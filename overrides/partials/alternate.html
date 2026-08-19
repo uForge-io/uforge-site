@@ -35,10 +35,27 @@
       {% set target = ("/zh/" ~ page.url) if alt.lang == "zh" else ("/" ~ page.url) %}
     {% endif %}
     <div class="md-header__option">
-      <a href="{{ target }}" hreflang="{{ alt.lang }}" class="md-header__button md-icon uf-lang-switch" title="{{ alt.name }}" aria-label="{{ alt.name }}"{% if offline %} data-uf-offline-language="{{ alt.lang }}" data-uf-page-url="{{ page.url }}"{% endif %}>
+      {# `target="_self"` prevents Zensical's version-switcher script from
+         treating this SEO alternate as a version link and rewriting it. #}
+      <a href="{{ target }}" target="_self" hreflang="{{ alt.lang }}" class="md-header__button md-icon uf-lang-switch" title="{{ alt.name }}" aria-label="{{ alt.name }}"{% if offline %} data-uf-offline-language="{{ alt.lang }}" data-uf-page-url="{{ page.url }}"{% else %} data-uf-language-target="{{ alt.lang }}"{% endif %}>
         {% set icon = config.theme.icon.alternate or "material/translate" %}
         {% include ".icons/" ~ icon ~ ".svg" %}
       </a>
     </div>
   {% endif %}
 {% endfor %}
+{% if not offline %}
+<script>
+  // Build the target from the page that is actually visible at click time.
+  // This preserves deep links even when a preview server rewrites navigation.
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".uf-lang-switch[data-uf-language-target]").forEach(function (link) {
+      link.addEventListener("click", function () {
+        var pagePath = window.location.pathname.replace(/^\/zh(?=\/|$)/, "") || "/";
+        var targetPath = link.dataset.ufLanguageTarget === "zh" ? "/zh" + pagePath : pagePath;
+        link.href = targetPath + window.location.search + window.location.hash;
+      });
+    });
+  });
+</script>
+{% endif %}

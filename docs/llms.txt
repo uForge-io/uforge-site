@@ -4,7 +4,7 @@
 
 Primary audience: hardware engineers, PCB designers, firmware/software engineers, and product engineers selecting parts or designing hardware around the SF32 family. Content favors practical engineering detail (part selection, pin assignments, electrical specs, PCB layout rules, integration risk) over marketing language.
 
-Only the pages listed below are published on this site. Internal working notes (an improvement-suggestions memo and a documentation-assumptions memo) are excluded from this domain entirely and are not part of the public content set.
+Only the pages listed below are published on this site. Internal working notes, process documentation, and authoring templates are excluded from this domain entirely and are not part of the public content set.
 
 ## Getting Started
 
@@ -18,6 +18,8 @@ Only the pages listed below are published on this site. Internal working notes (
 
 ## Hardware — Task Hubs
 
+- [SF32 Products](https://uForge.io/sf32-products/): Start here to explore SF32 hardware, plan a product, choose a chip, module, or development board, reuse a reference design, and prepare a production design.
+- [Hardware](https://uForge.io/hardware/): Reuse an SF32 reference baseline or implement a selected device, then prepare the design for production.
 - [Plan a Product](https://uForge.io/sf32-products/family/product-planning/): End-to-end path from requirements and device selection through board validation and production design.
 - [Reference Designs](https://uForge.io/hardware/reference-designs/reference-designs/): Reference-design journeys for μForge — compare reproducible hardware and software validation paths, then follow the one closest to your product.
 - [Connected Wearable Reference-Design Journey](https://uForge.io/hardware/reference-designs/connected-wearable-journey/): A practical SF32 reference-design journey from SF32LB52 development-board validation to a custom connected wearable hardware and firmware release plan.
@@ -93,6 +95,17 @@ Only the pages listed below are published on this site. Internal working notes (
 - [Board Configuration](https://uForge.io/develop/platforms/sifli-sdk/board-configuration/): How the --board value selects the board support package controlling flash layout, PSRAM, pins, display, audio, clocking, and power rails.
 - [Components and sf_pkg](https://uForge.io/develop/platforms/sifli-sdk/components/): SiFli's reusable middleware, driver, and component ecosystem for firmware that grows beyond a copied example.
 - [Debugging and Diagnostics](https://uForge.io/develop/platforms/sifli-sdk/debugging-diagnostics/): Serial logs, crash dumps, trace capture, and shell commands for debugging SF32 firmware.
+- [SDK Application Notes](https://uForge.io/develop/platforms/sifli-sdk/sdk-application-notes/): A task-oriented, source-linked reading path through the SiFli-SDK usage guides for SF32 development.
+- [Sample with GPADC](https://uForge.io/develop/platforms/sifli-sdk/application-notes/adc-sampling/): Use the general-purpose ADC (GPADC) across SF32LB52x, SF32LB55x, SF32LB56x, SF32LB57x, and SF32LB58x: electrical limits, pad mapping, device access, and calibration.
+- [Integrate and Read Sensors](https://uForge.io/develop/platforms/sifli-sdk/application-notes/sensor-integration/): Add a sensor to SiFli-SDK, connect it through RT-Thread, register the device, and validate it from the FinSH shell.
+- [Use External Flash](https://uForge.io/develop/platforms/sifli-sdk/application-notes/external-flash/): Configure, access, mount, and port external NOR Flash, NAND Flash, and PSRAM with SiFli-SDK.
+- [Configure the Watchdog](https://uForge.io/develop/platforms/sifli-sdk/application-notes/watchdog/): Enable, feed, and validate the SF32 HCPU and LCPU watchdog paths with SiFli-SDK.
+- [Compress Graphics Assets with EZIP](https://uForge.io/develop/platforms/sifli-sdk/application-notes/ezip-image-assets/): Convert PNG assets to EZIP, PIXEL, LVGL C, and hardware-decompressible GZIP formats with SiFli-SDK.
+- [Configure and Measure Low Power](https://uForge.io/develop/platforms/sifli-sdk/application-notes/low-power-measurement/): Configure SiFli-SDK power modes, wake sources, clocks, and board-level current measurements.
+- [Capture Logs and Analyze Crashes](https://uForge.io/develop/platforms/sifli-sdk/application-notes/crash-analysis/): Capture matching logs and memory, restore a crash context, and analyze assertions or hard faults with SiFli-SDK tools.
+- [Run SiFli SDK RF Tests](https://uForge.io/develop/platforms/sifli-sdk/application-notes/rf-performance-tests/): Choose the correct Bluetooth RF test mode, control path, and measurement equipment.
+- [Run Bluetooth Signaling Tests](https://uForge.io/develop/platforms/sifli-sdk/application-notes/bluetooth-signalling-tests/): Connect SF32 DUTs to a Bluetooth tester and perform BLE or Classic Bluetooth signaling measurements.
+- [Run Bluetooth Single-Item RF Tests](https://uForge.io/develop/platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests/): Use SiFli_RfTool to control BLE or Classic Bluetooth RF one operation at a time for board tuning and pre-compliance work.
 - [CodeKit](https://uForge.io/develop/tools/codekit/): The VS Code extension workflow for SiFli-SDK setup, project creation, build, flash, and monitor.
 - [Zephyr Platform Overview](https://uForge.io/develop/platforms/zephyr/overview/): OpenSiFli's downstream Zephyr tree, SiFli HAL integration, and SF32LB52 board support.
 - [Arduino Platform Overview](https://uForge.io/develop/platforms/arduino/overview/): OpenSiFli's beta Zephyr-based Arduino core for SF32LB52.
@@ -124,7 +137,8 @@ Only the pages listed below are published on this site. Internal working notes (
 - [Bluetooth Processor](https://uForge.io/learn/bluetooth/processor/): How SF32's dedicated Bluetooth processor offloads radio timing and link control from the application CPU, enabling low-power always-connected products.
 - [Bluetooth PAN](https://uForge.io/learn/bluetooth/pan/): Bluetooth PAN on SF32 — how BNEP, NAP, GN, and PANU roles work, when to use a phone-tethered PAN link instead of adding Wi-Fi, and how to bring up SiFli-SDK's PAN example, including PAN-based OTA delivery.
 - [Bluetooth SDK Examples](https://uForge.io/learn/bluetooth/bluetooth-sdk-examples/): Choose the right SiFli-SDK Bluetooth example for BLE services, Classic Bluetooth profiles, phone integration, OTA, data transfer, or LE Audio broadcast.
-- [Bluetooth Low-Power Profiling](https://uForge.io/learn/bluetooth/bluetooth-low-power-profiling/): A practical method to measure the actual Bluetooth LE power consumption of an SF32 device, attribute the trace to firmware behavior, and turn the result into a daily-use energy budget.
+- [Bluetooth Low-Power Profiling](https://uForge.io/learn/bluetooth/bluetooth-low-power-profiling/): A practical method to measure BLE, Classic Bluetooth, and dual-mode Bluetooth power consumption on an SF32 device, attribute the trace to firmware behavior, and turn the result into a daily-use energy budget.
+- [Bluetooth AT Command Reference](https://uForge.io/learn/bluetooth/at-command-reference/): Complete AT command reference for the SF32LB57 dual-mode Bluetooth AT command module (SIFLI_AT): command framing, system and device, address and identity, operating mode and visibility, pairing and security, serial port and events, connection management, data transfer, and custom GATT commands, plus unsolicited events (URCs) and PDU-format commands.
 - [AI Overview](https://uForge.io/learn/ai/overview/): Product-level planning for on-device AI, including model fit, memory, latency, and power.
 - [AI Accelerator](https://uForge.io/learn/ai/accelerator/): How the SF32 AI accelerator hardware speeds up on-device machine learning and signal processing, and why edge AI matters for wearables and AIoT products.
 - [Audio Overview](https://uForge.io/learn/audio/overview/): Local audio architecture, interfaces, buffering, Audio Server middleware, and power tradeoffs.
@@ -134,12 +148,20 @@ Only the pages listed below are published on this site. Internal working notes (
 - [Power Measurement and Validation](https://uForge.io/learn/low-power/measurement-and-validation/): A repeatable SF32 power-measurement and validation workflow for active, connected-idle, display-off, sleep, and wake scenarios.
 - [Low-Power SDK Examples](https://uForge.io/learn/low-power/low-power-sdk-examples/): Choose the right SiFli-SDK power-management example for sleep, wake sources, GPIO, CPU, Bluetooth, displays, UI, and wearable power scenarios.
 - [Battery Capacity Calculation](https://uForge.io/learn/low-power/battery-capacity-calculation/): Estimate battery percentage on SF32 products from battery voltage using the SiFli-SDK battery calculator, matched charge/discharge curves, charger-state detection, and multi-stage filtering.
+- [Smartwatch Power Profiling](https://uForge.io/learn/low-power/smartwatch-power-profiling/): Build and validate a smartwatch battery-life model from daily usage scenarios, then use the result to prioritize low-power work.
 
 ## Projects
 
 - [Projects](https://uForge.io/projects/): End-to-end μForge projects that combine selected hardware, a software baseline, validation evidence, and a production handoff.
 - [SF32 Xiaozhi Voice Assistant](https://uForge.io/projects/sf32-xiaozhi/): A complete product-development path for the open-source Xiaozhi voice assistant on SF32LB52 — board bring-up, Bluetooth PAN provisioning, cloud voice interaction, customization, OTA, validation, and production handoff.
 - [Arduboy2 on SiFli](https://uForge.io/projects/arduboy2-sifli/): A reproducible path for evaluating OpenSiFli's Arduboy2 port, validating the SF32 display/input/audio boundary, and deciding whether a game-oriented product adaptation is ready for deeper design work.
+- [SF32 BLE Talkback](https://uForge.io/projects/sf32-ble-talkback/): A product-development path for reproducing and qualifying multi-device BLE push-to-talk with SF32LB52-DevKit-ULP and OpenSiFli Talkback.
+- [SF32 EPD Reader](https://uForge.io/projects/sf32-epd-reader/): A product-development path for reproducing and qualifying the OpenSiFli EPD Reader on SF32-OED-EPD hardware.
+- [SuperKey](https://uForge.io/projects/superkey/): An engineering path for the SF32LB52-based SuperKey with three displays, USB HID/CDC, and a desktop companion: reproduce, validate communications and recovery, adapt deliberately, and hand off to product design.
+- [Radiation Monitor](https://uForge.io/projects/radiation-monitor/): An SF32LB52-based 2.4 GHz energy viewer: reproduce Radiation Monitor, verify its 79-point scan, RSSI smoothing, and history playback, then define calibration and product-review boundaries.
+- [Pocket Pi](https://uForge.io/projects/pocket-pi/): A reproducible Pocket Pi engineering path: validate NES emulation, 320 × 240 display, AW9523 input, audio, ROM filesystems, and save-state recovery on SF32LB52.
+- [LilyGO T-Display-SF32](https://uForge.io/projects/lilygo-t-display-sf32/): A product-engineering path for LilyGO's third-party T-Display-SF32 platform: establish the vendor baseline, validate its display, peripherals, power behavior, and recovery, reproduce the SiFli-SDK build, and adapt it deliberately.
+- [ZMK on SF32](https://uForge.io/projects/zmk-sf32/): An engineering path for OpenSiFli's ZMK port on SF32LB52: reproduce the Urchin split-keyboard baseline, validate USB, BLE, settings, and recovery, then adapt the keymap or hardware deliberately.
 
 ## Getting Started — Tutorials
 
@@ -155,6 +177,7 @@ Only the pages listed below are published on this site. Internal working notes (
 ## Blog
 
 - [Blog](https://uForge.io/blog/): Announcements, project history, and deep dives on μForge.io's progress.
+- [The First μForge.io Blog Post](https://uForge.io/blog/posts/2026-07-31-the-first-blog/): The first μForge.io blog post: our mission, what we've built over the past month, and what's coming next for SF32 documentation.
 
 ## About
 

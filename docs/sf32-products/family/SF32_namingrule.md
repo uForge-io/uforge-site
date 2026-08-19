@@ -24,7 +24,7 @@ tags:
 - **5** — Processor Family
     - **5**: Devices based on a 32-bit Arm Cortex-M33 Star-MC1 processor, or a RISC-V processor with comparable performance
 - **x** — Product Tier
-    - **8**: Flagship (***dual*** application processors, ***single*** low-power processor)
+    - **8 / 7**: Flagship (***dual*** application processors, ***single*** low-power processor)
     - **6 / 5**: Mid-range (***single*** application processor, ***single*** low-power processor)
     - **2**: Cost-optimized (***single*** application processor, ***dedicated*** low-power Bluetooth controller)
 - **y** — Device Variant
@@ -101,7 +101,7 @@ tags:
 
 - **SF32LB5x** — Module MCU family
     - **SF32**, **LB**, and **5** follow the same series, product-line, and processor-family meanings as the chip naming convention above.
-    - **x** identifies the product tier: **8** flagship, **6 / 5** mid-range, and **2** cost-optimized.
+    - **x** identifies the product tier: **8 / 7** flagship, **6 / 5** mid-range, and **2** cost-optimized.
 - **MOD** — SiFli module product.
 - **y** — Module subtype, when the family defines one
     - **1**: Direct Li-ion battery operation for SF32LB520/3/5/7 devices. The chip supply range is 3.2–4.7 V; the standard configuration uses SF32LB525UC6 with 8 MB OPI-PSRAM.

@@ -6,31 +6,31 @@ tags:
     - SiFli-SDK
 ---
 
-# Build, Flash, Monitor
+# Build, Flash, Monitor { #build-flash-monitor }
 
 This page summarizes the daily SiFli-SDK loop: activate the environment, build with `scons`, flash the board, and watch logs.
 
-## Activate the SDK
+## Activate the SDK { #activate-the-sdk }
 
-Run the SDK export script in every new terminal before building:
+Install the SDK environment using the [official installation guide](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/quickstart/install/index.html) for your SDK version. Before building, activate it in each new terminal by running the export script from the SDK root:
 
 === "macOS / Linux"
 
     ```bash
     cd ~/OpenSiFli/SiFli-SDK
-    . export.sh
+    . ./export.sh
     ```
 
 === "Windows"
 
     ```powershell
     cd C:\OpenSiFli\SiFli-SDK
-    .\export.bat
+    .\export.ps1
     ```
 
-The install script prepares compilers, Python packages, and debugger/download dependencies. The export script makes those tools visible in the current shell.
+The export script loads the environment associated with the current SDK checkout into that terminal. Installation and environment-management steps can vary by SDK version; follow the matching official setup guide.
 
-## Build
+## Build { #build }
 
 From an example project directory:
 
@@ -38,31 +38,37 @@ From an example project directory:
 scons --board=<board_name> -j8
 ```
 
-Use a lower or higher `-j` value depending on your host machine. Output goes into a board-specific build directory.
+Set `-j` to suit your host machine. If the board name does not specify a core, the SDK selects HCPU by default. For example, `sf32lb52-lcd_n16r8` produces `build_sf32lb52-lcd_n16r8_hcpu/`. Use the directory reported for the resolved board/core target; do not append `_hcpu` again if the board identifier already specifies a core.
 
-## Clean Rebuilds
+## Clean Rebuilds { #clean-rebuilds }
 
-Use a clean rebuild when switching boards, changing major configuration, or chasing a suspicious build artifact. Keep the exact clean command used by the SDK or project in your project notes. If no project-specific clean command is documented, rebuild from a fresh checkout before filing a toolchain issue.
+Use a clean rebuild when switching boards, changing major configuration, or investigating a suspicious build artifact. From the example project directory, run the documented SCons clean option:
 
-## Flash
+```bash
+scons -c
+```
 
-The first-run path uses the UART download script produced by the build:
+This cleans build targets and generated temporary/object files; rebuild with the intended board configuration afterward.
+
+## Flash { #flash }
+
+For example, for the `sf32lb52-lcd_n16r8` HCPU target, use the UART download script produced by the build:
 
 === "macOS / Linux"
 
     ```bash
-    ./build_<board_name>_hcpu/uart_download.sh
+    ./build_sf32lb52-lcd_n16r8_hcpu/uart_download.sh
     ```
 
 === "Windows"
 
     ```powershell
-    build_<board_name>_hcpu\uart_download.bat
+    build_sf32lb52-lcd_n16r8_hcpu\uart_download.bat
     ```
 
-OpenSiFli also publishes [`sftool`](https://github.com/OpenSiFli/sftool), a standalone download tool used by Zephyr and ArduinoCore-zephyr flows. Add `sftool` to your toolbox when you need a consistent flashing path outside an SDK-generated script.
+OpenSiFli also publishes [`sftool`](https://github.com/OpenSiFli/sftool), an open-source command-line utility for communicating with SiFli SoCs over a serial interface. Its documented operations include writing, reading, and erasing flash, as well as controlling chip reset. Check the tool's README for supported chips, storage types, and command options.
 
-## Monitor
+## Monitor { #monitor }
 
 Use the serial terminal configured for the board and example. The serial log should show boot output, RT-Thread startup messages, application prints, or a shell prompt.
 
@@ -75,7 +81,7 @@ Keep a note of:
 - Flash command.
 - SDK branch or release.
 
-## Daily Developer Loop
+## Daily Developer Loop { #daily-developer-loop }
 
 <div align="center"><em>Table: Daily Developer Loop</em></div>
 
@@ -92,13 +98,13 @@ Keep a note of:
 
 </div>
 
-## Start from a Matching Example
+## Start from a Matching Example { #start-from-a-matching-example }
 
 Before creating or heavily modifying a project, choose the closest [SDK example](../../examples/index.md) that matches the board and critical subsystem. Build, flash, and monitor that unmodified baseline first; then keep its board name, SDK release, commands, and expected output with the adapted project.
 
 If you use [CodeKit](../../tools/codekit.md), preserve the same evidence and confirm that its editor actions can be reproduced through the SDK command flow.
 
-## Troubleshooting
+## Troubleshooting { #troubleshooting }
 
 <div align="center"><em>Table: Troubleshooting</em></div>
 
@@ -106,15 +112,15 @@ If you use [CodeKit](../../tools/codekit.md), preserve the same evidence and con
 
 | Symptom | Check |
 |:--------|:------|
-| Build tool not found | Re-run `export.sh` / `export.bat` in the current terminal. |
+| Build tool not found | Re-run `export.sh` / `export.ps1` in the current terminal. |
 | Board name unknown | Check the SDK supported-boards documentation. |
 | Download script cannot open port | Close serial terminals and verify the USB-to-UART cable/connector. |
-| Flash does not start | Reset or power-cycle the board before starting the download. |
+| Flash does not start | Follow the board's documented download sequence. For `sf32lb52-lcd_n16r8`, after selecting the serial port, restart the board and press Enter within 2 seconds to start the download; use the target-specific sequence for other boards. Check board power and the selected port/UART connection. |
 | Serial output is unreadable | Check baud rate and use the data UART, not a charge-only cable. |
 
 </div>
 
-## Handoff Checklist
+## Handoff Checklist { #handoff-checklist }
 
 Before handing a project to another developer, include:
 
@@ -126,6 +132,3 @@ Before handing a project to another developer, include:
 - Monitor settings.
 - Expected first log lines.
 - Recovery command.
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

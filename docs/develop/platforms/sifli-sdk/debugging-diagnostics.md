@@ -6,23 +6,23 @@ tags:
     - Debugging
 ---
 
-# Debugging and Diagnostics
+# Debugging and Diagnostics { #debugging-and-diagnostics }
 
-SF32 debugging starts with serial logs, but real product work needs crash dumps, trace capture, shell commands, and repeatable reproduction notes.
+Start SF32 debugging with serial logs. Depending on the chip, SDK release, and project configuration, you may also have crash-dump tools, trace capture, and an RT-Thread shell; use only workflows documented for the target.
 
-## First-Line Debugging
+## First-Line Debugging { #first-line-debugging }
 
 Use the serial console to collect:
 
 - Boot logs.
 - Application prints.
-- RT-Thread shell output.
+- RT-Thread shell output, if enabled in the project.
 - Fault messages.
 - Download and reset behavior.
 
 Keep logs with board revision, SDK branch, build command, flash command, and serial settings.
 
-## Debugging Order
+## Debugging Order { #debugging-order }
 
 1. Reproduce with the same firmware.
 2. Reproduce after reset.
@@ -30,9 +30,9 @@ Keep logs with board revision, SDK branch, build command, flash command, and ser
 4. Reproduce from the closest SDK example.
 5. Add product changes back one at a time.
 
-This keeps hardware, board support, middleware, and application bugs from blending together.
+This helps separate hardware, board-support, middleware, and application issues.
 
-## Tools to Know
+## Tools to Know { #tools-to-know }
 
 <div align="center"><em>Table: Tools to Know</em></div>
 
@@ -40,14 +40,15 @@ This keeps hardware, board support, middleware, and application bugs from blendi
 
 | Tool | Use |
 |:-----|:----|
-| `sftool` | Flashing and scripted download flows. |
-| `AssertDump` | Crash dump analysis when available in the SDK toolchain. |
-| `SiFli_Trace` / `UsartServer` | Trace and UART log capture workflows. |
-| RT-Thread shell | Runtime inspection, device lists, thread lists, and quick checks. |
+| `sftool` | Serial command-line utility for supported flash read/write/erase and reset operations; options depend on chip and storage. |
+| `SiFli_Trace` | Capture and inspect target-board log output using the workflow supported by the selected target. |
+| `UsartServer` | Required companion for the documented UART-debug workflow through the built-in Debug IP on SF32LB52X and SF32LB56X; do not assume it applies to every target. |
+| `AssertDump` and crash-dump tools | Use only when provided for the chip and SDK release; follow that release's documented capture and analysis procedure. |
+| RT-Thread shell | Runtime inspection and commands only when the project configuration enables the shell. |
 
 </div>
 
-## What to Inspect First
+## What to Inspect First { #what-to-inspect-first }
 
 <div align="center"><em>Table: What to Inspect First</em></div>
 
@@ -56,14 +57,14 @@ This keeps hardware, board support, middleware, and application bugs from blendi
 | Symptom | First checks |
 |:--------|:-------------|
 | Hard fault or assert | Stack size, null pointers, DMA buffers, cache maintenance. |
-| Peripheral silent | Pin mux, clock, power rail, board name, driver enable. |
-| Bluetooth unstable | RF clock, antenna path, stack config, connection parameters. |
+| Peripheral unresponsive | Pin mux, clock, power rail, board name, driver enable. |
+| Bluetooth unstable | RF clock, antenna path, Bluetooth stack configuration, connection parameters. |
 | Display artifacts | Panel timing, buffer format, cache/DMA synchronization. |
 | Random reset | Watchdog, power rail, brownout, stack overflow. |
 
 </div>
 
-## Crash Report Checklist
+## Crash Report Checklist { #crash-report-checklist }
 
 When reporting a crash, include:
 
@@ -76,6 +77,3 @@ When reporting a crash, include:
 - Serial boot log from reset.
 - Crash dump or assert output.
 - Whether the issue reproduces on a clean SDK example.
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

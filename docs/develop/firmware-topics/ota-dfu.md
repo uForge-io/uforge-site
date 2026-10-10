@@ -7,13 +7,13 @@ tags:
     - DFU
 ---
 
-# OTA and DFU
+# OTA and DFU { #ota-and-dfu }
 
 DFU v2 is the SiFli-SDK firmware-update middleware for DFU and OTA workflows. It provides three transport channels: USB-CDC, BLE, and Bluetooth PAN. Each channel includes a user application and a matching loader subproject.
 
-Start by selecting the transport that matches the product's update path. Then begin with the corresponding application example; its loader is brought into the build automatically.
+Start by selecting the transport that matches the product's update path. Then begin with the corresponding application example; its matching loader is added to the build automatically.
 
-## DFU v2 Structure
+## DFU v2 Structure { #dfu-v2-structure }
 
 <div align="center"><em>Figure: DFU v2 example structure</em></div>
 
@@ -30,9 +30,15 @@ dfu_v2/
     └── loader/    PAN DFU loader
 ```
 
-The application and loader for a given channel are designed to be used together. When you build an application, the SDK uses the `AddDFU_*` logic in `building.py` to include the matching loader as a subproject; do not build that loader separately. For BLE, the application supports runtime updates, while an update to the HCPU itself completes through the loader.
+The application and loader for a given channel are designed to be used together. When you build an application, the SDK uses the `AddDFU_*` logic in `building.py` to include the matching loader as a subproject; do not build that loader separately. In the BLE example, the running application can update non-HCPU images; updating HCPU requires switching to the loader.
 
-## Choose an Update Channel
+## Compatibility and Configuration { #compatibility-and-configuration }
+
+DFU v2 is disabled by default; explicitly enable `USING_DFU_V2` in the middleware configuration. It is available only on HCPU (`BF0_HCPU`) and cannot be enabled alongside the legacy DFU options `BSP_USING_DFU` or `USING_DFU_PAN`. Enabling DFU v2 selects FlashDB (`PKG_USING_FLASHDB`) to support resumable transfers.
+
+USB CDC and BLE are push transports and are mutually exclusive; select one with `DFU_V2_USE_CDC_TRANSPORT` or `DFU_V2_USE_BLE_TRANSPORT`. Bluetooth PAN uses a pull transport; enable `DFU_V2_USE_PAN_TRANSPORT` with device-initiated mode (`DFU_V2_USE_DEVICE_MODE`) and WebClient. Confirm the available options against the target SDK release before settling the product update architecture.
+
+## Choose an Update Channel { #choose-an-update-channel }
 
 <div align="center"><em>Table: DFU v2 transport selection</em></div>
 
@@ -46,16 +52,16 @@ The application and loader for a given channel are designed to be used together.
 
 </div>
 
-## Product Update Review
+## Product Update Review { #product-update-review }
 
 - [ ] The selected transport matches the product's available connection path.
 - [ ] The application and matching loader are built and tested as one update flow.
 - [ ] The supported target board is confirmed in that example's README.
 - [ ] Update interruption, recovery, and factory-service behavior are defined for the product.
-- [ ] Image authenticity, integrity, version policy, and partition capacity are reviewed for the product release.
+- [ ] Firmware-image authenticity and integrity, version policy, and partition capacity are reviewed for the product release.
 - [ ] Failed-update logs can be collected without depending on a healthy application.
 
-## Build a DFU v2 Example
+## Build a DFU v2 Example { #build-a-dfu-v2-example }
 
 From an example's `project/` directory, build with:
 
@@ -65,7 +71,7 @@ scons --board=<board-name> -j8
 
 Each example README lists its supported boards. The DFU v2 middleware configuration itself is under `middleware/dfu_v2` in SiFli-SDK.
 
-## DFU v2 SDK Examples
+## DFU v2 SDK Examples { #dfu-v2-sdk-examples }
 
 <div align="center"><em>Table: Official SiFli-SDK DFU v2 examples for SF32LB58x</em></div>
 

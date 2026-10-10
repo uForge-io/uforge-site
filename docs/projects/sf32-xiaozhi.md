@@ -8,19 +8,19 @@ tags:
     - Audio
 ---
 
-# SF32 Xiaozhi Voice Assistant
+# SF32 Xiaozhi Voice Assistant { #sf32-xiaozhi-voice-assistant }
 
-## What Is Xiaozhi?
+## What Is Xiaozhi? { #what-is-xiaozhi }
 
 [Xiaozhi](https://github.com/78/xiaozhi-esp32) is an open-source, MCP-based voice chatbot that became widely known through its ESP32 implementation in 2025. It combines a voice-interaction device with cloud large-model services and device-side or cloud-side MCP extensions, making it a practical starting point for conversational AI hardware rather than just a text-chat application.
 
-## Why the SF32 Implementation?
+## Why the SF32 Implementation? { #why-the-sf32-implementation }
 
 [78/xiaozhi-sf32](https://github.com/78/xiaozhi-sf32) is the SF32 implementation, but it deliberately uses a different connectivity scheme. Whereas the original ESP32 project supports Wi-Fi and other direct networking options, the SF32 version uses Classic [Bluetooth PAN](../learn/bluetooth/pan.md) to obtain Internet access from a paired phone. This shifts the wide-area connection burden from the device to the phone and can reduce device-side networking power substantially in a phone-tethered design; the actual saving depends on the phone, radio conditions, dialogue duty cycle, and power policy. That makes the SF32 approach especially well suited to battery-powered, personal portable products such as pendants, badges, compact assistants, and small wearables.
 
 It is an unusually useful product reference because it joins the work that is often treated separately: display and audio hardware, phone-provided networking, a cloud voice service, a user-facing activation flow, device controls, and field-update capability.
 
-## Outcome, Scope, and Entry Criteria
+## Outcome, Scope, and Entry Criteria { #outcome-scope-and-entry-criteria }
 
 This page is a complete engineering path for adapting that reference into a product direction. It does **not** claim that Xiaozhi is an offline on-device LLM, that every upstream feature is production-qualified, or that a supported development board is equivalent to a certified finished product. The device uses Bluetooth PAN to obtain Internet access from a paired phone and relies on Xiaozhi cloud services for the conversational flow. Confirm service terms, account ownership, privacy, security, cost, availability, and regional suitability before product commitment.
 
@@ -42,11 +42,11 @@ This page is a complete engineering path for adapting that reference into a prod
 
 </div>
 
-## Hardware and Software Specifications
+## Hardware and Software Specifications { #hardware-and-software-specifications }
 
 The manifest below defines one concrete source-build reference: **SF32LB52-DevKit-Nano-R16N16 V1.0.0** with the external display and audio circuit documented by SiFli. It is not a universal BOM for every supported Xiaozhi board. If you choose DevKit-ULP, DevKit-LCD, or Xiaotangyuan, replace this entire hardware manifest with that board's documented assembly and retain its exact supplier parts and board revision.
 
-### Hardware Specification
+### Hardware Specification { #hardware-specification }
 
 <div align="center"><em>Table: Xiaozhi Nano Reference Hardware Specification</em></div>
 
@@ -67,7 +67,7 @@ The manifest below defines one concrete source-build reference: **SF32LB52-DevKi
 
 The third-party component URLs above are marketplace links published by the official SiFli Nano guide, not permanent manufacturer part-number guarantees. Preserve screenshots or order records for the evaluated parts, then replace each marketplace dependency with a qualified supplier part number and datasheet before product design.
 
-### Software Specification
+### Software Specification { #software-specification }
 
 <div align="center"><em>Table: Xiaozhi Reference Software Specification</em></div>
 
@@ -84,7 +84,7 @@ The third-party component URLs above are marketplace links published by the offi
 
 </div>
 
-## Choose a Supported Baseline
+## Choose a Supported Baseline { #choose-a-supported-baseline }
 
 The SiFli Xiaozhi quick-start documentation lists four prebuilt-firmware targets: SF32LB52-DevKit-ULP (Huangshan), SF32LB52-DevKit-LCD, SF32LB52-DevKit-Nano, and the Xiaotangyuan plug-in board. Its source-build documentation currently lists DevKit-ULP, DevKit-LCD, and DevKit-Nano. Choose a board that is in the source-build list if source customization is a project requirement; do not assume a prebuilt image implies a documented source-build target.
 
@@ -101,7 +101,7 @@ The SiFli Xiaozhi quick-start documentation lists four prebuilt-firmware targets
 
 </div>
 
-## Delivery Map
+## Delivery Map { #delivery-map }
 
 Use the stages as decision points, not as a feature checklist. Each one leaves behind an artifact that makes the next decision reviewable and repeatable.
 
@@ -119,25 +119,25 @@ Use the stages as decision points, not as a feature checklist. Each one leaves b
 
 </div>
 
-## System Architecture and Dependencies
+## System Architecture and Dependencies { #system-architecture-and-dependencies }
 
 <div align="center"><em>Figure: Xiaozhi SF32 Product Flow</em></div>
 
 ```mermaid
 flowchart LR
     U["User: wake word or dialogue key"] --> D["SF32LB52 device\nmic, UI, local controls"]
-    D --> E["Audio pipeline\nOPUS / AEC when enabled"]
+    D --> E["Audio pipeline\nOPUS / AEC / VAD when enabled"]
     D <-->|"Classic Bluetooth PAN\nBNEP + IP"| P["Paired phone\nBluetooth Internet sharing"]
     P <-->|"WebSocket; selected HTTP APIs"| S["Xiaozhi cloud services\nstreaming ASR / LLM / TTS"]
     S --> P --> D
     D --> O["Speaker, display,\nand device-side MCP actions"]
 ```
 
-The official architecture guide describes Bluetooth PAN over Classic Bluetooth as the network path, with lightweight IP networking on the device. It identifies WebSocket as the primary real-time application channel and HTTP for selected API interactions. The upstream project adds the voice pipeline, display UI, battery/power behavior, keyword wake, AEC, device-side MCP controls, cloud-side MCP extension, and PAN OTA capabilities.
+The official architecture guide describes Bluetooth PAN over Classic Bluetooth as the network path, with lightweight IP networking on the device. It identifies WebSocket as the primary real-time application channel and HTTP for selected API interactions. The SiFli overview lists keyword wake-up (KWS), continuous dialogue, AEC/VAD, dynamic expressions, vector fonts, and local MCP among the implemented features. Other official project materials also describe the display UI, battery/power behavior, cloud-side MCP extensions, and PAN OTA; verify exact support against the selected board and firmware.
 
 This flow creates four failure domains that must be diagnosed independently: local hardware/audio, Bluetooth pairing and PAN, Internet/cloud-service reachability, and application/service configuration. A successful BLE pairing alone does not prove that the board has Internet access or that the voice service is activated.
 
-## Stage 1 — Establish the Untouched Reference Baseline
+## Stage 1 — Establish the Untouched Reference Baseline { #stage-1-establish-the-untouched-reference-baseline }
 
 1. Complete the official board-specific hardware setup. For DevKit-LCD, this includes the specified AMOLED/FPC arrangement, a speaker on `SPK`, `KEY1` for wake/dialogue, and `KEY2` for long-press power-off.
 2. Flash the supported prebuilt firmware using the official Xiaozhi procedure. The quick-start guide recommends the UI flashing tool; it notes that terminal flashing is not supported for firmware version 1.4.0 and later at the time of that guide.
@@ -147,7 +147,7 @@ This flow creates four failure domains that must be diagnosed independently: loc
 
 **Gate 1 exit criterion:** after a cold boot, the device establishes PAN, identifies itself as activated, accepts a dialogue request, plays a response, and presents the expected UI state.
 
-## Stage 2 — Prove Recovery and Product-Critical Behavior
+## Stage 2 — Prove Recovery and Product-Critical Behavior { #stage-2-prove-recovery-and-product-critical-behavior }
 
 Run these tests before any source change. They turn the demonstration into a dependable baseline:
 
@@ -170,7 +170,7 @@ The official guide warns that the default per-board `battery_table.c` curve can 
 
 **Gate 2 exit criterion:** every test has a recorded result, failures are distinguishable by failure domain, and each documented recovery route works without reflashing or manual state repair.
 
-## Stage 3 — Build a Reproducible Source Baseline
+## Stage 3 — Build a Reproducible Source Baseline { #stage-3-build-a-reproducible-source-baseline }
 
 The repository brings SiFli-SDK in as a submodule. Clone it recursively and record both the Xiaozhi commit and the SDK submodule commit:
 
@@ -194,7 +194,7 @@ Use the board-specific official build page for the exact target and download scr
 
 **Gate 3 exit criterion:** a clean checkout on a second machine—or after deleting the build directory—produces an image that passes every Stage 2 check.
 
-## Stage 4 — Adapt Deliberately
+## Stage 4 — Adapt Deliberately { #stage-4-adapt-deliberately }
 
 Make one change at a time and preserve the passing baseline image. The official customization material covers Bluetooth naming, static and animated graphics, fonts, PAN DFU, and MCP.
 
@@ -218,7 +218,7 @@ For PAN OTA, the official documentation describes three separately deployable im
 
 **Gate 4 exit criterion:** the selected change, its rollback or recovery route, and every applicable regression result are recorded; the original dialogue loop and the safety boundary of any device action still pass.
 
-## Stage 5 — Product-Readiness Review
+## Stage 5 — Product-Readiness Review { #stage-5-product-readiness-review }
 
 Do not move to custom hardware until the team can answer all of these:
 
@@ -231,16 +231,17 @@ Do not move to custom hardware until the team can answer all of these:
 
 **Gate 5 exit criterion:** the answers, named owners, and residual risks are recorded and accepted by the product team; each unresolved item has a mitigation, an explicit deferral, or a stop decision.
 
-## Handoff to Product Design
+## Handoff to Product Design { #handoff-to-product-design }
 
 Carry the chosen SF32 part, power architecture, display/audio design, RF strategy, storage/partition plan, production test, and recovery assumptions into [Design for Production](../hardware/design-for-production.md). Use the [SF32LB52 integration path](../sf32-products/chips/SF32LB52x.md#integration-path) to choose the relevant chip, module, board, guide, and checklist.
 
 **Project completion definition:** this reference has served its purpose when a new team member can reproduce the selected baseline, trace each observed failure to its owner or recovery path, rebuild the customized image, and review the evidence required for the custom-hardware decision. It is then a product-development reference—not an unexamined demo to carry into production.
 
-## Authoritative Sources
+## Authoritative Sources { #authoritative-sources }
 
 - [78/xiaozhi-esp32 repository](https://github.com/78/xiaozhi-esp32)
 - [78/xiaozhi-sf32 repository](https://github.com/78/xiaozhi-sf32)
+- [SiFli Wiki: AI Xiaozhi overview (Chinese)](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/application/xiaozhi.md)
 - [SiFli Xiaozhi quick start](https://docs.sifli.com/projects/xiaozhi/get-started/)
 - [SiFli Xiaozhi source build](https://docs.sifli.com/projects/xiaozhi/source-build/)
 - [SiFli Xiaozhi architecture](https://docs.sifli.com/projects/xiaozhi/architecture/)

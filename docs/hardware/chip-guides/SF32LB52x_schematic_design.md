@@ -1,5 +1,7 @@
 ---
 icon: lucide/circuit-board
+hide:
+    - navigation
 description: "Schematic design guidelines for the SF32LB52x MCU: minimum system design, power system, and clock generation."
 tags:
     - Hardware
@@ -13,7 +15,7 @@ tags:
 
 ## 5. Schematic Design Guidelines
 
-This chapter follows the schematic workflow across three pages. Complete the minimum-system review first, then expand into clock generation on this page; RF and user interfaces on the next page; and storage, manufacturing access, and PCB-dependent decisions on the final page. For each major block, confirm the design goal and variant scope before checking circuit requirements, pin assignment, common mistakes, and release checklist items.
+This chapter follows the schematic workflow across three pages. Complete the minimum-system review first, then review the power system and clock generation on this page; RF and user interfaces on the next page; and storage, manufacturing access, and PCB-dependent decisions on the final page. For each major block, confirm the design goal and variant scope before checking circuit requirements, pin assignment, common mistakes, and release checklist items.
 
 <div align="center"><em>Table 5-1: Schematic Chapter Navigation</em></div>
 
@@ -26,7 +28,7 @@ This chapter follows the schematic workflow across three pages. Complete the min
 | Clock Generation | 48 MHz and 32.768 kHz crystal selection, loading, and calibration assumptions | Crystal CL/ESR check, placement and routing screenshots, calibration plan |
 | RF | RF matching, antenna path, and tuning access | RF impedance plan, matching-network placement screenshot, antenna tuning plan |
 | User Interfaces | Display, audio, buttons, and vibration motor | Interface schematic review, timing/control pins, power sequencing, analog review |
-| Storage and Connectivity | Boot medium, bootstrap pins, storage power switch, sensors, UART/I2C, and GPTIM | Bootstrap table, PA21 power control, bus assignment, storage rail review |
+| Storage and Connectivity | Boot medium, bootstrap pins, storage power switch, sensors, UART/I2C, and GPTIM | Bootstrap table, PA11/PA21 source discrepancy review, bus assignment, storage rail review |
 | Manufacturing | DBG_UART/SWD, test points, production flashing, calibration access, and release checklists | Test-point drawing, production fixture plan, completed release evidence |
 
 </div>
@@ -41,7 +43,7 @@ Use the following sequence for the first schematic pass:
 2. Choose the correct power path: `SF32LB520/3/5/7` for rechargeable battery-powered products, or `52B/D/E/G/J` for externally regulated products.
 3. Lock the power-system decisions in Section 5.2, including `VBUS`/`VBAT`/`VCC` or `PVDD`/`VDDIOA`/`VDD_SIP`, BUCK, internal LDO decoupling, RF/audio rails, and all low-power load switches.
 4. Select the boot medium and populate `PA13`/`PA17` bootstrap pull options to match the boot table in Section 5.6.1.
-5. Route all boot-storage power switches to `PA21`, including large NOR Flash designs that must exit 4-byte mode after restart or Hibernate.
+5. Confirm the boot-storage power-switch pin against the source discrepancy before layout. The application notes and schematic guide specify `PA21`; the official checklist instead specifies `PA11` for external Flash on battery-powered variants.
 6. Reserve `PA18`/`PA19`, ground, and a valid power reference for DBG_UART/SWD access before the enclosure and production fixture are frozen.
 7. Select the 48 MHz and 32.768 kHz crystals from Section 5.3.1 and keep their placement constraints visible during schematic review.
 8. Assign wake pins, power-key behavior, charger events, and storage/sensor shutdown states before firmware low-power policy is finalized.
@@ -57,7 +59,7 @@ Power-system design defines the rails, load switches, charger path, OVP, interna
 **Quick Summary**
 
 - Battery-powered devices use the `SF32LB520/3/5/7` path with `VBUS`, `VBAT`, `VCC`, charging, and OVP decisions.
-- Regular-powered devices use the `52B/D/E/G/J` path with externally regulated `PVDD`, `VDDIOA`, `VDD_SIP`, and no internal charging path.
+- Regular-powered devices use the `52B/D/E/G/J` path with externally regulated `PVDD` and `VDDIOA`. Configure `VDD_SIP` for the exact chip model; it may use an external supply or the internal LDO. There is no internal charging path.
 - BUCK inductor, internal LDO decoupling, RF/audio rails, and standby load switches must be fixed before PCB placement.
 
 **Design Goal**
@@ -74,7 +76,7 @@ Create a stable, low-leakage power tree that supports the selected variant, avoi
 
     | Pin | Min (V) | Typ (V) | Max (V) | Max Current (mA) | Description |
     |:---|:---|:---|:---|:---|:---|
-    | VBUS | 4.6 | 5.0 | 5.5 | 500 | VBUS power input |
+    | VBUS | 4.5 | 5.0 | 5.5 | 500 | VBUS power input; see the source discrepancy note below |
     | VBAT | 3.2 | - | 4.7 | 500 | VBAT power output |
     | VCC | 3.2 | - | 4.7 | 500 | System power input (1) |
     | VSYS | - | 3.3 | - | 500 | VSYS power output (2) |
@@ -142,7 +144,7 @@ Both design groups use the same inductor specification.
 
     **External Charging Management Chip**
 
-    External charging chips come in two common types: without PPM (power path management) and with PPM. Without PPM, the battery directly supplies the VBAT and VCC pins. With PPM, the charger's VSYS supplies VCC, and the charger's VBAT connects to both the battery and the chip's VBAT pin. Both approaches measure battery voltage through the VBAT pin, which has an integrated GPADC channel with sampling accuracy within ±30 mV.
+    External charging ICs come in two common types: with or without power-path management (PPM). Without PPM, the battery directly supplies the VBAT and VCC pins. With PPM, the charger's VSYS supplies VCC, and the charger's VBAT connects to both the battery and the chip's VBAT pin. Both approaches measure battery voltage through the VBAT pin, which has an integrated GPADC channel with sampling accuracy within ±30 mV.
 
     ![Figure 5.2-1: External Charging Circuit without PPM](../../sf32-products/chips/assets/52xA/sf32lb52x-CHG-NPPM.png){ width="100%" loading="lazy" }
 
@@ -151,6 +153,8 @@ Both design groups use the same inductor specification.
     ![Figure 5.2-2: External Charging Circuit with PPM](../../sf32-products/chips/assets/52xA/sf32lb52x-CHG-PPM.png){ width="100%" loading="lazy" }
 
     <div align="center"><em>Figure 5.2-2: External Charging Circuit with PPM</em></div>
+
+    With PPM, connect the charger's VSYS output to the chip's VCC pin and keep the charger's default VSYS output at or below 4.7 V, the maximum VCC input voltage.
 
     **On-Chip Integrated Charging Management Module**
 
@@ -165,7 +169,12 @@ Both design groups use the same inductor specification.
     The VBUS input range is 4.5 V–5.5 V, so choose one of these OVP chip types:
 
     - Adjustable-OVLO OVP chip, e.g. AW32905FCR — set OVLO between 5.2 V and 5.5 V (VOVLO_TH tolerance ≤3%, resistor tolerance ≤1%)
-    - Regulated-output OVP chip, e.g. SGM4064YDE8G or LP5305AQVF — regulator output must be between 4.5 V and 5.5 V
+    - Regulated-output OVP chip, e.g. SGM4064YDE8G or LP5305AQVF — regulator output must be between 4.5 V and 5.4 V
+
+    !!! important "VBUS values differ across source documents"
+        The OpenSiFli battery-variant application guide is internally inconsistent: its OVP-selection paragraph gives a chip VBUS range of 4.5–5.5 V, while its supply table and integrated-charger notes give 4.6–5.5 V and require at least 4.6 V at the VBUS pin at maximum charging current. Electrical Specification-A3 lists a general range of 4.5–5.5 V, and the reference charging schematic is labeled 4.3–5.5 V. For an integrated-charger design, maintain at least 4.6 V at the pin under maximum load until SiFli clarifies the applicable operating minimum; do not treat the schematic's 4.3 V label as an approved lower limit.
+
+        The same application guide sets `VIN_OVLO` on an adjustable-OVLO OVP device to 5.2–5.5 V, with `VOVLO_TH` tolerance ≤3% and R1/R2 tolerance ≤1%. For an OVP device with a regulator output, it specifies an LDO output of 4.5–5.4 V. These are topology-specific OVP settings, not interchangeable chip VBUS operating ranges; account for component tolerances and confirm the approved design with SiFli.
 
     ![Figure 5.2-4: OVLO Set-Point Formula](../../sf32-products/chips/assets/52xA/sf32lb52x-OVP-SET.png){ width="100%" loading="lazy" }
 
@@ -339,7 +348,13 @@ Recommended crystals:
 </div>
 
 !!! note "Additional Notes"
-    The TKD SX20Y048000B31T-8.8 has a somewhat higher ESR, which slightly increases static power consumption. During PCB layout, remove the second-layer ground copper directly under the crystal to reduce parasitic load capacitance on the clock signal.
+    The TKD SX20Y048000B31T-8.8 has a somewhat higher ESR, which slightly increases static power consumption. SiFli's schematic application note also recommends removing at least the GND copper on the second layer beneath the 48 MHz crystal to reduce parasitic load capacitance. The PCB layout guide, however, prohibits plane voids or copper cutouts beneath the crystal on adjacent layers. These recommendations conflict; see [Clock Interface Routing](SF32LB52x_pcb_layout.md#65-clock-interface-routing). Confirm the intended layer treatment with SiFli before releasing the layout.
+
+!!! important "Crystal ESR exception in the source"
+    The source lists TKD SX20Y048000B31T-8.8 with ESR ≤ 40 Ω, although its general 48 MHz requirement is ESR ≤ 30 Ω. Treat this as a part-specific qualification question, not permission to use any 40 Ω crystal. Confirm the exact part's current AVL approval and validate startup, frequency calibration, and oscillator current before release.
+
+!!! important "32.768 kHz crystal recommendation differs within the source"
+    The source's 32.768 kHz parameter table recommends CL = 7 pF and ESR = 38 kΩ, while its accompanying prose recommends CL ≤ 9 pF and ESR ≤ 40 kΩ. Both statements are retained in the source material; confirm the intended target and the selected crystal's AVL qualification with SiFli before release.
 
 For the complete, continuously maintained qualification data, refer to the [SiFli Approved Vendor List][SiFli Approved Vendor List (AVL)].
 

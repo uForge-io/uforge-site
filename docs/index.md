@@ -15,7 +15,7 @@ hide:
 
 <span class="uf-badge">OPEN SOURCE · SILICON TO PRODUCTION · FOR EMBEDDED DEVELOPERS</span>
 
-# Build the Next Generation<br>of Embedded Devices
+# Build the Next Generation<br>of Embedded Devices { #build-the-next-generationof-embedded-devices }
 
 ***μForge.io*** is an open-source development platform for innovative semiconductor solutions, beginning with SiFli's SF32 family of ultra-low-power microcontrollers. From silicon and modules to development boards, SDKs, documentation, and production-ready reference designs, ***μForge.io*** brings the full stack together in one place, helping developers take connected, intelligent, and energy-efficient embedded products from idea to production faster and with less friction.
 
@@ -48,14 +48,14 @@ hide:
   <span class="uf-spotlight-item__art uf-spotlight-item__art--silicon" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">Silicon</span>
   <span class="uf-spotlight-item__title">SF32 Family</span>
-  <span class="uf-spotlight-item__copy">Ultra-low-power, connected, intelligent embedded products.</span>
+  <span class="uf-spotlight-item__copy">For ultra-low-power, connected, intelligent embedded products.</span>
 </a>
 
 <a class="uf-spotlight-item uf-spotlight-item--board" href="sf32-products/index.md" data-radius="250">
   <span class="uf-spotlight-item__art uf-spotlight-item__art--board" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">Hardware</span>
   <span class="uf-spotlight-item__title">Modules &amp; Dev Boards</span>
-  <span class="uf-spotlight-item__copy">Tested hardware, faster design to production.</span>
+  <span class="uf-spotlight-item__copy">Tested hardware for a faster path from design to production.</span>
 </a>
 
 <a class="uf-spotlight-item uf-spotlight-item--sdk" href="develop/index.md" data-radius="245">
@@ -112,29 +112,29 @@ hide:
 
 ---
 
-## Why Choose ***SF32***? { .uf-center-heading }
+## Why Choose ***SF32***? { #why-choose-sf32 .uf-center-heading }
 
 <div class="grid cards uf-why-grid" markdown>
 
 - :fontawesome-solid-microchip:{ .uf-icon-blue } **High Performance**
 
-    Single-core, dual-core or triple-core Cortex-M33 / STAR-MC1, featuring integrated instruction (I\$) and data (D\$) caches, FPU and MPU, and up to 64 MB of in-package PSRAM for graphics-intensive and compute-intensive applications.
+    Core count and features vary by device: the family ranges from single- to tri-core designs, with Cortex-M33 / STAR-MC1 processing in several families. Cache, FPU, and MPU availability depends on the specific chip and SoC implementation; check the part-level documentation. Selected devices offer up to 64 MB of in-package PSRAM.
 
-- :fontawesome-brands-bluetooth:{ .uf-icon-blue } **Bluetooth 6.3**
+- :fontawesome-brands-bluetooth:{ .uf-icon-blue } **Bluetooth Connectivity**
 
-    Dual-mode Bluetooth with Bluetooth Classic and LE, LE Audio, and long-range PHY support. A dedicated Bluetooth subsystem with its own processor, memory, and firmware enables advanced customization and protocol development.
+    Modes and features vary by family and part. Depending on the device, support includes Bluetooth Classic and LE, LE Audio, and long-range PHY. Check the chip page for exact capabilities.
 
 - :fontawesome-solid-cube:{ .uf-icon-purple } **Graphics Acceleration**
 
-    2D / 2.5D GPU, LCD controller, and LVGL graphics framework for rich and smooth graphical user interfaces with resolutions up to 1280 × 720. Supported interfaces include MIPI, RGB, QSPI, 8080, JDI, and EPD.
+    2D / 2.5D GPU, LCD controllers, and LVGL support enable rich, smooth graphical interfaces. Across the family, supported interfaces include MIPI, RGB, QSPI, 8080, JDI, and EPD, with resolutions up to 1280 × 720.
 
 - :fontawesome-solid-volume-high:{ .uf-icon-pink } **Audio Subsystem**
 
-    Integrated audio subsystem with analog audio, I²S, PDM, and hardware-assisted digital audio processing.
+    Audio capabilities vary by family and part; supported devices offer analog audio, I²S, PDM, and hardware-assisted digital audio processing.
 
 - :fontawesome-solid-brain:{ .uf-icon-amber } **AI Acceleration**
 
-    Integrated NPU for TinyML, voice recognition, and intelligent edge AI applications.
+    Selected SF32 devices integrate neural-network acceleration for TinyML and other edge-inference workloads.
 
 - :fontawesome-solid-leaf:{ .uf-icon-green } **Ultra-Low Power**
 
@@ -144,7 +144,7 @@ hide:
 
 ---
 
-## Supported SF32 MCUs [^1] { .uf-center-heading }
+## Supported SF32 MCUs [^1] { #supported-sf32-mcus .uf-center-heading }
 
 <div class="grid cards uf-mcu-grid" markdown>
 
@@ -154,8 +154,8 @@ hide:
 
     ---
 
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-Mode Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1 application core + dedicated Bluetooth controller core
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-Mode Bluetooth 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 Hardware Decompression
     - :fontawesome-solid-circle:{ .uf-dot-blue } Audio Codec, 1 x AMIC, 2 x DMIC
@@ -170,8 +170,8 @@ hide:
 
     ---
 
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Single-Mode Bluetooth 5.2
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-core Cortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Low-Power Bluetooth 5.2 Transceiver
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 1.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 1.0 Hardware Decompression
     - :fontawesome-solid-circle:{ .uf-dot-blue } AI Accelerator
@@ -186,7 +186,8 @@ hide:
 
     ---
 
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-core Cortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Low-Power Bluetooth 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } RGB Display up to 1024 x 600
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 Hardware Decompression
@@ -202,10 +203,10 @@ hide:
 
     ---
 
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-core Cortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Tri-Core Architecture: HCPU, ACPU, and LCPU
     - :fontawesome-solid-circle:{ .uf-dot-blue } MIPI Display up to 1280 x 720
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU + Vector Graphics, ePicasso 2.0
-    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 and JPEG/MJPEG Dec
+    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 and JPEG/MJPEG decoding
     - :fontawesome-solid-circle:{ .uf-dot-blue } Audio Codec, 2 x AMIC, 4 x DMIC
     - :fontawesome-solid-circle:{ .uf-dot-blue } 3.7 MB SRAM, up to 64 MB PSRAM
     - :fontawesome-solid-circle:{ .uf-dot-blue } Available in BGA256 package, up to 154 GPIOs

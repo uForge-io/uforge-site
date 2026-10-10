@@ -4,16 +4,18 @@ description: "Schematic design guidelines for the SF32LB56x MCU: power system, o
 tags:
     - Hardware
     - Chip
+hide:
+    - navigation
 ---
 
-# SF32LB56x Hardware Design Guide — Schematic Design Guidelines
+# SF32LB56x Hardware Design Guide — Schematic Design Guidelines { #sf32lb56x-hardware-design-guide-schematic-design-guidelines }
 
 !!! note "Part of the SF32LB56x Hardware Design Guide"
     This page covers Section 5, Schematic Design Guidelines. Start from the [SF32LB56x Hardware Design Guide overview](SF32LB56x_hardware_design_guide.md) for device selection and the full design flow, continue to the [Schematic Checklist](SF32LB56x_schematic_checklist.md), or skip ahead to [PCB Layout Guidelines](SF32LB56x_pcb_layout.md).
 
-## 5. Schematic Design Guidelines
+## 5. Schematic Design Guidelines { #5-schematic-design-guidelines }
 
-### 5.1. Power System
+### 5.1. Power System { #51-power-system }
 
 Review processor rails, required local capacitors, PMIC output assignments, reset timing, and charger wiring together. The U and V variants share the same power-design method, but their power-pin names and load assignments differ.
 
@@ -119,19 +121,19 @@ Review processor rails, required local capacitors, PMIC output assignments, rese
 
 </div>
 
-<div align="center"><em>Table 5.1-5: SF30147C PMIC Power Distribution Example for U</em></div>
+<div align="center"><em>Table 5.1-5: SF30147C PMIC Output Ratings (U-Variant Example)</em></div>
 
 <div align="center" markdown>
 
 | SF30147C Power Supply Pin | Minimum Voltage (V) | Maximum Voltage (V) | Maximum Current (mA) | Detailed Description |
 | :--- | :--- | :--- | :--- | :--- |
-| VBUCK | 1.8 | 1.8 | 500 | 1.8V Power Supply inputs such as PVDD, VDDIOA, VDDIOA2, VDDIOB, VDDIOSA, VDDIOSB, VDDIOSC, AVDD_BRF of SF32LB56xU |
+| VBUCK | 1.8 | 1.8 | 500 | 1.8V output; do not infer the U-variant chip-rail mapping from this row. |
 | LVSW1 | 1.8 | 1.8 | 100 | 1.8V power supply output |
 | LVSW2 | 1.8 | 1.8 | 100 | G-SENSOR 1.8V power supply input |
 | LVSW3 | 1.8 | 1.8 | 150 | Heart rate 1.8V power supply input |
 | LVSW4 | 1.8 | 1.8 | 150 | LCD 1.8V power supply input |
 | LVSW5 | 1.8 | 1.8 | 150 | 1.8V power supply output |
-| LDO1 | 2.8 | 3.3 | 100 | 3.3V Power Supply inputs such as AVDD33_ANA, AVDD33_AUD, VDDIOA2 of SF32LB56xU |
+| LDO1 | 2.8 | 3.3 | 100 | 2.8–3.3V output; do not infer the U-variant chip-rail mapping from this row. |
 | LDO2 | 2.8 | 3.3 | 100 | Motor power supply input |
 | LDO3 | 2.8 | 3.3 | 100 | LCD 3.3V power supply input |
 | LDO4 | 2.8 | 3.3 | 100 | Heart rate 3.3V power supply input |
@@ -139,6 +141,9 @@ Review processor rails, required local capacitors, PMIC output assignments, rese
 | HVSW2 | 2.8 | 5 | 150 | GPS power supply input |
 
 </div>
+
+!!! warning "Verify the U-variant PMIC rail mapping"
+    SiFli's original U-variant power-allocation table lists VDDIOA, VDDIOA2, VDDIOB, VDDIOSA/B/C, and AVDD_BRF, which conflict with the U-specific processor power table in the same guide. The table above retains the PMIC output voltage and current limits; do not use it to infer U-variant chip-pin connections. Confirm the actual mapping against the matching schematic revision and the SF30147C datasheet before layout release.
 
 <div align="center"><em>Table 5.1-6: SF30147C PMIC Power Distribution Example for V</em></div>
 
@@ -193,7 +198,13 @@ Review processor rails, required local capacitors, PMIC output assignments, rese
 
 <div align="center"><em>Figure 5.1-8: SF32LB56xV Charging Reference Circuit</em></div>
 
-### 5.2. Operating Modes and Wake Sources
+Without power-path management, the system is connected directly to VBAT with the battery. This is lower cost, but downstream circuitry cannot be fully disconnected from the battery, increasing leakage and preventing the low-power Shipping Mode target. When the battery is over-discharged, charger trickle current must exceed the combined system and leakage load (i1+i2 in the source diagram). While the system is running, constant-current charge current must also exceed i1+i2; otherwise, the system load draws part of the charge current and the battery may not reach full charge. A power-path charger separates system power at VSYS from battery charging at VBAT, supports Shipping Mode, and can power the system from VSYS even when the battery is over-discharged.
+
+For the U variant, choose among three power topologies according to peripheral I/O voltage and the system power target. In all three, AVDD33_ANA and AVDD33_AUD are supplied at 3.3V. The lowest-power topology supplies PVDD and VDDIO1–VDDIO4 at 1.8V and uses peripherals with 1.8V I/O. The intermediate topology keeps PVDD and VDDIO1 at 1.8V while supplying VDDIO2–VDDIO4 and peripheral I/O at 3.3V. The highest-power topology keeps only VDDIO1, which supplies the co-packaged PSRAM, at 1.8V; PVDD, VDDIO2–VDDIO4, and peripheral I/O use 3.3V. Use load switches for dynamic power management of external modules and keep them off by default when unused. For modules that must remain on, select devices with low quiescent current. The load-switch control GPIO's hardware default level must match the switch enable polarity so the switch remains off at startup; SiFli recommends a 1MΩ pull-up or pull-down at the enable input.
+
+The U-variant PMU completes power-on reset when PVDD rises to 1.5V. A falling PVDD triggers brownout reset at the configured BOR threshold, which is configurable from 1.5V to 2.5V.
+
+### 5.2. Operating Modes and Wake Sources { #52-operating-modes-and-wake-sources }
 
 Operating mode, wake source, pull-up rail, and leakage-current decisions should be reviewed as one topic. Use wake-capable pins for buttons, touch, sensor interrupts, charger events, and other low-power wake signals.
 
@@ -207,7 +218,7 @@ Operating mode, wake source, pull-up rail, and leakage-current decisions should 
 | WFI/WFE | Stop | Run | Accessible | Toggleable | Run | Any interrupt | < 0.5us |
 | DEEPWFI | Stop | Run | Accessible | Toggleable | Run | Any interrupt | < 5us |
 | Light sleep | Stop | Stop | Not accessible, fully retained | Level held | Run | RTC, GPIO, LPTIM, cross-system, Bluetooth, comparator | < 100us |
-| Deep sleep | Stop | Stop | Not accessible, fully retained | Level held | Run | < 300us |  |
+| Deep sleep | Stop | Stop | Not accessible, fully retained | Level held | Run |  | < 300us |
 | Standby | Reset | Reset | Not accessible, LP fully retained, HP retains only 160KB | Level held | Run | RTC, Buttons, LPTIM, cross-system, Bluetooth | 1.5ms+recovery |
 | Hibernate rtc | Reset | Reset | Data not retained | High-Z | Reset | RTC, Buttons | > 2ms |
 | Hibernate pin | Reset | Reset | Data not retained | High-Z | Reset | Buttons | > 2ms |
@@ -271,7 +282,11 @@ Operating mode, wake source, pull-up rail, and leakage-current decisions should 
 
 </div>
 
-### 5.3. Clock Generation
+BOOT_MODE selects startup behavior: high enters download mode; low makes ROM check for a user program, starting it if present and otherwise entering download mode. The U-variant Mode pin has an internal pull-down, may be left floating when unused, and shares the VDDIO2 domain. The V-variant Mode pin shares VDDIOA and should be held stable with a 10kΩ pull-up or pull-down; do not leave it floating or allow it to toggle from interference. Reserve a Mode test point on production boards; a jumper is useful on development boards for recovery.
+
+Account for memory I/O power in low-power shutdown designs. In U-variant Standby, GPIO levels are retained and VDDIO1 can remain powered; put storage on MPI1/MPI2 into its low-power mode. In Hibernate, GPIO levels are not retained, so turn off VDDIO1 to prevent leakage through the co-packaged memory I/O. For the V variant, keep the co-packaged-memory I/O powered in Standby; before Hibernate, turn off VDDIOSA and VDDIOSB under PBR0 control and place NOR Flash in Deep Power-Down. VDDIOSC must remain powered.
+
+### 5.3. Clock Generation { #53-clock-generation }
 
 <div align="center"><em>Table 5.3-1: Crystal Requirements</em></div>
 
@@ -299,13 +314,13 @@ Operating mode, wake source, pull-up rail, and leakage-current decisions should 
 
 Keep the 48 MHz and 32.768 kHz crystals close to the chip, reserve matching capacitors, and protect crystal traces from BUCK, RF, display, motor, and charger noise.
 
-### 5.4. RF
+### 5.4. RF { #54-rf }
 
 For both SF32LB56xU and SF32LB56xV designs, route the RF path as a 50-ohm controlled-impedance trace. If the selected antenna is already matched, no additional RF components are normally required, but the design should still reserve a π-type matching network for spurious filtering and final antenna tuning.
 
 Place the RF matching network close to the chip side, not the antenna side. Keep AVDD_BRF filtering close to the chip pin, connect capacitor grounds directly to the main ground, route RF on the surface layer where practical, avoid vias and sharp corners, add dense ground shielding vias along both sides of the RF trace, and keep DC-DC, VBAT, crystal, high-speed clock, I2C, SPI, SDIO, I2S, and UART signals out of the RF area.
 
-### 5.5. Display, Touch, and Backlight Interfaces
+### 5.5. Display, Touch, and Backlight Interfaces { #55-display-touch-and-backlight-interfaces }
 
 Display interface selection is a package-level decision. The U variant documents SPI/QSPI and JDI display options; the V variant also documents MCU8080 and DPI options. Touch interrupt, reset, and backlight controls should be assigned with wake and production access in mind.
 
@@ -329,7 +344,7 @@ Display interface selection is a package-level decision. The U variant documents
 
 <div align="center" markdown>
 
-| SPI Signal | SF32LB56XU Pin | SS6700A Pin | Detailed Description |
+| SPI Signal | SF32LB56xU Pin | SS6700A Pin | Detailed Description |
 | :--- | :--- | :--- | :--- |
 | CSX | PA36 | PA36 | Enable signal |
 | WRX_SCL | PA37 | PA37 | Clock signal |
@@ -502,7 +517,7 @@ Display interface selection is a package-level decision. The U variant documents
 
 </div>
 
-### 5.6. Storage, Sensors, Audio, and Connectivity
+### 5.6. Storage, Sensors, Audio, and Connectivity { #56-storage-sensors-audio-and-connectivity }
 
 Storage and display buses should not be assigned independently because both consume high-value GPIO groups and can drive PCB stack-up decisions. Confirm boot storage type, pull-ups, voltage domain, power-switch behavior, and fixture access before schematic freeze.
 
@@ -585,6 +600,9 @@ Storage and display buses should not be assigned independently because both cons
 
 </div>
 
+!!! warning "Verify the SF32LB56xV SD1 data-line mapping"
+    The SiFli source labels PA12 as SD1_D2 but describes it as `Data 6`; it also labels SD1_D6 as `Data 6` and has no `Data 2` row. Confirm the intended pin mapping against the released pin-mux documentation before routing. The table preserves SiFli's published entries.
+
 <div align="center"><em>Table 5.6-6: Sensor I2C Interface</em></div>
 
 <div align="center" markdown>
@@ -595,6 +613,8 @@ Storage and display buses should not be assigned independently because both cons
 | SCL | PA17 | Light-tracking Sensors I2C Clock signal |
 
 </div>
+
+Match the storage I/O supply to the attached memory's logic level: U-variant storage I/O uses VDDIO3, while V-variant storage I/O uses VDDIOA2. Pull the SPI NAND Flash Hold# pin up to its supply through a 10kΩ resistor. SD1/eMMC is available on the V variant; do not apply the V-variant SD1/eMMC pin table to the U variant, which uses the SD2 storage interface.
 
 <div align="center"><em>Table 5.6-7: SF32LB56xU Audio Interface</em></div>
 
@@ -626,9 +646,22 @@ Storage and display buses should not be assigned independently because both cons
 
 </div>
 
-### 5.7. Manufacturing
+!!! warning "Verify the V-variant I2S instance"
+    The SiFli pin table and schematic net labels identify these pins as I2S1_LRCK/SDI/SDO/BCK, but the table descriptions call them I2S2 signals. Treat the peripheral instance as unresolved and confirm it against the released pin-mux documentation before assigning these pins.
+
+For an external differential analog microphone, place at least 2.2µF DC-blocking capacitors in the ADC inputs and power the microphone from MIC_BIAS. The U-variant MEMS-microphone reference feeds MIC_BIAS through 1kΩ with a 4.7µF bypass capacitor; its microphone-output reference also shows a 0.01µF coupling capacitor. The U-variant analog-PA reference uses 33nF input coupling capacitors, with the differential low-pass filter close to the chip. Route analog DAC outputs as a guarded differential pair; keep parasitic capacitance below 10pF and trace length below 2cm. The V variant also provides I2S; its reference I2S amplifier is configured over I2C3. Place audio supply/reference capacitors close to their pins and route analog audio away from switchers and high-speed digital signals.
+
+Both variants provide PWM for vibration motors. The motor may be powered directly from VBAT if its startup current does not destabilize the system. When `BSP_PM_FREQ_SCALING` is defined as `1`, HCPU frequency scaling changes PWM frequency on PA pins; use a PB pin for this case. PB32 is an active-high power/reset input; a long press of at least 10s triggers reset. The U-variant reference connects the key through 1kΩ from VDDIOB and adds a 10kΩ pull-down and 0.1µF capacitor to ground. The V-variant reference uses a 1kΩ series resistor from VDD_1V8 and a 10kΩ pull-down. Other buttons and rotary encoders require pull-ups; for a mechanical encoder that does not return to the off state after rotation, its pull-up rail must be switchable in standby to avoid leakage.
+
+U provides PBR0–PBR2 and V provides PBR0–PBR3. PBR0 transitions low-to-high during startup and can control an external load switch; the other PBR pins default low. PBR pins can output in Standby and Hibernate and can carry LPTIM; all except PBR0 can output a 32kHz clock. PBR pins can also be configured as wake inputs, but the MCU cannot receive an interrupt from that input after wake. Prefer LCPU PB pins for sensor I2C, SPI, control, and interrupt-wake signals; sensor power can be switched as needed from an SF30147C LVSW or LDO output.
+
+All U/V PA pins can be muxed to UART, I2C, or GPTIM. On U, PB32/PB33/PB34 and PBR0/PBR1/PBR2 are exceptions; on V, PB32–PB36 and PBR0–PBR3 are exceptions. Review these restrictions together with wake, button, and PBR assignments.
+
+### 5.7. Manufacturing { #57-manufacturing }
 
 Reserve debug/flashing access, production flashing mode, crystal calibration access, power measurement points, RF test access, and PMIC control visibility. Verify the fixture can power the board, force boot/download mode, communicate with the chip, and collect calibration data.
+
+At minimum, reserve VBAT, GND, VDDIO2, Mode, SWDIO, SWCLK, UART4_RXD, UART4_TXD, and one of PB20/PB21/PB25 as U-variant test points. For V, use VDDIOB instead of VDDIO2; the other signals are the same. When connecting J-Link, set debugger power to external input so the target board powers the debugger. The production download and crystal-calibration fixture must be able to access these points.
 
 <div align="center"><em>Table 5.7-1: SF32LB56xU Debug and Flashing Interface</em></div>
 

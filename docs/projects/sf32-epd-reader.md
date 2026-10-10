@@ -1,6 +1,6 @@
 ---
 icon: lucide/book-open-text
-description: "A product-development path for reproducing and qualifying the OpenSiFli EPD Reader on SF32-OED-EPD hardware."
+description: "A product-development path for reproducing and validating the OpenSiFli EPD Reader on SF32-OED-EPD hardware."
 tags:
     - Projects
     - EPUB
@@ -8,25 +8,29 @@ tags:
     - Low power
 ---
 
-# SF32 E-Paper EPUB Reader
+# SF32 E-Paper EPUB Reader { #sf32-e-paper-epub-reader }
 
-## What Is EPD Reader?
+## What Is EPD Reader? { #what-is-epd-reader }
 
-[OpenSiFli EPD Reader](https://github.com/OpenSiFli/EPD_Reader) adapts [atomic14/diy-esp32-epub-reader](https://github.com/atomic14/diy-esp32-epub-reader) to SiFli `SF32-OED-EPD` hardware. It uses SF32LB52X as the processing core, reads EPUB files from the built-in file system or a TF card, lays out content through ZIP/XML/XHTML parsing, FreeType fonts, and image decoders, then drives an e-paper panel with full- and partial-refresh waveforms.
+[OpenSiFli EPD Reader](https://github.com/OpenSiFli/EPD_Reader) adapts [atomic14/diy-esp32-epub-reader](https://github.com/atomic14/diy-esp32-epub-reader) to SiFli `SF32-OED-EPD` hardware. It uses SF32LB52x as the processing core, reads EPUB files from the built-in file system or a TF card, lays out content through ZIP/XML/XHTML parsing, FreeType fonts, and image decoders, then drives an e-paper panel with full- and partial-refresh waveforms.
 
 The current application provides library, table-of-contents, reading, reading-settings, function-settings, welcome/screen-off, low-battery, charging, and shutdown pages. It supports keys and touch, Chinese and English text, dynamic TTF/OTF fonts, font size/weight, line spacing, margins, and persistence of reading settings to the TF card. To conserve resources, the bundled Chinese font does not enable separate bold/italic faces by default; validate the actual result of weight options with the target font. It is a complete reference for a low-refresh reading terminal, not proof of general EPUB conformance or a production e-reader.
 
-## Why the SF32 Implementation?
+## Why the SF32 Implementation? { #why-the-sf32-implementation }
 
-This path combines SF32LB52 external storage, EPIC/LCDC display acceleration, touch, keys, Bluetooth PAN configuration, battery monitoring, and low-power management in one application. For a product team, its value is not merely showing one page: it enables joint evaluation of layout memory, full/partial refresh ghosting, waveform adaptation, TF-card power management, font access, interaction flow, and sleep behavior on supported hardware.
+This path combines SF32LB52 storage, EPIC/LCDC display acceleration, touch, keys, battery monitoring, and low-power management in one application. For a product team, its value is not merely showing one page: it enables joint evaluation of layout memory, full/partial refresh ghosting, waveform adaptation, TF-card power management, font access, interaction flow, and sleep behavior on supported hardware.
 
-Upstream publishes no authoritative purchase link for the `SF32-OED-EPD` boards or panels, and it specifies no EPUB coverage rate, panel operating-temperature range, production lifetime, or current figures for each mode. This page therefore treats hardware revision, panel/touch combination, and software commit as a mandatory engineering baseline. Other e-paper modules are not drop-in substitutes.
+SiFli's board guide links to a sample listing, but it does not establish that the offered board, panel, and touch hardware match the project's V1.1 software baseline; no exact baseline assembly or separate panel source is specified. Upstream also gives no EPUB coverage rate, panel operating-temperature range, production lifetime, or current figures for each mode. This page therefore treats hardware revision, panel/touch combination, and software commit as a mandatory engineering baseline. Other e-paper modules are not drop-in substitutes.
 
-## Outcome, Scope, and Entry Criteria
+**Source-baseline check:** SiFli's [SF32LB52-OED-6'-EPD guide](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-OED-6%27-EPD.md) describes a 6-inch OPM060DA panel at 758 × 1024. Its block diagram also shows the board-level paths: an 8-bit 8080 EPD interface, I²C touch, SPI1 TF card, analog microphone/audio PA, USB-to-UART, and battery/charger power. The pinned EPD Reader V1.1 configuration instead selects YZC085 V1.05 at 1032 × 758, and the Wiki board photo is marked V1.2. These sources do not establish that OPM060DA and YZC085 are interchangeable or that the Wiki panel is supplied with V1.1. Confirm the actual board and panel markings, then use the matching project target, waveform, and VCOM settings.
 
-**Outcome:** on a pinned `SF32-OED-EPD_V1.1` board and 6.0-inch YZC085 V1.05 panel, reproduce build/download, library/contents/reading, key/touch input, settings persistence, full/partial refresh, low-battery, sleep, and shutdown behavior, then retain the evidence required for a product decision.
+**Power requirement:** SiFli's board guide requires the battery to remain connected during operation; USB-C VBUS is for charging and cannot run the board by itself. The guide specifies a 1000–1500 mAh battery and recommends a 1500 mAh single-cell Li-Po pack with an MX1.25 connector. Because the guide's photographed board is marked V1.2 while this project baseline targets V1.1, confirm the exact board's power connector, polarity, and charging limits before selecting a pack.
 
-**Out of scope:** this page does not prove complete EPUB/CSS/font compatibility, DRM support, arbitrary-panel waveform compatibility, commercial reading quality, wireless content distribution, certification, or production reliability. Current source enables Bluetooth/PAN configuration and status UI, but the official README does not define network download as part of the local EPUB reading baseline.
+## Outcome, Scope, and Entry Criteria { #outcome-scope-and-entry-criteria }
+
+**Outcome:** on a pinned `SF32-OED-EPD_V1.1` board using the YZC085 V1.05 panel at the configured resolution of 1032 × 758, reproduce build/download, library/contents/reading, key/touch input, settings persistence, full/partial refresh, low-battery, sleep, and shutdown behavior, then retain the evidence required for a product decision.
+
+**Out of scope:** this page does not prove complete EPUB/CSS/font compatibility, DRM support, arbitrary-panel waveform compatibility, commercial reading quality, wireless content distribution, certification, or production reliability. The pinned source exposes Bluetooth/PAN configuration and status UI, but the upstream README does not define a content-delivery workflow over that connection. Treat local files as the reproducible baseline; network delivery remains unverified and out of scope.
 
 **Entry criteria:** the team can build and download SiFli-SDK applications and can identify the board revision, panel model, flex orientation, battery polarity, and TF-card file system. If the board/panel source and hardware documentation are unclear, stop purchase commitment until SiFli or the hardware provider confirms them.
 
@@ -43,9 +47,9 @@ Upstream publishes no authoritative purchase link for the `SF32-OED-EPD` boards 
 
 </div>
 
-## Hardware and Software Specifications
+## Hardware and Software Specifications { #hardware-and-software-specifications }
 
-### Hardware Specification
+### Hardware Specification { #hardware-specification }
 
 <div align="center"><em>Table: Hardware Specification</em></div>
 
@@ -53,16 +57,16 @@ Upstream publishes no authoritative purchase link for the `SF32-OED-EPD` boards 
 
 | Component | Required specification | Role | Status | Where to get it | Compatibility and substitution notes |
 |:----------|:-----------------------|:-----|:-------|:----------------|:-------------------------------------|
-| SF32-OED-EPD V1.1 board | SF32LB52X; `sf32-oed-epd_v11` software target; project map provides a 16 MiB QSPI NOR region and 8 MiB PSRAM region | Processing, storage, display, input, battery, and power management | Required | No purchase channel is published; identify it from the [pinned V1.1 board configuration](https://github.com/OpenSiFli/EPD_Reader/tree/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/sf32-oed-epd_v11) and obtain it through SiFli/the hardware provider | V1.2 and V1.2-SPI have separate targets and are not substitutes based only on connector appearance |
-| YZC085 V1.05 e-paper module | 6.0-inch, 1032 × 758, 300 dpi, 8-bit EPD/DBI path; V1.1 default | Displays EPUB pages and UI | Required | Acquisition channel not published; match the [pinned Kconfig option](https://github.com/OpenSiFli/EPD_Reader/blob/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/project/Kconfig.proj) to the physical model | R7D005 (1448 × 1072) and OPM037A3 (240 × 416, SPI) are separate configurations, not unconfigured replacements; validate waveform, VCOM, timing, and resolution per panel |
+| SF32-OED-EPD V1.1 board | SF32LB52x; `sf32-oed-epd_v11` software target; project map provides a 16 MiB QSPI NOR region and 8 MiB PSRAM region | Processing, storage, display, input, battery, and power management | Required | SiFli's [board guide](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-OED-6%27-EPD.md) links to a sample listing; confirm board revision, supplied panel, and touch hardware with the seller. Use the [pinned V1.1 board configuration](https://github.com/OpenSiFli/EPD_Reader/tree/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/sf32-oed-epd_v11) to identify the software target | V1.2 and V1.2-SPI have separate targets and are not substitutes based only on connector appearance |
+| YZC085 V1.05 e-paper module | 1032 × 758; 8-bit EPD/DBI path; V1.1 default. The pinned project configuration and cited board guide do not establish the panel's physical diagonal or DPI; verify these against the panel markings and vendor documentation. | Displays EPUB pages and UI | Required | Acquisition channel not published; match the [pinned Kconfig option](https://github.com/OpenSiFli/EPD_Reader/blob/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/project/Kconfig.proj) to the physical model | R7D005 (1448 × 1072) and OPM037A3 (240 × 416, SPI) are separate configurations, not unconfigured replacements; validate waveform, VCOM, timing, and resolution per panel |
 | FT5446U touch path | V1.1 default `TSC_USING_FT5446U_V01` | Touch selection, page turns, and swipe-up overlay | Required when touch is used | Obtain with the matching V1.1 board/panel assembly; no independent channel is published | V1.2 defaults to GT967 and the 3.7-inch SPI configuration selects FT6336U; drivers are not interchangeable |
 | TF card | Recognized by the board SPI storage driver and FAT file system | Bulk EPUB storage, external fonts, and `/settings.cfg` persistence | Required for the complete feature baseline; optional for built-in samples only | Standard TF card; upstream specifies no brand or capacity | Firmware prefers the TF card; record capacity, format, and file set and test removal/corruption recovery |
-| USB data cable and build host | Data-capable cable; host able to run SiFli-SDK tools | Power, UART download, and logging | Required | Standard data cable; tools from the [pinned SDK commit](https://github.com/OpenSiFli/SiFli-SDK/commit/8a1eb8a34be02c1df8529c9e8f0e69172bf9ef36) | Record host OS, port, and toolchain; a charge-only cable is unusable |
-| Battery/power assembly | Must match the exact SF32-OED-EPD board input, connector, polarity, and charger | Low-battery, charging, sleep, and portable-use qualification | Required for product qualification; USB is sufficient for bench reading | Upstream publishes no battery part number or purchase channel; obtain specifications from the board provider | Do not infer compatibility from the connector without a schematic/specification; record cell, protection, capacity, and charging limits |
+| USB data cable and build host | Data-capable cable; host able to run SiFli-SDK tools | USB-UART download, debugging/logging, and battery charging; not standalone board power | Required | Standard data cable; tools from the [pinned SDK commit](https://github.com/OpenSiFli/SiFli-SDK/commit/8a1eb8a34be02c1df8529c9e8f0e69172bf9ef36) | USB-C VBUS does not operate the board without a connected battery; a charge-only cable cannot download firmware |
+| Battery/power assembly | SiFli's board guide specifies 1000–1500 mAh and recommends a 1500 mAh single-cell Li-Po battery with an MX1.25 connector; verify the exact V1.1 board input and polarity | Required board operating power; low-battery, charging, sleep, and portable-use validation | Required to operate the board | No exact battery part number is published; see the [SiFli board guide](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-OED-6%27-EPD.md) and confirm the connector, polarity, and limits with the board provider | SiFli specifies a 1 A maximum linear-charger current and 1000 mA default constant-current setting; verify that the V1.1 assembly matches before product design |
 
 </div>
 
-### Software Specification
+### Software Specification { #software-specification }
 
 <div align="center"><em>Table: Software Specification</em></div>
 
@@ -79,7 +83,7 @@ Upstream publishes no authoritative purchase link for the `SF32-OED-EPD` boards 
 
 </div>
 
-## Choose a Supported Baseline
+## Choose a Supported Baseline { #choose-a-supported-baseline }
 
 Use `SF32-OED-EPD V1.1 + YZC085 V1.05 + FT5446U` for the first reproduction. Upstream documents an explicit `sf32-oed-epd_v11` build/download path, and Kconfig makes this the V1.1 default combination. Pin top-level commit `7d72223` and SDK submodule `8a1eb8a`; do not change board, panel, touch controller, and waveform together in the first pass.
 
@@ -95,7 +99,7 @@ The Windows download script is `build_sf32-oed-epd_v11_hcpu\uart_download.bat`. 
 scons --board=sf32-oed-epd_v11 --board_search_path=.. --menuconfig
 ```
 
-## Delivery Map
+## Delivery Map { #delivery-map }
 
 <div align="center"><em>Table: Delivery Stages and Decisions</em></div>
 
@@ -105,13 +109,13 @@ scons --board=sf32-oed-epd_v11 --board_search_path=.. --menuconfig
 |:------|:-------------------|:-----------------|
 | Pin hardware and source | Does the physical assembly match the upstream V1.1 baseline? | Marking/panel photos, connection orientation, commits, submodules, and configuration |
 | Establish the reading baseline | Can the pinned image complete the local EPUB flow? | Build/download logs, sample manifest, pages, and input record |
-| Qualify content and recovery | Are real books, fonts, TF card, and settings repeatable? | Compatibility matrix, missing/corrupt storage and font recovery, and persistence results |
-| Qualify display and power | Can waveform, ghosting, refresh, and battery behavior support the product direction? | Temperature, full/partial refresh, VCOM, refresh time, and current measurements |
+| Validate content and recovery | Are real books, fonts, TF card, and settings repeatable? | Compatibility matrix, missing/corrupt storage and font recovery, and persistence results |
+| Evaluate display quality and power | Can waveform, ghosting, refresh, and battery behavior support the product direction? | Temperature, full/partial refresh, VCOM, refresh time, and current measurements |
 | Adapt and review | Can one bounded change be made safely, and should product work proceed? | Change, regression, risk register, and proceed/stop decision |
 
 </div>
 
-## System Architecture and Dependencies
+## System Architecture and Dependencies { #system-architecture-and-dependencies }
 
 <div align="center"><em>Figure: EPUB Content, Rendering, Input, and E-Paper Paths</em></div>
 
@@ -133,9 +137,9 @@ flowchart LR
     UI --> PM["TF-card sleep / welcome page / shutdown"]
 ```
 
-The main failure domains are content archive/XHTML parsing, font files and memory, TF-card detection/power, touch/key mapping, panel model/waveform/VCOM, full/partial ghosting, battery ADC/charge state, and shutdown/wake. Bluetooth PAN exists in current configuration but should not obscure local-file, display, and power baseline failures.
+The main failure domains are content archive/XHTML parsing, font files and memory, TF-card detection/power, touch/key mapping, panel model/waveform/VCOM, full/partial ghosting, battery ADC/charge state, and shutdown/wake. Keep any future wireless feature outside the local-file, display, and power baseline until its project support and delivery path are documented.
 
-## Stage 1 — Pin the Physical and Source Baseline
+## Stage 1 — Pin the Physical and Source Baseline { #stage-1-pin-the-physical-and-source-baseline }
 
 **Goal:** prove that board, panel, touch controller, and source describe one supported combination.
 
@@ -147,7 +151,7 @@ The main failure domains are content archive/XHTML parsing, font files and memor
 
 **Gate 1 exit criterion:** the assembly matches the `sf32-oed-epd_v11` default combination, and pinned inputs reproducibly generate and start the same image.
 
-## Stage 2 — Validate the Untouched Reading Flow
+## Stage 2 — Validate the Untouched Reading Flow { #stage-2-validate-the-untouched-reading-flow }
 
 **Goal:** prove the core user journey before modification.
 
@@ -160,7 +164,7 @@ The main failure domains are content archive/XHTML parsing, font files and memor
 
 **Gate 2 exit criterion:** the main flow repeats across the target sample set and every failure is classified as content, font, storage, memory, input, or display—not “intermittent.”
 
-## Stage 3 — Qualify Settings, Storage, and Recovery
+## Stage 3 — Validate Settings, Storage, and Recovery { #stage-3-qualify-settings-storage-and-recovery }
 
 **Goal:** ensure that real content and settings cannot leave the user in an unrecoverable state after storage events.
 
@@ -173,7 +177,7 @@ The main failure domains are content archive/XHTML parsing, font files and memor
 
 **Gate 3 exit criterion:** target content and settings load repeatedly; missing card, invalid configuration, and missing font have comprehensible fallbacks that do not prevent return to Home.
 
-## Stage 4 — Qualify E-Paper Quality and Power
+## Stage 4 — Evaluate E-Paper Display Quality and Power { #stage-4-qualify-e-paper-quality-and-power }
 
 **Goal:** decide whether the panel driver and low-power policy fit the intended reading experience.
 
@@ -186,7 +190,7 @@ The main failure domains are content archive/XHTML parsing, font files and memor
 
 **Gate 4 exit criterion:** display quality, refresh latency, temperature, power, and recovery thresholds are defined and met, with an explicit disposition for every miss.
 
-## Stage 5 — Make a Controlled Adaptation and Review Readiness
+## Stage 5 — Make a Controlled Adaptation and Review Readiness { #stage-5-make-a-controlled-adaptation-and-review-readiness }
 
 **Goal:** prove that the team can adapt one boundary without breaking the baseline.
 
@@ -205,11 +209,11 @@ The product review must answer at least:
 
 **Gate 5 exit criterion:** the controlled change passes every applicable regression, and remaining content, display, power, security, licensing, supply, and regulatory risks have owners, mitigations, and a proceed, defer, or stop decision.
 
-## Handoff to Product Design
+## Handoff to Product Design { #handoff-to-product-design }
 
-The handoff package should include board/panel/touch revisions, pinned code and SDK, memory/partitions, file systems, font/content assets, waveform/VCOM/timing, full/partial-refresh policy, input map, battery curve, power measurements, fault recovery, license manifest, and production-test plan. Use the [SF32LB52x integration path](../sf32-products/chips/SF32LB52x.md#integration-path) to select the chip, module, board, hardware design guide, and checklist, then redesign custom hardware from the qualified functional boundary.
+The handoff package should include board/panel/touch revisions, pinned code and SDK, memory/partitions, file systems, font/content assets, waveform/VCOM/timing, full/partial-refresh policy, input map, battery curve, power measurements, fault recovery, license manifest, and production-test plan. Use the [SF32LB52x integration path](../sf32-products/chips/SF32LB52x.md#integration-path) to select the chip, module, board, hardware design guide, and checklist, then redesign custom hardware from the validated functional boundary.
 
-## Authoritative Sources
+## Authoritative Sources { #authoritative-sources }
 
 - [OpenSiFli/EPD_Reader](https://github.com/OpenSiFli/EPD_Reader)
 - [Project review commit `7d72223`](https://github.com/OpenSiFli/EPD_Reader/commit/7d72223c513d0a77eb251a3acb0f18cadb8d4d89)
@@ -220,3 +224,4 @@ The handoff package should include board/panel/touch revisions, pinned code and 
 - [EPD Reader main-application MIT license](https://github.com/OpenSiFli/EPD_Reader/blob/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/LICENSE)
 - [atomic14/diy-esp32-epub-reader](https://github.com/atomic14/diy-esp32-epub-reader)
 - [SiFli SF32LB52x build and download guide](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/build.html)
+- [SiFli Chinese hardware guide for SF32LB52-OED-6'-EPD](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-OED-6%27-EPD.md)

@@ -209,7 +209,7 @@ nav = [
     ]},
     { "Low Power" = [
       { "Low Power Overview" = "learn/low-power/overview.md" },
-      { "Battery Capacity Calculation" = "learn/low-power/battery-capacity-calculation.md" },
+      { "Battery State-of-Charge Estimation" = "learn/low-power/battery-capacity-calculation.md" },
       { "Smartwatch Power Profiling" = "learn/low-power/smartwatch-power-profiling.md" },
       "learn/low-power/measurement-and-validation.md",
       "learn/low-power/low-power-sdk-examples.md"
@@ -227,6 +227,7 @@ nav = [
   { "Blog" = [
     "blog/index.md",
     { "Posts" = [
+      "blog/posts/2026-10-07-multi-language-translation.md",
       "blog/posts/2026-08-24-august-progress.md",
       "blog/posts/2026-07-31-the-first-blog.md"
     ]}
@@ -341,6 +342,40 @@ name = "EN"
 link = "/"
 lang = "en"
 
+[[project.extra.alternate]]
+name = "中文"
+link = "/zh/"
+lang = "zh"
+
+[[project.extra.alternate]]
+name = "日本語"
+link = "/ja/"
+lang = "ja"
+
+[[project.extra.alternate]]
+name = "Español"
+link = "/es/"
+lang = "es"
+
+[[project.extra.alternate]]
+name = "Deutsch"
+link = "/de/"
+lang = "de"
+
+[[project.extra.alternate]]
+name = "Français"
+link = "/fr/"
+lang = "fr"
+
+[[project.extra.alternate]]
+name = "Português"
+link = "/pt/"
+lang = "pt"
+
+[[project.extra.alternate]]
+name = "Русский"
+link = "/ru/"
+lang = "ru"
 
 [[project.extra.social]]
 icon = "fontawesome/solid/envelope"

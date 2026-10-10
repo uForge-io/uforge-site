@@ -1,31 +1,33 @@
 ---
 icon: lucide/circuit-board
+hide:
+    - navigation
 description: "Storage, connectivity, and manufacturing-access schematic design guidelines for the SF32LB52x MCU: boot storage, sensors, debug/download interface, and production flashing."
 tags:
     - Hardware
     - Chip
 ---
 
-# SF32LB52x Hardware Design Guide — Storage & Manufacturing
+# SF32LB52x Hardware Design Guide — Storage & Manufacturing { #sf32lb52x-hardware-design-guide-storage-manufacturing }
 
 !!! note "Part of the SF32LB52x Hardware Design Guide"
     This page covers Sections 5.6-5.7 of Schematic Design Guidelines: Storage and Connectivity, and Manufacturing. Return to [RF & User Interfaces](SF32LB52x_schematic_rf_interfaces.md), or see the [Schematic Checklist](SF32LB52x_schematic_checklist.md) for the item-by-item review.
 
-### 5.6. Storage and Connectivity
+### 5.6. Storage and Connectivity { #56-storage-and-connectivity }
 
-#### 5.6.1. Storage
+#### 5.6.1. Storage { #561-storage }
 
 **Quick Summary**
 
-- External boot options include SPI NOR, SPI NAND, SD NAND, and eMMC on supported regular-powered variants.
+- External boot options include SPI NOR, SPI NAND, and SD NAND; eMMC is available on supported externally regulated variants.
 - Bootstrap pins `PA13` and `PA17` select the boot medium.
-- Boot storage power switching uses `PA21`; incorrect storage power behavior can block restart or increase Hibernate leakage.
+- The application notes and schematic-design guide specify `PA21` for boot-storage power switching, whereas the official checklist specifies `PA11` for external Flash on battery-powered variants. Confirm the applicable control pin with SiFli for the exact design. Separately, PA21 must power-cycle MPI-attached NOR Flash of 32 MB or larger so ROM can recognize it after reset or Hibernate entry; during Hibernate, VDD_SIP must be off to avoid leakage through co-packaged-memory I/O.
 
 **Design Goal**
 
 Choose a boot medium and storage power architecture that support firmware size, update strategy, low-power states, and reliable ROM boot after reset or Hibernate.
 
-##### 5.6.1.1. Storage Interface Description
+##### 5.6.1.1. Storage Interface Description { #5611-storage-interface-description }
 
 The chip supports external SPI NOR Flash, SPI NAND Flash, and SD NAND Flash. **eMMC is supported only on the 52B/D/E/G/J regular-powered variant.**
 
@@ -62,7 +64,10 @@ The chip supports external SPI NOR Flash, SPI NAND Flash, and SD NAND Flash. **e
 !!! note "eMMC power domains (regular-powered variant only)"
     eMMC chips have two power domains, VCC and VCCQ. Option 1: switch both together — lower shutdown current, but slower eMMC sleep recovery and higher average CPU power. Option 2: switch VCC only, keep VCCQ always on — higher shutdown current than option 1, but faster eMMC sleep recovery and lower average CPU power.
 
-##### 5.6.1.2. Boot Configuration
+!!! important "Storage-interface pull-ups"
+    The application note for externally regulated variants specifies no external pull-up for NOR Flash; a pull-up on PA17 (Hold#) for SPI NAND; pull-ups on PA13 (D3) and PA15 (CMD) for SD NAND; and pull-ups on PA17 (D1), PA13 (D3), and PA15 (CMD) for eMMC. It recommends 7.5 kΩ. The battery-variant application note only identifies PA13/PA17 bootstrap footprints and does not say whether the PA15/CMD pull-up also applies there. Do not transfer the externally regulated variant's PA15 requirement to battery-powered designs without confirmation; verify pull-ups for the exact variant and boot medium with SiFli.
+
+##### 5.6.1.2. Boot Configuration { #5612-boot-configuration }
 
 === "SF32LB520/3/5/7 (Battery-Powered)"
 
@@ -114,9 +119,12 @@ The chip supports external SPI NOR Flash, SPI NAND Flash, and SD NAND Flash. **e
     !!! note "Naming note in the original SiFli documentation"
         SiFli's original source document uses suffix letters "SF32LB52AUx6" and "SF32LB52D/F/HUx6" in this section, which do not match the B/D/E/G/J model naming used at the start of the same source document. This guide restates the distinction by actual co-packaged memory type (Flash vs. PSRAM); if in doubt, verify against the exact chip model and datasheet.
 
-##### 5.6.1.3. Boot Storage Power Control
+!!! important "Confirm the overlapping boot-table entries"
+    The application notes list H/X for SD NAND, while the separate SF32LB52x schematic-design guide lists H/L; the regular-powered application note also lists H/H for eMMC. Since X normally means either logic level, the regular-powered entries overlap and the sources do not explain the difference. Do not infer the final strap levels from these tables alone; confirm the exact variant and ROM behavior with SiFli. The reference circuits use 7.5 kΩ pull-ups: Figure 5.6-1 connects them to the 3.3 V VDD33_VOUT1 rail, and Figure 5.6-2 to 3.3 V VDDIOA.
 
-The chip supports power-switching the boot storage medium to reduce shutdown power. The switch enable pin must be controlled through **PA21**, active high (on), inactive low (off).
+##### 5.6.1.3. Boot Storage Power Control { #5613-boot-storage-power-control }
+
+The higher-priority OpenSiFli application guides and schematic-design guide specify `PA21` for boot-storage power switching, active high (on) and low (off); use `PA21` as the source-supported design basis. The checklist workbook linked from the SiFli Wiki instead lists `PA11` for external-Flash switching on battery-powered variants. Do not substitute `PA11` based only on that workbook. It does not say whether `PA11` is a separate board-level enable or a pin-assignment conflict, so confirm the exact net and variant with SiFli before release.
 
 === "SF32LB520/3/5/7 (Battery-Powered)"
 
@@ -132,14 +140,14 @@ The chip supports power-switching the boot storage medium to reduce shutdown pow
     - Models with co-packaged PSRAM (SF32LB52DUB6/EUB6/GUC6/JUD6) — if PVDD = 3.3 V and VDD_SIP uses the internal LDO, a VDD_SIP power switch is optional; if PVDD = 1.8 V, a VDD_SIP power switch is required
     - External storage power is independent of VDD_SIP — add a separate power switch
     - See Section 5.6.1.1 for the eMMC VCC/VCCQ power-domain tradeoffs
-    - **All boot-related storage power switches must be controlled through PA21**
+    - The application note specifies **PA21** for boot-related storage power switches; the source discrepancy for battery-powered external Flash is called out above
     - For a NOR Flash of 32 MB or larger attached via the MPI (Memory Peripheral Interface, which connects to SPI-NOR/SPI-NAND), the Flash must be power-switchable via PA21 so it exits 4-byte mode on MCU restart or Hibernate entry — otherwise ROM won't recognize the Flash. NOR Flash of 16 MB or smaller can remain always powered
     - The reference design reserves pull-up resistor footprints at PA13 and PA17 — populate based on the storage type, 7.5 kΩ recommended
 
 **Common Mistakes - Storage**
 
 - Missing bootstrap resistors or populating them for the wrong boot medium.
-- Leaving `PA21` disconnected from the boot-storage power switch.
+- Leaving the source-confirmed boot-storage power-switch control disconnected.
 - Treating eMMC as available on all variants.
 - Keeping large NOR Flash always powered when 4-byte mode can break ROM recognition after restart.
 
@@ -147,15 +155,15 @@ The chip supports power-switching the boot storage medium to reduce shutdown pow
 
 - [ ] Boot medium is selected and documented before PCB layout.
 - [ ] `PA13`/`PA17` bootstrap pull options match the boot table.
-- [ ] `PA21` controls all required boot-storage power switches.
+- [ ] The source-confirmed, variant-specific pin controls all required boot-storage power switches; the PA11/PA21 discrepancy has been resolved with SiFli.
 - [ ] eMMC VCC/VCCQ tradeoff is reviewed for regular-powered designs.
 - [ ] Bring-up plan covers boot-mode strapping, storage rail timing, ID read, and firmware download.
 
-#### 5.6.2. Sensors
+#### 5.6.2. Sensors { #562-sensors }
 
 **Quick Summary**
 
-- Sensors typically connect through I2C or SPI and should be power-gated when low standby current is required.
+- Sensors typically connect through I2C or SPI. Power-gate unused sensors to reduce standby current; keep sensors needed for wake-up in the required operating mode.
 - Wake-capable sensor interrupts must be assigned before pinout freeze.
 
 **Design Goal**
@@ -167,11 +175,11 @@ The SF32LB52x can connect to heart-rate, accelerometer, geomagnetic, and similar
 **Sensor Checklist**
 
 - [ ] Sensor bus, interrupt, reset, and power-enable pins are assigned.
-- [ ] Sensor load switch Iq and shutdown current match the standby target.
+- [ ] The sensor load switch's quiescent current (Iq) and shutdown current meet the standby target.
 - [ ] Pull-ups are placed on the correct sensor I/O voltage rail.
 - [ ] Bring-up plan covers bus scan, interrupt wake, and sensor power cycling.
 
-#### 5.6.3. UART and I2C Pin Assignment
+#### 5.6.3. UART and I2C Pin Assignment { #563-uart-and-i2c-pin-assignment }
 
 **Quick Summary**
 
@@ -190,12 +198,12 @@ The SF32LB52x supports UART and I2C function mapping on arbitrary PA pins.
 - [ ] UART pins needed for logs, download, or external modules are accessible.
 - [ ] Pin multiplexing does not conflict with bootstrap, wake, display, storage, or debug functions.
 
-#### 5.6.4. GPTIM Pin Assignment
+#### 5.6.4. GPTIM Pin Assignment { #564-gptim-pin-assignment }
 
 **Quick Summary**
 
 - GPTIM functions can be mapped to arbitrary PA pins.
-- Timer outputs are commonly used for PWM, capture, motor control, backlight, or product-specific timing.
+- Timer functions support PWM outputs, input capture, motor control, backlight control, and product-specific timing.
 
 **Design Goal**
 
@@ -209,9 +217,9 @@ The SF32LB52x supports GPTIM function mapping on arbitrary PA pins.
 - [ ] GPTIM pins do not conflict with backlight, motor, debug, or storage requirements.
 - [ ] Bring-up plan includes checking PWM frequency, duty range, and pin polarity.
 
-### 5.7. Manufacturing
+### 5.7. Manufacturing { #57-manufacturing }
 
-#### 5.7.1. Debug and Download Interface
+#### 5.7.1. Debug and Download Interface { #571-debug-and-download-interface }
 
 **Quick Summary**
 
@@ -223,6 +231,8 @@ The SF32LB52x supports GPTIM function mapping on arbitrary PA pins.
 Guarantee firmware download, debug logs, single-step debug, and failure recovery access even after the product enclosure and production fixture are defined.
 
 The SF32LB52x supports a DBG_UART interface for download and debug, connected to a PC through a 3.3 V UART-to-USB dongle board. SWD and DBG_UART are multiplexed on PA18 and PA19; the default power-on configuration is DBG_UART, which supports single-step debugging as well as log output.
+
+For DBG_UART single-step debugging and log output, consult the SFtool and Impeller manuals.
 
 <div align="center"><em>Table 5.7-1: Debug Port Connections</em></div>
 
@@ -242,7 +252,7 @@ The SF32LB52x supports a DBG_UART interface for download and debug, connected to
 - [ ] UART voltage level is 3.3 V compatible with the selected adapter or fixture.
 - [ ] Recovery path is documented for a board that cannot boot application firmware.
 
-#### 5.7.2. Production Flashing and Crystal Calibration
+#### 5.7.2. Production Flashing and Crystal Calibration { #572-production-flashing-and-crystal-calibration }
 
 **Quick Summary**
 
@@ -262,7 +272,7 @@ SiFli provides an offline downloader for production firmware flashing and crysta
 - [ ] Crystal calibration flow and pass/fail limits are defined with manufacturing.
 - [ ] Programming, calibration, and functional-test records can be tied back to the board revision.
 
-#### 5.7.3. Schematic and PCB Drawing Checklists
+#### 5.7.3. Schematic and PCB Drawing Checklists { #573-schematic-and-pcb-drawing-checklists }
 
 Use the official [schematic and PCB checklist][SiFli SF32LB52 Schematic & PCB Checklist (XLSX)] published on SiFli's wiki as the formal release gate — see the [Schematic Checklist](SF32LB52x_schematic_checklist.md) for the complete, item-by-item version. The local checklists in this guide are intended to catch common engineering issues before the formal checklist review.
 

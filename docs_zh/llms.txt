@@ -1,0 +1,194 @@
+# μForge.io
+
+> μForge.io 是面向创新半导体方案的开源开发平台，首先覆盖 SiFli 的 SF32 系列超低功耗 AIoT 微控制器。它汇集了芯片与模块文档、开发板参考、SDK/平台指南，以及可用于量产的硬件设计指南，服务于构建互联、智能、节能嵌入式产品的开发者。
+
+目标读者：围绕 SF32 系列选型或设计硬件的硬件工程师、PCB 设计人员、固件/软件工程师和产品工程师。内容侧重实用的工程细节（选型、引脚分配、电气规格、PCB 布局规则、集成风险），而非营销语言。
+
+仅下列页面在本站公开发布。内部工作笔记、流程文档和写作模板不在本域名下发布，也不属于公开内容。
+
+本文件列出中文页面（/zh/）。英文版（站点根路径）是权威参考；中文为机器辅助翻译。涉及关键技术细节时，请与对应的英文页面核对。
+
+## 快速入门
+
+- [入门指南概览](https://uForge.io/zh/getting-started/): 为你的第一块 SF32 开发板选择软件路径——SiFli-SDK、CodeKit、Zephyr、Arduino、Rust 或 MicroPython，附各路径现状与所需硬件。
+- [SiFli-SDK](https://uForge.io/zh/getting-started/sifli/getting-started-sifli-sdk/): 从开箱的 SF32 开发板开始，通过 SiFli-SDK 安装工具链、使用 scons 构建，并经 UART 烧录和运行 hello_world。
+- [SiFli CodeKit](https://uForge.io/zh/getting-started/sifli/getting-started-sifli-codekit/): 介绍如何在 VS Code 中首次使用 SiFli CodeKit：安装扩展、选择 SF32 开发板、构建并烧录 hello_world，再打开串口控制台。
+- [Zephyr 上游版本](https://uForge.io/zh/getting-started/zephyr/getting-started-zephyr-upstream/): 构建并烧录 Zephyr 上游支持的 SF32LB52 DevKit LCD 开发板目标，然后检查文档记录的控制台设置和受支持功能。
+- [Arduino](https://uForge.io/zh/getting-started/arduino/getting-started-arduino/): 在 SF32LB52 DevKit LCD 上首次运行 OpenSiFli 的测试版 ArduinoCore-zephyr：安装开发板包、上传串口测试程序，并运行 Blink。
+- [MicroPython](https://uForge.io/zh/getting-started/micropython/getting-started-micropython/): MicroPython 尚无经过验证的 SF32 入门流程；可先按 SiFli-SDK 流程完成可复现的首次启动调试，并在 MicroPython 状态页了解支持进展。
+- [Rust](https://uForge.io/zh/getting-started/rust/getting-started-rust/): 在 SF32LB52 上首次评估 OpenSiFli sifli-rs：安装 Rust 编译目标、构建未修改的 Blinky 示例、配置 sftool，并保留 SDK 恢复路径。
+
+## 硬件 — 任务入口
+
+- [SF32 产品](https://uForge.io/zh/sf32-products/): 从这里了解 SF32 硬件、规划产品、选择芯片/模组/开发板、复用参考设计，并完成量产硬件设计准备。
+- [硬件](https://uForge.io/zh/hardware/): 复用 SF32 参考设计，或基于选定器件开展设计，并为量产做好准备。
+- [规划产品](https://uForge.io/zh/sf32-products/family/product-planning/): 端到端 SF32 产品规划路径：选择器件和集成层级，在开发板上验证软件，再为量产准备设计。
+- [参考设计](https://uForge.io/zh/hardware/reference-designs/reference-designs/): μForge 参考设计路径：比较可复现的硬件与软件验证路径，然后选择最接近产品需求的路径。
+- [互联可穿戴参考设计路径](https://uForge.io/zh/hardware/reference-designs/connected-wearable-journey/): 从 SF32LB52 开发板验证到自定义互联可穿戴产品硬件和固件发布计划的实用 SF32 参考设计路径。
+- [SF32 产品选型工具](https://uForge.io/zh/sf32-products/product-selector/): 根据产品约束筛选 SF32 芯片和模组，再通过受支持的硬件验证实施路径。
+- [面向量产的设计](https://uForge.io/zh/hardware/design-for-production/): SF32 量产硬件设计入口：芯片和模组设计指南、检查清单、接口定义、经验证的元器件与 EDA 库。
+
+## 硬件 — 芯片
+
+- [SF32 产品系列](https://uForge.io/zh/sf32-products/family/SF32_family/): SF32LB5xx 系列概览：异构 Cortex-M33 内核、蓝牙、ePicasso 图形和边缘 AI，并提供对比表和快速选型指南。
+- [SF32 命名规则](https://uForge.io/zh/sf32-products/family/SF32_namingrule/): 如何解读 SF32LB5xyZxYx6 型号：产品档位、PSRAM 变体、封装类型、内置 Flash/PSRAM 容量与温度等级，附实例解析。
+- [SF32LB52x](https://uForge.io/zh/sf32-products/chips/SF32LB52x/): SF32LB52x：面向可穿戴与紧凑型 AIoT 产品的高性价比双核 Arm Cortex-M33 MCU 系列，涵盖电池供电的 SF32LB520/3/5/7 和外部供电的 52B/D/E/G/J。
+- [SF32LB52x 硬件设计指南](https://uForge.io/zh/hardware/chip-guides/SF32LB52x_hardware_design_guide/): SF32LB52x 硬件设计指南：电源架构、时钟与 RF 设计、显示与存储接口及 PCB 布局指导。
+- [SF32LB52x 硬件设计指南 — 原理图设计指导](https://uForge.io/zh/hardware/chip-guides/SF32LB52x_schematic_design/): SF32LB52x MCU 的原理图设计指导：最小系统设计、电源系统与时钟生成。
+- [SF32LB52x 硬件设计指南 — RF 与用户接口](https://uForge.io/zh/hardware/chip-guides/SF32LB52x_schematic_rf_interfaces/): SF32LB52x MCU 的 RF 与用户接口原理图设计指导：天线匹配、显示、音频、按键与振动马达。
+- [SF32LB52x 硬件设计指南 — 存储与量产](https://uForge.io/zh/hardware/chip-guides/SF32LB52x_schematic_storage_mfg/): SF32LB52x MCU 的存储、外设连接与量产原理图设计指导：启动存储、传感器、调试/下载接口及产线烧录。
+- [SF32LB52x 硬件设计指南 — 原理图核对表](https://uForge.io/zh/hardware/chip-guides/SF32LB52x_schematic_checklist/): SF32LB52x 原理图逐项核对表，涵盖封装、供电、时钟、射频、存储、显示及生产测试。
+- [SF32LB52x 硬件设计指南 — PCB 布局指导](https://uForge.io/zh/hardware/chip-guides/SF32LB52x_pcb_layout/): SF32LB52x MCU 的 PCB 布局指导：封装、叠层、扇出，以及时钟/RF/音频/USB/SDIO 走线、DC-DC 与电源走线、EMI/ESD 及其他布局注意事项。
+- [SF32LB52x 硬件设计指南 — PCB 布局核对表](https://uForge.io/zh/hardware/chip-guides/SF32LB52x_pcb_layout_checklist/): SF32LB52x MCU 的逐项 PCB 布局评审核对表，覆盖封装、走线、电源与接地检查项。
+- [SF32LB52x 硬件设计指南 — 设计评审检查表与参考资料](https://uForge.io/zh/hardware/chip-guides/SF32LB52x_review_and_reference/): SF32LB52x 硬件设计指南的设计评审检查表、相关文档与参考资料、参考原理图/PCB/机械/电源附录，以及修订历史。
+- [SF32LB55x](https://uForge.io/zh/sf32-products/chips/SF32LB55x/): SF32LB55x：面向可穿戴与紧凑型 HMI 产品的主流超低功耗 BLE MCU 系列，提供比入门级器件更强的图形能力、更大的 SRAM，以及更灵活的封装选择。
+- [SF32LB55x 硬件设计指南](https://uForge.io/zh/hardware/chip-guides/SF32LB55x_hardware_design_guide/): SF32LB55x 硬件设计指南：电源设计、时钟电路、RF 匹配、存储与显示接口及 PCB 布局指导。
+- [SF32LB55x 硬件设计指南 — 原理图设计指导](https://uForge.io/zh/hardware/chip-guides/SF32LB55x_schematic_design/): SF32LB55x MCU 的原理图设计指导：电源系统、启动模式、时钟生成、RF、存储接口、显示与触摸接口，以及唤醒/GPADC/制造接口。
+- [SF32LB55x 硬件设计指南 — 原理图核对表](https://uForge.io/zh/hardware/chip-guides/SF32LB55x_schematic_checklist/): SF32LB55x MCU 的逐项原理图评审核对表，覆盖封装、电源、时钟、RF、存储、显示与制造检查项。
+- [SF32LB55x 硬件设计指南 — PCB 布局指导](https://uForge.io/zh/hardware/chip-guides/SF32LB55x_pcb_layout/): SF32LB55x MCU 的 PCB 布局指导：封装与叠层、通用 PCB 规则、接口走线，以及逐项 PCB 布局核对表。
+- [SF32LB55x 硬件设计指南 — 设计评审检查表与参考资料](https://uForge.io/zh/hardware/chip-guides/SF32LB55x_review_and_reference/): SF32LB55x 硬件设计指南的设计评审检查表、相关文档与参考资料、附录，以及修订历史。
+- [SF32LB56x](https://uForge.io/zh/sf32-products/chips/SF32LB56x/): SF32LB56x：面向显示、音频和存储需求更高的连接型产品，提供双模蓝牙、超低功耗运行与更强的常开处理能力。
+- [SF32LB56x 硬件设计指南](https://uForge.io/zh/hardware/chip-guides/SF32LB56x_hardware_design_guide/): SF32LB56x 硬件设计指南：电源系统、时钟生成、RF 设计、显示、音频及 PCB 布局指导。
+- [SF32LB56x 硬件设计指南 — 原理图设计指导](https://uForge.io/zh/hardware/chip-guides/SF32LB56x_schematic_design/): SF32LB56x MCU 的原理图设计指导：电源系统、工作模式与唤醒源、时钟生成、RF、显示/触摸/背光接口，以及存储、传感器、音频、连接与制造。
+- [SF32LB56x 硬件设计指南 — 原理图核对表](https://uForge.io/zh/hardware/chip-guides/SF32LB56x_schematic_checklist/): SF32LB56x MCU 的逐项原理图评审核对表，覆盖封装、电源、时钟、RF、存储、显示与制造检查项。
+- [SF32LB56x 硬件设计指南 — PCB 布局指导](https://uForge.io/zh/hardware/chip-guides/SF32LB56x_pcb_layout/): SF32LB56x MCU 的 PCB 布局指导：封装与叠层、关键走线，以及逐项 PCB 布局核对表。
+- [SF32LB56x 硬件设计指南 — 设计评审检查表与参考资料](https://uForge.io/zh/hardware/chip-guides/SF32LB56x_review_and_reference/): SF32LB56x 硬件设计指南的设计评审检查表、相关文档与参考资料、附录，以及修订历史。
+- [SF32LB58x](https://uForge.io/zh/sf32-products/chips/SF32LB58x/): SF32LB58x：SF32LB5x 系列旗舰档 AIoT MCU，面向图形、显示、存储和外设需求较高的连接型产品。
+- [SF32LB58x 硬件设计指南](https://uForge.io/zh/hardware/chip-guides/SF32LB58x_hardware_design_guide/): SF32LB58x 硬件设计指南：电源架构、时钟与 RF 设计、显示、存储、音频及 PCB 布局指导。
+- [SF32LB58x 硬件设计指南 — 原理图设计](https://uForge.io/zh/hardware/chip-guides/SF32LB58x_schematic_design/): SF32LB58x MCU 原理图设计指南，涵盖电源、时钟生成、RF、用户接口、存储与连接，以及制造。
+- [SF32LB58x 硬件设计指南 — 原理图核对表](https://uForge.io/zh/hardware/chip-guides/SF32LB58x_schematic_checklist/): SF32LB58x MCU 的逐项原理图评审核对表，覆盖电源、时钟、RF、存储、显示与制造检查项。
+- [SF32LB58x 硬件设计指南 — PCB 布局指导](https://uForge.io/zh/hardware/chip-guides/SF32LB58x_pcb_layout/): SF32LB58x MCU 的 PCB 布局指导：封装、叠层、扇出，以及时钟/RF/音频/USB/SDIO/DSI/电源走线指导。
+- [SF32LB58x 硬件设计指南 — PCB 布局核对表](https://uForge.io/zh/hardware/chip-guides/SF32LB58x_pcb_layout_checklist/): SF32LB58x MCU 的逐项 PCB 布局评审核对表，覆盖封装、电源、时钟、RF、音频、高速信号与叠层检查项。
+- [SF32LB58x 硬件设计指南 — 设计评审检查表与参考资料](https://uForge.io/zh/hardware/chip-guides/SF32LB58x_review_and_reference/): SF32LB58x 硬件设计指南的设计评审检查表、相关文档与参考资料、附录，以及修订历史。
+
+## 硬件 — 模块
+
+- [模组接口标准](https://uForge.io/zh/hardware/m2-modules/interface-standards-overview/): 了解 μForge M2 模组接口约定：用命名规则统一术语，并在确定载板设计前验证仍处于草案状态的引脚级接口定义。
+- [M2 接口定义](https://uForge.io/zh/hardware/m2-modules/M2-interface-definition/): μForge M2 和 M2xM 触点分配草案，以及尚未核实的 M2xN、M2xA 摘要与信号复用说明。
+- [SF32LB52-MOD-1](https://uForge.io/zh/sf32-products/modules/SF32LB52-MOD-1/): SF32LB52-MOD-1：基于 SF32LB52x 平台的低功耗蓝牙（Bluetooth）5.3 MCU 模组系列，集成 RF 电路和 48 MHz 晶振，天线配置因料号而异。
+- [SF32LB52-MOD-1 硬件设计指南](https://uForge.io/zh/hardware/chip-guides/SF32LB52-MOD-1_hardware_design_guide/): SF32LB52-MOD-1 硬件设计指南：蓝牙（Bluetooth）MCU 模组的电源、接口及 PCB 集成设计指导。
+- [SF32LB56-MOD](https://uForge.io/zh/sf32-products/modules/SF32LB56-MOD/): SF32LB56-MOD：基于 SF32LB56xV 的通用低功耗蓝牙（Bluetooth）5.3 MCU 模组系列，标准配置包含合封的 4 MB + 8 MB OPI-PSRAM，并按 SKU 提供不同 Flash 配置。
+- [SF32LB56-MOD 硬件设计指南](https://uForge.io/zh/hardware/chip-guides/SF32LB56-MOD_hardware_design_guide/): SF32LB56-MOD 硬件设计指南：蓝牙 MCU 模组的电源、接口及 PCB 集成设计指导。
+- [SF32LB58-MOD](https://uForge.io/zh/sf32-products/modules/SF32LB58-MOD/): SF32LB58-MOD：基于 SF32LB586VDD36 的低功耗蓝牙（Bluetooth）MCU 模组，标准配置为 16 + 16 MB HPI-PSRAM 和 1 MB QSPI-NOR，并提供 NOR、NAND 或 eMMC 存储配置。
+- [SF32LB58-MOD 硬件设计指南](https://uForge.io/zh/hardware/chip-guides/SF32LB58-MOD_hardware_design_guide/): SF32LB58-MOD 硬件设计指南：低功耗蓝牙（Bluetooth）MCU 模组的电源、接口及 PCB 集成设计指导。
+
+## 硬件 — 开发板
+
+- [SF32LB52-DevKit-LCD](https://uForge.io/zh/sf32-products/devkits/SF32LB52-DevKit-LCD/): SF32LB52-DevKit-LCD：面向显示应用的 SF32LB52x 开发板，适合快速验证 SPI、QSPI 和 MCU/8080 屏幕，并集成触摸、音频、存储和电池支持。
+- [SF32LB52-DevKit-Core-3p3](https://uForge.io/zh/sf32-products/devkits/SF32LB52-DevKit-Core-3p3/): SF32LB52-DevKit-Core-3p3：紧凑型 SF32LB52x 评估板，MCU 供电可通过跳线选择 1.8 V 或 3.3 V，并提供 GPIO、显示、音频、USB 和电源轨的直接访问。
+- [SF32LB52-DevKit-Nano](https://uForge.io/zh/sf32-products/devkits/SF32LB52-DevKit-Nano/): SF32LB52-DevKit-Nano：紧凑型半孔 SF32LB52x 开发板，适合贴装式原型、小型显示模组调试和接近成品形态的评估。
+- [SF32LB52-DevKit-ULP](https://uForge.io/zh/sf32-products/devkits/SF32LB52-DevKit-ULP/): SF32LB52-DevKit-ULP：面向可穿戴系统验证的 SF32LB52x 开发板，集成 AMOLED、触摸、传感器、音频、电池充电和电流测量能力。
+- [SF32LB56-DevKit-LCD](https://uForge.io/zh/sf32-products/devkits/SF32LB56-DevKit-LCD/): SF32LB56-DevKit-LCD 开发板：基于 SF32LB56xV 模组的显示、音频、存储和外设开发平台。
+- [SF32LB58-DevKit-LCD](https://uForge.io/zh/sf32-products/devkits/SF32LB58-DevKit-LCD/): SF32LB58-DevKit-LCD：基于 SF32LB58x 的多接口开发板，可用于 MIPI DSI、RGB 和 QSPI 显示屏启动调试，以及音频、SDIO、CAN 和外设扩展验证。
+
+## 硬件 — 其他资源
+
+- [元器件和 CAD 库](https://uForge.io/zh/hardware/cad-components/components-and-cad-libraries/): 利用元器件适用性验证资料和官方 CAD 数据开展 SF32 量产设计，按正确顺序完成 BOM 与 PCB 布局评审。
+- [SF32 合格供应商名录](https://uForge.io/zh/hardware/cad-components/sifli-approved-vendor-list/): 思澈科技（SiFli）针对 SF32 设计的合格供应商名录：涵盖已验证晶体、Buck 电感、NOR/NAND 与 SD-NAND Flash 及 LCD 驱动，并提供选型要求和 BOM 核对清单。
+- [SF32 EDA 工具库](https://uForge.io/zh/hardware/cad-components/eda-tool-libraries/): 思澈科技（SiFli）官方提供的 SF32 芯片与模组原理图符号及 PCB 封装库——JLCEDA/LCEDA Pro、PADS、OrCAD 与 KiCad，含下载链接与核对清单。
+
+## 开发
+
+- [开发概览](https://uForge.io/zh/develop/): 以任务为主线梳理 SF32 的开发资源：SiFli-SDK 日常工作流、应用笔记、示例、工具、固件专题和社区路径。
+- [开发概览](https://uForge.io/zh/develop/): 以任务为主线梳理 SF32 的开发资源：SiFli-SDK 日常工作流、应用笔记、示例、工具、固件专题和社区路径。
+- [SiFli-SDK](https://uForge.io/zh/develop/platforms/sifli-sdk/overview/): SiFli-SDK 作为 SF32 的参考开发路径：核心 scons 构建与 sdk.py menuconfig 工作流、开发板命名、项目结构，以及量产前的评估要点。
+- [构建、烧录与串口监控](https://uForge.io/zh/develop/platforms/sifli-sdk/build-flash-monitor/): SiFli-SDK 的日常开发流程：激活环境、使用 scons 构建、通过 UART 下载脚本或 sftool 烧录，并查看串口输出。
+- [开发板配置](https://uForge.io/zh/develop/platforms/sifli-sdk/board-configuration/): SiFli-SDK 的 --board 名称如何将固件与实际 SF32 硬件关联：Flash/PSRAM 布局、引脚复用、显示和音频路径，以及开发板启动调试清单。
+- [组件与 `sf-pkg`](https://uForge.io/zh/develop/platforms/sifli-sdk/components/): 将 SiFli-SDK 示例代码转化为可复用组件与 `sf-pkg` 软件包：质量门槛、需要记录的信息，以及常见打包陷阱。
+- [调试与诊断](https://uForge.io/zh/develop/platforms/sifli-sdk/debugging-diagnostics/): 使用 sftool、AssertDump、SiFli_Trace 与 RT-Thread Shell 调试 SF32 固件，包含可复现的排查顺序与崩溃报告检查清单。
+- [SDK 应用笔记](https://uForge.io/zh/develop/platforms/sifli-sdk/sdk-application-notes/): 按工程任务组织的 SiFli-SDK 使用指南阅读路径，帮助 SF32 开发者更快找到可验证的资料。
+- [使用 GPADC 采样](https://uForge.io/zh/develop/platforms/sifli-sdk/application-notes/adc-sampling/): 介绍适用于 SF32LB52x、SF32LB55x、SF32LB56x、SF32LB57x 和 SF32LB58x 的通用 ADC（GPADC），包括电气限制、PAD 映射、设备访问和校准。
+- [集成并读取传感器](https://uForge.io/zh/develop/platforms/sifli-sdk/application-notes/sensor-integration/): 在 SiFli-SDK 中添加传感器驱动，通过 RT-Thread 注册设备，并通过 FinSH 命令行完成验证。
+- [使用外部 Flash](https://uForge.io/zh/develop/platforms/sifli-sdk/application-notes/external-flash/): 使用 SiFli-SDK 配置、访问、挂载并移植外部 NOR Flash、NAND Flash 和 PSRAM。
+- [配置看门狗](https://uForge.io/zh/develop/platforms/sifli-sdk/application-notes/watchdog/): 使用 SiFli-SDK 使能、喂狗并验证 SF32 的 HCPU 和 LCPU 看门狗路径。
+- [使用 EZIP 压缩图形资源](https://uForge.io/zh/develop/platforms/sifli-sdk/application-notes/ezip-image-assets/): 使用 SiFli-SDK 将 PNG 转换为 EZIP、PIXEL、LVGL C 和可由硬件解压的 GZIP 格式。
+- [配置并测量低功耗](https://uForge.io/zh/develop/platforms/sifli-sdk/application-notes/low-power-measurement/): 配置 SiFli-SDK 的低功耗模式、唤醒源和时钟，并完成可复现的板级电流测量。
+- [日志采集与崩溃分析](https://uForge.io/zh/develop/platforms/sifli-sdk/application-notes/crash-analysis/): 使用 SiFli-SDK 工具采集日志和内存现场，恢复故障上下文并分析断言或硬故障。
+- [运行 SiFli-SDK 射频测试](https://uForge.io/zh/develop/platforms/sifli-sdk/application-notes/rf-performance-tests/): 根据测试目标选择蓝牙射频测试模式、控制路径和测量仪器。
+- [运行蓝牙信令测试](https://uForge.io/zh/develop/platforms/sifli-sdk/application-notes/bluetooth-signalling-tests/): 将 SF32 被测设备连接到蓝牙综测仪，完成 BLE 或经典蓝牙信令测量。
+- [运行蓝牙单项射频测试](https://uForge.io/zh/develop/platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests/): 使用 SiFli_RfTool 逐项控制 BLE 或经典蓝牙射频，用于板级调试和法规预测试。
+- [CodeKit](https://uForge.io/zh/develop/tools/codekit/): SiFli CodeKit 这一 VS Code 扩展在 SiFli-SDK 开发流程中的定位：创建工程、构建/烧录/监视工作流和故障排查。
+- [Zephyr](https://uForge.io/zh/develop/platforms/zephyr/overview/): OpenSiFli 针对 SF32LB52 DevKit LCD 的下游 Zephyr 支持：开发板标识、配置边界、驱动覆盖范围和集成风险。
+- [Arduino](https://uForge.io/zh/develop/platforms/arduino/overview/): 面向 SF32LB52 DevKit LCD 的 ArduinoCore-zephyr：平台适用性、开发板标识、loader 与构建模式取舍、集成限制和问题定位路径。
+- [MicroPython 状态](https://uForge.io/zh/develop/platforms/micropython/status/): SF32 上 MicroPython 的现状：目前尚未发现官方移植版本，以及使其成为受支持路径前需要满足的验收标准。
+- [Rust](https://uForge.io/zh/develop/platforms/rust/overview/): 评估 OpenSiFli 社区维护的 sifli-rs（sifli-hal、sifli-pac）对 SF32 的 Rust 支持：当前成熟度、适用与不适用场景及风险核对清单。
+- [工具](https://uForge.io/zh/develop/tools/): SF32 开发工具地图：sftool、SDK UART 下载脚本、CodeKit 操作，以及按用途分类的崩溃/追踪工具与资产/量产工具。
+- [固件主题](https://uForge.io/zh/develop/firmware-topics/): 跨平台 SF32 固件主题总览：分区表、OTA/DFU、USB、电源管理与日志/崩溃分析。
+- [分区表](https://uForge.io/zh/develop/firmware-topics/partition-tables/): 使用 SiFli-SDK 分区表描述 SF32 存储布局：对比传统 JSON v1/v2 与推荐的 YAML v3 格式，并了解叠加配置、构建产物和验证方法。
+- [OTA 与 DFU](https://uForge.io/zh/develop/firmware-topics/ota-dfu/): 使用 SiFli-SDK DFU v2 中间件，通过 USB-CDC、BLE 或蓝牙（Bluetooth）PAN 完成固件升级，并了解配套的应用与加载器示例。
+- [USB 与 CherryUSB](https://uForge.io/zh/develop/firmware-topics/usb-cherryusb/): 使用 CherryUSB 驱动 SF32 USB 硬件：CDC、HID、MSC、音频与 MTP 应用场景、描述符核对清单，以及跨操作系统枚举测试。
+- [电源管理](https://uForge.io/zh/develop/firmware-topics/power-management/): 测量并调优 SF32 在时钟、睡眠模式、显示、蓝牙与传感器活动中的功耗，将原型打造为可支持电池供电的产品。
+- [日志与崩溃分析](https://uForge.io/zh/develop/firmware-topics/logging-crash-analysis/): 设计 SF32 固件日志与崩溃分析流程，使现场故障可诊断，涵盖最小日志数据、崩溃报告流程与各阶段日志级别。
+- [示例](https://uForge.io/zh/develop/examples/): 如何按开发板、框架和最难外设选择并改造 SiFli-SDK 或 Zephyr 示例，而不是从零构建 SF32 固件。
+
+## 学习
+
+- [学习概览](https://uForge.io/zh/learn/): 查找所需的 SF32 架构和子系统指引：图形、蓝牙（Bluetooth）、AI、音频、低功耗以及底层处理器架构。
+- [架构概览](https://uForge.io/zh/learn/architecture/overview/): 介绍 SF32 的处理器、内存、蓝牙控制与硬件卸载架构，并强调按具体型号核实能力。
+- [STAR-MC1](https://uForge.io/zh/learn/architecture/star-mc1/): 介绍 Arm China STAR-MC1 CPU IP 的 Armv8-M Mainline 架构、与 Cortex-M33 的软件模型关系，以及对 SF32 固件开发的影响。
+- [PSRAM 与嵌入式系统中的其他存储器对比](https://uForge.io/zh/learn/architecture/psram-and-memory-types/): 嵌入式系统中的 PSRAM：它如何扩展 SRAM、与 DRAM、RRAM 和 MRAM 的差异，以及如何在 SF32 内存层级中安排数据。
+- [PTM 并行任务机](https://uForge.io/zh/learn/architecture/ptm-parallel-task-machine/): SF32LB57x 资料中列出的 PTM（并行任务机）：一种可编程外设任务引擎，可将时序敏感的 IO 操作和自定义协议处理从 Cortex-M33 转移到硬件执行。
+- [图形概览](https://uForge.io/zh/learn/graphics/overview/): SF32 用户界面图形概览：显示屏选型、帧缓冲策略、LVGL 集成、ePicasso 加速与内存布局。
+- [ePicasso 2D / 2.5D 图形引擎](https://uForge.io/zh/learn/graphics/epicasso-gpu/): 思澈科技（SiFli）的 ePicasso 2D/2.5D 图形引擎如何在 SF32 上加速嵌入式 UI 渲染，以及它与 LVGL、内存和显示控制器的协同方式。
+- [eZip 无损压缩与硬件解码](https://uForge.io/zh/learn/graphics/ezip/): 介绍 eZip 和 eZip-A 如何在支持这些功能的 SF32 芯片上减少 UI 资源存储占用、内存访问流量和 CPU 解码负担。
+- [TurboPixel 帧缓冲区压缩](https://uForge.io/zh/learn/graphics/turbopixel/): 介绍 TurboPixel 如何通过固定压缩比的有损帧缓冲压缩，减少所支持的 SF32 芯片的缓冲区占用和显示读取流量。
+- [显示控制器](https://uForge.io/zh/learn/graphics/display-controller/): SF32 显示控制器如何将已准备的像素传输到面板，包括接口选择、flush 输出路径、局部刷新和面板启动调试。
+- [LVGL SDK 示例](https://uForge.io/zh/learn/graphics/lvgl-sdk-examples/): 按 UI 启动调试、控件、设计工具、压缩资源、动画、媒体和可穿戴界面等任务选择合适的 SiFli-SDK LVGL 示例。
+- [蓝牙概览](https://uForge.io/zh/learn/bluetooth/overview/): SF32 蓝牙概览：BLE 与双模选择、GATT 服务设计、连接参数调优、配对与安全、LE Audio 及共存问题。
+- [蓝牙处理器](https://uForge.io/zh/learn/bluetooth/processor/): 介绍 SF32 蓝牙处理器如何将射频时序与链路控制任务从应用处理器卸载到专用子系统，以支持低功耗常连接产品。
+- [蓝牙 PAN](https://uForge.io/zh/learn/bluetooth/pan/): SF32 蓝牙 PAN：BNEP 传输、NAP/GN/PANU 角色、手机共享网络的权衡、SiFli-SDK 配置与 OTA 验证。
+- [蓝牙 SDK 示例](https://uForge.io/zh/learn/bluetooth/bluetooth-sdk-examples/): 按 BLE 服务、经典蓝牙应用规范、手机互操作、OTA、数据传输或 LE Audio 广播选择合适的 SiFli-SDK 蓝牙示例。
+- [蓝牙功耗测量与分析](https://uForge.io/zh/learn/bluetooth/bluetooth-low-power-profiling/): 面向 SF32 设备，实测 BLE、经典蓝牙和双模蓝牙的功耗，将测量波形与固件行为对应起来，并据此建立符合日常使用情况的能耗预算。
+- [AT 指令集](https://uForge.io/zh/learn/bluetooth/at-command-reference/): SF32LB57 双模蓝牙 AT 指令模组（SIFLI_AT）完整 AT 指令参考：指令格式、系统与设备、地址与标识、工作模式与可见性、配对与安全、串口与事件、连接管理、数据收发、自定义 GATT 各类命令，以及主动事件（URC）与 PDU 格式命令。
+- [AI 概览](https://uForge.io/zh/learn/ai/overview/): SF32 设备端 AI 概览：选择合适芯片、使用 NNACC HAL、规划内存预算，并在功耗预算内调度推理。
+- [AI 加速器](https://uForge.io/zh/learn/ai/accelerator/): 介绍 SF32 NNACC 的算子支持、CPU 与运行时分工、内存约束，以及嵌入式 AI 的延迟和能耗评估。
+- [音频概览](https://uForge.io/zh/learn/audio/overview/): SF32 本地音频子系统概览：编解码器与 DMA 路径、接口选择、缓冲策略、Audio Server 中间件与功耗权衡。
+- [音频服务（Audio Server）与缓冲管理](https://uForge.io/zh/learn/audio/audio-server-buffering/): 介绍 SF32 Audio Server 与 DMA 缓冲的使用方法，帮助避免播放和录音卡顿，并说明如何与蓝牙（Bluetooth）及图形任务并发运行。
+- [音频 SDK 示例](https://uForge.io/zh/learn/audio/audio-sdk-examples/): 按 PDM 数字麦克风采集、录音、播放、编解码、存储和混音等任务选择合适的 SiFli-SDK 音频示例。
+- [低功耗概览](https://uForge.io/zh/learn/low-power/overview/): SF32 低功耗设计概览：电源模式、PM 中间件、真正消耗电池的因素，以及蓝牙（Bluetooth）、图形、音频与 AI 对功耗的影响。
+- [功耗测量与验证](https://uForge.io/zh/learn/low-power/measurement-and-validation/): 从器件到整机的 SF32 功耗测量与验证流程，覆盖电流、电压、能耗和续航模型准确性。
+- [低功耗 SDK 示例](https://uForge.io/zh/learn/low-power/low-power-sdk-examples/): 按休眠、唤醒源、GPIO、CPU、蓝牙（Bluetooth）、显示、UI 和可穿戴场景选择合适的 SiFli-SDK 电源管理示例。
+- [电池电量估算](https://uForge.io/zh/learn/low-power/battery-capacity-calculation/): 使用 SiFli-SDK 电池计算器，根据电池电压、充放电曲线、充电状态检测和多级滤波估算 SF32 产品的电池电量百分比。
+- [智能手表功耗建模与分析](https://uForge.io/zh/learn/low-power/smartwatch-power-profiling/): 从每日使用场景建立智能手表续航模型，再根据结果确定低功耗优化优先级。
+
+## 项目
+
+- [项目概览](https://uForge.io/zh/projects/): 端到端 μForge 项目：将选定硬件、软件基线、验证证据和量产交接结合在一起。
+- [SF32 小智语音助手](https://uForge.io/zh/projects/sf32-xiaozhi/): 面向 SF32LB52 开源小智语音助手的完整产品开发路径：开发板启动调试、通过蓝牙（Bluetooth）PAN 接入互联网、云端语音交互、定制、OTA、验证和量产交接。
+- [Arduboy2 的 SF32LB52 移植版](https://uForge.io/zh/projects/arduboy2-sifli/): 用于评估 OpenSiFli Arduboy2 移植、验证游戏循环与外设边界，并判断 SF32 游戏类产品是否适合继续开展设计工作的可复现工程路径。
+- [SF32 BLE 对讲机](https://uForge.io/zh/projects/sf32-ble-talkback/): 以 SF32LB52-DevKit-ULP 和 OpenSiFli Talkback 为基线，复现并评估多人 BLE 按键通话功能。
+- [SF32 墨水屏 EPUB 阅读器](https://uForge.io/zh/projects/sf32-epd-reader/): 以 OpenSiFli EPD Reader 和 SF32-OED-EPD 为基线，复现并验证低功耗 EPUB 墨水屏阅读器。
+- [SuperKey 多功能宏键盘](https://uForge.io/zh/projects/superkey/): 基于 SF32LB52、三联屏、USB HID/CDC 与配套上位机的 SuperKey 工程路径：从原版复现、通信与恢复验证，到可控定制和产品交接。
+- [Radiation Monitor 便携式信号强度检测器](https://uForge.io/zh/projects/radiation-monitor/): 基于 SF32LB52 的便携式蓝牙（Bluetooth）频段信号强度显示器：复现 Radiation Monitor，核对 79 点扫描、RSSI 平滑与历史回放，并明确校准和产品评审边界。
+- [Pocket Pi SF32 掌上游戏机](https://uForge.io/zh/projects/pocket-pi/): Pocket Pi 的可复现工程路径：在 SF32LB52 上验证 NES 模拟、320 × 240 显示、AW9523 输入、音频、ROM 文件系统和存档恢复。
+- [LilyGO T-Display-SF32](https://uForge.io/zh/projects/lilygo-t-display-sf32/): 面向 LilyGO 第三方 T-Display-SF32 平台的产品工程路径：建立厂商基线，验证显示、外设、供电行为与恢复能力，复现 SiFli-SDK 构建，并进行受控适配。
+- [SF32 上的 ZMK 键盘固件](https://uForge.io/zh/projects/zmk-sf32/): 面向 OpenSiFli ZMK SF32LB52 移植的工程路径：复现 Urchin 分体键盘基线，验证 USB、BLE、设置与恢复，再受控适配键位映射或硬件。
+
+## 快速入门 — 教程
+
+- [教程概览](https://uForge.io/zh/getting-started/tutorials/overview/): 按工程成果组织的实用 SF32 教程路线图：基础外设、子系统集成和产品验证。
+- [外设入门](https://uForge.io/zh/getting-started/tutorials/beginner/): hello_world 之后的 SF32 外设实操教程：GPIO、FinSH、ADC、PWM、RTC，以及一个基于开发板的小项目。
+- [子系统集成](https://uForge.io/zh/getting-started/tutorials/intermediate/): SF32 子系统集成教程：I2C 传感器、基础 LVGL 界面、BLE 外设服务、本地音频播放、文件系统存储，以及多子系统联合测试。
+- [产品验证](https://uForge.io/zh/getting-started/tutorials/advanced/): SF32 产品验证教程：实测低功耗调优、可恢复的 BLE OTA、自定义显示屏适配、崩溃与 core dump 分析、多连接蓝牙（Bluetooth）和自定义驱动。
+
+## 参考
+
+- [术语表](https://uForge.io/zh/about/glossary/): μForge.io SF32 文档中常用的嵌入式、无线、图形与思澈科技（SiFli）专有术语速查表。
+
+## 博客
+
+- [博客](https://uForge.io/zh/blog/): μForge.io 博客：产品动态、版本说明，以及 SF32 文档相关的技术深度文章。
+- [多语言翻译，一轮一轮迭代而成 [2026-10-07]](https://uForge.io/zh/blog/posts/2026-10-07-multi-language-translation/): μForge.io 新增七种语言的翻译，借助 LLM 工具经多轮迭代完成。
+- [八月：资料更全，选型更有把握 [2026-08-24]](https://uForge.io/zh/blog/posts/2026-08-24-august-progress/): μForge.io 8 月进展：更清晰的产品选型、可复用项目、实用学习内容，以及直接的支持入口。
+- [博客首篇文章 [2026-07-31]](https://uForge.io/zh/blog/posts/2026-07-31-the-first-blog/): μForge.io 博客首篇文章：我们的目标、过去一个月完成的工作，以及 SF32 文档接下来的计划。
+
+## 关于
+
+- [关于 μForge.io](https://uForge.io/zh/about/): μForge.io 完整覆盖 SF32 超低功耗微控制器家族——器件选型、硬件设计与 SDK 工作流。
+
+## 给 AI 代理和编程助手的说明
+
+- 所有硬件设计指南均使用带编号的章节、表格和图（如“表 5.1-1”“图 5.2-3”），编号按 H3 小节划分；引用具体数值时请把这些编号视为稳定锚点。
+- 每个芯片/模块系列结构一致：简介页（器件概览、型号、封装、应用）和硬件设计指南（原理图指导、PCB 布局、制造检查清单）；部分芯片还有独立的硬件设计检查清单页。
+- 站点以八种语言发布：英文（参考版本，位于站点根路径）以及机器辅助翻译的中文（/zh/）、日文（/ja/）、西班牙文（/es/）、德文（/de/）、法文（/fr/）、葡萄牙文（/pt/）和俄文（/ru/）。每个译文页面在语言前缀下与英文页面路径相同。
+- 关于权威的电气规格、引脚映射和元器件认证，指南会链接到 SiFli 的数据手册、用户手册和 SiFli 认可供应商列表（AVL）。

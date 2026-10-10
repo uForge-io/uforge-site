@@ -6,15 +6,15 @@ tags:
     - Rust
 ---
 
-# Rust
+# Rust { #rust }
 
-OpenSiFli has Rust work in [OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs), including HAL, PAC, flash-table crates, examples, and flash/debug notes.
+OpenSiFli's Rust work is in [OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs), which includes HAL, PAC, flash-table crates, examples, and notes on flashing and debugging.
 
-The repository describes the project as work-in-progress and not ready for production use. Treat Rust on SF32 as an exploration path unless your team is ready to work close to the hardware and contribute fixes upstream.
+The maintainers describe the project as a work in progress that is not ready for production use. Treat Rust on SF32 as an exploration path unless your team can work close to the hardware and is prepared to contribute fixes upstream.
 
-For the initial toolchain, unmodified Blinky build, and flash-runner setup, use [Getting Started with Rust](../../../getting-started/rust/getting-started-rust.md). This page is for evaluating support scope and deciding whether to carry Rust beyond that baseline.
+For initial toolchain setup, an unmodified Blinky build, and flash-runner configuration, see [Getting Started with Rust](../../../getting-started/rust/getting-started-rust.md). Use this page to evaluate current support and decide whether to take Rust beyond that baseline.
 
-## Crates Mentioned by OpenSiFli
+## Crates Mentioned by OpenSiFli { #crates-mentioned-by-opensifli }
 
 <div align="center"><em>Table: Crates Mentioned by OpenSiFli</em></div>
 
@@ -28,24 +28,24 @@ For the initial toolchain, unmodified Blinky build, and flash-runner setup, use 
 
 </div>
 
-## When Rust Makes Sense
+## When Rust Makes Sense { #when-rust-makes-sense }
 
-Use Rust if you want:
+Rust may be a good fit if you want to:
 
-- Embedded Rust experiments.
-- Strong typing around low-level firmware code.
-- A future path toward `embedded-hal` style drivers.
-- To contribute to the SF32 Rust ecosystem.
+- Experiment with embedded Rust.
+- Use strong typing in low-level firmware code.
+- Build toward future drivers in the style of `embedded-hal`.
+- Contribute to the SF32 Rust ecosystem.
 
 Use SiFli-SDK for production firmware today.
 
-## Evaluation Gates
+## Evaluation Gates { #evaluation-gates }
 
-Do not begin a product port until the first-run baseline works on the target board. Then establish a separate proof point for every required peripheral, flash layout, debug path, and runtime feature. Record the upstream commit, Rust target, Cargo configuration, board revision, and recovery procedure with each result.
+Before beginning a product port, verify that the first-run baseline works on the target board. Then validate each required peripheral, flash layout, debug path, and runtime feature independently. Record the upstream commit, Rust target, Cargo configuration, board revision, and recovery procedure for every result.
 
-The repository's use of `sifli-hal`, `sifli-pac`, flash-table tooling, and Embassy-style async examples means that a successful application also depends on their interaction, not just on whether a crate compiles. Keep the smallest reproducer possible when evaluating a gap.
+The repository's use of `sifli-hal`, `sifli-pac`, flash-table tooling, and Embassy-style async examples means that application success depends on how these pieces work together, not just on whether a crate compiles. When investigating a gap, keep the reproducer as small as possible.
 
-## Risk Checklist
+## Risk Checklist { #risk-checklist }
 
 - Does the crate support the exact chip?
 - Does the HAL cover the needed peripheral?
@@ -54,7 +54,7 @@ The repository's use of `sifli-hal`, `sifli-pac`, flash-table tooling, and Embas
 - Can the same board be recovered with SiFli-SDK or `sftool`?
 - Is the team comfortable contributing fixes?
 
-## Good Fit / Poor Fit
+## Good Fit / Poor Fit { #good-fit-poor-fit }
 
 <div align="center"><em>Table: Good Fit / Poor Fit</em></div>
 
@@ -67,6 +67,3 @@ The repository's use of `sifli-hal`, `sifli-pac`, flash-table tooling, and Embas
 | Contributing to HAL/PAC maturity. | One-off prototypes where Arduino or SDK examples are faster. |
 
 </div>
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

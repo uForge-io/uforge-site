@@ -5,12 +5,19 @@
 {% set page_description = page.meta.description if page.meta and page.meta.description else config.site_description %}
 {% set page_url = page.canonical_url if page.canonical_url else (site_url ~ (page.url | default("", true))) %}
 {% set page_image = page.meta.image if page.meta and page.meta.image else "assets/uforge-logo.svg" %}
-{% set absolute_image = page_image if "http" in page_image else (site_url ~ page_image) %}
+{# Shared assets (logo, images) live once at the site root; localized builds are
+   nested under /<lang>/ and tools/dedupe-site-assets.py deletes their copies,
+   so absolute asset URLs must use the root URL, not the per-language site_url. #}
+{% set root_url = site_url | replace("/zh/", "/") | replace("/ja/", "/") | replace("/es/", "/") | replace("/de/", "/") | replace("/fr/", "/") | replace("/pt/", "/") | replace("/ru/", "/") %}
+{% set absolute_image = page_image if "http" in page_image else (root_url ~ page_image) %}
 {% set is_home = page.url == "" %}
 {% set src_path = page.file.src_path if page.file and page.file.src_path else "" %}
 {% set is_hardware_guide = "hardware_design_guide" in src_path or "hardware_design_guide" in page_url %}
 {% set is_checklist = "hardware_design_checklist" in src_path or "hardware_design_checklist" in page_url %}
 {% set is_internal = "about/others/" in src_path or "/about/others/" in page_url %}
+{% set content_language = config.theme.language | default("en", true) %}
+{% set home_labels = {"en": "Home", "zh": "首页", "ja": "ホーム", "es": "Inicio", "de": "Startseite", "fr": "Accueil", "pt": "Início", "ru": "Главная"} %}
+{% set home_label = home_labels[content_language] | default("Home", true) %}
 
 <meta property="og:type" content="{{ 'website' if is_home else 'article' }}">
 <meta property="og:title" content="{{ page_title }} - {{ config.site_name }}">
@@ -19,6 +26,8 @@
 {% endif %}
 <meta property="og:url" content="{{ page_url }}">
 <meta property="og:site_name" content="{{ config.site_name }}">
+{% set og_locales = {"en": "en_US", "zh": "zh_CN", "ja": "ja_JP", "es": "es_ES", "de": "de_DE", "fr": "fr_FR", "pt": "pt_BR", "ru": "ru_RU"} %}
+<meta property="og:locale" content="{{ og_locales[content_language] | default('en_US', true) }}">
 <meta property="og:image" content="{{ absolute_image }}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ page_title }} - {{ config.site_name }}">
@@ -39,13 +48,14 @@
       "@id": "{{ site_url }}#organization",
       "name": "μForge.io",
       "url": "{{ site_url }}",
-      "logo": "{{ site_url }}assets/uforge-logo.svg",
+      "logo": "{{ root_url }}assets/uforge-logo.svg",
       "sameAs": [
         "https://github.com/uforge-io/"
       ]
     },
     {
       "@type": "WebSite",
+      "inLanguage": {{ content_language | tojson }},
       "@id": "{{ site_url }}#website",
       "url": "{{ site_url }}",
       "name": "{{ config.site_name }}",
@@ -61,7 +71,7 @@
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Home",
+          "name": {{ home_label | tojson }},
           "item": "{{ site_url }}"
         },
         {
@@ -74,6 +84,7 @@
     },
     {
       "@type": "{{ 'TechArticle' if is_hardware_guide or is_checklist else 'Article' }}",
+      "inLanguage": {{ content_language | tojson }},
       "@id": "{{ page_url }}#article",
       "headline": "{{ page_title }}",
       "description": "{{ page_description }}",

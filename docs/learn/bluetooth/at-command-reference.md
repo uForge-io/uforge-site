@@ -19,7 +19,7 @@ tags:
 
 </div>
 
-This reference specifies the external AT command interface provided by version V1.2.1 of the SF32LB57 dual-mode Bluetooth module (SIFLI_AT). Commands and response strings are shown in monospace; `\r` denotes a carriage return (0x0D) and `\n` denotes a line feed (0x0A). AT commands are transmitted as ASCII text, while binary fields in PDU frames use little-endian byte order.
+This reference documents the external AT command interface for version V1.2.1 of the SF32LB57 dual-mode Bluetooth module (SIFLI_AT). Commands and response strings are shown in monospace; `\r` denotes a carriage return (0x0D) and `\n` denotes a line feed (0x0A). AT commands are transmitted as ASCII text, while binary fields in PDU frames use little-endian byte order.
 
 This is the complete AT interface specification referenced by the Bluetooth AT Command Module page.
 
@@ -35,7 +35,7 @@ This is the complete AT interface specification referenced by the Bluetooth AT C
 
 ## Overview
 
-The SF32LB57 dual-mode Bluetooth module exposes a UART-based AT command interface to the host, supporting both BLE and Classic Bluetooth (BR/EDR). The host uses AT commands to configure device parameters, manage connections, send and receive data, and receive unsolicited status indications from the module.
+The SF32LB57 dual-mode Bluetooth module provides the host with a UART-based AT command interface for both BLE and Classic Bluetooth (BR/EDR). The host uses AT commands to configure device parameters, manage connections, send and receive data, and receive unsolicited status indications from the module.
 
 ### Default Settings
 
@@ -1103,7 +1103,7 @@ The following are status indications the module reports on its own — the host 
 | Command | None (reported by the firmware on its own, not sent by the user) |
 | Response | Report string: `\r\nIM_READY\r\n` |
 | Parameters | None |
-| Notes | Reported once when the module finishes initialization and enters an available state; also reported again once all connections have dropped and the connection count returns to zero. Reporting is controlled by the event-silence switch; nothing is reported while silent mode is on. |
+| Notes | Reported once when the module finishes initialization and enters an available state; also reported again once all connections have dropped and the connection count returns to zero. Whether it is reported is controlled by `AT+EVT`; setting `AT+EVT=1` suppresses it. |
 
 </div>
 
@@ -1118,7 +1118,7 @@ The following are status indications the module reports on its own — the host 
 | Command | None (reported by the firmware on its own when a connection is established) |
 | Response | Command mode: `\r\nIM_CONN <hdl>,<addr>,<mtu>\r\n`; pass-through mode: `\r\nIM_CONN\r\n` |
 | Parameters | `hdl`: connection handle, 4 hex digits (uppercase, fixed 4 digits, zero-padded). BLE connections display a 1-based handle (the internal handle plus 1); other types display the raw value. `addr`: the peer's address, 12 hex digits, MSB first. `mtu`: the current connection's MTU, decimal. |
-| Notes | In command mode, each connection established is reported once, carrying the handle, peer address, and MTU. In pass-through mode, this is reported only when the connection count is 1 (the first connection), and carries no parameters. Reporting is controlled by the event-silence switch; nothing is reported while silent mode is on. |
+| Notes | In command mode, each connection established is reported once, carrying the handle, peer address, and MTU. In pass-through mode, this is reported only when the connection count is 1 (the first connection), and carries no parameters. Whether it is reported is controlled by `AT+EVT`; setting `AT+EVT=1` suppresses it. |
 
 </div>
 
@@ -1133,7 +1133,7 @@ The following are status indications the module reports on its own — the host 
 | Command | None (reported by the firmware on its own when a connection is dropped) |
 | Response | Command mode: `\r\nIM_DISCONN:<hdl>\r\n` |
 | Parameters | `hdl`: the disconnected connection's handle, 4 hex digits (uppercase, fixed 4 digits, zero-padded). BLE connections display a 1-based handle (the raw handle plus 1); others display the raw value. |
-| Notes | Only carries a handle and is reported in command mode; not reported in pass-through mode. Regardless of mode, once all connections have dropped and the connection count returns to zero, `\r\nIM_READY\r\n` is additionally reported. Reporting is controlled by the event-silence switch; nothing is reported while silent mode is on. |
+| Notes | Only carries a handle and is reported in command mode; not reported in pass-through mode. Regardless of mode, once all connections have dropped and the connection count returns to zero, `\r\nIM_READY\r\n` is additionally reported. Whether it is reported is controlled by `AT+EVT`; setting `AT+EVT=1` suppresses it. |
 
 </div>
 
@@ -1210,7 +1210,7 @@ The following are status indications the module reports on its own — the host 
 | Command | Reported by the module on its own — no command needed from the host. `IM_CONN` is reported when a connection is established, `IM_DISCONN` when one is dropped. |
 | Response | Command mode, connection established: `\r\nIM_CONN <hdl>,<mac>,<mtu>\r\n`, where `<hdl>` is a 4-digit hex handle, `<mac>` is a 12-digit hex address (most-significant byte first), and `<mtu>` is a decimal MTU. Command mode, connection dropped: `\r\nIM_DISCONN:<hdl>\r\n` (`<hdl>` is 4 hex digits). Pass-through mode reports `\r\nIM_CONN\r\n` (no parameters) only when the first connection is established, and does not report `IM_DISCONN` on disconnect. Both modes report `\r\nIM_READY\r\n` once all connections have dropped. |
 | Parameters | `<hdl>`: connection handle; BLE connections display as 1-based (internal 0-based plus 1), SPP connections display the raw handle. `<mac>`: the peer's Bluetooth address. `<mtu>`: the negotiated MTU. |
-| Notes | Reporting is controlled by the event-silence switch: with the switch at 0 (default), reporting is normal; once set, none of `IM_READY`/`IM_CONN`/`IM_DISCONN` are reported. The reporting format and content differ by current operating mode (command mode / pass-through mode), as described above. |
+| Notes | Reporting is controlled by `AT+EVT`: at 0 (default), notifications are reported normally; at 1, `IM_READY`/`IM_CONN`/`IM_DISCONN` are suppressed. The reporting format and content differ by current operating mode (command mode / pass-through mode), as described above. |
 
 </div>
 

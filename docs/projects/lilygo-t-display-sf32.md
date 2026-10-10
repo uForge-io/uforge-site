@@ -8,24 +8,26 @@ tags:
     - Third-Party
 ---
 
-# LilyGO T-Display-SF32
+# LilyGO T-Display-SF32 { #lilygo-t-display-sf32 }
 
 !!! warning "Third-party project — not a SiFli project"
     T-Display-SF32 is published and maintained by Xinyuan-LilyGO/LilyGO, not by SiFli or OpenSiFli. Use LilyGO's repositories for board-specific hardware, firmware, and support decisions. SiFli's sources remain authoritative for the underlying SF32 device and SiFli-SDK, but they do not imply that SiFli has validated or supports this LilyGO board.
 
-## What Is T-Display-SF32?
+## What Is T-Display-SF32? { #what-is-t-display-sf32 }
 
 [Xinyuan-LilyGO/T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32) is a development platform built around an SF32LB52x MCU and a 2.16-inch CO5300 AMOLED with CST9220 touch. The repository documents 16 MB flash, 8 MB PSRAM, a BHI260AP IMU, SX1262 LoRa, a microSD interface, audio, USB Type-C, charging support, board pin assignments, example applications, hardware files, a factory-firmware directory, and a board-specific power-consumption report.
 
 This combination makes the board useful for evaluating a display-led wearable, handheld controller, portable sensor terminal, or connected HMI. It is a platform reference rather than a finished product: the repository exposes many hardware paths, but a product team must still choose which paths matter, reproduce a known baseline, measure them on its exact board revision, and qualify power, RF, safety, software maintenance, and recovery.
 
-## Why the SF32 Implementation?
+The repository's feature matrix distinguishes the standalone T-SF32-Display from the optional T-SF32-Keyboard expansion. Wi-Fi (ESP32-C6), GPS (L76K), the matrix keyboard and LEDs (TCA8418, AW21009, and XL9555), BME280, infrared transmitter, and vibration motor (AW86224) require that expansion; do not include them in the standalone-board baseline.
+
+## Why the SF32 Implementation? { #why-the-sf32-implementation }
 
 T-Display-SF32 combines SF32LB52x graphics, Bluetooth, audio, and low-power capabilities with external display, touch, motion, storage, and LoRa devices on one board. LilyGO also provides board configuration, dedicated device drivers, examples, and a separate [LilyGO SDK fork](https://github.com/Xinyuan-LilyGO/SlFli-SDK-Lilygo) described as being based on SiFli-SDK 2.4.0. That can shorten initial board bring-up compared with starting from an unmodified generic SDK target.
 
 The tradeoff is ownership. Board support, driver changes, hardware revisions, bundled firmware, and the relationship between LilyGO's SDK fork and upstream SiFli-SDK are controlled outside SiFli. A reproducible project therefore needs to lock both repositories by commit, retain a working factory/recovery image, and test any migration to a newer upstream SDK as an explicit engineering change.
 
-## Outcome, Scope, and Entry Criteria
+## Outcome, Scope, and Entry Criteria { #outcome-scope-and-entry-criteria }
 
 **Outcome:** establish a version-locked T-Display-SF32 baseline; validate the display/touch, selected peripherals, power behavior, and recovery route; reproduce a source build; then make one bounded application change with regression evidence suitable for a product review.
 
@@ -55,7 +57,39 @@ Before starting, have:
 
 </div>
 
-## Choose a Supported Baseline
+## Hardware and Software Specifications { #hardware-and-software-specifications }
+
+### Hardware Specification { #hardware-specification }
+
+<div align="center"><em>Table: T-Display-SF32 Hardware Specification</em></div>
+
+<div align="center" markdown>
+
+| Component | Required specification | Role | Status | Where to get it | Compatibility and substitution notes |
+|:----------|:-----------------------|:-----|:-------|:----------------|:-------------------------------------|
+| T-Display-SF32 board | SF32LB52x; documented configuration includes 2.16-inch CO5300 AMOLED, CST9220 touch, 16 MB Flash, 8 MB PSRAM, BHI260AP IMU, SX1262 LoRa, microSD, onboard microphone and speaker amplifier with 3.5 mm audio jack, and three user buttons | Integrated compute, display, sensing, radio, storage, and audio reference | Required | [LilyGO repository](https://github.com/Xinyuan-LilyGO/T-Display-SF32); [hardware files](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | Record the exact board revision and fitted-device inventory; do not assume every variant has the same population |
+| T-SF32-Keyboard expansion | Optional expansion with ESP32-C6 Wi-Fi, L76K GPS, TCA8418/AW21009/XL9555 keyboard subsystem, BME280, infrared transmitter, and AW86224 vibration motor | Adds the listed wireless, positioning, keyboard, environmental-sensing, IR, and haptic functions | Optional; required only for those functions | [LilyGO repository](https://github.com/Xinyuan-LilyGO/T-Display-SF32); [hardware files](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | These parts are not on the standalone T-SF32-Display; Wi-Fi and GPS share UART2, so validate the expansion's combined configuration |
+| USB Type-C data connection and controlled power source | Data-capable cable; current-limited supply or protected battery with monitored voltage | Flashing, logs, and safe power validation | Required | [LilyGO repository](https://github.com/Xinyuan-LilyGO/T-Display-SF32) | Type-C D+/D- connect to the CH343P USB-to-UART bridge; this port supports UART flashing/logs, not native SF32 USB device/host data. Also follow the board-specific greater-than-3.5 V startup condition |
+| Interface-specific test accessories | microSD card, audio load/headphones, or legal-band LoRa peer only for the paths under test | Exercises optional board interfaces | Optional; choose per test | [Examples](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/examples) | Confirm the exact connector, voltage, region, and revision against the board files before connection |
+
+</div>
+
+### Software Specification { #software-specification }
+
+<div align="center"><em>Table: T-Display-SF32 Software Specification</em></div>
+
+<div align="center" markdown>
+
+| Package or service | Required version or revision | Role | Status | Where to get it | Compatibility and update notes |
+|:-------------------|:-----------------------------|:-----|:-------|:----------------|:-------------------------------|
+| T-Display-SF32 firmware/source | Pin and record a repository commit; upstream does not identify a universal tagged baseline | Board examples, configuration, and firmware | Required | [Repository](https://github.com/Xinyuan-LilyGO/T-Display-SF32) | Preserve the factory image and record the board revision and commit together |
+| LilyGO SiFli-SDK fork | Pin a commit of the fork documented as based on SiFli-SDK 2.4.0 | Board support, drivers, build, and download environment | Required | [LilyGO SDK fork](https://github.com/Xinyuan-LilyGO/SlFli-SDK-Lilygo) | The 2.4.0 base description is not an exact fork revision; do not replace it silently with upstream SDK |
+| SCons and host download tools | Versions supplied by the selected fork; record host OS and resolved versions | Build and flash the `t-display-sf32_hcpu` target | Required | [LilyGO SDK fork](https://github.com/Xinyuan-LilyGO/SlFli-SDK-Lilygo) | The documented initial build path uses Windows/PowerShell; qualify other hosts separately |
+| Factory firmware V1.2 | Image from the matching board/repository revision | Untouched behavior and recovery reference | Optional, but retain before modification | [Factory firmware directory](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/firmware/T-SF32-Factory-V1.2) | Directory label alone does not establish image-to-board compatibility; verify before flashing |
+
+</div>
+
+## Choose a Supported Baseline { #choose-a-supported-baseline }
 
 The upstream repository currently uses the `master` branch and does not present a tagged release as the universal software baseline. Record the exact commit instead of writing “latest.” The repository contains a `firmware/T-SF32-Factory-V1.2` directory, but that directory name is not a substitute for recording the matching board revision, repository commit, and flash procedure.
 
@@ -84,7 +118,7 @@ build_t-display-sf32_hcpu\uart_download.bat
 
 Save the actual repository and SDK commits, environment-export result, full build log, generated images, download log, and boot log. The parallel-job count may change; the target and source revisions may not.
 
-## Delivery Map
+## Delivery Map { #delivery-map }
 
 <div align="center"><em>Table: T-Display-SF32 Delivery Map</em></div>
 
@@ -100,7 +134,7 @@ Save the actual repository and SDK commits, environment-export result, full buil
 
 </div>
 
-## System Architecture and Dependencies
+## System Architecture and Dependencies { #system-architecture-and-dependencies }
 
 <div align="center"><em>Figure: T-Display-SF32 Product and Development Boundaries</em></div>
 
@@ -118,7 +152,7 @@ flowchart LR
 
 Treat failures as separate domains: board power/charging, boot and download, display/touch, each selected peripheral, LilyGO board support, and the underlying SDK. For example, a failed display example can arise from power, board revision, panel/touch configuration, the application, or an SDK/driver mismatch; “the SDK failed” is not a sufficient diagnosis.
 
-## Stage 1 — Establish the Untouched Vendor Baseline
+## Stage 1 — Establish the Untouched Vendor Baseline { #stage-1-establish-the-untouched-vendor-baseline }
 
 **Goal:** prove what the received board and vendor baseline actually do before changing source.
 
@@ -132,7 +166,7 @@ Treat failures as separate domains: board power/charging, boot and download, dis
 
 **Gate 1 exit criterion:** two cold starts reproduce the identified display/touch baseline, every in-scope fitted peripheral has a recorded result, and the original or known-good image can be restored.
 
-## Stage 2 — Validate Peripheral, Power, and Recovery Boundaries
+## Stage 2 — Validate Peripheral, Power, and Recovery Boundaries { #stage-2-validate-peripheral-power-and-recovery-boundaries }
 
 **Goal:** determine whether failures can be detected and recovered without unsafe battery use or undocumented reflashing.
 
@@ -154,7 +188,7 @@ Treat failures as separate domains: board power/charging, boot and download, dis
 
 **Gate 2 exit criterion:** each applicable test has a repeatable result and recovery route, low-battery protection is implemented for any custom firmware, and no unresolved fault can damage the battery or strand the board without a documented recovery path.
 
-## Stage 3 — Build a Reproducible Source Baseline
+## Stage 3 — Build a Reproducible Source Baseline { #stage-3-build-a-reproducible-source-baseline }
 
 **Goal:** let a second engineer create and flash the same baseline from clean, version-locked sources.
 
@@ -165,7 +199,7 @@ Treat failures as separate domains: board power/charging, boot and download, dis
 
 **Gate 3 exit criterion:** no stale image, untracked board file, or undocumented SDK substitution is needed to produce firmware that passes Stage 2.
 
-## Stage 4 — Adapt One Product Path at a Time
+## Stage 4 — Adapt One Product Path at a Time { #stage-4-adapt-one-product-path-at-a-time }
 
 **Goal:** make one useful change while preserving the working vendor and recovery baselines.
 
@@ -186,7 +220,7 @@ Treat failures as separate domains: board power/charging, boot and download, dis
 
 **Gate 4 exit criterion:** the change is reviewed, the original image remains restorable, and all applicable display, touch, peripheral, power, flash, and recovery tests pass.
 
-## Stage 5 — Product-Readiness Review
+## Stage 5 — Product-Readiness Review { #stage-5-product-readiness-review }
 
 Before committing to a field trial or custom PCB, answer:
 
@@ -200,11 +234,11 @@ Before committing to a field trial or custom PCB, answer:
 
 **Gate 5 exit criterion:** every residual risk has an owner, evidence, and disposition, and the team has explicitly decided to proceed, defer, or stop.
 
-## Handoff to Product Design
+## Handoff to Product Design { #handoff-to-product-design }
 
 Carry forward the exact SF32 part and memory devices, display/touch timing, fitted peripherals and buses, power tree, charger and battery policy, antenna/RF strategy, boot/download connection, partition plan, production-test access, software-fork ownership, and proven recovery route. Continue with the [SF32LB52x integration path](../sf32-products/chips/SF32LB52x.md#integration-path), [SF32LB52x Hardware Design Guide](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [SiFli-SDK Build, Flash, and Monitor](../develop/platforms/sifli-sdk/build-flash-monitor.md), and [Design for Production](../hardware/design-for-production.md).
 
-## Authoritative Sources
+## Authoritative Sources { #authoritative-sources }
 
 - [Xinyuan-LilyGO/T-Display-SF32 repository](https://github.com/Xinyuan-LilyGO/T-Display-SF32)
 - [T-Display-SF32 Chinese README](https://github.com/Xinyuan-LilyGO/T-Display-SF32/blob/master/readme_cn.md)

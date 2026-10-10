@@ -12,21 +12,30 @@ A battery-life estimate becomes credible only when its assumptions converge with
 
 ## Measure Energy, Not Current Alone
 
-Current is only one part of the result. Record the device-under-test voltage (`V_DUT`) with the current trace so that the capture represents instantaneous power and energy as well as charge:
+Current is only one part of the result. Record the voltage at the device under test (DUT, `V_DUT`) with the current trace so that the capture represents instantaneous power and energy as well as charge:
 
 ```text
 power_W(t) = voltage_V(t) x current_A(t)
 energy_Wh = integral(power_W(t) dt) / 3600
+energy_mWh = energy_Wh x 1000
 charge_mAh = integral(current_mA(t) dt) / 3600
 ```
+
+Here, `t` is measured in seconds. The factor `3600` converts seconds to hours; use current in A for the power calculation and in mA for the charge calculation.
+
+The energy integral is in Wh; convert it to mWh by multiplying by 1000 before combining it with a profile recorded in mWh. Keep mAh and mWh as separate quantities; they are not interchangeable.
 
 If the supply is stable, record the measured `V_DUT` for the capture and use it with the current trace. If the voltage changes during the test, sample it on the same timebase as current, or record enough synchronized voltage points to calculate a defensible average power. Comparing only mAh can hide a real change in energy when the supply voltage, regulator operating point, or battery state differs between captures.
 
 ## Set Up the Measurement Baseline
 
-Use the Nordic [Power Profiler Kit II (PPK2)](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/ppk_user_guide_intro.html) as the reference current-measurement tool. It can supply a DUT in Source Meter mode or measure current in series with an external supply in Ampere Meter mode. In Source Meter mode, use the configured output voltage as a controlled test condition; in Ampere Meter mode, measure and log the external supply voltage at the DUT. In either case, record the voltage actually presented to the DUT, not just the nominal battery or bench-supply setting.
+Use the Nordic [Power Profiler Kit II (PPK2)](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/ppk_user_guide_intro.html) as the reference current-measurement tool. It can supply a DUT in Source Meter mode or measure current with the PPK2 inserted in series between the DUT and an external supply in Ampere Meter mode. In Source Meter mode, use the configured output voltage as a controlled test condition; in Ampere Meter mode, measure and log the external supply voltage at the DUT. In either case, record the voltage actually presented to the DUT, not just the nominal battery or bench-supply setting.
 
-PPK2 provides the current waveform, accumulated charge, and exportable capture data. Where the DUT voltage is compatible, its digital inputs can also mark firmware phases in the trace. Use a GPIO marker around important paths such as wake, display update, radio transfer, sensor sampling, and return to sleep. The official [PPK2 user guide](https://docs.nordicsemi.com/r/bundle/ug_ppk2/) documents the supported operating modes and connection requirements.
+PPK2 provides the current waveform, accumulated charge, and exportable capture data. Its logic port exposes D0–D7 plus DUT VCC and GND connections. Connect VCC and GND to the DUT's logic supply and common ground, then connect marker GPIOs to D0–D7. Keep logic-port VCC within Nordic's 1.65–5.5 V range and verify that the marker levels are compatible. The digital inputs are sampled at 100 kHz with typical bandwidth of 50 kHz, so very short phases may not be resolved reliably. See Nordic's [connector definitions](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/ppk_user_guide_connectors.html), [power-supply specifications](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/ppk_power_supply_specs.html), and [digital-input resolution](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/digital_input_resolution.html). Use GPIO markers around important paths such as wake, display update, radio transfer, sensor sampling, and return to sleep. The official [PPK2 user guide](https://docs.nordicsemi.com/r/bundle/ug_ppk2/) documents the supported operating modes and connection requirements.
+
+Keep the PPK2's USB data/power connection attached while it is in use, as Nordic requires. This is separate from the additional USB supply recommended for higher Source Meter loads below.
+
+Before connecting the DUT, verify that the selected PPK2 mode supports its voltage and peak current. Nordic specifies a DUT voltage range of 0.8–5.0 V, a continuous DUT current limit of 1 A in Ampere Meter mode, and a maximum of 600 mA in Source Meter mode. If the DUT draws more than 400 mA in Source Meter mode, Nordic recommends an additional USB supply rated for at least 1 A to power the PPK2. See Nordic's [maximum DUT current specification](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/ppk_max_dut_current.html) and [power-supply guidance](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/ppk_power_supply.html). These are instrument limits, not recommended product operating points. For tests outside a supported range, use appropriately rated measurement equipment.
 
 <div align="center"><em>Table: Required Capture Record</em></div>
 
@@ -36,7 +45,7 @@ PPK2 provides the current waveform, accumulated charge, and exportable capture d
 |:-------|:-----------------|
 | Test ID, board revision, populated components, and firmware revision | Makes results repeatable and comparable. |
 | `V_DUT`: target, measured start/end, and variation during the capture | Enables a valid power and energy calculation. |
-| Current trace, average current, peak current, charge, and capture duration | Separates brief peaks from sustained energy cost. |
+| Current trace, average and peak current, average power, charge (mAh), energy (mWh), and capture duration | Separates brief current peaks from sustained draw and records power and energy for the capture. |
 | Temperature, battery state or bench-supply setting, and radio environment | Prevents environmental changes from being misread as firmware improvements. |
 | Enabled peripherals, clock policy, PM state, and wake sources | Explains why the device did or did not enter the intended low-power state. |
 | Firmware markers and trigger conditions | Attributes energy to a specific path instead of a vague waveform region. |
@@ -76,11 +85,12 @@ A component reaches its specified low-power state only when its driver applies t
 | Control Area | Driver Requirement | Measurement Evidence |
 |:-------------|:-------------------|:---------------------|
 | Mode registers and low-power commands | Apply the documented standby, shutdown, retention, data-rate, and interrupt settings; verify status where the component supports it. | Current and energy match the selected mode, with the intended configuration captured in the test record. |
+| PM-lock and constraint ownership | Define whether the component driver or a higher-level service owns each PM lock or constraint. Acquire it only while the protected resource is needed, and release it on every success, error, and early-return path once the component is safe to idle. | Traces confirm that the lock covers the required interval, is not released early, and is not left held after work completes or fails, blocking sleep. |
 | Power, enable, reset, and clock sequence | Meet the component's required ordering and timing during power-up, use, and power-down. | GPIO markers and the power trace show that no unintended active interval or current spike remains. |
 | SPI, I2C, UART, and other control buses | Stop unnecessary traffic; put chip select, clock, data, and interrupt lines in their specified inactive state. | The component stays in its intended low-power state between transactions. |
 | GPIO pulls and high impedance | Configure every control pin deliberately as output high, output low, input with the correct pull-up or pull-down, or high impedance only where the external circuit defines the level. | Current is checked with the peer powered and unpowered, and with reset/default states included. |
 | Power-domain crossings | Never drive an unpowered component through a control or data pin unless the hardware explicitly supports that path. | No back-powering or leakage appears when either side of the interface is off. |
-| Error and resume paths | Restore the correct state after timeouts, failed transfers, wakeups, and firmware resets. | Long-duration captures show no accumulating current caused by a failed cleanup path. |
+| Error and resume paths | Restore the correct state after timeouts, failed transfers, wakeups, and firmware resets. | Long-duration captures show no persistent or progressively increasing excess current caused by incomplete cleanup. |
 
 </div>
 
@@ -88,7 +98,7 @@ Valid logic levels do not guarantee low leakage. Internal pulls, conflicting pul
 
 ## Validate Firmware Scenarios
 
-Once component behavior is understood, measure the complete firmware scenes that a user experiences. A scenario includes the components, PM states, wakeups, and timing that happen together. For a smartwatch, start with the same scenes used in the [Smartwatch Power Profiling](smartwatch-power-profiling.md) model: display-off standby, notifications, incoming-call alerts, raise-to-wake, automatic heart-rate checks, manual SpO2 checks, exercise recording, alarms, sleep monitoring, and app synchronization. Add NFC, Bluetooth calling, and AOD as separate scenes when those features are enabled.
+Once component behavior is understood, measure the complete firmware scenarios that a user experiences. A scenario includes the components, PM states, wakeups, and timing that happen together. For a smartwatch, start with the same scenarios used in the [Smartwatch Power Profiling](smartwatch-power-profiling.md) model: display-off standby, notifications, incoming-call alerts, raise-to-wake, automatic heart-rate checks, manual SpO2 checks, exercise recording, alarms, sleep monitoring, and app synchronization. Add NFC, Bluetooth calling, and AOD as separate scenarios when those features are enabled.
 
 <div align="center"><em>Table: Scenario Validation Record</em></div>
 
@@ -99,7 +109,7 @@ Once component behavior is understood, measure the complete firmware scenes that
 | Start and end marker | The trace includes the entire wake-to-sleep path. | Scenario boundary and duration. |
 | Component and rail activity | Only expected components are active. | Correct component assumptions and `Other` allocation. |
 | PM state after work completes | The system reaches the intended sleep state. | Idle or standby current and remaining-time assumption. |
-| Current, `V_DUT`, charge, and energy per occurrence | The capture represents battery-side cost. | Energy per event and charge per event. |
+| Current, `V_DUT`, charge (mAh), and energy (mWh) per occurrence | The capture represents battery-side cost. | Charge (mAh) and energy (mWh) per event. |
 | Product behavior | The measurement preserves required latency, RF reliability, audio quality, and user experience. | A valid operating point, rather than an unusable low-power setting. |
 
 </div>
@@ -156,3 +166,6 @@ Use the reconciled profile to decide where effort has the highest return. Separa
 ## Release Evidence
 
 Before making a battery-life claim, retain the component captures, scenario captures, daily-use profile, voltage records, firmware markers, and the versioned assumptions that connect them. Re-run the affected portion of this workflow whenever firmware scheduling, display policy, radio parameters, sensor cadence, power-tree components, or product usage assumptions change.
+
+!!! note "Auto-generated content"
+    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

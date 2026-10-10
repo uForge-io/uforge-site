@@ -1,24 +1,28 @@
 ---
 icon: lucide/list-checks
 description: "Item-by-item schematic review checklist for the SF32LB52x MCU, covering package, power, clock, RF, storage, display, and manufacturing checks."
+hide:
+    - navigation
 tags:
     - Hardware
     - Chip
     - Checklist
 ---
 
-# SF32LB52x Hardware Design Guide — Schematic Checklist
+# SF32LB52x Hardware Design Guide — Schematic Checklist { #sf32lb52x-hardware-design-guide-schematic-checklist }
 
 !!! note "Part of the SF32LB52x Hardware Design Guide"
     This page covers Section 5.8, the item-by-item schematic checklist. Return to [Minimum System, Power & Clock](SF32LB52x_schematic_design.md), the first of the three Schematic Design Guidelines pages.
 
-## 5.8. Schematic Checklist
+## 5.8. Schematic Checklist { #58-schematic-checklist }
 
 Each table below covers one functional block of the schematic. The Applies To column narrows a check point to a specific SF32LB52x power variant or silicon revision where the general "All variants" scope doesn't hold.
 
-### 5.8.1. Package
+“Required” means the applicable check must be reviewed; it does not require fitting every peripheral listed. Review conditional checks only when the corresponding circuit or function is present. Keep the source’s Required/Optional categories and distinguish recommendations from mandatory limits.
 
-<div align="center"><em>Table 5.8-1: Package Checklist</em></div>
+### 5.8.1. Package { #581-package }
+
+<div align="center"><em>Table 5.8.1-1: Package Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -28,19 +32,19 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.2. Power Supply
+### 5.8.2. Power Supply { #582-power-supply }
 
-<div align="center"><em>Table 5.8-2: Power Supply Checklist</em></div>
+<div align="center"><em>Table 5.8.2-1: Power Supply Checklist</em></div>
 
 <div align="center" markdown>
 
 | No. | Check Point | Applies To | Category |
 |:---|:---|:---|:---|
 | 1 | VBUS supply voltage is <span class="flag-red">4.6 V–5.5 V</span> | 520/3/5/7 only | Required |
-| 2 | If the "charge and light the screen immediately" requirement applies, do not use the internal charger — use an external charger IC with path management instead | 520/3/5/7 only | Required |
+| 2 | If the screen must turn on immediately when a charger is connected, the internal charger is not recommended; prefer an external charger IC with power-path management | 520/3/5/7 only | Required |
 | 3 | The internal charger may be used only if it is acceptable to require charging to 3.6 V before software powers on the screen | 520/3/5/7 only | Required |
 | 4 | An OVP device with an integrated LDO output (e.g. LP5305AQVF) is recommended: LDO output 4.7–5.4 V, load capability ≥0.5 A, over-current-protection trip ≥0.7 A | 520/3/5/7 only | Required |
-| 5 | If an OVP device with adjustable OVLO is used, use 1%-tolerance divider resistors; OVLO threshold (V_OVLO_TH) error must be under 3%; set V_OVP min/max to 5.15 V (charger's max input voltage) – 5.55 V (the 52x charger's input upper limit) | 520/3/5/7 only | Required |
+| 5 | If an OVP device has adjustable OVLO, use divider resistors with 1% tolerance and keep V_OVLO_TH error below 3%; both the minimum and maximum V_OVP values must lie within 5.15–5.55 V. The source labels 5.15 V as the charger's maximum input voltage and 5.55 V as the 52x charger's input upper limit; see the discrepancy note below | 520/3/5/7 only | Required |
 | 6 | If the on-chip charger is unused, VBUS may be left unconnected and its capacitor omitted — but VBAT then loses its output capability; use a 1 uF external capacitor on VBAT in this case | 520/3/5/7 only | Required |
 | 7 | Battery-voltage sensing: the chip already routes an internal GPADC channel to VBAT (or VBATS) — do not additionally route VBAT to a GPADC pin | All variants | Required |
 | 8 | <span class="flag-red">VCC and VBAT pin supply voltage is 3.2 V–4.7 V</span> | 520/3/5/7 only | Required |
@@ -59,7 +63,7 @@ Each table below covers one functional block of the schematic. The Applies To co
 | 21 | LCD requires a dedicated low-Iq LDO supply | All variants | Required |
 | 22 | Heart-rate sensor LED is recommended to be powered from VBAT | All variants | Required |
 | 23 | Charging input requires an OVP circuit | All variants | Required |
-| 24 | When the charging path needs path management — i.e. when battery voltage is too low and 5 V is supplied from the charger input — use a charger IC with path management; <span class="flag-red">the voltage into VCC must not exceed 4.7 V</span> | 520/3/5/7 only | Required |
+| 24 | When power-path management is needed because battery voltage is too low and 5 V is supplied from the charger input, a charger IC with power-path management is recommended; <span class="flag-red">the voltage into VCC must not exceed 4.7 V</span> | 520/3/5/7 only | Required |
 | 25 | <span class="flag-red">SF32LB52DUB6: PVDD = 1.8 V</span> | 52D only | Required |
 | 26 | <span class="flag-red">SF32LB52B/E/G/JUX6: PVDD = 3.3 V</span> | 52B/E/G/J | Required |
 | 27 | <span class="flag-red">SF32LB52BU36 and SF32LB52BU56: VDD_SIP requires an external 3.3 V supply</span> | 52B only | Required |
@@ -69,9 +73,15 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.3. Power Supply Capacitors and Inductors
+!!! important "OVP thresholds are not VBUS operating limits"
+    The source checklist gives 5.15–5.55 V for adjustable-OVLO selection in row 5, while row 1 reproduces the workbook's 4.6–5.5 V VBUS check. Do not interpret 5.55 V as an allowed continuous voltage at VBUS. The [power-system discussion](SF32LB52x_schematic_design.md#52-power-system) explains the source differences and quotes a different OVP-selection range from the application note. Confirm the thresholds and operating limits with SiFli for the selected device before accepting the design.
 
-<div align="center"><em>Table 5.8-3: Power Supply Capacitors and Inductors Checklist</em></div>
+!!! note "Source and scope of VBUS values"
+    Electrical Specification-A3 lists a 4.5–5.5 V VBUS supply range. The battery-variant application note gives 4.6–5.5 V in its supply table and requires at least 4.6 V at the VBUS pin during maximum charging current. These values have different contexts; account for supply tolerance and voltage drop when checking the minimum voltage at the chip.
+
+### 5.8.3. Power Supply Capacitors and Inductors { #583-power-supply-capacitors-and-inductors }
+
+<div align="center"><em>Table 5.8.3-1: Power Supply Capacitors and Inductors Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -97,7 +107,7 @@ Each table below covers one functional block of the schematic. The Applies To co
 | 18 | AUD_VREF capacitor = 1 uF | All variants | Required |
 | 19 | <span class="flag-red flag-yellow">VSYS capacitor = 4.7 uF</span> | <span class="flag-red flag-yellow">520/3/5/7 only</span> | Required |
 | 20 | GPADC VREFP capacitor = 4.7 uF | All variants | Required |
-| 21 | BUCK inductor is a part number listed on the [SiFli Approved Vendor List] (AVL) | All variants | Required |
+| 21 | BUCK inductor is a part number listed on the [SiFli Approved Vendor List][SiFli Approved Vendor List] (AVL) | All variants | Required |
 | 22 | If the BUCK inductor is not AVL-listed, it meets L = 4.7 uH, DCR ≤0.4 Ω, Isat ≥450 mA | All variants | Required |
 | 23 | <span class="flag-red">If GPS or other interference-sensitive peripherals are present, reserve a shunt-to-ground capacitor footprint at BUCK_LX; the value depends on actual test results</span> | <span class="flag-red">All variants</span> | Required |
 | 24 | <span class="flag-red">Quiescent current of the selected DCDC is recorded and meets project requirements</span> | <span class="flag-red">All variants</span> | Required |
@@ -105,9 +115,12 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.4. Clock
+!!! note "Pin-24 scope in the source checklist"
+    Capacitor row 3 names SF32LB520/3/5/7 in its check-point text, but its Applies To column specifies only 523/5/7. Rows 5 and 6 instead identify SF32LB520 pin 24 as PA21 and pin 23 as VCC. This table follows the narrower applicability stated for row 3; confirm the pinout of the exact part before review approval.
 
-<div align="center"><em>Table 5.8-4: Clock Checklist</em></div>
+### 5.8.4. Clock { #584-clock }
+
+<div align="center"><em>Table 5.8.4-1: Clock Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -121,9 +134,9 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.5. Bootstrap Configuration
+### 5.8.5. Bootstrap Configuration { #585-bootstrap-configuration }
 
-<div align="center"><em>Table 5.8-5: Bootstrap Configuration Checklist</em></div>
+<div align="center"><em>Table 5.8.5-1: Bootstrap Configuration Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -136,9 +149,9 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.6. RF
+### 5.8.6. RF { #586-rf }
 
-<div align="center"><em>Table 5.8-6: RF Checklist</em></div>
+<div align="center"><em>Table 5.8.6-1: RF Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -151,9 +164,9 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.7. I/O Resource Allocation
+### 5.8.7. I/O Resource Allocation { #587-io-resource-allocation }
 
-<div align="center"><em>Table 5.8-7: I/O Resource Allocation Checklist</em></div>
+<div align="center"><em>Table 5.8.7-1: I/O Resource Allocation Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -165,9 +178,9 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.8. Hardware Wake-up
+### 5.8.8. Hardware Wake-up { #588-hardware-wake-up }
 
-<div align="center"><em>Table 5.8-8: Hardware Wake-up Checklist</em></div>
+<div align="center"><em>Table 5.8.8-1: Hardware Wake-up Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -177,9 +190,9 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.9. Storage
+### 5.8.9. Storage { #589-storage }
 
-<div align="center"><em>Table 5.8-9: Storage Checklist</em></div>
+<div align="center"><em>Table 5.8.9-1: Storage Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -190,23 +203,23 @@ Each table below covers one functional block of the schematic. The Applies To co
 | 3 | If MPI2 (SD1) connects to SD NAND flash: <span class="flag-red">PA13 (SD D3) must have a 7.5 kΩ pull-up, PA17 (SD D1) needs no pull-up, PA15 (SD CMD) must have a 7.5 kΩ pull-up</span> | All variants | Required |
 | 4 | If MPI2 (SD1) connects to eMMC: <span class="flag-red">PA13 (SD D3) and PA17 (SD D1) both must have 7.5 kΩ pull-ups, PA15 (SD CMD) must have a 7.5 kΩ pull-up</span> | <span class="flag-red">52D/E/G/J</span> | Required |
 | 5 | SF32LB520 and SF32LB52B external storage must be SPI NOR flash | 520/B | Required |
-| 6 | When shutdown power consumption matters, <span class="flag-red">external flash power must be switched by PA11</span>, active-high (on) / active-low (off) | 520/3/5/7 only | Required |
-| 7 | When shutdown power consumption matters, <span class="flag-red">external flash power must be switched by PA21</span>, active-high (on) / active-low (off) | <span class="flag-red">52B/D/E/G/J</span> | Required |
-| 8 | When shutdown power consumption matters, <span class="flag-red">VDD_SIP supply must be switched by PA21</span>, active-high (on) / active-low (off) | <span class="flag-red">52B/D/E/G/J</span> | Required |
+| 6 | When shutdown power consumption matters, <span class="flag-red">external flash power must be switched by PA11</span>, high to enable / low to disable | 520/3/5/7 only | Required |
+| 7 | When shutdown power consumption matters, <span class="flag-red">external flash power must be switched by PA21</span>, high to enable / low to disable | <span class="flag-red">52B/D/E/G/J</span> | Required |
+| 8 | When shutdown power consumption matters, <span class="flag-red">VDD_SIP supply must be switched by PA21</span>, high to enable / low to disable | <span class="flag-red">52B/D/E/G/J</span> | Required |
 | 9 | <span class="flag-red">When MPI drives a NOR flash of 32 MB or larger, the flash supply must be switchable via PA21 so it can be powered off</span> | <span class="flag-red">52B/D/E/G/J</span> | Required |
 | 10 | If SD1 connects to an SD NAND device, signal connections are correct | All variants | Required |
 | 11 | <span class="flag-red">Flash CLK and data lines have 33 Ω series resistors</span> | <span class="flag-red">All variants</span> | Required |
 | 12 | <span class="flag-red">When two external NOR flash devices are used, CLK/D0–D3 are shared; flash 1's CS uses PA12, flash 2's CS uses PA26, an internally pulled-up pin — well suited to an active-low CS signal since it defaults high (deselected) at reset</span> | <span class="flag-red">All variants</span> | Required |
 | 13 | <span class="flag-red">When two external NOR flash devices are used, the first must be 16 MB; the second may be 8 MB or 16 MB</span> | <span class="flag-red">All variants</span> | Required |
 | 14 | The peripheral device's I/O logic level matches the main chip's | All variants | Required |
-| 15 | <span class="flag-red">The NOR flash part is qualified in the key-component selection guide (an unqualified part risks ROM failing to recognize it and the system failing to boot)</span> | <span class="flag-red">All variants</span> | Required |
-| 16 | <span class="flag-red">The SPI/SD NAND flash part is qualified in the key-component selection guide (an unqualified part risks ROM failing to recognize it and the system failing to boot)</span> | <span class="flag-red">All variants</span> | Required |
+| 15 | <span class="flag-red">The selected NOR flash part is listed as qualified in the key-component selection guide; otherwise, ROM may not recognize it and the system may fail to boot</span> | <span class="flag-red">All variants</span> | Required |
+| 16 | <span class="flag-red">The selected SPI/SD NAND flash part is listed as qualified in the key-component selection guide; otherwise, ROM may not recognize it and the system may fail to boot</span> | <span class="flag-red">All variants</span> | Required |
 
 </div>
 
-### 5.8.10. Display
+### 5.8.10. Display { #5810-display }
 
-<div align="center"><em>Table 5.8-10: Display Checklist</em></div>
+<div align="center"><em>Table 5.8.10-1: Display Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -230,9 +243,9 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.11. GPADC
+### 5.8.11. GPADC { #5811-gpadc }
 
-<div align="center"><em>Table 5.8-11: GPADC Checklist</em></div>
+<div align="center"><em>Table 5.8.11-1: GPADC Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -244,9 +257,9 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.12. Buttons
+### 5.8.12. Buttons { #5812-buttons }
 
-<div align="center"><em>Table 5.8-12: Buttons Checklist</em></div>
+<div align="center"><em>Table 5.8.12-1: Buttons Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -259,9 +272,9 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.13. EOS and ESD Protection
+### 5.8.13. EOS and ESD Protection { #5813-eos-and-esd-protection }
 
-<div align="center"><em>Table 5.8-13: EOS and ESD Protection Checklist</em></div>
+<div align="center"><em>Table 5.8.13-1: EOS and ESD Protection Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -276,9 +289,9 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.14. I2C
+### 5.8.14. I2C { #5814-i2c }
 
-<div align="center"><em>Table 5.8-14: I2C Checklist</em></div>
+<div align="center"><em>Table 5.8.14-1: I2C Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -291,9 +304,9 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.15. Analog Audio
+### 5.8.15. Analog Audio { #5815-analog-audio }
 
-<div align="center"><em>Table 5.8-15: Analog Audio Checklist</em></div>
+<div align="center"><em>Table 5.8.15-1: Analog Audio Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -306,13 +319,13 @@ Each table below covers one functional block of the schematic. The Applies To co
 | 5 | All audio ADC inputs have a DC-blocking capacitor of at least 2.2 uF | All variants | Optional |
 | 6 | Audio DAC outputs DACP and DACN each have a 1 kΩ series resistor near the chip, with a 1.5 nF capacitor in parallel between DACP and DACN | All variants | Optional |
 | 7 | <span class="flag-red">AW8155B is recommended for the audio power amplifier, configured in software for Class A/B mode; other amplifier parts require test verification</span> | All variants | Optional |
-| 8 | <span class="flag-red">If the chip's integrated analog audio ADC path is unused, ADCP has a 0 Ω series resistor to ground</span> | All variants | Optional |
+| 8 | <span class="flag-red">If the chip's integrated analog audio ADC path is unused, connecting ADCP to ground through a 0 Ω resistor is recommended</span> | All variants | Optional |
 
 </div>
 
-### 5.8.16. SPI
+### 5.8.16. SPI { #5816-spi }
 
-<div align="center"><em>Table 5.8-16: SPI Checklist</em></div>
+<div align="center"><em>Table 5.8.16-1: SPI Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -324,9 +337,9 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.17. USART and Debug Interface
+### 5.8.17. USART and Debug Interface { #5817-usart-and-debug-interface }
 
-<div align="center"><em>Table 5.8-17: USART and Debug Interface Checklist</em></div>
+<div align="center"><em>Table 5.8.17-1: USART and Debug Interface Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -339,9 +352,9 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.18. PWM
+### 5.8.18. PWM { #5818-pwm }
 
-<div align="center"><em>Table 5.8-18: PWM Checklist</em></div>
+<div align="center"><em>Table 5.8.18-1: PWM Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -352,9 +365,9 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.19. USB
+### 5.8.19. USB { #5819-usb }
 
-<div align="center"><em>Table 5.8-19: USB Checklist</em></div>
+<div align="center"><em>Table 5.8.19-1: USB Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -366,35 +379,38 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 </div>
 
-### 5.8.20. Power Consumption
+### 5.8.20. Power Consumption { #5820-power-consumption }
 
-<div align="center"><em>Table 5.8-20: Power Consumption Checklist</em></div>
+<div align="center"><em>Table 5.8.20-1: Power Consumption Checklist</em></div>
 
 <div align="center" markdown>
 
 | No. | Check Point | Applies To | Category |
 |:---|:---|:---|:---|
 | 1 | LDO/DCDC parts have active-high enable; if the output defaults to off, a 1 M–5.1 MΩ pull-down from EN to ground is added, sized to the project's power-consumption requirements | All variants | Required |
-| 2 | MOSFET-based power switching uses a PMOS+NMOS combination, control pin active-high (on) / active-low (off), with a 1 MΩ pull-down on the control pin to ground | All variants | Required |
+| 2 | MOSFET-based power switching uses a PMOS+NMOS combination, control pin high to enable / low to disable, with a 1 MΩ pull-down on the control pin to ground | All variants | Required |
 | 3 | External flash power switch is controlled by PA11 | 520/3/5/7 only | Required |
-| 4 | <span class="flag-red">External flash and VDD_SIP power switch is controlled by PA21</span> | <span class="flag-red">52A/D</span>[^52a-note] | Required[^52a-category-note] |
+| 4 | <span class="flag-red">The external Flash power switch and the VDD_SIP power switch are both controlled by PA21</span> | <span class="flag-red">52A/D</span>[^52a-note] | Not specified in source[^52a-category-note] |
 | 5 | VSYS, when used as a GPIO pull-up supply, is always on; this is confirmed to meet power-consumption requirements | 520/3/5/7 only | Required |
 | 6 | When LDO2 or LDO3 is used as a GPIO pull-up supply, the LDO2/LDO3 power-off scenario is confirmed to still meet design requirements | 520/3/5/7 only | Required |
 | 7 | I2C pull-up supply switches together with the peripheral's IO supply, to avoid leakage | All variants | Required |
 | 8 | PA09 usage note: drives high to enable at screen-on, driven low at sleep | Silicon rev. A2 and earlier | Required |
-| 9 | Deep Sleep mode base-current requirement is defined and recorded | All variants | Required |
-| 10 | <span class="flag-red">Sum of base currents of all selected peripherals in Deep Sleep mode is recorded and meets project requirements</span> | <span class="flag-red">All variants</span> | Required |
-| 11 | Standby mode base-current requirement is defined and recorded | All variants | Required |
-| 12 | <span class="flag-red">Sum of base currents of all selected peripherals in Standby mode is recorded and meets project requirements</span> | <span class="flag-red">All variants</span> | Required |
+| 9 | Deep Sleep mode baseline-current requirement is defined and recorded | All variants | Required |
+| 10 | <span class="flag-red">Sum of baseline currents of all selected peripherals in Deep Sleep mode is recorded and meets project requirements</span> | <span class="flag-red">All variants</span> | Required |
+| 11 | Standby mode baseline-current requirement is defined and recorded | All variants | Required |
+| 12 | <span class="flag-red">Sum of baseline currents of all selected peripherals in Standby mode is recorded and meets project requirements</span> | <span class="flag-red">All variants</span> | Required |
 
-[^52a-note]: The source spreadsheet lists this as "52A/52D." SiFli's own naming elsewhere (including a similar inconsistency noted in the [SF32LB52x Hardware Design Guide][SF32LB52x Hardware Design Guide - Dev], Section 5.4.1.2) uses SF32LB52B/D/E/G/J, with no "52A" part number — verify this check point against the exact chip model and datasheet before relying on it.
-[^52a-category-note]: Treated as Required because the underlying design intent matches the surrounding storage-power-control requirements, even though the source variant label itself is inconsistent.
+[^52a-note]: The source spreadsheet lists “52A/52D.” The variants described in the [SF32LB52x Hardware Design Guide][SF32LB52x Hardware Design Guide - Dev] are SF32LB52B/D/E/G/J; the spreadsheet’s “52A” label does not identify one of those variants. Confirm the exact device and datasheet before applying this row; do not automatically replace “52A” with another model.
+
+!!! important "Storage power-switch pin discrepancy"
+    This table preserves the checklist workbook's PA11 entry for external-Flash switching on SF32LB520/3/5/7. Under this project's source priority, the higher-priority OpenSiFli application guides and schematic-design guide govern and specify PA21 for boot-storage power switching; use PA21 as the source-supported design basis and do not adopt PA11 solely from the lower-priority workbook. The workbook does not clarify whether PA11 is a separate board-level enable or a pin-assignment conflict. Confirm the exact net and variant with SiFli before release.
+[^52a-category-note]: The source spreadsheet leaves the category blank for this row. It is reproduced as “Not specified in source”; this is not an inferred Required or Optional classification. Confirm applicability and the release criterion for the selected device.
 
 </div>
 
-### 5.8.21. Download and Debug Test Points
+### 5.8.21. Download and Debug Test Points { #5821-download-and-debug-test-points }
 
-<div align="center"><em>Table 5.8-21: Download and Debug Test Points Checklist</em></div>
+<div align="center"><em>Table 5.8.21-1: Download and Debug Test Points Checklist</em></div>
 
 <div align="center" markdown>
 

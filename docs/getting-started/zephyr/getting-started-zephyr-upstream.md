@@ -1,81 +1,54 @@
 ---
 icon: lucide/layers
-description: "First run of OpenSiFli's downstream Zephyr workspace on the SF32LB52 DevKit LCD: set up west, build hello_world, flash with sftool, and try board samples."
+description: "Build and flash Zephyr's upstream SF32LB52 DevKit LCD board target, then check its documented console and supported features."
 tags:
     - Getting started
     - Zephyr
 ---
 
-# Zephyr Downstream
+# Zephyr Upstream { #zephyr-upstream }
 
-OpenSiFli has active Zephyr work in [OpenSiFli/zephyr-downstream](https://github.com/OpenSiFli/zephyr-downstream) and a SiFli HAL module in [OpenSiFli/zephyr-hal_sifli-downstream](https://github.com/OpenSiFli/zephyr-hal_sifli-downstream). The downstream tree includes an `sf32lb52_devkit_lcd` board and SF32LB52-related drivers, devicetree bindings, tests, and sample overlays.
+The `sf32lb52_devkit_lcd` board has been supported and maintained in upstream Zephyr since v4.3.0. See the [v4.3.0 release notes](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html) and the [SF32LB52 DevKit LCD board documentation](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html). This guide creates a v4.3.0 workspace, builds a first sample, and flashes the board. Use [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) when you need the broader official SF32 feature set.
 
-Use this path when you want Zephyr APIs, Zephyr devicetree, portable RTOS structure, or a bridge toward the ArduinoCore-zephyr flow. Use [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) when you need the most complete official SF32 feature coverage today.
+!!! note "Check the board feature list"
+    An upstream board definition does not by itself confirm that every peripheral or operating mode is enabled or validated for a product. Check the board documentation's supported-features table and verify the required behavior on your exact board revision.
 
-!!! note "Downstream first"
-    This page describes the OpenSiFli downstream Zephyr work. Treat upstream Zephyr support as a follow-up milestone unless SiFli publishes an upstreamed board/support matrix.
-
-## What You'll Need
+## What You'll Need { #what-youll-need }
 
 **Hardware**
 
-- SiFli SF32LB52 DevKit LCD, based on the SF32LB52x-MOD-N16R8 module with SF32LB525UC6, 8 MB OPI-PSRAM, and 128 Mb QSPI-NOR.
-- A USB Type-C data cable connected to the board's USB-to-UART path.
-- A computer running macOS or Linux for the most direct Zephyr workflow. Windows users should use WSL until native instructions are published.
+- SF32LB52 DevKit LCD, based on the SF32LB52x-MOD-N16R8 module with SF32LB525UC6, 8 MB OPI-PSRAM, and 128 Mb QSPI-NOR.
+- USB Type-C data cable connected to the board's USB-to-UART path.
 
 **Software**
 
-- Git.
-- Python 3 with `venv` and `pip`.
-- CMake, Ninja, and Zephyr build prerequisites.
-- `west`.
-- The OpenSiFli downstream Zephyr workspace.
+- A host OS supported by Zephyr v4.3.0 and its [Getting Started instructions](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html).
+- Zephyr host dependencies and the Zephyr SDK, installed for the ARM Cortex-M target as described in that guide.
+- Git, Python 3, and `pip`.
 
-## Prepare the Tooling
+## Prepare the Tooling { #prepare-the-tooling }
 
-Install the normal Zephyr host tools for your platform. On Ubuntu-like systems:
+First complete the host-dependency and Zephyr SDK setup in Zephyr's [v4.3.0 Getting Started guide](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html). Then create a Python environment and initialize a workspace at the matching Zephyr tag:
 
 ```bash
-sudo apt install python3-pip python3-setuptools python3-venv build-essential git cmake ninja-build zstd
-```
-
-On macOS with Homebrew:
-
-```bash
-xcode-select --install
-brew install python cmake ninja zstd git
-```
-
-Create a Python environment for Zephyr:
-
-```bash
-python3 -m venv ~/zephyr-sifli/.venv
-source ~/zephyr-sifli/.venv/bin/activate
+python3 -m venv ~/zephyr-venv
+source ~/zephyr-venv/bin/activate
 pip install west
-```
-
-## Get the Downstream Workspace
-
-Clone the OpenSiFli downstream tree:
-
-```bash
-mkdir -p ~/zephyr-sifli
-cd ~/zephyr-sifli
-git clone https://github.com/OpenSiFli/zephyr-downstream zephyr
-cd zephyr
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.3.0 ~/zephyrproject
+cd ~/zephyrproject
 west update
 west zephyr-export
-pip install -r scripts/requirements.txt
+pip install -r zephyr/scripts/requirements.txt
 ```
 
-If SiFli publishes a west manifest for a multi-repository workspace, use that manifest instead. The downstream tree currently references SiFli-specific board, SoC, driver, binding, HAL, and sample work directly.
+Keep this environment active for the build and flash steps below.
 
-## Confirm the Board
+## Confirm the Board { #confirm-the-board }
 
-Check that Zephyr sees the SF32 board:
+Check that the workspace includes the target:
 
 ```bash
-west boards | grep -i sf32
+west boards
 ```
 
 The expected board name is:
@@ -84,53 +57,39 @@ The expected board name is:
 sf32lb52_devkit_lcd
 ```
 
-## Build Hello World
+## Build Hello World { #build-hello-world }
 
-Build Zephyr's standard hello-world sample:
+Build Zephyr's standard Hello World sample:
 
 ```bash
 west build -b sf32lb52_devkit_lcd samples/hello_world --pristine
 ```
 
-If the build succeeds, the board definition, toolchain, and downstream tree are wired together correctly.
+A successful build confirms that the board target and toolchain are available in the workspace. It does not validate every board peripheral.
 
-## Flash the Board
+## Flash the Board { #flash-the-board }
 
-Try the board's documented Zephyr flash path:
+The upstream board declares `sftool` as its default flash runner. Install [OpenSiFli sftool](https://github.com/OpenSiFli/sftool), make sure it is on `PATH`, and put the board into serial download mode using the board's documented procedure. Then run:
 
 ```bash
 west flash
 ```
 
-The downstream board configuration uses the `sftool` runner with `--chip=SF32LB52`. If `west flash` does not handle your local setup, confirm that `sftool` is installed and that the board is in the correct serial download mode.
+If flashing fails, check the serial port selection, download mode, and the runner instructions in the [board documentation](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html).
 
-## Open the Serial Console
+## Open the Serial Console { #open-the-serial-console }
 
-Open the board's console UART. The downstream devicetree routes Zephyr console and shell to `usart1` at `1000000` baud.
-
-Expected output should include:
+The upstream board configuration routes the Zephyr console to `usart1` at `1000000` baud. Open that UART with a serial terminal and check for:
 
 ```text
 Hello World! sf32lb52_devkit_lcd
 ```
 
-## Try Board-Level Samples
+## Choose a Next Sample { #choose-a-next-sample }
 
-After `hello_world`, validate real board I/O. The downstream tree includes SF32LB52 board-specific overlays or configs for areas such as:
+Use the upstream board documentation's supported-features table together with the [Zephyr sample browser](https://docs.zephyrproject.org/4.3.0/samples/index.html) to choose the next API or peripheral to evaluate. Confirm that the feature is listed for this board and that any required configuration is enabled before treating a sample as evidence of product readiness.
 
-- ADC.
-- UART async API.
-- Memory controller / PSRAM.
-- LVGL display sample.
-- Filesystem sample.
-- PWM tests.
-- RTC tests.
-- SPI loopback tests.
-- Bluetooth BAP broadcast sink configuration.
-
-Start with `samples/basic/blinky` and `samples/drivers/uart/async_api`, then move to display, storage, Bluetooth, and power-sensitive features.
-
-## Troubleshooting
+## Troubleshooting { #troubleshooting }
 
 <div align="center"><em>Table: Troubleshooting</em></div>
 
@@ -138,29 +97,16 @@ Start with `samples/basic/blinky` and `samples/drivers/uart/async_api`, then mov
 
 | Symptom | Check |
 |:--------|:------|
-| `west boards` does not show SF32 | Confirm you are using `OpenSiFli/zephyr-downstream`, not an upstream Zephyr checkout without SiFli board support. |
-| Build fails before compiling | Confirm the Python environment is active and Zephyr requirements are installed. |
-| Board builds but does not flash | Confirm the downstream `sftool` runner, `sftool` availability, and serial download mode. |
-| No serial output | Confirm `usart1`, `1000000` baud, the USB-to-UART connector, and whether another terminal owns the port. |
-| Peripheral sample fails | Check board-specific overlays and whether the driver is enabled in Kconfig. |
+| `west boards` does not show the SF32 target | Confirm the workspace is initialized from upstream Zephyr v4.3.0 or later and that `west update` completed. |
+| Build fails before compiling | Confirm the Python environment is active, the Zephyr SDK is installed for ARM Cortex-M, and the v4.3.0 requirements were installed. |
+| Board builds but does not flash | Confirm `sftool` is installed and on `PATH`, the selected serial port is correct, and the board is in serial download mode. |
+| No serial output | Check `usart1`, `1000000` baud, the USB-to-UART connection, and whether another terminal has the port open. |
+| A peripheral sample fails | Check the board's supported-features table and sample configuration; do not assume every peripheral is enabled by the base board target. |
 
 </div>
 
-## What SiFli Team Should Finish
+## Before Product Integration { #before-product-integration }
 
-To make this Zephyr path public-docs quality, SiFli should complete the following work:
-
-- **Status statement:** say whether `zephyr-downstream` is experimental, beta, or supported, and whether/when changes are intended for upstream Zephyr.
-- **Workspace instructions:** publish the exact recommended clone/init flow, including whether users should clone `zephyr-downstream` directly or use a west manifest.
-- **Toolchain version:** document the Zephyr SDK version, Python version range, CMake/Ninja minimums, and supported host OS versions.
-- **Board page:** expand the `sf32lb52_devkit_lcd` board page with board photo, connectors, serial console pins, boot/download buttons, flash layout, PSRAM, display, and supported peripherals.
-- **Flash runner:** document `west flash`, the `sftool` runner, `--chip=SF32LB52`, expected port selection behavior, and how this relates to SDK/Arduino flashing.
-- **Download mode recovery:** give exact button/reset timing and recovery steps for failed flashes.
-- **Feature matrix:** list driver status for GPIO, UART, I2C, SPI, ADC, PWM, RTC, watchdog, flash, PSRAM, display/LVGL, filesystem, Bluetooth HCI/BAP, audio, crypto, entropy, low power, and USB.
-- **Sample matrix:** list every sample known to build and run on `sf32lb52_devkit_lcd`, with expected output and any required overlays.
-- **Known limitations:** document missing upstream pieces, incomplete drivers, unsupported low-power states, display constraints, Bluetooth limitations, and memory caveats.
-- **Console and logging:** state `usart1`, `1000000` baud, shell availability, logging configuration, and crash-log collection method.
-- **Upstream plan:** identify which board, SoC, binding, driver, and HAL pieces are intended for upstream Zephyr and which remain downstream-only.
-- **CI badge and artifacts:** expose CI status for board builds and publish logs/artifacts for `hello_world`, GPIO, UART, display, filesystem, and Bluetooth smoke tests.
-- **Issue template:** request downstream commit, HAL commit, board revision, west manifest, toolchain version, exact build command, flash command, console log, and sample name.
-- **Arduino relationship:** explain how `ArduinoCore-zephyr` consumes this downstream, including loader build, variant generation, exported symbols, and when Arduino users need to rebuild Zephyr.
+- Check the upstream board's supported-features table and the configuration for the exact sample you plan to use.
+- Validate required interfaces, performance, memory use, and power behavior on the target board and product configuration; a successful Hello World build is only a toolchain smoke test.
+- Compare the upstream feature scope with [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) if your design depends on a capability that is not listed or validated for this Zephyr target.

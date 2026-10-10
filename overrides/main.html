@@ -11,15 +11,10 @@
 
 {#-
   Override of base.html's site_meta block, identical except for the
-  <link rel="alternate"> hrefs: instead of the static config-level
-  alt.link ("/" or "/zh/"), compute the equivalent page in the other
-  language from the current page's own URL. docs/ and docs_zh/ share the
-  same relative paths (see AGENTS.md's twin-file convention), and the
-  merged bilingual preview (tools/serve-bilingual-dev.sh) nests the
-  Chinese build under site/zh/, so "/zh/" + page.url and "/" + page.url
-  both resolve correctly. This intentionally does not check whether the
-  target page has actually been translated yet -- see partials/alternate.html
-  for the same tradeoff on the header switcher.
+  <link rel="alternate"> hrefs: every localized documentation tree shares
+  the English tree's relative paths, so the equivalent page is derived from
+  page.url and the locale's site prefix instead of an alternate homepage
+  link. See partials/alternate.html for the matching header control.
 -#}
 {% block site_meta %}
   <meta charset="utf-8">
@@ -45,10 +40,14 @@
   {% endif %}
   {% set offline = config.extra.offline and config.extra.offline.enabled %}
   {% if config.extra.alternate is iterable and not offline %}
+    {# hreflang URLs must be fully qualified (Google ignores relative ones). #}
+    {% set hreflang_root = (config.site_url | default("", true)) | replace("/zh/", "/") | replace("/ja/", "/") | replace("/es/", "/") | replace("/de/", "/") | replace("/fr/", "/") | replace("/pt/", "/") | replace("/ru/", "/") %}
+    {% set locale_prefixes = {"en": "", "zh": "/zh", "ja": "/ja", "es": "/es", "de": "/de", "fr": "/fr", "pt": "/pt", "ru": "/ru"} %}
     {% for alt in config.extra.alternate %}
-      {% set target = ("/zh/" ~ page.url) if alt.lang == "zh" else ("/" ~ page.url) %}
-      <link rel="alternate" href="{{ target }}" hreflang="{{ alt.lang | d(lang.t('language')) }}">
+      {% set target = (locale_prefixes[alt.lang] | d("", true)) ~ "/" ~ page.url %}
+      <link rel="alternate" href="{{ hreflang_root ~ target[1:] }}" hreflang="{{ alt.lang | d(lang.t('language')) }}">
     {% endfor %}
+    <link rel="alternate" href="{{ hreflang_root ~ page.url }}" hreflang="x-default">
   {% endif %}
   {% set href = config.theme.favicon | d("assets/images/favicon.png") %}
   <link rel="icon" href="{{ href | url }}">

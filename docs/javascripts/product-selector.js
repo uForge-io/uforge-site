@@ -1,17 +1,16 @@
 /* Interactive SF32 product-selection table (docs/sf32-products/product-selector.md
-   and its Chinese twin). Loads docs/assets/data/product-selector.json (shared
-   between both languages via tools/link-shared-assets.sh) and renders a
+   and its localized twins). Loads docs/assets/data/product-selector.json (shared
+   between languages via tools/link-shared-assets.sh) and renders a
    filterable table client-side -- there's no backend, so filtering,
    rendering, and link construction all happen here.
 
-   This file is identical in docs/javascripts/ and docs_zh/javascripts/ on
-   purpose (same convention as offline.js): it detects the page language from
-   document.documentElement.lang at runtime instead of shipping two
-   near-duplicate scripts. */
+   Localized trees share this script through file symlinks.
+   It detects document.documentElement.lang at runtime. */
 (function () {
   "use strict";
 
-  var LANG = document.documentElement.lang === "zh" ? "zh" : "en";
+  var pageLanguage = document.documentElement.lang.split("-")[0];
+  var LANG = ["en", "zh", "ja", "es", "de", "fr", "pt", "ru"].indexOf(pageLanguage) >= 0 ? pageLanguage : "en";
 
   var STRINGS = {
     en: {
@@ -57,9 +56,9 @@
         audioDacAny: "Any",
         audioAdc: "Min. audio ADC",
         audioAdcAny: "Any",
-        audioPdm: "Min. audio PDM",
+        audioPdm: "Min. PDM interfaces",
         audioPdmAny: "Any",
-        audioI2s: "Min. audio I2S",
+        audioI2s: "Min. I2S interfaces",
         audioI2sAny: "Any",
       },
       table: {
@@ -79,8 +78,8 @@
         resolution: "Max resolution",
         audioDac: "Audio DAC",
         audioAdc: "Audio ADC",
-        audioPdm: "PDM",
-        audioI2s: "I2S",
+        audioPdm: "PDM interfaces",
+        audioI2s: "I2S interfaces",
         uart: "UART",
         i2c: "I2C",
         spi: "SPI",
@@ -111,8 +110,8 @@
         sdio: "not enough SD/SDIO controllers",
         audioDac: "not enough audio DAC",
         audioAdc: "not enough audio ADC",
-        audioPdm: "not enough audio PDM",
-        audioI2s: "not enough audio I2S",
+        audioPdm: "not enough PDM interfaces",
+        audioI2s: "not enough I2S interfaces",
       },
       noResults: "No parts match every filter. Try loosening one of them.",
     },
@@ -155,13 +154,13 @@
         resolutionAny: "任意",
         sdio: "最少 SDIO 数量",
         sdioAny: "任意",
-        audioDac: "最少音频 DAC",
+        audioDac: "最少音频 DAC 数",
         audioDacAny: "任意",
-        audioAdc: "最少音频 ADC",
+        audioAdc: "最少音频 ADC 数",
         audioAdcAny: "任意",
-        audioPdm: "最少音频 PDM",
+        audioPdm: "最少 PDM 接口",
         audioPdmAny: "任意",
-        audioI2s: "最少音频 I2S",
+        audioI2s: "最少 I2S 接口",
         audioI2sAny: "任意",
       },
       table: {
@@ -181,8 +180,8 @@
         resolution: "最大分辨率",
         audioDac: "音频 DAC",
         audioAdc: "音频 ADC",
-        audioPdm: "PDM",
-        audioI2s: "I2S",
+        audioPdm: "PDM 接口数",
+        audioI2s: "I2S 接口数",
         uart: "UART",
         i2c: "I2C",
         spi: "SPI",
@@ -213,11 +212,257 @@
         sdio: "SD/SDIO 控制器数量不足",
         audioDac: "音频 DAC 数量不足",
         audioAdc: "音频 ADC 数量不足",
-        audioPdm: "音频 PDM 数量不足",
-        audioI2s: "音频 I2S 数量不足",
+        audioPdm: "PDM 接口数量不足",
+        audioI2s: "I2S 接口数量不足",
       },
       noResults: "没有器件满足全部筛选条件，请适当放宽某一项。",
     },
+  };
+
+  STRINGS.ja = {
+    loading: "製品データを読み込み中...",
+    loadError: "製品データを読み込めませんでした。ページを再読み込みしてください。",
+    clearFilters: "絞り込みを解除",
+    filters: {
+      tier: "実装形態", tierAny: "指定なし（チップまたはモジュール）",
+      tierChip: "チップ", tierModule: "モジュール", wifi: "外付け Wi-Fi 用 SDIO",
+      camera: "カメラインターフェース（DCMI）", ai: "AI / ML アクセラレータ",
+      freeIo: "FreeIO による柔軟な GPIO 割り当て", ptm: "PTM（周辺タスクエンジン）",
+      psram: "必要な PSRAM 容量", psramAny: "指定なし",
+      gpio: "必要な GPIO 数", gpioAny: "指定なし",
+      package: "パッケージ", packageAny: "指定なし",
+      packageQfn68: "QFN68（7 x 7 mm、44-48 GPIO）",
+      packageQfn80: "QFN80（8 x 8 mm、最大 58 GPIO）",
+      packageBga: "BGA（小型、多数の GPIO）",
+      power: "電源", powerAny: "指定なし",
+      powerLiIon: "リチウムイオン電池から直接給電（3.2～4.7 V）",
+      power3v3: "3.3 V 電源", power1v8: "最低 1.8 V の電源に対応",
+      display: "表示インターフェース", displayAny: "指定なし",
+      displayQspi: "QSPI", displayRgb: "RGB", displayMipi: "MIPI", displayEpd: "EPD", displayJdi: "JDI",
+      resolution: "目標解像度", resolutionAny: "指定なし",
+      sdio: "SDIO の最小数", sdioAny: "指定なし",
+      audioDac: "音声 DAC の最小数", audioDacAny: "指定なし",
+      audioAdc: "音声 ADC の最小数", audioAdcAny: "指定なし",
+      audioPdm: "PDM インターフェースの最小数", audioPdmAny: "指定なし",
+      audioI2s: "I2S インターフェースの最小数", audioI2sAny: "指定なし"
+    },
+    table: {
+      name: "型番", wifi: "外付け Wi-Fi 用 SDIO", camera: "カメラ", ai: "AI アクセラレータ",
+      freeIo: "FreeIO", ptm: "PTM", psram: "PSRAM", flash: "NOR Flash", gpio: "最大 GPIO 数",
+      package: "パッケージ", power: "電源", ioVoltage: "I/O 電圧", display: "表示インターフェース",
+      resolution: "最大解像度", audioDac: "音声 DAC", audioAdc: "音声 ADC", audioPdm: "PDM インターフェース数",
+      audioI2s: "I2S インターフェース数", uart: "UART", i2c: "I2C", spi: "SPI", can: "CAN", gpadcCh: "GPADC チャネル", usb: "USB2.0"
+    },
+    yes: "対応", no: "—", noMatchReasonPrefix: "条件に不一致：",
+    reasons: {
+      tier: "実装形態", wifi: "外付け Wi-Fi 非対応", camera: "カメラインターフェースなし",
+      ai: "AI アクセラレータなし", freeIo: "FreeIO 非対応", ptm: "PTM 非対応",
+      psram: "PSRAM 容量不足", gpio: "GPIO 数不足", packageQfn68: "QFN68 の選択肢なし",
+      packageQfn80: "QFN80 の選択肢なし", packageBga: "BGA の選択肢なし",
+      powerLiIon: "リチウムイオン電池からの直接給電は未記載", power3v3: "3.3 V 給電は未記載",
+      power1v8: "1.8V までの低電圧給電に非対応", display: "必要な表示インターフェースなし",
+      resolution: "目標解像度に未達", sdio: "SD/SDIO コントローラ数不足",
+      audioDac: "音声 DAC 数不足", audioAdc: "音声 ADC 数不足",
+      audioPdm: "PDM インターフェース数が不足", audioI2s: "I2S インターフェース数が不足"
+    },
+    noResults: "すべての条件を満たす製品がありません。いずれかの条件を緩めてください。"
+  };
+  STRINGS.es = {
+    loading: "Cargando datos de productos...",
+    loadError: "No se pudieron cargar los datos. Vuelva a cargar la página.",
+    clearFilters: "Borrar filtros",
+    filters: {
+      tier: "Nivel de integración", tierAny: "Cualquiera (chip o módulo)", tierChip: "Chip", tierModule: "Módulo",
+      wifi: "SDIO para Wi-Fi externo", camera: "Interfaz de cámara (DCMI)", ai: "Acelerador de IA / ML",
+      freeIo: "Asignación flexible de GPIO con FreeIO", ptm: "PTM (motor de tareas de periféricos)",
+      psram: "Máx. de PSRAM requerida", psramAny: "Cualquiera", gpio: "Máx. de GPIO necesarios", gpioAny: "Cualquiera",
+      package: "Encapsulado", packageAny: "Cualquiera",
+      packageQfn68: "QFN68 (7 x 7 mm, 44-48 GPIO)", packageQfn80: "QFN80 (8 x 8 mm, hasta 58 GPIO)",
+      packageBga: "BGA (menor superficie, más GPIO)", power: "Alimentación", powerAny: "Cualquiera",
+      powerLiIon: "Batería Li-ion (alimentación directa, 3,2–4,7 V)",
+      power3v3: "Alimentación de 3,3 V", power1v8: "Admite una tensión mínima de 1,8 V",
+      display: "Interfaz de pantalla", displayAny: "Cualquiera", displayQspi: "QSPI", displayRgb: "RGB",
+      displayMipi: "MIPI", displayEpd: "EPD", displayJdi: "JDI", resolution: "Resolución objetivo", resolutionAny: "Cualquiera",
+      sdio: "Mín. de SDIO", sdioAny: "Cualquiera", audioDac: "Mín. de DAC de audio", audioDacAny: "Cualquiera",
+      audioAdc: "Mín. de ADC de audio", audioAdcAny: "Cualquiera", audioPdm: "Mín. de interfaces PDM", audioPdmAny: "Cualquiera",
+      audioI2s: "Mín. de interfaces I2S", audioI2sAny: "Cualquiera"
+    },
+    table: {
+      name: "Referencia", wifi: "SDIO para Wi-Fi ext.", camera: "Cámara", ai: "Acel. IA", freeIo: "FreeIO", ptm: "PTM",
+      psram: "PSRAM", flash: "NOR Flash", gpio: "GPIO máx.", package: "Encapsulado", power: "Alimentación",
+      ioVoltage: "Tensión de E/S", display: "Interfaces de pantalla", resolution: "Resolución máx.",
+      audioDac: "DAC de audio", audioAdc: "ADC de audio", audioPdm: "Interfaces PDM", audioI2s: "Interfaces I2S", uart: "UART",
+      i2c: "I2C", spi: "SPI", can: "CAN", gpadcCh: "Canales GPADC", usb: "USB2.0"
+    },
+    yes: "Sí", no: "—", noMatchReasonPrefix: "No cumple:",
+    reasons: {
+      tier: "nivel de integración", wifi: "sin Wi-Fi externo", camera: "sin interfaz de cámara", ai: "sin acelerador de IA",
+      freeIo: "sin soporte FreeIO", ptm: "sin soporte PTM", psram: "capacidad PSRAM insuficiente", gpio: "número de GPIO insuficiente",
+      packageQfn68: "no disponible en QFN68", packageQfn80: "no disponible en QFN80", packageBga: "no disponible en BGA",
+      powerLiIon: "alimentación directa de ion-litio no documentada", power3v3: "alimentación de 3.3V no documentada",
+      power1v8: "no admite alimentación desde 1.8V", display: "falta la interfaz de pantalla", resolution: "resolución inferior al objetivo",
+      sdio: "controladores SD/SDIO insuficientes", audioDac: "DAC de audio insuficientes", audioAdc: "ADC de audio insuficientes",
+      audioPdm: "interfaces PDM insuficientes", audioI2s: "interfaces I2S insuficientes"
+    },
+    noResults: "Ningún producto cumple todos los filtros. Pruebe a flexibilizar alguno."
+  };
+  STRINGS.de = {
+    loading: "Teiledaten werden geladen...",
+    loadError: "Produktdaten konnten nicht geladen werden. Bitte Seite neu laden.",
+    clearFilters: "Filter zurücksetzen",
+    filters: {
+      tier: "Integrationsebene", tierAny: "Beliebig (Chip oder Modul)", tierChip: "Chip", tierModule: "Modul",
+      wifi: "SDIO für externes Wi-Fi", camera: "Kameraschnittstelle (DCMI)", ai: "KI-/ML-Beschleuniger",
+      freeIo: "Flexible GPIO-Zuweisung mit FreeIO", ptm: "PTM (Peripheral Task Machine)",
+      psram: "Benötigte PSRAM-Kapazität (max.)", psramAny: "Beliebig", gpio: "Benötigte GPIO-Anzahl (max.)", gpioAny: "Beliebig",
+      package: "Gehäusetyp", packageAny: "Beliebig",
+      packageQfn68: "QFN68 (7 x 7 mm, 44-48 GPIO)", packageQfn80: "QFN80 (8 x 8 mm, bis zu 58 GPIO)",
+      packageBga: "BGA (kleinere Grundfläche, mehr GPIO)", power: "Stromversorgung", powerAny: "Beliebig",
+      powerLiIon: "Li-Ion-Akku (direkte Versorgung mit 3,2–4,7 V)",
+      power3v3: "Versorgung mit 3,3 V", power1v8: "Versorgung bis hinunter zu 1,8 V",
+      display: "Display-Schnittstelle", displayAny: "Beliebig", displayQspi: "QSPI", displayRgb: "RGB",
+      displayMipi: "MIPI", displayEpd: "EPD", displayJdi: "JDI", resolution: "Zielauflösung", resolutionAny: "Beliebig",
+      sdio: "Min. Anzahl SDIO", sdioAny: "Beliebig", audioDac: "Min. Audio-DAC", audioDacAny: "Beliebig",
+      audioAdc: "Min. Audio-ADC", audioAdcAny: "Beliebig", audioPdm: "Min. PDM-Schnittstellen", audioPdmAny: "Beliebig",
+      audioI2s: "Min. I2S-Schnittstellen", audioI2sAny: "Beliebig"
+    },
+    table: {
+      name: "Teilenummer", wifi: "SDIO für ext. Wi-Fi", camera: "Kamera", ai: "KI-Beschl.", freeIo: "FreeIO", ptm: "PTM",
+      psram: "PSRAM", flash: "NOR-Flash", gpio: "Max. GPIO", package: "Gehäuse", power: "Stromversorgung",
+      ioVoltage: "E/A-Spannung", display: "Display-Schnittstellen", resolution: "Max. Auflösung",
+      audioDac: "Audio-DAC", audioAdc: "Audio-ADC", audioPdm: "PDM-Schnittstellen", audioI2s: "I2S-Schnittstellen", uart: "UART",
+      i2c: "I2C", spi: "SPI", can: "CAN", gpadcCh: "GPADC-Kanäle", usb: "USB2.0"
+    },
+    yes: "Ja", no: "—", noMatchReasonPrefix: "Nicht erfüllt:",
+    reasons: {
+      tier: "Integrationsebene", wifi: "kein externes Wi-Fi", camera: "keine Kameraschnittstelle", ai: "kein KI-Beschleuniger",
+      freeIo: "kein FreeIO-Support", ptm: "kein PTM-Support", psram: "PSRAM-Kapazität zu gering", gpio: "GPIO-Anzahl zu gering",
+      packageQfn68: "nicht in QFN68 verfügbar", packageQfn80: "nicht in QFN80 verfügbar", packageBga: "nicht in BGA verfügbar",
+      powerLiIon: "keine direkte Li-Ion-Versorgung dokumentiert", power3v3: "keine 3,3V-Versorgung dokumentiert",
+      power1v8: "unterstützt keine Versorgung bis hinunter zu 1,8 V", display: "erforderliche Display-Schnittstelle fehlt", resolution: "Auflösung unter Zielwert",
+      sdio: "nicht genug SD/SDIO-Controller", audioDac: "nicht genug Audio-DAC", audioAdc: "nicht genug Audio-ADC",
+      audioPdm: "zu wenige PDM-Schnittstellen", audioI2s: "zu wenige I2S-Schnittstellen"
+    },
+    noResults: "Kein Bauteil erfüllt alle Filter. Bitte einen Filter lockern."
+  };
+  STRINGS.fr = {
+    loading: "Chargement des données produit...",
+    loadError: "Impossible de charger les données produit. Veuillez actualiser la page.",
+    clearFilters: "Effacer les filtres",
+    filters: {
+      tier: "Niveau d'intégration", tierAny: "Tous (puce ou module)", tierChip: "Puce", tierModule: "Module",
+      wifi: "SDIO pour Wi-Fi externe", camera: "Interface caméra (DCMI)", ai: "Accélérateur IA / ML",
+      freeIo: "Attribution GPIO flexible avec FreeIO", ptm: "PTM (moteur de tâches périphériques)",
+      psram: "PSRAM requise (max.)", psramAny: "Tous", gpio: "GPIO requis (max.)", gpioAny: "Tous",
+      package: "Type de boîtier", packageAny: "Tous",
+      packageQfn68: "QFN68 (7 x 7 mm, 44-48 GPIO)", packageQfn80: "QFN80 (8 x 8 mm, jusqu'à 58 GPIO)",
+      packageBga: "BGA (empreinte plus petite, plus de GPIO)", power: "Alimentation", powerAny: "Tous",
+      powerLiIon: "Batterie Li-ion (alimentation directe, 3,2–4,7 V)",
+      power3v3: "Alimentation 3,3 V", power1v8: "Tension minimale d'alimentation : 1,8 V",
+      display: "Interface d'affichage", displayAny: "Tous", displayQspi: "QSPI", displayRgb: "RGB",
+      displayMipi: "MIPI", displayEpd: "EPD", displayJdi: "JDI", resolution: "Résolution cible", resolutionAny: "Tous",
+      sdio: "Min. de SDIO", sdioAny: "Tous", audioDac: "Min. DAC audio", audioDacAny: "Tous",
+      audioAdc: "Min. ADC audio", audioAdcAny: "Tous", audioPdm: "Min. d'interfaces PDM", audioPdmAny: "Tous",
+      audioI2s: "Min. d'interfaces I2S", audioI2sAny: "Tous"
+    },
+    table: {
+      name: "Référence", wifi: "SDIO Wi-Fi ext.", camera: "Caméra", ai: "Accél. IA", freeIo: "FreeIO", ptm: "PTM",
+      psram: "PSRAM", flash: "NOR Flash", gpio: "GPIO max.", package: "Boîtier", power: "Alimentation",
+      ioVoltage: "Tension E/S", display: "Interfaces d'affichage", resolution: "Résolution max.",
+      audioDac: "DAC audio", audioAdc: "ADC audio", audioPdm: "Interfaces PDM", audioI2s: "Interfaces I2S", uart: "UART",
+      i2c: "I2C", spi: "SPI", can: "CAN", gpadcCh: "Canaux GPADC", usb: "USB2.0"
+    },
+    yes: "Oui", no: "—", noMatchReasonPrefix: "Ne correspond pas :",
+    reasons: {
+      tier: "niveau d'intégration", wifi: "pas de Wi-Fi externe", camera: "pas d'interface caméra", ai: "pas d'accélérateur IA",
+      freeIo: "pas de support FreeIO", ptm: "pas de support PTM", psram: "capacité PSRAM insuffisante", gpio: "nombre de GPIO insuffisant",
+      packageQfn68: "non disponible en QFN68", packageQfn80: "non disponible en QFN80", packageBga: "non disponible en BGA",
+      powerLiIon: "alimentation directe Li-ion non documentée", power3v3: "alimentation 3,3 V non documentée",
+      power1v8: "ne prend pas en charge une alimentation jusqu'à 1,8 V", display: "interface d'affichage requise manquante", resolution: "résolution inférieure à la cible",
+      sdio: "contrôleurs SD/SDIO insuffisants", audioDac: "DAC audio insuffisants", audioAdc: "ADC audio insuffisants",
+      audioPdm: "interfaces PDM en nombre insuffisant", audioI2s: "interfaces I2S en nombre insuffisant"
+    },
+    noResults: "Aucun composant ne correspond à tous les filtres. Essayez d'assouplir l'un d'eux."
+  };
+  STRINGS.pt = {
+    loading: "Carregando dados dos componentes...",
+    loadError: "Não foi possível carregar os dados dos produtos. Atualize a página.",
+    clearFilters: "Limpar filtros",
+    filters: {
+      tier: "Nível de integração", tierAny: "Qualquer (chip ou módulo)", tierChip: "Chip", tierModule: "Módulo",
+      wifi: "SDIO para Wi-Fi externo", camera: "Interface de câmera (DCMI)", ai: "Acelerador de IA / ML",
+      freeIo: "Atribuição flexível de GPIO (FreeIO)", ptm: "PTM (Peripheral Task Machine)",
+      psram: "Capacidade máxima de PSRAM necessária", psramAny: "Qualquer", gpio: "Máximo de GPIO necessários", gpioAny: "Qualquer",
+      package: "Tipo de encapsulamento", packageAny: "Qualquer",
+      packageQfn68: "QFN68 (7 x 7 mm, 44–48 GPIO)", packageQfn80: "QFN80 (8 x 8 mm, até 58 GPIO)",
+      packageBga: "BGA (menor área, mais GPIO)", power: "Alimentação", powerAny: "Qualquer",
+      powerLiIon: "Bateria Li-ion (alimentação direta de 3,2–4,7 V)", power3v3: "Alimentação de 3,3 V",
+      power1v8: "Alimentação a partir de 1,8 V", display: "Interface de display", displayAny: "Qualquer",
+      displayQspi: "QSPI", displayRgb: "RGB", displayMipi: "MIPI", displayEpd: "EPD", displayJdi: "JDI",
+      resolution: "Resolução desejada", resolutionAny: "Qualquer", sdio: "Mínimo de SDIO", sdioAny: "Qualquer",
+      audioDac: "Mínimo de DAC de áudio", audioDacAny: "Qualquer", audioAdc: "Mínimo de ADC de áudio", audioAdcAny: "Qualquer",
+      audioPdm: "Mínimo de interfaces PDM", audioPdmAny: "Qualquer", audioI2s: "Mínimo de interfaces I2S", audioI2sAny: "Qualquer"
+    },
+    table: {
+      name: "Código do componente", wifi: "SDIO para Wi-Fi externo", camera: "Câmera", ai: "Acelerador de IA",
+      freeIo: "FreeIO", ptm: "PTM", psram: "PSRAM", flash: "Flash NOR", gpio: "Máx. de GPIO",
+      package: "Encapsulamento", power: "Alimentação", ioVoltage: "Tensão de I/O", display: "Interfaces de display",
+      resolution: "Resolução máx.", audioDac: "DAC de áudio", audioAdc: "ADC de áudio", audioPdm: "Interfaces PDM",
+      audioI2s: "Interfaces I2S", uart: "UART", i2c: "I2C", spi: "SPI", can: "CAN", gpadcCh: "Canais GPADC", usb: "USB 2.0"
+    },
+    yes: "Sim", no: "—", noMatchReasonPrefix: "Não atende:",
+    reasons: {
+      tier: "nível de integração", wifi: "sem Wi-Fi externo", camera: "sem interface de câmera", ai: "sem acelerador de IA",
+      freeIo: "sem suporte a FreeIO", ptm: "sem suporte a PTM", psram: "capacidade de PSRAM insuficiente",
+      gpio: "quantidade de GPIO insuficiente", packageQfn68: "indisponível em QFN68", packageQfn80: "indisponível em QFN80",
+      packageBga: "indisponível em BGA", powerLiIon: "alimentação direta por Li-ion não documentada",
+      power3v3: "alimentação de 3,3 V não documentada", power1v8: "não aceita alimentação de até 1,8 V",
+      display: "falta a interface de display necessária", resolution: "resolução abaixo da desejada",
+      sdio: "controladores SD/SDIO insuficientes", audioDac: "DACs de áudio insuficientes",
+      audioAdc: "ADCs de áudio insuficientes", audioPdm: "interfaces PDM insuficientes", audioI2s: "interfaces I2S insuficientes"
+    },
+    noResults: "Nenhum componente atende a todos os filtros. Tente flexibilizar algum deles."
+  };
+
+  STRINGS.ru = {
+    loading: "Загрузка данных о компонентах...",
+    loadError: "Не удалось загрузить данные о продуктах. Обновите страницу.",
+    clearFilters: "Сбросить фильтры",
+    filters: {
+      tier: "Уровень интеграции", tierAny: "Любой вариант (микросхема или модуль)", tierChip: "Микросхема", tierModule: "Модуль",
+      wifi: "SDIO для внешнего Wi-Fi", camera: "Интерфейс камеры (DCMI)", ai: "Ускоритель AI / ML",
+      freeIo: "Гибкое назначение GPIO (FreeIO)", ptm: "PTM (Peripheral Task Machine)",
+      psram: "Максимально требуемый объём PSRAM", psramAny: "Любой", gpio: "Максимально требуемое число GPIO", gpioAny: "Любое",
+      package: "Тип корпуса", packageAny: "Любой",
+      packageQfn68: "QFN68 (7 × 7 мм, 44–48 GPIO)", packageQfn80: "QFN80 (8 × 8 мм, до 58 GPIO)",
+      packageBga: "BGA (меньше площадь, больше GPIO)", power: "Питание", powerAny: "Любое",
+      powerLiIon: "Питание от аккумулятора Li-ion (прямая шина 3,2–4,7 В)", power3v3: "Питание 3,3 В",
+      power1v8: "Питание от 1,8 В", display: "Интерфейс дисплея", displayAny: "Любой",
+      displayQspi: "QSPI", displayRgb: "RGB", displayMipi: "MIPI", displayEpd: "EPD", displayJdi: "JDI",
+      resolution: "Целевое разрешение", resolutionAny: "Любое", sdio: "Мин. число SDIO", sdioAny: "Любое",
+      audioDac: "Мин. число аудио DAC", audioDacAny: "Любое", audioAdc: "Мин. число аудио ADC", audioAdcAny: "Любое",
+      audioPdm: "Мин. число интерфейсов PDM", audioPdmAny: "Любое", audioI2s: "Мин. число интерфейсов I2S", audioI2sAny: "Любое"
+    },
+    table: {
+      name: "Номер модели", wifi: "SDIO для внешнего Wi-Fi", camera: "Камера", ai: "AI-ускоритель",
+      freeIo: "FreeIO", ptm: "PTM", psram: "PSRAM", flash: "NOR Flash", gpio: "Макс. число GPIO",
+      package: "Корпус", power: "Питание", ioVoltage: "Напряжение I/O", display: "Интерфейсы дисплея",
+      resolution: "Макс. разрешение", audioDac: "Аудио DAC", audioAdc: "Аудио ADC", audioPdm: "Интерфейсы PDM",
+      audioI2s: "Интерфейсы I2S", uart: "UART", i2c: "I2C", spi: "SPI", can: "CAN", gpadcCh: "Каналы GPADC", usb: "USB 2.0"
+    },
+    yes: "Да", no: "—", noMatchReasonPrefix: "Не соответствует:",
+    reasons: {
+      tier: "неподходящий уровень интеграции", wifi: "нет SDIO для внешнего Wi-Fi", camera: "нет интерфейса камеры",
+      ai: "нет AI-ускорителя", freeIo: "нет поддержки FreeIO", ptm: "нет поддержки PTM",
+      psram: "недостаточный объём PSRAM", gpio: "слишком мало GPIO", packageQfn68: "недоступно в корпусе QFN68",
+      packageQfn80: "недоступно в корпусе QFN80", packageBga: "недоступно в корпусе BGA",
+      powerLiIon: "прямое питание от Li-ion не указано в документации", power3v3: "питание 3,3 В не указано в документации",
+      power1v8: "питание при напряжении 1,8 В не поддерживается", display: "нет требуемого интерфейса дисплея",
+      resolution: "разрешение ниже целевого", sdio: "недостаточно контроллеров SD/SDIO",
+      audioDac: "недостаточно аудио DAC", audioAdc: "недостаточно аудио ADC",
+      audioPdm: "недостаточно интерфейсов PDM", audioI2s: "недостаточно интерфейсов I2S"
+    },
+    noResults: "Ни одна модель не соответствует всем фильтрам. Попробуйте ослабить один из них."
   };
 
   var t = STRINGS[LANG];
@@ -233,8 +478,8 @@
       var stem = filename.replace(/\.md$/, "");
       url = dir ? "/" + dir + "/" + stem : "/" + stem;
     }
-    if (LANG === "zh") {
-      url = "/zh" + url;
+    if (LANG !== "en") {
+      url = "/" + LANG + url;
     }
     return url.replace(/\/+$/, "") + "/";
   }
@@ -849,7 +1094,7 @@
     root.textContent = "";
     root.appendChild(el("p", { class: "uf-ps-status", text: t.loading }));
 
-    var dataUrl = (LANG === "zh" ? "/zh" : "") + "/assets/data/product-selector.json";
+    var dataUrl = (LANG === "en" ? "" : "/" + LANG) + "/assets/data/product-selector.json";
 
     fetch(dataUrl)
       .then(function (resp) {

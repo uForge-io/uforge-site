@@ -32,7 +32,33 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install zensical
-      - run: zensical build --clean --strict
+      # Eight language builds (Zensical builds one UI language per run). English
+      # is the site root; each other language is built to site_<lang>/ and then
+      # nested under site/<lang>/ so the header language menu, hreflang tags and
+      # first-visit redirect (which all target /<lang>/<same page>) resolve.
+      # --strict on every build: a broken link or missing page in ANY language
+      # fails the deploy rather than shipping a half-working site.
+      - name: Build all languages
+        run: |
+          languages="zh ja es de fr pt ru"
+          zensical build --clean --strict --config-file zensical.toml
+          for lang in $languages; do
+            zensical build --clean --strict --config-file "zensical.${lang}.toml"
+          done
+      - name: Nest localized sites under the English site
+        run: |
+          for lang in zh ja es de fr pt ru; do
+            rm -rf "site/${lang}"
+            cp -R "site_${lang}" "site/${lang}"
+          done
+          for lang in zh ja es de fr pt ru; do
+            test -f "site/${lang}/index.html"
+          done
+      # Share one copy of every image/PDF/XLSX: delete the byte-identical copies
+      # inside site/<lang>/ and point that language's pages at the root copy.
+      # Fails the deploy if any rewritten reference no longer resolves.
+      - name: Share assets across languages
+        run: python3 .github/scripts/dedupe-site-assets.py site zh ja es de fr pt ru
       - uses: actions/upload-pages-artifact@v5
         with:
           path: site

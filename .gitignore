@@ -1,5 +1,6 @@
 .venv/
 site/
+site_*/
 .cache/
 .DS_Store
 Makefile

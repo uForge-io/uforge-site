@@ -6,13 +6,13 @@ tags:
     - Partitions
 ---
 
-# Partition Tables
+# Partition Tables { #partition-tables }
 
 The SiFli-SDK `partition_table` build tool reads a board's partition description and generates `ptab.h`, which provides the partition macros used by an application. A partition table describes the address layout of all relevant memory, including NOR Flash, NAND Flash, eMMC, SD cards, PSRAM, and on-chip SRAM.
 
 Each board has a default layout, and every application built for that board follows it. A project can also supply its own partition-table configuration to replace the board default.
 
-## Enable Partition Tables
+## Enable Partition Tables { #enable-partition-tables }
 
 Enable **Use partition table to manage all memory layout** under the middleware configuration. Projects also require the following setting in `Kconfig.proj`; SiFli-SDK examples already include it.
 
@@ -24,7 +24,7 @@ config CUSTOM_MEM_MAP
     default y if !SOC_SIMULATOR
 ```
 
-## Choose a Format
+## Choose a Format { #choose-a-format }
 
 SiFli-SDK supports three partition-table formats. Use v3 for new work unless an existing board or product must retain its v1/v2 configuration.
 
@@ -41,14 +41,14 @@ SiFli-SDK supports three partition-table formats. Use v3 for new work unless an 
 
 The build system first searches for `ptab.yaml` (v3), then falls back to `ptab.json` (v1/v2). Its search order is the board directory, chip directory, BSP root, and `customer/boards/<board>/`.
 
-## v1: JSON Tags and Image Metadata
+## v1: JSON Tags and Image Metadata { #v1-json-tags-and-image-metadata }
 
 v1 uses a JSON array in `ptab.json`. It has no dedicated version field, but it can optionally start with a header element containing `"version": "1"`.
 
 Each memory entry defines:
 
 - `mem`: memory name, such as `flash2` or `psram1`.
-- `base`: verified hexadecimal base address.
+- `base`: the memory's hexadecimal base address; verify it against the target memory map.
 - `regions`: list of partitions within that memory.
 
 Each region uses `offset` and `max_size` in bytes. Its `tags` list generates partition macros. For example, `FLASH_BOOT_LOADER` produces `FLASH_BOOT_LOADER_START_ADDR`, `FLASH_BOOT_LOADER_OFFSET`, and `FLASH_BOOT_LOADER_SIZE`; the start address is the memory `base` plus the region `offset`.
@@ -67,7 +67,7 @@ Each region uses `offset` and `max_size` in bytes. Its `tags` list generates par
 
 For PSRAM, the source distinguishes CBUS and SBUS address spaces. Put `exec` on the CBUS partition so code uses the execution address; place an `ftab` `xip` address on the SBUS partition when that address is used to copy code.
 
-## v2: Named and Typed JSON Partitions
+## v2: Named and Typed JSON Partitions { #v2-named-and-typed-json-partitions }
 
 v2 also uses `ptab.json`, but its header must declare `"version": "2"`. The memory fields remain `mem`, `base`, and `regions`. A region keeps `offset` and `max_size`, and may use `tags` and `custom`; v2 additionally gives the region a `name`, a `type`, and, for an execution partition, an optional `core`.
 
@@ -86,7 +86,7 @@ v2 also uses `ptab.json`, but its header must declare `"version": "2"`. The memo
 
 `bootloader`, `main`, `dfu`, and `ftab` are reserved names. Other program names are available for user-defined images, such as `acpu`. When the table does not define `ftab` and `bootloader` partitions, the tool generates a default configuration; inspect generated `ptab.h` before relying on it.
 
-## v3: YAML Partitions and Overlays
+## v3: YAML Partitions and Overlays { #v3-yaml-partitions-and-overlays }
 
 v3 uses `ptab.yaml` and is the recommended format. It replaces the legacy `tags` model with explicit `type` and `subtype` fields, decouples a partition from physical topology through logical `region` names, and generates `ptab.h`, `ftab.bin`, and link-script fragments as part of the build.
 
@@ -106,6 +106,8 @@ v3 uses `ptab.yaml` and is the recommended format. It replaces the legacy `tags`
 
 External `memory` definitions use an `mpi` or `sdmmc` interface name, a `type` of `nand`, `nor`, or `sd`, and a size. `region` can reference those external memories, `hpsys_ram`, or `lpsys_ram`.
 
+Each `region` maps to an SBUS storage address and a CBUS address used for CPU execution or XiP. The SDK loads this mapping from the chip's SiliconSchema data. For `FAL_PART_TABLE`, the device name comes from the partition's storage `region`, not from `exec`: `mpi1` through `mpi5` map to `NOR_FLASH1_DEV_NAME` through `NOR_FLASH5_DEV_NAME`, while `sdmmc1` and `sdmmc2` map to `SDMMC1_DEV_NAME` and `SDMMC2_DEV_NAME`.
+
 <div align="center"><em>Table: v3 partition types and subtypes</em></div>
 <div align="center" markdown>
 
@@ -117,14 +119,18 @@ External `memory` definitions use an `mpi` or `sdmmc` interface name, a `type` o
 | `app` | `dfu` | Independent DFU application. |
 | `app` | `ex` | Resource partition. The build creates toolchain-specific resource-image outputs. |
 | `data` | `flashdb_kv` | FlashDB KV database; generates `KVDB_*` macros and participates in `FAL_PART_TABLE`. |
-| `data` | `filesystem`, `littlefs`, `fat`, or `fatfs` | Filesystem partition. These subtypes generate `FS_REGION_*` macros; `filesystem` participates in `FAL_PART_TABLE`. The documentation notes that `littlefs`, `fat`, and `fatfs` currently have no additional effect. |
+| `data` | `filesystem`, `littlefs`, `fat`, or `fatfs` | The reference identifies `filesystem` as generating `FS_REGION_*` macros and participating in `FAL_PART_TABLE`. Elsewhere, it also lists `littlefs`, `fat`, and `fatfs` as macro-generating subtypes while describing them as having no current effect; verify these three subtype behaviors against the target SDK release. The same macro section uses the subtype name `flashdb`, while its subtype table and FAL rules use `flashdb_kv`; do not assume these names are aliases without checking the target SDK. |
 | `data` | `ram`, `calibration`, `raw`, or `int_res` | RAM, calibration, application-managed raw data, or internal resource data linked into the ELF and split by section name. |
 
 </div>
 
+The generated v3 `FAL_PART_TABLE` includes only `data/flashdb_kv`, `data/filesystem`, and `app` partitions whose subtype is not `ex`. It excludes `ftab`, `bootloader`, `app/ex`, and other `data` subtypes, including `littlefs`, `fat`, `fatfs`, `raw`, `ram`, `calibration`, and `int_res`. Entries use each partition's `name`; legacy layout aliases such as `main`, `dfu_code`, and `fs_root` are not mapped to partition names. When migrating to v3, do not define `FAL_PART_TABLE` manually; remove a board-level `custom_mem_map.h` if present to avoid a redefinition warning.
+
+For each partition, `ptab.h` generates `<NAME>_START_ADDR`, `<NAME>_SIZE`, and `<NAME>_OFFSET` macros, where `<NAME>` is the uppercase partition name. When the region's memory type is recognized, it also generates `<NAME>_MEM_TYPE`. For an `app/factory` partition, `CODE_START_ADDR` uses the address in `exec` when specified; otherwise it uses the partition's CBUS address.
+
 Use `exec: {region, offset}` where code cannot execute in place, such as an application stored in NAND Flash and copied to PSRAM. Without `exec`, the generated code start address uses the partition's CBUS storage address. `attrs` adds custom macros to `ptab.h`.
 
-### Defaults and Project Overlays
+### Defaults and Project Overlays { #defaults-and-project-overlays }
 
 v3 derives system defaults when the corresponding partitions are absent. For SF32LB52, `flash_table` and `bootloader` can be inferred from the HCPU factory application's storage region; NAND and SDMMC boot storage also receive documented default data partitions. For SF32LB56 and SF32LB58, `flash_table` and `bootloader` on internal `mpi5` can be omitted. Default SiP PSRAM windows and standard RAM partitions can also be omitted unless the project changes the RAM layout.
 
@@ -145,9 +151,9 @@ partitions:
     size: 64KB
 ```
 
-The board-specific overlay has priority over the chip-specific overlay. Overlays modify partitions only: they cannot alter `memory`, `chip`, or `version`; cannot delete partitions; and apply only to a v3 board table. When an overlay is active, the build writes the resulting `ptab.effective.yaml` for inspection.
+The board-specific overlay has priority over the chip-specific overlay. Overlays modify partitions only: they cannot alter `memory`, `chip`, or `version`, and cannot delete partitions. They apply only to a board-level v3 `ptab.yaml`; they cannot be combined with a complete project-level `ptab.yaml` or `ptab.json`. If the board still uses `ptab.json` (v1/v2) and no complete `ptab.yaml` is selected, the build ignores the overlay, prints a warning, and continues with the non-overlay partition-table path. In that case, it does not generate `ptab.effective.yaml`. When an overlay is applied, the build writes the resulting `ptab.effective.yaml` for inspection.
 
-## Generated Files and Validation
+## Generated Files and Validation { #generated-files-and-validation }
 
 <div align="center"><em>Table: Partition-table build outputs</em></div>
 <div align="center" markdown>
@@ -175,7 +181,7 @@ sdk.py ptab-export --board=<board-name> --output /tmp/ptab.effective.yaml
 sdk.py ptab-export --strict
 ```
 
-## Inspect the Generated Flash Table
+## Inspect the Generated Flash Table { #inspect-the-generated-flash-table }
 
 After a build, `ftab.bin` is placed in the build directory. Initialize the SDK environment, then inspect the first `build_*/ftab.bin` found under the current project:
 
@@ -193,7 +199,7 @@ sdk.py ftab-dump --path build_<board_name>/ftab.bin --format json
 
 The table view reports partition entries, image descriptions used by DFU and boot flows, and the running-image pointers for HCPU, LCPU, bootloader, and boot images.
 
-## Product Review
+## Product Review { #product-review }
 
 - [ ] The project uses the board table or an explicit project configuration intentionally.
 - [ ] The selected v1, v2, or v3 syntax matches the file actually found by the build system.

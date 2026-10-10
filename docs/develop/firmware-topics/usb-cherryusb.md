@@ -6,22 +6,22 @@ tags:
     - USB
 ---
 
-# USB and CherryUSB
+# USB and CherryUSB { #usb-and-cherryusb }
 
-SF32 devices expose USB hardware, and SiFli-SDK documentation and examples reference CherryUSB integration. Treat USB as a software stack, not only as a hardware feature.
+For SF32 devices and boards with supported USB hardware, SiFli-SDK documentation and examples show CherryUSB integration. Confirm the USB roles and classes supported by the exact chip, board, and SDK release, and treat USB as a full software stack rather than only a hardware feature.
 
 USB work crosses firmware, descriptors, host operating systems, power behavior, and factory tooling. A device that enumerates once on a developer laptop is not finished.
 
-## Use Cases
+## Use Cases { #use-cases }
 
 - USB CDC serial.
 - HID devices.
 - MSC storage.
 - USB audio microphone/speaker.
 - MTP.
-- USB host modes such as CDC, HID, MSC, UVC, and UAC where supported by the SDK and board.
+- USB host support for CDC, HID, MSC, UVC, and UAC peripherals, where supported by the SDK and board.
 
-## Practical Workflow
+## Practical Workflow { #practical-workflow }
 
 1. Confirm the board exposes the required USB connector and power path.
 2. Start from the closest SDK USB example.
@@ -29,17 +29,17 @@ USB work crosses firmware, descriptors, host operating systems, power behavior, 
 4. Verify suspend/resume and cable reconnect behavior.
 5. Record VID/PID, descriptors, and driver expectations.
 
-## What to Test
+## What to Test { #what-to-test }
 
-- Cold plug and hot plug.
+- Connect before power-up; connect and disconnect while the device is running.
 - Reset while connected.
 - Host sleep/wake.
 - Cable disconnect during transfer.
 - Windows, macOS, and Linux enumeration.
 - Composite device behavior if multiple classes are enabled.
-- Power-only cable failure messaging in user docs.
+- Tell users that charge-only USB cables do not support data communication.
 
-## Descriptor Checklist
+## Descriptor Checklist { #descriptor-checklist }
 
 - VID/PID ownership is clear.
 - Product string is final or versioned.
@@ -47,7 +47,7 @@ USB work crosses firmware, descriptors, host operating systems, power behavior, 
 - Class/subclass/protocol values match the intended host driver.
 - Composite interfaces are stable across firmware updates.
 
-## SDK Examples
+## SDK Examples { #sdk-examples }
 
 The [official SiFli-SDK CherryUSB example index](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/index.html) separates USB-device and USB-host work. Start with the example that matches the intended USB role and class, then carry its descriptor, power, and host-compatibility checks into the product implementation.
 

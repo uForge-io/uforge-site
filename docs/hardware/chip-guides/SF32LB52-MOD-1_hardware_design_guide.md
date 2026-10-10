@@ -1,5 +1,7 @@
 ---
 icon: lucide/book-check
+hide:
+    - navigation
 description: "Hardware design guide for the SF32LB52-MOD-1 Bluetooth MCU module: power, interfaces, and PCB integration guidance."
 tags:
     - Hardware
@@ -43,7 +45,7 @@ For the underlying chip architecture (cores, graphics, memory subsystem, and per
 | :--- | :--- |
 | Application core (HCPU) | Arm Cortex-M33 STAR-MC1, up to 240MHz, 512KB SRAM |
 | Low-power core (LCPU) | Arm Cortex-M33 STAR-MC1, up to 24MHz, 64KB SRAM |
-| Wireless | Dual-mode Bluetooth 6.3 with BLE Audio |
+| Wireless | Dual-mode Bluetooth 5.3 with BLE Audio |
 | Graphics | ePicasso 2.0 2D/2.5D engine, up to 512×512, eZip 2.0 lossless decompression |
 | Audio | 1x 24-bit audio DAC, 1x 24-bit audio Sigma-Delta ADC |
 | Storage | Optional in-package OPI-PSRAM (144MHz); 1x external MPI (QSPI); 1x SD/SDIO/eMMC |
@@ -67,7 +69,7 @@ The module integrates the SF32LB525UC6 chip, a 48MHz crystal, an optional 32.768
 
 The module exposes 68 pins around its perimeter. Pin 1 is marked at the corner near the antenna zone; pins are numbered counter-clockwise around the package.
 
-!!! info "Figure 4-1: Pinout Diagram, Top View"
+!!! info "Figure 4.1-1: Pinout Diagram, Top View"
     See Figure 3-1 in the official datasheet for this diagram — not reproduced in this guide.
 
 ### 4.2 Pin Definition Table
@@ -148,14 +150,17 @@ The module has 68 pins in total, described in the table below.
 
 The datasheet's physical pin description figure groups pins by function family — SDIO, SPI, I2C, UART, GPTIM, LCD interface, GPADC, MPI, analog audio, external 32K oscillator, external wake-up, and SWD/debug UART — overlaid on the SF32LB525UC6 die outline. Use it alongside the pin definition table above when laying out signal groups on the host PCB.
 
-!!! info "Figure 4-2: Physical Pin Description"
+!!! info "Figure 4.3-1: Physical Pin Description"
     See Figure 3-2 in the official datasheet for this diagram — not reproduced in this guide.
 
 ## 5. Peripherals
 
 ### 5.1 Communication Interfaces
 
-Any pin marked `PAxx_I2C_UART` in the table above can be configured as either I2C or UART. The chip supports up to 4 I2C interfaces and 3 UART interfaces in total.
+Any pin marked `PAxx_I2C_UART` in the table above can be configured as either I2C or UART. The datasheet states a configurable maximum of 4 I2C interfaces and 3 UART interfaces.
+
+!!! important "Peripheral-count discrepancy in the datasheet"
+    The same datasheet later enumerates I2C1–I2C7 and UART1–UART6. These lists conflict with its stated maxima of 4 I2C and 3 UART interfaces. Confirm the usable peripheral count for the exact module/SoC configuration with SiFli; do not treat the enumerated controller numbers as proof that all are simultaneously available.
 
 **UART** — Full-duplex, up to 6Mbps baud rate, configurable data format, hardware flow control (CTS/RTS), DMA multi-packet TX/RX. UART1–3 are on HPSYS; UART4–6 are on LPSYS.
 
@@ -277,9 +282,9 @@ VDD is the I/O supply rail; VOH/VOL are measured under high-impedance load.
 
 ### 6.5 Dual-Mode Bluetooth RF Performance
 
-Supports Bluetooth 6.3, backward compatible with 5.x/4.2/4.1/4.0. Operating channel center frequency: 2402–2480MHz.
+Supports Bluetooth 5.3, backward compatible with 4.2/4.1/4.0. Operating channel center frequency: 2402–2480 MHz.
 
-**BLE transmitter (1Mbps)**: max power 19dBm, power control range -20 to 19dBm, max/min modulation index 250kHz/210kHz typ, initial carrier frequency tolerance ±20kHz typ.
+**BLE transmitter (1Mbps)**: max power 19dBm, power control range -20 to 19dBm, Δf1avg = 250kHz typ and Δf2max = 210kHz typ. These are frequency-deviation values (the datasheet labels the entries maximum/minimum modulation), not a dimensionless modulation index. Initial carrier frequency tolerance is ±20kHz typ.
 
 **BLE receiver (1Mbps)**: sensitivity -100dBm (dirty off) / -99.3dBm (dirty on) @30.8% PER, co-channel C/I 7dB.
 
@@ -331,7 +336,7 @@ Use these as the starting point for a production schematic and adapt pin selecti
 | 10 | Pins marked `#GPADC_CHx` in the pin table support analog input in the 0–3.3V range. |
 | 11 | Pins marked `PAxx_TIM` in the pin table support PWM output. |
 | 12 | PA34 supports a 10-second long-press reset, active high; add a 10kΩ pull-down resistor in the design. |
-| 13 | Reserve ESD protection components for the battery interface, test points, and similar external-facing signals. |
+| 13 | Reserve ESD protection components for the battery and touch-panel (TP) interfaces, and other externally exposed interfaces where needed. |
 | 14 | PA18/PA19, multiplexed as DBG_UART for programming/debug, should each have a 100Ω series resistor. |
 
 </div>
@@ -342,12 +347,12 @@ Use these as the starting point for a production schematic and adapt pin selecti
 
 The module measures 27.9 × 18.0 × 3.1mm.
 
-!!! info "Figure 10-1: Module Dimensions — Top, Side, and Bottom Views"
+!!! info "Figure 10.1-1: Module Dimensions — Top, Side, and Bottom Views"
     See Figure 8-1 in the official datasheet for this diagram — not reproduced in this guide.
 
 ### 10.2 Recommended PCB Footprint
 
-!!! info "Figure 10-2: Recommended PCB Footprint"
+!!! info "Figure 10.2-1: Recommended PCB Footprint"
     See Figure 8-2 in the official datasheet for this diagram — not reproduced in this guide.
 
 ### 10.3 External Antenna Connector
@@ -358,7 +363,7 @@ For SKUs supporting an external antenna, the module uses a first-generation conn
 - I-PEX MHFI connectors
 - Amphenol AMC connectors
 
-!!! info "Figure 10-3: External Antenna Connector Dimensions"
+!!! info "Figure 10.3-1: External Antenna Connector Dimensions"
     See Figure 8-3 in the official datasheet for this diagram — not reproduced in this guide.
 
 ### 10.4 Module Placement in PCB Design
@@ -369,12 +374,12 @@ Recommended practice:
 
 - Extend the module's antenna area past the host board edge, with the feed point close to the board edge.
 
-!!! info "Figure 10-4: Recommended Module Placement"
+!!! info "Figure 10.4-1: Recommended Module Placement"
     See Figure 8-4 in the official datasheet for this diagram — not reproduced in this guide.
 
 - If the antenna cannot extend past the board edge, provide a keepout zone of at least 15mm around the PCB antenna — no copper pour, traces, or components — and cut away the host board material beneath the antenna where possible.
 
-!!! info "Figure 10-5: Antenna Keepout Zone"
+!!! info "Figure 10.4-2: Antenna Keepout Zone"
     See Figure 8-5 in the official datasheet for this diagram — not reproduced in this guide.
 
 - Keep the antenna feed point close to the board edge even in the keepout-zone layout.
@@ -386,7 +391,7 @@ Recommended practice:
 
 - Store products sealed in a moisture barrier bag (MBB) at <40°C / 90%RH, non-condensing.
 - Module moisture sensitivity level (MSL): 3.
-- After opening the vacuum bag, use the module within 168 hours at 25±5°C / 60%RH; otherwise it must be baked before a second reflow pass.
+- After opening the vacuum bag, use the module within 168 hours at 25±5°C / 60%RH; otherwise, bake it before returning it to the production line.
 
 ### 11.2 Electrostatic Discharge (ESD)
 
@@ -397,7 +402,7 @@ Recommended practice:
 
 The module is recommended to go through reflow only once.
 
-!!! info "Figure 11-1: Recommended Reflow Temperature Profile"
+!!! info "Figure 11.3-1: Recommended Reflow Temperature Profile"
     See Figure 9-1 in the official datasheet for this diagram — not reproduced in this guide.
 
 ### 11.4 Ultrasonic Vibration

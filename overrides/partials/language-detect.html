@@ -1,53 +1,34 @@
 {#-
-  First-visit automatic language detection: redirect a visitor to the
-  browser-language-matching build (en <-> zh) if it differs from the
-  language they landed on. Automatic detection is deliberately not saved:
-  a later visit can reflect a changed browser language. A language chosen
-  with the header switcher is saved separately as an explicit preference
-  (see partials/alternate.html) and always takes precedence.
-
-  Only ever rendered when more than one language is actually configured
-  (see the guard in main.html's extrahead block), so this is a total
-  no-op on any single-language build -- in particular the public
-  uforge-site sync, which strips the "zh" entry from
-  project.extra.alternate (see tools/sync-public-release.sh), and the
-  offline package, which never includes this partial at all (same
-  `not offline` guard as the header switcher's own script).
-
-  Placed in <head> via extrahead so it runs and can redirect before the
-  page body paints, minimizing a flash of the wrong language. Uses
-  window.location.replace (not .href) so the wrong-language page never
-  enters browser history -- pressing back from the redirected page goes
-  to wherever the visitor came from, not back to the auto-redirect.
+  Redirect a first-time visitor to the matching configured locale. A manual
+  selection in the header takes precedence and is retained in local storage.
+  This partial is only included for multi-language builds.
 -#}
 {% set current_language = config.theme.language | d("en", true) %}
-{% set zh_target = "/zh/" ~ page.url %}
-{% set en_target = "/" ~ page.url %}
+{% set configured_languages = config.extra.alternate | map(attribute="lang") | list %}
 <script>
   (function () {
     try {
       var current = {{ current_language | tojson }};
-      var MANUAL_PREFERENCE_KEY = "uf-lang-manual-preference";
-      var manualPreference = localStorage.getItem(MANUAL_PREFERENCE_KEY);
-      var target;
+      var configured = {{ configured_languages | tojson }};
+      var prefixes = { en: "", zh: "/zh", ja: "/ja", es: "/es", de: "/de", fr: "/fr", pt: "/pt", ru: "/ru" };
+      var pageUrl = {{ page.url | tojson }};
+      var manual = localStorage.getItem("uf-lang-manual-preference");
 
-      if (manualPreference === "en" || manualPreference === "zh") {
-        if (manualPreference === current) return;
-        target = manualPreference === "zh" ? {{ zh_target | tojson }} : {{ en_target | tojson }};
-        window.location.replace(target + window.location.search + window.location.hash);
+      function targetFor(language) {
+        return (prefixes[language] || "") + "/" + pageUrl;
+      }
+
+      if (configured.indexOf(manual) !== -1) {
+        if (manual !== current) window.location.replace(targetFor(manual) + window.location.search + window.location.hash);
         return;
       }
 
-      var browserLang = (navigator.language || (navigator.languages && navigator.languages[0]) || "").toLowerCase();
-      var preferred = browserLang.indexOf("zh") === 0 ? "zh" : "en";
-
-      if (preferred === current) return;
-
-      target = preferred === "zh" ? {{ zh_target | tojson }} : {{ en_target | tojson }};
-      window.location.replace(target + window.location.search + window.location.hash);
+      var browser = (navigator.language || (navigator.languages && navigator.languages[0]) || "").toLowerCase();
+      var preferred = browser.split("-")[0];
+      if (configured.indexOf(preferred) === -1) preferred = "en";
+      if (preferred !== current) window.location.replace(targetFor(preferred) + window.location.search + window.location.hash);
     } catch (e) {
-      // localStorage unavailable (private-browsing lockdown, disabled
-      // storage, etc.) -- fail open and just show the page as built.
+      // Fail open when local storage or browser language information is unavailable.
     }
   })();
 </script>

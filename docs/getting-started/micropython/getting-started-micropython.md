@@ -6,7 +6,7 @@ tags:
     - MicroPython
 ---
 
-# MicroPython
+# MicroPython { #micropython }
 
 MicroPython is not yet a verified getting-started path for SF32. No official board-specific firmware image, flash procedure, or REPL configuration is currently documented in the checked SiFli and OpenSiFli sources.
 
@@ -17,12 +17,6 @@ The [MicroPython Status](../../develop/platforms/micropython/status.md) page tra
 !!! warning "No verified MicroPython tutorial yet"
     A usable SF32 MicroPython guide needs an exact board-and-memory image, flash and recovery commands, REPL port and baud rate, filesystem behavior, and an honest peripheral-support matrix. Until those artifacts exist, this page intentionally has no installation steps.
 
-## What SiFli Should Publish
+## What a Verified Tutorial Needs { #what-sifli-should-publish }
 
-- Board-specific firmware images with chip, flash, PSRAM, and board-revision compatibility.
-- Tested flash, erase, and recovery commands for Windows, macOS, and Linux.
-- REPL port, baud rate, expected banner, and `mpremote` or equivalent workflow.
-- A maintained `machine` API and peripheral-support matrix, including display, Bluetooth, storage, USB, and low-power limits.
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.
+Before following a future SF32 MicroPython tutorial, confirm that it identifies a compatible board-specific image, tested flash and recovery commands, REPL port and baud rate, filesystem behavior, and a maintained peripheral-support matrix. Until those details are available in the [status page](../../develop/platforms/micropython/status.md), use the SiFli-SDK path above for first bring-up.

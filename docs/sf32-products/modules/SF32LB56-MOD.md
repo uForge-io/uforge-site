@@ -1,6 +1,6 @@
 ---
 icon: lucide/card-sim
-description: "SF32LB56-MOD: general-purpose Bluetooth 6.3 MCU module family based on SF32LB56xV for products that need richer graphics, audio, and storage with lower RF-integration risk."
+description: "SF32LB56-MOD: general-purpose low-power Bluetooth 5.3 MCU module family based on SF32LB56xV, with 4 MB + 8 MB of co-packaged OPI-PSRAM and SKU-dependent Flash variants."
 tags:
   - Hardware
   - Module
@@ -10,32 +10,32 @@ tags:
 
 ## Overview
 
-SF32LB56-MOD is SiFli's general-purpose low-power Bluetooth MCU module family based on the SF32LB56xV platform. It combines dual-core MCU processing, Bluetooth 6.3 with BLE Audio support, graphics acceleration, audio interfaces, external-memory options, and module-level RF integration in one production-ready form factor.
+SF32LB56-MOD is SiFli's general-purpose, low-power Bluetooth MCU module family based on the SF32LB56xV platform. The standard configuration uses an SF32LB566VCB36 with 4 MB + 8 MB of co-packaged OPI-PSRAM and 1 MB of QSPI-NOR. The module combines dual-core MCU processing, Bluetooth 5.3 with BLE Audio support, graphics acceleration, audio interfaces, SKU-dependent Flash variants, and an integrated RF path in a compact form factor.
 
-Compared with a chip-down SF32LB56xV design, the module reduces RF layout, antenna matching, crystal placement, and high-speed memory integration risk. It is a strong fit for products that need more display, audio, sensing, and local-processing headroom than a simple Bluetooth module can provide, while still keeping the hardware path compact and production-friendly.
+The module integrates the RF path, crystal, and high-speed memory, and supports either an on-module PCB antenna or an external antenna connected through an IPEX-compatible connector. Validate RF performance in the finished product, and design the carrier board around the selected antenna arrangement. The module's interfaces and memory configurations support products with display, audio, sensing, and local-processing requirements.
 
-According to the module technical specification, the family is offered in multiple memory configurations, all in an 18.0 × 32.9 × 3.1mm package rated for -40 to 85°C operation. Depending on the selected SKU, the RF path uses either an on-board PCB antenna or an external antenna through an IPEX-compatible connector.
+The family is available in multiple memory configurations. All variants measure 18.0 × 32.9 × 3.1 mm and are rated for operation from -40 to 85 °C. The [SF32LB56-MOD hardware design guide](../../hardware/chip-guides/SF32LB56-MOD_hardware_design_guide.md), based on DS5602 V0.3, provides further antenna and layout details. The SiFli module-model guide lists the memory configurations but does not map antenna options to SKUs. Confirm the antenna arrangement of the selected module with SiFli before finalizing the carrier-board layout.
 
 !!! info
-    For the underlying chip family, architecture, and peripheral set, see [SF32LB56x](../chips/SF32LB56x.md). This page focuses on module-specific integration, memory variants, power rails, and product fit.
+    The compute, graphics, and audio features below describe the SF32LB56xV platform integrated in the module; external availability depends on the module pinout and pin multiplexing. For the chip family's architecture and full peripheral set, see [SF32LB56x](../chips/SF32LB56x.md). This page focuses on module integration, SKU-dependent memory, power rails, and product fit.
 
 ## Applications
 
-**SF32LB56-MOD is recommended for** products that need Bluetooth, display, audio, sensing, and local intelligence in a compact module form factor, including:
+SiFli lists the following application areas for SF32LB56-MOD:
 
-- Higher-end smartwatches, smart bands, and wearable medical devices
-- Smart-home controllers and control panels
-- Voice-command and audio-enabled products
-- E-bike dashboards and vehicle accessories
-- Smart locks, connected appliances, and graphical HMI panels
-- Industrial sensor centers, monitoring terminals, and compact instruments
+- Wearables: high-end smartwatches, smart bands, wearable medical devices, and fitness equipment
+- Industrial: cost-effective display solutions, graphical HMI, industrial sensor-control centers, equipment monitoring, and instruments
+- Automotive: electric-vehicle central-control devices, car keys, and wearable vehicle remotes
+- Home automation: small and medium-sized smart appliances and smart locks
+- General: low-power sensor hubs and Bluetooth Mesh
+- AIoT examples: voice-command recognition, smart-home devices, smart keys, and smart control panels
 
-Choose SF32LB56-MOD when the project wants one or more of these advantages:
+Consider SF32LB56-MOD when the design needs one or more of these capabilities:
 
-- Faster integration than a chip-down SF32LB56xV board
-- Lower RF and antenna risk
-- Easier memory-configuration selection by module SKU
-- Better fit for products that need more UI, audio, and storage flexibility than entry-level modules
+- Module-level integration of the RF path, antenna option, crystal, and high-speed memory
+- Memory configuration choices across the listed module SKUs
+- Interfaces for display, audio, sensing, and local processing
+- Compact module dimensions for space-constrained products
 
 ## Development Resources
 
@@ -63,19 +63,19 @@ Choose SF32LB56-MOD when the project wants one or more of these advantages:
 
 ### Compute and Memory
 
-- HCPU: Arm Cortex-M33 STAR-MC1, up to 240MHz, up to 370 DMIPS / 984 EEMBC CoreMark
-- LCPU: Arm Cortex-M33 STAR-MC1, up to 96MHz, up to 148 DMIPS / 394 EEMBC CoreMark
-- HCPU memory system: 32KB + 16KB I/D-cache and 800KB SRAM, including 128KB retention SRAM
-- LCPU memory system: 16KB + 8KB I/D-cache and 160KB retention SRAM
+- HCPU: Arm Cortex-M33 STAR-MC1, up to 240 MHz, up to 370 DMIPS / 984 EEMBC CoreMark
+- LCPU: Arm Cortex-M33 STAR-MC1, up to 96 MHz, up to 148 DMIPS / 394 EEMBC CoreMark
+- HCPU memory system: 32 KB instruction cache, 16 KB data cache, and 800 KB SRAM, including 128 KB retention SRAM
+- LCPU memory system: 16 KB instruction cache, 8 KB data cache, and 160 KB retention SRAM
 - Single-precision FPU and MPU on both cores
 - Neural-network matrix accelerator and signal-processing accelerators for richer local workloads
 
 ### Wireless Connectivity
 
-- Dual-mode Bluetooth 6.3 with BLE Audio support
-- Sensitivity: -100dBm BLE 1Mbps, -96.3dBm BR, -95.5dBm EDR2, -88.5dBm EDR3
-- Maximum transmit power: 19dBm for BR/BLE, 13dBm for EDR2/EDR3
-- BR peak receive current: 2.2mA at 3.3V
+- Dual-mode Bluetooth 5.3 with BLE Audio support
+- Sensitivity: -100 dBm BLE 1 Mbps, -96.3 dBm BR, -95.5 dBm EDR2, -88.5 dBm EDR3
+- Maximum transmit power: 19 dBm for BR/BLE, 13 dBm for EDR2/EDR3
+- BR peak receive current: 2.2 mA at 3.3 V
 
 ### Graphics and Display
 
@@ -84,15 +84,17 @@ Choose SF32LB56-MOD when the project wants one or more of these advantages:
 - Graphics workloads up to 1024 × 1024
 - eZip 2.0 lossless graphics decompression and eZip-A animation support
 - LCD support for 8080, SPI, Dual-SPI, Quad-SPI, DPI/RGB, and JDI
-- TurboPixel: extDMA fixed-ratio lossy final-framebuffer compression and display-controller decompression, reducing PSRAM bandwidth and capacity
+- TurboPixel: extDMA compresses the final framebuffer using fixed-ratio lossy compression, and the display controller decompresses it. This reduces the PSRAM bandwidth and framebuffer capacity required by a given workload.
 
 ### Audio
 
-- 1x 24-bit audio DAC
-- 1x 24-bit Sigma-Delta audio ADC
-- 2x PDM digital microphone inputs
-- 1x I2S interface
+- 1 × 24-bit audio DAC
+- 1 × 24-bit Sigma-Delta audio ADC
+- 2 × PDM interfaces (PDM1/PDM2), each supporting left/right microphone channels
+- 1 × I2S interface
 - Audio sample-rate conversion and EQ acceleration
+
+Each PDM interface can serve up to two digital microphones, so the two interfaces can support up to four microphones in total. PDM interface count is not microphone count; actual connectivity depends on pin multiplexing and board routing.
 
 ### Memory and Module Variants
 
@@ -100,23 +102,27 @@ Choose SF32LB56-MOD when the project wants one or more of these advantages:
 
 <div align="center" markdown>
 
-| Module Code | Main Flash | PSRAM | Backup Flash | Temperature | Dimensions |
+| Module Code | Flash by SKU | PSRAM | Standard Flash | Temperature | Dimensions |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB56-MOD-N16R12N1 | 16MB QSPI-NOR | 4+8MB OPI-PSRAM | 1MB QSPI-NOR | -40 to 85°C | 18.0 × 32.9 × 3.1mm |
-| SF32LB56-MOD-A128R12N1 | 128MB QSPI-NAND | 4+8MB OPI-PSRAM | 1MB QSPI-NOR | -40 to 85°C | 18.0 × 32.9 × 3.1mm |
-| SF32LB56-MOD-D128R12N1 | 128MB SD-NAND | 4+8MB OPI-PSRAM | 1MB QSPI-NOR | -40 to 85°C | 18.0 × 32.9 × 3.1mm |
+| SF32LB56-MOD-N16R12N1 | 16 MB QSPI-NOR | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40 to 85 °C | 18.0 × 32.9 × 3.1 mm |
+| SF32LB56-MOD-A128R12N1 | 128 MB QSPI-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40 to 85 °C | 18.0 × 32.9 × 3.1 mm |
+| SF32LB56-MOD-D128R12N1 | 128 MB SD-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40 to 85 °C | 18.0 × 32.9 × 3.1 mm |
 
 </div>
 
+The [SiFli Module Model Guide](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) lists these three configurations and notes that other configurations can be customized. Confirm current SKU availability and memory configuration with SiFli.
+
+SiFli identifies SF32LB566VCB36 with 4 MB + 8 MB OPI-PSRAM and 1 MB QSPI-NOR as the standard configuration; this matches the N16R12N1 memory configuration. The model guide does not assign a chip part number to A128R12N1 or D128R12N1 individually; confirm the exact chip part number for either SKU with SiFli.
+
 ### Power and I/O
 
-- VDD_3V3 recommended operating range: 2.97–3.6V
-- VDD_1V8 recommended operating range: 1.7–1.95V
-- VDDIO recommended operating range: 1.7–3.6V
+- VDD_3V3 recommended operating range: 2.97–3.6 V
+- VDD_1V8 recommended operating range: 1.7–1.95 V
+- VDDIO recommended operating range: 1.7–3.6 V
 - VDD_3V3, VDD_1V8, and VDDIO must power up together
-- PA00–PA11 interface level is fixed at 3.3V and does not follow VDDIO
+- PA00–PA11 interface level is fixed at 3.3 V and does not follow VDDIO
 - 89-pin module interface
-- Operating temperature: -40 to 85°C
+- Operating temperature: -40 to 85 °C
 
 ## Related Products
 
@@ -126,8 +132,8 @@ Built on [SF32LB56x](../chips/SF32LB56x.md), specifically the SF32LB56xV platfor
 
 ### Development Kits
 
-Use the selected SF32LB56x bring-up platform together with the module SKU and intended software image, because memory type and antenna configuration affect firmware layout, RF verification, and production test planning.
+The [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) is a practical platform for validating display, audio, storage, and peripheral drivers. Its documentation lists N16R12N1 and A128R12N1 configurations; verify the module marking and board revision before using its memory setup as a design baseline.
 
 ### Reference Products
 
-Typical end products include higher-end smartwatches, connected HMI panels, smart-home controllers, voice-capable accessories, industrial monitoring terminals, and Bluetooth sensor hubs.
+SiFli's documented application areas include wearables, industrial display and HMI equipment, vehicle-control products, smart-home appliances, low-power sensor hubs, and Bluetooth Mesh products.

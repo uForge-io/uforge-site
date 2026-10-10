@@ -4,11 +4,13 @@ description: "Hardware design guide for the SF32LB56x MCU: power system, clock g
 tags:
     - Hardware
     - Chip
+hide:
+    - navigation
 ---
 
-# SF32LB56x Hardware Design Guide
+# SF32LB56x Hardware Design Guide { #sf32lb56x-hardware-design-guide }
 
-## 1. Introduction
+## 1. Introduction { #1-introduction }
 
 This hardware design guide provides recommendations and reference material for products based on the SF32LB56x family of graphics-optimized AIoT microcontrollers. It is intended for hardware engineers, PCB designers, and product developers building smartwatches, connected HMI systems, medical and healthcare devices, industrial handhelds, portable instruments, and advanced e-bike or e-scooter displays.
 
@@ -16,7 +18,7 @@ The guide covers the complete hardware development process for both SF32LB56xU a
 
 This document assumes a basic understanding of embedded hardware design, schematic capture, and PCB layout. It complements the SF32LB56xU and SF32LB56xV hardware application notes, datasheets, user manuals, reference designs, and SiFli Approved Vendor List, which remain the authority for electrical specifications, pin multiplexing, package dimensions, component qualification, and production limits.
 
-## 2. Development Resources
+## 2. Development Resources { #2-development-resources }
 
 [SF32LB56xU Hardware Application Note]: https://wiki.sifli.com/en/hardware/SF32LB56xU-HW-Application.html
 [SF32LB56xV Hardware Application Note]: https://wiki.sifli.com/en/hardware/SF32LB56xV-HW-Application.html
@@ -35,16 +37,17 @@ This document assumes a basic understanding of embedded hardware design, schemat
 - :fontawesome-brands-github: __[SF32LB56xV Hardware Application Source]__
 - :fontawesome-solid-file-excel: __[SiFli Approved Vendor List (AVL)]__
 - :fontawesome-solid-cart-shopping: __[Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[Buy Dev Kits]__
 
 </div>
 
-## 3. Device Overview
+## 3. Device Overview { #3-device-overview }
 
-### 3.1. Architecture
+### 3.1. Architecture { #31-architecture }
 
 SF32LB56x targets richer display and HMI products than BLE-only sensor nodes. The official U and V hardware application notes share the same engineering themes: PMIC-based power distribution, 48 MHz and 32.768 kHz crystals, RF design, display interface selection, storage interface selection, audio, PBR pins, sensors, UART/I2C/GPTIM planning, debug/flashing, and production crystal calibration.
 
-### 3.2. Variants and Packages
+### 3.2. Variants and Packages { #32-variants-and-packages }
 
 <div align="center"><em>Table 3.2-1: SF32LB56x Package Variants</em></div>
 
@@ -67,7 +70,7 @@ The U variant uses a QFN68L package. The V variant uses a WBBGA175 package and r
 
 <div align="center"><em>Figure 3.2-2: SF32LB56xV WBBGA175 Pin Distribution</em></div>
 
-### 3.3. Major Hardware Features
+### 3.3. Major Hardware Features { #33-major-hardware-features }
 
 - PMIC-centered power distribution using SF30147C examples.
 - 48 MHz and 32.768 kHz crystal requirements and recommended crystal models.
@@ -76,7 +79,7 @@ The U variant uses a QFN68L package. The V variant uses a WBBGA175 package and r
 - External memory and boot storage options, including SDIO/eMMC/SD NAND style interfaces.
 - Buttons, vibration motor, audio interface, PBR pins, sensors, UART/I2C, GPTIM, debug/flashing, and calibration.
 
-### 3.4. Typical Applications
+### 3.4. Typical Applications { #34-typical-applications }
 
 ![Figure 3.4-1: SF32LB56xU Smart Watch Application Block Diagram](../../sf32-products/chips/assets/56x/sf32lb56xU-watch-app-diagram.png){ width="100%" loading="lazy" }
 
@@ -88,9 +91,9 @@ The U variant uses a QFN68L package. The V variant uses a WBBGA175 package and r
 
 SF32LB56x fits smartwatches, connected HMI panels, healthcare products, industrial handhelds, portable instruments, and advanced display products that need Bluetooth, audio, sensors, external memory, and richer UI capability.
 
-## 4. Design at a Glance
+## 4. Design at a Glance { #4-design-at-a-glance }
 
-### 4.1. Engineering Summary
+### 4.1. Engineering Summary { #41-engineering-summary }
 
 <div align="center"><em>Table 4.1-1: SF32LB56x Design Summary</em></div>
 
@@ -106,7 +109,7 @@ SF32LB56x fits smartwatches, connected HMI panels, healthcare products, industri
 
 </div>
 
-### 4.2. Hardware Design Flow
+### 4.2. Hardware Design Flow { #42-hardware-design-flow }
 
 1. Select U or V variant, package, display interface, storage option, and target PCB process.
 2. Define PMIC power distribution, processor rails, reset, charging, and low-power control.
@@ -115,11 +118,11 @@ SF32LB56x fits smartwatches, connected HMI panels, healthcare products, industri
 5. Review PCB fanout, stack-up, impedance, RF, clocks, USB/SDIO, audio, DC-DC, and ESD.
 6. Run the design checklist before schematic freeze, layout release, EVT, and production fixture release.
 
-### 4.3. Review Evidence Pack
+### 4.3. Review Evidence Pack { #43-review-evidence-pack }
 
 Before EVT, archive the U/V source document version, datasheet/user-manual versions, schematic PDF, PCB stack-up, PCB process capability, DRC/ERC reports, PMIC configuration, power tree, boot/storage configuration, display routing screenshots, RF/crystal layout screenshots, audio/analog screenshots, and production flashing/calibration plan.
 
-## Using the Checklists
+### 4.4. Using the Checklists { #using-the-checklists }
 
 This guide includes two levels of checklist coverage. The short checklist in Section 7 gives the highest-risk items for a quick engineering self-check. The [Schematic Checklist](SF32LB56x_schematic_checklist.md) (Section 5.8) and Section 6.3 of the [PCB Layout Guidelines](SF32LB56x_pcb_layout.md) reproduce SiFli's complete, item-by-item *SF32LB56x Schematic & PCB Checklist* (V1.0, 2026-01-21), published alongside the hardware design materials on [SiFli's wiki][SiFli Chip Hardware Design Guide Index (Wiki)], spanning the SF32LB56xU family, the SF32LB56xV family, and the SS6700A variant.
 
@@ -134,7 +137,7 @@ For best results, treat the checklist as a sign-off record rather than a reading
 3. Cross-check display, storage, wake-up, and low-power rows against the matching hardware design guide sections.
 4. Record package-specific assumptions — especially 56xU vs. 56xV, QFN vs. WBBGA, DSI vs. SPI display, and SD2/MPI3 storage usage — in the review notes.
 
-<div align="center"><em>Review Record Template</em></div>
+<div align="center"><em>Table 4.4-1: Review Record Template</em></div>
 
 <div align="center" markdown>
 
@@ -150,7 +153,7 @@ For best results, treat the checklist as a sign-off record rather than a reading
 
 </div>
 
-<div align="center"><em>Checklist Document Version History</em></div>
+<div align="center"><em>Table 4.4-2: Checklist Document Version History</em></div>
 
 <div align="center" markdown>
 
@@ -162,7 +165,7 @@ For best results, treat the checklist as a sign-off record rather than a reading
 
 [SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## Continue the Design Guide
+## Continue the Design Guide { #continue-the-design-guide }
 
 The full guide continues across the pages below. Each covers one stage of the design process and can be reached from here.
 

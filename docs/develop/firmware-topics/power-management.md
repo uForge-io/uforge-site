@@ -1,18 +1,18 @@
 ---
 icon: lucide/battery-charging
-description: "Measure and tune SF32 power consumption across clocking, sleep modes, display, Bluetooth, and sensor activity to turn a prototype into a battery-ready product."
+description: "Measure and tune SF32 power consumption across clock configuration, sleep modes, display operation, Bluetooth connection intervals, and sensor activity to turn a prototype into a battery-ready product."
 tags:
     - Develop
     - Power
 ---
 
-# Power Management
+# Power Management { #power-management }
 
-Power management turns a working prototype into a wearable-ready product. On SF32, power work spans clocking, sleep modes, display behavior, Bluetooth intervals, sensor interrupts, and application architecture.
+Power management turns a working prototype into a wearable-ready product. On SF32, power work spans clock configuration, sleep modes, display behavior, Bluetooth connection intervals, sensor interrupts, and application architecture.
 
 Do not optimize power from isolated code snippets. Measure product scenarios: boot, idle, connected idle, display on, audio active, sensor wake, OTA, and shutdown.
 
-## Practical Workflow
+## Practical Workflow { #practical-workflow }
 
 1. Measure the unmodified SDK example.
 2. Enable one subsystem at a time.
@@ -20,14 +20,14 @@ Do not optimize power from isolated code snippets. Measure product scenarios: bo
 4. Use interrupt-driven wakeups instead of polling.
 5. Record current draw by mode and by product scenario.
 
-## Useful Starting Points
+## Useful Starting Points { #useful-starting-points }
 
 - SDK power examples.
 - CPU usage profiling.
 - RT-Thread shell inspection.
 - Board-level current measurement.
 
-## Measurement Notes
+## Measurement Notes { #measurement-notes }
 
 Record every measurement with:
 
@@ -40,7 +40,7 @@ Record every measurement with:
 - Logging level.
 - Average current, peak current, and measurement window.
 
-## Common Power Problems
+## Common Power Problems { #common-power-problems }
 
 <div align="center"><em>Table: Common Power Problems</em></div>
 
@@ -51,10 +51,7 @@ Record every measurement with:
 | Idle current too high | Polling loop, logging, display rail, or peripheral clock left on. |
 | Sleep entry fails | Active timer, open device, pending work, or unhandled wake source. |
 | Bluetooth current spikes | Connection interval, scan window, audio path, or retransmissions. |
-| Display dominates battery life | Backlight/AMOLED content, refresh policy, or partial update strategy. |
+| Display dominates power consumption | LCD backlight power draw, on-screen AMOLED content, refresh policy, or partial-update strategy. |
 | Measurements vary wildly | Test setup, battery state, USB power path, or logging load changed. |
 
 </div>
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

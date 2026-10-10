@@ -21,7 +21,7 @@ The SF32 Products section helps you move from a product idea to an implementable
 |:----------|:-----------|:--------------------|
 | Explore the SF32 family | [Understand SF32](family/SF32_family.md) | A family-level comparison and the part-number rules needed to interpret an orderable device. |
 | Turn a concept into a plan | [Plan a Product](family/product-planning.md) | A staged path from requirements and device direction through board validation and production preparation. |
-| Select a chip, module, or board | [SF32 Product Selector](product-selector.md) | An interactive shortlist tool, selection factors, and product introductions for the available hardware. |
+| Select a chip or module | [SF32 Product Selector](product-selector.md) | An interactive shortlist tool for chips and modules, selection factors, and product introductions. Development boards are catalogued separately for validation. |
 | Reuse a technical baseline | [Reference Designs](../hardware/reference-designs/reference-designs.md) | Reproducible hardware and software starting points, their validation focus, and their reuse boundaries. |
 | Release a board design | [Design for Production](../hardware/design-for-production.md) | Design guides, checklists, interface definitions, approved components, and official EDA libraries. |
 
@@ -44,6 +44,3 @@ Already know the kind of hardware you need? Go straight to the relevant catalogu
 - [Development Boards](devkits/SF32LB52-DevKit-LCD.md) for supported hardware used to validate software and peripherals.
 
 Hardware documentation defines the physical product path. For SDK setup, examples, toolchains, and software-platform support, continue to [Develop](../develop/index.md).
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

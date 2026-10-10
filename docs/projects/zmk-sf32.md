@@ -8,9 +8,9 @@ tags:
     - Keyboards
 ---
 
-# ZMK Keyboard Firmware on SF32
+# ZMK Keyboard Firmware on SF32 { #zmk-keyboard-firmware-on-sf32 }
 
-## What Is ZMK on SF32?
+## What Is ZMK on SF32? { #what-is-zmk-on-sf32 }
 
 [ZMK Firmware](https://zmk.dev/) is an MIT-licensed keyboard firmware built on Zephyr. Upstream ZMK provides the application model used by many wired, wireless, and split keyboards: matrix scanning, keymaps and layers, key behaviors, USB and Bluetooth HID, persistent settings, and extensible board/shield definitions.
 
@@ -25,13 +25,13 @@ tags:
 
 This is a development port, not a tagged SF32 ZMK product release. The fork's top-level README remains the generic upstream ZMK README and does not provide an SF32-specific quick start. Treat the board, shield, manifest, source, and commit as the executable reference, and require your own clean-build, download, functional, and recovery evidence before adapting it.
 
-## Why the SF32 Implementation?
+## Why the SF32 Implementation? { #why-the-sf32-implementation }
 
 The SF32 port demonstrates how ZMK's keyboard model can run on SF32LB52 while retaining Zephyr's devicetree, Kconfig, `west`, keymap, shield, and split-keyboard conventions. The `urchin_sf32lb52` reference divides a 38-key layout across two halves. Its left configuration is the ZMK split central, enables CherryUSB and ZMK Studio, and can present USB HID to a host; the right configuration is the split peripheral. Both halves enable ZMK BLE.
 
 That makes the fork useful for evaluating a wireless split keyboard, USB/Bluetooth desktop input device, programmable macro pad, or custom human-interface product on SF32. The tradeoff is dependency maturity: the fork's `west` manifest pins a custom Zephyr branch (`v4.3+sf32-zmk_fixes`), a fixed SiFli HAL revision, and a custom CherryUSB `zephyr-adapt` branch. These are part of the port's compatibility boundary and cannot be replaced with upstream “latest” revisions without a full migration and regression pass.
 
-## Outcome, Scope, and Entry Criteria
+## Outcome, Scope, and Entry Criteria { #outcome-scope-and-entry-criteria }
 
 **Outcome:** build and download version-locked left and right Urchin images, validate the complete key matrix, layers, USB HID, BLE split and host paths, settings persistence, ZMK Studio boundary, and recovery; then make one controlled keymap or hardware change with repeatable evidence.
 
@@ -62,7 +62,38 @@ Before starting, have:
 
 </div>
 
-## Choose a Supported Baseline
+## Hardware and Software Specifications { #hardware-and-software-specifications }
+
+### Hardware Specification { #hardware-specification }
+
+<div align="center"><em>Table: ZMK on SF32 Hardware Specification</em></div>
+
+<div align="center" markdown>
+
+| Component | Required specification | Role | Status | Where to get it | Compatibility and substitution notes |
+|:----------|:-----------------------|:-----|:-------|:----------------|:-------------------------------------|
+| Two SF32LB52-DevKit-LCD boards | Board target `sf32lb52_devkit_lcd/sf32lb525uc6/zmk`; record both board revisions | Central and peripheral halves for the documented split baseline | Required for split tests | [μForge board reference](../sf32-products/devkits/SF32LB52-DevKit-LCD.md); [OpenSiFli board variant at the reviewed commit](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/sifli/sf32lb52_devkit_lcd) | The central and peripheral images use different roles/configurations; preserve independent recovery for both boards |
+| Urchin split keyboard fixture and interconnect | 38-key matrix wired to the `urchin_sf32lb52_left` and `urchin_sf32lb52_right` overlays | Exercises key matrix, split transport, and role behavior | Required for full split validation | [Urchin shield at the reviewed commit](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/shields/urchin_sf32lb52) | The overlays are the wiring reference, not a guarantee for a different PCB or arbitrary shield |
+| USB/BLE host and data cables | USB host for central half; Bluetooth HID host; separately accessible power/download path for peripheral half | Host connection, input validation, logs, and recovery | Required | [OpenSiFli ZMK fork](https://github.com/OpenSiFli/zmk) | Record host OS, BLE bond state, cable/port, and recovery connection for each half |
+
+</div>
+
+### Software Specification { #software-specification }
+
+<div align="center"><em>Table: ZMK on SF32 Software Specification</em></div>
+
+<div align="center" markdown>
+
+| Package or service | Required version or revision | Role | Status | Where to get it | Compatibility and update notes |
+|:-------------------|:-----------------------------|:-----|:-------|:----------------|:-------------------------------|
+| OpenSiFli/zmk | Reviewed commit [`fd4d5843065f`](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e) | SF32 board port, ZMK application, and Urchin configuration | Required | [Repository at reviewed commit](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e) | This is not a tagged SF32 ZMK release; do not substitute upstream ZMK without porting and validation |
+| West manifest dependencies | Exact revisions resolved by `app/west.yml` at the pinned fork commit | Zephyr, `hal_sifli`, CherryUSB, and other modules | Required | [Pinned west manifest](https://github.com/OpenSiFli/zmk/blob/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/west.yml) | Run and retain `west list`; do not update dependencies independently |
+| Zephyr `west` toolchain and build tools | Versions compatible with the pinned manifest; record the installed versions and host OS | Configure, build, and produce left/right images | Required | [ZMK documentation](https://zmk.dev/docs); [Zephyr documentation](https://docs.zephyrproject.org/) | Rebuild both images from a clean workspace and preserve their separate build directories and hashes |
+| ZMK Studio host | Compatible host/application version, if Studio is enabled in the selected configuration | Optional keymap/configuration path | Optional | [ZMK Studio documentation](https://zmk.dev/docs/features/studio) | The reviewed configuration exposes Studio on the left/central half; validate authorization and rollback before product use |
+
+</div>
+
+## Choose a Supported Baseline { #choose-a-supported-baseline }
 
 The reviewed OpenSiFli baseline is commit `fd4d5843065f` from 2026-05-27. It includes the Urchin shield and board-configuration update available at that commit but is not a tagged SF32 ZMK release. Pin this commit for initial reproduction, or record and review a newer commit explicitly.
 
@@ -104,7 +135,7 @@ west build -s app -p always -d build-right \
 
 Record the final `west list`, generated Kconfig and devicetree, artifact hashes, image-to-half labels, and actual download procedure. Do not begin split testing until each board can be recovered independently.
 
-## Delivery Map
+## Delivery Map { #delivery-map }
 
 <div align="center"><em>Table: ZMK on SF32 Delivery Map</em></div>
 
@@ -120,7 +151,7 @@ Record the final `west list`, generated Kconfig and devicetree, artifact hashes,
 
 </div>
 
-## System Architecture and Dependencies
+## System Architecture and Dependencies { #system-architecture-and-dependencies }
 
 <div align="center"><em>Figure: ZMK Split-Keyboard Paths on SF32LB52</em></div>
 
@@ -131,7 +162,7 @@ flowchart LR
     R -->|"ZMK BLE split link"| L
     L -->|"USB HID\nCherryUSB"| H["Host computer"]
     L -->|"Bluetooth HID"| H
-    H <-->|"ZMK Studio\nleft image only"| L
+    H <-->|"ZMK Studio\nleft-side firmware image only"| L
     NL["NVS settings\nbonds and configuration"] --> L
     NR["NVS settings\npersistent state"] --> R
     M["OpenSiFli west manifest\ncustom Zephyr + HAL + CherryUSB"] --> L
@@ -140,21 +171,21 @@ flowchart LR
 
 Treat failures as distinct domains: physical matrix/wiring, the right-to-left split link, left-side USB, host Bluetooth, stored bonds/settings, ZMK Studio, board download/recovery, and the pinned dependency stack. A key that does not reach the host can fail before scanning, during split transport, in the central keymap, or at the selected HID endpoint; diagnose the path in that order.
 
-## Stage 1 — Establish the Untouched Port Baseline
+## Stage 1 — Establish the Untouched Port Baseline { #stage-1-establish-the-untouched-port-baseline }
 
 **Goal:** prove the exact OpenSiFli reference before changing a keymap, overlay, or dependency.
 
 1. Record both board revisions and wire the two fixtures exactly to the left and right Urchin overlays. Label the boards and USB/download cables by role.
 2. Build both images at the pinned commit, save `west list`, and inspect the generated configuration to confirm the expected board, shield, split role, BLE, CherryUSB, ZMK Studio, and NVS settings.
 3. Download each image through its independently verified recovery path. Capture cold-boot and console behavior before pairing the halves or host.
-4. Establish the BLE split connection, then verify all 38 positions against the default, lower, and raise layers. Check Bluetooth profile selection/clear and Studio-unlock bindings deliberately so they are not triggered accidentally during typing tests.
+4. Establish the BLE split connection, then verify all 38 positions against the `default`, `lower`, and `raise` layers. Check Bluetooth profile selection/clear and Studio-unlock bindings deliberately so they are not triggered accidentally during typing tests.
 5. Validate USB HID and ZMK Studio on the left half, then validate Bluetooth HID to the selected host. Repeat after a cold start.
 
 **Evidence to retain:** board and wiring records, fork and manifest revisions, generated configurations, image hashes, download and boot logs, complete key-position matrix, layer results, endpoint selection, and host/Studio versions.
 
 **Gate 1 exit criterion:** two cold starts reproduce the full 38-position keymap, all three layers, the right-to-left split link, and at least one selected host endpoint; both halves remain independently recoverable.
 
-## Stage 2 — Validate Input, Transport, Settings, and Recovery
+## Stage 2 — Validate Input, Transport, Settings, and Recovery { #stage-2-validate-input-transport-settings-and-recovery }
 
 **Goal:** prove that realistic keyboard faults are visible and recoverable without rebuilding from an unknown state.
 
@@ -176,7 +207,7 @@ Treat failures as distinct domains: physical matrix/wiring, the right-to-left sp
 
 **Gate 2 exit criterion:** every applicable failure has a repeatable detection and recovery result, no test leaves a stuck HID state, and settings or bonds can be returned to the recorded baseline without replacing untracked files.
 
-## Stage 3 — Build a Reproducible Source Baseline
+## Stage 3 — Build a Reproducible Source Baseline { #stage-3-build-a-reproducible-source-baseline }
 
 **Goal:** allow a second engineer to regenerate both images and repeat Stage 2 from clean sources.
 
@@ -187,7 +218,7 @@ Treat failures as distinct domains: physical matrix/wiring, the right-to-left sp
 
 **Gate 3 exit criterion:** a second environment produces correctly labeled images that pass Stage 2 without untracked overlays, stale build output, or floating dependency revisions.
 
-## Stage 4 — Adapt One Keyboard Boundary at a Time
+## Stage 4 — Adapt One Keyboard Boundary at a Time { #stage-4-adapt-one-keyboard-boundary-at-a-time }
 
 **Goal:** make one product change while preserving the known-good port and independent recovery paths.
 
@@ -208,7 +239,7 @@ Treat failures as distinct domains: physical matrix/wiring, the right-to-left sp
 
 **Gate 4 exit criterion:** the change is reviewed, original images and settings can be restored, and all applicable matrix, layer, split, USB, BLE, Studio, power, and recovery tests pass.
 
-## Stage 5 — Product-Readiness Review
+## Stage 5 — Product-Readiness Review { #stage-5-product-readiness-review }
 
 Before designing a custom keyboard PCB or battery prototype, answer:
 
@@ -222,17 +253,17 @@ Before designing a custom keyboard PCB or battery prototype, answer:
 
 **Gate 5 exit criterion:** every residual risk has an owner, evidence, and disposition, and the team has explicitly decided to proceed, defer, or stop.
 
-## Handoff to Product Design
+## Handoff to Product Design { #handoff-to-product-design }
 
 Carry forward the exact SF32 part and memory, split roles and transport, row/column/direct-input map, diode direction, USB connection, antenna and enclosure assumptions, NVS/settings policy, download and recovery interfaces, per-half power budget, test fixtures, image identification, and pinned manifest. Continue with [SF32LB52-DevKit-LCD](../sf32-products/devkits/SF32LB52-DevKit-LCD.md), the [Zephyr platform boundary](../develop/platforms/zephyr/overview.md), [Bluetooth Architecture](../learn/bluetooth/overview.md), the [SF32LB52x Hardware Design Guide](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), and [Design for Production](../hardware/design-for-production.md).
 
-## Authoritative Sources
+## Authoritative Sources { #authoritative-sources }
 
 - [OpenSiFli/zmk SF32 fork](https://github.com/OpenSiFli/zmk)
 - [Reviewed OpenSiFli/zmk commit](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e)
-- [SF32LB52 ZMK board variant](https://github.com/OpenSiFli/zmk/tree/main/app/boards/sifli/sf32lb52_devkit_lcd)
-- [Urchin SF32LB52 split shield](https://github.com/OpenSiFli/zmk/tree/main/app/boards/shields/urchin_sf32lb52)
-- [OpenSiFli ZMK west manifest](https://github.com/OpenSiFli/zmk/blob/main/app/west.yml)
+- [SF32LB52 ZMK board variant at the reviewed commit](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/sifli/sf32lb52_devkit_lcd)
+- [Urchin SF32LB52 split shield at the reviewed commit](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/shields/urchin_sf32lb52)
+- [OpenSiFli ZMK west manifest at the reviewed commit](https://github.com/OpenSiFli/zmk/blob/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/west.yml)
 - [Upstream zmkfirmware/zmk](https://github.com/zmkfirmware/zmk)
 - [ZMK documentation](https://zmk.dev/docs/)
 - [Zephyr project documentation](https://docs.zephyrproject.org/)

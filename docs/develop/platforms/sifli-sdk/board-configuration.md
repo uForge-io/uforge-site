@@ -6,13 +6,15 @@ tags:
     - SiFli-SDK
 ---
 
-# Board Configuration
+# Board Configuration { #board-configuration }
 
 Board configuration ties firmware to real hardware: flash layout, PSRAM, pins, display interface, audio path, clocking, power rails, and default peripherals.
 
 In SiFli-SDK, the `--board=<board_name>` value is the most important build input. It selects the board support package used by the example.
 
-## What the Board Name Controls
+For dual-core boards, omitting the core suffix selects the HCPU configuration by default. Append `_lcpu` to the board name to build for LCPU; use `_hcpu` to select HCPU explicitly. Confirm that the example supports the selected core.
+
+## What the Selected Board Can Affect { #what-the-board-name-controls }
 
 The selected board can affect:
 
@@ -26,7 +28,7 @@ The selected board can affect:
 - Bluetooth configuration.
 - Partition table and boot assumptions.
 
-## Practical Rules
+## Practical Rules { #practical-rules }
 
 - Do not guess the board name from the marketing name.
 - Do not copy a board name from Zephyr or Arduino into SiFli-SDK.
@@ -34,12 +36,12 @@ The selected board can affect:
 - Start from the closest SDK example for the same board.
 - Rebuild cleanly after switching boards.
 
-## Board Bring-Up Checklist
+## Board Bring-Up Checklist { #board-bring-up-checklist }
 
 - [ ] Confirm the chip variant and package.
-- [ ] Confirm external flash and PSRAM size.
+- [ ] Confirm the Flash and PSRAM types, capacities, and configuration.
 - [ ] Confirm power source and charger behavior.
-- [ ] Confirm 48 MHz and 32.768 kHz clock sources.
+- [ ] Confirm the clock sources and frequencies used by this board, including 48 MHz and 32.768 kHz where applicable.
 - [ ] Confirm download UART and log UART.
 - [ ] Confirm display and touch interface.
 - [ ] Confirm audio path if used.
@@ -48,23 +50,22 @@ The selected board can affect:
 
 Do not begin application debugging until the board configuration matches the hardware in front of you.
 
-## Cross-Framework Name Examples
+## SDK Board-Name Example { #sdk-board-name-example }
 
-<div align="center"><em>Table: Cross-Framework Name Examples</em></div>
+<div align="center"><em>Table: SF32LB52-DevKit-LCD_N16R8 SDK Board Name</em></div>
 
 <div align="center" markdown>
 
-| Context | Example name |
-|:--------|:-------------|
-| SiFli-SDK | `sf32lb52-lcd_n16r8` |
-| Zephyr downstream | `sf32lb52_devkit_lcd` |
-| ArduinoCore-zephyr FQBN | `sifli:sf32lb52:sf32lb52devkitlcd` |
+| Name type | Identifier |
+|:----------|:-----------|
+| Board model | `SF32LB52-DevKit-LCD_N16R8` |
+| SiFli-SDK `--board` value | `sf32lb52-lcd_n16r8` |
 
 </div>
 
-These names refer to closely related SF32LB52 DevKit LCD work, but they are not interchangeable.
+Use the SiFli-SDK identifier with `--board`; the product name is not a build identifier.
 
-## When Porting to a Custom Board
+## When Porting to a Custom Board { #when-porting-to-a-custom-board }
 
 Start from the closest dev kit or module configuration, then change:
 
@@ -77,6 +78,3 @@ Start from the closest dev kit or module configuration, then change:
 7. Product-specific peripherals.
 
 Validate each change with the smallest example that exercises it.
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

@@ -1,6 +1,6 @@
 ---
 icon: lucide/card-sim
-description: "SF32LB52-MOD-1: Bluetooth 6.3 MCU module based on SF32LB525UC6 for wearable and compact HMI products that want lower RF and antenna-integration risk."
+description: "SF32LB52-MOD-1: low-power Bluetooth 5.3 MCU module family for SF32LB52x, with integrated RF circuitry, a 48 MHz crystal, and SKU-dependent antenna options."
 tags:
   - Hardware
   - Module
@@ -10,11 +10,11 @@ tags:
 
 ## Overview
 
-SF32LB52-MOD-1 is a low-power Bluetooth MCU module built around SiFli's SF32LB525UC6. It packages the SF32LB52x-class dual-core Arm Cortex-M33 STAR-MC1 platform, RF path, 48MHz crystal, and module-level antenna implementation into a ready-to-integrate 27.9 × 18.0 × 3.1mm form factor.
+SF32LB52-MOD-1 is a low-power Bluetooth MCU module family built on the SF32LB52x platform. The standard N16R8 SKU uses SF32LB525UC6. The 27.9 × 18.0 × 3.1 mm module combines the dual-core Arm Cortex-M33 STAR-MC1 platform, RF circuitry, a 48 MHz crystal, and an antenna connection. Depending on the part number, it uses either an on-board PCB antenna or an IPEX connector for an external antenna.
 
-Compared with a chip-down SF32LB52x design, the module reduces RF layout, antenna matching, crystal placement, and certification risk. It is a practical choice for products that want SF32LB52x-class Bluetooth, graphics, and audio capability without taking on chip-level RF work at the first hardware spin.
+DS5203 V0.3 documents an on-module PCB antenna and says an IPEX-connected external antenna is available on another model, but does not map antenna options to the published memory-SKU list. Confirm the exact antenna configuration with SiFli before finalizing the carrier-board layout. The finished product still requires RF validation and applicable product-level certification. The exposed interfaces provide the Bluetooth, graphics, and audio functions used in compact connected products.
 
-Depending on the selected order code, the module can also include in-package OPI-PSRAM. The exposed module interface gives access to the same broad product-building blocks as the underlying chip family, including GPIO, SPI, LCD, MPI, UART, I2C, PWM, SDIO, USB2.0 FS, and analog audio paths.
+Depending on the selected SKU, the chip package may include OPI-PSRAM. The module interface exposes key functions of the underlying chip family, including GPIO, SPI, LCD, MPI, UART, I2C, PWM, SDIO, USB 2.0 FS, and analog audio.
 
 !!! info
     For the underlying chip family, architecture, and peripheral set, see [SF32LB52x](../chips/SF32LB52x.md). This page focuses on module-level integration, power, package, and variant selection.
@@ -30,10 +30,10 @@ Depending on the selected order code, the module can also include in-package OPI
 - Vehicle key fobs and wearable remote products
 - Cost-sensitive connected display devices
 
-Choose SF32LB52-MOD-1 when the project wants one or more of these advantages:
+Consider SF32LB52-MOD-1 when the product needs one or more of these capabilities:
 
-- Faster hardware bring-up than a chip-down RF design
-- Lower antenna-matching and certification risk
+- Module-level RF integration with PCB-antenna and external-antenna options
+- Exposed interfaces for the chip platform's Bluetooth, graphics, and audio capabilities
 - Reuse of SF32LB52x software and peripheral capability
 - Compact module integration for space-constrained wearable or HMI products
 
@@ -63,19 +63,19 @@ Choose SF32LB52-MOD-1 when the project wants one or more of these advantages:
 
 ### Compute and Memory
 
-- Arm Cortex-M33 STAR-MC1 application core (HCPU), up to 240MHz, up to 370 DMIPS / 984 EEMBC CoreMark
-- 32KB + 16KB I/D-cache
-- 512KB SRAM
-- Dedicated ultra-low-power Arm Cortex-M33 STAR-MC1 core (LCPU), up to 24MHz, with 64KB SRAM
+- Arm Cortex-M33 STAR-MC1 application core (HCPU), up to 240 MHz, up to 370 DMIPS / 984 EEMBC CoreMark
+- 32 KB instruction cache and 16 KB data cache
+- 512 KB retention SRAM
+- Dedicated ultra-low-power Arm Cortex-M33 STAR-MC1 core (LCPU), up to 24 MHz, with 64 KB retention SRAM
 - Single-precision FPU and MPU on both cores
 - Optional in-package OPI-PSRAM depending on module SKU
 
 ### Wireless Connectivity
 
-- Dual-mode Bluetooth 6.3 with BLE Audio support
-- Sensitivity: -100dBm (BLE/1Mbps), -96.3dBm (BR), -95.5dBm (EDR2)
-- Maximum transmit power: 19dBm (BR/BLE), 13dBm (EDR2/EDR3)
-- BR peak receive current: 2.4mA @ 3.8V
+- Dual-mode Bluetooth 5.3 with BLE Audio support
+- Sensitivity: -100 dBm (BLE/1 Mbps), -96.3 dBm (BR), -95.5 dBm (EDR2)
+- Maximum transmit power: 19 dBm (BR/BLE), 13 dBm (EDR2/EDR3)
+- BR peak receive current: 2.4 mA @ 3.8 V
 
 ### Graphics and Display
 
@@ -86,15 +86,19 @@ Choose SF32LB52-MOD-1 when the project wants one or more of these advantages:
 
 ### Audio
 
-- 1x 24-bit audio DAC
-- 1x 24-bit Sigma-Delta audio ADC
+- 1 × 24-bit audio DAC
+- 1 × 24-bit Sigma-Delta audio ADC
+- 1 × I2S interface
+- 1 × PDM interface
 - Analog audio input/output support exposed through the module interface
+
+The PDM interface can connect up to two digital microphones; the number of PDM interfaces is not the microphone count. Actual connectivity depends on pin multiplexing and board routing. On this module, PA22/PA23 are unavailable externally when the optional 32.768 kHz crystal is populated; the hardware guide documents an alternate PDM pin mapping.
 
 ### Storage Interfaces
 
 - Optional in-package OPI-PSRAM, depending on module SKU
-- 1x MPI (QSPI) for external NOR, NAND, or OPI-PSRAM
-- 1x SD/SDIO supporting SD3.0, SDIO3.0, and eMMC
+- 1 × MPI (QSPI) for external SPI NOR or SPI NAND
+- 1 × SD/SDIO supporting SD3.0, SDIO3.0, and eMMC
 
 ### Security
 
@@ -104,13 +108,13 @@ Choose SF32LB52-MOD-1 when the project wants one or more of these advantages:
 
 ### Power, Package, and I/O
 
-- Module package: 27.9 × 18.0 × 3.1mm
-- Operating temperature: -40 to 85°C
-- VSYS: 3.2–4.7V from Li-ion/Li-Po battery, or 3.7–4.7V from regulated supply
-- IO voltage: 3.3V
-- VBATS input for battery-voltage sensing
-- VDD33_VOUT2 on-module 3.3V output for external peripheral supply
-- Up to 68 module pins for GPIO, SPI, LCD, MPI, UART, I2C, PWM, SDIO, USB2.0 FS, and analog audio functions
+- Module package: 27.9 × 18.0 × 3.1 mm
+- Operating temperature: -40 to 85 °C
+- VSYS: 3.2–4.7 V for direct Li-ion battery input, or 3.7–4.7 V from a regulated supply; 3.8 V is recommended.
+- IO voltage: 3.3 V
+- VBATS: 0–4.7 V battery-sense input that can also be used for ADC measurement. Connect the voltage to be measured directly; do not use an external resistor divider.
+- VDD33_VOUT2: on-module 3.3 V LDO output for external peripherals. It is off by default and must be enabled in software; maximum output current is 150 mA, and total capacitance on the rail must not exceed 7.4 µF.
+- 68-pin module interface; signal pins expose multiplexed functions including GPIO, SPI, LCD, MPI, UART, I2C, PWM, SDIO, USB 2.0 FS, and digital and analog audio
 
 ## Module Variants
 
@@ -118,17 +122,22 @@ Choose SF32LB52-MOD-1 when the project wants one or more of these advantages:
 
 <div align="center" markdown>
 
-| Module Code | Flash | PSRAM | Temperature | Dimensions |
-| :--- | :--- | :--- | :--- | :--- |
-| SF32LB52-MOD-1-N16R8 | 16MB QSPI-NOR | 8MB OPI-PSRAM | -40 to 85°C | 27.9 × 18.0 × 3.1mm |
+| Module Code | Chip | Flash | PSRAM | Temperature | Dimensions |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| SF32LB52-MOD-1-N16R8 | SF32LB525UC6 | 16 MB QSPI-NOR | 8 MB OPI-PSRAM | -40 to 85 °C | 27.9 × 18.0 × 3.1 mm |
+| SF32LB52-MOD-1-A128R16 | SF32LB527UD6 | 128 MB SPI-NAND | 16 MB OPI-PSRAM | -40 to 85 °C | 27.9 × 18.0 × 3.1 mm |
 
 </div>
+
+The [SiFli module-model guide](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) and EPD application guide also list A128R16, but the linked DS5203 V0.3 datasheet lists only N16R8. Confirm current availability and memory configuration with SiFli before selecting A128R16.
+
+The A128R16 Flash labels differ across the official sources: the [OpenSiFli module-model guide](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) identifies 128 MB SPI-NAND, while SiFli's [board-model guide](https://wiki.sifli.com/board/devkit_guide.html) lists 128 MB QSPI-NAND for the corresponding DevKit SKU. The sources do not explain whether this reflects the fitted part or interface wording. Confirm the Flash part and bus mode against the schematic/BOM for the exact board revision before using the board configuration as a module baseline.
 
 ## Related Products
 
 ### Chip
 
-Built on [SF32LB52x](../chips/SF32LB52x.md), specifically the SF32LB525UC6 platform. Use the chip page when you need the full architecture, peripheral, and family-variant picture behind the module.
+The [SF32LB52x](../chips/SF32LB52x.md) page covers family-level architecture and peripherals; see the variant table above for the chip and memory mapping of each listed module SKU.
 
 ### Development Kits
 

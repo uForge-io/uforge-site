@@ -6,13 +6,13 @@ tags:
     - Firmware
 ---
 
-# Firmware Topics
+# Firmware Topics { #firmware-topics }
 
-These topics apply across platforms. They are the mechanics that turn examples into products: boot layout, partitions, OTA, USB, power, logging, and crash analysis.
+These topics apply across platforms. They cover the firmware decisions that turn examples into products: boot layout, partitions, OTA, USB, power management, logging, and crash analysis.
 
-Read these pages before changing firmware layout, update behavior, or low-power policy. The code may still compile when these pieces are wrong, but the product can become hard to recover, debug, or ship.
+Read these pages before changing firmware layout, update behavior, or low-power policy. These mistakes may not prevent a successful build, but they can make a product difficult to recover, debug, or release.
 
-## Topics
+## Topics { #topics }
 
 <div align="center"><em>Table: Topics</em></div>
 
@@ -28,19 +28,16 @@ Read these pages before changing firmware layout, update behavior, or low-power 
 
 </div>
 
-## Practical Rule
+## Practical Rule { #practical-rule }
 
-Before changing boot, OTA, filesystem, or storage behavior, understand the partition table and recovery path. A broken app is inconvenient; a broken boot/update layout can make boards painful to recover.
+Before changing boot, OTA, filesystem, or storage behavior, understand the partition table and verify the recovery path. An application fault is inconvenient; an incorrect boot or update layout can make a board difficult to recover.
 
-## Product Readiness Checklist
+## Product Readiness Checklist { #product-readiness-checklist }
 
-- [ ] A known-good full flash command exists outside the normal OTA path.
+- [ ] A tested full-device flash command is available outside the normal OTA path.
 - [ ] Partition layout is documented in the product repository.
 - [ ] OTA/DFU failure behavior has been tested.
 - [ ] USB descriptors and VID/PID ownership are documented if USB is used.
-- [ ] Power modes are measured on real hardware.
+- [ ] Low-power modes are measured on real hardware.
 - [ ] Crash logs can be decoded from the released binary.
-- [ ] Factory and developer flashing flows are separated.
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.
+- [ ] Factory and developer flashing procedures are separate.

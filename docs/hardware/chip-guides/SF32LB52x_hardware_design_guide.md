@@ -1,5 +1,7 @@
 ---
 icon: lucide/book-check
+hide:
+    - navigation
 description: "Hardware design guide for the SF32LB52x MCU: device overview, design flow, and links to schematic, PCB layout, review, and checklist pages."
 tags:
     - Hardware
@@ -54,8 +56,8 @@ The SF32LB52x family combines dual-core STAR-MC1 processors, Bluetooth connectiv
 
 The family integrates:
 
-- Dual-core Arm China STAR-MC1 processors with FPU and MPU, Arm Cortex-M33 compatible
-- Dual-mode Bluetooth 6.3 radio
+- Dual-core Arm China STAR-MC1 processors, compatible with Arm Cortex-M33 and equipped with FPU and MPU
+- Dual-mode Bluetooth 5.3 radio
 - ePicasso 2.0 2D/2.5D graphics accelerator
 - Display controller supporting SPI, QSPI, 8080, JDI, and 8-bit EPD interfaces
 - USB 2.0 Full-Speed device
@@ -175,7 +177,7 @@ The following table summarizes the recommended hardware architecture for a typic
 | Package | QFN68L, 7 mm x 7 mm x 0.85 mm, 0.35 mm pitch |
 | PCB | 4-layer PTH PCB recommended |
 | Power Supply | Single-cell Li-ion/Li-Po battery or regulated external supply, depending on device variant |
-| Battery Charging | Integrated charger on supported variants, or external charger IC with or without PPM |
+| Battery Charging | Integrated charger on supported variants, or an external charger IC with or without power-path management (PPM) |
 | Buck Inductor | 4.7 uH +/-20%, DCR <= 0.4 Ω, Isat >= 450 mA |
 | Crystal | 48 MHz main crystal and 32.768 kHz RTC crystal |
 | RF | 50 Ω controlled-impedance trace with reserved π matching network |
@@ -228,7 +230,7 @@ When a design reuses an older SF32LB52x schematic, review the supply pins, SIP-m
 Before hardware release, collect the schematic PDF, PCB stack-up, impedance report, component AVL cross-check, DRC report, and screenshots of the RF, crystal, USB, SDIO/eMMC, audio, power, and boot-storage layouts. Keep the evidence with the board revision so later firmware, RF, and production issues can be traced back to the reviewed hardware baseline.
 
 
-## Using the Checklists
+## 5. Using the Checklists { #using-the-checklists }
 
 This guide includes two levels of checklist coverage. The short checklists embedded throughout Sections 5.1.1.5, 5.5.3, and 7 give the highest-risk items for quick engineering self-checks. The [Schematic Checklist](SF32LB52x_schematic_checklist.md) (Section 5.8) and [PCB Layout Checklist](SF32LB52x_pcb_layout_checklist.md) (Section 6.15) reproduce SiFli's complete, item-by-item [*SF32LB52 Schematic & PCB Checklist*][SiFli SF32LB52 Schematic & PCB Checklist (XLSX)] (V1.0, 2026-01-21), published alongside the hardware design guide on [SiFli's wiki][SiFli Chip Hardware Design Guide Index (Wiki)], covering both the SF32LB520/3/5/7 battery-powered variants and the SF32LB52B/D/E/G/J externally powered variants.
 
@@ -243,7 +245,7 @@ For best results, treat the checklist as a sign-off record rather than a reading
 3. Where a check point references boot media, display type, or power-switch behavior, verify it against the actual schematic and the matching subsystem chapter in the design guide.
 4. For any ambiguous source wording, record the exact part number and design assumption in the review notes before release.
 
-<div align="center"><em>Review Record Template</em></div>
+<div align="center"><em>Table 5-1: Review Record Template</em></div>
 
 <div align="center" markdown>
 
@@ -259,7 +261,7 @@ For best results, treat the checklist as a sign-off record rather than a reading
 
 </div>
 
-<div align="center"><em>Checklist Document Version History</em></div>
+<div align="center"><em>Table 5-2: Checklist Document Version History</em></div>
 
 <div align="center" markdown>
 
@@ -272,7 +274,7 @@ For best results, treat the checklist as a sign-off record rather than a reading
 [SiFli SF32LB52 Schematic & PCB Checklist (XLSX)]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx
 [SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/en/hardware/index.html
 
-## Continue the Design Guide
+## 6. Continue the Design Guide { #continue-the-design-guide }
 
 The full guide continues across the pages below. Each covers one stage of the design process and can be reached from here.
 

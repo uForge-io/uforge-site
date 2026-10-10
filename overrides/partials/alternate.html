@@ -1,68 +1,46 @@
 {#-
-  Override of Zensical's built-in partials/alternate.html (the header
-  language-switcher). The stock version renders a dropdown (.md-select)
-  listing every language in config.extra.alternate, each linking to that
-  language's static alt.link ("/" or "/zh/") -- landing on the target
-  language's homepage, and requiring an open-menu step even though this
-  site only ever has two languages.
-
-  Since there are exactly two languages, this version skips the menu
-  entirely and renders a single click-through button straight to the
-  *other* language's equivalent page, computed from the current page's own
-  URL so switching language stays on the same page. config.theme.language
-  ("en" or "zh", set per zensical.*.toml) tells us which alternate entry to
-  skip (the current language) and which one to render as the button.
-
-  This assumes docs/ and docs_zh/ share the same relative paths (see
-  AGENTS.md's twin-file convention) and that the merged bilingual preview
-  (tools/serve-bilingual-dev.sh) nests the Chinese build under site/zh/. It
-  does NOT check whether the target page has actually been translated yet --
-  if docs_zh/ doesn't have that page, the link 404s. That's a known,
-  accepted tradeoff (chosen over a fallback-to-homepage version) until
-  docs_zh/ reaches closer parity with docs/.
-
-  If a third language is ever added, this button-per-click approach stops
-  making sense (you can't "toggle" between three options) -- revert to the
-  dropdown pattern (git history has the prior version) or render N buttons.
+  Page-aware language menu. Every localized documentation tree has the same
+  relative paths as docs/, so each alternate is calculated from page.url
+  rather than its configured homepage. The small click-time update protects
+  deep links when a preview server rewrites navigation.
 -#}
-{% set current_language = config.theme.language | d("en", true) %}
 {% set offline = config.extra.offline and config.extra.offline.enabled %}
-{% for alt in config.extra.alternate %}
-  {% if alt.lang != current_language %}
-    {% if offline %}
-      {% set target = "#" %}
-    {% else %}
-      {% set target = ("/zh/" ~ page.url) if alt.lang == "zh" else ("/" ~ page.url) %}
-    {% endif %}
-    <div class="md-header__option">
-      {# `target="_self"` prevents Zensical's version-switcher script from
-         treating this SEO alternate as a version link and rewriting it. #}
-      <a href="{{ target }}" target="_self" hreflang="{{ alt.lang }}" class="md-header__button md-icon uf-lang-switch" title="{{ alt.name }}" aria-label="{{ alt.name }}"{% if offline %} data-uf-offline-language="{{ alt.lang }}" data-uf-page-url="{{ page.url }}"{% else %} data-uf-language-target="{{ alt.lang }}"{% endif %}>
-        {% set icon = config.theme.icon.alternate or "material/translate" %}
+{% set locale_prefixes = {"en": "", "zh": "/zh", "ja": "/ja", "es": "/es", "de": "/de", "fr": "/fr", "pt": "/pt", "ru": "/ru"} %}
+{% if config.extra.alternate | length > 1 %}
+  <div class="md-header__option">
+    <div class="md-select">
+      {% set icon = config.theme.icon.alternate or "material/translate" %}
+      <button class="md-header__button md-icon" aria-label="{{ lang.t('select.language') }}">
         {% include ".icons/" ~ icon ~ ".svg" %}
-      </a>
+      </button>
+      <div class="md-select__inner">
+        <ul class="md-select__list">
+          {% for alt in config.extra.alternate %}
+            {% set target = "#" if offline else (locale_prefixes[alt.lang] | d("", true)) ~ "/" ~ page.url %}
+            <li class="md-select__item">
+              <a href="{{ target }}" target="_self" hreflang="{{ alt.lang }}" class="md-select__link uf-lang-switch"{% if offline %} data-uf-offline-language="{{ alt.lang }}" data-uf-page-url="{{ page.url }}"{% else %} data-uf-language-target="{{ alt.lang }}"{% endif %}>
+                {{ alt.name }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
-  {% endif %}
-{% endfor %}
+  </div>
+{% endif %}
 {% if not offline and (config.extra.alternate | length) > 1 %}
 <script>
-  // Build the target from the page that is actually visible at click time.
-  // This preserves deep links even when a preview server rewrites navigation.
-  //
-  // Persist a manual choice separately from automatic browser-language
-  // detection. The detector redirects future direct links to this language
-  // until the visitor switches again or clears site storage.
   document.addEventListener("DOMContentLoaded", function () {
+    var prefixes = { en: "", zh: "/zh", ja: "/ja", es: "/es", de: "/de", fr: "/fr", pt: "/pt", ru: "/ru" };
     document.querySelectorAll(".uf-lang-switch[data-uf-language-target]").forEach(function (link) {
       link.addEventListener("click", function () {
-        var pagePath = window.location.pathname.replace(/^\/zh(?=\/|$)/, "") || "/";
-        var targetPath = link.dataset.ufLanguageTarget === "zh" ? "/zh" + pagePath : pagePath;
+        var pagePath = window.location.pathname.replace(/^\/(?:zh|ja|es|de|fr|pt|ru)(?=\/|$)/, "") || "/";
+        var targetPath = (prefixes[link.dataset.ufLanguageTarget] || "") + pagePath;
         link.href = targetPath + window.location.search + window.location.hash;
         try {
           localStorage.setItem("uf-lang-manual-preference", link.dataset.ufLanguageTarget);
         } catch (e) {
-          // localStorage unavailable -- the click still navigates normally,
-          // it just won't be remembered on the next visit.
+          // The link remains usable when storage is unavailable.
         }
       });
     });

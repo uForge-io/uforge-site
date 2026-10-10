@@ -1,17 +1,19 @@
 ---
 icon: lucide/clipboard-check
+hide:
+    - navigation
 description: "Design review checklist, related documents and references, reference schematic/PCB/mechanical/power appendices, and revision history for the SF32LB52x hardware design guide."
 tags:
     - Hardware
     - Chip
 ---
 
-# SF32LB52x Hardware Design Guide — Design Review Checklist and References
+# SF32LB52x Hardware Design Guide — Design Review Checklist and References { #sf32lb52x-hardware-design-guide-design-review-checklist-and-references }
 
 !!! note "Part of the SF32LB52x Hardware Design Guide"
     This page covers Sections 7-10: Design Review Checklist, Related Documents and References, Appendices, and Revision History. Return to [PCB Layout Guidelines](SF32LB52x_pcb_layout.md).
 
-## 7. Design Review Checklist
+## 7. Design Review Checklist { #7-design-review-checklist }
 
 - [ ] Minimum-system review is complete: exact variant, package, power tree, boot medium, bootstrap pins, debug/download access, clocks, and wake strategy are all documented
 - [ ] The exact chip model and power variant are confirmed, and power schematics from the two variants are not mixed
@@ -21,12 +23,13 @@ tags:
 - [ ] 48 MHz and 32.768 kHz crystals meet the recommended specifications, with routing and keep-out zones satisfied
 - [ ] RF trace is 50 Ω impedance, with the matching network placed close to the chip
 - [ ] Storage boot configuration (including the regular-powered variant's eMMC option) matches the Bootstrap pin settings
-- [ ] Storage power switches are uniformly controlled through PA21, active high (on) / low (off)
-- [ ] USB and SDIO differential trace impedance and length matching meet requirements
+- [ ] Storage power-switch control pin is verified for the exact variant; resolve the PA11/PA21 discrepancy between the official checklist and application notes before release
+- [ ] USB DP/DN are routed as a differential pair with 90 Ω differential impedance
+- [ ] SDIO signals are routed together, with total length ≤50 mm, within-group length difference ≤6 mm, and ground shielding
 - [ ] DBG_UART/SWD multiplexed pins and production test points are reserved
 - [ ] Key component part numbers have been verified against the latest [SiFli Approved Vendor List][SiFli Approved Vendor List (AVL)]
 
-## 8. Related Documents and References
+## 8. Related Documents and References { #8-related-documents-and-references }
 
 [SF32LB52x Datasheet (Official PDF)]: https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?
 [SF32LB52x User Manual (Official PDF)]: https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?
@@ -60,7 +63,7 @@ Additional source references:
 
 The [Schematic Checklist](SF32LB52x_schematic_checklist.md) (Section 5.8) and [PCB Layout Checklist](SF32LB52x_pcb_layout_checklist.md) (Section 6.15) reproduce the same *SF32LB52 Schematic & PCB Checklist* (V1.0, 2026-01-21) item by item, alongside the schematic and PCB layout guidance they check against.
 
-## 9. Appendices
+## 9. Appendices { #9-appendices }
 
 The original SiFli application notes include the following schematic, PCB layout, mechanical, and power reference figures. These appendices preserve those source figures for review evidence, while Sections 5 and 6 remain the primary design guidance.
 
@@ -81,285 +84,289 @@ The original SiFli application notes include the following schematic, PCB layout
 
 </div>
 
-### Appendix A. A Typical Smart Watch Application
+### 9.1. Appendix A. A Typical Smart Watch Application { #appendix-a-a-typical-smart-watch-application }
 
 A typical SF32LB52x smart watch design includes the MCU, display, touch controller, storage, sensors, vibration motor, audio input/output, Bluetooth antenna, clock sources, power management, debug access, and production-test access. The battery-powered design additionally includes charging management.
+Figures 9.1-1 and 9.1-2 show a QSPI display, SPI accelerometer/gyroscope, I2C heart-rate module, analog microphone and DAC-to-amplifier path, PWM-driven vibration motor, 48 MHz clock, Bluetooth RF path, and SWD/UART access. Their storage examples list QSPI NAND, SD NAND and NOR Flash; these are examples, not an exhaustive boot-media list. Both diagrams depict an external charger and Buck/LDO path. Use Section 5.2 to select the actual power architecture rather than treating that block diagram as a mandatory circuit.
 
-![Figure A-1: SF32LB520/3/5/7 Smart Watch Application Diagram](../../sf32-products/chips/assets/52xA/sf32lb52x-A-watch-app-diagram-52x.png){ loading="lazy" }
 
-<div align="center"><em>Figure A-1: SF32LB520/3/5/7 Smart Watch Application Diagram</em></div>
+![Figure 9.1-1: SF32LB520/3/5/7 Smart Watch Application Diagram](../../sf32-products/chips/assets/52xA/sf32lb52x-A-watch-app-diagram-52x.png){ loading="lazy" }
 
-![Figure A-2: 52B/D/E/G/J Smart Watch Application Diagram](../../sf32-products/chips/assets/52xB/sf32lb52X-B-watch-app-diagram-52X.png){ loading="lazy" }
+<div align="center"><em>Figure 9.1-1: SF32LB520/3/5/7 Smart Watch Application Diagram</em></div>
 
-<div align="center"><em>Figure A-2: 52B/D/E/G/J Smart Watch Application Diagram</em></div>
+![Figure 9.1-2: 52B/D/E/G/J Smart Watch Application Diagram](../../sf32-products/chips/assets/52xB/sf32lb52X-B-watch-app-diagram-52X.png){ loading="lazy" }
 
-### Appendix B. Reference Schematics
+<div align="center"><em>Figure 9.1-2: 52B/D/E/G/J Smart Watch Application Diagram</em></div>
+
+### 9.2. Appendix B. Reference Schematics { #appendix-b-reference-schematics }
 
 **RF**
 
-![Figure B-1: RF Front-End Block Diagram](../../sf32-products/chips/assets/52xB/sf32lb52X-B-rf-diagram.png){ loading="lazy" }
+![Figure 9.2-1: RF Front-End Block Diagram](../../sf32-products/chips/assets/52xB/sf32lb52X-B-rf-diagram.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-1: RF Front-End Block Diagram</em></div>
+<div align="center"><em>Figure 9.2-1: RF Front-End Block Diagram</em></div>
 
-![Figure B-2: RF Schematic Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-RF.png){ loading="lazy" }
+![Figure 9.2-2: RF Schematic Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-RF.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-2: RF Schematic Reference</em></div>
+<div align="center"><em>Figure 9.2-2: RF Schematic Reference</em></div>
 
-![Figure B-3: RF Schematic Routing Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-RF-2.png){ loading="lazy" }
+![Figure 9.2-3: RF Schematic Routing Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-RF-2.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-3: RF Schematic Routing Reference</em></div>
+<div align="center"><em>Figure 9.2-3: RF Schematic Routing Reference</em></div>
 
 **Storage and Boot**
 
-![Figure B-4: SF32LB520/3/5/7 Bootstrap Reference](../../sf32-products/chips/assets/52xA/SF32LB52x-A-Bootstrap.png){ loading="lazy" }
+![Figure 9.2-4: SF32LB520/3/5/7 Bootstrap Reference](../../sf32-products/chips/assets/52xA/SF32LB52x-A-Bootstrap.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-4: SF32LB520/3/5/7 Bootstrap Reference</em></div>
+<div align="center"><em>Figure 9.2-4: SF32LB520/3/5/7 Bootstrap Reference</em></div>
 
-![Figure B-5: 52B/D/E/G/J Bootstrap Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-Bootstrap.png){ loading="lazy" }
+![Figure 9.2-5: 52B/D/E/G/J Bootstrap Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-Bootstrap.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-5: 52B/D/E/G/J Bootstrap Reference</em></div>
+<div align="center"><em>Figure 9.2-5: 52B/D/E/G/J Bootstrap Reference</em></div>
 
-![Figure B-6: SDIO Schematic Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-SDIO.png){ loading="lazy" }
+![Figure 9.2-6: SDIO Schematic Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-SDIO.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-6: SDIO Schematic Reference</em></div>
+<div align="center"><em>Figure 9.2-6: SDIO Schematic Reference</em></div>
 
 **Buttons, Motor, and Audio**
 
-![Figure B-7: SF32LB520/3/5/7 Vibration Motor Reference](../../sf32-products/chips/assets/52xA/sf32lb52x-A-VIB.png){ loading="lazy" }
+![Figure 9.2-7: SF32LB520/3/5/7 Vibration Motor Reference](../../sf32-products/chips/assets/52xA/sf32lb52x-A-VIB.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-7: SF32LB520/3/5/7 Vibration Motor Reference</em></div>
+<div align="center"><em>Figure 9.2-7: SF32LB520/3/5/7 Vibration Motor Reference</em></div>
 
-![Figure B-8: 52B/D/E/G/J Vibration Motor Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-VIB.png){ loading="lazy" }
+![Figure 9.2-8: 52B/D/E/G/J Vibration Motor Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-VIB.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-8: 52B/D/E/G/J Vibration Motor Reference</em></div>
+<div align="center"><em>Figure 9.2-8: 52B/D/E/G/J Vibration Motor Reference</em></div>
 
-![Figure B-9: Power Key Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PWKEY.png){ loading="lazy" }
+![Figure 9.2-9: Power Key Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PWKEY.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-9: Power Key Reference</em></div>
+<div align="center"><em>Figure 9.2-9: Power Key Reference</em></div>
 
-![Figure B-10: Rotary Encoder Key Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-XNKEY.png){ loading="lazy" }
+![Figure 9.2-10: Rotary Encoder Key Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-XNKEY.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-10: Rotary Encoder Key Reference</em></div>
+<div align="center"><em>Figure 9.2-10: Rotary Encoder Key Reference</em></div>
 
-![Figure B-11: Analog MEMS Microphone Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-MEMS-MIC.png){ loading="lazy" }
+![Figure 9.2-11: Analog MEMS Microphone Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-MEMS-MIC.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-11: Analog MEMS Microphone Reference</em></div>
+<div align="center"><em>Figure 9.2-11: Analog MEMS Microphone Reference</em></div>
 
-![Figure B-12: Analog ECM Microphone Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-ECM-MIC.png){ loading="lazy" }
+![Figure 9.2-12: Analog ECM Microphone Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-ECM-MIC.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-12: Analog ECM Microphone Reference</em></div>
+<div align="center"><em>Figure 9.2-12: Analog ECM Microphone Reference</em></div>
 
-![Figure B-13: Analog DAC to PA Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-DAC-PA.png){ loading="lazy" }
+![Figure 9.2-13: Analog DAC to PA Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-DAC-PA.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-13: Analog DAC to PA Reference</em></div>
+<div align="center"><em>Figure 9.2-13: Analog DAC to PA Reference</em></div>
 
-![Figure B-14: Audio Power Schematic Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-AUDIO-PWR.png){ loading="lazy" }
+![Figure 9.2-14: Audio Power Schematic Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-AUDIO-PWR.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-14: Audio Power Schematic Reference</em></div>
+<div align="center"><em>Figure 9.2-14: Audio Power Schematic Reference</em></div>
 
-![Figure B-15: Audio ADC Schematic Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-AUDIO-ADC.png){ loading="lazy" }
+![Figure 9.2-15: Audio ADC Schematic Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-AUDIO-ADC.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-15: Audio ADC Schematic Reference</em></div>
+<div align="center"><em>Figure 9.2-15: Audio ADC Schematic Reference</em></div>
 
-![Figure B-16: Audio DAC Schematic Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-AUDIO-DAC.png){ loading="lazy" }
+![Figure 9.2-16: Audio DAC Schematic Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-AUDIO-DAC.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-16: Audio DAC Schematic Reference</em></div>
+<div align="center"><em>Figure 9.2-16: Audio DAC Schematic Reference</em></div>
 
 **Clock**
 
-![Figure B-17: 48 MHz Crystal Schematic](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-48M-SCH.png){ loading="lazy" }
+![Figure 9.2-17: 48 MHz Crystal Schematic](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-48M-SCH.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-17: 48 MHz Crystal Schematic</em></div>
+<div align="center"><em>Figure 9.2-17: 48 MHz Crystal Schematic</em></div>
 
-![Figure B-18: 32.768 kHz Crystal Schematic](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-32K-SCH.png){ loading="lazy" }
+![Figure 9.2-18: 32.768 kHz Crystal Schematic](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-32K-SCH.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-18: 32.768 kHz Crystal Schematic</em></div>
+<div align="center"><em>Figure 9.2-18: 32.768 kHz Crystal Schematic</em></div>
 
 **USB**
 
-![Figure B-19: USB Schematic Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-USB.png){ loading="lazy" }
+![Figure 9.2-19: USB Schematic Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-USB.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-19: USB Schematic Reference</em></div>
+<div align="center"><em>Figure 9.2-19: USB Schematic Reference</em></div>
 
 **DC/DC**
 
-![Figure B-20: DC/DC Schematic Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-DCDC.png){ loading="lazy" }
+![Figure 9.2-20: DC/DC Schematic Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-DCDC.png){ loading="lazy" }
 
-<div align="center"><em>Figure B-20: DC/DC Schematic Reference</em></div>
+<div align="center"><em>Figure 9.2-20: DC/DC Schematic Reference</em></div>
 
-### Appendix C. Reference PCB Layouts
+### 9.3. Appendix C. Reference PCB Layouts { #appendix-c-reference-pcb-layouts }
 
 **RF**
 
-![Figure C-1: RF PCB Matching Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-RF.png){ loading="lazy" }
+![Figure 9.3-1: RF PCB Matching Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-RF.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-1: RF PCB Matching Reference</em></div>
+<div align="center"><em>Figure 9.3-1: RF PCB Matching Reference</em></div>
 
-![Figure C-2: RF PCB Routing Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-RF-ROUTE.png){ loading="lazy" }
+![Figure 9.3-2: RF PCB Routing Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-RF-ROUTE.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-2: RF PCB Routing Reference</em></div>
+<div align="center"><em>Figure 9.3-2: RF PCB Routing Reference</em></div>
 
 **Storage**
 
-![Figure C-3: SDIO PCB Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-SDIO.png){ loading="lazy" }
+![Figure 9.3-3: SDIO PCB Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-SDIO.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-3: SDIO PCB Reference</em></div>
+<div align="center"><em>Figure 9.3-3: SDIO PCB Reference</em></div>
 
 **Audio**
 
-![Figure C-4: Audio Power PCB Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-AUDIO-PWR.png){ loading="lazy" }
+![Figure 9.3-4: Audio Power PCB Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-AUDIO-PWR.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-4: Audio Power PCB Reference</em></div>
+<div align="center"><em>Figure 9.3-4: Audio Power PCB Reference</em></div>
 
-![Figure C-5: Audio ADC PCB Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-AUDIO-ADC.png){ loading="lazy" }
+![Figure 9.3-5: Audio ADC PCB Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-AUDIO-ADC.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-5: Audio ADC PCB Reference</em></div>
+<div align="center"><em>Figure 9.3-5: Audio ADC PCB Reference</em></div>
 
-![Figure C-6: Audio DAC PCB Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-AUDIO-DAC.png){ loading="lazy" }
+![Figure 9.3-6: Audio DAC PCB Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-AUDIO-DAC.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-6: Audio DAC PCB Reference</em></div>
+<div align="center"><em>Figure 9.3-6: Audio DAC PCB Reference</em></div>
 
 **PCB Foundation**
 
-![Figure C-7: PCB Stack-Up Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-STACK.png){ loading="lazy" }
+![Figure 9.3-7: PCB Stack-Up Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-STACK.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-7: PCB Stack-Up Reference</em></div>
+<div align="center"><em>Figure 9.3-7: PCB Stack-Up Reference</em></div>
 
-![Figure C-8: PCB Design Rule Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-RULE.png){ loading="lazy" }
+![Figure 9.3-8: PCB Design Rule Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-RULE.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-8: PCB Design Rule Reference</em></div>
+<div align="center"><em>Figure 9.3-8: PCB Design Rule Reference</em></div>
 
-![Figure C-9: QFN Fanout Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-FANOUT.png){ loading="lazy" }
+![Figure 9.3-9: QFN Fanout Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-FANOUT.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-9: QFN Fanout Reference</em></div>
+<div align="center"><em>Figure 9.3-9: QFN Fanout Reference</em></div>
 
-![Figure C-10: Crystal Placement Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-CRYSTAL.png){ loading="lazy" }
+![Figure 9.3-10: Crystal Placement Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-CRYSTAL.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-10: Crystal Placement Reference</em></div>
+<div align="center"><em>Figure 9.3-10: Crystal Placement Reference</em></div>
 
 **Clock Routing**
 
-![Figure C-11: 48 MHz Crystal Routing Model](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-48M-MOD.png){ loading="lazy" }
+![Figure 9.3-11: 48 MHz Crystal Routing Model](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-48M-MOD.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-11: 48 MHz Crystal Routing Model</em></div>
+<div align="center"><em>Figure 9.3-11: 48 MHz Crystal Routing Model</em></div>
 
-![Figure C-12: 48 MHz Crystal Routing Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-48M-ROUTE-REF.png){ loading="lazy" }
+![Figure 9.3-12: 48 MHz Crystal Routing Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-48M-ROUTE-REF.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-12: 48 MHz Crystal Routing Reference</em></div>
+<div align="center"><em>Figure 9.3-12: 48 MHz Crystal Routing Reference</em></div>
 
-![Figure C-13: 32.768 kHz Crystal Routing Model](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-32K-MOD.png){ loading="lazy" }
+![Figure 9.3-13: 32.768 kHz Crystal Routing Model](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-32K-MOD.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-13: 32.768 kHz Crystal Routing Model</em></div>
+<div align="center"><em>Figure 9.3-13: 32.768 kHz Crystal Routing Model</em></div>
 
-![Figure C-14: 32.768 kHz Crystal Routing Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-32K-ROUTE-REF.png){ loading="lazy" }
+![Figure 9.3-14: 32.768 kHz Crystal Routing Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-32K-ROUTE-REF.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-14: 32.768 kHz Crystal Routing Reference</em></div>
+<div align="center"><em>Figure 9.3-14: 32.768 kHz Crystal Routing Reference</em></div>
 
 **USB**
 
-![Figure C-15: USB PCB Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-USB.png){ loading="lazy" }
+![Figure 9.3-15: USB PCB Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-USB.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-15: USB PCB Reference</em></div>
+<div align="center"><em>Figure 9.3-15: USB PCB Reference</em></div>
 
-![Figure C-16: USB Layout Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-USB-LAYOUT.png){ loading="lazy" }
+![Figure 9.3-16: USB Layout Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-USB-LAYOUT.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-16: USB Layout Reference</em></div>
+<div align="center"><em>Figure 9.3-16: USB Layout Reference</em></div>
 
-![Figure C-17: USB Routing Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-USB-ROUTE.png){ loading="lazy" }
+![Figure 9.3-17: USB Routing Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-USB-ROUTE.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-17: USB Routing Reference</em></div>
+<div align="center"><em>Figure 9.3-17: USB Routing Reference</em></div>
 
 **DC/DC**
 
-![Figure C-18: DC/DC PCB Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-DCDC.png){ loading="lazy" }
+![Figure 9.3-18: DC/DC PCB Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-DCDC.png){ loading="lazy" }
 
-<div align="center"><em>Figure C-18: DC/DC PCB Reference</em></div>
+<div align="center"><em>Figure 9.3-18: DC/DC PCB Reference</em></div>
 
-### Appendix D. Mechanical
+### 9.4. Appendix D. Mechanical { #appendix-d-mechanical }
 
-![Figure D-1: SF32LB520/3/5/7 Package Layout](../../sf32-products/chips/assets/52xA/sf32lb52x-A-package-layout.png){ loading="lazy" }
+![Figure 9.4-1: SF32LB520/3/5/7 Package Layout](../../sf32-products/chips/assets/52xA/sf32lb52x-A-package-layout.png){ loading="lazy" }
 
-<div align="center"><em>Figure D-1: SF32LB520/3/5/7 Package Layout</em></div>
+<div align="center"><em>Figure 9.4-1: SF32LB520/3/5/7 Package Layout</em></div>
 
-![Figure D-2: 52B/D/E/G/J Package Layout](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ loading="lazy" }
+![Figure 9.4-2: 52B/D/E/G/J Package Layout](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ loading="lazy" }
 
-<div align="center"><em>Figure D-2: 52B/D/E/G/J Package Layout</em></div>
+<div align="center"><em>Figure 9.4-2: 52B/D/E/G/J Package Layout</em></div>
 
-![Figure D-3: QFN68L Package Dimensions](../../sf32-products/chips/assets/52xB/sf32lb52X-B-QFN68L-POD.png){ loading="lazy" }
+![Figure 9.4-3: QFN68L Package Dimensions](../../sf32-products/chips/assets/52xB/sf32lb52X-B-QFN68L-POD.png){ loading="lazy" }
 
-<div align="center"><em>Figure D-3: QFN68L Package Dimensions</em></div>
+<div align="center"><em>Figure 9.4-3: QFN68L Package Dimensions</em></div>
 
-![Figure D-4: QFN68L Package Shape](../../sf32-products/chips/assets/52xB/sf32lb52X-B-QFN68L-SHAPE.png){ loading="lazy" }
+![Figure 9.4-4: QFN68L Package Shape](../../sf32-products/chips/assets/52xB/sf32lb52X-B-QFN68L-SHAPE.png){ loading="lazy" }
 
-<div align="center"><em>Figure D-4: QFN68L Package Shape</em></div>
+<div align="center"><em>Figure 9.4-4: QFN68L Package Shape</em></div>
 
-![Figure D-5: QFN68L Recommended Footprint](../../sf32-products/chips/assets/52xB/sf32lb52X-B-QFN68L-REF.png){ loading="lazy" }
+![Figure 9.4-5: QFN68L Recommended Footprint](../../sf32-products/chips/assets/52xB/sf32lb52X-B-QFN68L-REF.png){ loading="lazy" }
 
-<div align="center"><em>Figure D-5: QFN68L Recommended Footprint</em></div>
+<div align="center"><em>Figure 9.4-5: QFN68L Recommended Footprint</em></div>
 
-### Appendix E. Power
+### 9.5. Appendix E. Power { #appendix-e-power }
 
 **SF32LB520/3/5/7 (Battery-Powered)**
 
-![Figure E-1: External Charger Without PPM](../../sf32-products/chips/assets/52xA/sf32lb52x-CHG-NPPM.png){ loading="lazy" }
+The figures below show external charging circuits with and without power-path management (PPM), followed by the integrated charger circuit.
 
-<div align="center"><em>Figure E-1: External Charger Without PPM</em></div>
+![Figure 9.5-1: External Charging Circuit Without PPM](../../sf32-products/chips/assets/52xA/sf32lb52x-CHG-NPPM.png){ loading="lazy" }
 
-![Figure E-2: External Charger With PPM](../../sf32-products/chips/assets/52xA/sf32lb52x-CHG-PPM.png){ loading="lazy" }
+<div align="center"><em>Figure 9.5-1: External Charging Circuit Without Power-Path Management (PPM)</em></div>
 
-<div align="center"><em>Figure E-2: External Charger With PPM</em></div>
+![Figure 9.5-2: External Charging Circuit With PPM](../../sf32-products/chips/assets/52xA/sf32lb52x-CHG-PPM.png){ loading="lazy" }
 
-![Figure E-3: Integrated Charger Circuit](../../sf32-products/chips/assets/52xA/sf32lb52x-CHG-INNER.png){ loading="lazy" }
+<div align="center"><em>Figure 9.5-2: External Charging Circuit With Power-Path Management (PPM)</em></div>
 
-<div align="center"><em>Figure E-3: Integrated Charger Circuit</em></div>
+![Figure 9.5-3: Integrated Charger Circuit](../../sf32-products/chips/assets/52xA/sf32lb52x-CHG-INNER.png){ loading="lazy" }
 
-![Figure E-4: OVP Threshold Setting](../../sf32-products/chips/assets/52xA/sf32lb52x-OVP-SET.png){ loading="lazy" }
+<div align="center"><em>Figure 9.5-3: Integrated Charger Circuit</em></div>
 
-<div align="center"><em>Figure E-4: OVP Threshold Setting</em></div>
+![Figure 9.5-4: OVP Threshold Setting](../../sf32-products/chips/assets/52xA/sf32lb52x-OVP-SET.png){ loading="lazy" }
 
-![Figure E-5: Adjustable OVLO OVP Application](../../sf32-products/chips/assets/52xA/sf32lb52x-OVP-OVLO.png){ loading="lazy" }
+<div align="center"><em>Figure 9.5-4: OVP Threshold Setting</em></div>
 
-<div align="center"><em>Figure E-5: Adjustable OVLO OVP Application</em></div>
+![Figure 9.5-5: Adjustable OVLO OVP Application](../../sf32-products/chips/assets/52xA/sf32lb52x-OVP-OVLO.png){ loading="lazy" }
 
-![Figure E-6: Regulated-Output OVP Application](../../sf32-products/chips/assets/52xA/sf32lb52x-OVP-REGU.png){ loading="lazy" }
+<div align="center"><em>Figure 9.5-5: Adjustable OVLO OVP Application</em></div>
 
-<div align="center"><em>Figure E-6: Regulated-Output OVP Application</em></div>
+![Figure 9.5-6: Regulated-Output OVP Application](../../sf32-products/chips/assets/52xA/sf32lb52x-OVP-REGU.png){ loading="lazy" }
 
-![Figure E-7: SF32LB520/3/5/7 Power Structure](../../sf32-products/chips/assets/52xA/sf32lb52x-PWR-diagram.png){ loading="lazy" }
+<div align="center"><em>Figure 9.5-6: Regulated-Output OVP Application</em></div>
 
-<div align="center"><em>Figure E-7: SF32LB520/3/5/7 Power Structure</em></div>
+![Figure 9.5-7: SF32LB520/3/5/7 Power Structure](../../sf32-products/chips/assets/52xA/sf32lb52x-PWR-diagram.png){ loading="lazy" }
 
-![Figure E-8: VCC Schematic Reference](../../sf32-products/chips/assets/52xA/sf32LB52x-A-SCH-VCC.png){ loading="lazy" }
+<div align="center"><em>Figure 9.5-7: SF32LB520/3/5/7 Power Structure</em></div>
 
-<div align="center"><em>Figure E-8: VCC Schematic Reference</em></div>
+![Figure 9.5-8: VCC Schematic Reference](../../sf32-products/chips/assets/52xA/sf32LB52x-A-SCH-VCC.png){ loading="lazy" }
 
-![Figure E-9: VCC PCB Reference](../../sf32-products/chips/assets/52xA/sf32LB52x-A-PCB-VCC.png){ loading="lazy" }
+<div align="center"><em>Figure 9.5-8: VCC Schematic Reference</em></div>
 
-<div align="center"><em>Figure E-9: VCC PCB Reference</em></div>
+![Figure 9.5-9: VCC PCB Reference](../../sf32-products/chips/assets/52xA/sf32LB52x-A-PCB-VCC.png){ loading="lazy" }
 
-![Figure E-10: Charging Schematic Reference](../../sf32-products/chips/assets/52xA/sf32LB52x-A-SCH-CHG.png){ loading="lazy" }
+<div align="center"><em>Figure 9.5-9: VCC PCB Reference</em></div>
 
-<div align="center"><em>Figure E-10: Charging Schematic Reference</em></div>
+![Figure 9.5-10: Charging Schematic Reference](../../sf32-products/chips/assets/52xA/sf32LB52x-A-SCH-CHG.png){ loading="lazy" }
 
-![Figure E-11: Charging PCB Reference](../../sf32-products/chips/assets/52xA/sf32LB52x-A-PCB-CHG.png){ loading="lazy" }
+<div align="center"><em>Figure 9.5-10: Charging Schematic Reference</em></div>
 
-<div align="center"><em>Figure E-11: Charging PCB Reference</em></div>
+![Figure 9.5-11: Charging PCB Reference](../../sf32-products/chips/assets/52xA/sf32LB52x-A-PCB-CHG.png){ loading="lazy" }
 
-![Figure E-12: PMU TVS Reference](../../sf32-products/chips/assets/52xA/sf32LB52x-A-SCH-PMU-TVS.png){ loading="lazy" }
+<div align="center"><em>Figure 9.5-11: Charging PCB Reference</em></div>
 
-<div align="center"><em>Figure E-12: PMU TVS Reference</em></div>
+![Figure 9.5-12: PMU TVS Reference](../../sf32-products/chips/assets/52xA/sf32LB52x-A-SCH-PMU-TVS.png){ loading="lazy" }
 
-![Figure E-13: PMU EOS Reference](../../sf32-products/chips/assets/52xA/sf32LB52x-A-SCH-PMU-EOS.png){ loading="lazy" }
+<div align="center"><em>Figure 9.5-12: PMU TVS Reference</em></div>
 
-<div align="center"><em>Figure E-13: PMU EOS Reference</em></div>
+![Figure 9.5-13: PMU EOS Reference](../../sf32-products/chips/assets/52xA/sf32LB52x-A-SCH-PMU-EOS.png){ loading="lazy" }
+
+<div align="center"><em>Figure 9.5-13: PMU EOS Reference</em></div>
 
 **52B/D/E/G/J (Regular-Powered)**
 
-![Figure E-14: 52B/D/E/G/J PMU PCB Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-PMU.png){ loading="lazy" }
+![Figure 9.5-14: 52B/D/E/G/J PMU PCB Reference](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-PMU.png){ loading="lazy" }
 
-<div align="center"><em>Figure E-14: 52B/D/E/G/J PMU PCB Reference</em></div>
+<div align="center"><em>Figure 9.5-14: 52B/D/E/G/J PMU PCB Reference</em></div>
 
-## 10. Revision History
+## 10. Revision History { #10-revision-history }
 
 <div align="center"><em>Table 10-1: Revision History</em></div>
 
@@ -368,13 +375,13 @@ A typical SF32LB52x smart watch design includes the MCU, display, touch controll
 | Version | Date | Note |
 |:---|:---|:---|
 | 1.1 | 2026-07 | Promoted Power System to a peer schematic section, split Clock Generation and RF into separate schematic sections, and renumbered the following schematic guidance sections. |
+| 1.0 | This document | Combined both official hardware application notes into a single guide, using tabs to separate battery-powered vs. regular-powered variant content |
 | 0.0.1 | 10/2024 | Original release of `SF32LB520-3-5-7-HW-Application` |
 | 0.0.1 | 10/2024 | Original release of `SF32LB52B-E-G-J-HW-Application` |
-| 1.0 | This document | Combined both official hardware application notes into a single guide, using tabs to separate battery-powered vs. regular-powered variant content |
 
 </div>
 
-### 10.1. Checklist Revision History
+### 10.1. Checklist Revision History { #101-checklist-revision-history }
 
 The item-by-item checklist in the [Schematic Checklist](SF32LB52x_schematic_checklist.md) and [PCB Layout Checklist](SF32LB52x_pcb_layout_checklist.md) is versioned separately from the guide, following SiFli's own *SF32LB52 Schematic & PCB Checklist* spreadsheet.
 

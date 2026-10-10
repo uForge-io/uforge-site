@@ -1,24 +1,26 @@
 ---
 icon: lucide/book-check
+hide:
+    - navigation
 description: "Hardware design guide for the SF32LB55x MCU: power supply, clock circuits, RF matching, storage and display interfaces, and PCB layout guidance."
 tags:
     - Hardware
     - Chip
 ---
 
-# SF32LB55x Hardware Design Guide
+# SF32LB55x Hardware Design Guide { #sf32lb55x-hardware-design-guide }
 
-## 1. Introduction
+## 1. Introduction { #1-introduction }
 
-This hardware design guide provides recommendations and reference material for products based on the SF32LB55x family of mainstream AIoT microcontrollers. It is intended for hardware engineers, PCB designers, and product developers building BLE wearables, sensor-rich battery products, health-monitoring devices, and compact connected systems.
+This hardware design guide provides recommendations and reference material for products based on the SF32LB55x family of general-purpose AIoT microcontrollers. It is intended for hardware engineers, PCB designers, and product developers building BLE wearables, sensor-rich battery-powered products, health-monitoring devices, and compact connected systems.
 
 The guide covers the complete hardware development process, including package selection, power-supply design, clock circuits, RF layout, external memory, display interfaces, wake sources, sensors, audio, debug access, PCB layout, validation, and manufacturing preparation. Following these guidelines helps reduce schematic and layout risk, preserve low-power behavior, and keep the design aligned with SF32LB55x package, power, memory, RF, and interface requirements.
 
-This document assumes a basic understanding of embedded hardware design and schematic capture. It complements the SF32LB55x datasheet, user manual, official hardware application note, reference designs, and SiFli Approved Vendor List, which remain the authority for electrical specifications, pin multiplexing, package dimensions, component qualification, and production limits.
+This document assumes a basic understanding of embedded hardware design and schematic capture. It complements the SF32LB55x datasheet, user manual, official hardware application note, reference designs, and SiFli Approved Vendor List. These official sources remain authoritative for electrical specifications, pin multiplexing, package dimensions, component qualification, and production limits.
 
-SiFli's chip model guide notes one important caveat: the 55x suffix naming predates the later 52/56/58 convention and does not fully follow it. For interface availability, package-dependent capability, and exact memory topology, use the exact orderable part number and package reference rather than suffix inference alone.
+SF32LB55x uses a legacy suffix convention. For interface availability, package-dependent capability, and exact memory topology, use the exact orderable part number and package reference rather than suffix inference alone.
 
-## 2. Development Resources
+## 2. Development Resources { #2-development-resources }
 
 [SF32LB55x Hardware Application Note]: https://wiki.sifli.com/en/hardware/SF32LB55x-HW-Application.html
 [SF32LB55x Hardware Application Source]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB55x-HW-Application.md
@@ -46,13 +48,15 @@ SiFli's chip model guide notes one important caveat: the 55x suffix naming preda
 
 </div>
 
-## 3. Device Overview
+## 3. Device Overview { #3-device-overview }
 
-### 3.1. Architecture
+### 3.1. Architecture { #31-architecture }
 
-SF32LB55x is a mainstream AIoT MCU family for BLE-connected, sensor-rich, low-power products. The source design guide focuses on package selection, PMU rails, boot mode, dual crystal design, RF matching, external memory, MIPI/SPI/MCU8080/JDI display options, GPADC, sensors, external Bluetooth audio, debug/flashing, and production calibration.
+SF32LB55x targets low-power AIoT products that must respond quickly to users while keeping standby and sleep power low. It integrates a low-power Bluetooth 5.2 transceiver, power management, and memory and display interfaces. Hardware integration requires package selection, PMU rail design, boot-mode control, two crystal circuits, RF matching, external memory, MIPI/SPI/MCU8080/JDI display selection, GPADC and sensor connections, external Bluetooth audio, debug/flashing access, and production calibration.
 
-### 3.2. Variants and Packages
+Storage connectivity includes multiple QSPI interfaces, an independent OPI-PSRAM interface, and SD/eMMC support. Co-packaged NOR Flash and PSRAM configurations vary by exact part number. Memory and display interfaces also depend on the package: BGA145 supports one external OPI-PSRAM channel, while BGA169 supports two. The two-lane MIPI DSI interface is supported on BGA145 and BGA169, not QFN68L. Confirm the exact part's pin map and co-packaged memory configuration before assigning external devices.
+
+### 3.2. Variants and Packages { #32-variants-and-packages }
 
 <div align="center"><em>Table 3.2-1: Package Options</em></div>
 
@@ -66,7 +70,7 @@ SF32LB55x is a mainstream AIoT MCU family for BLE-connected, sensor-rich, low-po
 
 </div>
 
-SF32LB55x supports QFN68L and multiple BGA packages. Select the package early because memory interfaces, fanout, PCB process requirements, and available GPIO differ by package.
+SF32LB55x supports QFN68L, BGA145, and BGA169 packages. Select the package early because memory interfaces, fanout, PCB process requirements, and available GPIO differ by package.
 
 ![Figure 3.2-1: QFN68L Pin Distribution](../../sf32-products/chips/assets/55x/SF32LB55x-QFN68-Leadmap.svg){ width="100%" loading="lazy" }
 
@@ -76,6 +80,9 @@ SF32LB55x supports QFN68L and multiple BGA packages. Select the package early be
 
 <div align="center"><em>Figure 3.2-2: BGA145 Pin Distribution</em></div>
 
+!!! warning "Legacy BGA169 pin maps"
+    SiFli identifies SF32LB557V8N6 as end-of-life (EOL). Its ball map is retained below for existing-design review, not as a recommendation for a new design. SF32LB557VD3A6 uses a different BGA169 ball map: D11, E9, K12, L11, L13, and M13 are NC. Check the exact part's map; identical package dimensions do not imply pin compatibility.
+
 ![Figure 3.2-3: BGA169 SF32LB557V8N6 Pin Distribution](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 3.2-3: BGA169 SF32LB557V8N6 Pin Distribution</em></div>
@@ -84,23 +91,23 @@ SF32LB55x supports QFN68L and multiple BGA packages. Select the package early be
 
 <div align="center"><em>Figure 3.2-4: BGA169 SF32LB557VD3A6 Pin Distribution</em></div>
 
-### 3.3. Major Hardware Features
+### 3.3. Major Hardware Features { #33-major-hardware-features }
 
 - QFN68L, BGA145, and BGA169 package options.
 - Dual 48 MHz and 32.768 kHz crystal design requirements.
-- RF matching and Bluetooth antenna layout requirements.
-- OPI PSRAM, QSPI NOR/NAND Flash and PSRAM, SDIO eMMC or Micro SD interfaces.
+- Low-power Bluetooth 5.2 transceiver, RF matching, and antenna layout requirements.
+- OPI PSRAM, QSPI NOR/NAND Flash and PSRAM, SDIO eMMC or Micro SD interfaces; co-packaged memory varies by exact part number.
 - MIPI DSI, SPI/QSPI, MCU8080, and JDI display options.
 - Wake button, vibration motor, wake interrupt, GPADC, sensor, and external Bluetooth audio design guidance.
 - DBG-UART, SWD, production flashing, and crystal calibration support.
 
-### 3.4. Typical Applications
+### 3.4. Typical Applications { #34-typical-applications }
 
-SF32LB55x fits BLE wearables, fitness bands, sports and cycling computers, health-monitoring devices, sensor-rich portable products, and compact battery-powered AIoT nodes.
+Typical target applications include wearable bands, smart mobile devices, smart-home products, and other low-power AIoT designs.
 
-## 4. Design at a Glance
+## 4. Design at a Glance { #4-design-at-a-glance }
 
-### 4.1. Engineering Summary
+### 4.1. Engineering Summary { #41-engineering-summary }
 
 <div align="center"><em>Table 4.1-1: SF32LB55x Design Summary</em></div>
 
@@ -112,13 +119,13 @@ SF32LB55x fits BLE wearables, fitness bands, sports and cycling computers, healt
 | Power | Review PMU rails, other power pins, required capacitors, POR/BOR/reset, and BUCK mode. |
 | Clock | Use 48 MHz and 32.768 kHz crystals that meet CL, ppm, and ESR requirements. |
 | RF | Keep matching network close to the chip and preserve a clean 50 ohm antenna path. |
-| Memory | Select OPI, QSPI, or SDIO storage based on package and boot strategy. |
+| Memory | Plan volatile OPI/QSPI PSRAM separately from boot and persistent storage on QSPI Flash or SDIO eMMC/Micro SD; confirm package and boot-mode support. |
 | Display | Select MIPI DSI, SPI/QSPI, MCU8080, or JDI early because pin groups and layout differ. |
 | Production | Reserve DBG-UART, SWD, boot-mode, power, and RF/crystal calibration access. |
 
 </div>
 
-### 4.2. Hardware Design Flow
+### 4.2. Hardware Design Flow { #42-hardware-design-flow }
 
 1. Confirm package, memory strategy, display interface, and low-power target.
 2. Define the power tree, PMU rails, BUCK/LDO behavior, and reset circuit.
@@ -127,11 +134,11 @@ SF32LB55x fits BLE wearables, fitness bands, sports and cycling computers, healt
 5. Lock PCB stack-up, fanout, impedance, ESD, RF, and high-speed interface constraints.
 6. Review the Section 7 checklist before schematic freeze, layout release, and EVT.
 
-### 4.3. Review Evidence Pack
+### 4.3. Review Evidence Pack { #43-review-evidence-pack }
 
 Before EVT, archive the datasheet/user-manual versions, package drawing, schematic PDF, PCB stack-up, impedance report, DRC/ERC reports, power tree, boot-mode table, RF layout screenshots, crystal layout screenshots, memory/display routing screenshots, and production test-point plan.
 
-## Using the Checklists
+### 4.4. Using the Checklists { #using-the-checklists }
 
 This guide includes two levels of checklist coverage. The short checklist in Section 7 gives the highest-risk items for a quick engineering self-check. The [Schematic Checklist](SF32LB55x_schematic_checklist.md) (Section 5.8) and Section 6.4 of the [PCB Layout Guidelines](SF32LB55x_pcb_layout.md) reproduce SiFli's complete, item-by-item *SF32LB55x Schematic & PCB Checklist* (V1.0, 2026-01-21), published alongside the hardware design materials on [SiFli's wiki][SiFli Chip Hardware Design Guide Index (Wiki)], spanning the 551/555/557 devices and the SS6600A8 variant.
 
@@ -146,7 +153,7 @@ For best results, treat the checklist as a sign-off record rather than a reading
 3. Cross-check display, storage, wake-up, and low-power rows against the matching hardware design guide sections.
 4. Record package-specific assumptions — especially BGA vs. QFN, DSI vs. SPI display, and QSPI2/QSPI3 storage usage — in the review notes.
 
-<div align="center"><em>Review Record Template</em></div>
+<div align="center"><em>Table 4.4-1: Review Record Template</em></div>
 
 <div align="center" markdown>
 
@@ -162,7 +169,7 @@ For best results, treat the checklist as a sign-off record rather than a reading
 
 </div>
 
-<div align="center"><em>Checklist Document Version History</em></div>
+<div align="center"><em>Table 4.4-2: Checklist Document Version History</em></div>
 
 <div align="center" markdown>
 
@@ -174,7 +181,7 @@ For best results, treat the checklist as a sign-off record rather than a reading
 
 [SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## Continue the Design Guide
+## Continue the Design Guide { #continue-the-design-guide }
 
 The full guide continues across the pages below. Each covers one stage of the design process and can be reached from here.
 

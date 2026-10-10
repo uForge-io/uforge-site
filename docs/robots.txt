@@ -1,5 +1,19 @@
 User-agent: *
 Allow: /
 Disallow: /about/others/
+Disallow: /zh/about/others/
+Disallow: /ja/about/others/
+Disallow: /es/about/others/
+Disallow: /de/about/others/
+Disallow: /fr/about/others/
+Disallow: /pt/about/others/
+Disallow: /ru/about/others/
 
 Sitemap: https://uForge.io/sitemap.xml
+Sitemap: https://uForge.io/zh/sitemap.xml
+Sitemap: https://uForge.io/ja/sitemap.xml
+Sitemap: https://uForge.io/es/sitemap.xml
+Sitemap: https://uForge.io/de/sitemap.xml
+Sitemap: https://uForge.io/fr/sitemap.xml
+Sitemap: https://uForge.io/pt/sitemap.xml
+Sitemap: https://uForge.io/ru/sitemap.xml

@@ -8,7 +8,7 @@ tags:
 
 # Overview { #graphics-overview }
 
-## Overview
+## Plan the Graphics Architecture { #overview }
 
 This guide explains how to build responsive graphical user interfaces on SF32 devices. It focuses on the practical decisions that affect real products: display selection, framebuffer strategy, LVGL integration, ePicasso hardware acceleration, memory placement, and display refresh behavior.
 
@@ -16,9 +16,11 @@ SF32 devices are designed for compact AIoT and wearable products where the UI mu
 
 Use this page when making the early UI architecture decisions that are expensive to reverse: panel and interface, framebuffer strategy, color depth, transparency, asset placement, and refresh policy. The linked Graphics articles then provide the implementation detail for a specific block in that flow.
 
-## SF32 Graphics Flow
+## SF32 Graphics Flow { #sf32-graphics-flow }
 
 The typical display-resource path is:
+
+<div align="center"><em>Diagram: Graphics Resource and Display Flow</em></div>
 
 ```text
 Source images, fonts, and animations
@@ -56,7 +58,7 @@ Display controller transfers pixels to the panel
 SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
 ```
 
-The path is configurable rather than mandatory: a product may not use eZip, ePicasso, TurboPixel, or a full framebuffer. Availability and connections depend on the selected device, SDK, display interface, panel, and driver configuration. In particular, TurboPixel is documented on SF32LB55x, SF32LB56x, and SF32LB58x; it is **not available** on SF32LB52x or SF32LB57x.
+The path is configurable rather than mandatory: a product may not use eZip, ePicasso, TurboPixel, or a full framebuffer. Availability and connections depend on the selected device, SDK, display interface, panel, and driver configuration. The current OpenSiFli LCDC header defines `LCDC_SUPPORTED_COMPRESSED_LAYER` only when `HAL_EXTDMA_MODULE_ENABLED` is enabled and the family guard permits it; SF32LB52x and SF32LB57x are excluded. A source comment also notes that the LCPU path is not enabled. The published SDK LCDC capability table marks compressed-layer decompression unsupported on SF32LB55x, so treat 55x as conditional rather than validated end-to-end support. Verify the exact SDK revision, core, build configuration, and target hardware; see [TurboPixel](turbopixel.md#availability-in-the-sf32-family).
 
 <div align="center"><em>Roles in the SF32 Graphics Flow</em></div>
 
@@ -64,16 +66,16 @@ The path is configurable rather than mandatory: a product may not use eZip, ePic
 
 | Block | Position in the Flow | Primary Responsibility | It Does Not Replace |
 |:---|:---|:---|:---|
-| **eZip / eZip-A** | Before rendering, while reading stored resources | Losslessly decompress supported static or animated assets; eZip can also be used for general-purpose data. | The renderer, final framebuffer, or display controller. |
+| **eZip / eZip-A** | Before rendering, while reading stored resources | Losslessly decompress supported eZip graphics assets, including static images and animation resources. | The renderer, final framebuffer, or display controller. |
 | **ePicasso** | During rendering and composition | Accelerate supported copy, fill, blend, transform, and composition work on pixels in memory. | Asset compression or panel transfer. |
-| **TurboPixel** | After rendering, before panel output on supported devices | Use extDMA to compress the final bitmap at a fixed ratio with lossy compression, reducing PSRAM capacity and bandwidth pressure. Available on SF32LB55x, SF32LB56x, and SF32LB58x; not on SF32LB52x or SF32LB57x. | Lossless asset compression or pixel rendering. |
+| **TurboPixel** | After rendering, before panel output on supported devices | Use extDMA to compress the final bitmap at a fixed ratio with lossy compression, reducing the PSRAM capacity required and display-read traffic. The current header exposes the compressed-layer capability for SF32LB55x, SF32LB56x, and SF32LB58x when extDMA is enabled, and excludes SF32LB52x and SF32LB57x; its comment notes that the LCPU path is not enabled. The published capability table marks SF32LB55x unsupported, so verify the exact core, SDK configuration, and target path before relying on it. | Lossless asset compression or pixel rendering. |
 | **Display controller** | Final output stage | Decompress TurboPixel when that path is enabled and transfer prepared pixels through the panel interface. | eZip asset decompression or graphics composition. |
 
 </div>
 
 Application code describes UI state and behavior. The UI framework manages widgets, invalidation, and drawing. The graphics/display driver chooses CPU or ePicasso execution and coordinates buffers; the display controller owns panel transfer. For feature-specific implementation details, see [ePicasso](epicasso-gpu.md), [eZip](ezip.md), and [TurboPixel](turbopixel.md).
 
-## Choose the Display First
+## Choose the Display First { #choose-the-display-first }
 
 The display choice affects nearly every graphics decision. Before optimizing code, define the panel requirements clearly:
 
@@ -91,11 +93,11 @@ A small SPI or QSPI AMOLED behaves very differently from an RGB panel, MIPI DSI 
 
 For detailed interface selection, flush-path design, and panel bring-up, see [Display Controller](display-controller.md).
 
-## Start from a Verified LVGL Example
+## Start from a Verified LVGL Example { #start-from-a-verified-lvgl-example }
 
 Choose an SDK example that already proves the product's riskiest graphics boundary before composing screens around it. [LVGL SDK Examples](lvgl-sdk-examples.md) organizes the official baseline, design-tool, widget, compressed-asset, animation/media, compass, game, and watch-interface examples by the engineering task they establish. It also makes clear which board, version, display, memory, and performance assumptions must be revalidated during product adaptation.
 
-## Pick the Right SF32 Device
+## Pick the Right SF32 Device { #pick-the-right-sf32-device }
 
 Choose the chip based on the display and UI workload, not just CPU frequency.
 
@@ -109,6 +111,7 @@ Choose the chip based on the display and UI workload, not just CPU frequency.
 | Entry smartwatch, badge, label, simple HMI | SF32LB52x |
 | BLE wearable with sensor-rich UI | SF32LB55x |
 | RGB display or richer LVGL interface | SF32LB56x |
+| Audio/graphics workloads suited to ACPU task offload | SF32LB57x; verify SDK support and task placement |
 | High-resolution display or advanced graphics | SF32LB56x or SF32LB58x |
 | MIPI DSI display | SF32LB55x or SF32LB58x, depending on panel and product class |
 | Flagship UI with graphics, audio, AI, and large memory | SF32LB58x |
@@ -117,7 +120,7 @@ Choose the chip based on the display and UI workload, not just CPU frequency.
 
 The most important constraints are display interface, resolution, memory capacity, graphics accelerator generation, available pins, and power budget.
 
-## Framebuffer and Bandwidth Calculator
+## Framebuffer and Bandwidth Calculator { #framebuffer-and-bandwidth-calculator }
 
 Estimate memory and transfer cost before choosing a panel or animation style:
 
@@ -134,16 +137,16 @@ Examples:
 
 | Panel | Format | One Full Buffer | 30 fps Full-Frame Traffic |
 |:------|:-------|----------------:|--------------------------:|
-| 240 x 240 | RGB565 | ~113 KB | ~3.4 MB/s |
-| 390 x 390 | RGB565 | ~297 KB | ~8.9 MB/s |
-| 454 x 454 | RGB565 | ~403 KB | ~12.1 MB/s |
-| 480 x 480 | RGB888 | ~675 KB | ~20.3 MB/s |
+| 240 x 240 | RGB565 | ~113 KiB | ~3.46 MB/s |
+| 390 x 390 | RGB565 | ~297 KiB | ~9.13 MB/s |
+| 454 x 454 | RGB565 | ~403 KiB | ~12.37 MB/s |
+| 480 x 480 | RGB888 | ~675 KiB | ~20.74 MB/s |
 
 </div>
 
-These are raw pixel numbers before command overhead, alignment, cache maintenance, asset reads, blending, or other system traffic. If the product also runs Bluetooth audio, AI, or external PSRAM traffic, leave margin.
+Buffer sizes use KiB (1,024 bytes); bandwidth uses decimal MB/s (1,000,000 bytes/s). These are raw pixel numbers before command overhead, alignment, cache maintenance, asset reads, blending, or other system traffic. If the product also runs Bluetooth audio, AI, or external PSRAM traffic, leave margin.
 
-## Understand Your Buffers
+## Understand Your Buffers { #understand-your-buffers }
 
 A UI is ultimately pixels in memory. The main buffer types are:
 
@@ -161,11 +164,11 @@ A UI is ultimately pixels in memory. The main buffer types are:
 
 </div>
 
-A full-screen framebuffer can be convenient, but it may consume too much SRAM on larger panels. For a 454 x 454 RGB565 display, a single full-screen buffer is about 412 KB. Two buffers double that. Higher color depths and larger displays grow quickly.
+A full-screen framebuffer can be convenient, but it may consume too much SRAM on larger panels. A 454 x 454 RGB565 buffer contains 412,232 bytes (about 412 kB or 403 KiB); two buffers need twice that capacity. Higher color depths and larger displays grow quickly.
 
 When memory is tight, use partial draw buffers and dirty-region updates. When animation is important and memory is available, full-screen or double-buffered strategies may make the UI smoother.
 
-## Choose Color Depth Carefully
+## Choose Color Depth Carefully { #choose-color-depth-carefully }
 
 Color depth affects visual quality, memory use, and bus bandwidth.
 
@@ -184,11 +187,11 @@ Color depth affects visual quality, memory use, and bus bandwidth.
 
 For most wearable and compact HMI products, RGB565 is a strong default unless the panel, UI quality target, or product requirements demand more.
 
-## Transparency, Alpha, and Layer Composition
+## Transparency, Alpha, and Layer Composition { #transparency-alpha-and-layer-composition }
 
 Transparency is represented by an **alpha** factor: a value that specifies how strongly a foreground pixel contributes when it is drawn over a background pixel. Alpha is independent of RGB color channels. An opaque pixel has alpha 1 (or 255 in an 8-bit alpha channel); a fully transparent pixel has alpha 0.
 
-For the common source-over operation, each output color channel is calculated as:
+For source-over compositing onto an **opaque background**, with **straight-alpha foreground colors** and alpha normalized to 0–1, each output RGB channel is calculated as follows. This simplified equation does not calculate the output alpha of a transparent destination:
 
 ```text
 output = foreground × alpha + background × (1 − alpha)
@@ -214,7 +217,7 @@ Two alpha representations are common. With **straight alpha**, RGB describes the
 
 Alpha blending reads both foreground and destination pixels, then writes the result. It therefore increases memory traffic compared with a simple opaque copy or fill. Use ePicasso where the driver supports the selected blend operation and pixel formats; otherwise keep a CPU fallback. Limit full-screen translucent layers, update only invalidated regions, and avoid unnecessary intermediate surfaces when PSRAM bandwidth or power is tight.
 
-## Integrating LVGL
+## Integrating LVGL { #integrating-lvgl }
 
 LVGL is a practical UI framework for SF32 devices because it provides widgets, styles, input handling, animation, invalidation, and display-driver hooks.
 
@@ -229,7 +232,7 @@ A typical LVGL integration needs:
 
 The display flush callback is the rendering/output boundary. Its controller and DMA behavior is covered in [Display Controller](display-controller.md#controller-buffers-and-flush-paths).
 
-## LVGL Porting Decisions
+## LVGL Porting Decisions { #lvgl-porting-decisions }
 
 Lock down these LVGL integration details before polishing screens:
 
@@ -251,7 +254,7 @@ Lock down these LVGL integration details before polishing screens:
 
 A good LVGL port should let screen code stay declarative while the driver owns transfer, synchronization, acceleration, and cache behavior.
 
-## Using ePicasso Acceleration
+## Using ePicasso Acceleration { #using-epicasso-acceleration }
 
 ePicasso is useful when the UI contains operations that would otherwise require many repeated pixel calculations. Common candidates include:
 
@@ -265,7 +268,7 @@ ePicasso is useful when the UI contains operations that would otherwise require 
 
 A good port should accelerate common high-volume operations while keeping CPU fallback paths for unsupported cases. Do not assume every LVGL style effect or widget maps to hardware. Measure the actual screens that matter for the product.
 
-### When Acceleration Helps Most
+### When Acceleration Helps Most { #when-acceleration-helps-most }
 
 ePicasso usually helps most when:
 
@@ -274,7 +277,7 @@ ePicasso usually helps most when:
 - The CPU would otherwise spend a large part of each frame doing pixel loops.
 - Memory placement and pixel formats match what the accelerator can handle efficiently.
 
-### When Acceleration May Not Help Much
+### When Acceleration May Not Help Much { #when-acceleration-may-not-help-much }
 
 Hardware acceleration may provide limited benefit when:
 
@@ -284,7 +287,7 @@ Hardware acceleration may provide limited benefit when:
 - Buffers are placed in slow memory without enough bandwidth.
 - Cache maintenance overhead dominates the operation.
 
-## Memory Placement Strategy
+## Memory Placement Strategy { #memory-placement-strategy }
 
 Graphics performance is often limited by memory movement. Place buffers intentionally:
 
@@ -295,11 +298,11 @@ Graphics performance is often limited by memory movement. Place buffers intentio
 - Keep DMA-accessed buffers aligned according to SDK guidance.
 - Use compressed or indexed assets when they reduce total bandwidth and decode cost.
 
-If the CPU, ePicasso, DMA, display controller, or other peripherals share buffers, follow the SDK cache maintenance rules. Clean CPU-written buffers before hardware reads them. Invalidate buffers after hardware writes them and before the CPU reads them.
+When the CPU and graphics or display hardware share buffers, follow the SDK's cache and buffer-ownership rules. Before hardware reads CPU-written data, clean the relevant cache lines and complete the required synchronization. Before hardware writes a buffer, prepare it so that dirty CPU cache lines cannot later overwrite the hardware result. Wait for the transfer to complete, then invalidate stale cache lines before the CPU reads the result. Respect cache-line alignment and neighboring data, and do not modify a buffer while hardware owns it. Use the SDK's supported routines rather than treating clean and invalidate as interchangeable.
 
 For partial refresh, panel-specific behavior, and the staged bring-up sequence, see [Display Controller](display-controller.md).
 
-## Asset Preparation
+## Asset Preparation { #asset-preparation }
 
 Good asset preparation can make a UI faster before any code optimization begins.
 
@@ -315,7 +318,7 @@ Use these rules of thumb:
 
 For multilingual products, font memory can dominate the UI budget. Plan font fallback, glyph subsets, and text layout early.
 
-## Animation Strategy
+## Animation Strategy { #animation-strategy }
 
 Smooth animation depends on frame budget, panel bandwidth, rendering cost, and power.
 
@@ -330,7 +333,7 @@ A practical approach:
 
 A wearable UI does not need desktop-style animation everywhere. A few fast, clear transitions usually feel better than many effects that drain power or drop frames.
 
-## Graphics Validation Matrix
+## Graphics Validation Matrix { #graphics-validation-matrix }
 
 Use repeatable screens instead of subjective “smooth enough” checks:
 
@@ -352,7 +355,7 @@ Use repeatable screens instead of subjective “smooth enough” checks:
 
 Track render time, flush time, CPU load, and power for each screen. If only total frame time is measured, it is hard to know whether the bottleneck is LVGL, ePicasso, memory, or the panel interface.
 
-## Debugging Graphics Performance
+## Debugging Graphics Performance { #debugging-graphics-performance }
 
 When the UI is slow, identify the bottleneck before changing the design.
 
@@ -380,7 +383,7 @@ Measure these separately:
 - Memory bandwidth pressure.
 - Power consumption during active, idle, and sleep states.
 
-## Common Mistakes
+## Common Mistakes { #common-mistakes }
 
 Avoid these early; they are expensive to fix late:
 
@@ -395,7 +398,7 @@ Avoid these early; they are expensive to fix late:
 - Ignoring touch latency while optimizing only frame rate.
 - Waiting until PCB bring-up to validate panel initialization.
 
-## Bring-Up Checklist
+## Bring-Up Checklist { #bring-up-checklist }
 
 Use this checklist when starting a new SF32 graphics project:
 
@@ -411,7 +414,7 @@ Use this checklist when starting a new SF32 graphics project:
 - [ ] Profile render time, flush time, CPU load, and power.
 - [ ] Test worst-case screens, animations, Bluetooth activity, and sleep/wake paths.
 
-## Key Takeaways
+## Key Takeaways { #key-takeaways }
 
 - Start graphics design from the display interface, resolution, color depth, and refresh requirements.
 - Use LVGL or a similar framework to manage widgets, invalidation, drawing, and input.
@@ -419,6 +422,3 @@ Use this checklist when starting a new SF32 graphics project:
 - Optimize memory placement and buffer strategy as carefully as rendering code.
 - Prefer partial refresh for bandwidth-limited panels and static wearable screens.
 - Treat UI performance as a system problem involving CPU, ePicasso, memory, display controller, panel interface, touch, and power policy.
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

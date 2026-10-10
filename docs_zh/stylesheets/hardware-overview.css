@@ -1,0 +1,49 @@
+/* ============================================================
+   Hardware Overview page — icon-badge styling
+   Scoped to its own class names (uf-hw-*) so this file can be
+   edited freely without any risk of affecting the homepage,
+   which uses its own separate classes in uforge-home.css.
+
+   Add to mkdocs.yml alongside the homepage stylesheet:
+     extra_css:
+       - stylesheets/uforge-home.css
+       - stylesheets/hardware-overview.css
+   ============================================================ */
+
+/* Icon badge: fixed-size flexbox box so the glyph is centered
+   by layout, not by padding + the icon font's own baseline
+   metrics (which is what caused the off-center look).
+   .md-typeset prefix + !important: the theme's
+   ".md-typeset .twemoji { height: 1.125em; vertical-align: text-top }"
+   otherwise out-ranks these and squashes the box to 42x22.5. */
+.md-typeset .uf-hw-icon {
+  font-size: 20px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 42px !important;
+  height: 42px !important;
+  padding: 0 !important;
+  line-height: 1;
+  vertical-align: middle !important;
+  border-radius: 9px;
+  margin-right: 6px;
+}
+
+.uf-hw-icon.uf-hw-blue   { color: var(--uf-blue, #2563eb)     !important; background: var(--uf-blue-bg, #dbeafe); }
+.uf-hw-icon.uf-hw-green  { color: var(--uf-green, #059669)    !important; background: var(--uf-green-bg, #d1fae5); }
+.uf-hw-icon.uf-hw-pink   { color: var(--uf-pink, #db2777)     !important; background: var(--uf-pink-bg, #fce7f3); }
+.uf-hw-icon.uf-hw-purple { color: var(--uf-purple, #7c3aed)   !important; background: var(--uf-purple-bg, #ede9fe); }
+
+/* The homepage stylesheet's global "*:first-child { padding-top: 0 }"
+   reset strips the FIRST card's top padding in plain cards grids,
+   making card 1 sit higher than its siblings. Restore it (scoped away
+   from the homepage's own uf-* grids, which manage their own padding). */
+.md-typeset .grid.cards:not([class*="uf-"]) > ul > li:first-child {
+  padding-top: .8rem !important;
+}
+
+.uf-hw-link-blue   { color: var(--uf-blue, #2563eb)     !important; font-weight: 600; font-size: 13px; }
+.uf-hw-link-green  { color: var(--uf-green, #059669)    !important; font-weight: 600; font-size: 13px; }
+.uf-hw-link-pink   { color: var(--uf-pink, #db2777)     !important; font-weight: 600; font-size: 13px; }
+.uf-hw-link-purple { color: var(--uf-purple, #7c3aed)   !important; font-weight: 600; font-size: 13px; }

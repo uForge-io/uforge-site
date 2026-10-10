@@ -6,13 +6,13 @@ tags:
     - Examples
 ---
 
-# Examples
+# Examples { #examples }
 
 Start from examples. SF32 firmware usually comes together faster when you adapt a working board-specific example instead of building every subsystem from scratch.
 
 The best example is not always the smallest example. Choose the one that already includes the hardest part of your product: Bluetooth profile, display panel, audio route, filesystem, OTA, USB, power mode, or AI accelerator.
 
-## Example Areas
+## Example Areas { #example-areas }
 
 <div align="center"><em>Table: Example Areas</em></div>
 
@@ -32,7 +32,7 @@ The best example is not always the smallest example. Choose the one that already
 
 </div>
 
-## Representative SDK Starting Points
+## Representative SDK Starting Points { #representative-sdk-starting-points }
 
 Use this table after choosing the relevant area. Paths are representative and can change between SDK releases; verify the selected SDK, target board, and configuration before building.
 
@@ -56,7 +56,7 @@ Use this table after choosing the relevant area. Paths are representative and ca
 
 </div>
 
-## How to Choose an Example
+## How to Choose an Example { #how-to-choose-an-example }
 
 Use this order:
 
@@ -68,7 +68,7 @@ Use this order:
 
 For example, a Bluetooth audio product should start closer to an audio/Bluetooth example than to a clean `hello_world`, even if the latter is easier to understand.
 
-## Adaptation Workflow
+## Adaptation Workflow { #adaptation-workflow }
 
 1. Build and flash the unmodified example.
 2. Save the successful build command, board name, flash command, serial port, and log.
@@ -78,7 +78,7 @@ For example, a Bluetooth audio product should start closer to an audio/Bluetooth
 
 This workflow is slower for the first hour and much faster after the first hard failure.
 
-## Evidence to Keep
+## Evidence to Keep { #evidence-to-keep }
 
 For each example that becomes a product base, record:
 
@@ -91,7 +91,7 @@ For each example that becomes a product base, record:
 - Memory footprint if available.
 - Recovery command.
 
-## Example Selection Rule
+## Example Selection Rule { #example-selection-rule }
 
 Choose the example that matches the most constrained part of the product:
 
@@ -102,9 +102,6 @@ Choose the example that matches the most constrained part of the product:
 
 Then add the other subsystems one by one.
 
-## Suggested Learning Path
+## Suggested Learning Path { #suggested-learning-path }
 
 If you are new to the SDK, begin with [Beginner Tutorials](../../getting-started/tutorials/beginner.md), then move to [Intermediate Tutorials](../../getting-started/tutorials/intermediate.md) when a single peripheral is stable. Use [Advanced Tutorials](../../getting-started/tutorials/advanced.md) for measured power work, OTA, custom display bring-up, failure analysis, multi-connection Bluetooth, and custom drivers. The topic overviews explain the architecture and trade-offs behind those examples.
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

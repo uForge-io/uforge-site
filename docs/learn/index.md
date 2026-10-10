@@ -12,11 +12,11 @@ Use **Learn** to make subsystem and architecture decisions before they become ha
 
 Use [Getting Started](../getting-started/index.md) for the first successful board run, [Tutorials](../getting-started/tutorials/overview.md) for guided exercises, [Develop](../develop/index.md) for software workflows and examples, and the [SF32 Family](../sf32-products/family/SF32_family.md) for part selection and production design.
 
-## Start with Your Design Question
+## Start with Your Design Question { #start-with-your-design-question }
 
 <div align="center"><em>Table: Find the Right Learning Path</em></div>
 
-<div align="center" markdown>
+<div align="center" markdown style="max-width: 100%; overflow-x: auto;">
 
 | If you need to… | Start here | Then explore |
 |:----------------|:-----------|:-------------|
@@ -29,16 +29,16 @@ Use [Getting Started](../getting-started/index.md) for the first successful boar
 
 </div>
 
-## Use the Pages Together
+## Use the Pages Together { #use-the-pages-together }
 
 Most real products cross several groups. A wearable with a display, BLE, microphone, and battery budget should not treat those as isolated features: display refresh affects memory traffic and active time; Bluetooth scheduling affects wake frequency; audio and AI affect buffers and latency; each decision changes the power budget.
 
 Use the pages as a design loop:
 
 1. Start from the dominant product requirement and the selected device. Confirm that the required display, Bluetooth, AI, audio, memory, and low-power capabilities are actually documented for that device.
-2. Set the processor and memory boundaries before application integration. Define the working-set, framebuffer, model, and audio-buffer placement; keep latency-critical work in the appropriate low-latency memory; and use dedicated hardware only where its capability and integration constraints fit the product.
+2. Define processor responsibilities and memory allocation before application integration. Plan where the working set, framebuffers, model, and audio buffers will reside; place code and data needed by latency-critical tasks in suitable low-latency memory; and use dedicated hardware only where its capabilities and integration constraints fit the product.
 3. Follow the overview for the dominant subsystem into its detailed implementation page. Treat cross-links to Bluetooth, memory, and low power as design dependencies, not optional background reading.
 4. Validate the complete combination on the intended hardware. Use the workflows in [Develop](../develop/index.md) and the measurements called out in the relevant Learn pages to test functional behavior, latency, bandwidth, RF behavior, and power together.
 
 !!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.
+    This page was compiled/drafted without an existing source document dedicated to its content. Verify technical claims against SiFli's official documentation before relying on them.

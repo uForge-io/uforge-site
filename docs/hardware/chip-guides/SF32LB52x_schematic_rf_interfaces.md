@@ -1,5 +1,7 @@
 ---
 icon: lucide/circuit-board
+hide:
+    - navigation
 description: "RF and user-interface schematic design guidelines for the SF32LB52x MCU: antenna matching, display, audio, buttons, and vibration motor."
 tags:
     - Hardware
@@ -31,6 +33,8 @@ RF trace characteristic impedance is 50 Ω. If the antenna is already matched, n
 
 <div align="center"><em>Figure 5.4-1: RF Circuit Diagram</em></div>
 
+Figure 5.4-1 shows a 15 pF, 50 V series capacitor (C0323); the two shunt positions C0318 and C0319 are marked NF (not fitted). These are reference values, not a universal antenna match. Keep the matching network close to the chip-side RF pin and determine its final population from measurements on the assembled product.
+
 #### 5.4.2. RF Review and Tuning
 
 **Common Mistakes - RF**
@@ -45,7 +49,7 @@ RF trace characteristic impedance is 50 Ω. If the antenna is already matched, n
 - [ ] RF trace impedance target is defined with the PCB vendor.
 - [ ] Pi matching network is reserved and placed close to the chip.
 - [ ] Ground-via fence and RF keep-out are reviewed.
-- [ ] Antenna tuning and certification access are planned before enclosure freeze.
+- [ ] Provide access for antenna tuning and certification testing before finalizing the enclosure design.
 
 ### 5.5. User Interfaces
 
@@ -84,6 +88,9 @@ Supported LCD driver models:
 
 </div>
 
+!!! note "Display-driver interfaces are not MCU capabilities"
+    Table 5.5-1 lists the interfaces offered by the LCD driver ICs, not interfaces that are all available on SF32LB52x. A driver entry mentioning MIPI-DSI or an 8-bit 8080 MCU bus does not establish MCU support for that interface. Select a panel interface supported by both the exact MCU variant and the driver.
+
 ##### 5.5.1.1. SPI/QSPI Display Interface
 
 <div align="center"><em>Table 5.5-2: SPI/QSPI Signal Connections</em></div>
@@ -105,6 +112,9 @@ Supported LCD driver models:
 </div>
 
 ##### 5.5.1.2. JDI Display Interface
+
+!!! important "JDI terminology in the source"
+    The original application notes describe serial JDI in their capability summaries but label the following pin table as parallel JDI. The source pin assignments are retained here. Before fixing the schematic, confirm the intended JDI mode, panel requirements, and support for the exact MCU variant; do not treat the serial and parallel interfaces as interchangeable.
 
 <div align="center"><em>Table 5.5-3: Parallel JDI Signal Connections</em></div>
 
@@ -139,13 +149,13 @@ Supported LCD driver models:
 
     | EPD Signal | I/O | Description |
     |:---|:---|:---|
-    | CLK | PA04 | Clock source driver |
-    | CKV/CPV | GPIO | Clock gate driver |
-    | SPH | PA06 | Start pulse source driver |
-    | SPV/STV | GPIO | Start pulse gate driver |
-    | LE | GPIO | Latch enable source driver |
-    | OE | GPIO | Output enable source driver |
-    | D0–D7 | PA07/PA08/PA37/PA39/PA40/PA41/PA42/PA43 | Data signal source driver, bits 0–7 |
+    | CLK | PA04 | Source-driver clock |
+    | CKV/CPV | GPIO | Gate-driver clock |
+    | SPH | PA06 | Source-driver start pulse |
+    | SPV/STV | GPIO | Gate-driver start pulse |
+    | LE | GPIO | Source-driver latch enable |
+    | OE | GPIO | Source-driver output enable |
+    | D0–D7 | PA07/PA08/PA37/PA39/PA40/PA41/PA42/PA43 | Source-driver data, bits 0–7 |
     | GMODE | GPIO | Output mode selection, gate driver |
     | VPOS/VNEG | TPS | Positive/negative power supply, source driver |
     | VGH/VGL | TPS | Positive/negative power supply, gate driver |
@@ -209,10 +219,10 @@ The SF32LB52x supports an I2C touch-controller interface with a touch-status int
 
 Preserve analog signal quality by keeping microphone, DAC, bias, and audio power paths short, filtered, shielded, and isolated from digital and switching-noise sources.
 
-The shared audio interface provides:
+The audio interface provides:
 
-1. One single-ended ADC input for an analog microphone, with a DC-blocking capacitor of at least 2.2 uF in series; the microphone is powered from the chip's MIC_BIAS output
-2. One differential DAC output for an external audio PA — route as a differential pair with proper ground shielding; keep trace capacitance < 10 pF and length < 2 cm
+1. One single-ended ADC input for an analog microphone, with a DC-blocking capacitor of at least 2.2 uF in series; the microphone is powered from the chip's MIC_BIAS output.
+2. One differential DAC output for an external audio PA. Route it as a differential pair with proper ground shielding; keep trace capacitance < 10 pF and length < 2 cm.
 
 <div align="center"><em>Table 5.5-6: Audio Signal Connections</em></div>
 
@@ -235,6 +245,8 @@ The shared audio interface provides:
 
 <div align="center"><em>Figure 5.5-2: Analog ECM MIC Single-Ended Input Circuit</em></div>
 
+The microphone examples filter MIC_BIAS with a 1 kΩ series resistor and a 1 uF, 6.3 V capacitor to ground. The ECM circuit also uses a 4.7 kΩ microphone-bias resistor. Both examples show a 0.01 uF input capacitor to ground; it is a shunt filter, not the series DC-blocking capacitor required in the signal path. Retain the distinction when adapting these reference circuits.
+
 ![Figure 5.5-3: Analog Audio PA Circuit](../../sf32-products/chips/assets/52xB/sf32lb52X-B-DAC-PA.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 5.5-3: Analog Audio PA Circuit</em></div>
@@ -252,6 +264,9 @@ The shared audio interface provides:
 - [ ] DACP/DACN are routed as a short, shielded differential pair.
 - [ ] Audio filter capacitors are close to their pins and grounded cleanly.
 - [ ] Bring-up plan covers microphone bias, ADC noise floor, DAC output, PA enable, and audible noise.
+
+!!! important "Complete the microphone and DAC paths"
+    The source connects both MEMS_MIC_ADC_IN and ECM_MIC_ADC_IN to ADCP. Include the series DC-blocking capacitor of at least 2.2 uF required above; the 0.01 uF shunt capacitor shown in the microphone circuits is not a substitute. Place the differential low-pass filter in the dashed box of Figure 5.5-3 close to the MCU, keeping the DAC output trace capacitance below 10 pF and length below 2 cm.
 
 #### 5.5.3. Buttons
 
@@ -272,6 +287,8 @@ PA34 supports long-press reset and can be designed as a combined power on/off an
 
 <div align="center"><em>Figure 5.5-4: Power / Long-Press-Reset Button Circuit</em></div>
 
+The reference circuit uses R0703 (5.1 kΩ) between VSYS_3V3 and the button, with R0702 (100 kΩ) pulling PA34 low and C0720 (0.1 uF) connected to ground. It also includes an ESD protection device. These values describe the illustrated design; check the input thresholds, debounce behavior, leakage, and reset timing when adapting it.
+
 ##### 5.5.3.2. Mechanical Rotary Encoder Button
 
 Use the reference design as the baseline for the rotary encoder button circuit.
@@ -279,6 +296,8 @@ Use the reference design as the baseline for the rotary encoder button circuit.
 ![Figure 5.5-5: Mechanical Rotary Encoder Button Circuit](../../sf32-products/chips/assets/52xB/sf32lb52X-B-XNKEY.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 5.5-5: Mechanical Rotary Encoder Button Circuit</em></div>
+
+The encoder's A and B signals connect to PA35 and PA36 through 0 Ω resistors. Each signal has a 200 kΩ pull-up to VDD33_LDO2_VOUT and ESD protection; C0703 and C0706 are marked NF (not fitted). The signal labels also identify USB/UART multiplexed functions, so check pin conflicts before adopting this assignment.
 
 **Common Mistakes - Buttons**
 
@@ -313,6 +332,8 @@ The SF32LB52x supports a PWM output for driving a vibration motor through an ext
 ![Figure 5.5-7: Vibration Motor Driver Circuit (52B/D/E/G/J Reference)](../../sf32-products/chips/assets/52xB/sf32lb52X-B-VIB.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 5.5-7: Vibration Motor Driver Circuit (52B/D/E/G/J Reference)</em></div>
+
+Both motor examples use PA20 to control a low-side MOSFET, with a 1 MΩ gate pull-down. Figure 5.5-6 powers the motor from the chip's 3.3 V VDD33_VOUT2 output. Figure 5.5-7 instead uses separate external 3.3 V LDOs for the motor and PVDD, supplied from VSYS/VBAT. The control function is equivalent, but the supply connections are not interchangeable.
 
 **Motor Checklist**
 

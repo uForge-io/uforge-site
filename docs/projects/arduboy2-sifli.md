@@ -7,15 +7,15 @@ tags:
     - Graphics
 ---
 
-# Arduboy2 on SiFli
+# Arduboy2 Port for SF32LB52 { #arduboy2-on-sifli }
 
-## What Is Arduboy2-SiFli?
+## What Is Arduboy2-SiFli? { #what-is-arduboy2-sifli }
 
 [OpenSiFli/Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) is an OpenSiFli port of the [Arduboy2 library](https://github.com/MLXXXp/Arduboy2) for the SiFli development environment. Arduboy2 provides an application-facing model for a small game device: a frame loop, a display buffer, buttons, sprites, text, and optional sound control. The SiFli port is therefore useful as a compatibility experiment: it tests how much of an Arduboy-style game can be retained while the underlying board, display, input, audio, and build path move to SF32.
 
 The repository is a software reference, not a finished game console or a production hardware design. Treat its README, source tree, examples, issue history, and license files as the authority for the exact board target, supported API surface, build instructions, and redistribution conditions. This page organizes the engineering decisions around that reference; it does not replace the repository's executable instructions.
 
-## Why the SiFli Implementation?
+## Why This SF32 Port? { #why-the-sifli-implementation }
 
 An Arduboy-style application is a compact way to exercise several embedded-product decisions at once: a predictable render loop, small monochrome or low-resolution assets, button input, audio timing, and a tightly bounded memory budget. Porting that model to SF32 can provide a useful early reference for handheld games, UI demonstrators, educational devices, and other products whose interaction is local and deterministic.
 
@@ -27,7 +27,7 @@ The value is not that every Arduboy sketch will run unchanged. The value is the 
 
 These are engineering expectations, not measured compatibility claims. Confirm them against the current OpenSiFli repository and record the exact result for the selected board and commit.
 
-## Outcome, Scope, and Entry Criteria
+## Outcome, Scope, and Entry Criteria { #outcome-scope-and-entry-criteria }
 
 This page defines a staged route from the OpenSiFli reference to one reproducible SF32 game or interactive demo. It does **not** claim that the port supports every Arduboy2 feature, every Arduboy game, every SF32 board, or production-quality display and audio timing. It also does not establish licensing rights for games, fonts, graphics, or other assets copied from third-party repositories.
 
@@ -37,8 +37,8 @@ This page defines a staged route from the OpenSiFli reference to one reproducibl
 
 Before starting, have the following available:
 
-- A development board and display/input hardware explicitly named by the repository or by the current SiFli Arduino path.
-- A known-good Arduino installation and the OpenSiFli board package. The current μForge Arduino guide documents the **SF32LB52 DevKit LCD** as its baseline; verify that Arduboy2-SiFli targets the same board before treating it as a supported combination.
+- An SF32LB52 development board using the ArduinoCore-Zephyr variant `sf32lb52_devkit_lcd_sf32lb525uc6`, plus the external peripherals described below. The README reports that the display, buttons, external EEPROM, and audio paths have been exercised on SF32LB52 hardware; it documents an RGB LED path but does not state a test result for it. The README does not pin a physical board revision or identify the exact OLED module.
+- A known-good Arduino installation and the matching OpenSiFli board package. The variant name is a software/pin-mapping baseline, not proof that every SF32LB52-DevKit-LCD assembly matches the project's external wiring; check the physical board schematic before connecting peripherals.
 - The exact Arduboy2-SiFli commit, Arduino core/package version, host OS, and upload tool.
 - A USB data connection and a way to capture the serial log and observe the display, buttons, and audio output.
 - Permission to use and redistribute every game, image, font, and sound asset included in a downstream adaptation.
@@ -50,16 +50,51 @@ Before starting, have the following available:
 | Area | Project baseline | Evidence before adaptation |
 |:-----|:-----------------|:---------------------------|
 | Source | A recorded OpenSiFli/Arduboy2-SiFli commit and its dependency revisions. | Clean checkout and a reproducible build record. |
-| Board | The exact SF32 board and display/input/audio configuration named by the repository. | Board identity, wiring, power source, and successful upload are recorded. |
+| Board | SF32LB52 and ArduinoCore-Zephyr variant `sf32lb52_devkit_lcd_sf32lb525uc6`, with the external peripherals listed below. | Record the physical board revision, wiring, power source, and successful upload; the repository does not pin a board revision or OLED model. |
 | Toolchain | Arduino IDE or CLI, OpenSiFli board package, and the documented upload path. | Package versions, board selection, compiler output, upload log, and serial log. |
 | Reference behavior | One upstream example or minimal sketch that exercises the port. | Display refresh, input response, and any supported audio behavior are observed and repeatable. |
 | Product change | One bounded game or UI adaptation. | The reference test still passes after the change, with asset and license records retained. |
 
 </div>
 
-## Choose a Supported Baseline
+## Hardware and Software Specifications { #hardware-and-software-specifications }
+
+### Hardware Specification { #hardware-specification }
+
+<div align="center"><em>Table: Arduboy2-SiFli Hardware Specification</em></div>
+
+<div align="center" markdown>
+
+| Component | Required specification | Role | Status | Where to get it | Compatibility and substitution notes |
+|:----------|:-----------------------|:-----|:-------|:----------------|:-------------------------------------|
+| SF32LB52 development board | ArduinoCore-Zephyr variant `sf32lb52_devkit_lcd_sf32lb525uc6`; the repository does not pin a physical board revision | Runs the port and provides the mapped MCU pins | Required | [Arduboy2-SiFli source](https://github.com/OpenSiFli/Arduboy2-SiFli); [ArduinoCore-zephyr variant](https://github.com/OpenSiFli/ArduinoCore-zephyr) | This identifies the software board variant and pin map, not a validated physical assembly; compare the actual board revision and schematic before wiring |
+| Monochrome OLED | 128 × 64 pixels, connected over SPI1; the repository does not identify the exact module or controller | Displays the game framebuffer | Required | [Arduboy2-SiFli source](https://github.com/OpenSiFli/Arduboy2-SiFli) | The OLED is an external peripheral; verify controller, voltage, connector, orientation, and timing against the module and board before use |
+| Six game buttons | Arduboy-compatible inputs; active-low with pull-ups, using the pin mapping in the repository | Reads directional and A/B controls | Required | [Arduboy2-SiFli source](https://github.com/OpenSiFli/Arduboy2-SiFli) | The buttons are external; verify the mapped Arduino IOs against the physical board and record the wiring and debounce behavior |
+| External EEPROM | AT24C02 or AT24C32 over I2C1 at address `0x50` | Supports EEPROM-backed library features | Optional; required only for features that use EEPROM | [Arduboy2-SiFli source](https://github.com/OpenSiFli/Arduboy2-SiFli) | Confirm the selected device, voltage, pull-ups, and bus wiring; the repository does not specify a fitted EEPROM assembly |
+| Audio output and RGB indicator | Repository-supported audio backends use the mapped speaker outputs; an external common-cathode RGB LED is driven by software PWM | Optional sound and color indication | Optional; select for the sketch under test | [Arduboy2-SiFli source](https://github.com/OpenSiFli/Arduboy2-SiFli) | The source does not define a complete speaker/LED bill of materials; verify the external circuit, pin mapping, current, and audio behavior |
+| Host and USB data connection | Host supported by the selected Arduino toolchain; data-capable cable and serial-log access | Build, upload, and observe the reference | Required | [ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) | Record host OS, cable/port, package versions, and recovery method; a charge-only cable is insufficient |
+
+</div>
+
+### Software Specification { #software-specification }
+
+<div align="center"><em>Table: Arduboy2-SiFli Software Specification</em></div>
+
+<div align="center" markdown>
+
+| Package or service | Required version or revision | Role | Status | Where to get it | Compatibility and update notes |
+|:-------------------|:-----------------------------|:-----|:-------|:----------------|:-------------------------------|
+| OpenSiFli/Arduboy2-SiFli | Pin and record one commit; this article does not freeze a revision | SF32 compatibility layer and examples | Required | [Repository](https://github.com/OpenSiFli/Arduboy2-SiFli) | Recheck the board target, dependencies, and supported API at the selected commit |
+| OpenSiFli/ArduinoCore-zephyr and board package | Exact compatible commit/package version must be resolved from the port and recorded | Arduino runtime, board definition, compiler, and upload integration | Required | [Repository](https://github.com/OpenSiFli/ArduinoCore-zephyr) | Do not substitute a newer core or another board package without a clean build and peripheral regression |
+| Test sketch and game assets | One repository example or a separately licensed test sketch; record asset revisions and licenses | Exercises the selected API and product path | Choose one | [Arduboy2-SiFli examples](https://github.com/OpenSiFli/Arduboy2-SiFli) | The article does not grant rights to redistribute third-party games, fonts, images, or sounds |
+
+</div>
+
+## Choose a Supported Baseline { #choose-a-supported-baseline }
 
 Start with the board and software combination named in the OpenSiFli repository rather than selecting a board from the product catalogue by similarity. The board package, display wiring, input mapping, upload method, and library assumptions are part of the baseline.
+
+The Arduboy2-SiFli repository does not provide the board pin map as a separate file: its README publishes the [SiFli I/O mapping table](https://github.com/OpenSiFli/Arduboy2-SiFli#sifli-io-mapping). The library's logical pin definitions are in [`pins_sifli.h`](https://github.com/OpenSiFli/Arduboy2-SiFli/blob/master/src/platforms/sifli/pins_sifli.h), while board-specific routing is in the ArduinoCore-Zephyr [Devicetree overlay](https://github.com/OpenSiFli/ArduinoCore-zephyr/blob/main/variants/sf32lb52_devkit_lcd_sf32lb525uc6/sf32lb52_devkit_lcd_sf32lb525uc6.overlay). These sources define a software baseline, not a validated physical assembly; verify the actual board revision and schematic before wiring.
 
 <div align="center"><em>Table: Baseline Selection</em></div>
 
@@ -67,7 +102,7 @@ Start with the board and software combination named in the OpenSiFli repository 
 
 | Baseline element | Select it from | Do not assume |
 |:-----------------|:---------------|:--------------|
-| Target board | Arduboy2-SiFli README, examples, and board configuration. | A sketch tested on one SF32 board is portable to another board with the same chip. |
+| Target board | The ArduinoCore-Zephyr variant `sf32lb52_devkit_lcd_sf32lb525uc6` identified by the Arduboy2-SiFli README, then the physical board schematic. | The software variant proves that every physical board revision or peripheral assembly is compatible. |
 | Arduino core | The OpenSiFli package and revision documented for the target. | The latest package is interchangeable with the revision used by the repository. |
 | Display and input | The repository's pin/configuration definitions and the physical board schematic. | Arduboy's original display geometry, button polarity, or pin names match the SF32 board. |
 | Audio | The repository's supported output path and any board-specific configuration. | A tone API proves that speaker timing, volume, and power behavior are product-ready. |
@@ -75,9 +110,9 @@ Start with the board and software combination named in the OpenSiFli repository 
 
 </div>
 
-If the repository does not identify a complete board configuration, stop at the baseline-discovery stage and record the missing information. Do not fill the gap with pin mappings or addresses copied from another SF32 project.
+The repository identifies a software board variant and peripheral pin map, and reports that the display, buttons, external EEPROM, and audio paths have been exercised on SF32LB52 hardware. It documents an external RGB LED path but does not state that it was tested. The repository does not identify the physical board revision, exact OLED module/controller, or a complete accessory assembly. Before wiring or claiming a reproducible hardware baseline, match the variant's pin map to the actual board schematic and record the parts and revisions used. Do not fill any remaining gap with pin mappings or addresses copied from another SF32 project.
 
-## Delivery Map
+## Delivery Map { #delivery-map }
 
 Use the stages as decision gates rather than as a feature checklist.
 
@@ -95,7 +130,7 @@ Use the stages as decision gates rather than as a feature checklist.
 
 </div>
 
-## System Architecture and Dependencies
+## System Architecture and Dependencies { #system-architecture-and-dependencies }
 
 <div align="center"><em>Figure: Arduboy2-SiFli Application Path</em></div>
 
@@ -119,7 +154,7 @@ This is a decision model, not a claim that the repository uses exactly these int
 
 The principal failure domains are application/API compatibility, display configuration, input wiring, audio/timer behavior, memory and asset placement, and upload/recovery. A failure in one domain should not be reported simply as “the port does not work.”
 
-## Stage 1 — Establish the Untouched Reference
+## Stage 1 — Establish the Untouched Reference { #stage-1-establish-the-untouched-reference }
 
 **Goal:** prove that the repository's documented baseline is real before changing the library or a game.
 
@@ -132,7 +167,7 @@ The principal failure domains are application/API compatibility, display configu
 
 **Gate 1 exit criterion:** the untouched reference builds and uploads on the selected board, and its documented behavior is repeatable after a reset or power cycle.
 
-## Stage 2 — Validate Peripheral and Timing Boundaries
+## Stage 2 — Validate Peripheral and Timing Boundaries { #stage-2-validate-peripheral-and-timing-boundaries }
 
 **Goal:** separate a successful compile from a usable game-device baseline.
 
@@ -145,7 +180,7 @@ The principal failure domains are application/API compatibility, display configu
 
 **Gate 2 exit criterion:** the selected peripheral path is understood well enough to distinguish application bugs from board configuration, timing, or power problems.
 
-## Stage 3 — Build a Reproducible Source Baseline
+## Stage 3 — Build a Reproducible Source Baseline { #stage-3-build-a-reproducible-source-baseline }
 
 **Goal:** make the port reproducible instead of depending on one development machine or a supplied binary.
 
@@ -158,7 +193,7 @@ The principal failure domains are application/API compatibility, display configu
 
 **Gate 3 exit criterion:** a clean checkout reproduces an image that passes the Stage 2 peripheral checks without undocumented local files or manual edits.
 
-## Stage 4 — Adapt One Game Deliberately
+## Stage 4 — Adapt One Game Deliberately { #stage-4-adapt-one-game-deliberately }
 
 **Goal:** prove the compatibility boundary with one controlled product change.
 
@@ -184,7 +219,7 @@ Do not copy AVR register access, original Arduboy pin assumptions, or storage ad
 
 **Gate 4 exit criterion:** the adapted game passes the reference peripheral checks, and its memory, timing, recovery, and licensing boundaries are recorded.
 
-## Stage 5 — Product-Readiness Review
+## Stage 5 — Product-Readiness Review { #stage-5-product-readiness-review }
 
 Do not move from a porting demonstration to custom hardware or a field trial until the team can answer:
 
@@ -197,13 +232,13 @@ Do not move from a porting demonstration to custom hardware or a field trial unt
 
 **Gate 5 exit criterion:** remaining risks have named owners and evidence; each item has a mitigation, an explicit deferral, or a stop decision.
 
-## Handoff to Product Design
+## Handoff to Product Design { #handoff-to-product-design }
 
 Carry the selected SF32 device, display and input architecture, audio/timer plan, flash and asset layout, power measurements, recovery method, and production-test assumptions into the [Hardware](../hardware/index.md) section. Use the [SF32 Product Selector](../sf32-products/product-selector.md) when the game’s display, memory, package, power, or connectivity requirements change the device shortlist. For the software baseline, start with [Getting Started with Arduino](../getting-started/arduino/getting-started-arduino.md) and continue with the [Arduino platform overview](../develop/platforms/arduino/overview.md).
 
 The reference has served its product-development purpose when another engineer can rebuild the port, reproduce the peripheral results, explain every board-specific adaptation, and review the evidence before a custom board or expanded game library is approved.
 
-## Authoritative Sources
+## Authoritative Sources { #authoritative-sources }
 
 - [OpenSiFli/Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli)
 - [MLXXXp/Arduboy2](https://github.com/MLXXXp/Arduboy2)

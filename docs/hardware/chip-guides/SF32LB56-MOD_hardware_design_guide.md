@@ -4,6 +4,8 @@ description: "Hardware design guide for the SF32LB56-MOD Bluetooth MCU module: p
 tags:
   - Hardware
   - Module
+hide:
+    - navigation
 ---
 
 # SF32LB56-MOD Hardware Design Guide
@@ -12,7 +14,7 @@ tags:
 
 **SF32LB56-MOD** is SiFli's general-purpose low-power Bluetooth MCU module family, built on the SF32LB56xV series.
 
-This guide presents **DS5602-SF32LB56-MOD Technical Specification V0.3** as an integration-focused hardware reference for schematic design, layout planning, validation, and production release. It preserves the module-specific details from DS5602, including memory variants, the 89-pin interface, three power rails, display/audio/storage interfaces, antenna placement rules, handling requirements, and the schematic checklist.
+This guide uses **DS5602-SF32LB56-MOD Technical Specification V0.3** as its source and organizes the module-specific information needed for schematic design, PCB layout, validation, and production release. It covers memory variants, the 89-pin interface, three power rails, display/audio/storage interfaces, antenna-placement rules, handling requirements, and the schematic checklist.
 
 !!! note "Source and recommendations"
     Technical values below follow **DS5602-SF32LB56-MOD Technical Specification V0.3** unless explicitly marked as integration guidance or a design recommendation.
@@ -21,9 +23,9 @@ This guide presents **DS5602-SF32LB56-MOD Technical Specification V0.3** as an i
 
 ### 2.1 Architecture
 
-SF32LB56-MOD uses an SF32LB56xV-series dual-core MCU platform with an HCPU for application and graphics workloads and an LCPU for low-power always-on tasks. The HCPU is an Arm Cortex-M33 STAR-MC1 core running up to 240MHz; the LCPU is an Arm Cortex-M33 STAR-MC1 core running up to 96MHz. Both cores support FPU and MPU functions.
+SF32LB56-MOD uses a dual-core MCU platform from the SF32LB56xV series. The HCPU handles application and graphics workloads; the LCPU runs low-power, always-on tasks. The HCPU is an Arm Cortex-M33 STAR-MC1 core operating at up to 240 MHz; the LCPU is the same core type operating at up to 96 MHz. Both support FPU and MPU.
 
-The module also provides Bluetooth 6.3 wireless connectivity, display acceleration, audio input/output, external-memory interfaces, USB2.0 FS, SD/SDIO/eMMC, I2S, UART, I2C, SPI, PWM, GPADC, and debug/download access.
+The module supports Bluetooth 5.3 connectivity and provides display acceleration, audio I/O, external-memory interfaces, USB 2.0 FS, SD/SDIO/eMMC, I2S, UART, I2C, SPI, PWM, GPADC, and debug/download access.
 
 ### 2.2 Variants
 
@@ -48,10 +50,10 @@ The module also provides Bluetooth 6.3 wireless connectivity, display accelerati
 | Area | Capability |
 | :--- | :--- |
 | CPU | HCPU up to 240MHz, LCPU up to 96MHz, both Arm Cortex-M33 STAR-MC1 |
-| Wireless | Dual-mode Bluetooth 6.3 with BLE Audio support |
+| Wireless | Dual-mode Bluetooth 5.3 with BLE Audio support |
 | Graphics | ePicasso 2.0, eZip 2.0, TurboPixel, LCD 8080/SPI/Dual-SPI/Quad-SPI/DPI/RGB/JDI |
-| Audio | 24-bit DAC, 24-bit Sigma-Delta ADC, 2x PDM digital mic inputs, 1x I2S |
-| AI/DSP | Matrix accelerator up to 1.92GOPS, FFT, FIR, CORDIC |
+| Audio | 24-bit DAC, 24-bit Sigma-Delta ADC, 2 PDM interfaces (PDM1/PDM2), each supporting two microphones on left/right channels (up to four microphones total), 1x I2S |
+| AI/DSP | Matrix accelerator up to 1.92 GOPS, FFT, FIR, CORDIC |
 | Storage | Module Flash/PSRAM options, MPI3, SD/SDIO/eMMC support |
 | Security | AES, HASH, CRC, TRNG, Secure Boot, 1024-bit eFuse, PSA Certified Level 1 |
 | Antenna | PCB on-board antenna or external antenna through IPEX-compatible connector |
@@ -60,7 +62,7 @@ The module also provides Bluetooth 6.3 wireless connectivity, display accelerati
 
 ### 2.4 Typical Applications
 
-Typical applications include high-end smart watches, smart bands, wearable medical equipment, fitness equipment, e-bike control panels, car keys, wearable vehicle remote controls, smart appliances, smart locks, graphical HMI devices, industrial sensor centers, industrial monitoring terminals, low-power sensor hubs, and Bluetooth mesh devices.
+Typical applications include high-end smartwatches, smart bands, wearable medical equipment, fitness equipment, e-bike control panels, car keys, wearable remote controls for vehicles, smart appliances, smart locks, graphical HMI devices, industrial sensor hubs, industrial monitoring terminals, low-power sensor hubs, and Bluetooth Mesh devices.
 
 ## 3. Design at a Glance
 
@@ -202,7 +204,7 @@ The module platform uses a 48MHz crystal oscillator and supports low-power RC os
 
 </div>
 
-The module supports PCB on-board antenna or an external antenna through an IPEX-compatible connector. Validate communication distance and RF performance in the final enclosure, not only on an open bench.
+The module supports an on-board PCB antenna or an external antenna connected through an IPEX-compatible connector. Validate the communication range and RF performance in the final enclosure, not only on an open bench.
 
 ### 5.3 User Interfaces
 
@@ -263,7 +265,7 @@ Reserve production access for power, ground, boot mode, reset/PWRKEY, SWD, UART 
 
 ### 6.1 Mechanical and Footprint
 
-The module measures 18.0 × 32.9 × 3.1mm. Use the recommended PCB footprint from the datasheet and verify the land pattern, solder-mask expansion, paste opening, keep-out, and assembly courtyard with the PCB assembly vendor.
+The module measures 18.0 × 32.9 × 3.1 mm. Use the recommended PCB footprint from the datasheet and confirm the land pattern, solder-mask expansion, stencil apertures, keep-out area, and assembly courtyard with the PCB assembler.
 
 !!! info "Figure 6.1-1: SF32LB56-MOD Module Dimensions"
     See Figure 8-1 in DS5602 V0.3.
@@ -423,9 +425,9 @@ VDD is the I/O supply. VOH and VOL are measured with a high-impedance load.
 
 </div>
 
-### 7.4 Production Handling
+### 7.4 Storage, Handling, and Assembly
 
-<div align="center"><em>Table 7.4-1: Handling and Assembly Requirements</em></div>
+<div align="center"><em>Table 7.4-1: Storage, Handling, and Assembly Requirements</em></div>
 
 <div align="center" markdown>
 
@@ -461,13 +463,13 @@ VDD is the I/O supply. VOH and VOL are measured with a high-impedance load.
 
 </div>
 
-## Appendices
+## 9. Appendices { #appendices }
 
-### Appendix A. Pin Planning Reference
+### 9.1. Appendix A. Pin Planning Reference { #appendix-a-pin-planning-reference }
 
 DS5602 V0.3 provides the complete 89-pin definition table and top-view pinout. The table below highlights the pins and signal groups that most often affect schematic risk, boot/debug access, or shared-resource planning.
 
-<div align="center"><em>Table A-1: Critical Pin and Signal Groups</em></div>
+<div align="center"><em>Table 9.1-1: Critical Pin and Signal Groups</em></div>
 
 <div align="center" markdown>
 
@@ -490,9 +492,11 @@ DS5602 V0.3 provides the complete 89-pin definition table and top-view pinout. T
 
 </div>
 
-### Appendix B. Revision History
+## 10. Revision History { #appendix-b-revision-history }
 
-<div align="center"><em>Table B-1: Guide Revision History</em></div>
+### 10.1. Guide Revision History { #guide-revision-history }
+
+<div align="center"><em>Table 10.1-1: Guide Revision History</em></div>
 
 <div align="center" markdown>
 
@@ -502,7 +506,9 @@ DS5602 V0.3 provides the complete 89-pin definition table and top-view pinout. T
 
 </div>
 
-<div align="center"><em>Table B-2: Source Datasheet Revision History</em></div>
+### 10.2. Source Datasheet Revision History { #source-datasheet-revision-history }
+
+<div align="center"><em>Table 10.2-1: Source Datasheet Revision History</em></div>
 
 <div align="center" markdown>
 

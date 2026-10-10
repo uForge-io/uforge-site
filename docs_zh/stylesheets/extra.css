@@ -1,0 +1,264 @@
+.invert-icon {
+  filter: invert(100%);
+}
+
+/* Marks a checklist item that was highlighted in red in a source document
+   (e.g. an imported spreadsheet checklist), so the flag survives the
+   conversion to markdown.
+   Scoped under .md-typeset (and !important) because the theme's own
+   table-cell color rules (e.g. ".md-typeset table td") are more specific
+   than a bare ".flag-red" class selector and were silently winning,
+   leaving the text in the default color instead of red. */
+.md-typeset .flag-red {
+  color: #d32f2f !important;
+  font-weight: 600;
+}
+
+.md-typeset .flag-yellow {
+  background-color: #fff176;
+  padding: 0 0.15em;
+}
+
+.md-typeset .flag-purple {
+  color: #7030a0 !important;
+  font-weight: 600;
+}
+
+.md-typeset .flag-blue {
+  color: #0070c0 !important;
+  font-weight: 600;
+}
+
+.md-typeset .flag-green {
+  color: #00b050 !important;
+  font-weight: 600;
+}
+
+/* Language-switch header button (overrides/partials/alternate.html).
+   Icon-only click target -- same footprint as the stock .md-header__button,
+   no visible text label (title/aria-label still carry the language name
+   for tooltips and screen readers). */
+.md-header__button.uf-lang-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* M2 interface visual guide. The category colors are repeated in the pinout
+   overview and signal guide, so a reader can scan the connector allocation
+   before using the detailed contact-assignment table. */
+.m2-visual-guide {
+  margin: 1.5rem 0;
+}
+
+.m2-category-band,
+.m2-signal-guide {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.m2-category-band {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  margin-bottom: 0.65rem;
+}
+
+.m2-category,
+.m2-signal-card {
+  border-radius: 0.18rem;
+  color: #fff;
+  padding: 0.55rem 0.65rem;
+}
+
+.m2-category {
+  font-weight: 700;
+  text-align: center;
+}
+
+.m2-signal-guide {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.m2-signal-card {
+  display: grid;
+  grid-template-columns: minmax(6.5rem, 0.8fr) 2fr;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.m2-signal-card strong {
+  font-size: 0.85rem;
+}
+
+.m2-signal-card span {
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.m2-power { background: #138c8c; }
+.m2-display { background: #5967c7; }
+.m2-touch { background: #c2603c; }
+.m2-wireless { background: #2f9c5c; }
+.m2-audio { background: #a15b8c; }
+.m2-debug { background: #b27b12; }
+.m2-bus { background: #337cae; }
+
+/* MicroMod-style pinout grid: a dense two-sided contact table where each
+   function cell is fully filled with its category color (not a padded
+   chip floating in a plain cell), plus dedicated alt-function columns,
+   matching the SparkFun MicroMod pinout table this is modeled on. */
+.md-typeset table.m2-grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.74rem;
+  margin: 1rem 0;
+}
+
+.md-typeset table.m2-grid caption {
+  caption-side: bottom;
+  font-size: 0.72rem;
+  color: var(--md-default-fg-color--light);
+  padding-top: 0.5rem;
+  text-align: left;
+}
+
+.md-typeset table.m2-grid th,
+.md-typeset table.m2-grid td {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.md-typeset table.m2-grid thead th {
+  background: var(--md-default-fg-color--lightest);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.md-typeset table.m2-grid td.m2-pin {
+  font-family: var(--md-code-font-family, monospace);
+  color: var(--md-default-fg-color--light);
+  background: var(--md-default-bg-color);
+}
+
+.md-typeset table.m2-grid td.m2-cn1 {
+  background: var(--md-default-fg-color--lightest);
+}
+
+.md-typeset table.m2-grid td.m2-fn,
+.md-typeset table.m2-grid td.m2-alt {
+  font-family: var(--md-code-font-family, monospace);
+  font-weight: 600;
+  color: #fff;
+}
+
+.md-typeset table.m2-grid td.m2-alt {
+  font-size: 0.68rem;
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+.md-typeset table.m2-grid td.m2-notch {
+  background: var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color--light);
+  font-style: italic;
+}
+
+.md-typeset table.m2-grid td.m2-blank {
+  background: var(--md-default-bg-color);
+}
+
+/* Category fills for .m2-fn / .m2-alt cells. !important beats the
+   theme's own ".md-typeset table td" color/background rules, the same
+   workaround already used by .flag-red et al. above. */
+.md-typeset table.m2-grid td.m2-power    { background: #138c8c !important; }
+.md-typeset table.m2-grid td.m2-display  { background: #5967c7 !important; }
+.md-typeset table.m2-grid td.m2-touch    { background: #c2603c !important; }
+.md-typeset table.m2-grid td.m2-wireless { background: #2f9c5c !important; }
+.md-typeset table.m2-grid td.m2-audio    { background: #a15b8c !important; }
+.md-typeset table.m2-grid td.m2-debug    { background: #b27b12 !important; }
+.md-typeset table.m2-grid td.m2-bus      { background: #337cae !important; }
+.md-typeset table.m2-grid td.m2-gnd      { background: #5b6472 !important; }
+
+/* Same category fills, applied as a plain inline chip for the signal-
+   descriptions table (prose context, not a grid cell). */
+.md-typeset .m2-chip {
+  display: inline-block;
+  font-family: var(--md-code-font-family, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #fff;
+  padding: 0.1rem 0.45rem;
+  border-radius: 0.25rem;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.md-typeset .m2-gnd { background: #5b6472; }
+
+.m2-contact-overview {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.35rem;
+}
+
+.m2-contact-overview > div {
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.18rem;
+  color: #fff;
+  padding: 0.55rem 0.65rem;
+}
+
+.m2-contact-overview strong,
+.m2-contact-overview span {
+  display: block;
+}
+
+.m2-contact-overview strong {
+  font-size: 0.8rem;
+}
+
+.m2-contact-overview span {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
+.md-typeset h2[id="5-schematic-design-guidelines"] ~ div[align="center"]:has(> table > thead > tr > th:nth-child(4)) {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.md-typeset h2[id="5-schematic-design-guidelines"] ~ div[align="center"]:has(> table > thead > tr > th:nth-child(4)) > table:not([class]) {
+  display: table;
+  width: 100%;
+  min-width: 48rem;
+  max-width: none;
+  overflow: visible;
+}
+
+.md-typeset h2[id="5-schematic-design-guidelines"] ~ div[align="center"]:has(> table > thead > tr > th:nth-child(5)) > table:not([class]) {
+  min-width: 56rem;
+}
+
+@media screen and (max-width: 76.1875em) {
+  .m2-category-band,
+  .m2-contact-overview {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 44.9375em) {
+  .m2-category-band,
+  .m2-contact-overview,
+  .m2-signal-guide {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .m2-signal-card {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+}

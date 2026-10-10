@@ -6,7 +6,7 @@ tags:
     - Arduino
 ---
 
-# Arduino
+# Arduino { #arduino }
 
 [OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) is a Zephyr-based Arduino core for SF32. It is a useful path for sketches, peripheral experiments, demonstrations, and early prototypes on the **SiFli SF32LB52 DevKit LCD**.
 
@@ -15,7 +15,7 @@ tags:
 
 For the initial IDE installation, board/port selection, bootloader installation, and Blink check, use [Getting Started with Arduino](../../../getting-started/arduino/getting-started-arduino.md). This page is for deciding whether Arduino is a fit and for maintaining an Arduino-based project after that first run.
 
-## Where Arduino Fits
+## Where Arduino Fits { #where-arduino-fits }
 
 Choose Arduino when fast iteration and the familiar sketch model matter more than complete access to SF32-specific capabilities. It is a good fit for proof-of-concept work, simple peripheral validation, classroom or demonstration projects, and teams with an existing Arduino codebase.
 
@@ -33,7 +33,7 @@ Move to [SiFli-SDK](../sifli-sdk/overview.md) when the product depends on a prod
 
 </div>
 
-## Board Identity
+## Board Identity { #board-identity }
 
 The current public package targets the SF32LB52 DevKit LCD. Keep these values in the project record and in issue reports: they determine how the sketch is built, loaded, and mapped to the board.
 
@@ -54,9 +54,9 @@ The current public package targets the SF32LB52 DevKit LCD. Keep these values in
 
 </div>
 
-Selecting a similarly named SiFli or Zephyr board is not interchangeable with this FQBN. The board selection controls the build and upload parameters.
+A similarly named SiFli or Zephyr board identifier is not interchangeable with this FQBN. The board selection controls the build and upload parameters.
 
-## Build and Loader Model
+## Build and Loader Model { #build-and-loader-model }
 
 ArduinoCore-zephyr combines a sketch-facing Arduino API with a Zephyr loader and board-specific configuration. The two option menus affect startup and linking behavior rather than just compiler flags.
 
@@ -77,7 +77,7 @@ Start with **Standard** and **Dynamic**. In Debug mode, an uploaded sketch does 
 
 The loader is a separate board artifact. Burn Bootloader is normally a first-use, update, or recovery operation, not part of every sketch upload. Record the Arduino package version and any loader update together; mismatched assumptions are difficult to diagnose later.
 
-## Integration Boundaries
+## Integration Boundaries { #integration-boundaries }
 
 Treat the Arduino core as an integration layer rather than a replacement for the underlying Zephyr platform. A sketch can require Zephyr symbols or subsystems that the loader does not expose or enable. Typical symptoms are an undefined Zephyr symbol, a missing subsystem, or memory pressure from dynamic loading and the shell.
 
@@ -91,7 +91,7 @@ Before adding a library or feature to a product prototype, establish all of the 
 
 Do not infer library support solely because an Arduino API or a similarly named Zephyr driver exists. Validate the complete sketch, loader, board, and package combination on the target hardware.
 
-## Diagnose and Escalate
+## Diagnose and Escalate { #diagnose-and-escalate }
 
 Start with the first-run guide when a board cannot be detected, flashed, or made to run Blink. Once that baseline works, use the following boundary to shorten debugging.
 
@@ -111,12 +111,9 @@ Start with the first-run guide when a board cannot be detected, flashed, or made
 
 For a useful issue report, include the package version, IDE or CLI version, operating system, FQBN, build mode, link mode, board revision, complete upload output, and serial log.
 
-## Related Pages
+## Related Pages { #related-pages }
 
 - [Getting Started with Arduino](../../../getting-started/arduino/getting-started-arduino.md)
 - [Zephyr](../zephyr/overview.md)
 - [SiFli-SDK](../sifli-sdk/overview.md)
 - [SF32LB52 DevKit LCD](../../../sf32-products/devkits/SF32LB52-DevKit-LCD.md)
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

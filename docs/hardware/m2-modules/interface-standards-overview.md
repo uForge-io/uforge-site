@@ -7,11 +7,11 @@ tags:
     - Interface
 ---
 
-# Module Interface Standards
+# Module Interface Standards { #module-interface-standards }
 
-This group defines the conventions used to describe μForge module interfaces. Start here before committing a carrier-board connector, pin map, or compatibility claim. It contains two different kinds of documents: a naming convention that establishes common language, and a pin-level proposal that is useful for planning but must be validated for the selected module and product.
+This section introduces the conventions used to describe μForge module interfaces. Start here before committing to a carrier-board connector, pin map, or compatibility claim. It links to two different kinds of documents: naming rules that establish common terminology, and a pin-level proposal that can inform planning but must be validated for the selected module and product.
 
-## Use the Documents in the Right Order
+## Use the Documents in the Right Order { #use-the-documents-in-the-right-order }
 
 <div align="center"><em>Table: Module Interface Documents</em></div>
 
@@ -24,9 +24,9 @@ This group defines the conventions used to describe μForge module interfaces. S
 
 </div>
 
-## What Is Stable and What Must Be Verified
+## Naming Versus Electrical Compatibility { #what-is-stable-and-what-must-be-verified }
 
-The naming rules are the stable vocabulary for communicating interface intent. Apply them consistently in module descriptions, schematics, BOM notes, and product documentation.
+Use the naming rules consistently in module descriptions, schematics, BOM notes, and product documentation. They describe the intended interface profile, not a finalized electrical or mechanical specification. Neither a profile name nor a matching connector form establishes interchangeability between a module and a carrier board.
 
 The pin-level definition is not a promise that every μForge module or SF32 package supports every assigned signal, interface, or simultaneous-use combination. Before a design commitment, verify all of the following against the exact selected module, chip, package, and hardware design guide:
 
@@ -37,15 +37,12 @@ The pin-level definition is not a promise that every μForge module or SF32 pack
 - debug, boot, recovery, and production-test access; and
 - the carrier board's display, camera, audio, storage, and wireless companion requirements.
 
-## Carrier-Board Decision Path
+## Carrier-Board Decision Path { #carrier-board-decision-path }
 
 1. Pick the module and read its introduction and hardware design guide.
 2. Use the [M2 Interface Naming Rules](M2%20Interface%20Naming%20Rules.md) to make the intended profile unambiguous.
 3. Use the [M2 Interface Definition](M2-interface-definition.md) to identify candidate signals and sharing conflicts.
 4. Confirm every used contact in the module-specific documentation and the applicable SiFli source documentation.
-5. Capture confirmed exceptions and unresolved items in the schematic review before layout starts.
+5. Record the document versions, module and carrier-board revisions, confirmed exceptions, and unresolved items in the schematic review before layout starts.
 
 For a complete carrier-board review, continue with [Design for Production](../design-for-production.md). For module-specific implementation requirements, use the matching module guide in the **Hardware Design Guides** group.
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

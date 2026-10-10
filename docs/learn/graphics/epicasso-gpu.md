@@ -4,19 +4,19 @@ description: "How SiFli's ePicasso 2D/2.5D graphics engine accelerates embedded 
 tags:
   - Graphics
 ---
-# ePicasso 2D / 2.5D Graphics Engine
+# ePicasso 2D / 2.5D Graphics Engine { #epicasso-2d-25d-graphics-engine }
 
-## Introduction
+## Introduction { #introduction }
 
 **ePicasso** is SiFli's 2D/2.5D graphics acceleration engine for the SF32 microcontroller family. It offloads supported, repetitive pixel work from the application CPU so embedded UIs can deliver smooth effects, responsive interaction, and efficient display updates within an MCU-class power budget.
 
-In the SF32 graphics flow, ePicasso operates after resources are available to the renderer and before the final bitmap reaches the display controller. It accelerates pixel-processing work such as image copy, blending, scaling, rotation, and layer composition; it does not decompress eZip assets or transfer pixels to the panel. See [Graphics Overview](overview.md#sf32-graphics-flow) for the complete resource-to-panel path.
+In the SF32 graphics flow, ePicasso operates after resources are available to the renderer and before the final bitmap reaches the display controller. It accelerates pixel-processing work such as image copy, blending, scaling, rotation, and layer composition. eZip performs asset decompression and can feed decoded image data to ePicasso; the display controller transfers the prepared pixels to the panel. See [Graphics Overview](overview.md#sf32-graphics-flow) for the complete resource-to-panel path.
 
 Applications usually do not program individual ePicasso operations directly. Instead, a graphics framework such as **LVGL**, or a vendor graphics library, builds commands for common UI work. The SF32 graphics driver routes supported operations to ePicasso and falls back to CPU rendering when an operation is unsupported.
 
-Read this page when UI profiling shows that copy, fill, alpha blend, scaling, rotation, or composition is limiting responsiveness or power. It helps firmware engineers decide what can be accelerated and what must remain in a correct CPU fallback path.
+Read this page when UI profiling shows that copy, fill, alpha blend, scaling, rotation, or composition limits responsiveness or increases power consumption. It helps firmware engineers decide what can be accelerated and what must remain in a correct CPU fallback path.
 
-## Why Hardware Graphics Acceleration Matters
+## Why Hardware Graphics Acceleration Matters { #why-hardware-graphics-acceleration-matters }
 
 Embedded UI performance is often limited by memory movement rather than CPU instruction throughput. Even a simple semi-transparent icon can require a source read, a framebuffer read, pixel blending, and a framebuffer write for every affected pixel.
 
@@ -32,9 +32,11 @@ ePicasso improves this situation by accelerating the repetitive pixel operations
 
 The benefit is not limited to frame rate: hardware acceleration can reduce CPU utilization, improve touch responsiveness, and leave more opportunity for lower-power states between display updates.
 
-## Core Rendering Concepts
+CPU offload does not guarantee lower total system energy. Accelerator clocks, memory traffic, synchronization and driver overhead can offset the CPU savings. Compare energy per completed screen update on the target hardware, including the display and idle interval, rather than judging power efficiency from CPU utilization alone.
 
-### Surfaces and Framebuffers
+## Core Rendering Concepts { #core-rendering-concepts }
+
+### Surfaces and Framebuffers { #surfaces-and-framebuffers }
 
 A **surface** is a rectangular area of pixel memory. It may represent a full screen framebuffer, a partial draw buffer, an image asset, a canvas, or an intermediate layer. ePicasso operations generally read pixels from one or more source surfaces and write pixels to a destination surface.
 
@@ -45,7 +47,7 @@ Place surfaces in memory that matches their access pattern:
 - Full-screen framebuffers for higher-resolution displays may require PSRAM.
 - DMA-visible buffers must follow the SDK's memory and cache-coherency rules.
 
-### Blending
+### Blending { #blending }
 
 Blending combines source pixels with destination pixels. This is essential for modern UI elements such as translucent cards, soft shadows, anti-aliased glyphs, overlays, and fading animations.
 
@@ -57,19 +59,19 @@ Common blending cases include:
 
 When ePicasso handles blending in hardware, the CPU avoids executing the same arithmetic for every pixel in the affected region.
 
-### Scaling and Rotation
+### Scaling and Rotation { #scaling-and-rotation }
 
 Scaling and rotation are common in animated interfaces and responsive layouts. Hardware scaling can be used for zoom effects, preview thumbnails, resized icons, or adapting assets to different screen densities. Rotation is useful for screen orientation changes, rotating gauges, watch-face elements, and certain transition effects.
 
 These operations are bandwidth-sensitive. Their benefit depends on source and destination formats, memory placement, and whether the graphics driver can express the operation in supported hardware terms.
 
-### Layer Composition
+### Layer Composition { #layer-composition }
 
 Many screens are built from multiple visual layers: a background, image assets, text, status indicators, popups, and animation overlays. Layer composition combines those elements into the final visible result.
 
 ePicasso is designed to accelerate this style of 2D composition. Instead of redrawing the entire screen in software, a UI framework can update only the invalidated regions and use the accelerator to composite the changed pixels efficiently.
 
-## 2D and 2.5D Graphics
+## 2D and 2.5D Graphics { #2d-and-25d-graphics }
 
 The term **2D graphics** usually refers to operations performed on flat rectangular images: copy, fill, blend, scale, rotate, and compose.
 
@@ -77,26 +79,35 @@ The term **2.5D graphics** is used for effects that still render into a 2D frame
 
 For SF32 documentation, ePicasso should be understood primarily as a **2D/2.5D UI accelerator**, not as a desktop-class programmable 3D GPU. Its purpose is to make embedded interfaces smoother and more power-efficient, especially on displays used by wearables, smart controls, handheld devices, and compact dashboards.
 
-## ePicasso Generation Comparison
+## ePicasso Implementation Comparison { #epicasso-generation-comparison }
 
-The version name identifies the graphics-engine generation, but it does not by itself define the final UI capability of a product. Display resolution, layer count, supported formats, eZip features, external-memory bandwidth, and driver support also depend on the selected SF32 device, package, SDK, and board design.
+Compare the implementation in each device family, not an engine name alone. Display resolution, layer count, supported formats, eZip features, external-memory bandwidth and driver support also depend on the selected SF32 device, package, SDK and board design. SiFli's [SF32LB52x product brief](https://downloads.sifli.com/user%20manual/PB5201-SF32LB52x-Product%20Brief.pdf) names its engine ePicasso 2.0. The [SF32LB56x datasheet](https://downloads.sifli.com/silicon/DS0056-SF32LB56x-Datasheet%20V1p8.pdf) specifies four foreground layers, a dedicated mask layer and a monochrome background layer; it documents TurboPixel separately as an LCD-controller frame-buffer-compression feature. The [SF32LB58x datasheet](https://downloads.sifli.com/user%20manual/DS5801-SF32LB58x-Datasheet%20V1p8p3.pdf) documents ePicasso 2.0 and a separate Vivante GCNanoUltraV vector engine.
 
-<div align="center"><em>ePicasso Generation Comparison</em></div>
+<div align="center"><em>ePicasso Implementation Comparison</em></div>
 
 <div align="center" markdown>
 
-| Generation | Representative SF32 Family | Graphics Scope | Documented Differentiators | Practical Fit |
+| Documented Engine | Representative SF32 Family | Graphics Scope | Documented Differentiators | Practical Fit |
 |:---|:---|:---|:---|:---|
-| **ePicasso 1.0** | SF32LB55x | 2.5D UI acceleration | Hardware rotation, scaling, mirroring, and alpha blending; eZip lossless-asset workflow | BLE wearables and compact HMIs that need richer UI than an entry-level design |
-| **ePicasso 2.0 Lite** | SF32LB52x | 2D/2.5D UI acceleration | eZip 2.0 asset decompression in a cost-optimized graphics configuration | Entry-level wearables, Bluetooth products, e-paper, and compact HMIs |
-| **ePicasso 2.0** | SF32LB56x; SF32LB58x | 2D/2.5D UI acceleration | On SF32LB56x: four alpha-blended layers plus one background layer, hardware rotation/scaling/mirroring, format conversion, eZip 2.0, and TurboPixel support | Display- and audio-rich embedded UI; SF32LB58x adds a separate vector-graphics engine |
-| **ePicasso 3.0** | SF32LB57x | 2D/2.5D UI acceleration | Rotation, scaling, projection, mirroring, alpha blending, and multi-layer composition; eZip 3.0 supports eZip/eZip-A, JPEG, and MJPEG resources without an intermediate framebuffer when linked with ePicasso | Graphics-rich, camera-capable, and multimedia-oriented connected products |
+| **ePicasso** | SF32LB55x | 2.5D UI acceleration | Hardware rotation, scaling, horizontal mirroring, and alpha blending; vertical mirroring is not supported. eZip lossless-asset workflow. | BLE wearables and compact HMIs that need richer UI than an entry-level design |
+| **ePicasso 2.0** | SF32LB52x | 2D/2.5D UI acceleration | eZip 2.0 asset decompression in a cost-optimized graphics configuration | Entry-level wearables, Bluetooth products, e-paper, and compact HMIs |
+| **ePicasso 2.0** | SF32LB56x | 2D/2.5D UI acceleration | Four alpha-blended foreground layers, one dedicated mask layer, and one monochrome background layer; hardware rotation/scaling and horizontal mirroring (vertical mirroring is not supported); format conversion; eZip 2.0; separate TurboPixel frame-buffer compression | Higher-resolution displays and richer LVGL interfaces; verify operation support for the selected device and SDK |
+| **ePicasso 2.0** | SF32LB58x | 2D/2.5D UI acceleration | Includes ePicasso 2.0 and a separate Vivante GCNanoUltraV vector-graphics engine; verify each engine's supported functions independently | High-resolution, graphics-rich products; confirm which functions the target SDK supports on each engine |
+| **ePicasso (EPIC)** | SF32LB57x | 2D/2.5D UI acceleration | Rotation, scaling, matrix transforms, horizontal and vertical mirroring, alpha blending, and multi-layer composition; EZIP feeds decoded eZip/eZip-A assets to EPIC. The EPIC format table separately lists JPEG input on SF32LB57x; the SDK also provides a standalone JPEGD HAL decoder, which is a distinct path. | Graphics-rich, camera-capable, and multimedia-oriented connected products |
 
 </div>
 
 This is not a benchmark ranking. For a product design, verify the exact chip's supported pixel formats, layer and resolution limits, eZip capabilities, available framebuffer memory, display-interface bandwidth, and SDK driver coverage.
 
-## ePicasso Across the SF32 Family
+The SDK EPIC capability table documents horizontal mirroring across the listed families, but vertical mirroring only on SF32LB52x and SF32LB57x. Do not read an unqualified “mirroring” claim as support for both directions. The same table excludes EZIP, JPEG, and YUV input from rotation and matrix transforms.
+
+The EZIP-to-EPIC path avoids storing a complete decompressed source image in an intermediate framebuffer; decoder working memory and the final render buffer are still required. JPEG decoding is not an EZIP function. The SDK lists JPEG as an EPIC input format on SF32LB57x and separately provides a [JPEGD HAL example](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/hal/jpegd/README.html) that decodes a JPEG image through HAL_JPEGD. These are distinct documented paths; verify the exact pipeline used by the application.
+
+This still-image example does not establish MJPEG stream decoding through JPEGD. The SDK documents MJPEG separately in its [FFmpeg video middleware guide](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/middleware/video.html), whose MJPEG configuration note says hardware decoding is available only on SF32LB58x.
+
+Also check format-specific restrictions and family differences before selecting an accelerated path. Use the [upstream EPIC capability table](https://github.com/OpenSiFli/SiFli-SDK/blob/main/docs/source/zh_CN/hal/epic.md) and [JPEGD interface](https://github.com/OpenSiFli/SiFli-SDK/blob/main/drivers/Include/bf0_hal_jpegd.h).
+
+## ePicasso Across the SF32 Family { #epicasso-across-the-sf32-family }
 
 Different SF32 devices integrate different ePicasso configurations. Use the selected chip's datasheet and reference manual as the authority for the final feature set.
 
@@ -106,19 +117,19 @@ Different SF32 devices integrate different ePicasso configurations. Use the sele
 
 | Device Family | Graphics Accelerator | Typical Positioning |
 |:--------------|:---------------------|:--------------------|
-| **SF32LB52x** | ePicasso 2.0 Lite 2D/2.5D accelerator | Cost-optimized wearable, Bluetooth, and compact HMI products. |
-| **SF32LB55x** | ePicasso 1.0 2.5D accelerator | BLE wearables and sensor-rich devices with display needs. |
+| **SF32LB52x** | ePicasso 2.0 2D/2.5D accelerator | Cost-optimized wearable, Bluetooth, and compact HMI products. |
+| **SF32LB55x** | ePicasso 2.5D accelerator | BLE wearables and sensor-rich devices with display needs. |
 | **SF32LB56x** | ePicasso 2.0 2D/2.5D accelerator | Higher-resolution display products and richer LVGL-style interfaces. |
-| **SF32LB57x** | ePicasso 3.0 2D/2.5D accelerator | Graphics-rich, camera-capable, and multimedia-oriented connected products. |
-| **SF32LB58x** | ePicasso 2.0 plus vector graphics acceleration on selected variants | Flagship graphics, high-resolution UI, and advanced visual applications. |
+| **SF32LB57x** | ePicasso (EPIC) 2D/2.5D accelerator | Graphics-rich, camera-capable, and multimedia-oriented connected products. |
+| **SF32LB58x** | ePicasso 2.0 plus the separate Vivante GCNanoUltraV vector engine | Flagship graphics, high-resolution UI, and advanced visual applications. |
 
 </div>
 
 This progression lets developers retain a similar graphics software model across SF32 while selecting the device that fits the required display resolution, memory, graphics complexity, GPIO count, and power budget.
 
-## Integration with LVGL and UI Frameworks
+## Integration with LVGL and UI Frameworks { #integration-with-lvgl-and-ui-frameworks }
 
-**LVGL** is a common choice for embedded graphical interfaces on SF32 devices. In an LVGL-based design, the application builds screens using widgets, styles, images, fonts, and animations. LVGL determines which regions need to be redrawn, and the display driver is responsible for rendering and flushing those regions to the panel.
+**LVGL** is a common choice for embedded graphical interfaces on SF32 devices. The application builds screens using widgets, styles, images, fonts and animations. LVGL identifies the regions to redraw, and its software renderer or hardware draw backend produces their pixels. The display driver's flush path transfers those rendered pixels to the panel and signals completion. Keep rendering completion and display-transfer completion distinct.
 
 ePicasso can improve LVGL performance when the SF32 port routes supported draw operations to hardware. The most useful acceleration points are typically:
 
@@ -131,7 +142,7 @@ ePicasso can improve LVGL performance when the SF32 port routes supported draw o
 
 A robust LVGL integration retains CPU fallback paths. Not every LVGL feature, pixel format, style effect, or image layout maps cleanly to a hardware operation. Accelerate common high-volume operations and leave uncommon or complex cases to software.
 
-## Memory and Bandwidth Considerations
+## Memory and Bandwidth Considerations { #memory-and-bandwidth-considerations }
 
 Graphics acceleration does not remove the need for careful memory design. In many embedded display systems, the memory bus is the limiting resource: ePicasso, the CPU, display controller, DMA engines, Flash, PSRAM, audio, and wireless subsystems can all contend for access.
 
@@ -144,11 +155,11 @@ Good graphics performance depends on several design choices:
 - Align draw buffers and framebuffers according to SDK recommendations.
 - Keep DMA and cache coherency rules clear when buffers are shared between CPU, ePicasso, and display controller.
 
-On devices with instruction and data caches, cache maintenance is essential. If the CPU writes a draw buffer before ePicasso reads it, or ePicasso writes a framebuffer before the CPU reads it, follow the SDK's cache clean/invalidate rules for shared buffers.
+For cacheable buffers shared by the CPU and ePicasso, follow the SDK's cache-maintenance and ownership rules. Clean CPU-written source data before hardware reads it. Before hardware writes a destination buffer, follow the SDK's cache rules so dirty CPU cache lines cannot later overwrite the result; after hardware completion, invalidate stale lines before the CPU reads it. Respect cache-line alignment and neighboring data, and do not modify buffers while hardware owns them. See [Graphics Overview](overview.md#memory-placement-strategy) for the shared-buffer workflow.
 
 The role split in [Graphics Overview](overview.md#sf32-graphics-flow) is central to UI-performance debugging. A slow update can result from rendering time, memory bandwidth, panel-transfer speed, display-interface configuration, or synchronization strategy. ePicasso helps most when rendering is the bottleneck; if panel transfer is limiting, partial refresh, lower color depth, a different buffering strategy, or a faster interface may matter more.
 
-## Typical Use Cases
+## Typical Use Cases { #typical-use-cases }
 
 ePicasso is most useful in products where the interface contains many visual elements but the system still needs to stay within a microcontroller-level power budget.
 
@@ -163,7 +174,7 @@ Typical use cases include:
 - Label printers, smart badges, and electronic shelf labels.
 - LVGL-based HMIs with icons, transparency, and animations.
 
-## Practical Design Guidance
+## Practical Design Guidance { #practical-design-guidance }
 
 Start from the display and user-experience requirements, then work backward to the graphics architecture.
 
@@ -179,7 +190,7 @@ Important questions include:
 
 For many products, the best result comes from combining several techniques: hardware-accelerated drawing, partial refresh, compressed or optimized assets, careful buffer placement, and a UI design that avoids unnecessary full-screen redraws.
 
-## Key Takeaways
+## Key Takeaways { #key-takeaways }
 
 - ePicasso is SiFli's 2D/2.5D graphics accelerator for SF32 microcontrollers.
 - It offloads common pixel operations such as fill, copy, blending, scaling, rotation, and layer composition.
@@ -187,6 +198,3 @@ For many products, the best result comes from combining several techniques: hard
 - Its benefits are strongest in UI-heavy products where memory movement, blending, and repeated pixel processing would otherwise consume significant CPU time.
 - LVGL and other UI frameworks can benefit from ePicasso when the SF32 graphics driver maps supported draw operations to hardware.
 - Real performance depends on display resolution, memory placement, pixel formats, buffer strategy, cache handling, and panel interface bandwidth.
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

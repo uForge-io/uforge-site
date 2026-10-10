@@ -6,17 +6,17 @@ tags:
   - Low Power
 ---
 
-# Overview { #low-power-overview }
+# Low-Power Design Overview { #low-power-overview }
 
-## Overview
+## Purpose and Scope { #overview }
 
-This guide covers practical low-power design on SF32 devices: power modes, what actually drains a battery, and how to structure firmware so the system spends as much time as possible in a low-power state. Power is treated here as a system-level property that cuts across every other guide — Bluetooth, graphics, audio, and AI decisions all have direct power consequences, and this guide is where those threads come together.
+This guide covers practical low-power design on SF32 devices: power modes, what actually drains a battery, and how to structure firmware so the system spends as much time as possible in a low-power state. Power is a system-level concern: decisions about Bluetooth, graphics, audio, and AI all affect consumption, so this guide brings those effects together.
 
-SF32's RT-Thread-based SDK includes a **PM (Power Management)** middleware component that coordinates sleep modes and wake sources across the system, alongside a dedicated low-power/Bluetooth processor (see [Bluetooth Processor Architecture](../bluetooth/processor.md)) that lets the main application CPU sleep while the wireless link stays alive. This guide assumes that architecture and focuses on how to use it well.
+SiFli SDK documentation describes RT-Thread-based **PM (Power Management)** middleware for specific targets, including SF32LB52x. Available modes and wake behavior can differ by device and SDK configuration; verify the documentation for the target. On families where the selected SDK assigns Bluetooth controller work to a separate processor (see [Bluetooth Processor Architecture](../bluetooth/processor.md)), radio events may be handled without waking the application CPU each time. Whether it can remain asleep depends on task placement, configured wake sources, and inter-processor traffic; verify this on the target device.
 
 Use this page when a battery-life target must become firmware and hardware decisions with measured evidence. It is for engineers balancing connected standby, display behavior, audio, sensing, AI, and user responsiveness—not for treating sleep as a single API call.
 
-## Define the Product's Power Budget First
+## Define the Product's Power Budget First { #define-the-products-power-budget-first }
 
 Before writing any power-management code, define what "good" looks like for the product:
 
@@ -28,9 +28,9 @@ Before writing any power-management code, define what "good" looks like for the 
 
 These targets should drive architecture decisions early — including chip selection, display type, and whether features like always-listening voice or always-on display are affordable within the power budget at all.
 
-## Power Modes and the PM Framework
+## Power Modes and the PM Framework { #power-modes-and-the-pm-framework }
 
-Most SF32 firmware power policy is expressed as a small set of operating modes, roughly:
+The following are conceptual system states, not an exact list of SF32 hardware modes or SDK enum values. Check the selected device and SDK documentation for supported modes, wake sources, and retention behavior:
 
 <div align="center"><em>Table: Power Modes and the PM Framework</em></div>
 
@@ -39,22 +39,24 @@ Most SF32 firmware power policy is expressed as a small set of operating modes, 
 | Mode | Typical State | When Used |
 |:-----|:---------------|:----------|
 | **Active** | CPU running, peripherals as needed | UI interaction, active Bluetooth transfer, audio streaming, sensor processing. |
-| **Idle** | CPU can sleep between events, peripherals mostly quiescent | Between UI frames, waiting on the next scheduled task or interrupt. |
-| **Sleep / Low-power** | CPU deeply asleep, select peripherals or the low-power processor still active | Connected standby, waiting for a Bluetooth event, sensor interrupt, or timer. |
-| **Deep sleep / Standby** | Most of the system powered down | Long idle periods where no near-term wake is expected. |
+| **Idle** | CPU waits for an event or interrupt; peripheral state depends on the device and configuration | Between UI frames, while waiting for the next scheduled task or an enabled interrupt. |
+| **Sleep / Low-power** | A CPU or subsystem enters a supported low-power state; clocks, domains, and peripherals may stop or remain active according to that state | Connected standby or waiting for a configured Bluetooth event, sensor interrupt, or timer. |
+| **Deep sleep / Standby** | A device-specific deeper state with reduced active domains; retention and wake behavior vary | Longer idle periods when the selected mode and wake requirements permit it. |
 
 </div>
 
-Real work does not stay in one mode. A wake source brings the system out of sleep, clocks and peripherals become available, the product does its work, and the PM framework should release its constraints so the system can return to the deepest safe mode. The trace below is illustrative: its shape shows the relative transition between modes, not device-specific current values or timing.
+Real work moves the system between states. A configured wake source brings a CPU or subsystem out of its low-power state; the wake-up and clock-restoration sequence is device-specific. After the work is done, the responsible drivers or tasks should release any sleep-inhibiting PM requests so the configured policy can select an eligible low-power state. The trace below is illustrative: it shows relative transitions, not device-specific current values or timing.
 
 <div align="center">
 <img src="assets/power-mode-transition.svg" alt="Illustrative relative-current trace showing deep sleep, wake, active work, idle, and return to low power" width="960">
 <br><em>Diagram: Illustrative Power-Mode Transitions During a Short Workload</em>
 </div>
 
-The PM middleware's job is to pick the deepest mode that's safe given every subsystem's current requirements — a peripheral or driver votes for the power state it needs, and the system sleeps as deeply as the most demanding active vote allows. Practically, this means: **the more subsystems you keep truly idle, the deeper the system can actually sleep.** A single misbehaving driver that never releases its "stay active" vote can silently keep the whole system out of deep sleep.
+Power-mode selection and sleep inhibition are distinct. SiFli's [SF32LB52x PM middleware reference](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/middleware/pm.html) and [SF32LB55x low-power guide](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/low_power.html) document that `rt_pm_request(PM_SLEEP_MODE_IDLE)` blocks entry into LIGHT, DEEP, and STANDBY until the matching `rt_pm_release(PM_SLEEP_MODE_IDLE)` is called; the request does not select a deeper mode.
 
-## What Drains Power on an SF32 Product
+For implementation, use the official low-power guide for the target family: [SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html), [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/low_power.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/low_power.html), or [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/low_power.html). Mode availability, entry conditions, wake sources, and retention behavior depend on the chip family, board, and SDK configuration. The [SF32LB52x low-power guide](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html) includes a Hibernate wake-pin example explicitly grouped for 58x/56x/52x/57x; the common SDK [HAL PMU API reference](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/pmu.html) lists the `HAL_PMU_EnablePinWakeup()` index range for SF32LB57x as 0 through 13. These sources establish this wake-pin configuration only; they do not establish that 52x RT-Thread mode availability, policy thresholds, or retention behavior apply to 57x. Confirm those points in the target SDK and device documentation. In general, a configured policy may select a deeper eligible state only when the idle interval and other entry conditions permit it. An unreleased request can keep the system in a shallower state than intended.
+
+## What Drains Power on an SF32 Product { #what-drains-power-on-an-sf32-product }
 
 Every subsystem has a different power signature:
 
@@ -76,41 +78,41 @@ Every subsystem has a different power signature:
 
 No single fix addresses all of these — power optimization on a real product is a matter of tuning each subsystem's contribution and then verifying the combined effect, since subsystems compete for the same "how deep can we sleep" decision.
 
-## Sleep-Aware Firmware Design
+## Sleep-Aware Firmware Design { #sleep-aware-firmware-design }
 
 The biggest power wins usually come from firmware structure, not clever low-level tricks:
 
 - **Prefer interrupts and events over polling.** A polling loop keeps the CPU active even when there's nothing to do.
 - **Batch work.** Where latency allows, accumulate sensor samples, Bluetooth events, or audio blocks and process them together instead of waking for each one individually.
-- **Release PM votes promptly.** Any driver or task that requests an active/idle power state should release that request as soon as its work is done — holding a vote longer than necessary is one of the most common causes of "power leaks."
+- **Release sleep-inhibiting PM requests promptly.** A driver or task that holds a PM request blocking entry into a deeper low-power state should release the matching request as soon as the block is no longer needed. An unreleased request can keep the system shallower than intended.
 - **Design the UI and audio paths to be event-driven**, not timer-polled, wherever the framework allows it.
-- **Audit timers.** Every periodic timer is a scheduled wakeup; each one has a cost, and it's easy to accumulate several "harmless" timers that add up to a meaningfully worse sleep profile.
+- **Audit timers.** A periodic timer schedules future work and may wake the system or limit the idle interval available to the PM policy. Several seemingly harmless timers can therefore reduce time in deeper low-power states.
 
-## Start from a Verified Power Example
+## Start from a Verified Power Example { #start-from-a-verified-power-example }
 
 Choose an SDK example that establishes the most uncertain power boundary before estimating product battery life. [Low-Power SDK Examples](low-power-sdk-examples.md) maps the official PM, GPIO, processor, Bluetooth, display, GUI, screen-refresh, and raise-to-wake projects to the scenario they prove. It also explains which supply connection, board, configuration, wake source, external circuit, and workload assumptions must be revalidated before using an example as product evidence.
 
-## Bluetooth Power Tuning
+## Bluetooth Power Tuning { #bluetooth-power-tuning }
 
 Connection and advertising parameters are the primary levers for Bluetooth power (see the full table in the [Bluetooth Overview](../bluetooth/overview.md#advertising-and-connection-parameters)):
 
 - Increase connection interval and slave latency for links that are mostly idle.
 - Reduce TX power to the lowest level that still meets the range requirement.
 - Advertise less aggressively once a product expects reconnection rather than first-time discovery.
-- Remember that the dedicated Bluetooth/low-power processor is what allows the main CPU to sleep through connection events — application code that wakes the main CPU for every Bluetooth callback defeats much of that benefit.
+- Where the selected SDK handles Bluetooth controller events on a separate processor, the application CPU may sleep between connection events if no application task, wake source, or inter-processor message needs it. Waking it for every Bluetooth callback can reduce that benefit; verify the core/task split for the target device.
 
-For a practical scenario-by-scenario method to measure actual Bluetooth LE device consumption, see [Bluetooth Low-Power Profiling](../bluetooth/bluetooth-low-power-profiling.md).
+For a practical, scenario-by-scenario method to measure actual power consumption with Classic Bluetooth alone, BLE alone, and both operating together in dual mode, see [Bluetooth Low-Power Profiling](../bluetooth/bluetooth-low-power-profiling.md).
 
-## Display and Backlight Power
+## Display and Backlight Power { #display-and-backlight-power }
 
 Displays and backlights are often the single largest power draw on a wearable or handheld product:
 
 - Use partial refresh and dirty-region updates instead of full-screen redraws where the panel and UI allow it (see [Display Controller: Partial Refresh](../graphics/display-controller.md#partial-refresh-and-dirty-regions)).
-- Dim or turn off the backlight aggressively on inactivity, and stop animations when the screen is dimmed or covered.
-- For always-on-display products, choose a panel type suited to it (EPD or JDI/memory-in-pixel) rather than forcing an AMOLED/TFT panel to stay lit continuously.
+- On inactivity, reduce display brightness or turn off the backlight where applicable; stop animations when the screen is dimmed or covered.
+- For always-on-display products, compare panels such as EPD, JDI/memory-in-pixel, AMOLED, and TFT using measured always-on energy and the required user experience. Choose a panel and operating policy suited to the budget rather than simply keeping a normal active display mode running continuously.
 - Treat "always-on display" as a distinct power budget line item, since it fundamentally changes what "idle" means for the product.
 
-## AI and Sensor Power Tuning
+## AI and Sensor Power Tuning { #ai-and-sensor-power-tuning }
 
 On-device inference and sensor sampling should be scheduled deliberately, not run continuously:
 
@@ -120,7 +122,7 @@ On-device inference and sensor sampling should be scheduled deliberately, not ru
 
 See the [AI Overview](../ai/overview.md#power-aware-inference-scheduling) for the accuracy/latency/power tradeoff in more depth.
 
-## Memory and Clock Considerations
+## Memory and Clock Considerations { #memory-and-clock-considerations }
 
 Where code executes from matters for both performance and power. On SF32 devices that implement and enable the relevant cache features, instruction and data caches can reduce time spent stalled on Flash or PSRAM accesses; shorter active time can leave more time for sleep. See [STAR-MC1](../architecture/star-mc1.md#memory-system-optimization) for cache and memory-system considerations.
 
@@ -130,7 +132,7 @@ Beyond the CPU itself:
 - Clock source selection (crystal vs. internal oscillator, and which PLL/clock domains stay active) affects both wake latency and sleep-state power draw.
 - Reducing CPU frequency during less demanding phases can help, but confirm it doesn't just extend active time enough to erase the benefit — measure the actual energy, not just instantaneous current.
 
-## Hardware and RF Power Considerations
+## Hardware and RF Power Considerations { #hardware-and-rf-power-considerations }
 
 Firmware policy can only work within what the hardware allows:
 
@@ -139,11 +141,11 @@ Firmware policy can only work within what the hardware allows:
 - Crystal accuracy affects both RF timing margins and how conservatively firmware must set supervision timeouts and wake margins.
 - Leave production test/calibration access in the design — power and RF tuning often continue past the first hardware revision.
 
-## Case Study: Raise-to-Wake
+## Case Study: Raise-to-Wake { #case-study-raise-to-wake }
 
-A common wearable pattern — waking the display when the user raises their wrist — illustrates most of the ideas in this guide at once: a low-power accelerometer interrupt (not polling) wakes the system only on a real gesture, the application processor stays asleep until that interrupt fires, and the display only lights up (often via partial refresh into an already-idle panel) for the duration of the glance. The SDK includes a reference example for this exact pattern — it's a useful template for any "wake briefly, do a little work, go back to sleep" feature, not just wrist-raise detection specifically.
+A common wearable use case is waking the display when the user raises their wrist, but the implementation depends on the sensor, board, and SDK. SiFli's [SF32LB52x raise-wrist example](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/raise_wrist/README.html) targets the `sf32lb52-lchspi-ulp` board and uses an LSM6DSL accelerometer/gyroscope, sampling acceleration every 200 ms to recognize wrist-raise and wrist-lower gestures. It enters sleep after 10 seconds of inactivity and wakes to light the display when a raise gesture is detected. This is one board-specific implementation, not evidence that other targets use a sensor interrupt or the same PM behavior. If the target sensor supports motion or threshold interrupts, firmware may use one as a configured wake source to avoid continuous application-CPU polling; otherwise, include sensor sampling and CPU wakeups in the power budget. Verify the sensor, board, wake sources, and PM configuration for the actual target.
 
-## Power Budget Worksheet
+## Power Budget Worksheet { #power-budget-worksheet }
 
 Convert the product goal into numbers before tuning firmware. A simple worksheet is usually enough:
 
@@ -162,11 +164,11 @@ Convert the product goal into numbers before tuning firmware. A simple worksheet
 
 </div>
 
-For each row, estimate `average current = state current x duty cycle`, then sum the rows. This exposes design problems early: a 20 uA sleep target will not rescue a product that spends too much time with a bright backlight or fixed-interval inference loop active.
+For mutually exclusive operating states, estimate `average current = state current x duty cycle`, then sum the state contributions. If loads operate concurrently, include them in the scenario total rather than double-counting overlapping states. This exposes design problems early: a 20 μA sleep target will not rescue a product that spends too much time with a bright backlight or fixed-interval inference loop active.
 
-## Power Profiling: Model, Measure, Update
+## Power Profiling: Model, Measure, Update { #power-profiling-model-measure-update }
 
-Power profiling turns the budget into a repeatable engineering loop. Define representative product scenarios, assign a current and duration to each load within each scenario, and sum their battery-side energy over a day. The result estimates average current, daily charge consumption, and battery life. More usefully, it ranks the scenarios that deserve measurement and optimization first.
+Power profiling turns the budget into a repeatable engineering loop. Define representative product scenarios, record voltage and current at the relevant supply boundary, and account for each load's duration and frequency. Calculate energy over time and reconcile rail-level measurements with battery-side consumption, including conversion losses; do not add currents from rails at different voltages directly. The result estimates average battery-side current, daily charge consumption, and battery life, and ranks the scenarios that deserve measurement and optimization first.
 
 <div align="center"><em>Diagram: Power-Profiling Loop</em></div>
 
@@ -191,7 +193,7 @@ For every scenario, capture the assumptions that materially affect energy:
 
 Use the estimate to identify the largest budget items, then validate those scenes on hardware before making a battery-life claim. The [Smartwatch Power Profiling](smartwatch-power-profiling.md) article works through this method with a daily-use model, while [Power Measurement and Validation](measurement-and-validation.md) defines the repeatable capture workflow.
 
-## PM Ownership and Wake-Source Review
+## PM Ownership and Wake-Source Review { #pm-ownership-and-wake-source-review }
 
 A reliable low-power design needs a clear owner for every wake source and every PM vote. Track these items in the design review:
 
@@ -201,17 +203,17 @@ A reliable low-power design needs a clear owner for every wake source and every 
 
 | Item | Review Question | Failure Mode |
 |:-----|:----------------|:-------------|
-| PM vote owner | Which driver or task requests the active state? | A forgotten vote keeps the whole system awake. |
-| Release condition | What exact event releases the vote? | Error paths or timeouts leak power. |
-| Wake source | Which interrupt, timer, BLE event, or sensor can wake the CPU? | Unexpected periodic wakeups dominate idle current. |
+| PM request/blocker owner | Which driver or task can inhibit entry into a deeper state? | An unreleased request can keep the system in a shallower state. |
+| Release condition | What event or error path ensures the matching request is released? | A request left active can prevent deeper sleep and increase consumption. |
+| Wake source | Which device-supported, configured interrupt, timer, BLE event, or sensor can wake the CPU? | Unexpected periodic wakeups dominate idle current. |
 | Clock dependency | Which clock domain must remain alive? | A peripheral silently prevents deeper sleep. |
 | Retention need | Which memory/state must survive sleep? | Over-retention wastes current; under-retention breaks wake behavior. |
 
 </div>
 
-During debugging, instrument both the requested PM state and the actual entered PM state. If they differ, the mismatch is usually more useful than the current number itself.
+During debugging, record the configured PM policy, any active requests that inhibit deeper modes, and the last low-power mode reported by the target SDK or its logs. If the system reaches a shallower state than expected, this evidence is often more useful than the current reading alone.
 
-## Measuring Power in Practice
+## Measuring Power in Practice { #measuring-power-in-practice }
 
 Don't guess — measure. A basic power validation setup includes:
 
@@ -219,9 +221,9 @@ Don't guess — measure. A basic power validation setup includes:
 - Test scenarios that match real product usage: connected-idle, active UI interaction, audio playback, AI inference bursts, and worst-case combined load.
 - Logging or marking firmware states (active/idle/sleep) alongside the power trace so current spikes can be attributed to specific code paths.
 
-The SDK ships dedicated power-characterization example projects covering common scenarios — including AMOLED display power, GPIO power, JDI display power, BLE/Classic Bluetooth power, and CPU-bound (CoreMark-style) power — useful both as measurement templates and as a sanity check for what "expected" current draw looks like on real hardware.
+SiFli SDK documentation provides power-characterization examples for selected devices and boards, covering scenarios such as AMOLED and JDI displays, GPIO, BLE/Classic Bluetooth, and CoreMark-style CPU load. Check the target SDK and board documentation for availability and setup; use applicable examples as measurement templates and as a reasonableness check, not as product-specific power guarantees.
 
-## Power Validation Matrix
+## Power Validation Matrix { #power-validation-matrix }
 
 Use repeatable test scenes so improvements can be compared across firmware revisions. At minimum, measure:
 
@@ -232,7 +234,7 @@ Use repeatable test scenes so improvements can be compared across firmware revis
 | Test Scene | What to Enable | Pass Criterion |
 |:-----------|:---------------|:---------------|
 | Boot to idle | Normal boot, no pairing, display off | No periodic work except required timers. |
-| Connected idle | Bonded BLE link, production connection parameters | Main CPU sleeps between link events. |
+| Connected idle | Bonded BLE link, production connection parameters | Verify that the CPU/core intended to sleep reaches its target low-power state between link events; confirm the target's Bluetooth task placement and wake behavior. |
 | UI glance | Display wake, one typical screen update, dim timeout | Backlight and animation stop after timeout. |
 | Audio active | Playback or recording path active | No underrun; codec powers down after session. |
 | AI active | Real sensor input and inference burst | Energy per inference matches budget. |
@@ -242,7 +244,7 @@ Use repeatable test scenes so improvements can be compared across firmware revis
 
 Record firmware version, board revision, battery/supply voltage, temperature, antenna/enclosure configuration, and test script. Without that metadata, power numbers become difficult to compare and easy to misread.
 
-## Debugging High Power Consumption
+## Debugging High Power Consumption { #debugging-high-power-consumption }
 
 <div align="center"><em>Table: Debugging High Power Consumption</em></div>
 
@@ -259,7 +261,7 @@ Record firmware version, board revision, battery/supply voltage, temperature, an
 
 </div>
 
-## Common Mistakes
+## Common Mistakes { #common-mistakes }
 
 - Treating power optimization as a final polish step instead of a design constraint from day one.
 - Polling sensors, Bluetooth state, or timers instead of using interrupts and events.
@@ -269,7 +271,7 @@ Record firmware version, board revision, battery/supply voltage, temperature, an
 - Measuring only instantaneous current instead of energy over a realistic usage scenario.
 - Validating power only on the bench, never in the final enclosure with the real antenna and battery.
 
-## Bring-Up Checklist
+## Bring-Up Checklist { #bring-up-checklist }
 
 - [ ] Define target battery life, duty cycle, and required wake sources.
 - [ ] Identify which subsystems must stay active continuously vs. can be fully event-driven.
@@ -281,10 +283,10 @@ Record firmware version, board revision, battery/supply voltage, temperature, an
 - [ ] Test combined worst-case load (Bluetooth + display + audio + AI, as applicable) and confirm it still meets the power budget.
 - [ ] Re-validate power after every significant firmware change, not just at the end of the project.
 
-## Key Takeaways
+## Key Takeaways { #key-takeaways }
 
 - Power is a system property: Bluetooth, display, audio, AI, and memory decisions all feed into how deeply — and how often — the device can sleep.
-- The PM framework sleeps as deeply as the most demanding active subsystem allows; a single lingering vote can quietly keep the whole system awake.
+- The configured PM policy chooses among eligible low-power states; an unreleased request that inhibits deeper sleep can keep the system shallower than intended.
 - Event-driven, interrupt-based design beats polling almost everywhere power matters.
 - Bluetooth connection parameters and display refresh strategy are usually the two biggest levers on a connected wearable product.
-- Measure real energy under realistic combined workloads, on real hardware in the final enclosure — bench numbers and single-subsystem numbers both under-represent real product power.
+- Measure real energy under realistic combined workloads, on real hardware in the final enclosure. Bench measurements and isolated-subsystem measurements can under-represent real product power.

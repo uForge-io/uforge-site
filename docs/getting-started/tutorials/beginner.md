@@ -1,11 +1,11 @@
 ---
 icon: lucide/footprints
-description: "First SF32 peripheral tutorials after hello_world: GPIO, FinSH, ADC, PWM, RTC, and a small board-level project."
+description: "Practical SF32 peripheral tutorials after hello_world: GPIO, FinSH, ADC, PWM, RTC, and a small project using a development board."
 tags:
     - Tutorials
 ---
 
-# First Peripherals { #beginner-tutorials }
+# Getting Started with Peripherals { #beginner-tutorials }
 
 These tutorials pick up right after [Get Started](../index.md). You should already have the SiFli-SDK toolchain installed, have flashed `hello_world` at least once, and know how to open the serial console. Each tutorial is intentionally small: one concept, one peripheral, one clear success condition.
 
@@ -13,7 +13,7 @@ The examples assume an SF32LB52-DevKit-LCD-class board such as `sf32lb52-lcd_n16
 
 Use this series to build reliable habits: verify one board-level behavior, state a clear success condition, and preserve the working baseline before moving to the next peripheral. It is deliberately practical for developers who are new to the SF32 SDK, even when they already know embedded C.
 
-## Before You Start
+## Before You Start { #before-you-start }
 
 Use the same basic loop for every tutorial:
 
@@ -23,6 +23,8 @@ scons --board=<board_name> -j8
 ```
 
 Keep a serial terminal open. Most beginner mistakes are easier to solve when you can see `rt_kprintf()` output and the FinSH `msh>` prompt.
+
+The C listings below are excerpts, not complete source files. Add the headers, declarations, board-specific initialization, return-value checks, and cleanup required by your project and SDK version.
 
 <div align="center"><em>Table: Before You Start</em></div>
 
@@ -38,7 +40,7 @@ Keep a serial terminal open. Most beginner mistakes are easier to solve when you
 
 </div>
 
-## Blink an LED with GPIO
+## Blink an LED with GPIO { #blink-an-led-with-gpio }
 
 **Goal:** control a GPIO pin from firmware, the embedded equivalent of a first successful build.
 
@@ -52,7 +54,7 @@ SF32's RT-Thread-based SDK exposes GPIO through the standard RT-Thread **PIN dev
 #include <rtthread.h>
 #include <rtdevice.h>
 
-#define LED_PIN GET_PIN(A, 0)  /* replace with your board's LED pin */
+#define LED_PIN GET_PIN(1, 0)  /* replace with your board's LED pin */
 
 int main(void)
 {
@@ -80,7 +82,7 @@ int main(void)
 
 **What you learned:** the PIN device abstraction, board-specific pin definitions, and the basic edit/build/flash loop.
 
-## Read a Button with GPIO Input
+## Read a Button with GPIO Input { #read-a-button-with-gpio-input }
 
 **Goal:** read a digital input and react to a button press.
 
@@ -90,8 +92,10 @@ int main(void)
 
 Reading a button uses the same PIN API in input mode. Start with a simple read to confirm the wiring and logic level:
 
+In the SiFli SDK, the RT-Thread PIN device API does not configure the pad's pull-up or pull-down through `rt_pin_mode()`. For an active-low button, confirm that the board provides a pull-up resistor or configure the pull through the board's pinmux settings with `HAL_PIN_Set(...)`. The pad, function, and CPU domain are board-specific; use the board support files rather than copying a pin assignment blindly.
+
 ```c
-rt_pin_mode(BUTTON_PIN, PIN_MODE_INPUT_PULLUP);
+rt_pin_mode(BUTTON_PIN, PIN_MODE_INPUT);
 
 if (rt_pin_read(BUTTON_PIN) == PIN_LOW)
 {
@@ -99,7 +103,7 @@ if (rt_pin_read(BUTTON_PIN) == PIN_LOW)
 }
 ```
 
-For anything beyond a quick test, attach an interrupt instead of polling in a tight loop. It is more responsive and much better for power:
+For applications beyond a quick test, use an interrupt instead of continuously polling in a tight loop. This lets firmware react to an input edge without repeatedly checking the pin; when the rest of the design allows the CPU to sleep between events, it can also reduce power:
 
 ```c
 rt_pin_attach_irq(BUTTON_PIN, PIN_IRQ_MODE_FALLING, button_isr, RT_NULL);
@@ -115,11 +119,11 @@ rt_pin_irq_enable(BUTTON_PIN, PIN_IRQ_ENABLE);
 
 **Success criteria:** one physical press causes one intended firmware action, with no repeated triggers from bounce.
 
-**If it does not work:** verify pull-up or pull-down configuration, button polarity, interrupt edge selection, and whether the pin is shared with boot mode, debug, or another peripheral.
+**If it does not work:** verify the required pull-up or pull-down is provided by the board or configured through pinmux, then check button polarity, interrupt edge selection, and whether the pin is shared with boot mode, debug, or another peripheral.
 
-**What you learned:** digital input configuration, active-high vs. active-low logic, interrupt-driven input, and why polling is a power smell. See [Low-Power Overview](../../learn/low-power/overview.md#sleep-aware-firmware-design) for the system-level reason.
+**What you learned:** digital input configuration, active-high vs. active-low logic, interrupt-driven input, and why continuous polling can waste power. See [Low-Power Overview](../../learn/low-power/overview.md#sleep-aware-firmware-design) for the system-level reason.
 
-## Use the Shell and Print Debug Output
+## Use the Shell and Print Debug Output { #use-the-shell-and-print-debug-output }
 
 **Goal:** get comfortable with the FinSH console and `rt_kprintf()` before debugging gets harder.
 
@@ -145,34 +149,36 @@ RT-Thread's **FinSH** shell gives you an interactive `msh>` prompt over the same
 
 **What you learned:** how to inspect a running system without a debugger attached, and how to use low-friction logging without turning every problem into a blind firmware guess.
 
-## Read an Analog Sensor with ADC
+## Read an Analog Sensor with ADC { #read-an-analog-sensor-with-adc }
 
 **Goal:** sample an analog voltage from a potentiometer, simple sensor, or battery-sense input.
 
 **Time:** 20 minutes
 
-**Start from:** `example/hal/adc` or `example/rt_device/adc`
+**Start from:** `example/rt_device/adc/channel`
+
+For this RT-Thread example, enable `BSP_USING_ADC`, `BSP_USING_ADC1`, and `RT_USING_ADC`; otherwise, the SDK will not register `bat1`. On SF32LB52, channel 7 is internally connected to VBAT, so it is not a general-purpose external sensor input. Select an ADC channel and pin mux supported by your exact chip and board. In the documented SF32LB52 setup, channel 0 uses PA28. In the current SiFli SDK example, `rt_adc_read()` returns a voltage-scaled value in 0.1 mV units, not raw ADC counts; confirm the unit and conversion for the specific chip and driver version you use.
 
 ```c
-rt_adc_device_t adc = (rt_adc_device_t)rt_device_find("adc1");
+rt_adc_device_t adc = (rt_adc_device_t)rt_device_find("bat1");
 rt_adc_enable(adc, channel);
-rt_uint32_t raw = rt_adc_read(adc, channel);
+rt_uint32_t voltage_0p1mV = rt_adc_read(adc, channel);
 ```
 
 1. Identify an ADC-capable pin and channel on your board.
 2. Confirm the input voltage range and whether there is a divider or analog front-end circuit.
-3. Open the ADC device, enable the channel, and read a raw value.
-4. Convert the raw reading to a voltage using the board's reference voltage and ADC resolution.
+3. Find the registered ADC device, enable the channel, and read its value.
+4. Apply the conversion documented for that driver. For the current SF32LB52 example, divide the returned value by 10 to get millivolts; do not apply a raw-count/reference-voltage formula again. If an external divider is present, account for its ratio when calculating the voltage before the divider.
 5. Print the result over the shell from Tutorial 3.
-6. Move the input slowly and confirm the raw value changes smoothly.
+6. Move the input slowly and confirm the reported value changes smoothly.
 
-**Success criteria:** raw ADC readings change in the expected direction and convert to a plausible voltage.
+**Success criteria:** the reported value changes in the expected direction and corresponds to a plausible input voltage after applying the documented scale and any board-level divider ratio.
 
-**If it does not work:** check pin muxing, channel number, reference voltage, input range, whether the input is floating, and whether the sensor needs power or settling time before sampling.
+**If it does not work:** check pin muxing, channel number, the driver's documented scale and calibration, input range, whether the input is floating, and whether the sensor needs power or settling time before sampling.
 
 **What you learned:** the `rt_device_find()` pattern used across RT-Thread device drivers. You will reuse this pattern for I2C, SPI, PWM, storage, and custom drivers.
 
-## Drive a PWM Output
+## Drive a PWM Output { #drive-a-pwm-output }
 
 **Goal:** generate a PWM signal to dim an LED or drive a simple buzzer.
 
@@ -180,8 +186,10 @@ rt_uint32_t raw = rt_adc_read(adc, channel);
 
 **Start from:** `example/rt_device/pwm`
 
+The PWM device name depends on which timer driver is enabled for the board. The SDK uses names such as `pwm3`, `pwmlp1`, and `pwma1`; `pwm3` below is an example, not a universal name. Confirm the registered device name and pin mux in the board configuration.
+
 ```c
-struct rt_device_pwm *pwm = (struct rt_device_pwm *)rt_device_find("pwm1");
+struct rt_device_pwm *pwm = (struct rt_device_pwm *)rt_device_find("pwm3");
 rt_pwm_set(pwm, channel, period_ns, pulse_ns);
 rt_pwm_enable(pwm, channel);
 ```
@@ -198,7 +206,7 @@ rt_pwm_enable(pwm, channel);
 
 **What you learned:** period/duty-cycle configuration and the same device-driver pattern from Tutorial 4 applied to a different peripheral class.
 
-## Keep Time with the RTC
+## Keep Time with the RTC { #keep-time-with-the-rtc }
 
 **Goal:** read and set wall-clock time using the on-chip RTC.
 
@@ -209,16 +217,17 @@ rt_pwm_enable(pwm, channel);
 ```c
 time_t now = time(RT_NULL);
 struct tm *tm_now = localtime(&now);
-rt_kprintf("%04d-%02d-%02d %02d:%02d:%02d
-",
+rt_kprintf("%04d-%02d-%02d %02d:%02d:%02d\n",
            tm_now->tm_year + 1900, tm_now->tm_mon + 1, tm_now->tm_mday,
            tm_now->tm_hour, tm_now->tm_min, tm_now->tm_sec);
 ```
 
-1. Set the RTC time once at startup or through a shell command.
+1. Set the RTC once using a supported mechanism, such as a shell command.
 2. Print the current time periodically.
 3. Power-cycle the board and confirm whether time is retained.
 4. If time is not retained, check the board's backup power path before changing firmware.
+
+When testing retention, do not reset the RTC unconditionally on every boot; doing so would hide whether the previous time was retained.
 
 **Success criteria:** time increments normally while powered, and retention behavior matches the board hardware.
 
@@ -226,7 +235,7 @@ rt_kprintf("%04d-%02d-%02d %02d:%02d:%02d
 
 **What you learned:** the standard C time API on top of RT-Thread's RTC device, plus an early example of how firmware behavior depends on hardware design.
 
-## Mini Project: Button-Controlled Sensor Logger
+## Mini Project: Button-Controlled Sensor Logger { #mini-project-button-controlled-sensor-logger }
 
 After finishing the six short tutorials, combine them into one small project:
 
@@ -248,9 +257,6 @@ After finishing the six short tutorials, combine them into one small project:
 - [ ] PWM period/duty settings produce the expected physical output.
 - [ ] RTC behavior is understood, including retention limitations.
 
-## Where to Go Next
+## Where to Go Next { #where-to-go-next }
 
 Once these feel comfortable, move on to [Connected Subsystems](intermediate.md). The next track combines peripherals with middleware: I2C sensors, LVGL, BLE, audio playback, storage, and deliberate coexistence testing.
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

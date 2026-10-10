@@ -225,6 +225,24 @@
   line-height: 1.35;
 }
 
+.md-typeset h2[id="5-schematic-design-guidelines"] ~ div[align="center"]:has(> table > thead > tr > th:nth-child(4)) {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.md-typeset h2[id="5-schematic-design-guidelines"] ~ div[align="center"]:has(> table > thead > tr > th:nth-child(4)) > table:not([class]) {
+  display: table;
+  width: 100%;
+  min-width: 48rem;
+  max-width: none;
+  overflow: visible;
+}
+
+.md-typeset h2[id="5-schematic-design-guidelines"] ~ div[align="center"]:has(> table > thead > tr > th:nth-child(5)) > table:not([class]) {
+  min-width: 56rem;
+}
+
 @media screen and (max-width: 76.1875em) {
   .m2-category-band,
   .m2-contact-overview {

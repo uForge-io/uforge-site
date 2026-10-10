@@ -5,7 +5,7 @@ description: "Add a sensor to SiFli-SDK, connect it through RT-Thread, register 
 tags: [Develop, SiFli-SDK, Application Notes, Sensors]
 ---
 
-# Integrate and Read Sensors
+# Integrate and Read Sensors { #integrate-and-read-sensors }
 
 This article adapts SiFli's [Sensor integration guide](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/sensor.html) into a practical driver workflow. The same guide is published for SF32LB52x, SF32LB55x, SF32LB56x, and SF32LB58x; verify the target SDK branch before copying paths or symbols. It covers the path from a sensor data sheet and board wiring to a Kconfig entry, bus read/write callbacks, interrupt handling, RT-Thread sensor registration, and command-line validation.
 
@@ -14,7 +14,7 @@ The examples use an LSM6DSL six-axis sensor (accelerometer and gyroscope) and a 
 !!! note "Family scope"
     The driver workflow is consolidated across SF32LB52x, SF32LB55x, SF32LB56x, and SF32LB58x. The LSM6DSL/BMP280 code is sensor-driver example code, while the bus instance, GPIO numbers, interrupt routing, Kconfig paths, and available peripherals remain target-family and board dependent.
 
-## 1. Confirm the hardware and sensor interface
+## Confirm the hardware and sensor interface { #1-confirm-the-hardware-and-sensor-interface }
 
 Start with the sensor's data sheet and identify both its function and its host interface. The SDK guide lists six-axis (accelerometer and gyroscope), temperature, barometric-pressure, geomagnetic, light, GPS, and motor sensors as examples. The supported host interfaces in this guide are I2C, SPI, and UART.
 
@@ -25,12 +25,12 @@ Before writing a driver:
 - Identify the bus name, device address, chip-select (if applicable), power control, reset, and interrupt pins.
 - Agree with the application owner on the data and control operations the driver must expose.
 
-## 2. Prepare the driver and build configuration
+## Prepare the driver and build configuration { #2-prepare-the-driver-and-build-configuration }
 
 SiFli-SDK peripheral drivers live under `rtos/rthread/bsp/sifli/peripherals`. After choosing the bus and implementation, add a directory for the new device. Add its `menuconfig` entries to `rtos/rthread/bsp/sifli/peripherals/Kconfig`, including:
 
 - the sensor enable switch;
-- the I2C/SPI (or other bus) selection and bus name;
+- the supported bus selection and name (for example, I2C, SPI, or UART);
 - power, reset, chip-select, and interrupt GPIO settings; and
 - optional sensor functions such as activity detection, a pedometer, or FIFO support.
 
@@ -38,9 +38,9 @@ Implement the driver in the new directory. Read the bus name, GPIO numbers, and 
 
 From the project directory, run `menuconfig`, choose **Select board peripherals**, enable the new module, and enter its child options to set the board-specific values.
 
-## 3. Configure the interface in Kconfig
+## Configure the interface in Kconfig { #3-configure-the-interface-in-kconfig }
 
-The following example enables an LSM6DSL under a six-axis sensor group. `SENSOR_USING_6D` is the group switch; the child switch selects the LSM6DSL implementation.
+The following Kconfig example is from the SF32LB52x guide. It enables an LSM6DSL under a six-axis sensor group: `SENSOR_USING_6D` is the group switch, and its child switch selects the LSM6DSL implementation.
 
 ```kconfig
 menuconfig SENSOR_USING_6D
@@ -72,7 +72,7 @@ menuconfig SENSOR_USING_6D
                 config LSM_USING_PEDO
                 bool "Enable Pedometer fucntion"
                 default y
-                config LSM6DSL_UES_FIFO
+                config LSM6DSL_USE_FIFO
                 bool "LSM6DSL use fifo"
                 default y
             endif
@@ -87,7 +87,9 @@ The group switch can contain several supported models, such as LSM6DSL and SC7A2
 - `LSM6DSL_INT_GPIO_BIT` and `LSM6DSL_INT2_GPIO_BIT` describe the interrupt pins when the board assigns them.
 - `LSM_USING_AWT`, `LSM_USING_PEDO`, and `LSM6DSL_USE_FIFO` represent device-specific functions; define them only when the selected driver supports them.
 
-### Find the bus and implement register access
+This example follows the SF32LB52x guide. Other family guides or SDK branches may expose different options or menu paths; verify each symbol in the target branch before applying the example.
+
+### Find the bus and implement register access { #find-the-bus-and-implement-register-access }
 
 Use `rt_i2c_bus_device_find` or `rt_device_find` to obtain the bus device. Then call the corresponding bus read/write API for the selected interface. The sensor data sheet remains the authority for the device address, register map, command sequence, and register width.
 
@@ -149,7 +151,7 @@ int32_t LSM_I2C_Read(void *ctx, uint8_t reg, uint8_t *data, uint16_t len)
 
 The sample returns `-1` when the bus cannot be found, `-2` when a bus transaction fails, and `-3` when the context, bus handle, or data pointer is invalid. Adapt the error policy to the surrounding driver.
 
-### Configure a sensor interrupt
+### Configure a sensor interrupt { #configure-a-sensor-interrupt }
 
 Set the interrupt pin as an input with `rt_pin_mode`, attach the handler and trigger condition with `rt_pin_attach_irq`, and enable or disable it with `rt_pin_irq_enable`. The SDK lists rising-edge (`PIN_IRQ_MODE_RISING`), falling-edge (`PIN_IRQ_MODE_FALLING`), both-edge (`PIN_IRQ_MODE_RISING_FALLING`), and high- or low-level (`PIN_IRQ_MODE_HIGH_LEVEL` / `PIN_IRQ_MODE_LOW_LEVEL`) triggers. The handler itself depends on the sensor.
 
@@ -182,7 +184,7 @@ int lsm6dsl_gpio_int_enable(void)
 }
 ```
 
-## 4. Register the RT-Thread sensor device
+## Register the RT-Thread sensor device { #4-register-the-rt-thread-sensor-device }
 
 Add a `sensor_xxx.c` file in the new device directory. Its job is to expose the device through RT-Thread's sensor framework so application code can use the sensor device rather than the bus-specific register functions directly.
 
@@ -210,7 +212,7 @@ int rt_hw_bmp280_init(const char *name, struct rt_sensor_config *cfg)
     {
         sensor_temp = rt_calloc(1, sizeof(struct rt_sensor_device));
         if (sensor_temp == RT_NULL)
-            return -1;
+            goto __exit;
 
         sensor_temp->info.type       = RT_SENSOR_CLASS_TEMP;
         sensor_temp->info.vendor     = RT_SENSOR_VENDOR_BOSCH;
@@ -272,9 +274,11 @@ __exit:
 }
 ```
 
-Set `type`, `vendor`, `model`, `unit`, `intf_type`, valid range, and minimum period to the values in the device data sheet. Keep the cleanup path complete if either registration fails.
+Set `type`, `vendor`, `model`, `unit`, `intf_type`, valid range, and minimum period to the values in the device data sheet. Keep the cleanup path complete if allocation or either registration fails.
 
-## 5. Validate the driver from FinSH
+**Source-example cleanup caveat:** If the temperature device registers successfully and the later barometer allocation or registration fails, the example's cleanup label frees the temperature device without first unregistering it. In product code, track which devices registered successfully, unregister each registered device through the removal API supported by the target RT-Thread version, and only then free its storage. Do not copy this failure path unchanged.
+
+## Validate the driver from FinSH { #5-validate-the-driver-from-finsh }
 
 After the driver is built into the image, add a command-line function and register it with `FINSH_FUNCTION_EXPORT_ALIAS`. A useful validation command should cover:
 
@@ -350,15 +354,15 @@ FINSH_FUNCTION_EXPORT_ALIAS(cmd_bmpt, __cmd_bmpt, Test driver bmp280);
 #endif //DRV_BMP280_TEST
 ```
 
-Before treating a readout as valid, verify the device address, read a known identity or calibration register, and compare a physical measurement with an expected range. The command example assumes the argument count and device functions are validated by the surrounding driver; add bounds checks for production tools.
+Before accepting a reading, verify the device address, read a known identity or calibration register, and compare the measurement with the expected range. Treat this command as a basic bring-up aid, not production-ready CLI code: validate the arguments for each subcommand, check return values from device and API calls, and add bounds checks before integrating it into a product.
 
-## Related pages
+## Related pages { #related-pages }
 
 - [Board Configuration](../board-configuration.md) — board-owned bus, pin, and peripheral settings.
-- [Components and `sf_pkg`](../components.md) — package dependencies used by a driver.
+- [Components and `sf-pkg`](../components.md) — package dependencies used by a driver.
 - [SiFli-SDK application notes](../sdk-application-notes.md) — the complete application-note index.
 
-## Official source
+## Official source { #official-source }
 
 - [Sensor添加指南 — SiFli SDK 编程指南](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/sensor.html)
 - [SF32LB55x sensor guide](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/sensor.html)

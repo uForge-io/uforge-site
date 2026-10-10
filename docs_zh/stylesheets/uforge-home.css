@@ -1,0 +1,1523 @@
+/* ============================================================
+   μForge Homepage — custom CSS for Zensical / MkDocs Material
+   Place this file in docs/stylesheets/uforge-home.css
+   Add to mkdocs.yml under extra_css:
+     - stylesheets/uforge-home.css
+   ============================================================ */
+
+/* ── Tokens ── */
+:root {
+  --uf-blue:        #2563eb;
+  --uf-blue-bg:     #dbeafe;
+  --uf-blue-mid:    #3b82f6;
+  --uf-purple:      #7c3aed;
+  --uf-purple-bg:   #ede9fe;
+  --uf-green:       #059669;
+  --uf-green-bg:    #d1fae5;
+  --uf-pink:        #db2777;
+  --uf-pink-bg:     #fce7f3;
+  --uf-amber:       #d97706;
+  --uf-amber-bg:    #fef3c7;
+  --uf-gray-50:     #f9fafb;
+  --uf-gray-100:    #f3f4f6;
+  --uf-gray-200:    #e5e7eb;
+  --uf-gray-400:    #9ca3af;
+  --uf-gray-500:    #6b7280;
+  --uf-gray-700:    #374151;
+  --uf-gray-900:    #111827;
+  --uf-radius:      10px;
+  --uf-radius-lg:   16px;
+  --uf-shadow:      0 4px 14px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.05);
+}
+
+/* ── Logo: swap to the inverted variant in dark mode ──
+   The header/sidebar logo is an <img>, so it can't inherit colors;
+   swap its source when the slate (dark) scheme is active. */
+[data-md-color-scheme="slate"] .md-logo img {
+  content: url("../assets/uforge-logo-inverted.svg");
+}
+
+/* ── Dark mode (slate scheme) token overrides ──
+   Every uf-* component on the page reads its text/border/background
+   color from these --uf-gray-* tokens, but the :root block above only
+   defines a light-mode scale (dark text, light borders). Without this
+   override, headings/body text stay dark-on-dark once the theme switches
+   to slate — this is what "fonts don't invert" was. Redefining the
+   tokens here recolors every consumer at once via the cascade, in the
+   same relative order as light mode (900 = most prominent text down to
+   400 = most muted; 50/100/200 = increasingly visible dark surfaces). */
+[data-md-color-scheme="slate"] {
+  --uf-gray-50:   #0f172a;
+  --uf-gray-100:  #1e293b;
+  --uf-gray-200:  #334155;
+  --uf-gray-400:  #94a3b8;
+  --uf-gray-500:  #cbd5e1;
+  --uf-gray-700:  #e2e8f0;
+  --uf-gray-900:  #f8fafc;
+}
+
+/* The hero's background is a hardcoded light gradient (independent of
+   --uf-gray-*), so its text — now light, via --uf-gray-900 above —
+   would otherwise sit on a light surface and disappear. */
+[data-md-color-scheme="slate"] .uf-hero {
+  background: linear-gradient(155deg, #0f172a 0%, #111827 55%, #0b1220 100%);
+}
+
+/* Quick-links card hover swaps to a hardcoded white regardless of
+   scheme; give it a dark-appropriate hover surface instead. */
+[data-md-color-scheme="slate"] .uf-quicklinks.grid.cards > ul > li:hover {
+  background: #1e293b;
+}
+
+/* ── Hide the header source block on the front page only ──
+   The theme gives .md-header__source a fixed width:11.5rem regardless of
+   its contents. On the homepage we hide GitHub and don't want the empty
+   11.5rem gap that would otherwise push the palette/search cluster toward
+   the center, so we hide the entire block (not just the link inside it).
+   .uf-hero only exists on index.md, so :has() scopes this to that page. */
+body:has(.uf-hero) .md-header__source {
+  display: none !important;
+}
+
+/* ── Header "Buy" pill (see overrides/partials/header.html) ──
+   Sits as a normal flex item just left of the palette (light/dark) toggle.
+   No absolute positioning or search margin hacks needed. */
+.md-header .uf-buy {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  background: var(--uf-blue);
+  border-radius: 100px;
+  /* the icon's <path fill="currentColor"> beats inherited fill; pin
+     currentColor to white so the cart is white in both schemes */
+  color: #fff !important;
+  text-decoration: none;
+  height: 1.5rem;
+  padding: 0 .6rem 0 .5rem;
+  margin: 0 .2rem;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.md-header .uf-buy svg {
+  fill: currentColor;
+  width: .75rem;
+  height: .75rem;
+  flex-shrink: 0;
+}
+.md-header .uf-buy .uf-buy-label {
+  font-size: .7rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ── Suppress default MkDocs page padding on homepage ──
+   Covers every container MkDocs Material may use to add
+   top spacing before article content, plus margin-collapse
+   protection on whatever renders as the first element. */
+.md-container,
+.md-main,
+.md-main__inner {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+.md-content,
+.md-content__inner {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+.md-typeset {
+  margin-top: 0 !important;
+}
+.md-typeset > *:first-child,
+.md-content__inner > *:first-child,
+.md-content__inner *:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+/* The theme inserts a 0.4rem spacer pseudo-element at the top of the
+   content area (.md-content__inner:before { height: .4rem }). It is a
+   pseudo-element, so none of the element resets above can catch it —
+   this is what created the white gap between the nav tabs and the hero. */
+.md-content__inner::before {
+  display: none !important;
+  height: 0 !important;
+}
+/* The *:first-child reset above also wipes the hero's own top padding
+   (.uf-hero is the first child of the article), leaving the badge flush
+   against the upper edge. Re-assert it here: higher specificity than the
+   reset, so the hero keeps its intended breathing room while the white
+   gap above the hero background stays closed. */
+.md-content__inner > .uf-hero:first-child,
+.md-content__inner .uf-hero {
+  padding-top: 36px !important;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.uf-hero {
+  display: grid;
+  grid-template-columns: 3fr 2fr; /* 60% content / 40% visual */
+  gap: 48px;
+  align-items: center;
+  padding: 572px 0 40px;
+  margin-top: -24px;
+  background: linear-gradient(155deg, #eef2ff 0%, #f5f8ff 55%, #fff 100%);
+  /* Full-bleed treatment, restored: .uf-hero is `display: grid`, and
+     removing this margin/padding pair (as a previous version of this
+     rule did) doesn't just reposition the background — it changes the
+     WIDTH the grid has to divide between the two columns (hero-content
+     3fr / hero-visual 2fr both grow to fill the wider box), which shifts
+     where the heading/paragraph column ends and the chip-visual column
+     begins. The -1rem margin + 1rem padding cancel out for width
+     purposes (net grid width and content start position are unchanged
+     from a fully plain box), while still letting the *background* paint
+     1rem further out than the content does. Keep this pair; fix
+     background-edge alignment against the rows below by matching THEM
+     to this, not by removing this. */
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* The rows below the hero (quicklinks, Why μForge, MCU cards, steps,
+   bottom row) aren't full-bleed like the hero — they sit inside the
+   theme's normal .md-content__inner, which insets 0.8rem from the
+   .md-grid boundary by default. Bump that to 1rem on the front page only,
+   so those rows keep matching the hero above them and the header/tabs
+   bar, instead of sitting 0.2rem further out than everything else. */
+body:has(.uf-hero) .md-content__inner {
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+}
+
+.uf-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  /* keep hero text painted above the (possibly overlapping) hero image */
+  position: relative;
+  z-index: 2;
+  /* Nudge the title/body/CTAs right by 2em total. This is padding on the
+     grid ITEM, not on .uf-hero itself, so it doesn't touch the 3fr/2fr
+     column math (see the comment on .uf-hero above) — it only shifts
+     content within the content column's own box. */
+  padding-left: 2em;
+}
+.uf-hero-visual {
+  position: relative;
+  z-index: 1;
+}
+
+/* Badge pill */
+.uf-badge {
+  /* flex (not inline-flex): an inline pill is anchored to the text baseline,
+     so padding changes moved the pill around the text instead of the text
+     within the pill. As a block-level flexbox, padding behaves intuitively. */
+  display: flex;
+  align-items: center;
+  background: var(--uf-blue-bg);
+  color: var(--uf-blue);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1; /* pill height = font size + padding, no line-box slack */
+  letter-spacing: 0;
+  padding: 10px 18px;
+}
+/* The badge is the first child of its wrapper <p>, so the global
+   *:first-child reset forces its padding-top to 0 — this is what kept
+   the text glued to the pill's top edge. Out-rank the reset here. */
+.uf-hero-content .uf-badge {
+  padding-top: 10px !important;
+  border-radius: 100px;
+  margin-bottom: 0; /* was 20px: pulls the rest of the hero up 20px */
+  width: fit-content;
+}
+/* Hero H1 */
+.uf-hero-content h1 {
+  font-size: 42px !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  color: var(--uf-gray-900) !important;
+  margin-top: -10px !important; /* badge margin exhausted; pulls headline + rest up 10px more */
+  margin-bottom: 18px !important;
+  border: none !important;
+}
+
+/* Hero body */
+.uf-hero-content > p {
+  font-size: 16px;
+  color: var(--uf-gray-500);
+  line-height: 1.7;
+  max-width: 490px;
+  margin-bottom: 32px;
+}
+
+/* CTA buttons row */
+.uf-hero-actions {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+.uf-hero-actions .md-button {
+  margin: 0 !important;
+  font-size: 14px;
+  /* !important: the first button is its wrapper's :first-child, so the
+     global *:first-child reset would otherwise zero its top padding
+     and knock it out of alignment with the other buttons. */
+  padding: 9px 20px !important;
+  border-radius: 7px;
+}
+.uf-hero-actions .md-button--primary {
+  background: var(--uf-blue) !important;
+  border-color: var(--uf-blue) !important;
+  color: #fff !important;
+}
+
+/* Trust bar */
+.uf-trust-bar {
+  font-size: 13px;
+  color: var(--uf-gray-500);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+.uf-trust-bar .twemoji,
+.uf-trust-bar svg { color: var(--uf-green); }
+
+/* ── Hero visual ──
+   The hero picture itself is a real <img> in index5.md (class
+   .uf-chip-scene with inline styles there); this just centers it. */
+.uf-hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Feather the chip-scene image's own rectangular edge so it dissolves
+   into the hero's gradient background instead of showing a hard box
+   outline. Two perpendicular linear-gradient masks, combined with
+   "intersect", fade out the outer ~8% of the image on all four sides
+   at once (a soft vignette frame) while leaving the center — and the
+   corner badges, which sit well inside that margin — fully opaque. */
+.uf-chip-scene {
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  mask-composite: intersect;
+}
+
+/* ============================================================
+   QUICK-LINKS BAR (full-bleed, vertical dividers, matches source)
+   ============================================================ */
+.uf-quicklinks.grid.cards {
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 0 !important;
+  background: var(--uf-gray-50);
+  border-top: 1px solid var(--uf-gray-200);
+  border-bottom: 1px solid var(--uf-gray-200);
+  margin: 0 !important;
+  margin-top: 0 !important;
+  /* Same -1rem/+1rem pair as .uf-hero, for the same reason: lets the
+     gray background reach the same outer edge the hero's background
+     does, while the matching padding keeps the 4 cards' own content
+     (icon/text, inset again by their own 28px card padding) exactly
+     where it was — this pair cancels out for width/position, it only
+     moves where the background paints. */
+  margin-left: -1rem !important;
+  margin-right: -1rem !important;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.uf-quicklinks.grid.cards > ul > li {
+  background: transparent;
+  border: none !important;
+  border-right: 1px solid var(--uf-gray-200) !important;
+  border-radius: 0 !important;
+  padding: 28px !important;
+  transition: background .15s;
+}
+.uf-quicklinks.grid.cards > ul > li:last-child {
+  border-right: none !important;
+}
+.uf-quicklinks.grid.cards > ul > li:hover {
+  background: #fff;
+}
+
+/* coloured icon backgrounds */
+/* The theme fixes .twemoji spans at height 1.125em (border-box), so chip
+   padding squeezes the inner SVG to a few px tall. Let the chips size
+   naturally and give the SVGs explicit dimensions. */
+.uf-ql-icon,
+span[class*="uf-icon-"],
+span[class*="uf-comm-icon-"] {
+  height: auto !important;
+  /* atomic inline box: padding counts toward the box, and
+     vertical-align: middle then truly centers it on the text line.
+     !important: the theme's .twemoji rule out-ranks these selectors. */
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle !important;
+  margin-right: 6px;
+  margin-bottom: 0 !important; /* stray bottom margin skews centering (uf-icon-*) */
+  aspect-ratio: 1; /* perfectly square chip: equal visual padding on all sides */
+}
+/* .md-typeset prefix: must out-rank the theme's
+   ".md-typeset .twemoji svg { width: var(--md-icon-size); max-height: 100% }" */
+.md-typeset .uf-ql-icon svg,
+.md-typeset span[class*="uf-icon-"] svg,
+.md-typeset span[class*="uf-comm-icon-"] svg {
+  width: 20px !important;
+  height: 20px !important;
+  max-height: none !important;
+}
+.uf-ql-icon { font-size: 22px !important; }
+.uf-ql-icon.uf-blue   { color: var(--uf-blue)   !important; background: var(--uf-blue-bg);   padding: 8px; border-radius: 9px; }
+.uf-ql-icon.uf-green  { color: var(--uf-green)  !important; background: var(--uf-green-bg);  padding: 8px; border-radius: 9px; }
+.uf-ql-icon.uf-pink   { color: var(--uf-pink)   !important; background: var(--uf-pink-bg);   padding: 8px; border-radius: 9px; }
+.uf-ql-icon.uf-purple { color: var(--uf-purple) !important; background: var(--uf-purple-bg); padding: 8px; border-radius: 9px; }
+
+/* "arrow" links */
+.uf-link-blue   { color: var(--uf-blue)   !important; font-weight: 600; font-size: 13px; }
+.uf-link-green  { color: var(--uf-green)  !important; font-weight: 600; font-size: 13px; }
+.uf-link-pink   { color: var(--uf-pink)   !important; font-weight: 600; font-size: 13px; }
+.uf-link-purple { color: var(--uf-purple) !important; font-weight: 600; font-size: 13px; }
+
+/* ── Centered section titles (Why μForge / MCUs / Steps) ── */
+.uf-center-heading {
+  text-align: center;
+}
+
+/* ============================================================
+   WHY UFORGE
+   ============================================================ */
+.uf-why-grid.grid.cards {
+  grid-template-columns: repeat(3, 1fr) !important;
+  /* Negative margin only (no offsetting padding, unlike the hero/
+     quicklinks full-bleed trick): this actually widens the grid's
+     content box by 1rem on each side, so the outer cards' own borders
+     stretch out to the same edge as the hero's full-bleed background,
+     instead of staying inset at .md-content__inner's normal position. */
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+.uf-why-grid.grid.cards > ul > li {
+  border: 1px solid var(--uf-gray-200) !important;
+  border-radius: var(--uf-radius) !important;
+  padding: 24px 24px 28px !important;
+  transition: box-shadow .15s;
+}
+.uf-why-grid.grid.cards > ul > li:hover {
+  box-shadow: var(--uf-shadow);
+}
+
+.uf-icon-blue   { font-size: 22px !important; color: var(--uf-blue)   !important; background: var(--uf-blue-bg);   padding: 8.1px; border-radius: 9px; display: inline-block; margin-bottom: 14px; }
+.uf-icon-purple { font-size: 22px !important; color: var(--uf-purple) !important; background: var(--uf-purple-bg); padding: 8.1px; border-radius: 9px; display: inline-block; margin-bottom: 14px; }
+.uf-icon-pink   { font-size: 22px !important; color: var(--uf-pink)   !important; background: var(--uf-pink-bg);   padding: 8.1px; border-radius: 9px; display: inline-block; margin-bottom: 14px; }
+.uf-icon-amber  { font-size: 22px !important; color: var(--uf-amber)  !important; background: var(--uf-amber-bg);  padding: 8.1px; border-radius: 9px; display: inline-block; margin-bottom: 14px; }
+.uf-icon-green  { font-size: 22px !important; color: var(--uf-green)  !important; background: var(--uf-green-bg);  padding: 8.1px; border-radius: 9px; display: inline-block; margin-bottom: 14px; }
+
+/* ============================================================
+   MCU CARDS
+   ============================================================ */
+.uf-mcu-grid.grid.cards {
+  grid-template-columns: repeat(4, 1fr) !important;
+  /* Same reasoning as .uf-why-grid above: negative margin only, so the
+     card row's own outer edges reach the hero's full-bleed background
+     edge instead of staying inset at the normal content margin. */
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+.uf-mcu-grid.grid.cards > ul > li {
+  border: 1px solid var(--uf-gray-200) !important;
+  border-radius: var(--uf-radius-lg) !important;
+  padding: 22px !important;
+  transition: box-shadow .15s, border-color .15s;
+}
+.uf-mcu-grid.grid.cards > ul > li:hover {
+  box-shadow: var(--uf-shadow);
+  border-color: var(--uf-gray-400) !important;
+}
+
+/* header row: chip thumbnail (col 1) next to title+subtitle (col 2).
+   Earlier this spanned the chip across two separate grid rows (one for
+   the title <p>, one for the subtitle <p>) to center it against both —
+   but a row-spanning item forces Grid to distribute leftover height
+   between the two auto rows it spans, and that distribution isn't
+   guaranteed to come out identically across cards whose title/subtitle
+   text sizes differ by even a hair, which is what made card 1's whole
+   header (and everything below it, including the first bullet) sit at
+   a different height than the others.
+   Fix: title + subtitle are now a single inline <span class="uf-mcu-
+   headtext"> (markdown syntax inside it still gets processed — unlike
+   a <div>, a <span> doesn't trigger raw-HTML-block mode, which is what
+   broke the rest of the card when a <div> wrapper was tried here) that
+   markdown wraps in its own <p>, giving col 2 a single grid item —
+   only one row to size, no ambiguity — and align-items: center handles
+   vertical centering directly. */
+.uf-mcu-grid.grid.cards > ul > li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  /* Fixed row height (matches the 64px chip) instead of letting the row
+     auto-size to "whichever of chip vs. headtext is taller" — the two
+     are the same 64px on every card, so this shouldn't have mattered,
+     but pinning it explicitly removes any remaining dependency on the
+     title/subtitle's own rendered height and guarantees the divider
+     below lands at an identical spot on every card. */
+  grid-template-rows: 64px;
+  align-items: center;
+  column-gap: 12px;
+  /* Root cause of the "first bullet row" drifting between cards: the
+     outer .uf-mcu-grid is itself a CSS Grid, and its row items default
+     to align-items: stretch — every card <li> in a row is stretched to
+     match the tallest sibling (whichever card wraps the most bullet
+     lines). Each <li> is *also* a grid (for the header layout above),
+     and a stretched grid container distributes its leftover height
+     across its own auto-sized rows (align-content defaults to normal/
+     stretch) — here that's the hr row and the bullet-list row — instead
+     of leaving it untouched. So a short card sitting next to a tall one
+     got its hr/first-bullet pushed down by however much extra height it
+     was stretched to absorb. align-content: start pins every row to its
+     natural size and pushes all leftover height to the bottom of the
+     card (after the "View Series" link), where it's invisible, instead
+     of leaking into the gap above the bullet list. */
+  align-content: start;
+}
+.uf-mcu-grid li > p:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0 0 14px;
+}
+.uf-mcu-grid li > p:nth-child(2) {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0 0 14px;
+}
+.uf-mcu-headtext { display: flex; flex-direction: column; }
+.uf-mcu-grid li > hr,
+.uf-mcu-grid li > ul,
+.uf-mcu-grid li > p:nth-child(n+3) {
+  grid-column: 1 / -1;
+}
+
+.uf-mcu-chip {
+  display: flex;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  border-radius: 12px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,.25);
+}
+.uf-mcu-chip small { font-size: 9px; opacity: .5; font-weight: 600; }
+
+/* The chip is a hardcoded dark navy badge (like the logo before its own
+   dark-mode swap above) — in light mode it contrasts against the white
+   card, but the card's own background goes dark in slate mode too, so
+   the badge just blends in instead of standing out. Invert it the same
+   way the logo inverts: light badge, dark text. */
+[data-md-color-scheme="slate"] .uf-mcu-chip {
+  background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+  color: #0f172a;
+  box-shadow: 0 4px 14px rgba(0,0,0,.4);
+}
+
+.uf-mcu-title { font-size: 17px !important; font-weight: 800 !important; color: var(--uf-gray-900) !important; }
+.uf-mcu-sub   { font-size: 12px; color: var(--uf-gray-400); }
+
+/* bullet dots */
+.uf-mcu-grid li ul { list-style: none !important; padding: 0 !important; margin: 0 !important; }
+.uf-mcu-grid li li {
+  list-style: none !important;
+  margin: 0 !important;
+  /* hanging indent: padding-left reserves space for the dot on every
+     line (including wrapped ones), text-indent pulls just the first
+     line back by the same amount so the dot sits in that reserved gap
+     instead of the wrapped line starting underneath it. 13px ≈ dot
+     width (6px font-size × 1.125em icon sizing ≈ 6.75px) + its 6px
+     margin-right. */
+  padding: 3px 0 3px 13px;
+  text-indent: -13px;
+  font-size: 13px;
+  line-height: 1.5;
+  border-top: 1px solid var(--uf-gray-100);
+}
+/* Plain inline flow (not flex): the dot only ever occupies the first
+   line's line box, so aligning it there leaves line 2+ (on wrapped
+   items) as a separate line box it never touches — it stays pinned to
+   line 1 instead of sinking to the midpoint between both lines.
+   The previous attempt at this used vertical-align: middle on
+   .uf-dot-blue alone, but the theme's own ".md-typeset .twemoji" rule
+   sets vertical-align: text-top with *higher* specificity (two classes
+   vs. one), so it silently won and left every dot pinned to the top of
+   the line instead of centered — this is why that attempt looked wrong
+   even on single-line items. Repeating the .md-typeset prefix here
+   (same fix already used for icon sizing elsewhere in this file)
+   out-ranks it. */
+.md-typeset .uf-dot-blue {
+  font-size: 6px !important;
+  color: var(--uf-blue-mid) !important;
+  vertical-align: middle !important;
+  margin-right: 6px;
+}
+
+/* ============================================================
+   STEPS
+   ============================================================ */
+.uf-steps.grid.cards {
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 0 !important; /* cells form one connected bar with shared borders */
+}
+.uf-steps.grid.cards > ul > li {
+  border: 1px solid var(--uf-gray-200) !important;
+  border-radius: 0 !important;
+  border-right-width: 0 !important;
+  text-align: center !important;
+  padding: 28px 16px !important;
+  position: relative;
+}
+.uf-steps.grid.cards > ul > li:first-child { border-radius: var(--uf-radius) 0 0 var(--uf-radius) !important; }
+.uf-steps.grid.cards > ul > li:last-child  { border-radius: 0 var(--uf-radius) var(--uf-radius) 0 !important; border-right-width: 1px !important; }
+
+/* step number bubble */
+.uf-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.uf-step-1 { background: #3b82f6; }
+.uf-step-2 { background: #8b5cf6; }
+.uf-step-3 { background: #ec4899; }
+.uf-step-4 { background: #f59e0b; }
+.uf-step-5 { background: #22c55e; }
+
+/* Step icons now double up with the .uf-icon-{color} classes used
+   elsewhere on the page (Why Choose section), so each step gets a
+   small colored badge instead of a plain uncolored glyph — this is
+   what actually makes the 5 steps visually distinguishable at a
+   glance, matching each step's numbered-circle color. inline-block
+   (not block) keeps the badge sized to its own icon instead of
+   stretching to the full card width; the parent li's text-align:
+   center still centers it, same as the Why Choose icons. */
+.uf-step-icon { font-size: 28px !important; display: inline-block; margin-bottom: 10px; }
+
+/* ============================================================
+   BOTTOM 3-COL ROW
+   ============================================================ */
+.uf-bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  padding: 60px 0 72px;
+  border-top: 1px solid var(--uf-gray-200);
+}
+
+.uf-bottom-col h2 {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: var(--uf-gray-900) !important;
+  border: none !important;
+  margin-bottom: 4px !important;
+  padding-bottom: 0 !important;
+}
+
+/* Featured Projects list */
+.uf-project-list > ul { list-style: none !important; padding: 0 !important; margin: 0 0 16px !important; }
+.uf-project-list > ul > li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--uf-gray-100);
+  font-size: 14px;
+  color: var(--uf-gray-700);
+}
+.uf-project-list > ul > li:last-child { border-bottom: none; }
+
+.uf-proj-thumb {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+.uf-proj-blue  { background: var(--uf-blue-bg); }
+.uf-proj-amber { background: var(--uf-amber-bg); }
+.uf-proj-green { background: var(--uf-green-bg); }
+
+/* News definition list */
+.uf-bottom-col dl { margin: 0 0 16px; }
+.uf-bottom-col dt {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--uf-gray-900);
+  border-bottom: 1px solid var(--uf-gray-100);
+  padding: 10px 0 2px;
+  margin-top: 0;
+}
+.uf-bottom-col dt a { color: var(--uf-gray-900) !important; }
+.uf-bottom-col dt a:hover { color: var(--uf-blue) !important; }
+.uf-bottom-col dd {
+  font-size: 12px;
+  color: var(--uf-gray-400);
+  margin: 2px 0 0 0;
+  padding-bottom: 2px;
+}
+.uf-news-date {
+  font-size: 11px;
+  color: var(--uf-gray-400);
+  font-weight: 400;
+  margin-left: 6px;
+}
+
+/* Community list */
+.uf-comm-list > ul { list-style: none !important; padding: 0 !important; margin: 8px 0 16px !important; }
+.uf-comm-list > ul > li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--uf-gray-100);
+  font-size: 14px;
+  color: var(--uf-gray-700);
+}
+.uf-comm-list > ul > li:last-child { border-bottom: none; }
+
+.uf-comm-icon-gray   { font-size: 18px !important; background: var(--uf-gray-100);   color: var(--uf-gray-700) !important; padding: 6.3px; border-radius: 8px; }
+.uf-comm-icon-purple { font-size: 18px !important; background: var(--uf-purple-bg);  color: var(--uf-purple)   !important; padding: 6.3px; border-radius: 8px; }
+.uf-comm-icon-blue   { font-size: 18px !important; background: var(--uf-blue-bg);    color: var(--uf-blue)     !important; padding: 6.3px; border-radius: 8px; }
+.uf-comm-icon-green  { font-size: 18px !important; background: var(--uf-green-bg);   color: var(--uf-green)    !important; padding: 6.3px; border-radius: 8px; }
+
+/* ============================================================
+   CONTACT FORM (About page)
+   ============================================================ */
+.uf-contact-form {
+  max-width: 720px;
+  margin: 24px 0 32px;
+  padding: 28px;
+  border: 1px solid var(--uf-gray-200);
+  border-radius: var(--uf-radius-lg);
+  background: var(--uf-gray-50);
+}
+.uf-form-row {
+  display: grid;
+  gap: 0 16px;
+}
+.uf-form-row-2 { grid-template-columns: 1fr 1fr; }
+.uf-form-row-3 { grid-template-columns: 1fr 1fr 1fr; }
+.uf-form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+.uf-form-group label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--uf-gray-500);
+  margin-bottom: 8px;
+}
+.uf-required { color: var(--uf-green); }
+.uf-contact-form input[type="text"],
+.uf-contact-form input[type="email"],
+.uf-contact-form input[type="tel"],
+.uf-contact-form select,
+.uf-contact-form textarea {
+  font: inherit;
+  font-size: 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--uf-gray-200);
+  border-radius: var(--uf-radius);
+  background: var(--md-default-bg-color);
+  color: var(--uf-gray-900);
+  transition: border-color .15s, box-shadow .15s;
+}
+.uf-contact-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='%239ca3af' d='M4 6l4 4 4-4z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  padding-right: 34px;
+  cursor: pointer;
+}
+.uf-contact-form select:invalid { color: var(--uf-gray-400); }
+.uf-contact-form input:focus,
+.uf-contact-form select:focus,
+.uf-contact-form textarea:focus {
+  outline: none;
+  border-color: var(--uf-blue);
+  box-shadow: 0 0 0 3px var(--uf-blue-bg);
+}
+.uf-contact-form textarea { resize: vertical; min-height: 120px; }
+
+.uf-form-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff !important;
+  background: var(--uf-blue);
+  border: none;
+  border-radius: var(--uf-radius);
+  cursor: pointer;
+  transition: background .15s, box-shadow .15s;
+}
+.uf-form-submit:hover { background: #1d4ed8; box-shadow: var(--uf-shadow); }
+
+.uf-form-status {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: var(--uf-gray-500);
+  min-height: 1.4em;
+}
+.uf-form-status--info { color: var(--uf-blue); }
+.uf-form-status--error { color: #c0392b; }
+
+/* ============================================================
+   RESET REPAIRS
+   The global "*:first-child { padding-top: 0 !important }" reset at
+   the top of this file also clips any element that happens to be the
+   first child of its parent. The :first-child in each selector below
+   both scopes the repair to the affected element and lifts specificity
+   above the reset. Values mirror the originals declared earlier.
+   ============================================================ */
+.uf-quicklinks .uf-ql-icon:first-child { padding-top: 8px !important; }
+.uf-why-grid span[class*="uf-icon-"]:first-child { padding-top: 8.1px !important; }
+.uf-comm-list span[class*="uf-comm-icon-"]:first-child { padding-top: 6.3px !important; }
+.uf-mcu-grid li li:first-child { padding-top: 3px !important; border-top: none !important; }
+.uf-project-list > ul > li:first-child,
+.uf-comm-list > ul > li:first-child { padding-top: 10px !important; }
+.uf-bottom-col dt:first-child { padding-top: 10px !important; }
+
+/* Plain markdown tables: the theme gives every td/th the same
+   padding: .9375em 1.25em (see .md-typeset table:not([class]) td/th),
+   so a row's cells normally line up flush at the same top offset even
+   when one column wraps to more lines than another. But the first
+   .md-content__inner *:first-child { padding-top: 0 !important; }
+   reset above also matches the first <td>/<th> of every <tr> (it's
+   that row's :first-child), zeroing just that column's top padding —
+   so column 1 sits glued to the top of the row while every other
+   column keeps the theme's normal padding and starts lower. Restore
+   the theme's own value, scoped to table cells only. */
+.md-typeset table:not([class]) td:first-child,
+.md-typeset table:not([class]) th:first-child {
+  padding-top: 0.9375em !important;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 960px) {
+  .uf-hero { grid-template-columns: 1fr; }
+  .uf-hero-visual { display: none; }
+  .uf-hero-content h1 { font-size: 32px !important; }
+  .uf-quicklinks.grid.cards { grid-template-columns: repeat(2, 1fr) !important; }
+  .uf-why-grid.grid.cards   { grid-template-columns: repeat(2, 1fr) !important; }
+  .uf-mcu-grid.grid.cards   { grid-template-columns: repeat(2, 1fr) !important; }
+  .uf-steps.grid.cards      { grid-template-columns: repeat(3, 1fr) !important; }
+  .uf-bottom-row { grid-template-columns: 1fr; }
+  .uf-form-row-2,
+  .uf-form-row-3 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .uf-quicklinks.grid.cards { grid-template-columns: 1fr !important; }
+  .uf-why-grid.grid.cards   { grid-template-columns: 1fr !important; }
+  .uf-mcu-grid.grid.cards   { grid-template-columns: 1fr !important; }
+  .uf-steps.grid.cards      { grid-template-columns: repeat(2, 1fr) !important; }
+  .uf-steps.grid.cards > ul > li { border-radius: var(--uf-radius) !important; border-right-width: 1px !important; }
+}
+
+/* ============================================================
+   INTERACTIVE HOMEPAGE HERO
+   The visual field is deliberately scoped to the homepage so regular
+   documentation pages continue to use the standard Material layout.
+   ============================================================ */
+.uf-spotlight-hero {
+  --spotlight-x: 50%;
+  --spotlight-y: 50%;
+  position: relative;
+  display: block;
+  min-height: min(560px, calc(100vh - 3rem));
+  margin: -24px -1rem 0;
+  padding: clamp(4rem, 9vw, 7rem) max(2rem, calc((100% - 1120px) / 2)) 40px !important;
+  overflow: hidden;
+  isolation: isolate;
+  color: #ecffff;
+  background:
+    radial-gradient(circle 42rem at var(--spotlight-x) var(--spotlight-y), rgba(61, 236, 201, .18), transparent 36%),
+    radial-gradient(ellipse 72% 100% at 73% 4%, #173c4c 0%, #0d2634 43%, #07151e 100%);
+}
+.uf-spotlight-hero::before,
+.uf-spotlight-hero::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+}
+.uf-spotlight-hero::before {
+  z-index: -1;
+  opacity: .38;
+  background-image:
+    linear-gradient(rgba(143, 241, 224, .12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(143, 241, 224, .12) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: radial-gradient(circle 35rem at var(--spotlight-x) var(--spotlight-y), #000, transparent 74%);
+}
+.uf-spotlight-hero::after {
+  z-index: 0;
+  background: radial-gradient(circle 150px at var(--spotlight-x) var(--spotlight-y), rgba(210, 255, 248, .17), rgba(72, 238, 207, .04) 43%, transparent 72%);
+  mix-blend-mode: screen;
+}
+.uf-spotlight-hero .uf-hero-content {
+  position: relative;
+  z-index: 3;
+  display: block;
+  max-width: 640px;
+  padding: 0;
+}
+.uf-spotlight-hero .uf-badge {
+  width: fit-content;
+  padding: 9px 14px !important;
+  color: #c3fff3;
+  background: rgba(89, 234, 202, .12);
+  border: 1px solid rgba(145, 255, 232, .26);
+}
+.uf-spotlight-hero .uf-hero-content h1 {
+  margin: .8rem 0 .9rem !important;
+  color: #f3ffff !important;
+  font-size: 46px !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+  letter-spacing: normal;
+}
+.uf-spotlight-hero .uf-hero-content > p {
+  max-width: 470px;
+  margin: 0 0 1.5rem;
+  color: #c4dbe1;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.uf-spotlight-hero .uf-hero-actions { margin: 0 0 1.35rem; }
+.uf-spotlight-hero .uf-hero-actions .md-button {
+  color: #ddfff8;
+  border-color: rgba(191, 255, 244, .38);
+}
+.uf-spotlight-hero .uf-hero-actions .md-button--primary {
+  color: #06211f;
+  border-color: #71f5d9;
+  background: #71f5d9;
+}
+/* "Fun" toggle: a small floating round button rather than a row button —
+   it's a playful extra, not a primary CTA, so it sits off to the side of
+   the card field instead of competing with Get Started/SF32 Products/GitHub.
+   Reuses the old .uf-spotlight-hint's corner position (removed earlier),
+   which was already established as an uncluttered spot clear of the cards. */
+.uf-spotlight-toggle {
+  position: absolute;
+  right: clamp(2rem, 5vw, 5rem);
+  bottom: calc(2.3rem - 1em);
+  z-index: 3;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #ddfff8;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: color .15s, transform .3s;
+}
+.uf-spotlight-toggle svg { display: block; transition: transform .4s ease, filter .2s; }
+.uf-spotlight-toggle:hover { transform: scale(1.1); }
+.uf-spotlight-toggle:hover svg { transform: rotate(25deg) scale(1.1); }
+.uf-spotlight-toggle[aria-pressed="true"] { color: #71f5d9; }
+.uf-spotlight-toggle[aria-pressed="true"] svg {
+  transform: rotate(90deg);
+  filter: drop-shadow(0 0 6px rgba(113, 245, 217, .65));
+}
+/* Wand keeps waving and its tip keeps twinkling at all times (not just on
+   hover/press), so it reads as a "magic" control at rest. Lives on the inner
+   <g>/<path>/<circle> elements rather than the <svg> itself so it never
+   fights with the hover/press rules above, which animate the <svg>'s own
+   transform. transform-box: view-box lets the rotation pivot use the same
+   24x24 coordinate space the icon was drawn in, instead of each element's
+   own bounding box. */
+.uf-spotlight-toggle .uf-wand-shake {
+  transform-box: view-box;
+  transform-origin: 6px 18.5px;
+  animation: uf-wand-shake 2.6s ease-in-out infinite;
+}
+.uf-spotlight-toggle .uf-wand-star {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: uf-wand-twinkle 1.6s ease-in-out infinite;
+}
+.uf-spotlight-toggle .uf-wand-dot--a {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: uf-wand-twinkle 1.3s ease-in-out infinite .3s;
+}
+.uf-spotlight-toggle .uf-wand-dot--b {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: uf-wand-twinkle 1.9s ease-in-out infinite .6s;
+}
+@keyframes uf-wand-shake {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(8deg); }
+}
+@keyframes uf-wand-twinkle {
+  0%, 100% { opacity: .4; transform: scale(.75); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .uf-spotlight-toggle .uf-wand-shake,
+  .uf-spotlight-toggle .uf-wand-star,
+  .uf-spotlight-toggle .uf-wand-dot--a,
+  .uf-spotlight-toggle .uf-wand-dot--b {
+    animation: none;
+  }
+}
+/* Forced-reveal state: bypasses the pointer-proximity --reveal value
+   entirely so every card is shown at full opacity/scale regardless of
+   where the cursor is. */
+.uf-spotlight-hero.uf-spotlight-force-reveal .uf-spotlight-item {
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) rotate(var(--tilt)) scale(1) !important;
+}
+.uf-spotlight-hero.uf-spotlight-force-reveal .uf-spotlight-item::before {
+  opacity: 1 !important;
+}
+.uf-spotlight-hero .uf-trust-bar {
+  color: #b1cdd4;
+  border-color: rgba(168, 244, 230, .18);
+}
+.uf-spotlight-field {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.uf-spotlight-item {
+  --reveal: 0;
+  --tilt: 0deg;
+  position: absolute;
+  display: block;
+  width: clamp(160px, 18vw, 225px);
+  min-height: 190px;
+  padding: 15px 15px 13px;
+  overflow: hidden;
+  color: #ecfffb !important;
+  text-decoration: none !important;
+  pointer-events: auto;
+  opacity: var(--reveal);
+  transform: translate(-50%, -50%) rotate(var(--tilt)) scale(calc(.83 + var(--reveal) * .18));
+  transition: opacity 100ms linear, transform 140ms cubic-bezier(.2, .7, .2, 1), border-color 140ms ease;
+  border: 1px solid rgba(176, 255, 239, .34);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(31, 91, 101, .86), rgba(9, 34, 47, .8));
+  box-shadow: 0 23px 55px rgba(0, 0, 0, .32), inset 0 1px rgba(255, 255, 255, .13);
+  backdrop-filter: blur(7px);
+}
+.uf-spotlight-item:hover,
+.uf-spotlight-item:focus-visible {
+  border-color: rgba(213, 255, 247, .76);
+  outline: none;
+}
+.uf-spotlight-item::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -55%;
+  opacity: var(--reveal);
+  background: radial-gradient(circle, rgba(97, 255, 219, .28), transparent 61%);
+  filter: blur(12px);
+}
+.uf-spotlight-item__eyebrow,
+.uf-spotlight-item__title,
+.uf-spotlight-item__copy { display: block; position: relative; z-index: 2; }
+.uf-spotlight-item__eyebrow { color: #9dffea; font-size: .61rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+.uf-spotlight-item__title { margin-top: 4px; font-size: .95rem; font-weight: 800; line-height: 1.2; }
+.uf-spotlight-item__copy { position: absolute; right: 15px; bottom: 13px; left: 15px; color: #c2d9dd; font-size: .68rem; line-height: 1.42; }
+/* Fixed, hand-picked (not actually random — real randomness would differ
+   on every reload/build) tilt angles per card so the floating field reads
+   as a scatter of loose post-it notes rather than a grid. */
+.uf-spotlight-item--silicon { left: calc(64% - 5em); top: 22%; --tilt: -18deg; }
+.uf-spotlight-item--board { left: calc(90% - 5em); top: 26%; --tilt: 13deg; }
+.uf-spotlight-item--sdk { left: calc(76% - 5em); top: calc(44% + 2em); --tilt: -9deg; }
+.uf-spotlight-item--examples { left: calc(93% - 5em); top: calc(64% + 3em); width: clamp(140px, 15vw, 190px); min-height: 164px; --tilt: 20deg; }
+.uf-spotlight-item--learn { left: calc(63% - 10em); top: calc(74% - 0.5em); --tilt: -15deg; }
+.uf-spotlight-item__art { position: absolute; z-index: 1; pointer-events: none; }
+.uf-spotlight-item__art--silicon {
+  width: 68px; aspect-ratio: 1; right: 21px; top: 38px; border-radius: 14px;
+  background: linear-gradient(135deg, #91ffe7, #2496ad 58%, #3d4eaa);
+  box-shadow: 0 0 0 9px #164353, 0 0 0 11px rgba(141, 255, 232, .35), 0 0 32px rgba(104, 255, 224, .58);
+  transform: rotate(18deg);
+}
+.uf-spotlight-item__art--silicon::after { content: "SF32"; display: grid; height: 100%; place-items: center; color: #fff; font-size: 1.5em; font-weight: 900; letter-spacing: -.02em; transform: rotate(-18deg); }
+.uf-spotlight-item__art--board { top: 43px; right: 17px; width: 92px; height: 62px; border: 2px solid #7bf0da; border-radius: 9px; background: linear-gradient(135deg, #1f6d72, #123749); box-shadow: 0 0 27px rgba(113, 255, 218, .4); transform: rotate(-11deg); }
+.uf-spotlight-item__art--board::after { content: ""; position: absolute; width: 31px; aspect-ratio: 1; top: 13px; left: 29px; border-radius: 8px; background: #a3ffe9; box-shadow: 0 0 0 5px #174c52; }
+/* Software = "SDK & tools": a `</>` code-bracket glyph instead of the old
+   abstract diagonal-stripe pattern. */
+.uf-spotlight-item__art--sdk {
+  top: 52px; right: 46px; width: 4px; height: 32px; border-radius: 2px;
+  background: #a4ffe8;
+  box-shadow: 0 0 14px rgba(164, 255, 232, .55);
+  transform: rotate(18deg);
+}
+.uf-spotlight-item__art--sdk::before {
+  content: ""; position: absolute; left: -30px; top: 6px; width: 18px; height: 18px;
+  border-left: 4px solid #a4ffe8; border-bottom: 4px solid #a4ffe8; border-radius: 2px;
+  transform: rotate(45deg);
+  filter: drop-shadow(0 0 6px rgba(164, 255, 232, .45));
+}
+.uf-spotlight-item__art--sdk::after {
+  content: ""; position: absolute; left: 18px; top: 6px; width: 18px; height: 18px;
+  border-right: 4px solid #a4ffe8; border-top: 4px solid #a4ffe8; border-radius: 2px;
+  transform: rotate(45deg);
+  filter: drop-shadow(0 0 6px rgba(164, 255, 232, .45));
+}
+/* Learn = "CPU, GPU": a processor die — grid of cores/cache lines with a
+   glowing compute core at center, instead of the old signal/antenna ring. */
+.uf-spotlight-item__art--learn {
+  top: 38px; right: 24px; width: 70px; height: 70px; border-radius: 12px;
+  border: 2px solid #9cffe8;
+  background:
+    repeating-linear-gradient(0deg, rgba(156, 255, 232, .3) 0 2px, transparent 2px 12px),
+    repeating-linear-gradient(90deg, rgba(156, 255, 232, .3) 0 2px, transparent 2px 12px);
+  box-shadow: 0 0 0 13px rgba(123, 255, 223, .06), 0 0 26px rgba(123, 255, 223, .38);
+  transform: rotate(-9deg);
+}
+.uf-spotlight-item__art--learn::after {
+  content: ""; position: absolute; inset: 24px; border-radius: 4px;
+  background: #a7ffe9; box-shadow: 0 0 16px #7cf6dc;
+}
+/* Projects = "Watch, HMI": a rounded device body with a circular watch
+   face/display, instead of the old generic PCB-trace grid. */
+.uf-spotlight-item__art--examples {
+  top: 36px; right: 23px; width: 68px; height: 68px; border-radius: 18px;
+  border: 2px solid #a0ffe9;
+  background: linear-gradient(135deg, rgba(160, 255, 233, .16), transparent 70%);
+  box-shadow: 0 0 22px rgba(160, 255, 233, .32);
+}
+.uf-spotlight-item__art--examples::before {
+  content: ""; position: absolute; inset: 13px; border-radius: 50%; border: 2px solid #a0ffe9;
+}
+.uf-spotlight-item__art--examples::after {
+  content: ""; position: absolute; top: 31px; left: 31px; width: 6px; height: 6px; border-radius: 50%;
+  background: #a0ffe9; box-shadow: 0 0 10px #7cf6dc;
+}
+
+@media (max-width: 1050px) {
+  .uf-spotlight-hero { min-height: 520px; }
+  .uf-spotlight-item--sdk { left: calc(70% - 5em); }
+  .uf-spotlight-item--board { left: calc(84% - 5em); }
+  .uf-spotlight-item--examples { display: none; }
+}
+@media (max-width: 780px), (hover: none), (pointer: coarse) {
+  .uf-spotlight-hero { min-height: 0; padding-bottom: 2.5rem !important; }
+  .uf-spotlight-hero::after { display: none; }
+  .uf-spotlight-hero .uf-hero-content { max-width: none; }
+  .uf-spotlight-field { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; margin-top: 2.3rem; pointer-events: auto; }
+  .uf-spotlight-item,
+  .uf-spotlight-item:hover { position: relative; top: auto; left: auto; width: auto; min-height: 142px; opacity: 1; transform: none; }
+  .uf-spotlight-item--examples { display: block; }
+  .uf-spotlight-item__copy { font-size: .66rem; }
+  /* Cards are already always-visible in this layout, and the toggle's
+     click handler never gets wired up on touch/coarse-pointer devices
+     (see spotlight-hero.js's early return) — hide the now-nonfunctional
+     button rather than leave a dead control on screen. */
+  .uf-spotlight-toggle { display: none; }
+}
+@media (max-width: 520px) {
+  .uf-spotlight-hero { margin-top: -16px; padding: 3.25rem 1.25rem 2rem !important; }
+  .uf-spotlight-field { grid-template-columns: 1fr; }
+  .uf-spotlight-item { min-height: 125px; }
+}
+
+/* Carry the hero's dark teal atmosphere down the whole homepage. */
+body:has(.uf-spotlight-hero) {
+  --md-default-bg-color: #081923;
+  --md-typeset-color: #c7dce1;
+  --uf-gray-50: #0c202b;
+  --uf-gray-100: #102a36;
+  --uf-gray-200: #244651;
+  --uf-gray-400: #8eabb4;
+  --uf-gray-500: #b5ced4;
+  --uf-gray-700: #deeff1;
+  --uf-gray-900: #f2ffff;
+  background: #081923;
+}
+body:has(.uf-spotlight-hero) .md-container,
+body:has(.uf-spotlight-hero) .md-main,
+body:has(.uf-spotlight-hero) .md-content,
+body:has(.uf-spotlight-hero) .md-content__inner {
+  background: #081923;
+}
+body:has(.uf-spotlight-hero) .md-typeset {
+  color: #c7dce1;
+}
+body:has(.uf-spotlight-hero) .md-typeset h2,
+body:has(.uf-spotlight-hero) .md-typeset h3 {
+  color: #f2ffff;
+}
+body:has(.uf-spotlight-hero) .uf-quicklinks.grid.cards,
+body:has(.uf-spotlight-hero) .uf-why-grid.grid.cards > ul > li,
+body:has(.uf-spotlight-hero) .uf-mcu-grid.grid.cards > ul > li {
+  background: linear-gradient(145deg, #102a36, #0b202a);
+}
+body:has(.uf-spotlight-hero) .uf-quicklinks.grid.cards > ul > li:hover {
+  background: #153440;
+}
+body:has(.uf-spotlight-hero) .uf-why-grid.grid.cards > ul > li:hover,
+body:has(.uf-spotlight-hero) .uf-mcu-grid.grid.cards > ul > li:hover {
+  box-shadow: 0 10px 32px rgba(0, 0, 0, .26);
+}
+
+/* Use the same surface and readable light foregrounds for the site chrome. */
+body:has(.uf-spotlight-hero) .md-header {
+  background: rgba(8, 25, 35, .96);
+  color: #effffd;
+  box-shadow: 0 1px rgba(170, 255, 238, .12);
+}
+body:has(.uf-spotlight-hero) .md-header__topic,
+body:has(.uf-spotlight-hero) .md-header__button,
+body:has(.uf-spotlight-hero) .md-header__button svg,
+body:has(.uf-spotlight-hero) .md-header__title,
+body:has(.uf-spotlight-hero) .md-header__ellipsis {
+  color: #effffd;
+}
+body:has(.uf-spotlight-hero) .md-header__button:hover {
+  color: #9dffe9;
+}
+body:has(.uf-spotlight-hero) .md-search__input {
+  color: #effffd;
+  background: #102a36;
+}
+body:has(.uf-spotlight-hero) .md-search__input::placeholder { color: #a9c4cb; }
+body:has(.uf-spotlight-hero) .md-tabs {
+  background: #081923;
+  border-top: 1px solid rgba(170, 255, 238, .08);
+  border-bottom: 1px solid rgba(170, 255, 238, .11);
+}
+body:has(.uf-spotlight-hero) .md-tabs__link {
+  color: #c7dce1;
+  opacity: 1;
+}
+body:has(.uf-spotlight-hero) .md-tabs__link:is(:hover, :focus),
+body:has(.uf-spotlight-hero) .md-tabs__link--active {
+  color: #a3ffe9;
+}
+body:has(.uf-spotlight-hero) .md-footer {
+  color: #d7f0f1;
+  background: #081923;
+  border-top: 1px solid rgba(170, 255, 238, .13);
+}
+body:has(.uf-spotlight-hero) .md-footer__link,
+body:has(.uf-spotlight-hero) .md-footer__title,
+body:has(.uf-spotlight-hero) .md-footer__direction,
+body:has(.uf-spotlight-hero) .md-footer__button,
+body:has(.uf-spotlight-hero) .md-footer__button svg {
+  color: #effffd;
+}
+body:has(.uf-spotlight-hero) .md-footer-meta {
+  color: #b8d4d8;
+  background: #081923;
+}
+body:has(.uf-spotlight-hero) .md-footer-meta a,
+body:has(.uf-spotlight-hero) .md-footer-meta__inner {
+  color: #d7f0f1;
+}
+/* Material applies separate, scheme-dependent opacity colors to these nested
+   footer elements. Pin them to the homepage's light footer foreground so the
+   text stays readable even when the site palette is set to the light scheme. */
+body:has(.uf-spotlight-hero) .md-footer .md-copyright,
+body:has(.uf-spotlight-hero) .md-footer .md-copyright__highlight,
+body:has(.uf-spotlight-hero) .md-footer .md-copyright a,
+body:has(.uf-spotlight-hero) .md-footer .md-social__link,
+body:has(.uf-spotlight-hero) .md-footer .md-social__link svg {
+  color: #d7f0f1 !important;
+}
+
+/* The homepage follows the selected Material palette instead of forcing its
+   own dark mode. The light scheme stays airy; slate restores the immersive
+   low-light treatment for extended desktop use. */
+body:has(.uf-spotlight-hero) {
+  --md-default-bg-color: #f4fbfa;
+  --md-typeset-color: #2a4850;
+  --uf-gray-50: #eef8f7;
+  --uf-gray-100: #e1f1ef;
+  --uf-gray-200: #c9e2df;
+  --uf-gray-400: #6c9097;
+  --uf-gray-500: #57767d;
+  --uf-gray-700: #25464e;
+  --uf-gray-900: #102f38;
+  background: #f4fbfa;
+}
+body:has(.uf-spotlight-hero) .md-container,
+body:has(.uf-spotlight-hero) .md-main,
+body:has(.uf-spotlight-hero) .md-content,
+body:has(.uf-spotlight-hero) .md-content__inner { background: #f4fbfa; }
+body:has(.uf-spotlight-hero) .md-typeset { color: #2a4850; }
+body:has(.uf-spotlight-hero) .md-typeset h2,
+body:has(.uf-spotlight-hero) .md-typeset h3 { color: #102f38; }
+body:has(.uf-spotlight-hero) .uf-spotlight-hero {
+  color: #10333c;
+  background:
+    radial-gradient(circle 42rem at var(--spotlight-x) var(--spotlight-y), rgba(35, 183, 157, .18), transparent 36%),
+    radial-gradient(ellipse 72% 100% at 73% 4%, #d5f3ee 0%, #e9f8f6 47%, #f4fbfa 100%);
+}
+body:has(.uf-spotlight-hero) .uf-spotlight-hero::before { opacity: .42; }
+body:has(.uf-spotlight-hero) .uf-spotlight-hero::after { background: radial-gradient(circle 150px at var(--spotlight-x) var(--spotlight-y), rgba(255,255,255,.82), rgba(76,213,184,.13) 43%, transparent 72%); }
+body:has(.uf-spotlight-hero) .uf-spotlight-hero .uf-hero-content h1 { color: #10333c !important; }
+body:has(.uf-spotlight-hero) .uf-spotlight-hero .uf-hero-content > p { color: #456d74; }
+body:has(.uf-spotlight-hero) .uf-spotlight-hero .uf-badge { color: #087d6e; background: rgba(57, 198, 170, .12); border-color: rgba(15, 139, 121, .24); }
+body:has(.uf-spotlight-hero) .uf-spotlight-hero .uf-hero-actions .md-button { color: #17484f; border-color: rgba(21, 104, 97, .36); }
+body:has(.uf-spotlight-hero) .uf-spotlight-toggle { color: #17484f; }
+body:has(.uf-spotlight-hero) .uf-spotlight-toggle[aria-pressed="true"] { color: #0f8b79; }
+body:has(.uf-spotlight-hero) .uf-spotlight-toggle[aria-pressed="true"] svg { filter: drop-shadow(0 0 6px rgba(15, 139, 121, .45)); }
+body:has(.uf-spotlight-hero) .uf-spotlight-hero .uf-trust-bar { color: #53777e; }
+body:has(.uf-spotlight-hero) .uf-spotlight-item {
+  color: #123940 !important;
+  border-color: rgba(15, 139, 121, .4);
+  background: linear-gradient(145deg, rgba(246, 255, 253, .9), rgba(208, 239, 234, .82));
+  box-shadow: 0 20px 44px rgba(26, 86, 90, .16), inset 0 1px rgba(255, 255, 255, .76);
+}
+body:has(.uf-spotlight-hero) .uf-spotlight-item::before { background: radial-gradient(circle, rgba(65, 213, 183, .24), transparent 61%); }
+body:has(.uf-spotlight-hero) .uf-spotlight-item__eyebrow { color: #087d6e; }
+body:has(.uf-spotlight-hero) .uf-spotlight-item__copy { color: #3a5c62; }
+/* The decorative art pieces (chip/board/sdk/signal/paths) were tuned as
+   pale cyan glows meant to pop against the dark-mode card — on the light
+   card background those same colors are nearly invisible. Recolor them to
+   the light theme's dark-teal accent so they actually read as artwork. */
+body:has(.uf-spotlight-hero) .uf-spotlight-item__art--silicon {
+  background: linear-gradient(135deg, #39c6aa, #0f8b79 58%, #2f4f9c);
+  box-shadow: 0 0 0 9px #eafaf6, 0 0 0 11px rgba(15, 139, 121, .35), 0 0 26px rgba(15, 139, 121, .4);
+}
+body:has(.uf-spotlight-hero) .uf-spotlight-item__art--board {
+  border-color: #0f8b79;
+  background: linear-gradient(135deg, #cfeee6, #eafaf6);
+  box-shadow: 0 0 20px rgba(15, 139, 121, .28);
+}
+body:has(.uf-spotlight-hero) .uf-spotlight-item__art--board::after {
+  background: #0f8b79;
+  box-shadow: 0 0 0 5px #eafaf6;
+}
+body:has(.uf-spotlight-hero) .uf-spotlight-item__art--sdk {
+  background: #0f8b79;
+  box-shadow: 0 0 12px rgba(15, 139, 121, .4);
+}
+body:has(.uf-spotlight-hero) .uf-spotlight-item__art--sdk::before,
+body:has(.uf-spotlight-hero) .uf-spotlight-item__art--sdk::after {
+  border-color: #0f8b79;
+}
+body:has(.uf-spotlight-hero) .uf-spotlight-item__art--learn {
+  border-color: #0f8b79;
+  background:
+    repeating-linear-gradient(0deg, rgba(15, 139, 121, .22) 0 2px, transparent 2px 12px),
+    repeating-linear-gradient(90deg, rgba(15, 139, 121, .22) 0 2px, transparent 2px 12px);
+  box-shadow: 0 0 0 13px rgba(15, 139, 121, .06), 0 0 20px rgba(15, 139, 121, .3);
+}
+body:has(.uf-spotlight-hero) .uf-spotlight-item__art--learn::after {
+  background: #0f8b79;
+  box-shadow: 0 0 14px rgba(15, 139, 121, .4);
+}
+body:has(.uf-spotlight-hero) .uf-spotlight-item__art--examples {
+  border-color: #0f8b79;
+  background: linear-gradient(135deg, rgba(15, 139, 121, .14), transparent 70%);
+  box-shadow: 0 0 18px rgba(15, 139, 121, .26);
+}
+body:has(.uf-spotlight-hero) .uf-spotlight-item__art--examples::before,
+body:has(.uf-spotlight-hero) .uf-spotlight-item__art--examples::after { border-color: #0f8b79; background: #0f8b79; }
+body:has(.uf-spotlight-hero) .uf-spotlight-item__art--examples::before { background: transparent; }
+body:has(.uf-spotlight-hero) .uf-quicklinks.grid.cards,
+body:has(.uf-spotlight-hero) .uf-why-grid.grid.cards > ul > li,
+body:has(.uf-spotlight-hero) .uf-mcu-grid.grid.cards > ul > li { background: linear-gradient(145deg, #fff, #edf8f6); }
+body:has(.uf-spotlight-hero) .uf-quicklinks.grid.cards > ul > li:hover { background: #e1f3ef; }
+body:has(.uf-spotlight-hero) .md-header { color: #10333c; background: rgba(244, 251, 250, .94); box-shadow: 0 1px rgba(16, 85, 79, .12); }
+body:has(.uf-spotlight-hero) .md-header__topic,
+body:has(.uf-spotlight-hero) .md-header__button,
+body:has(.uf-spotlight-hero) .md-header__button svg,
+body:has(.uf-spotlight-hero) .md-header__title,
+body:has(.uf-spotlight-hero) .md-header__ellipsis { color: #10333c; }
+body:has(.uf-spotlight-hero) .md-search__input { color: #10333c; background: #fff; }
+body:has(.uf-spotlight-hero) .md-tabs { background: #eaf7f5; border-color: #c9e2df; }
+body:has(.uf-spotlight-hero) .md-tabs__link { color: #365c63; }
+body:has(.uf-spotlight-hero) .md-tabs__link:is(:hover, :focus),
+body:has(.uf-spotlight-hero) .md-tabs__link--active { color: #087d6e; }
+body:has(.uf-spotlight-hero) .md-footer,
+body:has(.uf-spotlight-hero) .md-footer-meta { color: #385d64; background: #e1f2ef; border-color: #c9e2df; }
+body:has(.uf-spotlight-hero) .md-footer__link,
+body:has(.uf-spotlight-hero) .md-footer__title,
+body:has(.uf-spotlight-hero) .md-footer__direction,
+body:has(.uf-spotlight-hero) .md-footer__button,
+body:has(.uf-spotlight-hero) .md-footer__button svg,
+body:has(.uf-spotlight-hero) .md-footer-meta a,
+body:has(.uf-spotlight-hero) .md-footer-meta__inner,
+body:has(.uf-spotlight-hero) .md-footer .md-copyright,
+body:has(.uf-spotlight-hero) .md-footer .md-copyright__highlight,
+body:has(.uf-spotlight-hero) .md-footer .md-copyright a,
+body:has(.uf-spotlight-hero) .md-footer .md-social__link,
+body:has(.uf-spotlight-hero) .md-footer .md-social__link svg { color: #244b53 !important; }
+
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) {
+  --md-default-bg-color: #081923;
+  --md-typeset-color: #c7dce1;
+  --uf-gray-50: #0c202b;
+  --uf-gray-100: #102a36;
+  --uf-gray-200: #244651;
+  --uf-gray-400: #8eabb4;
+  --uf-gray-500: #b5ced4;
+  --uf-gray-700: #deeff1;
+  --uf-gray-900: #f2ffff;
+  background: #081923;
+}
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-container,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-main,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-content,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-content__inner { background: #081923; }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-typeset { color: #c7dce1; }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-typeset h2,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-typeset h3 { color: #f2ffff; }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .uf-spotlight-hero {
+  color: #ecffff;
+  background:
+    radial-gradient(circle 42rem at var(--spotlight-x) var(--spotlight-y), rgba(61, 236, 201, .18), transparent 36%),
+    radial-gradient(ellipse 72% 100% at 73% 4%, #173c4c 0%, #0d2634 43%, #07151e 100%);
+}
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .uf-spotlight-hero::after { background: radial-gradient(circle 150px at var(--spotlight-x) var(--spotlight-y), rgba(210,255,248,.17), rgba(72,238,207,.04) 43%, transparent 72%); }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .uf-spotlight-hero .uf-hero-content h1 { color: #f3ffff !important; }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .uf-spotlight-hero .uf-hero-content > p { color: #c4dbe1; }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .uf-spotlight-hero .uf-badge { color: #c3fff3; background: rgba(89,234,202,.12); border-color: rgba(145,255,232,.26); }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .uf-spotlight-hero .uf-hero-actions .md-button { color: #ddfff8; border-color: rgba(191,255,244,.38); }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .uf-spotlight-toggle { color: #ddfff8; }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .uf-spotlight-toggle[aria-pressed="true"] { color: #71f5d9; }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .uf-spotlight-item { color: #ecfffb !important; border-color: rgba(176,255,239,.34); background: linear-gradient(145deg, rgba(31,91,101,.86), rgba(9,34,47,.8)); box-shadow: 0 23px 55px rgba(0,0,0,.32), inset 0 1px rgba(255,255,255,.13); }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .uf-spotlight-item__eyebrow { color: #9dffea; }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .uf-spotlight-item__copy { color: #c2d9dd; }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .uf-quicklinks.grid.cards,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .uf-why-grid.grid.cards > ul > li,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .uf-mcu-grid.grid.cards > ul > li { background: linear-gradient(145deg, #102a36, #0b202a); }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .uf-quicklinks.grid.cards > ul > li:hover { background: #153440 !important; }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-header { color: #effffd; background: rgba(8,25,35,.96); }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-header__topic,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-header__button,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-header__button svg,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-header__title,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-header__ellipsis { color: #effffd; }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-search__input { color: #effffd; background: #102a36; }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-tabs { background: #081923; border-color: rgba(170,255,238,.11); }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-tabs__link { color: #c7dce1; }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-footer,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-footer-meta { color: #d7f0f1; background: #081923; border-color: rgba(170,255,238,.13); }
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-footer__link,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-footer__title,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-footer__direction,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-footer__button,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-footer__button svg,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-footer-meta a,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-footer-meta__inner,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-footer .md-copyright,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-footer .md-copyright__highlight,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-footer .md-copyright a,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-footer .md-social__link,
+[data-md-color-scheme="slate"] body:has(.uf-spotlight-hero) .md-footer .md-social__link svg { color: #d7f0f1 !important; }
+
+/* Zensical places the scheme attribute on <body>, so keep this explicit
+   fallback alongside the generic selector above. */
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) {
+  --md-default-bg-color: #081923;
+  --md-typeset-color: #c7dce1;
+  --uf-gray-50: #0c202b;
+  --uf-gray-100: #102a36;
+  --uf-gray-200: #244651;
+  --uf-gray-400: #8eabb4;
+  --uf-gray-500: #b5ced4;
+  --uf-gray-700: #deeff1;
+  --uf-gray-900: #f2ffff;
+  background: #081923;
+}
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .md-container,
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .md-main,
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .md-content,
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .md-content__inner { background: #081923; }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .md-typeset { color: #c7dce1; }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .md-typeset :is(h2, h3) { color: #f2ffff; }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .uf-spotlight-hero {
+  color: #ecffff;
+  background: radial-gradient(circle 42rem at var(--spotlight-x) var(--spotlight-y), rgba(61,236,201,.18), transparent 36%), radial-gradient(ellipse 72% 100% at 73% 4%, #173c4c 0%, #0d2634 43%, #07151e 100%);
+}
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .uf-spotlight-hero::after { background: radial-gradient(circle 150px at var(--spotlight-x) var(--spotlight-y), rgba(210,255,248,.17), rgba(72,238,207,.04) 43%, transparent 72%); }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .uf-spotlight-hero .uf-hero-content h1 { color: #f3ffff !important; }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .uf-spotlight-hero .uf-hero-content > p { color: #c4dbe1; }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .uf-spotlight-hero .uf-badge { color: #c3fff3; background: rgba(89,234,202,.12); border-color: rgba(145,255,232,.26); }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .uf-spotlight-hero .uf-hero-actions .md-button { color: #ddfff8; border-color: rgba(191,255,244,.38); }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .uf-spotlight-toggle { color: #ddfff8; }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .uf-spotlight-toggle[aria-pressed="true"] { color: #71f5d9; }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .uf-spotlight-item { color: #ecfffb !important; border-color: rgba(176,255,239,.34); background: linear-gradient(145deg, rgba(31,91,101,.86), rgba(9,34,47,.8)); box-shadow: 0 23px 55px rgba(0,0,0,.32), inset 0 1px rgba(255,255,255,.13); }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .uf-spotlight-item__eyebrow { color: #9dffea; }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .uf-spotlight-item__copy { color: #c2d9dd; }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) :is(.uf-quicklinks.grid.cards, .uf-why-grid.grid.cards > ul > li, .uf-mcu-grid.grid.cards > ul > li) { background: linear-gradient(145deg, #102a36, #0b202a); }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .uf-quicklinks.grid.cards > ul > li:hover { background: #153440 !important; }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .md-header { color: #effffd; background: rgba(8,25,35,.96); }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .md-header :is(.md-header__topic, .md-header__button, .md-header__button svg, .md-header__title, .md-header__ellipsis) { color: #effffd; }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .md-search__input { color: #effffd; background: #102a36; }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .md-tabs { background: #081923; border-color: rgba(170,255,238,.11); }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .md-tabs__link { color: #c7dce1; }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) :is(.md-footer, .md-footer-meta) { color: #d7f0f1; background: #081923; border-color: rgba(170,255,238,.13); }
+body[data-md-color-scheme="slate"]:has(.uf-spotlight-hero) .md-footer :is(.md-footer__link, .md-footer__title, .md-footer__direction, .md-footer__button, .md-footer__button svg, .md-footer-meta a, .md-footer-meta__inner, .md-copyright, .md-copyright__highlight, .md-copyright a, .md-social__link, .md-social__link svg) { color: #d7f0f1 !important; }
+
+/* Defense-in-depth: the two blocks above only fire once Material's palette
+   JS has actually written data-md-color-scheme="slate" onto <body>. If the
+   "System" (auto) palette is in use and that attribute isn't set the way
+   these selectors expect, this quicklinks-card hover still needs to not be
+   a stark white flash against the dark hero — fall back to the OS-level
+   dark preference directly, independent of the data-attribute mechanism. */
+@media (prefers-color-scheme: dark) {
+  /* :not([data-md-color-scheme]) is the important part here: this must only
+     act as a fallback for the moment before Material's palette JS has set
+     an explicit scheme attribute (or a truly attribute-less "auto" state).
+     Without that guard, this fired purely off the OS preference regardless
+     of what the visitor explicitly chose in the site's own toggle — so
+     switching the site to light mode while the OS prefers dark still forced
+     this dark hover color, which is the exact bug this rule was meant to
+     prevent, just inverted. */
+  body:not([data-md-color-scheme]):has(.uf-spotlight-hero) .uf-quicklinks.grid.cards > ul > li:hover { background: #153440 !important; }
+}

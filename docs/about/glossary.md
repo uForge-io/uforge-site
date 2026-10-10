@@ -4,11 +4,11 @@ description: "Quick-reference glossary of embedded, wireless, graphics, and SiFl
 tags:
     - About
 ---
-# Glossary
+# Glossary { #glossary }
 
 Quick reference for acronyms and terms used across the μForge.io site — both general embedded/wireless terminology and SiFli-specific names for the SF32 platform. Entries link to the page where a term is explained in depth; this page is a lookup aid, not a replacement for that context.
 
-## Architecture and Processing
+## Architecture and Processing { #architecture-and-processing }
 
 * **MCU** — **Microcontroller Unit.** An integrated circuit combining a CPU core, memory, and programmable input/output peripherals, optimized to run dedicated, low-overhead firmware rather than a general-purpose operating system.
 * **SoC** — **System on Chip.** An integrated circuit that consolidates all necessary electronic circuits and components of a computer system onto a single substrate. On this site, SF32 parts are categorized as MCUs since they target microcontroller-class firmware rather than a full application-processor OS envelope.
@@ -20,7 +20,7 @@ Quick reference for acronyms and terms used across the μForge.io site — both 
 * **HAL** — **Hardware Abstraction Layer.** The SDK layer that exposes peripherals through a consistent API independent of the exact chip variant.
 * **AI / ML accelerator** — Hardware that accelerates artificial-intelligence or machine-learning workloads, such as inference over a compact neural-network model. Availability is device-specific; use the product selector and target datasheet to confirm the selected part.
 
-## Wireless Connectivity
+## Wireless Connectivity { #wireless-connectivity }
 
 * **BLE** — **Bluetooth Low Energy.** The low-power Bluetooth radio mode most SF32 wearable and IoT products build on.
 * **Wi-Fi** — A wireless local-area-network technology. Where an SF32 product documents external Wi-Fi support, the connection is made through its SDIO interface; confirm the exact part, board-level routing, power, and software support before design freeze.
@@ -32,7 +32,7 @@ Quick reference for acronyms and terms used across the μForge.io site — both 
 * **OTA** — **Over-The-Air** (firmware update). Updating device firmware via a wireless link (typically BLE) instead of a wired connection.
 * **DFU** — **Device Firmware Update.** The general mechanism/protocol category that OTA updates over Bluetooth typically implement.
 
-## Graphics and Display
+## Graphics and Display { #graphics-and-display }
 
 * **ePicasso** — SiFli's in-house 2D/2.5D graphics acceleration engine for the SF32 family, offloading pixel operations like image copy, blending, scaling, rotation, and layer composition from the application CPU. See the [ePicasso architecture page](../learn/graphics/epicasso-gpu.md).
 * **eZip** — SiFli's lossless graphics and general-purpose compression format, with hardware decoding on supported SF32 devices. For graphics, SiFli describes its compression ratio as slightly higher than PNG; for general-purpose data, the ratio varies with the source. Because compressed assets move over the bus before decoding, eZip can reduce external-memory bandwidth from PSRAM and NOR Flash.
@@ -44,22 +44,22 @@ Quick reference for acronyms and terms used across the μForge.io site — both 
 * **EPD** — **Electronic Paper Display.** A display technology commonly used for low-power, reflective screens.
 * **JDI display interface** — Support for compatible JDI / Sharp Memory-in-Pixel displays, where documented for the selected SF32 device.
 
-## Audio
+## Audio { #audio }
 
 * **ADC / DAC** — **Analog-to-Digital / Digital-to-Analog Converter.** The audio front-end and output paths on SF32 parts with integrated audio capability. Dedicated audio ADC/DAC is available on SF32LB52x/56x/57x/58x; SF32LB55x lacks a dedicated audio ADC/DAC.
 * **PDM** — **Pulse-Density Modulation.** A common digital microphone interface format supported alongside I2S on SF32 audio-capable parts. A PDM interface is not the same thing as one microphone: one interface can normally connect up to two digital microphones, which share the clock and use opposite clock edges to identify their left and right channels. Specify and compare PDM interface counts rather than microphone counts.
 * **I2S** — **Inter-IC Sound.** A standard digital audio interface for connecting codecs, DACs, or other audio peripherals.
 
-## Power and Reliability
+## Power and Reliability { #power-and-reliability }
 
 * **PMU** — **Power Management Unit.** The integrated block handling voltage regulation (BUCK/LDO outputs) inside SF32 chips; some designs pair it with an external SiFli PMIC (e.g. SF30147C) for additional power rails.
 * **PMIC** — **Power Management IC.** A dedicated external chip providing additional regulated power rails beyond what the MCU's internal PMU supplies.
 * **LDO** — **Low-Dropout regulator.** A linear voltage regulator type, one of the internal PMU output stages on SF32 parts.
 * **BUCK** — A switching (non-linear) voltage regulator topology, more efficient than an LDO at higher current, also integrated into the SF32 PMU.
 * **TRNG** — **True Random Number Generator.** A hardware entropy source, drawing on physical thermal noise, used for cryptographic key generation and security features.
-* **PSA** — **Platform Security Architecture.** An Arm security framework; SF32 parts carry a PSA certification level indicating verified security posture.
+* **PSA** — **Platform Security Architecture.** Arm's security framework and certification scheme. Some SF32 chip pages list **PSA Certified Level 1**; verify the certification status and level for the exact part in its official documentation rather than assuming they apply uniformly across the family.
 
-## Storage and Memory
+## Storage and Memory { #storage-and-memory }
 
 * **SRAM** — **Static RAM.** The fast on-chip working memory used for running application code and data.
 * **PSRAM** — **Pseudo-Static RAM.** Higher-capacity external memory (often System-in-Package on SF32 modules) used to extend beyond on-chip SRAM for graphics buffers and larger applications.
@@ -67,7 +67,7 @@ Quick reference for acronyms and terms used across the μForge.io site — both 
 * **OPI / QPI / QSPI** — **Octal/Quad Peripheral (or Serial Peripheral) Interface.** The pin-count/bandwidth class of the flash or PSRAM interface (Quad = 4 data lines, Octal = 8), affecting achievable memory bandwidth.
 * **eMMC** — **Embedded MultiMediaCard.** A managed NAND flash storage interface used on higher-storage SF32 designs.
 
-## Peripherals and Interfaces
+## Peripherals and Interfaces { #peripherals-and-interfaces }
 
 * **GPIO** — **General-Purpose Input/Output.** Configurable digital pins used for simple signaling, buttons, LEDs, and bit-banged interfaces.
 * **I/O** — **Input/Output.** A general term for the pins and peripheral signals through which a device exchanges data or control signals with the rest of a system.
@@ -80,7 +80,7 @@ Quick reference for acronyms and terms used across the μForge.io site — both 
 * **PTM** — **Peripheral Task Machine.** A SiFli hardware feature for deterministic peripheral-task handling on supported devices.
 * **RTC** — **Real-Time Clock.** A timekeeping peripheral that can keep running (or wake the system) independent of the main application clock domains.
 
-## Hardware and Manufacturing
+## Hardware and Manufacturing { #hardware-and-manufacturing }
 
 * **QFN** — **Quad Flat No-lead package.** The chip package type SF32 parts ship in, described by pin count and body size (e.g. QFN68).
 * **BGA** — **Ball Grid Array package.** A package with solder balls arranged beneath the device, enabling a compact footprint and higher pin count but requiring BGA-capable PCB escape routing and assembly.
@@ -90,12 +90,9 @@ Quick reference for acronyms and terms used across the μForge.io site — both 
 * **EVB** — **Evaluation Board.** A SiFli-issued SF32 reference/development board used to bring up and validate designs before custom hardware exists.
 * **FAE** — **Field Application Engineer.** SiFli's technical support contact for hardware design questions beyond what public documentation covers.
 
-## Software and Tools
+## Software and Tools { #software-and-tools }
 
 * **SiFli-SDK** — SiFli's primary firmware development kit for SF32 parts; the reference/vendor SDK most production firmware is built on.
 * **SiFli CodeKit** — A VS Code extension for SiFli-SDK development, guiding project creation, configuration, build, flash, and monitor workflows without requiring the raw command-line toolchain.
 * **RTOS** — **Real-Time Operating System.** The class of OS (deterministic scheduling, low overhead) SF32 firmware typically runs, whether via SiFli-SDK's own RTOS integration or Zephyr.
 * **sftool** — SiFli's command-line flashing/recovery utility for SF32 boards, including brick recovery for boards that fail to boot.
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

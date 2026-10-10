@@ -1,5 +1,7 @@
 ---
 icon: lucide/book-check
+hide:
+    - navigation
 description: "Hardware design guide for the SF32LB58-MOD Bluetooth MCU module: power, interfaces, and PCB integration guidance."
 tags:
     - Hardware
@@ -10,7 +12,7 @@ tags:
 
 ## 1. Overview
 
-**SF32LB58-MOD** is a certified, general-purpose low-power Bluetooth MCU module built on SiFli's flagship SF32LB586VDD36 chip (Arm Cortex-M33 STAR-MC1 triple-core, up to 240MHz). It integrates a 48MHz crystal, an optional 32.768kHz crystal, and, depending on order code, in-package HPI-PSRAM, QSPI-NOR/NAND Flash, or eMMC storage into a single 24 × 24 × 3.1mm surface-mount package with 138 pins.
+**SF32LB58-MOD** is a general-purpose, low-power Bluetooth MCU module built around SiFli's SF32LB586VDD36 chip, which integrates a triple-core Arm Cortex-M33 STAR-MC1 processor running at up to 240 MHz. The module includes a 48 MHz crystal and an optional 32.768 kHz crystal. Depending on the SKU, it also includes HPI-PSRAM, QSPI-NOR/NAND Flash, or eMMC storage. The surface-mount module has 138 pins and measures 24 × 24 × 3.1 mm.
 
 This guide covers module-level hardware integration: pin definitions, peripheral interfaces, electrical characteristics, power-supply requirements, reference schematics, a schematic design checklist, mechanical dimensions and PCB footprint, and product handling requirements. It is based on SiFli datasheet **DS5802-SF32LB58-MOD V0.1**.
 
@@ -27,7 +29,7 @@ For the underlying chip architecture (cores, graphics, memory subsystem, and per
 
 <div align="center" markdown>
 
-| Module Code | Flash | PSRAM | Backup Flash | Temperature | Dimensions (mm) |
+| Module Code | Flash | PSRAM | Standard Flash | Temperature | Dimensions (mm) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | SF32LB58-MOD-N16R32N1 | 16MB QSPI-NOR | 16+16MB HPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 24 × 24 × 3.1 |
 | SF32LB58-MOD-A128R32N1 | 128MB QSPI-NAND | 16+16MB HPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 24 × 24 × 3.1 |
@@ -46,7 +48,7 @@ For the underlying chip architecture (cores, graphics, memory subsystem, and per
 | Application cores (HCPU/ACPU) | 2x Arm Cortex-M33 STAR-MC1, up to 240MHz |
 | Low-power core (LCPU) | Arm Cortex-M33 STAR-MC1, up to 96MHz |
 | SRAM | 2176KB (HCPU) + 512KB (ACPU) + 1056KB retention SRAM (LCPU) |
-| Wireless | Dual-mode Bluetooth 6.3 with BLE Audio |
+| Wireless | Dual-mode Bluetooth 5.3, backward compatible with 4.2/4.1/4.0; supports BLE and Classic Bluetooth |
 | Graphics | ePicasso 2.0 + Vivante GCNanoUltraV, up to 1024×1024, eZip 2.0, hardware JPEG codec |
 | Audio | 2x 24-bit audio DAC, 2x 24-bit audio Sigma-Delta ADC |
 | Storage | 5x MPI (in-package + external), 2x SD/SDIO/eMMC |
@@ -239,7 +241,7 @@ Any pin marked `PAxx_I2C_UART` or `PBxx_I2C_UART` in the table above can be conf
 
 **UART** — Full-duplex, up to 6Mbps baud rate, configurable data format, hardware flow control (CTS/RTS), DMA multi-packet TX/RX. UART1–3 are on HPSYS; UART4–6 are on LPSYS.
 
-**I2C** — Master and Slave capable, 8-byte FIFO, DMA support, standard (100kbps), fast (400kbps), fast-mode-plus (1Mbps), and high-speed (3.4Mbps) modes, 7-bit/10-bit addressing as Master, configurable digital de-glitch filter. I2C1–4 are on HPSYS; I2C5–7 are on LPSYS.
+**I2C** — Supports Master and Slave roles, an 8-byte FIFO, DMA, standard (100kbps), fast (400kbps), fast-mode-plus (1Mbps), and high-speed (3.4Mbps) modes, 7-bit/10-bit Master addressing, clock stretching, and configurable digital deglitch filtering. I2C1–4 are on HPSYS; I2C5–7 are on LPSYS.
 
 **SPI** — Supports SSP/SPI (full duplex, Master or Slave) and Microwire (half duplex, Master only) formats, 4–32-bit data width, configurable clock polarity/phase, configurable chip-select polarity, 32-bit × 16-entry FIFO, DMA support. SPI1/2 are on HPSYS (max 48MHz); SPI3/4 are on LPSYS (max 24MHz).
 
@@ -374,11 +376,11 @@ Full tables (including input leakage, reset thresholds, and pin capacitance at b
 
 ### 6.5 Dual-Mode Bluetooth RF Performance
 
-Supports Bluetooth 6.3, backward compatible with 5.x/4.2/4.1/4.0. Operating channel center frequency: 2402–2480MHz.
+Supports Bluetooth 5.3, backward compatible with 4.2/4.1/4.0, including BLE and Classic Bluetooth. Operating channel center frequency: 2402–2480MHz.
 
 **BLE transmitter (1Mbps)**: max power 19dBm, power control range -20 to 19dBm.
 
-**BLE receiver**: sensitivity -100dBm (1Mbps), -97dBm (2Mbps), -104.5dBm (LR S2/125kbps), -107.5dBm (LR S8/500bps) @30.8% PER, dirty-off condition.
+**BLE receiver**: typical sensitivity is -100dBm (1Mbps), -97dBm (2Mbps), -104.5dBm (LR S2/500kbps), and -107.5dBm (LR S8/125kbps), measured with 37-byte packets at 30.8% PER under dirty-off conditions.
 
 **Classic BT (Basic Data Rate)**: max transmit power 19dBm; receiver sensitivity -96.3dBm (dirty off) / -94dBm (dirty on) @0.1% BER.
 
@@ -428,7 +430,7 @@ Use these as the starting point for a production schematic and adapt pin selecti
 </div>
 
 !!! note
-    The official datasheet's schematic design checklist (§7.3) continues beyond the three items above with additional entries covering topics consistent with SiFli's standard MOD-series checklist pattern — matching IO voltage levels between the module and connected peripherals, `#GPADC_CHx`-marked pins supporting 0–3.3V analog input, `PAxx_TIM`/`GPTIMx`-marked pins supporting PWM output, ESD protection for battery/connector/test-point interfaces, and series resistors on the SWD/debug UART lines used for programming and debug. Confirm the complete, current checklist against the [official datasheet PDF](https://downloads.sifli.com/user%20manual/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) before finalizing a production schematic.
+    This guide reproduces only the three checklist items above. Consult §7.3 of the [official datasheet PDF](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) for the complete checklist before finalizing a production schematic.
 
 ## 10. Module Dimensions and PCB Footprint
 
@@ -482,11 +484,11 @@ The module is recommended to go through reflow only once.
 Avoid exposing SiFli modules to vibration from ultrasonic welding or ultrasonic cleaning equipment. Ultrasonic vibration can resonate with the module's internal crystal oscillators, causing crystal failure or malfunction, and may render the module inoperable or degrade its performance.
 
 !!! note
-    Confirm the final moisture sensitivity level, floor-life window, ESD limits, and reflow requirements for SF32LB58-MOD against §9 of the [official datasheet PDF](https://downloads.sifli.com/user%20manual/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) before releasing manufacturing process specifications.
+    Confirm the final moisture sensitivity level, floor-life window, ESD limits, and reflow requirements for SF32LB58-MOD against §9 of the [official datasheet PDF](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) before releasing manufacturing process specifications.
 
 ## 12. Related Documents
 
-- [DS5802-SF32LB58-MOD Datasheet (V0.1)](https://downloads.sifli.com/user%20manual/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf)
+- [DS5802-SF32LB58-MOD Datasheet (V0.1)](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf)
 - [SF32LB58x Chip Introduction](../../sf32-products/chips/SF32LB58x.md)
 - [SF32LB58x Hardware Design Guide](../chip-guides/SF32LB58x_hardware_design_guide.md)
 - [SF32LB58-DevKit-LCD](../../sf32-products/devkits/SF32LB58-DevKit-LCD.md)

@@ -1,0 +1,1 @@
+../../docs/javascripts/spotlight-hero.js

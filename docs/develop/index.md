@@ -16,7 +16,7 @@ Use [Getting Started](../getting-started/index.md) for the first board run, [SF3
 !!! info "SiFli-Solution"
     SiFli-Solution is a separate SiFli software package that μForge.io does not currently document. The guidance here is limited to SiFli-SDK and the community paths listed below. If your product needs a more complete display-device solution, consult the official [SiFli Solution Documentation](https://docs.sifli.com/projects/solution/index.html) and engage SiFli directly. A complex product using this route may need deep, direct SiFli involvement.
 
-## Establish a SiFli-SDK Baseline
+## Establish a SiFli-SDK Baseline { #establish-a-sifli-sdk-baseline }
 
 [SiFli-SDK](platforms/sifli-sdk/overview.md) is SiFli's official, RT-Thread-based software package and the reference development path for SF32 firmware. Start there unless you have a deliberate reason to evaluate another ecosystem: it provides the broadest documented baseline for board support, Bluetooth, graphics, audio, storage, power management, and production work.
 
@@ -29,7 +29,7 @@ Before building product features, establish and record one reproducible baseline
 
 The resulting record is the reference point for later application changes, board ports, test failures, and field recovery.
 
-## Find Guidance by Task
+## Find Guidance by Task { #find-guidance-by-task }
 
 <div align="center"><em>Table: SF32 development tasks</em></div>
 
@@ -37,7 +37,7 @@ The resulting record is the reference point for later application changes, board
 
 | Task | Start here | Then use |
 |:----------------|:-----------|:---------|
-| Build, download, and read serial output every day | [Build, Flash, Monitor](platforms/sifli-sdk/build-flash-monitor.md) | [Tools](tools/index.md) for scripted download, trace, and crash utilities. |
+| Build and flash firmware; inspect serial output | [Build, Flash, Monitor](platforms/sifli-sdk/build-flash-monitor.md) | [Tools](tools/index.md) for scripted download, trace, and crash utilities. |
 | Match firmware to a development board, module, or custom hardware | [Board Configuration](platforms/sifli-sdk/board-configuration.md) | The relevant Hardware guide and the closest board-specific example. |
 | Reuse a driver or middleware layer across projects | [Components and `sf_pkg`](platforms/sifli-sdk/components.md) | A minimal example and a documented configuration boundary. |
 | Implement a concrete peripheral or subsystem | [SiFli-SDK App Notes](platforms/sifli-sdk/sdk-application-notes.md) | The linked official SDK usage guide for exact APIs, configuration symbols, and commands. |
@@ -47,7 +47,7 @@ The resulting record is the reference point for later application changes, board
 
 </div>
 
-## SiFli-SDK Application Notes
+## SiFli-SDK Application Notes { #sifli-sdk-application-notes }
 
 The application-note collection is organized by integration task rather than SDK catalogue order. Begin with the immediate subsystem. Before adapting a configuration or command, check the stated chip-family scope, board configuration, SDK release, and hardware prerequisites.
 
@@ -60,11 +60,11 @@ The application-note collection is organized by integration task rather than SDK
 | Analog and sensors | [Sample with GPADC](platforms/sifli-sdk/application-notes/adc-sampling.md) · [Integrate and Read Sensors](platforms/sifli-sdk/application-notes/sensor-integration.md) |
 | Storage and graphics assets | [Use External Flash](platforms/sifli-sdk/application-notes/external-flash.md) · [Compress Graphics Assets with EZIP](platforms/sifli-sdk/application-notes/ezip-image-assets.md) |
 | Reliability, power, and debugging | [Configure the Watchdog](platforms/sifli-sdk/application-notes/watchdog.md) · [Configure and Measure Low Power](platforms/sifli-sdk/application-notes/low-power-measurement.md) · [Capture Logs and Analyze Crashes](platforms/sifli-sdk/application-notes/crash-analysis.md) |
-| RF and Bluetooth validation | [Run SiFli SDK RF Tests](platforms/sifli-sdk/application-notes/rf-performance-tests.md) · [Run Bluetooth Signaling Tests](platforms/sifli-sdk/application-notes/bluetooth-signalling-tests.md) · [Run Bluetooth Single-Item RF Tests](platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests.md) |
+| RF and Bluetooth validation | [Run SiFli-SDK RF Tests](platforms/sifli-sdk/application-notes/rf-performance-tests.md) · [Run Bluetooth Signaling Tests](platforms/sifli-sdk/application-notes/bluetooth-signalling-tests.md) · [Run Bluetooth Single-Item RF Tests](platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests.md) |
 
 </div>
 
-## Navigate the Develop Section
+## Navigate the Develop Section { #navigate-the-develop-section }
 
 <div align="center"><em>Table: Develop section map</em></div>
 
@@ -81,7 +81,7 @@ The application-note collection is organized by integration task rather than SDK
 
 </div>
 
-## Evaluate Community Paths Deliberately
+## Evaluate Community Paths Deliberately { #evaluate-community-paths-deliberately }
 
 The [Experimental / Community](platforms/zephyr/overview.md) group is for teams with a reason to work beyond the reference SDK path. It does not imply equivalent production support.
 
@@ -100,7 +100,7 @@ The [Experimental / Community](platforms/zephyr/overview.md) group is for teams 
 
 Before committing a product to one of these paths, validate every required peripheral, Flash layout, debug method, and recovery procedure on the exact board. Keep the tested revision, configuration, commands, and results with the product source.
 
-## Product-Ready Development Evidence
+## Product-Ready Development Evidence { #product-ready-development-evidence }
 
 Before treating a firmware path as product-ready, make sure you can answer:
 

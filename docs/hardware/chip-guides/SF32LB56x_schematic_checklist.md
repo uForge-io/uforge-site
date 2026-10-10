@@ -5,20 +5,22 @@ tags:
     - Hardware
     - Chip
     - Checklist
+hide:
+    - navigation
 ---
 
-# SF32LB56x Hardware Design Guide — Schematic Checklist
+# SF32LB56x Hardware Design Guide — Schematic Checklist { #sf32lb56x-hardware-design-guide-schematic-checklist }
 
 !!! note "Part of the SF32LB56x Hardware Design Guide"
     This page covers Section 5.8, the item-by-item schematic checklist. Return to [Schematic Design Guidelines](SF32LB56x_schematic_design.md).
 
-## 5.8. Schematic Checklist
+## 5.8. Schematic Checklist { #58-schematic-checklist }
 
 Each table below covers one schematic functional block. Apply a row only to the variants listed in the Applies To column when that column is present.
 
-### 5.8.1. Package
+### 5.8.1. Package { #581-package }
 
-<div align="center"><em>Table 5.8-1: Package Checklist</em></div>
+<div align="center"><em>Table 5.8.1-1: Package Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -28,9 +30,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.2. Power Supply
+### 5.8.2. Power Supply { #582-power-supply }
 
-<div align="center"><em>Table 5.8-2: Power Supply Checklist</em></div>
+<div align="center"><em>Table 5.8.2-1: Power Supply Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -66,9 +68,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.3. Power Supply Capacitors and Inductors
+### 5.8.3. Power Supply Capacitors and Inductors { #583-power-supply-capacitors-and-inductors }
 
-<div align="center"><em>Table 5.8-3: Power Supply Capacitors and Inductors Checklist</em></div>
+<div align="center"><em>Table 5.8.3-1: Power Supply Capacitors and Inductors Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -98,16 +100,16 @@ Each table below covers one schematic functional block. Apply a row only to the 
 | 22 | GPADC VREFP capacitor = 4.7 uF | All chips | Required |
 | 23 | BUCK inductor is a part number listed on the [SiFli Approved Vendor List] (AVL) | All chips | Required |
 | 24 | If the BUCK inductor is not SiFli-recommended, it meets L = 4.7 uH, DCR &lt;= 0.4 ohm, and Isat &gt;= 450 mA | All chips | Required |
-| 25 | PVDDsupply power supply is 1.8 V, recommended to use VBAT1.8 V DCDC | All chips | Required |
+| 25 | Set PVDD to 1.8 V; a VBAT-to-1.8 V DCDC converter is recommended | All chips | Required |
 | 26 | If GPS or other interference-sensitive peripherals are present, reserve a shunt-to-ground capacitor footprint at BUCK_LX; the value depends on actual test results | All chips | Required |
 | 27 | Quiescent current of the selected DCDC is recorded and meets project requirements | All chips | Required |
 | 28 | Quiescent current of the selected LDO is recorded and meets project requirements | All chips | Required |
 
 </div>
 
-### 5.8.4. Clock
+### 5.8.4. Clock { #584-clock }
 
-<div align="center"><em>Table 5.8-4: Clock Checklist</em></div>
+<div align="center"><em>Table 5.8.4-1: Clock Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -120,9 +122,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.5. Ground Signals
+### 5.8.5. Ground Signals { #585-ground-signals }
 
-<div align="center"><em>Table 5.8-5: Ground Signals Checklist</em></div>
+<div align="center"><em>Table 5.8.5-1: Ground Signals Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -132,9 +134,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.6. Boot Mode
+### 5.8.6. Boot Mode { #586-boot-mode }
 
-<div align="center"><em>Table 5.8-6: Boot Mode Checklist</em></div>
+<div align="center"><em>Table 5.8.6-1: Boot Mode Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -145,9 +147,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.7. RF
+### 5.8.7. RF { #587-rf }
 
-<div align="center"><em>Table 5.8-7: RF Checklist</em></div>
+<div align="center"><em>Table 5.8.7-1: RF Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -158,9 +160,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.8. I/O Resource Allocation
+### 5.8.8. I/O Resource Allocation { #588-io-resource-allocation }
 
-<div align="center"><em>Table 5.8-8: I/O Resource Allocation Checklist</em></div>
+<div align="center"><em>Table 5.8.8-1: I/O Resource Allocation Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -173,9 +175,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.9. Hardware Wake-up
+### 5.8.9. Hardware Wake-up { #589-hardware-wake-up }
 
-<div align="center"><em>Table 5.8-9: Hardware Wake-up Checklist</em></div>
+<div align="center"><em>Table 5.8.9-1: Hardware Wake-up Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -188,9 +190,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.10. Storage
+### 5.8.10. Storage { #5810-storage }
 
-<div align="center"><em>Table 5.8-10: Storage Checklist</em></div>
+<div align="center"><em>Table 5.8.10-1: Storage Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -214,9 +216,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.11. Display
+### 5.8.11. Display { #5811-display }
 
-<div align="center"><em>Table 5.8-11: Display Checklist</em></div>
+<div align="center"><em>Table 5.8.11-1: Display Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -237,9 +239,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.12. GPADC
+### 5.8.12. GPADC { #5812-gpadc }
 
-<div align="center"><em>Table 5.8-12: GPADC Checklist</em></div>
+<div align="center"><em>Table 5.8.12-1: GPADC Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -253,9 +255,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.13. Buttons
+### 5.8.13. Buttons { #5813-buttons }
 
-<div align="center"><em>Table 5.8-13: Buttons Checklist</em></div>
+<div align="center"><em>Table 5.8.13-1: Buttons Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -268,9 +270,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.14. EOS and ESD Protection
+### 5.8.14. EOS and ESD Protection { #5814-eos-and-esd-protection }
 
-<div align="center"><em>Table 5.8-14: EOS and ESD Protection Checklist</em></div>
+<div align="center"><em>Table 5.8.14-1: EOS and ESD Protection Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -286,9 +288,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.15. I2C
+### 5.8.15. I2C { #5815-i2c }
 
-<div align="center"><em>Table 5.8-15: I2C Checklist</em></div>
+<div align="center"><em>Table 5.8.15-1: I2C Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -298,13 +300,13 @@ Each table below covers one schematic functional block. Apply a row only to the 
 | 2 | I2C has pull-ups with the correct resistor value; if 400 kHz operation is required, 2.2 kΩ pull-ups are recommended. Use the peripheral-side voltage domain and shut the pull-up supply off with the peripheral at power-down | All chips | Required |
 | 3 | I2C interrupt signal supports hardware wake-up where required | All chips | Required |
 | 4 | If multiple devices share one I2C bus, their addresses are distinguished | All chips | Required |
-| 5 | When use SF30147C PMIC, I2C SCL with TWI DAT use PB23, I2C SCL pull-up power supplyalways powered, TWI DATnormal SF30147C | SF32LB560/561/563/56W and SS6700A | Required |
+| 5 | The SiFli source row for the SF30147C PMIC reads: “I2C SCL with TWI DAT use PB23; I2C SCL pull-up power supplyalways powered; TWI DATnormal SF30147C.” The wording does not clarify how the signals relate or what “normal” means. Verify the PB23 assignment, pull-up supply, and TWI DAT operation with the SF30147C against the official schematic and documentation before release. | SF32LB560/561/563/56W and SS6700A | Required |
 
 </div>
 
-### 5.8.16. Analog Audio
+### 5.8.16. Analog Audio { #5816-analog-audio }
 
-<div align="center"><em>Table 5.8-16: Analog Audio Checklist</em></div>
+<div align="center"><em>Table 5.8.16-1: Analog Audio Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -324,9 +326,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.17. SPI
+### 5.8.17. SPI { #5817-spi }
 
-<div align="center"><em>Table 5.8-17: SPI Checklist</em></div>
+<div align="center"><em>Table 5.8.17-1: SPI Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -338,9 +340,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.18. USART
+### 5.8.18. USART { #5818-usart }
 
-<div align="center"><em>Table 5.8-18: USART Checklist</em></div>
+<div align="center"><em>Table 5.8.18-1: USART Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -357,9 +359,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.19. PWM
+### 5.8.19. PWM { #5819-pwm }
 
-<div align="center"><em>Table 5.8-19: PWM Checklist</em></div>
+<div align="center"><em>Table 5.8.19-1: PWM Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -372,9 +374,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.20. Debug
+### 5.8.20. Debug { #5820-debug }
 
-<div align="center"><em>Table 5.8-20: Debug Checklist</em></div>
+<div align="center"><em>Table 5.8.20-1: Debug Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -387,9 +389,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.21. USB
+### 5.8.21. USB { #5821-usb }
 
-<div align="center"><em>Table 5.8-21: USB Checklist</em></div>
+<div align="center"><em>Table 5.8.21-1: USB Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -401,9 +403,9 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.22. PBR
+### 5.8.22. PBR { #5822-pbr }
 
-<div align="center"><em>Table 5.8-22: PBR Checklist</em></div>
+<div align="center"><em>Table 5.8.22-1: PBR Checklist</em></div>
 
 <div align="center" markdown>
 
@@ -420,16 +422,16 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.23. Power Consumption
+### 5.8.23. Power Consumption { #5823-power-consumption }
 
-<div align="center"><em>Table 5.8-23: Power Consumption Checklist</em></div>
+<div align="center"><em>Table 5.8.23-1: Power Consumption Checklist</em></div>
 
 <div align="center" markdown>
 
 | No. | Check Point | Applies To | Category |
 |:---|:---|:---|:---|
 | 1 | For all MOSFET, LDO, and DCDC enable pins used for power switching, reserve a 1 MΩ pull-down to ground when the enable pin is active-high; adjust the value if needed for the actual project | All chips | Required |
-| 2 | SF32LB56x PVDD supply is 1.8 V, useslowIq DCDC output is 1.8 V power supply, always powered | All chips | Required |
+| 2 | Supply SF32LB56x PVDD at 1.8 V from a low-Iq DCDC converter and keep it powered continuously | All chips | Required |
 | 3 | For SF32LB56xU and SS6700, VDDIO1 requires load-switch control. Use PBR0 as the control signal; if GPIOs are available, PB22 may control the supply. The download tool must enable VDDIO1 power | SF32LB560/561/563/56W and SS6700A | Required |
 | 4 | For SF32LB56xU and SS6700, external flash power requires a load switch controlled by PBR0 | SF32LB560/561/563/56W and SS6700A | Required |
 | 5 | <span class="flag-yellow">In Hibernate-off or Standby-off mode, SF32LB56xV VDDIOSA and VDDIOSB require load-switch control through PBR0, while VDDIOSC must always be powered</span> | SF32LB565/567 | Required |
@@ -442,16 +444,16 @@ Each table below covers one schematic functional block. Apply a row only to the 
 
 </div>
 
-### 5.8.24. Download
+### 5.8.24. Download { #5824-download }
 
-<div align="center"><em>Table 5.8-24: Download Checklist</em></div>
+<div align="center"><em>Table 5.8.24-1: Download Checklist</em></div>
 
 <div align="center" markdown>
 
 | No. | Check Point | Applies To | Category |
 |:---|:---|:---|:---|
-| 1 | SF32LB56xU: UART download test points, reserve VBAT, GND, UART4_TXD, UART4_RXD, MODE, VDDIO2, VDDIO3 or VDDIO4, PB32and similartest point | SF32LB560/561/563/56W and SS6700A | Required |
-| 2 | SF32LB56xV: UART download test points, reserve VBAT, GND, UART4_TXD, UART4_RXD, MODE, VDDIOA, VDDIOB, PB32and similartest point | SF32LB565/567 | Required |
+| 1 | SF32LB56xU: reserve VBAT, GND, VDDIO2, VDDIO3 or VDDIO4, MODE, SWDIO, SWCLK, UART4_RXD, UART4_TXD, and one of PB20/PB21/PB25 as download test points | SF32LB560/561/563/56W and SS6700A | Required |
+| 2 | SF32LB56xV: reserve VBAT, GND, VDDIOA, VDDIOB, MODE, SWDIO, SWCLK, UART4_RXD, UART4_TXD, and one of PB20/PB21/PB25 as download test points | SF32LB565/567 | Required |
 
 </div>
 

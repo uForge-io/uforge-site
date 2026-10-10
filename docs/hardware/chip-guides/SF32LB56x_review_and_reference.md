@@ -4,14 +4,16 @@ description: "Design review checklist, related documents and references, appendi
 tags:
     - Hardware
     - Chip
+hide:
+    - navigation
 ---
 
-# SF32LB56x Hardware Design Guide — Design Review Checklist and References
+# SF32LB56x Hardware Design Guide — Design Review Checklist and References { #sf32lb56x-hardware-design-guide-design-review-checklist-and-references }
 
 !!! note "Part of the SF32LB56x Hardware Design Guide"
     This page covers Sections 7-10: Design Review Checklist, Related Documents and References, Appendices, and Revision History. Return to [PCB Layout Guidelines](SF32LB56x_pcb_layout.md).
 
-## 7. Design Review Checklist
+## 7. Design Review Checklist { #7-design-review-checklist }
 
 - [ ] U or V variant, package, pinout, and PCB process are confirmed.
 - [ ] Processor rails, PMIC outputs, capacitors, reset, charger, and low-power switches are reviewed.
@@ -22,7 +24,7 @@ tags:
 - [ ] QFN or BGA fanout, stack-up, impedance, DRC, and ESD strategy are complete.
 - [ ] Production flashing and crystal calibration flow have been tested.
 
-## 8. Related Documents and References
+## 8. Related Documents and References { #8-related-documents-and-references }
 
 Use the latest official documents when checking electrical limits, package data, pin multiplexing, software configuration, component qualification, and manufacturing constraints.
 
@@ -42,13 +44,13 @@ The [Schematic Checklist](SF32LB56x_schematic_checklist.md) (Section 5.8) and Se
 [SiFli Approved Vendor List (AVL)]: ../cad-components/sifli-approved-vendor-list.md
 [SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## 9. Appendices
+## 9. Appendices { #9-appendices }
 
-### Appendix A. A Typical SF32LB56x Product
+### 9.1. Appendix A. A Typical SF32LB56x Product { #appendix-a-a-typical-sf32lb56x-product }
 
 A typical SF32LB56x product includes the MCU, PMIC, display and touch controller, boot storage, optional external memory, sensors, vibration motor, audio input/output, Bluetooth antenna, crystals, debug access, and production test access. The U package favors compact QFN implementation, while the V package enables richer interfaces with BGA/HDI layout planning.
 
-## 10. Revision History
+## 10. Revision History { #10-revision-history }
 
 <div align="center"><em>Table 10-1: Revision History</em></div>
 
@@ -60,7 +62,7 @@ A typical SF32LB56x product includes the MCU, PMIC, display and touch controller
 
 </div>
 
-### 10.1. Checklist Revision History
+### 10.1. Checklist Revision History { #101-checklist-revision-history }
 
 The item-by-item checklist in the [Schematic Checklist](SF32LB56x_schematic_checklist.md) and Section 6.3 of the [PCB Layout Guidelines](SF32LB56x_pcb_layout.md) is versioned separately from the guide, following SiFli's own *SF32LB56x Schematic & PCB Checklist* workbook.
 

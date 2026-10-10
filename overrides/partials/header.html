@@ -37,9 +37,11 @@
       </div>
     </div>
     {#- ── Buy pill (left of palette toggle) ── -#}
-    <a href="https://shop.uforge.io" title="Buy" class="uf-buy" data-md-component="buy">
+    {% set buy_labels = {"en": "Buy", "zh": "购买", "ja": "購入", "es": "Comprar", "de": "Kaufen", "fr": "Acheter", "pt": "Comprar", "ru": "Купить"} %}
+    {% set buy_label = buy_labels[config.theme.language] | default("Buy", true) %}
+    <a href="https://sifli.taobao.com/" title="{{ buy_label }}" class="uf-buy" data-md-component="buy">
       {% include ".icons/fontawesome/solid/cart-shopping.svg" %}
-      <span class="uf-buy-label">Buy</span>
+      <span class="uf-buy-label">{{ buy_label }}</span>
     </a>
     {% if config.theme.palette %}
       {% if not config.theme.palette is mapping %}

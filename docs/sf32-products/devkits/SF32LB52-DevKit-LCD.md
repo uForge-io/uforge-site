@@ -3,12 +3,12 @@ icon: lucide/circuit-board
 description: "SF32LB52-DevKit-LCD: display-focused SF32LB52x development board for rapid bring-up of SPI, QSPI, and MCU/8080 display products with touch, audio, storage, and battery support."
 tags:
     - Hardware
-    - DevKit
+    - Development board
 ---
 
-# SF32LB52-DevKit-LCD
+# SF32LB52-DevKit-LCD { #sf32lb52-devkit-lcd }
 
-## Overview
+## Overview { #overview }
 
 The SF32LB52-DevKit-LCD is a display-focused development board for the SF32LB52x family. It is built around an SF32LB52x module and is intended for rapid development of products that use SPI, DSPI, QSPI, or MCU/8080 display interfaces.
 
@@ -23,9 +23,9 @@ The board combines the MCU module, display connectors, touch interface, analog m
 ![SF32LB52-DevKit-LCD block diagram](assets/sf32lb52x/SF32LB52x_DevKit-LCD_Block_Diagram.png){ loading="lazy" }
 <div align="center"><em>SF32LB52-DevKit-LCD — Block Diagram</em></div>
 
-## Board Highlights
+## Board Highlights { #board-highlights }
 
-- SF32LB52x module platform, compatible with SF32LB-MOD-1, SF32LB-MOD-A, and SF32LB-MOD-B
+- SF32LB52x module platform, compatible with SF32LB52-MOD-1, SF32LB52-MOD-A, and SF32LB52-MOD-B
 - QSPI/SPI/DSPI LCD support through a 22-pin FPC connector
 - 8-bit MCU/8080 LCD support through the FPC and 40-pin expansion header
 - I2C touch-panel support
@@ -36,7 +36,7 @@ The board combines the MCU module, display connectors, touch interface, analog m
 - Battery connector and ETA9640P linear charger
 - 40-pin expansion header for display, GPIO, storage, audio, and power signals
 
-## When to Use This Board
+## When to Use This Board { #when-to-use-this-board }
 
 Choose SF32LB52-DevKit-LCD when the project needs a ready display platform instead of a minimal breakout board.
 
@@ -49,7 +49,7 @@ Choose SF32LB52-DevKit-LCD when the project needs a ready display platform inste
 
 For a smaller board with castellated edges, use [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md). For maximum pin breakout and direct signal access, use [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md).
 
-## Hardware Configuration
+## Hardware Configuration { #hardware-configuration }
 
 <div align="center"><em>Hardware Configuration Summary</em></div>
 
@@ -57,9 +57,8 @@ For a smaller board with castellated edges, use [SF32LB52-DevKit-Nano](SF32LB52-
 
 | Area | Configuration |
 | :--- | :--- |
-| MCU module | SF32LB52x module, module variant dependent |
-| Standard module configuration | SF32LB525UC6 with 8MB OPI-PSRAM |
-| External Flash on module | 128Mb QSPI-NOR Flash, 72MHz STR mode |
+| SF32LB52-DevKit-LCD-1-N16R8 | SF32LB52-MOD-1-N16R8 / SF32LB525UC6; 16MB QSPI-NOR + 8MB OPI-PSRAM |
+| SF32LB52-DevKit-LCD-1-A128R16 | SF32LB52-MOD-1-A128R16 / SF32LB527UD6; 128MB QSPI-NAND + 16MB OPI-PSRAM |
 | Clocks | 48MHz main crystal and 32.768kHz RTC crystal on the module |
 | RF | On-board antenna or IPEX connector selected by 0-ohm resistor |
 | Display | QSPI/SPI/DSPI and 8-bit MCU/8080 |
@@ -72,7 +71,11 @@ For a smaller board with castellated edges, use [SF32LB52-DevKit-Nano](SF32LB52-
 
 </div>
 
-## Version Notes
+The board codes and memory configurations above follow SiFli's [development-board model guide](https://wiki.sifli.com/en/board/devkit_guide.html). Before using a board as a design baseline, check its revision against the board marking and the matching design package.
+
+The A128R16 Flash labels differ across the official sources: the [OpenSiFli module-model guide](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) identifies the module as 128 MB SPI-NAND, while the board-model guide lists the corresponding DevKit SKU as 128 MB QSPI-NAND. The sources do not explain whether this reflects the fitted part or interface wording. Confirm the Flash part and bus mode against the schematic/BOM for the exact board revision before relying on this configuration.
+
+## Version Notes { #version-notes }
 
 <div align="center"><em>Board Version History</em></div>
 
@@ -80,8 +83,8 @@ For a smaller board with castellated edges, use [SF32LB52-DevKit-Nano](SF32LB52-
 
 | Version | Module Basis | Notes |
 | :--- | :--- | :--- |
-| V1.2.0 | SF32LB-MOD-1/A/B | Updated SD-card detect to PA26; planned support for SF32LB-MOD-1 with SF32LB525UC6 |
-| V1.1.0 | SF32LB-MOD-A/B | Updated charger circuit, power switching, audio PA gain, reset behavior, RGB LED circuit, module pin compatibility, RF power filtering, dual-Flash support, SD-card detect, optional SDIO Wi-Fi, antenna keep-out, and VBUS protection |
+| V1.2.0 | SF32LB52-MOD-1 / SF32LB52-MOD-A / SF32LB52-MOD-B | Updated SD-card detect to PA26. Current SiFli model listings include the two MOD-1 configurations shown above. |
+| V1.1.0 | SF32LB52-MOD-A / SF32LB52-MOD-B | Updated charger circuit, power switching, audio PA gain, reset behavior, RGB LED circuit, module pin compatibility, RF power filtering, dual-Flash support, SD-card detect, optional SDIO Wi-Fi, antenna keep-out, and VBUS protection |
 | V1.0.0 | Earlier SF32LB52 module | Initial public board version |
 
 </div>
@@ -94,23 +97,23 @@ Check the silkscreen and design package for the exact board revision before usin
 ![SF32LB52-DevKit-LCD back annotated view](assets/sf32lb52x/52KIT-LCD-B-Notes.png){ loading="lazy" }
 <div align="center"><em>SF32LB52-DevKit-LCD — Back Annotated View</em></div>
 
-## Getting Started
+## Getting Started { #getting-started }
 
-### Required Hardware
+### Required Hardware { #required-hardware }
 
 - SF32LB52-DevKit-LCD board
 - LCD module compatible with the selected interface
 - USB 2.0 data cable, Type-A to Type-C or equivalent
 - Host computer running Windows, Linux, or macOS
 
-### Optional Hardware
+### Optional Hardware { #optional-hardware }
 
 - Speaker
 - TF card
 - Single-cell Li-ion/Li-poly battery, typically 450mAh to 500mAh
 - Second USB cable when UART debug and native USB testing are needed at the same time
 
-### Basic Setup
+### Basic Setup { #basic-setup }
 
 1. Connect the LCD module to the correct LCD connector.
 2. Connect the USB-to-UART Type-C port to the host computer.
@@ -121,7 +124,7 @@ Check the silkscreen and design package for the exact board revision before usin
 
 Use a real data-capable USB cable. Charge-only cables can power the board but will not expose the serial or USB data interface.
 
-## Power
+## Power { #power }
 
 SF32LB52-DevKit-LCD can be powered in two main ways:
 
@@ -132,7 +135,7 @@ For firmware download and normal debugging, use the USB-to-UART Type-C port. Bat
 
 The board integrates an ETA9640P linear charger. The maximum supported charge current is 1A, and the default constant-current setting is 450mA. Use a single-cell Li-ion or Li-poly battery and verify connector polarity against the board silkscreen before connecting the battery.
 
-## Download and Debug
+## Download and Debug { #download-and-debug }
 
 The USB-to-UART port is the primary firmware download and log interface.
 
@@ -144,7 +147,7 @@ Some SF32LB52x boards use the USB-to-UART RTS signal for reset. If the board res
 ![Disable modem flow control in serial-port advanced settings](assets/sf32lb52x/Modem.png){ loading="lazy" }
 <div align="center"><em>Disabling Modem Flow Control in Serial-Port Settings</em></div>
 
-## LCD and Touch Interface
+## LCD and Touch Interface { #lcd-and-touch-interface }
 
 The board supports QSPI LCD panels through a 22-pin, 0.5mm-pitch FPC connector. The connector is a vertical, flip-lock style connector. If a panel uses a different pin order, use an adapter board before connecting it.
 
@@ -158,7 +161,7 @@ Supported LCD and touch capabilities include:
 
 The original SiFli board note lists `TFT-H043A28WQISTKN22_V0-3` as a supported display model.
 
-### 22-Pin QSPI FPC Signal Map
+### 22-Pin QSPI FPC Signal Map { #22-pin-qspi-fpc-signal-map }
 
 <div align="center"><em>22-Pin QSPI FPC Signal Map</em></div>
 
@@ -191,7 +194,9 @@ The original SiFli board note lists `TFT-H043A28WQISTKN22_V0-3` as a supported d
 
 </div>
 
-## Key Module Pin Assignments
+**Source pin-count discrepancy — verify before connecting a display:** SiFli labels the connector and signal table as 22-pin, but its accompanying connection drawing numbers contacts 1 through 24 and marks pins 22–24 as GND. The source does not reconcile the mismatch. Check the physical connector and schematic for the exact board revision before selecting or wiring a flex cable; do not assume a 22-pin cable fits a 24-position connector.
+
+## Key Module Pin Assignments { #key-module-pin-assignments }
 
 ![SF32LB52-DevKit-LCD 40-pin header definition](assets/sf32lb52x/SF32LB52x_DevKit-40p-define.png){ loading="lazy" }
 <div align="center"><em>40-Pin Header Definition</em></div>
@@ -224,17 +229,17 @@ The original SiFli board note lists `TFT-H043A28WQISTKN22_V0-3` as a supported d
 
 </div>
 
-## Module Compatibility Notes
+## Module Compatibility Notes { #module-compatibility-notes }
 
-- SF32LB-MOD-1 uses pin 17 as a 3.3V output that is disabled by default and must be enabled in software.
-- SF32LB-MOD-A/B use pin 17 as a 3.3V power input.
-- SF32LB-MOD-1 uses pin 27 as a 3.2V to 4.7V VBAT input.
-- SF32LB-MOD-A/B use pin 27 as a 3.3V power input.
-- On SF32LB-MOD-1, the VBAT power-on threshold is 3.58V and the power-off threshold is 3.48V. For non-battery supply testing, 3.8V is recommended on VBAT.
-- PA21 on module pin 62 is only available on SF32LB-MOD-A/B. It is not connected on SF32LB-MOD-1.
+- SF32LB52-MOD-1 uses pin 17 as a 3.3V output that is disabled by default and must be enabled in software.
+- SF32LB52-MOD-A/B use pin 17 as a 3.3V power input.
+- SF32LB52-MOD-1 uses pin 27 as a 3.2V to 4.7V VBAT input.
+- SF32LB52-MOD-A/B use pin 27 as a 3.3V power input.
+- On SF32LB52-MOD-1, the VBAT power-on threshold is 3.58V and the power-off threshold is 3.48V. For non-battery supply testing, 3.8V is recommended on VBAT.
+- PA21 on module pin 62 is only available on SF32LB52-MOD-A/B. It is not connected on SF32LB52-MOD-1.
 - Module pins 62 to 68 may be connected internally to NOR Flash by default. To use SDIO externally, select a module variant without internal Flash on those pins.
 
-## Audio
+## Audio { #audio }
 
 The board includes a MEMS microphone and an audio power amplifier.
 
@@ -242,11 +247,21 @@ The board includes a MEMS microphone and an audio power amplifier.
 - Use the speaker connector for audio output testing.
 - The external speaker path supports up to 3W into 4ohm according to the original board note.
 
-## Storage
+## Storage { #storage }
 
 The MicroSD socket is connected over SPI. It is suitable for validating file systems, image assets, logs, and data recording before moving to a custom board.
 
-## Related Documents
+## SDK Build Targets { #sdk-build-targets }
+
+The SiFli SDK uses the following exact board-target names with `scons --board=<board_name>`:
+
+- `sf32lb52-lcd_52d`
+- `sf32lb52-lcd_n16r8`
+- `sf32lb52-lcd_a128r16`
+
+These are SDK build-target identifiers, not necessarily the product names printed on a board or module. The [Supported Boards index](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/index.html) and the SDK's [`build_config_gcc.yaml`](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml) may enumerate different sets; confirm the target against the SDK revision in use.
+
+## Related Documents { #related-documents }
 
 [SF32LB52x Chip Introduction]: ../chips/SF32LB52x.md
 [SF32LB52x Hardware Design Guide]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md

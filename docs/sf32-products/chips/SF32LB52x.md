@@ -1,6 +1,6 @@
 ---
 icon: lucide/microchip
-description: "SF32LB52x: cost-optimized dual-core Arm Cortex-M33 AIoT MCU family for wearables and compact AIoT products, spanning battery-powered SF32LB520/3/5/7 and external-supply SF32LB52B/D/E/G/J variants."
+description: "SF32LB52x: cost-optimized dual-core Arm Cortex-M33 AIoT MCU family for wearables and compact AIoT products, spanning battery-powered SF32LB520/3/5/7 and external-supply 52B/D/E/G/J variants."
 tags:
     - Hardware
     - Chip
@@ -12,14 +12,14 @@ tags:
 
 SF32LB52x is SiFli's cost-optimized MCU family for entry-level smart wearables, compact graphical HMIs, Bluetooth peripherals, and other space-constrained AIoT products that still need integrated display, audio, storage, and wireless capability.
 
-At the platform level, the family combines a 240MHz Arm Cortex-M33 STAR-MC1 application core with a dedicated 24MHz low-power Bluetooth controller core, enabling the chip to run a responsive UI and application stack while keeping Bluetooth connectivity and always-on workloads separate.
+At the platform level, the family combines a 240 MHz Arm Cortex-M33 STAR-MC1[^1] application core with a dedicated 24 MHz low-power Bluetooth controller core, enabling the chip to run a responsive UI and application stack while keeping Bluetooth connectivity and always-on workloads separate.
 
-For product planning, the important distinction is that SF32LB52 is split into two supply-oriented subfamilies:
+For product planning, the key variants in SiFli's chip model guide fall into two supply-oriented groups:
 
 - **SF32LB520/3/5/7**: lithium-ion battery-powered variants with an integrated charger path
-- **SF32LB52B/D/E/G/J**: external-supply variants, where 52B/E/G/J target standard 3.3V systems and **52D** targets a special 1.8V ultra-low-power rail
+- **52B/D/E/G/J**: external-supply variants, where 52B/E/G/J target standard 3.3V systems and **52D** targets a special 1.8V ultra-low-power rail
 
-These groups are not interchangeable at the board level. The battery-powered and external-supply families are not pin compatible with each other, and the 1.8V 52D variant is also electrically distinct from the 3.3V 52B/E/G/J group even where package alignment looks similar.
+These groups are not interchangeable at the board level. The battery-powered and external-supply families are not pin compatible with each other, and the 1.8 V 52D variant is electrically distinct from the 3.3 V 52B/E/G/J group even when their package layouts appear similar.
 
 [^1]: STAR-MC1 is a configurable Armv8-M Mainline embedded CPU IP from Arm China. In compatible SF32 devices, SiFli documents it as an Arm Cortex-M33 STAR-MC1 application processor. Its Cortex-M33-class software model helps existing Cortex-M33 firmware, middleware, RTOS ports, and tools carry forward, subject to normal device-specific integration work. Its CU, SP, and SE configurations vary chiefly in cache, TCM, XIPU, and TrustZone capability; Arm Custom Instructions/CDE and the coprocessor interface are optional capabilities that must be verified for the exact SF32 part. SiFli documentation may use ***Arm Cortex-M33 STAR-MC1*** or ***Arm Cortex-M33*** according to context.
 
@@ -38,11 +38,11 @@ These groups are not interchangeable at the board level. The battery-powered and
 
 ## Development Resources
 
-[Product Brief (SF32LB520/3/5/7)]: https://downloads.sifli.com/user%20manual/PB5201-SF32LB52x-Product%20Brief.pdf
-[Datasheet (SF32LB520/3/5/7)]: https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf
-[Product Brief (SF32LB52X external-supply family)]: https://downloads.sifli.com/user%20manual/PB5202-SF32LB52X-Product%20Brief%20V0p1.pdf
-[Datasheet (SF32LB52X external-supply family)]: https://downloads.sifli.com/user%20manual/DS5202-SF32LB52X-Datasheet%20V0p2p5.pdf
-[Reference Manual]: https://downloads.sifli.com/user%20manual/UM5201-SF32LB52x-User%20Manual%20V0p8p4.pdf
+[Product Brief (SF32LB520/3/5/7)]: https://downloads.sifli.com/docs/Product%20Brief/SF32LB52x/PB5201-SF32LB52x-Product%20Brief.pdf
+[Datasheet (SF32LB520/3/5/7)]: https://downloads.sifli.com/docs/Datasheet/SF32LB52x/DS5201-SF32LB52x-Datasheet%20V2p5p5.pdf
+[Product Brief (SF32LB52X external-supply family)]: https://downloads.sifli.com/docs/Product%20Brief/SF32LB52x/PB5202-SF32LB52X-Product%20Brief%20V0p1.pdf
+[Datasheet (SF32LB52X external-supply family)]: https://downloads.sifli.com/docs/Datasheet/SF32LB52X/DS5202-SF32LB52X-Datasheet%20V0p2p6.pdf
+[User Manual]: https://downloads.sifli.com/docs/user%20manual/SF32LB52x/UM5201-SF32LB52x-User%20Manual%20V0p8p8.pdf
 [Hardware Design Guide (520/3/5/7)]: https://wiki.sifli.com/en/hardware/SF32LB520-3-5-7-HW-Application.html
 [Hardware Design Guide (52B/D/E/G/J)]: https://wiki.sifli.com/en/hardware/SF32LB52B-E-G-J-HW-Application.html
 
@@ -60,7 +60,7 @@ These groups are not interchangeable at the board level. The battery-powered and
 - :fontawesome-solid-file-pdf: __[Datasheet (SF32LB520/3/5/7)]__
 - :fontawesome-solid-file-pdf: __[Product Brief (SF32LB52X external-supply family)]__
 - :fontawesome-solid-file-pdf: __[Datasheet (SF32LB52X external-supply family)]__
-- :fontawesome-solid-file-pdf: __[Reference Manual]__
+- :fontawesome-solid-file-pdf: __[User Manual]__
 - :fontawesome-solid-file-lines: __[Hardware Design Guide (520/3/5/7)]__
 - :fontawesome-solid-file-lines: __[Hardware Design Guide (52B/D/E/G/J)]__
 - :fontawesome-solid-cart-shopping: __[Buy Samples]__
@@ -82,27 +82,27 @@ These groups are not interchangeable at the board level. The battery-powered and
 
 ### Graphics and Audio
 
-- ePicasso 2.0 Lite 2D/2.5D graphics accelerator
+- ePicasso 2.0 2D/2.5D graphics accelerator
 - eZip 2.0 hardware decoder for lossless graphics compression
 - Dedicated LCD controller supporting SPI/DSPI/QSPI, including e-paper SPI, plus 8080-8bit
-- 1x 24-bit Audio ADC with 109 dB SNR
-- 1x 24-bit Audio DAC with 99 dB SNR
+- 1x 24-bit Audio ADC with 99 dB SNR
+- 1x 24-bit Audio DAC with 109 dB SNR
 
 ### Wireless Connectivity
 
-- Dual-mode BT/BLE, BT6.3 certified
+- Dual-mode Bluetooth 5.3 (Classic Bluetooth and BLE)
 - Maximum transmit power:
-    - 17 dBm for BLE and BT/BR
+    - 19 dBm for BLE/BR
     - 13 dBm for BT/EDR2 and BT/EDR3
 - Sensitivity: -100 dBm @ BLE/1Mbps
-- Dedicated Arm Cortex-M33 STAR-MC1 Bluetooth-controller core with 64 KB SRAM @ 24MHz
-- Ultra-low sleep current around 2 µA for always-on wearable designs
+- Dedicated Arm Cortex-M33 STAR-MC1 Bluetooth-controller core with 64 KB SRAM @ 24 MHz
+- Sleep current: 2 µA in the product brief; system-level standby current depends on the operating mode and board-level leakage
 
 ### Security
 
 - AES/HASH/CRC hardware accelerators
 - TRNG
-- PSA Level 1 Certified
+- PSA Certified Level 1
 
 ### Peripherals and I/Os
 
@@ -111,7 +111,7 @@ These groups are not interchangeable at the board level. The battery-powered and
 - 2x SPI
 - 1x USB2.0 FS
 - 1x I2S
-- 1x PDM
+- 1x PDM interface (up to two digital microphones)
 - 1x SD3.0/SDIO3.0/eMMC
 - 1x 12-bit general-purpose ADC
 - Temperature sensor
@@ -122,7 +122,7 @@ These groups are not interchangeable at the board level. The battery-powered and
 
 - **Battery-powered group: SF32LB520/3/5/7** — powered directly from a single-cell Li-ion/Li-Po battery and intended for designs that use the integrated charging-oriented power architecture.
 
-- **External-supply 3.3V group: SF32LB52B/E/G/J** — intended for regulated external-supply systems and pin compatible with one another.
+- **External-supply 3.3V group: 52B/E/G/J** — intended for regulated external-supply systems and pin compatible with one another.
 
 - **External-supply 1.8V group: SF32LB52D** — intended for special ultra-low-power 1.8V designs and not electrically interchangeable with the 3.3V parts.
 
@@ -130,12 +130,10 @@ The battery-powered and external-supply groups are independent silicon configura
 
 ## Family Variants
 
-<div align="center"><em>SF32LB52x Family Variants</em></div>
-
-The practical part-selection split is:
+For the key variants listed in SiFli's chip model guide, the practical part-selection split is:
 
 - **SF32LB520/3/5/7**: lithium-ion battery-powered group, pin compatible within the group
-- **SF32LB52B/E/G/J**: standard 3.3V external-supply group, pin compatible within the group
+- **52B/E/G/J**: standard 3.3V external-supply group, pin compatible within the group
 - **SF32LB52D**: special 1.8V external-supply variant for ultra-low-power scenarios
 
 If you are migrating between memory tiers, the nearest content-correspondence map is:
@@ -144,6 +142,8 @@ If you are migrating between memory tiers, the nearest content-correspondence ma
 - 523 ↔ 52E, with 52D as the 1.8V counterpart
 - 525 ↔ 52G
 - 527 ↔ 52J
+
+<div align="center"><em>Key SF32LB52x Variants</em></div>
 
 <div align="center" markdown>
 
@@ -154,11 +154,13 @@ If you are migrating between memory tiers, the nearest content-correspondence ma
 | Pitch | 0.35mm | 0.35mm | 0.35mm | 0.35mm | 0.35mm | 0.35mm | 0.35mm | 0.35mm | 0.35mm | 0.35mm |
 | GPIOs | 44 | 44 | 44 | 44 | 45 | 45 | 45 | 45 | 45 | 45 |
 | Co-packaged memory | 1MB QSPI-NOR | 4MB OPI-PSRAM | 8MB OPI-PSRAM | 16MB OPI-PSRAM | 1MB QSPI-NOR | 4MB QSPI-NOR | 4MB OPI-PSRAM | 4MB OPI-PSRAM | 8MB OPI-PSRAM | 16MB OPI-PSRAM |
-| Power supply | 3.2–4.7V | 3.2–4.7V | 3.2–4.7V | 3.2–4.7V | **3.3V** | **3.3V** | **1.8V** | **3.3V** | **3.3V** | **3.3V** |
+| Power supply range | 3.2–4.7 V | 3.2–4.7 V | 3.2–4.7 V | 3.2–4.7 V | 2.97–3.63 V | 2.97–3.63 V | 1.71–1.98 V | 2.97–3.63 V | 2.97–3.63 V | 2.97–3.63 V |
 | I/O voltage | 3.3V | 3.3V | 3.3V | 3.3V | 3.3V / 1.8V | 3.3V / 1.8V | 3.3V / 1.8V | 3.3V / 1.8V | 3.3V / 1.8V | 3.3V / 1.8V |
 | Temperature | -40 to 85°C | -40 to 85°C | -40 to 85°C | -40 to 85°C | -40 to 85°C | -40 to 85°C | -40 to 85°C | -40 to 85°C | -40 to 85°C | -40 to 85°C |
 
 </div>
+
+This table follows the key variants in SiFli's [Chip Model Guide](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html); it is not a complete ordering catalog. The linked external-supply datasheet also lists **SF32LB52HUD6** (1.8 V, QFN68L, 128 Mb PSRAM), while the hardware guide uses the additional suffix patterns `52AUx6` and `52D/F/HUx6`. The available sources do not provide a single, consistent variant table. Before design release, verify the ordering status, supply limits, memory interface, and I/O details of any such SKU in its current datasheet.
 
 ## Integration Path
 
@@ -173,15 +175,18 @@ Use this sequence to turn an SF32LB52x shortlist into a validated design:
 
 ### Module
 
-[SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) packages the SF32LB525UC6 chip, its RF matching network, and 8MB in-package OPI-PSRAM in the standard configuration, creating a certified, ready-to-integrate 27.9 × 18.0 × 3.1mm module for projects that want SF32LB52-class capability without owning chip-level RF layout and certification.
+[SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) combines the SF32LB525UC6, which has 8 MB of co-packaged OPI-PSRAM in the standard configuration, with an RF matching network. The module measures 27.9 × 18.0 × 3.1 mm and suits projects that need SF32LB52-class capability without taking on chip-level RF layout and validation.
 
 ### Development Kits
 
 - [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md) is the main display-oriented bring-up board for the SF32LB52 module ecosystem, with QSPI and MCU/8080 LCD connectivity.
-- [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) is the compact external-supply core board for quick firmware, GPIO, and low-power bring-up on 52B/J-class parts.
+- [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) is the compact external-supply core board for quick firmware, GPIO, and low-power bring-up on 52B/52J-class parts.
 - [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) is the smallest 52-series dev board, useful when the target product is size constrained.
 - [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) is the low-power-oriented board path for battery-focused evaluation and compact product experiments.
 
 ### Reference Products
 
 Typical SF32LB52 designs include entry-level smartwatches, fitness bands, Bluetooth accessories, compact graphical controls, electronic shelf labels, smart badges, portable label printers, and cost-sensitive eBike or eScooter displays.
+
+!!! note "Auto-generated content"
+    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

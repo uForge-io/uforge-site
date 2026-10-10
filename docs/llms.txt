@@ -147,7 +147,7 @@ Only the pages listed below are published on this site. Internal working notes, 
 - [Low-Power Overview](https://uForge.io/learn/low-power/overview/): System-level low-power design and measured battery-life validation.
 - [Power Measurement and Validation](https://uForge.io/learn/low-power/measurement-and-validation/): A repeatable SF32 power-measurement and validation workflow for active, connected-idle, display-off, sleep, and wake scenarios.
 - [Low-Power SDK Examples](https://uForge.io/learn/low-power/low-power-sdk-examples/): Choose the right SiFli-SDK power-management example for sleep, wake sources, GPIO, CPU, Bluetooth, displays, UI, and wearable power scenarios.
-- [Battery Capacity Calculation](https://uForge.io/learn/low-power/battery-capacity-calculation/): Estimate battery percentage on SF32 products from battery voltage using the SiFli-SDK battery calculator, matched charge/discharge curves, charger-state detection, and multi-stage filtering.
+- [Battery State-of-Charge Estimation](https://uForge.io/learn/low-power/battery-capacity-calculation/): Estimate battery percentage on SF32 products from battery voltage using the SiFli-SDK battery calculator, matched charge/discharge curves, charger-state detection, and multi-stage filtering.
 - [Smartwatch Power Profiling](https://uForge.io/learn/low-power/smartwatch-power-profiling/): Build and validate a smartwatch battery-life model from daily usage scenarios, then use the result to prioritize low-power work.
 
 ## Projects
@@ -177,17 +177,17 @@ Only the pages listed below are published on this site. Internal working notes, 
 ## Blog
 
 - [Blog](https://uForge.io/blog/): Announcements, project history, and deep dives on μForge.io's progress.
+- [Multi-Language Translation, One Iteration at a Time](https://uForge.io/blog/posts/2026-10-07-multi-language-translation/): μForge.io now has translations in seven more languages, built with LLM tools over many iterations.
 - [August: Product Selection, Practical Learning, and Reproducible Projects](https://uForge.io/blog/posts/2026-08-24-august-progress/): August at μForge.io: product selection, practical Learn content, reproducible projects, and a site reorganized around how engineers work.
 - [The First μForge.io Blog Post](https://uForge.io/blog/posts/2026-07-31-the-first-blog/): The first μForge.io blog post: our mission, what we've built over the past month, and what's coming next for SF32 documentation.
 
 ## About
 
 - [About μForge.io](https://uForge.io/about/): μForge.io's mission — documenting SiFli's SF32 microcontroller family end to end for hardware and firmware engineers.
-- [Contact μForge.io](https://uForge.io/about/contact/): Contact form covering sales, technical support, partnerships, media, and documentation feedback for the SF32 MCU family.
 
 ## Notes for AI agents and coding assistants
 
 - All hardware design guides use numbered sections, tables, and figures (e.g. "Table 5.1-1", "Figure 5.2-3") scoped per H3 subsection; treat these numbers as stable anchors when quoting specific values.
 - Each chip/module family follows the same structure: an Introduction page (device overview, variants, packages, applications) and a Hardware Design Guide (schematic guidance, PCB layout, manufacturing checklist); several chips also have a standalone Hardware Design Checklist page.
-- This domain publishes English content only. A separate Chinese documentation set exists but is not part of this site's published content.
+- The site is published in eight languages: English (the reference, at the site root) and machine-assisted translations in Chinese (/zh/), Japanese (/ja/), Spanish (/es/), German (/de/), French (/fr/), Portuguese (/pt/), and Russian (/ru/). Every translated page has the same path as its English page under the language prefix. The URLs listed in this file are the English pages; localized indexes are at https://uForge.io/<lang>/llms.txt (e.g. https://uForge.io/de/llms.txt). When a technical detail matters, verify it against the English page.
 - For authoritative electrical specifications, pin mappings, and component qualification beyond what's summarized here, the guides link out to SiFli's datasheets, user manuals, and the SiFli Approved Vendor List.

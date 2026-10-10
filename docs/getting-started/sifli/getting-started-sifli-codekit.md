@@ -7,7 +7,7 @@ tags:
     - VS Code
 ---
 
-# SiFli CodeKit
+# SiFli CodeKit { #sifli-codekit }
 
 SiFli CodeKit is the VS Code extension for SiFli-SDK development. It provides guided actions for installing SDK tools, selecting a board, building an example, flashing firmware, and opening a serial console.
 
@@ -15,7 +15,7 @@ Use this path if you prefer an IDE workflow. If you want to understand the comma
 
 This is the first-run guide. After `hello_world` works, use the canonical [CodeKit tool reference](../../develop/tools/codekit.md) for CodeKit's day-to-day role, reproducibility expectations, and failure boundaries.
 
-## What You'll Need
+## What You'll Need { #what-youll-need }
 
 **Hardware**
 
@@ -31,9 +31,9 @@ This is the first-run guide. After `hello_world` works, use the canonical [CodeK
 
 **Official reference**
 
-- [SiFli CodeKit getting started](https://docs.sifli.com/projects/codekit/get-started/)
+- [SiFli CodeKit installation guide](https://docs.sifli.com/projects/codekit/get-started/install.html)
 
-## Install CodeKit
+## Install CodeKit { #install-codekit }
 
 1. Open VS Code.
 2. Open **Extensions**.
@@ -41,14 +41,16 @@ This is the first-run guide. After `hello_world` works, use the canonical [CodeK
 4. Install the extension.
 5. Reload VS Code if prompted.
 
-After installation, CodeKit adds SiFli-specific actions to VS Code. Depending on the extension version, they may appear in the Activity Bar, Command Palette, or status bar.
+To open SDK management, click the SiFli icon in the VS Code sidebar and choose **SDK Manager**. You can also open **View > Command Palette** (default shortcut `F1`) and run **Manage SiFli SDK installation**. The exact labels can vary with the extension version; see the official installation guide linked above.
 
 !!! tip
     If you cannot find the action you need, open the Command Palette and search for `SiFli`.
 
-## Install or Select SiFli-SDK
+## Install or Select SiFli-SDK { #install-or-select-sifli-sdk }
 
-Use CodeKit's setup flow to install SiFli-SDK, or point it at an SDK copy you already cloned.
+Use CodeKit's setup flow to install SiFli-SDK, or point it at an SDK copy you already cloned. For most users, choose a **Release/Tag**: it is a versioned, tested baseline. Choose a **Branch** when you need newer fixes or features and can accept that it may be less stable. The official guide describes `release/vX.Y` as a way to get the latest fixes and features for that release line without using the less-stable `main` branch. Its contents can still change over time.
+
+If you are working from mainland China, the official guide recommends using Gitee as the SDK source and the SiFli domestic mirror for toolchain downloads.
 
 If CodeKit asks for an SDK location, choose a short path without spaces, for example:
 
@@ -66,7 +68,7 @@ If CodeKit asks for an SDK location, choose a short path without spaces, for exa
 
 CodeKit uses the SDK's own installer and environment scripts. The result should match the manual setup: compiler, Python environment, build tools, and flash tools are prepared together.
 
-## Open an Example
+## Open an Example { #open-an-example }
 
 Start from the SDK's `hello_world` example:
 
@@ -76,7 +78,7 @@ example/get-started/hello_world/rtt/project
 
 Open that project folder in VS Code. If CodeKit offers a project import wizard, choose the `hello_world` project and let it detect the SDK root.
 
-## Select the Board
+## Select the Board { #select-the-board }
 
 Choose the board configuration that matches your hardware. For an SF32LB52-DevKit-LCD-class board, the common board name is:
 
@@ -86,7 +88,7 @@ sf32lb52-lcd_n16r8
 
 If you use a different board, select the matching board name from CodeKit's list or from the SDK's supported board documentation. The board name controls memory layout, pins, flash settings, and default peripherals.
 
-## Build
+## Build { #build }
 
 Run CodeKit's **Build** action. A successful build creates a board-specific output folder such as:
 
@@ -96,7 +98,7 @@ build_sf32lb52-lcd_n16r8_hcpu
 
 If the build fails immediately, check that CodeKit knows where SiFli-SDK is installed and that the SDK environment has finished installing.
 
-## Flash
+## Flash { #flash }
 
 Connect the board through the USB-to-UART port, then run CodeKit's **Flash** or **Download** action.
 
@@ -106,15 +108,15 @@ When prompted for a serial port:
 - On macOS, choose the `/dev/cu.*` device rather than `/dev/tty.*`.
 - On Linux, choose the matching `/dev/ttyUSB*` or `/dev/ttyACM*` device.
 
-Reset the board right before flashing if the download tool has trouble entering boot mode.
+If the download tool does not enter UART download mode, reset the board immediately before starting the transfer. If the problem persists, follow the board-specific flashing instructions.
 
-## Open the Serial Console
+## Open the Serial Console { #open-the-serial-console }
 
 Use CodeKit's serial monitor, VS Code's serial tooling, or another terminal program. After reset, the console should show readable boot output and the `hello_world` example output.
 
 If you see readable boot logs, the board and serial settings are correct. If the output is garbled, close other serial tools and confirm the baud rate used by the example.
 
-## Success Check
+## Success Check { #success-check }
 
 You are ready to move on when:
 
@@ -123,7 +125,7 @@ You are ready to move on when:
 - Build and flash actions complete.
 - The serial console shows `hello_world` output after reset.
 
-## Troubleshooting
+## Troubleshooting { #troubleshooting }
 
 <div align="center"><em>Table: Troubleshooting</em></div>
 
@@ -134,23 +136,17 @@ You are ready to move on when:
 | No serial port appears | Try a data cable, another USB port, or the board's USB-to-UART connector. |
 | CodeKit cannot find the SDK | Re-run the CodeKit setup flow and select the SiFli-SDK root folder. |
 | Build cannot find tools | Let CodeKit reinstall the toolchain, or run the SDK installer manually once. |
-| Flash fails to start | Reset or power-cycle the board immediately before download. |
+| Flash fails to start | If the tool does not enter UART download mode, reset the board immediately before transfer. If the problem persists, follow the board-specific flashing instructions. |
 | Serial output is unreadable | Check baud rate and make sure only one serial monitor is open. |
 
 </div>
 
-## Where to Go Next
+## Where to Go Next { #where-to-go-next }
 
 - Use [SiFli-SDK](getting-started-sifli-sdk.md) to understand the equivalent terminal commands.
 - Continue with [Beginner Tutorials](../tutorials/beginner.md) after `hello_world` works.
 - Review [Bluetooth Overview](../../learn/bluetooth/overview.md), [Graphics Overview](../../learn/graphics/overview.md), [Audio Overview](../../learn/audio/overview.md), and [Low-Power Overview](../../learn/low-power/overview.md) when you start a real product feature.
 
-## What SiFli Should Add
+## Keep the Setup Reproducible { #what-sifli-should-add }
 
-CodeKit documentation would be easier to follow if SiFli added:
-
-- A stable list of CodeKit command names and where they appear in VS Code.
-- Screenshots for SDK selection, board selection, build, flash, and monitor.
-- A table mapping CodeKit board labels to SDK `scons --board` names.
-- A list of supported operating systems and required VS Code versions.
-- Recovery steps for failed setup, failed build, failed flash, and busy serial ports.
+Record the CodeKit and SDK versions, the selected release tag or branch, and the exact board target. If a menu or command label differs from this page, use the current [official installation guide](https://docs.sifli.com/projects/codekit/get-started/install.html) and the SDK's [supported-boards list](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html) as the references for your installed versions.

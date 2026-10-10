@@ -13,7 +13,8 @@
   {% endif %}
   {% set hide_generator = page.meta and page.meta.hide and "generator" in page.meta.hide %}
   {% if not config.extra.generator == false and not hide_generator %}
-    Made with
+    {% set credit_labels = {"en": "Made with", "zh": "由", "ja": "使用ツール：", "es": "Creado con", "de": "Erstellt mit", "fr": "Fait avec", "pt": "Feito com", "ru": "Создано с помощью"} %}
+    {{ credit_labels[config.theme.language] | default("Made with", true) }}
     <a href="https://zensical.org/" target="_blank" rel="noopener">
       Zensical
     </a>

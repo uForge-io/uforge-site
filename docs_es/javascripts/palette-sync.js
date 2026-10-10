@@ -1,0 +1,1 @@
+../../docs/javascripts/palette-sync.js

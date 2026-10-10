@@ -13,12 +13,13 @@ Power profiling turns expected daily use into a battery-life estimate and, more 
 
 !!! warning "Model, not a device specification"
     The currents and usage assumptions in this example belong to the supplied model. They are not characterization data for a specific SF32 device, display, battery, or watch design. Replace them with measurements from your hardware before using the result in a product battery-life claim.
+    The workbook contains no measurement log, so it does not identify any input as a hardware measurement. The 13.15-day result is a model estimate, not an observed runtime.
 
 Use this page with the [Low-Power Overview](overview.md) for architecture and firmware guidance, and [Power Measurement and Validation](measurement-and-validation.md) for the measurement workflow that validates the model.
 
 ## Smartwatch System Overview
 
-Start by defining the model boundary. This workbook represents a battery-powered smartwatch with an MCU, AMOLED display, haptic motor, and an unallocated `Other` load bucket. It does not identify the panel size, resolution, brightness setting, radio architecture, or individual sensors. Treat the display-current entries below as measured or assumed AMOLED operating points, not as a specification for a particular panel. Treat `Other` as a modelling boundary, not as one physical component.
+Start by defining the model boundary. This workbook represents a battery-powered smartwatch with an MCU, AMOLED display, haptic motor, and an unallocated `Other` load bucket. It does not identify the panel size, resolution, brightness setting, radio architecture, or individual sensors. Treat the display-current entries below as workbook inputs, not as measured operating points or specifications for a particular panel. Treat `Other` as a modelling boundary, not as one physical component.
 
 <div align="center"><em>Table: Smartwatch System and Model Inputs</em></div>
 
@@ -36,7 +37,7 @@ Start by defining the model boundary. This workbook represents a battery-powered
 
 ## Power Consumption by Scenario
 
-A scenario is a complete user or system event, rather than one isolated part. A message notification can wake the MCU, light the AMOLED display, drive the haptic motor, and keep background loads active. In the source matrix, every `Display` row refers to the AMOLED display. The matrix keeps each scenario's component rows together and retains calculated daily values for traceability. The daily frequency and duration assumptions that drive those values appear in the next section.
+A scenario is a complete user or system event, rather than one isolated part. A message notification can wake the MCU, light the AMOLED display, drive the haptic motor, and keep background loads active. In the source matrix, every `Display` row refers to the AMOLED display. The matrix keeps each scenario's component rows together and retains calculated daily values for traceability. The occurrence counts and durations behind those values are listed in the daily-use profile later in this article.
 
 <div align="center"><em>Table: Complete Component-Level Power Model</em></div>
 
@@ -103,7 +104,7 @@ A scenario is a complete user or system event, rather than one isolated part. A 
 
 </div>
 
-\*The workbook labels this factor as power efficiency, but it is a voltage-ratio helper rather than a measured regulator efficiency. The following section explains the consequence for battery-life estimates. Daily-charge and percentage values in this table are rounded from the workbook; use the downloadable file for the exact formulas and values. Use the ranked tables below to set priorities, then return to this matrix when you need to inspect the current or voltage assumption behind a contribution.
+\*The workbook labels this column “Power-Conversion Efficiency (%)”, but its formula is only a voltage ratio, not a measured regulator efficiency. The subsection “Check the Workbook's Conversion Assumption” below explains the consequence for battery-life estimates. Daily-charge and percentage values in this table are rounded from the workbook; use the downloadable file for the exact formulas and values. Use the ranked tables below to set priorities, then return to this matrix when you need to inspect the current or voltage assumption behind a contribution.
 
 <div align="center"><em>Diagram: Smartwatch Power-Profiling Loop</em></div>
 
@@ -136,9 +137,9 @@ Use measured regulator efficiency at the intended load current. A regulator's pe
 
 ### Check the Workbook's Conversion Assumption
 
-The workbook labels one helper column as supply efficiency, but calculates it as `load voltage / battery voltage`. Its subsequent energy formula divides by that helper and then divides by battery voltage again, which cancels the voltage terms. In effect, the baseline calculation assumes ideal power conversion.
+The workbook's “Power-Conversion Efficiency (%)” column is calculated as `load voltage / battery voltage`. Its subsequent charge formula divides by that helper and then by battery voltage, so the voltage terms cancel. The resulting daily charge is simply load current multiplied by time: it treats battery current as equal to load current, rather than modelling ideal power conversion. This resembles a linear regulator with quiescent current omitted; it is not a general model for a switching regulator.
 
-The ranking remains useful as a first-pass view of the declared current and time assumptions, but it is not a final battery budget: real regulator losses can change close comparisons and make the absolute battery-life estimate optimistic. For a production budget, replace that helper with the measured regulator efficiency for each rail and load range, include quiescent current, and account for battery-protection and charger-path losses in the finished product.
+For example, a 1 mA load at 3.3 V supplied from a 3.87 V battery would draw about 0.853 mA through an ideal converter, whereas the workbook counts 1 mA. A real converter's result depends on its efficiency and quiescent current. Consequently, the workbook's conversion assumption alone does not establish whether its battery-life estimate is optimistic or conservative. The ranking is useful for a first review of the declared current and time assumptions, but it is not a final battery budget. For a production budget, replace the helper with measured efficiency for each rail and load range, include quiescent current without double-counting it if already included in that measurement, and account for battery-protection and charger-path losses.
 
 ## Calculate Daily Consumption from Product Usage
 
@@ -156,14 +157,14 @@ The same scenario can be negligible or dominant depending on how the product is 
 | Raise-to-wake | 200 | 5 s | 1,000 s | 27.72% | Enabled |
 | Automatic heart-rate check | 48 | 60 s | 2,880 s | 1.48% | Enabled |
 | Manual SpO2 check | 2 | 40 s | 80 s | 2.22% | Enabled |
-| Exercise recording | 1 | `3,600 / 7` s | 514.3 s | 12.35% | Enabled; one hour per week, averaged per day |
+| Exercise recording | 1 | `3600 / 7` s | 514.3 s | 12.35% | Enabled; one hour per week, averaged per day |
 | Alarm vibration | 3 | 30 s | 90 s | 3.91% | Enabled |
-| Sleep monitoring | 1 | `8 x 3,600` s | 28,800 s | 13.03% | Enabled |
+| Sleep monitoring | 1 | `8 x 3600` s | 28,800 s | 13.03% | Enabled |
 | App data synchronization | 20 | 0.5 s | 10 s | 0.45% | Enabled |
 | NFC card transaction | 0 | 5 s | 0 s | 0.00% | Disabled |
 | Bluetooth call | 0 | `2 x 60` s | 0 s | 0.00% | Disabled |
 | AOD, MCU update once per minute | 0 | 0.05 s | 0 s | 0.00% | Disabled |
-| AOD, display on | 0 | `(24 - 8) x 3,600` s | 0 s | 0.00% | Disabled |
+| AOD, display on | 0 | `(24 - 8) x 3600` s | 0 s | 0.00% | Disabled |
 
 </div>
 
@@ -207,7 +208,7 @@ The model's scenario ranking is more actionable than its final battery-life numb
 
 ```mermaid
 pie showData
-    title Daily Charge by Enabled Scenario
+    title Daily Charge (mAh/day) by Enabled Scenario
     "Raise-to-wake" : 4.9020
     "Notifications" : 3.9996
     "Sleep monitoring" : 2.3040
@@ -239,7 +240,7 @@ The first two screen-on interactions account for about half of the modelled dail
 
 ```mermaid
 pie showData
-    title Daily Charge by Explicit Workbook Category
+    title Daily Charge (mAh/day) by Explicit Workbook Category
     "AMOLED display (9.56 mAh/day)" : 9.5595
     "MCU (4.62 mAh/day)" : 4.6163
     "Haptic motor (2.22 mAh/day)" : 2.2203
@@ -248,11 +249,11 @@ pie showData
 
 The chart deliberately leaves the final slice as `Other / unallocated`. The workbook does not provide independent battery-side values for Bluetooth, the accelerometer, or the gyroscope. Its disabled Bluetooth-calling scenario does not prove that Bluetooth costs zero: the app-synchronization scene may also use a radio path, but the workbook does not split that energy out. Likewise, the sensor contribution may be included in `Other`, but it cannot be separated into accelerometer and gyroscope values from the supplied data.
 
-To turn this into a five-way MCU/display/haptic/Bluetooth/accelerometer-and-gyroscope chart, add separate rows for Bluetooth idle and transfer states, accelerometer modes and duty cycles, and gyroscope modes and duty cycles. Measure each row at the battery input, or apply the measured regulator efficiency before adding it to the battery-side mAh total. Then replace the `Other / unallocated` slice rather than adding a second, overlapping sensor or Bluetooth slice.
+To make this a five-category chart—MCU, display, haptic motor, Bluetooth, and a combined accelerometer/gyroscope category—add separate rows for Bluetooth idle and transfer states, accelerometer modes and duty cycles, and gyroscope modes and duty cycles. Measure each row at the battery input, or apply the measured regulator efficiency before adding it to the battery-side mAh total. Then replace the `Other / unallocated` slice rather than adding a second, overlapping sensor or Bluetooth slice.
 
-### Separate Standby MCU, Active MCU, and Sensors
+### Separate Baseline MCU Consumption, Scenario-Related MCU Work, and Sensor Loads { #separate-standby-mcu-active-mcu-and-sensors }
 
-The workbook provides an explicit `MCU` bucket, but it does not isolate graphics rendering as its own code path. The most defensible split is therefore between its baseline-standby MCU entry, MCU work in display-on interaction scenarios, and other scheduled MCU work.
+The workbook provides an explicit `MCU` bucket, but it does not isolate graphics rendering as its own code path. The most defensible analysis separates the baseline-standby MCU entry from MCU entries assigned to the usage scenarios; sensor consumption is not identified as a separate category.
 
 <div align="center"><em>Table: Breakdown of the Workbook's MCU Bucket</em></div>
 
@@ -272,7 +273,7 @@ The workbook provides an explicit `MCU` bucket, but it does not isolate graphics
 
 ```mermaid
 pie showData
-    title Daily MCU Charge by Activity Group
+    title Daily MCU Charge (mAh/day) by Activity Group
     "Baseline standby" : 1.4854
     "Display-on interaction" : 1.3013
     "Sleep monitoring" : 1.6640
@@ -281,10 +282,10 @@ pie showData
 
 Two comparisons prevent a misleading conclusion:
 
-- **Standby MCU versus display-on MCU:** baseline standby contributes 1.49 mAh/day, slightly more than the 1.30 mAh/day MCU contribution from all display-on interaction scenarios combined. In this baseline, reducing standby current is at least as important as making individual graphics bursts shorter.
-- **Standby MCU versus all active MCU work:** all non-standby MCU entries total 3.13 mAh/day, or 2.11 times the baseline-standby MCU entry. The largest opportunity is not graphics alone: the 8-hour sleep-monitoring scene dominates the active MCU portion.
+- **Baseline-standby MCU entry versus display-on scenario entries:** baseline standby contributes 1.49 mAh/day, slightly more than the 1.30 mAh/day assigned to the MCU across all display-on interaction scenarios. In this model, reducing the assumed baseline current matters at least as much as reducing the MCU work associated with those scenarios. The workbook does not isolate graphics bursts as a separate measurement.
+- **Baseline-standby MCU entry versus all other explicit MCU entries:** the remaining MCU entries total 3.13 mAh/day, or 2.11 times the baseline-standby entry. Sleep monitoring is the largest individual non-baseline entry at 1.66 mAh/day; this is a scenario-level MCU allocation, not a measurement of CPU-active current alone.
 
-The workbook provides no dedicated sensor category. Its `Other` bucket is the only place that could include sensor consumption, but it may also include PMIC, radio, leakage, or other background loads. It totals 1.29 mAh/day (7.28%). Therefore, even under the conservative assumption that all `Other` consumption belongs to sensors, the explicit MCU bucket is more dominant: 4.62 mAh/day versus 1.29 mAh/day, or 3.59 times higher. The true sensor-only share can only be determined after the model separates sensor rails from the generic `Other` entry.
+The workbook provides no dedicated sensor category. Its `Other` bucket is the only place that could include sensor consumption, but it may also include PMIC, radio, leakage, or other background loads. It totals 1.29 mAh/day (7.28%). Even if all of `Other` were attributed to sensors, the explicit MCU bucket would still be larger: 4.62 mAh/day versus 1.29 mAh/day, or 3.59 times higher. This compares workbook categories, not a direct measurement of the MCU silicon against the sensors. The true sensor-only share can be determined only after the model separates sensor rails from the generic `Other` entry.
 
 <div align="center"><em>Table: What to Measure Next to Separate the Remaining Loads</em></div>
 

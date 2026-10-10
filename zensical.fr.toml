@@ -1,0 +1,400 @@
+[project]
+
+site_name = "μForge.io"
+
+site_description = "μForge.io fournit des microcontrôleurs SF32 ultra-basse consommation, des modules, des cartes de développement, des flux de travail SDK et des guides de conception matérielle prêts pour la production aux développeurs embarqués."
+
+site_author = "Jingming Wang"
+
+site_url = "https://uForge.io/fr/"
+
+repo_url = "https://github.com/uForge-io/uforge-site"
+
+repo_name = "μForge-io/uforge-site"
+
+copyright = """
+Copyright &copy; 2026 μForge.io · <a href='/fr/about/'>À propos de ce site</a> · <a href='/fr/about/glossary/'>Glossaire</a> · <a href='/fr/about/contact/'>Contact</a>
+"""
+
+# French source tree
+docs_dir = "docs_fr"
+site_dir = "site_fr"
+nav = [
+  { "Produits SF32" = [
+    { "Aperçu" = "sf32-products/index.md" },
+    { "Famille SF32" = [
+      "sf32-products/family/SF32_family.md",
+      "sf32-products/family/SF32_namingrule.md",
+      "sf32-products/family/product-planning.md"
+    ]},
+    { "Sélecteur de produits SF32" = "sf32-products/product-selector.md" },
+    { "Microcontrôleurs" = [
+      "sf32-products/chips/SF32LB52x.md",
+      "sf32-products/chips/SF32LB55x.md",
+      "sf32-products/chips/SF32LB56x.md",
+      "sf32-products/chips/SF32LB58x.md"
+    ]},
+    { "Modules" = [
+      "sf32-products/modules/SF32LB52-MOD-1.md",
+      "sf32-products/modules/SF32LB56-MOD.md",
+      "sf32-products/modules/SF32LB58-MOD.md"
+    ]},
+    { "Cartes de développement" = [
+      "sf32-products/devkits/SF32LB52-DevKit-LCD.md",
+      "sf32-products/devkits/SF32LB52-DevKit-Core-3p3.md",
+      "sf32-products/devkits/SF32LB52-DevKit-Nano.md",
+      "sf32-products/devkits/SF32LB52-DevKit-ULP.md",
+      "sf32-products/devkits/SF32LB56-DevKit-LCD.md",
+      "sf32-products/devkits/SF32LB58-DevKit-LCD.md"
+    ]}
+  ]},
+  { "Démarrage" = [
+    { "Aperçu" = "getting-started/index.md" },
+    { "SiFli-SDK" = [
+      "getting-started/sifli/getting-started-sifli-sdk.md",
+      "getting-started/sifli/getting-started-sifli-codekit.md"
+    ]},
+    { "Plates-formes communautaires" = [
+      "getting-started/zephyr/getting-started-zephyr-upstream.md",
+      "getting-started/arduino/getting-started-arduino.md",
+      "getting-started/rust/getting-started-rust.md",
+      "getting-started/micropython/getting-started-micropython.md"
+    ]},
+    { "Tutoriels" = [
+      "getting-started/tutorials/overview.md",
+      { "Premières périphériques" = "getting-started/tutorials/beginner.md" },
+      { "Sous-système de connectivité" = "getting-started/tutorials/intermediate.md" },
+      { "Validation du produit" = "getting-started/tutorials/advanced.md" }
+    ]}
+  ]},
+  { "Développement" = [
+    { "Aperçu" = "develop/index.md" },
+    { "SiFli-SDK" = [
+      "develop/platforms/sifli-sdk/overview.md",
+      "develop/platforms/sifli-sdk/build-flash-monitor.md",
+      "develop/platforms/sifli-sdk/board-configuration.md",
+      "develop/platforms/sifli-sdk/components.md",
+      "develop/platforms/sifli-sdk/debugging-diagnostics.md"
+    ]},
+    { "Notes d'application SiFli-SDK" = [
+      "develop/platforms/sifli-sdk/sdk-application-notes.md",
+      "develop/platforms/sifli-sdk/application-notes/adc-sampling.md",
+      "develop/platforms/sifli-sdk/application-notes/sensor-integration.md",
+      "develop/platforms/sifli-sdk/application-notes/external-flash.md",
+      "develop/platforms/sifli-sdk/application-notes/watchdog.md",
+      "develop/platforms/sifli-sdk/application-notes/ezip-image-assets.md",
+      "develop/platforms/sifli-sdk/application-notes/low-power-measurement.md",
+      "develop/platforms/sifli-sdk/application-notes/crash-analysis.md",
+      "develop/platforms/sifli-sdk/application-notes/rf-performance-tests.md",
+      "develop/platforms/sifli-sdk/application-notes/bluetooth-signalling-tests.md",
+      "develop/platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests.md"
+    ]},
+    { "Exemples" = [ "develop/examples/index.md" ] },
+    { "Outils" = [
+      "develop/tools/index.md",
+      "develop/tools/codekit.md"
+    ]},
+    { "Sujets du micrologiciel" = [
+      "develop/firmware-topics/index.md",
+      "develop/firmware-topics/partition-tables.md",
+      "develop/firmware-topics/ota-dfu.md",
+      "develop/firmware-topics/usb-cherryusb.md",
+      "develop/firmware-topics/power-management.md",
+      "develop/firmware-topics/logging-crash-analysis.md"
+    ]},
+    { "Expérimental / Communauté" = [
+      "develop/platforms/zephyr/overview.md",
+      "develop/platforms/arduino/overview.md",
+      "develop/platforms/micropython/status.md",
+      "develop/platforms/rust/overview.md"
+    ]}
+  ]},
+  { "Matériel" = [
+    { "Aperçu" = "hardware/index.md" },
+    { "Conceptions de référence" = [
+      "hardware/reference-designs/reference-designs.md",
+      { "Parcours de conception portable connectée" = "hardware/reference-designs/connected-wearable-journey.md" }
+    ]},
+    { "Guides de conception matérielle" = [
+      { "SF32LB52x" = [
+        { "Aperçu" = "hardware/chip-guides/SF32LB52x_hardware_design_guide.md" },
+        { "Directives de conception du schéma" = [
+          { "Système minimum, alimentation, horloge" = "hardware/chip-guides/SF32LB52x_schematic_design.md" },
+          { "Interfaces RF et utilisateur" = "hardware/chip-guides/SF32LB52x_schematic_rf_interfaces.md" },
+          { "Stockage et fabrication" = "hardware/chip-guides/SF32LB52x_schematic_storage_mfg.md" },
+          { "Liste de contrôle du schéma" = "hardware/chip-guides/SF32LB52x_schematic_checklist.md" }
+        ]},
+        { "Directives de disposition du PCB" = [
+          { "Directives de conception" = "hardware/chip-guides/SF32LB52x_pcb_layout.md" },
+          { "Liste de contrôle de disposition du PCB" = "hardware/chip-guides/SF32LB52x_pcb_layout_checklist.md" }
+        ]},
+        { "Révision de conception, listes de contrôle et références" = "hardware/chip-guides/SF32LB52x_review_and_reference.md" }
+      ]},
+      { "SF32LB55x" = [
+        { "Aperçu" = "hardware/chip-guides/SF32LB55x_hardware_design_guide.md" },
+        { "Directives de conception du schéma" = "hardware/chip-guides/SF32LB55x_schematic_design.md" },
+        { "Liste de contrôle du schéma" = "hardware/chip-guides/SF32LB55x_schematic_checklist.md" },
+        { "Directives de disposition du PCB" = "hardware/chip-guides/SF32LB55x_pcb_layout.md" },
+        { "Révision de conception, listes de contrôle et références" = "hardware/chip-guides/SF32LB55x_review_and_reference.md" }
+      ]},
+      { "SF32LB56x" = [
+        { "Aperçu" = "hardware/chip-guides/SF32LB56x_hardware_design_guide.md" },
+        { "Directives de conception du schéma" = "hardware/chip-guides/SF32LB56x_schematic_design.md" },
+        { "Liste de contrôle du schéma" = "hardware/chip-guides/SF32LB56x_schematic_checklist.md" },
+        { "Directives de disposition du PCB" = "hardware/chip-guides/SF32LB56x_pcb_layout.md" },
+        { "Révision de conception, listes de contrôle et références" = "hardware/chip-guides/SF32LB56x_review_and_reference.md" }
+      ]},
+      { "SF32LB58x" = [
+        { "Aperçu" = "hardware/chip-guides/SF32LB58x_hardware_design_guide.md" },
+        { "Directives de conception du schéma" = "hardware/chip-guides/SF32LB58x_schematic_design.md" },
+        { "Liste de contrôle du schéma" = "hardware/chip-guides/SF32LB58x_schematic_checklist.md" },
+        { "Directives de disposition du PCB" = "hardware/chip-guides/SF32LB58x_pcb_layout.md" },
+        { "Liste de contrôle de disposition du PCB" = "hardware/chip-guides/SF32LB58x_pcb_layout_checklist.md" },
+        { "Révision de conception, listes de contrôle et références" = "hardware/chip-guides/SF32LB58x_review_and_reference.md" }
+      ]},
+      { "SF32LB52-MOD-1" = "hardware/chip-guides/SF32LB52-MOD-1_hardware_design_guide.md" },
+      { "SF32LB56-MOD" = "hardware/chip-guides/SF32LB56-MOD_hardware_design_guide.md" },
+      { "SF32LB58-MOD" = "hardware/chip-guides/SF32LB58-MOD_hardware_design_guide.md" }
+    ]},
+    { "Modules M2" = [
+      "hardware/m2-modules/interface-standards-overview.md",
+      "hardware/m2-modules/M2 Interface Naming Rules.md",
+      "hardware/m2-modules/M2-interface-definition.md"
+    ]},
+    { "CAO et composants" = [
+      "hardware/cad-components/components-and-cad-libraries.md",
+      "hardware/cad-components/sifli-approved-vendor-list.md",
+      "hardware/cad-components/eda-tool-libraries.md"
+    ]},
+    { "Conception pour la production" = "hardware/design-for-production.md" }
+  ]},
+  { "Projets" = [
+    { "Aperçu" = "projects/index.md" },
+    { "Projets avec SiFli-SDK" = [
+      "projects/sf32-xiaozhi.md",
+      "projects/sf32-ble-talkback.md",
+      "projects/sf32-epd-reader.md",
+      "projects/superkey.md",
+      "projects/radiation-monitor.md",
+      "projects/pocket-pi.md",
+      "projects/lilygo-t-display-sf32.md"
+    ]},
+    { "Projets avec Zephyr" = [
+      "projects/arduboy2-sifli.md",
+      "projects/zmk-sf32.md"
+    ]}
+  ]},
+  { "Apprendre" = [
+    { "Aperçu" = "learn/index.md" },
+    { "Architecture" = [
+      { "Aperçu de l'architecture" = "learn/architecture/overview.md" },
+      "learn/architecture/star-mc1.md",
+      "learn/architecture/psram-and-memory-types.md",
+      "learn/architecture/ptm-parallel-task-machine.md"
+    ]},
+    { "Graphiques" = [
+      { "Aperçu des graphiques" = "learn/graphics/overview.md" },
+      "learn/graphics/epicasso-gpu.md",
+      "learn/graphics/ezip.md",
+      "learn/graphics/turbopixel.md",
+      "learn/graphics/display-controller.md",
+      "learn/graphics/lvgl-sdk-examples.md"
+    ]},
+    { "Bluetooth" = [
+      { "Aperçu Bluetooth" = "learn/bluetooth/overview.md" },
+      "learn/bluetooth/processor.md",
+      "learn/bluetooth/pan.md",
+      "learn/bluetooth/at-command-reference.md",
+      "learn/bluetooth/bluetooth-low-power-profiling.md",
+      "learn/bluetooth/bluetooth-sdk-examples.md"
+    ]},
+    { "Basse consommation" = [
+      { "Conception basse consommation" = "learn/low-power/overview.md" },
+      { "Estimation du niveau de charge de la batterie" = "learn/low-power/battery-capacity-calculation.md" },
+      { "Profilage de la consommation électrique de la montre intelligente" = "learn/low-power/smartwatch-power-profiling.md" },
+      "learn/low-power/measurement-and-validation.md",
+      "learn/low-power/low-power-sdk-examples.md"
+    ]},
+    { "Audio" = [
+      { "Aperçu audio" = "learn/audio/overview.md" },
+      "learn/audio/audio-server-buffering.md",
+      "learn/audio/audio-sdk-examples.md"
+    ]},
+    { "IA" = [
+      { "Aperçu IA" = "learn/ai/overview.md" },
+      "learn/ai/accelerator.md"
+    ]},
+  ]},
+  { "Blog" = [
+    "blog/index.md",
+    { "Articles" = [
+      "blog/posts/2026-10-07-multi-language-translation.md",
+      "blog/posts/2026-08-24-august-progress.md",
+      "blog/posts/2026-07-31-the-first-blog.md"
+    ]}
+  ]},
+  { "À propos de ce site" = [
+    "about/index.md",
+    { "Glossaire" = "about/glossary.md" },
+    "about/contact.md",
+  ]}
+]
+
+extra_css = [
+    "stylesheets/uforge-home.css",
+    "stylesheets/hardware-overview.css",
+    "stylesheets/extra.css",
+    "stylesheets/product-selector.css",
+]
+extra_javascript = ["javascripts/product-selector.js", "javascripts/palette-sync.js", "javascripts/spotlight-hero.js"]
+
+[project.theme]
+custom_dir = "overrides"
+favicon = "assets/uforge-favicon.svg"
+language = "fr"
+
+features = [
+    "announce.dismiss",
+    "content.code.annotate",
+    "content.code.copy",
+    "content.code.select",
+    "content.footnote.tooltips",
+    "content.tabs.link",
+    "content.tooltips",
+    "navigation.footer",
+    "navigation.indexes",
+    "navigation.instant",
+    "navigation.instant.prefetch",
+    "navigation.path",
+    "navigation.sections",
+    "navigation.tabs",
+    "navigation.top",
+    "navigation.tracking",
+    "search.highlight",
+]
+
+logo = "assets/uforge-logo.svg"
+
+[project.theme.icon]
+repo = "fontawesome/brands/github"
+alternate = "lucide/languages"
+
+text = "Josefin Sans"
+code = "Jetbrains Mono"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Préférence du système"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "deep orange"
+accent = "cyan"
+toggle.icon = "lucide/sun"
+toggle.name = "Mode clair"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+primary = "deep orange"
+accent = "cyan"
+toggle.icon = "lucide/moon"
+toggle.name = "Mode sombre"
+
+[[project.extra.alternate]]
+name = "EN"
+link = "/"
+lang = "en"
+
+[[project.extra.alternate]]
+name = "中文"
+link = "/zh/"
+lang = "zh"
+
+[[project.extra.alternate]]
+name = "日本語"
+link = "/ja/"
+lang = "ja"
+
+[[project.extra.alternate]]
+name = "Español"
+link = "/es/"
+lang = "es"
+
+[[project.extra.alternate]]
+name = "Deutsch"
+link = "/de/"
+lang = "de"
+
+[[project.extra.alternate]]
+name = "Français"
+link = "/fr/"
+lang = "fr"
+
+[[project.extra.alternate]]
+name = "Português"
+link = "/pt/"
+lang = "pt"
+
+[[project.extra.alternate]]
+name = "Русский"
+link = "/ru/"
+lang = "ru"
+
+[[project.extra.social]]
+icon = "fontawesome/solid/envelope"
+link = "mailto:contact@uforge.io"
+name = "Contact"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/uforge-io/"
+name = "Ouvrir GitHub"
+
+[[project.extra.social]]
+icon = "simple/taobao"
+link = "https://sifli.taobao.com/"
+name = "Boutique Taobao de SiFli"
+
+[project.markdown_extensions.abbr]
+[project.markdown_extensions.admonition]
+[project.markdown_extensions.attr_list]
+[project.markdown_extensions.def_list]
+[project.markdown_extensions.footnotes]
+[project.markdown_extensions.md_in_html]
+[project.markdown_extensions.toc]
+permalink = true
+[project.markdown_extensions.pymdownx.arithmatex]
+generic = true
+[project.markdown_extensions.pymdownx.betterem]
+[project.markdown_extensions.pymdownx.caret]
+[project.markdown_extensions.pymdownx.details]
+[project.markdown_extensions.pymdownx.emoji]
+emoji_generator = "zensical.extensions.emoji.to_svg"
+emoji_index = "zensical.extensions.emoji.twemoji"
+[project.markdown_extensions.pymdownx.highlight]
+anchor_linenums = true
+line_spans = "__span"
+pygments_lang_class = true
+[project.markdown_extensions.pymdownx.inlinehilite]
+[project.markdown_extensions.pymdownx.keys]
+[project.markdown_extensions.pymdownx.magiclink]
+[project.markdown_extensions.pymdownx.mark]
+[project.markdown_extensions.pymdownx.smartsymbols]
+fractions = false
+[project.markdown_extensions.pymdownx.superfences]
+custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" }
+]
+[project.markdown_extensions.pymdownx.tabbed]
+alternate_style = true
+combine_header_slug = true
+[project.markdown_extensions.pymdownx.tasklist]
+custom_checkbox = true
+[project.markdown_extensions.pymdownx.tilde]
+
+[project.extra.analytics]
+provider = "google"
+property = "G-NN1VWVS9D7"

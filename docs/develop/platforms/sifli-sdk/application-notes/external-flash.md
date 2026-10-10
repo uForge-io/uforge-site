@@ -5,17 +5,19 @@ description: "Configure, access, mount, and port external NOR Flash, NAND Flash,
 tags: [Develop, SiFli-SDK, Application Notes, Flash]
 ---
 
-# Use External Flash
+# Use External Flash { #use-external-flash }
 
 This article adapts SiFli's [Flash usage guide](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/flash_usage.html) into a practical integration path for SF32LB52x, SF32LB55x, SF32LB56x, and SF32LB58x. It covers controller configuration, family-specific address spaces, RT-Thread direct access, MTD filesystems, reserved regions, new Flash-part porting, PSRAM, and J-Link Open Flashloader support.
 
 The source guide uses `FLASH` for both NOR Flash and NAND Flash. The examples preserve its SDK symbols and device names; confirm the target SDK branch and board schematic before copying a configuration into a product.
 
-## 1. Controller model and capabilities
+## Controller model and capabilities { #1-controller-model-and-capabilities }
 
 The SiFli Flash controller can connect several Flash devices at the same time:
 
-<div align="center"><em>Table: Flash-controller capabilities by family</em></div>
+<div align="center" markdown>
+
+<em>Table: Flash-controller capabilities by family</em>
 
 | Family | Maximum devices | PSRAM line modes covered by this guide | Controller naming in the examples |
 |---|---:|---|---|
@@ -23,8 +25,9 @@ The SiFli Flash controller can connect several Flash devices at the same time:
 | SF32LB55x | 4 | 4-line PSRAM only | QSPI |
 | SF32LB56x | 4 | 4-line and 8-line PSRAM | MPI/QSPI compatibility names |
 | SF32LB58x | 5 | 4-line, 8-line, and 16-line PSRAM | MPI/QSPI compatibility names |
+</div>
 
-The devices can be NOR Flash or NAND Flash. Compared with SF32LB55x, the SF32LB58x and SF32LB56x controllers also support 8-line and 16-line PSRAM. The controller is called QSPI on the earlier arrangement and MPI on the newer memory-oriented arrangement.
+The devices can be NOR Flash or NAND Flash. Compared with SF32LB55x, the SF32LB56x and SF32LB58x controllers also support 8-line PSRAM; SF32LB58x additionally supports 16-line PSRAM. The controller is called QSPI on the earlier arrangement and MPI on the newer memory-oriented arrangement.
 
 The usual controller assignments are:
 
@@ -36,13 +39,13 @@ The driver is split into two layers. The HAL layer provides hardware-register ac
 
 The controller supports single-line and four-line Flash operations, DMA acceleration, page programming, page reads, and sector/block erase. NOR Flash can also be read directly through the AHB memory interface. The basic erase unit depends on the Flash part.
 
-## 2. Configure QSPI or MPI
+## Configure QSPI or MPI { #2-configure-qspi-or-mpi }
 
-Flash attributes and usage are configured through `menuconfig`, which generates `rtconfig.h`. The options include whether a controller is enabled, DMA usage, MTD registration, filesystem settings, memory size, and the manual/device ID.
+Flash attributes and usage are configured through `menuconfig`, which generates `rtconfig.h`. The options include whether a controller is enabled, DMA usage, MTD registration, filesystem settings, memory size, and device-ID handling (automatic detection or manual override).
 
-### SF32LB55x QSPI example
+### SF32LB55x QSPI example { #sf32lb55x-qspi-example }
 
-From `menuconfig`, the source guide enters **RTOS → On-chip Peripheral Driver → Enable QSPI → Enable QSPI Driver → QSPI Controller 1 Enable** and then selects the QSPI1 mode, filesystem use, memory size, and manual/device ID.
+From `menuconfig`, the source guide enters **RTOS → On-chip Peripheral Driver → Enable QSPI → Enable QSPI Driver → QSPI Controller 1 Enable** and then selects the QSPI1 mode, filesystem use, memory size, and whether the device ID is detected automatically or specified manually.
 
 The corresponding `rtconfig.h` definitions are:
 
@@ -72,12 +75,12 @@ For a second NOR Flash and a third NAND Flash, the source examples are:
 ```c
 #define BSP_ENABLE_QSPI3 1          /*使能QSPI3 模块*/
 #define BSP_QSPI3_USING_DMA 1       /*使能QSPI3 FIFO DMA <*/
-#define BSP_QSPI3_MODE 1            /*设置FLASH2 为NAND-FLASH*/
+#define BSP_QSPI3_MODE 1            /*设置FLASH3 为NAND-FLASH*/
 #define BSP_QSPI3_MEM_SIZE 128      /*配置FLASH3的总大小为128MB*/
 #define BSP_QSPI3_CHIP_ID 0         /*FLASH3 DEV ID 由系统获取，不需要手动输入*/
 ```
 
-### SF32LB58x MPI example
+### SF32LB58x MPI example { #sf32lb58x-mpi-example }
 
 On the SF32LB58x EVB, the source guide enters **RTOS → On-chip Peripheral Driver → Enable MPI → Enable QSPI Driver → MPI Controller 1 Enable**, then selects the MPI mode, memory size, and other device options. The mode values are `0 NOR`, `1 NAND`, `2 PSRAM`, `3 OPSRAM`, `4 HPSRAM`, and `5 LEGACY_PSRAM`.
 
@@ -94,7 +97,7 @@ The common MPI enable and per-controller examples are:
 #define BSP_MPI1_MODE_4 1           /*MPI1 设置为功能4---16线PSRAM*/
 #define BSP_QSPI1_MODE 4
 #define BSP_USING_PSRAM1 1
-#define BSP_QSPI1_MEM_SIZE 32       /*配置MPI1的总大小为16MB*/
+#define BSP_QSPI1_MEM_SIZE 32       /*Source value; verify its size encoding for the target SDK release.*/
 ```
 
 ```c
@@ -113,7 +116,7 @@ The common MPI enable and per-controller examples are:
 #define BSP_QSPI3_MODE 0
 #define BSP_USING_NOR_FLASH3 1
 #define BSP_QSPI3_USING_DMA 1       /*MPI3 使用DMA*/
-#define BSP_QSPI3_MEM_SIZE 32       /*配置MPI2的总大小为32MB*/
+#define BSP_QSPI3_MEM_SIZE 32       /*配置MPI3的总大小为32MB*/
 ```
 
 ```c
@@ -122,8 +125,8 @@ The common MPI enable and per-controller examples are:
 #define BSP_MPI4_MODE_1 1           /*MPI4 设置为功能1---NAND FLASH*/
 #define BSP_QSPI4_MODE 1
 #define BSP_USING_NAND_FLASH4 1
-#define BSP_QSPI4_USING_DMA 1       /*MPI5 使用DMA*/
-#define BSP_QSPI4_MEM_SIZE 128      /*配置MPI2的总大小为128MB*/
+#define BSP_QSPI4_USING_DMA 1       /*MPI4 使用DMA*/
+#define BSP_QSPI4_MEM_SIZE 128      /*Source comment says 128 MB; verify against the target device and SDK.*/
 ```
 
 ```c
@@ -138,13 +141,18 @@ The common MPI enable and per-controller examples are:
 
 SF32LB56x uses essentially the same MPI configuration as SF32LB58x, except that MPI4 is not present.
 
-## 3. Flash address spaces
+!!! warning "Verify the MPI configuration example"
+    SiFli's source material is internally inconsistent about MPI1: its prose says MPI1 defaults to NOR Flash and its mode cannot be changed, while the following configuration snippet sets MPI1 to mode 4 (16-line PSRAM). The snippet also sets `BSP_QSPI1_MEM_SIZE` to `32` while its comment says 16 MB; for MPI4, the value is `128` and the comment says 128 MB, while the EVB capacity table lists 64 MB. This article preserves the source configuration values without inferring the macro encoding or actual device capacity. Verify them against the target SDK release's Kconfig/generated configuration, board schematic, and memory datasheet.
+
+## Flash address spaces { #3-flash-address-spaces }
 
 The following ranges are the maximum controller windows. The actual usable size comes from the Flash part selected in `menuconfig`, not from the maximum window alone.
 
-### SF32LB55x
+### SF32LB55x { #sf32lb55x }
 
-<div align="center"><em>Table: SF32LB55x Flash controller address windows</em></div>
+<div align="center" markdown>
+
+<em>Table: SF32LB55x Flash controller address windows</em>
 
 | Controller | Start | End | Maximum window | EVB description |
 |:-----------|:------|:----|:---------------|:----------------|
@@ -152,6 +160,7 @@ The following ranges are the maximum controller windows. The actual usable size 
 | FLASH2 | `0x64000000` | `0x67FFFFFF` | 64 × 1024 × 1024 bytes | EVB capacity 32 MB |
 | FLASH3 | `0x68000000` | `0x6FFFFFFF` | 128 × 1024 × 1024 bytes | EVB not enabled |
 | FLASH4 | `0x12000000` | `0x13FFFFFF` | 32 × 1024 × 1024 bytes | EVB not enabled |
+</div>
 
 The controller-base definitions are in `mem_map.h`:
 
@@ -162,11 +171,13 @@ The controller-base definitions are in `mem_map.h`:
 #define QSPI4_MEM_BASE   (0x12000000)
 ```
 
-### SF32LB58x
+### SF32LB58x { #sf32lb58x }
 
 **C-BUS address space**
 
-<div align="center"><em>Table: SF32LB58x C-BUS address space</em></div>
+<div align="center" markdown>
+
+<em>Table: SF32LB58x C-BUS address space</em>
 
 | Controller | Start | End | Maximum window | EVB description |
 |:-----------|:------|:----|:---------------|:----------------|
@@ -175,10 +186,13 @@ The controller-base definitions are in `mem_map.h`:
 | MPI3 | `0x14000000` | `0x17FFFFFF` | 64 × 1024 × 1024 bytes | EVB capacity 32 MB |
 | MPI4 | `0x18000000` | `0x1BFFFFFF` | 64 × 1024 × 1024 bytes | EVB capacity 64 MB |
 | MPI5 | `0x1C000000` | `0x1FFFFFFF` | 64 × 1024 × 1024 bytes | EVB capacity 4 MB |
+</div>
 
 **S-BUS address space**
 
-<div align="center"><em>Table: SF32LB58x S-BUS address space</em></div>
+<div align="center" markdown>
+
+<em>Table: SF32LB58x S-BUS address space</em>
 
 | Controller | Start | End | Maximum window | EVB description |
 |:-----------|:------|:----|:---------------|:----------------|
@@ -186,6 +200,7 @@ The controller-base definitions are in `mem_map.h`:
 | MPI2 | `0x62000000` | `0x63FFFFFF` | 32 × 1024 × 1024 bytes | EVB capacity 16 MB |
 | MPI3 | `0x64000000` | `0x67FFFFFF` | 64 × 1024 × 1024 bytes | EVB capacity 32 MB |
 | MPI4 | `0x68000000` | `0x9FFFFFFF` | 896 × 1024 × 1024 bytes | EVB capacity 64 MB |
+</div>
 
 For NAND Flash larger than 64 MB, the guide recommends mounting it on MPI4 and using addresses beginning at `0x68000000`.
 
@@ -197,28 +212,34 @@ For NAND Flash larger than 64 MB, the guide recommends mounting it on MPI4 and u
 #define QSPI5_MEM_BASE   (0x1C000000)
 ```
 
-### SF32LB56x
+### SF32LB56x { #sf32lb56x }
 
 **C-BUS address space**
 
-<div align="center"><em>Table: SF32LB56x C-BUS address space</em></div>
+<div align="center" markdown>
+
+<em>Table: SF32LB56x C-BUS address space</em>
 
 | Controller | Start | End | Maximum window | EVB description |
 |:-----------|:------|:----|:---------------|:----------------|
 | MPI1 | `0x10000000` | `0x107FFFFF` | 8 × 1024 × 1024 bytes | EVB capacity 4 MB |
 | MPI2 | `0x10800000` | `0x13FFFFFF` | 56 × 1024 × 1024 bytes | EVB capacity 16 MB |
-| MPI3 | `0x14000000` | `0x17FFFFFF` | 128 × 1024 × 1024 bytes | EVB capacity 128 MB |
+| MPI3 | `0x14000000` | `0x17FFFFFF` | 64 × 1024 × 1024 bytes | EVB capacity 128 MB |
 | MPI5 | `0x1C000000` | `0x1FFFFFFF` | 64 × 1024 × 1024 bytes | EVB capacity 1 MB |
+</div>
 
 **S-BUS address space**
 
-<div align="center"><em>Table: SF32LB56x S-BUS address space</em></div>
+<div align="center" markdown>
+
+<em>Table: SF32LB56x S-BUS address space</em>
 
 | Controller | Start | End | Maximum window |
 |:-----------|:------|:----|:---------------|
 | MPI1 | `0x60000000` | `0x607FFFFF` | 8 × 1024 × 1024 bytes |
 | MPI2 | `0x60800000` | `0x63FFFFFF` | 56 × 1024 × 1024 bytes |
 | MPI3 | `0x64000000` | `0x9FFFFFFF` | 960 × 1024 × 1024 bytes |
+</div>
 
 ```c
 #define QSPI1_MEM_BASE   (0x10000000)
@@ -227,43 +248,21 @@ For NAND Flash larger than 64 MB, the guide recommends mounting it on MPI4 and u
 #define QSPI5_MEM_BASE   (0x1C000000)
 ```
 
-## 4. Access Flash through RT-Thread
+!!! note "Address window and device capacity"
+    The source lists the SF32LB56x MPI3 C-BUS range as `0x14000000`–`0x17FFFFFF`, but labels its size as 128 MB. Those inclusive endpoints span 64 MB, which is the window size shown above. The source's 128 MB EVB device capacity is retained separately; device capacity does not determine the size of this C-BUS window. Verify the target SDK memory map before using an address range.
+
+## Access Flash through RT-Thread { #4-access-flash-through-rt-thread }
 
 The RT-Thread Flash interface selects the controller from the absolute address. Call `rt_hw_flash_init` after the controller and device settings have been generated in `rtconfig.h`:
 
 ```c
-/**
-* @brief  Flash controller hardware initial.
-* @retval 0 if success.
-
-int rt_hw_flash_init(void)；
-
-/**
- * @brief Read nor-flash memory
- * @param[in] addr: start address for flash memory.
- * @param[out] buf: output data buffer, should not be null.
- * @param[in] size: read memory size, in bytes.
- * @return read size, 0 if fail.
- */
+int rt_hw_flash_init(void);
 int rt_flash_read(rt_uint32_t addr, rt_uint8_t *buf, size_t size);
-
-/**
- * @brief Write nor-flash memory
- * @param[in] addr: start address for flash memory.
- * @param[in] buf: input data buffer, should not be null.
- * @param[in] size: write memory size, in bytes.
- * @return write size, 0 if fail.
- */
 int rt_flash_write(rt_uint32_t addr, const rt_uint8_t *buf, size_t size);
-
-/**
- * @brief erase flash.
- * @param[in] addr: start address for flash memory.
- * @param[in] size: erase memory size, in bytes.
- * @return RT_EOK if success.
- */
 rt_err_t rt_flash_erase(rt_uint32_t addr, size_t size);
 ```
+
+`rt_flash_read` and `rt_flash_write` return the number of bytes transferred on success and `0` on failure; `rt_flash_erase` returns `RT_EOK` on success. These declarations are normalized for readability; confirm the actual headers and return behavior in the target SDK branch.
 
 Use `rt_flash_read` for both NOR and NAND reads; NOR can alternatively be read through its memory window, while NAND must use the API and the caller must manage the buffer. Use `rt_flash_write` for both types. For erase operations, NOR normally requires sector-aligned address and length (typically 4 KB); NAND normally requires block-aligned address and length (typically 128 KB). Preserve and restore any unaligned data yourself.
 
@@ -283,60 +282,61 @@ LR_IROM1 0x10020000 0x100000  {    ; load region size_region
 }
 ```
 
-The following source example erases, writes, reads, and compares a 4 KB block at an address one megabyte into `FLASH1`:
+The source round-trip example has an uninitialized data buffer and incorrect cleanup, so it should not be run as published. The adapted NOR Flash example below takes a test address as an argument rather than assuming a fixed product address:
+
+!!! warning "Flash erase is destructive"
+    Run this only in a dedicated, erasable NOR test region, and set `TEST_SIZE` to the erase granularity required by the part and driver. Reserve at least one complete erase unit and satisfy address/length alignment. Do not target boot configuration, calibration data, firmware/OTA images, a filesystem, or user data. This example is not for NAND; NAND also requires part- and driver-specific bad-block, ECC, OOB, page, and block handling.
 
 ```c
-unsigned long address = FLASH_BASE_ADDR + 0x100000;
-char * buf = NULL;
-char * buf2 = NULL;
+#include <rtthread.h>
+#include <string.h>
 
-// Erase flash
-int res = rt_flash_erase(address, 4096);
-if(res != 0)
-    goto err;
+#define TEST_SIZE 4096u /* Set to the device erase granularity; reserve a full test region. */
 
+static int flash_nor_round_trip(rt_uint32_t address)
+{
+    rt_uint8_t *write_buf = RT_NULL;
+    rt_uint8_t *read_buf = RT_NULL;
+    int result = RT_ERROR;
 
-// Write flash
-// malloc buf and initial data before write
-buf = malloc(4096);
-if(buf == NULL)
-    return ERROR;
-int size = rt_flash_write(address, buf, 4096);
-if(size != 4096)
-    goto err;
+    if ((address % TEST_SIZE) != 0)
+        return RT_ERROR;
 
-// read flash
-buf2 = malloc(4096);
-if(buf2 == NULL)
-    goto err;
-size = rt_flash_read(address, buf2, 4096);
-if(size != 4096)
-    goto err;
-	
-// check data
-for(int i=0; i<4096; i++)
-    if(buf[i] != buf2[i])
-	    goto err;
+    write_buf = rt_malloc(TEST_SIZE);
+    read_buf = rt_malloc(TEST_SIZE);
+    if (write_buf == RT_NULL || read_buf == RT_NULL)
+        goto cleanup;
 
-....
-		
-err:
-    if(buf)
-	    free(buf);
-	if(buf2)
-	    free(buf);
-return ERROR;
+    for (rt_size_t i = 0; i < TEST_SIZE; ++i)
+        write_buf[i] = (rt_uint8_t)(i & 0xFFu);
 
-...
+    if (rt_flash_erase(address, TEST_SIZE) != RT_EOK)
+        goto cleanup;
+    if (rt_flash_write(address, write_buf, TEST_SIZE) != (int)TEST_SIZE)
+        goto cleanup;
+    if (rt_flash_read(address, read_buf, TEST_SIZE) != (int)TEST_SIZE)
+        goto cleanup;
+    if (memcmp(write_buf, read_buf, TEST_SIZE) != 0)
+        goto cleanup;
+
+    result = RT_EOK;
+
+cleanup:
+    if (read_buf != RT_NULL)
+        rt_free(read_buf);
+    if (write_buf != RT_NULL)
+        rt_free(write_buf);
+    return result;
+}
 ```
 
-## 5. Use Flash through RT-Thread MTD
+## Use Flash through RT-Thread MTD { #5-use-flash-through-rt-thread-mtd }
 
 RT-Thread provides MTD-NOR and MTD-NAND device drivers. When MTD and filesystem options are enabled in the configuration, the devices are registered during startup. Query a controller with `rt_device_find("flash1")`; the controller names are `flash1`, `flash2`, and `flash3` (and the corresponding device name for each enabled controller). A non-null result indicates successful registration.
 
 MTD is used by filesystems and USB storage. Application code normally finds the device and binds it; the MTD NOR layer encapsulates the read/write operations. If you register a device yourself, implement the operation table shown below.
 
-### MTD-NOR types
+### MTD-NOR device structure { #mtd-nor-types }
 
 ```c
 struct rt_mtd_nor_device
@@ -364,7 +364,7 @@ struct rt_mtd_nor_driver_ops
 rt_err_t rt_mtd_nor_register_device(const char* name, struct rt_mtd_nor_device* device);
 ```
 
-### MTD-NAND types
+### MTD-NAND device structure { #mtd-nand-types }
 
 ```c
 struct rt_mtd_nand_device
@@ -372,7 +372,7 @@ struct rt_mtd_nand_device
     struct rt_device parent;
 
     rt_uint16_t page_size;          /* The Page size in the flash */
-    rt_uint16_t oob_size;           /* Out of bank size */
+    rt_uint16_t oob_size;           /* Out-of-band (OOB) bytes per page */
     rt_uint16_t oob_free;           /* the free area in oob that flash driver not use */
     rt_uint16_t plane_num;          /* the number of plane in the NAND Flash */
 
@@ -437,9 +437,9 @@ The source's NOR filesystem example registers `flash1`, finds it, formats it wit
     }
 ```
 
-## 6. Reserve and review the current Flash layout
+## Reserve and review the current Flash layout { #6-reserve-and-review-the-current-flash-layout }
 
-The source guide describes the default SF32LB55x layout from `mem_map.h`: the first 64 KB at `0x10000000` stores `flash_table`, the next 64 KB at `0x10010000` stores the boot patch, and the image begins at `0x10020000`. If `FLASH2` is NOR Flash, watch resources begin at `0x64000000`. FlashDB (or EasyFlash) also uses portions of `flash1` and `flash2` for variables and logs; reclaim and repartition those regions according to the system requirements.
+The [SF32LB55x memory usage guide](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/memory_usage.html) gives this default QSPI1 layout: the 64 KB region from `0x10000000` to `0x1000FFFF` contains the Flash configuration table, calibration table, and reserved space; the next 64 KB, from `0x10010000` to `0x1001FFFF`, is reserved for the boot-ROM patch, and user code begins at `0x10020000`. If `FLASH2` uses NOR Flash, image resources begin at `0x64000000`. FlashDB (or EasyFlash) also uses portions of `flash1` and `flash2` for variables and logs; reclaim and repartition those regions according to the system requirements.
 
 ```c
 #define FLASH_TABLE_SIZE            (20*1024)
@@ -457,11 +457,11 @@ The source guide describes the default SF32LB55x layout from `mem_map.h`: the fi
 
 Treat these addresses as the source guide's default layout, not a universal partition map. Reconcile them with the target linker script, bootloader, OTA plan, filesystem ranges, and actual Flash capacity before allocating product data.
 
-## 7. Port a NOR Flash part
+## Port a NOR Flash part { #7-port-a-nor-flash-part }
 
 Different boards may use different NOR Flash parts. Match the part against both its hardware specification and its operation commands.
 
-### Hardware requirements
+### Hardware requirements { #hardware-requirements }
 
 Check:
 
@@ -470,7 +470,7 @@ Check:
 - maximum frequency in each line mode; and
 - any other details needed by the hardware design. The source notes that operating temperature and erase/program speed are not required for the software porting match at this stage.
 
-### Operation commands
+### Operation commands { #operation-commands }
 
 Read, write, and erase commands vary by vendor and part. Compare the part's data sheet with the command IDs in `bf0_hal_qspi.h` and add a command table in `flash_table.c` when the existing table does not match.
 
@@ -541,23 +541,23 @@ typedef struct
 {
     uint8_t cmd;
     uint8_t func_mode;   /*!<   manual read 0 / write 1  */
-    uint8_t data_mode;   /*!<   0 no data / 1 single line / 2 dual line / 3 qual line  */
+    uint8_t data_mode;   /*!<   0 no data / 1 single line / 2 dual line / 3 quad line  */
     uint8_t dummy_cycle;     /*!<   dummy cycle between command and address/data  */
     uint8_t ab_size;          /*!<   alternate byte size, */
-    uint8_t ab_mode;          /*!<   alternate byte mode, 0 no, 1, single line, 2, dual line, 3 fouline */
+    uint8_t ab_mode;          /*!<   alternate byte mode, 0 no, 1 single line, 2 dual line, 3 four-line */
     uint8_t addr_size;   /*!<   address byte count - 1 */
-    uint8_t addr_mode;   /*!<   0 no, 1 single line / 2 dual lin / 3 four line */
-    uint8_t cmd_mode;    /*!<   0 no, 1 single lien / 2 dual line / 3 four line */
+    uint8_t addr_mode;   /*!<   0 no, 1 single line / 2 dual line / 3 four line */
+    uint8_t cmd_mode;    /*!<   0 no, 1 single line / 2 dual line / 3 four line */
 } FLASH_CMD_CFG_T;
 ```
 
 Here `cmd` is the command ID (`0x06` for write enable and `0x05` for read status in the source examples). `func_mode` selects read or write; `data_mode` selects no data, single-, dual-, or four-line data; `dummy_cycle` describes clocks between command and address/data; `ab_size` and `ab_mode` describe alternate bytes; `addr_size` and `addr_mode` describe the address length and line mode; and `cmd_mode` indicates whether the command itself is sent on one, two, or four lines.
 
-## 8. Port a NAND Flash part
+## Port a NAND Flash part { #8-port-a-nand-flash-part }
 
 NAND porting follows the NOR process, but the command set and timing differ by part. Derive the required sequence from the part's data sheet. Some parts use a different ID-read timing; if the default timing cannot read the correct ID, either change the ID-read implementation or configure the correct ID explicitly so the new command table can be selected.
 
-## 9. Port PSRAM
+## Port PSRAM { #9-port-psram }
 
 The source guide documents APM PSRAM support in 4-line, 8-line, and 16-line modes, with supported densities from 4 MB to 32 MB:
 
@@ -567,7 +567,7 @@ The source guide documents APM PSRAM support in 4-line, 8-line, and 16-line mode
 
 Use the MPI/QSPI mode and memory-size settings that match the package, board wiring, and PSRAM part.
 
-## 10. Use J-Link DSK and Open Flashloader
+## Use J-Link DSK and Open Flashloader { #10-use-j-link-dsk-and-open-flashloader }
 
 The SDK's `tools/flash/jlink_drv` directory is SiFli's static J-Link Device Support Kit (DSK). The root `JLinkDevices.xml` describes the device, Flash bank, and loader relationships; the ELF files in its subdirectories are the Open Flashloader algorithms.
 
@@ -581,7 +581,7 @@ Keep these rules in sync with the board project:
 - A `FlashBankInfo` can contain multiple `LoaderInfo` entries. J-Link uses the first loader by default. Select another loader explicitly with `_device "<DeviceName>?BankAddr=<FlashBankBase>&Loader=<LoaderName>"_` or call `_JLINK_ExecCommand("DEVICE_SelectLoader BankAddr=<FlashBankBase> Loader=<LoaderName>");_` from a J-Link script.
 - Unsuffixed device names such as `SF32LB52X`, `SF32LB55X`, `SF32LB56X`, and `SF32LB58X` now include complete bank and loader information and prefer the NOR loader. Suffixed names remain for compatibility with existing scripts.
 
-## Integration checklist
+## Integration checklist { #integration-checklist }
 
 Before using external Flash in a product, record:
 
@@ -592,13 +592,13 @@ Before using external Flash in a product, record:
 5. the MTD device name and filesystem mount path, if used; and
 6. the board's J-Link device name and loader selection.
 
-## Related pages
+## Related pages { #related-pages }
 
 - [Partition Tables](../../../firmware-topics/partition-tables.md) — reconcile Flash regions with image and OTA layout.
 - [OTA and DFU](../../../firmware-topics/ota-dfu.md) — review update behavior before reserving product data regions.
 - [SiFli-SDK application notes](../sdk-application-notes.md) — the complete application-note index.
 
-## Official source
+## Official source { #official-source }
 
 - [Flash使用指南 — SiFli SDK 编程指南](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/flash_usage.html)
 - [SF32LB52x Flash usage](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/flash_usage.html)

@@ -48,7 +48,7 @@ Le parcours actuel d'objet connecté portable décrit une démarche de validatio
 1. Vérifiez que le produit visé par le parcours et le matériel retenu respectent les contraintes de votre conception.
 2. Reproduisez sa base logicielle sur la carte indiquée avant de l'adapter.
 3. Consignez avec le dossier du projet la référence exacte de la carte, la version du SDK, l'exemple, la commande de compilation/flashage et le journal série.
-4. Ajoutez une validation spécifique au produit pour chaque modification de l'affichage, du dispositif de mémoire, du chemin d'alimentation par batterie, de la conception RF, du boîtier ou des interfaces.
+4. Ajoutez une validation spécifique au produit pour chaque modification de l'affichage, du composant de mémoire, du chemin d'alimentation par batterie, de la conception RF, du boîtier ou des interfaces.
 5. Transmettez les résultats à [Conception pour la production](../design-for-production.md), y compris le guide sélectionné, la liste de contrôle, les décisions AVL, la méthode de récupération et les risques restants.
 
 ## Ajouter un nouveau parcours { #adding-a-new-journey }

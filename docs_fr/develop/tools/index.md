@@ -14,7 +14,7 @@ Le tableau ci-dessous associe les tâches courantes aux outils correspondants. I
 
 ## Carte des outils { #tool-map }
 
-<div align="center"><em>Tableau : Carte des outils</em></div>
+<div align="center"><em>Tableau : carte des outils</em></div>
 
 <div align="center" markdown>
 
@@ -24,10 +24,10 @@ Le tableau ci-dessous associe les tâches courantes aux outils correspondants. I
 | [Scripts de téléchargement UART du SDK](../platforms/sifli-sdk/build-flash-monitor.md) | Scripts de flashage de première exécution générés par les compilations SiFli-SDK. |
 | [Actions CodeKit](codekit.md) | Actions VS Code de configuration, compilation, flashage et surveillance. |
 | [`AssertDump`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/AssertDump/AssertDump_UM.html) | Capture des données mémoire lors d'un plantage pour analyse ultérieure. |
-| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | Capture de traces/logs et débogage via UART au moyen du Debug IP de la puce. |
+| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | Capture de traces et de journaux, et débogage via UART au moyen du Debug IP de la puce. |
 | [`Impeller`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/Impeller/Impeller_UM.html) | Programmation du firmware, calibration et tests PCBA en production. |
 | [eZip / outillage d'images](../../learn/graphics/ezip.md) | Conversion de ressources pour les pipelines graphiques compressés. |
-| [Outils RF/audio/usine](https://docs.sifli.com/projects/solution/6.tools/index.html) | Flux de calibration, de test et de réglage en production. |
+| [Outils RF, audio et de production](https://docs.sifli.com/projects/solution/6.tools/index.html) | Flux de calibration, de test et de réglage en production. |
 
 </div>
 
@@ -46,7 +46,7 @@ Consignez les deux méthodes dans la documentation du projet jusqu'à ce que l'�
 
 Pour un développement normal, un terminal série suffit. Pour les défaillances difficiles, capturez des journaux structurés et des données de plantage :
 
-- Enregistrez un journal de démarrage complet depuis le reset.
+- Enregistrez un journal de démarrage complet depuis la réinitialisation.
 - Enregistrez les fichiers ELF/map/symboles exacts correspondant à l'image flashée.
 - Notez si le shell RT-Thread, le shell Zephyr ou le mode débogage Arduino était actif.
 - Lorsqu'ils sont disponibles, utilisez les outils de diagnostic SiFli pour analyser les dumps d'assertion et capturer des traces.
@@ -55,9 +55,9 @@ Pour un développement normal, un terminal série suffit. Pour les défaillances
 
 Les produits qui font largement appel à l'affichage graphique devraient documenter le processus de conversion des ressources, notamment lorsqu'ils utilisent la compression eZip ou l'accélération graphique matérielle. Pour les produits en production, documentez séparément les outils RF, audio et de production des outils de flashage réservés aux développeurs, afin que les opérateurs d'usine ne dépendent pas de commandes réservées au développement.
 
-## Liste de vérification pour le choix des outils { #tool-selection-checklist }
+## Liste de contrôle pour le choix des outils { #tool-selection-checklist }
 
-<div align="center"><em>Tableau : Liste de vérification pour le choix des outils</em></div>
+<div align="center"><em>Tableau : liste de contrôle pour le choix des outils</em></div>
 
 <div align="center" markdown>
 

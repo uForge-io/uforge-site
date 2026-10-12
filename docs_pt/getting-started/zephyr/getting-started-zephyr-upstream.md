@@ -65,7 +65,7 @@ Compile o exemplo padrão Hello World do Zephyr:
 west build -b sf32lb52_devkit_lcd samples/hello_world --pristine
 ```
 
-Uma compilação bem-sucedida confirma que o alvo da placa e a toolchain estão disponíveis no workspace. Ela não valida todos os periféricos da placa.
+Uma compilação bem-sucedida confirma que o alvo da placa e a cadeia de ferramentas estão disponíveis no workspace. Ela não valida todos os periféricos da placa.
 
 ## Gravar a placa { #flash-the-board }
 
@@ -98,8 +98,8 @@ Use a tabela de recursos compatíveis da documentação upstream da placa e o [c
 | Sintoma | Verificação |
 |:--------|:------------|
 | `west boards` não mostra o alvo SF32 | Confirme que o workspace foi inicializado com o Zephyr upstream v4.3.0 ou posterior e que `west update` foi concluído. |
-| A compilação falha antes de compilar | Confirme que o ambiente Python está ativo, que o Zephyr SDK para ARM Cortex-M está instalado e que os requisitos do v4.3.0 foram instalados. |
-| A placa compila, mas não grava | Confirme que `sftool` está instalado e no `PATH`, que a porta serial selecionada está correta e que a placa está no modo de download serial. |
+| A compilação falha antes de começar | Confirme que o ambiente Python está ativo, que o Zephyr SDK para ARM Cortex-M está instalado e que os requisitos do v4.3.0 foram instalados. |
+| O firmware compila, mas a gravação falha | Confirme que `sftool` está instalado e no `PATH`, que a porta serial selecionada está correta e que a placa está no modo de download serial. |
 | Não há saída serial | Confira `usart1`, `1000000` baud, a conexão USB-UART e se outro terminal está usando a porta. |
 | Um exemplo de periférico falha | Consulte a tabela de recursos compatíveis e a configuração do exemplo; o alvo básico da placa não habilita necessariamente todos os periféricos. |
 
@@ -108,5 +108,5 @@ Use a tabela de recursos compatíveis da documentação upstream da placa e o [c
 ## Antes da integração ao produto { #before-product-integration }
 
 - Confira a tabela de recursos compatíveis da placa upstream e a configuração do exemplo que pretende usar.
-- Valide as interfaces, o desempenho, o uso de memória e o consumo de energia necessários na placa-alvo com a configuração do produto. Uma compilação correta do Hello World é apenas um teste básico da toolchain.
+- Valide as interfaces, o desempenho, o uso de memória e o consumo de energia necessários na placa-alvo com a configuração do produto. Uma compilação correta do Hello World é apenas um teste básico da cadeia de ferramentas.
 - Compare o escopo de recursos do alvo upstream com o [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) se o projeto depender de um recurso não listado ou não validado para esse alvo Zephyr.

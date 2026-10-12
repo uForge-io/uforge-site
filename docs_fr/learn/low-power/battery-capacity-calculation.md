@@ -75,7 +75,7 @@ Le fichier `battery_table.c` fourni par défaut dans le répertoire de la carte 
 Utilisez des courbes distinctes : à niveau de charge identique, la tension de la cellule n'est pas la même en charge et en décharge. Ne remplacez pas la courbe de la cellule utilisée par une courbe générique de batterie lithium à 4,2 V au seul motif que leur chimie nominale est identique.
 
 !!! warning "Vérifier l'échelle de tension du SDK et de la carte utilisés"
-    La documentation SiFli publiée présente une incohérence d'unités : `voltage_mv` et les seuils de filtrage sont indiqués en mV, mais l'exemple transmet `38000` pour `3.8 V` et la courbe d'exemple utilise `41808` pour `4.18 V`. Ces valeurs sont cohérentes avec une échelle de 0,1 mV, mais la documentation ne précise pas explicitement cette échelle. Il s'agit donc d'une déduction à partir des nombres, et non d'une garantie de l'API. Avant d'utiliser le calculateur, vérifiez le chemin de conversion ADC, la table de batterie et les comparaisons de seuil dans la révision exacte du SDK et la configuration de la carte.
+    La documentation SiFli publiée présente une incohérence d'unités : `voltage_mv` et les seuils de filtrage sont indiqués en mV, mais l'exemple transmet `38000` pour `3,8 V` et la courbe d'exemple utilise `41808` pour `4,18 V`. Ces valeurs sont cohérentes avec une échelle de 0,1 mV, mais la documentation ne précise pas explicitement cette échelle. Il s'agit donc d'une déduction à partir des nombres, et non d'une garantie de l'API. Avant d'utiliser le calculateur, vérifiez le chemin de conversion ADC, la table de batterie et les comparaisons de seuil dans la révision exacte du SDK et la configuration de la carte.
 
     La lecture ADC, la table de courbe sélectionnée et les seuils de filtrage doivent utiliser des échelles compatibles. Le guide donne les valeurs littérales `50` et `30` pour les seuils et les indique en mV ; ne les convertissez pas en vous fondant uniquement sur les exemples de tension. Vérifiez comment la révision du SDK utilisée interprète et compare chaque champ. Ne modifiez pas uniquement l'échelle de la lecture ADC en laissant la table ou les seuils dans une autre échelle.
 
@@ -124,12 +124,12 @@ uint8_t battery_calculator_get_percent(battery_calculator_t *calc,
 
 | Étape | Action |
 | --- | --- |
-| 1 | Configurer l'ADC de la carte, le type de chargeur, la broche de détection et sa polarité. |
-| 2 | Définir dans `battery_table.c` des courbes de charge et de décharge validées. |
+| 1 | Configurez l'ADC de la carte, le type de chargeur, la broche de détection et sa polarité. |
+| 2 | Définissez dans `battery_table.c` des courbes de charge et de décharge validées. |
 | 3 | Initialiser `battery_calculator_t` avec `battery_calculator_config_t`. |
-| 4 | Mesurer la tension de la batterie par le chemin ADC configuré. |
-| 5 | Vérifier que tension, tables et seuils emploient la même échelle avant de passer la tension à `battery_calculator_get_percent()`. |
-| 6 | Utiliser le résultat filtré dans l'interface utilisateur, la gestion du niveau de batterie faible et la télémétrie du produit. |
+| 4 | Mesurez la tension de la batterie par le chemin ADC configuré. |
+| 5 | Vérifiez que tension, tables et seuils emploient la même échelle avant de passer la tension à `battery_calculator_get_percent()`. |
+| 6 | Utilisez le résultat filtré dans l'interface utilisateur, la gestion du niveau de batterie faible et la télémétrie du produit. |
 
 </div>
 

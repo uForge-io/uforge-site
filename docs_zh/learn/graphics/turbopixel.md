@@ -11,7 +11,7 @@ tags:
 
 **TurboPixel** 是一种固定压缩比的有损压缩格式，用于支持该功能的 SF32 芯片上渲染完成后的最终位图，属于显示路径的一部分：**extDMA** 压缩位图，显示控制器在将像素传输到面板时解压 TurboPixel。
 
-TurboPixel 并非源资源存储格式，也不能替代 [eZip](ezip.md)。eZip 将源资源无损压缩后存储，使用时再读取、解码；TurboPixel 则在渲染完成后压缩最终位图，减少帧缓冲区的存储占用和显示读取流量。
+TurboPixel 并非源资源存储格式，也不能替代 [eZip](ezip.md)。eZip 对源资源进行无损压缩，再从存储器中读取；TurboPixel 则压缩渲染完成后的最终位图，以减少帧缓冲区流量所需的 PSRAM 容量和 PSRAM 带宽。
 
 TurboPixel 相对于 eZip、ePicasso 和显示控制器的完整图形流程，请参阅[图形概览](overview.md#sf32-graphics-flow)。本文重点说明 TurboPixel 的压缩特性、集成权衡和可用性。
 
@@ -90,7 +90,7 @@ extDMA 的源地址、目标地址和传输长度均须按 4 字节对齐。应�
 
 ## SF32 系列中的可用性 { #availability-in-the-sf32-family }
 
-官方资料和 SDK 确认的 TurboPixel 支持情况如下：
+以下 SF32 系列在文档中有 TurboPixel 的记载：
 
 <div align="center"><em>TurboPixel 支持情况（文档记载）</em></div>
 
@@ -117,7 +117,7 @@ extDMA 的源地址、目标地址和传输长度均须按 4 字节对齐。应�
 - 官方资料记载 SF32LB55x、SF32LB56x 和 SF32LB58x 支持 TurboPixel。当前源码在启用 extDMA 时为 55x 定义压缩图层能力，但注释指出 LCPU 路径尚未启用，已发布的 SDK 功能表也将 55x 标为不支持；因此应将 55x 视为有条件支持，并验证完整显示链路。当前源码排除 SF32LB52x 和 SF32LB57x；其他目标也应逐一确认。
 - TurboPixel 与 eZip 相辅相成：eZip 是无损资源压缩，TurboPixel 是最终位图的有损压缩。
 
-## 原始参考资料 { #primary-references }
+## 主要参考资料 { #primary-references }
 
 - [extDMA 指南](https://github.com/OpenSiFli/SiFli-SDK/blob/121aa105565ee6bcbab6a15c1cb3b5571f5cc8e5/docs/source/zh_CN/hal/ext_dma.md)
 - [压缩大小计算实现](https://github.com/OpenSiFli/SiFli-SDK/blob/121aa105565ee6bcbab6a15c1cb3b5571f5cc8e5/drivers/Include/sifli_cmpr.h)
@@ -126,4 +126,4 @@ extDMA 的源地址、目标地址和传输长度均须按 4 字节对齐。应�
 - [OpenSiFli 当前 LCDC 压缩图层条件](https://github.com/OpenSiFli/SiFli-SDK/blob/main/drivers/Include/bf0_hal_lcdc.h)
 - [生成版 SDK LCDC 功能表](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/hal/lcdc.html)
 - [LCDC 图层实现](https://github.com/OpenSiFli/SiFli-SDK/blob/121aa105565ee6bcbab6a15c1cb3b5571f5cc8e5/drivers/hal/bf0_hal_lcdc.c)
-- 产品简介: [SF32LB55x](https://downloads.sifli.com/silicon/PB0001-SF32LB55x-Product%20Brief%20V1p3.pdf), [SF32LB56x](https://downloads.sifli.com/silicon/PB0056-SF32LB56x-Product%20Brief%20V1p1.pdf), [SF32LB58x](https://downloads.sifli.com/silicon/PB0058-SF32LB58x-Product%20Brief%20V0p7.pdf)
+- 产品简介：[SF32LB55x](https://downloads.sifli.com/silicon/PB0001-SF32LB55x-Product%20Brief%20V1p3.pdf)、[SF32LB56x](https://downloads.sifli.com/silicon/PB0056-SF32LB56x-Product%20Brief%20V1p1.pdf)、[SF32LB58x](https://downloads.sifli.com/silicon/PB0058-SF32LB58x-Product%20Brief%20V0p7.pdf)

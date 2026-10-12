@@ -15,7 +15,7 @@ O GPADC é o conversor analógico-digital (ADC) de uso geral da SiFli, destinado
 
 As notas de aplicação do SDK para SF32LB52x, SF32LB55x, SF32LB56x e SF32LB58x usam oito canais ADC, de `GPADC_CH0` a `GPADC_CH7`, para fontes analógicas como saídas de sensores e medições da tensão da bateria. O mapa de canais ADC do SDK para SF32LB57x define doze canais: `PA28`–`PA38` correspondem a `GPADC_CH0`–`GPADC_CH10`, e o canal de detecção da bateria é `GPADC_CH11` (identificado como `BAT` no mapa do SDK). O guia de hardware do SF32LB57x identifica o sinal correspondente no encapsulamento como `VBAT` ou `VBATS`, conforme a variante de alimentação. Uma leitura válida depende do canal escolhido, da rede de entrada e da calibração de software específica do dispositivo.
 
-O SF32LB52x tem uma rota dedicada de detecção da bateria em `GPADC_CH7` (`BAT`): o exemplo do SDK informa que esse canal é conectado a VBAT por meio de um divisor interno e que o fator de conversão de tensão da bateria do SDK (`vbat_factor`) é aplicado à leitura. Já `GPADC_CH7` corresponde ao PAD externo `PB32` no SF32LB56x e a `PB39` no SF32LB58x. O canal de detecção da bateria do SF32LB57x é `GPADC_CH11`; use o sinal `VBAT` ou `VBATS` correspondente à variante de alimentação e respeite os limites próprios desse domínio. O fato de um canal ter uma conexão de placa relacionada à bateria não o torna um canal dedicado de bateria integrado ao chip.
+O SF32LB52x tem uma rota dedicada de detecção da bateria em `GPADC_CH7` (`BAT`): o exemplo do SDK informa que esse canal é conectado a VBAT por meio de um divisor interno e que o fator de conversão de tensão da bateria do SDK é aplicado à leitura. Já `GPADC_CH7` corresponde ao PAD externo `PB32` no SF32LB56x e a `PB39` no SF32LB58x. O canal de detecção da bateria do SF32LB57x é `GPADC_CH11`; use o sinal `VBAT` ou `VBATS` correspondente à variante de alimentação e respeite os limites próprios desse domínio. O fato de um canal ter uma conexão de placa relacionada à bateria não o torna um canal dedicado de bateria integrado ao chip.
 
 ## Características do ADC e rede de entrada { #adc-characteristics-and-input-network }
 
@@ -72,7 +72,7 @@ Para a medição externa da bateria no SF32LB55x, o FAQ de ADC do OpenSiFli most
 
 No esquemático de referência do SF32LB55x, a linha VBAT passa pelo resistor R125 (1 MΩ) até o nó `PB10_BAT_DET_ADC`. O resistor R126 (220 kΩ) e o capacitor C118 (0,1 µF) conectam esse nó ao terra em paralelo. Trate esses valores como referência e confirme-os no esquemático e nos limites elétricos do dispositivo de destino.
 
-![Esquema do divisor externo para medição da tensão da bateria no SF32LB55x](../../../../assets/develop/adc/adc004.png){ loading="lazy" }
+![Esquemático do divisor externo para medição da tensão da bateria no SF32LB55x](../../../../assets/develop/adc/adc004.png){ loading="lazy" }
 <div align="center"><em>Figura: Caminho externo de amostragem da tensão da bateria no SF32LB55x.</em></div>
 
 ## Alimentação analógica e referência { #analog-supply-and-reference }
@@ -162,7 +162,7 @@ O guia representa a conversão por uma relação linear:
 3. Use `sifli_adc_calibration` para calcular e armazenar o ratio e o offset.
 4. Converta as leituras brutas posteriores com esses valores de calibração e considere a relação do divisor ao informar a tensão da fonte.
 
-A implementação de referência define `ADC_RATIO_ACCURATE` como 1000 e inicializa `adc_vol_offset` e `adc_vol_ratio` com 200 e 3930, respectivamente. Esse helper legado ilustra o cálculo linear, mas não substitui o fluxo de calibração disponível na versão do SDK do dispositivo de destino. Quando houver suporte, use a API de calibração do HAL ou do driver do dispositivo.
+A implementação de referência define `ADC_RATIO_ACCURATE` como 1000 e inicializa `adc_vol_offset` e `adc_vol_ratio` com 200 e 3930, respectivamente. Essa função auxiliar legada ilustra o cálculo linear, mas não substitui o fluxo de calibração disponível na versão do SDK do dispositivo de destino. Quando houver suporte, use a API de calibração do HAL ou do driver do dispositivo.
 
 ### Faixas de calibração do SF32LB55x { #sf32lb55x-calibration-ranges }
 

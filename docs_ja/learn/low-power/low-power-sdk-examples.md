@@ -15,14 +15,14 @@ SiFli-SDKの電源管理サンプルは、測定や統合の基準となるも�
 
 ## 目的に合った電源管理サンプルを選ぶ { #start-with-the-right-power-example }
 
-<div align="center"><em>表: 設計課題別 SiFli-SDK電源管理サンプル</em></div>
+<div align="center"><em>表: 設計課題別SiFli-SDK電源管理サンプル</em></div>
 
 <div align="center" markdown>
 
 | 設計目的 | 参照するサンプル | 確認に役立つ点 | 製品で再確認する項目 |
 |:-----------------|:-----------|:------------------------|:-------------------------|
 | 基本的な電源管理状態への遷移とウェイクアップ動作を確認する | [電源管理サンプル (PM Example)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/classical/README.html) | SDKの基本的な電源管理設定とスリープ/ウェイクアップの流れ | 実際のウェイクアップ要因、クロック依存関係、保持状態、各ドライバーが要求するPM状態 |
-| 低消費電力時のGPIO動作を評価する | [GPIO消費電力測定 (GPIO Power Consumption Test)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/gpio/README.html) | タイマーによる定期ウェイクアップ、GPIOアクセス、ウェイクアップ/スリープ/I/O動作の違い | 外付けプル抵抗、電源オフ中の周辺機器、ピンマルチプレクサ、電源レール、意図しないリーク経路 |
+| 低消費電力時のGPIO動作を評価する | [GPIO消費電力測定 (GPIO Power Consumption Test)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/gpio/README.html) | タイマーによる定期ウェイクアップ、GPIOアクセス、ウェイクアップ/スリープ/I/O動作の違い | 外付けプル抵抗、電源オフ中の周辺機器、ピン多重化、電源レール、意図しないリーク経路 |
 | 演算処理とシャットダウン動作を切り分ける | [プロセッサー消費電力測定 (Processor Power Consumption Test)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/coremark/README.html) | CPUベンチマーク/ループ処理、シャットダウン、RTCウェイクアップ、ピンウェイクアップ | コア周波数、ワークロード、ウェイクアップピンの極性、ボード固有の信号割り当て、電源電圧 |
 | Bluetoothシナリオを測定する | [BLEアドバタイズ／接続の消費電力測定 (BLE Broadcast and Connection Power Consumption Test)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/ble/README.html) または [BLE/BT消費電力測定 (BLE/BT Power Consumption Test)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) | アドバタイズ、接続、Bluetooth動作を測定シナリオとして評価 | RF環境、送信出力、アドバタイズ間隔と接続間隔、相手機器の動作、アンテナ、アプリケーションのコールバック |
 | AMOLEDの画面オフと常時表示ポリシーを比較する | [AMOLED消費電力測定 (AMOLED Power Consumption Test)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/AMOLED/README.html) | ディスプレイ更新、画面オフ時のスリープ、常時表示の比較 | 実際のパネル、輝度、更新ポリシー、ディスプレイ電源、実際の使用時間の割合 |
@@ -35,18 +35,18 @@ SiFli-SDKの電源管理サンプルは、測定や統合の基準となるも�
 
 ### 対象ボードを確認する { #verify-the-board-scope }
 
-以下では、各サンプルの公式ガイドに記載されたボードと、SiFli-SDKの現行GCCビルド設定にあるターゲットを分けて示します。ビルドマトリクスに含まれることは、そのターゲット向けのビルド設定があることを示すだけで、そのボードでガイド記載の消費電力値を実測したことを意味しません。下記の設定リンクは現在の `main` ブランチを参照しています。別のSDKリビジョンを使う場合は、そのチェックアウトにある `build_config_gcc.yaml` を確認してから `scons --board` のターゲットを選んでください。測定を再現する場合はガイド指定のハードウェア構成を使い、ドキュメントURLのチップファミリー名だけからファミリー全体の対応を推定しないでください。
+以下では、各サンプルの公式ガイドに記載されたボードと、SiFli-SDKの現行GCCビルド設定にあるターゲットを分けて示します。ビルドマトリクスに含まれることは、そのターゲット向けのビルド設定があることを示すだけで、そのボードでガイド記載の消費電力値を実測したことを意味しません。下記の設定リンクは現在の`main`ブランチを参照しています。別のSDKリビジョンを使う場合は、そのチェックアウトにある`build_config_gcc.yaml`を確認してから`scons --board`のターゲットを選んでください。測定を再現する場合はガイド指定のハードウェア構成を使い、ドキュメントURLのチップファミリー名だけからファミリー全体の対応を推定しないでください。
 
-- **PM Example**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/classical)）：ガイドには `sf32lb56-devkit-lcd_n16r12n1`、`eh-lb551`、`sf32lb52-lcd_n16r8`、`sf32lb58-lcd_n16r64n4` が記載されています。現行GCC設定のPMプロジェクトでは `sf32lb56-lcd_n16r12n1`（ガイドの `sf32lb56-devkit-lcd_n16r12n1` とは異なる識別子）、`eh-lb551`、`sf32lb52-lcd_n16r8`、`sf32lb58-lcd_n16r64n4` が使われ、さらに `sf32lb52-core_n16r16` も含まれます。名前の異なるターゲットを、ボード対応を確認せずに同一視しないでください。
-- **GPIO Power Consumption Test**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/gpio)）：ガイドと現行GCCビルド設定の両方に `sf32lb52-core_n16r16` が記載されています。
-- **Processor Power Consumption Test**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/coremark)）：ガイドには `eh-lb551`、`eh-lb555`、`ec-lb583`、`ec-lb587`、`eh-lb561`、`eh-lb563`、`eh-lb523` が記載されています。現行GCCビルド設定では `default_boards` セットが使われます。現在のビルドターゲット名は[ビルド設定](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml)で確認できます。ガイドのボード名と `default_boards` 内のターゲット名は一対一で対応していません。名前から推測せず、使用するSDKリビジョンでボードの対応関係を確認してください。また、ビルド対象の範囲は、ガイドの消費電力測定がセット内の全ボードを対象としていることを意味しません。
-- **BLE Broadcast and Connection Power Consumption Test**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/ble)）：ガイドに記載されたボード名は `eh-lb551` と `eh-lb555` ですが、現行GCC設定のビルドターゲット名は `eh-lb551_hcpu` と `eh-lb555_hcpu` です。
-- **BLE/BT Power Consumption Test**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/bt)）：ガイドに記載されたボードは `ec-lb583`、`ec-lb587`、`eh-lb561`、`eh-lb563`、`eh-lb523` です。現行GCC設定では `bt_boards` セットが使われます。正確なビルドターゲット名は[設定](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml)で確認でき、一部は `_hcpu` で終わります。このプロジェクトの別エントリーには `sf32lb56-wlan-core_a128r12n1` と `sf32lb56-wlan-core_n16r12n1` も含まれます。ガイドのボード名とビルドターゲット名は、対応関係を確認せずに置き換えないでください。
-- **AMOLED Power Consumption Test**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/AMOLED)）：ガイドと現行GCCビルド設定の両方に `sf32lb52-core_n16r16` が記載されています。
-- **JDI Power Consumption Test**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/jdi)）：ガイドと現行GCCビルド設定の両方に `sf32lb52-core_n16r16` が記載されています。
-- **GUI_PM Low-Power Example Guide**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/gui_pm)）：ガイドと現行GCCビルド設定の両方に `sf32lb52-lchspi-ulp` が記載されています。
-- **Power Consumption Test Example — Screen Refresh Scenario**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/lcd_refresh)）：ガイドのビルド例は `sf32lb52-core_n16r16` です。現行GCCビルドマトリクスにはこのプロジェクトが記載されていませんが、この省略によって、公開ガイドとソースサンプルがなくなるわけではありません。
-- **Raise Wrist to Light Up Screen**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/raise_wrist)）：ガイドと現行GCCビルド設定の両方に `sf32lb52-lchspi-ulp` が記載されています。
+- **PM Example**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/classical)）：ガイドには`sf32lb56-devkit-lcd_n16r12n1`、`eh-lb551`、`sf32lb52-lcd_n16r8`、`sf32lb58-lcd_n16r64n4`が記載されています。現行GCC設定のPMプロジェクトでは`sf32lb56-lcd_n16r12n1`（ガイドの`sf32lb56-devkit-lcd_n16r12n1`とは異なる識別子）、`eh-lb551`、`sf32lb52-lcd_n16r8`、`sf32lb58-lcd_n16r64n4`が使われ、さらに`sf32lb52-core_n16r16`も含まれます。名前の異なるターゲットを、ボード対応を確認せずに同一視しないでください。
+- **GPIO Power Consumption Test**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/gpio)）：ガイドと現行GCCビルド設定の両方に`sf32lb52-core_n16r16`が記載されています。
+- **Processor Power Consumption Test**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/coremark)）：ガイドには`eh-lb551`、`eh-lb555`、`ec-lb583`、`ec-lb587`、`eh-lb561`、`eh-lb563`、`eh-lb523`が記載されています。現行GCCビルド設定では`default_boards`セットが使われます。現在のビルドターゲット名は[ビルド設定](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml)で確認できます。ガイドのボード名と`default_boards`内のターゲット名は一対一で対応していません。名前から推測せず、使用するSDKリビジョンでボードの対応関係を確認してください。また、ビルド対象の範囲は、ガイドの消費電力測定がセット内の全ボードを対象としていることを意味しません。
+- **BLE Broadcast and Connection Power Consumption Test**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/ble)）：ガイドに記載されたボード名は`eh-lb551`と`eh-lb555`ですが、現行GCC設定のビルドターゲット名は`eh-lb551_hcpu`と`eh-lb555_hcpu`です。
+- **BLE/BT Power Consumption Test**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/bt)）：ガイドに記載されたボードは`ec-lb583`、`ec-lb587`、`eh-lb561`、`eh-lb563`、`eh-lb523`です。現行GCC設定では`bt_boards`セットが使われます。正確なビルドターゲット名は[設定](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml)で確認でき、一部は`_hcpu`で終わります。このプロジェクトの別エントリーには`sf32lb56-wlan-core_a128r12n1`と`sf32lb56-wlan-core_n16r12n1`も含まれます。ガイドのボード名とビルドターゲット名は、対応関係を確認せずに置き換えないでください。
+- **AMOLED Power Consumption Test**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/AMOLED)）：ガイドと現行GCCビルド設定の両方に`sf32lb52-core_n16r16`が記載されています。
+- **JDI Power Consumption Test**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/jdi)）：ガイドと現行GCCビルド設定の両方に`sf32lb52-core_n16r16`が記載されています。
+- **GUI_PM Low-Power Example Guide**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/gui_pm)）：ガイドと現行GCCビルド設定の両方に`sf32lb52-lchspi-ulp`が記載されています。
+- **Power Consumption Test Example — Screen Refresh Scenario**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/lcd_refresh)）：ガイドのビルド例は`sf32lb52-core_n16r16`です。現行GCCビルドマトリクスにはこのプロジェクトが記載されていませんが、この省略によって、公開ガイドとソースサンプルがなくなるわけではありません。
+- **Raise Wrist to Light Up Screen**（[SDKソース](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/raise_wrist)）：ガイドと現行GCCビルド設定の両方に`sf32lb52-lchspi-ulp`が記載されています。
 
 ## 測定に含める回路の範囲をそろえる { #measure-at-the-right-electrical-boundary }
 
@@ -81,7 +81,7 @@ SiFli-SDKの電源管理サンプルは、測定や統合の基準となるも�
 - [GUI_PM低消費電力サンプルガイド](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/gui_pm/README.html)では、UIのライフサイクル設計と電源管理動作の関係を確認できます。
 - [画面更新シナリオ](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/lcd_refresh/README.html)では、ディスプレイ更新自体の負荷に焦点を当てます。
 
-これらのサンプルを通じて、製品に関する「どのイベントで実際に画素を変更する必要があるか」「パネルのどの範囲を更新すべきか」という問いを検討できます。その答えをバッファリング方式や部分更新の方針に反映するには、[グラフィックス概要](../graphics/overview.md)と[ディスプレイコントローラ](../graphics/display-controller.md)を参照してください。
+これらのサンプルを通じて、製品に関する「どのイベントで実際に画素を変更する必要があるか」「パネルのどの範囲を更新すべきか」という問いを検討できます。その答えをバッファリング方式や部分更新の方針に反映するには、[グラフィックス概要](../graphics/overview.md)と[ディスプレイコントローラー](../graphics/display-controller.md)を参照してください。
 
 ## 手首を上げて画面を点灯する一連の動作を評価する { #raise-to-wake-as-a-complete-scenario }
 

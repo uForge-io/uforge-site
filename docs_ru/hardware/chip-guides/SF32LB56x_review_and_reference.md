@@ -1,6 +1,6 @@
 ---
 icon: lucide/clipboard-check
-description: "Чек-лист проверки проекта, связанные документы и справочные материалы, приложения и история версий руководства по аппаратной разработке SF32LB56x."
+description: "Контрольный список проверки проекта, связанные документы и справочные материалы, приложения и история версий руководства по аппаратной разработке SF32LB56x."
 tags:
     - Аппаратура
     - Микросхема
@@ -11,7 +11,7 @@ hide:
 # Руководство по аппаратной разработке SF32LB56x — чек-лист проверки проекта и справочные материалы { #sf32lb56x-hardware-design-guide-design-review-checklist-and-references }
 
 !!! note "Часть руководства по аппаратной разработке SF32LB56x"
-    На этой странице рассматриваются разделы 7–10: чек-лист проверки проекта, связанные документы и справочные материалы, приложения и история версий. Вернитесь к [рекомендациям по разводке PCB](SF32LB56x_pcb_layout.md).
+    На этой странице рассматриваются разделы 7–10: контрольный список проверки проекта, связанные документы и справочные материалы, приложения и история версий. Вернитесь к [рекомендациям по разводке PCB](SF32LB56x_pcb_layout.md).
 
 ## 7. Чек-лист проверки проекта { #7-design-review-checklist }
 
@@ -21,7 +21,7 @@ hide:
 - [ ] Проверьте параметры, размещение и трассировку кварцев на 48 MHz и 32,768 kHz.
 - [ ] Проверьте согласующую RF-цепь и размещение антенны; подготовьте план настройки.
 - [ ] Убедитесь, что функции дисплея, памяти, аудио, датчиков, PBR, UART/I2C, GPTIM, отладки и производственных выводов не конфликтуют при назначении выводов.
-- [ ] Завершите планирование fanout для QFN или BGA, стека слоев, контроля импеданса и стратегии ESD; проверьте DRC.
+- [ ] Завершите планирование вывода трасс из корпуса QFN или BGA, стека слоёв, контроля импеданса и стратегии ESD; проверьте DRC.
 - [ ] Проверьте на практике программирование микросхем на производстве и процесс калибровки кварцев.
 
 ## 8. Связанные документы и справочные материалы { #8-related-documents-and-references }
@@ -30,19 +30,19 @@ hide:
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-lines: __[Руководство по аппаратному применению SF32LB56xU]__
-- :fontawesome-solid-file-lines: __[Руководство по аппаратному применению SF32LB56xV]__
-- :fontawesome-solid-file-excel: __[Список одобренных поставщиков SiFli (AVL)]__
-- :fontawesome-brands-wikipedia-w: __[Указатель руководств SiFli по аппаратной разработке микросхем (Wiki)]__
+- :fontawesome-solid-file-lines: __[Руководство по аппаратному применению SF32LB56xU][SF32LB56xU Hardware Application Note]__
+- :fontawesome-solid-file-lines: __[Руководство по аппаратному применению SF32LB56xV][SF32LB56xV Hardware Application Note]__
+- :fontawesome-solid-file-excel: __[Список одобренных поставщиков SiFli (AVL)][SiFli Approved Vendor List (AVL)]__
+- :fontawesome-brands-wikipedia-w: __[Указатель руководств SiFli по аппаратной разработке микросхем (Wiki)][SiFli Chip Hardware Design Guide Index (Wiki)]__
 
 </div>
 
 [Контрольный список схемы](SF32LB56x_schematic_checklist.md) (раздел 5.8) и раздел 6.3 [рекомендаций по разводке PCB](SF32LB56x_pcb_layout.md) воспроизводят пункт за пунктом один и тот же документ *SF32LB56x Schematic & PCB Checklist* (V1.0, 2026-01-21), дополняя его соответствующими рекомендациями по схемотехнике и разводке платы.
 
-[Руководство по аппаратному применению SF32LB56xU]: https://wiki.sifli.com/en/hardware/SF32LB56xU-HW-Application.html
-[Руководство по аппаратному применению SF32LB56xV]: https://wiki.sifli.com/en/hardware/SF32LB56xV-HW-Application.html
-[Список одобренных поставщиков SiFli (AVL)]: ../cad-components/sifli-approved-vendor-list.md
-[Указатель руководств SiFli по аппаратной разработке микросхем (Wiki)]: https://wiki.sifli.com/hardware/index.html
+[SF32LB56xU Hardware Application Note]: https://wiki.sifli.com/en/hardware/SF32LB56xU-HW-Application.html
+[SF32LB56xV Hardware Application Note]: https://wiki.sifli.com/en/hardware/SF32LB56xV-HW-Application.html
+[SiFli Approved Vendor List (AVL)]: ../cad-components/sifli-approved-vendor-list.md
+[SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
 ## 9. Приложения { #9-appendices }
 

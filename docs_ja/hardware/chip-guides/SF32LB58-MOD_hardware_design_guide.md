@@ -8,13 +8,13 @@ tags:
     - モジュール
 ---
 
-# SF32LB58-MOD ハードウェア設計ガイド { #sf32lb58-mod-hardware-design-guide }
+# SF32LB58-MODハードウェア設計ガイド { #sf32lb58-mod-hardware-design-guide }
 
 ## 1. 概要 { #1-overview }
 
-**SF32LB58-MOD**は、SiFliのSF32LB586VDD36チップを搭載した汎用・低消費電力Bluetooth MCUモジュールです。このチップには、最大240 MHzで動作する3コアのArm Cortex-M33 STAR-MC1プロセッサが搭載されています。モジュールには48 MHz水晶振動子が実装され、32.768 kHz水晶振動子はオプションです。SKUに応じてHPI-PSRAM、QSPI-NOR/NAND Flash、またはeMMCストレージも搭載します。表面実装型の138ピンモジュールで、寸法は24 × 24 × 3.1 mmです。
+**SF32LB58-MOD**は、SiFliのSF32LB586VDD36チップを搭載した汎用・低消費電力Bluetooth MCUモジュールです。このチップには、最大240 MHzで動作する3コアのArm Cortex-M33 STAR-MC1プロセッサーが搭載されています。モジュールには48 MHz水晶振動子が実装され、32.768 kHz水晶振動子はオプションです。SKUに応じてHPI-PSRAM、QSPI-NOR/NAND Flash、またはeMMCストレージも搭載します。表面実装型の138ピンモジュールで、寸法は24 × 24 × 3.1 mmです。
 
-このガイドでは、モジュールレベルのハードウェア統合について、ピン定義、周辺インターフェース、電気的特性、電源要件、リファレンス回路図、回路設計チェックリスト、外形寸法とPCBフットプリント、製品取り扱い要件を説明します。SiFliのデータシート **DS5802-SF32LB58-MOD V0.1**に基づいています。
+このガイドでは、モジュールレベルのハードウェア統合について、ピン定義、周辺インターフェース、電気的特性、電源要件、リファレンス回路図、回路図設計チェックリスト、外形寸法とPCBフットプリント、製品取り扱い要件を説明します。SiFliのデータシート **DS5802-SF32LB58-MOD V0.1**に基づいています。
 
 チップのアーキテクチャ（CPUコア、グラフィックス、メモリーサブシステム、周辺機能）の詳細は、[SF32LB58x](../../sf32-products/chips/SF32LB58x.md)および[SF32LB58xハードウェア設計ガイド](../chip-guides/SF32LB58x_hardware_design_guide.md)を参照してください。
 
@@ -47,13 +47,13 @@ tags:
 | :--- | :--- |
 | アプリケーションコア (HCPU/ACPU) | Arm Cortex-M33 STAR-MC1 × 2、最大240MHz |
 | 低消費電力コア (LCPU) | Arm Cortex-M33 STAR-MC1、最大96MHz |
-| SRAM | 2176KB (HCPU) + 512KB (ACPU) + 1056KB retention SRAM (LCPU) |
+| SRAM | 2176KB (HCPU) + 512KB (ACPU) + 1056KB リテンションSRAM (LCPU) |
 | 無線 | デュアルモードBluetooth 5.3（4.2/4.1/4.0との下位互換性あり、BLEおよびClassic Bluetooth対応） |
 | グラフィックス | ePicasso 2.0 + Vivante GCNanoUltraV、最大1024×1024、eZip 2.0、ハードウェアJPEGコーデック |
 | オーディオ | 24-bitオーディオDAC × 2、24-bitオーディオSigma-Delta ADC × 2 |
 | ストレージ | MPI × 5（パッケージ内蔵および外付け）、SD/SDIO/eMMC × 2 |
 | パッケージ | 138ピン、24 × 24 × 3.1 mm |
-| 電源 | VDD_3V3 (2.97–3.6V)、VDD_1V8 (1.7–1.95V)、VDDIOA/VDDIOA2/VDDIOB (1.7–3.6V) |
+| 電源 | VDD_3V3 (2.97～3.6V)、VDD_1V8 (1.7～1.95V)、VDDIOA/VDDIOA2/VDDIOB (1.7～3.6V) |
 | アンテナ | 型番に応じて、スタンプホールRF給電部またはIPEX互換コネクターを介して外部アンテナを接続 |
 | 動作温度 | -40～85°C |
 
@@ -98,7 +98,7 @@ tags:
 | BOOT_MODE | 11 | I | BOOT_MODE | I | 1: ダウンロードモード、0: ユーザーモード |
 | RSTN | 12 | I | RSTN | I | 1: ユーザーモード、0: リセットモード |
 | VDD_1V8 | 13 | P | 1.8V | P | MCUおよびパッケージ内蔵メモリーの主電源入力 |
-| GND | 14 | P | GND | P | グランド |
+| GND | 14 | P | GND | P | グラウンド |
 | VDDIOA | 15 | P | 1.8/3.3V | P | PAインターフェースのIO電源入力（PA00～PA11を除く） |
 | VDD_3V3 | 16 | P | 3.3V | P | MCUアナログ電源入力 |
 | PA13 | 17 | I/O/T | GPIO_A13 | O | GPIO_A13, GPTIM1_CH2, ATIM1_BKIN, LCDC1_DPI_DE |
@@ -130,7 +130,7 @@ tags:
 | PA23 | 43 | I/O/T | GPIO_A23 | O | GPIO_A23, PDM1_CLK, I2S1_BCK, USART2_CTS, I2C2_SDA, LCDC1_DPI_R1 |
 | PA22 | 44 | I/O/T | GPIO_A22 | O | GPIO_A22, PDM2_DATA, GPTIM1_ETR, ATIM2_CH1, LCDC1_DPI_R0, LCDC1_JDI_VST |
 | VDDIOA2 | 45 | P | 1.8/3.3V | P | PA00～PA11のIO電源入力 |
-| GND | 46 | P | GND | P | グランド |
+| GND | 46 | P | GND | P | グラウンド |
 | DSI_D0N | 47 | O | DSI_D0N | O | MIPI DSIデータレーン0、負極 |
 | DSI_D0P | 48 | O | DSI_D0P | P | MIPI DSIデータレーン0、正極 |
 | DSI_CLKN | 49 | O | DSI_CLKN | P | MIPI DSIクロックレーン、負極 |
@@ -149,13 +149,13 @@ tags:
 | PB18 | 62 | I/O/T | GPIO_B18 | I/O | GPIO_B18, USART5_TXD, SPI3_DI |
 | PB11 | 63 | I/O/T | SWDIO | I/O | SWDIO, GPIO_B11, USART4_TXD, GPTIM5_CH4 |
 | PB07 | 64 | I/O/T | SWCLK | O | SWCLK, GPIO_B07, USART4_RXD, GPTIM4_CH4 |
-| GND | 65 | P | GND | P | グランド |
+| GND | 65 | P | GND | P | グラウンド |
 | AU_DAC1N_OUT | 66 | AO | AU_DAC1N_OUT | AO | オーディオDAC1差動出力、負極 |
 | AU_DAC1P_OUT | 67 | AO | AU_DAC1P_OUT | AO | オーディオDAC1差動出力、正極 |
 | MIC_BIAS | 68 | P | MIC_BIAS | P | マイクバイアス電圧 |
 | AU_ADC1N_IN | 69 | AI | AU_ADC1N_IN | AI | オーディオADC1差動入力、負極 |
 | AU_ADC1P_IN | 70 | AI | AU_ADC1P_IN | AI | オーディオADC1差動入力、正極 |
-| GND | 71 | P | GND | P | グランド |
+| GND | 71 | P | GND | P | グラウンド |
 | BT_ANT | 72 | I/O | BT_ANT | I/O | Bluetooth RF信号の入出力 |
 | PB51 | 73 | I/O/T | GPIO_B51 | I/O | GPIO_B51, PMIC_SDA, USART4_CTS, USART5_CTS, LPCOMP1_OUT |
 | PB52 | 74 | I/O/T | GPIO_B52 | I/O | GPIO_B52, PMIC_SCLK, USART4_RTS, USART5_RTS, LPCOMP2_OUT |
@@ -217,7 +217,7 @@ tags:
 | AU_DAC2P_OUT | 130 | AO | AU_DAC2P_OUT | AO | オーディオDAC2差動出力、正極 |
 | AU_ADC2N_IN | 131 | AI | AU_ADC2N_IN | AI | オーディオADC2差動入力、負極 |
 | AU_ADC2P_IN | 132 | AI | AU_ADC2P_IN | AI | オーディオADC2差動入力、正極 |
-| GND | 133–138 | P | GND | P | グランド（6ピン） |
+| GND | 133～138 | P | GND | P | グラウンド（6ピン） |
 
 </div>
 
@@ -247,7 +247,7 @@ tags:
 
 **USB2.0 HS** — USB 2.0準拠の高速ホスト／デバイスポートを1系統備えます。エンドポイント設定、サスペンド／レジューム、セッション要求、ホストネゴシエーションプロトコルに対応し、High-speedおよびFull-speedで動作します。
 
-**MPI (Memory Peripheral Interface)** — SPI NOR Flash（1/2/4線、DTRモード）およびSPI NAND Flash（1/2/4線）に対応し、レジスタモードとメモリーマップモードをハードウェアで自動的に切り替えてアクセスします。本モジュールのMPI4インターフェースには外付けSPI NOR/NAND Flashを接続できます。
+**MPI (Memory Peripheral Interface)** — SPI NOR Flash（1/2/4線、DTRモード）およびSPI NAND Flash（1/2/4線）に対応し、レジスターモードとメモリーマップモードをハードウェアで自動的に切り替えてアクセスします。本モジュールのMPI4インターフェースには外付けSPI NOR/NAND Flashを接続できます。
 
 **SD/SDIO/eMMC** — SD 3.0およびeMMC 4.5.1に準拠し、チェーンDMAと1KB FIFOを備えたホストコントローラーとして動作します。SDSC/SDHC/SDXC/SDHSカード、UHS-1（SDR12/25/50/104/DDR50）、1線／4線／8線SDRモード、4線／8線DDRモードに対応します。
 
@@ -340,7 +340,7 @@ tags:
 
 | 記号 | 条件 | @1.8V | @3.8V | 単位 |
 | :--- | :--- | :-: | :-: | :-: |
-| I∆TX | TX power = 0dBm | 4.19 | 2.21 | mA |
+| I∆TX | TX出力 = 0dBm | 4.19 | 2.21 | mA |
 | I∆RX | — | 4.03 | 2.12 | mA |
 
 </div>
@@ -415,9 +415,9 @@ BLEの1Mbps/2Mbps/LR送受信性能およびClassic BT BR/EDR送受信性能の�
 
 これらを量産回路図の出発点とし、製品で使用する周辺機能に合わせてピンを選定してください。
 
-## 9. 回路設計チェックリスト { #9-schematic-design-checklist }
+## 9. 回路図設計チェックリスト { #9-schematic-design-checklist }
 
-<div align="center"><em>表 9-1: 回路設計チェックリスト</em></div>
+<div align="center"><em>表 9-1: 回路図設計チェックリスト</em></div>
 
 <div align="center" markdown>
 

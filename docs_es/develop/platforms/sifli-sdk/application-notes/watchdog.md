@@ -20,7 +20,7 @@ La documentación del SDK de SiFli trata el watchdog en dos niveles: el hardware
 </div>
 
 !!! warning "Ámbito de la guía de watchdog para RT-Thread"
-    La [guía de uso del watchdog](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/watchdog.html) se publica bajo la ruta `sf32lb52x`, pero su texto menciona explícitamente SF32LB55X. El tiempo predeterminado de 30 segundos, la alimentación desde el hilo IDLE, el comportamiento durante el reposo y la secuencia de reinicio de la aplicación que se describen abajo corresponden a la configuración 55x documentada allí; no son una garantía común a toda la familia SF32. Verifique estos detalles en la documentación y la configuración generada para el chip de destino.
+    La [guía de uso del watchdog](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/watchdog.html) se publica bajo la ruta `sf32lb52x`, pero su texto menciona explícitamente SF32LB55X. El tiempo predeterminado de 30 segundos, el refresco desde el hilo IDLE, el comportamiento durante la suspensión y la secuencia de reinicio de la aplicación que se describen abajo corresponden a la configuración 55x documentada allí; no son una garantía común a toda la familia SF32. Verifique estos detalles en la documentación y la configuración generada para el chip de destino.
 
 ## Activar y configurar el watchdog { #enable-and-configure-the-watchdog }
 
@@ -62,7 +62,7 @@ No añada un bucle de refresco incondicional que oculte una parada del planifica
 
 ## Secuencia de validación { #validation-sequence }
 
-1. Registre la familia del chip, la revisión del SDK, el tiempo de espera, el hilo responsable de refrescar el watchdog y el modo de suspensión.
+1. Registre la familia del chip, la revisión del SDK, el tiempo de espera, el responsable de refrescar el watchdog y el modo de suspensión.
 2. Compruebe que una carga de trabajo normal alcanza el punto de refresco previsto.
 3. Detenga deliberadamente el mecanismo de refresco y confirme el alcance del reinicio y el comportamiento de arranque esperados.
 4. Repita la prueba en cada modo de suspensión compatible, especialmente `Standby` y `Hibernate`.

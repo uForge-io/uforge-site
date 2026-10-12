@@ -39,12 +39,12 @@ O desenvolvimento USB envolve firmware, descritores, sistemas operacionais host,
 - Comportamento do dispositivo composto quando várias classes estão habilitadas.
 - Informe aos usuários que cabos USB somente para carga não permitem comunicação de dados.
 
-## Lista de verificação dos descritores { #descriptor-checklist }
+## Checklist dos descritores { #descriptor-checklist }
 
 - A titularidade do VID/PID está definida.
 - A string do produto está finalizada ou versionada.
 - O comportamento do número de série está definido.
-- Os valores de classe/subclasse/protocolo correspondem ao driver host previsto.
+- Os valores de classe/subclasse/protocolo correspondem ao driver do sistema host previsto.
 - As interfaces compostas permanecem estáveis entre versões do firmware.
 
 ## Exemplos do SDK { #sdk-examples }
@@ -66,7 +66,7 @@ O [índice oficial de exemplos CherryUSB do SiFli-SDK](https://docs.sifli.com/pr
 | Dispositivo | [MSC com disco RAM](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/device/msc/ram_disk/README.html) | Armazenamento em massa com RAM |
 | Dispositivo | [MSC com dois discos RAM](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/device/msc/ram_disk_dual/README.html) | Duas unidades lógicas armazenadas em RAM |
 | Dispositivo | [MSC com SD/eMMC](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/device/msc/sdcard_disk/README.html) | Armazenamento em massa com cartão SD ou eMMC |
-| Dispositivo | [MTP com DFS e disco RAM](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/device/mtp/README.html) | Dispositivo Media Transfer Protocol |
+| Dispositivo | [MTP com DFS e disco RAM](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/device/mtp/README.html) | Dispositivo MTP |
 | Host | [Host CDC ACM](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/host/cdc_acm_host/README.html) | Comunicação com um periférico CDC ACM |
 | Host | [Host HID](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/host/hid/README.html) | Conexão e leitura de um periférico HID |
 | Host | [Host MSC](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/host/msc_host/README.html) | Conexão de um periférico de armazenamento em massa USB |

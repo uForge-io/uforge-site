@@ -30,7 +30,7 @@ dfu_v2/
     └── loader/    PAN DFU loader
 ```
 
-Anwendung und Loader sind für jeden Übertragungsweg auf den gemeinsamen Einsatz ausgelegt. Beim Build der Anwendung bindet das SDK über die `AddDFU_*`-Logik in `building.py` den passenden Loader als Subprojekt ein; ein separater Build des Loaders ist nicht erforderlich. Im BLE-Beispiel kann die laufende Anwendung andere Firmware-Images als das HCPU-Firmware-Image aktualisieren; für ein HCPU-Firmware-Image muss zum Loader gewechselt werden.
+Anwendung und Loader sind für jeden Übertragungsweg auf den gemeinsamen Einsatz ausgelegt. Beim Build der Anwendung bindet das SDK über die `AddDFU_*`-Logik in `building.py` den passenden Loader als Subprojekt ein; bauen Sie diesen Loader nicht separat. Im BLE-Beispiel kann die laufende Anwendung andere Firmware-Images als das HCPU-Firmware-Image aktualisieren; für ein HCPU-Firmware-Image muss zum Loader gewechselt werden.
 
 ## Kompatibilität und Konfiguration { #compatibility-and-configuration }
 
@@ -47,7 +47,7 @@ USB CDC und BLE sind Push-Transportwege und schließen sich gegenseitig aus; wä
 | Kanal | Dokumentierter Update-Pfad | Typischer Einsatzbereich |
 | --- | --- | --- |
 | USB-CDC | Ein PC aktualisiert das Gerät über eine virtuelle serielle USB-Schnittstelle. | Produktion, Labor und kabelgebundene Wartung. |
-| BLE | Eine BLE-Anwendung im Peripheral-Modus empfängt ein Update. | Eine mobile App aktualisiert ein verbundenes Produkt. |
+| BLE | Eine Anwendung auf dem BLE-Peripheriegerät empfängt ein Update. | Eine mobile App aktualisiert ein verbundenes Produkt. |
 | Bluetooth PAN | Das Gerät lädt über ein Bluetooth-PAN-Netzwerk ein Update von einem HTTP-Server herunter. | Vernetzte Produkte, die ihr eigenes Update-Image abrufen. |
 
 </div>
@@ -57,7 +57,7 @@ USB CDC und BLE sind Push-Transportwege und schließen sich gegenseitig aus; wä
 - [ ] Der gewählte Transport passt zum verfügbaren Verbindungspfad des Produkts.
 - [ ] Die Anwendung und der passende Loader werden als ein einziger Update-Ablauf gebaut und getestet.
 - [ ] Das unterstützte Ziel-Board ist im README des jeweiligen Beispiels bestätigt.
-- [ ] Verhalten bei Update-Unterbrechungen, Wiederherstellung und Service im Werk sind für das Produkt definiert.
+- [ ] Verhalten bei Update-Unterbrechungen, Wiederherstellung und Service in der Fertigung sind für das Produkt definiert.
 - [ ] Authentizität und Integrität des Firmware-Images, Versionsrichtlinie und Partitionskapazität sind für das Produkt-Release geprüft.
 - [ ] Protokolle zu fehlgeschlagenen Updates lassen sich erfassen, ohne auf eine funktionsfähige Anwendung angewiesen zu sein.
 

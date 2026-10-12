@@ -8,7 +8,7 @@ tags:
 
 # Werkzeuge { #tools }
 
-Für die SF32-Entwicklung braucht es mehr als einen Compiler. Ein praxistauglicher Firmware-Workflow umfasst außerdem Werkzeuge zum Flashen, zur seriellen Überwachung, zur Crash-Analyse, zur Trace-Erfassung, zur Bildkonvertierung, zur HF-/Audio-Abstimmung und zur Programmierung in der Fertigung.
+Für die SF32-Entwicklung braucht es mehr als einen Compiler. Ein praxistauglicher Firmware-Workflow umfasst außerdem Werkzeuge zum Flashen, zur seriellen Überwachung, zur Crash-Analyse, zur Trace-Erfassung, zur Bildkonvertierung, zur RF-/Audio-Abstimmung und zur Programmierung in der Fertigung.
 
 Die folgende Tabelle ordnet typischen Entwicklungsaufgaben passende Werkzeuge zu. Sie ergänzt die jeweiligen Handbücher, ersetzt sie aber nicht. Hinweise zur Installation, genaue Befehle und werkzeugspezifische Verfahren finden Sie in der verlinkten Dokumentation.
 
@@ -27,7 +27,7 @@ Die folgende Tabelle ordnet typischen Entwicklungsaufgaben passende Werkzeuge zu
 | [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | Trace-/Log-Erfassung und UART-basierte Fehlersuche über die Debug-IP des Chips. |
 | [`Impeller`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/Impeller/Impeller_UM.html) | Firmware-Programmierung, Kalibrierung und PCBA-Tests in der Fertigung. |
 | [eZip-/Bildwerkzeuge](../../learn/graphics/ezip.md) | Asset-Konvertierung für komprimierte Grafik-Pipelines. |
-| [HF-/Audio-/Fertigungswerkzeuge](https://docs.sifli.com/projects/solution/6.tools/index.html) | Produktionskalibrierung, Test- und Abstimmungsworkflows. |
+| [RF-/Audio-/Fertigungswerkzeuge](https://docs.sifli.com/projects/solution/6.tools/index.html) | Produktionskalibrierung, Test- und Abstimmungsworkflows. |
 
 </div>
 
@@ -46,14 +46,14 @@ Halten Sie beide Wege in Ihrem Projekt dokumentiert, bis sich das Team auf einen
 
 Für die normale Entwicklung genügt ein serielles Terminal. Bei schwerwiegenden Fehlern erfassen Sie strukturierte Logs und Crash-Daten:
 
-- Ein vollständiges Boot-Log ab dem Reset sichern.
+- Ein vollständiges Startprotokoll ab dem Reset sichern.
 - Die exakten ELF-/Map-/Symbol-Dateien passend zum geflashten Image sichern.
 - Festhalten, ob RT-Thread-Shell, Zephyr-Shell oder Arduino-Debug-Modus aktiv war.
 - SiFli-Diagnosewerkzeuge für Assert-Dumps und Trace-Erfassung nutzen, sofern verfügbar.
 
 ## Asset- und Produktionswerkzeuge { #asset-and-production-tools }
 
-Grafikintensive Produkte sollten den Pfad zur Asset-Konvertierung dokumentieren, insbesondere bei eZip-Komprimierung oder hardwarebeschleunigter Grafik. Bei Produkten für die Serienfertigung sollten Werkzeuge für HF, Audio und Fertigung getrennt von Entwickler-Flash-Tools dokumentiert werden, damit das Fertigungspersonal nicht auf entwicklerspezifische Befehle angewiesen ist.
+Grafikintensive Produkte sollten den Pfad zur Asset-Konvertierung dokumentieren, insbesondere bei eZip-Komprimierung oder hardwarebeschleunigter Grafik. Bei Produkten für die Serienfertigung sollten Werkzeuge für RF, Audio und Fertigung getrennt von Entwickler-Flash-Tools dokumentiert werden, damit das Fertigungspersonal nicht auf entwicklerspezifische Befehle angewiesen ist.
 
 ## Checkliste zur Toolauswahl { #tool-selection-checklist }
 
@@ -76,7 +76,7 @@ Grafikintensive Produkte sollten den Pfad zur Asset-Konvertierung dokumentieren,
 ## Praktische Hinweise { #practical-advice }
 
 - Lernen Sie zunächst einen zuverlässigen Flash-Pfad, bevor Sie einen zweiten hinzufügen.
-- Sichern Sie für jedes Board nachweislich funktionierende serielle Logs.
+- Sichern Sie für jedes Board nachweislich funktionierende serielle Protokolle.
 - Verwenden Sie für die erste Inbetriebnahme vom SDK erzeugte Skripte.
 - Verwenden Sie `sftool`, wenn Sie wiederholbares Kommandozeilen-Flashen über Zephyr, Arduino oder Automatisierung hinweg benötigen.
-- Fügen Sie Crash-Analyse-Tooling hinzu, bevor der erste schwer reproduzierbare Fehler auftritt.
+- Ergänzen Sie Werkzeuge zur Absturzanalyse, bevor der erste schwer reproduzierbare Fehler auftritt.

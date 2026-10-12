@@ -9,10 +9,10 @@ hide:
     - navigation
 ---
 
-# SF32LB58x ハードウェア設計ガイド — 回路図チェックリスト { #sf32lb58x-hardware-design-guide-schematic-checklist }
+# SF32LB58xハードウェア設計ガイド — 回路図チェックリスト { #sf32lb58x-hardware-design-guide-schematic-checklist }
 
 !!! note "SF32LB58xハードウェア設計ガイドの一部"
-    このページでは、第5.8節の回路図チェックリストを項目ごとに説明します。[回路設計ガイドライン](SF32LB58x_schematic_design.md)に戻ります。
+    このページでは、第5.8節の回路図チェックリストを項目ごとに説明します。[回路図設計ガイドライン](SF32LB58x_schematic_design.md)に戻ります。
 
 ## 5.8. 回路図チェックリスト { #58-schematic-checklist }
 
@@ -20,7 +20,7 @@ hide:
 
 ### 5.8.1. パッケージ { #581-package }
 
-<div align="center"><em>表 5.8.1-1：パッケージのチェックリスト</em></div>
+<div align="center"><em>表 5.8.1-1: パッケージのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -32,7 +32,7 @@ hide:
 
 ### 5.8.2. 電源 { #582-power-supply }
 
-<div align="center"><em>表 5.8.2-1：電源のチェックリスト</em></div>
+<div align="center"><em>表 5.8.2-1: 電源のチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -71,7 +71,7 @@ hide:
 
 ### 5.8.3. 電源コンデンサとインダクタ { #583-power-supply-capacitors-and-inductors }
 
-<div align="center"><em>表 5.8.3-1：電源コンデンサとインダクタのチェックリスト</em></div>
+<div align="center"><em>表 5.8.3-1: 電源コンデンサとインダクタのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -112,7 +112,7 @@ hide:
 
 ### 5.8.4. クロック { #584-clock }
 
-<div align="center"><em>表 5.8.4-1：クロックのチェックリスト</em></div>
+<div align="center"><em>表 5.8.4-1: クロックのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -127,7 +127,7 @@ hide:
 
 ### 5.8.5. リセット { #585-reset }
 
-<div align="center"><em>表 5.8.5-1：リセットのチェックリスト</em></div>
+<div align="center"><em>表 5.8.5-1: リセットのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -141,7 +141,7 @@ hide:
 
 ### 5.8.6. グラウンド信号 { #586-ground-signals }
 
-<div align="center"><em>表 5.8.6-1：グラウンド信号のチェックリスト</em></div>
+<div align="center"><em>表 5.8.6-1: グラウンド信号のチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -154,7 +154,7 @@ hide:
 
 ### 5.8.7. ブートモード { #587-boot-mode }
 
-<div align="center"><em>表 5.8.7-1：ブートモードのチェックリスト</em></div>
+<div align="center"><em>表 5.8.7-1: ブートモードのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -167,7 +167,7 @@ hide:
 
 ### 5.8.8. RF { #588-rf }
 
-<div align="center"><em>表 5.8.8-1：RFのチェックリスト</em></div>
+<div align="center"><em>表 5.8.8-1: RFのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -184,7 +184,7 @@ hide:
 
 ### 5.8.9. I/Oリソース割り当て { #589-io-resource-allocation }
 
-<div align="center"><em>表 5.8.9-1：I/Oリソース割り当てのチェックリスト</em></div>
+<div align="center"><em>表 5.8.9-1: I/Oリソース割り当てのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -198,7 +198,7 @@ hide:
 
 ### 5.8.10. ハードウェアウェイクアップ { #5810-hardware-wake-up }
 
-<div align="center"><em>表 5.8.10-1：ハードウェアウェイクアップのチェックリスト</em></div>
+<div align="center"><em>表 5.8.10-1: ハードウェアウェイクアップのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -212,7 +212,7 @@ hide:
 
 ### 5.8.11. ストレージ { #5811-storage }
 
-<div align="center"><em>表 5.8.11-1：ストレージのチェックリスト</em></div>
+<div align="center"><em>表 5.8.11-1: ストレージのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -236,7 +236,7 @@ hide:
 
 </div>
 
-<div align="center"><em>表 5.8.11-2：SiFli EVB の SPI NAND 用 MPI4 参考接続</em></div>
+<div align="center"><em>表 5.8.11-2: SiFli EVBのSPI NAND用MPI4参考接続</em></div>
 
 <div align="center" markdown>
 
@@ -257,7 +257,7 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 
 ### 5.8.12. ディスプレイ { #5812-display }
 
-<div align="center"><em>表 5.8.12-1：ディスプレイのチェックリスト</em></div>
+<div align="center"><em>表 5.8.12-1: ディスプレイのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -280,7 +280,7 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 
 ### 5.8.13. GPADC { #5813-gpadc }
 
-<div align="center"><em>表 5.8.13-1：GPADCのチェックリスト</em></div>
+<div align="center"><em>表 5.8.13-1: GPADCのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -296,7 +296,7 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 
 ### 5.8.14. SDMADC { #5814-sdmadc }
 
-<div align="center"><em>表 5.8.14-1：SDMADCのチェックリスト</em></div>
+<div align="center"><em>表 5.8.14-1: SDMADCのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -310,7 +310,7 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 
 ### 5.8.15. ボタン { #5815-buttons }
 
-<div align="center"><em>表 5.8.15-1：ボタンのチェックリスト</em></div>
+<div align="center"><em>表 5.8.15-1: ボタンのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -325,7 +325,7 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 
 ### 5.8.16. EOS／ESD保護 { #5816-eos-and-esd-protection }
 
-<div align="center"><em>表 5.8.16-1：EOS／ESD保護のチェックリスト</em></div>
+<div align="center"><em>表 5.8.16-1: EOS／ESD保護のチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -343,7 +343,7 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 
 ### 5.8.17. I2C { #5817-i2c }
 
-<div align="center"><em>表 5.8.17-1：I2Cのチェックリスト</em></div>
+<div align="center"><em>表 5.8.17-1: I2Cのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -358,7 +358,7 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 
 ### 5.8.18. I2S { #5818-i2s }
 
-<div align="center"><em>表 5.8.18-1：I2Sのチェックリスト</em></div>
+<div align="center"><em>表 5.8.18-1: I2Sのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -375,7 +375,7 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 
 ### 5.8.19. PDMおよびアナログオーディオ { #5819-pdm-and-analog-audio }
 
-<div align="center"><em>表 5.8.19-1：PDMおよびアナログオーディオのチェックリスト</em></div>
+<div align="center"><em>表 5.8.19-1: PDMおよびアナログオーディオのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -396,7 +396,7 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 
 ### 5.8.20. SPI { #5820-spi }
 
-<div align="center"><em>表 5.8.20-1：SPIのチェックリスト</em></div>
+<div align="center"><em>表 5.8.20-1: SPIのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -410,7 +410,7 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 
 ### 5.8.21. USART { #5821-usart }
 
-<div align="center"><em>表 5.8.21-1：USARTのチェックリスト</em></div>
+<div align="center"><em>表 5.8.21-1: USARTのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -430,7 +430,7 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 
 ### 5.8.22. PWM { #5822-pwm }
 
-<div align="center"><em>表 5.8.22-1：PWMのチェックリスト</em></div>
+<div align="center"><em>表 5.8.22-1: PWMのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -445,7 +445,7 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 
 ### 5.8.23. デバッグ { #5823-debug }
 
-<div align="center"><em>表 5.8.23-1：デバッグのチェックリスト</em></div>
+<div align="center"><em>表 5.8.23-1: デバッグのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -459,7 +459,7 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 
 ### 5.8.24. USB { #5824-usb }
 
-<div align="center"><em>表 5.8.24-1：USBのチェックリスト</em></div>
+<div align="center"><em>表 5.8.24-1: USBのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -473,7 +473,7 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 
 ### 5.8.25. PBR { #5825-pbr }
 
-<div align="center"><em>表 5.8.25-1：PBRのチェックリスト</em></div>
+<div align="center"><em>表 5.8.25-1: PBRのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -490,13 +490,13 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 </div>
 
 !!! note "出典の適用範囲と技術確認"
-    [出典のチェックリストワークブック](https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)のPBRチェックリスト項目4には SF32LB567 が記載されています。ただし、PBRチェックリスト項目4と5が SF32LB58x 向けの推奨事項であることはワークブックから確認できません。採用する前に、SiFli へ適用可否を確認してください。
+    [出典のチェックリストワークブック](https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)のPBRチェックリスト項目4にはSF32LB567が記載されています。ただし、PBRチェックリスト項目4と5がSF32LB58x向けの推奨事項であることはワークブックから確認できません。採用する前に、SiFliへ適用可否を確認してください。
 
-    ワークブックのストレージチェックリスト項目6では、量産時に PA43 を High にして「MPI3 の電源」を有効にするとしています。一方、[公式 SF32LB58x ハードウェアアプリケーションノート](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md)では、PA43 は外付け Flash の電源制御ピンと説明され、外付け Flash に給電するには High にすると記載されています。チェックリストにはワークブックの記述をそのまま残しています。量産書き込みの方法を確定する前に、実際に制御される電源レールと対象インターフェースを SiFli に確認してください。
+    ワークブックのストレージチェックリスト項目6では、量産時にPA43をHighにして「MPI3の電源」を有効にするとしています。一方、[公式SF32LB58xハードウェアアプリケーションノート](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md)では、PA43は外付けFlashの電源制御ピンと説明され、外付けFlashに給電するにはHighにすると記載されています。チェックリストにはワークブックの記述をそのまま残しています。量産書き込みの方法を確定する前に、実際に制御される電源レールと対象インターフェースをSiFliに確認してください。
 
 ### 5.8.26. 消費電力 { #5826-power-consumption }
 
-<div align="center"><em>表 5.8.26-1：消費電力のチェックリスト</em></div>
+<div align="center"><em>表 5.8.26-1: 消費電力のチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -512,7 +512,7 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 
 ### 5.8.27. 書き込みと水晶振動子の校正 { #5827-download-and-crystal-calibration }
 
-<div align="center"><em>表 5.8.27-1：書き込みと水晶振動子校正のチェックリスト</em></div>
+<div align="center"><em>表 5.8.27-1: 書き込みと水晶振動子校正のチェックリスト</em></div>
 
 <div align="center" markdown>
 

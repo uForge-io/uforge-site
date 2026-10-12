@@ -12,7 +12,7 @@ hide:
 # Guide de conception matérielle du SF32LB58x — Liste de contrôle du schéma { #sf32lb58x-hardware-design-guide-schematic-checklist }
 
 !!! note "Fait partie du Guide de conception matérielle du SF32LB58x"
-    Cette page couvre la section 5.8, la liste de contrôle du schéma point par point. Retournez aux [Directives de conception schématique](SF32LB58x_schematic_design.md).
+    Cette page couvre la section 5.8, la liste de contrôle du schéma point par point. Retournez aux [Directives de conception de schéma](SF32LB58x_schematic_design.md).
 
 ## 5.8. Liste de contrôle du schéma { #58-schematic-checklist }
 
@@ -108,7 +108,7 @@ Chaque tableau ci-dessous couvre un bloc fonctionnel du schéma. Déterminez l'a
 </div>
 
 !!! note "Écart sur le courant de saturation de l'inductance BUCK"
-    Le point 24 de la liste de contrôle des condensateurs et inductances d'alimentation du classeur fixe Isat ≥ 450 mA pour une inductance absente de l'AVL. La note d'application matérielle d'OpenSiFli fixe Isat ≥ 500 mA pour une inductance BUCK de L = 4,7 µH et DCR ≤ 0,4 Ω. Le tableau conserve la valeur de 450 mA du classeur ; le [guide de sélection des inductances BUCK de la conception schématique](SF32LB58x_schematic_design.md#5114-buck-inductor-selection) applique 500 mA. Dans l'attente d'une clarification de SiFli, utilisez une inductance avec Isat ≥ 500 mA.
+    Le point 24 de la liste de contrôle des condensateurs et inductances d'alimentation du classeur fixe Isat ≥ 450 mA pour une inductance absente de l'AVL. La note d'application matérielle d'OpenSiFli fixe Isat ≥ 500 mA pour une inductance BUCK de L = 4,7 µH et DCR ≤ 0,4 Ω. Le tableau conserve la valeur de 450 mA du classeur ; le [guide de sélection des inductances BUCK de la conception du schéma](SF32LB58x_schematic_design.md#5114-buck-inductor-selection) applique 500 mA. Dans l'attente d'une clarification de SiFli, utilisez une inductance avec Isat ≥ 500 mA.
 
 ### 5.8.4. Horloge { #584-clock }
 
@@ -229,7 +229,7 @@ Chaque tableau ci-dessous couvre un bloc fonctionnel du schéma. Déterminez l'a
 | 9 | Si l'interface SD1 se connecte à l'eMMC ou à la SD NAND, les connexions de signaux sont correctes | Obligatoire |
 | 10 | Le niveau de l'interface E/S de l'eMMC ou de la SD NAND correspond à VDDIOA2 | Obligatoire |
 | 11 | Les connexions de signaux MPI3 ou MPI4 sont correctes | Obligatoire |
-| 12 | Le niveau logique E/S du dispositif périphérique correspond à celui de la puce principale | Obligatoire |
+| 12 | Le niveau logique E/S du composant périphérique correspond à celui de la puce principale | Obligatoire |
 | 13 | <span class="flag-red">La Flash NOR est qualifiée dans le guide de sélection des composants clés</span> | Obligatoire |
 | 14 | <span class="flag-red">La Flash SPI/SD NAND est qualifiée dans le guide de sélection des composants clés</span> | Obligatoire |
 | 15 | <span class="flag-red">L'eMMC est qualifiée dans le guide de sélection des composants clés</span> | Obligatoire |
@@ -273,7 +273,7 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
 | 8 | L'interface LCD prend en charge le MIPI-DSI, le SPI 3/4 fils, le SPI à données double/quadruple, le DBI 8080, le DPI, et les interfaces JDI parallèle/série | Obligatoire |
 | 9 | <span class="flag-red">LCD SPI, mode 3 fils : CS connecté à PA44 ou PB08, CLK connecté à PA46 ou PB10, DATA connecté à PA50 ou PB09 ; <br>mode 4 fils : CS connecté à PA44 ou PB08, CLK connecté à PA46 ou PB10, DATA connecté à PA50 ou PB09, DC connecté à PA48 ou PB03</span> | Obligatoire |
 | 10 | Confirmez si le LCD doit prendre en charge l'AOD ; si oui, un panneau QSPI doit se connecter au HCPU, tandis qu'un panneau JDI peut se connecter au LCPU | Obligatoire |
-| 11 | Le niveau logique E/S du dispositif périphérique correspond à celui de la puce principale | Obligatoire |
+| 11 | Le niveau logique E/S du composant périphérique correspond à celui de la puce principale | Obligatoire |
 | 12 | Pour les LCD DSI, connectez les signaux de données et d'horloge DSI. Les panneaux DSI en mode vidéo se comportent comme des panneaux RGB et n'ont pas de signal TE ; les panneaux DSI en mode commande ont un signal TE, et le DSI17801 nécessite TE. TE et RST sont tous deux recommandés ; l'usage final dépend du LCD sélectionné | Obligatoire |
 
 </div>
@@ -288,8 +288,8 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
 |:---|:---|:---|
 | 1 | L'entrée GPADC est connectée à la broche correspondante | Optionnel |
 | 2 | La plage d'entrée GPADC est correcte ; la tension d'entrée maximale ne doit pas dépasser AVDD33_ANA | Optionnel |
-| 3 | Recommandation de diviseur de tension de batterie : résistance 470 kΩ 1% côté alimentation, résistance 1 MΩ 1% vers la masse, et condensateur de filtrage 100 nF | Obligatoire |
-| 4 | <span class="flag-red">Pour chaque signal de diviseur résistif mesuré par le GPADC, utilisez des résistances de diviseur à tolérance de 1% ; chaque voie GPADC doit avoir un condensateur de filtrage de 100 nF placé près de la broche de la puce</span> | Obligatoire |
+| 3 | Recommandation de diviseur de tension de batterie : résistance 470 kΩ 1 % côté alimentation, résistance 1 MΩ 1 % vers la masse, et condensateur de filtrage 100 nF | Obligatoire |
+| 4 | <span class="flag-red">Pour chaque signal de diviseur résistif mesuré par le GPADC, utilisez des résistances de diviseur à tolérance de 1 % ; chaque voie GPADC doit avoir un condensateur de filtrage de 100 nF placé près de la broche de la puce</span> | Obligatoire |
 | 5 | <span class="flag-red">L'ADC peut détecter plusieurs boutons et économiser des broches ; par exemple, lorsque PB32 est utilisé comme bouton ADC, n'utilisez pas la batterie comme alimentation de tirage haut</span> | Obligatoire |
 
 </div>
@@ -333,11 +333,11 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
 |:---|:---|:---|
 | 1 | L'interface de charge dispose d'une conception de protection contre l'EOS, l'ESD et les surtensions (OVP) | Obligatoire |
 | 2 | Le signal de détection du branchement du chargeur dispose d'un composant ESD | Obligatoire |
-| 3 | L'interface batterie dispose d'un dispositif ESD | Obligatoire |
-| 4 | L'interface antenne dispose d'un dispositif ESD | Obligatoire |
-| 5 | Les interfaces d'alimentation LCD et TP disposent de dispositifs ESD | Obligatoire |
-| 6 | Les lignes I2C, RST, et INT du TP disposent de dispositifs ESD | Obligatoire |
-| 7 | L'interface d'alimentation et les lignes de signal du capteur de fréquence cardiaque disposent de dispositifs ESD | Obligatoire |
+| 3 | L'interface batterie dispose d'un composant ESD | Obligatoire |
+| 4 | L'interface antenne dispose d'un composant ESD | Obligatoire |
+| 5 | Les interfaces d'alimentation LCD et TP disposent de composants ESD | Obligatoire |
+| 6 | Les lignes I2C, RST, et INT du TP disposent de composants ESD | Obligatoire |
+| 7 | L'interface d'alimentation et les lignes de signal du capteur de fréquence cardiaque disposent de composants ESD | Obligatoire |
 
 </div>
 
@@ -352,7 +352,7 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
 | 1 | L'affectation des bus I2C tient compte du partitionnement HCPU/LCPU et de la nécessité éventuelle de faire fonctionner le périphérique en mode basse consommation | Obligatoire |
 | 2 | L'I2C dispose de tirages haut avec la valeur de résistance correcte ; si un fonctionnement à 400 kHz est requis, des tirages haut de 2,2 kΩ sont recommandés. Utilisez le domaine de tension côté périphérique et coupez l'alimentation de tirage haut lorsque le périphérique est hors tension | Obligatoire |
 | 3 | Le signal d'interruption I2C prend en charge le réveil matériel lorsque nécessaire | Obligatoire |
-| 4 | Si plusieurs dispositifs partagent un même bus I2C, leurs adresses sont distinguées | Obligatoire |
+| 4 | Si plusieurs composants partagent un même bus I2C, leurs adresses sont distinguées | Obligatoire |
 
 </div>
 
@@ -365,11 +365,11 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
 | N° | Point de contrôle | Catégorie |
 |:---|:---|:---|
 | 1 | <span class="flag-red">I2S1 est uniquement en entrée et ne fonctionne qu'en mode maître ; le microphone est connecté à I2S1 comme prévu</span> | Optionnel |
-| 2 | <span class="flag-red">I2S2 prend en charge l'entrée et la sortie uniquement en mode maître, et peut se connecter à des dispositifs codec DAC/ADC externes</span> | Optionnel |
+| 2 | <span class="flag-red">I2S2 prend en charge l'entrée et la sortie uniquement en mode maître, et peut se connecter à des composants codec DAC/ADC externes</span> | Optionnel |
 | 3 | <span class="flag-red">I2S3 prend en charge l'entrée et la sortie uniquement en mode maître ; il convient aux cas d'usage basse consommation où le HCPU est en veille et le LCPU reçoit/traite l'audio via I2S3</span> | Optionnel |
 | 4 | Les connexions de signaux I2S sont correctes | Optionnel |
 | 5 | <span class="flag-red">La connexion du microphone numérique de l'interface I2S1 est correcte</span> | Optionnel |
-| 6 | Le niveau logique E/S du dispositif périphérique correspond à celui de la puce principale | Optionnel |
+| 6 | Le niveau logique E/S du composant périphérique correspond à celui de la puce principale | Optionnel |
 
 </div>
 
@@ -381,10 +381,10 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
 
 | N° | Point de contrôle | Catégorie |
 |:---|:---|:---|
-| 1 | La connexion double microphone PDM est correcte | Optionnel |
+| 1 | Le raccordement des deux microphones PDM est correct | Optionnel |
 | 2 | Le microphone PDM est alimenté par une alimentation numérique | Optionnel |
-| 3 | Le niveau logique E/S du dispositif périphérique correspond à celui de la puce principale | Optionnel |
-| 4 | La connexion double microphone analogique est correcte | Optionnel |
+| 3 | Le niveau logique E/S du composant périphérique correspond à celui de la puce principale | Optionnel |
+| 4 | Le raccordement des deux microphones analogiques est correct | Optionnel |
 | 5 | Le microphone analogique est alimenté par la sortie MIC_BIAS | Optionnel |
 | 6 | Les deux entrées ADC audio doivent chacune inclure au moins un condensateur de blocage DC de 2,2 µF | Optionnel |
 | 7 | Les chemins de sortie DAC P et N disposent chacun d'une résistance série de 1 kΩ, avec un condensateur de 1,5 nF entre eux | Optionnel |
@@ -404,7 +404,7 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
 |:---|:---|:---|
 | 1 | La connexion SPI est correcte ; SDO et SDI sont correctement croisés entre le MCU et le périphérique | Optionnel |
 | 2 | Les exigences de timing du périphérique SPI sont confirmées et prises en charge | Optionnel |
-| 3 | Le niveau logique E/S du dispositif périphérique correspond à celui de la puce principale | Optionnel |
+| 3 | Le niveau logique E/S du composant périphérique correspond à celui de la puce principale | Optionnel |
 
 </div>
 
@@ -419,10 +419,10 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
 | 1 | USART4 est conçu comme l'interface de téléchargement et de journalisation | Obligatoire |
 | 2 | <span class="flag-red">USART4 dispose de points de test ; TXD et RXD sont recommandés avec une résistance série de 100 Ω</span> | Obligatoire |
 | 3 | <span class="flag-red">USART1 dispose d'un point de test</span> | Obligatoire |
-| 4 | Les dispositifs devant fonctionner sur le HCPU sont connectés à USART2 ou USART3 | Optionnel |
-| 5 | Les dispositifs devant fonctionner sur le LCPU sont connectés à USART5 ou USART6 | Optionnel |
+| 4 | Les composants devant fonctionner sur le HCPU sont connectés à USART2 ou USART3 | Optionnel |
+| 5 | Les composants devant fonctionner sur le LCPU sont connectés à USART5 ou USART6 | Optionnel |
 | 6 | Lors de la connexion à un périphérique, RXD et TXD sont correctement croisés | Obligatoire |
-| 7 | Le niveau logique E/S du dispositif périphérique correspond à celui de la puce principale | Obligatoire |
+| 7 | Le niveau logique E/S du composant périphérique correspond à celui de la puce principale | Obligatoire |
 | 8 | Les points de test USART inutilisés sont réservés pour un usage de secours | Optionnel |
 | 9 | <span class="flag-red">Pour les périphériques, il est recommandé d'utiliser une interface UART du HCPU afin d'éviter que le logiciel du HCPU n'ait à utiliser une interface UART du LCPU</span> | Obligatoire |
 
@@ -518,7 +518,7 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
 
 | N° | Point de contrôle | Catégorie |
 |:---|:---|:---|
-| 1 | Prévoir des points de test pour le téléchargement SWD sur VBAT, GND, SWDIO, SDCLK, MODE, RSTN, VDDIOA et VDDIOB | Obligatoire |
+| 1 | Prévoyez des points de test pour le téléchargement SWD sur VBAT, GND, SWDIO, SDCLK, MODE, RSTN, VDDIOA et VDDIOB | Obligatoire |
 | 2 | Si une carte de téléchargement hors ligne est nécessaire pour programmer le firmware, prévoir des points de test sur VBAT, GND, UART4_TXD, UART4_RXD, MODE, RSTN et VDDIOA | Optionnel |
 | 3 | Si une calibration du quartz est requise, réservez un point de test de calibration du quartz ; PB45 est recommandé | Optionnel |
 

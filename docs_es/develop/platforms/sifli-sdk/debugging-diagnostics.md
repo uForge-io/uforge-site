@@ -25,8 +25,8 @@ Guarde los registros junto con la revisión de la placa, la rama del SDK, el com
 ## Orden de depuración { #debugging-order }
 
 1. Reproduzca el problema con el mismo firmware.
-2. Compruebe si vuelve a aparecer tras un reinicio.
-3. Compruebe si vuelve a aparecer después de volver a grabar el firmware completo.
+2. Reproduzca el problema después de reiniciar.
+3. Reproduzca el problema después de volver a grabar el firmware completo.
 4. Compruebe si se reproduce con el ejemplo del SDK más cercano.
 5. Vuelva a incorporar los cambios específicos del producto de uno en uno.
 

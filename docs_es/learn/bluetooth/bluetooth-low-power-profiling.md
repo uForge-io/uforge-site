@@ -27,7 +27,7 @@ El [Online Power Profiler for Bluetooth LE](https://devzone.nordicsemi.com/power
 | Punto de medida | Qué incluye | Cuándo usarlo | Limitación |
 |:---------|:-----------------|:---------------|:-----------|
 | Subsistema Bluetooth o raíl seleccionado | Radio/controlador y el circuito de alimentación seleccionado | Aislar un aumento del consumo de la radio o del controlador | No representa el consumo de batería del dispositivo completo |
-| Entrada de alimentación del MCU | MCU, controlador y periféricos integrados alimentados desde ese raíl | Comparar estados del firmware en una placa controlada | No incluye componentes externos conectados a otros raíles ni las pérdidas del regulador |
+| Entrada de alimentación de la MCU | MCU, controlador y periféricos integrados alimentados desde ese raíl | Comparar estados del firmware en una placa controlada | No incluye componentes externos conectados a otros raíles ni las pérdidas del regulador |
 | Batería o entrada principal del producto | Reguladores, MCU, memoria externa, sensores, pantalla y otras cargas | Estimar la autonomía y validar el producto | Exige controlar todas las conexiones y fuentes de alimentación del equipo |
 
 </div>

@@ -20,11 +20,11 @@ tags:
 |:---|:---|
 | Système d'alimentation | Rails du PMU, autres rails, condensateurs, POR/BOR/reset, inductance BUCK. |
 | Mode de démarrage | Domaine de tension de la broche Mode, résistance de rappel, téléchargement, récupération et accès en production. |
-| Génération d'horloge | Cristal 48 MHz, cristal 32,768 kHz, et revue des condensateurs d'adaptation. |
+| Génération d'horloge | Quartz 48 MHz, quartz 32,768 kHz, et revue des condensateurs d'adaptation. |
 | RF | Adaptation RF, chemin d'antenne à 50 ohms, filtrage AVDD_BRF, et zone interdite RF. |
 | Interfaces de stockage | OPI PSRAM, QSPI NOR/NAND/PSRAM, et SDIO eMMC/Micro SD. |
 | Affichage et tactile | MIPI DSI, SPI/QSPI, MCU8080, JDI, interruption tactile, reset, rétroéclairage et alimentation du panneau. |
-| Réveil, GPADC et fabrication | Sources et boutons de réveil, PWM du moteur, diviseurs GPADC, capteurs, audio Bluetooth, DBG-UART, SWD, programmation en production et étalonnage du quartz. |
+| Réveil, GPADC et fabrication | Sources et boutons de réveil, PWM du moteur, diviseurs GPADC, capteurs, audio Bluetooth, DBG-UART, SWD, flashage en production et étalonnage du quartz. |
 
 </div>
 
@@ -70,10 +70,10 @@ Le SF32LB551 en QFN68L ne possède pas les broches VDD2, BUCK2_VSW, BUCK2_VOUT, 
 
 | Broches d'alimentation | Condensateur | Description détaillée |
 | :--- | :--- | :--- |
-| VDD1 VDD2 | 0,1 µF + 10 µF | Court-circuitez VDD1 et VDD2 ensemble. Placez au moins deux condensateurs, 10 µF et 0,1 µF, près des broches |
+| VDD1 VDD2 | 0,1 µF + 10 µF | Reliez VDD1 et VDD2 ensemble. Placez au moins deux condensateurs, 10 µF et 0,1 µF, près des broches |
 | BUCK1_VSW BUCK1_VOUT | 0,1 µF + 4,7 µF | Placez au moins deux condensateurs, 4,7 µF et 0,1 µF, près des broches |
 | BUCK2_VSW BUCK2_VOUT | 0,1 µF + 4,7 µF | Placez au moins deux condensateurs, 4,7 µF et 0,1 µF, près des broches |
-| LDOVCC2_VOUT | 0,1 µF + 4,7 µF | Lorsque BUCK2 est configuré en mode BUCK, laissez cette broche flottante ; lorsque BUCK2 est configuré en mode LDO, laissez BUCK2_VSW flottante, court-circuitez LDOVCC2_VOUT et BUCK2_VOUT ensemble, et placez au moins deux condensateurs, 4,7 µF et 0,1 µF, près des broches |
+| LDOVCC2_VOUT | 0,1 µF + 4,7 µF | Lorsque BUCK2 est configuré en mode BUCK, laissez cette broche flottante ; lorsque BUCK2 est configuré en mode LDO, laissez BUCK2_VSW flottante, reliez LDOVCC2_VOUT et BUCK2_VOUT ensemble, et placez au moins deux condensateurs, 4,7 µF et 0,1 µF, près des broches |
 | LDO_VOUT1 | 4,7 µF | Placez au moins un condensateur de 4,7 µF près de la broche |
 | LDO_VOUT2 | 4,7 µF | Placez au moins un condensateur de 4,7 µF près de la broche |
 | VDD_RET | 0,47 µF | Placez au moins un condensateur de 0,47 µF près de la broche |
@@ -128,20 +128,20 @@ Conformément à la note d'application matérielle de SiFli, choisissez une indu
 
 </div>
 
-Avec un niveau haut, la puce entre en mode de téléchargement après la mise sous tension ; avec un niveau bas, elle démarre le programme utilisateur. Assurez-vous que les gabarits de test de production peuvent imposer l'état de démarrage requis et que les broches de démarrage restent accessibles malgré le coffret du produit et les contraintes d'accès aux points de test.
+Avec un niveau haut, la puce entre en mode de téléchargement après la mise sous tension ; avec un niveau bas, elle démarre le programme utilisateur. Assurez-vous que l'outillage de test en production peut imposer l'état de démarrage requis et que les broches de démarrage restent accessibles malgré le coffret du produit et les contraintes d'accès aux points de test.
 
-La broche Mode appartient au même domaine de tension que VDDIOA. Maintenez son niveau stable avec une résistance externe de 10 kΩ reliée à l'alimentation correspondante ou à GND ; ne la laissez pas flottante et évitez les transitions involontaires. Les cartes de production doivent prévoir un point de test Mode pour la programmation du firmware et l'étalonnage du quartz ; un cavalier n'est pas nécessaire. Sur les cartes de test, réservez un cavalier afin de pouvoir récupérer une application bloquée en démarrant en mode téléchargement.
+La broche Mode appartient au même domaine de tension que VDDIOA. Maintenez son niveau stable avec une résistance externe de 10 kΩ reliée à l'alimentation correspondante ou à GND ; ne la laissez pas flottante et évitez les transitions involontaires. Les cartes de production doivent prévoir un point de test Mode pour le flashage du firmware et l'étalonnage du quartz ; un cavalier n'est pas nécessaire. Sur les cartes de test, réservez un cavalier afin de pouvoir récupérer une application bloquée en démarrant en mode téléchargement.
 
 ### 5.3. Génération d'horloge { #53-clock-generation }
 
-<div align="center"><em>Tableau 5.3-1 : Exigences du cristal</em></div>
+<div align="center"><em>Tableau 5.3-1 : Exigences du quartz</em></div>
 
 <div align="center" markdown>
 
 | Quartz | Exigences du quartz | Description détaillée |
 | :--- | :--- | :--- |
-| 48 MHz | 7 pF≦CL≦12 pF (valeur recommandée : 8,8 pF), △F/F0≦±10 ppm, ESR≦30 Ω (valeur recommandée : 22 Ω) | La consommation de l'oscillateur à cristal dépend de CL et de l'ESR : plus leurs valeurs sont faibles, plus la consommation diminue. Pour l'optimiser, choisissez des composants dont les valeurs de CL et d'ESR sont plutôt faibles tout en restant dans la plage requise. Prévoyez des empreintes pour des condensateurs d'adaptation en parallèle près du cristal. Si CL<12 pF, il n'est pas nécessaire de monter de condensateur |
-| 32,768 kHz | CL≦12,5 pF (valeur recommandée : 7 pF), △F/F0≦±20 ppm, ESR≦80 kΩ (valeur recommandée : 38 kΩ) | La consommation du cristal dépend de CL et de l'ESR : plus leurs valeurs sont faibles, plus la consommation diminue. Pour l'optimiser, choisissez des composants dont les valeurs de CL et d'ESR sont plutôt faibles tout en restant dans la plage requise. Prévoyez des empreintes pour des condensateurs d'adaptation en parallèle près du cristal. Si CL<12,5 pF, il n'est pas nécessaire de souder de condensateur |
+| 48 MHz | 7 pF≦CL≦12 pF (valeur recommandée : 8,8 pF), △F/F0≦±10 ppm, ESR≦30 Ω (valeur recommandée : 22 Ω) | La consommation de l'oscillateur à quartz dépend de CL et de l'ESR : plus leurs valeurs sont faibles, plus la consommation diminue. Pour l'optimiser, choisissez des composants dont les valeurs de CL et d'ESR sont plutôt faibles tout en restant dans la plage requise. Prévoyez des empreintes pour des condensateurs d'adaptation en parallèle près du quartz. Si CL<12 pF, il n'est pas nécessaire de monter de condensateur |
+| 32,768 kHz | CL≦12,5 pF (valeur recommandée : 7 pF), △F/F0≦±20 ppm, ESR≦80 kΩ (valeur recommandée : 38 kΩ) | La consommation du quartz dépend de CL et de l'ESR : plus leurs valeurs sont faibles, plus la consommation diminue. Pour l'optimiser, choisissez des composants dont les valeurs de CL et d'ESR sont plutôt faibles tout en restant dans la plage requise. Prévoyez des empreintes pour des condensateurs d'adaptation en parallèle près du quartz. Si CL<12,5 pF, il n'est pas nécessaire de souder de condensateur |
 
 </div>
 
@@ -151,7 +151,7 @@ Placez les deux quartz près de la puce, gardez leurs pistes courtes et symétri
 
 Le frontal RF du SF32LB55x intègre une technologie de filtrage et d'adaptation large bande. Maintenez l'impédance caractéristique de la piste RF du PCB à 50 Ω et prévoyez un réseau d'adaptation en π pour filtrer les émissions parasites et adapter l'antenne. Déterminez les valeurs finales des composants par des essais avec l'antenne et le PCB réels. Si l'antenne choisie est déjà adaptée, il n'est généralement pas nécessaire de monter des composants supplémentaires dans le réseau prévu.
 
-Faites passer les pistes RF au-dessus d'un plan de masse continu, placez le réseau d'adaptation au plus près de la puce et le filtre AVDD_BRF près de la broche. Éloignez de la zone RF les pistes DC-DC, VBAT, du cristal, de l'horloge haute vitesse, du SPI, du SDIO, de l'I2S et de l'UART.
+Routez les pistes RF au-dessus d'un plan de référence de masse continu, placez le réseau d'adaptation au plus près de la puce et le filtre AVDD_BRF près de la broche. Éloignez de la zone RF les pistes DC-DC, VBAT, du quartz, de l'horloge haute vitesse, du SPI, du SDIO, de l'I2S et de l'UART.
 
 Le circuit RF de référence place C0323 (15 pF/50 V) en série avec ANT et laisse les deux branches vers la masse C0318 et C0319 non montées (NF). Ces valeurs sont des exemples, pas des valeurs d'adaptation universelles.
 
@@ -380,7 +380,7 @@ Notes d'affectation des broches d'affichage :
 | WRX_SCL | GPIO23 | PB32 | Signal d'horloge |
 | DCX | GPIO20 | PB36 | Signal de données/commande en mode SPI 4 fils ; donnée 1 en mode Quad-SPI |
 | SDI_RDX | GPIO21 | PB35 | Signal d'entrée de données en mode SPI 3/4 fils ; donnée 0 en mode Quad-SPI |
-| SDO | GPIO21 | PB35 | Signal de sortie de données en mode SPI 3/4 fils ; court-circuitez-le avec SDI_RDX |
+| SDO | GPIO21 | PB35 | Signal de sortie de données en mode SPI 3/4 fils ; reliez-le à SDI_RDX |
 | D[0] | GPIO19 | PB37 | Donnée 2 en mode Quad-SPI |
 | D[1] | GPIO18 | PB07 | Donnée 3 en mode Quad-SPI |
 | RESET | GPIO2 | PB17 | Signal de reset pour le panneau d'affichage |
@@ -540,7 +540,7 @@ Raccordez au LCPU les interfaces I2C/SPI, de commande et d'interruption de réve
 
 L'audio Bluetooth externe communique par UART1 du HCPU. Adaptez les niveaux ou ajoutez un convertisseur ; coupez l'alimentation du convertisseur en même temps que celle du module pour éviter les fuites. Si le module reste alimenté en Standby et que sa commande d'alimentation est active à l'état bas, utilisez un GPIO LCPU avec comportement PD par défaut.
 
-<div align="center"><em>Tableau 5.7-3 : Interface de débogage et de programmation</em></div>
+<div align="center"><em>Tableau 5.7-3 : Interface de débogage et de flashage</em></div>
 
 <div align="center" markdown>
 

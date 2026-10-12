@@ -2,7 +2,7 @@
 icon: lucide/list-checks
 hide:
     - navigation
-description: "Lista de comprobación punto por punto para revisar el diseño de PCB del MCU SF32LB58x: encapsulado, alimentación, reloj, RF, audio, señales de alta velocidad y apilado de capas."
+description: "Lista de comprobación punto por punto para revisar el diseño de PCB de la MCU SF32LB58x: encapsulado, alimentación, reloj, RF, audio, señales de alta velocidad y apilado de capas."
 tags:
     - Hardware
     - Chip
@@ -103,7 +103,7 @@ Cada tabla cubre un área de revisión del diseño de PCB. Si no aparece una col
 </div>
 
 !!! warning "Confirme con SiFli las capas de exclusión de cobre del cristal"
-    La hoja de cálculo de la lista de comprobación pide dejar sin cobre las capas 1, 2 y 3 en una PCB de cuatro capas. La [guía de diseño de PCB](SF32LB58x_pcb_layout.md#65-clock-interface-routing) especifica la capa superior y la capa adyacente bajo cada zona de cristal. Las fuentes difieren sobre si debe incluirse la capa 3; no deduzca el requisito definitivo sin confirmarlo con SiFli.
+    El libro de comprobación de origen pide dejar sin cobre las capas 1, 2 y 3 en una PCB de cuatro capas. La [guía de diseño de PCB](SF32LB58x_pcb_layout.md#65-clock-interface-routing) especifica la capa superior y la capa adyacente bajo cada zona de cristal. Las fuentes difieren sobre si debe incluirse la capa 3; no deduzca el requisito definitivo sin confirmarlo con SiFli.
 
 ### 6.18.5. Botones { #6185-buttons }
 
@@ -125,7 +125,7 @@ Cada tabla cubre un área de revisión del diseño de PCB. Si no aparece una col
 
 | N.º | Punto de comprobación | Categoría |
 |:---|:---|:---|
-| 1 | La pista RF cumple el requisito de impedancia característica single-ended de 50 Ω | Obligatorio |
+| 1 | La pista RF cumple el requisito de impedancia característica de 50 Ω en modo single-ended | Obligatorio |
 | 2 | Ancho de la pista RF ≥10 mil | Obligatorio |
 | 3 | Reserve cerca del chip una huella para una red de adaptación de antena de tipo π | Obligatorio |
 | 4 | Mantenga un plano GND continuo debajo de la señal RF | Obligatorio |
@@ -192,8 +192,8 @@ Cada tabla cubre un área de revisión del diseño de PCB. Si no aparece una col
 
 | N.º | Punto de comprobación | Categoría |
 |:---|:---|:---|
-| 1 | La ubicación de los puntos de prueba es adecuada para medir con una sonda o soldar un útil de pruebas | Obligatorio |
-| 2 | Los puntos de prueba para programar/descargar y calibrar el cristal (VBAT, GND, SWDIO, SWCLK, VDDIOB, MODE, RESET, UART4_TXD, UART4_RXD, etc.) cumplen los requisitos de tamaño y ubicación del útil | Obligatorio |
+| 1 | La ubicación de los puntos de prueba permite medir con una sonda o soldar un útil de prueba | Obligatorio |
+| 2 | Los puntos de prueba para la grabación/descarga y la calibración del cristal (VBAT, GND, SWDIO, SWCLK, VDDIOB, MODE, RESET, UART4_TXD, UART4_RXD, etc.) cumplen los requisitos de tamaño y ubicación del útil | Obligatorio |
 
 </div>
 

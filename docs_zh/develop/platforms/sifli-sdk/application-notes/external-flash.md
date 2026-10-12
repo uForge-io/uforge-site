@@ -59,7 +59,7 @@ Flash 属性和使用方式通过 `menuconfig` 配置，并生成 `rtconfig.h`�
 #define BSP_QSPI1_CHIP_ID 0         /*FLASH1 DEV ID 由系统获取，不需要手动输入（这个配置是为了当有些FLASH获取ID的命令时序与默认设置不同时，手动添加ID以便查找正确的命令表）*/
 ```
 
-第二个 NOR Flash 和第三个 NAND Flash 的原指南示例如下：
+第二个 NOR Flash 和第三个 NAND Flash 的源示例如下：
 
 ```c
 #define BSP_ENABLE_QSPI2 1          /*使能QSPI2 模块*/
@@ -551,7 +551,7 @@ typedef struct
 } FLASH_CMD_CFG_T;
 ```
 
-其中，`cmd` 是命令 ID（原指南示例中写使能为 `0x06`，读状态寄存器为 `0x05`）；`func_mode` 选择读或写；`data_mode` 选择无数据、单线、双线或四线数据；`dummy_cycle` 表示命令与地址/数据之间的空时钟周期；`ab_size` 和 `ab_mode` 描述交替字节（alternate bytes）；`addr_size` 和 `addr_mode` 描述地址长度及线数模式；`cmd_mode` 表示命令本身使用单线、双线还是四线发送。
+其中，`cmd` 是命令 ID（源示例中写使能为 `0x06`，读状态寄存器为 `0x05`）；`func_mode` 选择读或写；`data_mode` 选择无数据、单线、双线或四线数据；`dummy_cycle` 表示命令与地址/数据之间的空时钟周期；`ab_size` 和 `ab_mode` 描述交替字节（alternate bytes）；`addr_size` 和 `addr_mode` 描述地址长度及线数模式；`cmd_mode` 表示命令本身使用单线、双线还是四线发送。
 
 ## 移植 NAND Flash 器件驱动 { #8-port-a-nand-flash-part }
 

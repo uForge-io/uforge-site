@@ -14,7 +14,7 @@ Use la utilidad incluida en la rama del SDK de destino: `$SDK_ROOT/tools/png2ezi
 
 ## Formatos de archivo { #1-file-formats }
 
-Los cuatro primeros bytes del archivo binario generado forman una cabecera little-endian. Sus campos de bits son:
+Los cuatro primeros bytes del archivo binario generado forman una cabecera con codificación little-endian. Sus campos de bits son:
 
 <div align="center" markdown>
 <em>Tabla: campos de la cabecera binaria EZIP/PIXEL</em>
@@ -31,7 +31,7 @@ Los cuatro primeros bytes del archivo binario generado forman una cabecera littl
 Los valores de formato son:
 
 <div align="center" markdown>
-<em>Tabla: Valores de formato EZIP y PIXEL</em>
+<em>Tabla: valores de formato EZIP y PIXEL</em>
 
 | Valor | Significado |
 |:------|:--------|
@@ -45,7 +45,7 @@ Los valores de formato son:
 PIXEL sin alfa admite RGB565 y RGB888. PIXEL con alfa admite ARGB565 y ARGB888. La herramienta elige la variante con o sin alfa según la imagen PNG de origen: si esta no tiene canal alfa, genera un formato sin alfa.
 
 <div align="center" markdown>
-<em>Tabla: Campos de bits de los formatos de color PIXEL y ARGB</em>
+<em>Tabla: campos de bits de los formatos de color PIXEL y ARGB</em>
 
 | Formato | Campos de bits |
 |:-------|:-----------|
@@ -56,7 +56,7 @@ PIXEL sin alfa admite RGB565 y RGB888. PIXEL con alfa admite ARGB565 y ARGB888. 
 
 </div>
 
-Los campos de bits de todos los formatos de píxel anteriores se almacenan en orden little-endian.
+Los campos de bits de todos los formatos de píxel anteriores se almacenan en orden de bytes little-endian.
 
 ## Convertir recursos PNG { #2-convert-png-assets }
 

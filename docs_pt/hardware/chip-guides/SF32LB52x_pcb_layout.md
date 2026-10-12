@@ -15,7 +15,7 @@ tags:
 
 ## 6. Orientações de layout de PCB { #6-pcb-layout-guidelines }
 
-Use este capítulo junto com a Seção 5 para revisar o layout. Antes de definir o posicionamento final, o esquemático já deve especificar a variante, a árvore de alimentação, os componentes de clock, as posições reservadas para RF, os pinos de display e armazenamento e o acesso aos pontos de teste.
+Use este capítulo junto com a Seção 5 para revisar o layout. Antes de definir o posicionamento final, recomenda-se que o esquemático já especifique a variante, a árvore de alimentação, os componentes de clock, a área reservada para RF, os pinos de display e armazenamento e o acesso aos pontos de teste.
 
 **Objetivo do projeto**
 
@@ -49,7 +49,7 @@ O desenho do encapsulamento especifica altura total nominal de 0,85 mm, com faix
 
 A Figura 6.1-3 especifica pads periféricos de 0,2 mm x 0,55 mm, passo de 0,35 mm, aberturas de máscara de solda de 0,3 mm x 0,65 mm e aberturas de pasta de 0,2 mm x 0,55 mm. São dimensões de referência; confira os requisitos do processo de montagem antes de liberar o footprint.
 
-O desenho do encapsulamento indica um pad exposto nominal de 5,49 mm x 5,49 mm. O exemplo de fanout liga o pad central ao GND; não o trate como uma peça mecânica que possa ficar desconectada.
+O desenho do encapsulamento indica um pad exposto nominal de 5,49 mm x 5,49 mm. O exemplo de fanout conecta o pad central ao GND; portanto, trate-o como uma conexão elétrica, não apenas como um elemento mecânico.
 
 ### 6.2. Empilhamento de camadas { #62-pcb-stack-up }
 

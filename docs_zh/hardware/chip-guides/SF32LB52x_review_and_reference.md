@@ -383,7 +383,7 @@ tags:
 
 ### 10.1. 核对表修订历史 { #101-checklist-revision-history }
 
-[原理图核对表](SF32LB52x_schematic_checklist.md)与 [PCB 布局核对表](SF32LB52x_pcb_layout_checklist.md)中的逐项核对表与设计指南单独维护版本，版本编号沿用思澈科技（SiFli）官方 *SF32LB52 Schematic & PCB Checklist* 电子表格。
+[原理图核对表](SF32LB52x_schematic_checklist.md)和 [PCB 布局核对表](SF32LB52x_pcb_layout_checklist.md)中的逐项核对内容独立于设计指南进行版本管理，版本编号沿用思澈科技（SiFli）官方 *SF32LB52 Schematic & PCB Checklist* 电子表格。
 
 <div align="center"><em>表 10.1-1：核对表修订历史</em></div>
 

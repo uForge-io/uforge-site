@@ -9,7 +9,7 @@ tags:
 
 ## Introducción { #introduction }
 
-**eZip** es el formato propietario sin pérdida de SiFli para recursos gráficos. En los dispositivos SF32 que admiten estas funciones, el bloque de hardware EZIP decodifica recursos gráficos eZip; también ofrece modos GZIP y LZ4 independientes para datos generales, cuya salida descomprimida se escribe en memoria mediante AHB, no directamente en EPIC. En lugar de guardar cada recurso como un mapa de bits sin comprimir en NOR Flash, PSRAM o un sistema de archivos, el producto puede almacenar los datos eZip y decodificarlos cuando la interfaz los necesite.
+**eZip** es el formato propietario sin pérdida de SiFli para recursos gráficos. En los dispositivos SF32 que admiten estas funciones, el bloque de hardware EZIP decodifica recursos gráficos eZip; también ofrece modos GZIP y LZ4 independientes para datos generales, cuya salida descomprimida se escribe en memoria mediante AHB, no directamente en EPIC. En lugar de guardar cada recurso como un mapa de bits sin comprimir en NOR Flash, PSRAM o un sistema de archivos, el producto puede almacenar el resultado comprimido en eZip y decodificarlo cuando la interfaz lo necesite.
 
 **eZip-A** es el formato correspondiente para recursos animados. Los archivos de origen se convierten durante la compilación o la preparación de recursos; eZip no es un decodificador de imágenes genérico que acepte archivos arbitrarios en tiempo de ejecución.
 
@@ -80,7 +80,7 @@ Cuando se utiliza una ruta de decodificación por hardware compatible, la CPU de
 
 ### Hacer reproducible la entrega de recursos { #make-asset-delivery-repeatable }
 
-El uso de una herramienta de conversión y de un formato de recursos controlado hace reproducibles las versiones del producto: las imágenes de origen, los ajustes de conversión, los recursos generados y los perfiles de resolución objetivo pueden mantenerse juntos bajo control de versiones. Es más fiable que convertir archivos manualmente o depender de que cada desarrollador de UI vuelva a aplicar los mismos ajustes de imagen.
+El uso de una herramienta de conversión y de un formato de recursos controlado permite reproducir de forma consistente las entregas del producto: las imágenes de origen, los ajustes de conversión, los recursos generados y los perfiles de resolución objetivo pueden mantenerse juntos bajo control de versiones. Es más fiable que convertir archivos manualmente o depender de que cada desarrollador de UI vuelva a aplicar los mismos ajustes de imagen.
 
 ## Comparación de implementaciones de eZip { #ezip-version-comparison }
 
@@ -116,10 +116,10 @@ Para otros formatos de imágenes estáticas, el flujo documentado consiste en re
 
 ## Herramientas de integración { #integration-tools }
 
-Además del flujo de trabajo de escritorio con GraphicsTool, SiFli ofrece:
+Además del flujo de trabajo de escritorio con GraphicsTool, SiFli ofrece lo siguiente:
 
-- Las **herramientas de línea de comandos** permiten integrar la conversión eZip en procesos de recursos automatizados y reproducibles. Úselas en scripts de compilación locales o tareas de integración continua para mantener la trazabilidad entre las imágenes de origen versionadas y los archivos eZip generados.
-- Los **SDK para Android e iOS** permiten integrar eZip en aplicaciones móviles. Resultan útiles si una aplicación complementaria debe preparar, gestionar, transferir o procesar recursos eZip como parte del flujo de trabajo con el dispositivo.
+- **Herramientas de línea de comandos.** Permiten integrar la conversión eZip en procesos de recursos automatizados y reproducibles. Úselas en scripts de compilación locales o tareas de integración continua para mantener la trazabilidad entre las imágenes de origen versionadas y los archivos eZip generados.
+- **SDK para Android e iOS.** Permiten integrar eZip en aplicaciones móviles. Resultan útiles si una aplicación complementaria debe preparar, gestionar, transferir o procesar recursos eZip como parte del flujo de trabajo con el dispositivo.
 
 Mantenga bajo control de versiones los perfiles de conversión, las versiones de las herramientas o del SDK, las sumas de comprobación de los archivos generados y los requisitos de compatibilidad del dispositivo objetivo. Las integraciones móviles y de línea de comandos deben usar el mismo perfil de recursos aprobado que el producto embebido. No dé por hecho que un archivo generado para un chip o una configuración del SDK funcionará sin cambios en todos los dispositivos SF32.
 
@@ -130,7 +130,7 @@ Mantenga bajo control de versiones los perfiles de conversión, las versiones de
 - **Mantenga una ruta de respaldo por CPU.** No todos los tipos de recursos, formatos de píxel u operaciones de UI pueden utilizar la decodificación por hardware o la ruta gráfica.
 - **Valide la ubicación en memoria.** Pruebe los recursos y los búferes de dibujo en SRAM interna, NOR Flash, PSRAM o almacenamiento extraíble; cada opción afecta a la latencia y a la contención del bus.
 - **Pruebe la carga de trabajo real.** Mida el tiempo de carga en frío, la frecuencia de las animaciones, la latencia de la UI y el consumo mientras funcionan a la vez Bluetooth, el audio, los sensores y la pantalla.
-- **Fije los ajustes de conversión antes de publicar.** Los cambios de versión de la herramienta o de sus parámetros pueden afectar a la compatibilidad, la calidad, el espacio de almacenamiento y el rendimiento de decodificación.
+- **Fije los ajustes de conversión antes de liberar la versión.** Los cambios de versión de la herramienta o de sus parámetros pueden afectar a la compatibilidad, la calidad, el espacio de almacenamiento y el rendimiento de decodificación.
 
 ## Conclusiones clave { #key-takeaways }
 

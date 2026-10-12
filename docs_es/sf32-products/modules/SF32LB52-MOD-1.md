@@ -12,7 +12,7 @@ tags:
 
 SF32LB52-MOD-1 es una familia de módulos MCU de bajo consumo con Bluetooth, basada en la plataforma SF32LB52x. La variante estándar N16R8 incorpora el SF32LB525UC6. El módulo de 27,9 × 18,0 × 3,1 mm integra la plataforma Arm Cortex-M33 STAR-MC1 de doble núcleo, el circuito de RF, un cristal de 48 MHz y la conexión de antena. El tipo de antena depende del código de producto: puede ser una antena PCB integrada en el módulo o una antena externa conectada mediante IPEX.
 
-DS5203 V0.3 documenta una antena PCB integrada en el módulo e indica que también hay otro modelo compatible con una antena externa mediante IPEX, pero no asigna las opciones de antena a los SKU de memoria publicados. Antes de cerrar el diseño de la placa portadora, confirme con SiFli la configuración de antena exacta. El producto final aún requiere validación de RF y la certificación aplicable a nivel de producto. Las interfaces expuestas permiten implementar funciones Bluetooth, gráficas y de audio en productos conectados compactos.
+La hoja de datos DS5203 V0.3 documenta una antena PCB integrada en el módulo e indica que otro modelo puede utilizar una antena externa conectada mediante IPEX, pero no asigna las opciones de antena a los SKU de memoria publicados. Antes de finalizar el diseño de la placa portadora, confirme con SiFli la configuración de antena exacta. El producto final también requiere validación de RF y la certificación aplicable al producto. Las interfaces expuestas proporcionan acceso a las funciones Bluetooth, gráficas y de audio utilizadas en productos conectados compactos.
 
 Según el SKU seleccionado, el chip montado en el módulo puede llevar OPI-PSRAM en su encapsulado. Las interfaces disponibles proporcionan acceso a las principales funciones de la familia de chips, como GPIO, SPI, LCD, MPI, UART, I2C, PWM, SDIO, USB 2.0 FS y señales de audio analógico.
 
@@ -27,8 +27,8 @@ Según el SKU seleccionado, el chip montado en el módulo puede llevar OPI-PSRAM
 - Concentradores de sensores Bluetooth y accesorios conectados
 - Cerraduras inteligentes, dispositivos para el hogar conectado y electrodomésticos compactos
 - Productos HMI con pantalla gráfica pequeña
-- Llaveros electrónicos para vehículos y mandos a distancia vestibles
-- Dispositivos conectados con pantalla y coste ajustado
+- Llaveros electrónicos para vehículos y mandos a distancia para vehículos que se llevan puestos
+- Dispositivos conectados con pantalla dirigidos a segmentos sensibles al precio
 
 Considere SF32LB52-MOD-1 si el proyecto necesita una o varias de estas ventajas:
 
@@ -44,7 +44,7 @@ Considere SF32LB52-MOD-1 si el proyecto necesita una o varias de estas ventajas:
 [Guía de diseño de hardware]: ../../hardware/chip-guides/SF32LB52-MOD-1_hardware_design_guide.md
 [Guía original de diseño (wiki.sifli.com, variante EPD)]: https://wiki.sifli.com/en/hardware/SF32LB52-MOD-1-EPD-HW-Application.html
 [Comprar muestras]: https://sifli.taobao.com/
-[Comprar kits de desarrollo]: https://sifli.taobao.com/
+[Comprar placas de desarrollo]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
@@ -53,7 +53,7 @@ Considere SF32LB52-MOD-1 si el proyecto necesita una o varias de estas ventajas:
 - :fontawesome-solid-file-lines: __[Guía de diseño de hardware]__
 - :fontawesome-solid-file-lines: __[Guía original de diseño (wiki.sifli.com, variante EPD)]__
 - :fontawesome-solid-cart-shopping: __[Comprar muestras]__
-- :fontawesome-solid-cart-shopping: __[Comprar kits de desarrollo]__
+- :fontawesome-solid-cart-shopping: __[Comprar placas de desarrollo]__
 
 </div>
 
@@ -139,9 +139,9 @@ Las fuentes oficiales usan denominaciones distintas para la memoria Flash de A12
 
 La página de [SF32LB52x](../chips/SF32LB52x.md) describe la arquitectura y los periféricos de la familia; consulte la tabla de variantes anterior para ver la correspondencia entre cada SKU, su chip y su memoria.
 
-### Kits de desarrollo { #development-kits }
+### Placas de desarrollo { #development-kits }
 
-Los kits [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md), [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md), [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) y [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) permiten validar el firmware antes de diseñar una placa portadora propia para el módulo.
+Las placas [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md), [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md), [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) y [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) permiten validar el firmware antes de diseñar una placa portadora propia para el módulo.
 
 ### Productos de referencia { #reference-products }
 

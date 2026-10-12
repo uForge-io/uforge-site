@@ -30,7 +30,7 @@ dfu_v2/
     └── loader/    PAN DFU loader
 ```
 
-O aplicativo e o carregador de cada canal foram projetados para funcionar em conjunto. Ao compilar o aplicativo, o SDK usa a lógica `AddDFU_*` de `building.py` para incluir o carregador correspondente como subprojeto; não o compile separadamente. No exemplo BLE, o aplicativo em execução pode atualizar imagens de firmware que não sejam a imagem de firmware do HCPU; para atualizar esta última, é preciso mudar para o carregador.
+O aplicativo e o carregador de cada canal foram projetados para funcionar em conjunto. Ao compilar o aplicativo, o SDK usa a lógica `AddDFU_*` de `building.py` para incluir o carregador correspondente como subprojeto; não o compile separadamente. No exemplo BLE, o aplicativo em execução pode atualizar imagens que não sejam de HCPU; para atualizar o HCPU, é preciso alternar para o carregador.
 
 ## Compatibilidade e configuração { #compatibility-and-configuration }
 

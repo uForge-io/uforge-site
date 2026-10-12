@@ -10,7 +10,7 @@ hide:
 
 # Selector de productos SF32 { #sf32-product-selector }
 
-Preseleccione chips y módulos SF32 antes de comprometerse con un esquemático. Defina primero las restricciones cuyo cambio posterior sería costoso —la arquitectura de alimentación, el encapsulado, la pantalla, el audio, la memoria, los GPIO, la conectividad y la ruta de validación de software— y compare después los candidatos restantes.
+Preseleccione chips y módulos SF32 antes de comprometerse con un esquemático. Defina primero las restricciones cuyo cambio posterior sería costoso —la arquitectura de alimentación, el encapsulado, la pantalla, el audio, la memoria, las GPIO, la conectividad y la ruta de validación de software— y compare después los candidatos restantes.
 
 Use el selector interactivo como primer filtro. Solo incluye chips y módulos, que puede filtrar por nivel de integración, capacidad de PSRAM y GPIO, encapsulado, alimentación principal, interfaz de pantalla y resolución objetivo, número de interfaces SDIO, cantidad de interfaces de audio y funciones de hardware especializadas. Cada resultado enlaza con la introducción del producto correspondiente. Las placas de desarrollo son plataformas de validación independientes y no figuran en el selector.
 
@@ -39,7 +39,7 @@ Elija el nivel de integración antes de comparar especificaciones detalladas si 
 
 ### Suministro de alimentación y encapsulado { #power-supply-and-package }
 
-Seleccione la alimentación y el encapsulado desde el principio. El selector distingue entre alimentación directa desde una batería Li-ion (raíl de 3,2–4,7 V), componentes con una opción documentada de alimentación de 3,3 V mediante regulación externa y componentes que admiten una tensión de alimentación principal tan baja como aproximadamente 1,8 V (algunas especificaciones fijan el límite inferior en 1,71 V). Estos filtros describen la alimentación principal, no la tensión de E/S de los GPIO. La tabla muestra la tensión de E/S por separado como nivel nominal, no como límites de funcionamiento garantizados; compruebe las especificaciones eléctricas del componente exacto. El encapsulado también es una decisión estructural: determina el área ocupada en la placa, la complejidad del fan-out, la ruta térmica y el presupuesto de pines utilizables. El filtro usa categorías generales; consulte en los resultados la designación exacta del encapsulado. Un encapsulado con un máximo de GPIO publicado mayor puede quedarse corto después de reservar pines para alimentación, relojes, depuración, pantalla, memoria y periféricos obligatorios.
+Seleccione la alimentación y el encapsulado desde el principio. El selector distingue entre alimentación directa desde una batería Li-ion (raíl de 3,2–4,7 V), componentes con una opción documentada de alimentación de 3,3 V mediante regulación externa y componentes que admiten una tensión de alimentación principal tan baja como aproximadamente 1,8 V (algunas especificaciones fijan el límite inferior en 1,71 V). Estos filtros describen la alimentación principal, no la tensión de E/S de las GPIO. La tabla muestra la tensión de E/S por separado como nivel nominal, no como límites de funcionamiento garantizados; compruebe las especificaciones eléctricas del componente exacto. El encapsulado también es una decisión estructural: determina el área ocupada en la placa, la complejidad del fan-out, la ruta térmica y el presupuesto de pines utilizables. El filtro usa categorías generales; consulte en los resultados la designación exacta del encapsulado. Un encapsulado con un máximo de GPIO publicado mayor puede quedarse corto después de reservar pines para alimentación, relojes, depuración, pantalla, memoria y periféricos obligatorios.
 
 ### Margen de memoria y GPIO { #memory-and-gpio-headroom }
 
@@ -51,7 +51,7 @@ Filtre por la interfaz de pantalla que realmente requiere el panel y use la reso
 
 ### Interfaces de audio { #audio-interfaces }
 
-El selector ofrece filtros independientes de cantidad mínima para DAC de audio, ADC, interfaces PDM e interfaces I2S. Cada valor es un umbral mínimo, no un perfil de audio combinado. Después, revise el uso compartido de recursos con otros periféricos y el diseño analógico de la placa.
+El selector ofrece filtros independientes de cantidad mínima para DAC y ADC de audio, interfaces PDM e interfaces I2S. Cada valor es un umbral mínimo, no un perfil de audio combinado. Después, revise el uso compartido de recursos con otros periféricos y el diseño analógico de la placa.
 
 ### Conectividad y hardware especializado { #connectivity-and-specialist-hardware }
 

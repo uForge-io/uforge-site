@@ -70,8 +70,8 @@ Por ejemplo, un producto de audio Bluetooth debería partir de un ejemplo de aud
 
 ## Flujo de adaptación { #adaptation-workflow }
 
-1. Compile y programe el ejemplo sin modificar.
-2. Guarde el comando de compilación que funcionó, el nombre de la placa, el comando de programación, el puerto serie y el registro.
+1. Compile y grabe el ejemplo sin modificar.
+2. Guarde el comando de compilación que funcionó, el nombre de la placa, el comando de grabación, el puerto serie y el registro.
 3. Realice un único cambio para el producto.
 4. Vuelva a compilar y a probar.
 5. Haga un commit o registre el cambio antes de añadir otro subsistema.

@@ -39,30 +39,30 @@ Uma pipeline simplificada de IA de borda no SF32 pode ser representada assim:
 <div align="center"><em>Diagrama: Etapas de processamento e inferência controlada pelo firmware</em></div>
 
 ```text
-Sensores / Áudio / Câmera
+Sensors / Audio / Camera
         │
         ▼
-Pré-processamento
-  - filtragem
-  - divisão em quadros
-  - normalização
-  - extração de características
+Pre-processing
+  - filtering
+  - framing
+  - normalization
+  - feature extraction
         │
         ▼
-Firmware / runtime de inferência
-  - orquestração do grafo do modelo
-  - operações compatíveis com NNACC
-  - outras operações na CPU, se implementadas
+Firmware / Inference Runtime
+  - model graph orchestration
+  - supported operations on NNACC
+  - other operations on CPU, if implemented
         │
         ▼
-Pós-processamento
-  - aplicação de limiar
-  - suavização
-  - detecção de eventos
-  - decisões da aplicação
+Post-processing
+  - thresholding
+  - smoothing
+  - event detection
+  - application decisions
         │
         ▼
-Aplicação, UI, Bluetooth ou armazenamento
+Application, UI, Bluetooth, or Storage
 ```
 
 O acelerador é apenas uma etapa da pipeline completa de IA. Produtos reais ainda precisam capturar e armazenar dados em buffers, fazer pré-processamento, agendar inferências, executar o pós-processamento e aplicar a lógica de decisão da aplicação. Em geral, o melhor desempenho vem de projetar toda a pipeline considerando a hierarquia de memória e os aceleradores disponíveis, em vez de tratar a inferência como uma chamada de função isolada.

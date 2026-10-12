@@ -35,7 +35,7 @@ Os exemplos em C são trechos, não arquivos-fonte completos. Inclua os cabeçal
 | Nome da placa | Corresponde a uma das configurações de placa compatíveis. |
 | Porta serial | Abre normalmente e exibe a saída de inicialização. |
 | Ferramenta de gravação | Permite gravar o firmware repetidamente sem trocar os cabos. |
-| Esquema ou arquivos da placa | Estão disponíveis antes da escolha de recursos GPIO, ADC, PWM ou RTC. |
+| Esquemático ou arquivos da placa | Estão disponíveis antes da escolha de recursos GPIO, ADC, PWM ou RTC. |
 | Uma alteração por vez | Compile, grave e valide após cada pequena mudança. |
 
 </div>
@@ -71,7 +71,7 @@ int main(void)
 ```
 
 1. Copie para o diretório do seu projeto o exemplo de GPIO mais próximo, ou edite o próprio exemplo enquanto aprende.
-2. Localize o pino do LED no esquema ou nos arquivos de suporte da placa. Não tente adivinhar a identificação da porta nem do pino.
+2. Localize o pino do LED no esquemático ou nos arquivos de suporte da placa. Não tente adivinhar a identificação da porta nem do pino.
 3. Compile e grave o firmware usando o mesmo nome de placa empregado no `hello_world`.
 4. Confirme se o LED pisca na frequência esperada.
 5. Altere o atraso para 100 ms, compile novamente e confirme se a frequência visível do piscar mudou.
@@ -140,7 +140,7 @@ O shell **FinSH** do RT-Thread oferece um prompt interativo `msh>` pela mesma UA
 1. Grave um dos exemplos anteriores e abra novamente o terminal serial.
 2. Pressione Enter para obter o prompt `msh>`.
 3. Execute `list_thread` e `list_device`.
-4. Adicione chamadas a `rt_kprintf()` no tratador do botão do Tutorial 2.
+4. Adicione chamadas a `rt_kprintf()` na rotina de tratamento do botão do Tutorial 2.
 5. Confirme se as mensagens aparecem quando você pressiona o botão.
 
 **Critério de sucesso:** você consegue inspecionar threads e dispositivos pelo shell e relacionar suas mensagens de log com eventos físicos.
@@ -204,7 +204,7 @@ rt_pwm_enable(pwm, channel);
 
 **Se não funcionar:** verifique se o pino está conectado à instância PWM, se o número do canal está correto, se o período e a largura do pulso estão em nanossegundos e se a carga externa precisa de um transistor de acionamento.
 
-**O que você aprendeu:** a configurar o período e o ciclo de trabalho e a reutilizar, em outra classe de periférico, o padrão de driver de dispositivo visto no Tutorial 4.
+**O que você aprendeu:** como configurar o período e o ciclo de trabalho e aplicar, em outra classe de periférico, o padrão de driver de dispositivo visto no Tutorial 4.
 
 ## Mantenha a hora com o RTC { #keep-time-with-the-rtc }
 
@@ -235,7 +235,7 @@ Ao testar a retenção, não redefina o RTC incondicionalmente a cada inicializa
 
 **O que você aprendeu:** a API padrão de tempo da linguagem C sobre o dispositivo RTC do RT-Thread e um exemplo de como o comportamento do firmware depende do projeto de hardware.
 
-## Miniprojeto: registrador de sensor controlado por botão { #mini-project-button-controlled-sensor-logger }
+## Miniprojeto: registrador de leituras de sensor controlado por botão { #mini-project-button-controlled-sensor-logger }
 
 Depois de concluir os seis tutoriais curtos, combine-os em um pequeno projeto:
 
@@ -247,7 +247,7 @@ Depois de concluir os seis tutoriais curtos, combine-os em um pequeno projeto:
 
 **Critério de aprovação:** o projeto funciona por vários minutos sem disparos repetidos do botão, logs descontrolados ou reinicializações inesperadas.
 
-## Checklist de bring-up dos primeiros periféricos { #beginner-bring-up-checklist }
+## Checklist de bring-up (ativação inicial) dos primeiros periféricos { #beginner-bring-up-checklist }
 
 - [ ] Nome da placa, porta serial e processo de gravação foram validados.
 - [ ] A saída GPIO funciona com um LED real ou em um pino medido.

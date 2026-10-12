@@ -1,6 +1,6 @@
 ---
 icon: lucide/book-check
-description: "Hardware-Design-Guide für das SF32LB56-MOD Bluetooth-MCU-Modul: Stromversorgung, Schnittstellen und Hinweise zur PCB-Integration."
+description: "Hardware-Design-Leitfaden für das SF32LB56-MOD Bluetooth-MCU-Modul: Stromversorgung, Schnittstellen und Hinweise zur PCB-Integration."
 tags:
   - Hardware
   - Modul
@@ -8,11 +8,11 @@ hide:
     - navigation
 ---
 
-# SF32LB56-MOD Hardware-Design-Guide { #sf32lb56-mod-hardware-design-guide }
+# SF32LB56-MOD Hardware-Design-Leitfaden { #sf32lb56-mod-hardware-design-guide }
 
 ## 1. Einführung { #1-introduction }
 
-**SF32LB56-MOD** ist eine universell einsetzbare, stromsparende Bluetooth-MCU-Modulfamilie von SiFli auf Basis der Serie SF32LB56xV.
+**SF32LB56-MOD** ist eine vielseitig einsetzbare Bluetooth-MCU-Modulfamilie von SiFli mit niedrigem Stromverbrauch auf Basis der Serie SF32LB56xV.
 
 Dieser Leitfaden stützt sich auf die **technische Spezifikation DS5602-SF32LB56-MOD V0.3** und bündelt die modulspezifischen Angaben, die für Schaltplanentwurf, PCB-Layout, Validierung und Produktionsfreigabe benötigt werden. Dazu gehören Speichervarianten, die 89-Pin-Schnittstelle, drei Versorgungsschienen, Display-, Audio- und Speicherschnittstellen, Antennenplatzierung, Handhabungsanforderungen und die Schaltplan-Checkliste.
 
@@ -56,13 +56,13 @@ Das Modul unterstützt Bluetooth 5.3 und bietet Display-Beschleunigung, Audio-Ei
 | KI/DSP | Matrix-Beschleuniger mit bis zu 1,92 GOPS, FFT, FIR, CORDIC |
 | Speicher | Modul-Flash-/PSRAM-Optionen, MPI3, SD/SDIO/eMMC-Unterstützung |
 | Sicherheit | AES, HASH, CRC, TRNG, Secure Boot, 1024-Bit-eFuse, PSA Certified Level 1 |
-| Antenne | PCB-Onboard-Antenne oder externe Antenne über IPEX-kompatiblen Steckverbinder |
+| Antenne | Integrierte PCB-Antenne oder externe Antenne über IPEX-kompatiblen Steckverbinder |
 
 </div>
 
 ### 2.4 Typische Anwendungen { #24-typical-applications }
 
-Typische Anwendungen umfassen High-End-Smartwatches, Smart Bands, tragbare medizinische Geräte, Fitnessgeräte, E-Bike-Bedienfelder, Autoschlüssel, am Körper tragbare Fernbedienungen für Fahrzeuge, Smart-Home-Geräte, Smart Locks, grafische HMI-Geräte, industrielle Sensor-Hubs, industrielle Überwachungsterminals, Low-Power-Sensor-Hubs und Bluetooth-Mesh-Geräte.
+Typische Anwendungen umfassen High-End-Smartwatches, Smart Bands, tragbare medizinische Geräte, Fitnessgeräte, E-Bike-Bedienfelder, Autoschlüssel, am Körper tragbare Fernbedienungen für Fahrzeuge, smarte Haushaltsgeräte, Smart Locks, grafische HMI-Geräte, industrielle Sensor-Hubs, industrielle Überwachungsterminals, Low-Power-Sensor-Hubs und Bluetooth-Mesh-Geräte.
 
 ## 3. Design auf einen Blick { #3-design-at-a-glance }
 
@@ -74,17 +74,17 @@ Typische Anwendungen umfassen High-End-Smartwatches, Smart Bands, tragbare mediz
 
 | Thema | Design-Hinweis |
 | :--- | :--- |
-| Spannungsschienen | VDD_3V3, VDD_1V8 und VDDIO bereitstellen. Alle drei Schienen müssen gleichzeitig hochfahren. |
-| Lokale Entkopplung | 4,7-µF-Kondensatoren nahe an den Modulpins von VDD_3V3, VDD_1V8 und VDDIO platzieren. |
-| I/O-Pegel | VDDIO unterstützt 1,7–3,6 V, aber PA00–PA11 sind fest auf 3,3 V eingestellt. Jedes angeschlossene Peripheriegerät prüfen. |
+| Spannungsschienen | Stellen Sie VDD_3V3, VDD_1V8 und VDDIO bereit. Alle drei Schienen müssen gleichzeitig hochfahren. |
+| Lokale Entkopplung | Platzieren Sie 4,7-µF-Kondensatoren nahe an den Modulpins von VDD_3V3, VDD_1V8 und VDDIO. |
+| I/O-Pegel | VDDIO unterstützt 1,7–3,6 V, PA00–PA11 sind jedoch fest auf 3,3 V eingestellt. Prüfen Sie jedes angeschlossene Peripheriegerät. |
 | Debug/Download | UART4_TXD/UART4_RXD sind die Standard-UART-Pins für Logausgabe, Download und Debug; SWDIO/SWCLK unterstützen den SWD-Download. |
-| Boot-Modus | BOOT_MODE High wählt den Download-Modus; BOOT_MODE Low wählt den Benutzermodus. |
+| Boot-Modus | Ein High-Pegel an BOOT_MODE wählt den Download-Modus, ein Low-Pegel den Benutzermodus. |
 | Konflikt mit internem Flash | PA06–PA11 sind standardmäßig mit dem internen Modul-Flash verbunden und extern nicht verfügbar. |
 | SDIO-/MPI3-Konflikt | SDIO und MPI3 teilen sich I/O-Ressourcen und können nicht gleichzeitig verwendet werden. |
-| Weckquellen | PA50, PA51, PB32 und PB35 können während des MCU-Schlafs Interrupts empfangen. |
+| Weckquellen | PA50, PA51, PB32 und PB35 können Interrupts empfangen, während sich die MCU im Schlafmodus befindet. |
 | PWRKEY | PB32 unterstützt einen Reset nach 10 s langem Drücken bei High-Pegel; ein 10-kΩ-Pull-down ist erforderlich. |
-| Antenne | Den PCB-Antennenbereich frei von Kupfer, Leiterbahnen, Bauteilen und Metall halten; mindestens 15 mm Abstand einhalten, falls die Antenne nicht über den Platinenrand hinausragen kann. |
-| Fertigung | MSL 3; nach dem Öffnen des Vakuumbeutels innerhalb von 168 Stunden bei 25 ± 5 °C und 60 % rF verwenden, andernfalls vor der Wiederverwendung im Ofen trocknen. |
+| Antenne | Halten Sie den Bereich der integrierten PCB-Antenne frei von Kupfer, Leiterbahnen, Bauteilen und Metall. Falls die Antenne nicht über den Platinenrand hinausragen kann, halten Sie mindestens 15 mm Abstand. |
+| Fertigung | MSL 3; verwenden Sie das Modul nach dem Öffnen des Vakuumbeutels innerhalb von 168 Stunden bei 25 ± 5 °C und 60 % rF. Trocknen Sie es andernfalls vor der Wiederverwendung im Ofen. |
 
 </div>
 
@@ -115,7 +115,7 @@ VDD_3V3 versorgt MCU-PVDD, AVDD33_ANA, AVDD33_AUD, AVDD_BRF, VDDIOA2 und das int
 
 ### 3.4 Systemblockdiagramm { #34-system-block-diagram }
 
-Das Modulblockdiagramm zeigt die MCU der Serie SF32LB56xV, Speicherressourcen, HF-Pfad, Antennenoption, Stromversorgungseingänge und externe Schnittstellengruppen.
+Das Modulblockdiagramm zeigt die MCU der Serie SF32LB56xV, Speicherressourcen, RF-Pfad, Antennenoption, Stromversorgungseingänge und externe Schnittstellengruppen.
 
 !!! info "Abbildung 3.4-1: SF32LB56-MOD Funktionsblockdiagramm"
     Siehe Abbildung 2-1 in DS5602 V0.3.
@@ -124,18 +124,18 @@ Das Modulblockdiagramm zeigt die MCU der Serie SF32LB56xV, Speicherressourcen, H
 
 ### 4.1 Design-Reihenfolge { #41-design-sequence }
 
-1. Die Speichervariante basierend auf Firmware-Größe, Grafik-Assets, Bedarf an externem Speicher und Kostenziel auswählen.
-2. Vor Abschluss der Mechanikplanung zwischen PCB-Antenne und Variante mit externer Antenne wählen.
-3. Die Stromversorgungsarchitektur für VDD_3V3, VDD_1V8 und VDDIO festlegen und das gleichzeitige Hochfahren bestätigen.
-4. Pins für Display, Speicher, USB, Audio, Sensoren, Weckfunktion, Debug und Produktionstest zuweisen.
-5. Konflikte bei gemeinsam genutzten Ressourcen lösen, insbesondere SDIO gegenüber MPI3 sowie die intern genutzten PA06–PA11-Flash-Pins.
-6. Entkopplung, ESD, PWRKEY-Pull-down, LCD-Serienwiderstände und Debug-UART-Serienwiderstände hinzufügen.
-7. Das Modul mit dem erforderlichen Antennenabstand und Freihaltebereich platzieren.
-8. Schaltplan und PCB vor der Freigabe anhand der Checkliste in Abschnitt 7 prüfen.
+1. Wählen Sie die Speichervariante anhand der Firmware-Größe, der Grafik-Assets, des Bedarfs an externem Speicher und des Kostenziels aus.
+2. Entscheiden Sie sich vor Abschluss der Mechanikplanung für die integrierte PCB-Antenne oder die Variante mit externer Antenne.
+3. Legen Sie die Stromversorgungsarchitektur für VDD_3V3, VDD_1V8 und VDDIO fest und bestätigen Sie, dass alle drei Schienen gleichzeitig hochfahren.
+4. Weisen Sie Pins für Display, Speicher, USB, Audio, Sensoren, Weckfunktion, Debugging und Produktionstests zu.
+5. Lösen Sie Konflikte bei gemeinsam genutzten Ressourcen, insbesondere zwischen SDIO und MPI3 sowie bei den intern genutzten Flash-Pins PA06–PA11.
+6. Ergänzen Sie Entkopplung, ESD-Schutz, den PWRKEY-Pull-down sowie die Serienwiderstände für LCD und Debug-UART.
+7. Platzieren Sie das Modul mit dem erforderlichen Antennenabstand und Freihaltebereich.
+8. Prüfen Sie Schaltplan und PCB vor der Freigabe anhand der Checkliste in Abschnitt 7.
 
 ### 4.2 Prüfreihenfolge { #42-review-sequence }
 
-Eine gestufte Prüfreihenfolge verwenden: Schaltplanprüfung, Pin-Mux-Prüfung, Hochfahrprüfung, HF-/Antennenprüfung, Layoutprüfung, Erstmuster-Inbetriebnahmeprüfung, HF-Validierung, Umwelt-/Zuverlässigkeitsprüfung und Produktionstestprüfung.
+Verwenden Sie eine gestufte Prüfreihenfolge: Schaltplanprüfung, Pin-Mux-Prüfung, Prüfung des Hochfahrens, RF-/Antennenprüfung, Layoutprüfung, Inbetriebnahme des Erstmusters, RF-Validierung, Umwelt- und Zuverlässigkeitsprüfung sowie Produktionstest.
 
 ### 4.3 Meilensteine { #43-milestones }
 
@@ -147,8 +147,8 @@ Eine gestufte Prüfreihenfolge verwenden: Schaltplanprüfung, Pin-Mux-Prüfung, 
 | :--- | :--- |
 | Schaltplan-Freeze | Variante ausgewählt, Pin-Konflikte behoben, Spannungsschienen geprüft, Checkliste vollständig. |
 | Layout-Freeze | Antennenfreihaltebereich geprüft, Versorgungsentkopplung platziert, High-Speed-Schnittstellen geprüft. |
-| EVT-Inbetriebnahme | Schienen, Boot-Modus, UART/SWD, Flash, Display, USB, Audio und HF-Funktionstests bestanden. |
-| DVT | HF-Reichweite, Strom, Thermik, Schlaf-/Weckverhalten, ESD-Strategie und Gehäuseeinfluss validiert. |
+| EVT-Inbetriebnahme | Schienen, Boot-Modus, UART/SWD, Flash, Display, USB, Audio und RF-Funktionstests bestanden. |
+| DVT | RF-Reichweite, Strom, Thermik, Schlaf-/Weckverhalten, ESD-Strategie und Gehäuseeinfluss validiert. |
 | Produktionsfreigabe | Programmierung, Testpads, Prüfregeln, MSL-/Reflow-Handhabung und Revisionsaufzeichnungen vollständig. |
 
 </div>
@@ -165,35 +165,35 @@ Eine gestufte Prüfreihenfolge verwenden: Schaltplanprüfung, Pin-Mux-Prüfung, 
 
 | Schiene | Empfohlener Betriebsbereich | Zweck |
 | :--- | :--- | :--- |
-| VDD_3V3 | 2,97–3,6 V | MCU-PVDD, analoge 3,3-V-Domänen, analoge HF-Domäne, VDDIOA2, internes Flash. |
+| VDD_3V3 | 2,97–3,6 V | MCU-PVDD, analoge 3,3-V-Domänen, analoge RF-Domäne, VDDIOA2, internes Flash. |
 | VDD_1V8 | 1,7–1,95 V | Versorgung des Speichers, der sich im selben Gehäuse wie die MCU befindet. |
 | VDDIO | 1,7–3,6 V | VDDIOA-/VDDIOB-I/O-Versorgung der MCU. |
 
 </div>
 
-VDD_3V3, VDD_1V8 und VDDIO müssen gleichzeitig hochfahren. An jedem Modul-Versorgungspin einen 4,7-µF-Kondensator nahe platzieren. Obwohl VDDIO von 1,7 V bis 3,6 V betrieben werden kann, weist das Datenblatt gesondert darauf hin, dass PA00–PA11 fest auf 3,3 V eingestellt sind und VDDIO nicht folgen.
+VDD_3V3, VDD_1V8 und VDDIO müssen gleichzeitig hochfahren. Platzieren Sie an jedem Modul-Versorgungspin einen 4,7-µF-Kondensator in unmittelbarer Nähe. Obwohl VDDIO mit 1,7 V bis 3,6 V betrieben werden kann, weist das Datenblatt gesondert darauf hin, dass PA00–PA11 fest auf 3,3 V eingestellt sind und VDDIO nicht folgen.
 
 #### 5.1.2 Betriebsmodi { #512-operating-modes }
 
-BOOT_MODE wählt den Startmodus: High für den Download-Modus und Low für den Benutzermodus. Den Pegel am BOOT_MODE-Pin bei Reset und während der Produktionsprogrammierung eindeutig festlegen. PB32/PWRKEY unterstützt einen Reset nach 10 s langem Drücken bei High-Pegel; ein 10-kΩ-Pull-down ist erforderlich.
+BOOT_MODE wählt den Startmodus: High für den Download-Modus und Low für den Benutzermodus. Legen Sie den Pegel am BOOT_MODE-Pin bei Reset und während der Produktionsprogrammierung eindeutig fest. PB32/PWRKEY unterstützt einen Reset nach 10 s langem Drücken bei High-Pegel; ein 10-kΩ-Pull-down ist erforderlich.
 
-### 5.2 Takt und HF { #52-timing-and-rf }
+### 5.2 Takt und RF { #52-timing-and-rf }
 
 #### 5.2.1 Takt { #521-clock }
 
-Die Modulplattform verwendet einen 48-MHz-Quarzoszillator und unterstützt Low-Power-RC-Oszillatoren bei 1 MHz/48 MHz, einen Ultra-Low-Power-10-kHz-RC-Oszillator sowie einen optionalen 32,768-kHz-Quarzoszillator. Das Layout und die Masseführung im Taktbereich konsistent mit dem Modul-Referenzdesign halten und Ultraschallprozesse vermeiden, die den internen Kristall mechanisch belasten können.
+Die Modulplattform verwendet einen 48-MHz-Quarzoszillator und unterstützt stromsparende RC-Oszillatoren mit 1 MHz/48 MHz, einen besonders stromsparenden 10-kHz-RC-Oszillator sowie einen optionalen 32,768-kHz-Quarzoszillator. Halten Sie Layout und Masseführung im Taktbereich konsistent mit dem Modul-Referenzdesign. Vermeiden Sie Ultraschallprozesse, die den internen Quarz mechanisch belasten können.
 
-#### 5.2.2 HF { #522-rf }
+#### 5.2.2 RF { #522-rf }
 
-<div align="center"><em>Tabelle 5.2-1: Bluetooth-HF-Zusammenfassung</em></div>
+<div align="center"><em>Tabelle 5.2-1: Bluetooth-RF-Zusammenfassung</em></div>
 
 <div align="center" markdown>
 
-| Punkt | Wert |
+| Merkmal | Wert |
 | :--- | :--- |
 | Bluetooth-Frequenzbereich | 2402–2480 MHz |
 | Maximale BLE-Sendeleistung | 19 dBm |
-| BLE-HF-Leistungsregelbereich | -20 bis 19 dBm |
+| BLE-RF-Leistungsregelbereich | -20 bis 19 dBm |
 | BLE-1-Mbps-Empfindlichkeit | -100 dBm dirty off, -99,3 dBm dirty on |
 | BLE-2-Mbps-Empfindlichkeit | -97 dBm dirty off, -96,5 dBm dirty on |
 | Maximale BR-Sendeleistung | 19 dBm |
@@ -204,7 +204,7 @@ Die Modulplattform verwendet einen 48-MHz-Quarzoszillator und unterstützt Low-P
 
 </div>
 
-Das Modul unterstützt eine PCB-Onboard-Antenne oder eine externe Antenne über einen IPEX-kompatiblen Steckverbinder. Kommunikationsreichweite und HF-Leistung im endgültigen Gehäuse validieren, nicht nur auf offener Werkbank.
+Das Modul unterstützt eine integrierte PCB-Antenne oder eine externe Antenne über einen IPEX-kompatiblen Steckverbinder. Validieren Sie Kommunikationsreichweite und RF-Leistung im endgültigen Gehäuse, nicht nur auf einer offenen Werkbank.
 
 ### 5.3 Benutzerschnittstellen { #53-user-interfaces }
 
@@ -212,7 +212,7 @@ Das Modul unterstützt eine PCB-Onboard-Antenne oder eine externe Antenne über 
 
 Der LCD-Controller unterstützt DBI-Seriell-SPI-Modus, Dual-SPI, Quad-SPI, 8080-Parallelmodus, DPI/RGB und JDI. Die im Datenblatt empfohlene Pin-Zuweisungsabbildung ordnet die Gruppen LCD_DPI_24, LCD_DPI_8, LCD_QSPI, LCD_8080, E-Paper und Raspberry-Pi-Stil den Modulpins zu.
 
-An den LCD-RGB-Signalleitungen 33–100-Ω-Serienwiderstände hinzufügen. RGB-, SPI-Display- und Touch-Panel-Routing kurz und konsistent halten und ESD-Schutz an exponierten Touch- oder Steckverbinderschnittstellen reservieren.
+Fügen Sie den LCD-RGB-Signalleitungen Serienwiderstände von 33–100 Ω hinzu. Halten Sie RGB-, SPI-Display- und Touch-Panel-Leiterbahnen kurz und konsistent. Sehen Sie ESD-Schutz an exponierten Touch- oder Steckverbinderschnittstellen vor.
 
 !!! info "Abbildung 5.3-1: Empfohlene Pin-Zuweisung des Entwicklungsboards"
     Siehe Abbildung 7-6 in DS5602 V0.3.
@@ -221,15 +221,15 @@ An den LCD-RGB-Signalleitungen 33–100-Ω-Serienwiderstände hinzufügen. RGB-,
 
 Das Modul stellt analoge Audio-DAC-Ausgänge, MIC_BIAS, MIC_ADC_IN, I2S und PDM-fähige Pins bereit. Der Audio-DAC ist ein 24-Bit-Ausgangspfad, der Abtastraten von 8 kHz bis 48 kHz mit 109 dB SNR und Dynamikumfang unterstützt. Der Audio-ADC ist ein 24-Bit-Sigma-Delta-Eingangspfad, der Abtastraten von 8 kHz bis 48 kHz mit 99 dB SNR und Dynamikumfang unterstützt.
 
-Analoges Audio von störenden Schaltknoten, LCD-Takten und Antennenzuführungsstrukturen fernhalten. Die Filterung von MIC_BIAS und MIC_ADC_IN nahe an der angeschlossenen Mikrofonschaltung halten.
+Halten Sie analoge Audiosignale von störenden Schaltknoten, LCD-Takten und Antennenzuführungsstrukturen fern. Platzieren Sie die Filterung für MIC_BIAS und MIC_ADC_IN nahe an der angeschlossenen Mikrofonschaltung.
 
 #### 5.3.3 Tasten { #533-buttons }
 
-PB32 ist der PWRKEY-Eingang und unterstützt einen Reset nach 10 s langem Drücken bei High-Pegel. Den erforderlichen 10-kΩ-Pull-down vorsehen und sicherstellen, dass der Tastenschaltkreis während Transport, Deep Sleep und Ein-/Ausschaltsequenzen keinen undefinierten Pegel annimmt.
+PB32 ist der PWRKEY-Eingang und unterstützt einen Reset nach 10 s langem Drücken bei High-Pegel. Sehen Sie den erforderlichen 10-kΩ-Pull-down vor und stellen Sie sicher, dass der Tastenschaltkreis während Transport, Deep Sleep und Ein-/Ausschaltsequenzen keinen undefinierten Pegel annimmt.
 
 #### 5.3.4 Motor- und PWM-Lasten { #534-motor-and-pwm-loads }
 
-Im Datenblatt in der empfohlenen Pin-Zuweisungsabbildung mit GPTIM gekennzeichnete Pins unterstützen PWM-Ausgang. Externe Treiber für Motoren, Hintergrundbeleuchtung, Summer oder andere Lasten verwenden; induktive oder Hochstromlasten nicht direkt von Modul-GPIOs ansteuern.
+Die in der empfohlenen Pin-Zuweisungsabbildung des Datenblatts mit GPTIM gekennzeichneten Pins unterstützen PWM-Ausgänge. Verwenden Sie externe Treiber für Motoren, Hintergrundbeleuchtung, Summer oder andere Lasten. Steuern Sie induktive oder stromstarke Lasten nicht direkt über Modul-GPIOs an.
 
 ### 5.4 Speicher und Konnektivität { #54-storage-and-connectivity }
 
@@ -239,13 +239,13 @@ Die Modulfamilie stellt SKU-abhängiges Haupt-Flash, 4+8 MB OPI-PSRAM und 1 MB B
 
 #### 5.4.2 Sensoren { #542-sensors }
 
-GPADC unterstützt 12-Bit-Wandlung, eine Abtastrate von bis zu 4 MS/s, einen Eingangsbereich von 0–3,3 V single-ended, einen Differenzeingangsbereich von -2,1 V bis +2,1 V, Software-/Hardware-Trigger und DMA. Mit GPADC_CHx gekennzeichnete Pins unterstützen Analogeingänge; analoge Pfade kurz, gefiltert und fern von LCD- und HF-Schaltstörungen halten.
+GPADC unterstützt 12-Bit-Wandlung, eine Abtastrate von bis zu 4 MS/s, einen Eingangsbereich von 0–3,3 V single-ended, einen Differenzeingangsbereich von -2,1 V bis +2,1 V, Software-/Hardware-Trigger und DMA. Mit GPADC_CHx gekennzeichnete Pins unterstützen Analogeingänge; analoge Pfade kurz, gefiltert und fern von LCD- und RF-Schaltstörungen halten.
 
 #### 5.4.3 UART/I2C { #543-uarti2c }
 
 UART unterstützt Vollduplex-Betrieb bis zu 6 Mbps. I2C unterstützt die Standardmodi 100 kbps, Fast 400 kbps, Fast-Mode Plus 1 Mbps und High-Speed 3,4 Mbps. Viele GPIOs sind als `PAxx_I2C_UART` oder `PBxx_I2C_UART` gemultiplext; den endgültigen Mux-Plan vor dem Schaltplan-Freeze bestätigen.
 
-UART4_TXD an Pin 6 und UART4_RXD an Pin 7 bilden die Standard-UART für Logausgabe und unterstützen Programm-Download sowie Debug. PA16 und PA17 können als DBG_UART gemultiplext werden; bei Verwendung für Download oder Debug sind 100-Ω-Serienwiderstände erforderlich.
+UART4_TXD an Pin 6 und UART4_RXD an Pin 7 bilden die Standard-UART für Logausgabe und unterstützen Programm-Download sowie Debugging. PA16 und PA17 können als DBG_UART gemultiplext werden; verwenden Sie diese Pins für Download oder Debugging, sind Serienwiderstände von 100 Ω erforderlich.
 
 #### 5.4.4 USB, SPI, SDIO und I2S { #544-usb-spi-sdio-and-i2s }
 
@@ -255,17 +255,17 @@ USB2.0 FS unterstützt Host-/Device-Modus mit integriertem PHY. SPI unterstützt
 
 #### 5.5.1 Debug { #551-debug }
 
-SWDIO an Pin 79 und SWCLK an Pin 80 sind SWD-Debug-/Download-Pins. SWD auf frühen Prototypen und Produktions-Fixtures zugänglich halten. Zudem den Standard-UART4-Download-/Debug-Pfad zugänglich halten, sofern das Produkt keinen anderen zugelassenen Programmierpfad besitzt.
+SWDIO an Pin 79 und SWCLK an Pin 80 sind SWD-Debug-/Download-Pins. Halten Sie SWD bei frühen Prototypen und an Fertigungsprüfvorrichtungen zugänglich. Halten Sie außerdem den Standard-UART4-Download-/Debug-Pfad zugänglich, sofern das Produkt keinen anderen zugelassenen Programmierpfad besitzt.
 
 #### 5.5.2 Produktion { #552-production }
 
-Produktionszugang für Stromversorgung, Masse, Boot-Modus, Reset/PWRKEY, SWD, UART-Download und jede Kalibrierungs- oder HF-Testschnittstelle auf Board-Ebene reservieren. Die finale Testsoftware sollte Boot, Flash, Display, Touch, Audio, USB, Sensoren, HF-Kommunikation, Schlaf-/Weckverhalten und Stromverbrauch abdecken.
+Reservieren Sie auf Platinenebene Fertigungszugänge für Stromversorgung, Masse, Boot-Modus, Reset/PWRKEY, SWD, UART-Download sowie jede Kalibrierungs- oder RF-Testschnittstelle. Die finale Testsoftware sollte Boot, Flash, Display, Touch, Audio, USB, Sensoren, RF-Kommunikation, Schlaf- und Weckverhalten sowie Stromverbrauch abdecken.
 
 ## 6. PCB-Layout { #6-pcb-layout }
 
 ### 6.1 Mechanik und Footprint { #61-mechanical-and-footprint }
 
-Das Modul misst 18,0 × 32,9 × 3,1 mm. Den empfohlenen PCB-Footprint aus dem Datenblatt verwenden und Land Pattern, Lötstopplack-Erweiterung, Pastenöffnung, Freihaltebereich und Bestückungs-Courtyard mit dem PCB-Bestückungsdienstleister abstimmen.
+Das Modul misst 18,0 × 32,9 × 3,1 mm. Verwenden Sie den empfohlenen PCB-Footprint aus dem Datenblatt und stimmen Sie Land Pattern, Lötstopplack-Erweiterung, Pastenöffnung, Freihaltebereich und Bestückungs-Courtyard mit dem PCB-Bestückungsdienstleister ab.
 
 !!! info "Abbildung 6.1-1: SF32LB56-MOD Modulabmessungen"
     Siehe Abbildung 8-1 in DS5602 V0.3.
@@ -275,9 +275,9 @@ Das Modul misst 18,0 × 32,9 × 3,1 mm. Den empfohlenen PCB-Footprint aus dem Da
 
 ### 6.2 Antennenplatzierung { #62-antenna-placement }
 
-Verwendet das Produkt die PCB-Onboard-Antenne, den Antennenbereich frei von Bauteilen oder Metall reservieren. Das Modul so platzieren, dass der Antennenbereich nach Möglichkeit über den Rand der Trägerplatine hinausragt, mit dem Speisepunkt nahe am Platinenrand.
+Verwendet das Produkt die integrierte PCB-Antenne, halten Sie deren Bereich frei von Bauteilen und Metall. Platzieren Sie das Modul so, dass die Antenne nach Möglichkeit über den Rand der Trägerplatine hinausragt und der Speisepunkt nahe am Platinenrand liegt.
 
-Kann die Antenne nicht über den Platinenrand hinausragen, einen Freihaltebereich von mindestens 15 mm vorsehen. In diesem Freihaltebereich kein Kupfer, keine Leiterbahnen oder Bauteile platzieren und das Trägerplatinenmaterial unter der PCB-Antenne so weit wie praktikabel aussparen.
+Kann die Antenne nicht über den Platinenrand hinausragen, sehen Sie einen Freihaltebereich von mindestens 15 mm vor. Platzieren Sie in diesem Bereich weder Kupfer noch Leiterbahnen noch Bauteile und sparen Sie das Material der Trägerplatine unter der PCB-Antenne so weit wie praktikabel aus.
 
 !!! info "Abbildung 6.2-1: Empfohlene Modulplatzierung"
     Siehe Abbildung 8-4 in DS5602 V0.3.
@@ -301,11 +301,11 @@ Für Designs mit externer Antenne beschreibt das Datenblatt einen Steckverbinder
 | Bereich | Prüfung |
 | :--- | :--- |
 | Stromversorgung | 4,7-µF-Kondensatoren befinden sich nahe an den Pins von VDD_3V3, VDD_1V8 und VDDIO. |
-| Masse | Modul-Massepins sind mit einem niederohmigen Massesystem mit Stitching nahe den High-Speed- und HF-Pfaden verbunden. |
-| Antenne | Der Antennenfreihaltebereich weist kein Eindringen von Kupfer, Leiterbahnen, Bauteilen, Schrauben, Abschirmungen, Batteriemetall oder Gehäusemetall auf. |
+| Masse | Modul-Massepins sind mit einem niederohmigen Massesystem mit Stitching nahe den High-Speed- und RF-Pfaden verbunden. |
+| Antenne | Der Antennenfreihaltebereich weist kein Eindringen von Kupfer, Leiterbahnen, Bauteilen, Schrauben, Abschirmungen, Akkumetall oder Gehäusemetall auf. |
 | Display | LCD-RGB-/SPI-Leitungen sind kurz, impedanzbewusst und weisen die erforderlichen Serienwiderstände auf. |
 | USB | USB-DP/DM sind als angepasstes Differenzpaar geroutet, mit ESD nahe am Steckverbinder. |
-| Analoges Audio | MIC_BIAS, MIC_ADC_IN und DAC-Ausgänge meiden Schaltregler, LCD-Takte und HF-Speisebereiche. |
+| Analoges Audio | MIC_BIAS, MIC_ADC_IN und DAC-Ausgänge meiden Schaltregler, LCD-Takte und RF-Speisebereiche. |
 | Debug | SWD- und UART-Download-/Debug-Zugang ist bei Prototypen und Produktions-Fixtures erreichbar. |
 
 </div>
@@ -314,7 +314,7 @@ Für Designs mit externer Antenne beschreibt das Datenblatt einen Steckverbinder
 
 ### 7.1 Elektrische Eigenschaften { #71-electrical-characteristics }
 
-<div align="center"><em>Tabelle 7.1-1: Absolute Grenzwerte</em></div>
+<div align="center"><em>Tabelle 7.1-1: Absolute Maximalwerte</em></div>
 
 <div align="center" markdown>
 
@@ -431,7 +431,7 @@ VDD ist die I/O-Versorgung. VOH und VOL werden mit einer hochohmigen Last gemess
 
 <div align="center" markdown>
 
-| Punkt | Anforderung |
+| Thema | Anforderung |
 | :--- | :--- |
 | Lagerung im versiegelten MBB | Nicht kondensierende Atmosphäre; Temperatur unter 40 °C und relative Luftfeuchtigkeit unter 90 %. |
 | Feuchtigkeitsempfindlichkeit | MSL 3. |
@@ -502,7 +502,7 @@ DS5602 V0.3 enthält die vollständige 89-Pin-Definitionstabelle und eine Pinbel
 
 | Version | Datum | Anmerkungen |
 | :--- | :--- | :--- |
-| 0.1 | 2026-07 | Erste Ausgabe des Hardware-Design-Guides für das Modul SF32LB56-MOD, basierend auf DS5602-SF32LB56-MOD V0.3. |
+| 0.1 | 2026-07 | Erste Ausgabe des Hardware-Design-Leitfadens für das Modul SF32LB56-MOD, basierend auf DS5602-SF32LB56-MOD V0.3. |
 
 </div>
 

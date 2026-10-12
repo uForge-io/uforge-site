@@ -10,7 +10,7 @@ tags:
 
 Esta guía explica cómo pasar de una placa de desarrollo SF32 recién sacada de la caja a ejecutar el ejemplo `hello_world` por UART con **SiFli-SDK**, el SDK oficial basado en RT-Thread para dispositivos SF32.
 
-Aunque tenga previsto usar Arduino, Zephyr o MicroPython, conviene completar esta guía una vez. Así podrá comprobar que la placa, el cable, el puerto serie, el proceso de flasheo por UART y la cadena de herramientas básica funcionan antes de incorporar otro framework.
+Aunque tenga previsto usar Arduino, Zephyr o MicroPython, conviene completar esta guía una vez. Así podrá comprobar que la placa, el cable, el puerto serie, el proceso de grabación por UART y la cadena de herramientas básica funcionan antes de incorporar otro framework.
 
 ## Qué necesitará { #what-youll-need }
 
@@ -34,9 +34,9 @@ Aunque tenga previsto usar Arduino, Zephyr o MicroPython, conviene completar est
 - [Versiones publicadas de SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK/releases)
 
 !!! tip "¿Prefiere un IDE?"
-    SiFli también publica una extensión **SiFli-SDK-CodeKit** para VS Code que empaqueta la configuración, la compilación y el flujo de flasheo del SDK en acciones guiadas. Consulte [SiFli CodeKit](getting-started-sifli-codekit.md) si prefiere ese flujo de trabajo.
+    SiFli también publica una extensión **SiFli-SDK-CodeKit** para VS Code que empaqueta la configuración, la compilación y el flujo de grabación del SDK en acciones guiadas. Consulte [SiFli CodeKit](getting-started-sifli-codekit.md) si prefiere ese flujo de trabajo.
 
-## Instala la cadena de herramientas { #install-the-toolchain }
+## Instale la cadena de herramientas { #install-the-toolchain }
 
 Para partir de una base reproducible, utilice una etiqueta de versión publicada en lugar de `main`. En el momento de esta revisión, la etiqueta publicada más reciente es `v2.5.1`; consulte la [lista oficial de versiones](https://github.com/OpenSiFli/SiFli-SDK/releases) por si hubiera una más nueva. La rama `release/v2.5` recibe actualizaciones de esa serie y puede cambiar con el tiempo.
 
@@ -97,7 +97,7 @@ Para partir de una base reproducible, utilice una etiqueta de versión publicada
 
 ## Elija el objetivo de placa { #choose-the-board-target }
 
-El valor que se pasa a `scons --board` es el nombre del directorio de la placa dentro de `customer/boards`. Elija el objetivo que coincida con la configuración de memoria y pantalla de su kit. Los nombres distinguen entre mayúsculas y minúsculas.
+El valor que se pasa a `scons --board` es el nombre del directorio de la placa dentro de `customer/boards`. Elija el objetivo que coincida con la configuración de memoria y pantalla de su placa. Los nombres distinguen entre mayúsculas y minúsculas.
 
 <div align="center" markdown>
 
@@ -116,7 +116,7 @@ El valor que se pasa a `scons --board` es el nombre del directorio de la placa d
 
 En una placa de doble núcleo, si omite el sufijo del núcleo se compila la configuración HCPU. Puede indicar `_hcpu` explícitamente o añadir `_lcpu` para compilar la configuración LCPU; por ejemplo, `scons --board=eh-lb551_lcpu`. Si su configuración no aparece en la tabla, consulte la [lista oficial de placas compatibles](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html), que contiene la información más reciente.
 
-## Compile el ejemplo "Hello World" { #build-the-hello-world-example }
+## Compile el ejemplo «Hello World» { #build-the-hello-world-example }
 
 Con el entorno cargado, compile el ejemplo `hello_world` de RT-Thread para su placa:
 
@@ -125,14 +125,14 @@ cd example/get-started/hello_world/rtt/project
 scons --board=sf32lb52-lcd_n16r8 -j8
 ```
 
-Sustituya `sf32lb52-lcd_n16r8` por el nombre de su placa. Consulte la [lista de placas compatibles](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html) para ver los nombres disponibles. `-j8` compila con 8 procesos en paralelo; ajuste ese número a su equipo. Como el comando del ejemplo omite el sufijo del núcleo, se compila HCPU y los binarios se guardan en `build_sf32lb52-lcd_n16r8_hcpu/`. Si indicas explícitamente un destino con sufijo `_lcpu`, el directorio de salida también termina en `_lcpu`.
+Sustituya `sf32lb52-lcd_n16r8` por el nombre de su placa. Consulte la [lista de placas compatibles](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html) para ver los nombres disponibles. `-j8` compila con 8 procesos en paralelo; ajuste ese número a su equipo. Como el comando del ejemplo omite el sufijo del núcleo, se compila HCPU y los binarios se guardan en `build_sf32lb52-lcd_n16r8_hcpu/`. Si indica explícitamente un destino con sufijo `_lcpu`, el directorio de salida también termina en `_lcpu`.
 
 !!! tip "¿Necesita ajustes personalizados?"
     Ejecute `sdk.py menuconfig --board=<board_name>` desde el directorio del proyecto para abrir el menú de configuración interactivo. Pulse ++esc++ dos veces y, cuando se le indique, elija guardar la configuración.
 
-## Programe la placa { #flash-the-board }
+## Grabe el firmware en la placa { #flash-the-board }
 
-Mantenga la placa conectada por USB y ejecute el script de programación UART generado por la compilación:
+Mantenga la placa conectada por USB y ejecute el script de grabación UART generado por la compilación:
 
 === "macOS / Linux"
 
@@ -155,7 +155,7 @@ Mantenga la placa conectada por USB y ejecute el script de programación UART ge
 
 ## Véalo en funcionamiento { #see-it-run }
 
-Una vez completado el flasheo, reinicie la placa o deje que se reinicie automáticamente. Abra un terminal serie a la velocidad en baudios predeterminada de la placa. Debería ver la salida de arranque y la salida del ejemplo `hello_world` por UART.
+Una vez completada la grabación, reinicie la placa o deje que se reinicie automáticamente. Abra un terminal serie a la velocidad en baudios predeterminada de la placa. Debería ver la salida de arranque y la salida del ejemplo `hello_world` por UART.
 
 ## Verifique que todo funciona { #success-check }
 

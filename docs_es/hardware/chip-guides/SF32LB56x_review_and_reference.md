@@ -17,12 +17,12 @@ hide:
 
 - [ ] Se han confirmado la variante U o V, el encapsulado, la asignación de pines y el proceso de fabricación de la PCB.
 - [ ] Se han revisado las líneas de alimentación del procesador, las salidas del PMIC, los condensadores, el reset, el cargador y los interruptores de bajo consumo.
-- [ ] Se han revisado los modos de funcionamiento, las fuentes de activación, las líneas de alimentación de las resistencias pull-up y las corrientes de fuga durante el modo de suspensión.
+- [ ] Se han revisado los modos de funcionamiento, las fuentes de activación, los rieles de pull-up y las corrientes de fuga durante la suspensión.
 - [ ] Se han revisado los parámetros, la colocación y el trazado de los cristales de cuarzo de 48 MHz y 32,768 kHz.
 - [ ] Se han completado la red de adaptación de RF, el diseño de la antena y el plan de sintonización.
 - [ ] No hay conflictos en los pines de pantalla, almacenamiento, audio, sensores, PBR, UART/I2C, GPTIM, depuración y producción.
-- [ ] Se han completado el fan-out QFN o BGA, el apilado de capas, la impedancia, el DRC y la estrategia ESD.
-- [ ] Se han probado los flujos de programación de producción y calibración del cristal.
+- [ ] Se han completado la salida de pistas del encapsulado QFN o BGA, el apilado de capas, la impedancia, la DRC y la estrategia ESD.
+- [ ] Se han probado los flujos de grabación de producción y calibración del cristal.
 
 ## 8. Documentos y referencias relacionados { #8-related-documents-and-references }
 
@@ -37,7 +37,7 @@ Consulte la documentación oficial más reciente para verificar límites eléctr
 
 </div>
 
-La [lista de comprobación del esquema](SF32LB56x_schematic_checklist.md) (sección 5.8) y la sección 6.3 de las [directrices de diseño de PCB](SF32LB56x_pcb_layout.md) reproducen punto por punto la misma *SF32LB56x Schematic & PCB Checklist* (V1.0, 2026-01-21), junto con las pautas de esquemático y diseño de PCB que verifica.
+La [lista de comprobación del esquemático](SF32LB56x_schematic_checklist.md) (sección 5.8) y la sección 6.3 de las [directrices de diseño de PCB](SF32LB56x_pcb_layout.md) reproducen punto por punto la misma *SF32LB56x Schematic & PCB Checklist* (V1.0, 2026-01-21), junto con las directrices para el esquemático y el diseño de PCB que sirven de referencia para aplicar sus comprobaciones.
 
 [Nota de aplicación de hardware SF32LB56xU]: https://wiki.sifli.com/en/hardware/SF32LB56xU-HW-Application.html
 [Nota de aplicación de hardware SF32LB56xV]: https://wiki.sifli.com/en/hardware/SF32LB56xV-HW-Application.html
@@ -48,7 +48,7 @@ La [lista de comprobación del esquema](SF32LB56x_schematic_checklist.md) (secci
 
 ### 9.1. Apéndice A. Producto típico basado en SF32LB56x { #appendix-a-a-typical-sf32lb56x-product }
 
-Un producto SF32LB56x típico incluye el MCU, el PMIC, la pantalla y el controlador táctil, el almacenamiento de arranque, memoria externa opcional, sensores, un motor de vibración, entrada y salida de audio, antena Bluetooth, cristales de cuarzo y conexiones para depuración y pruebas de producción. El encapsulado U favorece una implementación QFN compacta; el V admite más interfaces, pero requiere planificar el diseño BGA/HDI.
+Un producto típico basado en SF32LB56x incluye la MCU, el PMIC, la pantalla y el controlador táctil, el almacenamiento de arranque, memoria externa opcional, sensores, un motor de vibración, entrada y salida de audio, antena Bluetooth, cristales de cuarzo y conexiones para depuración y pruebas de producción. El encapsulado U favorece una implementación QFN compacta; el V admite más interfaces, pero requiere planificar el diseño BGA/HDI.
 
 ## 10. Historial de revisiones { #10-revision-history }
 
@@ -64,7 +64,7 @@ Un producto SF32LB56x típico incluye el MCU, el PMIC, la pantalla y el controla
 
 ### 10.1. Historial de revisiones de la lista de comprobación { #101-checklist-revision-history }
 
-La lista punto por punto de la [lista de comprobación del esquema](SF32LB56x_schematic_checklist.md) y de la sección 6.3 de las [directrices de diseño de PCB](SF32LB56x_pcb_layout.md) se versiona por separado de la guía, de acuerdo con el propio libro de trabajo *SF32LB56x Schematic & PCB Checklist* de SiFli.
+La lista punto por punto de la [lista de comprobación del esquemático](SF32LB56x_schematic_checklist.md) y de la sección 6.3 de las [directrices de diseño de PCB](SF32LB56x_pcb_layout.md) se versiona por separado de la guía, de acuerdo con el propio libro de trabajo *SF32LB56x Schematic & PCB Checklist* de SiFli.
 
 <div align="center"><em>Tabla 10.1-1: Historial de revisiones de la lista de comprobación</em></div>
 

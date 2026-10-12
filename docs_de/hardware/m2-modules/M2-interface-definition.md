@@ -10,7 +10,7 @@ tags:
 # M2-Schnittstellendefinition { #m2-interface-definition }
 
 !!! warning "Entwurf der Schnittstellendefinition"
-    Diese Seite dokumentiert einen M2-Entwurf. Eine lokale Vorschlags-Arbeitsmappe enthält M2- und M2xM-Blätter. Sie verweist jedoch auf die separate Quelldatei `M2E接口定义_0714.xlsx`, die hier fehlt; Version und Freigabestatus des Vorschlags ließen sich nicht feststellen. Eine SiFli-Primärquelle zur Bestätigung der Belegungen oder Kontaktzahlen wurde ebenfalls nicht gefunden. Die Arbeitsmappe enthält keine M2xN- oder M2xA-Blätter; die entsprechenden Zusammenfassungen unten sind daher ungeprüft. Dies ist kein veröffentlichter μForge.io-Schnittstellenstandard. Behandeln Sie alle Belegungen als vorläufig und prüfen Sie das gewählte Modul, die Trägerplatine, den Steckverbinder, elektrische Grenzwerte und Pin-Multiplexing vor einer Serienfreigabe.
+    Diese Seite dokumentiert einen M2-Entwurf. Eine lokal verfügbare Arbeitsmappe mit einem Vorschlag enthält Blätter zu M2 und M2xM. Sie verweist jedoch auf die separate Quelldatei `M2E接口定义_0714.xlsx`, die hier nicht vorliegt; Version und Freigabestatus des Vorschlags ließen sich nicht feststellen. Auch eine SiFli-Primärquelle, die Belegungen oder Kontaktzahlen bestätigt, wurde nicht gefunden. Die Arbeitsmappe enthält keine M2xN- oder M2xA-Blätter; die entsprechenden Zusammenfassungen unten sind daher ungeprüft. Dies ist kein veröffentlichter μForge.io-Schnittstellenstandard. Behandeln Sie alle Belegungen als vorläufig und prüfen Sie das ausgewählte Modul, die Trägerplatine, den Steckverbinder, elektrische Grenzwerte und Pin-Multiplexing, bevor Sie sich auf ein Produktionsdesign festlegen.
 
 ## Umfang { #scope }
 
@@ -24,7 +24,7 @@ Die M2- und M2xM-Blätter der lokalen Arbeitsmappe nummerieren die Positionen vo
 Im aktuellen Entwurf sind `M2xH` und `M2xP` als Namen reserviert; Kontakte sind ihnen nicht zugewiesen.
 
 !!! info "Zuordnung zu Steckverbindern nicht festgelegt"
-    Laut lokaler Arbeitsmappe muss ein Modul mit M2xM auch die M2-Basisschnittstelle enthalten. Sie legt jedoch nicht fest, ob die beiden Pläne getrennte oder gemeinsam genutzte physische Steckverbinder abbilden. Anzahl und Anordnung lassen sich daraus nicht ableiten. Kontaktpläne für M2xN und M2xA sind in der Arbeitsmappe nicht enthalten.
+    Laut lokaler Arbeitsmappe muss ein Modul mit M2xM auch die M2-Basisschnittstelle enthalten. Die Arbeitsmappe legt jedoch nicht fest, ob die beiden Belegungen getrennte oder gemeinsam genutzte physische Steckverbinder darstellen. Anzahl und Anordnung lassen sich daraus nicht ableiten. Kontaktbelegungen für M2xN und M2xA sind in der Arbeitsmappe nicht enthalten.
 
 ## Steckverbinderkonvention { #connector-convention }
 
@@ -138,7 +138,7 @@ Dieses zweiseitige Raster verwendet die Spalten Unterer Pin / Oberer Pin / CN1. 
 
 ### M2-Pin-Beschreibungen { #m2-pin-descriptions }
 
-Gruppen und Farben entsprechen der Kontakttabelle oben. Die Arbeitsmappe definiert keine I/O-Richtungen; diese Spalte ist daher eine vorläufige Integrationshilfe aus Sicht des Moduls: I bedeutet Eingang, O Ausgang und I/O bidirektional. Durch Kommas getrennte Richtungen entsprechen der Reihenfolge der Signale. Bei SPI und PDM wird angenommen, dass das Modul den Takt bereitstellt; bei SWD wird ein externer Debugger angenommen. Bestätigen Sie jede Signalrichtung und elektrische Anforderung anhand der Dokumentation des ausgewählten Moduls sowie der Dokumentation zum SoC.
+Gruppen und Farben entsprechen der Kontakttabelle oben. Die Arbeitsmappe definiert keine I/O-Richtungen; diese Spalte ist daher eine vorläufige Integrationshilfe aus Sicht des Moduls: I steht für Eingang, O für Ausgang und I/O für bidirektional. Durch Kommas getrennte Richtungen entsprechen der Reihenfolge der Signale. Bei SPI und PDM wird angenommen, dass das Modul den Takt bereitstellt; bei SWD wird ein externer Debugger angenommen. Bestätigen Sie jede Signalrichtung und elektrische Anforderung anhand der Dokumentation des ausgewählten Moduls sowie der SoC-Dokumentation.
 
 Bei I2C bezeichnet I/O die bidirektionalen SDA-/SCL-Busleitungen. Dies garantiert weder alle Controller-/Target-Betriebsarten noch Clock-Stretching-Unterstützung. Prüfen Sie Pin-Konfiguration und Pull-ups am tatsächlichen Modul; siehe [I2C-Busspezifikation von NXP](https://www.nxp.com/docs/en/user-guide/UM10204.pdf). Die Annahme eines PDM-Taktausgangs und Dateneingangs folgt der Mikrofon-Host-Anordnung in [STs PDM-Anwendungshinweis](https://www.st.com/resource/en/application_note/an5027-interfacing-pdm-digital-microphones-using-stm32-mcus-and-mpus-stmicroelectronics.pdf). Daraus ergibt sich keine Funktionszusage für ein bestimmtes Modul.
 
@@ -148,7 +148,7 @@ Bei I2C bezeichnet I/O die bidirektionalen SDA-/SCL-Busleitungen. Dies garantier
 
 | Signalgruppe | Signal | I/O | Beschreibung |
 | --- | --- | :---: | --- |
-| <span class="m2-chip m2-power">Stromversorgung</span> | `VBAT/VBATS` | I | Batterie-Eingangsschiene. |
+| <span class="m2-chip m2-power">Stromversorgung</span> | `VBAT/VBATS` | I | Akku-Eingangsschiene. |
 | <span class="m2-chip m2-power">Stromversorgung</span> | `3.3V` | I | 3,3-V-Versorgungsschiene. |
 | <span class="m2-chip m2-power">Stromversorgung</span> | `CHG_INT` | O | Ladegerät-Interrupt-/Statusausgang. |
 | <span class="m2-chip m2-power">Stromversorgung</span> | `USB_VIN` | I | USB-Eingang / Ladepfad-Schiene. |
@@ -159,7 +159,7 @@ Bei I2C bezeichnet I/O die bidirektionalen SDA-/SCL-Busleitungen. Dies garantier
 | <span class="m2-chip m2-display">Display</span> | `LCDC1_SPI_CLK` | O | QSPI-Display-Takt. |
 | <span class="m2-chip m2-display">Display</span> | `LCDC1_SPI_DIO0`–`DIO3` | I/O | QSPI-Display-Datenleitungen. |
 | <span class="m2-chip m2-display">Display</span> | `LCDC1_SPI_TE` | I | Tearing-Effect-Sync-Eingang vom Panel. |
-| <span class="m2-chip m2-display">Display</span> | `LCDC1_SPI_RSTB` | O | Display-Panel-Reset, aktiv-low. |
+| <span class="m2-chip m2-display">Display</span> | `LCDC1_SPI_RSTB` | O | Display-Panel-Reset, low-aktiv. |
 | <span class="m2-chip m2-display">Display</span> | `LCD_BL_PWM` | O | Hintergrundbeleuchtungs-PWM-Steuerung. |
 | <span class="m2-chip m2-touch">Touch</span> | `CTP_I2C1_SDA`, `CTP_I2C1_SCL` | I/O | I²C-Bus des kapazitiven Touch-Controllers. |
 | <span class="m2-chip m2-touch">Touch</span> | `CTP_INT` | I | Interrupt des Touch-Controllers. |
@@ -250,7 +250,7 @@ M2xN ist eine ungeprüfte Netzwerkprofil-Zusammenfassung in diesem Artikel, kein
 
 ## M2xA-Analog- und Motorsteuerungsprofil { #m2xa-analog-and-motion-control-profile }
 
-M2xA ist eine ungeprüfte Zusammenfassung zu Motorsteuerung und Erfassung in diesem Artikel, kein durch eine Quelle belegter Kontaktplan. Die verfügbare Arbeitsmappe enthält kein M2xA-Blatt; auch eine passende SiFli-Primärquelle wurde nicht gefunden. Die folgenden Signalnamen, Anzahlen und Belegungen dürfen nicht als verifiziert behandelt werden.
+M2xA ist in diesem Artikel als Zusammenfassung zu Motorsteuerung und Datenerfassung aufgeführt, jedoch nicht durch eine Quelle als Kontaktbelegung belegt. Die verfügbare Arbeitsmappe enthält kein M2xA-Blatt; auch eine passende SiFli-Primärquelle wurde nicht gefunden. Die folgenden Signalnamen, Anzahlen und Belegungen dürfen nicht als verifiziert behandelt werden.
 
 <div align="center"><em>Tabelle: M2xA-Funktionsbelegung</em></div>
 

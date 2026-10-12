@@ -168,4 +168,4 @@ Appuyez-vous sur le profil validé pour cibler les optimisations les plus effica
 Avant d'annoncer une autonomie, archivez les mesures des composants et des scénarios, le profil d'utilisation quotidien, les relevés de tension, les marqueurs du firmware et les hypothèses versionnées qui relient ces éléments. Reprenez les étapes concernées dès qu'une modification touche l'ordonnancement du firmware, la gestion de l'affichage, les paramètres radio, la cadence des capteurs, les composants de l'alimentation ou les hypothèses d'utilisation du produit.
 
 !!! note "Contenu généré automatiquement"
-    Cette page a été compilée/rédigée sans document source existant. Vérifiez les affirmations techniques dans la documentation officielle de SiFli avant de vous y fier.
+    Cette page a été compilée ou rédigée sans document source préexistant. Vérifiez les affirmations techniques dans la documentation officielle de SiFli avant de vous y fier.

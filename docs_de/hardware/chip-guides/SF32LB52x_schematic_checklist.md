@@ -44,9 +44,9 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 | 2 | Soll das Display unmittelbar beim Anschließen des Ladegeräts einschalten, wird der interne Ladeblock nicht empfohlen; bevorzugt wird ein externer Lade-IC mit Power-Path-Management | nur 520/3/5/7 | Erforderlich |
 | 3 | Der integrierte Lader ist nur geeignet, wenn es akzeptabel ist, den Akku zunächst bis auf 3,6 V zu laden, bevor die Software das Display einschaltet | nur 520/3/5/7 | Erforderlich |
 | 4 | Ein OVP-Bauteil mit integriertem LDO-Ausgang (z. B. LP5305AQVF) wird empfohlen: LDO-Ausgang 4,7–5,4 V, Belastbarkeit ≥0,5 A, Überstromschutz-Auslösung ≥0,7 A | nur 520/3/5/7 | Erforderlich |
-| 5 | Bei einem OVP-Bauteil mit einstellbarem OVLO haben die Teilerwiderstände 1 % Toleranz, und der Fehler von V_OVLO_TH liegt unter 3 %. Sowohl der minimale als auch der maximale V_OVP-Wert liegen innerhalb von 5,15–5,55 V. Die Quelle bezeichnet 5,15 V als maximale Eingangsspannung des Ladegeräts und 5,55 V als obere Eingangsgrenze des 52x-Ladeblocks; siehe den Hinweis zu den abweichenden Quellenangaben nach der Tabelle | nur 520/3/5/7 | Erforderlich |
+| 5 | Bei einem OVP-Bauteil mit einstellbarem OVLO müssen die Teilerwiderstände 1 % Toleranz haben, und der Fehler von V_OVLO_TH muss unter 3 % liegen. Sowohl der minimale als auch der maximale V_OVP-Wert müssen innerhalb von 5,15–5,55 V liegen. Die Quelle bezeichnet 5,15 V als maximale Eingangsspannung des Ladegeräts und 5,55 V als obere Eingangsgrenze des 52x-Ladeblocks; siehe den Hinweis zu den abweichenden Quellenangaben nach der Tabelle | nur 520/3/5/7 | Erforderlich |
 | 6 | Wird der integrierte Lader nicht verwendet, kann VBUS unbeschaltet bleiben und der zugehörige Kondensator entfallen. VBAT kann dann jedoch nicht mehr als Versorgungsausgang dienen; deshalb einen externen 1-µF-Kondensator an VBAT anschließen | nur 520/3/5/7 | Erforderlich |
-| 7 | Batteriespannungserfassung: Der Chip führt bereits einen internen GPADC-Kanal auf VBAT (bzw. VBATS) — VBAT nicht zusätzlich auf einen GPADC-Pin führen | Alle Varianten | Erforderlich |
+| 7 | Akkuspannungserfassung: Der Chip führt bereits einen internen GPADC-Kanal auf VBAT (bzw. VBATS) — VBAT nicht zusätzlich auf einen GPADC-Pin führen | Alle Varianten | Erforderlich |
 | 8 | <span class="flag-red">Versorgungsspannung an den Pins VCC und VBAT ist 3,2 V–4,7 V</span> | nur 520/3/5/7 | Erforderlich |
 | 9 | BUCK_LX- und BUCK_FB-Verbindungen sind korrekt | Alle Varianten | Erforderlich |
 | 10 | Für die Spannungsmessung am Ausgang VDD_VOUT1 ist ein Prüfpunkt oder ein gut zugänglicher Filterkondensator vorgesehen | Alle Varianten | Erforderlich |
@@ -69,15 +69,15 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 | 27 | <span class="flag-red">SF32LB52BU36 und SF32LB52BU56: VDD_SIP benötigt eine externe 3,3-V-Versorgung</span> | nur 52B | Erforderlich |
 | 28 | <span class="flag-red">SF32LB52DUB6: VDD_SIP benötigt eine externe 1,8-V-Versorgung</span> | nur 52D | Erforderlich |
 | 29 | <span class="flag-red">SF32LB52E/G/JUX6: VDD_SIP benötigt keine externe Versorgung — ein externer Kondensator genügt</span> | 52E/G/J | Erforderlich |
-| 30 | VBATS ist das Batteriespannungs-Erfassungssignal; der Erfassungsbereich der Batteriespannung ist 0–4,5 V | 52B/D/E/G/J | Erforderlich |
+| 30 | VBATS ist das Akkuspannungs-Erfassungssignal; der Erfassungsbereich der Akkuspannung ist 0–4,5 V | 52B/D/E/G/J | Erforderlich |
 
 </div>
 
 !!! important "OVP-Schwellen sind keine VBUS-Betriebsspannungsgrenzen"
-    Punkt 5 der Quelle nennt 5,15–5,55 V für die Auswahl einer einstellbaren OVLO-Schwelle, während Punkt 1 die 4,6–5,5-V-VBUS-Prüfung der Arbeitsmappe wiedergibt. 5,55 V ist nicht als zulässige dauerhafte Betriebsspannung an VBUS zu verstehen. Der [Abschnitt zum Stromversorgungssystem](SF32LB52x_schematic_design.md#52-power-system) erläutert die Quellenabweichungen und nennt einen abweichenden OVP-Auswahlbereich aus dem Anwendungshinweis. Vor der Freigabe sind Schwellen und Betriebsgrenzen für das gewählte Bauteil mit SiFli zu klären.
+    Punkt 5 der Quelle nennt 5,15–5,55 V für die Auswahl einer einstellbaren OVLO-Schwelle, während Punkt 1 die 4,6–5,5-V-VBUS-Prüfung der Arbeitsmappe wiedergibt. 5,55 V ist nicht als zulässige dauerhafte Betriebsspannung an VBUS zu verstehen. Der [Abschnitt zum Stromversorgungssystem](SF32LB52x_schematic_design.md#52-power-system) erläutert die Quellenabweichungen und nennt einen abweichenden OVP-Auswahlbereich aus dem Anwendungshinweis. Vor der Freigabe sind Schwellen und Betriebsgrenzen für das gewählte Gerät mit SiFli zu klären.
 
 !!! note "Quelle und Geltungsbereich der VBUS-Werte"
-    Electrical Specification-A3 nennt 4,5–5,5 V als VBUS-Versorgungsbereich. Der Anwendungshinweis für batteriebetriebene Varianten gibt in seiner Versorgungstabelle 4,6–5,5 V an und verlangt bei maximalem Ladestrom mindestens 4,6 V am VBUS-Pin. Diese Werte haben unterschiedliche Kontexte; berücksichtigen Sie bei der Prüfung der Mindestspannung am Chip Versorgungstoleranz und Spannungsabfall.
+    Electrical Specification-A3 nennt 4,5–5,5 V als VBUS-Versorgungsbereich. Der Anwendungshinweis für akkubetriebene Varianten gibt in seiner Versorgungstabelle 4,6–5,5 V an und verlangt bei maximalem Ladestrom mindestens 4,6 V am VBUS-Pin. Diese Werte haben unterschiedliche Kontexte; berücksichtigen Sie bei der Prüfung der Mindestspannung am Chip Versorgungstoleranz und Spannungsabfall.
 
 ### 5.8.3. Stromversorgungskondensatoren und -induktivitäten { #583-power-supply-capacitors-and-inductors }
 
@@ -178,15 +178,15 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 
 </div>
 
-### 5.8.8. Hardware-Wake-up { #588-hardware-wake-up }
+### 5.8.8. Hardwareseitiges Wecken { #588-hardware-wake-up }
 
-<div align="center"><em>Tabelle 5.8.8-1: Checkliste Hardware-Wake-up</em></div>
+<div align="center"><em>Tabelle 5.8.8-1: Checkliste zum hardwareseitigen Wecken</em></div>
 
 <div align="center" markdown>
 
 | Nr. | Prüfpunkt | Gilt für | Kategorie |
 |:---|:---|:---|:---|
-| 1 | <span class="flag-red">Wake-up-Interrupt-Quellen sind korrekt (verfügbare Wake-up-Interrupt-Quellen: PA24–PA27 und PA34–PA44, insgesamt 15 Pins)</span> | <span class="flag-red">Alle Varianten</span> | Erforderlich |
+| 1 | <span class="flag-red">Die Weckinterruptquellen sind korrekt (verfügbare Weckinterruptquellen: PA24–PA27 und PA34–PA44, insgesamt 15 Pins)</span> | <span class="flag-red">Alle Varianten</span> | Erforderlich |
 
 </div>
 
@@ -209,7 +209,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 | 9 | <span class="flag-red">Wenn MPI ein NOR-Flash mit 32 MB oder mehr ansteuert, muss die Flash-Versorgung über PA21 schaltbar sein, damit sie abgeschaltet werden kann</span> | <span class="flag-red">52B/D/E/G/J</span> | Erforderlich |
 | 10 | Wenn SD1 mit einem SD-NAND-Gerät verbunden ist, sind die Signalverbindungen korrekt | Alle Varianten | Erforderlich |
 | 11 | <span class="flag-red">Flash-CLK- und Datenleitungen haben 33-Ω-Serienwiderstände</span> | <span class="flag-red">Alle Varianten</span> | Erforderlich |
-| 12 | <span class="flag-red">Bei zwei externen NOR-Flash-Bausteinen werden CLK/D0–D3 gemeinsam genutzt. Flash 1 verwendet PA12 als CS, Flash 2 PA26. Dieser Pin hat einen internen Pull-up und eignet sich daher für ein aktiv-low-CS-Signal: Beim Reset liegt er standardmäßig auf High (Baustein nicht ausgewählt).</span> | <span class="flag-red">Alle Varianten</span> | Erforderlich |
+| 12 | <span class="flag-red">Bei zwei externen NOR-Flash-Bausteinen werden CLK/D0–D3 gemeinsam genutzt. Flash 1 verwendet PA12 als CS, Flash 2 PA26. Dieser Pin hat einen internen Pull-up und eignet sich daher für ein low-aktives CS-Signal: Beim Reset liegt er standardmäßig auf High (Baustein nicht ausgewählt).</span> | <span class="flag-red">Alle Varianten</span> | Erforderlich |
 | 13 | <span class="flag-red">Bei zwei externen NOR-Flash-Bausteinen muss der erste eine Kapazität von 16 MB haben; für den zweiten sind 8 MB oder 16 MB zulässig</span> | <span class="flag-red">Alle Varianten</span> | Erforderlich |
 | 14 | Der I/O-Logikpegel des Peripheriegeräts stimmt mit dem des Hauptchips überein | Alle Varianten | Erforderlich |
 | 15 | <span class="flag-red">Das ausgewählte NOR-Flash-Bauteil ist im Leitfaden zur Auswahl der Schlüsselkomponenten als qualifiziert aufgeführt; andernfalls erkennt das ROM es möglicherweise nicht und das System startet eventuell nicht</span> | <span class="flag-red">Alle Varianten</span> | Erforderlich |
@@ -236,7 +236,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 | 9 | Ein Low-Iq-LDO versorgt das Display; <span class="flag-red">PA30 wird zur Steuerung der LDO-Freigabe empfohlen</span> | Alle Varianten | Erforderlich |
 | 10 | Es ist geklärt, ob die Versorgung von TP und LCD gemeinsam oder getrennt gesteuert wird | Alle Varianten | Erforderlich |
 | 11 | Wenn das LCD einen Lichtsensor integriert, ist auch dessen Stromversorgung bereitgestellt | Alle Varianten | Erforderlich |
-| 12 | TFT-LCD-Hintergrundbeleuchtungssteuerung: schaltet die Hintergrundbeleuchtung bei einem High-Signal ein und bei Low aus (aktiv high), einen Pull-down-(PD)-GPIO verwenden; schaltet sie bei Low ein und bei High aus (aktiv low), einen Pull-up-(PU)-GPIO verwenden | Alle Varianten | Erforderlich |
+| 12 | TFT-LCD-Hintergrundbeleuchtungssteuerung: Schaltet die Hintergrundbeleuchtung bei einem High-Signal ein und bei Low aus (high-aktiv); verwenden Sie einen Pull-down-(PD)-GPIO. Schaltet sie bei Low ein und bei High aus (low-aktiv), verwenden Sie einen Pull-up-(PU)-GPIO | Alle Varianten | Erforderlich |
 | 13 | <span class="flag-red">SPI-LCD: 3-Draht-Modus — CS an PA03, CLK an PA04, DATA an PA05; 4-Draht-Modus — CS an PA03, CLK an PA04, DATA an PA05, DC an PA06</span> | Alle Varianten | Erforderlich |
 | 14 | Sharp-Memory-/JDI-Display an der JDI-Schnittstelle des MCU: VCOM und VB an MCU-PA24, VA an MCU-PA25, R0/G0/B0 an MCU-R1/G1/B1, R1/G1/B1 an MCU-R2/G2/B2, GSP an MCU-VST, BSP an MCU-HST, GCK an MCU-VCK, BCK an MCU-HCK, GEN an MCU-ENB und INTB an MCU-XRST anschließen | Alle Varianten | Erforderlich |
 | 15 | Der I/O-Logikpegel des Peripheriegeräts stimmt mit dem des Hauptchips überein | Alle Varianten | Erforderlich |
@@ -267,7 +267,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 |:---|:---|:---|:---|
 | 1 | Es ist geklärt, ob die Tasten den MCU aufwecken müssen | Alle Varianten | Erforderlich |
 | 2 | Der Anschluss eines normalen Tasters ist korrekt ausgelegt (Pull-up vorhanden, Widerstandswert und Pull-up-Spannungsdomäne korrekt) | Alle Varianten | Erforderlich |
-| 3 | Der Ein-/Aus-Taster verwendet PA34 und ist aktiv-high; ein 10 Sekunden langer Tastendruck löst einen Reset aus. <span class="flag-red">Der 10-kΩ-Pull-down-Widerstand muss sich auf der Hauptplatine befinden.</span> | Alle Varianten | Erforderlich |
+| 3 | Der Ein-/Aus-Taster verwendet PA34 und ist high-aktiv; ein 10 Sekunden langer Tastendruck löst einen Reset aus. <span class="flag-red">Der 10-kΩ-Pull-down-Widerstand muss sich auf der Hauptplatine befinden.</span> | Alle Varianten | Erforderlich |
 | 4 | Alle Tastensignale verfügen über ESD-Schutz | Alle Varianten | Erforderlich |
 
 </div>
@@ -281,7 +281,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 | Nr. | Prüfpunkt | Gilt für | Kategorie |
 |:---|:---|:---|:---|
 | 1 | Die Ladeschnittstelle verfügt über EOS-, ESD- und OVP-Schutz | Alle Varianten | Erforderlich |
-| 2 | Die Batterieschnittstelle verfügt über ein ESD-Bauteil | Alle Varianten | Erforderlich |
+| 2 | Die Akkuschnittstelle verfügt über ein ESD-Bauteil | Alle Varianten | Erforderlich |
 | 3 | Die Antennenschnittstelle verfügt über ein ESD-Bauteil | Alle Varianten | Erforderlich |
 | 4 | Die Stromversorgungsschnittstellen von LCD und TP verfügen über ESD-Bauteile | Alle Varianten | Erforderlich |
 | 5 | Die Leitungen TP-I2C, RST und INT verfügen über ESD-Bauteile | Alle Varianten | Erforderlich |
@@ -298,7 +298,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 | Nr. | Prüfpunkt | Gilt für | Kategorie |
 |:---|:---|:---|:---|
 | 1 | I2C verfügt über Pull-ups mit korrektem Widerstandswert; für 400-kHz-Betrieb werden 2,2-kΩ-Pull-ups empfohlen; die peripherieseitige Spannungsdomäne verwenden und die Pull-up-Versorgung beim Abschalten zusammen mit der Peripherie abschalten | Alle Varianten | Erforderlich |
-| 2 | Das I2C-Interrupt-Signal unterstützt bei Bedarf Hardware-Wake-up | Alle Varianten | Erforderlich |
+| 2 | Das I2C-Interrupt-Signal unterstützt bei Bedarf das hardwareseitige Wecken | Alle Varianten | Erforderlich |
 | 3 | I2C-Geräte wie Beschleunigungs-, Herzfrequenz- und geomagnetische Sensoren unterstützen das Auslesen aller Daten in einem einzigen Burst-Lesezugriff | Alle Varianten | Erforderlich |
 | 4 | Teilen sich mehrere Geräte einen I2C-Bus, müssen sie unterschiedliche Adressen haben | Alle Varianten | Erforderlich |
 
@@ -375,7 +375,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 |:---|:---|:---|:---|
 | 1 | Die USB-Schnittstellenverbindung ist korrekt | Alle Varianten | Optional |
 | 2 | Die USB-Schnittstelle verfügt über ESD-Schutz | Alle Varianten | Optional |
-| 3 | Ist USB im normalen Betrieb (außerhalb des Schlafmodus) eingeschaltet, kann der Host das An- und Abstecken erkennen. Soll die Erkennung auch im Schlafmodus des MCU möglich sein, eine VBUS-Spannungsteilerschaltung vorsehen, die am Wake-up-Pin des MCU einen zum I/O-Pegel passenden Spannungspegel ausgibt. Es wird empfohlen, diesen Pin zugleich für die Erkennung eines angeschlossenen Ladegeräts zu verwenden | Alle Varianten | Optional |
+| 3 | Ist USB im normalen Betrieb (außerhalb des Schlafmodus) eingeschaltet, kann der Host das An- und Abstecken erkennen. Soll dies auch im Schlafmodus des MCU möglich sein, sehen Sie einen VBUS-Spannungsteiler vor, der am Weck-Pin des MCU einen zum I/O-Pegel passenden Spannungspegel ausgibt. Verwenden Sie diesen Pin möglichst zugleich zur Erkennung eines angeschlossenen Ladegeräts. | Alle Varianten | Optional |
 
 </div>
 
@@ -387,7 +387,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 
 | Nr. | Prüfpunkt | Gilt für | Kategorie |
 |:---|:---|:---|:---|
-| 1 | LDOs und DCDCs haben einen aktiv-high-Enable-Eingang. Ist der Ausgang standardmäßig ausgeschaltet, einen Pull-down-Widerstand von 1 MΩ bis 5,1 MΩ zwischen EN und Masse vorsehen; den Wert an die Anforderungen an die Stromaufnahme des Projekts anpassen | Alle Varianten | Erforderlich |
+| 1 | LDOs und DCDCs haben einen high-aktiven Enable-Eingang. Ist der Ausgang standardmäßig ausgeschaltet, einen Pull-down-Widerstand von 1 MΩ bis 5,1 MΩ zwischen EN und Masse vorsehen; den Wert an die Anforderungen an die Stromaufnahme des Projekts anpassen | Alle Varianten | Erforderlich |
 | 2 | Für die MOSFET-basierte Versorgungsschaltung eine PMOS-/NMOS-Kombination verwenden. Der Steuerpin schaltet bei High ein und bei Low aus; er ist über einen 1-MΩ-Pull-down-Widerstand mit Masse verbunden | Alle Varianten | Erforderlich |
 | 3 | Der Versorgungsschalter für den externen Flash wird über PA11 gesteuert | nur 520/3/5/7 | Erforderlich |
 | 4 | <span class="flag-red">Der Versorgungsschalter für den externen Flash und der VDD_SIP-Versorgungsschalter werden beide über PA21 gesteuert</span> | <span class="flag-red">52A/D</span>[^52a-note] | In der Quelle nicht angegeben[^52a-category-note] |
@@ -401,7 +401,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 | 12 | <span class="flag-red">Die Summe der Ruheströme aller ausgewählten Peripheriegeräte im Standby-Modus ist dokumentiert und erfüllt die Projektanforderungen</span> | <span class="flag-red">Alle Varianten</span> | Erforderlich |
 
 [^52a-note]: Die Quelltabelle nennt „52A/52D“. Der [SF32LB52x Hardware-Design-Leitfaden][SF32LB52x Hardware Design Guide - Dev] beschreibt SF32LB52B/D/E/G/J; „52A“ bezeichnet keine dieser Varianten eindeutig. Vor der Anwendung sind die genaue Teilenummer und ihr Datenblatt zu prüfen. „52A“ darf nicht eigenständig durch ein anderes Modell ersetzt werden.
-[^52a-category-note]: Die Quelle lässt die Kategorie dieser Zeile leer. Sie bleibt als „In der Quelle nicht angegeben“ erhalten; eine Einstufung als erforderlich oder optional wird nicht abgeleitet. Geltungsbereich und Freigabekriterium für das gewählte Bauteil sind zu bestätigen.
+[^52a-category-note]: Die Quelle lässt die Kategorie dieser Zeile leer. Sie bleibt als „In der Quelle nicht angegeben“ erhalten; eine Einstufung als erforderlich oder optional wird nicht abgeleitet. Geltungsbereich und Freigabekriterium für das gewählte Gerät sind zu bestätigen.
 
 !!! important "Abweichende Pinangaben für den Speicher-Versorgungsschalter"
     Diese Tabelle übernimmt den PA11-Eintrag des Checklisten-Arbeitsblatts für das Schalten des externen Flashs beim SF32LB520/3/5/7. Nach der Quellenpriorität dieses Projekts haben die höherrangigen OpenSiFli-Anwendungshinweise und der Leitfaden zum Schaltplanentwurf Vorrang; sie nennen PA21 zum Schalten der Boot-Speicherversorgung. Verwenden Sie PA21 als quellenbasierte Entwurfsgrundlage und übernehmen Sie PA11 nicht allein aufgrund des niedriger priorisierten Arbeitsblatts. Es klärt nicht, ob PA11 ein separates Enable-Signal auf der Platine oder eine abweichende Pinzuordnung bezeichnet. Klären Sie das konkrete Netz und die Variante vor der Freigabe mit SiFli.

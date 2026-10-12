@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "Guía de diseño del esquema del MCU SF32LB56x: alimentación, modos de funcionamiento y fuentes de activación, generación de reloj, RF, pantalla/táctil/retroiluminación, almacenamiento/sensores/audio/conectividad y fabricación."
+description: "Guía de diseño del esquemático de la MCU SF32LB56x: alimentación, modos de funcionamiento y fuentes de activación, generación de reloj, RF, pantalla/táctil/retroiluminación, almacenamiento/sensores/audio/conectividad y fabricación."
 tags:
     - Hardware
     - Chip
@@ -8,12 +8,12 @@ hide:
     - navigation
 ---
 
-# Guía de diseño de hardware de SF32LB56x — Diseño del esquema { #sf32lb56x-hardware-design-guide-schematic-design-guidelines }
+# Guía de diseño de hardware de SF32LB56x — Diseño del esquemático { #sf32lb56x-hardware-design-guide-schematic-design-guidelines }
 
 !!! note "Parte de la guía de diseño de hardware de SF32LB56x"
-    Esta página cubre la sección 5, «Guía de diseño del esquema». Consulte primero la [descripción general de la guía de diseño de hardware de SF32LB56x](SF32LB56x_hardware_design_guide.md) para elegir el dispositivo y conocer el flujo de diseño completo. Después, continúe con la [lista de comprobación del esquema](SF32LB56x_schematic_checklist.md) o vaya directamente a las [Pautas de diseño de PCB](SF32LB56x_pcb_layout.md).
+    Esta página cubre la sección 5, «Directrices para el diseño del esquemático». Consulte primero la [descripción general de la guía de diseño de hardware de SF32LB56x](SF32LB56x_hardware_design_guide.md) para elegir el dispositivo y conocer el flujo de diseño completo. Después, continúe con la [lista de comprobación del esquemático](SF32LB56x_schematic_checklist.md) o vaya directamente a las [Directrices de diseño de PCB](SF32LB56x_pcb_layout.md).
 
-## 5. Guía de diseño del esquema { #5-schematic-design-guidelines }
+## 5. Guía de diseño del esquemático { #5-schematic-design-guidelines }
 
 ### 5.1. Sistema de alimentación { #51-power-system }
 
@@ -25,19 +25,19 @@ Revise conjuntamente los raíles de alimentación del procesador, los condensado
 
 | Pin de alimentación PMU | Tensión mínima (V) | Tensión típica (V) | Tensión máxima (V) | Corriente máxima (mA) | Descripción detallada |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| PVDD | 1.7 | 1.8 | 3.6 | 100 | Entrada de alimentación PVDD |
-| BUCK_LX BUCK_FB | - | 1.25 | - | 100 | La salida BUCK_LX se conecta al inductor; la entrada de alimentación interna se conecta al otro extremo del inductor y a un condensador externo. |
-| LDO1_VOUT | - | 1.1 | - | 50 | Salida LDO1 con condensador externo |
-| LDO2_VOUT | - | 0.9 | - | 20 | Salida LDO2 con condensador externo |
-| VDD_RET | - | 0.9 | - | 1 | Salida LDO RET con condensador externo |
-| VDD_RTC | - | 1.1 | - | 1 | Salida LDO RTC con condensador externo |
-| MIC_BIAS | 1.4 | - | 2.8 | - | Salida de alimentación del micrófono |
-| AVDD33_ANA | 3.15 | 3.3 | 3.45 | 50 | Entrada de alimentación analógica y de RFPA |
-| AVDD33_AUD | 3.15 | 3.3 | 3.45 | 50 | Alimentación de audio analógico |
-| VDDIO1 | 1.71 | 1.8 | 1.98 | - | Entrada de alimentación del dispositivo de almacenamiento integrado en el encapsulado del núcleo grande |
-| VDDIO2 | 1.71 | 1.8 | 3.45 | - | Entrada de alimentación de los GPIO PA, excepto PA5~11 |
-| VDDIO3 | 1.71 | 1.8 | 3.45 | - | Entrada de alimentación de PA5~11 |
-| VDDIO4 | 1.71 | 1.8 | 3.45 | - | Entrada de alimentación de los GPIO PB y la Flash integrada del núcleo pequeño |
+| PVDD | 1,7 | 1,8 | 3,6 | 100 | Entrada de alimentación PVDD |
+| BUCK_LX BUCK_FB | - | 1,25 | - | 100 | La salida BUCK_LX se conecta al inductor; la entrada de alimentación interna se conecta al otro extremo del inductor y a un condensador externo. |
+| LDO1_VOUT | - | 1,1 | - | 50 | Salida LDO1 con condensador externo |
+| LDO2_VOUT | - | 0,9 | - | 20 | Salida LDO2 con condensador externo |
+| VDD_RET | - | 0,9 | - | 1 | Salida LDO RET con condensador externo |
+| VDD_RTC | - | 1,1 | - | 1 | Salida LDO RTC con condensador externo |
+| MIC_BIAS | 1,4 | - | 2,8 | - | Salida de alimentación del micrófono |
+| AVDD33_ANA | 3,15 | 3,3 | 3,45 | 50 | Entrada de alimentación analógica y de RFPA |
+| AVDD33_AUD | 3,15 | 3,3 | 3,45 | 50 | Alimentación de audio analógico |
+| VDDIO1 | 1,71 | 1,8 | 1,98 | - | Entrada de alimentación del dispositivo de almacenamiento integrado en el encapsulado del núcleo grande |
+| VDDIO2 | 1,71 | 1,8 | 3,45 | - | Entrada de alimentación de las GPIO PA, excepto PA5~11 |
+| VDDIO3 | 1,71 | 1,8 | 3,45 | - | Entrada de alimentación de PA5~11 |
+| VDDIO4 | 1,71 | 1,8 | 3,45 | - | Entrada de alimentación de las GPIO PB y la Flash integrada del núcleo pequeño |
 | GPADC_VREF | - | - | - | - | Entrada de referencia de tensión de GPADC; conecte solo un condensador externo, no se requiere fuente externa. |
 | AUD_VREF | - | - | - | - | Entrada de referencia de audio; conecte solo un condensador externo, no se requiere fuente externa. |
 
@@ -49,22 +49,22 @@ Revise conjuntamente los raíles de alimentación del procesador, los condensado
 
 | Pin de alimentación PMU | Tensión mínima (V) | Tensión típica (V) | Tensión máxima (V) | Corriente máxima (mA) | Descripción detallada |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| PVDD | 1.71 | 1.8 | 3.6 | 100 | Entrada de alimentación PVDD |
-| BUCK_LX BUCK_FB | - | 1.25 | - | 100 | La salida BUCK_LX se conecta al inductor; la entrada de alimentación interna se conecta al otro extremo del inductor y a un condensador externo. |
-| LDO1_VOUT | - | 1.1 | - | 50 | Salida LDO1 conectada a un condensador externo |
-| LDO2_VOUT | - | 0.9 | - | 20 | Salida LDO2 conectada a un condensador externo |
-| VDD_RET | - | 0.9 | - | 1 | Salida LDO RET conectada a un condensador externo |
-| VDD_RTC | - | 1.1 | - | 1 | Salida LDO RTC conectada a un condensador externo |
-| MIC_BIAS | 1.4 | - | 2.8 | - | Salida de alimentación del micrófono |
-| AVDD_BRF | 1.71 | 1.8 | 3.3 | 1 | Entrada de alimentación RF |
-| AVDD33_ANA | 3.15 | 3.3 | 3.45 | 50 | Entrada de alimentación analógica y de RFPA |
-| AVDD33_AUD | 3.15 | 3.3 | 3.45 | 50 | Alimentación de audio analógico |
-| VDDIOA | 1.71 | 1.8 | 3.45 | - | Entrada de alimentación de E/S PA12-PA78 |
-| VDDIOA2 | 1.71 | 1.8 | 3.45 | - | Entrada de alimentación de E/S PA0-PA11 |
-| VDDIOB | 1.71 | 1.8 | 3.45 | - | Entrada de alimentación de E/S PB |
-| VDDIOSA | 1.71 | 1.8 | 1.98 | - | Entrada de alimentación SIPA |
-| VDDIOSB | 1.71 | 1.8 | 1.98 | - | Entrada de alimentación SIPB |
-| VDDIOSC | 1.71 | 1.8 | 1.98 | - | Entrada de alimentación SIPC |
+| PVDD | 1,71 | 1,8 | 3,6 | 100 | Entrada de alimentación PVDD |
+| BUCK_LX BUCK_FB | - | 1,25 | - | 100 | La salida BUCK_LX se conecta al inductor; la entrada de alimentación interna se conecta al otro extremo del inductor y a un condensador externo. |
+| LDO1_VOUT | - | 1,1 | - | 50 | Salida LDO1 conectada a un condensador externo |
+| LDO2_VOUT | - | 0,9 | - | 20 | Salida LDO2 conectada a un condensador externo |
+| VDD_RET | - | 0,9 | - | 1 | Salida LDO RET conectada a un condensador externo |
+| VDD_RTC | - | 1,1 | - | 1 | Salida LDO RTC conectada a un condensador externo |
+| MIC_BIAS | 1,4 | - | 2,8 | - | Salida de alimentación del micrófono |
+| AVDD_BRF | 1,71 | 1,8 | 3,3 | 1 | Entrada de alimentación RF |
+| AVDD33_ANA | 3,15 | 3,3 | 3,45 | 50 | Entrada de alimentación analógica y de RFPA |
+| AVDD33_AUD | 3,15 | 3,3 | 3,45 | 50 | Alimentación de audio analógico |
+| VDDIOA | 1,71 | 1,8 | 3,45 | - | Entrada de alimentación de E/S PA12-PA78 |
+| VDDIOA2 | 1,71 | 1,8 | 3,45 | - | Entrada de alimentación de E/S PA0-PA11 |
+| VDDIOB | 1,71 | 1,8 | 3,45 | - | Entrada de alimentación de E/S PB |
+| VDDIOSA | 1,71 | 1,8 | 1,98 | - | Entrada de alimentación SIPA |
+| VDDIOSB | 1,71 | 1,8 | 1,98 | - | Entrada de alimentación SIPB |
+| VDDIOSC | 1,71 | 1,8 | 1,98 | - | Entrada de alimentación SIPC |
 | GPADC_VREF | - | - | - | - | Entrada de referencia de tensión de GPADC; conecte solo un condensador externo, no se requiere fuente externa. |
 | AUD_VREF | - | - | - | - | Entrada de referencia de audio; conecte solo un condensador externo, no se requiere fuente externa. |
 
@@ -76,21 +76,21 @@ Revise conjuntamente los raíles de alimentación del procesador, los condensado
 
 | Pin de alimentación | Condensador | Descripción detallada |
 | :--- | :--- | :--- |
-| PVDD | 0.1uF + 10uF | Coloque cerca del pin al menos dos condensadores: uno de 10uF y otro de 0.1uF. |
-| BUCK_LX BUCK_FB | 0.1uF + 4.7uF | Coloque cerca del pin al menos dos condensadores: uno de 4.7uF y otro de 0.1uF. |
-| LDO1_VOUT | 4.7uF | Coloque al menos un condensador de 4.7uF cerca del pin. |
-| LDO2_VOUT | 4.7uF | Coloque al menos un condensador de 4.7uF cerca del pin. |
-| VDD_RET | 0.47uF | Coloque al menos un condensador de 0.47uF cerca del pin. |
-| VDD_RTC | 1uF | Coloque al menos un condensador de 1uF cerca del pin. |
-| AVDD33_ANA | 4.7uF | Coloque al menos un condensador de 4.7uF cerca del pin. |
-| GPADC_VREF | 4.7uF | Coloque al menos un condensador de 4.7uF cerca del pin. |
-| AVDD33_AUD | 4.7uF | Coloque al menos un condensador de 4.7uF cerca del pin. |
-| AUD_VREF | 1uF | Coloque al menos un condensador de 1uF cerca del pin. |
-| MIC_BIAS | 1uF | Coloque al menos un condensador de 1uF cerca del pin. |
-| VDDIO1 | 1uF | Coloque al menos un condensador de 1uF cerca del pin. |
-| VDDIO2 | 1uF | Coloque al menos un condensador de 1uF cerca del pin. |
-| VDDIO3 | 1uF | Coloque al menos un condensador de 1uF cerca del pin. |
-| VDDIO4 | 1uF | Coloque al menos un condensador de 1uF cerca del pin. |
+| PVDD | 0,1 µF + 10 µF | Coloque cerca del pin al menos dos condensadores: uno de 10 µF y otro de 0,1 µF. |
+| BUCK_LX BUCK_FB | 0,1 µF + 4,7 µF | Coloque cerca del pin al menos dos condensadores: uno de 4,7 µF y otro de 0,1 µF. |
+| LDO1_VOUT | 4,7 µF | Coloque al menos un condensador de 4,7 µF cerca del pin. |
+| LDO2_VOUT | 4,7 µF | Coloque al menos un condensador de 4,7 µF cerca del pin. |
+| VDD_RET | 0,47 µF | Coloque al menos un condensador de 0,47 µF cerca del pin. |
+| VDD_RTC | 1 µF | Coloque al menos un condensador de 1 µF cerca del pin. |
+| AVDD33_ANA | 4,7 µF | Coloque al menos un condensador de 4,7 µF cerca del pin. |
+| GPADC_VREF | 4,7 µF | Coloque al menos un condensador de 4,7 µF cerca del pin. |
+| AVDD33_AUD | 4,7 µF | Coloque al menos un condensador de 4,7 µF cerca del pin. |
+| AUD_VREF | 1 µF | Coloque al menos un condensador de 1 µF cerca del pin. |
+| MIC_BIAS | 1 µF | Coloque al menos un condensador de 1 µF cerca del pin. |
+| VDDIO1 | 1 µF | Coloque al menos un condensador de 1 µF cerca del pin. |
+| VDDIO2 | 1 µF | Coloque al menos un condensador de 1 µF cerca del pin. |
+| VDDIO3 | 1 µF | Coloque al menos un condensador de 1 µF cerca del pin. |
+| VDDIO4 | 1 µF | Coloque al menos un condensador de 1 µF cerca del pin. |
 
 </div>
 
@@ -100,24 +100,24 @@ Revise conjuntamente los raíles de alimentación del procesador, los condensado
 
 | Pin de alimentación | Condensador | Descripción detallada |
 | :--- | :--- | :--- |
-| PVDD | 0.1uF + 10uF | Coloque cerca del pin al menos dos condensadores: uno de 10uF y otro de 0.1uF. |
-| BUCK_LX BUCK_FB | 0.1uF + 4.7uF | Coloque cerca del pin al menos dos condensadores: uno de 4.7uF y otro de 0.1uF. |
-| LDO1_VOUT | 4.7uF | Coloque al menos un condensador de 4.7uF cerca del pin. |
-| LDO2_VOUT | 4.7uF | Coloque al menos un condensador de 4.7uF cerca del pin. |
-| VDD_RET | 0.47uF | Coloque al menos un condensador de 0.47uF cerca del pin. |
-| VDD_RTC | 1uF | Coloque al menos un condensador de 1uF cerca del pin. |
-| AVDD_BRF | 4.7uF | Coloque al menos un condensador de 4.7uF cerca del pin. |
-| AVDD33_ANA | 4.7uF | Coloque al menos un condensador de 4.7uF cerca del pin. |
-| GPADC_VREFP | 4.7uF | Coloque al menos un condensador de 4.7uF cerca del pin. |
-| AVDD33_AUD | 4.7uF | Coloque al menos un condensador de 4.7uF cerca del pin. |
-| AUD_VREF | 1uF | Coloque al menos un condensador de 1uF cerca del pin. |
-| MIC_BIAS | 1uF | Coloque al menos un condensador de 1uF cerca del pin. |
-| VDDIOA | 1uF | Coloque al menos un condensador de 1uF cerca del pin. |
-| VDDIOA2 | 1uF | Coloque al menos un condensador de 1uF cerca del pin. |
-| VDDIOB | 1uF | Coloque al menos un condensador de 1uF cerca del pin. |
-| VDDIOSA | 0.1uF | Coloque al menos un condensador de 0.1uF cerca del pin. |
-| VDDIOSB | 0.1uF | Coloque al menos un condensador de 0.1uF cerca del pin. |
-| VDDIOSC | 0.1uF | Coloque al menos un condensador de 0.1uF cerca del pin. |
+| PVDD | 0,1 µF + 10 µF | Coloque cerca del pin al menos dos condensadores: uno de 10 µF y otro de 0,1 µF. |
+| BUCK_LX BUCK_FB | 0,1 µF + 4,7 µF | Coloque cerca del pin al menos dos condensadores: uno de 4,7 µF y otro de 0,1 µF. |
+| LDO1_VOUT | 4,7 µF | Coloque al menos un condensador de 4,7 µF cerca del pin. |
+| LDO2_VOUT | 4,7 µF | Coloque al menos un condensador de 4,7 µF cerca del pin. |
+| VDD_RET | 0,47 µF | Coloque al menos un condensador de 0,47 µF cerca del pin. |
+| VDD_RTC | 1 µF | Coloque al menos un condensador de 1 µF cerca del pin. |
+| AVDD_BRF | 4,7 µF | Coloque al menos un condensador de 4,7 µF cerca del pin. |
+| AVDD33_ANA | 4,7 µF | Coloque al menos un condensador de 4,7 µF cerca del pin. |
+| GPADC_VREFP | 4,7 µF | Coloque al menos un condensador de 4,7 µF cerca del pin. |
+| AVDD33_AUD | 4,7 µF | Coloque al menos un condensador de 4,7 µF cerca del pin. |
+| AUD_VREF | 1 µF | Coloque al menos un condensador de 1 µF cerca del pin. |
+| MIC_BIAS | 1 µF | Coloque al menos un condensador de 1 µF cerca del pin. |
+| VDDIOA | 1 µF | Coloque al menos un condensador de 1 µF cerca del pin. |
+| VDDIOA2 | 1 µF | Coloque al menos un condensador de 1 µF cerca del pin. |
+| VDDIOB | 1 µF | Coloque al menos un condensador de 1 µF cerca del pin. |
+| VDDIOSA | 0,1 µF | Coloque al menos un condensador de 0,1 µF cerca del pin. |
+| VDDIOSB | 0,1 µF | Coloque al menos un condensador de 0,1 µF cerca del pin. |
+| VDDIOSC | 0,1 µF | Coloque al menos un condensador de 0,1 µF cerca del pin. |
 
 </div>
 
@@ -127,23 +127,23 @@ Revise conjuntamente los raíles de alimentación del procesador, los condensado
 
 | Pin de alimentación SF30147C | Tensión mínima (V) | Tensión máxima (V) | Corriente máxima (mA) | Descripción detallada |
 | :--- | :--- | :--- | :--- | :--- |
-| VBUCK | 1.8 | 1.8 | 500 | Salida de 1.8 V; no deduzca de esta fila la asignación de alimentación de los pines del chip en la variante U |
-| LVSW1 | 1.8 | 1.8 | 100 | Salida de alimentación de 1.8V |
-| LVSW2 | 1.8 | 1.8 | 100 | Entrada de alimentación de 1.8V del G-SENSOR |
-| LVSW3 | 1.8 | 1.8 | 150 | Entrada de alimentación de 1.8V del sensor de frecuencia cardíaca |
-| LVSW4 | 1.8 | 1.8 | 150 | Entrada de alimentación de 1.8V de la LCD |
-| LVSW5 | 1.8 | 1.8 | 150 | Salida de alimentación de 1.8V |
-| LDO1 | 2.8 | 3.3 | 100 | Salida de 2.8 a 3.3 V; no deduzca de esta fila la asignación de alimentación de los pines del chip en la variante U |
-| LDO2 | 2.8 | 3.3 | 100 | Entrada de alimentación del motor |
-| LDO3 | 2.8 | 3.3 | 100 | Entrada de alimentación de 3.3V de la LCD |
-| LDO4 | 2.8 | 3.3 | 100 | Entrada de alimentación de 3.3V del sensor de frecuencia cardíaca |
-| HVSW1 | 2.8 | 5 | 150 | Entrada de alimentación del amplificador de potencia analógico Class-K |
-| HVSW2 | 2.8 | 5 | 150 | Entrada de alimentación del GPS |
+| VBUCK | 1,8 | 1,8 | 500 | Salida de 1,8 V; no deduzca de esta fila la asignación de alimentación de los pines del chip en la variante U |
+| LVSW1 | 1,8 | 1,8 | 100 | Salida de alimentación de 1,8 V |
+| LVSW2 | 1,8 | 1,8 | 100 | Entrada de alimentación de 1,8 V del G-SENSOR |
+| LVSW3 | 1,8 | 1,8 | 150 | Entrada de alimentación de 1,8 V del sensor de frecuencia cardíaca |
+| LVSW4 | 1,8 | 1,8 | 150 | Entrada de alimentación de 1,8 V de la LCD |
+| LVSW5 | 1,8 | 1,8 | 150 | Salida de alimentación de 1,8 V |
+| LDO1 | 2,8 | 3,3 | 100 | Salida de 2,8 a 3,3 V; no deduzca de esta fila la asignación de alimentación de los pines del chip en la variante U |
+| LDO2 | 2,8 | 3,3 | 100 | Entrada de alimentación del motor |
+| LDO3 | 2,8 | 3,3 | 100 | Entrada de alimentación de 3,3 V de la LCD |
+| LDO4 | 2,8 | 3,3 | 100 | Entrada de alimentación de 3,3 V del sensor de frecuencia cardíaca |
+| HVSW1 | 2,8 | 5 | 150 | Entrada de alimentación del amplificador de potencia analógico Class-K |
+| HVSW2 | 2,8 | 5 | 150 | Entrada de alimentación del GPS |
 
 </div>
 
 !!! warning "Verifique la asignación de los raíles del PMIC para la variante U"
-    La tabla original de distribución de alimentación de la variante U de SiFli enumera VDDIOA, VDDIOA2, VDDIOB, VDDIOSA/B/C y AVDD_BRF, pero estos nombres no coinciden con la tabla de alimentación del procesador U del mismo documento. La tabla anterior conserva los límites de tensión y corriente de salida del PMIC. No la use para deducir las conexiones a los pines del chip U; confirme la asignación con la revisión correspondiente del esquema y la hoja de datos del SF30147C antes de liberar el diseño.
+    La tabla original de distribución de alimentación de la variante U de SiFli enumera VDDIOA, VDDIOA2, VDDIOB, VDDIOSA/B/C y AVDD_BRF, pero estos nombres no coinciden con la tabla de alimentación del procesador U del mismo documento. La tabla anterior conserva los límites de tensión y corriente de salida del PMIC. No la use para deducir las conexiones a los pines del chip U; confirme la asignación con la revisión correspondiente del esquemático y la hoja de datos del SF30147C antes de liberar el diseño.
 
 <div align="center"><em>Tabla 5.1-6: Ejemplo de distribución de alimentación del PMIC SF30147C para V</em></div>
 
@@ -151,18 +151,18 @@ Revise conjuntamente los raíles de alimentación del procesador, los condensado
 
 | Pin de alimentación SF30147C | Tensión mínima (V) | Tensión máxima (V) | Corriente máxima (mA) | Descripción detallada |
 | :--- | :--- | :--- | :--- | :--- |
-| VBUCK | 1.8 | 1.8 | 500 | Entradas de alimentación de 1.8V de SF32LB56xV, como PVDD, VDDIOA, VDDIOA2, VDDIOB, VDDIOSA, VDDIOSB, VDDIOSC y AVDD_BRF |
-| LVSW1 | 1.8 | 1.8 | 100 | Entrada de alimentación lógica del amplificador Class-K de I2S |
-| LVSW2 | 1.8 | 1.8 | 100 | Entrada de alimentación de 1.8V del G-SENSOR |
-| LVSW3 | 1.8 | 1.8 | 150 | Entrada de alimentación de 1.8V del sensor de frecuencia cardíaca |
-| LVSW4 | 1.8 | 1.8 | 150 | Entrada de alimentación de 1.8V de la LCD |
-| LVSW5 | 1.8 | 1.8 | 150 | Entrada de alimentación del núcleo eMMC |
-| LDO1 | 2.8 | 3.3 | 100 | Entradas de alimentación de 3.3V de SF32LB56xV, como AVDD33_ANA, AVDD33_AUD y VDDIOA2 |
-| LDO2 | 2.8 | 3.3 | 100 | Entrada de alimentación de eMMC o SD NAND |
-| LDO3 | 2.8 | 3.3 | 100 | Entrada de alimentación de 3.3V de la LCD |
-| LDO4 | 2.8 | 3.3 | 100 | Entrada de alimentación de 3.3V del sensor de frecuencia cardíaca |
-| HVSW1 | 2.8 | 5 | 150 | Entrada de alimentación del amplificador de potencia analógico Class-K |
-| HVSW2 | 2.8 | 5 | 150 | Entrada de alimentación del GPS |
+| VBUCK | 1,8 | 1,8 | 500 | Entradas de alimentación de 1,8 V de SF32LB56xV, como PVDD, VDDIOA, VDDIOA2, VDDIOB, VDDIOSA, VDDIOSB, VDDIOSC y AVDD_BRF |
+| LVSW1 | 1,8 | 1,8 | 100 | Entrada de alimentación lógica del amplificador Class-K de I2S |
+| LVSW2 | 1,8 | 1,8 | 100 | Entrada de alimentación de 1,8 V del G-SENSOR |
+| LVSW3 | 1,8 | 1,8 | 150 | Entrada de alimentación de 1,8 V del sensor de frecuencia cardíaca |
+| LVSW4 | 1,8 | 1,8 | 150 | Entrada de alimentación de 1,8 V de la LCD |
+| LVSW5 | 1,8 | 1,8 | 150 | Entrada de alimentación del núcleo eMMC |
+| LDO1 | 2,8 | 3,3 | 100 | Entradas de alimentación de 3,3 V de SF32LB56xV, como AVDD33_ANA, AVDD33_AUD y VDDIOA2 |
+| LDO2 | 2,8 | 3,3 | 100 | Entrada de alimentación de eMMC o SD NAND |
+| LDO3 | 2,8 | 3,3 | 100 | Entrada de alimentación de 3,3 V de la LCD |
+| LDO4 | 2,8 | 3,3 | 100 | Entrada de alimentación de 3,3 V del sensor de frecuencia cardíaca |
+| HVSW1 | 2,8 | 5 | 150 | Entrada de alimentación del amplificador de potencia analógico Class-K |
+| HVSW2 | 2,8 | 5 | 150 | Entrada de alimentación del GPS |
 
 </div>
 
@@ -200,7 +200,7 @@ Revise conjuntamente los raíles de alimentación del procesador, los condensado
 
 Sin gestión de ruta de alimentación, el sistema se conecta directamente a VBAT junto con la batería. Es una solución de menor coste, pero los circuitos posteriores no pueden desconectarse por completo de la batería: aumenta la corriente de fuga y no se alcanza el objetivo de bajo consumo de Shipping Mode. Cuando la batería está sobredescargada, la corriente de precarga del cargador debe superar la suma de la carga del sistema y la corriente de fuga (i1+i2 en el diagrama). Con el sistema en funcionamiento, la corriente de carga constante también debe superar i1+i2; de lo contrario, la carga del sistema consume parte de la corriente de carga y es posible que la batería no se cargue por completo. Un cargador con gestión de ruta separa la alimentación del sistema por VSYS de la carga de la batería por VBAT, admite Shipping Mode y puede alimentar el sistema desde VSYS aunque la batería esté sobredescargada.
 
-La variante U ofrece tres topologías de alimentación para elegir según la tensión de E/S de los periféricos y el objetivo de consumo del sistema. En las tres, AVDD33_ANA y AVDD33_AUD se alimentan a 3,3 V. La topología de menor consumo alimenta PVDD y VDDIO1–VDDIO4 a 1,8 V y utiliza periféricos con E/S de 1,8 V. La topología intermedia mantiene PVDD y VDDIO1 a 1,8 V, y alimenta VDDIO2–VDDIO4 y las E/S de los periféricos a 3,3 V. La de mayor consumo mantiene únicamente a 1,8 V VDDIO1, que alimenta la PSRAM integrada; PVDD, VDDIO2–VDDIO4 y las E/S de los periféricos usan 3,3 V. Utilice interruptores de carga para gestionar dinámicamente la alimentación de los módulos externos y manténgalos apagados por defecto cuando no se utilicen. Para los módulos que deban permanecer encendidos, elija componentes con baja corriente de reposo. El nivel predeterminado de hardware del GPIO de control debe coincidir con la polaridad de habilitación del interruptor para mantenerlo apagado al arrancar. SiFli recomienda una resistencia pull-up o pull-down de 1 MΩ en la entrada de habilitación.
+La variante U ofrece tres topologías de alimentación para elegir según la tensión de E/S de los periféricos y el objetivo de consumo del sistema. En las tres, AVDD33_ANA y AVDD33_AUD se alimentan a 3,3 V. La topología de menor consumo alimenta PVDD y VDDIO1–VDDIO4 a 1,8 V y utiliza periféricos con E/S de 1,8 V. La topología intermedia mantiene PVDD y VDDIO1 a 1,8 V, y alimenta VDDIO2–VDDIO4 y las E/S de los periféricos a 3,3 V. La de mayor consumo mantiene únicamente a 1,8 V VDDIO1, que alimenta la PSRAM integrada; PVDD, VDDIO2–VDDIO4 y las E/S de los periféricos usan 3,3 V. Utilice interruptores de carga para gestionar dinámicamente la alimentación de los módulos externos y manténgalos apagados por defecto cuando no se utilicen. Para los módulos que deban permanecer encendidos, elija componentes con baja corriente de reposo. El nivel predeterminado de hardware de la GPIO de control debe coincidir con la polaridad de habilitación del interruptor para mantenerlo apagado al arrancar. SiFli recomienda una resistencia pull-up o pull-down de 1 MΩ en la entrada de habilitación.
 
 La PMU de la variante U completa el reset de encendido cuando PVDD alcanza 1,5 V. Si PVDD cae, se genera un reset por brownout al alcanzar el umbral BOR configurado, ajustable entre 1,5 V y 2,5 V.
 
@@ -215,13 +215,13 @@ Revise conjuntamente el modo de funcionamiento, la fuente de activación, la ali
 | Modo de funcionamiento | CPU | Periférico | SRAM | E/S | LPTIM | Fuente de activación | Tiempo de reactivación |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | Activo | En marcha | En marcha | Accesible | Conmutable | En marcha |  |  |
-| WFI/WFE | Detenido | En marcha | Accesible | Conmutable | En marcha | Cualquier interrupción | < 0.5us |
-| DEEPWFI | Detenido | En marcha | Accesible | Conmutable | En marcha | Cualquier interrupción | < 5us |
-| Light Sleep | Detenido | Detenido | No accesible, totalmente retenida | Nivel mantenido | En marcha | RTC, GPIO, LPTIM, entre sistemas, Bluetooth, comparador | < 100us |
-| Deep Sleep | Detenido | Detenido | No accesible, totalmente retenida | Nivel mantenido | En marcha |  | < 300us |
-| Standby | Reinicio | Reinicio | No accesible; LP totalmente retenida y HP conserva solo 160KB | Nivel mantenido | En marcha | RTC, botones, LPTIM, entre sistemas, Bluetooth | 1.5ms+recuperación |
-| Hibernate rtc | Reinicio | Reinicio | Datos no retenidos | High-Z | Reinicio | RTC, botones | > 2ms |
-| Hibernate pin | Reinicio | Reinicio | Datos no retenidos | High-Z | Reinicio | Botones | > 2ms |
+| WFI/WFE | Detenido | En marcha | Accesible | Conmutable | En marcha | Cualquier interrupción | < 0,5 µs |
+| DEEPWFI | Detenido | En marcha | Accesible | Conmutable | En marcha | Cualquier interrupción | < 5 µs |
+| Light Sleep | Detenido | Detenido | No accesible, totalmente retenida | Nivel mantenido | En marcha | RTC, GPIO, LPTIM, entre sistemas, Bluetooth, comparador | < 100 µs |
+| Deep Sleep | Detenido | Detenido | No accesible, totalmente retenida | Nivel mantenido | En marcha |  | < 300 µs |
+| Standby | Reinicio | Reinicio | No accesible; LP totalmente retenida y HP conserva solo 160 KB | Nivel mantenido | En marcha | RTC, botones, LPTIM, entre sistemas, Bluetooth | 1,5 ms + recuperación |
+| Hibernate rtc | Reinicio | Reinicio | Datos no retenidos | High-Z | Reinicio | RTC, botones | > 2 ms |
+| Hibernate pin | Reinicio | Reinicio | Datos no retenidos | High-Z | Reinicio | Botones | > 2 ms |
 
 </div>
 
@@ -232,13 +232,13 @@ Revise conjuntamente el modo de funcionamiento, la fuente de activación, la ali
 | Modo de funcionamiento | CPU | Periférico | SRAM | E/S | LPTIM | Fuente de activación | Tiempo de reactivación |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | Activo | En marcha | En marcha | Accesible | Conmutable | En marcha |  |  |
-| WFI/WFE | Detenido | En marcha | Accesible | Conmutable | En marcha | Cualquier interrupción | < 0.5us |
-| DEEPWFI | Detenido | En marcha | Accesible | Conmutable | En marcha | Cualquier interrupción | < 5us |
-| Light Sleep | Detenido | Detenido | No accesible, totalmente retenida | Nivel mantenido | En marcha | RTC, GPIO, LPTIM, LPCOMP, interrupción entre sistemas, Bluetooth | < 100us |
-| Deep Sleep | Detenido | Detenido | No accesible, totalmente retenida | Nivel mantenido | En marcha | RTC, GPIO, LPTIM, LPCOMP, interrupción entre sistemas, Bluetooth | < 300us |
-| Standby | Reinicio | Reinicio | No accesible; LP totalmente retenida y HP conserva solo 160KB | Nivel mantenido | En marcha | RTC, botones, LPTIM, interrupción entre sistemas, Bluetooth | 1.5ms + recuperación |
-| Hibernate rtc | Reinicio | Reinicio | Datos no retenidos | High-Z | Reinicio | RTC, botones | > 2ms |
-| Hibernate pin | Reinicio | Reinicio | Datos no retenidos | High-Z | Reinicio | Botones | > 2ms |
+| WFI/WFE | Detenido | En marcha | Accesible | Conmutable | En marcha | Cualquier interrupción | < 0,5 µs |
+| DEEPWFI | Detenido | En marcha | Accesible | Conmutable | En marcha | Cualquier interrupción | < 5 µs |
+| Light Sleep | Detenido | Detenido | No accesible, totalmente retenida | Nivel mantenido | En marcha | RTC, GPIO, LPTIM, LPCOMP, interrupción entre sistemas, Bluetooth | < 100 µs |
+| Deep Sleep | Detenido | Detenido | No accesible, totalmente retenida | Nivel mantenido | En marcha | RTC, GPIO, LPTIM, LPCOMP, interrupción entre sistemas, Bluetooth | < 300 µs |
+| Standby | Reinicio | Reinicio | No accesible; LP totalmente retenida y HP conserva solo 160 KB | Nivel mantenido | En marcha | RTC, botones, LPTIM, interrupción entre sistemas, Bluetooth | 1,5 ms + recuperación |
+| Hibernate rtc | Reinicio | Reinicio | Datos no retenidos | High-Z | Reinicio | RTC, botones | > 2 ms |
+| Hibernate pin | Reinicio | Reinicio | Datos no retenidos | High-Z | Reinicio | Botones | > 2 ms |
 
 </div>
 
@@ -312,7 +312,7 @@ Incluya la alimentación de E/S de memoria en el análisis de apagado de bajo co
 
 </div>
 
-Coloque los cristales de 48 MHz y 32.768 kHz cerca del chip, reserve espacio para los condensadores de ajuste y proteja sus pistas del ruido de BUCK, RF, pantalla, motor y cargador.
+Coloque los cristales de 48 MHz y 32,768 kHz cerca del chip, reserve espacio para los condensadores de ajuste y proteja sus pistas del ruido de BUCK, RF, pantalla, motor y cargador.
 
 ### 5.4. RF { #54-rf }
 
@@ -354,7 +354,7 @@ La elección de la interfaz de pantalla debe hacerse al seleccionar el encapsula
 | D0 | PA40 | PA40 | Dato 2 en modo Quad-SPI |
 | D1 | PA41 | PA41 | Dato 3 en modo Quad-SPI |
 | REST | PA05 | PB04 | Señal de reinicio del panel de pantalla |
-| TE | PA33 | PA33 | Señal Tearing Effect para la sincronización de fotogramas del MCU |
+| TE | PA33 | PA33 | Señal Tearing Effect para la sincronización de fotogramas de la MCU |
 
 </div>
 
@@ -400,7 +400,7 @@ La elección de la interfaz de pantalla debe hacerse al seleccionar el encapsula
 | D[0] | PA40 | Dato 2 en modo Quad-SPI |
 | D[1] | PA41 | Dato 3 en modo Quad-SPI |
 | REST | PA43 | Señal de reinicio de pantalla |
-| TE | PA33 | Señal Tearing Effect para la sincronización de fotogramas del MCU |
+| TE | PA33 | Señal Tearing Effect para la sincronización de fotogramas de la MCU |
 
 </div>
 
@@ -423,7 +423,7 @@ La elección de la interfaz de pantalla debe hacerse al seleccionar el encapsula
 | D[6] | PA32 | Dato 6 |
 | D[7] | PA34 | Dato 7 |
 | REST | PA43 | Reinicio |
-| TE | PA33 | Señal Tearing Effect para la sincronización de fotogramas del MCU |
+| TE | PA33 | Señal Tearing Effect para la sincronización de fotogramas de la MCU |
 
 </div>
 
@@ -519,7 +519,7 @@ La elección de la interfaz de pantalla debe hacerse al seleccionar el encapsula
 
 ### 5.6. Almacenamiento, sensores, audio y conectividad { #56-storage-sensors-audio-and-connectivity }
 
-No asigne por separado los buses de almacenamiento y pantalla: ambos utilizan grupos de GPIO importantes y pueden condicionar el apilado de capas de la PCB. Antes de cerrar el esquema, confirme el tipo de almacenamiento de arranque, las resistencias pull-up, el dominio de tensión, el funcionamiento de los interruptores de alimentación y el acceso desde los útiles de prueba.
+No asigne por separado los buses de almacenamiento y pantalla: ambos utilizan grupos de GPIO importantes y pueden condicionar el apilado de capas de la PCB. Antes de cerrar el esquemático, confirme el tipo de almacenamiento de arranque, las resistencias pull-up, el dominio de tensión, el funcionamiento de los interruptores de alimentación y el acceso desde los útiles de prueba.
 
 <div align="center"><em>Tabla 5.6-1: Interfaz Flash QSPI de SF32LB56xU</em></div>
 
@@ -622,7 +622,7 @@ Adapte la alimentación de E/S del almacenamiento al nivel lógico de la memoria
 
 | Señal de audio | E/S | Descripción detallada |
 | :--- | :--- | :--- |
-| AU_ADC1P | ADCP | Entrada P diferencial o entrada de MIC analógico en modo single-ended |
+| AU_ADC1P | ADCP | Entrada P diferencial o entrada no diferencial de MIC analógico |
 | AU_ADC1N | ADCN | Entrada N diferencial de MIC analógico o GND |
 | AU_DAC1P | DACP | Salida analógica diferencial P |
 | AU_DAC1N | DACN | Salida analógica diferencial N |
@@ -635,7 +635,7 @@ Adapte la alimentación de E/S del almacenamiento al nivel lógico de la memoria
 
 | Señal de audio | E/S | Descripción detallada |
 | :--- | :--- | :--- |
-| AU_ADC1P | ADCP | Entrada P diferencial o entrada de MIC analógico en modo single-ended |
+| AU_ADC1P | ADCP | Entrada P diferencial o entrada no diferencial de MIC analógico |
 | AU_ADC1N | ADCN | Entrada N diferencial de MIC analógico o GND |
 | AU_DAC1P | DACP | Salida analógica diferencial P |
 | AU_DAC1N | DACN | Salida analógica diferencial N |
@@ -647,13 +647,13 @@ Adapte la alimentación de E/S del almacenamiento al nivel lógico de la memoria
 </div>
 
 !!! warning "Verifique la instancia I2S de la variante V"
-    La tabla de pines y los nombres de red del esquema de SiFli identifican estos pines como I2S1_LRCK/SDI/SDO/BCK, pero las descripciones de la tabla los presentan como señales I2S2. La instancia periférica no queda clara; confírmela en la documentación de pin-mux publicada antes de asignar los pines.
+    La tabla de pines y los nombres de red del esquemático de SiFli identifican estos pines como I2S1_LRCK/SDI/SDO/BCK, pero las descripciones de la tabla los presentan como señales I2S2. La instancia periférica no queda clara; confírmela en la documentación de pin-mux publicada antes de asignar los pines.
 
 Para un micrófono analógico diferencial externo, coloque condensadores de bloqueo de CC de al menos 2,2 µF en las entradas ADC y alimente el micrófono desde MIC_BIAS. El circuito de referencia de micrófono MEMS U conecta MIC_BIAS mediante 1 kΩ y añade un condensador de bypass de 4,7 µF; la salida del micrófono también muestra un condensador de acoplamiento de 0,01 µF. El circuito de referencia de PA analógico U usa condensadores de acoplamiento de entrada de 33 nF y sitúa el filtro paso bajo diferencial cerca del chip. Enrute las salidas DAC analógicas como un par diferencial protegido por masa; mantenga la capacitancia parásita por debajo de 10 pF y la longitud por debajo de 2 cm. La variante V también ofrece I2S; su amplificador I2S de referencia se configura mediante I2C3. Coloque los condensadores de alimentación y referencia de audio cerca de sus pines y aleje el audio analógico de los convertidores conmutados y las señales digitales de alta velocidad.
 
-Ambas variantes ofrecen PWM para motores de vibración. El motor puede alimentarse directamente desde VBAT si su corriente de arranque no desestabiliza el sistema. Además, si se define `BSP_PM_FREQ_SCALING` como `1`, el escalado de frecuencia del HCPU también modifica la frecuencia PWM en los pines PA. En ese caso, use un pin PB. PB32 es una entrada de alimentación/reset activa en nivel alto; una pulsación de al menos 10 s activa el reset. El circuito U de referencia conecta la tecla mediante 1 kΩ desde VDDIOB y añade un pull-down de 10 kΩ y un condensador de 0,1 µF a GND. El circuito V de referencia usa una resistencia serie de 1 kΩ desde VDD_1V8 y un pull-down de 10 kΩ. Los demás botones y encoders rotatorios requieren pull-ups; si un encoder mecánico no vuelve al estado apagado tras girarlo, la alimentación del pull-up debe poder desconectarse durante Standby para evitar fugas.
+Ambas variantes ofrecen PWM para motores de vibración. El motor puede alimentarse directamente desde VBAT si su corriente de arranque no desestabiliza el sistema. Además, si se define `BSP_PM_FREQ_SCALING` como `1`, el escalado de frecuencia de la HCPU también modifica la frecuencia PWM en los pines PA. En ese caso, use un pin PB. PB32 es una entrada de alimentación/reset activa en nivel alto; una pulsación de al menos 10 s activa el reset. El circuito U de referencia conecta la tecla mediante 1 kΩ desde VDDIOB y añade un pull-down de 10 kΩ y un condensador de 0,1 µF a GND. El circuito V de referencia usa una resistencia serie de 1 kΩ desde VDD_1V8 y un pull-down de 10 kΩ. Los demás botones y encoders rotatorios requieren pull-ups; si un encoder mecánico no vuelve al estado apagado tras girarlo, la alimentación del pull-up debe poder desconectarse durante Standby para evitar fugas.
 
-La variante U dispone de PBR0–PBR2 y la V de PBR0–PBR3. Durante el arranque, PBR0 pasa de nivel bajo a alto y puede controlar un interruptor de carga externo; los demás pines PBR arrancan en nivel bajo. Los pines PBR pueden funcionar como salidas en Standby y Hibernate y transportar LPTIM; todos salvo PBR0 pueden emitir un reloj de 32 kHz. También se pueden configurar como entradas de activación, pero el MCU no recibe una interrupción de esa entrada después de despertarse. Priorice los pines PB del LCPU para I2C, SPI, control y señales de interrupción/activación de sensores. La alimentación de los sensores puede conmutarse según sea necesario desde una salida LVSW o LDO del SF30147C.
+La variante U dispone de PBR0–PBR2 y la V de PBR0–PBR3. Durante el arranque, PBR0 pasa de nivel bajo a alto y puede controlar un interruptor de carga externo; los demás pines PBR arrancan en nivel bajo. Los pines PBR pueden funcionar como salidas en Standby y Hibernate y transportar LPTIM; todos salvo PBR0 pueden emitir un reloj de 32 kHz. También se pueden configurar como entradas de activación, pero la MCU no recibe una interrupción de esa entrada después de despertarse. Priorice los pines PB de la LCPU para I2C, SPI, control y señales de interrupción/activación de sensores. La alimentación de los sensores puede conmutarse según sea necesario desde una salida LVSW o LDO del SF30147C.
 
 Todos los pines PA de U/V pueden multiplexarse como UART, I2C o GPTIM. En U, las excepciones son PB32/PB33/PB34 y PBR0/PBR1/PBR2; en V, PB32–PB36 y PBR0–PBR3. Revise estas restricciones junto con la activación, los botones y la asignación de PBR.
 

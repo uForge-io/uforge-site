@@ -17,7 +17,7 @@ hide:
 
 ### 6.1. Empreinte et empilage des couches { #61-footprint-and-stack-up }
 
-La variante U utilise un boîtier QFN68L à 68 broches de 7 × 7 × 0,75 mm, avec un pas de 0,35 mm. Le QFN est compatible avec les vias traversants (PTH) ; SiFli recommande un empilage PTH à quatre couches, avec le fan-out de toutes les broches sur la couche supérieure. La variante V utilise un boîtier WBBGA à 175 billes de 6,5 × 6,1 × 0,94 mm, avec un pas de 0,4 mm et des billes de 0,25 mm de diamètre. Il n'est pas compatible avec les PTH et nécessite un procédé HDI. Faites le fan-out des deux rangées extérieures de billes sur la couche supérieure et des autres billes sur les couches internes. Avant de figer le routage, confirmez que le fabricant de PCB prend en charge l'empilage, le masque de soudure et la stratégie de fan-out retenus.
+La variante U utilise un boîtier QFN68L à 68 broches de 7 × 7 × 0,75 mm, avec un pas de 0,35 mm. Le QFN est compatible avec les vias traversants (PTH) ; SiFli recommande un empilage PTH à quatre couches, avec le fan-out de toutes les broches sur la couche supérieure. La variante V utilise un boîtier WBBGA à 175 billes de 6,5 × 6,1 × 0,94 mm, avec un pas de 0,4 mm et des billes de 0,25 mm de diamètre. Ce boîtier n'est pas compatible avec les PTH et nécessite un procédé HDI. Faites le fan-out des deux rangées extérieures de billes sur la couche supérieure et des autres billes sur les couches internes. Avant de publier les données d'implantation pour fabrication, confirmez que le fabricant de PCB peut réaliser l'empilage, le masque de soudure et la stratégie de fan-out retenus.
 
 ### 6.2. Routage critique { #62-critical-routing }
 
@@ -27,11 +27,11 @@ Placez les quartz dans le blindage, à plus de 1 mm du bord de la carte et, de p
 
 #### 6.2.2. Routage RF { #622-rf-routing }
 
-Routez la RF sous forme d'une piste asymétrique à impédance contrôlée de 50 Ω, de préférence d'une largeur supérieure à 10 mil et, si possible, sur la couche supérieure ; évitez les vias et les angles vifs. Placez le réseau d'adaptation près de la puce, et non de l'antenne. Placez le condensateur de filtrage AVDD_BRF près de la broche de la puce et reliez sa masse directement à la masse principale par un via. Assurez un blindage de masse continu et des vias de couture le long des deux côtés de la piste RF. Éloignez de la zone RF et de sa face inférieure les alimentations à fort di/dt, les horloges haute vitesse et les signaux I2C, SPI, SDIO, I2S et UART. Reliez correctement à la masse principale AVSS_RF1/2/3 pour la variante U et AVSS_RRF, AVSS_TRF, AVSS_TRF2 et AVSS_BB pour la variante V.
+Routez la RF sur une piste asymétrique à impédance contrôlée de 50 Ω, de préférence d'une largeur supérieure à 10 mil et, si possible, sur la couche supérieure ; évitez les vias et les angles vifs. Placez le réseau d'adaptation près de la puce, et non de l'antenne. Placez le condensateur de filtrage AVDD_BRF près de la broche de la puce et reliez sa masse directement à la masse principale par un via. Assurez un blindage de masse continu et des vias de raccordement à la masse de chaque côté de la piste RF. Éloignez de la zone RF et de sa face inférieure les rails d'alimentation à fort di/dt, les horloges haute vitesse et les signaux I2C, SPI, SDIO, I2S et UART. Reliez correctement à la masse principale AVSS_RF1/2/3 pour la variante U et AVSS_RRF, AVSS_TRF, AVSS_TRF2 et AVSS_BB pour la variante V.
 
 #### 6.2.3. Alimentation et masse { #623-power-and-ground }
 
-Placez l'inductance BUCK et les condensateurs de filtrage près des broches de la puce. Gardez BUCK_LX courte et large ; BUCK_FB doit avoir une largeur d'au moins 0,25 mm. Ne coulez pas de cuivre sur la couche supérieure sous l'inductance ; conservez un plan de masse continu sur la couche adjacente et ne faites passer aucune autre piste dans la zone de l'inductance. Reliez les masses des condensateurs de sortie BUCK au plan de masse principal par plusieurs vias. Placez le condensateur PVDD près de sa broche et routez PVDD de manière courte et large ; reliez PVSS à la masse principale par des vias. Placez les condensateurs de découplage LDO et E/S près de leurs broches et dimensionnez les pistes d'alimentation selon le courant de charge.
+Placez l'inductance BUCK et les condensateurs de filtrage près des broches de la puce. Gardez la piste BUCK_LX courte et large ; la piste BUCK_FB doit avoir une largeur d'au moins 0,25 mm. Ne coulez pas de cuivre sur la couche supérieure sous l'inductance ; conservez un plan de masse continu sur la couche adjacente et ne faites passer aucune autre piste dans la zone de l'inductance. Reliez les masses des condensateurs de sortie BUCK au plan de masse principal par plusieurs vias. Placez le condensateur PVDD près de sa broche et routez PVDD de manière courte et large ; reliez PVSS à la masse principale par des vias. Placez les condensateurs de découplage LDO et E/S près de leurs broches et dimensionnez les pistes d'alimentation selon le courant de charge.
 
 !!! warning "Valeurs contradictoires pour la largeur de piste PVDD"
     Le guide d'application matérielle SF32LB56xU/V spécifie une largeur minimale de piste PVDD de 0,5 mm, tandis que la liste de contrôle PCB correspondante indique 8 mil. Ces valeurs diffèrent ; confirmez auprès de SiFli ou du responsable de la conception PCB l'exigence applicable avant le gel du routage.
@@ -42,11 +42,11 @@ Alimentez AVDD33_ANA et AVDD33_AUD par des branches en étoile distinctes, prot�
 
 #### 6.2.5. USB et SDIO { #625-usb-and-sdio }
 
-Routez USB D+/D− (PA17/PA18) en paire différentielle de 90 Ω protégée par la masse. Placez les dispositifs ESD près du connecteur et faites passer les signaux par ces dispositifs avant qu'ils n'atteignent la puce ; ne créez aucune dérivation avant le dispositif de protection. Reliez la masse du dispositif à la masse principale par des pistes courtes et larges et des vias. La variante U dispose d'une interface SDIO ; la variante V dispose de SDIO1 et SDIO2. Routez les signaux SDIO en groupe, avec une longueur totale maximale de 50 mm et un écart de longueur maximal de 6 mm au sein du groupe. Protégez l'horloge SDIO par la masse et prévoyez également une garde de masse autour des signaux DATA et CMD.
+Routez USB D+/D− (PA17/PA18) en paire différentielle de 90 Ω protégée par la masse. Placez les composants ESD près du connecteur et faites passer les signaux par ces composants avant qu'ils n'atteignent la puce ; ne créez aucune dérivation avant le composant de protection. Reliez la masse du composant à la masse principale par des pistes courtes et larges et des vias. La variante U dispose d'une interface SDIO ; la variante V dispose de SDIO1 et SDIO2. Routez les signaux SDIO en groupe, avec une longueur totale maximale de 50 mm et un écart de longueur maximal de 6 mm au sein du groupe. Protégez l'horloge SDIO par la masse et prévoyez également une garde de masse autour des signaux DATA et CMD.
 
 #### 6.2.6. EMI, ESD et points de test { #626-emi-esd-and-test-points }
 
-Évitez les longues pistes sur la couche supérieure, hors du blindage, pour les signaux d'horloge et d'alimentation bruyants ; utilisez si possible les couches internes. Placez les composants TVS/ESD près du connecteur correspondant. Faites passer chaque signal par son dispositif de protection, puis reliez la pastille de masse du dispositif à la masse principale par des pistes courtes et larges et des vias. Placez le point de test du câble de charge USB en amont de sa TVS ; placez la TVS du connecteur de batterie en amont de la plateforme batterie afin que les lignes externes passent par la TVS avant d'atteindre la puce. Reliez suffisamment le réseau de masse sous la puce au plan de masse principal à l'aide de vias borgnes ou enterrés.
+Évitez les longues pistes sur la couche supérieure, hors du blindage, pour les signaux d'horloge et d'alimentation bruyants ; utilisez si possible les couches internes. Placez les composants TVS/ESD près du connecteur correspondant. Faites passer chaque signal par son composant de protection, puis reliez la pastille de masse du composant à la masse principale par des pistes courtes et larges et des vias. Placez le point de test du câble de charge USB en amont de sa TVS ; placez la TVS du connecteur de batterie en amont de la plateforme batterie afin que les lignes externes passent par la TVS avant d'atteindre la puce. Reliez suffisamment le réseau de masse sous la puce au plan de masse principal à l'aide de vias borgnes ou enterrés.
 
 ### 6.3. Liste de contrôle d'implantation et de routage du PCB { #63-pcb-layout-checklist }
 
@@ -132,7 +132,7 @@ Chaque tableau ci-dessous couvre un aspect de la revue de l'implantation et du r
 
 | N° | Point de contrôle | Catégorie |
 |:---|:---|:---|
-| 1 | Le dispositif de protection ESD du bouton est placé près du bouton | Obligatoire |
+| 1 | Le composant de protection ESD du bouton est placé près du bouton | Obligatoire |
 
 </div>
 
@@ -146,12 +146,12 @@ Chaque tableau ci-dessous couvre un aspect de la revue de l'implantation et du r
 |:---|:---|:---|
 | 1 | La piste RF respecte l'exigence d'impédance caractéristique de 50 Ω en mode asymétrique (single-ended) | Obligatoire |
 | 2 | Largeur de la piste RF ≥ 10 mil | Obligatoire |
-| 3 | Prévoir au moins 60 mil de cuivre de masse de chaque côté de la piste RF et suffisamment de vias de raccordement à la masse pour relier ce cuivre à la masse principale | Obligatoire |
-| 4 | Placer près de la puce le réseau π d'adaptation d'antenne prévu | Obligatoire |
+| 3 | Prévoyez au moins 60 mil de cuivre de masse de chaque côté de la piste RF et suffisamment de vias de raccordement à la masse pour relier ce cuivre à la masse principale | Obligatoire |
+| 4 | Placez près de la puce le réseau π d'adaptation d'antenne prévu | Obligatoire |
 | 5 | Plan de masse GND continu sous le signal RF | Obligatoire |
 | 6 | Aucune piste de signal numérique haute vitesse ne passe sous la piste RF | Obligatoire |
 | 7 | Aucune piste d'alimentation à di/dt élevé ne passe sous la piste RF | Obligatoire |
-| 8 | Renforcer la mise à la masse d'AVSS_RF1, AVSS_RF2 et AVSS_RF3 et relier ces broches au plan de masse principal | Obligatoire |
+| 8 | Renforcez la mise à la masse d'AVSS_RF1, AVSS_RF2 et AVSS_RF3 et reliez ces broches au plan de masse principal | Obligatoire |
 
 </div>
 
@@ -166,7 +166,7 @@ Chaque tableau ci-dessous couvre un aspect de la revue de l'implantation et du r
 | 1 | AU_ADCP/AU_ADCN sont routées comme des pistes différentielles avec garde de masse | Obligatoire |
 | 2 | AU_DACP/AU_DACN sont routées comme des pistes différentielles avec garde de masse | Obligatoire |
 | 3 | Les pistes AU_DACP/AU_DACN sont suffisamment courtes pour que la capacité parasite soit inférieure à 10 pF | Obligatoire |
-| 4 | Les pistes d'alimentation AVDD33_ANA et AVDD33_AUD doivent être gardées par une masse, rester à l'écart des signaux bruyants à fort courant et suivre un routage en étoile ; chacune doit mesurer au moins 5 mm | Obligatoire |
+| 4 | Les pistes d'alimentation AVDD33_ANA et AVDD33_AUD doivent être munies d'une garde de masse, rester à l'écart des signaux bruyants à fort courant et suivre un routage en étoile ; chacune doit mesurer au moins 5 mm | Obligatoire |
 | 5 | AVSS est connecté par des vias au plan de masse principal | Obligatoire |
 
 </div>

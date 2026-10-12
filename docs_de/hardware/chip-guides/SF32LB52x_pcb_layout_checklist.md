@@ -19,14 +19,14 @@ tags:
 Die ursprüngliche PCB-Checkliste enthält keine Spalte „Gilt für“. Wenden Sie jeden Prüfpunkt nur an, wenn die gewählte Variante und Schaltung den genannten Pin, die Versorgung oder die Funktion enthalten; kennzeichnen Sie nicht vorhandene Funktionen als nicht zutreffend. Die ursprünglichen Kategorien Erforderlich/Optional bleiben erhalten. Optional bedeutet jedoch nicht, dass ein laut Bauteilspezifikation notwendiges Bauteil entfallen darf.
 
 !!! note "Kupferbehandlung am Quarz in der Quelle"
-    Takt-Prüfpunkt 3 der Checkliste legt nicht fest, auf welchen Lagen eine Kupfer-Sperrzone erforderlich ist. Der Anwendungshinweis für batteriegespeiste Varianten widerspricht sich: Im Taktabschnitt soll die L2-Massefläche unter dem Quarz entfernt werden; im PCB-Routing-Abschnitt sind Ebenenaussparungen und Kupferausschnitte auf der oberen und den angrenzenden Lagen verboten und zeigen durchgehende L2-Masse. Der separate PCB-Layout-Leitfaden wiederholt das Verbot von Aussparungen. Klären Sie die Ausführung für den gewählten Lagenaufbau vor der Freigabe mit SiFli, statt sie aus der Checkliste abzuleiten.
+    Takt-Prüfpunkt 3 der Checkliste legt nicht fest, auf welchen Lagen ein Kupfer-Freihaltebereich erforderlich ist. Der Anwendungshinweis für batteriegespeiste Varianten widerspricht sich: Im Taktabschnitt soll die L2-Massefläche unter dem Quarz entfernt werden; im PCB-Routing-Abschnitt sind dagegen Ebenenaussparungen und Kupferausschnitte auf der oberen und den angrenzenden Lagen verboten. Das Routing-Modell zeigt eine durchgehende L2-Massefläche. Der separate PCB-Layout-Leitfaden wiederholt das Verbot von Aussparungen. Klären Sie die Ausführung für den gewählten Lagenaufbau vor der Freigabe mit SiFli, statt sie aus der Checkliste abzuleiten.
 
 !!! note "Prüfung der Leiterbahnbreiten"
     Die Arbeitsmappe gibt VCC ≥12 mil, BUCK-Leiterbahnen ≥10 mil und RF ≥10 mil vor. Abschnitt 6 enthält strengere Vorgaben für VCC und BUCK sowie die Empfehlung RF >10 mil. Erfüllen Sie beide jeweils zutreffenden Vorgabensätze einschließlich der 50-Ω-Anforderung für RF. Der Mindestwert der Checkliste ersetzt nicht die detaillierten Layoutvorgaben.
 
 ### 6.15.1. Gehäuse { #6151-package }
 
-<div align="center"><em>Tabelle 6.15.1-1: Checkliste Gehäuse</em></div>
+<div align="center"><em>Tabelle 6.15.1-1: Gehäuse-Checkliste</em></div>
 
 <div align="center" markdown>
 
@@ -38,7 +38,7 @@ Die ursprüngliche PCB-Checkliste enthält keine Spalte „Gilt für“. Wenden 
 
 ### 6.15.2. Routing der Stromversorgung { #6152-power-supply-routing }
 
-<div align="center"><em>Tabelle 6.15.2-1: Checkliste Routing der Stromversorgung</em></div>
+<div align="center"><em>Tabelle 6.15.2-1: Checkliste zum Routing der Stromversorgung</em></div>
 
 <div align="center" markdown>
 
@@ -57,7 +57,7 @@ Die ursprüngliche PCB-Checkliste enthält keine Spalte „Gilt für“. Wenden 
 
 ### 6.15.3. Platzierung von Stromversorgungskondensatoren und -induktivitäten { #6153-power-supply-capacitor-and-inductor-placement }
 
-<div align="center"><em>Tabelle 6.15.3-1: Checkliste Platzierung von Stromversorgungskondensatoren und -induktivitäten</em></div>
+<div align="center"><em>Tabelle 6.15.3-1: Checkliste zur Platzierung von Stromversorgungskondensatoren und -induktivitäten</em></div>
 
 <div align="center" markdown>
 

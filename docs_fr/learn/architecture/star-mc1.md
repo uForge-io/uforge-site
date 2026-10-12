@@ -10,7 +10,7 @@ tags:
 
 **STAR-MC1** est une IP de processeur conçue par Arm China et basée sur **Armv8-M Mainline**, le même profil d'architecture que celui utilisé par Cortex-M33. Le modèle logiciel Armv8-M reste donc familier, mais cela ne garantit pas la réutilisation sans modification d'un firmware pour Cortex-M33. Les extensions architecturales optionnelles, la configuration du cœur, les périphériques du SoC, la configuration de démarrage et de l'éditeur de liens, ainsi que la prise en charge par le SDK peuvent différer. Considérez les logiciels destinés à Cortex-M33 comme un point de départ pour le portage et validez-les avec le composant et le SDK cibles.
 
-Sur les dispositifs SF32 qui intègrent STAR-MC1, la documentation SiFli peut désigner le processeur applicatif par **Arm Cortex-M33**, **Cortex-M33 STAR-MC1** ou simplement **STAR-MC1**, selon le contexte et le niveau de détail. Ces appellations ne permettent pas, à elles seules, de confirmer les fonctions optionnelles du cœur ni la configuration exacte du SoC ; pour choisir un composant, vérifiez la documentation de chaque référence envisagée.
+Sur les composants SF32 qui intègrent STAR-MC1, la documentation SiFli peut désigner le processeur applicatif par **Arm Cortex-M33**, **Cortex-M33 STAR-MC1** ou simplement **STAR-MC1**, selon le contexte et le niveau de détail. Ces appellations ne permettent pas, à elles seules, de confirmer les fonctions optionnelles du cœur ni la configuration exacte du SoC ; pour choisir un composant, vérifiez la documentation de chaque référence envisagée.
 
 Consultez cette page si vous connaissez la famille Arm Cortex-M et souhaitez situer correctement STAR-MC1 pour le développement logiciel, les performances ou le choix d'un composant. Elle explique ce qui reste familier, ce qui peut varier selon l'implémentation du SoC et pourquoi STAR-MC1 ne doit pas être considéré comme un remplacement direct du Cortex-M7.
 
@@ -36,9 +36,9 @@ Pour un projet SF32, choisissez le composant en fonction de ses caractéristique
 
 ## Pourquoi STAR-MC1 compte { #why-star-mc1-matters }
 
-Les MCU Cortex-M33 traditionnels excellent dans le contrôle embarqué sécurisé et basse consommation. Toutefois, les produits connectés modernes ont souvent besoin de davantage que de la logique de contrôle. Les objets connectés portés, les écrans intelligents, les produits audio Bluetooth et les dispositifs d'IA en périphérie peuvent également exiger une interface utilisateur réactive, plus de mémoire externe, du traitement du signal et des transferts fréquents de données graphiques ou audio.
+Les MCU Cortex-M33 traditionnels excellent dans le contrôle embarqué sécurisé et basse consommation. Toutefois, les produits connectés modernes ont souvent besoin de davantage que de la logique de contrôle. Les objets connectés portés, les écrans intelligents, les produits audio Bluetooth et les appareils d'IA en périphérie peuvent également exiger une interface utilisateur réactive, plus de mémoire externe, du traitement du signal et des transferts fréquents de données graphiques ou audio.
 
-STAR-MC1 peut répondre à ces charges grâce aux caches, à la TCM et aux instructions personnalisées optionnels, lorsque le SoC les implémente et que le logiciel les exploite efficacement. Ces fonctions peuvent réduire les attentes mémoire ou accélérer certaines opérations tout en conservant le modèle de développement des MCU. Vérifiez les gains de performance et d'énergie sur le dispositif final avec des charges représentatives ; le nom du cœur ne garantit aucun de ces gains.
+STAR-MC1 peut répondre à ces charges grâce aux caches, à la TCM et aux instructions personnalisées optionnels, lorsque le SoC les implémente et que le logiciel les exploite efficacement. Ces fonctions peuvent réduire les attentes mémoire ou accélérer certaines opérations tout en conservant le modèle de développement des MCU. Vérifiez les gains de performance et d'énergie sur l'appareil final avec des charges représentatives ; le nom du cœur ne garantit aucun de ces gains.
 
 ## Comparaison de la famille Cortex-M { #cortex-m-family-comparison }
 
@@ -112,7 +112,7 @@ Le CDE n'accélère pas automatiquement chaque application. Le logiciel doit s'a
 
 ### Optimisation du système mémoire { #memory-system-optimization }
 
-De nombreuses applications modernes sur MCU sont limitées non seulement par la fréquence du CPU, mais aussi par la latence et la bande passante mémoire. La conception du système mémoire de STAR-MC1 et les fonctions de cache implémentées et activées par le SoC sont donc importantes pour les dispositifs de classe SF32, dont les applications peuvent combiner SRAM interne, Flash intégrée au boîtier, PSRAM, tampons d'affichage et DMA périphérique.
+De nombreuses applications modernes sur MCU sont limitées non seulement par la fréquence du CPU, mais aussi par la latence et la bande passante mémoire. La conception du système mémoire de STAR-MC1 et les fonctions de cache implémentées et activées par le SoC sont donc importantes pour les composants de classe SF32, dont les applications peuvent combiner SRAM interne, Flash intégrée au boîtier, PSRAM, tampons d'affichage et DMA périphérique.
 
 Les gains les plus importants apparaissent généralement lorsque :
 
@@ -159,17 +159,17 @@ STAR-MC1 n'a pas vocation à remplacer le Cortex-M7 dans tous les cas d'usage. S
 
 ## Applications bien adaptées { #good-application-fits }
 
-Les dispositifs basés sur STAR-MC1 sont des candidats pour les produits qui doivent accélérer les accès mémoire ou certaines opérations tout en respectant les contraintes de consommation et d'intégration des MCU. Ils méritent notamment d'être évalués lorsque la latence mémoire compte davantage que le score d'un petit benchmark CoreMark/DMIPS. Choisissez le SoC selon ses fonctions implémentées et ses performances mesurées avec la charge visée, pas selon un avantage supposé sur tout Cortex-M33 classique.
+Les composants basés sur STAR-MC1 sont des candidats pour les produits qui doivent accélérer les accès mémoire ou certaines opérations tout en respectant les contraintes de consommation et d'intégration des MCU. Ils méritent notamment d'être évalués lorsque la latence mémoire compte davantage que le score d'un petit benchmark CoreMark/DMIPS. Choisissez le SoC selon ses fonctions implémentées et ses performances mesurées avec la charge visée, pas selon un avantage supposé sur tout Cortex-M33 classique.
 
 Exemples d'applications adaptées :
 
 - Les montres connectées et les bracelets d'activité.
-- Les dispositifs audio Bluetooth.
+- Les appareils audio Bluetooth.
 - Les dispositifs médicaux portables et les produits de suivi de la santé.
 - Les écrans intelligents et systèmes HMI compacts.
-- Les dispositifs dotés de capteurs pour l'IA en périphérie.
+- Les appareils dotés de capteurs pour l'IA en périphérie.
 - Les produits utilisant LVGL ou d'autres frameworks UI embarqués.
-- Les dispositifs qui exécutent du code depuis de grandes mémoires Flash ou PSRAM.
+- Les composants qui exécutent du code depuis de grandes mémoires Flash ou PSRAM.
 
 ## Points clés à retenir { #key-takeaways }
 
@@ -177,7 +177,7 @@ Exemples d'applications adaptées :
 - Lorsque le SoC active les caches d'instructions et de données, ils peuvent améliorer la performance réelle, en particulier lorsque le code et les données résident hors de la SRAM interne rapide.
 - Le CDE fournit un chemin pour l'accélération par instructions personnalisées lorsqu'il est pris en charge par le SoC et la pile logicielle.
 - STAR-MC1 associe un modèle logiciel compatible CM33 à des fonctions configurables de mémoire et d'accélération ; comparez les SoC concrets et les charges mesurées, pas seulement les noms des cœurs.
-- Sur les dispositifs SF32 intégrant STAR-MC1, le cœur et les fonctions implémentées à ses côtés dans le SoC peuvent prendre en charge des applications plus ambitieuses en graphisme, en audio, en AIoT et dans les objets connectés portables, tout en conservant un modèle de développement de type MCU.
+- Sur les composants SF32 intégrant STAR-MC1, le cœur et les fonctions implémentées à ses côtés dans le SoC peuvent prendre en charge des applications plus ambitieuses en graphisme, en audio, en AIoT et dans les objets connectés portables, tout en conservant un modèle de développement de type MCU.
 
 ---
 

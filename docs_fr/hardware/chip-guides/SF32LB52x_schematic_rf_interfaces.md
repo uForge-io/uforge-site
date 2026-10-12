@@ -25,7 +25,7 @@ tags:
 
 **Objectif de conception**
 
-Maximiser la sensibilité Bluetooth et les performances de rayonnement RF en maîtrisant l'impédance, en réduisant les discontinuités et en prévoyant une marge d'adaptation suffisante pour le réglage final de l'antenne.
+Maximiser la sensibilité Bluetooth et les performances en rayonnement RF en maîtrisant l'impédance, en réduisant les discontinuités et en prévoyant une marge d'adaptation suffisante pour le réglage final de l'antenne.
 
 L'impédance caractéristique de la piste RF est de 50 Ω. Si l'antenne est déjà adaptée, aucun composant RF supplémentaire n'est requis, mais un réseau d'adaptation de type π réservé reste recommandé pour le filtrage des émissions parasites ou le réglage de l'antenne.
 
@@ -41,7 +41,7 @@ La figure 5.4-1 montre un condensateur série de 15 pF, 50 V (C0323) ; les deux 
 
 - Placer le réseau d'adaptation près de l'antenne au lieu de le placer près de la broche RF côté puce.
 - Router la RF à travers des vias inutiles ou des coudes prononcés.
-- Partager des chemins de retour de masse bruyants avec des circuits DC/DC, d'affichage, USB, ou de chargeur.
+- Partager des chemins de retour de masse bruyants avec ceux des circuits DC/DC, d'affichage, USB ou du chargeur.
 - Ne pas réserver d'emplacements pour le réseau d'adaptation, ce qui complique le réglage ultérieur de l'antenne.
 
 **Liste de contrôle RF**
@@ -63,7 +63,7 @@ La figure 5.4-1 montre un condensateur série de 15 pF, 50 V (C0323) ; les deux 
 
 **Objectif de conception**
 
-Choisir une interface d'affichage adaptée à la bande passante et à la consommation visées. Le réveil, le reset, le rétroéclairage et la détection tactile doivent rester fiables, en fonctionnement normal comme dans les états basse consommation.
+Choisir une interface d'affichage adaptée à la bande passante et à la consommation visées, en préservant le comportement du réveil, du reset, du rétroéclairage et de la détection tactile, en fonctionnement normal comme dans les états basse consommation.
 
 La puce prend en charge les interfaces SPI 3 fils, SPI 4 fils, SPI double ligne de données, SPI quadruple ligne de données, et JDI série, avec des modes de profondeur de couleur 16,7 M couleurs (RGB888), 262 K couleurs (RGB666), 65 K couleurs (RGB565), et 8 couleurs (RGB111), jusqu'à une résolution de 512x512.
 
@@ -103,7 +103,7 @@ Modèles de contrôleur LCD pris en charge :
 | WRx_SCL | PA04 | Horloge |
 | DCx | PA06 | Donnée/commande en SPI 4 fils ; donnée 1 en Quad-SPI |
 | SDI_RDx | PA05 | Entrée de données en SPI 3/4 fils ; donnée 0 en Quad-SPI |
-| SDO | PA05 | Sortie de données en SPI 3/4 fils ; court-circuité avec SDI_RDx |
+| SDO | PA05 | Sortie de données en SPI 3/4 fils ; relié à SDI_RDx |
 | D[0] | PA07 | Donnée 2 en Quad-SPI |
 | D[1] | PA08 | Donnée 3 en Quad-SPI |
 | RESET | PA00 | Reset de l'afficheur |
@@ -196,7 +196,7 @@ Le SF32LB52x prend en charge un contrôleur tactile raccordé en I2C, avec une e
 **Erreurs courantes - Affichage**
 
 - Oublier les broches de reset, TE, PWM de rétroéclairage, ou interruption tactile lors de l'affectation des broches.
-- Supposer la prise en charge EPD sur la variante alimentée par batterie sans confirmer le dispositif réel et la conception source.
+- Supposer la prise en charge EPD sur la variante alimentée par batterie sans confirmer le composant réel et la conception source.
 - Alimenter l'afficheur depuis un LDO interne plutôt qu'un rail externe correctement dimensionné.
 - Router les horloges et données d'affichage à proximité du quartz, de la RF, de l'audio, ou de nœuds analogiques haute impédance.
 
@@ -222,7 +222,7 @@ Préserver la qualité du signal analogique en gardant les chemins de microphone
 L'interface audio fournit :
 
 1. Une entrée ADC asymétrique pour un microphone analogique, avec un condensateur de liaison en série d'au moins 2,2 uF ; le microphone est alimenté par la sortie MIC_BIAS de la puce.
-2. Une sortie DAC différentielle pour un PA audio externe — routez-la en paire différentielle avec un blindage par plan de masse ; gardez une capacité de piste < 10 pF et une longueur < 2 cm.
+2. Une sortie DAC différentielle pour un amplificateur de puissance audio (PA) externe — routez-la en paire différentielle avec un blindage par plan de masse ; gardez une capacité de piste < 10 pF et une longueur < 2 cm.
 
 <div align="center"><em>Tableau 5.5-6 : Connexions de signal audio</em></div>
 

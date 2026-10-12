@@ -11,7 +11,7 @@ tags:
 # Guia de projeto de hardware SF32LB52x — Armazenamento e fabricação { #sf32lb52x-hardware-design-guide-storage-manufacturing }
 
 !!! note "Parte do guia de projeto de hardware SF32LB52x"
-    Esta página cobre as Seções 5.6 e 5.7 das diretrizes de projeto do esquemático: armazenamento e conectividade, e fabricação. Volte a [RF e interfaces de usuário](SF32LB52x_schematic_rf_interfaces.md) ou consulte a [Checklist do esquemático](SF32LB52x_schematic_checklist.md) para a revisão item por item.
+    Esta página cobre as Seções 5.6 e 5.7 das diretrizes de projeto do esquemático: armazenamento e conectividade, e fabricação. Volte a [RF e interfaces de usuário](SF32LB52x_schematic_rf_interfaces.md) ou consulte o [Checklist do esquemático](SF32LB52x_schematic_checklist.md) para a revisão item por item.
 
 ### 5.6. Armazenamento e conectividade { #56-storage-and-connectivity }
 
@@ -21,7 +21,7 @@ tags:
 
 - As opções de boot externo incluem SPI NOR, SPI NAND e SD NAND; eMMC está disponível nos modelos compatíveis com alimentação externa regulada.
 - Os pinos de bootstrap `PA13` e `PA17` selecionam a mídia de boot.
-- As notas de aplicação e o guia de projeto do esquemático indicam `PA21` para comutar a alimentação do armazenamento de boot, enquanto o checklist oficial indica `PA11` para a Flash externa das variantes alimentadas por bateria. Confirme com a SiFli qual pino de controle se aplica ao projeto exato. Como requisito separado, a Flash NOR de 32 MB ou mais conectada via MPI deve poder ser desligada e religada por `PA21` para que a ROM a reconheça após um reset ou a entrada em Hibernate. Nas variantes com memória integrada ao encapsulamento, `VDD_SIP` deve ser desligado durante o Hibernate para evitar fuga de corrente nas E/S dessa memória.
+- As notas de aplicação e o guia de projeto do esquemático indicam `PA21` para comutar a alimentação do armazenamento de boot, enquanto o checklist oficial indica `PA11` para a Flash externa das variantes alimentadas por bateria. Confirme com a SiFli qual pino de controle se aplica ao projeto exato. Como requisito separado, a Flash NOR de 32 MB ou mais conectada via MPI deve poder ser desligada e religada por PA21 para que a ROM a reconheça após um reset ou a entrada em Hibernate. Nas variantes com memória integrada ao encapsulamento, VDD_SIP deve ser desligado durante o Hibernate para evitar fuga de corrente nas E/S dessa memória.
 
 **Objetivo do projeto**
 
@@ -124,7 +124,7 @@ O chip aceita Flash SPI NOR, SPI NAND e SD NAND externas. **eMMC é compatível 
 
 ##### 5.6.1.3. Controle da alimentação do armazenamento de boot { #5613-boot-storage-power-control }
 
-As notas de aplicação e o guia de projeto de esquemático da OpenSiFli, de maior prioridade, especificam `PA21` para comutar a alimentação do armazenamento de boot (nível alto: ligado; nível baixo: desligado); use `PA21` como base de projeto respaldada pelas fontes. Já a planilha de checklist vinculada na wiki da SiFli indica, em vez disso, `PA11` para a comutação da Flash externa das variantes alimentadas por bateria. Não substitua `PA21` por `PA11` com base apenas nessa planilha. Ela não esclarece se `PA11` é outro sinal de habilitação na placa ou uma divergência de atribuição; confirme com a SiFli a rede e a variante exatas antes de liberar o projeto.
+As notas de aplicação e o guia de projeto de esquemático da OpenSiFli, de maior prioridade, especificam `PA21` para comutar a alimentação do armazenamento de boot (nível alto: ligado; nível baixo: desligado); use `PA21` como base de projeto respaldada pelas fontes. Já a planilha de checklist vinculada na wiki da SiFli indica, em vez disso, `PA11` para a comutação da Flash externa das variantes alimentadas por bateria. Não substitua PA21 por `PA11` com base apenas nessa planilha. Ela não esclarece se `PA11` é outro sinal de habilitação na placa ou uma divergência de atribuição; confirme com a SiFli a rede e a variante exatas antes de liberar o projeto.
 
 === "SF32LB520/3/5/7 (alimentação por bateria)"
 
@@ -141,7 +141,7 @@ As notas de aplicação e o guia de projeto de esquemático da OpenSiFli, de mai
     - A alimentação do armazenamento externo é independente de VDD_SIP; adicione uma chave de alimentação separada.
     - Consulte a Seção 5.6.1.1 para conhecer as alternativas de alimentação de VCC/VCCQ do eMMC.
     - A nota de aplicação especifica **PA21** para as chaves de alimentação do armazenamento relacionadas ao boot; a divergência entre as fontes para a Flash externa das variantes alimentadas por bateria foi indicada acima.
-    - Flash NOR de 32 MB ou mais conectada por MPI (Memory Peripheral Interface, que conecta SPI-NOR/SPI-NAND) deve poder ser desligada por PA21 para sair do modo de 4 bytes quando o MCU reiniciar ou entrar em Hibernate; caso contrário, a ROM não reconhecerá a Flash. Flash NOR de até 16 MB pode permanecer sempre alimentada.
+    - A alimentação da Flash NOR de 32 MB ou mais conectada por MPI (Memory Peripheral Interface, que conecta SPI-NOR/SPI-NAND) deve poder ser desligada e religada por PA21 para que a Flash saia do modo de 4 bytes quando o MCU reiniciar ou entrar em Hibernate; caso contrário, a ROM não a reconhecerá. Flash NOR de até 16 MB pode permanecer sempre alimentada.
     - O projeto de referência reserva posições para resistores de pull-up em PA13 e PA17. Instale-os conforme o tipo de armazenamento; recomenda-se 7,5 kΩ.
 
 **Erros comuns — armazenamento**
@@ -151,11 +151,11 @@ As notas de aplicação e o guia de projeto de esquemático da OpenSiFli, de mai
 - Presumir que eMMC está disponível em todas as variantes.
 - Manter uma Flash NOR de alta capacidade sempre alimentada quando o modo de 4 bytes pode impedir que a ROM a reconheça após uma reinicialização.
 
-**Lista de verificação do armazenamento**
+**Checklist do armazenamento**
 
 - [ ] A mídia de boot foi selecionada e documentada antes do layout da PCB.
 - [ ] As opções de pull-up de bootstrap em `PA13`/`PA17` correspondem à tabela de boot.
-- [ ] Todas as chaves de alimentação necessárias ao armazenamento de boot são controladas pelo pino específico da variante confirmado pela fonte; a divergência entre `PA11` e `PA21` foi resolvida com a SiFli.
+- [ ] Todas as chaves de alimentação necessárias ao armazenamento de boot são controladas pelo pino específico da variante confirmado pela fonte; a divergência entre PA11 e PA21 foi resolvida com a SiFli.
 - [ ] O compromisso entre VCC e VCCQ do eMMC foi avaliado nos projetos alimentados por fonte regulada externa.
 - [ ] O plano de inicialização cobre os straps do modo de boot, a sequência temporal das linhas de alimentação do armazenamento, a leitura do ID e o download do firmware.
 
@@ -172,7 +172,7 @@ Mantenha confiáveis a alimentação, as interrupções e o roteamento dos barra
 
 O SF32LB52x pode se conectar a sensores de frequência cardíaca, acelerômetros, sensores geomagnéticos e outros semelhantes. Para chavear a alimentação dos sensores, escolha uma chave de carga com baixa corrente quiescente (Iq).
 
-**Lista de verificação dos sensores**
+**Checklist dos sensores**
 
 - [ ] Os pinos de barramento, interrupção, reset e habilitação da alimentação de cada sensor estão definidos.
 - [ ] A corrente quiescente (Iq) e a corrente no estado desligado da chave de carga dos sensores atendem à meta de standby.
@@ -184,7 +184,7 @@ O SF32LB52x pode se conectar a sensores de frequência cardíaca, acelerômetros
 **Resumo rápido**
 
 - As funções UART e I2C podem ser mapeadas para quaisquer pinos PA.
-- Ainda assim, a escolha dos pinos deve levar em conta as restrições de boot, despertar, depuração, testes de produção e roteamento da placa.
+- Ainda assim, recomenda-se considerar as restrições de boot, despertar, depuração, testes de produção e roteamento da placa ao escolher os pinos.
 
 **Objetivo do projeto**
 
@@ -192,7 +192,7 @@ Use o mapeamento flexível de pinos para simplificar o roteamento sem bloquear o
 
 O SF32LB52x permite mapear as funções UART e I2C para quaisquer pinos PA.
 
-**Lista de verificação UART/I2C**
+**Checklist UART/I2C**
 
 - [ ] Os resistores de pull-up, os domínios de tensão e a capacitância do barramento estão corretos para cada barramento I2C.
 - [ ] Os pinos UART necessários para logs, download ou módulos externos estão acessíveis.
@@ -211,7 +211,7 @@ Reserve as funções de temporizador com antecedência para evitar que, no fim d
 
 O SF32LB52x permite mapear as funções GPTIM para quaisquer pinos PA.
 
-**Lista de verificação GPTIM**
+**Checklist GPTIM**
 
 - [ ] Os canais de temporizador necessários para PWM, captura ou malhas de controle estão listados na tabela de pinagem.
 - [ ] Os pinos GPTIM não conflitam com os requisitos de backlight, motor, depuração ou armazenamento.
@@ -245,7 +245,7 @@ Para depuração passo a passo e saída de logs por DBG_UART, consulte os manuai
 
 </div>
 
-**Lista de verificação da depuração**
+**Checklist da depuração**
 
 - [ ] `PA18`/`PA19`, o terra e a referência de alimentação necessária estão disponíveis em pads de teste ou pinos de um conector.
 - [ ] O acesso de depuração continua disponível depois da montagem do gabinete, da bateria e do display.
@@ -265,22 +265,22 @@ Permita programar, calibrar e recuperar cada placa de produção sem soldagem ma
 
 A SiFli fornece um downloader offline para gravar o firmware de produção e calibrar o cristal. Reserve no projeto de hardware, no mínimo, os seguintes pontos de teste: PVDD/VBAT, GND, AVDD33, DBG_UART_RXD, DBG_UART_TXD e PA01. Consulte o documento "Offline Downloader User Guide", incluído no pacote de desenvolvimento, para obter o procedimento detalhado de gravação e calibração.
 
-**Lista de verificação de produção**
+**Checklist de produção**
 
 - [ ] Os pontos de teste PVDD/VBAT, GND, AVDD33, DBG_UART_RXD, DBG_UART_TXD e PA01 estão previstos.
 - [ ] Os pads de teste permanecem acessíveis ao dispositivo de teste previsto após a montagem mecânica.
 - [ ] O fluxo de calibração do cristal e os limites de aprovação/reprovação foram definidos com a equipe de fabricação.
 - [ ] Os registros de programação, calibração e testes funcionais podem ser associados à revisão da placa.
 
-#### 5.7.3. Listas de verificação de esquemático e layout da PCB { #573-schematic-and-pcb-drawing-checklists }
+#### 5.7.3. Checklists de esquemático e layout da PCB { #573-schematic-and-pcb-drawing-checklists }
 
-Use a [lista oficial de verificação de esquemático e PCB][SiFli SF32LB52 Schematic & PCB Checklist (XLSX)], publicada no wiki da SiFli, como critério formal de liberação. Consulte a [Checklist do esquemático](SF32LB52x_schematic_checklist.md) para ver a versão completa, item por item. As listas deste guia ajudam a detectar problemas comuns de engenharia antes da revisão formal.
+Use o [checklist oficial de esquemático e PCB][SiFli SF32LB52 Schematic & PCB Checklist (XLSX)], publicada no wiki da SiFli, como ponto de controle formal de liberação. Consulte o [Checklist do esquemático](SF32LB52x_schematic_checklist.md) para ver a versão completa, item por item. As listas deste guia ajudam a detectar problemas comuns de engenharia antes da revisão formal.
 
 [SiFli SF32LB52 Schematic & PCB Checklist (XLSX)]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx
 
-**Lista de verificação para liberação**
+**Checklist para liberação**
 
-- [ ] As listas de verificação do esquemático e da PCB, a verificação da lista de fornecedores aprovados (AVL), o relatório DRC e o relatório de impedância estão concluídos.
+- [ ] Os checklists do esquemático e da PCB, a verificação da lista de fornecedores aprovados (AVL), o relatório DRC e o relatório de impedância estão concluídos.
 - [ ] Foram arquivadas capturas de evidências sobre alimentação, clock, RF, display, armazenamento, áudio, USB, SDIO, DC/DC e acesso aos testes de produção.
 - [ ] As premissas específicas de cada variante estão registradas nas notas de revisão.
 - [ ] Cada risco de hardware ainda em aberto tem um responsável definido antes da liberação.

@@ -65,9 +65,9 @@ flowchart LR
 
 | テーブル | 必要な定義 |
 | --- | --- |
-| `charging_curve_table` | 充電用の`const battery_lookup_point_t[]`テーブル。電圧値は高い順から低い順に並べる。 |
-| `discharge_curve_table` | 放電用の`const battery_lookup_point_t[]`テーブル。電圧値は高い順から低い順に並べる。 |
-| テーブル内容 | 残量は100から0の順に対応させ、実際のバッテリー特性を反映する。 |
+| `charging_curve_table` | 充電用の`const battery_lookup_point_t[]`テーブル。電圧値は高い順から低い順に並べる必要がある。 |
+| `discharge_curve_table` | 放電用の`const battery_lookup_point_t[]`テーブル。電圧値は高い順から低い順に並べる必要がある。 |
+| テーブル内容 | 残量は100から0の順に対応させ、実際のバッテリー特性を反映する必要がある。 |
 | テーブルの配置場所 | ボード固有の`battery_table.c`。 |
 
 </div>

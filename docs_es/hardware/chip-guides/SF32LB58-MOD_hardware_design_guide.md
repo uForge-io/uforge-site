@@ -14,12 +14,12 @@ tags:
 
 **SF32LB58-MOD** es un módulo MCU Bluetooth de bajo consumo y uso general, basado en el chip SF32LB586VDD36 de SiFli. El chip integra un procesador Arm Cortex-M33 STAR-MC1 de tres núcleos, con una frecuencia de hasta 240 MHz. El módulo incluye un cristal de 48 MHz y ofrece uno de 32,768 kHz como opción. Según el SKU, también integra memoria HPI-PSRAM, Flash QSPI-NOR/NAND o eMMC. Es un módulo de montaje superficial con 138 pines y unas dimensiones de 24 × 24 × 3,1 mm.
 
-Esta guía aborda la integración de hardware a nivel de módulo: definiciones de pines, interfaces periféricas, características eléctricas, requisitos de alimentación, esquemas de referencia, lista de comprobación del esquema, dimensiones mecánicas y huella de PCB, y requisitos de manipulación del producto. Se basa en la hoja de datos de SiFli **DS5802-SF32LB58-MOD V0.1**.
+Esta guía aborda la integración de hardware a nivel de módulo: definiciones de pines, interfaces periféricas, características eléctricas, requisitos de alimentación, esquemáticos de referencia, lista de comprobación del esquemático, dimensiones mecánicas y huella de PCB, y requisitos de manipulación del producto. Se basa en la hoja de datos de SiFli **DS5802-SF32LB58-MOD V0.1**.
 
 Para conocer en más detalle la arquitectura del chip (núcleos, gráficos, subsistema de memoria y periféricos), consulte [SF32LB58x](../../sf32-products/chips/SF32LB58x.md) y la [Guía de diseño de hardware de SF32LB58x](../chip-guides/SF32LB58x_hardware_design_guide.md).
 
 !!! note "Fuentes y tratamiento de las figuras"
-    Los datos técnicos específicos del módulo siguen **DS5802-SF32LB58-MOD V0.1**. Algunos diagramas de pines, esquemas y dibujos mecánicos de la hoja de datos son imágenes rasterizadas; aquí se enlazan como referencia en lugar de volver a dibujarlos. La numeración de figuras y tablas sigue la numeración local de esta guía; los pies de los diagramas no reproducidos indican la figura correspondiente de la hoja de datos oficial.
+    Los datos técnicos específicos del módulo siguen **DS5802-SF32LB58-MOD V0.1**. Algunos diagramas de pines, esquemáticos y dibujos mecánicos de la hoja de datos son imágenes rasterizadas; aquí se enlazan como referencia en lugar de volver a dibujarlos. La numeración de figuras y tablas sigue la numeración local de esta guía; los pies de los diagramas no reproducidos indican la figura correspondiente de la hoja de datos oficial.
 
 ## 2. Resumen de diseño { #2-quick-design-summary }
 
@@ -31,9 +31,9 @@ Para conocer en más detalle la arquitectura del chip (núcleos, gráficos, subs
 
 | Código del módulo | Flash | PSRAM | Flash estándar | Temperatura | Dimensiones (mm) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB58-MOD-N16R32N1 | 16MB QSPI-NOR | 16+16MB HPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 24 × 24 × 3,1 |
-| SF32LB58-MOD-A128R32N1 | 128MB QSPI-NAND | 16+16MB HPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 24 × 24 × 3,1 |
-| SF32LB58-MOD-E4R32N1 | 4GB eMMC | 16+16MB HPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 24 × 24 × 3,1 |
+| SF32LB58-MOD-N16R32N1 | 16 MB QSPI-NOR | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 a 85 °C | 24 × 24 × 3,1 mm |
+| SF32LB58-MOD-A128R32N1 | 128 MB QSPI-NAND | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 a 85 °C | 24 × 24 × 3,1 mm |
+| SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 a 85 °C | 24 × 24 × 3,1 mm |
 
 </div>
 
@@ -45,16 +45,16 @@ Para conocer en más detalle la arquitectura del chip (núcleos, gráficos, subs
 
 | Elemento | Especificación |
 | :--- | :--- |
-| Núcleos de aplicación (HCPU/ACPU) | 2 Arm Cortex-M33 STAR-MC1, hasta 240 MHz |
+| Núcleos de aplicación (HCPU/ACPU) | 2 × Arm Cortex-M33 STAR-MC1, hasta 240 MHz |
 | Núcleo de bajo consumo (LCPU) | Arm Cortex-M33 STAR-MC1, hasta 96 MHz |
-| SRAM | 2176 KB (HCPU) + 512 KB (ACPU) + 1056 KB retention SRAM (LCPU) |
+| SRAM | 2176 KB (HCPU) + 512 KB (ACPU) + 1056 KB de SRAM de retención (LCPU) |
 | Conectividad inalámbrica | Bluetooth 5.3 de modo dual, compatible con 4.2/4.1/4.0; admite BLE y Bluetooth clásico |
 | Gráficos | ePicasso 2.0 + Vivante GCNanoUltraV, hasta 1024×1024, eZip 2.0 y códec JPEG por hardware |
 | Audio | 2 DAC de audio de 24 bits y 2 ADC Sigma-Delta de audio de 24 bits |
 | Almacenamiento | 5 MPI (integrados en el encapsulado y externos), 2 SD/SDIO/eMMC |
 | Encapsulado | 138 pines, 24 × 24 × 3,1 mm |
 | Alimentación | VDD_3V3 (2,97–3,6 V), VDD_1V8 (1,7–1,95 V), VDDIOA/VDDIOA2/VDDIOB (1,7–3,6 V) |
-| Antena | Antena externa mediante una conexión RF con orificios de estampado o un conector compatible con IPEX, según el número de pieza |
+| Antena | Antena externa mediante una conexión RF con semiorificios metalizados o un conector compatible con IPEX, según el número de pieza |
 | Temperatura de funcionamiento | -40 a 85 °C |
 
 </div>
@@ -85,7 +85,7 @@ El módulo tiene 138 pines en total, descritos en la siguiente tabla.
 
 | Nombre | N.º | Tipo | MUX predeterminado | I/O predeterminado | Función |
 | :--- | :-: | :-: | :--- | :-: | :--- |
-| VDDIOB | 1 | P | 1.8/3,3 V | P | Entrada de alimentación IO de la interfaz PB |
+| VDDIOB | 1 | P | 1,8/3,3 V | P | Entrada de alimentación de E/S de la interfaz PB |
 | PB36 | 2 | I/O/T | USART4_RXD | I | GPIO_B36, USART4_RXD, GPTIM3_CH1, #GPADC_CH4 |
 | PB37 | 3 | I/O/T | USART4_TXD | O | GPIO_B37, USART4_TXD, GPTIM3_CH2, #GPADC_CH5 |
 | PB54 | 4 | I/O/T | GPIO_B54 | I | GPIO_B54, #WKUP_PIN0 |
@@ -97,10 +97,10 @@ El módulo tiene 138 pines en total, descritos en la siguiente tabla.
 | PA79 | 10 | I/O/T | GPIO_A79 | I/O | GPIO_A79, SD2_DIO2 |
 | BOOT_MODE | 11 | I | BOOT_MODE | I | 1: modo de descarga; 0: modo de usuario |
 | RSTN | 12 | I | RSTN | I | 1: modo de usuario; 0: modo de reinicio |
-| VDD_1V8 | 13 | P | 1,8 V | P | Entrada de alimentación principal del MCU y de la memoria integrada en el encapsulado |
+| VDD_1V8 | 13 | P | 1,8 V | P | Entrada de alimentación principal de la MCU y de la memoria integrada en el encapsulado |
 | GND | 14 | P | Tierra | P | Tierra |
-| VDDIOA | 15 | P | 1.8/3,3 V | P | Entrada de alimentación IO de la interfaz PA, excepto PA00–PA11 |
-| VDD_3V3 | 16 | P | 3,3 V | P | Entrada de alimentación analógica del MCU |
+| VDDIOA | 15 | P | 1,8/3,3 V | P | Entrada de alimentación IO de la interfaz PA, excepto PA00–PA11 |
+| VDD_3V3 | 16 | P | 3,3 V | P | Entrada de alimentación analógica de la MCU |
 | PA13 | 17 | I/O/T | GPIO_A13 | O | GPIO_A13, GPTIM1_CH2, ATIM1_BKIN, LCDC1_DPI_DE |
 | PA15 | 18 | I/O/T | GPIO_A15 | O | GPIO_A15, GPTIM1_CH3, ATIM1_BKIN2, LCDC1_DPI_VSYNC |
 | PA14 | 19 | I/O/T | GPIO_A14 | O | GPIO_A14, I2S1_LRCK, LCDC1_DPI_HSYNC |
@@ -129,7 +129,7 @@ El módulo tiene 138 pines en total, descritos en la siguiente tabla.
 | PA24 | 42 | I/O/T | GPIO_A24 | O | GPIO_A24, LCDC1_8080_RSTB, LCDC1_SPI_RSTB, LCDC1_DPI_R2 |
 | PA23 | 43 | I/O/T | GPIO_A23 | O | GPIO_A23, PDM1_CLK, I2S1_BCK, USART2_CTS, I2C2_SDA, LCDC1_DPI_R1 |
 | PA22 | 44 | I/O/T | GPIO_A22 | O | GPIO_A22, PDM2_DATA, GPTIM1_ETR, ATIM2_CH1, LCDC1_DPI_R0, LCDC1_JDI_VST |
-| VDDIOA2 | 45 | P | 1.8/3,3 V | P | Entrada de alimentación IO de PA00–PA11 |
+| VDDIOA2 | 45 | P | 1,8/3,3 V | P | Entrada de alimentación IO de PA00–PA11 |
 | GND | 46 | P | Tierra | P | Tierra |
 | DSI_D0N | 47 | O | DSI_D0N | O | Carril de datos MIPI DSI 0, negativo |
 | DSI_D0P | 48 | O | DSI_D0P | P | Carril de datos MIPI DSI 0, positivo |
@@ -245,7 +245,7 @@ Cualquier pin marcado como `PAxx_I2C_UART` o `PBxx_I2C_UART` en la tabla anterio
 
 **SPI** — Admite formatos SSP/SPI (dúplex completo, maestro o esclavo) y Microwire (semidúplex, solo maestro), anchura de datos de 4–32 bits, polaridad/fase de reloj configurable y polaridad de selección de chip configurable. Incluye FIFO de 32 bits × 16 entradas y DMA. SPI1/2 están en HPSYS (máx. 48 MHz); SPI3/4, en LPSYS (máx. 24 MHz).
 
-**USB2.0 HS** — Un puerto de alta velocidad Host/Device, conforme con USB 2.0, con puntos finales configurables, suspensión/reanudación y compatibilidad con solicitudes de sesión y el protocolo de negociación del host. Admite los modos de alta y máxima velocidad.
+**USB2.0 HS** — Un puerto de alta velocidad Host/Device, conforme con USB 2.0, con puntos finales configurables, suspensión/reanudación y compatibilidad con solicitudes de sesión y el protocolo de negociación del host. Admite los modos de alta velocidad y de velocidad completa.
 
 **MPI (Memory Peripheral Interface)** — Admite Flash SPI NOR (1/2/4 líneas, modo DTR) y Flash SPI NAND (1/2/4 líneas), con acceso en modo de registros y en modo de memoria mapeada, y cambio automático por hardware entre ambos. La interfaz MPI4 del módulo permite conectar Flash SPI NOR/NAND externa.
 
@@ -253,7 +253,7 @@ Cualquier pin marcado como `PAxx_I2C_UART` o `PBxx_I2C_UART` en la tabla anterio
 
 **I2S** — Solo maestro, dúplex completo, formatos justificado a la izquierda/derecha y estándar, mono/estéreo de 8 y 16 bits, y anchura PCM de hasta 24 bits.
 
-**Interfaz LCD** — Modo SPI serie DBI (3/4 líneas, líneas de datos duales/cuádruples) y modo paralelo 8080 (anchura de bus de 8/16/24 bits). Según el modo, admite los formatos de color RGB332/RGB444/RGB565/RGB666/RGB888. También hay un conjunto específico de carriles MIPI DSI (reloj + 2 carriles de datos) en los pines 47–52.
+**Interfaz LCD** — Modo SPI serie DBI (3/4 líneas, líneas de datos duales/cuádruples) y modo paralelo 8080 (anchura de bus de 8/16/24 bits). Según el modo, admite los formatos de color RGB332/RGB444/RGB565/RGB666/RGB888. También hay un conjunto específico de líneas MIPI DSI (reloj + 2 líneas de datos) en los pines 47–52.
 
 ### 5.2 Procesamiento de señales analógicas { #52-analog-signal-processing }
 
@@ -277,9 +277,9 @@ Cualquier pin marcado como `PAxx_I2C_UART` o `PBxx_I2C_UART` en la tabla anterio
 
 | Símbolo | Parámetro | Mín. | Máx. | Unidad |
 | :--- | :--- | :-: | :-: | :-: |
-| VDD_3V3 | Entrada de alimentación de 3,3 V | -0.3 | 3,6 | V |
-| VDD_1V8 | Entrada de alimentación de 1,8 V | -0.3 | 1,95 | V |
-| VDDIO | Entrada de alimentación de I/O | -0.3 | 3,6 | V |
+| VDD_3V3 | Entrada de alimentación de 3,3 V | -0,3 | 3,6 | V |
+| VDD_1V8 | Entrada de alimentación de 1,8 V | -0,3 | 1,95 | V |
+| VDDIO | Entrada de alimentación de I/O | -0,3 | 3,6 | V |
 | Tstore | Temperatura de almacenamiento | -40 | 125 | °C |
 
 </div>
@@ -308,10 +308,10 @@ Cualquier pin marcado como `PAxx_I2C_UART` o `PBxx_I2C_UART` en la tabla anterio
 | Símbolo | Parámetro | Mín. | Típ. | Máx. | Unidad |
 | :--- | :--- | :-: | :-: | :-: | :-: |
 | CIN | Capacitancia del pin | 2,5 | 3 | 3,5 | pF |
-| VIH | Tensión de entrada alta | 0.7×VDD | - | VDD | V |
-| VIL | Tensión de entrada baja | VSS | - | 0.3×VDD | V |
-| VOH | Tensión de salida alta (carga High-Z) | 0.8×VDD | - | VDD | V |
-| VOL | Tensión de salida baja (carga High-Z) | VSS | - | 0.2×VDD | V |
+| VIH | Tensión de entrada alta | 0,7×VDD | - | VDD | V |
+| VIL | Tensión de entrada baja | VSS | - | 0,3×VDD | V |
+| VOH | Tensión de salida alta (carga High-Z) | 0,8×VDD | - | VDD | V |
+| VOL | Tensión de salida baja (carga High-Z) | VSS | - | 0,2×VDD | V |
 | IOH | Corriente de salida alta | 24 | 30 | 38 | mA |
 | IOL | Corriente de salida baja | 24 | 30 | 38 | mA |
 | RPU / RPD | Pull-up / pull-down interno | 7 | 10 | 20 | kΩ |
@@ -352,12 +352,12 @@ Las tablas completas (incluidas las fugas de entrada, los umbrales de reinicio y
 | Modo | Intervalo | @0 dBm | @10 dBm | Unidad |
 | :--- | :-: | :-: | :-: | :-: |
 | BT Sniff (attempt=1) | 50 ms | 146,4 | 178,6 | µA |
-| BT Sniff (attempt=1) | 1s | 7,3 | 8,9 | µA |
+| BT Sniff (attempt=1) | 1 s | 7,3 | 8,9 | µA |
 | BLE ADV | 50 ms | 166,9 | 251,8 | µA |
-| BLE ADV | 1s | 8,3 | 12,6 | µA |
-| Conexión BLE | 50 ms | 128.8 | 148.4 | µA |
-| Conexión BLE | 1s | 6.4 | 7.4 | µA |
-| Standby | — | 4.2 | — | µA |
+| BLE ADV | 1 s | 8,3 | 12,6 | µA |
+| Conexión BLE | 50 ms | 128,8 | 148,4 | µA |
+| Conexión BLE | 1 s | 6,4 | 7,4 | µA |
+| Standby | — | 4,2 | — | µA |
 
 </div>
 
@@ -392,32 +392,32 @@ Las tablas completas de valores mínimos/típicos/máximos para el rendimiento T
 
 El módulo tiene cinco interfaces de alimentación: **VDD_3V3**, **VDD_1V8**, **VDDIOA**, **VDDIOA2** y **VDDIOB**.
 
-- **VDD_3V3** alimenta los raíles AVDD33_ANA, AVDD33_AUD y AVDD_USB del chip, así como VDD del eMMC integrado en el módulo, si está presente. Se recomienda una fuente LDO.
+- **VDD_3V3** alimenta los raíles AVDD33_ANA, AVDD33_AUD y AVDD_USB del chip, así como VDD de la eMMC integrada en el módulo, si está presente. Se recomienda una fuente LDO.
 - **VDD_1V8** alimenta los raíles PVDD1, PVDD2, AVDD_BRF y AVDD18_DSI del chip, además de la memoria integrada en el encapsulado.
-- **VDDIOA** alimenta el raíl VDDIOA del chip, VIO del eMMC integrado en el encapsulado, si lo hay, y la Flash externa.
+- **VDDIOA** alimenta el raíl VDDIOA del chip, VIO de la eMMC integrada en el encapsulado, si lo hay, y la Flash externa.
 - **VDDIOA2** alimenta el raíl VDDIOA2 del chip (correspondiente a PA00–PA11).
 - **VDDIOB** alimenta el raíl VDDIOB del chip.
 
 !!! info "Figura 7-1: Diagrama de bloques de alimentación del módulo"
     Este diagrama no se reproduce en esta guía. Consulte la figura 7-1 de la hoja de datos oficial.
 
-## 8. Esquema de referencia y asignación de pines { #8-reference-schematic-and-pin-assignment }
+## 8. Esquemático de referencia y asignación de pines { #8-reference-schematic-and-pin-assignment }
 
-La hoja de datos incluye un esquema de referencia completo para una placa de desarrollo basada en SF32LB58-MOD, que abarca alimentación, reinicio, JTAG/SWD, UART, SDIO, LCD, MIPI DSI y circuitos de audio.
+La hoja de datos incluye un esquemático de referencia completo para una placa de desarrollo basada en SF32LB58-MOD, que abarca alimentación, reinicio, JTAG/SWD, UART, SDIO, LCD, MIPI DSI y circuitos de audio.
 
-!!! info "Figura 8-1: Esquema de referencia de la placa de desarrollo"
-    Este esquema no se reproduce en esta guía. Consulte las figuras 7-2–7-8 de la hoja de datos oficial.
+!!! info "Figura 8-1: Esquemático de referencia de la placa de desarrollo"
+    Este esquemático no se reproduce en esta guía. Consulte las figuras 7-2–7-8 de la hoja de datos oficial.
 
 La hoja de datos también ofrece una tabla recomendada de asignación de pines para esa placa de referencia, con las correspondencias de los conectores tipo Raspberry Pi para las opciones de pantalla LCD_DPI_24, LCD_DSI, LCD_QSPI y LCD_8080.
 
 !!! info "Figura 8-2: Asignación de pines recomendada para la placa de referencia"
     Este diagrama no se reproduce en esta guía. Consulte la figura 7-9 de la hoja de datos oficial.
 
-Utilice estos recursos como punto de partida del esquema de producción y adapte la selección de pines a los periféricos concretos del producto.
+Utilice estos recursos como punto de partida del esquemático de producción y adapte la selección de pines a los periféricos concretos del producto.
 
-## 9. Lista de comprobación del diseño del esquema { #9-schematic-design-checklist }
+## 9. Lista de comprobación del diseño del esquemático { #9-schematic-design-checklist }
 
-<div align="center"><em>Tabla 9-1: Lista de comprobación del diseño del esquema</em></div>
+<div align="center"><em>Tabla 9-1: Lista de comprobación del diseño del esquemático</em></div>
 
 <div align="center" markdown>
 
@@ -430,7 +430,7 @@ Utilice estos recursos como punto de partida del esquema de producción y adapte
 </div>
 
 !!! note
-    Esta guía solo reproduce los tres puntos anteriores. Antes de cerrar el esquema de producción, consulte la lista completa del §7.3 en el [PDF oficial de la hoja de datos](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf).
+    Esta guía solo reproduce los tres puntos anteriores. Antes de cerrar el esquemático de producción, consulte la lista completa del §7.3 en el [PDF oficial de la hoja de datos](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf).
 
 ## 10. Dimensiones del módulo y huella de PCB { #10-module-dimensions-and-pcb-footprint }
 
@@ -448,7 +448,7 @@ El módulo mide 24 × 24 × 3,1 mm.
 
 ### 10.3 Conector de antena externa { #103-external-antenna-connector }
 
-En los SKU que admiten una antena externa, el módulo puede utilizar una conexión RF con orificios de estampado o un conector compatible con IPEX, según el número de pieza.
+En los SKU que admiten una antena externa, el módulo puede utilizar una conexión RF con semiorificios metalizados o un conector compatible con IPEX, según el número de pieza.
 
 !!! info "Figura 10-3: Dimensiones del conector de antena externa"
     Esta figura no se reproduce en la guía. Consulte la figura 8-3 de la hoja de datos oficial.
@@ -465,7 +465,7 @@ Reserve la zona de antena del módulo para que ningún componente, cobre, pista,
 
 ### 11.1 Condiciones de almacenamiento { #111-storage-conditions }
 
-- Guarde los productos sellados en una bolsa barrera contra la humedad (MBB), a <40 °C / 90%RH, sin condensación.
+- Guarde los productos sellados en una bolsa barrera contra la humedad (MBB), a <40 °C / 90 % HR, sin condensación.
 - Tras abrir la bolsa de vacío, utilice el módulo dentro del tiempo de exposición especificado por su nivel de sensibilidad a la humedad (MSL); de lo contrario, deberá hornearlo antes de una segunda pasada de reflujo.
 
 ### 11.2 Descarga electrostática (ESD) { #112-electrostatic-discharge-esd }
@@ -484,7 +484,7 @@ Se recomienda someter el módulo a un único ciclo de reflujo.
 Evite exponer los módulos SiFli a las vibraciones de equipos de soldadura o limpieza por ultrasonidos. Estas vibraciones pueden entrar en resonancia con los osciladores de cristal internos del módulo, provocar fallos o averías en los cristales y dejarlo inoperativo o degradar su rendimiento.
 
 !!! note
-    Antes de publicar las especificaciones del proceso de fabricación, confirme el nivel definitivo de sensibilidad a la humedad, el tiempo de exposición, los límites de ESD y los requisitos de reflujo de SF32LB58-MOD en la sección §9 del [PDF oficial de la hoja de datos](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf).
+    Antes de liberar las especificaciones del proceso de fabricación, confirme el nivel definitivo de sensibilidad a la humedad, el tiempo de exposición, los límites de ESD y los requisitos de reflujo de SF32LB58-MOD en la sección §9 del [PDF oficial de la hoja de datos](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf).
 
 ## 12. Documentos relacionados { #12-related-documents }
 

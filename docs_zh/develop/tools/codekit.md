@@ -45,7 +45,7 @@ CodeKit 操作失败时，应尽可能通过底层 SDK 命令复现问题。这�
 
 ## 运行模型 { #operational-model }
 
-只有当 CodeKit 的编辑器操作能通过底层 SDK 复现时，它才最有价值。应将扩展视为操作界面，并以 SiFli-SDK 作为工具链、开发板定义、构建输出和下载产物的权威依据。
+当 CodeKit 的编辑器操作能通过底层 SDK 复现时，它最有用。应将扩展视为操作界面，并以 SiFli-SDK 作为工具链、开发板定义、构建输出和下载产物的权威依据。
 
 [CodeKit 快速开始](../../getting-started/sifli/getting-started-sifli-codekit.md) 介绍扩展安装和 `hello_world` 的首次运行。该基线成功后，可使用 CodeKit 缩短“编辑-构建-烧录-监视”循环；当操作需要自动化、检查或在 VS Code 外复现时，使用 SDK 命令行。
 

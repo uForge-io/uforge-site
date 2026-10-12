@@ -14,7 +14,7 @@ Esta guía explica cómo planificar e implementar la conectividad Bluetooth en p
 
 SF32 separa el procesamiento de la aplicación de las tareas del controlador Bluetooth con requisitos estrictos de temporización. El procesador de aplicación suele ejecutar la lógica del producto y la interfaz de usuario; un procesador Bluetooth o de bajo consumo gestiona la temporización de la capa de enlace y la planificación de radio. La ubicación de la pila host y de los servicios GATT depende del dispositivo y de la configuración del SDK. No presuponga que todos los servicios se ejecutan en el procesador de aplicación: compruebe los núcleos utilizados y la comunicación entre ellos en el ejemplo elegido.
 
-Para una explicación más profunda del subsistema subyacente, véase [Procesador Bluetooth](processor.md).
+Para una explicación más profunda del subsistema subyacente, consulte [Procesador Bluetooth](processor.md).
 
 Consulte esta guía al definir el comportamiento inalámbrico del producto: qué roles y perfiles necesita, qué capacidad de respuesta y autonomía esperan los usuarios, y cómo deben repartirse las responsabilidades entre el teléfono, la radio y el firmware de aplicación. Es una guía de diseño, no sustituye las pruebas de interoperabilidad con los teléfonos y accesorios previstos.
 
@@ -101,7 +101,7 @@ Para productos de modo dual, el SDK incluye ejemplos de implementación para est
 - **HFP**: llamadas manos libres, con los roles HF (dispositivo manos libres) y AG (pasarela de audio). El [ejemplo HFP](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/bt/hfp/README.html) documentado implementa HF; compruebe por separado el soporte de AG en la configuración del SDK elegida.
 - **PAN**: red sobre Bluetooth, incluyendo un ejemplo de entrega de OTA basado en PAN.
 
-Los perfiles de audio y los perfiles heredados suelen exigir una temporización y un rendimiento más estrictos que los enlaces BLE sencillos. Reserve tiempo suficiente para las pruebas de coexistencia (véase [Coexistencia](#coexistence-with-other-workloads)).
+Los perfiles de audio y los perfiles heredados suelen exigir una temporización y un rendimiento más estrictos que los enlaces BLE sencillos. Reserve tiempo suficiente para las pruebas de coexistencia (consulte [Coexistencia](#coexistence-with-other-workloads)).
 
 ## Audio Bluetooth y LE Audio { #bluetooth-audio-and-le-audio }
 
@@ -110,7 +110,7 @@ Existen dos rutas distintas dependiendo del enfoque de audio:
 - **Audio Bluetooth clásico**: A2DP para transmisión, AVRCP para control de reproducción y HFP para llamadas. Es una tecnología madura y ampliamente compatible con teléfonos y auriculares existentes.
 - **LE Audio**: el [perfil de audio básico (Basic Audio Profile, BAP)](https://www.bluetooth.com/specifications/specs/basic-audio-profile-1-0-2/) define los procedimientos para gestionar flujos LE Audio tanto unicast como de difusión. El SDK incluye ejemplos de fuente y receptor de difusión, además de un ejemplo que combina una fuente de difusión LE Audio con Bluetooth clásico para productos que necesitan admitir ambas tecnologías durante una transición.
 
-Ambas rutas requieren temporización estable, gestión de búferes y transferencia fiable de muestras de audio, normalmente mediante DMA. Evalúe SF32LB52x/56x/58x según los roles de audio Bluetooth y las configuraciones del SDK que necesite el producto. SF32LB55x solo admite BLE y no ofrece audio Bluetooth clásico; esto no significa que carezca de funciones de audio local. Para DMA y búferes, consulte el [Resumen del audio local](../audio/overview.md) y [Procesador Bluetooth](processor.md#bluetooth-audio-and-le-audio).
+Ambas rutas requieren temporización estable, gestión de búferes y transferencia fiable de muestras de audio, normalmente mediante DMA. Evalúe SF32LB52x/56x/58x según los roles de audio Bluetooth y las configuraciones del SDK que necesite el producto. SF32LB55x solo admite BLE y no ofrece audio Bluetooth clásico; esto no significa que carezca de funciones de audio local. Para DMA y búferes, consulte la [descripción general del audio](../audio/overview.md) y [Procesador Bluetooth](processor.md#bluetooth-audio-and-le-audio).
 
 ## Patrón de implementación para servicios Sibles { #implementation-pattern-for-sibles-services }
 
@@ -270,6 +270,6 @@ El firmware Bluetooth debe validarse con la misma disciplina que el hardware de 
 - Para audio Bluetooth, verifique el rol clásico o LE Audio requerido en el dispositivo y la configuración del SDK elegidos; después diseñe y pruebe los búferes y la coexistencia. Una afirmación sobre toda la familia no sustituye esta comprobación.
 - Bluetooth es una cuestión de sistema: el diseño de RF, los relojes, la experiencia de emparejamiento y la coexistencia con gráficos, audio y sensores importan tanto como el propio código GATT.
 
-Para un mapa orientado a tareas de los proyectos actuales del SDK para Bluetooth clásico, BLE y LE Audio, véase [Ejemplos de SDK de Bluetooth](bluetooth-sdk-examples.md).
+Para un mapa orientado a tareas de los proyectos actuales del SDK para Bluetooth clásico, BLE y LE Audio, consulte [Ejemplos de SDK de Bluetooth](bluetooth-sdk-examples.md).
 
-Para un método práctico de medir y analizar el consumo de Bluetooth de un dispositivo, véase [Medición y análisis del consumo energético de Bluetooth](bluetooth-low-power-profiling.md).
+Para un método práctico de medir y analizar el consumo de Bluetooth de un dispositivo, consulte [Medición y análisis del consumo energético de Bluetooth](bluetooth-low-power-profiling.md).

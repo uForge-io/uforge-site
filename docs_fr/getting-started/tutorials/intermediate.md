@@ -7,11 +7,11 @@ tags:
 
 # Intégration de sous-systèmes { #intermediate-tutorials }
 
-Ces tutoriels supposent que vous maîtrisez les notions de [Premiers pas avec les périphériques](beginner.md) : GPIO, shell, bases ADC/PWM et modèle de pilote `rt_device_find()`. Vous passerez ici des périphériques individuels au middleware et aux flux de travail combinés : capteurs I2C, interface graphique, services BLE, lecture audio, stockage persistant et tests simples de coexistence.
+Ces tutoriels supposent que vous maîtrisez les notions de [Premiers pas avec les périphériques](beginner.md) : GPIO, shell, bases ADC/PWM et modèle de pilote `rt_device_find()`. Cette série vous fait passer des périphériques individuels au middleware et aux flux de travail combinés : capteurs I2C, interface graphique, services BLE, lecture audio, stockage persistant et tests ciblés de coexistence.
 
 Il ne s'agit pas seulement de faire fonctionner chaque sous-système une fois, mais de comprendre comment le firmware SF32 est généralement assemblé : partir d'un exemple SDK adapté, vérifier le chemin matériel, le relier à la couche périphérique RT-Thread ou au middleware, puis le tester avec le reste du produit.
 
-Utilisez cette série lorsque les périphériques individuels fonctionnent déjà et que les risques d'intégration deviennent concrets : mémoire partagée, temporisation, consommation électrique, câblage propre à la carte et interactions entre composants middleware. Chaque exercice doit vous permettre d'isoler un sous-système testable, et pas seulement de produire une démonstration visuelle.
+Utilisez cette série lorsque les périphériques individuels fonctionnent déjà et que les risques d'intégration deviennent concrets : mémoire partagée, comportement temporel, consommation électrique, câblage propre à la carte et interactions entre composants middleware. Chaque exercice doit vous permettre d'isoler un sous-système testable, et pas seulement de produire une démonstration visuelle.
 
 ## Avant de commencer { #before-you-start }
 
@@ -19,13 +19,13 @@ Les exemples C sont des extraits, pas des fichiers source complets. Ajoutez les 
 
 Les chemins des exemples et les cartes prises en charge peuvent varier selon la version du SDK. Avant la compilation, vérifiez la liste « Supported Platforms » et les exigences matérielles et de configuration propres à chaque exemple ; la prise en charge d'un exercice ne garantit pas celle des autres.
 
-<div align="center"><em>Tableau : Avant de commencer</em></div>
+<div align="center"><em>Tableau : avant de commencer</em></div>
 
 <div align="center" markdown>
 
 | Prérequis | Pourquoi c'est important |
 |:------------|:---------------|
-| Shell fonctionnel | Vous avez besoin de `list_thread`, `list_device`, des journaux, et d'une inspection rapide. |
+| Shell fonctionnel | Vous avez besoin de `list_thread`, `list_device`, des journaux et d'outils d'inspection rapide. |
 | E/S GPIO vérifiées | De nombreuses démonstrations middleware ont encore besoin de boutons, de LED ou d'interruptions. |
 | Schéma de la carte | Les broches I2C et d'affichage, le chemin audio et l'organisation du stockage varient selon la carte. |
 | Configuration de référence validée | Conservez une compilation dont le bon fonctionnement est établi avant de combiner des fonctionnalités. |
@@ -53,14 +53,14 @@ Le nom `i2c1` est donné à titre d'exemple. Utilisez le nom du périphérique I
 2. Confirmez quel bus `i2cX` et quelles broches votre carte utilise.
 3. Adaptez l'exemple I2C EEPROM ou maître pour communiquer avec le capteur. S'il dispose d'un registre d'identification, lisez-le en premier ; sinon, commencez par un registre dont le comportement attendu est connu.
 4. Décodez une vraie mesure et affichez-la via le shell.
-5. Si le capteur dispose d'une sortie d'interruption ou de données prêtes, reliez-la à un GPIO et reprenez le modèle d'interruption de l'exercice 2 de Premiers pas avec les périphériques.
+5. Si le capteur dispose d'une sortie d'interruption ou d'une broche signalant que les données sont prêtes, reliez-la à un GPIO et reprenez le modèle d'interruption de l'exercice 2 de Premiers pas avec les périphériques.
 6. Dans la mesure du possible, remplacez l'interrogation périodique par des lectures déclenchées par événement.
 
 **Critères de réussite :** le firmware lit correctement un registre connu (celui de l'identifiant du périphérique, s'il existe), décode une valeur de capteur plausible et ne bloque pas le système si le capteur est absent.
 
 **Dépannage :** si les lectures renvoient toujours `0xff` ou `0x00`, ou provoquent un dépassement du délai d'attente, vérifiez le format d'adresse (7 ou 8 bits), les résistances de rappel, la séquence d'alimentation et l'éventuelle utilisation des mêmes broches par un autre périphérique.
 
-**Ce que vous avez appris :** les transactions I2C multi-octets et comment combiner une broche GPIO pilotée par interruption avec un périphérique de bus.
+**Ce que vous avez appris :** les transactions I2C sur plusieurs octets et comment combiner une broche GPIO pilotée par interruption avec un périphérique de bus.
 
 ## Construire un écran LVGL de base { #build-a-basic-lvgl-screen }
 
@@ -90,7 +90,7 @@ lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
 
 ## Diffuser des annonces BLE et établir une connexion en mode périphérique { #advertise-and-connect-as-a-ble-peripheral }
 
-**Objectif :** établir la communication entre un téléphone ou un dispositif central BLE et votre carte via un service GATT fonctionnel.
+**Objectif :** établir la communication entre un téléphone ou un appareil central BLE et votre carte via un service GATT fonctionnel.
 
 **Durée :** 45-60 minutes
 
@@ -123,10 +123,10 @@ La documentation actuelle indique `sf32lb52-lchspi-ulp` comme plateforme prise e
 2. Compilez et flashez l'exemple.
 3. Vérifiez que la lecture démarre sans distorsion et que la carte ne redémarre pas à son lancement.
 4. Intégrez la logique de démarrage et d'arrêt de la lecture au gestionnaire de bouton de Premiers pas avec les périphériques, exercice 2.
-5. Surveillez les interruptions dues au manque de données dans le tampon (underruns) pendant la journalisation shell et les mises à jour de l'affichage.
-6. Lisez la [Vue d'ensemble de l'audio](../../learn/audio/overview.md#playback-and-recording-basics) avant de changer le taux d'échantillonnage, le format, ou la taille de tampon.
+5. Surveillez les défauts de sous-alimentation du tampon lorsque la journalisation shell ou les mises à jour de l'affichage sont actives.
+6. Lisez la [Vue d'ensemble de l'audio](../../learn/audio/overview.md#playback-and-recording-basics) avant de changer le taux d'échantillonnage, le format ou la taille du tampon.
 
-**Critères de réussite :** la lecture peut être lancée, arrêtée et reprise à plusieurs reprises sans craquements ni underruns ; après l'arrêt, aucun état de forte consommation ne reste actif inutilement.
+**Critères de réussite :** la lecture peut être lancée, arrêtée et reprise à plusieurs reprises sans claquements ni défauts de sous-alimentation du tampon ; après l'arrêt, aucun état d'alimentation actif ne reste bloqué inutilement.
 
 **Dépannage :** si le son est déformé, vérifiez la fréquence d'échantillonnage, la profondeur de bits, le chemin de sortie, la configuration du codec, le format du fichier et la taille du tampon. Vérifiez aussi que les lectures depuis le stockage alimentent le décodeur assez rapidement.
 
@@ -134,7 +134,7 @@ La documentation actuelle indique `sf32lb52-lchspi-ulp` comme plateforme prise e
 
 ## Stocker et récupérer des données persistantes { #store-and-retrieve-data-with-a-filesystem }
 
-**Objectif :** persister des données à travers les redémarrages plutôt que de les perdre à chaque réinitialisation.
+**Objectif :** conserver des données après les redémarrages plutôt que de les perdre à chaque réinitialisation.
 
 **Durée :** 30-45 minutes
 
@@ -157,7 +157,7 @@ close(fd);
 5. Enregistrez périodiquement les lectures de capteur du Tutoriel 1.
 6. Définissez une règle de rétention simple, par exemple la suppression des anciens journaux, pour éviter leur croissance sans limite.
 
-**Critères de réussite :** les données survivent à un redémarrage et le firmware gère avec élégance un stockage manquant, plein, ou fraîchement formaté.
+**Critères de réussite :** les données sont conservées après un redémarrage et le firmware gère correctement un stockage absent, plein ou fraîchement formaté.
 
 **Dépannage :** vérifiez la disposition des partitions, le chemin de montage, les erreurs d'effacement ou d'écriture de la mémoire flash et la fermeture des fichiers. Assurez-vous également que la fréquence d'écriture reste compatible avec la durée de vie visée pour le stockage.
 

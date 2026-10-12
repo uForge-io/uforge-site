@@ -11,7 +11,7 @@ tags:
 ## アーキテクチャと処理 { #architecture-and-processing }
 
 * **MCU** — **Microcontroller Unit（マイクロコントローラー）。** CPUコア、メモリー、プログラム可能な入出力周辺機能を統合した集積回路です。汎用OSではなく、専用の軽量なファームウェアを実行する用途に最適化されています。
-* **SoC** — **System on Chip（システムオンチップ）。** コンピューターシステムに必要な回路や部品を一つの半導体チップ上に集積したものです。本サイトでは、SF32製品はアプリケーションプロセッサ向けの完全なOS環境ではなく、マイクロコントローラー向けのファームウェアを対象としているため、MCUに分類しています。
+* **SoC** — **System on Chip（システムオンチップ）。** コンピューターシステムに必要な回路や部品を一つの半導体チップ上に集積したものです。本サイトでは、SF32製品はアプリケーションプロセッサー向けの完全なOS環境ではなく、マイクロコントローラー向けのファームウェアを対象としているため、MCUに分類しています。
 * **Arm Cortex-M33** — SF32のアプリケーションコアとBluetoothコアに採用されている、32ビットのArmv8-M Mainlineプロセッサーアーキテクチャです。Armv8-M Mainlineは、従来のCortex-M3/M4に対し、信頼されたコードやデータをそれ以外からハードウェアで分離するTrustZoneセキュリティ拡張をオプションでサポートします。ただし、TrustZoneの有無はシリコン実装ごとの構成によって決まり、すべてのCortex-M33に備わる機能ではありません。現在のSF32LB52xからSF32LB58xまでの製品では、TrustZoneは有効化されていません。詳しくは、下記のSTAR-MC1と[SF32LB52xチップページ](../sf32-products/chips/SF32LB52x.md)を参照してください。
 * **STAR-MC1** — Arm Chinaが提供する、構成可能なArmv8-M Mainline準拠の組み込みCPU IPです。対応するSF32デバイスでは、Cortex-M33クラスのアプリケーションプロセッサーとして使用されています。CU、SP、SEの各構成では、キャッシュ、TCM、XIPU、TrustZoneの対応状況が異なります。SF32製品で利用できる機能は、デバイスごとに確認してください。SiFliの資料では、文脈に応じて「Arm Cortex-M33 STAR-MC1」または「Arm Cortex-M33」と表記されます。[STAR-MC1アーキテクチャページ](../learn/architecture/star-mc1.md)を参照してください。
 * **CDE** — **Custom Datapath Extension（カスタムデータパス拡張）。** 特定の処理を高速化するためのArmカスタム命令機構です。Arm ChinaのSTAR-MC1資料では、CDEの例としてCRC32が示されています。個々のSF32製品での対応状況とソフトウェアサポートは、デバイスごとに確認してください。
@@ -34,7 +34,7 @@ tags:
 
 ## グラフィックスとディスプレイ { #graphics-and-display }
 
-* **ePicasso** — SF32ファミリー向けにSiFliが独自開発した2D/2.5Dグラフィックスアクセラレーションエンジンです。画像のコピー、ブレンディング、拡大縮小、回転、レイヤー合成などのピクセル処理をアプリケーションCPUからオフロードします。[ePicasso 2D / 2.5D グラフィックスエンジン](../learn/graphics/epicasso-gpu.md)を参照してください。
+* **ePicasso** — SF32ファミリー向けにSiFliが独自開発した2D/2.5Dグラフィックスアクセラレーションエンジンです。画像のコピー、ブレンディング、拡大縮小、回転、レイヤー合成などのピクセル処理をアプリケーションCPUからオフロードします。[ePicasso 2D / 2.5Dグラフィックスエンジン](../learn/graphics/epicasso-gpu.md)を参照してください。
 * **eZip** — SiFli独自のロスレス画像・汎用圧縮形式です。対応するSF32デバイスでは、ハードウェアでデコードできます。画像ではPNGをわずかに上回る圧縮率が得られるとSiFliは説明しています。汎用データの圧縮率は元データによって異なります。圧縮データはデコード前にバスを通るため、eZipはPSRAMやNOR Flashなどの外部メモリーからの転送帯域を削減できます。
 * **TurboPixel** — 対応するSF32製品で使われる、固定圧縮率の非可逆フレームバッファー形式です。extDMAがレンダリング済みビットマップをTurboPixelに圧縮し、ディスプレイコントローラーが展開することで、PSRAMの帯域幅と容量を節約します。[TurboPixelフレームバッファー圧縮ページ](../learn/graphics/turbopixel.md)を参照してください。
 * **LVGL** — **Light and Versatile Graphics Library（軽量で多機能なグラフィックスライブラリー）。** 多くのSF32製品でアプリケーションのUIに使われる、オープンソースの組み込みUIフレームワークです。ePicassoによる描画アクセラレーションと組み合わせて動作します。
@@ -85,8 +85,8 @@ tags:
 * **QFN** — **Quad Flat No-lead package（クワッド・フラット・ノーリード・パッケージ）。** SF32製品で使われるチップパッケージの一種です。ピン数と外形寸法（例：QFN68）で表します。
 * **BGA** — **Ball Grid Array package（ボール・グリッド・アレイ・パッケージ）。** デバイス底面に半田ボールを配置するパッケージです。小型化と多ピン化に適しますが、BGA向けのPCB引き出し配線と実装工程が必要です。
 * **BOM** — **Bill of Materials（部品表）。** プリント基板アセンブリー（PCBA）の製造に必要な部品、受動部品、機構部品を項目別に記載した正式な一覧です。SiFli推奨の部品やモジュールを優先する大きな理由の一つは、BOMの複雑さを抑えられることです。
-* **EDA** — **Electronic Design Automation（電子設計自動化）。** 回路図入力、SPICEシミュレーション、PCBレイアウトを行うソフトウェアの総称です。SF32専用のフットプリントやシンボルについては、[SF32 EDA ツールライブラリ](../hardware/cad-components/eda-tool-libraries.md)を参照してください。
-* **AVL** — **Approved Vendor List（承認ベンダーリスト）。** 水晶振動子、レギュレーター、フラッシュなど、SF32ハードウェア設計の電気的許容範囲に照らして検証された、SiFliの認定セカンドソース部品リストです。[SF32 承認ベンダーリスト](../hardware/cad-components/sifli-approved-vendor-list.md)を参照してください。
+* **EDA** — **Electronic Design Automation（電子設計自動化）。** 回路図入力、SPICEシミュレーション、PCBレイアウトを行うソフトウェアの総称です。SF32専用のフットプリントやシンボルについては、[SF32 EDAツールライブラリ](../hardware/cad-components/eda-tool-libraries.md)を参照してください。
+* **AVL** — **Approved Vendor List（承認ベンダーリスト）。** 水晶振動子、レギュレーター、フラッシュなど、SF32ハードウェア設計の電気的許容範囲に照らして検証された、SiFliの認定セカンドソース部品リストです。[SF32承認ベンダーリスト](../hardware/cad-components/sifli-approved-vendor-list.md)を参照してください。
 * **EVB** — **Evaluation Board（評価ボード）。** カスタムハードウェアを製作する前に、設計の立ち上げと検証を行うためにSiFliが提供するSF32リファレンス／開発ボードです。
 * **FAE** — **Field Application Engineer（フィールドアプリケーションエンジニア）。** 公開資料だけでは解決できないハードウェア設計上の疑問に対応する、SiFliの技術サポート担当者です。
 

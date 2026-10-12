@@ -39,21 +39,21 @@ Considere o SF32LB56-MOD quando o projeto precisar de um ou mais destes recursos
 
 ## Recursos de desenvolvimento { #development-resources }
 
-[Ficha técnica do módulo]: https://downloads.sifli.com/user%20manual/DS5602-SF32LB56-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p3.pdf
-[Introdução ao chip]: ../chips/SF32LB56x.md
-[Guia de projeto de hardware]: ../../hardware/chip-guides/SF32LB56-MOD_hardware_design_guide.md
-[Guia de projeto de hardware SF32LB56x]: ../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md
-[Comprar amostras]: https://sifli.taobao.com/
-[Comprar kits de desenvolvimento]: https://sifli.taobao.com/
+[Module Datasheet]: https://downloads.sifli.com/user%20manual/DS5602-SF32LB56-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p3.pdf
+[Chip Introduction]: ../chips/SF32LB56x.md
+[Hardware Design Guide]: ../../hardware/chip-guides/SF32LB56-MOD_hardware_design_guide.md
+[SF32LB56x Hardware Design Guide]: ../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md
+[Buy Samples]: https://sifli.taobao.com/
+[Buy Dev Kits]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Ficha técnica do módulo]__
-- :fontawesome-solid-microchip: __[Introdução ao chip]__
-- :fontawesome-solid-file-lines: __[Guia de projeto de hardware]__
-- :fontawesome-solid-file-lines: __[Guia de projeto de hardware SF32LB56x]__
-- :fontawesome-solid-cart-shopping: __[Comprar amostras]__
-- :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento]__
+- :fontawesome-solid-file-pdf: __[Datasheet do módulo][Module Datasheet]__
+- :fontawesome-solid-microchip: __[Introdução ao chip][Chip Introduction]__
+- :fontawesome-solid-file-lines: __[Guia de projeto de hardware][Hardware Design Guide]__
+- :fontawesome-solid-file-lines: __[Guia de projeto de hardware SF32LB56x][SF32LB56x Hardware Design Guide]__
+- :fontawesome-solid-cart-shopping: __[Comprar amostras][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento][Buy Dev Kits]__
 
 </div>
 
@@ -112,7 +112,7 @@ A cada interface PDM podem ser conectados até dois microfones digitais; juntas,
 
 O [guia de modelos de módulos da SiFli](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) lista essas três configurações e informa que outras podem ser personalizadas. Confirme com a SiFli a disponibilidade atual dos SKUs e a configuração de memória.
 
-A SiFli identifica como configuração padrão a combinação do SF32LB566VCB36 com 4 MB + 8 MB de OPI-PSRAM no encapsulamento e 1 MB de QSPI-NOR; essa configuração de memória corresponde ao N16R12N1. O guia não atribui um código de chip específico aos modelos A128R12N1 e D128R12N1. Confirme com a SiFli o código exato do chip para qualquer um desses SKUs.
+A SiFli identifica como configuração padrão a combinação do SF32LB566VCB36 com 4 MB + 8 MB de OPI-PSRAM e 1 MB de QSPI-NOR; essa configuração de memória corresponde ao N16R12N1. O guia não atribui um código de chip específico aos modelos A128R12N1 e D128R12N1. Confirme com a SiFli o código exato do chip para qualquer um desses SKUs.
 
 ### Alimentação e I/O { #power-and-io }
 

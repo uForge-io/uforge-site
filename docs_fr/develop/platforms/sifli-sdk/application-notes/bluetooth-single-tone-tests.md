@@ -1,8 +1,8 @@
 ---
 icon: lucide/audio-lines
 title: "Effectuer des tests RF individuels pour Bluetooth"
-description: "Utiliser SiFli_RfTool pour piloter le RF BLE ou Bluetooth classique une opération à la fois, lors de la mise au point d'une carte et des évaluations préalables de conformité."
-tags: [Développement, SiFli-SDK, Notes d’application, Bluetooth]
+description: "Utiliser SiFli_RfTool pour commander les tests RF en BLE ou en Bluetooth classique, une opération à la fois, lors de la mise au point d'une carte et des essais préalables à la conformité."
+tags: [Développement, SiFli-SDK, Notes d'application, Bluetooth]
 ---
 
 # Effectuer des tests RF individuels pour Bluetooth { #run-bluetooth-single-item-rf-tests }
@@ -17,7 +17,7 @@ Préparez un équipement sous test (DUT), un PC, un câble USB de données (et n
 
 <em>Tableau : Affectations UART par défaut pour les essais modulés et à porteuse unique</em>
 
-| Dispositif/boîtier | UART1 TX/RX pour les essais modulés | UART de commande pour l'essai à porteuse unique (CW) |
+| Composant/boîtier | UART1 TX/RX pour les essais modulés | UART de commande pour l'essai à porteuse unique (CW) |
 |---|---|---|
 | SF32LB52x | PA19 / PA18 | UART1 |
 | SF32LB551 | PA49 / PA51 | UART3 (PB45 / PB46) |
@@ -62,7 +62,7 @@ Le code source du SDK fournit des niveaux TX de référence pour la HDK LB52x, m
 ![Réglages TX BLE de SiFli_RfTool](../../../../assets/develop/app-notes/bluetooth-single-item/figure_13-2.png){ loading="lazy" }
 <div align="center"><em>Figure : Exemple du guide SF32LB52x — sélectionnez la puce, le mode, le canal, la charge utile, la PHY, la longueur de données et la puissance avant de démarrer le TX.</em></div>
 
-## Recevoir et calculer la sensibilité { #receive-and-calculate-sensitivity }
+## Mesurer la sensibilité en réception { #receive-and-calculate-sensitivity }
 
 Arrêtez le TX avant d'entrer en RX. Réglez le canal et appuyez sur Start RX ; arrêtez le RX avant de le changer. Pour le RX BLE, configurez le testeur en mode Direct Test Mode, sélectionnez la PHY/le canal, envoyez 1 500 paquets et calculez :
 
@@ -70,7 +70,7 @@ Arrêtez le TX avant d'entrer en RX. Réglez le canal et appuyez sur Start RX ; 
 PER = (1500 - received_packets) / 1500 × 100%
 ```
 
-Notez également le RSSI. Pour le RX Bluetooth classique, utilisez une forme d'onde du générateur GPRF du CMW500, par exemple DH1/2-DH1/3-DH1, et consignez le nombre de paquets reçus et erronés, le nombre de bits, le BER et le RSSI. Les chemins RF BLE et Bluetooth classique partagent le même matériel ; ne les exécutez pas en parallèle.
+Notez également le RSSI. Pour le RX Bluetooth classique, utilisez une forme d'onde du générateur GPRF du CMW500, par exemple DH1/2-DH1/3-DH1, et consignez le nombre de paquets reçus et erronés, le nombre de bits, le BER et le RSSI. Les chemins RF du BLE et du Bluetooth classique partagent le même matériel ; n'effectuez donc pas ces deux essais en parallèle.
 
 ![Réglages RX BLE de SiFli_RfTool](../../../../assets/develop/app-notes/bluetooth-single-item/figure_13-5.png){ loading="lazy" }
 <div align="center"><em>Figure : Exemple du guide SF32LB52x — arrêtez le TX avant le RX et notez le canal, la modulation, la PHY et le résultat de réception.</em></div>

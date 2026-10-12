@@ -9,7 +9,7 @@ tags:
 
 Diese Tutorials knüpfen direkt an [Erste Schritte](../index.md) an. Sie sollten die SiFli-SDK-Toolchain bereits installiert und `hello_world` mindestens einmal geflasht haben sowie wissen, wie Sie die serielle Konsole öffnen. Jedes Tutorial ist bewusst kompakt gehalten: ein Konzept, ein Peripheriegerät und ein klares Erfolgskriterium.
 
-Die Beispiele setzen ein Board der Klasse SF32LB52-DevKit-LCD voraus, etwa `sf32lb52-lcd_n16r8`. Wenn Sie ein anderes Board verwenden, ersetzen Sie den Board-Namen im Build-Befehl und bestätigen Sie Pin-Namen, Peripherie-Instanzen und Speicherlayout anhand der Support-Dateien dieses Boards.
+Die Beispiele setzen ein Board der Klasse SF32LB52-DevKit-LCD voraus, etwa `sf32lb52-lcd_n16r8`. Wenn Sie ein anderes Board verwenden, ersetzen Sie den Board-Namen im Build-Befehl und prüfen Sie Pin-Namen, Peripherieinstanzen und Speicherlayout anhand der Support-Dateien dieses Boards.
 
 Nutzen Sie diese Reihe, um verlässliche Arbeitsweisen zu entwickeln: Prüfen Sie jeweils ein Verhalten auf der konkreten Platine, legen Sie ein klares Erfolgskriterium fest und bewahren Sie eine nachweislich funktionierende Ausgangskonfiguration, bevor Sie zum nächsten Peripheriegerät übergehen. Die Übungen richten sich an Entwickler, die neu mit dem SF32 SDK arbeiten, auch wenn sie eingebettetes C bereits beherrschen.
 
@@ -90,9 +90,9 @@ int main(void)
 
 **Ausgangsbeispiel:** `example/rt_device/gpio`
 
-Das Lesen eines Tasters verwendet dieselbe PIN-API im Eingangsmodus. Beginnen Sie mit einem einfachen Lesevorgang, um Verkabelung und Logikpegel zu bestätigen:
+Das Lesen eines Tasters verwendet dieselbe PIN-API im Eingangsmodus. Beginnen Sie mit einem einfachen Lesevorgang, um Verkabelung und Logikpegel zu prüfen:
 
-Im SiFli-SDK konfiguriert die RT-Thread-PIN-Device-API den Pull-up oder Pull-down des Pads nicht über `rt_pin_mode()`. Bei einem aktiv-low-Taster muss der Pull-up entweder auf dem Board vorhanden sein oder entsprechend der boardspezifischen Pinmux-Konfiguration mit `HAL_PIN_Set(...)` eingestellt werden. Pad, Funktion und CPU-Domäne sind boardabhängig; ziehen Sie die Board-Support-Dateien heran, statt eine Pinzuweisung blind zu übernehmen.
+Im SiFli-SDK konfiguriert die RT-Thread-PIN-Device-API den Pull-up oder Pull-down des Pads nicht über `rt_pin_mode()`. Bei einem low-aktiven Taster muss der Pull-up entweder auf dem Board vorhanden sein oder entsprechend der boardspezifischen Pinmux-Konfiguration mit `HAL_PIN_Set(...)` eingestellt werden. Pad, Funktion und CPU-Domäne sind boardabhängig; ziehen Sie die Board-Support-Dateien heran, statt eine Pinzuweisung blind zu übernehmen.
 
 ```c
 rt_pin_mode(BUTTON_PIN, PIN_MODE_INPUT);
@@ -112,7 +112,7 @@ rt_pin_irq_enable(BUTTON_PIN, PIN_IRQ_ENABLE);
 
 1. Identifizieren Sie einen verfügbaren Taster- oder Eingangspin auf Ihrem Board.
 2. Lesen Sie den Pin zunächst zyklisch aus und geben Sie den Rohwert aus, während Sie den Taster drücken und loslassen.
-3. Bestätigen Sie, ob der Taster aktiv-high oder aktiv-low ist.
+3. Prüfen Sie, ob der Taster high-aktiv oder low-aktiv ist.
 4. Wechseln Sie zu einem Interrupt-Handler, sobald das grundlegende Lesen funktioniert.
 5. Schalten Sie bei jedem Tastendruck die LED aus Tutorial 1 um.
 6. Fügen Sie eine einfache Entprellstrategie hinzu, indem Sie entweder Ereignisse für ein kurzes Intervall ignorieren oder den Pegel nach einer kurzen Verzögerung erneut prüfen.
@@ -121,7 +121,7 @@ rt_pin_irq_enable(BUTTON_PIN, PIN_IRQ_ENABLE);
 
 **Falls es nicht funktioniert:** Prüfen Sie, ob der benötigte Pull-up oder Pull-down auf dem Board vorhanden oder über den Pinmux konfiguriert ist. Kontrollieren Sie anschließend Tasterpolarität, Interrupt-Flankenauswahl und ob der Pin mit Boot-Modus, Debug oder einer anderen Peripherie geteilt wird.
 
-**Was Sie gelernt haben:** die Konfiguration digitaler Eingänge, den Unterschied zwischen aktiv-high und aktiv-low, interruptgesteuerte Eingaben und warum kontinuierliches Abfragen unnötig Strom verbrauchen kann. Den systemweiten Hintergrund erläutert die [Übersicht zum Energiesparen](../../learn/low-power/overview.md#sleep-aware-firmware-design).
+**Was Sie gelernt haben:** die Konfiguration digitaler Eingänge, den Unterschied zwischen high-aktiv und low-aktiv, interruptgesteuerte Eingaben und warum kontinuierliches Abfragen unnötig Strom verbrauchen kann. Den systemweiten Hintergrund erläutert die [Übersicht zum Energiesparen](../../learn/low-power/overview.md#sleep-aware-firmware-design).
 
 ## Die Shell verwenden und Debug-Ausgaben drucken { #use-the-shell-and-print-debug-output }
 
@@ -141,7 +141,7 @@ Die **FinSH**-Shell von RT-Thread stellt über denselben UART wie die Bootmeldun
 2. Drücken Sie die Eingabetaste, um den `msh>`-Prompt zu erhalten.
 3. Führen Sie `list_thread` und `list_device` aus.
 4. Fügen Sie `rt_kprintf()`-Aufrufe zum Taster-Handler aus Tutorial 2 hinzu.
-5. Bestätigen Sie, dass die Logs erscheinen, wenn Sie den Taster drücken.
+5. Prüfen Sie, ob die Logs beim Drücken des Tasters erscheinen.
 
 **Erfolgskriterien:** Sie können Threads und Geräte über die Shell inspizieren und Ihre eigenen Log-Nachrichten mit physischen Ereignissen korrelieren.
 
@@ -151,7 +151,7 @@ Die **FinSH**-Shell von RT-Thread stellt über denselben UART wie die Bootmeldun
 
 ## Einen analogen Sensor mit ADC lesen { #read-an-analog-sensor-with-adc }
 
-**Ziel:** eine analoge Spannung von einem Potentiometer, einfachen Sensor oder Batteriespannungs-Eingang abtasten.
+**Ziel:** eine analoge Spannung von einem Potentiometer, einem einfachen Sensor oder einem Eingang zur Akkuspannungsmessung abtasten.
 
 **Zeit:** 20 Minuten
 
@@ -170,7 +170,7 @@ rt_uint32_t voltage_0p1mV = rt_adc_read(adc, channel);
 3. Ermitteln Sie das registrierte ADC-Gerät, aktivieren Sie den Kanal und lesen Sie den Wert aus.
 4. Wenden Sie die für den Treiber dokumentierte Umrechnung an. Im aktuellen SF32LB52-Beispiel erhalten Sie Millivolt, indem Sie den Rückgabewert durch 10 teilen. Wenden Sie nicht zusätzlich eine Formel für rohe ADC-Zählwerte mit Referenzspannung und Auflösung an. Berücksichtigen Sie einen externen Spannungsteiler, wenn Sie die Spannung vor dem Teiler bestimmen.
 5. Geben Sie das Ergebnis über die Shell aus Tutorial 3 aus.
-6. Verändern Sie den Eingang langsam und prüfen Sie, ob sich der Messwert gleichmäßig ändert.
+6. Verändern Sie die Eingangsspannung langsam und prüfen Sie, ob sich der Messwert gleichmäßig ändert.
 
 **Erfolgskriterien:** Der ausgegebene Wert ändert sich in die erwartete Richtung und entspricht nach Anwendung der dokumentierten Skalierung und eines etwaigen Board-Spannungsteilers einer plausiblen Eingangsspannung.
 
@@ -194,11 +194,11 @@ rt_pwm_set(pwm, channel, period_ns, pulse_ns);
 rt_pwm_enable(pwm, channel);
 ```
 
-1. Wählen Sie einen PWM-fähigen Kanal und bestätigen Sie das Pin-Muxing.
+1. Wählen Sie einen PWM-fähigen Kanal und prüfen Sie das Pin-Muxing.
 2. Wählen Sie eine zum Peripheriegerät passende Periode: hoch genug, um sichtbares LED-Flackern zu vermeiden, oder im hörbaren Bereich für einen Summer.
 3. Variieren Sie den Tastgrad, um die LED heller und dunkler zu stellen.
 4. Probieren Sie einige feste Töne an einem Summer aus, indem Sie die Periode ändern.
-5. Deaktivieren Sie die PWM und bestätigen Sie, dass der Ausgang in einen sicheren Ruhezustand zurückkehrt.
+5. Deaktivieren Sie die PWM und prüfen Sie, ob der Ausgang in einen sicheren Ruhezustand zurückkehrt.
 
 **Erfolgskriterien:** Eine Änderung des Tastgrads ändert die Helligkeit, oder eine Änderung der Periode ändert den Ton, und das Deaktivieren der PWM lässt den Ausgang im erwarteten Zustand zurück.
 
@@ -251,7 +251,7 @@ Nach Abschluss der sechs kurzen Tutorials kombinieren Sie sie zu einem kleinen P
 
 - [ ] Board-Name, serieller Port und Flash-Ablauf wurden erfolgreich geprüft.
 - [ ] GPIO-Ausgang funktioniert an einer echten LED oder einem gemessenen Pin.
-- [ ] GPIO-Eingang funktioniert mit bestätigter Polarität und Entprellung.
+- [ ] GPIO-Eingang funktioniert mit geprüfter Polarität und Entprellung.
 - [ ] Die FinSH-Shell ist nutzbar, und `list_thread` / `list_device` funktionieren.
 - [ ] ADC-Messwerte sind plausibel und in physikalische Einheiten umgerechnet.
 - [ ] PWM-Perioden-/Tastgrad-Einstellungen erzeugen die erwartete physische Ausgabe.

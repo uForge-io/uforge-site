@@ -10,9 +10,9 @@ tags:
 
 ## Grafikarchitektur planen { #overview }
 
-Dieser Leitfaden erklärt, wie sich auf SF32-Bauteilen reaktionsschnelle grafische Benutzeroberflächen entwickeln lassen. Im Mittelpunkt stehen praktische Entscheidungen für das Produkt: Display-Auswahl, Framebuffer-Strategie, LVGL-Integration, ePicasso-Hardwarebeschleunigung, Speicherzuordnung und Aktualisierungsverhalten.
+Dieser Leitfaden erklärt, wie sich auf SF32-Geräten reaktionsschnelle grafische Benutzeroberflächen entwickeln lassen. Im Mittelpunkt stehen praktische Entscheidungen für das Produkt: Display-Auswahl, Framebuffer-Strategie, LVGL-Integration, ePicasso-Hardwarebeschleunigung, Speicherzuordnung und Aktualisierungsverhalten.
 
-SF32-Bauteile eignen sich für kompakte AIoT- und Wearable-Produkte mit strengen Vorgaben für Stromverbrauch, Speicher und Leiterplattenfläche. Gleichzeitig soll sich die Benutzeroberfläche flüssig bedienen lassen. Der Grafikpfad trennt Ressourcenverarbeitung, Pixelkomposition, optionale Framebuffer-Kompression und Panel-Ausgabe. Wer diese Aufgaben auseinanderhält, kann gezielter optimieren.
+SF32-Geräte eignen sich für kompakte AIoT- und Wearable-Produkte mit strengen Vorgaben für Stromverbrauch, Speicher und Leiterplattenfläche. Gleichzeitig soll sich die Benutzeroberfläche flüssig bedienen lassen. Der Grafikpfad trennt Ressourcenverarbeitung, Pixelkomposition, optionale Framebuffer-Kompression und Panel-Ausgabe. Wer diese Aufgaben auseinanderhält, kann gezielter optimieren.
 
 Nutzen Sie diese Seite für frühe UI-Architekturentscheidungen, die sich später nur mit hohem Aufwand ändern lassen: Panel und Schnittstelle, Framebuffer-Strategie, Farbtiefe, Transparenz, Ablage der Ressourcen und Aktualisierungsrichtlinie. Die verlinkten Grafikartikel erläutern die Implementierung der einzelnen Schritte.
 
@@ -23,42 +23,42 @@ Der typische Pfad für Display-Ressourcen ist:
 <div align="center"><em>Diagramm: Grafikressourcen und Display-Pipeline</em></div>
 
 ```text
-Quellbilder, Schriftarten und Animationen
+Source images, fonts, and animations
         │
         ▼
-GraphicsTool konvertiert unterstützte Ressourcen in eZip oder eZip-A
+GraphicsTool converts supported resources to eZip or eZip-A
         │
         ▼
-Komprimierte Ressourcen in NOR-Flash, PSRAM, NAND oder einem Dateispeicher
+Compressed assets in NOR Flash, PSRAM, NAND, or file storage
         │
         ▼
-Der eZip-Hardwaredecoder dekomprimiert Ressourcen bei Bedarf
+eZip hardware decoder expands an asset when required
         │
         ▼
-LVGL oder ein anderes UI-Framework + Grafik-/Displaytreiber
+LVGL or another UI framework + graphics/display driver
         │
-        ├── Rendering per CPU als Rückfallpfad
+        ├── CPU fallback rendering
         │
-        └── Pixelbeschleunigung durch ePicasso
+        └── ePicasso pixel acceleration
         │
         ▼
-Das fertige Bitmap liegt in einem Zeichenpuffer oder Framebuffer
+Final rendered bitmap in a draw buffer or framebuffer
         │
-        ├── Unkomprimierter Displaypfad
+        ├── Uncompressed display path
         │
-        └── Optional: extDMA komprimiert es in das TurboPixel-Format
+        └── Optional: extDMA compresses it into TurboPixel
                     │
                     ▼
-             TurboPixel-Framebuffer in PSRAM
+             TurboPixel framebuffer in PSRAM
         │
         ▼
-Der Display-Controller überträgt die Pixel an das Panel
+Display controller transfers pixels to the panel
         │
         ▼
-SPI- / QSPI- / 8080- / RGB- / MIPI-DSI- / EPD- / JDI-Panel
+SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
 ```
 
-Der Grafikpfad lässt sich flexibel zusammenstellen; ein Produkt kann auch ohne eZip, ePicasso, TurboPixel oder einen vollständigen Framebuffer auskommen. Verfügbarkeit und Anbindung hängen vom Bauteil, SDK, der Display-Schnittstelle, dem Panel und der Treiberkonfiguration ab. Der aktuelle OpenSiFli-LCDC-Header definiert `LCDC_SUPPORTED_COMPRESSED_LAYER` nur, wenn `HAL_EXTDMA_MODULE_ENABLED` aktiviert ist und die Familienbedingung erfüllt wird; SF32LB52x und SF32LB57x sind ausgeschlossen. Ein Quellcodekommentar weist außerdem darauf hin, dass der LCPU-Pfad nicht aktiviert ist. Die veröffentlichte SDK-LCDC-Funktionstabelle kennzeichnet die Dekomprimierung komprimierter Ebenen auf SF32LB55x als nicht unterstützt. Daher ist 55x als bedingt und nicht als end-to-end validiert zu betrachten. Prüfen Sie die genaue SDK-Version, den Kern, die Build-Konfiguration und die Zielhardware; weitere Hinweise finden Sie unter [TurboPixel](turbopixel.md#availability-in-the-sf32-family).
+Der Grafikpfad lässt sich flexibel zusammenstellen; ein Produkt kann auch ohne eZip, ePicasso, TurboPixel oder einen vollständigen Framebuffer auskommen. Verfügbarkeit und Anbindung hängen vom Gerät, SDK, der Display-Schnittstelle, dem Panel und der Treiberkonfiguration ab. Der aktuelle OpenSiFli-LCDC-Header definiert `LCDC_SUPPORTED_COMPRESSED_LAYER` nur, wenn `HAL_EXTDMA_MODULE_ENABLED` aktiviert ist und die Familienbedingung erfüllt wird; SF32LB52x und SF32LB57x sind ausgeschlossen. Ein Quellcodekommentar weist außerdem darauf hin, dass der LCPU-Pfad nicht aktiviert ist. Die veröffentlichte SDK-LCDC-Funktionstabelle kennzeichnet die Dekomprimierung komprimierter Ebenen auf SF32LB55x als nicht unterstützt. Daher ist 55x als bedingt und nicht als end-to-end validiert zu betrachten. Prüfen Sie die genaue SDK-Version, den Kern, die Build-Konfiguration und die Zielhardware; weitere Hinweise finden Sie unter [TurboPixel](turbopixel.md#availability-in-the-sf32-family).
 
 <div align="center"><em>Aufgaben der einzelnen Schritte im SF32-Grafikpfad</em></div>
 
@@ -68,7 +68,7 @@ Der Grafikpfad lässt sich flexibel zusammenstellen; ein Produkt kann auch ohne 
 |:---|:---|:---|:---|
 | **eZip / eZip-A** | Vor dem Rendering, beim Lesen gespeicherter Ressourcen | Dekomprimiert unterstützte eZip-Grafikressourcen verlustfrei, darunter statische Bilder und Animationen. | Den Renderer, den finalen Framebuffer oder den Display-Controller. |
 | **ePicasso** | Während Rendering und Komposition | Beschleunigt unterstützte Kopier-, Füll-, Blend-, Transformations- und Kompositionsoperationen auf Pixeln im Speicher. | Ressourcenkompression oder Panel-Übertragung. |
-| **TurboPixel** | Nach dem Rendering und vor der Panel-Ausgabe auf unterstützten Bauteilen | Komprimiert die fertige Bitmap mithilfe von extDMA verlustbehaftet mit festem Kompressionsverhältnis. Dadurch sinken der PSRAM-Bedarf und der Display-Leseverkehr. Der aktuelle Header stellt die Funktion für komprimierte Ebenen bei aktiviertem extDMA für SF32LB55x, SF32LB56x und SF32LB58x bereit und schließt SF32LB52x und SF32LB57x aus; ein Kommentar weist darauf hin, dass der LCPU-Pfad nicht aktiviert ist. Die veröffentlichte SDK-Funktionstabelle kennzeichnet 55x als nicht unterstützt. Prüfen Sie daher Kern, SDK-Konfiguration und Zielhardware, bevor Sie den Pfad einplanen. | Verlustfreie Ressourcenkompression oder Pixel-Rendering. |
+| **TurboPixel** | Nach dem Rendering und vor der Panel-Ausgabe auf unterstützten Geräten | Komprimiert die fertige Bitmap mithilfe von extDMA verlustbehaftet mit festem Kompressionsverhältnis. Dadurch sinken der PSRAM-Bedarf und der Display-Leseverkehr. Der aktuelle Header stellt die Funktion für komprimierte Ebenen bei aktiviertem extDMA für SF32LB55x, SF32LB56x und SF32LB58x bereit und schließt SF32LB52x und SF32LB57x aus; ein Kommentar weist darauf hin, dass der LCPU-Pfad nicht aktiviert ist. Die veröffentlichte SDK-Funktionstabelle kennzeichnet 55x als nicht unterstützt. Prüfen Sie daher Kern, SDK-Konfiguration und Zielhardware, bevor Sie den Pfad einplanen. | Verlustfreie Ressourcenkompression oder Pixel-Rendering. |
 | **Display-Controller** | Finale Ausgabestufe | Dekomprimiert TurboPixel, wenn dieser Pfad aktiviert ist, und überträgt die fertigen Pixel über die Panel-Schnittstelle. | eZip-Dekompression oder Grafikkomposition. |
 
 </div>
@@ -97,15 +97,15 @@ Informationen zur Schnittstellenauswahl, zum Flush-Pfad und zur Inbetriebnahme d
 
 Wählen Sie zunächst ein SDK-Beispiel, das den grafischen Aspekt mit dem größten Produktrisiko bereits abdeckt. [LVGL-SDK-Beispiele](lvgl-sdk-examples.md) ordnet offizielle Beispiele zu Basisfunktionen, Designtools, Widgets, komprimierten Ressourcen, Animation und Medien, Kompass, Spielen und Uhrenoberflächen nach der jeweiligen technischen Aufgabe. Außerdem zeigt die Seite, welche Annahmen zu Board, Version, Display, Speicher und Leistung bei der Produktanpassung erneut geprüft werden müssen.
 
-## Das richtige SF32-Bauteil wählen { #pick-the-right-sf32-device }
+## Das richtige SF32-Gerät wählen { #pick-the-right-sf32-device }
 
 Wählen Sie den Chip anhand des Displays und der UI-Arbeitslast, nicht nur der CPU-Frequenz.
 
-<div align="center"><em>Tabelle: Das richtige SF32-Bauteil wählen</em></div>
+<div align="center"><em>Tabelle: Das richtige SF32-Gerät wählen</em></div>
 
 <div align="center" markdown>
 
-| Anforderung | Orientierung für die Bauteilauswahl |
+| Anforderung | Orientierung für die Geräteauswahl |
 |:------------|:-------------------------|
 | Einfaches Bluetooth-Produkt mit kleiner UI | SF32LB52x |
 | Einsteiger-Smartwatch, Badge, Etikett, einfache HMI | SF32LB52x |
@@ -120,7 +120,7 @@ Wählen Sie den Chip anhand des Displays und der UI-Arbeitslast, nicht nur der C
 
 Die wichtigsten Einschränkungen sind Display-Schnittstelle, Auflösung, Speicherkapazität, Generation des Grafikbeschleunigers, verfügbare Pins und Leistungsbudget.
 
-## Framebuffer-Größe und Bandbreite berechnen { #framebuffer-and-bandwidth-calculator }
+## Framebuffer- und Bandbreitenrechner { #framebuffer-and-bandwidth-calculator }
 
 Schätzen Sie Speicher- und Übertragungskosten, bevor Sie ein Panel oder einen Animationsstil wählen:
 
@@ -144,7 +144,7 @@ Beispiele:
 
 </div>
 
-Die Puffergrößen sind in KiB (1.024 Byte), die Bandbreite in dezimalen MB/s (1.000.000 Byte/s) angegeben. Die Werte berücksichtigen nur die Rohdaten der Pixel. Befehls-Overhead, Ausrichtung, Cache-Wartung, Lesen von Ressourcen, Blending und sonstige Datenbewegungen im System sind nicht enthalten. Wenn das Produkt gleichzeitig Bluetooth-Audio oder KI nutzt oder andere Zugriffe auf externen PSRAM anfallen, planen Sie zusätzliche Reserven ein.
+Die Puffergrößen sind in KiB (1 024 Byte), die Bandbreite in dezimalen MB/s (1 000 000 Byte/s) angegeben. Die Werte berücksichtigen nur die Rohdaten der Pixel. Befehls-Overhead, Ausrichtung, Cache-Wartung, Lesen von Ressourcen, Blending und sonstige Datenbewegungen im System sind nicht enthalten. Wenn das Produkt gleichzeitig Bluetooth-Audio oder KI nutzt oder andere Zugriffe auf externen PSRAM anfallen, planen Sie zusätzliche Reserven ein.
 
 ## Die verschiedenen Puffer verstehen { #understand-your-buffers }
 
@@ -164,7 +164,7 @@ Eine UI wird letztlich als Pixel im Speicher dargestellt. Die wichtigsten Puffer
 
 </div>
 
-Ein Vollbild-Framebuffer ist bequem, kann bei größeren Panels aber zu viel SRAM belegen. Ein 454 × 454 großer RGB565-Puffer enthält 412.232 Byte (etwa 412 kB bzw. 403 KiB); zwei Puffer benötigen die doppelte Kapazität. Mit höherer Farbtiefe und größerer Auflösung steigt der Bedarf schnell.
+Ein Vollbild-Framebuffer ist bequem, kann bei größeren Panels aber zu viel SRAM belegen. Ein 454 × 454 großer RGB565-Puffer enthält 412 232 Byte (etwa 412 kB bzw. 403 KiB); zwei Puffer benötigen die doppelte Kapazität. Mit höherer Farbtiefe und größerer Auflösung steigt der Bedarf schnell.
 
 Wenn der Speicher knapp ist, verwenden Sie partielle Zeichenpuffer und aktualisieren Sie nur geänderte Bereiche. Ist Animation wichtig und genügend Speicher vorhanden, kann ein Vollbild-Framebuffer oder Doppelpufferung die UI flüssiger machen.
 
@@ -203,7 +203,7 @@ Ein Symbolpixel mit 50 % Alpha trägt beispielsweise die Hälfte seiner Farbe be
 
 <div align="center" markdown>
 
-| Alpha-Modus | Bedeutung | Typische Verwendung | Integrationsüberlegung |
+| Alpha-Modus | Bedeutung | Typische Verwendung | Integrationsaspekt |
 |:-----------|:--------|:------------|:--------------------------|
 | **Pixelweises Alpha** | Jeder Pixel trägt seinen eigenen Alphawert. | Kantengeglättete Symbole und Text, weiche Kanten, Schatten, PNG-artige Assets. | Bewahrt detaillierte Transparenz, erhöht aber Quelldatengröße und Blend-Aufwand. |
 | **Globales Alpha** | Ein Alphawert gilt für ein gesamtes Objekt oder eine Ebene. | Ausblenden eines Bildschirms, Dialogs oder Bilds. | Effizient für gleichmäßige Ausblendungen; kann keine weichen Kanten innerhalb des Objekts darstellen. |
@@ -219,7 +219,7 @@ Alpha-Blending liest sowohl Vordergrund- als auch Zielpixel und schreibt dann da
 
 ## LVGL integrieren { #integrating-lvgl }
 
-LVGL eignet sich für UIs auf SF32-Bauteilen und stellt Widgets, Stile, Eingabeverarbeitung, Animation, Bereichsinvalidierung und Schnittstellen zum Displaytreiber bereit.
+LVGL eignet sich für UIs auf SF32-Geräten und stellt Widgets, Stile, Eingabeverarbeitung, Animation, Bereichsinvalidierung und Schnittstellen zum Displaytreiber bereit.
 
 Eine typische LVGL-Integration benötigt:
 
@@ -256,7 +256,7 @@ Eine gute LVGL-Portierung sollte es dem Bildschirmcode erlauben, deklarativ zu b
 
 ## ePicasso-Beschleunigung nutzen { #using-epicasso-acceleration }
 
-ePicasso ist nützlich, wenn die UI Operationen enthält, die andernfalls viele wiederholte Pixelberechnungen erfordern würden. Häufige Kandidaten umfassen:
+ePicasso ist nützlich, wenn die UI Operationen enthält, die andernfalls viele wiederholte Pixelberechnungen erfordern würden. Häufige Kandidaten sind:
 
 - Rechteckfüllungen.
 - Bildkopie- und Blit-Operationen.
@@ -291,14 +291,14 @@ Hardwarebeschleunigung bietet möglicherweise begrenzten Nutzen, wenn:
 
 Die Grafikleistung wird häufig durch den Datentransfer zwischen Speichern begrenzt. Ordnen Sie Puffer deshalb gezielt zu:
 
-- Häufig genutzte Zeichenpuffer nach Möglichkeit in schnellem SRAM platzieren.
-- Große Framebuffer nur in PSRAM halten, wenn SRAM nicht ausreicht.
-- Große Bilder und Schriftarten in Flash oder PSRAM speichern, aber Zugriffslatenz berücksichtigen.
-- Wiederholte Laufzeitkonvertierung von Assets vermeiden.
-- DMA-zugängliche Puffer gemäß SDK-Vorgaben ausgerichtet halten.
-- Komprimierte oder indizierte Assets nutzen, wenn sie die Gesamtbandbreite und Dekodierkosten reduzieren.
+- Legen Sie häufig genutzte Zeichenpuffer nach Möglichkeit in schnellem SRAM ab.
+- Halten Sie große Framebuffer nur dann in PSRAM, wenn SRAM nicht ausreicht.
+- Speichern Sie große Bilder und Schriftarten in Flash oder PSRAM, berücksichtigen Sie dabei aber die Zugriffslatenz.
+- Vermeiden Sie wiederholte Laufzeitkonvertierungen von Assets.
+- Richten Sie DMA-zugängliche Puffer gemäß den SDK-Vorgaben aus.
+- Nutzen Sie komprimierte oder indizierte Assets, wenn sie die Gesamtbandbreite und Dekodierkosten reduzieren.
 
-Wenn CPU und Grafik- oder Display-Hardware Puffer gemeinsam nutzen, beachten Sie die SDK-Regeln für Cache-Pflege und Pufferbesitz. Bevor Hardware CPU-Daten liest, führen Sie Clean für die betroffenen Cache-Zeilen aus und schließen die erforderliche Synchronisierung ab. Bereiten Sie den Puffer vor einem Hardware-Schreibzugriff so vor, dass veränderte CPU-Cache-Zeilen das Ergebnis nicht später durch Zurückschreiben überschreiben. Warten Sie das Transferende ab und invalidieren Sie veraltete Cache-Zeilen, bevor die CPU das Ergebnis liest. Beachten Sie Cache-Zeilen-Ausrichtung und benachbarte Daten; verändern Sie keinen Puffer, solange die Hardware ihn besitzt. Verwenden Sie die unterstützten SDK-Routinen: Clean und Invalidate sind nicht austauschbar.
+Wenn CPU und Grafik- oder Display-Hardware Puffer gemeinsam nutzen, beachten Sie die SDK-Regeln für Cache-Wartung und Pufferbesitz. Bevor die Hardware CPU-Daten liest, führen Sie für die betroffenen Cache-Zeilen eine Clean-Operation aus und schließen die erforderliche Synchronisierung ab. Bereiten Sie den Puffer vor einem Hardware-Schreibzugriff so vor, dass veränderte CPU-Cache-Zeilen das Ergebnis nicht später durch Zurückschreiben überschreiben. Warten Sie das Ende der Übertragung ab und invalidieren Sie veraltete Cache-Zeilen, bevor die CPU das Ergebnis liest. Beachten Sie die Cache-Zeilen-Ausrichtung und benachbarte Daten; verändern Sie keinen Puffer, solange die Hardware ihn besitzt. Verwenden Sie die unterstützten SDK-Routinen: Clean und Invalidate sind nicht austauschbar.
 
 Für Teilaktualisierung, panelspezifisches Verhalten und den gestuften Inbetriebnahmeablauf siehe [Display-Controller](display-controller.md).
 
@@ -308,13 +308,13 @@ Gut vorbereitete Grafikressourcen können die UI beschleunigen, bevor Sie den Co
 
 Nutzen Sie diese Faustregeln:
 
-- Bildabmessungen an die tatsächliche Bildschirmgröße anpassen.
-- Skalierung großer Bilder in jedem Frame vermeiden.
-- Komplexe Schatten, Farbverläufe oder Hintergründe nach Möglichkeit vorrendern.
-- Alpha nur dort verwenden, wo Transparenz benötigt wird.
-- Gemeinsame Symbolsätze und Schriftart-Teilmengen bevorzugen.
-- Ungenutzte Glyphen aus Schriftarten entfernen.
-- Häufig genutzte Assets in Formaten halten, die der Grafikpfad effizient unterstützt.
+- Passen Sie die Bildabmessungen an die tatsächliche Bildschirmgröße an.
+- Vermeiden Sie es, große Bilder in jedem Frame zu skalieren.
+- Rendern Sie komplexe Schatten, Farbverläufe oder Hintergründe nach Möglichkeit vor.
+- Verwenden Sie Alpha nur dort, wo Transparenz benötigt wird.
+- Bevorzugen Sie gemeinsam genutzte Symbolsätze und Schriftart-Teilmengen.
+- Entfernen Sie ungenutzte Glyphen aus Schriftarten.
+- Halten Sie häufig genutzte Assets in Formaten, die der Grafikpfad effizient unterstützt.
 
 Bei mehrsprachigen Produkten kann der Schriftartspeicher das UI-Budget dominieren. Planen Sie Schriftart-Fallback, Glyphen-Teilmengen und Textlayout frühzeitig.
 
@@ -324,16 +324,16 @@ Flüssige Animationen hängen vom Zeitbudget pro Frame, der Panel-Bandbreite, de
 
 Ein praktischer Ansatz:
 
-- Nur animieren, was Nutzer bemerken.
-- Animierte Bereiche klein halten.
-- Transformationen oder Deckkraftänderungen bevorzugen, die sich gut auf Beschleunigung abbilden lassen.
-- Aufwändige Vollbild-Unschärfe-, Schatten- oder Transparenzeffekte in jedem Frame vermeiden.
-- Bildrate für unkritische Effekte reduzieren.
-- Animationen stoppen, wenn der Bildschirm gedimmt, abgedeckt oder inaktiv ist.
+- Animieren Sie nur, was Nutzer bemerken.
+- Halten Sie animierte Bereiche klein.
+- Bevorzugen Sie Transformationen oder Deckkraftänderungen, die sich gut beschleunigen lassen.
+- Vermeiden Sie aufwändige Vollbild-Unschärfe-, Schatten- oder Transparenzeffekte in jedem Frame.
+- Reduzieren Sie die Bildrate für unkritische Effekte.
+- Stoppen Sie Animationen, wenn der Bildschirm gedimmt, abgedeckt oder inaktiv ist.
 
 Eine Wearable-UI benötigt nicht überall Desktop-artige Animation. Wenige schnelle, klare Übergänge fühlen sich meist besser an als viele Effekte, die Strom verbrauchen oder Frames auslassen.
 
-## Matrix zur Grafikvalidierung { #graphics-validation-matrix }
+## Grafik-Validierungsmatrix { #graphics-validation-matrix }
 
 Verwenden Sie wiederholbare Bildschirme statt subjektiver „flüssig genug“-Prüfungen:
 
@@ -348,14 +348,14 @@ Verwenden Sie wiederholbare Bildschirme statt subjektiver „flüssig genug“-P
 | Symbolraster mit Alpha | Blending, Asset-Bandbreite, ePicasso-Pfad. |
 | Scrollliste | Invalidierte Bereiche, Übertragungsbandbreite, Eingabelatenz. |
 | Vollbildübergang | Frame-Budget, Doppelpufferung, Panel-Bandbreite. |
-| Gedimmter/inaktiver Bildschirm | Richtlinie zum Animationsstopp, Hintergrundbeleuchtung und Energiemanagement-Anforderungen (PM vote). |
+| Gedimmter/inaktiver Bildschirm | Richtlinie zum Animationsstopp, Hintergrundbeleuchtung und PM-Votes. |
 | Worst-Case-Koexistenz | Bluetooth/Audio/KI aktiv, während UI aktualisiert wird. |
 
 </div>
 
-Verfolgen Sie Render-Zeit, Flush-Zeit, CPU-Last und Stromverbrauch für jeden Bildschirm. Wird nur die Gesamt-Frame-Zeit gemessen, ist schwer zu erkennen, ob der Engpass LVGL, ePicasso, der Speicher oder die Panel-Schnittstelle ist.
+Erfassen Sie Render-Zeit, Flush-Zeit, CPU-Last und Stromverbrauch für jeden Bildschirm. Wird nur die Gesamt-Frame-Zeit gemessen, ist schwer zu erkennen, ob der Engpass LVGL, ePicasso, der Speicher oder die Panel-Schnittstelle ist.
 
-## Grafikleistung untersuchen { #debugging-graphics-performance }
+## Grafikleistung debuggen { #debugging-graphics-performance }
 
 Wenn die UI langsam ist, identifizieren Sie den Engpass, bevor Sie das Design ändern.
 
@@ -387,32 +387,32 @@ Messen Sie diese getrennt:
 
 Vermeiden Sie diese frühzeitig; sie sind spät nur schwer zu beheben:
 
-- Wahl einer Panel-Schnittstelle vor der Bandbreitenabschätzung.
-- Vollbildneuzeichnungen für kleine UI-Änderungen verwenden.
-- Alle UI-Assets ohne Profiling in langsamem Speicher ablegen.
-- RGB888 verwenden, wenn RGB565 ausreicht.
-- Große Bilder in jedem Frame skalieren.
-- Cache-Wartung für hardware-geteilte Puffer vergessen.
-- Annehmen, dass ePicasso automatisch jede UI-Operation beschleunigt.
-- Zu viele Timer oder Animationen verwenden, die die CPU wachhalten.
-- Touch-Latenz ignorieren, während nur die Bildrate optimiert wird.
-- Bis zur PCB-Inbetriebnahme warten, um die Panel-Initialisierung zu validieren.
+- Wählen Sie keine Panel-Schnittstelle, bevor Sie die Bandbreite abgeschätzt haben.
+- Vermeiden Sie Vollbildneuzeichnungen für kleine UI-Änderungen.
+- Legen Sie nicht alle UI-Assets ohne vorheriges Profiling in langsamem Speicher ab.
+- Verwenden Sie nicht RGB888, wenn RGB565 ausreicht.
+- Vermeiden Sie es, große Bilder in jedem Frame zu skalieren.
+- Vergessen Sie die Cache-Wartung für gemeinsam genutzte Hardware-Puffer nicht.
+- Gehen Sie nicht davon aus, dass ePicasso automatisch jede UI-Operation beschleunigt.
+- Vermeiden Sie zu viele Timer oder Animationen, die die CPU wachhalten.
+- Ignorieren Sie nicht die Touch-Latenz, während Sie nur die Bildrate optimieren.
+- Warten Sie mit der Validierung der Panel-Initialisierung nicht bis zur PCB-Inbetriebnahme.
 
 ## Inbetriebnahme-Checkliste { #bring-up-checklist }
 
 Verwenden Sie diese Checkliste zum Start eines neuen SF32-Grafikprojekts:
 
-- [ ] Display-Auflösung, Farbtiefe, Schnittstelle und Panel-Treiber-IC bestätigen.
-- [ ] Bestätigen, dass das gewählte SF32-Bauteil die benötigte Display-Schnittstelle unterstützt.
-- [ ] Speicheranforderungen für Framebuffer und Zeichenpuffer abschätzen.
-- [ ] Vollbild oder Teilaktualisierung sowie Einzel- oder Doppelpufferung festlegen.
-- [ ] Panel-Reset, Versorgungsspannungen, Hintergrundbeleuchtung und Initialisierungssequenz in Betrieb nehmen.
-- [ ] LVGL-Tick, Display-Flush und Eingabetreiber implementieren.
-- [ ] Grundlegendes Füll-, Bild-, Text- und Touch-Verhalten verifizieren.
-- [ ] ePicasso-Beschleunigung aktivieren, wo vom SDK und Treiber unterstützt.
-- [ ] Cache-Clean-/Invalidate-Verhalten für geteilte Puffer validieren.
-- [ ] Render-Zeit, Flush-Zeit, CPU-Last und Stromverbrauch profilieren.
-- [ ] Worst-Case-Bildschirme, Animationen, Bluetooth-Aktivität und Schlaf-/Aufwach-Pfade testen.
+- [ ] Bestätigen Sie Display-Auflösung, Farbtiefe, Schnittstelle und Panel-Treiber-IC.
+- [ ] Prüfen Sie, ob das gewählte SF32-Gerät die benötigte Display-Schnittstelle unterstützt.
+- [ ] Schätzen Sie den Speicherbedarf für Framebuffer und Zeichenpuffer ab.
+- [ ] Legen Sie Vollbild- oder Teilaktualisierung sowie Einzel- oder Doppelpufferung fest.
+- [ ] Nehmen Sie Panel-Reset, Versorgungsspannungen, Hintergrundbeleuchtung und Initialisierungssequenz in Betrieb.
+- [ ] Implementieren Sie LVGL-Tick, Display-Flush und Eingabetreiber.
+- [ ] Prüfen Sie grundlegendes Füll-, Bild-, Text- und Touch-Verhalten.
+- [ ] Aktivieren Sie ePicasso-Beschleunigung, sofern SDK und Treiber sie unterstützen.
+- [ ] Validieren Sie Cache-Clean- und Invalidate-Verhalten für gemeinsam genutzte Puffer.
+- [ ] Messen Sie Render-Zeit, Flush-Zeit, CPU-Last und Stromverbrauch.
+- [ ] Testen Sie Worst-Case-Bildschirme, Animationen, Bluetooth-Aktivität und Schlaf-/Aufwach-Pfade.
 
 ## Wichtige Erkenntnisse { #key-takeaways }
 

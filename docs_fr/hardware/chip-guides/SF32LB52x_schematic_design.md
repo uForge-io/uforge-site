@@ -11,7 +11,7 @@ tags:
 # Guide de conception matérielle SF32LB52x — Recommandations de conception du schéma { #sf32lb52x-hardware-design-guide-schematic-design-guidelines }
 
 !!! note "Fait partie du Guide de conception matérielle SF32LB52x"
-    Les Recommandations de conception du schéma s'étendent désormais sur trois pages : cette page (sections 5.1-5.3 : Système minimal, Alimentation, et Horloge), [RF et interfaces utilisateur](SF32LB52x_schematic_rf_interfaces.md) (sections 5.4-5.5), et [Stockage et fabrication](SF32LB52x_schematic_storage_mfg.md) (sections 5.6-5.7). Partez de l'[aperçu du Guide de conception matérielle SF32LB52x](SF32LB52x_hardware_design_guide.md) pour la sélection du dispositif et le flux de conception complet, ou consultez la [Liste de contrôle du schéma](SF32LB52x_schematic_checklist.md) pour la revue point par point.
+    Les Recommandations de conception du schéma s'étendent désormais sur trois pages : cette page (sections 5.1-5.3 : Système minimal, Alimentation, et Horloge), [RF et interfaces utilisateur](SF32LB52x_schematic_rf_interfaces.md) (sections 5.4-5.5), et [Stockage et fabrication](SF32LB52x_schematic_storage_mfg.md) (sections 5.6-5.7). Partez de l'[aperçu du Guide de conception matérielle SF32LB52x](SF32LB52x_hardware_design_guide.md) pour la sélection du composant et le flux de conception complet, ou consultez la [Liste de contrôle du schéma](SF32LB52x_schematic_checklist.md) pour la revue point par point.
 
 ## 5. Recommandations de conception du schéma { #5-schematic-design-guidelines }
 
@@ -29,17 +29,17 @@ Ce chapitre présente le flux de conception du schéma sur trois pages. Commence
 | RF | Adaptation RF, chemin d'antenne, et accès au réglage | Plan d'impédance RF, capture d'écran de placement du réseau d'adaptation, plan de réglage d'antenne |
 | Interfaces utilisateur | Affichage, audio, boutons, et moteur de vibration | Revue du schéma d'interface, broches de temporisation et de commande, séquencement d'alimentation, revue analogique |
 | Stockage et connectivité | Support de démarrage, broches de bootstrap, interrupteur d'alimentation du stockage, capteurs, UART/I2C, et GPTIM | Tableau de bootstrap, divergence des sources PA11/PA21, affectation de bus, revue du rail de stockage |
-| Fabrication | DBG_UART/SWD, points de test, programmation en production, accès pour l'étalonnage et listes de contrôle avant validation | Plan des points de test, plan du dispositif de test en production, éléments de validation complets |
+| Fabrication | DBG_UART/SWD, points de test, flashage en production, accès pour l'étalonnage et listes de contrôle avant validation | Plan des points de test, plan du dispositif de test en production, éléments de validation complets |
 
 </div>
 
 ### 5.1. Conception du système minimal { #51-minimum-system-design }
 
-La conception du système minimal constitue la première étape de validation du schéma d'une carte SF32LB52x. Elle couvre les décisions qui doivent être correctes avant l'ajout des périphériques du produit : variante exacte du dispositif, boîtier, arbre d'alimentation, support de démarrage, résistances de bootstrap, contrôle d'alimentation du stockage, accès de débogage/téléchargement, sources d'horloge et comportement de réveil. Le câblage de l'afficheur ou des capteurs peut souvent être modifié tardivement ; en revanche, une configuration incorrecte des broches de bootstrap du stockage, l'absence d'accès de débogage, un rail instable ou une hypothèse erronée sur les états d'alimentation peuvent empêcher le fonctionnement normal de la carte.
+La conception du système minimal constitue le premier point de contrôle de validation du schéma d'une carte SF32LB52x. Elle couvre les décisions qui doivent être correctes avant l'ajout des périphériques du produit : variante exacte du composant, boîtier, arbre d'alimentation, support de démarrage, résistances de bootstrap, contrôle d'alimentation du stockage, accès de débogage/téléchargement, sources d'horloge et comportement de réveil. Le câblage de l'afficheur ou des capteurs peut souvent être modifié tardivement ; en revanche, une configuration incorrecte des broches de bootstrap du stockage, l'absence d'accès de débogage, un rail instable ou une hypothèse erronée sur les états d'alimentation peuvent empêcher le fonctionnement normal de la carte.
 
 Effectuez la première revue du schéma dans l'ordre suivant :
 
-1. Sélectionnez le dispositif et le boîtier exacts depuis les sections 3.2 et 3.3.
+1. Sélectionnez le composant et le boîtier exacts depuis les sections 3.2 et 3.3.
 2. Choisissez le chemin d'alimentation correct : `SF32LB520/3/5/7` pour les produits alimentés par batterie rechargeable, ou `52B/D/E/G/J` pour les produits à régulation externe.
 3. Verrouillez les décisions du système d'alimentation à la section 5.2, y compris `VBUS`/`VBAT`/`VCC` ou `PVDD`/`VDDIOA`/`VDD_SIP`, le BUCK, le découplage du LDO interne, les rails RF/audio, et tous les interrupteurs d'alimentation basse consommation.
 4. Sélectionnez le support de démarrage et configurez les résistances de polarisation des broches de bootstrap `PA13`/`PA17` pour correspondre au tableau de démarrage de la section 5.6.1.
@@ -48,7 +48,7 @@ Effectuez la première revue du schéma dans l'ordre suivant :
 7. Sélectionnez les quartz 48 MHz et 32,768 kHz depuis la section 5.3.1 et gardez leurs contraintes de placement visibles pendant la revue du schéma.
 8. Définissez les broches de réveil, le comportement du bouton d'alimentation, les événements du chargeur et les états de mise hors tension du stockage et des capteurs avant d'arrêter la politique de basse consommation du firmware.
 
-À l'issue de cette étape, le schéma doit permettre la mise sous tension, le démarrage depuis le support sélectionné, l'accès à une voie de récupération, l'étalonnage de l'horloge et le passage à l'état de basse consommation prévu, sans dépendre de périphériques optionnels du produit.
+À l'issue de ce point de contrôle, le schéma doit permettre la mise sous tension, le démarrage depuis le support sélectionné, l'accès à une voie de récupération, l'étalonnage de l'horloge et le passage à l'état de basse consommation prévu, sans dépendre de périphériques optionnels du produit.
 
 ### 5.2. Système d'alimentation { #52-power-system }
 
@@ -58,8 +58,8 @@ La conception du système d'alimentation définit les rails, les interrupteurs d
 
 **Résumé rapide**
 
-- Pour les dispositifs alimentés par batterie, suivez la configuration `SF32LB520/3/5/7` et définissez `VBUS`, `VBAT`, `VCC`, la charge et l'OVP.
-- Les dispositifs à alimentation externe régulée utilisent la configuration `52B/D/E/G/J`, avec `PVDD` et `VDDIOA` régulés à l'extérieur. Configurez `VDD_SIP` selon la référence exacte : alimentation externe ou LDO interne. Il n'y a pas de circuit de charge intégré.
+- Pour les composants alimentés par batterie, suivez la configuration `SF32LB520/3/5/7` et définissez `VBUS`, `VBAT`, `VCC`, la charge et l'OVP.
+- Les composants à alimentation externe régulée utilisent la configuration `52B/D/E/G/J`, avec `PVDD` et `VDDIOA` régulés à l'extérieur. Configurez `VDD_SIP` selon la référence exacte : alimentation externe ou LDO interne. Il n'y a pas de circuit de charge intégré.
 - L'inductance BUCK, le découplage du LDO interne, les rails RF/audio, et les interrupteurs d'alimentation de veille doivent être fixés avant le placement PCB.
 
 **Objectif de conception**
@@ -174,7 +174,7 @@ Les deux groupes de conception utilisent la même spécification d'inductance.
     !!! important "Limites de VBUS et de l'OVP : divergence dans la source"
         La note d'application OpenSiFli des variantes sur batterie contient des indications VBUS contradictoires : la section de sélection de l'OVP donne 4,5–5,5 V pour la broche VBUS du composant, tandis que le tableau d'alimentation et les notes du chargeur intégré indiquent 4,6–5,5 V et exigent au moins 4,6 V sur la broche au courant de charge maximal. Electrical Specification-A3 donne une plage générale de 4,5–5,5 V, et le schéma de charge de référence porte l'indication 4,3–5,5 V. Avec le chargeur intégré, maintenez au moins 4,6 V sur la broche en charge maximale jusqu'à ce que SiFli précise la limite minimale applicable ; l'indication 4,3 V du schéma n'est pas une limite basse approuvée.
 
-        La même note fixe `VIN_OVLO` entre 5,2 et 5,5 V pour les dispositifs OVP à OVLO réglable ; la tolérance de `VOVLO_TH` doit être ≤3 % et celle de R1/R2, ≤1 %. Pour les dispositifs OVP à sortie régulée, elle spécifie une sortie LDO de 4,5 à 5,4 V. Il s'agit de réglages propres à chaque topologie OVP, et non de plages de fonctionnement VBUS du composant interchangeables. Tenez compte des tolérances des composants et confirmez auprès de SiFli la conception approuvée.
+        La même note fixe `VIN_OVLO` entre 5,2 et 5,5 V pour les composants OVP à OVLO réglable ; la tolérance de `VOVLO_TH` est ≤3 % et celle de R1/R2, ≤1 %. Pour les composants OVP à sortie régulée, elle spécifie une sortie LDO de 4,5 à 5,4 V. Il s'agit de réglages propres à chaque topologie OVP, et non de plages de fonctionnement VBUS du composant interchangeables. Tenez compte des tolérances des composants et confirmez auprès de SiFli la conception approuvée.
 
     ![Figure 5.2-4 : Formule du point de réglage OVLO](../../sf32-products/chips/assets/52xA/sf32lb52x-OVP-SET.png){ width="100%" loading="lazy" }
 
@@ -218,13 +218,13 @@ Les deux groupes de conception utilisent la même spécification d'inductance.
 
     <div align="center"><em>Figure 5.2-7 : Schéma de structure d'alimentation système SF32LB52x</em></div>
 
-    Définissez soigneusement l'état matériel initial des GPIO qui commandent les interrupteurs d'alimentation. Ajoutez des résistances de rappel au niveau haut ou bas de l'ordre du mégohm pour que ces interrupteurs soient désactivés par défaut. Choisissez des LDO et des interrupteurs d'alimentation à faible courant de repos (Iq) et à faible courant d'arrêt (Istb). Accordez une attention particulière à l'Iq des composants d'alimentation qui restent toujours actifs.
+    Définissez soigneusement l'état matériel initial des GPIO qui commandent les interrupteurs d'alimentation. Ajoutez des résistances de rappel au niveau haut ou bas, de l'ordre du mégohm, pour que ces interrupteurs soient désactivés par défaut. Choisissez des LDO et des interrupteurs d'alimentation à faible courant de repos (Iq) et à faible courant d'arrêt (Istb). Accordez une attention particulière à l'Iq des composants d'alimentation qui restent toujours actifs.
 
 === "52B/D/E/G/J (alimentation externe régulée)"
 
-    Utilisez des interrupteurs d'alimentation pour la gestion dynamique de l'alimentation de chaque bloc fonctionnel ; pour les modules ou chemins toujours actifs, sélectionnez des dispositifs à faible courant de repos.
+    Utilisez des interrupteurs d'alimentation pour la gestion dynamique de l'alimentation de chaque bloc fonctionnel ; pour les modules ou chemins toujours actifs, sélectionnez des composants à faible courant de repos.
 
-    Définissez soigneusement l'état matériel initial des GPIO qui commandent les interrupteurs d'alimentation. Ajoutez des résistances de rappel au niveau haut ou bas de l'ordre du mégohm pour que ces interrupteurs soient désactivés par défaut. Choisissez des LDO et des interrupteurs d'alimentation à faible courant de repos (Iq) et à faible courant d'arrêt (Istb). Accordez une attention particulière à l'Iq des composants d'alimentation qui restent toujours actifs.
+    Définissez soigneusement l'état matériel initial des GPIO qui commandent les interrupteurs d'alimentation. Ajoutez des résistances de rappel au niveau haut ou bas, de l'ordre du mégohm, pour que ces interrupteurs soient désactivés par défaut. Choisissez des LDO et des interrupteurs d'alimentation à faible courant de repos (Iq) et à faible courant d'arrêt (Istb). Accordez une attention particulière à l'Iq des composants d'alimentation qui restent toujours actifs.
 
 ##### 5.2.1.5. Liste de contrôle de conception de l'alimentation { #5215-power-design-checklist }
 
@@ -233,14 +233,14 @@ Les deux groupes de conception utilisent la même spécification d'inductance.
 - [ ] Tous les condensateurs de découplage du LDO interne sont placés selon les exigences
 - [ ] L'alimentation du LCD est isolée et non alimentée directement par le LDO interne
 - [ ] Les rails d'alimentation audio et RF sont correctement filtrés
-- [ ] Variante alimentée par batterie : chemin de charge et plages de tension du dispositif OVP vérifiés ; variante à alimentation externe régulée : alimentation VDD_SIP/VDDIOA configurée conformément au modèle de puce.
+- [ ] Variante alimentée par batterie : chemin de charge et plages de tension du composant OVP vérifiés ; variante à alimentation externe régulée : alimentation VDD_SIP/VDDIOA configurée conformément au modèle de puce.
 
 **Erreurs courantes - Alimentation**
 
 - Alimenter le LCD directement depuis un LDO interne au lieu d'un LDO externe.
 - Mélanger dans un même schéma les hypothèses d'alimentation par batterie et d'alimentation externe régulée.
 - Laisser `VDD_SIP` alimenté en mode Hibernate sur les variantes où la fuite du stockage est un risque.
-- Choisir un chargeur ou un dispositif OVP sans vérifier le courant VBUS dans le pire cas et la plage de tension.
+- Choisir un chargeur ou un composant OVP sans vérifier le courant VBUS dans le pire cas et la plage de tension.
 
 **Vérifications à la mise en service - Alimentation**
 
@@ -311,7 +311,7 @@ En modes Standby et Hibernate, toute la famille prend en charge 15 sources d'int
 **Résumé rapide**
 
 - Utilisez un quartz principal 48 MHz et un quartz RTC 32,768 kHz.
-- Privilégiez les composants à faible CL et faible ESR de l'AVL pour réduire le courant de démarrage et le courant statique.
+- Privilégiez les composants à faible CL et faible ESR de l'AVL pour réduire le courant de démarrage et le courant de repos.
 - Gardez les pistes du quartz courtes, blindées, et à l'écart de la chaleur, de la RF, du chargeur, du PMU, et du bruit du DC/DC.
 
 **Objectif de conception**
@@ -348,7 +348,7 @@ Quartz recommandés :
 </div>
 
 !!! note "Remarques supplémentaires"
-    Le TKD SX20Y048000B31T-8.8 présente un ESR quelque peu plus élevé, ce qui augmente légèrement la consommation statique. La note d'application schématique de SiFli recommande également de supprimer au moins le cuivre GND du deuxième plan sous le quartz 48 MHz afin de réduire la capacité de charge parasite. Or, le guide de routage PCB interdit les évidements de plan ou découpes de cuivre sous le quartz sur les couches adjacentes. Ces consignes se contredisent ; voir [Routage de l'interface d'horloge](SF32LB52x_pcb_layout.md#65-clock-interface-routing). Confirmez avec SiFli le traitement de couche attendu avant de figer le routage.
+    Le TKD SX20Y048000B31T-8.8 présente un ESR quelque peu plus élevé, ce qui augmente légèrement la consommation statique. La note d'application de SiFli sur le schéma recommande également de supprimer au moins le cuivre GND du deuxième plan sous le quartz 48 MHz afin de réduire la capacité de charge parasite. Or, le guide de routage PCB interdit les évidements de plan ou découpes de cuivre sous le quartz sur les couches adjacentes. Ces consignes se contredisent ; voir [Routage de l'interface d'horloge](SF32LB52x_pcb_layout.md#65-clock-interface-routing). Confirmez avec SiFli le traitement de couche attendu avant de figer le routage.
 
 !!! important "Exception concernant l'ESR du quartz dans la source"
     La source cite le TKD SX20Y048000B31T-8.8 avec ESR ≤ 40 Ω, alors que l'exigence générale à 48 MHz est ESR ≤ 30 Ω. Il faut donc vérifier la qualification de cette référence précise, sans en déduire que tout quartz de 40 Ω convient. Avant la mise en production, confirmez son approbation dans l'AVL en vigueur et validez le démarrage, l'étalonnage de fréquence et le courant de l'oscillateur.

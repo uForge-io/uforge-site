@@ -13,7 +13,7 @@ tags:
 !!! warning "Cœur bêta"
     OpenSiFli qualifie ce cœur de **BETA**. Les fonctionnalités, les API, le contenu des packages, le comportement du loader et les versions peuvent changer. Vérifiez le comportement actuel dans le README du projet et les Releases avant de choisir cette solution pour un produit.
 
-Pour l'installation initiale de l'IDE, la sélection de la carte et du port, l'installation du bootloader et la vérification de Blink, consultez [Premiers pas avec Arduino](../../../getting-started/arduino/getting-started-arduino.md). Cette page vous aide à déterminer si Arduino convient et à maintenir un projet Arduino après sa première mise en route.
+Pour l'installation initiale de l'IDE, la sélection de la carte et du port, l'installation du bootloader et la vérification de Blink, consultez la page [Arduino](../../../getting-started/arduino/getting-started-arduino.md). Cette page vous aide à déterminer si Arduino convient et à maintenir un projet Arduino après sa première mise en route.
 
 ## Où Arduino trouve sa place { #where-arduino-fits }
 
@@ -109,11 +109,11 @@ Commencez par le guide de première mise en route si la carte n'est pas détect�
 
 </div>
 
-Pour un rapport de problème utile, incluez la version du package, la version de l'IDE ou du CLI, le système d'exploitation, le FQBN, le mode de compilation, le mode de liaison, la révision de carte, la sortie complète du téléversement et le journal série.
+Pour un rapport de problème utile, incluez la version du package, la version de l'IDE ou de la CLI, le système d'exploitation, le FQBN, le mode de compilation, le mode de liaison, la révision de carte, la sortie complète du téléversement et le journal série.
 
 ## Pages liées { #related-pages }
 
-- [Premiers pas avec Arduino](../../../getting-started/arduino/getting-started-arduino.md)
+- [Arduino](../../../getting-started/arduino/getting-started-arduino.md)
 - [Zephyr](../zephyr/overview.md)
 - [SiFli-SDK](../sifli-sdk/overview.md)
 - [SF32LB52 DevKit LCD](../../../sf32-products/devkits/SF32LB52-DevKit-LCD.md)

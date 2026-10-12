@@ -23,7 +23,7 @@ SF32 产品栏目帮助你从产品构想走到可实施的 SF32 设计。你可
 | 将产品构想转化为计划 | [规划产品](family/product-planning.md) | 从需求和器件方向，到开发板验证与量产准备的分阶段路径。 |
 | 选择芯片或模组 | [SF32 产品选型工具](product-selector.md) | 芯片和模组交互式筛选工具、选型因素及产品介绍。开发板另行归类，作为验证平台使用。 |
 | 复用技术基线 | [参考设计](../hardware/reference-designs/reference-designs.md) | 可复现的软硬件起点、其验证重点和可复用边界。 |
-| 完成板级设计并准备量产 | [面向量产的设计](../hardware/design-for-production.md) | 设计指南、检查清单、接口定义、经认可的元器件和官方 EDA 库。 |
+| 发布板级设计 | [面向量产的设计](../hardware/design-for-production.md) | 设计指南、检查清单、接口定义、经认可的元器件和官方 EDA 库。 |
 
 </div>
 

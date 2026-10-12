@@ -37,7 +37,7 @@
       </div>
     </div>
     {#- ── Buy pill (left of palette toggle) ── -#}
-    {% set buy_labels = {"en": "Buy", "zh": "购买", "ja": "購入", "es": "Comprar", "de": "Kaufen", "fr": "Acheter", "pt": "Comprar", "ru": "Купить"} %}
+    {% set buy_labels = {"en": "Buy", "zh": "购买", "ja": "購入", "es": "Comprar", "de": "Kaufen", "fr": "Acheter", "pt": "Comprar", "ru": "Купить", "ko": "구매"} %}
     {% set buy_label = buy_labels[config.theme.language] | default("Buy", true) %}
     <a href="https://sifli.taobao.com/" title="{{ buy_label }}" class="uf-buy" data-md-component="buy">
       {% include ".icons/fontawesome/solid/cart-shopping.svg" %}

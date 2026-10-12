@@ -48,7 +48,7 @@ Abbildung 5.4-1 zeigt einen Serienkondensator mit 15 pF und 50 V (C0323); die be
 
 - [ ] Der Zielwert für die RF-Leiterbahnimpedanz ist mit dem PCB-Hersteller festgelegt.
 - [ ] Das π-Anpassnetzwerk ist reserviert und nahe am Chip platziert.
-- [ ] Masse-Via-Zaun und RF-Sperrzone sind geprüft.
+- [ ] Masse-Via-Zaun und RF-Freihaltebereich sind geprüft.
 - [ ] Vor Abschluss des Gehäusedesigns sind die Zugänge für die Antennenabstimmung und Zertifizierungsmessungen vorgesehen.
 
 ### 5.5. Benutzerschnittstellen { #55-user-interfaces }
@@ -63,9 +63,9 @@ Abbildung 5.4-1 zeigt einen Serienkondensator mit 15 pF und 50 V (C0323); die be
 
 **Design-Ziel**
 
-Wählen Sie eine Display-Schnittstelle, die die Anforderungen an Bandbreite und Leistungsaufnahme erfüllt, und erhalten Sie dabei das Verhalten von Aufwecken, Reset, Hintergrundbeleuchtung und Touch im Normalbetrieb und in Low-Power-Zuständen.
+Wählen Sie eine Display-Schnittstelle, die den Anforderungen an Bandbreite und Leistungsaufnahme entspricht und das gewünschte Verhalten beim Wecken, Zurücksetzen, bei der Hintergrundbeleuchtung und bei Touch im Normalbetrieb und in Energiesparzuständen ermöglicht.
 
-Der Chip unterstützt 3-Line-SPI, 4-Line-SPI, Dual-Data-SPI, Quad-Data-SPI und serielle JDI-Schnittstellen sowie die Farbtiefen RGB888 (16,7 Mio. Farben), RGB666 (262.000 Farben), RGB565 (65.000 Farben) und RGB111 (8 Farben) bei einer maximalen Auflösung von 512 × 512.
+Der Chip unterstützt 3-Line-SPI, 4-Line-SPI, Dual-Data-SPI, Quad-Data-SPI und serielle JDI-Schnittstellen sowie die Farbtiefen RGB888 (16,7 Mio. Farben), RGB666 (262 000 Farben), RGB565 (65 000 Farben) und RGB111 (8 Farben) bei einer maximalen Auflösung von 512 × 512.
 
 Unterstützte LCD-Treibermodelle:
 
@@ -170,10 +170,10 @@ Unterstützte LCD-Treibermodelle:
     !!! note
         Signale mit der Kennzeichnung „PA**“ müssen die angegebenen festen I/O-Zuweisungen verwenden. GPIO-Signale können einem beliebigen I/O zugewiesen werden. TPS-Signale werden vom Display-PMIC (TPS) an das Panel ausgegeben. I2C-Signale benötigen I/Os mit I2C-Unterstützung.
 
-=== "SF32LB520/3/5/7 (batteriebetrieben)"
+=== "SF32LB520/3/5/7 (akkubetrieben)"
 
     !!! info "Nicht zutreffend"
-        SiFlis offizieller Hardware-Anwendungshinweis für SF32LB520/3/5/7 enthält kein Referenzdesign für eine parallele EPD-Schnittstelle. Wenn Ihr Produkt EPD-Display-Unterstützung benötigt, konsultieren Sie die 52B/D/E/G/J-Dokumentation und bestätigen Sie die Machbarkeit für die batteriebetriebene Variante direkt mit dem SiFli-FAE-Support.
+        SiFlis offizieller Hardware-Anwendungshinweis für SF32LB520/3/5/7 enthält kein Referenzdesign für eine parallele EPD-Schnittstelle. Wenn Ihr Produkt EPD-Display-Unterstützung benötigt, konsultieren Sie die 52B/D/E/G/J-Dokumentation und bestätigen Sie die Machbarkeit für die akkubetriebene Variante direkt mit dem SiFli-FAE-Support.
 
 ##### 5.5.1.4. Touch- und Hintergrundbeleuchtungsschnittstelle { #5514-touch-and-backlight-interface }
 
@@ -185,7 +185,7 @@ Der SF32LB52x unterstützt eine I2C-Schnittstelle für den Touch-Controller mit 
 
 | Touch-/Hintergrundbeleuchtungssignal | Pin | Beschreibung |
 |:---|:---|:---|
-| Interrupt | PA43 | Touch-Status-Interrupt (wake-fähig) |
+| Interrupt | PA43 | Touch-Status-Interrupt (weckfähig) |
 | I2C1_SCL | PA42 | Touch-I2C-Takt |
 | I2C1_SDA | PA41 | Touch-I2C-Daten |
 | BL_PWM | PA01 | Hintergrundbeleuchtungs-PWM-Steuerung |
@@ -196,7 +196,7 @@ Der SF32LB52x unterstützt eine I2C-Schnittstelle für den Touch-Controller mit 
 **Häufige Fehler - Display**
 
 - Vergessen von Reset-, TE-, Hintergrundbeleuchtungs-PWM- oder Touch-Interrupt-Pins bei der Pin-Zuweisung.
-- Annahme von EPD-Unterstützung auf der batteriebetriebenen Variante, ohne das tatsächliche Gerät und Quelldesign zu bestätigen.
+- Annahme von EPD-Unterstützung auf der akkubetriebenen Variante, ohne das tatsächliche Gerät und Quelldesign zu bestätigen.
 - Versorgung des Displays von einem internen LDO statt von einer angemessen dimensionierten externen Schiene.
 - Verlegung von Display-Takten und -Daten neben Quarz-, RF-, Audio- oder hochohmigen analogen Knoten.
 
@@ -266,18 +266,18 @@ Die Mikrofon-Referenzschaltungen filtern MIC_BIAS mit einem Serienwiderstand von
 - [ ] Der Inbetriebnahmeplan umfasst Mikrofon-Bias, ADC-Grundrauschen, DAC-Ausgang, PA-Freigabe und hörbares Rauschen.
 
 !!! important "Mikrofon- und DAC-Signalpfade vervollständigen"
-    Die Quelle verbindet MEMS_MIC_ADC_IN und ECM_MIC_ADC_IN jeweils mit ADCP. Fügen Sie den oben geforderten DC-Blockkondensator von mindestens 2,2 uF in Serie ein. Der in den Mikrofonschaltungen nach Masse geschaltete 0,01-uF-Kondensator ersetzt ihn nicht. Platzieren Sie den differenziellen Tiefpass im gestrichelten Rahmen von Abbildung 5.5-3 nahe der MCU. Halten Sie die Kapazität der DAC-Ausgangsleiterbahnen unter 10 pF und ihre Länge unter 2 cm.
+    Die Quelle verbindet MEMS_MIC_ADC_IN und ECM_MIC_ADC_IN jeweils mit ADCP. Fügen Sie den oben geforderten DC-Sperrkondensator mit mindestens 2,2 µF in Reihe ein. Der in den Mikrofonschaltungen gegen Masse geschaltete 0,01-µF-Kondensator ersetzt ihn nicht. Platzieren Sie den differentiellen Tiefpass im gestrichelten Rahmen von Abbildung 5.5-3 nahe an der MCU. Halten Sie die Kapazität der DAC-Ausgangsleiterbahnen unter 10 pF und ihre Länge unter 2 cm.
 
 #### 5.5.3. Tasten { #553-buttons }
 
 **Kurzübersicht**
 
 - `PA34` unterstützt die Ein-/Aus-Taste sowie einen Reset bei langem Tastendruck.
-- Drehgeber-Tasten sollten der Referenzschaltung folgen und gemeinsam mit Wake-, Entprell- und ESD-Anforderungen geprüft werden.
+- Drehgeber-Tasten sollten der Referenzschaltung entsprechen und gemeinsam im Hinblick auf Weck-, Entprell- und ESD-Anforderungen geprüft werden.
 
 **Design-Ziel**
 
-Zuverlässige Benutzereingaben und Resets ermöglichen, ohne falsche Wake-Events, dauerhaft aktive Reset-Zustände oder hohen Standby-Leckstrom über Pull-Netzwerke.
+Ermöglichen Sie zuverlässige Benutzereingaben und Resets, ohne falsche Weckereignisse, dauerhaft aktive Reset-Zustände oder hohen Leckstrom im Standby über Pull-Netzwerke.
 
 ##### 5.5.3.1. Ein-/Aus-Taste { #5531-power-button }
 
@@ -302,15 +302,15 @@ Die A- und B-Signale des Drehgebers sind über 0-Ω-Widerstände mit PA35 und PA
 **Häufige Fehler - Tasten**
 
 - `PA34` bleibt offen (floating) oder ist auf den falschen Standardpegel vorgespannt.
-- Vergessen, dass Tastenschaltungen Wake-, ESD-, Entprell- und Produktionstestzugang benötigen können.
-- Gemeinsame Nutzung von Tastennetzen mit störbehafteten oder stark belasteten Funktionen ohne Prüfung der Wake-Zuverlässigkeit.
+- Nicht berücksichtigen, dass Tastenschaltungen Weck-, ESD- und Entprellfunktionen sowie Zugang für Produktionstests erfordern können.
+- Tastennetze gemeinsam mit störbehafteten oder stark belasteten Funktionen nutzen, ohne die Zuverlässigkeit des Weckens zu prüfen.
 
 **Checkliste Tasten**
 
 - [ ] Der Standardpegel der Ein-/Aus-Taste und des Resets bei langem Tastendruck ist korrekt.
-- [ ] Das Wake-Verhalten ist für die vorgesehenen Low-Power-Zustände verifiziert.
+- [ ] Das Weckverhalten ist für die vorgesehenen Energiesparzustände verifiziert.
 - [ ] ESD- und mechanische Entprellanforderungen sind geprüft.
-- [ ] Der Inbetriebnahmeplan umfasst kurze und lange Tastendrücke sowie Wake- und Reset-Verhalten.
+- [ ] Der Inbetriebnahmeplan umfasst kurze und lange Tastendrücke sowie das Weck- und Reset-Verhalten.
 
 #### 5.5.4. Vibrationsmotor { #554-vibration-motor }
 
@@ -321,7 +321,7 @@ Die A- und B-Signale des Drehgebers sind über 0-Ω-Widerstände mit PA35 und PA
 
 **Design-Ziel**
 
-Liefern Sie reproduzierbares haptisches Feedback und halten Sie dabei Motor-Einschaltstromstoß, Schaltrauschen und Standby-Leckstrom von empfindlichen Schienen und Wake-Schaltungen fern.
+Liefern Sie reproduzierbares haptisches Feedback und halten Sie dabei den Einschaltstromstoß des Motors, Schaltstörungen und Leckstrom im Standby von empfindlichen Versorgungsschienen und Weckschaltungen fern.
 
 Der SF32LB52x unterstützt einen PWM-Ausgang zur Ansteuerung eines Vibrationsmotors über eine externe Treiberstufe.
 

@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-ULP: placa SF32LB52x para prototipagem de dispositivos vestíveis, com AMOLED, touch, sensores, áudio, carregamento de bateria e medição de corrente para avaliação do consumo do sistema."
+description: "SF32LB52-DevKit-ULP: placa SF32LB52x para prototipagem de dispositivos vestíveis, com AMOLED, toque, sensores, áudio, carregamento de bateria e medição de corrente para avaliação do consumo do sistema."
 tags:
     - Hardware
     - Placa de desenvolvimento
@@ -14,11 +14,11 @@ A SF32LB52-DevKit-ULP também é conhecida como **立创黄山派**, **LCKFB-HSP
 
 Em comparação com as placas LCD, Nano e Core-3p3, esta placa se aproxima mais de um produto final: reúne um módulo SF32LB52, display AMOLED sensível ao toque, microfone, amplificador de áudio, LED RGB, acionamento de motor vibratório, sensores de movimento, magnético e de luz ambiente, circuito de carga da bateria e jumpers para medição de corrente. Assim, ela é especialmente útil quando a questão não é apenas “o MCU funciona?”, mas também “como o sistema vestível completo se comporta quando alimentado por bateria?”.
 
-O [guia da placa ULP][Artigo original da Wiki da SiFli] continua sendo uma página provisória. A fonte primária para a configuração detalhada é o [guia oficial chinês da placa Huangshan Pi][Guia SiFli Huangshan Pi], que documenta a versão V1.0.0 e serve aqui como referência para essa revisão. A [wiki de hardware da LCKFB][Wiki de hardware da LCKFB] não identifica a revisão e apresenta vários códigos de componentes diferentes. Trate essas diferenças como uma possível divergência de revisão ou de fonte, não como componentes intercambiáveis, e confira as marcações, o esquemático e a BOM da placa antes do trabalho de projeto.
+O [guia da placa ULP][Original SiFli Wiki Article] continua sendo uma página provisória. A fonte primária para a configuração detalhada é o [guia chinês da placa Huangshan Pi][Original SiFli Huangshan Pi Guide], que documenta a versão V1.0.0 e serve aqui como referência para essa revisão. A [wiki de hardware da LCKFB][LCKFB Hardware Wiki] não identifica a revisão e apresenta vários códigos de componentes diferentes. Trate essas diferenças como uma possível divergência de revisão ou de fonte, não como componentes intercambiáveis, e confira as marcações, o esquemático e a BOM da placa antes do trabalho de projeto.
 
 **Nota sobre o status de publicação:** O guia SiFli V1.0.0 informa que a placa documentada era então destinada a testes internos e seria modificada antes da publicação externa. Essa afirmação se limita à revisão dessa fonte; não estabelece o status nem a BOM de placas posteriores. Confira a revisão exata da placa e sua BOM.
 
-A [página de placas do SDK SiFli][Página SiFli SDK da placa ULP] identifica o alvo de compilação desta placa como `sf32lb52-lchspi-ulp`. Essa página e a seção de conteúdo do kit no guia chinês Huangshan Pi usam `SF32LB52X-MOD-1-N16R8`; o [guia SiFli de modelos de módulos][Guia SiFli de modelos de módulos] e o título da tabela GPIO usam `SF32LB52-MOD-1-N16R8`. As fontes não explicam a diferença do `X`. O alvo do SDK está confirmado; confira a identificação impressa no módulo instalado e a BOM, sem concluir que as duas grafias indicam hardwares diferentes.
+A [página de placas do SDK SiFli][SiFli SDK ULP Board Page] identifica o alvo de compilação desta placa como `sf32lb52-lchspi-ulp`. Essa página e a seção de conteúdo do kit no guia chinês Huangshan Pi usam `SF32LB52X-MOD-1-N16R8`; o [guia SiFli de modelos de módulos][SiFli Module Model Guide] e o título da tabela GPIO usam `SF32LB52-MOD-1-N16R8`. As fontes não explicam a diferença do `X`. O alvo do SDK está confirmado; confira a identificação impressa no módulo instalado e a BOM, sem concluir que as duas grafias indicam hardwares diferentes.
 
 ![Configuração de referência do SF32LB52-ULP para um dispositivo vestível](assets/sf32lb52x/52-ULP-1p85-install.png){ loading="lazy" }
 <div align="center"><em>SF32LB52-ULP — configuração de referência para um dispositivo vestível</em></div>
@@ -52,7 +52,7 @@ Use esses nomes como aliases da mesma família ao procurar documentação de har
 - Cristal principal de 48 MHz e cristal RTC de 32,768 kHz
 - Antena PCBA integrada à placa
 - Display AMOLED de 1,85 polegadas, resolução de 390 × 450
-- Interface de display Quad-SPI com suporte a touch
+- Interface de display Quad-SPI com suporte a toque
 - Microfone MEMS integrado
 - Saída de áudio analógico com amplificador de alto-falante classe D
 - Conector para alto-falantes externos de 3 W / 4 Ω ou 2 W / 8 Ω
@@ -74,9 +74,9 @@ Escolha a SF32LB52-DevKit-ULP / 立创黄山派 quando o objetivo for validar o 
 
 - Desenvolver protótipos de relógios, pulseiras e dispositivos vestíveis com vários sensores
 - Avaliar o comportamento da interface AMOLED na plataforma SF32LB52x
-- Testar em conjunto touch, sensores de movimento, magnéticos e de luz ambiente, áudio, vibração e LED RGB
+- Testar em conjunto toque, sensores de movimento, magnéticos e de luz ambiente, áudio, vibração e LED RGB
 - Medir os caminhos de corrente da bateria, do sistema e de 3,3 V em repouso e durante a operação ativa
-- Validar sequências de despertar acionadas por botões, sensores, touch ou temporizadores do firmware
+- Validar sequências de despertar acionadas por botões, sensores, toque ou temporizadores do firmware
 - Comparar o consumo de um sistema próximo ao produto final com as estimativas iniciais feitas em placas DevKit mais simples
 
 Para uma placa de avaliação geral com foco em display, use a [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md). Para protótipos compactos com módulo soldado à placa, use a [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md). Para ter acesso direto ao maior número de pinos durante o bring-up inicial na bancada, use a [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md).
@@ -96,7 +96,7 @@ Para uma placa de avaliação geral com foco em display, use a [SF32LB52-DevKit-
 | Display | AMOLED de 1,85 polegadas (ZC-A1D85W-010), 390 × 450, brilho de 800 cd/m², Quad-SPI |
 | Driver do display | CO5300AF-01 |
 | CI de alimentação do display | BV6802W |
-| Controlador touch | FT6146-M00 |
+| Controlador de toque | FT6146-M00 |
 | Microfone | Microfone MEMS integrado |
 | Saída de áudio | Amplificador classe D, conector externo GH-1,25 mm para alto-falante |
 | Armazenamento | Cartão MicroSD via SPI |
@@ -110,7 +110,7 @@ Para uma placa de avaliação geral com foco em display, use a [SF32LB52-DevKit-
 
 </div>
 
-**Os códigos dos componentes variam entre fontes ou revisões; confirme antes de projetar.** O guia SiFli V1.0.0 da [placa Huangshan Pi][Guia SiFli Huangshan Pi] identifica o carregador SY6103, o OVP SY5320 e o LED RGB SK6812MINI-HS. A [wiki de hardware da LCKFB][Wiki de hardware da LCKFB], sem revisão identificada, cita o OVP LP5305AQVF e o LED RGB WS2812B-2020; para o carregador, informa AW32001ECSR na lista de características e AW23001ECSR na seção sobre carga. As fontes não permitem determinar se as diferenças decorrem de outra revisão ou de documentação desatualizada. Use os valores SiFli V1.0.0 apenas para essa referência documentada; antes de usar especificações próprias de um componente, confira as marcações, o esquemático e a BOM da unidade.
+**Os códigos dos componentes variam entre fontes ou revisões; confirme antes de projetar.** O guia SiFli V1.0.0 da [placa Huangshan Pi][Original SiFli Huangshan Pi Guide] identifica o carregador SY6103, o OVP SY5320 e o LED RGB SK6812MINI-HS. A [wiki de hardware da LCKFB][LCKFB Hardware Wiki], sem revisão identificada, cita o OVP LP5305AQVF e o LED RGB WS2812B-2020; para o carregador, informa AW32001ECSR na lista de características e AW23001ECSR na seção sobre carga. As fontes não permitem determinar se as diferenças decorrem de outra revisão ou de documentação desatualizada. Use os valores SiFli V1.0.0 apenas para essa referência documentada; antes de usar especificações próprias de um componente, confira as marcações, o esquemático e a BOM da unidade.
 
 ## Conteúdo do kit { #package-contents }
 
@@ -188,10 +188,10 @@ O nome exato do alvo de placa no SiFli-SDK é `sf32lb52-lchspi-ulp`; use esse no
 | PA44 | VBUS_DET, detecção da conexão do carregador |
 | PA43 | KEY2 |
 | PA42 | Audio_PA_EN |
-| PA41 | Interrupção do touch |
+| PA41 | Interrupção do toque |
 | PA40 / PA39 | SCL / SDA do sensor I2C1, conforme a tabela de atribuição GPIO; veja abaixo a divergência referente ao pino do conector |
 | PA38 | Controle da chave de VSYS para VSYS_1 |
-| PA37 / PA33 | SCL / SDA do I2C do touch |
+| PA37 / PA33 | SCL / SDA do I2C do toque |
 | PA36 / PA35 | USB DM / DP |
 | PA34 | Botão HOME e reset após pressionamento longo de 10 s |
 | PA32 | Dados do LED RGB |
@@ -239,18 +239,18 @@ O conector de 30 pinos disponibiliza sinais de alimentação, USB, sensores, dis
 
 **Divergência na pinagem — confirme antes de conectar:** Na tabela GPIO SiFli V1.0.0, o SDA do sensor I2C1 corresponde a PA39; na tabela do conector de 30 pinos, o pino 14 aparece como PB39/I2C1_SDA e o pino 16 como PA40/I2C1_SCL. A documentação da LCKFB também apresenta a diferença entre PA39 e PB39, sem identificar a revisão da placa nem conciliar as entradas. O pad do MCU e a trilha ligados ao pino 14 não estão confirmados. Antes de conectar um periférico, consulte o esquemático/BOM da unidade e verifique a continuidade; não presuma que PA39 e PB39 sejam intercambiáveis.
 
-## Interface de display e touch { #display-and-touch-interface }
+## Interface de display e toque { #display-and-touch-interface }
 
 A placa usa um display AMOLED e disponibiliza um conjunto de sinais QSPI em um FPC de 22 pinos. A tabela SiFli V1.0.0 marca os pinos 5-10 como NC; a tabela abaixo inclui as 22 posições e identifica explicitamente esses pinos sem conexão.
 
-<div align="center"><em>Mapa dos sinais do FPC QSPI de 22 pinos para display e touch</em></div>
+<div align="center"><em>Mapa dos sinais do FPC QSPI de 22 pinos para display e toque</em></div>
 
 <div align="center" markdown>
 
 | Pino | Sinal | Função |
 | :--- | :--- | :--- |
 | 1 | VBAT | Saída VBAT no lado do display |
-| 2 | PA01 | PWM da retroiluminação para uso com tela TFT |
+| 2 | PA01 | PWM da retroiluminação para uso com display TFT |
 | 3 | PA07 | QSPI D2 |
 | 4 | PA08 | QSPI D3 |
 | 5 | NC | Sem conexão |
@@ -266,10 +266,10 @@ A placa usa um display AMOLED e disponibiliza um conjunto de sinais QSPI em um F
 | 15 | PA03 | Chip select QSPI/SPI |
 | 16 | PA06 | QSPI D1 / SPI DC |
 | 17 | VDD_3V3 | Saída de 3,3 V |
-| 18 | PA41 | Interrupção do touch |
-| 19 | PA33 | SDA do I2C do touch |
-| 20 | PA37 | SCL do I2C do touch |
-| 21 | PA09 | Reset do touch |
+| 18 | PA41 | Interrupção do toque |
+| 19 | PA33 | SDA do I2C do toque |
+| 20 | PA37 | SCL do I2C do toque |
+| 21 | PA09 | Reset do toque |
 | 22 | GND | Terra |
 
 </div>
@@ -284,27 +284,27 @@ Para obter medições úteis de consumo ultrabaixo:
 - Mantenha o jumper correspondente fechado em todo barramento que não estiver sendo medido.
 - Antes de medir a corrente em repouso, desative as cargas evitáveis, como efeitos do LED RGB, logs de depuração, atualização do display e consultas periódicas aos sensores.
 - Em cada medição, registre a revisão da placa, o commit do firmware, a tensão da bateria ou da fonte, a configuração dos jumpers e o estado dos sensores.
-- Meça tanto a corrente estável em repouso quanto a corrente durante eventos de touch, interrupções de sensores, atividade Bluetooth, ativação do display e vibração.
+- Meça tanto a corrente estável em repouso quanto a corrente durante eventos de toque, interrupções de sensores, atividade Bluetooth, ativação do display e vibração.
 
 ## Documentos relacionados { #related-documents }
 
-[Apresentação do chip SF32LB52x]: ../chips/SF32LB52x.md
-[Guia de projeto de hardware SF32LB52x]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
-[Artigo original da Wiki da SiFli]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-ULP.md
-[Guia SiFli Huangshan Pi]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-%E9%BB%84%E5%B1%B1%E6%B4%BE.md
-[Página SiFli SDK da placa ULP]: https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/boards/sf32lb52-lchspi-ulp/doc/index.html
-[Guia SiFli de modelos de módulos]: https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html
-[Página do projeto LCKFB]: https://lckfb.com/project/detail/lckfb-hspi-sf32lb52-ulp?param=baseInfo
-[Wiki de hardware da LCKFB]: https://wiki.lckfb.com/zh-hans/hspi-sf32lb52/hardware/board.html
-[Comprar amostras]: https://sifli.taobao.com/
+[SF32LB52x Chip Introduction]: ../chips/SF32LB52x.md
+[SF32LB52x Hardware Design Guide]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
+[Original SiFli Wiki Article]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-ULP.md
+[Original SiFli Huangshan Pi Guide]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-%E9%BB%84%E5%B1%B1%E6%B4%BE.md
+[SiFli SDK ULP Board Page]: https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/boards/sf32lb52-lchspi-ulp/doc/index.html
+[SiFli Module Model Guide]: https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html
+[LCKFB Project Page]: https://lckfb.com/project/detail/lckfb-hspi-sf32lb52-ulp?param=baseInfo
+[LCKFB Hardware Wiki]: https://wiki.lckfb.com/zh-hans/hspi-sf32lb52/hardware/board.html
+[Buy Samples]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-microchip: __[Apresentação do chip SF32LB52x]__
-- :fontawesome-solid-file-lines: __[Guia de projeto de hardware SF32LB52x]__
-- :fontawesome-brands-github: __[Artigo original da Wiki da SiFli]__
-- :fontawesome-solid-up-right-from-square: __[Página do projeto LCKFB]__
-- :fontawesome-solid-book: __[Wiki de hardware da LCKFB]__
-- :fontawesome-solid-cart-shopping: __[Comprar amostras]__
+- :fontawesome-solid-microchip: __[Apresentação do chip SF32LB52x][SF32LB52x Chip Introduction]__
+- :fontawesome-solid-file-lines: __[Guia de projeto de hardware SF32LB52x][SF32LB52x Hardware Design Guide]__
+- :fontawesome-brands-github: __[Artigo original da Wiki da SiFli][Original SiFli Wiki Article]__
+- :fontawesome-solid-up-right-from-square: __[Página do projeto LCKFB][LCKFB Project Page]__
+- :fontawesome-solid-book: __[Wiki de hardware da LCKFB][LCKFB Hardware Wiki]__
+- :fontawesome-solid-cart-shopping: __[Comprar amostras][Buy Samples]__
 
 </div>

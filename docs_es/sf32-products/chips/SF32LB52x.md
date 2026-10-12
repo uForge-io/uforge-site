@@ -52,7 +52,7 @@ Los grupos no son intercambiables directamente en una misma placa: las familias 
 -->
 
 [Comprar muestras]: https://sifli.taobao.com/
-[Comprar kits de desarrollo]: https://sifli.taobao.com/
+[Comprar placas de desarrollo]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
@@ -64,7 +64,7 @@ Los grupos no son intercambiables directamente en una misma placa: las familias 
 - :fontawesome-solid-file-lines: __[Guía de diseño de hardware (520/3/5/7)]__
 - :fontawesome-solid-file-lines: __[Guía de diseño de hardware (52B/D/E/G/J)]__
 - :fontawesome-solid-cart-shopping: __[Comprar muestras]__
-- :fontawesome-solid-cart-shopping: __[Comprar kits de desarrollo]__
+- :fontawesome-solid-cart-shopping: __[Comprar placas de desarrollo]__
 
 </div>
 
@@ -177,10 +177,10 @@ Siga estos pasos para convertir una selección preliminar de SF32LB52x en un dis
 
 [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) combina el chip SF32LB525UC6 —que, en la configuración estándar, incorpora 8 MB de OPI-PSRAM en su encapsulado— con una red de adaptación de RF. El módulo mide 27,9 × 18,0 × 3,1 mm y está pensado para proyectos que necesitan las prestaciones de SF32LB52 sin asumir el diseño y la validación de RF a nivel de chip.
 
-### Kits de desarrollo { #development-kits }
+### Placas de desarrollo { #development-kits }
 
 - [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md) es la placa principal del ecosistema de módulos SF32LB52 para la puesta en marcha con pantalla; ofrece conexiones LCD QSPI y MCU/8080.
-- [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) es una placa núcleo compacta con alimentación externa, pensada para poner en marcha rápidamente el firmware, los GPIO y las funciones de bajo consumo en variantes de la clase 52B/52J.
+- [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) es una placa núcleo compacta con alimentación externa, pensada para poner en marcha rápidamente el firmware, las GPIO y las funciones de bajo consumo en variantes de la clase 52B/52J.
 - [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) es la placa de desarrollo más pequeña de la serie 52 y resulta útil cuando el producto final tiene restricciones de espacio.
 - [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) está orientada a la evaluación de diseños con batería y a las primeras pruebas de productos compactos de bajo consumo.
 

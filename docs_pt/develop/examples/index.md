@@ -21,11 +21,11 @@ O melhor exemplo nem sempre é o menor. Escolha um que já inclua a parte mais c
 | Área | Comece por |
 |:-----|:-----------|
 | Primeira execução | `example/get-started/hello_world/rtt/project` |
-| LED / GPIO | `example/get-started/blink/rtt` ou exemplos de GPIO para HAL e RT-Device. |
+| Blink / GPIO | `example/get-started/blink/rtt` ou exemplos de GPIO para HAL e RT-Device. |
 | Bluetooth | Exemplos de BLE, Bluetooth clássico, LE Audio, taxa de transferência de dados, beacon, OTA e perfis. Comece pelo mapa de tarefas dos [exemplos do SDK Bluetooth](../../learn/bluetooth/bluetooth-sdk-examples.md). |
 | Gráficos | Demos LVGL, integração com ferramentas de design, widgets, recursos comprimidos, animação/mídia e exemplos específicos para cada display. Comece pelo mapa de tarefas dos [exemplos de LVGL do SDK](../../learn/graphics/lvgl-sdk-examples.md). |
 | Áudio | Reprodução, gravação, captura PDM, codec, Opus, MP3, mixagem e áudio USB quando houver suporte. Comece pelo mapa de tarefas dos [exemplos de áudio do SDK](../../learn/audio/audio-sdk-examples.md). |
-| Energia | Estados de gerenciamento de energia (PM), GPIO, processador, Bluetooth, display, interface do usuário e cenários de dispositivos vestíveis. Comece pelo mapa de tarefas dos [exemplos de baixo consumo do SDK](../../learn/low-power/low-power-sdk-examples.md). |
+| Baixo consumo | Estados de gerenciamento de energia (PM), GPIO, processador, Bluetooth, display, interface do usuário e cenários de dispositivos vestíveis. Comece pelo mapa de tarefas dos [exemplos de baixo consumo do SDK](../../learn/low-power/low-power-sdk-examples.md). |
 | Armazenamento | Exemplos de sistema de arquivos, Flash, SD e partições. |
 | USB | Exemplos CherryUSB de dispositivo e host. |
 | IA | Exemplos de HAL NNACC e RT-Device. |
@@ -76,7 +76,7 @@ Por exemplo, um produto de áudio Bluetooth deve começar por um exemplo de áud
 4. Compile novamente e teste.
 5. Faça commit ou registre a alteração antes de adicionar outro subsistema.
 
-Esse fluxo é mais lento na primeira hora e muito mais rápido depois da primeira falha difícil.
+Esse fluxo consome mais tempo na primeira hora, mas poupa muito tempo quando ocorre o primeiro problema sério.
 
 ## Evidências a manter { #evidence-to-keep }
 
@@ -88,12 +88,12 @@ Para cada exemplo que se tornar a base de um produto, registre:
 - Pinos e periféricos necessários.
 - Saída serial esperada.
 - Limitações conhecidas.
-- Consumo de memória, se disponível.
+- Uso de memória, se disponível.
 - Comando de recuperação.
 
 ## Critério para escolher exemplos { #example-selection-rule }
 
-Escolha o exemplo que corresponda à parte mais restrita do produto:
+Escolha o exemplo que corresponda à parte do produto com mais restrições:
 
 - Para produtos Bluetooth, comece pelo perfil mais próximo.
 - Para produtos com display, comece pelo fluxo de display e LVGL.

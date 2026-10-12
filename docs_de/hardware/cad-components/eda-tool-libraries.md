@@ -13,7 +13,7 @@ tags:
 
 SiFli veröffentlicht Schaltplansymbol- und PCB-Footprint-Bibliotheken für die SF32-Chip- und -Modulfamilie. Verwenden Sie diese Dateien als Ausgangspunkt für die Schaltplanerfassung und das PCB-Layout, anstatt Symbole, Pinbelegungen und Pad-Layouts von Hand aus dem Datenblatt nachzuzeichnen.
 
-Die Bibliotheken reduzieren das Risiko bei der Inbetriebnahme, ersetzen jedoch nicht das Datenblatt, die Gehäusezeichnung oder den gerätespezifischen Hardware-Designleitfaden. Vergleichen Sie vor der Freigabe immer das ausgewählte Bibliotheksbauteil mit der genauen Teilenummer, dem Gehäuse, der Pinbelegung, dem Pad-Layout und den Layoutvorgaben für Ihr Design.
+Die Bibliotheken reduzieren das Risiko bei der Inbetriebnahme, ersetzen jedoch nicht das Datenblatt, die Gehäusezeichnung oder den gerätespezifischen Hardware-Design-Leitfaden. Vergleichen Sie vor der Freigabe immer das ausgewählte Bibliotheksbauteil mit der genauen Teilenummer, dem Gehäuse, der Pinbelegung, dem Pad-Layout und den Layoutvorgaben für Ihr Design.
 
 <div class="grid cards" markdown>
 
@@ -33,7 +33,7 @@ Die Bibliotheken reduzieren das Risiko bei der Inbetriebnahme, ersetzen jedoch n
 
 <div align="center" markdown style="max-width: 100%; overflow-x: auto;">
 
-| EDA-Tool | Datei | Format | Inhalt | Verteilung |
+| EDA-Tool | Datei | Format | Inhalt | Bereitstellung |
 |:---|:---|:---|:---|:---|
 | JLCEDA / LCEDA Pro | `ProPrj_sifli-iclib_2026-04-20.epro2` | LCEDA-Pro-Projektarchiv | Schaltplansymbole und PCB-Footprints | Direkter Download |
 | PADS | `PADS-SIFLI-IC.ZIP` | Mentor/Siemens-PADS-Bibliotheksarchiv | Schaltplansymbole und PCB-Decals | Direkter Download |
@@ -42,7 +42,7 @@ Die Bibliotheken reduzieren das Risiko bei der Inbetriebnahme, ersetzen jedoch n
 
 </div>
 
-JLCEDA / LCEDA Pro und PADS werden als Archive bereitgestellt; OrCAD ist eine eigenständige `.OLB`-Bibliotheksdatei. Die Wiki-Übersicht führt nicht auf, welche einzelnen Bauteile enthalten sind. Importieren Sie die Datei in das vorgesehene EDA-Tool und prüfen Sie, ob das ausgewählte Bauteil enthalten ist.
+JLCEDA / LCEDA Pro und PADS werden als Archive bereitgestellt; OrCAD besteht aus einer eigenständigen `.OLB`-Bibliotheksdatei. Die Wiki-Übersicht nennt nicht, welche einzelnen Bauteile enthalten sind. Importieren Sie die Datei in das vorgesehene EDA-Tool und prüfen Sie, ob das ausgewählte Bauteil enthalten ist.
 
 Das verlinkte KiCad-Repository bietet öffentlichen Quellcode, versionierte Releases und eine Tabelle unterstützter Bauteile. Das erleichtert die Prüfung des Umfangs, garantiert aber nicht, dass jede SF32-Variante enthalten ist.
 
@@ -65,14 +65,14 @@ Das Repository [OpenSiFli/kicad-libraries](https://github.com/OpenSiFli/kicad-li
 Die Tabelle gibt den Stand der am 2026-10-05 geprüften Repository-README wieder, nicht eine Prüfung jedes Pins in jedem Download-Paket. Chipgruppen mit Platzhaltern belegen keine Unterstützung für jede genaue Bestellnummer. Prüfen Sie Symbol, Footprint und Gehäuse des gewählten Bauteils in der tatsächlich installierten Datei.
 
 !!! note "Teilenummern in der OpenSiFli-README richtig lesen"
-    Die README der OpenSiFli-KiCad-Bibliothek listet die Chipzeilen als `SF32LB52XUx` und `SF32LB52xUx`. In der SiFli-Namenskonvention ist das großgeschriebene `X` ein Platzhalter für die alphabetischen Varianten mit externer Stromversorgung; das kleingeschriebene `x` steht für die numerischen, batteriebetriebenen Varianten. Diese Seite erweitert diese Zeilen zu den expliziten Gruppen SF32LB52B/D/E/G/J und SF32LB520/3/5/7, die an anderer Stelle in der μForge-Dokumentation verwendet werden.
+    Die README der OpenSiFli-KiCad-Bibliothek führt die Chipzeilen als `SF32LB52XUx` und `SF32LB52xUx` auf. In der SiFli-Namenskonvention steht das großgeschriebene `X` als Platzhalter für die alphabetischen Varianten mit externer Stromversorgung; das kleingeschriebene `x` steht für die numerischen, akkubetriebenen Varianten. Diese Seite löst die Platzhalter in die expliziten Gruppen SF32LB52B/D/E/G/J und SF32LB520/3/5/7 auf, die auch an anderer Stelle in der μForge-Dokumentation verwendet werden.
 
 Die README von [OpenSiFli/kicad-libraries](https://github.com/OpenSiFli/kicad-libraries) bezeichnet die Installation aus dem Katalog des Package and Content Manager als noch nicht unterstützt. Für die manuelle Installation beschreibt sie, ein Release-ZIP herunterzuladen und im Manager **Install from file...** zu wählen. Auf der Seite zu Release `1.0.0` wird außerdem beschrieben, das ZIP in das KiCad-Bibliotheksverzeichnis zu entpacken oder es mit `metadata.json` über den Manager zu installieren. Folgen Sie der Anleitung des verwendeten Releases. Laut README heißen die installierten Symbol- und Footprint-Bibliotheken `PCM_SiFli`.
 
 ## Prüfcheckliste { #review-checklist }
 
 - [ ] Gleichen Sie die Bibliotheks-Teilenummer und das Gehäusesuffix vor der Schaltplanfreigabe mit der Stückliste ab.
-- [ ] Vergleichen Sie Symbol-Pinnamen und Pinnummern mit dem Chip-Datenblatt und dem gerätespezifischen Hardware-Designleitfaden.
+- [ ] Vergleichen Sie Symbol-Pinnamen und Pinnummern mit dem Chip-Datenblatt und dem gerätespezifischen Hardware-Design-Leitfaden.
 - [ ] Überprüfen Sie Footprint-Pad-Größe, Rastermaß, Courtyard, Behandlung des freiliegenden Pads und Montagefreiraum anhand der offiziellen Gehäusezeichnung.
 - [ ] Behandeln Sie 3D-Modelle nur als Platzierungs- und mechanische Passform-Hilfsmittel; verwenden Sie sie nicht als Fertigungs- oder Montagemaße.
 - [ ] Prüfen Sie bei JLCEDA / LCEDA Pro, PADS und OrCAD nach dem Import, welche Bauteile unterstützt werden; die Wiki-Download-Übersicht enthält keine Angaben für jedes einzelne Bauteil.

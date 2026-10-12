@@ -18,9 +18,9 @@ Esta guía organiza las decisiones necesarias para llevar un concepto basado en 
 
 | Etapa | Decisión clave | Empiece aquí | Criterio de salida |
 |:------|:-------------|:-----------|:---------------|
-| 1. Definir los requisitos | Rol del dispositivo en la conexión inalámbrica, pantalla, audio, IA, almacenamiento, alimentación y presupuesto de consumo energético, área ocupada por el encapsulado y vida útil prevista del producto. | [Familia SF32](SF32_family.md) | Lista priorizada de candidatos con las interfaces obligatorias y las restricciones claramente definidas. |
-| 2. Elegir el nivel de integración | PCB personalizada con el chip montado directamente, módulo con una placa portadora o placa de desarrollo para la validación inicial. | [Selector de productos SF32](../product-selector.md) | Un dispositivo y un enfoque de integración preferidos, junto con la placa o el módulo disponible más cercano. |
-| 3. Validar el entorno de software de referencia | Cadena de herramientas, proceso de grabación, salida serie y un ejemplo de referencia que funcione en la placa seleccionada o en la más cercana. | [Primeros pasos](../../getting-started/index.md) | Proceso reproducible de compilación y grabación, con el registro de consola capturado. |
+| 1. Definir los requisitos | Rol del dispositivo en la conexión inalámbrica, pantalla, audio, IA, almacenamiento, alimentación y presupuesto de consumo, área ocupada por el encapsulado y vida útil prevista del producto. | [Familia SF32](SF32_family.md) | Lista priorizada de candidatos con las interfaces obligatorias y las restricciones claramente definidas. |
+| 2. Elegir el nivel de integración | PCB personalizada con el chip montado directamente, módulo con una placa portadora o placa de desarrollo para la validación inicial. | [Selector de productos SF32](../product-selector.md) | Dispositivo y nivel de integración preferidos, junto con la placa o el módulo disponible que mejor se ajuste a las necesidades. |
+| 3. Validar la configuración de software de referencia | Cadena de herramientas, proceso de grabación, salida serie y un ejemplo de referencia que funcione en la placa seleccionada o en la más cercana. | [Primeros pasos](../../getting-started/index.md) | Proceso reproducible de compilación y grabación, con el registro de consola capturado. |
 | 4. Validar los riesgos del producto | Comportamiento específico del producto en pantalla, Bluetooth, audio, IA y almacenamiento, además de la ruta de alimentación y el perfil de consumo energético. | [Tutoriales](../../getting-started/tutorials/overview.md), [Aprender](../../learn/index.md) y [Desarrollo](../../develop/index.md) | Resultados medidos de los subsistemas que condicionan el coste, el consumo o el plazo. |
 | 5. Cerrar el plan de implementación | Esquemático, diseño de PCB, planificación de memoria y particiones, BOM, estrategia de pruebas, comportamiento de actualización y recuperación, y supuestos de fabricación. | [Diseño para producción](../../hardware/design-for-production.md) | Paquete de diseño revisado y lista explícita de las validaciones pendientes. |
 
@@ -37,8 +37,8 @@ Una vez establecida la base inicial de hardware y software, elija el [diseño de
 - [ ] El chip o módulo elegido cumple los requisitos del producto en cuanto a interfaces, memoria, encapsulado, alimentación y consumo energético.
 - [ ] Se dispone de una placa compatible o de un plan concreto para validar el hardware personalizado.
 - [ ] El equipo de producto acepta la plataforma de software y su nivel de madurez.
-- [ ] Antes de cerrar las decisiones sobre particiones y BOM, están definidos los requisitos de recuperación, OTA/DFU, registro y programación en fábrica.
-- [ ] Se han identificado la guía de diseño de hardware, la lista de comprobación, el AVL y la biblioteca EDA adecuados.
+- [ ] Antes de cerrar las decisiones sobre particiones y BOM, están definidos los requisitos de recuperación, OTA/DFU, registro y grabación en fábrica.
+- [ ] Se han identificado la guía de diseño de hardware, la lista de comprobación, la AVL y la biblioteca EDA adecuados.
 
 !!! note "Contenido generado automáticamente"
     Esta página se recopiló y redactó sin un documento fuente específico. Verifique las afirmaciones técnicas con la documentación oficial de SiFli antes de basarse en ellas.

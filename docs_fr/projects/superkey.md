@@ -72,7 +72,7 @@ Avant de commencer, préparez :
 |:-----------|:----------------------|:-----|:-------|:-------------|:--------------------------------------------------|
 | Assemblage matériel ouvert SuperKey | Configuration SF32LB52 avec trois écrans GC9107 de 128 × 128, trois LED RGB, quatre touches, un encodeur rotatif, un SHT30 et USB, selon le projet | Contrôle du clavier macro, affichage, entrée, capteurs et USB HID/CDC | Obligatoire | [Conception ouverte `sf32-keyboard`](https://oshwhub.com/sifli/sf32-keyboard) ; [dépôt SuperKey](https://github.com/SiFliSparks/SuperKey) | Les fichiers de conception ne constituent pas une spécification de carte assemblée disponible à l'achat ; consigner les révisions de la PCB et de l'assemblage |
 | Ordinateur hôte et connexion USB de données | Windows 10/11 est le parcours principal documenté ; connexion USB de données | Exécuter SuperKeyHub, fournir l'hôte HID/CDC et permettre le flashage/la récupération | Obligatoire | [Documentation SuperKey](https://sparks.sifli.com/projects/superkey/) | Le dépôt SuperKeyHub annonce la prise en charge de Windows/macOS ; valider CDC, DFU, flashage et récupération sur l'OS choisi |
-| Compte et configuration API QWeather | API Key, API Host et configuration de la ville | Fonction météo facultative | Optionnel | [QWeather](https://www.qweather.com/) | Ne pas verser les identifiants dans le dépôt ; vérifier les conditions et la disponibilité du service |
+| Compte et configuration API QWeather | API Key, API Host et configuration de la ville | Fonction météo optionnelle | Optionnel | [QWeather](https://www.qweather.com/) | Ne pas verser les identifiants dans le dépôt ; vérifier les conditions et la disponibilité du service |
 
 </div>
 
@@ -91,6 +91,7 @@ Avant de commencer, préparez :
 </div>
 
 ## Choisir une configuration de référence prise en charge { #choose-a-supported-baseline }
+
 La liste des releases amont inclut le firmware [v1.4.2](https://github.com/SiFliSparks/SuperKey/releases/tag/v1.4.2), qui constitue un point de départ figé. Les sources citées ne précisent pas de version SuperKeyHub compatible. Choisissez et figez une release ou un commit de Hub, testez avec v1.4.2 la télémétrie, la configuration et DFU, puis consignez le couple testé au lieu de déduire la compatibilité des numéros de version.
 
 <div align="center"><em>Tableau : choix de la base SuperKey</em></div>
@@ -102,7 +103,7 @@ La liste des releases amont inclut le firmware [v1.4.2](https://github.com/SiFli
 | Firmware | SuperKey v1.4.2 ou commit validé par l'équipe | Les versions du protocole firmware et hôte doivent correspondre |
 | Application compagnon | Release ou commit SuperKeyHub validé avec le firmware v1.4.2 | Les sources citées ne précisent pas de couple fixe ; valider les données CDC, la configuration et DFU sur l'OS choisi |
 | Cible de compilation | `sf32lb52-superkey`, avec les fichiers de carte sous `app/boards` | Il ne s'agit pas d'une cible générique pour carte de développement SF32LB52 |
-| Communication | Valider d'abord l'USB composite HID + CDC ; valider séparément l'UART à 1 Mbit/s si utilisé | La mention « USB énuméré » ne prouve pas que les interfaces HID et CDC fonctionnent toutes deux |
+| Communication | Valider d'abord l'USB composite HID + CDC ; valider séparément l'UART à 1 Mbit/s si utilisé | Le fait que le périphérique USB soit énuméré ne prouve pas que les interfaces HID et CDC fonctionnent toutes deux |
 | Mise à jour | DFU CDC déclenchée par l'application compagnon, avec conservation d'une voie filaire de flashage/récupération | Ce n'est pas une solution de mise à jour terrain tant que l'interruption, les incompatibilités et la récupération n'ont pas été validées |
 
 </div>
@@ -165,11 +166,11 @@ Répartissez les pannes en cinq domaines : matériel/écran du périphérique, e
 
 **Éléments à conserver :** révision matérielle, tag/commit du firmware, commit du SDK, version de l'application compagnon, système d'exploitation, configuration du port et de l'API, énumération USB, journaux, affichages et relevé des entrées.
 
-**Critère de sortie de l'étape 1 :** deux démarrages à froid valident les entrées HID, l'actualisation des données CDC et l'interaction avec les trois écrans ; chaque domaine de panne peut être identifié par les journaux ou un état observable.
+**Critère de sortie du point de contrôle 1 :** deux démarrages à froid valident les entrées HID, l'actualisation des données CDC et l'interaction avec les trois écrans ; chaque domaine de panne peut être identifié par les journaux ou un état observable.
 
 ## Étape 2 — Valider les limites de défaillance et de récupération { #stage-2-validate-fault-and-recovery-boundaries }
 
-**Objectif :** vérifier que les interruptions courantes en environnement de bureau ne réduisent pas l'appareil à un démonstrateur qu'il faut reflasher pour récupérer.
+**Objectif :** vérifier que les interruptions courantes en environnement de bureau ne réduisent pas l'appareil à un démonstrateur qu'il faut flasher à nouveau pour récupérer.
 
 <div align="center"><em>Tableau : tests de panne et de récupération SuperKey</em></div>
 
@@ -186,7 +187,7 @@ Répartissez les pannes en cinq domaines : matériel/écran du périphérique, e
 
 </div>
 
-**Critère de sortie de l'étape 2 :** chaque panne applicable dispose d'un résultat reproductible de détection et de récupération, sans réparation manuelle d'état non documentée.
+**Critère de sortie du point de contrôle 2 :** chaque panne applicable dispose d'un résultat reproductible de détection et de récupération, sans réparation manuelle d'état non documentée.
 
 ## Étape 3 — Établir une base de code reproductible { #stage-3-build-a-reproducible-source-baseline }
 
@@ -197,7 +198,7 @@ Répartissez les pannes en cinq domaines : matériel/écran du périphérique, e
 3. Conservez le journal de compilation, les sorties mémoire/partition, le script de flashage, les images générées et le journal série.
 4. Recompilez sur un second ordinateur ou après suppression du répertoire de compilation, flashez le même matériel et répétez les tests de non-régression principaux.
 
-**Critère de sortie de l'étape 3 :** aucun fichier non suivi, artefact obsolète ou remplacement manuel de binaire n'est nécessaire pour produire une image qui réussit l'étape 2.
+**Critère de sortie du point de contrôle 3 :** aucun fichier non suivi, artefact obsolète ou remplacement manuel de binaire n'est nécessaire pour produire une image qui réussit l'étape 2.
 
 ## Étape 4 — Adapter une variable produit à la fois { #stage-4-adapt-one-product-variable-at-a-time }
 
@@ -217,7 +218,7 @@ Répartissez les pannes en cinq domaines : matériel/écran du périphérique, e
 
 </div>
 
-**Critère de sortie de l'étape 4 :** la modification est relue, l'image d'origine peut être restaurée et les tests HID, CDC, écran, entrées, veille et récupération réussissent.
+**Critère de sortie du point de contrôle 4 :** la modification est relue, l'image d'origine peut être restaurée et les tests HID, CDC, écran, entrées, veille et récupération réussissent.
 
 ## Étape 5 — Revue de préparation produit { #stage-5-product-readiness-review }
 
@@ -230,12 +231,14 @@ Avant de concevoir du matériel spécifique ou de lancer une présérie, l'équi
 - Comment restaurer la configuration, les mappages de touches et l'état de mise à jour après une coupure d'alimentation ou un stockage endommagé ?
 - La PCB ouverte, le boîtier, les polices, icônes, musiques et API tierces sont-ils sous licence pour la distribution prévue ?
 
-**Critère de sortie de l'étape 5 :** chaque risque résiduel a un responsable, des preuves et une décision de traitement ; l'équipe a décidé de poursuivre, différer ou arrêter.
+**Critère de sortie du point de contrôle 5 :** chaque risque résiduel a un responsable, des preuves et une décision de traitement ; l'équipe a décidé de poursuivre, différer ou arrêter.
 
 ## Passage à la conception du produit { #handoff-to-product-design }
+
 Transférez à la conception le choix du SF32 et de la mémoire, les descripteurs USB HID/CDC, les connexions des trois écrans et du rétroéclairage, les interfaces d'entrée et de capteur, la politique d'alimentation et de veille, les partitions du système de fichiers et des mises à jour, le protocole compagnon, les points de test en production et le chemin de récupération validé. Consultez [SF32LB52x](../sf32-products/chips/SF32LB52x.md), le [guide de conception matérielle SF32LB52x](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [SiFli-SDK : compiler, flasher et surveiller la sortie série](../develop/platforms/sifli-sdk/build-flash-monitor.md) et [Conception pour la production](../hardware/design-for-production.md).
 
 ## Sources de référence { #authoritative-sources }
+
 - [Dépôt du firmware SiFliSparks/SuperKey](https://github.com/SiFliSparks/SuperKey)
 - [Version SuperKey v1.4.2](https://github.com/SiFliSparks/SuperKey/releases/tag/v1.4.2)
 - [Dépôt de l'application compagnon SiFliSparks/SuperKeyHub](https://github.com/SiFliSparks/SuperKeyHub)

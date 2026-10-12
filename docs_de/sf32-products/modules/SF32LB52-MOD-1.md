@@ -1,6 +1,6 @@
 ---
 icon: lucide/card-sim
-description: "SF32LB52-MOD-1: energiesparende Bluetooth-5.3-MCU-Modulfamilie für SF32LB52x mit integrierter HF-Schaltung, 48-MHz-Quarz und SKU-abhängigen Antennenoptionen."
+description: "SF32LB52-MOD-1: energiesparende Bluetooth-5.3-MCU-Modulfamilie für SF32LB52x mit integrierter RF-Schaltung, 48-MHz-Quarz und SKU-abhängigen Antennenoptionen."
 tags:
   - Hardware
   - Modul
@@ -10,9 +10,9 @@ tags:
 
 ## Überblick { #overview }
 
-SF32LB52-MOD-1 ist eine stromsparende Bluetooth-MCU-Modulfamilie auf Basis der SF32LB52x-Plattform. Die Standardvariante N16R8 verwendet den SF32LB525UC6. Das 27,9 × 18,0 × 3,1 mm große Modul vereint ein Dual-Core-System auf Basis von Arm Cortex-M33 STAR-MC1 mit HF-Schaltung, 48-MHz-Quarz und Antennenanschluss. Je nach Modul-SKU kommt eine Leiterplattenantenne auf dem Modul oder eine externe Antenne über einen IPEX-Anschluss zum Einsatz.
+SF32LB52-MOD-1 ist eine stromsparende Bluetooth-MCU-Modulfamilie auf Basis der SF32LB52x-Plattform. Die Standardvariante N16R8 verwendet den SF32LB525UC6. Das 27,9 × 18,0 × 3,1 mm große Modul vereint ein Dual-Core-System auf Basis von Arm Cortex-M33 STAR-MC1 mit RF-Schaltung, 48-MHz-Quarz und Antennenanschluss. Je nach Modul-SKU kommt eine Leiterplattenantenne auf dem Modul oder eine externe Antenne über einen IPEX-Anschluss zum Einsatz.
 
-DS5203 V0.3 dokumentiert eine Leiterplattenantenne auf dem Modul und nennt für ein weiteres Modell eine externe Antenne über IPEX; die Antennenausführung wird jedoch nicht den aufgeführten Speicher-SKUs zugeordnet. Klären Sie die genaue Antennenkonfiguration des gewählten Moduls mit SiFli, bevor Sie das Layout der Trägerplatine festlegen. Das Endprodukt muss weiterhin hinsichtlich seiner HF-Leistung validiert werden und die geltenden Produktzulassungsanforderungen erfüllen. Die herausgeführten Schnittstellen ermöglichen kompakte vernetzte Produkte mit den Bluetooth-, Grafik- und Audiofunktionen der Plattform.
+DS5203 V0.3 dokumentiert eine Leiterplattenantenne auf dem Modul und nennt für ein weiteres Modell eine externe Antenne über IPEX; die Antennenausführung wird jedoch nicht den aufgeführten Speicher-SKUs zugeordnet. Klären Sie die genaue Antennenkonfiguration des gewählten Moduls mit SiFli, bevor Sie das Layout der Trägerplatine festlegen. Das Endprodukt muss weiterhin hinsichtlich seiner RF-Leistung validiert werden und die geltenden Produktzulassungsanforderungen erfüllen. Die herausgeführten Schnittstellen ermöglichen kompakte vernetzte Produkte mit den Bluetooth-, Grafik- und Audiofunktionen der Plattform.
 
 Je nach Modul-SKU kann im Gehäuse des verwendeten Chips OPI-PSRAM integriert sein. Über die herausgeführten Modulschnittstellen stehen die wichtigsten Funktionen der Chipfamilie zur Verfügung, darunter GPIO, SPI, LCD, MPI, UART, I2C, PWM, SDIO, USB 2.0 FS und analoge Audiosignale.
 
@@ -21,7 +21,7 @@ Je nach Modul-SKU kann im Gehäuse des verwendeten Chips OPI-PSRAM integriert se
 
 ## Anwendungen { #applications }
 
-**SF32LB52-MOD-1 eignet sich für Produkte, die Bluetooth, Grafik und Audio benötigen und zugleich das HF- und Layout-Risiko reduzieren sollen.** Dazu zählen:
+**SF32LB52-MOD-1 eignet sich für Produkte, die Bluetooth, Grafik und Audio benötigen und zugleich das RF- und Layout-Risiko reduzieren sollen.** Dazu zählen:
 
 - Smartwatches, Fitnessarmbänder und tragbare Medizinprodukte
 - Bluetooth-Sensor-Hubs und vernetztes Zubehör
@@ -32,28 +32,28 @@ Je nach Modul-SKU kann im Gehäuse des verwendeten Chips OPI-PSRAM integriert se
 
 Ziehen Sie SF32LB52-MOD-1 in Betracht, wenn das Produkt eine oder mehrere der folgenden Eigenschaften erfordert:
 
-- HF-Integration auf Modulebene mit Optionen für Leiterplattenantenne und externe Antenne
+- RF-Integration auf Modulebene mit Optionen für Leiterplattenantenne und externe Antenne
 - Modulschnittstellen für die Bluetooth-, Grafik- und Audiofunktionen der SF32LB52x-Plattform
 - Weiterverwendung der Software und Peripheriefunktionen von SF32LB52x
 - Kompaktes Format für Wearables und HMI-Produkte mit begrenztem Bauraum
 
 ## Entwicklungsressourcen { #development-resources }
 
-[Moduldatenblatt]: https://downloads.sifli.com/user%20manual/DS5203-SF32LB52-MOD-1%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p3.pdf
-[Chipübersicht]: ../chips/SF32LB52x.md
-[Hardware-Designleitfaden]: ../../hardware/chip-guides/SF32LB52-MOD-1_hardware_design_guide.md
-[Originaler Hardwareleitfaden (wiki.sifli.com, EPD-Variante)]: https://wiki.sifli.com/en/hardware/SF32LB52-MOD-1-EPD-HW-Application.html
-[Muster bestellen]: https://sifli.taobao.com/
-[Entwicklungskits kaufen]: https://sifli.taobao.com/
+[Module Datasheet]: https://downloads.sifli.com/user%20manual/DS5203-SF32LB52-MOD-1%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p3.pdf
+[Chip Introduction]: ../chips/SF32LB52x.md
+[Hardware Design Guide]: ../../hardware/chip-guides/SF32LB52-MOD-1_hardware_design_guide.md
+[Original Design Guide (wiki.sifli.com, EPD variant)]: https://wiki.sifli.com/en/hardware/SF32LB52-MOD-1-EPD-HW-Application.html
+[Buy Samples]: https://sifli.taobao.com/
+[Buy Dev Kits]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Moduldatenblatt]__
-- :fontawesome-solid-microchip: __[Chipübersicht]__
-- :fontawesome-solid-file-lines: __[Hardware-Designleitfaden]__
-- :fontawesome-solid-file-lines: __[Originaler Hardwareleitfaden (wiki.sifli.com, EPD-Variante)]__
-- :fontawesome-solid-cart-shopping: __[Muster bestellen]__
-- :fontawesome-solid-cart-shopping: __[Entwicklungskits kaufen]__
+- :fontawesome-solid-file-pdf: __[Moduldatenblatt][Module Datasheet]__
+- :fontawesome-solid-microchip: __[Chipübersicht][Chip Introduction]__
+- :fontawesome-solid-file-lines: __[Hardware-Design-Leitfaden][Hardware Design Guide]__
+- :fontawesome-solid-file-lines: __[Originaler Hardwareleitfaden (wiki.sifli.com, EPD-Variante)][Original Design Guide (wiki.sifli.com, EPD variant)]__
+- :fontawesome-solid-cart-shopping: __[Muster bestellen][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[Entwicklungsboards kaufen][Buy Dev Kits]__
 
 </div>
 
@@ -79,7 +79,7 @@ Ziehen Sie SF32LB52-MOD-1 in Betracht, wenn das Produkt eine oder mehrere der fo
 
 ### Grafik und Display { #graphics-and-display }
 
-- ePicasso-2.0-2D/2,5D-Grafik-Engine
+- ePicasso-2.0-2D/2.5D-Grafik-Engine
 - eZip-2.0-Beschleuniger für verlustfreie Grafikdekompression
 - LCD-Controller mit Unterstützung für 8080-, SPI-, Dual-SPI- und Quad-SPI-Schnittstellen
 - Geeignet für kompakte, uhrenähnliche Produkte und kleine HMI-Displays
@@ -110,9 +110,9 @@ An eine PDM-Schnittstelle lassen sich bis zu zwei digitale Mikrofone anschließe
 
 - Modulgehäuse: 27,9 × 18,0 × 3,1 mm
 - Betriebstemperatur: −40 °C bis +85 °C
-- VSYS: 3,2–4,7 V bei direktem Anschluss einer Lithium-Ionen-Batterie oder 3,7–4,7 V bei geregelter Versorgung; empfohlen werden 3,8 V.
+- VSYS: 3,2–4,7 V bei direktem Anschluss eines Lithium-Ionen-Akkus oder 3,7–4,7 V bei geregelter Versorgung; empfohlen werden 3,8 V.
 - I/O-Spannung: 3,3 V
-- VBATS: Eingang zur Batteriespannungserfassung und für ADC-Messungen, 0–4,7 V. Die zu messende Spannung direkt anschließen; keinen externen Spannungsteiler verwenden.
+- VBATS: Eingang zur Akkuspannungserfassung und für ADC-Messungen, 0–4,7 V. Die zu messende Spannung direkt anschließen; keinen externen Spannungsteiler verwenden.
 - VDD33_VOUT2: integrierter 3,3-V-LDO-Ausgang zur Versorgung externer Peripherie. Standardmäßig deaktiviert und per Software zu aktivieren; maximaler Ausgangsstrom 150 mA, Gesamtkapazität der Versorgungsschiene höchstens 7,4 µF.
 - 68-polige Modulschnittstelle; die Signalpins stellen multiplexte Funktionen wie GPIO, SPI, LCD, MPI, UART, I2C, PWM, SDIO, USB 2.0 FS sowie digitales und analoges Audio bereit
 
@@ -137,9 +137,9 @@ Die offiziellen Quellen verwenden unterschiedliche Bezeichnungen für den Flash-
 
 ### Chip { #chip }
 
-Die Seite [SF32LB52x](../chips/SF32LB52x.md) beschreibt die Architektur und Peripherie der Chipfamilie. Die Zuordnung von Chip und Speicher zu den einzelnen Modul-SKUs finden Sie in der Variantentabelle oben.
+Die Seite [SF32LB52x](../chips/SF32LB52x.md) beschreibt Architektur und Peripherie auf Familienebene. Die Zuordnung von Chip und Speicher zu den einzelnen Modul-SKUs finden Sie in der Variantentabelle oben.
 
-### Entwicklungskits { #development-kits }
+### Entwicklungsboards { #development-kits }
 
 Die [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md), [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md), [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) und [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) eignen sich zur Firmwarevalidierung, bevor ein eigenes Trägerboard für das Modul entwickelt wird.
 

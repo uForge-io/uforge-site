@@ -17,7 +17,7 @@ tags:
 SuperKey ist mehr als ein Tastenfeld für Tastenkürzel. Die funktionsfähige Referenz vereint folgende Produktpfade:
 
 - USB-HID-Ausgabe für Tastatur und Mediensteuerung;
-- Daten zu Computerleistung, Wetter, Konfiguration und Energiezustand über USB CDC oder UART mit 1 Mbit/s;
+- Leistungsdaten des Computers, Wetterdaten, Konfiguration und Energiezustand über USB CDC oder UART mit 1 Mbit/s;
 - Seiten auf drei Displays für Leistungsüberwachung, Wetter, Uhr, Dienstprogramme, Musik und benutzerdefinierte Tastenbelegungen;
 - das Begleitprogramm [SuperKeyHub](https://github.com/SiFliSparks/SuperKeyHub), das Hostdaten erfasst, Funktionen konfiguriert und Firmwareupdates anstößt;
 - reproduzierbare Hardware anhand des offenen Hardwaredesigns [sf32-keyboard](https://oshwhub.com/sifli/sf32-keyboard).
@@ -29,13 +29,13 @@ SuperKey ist mehr als ein Tastenfeld für Tastenkürzel. Die funktionsfähige Re
 
 SuperKey benötigt Grafik, mehrere Displays, ein zusammengesetztes USB-Gerät, Tasten und Encoder, Sensoren, RGB-Effekte, ein Dateisystem und optional Audio. SF32LB52 führt diese Echtzeitaufgaben auf dem MCU aus. Dadurch kann das Gerät seine Oberfläche starten und grundlegende HID-Funktionen bereitstellen, auch wenn das Begleitprogramm nicht läuft. Das Hostprogramm übernimmt Rechner-Telemetrie und Internetdaten, die besser vom Desktopbetriebssystem verarbeitet werden.
 
-Diese Aufgabenteilung eignet sich für Desktop-Controller, Workflow-Tastaturen, Statusanzeigen und kompakte HMIs, bringt aber klar definierte Abhängigkeiten mit sich. Erweiterte Datenanzeigen benötigen das Begleitprogramm, Treiber und externe APIs. Firmware- und Hostversionen müssen kompatibel bleiben; USB-Verbindungsverlust, Hostschlaf und beschädigte Konfigurationen erfordern eigene Wiederherstellungstests.
+Diese Aufgabenteilung eignet sich für Desktop-Controller, Tastaturen für wiederkehrende Arbeitsabläufe, Statusanzeigen und kompakte HMIs, bringt aber klar definierte Abhängigkeiten mit sich. Erweiterte Datenanzeigen benötigen das Begleitprogramm, Treiber und externe APIs. Firmware- und Hostversionen müssen kompatibel bleiben; USB-Verbindungsverlust, der Schlafmodus des Hosts und beschädigte Konfigurationen erfordern eigene Wiederherstellungstests.
 
 ## Ergebnis, Umfang und Eintrittskriterien { #outcome-scope-and-entry-criteria }
 
 **Ergebnis:** Eine versionsgebundene SuperKey-Referenz reproduzieren, HID, CDC, Oberfläche auf drei Displays, Eingaben, Sensorik und Wiederherstellung nach dem Schlafmodus validieren und anschließend jeweils nur eine Verhaltenskategorie ändern. Build-, Kommunikations- und Regressionstests sind als Nachweise für die Produktbewertung aufzubewahren.
 
-Diese Seite belegt weder die Serienreife der offenen Platine noch die Kompatibilität mit jeder PC-Telemetriequelle, jedem Wetterdienst, jeder seriellen Bridge, jedem USB-Host oder jeder Betriebssystemversion. Börsenkurse sowie Wetter- und Leistungsdaten können von der SuperKeyHub-Version, APIs Dritter, Systemberechtigungen und der Hosthardware abhängen.
+Diese Seite belegt weder die Serienreife der Open-Source-Platine noch die Kompatibilität mit jeder PC-Telemetriequelle, jedem Wetterdienst, jeder seriellen Bridge, jedem USB-Host oder jeder Betriebssystemversion. Börsenkurse sowie Wetter- und Leistungsdaten können von der SuperKeyHub-Version, APIs Dritter, Systemberechtigungen und der Hosthardware abhängen.
 
 Halten Sie vor dem Start Folgendes bereit:
 
@@ -46,7 +46,7 @@ Halten Sie vor dem Start Folgendes bereit:
 - falls Wetterfunktionen geprüft werden: einen gültigen QWeather-API-Key, API-Host und eine Stadtkonfiguration;
 - ein Testprotokoll für USB-Enumeration, serielle Logs, Tastenverhalten, Displayzustand und Wiederherstellung aus dem Schlafmodus.
 
-<div align="center"><em>Tabelle: Projektvertrag für SuperKey</em></div>
+<div align="center"><em>Tabelle: Projektbasis und Nachweise für SuperKey</em></div>
 
 <div align="center" markdown>
 
@@ -103,7 +103,7 @@ Die Upstream-Releaseliste führt Firmware [v1.4.2](https://github.com/SiFliSpark
 | Firmware | SuperKey v1.4.2 oder ein vom Team validierter Commit | Firmware- und Hostprotokollversion müssen übereinstimmen |
 | Begleitprogramm | Mit Firmware v1.4.2 geprüfter SuperKeyHub-Release oder Commit | Das zitierte Releasematerial belegt keine feste Kombination; CDC-Daten, Konfiguration und DFU auf dem gewählten Hostbetriebssystem validieren |
 | Build-Ziel | `sf32lb52-superkey` mit Boarddateien unter `app/boards` | Kein generisches Entwicklungsboard-Ziel für SF32LB52 |
-| Kommunikation | Zuerst zusammengesetztes USB HID + CDC validieren; UART mit 1 Mbit/s bei Bedarf separat prüfen | Die Meldung „USB enumeriert“ belegt nicht, dass sowohl HID- als auch CDC-Schnittstelle funktionieren |
+| Kommunikation | Zuerst zusammengesetztes USB HID + CDC validieren; UART mit 1 Mbit/s bei Bedarf separat prüfen | Eine erfolgreiche USB-Erkennung belegt nicht, dass sowohl die HID- als auch die CDC-Schnittstelle funktionieren |
 | Update | Vom Begleitprogramm ausgelöstes CDC-DFU plus beibehaltener kabelgebundener Programmier-/Wiederherstellungspfad | Noch keine Feldupdate-Lösung, solange Unterbrechung, Versionskonflikt und Wiederherstellung nicht nachgewiesen sind |
 
 </div>
@@ -123,11 +123,11 @@ Verwenden Sie unter Windows die entsprechenden PowerShell-Installations- und Umg
 
 ## Projektphasen und Entscheidungspunkte { #delivery-map }
 
-<div align="center"><em>Tabelle: Entwicklungsphasen für SuperKey</em></div>
+<div align="center"><em>Tabelle: Projektphasen und Entscheidungspunkte von SuperKey</em></div>
 
 <div align="center" markdown>
 
-| Phase | Unterstützte Entscheidung | Erforderliches Ergebnis |
+| Phase | Entscheidungsfrage | Erforderliches Ergebnis |
 |:------|:---------------------|:----------------|
 | 1. Unveränderte Basis | Funktionieren offene Hardware, Firmware und Begleitprogramm wie dokumentiert zusammen? | Versionsgebundene, nachweislich funktionierende Sitzung |
 | 2. Kommunikation und Wiederherstellung | Lassen sich Fehler bei USB, serieller Verbindung, Schlafmodus, Verbindungsabbruch und Konfiguration diagnostizieren und beheben? | Fehler-Injektions- und Wiederherstellungsprotokoll |
@@ -166,7 +166,7 @@ Ordnen Sie Fehler fünf Bereichen zu: Gerätehardware/Display, HID-Eingabe, CDC-
 
 **Aufzubewahrende Nachweise:** Hardwarerevision, Firmware-Tag/Commit, SDK-Commit, Version des Begleitprogramms, Betriebssystem, Anschluss- und API-Konfiguration, USB-Enumeration, Protokolle, Displayzustände und Eingabeprotokoll.
 
-**Abnahmekriterium für Phase 1:** Bei zwei Kaltstarts funktionieren HID-Eingabe, CDC-Datenaktualisierung und Interaktion mit allen drei Displays. Jeder Fehlerbereich lässt sich anhand von Protokollen oder beobachtbarem Zustand unterscheiden.
+**Abnahmekriterium für Kontrollpunkt 1:** Bei zwei Kaltstarts funktionieren HID-Eingabe, CDC-Datenaktualisierung und Interaktion mit allen drei Displays. Jeder Fehlerbereich lässt sich anhand von Protokollen oder beobachtbarem Zustand unterscheiden.
 
 ## Phase 2 — Fehler- und Wiederherstellungsgrenzen validieren { #stage-2-validate-fault-and-recovery-boundaries }
 
@@ -182,12 +182,12 @@ Ordnen Sie Fehler fünf Bereichen zu: Gerätehardware/Display, HID-Eingabe, CDC-
 | CDC-Verbindung verloren | Während der Datenübertragung USB trennen/wiederverbinden oder Anschluss wechseln | Gerät hängt sich nicht auf; Versionsabfrage und Datenübertragung funktionieren nach der Wiederverbindung wieder |
 | Host wechselt in den Schlafmodus | `power_mode sleep/normal` aktivieren und einen Schlaf-/Aufwachzyklus des Hosts ausführen | LCDs, LEDs, Hintergrundbeleuchtung und Sensoren stoppen und starten wie vorgesehen; spätere Daten werden erneut aktualisiert |
 | Versionskonflikt | In einer kontrollierten Umgebung ein inkompatibles Paar aus Begleitprogramm und Firmware testen | Das Paar weist den Betrieb zurück oder zeigt einen diagnostizierbaren Fehler, statt ein inkompatibles Update anzuwenden |
-| API-Fehler | Ungültige Wetterkonfiguration verwenden oder Netzwerkverbindung trennen | Wetterfehler beeinträchtigen weder HID, CDC, lokale UI noch Wiederherstellung |
+| API-Fehler | Ungültige Wetterkonfiguration verwenden oder Netzwerkverbindung trennen | Wetterfehler beeinträchtigen weder HID noch CDC noch die lokale UI noch die Wiederherstellung |
 | DFU unterbrochen | Update auf einem wiederherstellbaren Testgerät unterbrechen | Der vorhandene kabelgebundene Programmierpfad stellt das bekannte Image wieder her |
 
 </div>
 
-**Abnahmekriterium für Phase 2:** Für jeden relevanten Fehlerfall sind Erkennung und Wiederherstellung reproduzierbar; eine undokumentierte manuelle Zustandskorrektur ist nicht erforderlich.
+**Abnahmekriterium für Kontrollpunkt 2:** Für jeden relevanten Fehlerfall sind Erkennung und Wiederherstellung reproduzierbar; eine undokumentierte manuelle Zustandskorrektur ist nicht erforderlich.
 
 ## Phase 3 — Eine reproduzierbare Quellbasis erstellen { #stage-3-build-a-reproducible-source-baseline }
 
@@ -198,7 +198,7 @@ Ordnen Sie Fehler fünf Bereichen zu: Gerätehardware/Display, HID-Eingabe, CDC-
 3. Sichern Sie Build-Protokoll, Speicher-/Partitionsausgabe, Flash-Skript, erzeugte Images und serielles Protokoll.
 4. Wiederholen Sie den Build auf einem zweiten Rechner oder nach dem Löschen des Build-Verzeichnisses, flashen Sie das Image auf dieselbe Hardware und führen Sie die wichtigsten Regressionstests erneut aus.
 
-**Abnahmekriterium für Phase 3:** Zum Erzeugen eines Images, das Phase 2 besteht, sind weder nicht versionierte Dateien noch veraltete Build-Artefakte oder manuelles Austauschen von Binärdateien erforderlich.
+**Abnahmekriterium für Kontrollpunkt 3:** Zum Erzeugen eines Images, das Phase 2 besteht, sind weder nicht versionierte Dateien noch veraltete Build-Artefakte noch manuelles Austauschen von Binärdateien erforderlich.
 
 ## Phase 4 — Jeweils eine Produktvariable anpassen { #stage-4-adapt-one-product-variable-at-a-time }
 
@@ -218,7 +218,7 @@ Ordnen Sie Fehler fünf Bereichen zu: Gerätehardware/Display, HID-Eingabe, CDC-
 
 </div>
 
-**Abnahmekriterium für Phase 4:** Die Änderung ist geprüft, das ursprüngliche Image wiederherstellbar und die Tests für HID, CDC, Display, Eingabe, Schlafmodus und Wiederherstellung sind bestanden.
+**Abnahmekriterium für Kontrollpunkt 4:** Die Änderung ist geprüft, das ursprüngliche Image wiederherstellbar und die Tests für HID, CDC, Display, Eingabe, Schlafmodus und Wiederherstellung sind bestanden.
 
 ## Phase 5 — Produktreife-Überprüfung { #stage-5-product-readiness-review }
 
@@ -231,11 +231,11 @@ Vor der Entwicklung eigener Hardware oder eines Pilotaufbaus muss das Team folge
 - Wie lassen sich Konfiguration, Tastenbelegungen und Updatezustand nach Stromausfall oder beschädigtem Speicher wiederherstellen?
 - Sind offene Platine, Gehäuse, Schriften, Symbole, Musik und APIs Dritter für die vorgesehene Verteilung lizenziert?
 
-**Abnahmekriterium für Phase 5:** Für jedes verbleibende Risiko sind Verantwortliche, Nachweise und Maßnahmen festgelegt; das Team hat über Fortfahren, Zurückstellen oder Abbrechen entschieden.
+**Abnahmekriterium für Kontrollpunkt 5:** Für jedes verbleibende Risiko sind Verantwortliche, Nachweise und Maßnahmen festgelegt; das Team hat über Fortfahren, Zurückstellen oder Abbrechen entschieden.
 
 ## Übergabe an das Produktdesign { #handoff-to-product-design }
 
-Übernehmen Sie Auswahl von SF32 und Speicher, USB-HID/CDC-Deskriptoren, Anschlüsse für drei Displays und Hintergrundbeleuchtung, Schnittstellen für Eingaben und Sensoren, Stromversorgungs- und Schlafrichtlinie, Dateisystem- und Updatepartitionen, Protokoll des Begleitprogramms, Produktionstestpunkte und validierten Wiederherstellungspfad in die nächste Designphase. Fahren Sie mit [SF32LB52x](../sf32-products/chips/SF32LB52x.md), dem [SF32LB52x Hardware-Design-Leitfaden](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [SiFli-SDK: Kompilieren, Flashen und Überwachen](../develop/platforms/sifli-sdk/build-flash-monitor.md) und [Design für die Produktion](../hardware/design-for-production.md) fort.
+Übernehmen Sie Auswahl von SF32 und Speicher, USB-HID/CDC-Deskriptoren, Anschlüsse für drei Displays und Hintergrundbeleuchtung, Schnittstellen für Eingaben und Sensoren, Stromversorgungs- und Schlafrichtlinie, Dateisystem- und Updatepartitionen, Protokoll des Begleitprogramms, Produktionstestpunkte und validierten Wiederherstellungspfad in die nächste Designphase. Fahren Sie mit [SF32LB52x](../sf32-products/chips/SF32LB52x.md), dem [SF32LB52x Hardware-Design-Leitfaden](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [SiFli-SDK: Bauen, Flashen und Überwachen](../develop/platforms/sifli-sdk/build-flash-monitor.md) und [Design für die Produktion](../hardware/design-for-production.md) fort.
 
 ## Maßgebliche Quellen { #authoritative-sources }
 

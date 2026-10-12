@@ -8,7 +8,7 @@ tags:
 
 # Planifier un produit { #plan-a-product }
 
-Ce guide organise les décisions nécessaires pour faire passer un concept SF32 des premières exigences, à travers la validation, jusqu’à un plan de conception prêt pour la production. Suivez les étapes dans l’ordre tant que la puce, le module, la carte de développement, la plateforme logicielle et l’approche de fabrication ne sont pas encore définis.
+Ce guide présente les décisions à prendre pour faire passer un concept SF32 des exigences initiales à un plan de conception prêt pour la production, en passant par la validation. Suivez les étapes dans l’ordre tant que le choix de la puce, du module, de la carte de développement, de la plateforme logicielle et de l’approche de fabrication reste ouvert.
 
 ## Parcours de planification produit { #product-planning-path }
 
@@ -19,9 +19,9 @@ Ce guide organise les décisions nécessaires pour faire passer un concept SF32 
 | Étape | Décision clé | Commencer ici | Critère de sortie |
 |:------|:-------------|:-----------|:---------------|
 | 1. Définir les exigences | Rôle de l’appareil dans la communication sans fil, affichage, audio, IA, stockage, alimentation et budget de consommation, surface occupée par le boîtier du composant et durée de vie prévue du produit. | [Famille SF32](SF32_family.md) | Liste de candidats priorisée, avec les interfaces obligatoires et les contraintes clairement définies. |
-| 2. Choisir le niveau d’intégration | PCB personnalisé avec la puce montée directement, module associé à une carte porteuse, ou carte de développement pour la validation initiale. | [Sélecteur de produits SF32](../product-selector.md) | Orientation définie pour le choix du composant et son niveau d’intégration, ainsi que la carte ou le module disponible le plus proche du besoin. |
-| 3. Valider la base logicielle | Chaîne d’outils, procédure de programmation, sortie série et exemple de référence fonctionnel sur la carte choisie ou la plus proche. | [Premiers pas](../../getting-started/index.md) | Procédure reproductible de compilation et de programmation, avec journal de sortie console enregistré. |
-| 4. Vérifier les risques du produit | Comportement propre au produit pour l’affichage, Bluetooth, l’audio, l’IA et le stockage, ainsi que le chemin d’alimentation et le profil de consommation énergétique. | [Tutoriels](../../getting-started/tutorials/overview.md), [Apprendre](../../learn/index.md) et [Développement](../../develop/index.md) | Résultats de mesure documentés pour les sous-systèmes déterminants pour les risques liés aux coûts, à la consommation ou au calendrier. |
+| 2. Choisir le niveau d’intégration | PCB personnalisé avec la puce montée directement, module associé à une carte porteuse, ou carte de développement pour la validation initiale. | [Sélecteur de produits SF32](../product-selector.md) | Composant et niveau d’intégration privilégiés, ainsi que la carte ou le module disponible le plus proche du besoin. |
+| 3. Valider la base logicielle | Chaîne d’outils, procédure de flashage, sortie série et exemple de référence fonctionnel sur la carte choisie ou la plus proche. | [Premiers pas](../../getting-started/index.md) | Procédure reproductible de compilation et de flashage, avec journal de sortie console enregistré. |
+| 4. Vérifier les risques du produit | Comportement propre au produit pour l’affichage, Bluetooth, l’audio, l’IA et le stockage, ainsi que le chemin d’alimentation et le profil de consommation énergétique. | [Tutoriels](../../getting-started/tutorials/overview.md), [Apprendre](../../learn/index.md) et [Développement](../../develop/index.md) | Résultats mesurés pour les sous-systèmes qui déterminent le coût, la consommation ou les risques liés au calendrier. |
 | 5. Figer le plan de mise en œuvre | Schéma, implantation, plan mémoire et partitions, nomenclature (BOM), stratégie de test, fonctionnement des mises à jour et de la récupération, hypothèses de fabrication. | [Conception pour la production](../../hardware/design-for-production.md) | Dossier de conception vérifié et liste explicite des validations restant à effectuer. |
 
 </div>

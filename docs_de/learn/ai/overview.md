@@ -14,7 +14,7 @@ Diese Seite beschreibt die Umsetzung von On-Device-KI auf SF32: Bauteilwahl, Vor
 
 Das SDK stellt beschleunigte Operationen über die **NNACC**-HAL (Neural Network Accelerator) bereit. Es gibt getrennte Beispiele für die [HAL](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/example/hal/nnacc/README_EN.md) und den [RT-Thread-Treiber](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/example/rt_device/nnacc/README_EN.md). Diese prüfen eine einzelne kanalweise Faltungsoperation (Depthwise Convolution), nicht die vollständige Bereitstellung eines trainierten Modells. Verwenden Sie sie zunächst als Funktionstest einer Operation. Modelllaufzeit, Konvertierungswerkzeuge und die Zuordnung der einzelnen Schichten müssen Sie gesondert auswählen und prüfen.
 
-Die nachfolgend zitierten Implementierungsdetails gelten für SDK v2.5.1. Weder diese Details noch die NNACC-Verfügbarkeit auf Familienebene garantieren die Unterstützung eines bestimmten Bauteils, eines Konverters oder einer Laufzeitumgebung für vollständige Modelle, die Kompatibilität von Operatoren, einen automatischen CPU-Fallback oder Kameraeingang. Prüfen Sie diese Punkte anhand der genauen SDK-Revision und -Konfiguration, der Chiprevision, der Laufzeitumgebung und der Platine.
+Die nachfolgend zitierten Implementierungsdetails gelten für SDK v2.5.1. Weder diese Details noch die NNACC-Verfügbarkeit auf Familienebene garantieren die Unterstützung eines bestimmten Geräts, eines Konverters oder einer Laufzeitumgebung für vollständige Modelle, die Kompatibilität von Operatoren, einen automatischen CPU-Fallback oder Kameraeingang. Prüfen Sie diese Punkte anhand der genauen SDK-Revision und -Konfiguration, der Chiprevision, der Laufzeitumgebung und der Platine.
 
 Nutzen Sie diese Seite, wenn Sie die Produktentscheidung und den Bereitstellungspfad für eine KI-Funktion verantworten: was das Gerät lokal entscheiden muss, wie viel Speicher und Energie es verbrauchen darf und wie sich die Funktion bei realen Sensordaten verhalten soll. Sie ergänzt den Artikel zum Beschleuniger, der die Hardwaregrenze erklärt.
 
@@ -47,19 +47,19 @@ Nicht jedes SF32-Gerät eignet sich gleichermaßen für KI-Workloads:
 
 </div>
 
-Die Tabelle ist ein Ausgangspunkt für die Evaluierung, keine Garantie für ausreichenden Speicher oder effiziente Ausführung. Prüfen Sie beim konkreten Bauteil Speicher, Sensorschnittstellen, Beschleunigerinstanz und SDK-Unterstützung anhand der gesamten Last. Der [NNACC-Leitfaden für SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/docs/source/en/hal/nnacc.md) nennt je einen NNACC im HCPU von SF32LB55x und SF32LB56x sowie je einen im HCPU und LCPU von SF32LB58x. Für SF32LB52x oder SF32LB57x belegt der Leitfaden keine NNACC-Verfügbarkeit; diese fehlende Angabe ist kein Nachweis für das Fehlen eines NNACC. Die genannten Instanzzahlen belegen weder Modellkompatibilität noch Energieeffizienz. Zur übergeordneten Auswahl siehe [Einordnung nach Gerätefamilie](accelerator.md#device-family-positioning).
+Die Tabelle ist ein Ausgangspunkt für die Evaluierung, keine Garantie für ausreichenden Speicher oder effiziente Ausführung. Prüfen Sie beim konkreten Gerät Speicher, Sensorschnittstellen, Beschleunigerinstanz und SDK-Unterstützung anhand der gesamten Last. Der [NNACC-Leitfaden für SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/docs/source/en/hal/nnacc.md) nennt je einen NNACC im HCPU von SF32LB55x und SF32LB56x sowie je einen im HCPU und LCPU von SF32LB58x. Für SF32LB52x oder SF32LB57x belegt der Leitfaden keine NNACC-Verfügbarkeit; diese fehlende Angabe ist kein Nachweis für das Fehlen eines NNACC. Die genannten Instanzzahlen belegen weder Modellkompatibilität noch Energieeffizienz. Zur übergeordneten Auswahl siehe [Einordnung nach Gerätefamilie](accelerator.md#device-family-positioning).
 
 ## Der Workflow der Modellentwicklung { #the-model-development-workflow }
 
 In der Praxis folgt die Bereitstellung eines Modells auf SF32-Hardware unabhängig vom konkreten Anwendungsfall demselben Muster:
 
-1. **Ein Modell auf einer Workstation trainieren oder auswählen** und dafür Daten verwenden, die den später im Feld erfassten Sensorsignalen möglichst nahekommen. Saubere Labordaten unterscheiden sich oft deutlich von verrauschten Sensordaten aus der Praxis.
-2. **Für die Beschränkungen eingebetteter Systeme verkleinern** – durch Architekturwahl, Pruning oder Quantisierung –, bevor die beschleunigerspezifische Konvertierung in den Blick genommen wird.
-3. **Modell exportieren und Operationen zuordnen**: zur gewählten Inferenzlaufzeit sowie zu den vom Ziel-SDK tatsächlich unterstützten Operatoren, Layouts und Zahlenformaten. Eine NNACC-HAL allein stellt weder einen Konverter für vollständige Modelle noch eine Graph-Laufzeit bereit.
-4. **Numerisch validieren** nach Konvertierung und Quantisierung; gehen Sie nicht davon aus, dass die Desktop-Genauigkeit unverändert übernommen wird.
-5. **Integrieren** von Vorverarbeitung, Inferenz und Nachverarbeitung in die Firmware – das Modell ist ein Funktionsaufruf innerhalb einer größeren Pipeline.
-6. **Latenz, Speicherbedarf, Energieverbrauch und Genauigkeit auf echter Hardware messen und bewerten**, nicht nur in der Simulation.
-7. **Testen unter realistischer kombinierter Last** – Bluetooth, Display und Sensoren gleichzeitig mit der Inferenz aktiv, nicht isoliert.
+1. **Trainieren oder wählen Sie ein Modell** auf einem Entwicklungsrechner und verwenden Sie Daten, die den später im Feld erfassten Sensorsignalen möglichst nahekommen. Saubere Labordaten unterscheiden sich oft deutlich von verrauschten Sensordaten aus der Praxis.
+2. **Verkleinern Sie das Modell für die Beschränkungen eingebetteter Systeme** – durch Architekturwahl, Pruning oder Quantisierung –, bevor Sie die beschleunigerspezifische Konvertierung angehen.
+3. **Exportieren Sie das Modell und ordnen Sie seine Operatoren zu**: zur gewählten Inferenzlaufzeit sowie zu den vom Ziel-SDK tatsächlich unterstützten Operatoren, Layouts und Zahlenformaten. Eine NNACC-HAL allein stellt weder einen Konverter für vollständige Modelle noch eine Graph-Laufzeit bereit.
+4. **Vergleichen Sie die numerischen Ergebnisse und die Modellgenauigkeit** nach Konvertierung und Quantisierung. Gehen Sie nicht davon aus, dass sich die Desktop-Genauigkeit unverändert überträgt.
+5. **Integrieren Sie Vorverarbeitung, Inferenz und Nachverarbeitung** in die Firmware – das Modell ist ein Funktionsaufruf innerhalb einer größeren Pipeline.
+6. **Messen und bewerten Sie Latenz, Speicherbedarf, Energieverbrauch und Genauigkeit** auf echter Hardware, nicht nur in der Simulation.
+7. **Testen Sie unter realistischer kombinierter Last** – Bluetooth, Display und Sensoren müssen gleichzeitig mit der Inferenz aktiv sein, nicht isoliert.
 
 Ein häufiger Integrationsfehler ist, das Modell zu optimieren, ohne Vorverarbeitung, Pufferung und Nachverarbeitung zu messen. Diese Stufen können ebenso aufwendig sein wie die beschleunigte Inferenz. Messen Sie deshalb den gesamten Pfad.
 
@@ -94,7 +94,7 @@ Prüfen Sie vor der Modellwahl jeden Operator, seine Parameter und den tatsächl
 
 | Klasse | Bedeutung | Maßnahme |
 |:------|:--------|:-------|
-| Beschleunigt | Direkt vom NNACC-Pfad für das Zielgerät unterstützt. | Bevorzugt für stark genutzte Schichten. |
+| Beschleunigt | Direkt vom NNACC-Pfad für das Zielgerät unterstützt. | Für häufig ausgeführte Schichten bevorzugen. |
 | CPU-Fallback | Die gewählte Laufzeit oder Firmware stellt eine geprüfte CPU-Implementierung bereit. | Kosten messen; nur akzeptieren, wenn die gesamte Pipeline ihre Ziele erreicht. |
 | Konvertierung erforderlich | Erfordert Layout-, Typ- oder Formatkonvertierung. | Konvertierungskosten in Latenz- und Energiebudget einrechnen. |
 | Nicht unterstützt | In der Ziel-Laufzeitumgebung nicht verfügbar. | Schicht ersetzen oder Modellarchitektur ändern. |
@@ -173,13 +173,13 @@ Gestenerkennung, Aktivitätsklassifikation und biometrische Analyse nutzen typis
 
 Kameraeingaben können erhebliche Kosten für Erfassung, Pufferung, Bandbreite und Inferenz verursachen. Die tatsächliche Last hängt von Auflösung, Bildrate, Sensorbetrieb und Modellarchitektur ab. Reduzieren Sie die Bildgröße oder verarbeiten Sie einen Bildausschnitt, sofern die Genauigkeit dies zulässt. Wählen Sie ein Modell für eingebettete Systeme, statt die unveränderte Bereitstellung eines Desktop-Vision-Modells vorauszusetzen.
 
-## Energiebewusstes Inferenz-Scheduling { #power-aware-inference-scheduling }
+## Energieeffiziente Inferenzplanung { #power-aware-inference-scheduling }
 
-Wählen Sie das Scheduling so, dass benötigte Signale erkannt und Reaktionszeiten eingehalten werden. Periodische Inferenz ist sinnvoll, wenn das Produkt regelmäßige Entscheidungen benötigt. Ereignisabhängige Freigabe ist nur dann hilfreich, wenn keine erforderlichen Signale verloren gehen.
+Planen Sie die Inferenz so, dass benötigte Signale erkannt und Reaktionszeiten eingehalten werden. Periodische Inferenz ist sinnvoll, wenn das Produkt regelmäßige Entscheidungen benötigt. Eine ereignisgesteuerte Auslösung ist nur dann hilfreich, wenn dadurch keine erforderlichen Signale verloren gehen.
 
-- Lösen Sie Inferenz bei passenden Anwendungen durch neue, relevante Daten aus, etwa einen Sensorschwellwert oder einen vollständigen Audioframe. Behalten Sie erforderliche periodische Verarbeitung bei und prüfen Sie nach Änderungen am Trigger übersehene Ereignisse sowie die maximale Reaktionszeit.
+- Lösen Sie die Inferenz bei geeigneten Anwendungen anhand neuer, relevanter Daten aus, etwa bei einem Sensorschwellwert oder nach Eingang eines vollständigen Audio-Frames. Behalten Sie erforderliche periodische Verarbeitung bei und prüfen Sie nach Änderungen am Trigger übersehene Ereignisse sowie die maximale Reaktionszeit.
 - Bündeln Sie Samples, wo die Latenzanforderungen dies erlauben, statt viele kleine Inferenzen auszuführen.
-- Verlagern Sie leichte Always-on-Sensorik, sofern Gerät und SDK dies unterstützen, auf den Low-Power-Prozessor, statt für jedes Sample die Anwendungs-CPU zu wecken.
+- Verlagern Sie leichte Always-on-Sensorik, sofern Gerät und SDK dies unterstützen, auf den stromsparenden Prozessor, statt für jedes Sample die Anwendungs-CPU zu wecken.
 - Bestimmen Sie die **Energie pro Inferenz**, indem Sie die gemessene Versorgungsleistung (Versorgungsspannung × Strom) über ein klar angegebenes Messfenster integrieren. Beziehen Sie Erfassung, Vor-/Nachverarbeitung und Wechsel zwischen Aktiv- und Schlafzustand in das Budget der Funktion ein. Schnellere Verarbeitung kann aktive Energie reduzieren oder früheren Schlaf ermöglichen; der Nutzen hängt jedoch von Strom, Speicherverkehr und dem übrigen System ab.
 
 Die systemweiten Hinweise zum Energieverbrauch finden Sie unter [Energiesparendes Design im Überblick](../low-power/overview.md). Verwenden Sie sie als Ergänzung für KI-Funktionen, die kontinuierlich oder nahezu kontinuierlich laufen müssen.
@@ -200,7 +200,7 @@ Die folgenden Punkte beschreiben typische Entwurfsfolgen, keine festen Zusammenh
 
 </div>
 
-Legen Sie vor der Optimierung fest, was das Produkt priorisieren muss. Ein Gestendetektor kann zugunsten der Batterielaufzeit etwas mehr Latenz zulassen. Ein Sprachtrigger benötigt meist eine schnelle Reaktion und muss zugleich energieaufwendige Fehlaktivierungen vermeiden.
+Legen Sie vor der Optimierung fest, was das Produkt priorisieren muss. Ein Gestendetektor kann zugunsten der Akkulaufzeit etwas mehr Latenz zulassen. Ein Sprachtrigger benötigt meist eine schnelle Reaktion und muss zugleich energieaufwendige Fehlaktivierungen vermeiden.
 
 ## Modell-Update und Feldvalidierung { #model-update-and-field-validation }
 
@@ -220,10 +220,10 @@ Wenn die KI-Funktion sich nach der Markteinführung verbessern kann, planen Sie 
 
 | Symptom | Wahrscheinlicher zu prüfender Bereich |
 |:--------|:----------------------|
-| Modell läuft, aber Genauigkeit sinkt gegenüber Workstation-Ergebnissen | Fehlanpassung bei Quantisierung/Kalibrierung, oder Trainingsdaten nicht repräsentativ für echtes Sensorrauschen. |
+| Modell läuft, aber Genauigkeit sinkt gegenüber Ergebnissen vom Entwicklungsrechner | Fehlanpassung bei Quantisierung/Kalibrierung, oder Trainingsdaten nicht repräsentativ für echtes Sensorrauschen. |
 | Inferenz ist langsamer als erwartet | Tatsächliche Schichtausführung auf der CPU, Layoutkonvertierung, Speicherbandbreite oder Scheduling-Konflikte. |
-| System erreicht nie die erwartete Schlaftiefe | Unnötige Weckvorgänge, aktive Treiber/Takte, Energiemanagement-Sperren oder eine unvollendete Beschleunigertransaktion. |
-| Funktion läuft eigenständig, scheitert aber im Gesamtprodukt | Nicht unter kombinierter Last getestet (Bluetooth + Display + Sensoren gleichzeitig aktiv). |
+| System erreicht nie die erwartete Schlaftiefe | Unnötige Weckvorgänge, aktive Treiber/Takte, Energiemanagement-Sperren oder eine nicht abgeschlossene Beschleunigertransaktion. |
+| Funktion läuft eigenständig, scheitert aber im Gesamtprodukt | Nicht unter kombinierter Last getestet (Bluetooth, Display und Sensoren gleichzeitig aktiv). |
 | Hoher Energieverbrauch trotz „schnellem“ Modell | Latenz statt Energie pro Inferenz gemessen; Codec-/Sensorpfad bleibt zwischen den Durchläufen aktiv. |
 | Sporadisch fehlerhafte Ausgabe bei gemeinsam genutzten Puffern | Vorbereitung der Cache-Zeilen, modifizierte Zeilen, vorzeitige Wiederverwendung, fehlender Abschluss oder gleichzeitiger Zugriff von CPU und Hardware. |
 
@@ -254,7 +254,7 @@ Wenn die KI-Funktion sich nach der Markteinführung verbessern kann, planen Sie 
 ## Wichtigste Erkenntnisse { #key-takeaways }
 
 - Beginnen Sie mit der Produktentscheidung und den Sensordaten, nicht mit der Modellarchitektur – das Modell ist eine Stufe in einer größeren Pipeline.
-- Nutzen Sie die Familienpositionierung zur Vorauswahl und prüfen Sie dann konkretes Bauteil, SDK, Operatorzuordnung, Speicherbelegung und gleichzeitige Last.
+- Nutzen Sie die Familienpositionierung zur Vorauswahl und prüfen Sie dann konkretes Gerät, SDK, Operatorzuordnung, Speicherbelegung und gleichzeitige Last.
 - Budgetieren Sie Speicher für die gesamte Pipeline (Gewichte, Tensoren, Aktivierungen, Vor-/Nachverarbeitungspuffer), nicht nur für die Größe der Modelldatei.
 - Wählen Sie periodische oder ereignisgesteuerte Inferenz ohne Abstriche bei der erforderlichen Signalerkennung. Messen Sie die Energie der gesamten Funktion; behandeln Sie die Modellgeschwindigkeit nicht als Maß für den Energieverbrauch.
 - Testen Sie die Genauigkeit mit realistischen Felddaten und die gesamte Funktion unter kombinierter Systemlast, nicht isoliert.

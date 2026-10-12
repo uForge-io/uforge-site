@@ -36,7 +36,7 @@ Para un proyecto SF32, seleccione el dispositivo por su memoria, periféricos y 
 
 ## Por qué importa STAR-MC1 { #why-star-mc1-matters }
 
-Los MCU Cortex-M33 tradicionales son excelentes para el control embebido seguro y de bajo consumo, pero los productos conectados modernos a menudo necesitan algo más que lógica de control. Los wearables, las pantallas inteligentes, los productos de audio Bluetooth y los dispositivos de IA en el borde también pueden requerir interfaces de usuario ágiles, más memoria externa, procesamiento de señales y transferencias frecuentes de datos gráficos o de audio.
+Las MCU Cortex-M33 tradicionales son excelentes para el control embebido seguro y de bajo consumo, pero los productos conectados modernos a menudo necesitan algo más que lógica de control. Los dispositivos vestibles, las pantallas inteligentes, los productos de audio Bluetooth y los dispositivos de IA en el borde también pueden requerir interfaces de usuario ágiles, más memoria externa, procesamiento de señales y transferencias frecuentes de datos gráficos o de audio.
 
 STAR-MC1 puede atender estas cargas mediante cachés, TCM e instrucciones personalizadas opcionales, cuando el SoC las implementa y el software las utiliza eficazmente. Estas funciones pueden reducir las esperas de memoria o acelerar operaciones concretas sin abandonar el modelo de desarrollo de MCU. Verifique las ventajas de rendimiento y consumo de energía en el dispositivo final con cargas representativas; ninguna está garantizada por el nombre del núcleo.
 
@@ -65,7 +65,7 @@ Para abreviar, la tabla usa `CM3`, `CM4`, `CM33`, `CM55` y `CM7` para los proces
 | Referencia de CoreMark/MHz* | 3,34 | 3,42 | 4,02 | 4,02† | 4,20 | 5,01 |
 | Demanda de potencia relativa (cualitativa)‡ | Muy baja | Baja | Baja | Baja | Media | Alta |
 | Perfil de cómputo (cualitativo) | Control escalar de bajo consumo | DSP escalar en tiempo real | MCU escalar seguro y configurable | CPU escalar compatible con CM33; la caché, la TCM y las instrucciones personalizadas implementadas por el SoC pueden mejorar el rendimiento a nivel de sistema | DSP/ML vectorial cuando Helium está habilitado | Alto rendimiento escalar y ancho de banda de memoria |
-| Aplicaciones típicas sugeridas | Control de baja complejidad y nodos de sensores sencillos | Control de motores, DSP de audio y procesamiento de sensores | Dispositivos conectados seguros y control IoT | Wearables con interfaces de usuario avanzadas, audio Bluetooth y productos IoT basados en Flash/PSRAM | Fusión de sensores mediante ML, voz/audio, visión y DSP | HMI con buena respuesta, control de alto rendimiento y redes |
+| Aplicaciones típicas sugeridas | Control de baja complejidad y nodos de sensores sencillos | Control de motores, DSP de audio y procesamiento de sensores | Dispositivos conectados seguros y control IoT | Dispositivos vestibles con interfaces de usuario avanzadas, audio Bluetooth y productos IoT basados en Flash/PSRAM | Fusión de sensores mediante ML, voz/audio, visión y DSP | HMI con buena respuesta, control de alto rendimiento y redes |
 
 </div>
 
@@ -94,7 +94,7 @@ Los principales beneficios son:
 - Mejor rendimiento para gráficos, audio, pilas de protocolo y frameworks de interfaz de usuario.
 - Menor presión sobre el bus de memoria cuando se reutiliza el mismo código o datos.
 
-Los drivers que comparten búferes cacheables con DMA, controladores de pantalla, interfaces de audio u otros maestros de bus deben seguir las reglas del SDK o RTOS cuando el hardware no garantiza la coherencia. Antes de que un periférico lea datos escritos por la CPU, limpie la caché para escribirlos en memoria. Prepare el búfer receptor antes de una escritura DMA e invalide las líneas obsoletas después de completar la transferencia y antes de que la CPU lea el resultado. La CPU no debe acceder al búfer mientras lo controle el DMA. Reserve líneas de caché completas sin compartirlas con datos ajenos y respete las comprobaciones de finalización y las barreras de memoria de la plataforma. Los búferes no cacheables o coherentes por hardware también requieren sus propias reglas de sincronización. Consulte [PSRAM y otros tipos de memoria](psram-and-memory-types.md#caches-and-external-memory-execution) para los detalles de propiedad del búfer y los riesgos de las líneas sucias.
+Los controladores que compartan búferes cacheables con DMA u otros maestros de bus, como los controladores de pantalla y las interfaces de audio, deben seguir las reglas de mantenimiento de caché del SDK o RTOS cuando el hardware no garantice la coherencia. Antes de que un periférico lea datos escritos por la CPU, limpie la caché para escribirlos en memoria. Prepare el búfer receptor antes de una escritura DMA e invalide las líneas obsoletas después de completar la transferencia y antes de que la CPU lea el resultado. La CPU no debe acceder al búfer mientras lo controle el DMA. Reserve líneas de caché completas sin compartirlas con datos ajenos y respete las comprobaciones de finalización y las barreras de memoria de la plataforma. Los búferes no cacheables o coherentes por hardware también requieren sus propias reglas de sincronización. Consulte [PSRAM y otros tipos de memoria](psram-and-memory-types.md#caches-and-external-memory-execution) para los detalles de propiedad del búfer y los riesgos de las líneas sucias.
 
 ### Extensión de ruta de datos personalizada Armv8-M { #armv8-m-custom-datapath-extension }
 
@@ -159,13 +159,13 @@ El núcleo no pretende reemplazar cada caso de uso de Cortex-M7. Si una aplicaci
 
 ## Aplicaciones adecuadas { #good-application-fits }
 
-Los dispositivos basados en STAR-MC1 son candidatos para productos que necesitan acelerar los accesos a memoria u operaciones específicas sin salir de las restricciones de consumo e integración de un MCU. Merecen especial atención cuando la latencia de memoria importa más que la puntuación de un benchmark compacto como CoreMark/DMIPS. Seleccione el SoC por sus funciones implementadas y el rendimiento medido con la carga real, no por una supuesta ventaja sobre cualquier Cortex-M33 convencional.
+Los dispositivos basados en STAR-MC1 son candidatos para productos que necesitan acelerar los accesos a memoria u operaciones específicas sin salir de las restricciones de consumo e integración de una MCU. Merecen especial atención cuando la latencia de memoria importa más que la puntuación de un benchmark compacto como CoreMark/DMIPS. Seleccione el SoC por sus funciones implementadas y el rendimiento medido con la carga real, no por una supuesta ventaja sobre cualquier Cortex-M33 convencional.
 
 Ejemplos típicos incluyen:
 
 - Relojes inteligentes y rastreadores de actividad física.
 - Dispositivos de audio Bluetooth.
-- Dispositivos médicos vestibles y de monitorización de la salud.
+- Dispositivos médicos vestibles y de supervisión de la salud.
 - Pantallas inteligentes y sistemas HMI compactos.
 - Dispositivos de sensores con IA en el borde.
 - Productos que usan LVGL u otros frameworks de interfaz de usuario embebida.
@@ -177,10 +177,10 @@ Ejemplos típicos incluyen:
 - Cuando el SoC habilita las cachés de instrucciones y datos, estas pueden mejorar el rendimiento real, especialmente cuando el código y los datos residen fuera de la SRAM interna rápida.
 - CDE proporciona una vía para la aceleración de instrucciones personalizadas cuando el SoC y la pila de software lo soportan.
 - STAR-MC1 combina un modelo de software compatible con CM33 con funciones configurables de memoria y aceleración; compare los SoC concretos y las cargas medidas, no solo los nombres de los núcleos.
-- En los dispositivos SF32 que incorporan STAR-MC1, el núcleo y las funciones que implemente el SoC junto con él pueden facilitar aplicaciones más avanzadas de gráficos, audio, AIoT y wearables, manteniendo un modelo de desarrollo propio de MCU.
+- En los dispositivos SF32 que incorporan STAR-MC1, el núcleo y las funciones que implemente el SoC junto con él pueden facilitar aplicaciones más avanzadas de gráficos, audio, AIoT y dispositivos vestibles, manteniendo un modelo de desarrollo propio de MCU.
 
 ---
 
-Véase también [Familia SF32](../../sf32-products/family/SF32_family.md) para conocer la posición de STAR-MC1 dentro de la gama de chips SF32LB5x.
+Consulte también [Familia SF32](../../sf32-products/family/SF32_family.md) para conocer la posición de STAR-MC1 dentro de la gama de chips SF32LB5x.
 
 Referencia principal: [Manual de referencia técnica de Arm China STAR-MC1](https://www.armchina.com/webarm/arm/common/download/profile/resource/file/Documents/Application-Notes/Technical-Reference-Manual/Star_Technical_Reference_Manual_00903001_0100_00_en.pdf).

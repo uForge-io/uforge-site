@@ -7,7 +7,7 @@ tags:
 
 # Subsystemintegration { #intermediate-tutorials }
 
-Diese Tutorials setzen voraus, dass Sie die Inhalte zu [Erste Peripherie](beginner.md) beherrschen: GPIO, Shell, ADC-/PWM-Grundlagen und das Treibermuster `rt_device_find()`. Hier geht es von einzelnen Peripheriegeräten weiter zu Middleware und kombinierten Abläufen: Sensoren am I2C-Bus, grafische Benutzeroberfläche, BLE-Dienste, Audiowiedergabe, dauerhafte Datenspeicherung und einfache Koexistenztests.
+Diese Tutorials setzen voraus, dass Sie mit den Inhalten zu [Einstieg in die Peripherie](beginner.md) vertraut sind: GPIO, Shell, ADC-/PWM-Grundlagen und das Treibermuster `rt_device_find()`. Hier geht es von einzelnen Peripheriegeräten weiter zu Middleware und kombinierten Abläufen: Sensoren am I2C-Bus, grafische Benutzeroberfläche, BLE-Dienste, Audiowiedergabe, dauerhafte Datenspeicherung und einfache Koexistenztests.
 
 Es geht nicht nur darum, jedes Subsystem einmal zum Laufen zu bringen. Sie sollen lernen, wie Firmware für SF32 typischerweise aufgebaut wird: von einem passenden SDK-Beispiel ausgehen, den Hardwarepfad überprüfen, ihn an die RT-Thread-Geräte- oder Middleware-Schicht anbinden und anschließend im Zusammenspiel mit dem restlichen Produkt testen.
 
@@ -26,7 +26,7 @@ Beispielpfade und unterstützte Boards können je nach SDK-Version variieren. Pr
 | Anforderung | Warum es wichtig ist |
 |:------------|:---------------|
 | Funktionierende Shell | Sie benötigen `list_thread`, `list_device`, Logs und schnelle Inspektion. |
-| Bekanntermaßen funktionierender GPIO-Ein-/Ausgang | Viele Middleware-Demos benötigen weiterhin Taster, LEDs oder Interrupts. |
+| Nachweislich funktionierender GPIO-Ein-/Ausgang | Viele Middleware-Demos benötigen weiterhin Taster, LEDs oder Interrupts. |
 | Board-Schaltplan | Pins für I2C und Display, Audiopfad und Speicherlayout sind board-spezifisch. |
 | Verifizierter Ausgangsstand | Bewahren Sie einen nachweislich funktionierenden Build auf, bevor Sie Funktionen kombinieren. |
 | Möglichkeit, den Strom zu messen | Bei der Integration von Subsystemen kann sich der Ruhestrom ändern, auch wenn scheinbar alles funktioniert. |
@@ -49,11 +49,11 @@ rt_i2c_transfer(bus, msgs, 2);
 
 Der Name `i2c1` dient nur als Beispiel. Verwenden Sie den von Ihrem Board registrierten I2C-Gerätenamen und prüfen Sie, ob `rt_device_find()` ein gültiges Gerät zurückgibt, bevor Sie den Bus verwenden.
 
-1. Bestätigen Sie anhand des Datenblatts die Adresse des Sensors am I2C-Bus, das Registerlayout, die Versorgungsspannung und die erforderlichen Pull-ups.
-2. Bestätigen Sie, welchen `i2cX`-Bus und welche Pins Ihr Board verwendet.
+1. Prüfen Sie im Datenblatt die I2C-Adresse des Sensors, das Registerlayout, die Versorgungsspannung und die erforderlichen Pull-ups.
+2. Ermitteln Sie, welchen `i2cX`-Bus und welche Pins Ihr Board verwendet.
 3. Passen Sie das EEPROM- oder Master-Beispiel für I2C an, um mit dem Sensor zu kommunizieren. Falls er ein Geräte-ID-Register besitzt, lesen Sie dieses zuerst; andernfalls beginnen Sie mit einem Register, dessen erwartetes Verhalten bekannt ist.
 4. Dekodieren Sie eine echte Messung und geben Sie sie über die Shell aus.
-5. Falls der Sensor einen Interrupt- oder Data-Ready-Pin hat, verbinden Sie ihn mit dem GPIO-Interrupt-Muster aus Erste Peripherie, Übung 2.
+5. Falls der Sensor einen Interrupt- oder Data-Ready-Pin hat, verbinden Sie ihn mit dem GPIO-Interrupt-Muster aus Einstieg in die Peripherie, Übung 2.
 6. Ersetzen Sie regelmäßiges Polling nach Möglichkeit durch ereignisgesteuerte Lesevorgänge.
 
 **Erfolgskriterien:** Die Firmware liest ein bekanntes Register erwartungsgemäß (wenn verfügbar, ein Geräte-ID-Register), dekodiert einen plausiblen Sensorwert und blockiert das System nicht, wenn das Gerät fehlt.
@@ -64,7 +64,7 @@ Der Name `i2c1` dient nur als Beispiel. Verwenden Sie den von Ihrem Board regist
 
 ## Einen einfachen LVGL-Bildschirm erstellen { #build-a-basic-lvgl-screen }
 
-**Ziel:** ein echtes UI-Element auf dem Display darstellen, statt rohe Framebuffer-Schreibvorgänge.
+**Ziel:** ein sichtbares UI-Element auf dem Display darstellen, statt direkt in den Framebuffer zu schreiben.
 
 **Zeit:** 45–60 Minuten
 
@@ -97,8 +97,8 @@ lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
 **Beispiel als Ausgangspunkt:** `example/ble/peripheral`
 
 1. Beginnen Sie mit dem einfachen BLE-Peripherie-Beispiel und prüfen Sie das Advertising mit einer BLE-Scanner-App.
-2. Verbinden Sie sich vom Telefon aus und bestätigen Sie, dass das Gerät mehrere Minuten stabil bleibt.
-3. Wenn Sie Sensordaten senden möchten, richten Sie im GATT-Dienst des Beispiels eine passende Characteristic ein und aktualisieren Sie sie mit einem echten Messwert, etwa dem ADC-Wert aus Erste Peripherie, Übung 4, oder dem I2C-Sensorwert aus Übung 1 dieses Lernpfads.
+2. Verbinden Sie das Telefon mit dem Board und prüfen Sie, ob die Verbindung mehrere Minuten stabil bleibt.
+3. Wenn Sie Sensordaten senden möchten, richten Sie im GATT-Dienst des Beispiels eine passende Characteristic ein und aktualisieren Sie sie mit einem echten Messwert, etwa dem ADC-Wert aus Einstieg in die Peripherie, Übung 4, oder dem I2C-Sensorwert aus Übung 1 dieses Lernpfads.
 4. Konfigurieren Sie die erforderlichen Eigenschaften der Characteristic. Falls Sie Benachrichtigungen verwenden, aktivieren Sie sie und prüfen Sie, ob das Telefon die Wertänderungen empfängt.
 5. Testen Sie Trennung und Wiederverbindung sowie einen Reset des Boards während einer Verbindung.
 6. Lesen Sie die [Bluetooth-Übersicht](../../learn/bluetooth/overview.md#gatt-services-and-the-sibles-framework), bevor Sie einen individuellen Dienst entwerfen.
@@ -121,12 +121,12 @@ Die aktuelle Dokumentation nennt `sf32lb52-lchspi-ulp` als unterstützte Plattfo
 
 1. Laden Sie eine kleine Audiodatei im Format WAV oder MP3 auf das vom Beispiel erwartete Speichermedium.
 2. Bauen und flashen Sie das Beispiel.
-3. Bestätigen Sie, dass die Wiedergabe startet, der Ton sauber ist und das Board bei Wiedergabebeginn nicht zurückgesetzt wird.
-4. Binden Sie die Start-/Stopp-Logik der Wiedergabe in den Taster-Handler aus Erste Peripherie, Übung 2 ein.
+3. Prüfen Sie, ob die Wiedergabe startet, der Ton sauber ist und das Board beim Start nicht zurückgesetzt wird.
+4. Binden Sie die Start-/Stopp-Logik der Wiedergabe in den Taster-Handler aus Einstieg in die Peripherie, Übung 2 ein.
 5. Achten Sie auf Audioaussetzer durch Pufferunterläufe, während Shell-Logs ausgegeben oder Display-Inhalte aktualisiert werden.
 6. Lesen Sie die [Audioübersicht](../../learn/audio/overview.md#playback-and-recording-basics), bevor Sie Abtastrate, Format oder Puffergröße ändern.
 
-**Erfolgskriterien:** Die Wiedergabe lässt sich wiederholt starten, stoppen und fortsetzen, ohne Knackgeräusche oder Pufferunterläufe. Nach dem Stoppen bleibt kein Zustand mit hoher Leistungsaufnahme unnötig aktiv.
+**Erfolgskriterien:** Die Wiedergabe lässt sich wiederholt starten, stoppen und erneut starten, ohne Knackgeräusche oder Pufferunterläufe. Nach dem Stoppen bleibt kein aktiver Leistungszustand unnötig bestehen.
 
 **Fehlerbehebung:** Wenn der Ton verzerrt ist, prüfen Sie Abtastrate, Bittiefe, Ausgangspfad, Codec-Konfiguration, Dateiformat und Puffergröße. Prüfen Sie außerdem, ob die Lesevorgänge aus dem Speicher den Decoder rechtzeitig mit Daten versorgen.
 
@@ -151,13 +151,13 @@ close(fd);
 ```
 
 1. Verwenden Sie ein Dateisystem wie LittleFS für dateibasierte Logs. Für strukturierte Einstellungen oder Datensätze mit Zeitstempel können Sie den KVDB- oder TSDB-Modus von FlashDB prüfen und das zu Board und Speicherbaustein passende Backend wählen.
-2. Bestätigen Sie die vom Beispiel verwendete Partition und den Mount-Pfad.
+2. Prüfen Sie die vom Beispiel verwendete Partition und den Mount-Pfad.
 3. Schreiben Sie einen kleinen Log-Eintrag oder eine Einstellung.
-4. Trennen Sie das Board kurz von der Stromversorgung und bestätigen Sie, dass die Daten noch vorhanden sind.
+4. Schalten Sie das Board aus und wieder ein und prüfen Sie, ob die Daten weiterhin vorhanden sind.
 5. Protokollieren Sie periodisch Sensormesswerte aus Tutorial 1.
 6. Legen Sie eine einfache Aufbewahrungsregel fest, damit die Logs nicht unbegrenzt wachsen.
 
-**Erfolgskriterien:** Daten überstehen einen Neustart, und die Firmware behandelt fehlenden, vollen oder frisch formatierten Speicher robust.
+**Erfolgskriterien:** Daten überstehen einen Neustart, und die Firmware behandelt fehlenden, vollen oder neu formatierten Speicher robust.
 
 **Fehlerbehebung:** Prüfen Sie Partitionslayout, Mount-Pfad, Flash-Lösch- und Schreibfehler sowie das Schließen der Dateien. Achten Sie auch darauf, dass die Schreibfrequenz zur erwarteten Schreibfestigkeit des Speichers passt.
 
@@ -172,11 +172,11 @@ close(fd);
 **Beispiel als Ausgangspunkt:** Wählen Sie zwei der Tutorials 1–5 aus, die für Ihr Produkt am relevantesten sind.
 
 1. Wählen Sie zwei Subsysteme, die Ihr Produkt tatsächlich zusammen benötigt, etwa BLE plus einen Sensor am I2C-Bus, oder LVGL plus Audiowiedergabe.
-2. Verifizieren Sie zunächst jedes einzeln.
+2. Prüfen Sie zunächst jedes Subsystem einzeln.
 3. Kombinieren Sie sie mit minimalen Änderungen.
 4. Testen Sie beide unter gleichzeitiger Last: etwa eine BLE-Benachrichtigung während eines Lesevorgangs am I2C-Bus, eine UI-Animation während der Audiowiedergabe oder einen Speicherschreibvorgang während einer Sensoraktualisierung.
 5. Beobachten Sie CPU-Auslastung, Logs, Speicher und sichtbares Verhalten.
-6. Vergleichen Sie Ihre Beobachtungen mit der [Bluetooth-Übersicht](../../learn/bluetooth/overview.md#coexistence-with-other-workloads), der [Grafik-Übersicht](../../learn/graphics/overview.md#graphics-validation-matrix) und der [Low-Power-Übersicht](../../learn/low-power/overview.md#what-drains-power-on-an-sf32-product).
+6. Vergleichen Sie Ihre Beobachtungen mit der [Bluetooth-Übersicht](../../learn/bluetooth/overview.md#coexistence-with-other-workloads), der [Grafikübersicht](../../learn/graphics/overview.md#graphics-validation-matrix) und [Energiesparendes Design im Überblick](../../learn/low-power/overview.md#what-drains-power-on-an-sf32-product).
 
 **Erfolgskriterien:** Beide Subsysteme funktionieren weiterhin unter gleichzeitiger Aktivität, und der Ruhestrom kehrt nach Testende auf das erwartete Niveau zurück.
 
@@ -186,8 +186,8 @@ close(fd);
 
 ## Checkliste zur Subsystemintegration { #intermediate-integration-checklist }
 
-- [ ] Jedes Tutorial beginnt mit einem SDK-Beispiel, dessen Funktion bereits bestätigt wurde.
-- [ ] Zuerst wird jeder Hardwarepfad überprüft: ein bekanntes Sensorregister oder einen Messwert lesen, eine einfarbige Fläche anzeigen, BLE-Advertising, Audioausgabe oder Speicher einbinden.
+- [ ] Jedes Tutorial beginnt mit einem SDK-Beispiel, dessen Funktion bereits nachgewiesen wurde.
+- [ ] Zuerst wird jeder Hardwarepfad überprüft: ein bekanntes Sensorregister oder einen Messwert lesen, ein einfarbiges Testbild anzeigen, BLE-Advertising prüfen, Audio wiedergeben oder Speicher einbinden.
 - [ ] Die Funktion übersteht Reset und, sofern zutreffend, Trennung/Wiederverbindung.
 - [ ] Fehlerpfade werden getestet: fehlender Sensor, fehlende Datei, getrenntes Telefon, voller Speicher.
 - [ ] Mindestens ein kombinierter Lasttest wurde durchgeführt.

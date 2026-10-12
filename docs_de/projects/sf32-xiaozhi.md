@@ -16,9 +16,9 @@ tags:
 
 ## Warum die SF32-Implementierung? { #why-the-sf32-implementation }
 
-[78/xiaozhi-sf32](https://github.com/78/xiaozhi-sf32) ist die SF32-Implementierung, verwendet jedoch bewusst ein anderes Verbindungskonzept. Während das ursprüngliche ESP32-Projekt WLAN und weitere direkte Netzwerkverbindungen unterstützt, bezieht die SF32-Version den Internetzugang über [Bluetooth PAN](../learn/bluetooth/pan.md) im Classic-Modus von einem gekoppelten Smartphone. Dadurch verlagert sich die Last der Weitverkehrsverbindung vom Gerät auf das Smartphone. Bei einem smartphonegebundenen Produkt kann das den netzwerkbedingten Stromverbrauch des Geräts deutlich senken; die tatsächliche Einsparung hängt jedoch vom Smartphone, den Funkbedingungen, dem Zeitanteil aktiver Dialoge und der Energierichtlinie ab. Der Ansatz eignet sich daher besonders für akkubetriebene, persönliche tragbare Produkte wie Anhänger, Abzeichen, kompakte Assistenten und kleine Wearables.
+[78/xiaozhi-sf32](https://github.com/78/xiaozhi-sf32) ist die SF32-Implementierung, verwendet jedoch bewusst ein anderes Verbindungskonzept. Während das ursprüngliche ESP32-Projekt WLAN und weitere direkte Netzwerkverbindungen unterstützt, bezieht die SF32-Version den Internetzugang über [Bluetooth PAN](../learn/bluetooth/pan.md) im Classic-Modus von einem gekoppelten Smartphone. Dadurch wird die Netzwerkanbindung des Geräts an das Smartphone ausgelagert. Bei einem smartphonegebundenen Produkt kann das den netzwerkbedingten Stromverbrauch des Geräts deutlich senken; die tatsächliche Einsparung hängt jedoch vom Smartphone, den Funkbedingungen, dem Zeitanteil aktiver Dialoge und der Energierichtlinie ab. Der Ansatz eignet sich daher besonders für akkubetriebene, persönliche Geräte wie Anhänger, Smart-Badges, kompakte Assistenten und kleine Wearables.
 
-Die Referenz ist eine ungewöhnlich nützliche Produktreferenz, weil sie Bereiche zusammenführt, die oft getrennt betrachtet werden: Display- und Audiohardware, vom Smartphone bereitgestellte Netzwerkverbindung, Cloud-Sprachdienst, Aktivierungsablauf für Nutzer, Gerätesteuerung und Updates im Einsatz.
+Besonders wertvoll ist das Projekt als Produktvorlage, weil es Bereiche zusammenführt, die oft getrennt betrachtet werden: Display- und Audiohardware, die vom Smartphone bereitgestellte Netzwerkverbindung, einen Cloud-Sprachdienst, die Geräteaktivierung, Gerätesteuerung und Updates im Einsatz.
 
 ## Ergebnis, Umfang und Eintrittskriterien { #outcome-scope-and-entry-criteria }
 
@@ -28,7 +28,7 @@ Diese Seite beschreibt einen vollständigen technischen Weg, um die Referenz in 
 
 **Zielgruppe:** Firmware-, Hardware- und Produktentwickler, die bereits eine SF32-Basis bauen und flashen können und mit C/C++, Board-Schaltplänen, Bluetooth-Konfiguration und Cloud-Dienstintegration zu arbeiten bereit sind.
 
-<div align="center"><em>Tabelle: Projektvertrag</em></div>
+<div align="center"><em>Tabelle: Projektbasis und Nachweise</em></div>
 
 <div align="center" markdown>
 
@@ -37,7 +37,7 @@ Diese Seite beschreibt einen vollständigen technischen Weg, um die Referenz in 
 | Hardware | Dokumentiertes SF32LB52-Xiaozhi-Ziel mit Audio-/Displaypfad, USB-Flashanschluss und Stromversorgung | Kaltstart, Tasten, Display, Mikrofon, Lautsprecher sowie Lade-/Akkuanzeige, sofern vorhanden |
 | Verbindung | Smartphone, das als `sifli-pan` gekoppelt werden und Bluetooth-PAN-Internetfreigabe bereitstellen kann | Die Board-UI bestätigt PAN; Unterbrechung und Wiederverbindung sind reproduzierbar |
 | Dienst | Xiaozhi-Konto, Geräteaktivierung und über die Xiaozhi-Konsole konfigurierter Agent | Eine Dialoganfrage erreicht den Dienst und die Antwort kehrt zum Board zurück |
-| Firmware | Dokumentierter Upstream-Commit, SDK-Submodulrevision, Boardziel und Build-/Downloadmethode | Reproduzierbarer sauberer Build, Flashvorgang, serielles Protokoll und Firmwareartefakt |
+| Firmware | Dokumentierter Upstream-Commit, SDK-Submodulrevision, Boardziel und Build-/Download-Methode | Reproduzierbarer sauberer Build, Flashvorgang, serielles Protokoll und Firmwareartefakt |
 | Produktanpassung | Eine bewusst begrenzte Änderung, etwa Markenauftritt der UI, Gerätename, Akkukurve oder ein sicherer MCP-gesteuerter Ausgang | Der ursprüngliche Sprachdialog funktioniert danach weiterhin |
 
 </div>
@@ -48,7 +48,7 @@ Das folgende Manifest beschreibt eine konkrete Referenz für den Build aus Quell
 
 ### Hardware-Spezifikation { #hardware-specification }
 
-<div align="center"><em>Tabelle: Hardwarespezifikation der Xiaozhi-Nano-Referenz</em></div>
+<div align="center"><em>Tabelle: Hardware-Spezifikation der Xiaozhi-Nano-Referenz</em></div>
 
 <div align="center" markdown>
 
@@ -69,15 +69,15 @@ Die oben genannten Links zu Drittanbieterkomponenten sind Marktplatzangebote aus
 
 ### Software-Spezifikation { #software-specification }
 
-<div align="center"><em>Tabelle: Softwarespezifikation der Xiaozhi-Referenz</em></div>
+<div align="center"><em>Tabelle: Software-Spezifikation der Xiaozhi-Referenz</em></div>
 
 <div align="center" markdown>
 
 | Paket oder Dienst | Erforderliche Version/Revision | Funktion | Status | Bezugsquelle | Hinweise zu Kompatibilität und Updates |
 |:-------------------|:-----------------------------|:-----|:-------|:----------------|:-------------------------------|
-| Vorgefertigte Xiaozhi-SF32-Firmware | v1.4.0 | Unverändertes Referenzimage für Basis und Wiederherstellung | Für Phasen 1–2 erforderlich | [Release v1.4.0](https://github.com/78/xiaozhi-sf32/releases/tag/v1.4.0) | Für die Nano-R16N16-Basis `sf32lb52-nano_52j.zip` auswählen. Archive verschiedener Boards nicht vermischen. |
+| Vorgefertigte Xiaozhi-SF32-Firmware | v1.4.0 | Unverändertes Referenz-Image für Basis und Wiederherstellung | Für Phasen 1–2 erforderlich | [Release v1.4.0](https://github.com/78/xiaozhi-sf32/releases/tag/v1.4.0) | Für die Nano-R16N16-Basis `sf32lb52-nano_52j.zip` auswählen. Archive verschiedener Boards nicht vermischen. |
 | Quellcode `78/xiaozhi-sf32` | Commit [`1d3ef641ace47fae68227e9173647fd5db01f6f5`](https://github.com/78/xiaozhi-sf32/commit/1d3ef641ace47fae68227e9173647fd5db01f6f5) | Anwendungsquellcode und Boardkonfiguration | Für Phasen 3–4 erforderlich | [Repository](https://github.com/78/xiaozhi-sf32) | Dies ist der für diesen Artikel geprüfte Quellstand. Spätere Commits als neue Basis dokumentieren und alle Prüfschritte wiederholen. |
-| SiFli-SDK-Submodul | Commit [`0d2de1480f735e05017c41436e655a1688063881`](https://github.com/OpenSiFli/SiFli-SDK/tree/0d2de1480f735e05017c41436e655a1688063881) | SF32-Treiber, RTOS, Middleware, Toolchainskripte und SCons-Buildumgebung | Für Phasen 3–4 erforderlich | [OpenSiFli/SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) über das `sdk`-Submodul des Repositories | Die im ausgewählten Anwendungskommit dokumentierte Submodulrevision verwenden; SDK innerhalb einer beibehaltenen Basis nicht unabhängig aktualisieren. |
+| SiFli-SDK-Submodul | Commit [`0d2de1480f735e05017c41436e655a1688063881`](https://github.com/OpenSiFli/SiFli-SDK/tree/0d2de1480f735e05017c41436e655a1688063881) | SF32-Treiber, RTOS, Middleware, Toolchainskripte und SCons-Buildumgebung | Für Phasen 3–4 erforderlich | [OpenSiFli/SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) über das `sdk`-Submodul des Repositories | Verwenden Sie die im Commit der ausgewählten Anwendung festgelegte Submodulrevision; aktualisieren Sie das SDK innerhalb einer beibehaltenen Basis nicht unabhängig. |
 | sftool-GUI | v1.2.1; SHA-256 des ausgewählten Betriebssystemartefakts aus der Release-Seite sichern | Flashen des vorgefertigten Images und lokale Wiederherstellung | Für den dokumentierten GUI-Pfad mit v1.4.0 erforderlich | [Release v1.2.1 und Plattformartefakte](https://github.com/OpenSiFli/sftool-gui/releases/tag/v1.2.1) | Hostbetriebssystem, Artefaktdateiname und Prüfsumme dokumentieren. Ein neueres Release vor dem Einsatz qualifizieren. |
 | Buildwerkzeuge des Hosts | Installations-/Exportskripte aus dem fixierten SiFli-SDK; von diesen Skripten eingerichtete SCons-Umgebung | Quellcodekonfiguration und Build | Für Phasen 3–4 erforderlich | [Offizielle Xiaozhi-Anleitung zum Build aus Quellcode](https://docs.sifli.com/projects/xiaozhi/source-build/) | Hostbetriebssystem, Architektur, Skriptergebnis und exportierte Umgebung dokumentieren. Global installierte Werkzeuge dürfen die fixierte SDK-Umgebung nicht unbemerkt überschreiben. |
 | Xiaozhi-Cloudkonsole und -dienst | Gehosteter Dienst unter `xiaozhi.me`; Validierungsdatum, Kontoinhaber, Agentkonfiguration und Endpunkt dokumentieren | Aktivierung, Streaming-ASR/LLM/TTS und Cloud-MCP | Für Dialog erforderlich | [Xiaozhi-Konsole](https://xiaozhi.me) | Für den gehosteten Dienst kann der Nutzer kein Release fixieren. Verhalten, Bedingungen, Verfügbarkeit und regionale Erreichbarkeit sind als extern kontrollierte Abhängigkeiten zu behandeln. |
@@ -105,11 +105,11 @@ Die SiFli-Schnellstartdokumentation für Xiaozhi nennt vier Ziele für vorgefert
 
 Betrachten Sie die Phasen als Entscheidungspunkte und nicht als Funktions-Checkliste. Jede Phase hinterlässt ein Artefakt, anhand dessen sich die nächste Entscheidung nachvollziehbar prüfen und wiederholen lässt.
 
-<div align="center"><em>Tabelle: Phasenplan</em></div>
+<div align="center"><em>Tabelle: Projektphasen und Entscheidungspunkte</em></div>
 
 <div align="center" markdown>
 
-| Phase | Unterstützte Entscheidung | Erforderliches Ergebnis |
+| Phase | Entscheidungsfrage | Erforderliches Ergebnis |
 |:------|:---------------------|:----------------|
 | 1. Referenzbasis | Funktionieren das dokumentierte Board, Smartphone, Konto und der Dienst unverändert zusammen? | Aufgezeichnete, nachweislich funktionierende Dialogsitzung. |
 | 2. Wiederherstellungsprüfung | Ist die Basis auch bei den Fehlern zuverlässig, die Nutzer erleben werden? | Bestandenes Prüfprotokoll zu Fehlern und Wiederherstellung. |
@@ -141,11 +141,11 @@ Daraus ergeben sich vier Fehlerbereiche, die unabhängig voneinander diagnostizi
 
 1. Richten Sie die Hardware gemäß der offiziellen Anleitung für das jeweilige Board ein. Beim DevKit-LCD gehören dazu die vorgesehene AMOLED-/FPC-Anordnung, ein Lautsprecher an `SPK`, `KEY1` zum Aktivieren und Starten eines Dialogs sowie langes Drücken von `KEY2` zum Ausschalten.
 2. Flashen Sie die unterstützte vorgefertigte Firmware nach dem offiziellen Xiaozhi-Verfahren. Die Schnellstartanleitung empfiehlt das grafische Flash-Tool. Zum Zeitpunkt der Anleitung wird das Flashen über das Terminal für Firmware ab Version 1.4.0 nicht unterstützt.
-3. Aktivieren Sie auf dem Smartphone **vor dem Koppeln die Bluetooth-Internetfreigabe**. Koppeln Sie es mit `sifli-pan` und prüfen Sie in der Board-UI sowie am Freigabestatus des Smartphones, dass PAN aktiv ist und nicht nur eine Bluetooth-Kopplung besteht. Laut offizieller Anleitung kann unter iOS ein Neustart des Smartphones erforderlich sein, wenn `sifli-pan` nicht angezeigt wird.
+3. Aktivieren Sie auf dem Smartphone **Bluetooth Internet sharing** (Bluetooth-Internetfreigabe) vor dem Koppeln. Koppeln Sie es mit `sifli-pan` und prüfen Sie in der Board-UI sowie am Freigabestatus des Smartphones, dass PAN aktiv ist und nicht nur eine Bluetooth-Kopplung besteht. Laut offizieller Anleitung kann unter iOS ein Neustart des Smartphones erforderlich sein, wenn `sifli-pan` nicht angezeigt wird.
 4. Führen Sie den offiziellen Aktivierungsablauf in der Xiaozhi-Konsole unter [xiaozhi.me](https://xiaozhi.me) aus: Erstellen und konfigurieren Sie einen Agenten und fügen Sie den vom Board angezeigten Gerätecode hinzu.
 5. Führen Sie mit der Dialogtaste des Boards oder dem konfigurierten Aktivierungspfad einen Dialog. Halten Sie Firmwareversion, Board, Smartphone-Modell und Betriebssystem sowie Konto- und Agentenkennung im Projektprotokoll fest.
 
-**Abnahmekriterium für Phase 1:** Nach einem Kaltstart stellt das Gerät PAN her, meldet seine Aktivierung, nimmt eine Dialoganfrage an, gibt eine Antwort wieder und zeigt den erwarteten UI-Zustand.
+**Abnahmekriterium für Kontrollpunkt 1:** Nach einem Kaltstart stellt das Gerät PAN her, meldet seine Aktivierung, nimmt eine Dialoganfrage an, gibt eine Antwort wieder und zeigt den erwarteten UI-Zustand.
 
 ## Phase 2 — Wiederherstellung und produktkritisches Verhalten nachweisen { #stage-2-prove-recovery-and-product-critical-behavior }
 
@@ -158,17 +158,17 @@ Führen Sie diese Tests vor jeder Quellcodeänderung aus. So wird aus der Demons
 | Test | Vorgehen | Nachweis für „bestanden“ |
 |:-----|:-------|:--------------|
 | Kein PAN | Koppeln Sie das Smartphone, ohne die Bluetooth-Internetfreigabe zu aktivieren. | UI oder Protokoll weisen klar auf das fehlende PAN hin; nach Aktivierung der Freigabe und erneuter Verbindung funktioniert der Dienst wieder. |
-| PAN-Verlust | Deaktivieren Sie die Freigabe, trennen Sie Bluetooth oder verlassen Sie während des Ruhezustands bzw. eines Dialogs die Reichweite. | Das Gerät erkennt den Fehler, kehrt in einen wiederherstellbaren Zustand zurück und verbindet sich über den dokumentierten Aktivierungs-/Wiederverbindungspfad erneut. |
+| PAN-Verlust | Deaktivieren Sie die Freigabe, trennen Sie Bluetooth oder verlassen Sie im Leerlauf bzw. während eines Dialogs die Reichweite. | Das Gerät erkennt den Fehler, kehrt in einen wiederherstellbaren Zustand zurück und verbindet sich über den dokumentierten Aktivierungs-/Wiederverbindungspfad erneut. |
 | Schlafen und Aufwachen | Lassen Sie das Gerät inaktiv, bis es in den Schlafmodus wechselt, und betätigen Sie dann die vorgesehene Aktivierungssteuerung. | Aufwachen, Wiederverbindung und nächster Dialog lassen sich ohne erneutes Flashen wiederholen. |
 | Audio und UI | Führen Sie bei realistischer Lautstärke mehrere Dialoge aus. | Die Aufnahme ist verständlich, die Wiedergabe klar, die UI bleibt reaktionsfähig und es tritt kein Reset auf. |
-| Akkuanzeige | Laden und entladen Sie den Akku über repräsentative Ladezustände hinweg. | Der angezeigte Ladezustand ist plausibel; ein anderer als der Referenzakku wird für die Kurvenkalibrierung markiert. |
+| Akkuanzeige | Laden und entladen Sie den Akku über repräsentative Ladezustände hinweg. | Der angezeigte Ladezustand ist plausibel; ein vom Referenzakku abweichender Akku ist zur Kurvenkalibrierung zu markieren. |
 | Dienstgrenze | Testen Sie ein Konto bzw. einen Agenten, bei dem die erwartete Konfiguration absichtlich fehlt. | Der Fehler lässt sich von PAN- und Hardwarefehlern unterscheiden. |
 
 </div>
 
 Die offizielle Anleitung weist darauf hin, dass die standardmäßige `battery_table.c`-Kurve eines Boards für einen anderen Akku ungenau sein kann. Beschaffen Sie für den Produktakku die Lade-/Entladedaten des Lieferanten oder messen Sie sie selbst. Aktualisieren Sie `charging_curve_table` und `discharge_curve_table`, erstellen Sie den Build neu und wiederholen Sie die Akkutests.
 
-**Abnahmekriterium für Phase 2:** Für jeden Test liegt ein Ergebnis vor, Fehler lassen sich den jeweiligen Fehlerbereichen zuordnen und jeder dokumentierte Wiederherstellungspfad funktioniert ohne erneutes Flashen oder manuelle Zustandskorrektur.
+**Abnahmekriterium für Kontrollpunkt 2:** Für jeden Test liegt ein Ergebnis vor, Fehler lassen sich den jeweiligen Fehlerbereichen zuordnen und jeder dokumentierte Wiederherstellungspfad funktioniert ohne erneutes Flashen oder manuelle Zustandskorrektur.
 
 ## Phase 3 — Eine reproduzierbare Quellbasis erstellen { #stage-3-build-a-reproducible-source-baseline }
 
@@ -190,9 +190,9 @@ Für das offizielle Skript-Build-Beispiel des DevKit-ULP erstellen Sie den Build
 scons --board=sf32lb52-lchspi-ulp --board_search_path="../boards" -j8
 ```
 
-Verwenden Sie für das genaue Buildziel und das Downloadskript die offizielle Build-Seite des jeweiligen Boards. Übernehmen Sie weder den ULP-Boardnamen noch den Pfad des erzeugten Artefakts für ein anderes Board. Ein reproduzierbares Buildprotokoll muss Hostbetriebssystem, Ergebnis der Tool-Installation, exportierte Umgebung, Boardargument, Upstream-/SDK-Revision, Buildprotokoll, heruntergeladenes Image und serielles Protokoll enthalten.
+Verwenden Sie für das genaue Buildziel und das Download-Skript die offizielle Build-Seite des jeweiligen Boards. Übernehmen Sie weder den ULP-Boardnamen noch den Pfad des erzeugten Artefakts für ein anderes Board. Ein reproduzierbares Buildprotokoll muss Hostbetriebssystem, Ergebnis der Tool-Installation, exportierte Umgebung, Boardargument, Upstream-/SDK-Revision, Buildprotokoll, heruntergeladenes Image und serielles Protokoll enthalten.
 
-**Abnahmekriterium für Phase 3:** Ein sauberer Checkout auf einem zweiten Rechner oder nach dem Löschen des Build-Verzeichnisses erzeugt ein Image, das alle Prüfungen aus Phase 2 besteht.
+**Abnahmekriterium für Kontrollpunkt 3:** Ein sauberer Checkout auf einem zweiten Rechner oder nach dem Löschen des Build-Verzeichnisses erzeugt ein Image, das alle Prüfungen aus Phase 2 besteht.
 
 ## Phase 4 — Gezielt anpassen { #stage-4-adapt-deliberately }
 
@@ -214,9 +214,9 @@ Nehmen Sie jeweils nur eine Änderung vor und bewahren Sie das bestandene Basisi
 
 Für MCP auf dem Gerät verwendet die offizielle Anleitung `McpServer::AddCommonTools()` in `app/src/mcp/mcp_server.cc`. Behandeln Sie eine vom LLM angeforderte Aktion als nicht vertrauenswürdige Anfrage: Prüfen Sie Wertebereich und Zustand im Callback, setzen Sie Ausgänge standardmäßig in einen sicheren Zustand und geben Sie irreversible, gefährliche oder sicherheitskritische Steuerungen nur mit produktspezifischer Autorisierung frei.
 
-Für PAN-OTA beschreibt die offizielle Dokumentation drei unabhängig bereitstellbare Imageklassen: Code, Bildressourcen und Schriftressourcen. Adresse und Größe der Images sind der Partitionstabelle zu entnehmen. Vor der Freigabe eines OTA-Updates für Nutzer braucht es in der Produktion eine Versionsrichtlinie, Zugriffskontrolle für den Server, Integritätsprüfung, einen Unterbrechungstest und einen kabelgebundenen oder lokalen Wiederherstellungspfad.
+Für PAN-OTA beschreibt die offizielle Dokumentation drei unabhängig bereitstellbare Image-Klassen: Code, Bildressourcen und Schriftressourcen. Adresse und Größe der Images sind der Partitionstabelle zu entnehmen. Vor der Freigabe eines OTA-Updates für Nutzer braucht es in der Produktion eine Versionsrichtlinie, Zugriffskontrolle für den Server, Integritätsprüfung, einen Unterbrechungstest und einen kabelgebundenen oder lokalen Wiederherstellungspfad.
 
-**Abnahmekriterium für Phase 4:** Die ausgewählte Änderung, ihr Rollback- oder Wiederherstellungspfad und alle einschlägigen Regressionsergebnisse sind dokumentiert. Der ursprüngliche Dialogablauf und die Sicherheitsgrenzen jeder Geräteaktion funktionieren weiterhin.
+**Abnahmekriterium für Kontrollpunkt 4:** Die ausgewählte Änderung, ihr Rollback- oder Wiederherstellungspfad und alle einschlägigen Regressionsergebnisse sind dokumentiert. Der ursprüngliche Dialogablauf und die Sicherheitsgrenzen jeder Geräteaktion funktionieren weiterhin.
 
 ## Phase 5 — Produktreife-Überprüfung { #stage-5-product-readiness-review }
 
@@ -229,11 +229,11 @@ Wechseln Sie erst zu kundenspezifischer Hardware, wenn das Team alle folgenden F
 - Wie erholt sich das Gerät nach einem fehlgeschlagenen Update, einem verlorenen Smartphone, einem Cloud-Ausfall, beschädigten Ressourcen oder einer fehlerhaften Konfiguration?
 - Welche Teile des Upstream-Codes, des Dienstes, des Modellverhaltens und der OTA-Infrastruktur kontrolliert Ihr Produktteam, und welche werden von externen Anbietern bereitgestellt?
 
-**Abnahmekriterium für Phase 5:** Das Produktteam hat die Antworten, verantwortlichen Personen und verbleibenden Risiken dokumentiert und akzeptiert. Für jeden offenen Punkt gibt es eine Gegenmaßnahme, einen ausdrücklich beschlossenen Aufschub oder eine Abbruchentscheidung.
+**Abnahmekriterium für Kontrollpunkt 5:** Das Produktteam hat die Antworten, verantwortlichen Personen und verbleibenden Risiken dokumentiert und akzeptiert. Für jeden offenen Punkt gibt es eine Gegenmaßnahme, einen ausdrücklich beschlossenen Aufschub oder eine Abbruchentscheidung.
 
 ## Übergabe an das Produktdesign { #handoff-to-product-design }
 
-Übernehmen Sie das ausgewählte SF32-Bauteil, die Stromversorgungsarchitektur, das Display-/Audiodesign, die HF-Strategie, den Speicher- und Partitionsplan, die Produktionstests sowie die Annahmen zur Wiederherstellung in [Design für die Produktion](../hardware/design-for-production.md). Verwenden Sie den [Integrationspfad für SF32LB52](../sf32-products/chips/SF32LB52x.md#integration-path), um den passenden Chip, das Modul, Board, den Leitfaden und die Checkliste auszuwählen.
+Übernehmen Sie das ausgewählte SF32-Gerät, die Stromversorgungsarchitektur, das Display-/Audiodesign, die RF-Strategie, den Speicher- und Partitionsplan, die Produktionstests sowie die Annahmen zur Wiederherstellung in [Design für die Produktion](../hardware/design-for-production.md). Verwenden Sie den [Integrationspfad für SF32LB52](../sf32-products/chips/SF32LB52x.md#integration-path), um den passenden Chip, das Modul, Board, den Leitfaden und die Checkliste auszuwählen.
 
 **Definition des Projektabschlusses:** Die Referenz hat ihren Zweck erfüllt, wenn ein neues Teammitglied die ausgewählte Basis reproduzieren, jeden beobachteten Fehler seinem Verantwortlichen oder Wiederherstellungspfad zuordnen, das angepasste Image neu erstellen und die Nachweise für die Entscheidung über kundenspezifische Hardware prüfen kann. Sie dient dann als Referenz für die Produktentwicklung und nicht als ungeprüfte Demonstration, die in die Produktion übernommen wird.
 

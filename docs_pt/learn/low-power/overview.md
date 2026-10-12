@@ -26,7 +26,7 @@ Antes de escrever o código de gerenciamento de energia, estabeleça o que o pro
 - Quais subsistemas precisam permanecer ativos, como um enlace Bluetooth, um display sempre ativo ou uma função de ativação por voz? Quais podem funcionar apenas em resposta a eventos?
 - Comportamento de carga e ciclos de carga previstos, quando forem relevantes para a política de energia do produto.
 
-Essas metas devem orientar cedo as decisões de arquitetura, incluindo a escolha do chip e do display e a viabilidade de recursos como escuta contínua de voz ou tela sempre ativa dentro do orçamento de energia.
+Essas metas devem orientar cedo as decisões de arquitetura, incluindo a escolha do chip e do display e a viabilidade de recursos como escuta contínua de voz ou display sempre ativo dentro do orçamento de energia.
 
 ## Modos de energia e framework PM { #power-modes-and-the-pm-framework }
 
@@ -45,7 +45,7 @@ As categorias abaixo são estados conceituais do sistema, não uma lista exata d
 
 </div>
 
-Durante a execução normal, o sistema alterna entre estados. Uma fonte de despertar configurada acorda a CPU ou o subsistema; a sequência de despertar e restauração dos clocks varia conforme o dispositivo. Ao concluir o trabalho, os drivers ou tarefas responsáveis devem liberar as solicitações de PM que impedem a suspensão, para que a política configurada selecione um estado de baixo consumo permitido. A curva abaixo é ilustrativa: mostra transições relativas, não correntes ou tempos específicos de um dispositivo.
+Durante a execução normal, o sistema alterna entre estados. Uma fonte de despertar configurada desperta a CPU ou o subsistema; a sequência de despertar e restauração dos clocks varia conforme o dispositivo. Ao concluir o trabalho, os drivers ou tarefas responsáveis devem liberar as solicitações de PM que impedem a suspensão, para que a política configurada selecione um estado de baixo consumo permitido. A curva abaixo é ilustrativa: mostra transições relativas, não correntes ou tempos específicos de um dispositivo.
 
 <div align="center">
 <img src="assets/power-mode-transition-pt.svg" alt="Curva ilustrativa de corrente relativa com suspensão profunda, despertar, trabalho ativo, inatividade e retorno ao baixo consumo" width="960">
@@ -108,9 +108,9 @@ Para medir, por cenário, o consumo real com apenas Bluetooth clássico, apenas 
 Displays e iluminação de fundo frequentemente representam o maior consumo individual em produtos vestíveis ou portáteis:
 
 - Use atualização parcial e de regiões alteradas em vez de redesenhar toda a tela quando o painel e a interface permitirem; consulte [Controlador de display: atualização parcial](../graphics/display-controller.md#partial-refresh-and-dirty-regions).
-- Durante a inatividade, reduza o brilho da tela ou desligue a iluminação de fundo, se houver. Pare também as animações quando a tela estiver escurecida ou coberta.
-- Para produtos com tela sempre ativa, compare painéis como EPD, JDI/memory-in-pixel, AMOLED e TFT pela energia medida nesse modo e pela experiência de uso exigida. Escolha o painel e a política de operação que atendam ao orçamento, em vez de manter continuamente um modo normal de tela ativa.
-- Trate a tela sempre ativa como uma linha independente no orçamento, pois ela muda substancialmente o significado de “inativo” para o produto.
+- Durante a inatividade, reduza o brilho do display ou desligue a iluminação de fundo, se houver. Pare também as animações quando a tela estiver escurecida ou coberta.
+- Para produtos com display sempre ativo, compare painéis como EPD, JDI/memory-in-pixel, AMOLED e TFT pela energia medida nesse modo e pela experiência de uso exigida. Escolha o painel e a política de operação que atendam ao orçamento, em vez de manter continuamente um modo normal de display ativo.
+- Trate o display sempre ativo como uma linha independente no orçamento, pois ela muda substancialmente o significado de “inativo” para o produto.
 
 ## Ajuste o consumo de IA e sensores { #ai-and-sensor-power-tuning }
 
@@ -143,7 +143,7 @@ A política do firmware só pode funcionar dentro dos limites do hardware:
 
 ## Caso prático: acender a tela ao levantar o pulso { #case-study-raise-to-wake }
 
-Acender a tela quando o usuário levanta o pulso é um caso de uso comum em dispositivos vestíveis, mas a implementação depende do sensor, da placa e do SDK. O [exemplo da SiFli para SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/raise_wrist/README.html) destina-se à placa `sf32lb52-lchspi-ulp` e usa um LSM6DSL (acelerômetro/giroscópio), amostrando a aceleração a cada 200 ms para reconhecer os gestos de levantar e abaixar o pulso. O dispositivo entra em suspensão após 10 segundos de inatividade e desperta para acender a tela ao detectar o gesto de levantar o pulso. Essa é uma implementação específica da placa e não demonstra que outros alvos usem interrupção do sensor ou o mesmo comportamento de PM. Se o sensor de destino oferecer interrupções de movimento ou de limite, o firmware poderá configurá-las como fonte de despertar para evitar polling contínuo pela CPU da aplicação. Caso contrário, inclua a amostragem do sensor e os despertares da CPU no orçamento de energia. Verifique o sensor, a placa, as fontes de despertar e a configuração de PM do alvo específico.
+Acender a tela quando o usuário levanta o pulso é um caso de uso comum em dispositivos vestíveis, mas a implementação depende do sensor, da placa e do SDK. O [exemplo da SiFli para SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/raise_wrist/README.html) destina-se à placa `sf32lb52-lchspi-ulp` e usa um LSM6DSL (acelerômetro/giroscópio), amostrando a aceleração a cada 200 ms para reconhecer os gestos de levantar e abaixar o pulso. O dispositivo entra em suspensão após 10 segundos de inatividade e desperta para acender o display ao detectar o gesto de levantar o pulso. Essa é uma implementação específica da placa e não demonstra que outros alvos usem interrupção do sensor ou o mesmo comportamento de PM. Se o sensor de destino oferecer interrupções de movimento ou de limite, o firmware poderá configurá-las como fonte de despertar para evitar polling contínuo pela CPU da aplicação. Caso contrário, inclua a amostragem do sensor e os despertares da CPU no orçamento de energia. Verifique o sensor, a placa, as fontes de despertar e a configuração de PM do alvo específico.
 
 ## Planilha de orçamento de energia { #power-budget-worksheet }
 
@@ -155,9 +155,9 @@ Transforme as metas do produto em números antes de ajustar o firmware. Uma plan
 
 | Estado | Pergunta orientadora | Item do orçamento |
 |:------|:-----------------|:------------|
-| Transporte / armazenamento | Quanto tempo o produto pode ficar armazenado antes do primeiro uso? | Corrente de suspensão profunda, retenção do RTC e fugas em componentes externos. |
-| Conectado e inativo | Quantas horas por dia ele fica pareado, mas sem uso? | Intervalo BLE, latência do periférico, interrupções de sensores e corrente com a tela apagada. |
-| Consulta rápida da tela | Com que frequência a tela desperta e por quanto tempo? | Iluminação de fundo, atualização parcial, atividade breve de CPU/interface e controlador de toque. |
+| Em estoque / armazenamento | Quanto tempo o produto pode ficar armazenado antes do primeiro uso? | Corrente de suspensão profunda, retenção do RTC e fugas em componentes externos. |
+| Conectado e inativo | Quantas horas por dia ele fica pareado, mas sem uso? | Intervalo BLE, latência do periférico, interrupções de sensores e corrente com o display apagado. |
+| Consulta rápida do display | Com que frequência o display desperta e por quanto tempo? | Iluminação de fundo, atualização parcial, atividade breve de CPU/interface e controlador de toque. |
 | Sessão de áudio | Quanto tempo dura a reprodução, a gravação ou a chamada? | Codec, DMA, áudio Bluetooth e largura de banda da memória. |
 | Processamento breve de IA | Com que frequência a inferência é executada? | Captura do sensor, pré-processamento, tempo do acelerador/CPU e pós-processamento. |
 | OTA / manutenção | Com que frequência são esperadas atualizações? | Intervalo de conexão curto, apagamento/escrita de Flash e armazenamento para rollback. |
@@ -182,7 +182,7 @@ flowchart LR
     F --> B
 ```
 
-Trate o perfil como uma estimativa, não como uma medição. O [Online Power Profiler for Bluetooth LE](https://devzone.nordicsemi.com/power/w/opp/2/online-power-profiler-for-bluetooth-le) da Nordic segue o mesmo princípio: usa modelos derivados de medições, mas seus resultados são valores esperados, não a medição de um produto específico. A corrente pode variar com o silício, o projeto da placa, a tensão da bateria, a temperatura, as condições de RF, os tempos do firmware e o caso de uso.
+Trate o perfil como uma estimativa, não como uma medição. O [Online Power Profiler for Bluetooth LE](https://devzone.nordicsemi.com/power/w/opp/2/online-power-profiler-for-bluetooth-le) da Nordic segue o mesmo princípio: usa modelos derivados de medições, mas seus resultados são valores esperados, não a medição de um produto específico. A corrente pode variar com o silício, o projeto da placa, a tensão da bateria, a temperatura, as condições de RF, a temporização do firmware e o caso de uso.
 
 Em cada cenário, registre as premissas que afetam significativamente a energia:
 
@@ -233,7 +233,7 @@ Use cenários reproduzíveis para comparar melhorias entre revisões do firmware
 
 | Cenário | O que habilitar | Critério de aprovação |
 |:-----------|:---------------|:---------------|
-| Inicialização até o estado inativo | Inicialização normal, sem pareamento, tela apagada | Nenhum trabalho periódico além dos temporizadores necessários. |
+| Inicialização até o estado inativo | Inicialização normal, sem pareamento, display apagado | Nenhum trabalho periódico além dos temporizadores necessários. |
 | Conectado e inativo | Enlace BLE com bonding e parâmetros de conexão de produção | Verifique se a CPU ou o núcleo que deveria dormir atinge o estado de baixo consumo desejado entre eventos de enlace; confirme a distribuição das tarefas Bluetooth e o comportamento de despertar. |
 | Consulta da interface | Despertar do display, atualização típica de uma tela e timeout de redução de brilho | Iluminação de fundo e animações param após o timeout. |
 | Áudio ativo | Caminho de reprodução ou gravação ativo | Sem underrun; o codec desliga após a sessão. |
@@ -271,7 +271,7 @@ Registre versão do firmware, revisão da placa, tensão da bateria/fonte, tempe
 - Medir apenas corrente instantânea em vez da energia de um cenário de uso realista.
 - Validar apenas na bancada, nunca no gabinete final com antena e bateria reais.
 
-## Lista de verificação para a integração inicial { #bring-up-checklist }
+## Checklist para a integração inicial { #bring-up-checklist }
 
 - [ ] Defina autonomia alvo, ciclo de trabalho e fontes de despertar necessárias.
 - [ ] Identifique quais subsistemas precisam permanecer ativos continuamente e quais podem ser totalmente acionados por eventos.

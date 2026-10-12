@@ -7,7 +7,7 @@ tags:
     - AVL
 ---
 
-# SF32 承認ベンダーリスト { #sf32-approved-vendor-list }
+# SF32承認ベンダーリスト { #sf32-approved-vendor-list }
 
 ## このリストの目的 { #what-this-list-is-for }
 
@@ -17,7 +17,7 @@ tags:
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-excel: __[SiFli 承認ベンダーリスト（AVL）：V0.3 .xlsxをダウンロード](https://downloads.sifli.com/hardware/files/documentation/SIFLI-MCU-AVL-%E8%AE%A4%E8%AF%81%E8%A1%A8-V0.3-20260121.xlsx)__
+- :fontawesome-solid-file-excel: __[SiFli承認ベンダーリスト（AVL）：V0.3 .xlsxをダウンロード](https://downloads.sifli.com/hardware/files/documentation/SIFLI-MCU-AVL-%E8%AE%A4%E8%AF%81%E8%A1%A8-V0.3-20260121.xlsx)__
 - :fontawesome-solid-globe: __[SiFli Wiki — ハードウェア設計ガイドとダウンロード](https://wiki.sifli.com/en/hardware/index.html)__
 
 </div>
@@ -33,7 +33,7 @@ tags:
 
 ## 掲載内容の概要 { #coverage-at-a-glance }
 
-<div align="center"><em>表：掲載内容の概要</em></div>
+<div align="center"><em>表: 掲載内容の概要</em></div>
 
 <div align="center" markdown>
 
@@ -54,7 +54,7 @@ tags:
 
 ## 改訂履歴 { #revision-history }
 
-<div align="center"><em>表：改訂履歴</em></div>
+<div align="center"><em>表: 改訂履歴</em></div>
 
 <div align="center" markdown>
 
@@ -75,7 +75,7 @@ AVLは、48 MHzのシステム用水晶振動子と32.768 kHzのRTC用水晶振�
 ### 48 MHzシステム用水晶振動子 { #48-mhz-system-crystal }
 
 !!! info "要件"
-    負荷容量 CL ≤ 12 pF（7 pF推奨）・周波数偏差 ΔF/F0 ≤ ±10 ppm・ESR ≤ 30 Ω（22 Ω推奨）
+    負荷容量CL ≤ 12 pF（7 pF推奨）・周波数偏差 ΔF/F0 ≤ ±10 ppm・ESR ≤ 30 Ω（22 Ω推奨）
 
 <div align="center"><em>48 MHzシステム用水晶振動子の掲載部品</em></div>
 
@@ -104,7 +104,7 @@ AVLは、48 MHzのシステム用水晶振動子と32.768 kHzのRTC用水晶振�
 ### 32.768 kHz RTC用水晶振動子 { #32768-khz-rtc-crystal }
 
 !!! info "要件"
-    負荷容量 CL ≤ 12.5 pF（7 pF推奨）・周波数偏差 ΔF/F0 ≤ ±20 ppm・ESR ≤ 80 kΩ（38 kΩ推奨）
+    負荷容量CL ≤ 12.5 pF（7 pF推奨）・周波数偏差 ΔF/F0 ≤ ±20 ppm・ESR ≤ 80 kΩ（38 kΩ推奨）
 
 <div align="center"><em>32.768 kHz RTC用水晶振動子の掲載部品</em></div>
 
@@ -127,7 +127,7 @@ AVLは、48 MHzのシステム用水晶振動子と32.768 kHzのRTC用水晶振�
 ## 降圧コンバーター用インダクター { #buck-inductors }
 
 !!! info "要件"
-    インダクタンス L = 4.7 µH ±20% · 直流抵抗（DCR）≤ 0.4 Ω · 飽和電流（Isat）≥ 450 mA
+    インダクタンスL = 4.7 µH ±20% · 直流抵抗（DCR）≤ 0.4 Ω · 飽和電流（Isat）≥ 450 mA
 
 <div align="center"><em>降圧コンバーター用インダクターの掲載部品</em></div>
 
@@ -152,7 +152,7 @@ AVLは、48 MHzのシステム用水晶振動子と32.768 kHzのRTC用水晶振�
 
 ## NOR Flash { #nor-flash }
 
-V0.3には、4 Mb～256 MbのNOR Flash部品44種類を容量別に掲載しています。表のクロック値はメモリ側の仕様であり、すべてのSF32や基板でその動作速度を保証するものではありません。対象設計の読み出しコマンド、コントローラーの制約、タイミング、ドライバーの識別処理を確認してください。原表の「Manufacture ID」という16進数の値にはデバイス識別フィールドも含まれるため、メーカーの1バイトだけでなく、想定する応答全体を比較します。動作時と待機時の消費電力は、動作条件が明記された電流値で算出してください。
+V0.3には、4 Mb～256 MbのNOR Flash部品44種類を容量別に掲載しています。表のクロック値はメモリー側の仕様であり、すべてのSF32や基板でその動作速度を保証するものではありません。対象設計の読み出しコマンド、コントローラーの制約、タイミング、ドライバーの識別処理を確認してください。原表の「Manufacture ID」という16進数の値にはデバイス識別フィールドも含まれるため、メーカーの1バイトだけでなく、想定する応答全体を比較します。動作時と待機時の消費電力は、動作条件が明記された電流値で算出してください。
 
 ### 4 Mb～16 Mb { #4-mb-16-mb }
 
@@ -164,12 +164,12 @@ V0.3には、4 Mb～256 MbのNOR Flash部品44種類を容量別に掲載して�
 
 | 掲載品番 | ベンダー | 容量 | 電圧 | 温度範囲 | 最大SDRクロック | 記載ID | 待機電流 | ディープパワーダウン電流 | 読み出し動作電流 |
 |:--------------|:-------|:---------|:--------|:-----------|:---------------|:-------|:--------|:------------------|:----------------------|
-| P25Q40SU | PUYA | 4 Mb | 1.65–3.6 V | −40°C～+85°C | 85 MHz @1.8 V / 104 MHz @3.3 V | 0x856013 | 10 µA | 0.1 µA @1.8 V / 0.6 µA @3.3 V | 3.5 mA @85 MHz (1.8 V) / 5 mA @85 MHz (3.3 V) / EDH: 非対応 |
-| P25Q80LE | PUYA | 8 Mb | 1.65–2.0 V | −40°C～+85°C | 104 MHz | 0x856014 | 9 µA | 0.1 µA | 1.5 mA @85 MHz / EDH: 非対応 |
-| GD25LE80E | GD (GigaDevice) | 8 Mb | 1.65–2.0 V | −40°C～+85°C | 133 MHz | 0xC86014 | 10 µA | 0.2 µA | 3 mA @80 MHz / EDH: 非対応 |
-| UC25WQ80IB | UCUN | 8 Mb | 1.65–3.6 V | −40°C～+85°C | 104 MHz | 0xB36014 | 1.5 µA | 0.5 µA | 6 mA @85 MHz / EDH: 未記載 |
-| P25Q16LE | PUYA | 16 Mb | 1.65–2.0 V | −40°C～+85°C | 104 MHz | 0x856015 | 18 µA | 0.1 µA | 3 mA @85 MHz / EDH: 非対応 |
-| GD25LE16E | GD (GigaDevice) | 16 Mb | 1.65–2.0 V | −40°C～+85°C | 133 MHz | 0xC86015 | 10 µA | 0.2 µA | 3 mA @80 MHz / EDH: 非対応 |
+| P25Q40SU | PUYA | 4 Mb | 1.65～3.6 V | −40°C～+85°C | 85 MHz @1.8 V / 104 MHz @3.3 V | 0x856013 | 10 µA | 0.1 µA @1.8 V / 0.6 µA @3.3 V | 3.5 mA @85 MHz (1.8 V) / 5 mA @85 MHz (3.3 V) / EDH: 非対応 |
+| P25Q80LE | PUYA | 8 Mb | 1.65～2.0 V | −40°C～+85°C | 104 MHz | 0x856014 | 9 µA | 0.1 µA | 1.5 mA @85 MHz / EDH: 非対応 |
+| GD25LE80E | GD (GigaDevice) | 8 Mb | 1.65～2.0 V | −40°C～+85°C | 133 MHz | 0xC86014 | 10 µA | 0.2 µA | 3 mA @80 MHz / EDH: 非対応 |
+| UC25WQ80IB | UCUN | 8 Mb | 1.65～3.6 V | −40°C～+85°C | 104 MHz | 0xB36014 | 1.5 µA | 0.5 µA | 6 mA @85 MHz / EDH: 未記載 |
+| P25Q16LE | PUYA | 16 Mb | 1.65～2.0 V | −40°C～+85°C | 104 MHz | 0x856015 | 18 µA | 0.1 µA | 3 mA @85 MHz / EDH: 非対応 |
+| GD25LE16E | GD (GigaDevice) | 16 Mb | 1.65～2.0 V | −40°C～+85°C | 133 MHz | 0xC86015 | 10 µA | 0.2 µA | 3 mA @80 MHz / EDH: 非対応 |
 
 </div>
 
@@ -181,17 +181,17 @@ V0.3には、4 Mb～256 MbのNOR Flash部品44種類を容量別に掲載して�
 
 | 掲載品番 | ベンダー | 容量 | 電圧 | 温度範囲 | 最大クロック（SDR / DTR） | 記載ID | 待機電流 | ディープパワーダウン電流 | 読み出し動作電流 |
 |:--------------|:-------|:---------|:--------|:-----------|:------------------------|:-------|:--------|:------------------|:----------------------|
-| P25Q32L | PUYA | 32 Mb | 1.65–2.0 V | −40°C～+85°C | 120 MHz / — | 0x856016 | 9 µA | 0.2 µA | 2 mA @85 MHz / EDH: 非対応 |
-| SK25LE032 | SK | 32 Mb | 1.65–2.0 V | −40°C～+85°C | 133 MHz / 80 MHz | 0x257016 | 10 µA | 0.1 µA | 2 mA @80 MHz (SDR) / 2.6 mA @80 MHz (DTR) |
-| GD25LE32E | GD (GigaDevice) | 32 Mb | 1.65–2.0 V | −40°C～+85°C | 133 MHz / — | 0xC86016 | 10 µA | 0.2 µA | 3 mA @80 MHz / EDH: 非対応 |
-| UC25IQ32A | UCUN | 32 Mb | 2.7–3.6 V | −40°C～+85°C | 133 MHz / 66 MHz | 0xB34014 | 15 µA | 1 µA | 8 mA @80 MHz / EDH: 未記載 |
-| P25Q64LE | PUYA | 64 Mb | 1.65–2.0 V | −40°C～+85°C | 104 MHz / — | 0x856017 | 18 µA | 0.3 µA | 2 mA @85 MHz / EDH: 非対応 |
-| P25Q64H | PUYA | 64 Mb | 2.3–3.6 V | −40°C～+85°C | 120 MHz / — | 0x856017 | 18 µA | 0.6 µA | 4 mA @85 MHz / EDH: 非対応 |
-| P25Q64SH | PUYA | 64 Mb | 2.3–3.6 V | −40°C～+85°C | 120 MHz / 70 MHz | 0x856017 | 10 µA | 0.3 µA | 6.8 mA @85 MHz (SDR) / 9.45 mA @70 MHz (DTR) |
-| GD25LE64E | GD (GigaDevice) | 64 Mb | 1.65–2.0 V | −40°C～+85°C | 133 MHz / — | 0xC86017 | 10 µA | 0.2 µA | 3 mA @80 MHz / EDH: 非対応 |
-| ZB25LQ64A | ZBIT | 64 Mb | 1.65–2.0 V | −40°C～+85°C | 133 MHz / 66 MHz | 0x5E7017 | 10 µA | 1 µA | 4 mA @104 MHz / EDH: 未記載 |
-| BY25Q64ES | BOYA | 64 Mb | 2.7–3.6 V | −40°C～+85°C | 120 MHz / — | 0x684017 | 9 µA | 0.4 µA | 6 mA @80 MHz / EDH: 非対応 |
-| UC25IQ64A | UCUN | 64 Mb | 2.7–3.6 V | −40°C～+85°C | 133 MHz / 66 MHz | 0xB34017 | 10 µA | 1 µA | 15 mA @80 MHz / EDH: 未記載 |
+| P25Q32L | PUYA | 32 Mb | 1.65～2.0 V | −40°C～+85°C | 120 MHz / — | 0x856016 | 9 µA | 0.2 µA | 2 mA @85 MHz / EDH: 非対応 |
+| SK25LE032 | SK | 32 Mb | 1.65～2.0 V | −40°C～+85°C | 133 MHz / 80 MHz | 0x257016 | 10 µA | 0.1 µA | 2 mA @80 MHz (SDR) / 2.6 mA @80 MHz (DTR) |
+| GD25LE32E | GD (GigaDevice) | 32 Mb | 1.65～2.0 V | −40°C～+85°C | 133 MHz / — | 0xC86016 | 10 µA | 0.2 µA | 3 mA @80 MHz / EDH: 非対応 |
+| UC25IQ32A | UCUN | 32 Mb | 2.7～3.6 V | −40°C～+85°C | 133 MHz / 66 MHz | 0xB34014 | 15 µA | 1 µA | 8 mA @80 MHz / EDH: 未記載 |
+| P25Q64LE | PUYA | 64 Mb | 1.65～2.0 V | −40°C～+85°C | 104 MHz / — | 0x856017 | 18 µA | 0.3 µA | 2 mA @85 MHz / EDH: 非対応 |
+| P25Q64H | PUYA | 64 Mb | 2.3～3.6 V | −40°C～+85°C | 120 MHz / — | 0x856017 | 18 µA | 0.6 µA | 4 mA @85 MHz / EDH: 非対応 |
+| P25Q64SH | PUYA | 64 Mb | 2.3～3.6 V | −40°C～+85°C | 120 MHz / 70 MHz | 0x856017 | 10 µA | 0.3 µA | 6.8 mA @85 MHz (SDR) / 9.45 mA @70 MHz (DTR) |
+| GD25LE64E | GD (GigaDevice) | 64 Mb | 1.65～2.0 V | −40°C～+85°C | 133 MHz / — | 0xC86017 | 10 µA | 0.2 µA | 3 mA @80 MHz / EDH: 非対応 |
+| ZB25LQ64A | ZBIT | 64 Mb | 1.65～2.0 V | −40°C～+85°C | 133 MHz / 66 MHz | 0x5E7017 | 10 µA | 1 µA | 4 mA @104 MHz / EDH: 未記載 |
+| BY25Q64ES | BOYA | 64 Mb | 2.7～3.6 V | −40°C～+85°C | 120 MHz / — | 0x684017 | 9 µA | 0.4 µA | 6 mA @80 MHz / EDH: 非対応 |
+| UC25IQ64A | UCUN | 64 Mb | 2.7～3.6 V | −40°C～+85°C | 133 MHz / 66 MHz | 0xB34017 | 10 µA | 1 µA | 15 mA @80 MHz / EDH: 未記載 |
 
 </div>
 
@@ -203,22 +203,22 @@ V0.3には、4 Mb～256 MbのNOR Flash部品44種類を容量別に掲載して�
 
 | 掲載品番 | ベンダー | 電圧 | 温度範囲 | 最大クロック（SDR / DTR） | 記載ID | 待機電流 | ディープパワーダウン電流 | 読み出し動作電流 |
 |:--------------|:-------|:--------|:-----------|:------------------------|:-------|:--------|:------------------|:----------------------|
-| P25Q128L | PUYA | 1.65–2.0 V | −40°C～+85°C | 70 MHz / 43 MHz | 0x856018 | 15 µA | 0.5 µA | 4.5 mA @85 MHz / EDH: 未記載 |
-| PY25Q128HA | PUYA | 2.7–3.6 V | −40°C～+85°C | 104 MHz / 66 MHz | 0x852018 | 15 µA | 1 µA | 7 mA @85 MHz (SDR) / 9 mA @66 MHz (DTR) |
-| SK25LP128 | SK | 1.65–2.0 V | −40°C～+85°C | 166 MHz / 104 MHz | 0x257018 | 8 µA | 0.1 µA | 2 mA @80 MHz (SDR) / 2.6 mA @80 MHz (DTR) |
-| GD25LQ128E | GD (GigaDevice) | 1.65–2.0 V | −40°C～+85°C | 120 MHz / — | 0xC86018 | 35 µA | 1 µA | 13 mA @80 MHz / EDH: 非対応 |
-| GD25Q128E | GD (GigaDevice) | 2.7–3.6 V | −40°C～+85°C | 133 MHz / — | 0xC84018 | 14 µA | 1 µA | 8 mA @80 MHz / EDH: 非対応 |
-| GD25F128F | GD (GigaDevice) | 2.7–3.6 V | −40°C～+85°C | 166 MHz / 104 MHz | 0xC84318 | 16 µA | 1 µA | 12 mA @80 MHz / EDH: 未記載 |
-| W25Q128JW | Winbond | 1.7–1.95 V | −40°C～+85°C | 133 MHz / — | 0xEF6018 | 10 µA | 1 µA | — / EDH: 非対応 |
-| W25Q128JV | Winbond | 2.7–3.6 V | −40°C～+85°C | 133 MHz / — | 0xEF4018 | 10 µA | 1 µA | 12 mA @104 MHz / EDH: 非対応 |
-| XT25F128F | XTX | 2.7–3.6 V | −40°C～+85°C | 133 MHz / 104 MHz | 0x0B4018 | 15 µA | 1 µA | 8 mA @80 MHz / EDH: 未記載 |
-| XT25Q128DW | XTX | 1.7–2.0 V | −40°C～+85°C | 108 MHz / 76 MHz | 0x0B6018 | 12 µA | 0.4 µA | 9 mA @80 MHz / EDH: 未記載 |
-| FM25W128 | FM | 1.65–3.6 V | −40°C～+85°C | 50 MHz @1.8 V / 100 MHz @3.3 V（SDRのみ、DTR非対応） | 0xA12818 | 5 µA | 1 µA @3.3 V | — / EDH: 非対応 |
-| XM25QU128C | XMC | 1.65–1.95 V | −40°C～+85°C | 133 MHz / — | 0x204118 | 18 µA | 6 µA | 6 mA @66 MHz / EDH: 非対応 |
-| ZB25VQ128D | ZBIT | 2.3–3.6 V | −40°C～+85°C | 104 MHz / — | 0x5E4018 | 10 µA | 1 µA | 4 mA @104 MHz / EDH: 非対応 |
-| ZB25LQ128B | ZBIT | 1.65–2.0 V | −40°C～+85°C | 104 MHz / — | 0x5E5018 | 9 µA | 3 µA | 9 mA @104 MHz / EDH: 非対応 |
-| BY25Q128ES | BOYA | 2.7–3.6 V | −40°C～+85°C | 108 MHz / — | 0x684018 | 14 µA | 0.2 µA | 6 mA @80 MHz / EDH: 非対応 |
-| UC25IQ128A | UCUN | 2.7–3.6 V | −40°C～+85°C | 133 MHz / 66 MHz | 0xB34018 | 15 µA | 1 µA | 12 mA @80 MHz / EDH: 未記載 |
+| P25Q128L | PUYA | 1.65～2.0 V | −40°C～+85°C | 70 MHz / 43 MHz | 0x856018 | 15 µA | 0.5 µA | 4.5 mA @85 MHz / EDH: 未記載 |
+| PY25Q128HA | PUYA | 2.7～3.6 V | −40°C～+85°C | 104 MHz / 66 MHz | 0x852018 | 15 µA | 1 µA | 7 mA @85 MHz (SDR) / 9 mA @66 MHz (DTR) |
+| SK25LP128 | SK | 1.65～2.0 V | −40°C～+85°C | 166 MHz / 104 MHz | 0x257018 | 8 µA | 0.1 µA | 2 mA @80 MHz (SDR) / 2.6 mA @80 MHz (DTR) |
+| GD25LQ128E | GD (GigaDevice) | 1.65～2.0 V | −40°C～+85°C | 120 MHz / — | 0xC86018 | 35 µA | 1 µA | 13 mA @80 MHz / EDH: 非対応 |
+| GD25Q128E | GD (GigaDevice) | 2.7～3.6 V | −40°C～+85°C | 133 MHz / — | 0xC84018 | 14 µA | 1 µA | 8 mA @80 MHz / EDH: 非対応 |
+| GD25F128F | GD (GigaDevice) | 2.7～3.6 V | −40°C～+85°C | 166 MHz / 104 MHz | 0xC84318 | 16 µA | 1 µA | 12 mA @80 MHz / EDH: 未記載 |
+| W25Q128JW | Winbond | 1.7～1.95 V | −40°C～+85°C | 133 MHz / — | 0xEF6018 | 10 µA | 1 µA | — / EDH: 非対応 |
+| W25Q128JV | Winbond | 2.7～3.6 V | −40°C～+85°C | 133 MHz / — | 0xEF4018 | 10 µA | 1 µA | 12 mA @104 MHz / EDH: 非対応 |
+| XT25F128F | XTX | 2.7～3.6 V | −40°C～+85°C | 133 MHz / 104 MHz | 0x0B4018 | 15 µA | 1 µA | 8 mA @80 MHz / EDH: 未記載 |
+| XT25Q128DW | XTX | 1.7～2.0 V | −40°C～+85°C | 108 MHz / 76 MHz | 0x0B6018 | 12 µA | 0.4 µA | 9 mA @80 MHz / EDH: 未記載 |
+| FM25W128 | FM | 1.65～3.6 V | −40°C～+85°C | 50 MHz @1.8 V / 100 MHz @3.3 V（SDRのみ、DTR非対応） | 0xA12818 | 5 µA | 1 µA @3.3 V | — / EDH: 非対応 |
+| XM25QU128C | XMC | 1.65～1.95 V | −40°C～+85°C | 133 MHz / — | 0x204118 | 18 µA | 6 µA | 6 mA @66 MHz / EDH: 非対応 |
+| ZB25VQ128D | ZBIT | 2.3～3.6 V | −40°C～+85°C | 104 MHz / — | 0x5E4018 | 10 µA | 1 µA | 4 mA @104 MHz / EDH: 非対応 |
+| ZB25LQ128B | ZBIT | 1.65～2.0 V | −40°C～+85°C | 104 MHz / — | 0x5E5018 | 9 µA | 3 µA | 9 mA @104 MHz / EDH: 非対応 |
+| BY25Q128ES | BOYA | 2.7～3.6 V | −40°C～+85°C | 108 MHz / — | 0x684018 | 14 µA | 0.2 µA | 6 mA @80 MHz / EDH: 非対応 |
+| UC25IQ128A | UCUN | 2.7～3.6 V | −40°C～+85°C | 133 MHz / 66 MHz | 0xB34018 | 15 µA | 1 µA | 12 mA @80 MHz / EDH: 未記載 |
 
 </div>
 
@@ -230,17 +230,17 @@ V0.3には、4 Mb～256 MbのNOR Flash部品44種類を容量別に掲載して�
 
 | 掲載品番 | ベンダー | 電圧 | 温度範囲 | 最大クロック（SDR / DTR） | 記載ID | 待機電流 | ディープパワーダウン電流 | 読み出し動作電流 |
 |:--------------|:-------|:--------|:-----------|:------------------------|:-------|:--------|:------------------|:----------------------|
-| W25Q256JW | Winbond | 1.7–1.95 V | −40°C～+85°C | 133 MHz / — | 0xEF6019 | 10 µA | 1 µA | 8 mA @80 MHz / EDH: 非対応 |
-| W25Q256JV | Winbond | 2.7–3.6 V | −40°C～+85°C | 133 MHz / — | 0xEF7019 | 10 µA | 1 µA | 12 mA @104 MHz / EDH: 非対応 |
-| PY25Q256HB | PUYA | 2.7–3.6 V | −40°C～+85°C | 133 MHz / 100 MHz | 0x852019 | 20 µA | 1 µA | 7 mA @80 MHz (SDR) / 11.5 mA @80 MHz (DTR) |
-| GD25LQ256D | GD (GigaDevice) | 1.65–2.0 V | −40°C～+85°C | 120 MHz / — | 0xC86019 | 70 µA | 2 µA | 10 mA @80 MHz / EDH: 非対応 |
-| GD25Q256E | GD (GigaDevice) | 2.7–3.6 V | −40°C～+85°C | 133 MHz / — | 0xC84019 | 16 µA | 1 µA | 12 mA @80 MHz / EDH: 非対応 |
-| XM25QU256C | XMC | 1.65–1.95 V | −40°C～+85°C | 133 MHz / — | 0x204119 | 15 µA | 7 µA | 11 mA @66 MHz / EDH: 非対応 |
-| XM25QH256C | XMC | 2.3–3.6 V | −40°C～+85°C | 133 MHz / — | 0x204019 | 15 µA | 7 µA | 7 mA @66 MHz / EDH: 非対応 |
-| XT25F256BW | XTX | 2.7–3.6 V | −40°C～+85°C | 104 MHz / 50 MHz | 0x0B4019 | 15 µA | 0.5 µA | 8 mA @80 MHz / EDH: 未記載 |
-| DS25M4BA | Dosilicon | 1.65–1.95 V | −40°C～+85°C | 108 MHz / 80 MHz | 0xE54219 | 15 µA | 5 µA | 13 mA @108 MHz / EDH: 未記載 |
-| BY25Q256FS | BOYA | 2.7–3.6 V | −40°C～+85°C | 100 MHz / 54 MHz | 0x684919 | 28 µA | 2 µA | 13 mA @80 MHz / EDH: 未記載 |
-| MX25U25643G | MXIC (Macronix) | 1.65–2.0 V | −40°C～+85°C | 133 MHz / 54 MHz | 0xC22539 | 15 µA | 0.8 µA | 7 mA @84 MHz / EDH: 未記載 |
+| W25Q256JW | Winbond | 1.7～1.95 V | −40°C～+85°C | 133 MHz / — | 0xEF6019 | 10 µA | 1 µA | 8 mA @80 MHz / EDH: 非対応 |
+| W25Q256JV | Winbond | 2.7～3.6 V | −40°C～+85°C | 133 MHz / — | 0xEF7019 | 10 µA | 1 µA | 12 mA @104 MHz / EDH: 非対応 |
+| PY25Q256HB | PUYA | 2.7～3.6 V | −40°C～+85°C | 133 MHz / 100 MHz | 0x852019 | 20 µA | 1 µA | 7 mA @80 MHz (SDR) / 11.5 mA @80 MHz (DTR) |
+| GD25LQ256D | GD (GigaDevice) | 1.65～2.0 V | −40°C～+85°C | 120 MHz / — | 0xC86019 | 70 µA | 2 µA | 10 mA @80 MHz / EDH: 非対応 |
+| GD25Q256E | GD (GigaDevice) | 2.7～3.6 V | −40°C～+85°C | 133 MHz / — | 0xC84019 | 16 µA | 1 µA | 12 mA @80 MHz / EDH: 非対応 |
+| XM25QU256C | XMC | 1.65～1.95 V | −40°C～+85°C | 133 MHz / — | 0x204119 | 15 µA | 7 µA | 11 mA @66 MHz / EDH: 非対応 |
+| XM25QH256C | XMC | 2.3～3.6 V | −40°C～+85°C | 133 MHz / — | 0x204019 | 15 µA | 7 µA | 7 mA @66 MHz / EDH: 非対応 |
+| XT25F256BW | XTX | 2.7～3.6 V | −40°C～+85°C | 104 MHz / 50 MHz | 0x0B4019 | 15 µA | 0.5 µA | 8 mA @80 MHz / EDH: 未記載 |
+| DS25M4BA | Dosilicon | 1.65～1.95 V | −40°C～+85°C | 108 MHz / 80 MHz | 0xE54219 | 15 µA | 5 µA | 13 mA @108 MHz / EDH: 未記載 |
+| BY25Q256FS | BOYA | 2.7～3.6 V | −40°C～+85°C | 100 MHz / 54 MHz | 0x684919 | 28 µA | 2 µA | 13 mA @80 MHz / EDH: 未記載 |
+| MX25U25643G | MXIC (Macronix) | 1.65～2.0 V | −40°C～+85°C | 133 MHz / 54 MHz | 0xC22539 | 15 µA | 0.8 µA | 7 mA @84 MHz / EDH: 未記載 |
 
 </div>
 
@@ -253,9 +253,9 @@ V0.3には、4 Mb～256 MbのNOR Flash部品44種類を容量別に掲載して�
 
 ## SPI-NAND Flash { #spi-nand-flash }
 
-V0.3には、512 Mbおよび1 GbのSPI-NAND部品18種類を掲載しています。対応するドライバーとソフトウェア構成を用いれば、ファイルやデータの保存に利用できます。FatFS、FlashDB、LittleFSなどが例ですが、選定部品との互換性は別途検証が必要です。NANDのページアクセス、ECC、不良ブロック管理は、NORの直接XIPアクセスとは異なります。原表では全掲載部品の **Golden Block** が `block0` ですが、保証条件や、それを前提とするファームウェア処理は記載されていません。デバイスとSDKの文書で確認してください。
+V0.3には、512 Mbおよび1 GbのSPI-NAND部品18種類を掲載しています。対応するドライバーとソフトウェア構成を用いれば、ファイルやデータの保存に利用できます。FatFS、FlashDB、LittleFSなどが例ですが、選定部品との互換性は別途検証が必要です。NANDのページアクセス、ECC、不良ブロック管理は、NORの直接XIPアクセスとは異なります。原表では全掲載部品の **Golden Block** が`block0`ですが、保証条件や、それを前提とするファームウェア処理は記載されていません。デバイスとSDKの文書で確認してください。
 
-GD5F1GM7REとGD5F1GM7UEについて、原表のページサイズは `2048+64` バイト、ブロックサイズは `128K+8K` バイトです。ページサイズから単純に計算した場合、スペア領域のサイズが一致しません。下表では両方の値をそのまま保持しています。ドライバーを設定する前に、対象部品のデータシートでページ、ブロック、スペア領域の構成を確認してください。
+GD5F1GM7REとGD5F1GM7UEについて、原表のページサイズは`2048+64`バイト、ブロックサイズは`128K+8K`バイトです。ページサイズから単純に計算した場合、スペア領域のサイズが一致しません。下表では両方の値をそのまま保持しています。ドライバーを設定する前に、対象部品のデータシートでページ、ブロック、スペア領域の構成を確認してください。
 
 ### 512 Mb { #512-mb }
 
@@ -265,35 +265,35 @@ GD5F1GM7REとGD5F1GM7UEについて、原表のページサイズは `2048+64` �
 
 | 掲載品番 | ベンダー | 電圧 | 温度範囲 | 記載ID | ページ／ブロックサイズ | 最大レート | ECC | Golden Block | 待機電流 | ページ読み出し電流 | 書き込み／消去電流 |
 |:--------------|:-------|:--------|:-----------|:-------|:---------------------|:---------|:----|:---------------|:--------|:-----------|:-----------------|
-| F35SQA512M | FORESEE | 2.7–3.6 V | −40°C～+85°C | 0xCD7070 | 2048+64 B / 128K+4K | 133 MHz | HW 1-bit | `block0` | 10 µA | 10 mA | 15 mA |
-| F35UQA512M | FORESEE | 1.7–1.95 V | −40°C～+85°C | 0xCD6060 | 2048+64 B / 128K+4K | 104 MHz | HW 1-bit | `block0` | 10 µA | 10 mA | 15 mA |
-| DS35M12B | Dosilicon | 1.7–1.95 V | −40°C～+85°C | 0xE5A5E5 | 2048+128 B / 128K+8K | 83 MHz | HW 8-bit | `block0` | 10 µA | 10 mA | 15 mA |
-| DS35Q12B | Dosilicon | 2.7–3.6 V | −40°C～+85°C | 0xE5F5E5 | 2048+128 B / 128K+8K | 104 MHz | HW 8-bit | `block0` | 10 µA | 10 mA | 15 mA |
+| F35SQA512M | FORESEE | 2.7～3.6 V | −40°C～+85°C | 0xCD7070 | 2048+64 B / 128K+4K | 133 MHz | HW 1-bit | `block0` | 10 µA | 10 mA | 15 mA |
+| F35UQA512M | FORESEE | 1.7～1.95 V | −40°C～+85°C | 0xCD6060 | 2048+64 B / 128K+4K | 104 MHz | HW 1-bit | `block0` | 10 µA | 10 mA | 15 mA |
+| DS35M12B | Dosilicon | 1.7～1.95 V | −40°C～+85°C | 0xE5A5E5 | 2048+128 B / 128K+8K | 83 MHz | HW 8-bit | `block0` | 10 µA | 10 mA | 15 mA |
+| DS35Q12B | Dosilicon | 2.7～3.6 V | −40°C～+85°C | 0xE5F5E5 | 2048+128 B / 128K+8K | 104 MHz | HW 8-bit | `block0` | 10 µA | 10 mA | 15 mA |
 
 </div>
 
 ### 1 Gb { #1-gb }
 
-<div align="center"><em>表：1 Gb SPI-NAND Flashの掲載部品</em></div>
+<div align="center"><em>表: 1 Gb SPI-NAND Flashの掲載部品</em></div>
 
 <div align="center" markdown>
 
 | 掲載品番 | ベンダー | 電圧 | 温度範囲 | 記載ID | ページ／ブロックサイズ | 最大レート | ECC | Golden Block | 待機電流 | ページ読み出し電流 | 書き込み／消去電流 |
 |:--------------|:-------|:--------|:-----------|:-------|:---------------------|:---------|:----|:---------------|:--------|:-----------|:-----------------|
-| W25N01GW | Winbond | 1.7–1.95 V | −40°C～+85°C | 0xEFBA21 | 2048+64 B / 128K+4K | 104 MHz | HW 1-bit | `block0` | 10 µA | 25 mA | 25 mA |
-| W25N01GV | Winbond | 2.7–3.6 V | −40°C～+85°C | 0xEFAA21 | 2048+64 B / 128K+4K | 104 MHz | HW 1-bit | `block0` | 10 µA | 25 mA | 25 mA |
-| GD5F1GM7RE | GD (GigaDevice) | 1.7–2.0 V | −40°C～+85°C | 0xC881C8 | 2048+64 B / 128K+8K | 104 MHz SDR / 80 MHz DTR | HW 8-bit | `block0` | 10 µA | 10 mA | 10 mA |
-| GD5F1GM7UE | GD (GigaDevice) | 2.7–3.6 V | −40°C～+85°C | 0xC891C8 | 2048+64 B / 128K+8K | 133 MHz SDR / 104 MHz DTR | HW 8-bit | `block0` | 10 µA | 15 mA | 15 mA |
-| F35SQA001G | FORESEE | 2.7–3.6 V | −40°C～+85°C | 0xCD7171 | 2048+64 B / 128K+4K | 104 MHz | HW 1-bit | `block0` | 10 µA | 10 mA | 15 mA |
-| HYF1GQ4IDACAE | HeYangTek | 1.7–1.98 V | −40°C～+85°C | 0xC981C9 | 2048+64 B / 128K+4K | 80 MHz | HW 4-bit | `block0` | 10 µA | 5 mA | — |
-| HYF1GQ4UDACAE | HeYangTek | 2.7–3.6 V | −40°C～+85°C | 0xC921C9 | 2048+64 B / 128K+4K | 108 MHz | HW 4-bit | `block0` | 10 µA | 15 mA | — |
-| XT26Q01D | XTX | 1.7–1.95 V | −40°C～+85°C | 0x0B5100 | 2048+128 B / 128K+8K | 108 MHz | HW 8-bit | `block0` | 15 µA | 26 mA | 28 mA / 18 mA |
-| XT26G01C | XTX | 2.7–3.6 V | −40°C～+85°C | 0x0B3100 | 2048+128 B / 128K+8K | 104 MHz | HW 8-bit | `block0` | 180 µA | 25 mA | 30 mA / 25 mA |
-| DS35M1GB | Dosilicon | 1.7–1.95 V | −40°C～+85°C | 0xE5A1E5 | 2048+128 B / 128K+8K | 83 MHz | HW 8-bit | `block0` | 10 µA | 10 mA | 15 mA |
-| DS35Q1GB | Dosilicon | 2.7–3.6 V | −40°C～+85°C | 0xE5F1E5 | 2048+128 B / 128K+8K | 104 MHz | HW 8-bit | `block0` | 10 µA | 10 mA | 15 mA |
-| ZB35Q01A | ZBIT | 2.7–3.6 V | −40°C～+85°C | 0x5E415E | 2048+64 B / 128K+4K | 80 MHz | HW 8-bit | `block0` | 10 µA | 10 mA | 10 mA |
-| FM25SL01 | FM | 1.75–1.95 V | −40°C～+85°C | 0xA1A5A1 | 2048+128 B / 128K+8K | 80 MHz | HW 1-bit | `block0` | 10 µA | 16 mA | 16 mA |
-| TC58CYG0S3HRAIJ | KIOXIA | 1.7–1.95 V | −40°C～+85°C | 0x98D240 | 2048+64 B / 128K+4K | 133 MHz | HW 8-bit | `block0` | 30 µA | 17 mA | 26 mA |
+| W25N01GW | Winbond | 1.7～1.95 V | −40°C～+85°C | 0xEFBA21 | 2048+64 B / 128K+4K | 104 MHz | HW 1-bit | `block0` | 10 µA | 25 mA | 25 mA |
+| W25N01GV | Winbond | 2.7～3.6 V | −40°C～+85°C | 0xEFAA21 | 2048+64 B / 128K+4K | 104 MHz | HW 1-bit | `block0` | 10 µA | 25 mA | 25 mA |
+| GD5F1GM7RE | GD (GigaDevice) | 1.7～2.0 V | −40°C～+85°C | 0xC881C8 | 2048+64 B / 128K+8K | 104 MHz SDR / 80 MHz DTR | HW 8-bit | `block0` | 10 µA | 10 mA | 10 mA |
+| GD5F1GM7UE | GD (GigaDevice) | 2.7～3.6 V | −40°C～+85°C | 0xC891C8 | 2048+64 B / 128K+8K | 133 MHz SDR / 104 MHz DTR | HW 8-bit | `block0` | 10 µA | 15 mA | 15 mA |
+| F35SQA001G | FORESEE | 2.7～3.6 V | −40°C～+85°C | 0xCD7171 | 2048+64 B / 128K+4K | 104 MHz | HW 1-bit | `block0` | 10 µA | 10 mA | 15 mA |
+| HYF1GQ4IDACAE | HeYangTek | 1.7～1.98 V | −40°C～+85°C | 0xC981C9 | 2048+64 B / 128K+4K | 80 MHz | HW 4-bit | `block0` | 10 µA | 5 mA | — |
+| HYF1GQ4UDACAE | HeYangTek | 2.7～3.6 V | −40°C～+85°C | 0xC921C9 | 2048+64 B / 128K+4K | 108 MHz | HW 4-bit | `block0` | 10 µA | 15 mA | — |
+| XT26Q01D | XTX | 1.7～1.95 V | −40°C～+85°C | 0x0B5100 | 2048+128 B / 128K+8K | 108 MHz | HW 8-bit | `block0` | 15 µA | 26 mA | 28 mA / 18 mA |
+| XT26G01C | XTX | 2.7～3.6 V | −40°C～+85°C | 0x0B3100 | 2048+128 B / 128K+8K | 104 MHz | HW 8-bit | `block0` | 180 µA | 25 mA | 30 mA / 25 mA |
+| DS35M1GB | Dosilicon | 1.7～1.95 V | −40°C～+85°C | 0xE5A1E5 | 2048+128 B / 128K+8K | 83 MHz | HW 8-bit | `block0` | 10 µA | 10 mA | 15 mA |
+| DS35Q1GB | Dosilicon | 2.7～3.6 V | −40°C～+85°C | 0xE5F1E5 | 2048+128 B / 128K+8K | 104 MHz | HW 8-bit | `block0` | 10 µA | 10 mA | 15 mA |
+| ZB35Q01A | ZBIT | 2.7～3.6 V | −40°C～+85°C | 0x5E415E | 2048+64 B / 128K+4K | 80 MHz | HW 8-bit | `block0` | 10 µA | 10 mA | 10 mA |
+| FM25SL01 | FM | 1.75～1.95 V | −40°C～+85°C | 0xA1A5A1 | 2048+128 B / 128K+8K | 80 MHz | HW 1-bit | `block0` | 10 µA | 16 mA | 16 mA |
+| TC58CYG0S3HRAIJ | KIOXIA | 1.7～1.95 V | −40°C～+85°C | 0x98D240 | 2048+64 B / 128K+4K | 133 MHz | HW 8-bit | `block0` | 30 µA | 17 mA | 26 mA |
 
 </div>
 
@@ -329,11 +329,11 @@ V0.3には、SD 2.0インターフェースを備えた1 Gbの検証済みSD-NAN
 
 | 掲載品番 | ベンダー | 温度範囲 | 電圧 | インターフェース | 最大クロック | 待機電流 | 動作電流 |
 |:--------------|:-------|:-----------|:--------|:----------|:----------|:--------|:---------------------|
-| CSNP1GCR01-BOW | CS | −30°C～+85°C | 2.7–3.6 V | SD 2.0 | 50 MHz | 150 µA (typ) | 15 mA @50 MHz (typ) |
-| XTSD01GLGEAG | XTX | −30°C～+85°C | 2.7–3.6 V | SD 2.0 | 50 MHz | 200 µA (max) | 30 mA @50 MHz (max) |
-| XSSD01GGAI | XSS | 0°C～+70°C | 2.7–3.6 V | SD 2.0 | 50 MHz | 300 µA (max) | 45 mA @50 MHz (max) |
-| MKDV1GCL-AB | MK | −25°C～+85°C | 2.7–3.6 V | SD 2.0 | 50 MHz | 50 µA (max) | 28 mA @50 MHz (max) |
-| XS26D01GACW | Icthink | −25°C～+85°C | 2.7–3.6 V | SD 2.0 | 50 MHz | 250 µA (max) | 100 mA @50 MHz (max) |
+| CSNP1GCR01-BOW | CS | −30°C～+85°C | 2.7～3.6 V | SD 2.0 | 50 MHz | 150 µA (typ) | 15 mA @50 MHz (typ) |
+| XTSD01GLGEAG | XTX | −30°C～+85°C | 2.7～3.6 V | SD 2.0 | 50 MHz | 200 µA (max) | 30 mA @50 MHz (max) |
+| XSSD01GGAI | XSS | 0°C～+70°C | 2.7～3.6 V | SD 2.0 | 50 MHz | 300 µA (max) | 45 mA @50 MHz (max) |
+| MKDV1GCL-AB | MK | −25°C～+85°C | 2.7～3.6 V | SD 2.0 | 50 MHz | 50 µA (max) | 28 mA @50 MHz (max) |
+| XS26D01GACW | Icthink | −25°C～+85°C | 2.7～3.6 V | SD 2.0 | 50 MHz | 250 µA (max) | 100 mA @50 MHz (max) |
 
 </div>
 
@@ -344,7 +344,7 @@ XSSD01GGAIの記載温度範囲は0°C～+70°Cです。他の4製品は下限�
 ## LCDドライバー { #lcd-driver }
 
 !!! warning "V0.3のディスプレイドライバー掲載範囲"
-    V0.3にはLCDドライバー1種類が掲載されています。[V0.3の原表](https://downloads.sifli.com/hardware/files/documentation/SIFLI-MCU-AVL-%E8%AE%A4%E8%AF%81%E8%A1%A8-V0.3-20260121.xlsx)は固定版であり、後続の改訂には自動更新されません。未掲載は非対応を意味しないため、量産採用前にSiFliへ確認してください。MIPIとQSPIはディスプレイドライバー側のインターフェースであり、すべてのSF32で使えるとは限りません。選定チップのインターフェースとドライバー対応を確認し、[グラフィックス概要](../../learn/graphics/overview.md)と[ePicasso 2D / 2.5D グラフィックスエンジン](../../learn/graphics/epicasso-gpu.md)も参照してください。原表のSDR速度は `?MHz` で、具体値は未記載です。DDRは非対応と記載されています。
+    V0.3にはLCDドライバー1種類が掲載されています。[V0.3の原表](https://downloads.sifli.com/hardware/files/documentation/SIFLI-MCU-AVL-%E8%AE%A4%E8%AF%81%E8%A1%A8-V0.3-20260121.xlsx)は固定版であり、後続の改訂には自動更新されません。未掲載は非対応を意味しないため、量産採用前にSiFliへ確認してください。MIPIとQSPIはディスプレイドライバー側のインターフェースであり、すべてのSF32で使えるとは限りません。選定チップのインターフェースとドライバー対応を確認し、[グラフィックス概要](../../learn/graphics/overview.md)と[ePicasso 2D / 2.5Dグラフィックスエンジン](../../learn/graphics/epicasso-gpu.md)も参照してください。原表のSDR速度は`?MHz`で、具体値は未記載です。DDRは非対応と記載されています。
 
 <div align="center"><em>LCDドライバーの掲載部品</em></div>
 
@@ -352,7 +352,7 @@ XSSD01GGAIの記載温度範囲は0°C～+70°Cです。他の4製品は下限�
 
 | 掲載品番 | ベンダー | 解像度 | 種類 | IO電圧 | インターフェース | GRAM | 色深度 | 最大レート（SDR / DDR） |
 |:--------------|:-------|:-----------|:-----|:-----------|:----------|:-----|:--------------|:--------------------------|
-| RM69090 | Raydium | 368×448 | AMOLED | 1.65–3.3 V | MIPI, QSPI | あり | 16.7M色 | 未記載／非対応 |
+| RM69090 | Raydium | 368×448 | AMOLED | 1.65～3.3 V | MIPI, QSPI | あり | 16.7M色 | 未記載／非対応 |
 
 </div>
 
@@ -396,4 +396,4 @@ V0.3にはタッチコントローラーの掲載がありません。これは�
 
 - [SF32LB52xハードウェア設計ガイド](../chip-guides/SF32LB52x_hardware_design_guide.md) — このリストの部品を複数参照している回路図・レイアウト設計の指針です。
 - SF32LB57xハードウェア設計ガイド
-- [SF32 ファミリー](../../sf32-products/family/SF32_family.md)
+- [SF32ファミリー](../../sf32-products/family/SF32_family.md)

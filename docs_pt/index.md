@@ -13,11 +13,11 @@ hide:
 <div class="uf-hero uf-spotlight-hero" markdown>
 <div class="uf-hero-content" markdown>
 
-<span class="uf-badge">CÓDIGO ABERTO · DO CHIP À PRODUÇÃO · PARA DESENVOLVEDORES EMBARCADOS</span>
+<span class="uf-badge">CÓDIGO ABERTO · DO SILÍCIO À PRODUÇÃO · PARA DESENVOLVEDORES DE SISTEMAS EMBARCADOS</span>
 
 # Crie a próxima geração<br>de dispositivos embarcados { #build-the-next-generationof-embedded-devices }
 
-***μForge.io*** é uma plataforma de desenvolvimento de código aberto voltada a soluções inovadoras de semicondutores, começando pela família SF32 de microcontroladores de ultrabaixo consumo da SiFli. De chips e módulos a placas de desenvolvimento, SDKs, documentação e designs de referência prontos para produção, ***μForge.io*** reúne esse conjunto de recursos em um só lugar e ajuda desenvolvedores a levar produtos embarcados conectados, inteligentes e eficientes em energia da ideia à produção com mais rapidez e menos entraves de integração.
+***μForge.io*** é uma plataforma de desenvolvimento de código aberto para soluções inovadoras de semicondutores, começando pela família SF32 de microcontroladores de ultrabaixo consumo da SiFli. De chips e módulos a placas de desenvolvimento, SDKs, documentação e projetos de referência prontos para produção, ***μForge.io*** reúne esse conjunto de recursos em um só lugar e ajuda desenvolvedores a levar produtos embarcados conectados, inteligentes e eficientes em energia da ideia à produção com mais rapidez e menos atrito.
 
 <div class="uf-hero-actions" markdown>
 
@@ -53,9 +53,9 @@ hide:
 
 <a class="uf-spotlight-item uf-spotlight-item--board" href="sf32-products/index.md" data-radius="250">
   <span class="uf-spotlight-item__art uf-spotlight-item__art--board" aria-hidden="true"></span>
-  <span class="uf-spotlight-item__eyebrow">Hardware</span>
+  <span class="uf-spotlight-item__eyebrow">Componentes</span>
   <span class="uf-spotlight-item__title">Módulos e placas de desenvolvimento</span>
-  <span class="uf-spotlight-item__copy">Hardware validado para acelerar o caminho do projeto à produção.</span>
+  <span class="uf-spotlight-item__copy">Componentes validados para acelerar o caminho do projeto à produção.</span>
 </a>
 
 <a class="uf-spotlight-item uf-spotlight-item--sdk" href="develop/index.md" data-radius="245">
@@ -76,7 +76,7 @@ hide:
   <span class="uf-spotlight-item__art uf-spotlight-item__art--examples" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">Projetos</span>
   <span class="uf-spotlight-item__title">Relógios inteligentes e HMI</span>
-  <span class="uf-spotlight-item__copy">Exemplos de aplicações de qualidade profissional.</span>
+  <span class="uf-spotlight-item__copy">Exemplos de aplicações com qualidade de produção.</span>
 </a>
 
 </div>
@@ -84,11 +84,11 @@ hide:
 
 <div class="grid cards uf-quicklinks" markdown>
 
-- :fontawesome-solid-microchip:{ .uf-ql-icon .uf-purple } **Hardware**
+- :fontawesome-solid-microchip:{ .uf-ql-icon .uf-purple } **Componentes**
 
     Microcontroladores, módulos, placas de desenvolvimento e projetos de referência prontos para produção.
 
-    [Ver hardware :material-arrow-right:](sf32-products/family/SF32_family.md){ .uf-link-purple }
+    [Ver componentes :material-arrow-right:](sf32-products/family/SF32_family.md){ .uf-link-purple }
 
 - :fontawesome-solid-code:{ .uf-ql-icon .uf-green } **SDK e ferramentas**
 
@@ -104,7 +104,7 @@ hide:
 
 - :fontawesome-solid-rocket:{ .uf-ql-icon .uf-pink } **Exemplos**
 
-    Exemplos de aplicações de qualidade profissional para casos de uso embarcados comuns.
+    Exemplos de aplicações embarcadas com qualidade de produção para casos de uso comuns.
 
     [Ver exemplos :material-arrow-right:](develop/examples/index.md){ .uf-link-pink }
 
@@ -144,13 +144,13 @@ hide:
 
 ---
 
-## Microcontroladores SF32 disponíveis [^1] { #supported-sf32-mcus .uf-center-heading }
+## MCUs SF32 com suporte [^1] { #supported-sf32-mcus .uf-center-heading }
 
 <div class="grid cards uf-mcu-grid" markdown>
 
 - <span class="uf-mcu-chip">SF32LB52</span>
 
-    <span class="uf-mcu-headtext">**SF32LB52x**{ .uf-mcu-title } <span class="uf-mcu-sub">MCU básico para dispositivos vestíveis</span></span>
+    <span class="uf-mcu-headtext">**SF32LB52x**{ .uf-mcu-title } <span class="uf-mcu-sub">MCU essencial para dispositivos vestíveis</span></span>
 
     ---
 
@@ -170,12 +170,12 @@ hide:
 
     ---
 
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1 de núcleo duplo
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Dois núcleos Cortex-M33 STAR-MC1
     - :fontawesome-solid-circle:{ .uf-dot-blue } Transceptor Bluetooth 5.2 de baixo consumo
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 1.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Descompressão por hardware eZip 1.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Acelerador de IA
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 1.4 MB de SRAM, até 18 MB de PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 1,4 MB de SRAM, até 18 MB de PSRAM
     - :fontawesome-solid-circle:{ .uf-dot-blue } Encapsulamentos QFN68, BGA145 e BGA169, com até 49 / 95 / 119 GPIOs
 
     [Ver série :material-arrow-right:](sf32-products/chips/SF32LB55x.md){ .uf-link-blue }
@@ -188,7 +188,7 @@ hide:
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1 de núcleo duplo
     - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 5.3 de baixo consumo
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Tela RGB de até 1024 x 600
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Display RGB de até 1024 x 600
     - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2.5D, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Descompressão por hardware eZip 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Codec de áudio, 1 x AMIC, 4 x DMIC
@@ -204,11 +204,11 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Arquitetura de três núcleos: HCPU, ACPU e LCPU
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Tela MIPI de até 1280 x 720
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Display MIPI de até 1280 x 720
     - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2.5D e gráficos vetoriais, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 e decodificação JPEG/MJPEG
     - :fontawesome-solid-circle:{ .uf-dot-blue } Codec de áudio, 2 x AMIC, 4 x DMIC
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 3.7 MB de SRAM, até 64 MB de PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 3,7 MB de SRAM, até 64 MB de PSRAM
     - :fontawesome-solid-circle:{ .uf-dot-blue } Encapsulamento BGA256, até 154 GPIOs
 
     [Ver série :material-arrow-right:](sf32-products/chips/SF32LB58x.md){ .uf-link-blue }

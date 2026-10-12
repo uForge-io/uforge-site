@@ -69,7 +69,7 @@ Une compilation réussie confirme que la cible de carte et la chaîne d'outils s
 
 ## Flasher la carte { #flash-the-board }
 
-La carte amont définit `sftool` comme outil de flash par défaut. Installez [OpenSiFli sftool](https://github.com/OpenSiFli/sftool), vérifiez qu'il est accessible via `PATH`, puis placez la carte en mode de téléchargement série conformément à sa documentation. Exécutez ensuite :
+La définition amont de la carte désigne `sftool` comme outil de flashage par défaut. Installez [OpenSiFli sftool](https://github.com/OpenSiFli/sftool), vérifiez qu'il est accessible via `PATH`, puis placez la carte en mode de téléchargement série conformément à sa documentation. Exécutez ensuite :
 
 ```bash
 west flash
@@ -91,13 +91,13 @@ Choisissez la prochaine API ou le prochain périphérique à évaluer à l'aide 
 
 ## Dépannage { #troubleshooting }
 
-<div align="center"><em>Tableau : Dépannage</em></div>
+<div align="center"><em>Tableau : dépannage</em></div>
 
 <div align="center" markdown>
 
 | Symptôme | Vérification |
 |:---------|:-------------|
-| La cible SF32 n'apparaît pas dans `west boards` | Vérifiez que l'espace de travail a été initialisé avec Zephyr amont v4.3.0 ou une version ultérieure et que `west update` est terminé. |
+| La cible SF32 n'apparaît pas dans `west boards` | Vérifiez que l'espace de travail a été initialisé avec Zephyr amont v4.3.0 ou une version ultérieure et que `west update` s'est achevé. |
 | Échec avant la compilation du code | Vérifiez que l'environnement Python est actif, que le Zephyr SDK pour ARM Cortex-M est installé et que les dépendances v4.3.0 ont été installées. |
 | La carte compile, mais ne se flashe pas | Vérifiez que `sftool` est installé et présent dans `PATH`, que le port série sélectionné est correct et que la carte est en mode de téléchargement série. |
 | Aucune sortie série | Vérifiez `usart1`, le débit de `1000000` bauds, la connexion USB-UART et qu'aucun autre terminal n'occupe le port. |

@@ -14,7 +14,7 @@ A série SF32LB55x é uma família de microcontroladores AIoT de categoria inter
 
 A arquitetura big.LITTLE de dois núcleos reúne dois processadores Arm Cortex-M33 STAR-MC1[^1]: um núcleo de aplicação de alto desempenho, com frequência de até 240 MHz, e um núcleo que opera com consumo ultrabaixo, de até 48 MHz. Essa divisão permite executar as tarefas de interface do usuário mais exigentes no núcleo de aplicação, enquanto o núcleo de baixo consumo cuida do processamento dos sensores, do controle em modo de espera e das tarefas BLE que precisam permanecer ativas.
 
-Segundo o resumo de produto e a ficha técnica oficiais da SiFli, a família combina BLE 5.2, o mecanismo gráfico ePicasso 2.5D, dois controladores LCD e um acelerador matricial de redes neurais voltado a TinyML. A SRAM no chip totaliza 1.312 KB (1.088 KB no HCPU + 224 KB no LCPU), e há suporte a memórias externas NOR, NAND, eMMC e PSRAM. Essa combinação torna a SF32LB55x uma opção prática para dispositivos vestíveis, produtos com muitos sensores e HMIs compactas que precisam de mais recursos que a SF32LB52x, sem precisar recorrer às categorias superiores 56/58.
+Segundo o resumo de produto e o datasheet oficiais da SiFli, a família combina BLE 5.2, o mecanismo gráfico ePicasso 2.5D, dois controladores LCD e um acelerador matricial de redes neurais voltado a TinyML. A SRAM no chip totaliza 1.312 KB (1.088 KB no HCPU + 224 KB no LCPU), e há suporte a memórias externas NOR, NAND, eMMC e PSRAM. Essa combinação torna a SF32LB55x uma opção prática para dispositivos vestíveis, produtos com muitos sensores e HMIs compactas que precisam de mais recursos que a SF32LB52x, sem precisar recorrer às categorias superiores 56/58.
 
 O guia de modelos de chips da SiFli também informa que a SF32LB55x foi definida antes das famílias 52/56/58 mais recentes; por isso, a nomenclatura dos sufixos não segue integralmente a convenção posterior. Use o código completo do componente e as tabelas de recursos específicas de cada encapsulamento ao selecionar um dispositivo, sem tentar deduzir todas as características apenas pelo sufixo.
 
@@ -35,7 +35,7 @@ O guia de modelos de chips da SiFli também informa que a SF32LB55x foi definida
 Considere a SF32LB55x quando o projeto precisar de um ou mais dos seguintes recursos:
 
 - Conectividade BLE 5.2 com corrente de recepção muito baixa
-- Suporte a telas MIPI DSI em modo de comando
+- Suporte a displays MIPI DSI em modo de comando
 - Mais SRAM para LVGL, recursos gráficos, processamento de sensores ou cargas de trabalho TinyML
 - Um processador de baixo consumo programável pelo usuário
 - Mais GPIOs ou opções de encapsulamento com maior densidade de E/S que a SF32LB52x
@@ -43,33 +43,33 @@ Considere a SF32LB55x quando o projeto precisar de um ou mais dos seguintes recu
 
 ## Recursos de desenvolvimento { #development-resources }
 
-[Resumo do produto]: https://downloads.sifli.com/silicon/PB0001-SF32LB55x-Product%20Brief%20V1p3.pdf
-[Ficha técnica]: https://downloads.sifli.com/docs/Datasheet/sf32lb55/DS5501-SF32LB55x-Datasheet%20V1p7p2.pdf
-[Manual do usuário]: https://downloads.sifli.com/docs/user%20manual/SF32LB55x/UM5501-SF32LB55x-User%20manual%20V0p3p4.pdf
-[Guia de projeto original (wiki.sifli.com)]: https://wiki.sifli.com/en/hardware/SF32LB55x-HW-Application.html
-[Nota de aplicação de hardware (fonte no GitHub)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB55x-HW-Application.md
-[Guia de modelos de chips da SiFli]: https://wiki.sifli.com/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html
-[Guia de projeto de hardware (μForge.io)]: ../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md
-[Fonte do checklist de projeto de hardware]: https://wiki.sifli.com/hardware/index.html
-[Documentação do SDK]: https://docs.sifli.com/projects/sdk/latest/sf32lb55x/index.html
-[Referência da API]: https://docs.sifli.com/projects/sdk/latest/sf32lb55x/api/index.html
-[Comprar amostras]: https://sifli.taobao.com/
-[Comprar kits de desenvolvimento]: https://sifli.taobao.com/
+[Product Brief]: https://downloads.sifli.com/silicon/PB0001-SF32LB55x-Product%20Brief%20V1p3.pdf
+[Datasheet]: https://downloads.sifli.com/docs/Datasheet/sf32lb55/DS5501-SF32LB55x-Datasheet%20V1p7p2.pdf
+[User Manual]: https://downloads.sifli.com/docs/user%20manual/SF32LB55x/UM5501-SF32LB55x-User%20manual%20V0p3p4.pdf
+[Original Design Guide (wiki.sifli.com)]: https://wiki.sifli.com/en/hardware/SF32LB55x-HW-Application.html
+[Hardware Application Note (GitHub source)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB55x-HW-Application.md
+[SiFli Chip Model Guide]: https://wiki.sifli.com/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html
+[Hardware Design Guide (μForge)]: ../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md
+[Hardware Design Checklist Source]: https://wiki.sifli.com/hardware/index.html
+[SDK Documentation]: https://docs.sifli.com/projects/sdk/latest/sf32lb55x/index.html
+[API Reference]: https://docs.sifli.com/projects/sdk/latest/sf32lb55x/api/index.html
+[Buy Samples]: https://sifli.taobao.com/
+[Buy Dev Kits]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Resumo do produto]__
-- :fontawesome-solid-file-pdf: __[Ficha técnica]__
-- :fontawesome-solid-file-pdf: __[Manual do usuário]__
-- :fontawesome-solid-file-lines: __[Guia de projeto original (wiki.sifli.com)]__
-- :fontawesome-brands-github: __[Nota de aplicação de hardware (fonte no GitHub)]__
-- :fontawesome-solid-list: __[Guia de modelos de chips da SiFli]__
-- :fontawesome-solid-file-lines: __[Guia de projeto de hardware (μForge.io)]__
-- :fontawesome-solid-book: __[Documentação do SDK]__
-- :fontawesome-solid-book-open: __[Referência da API]__
-- :fontawesome-solid-list-check: __[Fonte do checklist de projeto de hardware]__
-- :fontawesome-solid-cart-shopping: __[Comprar amostras]__
-- :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento]__
+- :fontawesome-solid-file-pdf: __[Resumo do produto][Product Brief]__
+- :fontawesome-solid-file-pdf: __[Datasheet]__
+- :fontawesome-solid-file-pdf: __[Manual do usuário][User Manual]__
+- :fontawesome-solid-file-lines: __[Guia de projeto original (wiki.sifli.com)][Original Design Guide (wiki.sifli.com)]__
+- :fontawesome-brands-github: __[Nota de aplicação de hardware (fonte no GitHub)][Hardware Application Note (GitHub source)]__
+- :fontawesome-solid-list: __[Guia de modelos de chips da SiFli][SiFli Chip Model Guide]__
+- :fontawesome-solid-file-lines: __[Guia de projeto de hardware (μForge.io)][Hardware Design Guide (μForge)]__
+- :fontawesome-solid-book: __[Documentação do SDK][SDK Documentation]__
+- :fontawesome-solid-book-open: __[Referência da API][API Reference]__
+- :fontawesome-solid-list-check: __[Fonte do checklist de projeto de hardware][Hardware Design Checklist Source]__
+- :fontawesome-solid-cart-shopping: __[Comprar amostras][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento][Buy Dev Kits]__
 
 </div>
 
@@ -94,7 +94,7 @@ Considere a SF32LB55x quando o projeto precisar de um ou mais dos seguintes recu
 - A camada de transformação do ePicasso oferece resolução de até 640 × 640; as camadas genéricas e a saída de display chegam a 1024 × 1024, com frequência de até 60 fps
 - O controlador LCD oferece suporte a 8080, SPI, Dual-SPI, Quad-SPI, DPI, MIPI DSI e interfaces JDI para displays refletivos nas variantes compatíveis; confirme a disponibilidade no modelo escolhido
 - A compressão de framebuffer TurboPixel permite que o controlador LCD leia os quadros comprimidos e os descomprima para exibição, reduzindo o espaço ocupado pelo framebuffer e a largura de banda de leitura necessária
-- Dois controladores LCD; as interfaces para tela sempre ativa e o uso de dois displays dependem do modelo e do encapsulamento
+- Dois controladores LCD; as interfaces para display sempre ativo e o uso de dois displays dependem do modelo e do encapsulamento
 - Acelerador matricial de redes neurais para cargas TinyML, de até 1,92 GOPS e 5,73 TOPS/W
 
 ### Conectividade sem fio { #wireless-connectivity }
@@ -129,11 +129,11 @@ Considere a SF32LB55x quando o projeto precisar de um ou mais dos seguintes recu
 
 </div>
 
-**Nota sobre SS6600A8:** O [guia atual de modelos de chips da SiFli][Guia de modelos de chips da SiFli] informa o encapsulamento, a memória integrada, os GPIOs e a interface de display desse componente, mas não apresenta as quantidades por modelo de UART, I2C, SPI, I2S, PDM ou ADC sigma-delta. A tabela 0-1 da [ficha técnica DS5501 V1.7.2][Ficha técnica] também não tem uma linha própria para SS6600A8. Por isso, essas quantidades aparecem como “Não especificado”. Não as deduza a partir do SF32LB551U4O5 apenas porque ambos usam o encapsulamento QFN68L. Confirme a configuração exata com a SiFli antes de definir a pinagem.
+**Nota sobre SS6600A8:** O [guia atual de modelos de chips da SiFli][SiFli Chip Model Guide] informa o encapsulamento, a memória integrada, os GPIOs e a interface de display desse componente, mas não apresenta as quantidades por modelo de UART, I2C, SPI, I2S, PDM ou ADC sigma-delta. A tabela 0-1 do [datasheet DS5501 V1.7.2][Datasheet] também não tem uma linha própria para SS6600A8. Por isso, essas quantidades aparecem como “Não especificado”. Não as deduza a partir do SF32LB551U4O5 apenas porque ambos usam o encapsulamento QFN68L. Confirme a configuração exata com a SiFli antes de definir a pinagem.
 
 - 1 interface USB 2.0 FS, configurável como host ou dispositivo
-- 1 GPADC (ADC SAR) de 10 bits: a ficha técnica especifica até 8 entradas single-ended ou 4 pares diferenciais, com faixa de 0–1,1 V para as entradas single-ended
-- **Divergência entre as fontes sobre o ADC:** a [ficha técnica DS5501 V1.7.2][Ficha técnica] especifica até 8 entradas single-ended ou 4 pares diferenciais e faixa de 0–1,1 V para as entradas single-ended. A [nota de aplicação de hardware da SF32LB55x][Nota de aplicação de hardware (fonte no GitHub)] informa 5 canais e faixa de entrada de 0–0,9 V. Antes de projetar o circuito analógico, confirme o mapeamento dos canais e os limites para o componente exato e a versão do SDK.
+- 1 GPADC (ADC SAR) de 10 bits: o datasheet especifica até 8 entradas single-ended ou 4 pares diferenciais, com faixa de 0–1,1 V para as entradas single-ended
+- **Divergência entre as fontes sobre o ADC:** o [datasheet DS5501 V1.7.2][Datasheet] especifica até 8 entradas single-ended ou 4 pares diferenciais e faixa de 0–1,1 V para as entradas single-ended. A [nota de aplicação de hardware da SF32LB55x][Hardware Application Note (GitHub source)] informa 5 canais e faixa de entrada de 0–0,9 V. Antes de projetar o circuito analógico, confirme o mapeamento dos canais e os limites para o componente exato e a versão do SDK.
 - ADC Sigma-Delta de 16 bits e 5 canais nos modelos BGA145 e BGA169 da tabela; não está disponível nos modelos QFN68L
 - Sensor de temperatura
 - 2 comparadores de tensão de baixo consumo
@@ -153,7 +153,7 @@ Considere a SF32LB55x quando o projeto precisar de um ou mais dos seguintes recu
 
 A SF32LB55x está disponível em encapsulamentos QFN e BGA. Defina o encapsulamento desde o início, pois a quantidade de GPIOs, a memória integrada, as interfaces de display e os requisitos de fabricação da PCB variam significativamente entre eles.
 
-Neste caso, escolher o encapsulamento não é apenas uma decisão de layout. O [guia de modelos de chips da SiFli][Guia de modelos de chips da SiFli] especifica que cada encapsulamento da família 55x oferece o conjunto completo ou apenas parte das interfaces de display. Portanto, defina o encapsulamento antes de fechar o planejamento do display, da memória e da alocação de pinos. Componentes no mesmo encapsulamento são compatíveis pino a pino; antes de selecionar um substituto compatível, confirme a configuração exata de memória e os requisitos de display.
+Neste caso, escolher o encapsulamento não é apenas uma decisão de layout. O [guia de modelos de chips da SiFli][SiFli Chip Model Guide] especifica que cada encapsulamento da família 55x oferece o conjunto completo ou apenas parte das interfaces de display. Portanto, fixe o encapsulamento antes de fechar o planejamento do display, da memória e da alocação de pinos. Componentes no mesmo encapsulamento são compatíveis pino a pino; antes de selecionar um substituto compatível, confirme a configuração exata de memória e os requisitos de display.
 
 <div align="center"><em>Opções de E/S da SF32LB55x por encapsulamento</em></div>
 
@@ -179,11 +179,11 @@ Os modelos atuais representativos listados no guia de modelos de chips da SiFli 
 | SF32LB551U4O5 | QFN68L | Flash de boot QSPI NOR de 4 MB + OPI-PSRAM de 4 MB | QSPI, 8080 | 49 GPIOs; 1,71–3,63 V; −20 °C a +70 °C; opção compacta com PSRAM integrada |
 | SF32LB555V4O6 | BGA145 | Flash de boot QSPI NOR de 4 MB + OPI-PSRAM de 4 MB | MIPI DSI em modo de comando, QSPI, 8080 | 95 GPIOs; −40 °C a +85 °C; opção BGA145 equilibrada para produtos com display que precisam de 4 MB de PSRAM |
 | SF32LB555V436 | BGA145 | Flash de boot QSPI NOR de 4 MB + OPI-PSRAM de 8 MB | MIPI DSI em modo de comando, QSPI, 8080 | 95 GPIOs; −40 °C a +85 °C; opção BGA145 para projetos que precisam do dobro da PSRAM no encapsulamento do SF32LB555V4O6 |
-| SF32LB557VD3A6 | BGA169 | Flash de boot QSPI NOR de 1 MB + OPI-PSRAM de 16 MB + QPI-PSRAM de 2 MB | MIPI DSI em modo de comando, QSPI, 8080, JDI/Sharp MIP | 113 GPIOs; −40 °C a +85 °C; suporta duas telas simultâneas por MIPI DSI e SPI/DSPI, cada uma com conteúdo independente |
+| SF32LB557VD3A6 | BGA169 | Flash de boot QSPI NOR de 1 MB + OPI-PSRAM de 16 MB + QPI-PSRAM de 2 MB | MIPI DSI em modo de comando, QSPI, 8080, JDI/Sharp MIP | 113 GPIOs; −40 °C a +85 °C; suporta dois displays simultâneos por MIPI DSI e SPI/DSPI, cada uma com conteúdo independente |
 
 </div>
 
-Para o SF32LB557VD3A6, o guia atual de modelos de chips da SiFli e a tabela 0-1 da ficha técnica DS5501 V1.7.2 indicam 113 GPIOs (71 HCPU + 42 LCPU). Já o resumo de características e o resumo de encapsulamentos dessa mesma ficha técnica, assim como o resumo de produto PB0001 V1.3, indicam 119 GPIOs para o BGA169 (71 HCPU + 48 LCPU). Portanto, as fontes oficiais divergem, inclusive dentro da própria DS5501. Esta página segue a linha específica do modelo e o guia atual (113). Antes de alocar pinos ou fechar o projeto, confira os GPIOs disponíveis no mapa de esferas do encapsulamento escolhido e confirme com a SiFli o código realmente comercializado. Confira também a alimentação, a faixa de temperatura, o código completo e a memória integrada na [ficha técnica DS5501 V1.7.2][Ficha técnica], no [resumo do produto PB0001 V1.3][Resumo do produto] e no [guia de modelos de chips da SiFli]. Os encapsulamentos BGA145 e BGA169 medem 7 × 7 × 0,94 mm, com passo de 0,5 mm.
+Para o SF32LB557VD3A6, o guia atual de modelos de chips da SiFli e a tabela 0-1 do datasheet DS5501 V1.7.2 indicam 113 GPIOs (71 HCPU + 42 LCPU). Já o resumo de características e o resumo de encapsulamentos desse mesmo datasheet, assim como o resumo de produto PB0001 V1.3, indicam 119 GPIOs para o BGA169 (71 HCPU + 48 LCPU). Portanto, as fontes oficiais divergem, inclusive dentro da própria DS5501. Esta página segue a linha específica do modelo e o guia atual (113). Antes de alocar pinos ou fechar o projeto, confira os GPIOs disponíveis no mapa de esferas do encapsulamento escolhido e confirme com a SiFli o código realmente comercializado. Confira também a alimentação, a faixa de temperatura, o código completo e a memória integrada no [datasheet DS5501 V1.7.2][Datasheet], no [resumo do produto PB0001 V1.3][Product Brief] e no [guia de modelos de chips da SiFli][SiFli Chip Model Guide]. Os encapsulamentos BGA145 e BGA169 medem 7 × 7 × 0,94 mm, com passo de 0,5 mm.
 
 
 ## Caminho de integração { #integration-path }
@@ -192,18 +192,18 @@ Siga esta sequência para passar de uma pré-seleção de componentes SF32LB55x 
 
 1. **Valide o caminho de firmware.** Comece pelo [guia de introdução ao SiFli SDK](../../getting-started/sifli/getting-started-sifli-sdk.md). Em seguida, use o [fluxo de trabalho do SiFli SDK](../../develop/platforms/sifli-sdk/overview.md) e os [exemplos](../../develop/examples/index.md) para validar o display, o Bluetooth e os recursos de baixo consumo necessários.
 2. **Planeje o hardware de avaliação.** Atualmente, a μForge não cataloga um módulo ou uma placa de desenvolvimento específicos para a SF32LB55. Use o [Seletor de produtos SF32](../product-selector.md) para escolher a plataforma de avaliação disponível mais próxima e confirme a compatibilidade de encapsulamento e interfaces antes de transferir os resultados para um projeto baseado na SF32LB55x.
-3. **Projete e revise o hardware.** Antes de liberar o esquemático ou o layout, consulte o [guia de projeto de hardware da μForge](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md), incluindo as listas de verificação de [esquemático](../../hardware/chip-guides/SF32LB55x_schematic_checklist.md) e de layout da PCB.
-4. **Confirme as fontes oficiais.** Verifique o código completo do componente e o encapsulamento na [ficha técnica][Ficha técnica], no [manual do usuário][Manual do usuário], no [guia de projeto original (wiki.sifli.com)][Guia de projeto original (wiki.sifli.com)] e na [fonte da nota de aplicação de hardware (GitHub)][Nota de aplicação de hardware (fonte no GitHub)].
+3. **Projete e revise o hardware.** Antes de liberar o esquemático ou o layout, consulte o [guia de projeto de hardware da μForge](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md), incluindo os checklists de [esquemático](../../hardware/chip-guides/SF32LB55x_schematic_checklist.md) e de layout da PCB.
+4. **Confirme as fontes oficiais.** Verifique o código completo do componente e o encapsulamento no [datasheet][Datasheet], no [manual do usuário][User Manual], no [guia de projeto original (wiki.sifli.com)][Original Design Guide (wiki.sifli.com)] e na [fonte da nota de aplicação de hardware (GitHub)][Hardware Application Note (GitHub source)].
 
 ## Produtos relacionados { #related-products }
 
 ### Kits de desenvolvimento { #development-kits }
 
-Use a nota oficial de aplicação de hardware, os esquemáticos de referência e a lista de verificação como ponto de partida para selecionar o encapsulamento, definir a arquitetura de alimentação, escolher a interface de display, planejar a memória e o layout de RF e preparar os testes de produção.
+Use a nota oficial de aplicação de hardware, os esquemáticos de referência e o checklist como ponto de partida para selecionar o encapsulamento, definir a arquitetura de alimentação, escolher a interface de display, planejar a memória e o layout de RF e preparar os testes de produção.
 
 ### Produtos de referência { #reference-products }
 
 Entre os produtos finais típicos com SF32LB55x estão smartwatches, pulseiras fitness, dispositivos vestíveis de monitoramento da saúde, fechaduras inteligentes, acessórios conectados, controladores para casa inteligente e HMIs gráficas compactas.
 
 !!! note "Conteúdo gerado automaticamente"
-    Esta página foi elaborada sem um documento-fonte específico. Verifique as afirmações técnicas na documentação oficial da SiFli antes de confiar nelas.
+    Esta página foi elaborada sem um documento-fonte preexistente. Verifique as afirmações técnicas na documentação oficial da SiFli antes de confiar nelas.

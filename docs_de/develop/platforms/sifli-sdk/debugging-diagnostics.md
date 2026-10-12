@@ -40,7 +40,7 @@ So lassen sich Fehler in Hardware, Board-Support, Middleware und Anwendung vonei
 
 | Werkzeug | Verwendung |
 |:-----|:----|
-| `sftool` | Serielles CLI-Werkzeug für unterstützte Flash-Lese-, Schreib- und Löschvorgänge sowie Reset; Optionen hängen von Chip und Speicher ab. |
+| `sftool` | Kommandozeilenwerkzeug für die serielle Schnittstelle mit unterstützten Flash-Lese-, Schreib- und Löschvorgängen sowie Reset; die Optionen hängen von Chip und Speicher ab. |
 | `SiFli_Trace` | Board-Protokolle mit dem für das Ziel unterstützten Ablauf erfassen und prüfen. |
 | `UsartServer` | Erforderliches Hilfswerkzeug für das dokumentierte UART-Debugging über die integrierte Debug-IP bei SF32LB52X und SF32LB56X; nicht pauschal auf andere Zielplattformen übertragen. |
 | `AssertDump` und Crash-Dump-Werkzeuge | Nur verwenden, wenn sie für Chip und SDK-Version bereitgestellt werden; das dazugehörige dokumentierte Erfassungs- und Analyseverfahren befolgen. |
@@ -57,7 +57,7 @@ So lassen sich Fehler in Hardware, Board-Support, Middleware und Anwendung vonei
 | Symptom | Erste Prüfungen |
 |:--------|:-------------|
 | HardFault oder Assert | Stackgröße, Nullzeiger, DMA-Puffer und Cache-Wartung. |
-| Peripheriegerät reagiert nicht | Pin-Mux, Takt, Spannungsschiene, Board-Name, Treiberaktivierung. |
+| Peripheriegerät reagiert nicht | Pin-Mux, Takt, Versorgungsschiene, Board-Name, Treiberaktivierung. |
 | Bluetooth instabil | RF-Takt, Antennenpfad, Bluetooth-Stack-Konfiguration, Verbindungsparameter. |
 | Bildfehler auf dem Display | Panel-Timing, Pufferformat und Cache-/DMA-Synchronisation. |
 | Zufälliger Neustart | Watchdog, Versorgungsschiene, Brownout und Stack-Überlauf. |

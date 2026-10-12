@@ -1,12 +1,12 @@
 ---
 icon: lucide/volume-2
-title: "Resumen del audio local"
+title: "Descripción general del audio"
 description: "Resumen del subsistema de audio local de SF32: ruta de códec y DMA, selección de interfaces, uso de búferes, middleware Audio Server y consumo energético."
 tags:
   - Audio
 ---
 
-# Resumen del audio local { #audio-overview }
+# Descripción general del audio { #audio-overview }
 
 ## Resumen { #overview }
 
@@ -158,13 +158,13 @@ Distinga el **códec de audio por hardware** (conversión ADC/DAC) del **códec 
 
 | Formato | Uso típico | Notas |
 |:-------|:-------------|:------|
-| **PCM sin comprimir** | Sonidos cortos, monitorización de baja latencia y procesamiento de voz | Sin decodificación de compresión; el tamaño depende de duración, frecuencia de muestreo, canales y ancho almacenado de cada muestra. |
+| **PCM sin comprimir** | Sonidos cortos, monitorización de baja latencia y procesamiento de voz | Sin decodificación de compresión; el tamaño depende de la duración, la frecuencia de muestreo, los canales y el tamaño almacenado por muestra. |
 | **MP3** | Reproducción de música local | Amplia compatibilidad; el costo de decodificación es bien conocido y se usa comúnmente en ejemplos de reproductor de música con tarjeta SD. |
 | **Opus** | Voz y audio comprimido de propósito general | Formato comprimido útil para voz y audio general. Admitir Opus no garantiza interoperabilidad A2DP, HFP o LE Audio; compruebe por separado el códec del perfil Bluetooth elegido y el soporte del SDK. |
 
 </div>
 
-El SDK ofrece ejemplos de música local, MP3 en tarjeta SD, Opus, grabación y ADC/DAC dobles. El ejemplo de dos canales requiere un dispositivo y una placa que los expongan; no significa que todos los SF32 tengan dos ADC/DAC. Parta de la configuración compatible y mida el costo de decodificación en el dispositivo real.
+El SDK ofrece ejemplos de música local, MP3 en tarjeta SD, Opus, grabación y ADC/DAC duales. El ejemplo de dos canales requiere un dispositivo y una placa que los expongan; no significa que todos los SF32 tengan dos ADC/DAC. Parta de la configuración compatible y mida el costo de decodificación en el dispositivo real.
 
 ## Audio local y audio Bluetooth { #local-audio-vs-bluetooth-audio }
 
@@ -177,7 +177,7 @@ En muchos productos se combinan ambas rutas: por ejemplo, se captura audio con u
 
 ## Lista de comprobación del diseño de audio en la placa { #board-level-audio-checklist }
 
-El firmware no puede compensar por completo un diseño analógico deficiente. Revise estos puntos al diseñar el esquema y la PCB:
+El firmware no puede compensar por completo un diseño analógico deficiente. Revise estos puntos al diseñar el esquemático y la PCB:
 
 <div align="center"><em>Tabla: Revisión del diseño de audio en la placa</em></div>
 
@@ -256,7 +256,7 @@ Conserve un archivo WAV/PCM de referencia validado y una grabación validada de 
 ## Lista de comprobación de puesta en marcha { #bring-up-checklist }
 
 - [ ] Confirme para el dispositivo y la placa concretos los tipos y canales de micrófono, las instancias PDM/I2S, los pines disponibles y las rutas simultáneas admitidas.
-- [ ] Defina la frecuencia de muestreo, el ancho almacenado de cada muestra, la disposición de canales y los tamaños de búfer de captura y reproducción.
+- [ ] Defina la frecuencia de muestreo, el tamaño almacenado por muestra, la disposición de canales y los tamaños de búfer de captura y reproducción.
 - [ ] Ponga en marcha la captura elegida mediante ADC/AUDPRC, PDM o I2S y la reproducción mediante DAC o I2S; pruebe cada dirección antes del funcionamiento dúplex completo.
 - [ ] Una vez que funcionen las rutas básicas, integre las sesiones compatibles con Audio Server y sus controladores; conserve pruebas directas de HAL para el diagnóstico.
 - [ ] Elija el formato de audio (PCM/MP3/Opus) y mida, cuando haya decodificación, su carga de CPU, memoria y energía.

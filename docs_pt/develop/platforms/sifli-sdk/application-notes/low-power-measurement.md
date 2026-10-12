@@ -177,7 +177,7 @@ Primeiro, meça o sistema mínimo: desconecte o display, os sensores, o carregad
 - PSRAM, Flash NOR/NAND, eMMC ou SDIO que não foi colocado em modo de baixo consumo;
 - uma configuração USB `PA01` da família 55x que conflita com o pull-down interno.
 
-Implemente as transições específicas da placa em `BSP_IO_Power_Down()` e `BSP_Power_Up()`. Use `BSP_TP_PowerDown/Up` e `BSP_LCD_PowerDown/Up` quando a alimentação da tela ou do touch precisar mudar imediatamente ao apagar ou acender a tela. Se o XIP estiver sendo executado a partir da Flash NOR, coloque a rotina de suspensão/despertar da Flash na RAM de retenção (`HAL_RAM_RET_CODE_SECT`).
+Implemente as transições específicas da placa em `BSP_IO_Power_Down()` e `BSP_Power_Up()`. Use `BSP_TP_PowerDown/Up` e `BSP_LCD_PowerDown/Up` quando a alimentação do display ou do toque precisar mudar imediatamente ao apagar ou acender a tela. Se o XIP estiver sendo executado a partir da Flash NOR, coloque a rotina de suspensão/despertar da Flash na RAM de retenção (`HAL_RAM_RET_CODE_SECT`).
 
 ## Medir e registrar resultados reproduzíveis { #measure-and-record-a-reproducible-result }
 

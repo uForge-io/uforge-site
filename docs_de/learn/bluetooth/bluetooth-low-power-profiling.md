@@ -26,19 +26,19 @@ Der [Online Power Profiler for Bluetooth LE](https://devzone.nordicsemi.com/powe
 
 | Messpunkt | Enthaltene Komponenten | Geeignet für | Einschränkung |
 |:---------|:-----------------|:---------------|:-----------|
-| Bluetooth-Subsystem oder ausgewählte Versorgungsschiene | Funk/Controller und der ausgewählte Versorgungspfad | Ursachen eines erhöhten Funk- oder Controller-Verbrauchs eingrenzen | Entspricht nicht dem gesamten Batterieverbrauch des Geräts |
-| MCU-Versorgungseingang | MCU, Controller und von dieser Schiene versorgte On-Chip-Peripheriegeräte | Vergleich von Firmware-Zuständen auf einem kontrollierten Board | Schließt externe Komponenten auf anderen Schienen und Reglerverluste aus |
-| Batterie oder Haupteingang des Produkts | Regler, MCU, externer Speicher, Sensoren, Display und andere versorgte Lasten | Modellierung der Batterielaufzeit und Produktabnahme | Erfordert die Kontrolle aller angeschlossenen Geräte und Versorgungspfade |
+| Bluetooth-Subsystem oder ausgewählte Versorgungsschiene | Funk/Controller und der ausgewählte Versorgungspfad | Ursachen eines erhöhten Funk- oder Controller-Verbrauchs eingrenzen | Entspricht nicht dem gesamten Akkuverbrauch des Geräts |
+| MCU-Versorgungseingang | MCU, Controller und von dieser Schiene versorgte On-Chip-Peripheriegeräte | Vergleich von Firmware-Zuständen auf einem kontrollierten Entwicklungsboard | Schließt externe Komponenten auf anderen Schienen und Reglerverluste aus |
+| Akku oder Haupteingang des Produkts | Regler, MCU, externer Speicher, Sensoren, Display und andere versorgte Lasten | Modellierung der Akkulaufzeit und Produktabnahme | Erfordert die Kontrolle aller angeschlossenen Geräte und Versorgungspfade |
 
 </div>
 
-Messen Sie zur Bewertung der Batterielaufzeit möglichst am Batterieeingang oder am Hauptversorgungseingang des Produkts. Zeichnen Sie Spannung und Strom gemeinsam auf. So lassen sich Leistung und Energie bestimmen, statt einen Stromwert ohne die zugehörigen Versorgungsbedingungen zu vergleichen.
+Messen Sie zur Bewertung der Akkulaufzeit möglichst am Akkueingang oder am Hauptversorgungseingang des Produkts. Zeichnen Sie Spannung und Strom gemeinsam auf. So lassen sich Leistung und Energie bestimmen, statt einen Stromwert ohne die zugehörigen Versorgungsbedingungen zu vergleichen.
 
 ## Einen wiederholbaren Test einrichten { #set-up-a-repeatable-test }
 
 Messgerät und Prüfling müssen denselben, eindeutig dokumentierten Messpunkt verwenden. Das Power Profiler Kit II (PPK II) von Nordic eignet sich bei passenden Spannungs- und Strombereichen als praktisches Werkzeug zur Versorgung und Strommessung. Eine vergleichbare Source-Measure-Unit oder ein Stromanalysator ist ebenfalls geeignet. Entscheidend ist ein sauberer Messaufbau, nicht die Marke des Instruments.
 
-Im [Source-Meter-Modus](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/measure_current_source_meter.html) des PPK II versorgt das Messgerät den Prüfling; im [Ampere-Meter-Modus](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/measure_current_ampere_meter.html) erfolgt die Versorgung aus einer externen Quelle über das Messgerät. Wählen Sie den Modus passend zum vorgesehenen Versorgungspfad. Eine eingestellte Versorgungsspannung ist keine aufgezeichnete Spannungskurve am Gerät: Überwachen Sie die Spannung am Messpunkt, besonders wenn Spannungseinbrüche oder Änderungen der Batteriespannung die Energie beeinflussen.
+Im [Source-Meter-Modus](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/measure_current_source_meter.html) des PPK II versorgt das Messgerät den Prüfling (DUT); im [Ampere-Meter-Modus](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/measure_current_ampere_meter.html) erfolgt die Versorgung aus einer externen Quelle über das Messgerät. Wählen Sie den Modus passend zum vorgesehenen Versorgungspfad. Eine eingestellte Versorgungsspannung ist keine aufgezeichnete Spannungskurve am Gerät: Überwachen Sie die Spannung am Messpunkt, besonders wenn Spannungseinbrüche oder Änderungen der Akkuspannung die Energie beeinflussen.
 
 Prüfen Sie vor dem Anschließen des DUT die Betriebsgrenzen des PPK II. Im Source-Meter-Modus ist die Ausgangsspannung von 0,8 bis 5,0 V einstellbar; der maximale DUT-Strom beträgt 600 mA. Der Ampere-Meter-Modus erfordert eine externe Versorgung mit 0,8 bis 5,0 V und unterstützt eine kontinuierliche Messung bis 1 A. Kann der DUT im Source-Meter-Modus mehr als 400 mA aufnehmen, empfiehlt Nordic eine zusätzliche USB-Versorgung mit mindestens 1 A Nennstrom für das PPK II. Dies sind Instrumentengrenzwerte, keine empfohlenen Betriebswerte für das Gerät. Siehe Nordics Angaben zum [maximal zulässigen DUT-Strom](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/ppk_max_dut_current.html) und zur [Stromversorgung](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/ppk_power_supply.html).
 
@@ -46,7 +46,7 @@ Prüfen Sie vor dem Anschließen des DUT die Betriebsgrenzen des PPK II. Im Sour
 
 ```mermaid
 flowchart LR
-    A["Konfigurierte Quelle oder Batterie-Emulator"] --> B["Strommessinstrument"]
+    A["Konfigurierte Quelle oder Akku-Emulator"] --> B["Strommessinstrument"]
     B --> C["Definierter Messpunkt an der Produktversorgung"]
     C --> D["SF32-Gerät, Funk und aktivierte Peripheriegeräte"]
     E["Spannungsmessung am selben Messpunkt"] -. "synchron zum Strom aufzeichnen" .-> C
@@ -58,7 +58,7 @@ Vor jedem Durchlauf:
 1. Trennen Sie USB-Strom, einen Debugger oder andere Versorgungen, die das Instrument umgehen oder Last hinzufügen können. Behalten Sie nur die vom Szenario benötigten Schnittstellen.
 2. Legen Sie die dokumentierte Versorgungsspannung am definierten Messpunkt an. Protokollieren Sie jede versorgte Schiene, jeden Jumper, jedes Modul und jedes externe Gerät.
 3. Verwenden Sie den Produkt-Firmware-Build und dessen vorgesehene PM-Konfiguration. Deaktivieren Sie umfangreiches Diagnose-Logging für die abschließenden Messungen, sofern es nicht Teil der Serienkonfiguration ist.
-4. Bereiten Sie für jeden Vergleich dasselbe Telefon, Zubehör, dieselbe Testanwendung, Distanz, Antennenausrichtung und HF-Umgebung vor.
+4. Bereiten Sie für jeden Vergleich dasselbe Telefon, Zubehör, dieselbe Testanwendung, Distanz, Antennenausrichtung und RF-Umgebung vor.
 5. Erfassen Sie ein ausreichend langes Fenster mit vielen wiederholten Bluetooth-Ereignissen, nicht nur einen einzelnen, zufällig erfassten Impuls.
 
 ## Die Leistungsphasen eines BLE-Advertising-Ereignisses verstehen { #read-a-ble-advertising-event-as-a-set-of-power-components }
@@ -109,11 +109,11 @@ I_average = (Q_event + I_idle x (T_cycle - t_event)) / T_cycle
 
 Bei konstanter Spannung verdoppelt sich die Energie einer Phase, wenn ihr gemessener Strom oder ihre Dauer verdoppelt wird. Kurze TX-, RX- und Startphasen können die Ereignisenergie dominieren; bei langen Abständen kann der Ruhestrom zwischen Ereignissen den mittleren Strom bestimmen. Kennzeichnen Sie die Phasen mit GPIO-Markern oder Firmware-Ereignissen mit geringem Zusatzaufwand und messen Sie am Versorgungseingang des vollständigen Produkts, bevor Sie das Optimierungsziel festlegen.
 
-Classic Bluetooth hat ein anderes Protokoll-Timing, es gilt jedoch dieselbe Messdisziplin. Die Bluetooth Core Specification definiert Inquiry Scan und Page Scan als unterschiedliche Scan-Verfahren. Im verbundenen Sniff-Modus werden die Empfangsgelegenheiten auf Peripheral-Seite auf die geplanten Sniff-Ankerpunkte reduziert; Verkehr des Gegenübers kann die Funkaktivität über einen Ankerpunkt hinaus verlängern. Diese Timing-Unterschiede zeigen, was gemessen werden muss, liefern aber keine Stromwerte. Messen Sie die konfigurierte Scan-Richtlinie, die Sniff-Parameter und die tatsächliche Aktivität von Peer und Anwendung am Zielgerät ([Bluetooth Core Specification: BR/EDR Baseband](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/br-edr-controller/baseband-specification.html); [HCI Scan Enable](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/host-controller-interface/host-controller-interface-functional-specification.html)).
+Classic Bluetooth hat ein anderes Protokoll-Timing, es gilt jedoch dieselbe Messdisziplin. Die Bluetooth Core Specification definiert Inquiry Scan und Page Scan als unterschiedliche Scan-Verfahren. Im verbundenen Sniff-Modus einer ACL-Verbindung werden die Empfangsgelegenheiten auf Peripheral-Seite auf die geplanten Sniff-Ankerpunkte reduziert; Verkehr der Gegenstelle kann die Funkaktivität über das jeweilige Sniff-Ankerintervall hinaus verlängern. Diese Timing-Unterschiede zeigen, was gemessen werden muss, liefern aber keine Stromwerte. Messen Sie die konfigurierte Scan-Richtlinie, die Sniff-Parameter und die tatsächliche Aktivität von Gegenstelle und Anwendung am Zielgerät ([Bluetooth Core Specification: BR/EDR Baseband](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/br-edr-controller/baseband-specification.html); [HCI Scan Enable](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/host-controller-interface/host-controller-interface-functional-specification.html)).
 
 ## Einen modusspezifischen Messplan erstellen { #build-a-mode-specific-measurement-plan }
 
-Behandeln Sie „Bluetooth aktiviert“ nicht als einen einzigen Betriebszustand. BLE und Classic Bluetooth verwenden unterschiedliche Verbindungs- und Low-Power-Verfahren. Ein Dual-Mode-Produkt kann Funksubsystem, Controller-Ressourcen, Takte, Speicher und oft Anwendungsarbeit gemeinsam nutzen. Beginnen Sie mit den kleinsten wiederholbaren Szenarien und messen Sie anschließend das kombinierte Verhalten, das im Endprodukt tatsächlich auftritt.
+Behandeln Sie „Bluetooth aktiviert“ nicht als einen einzigen Betriebszustand. BLE und Classic Bluetooth verwenden unterschiedliche Verbindungs- und Energiesparverfahren. Ein Dual-Mode-Produkt kann Funksubsystem, Controller-Ressourcen, Takte, Speicher und oft Anwendungsarbeit gemeinsam nutzen. Beginnen Sie mit den kleinsten wiederholbaren Szenarien und messen Sie anschließend das kombinierte Verhalten, das im Endprodukt tatsächlich auftritt.
 
 <div align="center"><em>Tabelle: Abdeckung von Bluetooth-Szenarien</em></div>
 
@@ -121,15 +121,15 @@ Behandeln Sie „Bluetooth aktiviert“ nicht als einen einzigen Betriebszustand
 
 | Funkunterstützung | Szenario | Vor der Messung festlegen | Zu dokumentierende Ergebnisse |
 |:-----------------|:---------|:--------------------------------|:-----------------|
-| BLE | Advertising, verbundener Leerlauf, Anwendungsübertragung und Reconnect | Rolle, Intervall, TX-Leistung, Nutzdaten, Peer, Start-/Endbedingungen | Durchschnittsstrom, Ereignisenergie und Energie pro abgeschlossener Aktion |
-| Classic Bluetooth (BR/EDR) | Scan-Zustand | Ob Inquiry Scan, Page Scan oder beide aktiviert sind; Auffindbarkeits-/Verbindbarkeitsrichtlinie | Durchschnittsstrom und Energie über ein repräsentatives Scan-Fenster |
-| Classic Bluetooth (BR/EDR) | Verbundener Sniff-Modus | Sniff-Parameter, Peer, Verbindungszustand und Hintergrund-Anwendungsaktivität | Durchschnittsstrom und Energie über viele Sniff-Intervalle |
+| BLE | Advertising, verbundener Leerlauf, Anwendungsübertragung und Wiederverbindung | Rolle, Intervall, TX-Leistung, Nutzdaten, Gegenstelle, Start-/Endbedingungen | Durchschnittsstrom, Ereignisenergie und Energie pro abgeschlossener Aktion |
+| Classic Bluetooth (BR/EDR) | Scan-Zustand | Ob Inquiry Scan, Page Scan oder beide aktiviert sind; Einstellungen für Erkennbarkeit und Verbindbarkeit | Durchschnittsstrom und Energie über ein repräsentatives Scan-Fenster |
+| Classic Bluetooth (BR/EDR) | Verbundener ACL-Sniff-Modus | Sniff-Parameter, Gegenstelle, Verbindungszustand und Hintergrund-Anwendungsaktivität | Durchschnittsstrom und Energie über viele Sniff-Intervalle |
 | Classic Bluetooth (BR/EDR) | Aktiver Profilbetrieb | Profil und Rolle, zum Beispiel SPP/PAN-Daten oder A2DP/HFP-Audio; Nutzdaten- oder Audiositzungsdauer | Energie pro abgeschlossener Übertragung oder Sitzung, plus anhaltende Durchschnittsleistung |
 | Dual-Mode | BLE und Classic Bluetooth im selben Produktszenario | Welche Verbindungen oder Modi im kombinierten Szenario genutzt werden, ihre Parameter, die Vordergrundlast sowie das Verhalten bei Übergängen und Wiederverbindungen | Gemessene kombinierte Durchschnittsleistung und Energie pro vollständigem Produktszenario |
 
 </div>
 
-Der [BLE/BT-Verbrauchstest](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) von SiFli ist eine hilfreiche Referenz: Er deckt BLE-Advertising und Verbindungsmodi sowie Classic-Bluetooth-Scan- und Sniff-Modi ab. Das Ergebnis eines einzelnen Boards ist jedoch keine Produktspezifikation. Nutzen Sie das unterstützte Board, den Wake-Pin, die Konsole und die PM-Konfiguration, um den Test reproduzierbar aufzusetzen. Übertragen Sie anschließend die vorgesehene Produktrolle, den Peer, den Datenverkehr und die Energiesparstrategie auf die Zielhardware.
+Der [BLE/BT-Verbrauchstest](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) von SiFli ist eine hilfreiche Referenz: Er deckt BLE-Advertising und Verbindungsmodi sowie Classic-Bluetooth-Scan- und Sniff-Modi ab. Das Ergebnis eines einzelnen Boards ist jedoch keine Produktspezifikation. Nutzen Sie das unterstützte Board, den Wake-Pin, die Konsole und die PM-Konfiguration, um den Test reproduzierbar aufzusetzen. Übertragen Sie anschließend die vorgesehene Produktrolle, die Gegenstelle, den Datenverkehr und die Energiesparstrategie auf die Zielhardware.
 
 ## BLE als eigenständigen Funkmodus messen { #profile-ble-as-a-standalone-radio-mode }
 
@@ -139,17 +139,17 @@ Beginnen Sie mit BLE allein. So erhalten Sie eine BLE-Referenzmessung, ohne dass
 
 <div align="center" markdown>
 
-| Szenario | Setup | Was zu berechnen ist | Typische Ursache eines irreführenden Ergebnisses |
+| Szenario | Versuchsaufbau | Was zu berechnen ist | Typische Ursache eines irreführenden Ergebnisses |
 |:---------|:------|:------------------|:-------------------------------------|
-| Advertising | Nicht verbundenes Gerät mit dokumentiertem Advertising-Typ und dokumentierter Kanalauswahl | Durchschnittsstrom und Energie pro Advertising-Intervall | Telefon-Scan-Verhalten, Debug-Verkehr oder eine Advertising-Rate, die nie zurückgefahren wird |
+| Advertising | Nicht verbundenes Gerät mit dokumentiertem Advertising-Typ und dokumentierter Kanalauswahl | Durchschnittsstrom und Energie pro Advertising-Intervall | Scan-Aktivität des Telefons, Debug-Verkehr oder ein Advertising-Intervall, das nie verlängert wird |
 | Verbundener Leerlauf | Verbundenes Gerät ohne Anwendungsübertragung; Pairing, Bonding und Verschlüsselung dokumentieren | Durchschnittsstrom über viele Verbindungsintervalle | Anwendungs-CPU wacht bei jedem Verbindungsereignis auf; Timer oder Benachrichtigungen bleiben aktiv |
-| Nutzerinteraktion | Ein repräsentativer GATT-Befehl, Sensor-Upload oder UI-ausgelöste Aktion | Energie pro abgeschlossener Aktion und zusätzliche Energie über den Leerlauf hinaus | Nur den Funk messen, während Host-, Display- oder Sensorarbeit ignoriert wird |
+| Nutzerinteraktion | Ein repräsentativer GATT-Befehl, eine Sensordatenübertragung oder eine durch die Benutzeroberfläche ausgelöste Aktion | Energie pro abgeschlossener Aktion und zusätzliche Energie über den Leerlauf hinaus | Nur den Funk messen, während Host-, Display- oder Sensorarbeit ignoriert wird |
 | Burst-Übertragung oder OTA | Eine definierte Nutzlast mit definierter Abschlussbedingung | Energie pro Byte oder pro abgeschlossener Übertragung, plus Gesamtdauer | Eine Spitzenrate verwenden, als repräsentiere sie die gesamte Übertragung |
-| Trennen und erneutes Verbinden | BLE-Peer verlässt Reichweite, kehrt zurück und verbindet sich erneut | Energie und Zeit zur Wiederherstellung | Unbegrenzte Wiederholungen oder eine aggressive Advertising-Richtlinie, die unbegrenzt fortgesetzt wird |
+| Trennen und erneutes Verbinden | BLE-Gegenstelle verlässt Reichweite, kehrt zurück und verbindet sich erneut | Energie und Zeit zur Wiederherstellung | Unbegrenzte Wiederholungen oder eine aggressive Advertising-Richtlinie, die unbegrenzt fortgesetzt wird |
 
 </div>
 
-Protokollieren Sie die BLE-Rolle, den Peer, Verbindungs- oder Advertising-Parameter, TX-Leistung, Nutzdaten, Auslöser, Endbedingung und tatsächliche Nutzungshäufigkeit. Ein Verlauf ohne diese Fakten lässt sich nicht mit einer anderen Firmware-Revision vergleichen.
+Protokollieren Sie die BLE-Rolle, die Gegenstelle, Verbindungs- oder Advertising-Parameter, TX-Leistung, Nutzdaten, Auslöser, Endbedingung und tatsächliche Nutzungshäufigkeit. Ein Verlauf ohne diese Fakten lässt sich nicht mit einer anderen Firmware-Revision vergleichen.
 
 ## Classic Bluetooth als eigenständigen Funkmodus messen { #profile-classic-bluetooth-as-a-standalone-radio-mode }
 
@@ -159,16 +159,16 @@ Messen Sie bei einem Dual-Mode-Produkt Classic Bluetooth separat, bevor Sie BLE 
 
 <div align="center" markdown>
 
-| Szenario | Setup | Was zu berechnen ist | Typische Ursache eines irreführenden Ergebnisses |
+| Szenario | Versuchsaufbau | Was zu berechnen ist | Typische Ursache eines irreführenden Ergebnisses |
 |:---------|:------|:------------------|:-------------------------------------|
 | Scan | Die für das Serienprodukt vorgesehene Inquiry-Scan-, Page-Scan- oder kombinierte Richtlinie ist aktiv | Durchschnittsstrom und Energie über ein repräsentatives Scan-Fenster | Eine aggressivere Scan-Richtlinie aktiviert lassen als im Serienprodukt vorgesehen |
-| Verbundener Sniff-Modus | Eine verbundene Classic-Bluetooth-Verbindung tritt in ihre vorgesehene Sniff-Konfiguration ein | Durchschnittsstrom über viele Sniff-Intervalle | Messung einer Verbindung, die aufgrund von Peer-Verkehr oder Anwendungsarbeit still aktiv bleibt |
+| Verbundener ACL-Sniff-Modus | Eine verbundene Classic-Bluetooth-ACL-Verbindung tritt in ihre vorgesehene Sniff-Konfiguration ein | Durchschnittsstrom über viele Sniff-Intervalle | Messung einer Verbindung, die aufgrund von Datenverkehr der Gegenstelle oder Anwendungsarbeit unbemerkt aktiv bleibt |
 | Aktiver Profilbetrieb | Eine definierte SPP-/PAN-Datenübertragung, ein A2DP-Stream, ein HFP-Anruf oder ein weiterer im Endprodukt eingesetzter Profilbetrieb | Energie pro abgeschlossener Übertragung oder Sitzung, plus anhaltende Durchschnittsleistung | Messung des Funks unter Auslassung von Codec-, Verstärker-, Display-, Speicher- oder Hostarbeit, die das Profil benötigt |
-| Trennen und erneutes Verbinden | Classic-Bluetooth-Peer verlässt Reichweite, kehrt zurück und verbindet sich erneut | Energie und Zeit zur Wiederherstellung | Unbegrenzte Wiederholungen oder eine Discovery-Richtlinie, die unbegrenzt aktiv bleibt |
+| Trennen und erneutes Verbinden | Classic-Bluetooth-Gegenstelle verlässt Reichweite, kehrt zurück und verbindet sich erneut | Energie und Zeit zur Wiederherstellung | Unbegrenzte Wiederholungen oder eine Geräteerkennungsstrategie, die unbegrenzt aktiv bleibt |
 
 </div>
 
-Protokollieren Sie die Classic-Bluetooth-Rolle, den Peer, die Scan- oder Sniff-Richtlinie, TX-Leistung, Profil, Nutzdaten oder Sitzungsdauer, Auslöser, Endbedingung und tatsächliche Nutzungshäufigkeit. Bei Audioprofilen muss der Messumfang den tatsächlich vom Produkt genutzten Audiopfad einschließen.
+Protokollieren Sie die Classic-Bluetooth-Rolle, die Gegenstelle, die Scan- oder Sniff-Richtlinie, TX-Leistung, Profil, Nutzdaten oder Sitzungsdauer, Auslöser, Endbedingung und tatsächliche Nutzungshäufigkeit. Bei Audioprofilen muss der Messumfang den tatsächlich vom Produkt genutzten Audiopfad einschließen.
 
 ## Dual-Mode-Verhalten als eigenes Szenario messen { #measure-dual-mode-behavior-as-its-own-scenario }
 
@@ -186,7 +186,7 @@ flowchart LR
     E --> F["Die gemessene kombinierte Energie im Produktbudget verwenden"]
 ```
 
-Erst wenn die BLE- und Classic-Bluetooth-Referenzmessungen vorliegen, sollten Sie das Dual-Mode-Verhalten des Produkts erfassen. Messen Sie zum Beispiel für ein Produkt, das eine BLE-Verbindung verfügbar hält, während es Classic-Bluetooth-Audio streamt, alle folgenden Punkte an derselben Hardware und mit demselben Peer:
+Erst wenn die BLE- und Classic-Bluetooth-Referenzmessungen vorliegen, sollten Sie das Dual-Mode-Verhalten des Produkts erfassen. Messen Sie zum Beispiel für ein Produkt, das eine BLE-Verbindung verfügbar hält, während es Classic-Bluetooth-Audio streamt, alle folgenden Punkte an derselben Hardware und mit derselben Gegenstelle:
 
 1. Die vorgesehene BLE-Verbindung im Leerlauf, ohne Classic Bluetooth.
 2. Den Classic-Bluetooth-Stream oder das Datenprofil für sich allein.
@@ -202,7 +202,7 @@ Um den tatsächlichen Geräteverbrauch zu verstehen, müssen Messverlauf und Fir
 - Vor und nach einer von der Anwendung gestarteten Übertragung oder einer Serie von Benachrichtigungen.
 - Wenn Display, Sensor, Flash, Audiopfad oder eine andere externe Komponente aktiviert oder deaktiviert wird.
 - Wenn die Firmware einen PM-Zustand anfordert und wenn das Gerät ihn tatsächlich betritt.
-- Wenn ein Reconnect-, Wiederholungs- oder Fehlerbehandlungspfad beginnt.
+- Wenn ein Wiederverbindungs-, Wiederholungs- oder Fehlerbehandlungspfad beginnt.
 
 Verwenden Sie einen GPIO-Trace-Punkt, einen Ereignismarker mit geringem Zusatzaufwand oder ein reproduzierbares Testskript. Ein serielles Log kann bei der Inbetriebnahme helfen, aber auch den Stromverbrauch verändern. Behandeln Sie die Protokollierung während der abschließenden Messung als kontrollierte Testvariable und nicht als grundsätzlich folgenlose Beobachtungsmethode.
 
@@ -212,12 +212,12 @@ Verwenden Sie einen GPIO-Trace-Punkt, einen Ereignismarker mit geringem Zusatzau
 
 | Verlaufsbeobachtung | Wahrscheinliche Bedeutung | In Firmware oder Hardware zu verifizieren |
 |:------------------|:---------------|:-------------------------------|
-| Kurze, regelmäßig verteilte Impulse über einer niedrigen Grundlinie | Geplante BLE-Advertising-/Verbindungsereignisse oder Classic-Bluetooth-Scan-/Sniff-Aktivität | Modus, Intervall oder Scan-/Sniff-Richtlinie, Funkrolle und tatsächlicher Low-Power-Zustand zwischen Ereignissen |
+| Kurze, regelmäßig verteilte Impulse über einer niedrigen Grundlinie | Geplante BLE-Advertising-/Verbindungsereignisse oder Classic-Bluetooth-Scan-/Sniff-Aktivität | Modus, Intervall oder Scan-/Sniff-Richtlinie, Funkrolle und tatsächlicher Energiesparzustand zwischen Ereignissen |
 | Ein deutlich höherer Stromimpuls unmittelbar nach jedem Funkereignis | Host-Callback, Protokollverarbeitung oder Anwendungsarbeit | Welcher Callback läuft, ob Daten nützlich sind und ob Arbeit gebündelt werden kann |
-| Anhaltende oder dicht wiederholte Aktivität während einer Classic-Bluetooth-Sitzung | Aktiver Classic-Bluetooth-Profilverkehr, oft begleitet von Host-, Audio- oder Datenverarbeitung | Profil, Codec-/Datenpfad, Peer-Verkehr, Audiotakte, externe Komponenten und Dauer der definierten Sitzung |
+| Anhaltende oder dicht wiederholte Aktivität während einer Classic-Bluetooth-Sitzung | Aktiver Classic-Bluetooth-Profilverkehr, oft begleitet von Host-, Audio- oder Datenverarbeitung | Profil, Codec-/Datenpfad, Datenverkehr der Gegenstelle, Audiotakte, externe Komponenten und Dauer der definierten Sitzung |
 | Abwechselnde BLE- und Classic-Bluetooth-Funkimpulse | Ein Dual-Mode-Zeitplan oder verwandte Hostarbeit | Welche Verbindung jeden Bereich verursacht hat, ob Arbeit gemeinsam genutzt wird und ob einer der Modi den Schlaf verzögert oder Wiederholungsaktivität erhöht |
 | Hoher Strom bleibt nach dem erwarteten Ereignis bestehen | Eine PM-Beschränkung, ein Peripheriegerät oder eine externe Schnittstelle bleibt aktiv | PM-Zustandsanforderungen, Timer, Takte, Pin-Zustände, Display-/Sensorversorgung und Fehlerpfade |
-| Vereinzelte, länger anhaltende Stromspitzen | Wiederholungen, Scannen, Reconnects, Peer-Verkehr oder Nutzeraktivität | HF-Bedingungen, Peer-Verhalten, Backoff-/Wiederholungsrichtlinie und Testskript |
+| Vereinzelte, länger anhaltende Stromspitzen | Wiederholungen, Scannen, Wiederverbindungen, Datenverkehr der Gegenstelle oder Nutzeraktivität | RF-Bedingungen, Verhalten der Gegenstelle, Backoff-/Wiederholungsrichtlinie und Testskript |
 | Grundlinie ändert sich nach dem Anschließen eines Moduls oder Kabels | Der erfasste elektrische Messumfang hat sich geändert | Rückspeisungspfade, UART-Adapter, externe Pull-Widerstände, Modulversorgung und Versorgungsführung |
 
 </div>
@@ -231,7 +231,7 @@ E_scenario = integral(V(t) x I(t) dt)
 P_average = E_scenario / T_scenario
 ```
 
-Bleibt die Spannung am Messpunkt konstant, kann für Vergleiche auch der Durchschnittsstrom herangezogen werden. Erfassen Sie die Spannung trotzdem weiter, insbesondere beim Wechsel zwischen einer geregelten Schiene und dem Batterieeingang.
+Bleibt die Spannung am Messpunkt konstant, kann für Vergleiche auch der Durchschnittsstrom herangezogen werden. Erfassen Sie die Spannung trotzdem weiter, insbesondere beim Wechsel zwischen einer geregelten Schiene und dem Akkueingang.
 
 Für ein wiederholtes Produktszenario:
 
@@ -241,7 +241,7 @@ E_day = sum(E_scenario x events_per_day) + E_mode_idle + E_other_states
 
 Teilen Sie den Tag in zeitlich überschneidungsfreie Abschnitte auf. `E_mode_idle` und `E_other_states` dürfen nur Zeiten abdecken, die noch nicht in den vollständigen Szenarioenergien enthalten sind. Erfassen Sie gleichzeitigen BLE- und Classic-Bluetooth-Betrieb als ein gemessenes kombiniertes Szenario, nicht als Summe isolierter Modi. Enthält das Modell bereits den Grundverbrauch für alle 24 Stunden, addieren Sie nur die zusätzliche Energie einer Aktion oberhalb dieses Grundverbrauchs, nicht ihre gesamte Energie. Mit Volt, Ampere und Sekunden ergibt sich die Energie in Joule; für Wh teilen Sie durch 3600.
 
-Die Szenarioenergie muss die gesamte Gerätearbeit einschließen, die zu ihrem Abschluss nötig ist. Zum Beispiel kann eine Telefonbenachrichtigung ein Verbindungsereignis, Hostverarbeitung, einen Sensor- oder Flash-Zugriff, eine Display-Aktualisierung und eine Rückkehr in den Schlaf umfassen. Nur den HF-Puls zu messen unterschätzt die Geräteenergie. Ohne Trace-Marker lässt sich bei einer Messung des gesamten Produkts die Ursache nicht gezielt verbessern.
+Die Szenarioenergie muss die gesamte Gerätearbeit einschließen, die zu ihrem Abschluss nötig ist. Zum Beispiel kann eine Telefonbenachrichtigung ein Verbindungsereignis, Hostverarbeitung, einen Sensor- oder Flash-Zugriff, eine Display-Aktualisierung und eine Rückkehr in den Schlaf umfassen. Nur den RF-Puls zu messen unterschätzt die Geräteenergie. Ohne Trace-Marker lässt sich bei einer Messung des gesamten Produkts die Ursache nicht gezielt verbessern.
 
 ## Das Modell mit dem Gerät abgleichen { #reconcile-the-model-with-the-device }
 
@@ -267,11 +267,11 @@ flowchart LR
 | Diskrepanz zwischen Modell und Messung | Zu beantwortende Fragen |
 |:--------------------------------|:-------------------|
 | Der Durchschnittsstrom ist höher als erwartet | Tritt das Gerät in den angeforderten PM-Zustand ein? Halten Timer, Logging oder Peripherietakte es wach? |
-| Ereignisenergie ist höher als erwartet | Haben Host, Display, Sensor, Speicher oder der Wiederholungspfad zusätzliche Arbeit geleistet? Erzwingt die HF-Qualität Wiederholungen oder höhere TX-Leistung? |
+| Ereignisenergie ist höher als erwartet | Haben Host, Display, Sensor, Speicher oder der Wiederholungspfad zusätzliche Arbeit geleistet? Erzwingt die RF-Qualität Wiederholungen oder höhere TX-Leistung? |
 | Der Leerlaufverbrauch von BLE oder Classic Bluetooth bestimmt den Energiebedarf | Sind BLE-Verbindungsparameter, Classic-Bluetooth-Scan-/Sniff-Richtlinie, Benachrichtigungstakt und Anwendungs-Weckvorgänge für den Produktzustand angemessen? |
 | Dual-Mode-Ergebnis weicht von der Summe der Einzelmodus-Tests ab | Welche Funkzeiträume, Controller-Arbeit, gemeinsam genutzte Takte, Anwendungs-Callbacks, Audio-/Datenpfade oder PM-Beschränkungen überlappen sich oder verhindern den Schlaf? |
-| Reconnect-Energie dominiert | Verwendet das Produkt begrenztes Wiederholungs-/Backoff-Verhalten und eine realistische Discovery-Richtlinie? |
-| Board und Endprodukt stimmen nicht überein | Welche externen Schienen, Reglerverluste, Module, Antennen-/Gehäuseeffekte und Schnittstellen-Pull-Widerstände unterscheiden sich? |
+| Energie für Wiederverbindungen dominiert | Verwendet das Produkt begrenztes Wiederholungs-/Backoff-Verhalten und eine realistische Geräteerkennungsstrategie? |
+| Entwicklungsboard und Endprodukt stimmen nicht überein | Welche externen Schienen, Reglerverluste, Module, Antennen-/Gehäuseeffekte und Schnittstellen-Pull-Widerstände unterscheiden sich? |
 
 </div>
 
@@ -285,12 +285,12 @@ Verwenden Sie SiFli-SDK-Beispiele, um einen Bluetooth-Zustand wiederholbar zu ma
 
 | Messziel | Offizieller Ausgangspunkt | Dann am Produkt messen |
 |:-------------------|:------------------------|:----------------------------|
-| BLE-Advertising- und Verbindungsleistung | [BLE-Verbrauchstest für Advertising und Verbindungen](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/ble/README.html) | Produkt-Advertising-Richtlinie, Verbindungsparameter, Callbacks, Peer-Verhalten und Antenne |
-| Classic-Bluetooth-Scan und -Sniff | [BLE/BT-Verbrauchstest](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) | Scan-Richtlinie des Serienprodukts, Sniff-Einstellungen, Peer-Verhalten und tatsächlicher Leerlauf-Verbindungszustand |
-| Classic-Bluetooth-Profil-Workload | [Bluetooth-SDK-Beispiele](bluetooth-sdk-examples.md) | Reale SPP-/PAN-Übertragung oder A2DP-/HFP-Sitzung, einschließlich der erforderlichen Host-, Audio-, Speicher- und externen Komponentenarbeit |
+| BLE-Advertising- und Verbindungsleistung | [BLE-Verbrauchstest für Advertising und Verbindungen](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/ble/README.html) | Produkt-Advertising-Richtlinie, Verbindungsparameter, Callbacks, Verhalten der Gegenstelle und Antenne |
+| Classic-Bluetooth-Scan und -Sniff | [BLE/BT-Verbrauchstest](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) | Scan-Richtlinie des Serienprodukts, Sniff-Einstellungen, Verhalten der Gegenstelle und tatsächlicher Leerlauf-Verbindungszustand |
+| Betrieb eines Classic-Bluetooth-Profils | [Bluetooth-SDK-Beispiele](bluetooth-sdk-examples.md) | Reale SPP-/PAN-Übertragung oder A2DP-/HFP-Sitzung, einschließlich der erforderlichen Host-, Audio-, Speicher- und externen Komponentenarbeit |
 | Dual-Mode-Produktverhalten | [BLE/BT-Verbrauchstest](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) plus das nächstliegende Produktprofilbeispiel | Das genaue gleichzeitige oder abwechselnde BLE- und Classic-Bluetooth-Verhalten, einschließlich Übergängen, gemeinsamer Verarbeitung und der Produkt-PM-Richtlinie |
 | Verbundener GATT-Service | [BLE-Peripheriegerät](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/ble/peripheral/README.html) | Reale Charakteristiken, Benachrichtigungstakt, Sicherheit und Telefoninteraktion |
-| BLE-Datenübertragung | [BLE-Datendurchsatz](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/ble/throughput/README.html) | Energie pro abgeschlossener Nutzlast und End-zu-End-Abschlusszeit |
+| BLE-Datenübertragung | [BLE-Datendurchsatz](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/ble/throughput/README.html) | Energie pro abgeschlossener Nutzlast und Abschlussdauer der Ende-zu-Ende-Übertragung |
 | Andere Bluetooth-Workflows | [Bluetooth-SDK-Beispiele](bluetooth-sdk-examples.md) | Die für das Produkt am besten passende Rolle beziehungsweise das passende Profil für Classic Bluetooth, BLE oder LE Audio vor der Integration |
 
 </div>
@@ -302,10 +302,10 @@ Verwenden Sie SiFli-SDK-Beispiele, um einen Bluetooth-Zustand wiederholbar zu ma
 - [ ] USB, Debugger, UART-Adapter und externe Modulversorgungen wurden kontrolliert oder explizit einbezogen.
 - [ ] Die Messkurven sind Firmware-Ereignissen, angeforderten PM-Zuständen und tatsächlich erreichten Zuständen zugeordnet.
 - [ ] BLE-Advertising-/Verbunden-Leerlauf- und Classic-Bluetooth-Scan-/Sniff-Verhalten wurden gegebenenfalls gemessen.
-- [ ] Jedes im Serienprodukt eingesetzte Classic-Bluetooth-Daten- oder Audioprofil hat eine definierte, gemessene Workload.
+- [ ] Für jedes im Serienprodukt eingesetzte Classic-Bluetooth-Daten- oder Audioprofil ist eine konkrete Arbeitslast definiert und gemessen.
 - [ ] Dual-Mode-Szenarien wurden als kombinierte Produktzustände gemessen, statt durch Addition von Einzelmodus-Ergebnissen geschätzt.
-- [ ] Repräsentatives Übertragungs-, Trenn- und Reconnect-Verhalten wurde gegebenenfalls gemessen.
-- [ ] Szenarioenergie wurde mit realistischer täglicher Häufigkeit skaliert und mit dem Batteriebudget abgeglichen.
+- [ ] Repräsentatives Übertragungs-, Trenn- und Wiederverbindungsverhalten wurde gegebenenfalls gemessen.
+- [ ] Szenarioenergie wurde mit realistischer täglicher Häufigkeit skaliert und mit dem Akkubudget abgeglichen.
 - [ ] Für den größten Energieverbraucher sind eine verantwortliche Person und eine Entscheidung zur Optimierung oder Akzeptanz festgelegt.
 
 ## Verwandte Ressourcen { #related-resources }

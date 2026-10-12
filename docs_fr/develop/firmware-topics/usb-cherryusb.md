@@ -1,6 +1,6 @@
 ---
 icon: lucide/usb
-description: "Utilisation du matériel USB SF32 avec CherryUSB : cas d'usage CDC, HID, MSC, audio et MTP, liste de vérification des descripteurs et tests d'énumération sur plusieurs systèmes d'exploitation."
+description: "Utilisation du matériel USB SF32 avec CherryUSB : cas d'usage CDC, HID, MSC, audio et MTP, liste de contrôle des descripteurs et tests d'énumération sur plusieurs systèmes d'exploitation."
 tags:
     - Développement
     - USB
@@ -10,7 +10,7 @@ tags:
 
 Pour les appareils SF32 et les cartes dotés d'un matériel USB pris en charge, la documentation et les exemples du SiFli-SDK présentent l'intégration de CherryUSB. Vérifiez les rôles et classes USB pris en charge pour la puce, la carte et la version du SDK utilisées, et traitez l'USB comme une pile logicielle complète, pas comme une simple fonctionnalité matérielle.
 
-La mise en œuvre USB implique le firmware, les descripteurs, les systèmes d'exploitation hôtes, la gestion de l'alimentation et les outils de production. Un appareil qui s'énumère une fois sur le portable d'un développeur n'est pas pour autant terminé.
+La mise en œuvre USB implique le firmware, les descripteurs, les systèmes d'exploitation hôtes, la gestion de l'alimentation et les outils de production. Un appareil qui s'énumère une fois sur l'ordinateur portable d'un développeur n'est pas pour autant terminé.
 
 ## Cas d'usage { #use-cases }
 
@@ -39,7 +39,7 @@ La mise en œuvre USB implique le firmware, les descripteurs, les systèmes d'ex
 - Comportement d'appareil composite si plusieurs classes sont activées.
 - Informer les utilisateurs qu'un câble USB de charge uniquement ne permet pas la communication de données.
 
-## Liste de vérification des descripteurs { #descriptor-checklist }
+## Liste de contrôle des descripteurs { #descriptor-checklist }
 
 - La propriété du VID/PID est claire.
 - La chaîne de produit est définitive ou versionnée.

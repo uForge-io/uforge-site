@@ -1,6 +1,6 @@
 ---
 icon: lucide/app-window
-description: "Cómo encaja la extensión SiFli CodeKit para VS Code en el desarrollo con SiFli-SDK: configuración de proyectos, compilación, grabación de firmware, monitorización y resolución de problemas."
+description: "Cómo encaja la extensión SiFli CodeKit para VS Code en el desarrollo con SiFli-SDK: configuración de proyectos, compilación, grabación de firmware, supervisión y resolución de problemas."
 tags:
     - Desarrollo
     - CodeKit
@@ -8,7 +8,7 @@ tags:
 
 # CodeKit { #codekit }
 
-SiFli CodeKit es la extensión de VS Code para desarrollar con SiFli-SDK. Guía la configuración del SDK y de los proyectos, y facilita su compilación, la grabación de firmware y la monitorización.
+SiFli CodeKit es la extensión de VS Code para desarrollar con SiFli-SDK. Guía la configuración del SDK y de los proyectos, y facilita su compilación, la grabación de firmware y la supervisión.
 
 Para la primera ejecución, consulte [Primeros pasos con CodeKit](../../getting-started/sifli/getting-started-sifli-codekit.md). Esta página explica dónde encaja CodeKit en el flujo de desarrollo.
 
@@ -23,7 +23,7 @@ Use CodeKit si necesita:
 - Un flujo del SDK centrado en VS Code.
 - Configuración guiada de proyectos.
 - Configuración de la placa y del proyecto desde el editor.
-- Acciones de compilación, grabación y monitorización sin memorizar todos los comandos.
+- Acciones de compilación, grabación y supervisión sin memorizar todos los comandos.
 - Un camino más sencillo para quienes se inician en SiFli-SDK.
 
 Use el flujo del SDK por línea de comandos para escribir scripts de CI, investigar problemas con las rutas de la cadena de herramientas o preparar procedimientos de fábrica/publicación. CodeKit mejora la productividad del desarrollador, pero no sustituye la comprensión del proceso de compilación del SDK.
@@ -47,7 +47,7 @@ Use [SiFli-SDK](../platforms/sifli-sdk/overview.md) para elegir una base admitid
 
 CodeKit resulta más útil cuando las acciones del editor se pueden reproducir con el SDK subyacente. Considere la extensión como la interfaz de control y SiFli-SDK como la referencia principal para la cadena de herramientas, la definición de la placa, la salida de compilación y los artefactos de descarga.
 
-La página [Primeros pasos con CodeKit](../../getting-started/sifli/getting-started-sifli-codekit.md) explica cómo instalar la extensión y ejecutar `hello_world`. Cuando esa base funcione, use CodeKit para agilizar el ciclo de edición, compilación, grabación y monitorización; use la línea de comandos del SDK cuando necesite automatizar, inspeccionar o reproducir una acción fuera de VS Code.
+La página [Primeros pasos con CodeKit](../../getting-started/sifli/getting-started-sifli-codekit.md) explica cómo instalar la extensión y ejecutar `hello_world`. Cuando esa base funcione, use CodeKit para agilizar el ciclo de edición, compilación, grabación y supervisión; use la línea de comandos del SDK cuando necesite automatizar, inspeccionar o reproducir una acción fuera de VS Code.
 
 ## Qué registrar { #what-to-record }
 

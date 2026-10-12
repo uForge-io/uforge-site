@@ -1,6 +1,6 @@
 ---
 icon: lucide/activity
-description: "Un afficheur de signal pour la bande Bluetooth basé sur SF32LB52 : reproduire Radiation Monitor, vérifier son balayage à 79 points, le lissage du RSSI et la relecture de l'historique, puis définir les limites d'étalonnage et de revue produit."
+description: "Un afficheur du niveau de signal dans la bande Bluetooth basé sur SF32LB52 : reproduire Radiation Monitor, vérifier son balayage à 79 points, le lissage du RSSI et la relecture de l'historique, puis définir les limites d'étalonnage et de revue produit."
 tags:
     - Projets
     - Bluetooth
@@ -8,13 +8,13 @@ tags:
     - Mesure
 ---
 
-# Radiation Monitor, détecteur portable de force du signal { #radiation-monitor-portable-signal-strength-detector }
+# Radiation Monitor, détecteur portable du niveau de signal { #radiation-monitor-portable-signal-strength-detector }
 
 ## Qu'est-ce que Radiation Monitor ? { #what-is-radiation-monitor }
 
-[SiFliSparks/RadiationMonitor](https://github.com/SiFliSparks/RadiationMonitor) est un afficheur portable de la force du signal dans la bande Bluetooth, construit sur SF32LB52 et SiFli-SDK. Son firmware parcourt 79 points de fréquence de 2402 à 2480 MHz et affiche les valeurs de force reçue sous forme de diagramme en barres LVGL. KEY2 démarre ou arrête le balayage et permet de parcourir l'historique enregistré.
+[SiFliSparks/RadiationMonitor](https://github.com/SiFliSparks/RadiationMonitor) est un afficheur portable du niveau de signal dans la bande Bluetooth, construit sur SF32LB52 et SiFli-SDK. Son firmware parcourt 79 points de fréquence de 2402 à 2480 MHz et affiche les niveaux de signal reçu sous forme de diagramme en barres LVGL. KEY2 démarre ou arrête le balayage et permet de parcourir l'historique enregistré.
 
-Le projet est utile pour étudier son chemin de balayage de la bande Bluetooth, le traitement de données en temps réel, la visualisation des fréquences et l'interaction à un seul bouton. Ce n'est pas un analyseur de spectre étalonné et il n'identifie pas la source du signal reçu. Les émissions voisines à 2,4 GHz et les conditions de mesure peuvent influencer le diagramme. Sans étalonnage ni comparaison contrôlée, ses valeurs ne conviennent ni aux mesures réglementaires, ni à la certification, ni aux mesures RF de précision.
+Le projet est utile pour étudier le balayage de la bande Bluetooth, le traitement de données en temps réel, la visualisation des fréquences et l'interaction à un seul bouton. Ce n'est pas un analyseur de spectre étalonné et il n'identifie pas la source du signal reçu. Les émissions voisines à 2,4 GHz et les conditions de mesure peuvent influencer le diagramme. Sans étalonnage ni comparaison contrôlée, ses valeurs ne conviennent ni aux mesures réglementaires, ni à la certification, ni aux mesures RF de précision.
 
 ![Interface en fonctionnement de Radiation Monitor](https://raw.githubusercontent.com/SiFliSparks/RadiationMonitor/main/assets/img.jpg)
 <div align="center"><em>Interface à diagramme en barres à 79 points de Radiation Monitor</em></div>
@@ -35,7 +35,7 @@ Avant de commencer, ayez :
 
 - une carte d'affichage SF32LB52. Le README du projet cite SF32LB52x et un répertoire de sortie `build_sf32lb52-lchspi-ulp_hcpu` ; la liste des cartes prises en charge de SiFli cite `sf32lb52-lchspi-ulp` pour la Huangshan Pi. Consignez la révision réelle de la carte et vérifiez la configuration de compilation du projet ;
 - SiFli-SDK, SCons, un chemin de téléchargement et la capture du journal série ;
-- une source 2,4 GHz contrôlable ou au moins deux scènes répétables, par exemple un émetteur d'annonces BLE choisi, éteint puis allumé ;
+- une source 2,4 GHz contrôlable ou au moins deux scènes répétables, par exemple un émetteur BLE qui diffuse des annonces, d'abord éteint puis allumé ;
 - un analyseur de spectre étalonné ou un instrument de mesure de puissance, ainsi que des conditions fixes d'antenne/de distance/de blindage si la précision numérique fait partie du périmètre ;
 - un relevé de test de l'état de l'écran, de la sortie série, de l'orientation de la carte, de la distance, de l'alimentation et de l'environnement.
 
@@ -63,8 +63,8 @@ Avant de commencer, ayez :
 
 | Composant | Spécification requise | Rôle | Statut | Où l'obtenir | Notes de compatibilité et de substitution |
 |:----------|:-----------------------|:-----|:-------|:----------------|:-------------------------------------|
-| SF32LB52-LCHSPI-ULP / Huangshan Pi | Partez de la cible de carte SCons `sf32lb52-lchspi-ulp` de SiFli ; consignez la révision exacte de la carte, l'antenne et l'assemblage de l'écran | Exécute le balayage Bluetooth, le diagramme, les commandes et l'interface d'historique | Requis ; l'assemblage exact doit être confirmé | [Référence μForge associée du DevKit-ULP](../sf32-products/devkits/SF32LB52-DevKit-ULP.md) ; [liste des cartes prises en charge par SiFli](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/index.html) ; [page de la carte LCKFB](https://lckfb.com/project/detail/lckfb-hspi-sf32lb52-ulp?param=baseInfo) ; [source du projet](https://github.com/SiFliSparks/RadiationMonitor) | Le répertoire de sortie du README `build_sf32lb52-lchspi-ulp_hcpu` n'identifie ni le circuit imprimé exact, ni la révision de l'antenne ou de l'écran |
-| Hôte, câble USB de données et source d'alimentation contrôlée | Hôte avec les outils SiFli-SDK retenus, câble capable de transmettre des données, journalisation série et alimentation surveillée | Compiler, télécharger, observer et répéter les mesures | Requis | [Démarrage rapide de SiFli-SDK](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/index.html) | Consignez le port, la tension, les versions de l'hôte et des outils, et la méthode de récupération |
+| SF32LB52-LCHSPI-ULP / Huangshan Pi | Partez de la cible de carte SCons `sf32lb52-lchspi-ulp` de SiFli ; consignez la révision exacte de la carte, l'antenne et l'assemblage de l'écran | Exécute le balayage Bluetooth, le diagramme, les commandes et l'interface d'historique | Obligatoire ; l'assemblage exact doit être confirmé | [Référence μForge associée du DevKit-ULP](../sf32-products/devkits/SF32LB52-DevKit-ULP.md) ; [liste des cartes prises en charge par SiFli](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/index.html) ; [page de la carte LCKFB](https://lckfb.com/project/detail/lckfb-hspi-sf32lb52-ulp?param=baseInfo) ; [source du projet](https://github.com/SiFliSparks/RadiationMonitor) | Le répertoire de sortie du README `build_sf32lb52-lchspi-ulp_hcpu` n'identifie ni le circuit imprimé exact, ni la révision de l'antenne ou de l'écran |
+| Hôte, câble USB de données et source d'alimentation contrôlée | Hôte avec les outils SiFli-SDK retenus, câble capable de transmettre des données, journalisation série et alimentation surveillée | Compiler, télécharger, observer et répéter les mesures | Obligatoire | [Démarrage rapide de SiFli-SDK](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/index.html) | Consignez le port, la tension, les versions de l'hôte et des outils, et la méthode de récupération |
 
 </div>
 
@@ -76,13 +76,13 @@ Avant de commencer, ayez :
 
 | Paquet ou service | Version ou révision requise | Rôle | Statut | Où l'obtenir | Notes de compatibilité et de mise à jour |
 |:-------------------|:-----------------------------|:-----|:-------|:----------------|:-------------------------------|
-| SiFliSparks/RadiationMonitor | Commit figé [`670cf20`](https://github.com/SiFliSparks/RadiationMonitor/commit/670cf20b931e82b7ff1cd14fa6727e460c4f677a) | Logique de balayage RF, diagramme à 79 points, lissage et historique | Requis | [Dépôt](https://github.com/SiFliSparks/RadiationMonitor) | Les descriptions du lissage dans le README se contredisent ; vérifiez l'implémentation exacte à ce commit avant de fixer une base de mesure |
-| OpenSiFli/SiFli-SDK | Le commit exact n'est pas figé par l'article du projet ; choisissez et consignez une révision compatible | RTOS, chemin de balayage Bluetooth, pilotes d'affichage et environnement de compilation/téléchargement | Requis | [Dépôt](https://github.com/OpenSiFli/SiFli-SDK) | Une compilation réussie n'établit ni des mesures RF étalonnées ni l'équivalence sur une autre carte |
-| SCons et outils hôte du SDK | Versions de l'environnement SiFli-SDK retenu | Compiler et télécharger la cible SF32LB52 | Requis | [Démarrage rapide de SiFli-SDK](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/index.html) | Consignez la cible de compilation exacte, le système d'exploitation hôte, les versions des outils et l'image générée |
+| SiFliSparks/RadiationMonitor | Commit figé [`670cf20`](https://github.com/SiFliSparks/RadiationMonitor/commit/670cf20b931e82b7ff1cd14fa6727e460c4f677a) | Logique de balayage RF, diagramme à 79 points, lissage et historique | Obligatoire | [Dépôt](https://github.com/SiFliSparks/RadiationMonitor) | Les descriptions du lissage dans le README se contredisent ; vérifiez l'implémentation exacte à ce commit avant de fixer une base de mesure |
+| OpenSiFli/SiFli-SDK | Le commit exact n'est pas figé par l'article du projet ; choisissez et consignez une révision compatible | RTOS, chemin de balayage Bluetooth, pilotes d'affichage et environnement de compilation/téléchargement | Obligatoire | [Dépôt](https://github.com/OpenSiFli/SiFli-SDK) | Une compilation réussie n'établit ni des mesures RF étalonnées ni l'équivalence sur une autre carte |
+| SCons et outils hôte du SDK | Versions de l'environnement SiFli-SDK retenu | Compiler et télécharger la cible SF32LB52 | Obligatoire | [Démarrage rapide de SiFli-SDK](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/index.html) | Consignez la cible de compilation exacte, le système d'exploitation hôte, les versions des outils et l'image générée |
 
 </div>
 
-## Choisir une base prise en charge { #choose-a-supported-baseline }
+## Choisir une configuration de référence prise en charge { #choose-a-supported-baseline }
 
 Utilisez le commit de projet figé [`670cf20`](https://github.com/SiFliSparks/RadiationMonitor/commit/670cf20b931e82b7ff1cd14fa6727e460c4f677a), et non la branche mobile `main`. Le README du projet cite `build_sf32lb52-lchspi-ulp_hcpu` comme répertoire de sortie ; la liste des cartes prises en charge de SiFli cite `sf32lb52-lchspi-ulp` pour la Huangshan Pi / LCHSPI-ULP. Cela établit le nom de carte du SDK, et non la commande exacte du projet ni l'assemblage de carte testé. Le README ne précise ni révision de carte ni commande SCons complète ; confirmez donc la configuration de compilation du projet lors de la première reproduction, au lieu de supposer que toute carte SF32LB52x est prise en charge.
 
@@ -103,9 +103,9 @@ Utilisez le commit de projet figé [`670cf20`](https://github.com/SiFliSparks/Ra
 !!! warning "La documentation amont se contredit sur la profondeur de lissage"
     La vue d'ensemble des fonctions du README indique une moyenne sur 30 balayages, tandis que sa description du module mentionne les dix balayages précédents et désigne `src/BT/bt_repeat.c` comme module de balayage. Elle ne précise pas si les valeurs sont moyennées en puissance linéaire ou en dBm, et ses deux nombres n'établissent pas quel comportement le code figé implémente. Inspectez cette révision exacte de la source et vérifiez l'échelle de la moyenne, la profondeur du tampon et le comportement sur l'appareil avant de considérer l'un ou l'autre nombre comme base de mesure. Le README indique aussi un intervalle de mise à jour des données de 30 ms, qui n'est pas nécessairement égal au temps nécessaire pour balayer les 79 points.
 
-## Plan de livraison { #delivery-map }
+## Étapes du projet { #delivery-map }
 
-<div align="center"><em>Tableau : Plan de livraison de Radiation Monitor</em></div>
+<div align="center"><em>Tableau : Étapes du projet de Radiation Monitor</em></div>
 
 <div align="center" markdown>
 
@@ -149,7 +149,7 @@ Les principaux domaines de défaillance sont l'entrée RF/l'antenne, le comporte
 
 **Preuves à conserver :** révisions de la source/du SDK/de la carte, journaux de compilation/téléchargement, description de l'environnement, réglages de la source, distance/orientation, journal série, captures d'écran et résultat de la réinitialisation.
 
-**Critère de sortie du point 1 :** deux démarrages indépendants balayent et affichent 79 points ; les changements de scène contrôlée sont répétables en direction ; les indices d'affichage et les étiquettes de fréquence ont été vérifiés.
+**Critère de sortie du point de contrôle 1 :** deux démarrages indépendants balayent et affichent 79 points ; les changements de scène contrôlée sont répétables en direction ; les indices d'affichage et les étiquettes de fréquence ont été vérifiés.
 
 ## Étape 2 — Valider le traitement, l'historique et la récupération { #stage-2-validate-processing-history-and-recovery }
 
@@ -170,7 +170,7 @@ Les principaux domaines de défaillance sont l'entrée RF/l'antenne, le comporte
 
 </div>
 
-**Critère de sortie du point 2 :** le lissage, la profondeur de l'historique, l'état des boutons et le comportement à la réinitialisation correspondent à la source ; les états anormaux sont observables et non silencieux.
+**Critère de sortie du point de contrôle 2 :** le lissage, la profondeur de l'historique, l'état des boutons et le comportement à la réinitialisation correspondent à la source ; les états anormaux sont observables et non silencieux.
 
 ## Étape 3 — Construire une base source reproductible { #stage-3-build-a-reproducible-source-baseline }
 
@@ -181,7 +181,7 @@ Les principaux domaines de défaillance sont l'entrée RF/l'antenne, le comporte
 3. Flashez avec le script de téléchargement généré et consignez le port, la vitesse en bauds et le résultat.
 4. Répétez sur un second ordinateur ou dans un répertoire propre, puis rejouez les contrôles essentiels de l'étape 2.
 
-**Critère de sortie du point 3 :** le projet produit une image équivalente en comportement, sans fichiers de carte non suivis, fichiers générés ni produits périmés.
+**Critère de sortie du point de contrôle 3 :** le projet produit une image équivalente en comportement, sans fichiers de carte non suivis, fichiers générés ni produits périmés.
 
 ## Étape 4 — Effectuer une adaptation contrôlée de la mesure ou de l'interface { #stage-4-make-one-controlled-measurement-or-ui-adaptation }
 
@@ -191,7 +191,7 @@ Les modifications envisageables comprennent la journalisation des valeurs brutes
 
 En cas d'ajout d'un étalonnage, définissez la source de référence, la fréquence, le niveau d'entrée, l'antenne/le câble, la distance, l'orientation, la température et l'incertitude. Un seul décalage global suffit rarement à compenser la réponse en fréquence, la dispersion entre cartes et les effets du boîtier.
 
-**Critère de sortie du point 4 :** la modification réussit les non-régressions d'origine sur les 79 points, le démarrage/arrêt, l'historique, la réinitialisation et la source contrôlée ; chaque affirmation de précision nomme son instrument de référence et ses conditions.
+**Critère de sortie du point de contrôle 4 :** la modification réussit les non-régressions d'origine sur les 79 points, le démarrage/arrêt, l'historique, la réinitialisation et la source contrôlée ; chaque affirmation de précision nomme son instrument de référence et ses conditions.
 
 ## Étape 5 — Revue de maturité produit { #stage-5-product-readiness-review }
 
@@ -204,13 +204,13 @@ L'équipe doit répondre aux questions suivantes :
 - La latence mesurée d'un balayage à 79 points avec un lissage vérifié dans la source répond-elle à l'exigence d'interface ?
 - Comment résoudre la distribution et les droits commerciaux alors que RadiationMonitor et le code intégré n'ont pas de licence explicite de niveau supérieur ?
 
-**Critère de sortie du point 5 :** l'objectif de mesure, le plan d'étalonnage, la stratégie de concurrence radio, les licences, le matériel et la responsabilité logicielle ont des responsables nommés et une décision de poursuivre/différer/arrêter.
+**Critère de sortie du point de contrôle 5 :** l'objectif de mesure, le plan d'étalonnage, la stratégie de concurrence radio, les licences, le matériel et la responsabilité logicielle ont des responsables nommés et une décision de poursuivre/différer/arrêter.
 
 ## Transfert vers la conception produit { #handoff-to-product-design }
 
 Reportez le composant SF32 cible, la carte/l'antenne, l'implémentation du balayage Bluetooth et toutes les contraintes de mode/d'API confirmées à partir de la source figée, la définition des fréquences et des données, les relevés bruts et lissés, le budget de rafraîchissement de l'interface, le montage d'étalonnage, les tests de bruit d'alimentation, le chemin de récupération et la limite du test de production. Poursuivez avec le [SF32LB52x](../sf32-products/chips/SF32LB52x.md), le [SF32LB52-DevKit-ULP](../sf32-products/devkits/SF32LB52-DevKit-ULP.md), le [guide de conception matérielle du SF32LB52x](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) et les [tests de performances RF de SiFli-SDK](../develop/platforms/sifli-sdk/application-notes/rf-performance-tests.md).
 
-## Sources faisant autorité { #authoritative-sources }
+## Sources de référence { #authoritative-sources }
 
 - [SiFliSparks/RadiationMonitor](https://github.com/SiFliSparks/RadiationMonitor)
 - [README amont sur `main`](https://github.com/SiFliSparks/RadiationMonitor/blob/main/README.md)

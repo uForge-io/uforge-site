@@ -9,7 +9,7 @@ Los ingenieros de sistemas embebidos leen la documentación en el idioma en el q
 
 ### Con herramientas LLM y muchas iteraciones { #built-with-llm-tools }
 
-Nada de esto habría sido viable sin las herramientas LLM, y estamos agradecidos por ellas. Pero no fue una sola ejecución: hicieron falta muchas iteraciones, por dos motivos. El primero es el límite del plan de uso: un trabajo largo de traducción solía alcanzar su límite antes de terminar las páginas y había que esperar a un reinicio o continuar en otra herramienta. Los múltiples reinicios gratuitos de ChatGPT ayudaron muchísimo, y damos las gracias por ello. El segundo es que traducir así es lento e ineficiente: las páginas técnicas son largas y están llenas de tablas, código, nombres de pines y enlaces cruzados, de modo que cada pasada producía algo que había que revisar, corregir y volver a ejecutar.
+Nada de esto habría sido viable sin las herramientas LLM, y estamos agradecidos por ellas. Pero no fue una sola ejecución: hicieron falta muchas iteraciones, por dos motivos. El primero es el límite del plan de uso: un trabajo largo de traducción solía alcanzar su límite antes de terminar las páginas y había que esperar a que se restableciera el límite o continuar en otra herramienta. Los múltiples reinicios gratuitos de ChatGPT ayudaron muchísimo, y damos las gracias por ello. El segundo es que traducir así es lento e ineficiente: las páginas técnicas son largas y están llenas de tablas, código, nombres de pines y enlaces cruzados, de modo que cada pasada producía algo que había que revisar, corregir y volver a ejecutar.
 
 ### Mantener la coherencia { #keeping-translations-consistent }
 

@@ -76,7 +76,7 @@ Los comandos AT se transmiten como texto ASCII y terminan con un retorno de carr
 | Forma | Comando | Descripción |
 |:-----|:--------|:-------------|
 | Consulta | `AT+<CMD>?\r` | Leer un parámetro o estado |
-| Ajuste | `AT+<CMD>=<param>[,<param>...]\r` | Escribir un parámetro |
+| Configuración | `AT+<CMD>=<param>[,<param>...]\r` | Escribir un parámetro |
 | Ejecución | `AT+<CMD>\r` | Ejecutar una acción |
 
 </div>
@@ -176,7 +176,7 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 #### Consultar la opción de añadir el sufijo MAC al nombre { #query-mac-name-suffix-switch }
 
-<div align="center"><em>Tabla: Consulta de la opción de sufijo MAC en el nombre</em></div>
+<div align="center"><em>Tabla: Lectura del estado del sufijo MAC del nombre</em></div>
 
 <div align="center" markdown>
 
@@ -403,7 +403,7 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 #### Consultar el uso de una dirección aleatoria BLE { #query-ble-random-address-switch }
 
-<div align="center"><em>Tabla: Consulta del uso de una dirección aleatoria BLE</em></div>
+<div align="center"><em>Tabla: Lectura de la configuración de dirección aleatoria BLE</em></div>
 
 <div align="center" markdown>
 
@@ -694,7 +694,7 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 #### Consultar la configuración de notificaciones de eventos { #query-event-reporting-switch }
 
-<div align="center"><em>Tabla: Consulta de las notificaciones de eventos</em></div>
+<div align="center"><em>Tabla: Lectura de la configuración de notificaciones de eventos</em></div>
 
 <div align="center" markdown>
 
@@ -756,7 +756,7 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 #### Consultar el ajuste global de multiconexión { #query-multi-connection-switch }
 
-<div align="center"><em>Tabla: Consulta del ajuste global de multiconexión</em></div>
+<div align="center"><em>Tabla: Lectura del ajuste global de multiconexión</em></div>
 
 <div align="center" markdown>
 
@@ -1060,7 +1060,7 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 #### Consultar la carga automática de GATT al encender { #query-gatt-auto-load-on-power-up-switch }
 
-<div align="center"><em>Tabla: Consulta de la carga automática de GATT al encender</em></div>
+<div align="center"><em>Tabla: Lectura del ajuste de carga automática de GATT al encender</em></div>
 
 <div align="center" markdown>
 

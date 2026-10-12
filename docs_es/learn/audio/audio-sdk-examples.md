@@ -34,25 +34,25 @@ Esta página agrupa una selección de ejemplos de audio de SiFli-SDK por tarea d
 
 ## Requisitos comunes { #shared-starting-point }
 
-La mayoría de los ejemplos comparten estos requisitos: la placa debe contar con el hardware de audio necesario y tenerlo conectado correctamente; su configuración debe habilitar los bloques de audio requeridos, y el ejemplo elegido debe ser compatible con ella. Los ejemplos que leen o escriben archivos también necesitan un sistema de archivos montado. No copie el nombre de una placa, una asignación de pines ni un ajuste de `menuconfig` de otro ejemplo sin comprobar la página oficial y los archivos de configuración de la placa objetivo.
+La mayoría de los ejemplos comparten estos requisitos: la placa debe contar con el hardware de audio necesario y tenerlo conectado correctamente; su configuración debe habilitar los bloques de audio requeridos, y el ejemplo elegido debe ser compatible con ella. Los ejemplos que leen o escriben archivos también necesitan un sistema de archivos montado. No copie el nombre de una placa, una asignación de pines ni un ajuste de `menuconfig` de otro ejemplo sin comprobar la página de origen y los archivos de configuración de la placa objetivo.
 
 !!! warning "Proteja los datos existentes del sistema de archivos"
     El ejemplo Opus de v2.5.1 llama a `dfs_mkfs()` si falla el montaje del sistema de archivos raíz ([código fuente](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/example/multimedia/audio/opus/src/main.c)). No incorpore esta recuperación mediante formato automático al producto sin una política explícita de conservación de datos. Un fallo de montaje no autoriza a borrar los datos del usuario.
 
 Para todos los ejemplos, limite deliberadamente la primera validación:
 
-1. Compile y cargue el proyecto sin modificar en una placa compatible.
+1. Compile y grabe en una placa compatible el proyecto sin modificar.
 2. Compruebe la captura o reproducción esperada con hardware de audio y archivos de referencia validados.
 3. Anote la revisión del SDK, el nombre de la placa, la configuración, la asignación de pines y el registro de consola serie.
 4. Modifique un solo elemento específico del producto y repita la misma prueba.
 
-El [Resumen del audio local](overview.md) explica las decisiones de interfaz y arquitectura que subyacen a estos ejemplos. Para la gestión de búferes, el cierre de sesiones y la coexistencia con la pantalla o Bluetooth, consulte [Audio Server y gestión de búferes](audio-server-buffering.md).
+La [descripción general del audio](overview.md) explica las decisiones de interfaz y arquitectura que subyacen a estos ejemplos. Para la gestión de búferes, el cierre de sesiones y la coexistencia con la pantalla o Bluetooth, consulte [Audio Server y gestión de búferes](audio-server-buffering.md).
 
 ## Captura con micrófonos digitales: PDM { #digital-microphone-capture-pdm }
 
 Use el ejemplo PDM cuando el producto necesite captar audio con micrófonos digitales en lugar de una entrada analógica. El ejemplo oficial admite dos o cuatro micrófonos PDM, pero la creación del archivo de grabación y su reproducción dependen del modo de procesamiento. La topología documentada utiliza los canales izquierdo y derecho de `PDM1` para dos micrófonos y añade `PDM2` para llegar a cuatro. Una interfaz PDM puede admitir hasta dos micrófonos digitales; por tanto, el número de interfaces no equivale al número de micrófonos. Confirme la configuración admitida consultando el mapeo de interfaces y canales del SoC de destino.
 
-La página oficial actual indica `sf32lb56-lcd_a128r12n1` como placa compatible. El modo `pdm open pdm12 4 raw` solo genera registros; no crea un archivo de grabación. Los modos de procesamiento Anyka producen salida mono, incluso con cuatro micrófonos: cuatro entradas no implican un archivo de cuatro canales. Compruebe las dependencias del algoritmo y el formato de salida antes de usarlo como referencia para una matriz de micrófonos.
+La página de origen actual indica `sf32lb56-lcd_a128r12n1` como placa compatible. El modo `pdm open pdm12 4 raw` solo genera registros; no crea un archivo de grabación. Los modos de procesamiento Anyka producen salida mono, incluso con cuatro micrófonos: cuatro entradas no implican un archivo de cuatro canales. Compruebe las dependencias del algoritmo y el formato de salida antes de usarlo como referencia para una matriz de micrófonos.
 
 Antes de adaptarlo, compruebe estos cuatro aspectos:
 
@@ -61,7 +61,7 @@ Antes de adaptarlo, compruebe estos cuatro aspectos:
 - La configuración de multiplexación de pines de la placa asigna las funciones PDM antes de iniciar el controlador.
 - El producto necesita los servicios de grabación y reproducción que habilita el ejemplo; no hacen falta para limitarse a capturar datos PDM.
 
-La página oficial de PDM documenta una configuración de placa compatible y un ejemplo de asignación de pines. Úselos como referencia validada, pero sustitúyalos por el cableado real de la placa objetivo; no dé por hecho que se pueden trasladar sin cambios. Consulte el [ejemplo PDM](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html).
+La página de origen de PDM documenta una configuración de placa compatible y un ejemplo de asignación de pines. Úselos como referencia validada, pero sustitúyalos por el cableado real de la placa objetivo; no dé por hecho que se pueden trasladar sin cambios. Consulte el [ejemplo PDM](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html).
 
 ## Captura analógica y grabación/reproducción básica { #analog-capture-and-basic-recordplayback }
 
@@ -83,7 +83,7 @@ Ambos ejemplos validan la reproducción, pero no implementan una arquitectura ge
 
 El **ejemplo FLAC** cubre el flujo completo sin pérdidas: grabar PCM con el micrófono, codificarlo en FLAC, decodificarlo y reproducirlo. La página oficial enumera las series `sf32lb52-lcd`, `sf32lb56-lcd` y `sf32lb58-lcd`; requiere FAT, `libFLAC` y los componentes de audio. Sirve para probar una ruta de captura basada en archivos o comparar el espacio de almacenamiento con el PCM sin comprimir.
 
-El **ejemplo Opus** cubre una ruta de compresión diseñada para aplicaciones de voz. La página oficial actual solo enumera `eh-lb525`. El ejemplo captura a 16 kHz, procesa tramas de 10 ms a aproximadamente 16 kbps y después decodifica y reproduce el flujo resultante. La documentación también especifica que el tamaño de pila requerido depende del modo de codificación elegido. Respete ese requisito al adaptar el ejemplo; no suponga que la pila predeterminada de la tarea bastará al añadir lógica de aplicación.
+El **ejemplo Opus** cubre una ruta de compresión diseñada para aplicaciones de voz. La página de origen actual solo enumera `eh-lb525`. El ejemplo captura a 16 kHz, procesa tramas de 10 ms a aproximadamente 16 kbps y después decodifica y reproduce el flujo resultante. La documentación también especifica que el tamaño de pila requerido depende del modo de codificación elegido. Respete ese requisito al adaptar el ejemplo; no suponga que la pila predeterminada de la tarea bastará al añadir lógica de aplicación.
 
 El README oficial de SiFli-SDK indica configuraciones de pila específicas para este ejemplo: usar `OPUS_STACK_SIZE` de 20k cuando `opus_test()` llama a `opus_encoder_ctl(encoder, OPUS_SET_FORCE_MODE(MODE_SILK_ONLY))`; si no se fuerza ese modo, recomienda 200k. No son requisitos universales de Opus. Antes de adaptarlas, compruebe la revisión del SDK y la ruta de codificación que va a compilar, y mida el uso máximo de pila con la carga de trabajo del producto para dimensionar la tarea.
 
@@ -115,7 +115,7 @@ Es una buena referencia para combinar avisos, efectos y música, cuando el produ
 
 ## Recursos relacionados { #related-resources }
 
-- [Resumen del audio local](overview.md) para consultar las interfaces, los tipos de sesión, el consumo energético y la validación.
+- [Descripción general del audio](overview.md) para consultar las interfaces, los tipos de sesión, el consumo energético y la validación.
 - [Audio Server y gestión de búferes](audio-server-buffering.md) para la gestión de flujos, los búferes DMA y las pruebas con cargas de producto.
 - [Ejemplos](../../develop/examples/index.md) para consultar el catálogo de ejemplos del SDK de distintos ámbitos.
 - [Índice de ejemplos de audio de SiFli-SDK](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/index.html) para ver la lista oficial vigente y las instrucciones de configuración de cada ejemplo.

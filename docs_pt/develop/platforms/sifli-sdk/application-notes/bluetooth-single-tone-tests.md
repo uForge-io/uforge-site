@@ -7,7 +7,7 @@ tags: [Desenvolvimento, SiFli-SDK, Notas de aplicação, Bluetooth]
 
 # Executar testes individuais de RF para Bluetooth { #run-bluetooth-single-item-rf-tests }
 
-Os testes individuais de RF são o recurso de baixo nível do SDK para ajustar a placa, realizar avaliações preliminares de conformidade FCC/CE e investigar uma frequência portadora ou uma configuração de modulação por vez. Esse recurso não faz parte do produto nem substitui os testes de sinalização BQB.
+Os testes individuais de RF são o recurso de baixo nível do SDK para ajustar a placa, realizar avaliações preliminares de conformidade FCC/CE e investigar a frequência de uma portadora ou uma configuração de modulação por vez. Esse recurso não faz parte do produto nem substitui os testes de sinalização BQB.
 
 ## Preparar o DUT e a ferramenta { #prepare-the-dut-and-tool }
 
@@ -49,15 +49,15 @@ Os pinos UART1 do SF32LB55x variam conforme o número da peça. Para testes modu
 
 ## Transmitir um sinal BLE ou Bluetooth clássico { #transmit-a-ble-or-classic-bt-signal }
 
-1. Abra `SiFli_RfTool.exe`, selecione a família do chip, escolha BLE non-signaling ou BT non-signaling, selecione a porta COM da UART1 e conecte a 1 000 000 baud.
-2. Para BLE, configure Frequency, Data Length, payload e PHY e selecione Start TX. Pare a transmissão antes de alterar o canal ou a PHY.
-3. Para Bluetooth clássico, configure Frequency, Data Length e Packet Type e selecione Start TX. Pare a transmissão antes de alterar os parâmetros do pacote.
+1. Abra `SiFli_RfTool.exe`, selecione a família do chip, escolha `BLE non-signaling` (BLE sem sinalização) ou `BT non-signaling` (BT sem sinalização), selecione a porta COM da UART1 e conecte a 1 000 000 baud.
+2. Para BLE, configure `Frequency` (frequência), `Data Length` (comprimento dos dados), `payload` (carga útil) e `PHY` (camada física) e selecione `Start TX` (iniciar TX). Pare a transmissão antes de alterar o canal ou a PHY.
+3. Para Bluetooth clássico, configure `Frequency` (frequência), `Data Length` (comprimento dos dados) e `Packet Type` (tipo de pacote) e selecione `Start TX` (iniciar TX). Pare a transmissão antes de alterar os parâmetros do pacote.
 4. No testador, use o mesmo canal, tipo de pacote, payload e PHY. Se não houver um testador de comunicações disponível, use um analisador de espectro para observar a forma de onda.
 
 O código-fonte do SDK inclui níveis TX de referência para o LB52x HDK, mas esses valores são específicos dessa placa. Use-os apenas como referência de depuração e meça a placa real do produto.
 
 ![Controles principais do SiFli_RfTool](../../../../assets/develop/app-notes/bluetooth-single-item/figure_13-1.jpg){ loading="lazy" }
-<div align="center"><em>Figura: Exemplo do guia do SF32LB52x — controles da família do chip, modo, UART, taxa de transmissão e TX/RX; confirme essas opções antes de aplicar um vetor de teste.</em></div>
+<div align="center"><em>Figura: Exemplo do guia do SF32LB52x — controles da família do chip, modo, UART, taxa de baud e TX/RX; confirme essas opções antes de aplicar um vetor de teste.</em></div>
 
 ![Configurações de TX BLE no SiFli_RfTool](../../../../assets/develop/app-notes/bluetooth-single-item/figure_13-2.png){ loading="lazy" }
 <div align="center"><em>Figura: Exemplo do guia do SF32LB52x — selecione o chip, o modo, o canal, o payload, a PHY, o tamanho dos dados e a potência antes de iniciar TX.</em></div>
@@ -79,7 +79,7 @@ Registre também o RSSI. Para RX de Bluetooth clássico, use uma forma de onda d
 
 Pare a operação atual antes de iniciar um teste de portadora única (CW). No SF32LB55x, transfira a conexão entre o DUT e o PC da UART1 para a UART3 (PB45/PB46), selecione a porta COM correspondente no SiFli_RfTool e use 1 000 000 baud. Para as demais famílias listadas, use a UART1. Defina a frequência da portadora e a potência TX, inicie a transmissão e observe a saída em um analisador de espectro ou medidor de potência.
 
-Para medir TX modulado de BLE/BT com um testador, selecione StandAlone (Non Signaling) como modo de recepção e use o mesmo canal, tipo de pacote, payload e PHY configurados no SiFli_RfTool. Para medir RX do DUT, configure o testador como fonte do sinal: BLE usa parâmetros DTM, enquanto Bluetooth clássico usa uma forma de onda GPRF.
+Para medir a transmissão TX modulada de BLE/BT com um testador, selecione StandAlone (Non Signaling) como modo de recepção e use o mesmo canal, tipo de pacote, payload e PHY configurados no SiFli_RfTool. Para medir RX do DUT, configure o testador como fonte do sinal: BLE usa parâmetros DTM, enquanto Bluetooth clássico usa uma forma de onda GPRF.
 
 Se a ferramenta ou a conexão serial parar de responder, feche o SiFli_RfTool, desligue e religue o DUT, aguarde a inicialização e reconecte. Guarde a versão da ferramenta, a identificação do firmware, o chip/encapsulamento, os pinos UART, a revisão da placa, o canal, a PHY/tipo de pacote, a potência, a perda do cabo, a configuração do instrumento e os resultados brutos junto com o registro do teste.
 

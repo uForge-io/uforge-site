@@ -9,7 +9,7 @@ tags:
 
 # Journalisation et analyse des plantages { #logging-and-crash-analysis }
 
-Les journaux font partie du produit ; ils ne sont pas un simple outil de débogage temporaire. Une journalisation bien conçue réduit le temps nécessaire à la mise en service des cartes, au diagnostic sur le terrain et à l'analyse des défaillances en production.
+Les journaux font partie du produit ; ils ne sont pas un simple outil de débogage temporaire. Une journalisation bien conçue réduit le temps nécessaire à la mise en service des cartes, au diagnostic sur le terrain et aux investigations en usine.
 
 Prévoyez la journalisation avant le premier essai sur le terrain. En cas de défaillance, vous ne pourrez récupérer que les données que le firmware avait été configuré pour enregistrer ou émettre.
 
@@ -31,7 +31,7 @@ Pour chaque compilation du firmware, consignez les éléments suivants :
 2. Capturer le journal complet depuis la réinitialisation.
 3. Conserver le binaire exact et les fichiers de symboles correspondants.
 4. Décoder les assertions ou les vidages à l'aide des outils SiFli.
-5. Vérifier la taille des piles, identifier le responsable de chaque zone mémoire, examiner les tampons DMA et les opérations de maintenance du cache.
+5. Vérifier la taille des piles d'exécution, déterminer qui est responsable de chaque zone mémoire, examiner les tampons DMA et les opérations de maintenance du cache.
 6. Isoler le problème à partir de l'exemple du SDK qui s'en rapproche le plus.
 
 ## Niveaux de journalisation { #log-levels }
@@ -57,4 +57,4 @@ Pour chaque compilation du firmware, consignez les éléments suivants :
 - Il inclut les fichiers de symboles ou une compilation reproductible.
 - Il indique si le plantage se produit sur un exemple du SDK non modifié.
 - Il liste les périphériques connectés et la source d'alimentation.
-- Il indique si le plantage persiste après l'effacement complet de la mémoire Flash et la reprogrammation.
+- Il indique si le plantage persiste après l'effacement complet de la mémoire Flash et un nouveau flashage.

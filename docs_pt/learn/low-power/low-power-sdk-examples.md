@@ -1,7 +1,7 @@
 ---
 icon: lucide/battery-charging
 title: "Exemplos de baixo consumo do SDK"
-description: "Escolha o exemplo de gerenciamento de energia do SiFli-SDK adequado para modos de suspensão, fontes de despertar, GPIO, CPU, Bluetooth, telas, interface e cenários de dispositivos vestíveis."
+description: "Escolha o exemplo de gerenciamento de energia do SiFli-SDK adequado para modos de suspensão, fontes de despertar, GPIO, CPU, Bluetooth, displays, interface e cenários de dispositivos vestíveis."
 tags:
   - Baixo consumo
   - Exemplos
@@ -25,17 +25,17 @@ Esta página organiza os projetos do [índice de exemplos de PM do SiFli-SDK](ht
 | Caracterizar a atividade de GPIO em baixo consumo | [Teste de consumo de GPIO](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/gpio/README.html) | Despertar periódico por temporizador, acesso a GPIO e diferenças entre atividade de despertar, suspensão e E/S | Pull-ups e pull-downs externos, periféricos desligados, multiplexação de pinos, linhas de alimentação e caminhos de fuga não previstos |
 | Separar o processamento do comportamento de desligamento | [Teste de consumo do processador](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/coremark/README.html) | Cargas de benchmark ou loop da CPU, desligamento, despertar por RTC e por pino | Frequência do núcleo, carga de trabalho, polaridade do pino de despertar, mapeamento específico da placa e tensão de alimentação |
 | Medir cenários de Bluetooth | [Teste de consumo de anúncios BLE e conexão](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/ble/README.html) ou [Teste de consumo BLE/BT](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) | Anúncios BLE, conexões e atividade Bluetooth como cenários mensuráveis | Condições de RF, potência de transmissão, intervalos de anúncio e de conexão, comportamento do dispositivo par, antena e callbacks da aplicação |
-| Comparar as políticas de tela apagada e tela sempre ativa em AMOLED | [Teste de consumo de AMOLED](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/AMOLED/README.html) | Atualização da tela, suspensão com a tela apagada e comparação com a tela sempre ativa | Painel real, brilho, política de atualização, linhas de alimentação da tela e ciclo de uso |
-| Medir um caminho de tela JDI | [Teste de consumo de JDI](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/jdi/README.html) | Comportamento de baixo consumo específico da configuração JDI documentada | Variante do painel, região de atualização, configuração do controlador, linhas de alimentação e frequência de atualização |
-| Integrar uma interface gráfica de baixo consumo | [Guia do exemplo de baixo consumo GUI_PM](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/gui_pm/README.html) | Interação entre o comportamento da interface, o estado da tela e a política de PM | Ciclo de vida das telas do produto, animações, fontes de despertar por toque ou controlador e política de atualização de áreas alteradas |
-| Caracterizar uma carga de atualização da tela | [Exemplo de teste de consumo — cenário de atualização da tela](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/lcd_refresh/README.html) | A contribuição da atualização da tela para a carga de trabalho do produto | Resolução, formato de pixel, área alterada, taxa da interface, estratégia de buffer e ritmo de atualização do conteúdo |
+| Comparar as políticas de tela apagada e tela sempre ativa em AMOLED | [Teste de consumo de AMOLED](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/AMOLED/README.html) | Atualização do display, suspensão com a tela apagada e comparação com a tela sempre ativa | Painel real, brilho, política de atualização, linhas de alimentação do display e ciclo de uso |
+| Medir um caminho de display JDI | [Teste de consumo de JDI](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/jdi/README.html) | Comportamento de baixo consumo específico da configuração JDI documentada | Variante do painel, região de atualização, configuração do controlador, linhas de alimentação e frequência de atualização |
+| Integrar uma interface gráfica de baixo consumo | [Guia do exemplo de baixo consumo GUI_PM](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/gui_pm/README.html) | Interação entre o comportamento da interface, o estado do display e a política de PM | Ciclo de vida das telas do produto, animações, fontes de despertar por toque ou controlador e política de atualização de áreas alteradas |
+| Caracterizar uma carga de atualização da tela | [Exemplo de teste de consumo — cenário de atualização da tela](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/lcd_refresh/README.html) | A contribuição da atualização do display para a carga de trabalho do produto | Resolução, formato de pixel, área alterada, taxa da interface, estratégia de buffer e ritmo de atualização do conteúdo |
 | Implementar uma interação em um dispositivo vestível, acionada por sensor | [Acender a tela ao erguer o pulso](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/raise_wrist/README.html) | Despertar por sensor, atividade com a tela acesa e retorno à suspensão | Escolha do sensor, algoritmo de gesto, intervalo de amostragem, tempo limite da tela, modelo de bateria e uso diário medido |
 
 </div>
 
 ### Confira o escopo das placas { #verify-the-board-scope }
 
-As listas abaixo distinguem as placas citadas explicitamente no guia oficial de cada exemplo dos alvos definidos na configuração GCC atual do SiFli-SDK. A presença de uma placa na matriz significa que o projeto está configurado como alvo de compilação; não significa que os valores de consumo publicados tenham sido medidos nessa placa. Quando os nomes do guia e os identificadores de compilação diferem, não presuma que sejam intercambiáveis sem conferir o mapeamento das placas. Os links de configuração apontam para a branch `main` atual; para outra revisão do SDK, consulte o `build_config_gcc.yaml` daquele checkout antes de escolher um alvo `scons --board`. Para reproduzir uma medição, siga a montagem de hardware indicada no guia. O nome de uma família no URL da documentação não permite concluir que toda a família é compatível.
+As listas abaixo distinguem as placas citadas explicitamente no guia de cada exemplo dos alvos definidos na configuração GCC atual do SiFli-SDK. A presença de uma placa na matriz significa que o projeto está configurado como alvo de compilação; não significa que os valores de consumo publicados tenham sido medidos nessa placa. Quando os nomes do guia e os identificadores de compilação diferem, não presuma que sejam intercambiáveis sem conferir o mapeamento das placas. Os links de configuração apontam para a branch `main` atual; para outra revisão do SDK, consulte o `build_config_gcc.yaml` daquele checkout antes de escolher um alvo `scons --board`. Para reproduzir uma medição, siga a montagem de hardware indicada no guia. O nome de uma família no URL da documentação não permite concluir que toda a família é compatível.
 
 - **PM Example** ([código-fonte do SDK](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/classical)): o guia lista `sf32lb56-devkit-lcd_n16r12n1`, `eh-lb551`, `sf32lb52-lcd_n16r8` e `sf32lb58-lcd_n16r64n4`. A entrada atual do projeto na configuração GCC usa `sf32lb56-lcd_n16r12n1`, `eh-lb551`, `sf32lb52-lcd_n16r8`, `sf32lb58-lcd_n16r64n4` e `sf32lb52-core_n16r16`. O primeiro identificador difere de `sf32lb56-devkit-lcd_n16r12n1`, usado no guia; confirme o mapeamento das placas em vez de presumir que identificadores diferentes sejam equivalentes.
 - **GPIO Power Consumption Test** ([código-fonte do SDK](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/gpio)): o guia e a configuração GCC atual listam `sf32lb52-core_n16r16`.
@@ -50,7 +50,7 @@ As listas abaixo distinguem as placas citadas explicitamente no guia oficial de 
 
 ## Defina o escopo elétrico da medição { #measure-at-the-right-electrical-boundary }
 
-Não compare a medição do produto com a de um exemplo do SDK antes de confirmar que ambas incluem o mesmo conjunto de componentes e linhas de alimentação. Os exemplos de GPIO e de ativação da tela pelo gesto de erguer o pulso, por exemplo, documentam conexões de alimentação e alterações de jumpers específicas da placa para medições de baixo consumo. Uma placa alimentada por USB, um depurador conectado, um conversor UART, um circuito de carga ou um módulo de tela podem alterar significativamente o resultado.
+Não compare a medição do produto com a de um exemplo do SDK antes de confirmar que ambas incluem o mesmo conjunto de componentes e linhas de alimentação. Os exemplos de GPIO e de ativação da tela pelo gesto de erguer o pulso, por exemplo, documentam conexões de alimentação e alterações de jumpers específicas da placa para medições de baixo consumo. Uma placa alimentada por USB, um depurador conectado, um conversor UART, um circuito de carga ou um módulo de display podem alterar significativamente o resultado.
 
 Em cada medição, registre:
 
@@ -70,16 +70,16 @@ O **Teste de consumo de GPIO** é um bom ponto de partida quando uma interface a
 
 O **Teste de consumo do processador** diferencia condições fundamentalmente distintas: processamento na CPU, uma carga simples em loop, desligamento e despertar por temporizador ou por pino. Ele ajuda a caracterizar o custo do processamento ativo e o funcionamento do despertar, mas não prevê o consumo de energia da aplicação. Antes de usar a medição no orçamento de energia, substitua o benchmark ou o loop por uma carga de firmware representativa do produto.
 
-## Cenários de Bluetooth e tela { #bluetooth-and-display-scenarios }
+## Cenários de Bluetooth e display { #bluetooth-and-display-scenarios }
 
 Use os projetos de [anúncio BLE e conexão](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/ble/README.html) e [BLE/BT](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) para estabelecer cenários de rádio reproduzíveis antes de otimizar os parâmetros de conexão na aplicação. Ainda assim, o produto final precisa ser medido com suas próprias configurações de anúncio ou conexão, dispositivo par, ambiente de RF, antena e comportamento dos callbacks. Uma aplicação que desperta a CPU principal a cada evento de rádio pode anular um bom resultado medido no nível do enlace.
 
-Os projetos voltados à tela ajudam a avaliar outro conjunto de decisões:
+Os projetos voltados ao display ajudam a avaliar outro conjunto de decisões:
 
 - O **Teste de consumo de AMOLED** compara a suspensão com a tela apagada a uma política de tela sempre ativa. As mudanças de modo e as estimativas de duração da bateria do exemplo de origem valem para a placa, o painel, o brilho, a temporização de atualização e o modelo de uso documentados; não se aplicam automaticamente a todos os produtos AMOLED.
-- O [Teste de consumo de JDI](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/jdi/README.html) fornece uma referência específica da plataforma para um caminho de tela JDI.
+- O [Teste de consumo de JDI](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/jdi/README.html) fornece uma referência específica da plataforma para um caminho de display JDI.
 - O [Guia do exemplo de baixo consumo GUI_PM](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/gui_pm/README.html) relaciona decisões sobre o ciclo de vida da interface ao comportamento de PM.
-- O [Cenário de atualização da tela](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/lcd_refresh/README.html) se concentra na carga causada pela própria atualização da tela.
+- O [Cenário de atualização da tela](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/lcd_refresh/README.html) se concentra na carga causada pela própria atualização do display.
 
 Em conjunto, esses exemplos ajudam a responder a uma pergunta sobre o produto: quais eventos realmente exigem mudanças nos pixels e que parte do painel precisa ser atualizada? Consulte a [Visão geral de gráficos](../graphics/overview.md) e o [Controlador de display](../graphics/display-controller.md) para transformar essa resposta em uma estratégia de buffers e atualização parcial.
 
@@ -97,7 +97,7 @@ Para ver um exemplo completo do ciclo entre modelagem e medição, consulte [An�
 
 <div align="center" markdown>
 
-| Etapa | Evidências a manter | Importância |
+| Passo | Evidências a manter | Importância |
 |:-----|:-----------------|:---------------|
 | Estabelecer a referência original | Placa, conexão de alimentação, jumpers, revisão do SDK, configuração e comportamento esperado | Separa o comportamento do exemplo de origem das alterações posteriores no produto |
 | Definir um cenário | Estado de PM identificado, componentes ativos, fonte de despertar, duração e condição de término | Evita obter um valor de corrente média sem significado de engenharia |

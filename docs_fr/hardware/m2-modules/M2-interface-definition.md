@@ -158,7 +158,7 @@ Pour I2C, I/O décrit les lignes bidirectionnelles SDA/SCL ; cela ne garantit ni
 | <span class="m2-chip m2-display">Affichage</span> | `LCDC1_SPI_CS`, `LCDC1_SPI_CS2` | O | Sélection de puce principale et secondaire optionnelle de l'afficheur QSPI. |
 | <span class="m2-chip m2-display">Affichage</span> | `LCDC1_SPI_CLK` | O | Horloge de l'afficheur QSPI. |
 | <span class="m2-chip m2-display">Affichage</span> | `LCDC1_SPI_DIO0`–`DIO3` | I/O | Lignes de données de l'afficheur QSPI. |
-| <span class="m2-chip m2-display">Affichage</span> | `LCDC1_SPI_TE` | I | Entrée de synchronisation tearing-effect depuis le panneau. |
+| <span class="m2-chip m2-display">Affichage</span> | `LCDC1_SPI_TE` | I | Entrée du signal TE de synchronisation, provenant du panneau. |
 | <span class="m2-chip m2-display">Affichage</span> | `LCDC1_SPI_RSTB` | O | Reset du panneau d'affichage, actif bas. |
 | <span class="m2-chip m2-display">Affichage</span> | `LCD_BL_PWM` | O | Commande PWM du rétroéclairage. |
 | <span class="m2-chip m2-touch">Tactile</span> | `CTP_I2C1_SDA`, `CTP_I2C1_SCL` | I/O | Bus I²C du contrôleur tactile capacitif. |
@@ -265,7 +265,7 @@ M2xA est un résumé non vérifié de commande moteur et d'acquisition dans cet 
 
 </div>
 
-## Déclaration du module et liste de vérification { #module-declaration-and-implementation-checklist }
+## Déclaration du module et liste de contrôle { #module-declaration-and-implementation-checklist }
 
 Une déclaration de module doit indiquer son brochage de base et chaque profil d'extension pris en charge, par exemple `M2`, `M2 + M2xM` ou `M2 + M2xN + M2xA`. Elle doit préciser le nombre de connecteurs au format M2, leur catégorie, les fonctions optionnelles implémentées et les modes mutuellement exclusifs.
 

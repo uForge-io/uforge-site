@@ -44,7 +44,7 @@ tags:
 
 ### 9.1. 附录 A. 典型 SF32LB55x 产品 { #appendix-a-a-typical-sf32lb55x-product }
 
-典型的 SF32LB55x 产品包含 MCU、电源树、晶体、RF 匹配网络和天线、外部存储器、显示与触摸控制器、传感器、GPADC 输入、振动马达、可选蓝牙音频，以及调试和量产测试接口。电池供电设计还应检查低功耗状态下的漏电流，并提前规划测试夹具的接入方式。
+典型的 SF32LB55x 产品包含 MCU、电源树、晶体、RF 匹配网络和天线、外部存储器、显示与触摸控制器、传感器、GPADC 输入、振动马达、可选蓝牙（Bluetooth）音频，以及调试和量产测试接口。电池供电设计还应检查低功耗状态下的漏电流，并提前规划测试夹具的接入方式。
 
 ### 9.2. 设计问答 { #91-design-qa }
 
@@ -80,7 +80,7 @@ tags:
 
 ### 10.1. 核对表修订历史 { #101-checklist-revision-history }
 
-[原理图核对表](SF32LB55x_schematic_checklist.md)以及 [PCB 布局指导](SF32LB55x_pcb_layout.md) 第 6.4 节中的逐项核对表与设计指南单独维护版本，版本编号沿用思澈科技（SiFli）官方 *SF32LB55x Schematic & PCB Checklist* 电子表格。
+[原理图核对表](SF32LB55x_schematic_checklist.md)以及 [PCB 布局指导](SF32LB55x_pcb_layout.md) 第 6.4 节中的逐项核对内容独立于设计指南进行版本管理，版本编号沿用思澈科技（SiFli）官方 *SF32LB55x Schematic & PCB Checklist* 电子表格。
 
 <div align="center"><em>表 10.1-1：核对表修订历史</em></div>
 

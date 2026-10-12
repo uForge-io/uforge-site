@@ -28,7 +28,7 @@ Um subsistema Bluetooth dedicado separa essas responsabilidades sem fio sensíve
 - Separação mais clara entre o firmware da aplicação e o firmware de controle do protocolo.
 - Mais facilidade para manter produtos conectados enquanto a CPU principal permanece em repouso.
 
-Essa separação é especialmente valiosa em produtos vestíveis e portáteis. O dispositivo pode passar a maior parte do tempo conectado em um estado de baixo consumo, despertando apenas para interações do usuário, eventos de sensores, atualizações da tela, atividade de áudio ou sincronização com o telefone.
+Essa separação é especialmente valiosa em produtos vestíveis e portáteis. O dispositivo pode passar a maior parte do tempo conectado em um estado de baixo consumo, despertando apenas para interações do usuário, eventos de sensores, atualizações do display, atividade de áudio ou sincronização com o telefone.
 
 Essas são possibilidades da arquitetura, não valores garantidos de consumo ou tempo de despertar. A localização da pilha Host, as interrupções, a partida do clock, a política de repouso e o tráfego da aplicação determinam o resultado medido. Meça a corrente e o tempo de resposta com o firmware e a carga previstos.
 
@@ -39,24 +39,24 @@ Uma arquitetura sem fio simplificada do SF32 pode ser representada assim:
 <div align="center"><em>Figura: Arquitetura sem fio simplificada do SF32</em></div>
 
 ```text
-Processador de aplicações
-  - firmware do produto
-  - interface e gráficos
-  - lógica de áudio da aplicação
-  - serviços do produto
+Application Processor
+  - product firmware
+  - UI and graphics
+  - audio application logic
+  - user services
         │
         ▼
-Host Bluetooth / serviços do sistema
+Bluetooth Host / System Services
         │
         ▼
-Processador Bluetooth / firmware do controlador
-  - temporização da camada de enlace
-  - escalonamento de rádio
-  - eventos de conexão de baixo consumo
-  - processamento de protocolo no controlador
+Bluetooth Processor / Controller Firmware
+  - link-layer timing
+  - radio scheduling
+  - low-power connection events
+  - controller-side protocol work
         │
         ▼
-Rádio Bluetooth e front-end de RF
+Bluetooth Radio and RF Front End
 ```
 
 A divisão exata entre host, controlador e firmware da aplicação depende do SDK, da configuração da pilha e dos requisitos do produto. Conceitualmente, porém, o processador principal de aplicações não deve ser considerado a única CPU envolvida na operação Bluetooth. O subsistema Bluetooth tem seu próprio contexto de execução e foi projetado para manter o comportamento sem fio determinístico e eficiente em consumo.
@@ -73,7 +73,7 @@ As diferentes classes de dispositivos da família SF32LB usam configurações di
 |:--------------|:---------------------|:-------------------------|:--------------------|
 | **SF32LB52x** | Bluetooth de modo dual: BT Classic + BLE | O LCPU executa a pilha Bluetooth; não fica disponível para o código de aplicação | Módulos Bluetooth otimizados em custo, acessórios de áudio, dispositivos vestíveis de nível básico e HMIs compactas. |
 | **SF32LB55x** | BLE | O LCPU pode executar tarefas de aplicação suportadas pelo SDK | Vestíveis BLE e produtos de baixo consumo com muitos sensores. |
-| **SF32LB56x** | Bluetooth de modo dual: BT Classic + BLE | O LCPU pode executar tarefas de aplicação suportadas pelo SDK | Produtos com telas mais avançadas, HMIs conectadas e dispositivos vestíveis. |
+| **SF32LB56x** | Bluetooth de modo dual: BT Classic + BLE | O LCPU pode executar tarefas de aplicação suportadas pelo SDK | Produtos com displays mais avançados, HMIs conectadas e dispositivos vestíveis. |
 | **SF32LB57x** | Bluetooth de modo dual: BT Classic + BLE | O LCPU gerencia Bluetooth e outras tarefas sujeitas a restrições de consumo de energia; confirme quais são suportadas pelo SDK | Produtos que combinam gráficos e áudio local na HCPU/ACPU. |
 | **SF32LB58x** | Bluetooth de modo dual: BT Classic + BLE | O LCPU pode executar tarefas de aplicação suportadas pelo SDK | Produtos avançados com gráficos, áudio, IA e requisitos complexos de conectividade. |
 
@@ -196,7 +196,7 @@ Entre os principais cuidados de hardware estão:
 - Siga os requisitos do cristal indicados no guia de projeto de hardware.
 - Forneça linhas de alimentação limpas e desacoplamento local para os circuitos de RF e clock.
 - Mantenha pontos de acesso para teste em produção, calibração de RF e gravação do firmware.
-- Evite passar trilhas de alta velocidade da tela, do armazenamento ou da fonte chaveada perto de caminhos sensíveis de RF.
+- Evite passar trilhas de alta velocidade do display, do armazenamento ou da fonte chaveada perto de caminhos sensíveis de RF.
 
 As equipes de software e hardware devem tratar o desempenho Bluetooth como uma característica do sistema. Parâmetros de firmware não compensam totalmente um layout de RF inadequado ou clocks instáveis.
 
@@ -206,7 +206,7 @@ Os dispositivos SF32 costumam executar Bluetooth em conjunto com gráficos, áud
 
 Entre os problemas comuns de coexistência estão:
 
-- A atualização da tela ou o tráfego de PSRAM reduzirem a largura de banda de memória disponível.
+- A atualização do display ou o tráfego de PSRAM reduzirem a largura de banda de memória disponível.
 - A necessidade de temporização estável para o DMA de áudio e os buffers de áudio Bluetooth.
 - Interrupções de sensores despertarem o processador de aplicações com frequência excessiva.
 - Wi-Fi externo ou outras fontes de RF afetarem o desempenho Bluetooth.
@@ -227,7 +227,7 @@ O processador Bluetooth é essencial em várias categorias de produtos SF32:
 - Controles para casas inteligentes e produtos com aplicativo complementar.
 - Dispositivos de sincronização de sensores e registro de dados.
 
-A melhor opção da família SF32 depende de o produto precisar apenas de BLE ou de Bluetooth de modo dual, além dos requisitos de áudio, tela, capacidade de memória e processamento de baixo consumo programável pelo usuário.
+A melhor opção da família SF32 depende de o produto precisar apenas de BLE ou de Bluetooth de modo dual, além dos requisitos de áudio, display, capacidade de memória e processamento de baixo consumo programável pelo usuário.
 
 ## Recomendações práticas de projeto { #practical-design-guidance }
 

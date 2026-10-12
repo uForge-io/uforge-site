@@ -116,7 +116,7 @@ Si usa [CodeKit](../../tools/codekit.md), conserve esos mismos registros de vali
 | Nombre de placa desconocido | Consulte la documentación de placas compatibles con el SDK. |
 | El script de descarga no puede abrir el puerto | Cierre los terminales serie y compruebe el cable/conector USB a UART. |
 | No se inicia la grabación | Siga el procedimiento de descarga documentado para la placa. Para `sf32lb52-lcd_n16r8`, después de seleccionar el puerto serie, reinicie la placa y pulse Enter antes de que transcurran 2 segundos para iniciar la descarga; para otras placas, siga el procedimiento específico de cada una. Compruebe también la alimentación, el puerto seleccionado y la conexión UART. |
-| La salida serie es ilegible | Compruebe la velocidad en baudios y conecte la UART con un cable USB que admita datos, no con uno solo de carga. |
+| La salida serie es ilegible | Compruebe la velocidad en baudios y conecte el UART con un cable USB que admita datos, no con uno solo de carga. |
 
 </div>
 

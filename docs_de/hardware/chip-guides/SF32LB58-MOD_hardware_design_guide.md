@@ -2,7 +2,7 @@
 icon: lucide/book-check
 hide:
     - navigation
-description: "Hardware-Design-Leitfaden für das SF32LB58-MOD Bluetooth-MCU-Modul: Stromversorgung, Schnittstellen und PCB-Integrationshinweise."
+description: "Hardware-Design-Leitfaden für das Bluetooth-MCU-Modul SF32LB58-MOD: Stromversorgung, Schnittstellen und Hinweise zur Leiterplattenintegration."
 tags:
     - Hardware
     - Modul
@@ -12,7 +12,7 @@ tags:
 
 ## 1. Übersicht { #1-overview }
 
-**SF32LB58-MOD** ist ein universell einsetzbares Low-Power-Bluetooth-MCU-Modul auf Basis des SiFli-Chips SF32LB586VDD36. Der Chip enthält einen dreikernigen Arm-Cortex-M33-STAR-MC1-Prozessor mit bis zu 240 MHz. Das Modul ist mit einem 48-MHz-Quarz ausgestattet; ein 32,768-kHz-Quarz ist optional. Je nach Bestellcode ist außerdem HPI-PSRAM, QSPI-NOR/NAND-Flash oder eMMC-Speicher integriert. Das SMD-Modul hat 138 Pins und misst 24 × 24 × 3,1 mm.
+**SF32LB58-MOD** ist ein universell einsetzbares Bluetooth-MCU-Modul mit niedrigem Stromverbrauch auf Basis des SiFli-Chips SF32LB586VDD36. Der Chip enthält einen dreikernigen Arm-Cortex-M33-STAR-MC1-Prozessor mit bis zu 240 MHz. Das Modul ist mit einem 48-MHz-Quarz ausgestattet; ein 32,768-kHz-Quarz ist optional. Je nach Bestellcode sind außerdem HPI-PSRAM, QSPI-NOR-/NAND-Flash oder eMMC integriert. Das SMD-Modul hat 138 Pins und misst 24 × 24 × 3,1 mm.
 
 Dieser Leitfaden behandelt die Hardware-Integration auf Modulebene: Pindefinitionen, Peripherieschnittstellen, elektrische Eigenschaften, Anforderungen an die Stromversorgung, Referenzschaltpläne, eine Schaltplan-Design-Checkliste, mechanische Abmessungen und PCB-Footprint sowie Anforderungen an die Produkthandhabung. Er basiert auf dem SiFli-Datenblatt **DS5802-SF32LB58-MOD V0.1**.
 
@@ -31,9 +31,9 @@ Für die zugrunde liegende Chip-Architektur (Kerne, Grafik, Speicherarchitektur 
 
 | Modulcode | Flash | PSRAM | Standard-Flash | Temperatur | Abmessungen (mm) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB58-MOD-N16R32N1 | 16MB QSPI-NOR | 16+16MB HPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 24 × 24 × 3,1 |
-| SF32LB58-MOD-A128R32N1 | 128MB QSPI-NAND | 16+16MB HPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 24 × 24 × 3,1 |
-| SF32LB58-MOD-E4R32N1 | 4GB eMMC | 16+16MB HPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 24 × 24 × 3,1 |
+| SF32LB58-MOD-N16R32N1 | 16 MB QSPI-NOR | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 bis 85 °C | 24 × 24 × 3,1 |
+| SF32LB58-MOD-A128R32N1 | 128 MB QSPI-NAND | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 bis 85 °C | 24 × 24 × 3,1 |
+| SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 bis 85 °C | 24 × 24 × 3,1 |
 
 </div>
 
@@ -43,25 +43,25 @@ Für die zugrunde liegende Chip-Architektur (Kerne, Grafik, Speicherarchitektur 
 
 <div align="center" markdown>
 
-| Punkt | Spezifikation |
+| Merkmal | Spezifikation |
 | :--- | :--- |
-| Anwendungskerne (HCPU/ACPU) | 2x Arm Cortex-M33 STAR-MC1, bis zu 240MHz |
-| Low-Power-Kern (LCPU) | Arm Cortex-M33 STAR-MC1, bis zu 96MHz |
-| SRAM | 2176KB (HCPU) + 512KB (ACPU) + 1056KB Retention-SRAM (LCPU) |
-| Wireless | Dual-Mode Bluetooth 5.3, abwärtskompatibel mit 4.2/4.1/4.0; unterstützt BLE und Classic Bluetooth |
-| Grafik | ePicasso 2.0 + Vivante GCNanoUltraV, bis zu 1024×1024, eZip 2.0, Hardware-JPEG-Codec |
-| Audio | 2x 24-Bit-Audio-DAC, 2x 24-Bit-Audio-Sigma-Delta-ADC |
-| Speicher | 5x MPI (im Gehäuse integriert + extern), 2x SD/SDIO/eMMC |
+| Anwendungskerne (HCPU/ACPU) | 2× Arm Cortex-M33 STAR-MC1, bis zu 240 MHz |
+| Kern für Energiesparfunktionen (LCPU) | Arm Cortex-M33 STAR-MC1, bis zu 96 MHz |
+| SRAM | 2 176 KB (HCPU) + 512 KB (ACPU) + 1 056 KB Retention-SRAM (LCPU) |
+| Drahtlose Kommunikation | Dual-Mode-Bluetooth 5.3, abwärtskompatibel mit 4.2/4.1/4.0; unterstützt BLE und Classic Bluetooth |
+| Grafik | ePicasso 2.0 + Vivante GCNanoUltraV, bis zu 1024 × 1024, eZip 2.0, Hardware-JPEG-Codec |
+| Audio | 2× 24-Bit-Audio-DAC, 2× 24-Bit-Audio-Sigma-Delta-ADC |
+| Speicher | 5× MPI (im Gehäuse integriert und extern), 2× SD/SDIO/eMMC |
 | Gehäuse | 138-polig, 24 × 24 × 3,1 mm |
-| Stromversorgung | VDD_3V3 (2,97–3,6V), VDD_1V8 (1,7–1,95V), VDDIOA/VDDIOA2/VDDIOB (1,7–3,6V) |
-| Antenne | Externe Antenne über eine Stempelloch-HF-Zuführung oder einen IPEX-kompatiblen Steckverbinder, je nach Teilenummer |
-| Betriebstemperatur | -40 bis 85°C |
+| Stromversorgung | VDD_3V3 (2,97–3,6 V), VDD_1V8 (1,7–1,95 V), VDDIOA/VDDIOA2/VDDIOB (1,7–3,6 V) |
+| Antenne | Externe Antenne je nach Teilenummer über metallisierte Halblöcher als RF-Anschluss oder über einen IPEX-kompatiblen Steckverbinder |
+| Betriebstemperatur | −40 bis 85 °C |
 
 </div>
 
 ## 3. Funktionsblockschaltbild { #3-functional-block-diagram }
 
-Das Modul integriert den Chip SF32LB586VDD36, einen 48MHz-Quarz, einen optionalen 32,768kHz-Quarz sowie – je nach SKU – im Gehäuse integrierten HPI-PSRAM, QSPI-NOR/NAND-Flash oder eMMC, zusammen mit dem HF-Anpassnetzwerk und der Antennenzuführung.
+Das Modul integriert den Chip SF32LB586VDD36, einen 48-MHz-Quarz, einen optionalen 32,768-kHz-Quarz sowie – je nach SKU – HPI-PSRAM, QSPI-NOR-/NAND-Flash oder eMMC. Hinzu kommen das RF-Anpassnetzwerk und die Antennenzuführung.
 
 !!! info "Abbildung 3-1: Funktionsblockschaltbild"
     Siehe Abbildung 2-1 im offiziellen Datenblatt für dieses Diagramm — in diesem Leitfaden nicht reproduziert.
@@ -85,7 +85,7 @@ Das Modul verfügt über insgesamt 138 Pins, die in der folgenden Tabelle beschr
 
 | Name | Nr. | Typ | Standard-MUX | Standard-I/O | Funktion |
 | :--- | :-: | :-: | :--- | :-: | :--- |
-| VDDIOB | 1 | P | 1,8/3,3V | P | PB-Schnittstellen-IO-Stromversorgungseingang |
+| VDDIOB | 1 | P | 1,8/3,3 V | P | PB-Schnittstellen-IO-Stromversorgungseingang |
 | PB36 | 2 | I/O/T | USART4_RXD | I | GPIO_B36, USART4_RXD, GPTIM3_CH1, #GPADC_CH4 |
 | PB37 | 3 | I/O/T | USART4_TXD | O | GPIO_B37, USART4_TXD, GPTIM3_CH2, #GPADC_CH5 |
 | PB54 | 4 | I/O/T | GPIO_B54 | I | GPIO_B54, #WKUP_PIN0 |
@@ -97,10 +97,10 @@ Das Modul verfügt über insgesamt 138 Pins, die in der folgenden Tabelle beschr
 | PA79 | 10 | I/O/T | GPIO_A79 | I/O | GPIO_A79, SD2_DIO2 |
 | BOOT_MODE | 11 | I | BOOT_MODE | I | 1: Download-Modus; 0: Anwendermodus |
 | RSTN | 12 | I | RSTN | I | 1: Anwendermodus; 0: Reset-Modus |
-| VDD_1V8 | 13 | P | 1,8V | P | Stromversorgungseingang für Haupt-MCU und im Gehäuse integrierten Speicher |
+| VDD_1V8 | 13 | P | 1,8 V | P | Stromversorgungseingang für Haupt-MCU und im Gehäuse integrierten Speicher |
 | GND | 14 | P | Masse | P | Masse |
-| VDDIOA | 15 | P | 1,8/3,3V | P | PA-Schnittstellen-IO-Stromversorgungseingang, ausgenommen PA00–PA11 |
-| VDD_3V3 | 16 | P | 3,3V | P | MCU-Analog-Stromversorgungseingang |
+| VDDIOA | 15 | P | 1,8/3,3 V | P | PA-Schnittstellen-IO-Stromversorgungseingang, ausgenommen PA00–PA11 |
+| VDD_3V3 | 16 | P | 3,3 V | P | MCU-Analog-Stromversorgungseingang |
 | PA13 | 17 | I/O/T | GPIO_A13 | O | GPIO_A13, GPTIM1_CH2, ATIM1_BKIN, LCDC1_DPI_DE |
 | PA15 | 18 | I/O/T | GPIO_A15 | O | GPIO_A15, GPTIM1_CH3, ATIM1_BKIN2, LCDC1_DPI_VSYNC |
 | PA14 | 19 | I/O/T | GPIO_A14 | O | GPIO_A14, I2S1_LRCK, LCDC1_DPI_HSYNC |
@@ -129,7 +129,7 @@ Das Modul verfügt über insgesamt 138 Pins, die in der folgenden Tabelle beschr
 | PA24 | 42 | I/O/T | GPIO_A24 | O | GPIO_A24, LCDC1_8080_RSTB, LCDC1_SPI_RSTB, LCDC1_DPI_R2 |
 | PA23 | 43 | I/O/T | GPIO_A23 | O | GPIO_A23, PDM1_CLK, I2S1_BCK, USART2_CTS, I2C2_SDA, LCDC1_DPI_R1 |
 | PA22 | 44 | I/O/T | GPIO_A22 | O | GPIO_A22, PDM2_DATA, GPTIM1_ETR, ATIM2_CH1, LCDC1_DPI_R0, LCDC1_JDI_VST |
-| VDDIOA2 | 45 | P | 1,8/3,3V | P | PA00–PA11 IO-Stromversorgungseingang |
+| VDDIOA2 | 45 | P | 1,8/3,3 V | P | PA00–PA11 IO-Stromversorgungseingang |
 | GND | 46 | P | Masse | P | Masse |
 | DSI_D0N | 47 | O | DSI_D0N | O | MIPI-DSI-Datenleitung 0, negativ |
 | DSI_D0P | 48 | O | DSI_D0P | P | MIPI-DSI-Datenleitung 0, positiv |
@@ -156,7 +156,7 @@ Das Modul verfügt über insgesamt 138 Pins, die in der folgenden Tabelle beschr
 | AU_ADC1N_IN | 69 | AI | AU_ADC1N_IN | AI | Audio-ADC1-Differenzeingang, negativ |
 | AU_ADC1P_IN | 70 | AI | AU_ADC1P_IN | AI | Audio-ADC1-Differenzeingang, positiv |
 | GND | 71 | P | Masse | P | Masse |
-| BT_ANT | 72 | I/O | BT_ANT | I/O | Bluetooth-HF-Signal Ein-/Ausgang |
+| BT_ANT | 72 | I/O | BT_ANT | I/O | Bluetooth-RF-Signal Ein-/Ausgang |
 | PB51 | 73 | I/O/T | GPIO_B51 | I/O | GPIO_B51, PMIC_SDA, USART4_CTS, USART5_CTS, LPCOMP1_OUT |
 | PB52 | 74 | I/O/T | GPIO_B52 | I/O | GPIO_B52, PMIC_SCLK, USART4_RTS, USART5_RTS, LPCOMP2_OUT |
 | PB56 | 75 | I/O/T | GPIO_B56 | I/O | GPIO_B56, USART4_CTS, SPI3_CLK, #WKUP_PIN2 |
@@ -239,17 +239,17 @@ Die physische Pinbeschreibung im Datenblatt gruppiert Pins nach Funktionsfamilie
 
 Jeder in der obigen Tabelle mit `PAxx_I2C_UART` oder `PBxx_I2C_UART` markierte Pin kann entweder als I2C oder UART konfiguriert werden. Der Chip unterstützt insgesamt bis zu 7 I2C-Schnittstellen und 6 UART-Schnittstellen.
 
-**UART** — Vollduplex, bis zu 6Mbps Baudrate, konfigurierbares Datenformat, Hardware-Flusssteuerung (CTS/RTS), DMA-Mehrfachpaket-TX/RX. UART1–3 befinden sich auf HPSYS; UART4–6 befinden sich auf LPSYS.
+**UART** — Vollduplex, Baudrate bis zu 6 Mbps, konfigurierbares Datenformat, Hardware-Flusssteuerung (CTS/RTS) und DMA-Mehrfachpaket-TX/RX. UART1–3 befinden sich auf HPSYS, UART4–6 auf LPSYS.
 
-**I2C** — Unterstützt Master- und Slave-Betrieb, einen 8-Byte-FIFO, DMA, Standard- (100kbps), Fast- (400kbps), Fast-Mode-Plus- (1Mbps) und High-Speed-Modus (3,4Mbps), 7-Bit-/10-Bit-Adressierung als Master, Clock-Stretching sowie einen konfigurierbaren digitalen Entprellfilter. I2C1–4 befinden sich auf HPSYS; I2C5–7 befinden sich auf LPSYS.
+**I2C** — Unterstützt Master- und Slave-Betrieb, einen 8-Byte-FIFO, DMA, Standard-Modus (100 kbps), Fast-Modus (400 kbps), Fast Mode Plus (1 Mbps) und High-Speed-Modus (3,4 Mbps), 7-Bit-/10-Bit-Adressierung als Master, Clock-Stretching sowie einen konfigurierbaren digitalen Entprellfilter. I2C1–4 befinden sich auf HPSYS, I2C5–7 auf LPSYS.
 
-**SPI** — Unterstützt SSP/SPI-Format (Vollduplex, Master oder Slave) und Microwire-Format (Halbduplex, nur Master), 4–32-Bit-Datenbreite, konfigurierbare Taktpolarität/-phase, konfigurierbare Chip-Select-Polarität, 32-Bit × 16-Einträge-FIFO, DMA-Unterstützung. SPI1/2 befinden sich auf HPSYS (max. 48MHz); SPI3/4 befinden sich auf LPSYS (max. 24MHz).
+**SPI** — Unterstützt das SSP-/SPI-Format (Vollduplex, Master oder Slave) und das Microwire-Format (Halbduplex, nur Master), eine Datenbreite von 4 bis 32 Bit, konfigurierbare Taktpolarität und -phase, konfigurierbare Chip-Select-Polarität, einen FIFO mit 16 Einträgen zu je 32 Bit sowie DMA. SPI1/2 befinden sich auf HPSYS (max. 48 MHz), SPI3/4 auf LPSYS (max. 24 MHz).
 
-**USB2.0 HS** — Ein High-Speed-Host-/Device-Port, USB2.0-konform, konfigurierbare Endpunkte, Suspend/Resume, Unterstützung für Session-Request und Host-Negotiation-Protokoll, Unterstützung für High-Speed- und Full-Speed-Modus.
+**USB 2.0 HS** — Ein USB-2.0-konformer High-Speed-Port für Host- und Gerätebetrieb mit konfigurierbaren Endpunkten, Suspend/Resume sowie Unterstützung für Session-Request und Host Negotiation Protocol im High-Speed- und Full-Speed-Modus.
 
 **MPI (Memory Peripheral Interface)** — Unterstützt SPI-NOR-Flash (1/2/4-Leitungen, DTR-Modus) und SPI-NAND-Flash (1/2/4-Leitungen), Register-Modus- und Memory-Mapped-Modus-Zugriff mit automatischer Hardware-Umschaltung. Die MPI4-Schnittstelle des Moduls kann externen SPI-NOR-/NAND-Flash anschließen.
 
-**SD/SDIO/eMMC** — Konform mit SD 3.0 und eMMC 4.5.1; fungiert als Host-Controller mit verketteter DMA und einem 1KB-FIFO. Unterstützt SDSC-/SDHC-/SDXC-/SDHS-Karten, UHS-1 (SDR12/25/50/104/DDR50), Einzelleitungs-/4-Leitungs-/8-Leitungs-SDR-Modi sowie 4-Leitungs-/8-Leitungs-DDR-Modi.
+**SD/SDIO/eMMC** — Konform mit SD 3.0 und eMMC 4.5.1; arbeitet als Host-Controller mit verketteter DMA und einem 1-KB-FIFO. Unterstützt SDSC-/SDHC-/SDXC-/SDHS-Karten, UHS-1 (SDR12/25/50/104/DDR50), SDR-Modi mit einer, vier oder acht Datenleitungen sowie DDR-Modi mit vier oder acht Datenleitungen.
 
 **I2S** — Nur Master, Vollduplex, linksbündige/rechtsbündige/Standardformate, 8-Bit und 16-Bit Mono/Stereo, bis zu 24-Bit-PCM-Breite.
 
@@ -257,28 +257,28 @@ Jeder in der obigen Tabelle mit `PAxx_I2C_UART` oder `PBxx_I2C_UART` markierte P
 
 ### 5.2 Analoge Signalverarbeitung { #52-analog-signal-processing }
 
-**12-Bit-GPADC** — SAR-ADC, maximale Abtastrate 4MS/s, Eingangsbereich 0–3,3V single-ended / ±2,1V differentiell, 8 single-ended Kanäle (oder 4 differentielle Paare), Einzel-/Dauermessmodi, 4 konfigurierbare Zeitschlitze pro Messung, Software-/Hardware-Trigger, DMA-Unterstützung.
+**12-Bit-GPADC** — SAR-ADC mit einer maximalen Abtastrate von 4 MS/s und einem Eingangsbereich von 0–3,3 V im Single-Ended-Betrieb beziehungsweise ±2,1 V im Differenzbetrieb. Unterstützt werden acht Single-Ended-Kanäle oder vier Differenzpaare, Einzel- und Dauermessungen, vier konfigurierbare Zeitschlitze pro Messung, Software- und Hardware-Trigger sowie DMA.
 
-**Temperatursensor** — 0,2°C Auflösung, Bereich -40°C bis 125°C, ±3°C Genauigkeit, Polling- oder Interrupt-Auslesung.
+**Temperatursensor** — Auflösung 0,2 °C, Messbereich −40 bis 125 °C, Genauigkeit ±3 °C; Auslesen per Polling oder Interrupt.
 
-**Audio-DAC** — 2 integrierte 24-Bit-Kanäle, 8kHz–48kHz Abtastraten, Differenzausgang.
+**Audio-DAC** — Zwei integrierte 24-Bit-Kanäle mit Abtastraten von 8 kHz bis 48 kHz und Differenzausgang.
 
-**Audio-PLL** — Fraktional-N-Takterzeugung mit 48MHz/2^18-Auflösung, unterstützt 48MHz, 32,768kHz und 44,1kHz abgeleitete Abtastraten.
+**Audio-PLL** — Fractional-N-Takterzeugung mit einer Auflösung von 48 MHz/2^18; als unterstützte, daraus abgeleitete Abtastraten nennt die Quelle 48 MHz, 32,768 kHz und 44,1 kHz.
 
-**Audio-ADC** — 2 integrierte 24-Bit-Kanäle, 8kHz–48kHz Abtastraten, unabhängige Verstärkungsregelung pro Kanal.
+**Audio-ADC** — Zwei integrierte 24-Bit-Kanäle mit Abtastraten von 8 kHz bis 48 kHz und unabhängiger Verstärkungsregelung pro Kanal.
 
 ## 6. Elektrische Eigenschaften { #6-electrical-characteristics }
 
-### 6.1 Absolute Grenzwerte { #61-absolute-maximum-ratings }
+### 6.1 Absolute Maximalwerte { #61-absolute-maximum-ratings }
 
-<div align="center"><em>Tabelle 6.1-1: Absolute Grenzwerte</em></div>
+<div align="center"><em>Tabelle 6.1-1: Absolute Maximalwerte</em></div>
 
 <div align="center" markdown>
 
 | Symbol | Parameter | Min | Max | Einheit |
 | :--- | :--- | :-: | :-: | :-: |
-| VDD_3V3 | 3,3V-Versorgungseingang | -0,3 | 3,6 | V |
-| VDD_1V8 | 1,8V-Versorgungseingang | -0,3 | 1,95 | V |
+| VDD_3V3 | 3,3-V-Versorgungseingang | -0,3 | 3,6 | V |
+| VDD_1V8 | 1,8-V-Versorgungseingang | -0,3 | 1,95 | V |
 | VDDIO | I/O-Versorgungseingang | -0,3 | 3,6 | V |
 | Tstore | Lagertemperatur | -40 | 125 | °C |
 
@@ -292,8 +292,8 @@ Jeder in der obigen Tabelle mit `PAxx_I2C_UART` oder `PBxx_I2C_UART` markierte P
 
 | Symbol | Parameter | Min | Typ | Max | Einheit |
 | :--- | :--- | :-: | :-: | :-: | :-: |
-| VDD_3V3 | 3,3V-Versorgungseingang | 2,97 | 3,3 | 3,6 | V |
-| VDD_1V8 | 1,8V-Versorgungseingang | 1,7 | 1,8 | 1,95 | V |
+| VDD_3V3 | 3,3-V-Versorgungseingang | 2,97 | 3,3 | 3,6 | V |
+| VDD_1V8 | 1,8-V-Versorgungseingang | 1,7 | 1,8 | 1,95 | V |
 | VDDIO | I/O-Versorgungseingang | 1,7 | - | 3,6 | V |
 | TA | Betriebstemperatur | -40 | - | 85 | °C |
 
@@ -301,7 +301,7 @@ Jeder in der obigen Tabelle mit `PAxx_I2C_UART` oder `PBxx_I2C_UART` markierte P
 
 ### 6.3 Gleichstrom-Kennwerte { #63-dc-electrical-characteristics }
 
-<div align="center"><em>Tabelle 6.3-1: Gleichstrom-Kennwerte (3,3V, 25°C)</em></div>
+<div align="center"><em>Tabelle 6.3-1: Gleichstrom-Kennwerte (3,3 V, 25 °C)</em></div>
 
 <div align="center" markdown>
 
@@ -318,7 +318,7 @@ Jeder in der obigen Tabelle mit `PAxx_I2C_UART` oder `PBxx_I2C_UART` markierte P
 
 </div>
 
-<div align="center"><em>Tabelle 6.3-2: Gleichstrom-Kennwerte (1,8V, 25°C)</em></div>
+<div align="center"><em>Tabelle 6.3-2: Gleichstrom-Kennwerte (1,8 V, 25 °C)</em></div>
 
 <div align="center" markdown>
 
@@ -334,67 +334,67 @@ Vollständige Tabellen (einschließlich Eingangsleckstrom, Reset-Schwellenwerten
 
 ### 6.4 Stromaufnahme { #64-power-consumption }
 
-<div align="center"><em>Tabelle 6.4-1: BLE-Strom (0dBm Sendeleistung)</em></div>
+<div align="center"><em>Tabelle 6.4-1: BLE-Strom (0 dBm Sendeleistung)</em></div>
 
 <div align="center" markdown>
 
-| Symbol | Bedingung | @1,8V | @3,8V | Einheit |
+| Symbol | Bedingung | @1,8 V | @3,8 V | Einheit |
 | :--- | :--- | :-: | :-: | :-: |
-| I∆TX | TX-Leistung = 0dBm | 4,19 | 2,21 | mA |
+| I∆TX | TX-Leistung = 0 dBm | 4,19 | 2,21 | mA |
 | I∆RX | — | 4,03 | 2,12 | mA |
 
 </div>
 
-<div align="center"><em>Tabelle 6.4-2: BLE/Classic-BT-Durchschnittsstrom (3,8V-Versorgung)</em></div>
+<div align="center"><em>Tabelle 6.4-2: BLE-/Classic-BT-Durchschnittsstrom bei 3,8-V-Versorgung</em></div>
 
 <div align="center" markdown>
 
-| Modus | Intervall | @0dBm | @10dBm | Einheit |
+| Modus | Intervall | @0 dBm | @10 dBm | Einheit |
 | :--- | :-: | :-: | :-: | :-: |
-| BT Sniff (attempt=1) | 50ms | 146,4 | 178,6 | µA |
-| BT Sniff (attempt=1) | 1s | 7,3 | 8,9 | µA |
-| BLE ADV | 50ms | 166,9 | 251,8 | µA |
-| BLE ADV | 1s | 8,3 | 12,6 | µA |
-| BLE Connection | 50ms | 128,8 | 148,4 | µA |
-| BLE Connection | 1s | 6,4 | 7,4 | µA |
+| BT Sniff (attempt=1) | 50 ms | 146,4 | 178,6 | µA |
+| BT Sniff (attempt=1) | 1 s | 7,3 | 8,9 | µA |
+| BLE ADV | 50 ms | 166,9 | 251,8 | µA |
+| BLE ADV | 1 s | 8,3 | 12,6 | µA |
+| BLE Connection | 50 ms | 128,8 | 148,4 | µA |
+| BLE Connection | 1 s | 6,4 | 7,4 | µA |
 | Standby | — | 4,2 | — | µA |
 
 </div>
 
-<div align="center"><em>Tabelle 6.4-3: Prozessorleistung (HPSYS/LPSYS, 3,8V-Versorgung)</em></div>
+<div align="center"><em>Tabelle 6.4-3: Prozessorleistung (HPSYS/LPSYS, 3,8-V-Versorgung)</em></div>
 
 <div align="center" markdown>
 
 | Symbol | Bedingung | Strom (mA) | Zuwachs (µA/MHz) |
 | :--- | :--- | :-: | :-: |
-| ICoreMark | HPSYS @240MHz | 10,34 | 31,3 |
-| ICoreMark | LPSYS @48MHz | 0,89 | 27,6 |
-| IWhileLoop | HPSYS @240MHz | 7,98 | 21,3 |
-| IWhileLoop | LPSYS @48MHz | 0,67 | 18,7 |
+| ICoreMark | HPSYS @240 MHz | 10,34 | 31,3 |
+| ICoreMark | LPSYS @48 MHz | 0,89 | 27,6 |
+| IWhileLoop | HPSYS @240 MHz | 7,98 | 21,3 |
+| IWhileLoop | LPSYS @48 MHz | 0,67 | 18,7 |
 
 </div>
 
-### 6.5 Dual-Mode-Bluetooth-HF-Leistung { #65-dual-mode-bluetooth-rf-performance }
+### 6.5 Dual-Mode-Bluetooth-RF-Leistung { #65-dual-mode-bluetooth-rf-performance }
 
-Unterstützt Bluetooth 5.3 und ist abwärtskompatibel mit 4.2/4.1/4.0. Unterstützt werden BLE und Classic Bluetooth. Betriebskanal-Mittenfrequenz: 2402–2480MHz.
+Das Modul unterstützt Bluetooth 5.3 und ist abwärtskompatibel zu Bluetooth 4.2/4.1/4.0. Unterstützt werden BLE und Classic Bluetooth. Die Mittenfrequenzen der Betriebskanäle liegen zwischen 2402 und 2480 MHz.
 
-**BLE-Sender (1Mbps)**: max. Leistung 19dBm, Leistungsregelbereich -20 bis 19dBm.
+**BLE-Sender (1 Mbps):** maximale Sendeleistung 19 dBm, Regelbereich −20 bis 19 dBm.
 
-**BLE-Empfänger**: Typische Empfindlichkeit: -100dBm (1Mbps), -97dBm (2Mbps), -104,5dBm (LR S2/500kbps) und -107,5dBm (LR S8/125kbps), gemessen mit 37-Byte-Paketen bei 30,8% PER unter Dirty-Off-Bedingungen.
+**BLE-Empfänger:** typische Empfindlichkeit −100 dBm (1 Mbps), −97 dBm (2 Mbps), −104,5 dBm (LR S2/500 kbps) und −107,5 dBm (LR S8/125 kbps), gemessen mit 37-Byte-Paketen bei 30,8 % PER unter Dirty-Off-Bedingungen.
 
-**Classic BT (Basic Data Rate)**: max. Sendeleistung 19dBm; Empfängerempfindlichkeit -96,3dBm (Dirty Off) / -94dBm (Dirty On) @0,1% BER.
+**Classic BT (Basic Data Rate):** maximale Sendeleistung 19 dBm; Empfängerempfindlichkeit −96,3 dBm (Dirty Off) / −94 dBm (Dirty On) bei 0,1 % BER.
 
-**Classic BT (Enhanced Data Rate)**: max. Sendeleistung 13dBm; π/4-DQPSK-Empfängerempfindlichkeit -95,5dBm; 8DPSK-Empfängerempfindlichkeit -88,5dBm.
+**Classic BT (Enhanced Data Rate):** maximale Sendeleistung 13 dBm; Empfängerempfindlichkeit −95,5 dBm für π/4-DQPSK und −88,5 dBm für 8DPSK.
 
-Vollständige Min/Typ/Max-Tabellen für alle BLE 1Mbps/2Mbps/LR-TX/RX-Leistungswerte und Classic-BT-BR/EDR-TX/RX-Leistungswerte sind in §5.5 des offiziellen Datenblatts enthalten.
+Vollständige Min/Typ/Max-Tabellen für alle BLE 1 Mbps/2 Mbps/LR-TX/RX-Leistungswerte und Classic-BT-BR/EDR-TX/RX-Leistungswerte sind in §5.5 des offiziellen Datenblatts enthalten.
 
 ## 7. Modul-Stromversorgung { #7-module-power-supply }
 
 Das Modul verfügt über fünf Stromversorgungsschnittstellen: **VDD_3V3**, **VDD_1V8**, **VDDIOA**, **VDDIOA2** und **VDDIOB**.
 
-- **VDD_3V3** versorgt die Schienen AVDD33_ANA, AVDD33_AUD, AVDD_USB des Chips sowie die VDD-Versorgung des im Gehäuse integrierten eMMC des Moduls (sofern bestückt). Eine LDO-Versorgung wird empfohlen.
+- **VDD_3V3** versorgt die Schienen AVDD33_ANA, AVDD33_AUD und AVDD_USB des Chips sowie den VDD-Anschluss des im Gehäuse integrierten eMMC (sofern bestückt). Eine Versorgung über einen LDO wird empfohlen.
 - **VDD_1V8** versorgt die Schienen PVDD1, PVDD2, AVDD_BRF, AVDD18_DSI des Chips sowie den im Gehäuse integrierten Speicher.
-- **VDDIOA** versorgt die VDDIOA-Schiene des Chips, die VIO-Versorgung des im Gehäuse integrierten eMMC (sofern bestückt) sowie externen Flash.
+- **VDDIOA** versorgt die VDDIOA-Schiene des Chips, den VIO-Anschluss des im Gehäuse integrierten eMMC (sofern bestückt) sowie externen Flash.
 - **VDDIOA2** versorgt die VDDIOA2-Schiene des Chips (deckt PA00–PA11 ab).
 - **VDDIOB** versorgt die VDDIOB-Schiene des Chips.
 
@@ -423,9 +423,9 @@ Verwenden Sie diese als Ausgangspunkt für einen Produktionsschaltplan und passe
 
 | # | Prüfpunkt |
 | :-: | :--- |
-| 1 | Der VDD_3V3-Eingangsspannungsbereich muss 2,97V–3,6V betragen; einen 4,7µF-Kondensator nahe am Modulpin platzieren. |
-| 2 | Der VDD_1V8-Eingangsspannungsbereich muss 1,7V–1,95V betragen; einen 4,7µF-Kondensator nahe am Modulpin platzieren. |
-| 3 | Der Eingangsspannungsbereich von VDDIOA, VDDIOA2 und VDDIOB muss 1,7V–3,6V betragen; Kondensatoren nahe an den Modulpins platzieren. |
+| 1 | Der Eingangsspannungsbereich von VDD_3V3 muss 2,97–3,6 V betragen; platzieren Sie einen 4,7-µF-Kondensator nahe am Modul-Pin. |
+| 2 | Der Eingangsspannungsbereich von VDD_1V8 muss 1,7–1,95 V betragen; platzieren Sie einen 4,7-µF-Kondensator nahe am Modul-Pin. |
+| 3 | Der Eingangsspannungsbereich von VDDIOA, VDDIOA2 und VDDIOB muss 1,7–3,6 V betragen; platzieren Sie Kondensatoren nahe an den Modul-Pins. |
 
 </div>
 
@@ -448,25 +448,25 @@ Das Modul misst 24 × 24 × 3,1 mm.
 
 ### 10.3 Externer Antennenanschluss { #103-external-antenna-connector }
 
-Für SKUs, die eine externe Antenne unterstützen, kann das Modul je nach Teilenummer eine Stempelloch-HF-Zuführung oder einen IPEX-kompatiblen Steckverbinder verwenden.
+Für SKUs, die eine externe Antenne unterstützen, kann das Modul je nach Teilenummer metallisierte Halblöcher als RF-Anschluss oder einen IPEX-kompatiblen Steckverbinder verwenden.
 
 !!! info "Abbildung 10-3: Abmessungen des externen Antennenanschlusses"
     Siehe Abbildung 8-3 im offiziellen Datenblatt für dieses Diagramm — in diesem Leitfaden nicht reproduziert.
 
 ### 10.4 Modulplatzierung im PCB-Design { #104-module-placement-in-pcb-design }
 
-Reservieren Sie die Antennenzone des Moduls so, dass keine Bauteile, Kupferflächen, Leiterbahnen, Gehäusemetall oder andere leitfähige Strukturen die HF-Sperrzone überlappen. Verwenden Sie das offizielle Modul-Datenblatt und das endgültige Produktgehäuse als Referenz für Antennenfreiraum und -validierung.
+Halten Sie die RF-Freihaltezone des Moduls frei von Bauteilen, Kupferflächen, Leiterbahnen, Gehäusemetall und anderen leitfähigen Strukturen. Verwenden Sie das offizielle Modul-Datenblatt und das endgültige Produktgehäuse als Referenz für Antennenfreiraum und -validierung.
 
 - Erweitern Sie den Antennenbereich nach Möglichkeit über den Rand der Host-Platine hinaus, mit dem Speisepunkt nahe am Platinenrand.
-- Falls sich die Antenne nicht über den Platinenrand hinaus erstrecken kann, sehen Sie eine großzügige Sperrzone vor (keine Kupferfläche, Leiterbahnen oder Bauteile) und entfernen Sie nach Möglichkeit Host-Platinenmaterial unterhalb der Antenne.
-- Bewerten Sie für vollständige Enddesigns die Auswirkung des Gehäuses auf die Antenne und führen Sie eine HF-Validierung durch, einschließlich eines abschließenden Kommunikationsreichweitentests am fertigen Produkt.
+- Falls sich die Antenne nicht über den Platinenrand hinaus erstrecken kann, sehen Sie einen großzügigen Freihaltebereich vor (keine Kupferflächen, Leiterbahnen oder Bauteile) und entfernen Sie nach Möglichkeit Host-Platinenmaterial unterhalb der Antenne.
+- Bewerten Sie für vollständige Enddesigns die Auswirkung des Gehäuses auf die Antenne und führen Sie eine RF-Validierung durch, einschließlich eines abschließenden Kommunikationsreichweitentests am fertigen Produkt.
 
 ## 11. Produkthandhabung { #11-product-handling }
 
 ### 11.1 Lagerbedingungen { #111-storage-conditions }
 
-- Produkte versiegelt in einer Feuchtigkeitsschutzverpackung (MBB) bei <40°C / 90% RH, nicht kondensierend lagern.
-- Nach dem Öffnen des Vakuumbeutels das Modul innerhalb des für seine Feuchtigkeitsempfindlichkeitsstufe (MSL) angegebenen Standzeitfensters verwenden; andernfalls muss es vor einem zweiten Reflow-Durchlauf getrocknet (gebacken) werden.
+- Lagern Sie Produkte in einer versiegelten Feuchtigkeitsschutzverpackung (MBB) bei <40 °C und 90 % RH, nicht kondensierend.
+- Verwenden Sie das Modul nach dem Öffnen des Vakuumbeutels innerhalb des für seine Feuchtigkeitsempfindlichkeitsstufe (MSL) angegebenen Standzeitfensters; andernfalls muss es vor einem zweiten Reflow-Durchlauf getrocknet (gebacken) werden.
 
 ### 11.2 Elektrostatische Entladung (ESD) { #112-electrostatic-discharge-esd }
 

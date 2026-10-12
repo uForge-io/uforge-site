@@ -19,11 +19,11 @@ tags:
 - [ ] Le modèle exact de la puce et la variante d'alimentation sont confirmés, et les schémas d'alimentation des deux variantes ne sont pas mélangés
 - [ ] Les broches d'alimentation du processeur (VBUS/VBAT/VCC ou PVDD/VDDIOA/VDD_SIP) se trouvent dans la plage de tension indiquée dans la fiche technique
 - [ ] L'inductance BUCK respecte 4,7 uH ±20 %, DCR ≤0,4 Ω, Isat ≥450 mA
-- [ ] Variante alimentée par batterie : le chemin de charge, la plage de tension du dispositif OVP et la capacité des condensateurs de sortie du LDO intégré sont vérifiés
+- [ ] Variante alimentée par batterie : le chemin de charge, la plage de tension du composant OVP et la capacité des condensateurs de sortie du LDO intégré sont vérifiés
 - [ ] Les quartz 48 MHz et 32,768 kHz respectent les spécifications recommandées ; le routage est conforme et les zones d'exclusion sont respectées
 - [ ] La piste RF présente une impédance de 50 Ω et le réseau d'adaptation est placé près de la puce
 - [ ] La configuration de démarrage depuis le stockage (y compris l'option eMMC de la variante alimentée par une alimentation régulée externe) correspond aux réglages des broches Bootstrap
-- [ ] Vérifier que la broche de commande du commutateur d'alimentation du stockage correspond à la variante exacte ; résoudre l'écart PA11/PA21 entre la liste de contrôle officielle et les notes d'application avant la publication
+- [ ] Vérifier que la broche de commande du commutateur d'alimentation du stockage correspond à la variante exacte ; résoudre l'écart PA11/PA21 entre la liste de contrôle officielle et les notes d'application avant la validation finale
 - [ ] USB DP/DN sont routés en paire différentielle avec une impédance différentielle de 90 Ω
 - [ ] Les signaux SDIO sont routés ensemble, avec une longueur totale ≤50 mm, un écart de longueur dans le groupe ≤6 mm et un blindage de masse
 - [ ] Les broches multiplexées DBG_UART/SWD et les points de test de production sont réservés
@@ -77,10 +77,10 @@ Les notes d'application originales de SiFli comprennent les figures de référen
 | Besoin | Commencer ici |
 |:---|:---|
 | Exemples de schéma-blocs de montre connectée pour les deux groupes de conception SF32LB52x | Annexe A : Une application typique de montre connectée |
-| Exemples de schémas pour la RF, le stockage et le démarrage, les boutons, le moteur, l’audio, l’horloge, l’USB et le DC/DC | Annexe B : Schémas de référence |
+| Exemples de schémas pour la RF, le stockage et le démarrage, les boutons, le moteur, l'audio, l'horloge, l'USB et le DC/DC | Annexe B : Schémas de référence |
 | Exemples de placement et de routage PCB pour RF, stockage, audio, empilement, fanout, horloge, USB, et DC/DC | Annexe C : Implantations et routages PCB de référence |
 | Plans du contour et de la géométrie du boîtier, ainsi que du motif de pastilles recommandé | Annexe D : Mécanique |
-| Schémas et implantations de référence pour la charge, l’OVP, l’architecture d’alimentation et le PMU | Annexe E : Alimentation |
+| Schémas et implantations de référence pour la charge, l'OVP, l'architecture d'alimentation et le PMU | Annexe E : Alimentation |
 
 </div>
 
@@ -138,13 +138,13 @@ Les figures 9.1-1 et 9.1-2 montrent un afficheur QSPI, un accéléromètre/gyros
 
 <div align="center"><em>Figure 9.2-8 : Référence de moteur de vibration 52B/D/E/G/J</em></div>
 
-![Figure 9.2-9 : Référence du bouton d’alimentation](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PWKEY.png){ loading="lazy" }
+![Figure 9.2-9 : Référence du bouton d'alimentation](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PWKEY.png){ loading="lazy" }
 
-<div align="center"><em>Figure 9.2-9 : Référence du bouton d’alimentation</em></div>
+<div align="center"><em>Figure 9.2-9 : Référence du bouton d'alimentation</em></div>
 
-![Figure 9.2-10 : Référence du bouton de l’encodeur rotatif](../../sf32-products/chips/assets/52xB/sf32lb52X-B-XNKEY.png){ loading="lazy" }
+![Figure 9.2-10 : Référence du bouton de l'encodeur rotatif](../../sf32-products/chips/assets/52xB/sf32lb52X-B-XNKEY.png){ loading="lazy" }
 
-<div align="center"><em>Figure 9.2-10 : Référence du bouton de l’encodeur rotatif</em></div>
+<div align="center"><em>Figure 9.2-10 : Référence du bouton de l'encodeur rotatif</em></div>
 
 ![Figure 9.2-11 : Référence de microphone MEMS analogique](../../sf32-products/chips/assets/52xB/sf32lb52X-B-MEMS-MIC.png){ loading="lazy" }
 
@@ -196,9 +196,9 @@ Les figures 9.1-1 et 9.1-2 montrent un afficheur QSPI, un accéléromètre/gyros
 
 **RF**
 
-![Figure 9.3-1 : Référence du réseau d’adaptation RF sur PCB](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-RF.png){ loading="lazy" }
+![Figure 9.3-1 : Référence du réseau d'adaptation RF sur PCB](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-RF.png){ loading="lazy" }
 
-<div align="center"><em>Figure 9.3-1 : Référence du réseau d’adaptation RF sur PCB</em></div>
+<div align="center"><em>Figure 9.3-1 : Référence du réseau d'adaptation RF sur PCB</em></div>
 
 ![Figure 9.3-2 : Référence de routage PCB RF](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-RF-ROUTE.png){ loading="lazy" }
 
@@ -306,15 +306,15 @@ Les figures 9.1-1 et 9.1-2 montrent un afficheur QSPI, un accéléromètre/gyros
 
 **SF32LB520/3/5/7 (alimenté par batterie)**
 
-Les figures ci-dessous montrent deux circuits de charge externes, avec et sans gestion du chemin d’alimentation (PPM), puis le circuit de charge intégré.
+Les figures ci-dessous montrent deux circuits de charge externes, avec et sans gestion du chemin d'alimentation (PPM), puis le circuit de charge intégré.
 
 ![Figure 9.5-1 : Circuit de charge externe sans PPM](../../sf32-products/chips/assets/52xA/sf32lb52x-CHG-NPPM.png){ loading="lazy" }
 
-<div align="center"><em>Figure 9.5-1 : Circuit de charge externe sans gestion du chemin d’alimentation (PPM)</em></div>
+<div align="center"><em>Figure 9.5-1 : Circuit de charge externe sans gestion du chemin d'alimentation (PPM)</em></div>
 
 ![Figure 9.5-2 : Circuit de charge externe avec PPM](../../sf32-products/chips/assets/52xA/sf32lb52x-CHG-PPM.png){ loading="lazy" }
 
-<div align="center"><em>Figure 9.5-2 : Circuit de charge externe avec gestion du chemin d’alimentation (PPM)</em></div>
+<div align="center"><em>Figure 9.5-2 : Circuit de charge externe avec gestion du chemin d'alimentation (PPM)</em></div>
 
 ![Figure 9.5-3 : Circuit de chargeur intégré](../../sf32-products/chips/assets/52xA/sf32lb52x-CHG-INNER.png){ loading="lazy" }
 

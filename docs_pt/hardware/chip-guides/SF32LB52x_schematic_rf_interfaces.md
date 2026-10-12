@@ -59,7 +59,7 @@ A figura 5.4-1 mostra um capacitor em série de 15 pF e 50 V (C0323); as posiç�
 
 - As interfaces incluem SPI, Dual-SPI, Quad-SPI e JDI serial. EPD está disponível nos modelos compatíveis com alimentação externa regulada.
 - A resolução máxima documentada do display é 512 x 512.
-- Revise em conjunto reset, TE, PWM do backlight, I2C de toque, interrupção de toque e sequenciamento da alimentação do display.
+- Recomenda-se revisar em conjunto reset, TE, PWM do backlight, I2C de toque, interrupção de toque e sequenciamento da alimentação do display.
 
 **Objetivo do projeto**
 
@@ -212,7 +212,7 @@ O SF32LB52x oferece uma interface I2C para o controlador de toque, com entrada d
 **Resumo**
 
 - A entrada de microfone analógico é não diferencial (single-ended) e requer um capacitor de bloqueio de DC.
-- A saída DAC é diferencial e deve ser roteada como um par diferencial curto e blindado.
+- A saída DAC é diferencial; recomenda-se roteá-la como um par diferencial curto e blindado.
 - A filtragem da alimentação de áudio e o posicionamento de MIC_BIAS influenciam significativamente o ruído.
 
 **Objetivo do projeto**
@@ -221,8 +221,8 @@ Preserve a qualidade do sinal analógico, mantendo os caminhos do microfone, DAC
 
 A interface de áudio oferece:
 
-1. Uma entrada ADC não diferencial para microfone analógico, com capacitor de bloqueio de DC de pelo menos 2,2 uF em série; o microfone recebe alimentação da saída MIC_BIAS do chip
-2. Uma saída DAC diferencial para um PA de áudio externo: roteie como par diferencial com blindagem de terra adequada e mantenha a capacitância das trilhas < 10 pF e o comprimento < 2 cm
+1. Uma entrada ADC não diferencial para microfone analógico, com capacitor de bloqueio de DC de pelo menos 2,2 uF em série; o microfone recebe alimentação da saída MIC_BIAS do chip.
+2. Uma saída DAC diferencial para um amplificador de potência (PA) de áudio externo: roteie como par diferencial com blindagem de terra adequada e mantenha a capacitância das trilhas < 10 pF e o comprimento < 2 cm.
 
 <div align="center"><em>Tabela 5.5-6: Conexões dos sinais de áudio</em></div>
 
@@ -247,9 +247,9 @@ A interface de áudio oferece:
 
 Os circuitos de referência dos microfones filtram MIC_BIAS com um resistor em série de 1 kΩ e um capacitor para o terra de 1 uF e 6,3 V. O circuito ECM também usa um resistor de polarização do microfone de 4,7 kΩ. Ambos mostram um capacitor de entrada de 0,01 uF para o terra: ele é um filtro em derivação, não o capacitor de acoplamento em série exigido no caminho do sinal. Preserve essa distinção ao adaptar os circuitos.
 
-![Figura 5.5-3: Circuito de PA de áudio analógico](../../sf32-products/chips/assets/52xB/sf32lb52X-B-DAC-PA.png){ width="100%" loading="lazy" }
+![Figura 5.5-3: Circuito do amplificador de potência de áudio analógico](../../sf32-products/chips/assets/52xB/sf32lb52X-B-DAC-PA.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 5.5-3: Circuito de PA de áudio analógico</em></div>
+<div align="center"><em>Figura 5.5-3: Circuito do amplificador de potência de áudio analógico</em></div>
 
 **Erros frequentes: áudio**
 
@@ -281,7 +281,7 @@ Garanta entradas de usuário e reset confiáveis, evitando eventos de despertar 
 
 ##### 5.5.3.1. Botão de alimentação { #5531-power-button }
 
-PA34 oferece reset por pressão longa e pode ser usado em um botão que combine liga/desliga e reset por pressão longa. O reset é ativo em nível alto: use pull-down para manter o estado padrão baixo e elevar o nível quando o botão for pressionado.
+PA34 oferece reset por pressão longa e pode ser usado em um botão que combine liga/desliga e reset por pressão longa. Como o reset é ativo em nível alto, recomenda-se manter o estado padrão em nível baixo com pull-down e levá-lo a nível alto quando o botão for pressionado.
 
 ![Figura 5.5-4: Circuito do botão de alimentação/reset por pressão longa](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PWKEY.png){ width="100%" loading="lazy" }
 
@@ -338,6 +338,6 @@ Os dois circuitos de motor usam PA20 para controlar um MOSFET de lado baixo, com
 **Checklist do motor**
 
 - [ ] O driver do motor, a proteção contra flyback/ESD e a capacidade de corrente da alimentação foram revisados.
-- [ ] A alimentação do motor fica desligada por padrão em standby e no estado de transporte.
+- [ ] A alimentação do motor fica desligada por padrão em standby e no modo de envio.
 - [ ] A atribuição do pino PWM não conflita com display, armazenamento ou depuração.
 - [ ] O plano de inicialização cobre a varredura do duty cycle PWM, a corrente de partida, o ruído audível e as fugas em standby.

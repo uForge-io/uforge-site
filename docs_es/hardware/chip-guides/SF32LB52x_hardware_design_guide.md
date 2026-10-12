@@ -2,7 +2,7 @@
 icon: lucide/book-check
 hide:
     - navigation
-description: "Guía de diseño de hardware del MCU SF32LB52x: descripción del dispositivo, flujo de diseño y enlaces a las páginas de esquemático, diseño de PCB, revisión y listas de comprobación."
+description: "Guía de diseño de hardware de la MCU SF32LB52x: descripción del dispositivo, flujo de diseño y enlaces a las páginas de esquemático, diseño de PCB, revisión y listas de comprobación."
 tags:
     - Hardware
     - Chip
@@ -29,7 +29,7 @@ La guía integra en un único flujo de trabajo de ingeniería dos notas original
 [Módulo SF32LB52-MOD-1]: ../../sf32-products/modules/SF32LB52-MOD-1.md
 [Archivos KiCad]: https://github.com/OpenSiFli/kicad-libraries
 [Comprar muestras]: https://sifli.taobao.com/
-[Comprar kits de desarrollo]: https://sifli.taobao.com/
+[Comprar placas de desarrollo]: https://sifli.taobao.com/
 [Lista de proveedores aprobados por SiFli]: ../cad-components/sifli-approved-vendor-list.md
 [Lista de proveedores aprobados por SiFli (AVL)]: https://downloads.sifli.com/hardware/files/documentation/SIFLI-MCU-AVL-%E8%AE%A4%E8%AF%81%E8%A1%A8-V0.3-20260121.xlsx
 
@@ -42,7 +42,7 @@ La guía integra en un único flujo de trabajo de ingeniería dos notas original
 - :fontawesome-solid-file-lines: __[Guía de diseño de hardware SF32LB52x (52B/D/E/G/J)]__
 - :fontawesome-solid-file-excel: __[Lista de proveedores aprobados por SiFli (AVL)]__
 - :fontawesome-solid-cart-shopping: __[Comprar muestras]__
-- :fontawesome-solid-cart-shopping: __[Comprar kits de desarrollo]__
+- :fontawesome-solid-cart-shopping: __[Comprar placas de desarrollo]__
 - :fontawesome-brands-github: __[Archivos KiCad]__
 - :fontawesome-solid-sim-card: __[Módulo SF32LB52-MOD-1]__
 
@@ -89,7 +89,7 @@ La familia SF32LB52x se divide, según su arquitectura de alimentación, en dos 
 
 === "52B/D/E/G/J (alimentación externa regulada)"
 
-    Este grupo integra la **PMU** en el chip, pero no incluye circuitos de carga. Se alimenta desde una fuente externa regulada.
+    Este grupo integra el **PMU** en el chip, pero no incluye circuitos de carga. Se alimenta desde una fuente externa regulada.
 
     <div align="center"><em>Tabla 3.2-2: correspondencia de modelos (variante con alimentación externa regulada)</em></div>
 
@@ -208,7 +208,7 @@ Siga la guía en el orden en que suelen fijarse las decisiones de hardware. El f
 | 4 | Seleccione la topología RF, la pantalla, el audio, los sensores y las demás interfaces del producto | Generación de reloj, RF, interfaces de usuario, almacenamiento y conectividad |
 | 5 | Revise el apilado de PCB, fanout, impedancias y trazado de señales sensibles | Pautas de diseño de PCB |
 | 6 | Compare con los esquemáticos, diseños de PCB y figuras mecánicas y de alimentación de referencia de las fuentes | Apéndices A–E |
-| 7 | Reserve acceso para puesta en marcha, depuración, calibración y pruebas de producción | Depuración, producción, lista de revisión del diseño |
+| 7 | Reserve acceso para puesta en marcha, depuración, calibración y pruebas de producción | Depuración, producción, lista de comprobación de revisión del diseño |
 
 </div>
 
@@ -284,6 +284,6 @@ La guía completa continúa en las siguientes páginas, cada una dedicada a una 
 - :fontawesome-solid-list-check: __[Lista de comprobación del esquemático](SF32LB52x_schematic_checklist.md)__ — lista detallada para revisar el esquemático (sección 5.8)
 - :fontawesome-solid-microchip: __[Pautas de diseño de PCB](SF32LB52x_pcb_layout.md)__ — pautas de huella, apilado, fanout y trazado de reloj, RF, audio, USB, SDIO y alimentación
 - :fontawesome-solid-list-check: __[Lista de comprobación del diseño de PCB](SF32LB52x_pcb_layout_checklist.md)__ — lista detallada para revisar el diseño de PCB (sección 6.15)
-- :fontawesome-solid-book-open: __[Lista de revisión del diseño y referencias](SF32LB52x_review_and_reference.md)__ — lista de comprobación de liberación, documentos relacionados, apéndices de referencias de esquemático/PCB/mecánica/alimentación e historial de revisiones
+- :fontawesome-solid-book-open: __[Lista de comprobación de revisión del diseño y referencias](SF32LB52x_review_and_reference.md)__ — lista de comprobación de liberación, documentos relacionados, apéndices de referencias de esquemático/PCB/mecánica/alimentación e historial de revisiones
 
 </div>

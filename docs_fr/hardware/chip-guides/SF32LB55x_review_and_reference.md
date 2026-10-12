@@ -16,11 +16,11 @@ tags:
 - [ ] Tous les rails d'alimentation du PMU et auxiliaires respectent les limites de tension/courant de la fiche technique.
 - [ ] Les condensateurs de découplage requis sont placés près des broches.
 - [ ] La temporisation du POR/BOR/reset et le mode de démarrage sont vérifiés.
-- [ ] Les cristaux 48 MHz et 32,768 kHz respectent les exigences de CL, de ppm, d'ESR, de placement et de routage.
+- [ ] Les quartz 48 MHz et 32,768 kHz respectent les exigences de CL, de ppm, d'ESR, de placement et de routage.
 - [ ] L'adaptation RF, l'antenne et les exigences de dégagement du plan de masse sont vérifiées.
 - [ ] Les groupes de broches de mémoire externe et d'affichage correspondent au boîtier sélectionné.
 - [ ] Les circuits de réveil, GPADC, capteurs, audio, tactile, rétroéclairage et moteur respectent les exigences de basse consommation.
-- [ ] L'accès au débogage, au téléchargement, à la programmation en production, au test RF et à l'étalonnage du cristal est réservé.
+- [ ] L'accès au débogage, au téléchargement, au flashage en production, au test RF et à l'étalonnage du quartz est réservé.
 
 ## 8. Documents et références connexes { #8-related-documents-and-references }
 
@@ -29,7 +29,7 @@ Utilisez les derniers documents officiels lors de la vérification des limites �
 <div class="grid cards" markdown>
 
 - :fontawesome-solid-file-lines: __[Note d'application matérielle SF32LB55x]__
-- :fontawesome-solid-file-excel: __[Liste des fournisseurs agréés par SiFli (AVL)]__
+- :fontawesome-solid-file-excel: __[Liste des fournisseurs approuvés par SiFli (AVL)]__
 - :fontawesome-brands-wikipedia-w: __[Index des guides de conception matérielle SiFli pour les puces (Wiki)]__
 
 </div>
@@ -37,7 +37,7 @@ Utilisez les derniers documents officiels lors de la vérification des limites �
 La [liste de contrôle du schéma](SF32LB55x_schematic_checklist.md) (section 5.8) et la section 6.4 de [Implantation et routage du PCB](SF32LB55x_pcb_layout.md) reproduisent point par point la même *SF32LB55x Schematic & PCB Checklist* (V1.0, 2026-01-21), accompagnée des conseils de conception du schéma et du PCB auxquels elle se rapporte.
 
 [Note d'application matérielle SF32LB55x]: https://wiki.sifli.com/en/hardware/SF32LB55x-HW-Application.html
-[Liste des fournisseurs agréés par SiFli (AVL)]: ../cad-components/sifli-approved-vendor-list.md
+[Liste des fournisseurs approuvés par SiFli (AVL)]: ../cad-components/sifli-approved-vendor-list.md
 [Index des guides de conception matérielle SiFli pour les puces (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
 ## 9. Annexes { #9-appendices }
@@ -62,7 +62,7 @@ Un produit SF32LB55x typique comprend le MCU, l'architecture d'alimentation, les
 12. **Comment éviter les défauts de commande d'alimentation de l'audio Bluetooth externe après le réveil, lorsque le module doit rester alimenté pendant le sommeil ?** Commandez son alimentation avec un GPIO du LCPU. Pour un interrupteur actif à l'état bas, choisissez un GPIO du LCPU avec pull-down (PD) par défaut.
 13. **Comment garantir la charge après une décharge profonde de la batterie ?** Lorsque la tension de la batterie est trop basse, la gestion du chemin d'alimentation doit permettre à l'entrée du chargeur d'alimenter le système après son branchement. En l'absence de cette gestion, le circuit intégré de charge choisi doit fournir un courant de charge lente d'au moins 40 mA.
 14. **Pourquoi la charge peut-elle ne pas démarrer après le branchement du chargeur ?** Le signal de détection du branchement doit être relié à l'un des GPIO de réveil du LCPU, GPIO43–GPIO48. Un autre GPIO peut empêcher le démarrage correct de la séquence de charge.
-15. **Comment éviter une consommation excessive en mode téléchargement lorsque MODE est haut ?** Pour les périphériques gourmands, comme un PA audio activé à l'état haut, utilisez un GPIO avec pull-down (PD) par défaut, jamais un GPIO avec pull-up (PU). Le mode téléchargement pourrait sinon activer le périphérique et perturber la programmation.
+15. **Comment éviter une consommation excessive en mode téléchargement lorsque MODE est haut ?** Pour les périphériques gourmands, comme un amplificateur de puissance audio (PA) activé à l'état haut, utilisez un GPIO avec pull-down (PD) par défaut, jamais un GPIO avec pull-up (PU). Le mode téléchargement pourrait sinon activer le périphérique et perturber la programmation.
 16. **Pourquoi la programmation peut-elle échouer lorsque MODE est haut, et que faire si l'interruption d'un capteur utilise GPIO46 ?** En mode téléchargement, GPIO46 est par défaut UART3_RX et peut perturber la programmation. Déplacez l'interruption du capteur sur GPIO43, GPIO44, GPIO47 ou GPIO48. Si davantage d'entrées de réveil LCPU sont nécessaires, reliez un bouton externe à GPIO45 ou GPIO46 au moyen d'une résistance de 0 Ω.
 17. **Que faire si les algorithmes du capteur G et de fréquence cardiaque dépassent la mémoire disponible ?** Vérifiez que la mémoire allouée au LCPU est suffisante. Si elle ne l'est pas, ajoutez une mémoire Flash NOR externe sur QSPI4.
 

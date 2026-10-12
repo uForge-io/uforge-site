@@ -1,6 +1,6 @@
 ---
 icon: lucide/app-window
-description: "Guía para usar SiFli CodeKit por primera vez en VS Code: instalar la extensión, elegir una placa SF32, compilar y flashear hello_world y abrir la consola serie."
+description: "Guía para usar SiFli CodeKit por primera vez en VS Code: instalar la extensión, elegir una placa SF32, compilar y grabar hello_world y abrir la consola serie."
 tags:
     - Primeros pasos
     - SiFli CodeKit
@@ -9,7 +9,7 @@ tags:
 
 # SiFli CodeKit { #sifli-codekit }
 
-SiFli CodeKit es la extensión de VS Code para desarrollar con SiFli-SDK. Ofrece acciones guiadas para instalar las herramientas del SDK, seleccionar una placa, compilar un ejemplo, flashear el firmware y abrir una consola serie.
+SiFli CodeKit es la extensión de VS Code para desarrollar con SiFli-SDK. Ofrece acciones guiadas para instalar las herramientas del SDK, seleccionar una placa, compilar un ejemplo, grabar el firmware y abrir una consola serie.
 
 Utilice esta ruta si prefiere un flujo de trabajo con IDE. Si quiere entender los comandos que hay detrás de los botones, utilice la [guía manual de SiFli-SDK](getting-started-sifli-sdk.md).
 
@@ -33,7 +33,7 @@ Esta guía cubre la configuración inicial. Cuando `hello_world` funcione, consu
 
 - [Guía oficial de instalación de SiFli CodeKit](https://docs.sifli.com/projects/codekit/get-started/install.html)
 
-## Instala CodeKit { #install-codekit }
+## Instale CodeKit { #install-codekit }
 
 1. Abra VS Code.
 2. Abra **Extensions**.
@@ -66,9 +66,9 @@ Si CodeKit le pide la ubicación del SDK, elija una ruta corta y sin espacios, p
     C:\OpenSiFli\SiFli-SDK
     ```
 
-CodeKit utiliza el instalador y los scripts de entorno incluidos en el SDK. Así se prepara el mismo entorno que con la instalación manual: compilador, entorno de Python, herramientas de compilación y herramientas de flasheo.
+CodeKit utiliza el instalador y los scripts de entorno incluidos en el SDK. Así se prepara el mismo entorno que con la instalación manual: compilador, entorno de Python, herramientas de compilación y herramientas de grabación.
 
-## Abre un ejemplo { #open-an-example }
+## Abra un ejemplo { #open-an-example }
 
 Empiece con el ejemplo `hello_world` del SDK:
 
@@ -98,7 +98,7 @@ build_sf32lb52-lcd_n16r8_hcpu
 
 Si la compilación falla de inmediato, compruebe que CodeKit sabe dónde está instalado SiFli-SDK y que la instalación del entorno del SDK ha terminado.
 
-## Flashee { #flash }
+## Grabe el firmware { #flash }
 
 Conecte la placa a través del puerto USB-to-UART y ejecute la acción **Flash** o **Download** de CodeKit.
 
@@ -110,7 +110,7 @@ Cuando se le pida un puerto serie:
 
 Si la herramienta de descarga no logra poner la placa en modo de descarga UART, reinicie la placa justo antes de iniciar la transferencia. Si el problema persiste, siga las instrucciones de grabación específicas de la placa.
 
-## Abre la consola serie { #open-the-serial-console }
+## Abra la consola serie { #open-the-serial-console }
 
 Utilice el monitor serie de CodeKit, las herramientas serie de VS Code u otro programa de terminal. Tras el reinicio, la consola debería mostrar una salida de arranque legible y la salida del ejemplo `hello_world`.
 
@@ -122,7 +122,7 @@ Puede continuar cuando se cumplan estas condiciones:
 
 - CodeKit reconoce la ubicación del SDK.
 - La placa seleccionada coincide con su hardware.
-- Las acciones de compilación y flasheo se completan.
+- Las acciones de compilación y grabación se completan.
 - La consola serie muestra la salida de `hello_world` tras el reinicio.
 
 ## Solución de problemas { #troubleshooting }
@@ -136,7 +136,7 @@ Puede continuar cuando se cumplan estas condiciones:
 | No aparece ningún puerto serie | Pruebe con un cable de datos, otro puerto USB o el conector USB-to-UART de la placa. |
 | CodeKit no encuentra el SDK | Vuelva a ejecutar el flujo de configuración de CodeKit y seleccione la carpeta raíz de SiFli-SDK. |
 | La compilación no encuentra las herramientas | Deje que CodeKit reinstale la cadena de herramientas o ejecute manualmente el instalador del SDK una vez. |
-| El flasheo no se inicia | Si la herramienta no entra en el modo de descarga UART, reinicie la placa justo antes de iniciar la transferencia. Si el problema persiste, siga las instrucciones de grabación específicas de la placa. |
+| La grabación no se inicia | Si la herramienta no entra en el modo de descarga UART, reinicie la placa justo antes de iniciar la transferencia. Si el problema persiste, siga las instrucciones de grabación específicas de la placa. |
 | La salida serie es ilegible | Compruebe la velocidad en baudios y asegúrese de que solo haya un monitor serie abierto. |
 
 </div>
@@ -147,6 +147,6 @@ Puede continuar cuando se cumplan estas condiciones:
 - Continúe con [Primeros pasos con los periféricos](../tutorials/beginner.md) una vez que `hello_world` funcione.
 - Cuando empiece a implementar funciones para un producto real, consulte el [Resumen de Bluetooth](../../learn/bluetooth/overview.md), el [Resumen de gráficos](../../learn/graphics/overview.md), el [Resumen del audio local](../../learn/audio/overview.md) y el [Resumen del diseño de bajo consumo](../../learn/low-power/overview.md).
 
-## Registra una configuración reproducible { #what-sifli-should-add }
+## Registre una configuración reproducible { #what-sifli-should-add }
 
 Anote la versión de CodeKit y del SDK, la etiqueta o rama elegida y el objetivo exacto de la placa. Si algún nombre de menú o comando difiere, consulte la [guía oficial de instalación](https://docs.sifli.com/projects/codekit/get-started/install.html) y la [lista de placas compatibles](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html) para las versiones instaladas.

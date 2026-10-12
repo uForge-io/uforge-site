@@ -7,7 +7,7 @@ tags:
 
 # Vue d'ensemble des tutoriels { #tutorials-overview }
 
-Cette série vous aide à passer d'un premier flash réussi à des compétences pratiques de développement sur SF32. La progression suit les étapes du travail d'ingénierie : vérifier d'abord un périphérique, combiner ensuite des sous-systèmes, puis réunir les éléments de validation nécessaires au produit. Les tutoriels partent d'exemples SiFli-SDK, mais les bonnes pratiques — vérifier le matériel, conserver une configuration de référence validée et mesurer les résultats — s'appliquent à tout environnement logiciel SF32.
+Cette série vous aide à passer d'un premier flash réussi à des compétences pratiques de développement sur SF32. La progression suit les étapes du travail d'ingénierie : vérifier d'abord un périphérique, combiner ensuite des sous-systèmes, puis réunir les éléments de validation nécessaires au produit. Les tutoriels partent d'exemples SiFli-SDK, mais les bonnes pratiques — vérifier le matériel, conserver une configuration de référence validée et mesurer les résultats — s'appliquent quel que soit le parcours logiciel SF32.
 
 Les tutoriels constituent la deuxième étape de la [prise en main](../index.md). Validez d'abord les critères de réussite de la première mise en route. Si vous choisissez une puce, un module ou une carte de développement, consultez la [famille SF32](../../sf32-products/family/SF32_family.md) avant de commencer.
 
@@ -15,7 +15,7 @@ Les tutoriels constituent la deuxième étape de la [prise en main](../index.md)
 
 Utilisez une carte de développement SF32 avec une connexion de données USB fonctionnelle et une console série. Par exemple, `sf32lb52-lcd_n16r8` est le nom de carte SiFli-SDK de la SF32LB52-DevKit-LCD_N16R8. Cette série ne suppose pas qu'une seule carte prenne en charge tous les exercices : consultez la liste des plateformes prises en charge par chaque exemple et vérifiez les broches, périphériques, fonctions d'affichage et audio ainsi que le stockage à l'aide du schéma et des fichiers de carte concernés. La liste officielle des [cartes prises en charge](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/index.html) fournit les identifiants de cartes SDK pour SF32LB52x.
 
-<div align="center"><em>Tableau : Prérequis des tutoriels</em></div>
+<div align="center"><em>Tableau : prérequis des tutoriels</em></div>
 
 <div align="center" markdown>
 
@@ -31,14 +31,14 @@ Utilisez une carte de développement SF32 avec une connexion de données USB fon
 
 ## Parcours d'apprentissage recommandé { #recommended-learning-path }
 
-<div align="center"><em>Tableau : Feuille de route des tutoriels</em></div>
+<div align="center"><em>Tableau : feuille de route des tutoriels</em></div>
 
 <div align="center" markdown>
 
 | Objectif | Commencer quand | Contenu | Passer à la suite quand |
 |:------|:-----------|:------------------|:--------------|
 | [Premiers pas avec les périphériques](beginner.md) | `hello_world` se compile et se flashe, et la sortie série fonctionne. | GPIO, FinSH, ADC, PWM, RTC et un petit projet au niveau de la carte. | Passez à la suite lorsque vous savez vérifier de façon autonome une entrée, une sortie et un périphérique de base. |
-| [Intégration de sous-systèmes](intermediate.md) | Chaque périphérique fonctionne de manière fiable lorsqu'il est utilisé seul. | Capteurs I2C, LVGL, BLE, audio, stockage et tests de coexistence planifiés. | Passez à la suite lorsque deux sous-systèmes fonctionnent ensemble de façon stable. |
+| [Intégration de sous-systèmes](intermediate.md) | Chaque périphérique fonctionne de manière fiable lorsqu'il est utilisé seul. | Capteurs I2C, LVGL, BLE, audio, stockage et tests ciblés de coexistence. | Passez à la suite lorsque deux sous-systèmes fonctionnent ensemble de façon stable. |
 | [Validation produit](advanced.md) | Vous pouvez intégrer du middleware et diagnostiquer les problèmes courants. | Consommation électrique mesurée, récupération OTA, affichages personnalisés, analyse des plantages, BLE à connexions multiples et pilotes réutilisables. | Utilisez les articles pertinents des sections Développement et Apprentissage comme références continues pour l'implémentation. |
 
 </div>

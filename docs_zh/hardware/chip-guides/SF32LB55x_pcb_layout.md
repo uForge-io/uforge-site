@@ -165,8 +165,8 @@ GPADC 走线应在三维方向进行地屏蔽，并远离易受噪声影响的�
 |:---|:---|:---|:---|
 | 1 | VDD1 供电走线至少 8 mil | 全部型号 | 必检 |
 | 2 | VDD2 供电走线至少 8 mil | 仅 555 | 必检 |
-| 3 | BUCK1_VSW 与 BUCK1_VOUT 走线至少 8 mil | 全部型号 | 必检 |
-| 4 | BUCK2_VSW 与 BUCK2_VOUT 走线至少 8 mil | 仅 555 | 必检 |
+| 3 | BUCK1_VSW 与 BUCK1_VOUT 走线宽度均至少 8 mil | 全部型号 | 必检 |
+| 4 | BUCK2_VSW 与 BUCK2_VOUT 走线宽度均至少 8 mil | 仅 555 | 必检 |
 | 5 | LDOVCC2_VOUT 走线至少 8 mil | 仅 555 | 可选 |
 | 6 | AVDD_DSI 供电走线至少 8 mil | 仅 555 | 必检 |
 | 7 | VDD_SIP 供电走线至少 6 mil | 全部型号 | 必检 |

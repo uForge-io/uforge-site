@@ -8,13 +8,13 @@ tags:
 
 # Tabelas de partições { #partition-tables }
 
-A ferramenta de build `partition_table` do SiFli-SDK lê a descrição de partições da placa e gera `ptab.h`, que fornece as macros de partição usadas pela aplicação. A tabela descreve o mapa de endereços de todas as memórias relevantes, incluindo NOR Flash, NAND Flash, eMMC, cartões SD, PSRAM e SRAM interna.
+A ferramenta de compilação `partition_table` do SiFli-SDK lê a descrição de partições da placa e gera `ptab.h`, que fornece as macros de partição usadas pela aplicação. A tabela descreve o mapa de endereços de todas as memórias relevantes, incluindo NOR Flash, NAND Flash, eMMC, cartões SD, PSRAM e SRAM interna.
 
 Cada placa tem um layout padrão, usado por todas as aplicações compiladas para ela. Um projeto também pode fornecer uma configuração própria da tabela de partições para substituir o padrão da placa.
 
 ## Habilitar as tabelas de partições { #enable-partition-tables }
 
-Ative **Use partition table to manage all memory layout** na configuração de middleware. O projeto também precisa da configuração abaixo em `Kconfig.proj`; os exemplos do SiFli-SDK já a incluem.
+Ative **Use partition table to manage all memory layout** (usar tabela de partições para gerenciar todo o mapa de memória) na configuração de middleware. O projeto também precisa da configuração abaixo em `Kconfig.proj`; os exemplos do SiFli-SDK já a incluem.
 
 ```kconfig
 # APP-specific configuration.
@@ -39,7 +39,7 @@ O SiFli-SDK suporta três formatos de tabela de partições. Para projetos novos
 
 </div>
 
-O sistema de build procura primeiro `ptab.yaml` (v3) e, se não encontrar, usa `ptab.json` (v1/v2). A ordem de busca é: diretório da placa, diretório do chip, raiz do BSP e `customer/boards/<board>/`.
+O sistema de compilação procura primeiro `ptab.yaml` (v3) e, se não encontrar, usa `ptab.json` (v1/v2). A ordem de busca é: diretório da placa, diretório do chip, raiz do BSP e `customer/boards/<board>/`.
 
 ## v1: tags JSON e metadados de imagem { #v1-json-tags-and-image-metadata }
 
@@ -78,7 +78,7 @@ O v2 também usa `ptab.json`, mas o cabeçalho deve declarar `"version": "2"`. O
 | --- | --- |
 | `name` | Nome da partição. Os nomes de imagens de programa devem corresponder ao nome do programa associado ou ao nome `AddCustomImg`. Um programa com vários arquivos pode usar `proj_name:1`, `proj_name:2` e assim por diante. |
 | `core` | Núcleo que executa uma partição `app_exec`: `hcpu`, `lcpu` ou `acpu`. |
-| `app_img` | Partição principal que armazena a imagem do programa e é gravada pela ferramenta de flash. |
+| `app_img` | Partição principal que armazena a imagem do programa e é gravada pela ferramenta de gravação. |
 | `app_img2` | Partição de backup da imagem do programa, normalmente associada à partição principal para atualizações. |
 | `app_exec` | Espaço de endereçamento de onde o programa é executado. |
 
@@ -88,7 +88,7 @@ O v2 também usa `ptab.json`, mas o cabeçalho deve declarar `"version": "2"`. O
 
 ## v3: partições YAML e overlays { #v3-yaml-partitions-and-overlays }
 
-O v3 usa `ptab.yaml` e é o formato recomendado. Ele substitui o modelo legado de `tags` pelos campos explícitos `type` e `subtype`, separa as partições da topologia física por meio de nomes lógicos de `region` e gera `ptab.h`, `ftab.bin` e trechos de script de link durante o build.
+O v3 usa `ptab.yaml` e é o formato recomendado. Ele substitui o modelo legado de `tags` pelos campos explícitos `type` e `subtype`, separa as partições da topologia física por meio de nomes lógicos de `region` e gera `ptab.h`, `ftab.bin` e trechos de scripts do linker durante a compilação.
 
 <div align="center"><em>Tabela: campos de nível superior e de partição no v3</em></div>
 <div align="center" markdown>
@@ -117,7 +117,7 @@ Cada `region` corresponde a um endereço de armazenamento SBUS e a um endereço 
 | `bootloader` | — | Partição do bootloader. |
 | `app` | `factory` | Aplicação principal de fábrica; gera `CODE_START_ADDR` e `CODE_SIZE`. |
 | `app` | `dfu` | Aplicação DFU independente. |
-| `app` | `ex` | Partição de recursos. O build gera arquivos de imagem de recursos específicos da toolchain. |
+| `app` | `ex` | Partição de recursos. A compilação gera arquivos de imagem de recursos específicos da toolchain. |
 | `data` | `flashdb_kv` | Banco de dados FlashDB KV; gera macros `KVDB_*` e integra `FAL_PART_TABLE`. |
 | `data` | `filesystem`, `littlefs`, `fat` ou `fatfs` | A documentação afirma que `filesystem` gera macros `FS_REGION_*` e integra `FAL_PART_TABLE`. Em outra seção, também lista `littlefs`, `fat` e `fatfs` como subtipos que geram essas macros, mas diz que atualmente não têm efeito; confirme o comportamento desses três subtipos na versão do SDK usada. Essa mesma seção de macros também usa o subtipo `flashdb`, enquanto a tabela de subtipos e as regras de FAL usam `flashdb_kv`; não trate esses nomes como aliases sem confirmar isso na versão do SDK usada. |
 | `data` | `ram`, `calibration`, `raw` ou `int_res` | RAM, calibração, dados brutos gerenciados pela aplicação ou dados internos de recursos vinculados ao ELF e separados pelo nome da seção. |
@@ -151,11 +151,11 @@ partitions:
     size: 64KB
 ```
 
-O overlay da placa tem prioridade sobre o overlay do chip. Ele só pode alterar partições: não pode mudar `memory`, `chip` ou `version`, nem excluir partições. Aplica-se apenas a um `ptab.yaml` v3 no nível da placa e não pode ser combinado com um `ptab.yaml` ou `ptab.json` completo no projeto. Se a placa ainda usar `ptab.json` (v1/v2) e nenhum `ptab.yaml` completo for selecionado, o build ignora o overlay, emite um aviso e continua pelo fluxo sem overlay. Nesse caso, `ptab.effective.yaml` não é gerado. Quando aplicado, o build grava o resultado em `ptab.effective.yaml` para inspeção.
+O overlay da placa tem prioridade sobre o overlay do chip. Ele só pode alterar partições: não pode mudar `memory`, `chip` ou `version`, nem excluir partições. Aplica-se apenas a um `ptab.yaml` v3 no nível da placa e não pode ser combinado com um `ptab.yaml` ou `ptab.json` completo no projeto. Se a placa ainda usar `ptab.json` (v1/v2) e nenhum `ptab.yaml` completo for selecionado, a compilação ignora o overlay, emite um aviso e continua pelo fluxo sem overlay. Nesse caso, `ptab.effective.yaml` não é gerado. Quando aplicado, o sistema grava o resultado em `ptab.effective.yaml` para inspeção.
 
 ## Arquivos gerados e validação { #generated-files-and-validation }
 
-<div align="center"><em>Tabela: arquivos gerados pelo build da tabela de partições</em></div>
+<div align="center"><em>Tabela: arquivos gerados na compilação da tabela de partições</em></div>
 <div align="center" markdown>
 
 | Saída | Finalidade |
@@ -173,7 +173,7 @@ Valide a tabela v3 da placa antes da integração:
 python tools/build/validate_ptab_v3.py customer/boards/<board>/ptab.yaml
 ```
 
-O validador verifica a sintaxe dos nomes de partição, tipos e subtipos válidos, regiões válidas, sobreposição de partições e unicidade do bootloader. Para inspecionar a configuração v3 efetiva usada pelo build, execute:
+O validador verifica a sintaxe dos nomes de partição, tipos e subtipos válidos, regiões válidas, sobreposição de partições e unicidade do bootloader. Para inspecionar a configuração v3 efetiva usada na compilação, execute:
 
 ```bash
 sdk.py ptab-export --board=<board-name>
@@ -183,14 +183,14 @@ sdk.py ptab-export --strict
 
 ## Inspecionar a Flash Table gerada { #inspect-the-generated-flash-table }
 
-Após o build, `ftab.bin` fica no diretório de saída. Inicialize o ambiente do SDK e inspecione o primeiro `build_*/ftab.bin` encontrado no projeto atual:
+Após a compilação, `ftab.bin` fica no diretório de saída. Inicialize o ambiente do SDK e inspecione o primeiro `build_*/ftab.bin` encontrado no projeto atual:
 
 ```bash
 source ./export.sh
 sdk.py ftab-dump
 ```
 
-No Windows PowerShell, inicialize com `./export.ps1`. Se o projeto tiver vários diretórios de build de placas, especifique o caminho. Use a saída JSON quando um script precisar processar o resultado:
+No Windows PowerShell, inicialize com `./export.ps1`. Se o projeto tiver vários diretórios de compilação de placas, especifique o caminho. Use a saída JSON quando um script precisar processar o resultado:
 
 ```bash
 sdk.py ftab-dump --path build_<board_name>/ftab.bin
@@ -202,7 +202,7 @@ A tabela exibe as entradas de partição, as descrições de imagem usadas nos f
 ## Revisão do produto { #product-review }
 
 - [ ] O projeto usa intencionalmente a tabela da placa ou uma configuração explícita do projeto.
-- [ ] A sintaxe v1, v2 ou v3 escolhida corresponde ao arquivo que o sistema de build realmente encontra.
+- [ ] A sintaxe v1, v2 ou v3 escolhida corresponde ao arquivo que o sistema de compilação realmente encontra.
 - [ ] Os locais de armazenamento e execução das imagens estão corretos, em especial para armazenamento não XiP e PSRAM.
 - [ ] As partições de aplicação, backup, DFU, sistema de arquivos, calibração e dados gerenciados pela aplicação têm capacidade suficiente e não se sobrepõem.
 - [ ] Foram inspecionados `ptab.h`, `ftab.bin` e, para overlays v3, `ptab.effective.yaml`.

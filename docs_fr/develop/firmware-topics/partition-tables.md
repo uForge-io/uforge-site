@@ -14,7 +14,7 @@ Chaque carte possède une disposition par défaut, et chaque application compil�
 
 ## Activer les tables de partitions { #enable-partition-tables }
 
-Dans la configuration du middleware, activez l'option **Use partition table to manage all memory layout**. Les projets nécessitent également le réglage suivant dans `Kconfig.proj` ; les exemples SiFli-SDK l'incluent déjà.
+Dans la configuration du middleware, activez l'option **Use partition table to manage all memory layout** (« Utiliser la table de partition pour gérer toute la disposition mémoire »). Les projets nécessitent également le réglage suivant dans `Kconfig.proj` ; les exemples SiFli-SDK l'incluent déjà.
 
 ```kconfig
 # APP-specific configuration.
@@ -120,7 +120,7 @@ Chaque `region` correspond à une adresse de stockage SBUS et à une adresse CBU
 | `app` | `ex` | Partition de ressources. La compilation crée des sorties d'image de ressources spécifiques à la chaîne d'outils. |
 | `data` | `flashdb_kv` | Base de données KV FlashDB ; génère les macros `KVDB_*` et participe à `FAL_PART_TABLE`. |
 | `data` | `filesystem`, `littlefs`, `fat` ou `fatfs` | La documentation indique que `filesystem` génère les macros `FS_REGION_*` et participe à `FAL_PART_TABLE`. Ailleurs, elle cite aussi `littlefs`, `fat` et `fatfs` parmi les sous-types qui génèrent ces macros, tout en précisant qu'ils n'ont actuellement aucun effet ; vérifiez leur comportement dans la version du SDK cible. Cette même section sur les macros emploie aussi le sous-type `flashdb`, tandis que le tableau des sous-types et les règles FAL utilisent `flashdb_kv` ; ne considérez pas ces noms comme des alias sans vérification dans le SDK cible. |
-| `data` | `ram`, `calibration`, `raw` ou `int_res` | Données RAM, de calibration, brutes gérées par l'application, ou données de ressources internes liées dans l'ELF et réparties par nom de section. |
+| `data` | `ram`, `calibration`, `raw` ou `int_res` | Données en RAM, de calibration, brutes gérées par l'application, ou données de ressources internes liées dans l'ELF et réparties par nom de section. |
 
 </div>
 
@@ -197,7 +197,7 @@ sdk.py ftab-dump --path build_<board_name>/ftab.bin
 sdk.py ftab-dump --path build_<board_name>/ftab.bin --format json
 ```
 
-La vue de la table indique les entrées de partition, les descriptions d'image utilisées par les flux DFU et de démarrage, ainsi que les pointeurs vers les images actives du HCPU, du LCPU, du bootloader et des images de démarrage.
+La vue tabulaire indique les entrées de partition, les descriptions d'image utilisées par les flux DFU et de démarrage, ainsi que les pointeurs vers les images en cours d'exécution du HCPU, du LCPU et du bootloader, et vers les images de démarrage.
 
 ## Revue du produit { #product-review }
 

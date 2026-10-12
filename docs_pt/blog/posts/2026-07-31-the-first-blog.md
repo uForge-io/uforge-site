@@ -7,11 +7,11 @@ description: "A primeira publicação do blog da μForge.io: nosso propósito, o
 
 Esta é a primeira publicação do blog. É uma boa oportunidade para explicar, de forma direta, para que serve a μForge.io.
 
-Quem avalia um novo microcontrolador não deveria precisar juntar informações espalhadas por um datasheet, uma página wiki e uma discussão em fórum para entender o panorama completo. A μForge.io reúne informações sobre a família SF32 de microcontroladores de ultrabaixo consumo da SiFli. São chips com conectividade Bluetooth, recursos gráficos e foco em AIoT, voltados a wearables, telas inteligentes e outros produtos conectados alimentados por bateria. Reunimos em um só lugar as referências que costumam ficar espalhadas por datasheets, wikis e PDFs, organizando-as conforme as etapas reais de desenvolvimento: escolher o componente, comprovar que funciona, integrá-lo ao projeto e entregar o produto. Para conhecer melhor a proposta, veja [Sobre](../../about/index.md).
+Quem avalia um novo microcontrolador não deveria precisar juntar informações espalhadas por um datasheet, uma página wiki e uma discussão em fórum para entender o panorama completo. A μForge.io reúne informações sobre a família SF32 de microcontroladores de ultrabaixo consumo da SiFli. São chips com conectividade Bluetooth, recursos gráficos e foco em AIoT, voltados a wearables, displays inteligentes e outros produtos conectados alimentados por bateria. Reunimos em um só lugar as referências que costumam ficar espalhadas por datasheets, wikis e PDFs, organizando-as conforme as etapas reais de desenvolvimento: escolher o componente, comprovar que funciona, integrá-lo ao projeto e entregar o produto. Para conhecer melhor a proposta, veja [Sobre](../../about/index.md).
 
 ### Por que SF32, e por que agora? { #why-sf32-right-now }
 
-Dois fatores justificaram a criação de uma plataforma documental inteira em torno da SF32.
+Dois fatores nos levaram a criar uma plataforma completa de documentação em torno da SF32.
 
 O primeiro é a diversidade arquitetural. A SF32 não é simplesmente uma CPU mais rápida com mais memória Flash. A família abrange dispositivos de núcleo único, projetos heterogêneos de dois núcleos e plataformas multimídia de três núcleos. A aceleração gráfica e a descompressão por hardware complementam esses processadores, em combinações que variam conforme a família. Assim, as equipes de produto podem equilibrar o desempenho das aplicações, as tarefas sempre ativas e o custo de integração.
 
@@ -23,6 +23,6 @@ Partimos de uma ideia inicial e chegamos a um site de documentação funcional, 
 
 ### Próximos passos { #whats-next }
 
-Nosso foco imediato é ampliar a cobertura e assegurar a precisão: expandir os guias de projeto de hardware e as listas de verificação, e continuar conferindo o conteúdo com a documentação oficial da SiFli à medida que ela é atualizada. Depois, virão mais projetos de referência, exemplos práticos nas seções Desenvolvimento e Tutoriais e melhorias contínuas no seletor de produtos, guiadas pelas dúvidas reais de aquisição que forem surgindo.
+Nosso foco imediato é ampliar a cobertura e assegurar a precisão: expandir os guias de projeto de hardware e os checklists, e continuar conferindo o conteúdo com a documentação oficial da SiFli à medida que ela é atualizada. Depois, virão mais projetos de referência, exemplos práticos nas seções Desenvolvimento e Tutoriais e melhorias contínuas no seletor de produtos, guiadas pelas dúvidas reais de aquisição que forem surgindo.
 
 Se notar algum erro ou informação faltando, [conte para nós](../../about/contact.md). Esse retorno é o que mantém o conteúdo útil.

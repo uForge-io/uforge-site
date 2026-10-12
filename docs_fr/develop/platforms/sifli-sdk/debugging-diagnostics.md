@@ -26,7 +26,7 @@ Conservez les journaux avec la révision de la carte, la branche SDK, les comman
 
 1. Reproduisez le problème avec le même firmware.
 2. Vérifiez s'il réapparaît après une réinitialisation.
-3. Vérifiez s'il réapparaît après avoir reflashé le firmware complet.
+3. Vérifiez s'il réapparaît après un nouveau flashage du firmware complet.
 4. Vérifiez s'il se reproduit avec l'exemple SDK le plus proche.
 5. Réintroduisez les modifications propres au produit une par une.
 
@@ -64,7 +64,7 @@ Cette démarche évite de confondre les problèmes matériels, ceux de la prise 
 
 </div>
 
-## Liste de vérification du rapport de plantage { #crash-report-checklist }
+## Liste de contrôle du rapport de plantage { #crash-report-checklist }
 
 Lors du signalement d'un plantage, incluez :
 

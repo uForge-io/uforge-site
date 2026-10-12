@@ -2,7 +2,7 @@
 icon: lucide/layers
 hide:
     - navigation
-description: "Pautas de diseño de PCB para el MCU SF32LB52x: huella, apilado, fanout, trazado de reloj/RF/audio/USB/SDIO, alimentación y DC-DC, EMI/ESD y otros aspectos del diseño."
+description: "Pautas de diseño de PCB para la MCU SF32LB52x: huella, apilado, fanout, trazado de reloj/RF/audio/USB/SDIO, alimentación y DC-DC, EMI/ESD y otros aspectos del diseño."
 tags:
     - Hardware
     - Chip
@@ -11,7 +11,7 @@ tags:
 # Guía de diseño de hardware SF32LB52x — Pautas de diseño de PCB { #sf32lb52x-hardware-design-guide-pcb-layout-guidelines }
 
 !!! note "Parte de la guía de diseño de hardware SF32LB52x"
-    Esta página cubre la sección 6, Pautas de diseño de PCB. Vuelva a las [Pautas de diseño del esquemático](SF32LB52x_schematic_design.md) (la primera de sus tres páginas), continúe con la [Lista de comprobación del diseño de PCB](SF32LB52x_pcb_layout_checklist.md) o vaya directamente a la [Lista de revisión del diseño y referencias](SF32LB52x_review_and_reference.md).
+    Esta página cubre la sección 6, Pautas de diseño de PCB. Vuelva a las [Pautas de diseño del esquemático](SF32LB52x_schematic_design.md) (la primera de sus tres páginas), continúe con la [Lista de comprobación del diseño de PCB](SF32LB52x_pcb_layout_checklist.md) o vaya directamente a la [Lista de comprobación de revisión del diseño y referencias](SF32LB52x_review_and_reference.md).
 
 ## 6. Pautas de diseño de PCB { #6-pcb-layout-guidelines }
 
@@ -59,7 +59,7 @@ El diseño de referencia admite montaje por una o ambas caras. Los componentes p
 
 <div align="center"><em>Figura 6.2-1: Estructura de apilado de referencia</em></div>
 
-La figura 6.2-1 muestra un apilado de referencia de 0,8 mm ±10%, incluidos el metalizado y la máscara de soldadura. Su espesor total calculado es de 0,79553 mm. Confirme el espesor acabado y la estructura dieléctrica con el fabricante; este ejemplo no es un apilado universal.
+La figura 6.2-1 muestra un apilado de referencia de 0,8 mm ±10 %, incluidos el metalizado y la máscara de soldadura. Su espesor total calculado es de 0,79553 mm. Confirme el espesor acabado y la estructura dieléctrica con el fabricante; este ejemplo no es un apilado universal.
 
 <div align="center"><em>Tabla 6.2-1: Valores del apilado de referencia</em></div>
 
@@ -67,19 +67,19 @@ La figura 6.2-1 muestra un apilado de referencia de 0,8 mm ±10%, incluidos el m
 
 | Capa | Material | Espesor (mil) | Espesor (mm) | Dk | Df |
 |:---|:---|---:|---:|---:|---:|
-| Máscara superior | Máscara de soldadura | 1 | 0.0254 | 3.5 | 0.8 |
-| L1 | Cobre + metalizado | 1.81 | 0.045974 | — | — |
-| Dieléctrico L1–L2 | Prepreg 1080 (66%) x3 | 8.5 | 0.2159 | 3.8 | 0.019 |
-| L2 | Cobre + metalizado | 1.4 | 0.03556 | — | — |
-| Dieléctrico L2–L3 | Núcleo | 5.9 | 0.14986 | 4 | 0.017 |
-| L3 | Cobre + metalizado | 1.4 | 0.03556 | — | — |
-| Dieléctrico L3–L4 | Prepreg 1080 (66%) x3 | 8.5 | 0.2159 | 3.8 | 0.019 |
-| L4 | Cobre + metalizado | 1.81 | 0.045974 | — | — |
-| Máscara inferior | Máscara de soldadura | 1 | 0.0254 | 3.5 | 0.8 |
+| Máscara superior | Máscara de soldadura | 1 | 0,0254 | 3,5 | 0,8 |
+| L1 | Cobre + metalizado | 1,81 | 0,045974 | — | — |
+| Dieléctrico L1–L2 | Prepreg 1080 (66 %) x3 | 8,5 | 0,2159 | 3,8 | 0,019 |
+| L2 | Cobre + metalizado | 1,4 | 0,03556 | — | — |
+| Dieléctrico L2–L3 | Núcleo | 5,9 | 0,14986 | 4 | 0,017 |
+| L3 | Cobre + metalizado | 1,4 | 0,03556 | — | — |
+| Dieléctrico L3–L4 | Prepreg 1080 (66 %) x3 | 8,5 | 0,2159 | 3,8 | 0,019 |
+| L4 | Cobre + metalizado | 1,81 | 0,045974 | — | — |
+| Máscara inferior | Máscara de soldadura | 1 | 0,0254 | 3,5 | 0,8 |
 
 </div>
 
-Las filas de prepreg suponen un área de cobre del 70%. Dk y Df se reproducen de la imagen, incluido el Df de 0,8 de la máscara; no son propiedades universales verificadas. Confirme los datos del material real con el fabricante para calcular impedancia y pérdidas.
+Las filas de prepreg suponen un área de cobre del 70 %. Dk y Df se reproducen de la imagen, incluido el Df de 0,8 de la máscara; no son propiedades universales verificadas. Confirme los datos del material real con el fabricante para calcular impedancia y pérdidas.
 
 ### 6.3. Reglas generales de diseño de PCB { #63-general-pcb-design-rules }
 
@@ -168,7 +168,7 @@ Aplique estas reglas de trazado RF a ambos grupos de diseño:
 
 <div align="center"><em>Figura 6.6-4: Trazado de señal RF en PCB</em></div>
 
-Los ejemplos RF usan un condensador serie de 15 pF/50 V (C0333), dejan C0318/C0319 como NF y muestran un filtro de 0,47 uF en AVDD_BRF. Son valores de montaje de ejemplo, no una receta universal de adaptación de antena.
+Los ejemplos RF usan un condensador en serie de 15 pF/50 V (C0333), dejan C0318/C0319 como NF y muestran un condensador de filtrado de 0,47 µF en AVDD_BRF. Son valores de montaje de ejemplo, no una receta universal de adaptación de antena.
 
 ### 6.7. Trazado de la interfaz de audio { #67-audio-interface-routing }
 
@@ -202,7 +202,7 @@ Aplique estas reglas de trazado de audio a ambos grupos de diseño:
 
 <div align="center"><em>Figura 6.7-6: Diseño de PCB de salida de audio analógico</em></div>
 
-La figura 6.7-1 muestra condensadores de filtro de referencia de 1 uF/6,3 V para MIC_BIAS, 2,2 uF/10 V para AVDD33_AUD y 1 uF/6,3 V para AUD_VREF. Estos valores explican el circuito ilustrado; confirme los necesarios para el diseño real. Además del trazado diferencial, mantenga DACP/DACN alejados de fuentes de interferencia intensa.
+La figura 6.7-1 muestra condensadores de filtrado de referencia de 1 µF/6,3 V para MIC_BIAS, 2,2 µF/10 V para AVDD33_AUD y 1 µF/6,3 V para AUD_VREF. Estos valores explican el circuito ilustrado; confirme los necesarios para el diseño real. Además del trazado diferencial, mantenga DACP/DACN alejados de fuentes de interferencia intensa.
 
 Las pautas del esquemático de la fuente también limitan a menos de 2 cm las pistas de salida DAC.
 
@@ -256,7 +256,7 @@ Coloque el inductor de alimentación y los condensadores de filtro cerca de los 
 
 <div align="center"><em>Figura 6.10-2: Diseño de PCB de los componentes clave DC/DC</em></div>
 
-La figura 6.10-1 usa un inductor de 4,7 uH y un condensador de salida de 4,7 uF/10 V. Sus etiquetas PMU_BUCK_VSW y PMU_BUCK_VOUT corresponden a los nodos de conmutación y salida/realimentación denominados BUCK_LX y BUCK_FB en la tabla de pines de la fuente. No pase otras pistas por la zona del inductor.
+La figura 6.10-1 usa un inductor de 4,7 µH y un condensador de salida de 4,7 µF/10 V. Sus etiquetas PMU_BUCK_VSW y PMU_BUCK_VOUT corresponden a los nodos de conmutación y salida/realimentación denominados BUCK_LX y BUCK_FB en la tabla de pines de la fuente. No pase otras pistas por la zona del inductor.
 
 ### 6.11. Trazado de alimentación { #611-power-supply-routing }
 
@@ -285,7 +285,7 @@ La figura 6.10-1 usa un inductor de 4,7 uH y un condensador de salida de 4,7 uF/
     <div align="center"><em>Figura 6.11-4: Trazado de alimentación VBUS y VBAT (PCB)</em></div>
 
     !!! note "Esquemático de carga de referencia"
-        La figura 6.11-3 muestra 10 uF/10 V en VBUS y 4,7 uF/10 V en VBAT. El rango impreso de VBUS es 4,3–5,5 V; Electrical Specification-A3 indica 4,5–5,5 V, y la nota de aplicación para variantes con batería especifica 4,6–5,5 V para el cargador integrado y exige al menos 4,6 V en el pin VBUS con la corriente máxima de carga. La figura es una referencia de colocación, no valida 4,3 V como límite inferior de funcionamiento. Consulte la nota de discrepancia de fuentes de la sección 5.2.
+        La figura 6.11-3 muestra 10 µF/10 V en VBUS y 4,7 µF/10 V en VBAT. El rango impreso de VBUS es 4,3–5,5 V; Electrical Specification-A3 indica 4,5–5,5 V, y la nota de aplicación para variantes con batería especifica 4,6–5,5 V para el cargador integrado y exige al menos 4,6 V en el pin VBUS con la corriente máxima de carga. La figura es una referencia de colocación, no valida 4,3 V como límite inferior de funcionamiento. Consulte la nota de discrepancia de fuentes de la sección 5.2.
 
 === "52B/D/E/G/J (alimentación con regulador externo)"
 
@@ -312,7 +312,7 @@ Aplique estas reglas de EMI y ESD a ambos grupos de diseño:
 
 ### 6.14. Otras consideraciones { #614-other-considerations }
 
-Coloque los puntos de prueba de la línea de carga USB del lado del conector, antes del punto de protección TVS. Sitúe el TVS de la batería en la entrada a la placa, antes de que la línea se ramifique hacia el MCU y otras cargas. Pase la pista por el punto de conexión del TVS antes de llegar al chip; el TVS se conecta en derivación a tierra, no en serie. Mantenga corta su conexión a tierra.
+Coloque los puntos de prueba de la línea de carga USB del lado del conector, antes del punto de protección TVS. Sitúe el TVS de la batería en la entrada a la placa, antes de que la línea se ramifique hacia la MCU y otras cargas. Pase la pista por el punto de conexión del TVS antes de llegar al chip; el TVS se conecta en derivación a tierra, no en serie. Mantenga corta su conexión a tierra.
 
 ![Figura 6.14-1: Referencia de colocación del TVS de alimentación](../../sf32-products/chips/assets/52xA/sf32LB52x-A-SCH-PMU-TVS.png){ width="100%" loading="lazy" }
 

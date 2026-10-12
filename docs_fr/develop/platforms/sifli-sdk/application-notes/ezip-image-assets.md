@@ -2,15 +2,15 @@
 icon: lucide/image-down
 title: "Compresser les ressources graphiques avec EZIP"
 description: "Convertir des ressources PNG en données binaires EZIP ou PIXEL, en tableaux C pour LVGL et en fichiers GZIP décompressibles par le matériel avec SiFli-SDK."
-tags: [Développement, SiFli-SDK, Notes d’application, EZIP]
+tags: [Développement, SiFli-SDK, Notes d'application, EZIP]
 ---
 
 # Compresser les ressources graphiques avec EZIP { #compress-graphics-assets-with-ezip }
 
-Utilisez l'utilitaire fourni avec la branche du SDK cible : `$SDK_ROOT/tools/png2ezip/ezip.exe`. Il génère des données binaires EZIP/PIXEL ou des tableaux C pour LVGL. Avant la conversion, vérifiez l'en-tête binaire et le format de pixel, puis choisissez la commande correspondante. Si l'image doit être décompressée par le matériel EZIP, suivez la procédure GZIP et la liste de vérification d'intégration à la fin.
+Utilisez l'utilitaire fourni avec la branche du SDK cible : `$SDK_ROOT/tools/png2ezip/ezip.exe`. Il génère des données binaires EZIP/PIXEL ou des tableaux C pour LVGL. Avant la conversion, vérifiez l'en-tête binaire et le format de pixel, puis choisissez la commande correspondante. Si l'image doit être décompressée par le matériel EZIP, suivez la procédure GZIP et la liste de contrôle d'intégration à la fin.
 
 !!! note "Portée par famille"
-    Il s’agit de guides distincts, propres à chaque famille. Pour connaître les différences de formats d’entrée et de sortie pris en charge ou de comportement de l’outil, suivez le guide correspondant à votre cible et utilisez l’outil fourni avec sa branche du SDK. Ne déduisez pas la prise en charge d’une famille à partir du guide d’une autre famille.
+    Il s'agit de guides distincts, propres à chaque famille. Pour connaître les différences de formats d'entrée et de sortie pris en charge ou de comportement de l'outil, suivez le guide correspondant à votre cible et utilisez l'outil fourni avec sa branche du SDK. Ne déduisez pas la prise en charge d'une famille à partir du guide d'une autre famille.
 
 ## Formats de fichier { #1-file-formats }
 
@@ -59,7 +59,7 @@ PIXEL sans canal alpha prend en charge RGB565 et RGB888. PIXEL avec canal alpha 
 
 </div>
 
-Les champs de bits associés aux formats de pixel ci-dessus sont stockés selon l’ordre little-endian.
+Les champs de bits associés aux formats de pixel ci-dessus sont stockés selon l'ordre little-endian.
 
 ## Convertir des ressources PNG { #2-convert-png-assets }
 
@@ -143,7 +143,7 @@ L'outil crée `file.bin.gz`. Ses quatre premiers octets contiennent la longueur 
 
 Transmettez en une seule fois au décompresseur EZIP matériel le flux GZIP complet qui suit le préfixe de longueur de quatre octets. Si une entrée volumineuse risque de dépasser le tampon d'entrée ou de sortie disponible, découpez le fichier d'origine en blocs (le guide SiFli suggère des blocs de 10 KB), compressez chaque bloc indépendamment, puis transmettez les données GZIP de chaque bloc au décompresseur dans l'ordre.
 
-## Liste de vérification d'intégration { #integration-checklist }
+## Liste de contrôle d'intégration { #integration-checklist }
 
 Pour chaque ressource, conservez le PNG source, la ligne de commande, le format couleur/alpha, le fichier généré, la section de l'éditeur de liens, la configuration d'affichage cible et une vérification de rendu sur la carte cible. Si la ressource est stockée en Flash externe, coordonnez sa section et son emplacement dans le système de fichiers avec [Utiliser une mémoire Flash externe](external-flash.md).
 

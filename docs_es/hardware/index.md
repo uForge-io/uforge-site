@@ -36,11 +36,11 @@ Elija el chip o módulo principal del diseño y consulte la guía correspondient
 
 | Familia de chips seleccionada | Guía de diseño de hardware | Lista de comprobación | Empiece aquí para |
 |:------------------------------|:---------------------------|:----------------------|:------------------|
-| SF32LB52x | [Guía](chip-guides/SF32LB52x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | Diseñar una placa con el SF32LB52x montado directamente. |
-| SF32LB55x | [Guía](chip-guides/SF32LB55x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | Diseñar una placa con el SF32LB55x montado directamente. |
-| SF32LB56x | [Guía](chip-guides/SF32LB56x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | Diseñar una placa con el SF32LB56x montado directamente. |
-| SF32LB57x | Guía | Esquema / Diseño de PCB | Diseñar una placa con el SF32LB57x montado directamente. |
-| SF32LB58x | [Guía](chip-guides/SF32LB58x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | Diseñar una placa con el SF32LB58x montado directamente. |
+| SF32LB52x | [Guía](chip-guides/SF32LB52x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | Diseñar una placa chip-down con el SF32LB52x. |
+| SF32LB55x | [Guía](chip-guides/SF32LB55x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | Diseñar una placa chip-down con el SF32LB55x. |
+| SF32LB56x | [Guía](chip-guides/SF32LB56x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | Diseñar una placa chip-down con el SF32LB56x. |
+| SF32LB57x | Guía | Esquemático / Diseño de PCB | Diseñar una placa chip-down con el SF32LB57x. |
+| SF32LB58x | [Guía](chip-guides/SF32LB58x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | Diseñar una placa chip-down con el SF32LB58x. |
 
 </div>
 
@@ -61,10 +61,10 @@ Elija el chip o módulo principal del diseño y consulte la guía correspondient
 ## Siga el proceso de diseño de hardware { #follow-the-hardware-path }
 
 1. **Reutilice un diseño de referencia cuando sea adecuado.** Antes de adaptarlo, reproduzca la configuración de hardware y software que especifica. Si no hay un diseño que encaje, empiece por la guía del dispositivo seleccionado.
-2. **Implemente y revise.** Consulte la guía correspondiente antes de preparar el esquema; después, use su lista de comprobación al revisar el esquema y el diseño de la PCB. Antes de cerrar el diseño de hardware, valide el software y los periféricos previstos en la [placa de desarrollo](../sf32-products/index.md) más parecida. Las pruebas en la placa de desarrollo no sustituyen la validación de la alimentación, las funciones de los pines y la RF en la placa final.
+2. **Implemente y revise.** Consulte la guía correspondiente antes de preparar el esquemático; después, use su lista de comprobación al revisar el esquemático y el diseño de la PCB. Antes de cerrar el diseño de hardware, valide el software y los periféricos previstos en la [placa de desarrollo](../sf32-products/index.md) más parecida. Las pruebas en la placa de desarrollo no sustituyen la validación de la alimentación, las funciones de los pines y la RF en la placa final.
 3. **Consulte la documentación M2 si la placa portadora va a seguir la propuesta M2.** Aplique las [reglas de nomenclatura M2](m2-modules/M2%20Interface%20Naming%20Rules.md) y confirme la [definición de interfaz](m2-modules/M2-interface-definition.md) con el módulo exacto antes de fijar la interfaz; la definición de pines sigue siendo un borrador.
-4. **Verifique los archivos CAD y la selección de componentes.** Use [CAD y componentes](cad-components/components-and-cad-libraries.md) para cotejar, para el número de pieza exacto, el símbolo, la huella, el plano del encapsulado, el AVL y las hipótesis sobre componentes críticos.
-5. **Cierre la revisión de preparación para producción.** Continúe con [Diseño para producción](design-for-production.md) cuando tenga las evidencias del diseño, las desviaciones aprobadas, los riesgos pendientes y las hipótesis de las pruebas de fabricación.
+4. **Verifique los archivos CAD y la selección de componentes.** Use [CAD y componentes](cad-components/components-and-cad-libraries.md) para cotejar, para el número de pieza exacto, el símbolo, la huella, el plano del encapsulado, la AVL y las hipótesis sobre componentes críticos.
+5. **Cierre el criterio de liberación del diseño.** Continúe con [Diseño para producción](design-for-production.md) cuando tenga las evidencias del diseño, las desviaciones aprobadas, los riesgos pendientes y las hipótesis de las pruebas de fabricación.
 
 ## Continúe el desarrollo { #stay-connected-to-the-platform-path }
 

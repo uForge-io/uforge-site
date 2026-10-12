@@ -10,10 +10,10 @@ tags:
 
 OpenSiFli bietet einen Beta-Arduino-Core für SF32 auf Zephyr-Basis an: [OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr). Das Projekt stellt das Arduino-Paket `sifli:sf32lb52` bereit. In Boards Manager erscheint es als **SiFli Serial Boards**; derzeit wird das Board **SiFli SF32LB52 DevKit LCD** unterstützt.
 
-Dieser Arduino-Kern eignet sich für Sketches, schnelle Prüfungen von Peripheriefunktionen, Demos und erste Prototypen. Für Produktionsfirmware, die Feinabstimmung des Bluetooth-Stacks, grafikintensive Anwendungen, die Optimierung des Stromverbrauchs oder die Inbetriebnahme eigener Boards verwenden Sie [SiFli-SDK](../sifli/getting-started-sifli-sdk.md).
+Dieser Arduino-Core eignet sich für Sketches, schnelle Prüfungen von Peripheriefunktionen, Demos und erste Prototypen. Für Produktionsfirmware, die Feinabstimmung des Bluetooth-Stacks, grafikintensive Anwendungen, die Optimierung des Stromverbrauchs oder die Inbetriebnahme eigener Boards verwenden Sie [SiFli-SDK](../sifli/getting-started-sifli-sdk.md).
 
-!!! warning "Beta-Kern"
-    OpenSiFli kennzeichnet diesen Arduino-Kern als **BETA** und empfiehlt, ihn nur zu Testzwecken zu verwenden. Funktionen, APIs, Loader-Verhalten, Paketinhalte und Release-Verfahren können sich ändern. Betrachten Sie ihn nicht als produktionsreif.
+!!! warning "Beta-Core"
+    OpenSiFli kennzeichnet diesen Arduino-Core als **BETA** und weist darauf hin, dass er ausschließlich zu Testzwecken verwendet werden soll. Funktionen, APIs, Loader-Verhalten, Paketinhalte und Release-Verfahren können sich ändern. Betrachten Sie ihn nicht als produktionsreif.
 
 ## Was Sie benötigen { #what-youll-need }
 
@@ -77,7 +77,7 @@ Die OpenSiFli-Board-Definition ordnet dieses Arduino-Board dem Zephyr-Ziel `sf32
 
 ## Build-Optionen wählen { #choose-build-options }
 
-Der Kern stellt zwei wichtige Menüs bereit:
+Der Arduino-Core stellt zwei wichtige Menüs bereit:
 
 <div align="center"><em>Build-Optionen</em></div>
 
@@ -88,11 +88,11 @@ Der Kern stellt zwei wichtige Menüs bereit:
 | **Mode** | `Standard` | Der Sketch startet automatisch nach dem Laden. |
 | **Mode** | `Debug` | Die Zephyr-Shell wartet auf den Befehl `sketch`. |
 | **Link mode** | `Dynamic` | Der Sketch wird für den Zephyr-Loader verpackt. |
-| **Link mode** | `Static` | Der Sketch wird zu einer flashbaren Binärdatei gelinkt. |
+| **Link mode** | `Static` | Der Sketch wird statisch in ein flashfähiges Binärimage gelinkt. |
 
 </div>
 
-Wählen Sie **Dynamic** für den Workflow mit dem Zephyr-Loader. Wählen Sie **Static**, wenn der Sketch in ein flashbares Firmware-Image gelinkt werden soll.
+Wählen Sie **Dynamic** für den Workflow mit dem Zephyr-Loader. Wählen Sie **Static**, wenn der Sketch statisch in ein flashfähiges Firmware-Image gelinkt werden soll.
 
 ## Board in den seriellen Download-Modus versetzen { #put-the-board-in-serial-download-mode }
 
@@ -161,9 +161,9 @@ void loop() {
 
 | Symptom | Prüfung |
 |:--------|:------|
-| Paket erscheint nicht | Bestätigen Sie die Paketindex-URL und verwenden Sie Arduino IDE 2.x. |
+| Paket erscheint nicht | Prüfen Sie, ob die Paketindex-URL stimmt, und verwenden Sie Arduino IDE 2.x. |
 | Upload schlägt fehl | Versetzen Sie das Board in den seriellen Download-Modus und stellen Sie sicher, dass kein serieller Monitor den Port blockiert. |
-| Sketch startet nicht | Bestätigen Sie **Mode**. Führen Sie im Modus `Debug` `sketch` aus der Zephyr-Shell aus. |
+| Sketch startet nicht | Prüfen Sie **Mode**. Führen Sie im Modus `Debug` `sketch` in der Zephyr-Shell aus. |
 | Undefiniertes Zephyr-Symbol | Laut README des Kerns müssen fehlende Zephyr-Funktionen möglicherweise in `loader/llext_exports.c` exportiert und der Loader neu gebaut werden. |
 | Zephyr-Subsystem fehlt | Aktivieren Sie die erforderliche `CONFIG_`-Option in der Board-`.conf`, bauen Sie den Loader neu und laden Sie ihn hoch. |
 | Speicher reicht nicht | Zephyr-Shell und dynamisches Sketch-Laden verbrauchen RAM; reduzieren Sie den Stack-Verbrauch oder wechseln Sie gegebenenfalls den Build-Modus. |

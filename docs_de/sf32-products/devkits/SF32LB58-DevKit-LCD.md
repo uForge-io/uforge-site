@@ -12,7 +12,7 @@ tags:
 
 Das SF32LB58-DevKit-LCD ist ein Entwicklungsboard auf Basis der Modulfamilie SF32LB58-MOD. Es unterstützt Produkte mit DSI-, DPI/RGB- oder QSPI-Displays und bietet eine praxisnahe Plattform, um hochauflösende Bedienoberflächen, Audio, Speicher, USB und die Einbindung von Peripherie zu validieren.
 
-Das Board vereint das SF32LB58x-Modul, mehrere Display-Steckverbinder, einen analogen Mikrofoneingang, einen Stereo-Lautsprecherausgang, MicroSD, zwei USB-Type-C-Anschlüsse, Erweiterungsleisten für den großen Kern und den Low-Power-Kern sowie Zubehörschnittstellen wie CAN und SDIO-WLAN-Erweiterung.
+Das Board vereint das SF32LB58x-Modul, mehrere Display-Steckverbinder, einen analogen Mikrofoneingang, einen Stereo-Lautsprecherausgang, MicroSD, zwei USB-Type-C-Anschlüsse, Erweiterungsleisten für den Hochleistungs- und den Low-Power-Kern sowie Zubehörschnittstellen wie CAN und SDIO-WLAN-Erweiterung.
 
 Nutzen Sie das Board, um Display, Speicher, Audio, USB und externe Peripherie gemeinsam zu validieren, bevor Sie sich auf ein eigenes Design festlegen.
 
@@ -44,7 +44,7 @@ Nutzen Sie das Board, um Display, Speicher, Audio, USB und externe Peripherie ge
 
 | Board-Version | Grundlage | Hinweise |
 | :--- | :--- | :--- |
-| V1.0.1 | SF32LB58-MOD-N16R32N1-V1.0.1 und SF32LB58-MOD-A128R32N1-V1.0.1 | Aktuelle Version; ergänzt die USB-Steckererkennung an PB24; ändert den PTC auf 2 A / 6 V, um die maximale duale Audioausgabe zu unterstützen; entfernt die Pegelwandlerstufe der RGB-LED, da deren Timing ungeeignet ist; ersetzt den DC/DC-Wandler, um die Ausgangswelligkeit zu verringern; entfernt den Pull-up-Widerstand an USB DP, um das Interrupt-Problem im USB-Device-Betrieb zu beheben |
+| V1.0.1 | SF32LB58-MOD-N16R32N1-V1.0.1 und SF32LB58-MOD-A128R32N1-V1.0.1 | Aktuelle Version; ergänzt die USB-Steckererkennung an PB24; ändert die PTC-Auslegung auf 2 A / 6 V, um die maximale Audioausgabe über beide Kanäle zu unterstützen; entfernt die Pegelwandlerstufe der RGB-LED, da deren Timing ungeeignet ist; ersetzt den DC/DC-Wandler, um die Ausgangswelligkeit zu verringern; entfernt den Pull-up-Widerstand an USB DP, um das Interrupt-Problem im USB-Device-Betrieb zu beheben |
 | V1.0.0 | SF32LB58-MOD-N16R32N1-V1.0.0 mit SF32LB587VEE56 | Erste öffentliche Board-Version |
 
 </div>
@@ -54,10 +54,10 @@ Die Quelle von SiFli ist für V1.0.0 widersprüchlich: Der Abschnitt zur Modulve
 ## Highlights des Boards { #board-highlights }
 
 - Modul SF32LB58-MOD-N16R32N1 oder SF32LB58-MOD-A128R32N1, je nach Board-Version
-- V1.0.1 nutzt SF32LB586VDD36 mit zwei 16-MB-HPI-PSRAM und 1 MB QSPI-NOR im Gehäuse; die MCU-Kennung von V1.0.0 widerspricht sich in der SiFli-Quelle (siehe Versionshinweis oben)
+- V1.0.1 nutzt SF32LB586VDD36 mit zwei HPI-PSRAM-Bausteinen zu je 16 MB und 1 MB QSPI-NOR im Gehäuse; die MCU-Kennung von V1.0.0 widerspricht sich in der SiFli-Quelle (siehe Versionshinweis oben)
 - Zusätzlich 16 MB QSPI-NOR oder 128 MB QSPI-NAND, je nach Modulvariante
 - 48-MHz-Hauptquarz und 32,768-kHz-RTC-Quarz
-- IPEX-Antennenanschluss und HF-Anpassnetzwerk des Moduls
+- IPEX-Antennenanschluss und RF-Anpassnetzwerk des Moduls
 - MIPI-DSI- / RGB888-Displayunterstützung über dedizierte FPC-Steckverbinder
 - Zwei QSPI- / DSPI- / SPI-Display-Pfade über 40-polige Stiftleisten
 - Unterstützung für I2C-Touch-Panels
@@ -73,7 +73,7 @@ Wählen Sie das SF32LB58-DevKit-LCD, wenn das Projekt eine realistische High-End
 
 - MIPI-DSI-, RGB888- oder QSPI-Displays in Betrieb nehmen
 - Touch, Audio, Speicher und USB gemeinsam validieren
-- Hochauflösendes UI-Verhalten auf der SF32LB58x-Plattform testen
+- Das Verhalten hochauflösender Benutzeroberflächen auf der SF32LB58x-Plattform testen
 - CAN- oder SDIO-WLAN-Erweiterung evaluieren
 - NOR- und NAND-basierte Modulkonfigurationen vergleichen
 - Firmware auf einem Board der Spitzenklasse validieren, bevor die Arbeit an einer eigenen Leiterplatte beginnt
@@ -97,9 +97,9 @@ Für die Integrationsplanung auf Modulebene lesen Sie zusätzlich [SF32LB58-MOD]
 | USB | USB-zu-UART Type-C und USB 2.0 HS Type-C |
 | USB-zu-UART-Kanäle | Der Modellleitfaden für Boards von SiFli nennt zwei CH343K-USB-zu-UART-Debug-Kanäle; der detaillierte Board-Leitfaden ordnet die Kanäle keinem bestimmten Type-C-Anschluss zu |
 | Speicherkarte | MicroSD-Kartensteckplatz über SDIO |
-| Antenne | HF-Pfad des Moduls mit IPEX-Anschluss |
-| Erweiterung | Zwei 40-polige Stiftleisten für Erweiterung von großem Kern und Low-Power-Kern |
-| Bedienelemente und Testpunkte | Zwei Benutzertasten (HOME/Reset durch langes Drücken und Funktionstaste), eine separate Reset-Taste, MODE-Boot-Jumper sowie Testpunkte für UART/USB/CAN |
+| Antenne | RF-Pfad des Moduls mit IPEX-Anschluss |
+| Erweiterung | Zwei 40-polige Stiftleisten zur Erweiterung des Hochleistungs- und des Low-Power-Kerns |
+| Bedienelemente und Testpunkte | Zwei Benutzertasten (HOME/Reset durch langes Drücken und Funktionstaste), eine separate Reset-Taste, Boot-Jumper „Mode“ sowie Testpunkte für UART/USB/CAN |
 | Spannungswandlung | DC-DC-Wandler auf dem Board; das Änderungsprotokoll von SiFli V1.0.1 verzeichnet einen Wandlerwechsel zur Verringerung der Ausgangswelligkeit, nennt aber keine Bauteilnummer. Prüfen Sie die genaue Revision in Schaltplan/Stückliste. |
 | Abmessungen / Betriebstemperatur | 65 × 50 mm / −40 bis 85 °C |
 
@@ -131,7 +131,7 @@ Für die Integrationsplanung auf Modulebene lesen Sie zusätzlich [SF32LB58-MOD]
 5. Versorgen Sie das Board und laden Sie die Ziel-Firmware herunter oder führen Sie sie aus.
 6. Validieren Sie nach der Display-Inbetriebnahme Touch, Audio, Speicher und alle für das Produkt benötigten Erweiterungsperipheriegeräte.
 
-Verwenden Sie ein echtes datenfähiges USB-Kabel. Manche Type-C-Kabel liefern nur Strom und stellen weder UART noch USB-Datenpfad bereit.
+Verwenden Sie ein USB-Kabel, das Daten übertragen kann. Manche Type-C-Kabel liefern nur Strom und stellen weder UART noch USB-Datenpfad bereit.
 
 ## Stromversorgung { #power }
 
@@ -257,22 +257,22 @@ Das Board unterstützt außerdem die SDIO-WLAN-Erweiterung über die Schnittstel
 
 ## Verwandte Dokumente { #related-documents }
 
-[SF32LB58x-Chipeinführung]: ../chips/SF32LB58x.md
-[SF32LB58x-Benutzerhandbuch]: https://downloads.sifli.com/docs/user%20manual/SF32LB58x/UM5801%E2%80%90SF32LB58x%E2%80%90EN.pdf
+[SF32LB58x Chip Introduction]: ../chips/SF32LB58x.md
+[SF32LB58x User Manual]: https://downloads.sifli.com/docs/user%20manual/SF32LB58x/UM5801%E2%80%90SF32LB58x%E2%80%90EN.pdf
 [SF32LB58-MOD]: ../modules/SF32LB58-MOD.md
-[SF32LB58-MOD-Designpaket]: https://downloads.sifli.com/hardware/files/documentation/SF32LB58-MOD-V1.0.1.zip?
-[SF32LB58-DevKit-LCD-Designpaket]: https://downloads.sifli.com/hardware/files/documentation/SF32LB58-DevKit-LCD-V1.0.1.zip?
-[SF32LB58-DevKit-LCD-LCEDA-Projekt]: https://downloads.sifli.com/hardware/files/documentation/ProPrj_SF32LB58-DevKit-LCD_2025-09-24.epro?
-[Muster kaufen]: https://sifli.taobao.com/
+[SF32LB58-MOD Design Package]: https://downloads.sifli.com/hardware/files/documentation/SF32LB58-MOD-V1.0.1.zip?
+[SF32LB58-DevKit-LCD Design Package]: https://downloads.sifli.com/hardware/files/documentation/SF32LB58-DevKit-LCD-V1.0.1.zip?
+[SF32LB58-DevKit-LCD LCEDA Project]: https://downloads.sifli.com/hardware/files/documentation/ProPrj_SF32LB58-DevKit-LCD_2025-09-24.epro?
+[Buy Samples]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-microchip: __[SF32LB58x-Chipeinführung]__
-- :fontawesome-solid-file-pdf: __[SF32LB58x-Benutzerhandbuch]__
+- :fontawesome-solid-microchip: __[SF32LB58x-Chipeinführung][SF32LB58x Chip Introduction]__
+- :fontawesome-solid-file-pdf: __[SF32LB58x-Benutzerhandbuch][SF32LB58x User Manual]__
 - :fontawesome-solid-cubes: __[SF32LB58-MOD]__
-- :fontawesome-solid-download: __[SF32LB58-MOD-Designpaket]__
-- :fontawesome-solid-download: __[SF32LB58-DevKit-LCD-Designpaket]__
-- :fontawesome-solid-download: __[SF32LB58-DevKit-LCD-LCEDA-Projekt]__
-- :fontawesome-solid-cart-shopping: __[Muster kaufen]__
+- :fontawesome-solid-download: __[SF32LB58-MOD-Designpaket][SF32LB58-MOD Design Package]__
+- :fontawesome-solid-download: __[SF32LB58-DevKit-LCD-Designpaket][SF32LB58-DevKit-LCD Design Package]__
+- :fontawesome-solid-download: __[SF32LB58-DevKit-LCD-LCEDA-Projekt][SF32LB58-DevKit-LCD LCEDA Project]__
+- :fontawesome-solid-cart-shopping: __[Muster kaufen][Buy Samples]__
 
 </div>

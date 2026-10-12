@@ -1,46 +1,46 @@
 ---
 icon: lucide/satellite-dish
 title: "センサーの統合と読み出し"
-description: "SiFli-SDK にセンサーを追加し、RT-Thread 経由で接続してデバイス登録を行い、FinSH シェルから検証するまでの手順を説明します。"
+description: "SiFli-SDKにセンサーを追加し、RT-Thread経由で接続してデバイス登録を行い、FinSHシェルから検証するまでの手順を説明します。"
 tags: [開発, SiFli-SDK, アプリケーションノート, センサー]
 ---
 
 # センサーの統合と読み出し { #integrate-and-read-sensors }
 
-この記事では、SiFli の[センサー統合ガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/sensor.html)を、実用的なドライバー開発手順としてまとめています。同じガイドは SF32LB52x、SF32LB55x、SF32LB56x、SF32LB58x 向けに公開されています。ファイルパスやシンボルを転用する前に、対象 SDK ブランチを確認してください。センサーのデータシートと基板配線の確認から、Kconfig の設定、バスの読み書きコールバック、割り込み処理、RT-Thread センサー登録、コマンドラインでの検証までを扱います。
+この記事では、SiFliの[センサー統合ガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/sensor.html)を、実用的なドライバー開発手順としてまとめています。同じガイドはSF32LB52x、SF32LB55x、SF32LB56x、SF32LB58x向けに公開されています。ファイルパスやシンボルを転用する前に、対象SDKブランチを確認してください。センサーのデータシートと基板配線の確認から、Kconfigの設定、バスの読み書きコールバック、割り込み処理、RT-Threadセンサー登録、コマンドラインでの検証までを扱います。
 
-例では、6 軸センサーの LSM6DSL（加速度センサーとジャイロスコープ）および温度・気圧センサーの BMP280 を使用します。SDK ガイドの API 名とサンプル識別子をそのまま示しています。製品に転用する前に、対象 SDK ブランチを確認してください。
+例では、6軸センサーのLSM6DSL（加速度センサーとジャイロスコープ）および温度・気圧センサーのBMP280を使用します。SDKガイドのAPI名とサンプル識別子をそのまま示しています。製品に転用する前に、対象SDKブランチを確認してください。
 
 !!! note "対象ファミリー"
-    この記事では、SF32LB52x、SF32LB55x、SF32LB56x、SF32LB58x 向けに共通するセンサードライバー開発の流れをまとめています。LSM6DSL/BMP280 のコードは実装例です。実際のバスインスタンス、GPIO 番号、割り込み経路、Kconfig のパス、利用できる周辺機能は、対象ファミリーやボードによって異なります。
+    この記事では、SF32LB52x、SF32LB55x、SF32LB56x、SF32LB58x向けに共通するセンサードライバー開発の流れをまとめています。LSM6DSL/BMP280のコードは実装例です。実際のバスインスタンス、GPIO番号、割り込み経路、Kconfigのパス、利用できる周辺機能は、対象ファミリーやボードによって異なります。
 
 ## ハードウェアとセンサーインターフェースを確認する { #1-confirm-the-hardware-and-sensor-interface }
 
-まずセンサーのデータシートを読み、センサーの機能とホスト側インターフェースを確認します。SDK ガイドでは、6 軸（加速度・ジャイロ）、温度、気圧、地磁気、照度、GPS、モーターの各センサーを例に挙げています。このガイドで扱うホスト側インターフェースは I2C、SPI、UART です。
+まずセンサーのデータシートを読み、センサーの機能とホスト側インターフェースを確認します。SDKガイドでは、6軸（加速度・ジャイロ）、温度、気圧、地磁気、照度、GPS、モーターの各センサーを例に挙げています。このガイドで扱うホスト側インターフェースはI2C、SPI、UARTです。
 
 ドライバーを実装する前に、次を確認してください。
 
 - ハードウェア設計を確認し、選択したバスが有効になっていて、パッケージの端子まで配線されていること。
-- センサーと SF32 デバイスの電圧範囲および周波数範囲に互換性があること。
+- センサーとSF32デバイスの電圧範囲および周波数範囲に互換性があること。
 - バス名、デバイスアドレス、チップセレクト（該当する場合）、電源制御、リセット、割り込みピンを特定すること。
 - ドライバーがアプリケーションに提供するデータ操作と制御操作を、アプリケーション担当者と合意すること。
 
 ## ドライバーとビルド設定を準備する { #2-prepare-the-driver-and-build-configuration }
 
-SiFli-SDK の周辺機器ドライバーは `rtos/rthread/bsp/sifli/peripherals` 以下にあります。バスと実装方式を決めたら、新しいデバイス用のディレクトリを追加します。`rtos/rthread/bsp/sifli/peripherals/Kconfig` に `menuconfig` エントリーを追加し、次の項目を含めます。
+SiFli-SDKの周辺機器ドライバーは`rtos/rthread/bsp/sifli/peripherals`以下にあります。バスと実装方式を決めたら、新しいデバイス用のディレクトリを追加します。`rtos/rthread/bsp/sifli/peripherals/Kconfig`に`menuconfig`エントリーを追加し、次の項目を含めます。
 
 - センサーの有効化スイッチ。
-- 対応するバスの選択と名称（I2C、SPI、UART など）。
-- 電源、リセット、チップセレクト、割り込み用 GPIO の設定。
-- 活動検出、歩数計、FIFO などの任意のセンサー機能。
+- 対応するバスの選択と名称（I2C、SPI、UARTなど）。
+- 電源、リセット、チップセレクト、割り込み用GPIOの設定。
+- 活動検出、歩数計、FIFOなどの任意のセンサー機能。
 
-新しいディレクトリにドライバーを実装します。ボード固有の値をハードコードせず、バス名、GPIO 番号、割り込み番号は Kconfig シンボルから読み取ります。最後に、そのディレクトリの `SConscript` ファイルでドライバーと Kconfig シンボルを関連付けます。
+新しいディレクトリにドライバーを実装します。ボード固有の値をハードコードせず、バス名、GPIO番号、割り込み番号はKconfigシンボルから読み取ります。最後に、そのディレクトリの`SConscript`ファイルでドライバーとKconfigシンボルを関連付けます。
 
-プロジェクトディレクトリから `menuconfig` を実行し、**Select board peripherals** を選択して新しいモジュールを有効化します。その配下の設定でボード固有の値を設定します。
+プロジェクトディレクトリから`menuconfig`を実行し、**Select board peripherals** を選択して新しいモジュールを有効化します。その配下の設定でボード固有の値を設定します。
 
-## Kconfig でインターフェースを設定する { #3-configure-the-interface-in-kconfig }
+## Kconfigでインターフェースを設定する { #3-configure-the-interface-in-kconfig }
 
-次の Kconfig 例は SF32LB52x ガイドから抜粋したもので、6 軸センサーグループの下で LSM6DSL を有効にします。`SENSOR_USING_6D` はグループ全体のスイッチで、その子スイッチが LSM6DSL の実装を選択します。
+次のKconfig例はSF32LB52xガイドから抜粋したもので、6軸センサーグループの下でLSM6DSLを有効にします。`SENSOR_USING_6D`はグループ全体のスイッチで、その子スイッチがLSM6DSLの実装を選択します。
 
 ```kconfig
 menuconfig SENSOR_USING_6D
@@ -79,19 +79,19 @@ menuconfig SENSOR_USING_6D
     endif
 ```
 
-グループスイッチには、LSM6DSL や SC7A20 など複数の対応モデルを含めることができます。外部インターフェースが競合しないよう、1 つのバス構成では対象モデルだけを有効にしてください。この例の各設定は次のとおりです。
+グループスイッチには、LSM6DSLやSC7A20など複数の対応モデルを含めることができます。外部インターフェースが競合しないよう、1つのバス構成では対象モデルだけを有効にしてください。この例の各設定は次のとおりです。
 
-- `ACC_USING_LSM6DSL` は LSM6DSL ドライバーを有効にします。
-- `LSM6DSL_USING_I2C` は I2C（`1`）または SPI（`0`）を選択します。センサーが 1 種類のインターフェースにしか対応しない場合、このシンボルは省略します。
-- `LSM6DSL_BUS_NAME` は、RT-Thread センサードライバーが検索するバスデバイス名です。
-- ボードで割り当てている場合、`LSM6DSL_INT_GPIO_BIT` と `LSM6DSL_INT2_GPIO_BIT` に割り込みピンを指定します。
-- `LSM_USING_AWT`、`LSM_USING_PEDO`、`LSM6DSL_USE_FIFO` はデバイス固有の機能です。選択したドライバーが対応する場合にのみ定義します。
+- `ACC_USING_LSM6DSL`はLSM6DSLドライバーを有効にします。
+- `LSM6DSL_USING_I2C`はI2C（`1`）またはSPI（`0`）を選択します。センサーが1種類のインターフェースにしか対応しない場合、このシンボルは省略します。
+- `LSM6DSL_BUS_NAME`は、RT-Threadセンサードライバーが検索するバスデバイス名です。
+- ボードで割り当てている場合、`LSM6DSL_INT_GPIO_BIT`と`LSM6DSL_INT2_GPIO_BIT`に割り込みピンを指定します。
+- `LSM_USING_AWT`、`LSM_USING_PEDO`、`LSM6DSL_USE_FIFO`はデバイス固有の機能です。選択したドライバーが対応する場合にのみ定義します。
 
-この例は SF32LB52x ガイドに準拠しています。他のファミリーのガイドや SDK ブランチでは、オプションやメニューのパスが異なる場合があります。例を適用する前に、対象ブランチで実際のシンボルを確認してください。
+この例はSF32LB52xガイドに準拠しています。他のファミリーのガイドやSDKブランチでは、オプションやメニューのパスが異なる場合があります。例を適用する前に、対象ブランチで実際のシンボルを確認してください。
 
 ### バスを取得してレジスターアクセスを実装する { #find-the-bus-and-implement-register-access }
 
-`rt_i2c_bus_device_find` または `rt_device_find` でバスデバイスを取得し、選択したインターフェースに対応するバス読み書き API を呼び出します。デバイスアドレス、レジスターマップ、コマンドシーケンス、レジスター幅については、センサーのデータシートを一次情報として扱ってください。
+`rt_i2c_bus_device_find`または`rt_device_find`でバスデバイスを取得し、選択したインターフェースに対応するバス読み書きAPIを呼び出します。デバイスアドレス、レジスターマップ、コマンドシーケンス、レジスター幅については、センサーのデータシートを一次情報として扱ってください。
 
 ```c
 int LSM6DSL_I2C_Init()
@@ -149,11 +149,11 @@ int32_t LSM_I2C_Read(void *ctx, uint8_t reg, uint8_t *data, uint16_t len)
 }
 ```
 
-このサンプルは、バスが見つからない場合に `-1`、バス転送が失敗した場合に `-2`、コンテキスト、バスハンドル、データポインターが無効な場合に `-3` を返します。エラー処理方針は、周辺のドライバー実装に合わせてください。
+このサンプルは、バスが見つからない場合に`-1`、バス転送が失敗した場合に`-2`、コンテキスト、バスハンドル、データポインターが無効な場合に`-3`を返します。エラー処理方針は、周辺のドライバー実装に合わせてください。
 
 ### センサー割り込みを設定する { #configure-a-sensor-interrupt }
 
-`rt_pin_mode` で割り込みピンを入力に設定し、`rt_pin_attach_irq` でハンドラーとトリガー条件を登録します。割り込みの有効／無効は `rt_pin_irq_enable` で切り替えます。SDK では、立ち上がりエッジ（`PIN_IRQ_MODE_RISING`）、立ち下がりエッジ（`PIN_IRQ_MODE_FALLING`）、両エッジ（`PIN_IRQ_MODE_RISING_FALLING`）、High／Low レベル（`PIN_IRQ_MODE_HIGH_LEVEL`／`PIN_IRQ_MODE_LOW_LEVEL`）の各トリガーに対応しています。ハンドラーの内容はセンサーによって異なります。
+`rt_pin_mode`で割り込みピンを入力に設定し、`rt_pin_attach_irq`でハンドラーとトリガー条件を登録します。割り込みの有効／無効は`rt_pin_irq_enable`で切り替えます。SDKでは、立ち上がりエッジ（`PIN_IRQ_MODE_RISING`）、立ち下がりエッジ（`PIN_IRQ_MODE_FALLING`）、両エッジ（`PIN_IRQ_MODE_RISING_FALLING`）、High／Lowレベル（`PIN_IRQ_MODE_HIGH_LEVEL`／`PIN_IRQ_MODE_LOW_LEVEL`）の各トリガーに対応しています。ハンドラーの内容はセンサーによって異なります。
 
 ```c
 int lsm6dsl_gpio_int_enable(void)
@@ -184,16 +184,16 @@ int lsm6dsl_gpio_int_enable(void)
 }
 ```
 
-## RT-Thread センサーデバイスを登録する { #4-register-the-rt-thread-sensor-device }
+## RT-Threadセンサーデバイスを登録する { #4-register-the-rt-thread-sensor-device }
 
-新しいデバイス用のディレクトリに `sensor_xxx.c` を追加します。このファイルでは、RT-Thread のセンサーフレームワーク経由でデバイスを公開し、アプリケーションコードがバス固有のレジスター関数を直接呼び出さずにセンサーを使えるようにします。
+新しいデバイス用のディレクトリに`sensor_xxx.c`を追加します。このファイルでは、RT-Threadのセンサーフレームワーク経由でデバイスを公開し、アプリケーションコードがバス固有のレジスター関数を直接呼び出さずにセンサーを使えるようにします。
 
-登録処理は次の 2 つで構成されます。
+登録処理は次の2つで構成されます。
 
-1. 1 つ以上の `rt_sensor_device` インスタンスを割り当て、`rt_hw_sensor_register` で登録する。
-2. データ読み出し、動作モード制御、スリープ／復帰処理の `sensor_ops` コールバックを用意する。
+1. 1つ以上の`rt_sensor_device`インスタンスを割り当て、`rt_hw_sensor_register`で登録する。
+2. データ読み出し、動作モード制御、スリープ／復帰処理の`sensor_ops`コールバックを用意する。
 
-SDK ガイドの BMP280 の例では、温度と気圧のチャンネルを別々に登録し、それぞれの単位と範囲を設定したうえで、共通設定をコピーし、コールバックテーブルを共有しています。
+SDKガイドのBMP280の例では、温度と気圧のチャンネルを別々に登録し、それぞれの単位と範囲を設定したうえで、共通設定をコピーし、コールバックテーブルを共有しています。
 
 ```c
 int rt_hw_bmp280_init(const char *name, struct rt_sensor_config *cfg)
@@ -276,17 +276,17 @@ __exit:
 
 `type`、`vendor`、`model`、`unit`、`intf_type`、有効範囲、最小周期には、デバイスのデータシートに記載された値を設定します。メモリー確保またはいずれかの登録が失敗した場合も、必要なリソースをすべて解放できるようにしてください。
 
-**ソース例のクリーンアップに関する注意：**温度デバイスの登録に成功した後、気圧デバイスのメモリー確保または登録に失敗すると、例のクリーンアップ処理は温度デバイスを登録解除せずに解放します。製品コードでは、登録に成功したデバイスを記録し、対象 RT-Thread バージョンがサポートする削除 API で登録解除してから、その領域を解放してください。この失敗時の処理をそのまま流用しないでください。
+**ソース例のクリーンアップに関する注意：**温度デバイスの登録に成功した後、気圧デバイスのメモリー確保または登録に失敗すると、例のクリーンアップ処理は温度デバイスを登録解除せずに解放します。製品コードでは、登録に成功したデバイスを記録し、対象RT-Threadバージョンがサポートする削除APIで登録解除してから、その領域を解放してください。この失敗時の処理をそのまま流用しないでください。
 
-## FinSH からドライバーを検証する { #5-validate-the-driver-from-finsh }
+## FinSHからドライバーを検証する { #5-validate-the-driver-from-finsh }
 
-ドライバーをイメージに組み込んだら、コマンドライン関数を追加し、`FINSH_FUNCTION_EXPORT_ALIAS` で登録します。検証コマンドには、次の確認項目を含めると有効です。
+ドライバーをイメージに組み込んだら、コマンドライン関数を追加し、`FINSH_FUNCTION_EXPORT_ALIAS`で登録します。検証コマンドには、次の確認項目を含めると有効です。
 
 - センサーの初期化とデバイスアドレスの検出。
-- I2C または SPI 経由でのレジスター読み書き。
+- I2CまたはSPI経由でのレジスター読み書き。
 - 気圧、温度、加速度など、センサー固有の機能の測定結果。
 
-次の BMP280 テストコマンドは、デバイスのオープン／クローズ、レジスター読み出し、温度・気圧・高度の取得、I2C バス速度の設定例です。
+次のBMP280テストコマンドは、デバイスのオープン／クローズ、レジスター読み出し、温度・気圧・高度の取得、I2Cバス速度の設定例です。
 
 ```c
 #define DRV_BMP280_TEST
@@ -354,17 +354,17 @@ FINSH_FUNCTION_EXPORT_ALIAS(cmd_bmpt, __cmd_bmpt, Test driver bmp280);
 #endif //DRV_BMP280_TEST
 ```
 
-読み出し値を有効と判断する前に、デバイスアドレスを確認し、既知の ID レジスターまたはキャリブレーションレジスターを読み出して、実測値が想定範囲にあることを確かめます。このコマンド例は基本的な立ち上げ確認用であり、そのまま製品用 CLI として使えるものではありません。製品に組み込む前に、各サブコマンドの引数の個数と値の範囲を検証し、デバイス/API 呼び出しの戻り値を確認したうえで、境界チェックを追加してください。
+読み出し値を有効と判断する前に、デバイスアドレスを確認し、既知のIDレジスターまたはキャリブレーションレジスターを読み出して、実測値が想定範囲にあることを確かめます。このコマンド例は基本的な立ち上げ確認用であり、そのまま製品用CLIとして使えるものではありません。製品に組み込む前に、各サブコマンドの引数の個数と値の範囲を検証し、デバイス/API呼び出しの戻り値を確認したうえで、境界チェックを追加してください。
 
 ## 関連ページ { #related-pages }
 
 - [ボード設定](../board-configuration.md)：ボードが管理するバス、ピン、周辺機器の設定。
-- [コンポーネントと `sf-pkg`](../components.md)：ドライバーが使用するパッケージ依存関係。
-- [SDK アプリケーションノート](../sdk-application-notes.md)：アプリケーションノートの一覧。
+- [コンポーネントと`sf-pkg`](../components.md)：ドライバーが使用するパッケージ依存関係。
+- [SDKアプリケーションノート](../sdk-application-notes.md)：アプリケーションノートの一覧。
 
 ## 公式ソース { #official-source }
 
-- [センサー追加ガイド — SiFli SDK プログラミングガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/sensor.html)
-- [SF32LB55x センサーガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/sensor.html)
-- [SF32LB56x センサーガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/sensor.html)
-- [SF32LB58x センサーガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/sensor.html)
+- [センサー追加ガイド — SiFli SDKプログラミングガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/sensor.html)
+- [SF32LB55xセンサーガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/sensor.html)
+- [SF32LB56xセンサーガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/sensor.html)
+- [SF32LB58xセンサーガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/sensor.html)

@@ -19,7 +19,7 @@ Leia também a [Visão geral do projeto de baixo consumo de energia](overview.md
 
 ## Visão geral do sistema { #smartwatch-system-overview }
 
-Comece definindo os limites do modelo. A planilha representa um smartwatch alimentado por bateria, com MCU, display AMOLED, motor de vibração e uma categoria de cargas não discriminadas chamada `Other`. Ela não informa tamanho, resolução ou brilho do painel, arquitetura de rádio nem sensores individuais. Trate as correntes do display como entradas do modelo, não como medições nem como especificações de um painel específico. `Other` delimita cargas ainda não identificadas no modelo; não representa um único componente físico.
+Comece definindo os limites do modelo. A planilha representa um smartwatch alimentado por bateria, com MCU, display AMOLED, motor de vibração e uma categoria agregada `Other` para cargas ainda não discriminadas. Ela não informa tamanho, resolução ou brilho do painel, arquitetura de rádio nem sensores individuais. Trate as correntes do display como entradas do modelo, não como medições nem como especificações de um painel específico. `Other` reúne cargas ainda não identificadas; não representa um único componente físico.
 
 <div align="center"><em>Tabela: sistema do smartwatch e entradas do modelo</em></div>
 
@@ -28,7 +28,7 @@ Comece definindo os limites do modelo. A planilha representa um smartwatch alime
 | Item | Valor na planilha | Por que importa |
 |:-----|----------------------:|:---------------|
 | Corrente do AMOLED em uso normal | 15 mA | Usada em notificações, alertas de chamada e acionamento da tela pelo gesto de erguer o pulso. |
-| Corrente do AMOLED com tela sempre ativa (AOD) | 2 mA | Definida no modelo, mas o cenário AOD está desativado nesta configuração de referência. |
+| Corrente do AMOLED com display sempre ativo (AOD) | 2 mA | Definida no modelo, mas o cenário AOD está desativado nesta configuração de referência. |
 | Capacidade nominal da bateria | 250 mAh | Capacidade inicial, antes da margem aplicada pelo modelo. |
 | Margem para degradação da bateria | 7% | Reduz a capacidade disponível para 232,5 mAh. |
 | Tensão nominal da bateria | 3,87 V | Usada no cálculo auxiliar de normalização de tensão da planilha. |
@@ -37,7 +37,7 @@ Comece definindo os limites do modelo. A planilha representa um smartwatch alime
 
 ## Consumo por cenário { #power-consumption-by-scenario }
 
-Um cenário representa um evento completo do usuário ou do sistema, não o funcionamento isolado de um componente. Uma notificação de mensagem pode acordar o MCU, acender o AMOLED, acionar o motor de vibração e manter cargas de fundo ativas. Na matriz de origem, cada linha `Display` corresponde ao AMOLED. A matriz agrupa as linhas dos componentes de cada cenário e mantém os valores diários calculados para permitir sua conferência. As hipóteses de frequência e duração que determinam esses valores são detalhadas mais adiante, no perfil diário de uso.
+Um cenário representa um evento completo do usuário ou do sistema, não o funcionamento isolado de um componente. Uma notificação de mensagem pode despertar o MCU, acender o AMOLED, acionar o motor de vibração e manter cargas de fundo ativas. Na matriz de origem, cada linha `Display` corresponde ao AMOLED. A matriz agrupa as linhas dos componentes de cada cenário e mantém os valores diários calculados para permitir sua conferência. As hipóteses de frequência e duração que determinam esses valores são detalhadas mais adiante, no perfil diário de uso.
 
 <div align="center"><em>Tabela: modelo completo de consumo por componente</em></div>
 
@@ -262,7 +262,7 @@ A planilha tem uma categoria explícita `MCU`, mas não isola a renderização g
 | Grupo de atividade do MCU | Consumo diário | Participação no consumo diário total | Participação na carga do MCU | Interpretação |
 |:-------------------|------------:|----------------------------:|--------------------:|:---------------|
 | Standby de referência | 1,49 mAh | 8,40% | 32,18% | 0,102 mA durante as 14,56 h restantes do modelo. É uma hipótese para a categoria MCU no sistema, não uma medição verificada da fuga do die isolado. |
-| Interação com a tela ligada | 1,30 mAh | 7,36% | 28,19% | Cenários de mensagem, chamada recebida, acionamento da tela pelo gesto de erguer o pulso, SpO2, exercício, alarme e sincronização. Inclui o processamento dos eventos e qualquer trabalho gráfico. |
+| Interação com o display ligado | 1,30 mAh | 7,36% | 28,19% | Cenários de mensagem, chamada recebida, acionamento da tela pelo gesto de erguer o pulso, SpO2, exercício, alarme e sincronização. Inclui o processamento dos eventos e qualquer trabalho gráfico. |
 | Monitoramento do sono | 1,66 mAh | 9,41% | 36,04% | 0,208 mA durante 8 h; a maior contribuição individual do MCU no modelo. |
 | Medição automática de frequência cardíaca | 0,17 mAh | 0,94% | 3,59% | Medições programadas e o trabalho correspondente do MCU. |
 | **Total do MCU** | **4,62 mAh** | **26,11%** | **100%** | Soma de todos os itens explicitamente atribuídos ao MCU na planilha. |
@@ -275,14 +275,14 @@ A planilha tem uma categoria explícita `MCU`, mas não isola a renderização g
 pie showData
     title Consumo diário do MCU (mAh/dia) por grupo de atividade
     "Standby de referência" : 1.4854
-    "Interação com a tela ligada" : 1.3013
+    "Interação com o display ligado" : 1.3013
     "Monitoramento do sono" : 1.6640
     "Medição automática de frequência cardíaca" : 0.1656
 ```
 
 Duas comparações ajudam a evitar uma conclusão enganosa:
 
-- **Item de referência do MCU em standby versus itens dos cenários com a tela ligada:** o standby de referência contribui com 1,49 mAh/dia, um pouco mais que os 1,30 mAh/dia atribuídos ao MCU no conjunto dos cenários de interação com a tela ligada. Neste modelo, reduzir a corrente de referência presumida é pelo menos tão importante quanto reduzir o trabalho total do MCU associado a esses cenários. A planilha não mede separadamente os períodos de processamento gráfico.
+- **Item de referência do MCU em standby versus itens dos cenários com o display ligado:** o standby de referência contribui com 1,49 mAh/dia, um pouco mais que os 1,30 mAh/dia atribuídos ao MCU no conjunto dos cenários de interação com o display ligado. Neste modelo, reduzir a corrente de referência presumida é pelo menos tão importante quanto reduzir o trabalho total do MCU associado a esses cenários. A planilha não mede separadamente os períodos de processamento gráfico.
 - **Item de referência do MCU em standby versus os demais itens explícitos do MCU:** os demais itens atribuídos ao MCU somam 3,13 mAh/dia, ou 2,11 vezes o valor de referência. O monitoramento do sono é o maior item individual fora do standby de referência, com 1,66 mAh/dia; trata-se de uma atribuição de consumo do MCU a um cenário, não de uma medição exclusiva da corrente da CPU em atividade.
 
 A planilha não tem uma categoria exclusiva para sensores. `Other` é a única categoria que poderia incluir seu consumo, mas também pode conter PMIC, rádio, correntes de fuga ou outras cargas de fundo. Ela soma 1,29 mAh/dia (7,28%). Mesmo que todo o consumo de `Other` fosse atribuído aos sensores, o item explícito do MCU ainda seria maior: 4,62 mAh/dia contra 1,29 mAh/dia, cerca de 3,59 vezes mais. Esta é uma comparação entre categorias do modelo, não uma medição direta do silício do MCU em relação aos sensores. A parcela real dos sensores só pode ser determinada quando o modelo separar suas linhas de alimentação da categoria genérica `Other`.
@@ -294,7 +294,7 @@ A planilha não tem uma categoria exclusiva para sensores. `Other` é a única c
 | Pergunta | Limite atual da planilha | Medição necessária |
 |:---------|:--------------------------|:-------------------|
 | Qual é a corrente de fuga do MCU? | A corrente de referência de `MCU` inclui mais que a fuga do die isolado. | Meça a alimentação do MCU no estado de suspensão previsto e, separadamente, as correntes de fuga da placa. |
-| Quanta energia a renderização gráfica consome? | O tempo do MCU com a tela ligada também inclui despertar, processamento de eventos e trabalho do driver do display. | Marque o intervalo de renderização no firmware e integre a corrente nesse intervalo. |
+| Quanta energia a renderização gráfica consome? | O tempo do MCU com o display ligado também inclui despertar, processamento de eventos e trabalho do driver do display. | Marque o intervalo de renderização no firmware e integre a corrente nesse intervalo. |
 | Que parte do consumo corresponde aos sensores? | Os sensores não têm categoria própria; podem estar em `Other`. | Meça a alimentação de cada sensor ou acrescente uma linha à planilha para cada modo e ciclo de trabalho. |
 | O que resta em `Other`? | PMIC, rádio, correntes de fuga e sensores estão agrupados. | Desative ou isole uma linha de alimentação ou um subsistema de cada vez e confira o total no lado da bateria. |
 
@@ -305,7 +305,7 @@ A planilha não tem uma categoria exclusiva para sensores. `Other` é a única c
 Comece pela maior contribuição modelada e valide a ordem por medição. Neste modelo, uma sequência razoável é:
 
 1. **Política do display:** meça a curva de corrente completa do gesto de erguer o pulso para ativar a tela. Reduza falsos acionamentos, tempo de tela ligada, brilho, redesenhos de tela inteira e animações desnecessárias antes de buscar reduções de poucos microampères no MCU.
-2. **Política de notificações:** agrupe notificações não urgentes quando a experiência do produto permitir. Verifique se todo evento precisa acionar tanto a tela quanto a vibração.
+2. **Política de notificações:** agrupe notificações não urgentes quando a experiência do produto permitir. Verifique se todo evento precisa acionar tanto o display quanto a vibração.
 3. **Standby conectado:** confirme que o MCU atinge o estado de suspensão previsto após cada evento. Revise timers periódicos, laços de polling, callbacks do Bluetooth e solicitações de estado ao gerenciamento de energia.
 4. **Padrões de vibração:** ajuste amplitude e duração com testes de percepção. Um padrão mais curto ou suave pode reduzir a energia sem prejudicar a utilidade dos alertas.
 5. **Sensoriamento prolongado:** analise monitoramento do sono e registro de exercício como cenários completos, incluindo ciclo de trabalho dos sensores, processamento, acessos à memória e atividade de rádio.
@@ -322,7 +322,7 @@ O modelo ganha utilidade quando é continuamente ajustado às medições. Para c
 
 | Cenário analisado | O que medir | O que atualizar no modelo |
 |:---------------|:----------------|:---------------------------------|
-| Standby com a tela desligada | Corrente média e despertares inesperados em uma captura longa | Correntes de referência de MCU, sensores, PMIC e outras cargas de fundo. |
+| Standby com o display desligado | Corrente média e despertares inesperados em uma captura longa | Correntes de referência de MCU, sensores, PMIC e outras cargas de fundo. |
 | Acionamento da tela pelo gesto de erguer o pulso | Detecção do gesto, latência de despertar, corrente do display e tempo de tela ligada | Número real de eventos, duração da tela ligada e custo energético da interface. |
 | Notificação | Atividade de MCU, display, motor de vibração e Bluetooth durante um alerta | Energia por notificação e frequência diária correta. |
 | Monitoramento do sono | Uma curva de corrente de toda a noite ou uma janela representativa e repetível | Ciclo de trabalho dos sensores e consumo do processamento periódico. |

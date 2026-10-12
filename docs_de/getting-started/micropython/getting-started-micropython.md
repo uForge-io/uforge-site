@@ -8,7 +8,7 @@ tags:
 
 # MicroPython { #micropython }
 
-Für SF32 gibt es noch keinen verifizierten Einstieg mit MicroPython. In den geprüften SiFli- und OpenSiFli-Quellen sind derzeit weder ein offizielles boardspezifisches Firmware-Image noch ein Flash-Verfahren oder eine REPL-Konfiguration dokumentiert.
+Für SF32 gibt es noch keinen verifizierten Einstieg mit MicroPython. In den geprüften SiFli- und OpenSiFli-Quellen sind derzeit weder ein offizielles boardspezifisches Firmware-Image noch ein Flash-Verfahren noch eine REPL-Konfiguration dokumentiert.
 
 Verwenden Sie [SiFli-SDK](../sifli/getting-started-sifli-sdk.md), um eine reproduzierbare Basis für Board, Kabel, seriellen Port und Flash-Vorgang herzustellen. Folgen Sie keinen allgemeinen MicroPython-Installationsanweisungen und verwenden Sie kein Image, das für einen anderen Mikrocontroller oder ein anderes Board bestimmt ist.
 

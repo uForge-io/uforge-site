@@ -163,7 +163,7 @@ A Nano expõe dois grupos de pinos nas bordas. O primeiro reúne áudio, SPI1, U
 
 ## Interface LCD { #lcd-interface }
 
-A placa suporta telas LCD QSPI por meio de um conjunto de sinais FPC de 16 pinos. A nota original da placa descreve a conexão com a tela AMOLED de 1,85 polegadas do Huangshan Pi usando um cabo FPC adaptador de 22 para 16 pinos.
+A placa suporta displays LCD QSPI por meio de um conjunto de sinais FPC de 16 pinos. A nota original da placa descreve a conexão com o display AMOLED de 1,85 polegadas do Huangshan Pi usando um cabo FPC adaptador de 22 para 16 pinos.
 
 ![Cabo adaptador FPC de 22 para 16 pinos](assets/sf32lb52x/22p-to-16p.png){ loading="lazy" }
 <div align="center"><em>Cabo adaptador FPC de 22 para 16 pinos</em></div>
@@ -186,10 +186,10 @@ A placa suporta telas LCD QSPI por meio de um conjunto de sinais FPC de 16 pinos
 | 10 | PA08 | LCD D3 / PDM1_DAT |
 | 11 | 3.3V | Saída de alimentação do display |
 | 12 | GND | Terra |
-| 13 | PA09 | Interrupção do touch |
-| 14 | PA11 | I2C SDA do touch |
-| 15 | PA20 | I2C SCL do touch |
-| 16 | PA10 | Reset do touch |
+| 13 | PA09 | Interrupção do toque |
+| 14 | PA11 | I2C SDA do toque |
+| 15 | PA20 | I2C SCL do toque |
+| 16 | PA10 | Reset do toque |
 
 </div>
 
@@ -230,18 +230,18 @@ Esses nomes identificam alvos de compilação do SDK e não necessariamente corr
 
 ## Documentos relacionados { #related-documents }
 
-[Apresentação do chip SF32LB52x]: ../chips/SF32LB52x.md
-[Guia de projeto de hardware SF32LB52x]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
-[Artigo original da Wiki da SiFli]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-Nano.md
-[Pacote de projeto]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-DevKit-Nano_V1.0.0.zip?
-[Comprar amostras]: https://sifli.taobao.com/
+[SF32LB52x Chip Introduction]: ../chips/SF32LB52x.md
+[SF32LB52x Hardware Design Guide]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
+[Original SiFli Wiki Article]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-Nano.md
+[Design Package]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-DevKit-Nano_V1.0.0.zip?
+[Buy Samples]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-microchip: __[Apresentação do chip SF32LB52x]__
-- :fontawesome-solid-file-lines: __[Guia de projeto de hardware SF32LB52x]__
-- :fontawesome-brands-github: __[Artigo original da Wiki da SiFli]__
-- :fontawesome-solid-download: __[Pacote de projeto]__
-- :fontawesome-solid-cart-shopping: __[Comprar amostras]__
+- :fontawesome-solid-microchip: __[Apresentação do chip SF32LB52x][SF32LB52x Chip Introduction]__
+- :fontawesome-solid-file-lines: __[Guia de projeto de hardware SF32LB52x][SF32LB52x Hardware Design Guide]__
+- :fontawesome-brands-github: __[Artigo original da Wiki da SiFli][Original SiFli Wiki Article]__
+- :fontawesome-solid-download: __[Pacote de projeto][Design Package]__
+- :fontawesome-solid-cart-shopping: __[Comprar amostras][Buy Samples]__
 
 </div>

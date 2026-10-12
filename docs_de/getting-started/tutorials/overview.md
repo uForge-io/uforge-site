@@ -7,9 +7,9 @@ tags:
 
 # Tutorial-Übersicht { #tutorials-overview }
 
-Diese Reihe baut auf dem ersten erfolgreichen Flash-Vorgang auf und vermittelt praktische Entwicklungsfähigkeiten für SF32. Sie ist nach technischem Umfang organisiert: zuerst die Funktion eines Peripheriegeräts prüfen, dann Subsysteme kombinieren und schließlich die nötigen Nachweise für ein Produkt erbringen. Die Tutorials verwenden SiFli-SDK-Beispiele als Ausgangspunkt. Hardware zu prüfen, eine bewährte Ausgangskonfiguration beizubehalten und Ergebnisse zu messen, ist jedoch bei jedem Softwarepfad für SF32 sinnvoll.
+Diese Reihe baut auf dem ersten erfolgreichen Flash-Vorgang auf und vermittelt praktische Entwicklungsfähigkeiten für SF32. Sie ist nach dem jeweiligen Entwicklungsziel gegliedert: zuerst ein Peripheriegerät praktisch erproben, dann Subsysteme kombinieren und schließlich die nötigen Nachweise für ein Produkt erarbeiten. Die Tutorials verwenden SiFli-SDK-Beispiele als Ausgangspunkt. Hardware zu prüfen, eine bewährte Ausgangskonfiguration beizubehalten und Ergebnisse zu messen, ist jedoch bei jedem Softwarepfad für SF32 sinnvoll.
 
-Tutorials sind die zweite Stufe von [Erste Schritte](../index.md). Schließen Sie zunächst dessen Erfolgskriterien für den ersten Durchlauf ab. Wenn Sie einen Chip, ein Modul oder ein Entwicklungsboard auswählen, beginnen Sie mit der [SF32-Familie](../../sf32-products/family/SF32_family.md), bevor Sie mit der Reihe beginnen.
+Tutorials sind die zweite Stufe von [Erste Schritte](../index.md). Erfüllen Sie zunächst die dort genannten Kriterien für eine erfolgreiche erste Inbetriebnahme. Wenn Sie einen Chip, ein Modul oder ein Entwicklungsboard auswählen, beginnen Sie mit der [SF32-Familie](../../sf32-products/family/SF32_family.md), bevor Sie mit der Reihe beginnen.
 
 ## Was Sie benötigen { #what-you-need }
 
@@ -21,11 +21,11 @@ Verwenden Sie ein Entwicklungsboard für SF32 mit funktionierender USB-Datenverb
 
 | Element | Mindestvoraussetzung für den Start |
 |:-----|:------------------------|
-| Toolchain | SiFli-SDK kann ein bewährtes Beispiel für Ihr Board kompilieren. |
+| Toolchain | SiFli-SDK kann ein bekanntes, funktionierendes Beispiel für Ihr Board bauen. |
 | Flash-Ablauf | Sie können das Board wiederholt programmieren, ohne die Einrichtung zu ändern. |
 | Serielle Konsole | Sie können Boot-Protokolle sehen und auf den FinSH-`msh>`-Prompt zugreifen. |
 | Board-Informationen | Halten Sie den Schaltplan oder die Support-Dateien des Boards bereit, bevor Sie Pins oder Peripheriegeräte zuweisen. |
-| Messwerkzeuge | Verwenden Sie bei Bedarf ein Multimeter oder einen Logikanalysator; für Arbeiten am Energiesparen verwenden Sie einen Strommessaufbau. |
+| Messwerkzeuge | Verwenden Sie bei Bedarf ein Multimeter oder einen Logikanalysator; für Energiesparmessungen benötigen Sie einen geeigneten Strommessaufbau. |
 
 </div>
 
@@ -37,7 +37,7 @@ Verwenden Sie ein Entwicklungsboard für SF32 mit funktionierender USB-Datenverb
 
 | Lernziel | Startbedingung | Inhalte | Weiter, wenn |
 |:------|:-----------|:------------------|:--------------|
-| [Erste Peripherie](beginner.md) | `hello_world` lässt sich flashen und gibt Text über die serielle Konsole aus. | GPIO, FinSH, ADC, PWM, RTC und ein kleines Board-Projekt. | Fahren Sie fort, wenn Sie einen Eingang, einen Ausgang und ein grundlegendes Peripheriegerät selbstständig prüfen können. |
+| [Einstieg in die Peripherie](beginner.md) | `hello_world` lässt sich flashen und gibt Text über die serielle Konsole aus. | GPIO, FinSH, ADC, PWM, RTC und ein kleines Board-Projekt. | Fahren Sie fort, wenn Sie einen Eingang, einen Ausgang und ein grundlegendes Peripheriegerät selbstständig prüfen können. |
 | [Subsystemintegration](intermediate.md) | Einzelne Peripheriegeräte funktionieren zuverlässig. | Sensoren über I2C, LVGL, BLE, Audio, Speicher und gezielte Koexistenztests. | Fahren Sie fort, wenn zwei Subsysteme gemeinsam stabil laufen. |
 | [Produktvalidierung](advanced.md) | Sie können Middleware integrieren und gängige Fehler diagnostizieren. | Gemessene Leistungsaufnahme, OTA-Wiederherstellung, kundenspezifische Displays, Absturzanalyse, BLE mit mehreren Verbindungen und wiederverwendbare Treiber. | Nutzen Sie passende Artikel aus den Bereichen Entwicklung und Lernen als fortlaufende Referenzen für die Implementierung. |
 

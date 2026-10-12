@@ -113,7 +113,7 @@ A tabela de variantes do SF32LB57x também lista este código como BGA112. Seus 
 
 ### Exceções de sufixo legado da família 55x { #legacy-55x-suffix-exceptions }
 
-A família SF32LB55x foi definida antes da convenção de nomenclatura atual, por isso alguns códigos mantêm formatos de sufixo legados. Estes três códigos não podem ser decodificados por completo pelo padrão `SF32LB5xyZxYx6` descrito acima: `SF32LB551U4O5`, `SF32LB555V4O6` e `SF32LB555V436`. Confirme o encapsulamento e a configuração de memória na tabela de variantes 55x e na ficha técnica de cada código; não deduza os campos a partir do padrão genérico. `SF32LB557VD3A6` segue a convenção atual e não é uma exceção legada.
+A família SF32LB55x foi definida antes da convenção de nomenclatura atual, por isso alguns códigos mantêm formatos de sufixo legados. Estes três códigos não podem ser decodificados por completo pelo padrão `SF32LB5xyZxYx6` descrito acima: `SF32LB551U4O5`, `SF32LB555V4O6` e `SF32LB555V436`. Confirme o encapsulamento e a configuração de memória na tabela de variantes 55x e no datasheet de cada código; não deduza os campos a partir do padrão genérico. `SF32LB557VD3A6` segue a convenção atual e não é uma exceção legada.
 
 ## Nomenclatura de módulos { #module-naming }
 

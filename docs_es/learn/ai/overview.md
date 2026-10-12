@@ -134,7 +134,7 @@ El ancho de banda de memoria puede limitar la IA aunque haya capacidad de cómpu
 
 La [implementación del HAL v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/hal/bf0_hal_nn_acc.c) comprueba que los búferes no crucen límites de ventanas de direcciones de 1 MiB (1 048 576 bytes) y que la entrada y el sesgo estén en la misma ventana. Verifique las direcciones asignadas, no solo la memoria libre total. El inicio bloqueante espera la finalización mediante sondeo; la ruta por interrupciones exige gestionar correctamente la IRQ y notificar la finalización. Compruebe los valores de retorno y defina una recuperación ante fallos y esperas acotadas en la aplicación, sin presuponer un tiempo límite en el entorno del modelo.
 
-Véase [STAR-MC1](../architecture/star-mc1.md#memory-system-optimization) para consideraciones de caché y sistema de memoria en este tipo de patrón de acceso mixto.
+Consulte [STAR-MC1](../architecture/star-mc1.md#memory-system-optimization) para consideraciones de caché y sistema de memoria en este tipo de patrón de acceso mixto.
 
 ## Hoja de cálculo para dimensionar la memoria { #memory-sizing-worksheet }
 

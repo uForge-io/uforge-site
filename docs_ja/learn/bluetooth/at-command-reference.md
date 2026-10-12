@@ -65,7 +65,7 @@ SF32LB57のデュアルモードBluetoothモジュールは、BLEとClassic Blue
 
 ### 構文定義 { #syntax-definition }
 
-ATコマンドはASCIIテキストで送信し、キャリッジリターン `\r`（0x0D）で終端します。コマンドのプレフィックスは`AT+`（AT形式）または`AT>`（PDU形式）です。SF32LB57のATポートはUSART1で、ハードウェアフロー制御なしの8N1形式を使用します。デフォルトのボーレートは460800 bps、1フレームの上限は512バイトです。
+ATコマンドはASCIIテキストで送信し、キャリッジリターン`\r`（0x0D）で終端します。コマンドのプレフィックスは`AT+`（AT形式）または`AT>`（PDU形式）です。SF32LB57のATポートはUSART1で、ハードウェアフロー制御なしの8N1形式を使用します。デフォルトのボーレートは460800 bps、1フレームの上限は512バイトです。
 
 ### AT形式コマンド { #at-format-commands }
 
@@ -88,7 +88,7 @@ ATコマンドはASCIIテキストで送信し、キャリッジリターン `\r
 | 結果 | 応答文字列 |
 |:-------|:------------------|
 | 成功 | `\r\nOK\r\n` |
-| 失敗 | `\r\nERROR\r\n` または `\r\nFALSE\r\n` |
+| 失敗 | `\r\nERROR\r\n`または`\r\nFALSE\r\n` |
 | クエリの戻り値 | `\r\n+<CMD>:<value>\r\n\r\nOK\r\n` |
 
 </div>
@@ -138,7 +138,7 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 項目 | 内容 |
 |:-----|:--------|
 | コマンド | `AT+GFWVER?\r` |
-| 応答 | 成功: `\r\n+GFWVER:SIFLI_AT_<version>_<build date>\r\n\r\nOK\r\n`。設定コマンドではすべて `\r\nERROR\r\n` を返します。 |
+| 応答 | 成功: `\r\n+GFWVER:SIFLI_AT_<version>_<build date>\r\n\r\nOK\r\n`。設定コマンドではすべて`\r\nERROR\r\n`を返します。 |
 | パラメータ | なし |
 | 備考 | クエリのみ。戻り値は常に`SIFLI_AT_`で始まり、その後にバージョン番号とビルド日付が続く。 |
 
@@ -320,7 +320,7 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | コマンド | `AT+TRIM=<freq_off>\r` |
 | 応答 | 成功: `\r\nOK\r\n`。値が範囲外の場合、または校正インターフェースでエラーが発生した場合: `\r\nERROR\r\n` |
 | パラメータ | `freq_off`: 周波数オフセット校正値。単位はHz、範囲は-120000～120000、デフォルトは0です。0を指定すると校正をリセットし、ハードウェア／工場出荷時の値に戻します。0以外の場合は指定値を直接設定します。 |
-| 備考 | 値を設定するとHXTコンデンサバンクレジスタが更新され、その結果が`FACTORY_CFG_ID_CRYSTAL`パーティションに書き込まれます。校正が成功すると、AT設定に記録された値が更新され、保存対象としてマークされます。 |
+| 備考 | 値を設定するとHXTコンデンサバンクレジスターが更新され、その結果が`FACTORY_CFG_ID_CRYSTAL`パーティションに書き込まれます。校正が成功すると、AT設定に記録された値が更新され、保存対象としてマークされます。 |
 
 </div>
 
@@ -867,7 +867,7 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 | 項目 | 内容 |
 |:-----|:--------|
-| コマンド | `AT+CONNLIST?\r` または `AT+CONNLIST\r` |
+| コマンド | `AT+CONNLIST?\r`または`AT+CONNLIST\r` |
 | 応答 | アクティブな各接続について1行出力される: `\r\n+CONNLIST:<conn_hdl>,<type>,<addr>,<extra>\r\n`。すべての行の後に`\r\nOK\r\n`が続く。アクティブな接続がない場合は`\r\nOK\r\n`のみ。空でないパラメータ: `\r\nERROR\r\n` |
 | パラメータ | 出力フィールド: `<conn_hdl>` — 接続ハンドル、16進数4桁、BLEは1始まりの外部ハンドルを使用する。`<type>` — 接続の種類、BLEまたはBT。`<addr>` — ピアのBluetoothアドレス、16進数12桁（最上位バイトが先頭）。`<extra>` — BLE接続の場合は現在のMTU、BT接続の場合はサービスチャネル、10進数。 |
 | 備考 | 設定形式に空でないパラメータを指定すると`ERROR`を返します。モジュールはすべての接続スロットを確認し、アクティブな各接続を出力します。 |
@@ -914,7 +914,7 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 | 項目 | 内容 |
 |:-----|:--------|
-| コマンド | `AT+SPPSEND=<conn_hdl>,<data>\r` または `AT+SPPSEND=,<data>\r` |
+| コマンド | `AT+SPPSEND=<conn_hdl>,<data>\r`または`AT+SPPSEND=,<data>\r` |
 | 応答 | 成功: `\r\nOK\r\n`。失敗: `\r\nERROR\r\n` |
 | パラメータ | `conn_hdl`: 対象のBT接続ハンドル。16進数。省略または0に設定可能で、その場合は現在最初にアクティブなBT接続が使用される。`data`: 送信するデータ。16進数文字列で、2文字が1バイトを表す。空にはできず、文字数は偶数でなければならない。ASCII ATフレームで運べる実際のデータ長も、単一ATフレームの上限によって制限される。 |
 | 備考 | `conn_hdl`と`data`はカンマで区切られる。`conn_hdl`が省略されている場合でもカンマは必要。クエリ形式はサポートされていない。 |
@@ -1092,9 +1092,9 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 以下はモジュールからホストへ送られる非同期のステータス通知です。受信のためにホストからコマンドを送る必要はありません。通知の有無はイベント通知設定（`AT+EVT`）で制御され、サイレントモード中は通知されません。
 
-### IM_READY レディ通知 { #im_ready-ready-indication }
+### IM_READYレディ通知 { #im_ready-ready-indication }
 
-<div align="center"><em>表: IM_READY レディ通知</em></div>
+<div align="center"><em>表: IM_READYレディ通知</em></div>
 
 <div align="center" markdown>
 
@@ -1107,9 +1107,9 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
-### IM_CONN 接続通知 { #im_conn-connection-indication }
+### IM_CONN接続通知 { #im_conn-connection-indication }
 
-<div align="center"><em>表: IM_CONN 接続通知</em></div>
+<div align="center"><em>表: IM_CONN接続通知</em></div>
 
 <div align="center" markdown>
 
@@ -1122,9 +1122,9 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
-### IM_DISCONN 切断通知 { #im_disconn-disconnect-indication }
+### IM_DISCONN切断通知 { #im_disconn-disconnect-indication }
 
-<div align="center"><em>表: IM_DISCONN 切断通知</em></div>
+<div align="center"><em>表: IM_DISCONN切断通知</em></div>
 
 <div align="center" markdown>
 
@@ -1192,7 +1192,7 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 | 項目 | 内容 |
 |:-----|:--------|
-| コマンド | `AT+DISCONN\r`（パラメータなし）または `AT+DISCONN=<conn_hdl>\r` |
+| コマンド | `AT+DISCONN\r`（パラメータなし）または`AT+DISCONN=<conn_hdl>\r` |
 | 応答 | 成功: `\r\nOK\r\n`。失敗: `\r\nERROR\r\n` |
 | パラメータ | `conn_hdl`: 切断する接続ハンドル、16進数。BLE接続は1始まり（外部表示値）で、値は0であってはならない（0は無効な入力として扱われ`ERROR`を返す）。SPP接続は生のACLハンドルを使用する。 |
 | 備考 | パラメータなしの場合、現在のすべての接続が切断され`OK`が返される。パラメータありの場合、解決順序は次の通り: まずBLEの1始まりハンドルと照合（`conn_hdl`-1がBLEスロットに一致する）。見つからない場合はSPPスロットの生の値と照合。接続が見つからない場合は`ERROR`を返す。BLE接続の場合、理由コード`0x13`で切断が開始される。SPP接続の場合、ピアアドレスによって切断が開始される。クエリ形式`AT+DISCONN?`は`ERROR`を返す。 |

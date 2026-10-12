@@ -48,7 +48,7 @@ Para abrir o gerenciamento do SDK, clique no ícone da SiFli na barra lateral do
 
 ## Instale ou selecione o SiFli-SDK { #install-or-select-sifli-sdk }
 
-Use o fluxo de configuração do CodeKit para instalar o SiFli-SDK ou indique o caminho de uma cópia que você já clonou. Para a maioria dos usuários, **Release/Tag** oferece uma base versionada e testada. Escolha **Branch** se precisar de correções ou recursos mais recentes e aceitar uma estabilidade possivelmente menor. O guia oficial descreve `release/vX.Y` como uma forma de obter as correções e os recursos mais recentes daquela linha de release sem usar a branch `main`, menos estável. Ainda assim, seu conteúdo pode mudar com o tempo.
+Use o fluxo de configuração do CodeKit para instalar o SiFli-SDK ou indique o caminho de uma cópia que você já clonou. Para a maioria dos usuários, escolha **Release/Tag**: é uma base versionada e testada. Escolha **Branch** se precisar de correções ou recursos mais recentes e aceitar uma estabilidade possivelmente menor. O guia oficial descreve `release/vX.Y` como uma forma de obter as correções e os recursos mais recentes daquela linha de release sem usar a branch `main`, menos estável. Ainda assim, seu conteúdo pode mudar com o tempo.
 
 Para usuários na China continental, o guia oficial recomenda o Gitee como origem do SDK e o espelho da SiFli para baixar a cadeia de ferramentas.
 
@@ -66,7 +66,7 @@ Se o CodeKit solicitar a localização do SDK, escolha um caminho curto e sem es
     C:\OpenSiFli\SiFli-SDK
     ```
 
-O CodeKit usa o instalador e os scripts de ambiente do próprio SDK. O resultado deve ser igual ao da configuração manual: compilador, ambiente Python, ferramentas de compilação e ferramentas de gravação ficam prontos em conjunto.
+O CodeKit usa o instalador e os scripts de ambiente do próprio SDK. O resultado deve ser igual ao da configuração manual: compilador, ambiente Python, ferramentas de compilação e ferramentas de gravação são configurados em conjunto.
 
 ## Abra um exemplo { #open-an-example }
 
@@ -137,7 +137,7 @@ Você pode prosseguir quando:
 | O CodeKit não encontra o SDK | Execute novamente a configuração do CodeKit e selecione a pasta raiz do SiFli-SDK. |
 | A compilação não encontra as ferramentas | Deixe o CodeKit reinstalar a cadeia de ferramentas ou execute manualmente o instalador do SDK uma vez. |
 | A gravação não começa | Se a ferramenta não entrar no modo de download UART, reinicie a placa imediatamente antes da transferência. Se o problema persistir, siga as instruções de gravação específicas da placa. |
-| A saída serial está ilegível | Confira o baud rate e verifique se apenas um monitor serial está aberto. |
+| A saída serial está ilegível | Confira a taxa de transmissão e verifique se apenas um monitor serial está aberto. |
 
 </div>
 
@@ -149,4 +149,4 @@ Você pode prosseguir quando:
 
 ## Registre uma configuração reproduzível { #what-sifli-should-add }
 
-Anote as versões do CodeKit e do SDK, a tag ou branch escolhida e o target exato da placa. Se um nome de menu ou comando for diferente, consulte o [guia oficial de instalação](https://docs.sifli.com/projects/codekit/get-started/install.html) e a [lista de placas compatíveis](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html) para as versões instaladas.
+Anote as versões do CodeKit e do SDK, a tag ou branch escolhida e o alvo de compilação exato da placa. Se um nome de menu ou comando for diferente, consulte o [guia oficial de instalação](https://docs.sifli.com/projects/codekit/get-started/install.html) e a [lista de placas compatíveis](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html) para as versões instaladas.

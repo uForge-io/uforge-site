@@ -7,7 +7,7 @@ tags: [Desarrollo, SiFli-SDK, Notas de aplicación, Flash]
 
 # Uso de memoria Flash externa { #use-external-flash }
 
-Este artículo convierte la [guía de uso de Flash](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/flash_usage.html) de SiFli en una ruta práctica de integración para SF32LB52x, SF32LB55x, SF32LB56x y SF32LB58x. Incluye la configuración del controlador, espacios de direcciones propios de cada familia, acceso directo desde RT-Thread, sistemas de archivos MTD, regiones reservadas, adaptación de nuevos componentes Flash, PSRAM y compatibilidad con J-Link Open Flashloader.
+Este artículo convierte la [guía de uso de Flash](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/flash_usage.html) de SiFli en una ruta práctica de integración para SF32LB52x, SF32LB55x, SF32LB56x y SF32LB58x. Incluye la configuración del controlador, espacios de direcciones propios de cada familia, acceso directo desde RT-Thread, sistemas de archivos MTD, regiones reservadas, integración de nuevas memorias Flash, PSRAM y compatibilidad con J-Link Open Flashloader.
 
 La guía original utiliza `FLASH` tanto para Flash NOR como NAND. Los ejemplos conservan los símbolos del SDK y los nombres de dispositivo originales; antes de copiar una configuración al producto, confirme la rama del SDK y el esquemático de la placa de destino.
 
@@ -32,8 +32,8 @@ Los dispositivos pueden ser Flash NOR o NAND. Frente al SF32LB55x, SF32LB56x y S
 Las asignaciones habituales de los controladores son:
 
 - **SF32LB55x:** normalmente, el controlador 1 gestiona la Flash NOR integrada; los controladores 2 y 3 dependen del diseño de la placa; el controlador 4 se conecta a Flash NOR y permite el acceso desde LCPU y HCPU.
-- **SF32LB58x:** los controladores 1 y 2 suelen gestionar Flash NOR integrada o PSRAM, según el encapsulado; los controladores 3 y 4 dependen del diseño de la placa; el controlador 5 se conecta a la Flash NOR integrada y permite el acceso desde LCPU y HCPU.
-- **SF32LB56x:** los controladores 1 y 2 suelen gestionar Flash NOR integrada o PSRAM, según el encapsulado; el controlador 3 depende del diseño de la placa; el controlador 5 se conecta a la Flash NOR integrada y permite el acceso desde LCPU y HCPU. No existe el controlador 4.
+- **SF32LB58x:** los controladores 1 y 2 suelen gestionar Flash NOR integrada o PSRAM, según el encapsulado; los controladores 3 y 4 dependen del diseño de la placa; el controlador 5 gestiona la Flash NOR integrada y permite el acceso desde LCPU y HCPU.
+- **SF32LB56x:** los controladores 1 y 2 suelen gestionar Flash NOR integrada o PSRAM, según el encapsulado; el controlador 3 depende del diseño de la placa; el controlador 5 gestiona la Flash NOR integrada y permite el acceso desde LCPU y HCPU. No existe el controlador 4.
 
 El driver se divide en dos capas. HAL permite acceder a los registros de hardware y ofrece lógica básica. DRV proporciona operaciones de lectura, escritura y borrado de Flash, inicialización y control, además de las interfaces utilizadas por dispositivos y sistemas de archivos.
 
@@ -142,7 +142,7 @@ Estos son los ejemplos de activación común de MPI y de configuración por cont
 El SF32LB56x utiliza prácticamente la misma configuración MPI que el SF32LB58x, salvo que no dispone de MPI4.
 
 !!! warning "Verifique el ejemplo de configuración MPI"
-    La documentación fuente de SiFli es contradictoria respecto a MPI1: el texto indica que MPI1 usa NOR Flash por defecto y que no se puede cambiar su modo, pero el fragmento de configuración siguiente establece el modo 4 (PSRAM de 16 líneas). Además, `BSP_QSPI1_MEM_SIZE` tiene el valor `32` y el comentario indica 16 MB; en MPI4, el valor es `128` y el comentario indica 128 MB, mientras que la tabla de capacidad de la EVB indica 64 MB. Este artículo conserva los valores de configuración de la fuente sin inferir la codificación de las macros ni la capacidad real. Verifíquelo con la configuración Kconfig/generada de la versión del SDK, el esquema de la placa y la hoja de datos de la memoria.
+    La documentación fuente de SiFli es contradictoria respecto a MPI1: el texto indica que MPI1 usa NOR Flash por defecto y que no se puede cambiar su modo, pero el fragmento de configuración siguiente establece el modo 4 (PSRAM de 16 líneas). Además, `BSP_QSPI1_MEM_SIZE` tiene el valor `32` y el comentario indica 16 MB; en MPI4, el valor es `128` y el comentario indica 128 MB, mientras que la tabla de capacidad de la EVB indica 64 MB. Este artículo conserva los valores de configuración de la fuente sin inferir la codificación de las macros ni la capacidad real. Verifíquelo con la configuración Kconfig/generada de la versión del SDK, el esquemático de la placa y la hoja de datos de la memoria.
 
 ## Espacios de direcciones Flash { #3-flash-address-spaces }
 
@@ -264,7 +264,7 @@ rt_err_t rt_flash_erase(rt_uint32_t addr, size_t size);
 
 `rt_flash_read` y `rt_flash_write` devuelven los bytes transferidos si tienen éxito y `0` si fallan; `rt_flash_erase` devuelve `RT_EOK` cuando termina correctamente. Las declaraciones se han normalizado para facilitar la lectura; confirme los encabezados y valores de retorno reales en la rama del SDK de destino.
 
-Utilice `rt_flash_read` para leer tanto NOR como NAND. La NOR también puede leerse mediante su ventana de memoria; para NAND es obligatorio usar la API y la aplicación debe gestionar el búfer. Use `rt_flash_write` con ambos tipos. Para borrar, la NOR suele requerir que la dirección y la longitud estén alineadas a sectores (normalmente 4 KB), mientras que NAND requiere alineación a bloques (normalmente 128 KB). La aplicación debe conservar y restaurar por su cuenta cualquier dato que no esté alineado.
+Utilice `rt_flash_read` para leer tanto NOR como NAND. La NOR también puede leerse mediante su ventana de memoria; para NAND es obligatorio usar la API y la aplicación debe gestionar el búfer. Use `rt_flash_write` con ambos tipos. Para borrar, la NOR suele requerir que la dirección y la longitud estén alineadas a sectores (normalmente 4 KB), mientras que NAND normalmente requiere alineación a bloques (normalmente 128 KB). La aplicación debe conservar y restaurar por su cuenta cualquier dato que no esté alineado.
 
 Si Flash no admite XIP, el código no puede borrar ni programar la misma Flash desde la que se está ejecutando. Coloque el código del driver Flash en SRAM. El fragmento del enlazador Keil de la guía original reserva 64 KB a partir de `0x200E1000`:
 
@@ -439,7 +439,7 @@ El ejemplo de sistema de archivos NOR de la guía original registra `flash1`, lo
 
 ## Revisar la distribución actual de Flash y reservar regiones { #6-reserve-and-review-the-current-flash-layout }
 
-La [guía de uso de memoria de SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/memory_usage.html) define esta distribución predeterminada de QSPI1: la región de 64 KB entre `0x10000000` y `0x1000FFFF` contiene la tabla de configuración de Flash, la tabla de calibración y espacio reservado; los siguientes 64 KB, entre `0x10010000` y `0x1001FFFF`, se reservan para el parche de la ROM de arranque, y el código de usuario comienza en `0x10020000`. Si `FLASH2` utiliza Flash NOR, los recursos de imagen empiezan en `0x64000000`. FlashDB (o EasyFlash) también utiliza partes de `flash1` y `flash2` para variables y registros; recupere y vuelva a particionar esas regiones según los requisitos del sistema.
+La [guía de uso de memoria de SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/memory_usage.html) define esta distribución predeterminada de QSPI1: la región de 64 KB entre `0x10000000` y `0x1000FFFF` contiene la tabla de configuración de Flash, la tabla de calibración y espacio reservado; los siguientes 64 KB, entre `0x10010000` y `0x1001FFFF`, se reservan para el parche de la ROM de arranque, y el código de usuario comienza en `0x10020000`. Si `FLASH2` utiliza Flash NOR, los recursos de imagen empiezan en `0x64000000`. FlashDB (o EasyFlash) también utiliza partes de `flash1` y `flash2` para variables y registros; libere y vuelva a particionar esas regiones según los requisitos del sistema.
 
 ```c
 #define FLASH_TABLE_SIZE            (20*1024)

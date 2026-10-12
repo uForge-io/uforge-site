@@ -8,7 +8,7 @@ tags:
 
 # Diseños de referencia { #reference-designs }
 
-Los diseños de referencia conectan la planificación del producto con la implementación. Una base reutilizable de hardware y software debe identificar el hardware de partida, la versión de software, los archivos de diseño disponibles, las evidencias de puesta en marcha y los límites de reutilización. Los recorridos de esta sección ayudan a establecer y validar esa base; su inclusión no demuestra que exista un esquema, una BOM o un paquete de cualificación para producción publicados.
+Los diseños de referencia conectan la planificación del producto con la implementación. Una base reutilizable de hardware y software debe identificar el hardware de partida, la versión de software, los archivos de diseño disponibles, las evidencias de puesta en marcha y los límites de reutilización. Los recorridos de esta sección ayudan a establecer y validar esa base; su inclusión no demuestra que exista un esquemático, una BOM o un paquete de cualificación para producción publicados.
 
 Use [Planificar un producto](../../sf32-products/family/product-planning.md) para elaborar una primera lista de candidatos y, después, elija el recorrido más parecido a su producto para organizar la validación de la placa y reducir los riesgos del producto.
 
@@ -31,7 +31,7 @@ Use un diseño de referencia para responder: **«¿Con qué base técnica reutil
 
 ## Recorridos disponibles { #available-journeys }
 
-El recorrido actual de Wearable conectado es un flujo de validación, no un paquete publicado de una placa de referencia. Todavía no publica una combinación fija de revisiones de placa y SDK, una versión de los archivos de diseño ni un registro de cualificación basado en mediciones. Establezca y registre esas bases para su producto antes de considerar reproducibles los resultados.
+El recorrido actual de Wearable conectado es un flujo de validación, no un paquete publicado de una placa de referencia. Todavía no publica una combinación fija de revisiones de placa y SDK, una entrega de archivos de diseño ni un registro de cualificación basado en mediciones. Establezca y registre esas bases para su producto antes de considerar reproducibles los resultados.
 
 <div align="center"><em>Tabla: Recorridos de diseño de referencia</em></div>
 
@@ -47,9 +47,9 @@ El recorrido actual de Wearable conectado es un flujo de validación, no un paqu
 
 1. Confirme que el enfoque del producto y el hardware seleccionado encajan con las restricciones del diseño.
 2. Reproduzca la base de software en la placa indicada antes de adaptarla.
-3. Conserve con el registro del proyecto la placa exacta, la versión del SDK, el ejemplo, el comando de compilación y grabación y el registro serie.
+3. Conserve con el registro del proyecto la placa exacta, la versión del SDK, el ejemplo, el comando de compilación y grabación y el registro del puerto serie.
 4. Añada validaciones específicas del producto para cada cambio en la pantalla, el dispositivo de memoria, la ruta de batería, el diseño RF, la carcasa o la interfaz.
-5. Use los resultados como entradas para [Diseño para producción](../design-for-production.md), incluyendo la guía y la lista de comprobación seleccionadas, las decisiones del AVL, el método de recuperación y los riesgos restantes.
+5. Use los resultados como entradas para [Diseño para producción](../design-for-production.md), incluyendo la guía y la lista de comprobación seleccionadas, las decisiones de la AVL, el método de recuperación y los riesgos restantes.
 
 ## Añadir un nuevo recorrido { #adding-a-new-journey }
 

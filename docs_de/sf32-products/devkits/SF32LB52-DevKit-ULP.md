@@ -12,13 +12,13 @@ tags:
 
 Das SF32LB52-DevKit-ULP ist auch unter den Bezeichnungen **立创黄山派**, **LCKFB-HSPI-SF32LB52-ULP** und **SF32LB52-ULP** bekannt. Es ist ein kompaktes Wearable-Entwicklungsboard mit extrem niedrigem Energiebedarf auf Basis der SF32LB52x-Familie und als Prototypenplattform für Smartwatches und Fitnessarmbänder positioniert, nicht als einfaches MCU-Breakout-Board.
 
-Im Vergleich zu den Boards LCD, Nano und Core-3p3 ist dieses Board produktnäher: Es vereint ein SF32LB52-Modul, AMOLED-Display, Touch, Mikrofon, Lautsprecherverstärker, RGB-LED, Treiber für einen Vibrationsmotor, Bewegungssensor, Magnetsensor, Umgebungslichtsensor, Akkuladung und Jumper zur Leistungsmessung. Das macht es besonders nützlich, wenn die Produktfrage nicht nur „Läuft die MCU?“ lautet, sondern „Wie verhält sich das gesamte Wearable-System im Akkubetrieb?“
+Im Vergleich zu den Boards LCD, Nano und Core-3p3 ist dieses Board produktnäher: Es vereint ein SF32LB52-Modul, AMOLED-Display, Touch, Mikrofon, Lautsprecherverstärker, RGB-LED, Treiber für einen Vibrationsmotor, Bewegungssensor, Magnetsensor, Umgebungslichtsensor, Akkuladung und Jumper zur Strommessung. Das macht es besonders nützlich, wenn die Produktfrage nicht nur „Läuft die MCU?“ lautet, sondern „Wie verhält sich das gesamte Wearable-System im Akkubetrieb?“
 
-Der [ULP-Board-Leitfaden][Originalartikel im SiFli-Wiki] von SiFli ist weiterhin nur ein Platzhalter. Für die detaillierte Board-Konfiguration verwenden Sie den chinesischen [Leitfaden zum Huangshan-Pi-Entwicklungsboard][Originalleitfaden Huangshan Pi von SiFli] von SiFli, der das Board V1.0.0 dokumentiert; die unten genannten Bauteilwerte sind die Grundlage für diese Revision. Das separate [LCKFB-Hardware-Wiki] nennt seine Board-Revision nicht und führt mehrere abweichende Bauteilnummern auf. Betrachten Sie diese als mögliche Abweichung zwischen Revisionen bzw. Quellen und nicht als austauschbare Bauteile, und prüfen Sie vor der Designarbeit die tatsächliche Board-Kennzeichnung, den Schaltplan und die Stückliste.
+Der [ULP-Board-Leitfaden][Original SiFli Wiki Article] von SiFli ist weiterhin nur ein Platzhalter. Für die detaillierte Board-Konfiguration verwenden Sie den chinesischen [Leitfaden zum Huangshan-Pi-Entwicklungsboard][Original SiFli Huangshan Pi Guide] von SiFli, der das Board V1.0.0 dokumentiert; die unten genannten Bauteilwerte sind die Grundlage für diese Revision. Das separate [LCKFB-Hardware-Wiki][LCKFB Hardware Wiki] nennt seine Board-Revision nicht und führt mehrere abweichende Bauteilnummern auf. Betrachten Sie diese als mögliche Abweichung zwischen Revisionen bzw. Quellen und nicht als austauschbare Bauteile, und prüfen Sie vor der Designarbeit die tatsächliche Board-Kennzeichnung, den Schaltplan und die Stückliste.
 
 **Hinweis zum Veröffentlichungsstatus:** Der Leitfaden V1.0.0 von SiFli besagt, dass das dokumentierte Board damals für interne Tests vorgesehen war und vor der externen Veröffentlichung überarbeitet werden sollte. Diese Aussage gilt nur für diese Revision der Quelle; sie sagt nichts über Status oder Stückliste späterer Boards aus. Prüfen Sie die genaue Board-Revision und die Stückliste.
 
-Die [Board-Seite im SiFli SDK][Board-Seite ULP im SiFli SDK] führt dieses Board-Target als `sf32lb52-lchspi-ulp`. Die Board-Seite des SDK und der Abschnitt zum Lieferumfang im chinesischen Huangshan-Pi-Leitfaden verwenden `SF32LB52X-MOD-1-N16R8`, während der [Modellleitfaden für Module][Modellleitfaden für Module von SiFli] von SiFli und die Beschriftung der GPIO-Tabelle `SF32LB52-MOD-1-N16R8` verwenden. Die Quellen erläutern diesen Unterschied beim `X` nicht. Das SDK-Target ist eindeutig; prüfen Sie Kennzeichnung und Stückliste des bestückten Moduls, statt anzunehmen, die beiden Schreibweisen der SKU bezeichneten unterschiedliche Hardware.
+Die [Board-Seite im SiFli SDK][SiFli SDK ULP Board Page] führt dieses Board-Target als `sf32lb52-lchspi-ulp`. Die Board-Seite des SDK und der Abschnitt zum Lieferumfang im chinesischen Huangshan-Pi-Leitfaden verwenden `SF32LB52X-MOD-1-N16R8`, während der [Modellleitfaden für Module][SiFli Module Model Guide] von SiFli und die Beschriftung der GPIO-Tabelle `SF32LB52-MOD-1-N16R8` verwenden. Die Quellen erläutern diesen Unterschied beim `X` nicht. Das SDK-Target ist eindeutig; prüfen Sie Kennzeichnung und Stückliste des bestückten Moduls, statt anzunehmen, die beiden Schreibweisen der SKU bezeichneten unterschiedliche Hardware.
 
 ![Montagereferenz des SF32LB52-ULP-Wearable-Boards](assets/sf32lb52x/52-ULP-1p85-install.png){ loading="lazy" }
 <div align="center"><em>SF32LB52-ULP — Montagereferenz des Wearable-Boards</em></div>
@@ -51,7 +51,7 @@ Verwenden Sie diese Namen als Synonyme für dieselbe Board-Familie, wenn Sie nac
 - 128 Mb QSPI-NOR-Flash, 72 MHz im STR-Modus
 - 48-MHz-Hauptquarz und 32,768-kHz-RTC-Quarz
 - PCB-Antenne auf dem Board
-- 1,85-Zoll-AMOLED-Display, Auflösung 390 x 450
+- 1,85-Zoll-AMOLED-Display, Auflösung 390 × 450
 - Quad-SPI-Display-Schnittstelle mit Touch-Unterstützung
 - MEMS-Mikrofon auf dem Board
 - Analoger Audioausgang mit Class-D-Lautsprecherverstärker
@@ -66,7 +66,7 @@ Verwenden Sie diese Namen als Synonyme für dieselbe Board-Familie, wenn Sie nac
 - 3-Achsen-Magnetsensor MMC5603NJ
 - Umgebungslichtsensor LTR-303ALS-01
 - Akkulader und Bausteine für das Energiemanagement zum Testen der Wearable-Versorgung
-- Erweiterungsleiste 2x15 Pins mit 1,27 mm Raster mit GPIO und Unterstützung für Strommessung
+- 2 × 15-polige Erweiterungsleiste mit 1,27 mm Rastermaß, GPIOs und Unterstützung für Strommessungen
 
 ## Wann dieses Board geeignet ist { #when-to-use-this-board }
 
@@ -93,7 +93,7 @@ Für ein displayorientiertes allgemeines Evaluierungsboard verwenden Sie das [SF
 | MCU | SF32LB525UC6 |
 | PSRAM | 8 MB OPI-PSRAM, Schnittstelle mit 144 MHz |
 | Flash | 128 Mb QSPI-NOR-Flash, 72 MHz im STR-Modus |
-| Display | 1,85-Zoll-AMOLED (ZC-A1D85W-010), 390 x 450, 800 cd/m², Quad-SPI |
+| Display | 1,85-Zoll-AMOLED (ZC-A1D85W-010), 390 × 450, 800 cd/m², Quad-SPI |
 | Display-Treiber | CO5300AF-01 |
 | Versorgungs-IC des Displays | BV6802W |
 | Touch-Controller | FT6146-M00 |
@@ -110,7 +110,7 @@ Für ein displayorientiertes allgemeines Evaluierungsboard verwenden Sie das [SF
 
 </div>
 
-**Revisionsabhängige Bauteilliste — vor dem Design prüfen:** Der [Huangshan-Pi-Leitfaden][Originalleitfaden Huangshan Pi von SiFli] von SiFli in der Version V1.0.0 nennt Lader SY6103, OVP SY5320 und RGB-LED SK6812MINI-HS. Das [LCKFB-Hardware-Wiki] ohne Versionsangabe führt stattdessen AW32001ECSR in der Funktionsliste und AW23001ECSR im Abschnitt zur Ladung sowie OVP LP5305AQVF und RGB-LED WS2812B-2020 auf. Die Quellen legen nicht fest, ob diese Unterschiede eine Hardware-Revision widerspiegeln oder auf veralteter Dokumentation beruhen. Verwenden Sie die Werte aus SiFli V1.0.0 nur für diese dokumentierte Referenz; prüfen Sie tatsächliche Board-Kennzeichnung, Schaltplan und Stückliste, bevor Sie sich auf bauteilspezifisches Verhalten verlassen.
+**Revisionsabhängige Bauteilliste — vor dem Design prüfen:** Der [Huangshan-Pi-Leitfaden][Original SiFli Huangshan Pi Guide] von SiFli in der Version V1.0.0 nennt Lader SY6103, OVP SY5320 und RGB-LED SK6812MINI-HS. Das [LCKFB-Hardware-Wiki][LCKFB Hardware Wiki] ohne Versionsangabe führt stattdessen AW32001ECSR in der Funktionsliste und AW23001ECSR im Abschnitt zur Ladung sowie OVP LP5305AQVF und RGB-LED WS2812B-2020 auf. Die Quellen legen nicht fest, ob diese Unterschiede eine Hardware-Revision widerspiegeln oder auf veralteter Dokumentation beruhen. Verwenden Sie die Werte aus SiFli V1.0.0 nur für diese dokumentierte Referenz; prüfen Sie tatsächliche Board-Kennzeichnung, Schaltplan und Stückliste, bevor Sie sich auf bauteilspezifisches Verhalten verlassen.
 
 ## Lieferumfang { #package-contents }
 
@@ -132,15 +132,15 @@ Das Board unterstützt zwei Hauptbetriebsarten der Versorgung:
 
 Der Akkueingang ist für eine einzelne Li-Ion-Zelle mit einem GH1.25mm-Steckverbinder in gerader Pinreihenfolge vorgesehen. Die dokumentierte Ladekonfiguration unterstützt einen maximalen Ladestrom von 500 mA, mit 450 mA als Standardeinstellung für den Konstantstrom.
 
-Wird das Board ohne Akku betrieben und VBAT aus einem Labornetzteil gespeist, beträgt der dokumentierte Eingangsbereich von VBAT 3,7 V bis 4,7 V, wobei 3,8 V für Versorgungstests bei Normalspannung empfohlen werden. Die Schwellen des SF32LB52-MOD-1-N16R8 sind mit 3,58 V zum Einschalten und 3,48 V zum Ausschalten dokumentiert.
+Wird das Board ohne Akku betrieben und VBAT aus einem Labornetzteil gespeist, beträgt der dokumentierte Eingangsbereich von VBAT 3,7 V bis 4,7 V; für Tests mit normaler Versorgungsspannung werden 3,8 V empfohlen. Die Schwellen des SF32LB52-MOD-1-N16R8 sind mit 3,58 V zum Einschalten und 3,48 V zum Ausschalten dokumentiert.
 
 Der Hardware-Leitfaden von LCKFB warnt, dass die Funktion der Taste für langes Drücken möglicherweise nicht funktioniert, wenn kein Akku angeschlossen ist. Prüfen Sie dieses Verhalten an der genauen Board-Revision und mit der vorgesehenen Versorgung.
 
-## Jumper für die Leistungsmessung { #power-measurement-jumpers }
+## Jumper für die Strommessung { #power-measurement-jumpers }
 
 Das Board führt Jumper für Strommessungen an den wichtigsten Versorgungspfaden heraus.
 
-<div align="center"><em>Zuordnung der Jumper für die Leistungsmessung</em></div>
+<div align="center"><em>Zuordnung der Jumper zur Strommessung</em></div>
 
 <div align="center" markdown>
 
@@ -171,11 +171,11 @@ Optionale Hardware:
 - Li-Ion-Akku mit 450 mAh oder mehr
 - Zweites USB-Kabel, wenn UART-Debug und nativer USB-Test gleichzeitig benötigt werden
 
-Verwenden Sie ein echtes datenfähiges USB-Kabel. Reine Ladekabel können das Board versorgen, stellen aber die serielle Datenschnittstelle nicht bereit.
+Verwenden Sie ein USB-Kabel, das Daten übertragen kann. Reine Ladekabel können das Board versorgen, stellen aber die serielle Datenschnittstelle nicht bereit.
 
 ## SDK-Build-Targets { #sdk-build-targets }
 
-Das SDK von SiFli verwendet mit `scons --board=<board_name>` den genauen Board-Target-Namen `sf32lb52-lchspi-ulp`. Dies ist ein Build-Target-Bezeichner des SDK und nicht zwingend der auf einem Board oder Modul aufgedruckte Produktname. Bestätigen Sie das Target anhand des [Index der unterstützten Boards](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/index.html) und der Datei [`build_config_gcc.yaml`](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml) des SDK für die verwendete SDK-Revision.
+Der genaue Board-Target-Name im SiFli-SDK lautet `sf32lb52-lchspi-ulp`; zum Bauen verwenden Sie `scons --board=<board_name>`. Dies ist ein Build-Target-Bezeichner des SDK und nicht zwingend der auf einem Board oder Modul aufgedruckte Produktname. Bestätigen Sie das Target anhand des [Index der unterstützten Boards](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/index.html) und der Datei [`build_config_gcc.yaml`](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml) des SDK für die verwendete SDK-Revision.
 
 ## Wichtige Signalzuordnungen { #key-signal-assignments }
 
@@ -276,7 +276,7 @@ Das Board nutzt einen AMOLED-Display-Pfad und führt einen 22-poligen QSPI-FPC-S
 
 **Abweichung in der Pinbelegung der Quelle — vor dem Anschluss eines Displays prüfen:** Die 22-polige FPC-Tabelle von SiFli V1.0.0 weist dem Steckverbinder-Pin 14 für QSPI D0 PB05 zu, während die separate GPIO-Zuordnungstabelle für dieses Signal PA05 führt. Auch die FPC-Tabelle von LCKFB nennt PB05, ihre GPIO-Tabelle verwendet jedoch PA05. Keine der Quellen erläutert, wie die Bezeichnungen von Modul-Pad und Steckverbinder zusammenhängen. Betrachten Sie die elektrische Verbindung als ungeklärt, bis Sie Schaltplan und Stückliste der genauen Board-Revision geprüft oder die Durchgängigkeit verifiziert haben; nehmen Sie nicht an, dass PA05 und PB05 austauschbar sind.
 
-## Hinweise zur Leistungsmessung { #power-measurement-guidance }
+## Hinweise zur Strommessung { #power-measurement-guidance }
 
 Für aussagekräftige Messungen bei extrem niedrigem Energiebedarf:
 
@@ -288,23 +288,23 @@ Für aussagekräftige Messungen bei extrem niedrigem Energiebedarf:
 
 ## Verwandte Dokumente { #related-documents }
 
-[SF32LB52x-Chipeinführung]: ../chips/SF32LB52x.md
-[SF32LB52x-Hardware-Designleitfaden]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
-[Originalartikel im SiFli-Wiki]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-ULP.md
-[Originalleitfaden Huangshan Pi von SiFli]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-%E9%BB%84%E5%B1%B1%E6%B4%BE.md
-[Board-Seite ULP im SiFli SDK]: https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/boards/sf32lb52-lchspi-ulp/doc/index.html
-[Modellleitfaden für Module von SiFli]: https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html
-[LCKFB-Projektseite]: https://lckfb.com/project/detail/lckfb-hspi-sf32lb52-ulp?param=baseInfo
-[LCKFB-Hardware-Wiki]: https://wiki.lckfb.com/zh-hans/hspi-sf32lb52/hardware/board.html
-[Muster kaufen]: https://sifli.taobao.com/
+[SF32LB52x Chip Introduction]: ../chips/SF32LB52x.md
+[SF32LB52x Hardware Design Guide]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
+[Original SiFli Wiki Article]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-ULP.md
+[Original SiFli Huangshan Pi Guide]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-%E9%BB%84%E5%B1%B1%E6%B4%BE.md
+[SiFli SDK ULP Board Page]: https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/boards/sf32lb52-lchspi-ulp/doc/index.html
+[SiFli Module Model Guide]: https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html
+[LCKFB Project Page]: https://lckfb.com/project/detail/lckfb-hspi-sf32lb52-ulp?param=baseInfo
+[LCKFB Hardware Wiki]: https://wiki.lckfb.com/zh-hans/hspi-sf32lb52/hardware/board.html
+[Buy Samples]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-microchip: __[SF32LB52x-Chipeinführung]__
-- :fontawesome-solid-file-lines: __[SF32LB52x-Hardware-Designleitfaden]__
-- :fontawesome-brands-github: __[Originalartikel im SiFli-Wiki]__
-- :fontawesome-solid-up-right-from-square: __[LCKFB-Projektseite]__
-- :fontawesome-solid-book: __[LCKFB-Hardware-Wiki]__
-- :fontawesome-solid-cart-shopping: __[Muster kaufen]__
+- :fontawesome-solid-microchip: __[SF32LB52x-Chipeinführung][SF32LB52x Chip Introduction]__
+- :fontawesome-solid-file-lines: __[SF32LB52x-Hardware-Design-Leitfaden][SF32LB52x Hardware Design Guide]__
+- :fontawesome-brands-github: __[Originalartikel im SiFli-Wiki][Original SiFli Wiki Article]__
+- :fontawesome-solid-up-right-from-square: __[LCKFB-Projektseite][LCKFB Project Page]__
+- :fontawesome-solid-book: __[LCKFB-Hardware-Wiki][LCKFB Hardware Wiki]__
+- :fontawesome-solid-cart-shopping: __[Muster kaufen][Buy Samples]__
 
 </div>

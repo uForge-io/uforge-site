@@ -11,7 +11,7 @@ tags:
 
 Für SF32 gibt es mehrere Softwarepfade. SiFli-SDK und CodeKit sind derzeit die offiziellen Wege für den Einstieg. Seit Zephyr v4.3.0 wird das SF32LB52 DevKit LCD im Zephyr-Upstream gepflegt. OpenSiFli bietet außerdem ArduinoCore-zephyr als Beta-Version an und entwickelt Rust-Unterstützung für SF32LB52. Für MicroPython fehlen noch offizielle Firmware-Images und boardspezifische Anleitungen, bevor ein verifiziertes Tutorial möglich ist.
 
-Den Entwicklungs-Referenzablauf und den aktuellen Umfang der einzelnen Pfade finden Sie in der [Entwicklungsübersicht](../develop/index.md). Nutzen Sie die folgende Tabelle nur zur Wahl des Einstiegspunkts. Die jeweiligen Plattformseiten enthalten die verbindlichen Angaben zu unterstützten Boards und Einschränkungen.
+Den Referenzablauf für die Entwicklung und den aktuellen Umfang der einzelnen Pfade finden Sie in der [Entwicklungsübersicht](../develop/index.md). Nutzen Sie die folgende Tabelle nur zur Wahl des Einstiegspunkts. Die jeweiligen Plattformseiten enthalten die verbindlichen Angaben zu unterstützten Boards und Einschränkungen.
 
 ## Wählen Sie Ihren Pfad { #choose-your-path }
 
@@ -22,11 +22,11 @@ Den Entwicklungs-Referenzablauf und den aktuellen Umfang der einzelnen Pfade fin
 | Pfad | Aktueller Status | Hier starten |
 |:-----|:---------------|:-----------|
 | **SiFli-SDK** | Offizieller SiFli-Pfad für die SF32-Referenzentwicklung mit RT-Thread, Bluetooth, Grafik, Audio und Energiesparfunktionen sowie für die Inbetriebnahme der Boards. | [SiFli-SDK](sifli/getting-started-sifli-sdk.md) |
-| **SiFli CodeKit** | Offizieller SiFli-Workflow für VS Code: SDK einrichten, Projekte anlegen und kompilieren, flashen und den seriellen Monitor verwenden. | [SiFli CodeKit](sifli/getting-started-sifli-codekit.md) |
-| **Zephyr** | Seit Zephyr v4.3.0 wird `sf32lb52_devkit_lcd` im Upstream gepflegt. | [Zephyr Upstream](zephyr/getting-started-zephyr-upstream.md) |
+| **SiFli CodeKit** | Offizieller SiFli-Workflow für VS Code: SDK einrichten, Projekte anlegen, bauen, flashen und den seriellen Monitor verwenden. | [SiFli CodeKit](sifli/getting-started-sifli-codekit.md) |
+| **Zephyr** | Für `sf32lb52_devkit_lcd` ist seit Zephyr v4.3.0 gepflegter Support im Upstream verfügbar. | [Zephyr Upstream](zephyr/getting-started-zephyr-upstream.md) |
 | **Arduino** | OpenSiFli bietet ein ArduinoCore-zephyr-Paket in der Betaversion für das SF32LB52 DevKit LCD an. | [Arduino](arduino/getting-started-arduino.md) |
 | **Rust** | `sifli-rs` von OpenSiFli ermöglicht eine Rust-Evaluierung, befindet sich aber noch in Entwicklung und ist nicht produktionsreif. | [Rust](rust/getting-started-rust.md) |
-| **MicroPython** | Benötigt offizielle Firmware-Images, Flash-Befehle, REPL-Einstellungen und unterstützte API-Details. | [MicroPython](micropython/getting-started-micropython.md) |
+| **MicroPython** | Für ein verifiziertes Tutorial fehlen noch offizielle Firmware-Images, Flash-Befehle, REPL-Einstellungen und Angaben zu unterstützten APIs. | [MicroPython](micropython/getting-started-micropython.md) |
 
 </div>
 
@@ -37,7 +37,7 @@ Verwenden Sie zunächst ein Board, das den gewählten Softwarepfad unterstützt.
 - Ein SF32-Entwicklungsboard, z. B. das [SF32LB52-DevKit-LCD](../sf32-products/devkits/SF32LB52-DevKit-LCD.md).
 - Ein Datenkabel und die für Board und Framework angegebene Programmier-/Seriellschnittstelle. Beim SF32LB52-DevKit-LCD verwenden Sie gemäß den [Anschlussanweisungen von SiFli](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/quickstart/get-started.html) für serielle Downloads den USB-zu-UART-Port; verwechseln Sie ihn nicht mit dem dedizierten USB-Funktionsanschluss.
 - Ein Computer mit Windows, macOS oder Linux.
-- Ein serielles Terminal, das für die Board-Konsole eingerichtet ist, damit Sie Boot-Protokolle und Beispielausgaben sehen können.
+- Ein serielles Terminal, das für die Board-Konsole eingerichtet ist, damit Sie Startmeldungen und Beispielausgaben sehen können.
 
 !!! tip "Verwenden Sie ein Datenkabel"
     USB-Kabel, die nur zum Laden geeignet sind, verursachen häufig Probleme bei der Erstinbetriebnahme. Wenn das Board zwar mit Strom versorgt wird, aber kein serieller Anschluss erscheint, verwenden Sie ein nachweislich funktionierendes Datenkabel und schließen Sie es direkt an einen USB-Anschluss des Computers an.
@@ -52,7 +52,7 @@ Sobald `hello_world` erfolgreich läuft, können Sie zu einem anderen Framework 
 
 Am Ende eines Leitfadens für die ersten Schritte sollten Sie:
 
-- Ein erstes Beispiel kompiliert oder geladen haben.
+- Ein erstes Beispiel gebaut oder geladen haben.
 - Das Beispiel auf das Board geflasht haben.
 - Die serielle Konsole geöffnet haben.
 - Vorhersehbare Ausgaben gesehen haben, wie ein Boot-Protokoll, `hello_world`, einen Shell-Prompt oder ein REPL-Banner.

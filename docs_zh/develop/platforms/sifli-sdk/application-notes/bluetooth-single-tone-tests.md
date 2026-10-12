@@ -29,7 +29,7 @@ tags: [开发, SiFli-SDK, 应用笔记, Bluetooth]
 
 </div>
 
-SF32LB55x 的 UART1 引脚因型号而异，单载波测试则统一改用 UART3。调制信号测试时，将 UART1 以 1,000,000 波特率连接 PC；对 SF32LB55x 进行单载波测试时，改接 UART3，并在 SiFli_RfTool 中选择对应的 COM 口。其他系列的单载波测试沿用 UART1。实际使用时，以工程中的引脚复用配置为准。RF 端口通过同轴线接入仪器；记录线缆损耗，并区分传导测试和辐射测试。
+SF32LB55x 的 UART1 引脚因型号而异，单载波测试则统一改用 UART3。调制信号测试时，将 UART1 以 1,000,000 波特率连接 PC；对 SF32LB55x 进行单载波测试时，改用 UART3（PB45/PB46）。其他系列的单载波测试沿用 UART1。实际使用时，以工程中的引脚复用配置为准。RF 端口通过同轴线接入仪器；应计入线缆损耗，并区分传导测试和辐射测试。
 
 !!! note "系列适用范围"
     UART 表汇总了多个系列和封装的默认配置。后续拓扑图和 `SiFli_RfTool` 截图均来自 SF32LB52x 指南，仅用于说明测试连接和界面操作。请在工具中选择实际芯片系列，并确认目标工程的 UART 映射。
@@ -38,7 +38,7 @@ SF32LB55x 的 UART1 引脚因型号而异，单载波测试则统一改用 UART3
     [蓝牙单项 RF 测试指南](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/app_note/bt_individual_test_guide.html)将 UART1 TX/RX 标为 PA32/PA31，而[通用 RF 测试指南](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/app_note/rf_test_guide.html)将 RF 调试串口标为 PA31/PA32。接线前请根据目标固件的测试路径和开发板 pinmux 核实；两份指南中的映射并不一致，不能假定二者可以互换。
 
 ![蓝牙单项测试拓扑](../../../../assets/develop/app-notes/bluetooth-single-item/figure_11-1.png){ loading="lazy" }
-<div align="center"><em>图：SF32LB52x 指南示例——PC 通过 UART/HCI 控制 DUT，RF 端口通过同轴线连接综测仪或频谱仪。</em></div>
+<div align="center"><em>图：SF32LB52x 源示例——PC 通过 UART/HCI 控制 DUT，RF 端口通过同轴线连接综测仪或频谱仪。</em></div>
 
 ## 进入射频测试模式 { #enter-rf-test-mode }
 
@@ -57,10 +57,10 @@ SF32LB55x 的 UART1 引脚因型号而异，单载波测试则统一改用 UART3
 SDK 资料中列出了 LB52x HDK 的 TX 电平参考，但这些数值只适用于该板卡。只能把它们作为调试参考，实际产品必须重新测量。
 
 ![SiFli_RfTool 主控制界面](../../../../assets/develop/app-notes/bluetooth-single-item/figure_13-1.jpg){ loading="lazy" }
-<div align="center"><em>图：SF32LB52x 指南示例——工具中的芯片系列、测试模式、串口、波特率和 TX/RX 控件；应用测试向量前应先确认这些选择。</em></div>
+<div align="center"><em>图：SF32LB52x 源示例——工具中的芯片系列、测试模式、串口、波特率和 TX/RX 控件；应用测试向量前应先确认这些选择。</em></div>
 
 ![SiFli_RfTool 的 BLE TX 设置](../../../../assets/develop/app-notes/bluetooth-single-item/figure_13-2.png){ loading="lazy" }
-<div align="center"><em>图：SF32LB52x 指南示例——选择芯片、模式、信道、有效载荷、PHY、数据长度和功率后再启动 TX。</em></div>
+<div align="center"><em>图：SF32LB52x 源示例——选择芯片、模式、信道、有效载荷、PHY、数据长度和功率后再启动 TX。</em></div>
 
 ## 接收并计算灵敏度 { #receive-and-calculate-sensitivity }
 
@@ -73,7 +73,7 @@ PER = (1500 - received_packets) / 1500 × 100%
 同时记录 RSSI。经典蓝牙 RX 使用 CMW500 GPRF Generator 的 DH1/2-DH1/3-DH1 等波形，记录收包数、错误包数、比特数、BER 和 RSSI。BLE 与经典蓝牙共用射频硬件，不能并行运行。
 
 ![SiFli_RfTool 的 BLE RX 设置](../../../../assets/develop/app-notes/bluetooth-single-item/figure_13-5.png){ loading="lazy" }
-<div align="center"><em>图：SF32LB52x 指南示例——RX 测试必须先停止 TX，并记录信道、调制、PHY 和收包结果。</em></div>
+<div align="center"><em>图：SF32LB52x 源示例——RX 测试必须先停止 TX，并记录信道、调制、PHY 和收包结果。</em></div>
 
 ## 单载波和仪器配置 { #single-carrier-and-instrument-setup }
 
@@ -84,6 +84,6 @@ PER = (1500 - received_packets) / 1500 × 100%
 如果工具或串口连接无响应，请关闭 SiFli_RfTool，将 DUT 断电后重新上电，等待启动完成再重新连接。测试记录应包含工具版本、固件标识、芯片/封装、UART 引脚、板卡版本、信道、PHY/数据包类型、功率、线缆损耗、仪器配置和原始结果。
 
 ![综测仪非信令接收配置](../../../../assets/develop/app-notes/bluetooth-single-item/figure_14-1.jpg){ loading="lazy" }
-<div align="center"><em>图：SF32LB52x 指南示例——综测仪应选择 StandAlone (Non Signaling)，并匹配 DUT 端的信道和数据包参数。</em></div>
+<div align="center"><em>图：SF32LB52x 源示例——综测仪应选择 StandAlone (Non Signaling)，并匹配 DUT 端的信道和数据包参数。</em></div>
 
 官方系列来源：[SF32LB52x](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/%E6%80%9D%E6%BE%88SF32LB5xx%E8%8A%AF%E7%89%87%E8%93%9D%E7%89%99%E5%8D%95%E9%A1%B9%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97.html)、[SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/%E6%80%9D%E6%BE%88SF32LB5xx%E8%8A%AF%E7%89%87%E8%93%9D%E7%89%99%E5%8D%95%E9%A1%B9%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97.html)、[SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/%E6%80%9D%E6%BE%88SF32LB5xx%E8%8A%AF%E7%89%87%E8%93%9D%E7%89%99%E5%8D%95%E9%A1%B9%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97.html) 和 [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/%E6%80%9D%E6%BE%88SF32LB5xx%E8%8A%AF%E7%89%87%E8%93%9D%E7%89%99%E5%8D%95%E9%A1%B9%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97.html)。

@@ -2,7 +2,7 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Conception du schéma du SF32LB52x : mémoire de démarrage, capteurs, interfaces, accès de débogage et programmation en production."
+description: "Conception du schéma du SF32LB52x : mémoire de démarrage, capteurs, interfaces, accès de débogage et flashage en production."
 tags:
     - Matériel
     - Puce
@@ -21,11 +21,11 @@ tags:
 
 - Les mémoires de démarrage externes comprennent SPI NOR, SPI NAND et SD NAND ; eMMC est disponible sur les variantes compatibles à alimentation externe régulée.
 - Les broches de bootstrap `PA13` et `PA17` sélectionnent le support de démarrage.
-- Les notes d'application et le guide de conception du schéma indiquent `PA21` pour la commutation de l'alimentation du stockage de démarrage, tandis que la checklist officielle indique `PA11` pour la Flash externe des variantes alimentées par batterie. Faites confirmer par SiFli la broche de commande adaptée à votre conception. Par ailleurs, une mémoire NOR Flash de 32 MB ou plus connectée via MPI doit pouvoir être mise hors tension puis réalimentée par `PA21` afin que la ROM la reconnaisse après une réinitialisation ou l'entrée en Hibernate. Pendant Hibernate, `VDD_SIP` doit être coupé afin d'éviter les courants de fuite sur les E/S de la mémoire intégrée au même boîtier.
+- Les notes d'application et le guide de conception du schéma indiquent `PA21` pour la commutation de l'alimentation du stockage de démarrage, tandis que la liste de contrôle officielle indique `PA11` pour la Flash externe des variantes alimentées par batterie. Faites confirmer par SiFli la broche de commande adaptée à votre conception. Par ailleurs, une mémoire NOR Flash de 32 Mo ou plus connectée via MPI doit pouvoir être mise hors tension puis réalimentée par `PA21` afin que la ROM la reconnaisse après une réinitialisation ou l'entrée en Hibernate. Pendant Hibernate, `VDD_SIP` doit être coupé afin d'éviter les courants de fuite sur les E/S de la mémoire intégrée au même boîtier.
 
 **Objectif de conception**
 
-Choisissez le support de démarrage et son schéma d'alimentation en fonction de la taille du firmware, de la stratégie de mise à jour et des états basse consommation. La conception doit aussi garantir un démarrage fiable par la ROM après un reset ou l'entrée en mode Hibernate.
+Choisissez le support de démarrage et son schéma d'alimentation en fonction de la taille du firmware, de la stratégie de mise à jour et des états basse consommation, en veillant aussi à un démarrage fiable par la ROM après un reset ou l'entrée en mode Hibernate.
 
 ##### 5.6.1.1. Description de l'interface de stockage { #5611-storage-interface-description }
 
@@ -65,7 +65,7 @@ La puce prend en charge les mémoires Flash SPI NOR, SPI NAND et SD NAND externe
     Les mémoires eMMC possèdent deux domaines d'alimentation : VCC et VCCQ. Option 1 : commuter les deux ensemble réduit le courant à l'arrêt, mais ralentit la reprise de l'eMMC depuis son mode basse consommation et augmente la consommation moyenne du CPU. Option 2 : commuter uniquement VCC et laisser VCCQ alimenté en permanence augmente le courant à l'arrêt par rapport à l'option 1, mais accélère la reprise de l'eMMC et réduit la consommation moyenne du CPU.
 
 !!! important "Résistances de pull-up des interfaces mémoire"
-    La note d'application des variantes à alimentation externe régulée indique : aucun pull-up externe pour NOR Flash ; un pull-up sur PA17 (Hold#) pour SPI NAND ; des pull-ups sur PA13 (D3) et PA15 (CMD) pour SD NAND ; des pull-ups sur PA17 (D1), PA13 (D3) et PA15 (CMD) pour eMMC. La valeur recommandée est 7,5 kΩ. La note des variantes sur batterie ne mentionne que les empreintes de bootstrap PA13/PA17 et ne précise pas si le pull-up PA15/CMD est également requis. N'étendez pas sans confirmation l'exigence PA15 des variantes à alimentation régulée aux modèles sur batterie ; confirmez les pull-ups requis pour la variante et le support de démarrage auprès de SiFli.
+    Pour les variantes à alimentation externe régulée, la note d'application indique qu'aucune résistance de pull-up externe n'est requise pour la NOR Flash, qu'une résistance doit être placée sur PA17 (Hold#) pour la SPI NAND, sur PA13 (D3) et PA15 (CMD) pour la SD NAND, ainsi que sur PA17 (D1), PA13 (D3) et PA15 (CMD) pour l'eMMC. La valeur recommandée est de 7,5 kΩ. Pour les variantes sur batterie, la note ne mentionne que les empreintes de bootstrap PA13/PA17 et ne précise pas si une résistance sur PA15/CMD est également requise. N'étendez pas sans confirmation l'exigence concernant PA15 des variantes à alimentation régulée aux modèles sur batterie ; confirmez auprès de SiFli les résistances requises pour la variante et le support de démarrage concernés.
 
 ##### 5.6.1.2. Configuration de démarrage { #5612-boot-configuration }
 
@@ -120,11 +120,11 @@ La puce prend en charge les mémoires Flash SPI NOR, SPI NAND et SD NAND externe
         Dans cette section, le document source de SiFli utilise les suffixes « SF32LB52AUx6 » et « SF32LB52D/F/HUx6 », qui ne correspondent pas aux noms de modèles B/D/E/G/J employés au début du même document. Ce guide distingue donc les variantes selon le type de mémoire réellement intégré au boîtier (Flash ou PSRAM). En cas de doute, vérifiez le modèle exact de la puce et sa fiche technique.
 
 !!! important "Confirmer les configurations de démarrage qui se chevauchent"
-    Les notes d'application indiquent H/X pour SD NAND, tandis que le guide de conception du schéma SF32LB52x distinct indique H/L ; la note d'application des variantes à alimentation externe régulée indique en outre H/H pour eMMC. Comme X désigne normalement l'un ou l'autre niveau logique, les entrées des variantes à alimentation externe régulée se chevauchent et les sources n'expliquent pas la différence. Ne déduisez pas les niveaux définitifs des broches de bootstrap à partir de ces seuls tableaux ; confirmez la variante exacte et le comportement de la ROM auprès de SiFli. Les circuits de référence utilisent des pull-ups de 7,5 kΩ : la figure 5.6-1 les relie au rail VDD33_VOUT1 de 3,3 V et la figure 5.6-2 à VDDIOA de 3,3 V.
+    Les notes d'application indiquent H/X pour la SD NAND, tandis que le guide de conception du schéma SF32LB52x indique H/L ; la note d'application des variantes à alimentation externe régulée indique en outre H/H pour l'eMMC. Comme X désigne normalement l'un ou l'autre niveau logique, les entrées des variantes à alimentation externe régulée se chevauchent, sans que les sources expliquent la différence. Ne déduisez pas les niveaux définitifs des broches de configuration au démarrage à partir de ces seuls tableaux ; confirmez la variante exacte et le comportement de la ROM auprès de SiFli. Les circuits de référence utilisent des résistances de pull-up de 7,5 kΩ : la figure 5.6-1 les relie au rail VDD33_VOUT1 de 3,3 V et la figure 5.6-2 à VDDIOA de 3,3 V.
 
 ##### 5.6.1.3. Contrôle d'alimentation du stockage de démarrage { #5613-boot-storage-power-control }
 
-Les notes d'application et le guide de conception de schéma OpenSiFli, de priorité supérieure, indiquent `PA21` pour commander l'interrupteur (niveau haut : marche ; niveau bas : arrêt) ; ce guide retient donc `PA21` comme référence étayée par les sources. En revanche, le classeur de checklist lié depuis le wiki SiFli indique `PA11` pour la Flash externe des variantes sur batterie. Ne remplacez pas `PA21` par `PA11` sur la seule base de ce classeur. Celui-ci ne précise pas si `PA11` correspond à une autre commande d'activation sur la carte ou à une divergence d'affectation ; confirmez auprès de SiFli le réseau et la variante exacts avant validation.
+Les notes d'application OpenSiFli et le guide de conception du schéma, qui ont priorité, indiquent `PA21` pour commander l'interrupteur (niveau haut : marche ; niveau bas : arrêt) ; ce guide retient donc `PA21` comme référence étayée par les sources. En revanche, le classeur de la liste de contrôle lié depuis le wiki SiFli indique `PA11` pour la Flash externe des variantes sur batterie. Ne remplacez pas `PA21` par `PA11` sur la seule base de ce classeur. Celui-ci ne précise pas si `PA11` correspond à une autre commande d'activation sur la carte ou à une divergence d'affectation ; confirmez auprès de SiFli le réseau et la variante exacts avant validation.
 
 === "SF32LB520/3/5/7 (alimenté par batterie)"
 
@@ -137,11 +137,11 @@ Les notes d'application et le guide de conception de schéma OpenSiFli, de prior
 === "52B/D/E/G/J (alimentation externe régulée)"
 
     - Le modèle avec Flash intégrée dans le boîtier (SF32LB52BU36) : ajoutez un interrupteur d'alimentation sur VDD_SIP.
-    - Pour les modèles avec PSRAM intégrée dans le boîtier (SF32LB52DUB6/EUB6/GUC6/JUD6), l'interrupteur de VDD_SIP est facultatif si PVDD = 3,3 V et si VDD_SIP utilise le LDO interne ; il est obligatoire si PVDD = 1,8 V.
+    - Pour les modèles avec PSRAM intégrée dans le boîtier (SF32LB52DUB6/EUB6/GUC6/JUD6), l'interrupteur de VDD_SIP est optionnel si PVDD = 3,3 V et si VDD_SIP utilise le LDO interne ; il est obligatoire si PVDD = 1,8 V.
     - L'alimentation du stockage externe est indépendante de VDD_SIP — ajoutez un interrupteur d'alimentation séparé
     - Voir la section 5.6.1.1 pour les compromis de domaine d'alimentation VCC/VCCQ de l'eMMC
     - La note d'application indique **PA21** pour les interrupteurs d'alimentation du stockage liés au démarrage ; la divergence entre les sources concernant la Flash externe des variantes alimentées par batterie est signalée plus haut
-    - Les mémoires Flash NOR de 32 MB ou plus connectées via MPI (Memory Peripheral Interface, interface de périphériques mémoire utilisée avec les mémoires SPI-NOR/SPI-NAND) doivent pouvoir être mises hors tension par PA21. Elles quittent ainsi le mode d'adressage sur 4 octets au redémarrage du MCU ou à l'entrée en Hibernate ; sinon, la ROM ne reconnaîtra pas la Flash. Les Flash NOR de 16 MB ou moins peuvent rester alimentées en permanence.
+    - Les mémoires Flash NOR de 32 Mo ou plus connectées via MPI (Memory Peripheral Interface, interface de périphériques mémoire utilisée avec les mémoires SPI-NOR/SPI-NAND) doivent pouvoir être mises hors tension par PA21. Elles quittent ainsi le mode d'adressage sur 4 octets au redémarrage du MCU ou à l'entrée en Hibernate ; sinon, la ROM ne reconnaîtra pas la Flash. Les Flash NOR de 16 Mo ou moins peuvent rester alimentées en permanence.
     - Le circuit de référence prévoit des emplacements pour les résistances de pull-up de PA13 et PA17. Montez-les selon le type de mémoire ; la valeur recommandée est 7,5 kΩ.
 
 **Erreurs courantes - Stockage**
@@ -154,7 +154,7 @@ Les notes d'application et le guide de conception de schéma OpenSiFli, de prior
 **Liste de contrôle du stockage**
 
 - [ ] Le support de démarrage est sélectionné et documenté avant le routage du PCB.
-- [ ] Les options de tirage de bootstrap `PA13`/`PA17` correspondent au tableau de démarrage.
+- [ ] Les niveaux de tirage des broches de bootstrap `PA13`/`PA17` correspondent au tableau de démarrage.
 - [ ] Les commutateurs nécessaires au stockage de démarrage sont commandés par la broche propre à la variante, confirmée par la source ; la divergence PA11/PA21 a été résolue avec SiFli.
 - [ ] Le compromis VCC/VCCQ de l'eMMC est évalué pour les conceptions à alimentation externe régulée.
 - [ ] Le plan de mise en service couvre les niveaux des broches de configuration de démarrage, les temps d'établissement de l'alimentation mémoire, la lecture de son identifiant et le transfert du firmware.
@@ -170,14 +170,14 @@ Les notes d'application et le guide de conception de schéma OpenSiFli, de prior
 
 Assurer des connexions fiables pour l'alimentation, les interruptions et les bus des capteurs, tout en permettant l'arrêt correct des capteurs inutilisés dans les modes basse consommation.
 
-Le SF32LB52x peut se connecter à des capteurs de fréquence cardiaque, des accéléromètres, des capteurs géomagnétiques et d'autres dispositifs similaires. Choisissez un commutateur d'alimentation à faible courant de repos (Iq) pour couper et rétablir leur alimentation.
+Le SF32LB52x peut se connecter à des capteurs de fréquence cardiaque, des accéléromètres, des capteurs géomagnétiques et d'autres composants similaires. Choisissez un commutateur d'alimentation à faible courant de repos (Iq) pour couper et rétablir leur alimentation.
 
 **Liste de contrôle des capteurs**
 
 - [ ] Les broches de bus, d'interruption, de reset et d'activation de l'alimentation des capteurs sont affectées.
 - [ ] Le courant de repos (Iq) et le courant à l'arrêt du commutateur d'alimentation des capteurs respectent l'objectif de veille.
 - [ ] Les résistances de pull-up sont reliées au rail d'alimentation E/S approprié du capteur.
-- [ ] Le plan de mise en service comprend la recherche des dispositifs sur le bus, le réveil par interruption et les cycles de coupure/rétablissement de l'alimentation du capteur.
+- [ ] Le plan de mise en service comprend la recherche des composants sur le bus, le réveil par interruption et les cycles de coupure/rétablissement de l'alimentation du capteur.
 
 #### 5.6.3. Affectation des broches UART et I2C { #563-uart-and-i2c-pin-assignment }
 

@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB58-DevKit-LCD : carte de développement SF32LB58x pour la mise en route d'écrans MIPI DSI, RGB et QSPI, avec audio, SDIO, CAN et interfaces d'extension."
+description: "SF32LB58-DevKit-LCD : carte de développement SF32LB58x pour la mise en service d'écrans MIPI DSI, RGB et QSPI, avec audio, SDIO, CAN et interfaces d'extension."
 tags:
     - Matériel
     - Carte de développement
@@ -54,8 +54,8 @@ La source SiFli est incohérente pour la V1.0.0 : sa section sur la version du m
 ## Points forts de la carte { #board-highlights }
 
 - Module SF32LB58-MOD-N16R32N1 ou SF32LB58-MOD-A128R32N1, selon la version de la carte
-- La V1.0.1 utilise le SF32LB586VDD36 avec deux HPI-PSRAM de 16 Mo et 1 Mo de NOR QSPI dans le boîtier ; l'identifiant du MCU de la V1.0.0 est contradictoire dans la source SiFli (voir la note de version ci-dessus)
-- 16 Mo de NOR QSPI ou 128 Mo de NAND QSPI supplémentaires, selon la variante de module
+- La V1.0.1 utilise le SF32LB586VDD36 avec deux HPI-PSRAM de 16 MB et 1 MB de NOR QSPI dans le boîtier ; l'identifiant du MCU de la V1.0.0 est contradictoire dans la source SiFli (voir la note de version ci-dessus)
+- 16 MB de NOR QSPI ou 128 MB de NAND QSPI supplémentaires, selon la variante de module
 - Quartz principal de 48 MHz et quartz RTC de 32,768 kHz
 - Connecteur d'antenne IPEX et réseau d'adaptation RF du module
 - Prise en charge d'écrans MIPI DSI / RGB888 via des connecteurs FPC dédiés
@@ -90,8 +90,8 @@ Pour la planification de l'intégration au niveau du module, consultez aussi [SF
 | :--- | :--- |
 | Module principal | SF32LB58-MOD-N16R32N1 ou SF32LB58-MOD-A128R32N1 |
 | MCU selon la révision de la carte | V1.0.1 : SF32LB586VDD36 ; V1.0.0 : écart dans la source SiFli (voir la note de version ci-dessus) |
-| Mémoire dans le boîtier (V1.0.1) | HPI-PSRAM 16 Mo + 16 Mo, plus 1 Mo de NOR QSPI |
-| Stockage supplémentaire | 16 Mo de NOR QSPI ou 128 Mo de NAND QSPI, selon la variante de module |
+| Mémoire dans le boîtier (V1.0.1) | HPI-PSRAM 16 MB + 16 MB, plus 1 MB de NOR QSPI |
+| Stockage supplémentaire | 16 MB de NOR QSPI ou 128 MB de NAND QSPI, selon la variante de module |
 | Écran | Prise en charge des écrans MIPI DSI, DPI/RGB888 et QSPI |
 | Audio | Chemin microphone analogique sur la carte et sortie haut-parleurs stéréo |
 | USB | USB-UART Type-C et USB 2.0 HS Type-C |
@@ -129,7 +129,7 @@ Pour la planification de l'intégration au niveau du module, consultez aussi [SF
 3. Ouvrez l'outil de téléchargement de SiFli et sélectionnez le bon port COM.
 4. Installez ou retirez le cavalier Mode selon que vous souhaitez le mode téléchargement ou le mode d'exécution normal.
 5. Alimentez la carte, puis téléchargez ou exécutez le firmware cible.
-6. Après la mise en route de l'écran, validez le tactile, l'audio, le stockage et tous les périphériques d'extension requis par le produit.
+6. Après la mise en service de l'écran, validez le tactile, l'audio, le stockage et tous les périphériques d'extension requis par le produit.
 
 Utilisez un véritable câble USB capable de transmettre des données. Certains câbles Type-C n'assurent que l'alimentation et n'exposent ni l'UART ni le chemin de données USB.
 
@@ -182,7 +182,7 @@ La carte expose à la fois des signaux au niveau du module et deux connecteurs d
 
 | Groupe de signaux | Broches / signaux typiques | Usage principal |
 | :--- | :--- | :--- |
-| Téléchargement et débogage | PB36, PB37, SWDIO, SWCLK, Boot_Mode, RSTN | Téléchargement UART, débogage logiciel, mise en route SWD |
+| Téléchargement et débogage | PB36, PB37, SWDIO, SWCLK, Boot_Mode, RSTN | Téléchargement UART, débogage logiciel, mise en service SWD |
 | MicroSD | PA75, PA76, PA77, PA70, PA81, PA79, PB58 | Interface de carte SDIO et détection de carte |
 | RGB LCDC1 | PA12–PA15, PA22–PA27, PA43–PA48, PA50, PA53–PA58, PA61–PA63, PA65, PA67 | Chemin d'affichage RGB888 |
 | MIPI DSI LCDC1 | Paires différentielles DSI_D0–DSI_D3 et DSI_CLK | Chemin d'affichage MIPI DSI ; le fonctionnement documenté prend en charge jusqu'à deux voies de données |
@@ -225,7 +225,7 @@ Les indications d'écrans pris en charge issues de la source SiFli comprennent :
 La carte prend en charge :
 
 - Un chemin d'entrée microphone sur la carte
-- Deux chemins d'entrée CAN audio ; des cavaliers à résistances déterminent si un chemin partagé est relié au microphone de la carte ou à l'entrée du connecteur à 40 broches
+- Deux chemins d'entrée ADC audio ; des cavaliers à résistances déterminent si un chemin partagé est relié au microphone de la carte ou à l'entrée du connecteur à 40 broches
 - Deux sorties haut-parleurs
 - Un chemin de signal PDM multiplexé avec les signaux RGB et donc indisponible lorsque le chemin d'affichage RGB est actif
 

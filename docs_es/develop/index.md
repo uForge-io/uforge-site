@@ -11,7 +11,7 @@ tags:
 
 La sección de desarrollo explica cómo convertir una placa SF32 funcional en un firmware de producto mantenible. Úsela después de ejecutar `hello_world` por primera vez para elegir la configuración de placa, repetir compilaciones y grabaciones, adaptar un ejemplo adecuado, integrar funciones del producto, diagnosticar fallos y planificar actualizaciones y recuperación.
 
-Para la primera ejecución de la placa, consulte [Primeros pasos](../getting-started/index.md); para elegir el dispositivo y la placa de desarrollo, [Productos SF32](../sf32-products/index.md); para esquemas y hardware de producción, [Hardware](../hardware/index.md); y para conocer los fundamentos de arquitectura, [Aprendizaje](../learn/index.md). Esta sección se centra en el flujo de ingeniería y en la orientación de implementación para tareas concretas.
+Para la primera ejecución de la placa, consulte [Primeros pasos](../getting-started/index.md); para elegir el dispositivo y la placa de desarrollo, [Productos SF32](../sf32-products/index.md); para esquemáticos y hardware de producción, [Hardware](../hardware/index.md); y para conocer los fundamentos de arquitectura, [Aprendizaje](../learn/index.md). Esta sección se centra en el flujo de ingeniería y en la orientación de implementación para tareas concretas.
 
 !!! info "SiFli-Solution"
     SiFli-Solution es otro paquete de software de SiFli que μForge.io no documenta actualmente. La información de esta sección se limita a SiFli-SDK y a las opciones comunitarias indicadas a continuación. Si su producto necesita una solución más completa para dispositivos con pantalla, consulte la [documentación oficial de SiFli Solution](https://docs.sifli.com/projects/solution/index.html) y póngase en contacto directamente con SiFli. Un producto complejo que siga esta vía puede requerir una colaboración directa y estrecha con SiFli.
@@ -75,7 +75,7 @@ Las notas de aplicación se organizan por tarea de integración, no según el or
 | [SiFli-SDK](platforms/sifli-sdk/overview.md) | Establecer el flujo de referencia: configuración, compilación, grabación, componentes reutilizables y diagnóstico. |
 | [Notas de aplicación de SiFli-SDK](platforms/sifli-sdk/sdk-application-notes.md) | Aplicar el SDK a una tarea concreta, como ADC, sensores, Flash externo, bajo consumo, diagnóstico o pruebas de RF y Bluetooth. |
 | [Ejemplos](examples/index.md) | Elegir y adaptar una implementación funcional para la placa exacta y el subsistema más exigente del producto. |
-| [Herramientas](tools/index.md) | Elegir herramientas de grabación, monitorización, trazas, análisis de fallos, recursos y producción. |
+| [Herramientas](tools/index.md) | Elegir herramientas de grabación, supervisión, trazas, análisis de fallos, recursos y producción. |
 | [Temas de firmware](firmware-topics/index.md) | Tomar decisiones transversales sobre particiones, OTA/DFU, USB, gestión de energía y evidencias de diagnóstico. |
 | [Experimental / Comunidad](platforms/zephyr/overview.md) | Evaluar Zephyr, Arduino, MicroPython o Rust teniendo en cuenta el alcance y el nivel de madurez indicados en cada página. |
 
@@ -106,7 +106,7 @@ Antes de considerar que una ruta de firmware está lista para incorporarse al pr
 
 - ¿Qué chip, revisión de la placa o del hardware propio y configuración se probaron?
 - ¿Qué SDK, paquete, rama o commit generó el firmware?
-- ¿Qué comandos de compilación, grabación, monitorización y recuperación completa funcionan?
+- ¿Qué comandos de compilación, grabación, supervisión y recuperación completa funcionan?
 - ¿Qué ejemplo o prueba demuestra el funcionamiento de cada periférico y subsistema requerido?
 - ¿Se validaron el diseño de particiones, el comportamiento de actualización, el objetivo de consumo y el procedimiento para decodificar los volcados de fallos?
 

@@ -8,7 +8,7 @@ tags:
 
 # Energieverbrauch messen und validieren { #power-measurement-and-validation }
 
-Eine Schätzung der Akkulaufzeit ist erst belastbar, wenn ihre Annahmen durch Messungen an der realen Hardware bestätigt werden. Nutzen Sie diese Seite zusammen mit der [Energiesparendes Design im Überblick](overview.md) und dem Beispiel zur [Stromverbrauchsanalyse einer Smartwatch](smartwatch-power-profiling.md). Messen Sie zunächst die einzelnen Komponenten, prüfen Sie anschließend vollständige Firmware-Szenarien und gleichen Sie das Tagesnutzungsmodell mit den Messwerten ab. Optimiert wird danach der größte nachgewiesene Energieverbraucher.
+Eine Schätzung der Akkulaufzeit ist erst belastbar, wenn ihre Annahmen durch Messungen an der realen Hardware bestätigt werden. Nutzen Sie diese Seite zusammen mit dem [Überblick zum Energiespardesign](overview.md) und der [Stromverbrauchsanalyse einer Smartwatch](smartwatch-power-profiling.md). Messen Sie zunächst die einzelnen Komponenten, prüfen Sie anschließend vollständige Firmware-Szenarien und gleichen Sie das Tagesnutzungsmodell mit den Messwerten ab. Optimiert wird danach der größte nachgewiesene Energieverbraucher.
 
 ## Energie statt nur Stromstärke messen { #measure-energy-not-current-alone }
 
@@ -72,7 +72,7 @@ Messen Sie die einzelnen Komponenten zunächst an einer separat messbaren Versor
 
 </div>
 
-Wenn es um den Energieverbrauch des gesamten Produkts geht, messen Sie am Batterieeingang. Messungen einzelner Versorgungsschienen sind für die Fehlersuche weiterhin wichtig. Rechnen Sie sie jedoch vor der Übernahme in das Akkulaufzeitmodell mithilfe des gemessenen Wirkungsgrads und Ruhestroms der Regler auf die Batterieseite um. Die Summe der Schienenströme ist nicht mit dem Strom am Batterieeingang gleichzusetzen.
+Wenn es um den Energieverbrauch des gesamten Produkts geht, messen Sie am Akkueingang. Messungen einzelner Versorgungsschienen sind für die Fehlersuche weiterhin wichtig. Rechnen Sie sie jedoch vor der Übernahme in das Akkulaufzeitmodell mithilfe des gemessenen Wirkungsgrads und Ruhestroms der Regler auf die Akkuseite um. Die Summe der Schienenströme ist nicht mit dem Strom am Akkueingang gleichzusetzen.
 
 ## Durch Treiber gesteuerte Energiesparzustände überprüfen { #verify-driver-controlled-power-states }
 
@@ -88,13 +88,13 @@ Eine Komponente erreicht den spezifizierten Energiesparzustand nur, wenn ihr Tre
 | Zuständigkeit für PM-Sperren und -Einschränkungen | Legen Sie fest, ob der Komponententreiber oder ein übergeordneter Dienst jede PM-Sperre bzw. -Einschränkung verwaltet. Halten Sie sie nur, solange die geschützte Ressource benötigt wird, und geben Sie sie nach einem sicheren Übergang der Komponente in den Leerlauf auf allen Erfolgs-, Fehler- und vorzeitigen Rückkehrpfaden frei. | Messprotokolle belegen, dass die Sperre den erforderlichen Zeitraum abdeckt, nicht vorzeitig freigegeben wird und nach Abschluss oder Fehler nicht gehalten bleibt und dadurch den Schlafmodus blockiert. |
 | Schaltfolge von Versorgung, Enable, Reset und Takt | Die erforderliche Reihenfolge und Zeitvorgaben beim Ein- und Ausschalten sowie während des Betriebs einhalten. | GPIO-Marker und Stromverlauf zeigen keine unbeabsichtigten aktiven Phasen oder Stromspitzen. |
 | SPI, I2C, UART und weitere Steuerbusse | Unnötige Kommunikation beenden und Chip-Select-, Takt-, Daten- und Interrupt-Leitungen in den vorgeschriebenen inaktiven Zustand versetzen. | Zwischen Übertragungen bleibt die Komponente im vorgesehenen Energiesparzustand. |
-| GPIO-Pulls und hochohmiger Zustand | Jeden Steuerpin gezielt als Ausgang High/Low, Eingang mit geeignetem Pull-up/Pull-down oder – nur wenn die externe Schaltung den Pegel festlegt – hochohmig konfigurieren. | Strom bei versorgtem und unversorgtem Gegenüber messen; auch Reset- und Standardzustände prüfen. |
+| GPIO-Pull-Konfigurationen und hochohmiger Zustand | Jeden Steuerpin gezielt als High- oder Low-Ausgang, als Eingang mit geeignetem Pull-up bzw. Pull-down oder – nur wenn die externe Schaltung den Pegel festlegt – hochohmig konfigurieren. | Strom bei versorgtem und unversorgtem Gegenüber messen; auch Reset- und Standardzustände prüfen. |
 | Verbindungen zwischen Versorgungsdomänen | Eine unversorgte Komponente niemals über einen Steuer- oder Datenpin ansteuern, außer die Hardware unterstützt diesen Pfad ausdrücklich. | Bei abgeschalteter Versorgung auf einer Schnittstellenseite treten weder Rückspeisung noch Leckstrom auf. |
-| Fehler- und Wiederanlaufpfade | Nach Timeouts, fehlgeschlagenen Übertragungen, Aufwecken und Firmware-Reset den korrekten Zustand wiederherstellen. | Langzeitmessungen zeigen keinen anhaltenden oder zunehmend erhöhten Strom durch unvollständige Fehlerbereinigung. |
+| Fehler- und Wiederanlaufpfade | Nach Timeouts, fehlgeschlagenen Übertragungen, Aufwecken und Firmware-Reset den korrekten Zustand wiederherstellen. | Langzeitmessungen zeigen weder dauerhaft zu hohen noch im Verlauf weiter ansteigenden Strom durch unvollständige Zustandsbereinigung. |
 
 </div>
 
-Gültige Logikpegel schließen Leckströme nicht aus. Interne Pull-Widerstände, widersprüchliche Pull-Konfigurationen, Vorgabewerte nach einem Reset, ESD-Pfade und Bus-Pull-ups können Leck- oder Rückspeisepfade bilden, obwohl beide Bausteine scheinbar gültige Logikpegel führen. Messen Sie den Schnittstellenstrom, wenn beide Seiten versorgt sind, wenn eine Seite unversorgt ist und während des Übergangs zwischen diesen Zuständen. Weicht das Ergebnis von der Erwartung ab, prüfen Sie zuerst, ob eine falsche Treiberkonfiguration oder Schaltfolge oder ein Leckpfad auf der Platine die Ursache ist. Ändern Sie nicht vorschnell die Werte in der Energieprofiltabelle.
+Gültige Logikpegel schließen Leckströme nicht aus. Interne Pull-Widerstände, widersprüchliche Pull-Konfigurationen, Vorgabewerte nach einem Reset, ESD-Pfade und Bus-Pull-ups können Leck- oder Rückspeisepfade bilden, obwohl an beiden Seiten der Schnittstelle scheinbar gültige Logikpegel anliegen. Messen Sie den Schnittstellenstrom, wenn beide Seiten versorgt sind, wenn eine Seite unversorgt ist und während des Übergangs zwischen diesen Zuständen. Weicht das Ergebnis von der Erwartung ab, prüfen Sie zuerst, ob eine falsche Treiberkonfiguration oder Schaltfolge oder ein Leckpfad auf der Platine die Ursache ist. Ändern Sie nicht vorschnell die Werte in der Energieprofiltabelle.
 
 ## Firmware-Szenarien validieren { #validate-firmware-scenarios }
 
@@ -109,8 +109,8 @@ Nachdem das Verhalten der einzelnen Komponenten bekannt ist, messen Sie vollstä
 | Start- und Endmarker | Der Verlauf umfasst den gesamten Ablauf vom Aufwachen bis zur Rückkehr in den Schlafmodus. | Anfang, Ende und Dauer des Szenarios. |
 | Aktivität der Komponenten und Versorgungsschienen | Nur die erwarteten Komponenten sind aktiv. | Annahmen zu den Komponenten und Zuordnung zu `Other`. |
 | Energieverwaltungszustand nach Abschluss der Aufgabe | Das System erreicht den vorgesehenen Schlafzustand. | Leerlauf- oder Bereitschaftsstrom und angenommene Restdauer. |
-| Strom, `V_DUT`, Ladung (mAh) und Energie (mWh) je Ereignis | Die Messung bildet den Verbrauch auf der Batterieseite ab. | Ladung (mAh) und Energie (mWh) je Ereignis. |
-| Produktverhalten | Erforderliche Reaktionszeit, HF-Zuverlässigkeit, Audioqualität und Nutzererlebnis bleiben erhalten. | Ein nutzbarer Betriebspunkt statt einer für das Produkt ungeeigneten Energiespareinstellung. |
+| Strom, `V_DUT`, Ladung (mAh) und Energie (mWh) je Ereignis | Die Messung bildet den Verbrauch auf der Akkuseite ab. | Ladung (mAh) und Energie (mWh) je Ereignis. |
+| Produktverhalten | Erforderliche Reaktionszeit, RF-Zuverlässigkeit, Audioqualität und Nutzererlebnis bleiben erhalten. | Ein nutzbarer Betriebspunkt statt einer für das Produkt ungeeigneten Energiespareinstellung. |
 
 </div>
 
@@ -118,7 +118,7 @@ Teilen Sie den Stromverlauf mithilfe von Firmware-gesteuerten GPIO-Markern in Ph
 
 ## Das Tagesnutzungsprofil abgleichen { #reconcile-the-daily-use-profile }
 
-Die abschließende Prüfung darf nicht aus einer Sammlung isolierter Best-Case-Messungen bestehen. Führen Sie anhand der gemessenen Energie je Szenario und dessen tatsächlicher Häufigkeit einen repräsentativen Nutzungstag durch oder rekonstruieren Sie ihn. Vergleichen Sie die Messwerte sowohl für die Ladung als auch für die Energie mit der Profiltabelle:
+Die abschließende Prüfung darf nicht aus einer Sammlung isolierter Best-Case-Messungen bestehen. Erstellen Sie anhand der gemessenen Energie je Szenario und dessen tatsächlicher Häufigkeit ein repräsentatives Tagesprofil – durch einen realen Test oder rechnerische Rekonstruktion. Vergleichen Sie die Messwerte sowohl für die Ladung als auch für die Energie mit der Profiltabelle:
 
 ```text
 daily_charge_mAh = sum(occurrences_per_day x charge_per_occurrence_mAh)
@@ -133,7 +133,7 @@ flowchart LR
     B --> C["Tägliche Ladungsmenge und Energie aus realer Nutzung berechnen"]
     C --> D["Messwerte mit der Profiltabelle vergleichen"]
     D --> E{"Erklärt das Modell den Messverlauf?"}
-    E -- "Nein" --> F["Fehlende Komponenten, fehlerhaftes Timing, einen unpassenden Energieverwaltungszustand oder eine unzutreffende Spannungsannahme ermitteln"]
+    E -- "Nein" --> F["Fehlende Komponenten, falsche Zeitannahmen, einen unpassenden Energieverwaltungszustand oder eine unzutreffende Spannungsannahme ermitteln"]
     F --> G["Firmware, Hardware oder anhand von Messungen belegte Tabelleneingaben korrigieren"]
     G --> A
     E -- "Ja" --> H["Bestätigte Verbraucher priorisieren und den größten optimieren"]
@@ -168,4 +168,4 @@ Nutzen Sie das abgeglichene Profil, um die wirksamsten Optimierungen zu priorisi
 Bevor Sie Angaben zur Akkulaufzeit veröffentlichen, archivieren Sie die Messdaten der Komponenten und Szenarien, das Tagesnutzungsprofil, die Spannungsaufzeichnungen, Firmware-Marker sowie die versionierten Annahmen, die diese Daten verbinden. Wiederholen Sie die betroffenen Schritte, wenn sich Firmware-Zeitplanung, Displaysteuerung, Funkparameter, Sensorabtastrate, Komponenten der Stromversorgung oder Annahmen zur Produktnutzung ändern.
 
 !!! note "Automatisch erstellter Inhalt"
-    Diese Seite wurde ohne ein eigenes Quelldokument aus mehreren Referenzen zusammengestellt. Prüfen Sie technische Aussagen vor der Verwendung anhand der offiziellen SiFli-Dokumentation.
+    Diese Seite wurde ohne ein vorhandenes Quelldokument erstellt. Prüfen Sie technische Aussagen vor der Verwendung anhand der offiziellen SiFli-Dokumentation.

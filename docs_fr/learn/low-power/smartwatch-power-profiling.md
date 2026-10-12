@@ -1,7 +1,7 @@
 ---
 icon: lucide/chart-no-axes-combined
 title: "Profilage de la consommation d'une montre connectée"
-description: "Construire et valider un modèle d'autonomie de montre connectée à partir de scénarios d'usage quotidiens, puis utiliser le résultat pour prioriser le travail de basse consommation."
+description: "Construire et valider un modèle d'autonomie de montre connectée à partir de scénarios d'usage quotidiens, puis utiliser le résultat pour prioriser les optimisations de basse consommation."
 tags:
   - Basse consommation
   - Objets portables
@@ -9,9 +9,9 @@ tags:
 
 # Profilage de la consommation d'une montre connectée { #power-profiling-a-smartwatch }
 
-Le profilage de la consommation transforme l'usage quotidien attendu en une estimation d'autonomie et, surtout, en une liste hiérarchisée des charges qui méritent d'être optimisées. Cet article prend comme exemple travaillé le [classeur anglais de données de profil de consommation d'une montre connectée](assets/smartwatch-power-profile-data.xlsx) fourni. Il montre comment convertir le comportement de l'utilisateur en mAh par jour, repérer les charges qui dominent le budget et faire d'un modèle de tableur un plan de mesure.
+Le profilage de la consommation transforme l'usage quotidien attendu en une estimation d'autonomie et, surtout, en une liste hiérarchisée des charges à optimiser. Cet article s'appuie sur le [classeur anglais de données de profil de consommation d'une montre connectée](assets/smartwatch-power-profile-data.xlsx) fourni comme exemple détaillé. Il montre comment convertir le comportement de l'utilisateur en mAh par jour, repérer les charges qui dominent le budget et transformer le modèle du tableur en plan de mesure.
 
-!!! warning "Un modèle, pas une spécification de composant"
+!!! warning "Un modèle, pas une spécification d'appareil"
     Les courants et hypothèses d'usage de cet exemple appartiennent au modèle fourni. Ce ne sont pas des données de caractérisation d'un composant SF32, d'un écran, d'une batterie ou d'une conception de montre particuliers. Remplacez-les par des mesures de votre matériel avant d'utiliser le résultat dans une affirmation d'autonomie de produit.
     Le classeur ne contient aucun relevé de mesure ; il n'identifie donc aucune entrée comme une mesure matérielle. Le résultat de 13,15 jours est une estimation du modèle, et non une autonomie observée.
 
@@ -31,7 +31,7 @@ Commencez par définir la frontière du modèle. Ce classeur représente une mon
 | Courant AOD de l'AMOLED | 2 mA | Défini dans le modèle, mais son scénario AOD est désactivé dans cette base. |
 | Capacité nominale de la batterie | 250 mAh | La capacité de départ avant la marge du modèle. |
 | Marge de dégradation de la batterie | 7% | Réduit la capacité disponible à 232,5 mAh. |
-| Tension nominale de la batterie | 3,87 V | Utilisée par l'aide de normalisation de tension du classeur. |
+| Tension nominale de la batterie | 3,87 V | Utilisée par la formule de normalisation de tension du classeur. |
 
 </div>
 
@@ -308,7 +308,7 @@ Travaillez du plus gros contributeur modélisé vers le plus petit, puis validez
 2. **Politique de notification :** regroupez les notifications non urgentes lorsque l'expérience produit le permet. Vérifiez si chaque événement a besoin à la fois de l'écran et d'un retour haptique.
 3. **Veille connectée :** confirmez que le MCU atteint le mode de veille prévu après chaque événement. Auditez les timers périodiques, les boucles d'interrogation, les rappels Bluetooth et les votes de gestion d'énergie.
 4. **Motifs haptiques :** réglez l'amplitude et la durée à l'aide de tests perceptifs. Un motif plus court ou plus doux peut réduire l'énergie sans rendre les alertes moins utilisables.
-5. **Détection de longue durée :** profilez le suivi du sommeil et l'enregistrement d'exercice comme des scènes complètes, y compris le rapport cyclique des capteurs, le traitement, le trafic mémoire et le comportement radio.
+5. **Surveillance prolongée :** profilez le suivi du sommeil et l'enregistrement d'exercice comme des scénarios complets, y compris le rapport cyclique des capteurs, le traitement, le trafic mémoire et le comportement radio.
 
 N'optimisez pas un chiffre de tableur isolé. Un changement apparemment efficace peut augmenter la fréquence des réveils, réduire la satisfaction de l'utilisateur ou allonger le temps actif au point d'effacer l'économie d'énergie attendue.
 
@@ -341,7 +341,7 @@ Le modèle devient utile lorsqu'il est étalonné en continu par des mesures. Po
 
 ## Points clés à retenir { #key-takeaways }
 
-- L'autonomie est la capacité effective de la batterie divisée par la consommation de charge quotidienne ; ce modèle projette 13,15 jours à partir de 232,5 mAh de capacité utilisable et de 17,68 mAh/jour de charge activée.
+- L'autonomie est la capacité effective de la batterie divisée par la consommation quotidienne ; ce modèle projette 13,15 jours à partir de 232,5 mAh de capacité utilisable et d'une charge quotidienne modélisée de 17,68 mAh.
 - Dans la base fournie, le comportement de l'écran domine le budget. Le réveil au lever du poignet et les notifications de message représentent à eux seuls environ la moitié de la charge quotidienne.
 - Le classement des scénarios indique où mesurer et optimiser en premier ; il est plus utile qu'un seul chiffre de courant moyen.
 - Utilisez le rendement réel du convertisseur et le courant de repos avant de traiter une prévision de classeur comme une affirmation d'autonomie de production.

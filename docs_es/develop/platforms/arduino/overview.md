@@ -8,18 +8,18 @@ tags:
 
 # Arduino { #arduino }
 
-[OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) es un core Arduino basado en Zephyr para SF32. Es una opción útil para sketches, experimentos con periféricos, demostraciones y prototipos iniciales en la **SiFli SF32LB52 DevKit LCD**.
+[OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) es un núcleo de Arduino basado en Zephyr para SF32. Es una opción adecuada para crear sketches, probar periféricos, preparar demostraciones y desarrollar prototipos iniciales en la **SiFli SF32LB52 DevKit LCD**.
 
-!!! warning "Core beta"
-    OpenSiFli etiqueta este core como **BETA**. Las funciones, API, contenido de los paquetes, comportamiento del cargador y versiones pueden cambiar. Antes de adoptar esta plataforma para un producto, confirme el comportamiento actual en el README del proyecto y en Releases.
+!!! warning "Núcleo en fase beta"
+    OpenSiFli marca este núcleo como **BETA**. Las funciones, API, contenido de los paquetes, comportamiento del cargador y versiones pueden cambiar. Antes de adoptar esta plataforma para un producto, confirme el comportamiento actual en el README del proyecto y en Releases.
 
-Para la instalación inicial del IDE, seleccionar la placa y el puerto, instalar el bootloader y comprobar Blink, siga [Primeros pasos con Arduino](../../../getting-started/arduino/getting-started-arduino.md). Esta página ayuda a decidir si Arduino encaja y a mantener un proyecto Arduino después de esa primera ejecución.
+Para completar la primera puesta en marcha (instalación del IDE, selección de la placa y el puerto, instalación del cargador de arranque y comprobación de Blink), siga [Primeros pasos con Arduino](../../../getting-started/arduino/getting-started-arduino.md). Esta página ayuda a decidir si Arduino encaja y a mantener un proyecto Arduino después de esa primera ejecución.
 
 ## Cuándo encaja Arduino { #where-arduino-fits }
 
 Elija Arduino cuando la iteración rápida y el modelo familiar de sketches sean más importantes que el acceso completo a las capacidades específicas de SF32. Es adecuado para pruebas de concepto, validación sencilla de periféricos, proyectos de aula o demostración y equipos con una base de código Arduino existente.
 
-Pase a [SiFli-SDK](../sifli-sdk/overview.md) cuando el producto dependa de una base de firmware para producción, ajuste de la pila Bluetooth, aplicaciones con muchos gráficos, optimización de bajo consumo, puesta en marcha de la placa o middleware del proveedor. Use [Zephyr](../zephyr/overview.md) si necesita controlar directamente devicetree, Kconfig y la estructura de aplicaciones nativa de Zephyr.
+Pase a [SiFli-SDK](../sifli-sdk/overview.md) cuando el producto dependa de una base de firmware para producción, ajuste de la pila Bluetooth, aplicaciones con muchos gráficos, optimización de bajo consumo, puesta en marcha de la placa o middleware del proveedor. Use [Zephyr](../zephyr/overview.md) si necesita un control detallado de devicetree, Kconfig y la estructura de aplicaciones nativa de Zephyr.
 
 <div align="center"><em>Tabla: Adecuación de la plataforma Arduino</em></div>
 
@@ -29,7 +29,7 @@ Pase a [SiFli-SDK](../sifli-sdk/overview.md) cuando el producto dependa de una b
 |:-------------------|:------------------------|
 | Sketches breves y experimentos rápidos con periféricos. | Un producto que requiera un conjunto amplio y validado de funciones SF32. |
 | Equipos que ya trabajan con Arduino IDE o Arduino CLI. | Puesta en marcha de placas personalizadas o control profundo de Flash, alimentación y middleware. |
-| Demostraciones y prototipos iniciales para validar la viabilidad. | Configuración, drivers y estructura RTOS nativos de Zephyr. |
+| Demostraciones y prototipos iniciales para validar la viabilidad. | Configuración, controladores y estructura RTOS nativos de Zephyr. |
 
 </div>
 
@@ -58,7 +58,7 @@ Un identificador de placa SiFli o Zephyr con un nombre parecido no es intercambi
 
 ## Modelo de compilación y cargador { #build-and-loader-model }
 
-ArduinoCore-zephyr combina una API Arduino para sketches con un cargador Zephyr y la configuración específica de la placa. Los dos menús de opciones afectan al arranque y al enlazado, no son simples indicadores del compilador.
+ArduinoCore-zephyr combina una API Arduino para sketches con un cargador Zephyr y la configuración específica de la placa. Los dos menús de opciones afectan al arranque y al enlazado; no son simples opciones del compilador.
 
 <div align="center"><em>Tabla: Opciones de compilación y cargador</em></div>
 
@@ -75,11 +75,11 @@ ArduinoCore-zephyr combina una API Arduino para sketches con un cargador Zephyr 
 
 Empiece con **Standard** y **Dynamic**. En modo Debug, el sketch cargado no comienza hasta ejecutar `sketch` desde la shell de Zephyr; es una causa habitual de que la carga parezca exitosa, aunque la aplicación no haga nada.
 
-El cargador es un artefacto independiente para cada placa. Burn Bootloader suele ser una operación de primer uso, actualización o recuperación, no un paso de cada carga de sketch. Registre juntos la versión del paquete Arduino y cualquier actualización del cargador; las suposiciones incompatibles son difíciles de diagnosticar después.
+El cargador es un artefacto independiente para cada placa. La opción Burn Bootloader suele utilizarse en la primera puesta en marcha, para actualizar el cargador o para recuperar la placa; no forma parte de cada carga de sketch. Registre juntos la versión del paquete Arduino y cualquier actualización del cargador; las suposiciones incompatibles son difíciles de diagnosticar después.
 
 ## Límites de integración { #integration-boundaries }
 
-Trate el core Arduino como una capa de integración, no como un sustituto de la plataforma Zephyr subyacente. Un sketch puede requerir símbolos o subsistemas Zephyr que el cargador no exponga o habilite. Los síntomas habituales son símbolos Zephyr sin definir, subsistemas ausentes o presión de memoria debida a la carga dinámica y a la shell.
+Trate el núcleo de Arduino como una capa de integración, no como un sustituto de la plataforma Zephyr subyacente. Un sketch puede requerir símbolos o subsistemas de Zephyr que el cargador no exponga o habilite. Los síntomas habituales son símbolos de Zephyr sin definir, subsistemas ausentes o presión de memoria debida a la carga dinámica y a la shell.
 
 Antes de incorporar una biblioteca o función a un prototipo de producto, confirme todo lo siguiente:
 
@@ -89,11 +89,11 @@ Antes de incorporar una biblioteca o función a un prototipo de producto, confir
 - Un presupuesto medible de RAM y Flash con la configuración del cargador prevista.
 - Una vía de recuperación mediante el cargador Arduino o firmware SiFli-SDK.
 
-No deduzca que una biblioteca es compatible solo porque exista una API Arduino o un driver Zephyr de nombre parecido. Valide en el hardware de destino la combinación completa de sketch, cargador, placa y paquete.
+No deduzca que una biblioteca es compatible solo porque exista una API de Arduino o un controlador de Zephyr con un nombre parecido. Valide en el hardware de destino la combinación completa de sketch, cargador, placa y paquete.
 
 ## Diagnóstico y escalado { #diagnose-and-escalate }
 
-Si no se detecta la placa, no se puede programar o Blink no funciona, empiece por la guía de primera ejecución. Una vez confirmada esa base, use la siguiente tabla para acotar el diagnóstico.
+Si no se detecta la placa, no se puede grabar o Blink no funciona, empiece por la guía de primera ejecución. Una vez confirmada esa base, use la siguiente tabla para acotar el diagnóstico.
 
 <div align="center"><em>Tabla: Diagnóstico inicial de problemas Arduino</em></div>
 
@@ -102,7 +102,7 @@ Si no se detecta la placa, no se puede programar o Blink no funciona, empiece po
 | Síntoma tras completar la primera ejecución | Primera investigación |
 |:-------------------------------------------|:--------------------|
 | El sketch solo se inicia tras ejecutar `sketch`. | Confirme que se seleccionó Debug intencionadamente. |
-| Falta una función o subsistema Zephyr. | Revise el README del core y las exportaciones/configuración del cargador. |
+| Falta una función o subsistema de Zephyr. | Revise el README del núcleo y las exportaciones/configuración del cargador. |
 | Error de memoria o inestabilidad. | Mida el presupuesto del sketch, tenga en cuenta la carga dinámica y la shell de Zephyr, y evalúe Static solo con un plan de recuperación. |
 | La biblioteca compila, pero el hardware no funciona. | Confirme las suposiciones sobre los pines de la placa y pruebe un ejemplo mínimo específico para ella. |
 | Falla la carga o la recuperación. | Restablezca el procedimiento Arduino documentado y, si hace falta, use la vía de recuperación SiFli-SDK de la placa. |

@@ -1,6 +1,6 @@
 ---
 icon: lucide/list-checks
-description: "Lista de comprobación para revisar, punto por punto, el esquemático del MCU SF32LB52x: encapsulado, alimentación, reloj, RF, almacenamiento, pantalla y fabricación."
+description: "Lista de comprobación para revisar, punto por punto, el esquemático de la MCU SF32LB52x: encapsulado, alimentación, reloj, RF, almacenamiento, pantalla y fabricación."
 hide:
     - navigation
 tags:
@@ -44,7 +44,7 @@ Cada tabla cubre un bloque funcional del esquemático. La columna «Aplicable a�
 | 2 | Si la pantalla debe encenderse en cuanto se conecta el cargador, no se recomienda el cargador interno; se recomienda un CI de carga externo con gestión de la ruta de alimentación | Solo 520/3/5/7 | Obligatorio |
 | 3 | El cargador interno solo se puede usar si es aceptable exigir que la batería se cargue hasta 3,6 V antes de que el software encienda la pantalla | Solo 520/3/5/7 | Obligatorio |
 | 4 | Se recomienda un dispositivo OVP con salida LDO integrada (por ejemplo, LP5305AQVF): salida LDO de 4,7–5,4 V, corriente de salida ≥0,5 A y umbral de disparo de protección contra sobrecorriente ≥0,7 A | Solo 520/3/5/7 | Obligatorio |
-| 5 | Si el dispositivo OVP tiene OVLO ajustable, se usan resistencias del divisor con tolerancia del 1 % y el error de V_OVLO_TH es inferior al 3 %; tanto el mínimo como el máximo de V_OVP deben quedar dentro de 5,15–5,55 V. La fuente identifica 5,15 V como la tensión máxima de entrada del cargador y 5,55 V como el límite superior de entrada del cargador 52x; véase la nota de discrepancia tras la tabla | Solo 520/3/5/7 | Obligatorio |
+| 5 | Si el dispositivo OVP tiene OVLO ajustable, se usan resistencias del divisor con tolerancia del 1 % y el error de V_OVLO_TH es inferior al 3 %; tanto el mínimo como el máximo de V_OVP deben quedar dentro de 5,15–5,55 V. La fuente identifica 5,15 V como la tensión máxima de entrada del cargador y 5,55 V como el límite superior de entrada del cargador 52x; consulte la nota de discrepancia tras la tabla | Solo 520/3/5/7 | Obligatorio |
 | 6 | Si no se usa el cargador integrado en el chip, VBUS puede dejarse sin conectar y se puede omitir su condensador. Sin embargo, VBAT ya no podrá usarse como salida de alimentación; en ese caso, se conecta un condensador externo de 1 µF a VBAT | Solo 520/3/5/7 | Obligatorio |
 | 7 | Para medir la tensión de la batería, el chip ya conecta internamente un canal GPADC a VBAT (o VBATS); no se debe conectar además VBAT a un pin GPADC | Todas las variantes | Obligatorio |
 | 8 | <span class="flag-red">La tensión de alimentación de los pines VCC y VBAT es de 3,2 V–4,7 V</span> | Solo 520/3/5/7 | Obligatorio |
@@ -55,7 +55,7 @@ Cada tabla cubre un bloque funcional del esquemático. La columna «Aplicable a�
 | 13 | La salida VDD_RTC tiene un punto de prueba o un condensador de filtro en una ubicación adecuada para medir la tensión | Todas las variantes | Obligatorio |
 | 14 | AVDD_BRF se alimenta a través de VSYS | Solo 520/3/5/7 | Obligatorio |
 | 15 | AVDD33_AUD se alimenta a través de LDO2 | Solo 520/3/5/7 | Obligatorio |
-| 16 | VSYS es una alimentación de uso interno del MCU; no se utiliza para alimentar otros periféricos | Solo 520/3/5/7 | Obligatorio |
+| 16 | VSYS es una alimentación de uso interno de la MCU; no se utiliza para alimentar otros periféricos | Solo 520/3/5/7 | Obligatorio |
 | 17 | Se recomienda usar LDO2_OUT para la memoria, los sensores y otros periféricos similares; se puede añadir un interruptor de carga para controlar la alimentación | Solo 520/3/5/7 | Obligatorio |
 | 18 | <span class="flag-red">La suma de las corrientes pico de todos los periféricos alimentados desde LDO2 no supera 150 mA</span> | Solo 520/3/5/7 | Obligatorio |
 | 19 | Se recomienda usar LDO3_OUT para alimentar el motor de vibración | Solo 520/3/5/7 | Obligatorio |
@@ -91,7 +91,7 @@ Cada tabla cubre un bloque funcional del esquemático. La columna «Aplicable a�
 | 2 | Condensador de VBAT ≥4,7 µF | Solo 520/3/5/7 | Obligatorio |
 | 3 | En SF32LB523/5/7, el pin 24 es VCC; se conecta un condensador externo ≥10 µF | 523/5/7 | Obligatorio |
 | 4 | En las variantes 523/5/7/B/D/E/G/J, <span class="flag-red">el pin 23 es VDD_SIP; se conecta un condensador externo ≥2,2 µF</span> | 523/5/7/B/D/E/G/J | Obligatorio |
-| 5 | En SF32LB520, el pin 24 es un GPIO: PA21 | 520/SS6500 | Obligatorio |
+| 5 | En SF32LB520, el pin 24 es una GPIO: PA21 | 520/SS6500 | Obligatorio |
 | 6 | En SF32LB520, el pin 23 es VCC; se conecta un condensador externo ≥10 µF | 520/SS6500 | Obligatorio |
 | 7 | Condensador de BUCK_FB = 4,7 µF | Todas las variantes | Obligatorio |
 | 8 | Condensador de VDD_VOUT1 = 4,7 µF | Todas las variantes | Obligatorio |
@@ -236,9 +236,9 @@ Cada tabla cubre un bloque funcional del esquemático. La columna «Aplicable a�
 | 9 | La pantalla se alimenta mediante un LDO de bajo Iq; <span class="flag-red">se recomienda usar PA30 para controlar la habilitación del LDO</span> | Todas las variantes | Obligatorio |
 | 10 | Se confirma si la alimentación de TP y LCD debe ser independiente o puede compartir el mismo control | Todas las variantes | Obligatorio |
 | 11 | Si la LCD integra un sensor de luz, también se suministra alimentación a dicho sensor | Todas las variantes | Obligatorio |
-| 12 | Control de la retroiluminación TFT: si se enciende con nivel alto y se apaga con nivel bajo (activo en alto), se usa un GPIO con pull-down (PD); si se enciende con nivel bajo y se apaga con nivel alto (activo en bajo), se usa un GPIO con pull-up (PU) | Todas las variantes | Obligatorio |
+| 12 | Control de la retroiluminación TFT: si se enciende con nivel alto y se apaga con nivel bajo (activo en alto), se usa una GPIO con pull-down (PD); si se enciende con nivel bajo y se apaga con nivel alto (activo en bajo), se usa una GPIO con pull-up (PU) | Todas las variantes | Obligatorio |
 | 13 | <span class="flag-red">LCD SPI: modo de 3 hilos: CS a PA03, CLK a PA04 y DATA a PA05; modo de 4 hilos: CS a PA03, CLK a PA04, DATA a PA05 y DC a PA06</span> | Todas las variantes | Obligatorio |
-| 14 | Pantalla Sharp Memory/JDI en la interfaz JDI del MCU: VCOM y VB se conectan a PA24 del MCU; VA a PA25; R0/G0/B0 a R1/G1/B1 del MCU; R1/G1/B1 a R2/G2/B2 del MCU; GSP a VST; BSP a HST; GCK a VCK; BCK a HCK; GEN a ENB; e INTB a XRST | Todas las variantes | Obligatorio |
+| 14 | Pantalla Sharp Memory/JDI en la interfaz JDI de la MCU: VCOM y VB se conectan a PA24 de la MCU; VA a PA25; R0/G0/B0 a R1/G1/B1 de la MCU; R1/G1/B1 a R2/G2/B2 de la MCU; GSP a VST; BSP a HST; GCK a VCK; BCK a HCK; GEN a ENB; e INTB a XRST | Todas las variantes | Obligatorio |
 | 15 | El nivel lógico de E/S del periférico coincide con el del chip principal | Todas las variantes | Obligatorio |
 
 </div>
@@ -331,7 +331,7 @@ Cada tabla cubre un bloque funcional del esquemático. La columna «Aplicable a�
 
 | N.º | Punto de comprobación | Aplicable a | Categoría |
 |:---|:---|:---|:---|
-| 1 | La conexión SPI es correcta: el SDO del MCU se conecta al SDI del periférico y el SDI del MCU al SDO del periférico | Todas las variantes | Opcional |
+| 1 | La conexión SPI es correcta: el SDO de la MCU se conecta al SDI del periférico y el SDI de la MCU al SDO del periférico | Todas las variantes | Opcional |
 | 2 | Se cumplen los requisitos de temporización del periférico SPI | Todas las variantes | Opcional |
 | 3 | El nivel lógico de E/S del periférico coincide con el del chip principal | Todas las variantes | Opcional |
 
@@ -346,8 +346,8 @@ Cada tabla cubre un bloque funcional del esquemático. La columna «Aplicable a�
 | N.º | Punto de comprobación | Aplicable a | Categoría |
 |:---|:---|:---|:---|
 | 1 | PA18/PA19 (multiplexados como DBG_UART) forman la interfaz de descarga de programas y depuración; se reservan puntos de prueba <span class="flag-red">con una resistencia en serie de 100 Ω</span> | Todas las variantes | Obligatorio |
-| 2 | Al conectar un dispositivo, RXD del MCU se conecta a TXD del periférico y TXD del MCU a RXD del periférico | Todas las variantes | Obligatorio |
-| 3 | Si PA35/PA36 se multiplexan como UART hacia un periférico, durante el reinicio del MCU el periférico conectado debe estar apagado o el software debe forzar estos pines a nivel bajo | Todas las variantes | Obligatorio |
+| 2 | Al conectar un dispositivo, RXD de la MCU se conecta a TXD del periférico y TXD de la MCU a RXD del periférico | Todas las variantes | Obligatorio |
+| 3 | Si PA35/PA36 se multiplexan como UART hacia un periférico, durante el reinicio de la MCU el periférico conectado debe estar apagado o el software debe forzar estos pines a nivel bajo | Todas las variantes | Obligatorio |
 | 4 | El nivel lógico de E/S del periférico coincide con el del chip principal | Todas las variantes | Obligatorio |
 
 </div>
@@ -375,7 +375,7 @@ Cada tabla cubre un bloque funcional del esquemático. La columna «Aplicable a�
 |:---|:---|:---|:---|
 | 1 | La conexión de la interfaz USB es correcta | Todas las variantes | Opcional |
 | 2 | La interfaz USB cuenta con protección ESD | Todas las variantes | Opcional |
-| 3 | Si USB permanece habilitado durante el funcionamiento normal (sin suspensión), el host puede detectar la conexión y desconexión. Si se necesita detectar estos eventos mientras el MCU duerme, se añade un divisor de VBUS que aplique al pin de despertar del MCU un nivel compatible con la tensión de E/S; se recomienda compartir este pin con la detección de conexión del cargador | Todas las variantes | Opcional |
+| 3 | Si USB permanece habilitado durante el funcionamiento normal (sin suspensión), el host puede detectar la conexión y desconexión. Si se necesita detectar estos eventos mientras la MCU duerme, se añade un divisor de VBUS que aplique al pin de despertar de la MCU un nivel compatible con la tensión de E/S; se recomienda compartir este pin con la detección de conexión del cargador | Todas las variantes | Opcional |
 
 </div>
 

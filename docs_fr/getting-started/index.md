@@ -9,13 +9,13 @@ tags:
 
 # Vue d'ensemble de la prise en main { #getting-started }
 
-Les appareils SF32 prennent en charge plusieurs parcours logiciels. SiFli-SDK et CodeKit sont actuellement les parcours officiels pour une première mise en route. Depuis Zephyr v4.3.0, le projet Zephyr en amont maintient la prise en charge de la SF32LB52 DevKit LCD. OpenSiFli propose aussi une version bêta d'ArduinoCore-zephyr et développe la prise en charge de Rust pour SF32LB52. Pour proposer un tutoriel MicroPython vérifié, il manque encore des images de firmware officielles et des instructions propres à chaque carte.
+Les puces SF32 prennent en charge plusieurs parcours logiciels. SiFli-SDK et CodeKit sont actuellement les parcours officiels pour une première mise en route. Depuis Zephyr v4.3.0, le projet Zephyr en amont maintient la prise en charge de la SF32LB52 DevKit LCD. OpenSiFli propose aussi une version bêta d'ArduinoCore-zephyr et développe la prise en charge de Rust pour SF32LB52. Pour proposer un tutoriel MicroPython vérifié, il manque encore des images de firmware officielles et des instructions propres à chaque carte.
 
 Pour connaître le flux de développement de référence et le périmètre actuel de chaque parcours, consultez la [Vue d'ensemble du développement](../develop/index.md). Le tableau ci-dessous sert uniquement à choisir un point de départ. Les pages de chaque plateforme font référence pour connaître les cartes prises en charge et leurs limites.
 
 ## Choisissez votre parcours { #choose-your-path }
 
-<div align="center"><em>Tableau : Choisir son parcours logiciel</em></div>
+<div align="center"><em>Tableau : choisir son parcours logiciel</em></div>
 
 <div align="center" markdown>
 
@@ -35,12 +35,12 @@ Pour connaître le flux de développement de référence et le périmètre actue
 Commencez par une carte prise en charge par le parcours logiciel choisi. Les connexions de programmation et série peuvent varier selon la carte et le framework :
 
 - Une carte de développement SF32, par exemple la [SF32LB52-DevKit-LCD](../sf32-products/devkits/SF32LB52-DevKit-LCD.md).
-- Un câble de données et l'interface de programmation/série indiquée pour la carte et le framework. Pour la SF32LB52-DevKit-LCD, les [instructions de connexion de SiFli](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/quickstart/get-started.html) indiquent d'utiliser le port USB-vers-UART pour le téléchargement série ; ne le confondez pas avec le port USB dédié aux fonctions USB.
+- Un câble de données et l'interface de programmation/série indiquée pour la carte et le framework. Pour la SF32LB52-DevKit-LCD, les [instructions de connexion de SiFli](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/quickstart/get-started.html) indiquent d'utiliser le port USB-UART pour le téléchargement série ; ne le confondez pas avec le port USB dédié à la fonction USB de la carte.
 - Un ordinateur sous Windows, macOS ou Linux.
 - Un terminal série configuré pour la console de la carte, afin de voir les journaux de démarrage et la sortie des exemples.
 
 !!! tip "Utilisez un câble de données"
-    Les câbles USB réservés à la charge sont une cause fréquente de problèmes lors de la première mise en route. Si la carte s'allume mais qu'aucun port série n'apparaît, utilisez un câble de données dont le fonctionnement est vérifié et branchez-le directement sur un port USB de l'ordinateur.
+    Les câbles USB réservés à la charge sont une cause fréquente de problèmes lors de la première mise en route. Si la carte s'allume mais qu'aucun port série n'apparaît, essayez un câble de données dont vous savez qu'il fonctionne et branchez-le directement sur un port USB de l'ordinateur.
 
 ## Première mise en route recommandée { #recommended-first-run }
 
@@ -78,6 +78,6 @@ Avant d'adopter un parcours logiciel, vérifiez que sa documentation couvre bien
 - La sortie série attendue pour chaque premier exemple.
 - Les étapes de récupération après un flashage échoué ou l'utilisation d'une image de firmware invalide.
 - Les limites connues de chaque framework, en particulier pour le Bluetooth, l'affichage, le stockage, l'USB et le fonctionnement en basse consommation.
-- Des notes de version précisant les versions compatibles du SDK, de CodeKit, du paquet, de l'image de firmware et du support de carte.
+- Des notes de version précisant les versions compatibles du SDK, de CodeKit, du paquet, de l'image de firmware et de la prise en charge de la carte.
 
 Ne supposez pas qu'un parcours disponible sur une carte l'est sur toutes les cartes SF32. Vérifiez la carte précise et la version logicielle que vous comptez utiliser.

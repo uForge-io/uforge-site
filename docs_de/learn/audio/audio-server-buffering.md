@@ -9,11 +9,11 @@ tags:
 
 Lesen Sie diese Seite, nachdem Sie in der [Audioübersicht](overview.md) Audioschnittstelle und Anwendungsszenario festgelegt haben. Sie beschreibt, wie Anwendungscode, Audio-Server-Sitzungen, DMA-Puffer und Hardware-Audiopfad zur Laufzeit zusammenarbeiten.
 
-**Geltungsbereich SDK-spezifischer Aussagen:** Die folgenden API-Details sind in der aktuellen SiFli-SDK-Dokumentation für SF32LB52x beschrieben. Prüfen Sie sie für die verwendete Chipfamilie und SDK-Version anhand von `audio_server.h`, Implementierung und Konfiguration. Empfehlungen zu Puffergrößen, Ablaufplanung und Cache-Management sind technische Hinweise; Audio Server garantiert nicht auf jedem Ziel dasselbe Verhalten oder dieselben Eigentumsregeln für Puffer.
+**Geltungsbereich SDK-spezifischer Aussagen:** Die folgenden API-Details sind in der aktuellen SiFli-SDK-Dokumentation für SF32LB52x beschrieben. Prüfen Sie sie für die Zielfamilie und die SDK-Version anhand von `audio_server.h`, Implementierung und Konfiguration. Empfehlungen zu Puffergrößen, Ablaufplanung und Cache-Management sind technische Hinweise; Audio Server garantiert nicht auf jedem Ziel dasselbe Verhalten oder dieselben Eigentumsregeln für Puffer.
 
 ## Zuständigkeiten in der Sitzung { #session-ownership }
 
-Trennen Sie die Anwendungslogik von der Übertragung des Datenstroms. Die Anwendung entscheidet, wann Wiedergabe oder Aufnahme beginnt oder endet und wie Zustandswechsel behandelt werden. Der Audio-Server koordiniert die Sitzung, DMA überträgt Sample-Blöcke und der Treiber konfiguriert die Hardware. Während eines aktiven Streams dürfen UI, Bluetooth-Callbacks und Lesezugriffe auf das Dateisystem nicht direkt auf Codec-Register zugreifen.
+Trennen Sie die Anwendungslogik von der Übertragung des Datenstroms. Die Anwendung entscheidet, wann Wiedergabe oder Aufnahme beginnt oder endet und wie Zustandswechsel behandelt werden. Der Audio-Server koordiniert die Sitzung, DMA überträgt Sample-Blöcke und der Treiber konfiguriert die Hardware. Vermeiden Sie, dass UI, Bluetooth-Callbacks oder Dateisystemzugriffe während eines aktiven Streams direkt auf Codec-Register zugreifen.
 
 <div align="center"><em>Tabelle: Zuständigkeit für die Puffer</em></div>
 
@@ -22,10 +22,10 @@ Trennen Sie die Anwendungslogik von der Übertragung des Datenstroms. Die Anwend
 | Verantwortungsgrenze | Zuständig | Prüffrage |
 |:---------|:------|:----------------|
 | Quelldaten | Anwendung, Decoder oder Speicher-Task | Wird die Wiedergabewarteschlange rechtzeitig nachgefüllt, bevor sie leerläuft? |
-| Audio-Server-Schreibcache, falls konfiguriert | Audio Server; Größe durch Anwendungskonfiguration | Ist `write_cache_size` für dieses SDK gültig, und wertet die Anwendung jedes Ergebnis von `audio_write()` aus? |
+| Audio-Server-Schreibcache, falls konfiguriert | Audio Server; die Größe legt die Anwendungskonfiguration fest | Ist `write_cache_size` für dieses SDK gültig, und wertet die Anwendung jedes Ergebnis von `audio_write()` aus? |
 | Puffer während der Übertragung | DMA-/Audio-Treiber | Bleibt der Puffer während der gesamten Übertragung stabil und cache-kohärent? |
 | Puffer nach Abschluss der Übertragung | Anwendungs- oder Verarbeitungs-Task | Sind Wiedergabedaten nachgefüllt oder Aufnahmedaten verarbeitet, bevor DMA den Bereich erneut nutzt? |
-| Sitzungszustand | Audio-Server plus Anwendungsrichtlinie | Verhindern wiederholte Start-, Stopp-, Fehler- und Beendigungsanforderungen ein doppeltes Schließen oder Freigeben von Ressourcen? |
+| Sitzungszustand | Audio Server und Anwendungslogik | Verhindern wiederholte Start-, Stopp-, Fehler- und Beendigungsanforderungen ein doppeltes Schließen oder Freigeben von Ressourcen? |
 
 </div>
 
@@ -60,6 +60,6 @@ In dieser API ist `write_cache_size` auf `0x7FFF` Byte begrenzt; für das Ping-P
 
 ## Unter realer Produktlast validieren { #validate-under-product-load }
 
-Testen Sie die Audiositzung mit den parallelen Produktlasten: Display-Aktualisierung, Bluetooth-Benachrichtigungen oder -Audio, Speicherzugriffen, Protokollierung und Wechseln in Energiesparzustände. Protokollieren Sie Unterläufe im Wiedergabepuffer, Überläufe im Aufnahmepuffer, Warteschlangenbelegung, Verzögerung vom Callback bis zum Worker, Audioaussetzer, Wiederverbindungen sowie Schlaf- und Aufwachvorgänge. Testen Sie Prioritätsunterbrechungen, Unterbrechen und Fortsetzen, Startfehler und wiederholte Stoppanforderungen. Prüfen Sie die vorgesehene Wiederherstellung, statt unbemerkt Daten zu verlieren.
+Testen Sie die Audiositzung zusammen mit den Produktfunktionen, die parallel aktiv sein können: Display-Aktualisierung, Bluetooth-Benachrichtigungen oder -Audio, Speicherzugriffe, Protokollierung und Übergänge in Energiesparzustände. Protokollieren Sie Unterläufe im Wiedergabepuffer, Überläufe im Aufnahmepuffer, Warteschlangenbelegung, Verzögerung vom Callback bis zum Worker, Audioaussetzer, Wiederverbindungen sowie Schlaf- und Aufwachvorgänge. Testen Sie Unterbrechungen durch höhere Prioritäten, Pausieren und Fortsetzen, Startfehler und wiederholte Stoppanforderungen. Prüfen Sie die vorgesehene Wiederherstellung, statt unbemerkt Daten zu verlieren.
 
 Beim Beenden muss der Treiber die Übertragungen stoppen; ausstehende Callbacks dürfen keine freigegebenen Puffer mehr ansprechen. Prüfen Sie, ob Anforderungen an die Energieverwaltung aufgehoben und externe Komponenten gemäß der Hardwaresequenz abgeschaltet werden. Zur Validierung der Systemleistungsaufnahme siehe [Energiesparendes Design im Überblick](../low-power/overview.md); zur Funkkoexistenz siehe die [Bluetooth-Übersicht](../bluetooth/overview.md).

@@ -10,20 +10,20 @@ tags:
 
 Bei SF32-Geräten und Boards mit unterstützter USB-Hardware zeigen die SiFli-SDK-Dokumentation und Beispiele die Integration mit CherryUSB. Prüfen Sie die vom konkreten Chip, Board und SDK-Release unterstützten USB-Rollen und -Klassen, und betrachten Sie USB als vollständigen Software-Stack statt nur als Hardwarefunktion.
 
-Bei USB müssen Firmware, Deskriptoren, Host-Betriebssysteme, Stromversorgung und Produktionswerkzeuge gemeinsam berücksichtigt werden. Wird ein Gerät einmal auf dem Entwickler-Laptop erkannt, ist es noch nicht fertig.
+Bei USB müssen Firmware, Deskriptoren, Host-Betriebssysteme, Energieverhalten und Produktionswerkzeuge gemeinsam berücksichtigt werden. Wird ein Gerät auf dem Entwicklungs-Laptop einmal erfolgreich enumeriert, ist die Arbeit noch nicht abgeschlossen.
 
 ## Anwendungsfälle { #use-cases }
 
 - Serielle Kommunikation über USB CDC.
 - HID-Geräte.
 - MSC-Speicher.
-- USB-Audio-Mikrofon/-Lautsprecher.
+- USB-Audio: Mikrofon/Lautsprecher.
 - MTP.
 - USB-Host-Unterstützung für CDC-, HID-, MSC-, UVC- und UAC-Peripheriegeräte, sofern SDK und Board dies unterstützen.
 
 ## Praktischer Arbeitsablauf { #practical-workflow }
 
-1. Prüfen Sie, ob das Board den benötigten USB-Anschluss und die passende Stromversorgung bereitstellt.
+1. Prüfen Sie, ob das Board den benötigten USB-Anschluss und den passenden Versorgungspfad bereitstellt.
 2. Beginnen Sie mit dem SDK-USB-Beispiel, das dem Anwendungsfall am nächsten kommt.
 3. Testen Sie die USB-Enumeration unter Windows, macOS und Linux.
 4. Prüfen Sie Suspend/Resume sowie das Verhalten nach erneutem Anschließen des Kabels.
@@ -31,7 +31,7 @@ Bei USB müssen Firmware, Deskriptoren, Host-Betriebssysteme, Stromversorgung un
 
 ## Was zu testen ist { #what-to-test }
 
-- Anschließen bei ausgeschaltetem Gerät und Ein-/Ausstecken im laufenden Betrieb.
+- Vor dem Einschalten anschließen; im laufenden Betrieb ein- und ausstecken.
 - Zurücksetzen bei bestehender Verbindung.
 - Ruhezustand und Reaktivierung des Hosts.
 - Kabeltrennung während der Übertragung.

@@ -5,41 +5,41 @@ tags:
   - Gráficos
 ---
 
-# Compactação sem perdas e decodificação por hardware com eZip { #ezip-lossless-compression-and-hardware-decoding }
+# Compressão sem perdas e decodificação por hardware com eZip { #ezip-lossless-compression-and-hardware-decoding }
 
 ## Introdução { #introduction }
 
-**eZip** é o formato proprietário de compactação sem perdas da SiFli para recursos gráficos. Nos dispositivos SF32 compatíveis com essas funções, o bloco de hardware EZIP decodifica recursos gráficos eZip. O bloco também oferece modos GZIP e LZ4 separados para dados gerais; os dados descompactados são gravados na memória via AHB, e não enviados diretamente ao EPIC. Em vez de armazenar cada recurso de display como um bitmap sem compactação em NOR Flash, PSRAM ou em um sistema de arquivos, o produto pode armazenar os dados eZip e decodificá-los quando a UI precisar deles.
+**eZip** é o formato proprietário de compressão sem perdas da SiFli para recursos gráficos. Nos dispositivos SF32 compatíveis com essas funções, o bloco de hardware EZIP decodifica recursos gráficos eZip. O bloco também oferece modos GZIP e LZ4 separados para dados gerais; os dados descomprimidos são gravados na memória via AHB, e não enviados diretamente ao EPIC. Em vez de armazenar cada recurso de display como um bitmap sem compressão em NOR Flash, PSRAM ou em um sistema de arquivos, o produto pode armazenar os dados eZip e decodificá-los quando a UI precisar deles.
 
-**eZip-A** é o formato correspondente para recursos animados. Os recursos de origem são convertidos durante o build ou na etapa de preparação de recursos; eZip não é um decodificador de imagem de uso geral que aceite arquivos arbitrários em tempo de execução.
+**eZip-A** é o formato correspondente para recursos animados. Os recursos de origem são convertidos durante o build ou na etapa de preparação de recursos; o eZip não é um decodificador de imagem de uso geral que aceite arquivos arbitrários em tempo de execução.
 
-Para dados que não sejam gráficos, como uma imagem OTA, o produto precisa definir e validar todo o fluxo de atualização, incluindo armazenamento, verificação de integridade, compatibilidade e o caminho de descompactação previsto. O [fluxo gráfico](overview.md#sf32-graphics-flow) aplica-se aos recursos de display, não ao fluxo de atualização específico da aplicação.
+Para dados que não sejam gráficos, como uma imagem OTA, o produto precisa definir e validar todo o fluxo de atualização, incluindo armazenamento, verificação de integridade, compatibilidade e o caminho de descompressão previsto. O [fluxo gráfico](overview.md#sf32-graphics-flow) aplica-se aos recursos de display, não ao fluxo de atualização específico da aplicação.
 
-Em um produto com interface gráfica, o objetivo é transferir menos bytes do armazenamento e evitar que a CPU da aplicação descompacte repetidamente os mesmos recursos. Isso pode reduzir o espaço de armazenamento e o tráfego de memória externa, deixando mais capacidade disponível para a UI, Bluetooth, áudio e outras tarefas da aplicação.
+Em um produto com interface gráfica, o objetivo é transferir menos bytes do armazenamento e evitar que a CPU da aplicação descomprima repetidamente os mesmos recursos. Isso pode reduzir o espaço de armazenamento e o tráfego de memória externa, deixando mais capacidade disponível para a UI, Bluetooth, áudio e outras tarefas da aplicação.
 
-Para entender a posição do eZip em relação ao ePicasso, ao TurboPixel e ao controlador de display, consulte a [Visão geral de gráficos](overview.md#sf32-graphics-flow). Esta página se concentra na preparação dos recursos eZip, no comportamento da compactação e na decodificação.
+Para entender a posição do eZip em relação ao ePicasso, ao TurboPixel e ao controlador de display, consulte a [Visão geral de gráficos](overview.md#sf32-graphics-flow). Esta página se concentra na preparação dos recursos eZip, no comportamento da compressão e na decodificação.
 
-Consulte esta página quando os recursos de UI ocuparem muito espaço em Flash, consumirem largura de banda excessiva da memória externa ou exigirem um fluxo de conversão reproduzível. Ela diferencia a compactação sem perdas dos recursos de origem da compactação do framebuffer final, abordada no artigo sobre [TurboPixel](turbopixel.md).
+Consulte esta página quando os recursos de UI ocuparem muito espaço em Flash, consumirem largura de banda excessiva da memória externa ou exigirem um fluxo de conversão reproduzível. Ela diferencia a compressão sem perdas dos recursos de origem da compressão do framebuffer final, abordada no artigo sobre [TurboPixel](turbopixel.md).
 
 ## Recursos e limitações { #capabilities-and-boundaries }
 
 O eZip foi projetado para um fluxo de produção de recursos, não para manipulação pontual de arquivos:
 
-- **Compactação gráfica sem perdas.** O formato preserva os dados da imagem e oferece suporte à transparência. A SiFli descreve qualitativamente a taxa típica de compactação gráfica como *um pouco superior à do PNG*; não publica um valor numérico fixo.
+- **Compressão gráfica sem perdas.** O formato preserva os dados da imagem e oferece suporte à transparência. A SiFli descreve qualitativamente a taxa típica de compressão gráfica como *um pouco superior à do PNG*; não publica um valor numérico fixo.
 - **Recursos estáticos e animados.** O GraphicsTool pode converter imagens PNG, GIF e APNG em recursos estáticos eZip ou animações eZip-A.
 - **Decodificação assistida por hardware em dispositivos compatíveis.** Ela pode reduzir o trabalho de decodificação da CPU da aplicação, conforme o chip, o SDK, o formato de origem e o caminho do driver selecionados.
 - **Fluxo de trabalho com ferramentas gráficas.** O GraphicsTool da SiFli processa formatos de origem comuns, redimensiona e converte imagens, permite o processamento em lote e gera recursos eZip/eZip-A.
 - **Integração com o ePicasso em dispositivos compatíveis.** A saída direta pode dispensar um buffer para a imagem de origem completamente decodificada, reduzindo a capacidade de memória necessária e o tráfego.
 
-“Sem perdas” descreve a compactação dos pixels entregues ao codificador, não todas as conversões anteriores. Redimensionar, converter RGB888 para RGB565 ou descartar alpha pode causar perda de informação antes da compactação. Compare os pixels descompactados com a entrada do codificador de mesmo tamanho e formato; preserve alpha quando a transparência for necessária.
+“Sem perdas” descreve a compressão dos pixels entregues ao codificador, não todas as conversões anteriores. Redimensionar, converter RGB888 para RGB565 ou descartar alpha pode causar perda de informação antes da compressão. Compare os pixels descomprimidos com a entrada do codificador de mesmo tamanho e formato; preserve alpha quando a transparência for necessária.
 
-## Taxa de compactação e uso geral { #compression-ratio-and-general-purpose-use }
+## Taxa de compressão e uso geral { #compression-ratio-and-general-purpose-use }
 
-Para recursos gráficos, use PNG como referência prática: a SiFli descreve a taxa de compactação do eZip como um pouco superior à do PNG, mantendo os dados da imagem sem perdas e preservando a transparência. A redução real do tamanho do arquivo ainda depende das dimensões da imagem, do formato de pixel, da transparência, do uso de paleta e do nível de detalhe. Meça recursos representativos com o perfil de conversão aprovado; não dimensione o armazenamento com base em um único percentual.
+Para recursos gráficos, use PNG como referência prática: a SiFli descreve a taxa de compressão do eZip como um pouco superior à do PNG, mantendo os dados da imagem sem perdas e preservando a transparência. A redução real do tamanho do arquivo ainda depende das dimensões da imagem, do formato de pixel, da transparência, do uso de paleta e do nível de detalhe. Meça recursos representativos com o perfil de conversão aprovado; não dimensione o armazenamento com base em um único percentual.
 
-O utilitário EZIP da SiFli também compacta arquivos de uso geral nos modos GZIP ou LZ4. Esse processo é diferente da conversão de recursos gráficos para eZip. A taxa de compactação de dados gerais depende do conteúdo de origem: dados repetitivos ou estruturados podem ser bem compactados, enquanto arquivos que já usam compactação — como imagens JPEG, vídeos MP4, arquivos ZIP ou dados criptografados — podem diminuir pouco ou nada. Antes de usar esse caminho com dados que não sejam gráficos, valide o tamanho resultante e o modo de descompactação compatível com o dispositivo de destino.
+O utilitário EZIP da SiFli também comprime arquivos de uso geral nos modos GZIP ou LZ4. Esse processo é diferente da conversão de recursos gráficos para eZip. A taxa de compressão de dados gerais depende do conteúdo de origem: dados repetitivos ou estruturados podem ser bem comprimidos, enquanto arquivos que já usam compressão — como imagens JPEG, vídeos MP4, arquivos ZIP ou dados criptografados — podem diminuir pouco ou nada. Antes de usar esse caminho com dados que não sejam gráficos, valide o tamanho resultante e o modo de descompressão compatível com o dispositivo de destino.
 
-O HAL do EZIP distingue os modos de trabalho eZip gráfico, GZIP e LZ4. A descompactação de dados gerais GZIP/LZ4 usa a saída para memória via AHB, não a saída direta para o EPIC. Um arquivo OTA precisa respeitar o enquadramento (framing) e os limites de tamanho aceitos pelo modo escolhido; um arquivo gráfico `.ezip` não é intercambiável com qualquer pacote de atualização compactado.
+O HAL do EZIP distingue os modos de trabalho eZip gráfico, GZIP e LZ4. A descompressão de dados gerais GZIP/LZ4 usa a saída para memória via AHB, não a saída direta para o EPIC. Um arquivo OTA precisa respeitar o enquadramento (framing) e os limites de tamanho aceitos pelo modo escolhido; um arquivo gráfico `.ezip` não é intercambiável com qualquer pacote de atualização comprimido.
 
 ## Comparação do tamanho de imagens representativas (modelo) { #representative-image-size-comparison-placeholder }
 
@@ -51,32 +51,32 @@ Use esta seção para registrar medições equivalentes de imagens de UI represe
 
 | Cenário | Formato | Codificação | Tamanho do arquivo | Em relação ao BMP | Configurações de teste / observações |
 |:---|:---|:---|---:|---:|:---|
-| Imagem de UI opaca | BMP | Referência sem compactação | A definir | 100% | Imagem de origem: a definir; dimensões: a definir; formato de pixel: a definir |
+| Imagem de UI opaca | BMP | Referência sem compressão | A definir | 100% | Imagem de origem: a definir; dimensões: a definir; formato de pixel: a definir |
 | Imagem de UI opaca | eZip | Sem perdas | A definir | A definir | Versão do GraphicsTool e perfil de conversão: a definir |
 | Imagem de UI opaca | PNG | Sem perdas | A definir | A definir | Codificador e configurações: a definir |
 | Imagem de UI opaca | JPEG | Com perdas | A definir | A definir | Codificador e configuração de qualidade: a definir |
-| Imagem de UI com canal alfa por pixel | BMP | Referência sem compactação | A definir | 100% | Indique a variante exata do BMP ou o tratamento do canal alfa: a definir |
+| Imagem de UI com canal alfa por pixel | BMP | Referência sem compressão | A definir | 100% | Indique a variante exata do BMP ou o tratamento do canal alfa: a definir |
 | Imagem de UI com canal alfa por pixel | eZip | Sem perdas com alfa | A definir | A definir | Versão do GraphicsTool e perfil de conversão; verifique as bordas transparentes: a definir |
 | Imagem de UI com canal alfa por pixel | PNG | Sem perdas com alfa | A definir | A definir | Codificador e configurações: a definir |
 | Imagem de UI com canal alfa por pixel | JPEG | Com perdas, sem alfa | A definir | A definir | Registre o fundo composto previamente e a configuração de qualidade; não preserva o canal alfa |
 
 </div>
 
-Calcule **Em relação ao BMP** como `file size ÷ BMP file size × 100%` dentro do mesmo cenário: divida o tamanho do arquivo pelo tamanho do BMP e multiplique o resultado por 100%. Não compare diretamente as linhas de imagens opacas com as que têm canal alfa, nem use esta tabela como uma afirmação geral sobre a taxa de compactação. Ela é um modelo de medição; os resultados variam conforme a imagem escolhida, a cobertura do canal alfa e as configurações de conversão.
+Calcule **Em relação ao BMP** como `file size ÷ BMP file size × 100%` dentro do mesmo cenário: divida o tamanho do arquivo pelo tamanho do BMP e multiplique o resultado por 100%. Não compare diretamente as linhas de imagens opacas com as que têm canal alfa, nem use esta tabela como uma afirmação geral sobre a taxa de compressão. Ela é um modelo de medição; os resultados variam conforme a imagem escolhida, a cobertura do canal alfa e as configurações de conversão.
 
 ## Por que usar eZip { #why-use-ezip }
 
 ### Reduzir o espaço de armazenamento dos recursos { #reduce-asset-storage }
 
-Recursos compactados podem ocupar menos espaço em NOR Flash, PSRAM, NAND ou armazenamento removível do que buffers de pixels sem compactação. Isso é especialmente útil para mostradores de relógio, pacotes de fontes multilíngues, conjuntos de ícones, temas de UI e interfaces com muitas animações.
+Recursos comprimidos podem ocupar menos espaço em NOR Flash, PSRAM, NAND ou armazenamento removível do que buffers de pixels sem compressão. Isso é especialmente útil para mostradores de relógio, pacotes de fontes multilíngues, conjuntos de ícones, temas de UI e interfaces com muitas animações.
 
 ### Reduzir o tráfego no barramento de memória { #reduce-memory-bus-traffic }
 
-Quando os recursos ficam em NOR Flash externa ou PSRAM, bitmaps sem compactação podem consumir muita largura de banda do barramento antes mesmo de o desenho começar. Transferir o recurso compactado e decodificá-lo próximo ao caminho gráfico pode reduzir esse tráfego. O ganho real depende da taxa de compactação, do formato de origem, do padrão de atualização do display e da velocidade da interface de armazenamento.
+Quando os recursos ficam em NOR Flash externa ou PSRAM, bitmaps sem compressão podem consumir muita largura de banda do barramento antes mesmo de o desenho começar. Transferir o recurso comprimido e decodificá-lo próximo ao caminho gráfico pode reduzir esse tráfego. O ganho real depende da taxa de compressão, do formato de origem, do padrão de atualização do display e da velocidade da interface de armazenamento.
 
 ### Liberar tempo de CPU { #preserve-cpu-time }
 
-Em um caminho de decodificação por hardware compatível, a CPU da aplicação não precisa descompactar cada recurso por software. A capacidade liberada pode melhorar a resposta da UI ou ser usada por tarefas de comunicação sem fio, áudio, sensores e gerenciamento de baixo consumo.
+Em um caminho de decodificação por hardware compatível, a CPU da aplicação não precisa descomprimir cada recurso por software. A capacidade liberada pode melhorar a resposta da UI ou ser usada por tarefas de comunicação sem fio, áudio, sensores e gerenciamento de baixo consumo.
 
 ### Tornar a entrega de recursos reproduzível { #make-asset-delivery-repeatable }
 
@@ -92,7 +92,7 @@ A tabela usa nomes respaldados pelos documentos de produto e pelo SDK. Um númer
 
 | Implementação | Famílias SF32 representativas | Recursos documentados | Implicações para o projeto |
 |:---|:---|:---|:---|
-| **eZip** | SF32LB55x | Descompressão gráfica sem perdas e conexão direta com o ePicasso; o SDK exclui essa família do suporte nativo a eZip-A. | Use recursos eZip estáticos; não pressuponha suporte nativo a animações eZip-A. |
+| **eZip** | SF32LB55x | Descompressão gráfica sem perdas e integração direta com o ePicasso; o SDK exclui essa família do suporte nativo a eZip-A. | Use recursos eZip estáticos; não pressuponha suporte nativo a animações eZip-A. |
 | **eZip 2.0** | SF32LB52x, SF32LB56x, SF32LB58x | Descompressão gráfica sem perdas e animações eZip-A nativas. O SF32LB58x também possui um codec JPEG separado. | Valide os requisitos de animação e memória; trate JPEG/MJPEG como um caminho de processamento de mídia separado. |
 | **EZIP** | SF32LB57x | Decodificação eZip/eZip-A e saída direta para EPIC. JPEGD é um decodificador JPEG independente; não pressuponha que use o mesmo caminho de saída direta para o EPIC. | Gere os recursos com uma janela de compressão de 2048 bytes. Esses fatos não estabelecem um caminho completo de reprodução MJPEG; confirme o suporte do middleware e do decodificador para o dispositivo exato. |
 
@@ -127,19 +127,19 @@ Mantenha sob controle de versão os perfis de conversão, as versões das ferram
 
 - **Use eZip para recursos.** Eles podem ficar em NOR Flash, PSRAM, NAND ou um sistema de arquivos, mas o decodificador não interpreta caminhos de arquivo. O driver de armazenamento precisa fornecer ou carregar os dados por um caminho de acesso suportado pelo hardware. O HAL exige alinhamento de 4 bytes para os buffers de entrada e saída AHB. eZip não comprime o framebuffer final.
 - **Dimensione a largura de banda de transferência dos recursos.** O eZip pode reduzir o tráfego de transferência, mas os pixels decodificados ainda precisam percorrer o caminho de renderização e exibição descrito na [Visão geral de gráficos](overview.md#sf32-graphics-flow).
-- **Mantenha caminhos de fallback em software.** Nem todos os tipos de recursos, formatos de pixel ou operações de UI são compatíveis com a decodificação por hardware ou com o caminho gráfico.
+- **Mantenha caminhos de fallback na CPU.** Nem todos os tipos de recursos, formatos de pixel ou operações de UI são compatíveis com a decodificação por hardware ou com o caminho gráfico.
 - **Valide a alocação de memória.** Teste os recursos e os buffers de desenho em SRAM interna, NOR Flash, PSRAM ou armazenamento removível; cada escolha altera a latência e a contenção do barramento.
 - **Teste a carga de trabalho real.** Meça o tempo de carregamento a frio, a cadência das animações, a latência da UI e o consumo enquanto Bluetooth, áudio, sensores e atualização do display estiverem ativos em conjunto.
 - **Congele as configurações de conversão antes do lançamento.** Mudanças na versão da ferramenta ou nos parâmetros podem afetar a compatibilidade da saída, a qualidade, o espaço de armazenamento e o desempenho de decodificação.
 
 ## Principais conclusões { #key-takeaways }
 
-- eZip é o formato de compactação sem perdas de recursos de display da SiFli e oferece um caminho de decodificação assistida por hardware em dispositivos SF32 compatíveis.
-- Use eZip para recursos gráficos e os modos GZIP/LZ4 do utilitário para dados gerais; a taxa de compactação destes depende dos dados de origem e precisa ser medida.
+- eZip é o formato de compressão sem perdas de recursos de display da SiFli e oferece um caminho de decodificação assistida por hardware em dispositivos SF32 compatíveis.
+- Use eZip para recursos gráficos e os modos GZIP/LZ4 do utilitário para dados gerais; a taxa de compressão destes depende dos dados de origem e precisa ser medida.
 - eZip-A é destinado a recursos animados; o GraphicsTool prepara recursos eZip/eZip-A a partir de arquivos de arte comuns.
 - A SiFli também oferece ferramentas de linha de comando e SDKs para Android/iOS para integrar eZip a fluxos automatizados e a aplicativos móveis complementares.
 - eZip pode reduzir o espaço ocupado pelos recursos, o tráfego de memória externa e o trabalho de decodificação da CPU da aplicação, mas não substitui o ePicasso nem o controlador de display.
-- Escolha a implementação e o caminho de saída documentados, não uma suposta hierarquia de versões. Separe JPEGD de EZIP e use a janela de compactação exigida para o SF32LB57x.
+- Escolha a implementação e o caminho de saída documentados, não uma suposta hierarquia de versões. Separe JPEGD de EZIP e use a janela de compressão exigida para o SF32LB57x.
 - Um projeto eZip bem-sucedido depende de um fluxo de recursos controlado: arquivos-fonte dos recursos visuais, configurações de conversão, local de armazenamento, integração gráfica e testes no hardware de destino.
 
 ## Referências primárias { #primary-references }

@@ -12,7 +12,7 @@ tags:
 
 Das SF32LB52-DevKit-Core-3p3 ist ein kompaktes Entwicklungsboard für die direkte Evaluierung von SF32LB52x-Chips. Ein Jumper auf dem Board wählt für die MCU eine Versorgung von 1,8 V oder 3,3 V. Die wichtigsten MCU-Signale sind über Randleisten herausgeführt, und die durchkontaktierten Randkontakte nehmen Stiftleisten ohne Löten auf. Das Board eignet sich für Entwickler, die direkten Zugriff auf GPIO, serielle Busse, Display-Signale, Audio, ADC, PWM und Versorgungsschienen benötigen.
 
-Mit 30,88 mm × 68 mm ist das Board kompakt für Prototypen am Prüfplatz und bietet zugleich praxistaugliche Schnittstellen für die Hardware- und Firmware-Inbetriebnahme des SF32LB52x.
+Mit 30,88 mm × 68 mm eignet sich das Board für kompakte Prototypen auf dem Labortisch und bietet zugleich praxistaugliche Schnittstellen für die Hardware- und Firmware-Inbetriebnahme des SF32LB52x.
 
 ![SF32LB52-DevKit-Core-3p3, Vorderseite](assets/sf32lb52x/Core-3p3_Front_look.png){ width="50%" loading="lazy" }
 <div align="center"><em>SF32LB52-DevKit-Core-3p3 — Vorderseite</em></div>
@@ -36,7 +36,7 @@ Mit 30,88 mm × 68 mm ist das Board kompakt für Prototypen am Prüfplatz und bi
 
 </div>
 
-Verwenden Sie die Varianten nur mit NOR für kompakte Bluetooth-, Steuerungs- und einfache HMI-Aufgaben. Verwenden Sie die Varianten mit PSRAM + externem NOR, wenn die Anwendung größere Grafik-Assets, Framebuffer, Dateisysteme oder Anwendungsspeicher benötigt.
+Varianten mit ausschließlich NOR-Speicher eignen sich für kompakte Bluetooth- und Steuerungsprodukte sowie einfache HMI-Anwendungen. Für Anwendungen mit größeren Grafik-Assets, Framebuffern, Dateisystemen oder Anwendungsspeicher eignen sich Varianten mit PSRAM und zusätzlichem NOR-Flash.
 
 **Quellenabweichung — Board-Bezeichnung vor der Auswahl prüfen:** Der [ausführliche Core-3p3-Board-Leitfaden](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Core-3p3.html) von SiFli nennt die Konfiguration mit SF32LB52JUD6 `R16N16 V1.0.0` (aktuell), während der [Modellleitfaden für Entwicklungsboards](https://wiki.sifli.com/en/board/devkit_guide.html) dieselbe Konfiguration aus JUD6 / 16 MB PSRAM / 16 MB NOR als `N16R16` aufführt. Die Zeile mit den Revisionsinformationen im ausführlichen Leitfaden gibt für EUB6 8 MB gemeinsam gehäustes PSRAM an, die Funktionsliste und die Variantentabelle jedoch 4 MB. Auch die [SF32LB52-Übersicht](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52/SF32LB52-Overview-B3.md) von SiFli nennt für EUB6 4 MB, weshalb dieser Artikel 4 MB verwendet. Bestätigen Sie die Kennzeichnung des Boards sowie den passenden Schaltplan bzw. die Stückliste, wenn es auf das genaue Board-Suffix ankommt.
 
@@ -55,7 +55,7 @@ Verwenden Sie die Varianten nur mit NOR für kompakte Bluetooth-, Steuerungs- un
 - Analoges Mikrofon und differenzielle Audioausgangspins
 - Eine Benutzer-LED
 - Power-Taste und Funktionstaste
-- Messpunkte für Strommessungen einzelner Versorgungsschienen; SiFli dokumentiert außerdem Leistungstests für die einzelne MCU, das minimale System und das gesamte Board
+- Messpunkte zur Strommessung an einzelnen Versorgungsschienen; SiFli dokumentiert außerdem Stromverbrauchsmessungen an der einzelnen MCU, am Minimalsystem und am gesamten Board
 
 ## Wann dieses Board geeignet ist { #when-to-use-this-board }
 
@@ -89,9 +89,9 @@ Das Board enthält einen Versorgungsschalter. Das Signal RTS# des CH340N kann de
 
 Verwenden Sie die UART-Buchse (USB Type-C) für Firmware-Download und Software-Debug.
 
-- **Download-Modus**: BOOT im Download-Werkzeug aktivieren, dann das Board mit Spannung versorgen oder zurücksetzen.
-- **Debug-/Log-Modus**: BOOT deaktivieren, dann das Board mit Spannung versorgen oder zurücksetzen.
-- **Reset**: Funktion von Reset bzw. Power-Taste auf dem Board oder der werkzeuggesteuerte RTS-Reset-Pfad.
+- **Download-Modus**: Aktivieren Sie BOOT im Download-Werkzeug und versorgen Sie das Board dann mit Spannung oder setzen Sie es zurück.
+- **Debug-/Log-Modus**: Deaktivieren Sie BOOT und versorgen Sie das Board dann mit Spannung oder setzen Sie es zurück.
+- **Reset**: Verwenden Sie die Reset-/Power-Taste auf dem Board oder den vom Werkzeug gesteuerten RTS-Reset-Pfad.
 
 ## Bedienelemente { #user-controls }
 
@@ -188,9 +188,9 @@ Das Board führt zwei 24-polige Randleisten heraus. Die erste Seite konzentriert
 
 ## Pins für externen Flash und SDIO { #external-flash-and-sdio-pins }
 
-Einige Varianten enthalten einen externen 16-MB-QSPI-NOR-Flash. Die gemeinsame Pingruppe für Speicher/SDIO lautet:
+Einige Varianten enthalten einen externen 16-MB-QSPI-NOR-Flash. Die gemeinsam genutzte Pin-Gruppe für Speicher und SDIO lautet:
 
-<div align="center"><em>Pingruppe für externen Flash und SDIO</em></div>
+<div align="center"><em>Pin-Gruppe für externen Flash und SDIO</em></div>
 
 <div align="center" markdown>
 
@@ -209,7 +209,7 @@ Prüfen Sie, ob diese Pins bereits vom bestückten Flash belegt sind, bevor Sie 
 
 ## Audio-Erweiterung { #audio-expansion }
 
-Das Board führt Mikrofon-Vorspannung/-Eingang und den differenziellen DAC-Ausgang heraus. Das Mikrofon und ein Class-AB/D-Verstärker zum Ansteuern eines Lautsprechers sind extern; wählen Sie sie passend zum vorgesehenen Audiopfad aus.
+Das Board führt Mikrofonvorspannung und -eingang sowie den differenziellen DAC-Ausgang heraus. Mikrofon und Class-AB/D-Verstärker zum Ansteuern eines Lautsprechers sind extern; wählen Sie beide passend zum vorgesehenen Audiopfad aus.
 
 ## SDK-Build-Targets { #sdk-build-targets }
 
@@ -222,18 +222,18 @@ Dies sind Build-Target-Bezeichner des SDK und nicht zwingend die auf einem Board
 
 ## Verwandte Dokumente { #related-documents }
 
-[SF32LB52x-Chipeinführung]: ../chips/SF32LB52x.md
-[SF32LB52x-Hardware-Designleitfaden]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
-[Originalartikel im SiFli-Wiki]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-Core-3p3.md
-[Designpaket]: https://downloads.sifli.com/hardware/files/documentation/ProPrj_SF32LB52-DevKit-Core-3p3-V100_2025-06-10.epro?
-[Muster kaufen]: https://sifli.taobao.com/
+[SF32LB52x Chip Introduction]: ../chips/SF32LB52x.md
+[SF32LB52x Hardware Design Guide]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
+[Original SiFli Wiki Article]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-Core-3p3.md
+[Design Package]: https://downloads.sifli.com/hardware/files/documentation/ProPrj_SF32LB52-DevKit-Core-3p3-V100_2025-06-10.epro?
+[Buy Samples]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-microchip: __[SF32LB52x-Chipeinführung]__
-- :fontawesome-solid-file-lines: __[SF32LB52x-Hardware-Designleitfaden]__
-- :fontawesome-brands-github: __[Originalartikel im SiFli-Wiki]__
-- :fontawesome-solid-download: __[Designpaket]__
-- :fontawesome-solid-cart-shopping: __[Muster kaufen]__
+- :fontawesome-solid-microchip: __[SF32LB52x-Chipeinführung][SF32LB52x Chip Introduction]__
+- :fontawesome-solid-file-lines: __[SF32LB52x-Hardware-Design-Leitfaden][SF32LB52x Hardware Design Guide]__
+- :fontawesome-brands-github: __[Originalartikel im SiFli-Wiki][Original SiFli Wiki Article]__
+- :fontawesome-solid-download: __[Designpaket][Design Package]__
+- :fontawesome-solid-cart-shopping: __[Muster kaufen][Buy Samples]__
 
 </div>

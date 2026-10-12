@@ -1,7 +1,7 @@
 ---
 icon: lucide/home
 title: "Plateforme de développement embarqué SF32"
-description: "Documentation open source sur les microcontrôleurs SF32 à très faible consommation, les modules, les cartes de développement, le développement avec le SDK et les guides de conception matérielle prêts pour la production."
+description: "Documentation open source sur les microcontrôleurs SF32 à très basse consommation, les modules, les cartes de développement, le développement avec le SDK et les guides de conception matérielle prêts pour la production."
 image: assets/home/sf32-chip-hero.png
 hide:
   - navigation
@@ -17,7 +17,7 @@ hide:
 
 # Construisez la prochaine génération<br>d'appareils embarqués { #build-the-next-generationof-embedded-devices }
 
-***μForge.io*** est une plateforme de développement open source dédiée aux solutions innovantes dans le domaine des semi-conducteurs. Elle s'appuie d'abord sur la famille SF32 de microcontrôleurs à très faible consommation de SiFli. Des puces et modules aux cartes de développement, en passant par les SDK, la documentation et les designs de référence prêts pour la production, ***μForge.io*** rassemble toute la chaîne de développement au même endroit. Les développeurs peuvent ainsi faire passer des produits embarqués connectés, intelligents et économes en énergie de l'idée à la production plus rapidement, avec moins d'efforts d'intégration.
+***μForge.io*** est une plateforme de développement open source dédiée aux solutions innovantes dans le domaine des semi-conducteurs. Elle s'appuie d'abord sur la famille SF32 de microcontrôleurs à très basse consommation de SiFli. Des puces et modules aux cartes de développement, en passant par les SDK, la documentation et les conceptions de référence prêtes pour la production, ***μForge.io*** rassemble toute la chaîne de développement au même endroit. Les développeurs peuvent ainsi faire passer des produits embarqués connectés, intelligents et économes en énergie de l'idée à la production plus rapidement, avec moins d'efforts d'intégration.
 
 <div class="uf-hero-actions" markdown>
 
@@ -48,7 +48,7 @@ hide:
   <span class="uf-spotlight-item__art uf-spotlight-item__art--silicon" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">Puce</span>
   <span class="uf-spotlight-item__title">Famille SF32</span>
-  <span class="uf-spotlight-item__copy">Produits embarqués connectés, intelligents et à ultra-faible consommation.</span>
+  <span class="uf-spotlight-item__copy">Produits embarqués connectés, intelligents et à très basse consommation.</span>
 </a>
 
 <a class="uf-spotlight-item uf-spotlight-item--board" href="sf32-products/index.md" data-radius="250">
@@ -98,7 +98,7 @@ hide:
 
 - :fontawesome-solid-book:{ .uf-ql-icon .uf-blue } **Apprendre**
 
-    Guides d'architecture et de sous-systèmes pour les graphiques, le Bluetooth, l'IA, l'audio et les systèmes à faible consommation.
+    Guides d'architecture et de sous-systèmes pour les graphiques, le Bluetooth, l'IA, l'audio et les systèmes à basse consommation.
 
     [Voir les ressources :material-arrow-right:](learn/index.md){ .uf-link-blue }
 
@@ -136,7 +136,7 @@ hide:
 
     Certains composants SF32 intègrent une accélération de réseaux neuronaux pour le TinyML et d'autres charges d'inférence en périphérie.
 
-- :fontawesome-solid-leaf:{ .uf-icon-green } **Très faible consommation**
+- :fontawesome-solid-leaf:{ .uf-icon-green } **Très basse consommation**
 
     Architecture avancée de gestion de l'alimentation optimisée pour les appareils alimentés par batterie et toujours actifs.
 
@@ -150,7 +150,7 @@ hide:
 
 - <span class="uf-mcu-chip">SF32LB52</span>
 
-    <span class="uf-mcu-headtext">**SF32LB52x**{ .uf-mcu-title } <span class="uf-mcu-sub">MCU d’entrée de gamme pour appareils portables</span></span>
+    <span class="uf-mcu-headtext">**SF32LB52x**{ .uf-mcu-title } <span class="uf-mcu-sub">MCU essentiel pour appareils portables</span></span>
 
     ---
 
@@ -220,7 +220,7 @@ hide:
 <!--
 ---
 
-## Démarrer en 5 étapes { .uf-center-heading }
+## Get Started in 5 Steps { .uf-center-heading }
 
 <div class="grid cards uf-steps" markdown>
 
@@ -228,41 +228,41 @@ hide:
 
     :fontawesome-solid-download:{ .uf-step-icon .uf-icon-blue }
 
-    **Installer**
+    **Install**
 
-    Installez uSDK et les outils de développement.
+    Install the uSDK and development tools.
 
 - <span class="uf-step-num uf-step-2">2</span>
 
     :fontawesome-solid-code:{ .uf-step-icon .uf-icon-purple }
 
-    **Compiler**
+    **Build**
 
-    Compilez des exemples ou créez votre propre application.
+    Build examples or create your own application.
 
 - <span class="uf-step-num uf-step-3">3</span>
 
     :fontawesome-solid-bolt:{ .uf-step-icon .uf-icon-pink }
 
-    **Flasher**
+    **Flash**
 
-    Flashez le firmware sur votre carte ou votre appareil.
+    Flash the firmware to your board or device.
 
 - <span class="uf-step-num uf-step-4">4</span>
 
     :fontawesome-solid-bug:{ .uf-step-icon .uf-icon-amber }
 
-    **Déboguer**
+    **Debug**
 
-    Déboguez à l'aide d'outils performants et des journaux.
+    Debug with powerful tools and logging.
 
 - <span class="uf-step-num uf-step-5">5</span>
 
     :fontawesome-solid-rocket:{ .uf-step-icon .uf-icon-green }
 
-    **Exécuter et livrer**
+    **Run & Ship**
 
-    Exécutez et optimisez votre produit, puis préparez-le pour sa mise en production.
+    Run, optimize, and deploy your product.
 
 </div>
 
@@ -271,51 +271,51 @@ hide:
 <div class="uf-bottom-row" markdown>
 <div class="uf-bottom-col" markdown>
 
-## Projets à la une
+## Featured Projects
 
 <div class="uf-project-list" markdown>
 
-- <span class="uf-proj-thumb uf-proj-blue">⌚</span> **Démo de montre connectée** — Démonstration complète d'une montre connectée avec interface utilisateur
-- <span class="uf-proj-thumb uf-proj-blue">🎵</span> **Audio Bluetooth** — Diffusion et lecture LE Audio
-- <span class="uf-proj-thumb uf-proj-amber">🤖</span> **Reconnaissance de gestes par IA** — Exemple TinyML avec IA embarquée
-- <span class="uf-proj-thumb uf-proj-green">💡</span> **Éclairage Matter** — Exemple d'éclairage Matter sur Thread
+- <span class="uf-proj-thumb uf-proj-blue">⌚</span> **Smart Watch Demo** — Complete smartwatch demo with UI
+- <span class="uf-proj-thumb uf-proj-blue">🎵</span> **Bluetooth Audio** — LE Audio broadcast and playback
+- <span class="uf-proj-thumb uf-proj-amber">🤖</span> **AI Gesture Recognition** — TinyML example with on-device AI
+- <span class="uf-proj-thumb uf-proj-green">💡</span> **Matter Light** — Matter over Thread lighting example
 
 </div>
 
-[Voir tous les exemples :material-arrow-right:](develop/examples/index.md){ .uf-link-blue }
-
-</div>
-<div class="uf-bottom-col" markdown>
-
-## Dernières actualités
-
-[**Publication d'uSDK v2.1.0**](blog/usdk-v210.md) <span class="uf-news-date">12 mai 2025</span>
-:   Améliorations des graphismes, du SDK d'IA et des performances.
-
-[**Carte de développement SF32LB58 disponible**](blog/sf32lb58-devboard.md) <span class="uf-news-date">28 avr. 2025</span>
-:   Une carte hautes performances pour les applications avancées.
-
-[**Premiers pas avec GUIX sur SF32**](blog/guix-getting-started.md) <span class="uf-news-date">15 avr. 2025</span>
-:   Créez de belles interfaces avec la bibliothèque graphique GUIX.
-
-[**Nouveaux exemples Bluetooth LE Audio**](blog/le-audio-examples.md) <span class="uf-news-date">2 avr. 2025</span>
-:   De nouveaux exemples de diffusion et de connexion unicast LE Audio.
-
-[Voir toutes les actualités :material-arrow-right:](blog/index.md){ .uf-link-blue }
+[View All Examples :material-arrow-right:](develop/examples/index.md){ .uf-link-blue }
 
 </div>
 <div class="uf-bottom-col" markdown>
 
-## Rejoindre la communauté
+## Latest News
 
-Échangez avec d'autres développeurs, posez vos questions et partagez vos projets.
+[**uSDK v2.1.0 Released**](blog/usdk-v210.md) <span class="uf-news-date">May 12, 2025</span>
+:   New graphics, AI SDK and performance improvements.
+
+[**SF32LB58 Development Board Available**](blog/sf32lb58-devboard.md) <span class="uf-news-date">Apr 28, 2025</span>
+:   High-performance board for advanced applications.
+
+[**GUIX on SF32 – Getting Started Guide**](blog/guix-getting-started.md) <span class="uf-news-date">Apr 15, 2025</span>
+:   Build beautiful UI with the GUIX graphics library.
+
+[**Bluetooth LE Audio Examples Added**](blog/le-audio-examples.md) <span class="uf-news-date">Apr 02, 2025</span>
+:   New LE Audio broadcast and unicast examples.
+
+[View All News :material-arrow-right:](blog/index.md){ .uf-link-blue }
+
+</div>
+<div class="uf-bottom-col" markdown>
+
+## Rejoignez la communauté
+
+Échangez avec les développeurs, posez vos questions et partagez vos projets.
 
 <div class="uf-comm-list" markdown>
 
 - :fontawesome-brands-github:{ .uf-comm-icon-gray } **GitHub Discussions** — Posez vos questions et partagez vos idées
-- :fontawesome-brands-discord:{ .uf-comm-icon-purple } **Serveur Discord** — Échangez en temps réel avec la communauté
-- :fontawesome-solid-comments:{ .uf-comm-icon-blue } **Forum des développeurs** — Approfondissez les discussions techniques
-- :fontawesome-brands-weixin:{ .uf-comm-icon-green } **Groupe WeChat** — Rejoignez la communauté de développement μForge
+- :fontawesome-brands-discord:{ .uf-comm-icon-purple } **Serveur Discord** — Discutez en temps réel avec la communauté
+- :fontawesome-solid-comments:{ .uf-comm-icon-blue } **Forum des développeurs** — Participez à des échanges techniques approfondis
+- :fontawesome-brands-weixin:{ .uf-comm-icon-green } **Groupe WeChat** — Rejoignez la communauté des développeurs de μForge
 
 </div>
 

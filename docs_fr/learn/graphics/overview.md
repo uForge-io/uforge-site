@@ -10,7 +10,7 @@ tags:
 
 ## Planifier l'architecture graphique { #overview }
 
-Ce guide explique comment créer des interfaces graphiques réactives sur les composants SF32. Il traite des décisions de conception qui comptent pour le produit : choix de l'écran, stratégie de framebuffer, intégration de LVGL, accélération matérielle ePicasso, organisation de la mémoire et comportement de rafraîchissement.
+Ce guide explique comment créer des interfaces graphiques réactives sur les appareils SF32. Il traite des décisions de conception qui comptent pour le produit : choix de l'écran, stratégie de framebuffer, intégration de LVGL, accélération matérielle ePicasso, organisation de la mémoire et comportement de rafraîchissement.
 
 Les composants SF32 ciblent les produits AIoT compacts et les appareils portables, soumis à de fortes contraintes de consommation électrique, de mémoire et d'encombrement du circuit imprimé. L'interface doit pourtant rester fluide. Le pipeline graphique distingue la gestion des ressources, la composition des pixels, la compression facultative du framebuffer et la sortie vers l'écran. Comprendre le rôle de chaque étape aide à choisir les optimisations adaptées.
 
@@ -46,7 +46,7 @@ Bitmap final rendu dans un tampon de dessin ou un framebuffer
         │
         ├── Chemin d'affichage non compressé
         │
-        └── Facultatif : extDMA le compresse au format TurboPixel
+        └── Optionnel : extDMA le compresse au format TurboPixel
                     │
                     ▼
              Framebuffer TurboPixel stocké en PSRAM
@@ -69,7 +69,7 @@ Ce pipeline est configurable : un produit n'a pas nécessairement besoin d'eZip,
 | **eZip / eZip-A** | Avant le rendu, lors de la lecture des ressources stockées | Décompresse sans perte les ressources graphiques eZip prises en charge, notamment les images fixes et les animations. | Le moteur de rendu, le framebuffer final ou le contrôleur d'affichage. |
 | **ePicasso** | Pendant le rendu et la composition | Accélère les opérations prises en charge de copie, remplissage, mélange, transformation et composition des pixels en mémoire. | La compression des ressources ou leur transfert vers l'écran. |
 | **TurboPixel** | Après le rendu et avant la sortie vers l'écran, sur les composants compatibles | Utilise extDMA pour appliquer au bitmap final une compression avec perte à taux fixe, ce qui réduit la capacité PSRAM nécessaire et le trafic de lecture de l'écran. L'en-tête actuel expose la fonction de couche compressée sur SF32LB55x, SF32LB56x et SF32LB58x lorsque extDMA est activé, et exclut SF32LB52x et SF32LB57x ; un commentaire indique que le chemin LCPU n'est pas activé. Le tableau publié marque 55x comme non pris en charge : vérifiez donc le cœur, la configuration du SDK et le chemin sur le matériel cible avant de vous y fier. | La compression sans perte des ressources ou le rendu des pixels. |
-| **Contrôleur d'affichage** | Étape finale de sortie | Décompresse les données TurboPixel lorsque cette voie est activée et transfère les pixels préparés par l'interface de l'écran. | La décompression des ressources eZip ou la composition graphique. |
+| **Contrôleur d'affichage** | Étape finale de sortie | Décompresse les données TurboPixel lorsque cette voie est activée et transfère les pixels préparés via l'interface de l'écran. | La décompression des ressources eZip ou la composition graphique. |
 
 </div>
 
@@ -97,7 +97,7 @@ Pour choisir l'interface, concevoir le chemin de flush et mettre en route l'écr
 
 Avant de concevoir les écrans du produit, choisissez un exemple du SDK qui valide déjà son point graphique le plus risqué. [Exemples LVGL du SDK](lvgl-sdk-examples.md) classent les exemples officiels — base, outil de conception, widgets, ressources compressées, animation et multimédia, boussole, jeux et interface de montre — selon la tâche d'ingénierie qu'ils couvrent. La page précise aussi quelles hypothèses concernant la carte, la version, l'écran, la mémoire et les performances doivent être vérifiées à nouveau lors de l'adaptation au produit.
 
-## Choisir le composant SF32 adapté { #pick-the-right-sf32-device }
+## Choisir la puce SF32 adaptée { #pick-the-right-sf32-device }
 
 Choisissez la puce en fonction de l'affichage et de la charge de travail UI, pas seulement de la fréquence CPU.
 
@@ -105,7 +105,7 @@ Choisissez la puce en fonction de l'affichage et de la charge de travail UI, pas
 
 <div align="center" markdown>
 
-| Exigence | Repère pour le choix du composant |
+| Exigence | Repère pour le choix de la puce |
 |:------------|:-------------------------|
 | Produit Bluetooth de base avec une interface utilisateur simple | SF32LB52x |
 | Montre connectée d'entrée de gamme, badge, étiquette, HMI simple | SF32LB52x |
@@ -215,7 +215,7 @@ RGB565 ne possède pas de canal alpha ; il sert donc généralement aux surfaces
 
 Deux représentations de l'alpha sont courantes. Avec l'**alpha non prémultiplié** (straight alpha), les valeurs RGB décrivent la couleur d'origine et l'alpha est appliqué lors du mélange. Avec l'**alpha prémultiplié**, les valeurs RGB ont déjà été multipliées par l'alpha ; l'équation source-over devient `output = premultiplied_foreground + background × (1 − alpha)`. Ne confondez pas ces deux représentations : interpréter des données non prémultipliées comme si elles étaient prémultipliées, ou inversement, crée des halos clairs ou sombres sur les bords.
 
-Le mélange alpha lit les pixels de premier plan et de destination, puis écrit le résultat. Il génère donc plus de trafic mémoire qu'une simple copie ou qu'un remplissage opaque. Utilisez ePicasso si le pilote prend en charge l'opération de mélange et les formats de pixel choisis ; sinon, conservez une solution de repli par CPU. Si la bande passante PSRAM ou le budget de consommation électrique sont limités, limitez les couches translucides plein écran, ne mettez à jour que les zones modifiées et évitez les surfaces intermédiaires inutiles.
+Le mélange alpha lit les pixels de premier plan et de destination, puis écrit le résultat. Il génère donc plus de trafic mémoire qu'une simple copie ou qu'un remplissage opaque. Utilisez ePicasso si le pilote prend en charge l'opération de mélange et les formats de pixel choisis ; sinon, conservez une solution de repli exécutée par le CPU. Si la bande passante PSRAM ou le budget de consommation électrique sont limités, limitez les couches translucides plein écran, ne mettez à jour que les zones modifiées et évitez les surfaces intermédiaires inutiles.
 
 ## Intégrer LVGL { #integrating-lvgl }
 
@@ -247,7 +247,7 @@ Définissez les points suivants avant de peaufiner les écrans :
 | Nombre de tampons de dessin | Choisissez un ou deux tampons selon la latence visée et le budget mémoire. |
 | Mise à jour des zones invalidées | Ne fusionnez les petites zones que si cela réduit le coût total du transfert. |
 | Périphériques d'entrée | Intégrez l'écran tactile, les boutons et l'encodeur via les pilotes d'entrée LVGL, plutôt que par interrogation répétée dans l'application. |
-| Accélération matérielle | Activez uniquement les opérations prises en charge par le SDK et le pilote, et conservez un repli par CPU. |
+| Accélération matérielle | Activez uniquement les opérations prises en charge par le SDK et le pilote, et conservez une solution de repli exécutée par le CPU. |
 | Gestion du cache | Gérez le nettoyage et l'invalidation du cache des tampons partagés à la frontière entre le framework et le pilote. |
 
 </div>
@@ -266,7 +266,7 @@ ePicasso est utile lorsque l'interface effectue de nombreuses opérations répé
 - La composition de couches.
 - La conversion de format de pixel lorsque prise en charge par le pilote.
 
-Une bonne intégration accélère les opérations fréquentes et volumineuses, tout en conservant un chemin de repli par CPU pour les cas non pris en charge. Ne partez pas du principe que chaque effet de style ou widget LVGL est exécuté par le matériel. Mesurez les écrans réellement utilisés par le produit.
+Une bonne intégration accélère les opérations fréquentes et volumineuses, tout en conservant une solution de repli exécutée par le CPU pour les cas non pris en charge. Ne partez pas du principe que chaque effet de style ou widget LVGL est exécuté par le matériel. Mesurez les écrans réellement utilisés par le produit.
 
 ### Quand l'accélération aide le plus { #when-acceleration-helps-most }
 
@@ -298,9 +298,9 @@ Les performances graphiques sont souvent limitées par les transferts de donnée
 - Gardez les tampons accessibles par DMA alignés selon les recommandations du SDK.
 - Utilisez des ressources compressées ou à couleurs indexées lorsqu'elles réduisent le trafic mémoire total et le coût de décodage.
 
-Lorsque le CPU et le matériel graphique ou d'affichage partagent des tampons, suivez les règles du SDK concernant le cache et la propriété des tampons. Avant une lecture matérielle de données écrites par le CPU, effectuez un clean des lignes concernées et terminez la synchronisation requise. Avant une écriture matérielle, préparez le tampon pour éviter qu'une ligne modifiée du cache CPU ne soit ensuite réécrite en mémoire et n'écrase le résultat. Attendez la fin du transfert, puis invalidez les lignes obsolètes avant que le CPU lise le résultat. Respectez l'alignement des lignes de cache et les données voisines ; ne modifiez pas un tampon détenu par le matériel. Utilisez les routines prises en charge par le SDK : clean et invalidate ne sont pas interchangeables.
+Lorsque le CPU et le matériel graphique ou d'affichage partagent des tampons, suivez les règles du SDK concernant le cache et la propriété des tampons. Avant que le matériel lise des données écrites par le CPU, nettoyez les lignes de cache concernées et terminez la synchronisation requise. Avant une écriture matérielle, préparez le tampon pour éviter qu'une ligne modifiée du cache CPU ne soit ensuite réécrite en mémoire et n'écrase le résultat. Attendez la fin du transfert, puis invalidez les lignes obsolètes avant que le CPU lise le résultat. Respectez l'alignement des lignes de cache et les données voisines ; ne modifiez pas un tampon détenu par le matériel. Utilisez les routines prises en charge par le SDK : le nettoyage et l'invalidation du cache ne sont pas interchangeables.
 
-Pour le rafraîchissement partiel, le comportement propre à chaque écran et la séquence de mise en route, consultez [Contrôleur d'affichage](display-controller.md).
+Pour le rafraîchissement partiel, le comportement propre à chaque écran et la séquence de mise en service, consultez [Contrôleur d'affichage](display-controller.md).
 
 ## Préparer les ressources graphiques { #asset-preparation }
 
@@ -396,9 +396,9 @@ Mesurez séparément :
 - Supposer qu'ePicasso accélère automatiquement chaque opération d'UI.
 - Utiliser trop de timers ou d'animations qui gardent le CPU éveillé.
 - Ignorer la latence tactile en n'optimisant que la fréquence d'images.
-- Attendre la mise en route du PCB pour valider l'initialisation du panneau.
+- Attendre la mise en service de la PCB pour valider l'initialisation du panneau.
 
-## Liste de contrôle pour la mise en route { #bring-up-checklist }
+## Liste de contrôle de mise en service { #bring-up-checklist }
 
 Pour démarrer un nouveau projet graphique sur SF32, suivez cette liste :
 
@@ -410,7 +410,7 @@ Pour démarrer un nouveau projet graphique sur SF32, suivez cette liste :
 - [ ] Implémentez le tick LVGL, le callback flush et les pilotes d'entrée.
 - [ ] Vérifiez les opérations de base : remplissage, image, texte et tactile.
 - [ ] Activez l'accélération ePicasso lorsque le SDK et le pilote la prennent en charge.
-- [ ] Vérifiez le nettoyage et l'invalidation du cache pour les tampons partagés.
+- [ ] Vérifiez le nettoyage et l'invalidation des lignes de cache pour les tampons partagés.
 - [ ] Mesurez le temps de rendu et de flush, la charge CPU et la consommation électrique.
 - [ ] Testez les écrans au pire cas, les animations, l'activité Bluetooth et les transitions veille/réveil.
 
@@ -418,7 +418,7 @@ Pour démarrer un nouveau projet graphique sur SF32, suivez cette liste :
 
 - Commencez par définir l'interface d'affichage, la résolution, la profondeur de couleur et la fréquence de rafraîchissement requise.
 - Utilisez LVGL ou un framework similaire pour gérer les widgets, les zones à redessiner, le dessin et les entrées.
-- Accélérez les opérations courantes sur les pixels avec ePicasso, tout en conservant un chemin de repli par CPU.
+- Accélérez les opérations courantes sur les pixels avec ePicasso, tout en conservant une solution de repli exécutée par le CPU.
 - Optimisez l'emplacement des données et la stratégie de tampon autant que le code de rendu.
 - Privilégiez le rafraîchissement partiel pour les panneaux limités par la bande passante et les écrans statiques d'appareils portables.
 - Évaluez les performances de l'interface à l'échelle du système : CPU, ePicasso, mémoire, contrôleur et interface d'affichage, tactile et gestion de l'énergie.

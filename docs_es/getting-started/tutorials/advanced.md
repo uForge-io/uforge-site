@@ -45,7 +45,7 @@ Las rutas de los ejemplos y las placas compatibles pueden variar según la versi
 
 **Ejemplo de partida:** `example/ble/peripheral_with_ota`
 
-1. Compile y flashee el ejemplo de periférico con OTA habilitada.
+1. Compile y grabe el ejemplo de periférico con OTA habilitada.
 2. Confirme que el comportamiento normal de periférico BLE sigue funcionando antes de intentar una actualización.
 3. Active una actualización OTA y confirme que el dispositivo arranca la nueva imagen.
 4. En una unidad de prueba con una ruta de recuperación documentada, provoque una sola interrupción cada vez, por ejemplo, desconectando durante la transferencia o saliendo del alcance. No corte la alimentación salvo que la documentación de la placa y el diseño de recuperación del producto confirmen que la prueba es segura.
@@ -73,7 +73,7 @@ Las rutas de los ejemplos y las placas compatibles pueden variar según la versi
 4. Ponga en marcha primero los rellenos de color sólido. No depure los widgets de LVGL hasta que el panel pueda mostrar patrones sencillos.
 5. Verifique el orden de color, el orden de bytes, la orientación, la ventana de direccionamiento y el comportamiento de actualización parcial.
 6. Vuelva a añadir LVGL, como en el ejercicio 2 de Integración de subsistemas.
-7. Solo si el chip, la ruta de pantalla, el controlador y el SDK seleccionados lo permiten, habilite de uno en uno la DMA, el refresco parcial y la aceleración ePicasso.
+7. Solo si el chip, la ruta de pantalla, el controlador y el SDK seleccionados lo permiten, habilite de uno en uno el DMA, el refresco parcial y la aceleración ePicasso.
 8. Pruebe las rutas de pantalla apagada, suspensión, activación y reinicialización.
 
 **Criterios de éxito:** el panel se inicializa de forma fiable tras un arranque en frío y un reset, renderiza patrones conocidos correctamente, y sobrevive a la suspensión/activación sin corrupción.
@@ -82,7 +82,7 @@ Las rutas de los ejemplos y las placas compatibles pueden variar según la versi
 
 **Lo que ha aprendido:** cómo separar la corrección eléctrica/de secuencia de la configuración del framework de interfaz.
 
-## Perfile el uso de CPU y analiza un fallo { #profile-cpu-usage-and-analyze-a-crash }
+## Perfile el uso de CPU y analice un fallo { #profile-cpu-usage-and-analyze-a-crash }
 
 **Objetivo:** depurar problemas que no se reproducen fácilmente durante una sesión de depuración en directo.
 
@@ -99,7 +99,7 @@ Las rutas de los ejemplos y las placas compatibles pueden variar según la versi
 
 **Criterios de éxito:** puede explicar tanto un problema de rendimiento como un fallo usando evidencia capturada en lugar de conjeturas.
 
-**Solución de problemas:** antes de interpretar la pila de llamadas, compruebe que los símbolos corresponden al binario flasheado, que los registros incluyen la versión del firmware y que conoce el nivel de optimización usado.
+**Solución de problemas:** antes de interpretar la pila de llamadas, compruebe que los símbolos corresponden al binario grabado, que los registros incluyen la versión del firmware y que conoce el nivel de optimización usado.
 
 **Lo que ha aprendido:** el perfilado proactivo para rutas lentas y el análisis post mortem de volcados para fallos difíciles de capturar en vivo.
 
@@ -113,9 +113,9 @@ Las rutas de los ejemplos y las placas compatibles pueden variar según la versi
 
 1. Parta del comportamiento periférico que validó en el ejercicio 3 de Integración de subsistemas.
 2. Añada el rol central: por ejemplo, el dispositivo puede actuar como periférico frente a un teléfono y como central frente a un accesorio con sensores.
-3. Amplía a varias conexiones concurrentes.
+3. Amplíe a varias conexiones concurrentes.
 4. Registre para cada enlace el intervalo de conexión, la latencia del periférico, el tiempo de supervisión y la frecuencia de notificación.
-5. Establece primero una referencia de caudal de datos (throughput) con el ejemplo correspondiente del SDK, antes de atribuir el problema al código de la aplicación.
+5. Establezca primero una referencia de caudal de datos (throughput) con el ejemplo correspondiente del SDK, antes de atribuir el problema al código de la aplicación.
 6. Pruebe la reconexión, el modo de reposo del teléfono, la pérdida del accesorio y las ráfagas simultáneas de notificaciones.
 
 **Criterios de éxito:** todos los roles previstos se conectan, desconectan y reconectan de forma fiable, y los parámetros elegidos para cada conexión se mantienen estables bajo carga combinada.
@@ -138,7 +138,7 @@ Las rutas de los ejemplos y las placas compatibles pueden variar según la versi
 4. Registre el dispositivo y confirme que aparece en `list_device`.
 5. Pruébelo del mismo modo que probó ADC, PWM, I2C y los dispositivos de almacenamiento en los tutoriales anteriores.
 6. Añada gestión de errores para hardware ausente, argumentos no válidos, tiempos de espera agotados y suspensión/reanudación.
-7. Si el controlador es reutilizable, empaquétalo como un componente del SDK en lugar de copiarlo y pegarlo entre productos.
+7. Si el controlador es reutilizable, empaquételo como un componente del SDK en lugar de copiarlo y pegarlo entre productos.
 
 **Criterios de éxito:** el código de la aplicación encuentra y usa el controlador mediante el modelo de dispositivos habitual de RT-Thread, y este se comporta de forma predecible durante la inicialización, el uso, la gestión de errores y los ciclos de suspensión y reanudación.
 
@@ -158,4 +158,4 @@ Las rutas de los ejemplos y las placas compatibles pueden variar según la versi
 
 ## A dónde ir después { #where-to-go-next }
 
-Llegados a este punto, dispone de las herramientas necesarias: integración de periféricos y middleware, gestión de la coexistencia y del consumo, OTA, puesta en marcha de hardware personalizado, análisis post mortem e integración de controladores. A partir de aquí, el catálogo de [Ejemplos](../../develop/examples/index.md) y el [Resumen de gráficos](../../learn/graphics/overview.md) le servirán como referencia. Consulte los temas que necesites para cada función, en lugar de recorrer el catálogo de principio a fin.
+Llegados a este punto, dispone de las herramientas necesarias: integración de periféricos y middleware, gestión de la coexistencia y del consumo, OTA, puesta en marcha de hardware personalizado, análisis post mortem e integración de controladores. A partir de aquí, el catálogo de [Ejemplos](../../develop/examples/index.md) y el [Resumen de gráficos](../../learn/graphics/overview.md) le servirán como referencia. Consulte los temas que necesite para cada función, en lugar de recorrer el catálogo de principio a fin.

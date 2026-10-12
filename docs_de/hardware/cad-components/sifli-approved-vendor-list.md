@@ -11,25 +11,25 @@ tags:
 
 ## Wofür diese Liste dient { #what-this-list-is-for }
 
-Die **freigegebene Lieferantenliste (Approved Vendor List, AVL)** dokumentiert SiFlis Bauteilqualifizierungen für SF32-Designs. V0.3 führt Quarze, Induktivitäten für Buck-Wandler, NOR-/NAND-Flash, SD-NAND und einen LCD-Treiber auf; das Tabellenblatt für Touch-Controller enthält keine Einträge. Nutzen Sie die Liste, um geeignete Bauteile und mögliche Zweitquellen auszuwählen. Prüfen Sie das konkrete Bauteil anschließend im vorgesehenen Produkt: auf der Platine, mit der Firmware, im Gehäuse sowie unter den vorgesehenen Fertigungs- und Lieferkettenbedingungen. Die Aufnahme in die AVL ersetzt keine Produktvalidierung.
+Die **freigegebene Lieferantenliste (Approved Vendor List, AVL)** dokumentiert die von SiFli qualifizierten Bauteile für SF32-Designs. V0.3 führt Quarze, Induktivitäten für Buck-Wandler, NOR-/NAND-Flash, SD-NAND und einen LCD-Treiber auf; das Tabellenblatt für Touch-Controller enthält keine Einträge. Nutzen Sie die Liste zur Vorauswahl geeigneter Bauteile und möglicher Zweitquellen. Prüfen Sie anschließend das konkrete Bauteil im vorgesehenen Produkt: auf der Platine, mit der Firmware, im Gehäuse sowie unter den geplanten Fertigungs- und Lieferkettenbedingungen. Die Aufnahme in die AVL ersetzt keine Produktvalidierung.
 
 Diese Seite basiert direkt auf SiFlis offizieller AVL-Tabelle, **`SIFLI-MCU-AVL-认证表`, Version V0.3 (2026-01-21)**. Da die AVL mit der Qualifizierung neuer Bauteile aktualisiert werden kann, bildet diese Seite den datierten Stand V0.3 ab und ist keine Live-Datenbank. Diese Prüfung bestätigt nur den Inhalt von V0.3; sie belegt nicht, dass ein Bauteil in einer späteren AVL-Fassung weiterhin freigegeben ist. Prüfen Sie vor der endgültigen Festlegung einer Stückliste die aktuelle Quelldatei:
 
 <div class="grid cards" markdown>
 
 - :fontawesome-solid-file-excel: __[SiFli freigegebene Lieferantenliste (AVL): V0.3 .xlsx herunterladen](https://downloads.sifli.com/hardware/files/documentation/SIFLI-MCU-AVL-%E8%AE%A4%E8%AF%81%E8%A1%A8-V0.3-20260121.xlsx)__
-- :fontawesome-solid-globe: __[SiFli Wiki — Hardware-Designleitfäden und Downloads](https://wiki.sifli.com/en/hardware/index.html)__
+- :fontawesome-solid-globe: __[SiFli Wiki — Hardware-Design-Leitfäden und Downloads](https://wiki.sifli.com/en/hardware/index.html)__
 
 </div>
 
 !!! note "So verwenden Sie diese Liste"
-    Die Quelle enthält allgemeine Anforderungen an Quarze und Buck-Induktivitäten; die übrigen Tabellen dokumentieren überwiegend einzelne Bauteildaten. Prüfen Sie Kandidaten anhand dieser Anforderungen, ohne vorauszusetzen, dass jedes gelistete Bauteil alle allgemeinen Grenzwerte erfüllt. Widersprüche der Quelle werden unten erläutert. Vollständig leere Spalten, etwa zur Flash-Download-Tool-Unterstützung, sind weggelassen; dies bestätigt keine entsprechende Unterstützung. Ein Gedankenstrich (—) in den Detailtabellen bedeutet in der Regel, dass V0.3 für dieses Feld keinen Wert enthält. In den DTR-Taktfeldern für NOR-Flash steht er dagegen für den Quelleintrag „nicht unterstützt“; siehe den Hinweis zu NOR-Flash.
+    Die Quelle nennt allgemeine Anforderungen an Quarze und Buck-Induktivitäten; die übrigen Tabellen enthalten überwiegend Daten zu einzelnen Bauteilen. Prüfen Sie Kandidaten anhand dieser Anforderungen, ohne vorauszusetzen, dass jedes gelistete Bauteil alle allgemeinen Grenzwerte erfüllt. Abweichungen in der Quelle werden unten erläutert. Vollständig leere Spalten, etwa zur Unterstützung durch Flash-Download-Tools, sind weggelassen; daraus lässt sich keine Unterstützung ableiten. Ein Gedankenstrich (—) in den Detailtabellen bedeutet in der Regel, dass V0.3 für dieses Feld keinen Wert enthält. In den DTR-Taktfeldern für NOR-Flash steht er dagegen für den Quelleintrag „nicht unterstützt“; siehe den Hinweis zu NOR-Flash.
 
 Prüfen Sie die Bauteilauswahl für Ihre Stückliste in drei Schritten, statt nur eine Teilenummer auszuwählen:
 
-1. **Vorauswahl anhand der Anforderungen.** Gleichen Sie Kapazität, Versorgungsspannung, Gehäuse und die Anforderungen der jeweiligen Bauteilart (Lastkapazität bei Quarzen, DCR/Isat bei Induktivitäten, SDR/DTR-Takt bei Flash) mit Ihrem Schaltplan und Ihrem Leistungsbudget ab.
+1. **Vorauswahl anhand der Anforderungen.** Stimmen Sie Kapazität, Versorgungsspannung, Gehäuse und die Anforderungen der jeweiligen Bauteilart (Lastkapazität bei Quarzen, DCR/Isat bei Induktivitäten, SDR-/DTR-Takt bei Flash) auf Schaltplan und Leistungsbudget ab.
 2. **Prüfen Sie auch Randbedingungen, die sich nicht aus einem einzelnen Datenblattwert ergeben.** Bestätigen Sie den Temperaturbereich für die Betriebs- und Lagerumgebung des Produkts, die genaue von der Firmware erwartete Hersteller-/JEDEC-ID sowie, ob OTA-, Dateisystem- oder Download-Tool-Unterstützung mit genau diesem Bauteil und nicht nur mit einem anderen Bauteil derselben Familie getestet wurde.
-3. **Validieren Sie auf realer Hardware vor der Serienfertigung.** Messen Sie Standby- und Aktivstrom auf Ihrer eigenen Platine, prüfen Sie die HF-Kalibrierung des Quarzes erneut mit der endgültigen Leiterplatte und dem Gehäuse, und ermitteln Sie mindestens eine Zweitquelle für jedes Bauteil mit nur einem Lieferanten.
+3. **Validieren Sie auf realer Hardware vor der Serienfertigung.** Messen Sie die Stromaufnahme im Standby und im aktiven Betrieb auf Ihrer Platine. Prüfen Sie die RF-Kalibrierung des Quarzes erneut mit der endgültigen Leiterplatte und dem Gehäuse, und ermitteln Sie für jedes Bauteil mit nur einem Lieferanten mindestens eine Zweitquelle.
 
 ## Abdeckung im Überblick { #coverage-at-a-glance }
 
@@ -70,7 +70,7 @@ Diese Übersicht zeigt den Umfang von V0.3. Display- und Touch-Bauteile erforder
 
 ## Quarze { #crystal-oscillators }
 
-Die AVL enthält 48-MHz-Systemquarze und 32,768-kHz-RTC-Quarze. Prüfen Sie die Anforderungen an die Taktquellen im Designleitfaden des genauen SF32-Bauteils und wählen Sie anhand von Lastkapazität, Frequenztoleranz, ESR, Anlaufverhalten und Leistungsbudget. Die Qualifizierungstabellen legen nicht für alle SF32-Produkte dieselbe zwingende Taktkonfiguration fest.
+Die AVL enthält 48-MHz-Systemquarze und 32,768-kHz-RTC-Quarze. Prüfen Sie die Anforderungen an die Taktquellen im Designleitfaden des genauen SF32-Geräts und wählen Sie anhand von Lastkapazität, Frequenztoleranz, ESR, Anlaufverhalten und Leistungsbudget. Die Qualifizierungstabellen legen nicht für alle SF32-Produkte dieselbe zwingende Taktkonfiguration fest.
 
 ### 48-MHz-Systemquarz { #48-mhz-system-crystal }
 
@@ -96,7 +96,7 @@ Die AVL enthält 48-MHz-Systemquarze und 32,768-kHz-RTC-Quarze. Prüfen Sie die 
 
 </div>
 
-!!! tip "Was die HF-Kalibrierungsspalten bedeuten"
+!!! tip "Was die RF-Kalibrierungsspalten bedeuten"
     **CBANK_SEL** ist die in SiFlis Qualifizierungsdaten angegebene Trimm-Einstellung. **TX Ch39 Freq Offset** übernimmt die Prüfbezeichnung der Quelle und die Ergebnisse bei drei Temperaturen. Die Arbeitsmappe nennt weder den Bluetooth-Modus noch die Prüffrequenz. Setzen Sie die Bezeichnung daher nicht mit BLE-Advertising-Kanal 39 oder einem bestimmten Kanal in der Bandmitte gleich. Klären Sie Prüfaufbau und Kalibrierverfahren, bevor Sie Ergebnisse vergleichen oder Trimm-Einstellungen auf Ihre Platine übertragen. Drei TKD-Einträge nennen ESR ≤40 Ω trotz der allgemeinen Vorgabe ≤30 Ω; auch diese Abweichung muss geklärt werden.
 
 Für die zusätzlichen Stromwerte in der Quarztabelle sind weder der Vergleichswert noch der vollständige Prüfaufbau dokumentiert. Sie beschreiben nicht den Versorgungsstrom eines Quarzes allein. Klären Sie die Messdefinition, bevor Sie Kandidaten vergleichen oder die Werte in das Leistungsbudget des Systems übernehmen.
@@ -344,7 +344,7 @@ XSSD01GGAI ist für 0 °C bis +70 °C aufgeführt. Bei den anderen vier Bauteile
 ## LCD-Treiber { #lcd-driver }
 
 !!! warning "Display-Treiber in V0.3"
-    V0.3 enthält einen LCD-Treiber. Das [Workbook V0.3](https://downloads.sifli.com/hardware/files/documentation/SIFLI-MCU-AVL-%E8%AE%A4%E8%AF%81%E8%A1%A8-V0.3-20260121.xlsx) ist eine feste Version und kein Link auf künftige Revisionen. Ein fehlender Eintrag bedeutet nicht fehlende Unterstützung; klären Sie die Eignung vor der Serienauswahl mit SiFli. MIPI und QSPI sind Schnittstellen des Display-Treibers, nicht zwangsläufig jedes SF32-Geräts. Prüfen Sie Schnittstellen und Softwaretreiber des gewählten Chips; siehe [Grafik-Übersicht](../../learn/graphics/overview.md) und [ePicasso-GPU-Architektur](../../learn/graphics/epicasso-gpu.md). Die Quelle nennt für SDR `?MHz`, also keinen konkreten Wert, und bezeichnet DDR als nicht unterstützt.
+    V0.3 enthält einen LCD-Treiber. Die [Arbeitsmappe zu V0.3](https://downloads.sifli.com/hardware/files/documentation/SIFLI-MCU-AVL-%E8%AE%A4%E8%AF%81%E8%A1%A8-V0.3-20260121.xlsx) ist ein fester Datenstand und verweist nicht auf künftige Revisionen. Ein fehlender Eintrag bedeutet nicht, dass ein Bauteil grundsätzlich nicht unterstützt wird; klären Sie seine Eignung vor der Serienauswahl mit SiFli. MIPI und QSPI sind Schnittstellen des Display-Treibers, nicht zwangsläufig jedes SF32-Geräts. Prüfen Sie die Schnittstellen und Softwaretreiber des gewählten Chips; siehe [Grafik-Übersicht](../../learn/graphics/overview.md) und [ePicasso-GPU-Architektur](../../learn/graphics/epicasso-gpu.md). Die Quelle nennt für SDR `?MHz`, also keinen konkreten Wert, und bezeichnet DDR als nicht unterstützt.
 
 <div align="center"><em>Qualifizierte LCD-Treiber</em></div>
 
@@ -374,7 +374,7 @@ Prüfen Sie vor der Freigabe von Schaltplan oder Stückliste jedes ausgewählte 
 - [ ] Die Firmware kann das Bauteil korrekt identifizieren, mittels JEDEC-/Hersteller-ID oder einer gleichwertigen Laufzeitprüfung, sofern zutreffend.
 - [ ] Boot-, Download-, OTA-, Dateisystem-, Display- oder Touch-Treiberverhalten wurde am genauen Bauteil verifiziert.
 - [ ] Der Stromverbrauch im Energiesparmodus wurde auf realer Hardware gemessen und nicht direkt aus der AVL oder dem Bauteil-Datenblatt übernommen.
-- [ ] Frequenzversatz des Quarzes, CBANK_SEL-Verhalten und HF-Kalibrierung sind auf der endgültigen Leiterplatte, Antenne und im Gehäuse validiert.
+- [ ] Frequenzversatz des Quarzes, CBANK_SEL-Verhalten und RF-Kalibrierung sind auf der endgültigen Leiterplatte, Antenne und im Gehäuse validiert.
 - [ ] Die Zeiten für das Löschen, Programmieren und Lesen des Flash wurden im erwarteten Spannungs- und Temperaturbereich des Produkts geprüft.
 - [ ] Für risikoreiche Stücklistenpositionen wie Quarze, Induktivitäten, Flash und Display-Panels ist mindestens ein Zweitquellenkandidat identifiziert.
 

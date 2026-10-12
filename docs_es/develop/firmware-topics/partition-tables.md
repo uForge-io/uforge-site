@@ -59,7 +59,7 @@ Cada región usa `offset` y `max_size`, expresados en bytes. La lista `tags` gen
 | Campo | Propósito |
 | --- | --- |
 | `ftab` | Describe una entrada de Flash Table. |
-| `img` | Asigna el nombre de la imagen de la partición que usarán los scripts de programación generados. Si el proyecto genera varios binarios, use `proj_name:binary_name`. |
+| `img` | Asigna el nombre de la imagen de la partición que usarán los scripts de grabación generados. Si el proyecto genera varios binarios, use `proj_name:binary_name`. |
 | `exec` | Identifica el programa ejecutable para que los scripts compartidos del enlazador puedan seleccionar su dirección de código. |
 | `custom` | Añade macros personalizadas de valor entero a `ptab.h`, que se genera. |
 
@@ -88,7 +88,7 @@ v2 también usa `ptab.json`, pero el encabezado debe declarar `"version": "2"`. 
 
 ## v3: particiones YAML y overlays { #v3-yaml-partitions-and-overlays }
 
-v3 usa `ptab.yaml` y es el formato recomendado. Sustituye el modelo heredado `tags` por los campos explícitos `type` y `subtype`, desacopla las particiones de la topología física mediante nombres lógicos `region` y genera `ptab.h`, `ftab.bin` y fragmentos para los scripts del enlazador durante la compilación.
+v3 usa `ptab.yaml` y es el formato recomendado. Con este formato, el modelo heredado basado en `tags` da paso a los campos explícitos `type` y `subtype`; las particiones se desacoplan de la topología física mediante nombres lógicos `region`, y durante la compilación se generan `ptab.h`, `ftab.bin` y fragmentos para los scripts del enlazador.
 
 <div align="center"><em>Tabla: campos de nivel superior y de partición en v3</em></div>
 <div align="center" markdown>

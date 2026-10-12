@@ -112,7 +112,7 @@ SF32LB56-MOD 是思澈科技（SiFli）基于 SF32LB56xV 平台推出的通用�
 
 思澈科技（SiFli）的[《模组型号指南》](https://wiki.sifli.com/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)列出了上述三种配置，并说明还可按需定制其他型号。选型前，请向思澈科技（SiFli）确认当前可供货的 SKU 及其存储配置。
 
-思澈科技（SiFli）将 SF32LB566VCB36 搭配合封 4 MB + 8 MB OPI-PSRAM 和 1 MB QSPI-NOR 的方案列为标准配置，其存储组合与 N16R12N1 对应。型号指南未分别标明 A128R12N1 和 D128R12N1 对应的芯片完整料号；选用这两个 SKU 前，请向思澈科技（SiFli）确认所用芯片的准确料号。
+思澈科技（SiFli）将 SF32LB566VCB36 搭配 4 MB + 8 MB OPI-PSRAM 和 1 MB QSPI-NOR 的方案列为标准配置，其存储组合与 N16R12N1 对应。型号指南未分别标明 A128R12N1 和 D128R12N1 对应的芯片完整料号；选用这两个 SKU 前，请向思澈科技（SiFli）确认所用芯片的准确料号。
 
 ### 电源与 I/O { #power-and-io }
 

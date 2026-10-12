@@ -22,7 +22,7 @@ SiFli SDK 从两个层面介绍看门狗：HAL 暴露的硬件看门狗，以及
 </div>
 
 !!! warning "RT-Thread 看门狗使用指南的适用范围"
-    [看门狗使用指南](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/watchdog.html) 的发布路径位于 `sf32lb52x`，但正文明确写的是 SF32LB55X。下文提到的 30 秒默认超时、IDLE 线程喂狗、休眠行为和应用层复位流程，均应视为该指南所述 55x 配置的说明，不能直接推广为所有 SF32 系列的共同保证。请根据目标系列的资料和生成的配置逐项确认。
+    [看门狗使用指南](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/watchdog.html) 的发布路径位于 `sf32lb52x`，但正文明确写的是 SF32LB55X。下文提到的 30 秒默认超时、IDLE 线程喂狗、睡眠行为和应用层复位流程，均应视为该指南所述 55x 配置的说明，不能直接推广为所有 SF32 系列的共同保证。请根据目标系列的资料和生成的配置逐项确认。
 
 ## 使能和配置看门狗 { #enable-and-configure-the-watchdog }
 
@@ -55,19 +55,19 @@ rt_hw_watchdog_pet();
 
 不要使用无条件的喂狗循环来掩盖调度器卡死或死锁。喂狗点应代表被监控任务确实取得了正常进展。
 
-## 休眠和复位行为 { #sleep-and-reset-behavior }
+## 睡眠和复位行为 { #sleep-and-reset-behavior }
 
 - 进入待机模式（`Standby`）或休眠（`Hibernate`）时会关闭看门狗，唤醒后重新启用。
-- 其他休眠模式下看门狗继续运行，因此系统必须在超时前唤醒并喂狗。
+- 其他睡眠模式下看门狗继续运行，因此系统必须在超时前唤醒并喂狗。
 - HCPU 使用系统看门狗，超时会重启整个芯片。
 - LCPU 使用 LCPU 子系统看门狗，超时先产生中断，再由中断处理函数通过软件触发整个芯片重启。
 
 ## 验证流程 { #validation-sequence }
 
-1. 记录芯片系列、SDK 版本、超时时间、喂狗责任线程和休眠模式。
+1. 记录芯片系列、SDK 版本、超时时间、喂狗责任线程和睡眠模式。
 2. 验证正常工作负载能够到达预期的喂狗位置。
 3. 有意停止喂狗，确认复位范围和启动行为符合预期。
-4. 在所有支持的休眠模式下重复测试，尤其要覆盖 `Standby` 和 `Hibernate`。
+4. 在所有支持的睡眠模式下重复测试，尤其要覆盖 `Standby` 和 `Hibernate`。
 5. 将复位结果和启动阶段的诊断信息保存到产品恢复测试记录中。
 
 ## 官方来源 { #official-sources }

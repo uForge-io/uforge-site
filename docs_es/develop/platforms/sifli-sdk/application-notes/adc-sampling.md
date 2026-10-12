@@ -42,12 +42,12 @@ Las tensiones máximas de entrada indicadas arriba se aplican a las entradas GPA
 |:-------|:-----------------------------|:---------------|
 | SF32LB55x | Un divisor externo se conecta a una entrada GPADC seleccionada; el circuito de referencia utiliza `PB10` / `GPADC_CH1`. | Mantenga la salida del divisor dentro del límite de entrada del rango X1/X3 seleccionado. |
 | SF32LB52x | Canal dedicado `GPADC_CH7` / `BAT`; el ejemplo del SDK indica una conexión de VBAT mediante un divisor interno. | Use el `vbat_factor` del SDK para convertir el resultado de este canal dedicado a tensión de batería. |
-| SF32LB56x / 58x | Un divisor externo de la placa alimenta el pad GPADC elegido; el mapa de referencia del SDK asigna `GPADC_CH7` a `PB32` / `PB39`, respectivamente. | Compruebe la conexión real del divisor de batería en el esquema de la placa. Son pads GPADC normales, no canales dedicados integrados en el chip. |
+| SF32LB56x / 58x | Un divisor externo de la placa alimenta el pad GPADC elegido; el mapa de referencia del SDK asigna `GPADC_CH7` a `PB32` / `PB39`, respectivamente. | Compruebe la conexión real del divisor de batería en el esquemático de la placa. Son pads GPADC normales, no canales dedicados integrados en el chip. |
 | SF32LB57x | Canal dedicado `GPADC_CH11`; el mapa del SDK lo denomina `BAT`, mientras que la guía de hardware usa `VBAT` o `VBATS` según la variante de alimentación. | Consulte el límite de medición del canal de batería para la pieza exacta. En las variantes con alimentación de 3,3 V, la guía especifica para `VBATS` un rango de medición GPADC de 0–4,5 V; no lo sustituya por la tensión nominal de pin de 4,7 V. |
 
 </div>
 
-Para la ruta externa de medición de batería de SF32LB55x, la FAQ de OpenSiFli muestra un divisor con resistencias de 1 MΩ y 220 kΩ, ambas con una tolerancia del 1 %. Los valores de resistencia elevados reducen la corriente de fuga continua del divisor; esa tolerancia limita el error de la relación de división y ayuda a mantener la precisión. La salida del divisor es el punto de prueba del ADC, no la tensión de la batería. Al adaptar esta referencia, consulte el esquema y los límites eléctricos del dispositivo de destino.
+Para la ruta externa de medición de batería de SF32LB55x, la FAQ de OpenSiFli muestra un divisor con resistencias de 1 MΩ y 220 kΩ, ambas con una tolerancia del 1 %. Los valores de resistencia elevados reducen la corriente de fuga continua del divisor; esa tolerancia limita el error de la relación de división y ayuda a mantener la precisión. La salida del divisor es el punto de prueba del ADC, no la tensión de la batería. Al adaptar esta referencia, consulte el esquemático y los límites eléctricos del dispositivo de destino.
 
 ![Referencia del divisor resistivo de VBAT en la guía del SDK de SF32LB56x](../../../../assets/develop/adc/adc-resistor-sf32lb56x.png){ loading="lazy" }
 <div align="center"><em>Figura: referencia del divisor resistivo de VBAT y del punto de prueba ADC en la guía del SDK de SF32LB56x.</em></div>
@@ -70,14 +70,14 @@ Para la ruta externa de medición de batería de SF32LB55x, la FAQ de OpenSiFli 
 
 </div>
 
-En el esquema de referencia del SF32LB55x, VBAT pasa por R125 (1 MΩ) hasta `PB10_BAT_DET_ADC`. R126 (220 kΩ) y C118 (0,1 µF) conectan este nodo a tierra en paralelo. Considere estos valores como una referencia y compruébelos con el esquema y los límites eléctricos del dispositivo de destino.
+En el esquemático de referencia del SF32LB55x, VBAT pasa por R125 (1 MΩ) hasta `PB10_BAT_DET_ADC`. R126 (220 kΩ) y C118 (0,1 µF) conectan este nodo a tierra en paralelo. Considere estos valores como una referencia y compruébelos con el esquemático y los límites eléctricos del dispositivo de destino.
 
-![Esquema del divisor externo de tensión de batería de SF32LB55x](../../../../assets/develop/adc/adc004.png){ loading="lazy" }
+![Esquemático del divisor externo de tensión de batería de SF32LB55x](../../../../assets/develop/adc/adc004.png){ loading="lazy" }
 <div align="center"><em>Figura: ruta externa de muestreo de tensión de batería de SF32LB55x.</em></div>
 
 ## Alimentación y referencia analógicas { #analog-supply-and-reference }
 
-La configuración de la alimentación analógica y de los pines de referencia depende de la familia. Consulte el esquema del dispositivo de destino; no presuponga que todos los GPADC tienen la misma distribución de pines VREF:
+La configuración de la alimentación analógica y de los pines de referencia depende de la familia. Consulte el esquemático del dispositivo de destino; no presuponga que todos los GPADC tienen la misma distribución de pines VREF:
 
 <div align="center"><em>Tabla: conexiones de alimentación y referencia del GPADC por familia SF32</em></div>
 
@@ -85,14 +85,14 @@ La configuración de la alimentación analógica y de los pines de referencia de
 
 | Familia | Conexiones de alimentación y referencia |
 |:-------|:----------------------------------------|
-| SF32LB52x / 56x | Alimente `AVDD33_ANA` con una línea estable de 3,3 V. El esquema de referencia muestra `GPADC_VREF` desacoplado a tierra; no es una entrada de alimentación. |
-| SF32LB55x | El esquema de referencia muestra `AVDD33_ANA` y `AVSS33_ANA`; siga el esquema de destino para conectarlos y desacoplarlos. |
+| SF32LB52x / 56x | Alimente `AVDD33_ANA` con una línea estable de 3,3 V. El esquemático de referencia muestra `GPADC_VREF` desacoplado a tierra; no es una entrada de alimentación. |
+| SF32LB55x | El esquemático de referencia muestra `AVDD33_ANA` y `AVSS33_ANA`; siga el esquemático de destino para conectarlos y desacoplarlos. |
 | SF32LB57x | Alimente `AVDD33_ANA` con 3,3 V. `GPADC_VREF` es un pin de referencia: conecte únicamente el condensador especificado a tierra y no lo alimente externamente. |
-| SF32LB58x | El esquema de referencia muestra `AVDD33_ANA` / `AVSS33_ANA`, `GPADC_VREFP` con su condensador especificado y `GPADC_VREFN` conectado a tierra. No trate ninguno de los dos pines de referencia como entrada de alimentación. |
+| SF32LB58x | El esquemático de referencia muestra `AVDD33_ANA` / `AVSS33_ANA`, `GPADC_VREFP` con su condensador especificado y `GPADC_VREFN` conectado a tierra. No trate ninguno de los dos pines de referencia como entrada de alimentación. |
 
 </div>
 
-El par `GPADC_VREFP` / `GPADC_VREFN` del SF32LB58x no es intercambiable con la denominación única `GPADC_VREF` que usan las demás familias. El esquema del SDK también muestra componentes de filtrado específicos por familia; use el circuito de referencia y los valores exactos del dispositivo de destino. Nunca aplique alimentación directamente a un pin de referencia GPADC. `AVDD33_ANA` es la alimentación analógica y `AVSS33_ANA` es la masa analógica cuando está presente.
+El par `GPADC_VREFP` / `GPADC_VREFN` del SF32LB58x no es intercambiable con la denominación única `GPADC_VREF` que usan las demás familias. El esquemático del SDK también muestra componentes de filtrado específicos por familia; use el circuito de referencia y los valores exactos del dispositivo de destino. Nunca aplique alimentación directamente a un pin de referencia GPADC. `AVDD33_ANA` es la alimentación analógica y `AVSS33_ANA` es la masa analógica cuando está presente.
 
 ![Conexión de alimentación analógica y referencia GPADC en la guía del SDK de SF32LB56x](../../../../assets/develop/adc/adc-ana-ref-sf32lb56x.png){ loading="lazy" }
 <div align="center"><em>Figura: conexión específica por familia de la alimentación analógica y la referencia GPADC que muestra la guía del SDK de SF32LB56x.</em></div>
@@ -122,7 +122,7 @@ Estas llamadas ilustran la API de pines analógicos, no la selección de pads de
 
 </div>
 
-Las fuentes de SiFli difieren en la asignación de pads del SF32LB52x: la [nota de aplicación ADC específica de SF32LB52x](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/adc.html) indica, para la revisión A0, la siguiente asignación de pads externos: `PB08`, `PB10`, `PB12`, `PB13`, `PB16`, `PB17`, `PB18` y `PB19` corresponden a `GPADC_CH0`–`GPADC_CH7`; la [tabla ADC consolidada de la guía de SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/adc.html) indica en cambio `PA28`–`PA34` para `GPADC_CH0`–`GPADC_CH6` y `BAT` para `GPADC_CH7`. La fila de SF32LB52x anterior refleja la tabla consolidada y no constituye una asignación universal para todos los 52x. Antes de trazar las pistas o configurar GPADC en un 52x, compruebe el modelo y la revisión exactos con la configuración de multiplexado del SDK correspondiente y el esquema de la placa; no combine ambos mapas.
+Las fuentes de SiFli difieren en la asignación de pads del SF32LB52x: la [nota de aplicación ADC específica de SF32LB52x](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/adc.html) indica, para la revisión A0, la siguiente asignación de pads externos: `PB08`, `PB10`, `PB12`, `PB13`, `PB16`, `PB17`, `PB18` y `PB19` corresponden a `GPADC_CH0`–`GPADC_CH7`; la [tabla ADC consolidada de la guía de SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/adc.html) indica en cambio `PA28`–`PA34` para `GPADC_CH0`–`GPADC_CH6` y `BAT` para `GPADC_CH7`. La fila de SF32LB52x anterior refleja la tabla consolidada y no constituye una asignación universal para todos los 52x. Antes de trazar las pistas o configurar GPADC en un 52x, compruebe el modelo y la revisión exactos con la configuración de multiplexado del SDK correspondiente y el esquemático de la placa; no combine ambos mapas.
 
 SF32LB57x tiene cuatro canales ADC adicionales: `PA36` es `GPADC_CH8`, `PA37` es `GPADC_CH9`, `PA38` es `GPADC_CH10` y la señal de detección de batería es `GPADC_CH11` (`BAT` en el mapa del SDK; `VBAT` o `VBATS` en la guía de hardware, según la variante de alimentación). Este canal pertenece al dominio de tensión de batería y tiene un rango de medida distinto al de las entradas GPADC normales. En las variantes con alimentación de 3,3 V, respete el rango de medición GPADC `VBATS` de 0–4,5 V que indica la guía, no la tensión nominal de pin de 4,7 V. Por tanto, ni el mapa de 12 canales ni la entrada de batería son intercambiables con los mapas de ocho canales anteriores.
 
@@ -162,7 +162,7 @@ La guía modela la conversión como una relación lineal:
 3. Use `sifli_adc_calibration` para calcular y guardar la relación y el offset.
 4. Convierta las lecturas posteriores con los valores de calibración almacenados e incluya la relación del divisor al calcular la tensión de entrada antes del divisor.
 
-La implementación del código fuente define `ADC_RATIO_ACCURATE` como 1000 y los valores iniciales de `adc_vol_offset` y `adc_vol_ratio` como 200 y 3930, respectivamente. Este helper heredado ilustra el cálculo lineal; no sustituye el flujo de calibración de la versión del SDK de destino. Si el SDK ofrece una API de calibración HAL o del controlador de dispositivo, use esa interfaz.
+La implementación del código fuente define `ADC_RATIO_ACCURATE` como 1000 y los valores iniciales de `adc_vol_offset` y `adc_vol_ratio` como 200 y 3930, respectivamente. Esta función auxiliar heredada ilustra el cálculo lineal; no sustituye el flujo de calibración de la versión del SDK de destino. Si el SDK ofrece una API de calibración HAL o del controlador de dispositivo, use esa interfaz.
 
 ### Rangos de calibración de SF32LB55x { #sf32lb55x-calibration-ranges }
 
@@ -236,7 +236,7 @@ Para depurar la medición de tensión de batería de SF32LB55x, la FAQ de OpenSi
 
 ### Comprobar la configuración del pin ADC del SF32LB55x tras standby y reactivación { #check-sf32lb55x-pin-configuration-after-standby }
 
-Para la entrada de detección de batería del SF32LB55x en `PB10`, compruebe la configuración del pin tanto antes de entrar en standby como después de reactivarse. Antes de la inicialización, `PB10` tiene activada por defecto una resistencia pull-up interna. En `pinmux.c`, configúrelo como `PIN_NOPULL` y `PIN_ANALOG_INPUT`; de lo contrario, la pull-up puede seguir activa y provocar lecturas ocasionalmente demasiado altas.
+Para la entrada de detección de batería del SF32LB55x en `PB10`, compruebe la configuración del pin tanto antes de entrar en standby como después de reactivarse. Antes de la inicialización, `PB10` tiene activada por defecto una resistencia pull-up interna. En `pinmux.c`, configúrelo como `PIN_NOPULL` y `PIN_ANALOG_INPUT`; de lo contrario, la resistencia pull-up puede seguir activa y provocar lecturas ocasionalmente demasiado altas.
 
 ![Forma de onda del nodo de muestreo de batería del SF32LB55x en standby](../../../../assets/develop/adc/adc006.png){ loading="lazy" }
 <div align="center"><em>Figura: Ejemplo de la forma de onda del nodo de muestreo de batería del SF32LB55x mientras el dispositivo está en standby.</em></div>

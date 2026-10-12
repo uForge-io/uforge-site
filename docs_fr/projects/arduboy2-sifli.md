@@ -67,12 +67,12 @@ Avant de commencer, ayez à disposition :
 
 | Composant | Spécification requise | Rôle | Statut | Où l'obtenir | Notes de compatibilité et de substitution |
 |:----------|:-----------------------|:-----|:-------|:----------------|:-------------------------------------|
-| Carte de développement SF32LB52 | Variante ArduinoCore-Zephyr `sf32lb52_devkit_lcd_sf32lb525uc6` ; le dépôt ne fixe pas de révision de carte physique | Exécute le portage et fournit les broches de MCU associées | Requis | [Source d'Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) ; [Variante d'ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) | Ceci identifie la variante logicielle de carte et la correspondance des broches, et non un assemblage physique validé ; comparez la révision réelle de la carte et son schéma avant le câblage |
-| OLED monochrome | 128 × 64 pixels, connecté via SPI1 ; le dépôt n'identifie ni le module exact ni le contrôleur | Affiche le tampon d'image du jeu | Requis | [Source d'Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | L'OLED est un périphérique externe ; vérifiez le contrôleur, la tension, le connecteur, l'orientation et le timing par rapport au module et à la carte avant utilisation |
-| Six boutons de jeu | Entrées compatibles Arduboy ; actives à l'état bas avec résistances de rappel haut, selon la correspondance des broches du dépôt | Lit les commandes directionnelles et A/B | Requis | [Source d'Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Les boutons sont externes ; vérifiez les E/S Arduino associées sur la carte physique et consignez le câblage et le comportement d'anti-rebond |
+| Carte de développement SF32LB52 | Variante ArduinoCore-Zephyr `sf32lb52_devkit_lcd_sf32lb525uc6` ; le dépôt ne fixe pas de révision de carte physique | Exécute le portage et fournit les broches de MCU associées | Obligatoire | [Source d'Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) ; [Variante d'ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) | Ceci identifie la variante logicielle de carte et la correspondance des broches, et non un assemblage physique validé ; comparez la révision réelle de la carte et son schéma avant le câblage |
+| OLED monochrome | 128 × 64 pixels, connecté via SPI1 ; le dépôt n'identifie ni le module exact ni le contrôleur | Affiche le tampon d'image du jeu | Obligatoire | [Source d'Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | L'OLED est un périphérique externe ; vérifiez le contrôleur, la tension, le connecteur, l'orientation et le timing par rapport au module et à la carte avant utilisation |
+| Six boutons de jeu | Entrées compatibles Arduboy ; actives à l'état bas avec résistances de rappel haut, selon la correspondance des broches du dépôt | Lit les commandes directionnelles et A/B | Obligatoire | [Source d'Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Les boutons sont externes ; vérifiez les E/S Arduino associées sur la carte physique et consignez le câblage et le comportement d'anti-rebond |
 | EEPROM externe | AT24C02 ou AT24C32 via I2C1 à l'adresse `0x50` | Prend en charge les fonctions de bibliothèque reposant sur l'EEPROM | Optionnel ; requis seulement pour les fonctions qui utilisent l'EEPROM | [Source d'Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Confirmez le composant retenu, la tension, les résistances de rappel et le câblage du bus ; le dépôt ne précise pas d'assemblage d'EEPROM monté |
 | Sortie audio et indicateur RVB | Les backends audio pris en charge par le dépôt utilisent les sorties haut-parleur associées ; une LED RVB externe à cathode commune est pilotée par PWM logiciel | Son et indication de couleur optionnels | Optionnel ; à choisir selon le sketch testé | [Source d'Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | La source ne définit pas de nomenclature complète pour le haut-parleur et la LED ; vérifiez le circuit externe, la correspondance des broches, le courant et le comportement audio |
-| Hôte et connexion USB de données | Hôte pris en charge par la chaîne d'outils Arduino retenue ; câble capable de transmettre des données et accès au journal série | Compiler, téléverser et observer la référence | Requis | [ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) | Consignez le système d'exploitation hôte, le câble/port, les versions des paquets et la méthode de récupération ; un câble de charge seule ne suffit pas |
+| Hôte et connexion USB de données | Hôte pris en charge par la chaîne d'outils Arduino retenue ; câble capable de transmettre des données et accès au journal série | Compiler, téléverser et observer la référence | Obligatoire | [ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) | Consignez le système d'exploitation hôte, le câble/port, les versions des paquets et la méthode de récupération ; un câble de charge seule ne suffit pas |
 
 </div>
 
@@ -84,13 +84,13 @@ Avant de commencer, ayez à disposition :
 
 | Paquet ou service | Version ou révision requise | Rôle | Statut | Où l'obtenir | Notes de compatibilité et de mise à jour |
 |:-------------------|:-----------------------------|:-----|:-------|:----------------|:-------------------------------|
-| OpenSiFli/Arduboy2-SiFli | Figer et consigner un commit ; cet article ne fige aucune révision | Couche de compatibilité SF32 et exemples | Requis | [Dépôt](https://github.com/OpenSiFli/Arduboy2-SiFli) | Revérifiez la cible de carte, les dépendances et l'API prise en charge au commit retenu |
-| OpenSiFli/ArduinoCore-zephyr et paquet de carte | Le commit/la version de paquet compatible exact doit être déterminé à partir du portage et consigné | Environnement d'exécution Arduino, définition de la carte, compilateur et intégration du téléversement | Requis | [Dépôt](https://github.com/OpenSiFli/ArduinoCore-zephyr) | Ne remplacez pas le cœur par un cœur plus récent ni par un autre paquet de carte sans compilation propre et non-régression des périphériques |
+| OpenSiFli/Arduboy2-SiFli | Figer et consigner un commit ; cet article ne fige aucune révision | Couche de compatibilité SF32 et exemples | Obligatoire | [Dépôt](https://github.com/OpenSiFli/Arduboy2-SiFli) | Revérifiez la cible de carte, les dépendances et l'API prise en charge au commit retenu |
+| OpenSiFli/ArduinoCore-zephyr et paquet de carte | Le commit/la version de paquet compatible exact doit être déterminé à partir du portage et consigné | Environnement d'exécution Arduino, définition de la carte, compilateur et intégration du téléversement | Obligatoire | [Dépôt](https://github.com/OpenSiFli/ArduinoCore-zephyr) | Ne remplacez pas le cœur par un cœur plus récent ni par un autre paquet de carte sans compilation propre et non-régression des périphériques |
 | Sketch de test et ressources de jeu | Un exemple du dépôt ou un sketch de test sous licence distincte ; consignez les révisions et licences des ressources | Exerce l'API retenue et le chemin produit | À choisir | [Exemples d'Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | L'article n'accorde aucun droit de redistribution sur les jeux, polices, images ou sons tiers |
 
 </div>
 
-## Choisir une base prise en charge { #choose-a-supported-baseline }
+## Choisir une configuration de référence prise en charge { #choose-a-supported-baseline }
 
 Commencez par la combinaison de carte et de logiciel nommée dans le dépôt OpenSiFli plutôt que de choisir une carte du catalogue produit par similarité. Le paquet de carte, le câblage de l'écran, la correspondance des entrées, la méthode de téléversement et les hypothèses de la bibliothèque font partie de la base.
 
@@ -112,11 +112,11 @@ Le dépôt Arduboy2-SiFli ne fournit pas la correspondance des broches de la car
 
 Le dépôt identifie une variante logicielle de carte et une correspondance des broches des périphériques, et indique que les chemins d'affichage, de boutons, d'EEPROM externe et d'audio ont été exercés sur du matériel SF32LB52. Il documente un chemin de LED RVB externe mais n'indique pas qu'il ait été testé. Le dépôt n'identifie ni la révision de la carte physique, ni le module/contrôleur OLED exact, ni un assemblage complet d'accessoires. Avant de câbler ou d'affirmer une base matérielle reproductible, rapprochez la correspondance des broches de la variante du schéma de la carte réelle et consignez les composants et révisions utilisés. Ne comblez aucune lacune restante avec des correspondances de broches ou des adresses copiées d'un autre projet SF32.
 
-## Plan de livraison { #delivery-map }
+## Étapes du projet { #delivery-map }
 
 Utilisez les étapes comme des points de décision, et non comme une liste de fonctions à cocher.
 
-<div align="center"><em>Tableau : Plan de livraison</em></div>
+<div align="center"><em>Tableau : Étapes du projet</em></div>
 
 <div align="center" markdown>
 
@@ -165,7 +165,7 @@ Les principaux domaines de défaillance sont la compatibilité application/API, 
 
 **Preuves à conserver :** commit du dépôt, versions des dépendances/paquets, révision de la carte, référence du câblage ou du schéma, sortie de compilation, journal de téléversement, journal série et court relevé fonctionnel.
 
-**Critère de sortie du point 1 :** la référence intacte se compile et se téléverse sur la carte retenue, et son comportement documenté est répétable après une réinitialisation ou un cycle d'alimentation.
+**Critère de sortie du point de contrôle 1 :** la référence intacte se compile et se téléverse sur la carte retenue, et son comportement documenté est répétable après une réinitialisation ou un cycle d'alimentation.
 
 ## Étape 2 — Valider les frontières des périphériques et du timing { #stage-2-validate-peripheral-and-timing-boundaries }
 
@@ -178,7 +178,7 @@ Les principaux domaines de défaillance sont la compatibilité application/API, 
 
 **Preuves à conserver :** résultats d'affichage visuels ou capturés, matrice des entrées, observations de timing, observations audio, journal de réinitialisation/récupération, et tout courant ou toute latence mesurés qui influencent la décision produit.
 
-**Critère de sortie du point 2 :** le chemin de périphériques retenu est assez bien compris pour distinguer les bogues applicatifs des problèmes de configuration de la carte, de timing ou d'alimentation.
+**Critère de sortie du point de contrôle 2 :** le chemin de périphériques retenu est assez bien compris pour distinguer les bogues applicatifs des problèmes de configuration de la carte, de timing ou d'alimentation.
 
 ## Étape 3 — Construire une base source reproductible { #stage-3-build-a-reproducible-source-baseline }
 
@@ -191,7 +191,7 @@ Les principaux domaines de défaillance sont la compatibilité application/API, 
 
 **Preuves à conserver :** révision des sources, révisions des dépendances, manifeste de l'hôte et des outils, journal de compilation, binaire ou autre artefact, rapport de taille, journal de téléversement et journal série.
 
-**Critère de sortie du point 3 :** une extraction propre reproduit une image qui réussit les contrôles des périphériques de l'étape 2 sans fichiers locaux non documentés ni modifications manuelles.
+**Critère de sortie du point de contrôle 3 :** une extraction propre reproduit une image qui réussit les contrôles des périphériques de l'étape 2 sans fichiers locaux non documentés ni modifications manuelles.
 
 ## Étape 4 — Adapter un jeu de façon délibérée { #stage-4-adapt-one-game-deliberately }
 
@@ -209,7 +209,7 @@ Commencez par un petit sketch ou jeu dont les besoins en affichage, entrées, au
 | Logique de jeu | Une règle bornée, un niveau ou une transition d'état. | Séquence d'entrées répétable, réinitialisation, persistance du score/de l'état le cas échéant, et timing des images. |
 | Audio | Une tonalité ou un court effet via le chemin pris en charge. | Démarrage/arrêt, mise en sourdine, interaction avec les timers et comportement sous charge d'affichage/d'entrée. |
 | Stockage | Une petite modification de sauvegarde ou de chargement de ressources. | Rapport de taille, comportement en cas de coupure d'alimentation, gestion de la corruption et récupération propre. |
-| Adaptation de la carte | Un changement délibéré de correspondance d'écran, de bouton ou de haut-parleur. | Preuve schéma/broches, non-régression complète des périphériques et retour à l'image de référence. |
+| Adaptation de la carte | Un changement délibéré de correspondance d'écran, de bouton ou de haut-parleur. | Justification par le schéma et le brochage, non-régression complète des périphériques et retour à l'image de référence. |
 
 </div>
 
@@ -217,7 +217,7 @@ Ne copiez pas d'accès aux registres AVR, d'hypothèses de broches d'origine d'A
 
 **Preuves à conserver :** différentiel relu, provenance des ressources, image avant/après, journaux de compilation et de téléversement, résultats de non-régression et image de retour arrière.
 
-**Critère de sortie du point 4 :** le jeu adapté réussit les contrôles de référence des périphériques, et ses limites de mémoire, de timing, de récupération et de licence sont consignées.
+**Critère de sortie du point de contrôle 4 :** le jeu adapté réussit les contrôles de référence des périphériques, et ses limites de mémoire, de timing, de récupération et de licence sont consignées.
 
 ## Étape 5 — Revue de maturité produit { #stage-5-product-readiness-review }
 
@@ -230,7 +230,7 @@ Ne passez pas d'une démonstration de portage à du matériel sur mesure ou à u
 - Quelles parties du portage sont maintenues par l'équipe produit, OpenSiFli, SiFli ou la communauté Arduboy2 d'origine ?
 - Chaque licence de jeu, de police, d'image, de son et de bibliothèque est-elle compatible avec le modèle de distribution prévu ?
 
-**Critère de sortie du point 5 :** les risques restants ont des responsables nommés et des preuves ; chaque élément fait l'objet d'une atténuation, d'un report explicite ou d'une décision d'arrêt.
+**Critère de sortie du point de contrôle 5 :** les risques restants ont des responsables nommés et des preuves ; chaque élément fait l'objet d'une atténuation, d'un report explicite ou d'une décision d'arrêt.
 
 ## Transfert vers la conception produit { #handoff-to-product-design }
 
@@ -238,7 +238,7 @@ Reportez le composant SF32 retenu, l'architecture d'affichage et d'entrées, le 
 
 La référence a rempli son rôle pour le développement du produit lorsqu'un autre ingénieur peut reconstruire le portage, reproduire les résultats des périphériques, expliquer chaque adaptation propre à la carte et relire les preuves avant l'approbation d'une carte sur mesure ou d'une bibliothèque de jeux étendue.
 
-## Sources faisant autorité { #authoritative-sources }
+## Sources de référence { #authoritative-sources }
 
 - [OpenSiFli/Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli)
 - [MLXXXp/Arduboy2](https://github.com/MLXXXp/Arduboy2)

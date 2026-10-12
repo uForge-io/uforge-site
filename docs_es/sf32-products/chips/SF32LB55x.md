@@ -1,6 +1,6 @@
 ---
 icon: lucide/microchip
-description: "SF32LB55x: familia de MCU de gama media y consumo ultrabajo para dispositivos vestibles y productos HMI que necesitan mejores prestaciones gráficas, más SRAM y más opciones de encapsulado que los MCU Bluetooth de gama básica."
+description: "SF32LB55x: familia de MCU de gama media y consumo ultrabajo para dispositivos vestibles y productos HMI que necesitan mejores prestaciones gráficas, más SRAM y más opciones de encapsulado que las MCU Bluetooth de gama básica."
 tags:
     - Hardware
     - Chip
@@ -10,11 +10,11 @@ tags:
 
 ## Visión general { #overview }
 
-La serie SF32LB55x es una familia de microcontroladores AIoT de gama media y consumo ultrabajo para productos conectados por BLE que necesitan mejores capacidades de visualización, más capacidad de memoria y más opciones de encapsulado que los MCU Bluetooth de entrada.
+La serie SF32LB55x es una familia de microcontroladores AIoT de gama media y consumo ultrabajo para productos conectados por BLE que necesitan mejores capacidades de visualización, más capacidad de memoria y más opciones de encapsulado que las MCU Bluetooth de entrada.
 
 La familia utiliza una arquitectura big.LITTLE de doble núcleo basada en dos procesadores Arm Cortex-M33 STAR-MC1[^1]: un núcleo de aplicación de alto rendimiento, con una frecuencia de hasta 240 MHz, y un núcleo de consumo ultrabajo, de hasta 48 MHz. Esta distribución permite ejecutar las tareas exigentes de la interfaz de usuario en el núcleo de aplicación y dejar en manos del núcleo de bajo consumo el procesamiento de sensores, la gestión del modo de espera y las tareas BLE que deben permanecer activas.
 
-Según el resumen de producto y la hoja de datos oficiales de SiFli, la familia integra BLE 5.2, el motor gráfico ePicasso 2.5D, dos controladores LCD y un acelerador matricial de redes neuronales para TinyML. Dispone de 1312 KB de SRAM en el chip (1088 KB en HCPU + 224 KB en LCPU) y admite memorias externas NOR, NAND, eMMC y PSRAM. Por esta combinación, SF32LB55x es una opción práctica para dispositivos vestibles, productos con numerosos sensores e HMI compactas que necesitan más recursos que SF32LB52x, pero no las prestaciones de los dispositivos de las familias superiores 56/58.
+Según el resumen de producto y la hoja de datos oficiales de SiFli, la familia integra BLE 5.2, el motor gráfico ePicasso 2.5D, dos controladores LCD y un acelerador matricial de redes neuronales para TinyML. Dispone de 1 312 KB de SRAM en el chip (1 088 KB en HCPU + 224 KB en LCPU) y admite memorias externas NOR, NAND, eMMC y PSRAM. Por esta combinación, SF32LB55x es una opción práctica para dispositivos vestibles, productos con numerosos sensores e HMI compactas que necesitan más recursos que SF32LB52x, pero no las prestaciones de los dispositivos de las familias superiores 56/58.
 
 La guía de modelos de chips de SiFli indica que SF32LB55x se definió antes que las familias 52/56/58; por ello, sus sufijos no siguen por completo la convención de nomenclatura más reciente. Para seleccionar el componente, consulte el código de pedido completo y las tablas de prestaciones de cada encapsulado; no deduzca todas sus capacidades únicamente a partir del sufijo.
 
@@ -22,10 +22,10 @@ La guía de modelos de chips de SiFli indica que SF32LB55x se definió antes que
 
 ## Aplicaciones { #applications }
 
-**SF32LB55x se recomienda para** productos centrados en BLE que necesitan una interfaz de usuario más avanzada, más memoria de trabajo o mayor flexibilidad de encapsulado que los MCU de entrada para dispositivos vestibles. Algunos ejemplos:
+**SF32LB55x se recomienda para** productos centrados en BLE que necesitan una interfaz de usuario más avanzada, más memoria de trabajo o mayor flexibilidad de encapsulado que las MCU de entrada para dispositivos vestibles. Algunos ejemplos:
 
 - Relojes inteligentes y pulseras de actividad
-- Dispositivos portátiles de monitorización de la salud
+- Dispositivos portátiles de supervisión de la salud
 - Cerraduras inteligentes y controladores de hogar inteligente
 - Accesorios conectados con numerosos sensores
 - Productos HMI gráficos compactos
@@ -54,7 +54,7 @@ Elija SF32LB55x si el diseño requiere una o varias de estas capacidades:
 [Documentación del SDK]: https://docs.sifli.com/projects/sdk/latest/sf32lb55x/index.html
 [Referencia de la API]: https://docs.sifli.com/projects/sdk/latest/sf32lb55x/api/index.html
 [Comprar muestras]: https://sifli.taobao.com/
-[Comprar kits de desarrollo]: https://sifli.taobao.com/
+[Comprar placas de desarrollo]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
@@ -69,7 +69,7 @@ Elija SF32LB55x si el diseño requiere una o varias de estas capacidades:
 - :fontawesome-solid-book-open: __[Referencia de la API]__
 - :fontawesome-solid-list-check: __[Fuente de la lista de comprobación de diseño de hardware]__
 - :fontawesome-solid-cart-shopping: __[Comprar muestras]__
-- :fontawesome-solid-cart-shopping: __[Comprar kits de desarrollo]__
+- :fontawesome-solid-cart-shopping: __[Comprar placas de desarrollo]__
 
 </div>
 
@@ -83,7 +83,7 @@ Elija SF32LB55x si el diseño requiere una o varias de estas capacidades:
 - Procesador Arm Cortex-M33 STAR-MC1 de consumo ultrabajo, hasta 48 MHz
 - Hasta 360 DMIPS / 965 EEMBC CoreMark en el procesador de aplicación
 - Hasta 72 DMIPS / 193 EEMBC CoreMark en el procesador de bajo consumo
-- 1088 KB de SRAM de aplicación, incluidas 64 KB de SRAM de retención
+- 1 088 KB de SRAM de aplicación, incluidas 64 KB de SRAM de retención
 - 224 KB de SRAM de bajo consumo, toda ella de retención
 - Interfaces de memoria externa para NOR, NAND, eMMC, QSPI-PSRAM y OPI-PSRAM
 
@@ -114,7 +114,7 @@ Elija SF32LB55x si el diseño requiere una o varias de estas capacidades:
 ### Periféricos y E/S { #peripherals-and-ios }
 
 - Hasta 5 UART, 6 I2C y 4 SPI en la familia; el número disponible varía según el modelo, como se indica en la tabla siguiente
-- El número de interfaces I2S y PDM también depende del modelo (véase la tabla). Cada interfaz PDM admite hasta dos micrófonos digitales: el número de interfaces no equivale al número de micrófonos. Compruebe también la disponibilidad de pines del modelo elegido.
+- El número de interfaces I2S y PDM también depende del modelo (consulte la tabla). Cada interfaz PDM admite hasta dos micrófonos digitales: el número de interfaces no equivale al número de micrófonos. Compruebe también la disponibilidad de pines del modelo elegido.
 
 <div align="center"><em>Recuentos publicados de periféricos y ADC por modelo (SS6600A8 sin especificar)</em></div>
 
@@ -129,7 +129,7 @@ Elija SF32LB55x si el diseño requiere una o varias de estas capacidades:
 
 </div>
 
-**Nota sobre las fuentes de SS6600A8:** La [guía actual de modelos de chips de SiFli][Guía de modelos de chips de SiFli] especifica el encapsulado, la memoria integrada, los GPIO y la interfaz de pantalla de este componente, pero no sus cantidades por modelo de UART, I2C, SPI, I2S, PDM o ADC sigma-delta. La tabla 0-1 de la [hoja de datos DS5501 V1.7.2][Hoja de datos] tampoco incluye una fila propia para SS6600A8. Por eso, la tabla indica esas cantidades como «No especificado»; no las deduzca a partir de SF32LB551U4O5 solo porque ambos usan QFN68L. Confirme la configuración con SiFli antes de asignar los pines.
+**Nota sobre las fuentes de SS6600A8:** La [guía actual de modelos de chips de SiFli][Guía de modelos de chips de SiFli] especifica el encapsulado, la memoria integrada, las GPIO y la interfaz de pantalla de este componente, pero no sus cantidades por modelo de UART, I2C, SPI, I2S, PDM o ADC sigma-delta. La tabla 0-1 de la [hoja de datos DS5501 V1.7.2][Hoja de datos] tampoco incluye una fila propia para SS6600A8. Por eso, la tabla indica esas cantidades como «No especificado»; no las deduzca a partir de SF32LB551U4O5 solo porque ambos usan QFN68L. Confirme la configuración con SiFli antes de asignar los pines.
 
 - 1 interfaz USB 2.0 FS, configurable como host o dispositivo
 - 1 GPADC (ADC SAR) de 10 bits: la hoja de datos especifica hasta 8 entradas de un solo terminal o 4 pares diferenciales, con un rango de 0–1,1 V para las entradas de un solo terminal
@@ -183,7 +183,7 @@ Los modelos actuales representativos que figuran en la guía de modelos de chips
 
 </div>
 
-Para SF32LB557VD3A6, la guía de modelos vigente de SiFli y la tabla 0-1 de la hoja de datos DS5501 V1.7.2 indican 71 GPIO de HCPU + 42 de LCPU, es decir, 113 en total. En cambio, el resumen de características y el resumen de encapsulados de esa misma hoja de datos, así como la ficha de producto PB0001 V1.3, indican 119 GPIO para BGA169 (71 de HCPU + 48 de LCPU). Por tanto, las fuentes oficiales discrepan, incluso dentro de la propia hoja de datos DS5501. Este artículo sigue la fila específica del modelo y la guía vigente (113). Antes de asignar pines o cerrar el diseño, compruebe los GPIO disponibles en el mapa de bolas del encapsulado y confirme con SiFli el componente realmente comercializado. Verifique también la alimentación y el rango de temperatura de la variante, el código completo y la memoria integrada en la [hoja de datos DS5501 V1.7.2][Hoja de datos], la [ficha de producto PB0001 V1.3][Ficha de producto] y la [guía de modelos de chips de SiFli][Guía de modelos de chips de SiFli]. Los encapsulados BGA145 y BGA169 miden 7 × 7 × 0,94 mm y tienen un paso de 0,5 mm.
+Para SF32LB557VD3A6, la guía de modelos vigente de SiFli y la tabla 0-1 de la hoja de datos DS5501 V1.7.2 indican 71 GPIO de HCPU + 42 de LCPU, es decir, 113 en total. En cambio, el resumen de características y el resumen de encapsulados de esa misma hoja de datos, así como la ficha de producto PB0001 V1.3, indican 119 GPIO para BGA169 (71 de HCPU + 48 de LCPU). Por tanto, las fuentes oficiales discrepan, incluso dentro de la propia hoja de datos DS5501. Este artículo sigue la fila específica del modelo y la guía vigente (113). Antes de asignar pines o cerrar el diseño, compruebe las GPIO disponibles en el mapa de bolas del encapsulado y confirme con SiFli el componente realmente comercializado. Verifique también la alimentación y el rango de temperatura de la variante, el código completo y la memoria integrada en la [hoja de datos DS5501 V1.7.2][Hoja de datos], la [ficha de producto PB0001 V1.3][Ficha de producto] y la [guía de modelos de chips de SiFli][Guía de modelos de chips de SiFli]. Los encapsulados BGA145 y BGA169 miden 7 × 7 × 0,94 mm y tienen un paso de 0,5 mm.
 
 
 ## Ruta de integración { #integration-path }
@@ -197,13 +197,13 @@ Siga estos pasos para pasar de una preselección de SF32LB55x a un diseño valid
 
 ## Productos relacionados { #related-products }
 
-### Kits de desarrollo { #development-kits }
+### Placas de desarrollo { #development-kits }
 
-Use la nota de aplicación de hardware oficial, los esquemas de referencia y la lista de comprobación como punto de partida para elegir el encapsulado y la interfaz de pantalla, definir la alimentación, planificar la memoria y el diseño de RF, y preparar las pruebas de producción.
+Use la nota de aplicación de hardware oficial, los esquemáticos de referencia y la lista de comprobación como punto de partida para elegir el encapsulado y la interfaz de pantalla, definir la alimentación, planificar la memoria y el diseño de RF, y preparar las pruebas de producción.
 
 ### Productos de referencia { #reference-products }
 
-Entre los productos finales habituales basados en SF32LB55x se encuentran los relojes inteligentes, las pulseras de actividad, los dispositivos portátiles de monitorización de la salud, las cerraduras inteligentes, los accesorios conectados, los controladores para el hogar inteligente y las HMI gráficas compactas.
+Entre los productos finales habituales basados en SF32LB55x se encuentran los relojes inteligentes, las pulseras de actividad, los dispositivos portátiles de supervisión de la salud, las cerraduras inteligentes, los accesorios conectados, los controladores para el hogar inteligente y las HMI gráficas compactas.
 
 !!! note "Contenido autogenerado"
     Esta página se ha redactado sin un documento fuente específico. Verifique las afirmaciones técnicas en la documentación oficial de SiFli antes de basarse en ellas.

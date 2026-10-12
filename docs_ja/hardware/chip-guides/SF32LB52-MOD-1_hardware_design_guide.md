@@ -8,7 +8,7 @@ tags:
     - モジュール
 ---
 
-# SF32LB52-MOD-1 ハードウェア設計ガイド { #sf32lb52-mod-1-hardware-design-guide }
+# SF32LB52-MOD-1ハードウェア設計ガイド { #sf32lb52-mod-1-hardware-design-guide }
 
 ## 1. 概要 { #1-overview }
 
@@ -16,7 +16,7 @@ tags:
 
 このガイドでは、モジュールのピン定義、周辺インターフェース、電気的特性、電源要件、リファレンス回路図、回路図設計チェックリスト、外形寸法とPCBフットプリント、および製品の取り扱い要件を説明します。SiFliのデータシート **DS5203-SF32LB52-MOD-1 V0.3**に基づいています。
 
-チップのアーキテクチャ（コア、グラフィックス、メモリサブシステム、周辺機能）の詳細については、[SF32LB52x](../../sf32-products/chips/SF32LB52x.md)および[SF32LB52xハードウェア設計ガイド](../chip-guides/SF32LB52x_hardware_design_guide.md)を参照してください。
+チップのアーキテクチャ（コア、グラフィックス、メモリーサブシステム、周辺機能）の詳細については、[SF32LB52x](../../sf32-products/chips/SF32LB52x.md)および[SF32LB52xハードウェア設計ガイド](../chip-guides/SF32LB52x_hardware_design_guide.md)を参照してください。
 
 !!! note "出典と図の扱い"
     モジュール固有の技術データは **DS5203-SF32LB52-MOD-1 V0.3**に準拠しています。データシート内のピン配置図、回路図、機構図にはラスター画像が含まれるため、本ガイドでは再描画せず参照先を示しています。以下の図表番号は本サイト内のガイド独自の番号です。転載していない図については、公式データシートの該当図番号をキャプションに記載しています。
@@ -25,7 +25,7 @@ tags:
 
 ### 2.1 モジュールのバリアント { #21-module-variant }
 
-<div align="center"><em>表 2.1-1：モジュールのバリアント</em></div>
+<div align="center"><em>表 2.1-1: モジュールのバリアント</em></div>
 
 <div align="center" markdown>
 
@@ -37,7 +37,7 @@ tags:
 
 ### 2.2 主な仕様 { #22-key-specifications }
 
-<div align="center"><em>表 2.2-1：主な仕様</em></div>
+<div align="center"><em>表 2.2-1: 主な仕様</em></div>
 
 <div align="center" markdown>
 
@@ -60,7 +60,7 @@ tags:
 
 本モジュールは、SF32LB525UC6チップ、48MHz水晶振動子、オプションの32.768kHz水晶振動子を搭載し、このSKUでは64Mb OPI-PSRAMダイもパッケージ内蔵しています。さらに、RF整合回路とアンテナ給電線を備えています。
 
-!!! info "図 3-1：機能ブロック図"
+!!! info "図 3-1: 機能ブロック図"
     本ガイドには転載していません。公式データシートの図2-1を参照してください。
 
 ## 4. ピン定義 { #4-pin-definition }
@@ -69,14 +69,14 @@ tags:
 
 モジュールの外周には68本のピンがあります。ピン1はアンテナ領域に近い角に示され、パッケージの周囲を反時計回りに番号が付けられています。
 
-!!! info "図 4.1-1：ピン配置図（上面図）"
+!!! info "図 4.1-1: ピン配置図（上面図）"
     本ガイドには転載していません。公式データシートの図3-1を参照してください。
 
 ### 4.2 ピン定義表 { #42-pin-definition-table }
 
 モジュールの全68ピンを以下の表に示します。
 
-<div align="center"><em>表 4.2-1：ピン定義表</em></div>
+<div align="center"><em>表 4.2-1: ピン定義表</em></div>
 
 <div align="center" markdown>
 
@@ -129,7 +129,7 @@ tags:
 | PA02 | 45 | I/O/T | GPIO_A02 | O | GPIO_A02, LCDC1_SPI_TE, I2S1_MCLK, PA02_I2C_UART, PA02_TIM, LCDC1_JDI_B2, LCDC1_8080_TE |
 | PA01 | 46 | I/O/T | GPIO_A01 | O | GPIO_A01, PA01_I2C_UART, PA01_TIM |
 | PA00 | 47 | I/O/T | GPIO_A00 | O | GPIO_A00, LCDC1_SPI_RSTB, PA00_I2C_UART, PA00_TIM, LCDC1_8080_RSTB |
-| GND | 48–60 | P | 接地 | P | 接地（13ピン） |
+| GND | 48～60 | P | 接地 | P | 接地（13ピン） |
 | VBATS | 61 | P | VBAT | P | バッテリー電圧検出入力 |
 | NC | 62 | — | NC | — | 未接続 |
 | PA15 | 63 | I/O/T | GPIO_A15 | I/O | GPIO_A15, MPI2_DIO0, SD1_CMD, PA15_I2C_UART, PA15_TIM |
@@ -150,7 +150,7 @@ tags:
 
 データシートの物理ピン配置図では、SF32LB525UC6のダイ外形上に、SDIO、SPI、I2C、UART、GPTIM、LCDインターフェース、GPADC、MPI、アナログオーディオ、外部32K発振器、外部ウェイクアップ、SWD／デバッグUARTの機能グループごとにピンが示されています。ホストPCBで信号グループを配置する際は、上記のピン定義表と併せて参照してください。
 
-!!! info "図 4.3-1：物理ピン配置"
+!!! info "図 4.3-1: 物理ピン配置"
     本ガイドには転載していません。公式データシートの図3-2を参照してください。
 
 ## 5. 周辺機能 { #5-peripherals }
@@ -170,7 +170,7 @@ tags:
 
 **USB2.0 FS** — フルスピードのホスト／デバイスポートを1つ備えます。エンドポイント設定、サスペンド／レジューム、FIFOサイズの動的設定、セッション要求、ホストネゴシエーションプロトコルに対応し、USB2.0 FS PHYを内蔵しています。
 
-**MPI（Memory Peripheral Interface）** — SPI NOR Flash（1／2／4線）およびSPI NAND Flash（1／2／4線）に対応し、レジスタモードとメモリマップモードをハードウェアで自動切り替えします。モジュールのMPI2インターフェースには外付けSPI NOR/NAND Flashを接続できます。モジュール内にFlashが実装済みの場合、MPI2の外部信号6本（PA12、PA13、PA14、PA15、PA16、PA17）は外部から使用できません。
+**MPI（Memory Peripheral Interface）** — SPI NOR Flash（1／2／4線）およびSPI NAND Flash（1／2／4線）に対応し、レジスターモードとメモリーマップモードをハードウェアで自動切り替えします。モジュールのMPI2インターフェースには外付けSPI NOR/NAND Flashを接続できます。モジュール内にFlashが実装済みの場合、MPI2の外部信号6本（PA12、PA13、PA14、PA15、PA16、PA17）は外部から使用できません。
 
 **SD/SDIO/eMMC** — SD 3.0、SDIO 3.0、eMMC 4.5.1に準拠し、SDSC/SDHC/SDXC/SDHSカード、SDR12/25/50、1線および4線のSDRモードに対応します。2 KB FIFO、DMAデータ転送に対応し、最大48 MHzで動作します（DDR非対応）。SDIOインターフェースはMPI2とI/Oを共有するため、同時には使用できません。
 
@@ -196,7 +196,7 @@ tags:
 
 以下の表の値を超えると、モジュールに恒久的な損傷が生じるおそれがあります。これらはストレス定格であり、§6.2の推奨動作条件を超えて正常に動作することを示すものではありません。絶対最大定格の条件に長時間さらされると、モジュールの信頼性が低下する可能性があります。
 
-<div align="center"><em>表 6.1-1：絶対最大定格</em></div>
+<div align="center"><em>表 6.1-1: 絶対最大定格</em></div>
 
 <div align="center" markdown>
 
@@ -209,7 +209,7 @@ tags:
 
 ### 6.2 推奨動作条件 { #62-recommended-operating-conditions }
 
-<div align="center"><em>表 6.2-1：推奨動作条件</em></div>
+<div align="center"><em>表 6.2-1: 推奨動作条件</em></div>
 
 <div align="center" markdown>
 
@@ -223,7 +223,7 @@ tags:
 
 ### 6.3 DC電気的特性（3.3 V、25°C） { #63-dc-electrical-characteristics-33v-25c }
 
-<div align="center"><em>表 6.3-1：DC電気的特性（3.3 V、25°C）</em></div>
+<div align="center"><em>表 6.3-1: DC電気的特性（3.3 V、25°C）</em></div>
 
 <div align="center" markdown>
 
@@ -249,7 +249,7 @@ VDDはI/O電源レールです。VOH/VOLは高インピーダンス負荷条件�
 
 ### 6.4 消費電力 { #64-power-consumption }
 
-<div align="center"><em>表 6.4-1：BluetoothおよびBLEの平均電流（電源電圧3.8 V）</em></div>
+<div align="center"><em>表 6.4-1: BluetoothおよびBLEの平均電流（電源電圧3.8 V）</em></div>
 
 <div align="center" markdown>
 
@@ -267,7 +267,7 @@ VDDはI/O電源レールです。VOH/VOLは高インピーダンス負荷条件�
 
 </div>
 
-<div align="center"><em>表 6.4-2：プロセッサの消費電力（電源電圧3.8 V）</em></div>
+<div align="center"><em>表 6.4-2: プロセッサーの消費電力（電源電圧3.8 V）</em></div>
 
 <div align="center" markdown>
 
@@ -306,19 +306,19 @@ BLE 1 Mbps／2 Mbpsの送受信性能およびClassic BT BR/EDRの送受信性�
 
 データシートには、SF32LB52-MOD-1を使用した開発ボードの完全なリファレンス回路図が掲載されています。電源、リセット、JTAG/SWD、UART、SDIO、LCD、オーディオ回路を含みます。
 
-!!! info "図 8-1：開発ボードのリファレンス回路図"
+!!! info "図 8-1: 開発ボードのリファレンス回路図"
     本ガイドには転載していません。公式データシートの図7-2～7-6を参照してください。
 
 このリファレンスボードの推奨ピン割り当て表も、データシートに掲載されています。
 
-!!! info "図 8-2：リファレンスボードの推奨ピン割り当て"
+!!! info "図 8-2: リファレンスボードの推奨ピン割り当て"
     本ガイドには転載していません。公式データシートの図7-7を参照してください。
 
 これらを量産回路図の出発点として使用し、製品で使用する周辺デバイスの構成に合わせてピンを選定してください。
 
 ## 9. 回路図設計チェックリスト { #9-schematic-design-checklist }
 
-<div align="center"><em>表 9-1：回路図設計チェックリスト</em></div>
+<div align="center"><em>表 9-1: 回路図設計チェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -337,7 +337,7 @@ BLE 1 Mbps／2 Mbpsの送受信性能およびClassic BT BR/EDRの送受信性�
 | 11 | ピン表で`PAxx_TIM`と記載されたピンはPWM出力に対応します。 |
 | 12 | PA34はアクティブHighで、10秒長押しによるリセットに対応します。設計に10 kΩのプルダウン抵抗を追加してください。 |
 | 13 | バッテリーおよびタッチパネル（TP）インターフェースなど、外部に露出する信号用にESD保護部品を確保する。 |
-| 14 | プログラム書き込み／デバッグ用にDBG_UARTへ多重化されるPA18/PA19には、それぞれ100 Ωの直列抵抗を設ける。 |
+| 14 | プログラム書き込み／デバッグ用にDBG_UARTへ多重化されるPA18/PA19には、それぞれ100 Ωの直列抵抗を設けることを推奨する。 |
 
 </div>
 
@@ -347,12 +347,12 @@ BLE 1 Mbps／2 Mbpsの送受信性能およびClassic BT BR/EDRの送受信性�
 
 モジュールの寸法は27.9 × 18.0 × 3.1mmです。
 
-!!! info "図 10.1-1：モジュール寸法（上面図、側面図、下面図）"
+!!! info "図 10.1-1: モジュール寸法（上面図、側面図、下面図）"
     本ガイドには転載していません。公式データシートの図8-1を参照してください。
 
 ### 10.2 推奨PCBフットプリント { #102-recommended-pcb-footprint }
 
-!!! info "図 10.2-1：推奨PCBフットプリント"
+!!! info "図 10.2-1: 推奨PCBフットプリント"
     本ガイドには転載していません。公式データシートの図8-2を参照してください。
 
 ### 10.3 外部アンテナコネクタ { #103-external-antenna-connector }
@@ -363,7 +363,7 @@ BLE 1 Mbps／2 Mbpsの送受信性能およびClassic BT BR/EDRの送受信性�
 - I-PEX MHFIコネクタ
 - Amphenol AMCコネクタ
 
-!!! info "図 10.3-1：外部アンテナコネクタ寸法"
+!!! info "図 10.3-1: 外部アンテナコネクタ寸法"
     本ガイドには転載していません。公式データシートの図8-3を参照してください。
 
 ### 10.4 PCB設計におけるモジュール配置 { #104-module-placement-in-pcb-design }
@@ -374,12 +374,12 @@ BLE 1 Mbps／2 Mbpsの送受信性能およびClassic BT BR/EDRの送受信性�
 
 - モジュールのアンテナ領域をホスト基板の端から張り出させ、給電点を基板端の近くに配置します。
 
-!!! info "図 10.4-1：推奨モジュール配置"
+!!! info "図 10.4-1: 推奨モジュール配置"
     本ガイドには転載していません。公式データシートの図8-4を参照してください。
 
 - アンテナ領域を基板端から張り出せない場合、PCBアンテナの周囲に15mm以上のキープアウト領域を設け、銅箔、配線、部品を配置しないでください。可能であれば、アンテナ直下のホスト基板材料も取り除いてください。
 
-!!! info "図 10.4-2：アンテナのキープアウト領域"
+!!! info "図 10.4-2: アンテナのキープアウト領域"
     本ガイドには転載していません。公式データシートの図8-5を参照してください。
 
 - キープアウト領域を設ける場合も、アンテナ給電点を基板端の近くに配置してください。
@@ -402,7 +402,7 @@ BLE 1 Mbps／2 Mbpsの送受信性能およびClassic BT BR/EDRの送受信性�
 
 モジュールのリフローは1回のみとすることを推奨します。
 
-!!! info "図 11.3-1：推奨リフロー温度プロファイル"
+!!! info "図 11.3-1: 推奨リフロー温度プロファイル"
     本ガイドには転載していません。公式データシートの図9-1を参照してください。
 
 ### 11.4 超音波振動 { #114-ultrasonic-vibration }
@@ -418,7 +418,7 @@ SiFliモジュールを超音波溶着機や超音波洗浄機の振動にさら
 
 ## 13. 改訂履歴 { #13-revision-history }
 
-<div align="center"><em>表 13-1：改訂履歴</em></div>
+<div align="center"><em>表 13-1: 改訂履歴</em></div>
 
 <div align="center" markdown>
 

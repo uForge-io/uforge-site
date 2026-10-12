@@ -110,7 +110,7 @@ Deux chemins distincts existent selon l'approche audio :
 - **Audio Bluetooth classique** — A2DP pour la diffusion, AVRCP pour la commande de lecture, HFP pour les appels. Cette technologie éprouvée est largement compatible avec les téléphones et casques existants.
 - **LE Audio** — le [Basic Audio Profile (BAP)](https://www.bluetooth.com/specifications/specs/basic-audio-profile-1-0-2/) définit les procédures de gestion des flux LE Audio en unicast comme en broadcast. Le SDK comprend des exemples de sources et de récepteurs de diffusion, ainsi qu'un exemple combinant une source de diffusion LE Audio et le Bluetooth classique pour les produits qui doivent prendre en charge les deux technologies pendant une période de transition.
 
-Les deux chemins exigent une temporisation stable, des tampons et un transfert fiable des échantillons audio, généralement par DMA. Évaluez SF32LB52x/56x/58x selon les rôles audio Bluetooth et les configurations du SDK nécessaires au produit. SF32LB55x ne prend en charge que BLE et ne fournit pas d'audio Bluetooth classique ; cela ne signifie pas qu'il est dépourvu de fonctions audio locales. Pour DMA et les tampons, consultez la [Vue d’ensemble de l’audio](../audio/overview.md) et le [Processeur Bluetooth](processor.md#bluetooth-audio-and-le-audio).
+Les deux chemins exigent une temporisation stable, des tampons et un transfert fiable des échantillons audio, généralement par DMA. Évaluez SF32LB52x/56x/58x selon les rôles audio Bluetooth et les configurations du SDK nécessaires au produit. SF32LB55x ne prend en charge que BLE et ne fournit pas d'audio Bluetooth classique ; cela ne signifie pas qu'il est dépourvu de fonctions audio locales. Pour DMA et les tampons, consultez la [Vue d'ensemble de l'audio](../audio/overview.md) et le [Processeur Bluetooth](processor.md#bluetooth-audio-and-le-audio).
 
 ## Modèle d'implémentation pour les services Sibles { #implementation-pattern-for-sibles-services }
 
@@ -149,7 +149,7 @@ Ces paramètres décrivent les liaisons BLE ACL, pas tous les transports audio B
 | Intervalle de connexion | Temps de réponse BLE ACL et consommation | Des intervalles plus longs peuvent réduire la consommation moyenne des liaisons peu chargées ; des intervalles plus courts peuvent améliorer la réactivité. Validez les paramètres négociés, le débit et le courant avec le téléphone cible. |
 | Latence du périphérique (slave latency dans les anciens SDK) | Autorise le périphérique à ignorer certains événements de connexion | Améliore l'autonomie lorsque la liaison est principalement inactive. Réglez cette valeur à 0 si la faible latence prime sur la consommation. |
 | Délai de supervision (supervision timeout) | Durée maximale sans réception d'un paquet de données valide de la couche liaison avant de déclarer la connexion perdue | Une valeur trop faible provoque des coupures lorsque la liaison RF est marginale ; une valeur trop élevée retarde la reconnexion après une perte réelle de la liaison. |
-| Puissance TX | Portée, consommation et coexistence | Commencer par le réglage minimal qui satisfait la portée requise. Mesurer l'énergie totale, les retransmissions et la coexistence dans le boîtier définitif : un réglage inférieur n'est pas forcément plus économe s'il provoque des retransmissions fréquentes. |
+| Puissance TX | Portée, consommation et coexistence | Commencez par le réglage minimal qui satisfait la portée requise. Mesurez l'énergie totale, les retransmissions et la coexistence dans le boîtier définitif : un réglage inférieur n'est pas forcément plus économe s'il provoque des retransmissions fréquentes. |
 
 </div>
 
@@ -247,7 +247,7 @@ Le firmware Bluetooth doit être validé avec autant de rigueur que le matériel
 - Laisser la latence du périphérique à 0 pour une liaison qui reste inactive la majeure partie du temps.
 - Ignorer les tests de coexistence jusqu'à l'intégration tardive, quand écran/audio/Bluetooth sont combinés pour la première fois.
 - Traiter l'appairage et le bonding comme des éléments secondaires, au lieu de concevoir leur parcours utilisateur.
-- Reporter la validation RF (antenne, réseau d'adaptation, précision du cristal) jusqu'aux dernières révisions du PCB.
+- Reporter la validation RF (antenne, réseau d'adaptation, précision du quartz) jusqu'aux dernières révisions du PCB.
 - Supposer qu'un réglage purement firmware peut compenser une mauvaise disposition RF.
 
 ## Liste de contrôle de mise en service { #bring-up-checklist }
@@ -256,7 +256,7 @@ Le firmware Bluetooth doit être validé avec autant de rigueur que le matériel
 - [ ] Identifier les exemples de profil/service SDK les plus proches pour le cas d'usage du produit.
 - [ ] Définir les paramètres d'annonces BLE et de connexion pour la découverte, l'utilisation active et les périodes d'inactivité.
 - [ ] Concevoir l'UX d'appairage, de bonding et de la fonction « oublier l'appareil ».
-- [ ] Valider la disposition RF, l'adaptation d'antenne et la précision du cristal sur du matériel réel.
+- [ ] Valider la disposition RF, l'adaptation d'antenne et la précision du quartz sur du matériel réel.
 - [ ] Tester les profils choisis (services GATT, A2DP/AVRCP/HFP ou diffusion LE Audio) avec un téléphone réel ou un hôte de référence.
 - [ ] Tester la coexistence avec l'écran, l'audio et les charges de travail des capteurs sous charge combinée réaliste.
 - [ ] Planifier et tester la méthode de mise à jour OTA si le firmware doit être mis à jour par Bluetooth.

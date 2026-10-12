@@ -13,7 +13,7 @@ Os tutoriais são a segunda etapa do guia [Primeiros passos](../index.md). Antes
 
 ## O que você precisa { #what-you-need }
 
-Use uma placa de desenvolvimento SF32 com conexão USB funcional para transferência de dados e console serial. Por exemplo, `sf32lb52-lcd_n16r8` é o nome de placa usado no SiFli-SDK para a SF32LB52-DevKit-LCD_N16R8. A série não pressupõe que uma única placa seja compatível com todos os exercícios: consulte a lista de plataformas compatíveis de cada exemplo e confira pinos, periféricos, display, áudio e armazenamento nos esquemas e arquivos correspondentes da placa. Para consultar os identificadores de placa SF32LB52x do SDK, use a lista oficial de [placas compatíveis](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/index.html).
+Use uma placa de desenvolvimento SF32 com conexão USB funcional para transferência de dados e console serial. Por exemplo, `sf32lb52-lcd_n16r8` é o nome de placa usado no SiFli-SDK para a SF32LB52-DevKit-LCD_N16R8. A série não pressupõe que uma única placa seja compatível com todos os exercícios: consulte a lista de plataformas compatíveis de cada exemplo e confira pinos, periféricos, display, áudio e armazenamento nos esquemáticos e arquivos correspondentes da placa. Para consultar os identificadores de placa SF32LB52x do SDK, use a lista oficial de [placas compatíveis](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/index.html).
 
 <div align="center"><em>Tabela: Pré-requisitos dos tutoriais</em></div>
 
@@ -24,8 +24,8 @@ Use uma placa de desenvolvimento SF32 com conexão USB funcional para transferê
 | Ferramentas de desenvolvimento | O SiFli-SDK consegue compilar um exemplo conhecido para a sua placa. |
 | Processo de gravação | Você consegue gravar firmware na placa repetidamente sem alterar a configuração. |
 | Console serial | Você consegue consultar os logs de inicialização e acessar o prompt `msh>` do FinSH. |
-| Informações da placa | Você tem o esquema elétrico ou os arquivos de suporte da placa antes de atribuir pinos ou periféricos. |
-| Ferramentas de medição | Use um multímetro ou analisador lógico quando necessário; em atividades de baixo consumo, use também uma montagem para medição de corrente. |
+| Informações da placa | Você tem o esquemático ou os arquivos de suporte da placa antes de atribuir pinos ou periféricos. |
+| Ferramentas de medição | Use um multímetro ou analisador lógico quando necessário; em atividades de baixo consumo, use também uma configuração de medição de corrente. |
 
 </div>
 
@@ -35,7 +35,7 @@ Use uma placa de desenvolvimento SF32 com conexão USB funcional para transferê
 
 <div align="center" markdown>
 
-| Trilha de resultado | Comece quando | O que você vai praticar | Continue com |
+| Trilha de objetivos | Comece quando | O que você vai praticar | Continue com |
 |:------|:-----------|:------------------|:--------------|
 | [Primeiros periféricos](beginner.md) | `hello_world` compila, a gravação funciona e há saída pela serial. | GPIO, FinSH, ADC, PWM, RTC e um pequeno projeto na placa. | Avance quando conseguir validar por conta própria uma entrada, uma saída e um periférico básico. |
 | [Integração de subsistemas](intermediate.md) | Os periféricos funcionam de forma confiável quando usados individualmente. | Sensores I2C, LVGL, BLE, áudio, armazenamento e testes planejados de coexistência. | Avance quando dois subsistemas reais funcionarem juntos de forma estável. |

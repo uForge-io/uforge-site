@@ -1,8 +1,8 @@
 ---
 icon: lucide/bluetooth
 title: "Exécuter les tests de signalisation Bluetooth"
-description: "Connecter un équipement SF32 sous test (DUT) à un testeur Bluetooth et effectuer des mesures de signalisation BLE ou Bluetooth Classic."
-tags: [Développement, SiFli-SDK, Notes d’application, Bluetooth]
+description: "Connecter un équipement SF32 sous test (DUT) à un testeur Bluetooth et effectuer des mesures de signalisation BLE ou Bluetooth classique."
+tags: [Développement, SiFli-SDK, Notes d'application, Bluetooth]
 ---
 
 # Exécuter les tests de signalisation Bluetooth { #run-bluetooth-signaling-tests }
@@ -11,13 +11,13 @@ En mode signalisation, une véritable liaison Bluetooth est établie entre l'éq
 
 ## Préparation du test { #test-setup }
 
-Préparez le DUT, un testeur de communications Bluetooth (le guide SiFli utilise un CMW500), un PC Windows, un câble USB-UART et un câble coaxial RF. Rendez accessibles les signaux `VBAT`, `GND` et TX/RX de l'UART1 du DUT. Les broches UART1 par défaut varient selon le boîtier :
+Préparez le DUT, un testeur de communications Bluetooth (le guide source utilise un CMW500), un PC Windows, un câble USB-UART et un câble coaxial RF. Rendez accessibles les signaux `VBAT`, `GND` et TX/RX de l'UART1 du DUT. Les broches UART1 par défaut varient selon le boîtier :
 
 <div align="center" markdown>
 
-<em>Tableau : Broches UART1 par défaut selon le dispositif/boîtier</em>
+<em>Tableau : Broches UART1 par défaut selon le composant/boîtier</em>
 
-| Dispositif/boîtier | UART1 TX | UART1 RX |
+| Composant/boîtier | UART1 TX | UART1 RX |
 |---|---|---|
 | SF32LB52x | PA19 | PA18 |
 | SF32LB551 | PA17 | PA18 |
@@ -29,18 +29,18 @@ Préparez le DUT, un testeur de communications Bluetooth (le guide SiFli utilise
 
 </div>
 
-Si le projet utilise une autre affectation, référez-vous à sa configuration réelle des broches. La signalisation BLE nécessite une liaison série de commande EUT entre le DUT et le testeur. En Bluetooth Classic, le testeur peut piloter le DUT par radio une fois celui-ci en mode test.
+Si le projet utilise une autre affectation, référez-vous à sa configuration réelle des broches. La signalisation BLE nécessite une liaison série de commande EUT entre le DUT et le testeur. En Bluetooth classique, le testeur peut piloter le DUT par radio une fois celui-ci en mode test.
 
-La différence essentielle concerne la topologie de commande : en BLE, le chemin de commande UART/HCI est relié au testeur ; en Bluetooth Classic, le testeur détecte le DUT et s'y connecte par radio. Les schémas ci-dessous illustrent des exemples SF32LB52x présentés dans le guide SiFli. Pour les autres familles, référez-vous au tableau des broches du projet concerné.
+La différence essentielle concerne la topologie de commande : en BLE, le chemin de commande UART/HCI est relié au testeur ; en Bluetooth classique, le testeur détecte le DUT et s'y connecte par radio. Les schémas ci-dessous illustrent des exemples SF32LB52x issus du guide source. Pour les autres familles, référez-vous au tableau des broches du projet concerné.
 
 !!! note "Champ d'application par famille"
-    Le tableau UART rassemble les affectations par défaut de plusieurs familles et boîtiers. Les schémas de topologie et les captures du testeur qui suivent illustrent des exemples SF32LB52x présentés dans le guide SiFli. Ils montrent le chemin du signal, mais ne constituent pas une référence universelle pour les broches ou les menus des autres boîtiers.
+    Le tableau UART rassemble les affectations par défaut de plusieurs familles et boîtiers. Les schémas de topologie et les captures du testeur qui suivent illustrent des exemples SF32LB52x issus du guide source. Ils montrent le chemin du signal, mais ne constituent pas une référence universelle pour les broches ou les menus des autres boîtiers.
 
 ![Topologie du test de signalisation BLE](../../../../assets/develop/app-notes/bluetooth-signalling/figure_1-1.jpg){ loading="lazy" }
-<div align="center"><em>Figure : Exemple SF32LB52x présenté dans le guide SiFli — en signalisation BLE, le PC place le DUT en mode test, puis le chemin de contrôle UART/HCI est relié au testeur.</em></div>
+<div align="center"><em>Figure : Exemple SF32LB52x issu de la source — en signalisation BLE, le PC place le DUT en mode test, puis le chemin de contrôle UART/HCI est relié au testeur.</em></div>
 
-![Topologie du test de signalisation Bluetooth Classic](../../../../assets/develop/app-notes/bluetooth-signalling/figure_1-2.jpg){ loading="lazy" }
-<div align="center"><em>Figure : Exemple SF32LB52x présenté dans le guide SiFli — en signalisation Bluetooth Classic, le testeur détecte le DUT et s'y connecte par RF.</em></div>
+![Topologie du test de signalisation Bluetooth classique](../../../../assets/develop/app-notes/bluetooth-signalling/figure_1-2.jpg){ loading="lazy" }
+<div align="center"><em>Figure : Exemple SF32LB52x issu de la source — en signalisation Bluetooth classique, le testeur détecte le DUT et s'y connecte par RF.</em></div>
 
 ## Placer le DUT en mode test { #put-the-dut-into-test-mode }
 
@@ -52,9 +52,9 @@ La différence essentielle concerne la topologie de commande : en BLE, le chemin
 4. Déconnectez le PC et reliez la même UART1 au port de contrôle EUT USB-vers-RS232 du testeur.
 
 ![Réponse série en mode test BLE](../../../../assets/develop/app-notes/bluetooth-signalling/figure_2-1.png){ loading="lazy" }
-<div align="center"><em>Figure : Exemple SF32LB52x présenté dans le guide SiFli — vérifiez `04 0E 04 XX 03 0C 00` avant de déplacer la connexion UART.</em></div>
+<div align="center"><em>Figure : Exemple SF32LB52x issu de la source — vérifiez `04 0E 04 XX 03 0C 00` avant de déplacer la connexion UART.</em></div>
 
-### Bluetooth Classic { #classic-bluetooth }
+### Bluetooth classique { #classic-bluetooth }
 
 1. Démarrez le DUT, maintenez l'écran allumé et gardez le processeur hors veille.
 2. Connectez l'UART1 au PC et envoyez `bt_cm dut`.
@@ -65,10 +65,10 @@ La différence essentielle concerne la topologie de commande : en BLE, le chemin
 Dans l'application `Bluetooth Signaling` du testeur, activez la signalisation. Pour le BLE, sous `EUT Control`, sélectionnez `USB-to-RS232 adapter`, un débit de 1 000 000 bauds et `Low Energy burst type`. Reliez l'UART1 du DUT au testeur et son câble coaxial RF à l'entrée RF du testeur. Lancez ensuite `Connection Check` et attendez `LE comm test passed`. Pour le Bluetooth Classic, réglez `HW Interface` sur `None (EUT Control off)`, recherchez l'adresse du DUT avec `Inquire`, puis sélectionnez `Connect Test Mode`.
 
 ![Paramètres EUT Control du testeur BLE](../../../../assets/develop/app-notes/bluetooth-signalling/figure_3-5.jpg){ loading="lazy" }
-<div align="center"><em>Figure : Exemple SF32LB52x présenté dans le guide SiFli — paramètres EUT Control, débit et Low Energy du BLE.</em></div>
+<div align="center"><em>Figure : Exemple SF32LB52x issu de la source — paramètres EUT Control, débit et Low Energy du BLE.</em></div>
 
-![Paramètres du testeur pour le Bluetooth Classic](../../../../assets/develop/app-notes/bluetooth-signalling/figure_3-7.jpg){ loading="lazy" }
-<div align="center"><em>Figure : Exemple SF32LB52x présenté dans le guide SiFli — signalisation Bluetooth Classic avec EUT Control réglé sur `None (EUT Control off)`.</em></div>
+![Paramètres du testeur pour le Bluetooth classique](../../../../assets/develop/app-notes/bluetooth-signalling/figure_3-7.jpg){ loading="lazy" }
+<div align="center"><em>Figure : Exemple SF32LB52x issu de la source — signalisation Bluetooth classique avec EUT Control réglé sur `None (EUT Control off)`.</em></div>
 
 ## Effectuer les mesures TX { #run-tx-measurements }
 

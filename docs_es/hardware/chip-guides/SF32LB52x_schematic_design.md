@@ -2,22 +2,22 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Directrices de diseño de esquemas para el MCU SF32LB52x: diseño del sistema mínimo, sistema de alimentación y generación de reloj."
+description: "Directrices de diseño de esquemáticos para la MCU SF32LB52x: diseño del sistema mínimo, sistema de alimentación y generación de reloj."
 tags:
     - Hardware
     - Chip
 ---
 
-# Guía de diseño de hardware de SF32LB52x — Directrices de diseño de esquemas { #sf32lb52x-hardware-design-guide-schematic-design-guidelines }
+# Guía de diseño de hardware de SF32LB52x — Directrices de diseño de esquemáticos { #sf32lb52x-hardware-design-guide-schematic-design-guidelines }
 
 !!! note "Parte de la guía de diseño de hardware de SF32LB52x"
-    Las directrices de diseño de esquemas se dividen ahora en tres páginas: esta página (secciones 5.1-5.3: sistema mínimo, alimentación y reloj), [RF e interfaces de usuario](SF32LB52x_schematic_rf_interfaces.md) (secciones 5.4-5.5) y [almacenamiento y fabricación](SF32LB52x_schematic_storage_mfg.md) (secciones 5.6-5.7). Consulte primero la [descripción general de la guía de diseño de hardware de SF32LB52x](SF32LB52x_hardware_design_guide.md) para elegir el dispositivo y conocer el flujo de diseño completo, o use la [lista de comprobación del esquema](SF32LB52x_schematic_checklist.md) para revisar cada punto.
+    Las directrices de diseño de esquemáticos se dividen ahora en tres páginas: esta página (secciones 5.1-5.3: sistema mínimo, alimentación y reloj), [RF e interfaces de usuario](SF32LB52x_schematic_rf_interfaces.md) (secciones 5.4-5.5) y [almacenamiento y fabricación](SF32LB52x_schematic_storage_mfg.md) (secciones 5.6-5.7). Consulte primero la [descripción general de la guía de diseño de hardware de SF32LB52x](SF32LB52x_hardware_design_guide.md) para elegir el dispositivo y conocer el flujo de diseño completo, o use la [lista de comprobación del esquemático](SF32LB52x_schematic_checklist.md) para revisar cada punto.
 
-## 5. Directrices de diseño de esquemas { #5-schematic-design-guidelines }
+## 5. Directrices de diseño de esquemáticos { #5-schematic-design-guidelines }
 
-Este capítulo sigue el flujo de diseño del esquema a lo largo de tres páginas. Primero complete la revisión del sistema mínimo; después, revise en esta página la alimentación y la generación de reloj, en la siguiente la RF y las interfaces de usuario, y en la última el almacenamiento, el acceso para fabricación y las decisiones que dependen de la PCB. Para cada bloque, confirme el objetivo de diseño y las variantes aplicables antes de comprobar los requisitos del circuito, la asignación de pines, los errores frecuentes y los criterios de aprobación.
+Este capítulo sigue el flujo de diseño del esquemático a lo largo de tres páginas. Primero complete la revisión del sistema mínimo; después, revise en esta página la alimentación y la generación de reloj, en la siguiente la RF y las interfaces de usuario, y en la última el almacenamiento, el acceso para fabricación y las decisiones que dependen de la PCB. Para cada bloque, confirme el objetivo de diseño y las variantes aplicables antes de comprobar los requisitos del circuito, la asignación de pines, los errores frecuentes y los criterios de aprobación.
 
-<div align="center"><em>Tabla 5-1: Navegación del capítulo de esquemas</em></div>
+<div align="center"><em>Tabla 5-1: Navegación del capítulo de esquemáticos</em></div>
 
 <div align="center" markdown>
 
@@ -27,17 +27,17 @@ Este capítulo sigue el flujo de diseño del esquema a lo largo de tres páginas
 | Sistema de alimentación | Árbol de alimentación por variante, ruta del cargador, BUCK, LDO, alimentación del almacenamiento de arranque, modos de funcionamiento y fuentes de activación | Revisión del árbol de alimentación, componentes de la AVL, ajustes del cargador/OVP y plan de bajo consumo y activación |
 | Generación de reloj | Selección de cristales de 48 MHz y 32,768 kHz, carga e hipótesis de calibración | Verificación de CL/ESR, capturas de colocación y enrutamiento, plan de calibración |
 | RF | Adaptación de RF, ruta de antena y acceso para ajuste | Plan de impedancia de RF, captura de ubicación de la red de adaptación y plan de ajuste de antena |
-| Interfaces de usuario | Pantalla, audio, botones y motor de vibración | Revisión del esquema de interfaces, pines de temporización/control, secuencia de alimentación y revisión analógica |
+| Interfaces de usuario | Pantalla, audio, botones y motor de vibración | Revisión del esquemático de interfaces, pines de temporización/control, secuencia de alimentación y revisión analógica |
 | Almacenamiento y conectividad | Medio de arranque, pines de configuración, interruptor de alimentación del almacenamiento, sensores, UART/I2C y GPTIM | Tabla de configuración, discrepancia PA11/PA21 en las fuentes, asignación de buses y revisión de la alimentación del almacenamiento |
-| Fabricación | DBG_UART/SWD, puntos de prueba, programación de producción, acceso para calibración y listas de liberación | Plano de puntos de prueba, plan del útil de producción y evidencias de liberación completas |
+| Fabricación | DBG_UART/SWD, puntos de prueba, grabación de producción, acceso para calibración y listas de liberación | Plano de puntos de prueba, plan del útil de producción y evidencias de liberación completas |
 
 </div>
 
 ### 5.1. Diseño del sistema mínimo { #51-minimum-system-design }
 
-El diseño del sistema mínimo es la primera etapa de revisión que debe superar el esquema de una placa SF32LB52x. Abarca las decisiones que deben ser correctas antes de añadir los periféricos del producto: variante y encapsulado exactos, árbol de alimentación, medio de arranque, resistencias de configuración, control de alimentación del almacenamiento, acceso de depuración/descarga, fuentes de reloj y comportamiento de activación. A menudo se pueden admitir cambios tardíos en el cableado de la pantalla o los sensores; en cambio, una configuración incorrecta de los pines de arranque del almacenamiento, la falta de acceso de depuración, una alimentación inestable o una hipótesis errónea sobre los estados de alimentación pueden impedir el funcionamiento normal de la placa.
+El diseño del sistema mínimo es la primera etapa de revisión que debe superar el esquemático de una placa SF32LB52x. Abarca las decisiones que deben ser correctas antes de añadir los periféricos del producto: variante y encapsulado exactos, árbol de alimentación, medio de arranque, resistencias de configuración, control de alimentación del almacenamiento, acceso de depuración/descarga, fuentes de reloj y comportamiento de activación. A menudo se pueden admitir cambios tardíos en el cableado de la pantalla o los sensores; en cambio, una configuración incorrecta de los pines de arranque del almacenamiento, la falta de acceso de depuración, una alimentación inestable o una hipótesis errónea sobre los estados de alimentación pueden impedir el funcionamiento normal de la placa.
 
-Siga esta secuencia durante la primera revisión del esquema:
+Siga esta secuencia durante la primera revisión del esquemático:
 
 1. Seleccione el dispositivo y el encapsulado exactos según las secciones 3.2 y 3.3.
 2. Elija la ruta de alimentación adecuada: `SF32LB520/3/5/7` para productos con batería recargable o `52B/D/E/G/J` para productos alimentados por una fuente regulada externa.
@@ -45,10 +45,10 @@ Siga esta secuencia durante la primera revisión del esquema:
 4. Seleccione el medio de arranque e implemente las opciones de resistencias pull de configuración en `PA13`/`PA17` según la tabla de arranque de la sección 5.6.1.
 5. Confirme el pin de control de los interruptores de alimentación del almacenamiento de arranque antes de cerrar el diseño. Las notas de aplicación y la guía del esquemático indican `PA21`, pero la lista de comprobación oficial indica `PA11` para la Flash externa en las variantes con batería.
 6. Reserve `PA18`/`PA19`, tierra y una referencia de alimentación válida para el acceso DBG_UART/SWD antes de cerrar el diseño de la carcasa y del útil de producción.
-7. Seleccione los cristales de 48 MHz y 32,768 kHz indicados en la sección 5.3.1 y tenga presentes sus restricciones de ubicación durante la revisión del esquema.
+7. Seleccione los cristales de 48 MHz y 32,768 kHz indicados en la sección 5.3.1 y tenga presentes sus restricciones de ubicación durante la revisión del esquemático.
 8. Asigne los pines de activación, el comportamiento del botón de encendido, los eventos del cargador y los estados de apagado del almacenamiento/sensores antes de cerrar la política de bajo consumo del firmware.
 
-Al terminar este punto de control, el esquema debe permitir encender la placa, arrancar desde el medio seleccionado, disponer de una ruta de recuperación, calibrar el reloj y entrar en el estado de bajo consumo previsto sin depender de periféricos opcionales del producto.
+Al terminar este punto de control, el esquemático debe permitir encender la placa, arrancar desde el medio seleccionado, disponer de una ruta de recuperación, calibrar el reloj y entrar en el estado de bajo consumo previsto sin depender de periféricos opcionales del producto.
 
 ### 5.2. Sistema de alimentación { #52-power-system }
 
@@ -108,19 +108,19 @@ Diseñe un árbol de alimentación estable y con baja corriente de fuga que admi
 
     | Pin | Mín. (V) | Típ. (V) | Máx. (V) | Corriente máx. (mA) | Descripción |
     |:---|:---|:---|:---|:---|:---|
-    | PVDD | 2.97 | 3.3 | 3.63 | 150 | Entrada de alimentación del sistema PVDD, condensador de 10 uF |
-    | BUCK_LX | - | 1.25 | - | 50 | Salida BUCK; se conecta a un inductor de 4,7 uH |
-    | BUCK_FB | - | 1.25 | - | 50 | Entrada de realimentación BUCK/alimentación interna; se conecta al otro extremo del inductor y a un condensador de 4,7 uF |
-    | VDD_VOUT1 | - | 1.1 | - | 50 | LDO interno, condensador de 4,7 uF; no alimenta periféricos |
-    | VDD_VOUT2 | - | 0.9 | - | 20 | LDO interno, condensador de 4,7 uF; no alimenta periféricos |
-    | VDD_RET | - | 0.9 | - | 1 | LDO interno, condensador de 0,47 uF; no alimenta periféricos |
-    | VDD_RTC | - | 1.1 | - | 1 | LDO interno, condensador de 1 uF; no alimenta periféricos |
-    | VDDIOA | 1.71 | 1.8/3.3 | 3.63 | - | Entrada de alimentación de GPIO, condensador de 1 uF |
-    | AVDD33 | 2.97 | 3.3 | 3.63 | 100 | Entrada de alimentación analógica de 3,3 V, condensador de 4,7 uF |
-    | AVDD33_AUD | 2.97 | 3.3 | 3.63 | 50 | Entrada de alimentación de audio de 3,3 V, condensador de 2,2 uF |
-    | VDD_SIP | 1.71 | 1.8/3.3 | 3.63 | 30 | LDO interno o fuente externa (1), condensador de 1 uF |
-    | AVDD_BRF | 2.97 | 3.3 | 3.63 | 100 | Entrada de alimentación analógica, condensador de 4,7 uF |
-    | MIC_BIAS | 1.4 | - | 2.8 | - | Salida de alimentación del micrófono, condensador de 1 uF |
+    | PVDD | 2.97 | 3.3 | 3.63 | 150 | Entrada de alimentación del sistema PVDD, condensador de 10 µF |
+    | BUCK_LX | - | 1.25 | - | 50 | Salida BUCK; se conecta a un inductor de 4,7 µH |
+    | BUCK_FB | - | 1.25 | - | 50 | Entrada de realimentación BUCK/alimentación interna; se conecta al otro extremo del inductor y a un condensador de 4,7 µF |
+    | VDD_VOUT1 | - | 1.1 | - | 50 | LDO interno, condensador de 4,7 µF; no alimenta periféricos |
+    | VDD_VOUT2 | - | 0.9 | - | 20 | LDO interno, condensador de 4,7 µF; no alimenta periféricos |
+    | VDD_RET | - | 0.9 | - | 1 | LDO interno, condensador de 0,47 µF; no alimenta periféricos |
+    | VDD_RTC | - | 1.1 | - | 1 | LDO interno, condensador de 1 µF; no alimenta periféricos |
+    | VDDIOA | 1.71 | 1.8/3.3 | 3.63 | - | Entrada de alimentación de GPIO, condensador de 1 µF |
+    | AVDD33 | 2.97 | 3.3 | 3.63 | 100 | Entrada de alimentación analógica de 3,3 V, condensador de 4,7 µF |
+    | AVDD33_AUD | 2.97 | 3.3 | 3.63 | 50 | Entrada de alimentación de audio de 3,3 V, condensador de 2,2 µF |
+    | VDD_SIP | 1.71 | 1.8/3.3 | 3.63 | 30 | LDO interno o fuente externa (1), condensador de 1 µF |
+    | AVDD_BRF | 2.97 | 3.3 | 3.63 | 100 | Entrada de alimentación analógica, condensador de 4,7 µF |
+    | MIC_BIAS | 1.4 | - | 2.8 | - | Salida de alimentación del micrófono, condensador de 1 µF |
 
     </div>
 
@@ -134,7 +134,7 @@ Diseñe un árbol de alimentación estable y con baja corriente de fuga que admi
 Ambos grupos de diseño utilizan la misma especificación de inductor.
 
 !!! important "Parámetros principales del inductor de alimentación"
-    L (inductancia) = 4,7 uH ± 20 %, DCR (resistencia de CC) ≤ 0,4 Ω, Isat (corriente de saturación) ≥ 450 mA.
+    L (inductancia) = 4,7 µH ± 20 %, DCR (resistencia de CC) ≤ 0,4 Ω, Isat (corriente de saturación) ≥ 450 mA.
 
 ##### 5.2.1.3. Control de batería y carga { #5213-battery-and-charging-control }
 
@@ -172,7 +172,7 @@ Ambos grupos de diseño utilizan la misma especificación de inductor.
     - Chip OVP con salida regulada, por ejemplo, SGM4064YDE8G o LP5305AQVF: la salida del regulador debe estar entre 4,5 y 5,4 V.
 
     !!! important "Límites de VBUS y OVP: discrepancia en la fuente"
-        La nota de aplicación OpenSiFli para variantes con batería contiene valores de VBUS incompatibles: el apartado de selección de OVP indica 4,5–5,5 V para el pin VBUS del chip, mientras que la tabla de alimentación y las notas del cargador integrado indican 4,6–5,5 V y exigen al menos 4,6 V en el pin con la corriente máxima de carga. Electrical Specification-A3 da un rango general de 4,5–5,5 V y el esquema de carga de referencia está rotulado 4,3–5,5 V. En diseños con cargador integrado, mantenga al menos 4,6 V en el pin bajo carga máxima hasta que SiFli aclare el mínimo aplicable; no considere los 4,3 V del esquema un límite inferior aprobado.
+        La nota de aplicación OpenSiFli para variantes con batería contiene valores de VBUS incompatibles: el apartado de selección de OVP indica 4,5–5,5 V para el pin VBUS del chip, mientras que la tabla de alimentación y las notas del cargador integrado indican 4,6–5,5 V y exigen al menos 4,6 V en el pin con la corriente máxima de carga. Electrical Specification-A3 da un rango general de 4,5–5,5 V y el esquemático de carga de referencia está rotulado 4,3–5,5 V. En diseños con cargador integrado, mantenga al menos 4,6 V en el pin bajo carga máxima hasta que SiFli aclare el mínimo aplicable; no considere los 4,3 V del esquemático un límite inferior aprobado.
 
         La misma guía establece `VIN_OVLO` entre 5,2 y 5,5 V para los dispositivos OVP con OVLO ajustable; la tolerancia de `VOVLO_TH` debe ser ≤3 % y la de R1/R2, ≤1 %. Para los dispositivos OVP con salida regulada, especifica una salida LDO de 4,5–5,4 V. Son ajustes propios de cada topología OVP, no rangos de funcionamiento de VBUS del chip que puedan intercambiarse. Tenga en cuenta las tolerancias de los componentes y confirme con SiFli el diseño aprobado.
 
@@ -199,7 +199,7 @@ Ambos grupos de diseño utilizan la misma especificación de inductor.
         - En la carga inalámbrica, asegúrese de que la fuente pueda suministrar más que la corriente de carga constante.
 
     !!! important "Notas sobre los LDO integrados"
-        - La capacitancia total en las salidas VDD33_VOUT1 y VDD33_VOUT2 no debe superar 9,6 uF.
+        - La capacitancia total en las salidas VDD33_VOUT1 y VDD33_VOUT2 no debe superar 9,6 µF.
         - AVDD33_AUD debe alimentarse desde VDD33_VOUT1, no desde VSYS.
         - No alimente la pantalla LCD desde el LDO interno; use un LDO externo.
 
@@ -218,13 +218,13 @@ Ambos grupos de diseño utilizan la misma especificación de inductor.
 
     <div align="center"><em>Figura 5.2-7: Diagrama de alimentación del sistema SF32LB52x</em></div>
 
-    Defina con cuidado el estado de hardware predeterminado de los GPIO que controlan los interruptores de alimentación y añada resistencias pull-up/pull-down del orden de megaohmios para que los interruptores de carga permanezcan apagados por defecto. Para los LDO e interruptores de carga, elija componentes con baja corriente en reposo (Iq) y baja corriente de apagado (Istb); preste especial atención a Iq en los dispositivos de alimentación siempre activos.
+    Defina con cuidado el estado de hardware predeterminado de las GPIO que controlan los interruptores de alimentación y añada resistencias pull-up/pull-down del orden de megaohmios para que los interruptores de carga permanezcan apagados por defecto. Para los LDO e interruptores de carga, elija componentes con baja corriente en reposo (Iq) y baja corriente de apagado (Istb); preste especial atención a Iq en los dispositivos de alimentación siempre activos.
 
 === "52B/D/E/G/J (alimentación externa regulada)"
 
     Utilice interruptores de carga para gestionar dinámicamente la alimentación de cada bloque funcional; para los módulos o las líneas siempre activos, elija componentes con baja corriente en reposo.
 
-    Defina con cuidado el estado de hardware predeterminado de los GPIO que controlan los interruptores de alimentación y añada resistencias pull-up/pull-down del orden de megaohmios para que los interruptores de carga permanezcan apagados por defecto. Para los LDO e interruptores de carga, elija componentes con baja corriente en reposo (Iq) y baja corriente de apagado (Istb); preste especial atención a Iq en los dispositivos de alimentación siempre activos.
+    Defina con cuidado el estado de hardware predeterminado de las GPIO que controlan los interruptores de alimentación y añada resistencias pull-up/pull-down del orden de megaohmios para que los interruptores de carga permanezcan apagados por defecto. Para los LDO e interruptores de carga, elija componentes con baja corriente en reposo (Iq) y baja corriente de apagado (Istb); preste especial atención a Iq en los dispositivos de alimentación siempre activos.
 
 ##### 5.2.1.5. Lista de comprobación del diseño de alimentación { #5215-power-design-checklist }
 
@@ -238,7 +238,7 @@ Ambos grupos de diseño utilizan la misma especificación de inductor.
 **Errores frecuentes en la alimentación**
 
 - Alimentar la pantalla LCD directamente desde un LDO interno en vez de usar un LDO externo.
-- Mezclar en el mismo esquema los requisitos de alimentación con batería y con alimentación externa regulada.
+- Mezclar en el mismo esquemático los requisitos de alimentación con batería y con alimentación externa regulada.
 - Mantener `VDD_SIP` alimentado durante Hibernate en variantes donde existe riesgo de fuga en el almacenamiento.
 - Elegir un cargador o dispositivo OVP sin comprobar la corriente y el rango de tensión de VBUS en las condiciones más desfavorables.
 
@@ -338,7 +338,7 @@ Cristales recomendados:
 
 <div align="center" markdown>
 
-| Número de parte | Fabricante | Parámetros |
+| Número de pieza | Fabricante | Parámetros |
 |:---|:---|:---|
 | E1SB48E001G00E | Hosonic | F0=48 MHz, ΔF/F0=-6~8 ppm, CL=8.8 pF, ESR≤22 Ω, TOPR=-30~85°C, encapsulado métrico 2016 |
 | SX20Y048000B31T-8.8 | TKD | F0=48 MHz, ΔF/F0=-10~10 ppm, CL=8.8 pF, ESR≤40 Ω, TOPR=-20~75°C, encapsulado métrico 2016 |
@@ -348,7 +348,7 @@ Cristales recomendados:
 </div>
 
 !!! note "Notas adicionales"
-    El TKD SX20Y048000B31T-8.8 tiene un ESR algo más alto, lo que aumenta ligeramente el consumo estático. Además, la nota de aplicación de esquemáticos de SiFli recomienda retirar al menos el cobre GND de la segunda capa bajo el cristal de 48 MHz para reducir la capacitancia de carga parásita. Sin embargo, la guía de layout de PCB prohíbe los vaciados de plano o recortes de cobre bajo la zona del cristal en las capas adyacentes. Las indicaciones se contradicen; consulte [Trazado de la interfaz de reloj](SF32LB52x_pcb_layout.md#65-clock-interface-routing). Confirme con SiFli el tratamiento de capas previsto antes de cerrar el layout.
+    El TKD SX20Y048000B31T-8.8 tiene un ESR algo más alto, lo que aumenta ligeramente el consumo estático. Además, la nota de aplicación de esquemáticos de SiFli recomienda eliminar al menos el cobre GND de la segunda capa bajo el cristal de 48 MHz para reducir la capacitancia de carga parásita. Sin embargo, la guía de diseño de PCB prohíbe los vaciados de plano o recortes de cobre bajo la zona del cristal en las capas adyacentes. Las indicaciones se contradicen; consulte [Trazado de la interfaz de reloj](SF32LB52x_pcb_layout.md#65-clock-interface-routing). Confirme con SiFli el tratamiento de capas previsto antes de cerrar el diseño de PCB.
 
 !!! important "Excepción de ESR del cristal en la fuente"
     La fuente incluye el TKD SX20Y048000B31T-8.8 con ESR ≤ 40 Ω, aunque el requisito general para 48 MHz es ESR ≤ 30 Ω. Debe verificarse la homologación de ese componente concreto; no significa que cualquier cristal de 40 Ω sea válido. Antes de liberar el diseño, confirme su aprobación en la AVL vigente y valide el arranque, la calibración de frecuencia y la corriente del oscilador.

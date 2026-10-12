@@ -8,7 +8,7 @@ tags:
 
 ## Introducción { #introduction }
 
-**ePicasso** es el motor de aceleración gráfica 2D/2.5D de SiFli para la familia de microcontroladores SF32. Libera a la CPU de la aplicación de las operaciones de píxeles repetitivas que admite el hardware, para que la interfaz ofrezca animaciones fluidas, responda con rapidez y actualice la pantalla con eficiencia dentro del presupuesto energético de un MCU.
+**ePicasso** es el motor de aceleración gráfica 2D/2.5D de SiFli para la familia de microcontroladores SF32. Libera a la CPU de la aplicación de las operaciones de píxeles repetitivas que admite el hardware, para que la interfaz ofrezca animaciones fluidas, responda con rapidez y actualice la pantalla con eficiencia dentro del presupuesto energético de una MCU.
 
 En el flujo gráfico de SF32, ePicasso actúa después de que el renderizador dispone de los recursos y antes de que el mapa de bits final llegue al controlador de pantalla. Acelera operaciones como copiar imágenes, mezclar píxeles, escalar, rotar y componer capas. eZip se encarga de descomprimir los recursos y puede enviar la imagen ya descomprimida a ePicasso; el controlador de pantalla transfiere los píxeles preparados al panel. Consulte el [resumen de gráficos](overview.md#sf32-graphics-flow) para ver el recorrido completo desde los recursos hasta el panel.
 
@@ -129,7 +129,7 @@ Esta progresión permite a los desarrolladores conservar un modelo de software g
 
 ## Integración con LVGL y frameworks de interfaz { #integration-with-lvgl-and-ui-frameworks }
 
-**LVGL** es una opción habitual para interfaces gráficas embebidas en SF32. La aplicación compone las pantallas con widgets, estilos, imágenes, fuentes y animaciones. LVGL identifica las zonas que deben redibujarse; su renderizador por software o backend de dibujo por hardware genera los píxeles. La ruta de flush del controlador de pantalla transfiere esos píxeles al panel y notifica la finalización. Distinga la finalización del renderizado de la finalización de la transferencia a pantalla.
+**LVGL** es una opción habitual para interfaces gráficas embebidas en SF32. La aplicación compone las pantallas con widgets, estilos, imágenes, fuentes y animaciones. LVGL identifica las zonas que deben redibujarse; su renderizador por software o backend de renderizado por hardware genera los píxeles. La ruta de flush del controlador de pantalla transfiere esos píxeles al panel y notifica la finalización. Distinga la finalización del renderizado de la finalización de la transferencia a pantalla.
 
 ePicasso puede mejorar el rendimiento de LVGL cuando la adaptación de LVGL para SF32 deriva al hardware las operaciones de dibujo admitidas. Las operaciones que más suelen beneficiarse son:
 

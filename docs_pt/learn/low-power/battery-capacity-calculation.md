@@ -122,7 +122,7 @@ uint8_t battery_calculator_get_percent(battery_calculator_t *calc,
 <div align="center"><em>Tabela: Sequência recomendada de integração</em></div>
 <div align="center" markdown>
 
-| Etapa | Ação |
+| Passo | Ação |
 | --- | --- |
 | 1 | Configure o ADC da placa, o tipo de carregador, o pino de detecção e sua polaridade. |
 | 2 | Defina curvas validadas de carga e descarga em `battery_table.c`. |

@@ -11,7 +11,7 @@ Im Signalisierungsmodus wird eine echte Bluetooth-Verbindung zwischen dem Prüfl
 
 ## Testaufbau { #test-setup }
 
-Bereiten Sie das DUT, einen Bluetooth-Kommunikationstester (die Quellanleitung verwendet ein CMW500), einen Windows-PC, ein USB-zu-UART-Kabel und ein RF-Koaxialkabel vor. Machen Sie am DUT die Signale `VBAT`, `GND` sowie UART1 TX/RX zugänglich. Die Standardbelegung von UART1 hängt vom Gerät und Gehäuse ab:
+Bereiten Sie einen Prüfling (DUT), einen Bluetooth-Kommunikationstester, einen Windows-PC, ein USB-zu-UART-Kabel und ein RF-Koaxialkabel vor. Der Quellleitfaden verwendet einen CMW500. Machen Sie am Prüfling die Signale `VBAT`, `GND` sowie UART1 TX/RX zugänglich. Die Standardbelegung von UART1 hängt vom Gerät und Gehäuse ab:
 
 <div align="center" markdown>
 
@@ -29,24 +29,24 @@ Bereiten Sie das DUT, einen Bluetooth-Kommunikationstester (die Quellanleitung v
 
 </div>
 
-Weicht die tatsächliche Projektkonfiguration von dieser Standardbelegung ab, verwenden Sie die dort festgelegte Pin-Zuordnung. Für BLE-Signalisierung ist eine serielle EUT-Steuerverbindung zum Tester erforderlich. Bei Classic BT kann der Tester das DUT über die Luftschnittstelle steuern, sobald es sich im Testmodus befindet.
+Weicht die tatsächliche Projektkonfiguration von dieser Standardbelegung ab, verwenden Sie die dort festgelegte Pin-Zuordnung. Für BLE-Signalisierung ist eine serielle EUT-Steuerverbindung zum Tester erforderlich. Bei Classic BT kann der Tester den Prüfling über die Luftschnittstelle steuern, sobald dieser im Testmodus ist.
 
-Der entscheidende Unterschied liegt in der Steuertopologie: Bei BLE wird der UART-/HCI-Steuerpfad mit dem Tester verbunden; bei Classic BT erkennt der Tester das DUT über die Luftschnittstelle und stellt die Verbindung her. Die folgenden Diagramme zeigen Beispiele für SF32LB52x aus der SiFli-Anleitung. Für andere Familien ist die Pin-Tabelle des jeweiligen Zielprojekts maßgeblich.
+Der entscheidende Unterschied liegt in der Steuertopologie: Bei BLE wird der UART-/HCI-Steuerpfad mit dem Tester verbunden; bei Classic BT erkennt der Tester den Prüfling über die Luftschnittstelle und stellt die Verbindung her. Die folgenden Diagramme zeigen Beispiele für SF32LB52x aus der SiFli-Anleitung. Für andere Familien ist die Pin-Tabelle des jeweiligen Zielprojekts maßgeblich.
 
-!!! note "Geltungsbereich nach Produktfamilie"
+!!! note "Geltungsbereich nach Familie"
     Die UART-Pin-Tabelle fasst die Standardbelegungen mehrerer Familien und Gehäuse zusammen. Die folgenden Topologiediagramme und Tester-Screenshots zeigen Beispiele für SF32LB52x aus der Quellanleitung. Sie veranschaulichen den Signalpfad, sind aber keine allgemeingültige Referenz für Pins oder Menüs anderer Gehäuse.
 
 ![BLE-Signalisierungstest-Topologie](../../../../assets/develop/app-notes/bluetooth-signalling/figure_1-1.jpg){ loading="lazy" }
-<div align="center"><em>Abbildung: Beispiel für SF32LB52x aus der Quellanleitung — BLE-Signalisierung: Der PC versetzt das DUT in den Testmodus, dann wechselt der UART-/HCI-Steuerpfad zum Tester.</em></div>
+<div align="center"><em>Abbildung: Beispiel für SF32LB52x aus der Quellanleitung — BLE-Signalisierung: Der PC versetzt den Prüfling in den Testmodus, dann wechselt der UART-/HCI-Steuerpfad zum Tester.</em></div>
 
 ![Classic-BT-Signalisierungstest-Topologie](../../../../assets/develop/app-notes/bluetooth-signalling/figure_1-2.jpg){ loading="lazy" }
-<div align="center"><em>Abbildung: Beispiel für SF32LB52x aus der Quellanleitung — Classic-BT-Signalisierung: Der Tester erkennt und verbindet sich über RF mit dem DUT.</em></div>
+<div align="center"><em>Abbildung: Beispiel für SF32LB52x aus der Quellanleitung — Classic-BT-Signalisierung: Der Tester erkennt den Prüfling über RF und stellt die Verbindung her.</em></div>
 
-## DUT in den Testmodus versetzen { #put-the-dut-into-test-mode }
+## Prüfling in den Testmodus versetzen { #put-the-dut-into-test-mode }
 
 ### BLE { #ble }
 
-1. Starten Sie das DUT und verhindern Sie, dass die DFU-/Anwendungsfirmware in einen Schlafmodus wechselt.
+1. Starten Sie den Prüfling und verhindern Sie, dass die DFU-/Anwendungsfirmware in einen Schlafmodus wechselt.
 2. Verbinden Sie UART1 mit dem PC und senden Sie den FinSH-Befehl `bt_cm uart_dut` mit SiFli_Trace oder einem anderen seriellen Tool.
 3. Stellen Sie das Terminal auf Hexadezimalanzeige um und überprüfen Sie `04 0E 04 XX 03 0C 00`.
 4. Trennen Sie den PC und verbinden Sie dieselbe UART1 mit dem USB-zu-RS232-EUT-Steuerport des Testers.
@@ -56,13 +56,13 @@ Der entscheidende Unterschied liegt in der Steuertopologie: Bei BLE wird der UAR
 
 ### Classic Bluetooth { #classic-bluetooth }
 
-1. Starten Sie das DUT und halten Sie Bildschirm und CPU wach.
+1. Starten Sie den Prüfling und halten Sie Display und CPU wach.
 2. Verbinden Sie UART1 mit dem PC und senden Sie `bt_cm dut`.
 3. Überprüfen Sie die Antwort `Write scan enable success`, verbinden Sie dann das RF-Koaxialkabel mit dem Tester. Starten Sie vor dem Wechsel in einen anderen Testmodus neu.
 
 ## Signalisierungsverbindung herstellen { #establish-the-signaling-connection }
 
-Schalten Sie in der Anwendung `Bluetooth Signaling` des Testers die Signalisierung ein. Wählen Sie für BLE unter `EUT Control` die Optionen `USB-to-RS232 adapter`, 1.000.000 Baud und `Low Energy burst type`. Verbinden Sie UART1 des DUT mit dem Tester und das RF-Koaxialkabel mit dessen RF-Eingang. Führen Sie anschließend `Connection Check` aus und warten Sie auf `LE comm test passed`. Setzen Sie für Classic BT `HW Interface` auf `None (EUT Control off)`, suchen Sie mit `Inquire` nach der DUT-Adresse und wählen Sie `Connect Test Mode`.
+Schalten Sie in der Anwendung `Bluetooth Signaling` des Testers die Signalisierung ein. Wählen Sie für BLE unter `EUT Control` die Optionen `USB-to-RS232 adapter`, 1 000 000 Baud und `Low Energy burst type`. Verbinden Sie UART1 des Prüflings mit dem Tester und das RF-Koaxialkabel mit dessen RF-Eingang. Führen Sie anschließend `Connection Check` aus und warten Sie auf `LE comm test passed`. Setzen Sie für Classic BT `HW Interface` auf `None (EUT Control off)`, suchen Sie mit `Inquire` nach der Adresse des Prüflings und wählen Sie `Connect Test Mode`.
 
 ![BLE-Tester-EUT-Control-Einstellungen](../../../../assets/develop/app-notes/bluetooth-signalling/figure_3-5.jpg){ loading="lazy" }
 <div align="center"><em>Abbildung: Beispiel für SF32LB52x aus der Quellanleitung — BLE-EUT-Control-, Baudraten- und Low-Energy-Einstellungen.</em></div>

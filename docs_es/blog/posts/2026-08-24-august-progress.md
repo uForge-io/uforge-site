@@ -5,7 +5,7 @@ description: "Agosto en μForge.io: una selección de productos más clara, proy
 
 # Agosto: de la cobertura a la confianza [2026-08-24] { #august-from-coverage-to-confidence-2026-08-24 }
 
-En agosto nos centramos en hacer que μForge.io sea más útil en los momentos clave del desarrollo de un producto: elegir los componentes, establecer una base funcional y validar los resultados. El objetivo es sencillo: perder menos tiempo buscando respuestas en fuentes dispersas.
+En agosto nos centramos en hacer que μForge.io sea más útil en tres etapas que hacen avanzar un producto: elegir un componente, establecer una base funcional y validar el resultado. El objetivo es sencillo: perder menos tiempo buscando respuestas en fuentes dispersas.
 
 ### Decisiones más claras antes del esquemático { #clearer-choices-before-the-schematic }
 

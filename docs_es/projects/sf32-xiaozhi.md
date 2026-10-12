@@ -26,7 +26,7 @@ Esta página presenta una ruta completa de ingeniería para adaptar esa referenc
 
 **Resultado:** obtener un asistente de voz y pantalla reproducible que pueda configurarse mediante un teléfono, mantener una conversación respaldada por la nube, controlar una función segura del dispositivo, recuperarse de una pérdida de conexión PAN y generar las evidencias necesarias para decidir si se debe diseñar hardware propio.
 
-**Público objetivo:** ingenieros de firmware, hardware y producto capaces de compilar y grabar una configuración base de SF32 y preparados para trabajar con C/C++, esquemas de placas, configuración Bluetooth e integración de servicios en la nube.
+**Público objetivo:** ingenieros de firmware, hardware y producto capaces de compilar y grabar una configuración base de SF32 y preparados para trabajar con C/C++, esquemáticos de placas, configuración Bluetooth e integración de servicios en la nube.
 
 <div align="center"><em>Tabla: Condiciones del proyecto</em></div>
 
@@ -75,11 +75,11 @@ Las URL de componentes de terceros anteriores son enlaces a tiendas publicados p
 
 | Paquete o servicio | Versión o revisión requerida | Función | Estado | Dónde obtenerlo | Notas de compatibilidad y actualización |
 |:-------------------|:-----------------------------|:--------|:-------|:----------------|:--------------------------------------|
-| Firmware precompilado Xiaozhi SF32 | v1.4.0 | Imagen de referencia intacta para la configuración inicial y la recuperación | Obligatorio en las etapas 1–2 | [Versión v1.4.0](https://github.com/78/xiaozhi-sf32/releases/tag/v1.4.0) | Para la configuración Nano R16N16 seleccione `sf32lb52-nano_52j.zip`. No mezcle archivos de placas distintas |
-| Código fuente `78/xiaozhi-sf32` | Commit [`1d3ef641ace47fae68227e9173647fd5db01f6f5`](https://github.com/78/xiaozhi-sf32/commit/1d3ef641ace47fae68227e9173647fd5db01f6f5) | Código de la aplicación y configuración de la placa | Obligatorio en las etapas 3–4 | [Repositorio](https://github.com/78/xiaozhi-sf32) | Esta es la instantánea de código fuente revisada para este artículo. Registre cualquier commit posterior como una nueva referencia y repita todas las puertas de validación |
-| Submódulo SiFli-SDK | Commit [`0d2de1480f735e05017c41436e655a1688063881`](https://github.com/OpenSiFli/SiFli-SDK/tree/0d2de1480f735e05017c41436e655a1688063881) | Controladores SF32, RTOS, middleware, scripts de herramientas y entorno de compilación SCons | Obligatorio en las etapas 3–4 | [OpenSiFli/SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) mediante el submódulo `sdk` del repositorio | Utilice la revisión del submódulo registrada por el commit de la aplicación seleccionado; no actualice el SDK de forma independiente dentro de una referencia conservada |
+| Firmware precompilado Xiaozhi SF32 | v1.4.0 | Imagen de referencia intacta para la configuración inicial y la recuperación | Obligatorio en las Etapas 1–2 | [Versión v1.4.0](https://github.com/78/xiaozhi-sf32/releases/tag/v1.4.0) | Para la configuración Nano R16N16 seleccione `sf32lb52-nano_52j.zip`. No mezcle archivos de placas distintas |
+| Código fuente `78/xiaozhi-sf32` | Commit [`1d3ef641ace47fae68227e9173647fd5db01f6f5`](https://github.com/78/xiaozhi-sf32/commit/1d3ef641ace47fae68227e9173647fd5db01f6f5) | Código de la aplicación y configuración de la placa | Obligatorio en las Etapas 3–4 | [Repositorio](https://github.com/78/xiaozhi-sf32) | Esta es la instantánea de código fuente revisada para este artículo. Registre cualquier commit posterior como una nueva referencia y repita todos los puntos de control |
+| Submódulo SiFli-SDK | Commit [`0d2de1480f735e05017c41436e655a1688063881`](https://github.com/OpenSiFli/SiFli-SDK/tree/0d2de1480f735e05017c41436e655a1688063881) | Controladores SF32, RTOS, middleware, scripts de herramientas y entorno de compilación SCons | Obligatorio en las Etapas 3–4 | [OpenSiFli/SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) mediante el submódulo `sdk` del repositorio | Utilice la revisión del submódulo registrada por el commit de la aplicación seleccionado; no actualice el SDK de forma independiente dentro de una referencia conservada |
 | Interfaz gráfica sftool | v1.2.1; conserve el SHA-256 del paquete para el sistema operativo elegido en la página de versiones | Grabación de imágenes precompiladas y recuperación local | Obligatoria para la ruta gráfica documentada de v1.4.0 | [Versión v1.2.1 y paquetes para cada plataforma](https://github.com/OpenSiFli/sftool-gui/releases/tag/v1.2.1) | Registre el sistema operativo del equipo, el nombre del paquete y su suma de comprobación. Valide las versiones posteriores antes de sustituirla |
-| Herramientas del equipo de desarrollo | Scripts de instalación/exportación del SiFli-SDK fijado; esos scripts crean el entorno SCons | Configuración y compilación desde el código fuente | Obligatorio en las etapas 3–4 | [Guía oficial de compilación de Xiaozhi desde el código fuente](https://docs.sifli.com/projects/xiaozhi/source-build/) | Registre sistema operativo, arquitectura, resultado del script y entorno exportado. Una herramienta instalada globalmente no debe reemplazar silenciosamente el entorno del SDK fijado |
+| Herramientas del equipo de desarrollo | Scripts de instalación/exportación del SiFli-SDK fijado; esos scripts crean el entorno SCons | Configuración y compilación desde el código fuente | Obligatorio en las Etapas 3–4 | [Guía oficial de compilación de Xiaozhi desde el código fuente](https://docs.sifli.com/projects/xiaozhi/source-build/) | Registre sistema operativo, arquitectura, resultado del script y entorno exportado. Una herramienta instalada globalmente no debe reemplazar silenciosamente el entorno del SDK fijado |
 | Consola y servicio en la nube de Xiaozhi | Servicio alojado en `xiaozhi.me`; registre la fecha de validación, quién es responsable de la cuenta, la configuración del agente y el endpoint | Activación, ASR/LLM/TTS en streaming y MCP en la nube | Obligatorio para los diálogos | [Consola de Xiaozhi](https://xiaozhi.me) | El servicio alojado no tiene una versión que el usuario pueda fijar. Trate su comportamiento, condiciones, disponibilidad y acceso regional como dependencias controladas externamente |
 
 </div>
@@ -144,7 +144,7 @@ Este flujo crea cuatro ámbitos de fallo que se deben diagnosticar por separado:
 4. Siga el flujo de activación oficial en la consola de Xiaozhi en [xiaozhi.me](https://xiaozhi.me): cree/configure un agente y añada el código del dispositivo que muestra la placa.
 5. Inicie un diálogo con la tecla de diálogo de la placa o con la ruta de activación configurada. Registre en el proyecto la versión del firmware, la placa, el modelo/sistema operativo del teléfono y el identificador de cuenta/agente del servicio.
 
-**Criterio de salida de la etapa 1:** tras un arranque en frío, el dispositivo establece PAN, se identifica como activado, acepta una solicitud de diálogo, reproduce la respuesta y presenta el estado de interfaz esperado.
+**Criterio de salida del punto de control 1:** tras un arranque en frío, el dispositivo establece PAN, se identifica como activado, acepta una solicitud de diálogo, reproduce la respuesta y presenta el estado de interfaz esperado.
 
 ## Etapa 2 — Demostrar la recuperación y el comportamiento crítico para el producto { #stage-2-prove-recovery-and-product-critical-behavior }
 
@@ -167,7 +167,7 @@ Ejecute estas pruebas antes de modificar el código fuente. Transforman la demos
 
 La guía oficial advierte que la curva `battery_table.c` predeterminada para cada placa puede ser inexacta con otra batería. Para la batería del producto, obtenga los datos de carga/descarga del proveedor o mídalos; actualice `charging_curve_table` y `discharge_curve_table`, vuelva a compilar y repita las pruebas de batería.
 
-**Criterio de salida de la etapa 2:** se registra el resultado de cada prueba, los fallos se distinguen por su ámbito y todas las rutas de recuperación documentadas funcionan sin volver a grabar el firmware ni corregir manualmente el estado.
+**Criterio de salida del punto de control 2:** se registra el resultado de cada prueba, los fallos se distinguen por su ámbito y todas las rutas de recuperación documentadas funcionan sin volver a grabar el firmware ni corregir manualmente el estado.
 
 ## Etapa 3 — Crear una referencia reproducible desde el código fuente { #stage-3-build-a-reproducible-source-baseline }
 
@@ -191,7 +191,7 @@ scons --board=sf32lb52-lchspi-ulp --board_search_path="../boards" -j8
 
 Consulte la página oficial de compilación específica de cada placa para usar el destino y el script de descarga exactos; no reutilice el nombre de placa ULP ni la ruta de artefactos generados con otra placa. Un registro de compilación reproducible debe incluir el sistema operativo del equipo, el resultado de instalar las herramientas, el entorno exportado, el argumento de placa, la revisión del repositorio/SDK, el registro de compilación, la imagen descargada y el registro de consola serie.
 
-**Criterio de salida de la etapa 3:** un checkout limpio en un segundo equipo —o después de borrar el directorio de compilación— genera una imagen que supera todas las comprobaciones de la etapa 2.
+**Criterio de salida del punto de control 3:** un checkout limpio en un segundo equipo —o después de borrar el directorio de compilación— genera una imagen que supera todas las comprobaciones de la Etapa 2.
 
 ## Etapa 4 — Adaptar de forma deliberada { #stage-4-adapt-deliberately }
 
@@ -215,7 +215,7 @@ Para MCP en el dispositivo, la guía oficial utiliza `McpServer::AddCommonTools(
 
 La documentación oficial de OTA por PAN describe tres tipos de imágenes que se pueden desplegar por separado: código, recursos gráficos y fuentes. Indica que se debe consultar la tabla de particiones para conocer la dirección y el tamaño de cada imagen. La OTA de producción necesita una política de versiones, control de acceso al servidor, validación de integridad, una prueba de interrupción y una ruta de recuperación por cable o local antes de habilitarla para los usuarios.
 
-**Criterio de salida de la etapa 4:** quedan registrados el cambio elegido, su ruta de reversión o recuperación y todos los resultados de regresión aplicables; el flujo de voz original y los límites de seguridad de las acciones del dispositivo siguen superando las pruebas.
+**Criterio de salida del punto de control 4:** quedan registrados el cambio elegido, su ruta de reversión o recuperación y todos los resultados de regresión aplicables; el flujo de voz original y los límites de seguridad de las acciones del dispositivo siguen superando las pruebas.
 
 ## Etapa 5 — Revisión de preparación del producto { #stage-5-product-readiness-review }
 
@@ -228,7 +228,7 @@ No pase a hardware propio hasta que el equipo pueda responder a todo lo siguient
 - ¿Cómo se recupera el dispositivo de una actualización fallida, la pérdida del teléfono, una interrupción de la nube, un recurso dañado o una configuración incorrecta?
 - ¿Qué partes del código de origen, el servicio, el comportamiento del modelo y la infraestructura OTA controla el equipo de producto y cuáles dependen de proveedores externos?
 
-**Criterio de salida de la etapa 5:** las respuestas, los responsables y los riesgos residuales están registrados y aceptados por el equipo de producto. Cada asunto sin resolver tiene una mitigación, una postergación explícita o una decisión de detenerse.
+**Criterio de salida del punto de control 5:** las respuestas, los responsables y los riesgos residuales están registrados y aceptados por el equipo de producto. Cada asunto sin resolver tiene una mitigación, una postergación explícita o una decisión de detenerse.
 
 ## Traspaso a la fase de diseño del producto { #handoff-to-product-design }
 

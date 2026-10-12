@@ -35,7 +35,7 @@ Wählen Sie SiFli-SDK, wenn Sie Folgendes benötigen:
 
 Die Seite [Erste Schritte mit SiFli-SDK](../../../getting-started/sifli/getting-started-sifli-sdk.md) richtet die Toolchain ein und prüft eine funktionierende `hello_world`-Referenz. Halten Sie danach SDK-Revision, ausgewähltes Board, Beispiel-/Projektverzeichnis, Konfiguration und die zugehörigen Build- und Flash-Artefakte gemeinsam in einem reproduzierbaren Build-Protokoll fest. Wenn der Board-Name keinen Core angibt, folgt das HCPU-Ausgabeverzeichnis häufig dem Muster `build_<board_name>_hcpu/`; für `sf32lb52-lcd_n16r8` lautet es beispielsweise `build_sf32lb52-lcd_n16r8_hcpu/`. Verwenden Sie das tatsächlich für das aufgelöste Board-/Core-Ziel erzeugte Verzeichnis, statt den Namen manuell zusammenzusetzen.
 
-Legen Sie für reproduzierbare Entwicklung einen SDK-Branch fest, dokumentieren Sie den Board-Namen, halten Sie lokale Board-Änderungen getrennt von den Herstellerdateien und nehmen Sie Konfigurationsänderungen in kleinen, überprüfbaren Schritten vor. Der detaillierte Ablauf zum Kompilieren, Flashen und Überwachen ist unter [Kompilieren, Flashen und Überwachen der seriellen Ausgabe](build-flash-monitor.md) beschrieben.
+Legen Sie für reproduzierbare Entwicklung einen SDK-Branch fest, dokumentieren Sie den Board-Namen, halten Sie lokale Board-Änderungen getrennt von den Herstellerdateien und nehmen Sie Konfigurationsänderungen in kleinen, überprüfbaren Schritten vor. Der detaillierte Ablauf zum Bauen, Flashen und Überwachen ist unter [Bauen, Flashen und Überwachen der seriellen Ausgabe](build-flash-monitor.md) beschrieben.
 
 ## Board-Namen { #board-names }
 
@@ -93,7 +93,7 @@ Beantworten Sie die folgenden Fragen, bevor Sie SiFli-SDK für einen Produkt-Bra
 
 ## Praktische nächste Seiten { #practical-next-pages }
 
-- [Kompilieren, Flashen und Überwachen der seriellen Ausgabe](build-flash-monitor.md)
+- [Bauen, Flashen und Überwachen der seriellen Ausgabe](build-flash-monitor.md)
 - [Board-Konfiguration](board-configuration.md)
 - [Komponenten und `sf-pkg`](components.md)
 - [Beispiele](../../examples/index.md) — das am besten passende, nachweislich funktionierende Beispiel wählen, bevor ein Subsystem angepasst wird.

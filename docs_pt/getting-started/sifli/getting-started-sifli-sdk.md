@@ -97,7 +97,7 @@ Para ter uma base reproduzível, use uma tag de versão publicada em vez de `mai
 
 ## Escolha o alvo da placa { #choose-the-board-target }
 
-O valor passado a `scons --board` é o nome do diretório da placa dentro de `customer/boards`. Escolha o alvo correspondente às configurações de memória e tela da sua placa. Os nomes abaixo diferenciam maiúsculas de minúsculas.
+O valor passado a `scons --board` é o nome do diretório da placa dentro de `customer/boards`. Escolha o alvo correspondente às configurações de memória e display da sua placa. Os nomes abaixo diferenciam maiúsculas de minúsculas.
 
 <div align="center" markdown>
 

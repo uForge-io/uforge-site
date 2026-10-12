@@ -15,7 +15,7 @@ SiFli-SDKのBluetooth例は、プロファイル、ロール、無線通信の�
 
 ## 製品に合ったBluetooth方式を選ぶ { #start-with-the-right-bluetooth-path }
 
-<div align="center"><em>表：Bluetooth SDK例の選定</em></div>
+<div align="center"><em>表: Bluetooth SDK例の選定</em></div>
 
 <div align="center" markdown>
 
@@ -48,7 +48,7 @@ SiFli-SDKのBluetooth例は、プロファイル、ロール、無線通信の�
 
 コンパニオンアプリのリンク、相互運用可能なGATTサービス、ビーコン、データ転送、BLEベースのOTAにはBLEの例を使用してください。まず必要な役割に合ったサンプルを選び、製品がその標準化されたサービスを必要とする場合にのみプロファイルの例を追加してください。
 
-<div align="center"><em>表：開発タスク別のBLE SDK例</em></div>
+<div align="center"><em>表: 開発タスク別のBLE SDK例</em></div>
 
 <div align="center" markdown>
 
@@ -70,7 +70,7 @@ SiFli-SDKのBluetooth例は、プロファイル、ロール、無線通信の�
 
 Classic Bluetoothのプロジェクトは、BR/EDRプロファイル、オーディオ、シリアル形式の通信、またはスマートフォン経由のIPネットワークを必要とする製品に適しています。開発ボード上での動作確認は出発点にすぎません。製品で使用する実際の相手機器とワークロードで相互運用性を検証してください。
 
-<div align="center"><em>表：開発タスク別のClassic Bluetooth SDK例</em></div>
+<div align="center"><em>表: 開発タスク別のClassic Bluetooth SDK例</em></div>
 
 <div align="center" markdown>
 
@@ -91,7 +91,7 @@ PANのネットワーキングモデルとスマートフォン側のセット�
 
 `zbt`プロジェクトでは、LE Audioの[Basic Audio Profile（BAP）](https://www.bluetooth.com/specifications/specs/basic-audio-profile-1-0-2/)に基づくブロードキャスト送信側と受信側の例を提供しています。送信側（Source）と受信側（Sink）を組み合わせてシステムとしてテストしてください。ブロードキャスト構成、オーディオソース、受信機、クロック構成、RF条件はすべて観測される結果に影響します。
 
-<div align="center"><em>表：LE Audioブロードキャスト SDK例</em></div>
+<div align="center"><em>表: LE AudioブロードキャストSDK例</em></div>
 
 <div align="center" markdown>
 
@@ -105,7 +105,7 @@ PANのネットワーキングモデルとスマートフォン側のセット�
 
 ## 例を超えた製品検証 { #product-validation-beyond-the-example }
 
-<div align="center"><em>表：Bluetooth例の製品適応チェック</em></div>
+<div align="center"><em>表: Bluetooth例の製品適応チェック</em></div>
 
 <div align="center" markdown>
 
@@ -114,7 +114,7 @@ PANのネットワーキングモデルとスマートフォン側のセット�
 | 無線の挙動 | サポートされているボードと、その例が意図するロールまたはプロファイル | アンテナ、筐体、到達範囲、RF共存、相手機器、規制適合性の試験計画 |
 | 接続ポリシー | 基準となるアドバタイズ、スキャン、または接続フロー | 製品のレイテンシ、消費電力の目標、再接続戦略、状態遷移 |
 | セキュリティ | 例のペアリングまたはボンディング設定 | 認証要件、鍵の保存、プライバシー、工場出荷時リセット、ユーザー向けの復旧 |
-| データとオーディオ | 実証されたパケットまたはストリームのフロー | データ形式とやり取りの仕様、エラー復旧、レイテンシ、バッファリング、コーデック構成、メモリのマージン |
+| データとオーディオ | 実証されたパケットまたはストリームのフロー | データ形式とやり取りの仕様、エラー復旧、レイテンシ、バッファリング、コーデック構成、メモリーのマージン |
 | 検証記録 | ビルド設定、ログ、期待される挙動 | 再現可能なスマートフォン/アクセサリの組み合わせ、消費電力の測定波形、切断からの復旧、回帰テスト |
 
 </div>
@@ -122,7 +122,7 @@ PANのネットワーキングモデルとスマートフォン側のセット�
 ## 関連リソース { #related-resources }
 
 - 製品レベルのロール、プロファイル、セキュリティ、接続パラメータ、共存に関する選択については[Bluetooth概要](overview.md)。
-- ホスト/コントローラの境界と電力挙動については[Bluetoothプロセッサアーキテクチャ](processor.md)。
+- ホスト/コントローラーの境界と電力挙動については[Bluetoothプロセッサーアーキテクチャ](processor.md)。
 - スマートフォンテザリングによるIPネットワーキングとPANベースのOTAについては[Bluetooth PAN](pan.md)。
 - Bluetoothオーディオ開発を補完する、ローカルキャプチャ、コーデック、再生の例については[オーディオSDKサンプル](../audio/audio-sdk-examples.md)。
 - 分野横断のSDK例カタログについては[サンプル](../../develop/examples/index.md)。

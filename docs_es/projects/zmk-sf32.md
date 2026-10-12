@@ -182,7 +182,7 @@ Separe los fallos por ámbito: matriz y cableado físico, enlace de derecha a iz
 
 **Evidencias que se deben conservar:** registro de placas y cableado, revisiones del repositorio derivado y del manifiesto, configuraciones generadas, hashes de las imágenes, registros de grabación y arranque, matriz completa de posiciones, resultados por capa, destino HID seleccionado y versiones del host/Studio.
 
-**Criterio de salida de la etapa 1:** dos arranques en frío reproducen las 38 posiciones, las tres capas, el enlace de derecha a izquierda entre mitades y al menos un destino HID del host; ambas mitades se pueden recuperar de manera independiente.
+**Criterio de salida del punto de control 1:** dos arranques en frío reproducen las 38 posiciones, las tres capas, el enlace de derecha a izquierda entre mitades y al menos un destino HID del host; ambas mitades se pueden recuperar de manera independiente.
 
 ## Etapa 2 — Validar entrada, transporte, ajustes y recuperación { #stage-2-validate-input-transport-settings-and-recovery }
 
@@ -204,18 +204,18 @@ Separe los fallos por ámbito: matriz y cableado físico, enlace de derecha a iz
 
 </div>
 
-**Criterio de salida de la etapa 2:** cada fallo aplicable tiene un resultado repetible de detección y recuperación; ninguna prueba deja un estado HID atascado; y los ajustes o las claves de vinculación pueden volver a la referencia registrada sin sustituir archivos sin seguimiento.
+**Criterio de salida del punto de control 2:** cada fallo aplicable tiene un resultado repetible de detección y recuperación; ninguna prueba deja un estado HID atascado; y los ajustes o las claves de vinculación pueden volver a la referencia registrada sin sustituir archivos sin seguimiento.
 
 ## Etapa 3 — Crear una configuración de referencia reproducible desde el código fuente { #stage-3-build-a-reproducible-source-baseline }
 
-**Objetivo:** permitir que otro ingeniero regenere ambas imágenes y repita la etapa 2 desde fuentes limpias.
+**Objetivo:** permitir que otro ingeniero regenere ambas imágenes y repita la Etapa 2 desde fuentes limpias.
 
 1. Empiece con una copia de trabajo limpia del repositorio derivado en el commit registrado y ejecute `west init`, `west update` y `west zephyr-export` sin sustituir módulos localmente.
 2. Guarde `west list`, las versiones del compilador y las herramientas, el `.config` generado, el devicetree generado, la salida de memoria, los registros de compilación y ambos artefactos con sus hashes.
-3. Grabe las imágenes etiquetadas de izquierda y derecha en las mitades correctas y repita todas las pruebas de la etapa 2.
+3. Grabe las imágenes etiquetadas de izquierda y derecha en las mitades correctas y repita todas las pruebas de la Etapa 2.
 4. Compare los artefactos y la configuración con el registro original; explique cualquier diferencia no reproducible antes de continuar.
 
-**Criterio de salida de la etapa 3:** un segundo entorno genera imágenes correctamente identificadas que superan la etapa 2 sin overlays sin seguimiento, resultados de compilación obsoletos ni revisiones de dependencias sin fijar.
+**Criterio de salida del punto de control 3:** un segundo entorno genera imágenes correctamente identificadas que superan la Etapa 2 sin overlays sin seguimiento, resultados de compilación obsoletos ni revisiones de dependencias sin fijar.
 
 ## Etapa 4 — Adaptar un límite del teclado cada vez { #stage-4-adapt-one-keyboard-boundary-at-a-time }
 
@@ -232,11 +232,11 @@ Separe los fallos por ámbito: matriz y cableado físico, enlace de derecha a iz
 | Studio | Un parámetro editable o una opción visible del diseño | Autorización, cambios válidos/no válidos, persistencia, desconexión, restauración y compatibilidad de versiones |
 | Transporte | Un destino USB/BLE o un cambio en la política de comunicación entre mitades | Enumeración, emparejamiento, claves de vinculación, cambio de perfil, reconexión entre mitades, prevención de teclas atascadas y corriente |
 | Gestión de energía | Un ajuste de reposo, reactivación, escaneo o radio | Corriente activa, inactiva y en reposo de cada mitad, latencia, todas las fuentes de reactivación, reconexión entre mitades y persistencia de ajustes |
-| Migración de dependencias | Actualizar ZMK, Zephyr, HAL o CherryUSB | Diferencia del manifiesto, compilaciones limpias, diferencias de configuración generada, todas las pruebas de etapa 2, corriente y reversión |
+| Migración de dependencias | Actualizar ZMK, Zephyr, HAL o CherryUSB | Diferencia del manifiesto, compilaciones limpias, diferencias de configuración generada, todas las pruebas de Etapa 2, corriente y reversión |
 
 </div>
 
-**Criterio de salida de la etapa 4:** el cambio se ha revisado, se pueden restaurar las imágenes y ajustes originales y se superan todas las pruebas aplicables de matriz, capas, comunicación entre mitades, USB, BLE, Studio, alimentación y recuperación.
+**Criterio de salida del punto de control 4:** el cambio se ha revisado, se pueden restaurar las imágenes y ajustes originales y se superan todas las pruebas aplicables de matriz, capas, comunicación entre mitades, USB, BLE, Studio, alimentación y recuperación.
 
 ## Etapa 5 — Revisión de preparación del producto { #stage-5-product-readiness-review }
 
@@ -250,7 +250,7 @@ Antes de diseñar una PCB de teclado personalizada o un prototipo con batería, 
 - ¿Se puede recuperar el producto sin abrirlo ni desecharlo si falla una actualización de dependencias, un cambio de Studio, una escritura de ajustes o una actualización en campo?
 - ¿Son aptos para la distribución prevista las licencias de ZMK/Zephyr, los archivos de PCB y carcasa, el contenido del mapa de teclas, los logotipos, las fuentes y cualquier configuración incluida?
 
-**Criterio de salida de la etapa 5:** todos los riesgos restantes tienen un responsable, evidencias y una decisión, y el equipo ha decidido expresamente continuar, aplazar o detenerse.
+**Criterio de salida del punto de control 5:** todos los riesgos restantes tienen un responsable, evidencias y una decisión, y el equipo ha decidido expresamente continuar, aplazar o detenerse.
 
 ## Traspaso a la fase de diseño del producto { #handoff-to-product-design }
 

@@ -8,7 +8,7 @@
 {# Shared assets (logo, images) live once at the site root; localized builds are
    nested under /<lang>/ and tools/dedupe-site-assets.py deletes their copies,
    so absolute asset URLs must use the root URL, not the per-language site_url. #}
-{% set root_url = site_url | replace("/zh/", "/") | replace("/ja/", "/") | replace("/es/", "/") | replace("/de/", "/") | replace("/fr/", "/") | replace("/pt/", "/") | replace("/ru/", "/") %}
+{% set root_url = site_url | replace("/zh/", "/") | replace("/ja/", "/") | replace("/es/", "/") | replace("/de/", "/") | replace("/fr/", "/") | replace("/pt/", "/") | replace("/ru/", "/") | replace("/ko/", "/") %}
 {% set absolute_image = page_image if "http" in page_image else (root_url ~ page_image) %}
 {% set is_home = page.url == "" %}
 {% set src_path = page.file.src_path if page.file and page.file.src_path else "" %}
@@ -16,7 +16,7 @@
 {% set is_checklist = "hardware_design_checklist" in src_path or "hardware_design_checklist" in page_url %}
 {% set is_internal = "about/others/" in src_path or "/about/others/" in page_url %}
 {% set content_language = config.theme.language | default("en", true) %}
-{% set home_labels = {"en": "Home", "zh": "首页", "ja": "ホーム", "es": "Inicio", "de": "Startseite", "fr": "Accueil", "pt": "Início", "ru": "Главная"} %}
+{% set home_labels = {"en": "Home", "zh": "首页", "ja": "ホーム", "es": "Inicio", "de": "Startseite", "fr": "Accueil", "pt": "Início", "ru": "Главная", "ko": "홈"} %}
 {% set home_label = home_labels[content_language] | default("Home", true) %}
 
 <meta property="og:type" content="{{ 'website' if is_home else 'article' }}">
@@ -26,7 +26,7 @@
 {% endif %}
 <meta property="og:url" content="{{ page_url }}">
 <meta property="og:site_name" content="{{ config.site_name }}">
-{% set og_locales = {"en": "en_US", "zh": "zh_CN", "ja": "ja_JP", "es": "es_ES", "de": "de_DE", "fr": "fr_FR", "pt": "pt_BR", "ru": "ru_RU"} %}
+{% set og_locales = {"en": "en_US", "zh": "zh_CN", "ja": "ja_JP", "es": "es_ES", "de": "de_DE", "fr": "fr_FR", "pt": "pt_BR", "ru": "ru_RU", "ko": "ko_KR"} %}
 <meta property="og:locale" content="{{ og_locales[content_language] | default('en_US', true) }}">
 <meta property="og:image" content="{{ absolute_image }}">
 <meta name="twitter:card" content="summary_large_image">

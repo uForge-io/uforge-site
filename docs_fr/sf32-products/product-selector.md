@@ -1,6 +1,6 @@
 ---
 icon: lucide/list-checks
-description: "Présélectionnez des puces et modules SF32 selon les contraintes du produit, puis validez le parcours d’intégration sur du matériel pris en charge."
+description: "Présélectionnez des puces et modules SF32 selon les contraintes du produit, puis validez le parcours d'intégration sur du matériel pris en charge."
 tags:
     - Matériel
     - Sélection

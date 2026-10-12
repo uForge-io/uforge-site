@@ -7,7 +7,7 @@ tags: [Desenvolvimento, SiFli-SDK, Notas de aplicação, EZIP]
 
 # Comprimir recursos gráficos com EZIP { #compress-graphics-assets-with-ezip }
 
-Use o utilitário incluído no ramo do SDK do seu alvo: `$SDK_ROOT/tools/png2ezip/ezip.exe`. Ele pode gerar dados binários EZIP/PIXEL ou arrays em C para LVGL. Antes de converter, confira o cabeçalho binário e o formato de pixel e escolha o comando correspondente. Se o hardware EZIP for descomprimir a imagem, siga o procedimento GZIP e a lista de verificação de integração no fim.
+Use o utilitário incluído no ramo do SDK do seu alvo: `$SDK_ROOT/tools/png2ezip/ezip.exe`. Ele pode gerar dados binários EZIP/PIXEL ou arrays em C para LVGL. Antes de converter, confira o cabeçalho binário e o formato de pixel e escolha o comando correspondente. Se o hardware EZIP for descomprimir a imagem, siga o procedimento GZIP e o checklist de integração no fim.
 
 !!! note "Escopo por família"
     Estes são guias separados, específicos de cada família. Para saber quais formatos de entrada e saída são suportados e como a ferramenta se comporta, siga o guia da família do dispositivo-alvo e use a ferramenta incluída no respectivo ramo do SDK. Não infira o suporte de uma família com base no guia de outra.
@@ -145,7 +145,7 @@ Passe todo o conteúdo GZIP após o prefixo de quatro bytes com o tamanho ao des
 
 ## Checklist de integração { #integration-checklist }
 
-Para cada recurso gráfico, registre o PNG de origem, a linha de comando, o formato de cor/canal alfa, o arquivo gerado, a seção do linker e a configuração da tela de destino; depois, valide a renderização na placa. Se o recurso ficar em Flash externa, coordene a seção e a posição no sistema de arquivos com [Uso de Flash externa](external-flash.md).
+Para cada recurso gráfico, mantenha o PNG de origem, a linha de comando, o formato de cor/canal alfa, o arquivo gerado, a seção do linker e a configuração do display de destino; depois, valide a renderização na placa. Se o recurso ficar em Flash externa, coordene a seção e a posição no sistema de arquivos com [Uso de Flash externa](external-flash.md).
 
 ## Fontes oficiais { #official-sources }
 

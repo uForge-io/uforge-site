@@ -125,7 +125,7 @@ cd example/get-started/hello_world/rtt/project
 scons --board=sf32lb52-lcd_n16r8 -j8
 ```
 
-Remplacez `sf32lb52-lcd_n16r8` par le nom de votre carte. Consultez la [liste des cartes prises en charge](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html) pour connaître les autres noms disponibles. `-j8` lance 8 tâches de compilation en parallèle ; adaptez ce nombre à votre machine. La commande ci-dessus omet le suffixe du cœur : elle construit donc HCPU et place les binaires dans `build_sf32lb52-lcd_n16r8_hcpu/`. Si vous indiquez une cible avec le suffixe `_lcpu`, le répertoire de sortie se termine également par `_lcpu`.
+Remplacez `sf32lb52-lcd_n16r8` par le nom de votre carte. Consultez la [liste des cartes prises en charge](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html) pour connaître les autres noms disponibles. `-j8` lance 8 tâches de compilation en parallèle ; adaptez ce nombre à votre machine. La commande ci-dessus omet le suffixe du cœur : elle compile donc la configuration HCPU et place les binaires dans `build_sf32lb52-lcd_n16r8_hcpu/`. Si vous indiquez une cible avec le suffixe `_lcpu`, le répertoire de sortie se termine à la place par `_lcpu`.
 
 !!! tip "Besoin de réglages personnalisés ?"
     Exécutez `sdk.py menuconfig --board=<board_name>` depuis le répertoire du projet pour ouvrir le menu de configuration interactif. Appuyez deux fois sur ++esc++, puis choisissez d'enregistrer la configuration lorsque le menu vous y invite.

@@ -41,8 +41,8 @@
   {% set offline = config.extra.offline and config.extra.offline.enabled %}
   {% if config.extra.alternate is iterable and not offline %}
     {# hreflang URLs must be fully qualified (Google ignores relative ones). #}
-    {% set hreflang_root = (config.site_url | default("", true)) | replace("/zh/", "/") | replace("/ja/", "/") | replace("/es/", "/") | replace("/de/", "/") | replace("/fr/", "/") | replace("/pt/", "/") | replace("/ru/", "/") %}
-    {% set locale_prefixes = {"en": "", "zh": "/zh", "ja": "/ja", "es": "/es", "de": "/de", "fr": "/fr", "pt": "/pt", "ru": "/ru"} %}
+    {% set hreflang_root = (config.site_url | default("", true)) | replace("/zh/", "/") | replace("/ja/", "/") | replace("/es/", "/") | replace("/de/", "/") | replace("/fr/", "/") | replace("/pt/", "/") | replace("/ru/", "/") | replace("/ko/", "/") %}
+    {% set locale_prefixes = {"en": "", "zh": "/zh", "ja": "/ja", "es": "/es", "de": "/de", "fr": "/fr", "pt": "/pt", "ru": "/ru", "ko": "/ko"} %}
     {% for alt in config.extra.alternate %}
       {% set target = (locale_prefixes[alt.lang] | d("", true)) ~ "/" ~ page.url %}
       <link rel="alternate" href="{{ hreflang_root ~ target[1:] }}" hreflang="{{ alt.lang | d(lang.t('language')) }}">

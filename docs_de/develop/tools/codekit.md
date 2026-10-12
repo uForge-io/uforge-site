@@ -41,7 +41,7 @@ CodeKit stellt eine Oberfläche für den SDK-Workflow bereit, ersetzt das SDK je
 
 Falls eine CodeKit-Aktion fehlschlägt, reproduzieren Sie nach Möglichkeit den zugrunde liegenden SDK-Befehl. Das macht Fehlerberichte klarer und hilft, Erweiterungsprobleme von SDK-Problemen zu unterscheiden.
 
-Verwenden Sie [SiFli-SDK](../platforms/sifli-sdk/overview.md), um die unterstützte Basis auszuwählen, und [Kompilieren, Flashen und Überwachen der seriellen Ausgabe](../platforms/sifli-sdk/build-flash-monitor.md), um die entsprechenden Schritte über die Kommandozeile zu dokumentieren. Beginnen Sie mit einem passenden [SDK-Beispiel](../examples/index.md), bevor Sie ein CodeKit-Projekt anpassen.
+Verwenden Sie [SiFli-SDK](../platforms/sifli-sdk/overview.md), um die unterstützte Basis auszuwählen, und [Bauen, Flashen und Überwachen der seriellen Ausgabe](../platforms/sifli-sdk/build-flash-monitor.md), um die entsprechenden Schritte über die Kommandozeile zu dokumentieren. Beginnen Sie mit einem passenden [SDK-Beispiel](../examples/index.md), bevor Sie ein CodeKit-Projekt anpassen.
 
 ## Betriebsmodell { #operational-model }
 
@@ -74,7 +74,7 @@ Dies ermöglicht es, eine GUI-Aktion bei Bedarf über die Kommandozeile zu repro
 | SDK nicht gefunden | SDK-Wurzelverzeichnis erneut auswählen und die vollständige SDK-Installation bestätigen. |
 | Build schlägt fehl | Dasselbe Projekt nach Möglichkeit mit `scons` reproduzieren. |
 | Flashen schlägt fehl, obwohl die Erstinbetriebnahme mit der Referenzkonfiguration funktioniert | Board und Ausgabe des Projekts mit der funktionierenden Referenzkonfiguration vergleichen. Anschließend prüfen, ob der Port belegt ist, und den Download-Modus kontrollieren. |
-| Monitor zeigt unverständliche Zeichen | Baudrate und ausgewählten Port bestätigen. |
+| Monitor zeigt unleserliche Zeichen | Baudrate und ausgewählten Port bestätigen. |
 | UI-Befehl fehlt | Die Befehlspalette verwenden und nach `SiFli` suchen. |
 
 </div>

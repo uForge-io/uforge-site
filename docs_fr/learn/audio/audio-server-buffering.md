@@ -7,7 +7,7 @@ tags:
 
 # Audio Server et mise en tampon { #audio-server-and-buffering }
 
-Après avoir choisi l'interface audio et défini son usage dans le produit à partir de la [Vue d’ensemble de l’audio](overview.md), consultez cette page pour comprendre la collaboration à l'exécution entre le code applicatif, les sessions Audio Server, les tampons DMA et la chaîne audio matérielle.
+Après avoir choisi l'interface audio et défini son usage dans le produit à partir de la [Vue d'ensemble de l'audio](overview.md), consultez cette page pour comprendre la collaboration à l'exécution entre le code applicatif, les sessions Audio Server, les tampons DMA et la chaîne audio matérielle.
 
 **Périmètre des comportements propres au SDK :** les détails d'API ci-dessous sont documentés pour SF32LB52x dans la version actuelle du SDK SiFli. Vérifiez-les dans `audio_server.h`, l'implémentation et la configuration de la famille de puces et de la version du SDK visées. Les conseils sur la taille des tampons, l'ordonnancement et le cache relèvent des pratiques d'ingénierie ; Audio Server ne garantit pas un comportement ni une propriété des tampons identiques sur toutes les cibles.
 
@@ -33,7 +33,7 @@ Séparez la logique de contrôle de l'application du mécanisme de transmission.
 
 Si le pilote le permet, le double tampon est un bon point de départ : le DMA transfère une zone pendant que le logiciel prépare les données de lecture ou traite les données capturées dans l'autre. Distinguez la file PCM de l'application du tampon DMA du pilote. Une écriture vers Audio Server ne prouve pas, à elle seule, que le transfert DMA se fait sans copie.
 
-N'augmentez la capacité de la file que si la latence du stockage, le temps de décodage, la gigue du transport Bluetooth ou les variations d'ordonnancement l'exigent. La capacité consomme de la mémoire ; la quantité d'audio réellement en attente détermine le temps d'attente. Réserver davantage de tampons n'augmente pas automatiquement la latence. Utilisez les calculs par trames de la [Vue d’ensemble de l’audio](overview.md#buffer-and-latency-budget), en tenant compte du nombre de canaux et des octets stockés par échantillon.
+N'augmentez la capacité de la file que si la latence du stockage, le temps de décodage, la gigue du transport Bluetooth ou les variations d'ordonnancement l'exigent. La capacité consomme de la mémoire ; la quantité d'audio réellement en attente détermine le temps d'attente. Réserver davantage de tampons n'augmente pas automatiquement la latence. Utilisez les calculs par trames de la [Vue d'ensemble de l'audio](overview.md#buffer-and-latency-budget), en tenant compte du nombre de canaux et des octets stockés par échantillon.
 
 Mesurez la durée du bloc, le temps maximal de préparation ou de traitement et la latence de bout en bout acceptable. Déterminez chaque échéance à partir des notifications du pilote cible pour le remplissage du tampon et la fin du transfert, ainsi que de l'ordre de réutilisation des tampons. Si le pilote propose des callbacks de demi-transfert et de transfert complet, planifiez le traitement autour de ces transitions ; ne considérez pas la fin du transfert en cours comme l'unique échéance. Les données de lecture doivent être prêtes avant que le DMA en ait besoin ; les données enregistrées doivent être traitées ou copiées avant qu'il ne les écrase. Prévoyez une marge d'ordonnancement et recherchez la cause de tout manque de données dans le tampon de lecture (underrun) et de tout débordement du tampon d'enregistrement (overrun), même si ces cas sont rares.
 

@@ -49,12 +49,12 @@ Antes de diseñar una placa propia, puede utilizarse para validar conjuntamente 
 
 </div>
 
-La fuente de SiFli presenta una discrepancia para V1.0.0: la sección de versiones del módulo identifica SF32LB586VDD36, mientras que la sección de versiones de la placa indica SF32LB587VEE56 para una placa con el módulo N16R32N1-V1.0.0. Comprueba las marcas del chip y del módulo en el hardware y consulta los archivos de diseño correspondientes antes de elegir el firmware o confiar en una configuración de almacenamiento.
+La fuente de SiFli presenta una discrepancia para V1.0.0: la sección de versiones del módulo identifica SF32LB586VDD36, mientras que la sección de versiones de la placa indica SF32LB587VEE56 para una placa con el módulo N16R32N1-V1.0.0. Compruebe las marcas del chip y del módulo en el hardware y consulte los archivos de diseño correspondientes antes de elegir el firmware o confiar en una configuración de almacenamiento.
 
 ## Aspectos destacados de la placa { #board-highlights }
 
 - Módulo SF32LB58-MOD-N16R32N1 o SF32LB58-MOD-A128R32N1, según la versión de la placa
-- La V1.0.1 usa SF32LB586VDD36, con dos memorias HPI-PSRAM de 16 MB y 1 MB de QSPI-NOR en el encapsulado; la fuente de SiFli presenta una discrepancia sobre el MCU de la V1.0.0 (véase la nota de versión anterior)
+- La V1.0.1 usa SF32LB586VDD36, con dos memorias HPI-PSRAM de 16 MB y 1 MB de QSPI-NOR en el encapsulado; la fuente de SiFli presenta una discrepancia sobre la MCU de la V1.0.0 (consulte la nota de versión anterior)
 - 16 MB de QSPI-NOR o 128 MB de QSPI-NAND adicionales, según la variante del módulo
 - Cristal principal de 48 MHz y cristal RTC de 32,768 kHz
 - Conector de antena IPEX y red de adaptación de RF del módulo
@@ -69,7 +69,7 @@ La fuente de SiFli presenta una discrepancia para V1.0.0: la sección de version
 
 ## Cuándo usar esta placa { #when-to-use-this-board }
 
-Elige SF32LB58-DevKit-LCD si necesitas una plataforma práctica y cercana a una configuración de producto real para validar pantallas de altas prestaciones y periféricos, en lugar de una placa de expansión básica.
+Elija SF32LB58-DevKit-LCD si necesita una plataforma práctica y cercana a una configuración de producto real para validar pantallas de altas prestaciones y periféricos, en lugar de una placa de expansión básica.
 
 - Poner en marcha paneles de pantalla MIPI DSI, RGB888 o QSPI
 - Validar táctil, audio, almacenamiento y USB juntos
@@ -78,7 +78,7 @@ Elige SF32LB58-DevKit-LCD si necesitas una plataforma práctica y cercana a una 
 - Comparar configuraciones de módulo respaldadas por NOR y NAND
 - Validar el firmware en una placa de altas prestaciones antes de diseñar la PCB propia
 
-Para planificar la integración a nivel de módulo, revisa también [SF32LB58-MOD](../modules/SF32LB58-MOD.md). Para conocer la arquitectura de la familia de chips y sus capacidades de pantalla y memoria, consulta [SF32LB58x](../chips/SF32LB58x.md).
+Para planificar la integración a nivel de módulo, revise también [SF32LB58-MOD](../modules/SF32LB58-MOD.md). Para conocer la arquitectura de la familia de chips y sus capacidades de pantalla y memoria, consulte [SF32LB58x](../chips/SF32LB58x.md).
 
 ## Configuración de hardware { #hardware-configuration }
 
@@ -89,7 +89,7 @@ Para planificar la integración a nivel de módulo, revisa también [SF32LB58-MO
 | Área | Configuración |
 | :--- | :--- |
 | Módulo núcleo | SF32LB58-MOD-N16R32N1 o SF32LB58-MOD-A128R32N1 |
-| MCU según revisión de la placa | V1.0.1: SF32LB586VDD36; V1.0.0: discrepancia en la fuente de SiFli (véase la nota de versión anterior) |
+| MCU según revisión de la placa | V1.0.1: SF32LB586VDD36; V1.0.0: discrepancia en la fuente de SiFli (consulte la nota de versión anterior) |
 | Memoria en el encapsulado (V1.0.1) | 16 MB + 16 MB de HPI-PSRAM y 1 MB de QSPI-NOR |
 | Almacenamiento adicional | 16 MB de QSPI-NOR o 128 MB de QSPI-NAND, según la variante del módulo |
 | Pantalla | Soporte de panel MIPI DSI, DPI/RGB888 y QSPI |
@@ -100,7 +100,7 @@ Para planificar la integración a nivel de módulo, revisa también [SF32LB58-MO
 | Antena | Ruta de RF del módulo con conector IPEX |
 | Expansión | Dos conectores de 40 pines para el núcleo principal y el de bajo consumo |
 | Controles y puntos de prueba | Dos botones de usuario (HOME/reinicio por pulsación larga y función), botón RESET independiente, puente MODE y puntos de prueba UART/USB/CAN |
-| Conversión de potencia | Convertidores DC-DC en la placa. El historial SiFli de V1.0.1 registra el reemplazo de un convertidor para reducir el rizado de salida, pero no identifica el componente; confirma la revisión exacta en el esquema/BOM. |
+| Conversión de potencia | Convertidores DC-DC en la placa. El historial SiFli de V1.0.1 registra el reemplazo de un convertidor para reducir el rizado de salida, pero no identifica el componente; confirme la revisión exacta en el esquemático/BOM. |
 | Dimensiones de la placa / temperatura de funcionamiento | 65 × 50 mm / −40 a 85 °C |
 
 </div>
@@ -124,29 +124,29 @@ Para planificar la integración a nivel de módulo, revisa también [SF32LB58-MO
 
 ### Configuración básica { #basic-setup }
 
-1. Conecta el panel de pantalla al conector LCD correspondiente.
-2. Conecta el puerto USB-UART Type-C al ordenador host.
-3. Abre la herramienta de descarga de SiFli y selecciona el puerto COM correcto.
-4. Coloca o retira el puente Mode según quieras usar el modo de descarga o el modo de funcionamiento normal.
-5. Enciende la placa y descarga o ejecuta el firmware objetivo.
-6. Después de poner en marcha la pantalla, valida el tacto, el audio, el almacenamiento y los periféricos de expansión que necesite el producto.
+1. Conecte el panel de pantalla al conector LCD correspondiente.
+2. Conecte el puerto USB-UART Type-C al ordenador host.
+3. Abra la herramienta de descarga de SiFli y seleccione el puerto COM correcto.
+4. Coloque o retire el puente Mode según quiera usar el modo de descarga o el modo de funcionamiento normal.
+5. Encienda la placa y descargue o ejecute el firmware objetivo.
+6. Después de poner en marcha la pantalla, valide el tacto, el audio, el almacenamiento y los periféricos de expansión que necesite el producto.
 
-Usa un cable USB compatible con la transferencia de datos. Algunos cables Type-C solo suministran alimentación y no permiten la comunicación UART ni USB.
+Use un cable USB compatible con la transferencia de datos. Algunos cables Type-C solo suministran alimentación y no permiten la comunicación UART ni USB.
 
 ## Alimentación { #power }
 
 SF32LB58-DevKit-LCD se alimenta desde USB Type-C.
 
 - Ambos conectores USB Type-C de la placa pueden alimentarla
-- Para descargar firmware y consultar los registros UART, usa el puerto USB-UART Type-C
-- Planifica el uso del puerto USB 2.0 HS Type-C por separado al validar funciones USB nativas
+- Para descargar firmware y consultar los registros UART, use el puerto USB-UART Type-C
+- Planifique el uso del puerto USB 2.0 HS Type-C por separado al validar funciones USB nativas
 
 ## Descarga y depuración { #download-and-debug }
 
 El puerto USB-UART Type-C es la interfaz principal para descargar firmware y consultar los registros serie.
 
-- **Modo de descarga**: instala el puente Mode y, a continuación, enciende o reinicia la placa
-- **Modo de depuración y registro de software**: retira el puente Mode y, a continuación, enciende o reinicia la placa
+- **Modo de descarga**: instale el puente Mode y, a continuación, encienda o reinicie la placa
+- **Modo de depuración y registro de software**: retire el puente Mode y, a continuación, encienda o reinicie la placa
 
 La placa también admite depuración J-Link / SWD.
 
@@ -161,7 +161,7 @@ La placa también admite depuración J-Link / SWD.
 
 ## Objetivos de compilación del SDK { #sdk-build-targets }
 
-La configuración de compilación de SiFli-SDK usa estos nombres exactos de destino de placa; utiliza el nombre correspondiente con `scons --board=<board_name>`:
+La configuración de compilación de SiFli-SDK usa estos nombres exactos de destino de placa; utilice el nombre correspondiente con `scons --board=<board_name>`:
 
 - `sf32lb58-lcd_a128r32n1_dsi`
 - `sf32lb58-lcd_a128r32n1_qspi`
@@ -170,11 +170,11 @@ La configuración de compilación de SiFli-SDK usa estos nombres exactos de dest
 - `sf32lb58-lcd_n16r32n1_qspi`
 - `sf32lb58-lcd_n16r64n4`
 
-Son identificadores de destinos de compilación del SDK, no necesariamente los nombres de producto impresos en la placa o el módulo. El índice [Supported Boards](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/index.html) y el [`build_config_gcc.yaml`](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml) de la rama principal no enumeran exactamente los mismos destinos de la serie 58; confirma los datos para la revisión del SDK que utilizas. Además, la actual [guía de modelos de placas](https://wiki.sifli.com/en/board/devkit_guide.html) no incluye un SKU físico correspondiente a `sf32lb58-lcd_n16r64n4`.
+Son identificadores de destinos de compilación del SDK, no necesariamente los nombres de producto impresos en la placa o el módulo. El índice [Supported Boards](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/index.html) y el [`build_config_gcc.yaml`](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml) de la rama principal no enumeran exactamente los mismos destinos de la serie 58; confirme los datos para la revisión del SDK que utilice. Además, la actual [guía de modelos de placas](https://wiki.sifli.com/en/board/devkit_guide.html) no incluye un SKU físico correspondiente a `sf32lb58-lcd_n16r64n4`.
 
 ## Señales clave de módulo y expansión { #key-module-and-expansion-signals }
 
-La placa expone tanto señales a nivel de módulo como dos conectores de expansión de 40 pines. Consulta la hoja de datos del módulo y los esquemas para ver la asignación completa de pines. La tabla siguiente resume los grupos de señales más relevantes para el diseño.
+La placa expone tanto señales a nivel de módulo como dos conectores de expansión de 40 pines. Consulte la hoja de datos del módulo y los esquemáticos para ver la asignación completa de pines. La tabla siguiente resume los grupos de señales más relevantes para el diseño.
 
 <div align="center"><em>Grupos de señales funcionales clave</em></div>
 
@@ -209,7 +209,7 @@ La documentación de SiFli indica que se admiten las siguientes configuraciones 
 - Paneles QSPI con resolución de hasta 512 × 512
 
 !!! warning "Número de líneas MIPI DSI"
-    La asignación del conector de 30 pines de la placa enumera D0–D3, pero la guía de la placa y el SDK documentan un máximo de dos líneas de datos. No deduzcas compatibilidad con cuatro líneas solo por las etiquetas del conector. Comprueba el cableado para el panel y la revisión exactos antes de usarlo.
+    La asignación del conector de 30 pines de la placa enumera D0–D3, pero la guía de la placa y el SDK documentan un máximo de dos líneas de datos. No deduzca compatibilidad con cuatro líneas solo por las etiquetas del conector. Compruebe el cableado para el panel y la revisión exactos antes de usarlo.
 
 ![Referencia de cableado de pantalla MIPI](assets/sf32lb58x/58KIT-MIPI-J0202.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — Referencia de cableado de pantalla MIPI</em></div>
@@ -229,7 +229,7 @@ La placa admite:
 - Dos salidas de altavoz
 - Una ruta de señal PDM multiplexada con las señales RGB; por tanto, no está disponible mientras se utiliza la interfaz de pantalla RGB
 
-La [guía detallada de la placa](https://wiki.sifli.com/en/board/sf32lb58x/SF32LB58-DevKit-LCD.html) de SiFli indica una salida de audio analógico estéreo de hasta 2,8 W/4 Ω, mientras que su [guía de modelos de placas](https://wiki.sifli.com/en/board/devkit_guide.html) especifica 3 W/4 Ω para las dos salidas de altavoz. Ninguna de las fuentes aclara si la potencia se aplica a cada canal o al conjunto. Antes de elegir altavoces, comprueba la revisión exacta de la placa, el esquema y las condiciones de alimentación y carga del amplificador; no consideres ninguna de las cifras una potencia garantizada por canal.
+La [guía detallada de la placa](https://wiki.sifli.com/en/board/sf32lb58x/SF32LB58-DevKit-LCD.html) de SiFli indica una salida de audio analógico estéreo de hasta 2,8 W/4 Ω, mientras que su [guía de modelos de placas](https://wiki.sifli.com/en/board/devkit_guide.html) especifica 3 W/4 Ω para las dos salidas de altavoz. Ninguna de las fuentes aclara si la potencia se aplica a cada canal o al conjunto. Antes de elegir altavoces, compruebe la revisión exacta de la placa, el esquemático y las condiciones de alimentación y carga del amplificador; no considere ninguna de las cifras una potencia garantizada por canal.
 
 ![Referencia de cableado de audio](assets/sf32lb58x/58KIT-AUDIO-CONN2.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — Referencia de cableado de audio</em></div>
@@ -252,8 +252,8 @@ La placa también admite un módulo Wi-Fi SDIO a través del conector de expansi
 ![Referencia de cableado Wi-Fi SDIO](assets/sf32lb58x/58KIT-SDIO-WIFI-CONN1.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — Referencia de cableado Wi-Fi SDIO</em></div>
 
-![Esquema Wi-Fi SDIO de referencia](assets/sf32lb58x/ATK-RTL8189-SDIO-WIFI-SCH.png){ loading="lazy" }
-<div align="center"><em>Esquema Wi-Fi SDIO de referencia</em></div>
+![Esquemático Wi-Fi SDIO de referencia](assets/sf32lb58x/ATK-RTL8189-SDIO-WIFI-SCH.png){ loading="lazy" }
+<div align="center"><em>Esquemático Wi-Fi SDIO de referencia</em></div>
 
 ## Documentos relacionados { #related-documents }
 

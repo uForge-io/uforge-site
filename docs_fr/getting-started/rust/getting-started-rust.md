@@ -8,7 +8,7 @@ tags:
 
 # Rust { #rust }
 
-[OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs) fournit un HAL et un PAC en Rust, ainsi que des fonctions liées aux tables de flash pour les microcontrôleurs SiFli. Ses mainteneurs indiquent que le projet est encore en cours de développement et n'est pas prêt pour la production. Ce guide définit donc un **point de départ pour l'évaluation**, et non un processus de développement de firmware destiné à la production.
+[OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs) fournit un HAL et un PAC en Rust, ainsi que des travaux sur les tables de flash pour les microcontrôleurs SiFli. Ses mainteneurs indiquent que le projet est encore en cours de développement et n'est pas prêt pour la production. Ce guide définit donc une **configuration de référence pour l'évaluation**, et non un processus de développement de firmware destiné à la production.
 
 Avant de commencer, suivez le guide [Premiers pas avec SiFli-SDK](../sifli/getting-started-sifli-sdk.md) sur la même carte. Vous disposerez ainsi d'une liaison série et d'une procédure de récupération déjà validées si l'expérience Rust ne peut pas être flashée ou déboguée.
 
@@ -42,7 +42,7 @@ Le répertoire d'exemples contient la configuration de cible Cargo, la dispositi
 
 ## Configurer le lanceur de flashage { #configure-the-flash-runner }
 
-Le dépôt documente `sftool` comme lanceur de flashage habituel. Dans `examples/sf32lb52x/.cargo/config.toml`, configurez le runner pour utiliser le port USB-UART de la carte, conformément au guide de flashage et débogage actuel. Le modèle documenté est :
+Le dépôt indique `sftool` comme runner de flashage habituel. Dans `examples/sf32lb52x/.cargo/config.toml`, configurez le runner pour utiliser le port USB-UART de la carte, conformément au guide actuel de flashage et de débogage. Le modèle documenté est :
 
 ```toml
 runner = 'sftool -c SF32LB52 -p <Your_Port> --compat write_flash'

@@ -2,7 +2,7 @@
 icon: lucide/book-check
 hide:
     - navigation
-description: "Hardware-Design-Leitfaden für den SF32LB52x MCU: Geräteübersicht, Designablauf und Links zu Schaltplan-, PCB-Layout-, Review- und Checklisten-Seiten."
+description: "Hardware-Design-Leitfaden für die SF32LB52x-MCU-Familie mit Geräteübersicht, Designablauf sowie Verweisen auf Schaltplan-, PCB-Layout- und Review-Checklisten."
 tags:
     - Hardware
     - Chip
@@ -12,86 +12,86 @@ tags:
 
 ## 1. Einführung { #1-introduction }
 
-Dieser Hardware-Design-Leitfaden bietet Designempfehlungen und quellenbasiertes Referenzmaterial für Produkte auf Basis der SF32LB52x-Familie besonders stromsparender AIoT-Mikrocontroller. Er richtet sich an Hardware-Ingenieure, PCB-Designer und Produktentwickler, die batteriebetriebene Wearable-Geräte und andere kompakte eingebettete Systeme entwickeln.
+Dieser Hardware-Design-Leitfaden enthält Designempfehlungen und quellenbasierte Referenzinformationen für Produkte mit Mikrocontrollern der besonders energieeffizienten SF32LB52x-AIoT-Familie. Er richtet sich an Hardware-Ingenieure, PCB-Designer und Produktentwickler, die akkubetriebene Wearables und andere kompakte eingebettete Systeme entwickeln.
 
-Der Leitfaden deckt den gesamten Hardware-Entwicklungsprozess ab, einschließlich Stromversorgungsdesign, Taktschaltungen, RF-Layout, Display- und Speicherschnittstellen, Audioschaltungen, PCB-Layout-Empfehlungen und Fertigungsaspekte. Die Einhaltung dieser Richtlinien hilft, das Entwicklungsrisiko zu verringern, die Systemzuverlässigkeit zu verbessern und den Produktentwicklungszyklus zu verkürzen.
+Der Leitfaden behandelt den gesamten Hardware-Entwicklungsprozess: Stromversorgungsdesign, Taktschaltungen, RF-Layout, Display- und Speicherschnittstellen, Audioschaltungen, PCB-Layout und Fertigung. Wenn Sie die Empfehlungen berücksichtigen, können Sie Entwicklungsrisiken senken, die Systemzuverlässigkeit erhöhen und die Produktentwicklung verkürzen.
 
-Dieses Dokument setzt ein grundlegendes Verständnis von eingebettetem Hardwaredesign und Schaltplanerfassung voraus. Es ergänzt das SF32LB52x-Datenblatt, das Referenzhandbuch und die SDK-Dokumentation, die weiterhin maßgeblich für detaillierte elektrische Spezifikationen, Peripheriebetrieb und Softwareentwicklung sind.
+Dieses Dokument setzt Grundkenntnisse im Embedded-Hardwaredesign und in der Schaltplanerstellung voraus. Es ergänzt das SF32LB52x-Datenblatt, das Referenzhandbuch und die SDK-Dokumentation. Für detaillierte elektrische Spezifikationen, den Betrieb der Peripherie und die Softwareentwicklung bleiben diese Quellen maßgeblich.
 
-Der Leitfaden führt zwei ursprüngliche Hardware-Anwendungshinweise von SiFli in einem gemeinsamen Entwicklungsablauf zusammen: einen für die batteriebetriebenen SF32LB520/3/5/7 und einen für die extern geregelt versorgten 52B/D/E/G/J. Bei uneinheitlichen Formulierungen in den Quellen legt er Wert auf genaue Bestellnummern, eine eindeutige Beschreibung der Versorgungsdomänen und verständliche Angaben für die Prüfung vor der Freigabe.
+Der Leitfaden fasst zwei ursprüngliche Hardware-Anwendungshinweise von SiFli in einem gemeinsamen Entwicklungsablauf zusammen: einen für die akkubetriebenen SF32LB520/3/5/7 und einen für die extern geregelten 52B/D/E/G/J. Wo die Quellen unterschiedlich formuliert sind, stellt dieser Leitfaden die genaue Bestellnummer, das Verhalten der einzelnen Versorgungsschienen und klare Prüfkriterien für die Freigabe in den Vordergrund.
 
 ## 2. Entwicklungsressourcen { #2-development-resources }
 [SF32LB52x Product Brief]: https://downloads.sifli.com/user%20manual/PB5201-SF32LB52x-Product%20Brief.pdf
 [SF32LB52x Datasheet]: https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf
-[SF32LB52x-Referenzhandbuch]: https://downloads.sifli.com/user%20manual/UM5201-SF32LB52x-User%20Manual%20V0p8p4.pdf
+[SF32LB52x Reference Manual]: https://downloads.sifli.com/user%20manual/UM5201-SF32LB52x-User%20Manual%20V0p8p4.pdf
 [SF32LB52x Hardware Design Guide (520/3/5/7)]: https://wiki.sifli.com/en/hardware/SF32LB520-3-5-7-HW-Application.html
 [SF32LB52x Hardware Design Guide (52B/D/E/G/J)]: https://wiki.sifli.com/en/hardware/SF32LB52B-E-G-J-HW-Application.html
 [SF32LB52-MOD-1]: ../../sf32-products/modules/SF32LB52-MOD-1.md
-[KiCad-Dateien]: https://github.com/OpenSiFli/kicad-libraries
-[Muster bestellen]: https://sifli.taobao.com/
-[Entwicklungskits kaufen]: https://sifli.taobao.com/
-[Liste der von SiFli freigegebenen Lieferanten]: ../cad-components/sifli-approved-vendor-list.md
-[Liste der von SiFli freigegebenen Lieferanten (AVL)]: https://downloads.sifli.com/hardware/files/documentation/SIFLI-MCU-AVL-%E8%AE%A4%E8%AF%81%E8%A1%A8-V0.3-20260121.xlsx
+[KiCad Files]: https://github.com/OpenSiFli/kicad-libraries
+[Buy Samples]: https://sifli.taobao.com/
+[Buy Dev Kits]: https://sifli.taobao.com/
+[SiFli Approved Vendor List]: ../cad-components/sifli-approved-vendor-list.md
+[SiFli Approved Vendor List (AVL)]: https://downloads.sifli.com/hardware/files/documentation/SIFLI-MCU-AVL-%E8%AE%A4%E8%AF%81%E8%A1%A8-V0.3-20260121.xlsx
 
 <div class="grid cards" markdown>
 
 - :fontawesome-solid-file-pdf: __[SF32LB52x-Produktübersicht][SF32LB52x Product Brief]__
 - :fontawesome-solid-file-pdf: __[SF32LB52x-Datenblatt][SF32LB52x Datasheet]__
-- :fontawesome-solid-file-pdf: __[SF32LB52x-Referenzhandbuch]__
+- :fontawesome-solid-file-pdf: __[SF32LB52x-Referenzhandbuch][SF32LB52x Reference Manual]__
 - :fontawesome-solid-file-lines: __[SF32LB52x-Hardware-Design-Leitfaden (520/3/5/7)][SF32LB52x Hardware Design Guide (520/3/5/7)]__
 - :fontawesome-solid-file-lines: __[SF32LB52x-Hardware-Design-Leitfaden (52B/D/E/G/J)][SF32LB52x Hardware Design Guide (52B/D/E/G/J)]__
-- :fontawesome-solid-file-excel: __[Liste der von SiFli freigegebenen Lieferanten (AVL)]__
-- :fontawesome-solid-cart-shopping: __[Muster bestellen]__
-- :fontawesome-solid-cart-shopping: __[Entwicklungskits kaufen]__
-- :fontawesome-brands-github: __[KiCad-Dateien]__
+- :fontawesome-solid-file-excel: __[Liste der von SiFli freigegebenen Lieferanten (AVL)][SiFli Approved Vendor List (AVL)]__
+- :fontawesome-solid-cart-shopping: __[Muster bestellen][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[Entwicklungsboards kaufen][Buy Dev Kits]__
+- :fontawesome-brands-github: __[KiCad-Dateien][KiCad Files]__
 - :fontawesome-solid-sim-card: __[SF32LB52-MOD-1]__
 
 </div>
 
 ## 3. Geräteübersicht { #3-device-overview }
 
-Die SF32LB52x-Familie kombiniert Dual-Core-STAR-MC1-Prozessoren, Bluetooth-Konnektivität, Grafikbeschleunigung, integriertes Audio, Display-Schnittstellen, Speichercontroller und Power-Management in einem kompakten QFN68-Gehäuse. Die Familie ist für Produkte optimiert, bei denen BOM-Kosten, Akkulaufzeit und PCB-Fläche gleichermaßen wichtig sind.
+Die SF32LB52x-Familie vereint zwei STAR-MC1-Prozessorkerne, Bluetooth, Grafikbeschleunigung, integrierte Audiofunktionen, Display-Schnittstellen, Speichercontroller und Power-Management in einem kompakten QFN68-Gehäuse. Sie eignet sich besonders für Produkte, bei denen Stücklistenkosten, Akkulaufzeit und Leiterplattenfläche gleichermaßen zählen.
 
 ### 3.1. Merkmale { #31-features }
 
 Die Familie integriert:
 
-- Dual-Core-Arm-China-STAR-MC1-Prozessoren, kompatibel mit Arm Cortex-M33 und mit FPU und MPU ausgestattet
-- Dual-Mode-Bluetooth-5.3-Funkeinheit
-- ePicasso-2.0-2D/2.5D-Grafikbeschleuniger
-- Display-Controller mit Unterstützung für SPI-, QSPI-, 8080-, JDI- und 8-Bit-EPD-Schnittstellen
-- USB-2.0-Full-Speed-Gerät
+- Zwei STAR-MC1-Prozessorkerne von Arm China, kompatibel mit Arm Cortex-M33 und mit FPU und MPU ausgestattet
+- Dual-Mode-Bluetooth-Funktechnik nach Bluetooth 5.3
+- ePicasso 2.0: 2D/2.5D-Grafikbeschleunigung
+- Display-Controller für SPI-, QSPI-, 8080-, JDI- und 8-Bit-EPD-Schnittstellen
+- USB-2.0-Full-Speed-Device
 - SDIO/eMMC-Speicherschnittstelle bei unterstützten Varianten
 - Analoge und digitale Audioschnittstellen
-- Integrierte PMU, DC/DC-Wandler und LDO-Regler
+- Integrierte PMU sowie DC/DC-Wandler und LDO-Regler
 - QFN68-Gehäuse mit bis zu 44/45 GPIOs
 
 ### 3.2. Varianten { #32-variants }
 
-Die SF32LB52x-Familie ist nach Stromversorgungsarchitektur in zwei praktische Design-Gruppen unterteilt: batteriebetriebene Geräte und Geräte mit extern geregelter Versorgung, wie unten dargestellt.
+Je nach Stromversorgungsarchitektur lässt sich die SF32LB52x-Familie in zwei Designgruppen einteilen: akkubetriebene Geräte und Geräte mit externer, geregelter Versorgung.
 
-=== "SF32LB520/3/5/7 (batteriebetrieben)"
+=== "SF32LB520/3/5/7 (akkubetrieben)"
 
-    Diese Gruppe integriert ein **Lademanagement-Modul und eine PMU** auf dem Chip. Sie kann direkt an einen einzelligen Lithium-Akku angeschlossen werden und unterstützt auch externe Ladelösungen.
+    Diese Gruppe verfügt über ein integriertes **Lademanagement-Modul und eine PMU**. Sie kann direkt an einen Lithium-Akku mit einer Zelle angeschlossen werden; externe Ladelösungen werden ebenfalls unterstützt.
 
-    <div align="center"><em>Tabelle 3.2-1: Modellübersicht (batteriebetriebene Variante)</em></div>
+    <div align="center"><em>Tabelle 3.2-1: Modellübersicht (akkubetriebene Variante)</em></div>
 
     <div align="center" markdown>
 
     | Modell | Speicher im selben Gehäuse | Versorgung | Design-Hinweis |
     |:---|:---|:---|:---|
-    | SF32LB520U36 | 1 MB QSPI-NOR-Flash | Li-Ion-Batterie, 3,2–4,7 V, wiederaufladbar | Startet standardmäßig aus dem Flash-Speicher im selben Gehäuse; `VDD18_VOUT` benötigt eine externe 3,3-V-Versorgung |
-    | SF32LB523UB6 | 4 MB OPI-PSRAM | Li-Ion-Batterie, 3,2–4,7 V, wiederaufladbar | Muss von externem Speicher booten |
-    | SF32LB525UC6 | 8 MB OPI-PSRAM | Li-Ion-Batterie, 3,2–4,7 V, wiederaufladbar | Muss von externem Speicher booten |
-    | SF32LB527UD6 | 16 MB OPI-PSRAM | Li-Ion-Batterie, 3,2–4,7 V, wiederaufladbar | Muss von externem Speicher booten |
+    | SF32LB520U36 | 1 MB QSPI-NOR-Flash | Li-Ion-Akku, 3,2–4,7 V, wiederaufladbar | Bootet standardmäßig vom integrierten Flash; `VDD18_VOUT` benötigt eine externe 3,3-V-Versorgung |
+    | SF32LB523UB6 | 4 MB OPI-PSRAM | Li-Ion-Akku, 3,2–4,7 V, wiederaufladbar | Muss von externem Speicher booten |
+    | SF32LB525UC6 | 8 MB OPI-PSRAM | Li-Ion-Akku, 3,2–4,7 V, wiederaufladbar | Muss von externem Speicher booten |
+    | SF32LB527UD6 | 16 MB OPI-PSRAM | Li-Ion-Akku, 3,2–4,7 V, wiederaufladbar | Muss von externem Speicher booten |
 
     </div>
 
-=== "52B/D/E/G/J (extern geregelt versorgt)"
+=== "52B/D/E/G/J (extern geregelte Versorgung)"
 
-    Diese Gruppe integriert die **PMU** auf dem Chip, enthält jedoch keine Ladeschaltung. Sie wird von einer geregelten externen Versorgung gespeist.
+    Diese Gruppe verfügt über eine integrierte **PMU**, jedoch nicht über eine Ladeschaltung. Die Versorgung erfolgt über eine externe Spannungsquelle mit geregelter Ausgangsspannung.
 
-    <div align="center"><em>Tabelle 3.2-2: Modellübersicht (extern geregelte Variante)</em></div>
+    <div align="center"><em>Tabelle 3.2-2: Modellübersicht (Variante mit externer Versorgung)</em></div>
 
     <div align="center" markdown>
 
@@ -120,7 +120,7 @@ Beide Design-Gruppen verwenden dasselbe QFN68-Gehäuse.
 
 </div>
 
-Die beiden Design-Gruppen unterscheiden sich geringfügig bei den Peripherieressourcen. Die batteriebetriebene Gruppe hat 44 GPIOs, während die extern geregelte Gruppe 45 GPIOs hat; der Unterschied ergibt sich aus den für das Laden reservierten Pins bei den batteriebetriebenen Geräten.
+Die Peripherieressourcen unterscheiden sich zwischen den beiden Designgruppen geringfügig: Die akkubetriebenen Varianten bieten 44 GPIOs, die extern versorgten 45. Bei den akkubetriebenen Varianten ist ein Pin für die Ladefunktion reserviert.
 
 - 44/45 GPIOs
 - 3x UART
@@ -132,11 +132,11 @@ Die beiden Design-Gruppen unterscheiden sich geringfügig bei den Peripherieress
 - 1x PDM-Audioschnittstelle
 - 1x differenzieller analoger Audioausgang
 - 1x unsymmetrischer analoger Audioeingang
-- SPI-Displayschnittstelle mit einer, zwei oder vier Datenleitungen, serielle JDI-Display-Schnittstelle
+- SPI-Displayschnittstelle mit einer, zwei oder vier Datenleitungen sowie serielle JDI-Display-Schnittstelle
 - Unterstützt Displays mit und ohne GRAM
 - Unterstützt UART-Download und Software-Debugging
 
-Die folgenden Abbildungen zeigen die Pinbelegung. Die Unterschiede werden im Abschnitt zum Schaltplanentwurf erneut behandelt.
+Die folgenden Abbildungen zeigen die Pinbelegung der beiden Gruppen. Auf die Unterschiede wird im Abschnitt zum Schaltplanentwurf nochmals eingegangen.
 
 ![Abbildung 3.3-1: QFN68L-Pin-Layout für SF32LB520/3/5/7](../../sf32-products/chips/assets/52xA/sf32lb52x-A-package-layout.png){ width="100%" loading="lazy" }
 
@@ -148,25 +148,25 @@ Die folgenden Abbildungen zeigen die Pinbelegung. Die Unterschiede werden im Abs
 
 ### 3.4. Anwendungen { #34-applications }
 
-Typische Anwendungen sind tragbare eingebettete Systeme, bei denen lange Akkulaufzeit und kompakte Bauformen wesentlich sind. Beispiele umfassen:
+Typische Einsatzbereiche sind kompakte, mobile Embedded-Systeme mit hohen Anforderungen an die Akkulaufzeit, zum Beispiel:
 
-- Einsteiger-Smartwatches und Fitness-Armbänder
+- Smartwatches der Einstiegsklasse und Fitness-Armbänder
 - Bluetooth-Module und drahtlose Adapter
 - Bluetooth-Audio-Zubehör
-- Smarte Sensoren und Wearable-Geräte
+- Intelligente Sensoren und Wearables
 - Elektronische Regaletiketten und Smart Badges
 - E-Book-Reader
 - Tragbare Etikettendrucker
-- eBike- und eScooter-Displays
+- Displays für E-Bikes und E-Scooter
 - Vernetzte Mensch-Maschine-Schnittstellen (HMI)
-- Tragbare Industrie- und Medizingeräte
-- Andere batteriebetriebene AIoT-Geräte
+- Mobile Industrie- und Medizingeräte
+- Weitere akkubetriebene AIoT-Geräte
 
 ## 4. Design im Überblick { #4-design-at-a-glance }
 
 ### 4.1. Hardware-Architektur { #41-hardware-architecture }
 
-Die folgende Tabelle fasst die empfohlene Hardware-Architektur für eine typische SF32LB52x-Anwendung zusammen. Nutzen Sie sie als Kurzreferenz, bevor Sie die detaillierten Designhinweise in den späteren Abschnitten lesen.
+Die folgende Tabelle gibt einen kompakten Überblick über die empfohlene Hardware-Architektur einer typischen SF32LB52x-Anwendung. Sie dient als Orientierung für die detaillierten Designhinweise in den folgenden Abschnitten.
 
 <div align="center"><em>Tabelle 4.1-1: Zusammenfassung „Design im Überblick“</em></div>
 
@@ -176,13 +176,13 @@ Die folgende Tabelle fasst die empfohlene Hardware-Architektur für eine typisch
 |:---|:---|
 | Gehäuse | QFN68L, 7 mm x 7 mm x 0,85 mm, 0,35 mm Pitch |
 | PCB | 4-Lagen-PTH-PCB empfohlen |
-| Stromversorgung | einzellige Li-Ion-/Li-Po-Batterie oder geregelte externe Versorgung, abhängig von der Gerätevariante |
-| Batterieladung | In unterstützten Varianten integrierter Lader oder externer Lade-IC mit oder ohne Power-Path-Management (PPM) |
+| Stromversorgung | einzelliger Li-Ion-/Li-Po-Akku oder geregelte externe Versorgung, abhängig von der Gerätevariante |
+| Akkuladung | In unterstützten Varianten integrierter Lader oder externer Lade-IC mit oder ohne Power-Path-Management (PPM) |
 | Buck-Induktivität | 4,7 µH ±20 %, DCR ≤ 0,4 Ω, Isat ≥ 450 mA |
 | Quarz | 48-MHz-Hauptquarz und 32,768-kHz-RTC-Quarz |
 | RF | 50-Ω-Leitung mit kontrolliertem Wellenwiderstand und reserviertem π-Anpassnetzwerk |
 | Display | 3-Draht-SPI, 4-Draht-SPI, Dual-SPI, Quad-SPI (bis 512 x 512), JDI und 8-Bit-EPD |
-| Touch | kapazitiver I2C-Touch-Controller mit Aufwecken per Interrupt |
+| Touch | kapazitiver I2C-Touch-Controller; das System kann per Interrupt aufgeweckt werden |
 | Speicher | SiP-Flash/PSRAM, externes SPI-NOR, SPI-NAND, SD-NAND oder eMMC, abhängig von der Variante |
 | Audio | Analoger Mikrofoneingang, differenzieller DAC-Ausgang, externer PA |
 | Sensoren | I2C-/SPI-Sensoren wie Beschleunigungssensor, Gyroskop, Erdmagnetfeldsensor, Herzfrequenzsensor, SpO2-Sensor und EKG-Sensor |
@@ -194,7 +194,7 @@ Die folgende Tabelle fasst die empfohlene Hardware-Architektur für eine typisch
 
 ### 4.2. Hardware-Designablauf { #42-hardware-design-flow }
 
-Folgen Sie dem Leitfaden in der Reihenfolge, in der Hardwareentscheidungen üblicherweise festgelegt werden. Der folgende Ablauf hält frühe Architekturentscheidungen sichtbar, bevor das Design in Schaltplan- und PCB-Details übergeht.
+Gehen Sie den Leitfaden in der Reihenfolge durch, in der die zentralen Hardwareentscheidungen üblicherweise getroffen werden. So bleiben die Architekturentscheidungen geklärt, bevor Sie den Schaltplan und das PCB-Layout ausarbeiten.
 
 <div align="center"><em>Tabelle 4.2-1: Hardware-Designablauf</em></div>
 
@@ -202,48 +202,48 @@ Folgen Sie dem Leitfaden in der Reihenfolge, in der Hardwareentscheidungen übli
 
 | Schritt | Design-Entscheidung | Primäre Abschnitte |
 |:---|:---|:---|
-| 1 | Exaktes bestellbares Gerät und Stromversorgungsvariante wählen | Geräteübersicht, Variantenauswahl |
-| 2 | Gehäuse, GPIO-Anzahl und Pins mit fester Funktion bestätigen | Gehäuse, Schaltplan-Designrichtlinien |
-| 3 | Minimalsystem festlegen: Power-Tree, Boot-Speicher, Bootstrap-Pins, Debug-Zugang, Takte und Wake-Strategie | Minimalsystem-Design, Speicher, Debug, Takterzeugung |
-| 4 | RF-Topologie, Display, Audio, Sensoren und übrige Produktschnittstellen auswählen | Takterzeugung, RF, Benutzerschnittstellen, Speicher und Konnektivität |
-| 5 | PCB-Stack-up, Fanout, Impedanz und Routing störungsempfindlicher Signale überprüfen | PCB-Layout-Richtlinien |
-| 6 | Mit Referenzschaltplänen, PCB-Layouts, Mechanikzeichnungen und Versorgungsdiagrammen aus den Quellen abgleichen | Anhänge A-E |
-| 7 | Zugang für Bring-up, Debug, Kalibrierung und Produktionstest reservieren | Debug, Produktion, Design-Review-Checkliste |
+| 1 | Die konkrete bestellbare Variante und die passende Stromversorgung auswählen | Geräteübersicht, Variantenauswahl |
+| 2 | Gehäuse, GPIO-Anzahl und Pins mit fest zugewiesenen Funktionen bestätigen | Gehäuse, Schaltplan-Designrichtlinien |
+| 3 | Das Minimalsystem festlegen: Stromversorgungsstruktur, Boot-Speicher, Bootstrap-Pins, Debug-Zugang, Taktquellen und Aufwachstrategie | Minimalsystem-Design, Speicher, Debug, Takterzeugung |
+| 4 | RF-Topologie, Display, Audio, Sensoren und weitere Produktschnittstellen auswählen | Takterzeugung, RF, Benutzerschnittstellen, Speicher und Konnektivität |
+| 5 | PCB-Stack-up, Fanout, Impedanz und Routing störungsempfindlicher Signale prüfen | PCB-Layout-Richtlinien |
+| 6 | Den Entwurf mit den in den Quellen enthaltenen Referenzschaltplänen, PCB-Layouts, Mechanikzeichnungen und Versorgungsdiagrammen abgleichen | Anhänge A–E |
+| 7 | Zugänge für Inbetriebnahme, Debugging, Kalibrierung und Produktionstests vorsehen | Debug, Produktion, Design-Review-Checkliste |
 
 </div>
 
-**Design-Entscheidungsbaum**
+**Auswahlhilfe**
 
-- Benötigen Sie Betrieb mit einem einzelligen Akku, der über USB geladen wird? Beginnen Sie mit `SF32LB520/3/5/7`.
-- Benötigen Sie eine extern geregelte Versorgung oder eMMC-Boot? Beginnen Sie mit `52B/D/E/G/J`.
-- Benötigen Sie 8-Bit-paralleles EPD? Verwenden Sie den extern geregelten Designpfad, sofern SiFli den batteriebetriebenen Pfad nicht ausdrücklich für das konkrete Design bestätigt.
-- Benötigen Sie den niedrigsten Standby-Strom? Entscheiden Sie über Schalten der Speicherversorgung, Lastschalter für Sensoren und Trennung der Displayversorgung, bevor die PCB-Platzierung beginnt.
+- Soll das Gerät mit einem über USB aufladbaren Einzelzellen-Akku betrieben werden? Beginnen Sie mit `SF32LB520/3/5/7`.
+- Ist eine extern geregelte Versorgung oder das Booten von eMMC erforderlich? Beginnen Sie mit `52B/D/E/G/J`.
+- Wird ein paralleles 8-Bit-EPD benötigt? Folgen Sie dem Designpfad für extern versorgte Varianten, sofern SiFli nicht ausdrücklich bestätigt, dass der akkubetriebene Pfad für den konkreten Entwurf geeignet ist.
+- Ist ein möglichst niedriger Standby-Strom entscheidend? Legen Sie Schalter für die Speicherversorgung und Sensoren sowie die Abschaltung der Displayversorgung fest, bevor Sie die Bauteile auf dem PCB platzieren.
 
 ### 4.3. Verwendung dieses Leitfadens { #43-how-to-use-this-guide }
 
-Legen Sie vor Beginn des Schaltplanentwurfs die genaue Bestellnummer fest. Die SF32LB52x-Familie gliedert sich in zwei Gruppen: `SF32LB520/3/5/7` für Batteriebetrieb und `52B/D/E/G/J` für extern geregelte Versorgung. Wählen Sie die Gruppe anhand von Abschnitt 3.2. Prüfen Sie das Minimalsystem und die Stromversorgung in den Abschnitten 5.1 und 5.2 sowie den Boot-Speicher und den Debug-Zugang in den Abschnitten 5.6.1 und 5.7.1. Die Abschnitte 5 und 6 behandeln Schaltplan und PCB. Vergleichen Sie den Entwurf mit den Referenzabbildungen in den Anhängen A–E und nutzen Sie Abschnitt 7 als Checkliste vor der Freigabe.
+Legen Sie vor Beginn des Schaltplanentwurfs die genaue Bestellnummer fest. Die SF32LB52x-Familie umfasst zwei praktische Designgruppen: `SF32LB520/3/5/7` für Akkubetrieb und `52B/D/E/G/J` für extern geregelte Versorgung. Wählen Sie die passende Gruppe anhand von Abschnitt 3.2. Prüfen Sie das Minimalsystem und die Stromversorgung in den Abschnitten 5.1 und 5.2 sowie Boot-Speicher und Debug-Zugang in den Abschnitten 5.6.1 und 5.7.1. Die Abschnitte 5 und 6 enthalten die Schaltplan- und PCB-Layout-Hinweise. Gleichen Sie den Entwurf mit den Referenzabbildungen in den Anhängen A–E ab und verwenden Sie Abschnitt 7 als Freigabe-Checkliste.
 
-Wenn ein Design einen älteren SF32LB52x-Schaltplan wiederverwendet, prüfen Sie zuerst die Versorgungs-Pins, die SiP-Speicherversorgung, die Boot-Speicher-Schiene, die DBG_UART-/SWD-Pins, die Quarzlast, den RF-Anpassungs-Footprint und die Produktionstestpunkte. Diese Punkte sind die häufigsten Quellen für Probleme bei der Inbetriebnahme, die bei der Prüfung leicht übersehen werden.
+Wenn Sie einen älteren SF32LB52x-Schaltplan wiederverwenden, prüfen Sie zuerst die Versorgungspins, die Versorgung des SiP-Speichers, die Versorgung des Boot-Speichers, die DBG_UART-/SWD-Pins, die Quarzbeschaltung, das RF-Anpassnetzwerk-Footprint und die Produktionstestpunkte. Fehler an diesen Stellen führen besonders häufig zu Problemen bei der Inbetriebnahme und werden bei einer oberflächlichen Prüfung leicht übersehen.
 
 ### 4.4. Nachweispaket für die Designprüfung { #44-review-evidence-pack }
 
-Sammeln Sie vor der Hardware-Freigabe das Schaltplan-PDF, den PCB-Stack-up, den Impedanzbericht, den Bauteil-AVL-Abgleich, den DRC-Bericht sowie Screenshots der RF-, Quarz-, USB-, SDIO-/eMMC-, Audio-, Power- und Boot-Speicher-Layouts. Bewahren Sie die Nachweise zusammen mit der Board-Revision auf, damit spätere Firmware-, RF- und Produktionsprobleme auf die geprüfte Hardware-Baseline zurückverfolgt werden können.
+Stellen Sie vor der Hardwarefreigabe die Nachweise zusammen: Schaltplan-PDF, PCB-Stack-up, Impedanzbericht, Abgleich der Bauteile mit der AVL, DRC-Bericht sowie Screenshots der RF-, Quarz-, USB-, SDIO-/eMMC-, Audio-, Stromversorgungs- und Boot-Speicher-Layouts. Archivieren Sie diese Unterlagen mit der jeweiligen Board-Revision. So lassen sich spätere Firmware-, RF- oder Fertigungsprobleme auf den geprüften Hardwarestand zurückführen.
 
 
 ## 5. Checklisten verwenden { #using-the-checklists }
 
-Dieser Leitfaden bietet Checklisten auf zwei Ebenen. Die Kurzchecklisten in den Abschnitten 5.1.1.5, 5.5.3 und 7 enthalten die risikoreichsten Punkte für eine schnelle technische Selbstprüfung. Die [Schaltplan-Checkliste](SF32LB52x_schematic_checklist.md) (Abschnitt 5.8) und die [PCB-Layout-Checkliste](SF32LB52x_pcb_layout_checklist.md) (Abschnitt 6.15) geben SiFlis vollständige [*SF32LB52 Schematic & PCB Checklist*][SiFli SF32LB52 Schematic & PCB Checklist (XLSX)] (V1.0, 2026-01-21) Punkt für Punkt wieder. Sie wurde zusammen mit dem Hardware-Design-Leitfaden auf [SiFlis Wiki][SiFli Chip Hardware Design Guide Index (Wiki)] veröffentlicht und deckt sowohl die batteriebetriebenen SF32LB520/3/5/7 als auch die extern versorgten SF32LB52B/D/E/G/J ab.
+Dieser Leitfaden enthält Checklisten auf zwei Ebenen. Die kompakten Prüflisten in den Abschnitten 5.1.1.5, 5.5.3 und 7 heben die wichtigsten Risiken für eine schnelle technische Selbstprüfung hervor. Die [Schaltplan-Checkliste](SF32LB52x_schematic_checklist.md) (Abschnitt 5.8) und die [PCB-Layout-Checkliste](SF32LB52x_pcb_layout_checklist.md) (Abschnitt 6.15) bilden SiFlis vollständige [*SF32LB52 Schematic & PCB Checklist*][SiFli SF32LB52 Schematic & PCB Checklist (XLSX)] (V1.0, 2026-01-21) Punkt für Punkt ab. Die Checkliste wurde zusammen mit dem Hardware-Design-Leitfaden im [SiFli-Wiki][SiFli Chip Hardware Design Guide Index (Wiki)] veröffentlicht. Sie gilt sowohl für die akkubetriebenen SF32LB520/3/5/7 als auch für die extern versorgten 52B/D/E/G/J.
 
-Jeder Prüfpunkt nennt die zutreffenden SF32LB52x-Varianten und seine Kategorie: erforderlich (muss vor der Freigabe bestanden werden) oder optional (empfohlen, wenn die Funktion genutzt wird). „Alle Varianten“ umfasst SF32LB520/3/5/7 und SF32LB52B/D/E/G/J, sofern kein engerer Geltungsbereich angegeben ist. Farbiger Text und Text mit <span class="flag-red flag-yellow">gelbem Hintergrund</span> erhalten die Hervorhebungen der ursprünglichen Tabelle. Da die Quelle ihre Gründe nicht erläutert, sind sie als zusätzliche Prüfhinweise zu verstehen; nicht hervorgehobene Punkte derselben Tabelle bleiben ebenso zu prüfen. Die Checklisten behalten bewusst das Tabellenlayout bei. Ist eine Formulierung unvollständig, widersprüchlich oder zu knapp, ziehen Sie den Design-Leitfaden, das Datenblatt, das Referenzhandbuch und SiFlis Modellnummern-Richtlinien hinzu.
+Jeder Prüfpunkt nennt die zutreffenden SF32LB52x-Varianten und ist als erforderlich (muss vor der Freigabe erfüllt sein) oder optional (bei Nutzung der betreffenden Funktion empfohlen) gekennzeichnet. „Alle Varianten“ umfasst SF32LB520/3/5/7 und 52B/D/E/G/J, sofern der Geltungsbereich nicht weiter eingeschränkt ist. Farbige Schrift und <span class="flag-red flag-yellow">gelb hinterlegte Textstellen</span> übernehmen die Hervorhebungen aus der ursprünglichen Tabelle. Da die Quelle die Gründe für einzelne Hervorhebungen nicht nennt, sollten Sie diese als zusätzliche Prüfsignale verstehen, nicht als Ersatz für die übrigen Prüfpunkte. Das Tabellenformat der Quelle bleibt bewusst erhalten. Ist eine Formulierung unvollständig, widersprüchlich oder zu knapp, ziehen Sie zusätzlich den Design-Leitfaden, das Datenblatt, das Referenzhandbuch und SiFlis Modellnummern-Richtlinien heran.
 
-Führen Sie die [Schaltplan-Checkliste](SF32LB52x_schematic_checklist.md) während des Schaltplan-Reviews durch, bevor das PCB-Layout beginnt. Führen Sie die [PCB-Layout-Checkliste](SF32LB52x_pcb_layout_checklist.md) während des Layout-Reviews durch, bevor die Gerber-Freigabe erfolgt. In der Praxis wird jeder Durchlauf üblicherweise zweimal durchgeführt: zuerst durch den Design-Ingenieur, dann durch einen unabhängigen Prüfer vor dem Design-Freeze oder der Fertigungsfreigabe.
+Bearbeiten Sie die [Schaltplan-Checkliste](SF32LB52x_schematic_checklist.md) bei der Schaltplanprüfung, bevor Sie mit dem PCB-Layout beginnen. Verwenden Sie die [PCB-Layout-Checkliste](SF32LB52x_pcb_layout_checklist.md) bei der Layoutprüfung vor der Gerber-Freigabe. Üblicherweise wird jede Prüfung zweimal durchgeführt: zuerst durch den zuständigen Entwicklungsingenieur und anschließend durch eine unabhängige prüfende Person, jeweils vor dem Design-Freeze oder der Fertigungsfreigabe.
 
-Für beste Ergebnisse behandeln Sie die Checkliste als Abnahmeprotokoll und nicht als bloße Lesecheckliste:
+Am nützlichsten ist die Checkliste als Abnahmeprotokoll, nicht als reine Leseliste:
 
-1. Bestätigen Sie zunächst die genaue Zielvariante des Mikrocontrollers, insbesondere wenn der Entwurf sowohl mit 520/3/5/7 als auch mit 52B/D/E/G/J umgesetzt werden könnte.
-2. Markieren Sie jeden Punkt während des Reviews als bestanden/nicht bestanden/nicht zutreffend, anstatt die Tabelle nur passiv zu lesen.
-3. Wo ein Prüfpunkt auf Boot-Medium, Displaytyp oder Power-Switch-Verhalten verweist, prüfen Sie ihn anhand des tatsächlichen Schaltplans und des passenden Subsystem-Kapitels im Design-Leitfaden.
-4. Bei jedem mehrdeutigen Quelltext dokumentieren Sie die exakte Teilenummer und die Design-Annahme in den Review-Notizen vor der Freigabe.
+1. Bestätigen Sie zuerst die genaue Zielvariante des Mikrocontrollers, besonders wenn der Entwurf sowohl mit 520/3/5/7 als auch mit 52B/D/E/G/J umgesetzt werden könnte.
+2. Kennzeichnen Sie jeden Punkt bei der Prüfung als bestanden, nicht bestanden oder nicht zutreffend, statt die Tabelle nur durchzulesen.
+3. Verweist ein Prüfpunkt auf das Boot-Medium, den Displaytyp oder das Schaltverhalten der Stromversorgung, gleichen Sie ihn mit dem tatsächlichen Schaltplan und dem passenden Kapitel des Design-Leitfadens ab.
+4. Halten Sie bei jeder mehrdeutigen Formulierung in der Quelle die genaue Teilenummer und die zugrunde gelegte Designannahme vor der Freigabe in den Prüfnotizen fest.
 
 <div align="center"><em>Tabelle 5-1: Review-Protokollvorlage</em></div>
 
@@ -274,16 +274,16 @@ Für beste Ergebnisse behandeln Sie die Checkliste als Abnahmeprotokoll und nich
 [SiFli SF32LB52 Schematic & PCB Checklist (XLSX)]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx
 [SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/en/hardware/index.html
 
-## 6. Weiter im Design-Leitfaden { #continue-the-design-guide }
+## 6. Weitere Seiten des Design-Leitfadens { #continue-the-design-guide }
 
-Der vollständige Leitfaden setzt sich über die folgenden Seiten fort. Jede deckt eine Phase des Designprozesses ab und ist von hier aus erreichbar.
+Der vollständige Leitfaden umfasst auch die folgenden Seiten. Jede behandelt eine Phase des Designprozesses und ist über die nachstehenden Links erreichbar.
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-bolt: __[Schaltplan-Designrichtlinien](SF32LB52x_schematic_design.md)__ — Minimalsystem, Stromversorgungssystem, Takterzeugung, RF, Benutzerschnittstellen, Speicher und Konnektivität sowie Fertigungszugang, verteilt auf drei Seiten
+- :fontawesome-solid-bolt: __[Schaltplan-Designrichtlinien](SF32LB52x_schematic_design.md)__ — Minimalsystem, Stromversorgung, Takterzeugung, RF, Benutzerschnittstellen, Speicher und Konnektivität sowie Fertigungszugang, verteilt auf drei Seiten
 - :fontawesome-solid-list-check: __[Schaltplan-Checkliste](SF32LB52x_schematic_checklist.md)__ — Punkt-für-Punkt-Checkliste für das Schaltplan-Review (Abschnitt 5.8)
-- :fontawesome-solid-microchip: __[PCB-Layout-Richtlinien](SF32LB52x_pcb_layout.md)__ — Footprint-, Stack-up-, Fanout- und Routing-Hinweise für Takt, RF, Audio, USB, SDIO und Versorgung
+- :fontawesome-solid-microchip: __[PCB-Layout-Richtlinien](SF32LB52x_pcb_layout.md)__ — Hinweise zu Footprint, Stack-up, Fanout und Routing für Takt, RF, Audio, USB, SDIO und Stromversorgung
 - :fontawesome-solid-list-check: __[PCB-Layout-Checkliste](SF32LB52x_pcb_layout_checklist.md)__ — Punkt-für-Punkt-Checkliste für das PCB-Layout-Review (Abschnitt 6.15)
-- :fontawesome-solid-book-open: __[Design-Review-Checkliste und Referenzen](SF32LB52x_review_and_reference.md)__ — Release-Checkliste, verwandte Dokumente, Referenzschaltplan-/PCB-/Mechanik-/Power-Anhänge und Versionshistorie
+- :fontawesome-solid-book-open: __[Design-Review-Checkliste und Referenzen](SF32LB52x_review_and_reference.md)__ — Freigabe-Checkliste, weiterführende Dokumente, Anhänge mit Referenzschaltplänen, PCB-Layouts, Mechanik- und Stromversorgungsangaben sowie Versionshistorie
 
 </div>

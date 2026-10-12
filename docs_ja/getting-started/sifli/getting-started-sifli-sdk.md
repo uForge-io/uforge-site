@@ -97,11 +97,11 @@ Arduino、Zephyr、MicroPythonを使う予定でも、まずこのガイドを�
 
 ## ボードターゲットの選択 { #choose-the-board-target }
 
-`scons --board`に渡す値は、`customer/boards`配下のボードディレクトリ名です。お使いのキットに搭載されたメモリおよびディスプレイ構成に合ったターゲットを選択してください。以下の名前は大文字小文字を区別します。
+`scons --board`に渡す値は、`customer/boards`配下のボードディレクトリ名です。お使いのキットに搭載されたメモリーおよびディスプレイ構成に合ったターゲットを選択してください。以下の名前は大文字小文字を区別します。
 
 <div align="center" markdown>
 
-*SiFli-SDK 開発キット ビルドターゲット*
+*SiFli-SDK開発キット ビルドターゲット*
 
 | 開発キット | 正確な`scons --board`ターゲット |
 | --- | --- |
@@ -151,7 +151,7 @@ scons --board=sf32lb52-lcd_n16r8 -j8
     `please input serial port number`と表示されたら、COMポートの番号だけを入力し（例: `COM19`なら`19`）、Enterを押してください。
 
 !!! tip
-    ダウンロードツールがUARTダウンロードモードに入れない場合は、転送を開始する直前にボードをリセットしてください。それでも解決しない場合は、ボード固有の書き込み手順を確認してください。
+    書き込みツールがUARTダウンロードモードに入れない場合は、転送を開始する直前にボードをリセットしてください。それでも解決しない場合は、ボード固有の書き込み手順を確認してください。
 
 ## 動作の確認 { #see-it-run }
 
@@ -162,7 +162,7 @@ scons --board=sf32lb52-lcd_n16r8 -j8
 次の条件を満たしたら、次の作業に進めます。
 
 - プロジェクトがエラーなくビルドされる。
-- UARTダウンロードスクリプトが完了する。
+- UART書き込みスクリプトが完了する。
 - シリアルコンソールに読み取り可能なブート出力が表示される。
 - リセット後に`hello_world`サンプルが出力される。
 
@@ -175,4 +175,4 @@ scons --board=sf32lb52-lcd_n16r8 -j8
 
 ## 動作確認済みの基準構成を記録する { #what-sifli-should-add }
 
-再現可能なセットアップのため、SDKのタグまたはブランチ、正確な`scons --board`ターゲット、ホストOS、シリアルポート、ボード固有のダウンロード手順を記録してください。SDKやボードを変更する際は、公式の[対応ボード一覧](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)と[リリース一覧](https://github.com/OpenSiFli/SiFli-SDK/releases)を再確認してください。
+再現可能なセットアップのため、SDKのタグまたはブランチ、正確な`scons --board`ターゲット、ホストOS、シリアルポート、お使いのボードで動作した書き込み手順を記録してください。SDKやボードを変更する際は、公式の[対応ボード一覧](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)と[リリース一覧](https://github.com/OpenSiFli/SiFli-SDK/releases)を再確認してください。

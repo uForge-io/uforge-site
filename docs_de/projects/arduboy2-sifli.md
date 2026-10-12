@@ -1,6 +1,6 @@
 ---
 icon: lucide/gamepad-2
-description: "Ein reproduzierbarer Engineering-Pfad, um die Arduboy2-Portierung von OpenSiFli zu evaluieren, die Grenze zwischen Spielschleife und Peripherie zu validieren und zu entscheiden, ob ein spieleorientiertes SF32-Produkt für tiefere Designarbeit bereit ist."
+description: "Ein reproduzierbarer technischer Ablauf zur Bewertung der Arduboy2-Portierung von OpenSiFli: Spielschleife und Peripherie validieren und entscheiden, ob ein spieleorientiertes SF32-Produkt für die nächste Designphase bereit ist."
 tags:
     - Projekte
     - Arduino
@@ -11,18 +11,18 @@ tags:
 
 ## Was ist Arduboy2-SiFli? { #what-is-arduboy2-sifli }
 
-[OpenSiFli/Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) ist eine OpenSiFli-Portierung der [Arduboy2-Bibliothek](https://github.com/MLXXXp/Arduboy2) für die SiFli-Entwicklungsumgebung. Arduboy2 bietet ein anwendungsnahes Modell für ein kleines Spielgerät: eine Frame-Schleife, einen Display-Puffer, Tasten, Sprites, Text und optionale Soundsteuerung. Die SiFli-Portierung ist daher als Kompatibilitätsexperiment nützlich: Sie zeigt, wie viel eines Spiels im Arduboy-Stil erhalten bleiben kann, wenn Board, Display, Eingabe, Audio und Build-Pfad auf SF32 umziehen.
+[OpenSiFli/Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) ist eine OpenSiFli-Portierung der [Arduboy2-Bibliothek](https://github.com/MLXXXp/Arduboy2) für die SiFli-Entwicklungsumgebung. Arduboy2 bietet ein anwendungsnahes Modell für ein kleines Spielgerät: eine Spielschleife mit Bildaktualisierung, einen Display-Puffer, Tasten, Sprites, Text und optionale Klangsteuerung. Die SiFli-Portierung eignet sich als Kompatibilitätsexperiment: Sie zeigt, wie viel von einem Spiel im Arduboy-Stil erhalten bleiben kann, wenn Board, Display, Eingabe, Audio und Build-Pfad auf SF32 umgestellt werden.
 
-Das Repository ist eine Software-Referenz, keine fertige Spielkonsole und kein Hardware-Design für die Serienfertigung. Betrachten Sie README, Quellbaum, Beispiele, Issue-Verlauf und Lizenzdateien als maßgeblich für das genaue Board-Target, die unterstützte API-Oberfläche, die Build-Anleitung und die Weitergabebedingungen. Diese Seite ordnet die technischen Entscheidungen rund um diese Referenz; sie ersetzt nicht die ausführbaren Anweisungen des Repositorys.
+Das Repository ist eine Software-Referenz, keine fertige Spielkonsole und kein Hardware-Design für die Serienfertigung. README, Quellbaum, Beispiele, Issue-Verlauf und Lizenzdateien sind maßgeblich für das genaue Board-Ziel, den unterstützten API-Umfang, die Build-Anleitung und die Weitergabebedingungen. Diese Seite ordnet die technischen Entscheidungen rund um die Referenz; sie ersetzt nicht die ausführbaren Anweisungen des Repositorys.
 
 ## Warum diese SF32-Portierung? { #why-the-sifli-implementation }
 
 Eine Anwendung im Arduboy-Stil ist ein kompakter Weg, mehrere Entscheidungen für Embedded-Produkte gleichzeitig zu erproben: eine vorhersagbare Render-Schleife, kleine monochrome oder niedrig aufgelöste Ressourcen, Tasteneingabe, Audio-Timing und ein eng begrenztes Speicherbudget. Die Portierung dieses Modells auf SF32 kann eine nützliche frühe Referenz für Handheld-Spiele, UI-Demonstratoren, Lerngeräte und andere Produkte liefern, deren Interaktion lokal und deterministisch ist.
 
-Der Wert liegt nicht darin, dass jeder Arduboy-Sketch unverändert läuft. Der Wert ist die Grenze, die die Portierung sichtbar macht:
+Entscheidend ist nicht, dass jeder Arduboy-Sketch unverändert läuft. Die Portierung macht vielmehr die Integrationsgrenzen sichtbar:
 
 - Das Spiel kann seine übergeordnete Update-, Eingabe-, Zeichen- und Ressourcenlogik behalten, solange es innerhalb der unterstützten Arduboy2-API bleibt.
-- Die Portierung muss die Annahmen zu Display, Tasten, Audio, Timing und Speicher übersetzen, die in der ursprünglichen Hardware implizit waren.
+- Die Portierung muss die in der Originalhardware impliziten Annahmen zu Display, Tasten, Audio, Timing und Speicher an die SF32-Umgebung anpassen.
 - Jeder Sketch, der AVR-Register, Arduboy-spezifische Pins, Display-Transaktionen, Timer oder das EEPROM-Layout direkt steuert, braucht eine bewusste Anpassung und eigene Regressionsnachweise.
 
 Dies sind technische Erwartungen, keine gemessenen Kompatibilitätsaussagen. Bestätigen Sie sie am aktuellen OpenSiFli-Repository und halten Sie das genaue Ergebnis für das gewählte Board und den gewählten Commit fest.
@@ -43,7 +43,7 @@ Halten Sie vor dem Start Folgendes bereit:
 - Eine USB-Datenverbindung und eine Möglichkeit, das serielle Log aufzuzeichnen sowie Display, Tasten und Audioausgabe zu beobachten.
 - Die Erlaubnis, jedes in einer nachgelagerten Anpassung enthaltene Spiel, Bild, jede Schrift und jede Klangressource zu verwenden und weiterzugeben.
 
-<div align="center"><em>Tabelle: Projektvertrag</em></div>
+<div align="center"><em>Tabelle: Projektbasis und Nachweise</em></div>
 
 <div align="center" markdown>
 
@@ -57,7 +57,7 @@ Halten Sie vor dem Start Folgendes bereit:
 
 </div>
 
-## Hardware- und Softwarespezifikationen { #hardware-and-software-specifications }
+## Hardware- und Software-Spezifikationen { #hardware-and-software-specifications }
 
 ### Hardware-Spezifikation { #hardware-specification }
 
@@ -70,7 +70,7 @@ Halten Sie vor dem Start Folgendes bereit:
 | SF32LB52-Entwicklungsboard | ArduinoCore-Zephyr-Variante `sf32lb52_devkit_lcd_sf32lb525uc6`; das Repository legt keine physische Board-Revision fest | Führt die Portierung aus und stellt die zugeordneten MCU-Pins bereit | Erforderlich | [Quelle von Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli); [Variante in ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) | Dies bezeichnet die Software-Board-Variante und Pin-Zuordnung, keine validierte physische Bestückung; vergleichen Sie vor der Verdrahtung die tatsächliche Board-Revision und den Schaltplan |
 | Monochromes OLED | 128 × 64 Pixel, über SPI1 angeschlossen; das Repository nennt weder das genaue Modul noch den Controller | Zeigt den Spiel-Framebuffer an | Erforderlich | [Quelle von Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Das OLED ist externe Peripherie; prüfen Sie vor der Verwendung Controller, Spannung, Steckverbinder, Ausrichtung und Timing anhand von Modul und Board |
 | Sechs Spieltasten | Arduboy-kompatible Eingänge; Active-Low mit Pull-ups, gemäß der Pin-Zuordnung im Repository | Liest Richtungs- und A/B-Tasten | Erforderlich | [Quelle von Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Die Tasten sind extern; prüfen Sie die zugeordneten Arduino-IOs am physischen Board und halten Sie Verdrahtung und Entprellverhalten fest |
-| Externes EEPROM | AT24C02 oder AT24C32 über I2C1 an Adresse `0x50` | Unterstützt Bibliotheksfunktionen mit EEPROM | Optional; nur für Funktionen mit EEPROM erforderlich | [Quelle von Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Bestätigen Sie das gewählte Bauteil, die Spannung, Pull-ups und Busverdrahtung; das Repository legt keine bestückte EEPROM-Variante fest |
+| Externes EEPROM | AT24C02 oder AT24C32 über I2C1 an Adresse `0x50` | Unterstützt Bibliotheksfunktionen mit EEPROM | Optional; nur für Funktionen mit EEPROM erforderlich | [Quelle von Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Bestätigen Sie das gewählte Gerät, die Spannung, Pull-ups und Busverdrahtung; das Repository legt keine bestückte EEPROM-Variante fest |
 | Audioausgang und RGB-Anzeige | Die vom Repository unterstützten Audio-Backends nutzen die zugeordneten Lautsprecherausgänge; eine externe RGB-LED mit gemeinsamer Kathode wird per Software-PWM angesteuert | Optionale Tonausgabe und Farbanzeige | Optional; für den getesteten Sketch auswählen | [Quelle von Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Die Quelle legt keine vollständige Stückliste für Lautsprecher/LED fest; prüfen Sie externe Schaltung, Pin-Zuordnung, Strom und Audioverhalten |
 | Host und USB-Datenverbindung | Vom gewählten Arduino-Toolchain unterstützter Host; datenfähiges Kabel und Zugriff auf das serielle Log | Build, Upload und Beobachtung der Referenz | Erforderlich | [ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) | Halten Sie Host-Betriebssystem, Kabel/Port, Paketversionen und Wiederherstellungsmethode fest; ein reines Ladekabel genügt nicht |
 
@@ -90,7 +90,7 @@ Halten Sie vor dem Start Folgendes bereit:
 
 </div>
 
-## Eine unterstützte Basis wählen { #choose-a-supported-baseline }
+## Unterstützte Referenzkonfiguration auswählen { #choose-a-supported-baseline }
 
 Beginnen Sie mit der Kombination aus Board und Software, die das OpenSiFli-Repository nennt, statt ein Board nach Ähnlichkeit aus dem Produktkatalog zu wählen. Board-Paket, Display-Verdrahtung, Eingabezuordnung, Upload-Methode und Annahmen der Bibliothek gehören zur Basis.
 
@@ -112,21 +112,21 @@ Das Repository Arduboy2-SiFli liefert die Pin-Zuordnung des Boards nicht als sep
 
 Das Repository benennt eine Software-Board-Variante und eine Pin-Zuordnung der Peripherie und berichtet, dass Display, Tasten, externes EEPROM und Audiopfade auf SF32LB52-Hardware erprobt wurden. Es dokumentiert einen externen RGB-LED-Pfad, gibt aber nicht an, dass dieser getestet wurde. Das Repository benennt weder die physische Board-Revision noch das genaue OLED-Modul/den Controller noch eine vollständige Zubehör-Bestückung. Gleichen Sie die Pin-Zuordnung der Variante vor der Verdrahtung oder vor der Behauptung einer reproduzierbaren Hardware-Basis mit dem Schaltplan des tatsächlichen Boards ab und halten Sie die verwendeten Teile und Revisionen fest. Schließen Sie verbleibende Lücken nicht mit Pin-Zuordnungen oder Adressen aus einem anderen SF32-Projekt.
 
-## Lieferplan { #delivery-map }
+## Projektphasen und Entscheidungspunkte { #delivery-map }
 
 Verwenden Sie die Stufen als Entscheidungstore und nicht als Funktions-Checkliste.
 
-<div align="center"><em>Tabelle: Lieferplan</em></div>
+<div align="center"><em>Tabelle: Projektphasen und Entscheidungspunkte</em></div>
 
 <div align="center" markdown>
 
-| Stufe | Unterstützte Entscheidung | Erforderliches Ergebnis |
+| Phase | Entscheidungsfrage | Erforderliches Ergebnis |
 |:------|:---------------------|:----------------|
 | 1. Unveränderte Referenz | Lässt sich die dokumentierte Portierung auf der gewählten Basis bauen, hochladen und ausführen? | Ein funktionierender Sketch, Commit-/Paketprotokoll, Upload-Log und beobachtetes Verhalten. |
-| 2. Peripherie-Validierung | Verhalten sich Display, Eingabe, Audio, Reset und Timing auf dem realen Board vorhersagbar? | Ein Peripherie-Testprotokoll mit Fehlern und Wiederherstellungsverhalten. |
+| 2. Validierung der Peripherie | Verhalten sich Display, Eingabe, Audio, Reset und Timing auf dem realen Board vorhersagbar? | Ein Peripherie-Testprotokoll mit Fehlern und Wiederherstellungsverhalten. |
 | 3. Reproduzierbare Quellbasis | Kann ein anderer Ingenieur dasselbe Image aus einem sauberen Checkout neu bauen? | Ein Artefakt aus sauberem Build, Umgebungsprotokoll und Wiederholungsergebnis. |
-| 4. Kontrollierte Spielanpassung | Lässt sich eine begrenzte Spiel- oder UI-Änderung einführen, ohne die Portierung zu beschädigen? | Eine geprüfte Änderung, Ressourcen-/Lizenznachweis und Regressionsergebnis. |
-| 5. Prüfung der Produktreife | Ist die Referenz stark genug, um eigene Hardware oder höhere Softwareinvestitionen zu rechtfertigen? | Ein Risikoregister mit Verantwortlichen, Nachweisen, Gegenmaßnahmen und einer Entscheidung: fortfahren/zurückstellen/stoppen. |
+| 4. Kontrollierte Spielanpassung | Lässt sich eine begrenzte Spiel- oder UI-Änderung einführen, ohne die Portierung zu beeinträchtigen? | Eine geprüfte Änderung, Ressourcen-/Lizenznachweis und Regressionsergebnis. |
+| 5. Prüfung der Produktreife | Reicht die Referenz aus, um eigene Hardware oder eine größere Softwareinvestition zu rechtfertigen? | Ein Risikoregister mit Verantwortlichen, Nachweisen, Gegenmaßnahmen und einer Entscheidung: fortfahren/zurückstellen/stoppen. |
 
 </div>
 
@@ -145,7 +145,7 @@ flowchart LR
 
 Dies ist ein Entscheidungsmodell und keine Behauptung, dass das Repository genau diese internen Modulnamen verwendet. Bestätigen Sie die tatsächlichen Quellgrenzen, bevor Sie die Portierung ändern. Die wichtigen Produktpfade sind:
 
-- **Frame und Timing:** Die Spielschleife muss in einem wiederholbaren Takt aktualisieren und rendern; jedes zeitkritische Audio- oder Eingabeverhalten muss auf dem Ziel-Board gemessen werden.
+- **Bildaktualisierung und Timing:** Die Spielschleife muss Bilder in einem wiederholbaren Takt aktualisieren und rendern. Zeitkritisches Audio- oder Eingabeverhalten muss auf dem Ziel-Board gemessen werden.
 - **Display:** Die Kompatibilitätsschicht muss den Puffer und die Geometrie des Spiels auf den gewählten Display-Controller, das Pixelformat, die Ausrichtung und den Aktualisierungspfad abbilden.
 - **Eingabe:** Tastennamen, Polarität, Entprellung, gleichzeitiges Drücken sowie Aufwach-/Reset-Verhalten müssen anhand der Board-Verdrahtung geprüft werden.
 - **Audio:** Tonerzeugung, Timer-Zuständigkeit, Lautsprecheranschluss, Lautstärke und Stummschaltung gelten bis zur Verifikation als boardspezifisch.
@@ -154,7 +154,7 @@ Dies ist ein Entscheidungsmodell und keine Behauptung, dass das Repository genau
 
 Die wesentlichen Fehlerdomänen sind Anwendungs-/API-Kompatibilität, Display-Konfiguration, Eingabeverdrahtung, Audio-/Timer-Verhalten, Speicher- und Ressourcenplatzierung sowie Upload/Wiederherstellung. Ein Fehler in einer Domäne sollte nicht einfach als „die Portierung funktioniert nicht“ gemeldet werden.
 
-## Stufe 1 — Die unveränderte Referenz herstellen { #stage-1-establish-the-untouched-reference }
+## Phase 1 — Die unveränderte Referenz herstellen { #stage-1-establish-the-untouched-reference }
 
 **Ziel:** Nachweisen, dass die dokumentierte Basis des Repositorys real ist, bevor Bibliothek oder Spiel geändert werden.
 
@@ -165,22 +165,22 @@ Die wesentlichen Fehlerdomänen sind Anwendungs-/API-Kompatibilität, Display-Ko
 
 **Aufzubewahrende Nachweise:** Commit des Repositorys, Abhängigkeits-/Paketversionen, Board-Revision, Verdrahtung oder Schaltplanreferenz, Build-Ausgabe, Upload-Log, serielles Log und ein kurzes Funktionsprotokoll.
 
-**Ausstiegskriterium von Tor 1:** Die unveränderte Referenz lässt sich auf dem gewählten Board bauen und hochladen, und ihr dokumentiertes Verhalten ist nach einem Reset oder Aus- und Einschalten wiederholbar.
+**Abnahmekriterium für Kontrollpunkt 1:** Die unveränderte Referenz lässt sich auf dem gewählten Board bauen und hochladen; ihr dokumentiertes Verhalten ist nach einem Reset oder Aus- und Einschalten wiederholbar.
 
-## Stufe 2 — Grenzen von Peripherie und Timing validieren { #stage-2-validate-peripheral-and-timing-boundaries }
+## Phase 2 — Grenzen von Peripherie und Timing validieren { #stage-2-validate-peripheral-and-timing-boundaries }
 
 **Ziel:** Eine erfolgreiche Kompilierung von einer brauchbaren Basis für ein Spielgerät trennen.
 
-1. Üben Sie Display-Löschen, vollständige Bildaktualisierung, Sprite- oder Bitmap-Rendering, den Textpfad und alle vom Beispiel genutzten Annahmen zu Geometrie/Ausrichtung.
-2. Üben Sie jede vom Projekt genutzte Eingabe, einschließlich Loslassen, gleichzeitigem Drücken, schnellem Drücken sowie ggf. Reset- oder Aufwachverhalten.
+1. Prüfen Sie das Leeren des Displays, die Aktualisierung des gesamten Bildes, die Darstellung von Sprites oder Bitmaps, die Textausgabe sowie alle vom Beispiel vorausgesetzten Geometrie- und Ausrichtungseinstellungen.
+2. Prüfen Sie alle vom Projekt verwendeten Eingaben: Loslassen, gleichzeitiges und schnelles Drücken sowie gegebenenfalls das Verhalten nach Reset oder beim Aufwachen.
 3. Prüfen Sie bei enthaltenem Audio Tonstart/-stopp, Timer-Interaktion, Stummschaltung und den Einfluss von Display- und Eingabeaktivität auf den Tonpfad.
 4. Unterbrechen Sie den normalen Ablauf durch Reset, Trennen/Wiederverbinden und eine ungültige oder unvollständige Eingabefolge. Halten Sie fest, ob das Board in einen nutzbaren Upload- und Ausführungszustand zurückkehrt.
 
 **Aufzubewahrende Nachweise:** Sicht- oder aufgezeichnete Display-Ergebnisse, Eingabematrix, Timing-Beobachtungen, Audio-Beobachtungen, Reset-/Wiederherstellungs-Log sowie gemessener Strom oder gemessene Latenz, die die Produktentscheidung beeinflussen.
 
-**Ausstiegskriterium von Tor 2:** Der gewählte Peripheriepfad ist so gut verstanden, dass Anwendungsfehler von Problemen der Board-Konfiguration, des Timings oder der Versorgung unterschieden werden können.
+**Abnahmekriterium für Kontrollpunkt 2:** Der gewählte Peripheriepfad ist so gut verstanden, dass sich Anwendungsfehler von Problemen der Board-Konfiguration, des Timings oder der Versorgung unterscheiden lassen.
 
-## Stufe 3 — Eine reproduzierbare Quellbasis aufbauen { #stage-3-build-a-reproducible-source-baseline }
+## Phase 3 — Eine reproduzierbare Quellbasis aufbauen { #stage-3-build-a-reproducible-source-baseline }
 
 **Ziel:** Die Portierung reproduzierbar machen, statt von einem Entwicklungsrechner oder einem gelieferten Binary abzuhängen.
 
@@ -191,13 +191,13 @@ Die wesentlichen Fehlerdomänen sind Anwendungs-/API-Kompatibilität, Display-Ko
 
 **Aufzubewahrende Nachweise:** Quellrevision, Revisionen der Abhängigkeiten, Host-/Werkzeug-Manifest, Build-Log, Binary oder anderes Artefakt, Größenbericht, Upload-Log und serielles Log.
 
-**Ausstiegskriterium von Tor 3:** Ein sauberer Checkout reproduziert ein Image, das die Peripherieprüfungen von Stufe 2 ohne undokumentierte lokale Dateien oder manuelle Änderungen besteht.
+**Abnahmekriterium für Kontrollpunkt 3:** Ein sauberer Checkout erzeugt ohne undokumentierte lokale Dateien oder manuelle Änderungen ein Image, das die Peripherieprüfungen aus Phase 2 besteht.
 
-## Stufe 4 — Ein Spiel gezielt anpassen { #stage-4-adapt-one-game-deliberately }
+## Phase 4 — Ein Spiel gezielt anpassen { #stage-4-adapt-one-game-deliberately }
 
 **Ziel:** Die Kompatibilitätsgrenze mit einer kontrollierten Produktänderung nachweisen.
 
-Beginnen Sie mit einem kleinen Sketch oder Spiel, dessen Anforderungen an Display, Eingabe, Audio und Ressourcen überschaubar sind. Halten Sie das unveränderte Referenz-Image bereit und ändern Sie jeweils nur eine Verhaltensklasse:
+Beginnen Sie mit einem kleinen Sketch oder Spiel, bei dem die Anforderungen an Display, Eingabe, Audio und Ressourcen klar erkennbar sind. Halten Sie das unveränderte Referenz-Image bereit und ändern Sie jeweils nur eine Verhaltensklasse:
 
 <div align="center"><em>Tabelle: Reihenfolge der kontrollierten Anpassung</em></div>
 
@@ -205,8 +205,8 @@ Beginnen Sie mit einem kleinen Sketch oder Spiel, dessen Anforderungen an Displa
 
 | Änderungsklasse | Beginnen mit | Erforderliche Regression |
 |:-------------|:-----------|:--------------------|
-| Identität und UI | Titelbildschirm, Schrift, Sprite, Palette oder Bildschirmlayout. | Prüfungen zu Build, Upload, Frame-Aktualisierung, Eingabe und Integrität der Ressourcen. |
-| Spiellogik | Eine begrenzte Regel, ein Level oder ein Zustandsübergang. | Wiederholbare Eingabefolge, Reset, ggf. Persistenz von Punktestand/Zustand sowie Frame-Timing. |
+| Identität und UI | Titelbildschirm, Schrift, Sprite, Palette oder Bildschirmlayout. | Build, Upload, Bildaktualisierung, Eingabe und Integrität der Ressourcen prüfen. |
+| Spiellogik | Eine begrenzte Regel, ein Level oder ein Zustandsübergang. | Wiederholbare Eingabefolge, Reset, ggf. Persistenz von Punktestand/Zustand und Bildtakt prüfen. |
 | Audio | Ein Ton oder ein kurzer Effekt über den unterstützten Pfad. | Start/Stopp, Stummschaltung, Timer-Interaktion und Verhalten unter Display-/Eingabelast. |
 | Speicher | Eine kleine Änderung beim Speichern oder Laden von Ressourcen. | Größenbericht, Verhalten bei Stromausfall, Behandlung von Beschädigungen und saubere Wiederherstellung. |
 | Board-Anpassung | Eine bewusste Änderung der Zuordnung von Display, Taste oder Lautsprecher. | Schaltplan-/Pin-Nachweis, vollständige Peripherie-Regression und Rückkehr zum Referenz-Image. |
@@ -217,9 +217,9 @@ Beginnen Sie mit einem kleinen Sketch oder Spiel, dessen Anforderungen an Displa
 
 **Aufzubewahrende Nachweise:** Geprüfter Diff, Herkunft der Ressourcen, Vorher-/Nachher-Bild, Build- und Upload-Logs, Regressionsergebnisse und ein Rollback-Image.
 
-**Ausstiegskriterium von Tor 4:** Das angepasste Spiel besteht die Referenz-Peripherieprüfungen, und seine Grenzen bei Speicher, Timing, Wiederherstellung und Lizenzierung sind festgehalten.
+**Abnahmekriterium für Kontrollpunkt 4:** Das angepasste Spiel besteht die Referenz-Peripherieprüfungen; seine Grenzen bei Speicher, Timing, Wiederherstellung und Lizenzierung sind dokumentiert.
 
-## Stufe 5 — Prüfung der Produktreife { #stage-5-product-readiness-review }
+## Phase 5 — Prüfung der Produktreife { #stage-5-product-readiness-review }
 
 Gehen Sie von einer Portierungsdemonstration erst dann zu eigener Hardware oder einem Feldtest über, wenn das Team Folgendes beantworten kann:
 
@@ -230,11 +230,11 @@ Gehen Sie von einer Portierungsdemonstration erst dann zu eigener Hardware oder 
 - Welche Teile der Portierung werden vom Produktteam, von OpenSiFli, SiFli oder der ursprünglichen Arduboy2-Community gepflegt?
 - Sind alle Lizenzen für Spiele, Schriften, Bilder, Klänge und Bibliotheken mit dem vorgesehenen Vertriebsmodell vereinbar?
 
-**Ausstiegskriterium von Tor 5:** Für verbleibende Risiken gibt es benannte Verantwortliche und Nachweise; jeder Punkt hat eine Gegenmaßnahme, eine ausdrückliche Zurückstellung oder eine Stopp-Entscheidung.
+**Abnahmekriterium für Kontrollpunkt 5:** Für verbleibende Risiken gibt es benannte Verantwortliche und Nachweise; für jeden Punkt ist eine Gegenmaßnahme, eine ausdrückliche Zurückstellung oder eine Stopp-Entscheidung festgehalten.
 
 ## Übergabe an das Produktdesign { #handoff-to-product-design }
 
-Übernehmen Sie das gewählte SF32-Bauteil, die Architektur von Display und Eingabe, den Plan für Audio/Timer, Flash- und Ressourcen-Layout, Leistungsmessungen, Wiederherstellungsmethode und die Annahmen zum Produktionstest in den Bereich [Hardware](../hardware/index.md). Nutzen Sie den [SF32-Produktwähler](../sf32-products/product-selector.md), wenn Anforderungen des Spiels an Display, Speicher, Gehäuse, Energiebedarf oder Konnektivität die Auswahlliste der Bauteile verändern. Für die Software-Basis beginnen Sie mit [Erste Schritte mit Arduino](../getting-started/arduino/getting-started-arduino.md) und fahren mit der [Übersicht zur Arduino-Plattform](../develop/platforms/arduino/overview.md) fort.
+Übernehmen Sie das gewählte SF32-Gerät, die Architektur von Display und Eingabe, den Plan für Audio/Timer, Flash- und Ressourcen-Layout, Leistungsmessungen, Wiederherstellungsmethode und die Annahmen zum Produktionstest in den Bereich [Hardware](../hardware/index.md). Nutzen Sie den [SF32-Produktwähler](../sf32-products/product-selector.md), wenn Anforderungen des Spiels an Display, Speicher, Gehäuse, Energiebedarf oder Konnektivität die Auswahlliste der Bauteile verändern. Für die Software-Basis beginnen Sie mit [Erste Schritte mit Arduino](../getting-started/arduino/getting-started-arduino.md) und fahren mit der [Übersicht zur Arduino-Plattform](../develop/platforms/arduino/overview.md) fort.
 
 Die Referenz hat ihren Zweck für die Produktentwicklung erfüllt, wenn ein anderer Ingenieur die Portierung neu bauen, die Peripherieergebnisse reproduzieren, jede boardspezifische Anpassung erklären und die Nachweise prüfen kann, bevor ein eigenes Board oder eine erweiterte Spielebibliothek freigegeben wird.
 

@@ -53,7 +53,7 @@ El nombre `i2c1` es ilustrativo. Utilice el nombre de dispositivo I2C registrado
 2. Confirme qué bus `i2cX` y qué pines usa su placa.
 3. Adapte el ejemplo de EEPROM o maestro I2C para comunicarse con el sensor. Si tiene un registro de identificación, léalo primero; si no, empiece por un registro cuyo comportamiento esperado conozca.
 4. Decodifique una medida real e imprímala a través del shell.
-5. Si el sensor tiene una salida de interrupción o de datos listos, conéctela a un GPIO y aplique el patrón de interrupción del ejercicio 2 de Primeros periféricos.
+5. Si el sensor tiene una salida de interrupción o de datos listos, conéctela a una GPIO y aplique el patrón de interrupción del ejercicio 2 de Primeros periféricos.
 6. Siempre que sea posible, sustituya el sondeo periódico por lecturas activadas por eventos.
 
 **Criterios de éxito:** el firmware lee correctamente un registro conocido (el de identificación del dispositivo, si está disponible), decodifica un valor de sensor plausible y no bloquea el sistema si el dispositivo está ausente.
@@ -120,7 +120,7 @@ lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
 La documentación actual indica `sf32lb52-lchspi-ulp` como plataforma compatible con `example/multimedia/audio/mp3_sd_player`. No dé por hecho que funciona en su placa: antes de usarlo, consulte la lista de [plataformas compatibles y requisitos de hardware](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/mp3_sd_player/README.html).
 
 1. Cargue un archivo WAV o MP3 pequeño en el medio de almacenamiento esperado por el ejemplo.
-2. Compile y flashee el ejemplo.
+2. Compile y grabe el ejemplo.
 3. Confirme que la reproducción se inicia, que el audio es limpio y que la placa no se reinicia cuando empiece la reproducción.
 4. Integre la lógica de inicio y parada de la reproducción en el manejador del botón del ejercicio 2 de Primeros periféricos.
 5. Vigile las interrupciones por falta de datos en el búfer (underruns) mientras estén activos los registros del shell o las actualizaciones de pantalla.

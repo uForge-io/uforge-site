@@ -118,7 +118,7 @@ hide:
 
 - :fontawesome-solid-microchip:{ .uf-icon-blue } **Высокая производительность**
 
-    Число ядер и набор функций зависят от конкретного устройства. В семействе есть одно-, двух- и трёхъядерные конфигурации; в нескольких сериях используются процессоры Cortex-M33 / STAR-MC1. Наличие кэша, FPU и MPU определяется конкретным чипом и реализацией SoC; сверяйтесь с документацией выбранной модели. В некоторых устройствах PSRAM объёмом до 64 МБ размещена в составе корпуса.
+    Число ядер и набор функций зависят от конкретного устройства. В семействе есть одно-, двух- и трёхъядерные конфигурации; в нескольких сериях используются процессоры Cortex-M33 / STAR-MC1. Наличие кэша, FPU и MPU определяется конкретным чипом и реализацией SoC; сверяйтесь с документацией выбранной модели. В некоторых устройствах PSRAM объёмом до 64 MB размещена в составе корпуса.
 
 - :fontawesome-brands-bluetooth:{ .uf-icon-blue } **Подключение Bluetooth**
 
@@ -175,7 +175,7 @@ hide:
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 1.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Аппаратная декомпрессия eZip 1.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Ускоритель ИИ
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 1.4 MB SRAM, до 18 MB PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 1,4 MB SRAM, до 18 MB PSRAM
     - :fontawesome-solid-circle:{ .uf-dot-blue } Корпуса QFN68, BGA145 и BGA169, до 49 / 95 / 119 GPIO
 
     [Серия SF32LB55x :material-arrow-right:](sf32-products/chips/SF32LB55x.md){ .uf-link-blue }
@@ -208,7 +208,7 @@ hide:
     - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2.5D и векторная графика, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 и декодирование JPEG/MJPEG
     - :fontawesome-solid-circle:{ .uf-dot-blue } Аудиокодек, 2 x AMIC, 4 x DMIC
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 3.7 MB SRAM, до 64 MB PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 3,7 MB SRAM, до 64 MB PSRAM
     - :fontawesome-solid-circle:{ .uf-dot-blue } Корпус BGA256, до 154 GPIO
 
     [Серия SF32LB58x :material-arrow-right:](sf32-products/chips/SF32LB58x.md){ .uf-link-blue }
@@ -298,7 +298,7 @@ hide:
 [**Начало работы с GUIX на SF32**](blog/guix-getting-started.md) <span class="uf-news-date">15 апреля 2025</span>
 :   Создавайте привлекательные интерфейсы с графической библиотекой GUIX.
 
-[**Добавлены примеры Bluetooth LE Audio**](blog/le-audio-examples.md) <span class="uf-news-date">2 апреля 2025</span>
+[**Добавлены примеры Bluetooth LE Audio**](blog/le-audio-examples.md) <span class="uf-news-date">02 апреля 2025</span>
 :   Новые примеры трансляции и одноадресной передачи LE Audio.
 
 [Все новости :material-arrow-right:](blog/index.md){ .uf-link-blue }

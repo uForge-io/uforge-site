@@ -33,16 +33,16 @@ Este glossário reúne siglas e termos usados na documentação da μForge.io: t
 * **OTA** — **Over-The-Air (atualização de firmware sem fio).** Atualização do firmware do dispositivo por uma conexão sem fio, normalmente BLE, em vez de uma conexão cabeada.
 * **DFU** — **Device Firmware Update (atualização de firmware do dispositivo).** Categoria geral de mecanismos e protocolos de atualização de firmware; atualizações OTA por Bluetooth normalmente implementam um mecanismo DFU.
 
-## Gráficos e telas { #graphics-and-display }
+## Gráficos e displays { #graphics-and-display }
 
-* **ePicasso** — Mecanismo próprio de aceleração gráfica 2D/2.5D da SiFli para a família SF32. Ele transfere da CPU de aplicação operações de pixel como cópia, combinação, redimensionamento, rotação e composição de camadas. Consulte a [página de arquitetura do ePicasso](../learn/graphics/epicasso-gpu.md).
+* **ePicasso** — Mecanismo próprio de aceleração gráfica 2D/2.5D da SiFli para a família SF32. Ele acelera operações de pixel, como cópia, combinação, redimensionamento, rotação e composição de camadas, reduzindo a carga da CPU de aplicação. Consulte a [página de arquitetura do ePicasso](../learn/graphics/epicasso-gpu.md).
 * **eZip** — Formato próprio da SiFli para compressão sem perdas de gráficos e dados de uso geral, com decodificação por hardware nos dispositivos SF32 compatíveis. Para gráficos, a SiFli descreve a taxa de compressão como ligeiramente superior à do PNG; para dados de uso geral, o resultado depende do conteúdo original. Como os recursos comprimidos passam pelo barramento antes da decodificação, o eZip pode reduzir a largura de banda externa usada pela PSRAM e pela NOR Flash.
 * **TurboPixel** — Formato com perdas e taxa de compressão fixa para o framebuffer final, disponível nos componentes SF32 compatíveis. O extDMA comprime o bitmap renderizado em TurboPixel e o controlador de display o descomprime, reduzindo a largura de banda e a capacidade de PSRAM necessárias. Consulte a [página de compressão de framebuffer TurboPixel](../learn/graphics/turbopixel.md).
 * **LVGL** — **Light and Versatile Graphics Library (biblioteca gráfica leve e versátil).** Framework de interface de usuário embarcada e de código aberto usado pela maioria dos produtos SF32, com renderização acelerada pelo ePicasso.
 * **HMI** — **Human-Machine Interface (interface homem-máquina).** Termo que designa a interface de usuário no dispositivo — tela, toque e botões — como categoria de projeto.
 * **Interface de display RGB / DPI** — Interface paralela que envia diretamente os componentes de cor dos pixels a um painel ou controlador de display compatível. Seu nome formal é **DPI (Display Pixel Interface)**; “interface RGB” é a abreviação comum no projeto de placas. Normalmente usa clock de pixel, sinais de sincronização horizontal e vertical e várias linhas paralelas de dados de cor. Em comparação com uma interface serial, a DPI usa mais GPIOs e exige mais cuidado no roteamento paralelo. Confirme o orçamento de pinos do encapsulamento e os requisitos de temporização do painel.
 * **Interface de display MIPI** — Interface definida pelos padrões da MIPI Alliance e usada por painéis compatíveis que exigem maior largura de banda.
-* **EPD** — **Electronic Paper Display (display de papel eletrônico).** Tecnologia de tela reflexiva, normalmente usada em displays de baixo consumo.
+* **EPD** — **Electronic Paper Display (display de papel eletrônico).** Tecnologia de display reflexivo, normalmente usada em painéis de baixo consumo.
 * **Interface de display JDI** — Suporte a displays JDI / Sharp Memory-in-Pixel compatíveis, quando documentado para o dispositivo SF32 selecionado.
 
 ## Áudio { #audio }

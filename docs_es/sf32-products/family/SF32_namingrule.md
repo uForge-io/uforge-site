@@ -168,6 +168,6 @@ Los tres campos del sufijo se concatenan sin separadores. `Aaaa` indica la opci�
 * **PSRAM:** `R32` indica 16 MB + 16 MB de HPI-PSRAM.
 * **Flash estándar:** `N1` indica 1 MB de Flash QSPI-NOR.
 
-El patrón de nomenclatura describe una configuración; no implica que todas las combinaciones de códigos correspondan a un SKU comercializado. La guía de SiFli identifica SF32LB566VCB36 y SF32LB586VDD36 como configuraciones estándar de MCU para las familias SF32LB56-MOD y SF32LB58-MOD, respectivamente; también pueden personalizarse otras configuraciones de módulo. Confirme la disponibilidad, el MCU instalado, la asignación de pines y las especificaciones eléctricas en la documentación del módulo correspondiente.
+El patrón de nomenclatura describe una configuración; no implica que todas las combinaciones de códigos correspondan a un SKU comercializado. La guía de SiFli identifica SF32LB566VCB36 y SF32LB586VDD36 como configuraciones estándar de MCU para las familias SF32LB56-MOD y SF32LB58-MOD, respectivamente; también pueden personalizarse otras configuraciones de módulo. Confirme la disponibilidad, la MCU instalada, la asignación de pines y las especificaciones eléctricas en la documentación del módulo correspondiente.
 
 [Guía de modelos de chips de SiFli](https://wiki.sifli.com/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) · [Guía de modelos de módulos de SiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md)

@@ -44,7 +44,7 @@ Erfassen Sie für jeden Firmware-Build:
 |:------|:------------------|
 | Inbetriebnahme der Platine | Ausführliche Protokolle zu Peripherie und Startvorgang. |
 | Funktionsentwicklung | Modulbezogene Debug-Protokolle rund um die geprüfte Funktion. |
-| Optimierung des Stromverbrauchs | Möglichst wenige Protokolle, da die Protokollierung die Leistungsaufnahme beeinflusst. |
+| Optimierung des Stromverbrauchs | Möglichst wenige Protokolle, da die Protokollierung selbst das Energieverhalten verändert. |
 | Freigabekandidat | Warnungen, Fehler, Version, Startursache und wichtige Zustandsprüfungen. |
 | Build zur Analyse eines Feldfehlers | Gezielte Protokolle zum vermuteten Subsystem. |
 

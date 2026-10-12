@@ -2,20 +2,20 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Schaltplan-Design-Richtlinien für die SF32LB58x-MCU: Stromversorgungssystem, Takterzeugung, HF, Benutzerschnittstellen, Speicher und Konnektivität sowie Fertigung."
+description: "Schaltplan-Design-Richtlinien für die SF32LB58x-MCU: Stromversorgungssystem, Takterzeugung, RF, Benutzerschnittstellen, Speicher und Konnektivität sowie Fertigung."
 tags:
     - Hardware
     - Chip
 ---
 
-# SF32LB58x-Hardwaredesignleitfaden — Schaltplanrichtlinien {#sf32lb58x-hardware-design-guide-schematic-design-guidelines}
+# SF32LB58x-Hardware-Design-Leitfaden — Schaltplanrichtlinien {#sf32lb58x-hardware-design-guide-schematic-design-guidelines}
 
-!!! note "Teil des SF32LB58x-Hardwaredesignleitfadens"
-    Diese Seite behandelt Abschnitt 5, die Schaltplanrichtlinien. Beginnen Sie mit der [Übersicht zum SF32LB58x-Hardwaredesignleitfaden](SF32LB58x_hardware_design_guide.md), um das Bauteil auszuwählen und den gesamten Designablauf kennenzulernen. Lesen Sie anschließend die [Schaltplan-Checkliste](SF32LB58x_schematic_checklist.md) oder wechseln Sie direkt zu den [PCB-Layout-Richtlinien](SF32LB58x_pcb_layout.md).
+!!! note "Teil des SF32LB58x-Hardware-Design-Leitfadens"
+    Diese Seite behandelt Abschnitt 5, die Schaltplanrichtlinien. Beginnen Sie mit der [Übersicht zum SF32LB58x-Hardware-Design-Leitfaden](SF32LB58x_hardware_design_guide.md), um das Gerät auszuwählen und den gesamten Designablauf kennenzulernen. Lesen Sie anschließend die [Schaltplan-Checkliste](SF32LB58x_schematic_checklist.md) oder wechseln Sie direkt zu den [PCB-Layout-Richtlinien](SF32LB58x_pcb_layout.md).
 
 ## 5. Schaltplan-Design-Richtlinien {#5-schematic-design-guidelines}
 
-Dieses Kapitel folgt dem Schaltplan-Workflow für den SF32LB58x: Es beginnt mit dem Minimal-Systemdesign und führt über Stromversorgung, Takterzeugung, HF, Benutzerschnittstellen, Speicher und Konnektivität bis zur Fertigung. Jeder Abschnitt erläutert zunächst das Designziel und fasst anschließend die Schaltungsanforderungen, typische Risiken und Prüfungen vor der Freigabe zusammen.
+Dieses Kapitel folgt dem Schaltplan-Workflow für den SF32LB58x: Es beginnt mit dem Minimalsystem-Design und führt über Stromversorgung, Takterzeugung, RF, Benutzerschnittstellen, Speicher und Konnektivität bis zur Fertigung. Jeder Abschnitt erläutert zunächst das Designziel und fasst anschließend die Schaltungsanforderungen, typische Risiken und Prüfungen vor der Freigabe zusammen.
 
 <div align="center"><em>Tabelle 5-1: Schaltplan-Abschnittsübersicht</em></div>
 
@@ -23,28 +23,28 @@ Dieses Kapitel folgt dem Schaltplan-Workflow für den SF32LB58x: Es beginnt mit 
 
 | Gruppe | Wesentliche Entscheidungen | Nachweise für die Freigabe |
 |:---|:---|:---|
-| Minimal-Systemdesign | Exakte Bauteilvariante und Gehäuse, Stromversorgung und Reset, Takte, Boot und Speicher, Debug und Wiederherstellung | Erstprüfung für die Inbetriebnahme sowie Boot- und Wiederherstellungsplan |
-| Stromversorgungssystem | System-PMIC, Chip-PMU-Schienen, BUCK-Induktivitäten, LDO-Kondensatoren, Reset, Weckquellen für den Energiesparbetrieb | Versorgungsplan, PMIC-Einstellungen, Messungen der Versorgungsschienen, Prüfung von POR/BOR/Reset |
-| Takterzeugung | 48-MHz- und 32,768-kHz-Quarze | Prüfung der Quarzspezifikationen, Plan der Anpasskondensatoren, Layoutaufnahmen der Quarze |
-| HF | HF-Anpassung und Antennenpfad | Impedanzplan, HF-Anpassnetzwerk, antennenfreie Zone, Layoutaufnahmen |
+| Minimalsystem-Design | Exakte Bauteilvariante und Gehäuse, Stromversorgung und Reset, Takte, Boot und Speicher, Debug und Wiederherstellung | Erstprüfung für die Inbetriebnahme sowie Boot- und Wiederherstellungsplan |
+| Stromversorgungssystem | System-PMIC, Chip-PMU-Schienen, BUCK-Induktivitäten, LDO-Kondensatoren, Reset, Weckquellen für den Energiesparbetrieb | Stromversorgungsbaum, PMIC-Einstellungen, Messungen der Versorgungsschienen, Prüfung von POR/BOR/Reset |
+| Takterzeugung | 48-MHz- und 32,768-kHz-Quarze | Prüfung der Quarzspezifikationen, Plan der Anpasskondensatoren, Layout-Screenshots der Quarze |
+| RF | RF-Anpassung und Antennenpfad | Impedanzplan, RF-Anpassnetzwerk, Antennen-Freihaltebereich, Layout-Screenshots |
 | Benutzerschnittstellen | Display, Touch/Hintergrundbeleuchtung, Audio, Tasten, Motor, PBR-Steuerung | Schnittstellenschaltpläne, Pinzuweisungen, Einschaltsequenz, Prüfung der Analog- und Audioschaltungen |
 | Speicher und Konnektivität | Boot-Modus, MPI4, SD1/SD2, eMMC/SD NAND/SD-Karte, USB 2.0 HS | Boot-Konfiguration, Stromversorgungskonzept für den Speicher, Nachweis der differentiellen und schnellen Signalführung |
 | Fertigung | SWD, UART-Debug-Ausgänge, Zugang für Produktionstests, Schaltplan-/PCB-Prüfliste | Testpunktzeichnung, Wiederherstellungsweg, Plan für Programmierung und Kalibrierung in der Fertigung |
 
 </div>
 
-### 5.1. Minimal-Systemdesign {#51-minimum-system-design}
+### 5.1. Minimalsystem-Design {#51-minimum-system-design}
 
-Behandeln Sie das Minimal-Systemdesign als erstes Freigabekriterium der Schaltplanprüfung. Bevor produktspezifische Peripherie hinzukommt, müssen die genaue Bauteilvariante und das Gehäuse, die erforderlichen Versorgungsschienen und Takte, das Reset-Verhalten, Boot-Konfiguration und Speicher sowie ein praktikabler Debug- und Wiederherstellungspfad feststehen. Diese Entscheidungen bestimmen, ob sich die Platine zuverlässig einschalten, starten und in Betrieb nehmen lässt.
+Behandeln Sie das Minimalsystem-Design als erstes Freigabekriterium der Schaltplanprüfung. Bevor produktspezifische Peripherie hinzukommt, müssen die genaue Bauteilvariante und das Gehäuse, die erforderlichen Versorgungsschienen und Takte, das Reset-Verhalten, Boot-Konfiguration und Speicher sowie ein praktikabler Debug- und Wiederherstellungspfad feststehen. Diese Entscheidungen bestimmen, ob sich die Platine zuverlässig einschalten, starten und in Betrieb nehmen lässt.
 
-<div align="center"><em>Tabelle 5.1-1: Prüfpunkte für das Minimal-Systemdesign</em></div>
+<div align="center"><em>Tabelle 5.1-1: Prüfpunkte für das Minimalsystem-Design</em></div>
 
 <div align="center" markdown>
 
 | Funktionsblock | SF32LB58x-Prüfpunkt | Detaillierte Hinweise |
 |:---|:---|:---|
 | Bauteil und Gehäuse | Exakte Teilenummer und Gehäuse bestätigen; prüfen, ob Pinbelegung und integrierte Speicherkonfiguration die geplanten Schnittstellen unterstützen. | [Varianten und Gehäuse](SF32LB58x_hardware_design_guide.md#32-variants) |
-| Stromversorgung | Erforderliche PMU- und externe Versorgungsschienen, BUCK-Bauteile und lokale Abblockkondensatoren vorsehen. | [Stromversorgungssystem](#51-power-system) |
+| Stromversorgung | Erforderliche PMU- und externe Versorgungsschienen, BUCK-Bauteile und lokale Entkopplungskondensatoren vorsehen. | [Stromversorgungssystem](#51-power-system) |
 | Takte | Den 48-MHz-Hauptquarz und den 32,768-kHz-RTC-Quarz vorsehen und die vorgegebenen Last- und Platzierungsbedingungen einhalten. | [Takterzeugung](#52-clock-generation) |
 | Reset | Die externe RC-Reset-Schaltung für `RSTN` auf die Spannungsdomäne `PVDD1` beziehen. | [Einschaltsequenz und Reset](#5115-power-up-sequencing-and-reset) |
 | Boot-Modus | Den `Mode`-Pin über einen 10-kΩ-Widerstand auf einen stabilen Pegel legen; Zugang für Produktionstests sowie auf Testplatinen einen Wiederherstellungs-Jumper vorsehen. | [Boot-Konfiguration](#551-boot-configuration) |
@@ -61,7 +61,7 @@ Die SF32LB58x-Serie verfügt über eine integrierte PMU mit zwei BUCK-Ausgängen
 
 ##### 5.2.1.1. SiFli-PMIC-Stromverteilung {#5111-sifli-pmic-power-distribution}
 
-Der SF30147C ist ein hochintegrierter, effizienter Energiemanagement-Chip für Wearables mit sehr niedrigem Stromverbrauch. Er enthält vier LDOs mit einem breiten Ein- und Ausgangsspannungsbereich und jeweils bis zu 100 mA Laststrom. Außerdem bietet er sieben Load-Switches mit geringem Leckstrom und niedrigem Einschaltwiderstand: zwei Hochspannungsschalter für direkt aus der Batteriespannung versorgte Peripherie (zum Beispiel einen Audioverstärker) sowie fünf Niederspannungsschalter für 1,8-V-Peripherie. Der SF32LB58x steuert den SF30147C über ein mit zwei GPIOs emuliertes TWI-Signal.
+Der SF30147C ist ein hochintegrierter, effizienter Energiemanagement-Chip für Wearables mit sehr niedrigem Stromverbrauch. Er enthält vier LDOs mit einem breiten Ein- und Ausgangsspannungsbereich und jeweils bis zu 100 mA Laststrom. Außerdem bietet er sieben Lastschalter mit geringem Leckstrom und niedrigem Einschaltwiderstand: zwei Hochspannungsschalter für direkt aus der Akkuspannung versorgte Peripherie (zum Beispiel einen Audioverstärker) sowie fünf Niederspannungsschalter für 1,8-V-Peripherie. Der SF32LB58x steuert den SF30147C über ein TWI-Signal, das mit zwei GPIOs nachgebildet wird.
 
 <div align="center"><em>Tabelle 5.2-1: SF30147C-Stromverteilung</em></div>
 
@@ -115,9 +115,9 @@ Weitere Pins, die extern versorgt werden müssen, sind nachfolgend aufgeführt.
 
 | Weiterer Stromversorgungspin | Min. Spannung (V) | Typ. Spannung (V) | Max. Spannung (V) | Max. Strom (mA) | Beschreibung |
 |:---|:---|:---|:---|:---|:---|
-| AVDD_BRF | 1,71 | 1,8 | 3,3 | 1 | HF-Stromversorgungseingang |
+| AVDD_BRF | 1,71 | 1,8 | 3,3 | 1 | RF-Stromversorgungseingang |
 | AVDD18_DSI | 1,71 | 1,8 | 2,5 | 20 | MIPI-DSI-Stromversorgungseingang; bei Nichtnutzung unbeschaltet lassen |
-| AVDD33_ANA | 3,15 | 3,3 | 3,45 | 50 | Analoge Stromversorgung + HF-PA-Stromversorgungseingang |
+| AVDD33_ANA | 3,15 | 3,3 | 3,45 | 50 | Analoge Stromversorgung + RF-PA-Stromversorgungseingang |
 | AVDD33_AUD | 3,15 | 3,3 | 3,45 | 50 | Stromversorgungseingang für analoges Audio |
 | AVDD33_USB | 3,15 | 3,3 | 3,45 | 50 | USB-Stromversorgungseingang |
 | VDDIOA | 1,71 | 1,8 | 3,45 | - | I/O-Stromversorgungseingang für PA12-PA93 |
@@ -139,21 +139,21 @@ Weitere Pins, die extern versorgt werden müssen, sind nachfolgend aufgeführt.
 
 | Stromversorgungspin | Kondensator | Beschreibung |
 |:---|:---|:---|
-| PVDD1 | 0,1 µF + 10 µF | Mindestens 10 µF und 0,1 µF (2 Kondensatoren insgesamt) nah am Pin platzieren |
-| PVDD2 | 0,1 µF + 10 µF | Mindestens 10 µF und 0,1 µF (2 Kondensatoren insgesamt) nah am Pin platzieren |
-| BUCK1_LX / BUCK1_FB | 0,1 µF + 4,7 µF | Mindestens 4,7 µF und 0,1 µF (2 Kondensatoren insgesamt) nah am Pin platzieren |
-| BUCK2_LX / BUCK2_FB | 0,1 µF + 4,7 µF | Mindestens 4,7 µF und 0,1 µF (2 Kondensatoren insgesamt) nah am Pin platzieren |
-| LDO_VOUT1 | 4,7 µF | Mindestens einen 4,7-µF-Kondensator nah am Pin platzieren |
-| VDD_RET | 0,47 µF | Mindestens einen 0,47-µF-Kondensator nah am Pin platzieren |
-| VDD_RTC | 0,1 µF | Mindestens einen 0,1-µF-Kondensator nah am Pin platzieren |
-| AVDD_BRF | 1 µF | Mindestens einen 1-µF-Kondensator nah am Pin platzieren |
-| AVDD18_DSI | 4,7 µF | Mindestens einen 4,7-µF-Kondensator nah am Pin platzieren |
-| AVDD33_ANA | 1 µF | Mindestens einen 1-µF-Kondensator nah am Pin platzieren |
-| AVDD33_AUD | 4,7 µF | Mindestens einen 4,7-µF-Kondensator nah am Pin platzieren |
-| AVDD33_USB | 1 µF | Mindestens einen 1-µF-Kondensator nah am Pin platzieren |
-| MIC_BIAS | 1 µF | Mindestens einen 1-µF-Kondensator nah am Pin platzieren |
-| VDDIOA / VDDIOA2 / VDDIOB | 1 µF | Mindestens einen 1-µF-Kondensator nah am Pin platzieren |
-| VDDIOSA / VDDIOSB / VDDIOSC | 1 µF | Mindestens einen 1-µF-Kondensator nah am Pin platzieren |
+| PVDD1 | 0,1 µF + 10 µF | Mindestens einen 10-µF- und einen 0,1-µF-Kondensator (insgesamt 2) nahe am Pin platzieren |
+| PVDD2 | 0,1 µF + 10 µF | Mindestens einen 10-µF- und einen 0,1-µF-Kondensator (insgesamt 2) nahe am Pin platzieren |
+| BUCK1_LX / BUCK1_FB | 0,1 µF + 4,7 µF | Mindestens einen 4,7-µF- und einen 0,1-µF-Kondensator (insgesamt 2) nahe am Pin platzieren |
+| BUCK2_LX / BUCK2_FB | 0,1 µF + 4,7 µF | Mindestens einen 4,7-µF- und einen 0,1-µF-Kondensator (insgesamt 2) nahe am Pin platzieren |
+| LDO_VOUT1 | 4,7 µF | Mindestens einen 4,7-µF-Kondensator nahe am Pin platzieren |
+| VDD_RET | 0,47 µF | Mindestens einen 0,47-µF-Kondensator nahe am Pin platzieren |
+| VDD_RTC | 0,1 µF | Mindestens einen 0,1-µF-Kondensator nahe am Pin platzieren |
+| AVDD_BRF | 1 µF | Mindestens einen 1-µF-Kondensator nahe am Pin platzieren |
+| AVDD18_DSI | 4,7 µF | Mindestens einen 4,7-µF-Kondensator nahe am Pin platzieren |
+| AVDD33_ANA | 1 µF | Mindestens einen 1-µF-Kondensator nahe am Pin platzieren |
+| AVDD33_AUD | 4,7 µF | Mindestens einen 4,7-µF-Kondensator nahe am Pin platzieren |
+| AVDD33_USB | 1 µF | Mindestens einen 1-µF-Kondensator nahe am Pin platzieren |
+| MIC_BIAS | 1 µF | Mindestens einen 1-µF-Kondensator nahe am Pin platzieren |
+| VDDIOA / VDDIOA2 / VDDIOB | 1 µF | Mindestens einen 1-µF-Kondensator nahe an den Pins platzieren |
+| VDDIOSA / VDDIOSB / VDDIOSC | 1 µF | Mindestens einen 1-µF-Kondensator nahe an den Pins platzieren |
 
 </div>
 
@@ -194,15 +194,15 @@ Die SF32LB58x-Serie kann ihre Versorgungsschienen über den SiFli-PMIC SF30147C 
 
 ##### 5.2.1.7. Checkliste Stromversorgungsdesign {#5117-power-design-checklist}
 
-- [ ] Bestätigen, dass der PVDD1/PVDD2-Versorgungsbereich (1,71 V–3,6 V) des ausgewählten Modells dem tatsächlichen Stromversorgungsschema entspricht
-- [ ] BUCK-Induktivität erfüllt 4,7 µH, DCR ≤ 0,4 Ω, Isat ≥ 500 mA
-- [ ] Entkopplungskondensatoren für PVDD1/PVDD2, BUCK1/2_LX/FB, LDO_VOUT1, VDD_RET und VDD_RTC verwenden die in diesem Abschnitt aufgeführten empfohlenen Werte
-- [ ] Bei Verwendung von SF30147C entspricht die Spannungs-/Stromzuweisung der 7 Load-Switches den Peripherieanforderungen
-- [ ] Die RC-Verzögerung der RSTN-Reset-Schaltung erfüllt die Reset-Timing-Anforderungen des Geräts
+- [ ] Bestätigen Sie, dass der PVDD1-/PVDD2-Versorgungsbereich (1,71 V–3,6 V) des ausgewählten Modells zum tatsächlichen Stromversorgungskonzept passt.
+- [ ] Prüfen Sie, ob die BUCK-Induktivität 4,7 µH, DCR ≤ 0,4 Ω und Isat ≥ 500 mA erfüllt.
+- [ ] Prüfen Sie, ob die Entkopplungskondensatoren für PVDD1/PVDD2, BUCK1/2_LX/FB, LDO_VOUT1, VDD_RET und VDD_RTC den in diesem Abschnitt empfohlenen Werten entsprechen.
+- [ ] Prüfen Sie bei Verwendung des SF30147C, ob die Spannungs- und Stromzuordnung der sieben Lastschalter den Anforderungen der Peripherie entspricht.
+- [ ] Prüfen Sie, ob die RC-Verzögerung der RSTN-Reset-Schaltung die Reset-Zeitvorgaben des Geräts erfüllt.
 
 #### 5.2.2. Betriebsmodi und Weckquellen {#512-operating-modes-and-wake-sources}
 
-Die Energiesparstrategie sollte gemeinsam mit den PBR-Funktionen, den aufweckfähigen Interrupts, den Speicherversorgungsschaltern, der Sensorversorgung und den Load-Switches des externen PMIC geprüft werden.
+Prüfen Sie die Energiesparstrategie gemeinsam mit den PBR-Funktionen, den weckfähigen Interrupts, den Speicherversorgungsschaltern, der Sensorversorgung und den Lastschaltern des externen PMIC.
 
 Die SF32LB58x-Serie bietet sechs PBR-Schnittstellen mit folgenden wesentlichen Eigenschaften:
 
@@ -212,7 +212,7 @@ Die SF32LB58x-Serie bietet sechs PBR-Schnittstellen mit folgenden wesentlichen E
 4. PBR0-PBR5 können ein 32-kHz-Taktsignal ausgeben;
 5. PBR0-PBR3 lassen sich als Eingänge für Wecksignale konfigurieren. Im aktiven Zustand empfängt die MCU darüber jedoch keinen Interrupt.
 
-Alle GPIOs der SF32LB58x-Serie können im Light-Sleep- und Deep-Sleep-Modus zum Aufwecken verwendet werden. Im Standby- und Hibernate-Modus stehen 16 aufweckfähige Interruptquellen zur Verfügung: sechs an PA und zehn an PB.
+Alle GPIOs der SF32LB58x-Serie können in den Modi Light Sleep und Deep Sleep zum Aufwecken verwendet werden. In Standby und Hibernate stehen 16 als Weckquelle nutzbare Interruptquellen zur Verfügung: sechs an PA und zehn an PB.
 
 <div align="center"><em>Tabelle 5.2-5: Interruptquellen-Verbindungen</em></div>
 
@@ -256,7 +256,7 @@ Die SF32LB58x-Serie benötigt zwei externe Taktquellen: einen 48-MHz-Hauptquarz 
 
 </div>
 
-<div align="center"><em>Tabelle 5.3-2: Im SiFli-AVL gelistete Quarzmodelle</em></div>
+<div align="center"><em>Tabelle 5.3-2: In der SiFli-AVL gelistete Quarzmodelle</em></div>
 
 <div align="center" markdown>
 
@@ -272,15 +272,15 @@ Die SF32LB58x-Serie benötigt zwei externe Taktquellen: einen 48-MHz-Hauptquarz 
 !!! note
     Die allgemeine Empfehlung für den 48-MHz-Quarz nennt ESR ≤ 30 Ω (22 Ω empfohlen), während für das aufgeführte Modell SX20Y048000B31T-8.8 ESR ≤ 40 Ω angegeben ist. Die Quelle nennt beide Werte, erläutert den Unterschied jedoch nicht. Klären Sie vor dem Einsatz mit SiFli, ob dieses Modell geeignet ist. Der höhere ESR kann auch den statischen Stromverbrauch erhöhen. Entfernen Sie beim PCB-Layout die GND-Kupferfläche der zweiten Lage direkt unter dem Quarz, um die parasitäre Lastkapazität des Taktsignals zu verringern.
 
-Weitere Angaben zu den gelisteten Bauteilen finden Sie in der [SiFli-Liste zugelassener Lieferanten][SiFli Approved Vendor List (AVL)].
+Weitere Angaben zu den gelisteten Bauteilen finden Sie in der [SiFli-Liste freigegebener Lieferanten][SiFli Approved Vendor List (AVL)].
 
-### 5.4. HF {#53-rf}
+### 5.4. RF {#53-rf}
 
-Das HF-Frontend des SF32LB58x nutzt eine integrierte Breitband-Anpassfiltertechnik. Daher ist lediglich eine HF-Leiterbahn auf der PCB mit kontrollierter Impedanz von 50 Ω erforderlich. Für die Unterdrückung von Störsignalen und die Antennenanpassung sollte zusätzlich ein π-Anpassnetzwerk vorgesehen werden.
+Das RF-Frontend des SF32LB58x nutzt eine integrierte Breitband-Anpassfiltertechnik. Daher ist lediglich eine RF-Leiterbahn auf der PCB mit kontrollierter Impedanz von 50 Ω erforderlich. Für die Unterdrückung von Störsignalen und die Antennenanpassung sollte zusätzlich ein π-Anpassnetzwerk vorgesehen werden.
 
-![Abbildung 5.4-1: HF-Schaltbild](../../sf32-products/chips/assets/58x/sf32lb58x-RF-SCH.png){ width="100%" loading="lazy" }
+![Abbildung 5.4-1: RF-Schaltbild](../../sf32-products/chips/assets/58x/sf32lb58x-RF-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Abbildung 5.4-1: HF-Schaltbild</em></div>
+<div align="center"><em>Abbildung 5.4-1: RF-Schaltbild</em></div>
 
 !!! note "Hinweis"
     Die Komponentenwerte im Anpassnetzwerk müssen durch Tests an der tatsächlichen Antenne und dem PCB-Layout ermittelt werden.
@@ -307,7 +307,7 @@ Die SF32LB58x-Serie unterstützt eine MIPI-DSI-Display-Schnittstelle mit zwei La
 | - | AVDD18_DSI | MIPI-Stromversorgungseingang |
 | - | DSI_REXT | Externer 10-kΩ-Widerstand gegen Masse |
 | - | AVSS_DSI | Masse |
-| TE | PB2 | Tearing-Effect-Signal zur MCU-Framesynchronisation |
+| TE | PB2 | Tearing-Effect-Signal zur Synchronisierung der Bildausgabe mit der MCU |
 | RESET | PB5 | Display-Reset-Signal |
 
 </div>
@@ -330,7 +330,7 @@ Die SF32LB58x-Serie unterstützt 3- und 4-Draht-SPI sowie Quad-SPI zum Anschluss
 | D[0] | PA47 | PB04 | Daten 2 im Quad-SPI-Modus |
 | D[1] | PA45 | PB06 | Daten 3 im Quad-SPI-Modus |
 | REST | PA74 | PB05 | Display-Reset-Signal |
-| TE | PA43 | PB02 | Tearing-Effect-Signal zur MCU-Framesynchronisation |
+| TE | PA43 | PB02 | Tearing-Effect-Signal zur Synchronisierung der Bildausgabe mit der MCU |
 
 </div>
 
@@ -357,7 +357,7 @@ Die SF32LB58x-Serie unterstützt eine MCU8080-Schnittstelle zum Anschluss eines 
 | D[6] | PA52 | Daten 6 |
 | D[7] | PA58 | Daten 7 |
 | REST | PA24 | Reset |
-| TE | PA43 | Tearing-Effect-Signal zur MCU-Framesynchronisation |
+| TE | PA43 | Tearing-Effect-Signal zur Synchronisierung der Bildausgabe mit der MCU |
 
 </div>
 
@@ -379,7 +379,7 @@ Die SF32LB58x-Serie unterstützt eine DPI-Schnittstelle zum Anschluss eines LCD-
 | HSYNC | PA14 | Horizontales Sync-Signal |
 | VSYNC | PA15 | Vertikales Sync-Signal |
 | SD | PA18 | Display-Shutdown-Steuerung |
-| CM | PA19 | Schaltet zwischen Normal-Color- und Reduced-Color-Modus um |
+| CM | PA19 | Schaltet zwischen „Normal Color“ (normale Farbdarstellung) und „Reduced Color mode“ (reduzierte Farbdarstellung) um |
 | R0-R7 | PA22/PA23/PA24/PA25/PA26/PA27/PA43/PA44 | Pixeldaten (Rot R0-R7) |
 | G0-G7 | PA45/PA46/PA47/PA48/PA50/PA53/PA54/PA55 | Pixeldaten (Grün G0-G7) |
 | B0-B7 | PA56/PA57/PA58/PA61/PA62/PA63/PA65/PA67 | Pixeldaten (Blau B0-B7) |
@@ -460,7 +460,7 @@ Die SF32LB58x-Serie stellt verschiedene audiobezogene Schnittstellen mit folgend
 8. Analoge Stereo-Kopfhörer können angeschlossen werden.
 
 !!! note "Widersprüchliche DAC-Leiterbahnlängen in der Quelle"
-    Die Hardware-Applikationsschrift von SiFli nennt zwei unterschiedliche Grenzwerte für die DAC-Leiterbahnlänge: In der Audioübersicht steht `<2 cm`, im ausführlichen Abschnitt zur DAC-Leiterbahnführung auf der Leiterplatte `<2 mm`. Die Quelle erklärt diesen Unterschied nicht. Klären Sie vor Abschluss des PCB-Layouts mit SiFli, welcher Grenzwert gilt; nehmen Sie nicht an, dass ein Wert den anderen ersetzt.
+    Der Hardware-Anwendungshinweis von SiFli nennt zwei unterschiedliche Grenzwerte für die DAC-Leiterbahnlänge: In der Audioübersicht steht `<2 cm`, im ausführlichen Abschnitt zur DAC-Leiterbahnführung auf der Leiterplatte `<2 mm`. Die Quelle erklärt diesen Unterschied nicht. Klären Sie vor Abschluss des PCB-Layouts mit SiFli, welcher Grenzwert gilt; nehmen Sie nicht an, dass ein Wert den anderen ersetzt.
 
 ![Abbildung 5.5-1: Differentielle analoge Audioeingangsschaltung](../../sf32-products/chips/assets/58x/sf32lb58x-DIFAU-SCH.png){ width="100%" loading="lazy" }
 
@@ -536,7 +536,7 @@ PB54 wird als Ein-/Ausschaltsignal für die SF32LB58x-Serie empfohlen. Über ein
 
 ##### 5.5.4.2. Funktionstaste oder Drehgeber {#5442-function-button-or-rotary-encoder}
 
-Die SF32LB58x-Serie unterstützt Eingänge für Funktionstasten und Drehgeber; beide benötigen einen Pull-up. Außerdem wird ein optischer Tracking-Sensor unterstützt, für den die I2C4-Schnittstelle empfohlen wird.
+Die SF32LB58x-Serie unterstützt Eingänge für Funktionstasten und Drehgeber; beide benötigen Pull-up-Widerstände. Außerdem wird ein optischer Tracking-Sensor unterstützt, für den die I2C4-Schnittstelle empfohlen wird.
 
 ![Abbildung 5.5-9: Funktionstasten-/Drehgeberschaltung](../../sf32-products/chips/assets/58x/sf32lb58x-KEY-SCH.png){ width="100%" loading="lazy" }
 
@@ -548,9 +548,9 @@ Die SF32LB58x-Serie unterstützt Eingänge für Funktionstasten und Drehgeber; b
 
 | I2C-Signal | I/O | Beschreibung |
 |:---|:---|:---|
-| INT | PA58 | Interrupteingang des optischen Tracking-Sensors |
-| SDA | PA59 | I2C-Daten des optischen Tracking-Sensors |
-| SCL | PA60 | I2C-Takt des optischen Tracking-Sensors |
+| INT | PA58 | Interrupt-Eingang des optischen Tracking-Sensors |
+| SDA | PA59 | I2C-Datenleitung des optischen Tracking-Sensors |
+| SCL | PA60 | I2C-Taktleitung des optischen Tracking-Sensors |
 
 </div>
 
@@ -583,7 +583,7 @@ Die SF32LB58x-Serie besitzt einen `Mode`-Pin zur Auswahl des Boot-Modus.
 
 !!! note "Hinweise"
     1. Die Spannungsdomäne des `Mode`-Pins entspricht der von VDDIOA;
-    2. `Mode` über einen 10-kΩ-Widerstand mit der Versorgung oder GND verbinden, damit der Pegel stabil bleibt. Der Pin darf weder offen bleiben noch zwischen den Pegeln wechseln;
+    2. Verbinden Sie `Mode` über einen 10-kΩ-Widerstand mit der Versorgung oder GND, damit der Pegel stabil bleibt. Der Pin darf weder offen bleiben noch zwischen den Pegeln wechseln;
     3. Ein Testpunkt für den `Mode`-Pin muss auf Produktionsplatinen für Firmware-Download und Quarzkalibrierung reserviert werden; ein Jumper ist nicht erforderlich;
     4. Auf Testplatinen wird empfohlen, einen Jumper für den `Mode`-Pin zu reservieren, damit die Platine nach einem Firmware-Absturz im Download-Modus gestartet werden kann.
 
@@ -605,7 +605,7 @@ Das SF32LB58x-EVB-Referenzboard verwendet standardmäßig MPI4 für den Anschlus
 
 | Flash-Signal | I/O-Signal (MPI4) | Beschreibung |
 |:---|:---|:---|
-| CS# | PA10 | Chip-Select, aktiv-low |
+| CS# | PA10 | Chip-Select, low-aktiv |
 | SO | PA04 | Dateneingang (Daten-Ein-/Ausgang 1) |
 | WP# | PA01 | Schreibschutz-Ausgang (Daten-Ein-/Ausgang 2) |
 | SI | PA05 | Datenausgang (Daten-Ein-/Ausgang 0) |
@@ -620,7 +620,7 @@ Das SF32LB58x-EVB-Referenzboard verwendet standardmäßig MPI4 für den Anschlus
 
 ##### 5.6.2.2. SDIO-eMMC-/Micro-SD-Schnittstelle {#5522-sdio-emmc-micro-sd-interface}
 
-Die SF32LB58x-Serie unterstützt zwei SDIO-Schnittstellen. Auf dem EVB ist SD1 standardmäßig mit eMMC oder SD NAND verbunden; SD2 ist mit einer SD-Karte oder einem Wi-Fi-Chip verbunden.
+Die SF32LB58x-Serie unterstützt zwei SDIO-Schnittstellen. Auf dem EVB ist SD1 standardmäßig mit eMMC oder SD NAND verbunden; SD2 ist mit einer SD-Karte oder einem WLAN-Chip verbunden.
 
 SD1 nutzt 12 GPIOs (PA00–PA11), die über die VDDIOA2-Domäne versorgt werden. Je nach Schnittstellenpegel der Peripherie ist eine Versorgung mit 1,8 V oder 3,3 V möglich. Für SPI-NAND-Flash und eMMC werden 1,8 V empfohlen. SD-NAND-Flash-Bausteine unterstützen nur 3,3-V-Schnittstellenpegel; in diesem Fall muss VDDIOA2 auf 3,3 V eingestellt werden.
 
@@ -720,17 +720,17 @@ Der SF32LB58x bietet eine SWD-Schnittstelle sowie sechs wählbare UART-Schnittst
 
 #### 5.7.2. Produktionsprogrammierung und Hardware-Zugang {#562-production-flashing-and-hardware-access}
 
-Planen Sie den Zugang für Programmierung, Wiederherstellung und Kalibrierung in der Fertigung, bevor Gehäuse und Prüfadapter festgelegt werden. Mindestens müssen Stromversorgung, Masse, SWD, erforderliche UART-Debug-Ausgänge und Boot-/Konfigurationspins zugänglich bleiben. Sehen Sie außerdem die erforderlichen Reset- oder PMIC-Steuerpunkte auf der Platine vor, damit sich ein Gerät mit nicht startender Firmware wiederherstellen lässt.
+Planen Sie den Zugang für Programmierung, Wiederherstellung und Kalibrierung in der Fertigung, bevor Gehäuse und Prüfadapter festgelegt werden. Erhalten Sie mindestens den Zugang zu Stromversorgung, Masse, SWD, erforderlichen UART-Debug-Ausgängen und Boot-/Konfigurationspins. Sehen Sie außerdem die erforderlichen Reset- oder PMIC-Steuerpunkte auf der Platine vor, damit sich ein Gerät mit nicht startender Firmware wiederherstellen lässt.
 
 #### 5.7.3. Schaltplan- und PCB-Zeichnungs-Checklisten {#563-schematic-and-pcb-drawing-checklists}
 
-- [ ] Die Stromversorgung (direkt über die integrierte PMU oder mit SF30147C) entspricht dem Leistungsbudget des Systems
-- [ ] Der Mode-Pin zur Boot-Konfiguration besitzt einen externen 10-kΩ-Widerstand; auf Produktionsplatinen ist ein Testpunkt vorgesehen
-- [ ] Die Spezifikationen des 48-MHz-/32,768-kHz-Quarzes entsprechen den Empfehlungen; die GND-Fläche der Lage 2 unter dem Quarz ist entfernt
-- [ ] Die Auswahl der Speicherschnittstelle (MPI4/SD1/SD2) entspricht der Boot-Konfiguration, und der PA43-Stromversorgungssteuer-Pin für externen Flash ist bestätigt
-- [ ] Die Auswahl der Display-Schnittstelle (MIPI-DSI/SPI-QSPI/MCU8080/DPI/JDI) entspricht der LCDC1-/LCDC2-Pinzuweisung
-- [ ] Die Pins des Debug-Ports (SWD + 6× UART) sind bedarfsgerecht zugewiesen; der interne Pull-up für UART-RXD ist aktiviert
-- [ ] Die Multiplexbelegung von I2S/PDM und analogem Audio ist geprüft; die Anforderungen an die Differenzleitungen sind erfüllt
-- [ ] USB DP und DM sind jeweils mit TVS-Schutz gegen Masse versehen; Sperrschichtkapazität < 5 pF
+- [ ] Prüfen Sie, ob die Stromversorgung (direkt über die integrierte PMU oder mit SF30147C) dem Leistungsbudget des Systems entspricht.
+- [ ] Prüfen Sie, ob der Mode-Pin zur Boot-Konfiguration einen externen 10-kΩ-Widerstand besitzt und auf Produktionsplatinen ein Testpunkt vorgesehen ist.
+- [ ] Prüfen Sie, ob die Spezifikationen des 48-MHz-/32,768-kHz-Quarzes den Empfehlungen entsprechen und die GND-Fläche der Lage 2 unter dem Quarz entfernt wurde.
+- [ ] Prüfen Sie, ob die Auswahl der Speicherschnittstelle (MPI4/SD1/SD2) der Boot-Konfiguration entspricht und der PA43-Steuerpin für die Stromversorgung des externen Flashs bestätigt ist.
+- [ ] Prüfen Sie, ob die Auswahl der Display-Schnittstelle (MIPI-DSI/SPI-QSPI/MCU8080/DPI/JDI) der LCDC1-/LCDC2-Pinzuweisung entspricht.
+- [ ] Prüfen Sie, ob die Pins des Debug-Ports (SWD + 6× UART) bedarfsgerecht zugewiesen und die internen Pull-ups für UART-RXD aktiviert sind.
+- [ ] Prüfen Sie, ob das Multiplexing von I2S/PDM und analogem Audio verifiziert wurde und das Budget für Differenzleiterbahnen eingehalten ist.
+- [ ] Prüfen Sie, ob USB DP und DM jeweils mit TVS-Dioden gegen Masse geschützt sind und die Sperrschichtkapazität unter 5 pF liegt.
 
 [SiFli Approved Vendor List (AVL)]: ../cad-components/sifli-approved-vendor-list.md

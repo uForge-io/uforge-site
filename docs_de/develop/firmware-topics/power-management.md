@@ -1,6 +1,6 @@
 ---
 icon: lucide/battery-charging
-description: "Stromverbrauch des SF32 bei Taktkonfiguration, Schlafmodi, Displaybetrieb, Bluetooth-Verbindungsintervallen und Sensoraktivität messen und optimieren, damit aus einem Prototyp ein batterietaugliches Produkt wird."
+description: "Stromverbrauch des SF32 bei Taktkonfiguration, Schlafmodi, Displaybetrieb, Bluetooth-Verbindungsintervallen und Sensoraktivität messen und optimieren, damit aus einem Prototyp ein für den Akkubetrieb ausgelegtes Produkt wird."
 tags:
     - Entwicklung
     - Energiemanagement
@@ -8,7 +8,7 @@ tags:
 
 # Energiemanagement { #power-management }
 
-Mit gutem Energiemanagement wird aus einem funktionsfähigen Prototyp ein für Wearables geeignetes Produkt. Beim SF32 umfasst die Arbeit am Energieverbrauch Taktkonfiguration, Schlafmodi, Displaybetrieb, Bluetooth-Verbindungsintervalle, Sensorinterrupts und die Anwendungsarchitektur.
+Mit gutem Energiemanagement wird aus einem funktionsfähigen Prototyp ein Produkt für Wearables. Beim SF32 umfasst die Arbeit am Energieverbrauch Taktkonfiguration, Schlafmodi, Displaybetrieb, Bluetooth-Verbindungsintervalle, Interrupts der Sensoren und die Anwendungsarchitektur.
 
 Optimieren Sie den Stromverbrauch nicht anhand einzelner Codeausschnitte. Messen Sie Produktszenarien: Start, Leerlauf, Leerlauf bei bestehender Verbindung, aktives Display, aktiver Audiobetrieb, Aufwecken durch einen Sensor, OTA und Herunterfahren.
 

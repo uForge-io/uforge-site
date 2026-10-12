@@ -15,8 +15,8 @@ Use o [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) para estabelecer uma co
 A página de [status do MicroPython](../../develop/platforms/micropython/status.md) acompanha os artefatos públicos e os critérios de aceitação exatos que precisam ser atendidos antes que esta página possa se tornar um tutorial.
 
 !!! warning "Ainda não há um tutorial de MicroPython validado"
-    Um guia utilizável de MicroPython para SF32 exige uma imagem de firmware compatível com a placa e sua configuração de memória, comandos de gravação e recuperação, a porta e a velocidade de transmissão (baud rate) do REPL, o comportamento do sistema de arquivos e uma matriz de suporte a periféricos que reflita com precisão o suporte real. Até que esses materiais estejam disponíveis, esta página não inclui etapas de instalação.
+    Um guia utilizável de MicroPython para SF32 exige uma imagem de firmware compatível com a placa e sua configuração de memória, comandos de gravação e recuperação, a porta e a velocidade de transmissão (baud rate) do REPL, o comportamento do sistema de arquivos e uma matriz atualizada e fiel do suporte a periféricos. Até que esses materiais estejam disponíveis, esta página não inclui etapas de instalação.
 
-## O que um tutorial verificado precisa { #what-sifli-should-publish }
+## O que um tutorial validado precisa { #what-sifli-should-publish }
 
-Antes de seguir um futuro tutorial de MicroPython para SF32, confirme se ele especifica uma imagem compatível para a placa, comandos testados de gravação e recuperação, a porta e a velocidade de transmissão (baud rate) do REPL, o comportamento do sistema de arquivos e uma matriz atualizada de suporte aos periféricos. Até que esses detalhes estejam disponíveis na [página de status](../../develop/platforms/micropython/status.md), use o caminho do SiFli-SDK indicado acima para o primeiro bring-up.
+Antes de seguir um futuro tutorial de MicroPython para SF32, confirme se ele especifica uma imagem compatível com a placa, comandos testados de gravação e recuperação, a porta e a velocidade de transmissão (baud rate) do REPL, o comportamento do sistema de arquivos e uma matriz atualizada de suporte aos periféricos. Até que esses detalhes estejam disponíveis na [página de status](../../develop/platforms/micropython/status.md), use o caminho do SiFli-SDK indicado acima para a primeira ativação da placa.

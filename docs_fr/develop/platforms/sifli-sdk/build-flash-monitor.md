@@ -120,7 +120,7 @@ Si vous utilisez [CodeKit](../../tools/codekit.md), conservez les mêmes traces 
 
 </div>
 
-## Liste de vérification pour le transfert { #handoff-checklist }
+## Liste de contrôle pour le transfert { #handoff-checklist }
 
 Avant de transmettre un projet à un autre développeur, incluez :
 

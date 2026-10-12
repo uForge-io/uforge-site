@@ -148,7 +148,7 @@ Los principales ámbitos de fallo son el archivo de contenido y el análisis XHT
 
 **Evidencias que se deben conservar:** fotografías físicas, identificadores de componentes, estado de Git, configuración, registros de compilación/grabación, hashes de imágenes y registro de inicio.
 
-**Criterio de salida de la etapa 1:** el conjunto coincide con la configuración predeterminada `sf32-oed-epd_v11`, y las entradas fijadas generan y arrancan de forma reproducible la misma imagen.
+**Criterio de salida del punto de control 1:** el conjunto coincide con la configuración predeterminada `sf32-oed-epd_v11`, y las entradas fijadas generan y arrancan de forma reproducible la misma imagen.
 
 ## Etapa 2 — Validar el flujo de lectura intacto { #stage-2-validate-the-untouched-reading-flow }
 
@@ -161,20 +161,20 @@ Los principales ámbitos de fallo son el archivo de contenido y el análisis XHT
 
 **Evidencias que se deben conservar:** origen/hash de los EPUB de prueba, fotografías de páginas, cronología de interacción, registros, memoria disponible y fallos clasificados.
 
-**Criterio de salida de la etapa 2:** el flujo principal se repite con el conjunto de muestras objetivo y todos los fallos se clasifican como contenido, fuente, almacenamiento, memoria, entrada o pantalla, no como «intermitentes».
+**Criterio de salida del punto de control 2:** el flujo principal se repite con el conjunto de muestras objetivo y todos los fallos se clasifican como contenido, fuente, almacenamiento, memoria, entrada o pantalla, no como «intermitentes».
 
 ## Etapa 3 — Validar ajustes, almacenamiento y recuperación { #stage-3-qualify-settings-storage-and-recovery }
 
 **Objetivo:** garantizar que el contenido y los ajustes reales no dejen al usuario sin posibilidad de recuperación tras eventos de almacenamiento.
 
-1. Coloque archivos `.ttf`/`.otf` en `/fonts` de la tarjeta TF; valide la detección de hasta 64 fuentes externas, su selección y el fallback cuando desaparece una fuente.
+1. Coloque archivos `.ttf`/`.otf` en `/fonts` de la tarjeta TF; valide la detección de hasta 64 fuentes externas, su selección y el uso de una fuente alternativa cuando desaparezca la seleccionada.
 2. Pruebe tamaños de fuente de 24–48 px, grosor, interlineado de 1,0×–2,0×, márgenes de 5–20 px y persistencia tras reinicio mediante `/settings.cfg`.
 3. En momentos seguros sin escrituras, pruebe la ausencia, extracción y reinserción de la tarjeta, ajustes dañados y fuentes no disponibles; no la extraiga en caliente de una forma que corrompa deliberadamente el sistema de archivos.
 4. Verifique el límite actual: Continuar leyendo conserva el índice del último libro abierto y el capítulo durante la ejecución actual; no lo describa como sincronización completa del progreso entre reinicios.
 
 **Evidencias que se deben conservar:** especificación/formato de la tarjeta, inventario de recursos, archivo de ajustes, resultados de reinicio, registros de errores y acciones de recuperación.
 
-**Criterio de salida de la etapa 3:** el contenido y los ajustes objetivo se cargan repetidamente; la ausencia de tarjeta, una configuración no válida o una fuente ausente cuentan con alternativas comprensibles que no impiden volver a Inicio.
+**Criterio de salida del punto de control 3:** el contenido y los ajustes objetivo se cargan repetidamente; la ausencia de tarjeta, una configuración no válida o una fuente ausente cuentan con alternativas comprensibles que no impiden volver a Inicio.
 
 ## Etapa 4 — Evaluar la calidad de la pantalla de papel electrónico y el consumo { #stage-4-qualify-e-paper-quality-and-power }
 
@@ -187,7 +187,7 @@ Los principales ámbitos de fallo son el archivo de contenido y el análisis XHT
 
 **Evidencias que se deben conservar:** versión del panel/forma de onda, temperatura, imágenes de página, estadísticas de actualización, trazas de corriente, condiciones de batería y resultados de activación/apagado.
 
-**Criterio de salida de la etapa 4:** se definen y alcanzan los umbrales de calidad de pantalla, latencia de actualización, temperatura, alimentación y recuperación; cada resultado insuficiente tiene una resolución explícita.
+**Criterio de salida del punto de control 4:** se definen y alcanzan los umbrales de calidad de pantalla, latencia de actualización, temperatura, alimentación y recuperación; cada resultado insuficiente tiene una resolución explícita.
 
 ## Etapa 5 — Realizar una adaptación controlada y revisar la preparación { #stage-5-make-a-controlled-adaptation-and-review-readiness }
 
@@ -206,7 +206,7 @@ La revisión del producto debe responder como mínimo a estas preguntas:
 
 **Evidencias que se deben conservar:** revisión del cambio, diff, matriz de regresión, registro de riesgos, responsables y decisión de producto.
 
-**Criterio de salida de la etapa 5:** el cambio controlado supera todas las regresiones aplicables y los riesgos pendientes de contenido, pantalla, alimentación, seguridad, licencias, suministro y normativa tienen responsables, mitigaciones y una decisión de continuar, aplazar o detenerse.
+**Criterio de salida del punto de control 5:** el cambio controlado supera todas las regresiones aplicables y los riesgos pendientes de contenido, pantalla, alimentación, seguridad, licencias, suministro y normativa tienen responsables, mitigaciones y una decisión de continuar, aplazar o detenerse.
 
 ## Traspaso a la fase de diseño del producto { #handoff-to-product-design }
 

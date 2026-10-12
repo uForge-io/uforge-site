@@ -25,7 +25,7 @@ El middleware detecta el estado del cargador, selecciona la curva de carga o des
 | Interpolación lineal | Calcula un porcentaje entre los puntos de la curva seleccionada. |
 | Filtro primario | Filtra los saltos de tensión mediante el umbral configurado y el número de muestras consecutivas que lo superan. |
 | Filtro secundario | Si se habilita, calcula un promedio ponderado de los valores de tensión anterior y actual. |
-| Detección del estado del cargador | Usa la configuración de detección del cargador de la placa para seleccionar la curva de carga o descarga. |
+| Detección del estado del cargador | La configuración de detección del cargador de la placa sirve para seleccionar la curva de carga o descarga. |
 
 </div>
 

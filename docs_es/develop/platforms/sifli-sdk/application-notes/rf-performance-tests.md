@@ -65,7 +65,7 @@ CONFIG_BSP_BT_CONNECTION_MANAGER=y
 CONFIG_BT_RF_TEST=y
 ```
 
-La ruta `bt_rftest` de SF32LB55x no utiliza `CONFIG_BT_RF_TEST`. `CONFIG_BT_FINSH` sirve para trazas y no es necesaria para los comandos de prueba. Si la ruta de control usa la UART IPC propia del SDK, configure `CONFIG_IPC_USE_OWN_DEVICE=y` y `CONFIG_IPC_OWN_DEVICE_NAME="uart2"` según corresponda a la placa. Los ejemplos `example/bt/spp/` y `example/bt/HCI_over_uart/` del SDK sirven como punto de partida.
+La ruta `bt_rftest` de SF32LB55x no utiliza `CONFIG_BT_RF_TEST`. `CONFIG_BT_FINSH` sirve para trazas y no es necesaria para los comandos de prueba. Si la ruta de control usa el UART IPC propia del SDK, configure `CONFIG_IPC_USE_OWN_DEVICE=y` y `CONFIG_IPC_OWN_DEVICE_NAME="uart2"` según corresponda a la placa. Los ejemplos `example/bt/spp/` y `example/bt/HCI_over_uart/` del SDK sirven como punto de partida.
 
 ## Prueba de señalización BT { #bt-signaling-test }
 

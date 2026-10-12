@@ -19,7 +19,7 @@ Nutzen Sie dieses Kapitel zusammen mit Abschnitt 5 zur Prüfung des PCB-Layouts.
 
 **Design-Ziel**
 
-Setzen Sie den Schaltplan in eine fertigungsgerechte 4-Lagen-PTH-Platine um. Schützen Sie dabei die empfindlichen RF-, Quarz-, Audio-, USB- und SDIO-Signalwege sowie die Versorgungsleitungen vor Impedanz-, Stör- und Rückstromproblemen.
+Setzen Sie den Schaltplan in eine fertigungsgerechte, vierlagige Leiterplatte mit durchkontaktierten Bohrungen (PTH) um. Schützen Sie dabei die empfindlichen RF-, Quarz-, Audio-, USB- und SDIO-Signalwege sowie die Versorgungsleitungen vor Impedanz-, Stör- und Rückstromproblemen.
 
 **PCB-Review-Ablauf**
 
@@ -31,7 +31,7 @@ Setzen Sie den Schaltplan in eine fertigungsgerechte 4-Lagen-PTH-Platine um. Sch
 
 ### 6.1. PCB-Footprint-Design { #61-pcb-footprint-design }
 
-Das QFN68L-Gehäuse des SF32LB52x misst 7 mm x 7 mm x 0,85 mm, mit 68 Pins und 0,35 mm Pitch.
+Das QFN68L-Gehäuse des SF32LB52x misst 7 mm x 7 mm x 0,85 mm, hat 68 Pins und ein Rastermaß von 0,35 mm.
 
 Die Gehäusezeichnung gibt eine nominale Gesamthöhe von 0,85 mm mit einem Bereich von 0,8–0,9 mm an. Der Abstand zur Platine beträgt nominal 0,02 mm, maximal 0,05 mm. Prüfen Sie Montage- und Gehäusefreiräume anhand der Detailzeichnung, nicht nur anhand der gerundeten Maßangaben.
 
@@ -49,7 +49,7 @@ Die Gehäusezeichnung gibt eine nominale Gesamthöhe von 0,85 mm mit einem Berei
 
 Abbildung 6.1-3 gibt Anschlussflächen von 0,2 mm x 0,55 mm, einen Abstand von 0,35 mm, Lötstoppöffnungen von 0,3 mm x 0,65 mm und Lotpastenöffnungen von 0,2 mm x 0,55 mm vor. Dies sind Referenzmaße; prüfen Sie vor der Freigabe die Anforderungen des Bestückungsprozesses.
 
-Die Gehäusezeichnung gibt eine nominale freiliegende Anschlussfläche von 5,49 mm x 5,49 mm an. Das Fanout-Beispiel verbindet die zentrale Fläche mit GND; behandeln Sie sie nicht als unbeschaltetes mechanisches Merkmal.
+Die Gehäusezeichnung gibt für die freiliegende Anschlussfläche ein Nennmaß von 5,49 mm x 5,49 mm an. Im Fanout-Beispiel ist die zentrale Fläche mit GND verbunden; sie ist also kein rein mechanisches, elektrisch ungenutztes Element.
 
 ### 6.2. PCB-Stack-up { #62-pcb-stack-up }
 
@@ -59,7 +59,7 @@ Das Referenzdesign unterstützt einseitige und doppelseitige Bestückung. Alle B
 
 <div align="center"><em>Abbildung 6.2-1: Referenz-Stack-up-Struktur</em></div>
 
-Abbildung 6.2-1 zeigt einen Referenzlagenaufbau mit 0,8 mm ±10% einschließlich Galvanisierung und Lötstoppmaske. Die berechnete Gesamtdicke beträgt 0,79553 mm. Stimmen Sie die tatsächliche Fertigdicke und den dielektrischen Aufbau mit dem PCB-Hersteller ab; dieses Beispiel ist kein universell gültiger Lagenaufbau.
+Abbildung 6.2-1 zeigt einen Referenzlagenaufbau mit 0,8 mm ±10 % einschließlich Galvanisierung und Lötstoppmaske. Die berechnete Gesamtdicke beträgt 0,79553 mm. Stimmen Sie die tatsächliche Fertigdicke und den dielektrischen Aufbau mit dem PCB-Hersteller ab; dieses Beispiel ist kein universell gültiger Lagenaufbau.
 
 <div align="center"><em>Tabelle 6.2-1: Werte des Referenzlagenaufbaus</em></div>
 
@@ -67,23 +67,23 @@ Abbildung 6.2-1 zeigt einen Referenzlagenaufbau mit 0,8 mm ±10% einschließlich
 
 | Lage | Material | Dicke (mil) | Dicke (mm) | Dk | Df |
 |:---|:---|---:|---:|---:|---:|
-| Obere Lötstoppmaske | Lötstoppmaske | 1 | 0.0254 | 3.5 | 0.8 |
-| L1 | Kupfer + Galvanisierung | 1.81 | 0.045974 | — | — |
-| L1–L2-Dielektrikum | 1080 (66%) x3 Prepreg | 8.5 | 0.2159 | 3.8 | 0.019 |
-| L2 | Kupfer + Galvanisierung | 1.4 | 0.03556 | — | — |
-| L2–L3-Dielektrikum | Kern | 5.9 | 0.14986 | 4 | 0.017 |
-| L3 | Kupfer + Galvanisierung | 1.4 | 0.03556 | — | — |
-| L3–L4-Dielektrikum | 1080 (66%) x3 Prepreg | 8.5 | 0.2159 | 3.8 | 0.019 |
-| L4 | Kupfer + Galvanisierung | 1.81 | 0.045974 | — | — |
-| Untere Lötstoppmaske | Lötstoppmaske | 1 | 0.0254 | 3.5 | 0.8 |
+| Obere Lötstoppmaske | Lötstoppmaske | 1 | 0,0254 | 3,5 | 0,8 |
+| L1 | Kupfer + Galvanisierung | 1,81 | 0,045974 | — | — |
+| L1–L2-Dielektrikum | 1080 (66 %) x3 Prepreg | 8,5 | 0,2159 | 3,8 | 0,019 |
+| L2 | Kupfer + Galvanisierung | 1,4 | 0,03556 | — | — |
+| L2–L3-Dielektrikum | Kern | 5,9 | 0,14986 | 4 | 0,017 |
+| L3 | Kupfer + Galvanisierung | 1,4 | 0,03556 | — | — |
+| L3–L4-Dielektrikum | 1080 (66 %) x3 Prepreg | 8,5 | 0,2159 | 3,8 | 0,019 |
+| L4 | Kupfer + Galvanisierung | 1,81 | 0,045974 | — | — |
+| Untere Lötstoppmaske | Lötstoppmaske | 1 | 0,0254 | 3,5 | 0,8 |
 
 </div>
 
-Die Prepreg-Zeilen setzen einen Kupferflächenanteil von 70% voraus. Dk und Df sind aus der Abbildung übernommen, einschließlich Df 0,8 für die Lötstoppmaske; dies sind keine verifizierten universellen Materialkennwerte. Verwenden Sie für Impedanz- und Verlustberechnungen die tatsächlichen Herstellerdaten.
+Die Prepreg-Zeilen setzen einen Kupferflächenanteil von 70 % voraus. Dk und Df sind aus der Abbildung übernommen, einschließlich Df 0,8 für die Lötstoppmaske; dies sind keine verifizierten universellen Materialkennwerte. Verwenden Sie für Impedanz- und Verlustberechnungen die tatsächlichen Herstellerdaten.
 
 ### 6.3. Allgemeine PCB-Designregeln { #63-general-pcb-design-rules }
 
-Befolgen Sie die allgemeinen PCB-Designregeln für PTH-Platinen aus dem Referenzdesign.
+Befolgen Sie die allgemeinen PCB-Designregeln für Leiterplatten mit durchkontaktierten Bohrungen aus dem Referenzdesign.
 
 ![Abbildung 6.3-1: Allgemeine PCB-Designregeln](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-RULE.png){ width="100%" loading="lazy" }
 
@@ -91,7 +91,7 @@ Befolgen Sie die allgemeinen PCB-Designregeln für PTH-Platinen aus dem Referenz
 
 Abbildung 6.3-1 verwendet eine minimale und empfohlene Leiterbahnbreite von 0,1 mm sowie eine maximale Breite von 2,54 mm. Sie unterscheidet Abstände von 0,1 mm für Leiterbahnen, Vias und Pads von Kupferabständen mit 0,127 mm (0,15 mm zwischen Kupferflächen) und gibt einen Abstand zum Platinenrand von 0,25 mm vor. Dies sind CAD-Referenzregeln. Fertigungsgrenzen und impedanzkontrollierte Leiterbahnen sind gesondert zu prüfen.
 
-Die zusätzlichen Regeln in Abbildung 6.3-1 legen jeweils 0,1 mm Abstand zwischen Bohrungen und zwischen Bauteilkörpern fest. Einige Einträge für dasselbe Netz sind null; das hebt weder Abstände zwischen verschiedenen Netzen noch die Rand- und Kupferregeln auf.
+Die zusätzlichen Regeln in Abbildung 6.3-1 legen jeweils 0,1 mm Abstand zwischen Bohrungen sowie zwischen Bauteilkörpern fest. Für einige Objekte desselben Netzes ist der Abstand mit 0 mm angegeben. Das hebt weder die Abstandsregeln zwischen verschiedenen Netzen noch die Rand- und Kupferregeln auf.
 
 ### 6.4. PCB-Leiterbahn-Fanout { #64-pcb-trace-fanout }
 
@@ -103,9 +103,9 @@ Führen Sie alle QFN-Gehäusesignale über die obere Lage heraus (Fanout).
 
 ### 6.5. Routing der Taktschnittstelle { #65-clock-interface-routing }
 
-Wenden Sie diese Takt-Routing-Regeln auf beide Design-Gruppen an:
+Wenden Sie diese Takt-Routing-Regeln auf beide Variantengruppen an:
 
-- Platzieren Sie Quarze innerhalb der Abschirmung und mehr als 1 mm vom PCB-Rand entfernt. Halten Sie möglichst großen Abstand zu wärmeerzeugenden Bauteilen (PA, Lader, PMU-Schaltungen), idealerweise mehr als 5 mm, damit deren Wärme die Frequenzdrift nicht beeinflusst.
+- Platzieren Sie Quarze innerhalb des Abschirmgehäuses und mehr als 1 mm vom PCB-Rand entfernt. Halten Sie möglichst großen Abstand zu wärmeerzeugenden Bauteilen (PA, Lader, PMU-Schaltungen), idealerweise mehr als 5 mm, damit deren Wärme die Frequenzdrift nicht beeinflusst.
 - Halten Sie um den Quarz einen Freiraum von mehr als 0,25 mm ein, in dem sich weder anderes Metall noch Bauteile befinden.
 - Verlegen Sie die 48-MHz-Quarzleiterbahnen auf der oberen Lage, mit 3–10 mm Länge, 0,1 mm Breite und vollständiger Masseabschirmung. Halten Sie Abstand zu VBAT/VCC, DC/DC und Hochgeschwindigkeitssignalleitungen. Führen Sie unter dem Quarzbereich weder auf der oberen noch auf der angrenzenden Lage andere Leiterbahnen.
 - Verlegen Sie die 32,768-kHz-Quarzleiterbahnen auf der oberen Lage, höchstens 10 mm lang und 0,1 mm breit. Halten Sie zwischen den parallelen 32K_XI- und 32K_XO-Leiterbahnen mindestens 0,15 mm Abstand und schirmen Sie sie mit Masse ab. Führen Sie unter dieser Quarzschaltung weder auf der oberen noch auf der angrenzenden Lage andere Leiterbahnen.
@@ -141,11 +141,11 @@ Wenden Sie diese Takt-Routing-Regeln auf beide Design-Gruppen an:
 Abbildungen 6.5-3 und 6.5-6 zeigen für beide Quarze mindestens 0,15 mm Abstand zwischen den parallelen XI/XO-Leiterbahnen. Abbildung 6.5-2 verwendet einen 48-MHz-Quarz mit 8,8 pF Lastkapazität; die externen Lastkondensatoren sind als NF (nicht bestückt) markiert. Abbildung 6.5-5 verwendet einen 32,768-kHz-Quarz mit 7 pF an PA22/PA23, die auch mit PDM_CLK/PDM_DATA multiplexiert sind.
 
 !!! important "Widersprüchliche Quellen zur Kupferfläche unter dem Quarz"
-    Der Anwendungshinweis für batteriegespeiste Varianten widerspricht sich bei der Kupferfläche unter dem Quarz: Im Taktabschnitt soll die L2-Massefläche direkt unter dem Quarz entfernt werden, im PCB-Routing-Abschnitt sind dagegen Ebenenaussparungen und Kupferausschnitte auf der oberen und den angrenzenden Lagen untersagt; das Routing-Modell zeigt durchgehendes L2-GND. Der separate PCB-Layout-Leitfaden wiederholt das Verbot von Aussparungen. Leiten Sie keine allgemeine L2-Regel ab und entscheiden Sie nicht allein anhand der Lagenzahl. Klären Sie die Ausführung für den gewählten Lagenaufbau vor der Freigabe mit SiFli. Quarz-Keep-out und Bauteilabstände sind getrennt zu prüfen.
+    Der Anwendungshinweis für batteriegespeiste Varianten widerspricht sich bei der Kupferfläche unter dem Quarz: Im Taktabschnitt soll die L2-Massefläche direkt unter dem Quarz entfernt werden; im PCB-Routing-Abschnitt sind dagegen Ebenenaussparungen und Kupferausschnitte auf der oberen und den angrenzenden Lagen untersagt. Das Routing-Modell zeigt eine durchgehende L2-Massefläche. Der separate PCB-Layout-Leitfaden wiederholt das Verbot von Aussparungen. Leiten Sie keine allgemeine L2-Regel ab und entscheiden Sie nicht allein anhand der Lagenzahl. Klären Sie die Ausführung für den gewählten Lagenaufbau vor der Freigabe mit SiFli. Quarz-Freihaltebereich und Bauteilabstände sind getrennt zu prüfen.
 
 ### 6.6. Routing der RF-Schnittstelle { #66-rf-interface-routing }
 
-Wenden Sie diese RF-Routing-Regeln auf beide Design-Gruppen an:
+Wenden Sie diese RF-Routing-Regeln auf beide Variantengruppen an:
 
 - Platzieren Sie das RF-Anpassnetzwerk nahe am Chip, nicht an der Antenne
 - Platzieren Sie den AVDD_BRF-Filterkondensator nahe am Chip-Pin und verbinden Sie seine Masse-Vias direkt mit der Hauptmasse
@@ -168,11 +168,11 @@ Wenden Sie diese RF-Routing-Regeln auf beide Design-Gruppen an:
 
 <div align="center"><em>Abbildung 6.6-4: PCB-Routing des RF-Signals</em></div>
 
-Die RF-Beispiele verwenden einen Serienkondensator mit 15 pF/50 V (C0333), lassen C0318/C0319 unbestückt (NF) und zeigen 0,47 uF zur Filterung von AVDD_BRF. Dies sind Bestückungsbeispiele, keine universellen Vorgaben zur Antennenanpassung.
+Die RF-Beispiele verwenden einen Serienkondensator mit 15 pF/50 V (C0333), lassen C0318/C0319 unbestückt (NF) und zeigen 0,47 µF zur Filterung von AVDD_BRF. Dies sind Bestückungsbeispiele, keine universellen Vorgaben zur Antennenanpassung.
 
 ### 6.7. Routing der Audioschnittstelle { #67-audio-interface-routing }
 
-Wenden Sie diese Audio-Routing-Regeln auf beide Design-Gruppen an:
+Wenden Sie diese Audio-Routing-Regeln auf beide Variantengruppen an:
 
 - Platzieren Sie die Filterkondensatoren für AVDD33_AUD, MIC_BIAS und AUD_VREF nahe an den jeweiligen Pins und verbinden Sie ihre Masseanschlüsse zuverlässig mit der Hauptmasse.
 - Platzieren Sie die Bauteile für den analogen ADCP-Eingang nahe am Chip-Pin. Halten Sie die Leiterbahnen kurz, schirmen Sie sie vollständig mit Masse ab und halten Sie Abstand zu starken Störquellen.
@@ -202,7 +202,7 @@ Wenden Sie diese Audio-Routing-Regeln auf beide Design-Gruppen an:
 
 <div align="center"><em>Abbildung 6.7-6: PCB-Design des analogen Audioausgangs</em></div>
 
-Abbildung 6.7-1 zeigt Referenzfilterkondensatoren mit 1 uF/6,3 V für MIC_BIAS, 2,2 uF/10 V für AVDD33_AUD und 1 uF/6,3 V für AUD_VREF. Diese Werte erläutern die abgebildete Schaltung; bestätigen Sie die erforderlichen Werte für das tatsächliche Design. Halten Sie DACP/DACN zusätzlich zur differenziellen Führung von starken Störquellen fern.
+Abbildung 6.7-1 zeigt Referenzfilterkondensatoren mit 1 µF/6,3 V für MIC_BIAS, 2,2 µF/10 V für AVDD33_AUD und 1 µF/6,3 V für AUD_VREF. Diese Werte erläutern die abgebildete Schaltung; bestätigen Sie die erforderlichen Werte für das konkrete Design. Halten Sie DACP/DACN zusätzlich zur differentiellen Führung von starken Störquellen fern.
 
 Die Schaltplanrichtlinien der Quelle begrenzen außerdem die DAC-Ausgangsleiterbahnen auf weniger als 2 cm.
 
@@ -256,11 +256,11 @@ Platzieren Sie die Leistungsinduktivität und die Filterkondensatoren nahe an de
 
 <div align="center"><em>Abbildung 6.10-2: PCB-Layout der wichtigsten DC/DC-Bauteile</em></div>
 
-Abbildung 6.10-1 verwendet eine Induktivität von 4,7 uH und einen Ausgangskondensator von 4,7 uF/10 V. PMU_BUCK_VSW und PMU_BUCK_VOUT bezeichnen den Schaltknoten und den Ausgangs-/Rückkopplungsknoten, die in der Quellen-Pintabelle BUCK_LX und BUCK_FB heißen. Halten Sie andere Leiterbahnen aus dem Induktivitätsbereich fern.
+Abbildung 6.10-1 verwendet eine Induktivität von 4,7 µH und einen Ausgangskondensator von 4,7 µF/10 V. PMU_BUCK_VSW und PMU_BUCK_VOUT bezeichnen den Schaltknoten und den Ausgangs-/Rückkopplungsknoten, die in der Pin-Tabelle der Quelle BUCK_LX und BUCK_FB heißen. Halten Sie andere Leiterbahnen aus dem Induktivitätsbereich fern.
 
 ### 6.11. Routing der Stromversorgung { #611-power-supply-routing }
 
-=== "SF32LB520/3/5/7 (batteriebetrieben)"
+=== "SF32LB520/3/5/7 (akkubetrieben)"
 
     VCC ist der Eingangspin des internen PMU-Moduls. Platzieren Sie den zugehörigen Kondensator nahe am Pin und führen Sie die Leiterbahn mit mindestens 0,4 mm Breite. Platzieren Sie auch die Filterkondensatoren für VDD_VOUT1, VDD_VOUT2, VDD_RET, VDD_RTC, VDD18_VOUT, VDD33_VOUT1, VDD33_VOUT2, AVDD33_AUD und AVDD_BRF nahe an den jeweiligen Pins. Dimensionieren Sie die Leiterbahnbreiten nach dem erforderlichen Eingangsstrom.
 
@@ -285,7 +285,7 @@ Abbildung 6.10-1 verwendet eine Induktivität von 4,7 uH und einen Ausgangskonde
     <div align="center"><em>Abbildung 6.11-4: VBUS- & VBAT-Stromversorgungsrouting (PCB)</em></div>
 
     !!! note "Referenzschaltplan der Ladeschaltung"
-        Abbildung 6.11-3 zeigt 10 uF/10 V an VBUS und 4,7 uF/10 V an VBAT. Der abgedruckte VBUS-Bereich beträgt 4,3–5,5 V; Electrical Specification-A3 nennt 4,5–5,5 V, und der Anwendungshinweis für batteriebetriebene Varianten gibt für den integrierten Lader 4,6–5,5 V an und verlangt bei maximalem Ladestrom mindestens 4,6 V am VBUS-Pin. Die Abbildung ist eine Platzierungsreferenz und bestätigt 4,3 V nicht als geprüfte untere Betriebsspannung. Beachten Sie auch den Quellenhinweis in Abschnitt 5.2.
+        Abbildung 6.11-3 zeigt 10 µF/10 V an VBUS und 4,7 µF/10 V an VBAT. Der abgedruckte VBUS-Bereich beträgt 4,3–5,5 V; Electrical Specification-A3 nennt 4,5–5,5 V, und der Anwendungshinweis für akkubetriebene Varianten gibt für den integrierten Lader 4,6–5,5 V an und verlangt bei maximalem Ladestrom mindestens 4,6 V am VBUS-Pin. Die Abbildung dient als Platzierungsreferenz und bestätigt 4,3 V nicht als geprüfte untere Betriebsspannung. Beachten Sie auch den Quellenhinweis in Abschnitt 5.2.
 
 === "52B/D/E/G/J (extern geregelte Versorgung)"
 
@@ -300,11 +300,11 @@ Abbildung 6.10-1 verwendet eine Induktivität von 4,7 uH und einen Ausgangskonde
 
 ### 6.12. Routing weiterer Schnittstellen { #612-other-interface-routing }
 
-Schirmen Sie GPADC-Eingangsleiterbahnen mit Masse ab und halten Sie Abstand zu anderen möglicherweise störenden Schaltungen, einschließlich Batteriestands- und Temperaturerfassung.
+Schirmen Sie GPADC-Eingangsleiterbahnen mit Masse ab und halten Sie Abstand zu anderen möglicherweise störenden Schaltungen, einschließlich Akkustands- und Temperaturerfassung.
 
 ### 6.13. EMI & ESD { #613-emi-esd }
 
-Wenden Sie diese EMI- und ESD-Regeln auf beide Design-Gruppen an:
+Wenden Sie diese EMI- und ESD-Regeln auf beide Variantengruppen an:
 
 - Führen Sie lange störende Takt- und Versorgungsleitungen außerhalb der Abschirmung nicht auf der oberen Lage, sondern auf inneren Lagen.
 - Platzieren Sie ESD-Schutzbauteile nahe an den Steckverbinder-Pins und führen Sie Signale zuerst durch das ESD-Bauteil, bevor sie weiterverlaufen
@@ -312,7 +312,7 @@ Wenden Sie diese EMI- und ESD-Regeln auf beide Design-Gruppen an:
 
 ### 6.14. Weitere Überlegungen { #614-other-considerations }
 
-Platzieren Sie Testpunkte der USB-Ladeleitung auf der Steckverbinderseite vor dem TVS-Schutzanschluss. Der TVS auf der Batterieseite gehört an den Platinenzugang, vor der Verzweigung zu MCU und weiteren Lasten. Führen Sie die Leitung zuerst über den TVS-Anschlusspunkt zum Chip. Der TVS selbst liegt als Parallelableiter gegen Masse, nicht in Reihe mit der Leitung. Halten Sie seine Masseverbindung kurz.
+Platzieren Sie Testpunkte der USB-Ladeleitung auf der Steckverbinderseite vor dem TVS-Schutzanschluss. Der TVS auf der Akkuseite gehört an den Platinenzugang, vor der Verzweigung zu MCU und weiteren Lasten. Führen Sie die Leitung zuerst über den TVS-Anschlusspunkt zum Chip. Der TVS selbst liegt als Parallelableiter gegen Masse, nicht in Reihe mit der Leitung. Halten Sie seine Masseverbindung kurz.
 
 ![Abbildung 6.14-1: Referenz für die Platzierung des TVS-Schutzes der Versorgung](../../sf32-products/chips/assets/52xA/sf32LB52x-A-SCH-PMU-TVS.png){ width="100%" loading="lazy" }
 

@@ -11,7 +11,7 @@ Dieser Artikel überführt den [Sensorintegrationsleitfaden von SiFli](https://d
 
 Die Beispiele verwenden den sechsachsigen Sensor LSM6DSL (Beschleunigungsmesser und Gyroskop) sowie den Temperatur- und Luftdrucksensor BMP280. Sie übernehmen die API-Namen und Beispielkennungen des SDK-Leitfadens; überprüfen Sie den Ziel-SDK-Branch, bevor Sie sie in ein Produkt übernehmen.
 
-!!! note "Geltungsbereich nach Chipfamilie"
+!!! note "Geltungsbereich nach Familie"
     Der hier beschriebene Ablauf zur Treiberentwicklung gilt für SF32LB52x, SF32LB55x, SF32LB56x und SF32LB58x. Der LSM6DSL-/BMP280-Code ist als Implementierungsbeispiel zu verstehen; Businstanz, GPIO-Nummern, Interrupt-Routing, Kconfig-Pfade und verfügbare Peripheriegeräte richten sich nach der Zielfamilie und dem Board.
 
 ## Hardware und Sensorschnittstelle bestätigen { #1-confirm-the-hardware-and-sensor-interface }
@@ -79,7 +79,7 @@ menuconfig SENSOR_USING_6D
     endif
 ```
 
-Der Gruppenschalter kann mehrere unterstützte Modelle enthalten, wie LSM6DSL und SC7A20. Aktivieren Sie zu einem Zeitpunkt nur das für eine bestimmte Busanordnung vorgesehene Modell, um Konflikte an der externen Schnittstelle zu vermeiden. In diesem Beispiel:
+Der Gruppenschalter kann mehrere unterstützte Modelle enthalten, wie LSM6DSL und SC7A20. Aktivieren Sie jeweils nur das für eine bestimmte Busanordnung vorgesehene Modell, um Konflikte auf der Busschnittstelle zu vermeiden. In diesem Beispiel:
 
 - `ACC_USING_LSM6DSL` aktiviert den LSM6DSL-Treiber.
 - `LSM6DSL_USING_I2C` wählt I2C (`1`) oder SPI (`0`) aus. Lassen Sie dieses Symbol weg, wenn der Sensor nur eine Schnittstelle unterstützt.
@@ -286,7 +286,7 @@ Nachdem der Treiber in das Image eingebunden wurde, fügen Sie eine Befehlszeile
 - Register-Lese- und -Schreibvorgänge über I2C oder SPI; und
 - ein sensorspezifisches Funktionsergebnis wie Druck, Temperatur oder Beschleunigung.
 
-Der folgende BMP280-Testbefehl veranschaulicht Öffnen, Schließen, Register-Lesen, Temperatur-/Druck-/Höhenauslesung sowie die I2C-Busgeschwindigkeitskonfiguration:
+Der folgende BMP280-Testbefehl veranschaulicht Öffnen, Schließen, Register-Lesen, Auslesen von Temperatur, Druck und Höhe sowie die I2C-Busgeschwindigkeitskonfiguration:
 
 ```c
 #define DRV_BMP280_TEST

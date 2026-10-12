@@ -17,7 +17,7 @@ Os guias `debug_logging` e `crash_analysis` do SDK se complementam: os logs most
 
 | Família | Comportamento de depuração e log |
 |---|---|
-| SF32LB52x, SF32LB56x, SF32LB58x | O guia de origem documenta a captura por UART, `SifliUsartServer`/`AssertDumpUart` e a recuperação com J-Link/Trace32. Use o transporte que permanecer disponível no estado de suspensão selecionado. |
+| SF32LB52x, SF32LB56x, SF32LB58x | O guia de referência documenta a captura por UART, `SifliUsartServer`/`AssertDumpUart` e a recuperação com J-Link/Trace32. Use o transporte que permanecer disponível no estado de suspensão selecionado. |
 | SF32LB55x | O SWD pode alternar entre HCPU e LCPU usando `$SDK_ROOT/tools/segger/jlink_hcpu_a0.bat` e `jlink_lcpu_a0.bat`. O console ROM do LCPU usa UART3 a 1 000 000 baud; o HCPU pode usar UART1/2 ou SWD. Como o SWD usa os pinos PB, mantenha o LPSYS ativo ou em light sleep durante a conexão. |
 
 </div>
@@ -50,7 +50,7 @@ Em capturas feitas por script, escolha o arquivo `.jlink` de acordo com a famíl
 ![Opção de rastreamento de memória no menuconfig do SF32LB52x](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_mem_trace.png){ loading="lazy" }
 <div align="center"><em>Figura: Exemplo do guia do SF32LB52x — habilite o rastreamento de memória antes de reproduzir uma falha quando precisar de evidências do heap.</em></div>
 
-A captura por UART normalmente exige que o utilitário serial, o endereço do servidor e o núcleo de destino correspondam. As capturas de tela de origem a seguir ajudam a verificar a conexão:
+A captura por UART normalmente exige que o utilitário serial, o endereço do servidor e o núcleo de destino correspondam. As capturas de tela do guia a seguir ajudam a verificar a conexão:
 
 ![Localização das ferramentas SiFli_Trace e SifliUsartServer](../../../../assets/develop/app-notes/crash-analysis/Sifli_Trace.png){ loading="lazy" }
 <div align="center"><em>Figura: Exemplo do guia do SF32LB52x — diretório das ferramentas.</em></div>
@@ -99,7 +99,7 @@ Para inspeção interativa, o Ozone pode carregar os ELF de HCPU/LCPU e o arquiv
 
 ## Instrumentar falhas de barramento e memória { #instrument-bus-and-memory-failures }
 
-O monitor de barramento do SDK pode capturar acessos que levam a uma falha de barramento. Registre um callback com `dbg_busmon_reg_callback` e use `dbg_busmon_read` e `dbg_busmon_write`, como no exemplo de origem, para inspecionar o intervalo de endereços relevante. Combine isso com o rastreamento do heap e o pacote de crash; um dump de registradores sem símbolos ou contexto de memória raramente é suficiente.
+O monitor de barramento do SDK pode capturar acessos que levam a uma falha de barramento. Registre um callback com `dbg_busmon_reg_callback` e use `dbg_busmon_read` e `dbg_busmon_write`, como no exemplo de referência, para inspecionar o intervalo de endereços relevante. Combine isso com o rastreamento do heap e o pacote de falha; um dump de registradores sem símbolos ou contexto de memória raramente é suficiente.
 
 ![Exemplo de pilha de chamadas do heap no Trace32](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_heap_callstack.png){ loading="lazy" }
 <div align="center"><em>Figura: Exemplo do guia do SF32LB52x — pilha de chamadas do heap e janelas de memória.</em></div>

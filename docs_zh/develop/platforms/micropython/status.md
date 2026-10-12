@@ -10,9 +10,9 @@ tags:
 
 在已检查的思澈科技（SiFli）文档和 OpenSiFli 仓库中，尚未找到官方 SF32 MicroPython 移植、固件镜像或面向具体开发板的烧录流程。
 
-本次核查范围包括 [OpenSiFli 的公开 GitHub 仓库](https://github.com/OpenSiFli/) 和[思澈科技（SiFli）文档站](https://docs.sifli.com/)。
+已检查的公开来源为 [OpenSiFli 的公开 GitHub 仓库](https://github.com/OpenSiFli/)和[思澈科技（SiFli）文档站](https://docs.sifli.com/)。
 
-这不能证明不存在内部或社区实验，但意味着在出现可公开获取的固件镜像或可公开访问的源代码树之前，本站不应将 MicroPython 描述为经过验证的 SF32 开发路径。
+这不能证明不存在私有或社区实验，但意味着在出现可公开获取的固件镜像或可公开访问的源代码树之前，本站不应将 MicroPython 描述为经过验证的 SF32 开发路径。
 
 ## 当前建议 { #current-recommendation }
 
@@ -43,7 +43,7 @@ while True:
     time.sleep(1)
 ```
 
-只有在引脚名称得到明确说明后，再测试 GPIO。
+仅在引脚名称有文档说明后，再测试 GPIO。
 
 ## 最低验收标准 { #minimum-acceptance-criteria }
 

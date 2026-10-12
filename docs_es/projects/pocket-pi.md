@@ -52,7 +52,7 @@ Antes de empezar, tenga preparado:
 | Placa | `sf32lb52-lchspi-ulp` | Revisiones de placa, expansor, pantalla, audio, almacenamiento y alimentación |
 | Contenido | En la revisión fijada, el explorador solo detecta archivos `.nes` y `.NES`; un `.jpg` con el mismo nombre puede aportar la portada | Procedencia/licencia de la ROM, hash, mapper y procedencia de la imagen |
 | Almacenamiento | Convierte `disk/` en `fs_root`; también busca `/sdcard/roms/nes` durante la ejecución | Imagen del sistema de archivos, formato de la tarjeta TF, directorio y registro de recuperación ante errores |
-| Entrada | En la revisión fijada, el código lee A/B, direcciones, Start, Select, Menu, L/R y teclas relacionadas mediante un expansor I²C AW9523 | Esquema/definición de pines, matriz completa de teclas y resultados con varias teclas simultáneas |
+| Entrada | En la revisión fijada, el código lee A/B, direcciones, Start, Select, Menu, L/R y teclas relacionadas mediante un expansor I²C AW9523 | Esquemático/definición de pines, matriz completa de teclas y resultados con varias teclas simultáneas |
 | Emulador | Núcleo NES Nofrendo, pantalla, ruta de audio de 32 kHz y guardado/carga de estados | Compatibilidad de juegos y evidencias de cuadros, audio, estados, memoria y reinicio |
 
 </div>
@@ -120,7 +120,7 @@ El script de compilación convierte `../disk` en una imagen del sistema de archi
 </div>
 
 !!! warning "La descripción de entrada del README no coincide con el código fijado"
-    El README describe `key_pin_def[]`, un escaneo GPIO a 200 Hz y combinaciones con Select. El código de la revisión fijada lee las teclas mediante un expansor I²C AW9523 en la dirección `0x5B`; Menu abre una pantalla de pausa con Save State, Load State y Exit Game, mientras que L/R ajustan el desplazamiento del audio. La reproducción y el diseño de hardware deben seguir el código fijado y el esquema, no la antigua tabla GPIO.
+    El README describe `key_pin_def[]`, un escaneo GPIO a 200 Hz y combinaciones con Select. El código de la revisión fijada lee las teclas mediante un expansor I²C AW9523 en la dirección `0x5B`; Menu abre una pantalla de pausa con Save State, Load State y Exit Game, mientras que L/R ajustan el desplazamiento del audio. La reproducción y el diseño de hardware deben seguir el código fijado y el esquemático, no la antigua tabla GPIO.
 
 ## Etapas del proyecto { #delivery-map }
 
@@ -170,7 +170,7 @@ Los principales dominios de fallo son el sistema de archivos/ROM, el mapper/emul
 
 **Evidencias que deben conservarse:** commits del repositorio y del SDK, placa y periféricos, hash/licencia de la ROM, registro de compilación, imagen del sistema de archivos, registro de descarga, registro serie y fotos de la lista de juegos y de la ejecución.
 
-**Criterio de salida de la etapa 1:** dos arranques en frío muestran y ejecutan la misma ROM, con comportamiento repetible de pantalla, direcciones/A/B/Start/Select básicos y audio.
+**Criterio de salida del punto de control 1:** dos arranques en frío muestran y ejecutan la misma ROM, con comportamiento repetible de pantalla, direcciones/A/B/Start/Select básicos y audio.
 
 ## Etapa 2 — Validar la entrada, los estados y la recuperación ante fallos { #stage-2-validate-input-state-and-fault-recovery }
 
@@ -191,7 +191,7 @@ Los principales dominios de fallo son el sistema de archivos/ROM, el mapper/emul
 
 </div>
 
-**Criterio de salida de la etapa 2:** se registran la entrada, la pantalla, el audio, la pausa, el guardado, la carga, la salida y el reinicio para la ROM elegida, y cada fallo se asocia a un dominio definido.
+**Criterio de salida del punto de control 2:** se registran la entrada, la pantalla, el audio, la pausa, el guardado, la carga, la salida y el reinicio para la ROM elegida, y cada fallo se asocia a un dominio definido.
 
 ## Etapa 3 — Crear una base reproducible de código y contenido { #stage-3-build-a-reproducible-source-and-content-baseline }
 
@@ -200,9 +200,9 @@ Los principales dominios de fallo son el sistema de archivos/ROM, el mapper/emul
 1. Registre las revisiones de PocketPi, SiFli-SDK y cualquier núcleo de terceros.
 2. Cree un manifiesto de `disk/` con nombres de archivo, hashes, procedencia y licencias de cada ROM y portada. No suba al repositorio ROM que no pueda redistribuir.
 3. Compile desde un directorio de salida vacío y conserve `fs_root`, el firmware, los informes de memoria y particiones, el script de descarga y los hashes.
-4. Repita la compilación en otro ordenador o en un directorio limpio y vuelva a ejecutar las pruebas básicas de la etapa 2.
+4. Repita la compilación en otro ordenador o en un directorio limpio y vuelva a ejecutar las pruebas básicas de la Etapa 2.
 
-**Criterio de salida de la etapa 3:** los manifiestos del código y del contenido permiten reconstruir una imagen con los mismos hashes o diferencias explicadas, sin archivos locales no documentados.
+**Criterio de salida del punto de control 3:** los manifiestos del código y del contenido permiten reconstruir una imagen con los mismos hashes o diferencias explicadas, sin archivos locales no documentados.
 
 ## Etapa 4 — Adaptar una variable a la vez { #stage-4-adapt-one-variable-at-a-time }
 
@@ -223,7 +223,7 @@ Los principales dominios de fallo son el sistema de archivos/ROM, el mapper/emul
 
 </div>
 
-**Criterio de salida de la etapa 4:** se revisaron el cambio y los derechos del contenido, se puede recuperar la imagen original y se superan todas las pruebas de la etapa 2 con la ROM seleccionada.
+**Criterio de salida del punto de control 4:** se revisaron el cambio y los derechos del contenido, se puede recuperar la imagen original y se superan todas las pruebas de la Etapa 2 con la ROM seleccionada.
 
 ## Etapa 5 — Revisión de preparación para producto { #stage-5-product-readiness-review }
 
@@ -231,16 +231,16 @@ Antes de diseñar hardware de consola portátil propio o distribuir contenido, r
 
 - ¿Qué mappers requiere el conjunto de juegos previsto y se han validado la tasa de cuadros, el audio, la memoria y el guardado de cada ROM?
 - ¿Están claros los derechos y las licencias de PocketPi, Nofrendo, SiFli-SDK, fuentes, portadas, sonidos y ROM?
-- ¿Tienen el AW9523, el LCD, el audio, la tarjeta TF, la batería y el circuito de carga esquemas, BOM y pruebas de producción completos?
+- ¿Tienen el AW9523, el LCD, el audio, la tarjeta TF, la batería y el circuito de carga esquemáticos, BOM y pruebas de producción completos?
 - ¿Cuáles son la corriente durante el juego, la lista, la pausa, el reposo y el apagado, la autonomía, la temperatura y el comportamiento con batería baja?
 - ¿Cómo se protegen y migran los estados guardados tras cortes de alimentación, actualizaciones, falta de espacio o corrupción?
 - ¿Cómo se recupera el dispositivo ante un sistema de archivos dañado, una actualización fallida, una pantalla negra o una ROM que impide arrancar?
 
-**Criterio de salida de la etapa 5:** la matriz de compatibilidad, las licencias de software/contenido, la responsabilidad del hardware, la alimentación y los riesgos de recuperación tienen responsables asignados y una decisión de continuar, aplazar o detener.
+**Criterio de salida del punto de control 5:** la matriz de compatibilidad, las licencias de software/contenido, la responsabilidad del hardware, la alimentación y los riesgos de recuperación tienen responsables asignados y una decisión de continuar, aplazar o detener.
 
 ## Traspaso a la fase de diseño del producto { #handoff-to-product-design }
 
-Traslade la selección del chip o módulo SF32, los picos de uso de PSRAM y Flash, la ruta de pantalla/búfer de cuadros, la matriz de entrada AW9523, el amplificador y el altavoz, la tarjeta TF y el sistema de archivos integrado, el formato de los estados guardados, la batería y su circuito de carga, el puerto de descarga para recuperación, la matriz de compatibilidad ROM/mapper y el manifiesto completo de licencias. Continúe con [SF32LB52x](../sf32-products/chips/SF32LB52x.md), [SF32LB52-DevKit-ULP](../sf32-products/devkits/SF32LB52-DevKit-ULP.md), [Compilar, grabar y monitorizar con SiFli-SDK](../develop/platforms/sifli-sdk/build-flash-monitor.md) y [Diseño para producción](../hardware/design-for-production.md).
+Traslade la selección del chip o módulo SF32, los picos de uso de PSRAM y Flash, la ruta de pantalla/búfer de cuadros, la matriz de entrada AW9523, el amplificador y el altavoz, la tarjeta TF y el sistema de archivos integrado, el formato de los estados guardados, la batería y su circuito de carga, el puerto de descarga para recuperación, la matriz de compatibilidad ROM/mapper y el manifiesto completo de licencias. Continúe con [SF32LB52x](../sf32-products/chips/SF32LB52x.md), [SF32LB52-DevKit-ULP](../sf32-products/devkits/SF32LB52-DevKit-ULP.md), [Compilar, grabar y supervisar con SiFli-SDK](../develop/platforms/sifli-sdk/build-flash-monitor.md) y [Diseño para producción](../hardware/design-for-production.md).
 
 ## Fuentes de referencia { #authoritative-sources }
 - [SiFliSparks/PocketPi](https://github.com/SiFliSparks/PocketPi)

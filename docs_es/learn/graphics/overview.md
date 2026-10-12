@@ -6,13 +6,13 @@ tags:
   - Gráficos
 ---
 
-# Resumen { #graphics-overview }
+# Resumen de gráficos { #graphics-overview }
 
 ## Planifique la arquitectura gráfica { #overview }
 
 Esta guía explica cómo crear interfaces gráficas ágiles en dispositivos SF32. Se centra en decisiones prácticas que afectan al producto: selección de pantalla, estrategia de framebuffer, integración de LVGL, aceleración por hardware ePicasso, distribución de memoria y actualización de la pantalla.
 
-Los dispositivos SF32 están diseñados para productos AIoT compactos y wearables, donde la interfaz debe responder con fluidez sin superar los límites estrictos de consumo energético, memoria y superficie de PCB. El flujo gráfico separa la gestión de recursos, la composición de píxeles, la compresión opcional del framebuffer y la salida al panel. Entender la función de cada etapa ayuda a elegir la optimización adecuada.
+Los dispositivos SF32 están diseñados para productos compactos de AIoT y dispositivos vestibles, en los que la interfaz debe responder con fluidez sin superar los límites estrictos de consumo, memoria y área disponible en la PCB. El flujo gráfico separa la gestión de recursos, la composición de píxeles, la compresión opcional del framebuffer y la salida al panel. Entender la función de cada etapa ayuda a elegir la optimización adecuada.
 
 Consulte esta página al tomar decisiones de arquitectura de UI que después resultan costosas de cambiar: panel e interfaz, estrategia de framebuffer, profundidad de color, transparencia, ubicación de recursos y política de actualización. Los artículos enlazados sobre gráficos explican cómo implementar cada etapa.
 
@@ -26,16 +26,16 @@ La ruta típica de recursos de pantalla es:
 Imágenes, fuentes y animaciones de origen
         │
         ▼
-GraphicsTool convierte los recursos soportados a eZip o eZip-A
+GraphicsTool convierte los recursos compatibles a eZip o eZip-A
         │
         ▼
 Recursos comprimidos en Flash NOR, PSRAM, NAND o almacenamiento de archivos
         │
         ▼
-El decodificador hardware eZip descomprime un recurso cuando se necesita
+El decodificador eZip por hardware descomprime un recurso cuando se necesita
         │
         ▼
-LVGL u otro framework de UI + driver gráfico/de pantalla
+LVGL u otro framework de UI + controlador gráfico/de pantalla
         │
         ├── Renderizado de respaldo por CPU
         │
@@ -58,7 +58,7 @@ El controlador de pantalla transfiere los píxeles al panel
 Panel SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI
 ```
 
-El flujo es configurable: un producto puede prescindir de eZip, ePicasso, TurboPixel o de un framebuffer completo. La disponibilidad y las conexiones dependen del dispositivo, el SDK, la interfaz de pantalla, el panel y la configuración del controlador. El encabezado LCDC actual de OpenSiFli define `LCDC_SUPPORTED_COMPRESSED_LAYER` solo cuando está habilitado `HAL_EXTDMA_MODULE_ENABLED` y la condición de familia lo permite; SF32LB52x y SF32LB57x quedan excluidos. Un comentario del código también indica que la ruta LCPU aún no está habilitada. La tabla publicada de funciones LCDC del SDK marca como no compatible la descompresión de capas comprimidas en SF32LB55x; por eso, en 55x debe considerarse una capacidad condicional, no una ruta de ejecución validada de extremo a extremo. Compruebe la revisión exacta del SDK, el núcleo, la configuración de compilación y el hardware objetivo; consulte [TurboPixel](turbopixel.md#availability-in-the-sf32-family).
+El flujo es configurable: un producto puede prescindir de eZip, ePicasso, TurboPixel o de un framebuffer completo. La disponibilidad y las conexiones dependen del dispositivo, el SDK, la interfaz de pantalla, el panel y la configuración del controlador. El encabezado LCDC actual de OpenSiFli define `LCDC_SUPPORTED_COMPRESSED_LAYER` solo cuando está habilitado `HAL_EXTDMA_MODULE_ENABLED` y se cumple la condición de compilación correspondiente a la familia; SF32LB52x y SF32LB57x quedan excluidos. Un comentario del código también indica que la ruta LCPU aún no está habilitada. La tabla publicada de funciones LCDC del SDK marca como no compatible la descompresión de capas comprimidas en SF32LB55x; por eso, en 55x debe considerarse una capacidad condicional, no una ruta de ejecución validada de extremo a extremo. Compruebe la revisión exacta del SDK, el núcleo, la configuración de compilación y el hardware objetivo; consulte [TurboPixel](turbopixel.md#availability-in-the-sf32-family).
 
 <div align="center"><em>Funciones de cada etapa del flujo gráfico de SF32</em></div>
 
@@ -68,12 +68,12 @@ El flujo es configurable: un producto puede prescindir de eZip, ePicasso, TurboP
 |:---|:---|:---|:---|
 | **eZip / eZip-A** | Antes del renderizado, al leer recursos almacenados | Descomprime sin pérdida recursos gráficos eZip compatibles, incluidas imágenes estáticas y animaciones. | El motor de renderizado, el framebuffer final o el controlador de pantalla. |
 | **ePicasso** | Durante el renderizado y la composición | Acelera las operaciones compatibles de copia, relleno, mezcla, transformación y composición de píxeles en memoria. | La compresión de recursos o la transferencia al panel. |
-| **TurboPixel** | Después del renderizado y antes de la salida al panel, en dispositivos compatibles | Usa extDMA para comprimir con pérdida el mapa de bits final a una relación fija, lo que reduce la capacidad de PSRAM necesaria y el tráfico de lectura de pantalla. El encabezado actual habilita la capacidad de capas comprimidas para SF32LB55x, SF32LB56x y SF32LB58x cuando se activa extDMA, y excluye SF32LB52x y SF32LB57x; el comentario del código señala que la ruta LCPU no está habilitada. La tabla publicada marca 55x como no compatible, por lo que hay que verificar el núcleo, la configuración del SDK y la ruta en el hardware objetivo. | La compresión sin pérdida de recursos o el renderizado de píxeles. |
+| **TurboPixel** | Después del renderizado y antes de la salida al panel, en dispositivos compatibles | TurboPixel utiliza extDMA para comprimir con pérdida el mapa de bits final con una relación fija. Esto reduce la capacidad de PSRAM necesaria y el tráfico de lectura de pantalla. El encabezado actual habilita la compatibilidad con capas comprimidas para SF32LB55x, SF32LB56x y SF32LB58x cuando se activa extDMA, y excluye SF32LB52x y SF32LB57x; el comentario del código señala que la ruta LCPU no está habilitada. La tabla publicada marca 55x como no compatible, por lo que hay que verificar el núcleo, la configuración del SDK y la ruta en el hardware objetivo. | La compresión sin pérdida de recursos o el renderizado de píxeles. |
 | **Controlador de pantalla** | Etapa final de salida | Descomprime TurboPixel si se activa esa ruta y transfiere los píxeles preparados al panel. | La descompresión de recursos eZip o la composición gráfica. |
 
 </div>
 
-El código de la aplicación define el estado y el comportamiento de la interfaz. El framework gestiona los widgets, las áreas que deben redibujarse y el dibujo. El controlador gráfico/de pantalla decide si ejecuta las operaciones en la CPU o en ePicasso y coordina los búferes; el controlador de pantalla se encarga de transferir los datos al panel. Para conocer los detalles de cada función, consulte [ePicasso](epicasso-gpu.md), [eZip](ezip.md) y [TurboPixel](turbopixel.md).
+El código de la aplicación define el estado y el comportamiento de la interfaz. El framework gestiona los widgets, las áreas que deben redibujarse y el dibujo. El controlador gráfico coordina los búferes y determina si las operaciones se ejecutan en la CPU o en ePicasso; el controlador de pantalla transfiere los datos al panel. Para conocer los detalles de cada función, consulte [ePicasso](epicasso-gpu.md), [eZip](ezip.md) y [TurboPixel](turbopixel.md).
 
 ## Elija primero la pantalla { #choose-the-display-first }
 
@@ -85,11 +85,11 @@ La elección de pantalla afecta a casi todas las decisiones gráficas. Antes de 
 - Tipo de interfaz.
 - Requisitos del controlador táctil.
 - Alimentación de la retroiluminación o del panel.
-- Si se soporta el refresco parcial.
+- Compatibilidad con refresco parcial.
 - Si el panel tiene GRAM interna.
-- Si se requiere comportamiento de pantalla siempre activa de bajo consumo.
+- Si se necesita una pantalla de bajo consumo que permanezca siempre encendida.
 
-Una pantalla AMOLED pequeña con interfaz SPI o QSPI se comporta de forma muy distinta de los paneles RGB, MIPI DSI y EPD, así como de las pantallas de memoria JDI. Un mismo framework de UI puede funcionar con distintos tipos de pantalla, pero la estrategia de búfer y la política de actualización adecuadas variarán.
+Una pantalla AMOLED pequeña con interfaz SPI o QSPI se comporta de forma muy distinta de los paneles RGB, MIPI DSI y EPD, así como de las pantallas JDI con memoria. Un mismo framework de UI puede funcionar con distintos tipos de pantalla, pero la estrategia de búfer y la política de actualización adecuadas variarán.
 
 Para elegir la interfaz, diseñar la ruta de flush y poner en marcha el panel, consulte [Controlador de pantalla](display-controller.md).
 
@@ -109,7 +109,7 @@ Elija el chip según la carga de trabajo de pantalla y UI, no solo la frecuencia
 |:------------|:-------------------------|
 | Producto Bluetooth básico con UI pequeña | SF32LB52x |
 | Reloj inteligente básico, distintivo, etiqueta o HMI sencilla | SF32LB52x |
-| Wearable BLE con una interfaz que muestra abundante información de sensores | SF32LB55x |
+| Dispositivo vestible BLE con una interfaz que muestra abundante información de sensores | SF32LB55x |
 | Pantalla RGB o interfaz LVGL más rica | SF32LB56x |
 | Cargas de audio/gráficos adecuadas para delegarse en la ACPU | SF32LB57x; verifique la compatibilidad del SDK y la asignación de tareas |
 | Pantalla de alta resolución o gráficos avanzados | SF32LB56x o SF32LB58x |
@@ -122,7 +122,7 @@ Las restricciones más importantes son la interfaz de pantalla, la resolución, 
 
 ## Cálculo de framebuffer y ancho de banda { #framebuffer-and-bandwidth-calculator }
 
-Estime el costo de memoria y transferencia antes de elegir un panel o estilo de animación:
+Estime el costo de memoria y transferencia antes de elegir un panel o un estilo de animación:
 
 ```text
 framebuffer bytes = width x height x bytes_per_pixel
@@ -144,7 +144,7 @@ Ejemplos:
 
 </div>
 
-El tamaño de los búferes se expresa en KiB (1.024 bytes) y el ancho de banda, en MB/s decimales (1.000.000 bytes/s). Son cifras de datos de píxeles sin procesar: no incluyen la sobrecarga de comandos, la alineación, el mantenimiento de caché, la lectura de recursos, la composición ni otros flujos de datos del sistema. Si el producto también utiliza audio Bluetooth, IA o PSRAM externa, reserve margen adicional.
+El tamaño de los búferes se expresa en KiB (1.024 bytes) y el ancho de banda, en MB/s decimales (1.000.000 bytes/s). Son cifras de datos de píxeles sin procesar: no incluyen la sobrecarga de comandos, la alineación, el mantenimiento de caché, la lectura de recursos, la composición ni otros flujos de datos del sistema. Si el producto también maneja audio Bluetooth, ejecuta cargas de IA o accede a PSRAM externa, reserve margen adicional.
 
 ## Entienda los búferes { #understand-your-buffers }
 
@@ -185,7 +185,7 @@ La profundidad de color afecta a la calidad de imagen, el uso de memoria y el an
 
 </div>
 
-En la mayoría de los wearables y HMI compactas, RGB565 es una buena opción inicial, salvo que el panel, la calidad de imagen deseada o los requisitos del producto exijan más.
+En la mayoría de los dispositivos vestibles y las HMI compactas, RGB565 es una buena opción inicial, salvo que el panel, la calidad de imagen deseada o los requisitos del producto exijan más.
 
 ## Transparencia, alfa y composición de capas { #transparency-alpha-and-layer-composition }
 
@@ -328,10 +328,10 @@ Un enfoque práctico:
 - Mantenga pequeñas las regiones animadas.
 - Prefiera transformaciones o cambios de opacidad que se adapten bien a la aceleración.
 - Evite efectos costosos de desenfoque, sombra o transparencia de pantalla completa en cada cuadro.
-- Reduzca la tasa de cuadros para efectos no críticos.
+- Reduzca la frecuencia de fotogramas para efectos no críticos.
 - Detenga las animaciones cuando la pantalla esté atenuada, cubierta o inactiva.
 
-Una interfaz para un wearable no necesita animaciones al estilo de escritorio en todas partes. Unas pocas transiciones breves y claras suelen ofrecer una mejor experiencia que muchos efectos que consumen energía o provocan caídas de fotogramas.
+La interfaz de un dispositivo vestible no necesita animaciones al estilo de escritorio en todas partes. Unas pocas transiciones breves y claras suelen ofrecer una mejor experiencia que muchos efectos que consumen energía o provocan caídas de fotogramas.
 
 ## Matriz de validación gráfica { #graphics-validation-matrix }
 
@@ -395,7 +395,7 @@ Evite estos desde el principio; son costosos de corregir tarde:
 - Olvidar el mantenimiento de caché para búferes compartidos con hardware.
 - Asumir que ePicasso acelera automáticamente cada operación de UI.
 - Usar demasiados temporizadores o animaciones que mantienen la CPU despierta.
-- Ignorar la latencia táctil mientras se optimiza solo la tasa de cuadros.
+- Ignorar la latencia táctil mientras se optimiza solo la frecuencia de fotogramas.
 - Esperar hasta la puesta en marcha de la PCB para validar la inicialización del panel.
 
 ## Lista de comprobación para la puesta en marcha { #bring-up-checklist }

@@ -129,7 +129,7 @@ Les cas d'usage typiques sont notamment :
 - réponse rapide à des déclencheurs ;
 - coordination de plusieurs modules ;
 - opérations groupées en mémoire ou sur des registres ;
-- petites boucles de commande déterministes pour des dispositifs externes ;
+- petites boucles de commande déterministes pour des composants externes ;
 - compensation des écarts de temporisation de protocole entre un capteur, un écran, un actionneur ou un circuit intégré compagnon et le firmware principal.
 
 ### Limites d'utilisation { #usage-boundaries }
@@ -212,7 +212,7 @@ DPPI est le modèle plus récent de Nordic. Un périphérique publie un événem
 | Configuration | Le logiciel associe à un canal un point de connexion d'événement et un ou plusieurs points de connexion de tâche. | Les périphériques émetteurs d'événements et les tâches abonnées choisissent un canal commun. |
 | Mode de connexion | Liaison explicite entre un événement et une tâche. | Publication et abonnement. |
 | Un événement, plusieurs tâches | Utilisation de plusieurs canaux ou du point de connexion de tâche fork d'un canal. | Plusieurs tâches peuvent s'abonner au même canal publié. |
-| Contexte matériel typique | Anciens dispositifs Nordic compatibles PPI, dont de nombreux nRF52. | Dispositifs Nordic plus récents qui intègrent le système d'événements distribué. |
+| Contexte matériel typique | Anciens composants Nordic compatibles PPI, dont de nombreux nRF52. | Composants Nordic plus récents qui intègrent le système d'événements distribué. |
 | Capacités d'exécution | N'exécute pas d'instructions et ne traite pas de données. | N'exécute pas d'instructions et ne traite pas de données. |
 
 </div>
@@ -221,7 +221,7 @@ DPPI est le modèle plus récent de Nordic. Un périphérique publie un événem
 
 Pour un concentrateur de capteurs de montre connectée classique, commencez par les périphériques I2C/SPI standard, le DMA, les minuteries et les mécanismes de réveil à basse consommation. Déterminez ensuite la nature du besoin :
 
-- **Échantillonnage courant :** un RTC ou une minuterie déclenche une tâche prise en charge par un périphérique standard, puis le CPU est averti à la fin de l'opération ou lorsqu'un seuil est atteint. Sur les plateformes Nordic, ce schéma « événement vers tâche existante » convient à PPI sur les anciens dispositifs et à DPPI sur les modèles plus récents. Aucun programme PIO ou PTM n'est nécessaire.
+- **Échantillonnage courant :** un RTC ou une minuterie déclenche une tâche prise en charge par un périphérique standard, puis le CPU est averti à la fin de l'opération ou lorsqu'un seuil est atteint. Sur les plateformes Nordic, ce schéma « événement vers tâche existante » convient à PPI sur les anciens composants et à DPPI sur les modèles plus récents. Aucun programme PIO ou PTM n'est nécessaire.
 - **Protocole électrique personnalisé :** si un capteur exige une forme d'onde, une largeur de mot (nombre de bits) ou une temporisation que l'I2C/SPI standard ne permet pas, PIO convient mieux pour implémenter le protocole directement sur les broches.
 - **Séquence personnalisée de traitement de capteur :** si une transaction doit attendre plusieurs déclencheurs, contrôler plusieurs signaux d'E/S, transférer quelques données, accéder à des registres et coordonner plusieurs étapes, PTM est mieux adapté sur SF32LB57x. Il peut avertir le CPU à des étapes définies.
 

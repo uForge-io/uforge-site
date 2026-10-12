@@ -1,6 +1,6 @@
 ---
 icon: lucide/list-checks
-description: "Checkliste zur systematischen Prüfung des SF32LB58x-Schaltplans mit Prüfpunkten zu Stromversorgung, Takt, HF, Speicher, Display und Fertigung."
+description: "Checkliste zur systematischen Prüfung des SF32LB58x-Schaltplans mit Prüfpunkten zu Stromversorgung, Takt, RF, Speicher, Display und Fertigung."
 tags:
     - Hardware
     - Chip
@@ -48,8 +48,8 @@ Die folgenden Tabellen sind nach funktionalen Schaltungsblöcken gegliedert. Ma�
 | 8 | VDDIOA-Versorgungsspannung beträgt 1,8 V-3,3 V; in der ersten Platinenrevision einen 0-Ω-Serienwiderstand reservieren | Erforderlich |
 | 9 | VDDIOA2-Versorgungsspannung beträgt 1,8 V-3,3 V; in der ersten Platinenrevision einen 0-Ω-Serienwiderstand reservieren | Erforderlich |
 | 10 | VDDIOB-Versorgungsspannung beträgt 1,8 V-3,3 V; in der ersten Platinenrevision einen 0-Ω-Serienwiderstand reservieren | Erforderlich |
-| 11 | VDDIOSA-Versorgungsspannung beträgt 1,8 V, und es ist ein Load-Switch vorgesehen, mit dem sie abgeschaltet werden kann | Erforderlich |
-| 12 | VDDIOSB-Versorgungsspannung beträgt 1,8 V, und es ist ein Load-Switch vorgesehen, mit dem sie abgeschaltet werden kann | Erforderlich |
+| 11 | Die Versorgung VDDIOSA beträgt 1,8 V; zum Abschalten ist ein Lastschalter vorgesehen | Erforderlich |
+| 12 | Die Versorgung VDDIOSB beträgt 1,8 V; zum Abschalten ist ein Lastschalter vorgesehen | Erforderlich |
 | 13 | VDDIOSC-Versorgungsspannung beträgt 1,8 V und muss immer eingeschaltet sein | Erforderlich |
 | 14 | AVDD33_USB-Versorgungsspannung beträgt 3,3 V | Erforderlich |
 | 15 | AVDD33_ANA-Versorgungsspannung beträgt 3,3 V | Erforderlich |
@@ -57,7 +57,7 @@ Die folgenden Tabellen sind nach funktionalen Schaltungsblöcken gegliedert. Ma�
 | 17 | AVDD33_AUD-Versorgungsspannung beträgt 3,3 V | Erforderlich |
 | 18 | AVDD18_DSI-Versorgungsspannung beträgt 1,8 V | Erforderlich |
 | 19 | Wenn SF30147C die Stromversorgung übernimmt, muss die TWI-Steuerschnittstelle MCU-PB-Pins verwenden, und diese Pins müssen PD-Pins sein | Erforderlich |
-| 20 | Die Ladeschaltung erfordert ein Versorgungspfadmanagement, damit das System bei zu niedriger Batteriespannung über den 5-V-Eingang des Ladegeräts versorgt werden kann | Erforderlich |
+| 20 | Die Ladeschaltung erfordert ein Versorgungspfadmanagement, damit das System bei zu niedriger Akkuspannung über den 5-V-Eingang des Ladegeräts versorgt werden kann | Erforderlich |
 | 21 | Wird die Stromversorgung über SF30147C bereitgestellt, ist die dedizierte TWI-Steuerschnittstelle des Chips zu verwenden | Erforderlich |
 | 22 | Bei Versorgung über SF30147C muss für die über EN gesteuerten Versorgungsschienen PVDD oder AVDD als Versorgungsdomäne des EN-Signals verwendet werden. EN darf nicht über ein MCU-GPIO angesteuert werden. Alternativ EN mit Masse verbinden und den Ausgang der jeweiligen Versorgungsschiene per Register steuern | Erforderlich |
 | 23 | Wenn SF30147C die Stromversorgung übernimmt, können <span class="flag-red">BUCK und LDO1</span> nur über ihre jeweiligen Enable-Signale EN_BUCK und EN_LDO1 gesteuert werden; eine interne Registersteuerung ist nicht vorgesehen | Erforderlich |
@@ -165,9 +165,9 @@ Die folgenden Tabellen sind nach funktionalen Schaltungsblöcken gegliedert. Ma�
 
 </div>
 
-### 5.8.8. HF { #588-rf }
+### 5.8.8. RF { #588-rf }
 
-<div align="center"><em>Tabelle 5.8.8-1: HF-Checkliste</em></div>
+<div align="center"><em>Tabelle 5.8.8-1: RF-Checkliste</em></div>
 
 <div align="center" markdown>
 
@@ -176,9 +176,9 @@ Die folgenden Tabellen sind nach funktionalen Schaltungsblöcken gegliedert. Ma�
 | 1 | Das ANT-Signal ist mit der Anforderung an einen unsymmetrischen Wellenwiderstand von 50 Ω gekennzeichnet | Erforderlich |
 | 2 | Ein Pi-förmiges Anpassnetzwerk ist am ANT-Signal reserviert: ein paralleler NC-Kondensator (nicht bestückt) und ein 15-pF-Serienkondensator | Erforderlich |
 | 3 | Falls eine Filterung von Störstrahlung berücksichtigt werden muss, ist ein Pi-förmiges Anpassnetzwerk mit einer 2,7-nH-Serieninduktivität und einem 2-pF-Parallelkondensator reserviert | Optional |
-| 4 | Falls ein externer HF-PA eine MCU-Steuerung von RXEN und TXEN erfordert, ausschließlich PB39 für PA RXEN und PB40 für PA TXEN verwenden | Optional |
-| 5 | <span class="flag-red">Falls der Wi-Fi-Chip die Antennen-Koexistenz-Arbitrierung unterstützt: <br> (1) Der 3-Draht-Modus wird empfohlen: Der Wi-Fi-Chip steuert den Bluetooth-/Wi-Fi-Antennen-HF-Schalter und führt die Arbitrierung durch. Anhand von BT_ACTIVE und BT_PRIORITY von Bluetooth entscheidet er, ob Bluetooth Zugriff auf die Antenne erhält. WLAN_ACTIVE kann die Bluetooth-Sende-/Empfangsaktivität während des Wi-Fi-Betriebs deaktivieren.<br> (2) BT_ACTIVE muss PB08 oder PB45 verwenden, WLAN_ACTIVE muss PB09 oder PB41 verwenden, und BT_PRIORITY kann ein beliebiges PB-GPIO verwenden.<br></span> | Optional |
-| 6 | Falls der Wi-Fi-Chip keine Antennen-Koexistenz-Arbitrierung unterstützt:<br>(1) Der 1-Draht-Modus wird empfohlen: Bluetooth steuert den Bluetooth-/Wi-Fi-Antennen-HF-Schalter, führt die Arbitrierung über BT_ACTIVE durch und benachrichtigt den Wi-Fi-Chip.<br> (2) Falls Wi-Fi ein Betriebszustandssignal ausgeben kann, lässt sich die Konfiguration auf den 2-Draht-Modus erweitern: Den Wi-Fi-Ausgang mit WLAN_ACTIVE verbinden, damit Bluetooth niedrig priorisierte Sende-/Empfangsvorgänge unterdrücken kann, während Wi-Fi aktiv ist, ohne Bluetooth zu beeinträchtigen, wenn Wi-Fi inaktiv ist.<br> (3) BT_ACTIVE muss PB08 oder PB45 verwenden, WLAN_ACTIVE muss PB09 oder PB41 verwenden | Optional |
+| 4 | Falls ein externer RF-PA eine MCU-Steuerung von RXEN und TXEN erfordert, ausschließlich PB39 für PA RXEN und PB40 für PA TXEN verwenden | Optional |
+| 5 | <span class="flag-red">Falls der Wi-Fi-Chip die Antennen-Koexistenz-Arbitrierung unterstützt: <br> (1) Der 3-Draht-Modus wird empfohlen: Der Wi-Fi-Chip steuert den Bluetooth-/Wi-Fi-Antennen-RF-Schalter und führt die Arbitrierung durch. Anhand von BT_ACTIVE und BT_PRIORITY von Bluetooth entscheidet er, ob Bluetooth Zugriff auf die Antenne erhält. WLAN_ACTIVE kann die Bluetooth-Sende-/Empfangsaktivität während des Wi-Fi-Betriebs deaktivieren.<br> (2) BT_ACTIVE muss PB08 oder PB45 verwenden, WLAN_ACTIVE muss PB09 oder PB41 verwenden, und BT_PRIORITY kann ein beliebiges PB-GPIO verwenden.<br></span> | Optional |
+| 6 | Falls der Wi-Fi-Chip keine Antennen-Koexistenz-Arbitrierung unterstützt:<br>(1) Der 1-Draht-Modus wird empfohlen: Bluetooth steuert den Bluetooth-/Wi-Fi-Antennen-RF-Schalter, führt die Arbitrierung über BT_ACTIVE durch und benachrichtigt den Wi-Fi-Chip.<br> (2) Falls Wi-Fi ein Betriebszustandssignal ausgeben kann, lässt sich die Konfiguration auf den 2-Draht-Modus erweitern: Den Wi-Fi-Ausgang mit WLAN_ACTIVE verbinden, damit Bluetooth niedrig priorisierte Sende-/Empfangsvorgänge unterdrücken kann, während Wi-Fi aktiv ist, ohne Bluetooth zu beeinträchtigen, wenn Wi-Fi inaktiv ist.<br> (3) BT_ACTIVE muss PB08 oder PB45 verwenden, WLAN_ACTIVE muss PB09 oder PB41 verwenden | Optional |
 
 </div>
 
@@ -196,17 +196,17 @@ Die folgenden Tabellen sind nach funktionalen Schaltungsblöcken gegliedert. Ma�
 
 </div>
 
-### 5.8.10. Hardware-Wake-up { #5810-hardware-wake-up }
+### 5.8.10. Hardwareseitiges Wecken { #5810-hardware-wake-up }
 
-<div align="center"><em>Tabelle 5.8.10-1: Checkliste Hardware-Wake-up</em></div>
+<div align="center"><em>Tabelle 5.8.10-1: Checkliste zum hardwareseitigen Wecken</em></div>
 
 <div align="center" markdown>
 
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
-| 1 | <span class="flag-red">HCPU-Wake-up-Interruptquellen sind korrekt: PA64, PA65, PA66, PA67, PA68 und PA69, insgesamt sechs Pins</span> | Erforderlich |
-| 2 | <span class="flag-red">LCPU-Wake-up-Interruptquellen sind korrekt: PB54, PB55, PB56, PB57, PB58, PB59, PBR0, PBR1, PBR2 und PBR3, insgesamt zehn Pins. Nach dem MCU-Wake-up können PBR0-PBR3 keine Interruptsignale empfangen</span> | Erforderlich |
-| 3 | <span class="flag-red">Interrupt- und Steuersignale für LCPU-seitige Peripherie wie G-Sensor und Herzfrequenzsensor müssen mit PB-GPIOs verbunden werden</span> | Erforderlich |
+| 1 | <span class="flag-red">Die Interruptquellen zum Wecken der HCPU sind korrekt zugewiesen: PA64, PA65, PA66, PA67, PA68 und PA69 (insgesamt sechs Pins)</span> | Erforderlich |
+| 2 | <span class="flag-red">Die Interruptquellen zum Wecken der LCPU sind korrekt zugewiesen: PB54, PB55, PB56, PB57, PB58, PB59, PBR0, PBR1, PBR2 und PBR3 (insgesamt zehn Pins). Nach dem Wecken der MCU können PBR0-PBR3 keine Interruptsignale empfangen</span> | Erforderlich |
+| 3 | <span class="flag-red">Interrupt- und Steuersignale für LCPU-seitige Peripherie wie Beschleunigungs- und Herzfrequenzsensor müssen mit PB-GPIOs verbunden werden</span> | Erforderlich |
 
 </div>
 
@@ -220,12 +220,12 @@ Die folgenden Tabellen sind nach funktionalen Schaltungsblöcken gegliedert. Ma�
 |:---|:---|:---|
 | 1 | MPI3 ist wie vorgesehen mit NOR-Flash oder SPI-NAND-Flash verbunden | Erforderlich |
 | 2 | VDDIOSC ist immer eingeschaltet | Erforderlich |
-| 3 | VDDIOSA- und VDDIOSB-Versorgungen werden von PBR0 aktiviert | Erforderlich |
+| 3 | Die Versorgungen VDDIOSA und VDDIOSB werden über PBR0 aktiviert | Erforderlich |
 | 4 | MPI3 oder MPI4 kann für externen NOR-Flash oder SPI-NAND-Flash verwendet werden | Erforderlich |
 | 5 | Der HOLD#-Pin des SPI-NAND-Flash ist über einen 10-kΩ-Widerstand auf die SPI-NAND-Flash-Versorgung hochgezogen | Erforderlich |
 | 6 | Falls die Produktion externen Flash auf MPI3 oder MPI4 programmieren muss, treibt das Download-Tool PA43 auf High, um die MPI3-Stromversorgung zu aktivieren | Erforderlich |
-| 7 | Falls die Produktion eMMC oder SD NAND auf SDIO1 programmieren muss, aktiviert das Download-Tool die entsprechende Stromversorgung | Erforderlich |
-| 8 | <span class="flag-red">Die von PBR0/PA43 gesteuerten Spannungsschalter sind aktiv-high ein und aktiv-low aus. Im Hibernate-Modus steuert PBR0 die VDDIOSA-/VDDIOSB-Stromumschaltung, VDDIOSC bleibt immer eingeschaltet, und PA43 steuert die Stromumschaltung des externen Flash</span> | Erforderlich |
+| 7 | Wenn eMMC oder SD-NAND über SDIO1 programmiert werden muss, aktiviert das Download-Tool die zugehörige Versorgung | Erforderlich |
+| 8 | <span class="flag-red">Die von PBR0/PA43 gesteuerten Spannungsschalter sind high-aktiv (ein) und low-aktiv (aus). Im Hibernate-Modus steuert PBR0 die VDDIOSA-/VDDIOSB-Stromumschaltung, VDDIOSC bleibt immer eingeschaltet, und PA43 steuert die Stromumschaltung des externen Flash</span> | Erforderlich |
 | 9 | Falls die SD1-Schnittstelle mit eMMC oder SD NAND verbunden ist, sind die Signalverbindungen korrekt | Erforderlich |
 | 10 | Der I/O-Schnittstellenpegel von eMMC oder SD NAND entspricht VDDIOA2 | Erforderlich |
 | 11 | MPI3- oder MPI4-Signalverbindungen sind korrekt | Erforderlich |
@@ -288,9 +288,9 @@ Die I/O-Versorgung VDDIOA2 für SD1 unterstützt 1,8 V oder 3,3 V und muss zum I
 |:---|:---|:---|
 | 1 | GPADC-Eingang ist mit dem entsprechenden Pin verbunden | Optional |
 | 2 | GPADC-Eingangsbereich ist korrekt; die maximale Eingangsspannung darf AVDD33_ANA nicht überschreiten | Optional |
-| 3 | Empfehlung zum Batteriespannungsteiler: 470-kΩ-1%-Widerstand versorgungsseitig, 1-MΩ-1%-Widerstand gegen Masse und 100-nF-Filterkondensator | Erforderlich |
-| 4 | <span class="flag-red">Für jedes von GPADC gemessene Widerstandsteiler-Signal 1%-tolerante Teilerwiderstände verwenden; jeder GPADC-Kanal muss einen 100-nF-Filterkondensator nah am Chip-Pin haben</span> | Erforderlich |
-| 5 | <span class="flag-red">ADC kann mehrere Tasten erkennen und Pins sparen; wenn beispielsweise PB32 als ADC-Taste verwendet wird, die Batterie nicht als Pull-up-Versorgung verwenden</span> | Erforderlich |
+| 3 | Empfehlung zum Akkuspannungsteiler: 470-kΩ-1%-Widerstand versorgungsseitig, 1-MΩ-1%-Widerstand gegen Masse und 100-nF-Filterkondensator | Erforderlich |
+| 4 | <span class="flag-red">Für jedes von GPADC gemessene Widerstandsteilersignal Teilerwiderstände mit 1 % Toleranz verwenden; jeder GPADC-Kanal muss einen 100-nF-Filterkondensator nahe am Chip-Pin haben</span> | Erforderlich |
+| 5 | <span class="flag-red">ADC kann mehrere Tasten erkennen und Pins sparen; wenn beispielsweise PB32 als ADC-Taste verwendet wird, den Akku nicht als Pull-up-Versorgung verwenden</span> | Erforderlich |
 
 </div>
 
@@ -316,9 +316,9 @@ Die I/O-Versorgung VDDIOA2 für SD1 unterstützt 1,8 V oder 3,3 V und muss zum I
 
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
-| 1 | Beim Kunden bestätigen, ob die Taste Wake-up-Fähigkeit benötigt | Erforderlich |
+| 1 | Mit dem Kunden klären, ob die Taste das System wecken können muss | Erforderlich |
 | 2 | Verbindung der gewöhnlichen Taste ist korrekt (Pull-up vorhanden, korrekter Widerstandswert, korrekte Pull-up-Spannungsdomäne) | Erforderlich |
-| 3 | <span class="flag-red">Die Power-Taste muss an PB54 angeschlossen sein und aktiv-high arbeiten. Ein 10 Sekunden langer Tastendruck muss einen Reset auslösen; auf der Hauptplatine ist ein 10-kΩ-Pull-down vorzusehen</span> | Erforderlich |
+| 3 | <span class="flag-red">Die Power-Taste muss an PB54 angeschlossen sein und high-aktiv sein. Ein 10 Sekunden langer Tastendruck muss einen Reset auslösen; auf der Hauptplatine ist ein 10-kΩ-Pull-down vorzusehen</span> | Erforderlich |
 | 4 | Alle Tastensignale haben ESD-Schutz | Erforderlich |
 
 </div>
@@ -333,7 +333,7 @@ Die I/O-Versorgung VDDIOA2 für SD1 unterstützt 1,8 V oder 3,3 V und muss zum I
 |:---|:---|:---|
 | 1 | Die Ladeschnittstelle hat EOS-, ESD- und OVP-Design | Erforderlich |
 | 2 | Das Signal zur Erkennung des Ladegeräteanschlusses hat ein ESD-Bauteil | Erforderlich |
-| 3 | Die Batterieschnittstelle hat ein ESD-Bauteil | Erforderlich |
+| 3 | Die Akkuschnittstelle hat ein ESD-Bauteil | Erforderlich |
 | 4 | Die Antennenschnittstelle hat ein ESD-Bauteil | Erforderlich |
 | 5 | LCD- und TP-Stromversorgungsschnittstellen haben ESD-Bauteile | Erforderlich |
 | 6 | TP-I2C-, RST- und INT-Leitungen haben ESD-Bauteile | Erforderlich |
@@ -349,9 +349,9 @@ Die I/O-Versorgung VDDIOA2 für SD1 unterstützt 1,8 V oder 3,3 V und muss zum I
 
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
-| 1 | Die I2C-Zuweisung berücksichtigt die HCPU-/LCPU-Aufteilung und ob das Gerät im Low-Power-Modus laufen muss | Erforderlich |
+| 1 | Bei der I2C-Zuweisung die Aufteilung zwischen HCPU und LCPU sowie die Frage berücksichtigen, ob das Gerät im Energiesparmodus laufen muss | Erforderlich |
 | 2 | I2C hat Pull-ups mit korrektem Widerstandswert; falls 400-kHz-Betrieb erforderlich ist, werden 2,2-kΩ-Pull-ups empfohlen. Die peripherieseitige Spannungsdomäne verwenden und die Pull-up-Versorgung bei Abschaltung der Peripherie ausschalten | Erforderlich |
-| 3 | Das I2C-Interruptsignal unterstützt Hardware-Wake-up, sofern erforderlich | Erforderlich |
+| 3 | Das I2C-Interruptsignal unterstützt bei Bedarf das hardwareseitige Wecken | Erforderlich |
 | 4 | Falls mehrere Geräte einen I2C-Bus teilen, sind ihre Adressen unterscheidbar | Erforderlich |
 
 </div>
@@ -366,7 +366,7 @@ Die I/O-Versorgung VDDIOA2 für SD1 unterstützt 1,8 V oder 3,3 V und muss zum I
 |:---|:---|:---|
 | 1 | <span class="flag-red">I2S1 ist nur Eingang und arbeitet nur im Master-Modus; das Mikrofon ist wie vorgesehen mit I2S1 verbunden</span> | Optional |
 | 2 | <span class="flag-red">I2S2 unterstützt Eingang und Ausgang nur im Master-Modus und kann mit externen Codec-DAC-/ADC-Geräten verbunden werden</span> | Optional |
-| 3 | <span class="flag-red">I2S3 unterstützt Eingang und Ausgang nur im Master-Modus; geeignet für Low-Power-Anwendungsfälle, bei denen HCPU schläft und LCPU Audio über I2S3 empfängt/verarbeitet</span> | Optional |
+| 3 | <span class="flag-red">I2S3 unterstützt Ein- und Ausgabe nur im Master-Modus. Die Schnittstelle eignet sich für Energiesparanwendungen, bei denen die HCPU schläft und die LCPU Audio über I2S3 empfängt oder verarbeitet</span> | Optional |
 | 4 | I2S-Signalverbindungen sind korrekt | Optional |
 | 5 | <span class="flag-red">Die digitale MIC-Verbindung der I2S1-Schnittstelle ist korrekt</span> | Optional |
 | 6 | Der I/O-Logikpegel des Peripheriegeräts entspricht dem des Hauptchips | Optional |
@@ -388,7 +388,7 @@ Die I/O-Versorgung VDDIOA2 für SD1 unterstützt 1,8 V oder 3,3 V und muss zum I
 | 5 | Analoges MIC wird von MIC_BIAS-Ausgang versorgt | Optional |
 | 6 | Beide Audio-ADC-Eingänge müssen jeweils mindestens einen 2,2-µF-DC-Blockkondensator enthalten | Optional |
 | 7 | DAC-Ausgangspfade P und N haben jeweils einen 1-kΩ-Serienwiderstand, mit einem 1,5-nF-Kondensator dazwischen | Optional |
-| 8 | AW8155 ist der empfohlene Audioverstärker; bei Verwendung des empfohlenen Bauteils in Software für Modus 4 / Class-AB-Modus konfigurieren | Optional |
+| 8 | AW8155 ist der empfohlene Audioverstärker; bei Verwendung dieses Bauteils die Softwareeinstellung „Mode 4 / Class AB mode“ (Modus 4 / Class-AB-Betrieb) wählen | Optional |
 | 9 | <span class="flag-red">Bei Rückführung des Audio-PA-Ausgangs zum MCU-ADC einen Teiler und RC-Filter oder zusätzliche digitale Filterung hinzufügen; die geteilte Spannung muss innerhalb des ADC-Eingangsbereichs bleiben, und die RC-Filter-Grenzfrequenz sollte 20 kHz betragen</span> | Optional |
 | 10 | <span class="flag-red">Falls der im Chip integrierte analoge Audio-ADC-Pfad nicht genutzt wird, wird für ADC1P/ADC1N und ADC2P/ADC2N jeweils ein 0-Ω-Serienwiderstand gegen Masse empfohlen</span> | Optional |
 
@@ -467,7 +467,7 @@ Die I/O-Versorgung VDDIOA2 für SD1 unterstützt 1,8 V oder 3,3 V und muss zum I
 |:---|:---|:---|
 | 1 | USB-Schnittstellenverbindung ist korrekt | Optional |
 | 2 | Die USB-Schnittstelle hat ESD-Schutz | Optional |
-| 3 | Solange USB aktiviert ist, kann der PC bzw. das angeschlossene Gerät im normalen Betrieb das Ein- und Ausstecken erkennen. Soll dies auch im Schlafmodus der MCU möglich sein, ist ein Spannungsteiler an VBUS vorzusehen. Dessen Ausgang muss einen zur I/O-Spannung passenden High-Pegel liefern und mit einem Wake-up-Pin der MCU verbunden werden. Es wird empfohlen, dafür denselben Wake-up-Pin wie für die Erkennung des Ladegeräteanschlusses zu verwenden | Optional |
+| 3 | Solange USB aktiviert ist, kann der PC oder das angeschlossene Gerät im normalen Betrieb das Ein- und Ausstecken erkennen. Soll dies auch im Schlafmodus der MCU möglich sein, ist ein Spannungsteiler an VBUS vorzusehen. Dessen Ausgang muss einen zur I/O-Spannung passenden High-Pegel liefern und mit einem Weck-Pin der MCU verbunden werden. Verwenden Sie dafür möglichst denselben Weck-Pin wie zur Erkennung des Ladegeräteanschlusses | Optional |
 
 </div>
 
@@ -479,13 +479,13 @@ Die I/O-Versorgung VDDIOA2 für SD1 unterstützt 1,8 V oder 3,3 V und muss zum I
 
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
-| 1 | PBR0 wechselt während des Einschaltens von 0 auf 1 und kann für die Steuerung bestimmter externer Load-Switches verwendet werden; PBR1-PBR5 sind standardmäßig Ausgang low | Erforderlich |
+| 1 | PBR0 wechselt beim Einschalten von 0 auf 1 und kann ausgewählte externe Lastschalter steuern; PBR1-PBR5 sind standardmäßig Low-Ausgänge | Erforderlich |
 | 2 | PBR0-PBR5 können sowohl in Standby als auch in Hibernate als Ausgänge verwendet werden | Optional |
 | 3 | PBR0-PBR5 können das LPTIM-Signal ausgeben | Optional |
 | 4 | <span class="flag-red">Für den SF32LB567 wird LPTIM3 empfohlen: LPTIM3_OUT und LPTIM3_OUT_BAR geben 21-25-kHz-Signale von PBR-Pins mit unterschiedlichen Tastverhältnissen und entgegengesetzter Polarität aus</span> | Optional |
 | 5 | <span class="flag-red">Die 21-25-kHz-Signale mit entgegengesetzter Polarität und unterschiedlichen Tastverhältnissen können auch von HCPU ATIM ausgegeben werden; geeignete ATIMx_CHx- und ATIMx_CHxN-Signale zusammen mit Pin_Config auswählen und die Auswirkung der HCPU-Frequenzabsenkung berücksichtigen</span> | Optional |
 | 6 | PBR0-PBR5 können ein 32-kHz-Taktsignal ausgeben | Optional |
-| 7 | <span class="flag-red">PBR0-PBR3 können als Wake-up-Eingänge konfiguriert werden, aber nach dem MCU-Wake-up können PBR0-PBRx keine Interruptsignale empfangen und nur 0/1-Pegel erkennen; mit Vorsicht verwenden</span> | Optional |
+| 7 | <span class="flag-red">PBR0-PBR3 können als Weckeingänge konfiguriert werden. Nach dem Wecken der MCU können PBR0-PBRx jedoch keine Interruptsignale empfangen, sondern nur 0-/1-Pegel erkennen. Mit Vorsicht verwenden</span> | Optional |
 
 </div>
 
@@ -502,7 +502,7 @@ Die I/O-Versorgung VDDIOA2 für SD1 unterstützt 1,8 V oder 3,3 V und muss zum I
 
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
-| 1 | Für alle für die Stromumschaltung verwendeten MOSFET-, LDO- und DCDC-Enable-Pins einen 1-MΩ-Pull-down gegen Masse reservieren, wenn der Enable-Pin aktiv-high ist | Erforderlich |
+| 1 | Für alle für die Stromumschaltung verwendeten MOSFET-, LDO- und DCDC-Enable-Pins einen 1-MΩ-Pull-down gegen Masse reservieren, wenn der Enable-Pin high-aktiv ist | Erforderlich |
 | 2 | Die angesetzte Basisstromaufnahme im Hibernate-Modus ist dokumentiert | Erforderlich |
 | 3 | <span class="flag-red">Die Summe der angesetzten Basisstromaufnahmen der ausgewählten Peripheriegeräte im Hibernate-Modus ist dokumentiert und erfüllt die Projektanforderungen</span> | Erforderlich |
 | 4 | Die angesetzte Basisstromaufnahme im Standby-Modus ist dokumentiert | Erforderlich |

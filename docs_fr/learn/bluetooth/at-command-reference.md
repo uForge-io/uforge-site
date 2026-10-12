@@ -245,7 +245,7 @@ Les commandes ci-dessous sont regroupées par fonction selon les mêmes catégor
 | Commande | `AT+RESET\r` |
 | Réponse | Succès : `\r\nOK\r\n` ; requête (`AT+RESET?\r`) : `\r\nERROR\r\n` |
 | Paramètres | Aucun |
-| Remarques | À la réception de la commande, le module sauvegarde la configuration AT actuelle, répond `OK`, puis arrête l'advertising, coupe les connexions et effectue une réinitialisation logicielle. Cette commande ne modifie pas elle-même la configuration. |
+| Remarques | À la réception de la commande, le module sauvegarde la configuration AT actuelle, répond `OK`, puis arrête la publicité, coupe les connexions et effectue une réinitialisation logicielle. Cette commande ne modifie pas elle-même la configuration. |
 
 </div>
 
@@ -473,7 +473,7 @@ Les commandes ci-dessous sont regroupées par fonction selon les mêmes catégor
 |:-----|:--------|
 | Commande | `AT+DISCOVERABLE?\r` |
 | Réponse | Succès : `\r\n+DISCOVERABLE:<state>\r\n\r\nOK\r\n` |
-| Paramètres | `state` : état de découvrabilité actuel. 0 = non découvrable, 1 = découvrable, 2 = partiellement découvrable (état mixte). La signification dépend du mode de fonctionnement : en mode BLE (`BTMODE=1`), reflète le réglage d'advertising BLE — 1 = activé, 0 = désactivé ; en mode BT (`BTMODE=2`), reflète l'inquiry scan et le page scan — 1 quand les deux sont activés, 0 quand les deux sont désactivés, et 2 sinon ; en mode bimode (`BTMODE=0`), vaut 1 quand l'advertising BLE, l'inquiry scan et le page scan sont tous activés, 0 quand tous sont désactivés, et 2 sinon. |
+| Paramètres | `state` : état de découvrabilité actuel. 0 = non découvrable, 1 = découvrable, 2 = partiellement découvrable (état mixte). La signification dépend du mode de fonctionnement : en mode BLE (`BTMODE=1`), reflète le paramètre de publicité BLE — 1 = activé, 0 = désactivé ; en mode BT (`BTMODE=2`), reflète l'inquiry scan et le page scan — 1 quand les deux sont activés, 0 quand les deux sont désactivés, et 2 sinon ; en mode bimode (`BTMODE=0`), vaut 1 quand la publicité BLE, l'inquiry scan et le page scan sont tous activés, 0 quand tous sont désactivés, et 2 sinon. |
 | Remarques | Interroge uniquement l'état de découvrabilité actuel — ne change pas l'état de l'appareil. |
 
 </div>
@@ -489,13 +489,13 @@ Les commandes ci-dessous sont regroupées par fonction selon les mêmes catégor
 | Commande | `AT+DISCOVERABLE=<mode>\r` |
 | Réponse | Succès : `\r\nOK\r\n` ; échec : `\r\nERROR\r\n` |
 | Paramètres | `mode` : 0 = désactiver la découvrabilité, 1 = activer la découvrabilité. |
-| Remarques | Agit selon le mode de fonctionnement actuel : en mode BLE (`BTMODE=1`), active ou désactive l'advertising BLE ; en mode BT (`BTMODE=2`), active ou désactive l'inquiry scan et le page scan ; en mode bimode (`BTMODE=0`), contrôle ensemble l'advertising BLE, l'inquiry scan et le page scan. |
+| Remarques | Agit selon le mode de fonctionnement actuel : en mode BLE (`BTMODE=1`), active ou désactive la publicité BLE ; en mode BT (`BTMODE=2`), active ou désactive l'inquiry scan et le page scan ; en mode bimode (`BTMODE=0`), contrôle ensemble la publicité BLE, l'inquiry scan et le page scan. |
 
 </div>
 
-#### Interroger l'état d'advertising GATT { #query-gatt-advertising-state }
+#### Interroger l'état de publicité GATT { #query-gatt-advertising-state }
 
-<div align="center"><em>Tableau : Interroger l'état d'advertising GATT</em></div>
+<div align="center"><em>Tableau : Interroger l'état de publicité GATT</em></div>
 
 <div align="center" markdown>
 
@@ -503,14 +503,14 @@ Les commandes ci-dessous sont regroupées par fonction selon les mêmes catégor
 |:-----|:--------|
 | Commande | `AT+GATTDISCOVER?\r` |
 | Réponse | Succès : `\r\n+GATTDISCOVER:<state>\r\n\r\nOK\r\n` ; échec : `\r\nERROR\r\n` |
-| Paramètres | `state` : l'état d'advertising BLE réel sur les ondes. 0 = pas d'advertising, 1 = advertising en cours. |
-| Remarques | Retourne l'état réel d'advertising BLE sur les ondes. Non disponible lorsque le mode de fonctionnement est BT uniquement (`BTMODE=2`) — renvoie `ERROR`. |
+| Paramètres | `state` : l'état réel de la publicité BLE sur les ondes. 0 = aucune publicité, 1 = publicité en cours. |
+| Remarques | Retourne l'état réel de la publicité BLE sur les ondes. Non disponible lorsque le mode de fonctionnement est BT uniquement (`BTMODE=2`) — renvoie `ERROR`. |
 
 </div>
 
-#### Définir l'advertising GATT { #set-gatt-advertising }
+#### Définir la publicité GATT { #set-gatt-advertising }
 
-<div align="center"><em>Tableau : Définir l'advertising GATT</em></div>
+<div align="center"><em>Tableau : Définir la publicité GATT</em></div>
 
 <div align="center" markdown>
 
@@ -518,8 +518,8 @@ Les commandes ci-dessous sont regroupées par fonction selon les mêmes catégor
 |:-----|:--------|
 | Commande | `AT+GATTDISCOVER=<value>\r` |
 | Réponse | Succès : `\r\nOK\r\n` ; échec : `\r\nERROR\r\n` |
-| Paramètres | `value` : 0 = arrêter l'advertising BLE, 1 = démarrer l'advertising BLE. |
-| Remarques | Contrôle directement le démarrage et l'arrêt de l'advertising BLE. Non disponible lorsque le mode de fonctionnement est BT uniquement (`BTMODE=2`). |
+| Paramètres | `value` : 0 = arrêter la publicité BLE, 1 = démarrer la publicité BLE. |
+| Remarques | Contrôle directement le démarrage et l'arrêt de la publicité BLE. Non disponible lorsque le mode de fonctionnement est BT uniquement (`BTMODE=2`). |
 
 </div>
 
@@ -810,7 +810,7 @@ Les commandes ci-dessous sont regroupées par fonction selon les mêmes catégor
 | Commande | `AT+BLEMULTICONN=<n>\r` |
 | Réponse | Succès : `\r\nOK\r\n` ; échec : `\r\nERROR\r\n` |
 | Paramètres | `<n>` : nombre maximal de connexions BLE simultanées, en décimal, plage 1–6. Par défaut 3. |
-| Remarques | Ne peut être défini que lorsque la multiconnexion est activée (`AT+MULTICONN=1`). Le réglage met à jour la configuration ; une fois le nombre maximal de connexions atteint, l'advertising s'arrête (les nouvelles connexions ne sont plus possibles) et reprend automatiquement dès qu'une connexion est libérée. |
+| Remarques | Ne peut être défini que lorsque la multiconnexion est activée (`AT+MULTICONN=1`). Le réglage met à jour la configuration ; une fois le nombre maximal de connexions atteint, la publicité BLE s'arrête (les nouvelles connexions ne sont plus possibles) et reprend automatiquement dès qu'une connexion est libérée. |
 
 </div>
 

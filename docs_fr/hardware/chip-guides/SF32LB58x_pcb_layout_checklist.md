@@ -2,19 +2,19 @@
 icon: lucide/list-checks
 hide:
     - navigation
-description: "Liste de contrôle de revue de disposition PCB point par point pour le MCU SF32LB58x, couvrant les vérifications de boîtier, d'alimentation, d'horloge, de RF, d'audio, de signaux haute vitesse et d'empilement."
+description: "Liste de contrôle de revue d'implantation du PCB point par point pour le MCU SF32LB58x, couvrant les vérifications de boîtier, d'alimentation, d'horloge, de RF, d'audio, de signaux haute vitesse et d'empilement."
 tags:
     - Matériel
     - Puce
     - Liste de contrôle
 ---
 
-# Guide de conception matérielle du SF32LB58x — Liste de contrôle de disposition PCB { #sf32lb58x-hardware-design-guide-pcb-layout-checklist }
+# Guide de conception matérielle du SF32LB58x — Liste de contrôle d'implantation du PCB { #sf32lb58x-hardware-design-guide-pcb-layout-checklist }
 
 !!! note "Fait partie du Guide de conception matérielle du SF32LB58x"
-    Cette page couvre la section 6.18, la liste de contrôle de disposition PCB point par point. Retournez à la page [Conception et routage du PCB](SF32LB58x_pcb_layout.md).
+    Cette page couvre la section 6.18, la liste de contrôle d'implantation du PCB point par point. Retournez à la page [Conception et routage du PCB](SF32LB58x_pcb_layout.md).
 
-## 6.18. Liste de contrôle de disposition PCB { #618-pcb-layout-checklist }
+## 6.18. Liste de contrôle d'implantation du PCB { #618-pcb-layout-checklist }
 
 Chaque tableau couvre un domaine de revue du PCB. En l'absence d'une colonne « S'applique à », les contrôles s'appliquent à toutes les conceptions PCB SF32LB58x couvertes par cette liste.
 
@@ -113,7 +113,7 @@ Chaque tableau couvre un domaine de revue du PCB. En l'absence d'une colonne « 
 
 | N° | Point de contrôle | Catégorie |
 |:---|:---|:---|
-| 1 | Le dispositif de protection ESD du bouton est placé près du bouton | Obligatoire |
+| 1 | Le composant de protection ESD du bouton est placé près du bouton | Obligatoire |
 
 </div>
 
@@ -142,10 +142,10 @@ Chaque tableau couvre un domaine de revue du PCB. En l'absence d'une colonne « 
 
 | N° | Point de contrôle | Catégorie |
 |:---|:---|:---|
-| 1 | Les pistes parallèles AU_ADC1P et AU_ADC1N utilisent un blindage de masse | Obligatoire |
-| 2 | Les pistes parallèles AU_ADC2P et AU_ADC2N utilisent un blindage de masse | Obligatoire |
-| 3 | Les pistes parallèles AU_DAC1P et AU_DAC1N utilisent un blindage de masse | Obligatoire |
-| 4 | Les pistes parallèles AU_DAC2P et AU_DAC2N utilisent un blindage de masse | Obligatoire |
+| 1 | Les pistes parallèles AU_ADC1P et AU_ADC1N sont protégées par une garde de masse | Obligatoire |
+| 2 | Les pistes parallèles AU_ADC2P et AU_ADC2N sont protégées par une garde de masse | Obligatoire |
+| 3 | Les pistes parallèles AU_DAC1P et AU_DAC1N sont protégées par une garde de masse | Obligatoire |
+| 4 | Les pistes parallèles AU_DAC2P et AU_DAC2N sont protégées par une garde de masse | Obligatoire |
 | 5 | La capacité des pistes AU_DAC1P, AU_DAC1N, AU_DAC2P et AU_DAC2N est &lt; 10 pF et leur longueur &lt; 2 cm | Obligatoire |
 
 </div>
@@ -168,7 +168,7 @@ Chaque tableau couvre un domaine de revue du PCB. En l'absence d'une colonne « 
 </div>
 
 !!! warning "Les sources divergent sur la limite entre paires différentielles DSI"
-    Ce classeur demande que les paires différentielles de données DSI soient adaptées à la paire différentielle d'horloge à 200 mil (5,08 mm) près. Le [guide de conception et routage du PCB](SF32LB58x_pcb_layout.md#610-dsi-interface-routing) limite l'écart entre paires à ≤2 mm et l'écart au sein d'une paire à ≤0,5 mm. Les limites entre paires se contredisent ; confirmez auprès de SiFli la limite inter-paires à appliquer avant de finaliser le routage.
+    Ce classeur demande que les paires différentielles de données DSI soient adaptées à la paire différentielle d'horloge à 200 mil (5,08 mm) près. Le [guide de conception et routage du PCB](SF32LB58x_pcb_layout.md#610-dsi-interface-routing) limite l'écart entre paires à ≤ 2 mm et l'écart au sein d'une paire à ≤ 0,5 mm. Les limites entre paires se contredisent ; confirmez auprès de SiFli la limite inter-paires à appliquer avant de finaliser le routage.
 
 ### 6.18.9. ADC { #6189-adc }
 
@@ -178,9 +178,9 @@ Chaque tableau couvre un domaine de revue du PCB. En l'absence d'une colonne « 
 
 | N° | Point de contrôle | Catégorie |
 |:---|:---|:---|
-| 1 | Éviter de router des signaux à commutation rapide en parallèle avec le signal GPADC ; si cela ne peut être évité, prévoir une garde de masse adéquate | Obligatoire |
+| 1 | Évitez de router des signaux à commutation rapide en parallèle avec le signal GPADC ; si cela ne peut être évité, prévoyez une garde de masse adéquate | Obligatoire |
 | 2 | Les résistances du diviseur de tension de batterie sont placées près de la broche d'entrée de la puce | Obligatoire |
-| 3 | Éviter de router des signaux à commutation rapide en parallèle avec le signal SDMADC ; si cela ne peut être évité, prévoir une garde de masse adéquate | Optionnel |
+| 3 | Évitez de router des signaux à commutation rapide en parallèle avec le signal SDMADC ; si cela ne peut être évité, prévoyez une garde de masse adéquate | Optionnel |
 
 </div>
 

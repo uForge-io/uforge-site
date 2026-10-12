@@ -23,7 +23,7 @@ A placa selecionada pode afetar:
 - Alvos de build HCPU/LCPU.
 - Multiplexação dos pinos e disponibilidade de periféricos.
 - Configurações de download pela UART.
-- Configuração de display e touch.
+- Configuração de display e toque.
 - Roteamento do codec de áudio.
 - Configuração de Bluetooth.
 - Tabela de partições e condições de inicialização.
@@ -43,7 +43,7 @@ A placa selecionada pode afetar:
 - [ ] Confirme a fonte de alimentação e o comportamento do circuito de carga.
 - [ ] Confirme as fontes e frequências de clock usadas por esta placa, incluindo 48 MHz e 32,768 kHz quando aplicável.
 - [ ] Confirme a UART de download e a UART de log.
-- [ ] Confirme as interfaces de display e touch.
+- [ ] Confirme as interfaces de display e toque.
 - [ ] Confirme o caminho de áudio, se usado.
 - [ ] Confirme os pinos de boot e o comportamento de reset.
 - [ ] Confirme o layout das partições.
@@ -72,7 +72,7 @@ Comece pela configuração do kit de desenvolvimento ou módulo mais próximo e 
 1. Configuração da Flash e da PSRAM.
 2. Multiplexação dos pinos.
 3. UART do console/download.
-4. Recursos de display, touch e áudio.
+4. Recursos de display, toque e áudio.
 5. Premissas de alimentação e carregamento.
 6. Layout das partições.
 7. Periféricos específicos do produto.

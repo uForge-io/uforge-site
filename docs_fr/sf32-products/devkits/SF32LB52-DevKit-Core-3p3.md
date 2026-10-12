@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-Core-3p3 : carte d'évaluation SF32LB52x compacte avec alimentation du MCU sélectionnable par cavalier (1,8 V ou 3,3 V) et accès direct aux GPIO, à l'affichage, à l'audio, à l'USB et aux rails d'alimentation."
+description: "SF32LB52-DevKit-Core-3p3 : carte d'évaluation SF32LB52x compacte avec alimentation de la MCU sélectionnable par cavalier (1,8 V ou 3,3 V) et accès direct aux GPIO, à l'affichage, à l'audio, à l'USB et aux rails d'alimentation."
 tags:
     - Matériel
     - Carte de développement
@@ -10,7 +10,7 @@ tags:
 
 ## Vue d'ensemble { #overview }
 
-La SF32LB52-DevKit-Core-3p3 est une carte de développement compacte destinée à l'évaluation directe des puces SF32LB52x. Un cavalier de la carte sélectionne une alimentation de 1,8 V ou de 3,3 V pour le MCU. Les principaux signaux du MCU sont exposés par des embases de bord, et les trous métallisés crénelés acceptent des barrettes à broches sans brasage. La carte convient aux ingénieurs qui ont besoin d'un accès direct aux GPIO, aux bus série, aux signaux d'affichage, à l'audio, à l'ADC, au PWM et aux rails d'alimentation.
+La SF32LB52-DevKit-Core-3p3 est une carte de développement compacte destinée à l'évaluation directe des puces SF32LB52x. Un cavalier de la carte sélectionne une alimentation de 1,8 V ou de 3,3 V pour la MCU. Les principaux signaux de la MCU sont accessibles sur les connecteurs en bord de carte ; les demi-trous métallisés permettent d'insérer des barrettes à broches sans soudure. La carte convient aux ingénieurs qui ont besoin d'un accès direct aux GPIO, aux bus série, aux signaux d'affichage, à l'audio, à l'ADC, au PWM et aux rails d'alimentation.
 
 Avec 30,88 mm × 68 mm, la carte est compacte pour des prototypes sur banc tout en offrant des interfaces pratiques pour la mise en service matérielle et logicielle du SF32LB52x.
 
@@ -36,26 +36,26 @@ Avec 30,88 mm × 68 mm, la carte est compacte pour des prototypes sur banc tout 
 
 </div>
 
-Utilisez les variantes NOR seule pour les travaux compacts de Bluetooth, de commande et d'IHM simple. Utilisez les variantes PSRAM + NOR externe lorsque l'application a besoin de ressources graphiques plus volumineuses, de tampons d'image, de systèmes de fichiers ou d'un stockage applicatif.
+Utilisez les variantes NOR seule pour les produits compacts axés sur le Bluetooth, la commande ou une IHM simple. Choisissez les variantes PSRAM + NOR externe lorsque l'application a besoin de ressources graphiques plus volumineuses, de tampons d'image, de systèmes de fichiers ou de stockage applicatif.
 
 **Divergence entre sources — vérifier le marquage de la carte avant le choix :** le [guide détaillé de la carte Core-3p3](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Core-3p3.html) de SiFli appelle la configuration SF32LB52JUD6 `R16N16 V1.0.0` (actuelle), tandis que son [guide des modèles de cartes de développement](https://wiki.sifli.com/en/board/devkit_guide.html) répertorie la même configuration JUD6 / 16 Mo de PSRAM / 16 Mo de NOR sous le nom `N16R16`. La ligne d'informations de révision du guide détaillé indique 8 Mo de PSRAM co-intégrée pour l'EUB6, mais sa liste de fonctionnalités et son tableau des variantes indiquent 4 Mo. La [présentation du SF32LB52](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52/SF32LB52-Overview-B3.md) de SiFli précise elle aussi 4 Mo pour l'EUB6 ; cet article retient donc 4 Mo. Confirmez le marquage de la carte ainsi que le schéma et la nomenclature correspondants lorsque le suffixe exact de la carte importe.
 
 ## Points forts de la carte { #board-highlights }
 
-- Variantes de MCU SF32LB52x en configuration NOR seule ou PSRAM + NOR
+- Variantes de la MCU SF32LB52x en configuration NOR seule ou PSRAM + NOR
 - Quartz principal de 48 MHz et quartz RTC de 32,768 kHz
 - Alimentation USB Type-C et téléchargement/débogage USB-UART via CH340N
 - Antenne PCBA embarquée et connecteur d'antenne I-PEX
-- Alimentation du MCU sélectionnable par cavalier : 1,8 V ou 3,3 V
+- Alimentation de la MCU sélectionnable par cavalier : 1,8 V ou 3,3 V
 - Signaux USB 2.0 FS acheminés vers l'embase de bord
-- 37 GPIO exposés ; le MCU fournit 3 UART, 4 interfaces I2C, 2 GPTIM, 2 interfaces SPI et 6 canaux GPADC
+- 37 GPIO exposés ; la MCU fournit 3 UART, 4 interfaces I2C, 2 GPTIM, 2 interfaces SPI et 6 canaux GPADC
 - Tous les GPIO peuvent être configurés en UART, I2C ou GPTIM ; le multiplexage des broches inclut aussi SPI, PWM, I2S, PDM et entrées de réveil
 - Connecteur FPC d'affichage 16 broches au pas de 0,5 mm ; les interfaces d'affichage comprennent SPI, DSPI et Quad-SPI, avec prise en charge du QSPI en mode DDR
-- Signaux de panneau tactile I2C
+- Signaux I2C de l'écran tactile
 - Microphone analogique et broches de sortie audio différentielle
 - Une LED utilisateur
 - Touche d'alimentation et touche de fonction
-- Points de test pour la mesure du courant d'un seul rail ; SiFli documente aussi des tests de consommation du MCU seul, du système minimal et de la carte entière
+- Points de test pour mesurer le courant sur un seul rail ; SiFli documente aussi des tests de consommation de la MCU seule, du système minimal et de la carte entière
 
 ## Quand utiliser cette carte { #when-to-use-this-board }
 
@@ -64,26 +64,26 @@ Choisissez la SF32LB52-DevKit-Core-3p3 lorsque vous avez besoin de l'accès le p
 - Mettre en service des cartes filles ou des cartes de capteurs personnalisées
 - Évaluer les variantes mémoire du SF32LB52x
 - Réaliser des prototypes de fonctions LCD, audio, USB et GPIO
-- Mesurer le courant de rails d'alimentation individuels
+- Mesurer le courant sur chaque rail d'alimentation
 - Valider le firmware avant de concevoir un circuit imprimé de produit compact
 
-Pour une carte plus petite de type module à bords crénelés, utilisez la [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md). Pour une carte d'affichage prête à l'emploi avec amplificateur audio, emplacement pour carte TF et chargeur de batterie, utilisez la [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md).
+Pour une carte plus petite de type module à demi-trous métallisés, utilisez la [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md). Pour une carte d'affichage prête à l'emploi avec amplificateur audio, emplacement pour carte TF et chargeur de batterie, utilisez la [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md).
 
 ## Alimentation { #power }
 
 La carte prend en charge trois entrées d'alimentation :
 
 - Alimentation USB Type-C, recommandée pour le développement et le débogage courants
-- Entrée 5 V via les broches 5 V et GND de l'embase de bord lorsque l'USB est déconnecté
-- Entrée 3,3 V via les broches 3,3 V et GND de l'embase de bord lorsque l'USB est déconnecté ; une alimentation de laboratoire externe peut être utilisée
+- Entrée 5 V via les broches 5 V et GND du connecteur en bord de carte lorsque l'USB est déconnecté
+- Entrée 3,3 V via les broches 3,3 V et GND du connecteur en bord de carte lorsque l'USB est déconnecté ; une alimentation de laboratoire externe peut être utilisée
 
-Un cavalier distinct de la carte sélectionne l'alimentation du MCU entre 1,8 V et 3,3 V. Ce réglage est distinct des broches d'alimentation 1,8 V et 3,3 V externes de l'embase ; consultez le brochage et le schéma de la révision de carte correspondante avant de modifier le cavalier ou d'alimenter des circuits externes.
+Un cavalier distinct sélectionne l'alimentation de la MCU entre 1,8 V et 3,3 V. Ce réglage est distinct des broches d'alimentation externes 1,8 V et 3,3 V du connecteur ; consultez le brochage et le schéma de la révision de carte correspondante avant de modifier le cavalier ou d'alimenter des circuits externes.
 
 Pour mesurer le courant d'un seul rail, placez un ampèremètre en série avec le rail à mesurer, aux points de mesure de la carte.
 
-Lorsque l'USB Type-C est connecté, la carte peut aussi fournir des sorties 3,3 V, 1,8 V et 5 V sur certaines broches de l'embase. Confirmez le sens requis avant de raccorder des circuits externes.
+Lorsque l'USB Type-C est connecté, la carte peut aussi fournir des sorties 3,3 V, 1,8 V et 5 V sur certaines broches du connecteur. Confirmez le sens requis avant de raccorder des circuits externes.
 
-La carte comprend un interrupteur d'alimentation. Le signal RTS# du CH340N peut commander l'activation de la carte, ce qui permet à l'outil de l'hôte de réinitialiser le MCU pendant les opérations de téléchargement ou de débogage.
+La carte comprend un interrupteur d'alimentation. Le signal RTS# du CH340N peut commander l'activation de la carte, ce qui permet à l'outil hôte de réinitialiser la MCU pendant les opérations de téléchargement ou de débogage.
 
 ## Téléchargement et débogage { #download-and-debug }
 
@@ -91,7 +91,7 @@ Utilisez le port UART USB Type-C pour le téléchargement du firmware et le déb
 
 - **Mode de téléchargement** : activez BOOT dans l'outil de téléchargement, puis mettez la carte sous tension ou réinitialisez-la.
 - **Mode débogage/journal** : désactivez BOOT, puis mettez la carte sous tension ou réinitialisez-la.
-- **Réinitialisation** : utilisez la fonction de réinitialisation/touche d'alimentation de la carte ou le chemin de réinitialisation RTS piloté par l'outil.
+- **Réinitialisation** : utilisez la fonction de réinitialisation associée à la touche d'alimentation de la carte ou la commande de réinitialisation RTS pilotée par l'outil.
 
 ## Commandes utilisateur { #user-controls }
 
@@ -109,7 +109,7 @@ Utilisez le port UART USB Type-C pour le téléchargement du firmware et le déb
 
 ## Interface d'affichage { #display-interface }
 
-La carte prend en charge les interfaces LCD SPI, DSPI et Quad-SPI, y compris le QSPI en mode DDR, via un connecteur FPC vertical à 16 broches au pas de 0,5 mm, avec un verrou à relever et des contacts en partie inférieure. Il transporte la réinitialisation du LCD, le PWM du rétroéclairage, le signal TE, la sélection de puce, l'horloge, quatre lignes de données et les signaux tactiles I2C.
+La carte prend en charge les interfaces LCD SPI, DSPI et Quad-SPI, y compris le QSPI en mode DDR, via un connecteur FPC vertical à 16 broches au pas de 0,5 mm, doté d'un verrou à relever et de contacts en partie inférieure. Ce connecteur transporte le signal de réinitialisation du LCD, le PWM du rétroéclairage, le signal TE, la sélection de puce, l'horloge, quatre lignes de données et les signaux I2C de l'écran tactile.
 
 ![Câble adaptateur FPC](assets/sf32lb52x/FPC-22P.png){ loading="lazy" }
 <div align="center"><em>Câble adaptateur FPC</em></div>
@@ -186,15 +186,15 @@ La carte expose deux embases de bord à 24 broches. Le premier côté est consac
 
 </div>
 
-## Broches du Flash externe et du SDIO { #external-flash-and-sdio-pins }
+## Broches de la flash externe et de l'interface SDIO { #external-flash-and-sdio-pins }
 
 Certaines variantes comprennent un Flash QSPI-NOR externe de 16 Mo. Le groupe de broches partagé stockage/SDIO est le suivant :
 
-<div align="center"><em>Groupe de broches du Flash externe et du SDIO</em></div>
+<div align="center"><em>Groupe de broches de la flash externe et de l'interface SDIO</em></div>
 
 <div align="center" markdown>
 
-| GPIO du MCU | Fonction partagée Flash / SDIO |
+| GPIO de la MCU | Fonction partagée flash / SDIO |
 | :--- | :--- |
 | PA12 | MPI2_CS / SD1_D2 |
 | PA13 | MPI2_D1 / SD1_D3 |
@@ -205,11 +205,11 @@ Certaines variantes comprennent un Flash QSPI-NOR externe de 16 Mo. Le groupe de
 
 </div>
 
-Vérifiez si ces broches sont déjà occupées par le Flash monté avant de les utiliser pour le SDIO ou d'autres fonctions d'extension.
+Vérifiez si ces broches sont déjà utilisées par la flash montée avant de les affecter au SDIO ou à d'autres fonctions d'extension.
 
 ## Extension audio { #audio-expansion }
 
-La carte achemine la polarisation et l'entrée du microphone analogique ainsi que la sortie différentielle du DAC. Le microphone et un amplificateur de classe AB/D pour piloter un haut-parleur sont externes ; choisissez-les en fonction du chemin audio visé.
+La carte achemine la polarisation et l'entrée du microphone analogique ainsi que la sortie différentielle du DAC. Le microphone et l'amplificateur de classe AB/D qui pilote le haut-parleur sont externes ; choisissez-les en fonction du chemin audio visé.
 
 ## Cibles de compilation du SDK { #sdk-build-targets }
 
@@ -225,7 +225,7 @@ Ce sont des identifiants de cibles de compilation du SDK, pas nécessairement le
 [Présentation de la puce SF32LB52x]: ../chips/SF32LB52x.md
 [Guide de conception matérielle SF32LB52x]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
 [Article original du wiki SiFli]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-Core-3p3.md
-[Paquet de conception]: https://downloads.sifli.com/hardware/files/documentation/ProPrj_SF32LB52-DevKit-Core-3p3-V100_2025-06-10.epro?
+[Fichiers de conception]: https://downloads.sifli.com/hardware/files/documentation/ProPrj_SF32LB52-DevKit-Core-3p3-V100_2025-06-10.epro?
 [Acheter des échantillons]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
@@ -233,7 +233,7 @@ Ce sont des identifiants de cibles de compilation du SDK, pas nécessairement le
 - :fontawesome-solid-microchip: __[Présentation de la puce SF32LB52x]__
 - :fontawesome-solid-file-lines: __[Guide de conception matérielle SF32LB52x]__
 - :fontawesome-brands-github: __[Article original du wiki SiFli]__
-- :fontawesome-solid-download: __[Paquet de conception]__
+- :fontawesome-solid-download: __[Fichiers de conception]__
 - :fontawesome-solid-cart-shopping: __[Acheter des échantillons]__
 
 </div>

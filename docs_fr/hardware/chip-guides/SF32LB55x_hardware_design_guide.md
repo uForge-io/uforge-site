@@ -12,7 +12,7 @@ tags:
 
 ## 1. Introduction { #1-introduction }
 
-Ce guide fournit des recommandations et des documents de référence pour les produits basés sur la famille de microcontrôleurs AIoT généralistes SF32LB55x. Il s'adresse aux ingénieurs matériels, aux concepteurs de PCB et aux développeurs de produits qui conçoivent des objets portables BLE, des appareils alimentés par batterie intégrant de nombreux capteurs, des dispositifs de surveillance de la santé et des systèmes connectés compacts.
+Ce guide fournit des recommandations et des documents de référence pour les produits basés sur la famille de microcontrôleurs AIoT généralistes SF32LB55x. Il s'adresse aux ingénieurs matériels, aux concepteurs de PCB et aux développeurs de produits qui conçoivent des objets portables BLE, des appareils alimentés par batterie intégrant de nombreux capteurs, des appareils de surveillance de la santé et des systèmes connectés compacts.
 
 Le guide couvre tout le processus de développement matériel : choix du boîtier, conception de l'alimentation, circuits d'horloge, routage RF, mémoire externe, interfaces d'affichage, sources de réveil, capteurs, audio, accès au débogage, routage PCB, validation et préparation à la fabrication. La mise en œuvre de ces recommandations contribue à réduire les risques liés au schéma et au routage, à préserver le fonctionnement basse consommation et à prendre en compte les exigences du SF32LB55x concernant le boîtier, l'alimentation, la mémoire, la RF et les interfaces.
 
@@ -52,7 +52,7 @@ SF32LB55x conserve une convention historique de suffixes. Pour connaître les in
 
 ### 3.1. Architecture { #31-architecture }
 
-SF32LB55x vise les produits AIoT basse consommation qui doivent rester réactifs aux actions de l'utilisateur tout en limitant leur consommation en veille et en sommeil. Il intègre un émetteur-récepteur Bluetooth 5.2 basse consommation, la gestion de l'alimentation et des interfaces mémoire et d'affichage. L'intégration matérielle doit couvrir le choix du boîtier, les rails du PMU, le mode de démarrage, les deux circuits à quartz, l'adaptation RF, la mémoire externe, le choix d'un affichage MIPI/SPI/MCU8080/JDI, les connexions GPADC et capteurs, l'audio Bluetooth externe, l'accès au débogage et à la programmation, ainsi que l'étalonnage en production.
+SF32LB55x vise les produits AIoT basse consommation qui doivent rester réactifs aux actions de l'utilisateur tout en limitant leur consommation en veille et en sommeil. Il intègre un émetteur-récepteur Bluetooth 5.2 basse consommation, la gestion de l'alimentation et des interfaces mémoire et d'affichage. L'intégration matérielle doit couvrir le choix du boîtier, les rails du PMU, le mode de démarrage, les deux circuits à quartz, l'adaptation RF, la mémoire externe, le choix d'un affichage MIPI/SPI/MCU8080/JDI, les connexions GPADC et capteurs, l'audio Bluetooth externe, l'accès au débogage et au flashage, ainsi que l'étalonnage en production.
 
 La connectivité de stockage comprend plusieurs interfaces QSPI, une interface OPI-PSRAM indépendante et la prise en charge SD/eMMC. La configuration de NOR Flash et de PSRAM intégrées au boîtier dépend de la référence exacte. Les interfaces mémoire et d'affichage dépendent également du boîtier. BGA145 prend en charge un canal OPI-PSRAM externe, contre deux pour BGA169. L'interface MIPI DSI à deux voies de données est disponible sur BGA145 et BGA169, pas sur QFN68L. Vérifiez le plan des broches et la configuration mémoire intégrée au boîtier de la référence exacte avant d'affecter les composants externes.
 
@@ -99,7 +99,7 @@ Le SF32LB55x est proposé en boîtiers QFN68L, BGA145 et BGA169. Choisissez le b
 - Interfaces OPI PSRAM, mémoire flash QSPI NOR/NAND et PSRAM, SDIO eMMC ou Micro SD ; la mémoire intégrée dépend de la référence exacte.
 - Options d'affichage MIPI DSI, SPI/QSPI, MCU8080 et JDI.
 - Conseils de conception pour le bouton de réveil, le moteur de vibration, l'interruption de réveil, le GPADC, les capteurs et l'audio Bluetooth externe.
-- Prise en charge du DBG-UART, du SWD, de la programmation en production et de l'étalonnage des quartz.
+- Prise en charge du DBG-UART, du SWD, du flashage en production et de l'étalonnage des quartz.
 
 ### 3.4. Applications typiques { #34-typical-applications }
 
@@ -140,13 +140,13 @@ Avant l'EVT, archivez les versions utilisées de la fiche technique et du manuel
 
 ### 4.4. Utilisation des listes de contrôle { #using-the-checklists }
 
-Ce guide propose deux niveaux de vérification. La liste courte de la section 7 regroupe les points les plus risqués pour un contrôle technique rapide. La [liste de contrôle du schéma](SF32LB55x_schematic_checklist.md) (section 5.8) et la section 6.4 des [directives d'implantation et de routage PCB](SF32LB55x_pcb_layout.md) reproduisent, point par point, le document officiel de SiFli *SF32LB55x Schematic & PCB Checklist* (V1.0, 2026-01-21), publié avec les documents de conception matérielle sur le [wiki de SiFli][Index des guides de conception matérielle des puces SiFli (Wiki)]. Ce document couvre les dispositifs 551/555/557 et la variante SS6600A8.
+Ce guide propose deux niveaux de vérification. La liste courte de la section 7 regroupe les points les plus risqués pour un contrôle technique rapide. La [liste de contrôle du schéma](SF32LB55x_schematic_checklist.md) (section 5.8) et la section 6.4 des [directives d'implantation et de routage PCB](SF32LB55x_pcb_layout.md) reproduisent, point par point, le document officiel de SiFli *SF32LB55x Schematic & PCB Checklist* (V1.0, 2026-01-21), publié avec les documents de conception matérielle sur le [wiki de SiFli][Index des guides de conception matérielle des puces SiFli (Wiki)]. Ce document couvre les composants 551/555/557 et la variante SS6600A8.
 
-Chaque point de contrôle indique le ou les groupes de variantes concernés et s'il est obligatoire (à valider avant la publication) ou optionnel (recommandé si la fonctionnalité est utilisée). Les textes colorés et ceux sur <span class="flag-yellow">fond jaune</span> reprennent les mises en évidence du fichier Excel source. Celui-ci n'en explique pas la raison pour chaque cas : considérez ces marques comme des signaux de vigilance supplémentaires, et non comme une raison d'ignorer les autres points du tableau.
+Chaque point de contrôle indique le ou les groupes de variantes concernés et s'il est obligatoire (à valider avant l'approbation de la conception) ou optionnel (recommandé si la fonctionnalité est utilisée). Les textes colorés et ceux sur <span class="flag-yellow">fond jaune</span> reprennent les mises en évidence du fichier Excel source. Celui-ci n'en explique pas la raison pour chaque cas : considérez ces marques comme des signaux de vigilance supplémentaires, et non comme une raison d'ignorer les autres points du tableau.
 
-Utilisez la [liste de contrôle du schéma](SF32LB55x_schematic_checklist.md) lors de la revue du schéma, avant de commencer le routage PCB. Utilisez la liste de contrôle PCB (section 6.4) lors de la revue du routage, avant de publier les fichiers Gerber. En pratique, chaque liste fait généralement l'objet de deux passes : d'abord par l'ingénieur de conception, puis par un réviseur indépendant avant le gel de la conception ou son lancement en fabrication.
+Utilisez la [liste de contrôle du schéma](SF32LB55x_schematic_checklist.md) lors de la revue du schéma, avant de commencer le routage PCB. Utilisez la liste de contrôle PCB (section 6.4) lors de la revue du routage, avant d'émettre les fichiers Gerber. En pratique, chaque liste fait généralement l'objet de deux passes : d'abord par l'ingénieur de conception, puis par un réviseur indépendant avant le gel de la conception ou son lancement en fabrication.
 
-Pour tirer pleinement parti des listes, utilisez-les comme traces de validation, et non comme de simples documents à parcourir :
+Pour tirer pleinement parti des listes, utilisez-les comme dossier de validation, et non comme de simples documents à parcourir :
 
 1. Confirmez d'abord la référence exacte du composant cible et le boîtier choisi.
 2. Pendant la revue, indiquez pour chaque point s'il est validé, non validé ou non applicable ; ne vous contentez pas de parcourir le tableau.

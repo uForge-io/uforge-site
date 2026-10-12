@@ -58,9 +58,9 @@ tags:
 | Инженерная задача | С чего начать |
 |:-----------------|:--------------------------------|
 | Аналоговые сигналы и датчики | [Измерения с помощью GPADC](platforms/sifli-sdk/application-notes/adc-sampling.md) · [Подключение датчиков и чтение данных](platforms/sifli-sdk/application-notes/sensor-integration.md) |
-| Хранение данных и графические ресурсы | [Работа с внешней Flash-памятью](platforms/sifli-sdk/application-notes/external-flash.md) · [Сжатие графических ресурсов с помощью EZIP](platforms/sifli-sdk/application-notes/ezip-image-assets.md) |
+| Хранение данных и графические ресурсы | [Работа с внешней флеш-памятью](platforms/sifli-sdk/application-notes/external-flash.md) · [Сжатие графических ресурсов с помощью EZIP](platforms/sifli-sdk/application-notes/ezip-image-assets.md) |
 | Надёжность, энергопотребление и отладка | [Настройка сторожевого таймера](platforms/sifli-sdk/application-notes/watchdog.md) · [Настройка режимов энергосбережения и измерение тока](platforms/sifli-sdk/application-notes/low-power-measurement.md) · [Сбор журналов и анализ сбоев](platforms/sifli-sdk/application-notes/crash-analysis.md) |
-| Проверка RF и Bluetooth | [RF-тестирование с SiFli SDK](platforms/sifli-sdk/application-notes/rf-performance-tests.md) · [Испытания Bluetooth с сигнализацией](platforms/sifli-sdk/application-notes/bluetooth-signalling-tests.md) · [Проверка отдельных RF-операций Bluetooth](platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests.md) |
+| Проверка RF и Bluetooth | [RF-тестирование с SiFli SDK](platforms/sifli-sdk/application-notes/rf-performance-tests.md) · [Сигнальные испытания Bluetooth](platforms/sifli-sdk/application-notes/bluetooth-signalling-tests.md) · [Проверка отдельных RF-операций Bluetooth](platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests.md) |
 
 </div>
 
@@ -73,7 +73,7 @@ tags:
 | Раздел | Назначение |
 |:-----|:--------|
 | [SiFli-SDK](platforms/sifli-sdk/overview.md) | Воспроизводимый основной процесс: конфигурация, сборка, прошивка, повторно используемые компоненты и диагностика. |
-| [Практические руководства по SiFli-SDK](platforms/sifli-sdk/sdk-application-notes.md) | Применение SDK для конкретных задач: ADC, датчики, внешняя Flash, низкое энергопотребление, диагностика, RF- и Bluetooth-тестирование. |
+| [Практические руководства по SiFli-SDK](platforms/sifli-sdk/sdk-application-notes.md) | Применение SDK для конкретных задач: ADC, датчики, внешняя флеш-память, низкое энергопотребление, диагностика, RF- и Bluetooth-тестирование. |
 | [Примеры](examples/index.md) | Выбор и адаптация работающей реализации для конкретной платы и самой сложной подсистемы продукта. |
 | [Инструменты](tools/index.md) | Подбор средств загрузки, мониторинга, трассировки, анализа сбоев, обработки ресурсов и подготовки к производству. |
 | [Темы по прошивке](firmware-topics/index.md) | Решения для всего продукта: разделы памяти, OTA/DFU, USB, управление питанием и сбор диагностических данных. |
@@ -94,11 +94,11 @@ tags:
 | [Zephyr](platforms/zephyr/overview.md) | Нужны API Zephyr, devicetree, Kconfig или доработка поддержки платы в downstream-ветке. | Путь оценки downstream-разработки с поддержкой конкретной платы. |
 | [Arduino](platforms/arduino/overview.md) | Нужны скетчи или быстрый прототип периферии на поддерживаемой плате. | Бета-версия для ограниченного набора плат. |
 | [MicroPython](platforms/micropython/status.md) | Оценивается возможность запуска скриптов в будущем. | Информационная страница до появления воспроизводимого общедоступного порта. |
-| [Rust](platforms/rust/overview.md) | Есть возможность оценить работу с HAL/PAC и предложить исправления в upstream-проект. | Проект сообщества, который ещё находится в разработке. |
+| [Rust](platforms/rust/overview.md) | Есть возможность оценить работу с HAL/PAC и предложить исправления в исходный проект. | Проект сообщества, который ещё находится в разработке. |
 
 </div>
 
-Прежде чем строить продукт на одном из этих путей, проверьте на конкретной плате всю требуемую периферию, разметку Flash, методы отладки и процедуру восстановления. Зафиксируйте проверенную ревизию, конфигурацию, команды и результаты вместе с исходным кодом продукта.
+Прежде чем строить продукт на одном из этих путей, проверьте на конкретной плате всю требуемую периферию, разметку флеш-памяти, методы отладки и процедуру восстановления. Зафиксируйте проверенную ревизию, конфигурацию, команды и результаты вместе с исходным кодом продукта.
 
 ## Проверьте готовность прошивки к применению в продукте { #product-ready-development-evidence }
 

@@ -7,7 +7,7 @@ tags: [Entwicklung, SiFli-SDK, Anwendungshinweise, Energiesparen]
 
 # Energiesparfunktionen konfigurieren und messen { #configure-and-measure-low-power }
 
-Die SiFli-SDK-Leitfäden zum Energiesparen behandeln mehrere SF32-Architekturen. SF32LB52x, SF32LB55x und SF32LB56x besitzen zwei Kerne: Der HCPU in HPSYS arbeitet mit bis zu 240 MHz für leistungsintensive Aufgaben, der LCPU in LPSYS mit bis zu 48 MHz für Bluetooth- und Sensoraufgaben. SF32LB57x und SF32LB58x ergänzen diese HCPU/LCPU-Architektur um einen ACPU; beim SF32LB58x arbeitet der stromsparende LCPU mit bis zu 96 MHz. Kernzahl, Taktgrenzen und Energiesparverhalten unterscheiden sich je nach Familie. Maßgeblich ist daher der SDK-Leitfaden für das Zielgerät.
+Die SiFli-SDK-Leitfäden zum Energiesparen behandeln mehrere SF32-Architekturen. SF32LB52x, SF32LB55x und SF32LB56x besitzen zwei Kerne: Der HCPU in HPSYS arbeitet mit bis zu 240 MHz für rechenintensive Aufgaben, der LCPU in LPSYS mit bis zu 48 MHz für Bluetooth- und Sensoraufgaben. SF32LB57x und SF32LB58x ergänzen diese HCPU/LCPU-Architektur um einen ACPU; beim SF32LB58x arbeitet der stromsparende LCPU mit bis zu 96 MHz. Kernzahl, Taktgrenzen und Energiesparverhalten unterscheiden sich je nach Familie. Maßgeblich ist daher der SDK-Leitfaden für das Zielgerät.
 
 ## Das Energiemanagement-Framework konfigurieren { #configure-the-power-management-framework }
 
@@ -66,7 +66,7 @@ HAL_PMU_EnablePinWakeup(0, AON_PIN_MODE_HIGH);
 rt_kprintf("CR:0x%x, WER:0x%x\n", hwp_pmuc->CR, hwp_pmuc->WER);
 ```
 
-Das Aufwachen aus Hibernate ist ein Kaltstart mit gesetztem `PM_HIBERNATE_BOOT`; anders als bei Standby wird der unterbrochene Befehlsstrom nicht fortgesetzt. Muss ein IO sowohl aus Standby als auch aus Hibernate aufwecken, konfigurieren Sie beide Pfade. Bei 55x sind die Aufwachpins in Hibernate schwebende Eingänge; sehen Sie bei Bedarf einen externen Pull-up- oder Pull-down-Widerstand vor.
+Das Aufwachen aus Hibernate ist ein Kaltstart mit gesetztem `PM_HIBERNATE_BOOT`; anders als bei Standby wird der unterbrochene Befehlsstrom nicht fortgesetzt. Muss ein I/O-Pin sowohl aus Standby als auch aus Hibernate wecken, konfigurieren Sie beide Pfade. Bei 55x sind die Aufwachpins in Hibernate schwebende Eingänge; sehen Sie bei Bedarf einen externen Pull-up- oder Pull-down-Widerstand vor.
 
 ## Die Schlafzustände verstehen { #understand-the-sleep-states }
 
@@ -99,13 +99,13 @@ Das Aufwachen aus Hibernate ist ein Kaltstart mit gesetztem `PM_HIBERNATE_BOOT`;
 
 Der zitierte aktuelle SDK-Leitfaden zu niedrigem Stromverbrauch enthält keine vergleichbare Angabe zur SRAM-Erhaltung und Aufwachzeit des SF32LB57x. Übertragen Sie keine numerischen Erhaltungskapazitäten oder Zeitwerte anderer Familien auf das SF32LB57x; prüfen Sie sie anhand der SDK-Version und der Gerätedokumentation für das Zielsystem.
 
-In der vorherigen Tabelle entsprechen `PM_SLEEP_MODE_LIGHT`, `PM_SLEEP_MODE_DEEP` und `PM_SLEEP_MODE_STANDBY` den Modi Light Sleep, Deep Sleep und Standby.
+In dieser Tabelle entsprechen `PM_SLEEP_MODE_LIGHT`, `PM_SLEEP_MODE_DEEP` und `PM_SLEEP_MODE_STANDBY` den Modi Light Sleep, Deep Sleep und Standby.
 
 Die familienbezogenen Werte sind Richtwerte aus den SDK-Leitfäden und keine garantierten Aufwachzeiten auf dem Board. Der SF32LB52x-Leitfaden beschreibt, dass HCPU bei vorhandenem PSRAM Daten aus dem abzuschaltenden RAM im PSRAM sichert und nach dem Aufwachen wiederherstellt; ohne PSRAM dient 64 KB Retention-RAM als Sicherungsziel. Dieser Sicherungsbereich ist nicht mit der in der Familientabelle genannten SRAM-Erhaltungskapazität gleichzusetzen (für den Standby-Modus von SF32LB52x sind beispielsweise 384 KB HPSYS-SRAM-Erhalt angegeben). Der tatsächliche Strom hängt außerdem von aktivierten Peripheriegeräten, IO-Pegeln, externem Speicher und dem Board ab.
 
 ## Takte im Wachzustand steuern { #control-clocks-while-awake }
 
-Kann der Idle-Thread keinen Schlafzustand erreichen, kann die automatische WFI-Taktreduzierung den Strom senken. Dies ist nur sicher, wenn EPIC, EZIP, LCDC, USB und SD im Leerlauf sind. Verwendet eine Anwendung nicht die SDK-interne Erfassung der LVGL- und Geräteaktivität, melden Sie den Beginn und das Ende der Peripherieaktivität mit `rt_pm_hw_device_start()` und `rt_pm_hw_device_stop()`. Konfigurieren Sie den Teiler mit `HAL_RCC_HCPU_SetDeepWFIDiv()`; Audioanwendungen begrenzen den reduzierten Takt normalerweise auf 48 MHz, während andere 4 MHz verwenden können. Setzen Sie `HPSYS_RCC_DBGR_FORCE_HP` entsprechend dem SDK-Leitfaden.
+Kann der Idle-Thread nicht in einen Schlafzustand wechseln, kann die automatische Taktreduzierung bei WFI den Stromverbrauch senken. Dies ist nur sicher, wenn EPIC, EZIP, LCDC, USB und SD im Leerlauf sind. Verwendet eine Anwendung nicht die SDK-interne Erfassung der LVGL- und Geräteaktivität, melden Sie den Beginn und das Ende der Peripherieaktivität mit `rt_pm_hw_device_start()` und `rt_pm_hw_device_stop()`. Konfigurieren Sie den Teiler mit `HAL_RCC_HCPU_SetDeepWFIDiv()`; Audioanwendungen begrenzen den reduzierten Takt normalerweise auf 48 MHz, während andere 4 MHz verwenden können. Setzen Sie `HPSYS_RCC_DBGR_FORCE_HP` entsprechend dem SDK-Leitfaden.
 
 Verwenden Sie für aktive Arbeit `rt_pm_run_enter()`:
 
@@ -123,9 +123,9 @@ Verwenden Sie für aktive Arbeit `rt_pm_run_enter()`:
 
 `pm_scenario_start()`/`pm_scenario_stop()` setzen die SDK-Strategie für UI und Audio um: Sobald UI oder Audio aktiv ist, wird High Speed gewählt; ist keines der beiden Szenarien aktiv, wird Medium Speed gewählt. Messen Sie den Energieverbrauch, nicht nur den Momentanstrom, da ein niedrigerer Takt die Ausführungszeit verlängern kann.
 
-## Einschlafreihenfolge der Subsysteme nachvollziehen { #understand-inter-subsystem-sleep-sequencing }
+## Reihenfolge der Subsysteme beim Übergang in den Schlafmodus { #understand-inter-subsystem-sleep-sequencing }
 
-Nach dem Ausschalten des Bildschirms kann HPSYS in den Schlafmodus wechseln. Bei 55x/56x/58x folgt LPSYS normalerweise auf HPSYS; die 52x-Familie bildet die dokumentierte Ausnahme und erlaubt unabhängige Schlafzustände für HCPU und LCPU. Die verfügbaren Quellen belegen nicht, dass der ACPU des 57x derselben Reihenfolge folgt. Prüfen Sie dessen Subsystem-Richtlinie anhand der passenden SDK-Version. Nach dem Aufwachen startet `gui_resume` einen neuen Entscheidungszyklus für das Ausschalten des Bildschirms. Halten Sie einen Kern wach, solange ein gemeinsam genutztes Peripheriegerät oder eine IPC-Transaktion ihn noch benötigt.
+Nach dem Ausschalten des Bildschirms kann HPSYS in den Schlafmodus wechseln. Bei 55x/56x/58x folgt LPSYS normalerweise auf HPSYS; die 52x-Familie bildet die dokumentierte Ausnahme und erlaubt unabhängige Schlafzustände für HCPU und LCPU. Die verfügbaren Quellen belegen nicht, dass der ACPU des 57x derselben Reihenfolge folgt. Prüfen Sie dessen Subsystem-Richtlinie anhand der passenden SDK-Version. Nach dem Aufwachen startet `gui_resume` einen neuen Zyklus zur Entscheidung über das Abschalten des Bildschirms. Halten Sie einen Kern wach, solange ein gemeinsam genutztes Peripheriegerät oder eine IPC-Transaktion ihn noch benötigt.
 
 Aktivieren Sie `BSP_PM_DEBUG` vorübergehend und suchen Sie in den Logs nach:
 
@@ -136,7 +136,7 @@ Aktivieren Sie `BSP_PM_DEBUG` vorübergehend und suchen Sie in den Logs nach:
 | Log | Bedeutung |
 |---|---|
 | `gui_suspend` / `gui_resume` | Übergang Bildschirm aus/an. |
-| `[pm]S: mode,gtime` | Schlafmodus erreicht; `gtime` in 32.768-Hz-Takten. |
+| `[pm]S: mode,gtime` | Schlafmodus erreicht; `gtime` in 32 768-Hz-Takten. |
 | `[pm]W: gtime` | Aus dem Schlaf aufgewacht. |
 | `[pm]WSR:0x...` | Aufwachgrund; Bits anhand des Benutzerhandbuchs der Familie dekodieren. |
 </div>

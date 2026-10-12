@@ -10,7 +10,7 @@ tags:
 
 El **acelerador de IA**, denominado NNACC en el SDK, ejecuta operaciones de redes neuronales compatibles en determinados dispositivos SF32. Permite aplicaciones de **IA en el borde**, con inferencia local en lugar de depender de un servicio en la nube. La reducción de latencia, ocupación de CPU o energía depende del modelo, la ubicación de los datos, la implementación de software y la carga del producto completo.
 
-Wearables, dispositivos de seguimiento de salud, pantallas inteligentes, accesorios de voz, sistemas de fusión de sensores y productos AIoT compactos son aplicaciones posibles. Estos equipos alimentados por batería suelen combinar Bluetooth, gráficos, audio, sensores e interacción con el usuario. Delegar en el hardware las operaciones compatibles puede liberar tiempo de CPU para otras tareas, pero la capacidad de respuesta y el ahorro energético deben medirse.
+Los dispositivos vestibles, los equipos de seguimiento de la salud, las pantallas inteligentes, los accesorios de voz, los sistemas de fusión de sensores y los productos AIoT compactos son aplicaciones posibles. Estos equipos alimentados por batería suelen combinar Bluetooth, gráficos, audio, sensores e interacción con el usuario. Delegar en el hardware las operaciones compatibles puede liberar tiempo de CPU para otras tareas, pero la capacidad de respuesta y el ahorro energético deben medirse.
 
 Las funciones de IA disponibles dependen del dispositivo SF32 y del soporte que ofrezca el SDK. Antes de decidir la arquitectura del modelo o la distribución de memoria, consulte la hoja de datos, el manual de referencia y la documentación del SDK del chip elegido.
 
@@ -28,7 +28,7 @@ Muchos productos embebidos necesitan ofrecer funciones inteligentes sin transmit
 - Mejor comportamiento sin conexión, porque las funciones principales pueden funcionar sin acceso a la red.
 - Menor potencia media solo si la función completa consume menos energía durante el mismo intervalo de uso, con precisión y cobertura de detección equivalentes e incluida la sobrecarga de delegar operaciones al acelerador.
 
-En los dispositivos portátiles y AIoT, estos beneficios son concretos. Un reloj puede clasificar gestos, detectar niveles de actividad, monitorizar señales de salud, reconocer activadores de voz sencillos o procesar datos de sensores, sin que la pantalla, Bluetooth y el procesador de aplicación pierdan capacidad de respuesta.
+En los dispositivos portátiles y AIoT, estos beneficios son concretos. Un reloj puede clasificar gestos, detectar niveles de actividad, supervisar señales de salud, reconocer activadores de voz sencillos o procesar datos de sensores, sin que la pantalla, Bluetooth y el procesador de aplicación pierdan capacidad de respuesta.
 
 Estos beneficios tienen condiciones. El procesamiento local reduce el tráfico inalámbrico solo si el producto evita enviar datos brutos; la privacidad sigue exigiendo almacenamiento adecuado, controles de acceso y protección de los datos transmitidos. Los casos siguientes son posibilidades de diseño, no una afirmación de que el SDK incluya todos los modelos.
 
@@ -49,7 +49,7 @@ Preprocesamiento
   - extracción de características
         │
         ▼
-Firmware / runtime de inferencia
+Firmware / entorno de inferencia
   - orquestación del grafo del modelo
   - operaciones compatibles con NNACC
   - otras operaciones en la CPU, si están implementadas

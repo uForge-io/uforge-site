@@ -85,8 +85,8 @@ Ces groupes ne sont pas interchangeables au niveau de la carte. Les familles sur
 - Accélérateur graphique 2D/2,5D ePicasso 2.0
 - Décodeur matériel eZip 2.0 pour la compression graphique sans perte
 - Contrôleur LCD dédié prenant en charge SPI/DSPI/QSPI, y compris le SPI pour papier électronique, ainsi que 8080-8 bits
-- 1 CAN audio 24 bits, RSB de 99 dB
-- 1 CNA audio 24 bits, RSB de 109 dB
+- 1 ADC audio 24 bits, RSB de 99 dB
+- 1 DAC audio 24 bits, RSB de 109 dB
 
 ### Connectivité sans fil { #wireless-connectivity }
 
@@ -113,7 +113,7 @@ Ces groupes ne sont pas interchangeables au niveau de la carte. Les familles sur
 - 1 I2S
 - 1 interface PDM (jusqu'à deux microphones numériques)
 - 1 SD3.0/SDIO3.0/eMMC
-- 1 CAN 12 bits à usage général
+- 1 ADC 12 bits à usage général
 - Capteur de température
 - RTC et timers de surveillance (watchdog)
 - 44 ou 45 GPIO selon la famille de variantes
@@ -150,13 +150,13 @@ Si vous changez de niveau de mémoire, la correspondance de contenu la plus proc
 | SF32LB | 520U36 | 523UB6 | 525UC6 | 527UD6 | 52BU36 | 52BU56 | 52DUB6 | 52EUB6 | 52GUC6 | 52JUD6 |
 |:-|-:|-:|-:|-:|-:|-:|-:|-:|-:|-:|
 | Boîtier | QFN68L | QFN68L | QFN68L | QFN68L | QFN68L | QFN68L | QFN68L | QFN68L | QFN68L | QFN68L |
-| Dimensions | 7 × 7 × 0.85mm | 7 × 7 × 0.85mm | 7 × 7 × 0.85mm | 7 × 7 × 0.85mm | 7 × 7 × 0.85mm | 7 × 7 × 0.85mm | 7 × 7 × 0.85mm | 7 × 7 × 0.85mm | 7 × 7 × 0.85mm | 7 × 7 × 0.85mm |
-| Pas | 0.35mm | 0.35mm | 0.35mm | 0.35mm | 0.35mm | 0.35mm | 0.35mm | 0.35mm | 0.35mm | 0.35mm |
+| Dimensions | 7 × 7 × 0,85 mm | 7 × 7 × 0,85 mm | 7 × 7 × 0,85 mm | 7 × 7 × 0,85 mm | 7 × 7 × 0,85 mm | 7 × 7 × 0,85 mm | 7 × 7 × 0,85 mm | 7 × 7 × 0,85 mm | 7 × 7 × 0,85 mm | 7 × 7 × 0,85 mm |
+| Pas | 0,35 mm | 0,35 mm | 0,35 mm | 0,35 mm | 0,35 mm | 0,35 mm | 0,35 mm | 0,35 mm | 0,35 mm | 0,35 mm |
 | GPIO | 44 | 44 | 44 | 44 | 45 | 45 | 45 | 45 | 45 | 45 |
-| Mémoire intégrée au boîtier | 1MB QSPI-NOR | 4MB OPI-PSRAM | 8MB OPI-PSRAM | 16MB OPI-PSRAM | 1MB QSPI-NOR | 4MB QSPI-NOR | 4MB OPI-PSRAM | 4MB OPI-PSRAM | 8MB OPI-PSRAM | 16MB OPI-PSRAM |
-| Plage de tension d'alimentation | 3.2–4.7 V | 3.2–4.7 V | 3.2–4.7 V | 3.2–4.7 V | 2.97–3.63 V | 2.97–3.63 V | 1.71–1.98 V | 2.97–3.63 V | 2.97–3.63 V | 2.97–3.63 V |
-| Tension d'E/S | 3.3V | 3.3V | 3.3V | 3.3V | 3.3V / 1.8V | 3.3V / 1.8V | 3.3V / 1.8V | 3.3V / 1.8V | 3.3V / 1.8V | 3.3V / 1.8V |
-| Température | -40 à 85°C | -40 à 85°C | -40 à 85°C | -40 à 85°C | -40 à 85°C | -40 à 85°C | -40 à 85°C | -40 à 85°C | -40 à 85°C | -40 à 85°C |
+| Mémoire intégrée au boîtier | 1 MB QSPI-NOR | 4 MB OPI-PSRAM | 8 MB OPI-PSRAM | 16 MB OPI-PSRAM | 1 MB QSPI-NOR | 4 MB QSPI-NOR | 4 MB OPI-PSRAM | 4 MB OPI-PSRAM | 8 MB OPI-PSRAM | 16 MB OPI-PSRAM |
+| Plage de tension d'alimentation | 3,2–4,7 V | 3,2–4,7 V | 3,2–4,7 V | 3,2–4,7 V | 2,97–3,63 V | 2,97–3,63 V | 1,71–1,98 V | 2,97–3,63 V | 2,97–3,63 V | 2,97–3,63 V |
+| Tension d'E/S | 3,3 V | 3,3 V | 3,3 V | 3,3 V | 3,3 V / 1,8 V | 3,3 V / 1,8 V | 3,3 V / 1,8 V | 3,3 V / 1,8 V | 3,3 V / 1,8 V | 3,3 V / 1,8 V |
+| Température | -40 à 85 °C | -40 à 85 °C | -40 à 85 °C | -40 à 85 °C | -40 à 85 °C | -40 à 85 °C | -40 à 85 °C | -40 à 85 °C | -40 à 85 °C | -40 à 85 °C |
 
 </div>
 
@@ -166,7 +166,7 @@ Ce tableau reprend les principales variantes du [guide des modèles de puces](ht
 
 Suivez cette séquence pour transformer une présélection SF32LB52x en conception validée :
 
-1. **Prouver le chemin du firmware.** Commencez par le [guide de prise en main du SDK SiFli](../../getting-started/sifli/getting-started-sifli-sdk.md), puis utilisez le [flux de travail du SDK SiFli](../../develop/platforms/sifli-sdk/overview.md) et les [exemples](../../develop/examples/index.md) pour valider les périphériques requis et le comportement Bluetooth.
+1. **Valider le parcours de développement du firmware.** Commencez par le [guide de prise en main du SDK SiFli](../../getting-started/sifli/getting-started-sifli-sdk.md), puis utilisez le [flux de travail du SDK SiFli](../../develop/platforms/sifli-sdk/overview.md) et les [exemples](../../develop/examples/index.md) pour valider les périphériques requis et le comportement Bluetooth.
 2. **Choisir le support d'intégration.** Évaluez le [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) lorsqu'un module RF déjà intégré convient au produit ; sinon, choisissez la [carte de développement SF32LB52](../devkits/SF32LB52-DevKit-LCD.md) la plus proche pour la validation précoce du firmware et des périphériques.
 3. **Concevoir et relire le matériel.** Utilisez le [guide de conception matérielle](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) local — y compris ses listes de contrôle du [schéma](../../hardware/chip-guides/SF32LB52x_schematic_checklist.md) et de l'[implantation du circuit imprimé](../../hardware/chip-guides/SF32LB52x_pcb_layout_checklist.md) — avant de valider le schéma ou l'implantation. Confirmez la bonne base de famille d'alimentation : 520/3/5/7, 52B/E/G/J ou 52D.
 4. **Vérifier la source faisant autorité.** Contrôlez la [fiche technique](#development-resources) applicable et le [guide de conception matérielle pour 520/3/5/7] ou le [guide de conception matérielle pour 52B/D/E/G/J] de SiFli par rapport à la référence commandable et au boîtier exacts.
@@ -179,8 +179,8 @@ Le [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) associe le SF32LB525UC6, qui d
 
 ### Kits de développement { #development-kits }
 
-- Le [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md) est la principale carte de mise en route orientée écran pour l'écosystème de modules SF32LB52, avec connectivité LCD QSPI et MCU/8080.
-- Le [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) est la carte cœur compacte à alimentation externe pour une mise en route rapide du firmware, des GPIO et du mode basse consommation sur des composants de classe 52B/52J.
+- Le [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md) est la principale carte de mise en service orientée écran pour l'écosystème de modules SF32LB52, avec connectivité LCD QSPI et MCU/8080.
+- Le [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) est la carte cœur compacte à alimentation externe pour une mise en service rapide du firmware, des GPIO et du mode basse consommation sur des composants de classe 52B/52J.
 - Le [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) est la plus petite carte de développement de la série 52, utile lorsque le produit cible est contraint en taille.
 - Le [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) est la voie orientée basse consommation pour l'évaluation sur batterie et les expérimentations de produits compacts.
 

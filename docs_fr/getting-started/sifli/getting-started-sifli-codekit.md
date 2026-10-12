@@ -11,7 +11,7 @@ tags:
 
 SiFli CodeKit est l'extension VS Code destinée au développement avec SiFli-SDK. Elle propose des actions guidées pour installer les outils du SDK, sélectionner une carte, compiler un exemple, flasher le firmware et ouvrir une console série.
 
-Suivez cette procédure si vous préférez travailler dans un IDE. Pour connaître les commandes exécutées par les boutons, consultez le [guide SiFli-SDK manuel](getting-started-sifli-sdk.md).
+Suivez cette procédure si vous préférez travailler dans un IDE. Pour connaître les commandes exécutées par les boutons, consultez le [guide manuel de SiFli-SDK](getting-started-sifli-sdk.md).
 
 Cette page décrit la configuration initiale. Une fois `hello_world` opérationnel, consultez la [documentation de référence de CodeKit](../../develop/tools/codekit.md) pour connaître son rôle au quotidien, les exigences de reproductibilité et les limites de ce que CodeKit peut prendre en charge en cas de problème.
 
@@ -102,13 +102,13 @@ Si la compilation échoue immédiatement, vérifiez que CodeKit connaît l'empla
 
 Connectez la carte via le port USB-UART, puis exécutez l'action **Flash** ou **Download** de CodeKit.
 
-Lorsque vous y êtes invité pour un port série :
+Lorsqu'un port série vous est demandé :
 
 - Sous Windows, choisissez le port `COM` correspondant.
 - Sous macOS, choisissez le périphérique `/dev/cu.*` plutôt que `/dev/tty.*`.
 - Sous Linux, choisissez le périphérique `/dev/ttyUSB*` ou `/dev/ttyACM*` correspondant.
 
-Si l'outil de téléchargement ne parvient pas à faire passer la carte en mode de téléchargement UART, réinitialisez-la juste avant de lancer le transfert. Si le problème persiste, suivez les instructions de programmation propres à la carte.
+Si l'outil de téléchargement ne parvient pas à faire passer la carte en mode de téléchargement UART, réinitialisez-la juste avant de lancer le transfert. Si le problème persiste, suivez les instructions de flashage propres à la carte.
 
 ## Ouvrir la console série { #open-the-serial-console }
 
@@ -143,7 +143,7 @@ Vous pouvez poursuivre lorsque les conditions suivantes sont réunies :
 
 ## Où aller ensuite { #where-to-go-next }
 
-- Utilisez [SiFli-SDK](getting-started-sifli-sdk.md) pour comprendre les commandes terminal équivalentes.
+- Utilisez [SiFli-SDK](getting-started-sifli-sdk.md) pour comprendre les commandes équivalentes en ligne de commande.
 - Continuez avec les [Tutoriels débutants](../tutorials/beginner.md) une fois que `hello_world` fonctionne.
 - Consultez la [Vue d'ensemble du Bluetooth](../../learn/bluetooth/overview.md), la [Vue d'ensemble des graphismes](../../learn/graphics/overview.md), la [Vue d'ensemble de l'audio](../../learn/audio/overview.md) et la [Vue d'ensemble de la basse consommation](../../learn/low-power/overview.md) lorsque vous commencez à développer une fonctionnalité produit concrète.
 

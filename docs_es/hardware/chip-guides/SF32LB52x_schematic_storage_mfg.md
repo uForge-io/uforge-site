@@ -2,7 +2,7 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Guía de diseño esquemático del almacenamiento, la conectividad y el acceso de fabricación del MCU SF32LB52x: almacenamiento de arranque, sensores, interfaz de depuración/descarga y programación de producción."
+description: "Guía de diseño esquemático del almacenamiento, la conectividad y el acceso de fabricación de la MCU SF32LB52x: almacenamiento de arranque, sensores, interfaz de depuración/descarga y grabación de producción."
 tags:
     - Hardware
     - Chip
@@ -21,11 +21,11 @@ tags:
 
 - Las opciones de arranque externo incluyen SPI NOR, SPI NAND y SD NAND; eMMC está disponible en las variantes compatibles con alimentación externa regulada.
 - Los pines bootstrap `PA13` y `PA17` seleccionan el medio de arranque.
-- Las notas de aplicación y la guía de diseño de esquemáticos asignan `PA21` a la conmutación de la alimentación del almacenamiento de arranque, mientras que la lista de comprobación oficial asigna `PA11` a la Flash externa de las variantes alimentadas por batería. Confirme con SiFli qué pin de control corresponde al diseño concreto. Como requisito independiente, la Flash NOR de 32 MB o más conectada mediante MPI debe apagarse y volver a encenderse mediante `PA21` para que la ROM pueda reconocerla tras un reinicio o al entrar en Hibernate. En las variantes con memoria integrada en el encapsulado, `VDD_SIP` debe apagarse durante Hibernate para evitar fugas en las E/S de esa memoria.
+- Las notas de aplicación y la guía de diseño de esquemáticos asignan `PA21` a la conmutación de la alimentación del almacenamiento de arranque, mientras que la lista de comprobación oficial asigna `PA11` a la Flash externa de las variantes alimentadas por batería. Confirme con SiFli qué pin de control corresponde al diseño concreto. Como requisito independiente, la Flash NOR de 32 MB o más conectada mediante MPI debe apagarse y volver a encenderse mediante PA21 para que la ROM pueda reconocerla tras un reinicio o al entrar en Hibernate. En las variantes con memoria integrada en el encapsulado, VDD_SIP debe apagarse durante Hibernate para evitar fugas en las E/S de esa memoria.
 
 **Objetivo de diseño**
 
-Elija el medio de arranque y el esquema de alimentación del almacenamiento en función del tamaño del firmware, la estrategia de actualización y los estados de bajo consumo. El diseño también debe permitir que la ROM arranque de forma fiable tras un reinicio o tras entrar en Hibernate.
+Elija el medio de arranque y el esquemático de alimentación del almacenamiento en función del tamaño del firmware, la estrategia de actualización y los estados de bajo consumo. El diseño también debe permitir que la ROM arranque de forma fiable tras un reinicio o tras entrar en Hibernate.
 
 ##### 5.6.1.1. Descripción de la interfaz de almacenamiento { #5611-storage-interface-description }
 
@@ -124,7 +124,7 @@ El chip admite SPI NOR Flash, SPI NAND Flash y SD NAND Flash externos. **eMMC so
 
 ##### 5.6.1.3. Control de alimentación del almacenamiento de arranque { #5613-boot-storage-power-control }
 
-Las guías de aplicación y de diseño de esquemáticos de OpenSiFli, de mayor prioridad, asignan `PA21` al control del interruptor (nivel alto: encendido; nivel bajo: apagado); utilice `PA21` como base de diseño respaldada por las fuentes. En cambio, el libro de comprobación enlazado desde la wiki de SiFli asigna `PA11` a la Flash externa de las variantes con batería. No sustituya `PA21` por `PA11` basándose únicamente en ese libro. Este no aclara si `PA11` es otra señal de habilitación de la placa o una discrepancia de asignación; confirme con SiFli la red y la variante exactas antes de liberar el diseño.
+Las guías de aplicación y de diseño de esquemáticos de OpenSiFli, de mayor prioridad, asignan `PA21` al control del interruptor (nivel alto: encendido; nivel bajo: apagado); utilice `PA21` como base de diseño respaldada por las fuentes. En cambio, el libro de comprobación enlazado desde la wiki de SiFli asigna `PA11` a la Flash externa de las variantes con batería. No utilice `PA11` basándose únicamente en ese libro. Este no aclara si `PA11` es otra señal de habilitación de la placa o una discrepancia de asignación; confirme con SiFli la red y la variante exactas antes de liberar el diseño.
 
 === "SF32LB520/3/5/7 (alimentación por batería)"
 
@@ -141,7 +141,7 @@ Las guías de aplicación y de diseño de esquemáticos de OpenSiFli, de mayor p
     - La alimentación del almacenamiento externo es independiente de VDD_SIP; añada un interruptor de alimentación separado.
     - Consulte la sección 5.6.1.1 para conocer las alternativas de los dominios VCC/VCCQ de eMMC.
     - La nota de aplicación asigna **PA21** a los interruptores de alimentación del almacenamiento relacionados con el arranque; la discrepancia entre las fuentes sobre la Flash externa de las variantes alimentadas por batería se señala más arriba.
-    - Las memorias NOR Flash de 32 MB o más conectadas mediante MPI (Memory Peripheral Interface, interfaz de periféricos de memoria para SPI-NOR/SPI-NAND) deben poder desconectarse mediante PA21. Así, salen del modo de 4 bytes al reiniciar el MCU o entrar en Hibernate; de lo contrario, la ROM no reconocerá la Flash. Las NOR Flash de 16 MB o menos pueden permanecer siempre alimentadas.
+    - Las memorias NOR Flash de 32 MB o más conectadas mediante MPI (Memory Peripheral Interface, interfaz de periféricos de memoria para SPI-NOR/SPI-NAND) deben poder desconectarse mediante PA21. Así, salen del modo de 4 bytes al reiniciar la MCU o entrar en Hibernate; de lo contrario, la ROM no reconocerá la Flash. Las NOR Flash de 16 MB o menos pueden permanecer siempre alimentadas.
     - El diseño de referencia reserva huellas para resistencias pull-up en PA13 y PA17; móntelas según el tipo de almacenamiento. Se recomiendan 7,5 kΩ.
 
 **Errores frecuentes en el diseño del almacenamiento**
@@ -252,25 +252,25 @@ Para la depuración paso a paso y la salida de registros mediante DBG_UART, cons
 - [ ] El nivel de tensión UART de 3,3 V es compatible con el adaptador o útil seleccionado.
 - [ ] Se ha documentado el procedimiento de recuperación de una placa que no puede arrancar el firmware de aplicación.
 
-#### 5.7.2. Programación de producción y calibración del cristal { #572-production-flashing-and-crystal-calibration }
+#### 5.7.2. Grabación de producción y calibración del cristal { #572-production-flashing-and-crystal-calibration }
 
 **Resumen rápido**
 
-- La programación de producción y la calibración del cristal requieren una alimentación estable, acceso a DBG_UART, PA01 y los puntos de prueba necesarios de alimentación y masa.
+- La grabación de producción y la calibración del cristal requieren una alimentación estable, acceso a DBG_UART, PA01 y los puntos de prueba necesarios de alimentación y masa.
 - Diseñe el acceso del útil antes de cerrar el contorno mecánico de la PCB y la carcasa.
 
 **Objetivo de diseño**
 
-Permita programar, calibrar y recuperar todas las placas de producción sin soldaduras manuales ni desmontar el producto.
+Permita grabar, calibrar y recuperar todas las placas de producción sin soldaduras manuales ni desmontar el producto.
 
-SiFli proporciona una herramienta de descarga sin conexión para programar el firmware de producción y calibrar el cristal. Reserve en el diseño de hardware, como mínimo, estos puntos de prueba: PVDD/VBAT, GND, AVDD33, DBG_UART_RXD, DBG_UART_TXD y PA01. Consulte el documento «Offline Downloader User Guide», incluido en el paquete de desarrollo, para conocer el procedimiento detallado de programación y calibración.
+SiFli proporciona una herramienta de descarga sin conexión para grabar el firmware de producción y calibrar el cristal. Reserve en el diseño de hardware, como mínimo, estos puntos de prueba: PVDD/VBAT, GND, AVDD33, DBG_UART_RXD, DBG_UART_TXD y PA01. Consulte el documento «Offline Downloader User Guide», incluido en el paquete de desarrollo, para conocer el procedimiento detallado de grabación y calibración.
 
 **Lista de comprobación de producción**
 
 - [ ] Se han reservado puntos de prueba para PVDD/VBAT, GND, AVDD33, DBG_UART_RXD, DBG_UART_TXD y PA01.
 - [ ] El útil previsto puede acceder a los pads de prueba después del montaje mecánico.
 - [ ] Se han definido con fabricación el flujo de calibración del cristal y los límites de aceptación/rechazo.
-- [ ] Los registros de programación, calibración y pruebas funcionales se pueden asociar a la revisión de la placa.
+- [ ] Los registros de grabación, calibración y pruebas funcionales se pueden asociar a la revisión de la placa.
 
 #### 5.7.3. Listas de comprobación de esquemático y PCB { #573-schematic-and-pcb-drawing-checklists }
 

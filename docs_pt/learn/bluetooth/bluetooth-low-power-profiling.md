@@ -36,7 +36,7 @@ Para fundamentar uma estimativa de autonomia do produto, meça, sempre que poss�
 
 ## Prepare um teste reproduzível { #set-up-a-repeatable-test }
 
-O instrumento e o dispositivo precisam compartilhar um limite de medição claramente documentado. O Power Profiler Kit II (PPK II), da Nordic, é uma ferramenta de fonte e medição de classe de referência, desde que as faixas de tensão e corrente sejam adequadas à configuração. Também é possível usar uma unidade de fonte e medição (SMU) ou um analisador de corrente equivalente. A disciplina de medição importa mais que a marca do instrumento.
+O instrumento e o dispositivo precisam compartilhar um limite de medição claramente documentado. O Power Profiler Kit II (PPK II), da Nordic, pode servir como instrumento de referência para alimentar o dispositivo e medir sua corrente, desde que as faixas de tensão e corrente sejam adequadas à configuração. Também é possível usar uma unidade de fonte e medição (SMU) ou um analisador de corrente equivalente. A disciplina de medição importa mais que a marca do instrumento.
 
 No [modo Source Meter](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/measure_current_source_meter.html), o PPK II alimenta o dispositivo; no [modo Ampere Meter](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/measure_current_ampere_meter.html), uma fonte externa fornece energia através do instrumento. Escolha o modo conforme o caminho de alimentação previsto. A tensão configurada não é uma forma de onda registrada no dispositivo: monitore também a tensão no ponto de medição, principalmente se quedas de tensão ou variações da bateria afetarem a energia.
 
@@ -295,7 +295,7 @@ Use os exemplos do SiFli-SDK para tornar reproduzível um estado Bluetooth antes
 
 </div>
 
-## Lista de verificação antes da liberação do produto { #release-review-checklist }
+## Checklist antes da liberação do produto { #release-review-checklist }
 
 - [ ] O ponto de medição e a tensão de alimentação estão documentados.
 - [ ] Corrente e tensão foram registradas em todos os cenários relevantes para o lançamento.

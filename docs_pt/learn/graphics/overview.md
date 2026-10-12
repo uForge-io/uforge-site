@@ -10,7 +10,7 @@ tags:
 
 ## Planeje a arquitetura gráfica { #overview }
 
-Este guia apresenta como criar interfaces gráficas responsivas em dispositivos SF32. O foco está nas decisões práticas que afetam produtos reais: escolha do display, estratégia de framebuffer, integração com LVGL, aceleração por hardware do ePicasso, posicionamento de memória e atualização da tela.
+Este guia apresenta como criar interfaces gráficas responsivas em dispositivos SF32. O foco está nas decisões práticas que afetam produtos reais: escolha do display, estratégia de framebuffer, integração com LVGL, aceleração por hardware do ePicasso, posicionamento de memória e atualização do display.
 
 Os dispositivos SF32 são voltados a produtos compactos de AIoT e wearables, nos quais a interface precisa ser fluida sem ultrapassar limites rigorosos de consumo de energia, memória e área de PCB. O fluxo gráfico separa o tratamento de recursos, a composição de pixels, a compressão opcional do framebuffer e a saída para o painel. Distinguir essas funções é essencial para escolher a otimização adequada.
 
@@ -23,42 +23,42 @@ O caminho típico dos recursos até o display é:
 <div align="center"><em>Diagrama: fluxo dos recursos gráficos até o display</em></div>
 
 ```text
-Imagens, fontes e animações de origem
+Source images, fonts, and animations
         │
         ▼
-GraphicsTool converte os recursos compatíveis para eZip ou eZip-A
+GraphicsTool converts supported resources to eZip or eZip-A
         │
         ▼
-Recursos compactados em NOR Flash, PSRAM, NAND ou sistema de arquivos
+Compressed assets in NOR Flash, PSRAM, NAND, or file storage
         │
         ▼
-O decodificador de hardware eZip expande o recurso quando necessário
+eZip hardware decoder expands an asset when required
         │
         ▼
-LVGL ou outro framework de interface + driver do subsistema gráfico
+LVGL or another UI framework + graphics/display driver
         │
-        ├── Renderização de fallback em software (CPU)
+        ├── CPU fallback rendering
         │
-        └── Aceleração de pixels por ePicasso
+        └── ePicasso pixel acceleration
         │
         ▼
-Bitmap final renderizado em um buffer de desenho ou framebuffer
+Final rendered bitmap in a draw buffer or framebuffer
         │
-        ├── Caminho de exibição sem compressão
+        ├── Uncompressed display path
         │
-        └── Opcional: extDMA comprime o bitmap em TurboPixel
+        └── Optional: extDMA compresses it into TurboPixel
                     │
                     ▼
-             Framebuffer TurboPixel na PSRAM
+             TurboPixel framebuffer in PSRAM
         │
         ▼
-O controlador de display transfere os pixels para o painel
+Display controller transfers pixels to the panel
         │
         ▼
-Painel SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI
+SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
 ```
 
-Esse fluxo é configurável: um produto pode não usar eZip, ePicasso, TurboPixel ou um framebuffer completo. A disponibilidade e as conexões dependem do dispositivo escolhido, do SDK, da interface de display, do painel e da configuração do driver. O cabeçalho LCDC atual do OpenSiFli define `LCDC_SUPPORTED_COMPRESSED_LAYER` somente quando `HAL_EXTDMA_MODULE_ENABLED` está habilitado e a condição da família permite; SF32LB52x e SF32LB57x são excluídos. Um comentário no código também informa que o caminho LCPU não está habilitado. A tabela publicada de recursos LCDC do SDK marca a descompressão de camadas comprimidas como não suportada no SF32LB55x. Portanto, considere o 55x condicional, e não como uma implementação validada de ponta a ponta. Verifique a revisão exata do SDK, o núcleo, a configuração de build e o hardware-alvo; consulte [TurboPixel](turbopixel.md#availability-in-the-sf32-family).
+Esse fluxo é configurável: um produto pode não usar eZip, ePicasso, TurboPixel ou um framebuffer completo. A disponibilidade e as conexões dependem do dispositivo escolhido, do SDK, da interface de display, do painel e da configuração do driver. O cabeçalho LCDC atual do OpenSiFli define `LCDC_SUPPORTED_COMPRESSED_LAYER` somente quando `HAL_EXTDMA_MODULE_ENABLED` está habilitado e a condição da família permite; SF32LB52x e SF32LB57x são excluídos. Um comentário no código também informa que o caminho LCPU não está habilitado. A tabela publicada de recursos LCDC do SDK marca a descompressão de camadas comprimidas como não suportada no SF32LB55x. Portanto, considere o SF32LB55x condicional, e não como uma implementação validada de ponta a ponta. Verifique a revisão exata do SDK, o núcleo, a configuração de build e o hardware-alvo; consulte [TurboPixel](turbopixel.md#availability-in-the-sf32-family).
 
 <div align="center"><em>Funções de cada etapa do fluxo gráfico SF32</em></div>
 
@@ -234,7 +234,7 @@ O callback de flush do display marca o limite entre renderização e saída. O c
 
 ## Decisões para portar o LVGL { #lvgl-porting-decisions }
 
-Defina estes detalhes de integração antes de aperfeiçoar as telas:
+Fixe estes detalhes de integração antes de aperfeiçoar as telas:
 
 <div align="center"><em>Tabela: Decisões para portar o LVGL</em></div>
 
@@ -366,7 +366,7 @@ Quando a interface ficar lenta, identifique o gargalo antes de alterar o projeto
 | Sintoma | Área provável para verificar |
 |:---|:---|
 | Alto uso da CPU durante o desenho | Falta de aceleração por hardware, excesso de operações de pixel por software ou widgets complexos. |
-| A renderização termina, mas a tela atualiza lentamente | Largura de banda da interface do painel, tamanho do flush ou caminho de transferência do driver. |
+| A renderização termina, mas o display atualiza lentamente | Largura de banda da interface do painel, tamanho do flush ou caminho de transferência do driver. |
 | Tearing ou cintilação | Estratégia de buffers, sincronização ou temporização da atualização parcial. |
 | Artefatos aleatórios | Coerência de cache, vida útil do buffer ou incompatibilidade de stride/formato de pixel. |
 | Telas simples funcionam bem, mas animações não | Redesenho da tela inteira, blends alpha grandes, redimensionamento de recursos ou largura de banda do painel. |
@@ -398,15 +398,15 @@ Evite estes erros: corrigi-los no fim do projeto costuma ser caro.
 - Ignorar a latência do toque enquanto se otimiza apenas a taxa de quadros.
 - Esperar o bring-up da PCB para validar a inicialização do painel.
 
-## Checklist de inicialização { #bring-up-checklist }
+## Checklist de bring-up { #bring-up-checklist }
 
 Use este checklist ao iniciar um projeto gráfico com SF32:
 
 - [ ] Confirme a resolução, a profundidade de cor, a interface e o circuito integrado controlador do painel.
 - [ ] Confirme se o dispositivo SF32 escolhido suporta a interface de display necessária.
 - [ ] Estime a memória exigida pelos framebuffers e buffers de desenho.
-- [ ] Defina uma estratégia de buffer completo ou parcial, simples ou dupla.
-- [ ] Inicialize o reset do painel, as linhas de alimentação, a retroiluminação e a sequência de inicialização.
+- [ ] Defina uma estratégia de buffer completo ou parcial, com buffer simples ou duplo.
+- [ ] Faça o bring-up do reset do painel, das linhas de alimentação, da retroiluminação e da sequência de inicialização.
 - [ ] Implemente o tick do LVGL, o flush do display e os drivers de entrada.
 - [ ] Verifique preenchimentos, imagens, texto e toque.
 - [ ] Habilite a aceleração ePicasso quando o SDK e o driver oferecerem suporte.

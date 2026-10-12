@@ -66,19 +66,19 @@ Berechnen Sie **Relativ zu BMP** je Szenario als `file size ÷ BMP file size × 
 
 ## Warum eZip verwenden { #why-use-ezip }
 
-### Reduzierung des Asset-Speicherbedarfs { #reduce-asset-storage }
+### Asset-Speicherbedarf reduzieren { #reduce-asset-storage }
 
 Komprimierte Ressourcen können weniger Speicherplatz in NOR-Flash, PSRAM, NAND oder Wechselspeichern belegen als unkomprimierte Pixelpuffer. Das ist besonders bei Zifferblättern, mehrsprachigen Schriftpaketen, Icon-Sammlungen, UI-Themes und animationsreichen Oberflächen hilfreich.
 
-### Reduzierung des Speicherbus-Verkehrs { #reduce-memory-bus-traffic }
+### Speicherbus-Verkehr reduzieren { #reduce-memory-bus-traffic }
 
 Liegen Ressourcen in externem NOR-Flash oder PSRAM, können unkomprimierte Bitmaps bereits vor dem Zeichnen viel Busbandbreite beanspruchen. Werden komprimierte Ressourcen übertragen und nahe am Grafikpfad dekodiert, kann dieser Verkehr sinken. Der tatsächliche Gewinn hängt vom Kompressionsverhältnis, Quellformat, Display-Aktualisierungsmuster und der Geschwindigkeit der Speicherschnittstelle ab.
 
 ### CPU-Zeit freisetzen { #preserve-cpu-time }
 
-Auf einem unterstützten Hardware-Dekodierpfad muss die Anwendungs-CPU nicht jedes Asset per Software dekomprimieren. Der freigewordene Spielraum kann die UI-Reaktionsfähigkeit verbessern oder Funk-, Audio-, Sensor- und Low-Power-Scheduling zugutekommen.
+Auf einem unterstützten Hardware-Dekodierpfad muss die Anwendungs-CPU nicht jedes Asset per Software dekomprimieren. Der freigewordene Spielraum kann die UI-Reaktionsfähigkeit verbessern oder der Aufgabenplanung für Funk, Audio, Sensoren und Energiesparbetrieb zugutekommen.
 
-### Wiederholbare Asset-Bereitstellung { #make-asset-delivery-repeatable }
+### Asset-Bereitstellung wiederholbar machen { #make-asset-delivery-repeatable }
 
 Mit einem Konvertierungswerkzeug und einem festgelegten Ressourcenformat lassen sich Releases reproduzierbar erstellen: Quellbilder, Konvertierungseinstellungen, erzeugte Ressourcen und Zielauflösungsprofile können gemeinsam versioniert werden. Das ist zuverlässiger als eine manuelle Konvertierung oder die Annahme, dass UI-Entwickler Bildeinstellungen jedes Mal identisch reproduzieren.
 
@@ -126,15 +126,15 @@ Verwalten Sie Konvertierungsprofile, Tool- und SDK-Versionen, Prüfsummen der Au
 ## Hinweise zu Design und Debugging { #design-and-debugging-guidance }
 
 - **Verwenden Sie eZip für Ressourcen.** Diese können in NOR Flash, PSRAM, NAND oder einem Dateisystem liegen; der Dekoder interpretiert jedoch keine Dateipfade. Der Speichertreiber muss die Daten über einen unterstützten, hardwarezugänglichen Pfad bereitstellen oder laden. Die HAL verlangt 4-Byte-Ausrichtung für Eingabepuffer und AHB-Ausgabepuffer. eZip ist kein Kompressionsformat für den endgültigen Framebuffer.
-- **Bandbreite für die Ressourcenübertragung einplanen.** eZip kann den Übertragungsverkehr senken, doch dekodierte Pixel durchlaufen weiterhin den in der [Grafikübersicht](overview.md#sf32-graphics-flow) beschriebenen Rendering- und Display-Pfad.
-- **CPU-Fallback-Pfade beibehalten.** Nicht jeder Asset-Typ, jedes Pixelformat oder jede UI-Operation lässt sich auf einen Hardware-Dekodier- oder Grafikpfad abbilden.
-- **Speicherplatzierung validieren.** Assets und Zeichenpuffer in internem SRAM, NOR-Flash, PSRAM oder Wechselspeicher testen; jede Wahl verändert Latenz und Buskonkurrenz.
-- **Mit der realen Arbeitslast testen.** Messen Sie Kaltladezeit, Animationstakt, UI-Latenz und Stromverbrauch, während Bluetooth, Audio, Sensoren und Display-Aktualisierung gleichzeitig aktiv sind.
-- **Konvertierungseinstellungen vor der Freigabe festschreiben.** Änderungen an Tool-Version oder Parametern können Ausgabekompatibilität, Qualität, Speicherbedarf und Dekodierleistung beeinflussen.
+- **Planen Sie die Bandbreite für die Ressourcenübertragung ein.** eZip kann den Übertragungsverkehr senken, doch dekodierte Pixel durchlaufen weiterhin den in der [Grafikübersicht](overview.md#sf32-graphics-flow) beschriebenen Rendering- und Display-Pfad.
+- **Behalten Sie CPU-Fallback-Pfade bei.** Nicht jeder Asset-Typ, jedes Pixelformat oder jede UI-Operation lässt sich auf einen Hardware-Dekodier- oder Grafikpfad abbilden.
+- **Validieren Sie die Speicherplatzierung.** Testen Sie Assets und Zeichenpuffer in internem SRAM, NOR-Flash, PSRAM oder Wechselspeicher; jede Wahl verändert Latenz und Buskonkurrenz.
+- **Testen Sie mit der realen Arbeitslast.** Messen Sie Kaltladezeit, Animationstakt, UI-Latenz und Stromverbrauch, während Bluetooth, Audio, Sensoren und Display-Aktualisierung gleichzeitig aktiv sind.
+- **Schreiben Sie die Konvertierungseinstellungen vor der Freigabe fest.** Änderungen an Tool-Version oder Parametern können Ausgabekompatibilität, Qualität, Speicherbedarf und Dekodierleistung beeinflussen.
 
 ## Wichtige Erkenntnisse { #key-takeaways }
 
-- eZip ist SiFlis verlustfreies Kompressionsformat für Display-Assets sowie der zugehörige hardwaregestützte Dekodierpfad auf unterstützten SF32-Bauteilen.
+- eZip ist SiFlis verlustfreies Kompressionsformat für Display-Assets sowie der zugehörige hardwaregestützte Dekodierpfad auf unterstützten SF32-Geräten.
 - Verwenden Sie eZip für Grafikressourcen und die GZIP-/LZ4-Modi des Tools für allgemeine Daten; deren Kompressionsverhältnis hängt von den Quelldaten ab und muss gemessen werden.
 - eZip-A ist das Format für animierte Ressourcen. GraphicsTool erzeugt eZip-/eZip-A-Ressourcen aus gängigem Ausgangsbildmaterial.
 - SiFli bietet zudem Kommandozeilen-Werkzeuge und Android-/iOS-SDKs zur Integration von eZip in automatisierte und mobile Begleit-App-Workflows.

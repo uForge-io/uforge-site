@@ -87,7 +87,7 @@ Registre:
 
 <div align="center" markdown>
 
-| Etapa | Objetivo |
+| Passo | Objetivo |
 |:-----|:-----|
 | Ativar | Ativar o ambiente do SDK no terminal atual. |
 | Configurar | Selecionar a placa e as opções de recursos. |
@@ -120,7 +120,7 @@ Se usar o [CodeKit](../../tools/codekit.md), mantenha os mesmos registros de val
 
 </div>
 
-## Lista de verificação para a entrega { #handoff-checklist }
+## Checklist para a transição { #handoff-checklist }
 
 Antes de entregar o projeto a outro desenvolvedor, inclua:
 

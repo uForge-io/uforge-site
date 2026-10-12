@@ -1,16 +1,16 @@
 ---
 icon: lucide/brain-circuit
-title: "Vue d’ensemble de l’IA"
-description: "Vue d'ensemble de l'IA embarquée sur SF32 : choisir un dispositif, utiliser le HAL NNACC, dimensionner la mémoire et planifier l'inférence dans le budget énergétique."
+title: "Vue d'ensemble de l'IA"
+description: "Vue d'ensemble de l'IA embarquée sur SF32 : choisir un composant, utiliser le HAL NNACC, dimensionner la mémoire et planifier l'inférence dans le budget énergétique."
 tags:
   - IA
 ---
 
-# Vue d’ensemble de l’IA { #ai-overview }
+# Vue d'ensemble de l'IA { #ai-overview }
 
 ## Vue d'ensemble { #overview }
 
-Cette page explique comment déployer une fonction d'IA embarquée sur SF32 : choisir un dispositif, préparer le modèle pour son chemin d'exécution, dimensionner la mémoire et planifier les inférences dans le budget énergétique du produit. Elle suppose acquises les notions matérielles présentées dans [Accélérateur IA](accelerator.md). Pour connaître d'abord le rôle et les limites de l'accélérateur, consultez cet article.
+Cette page explique comment déployer une fonction d'IA embarquée sur SF32 : choisir un composant, préparer le modèle pour son chemin d'exécution, dimensionner la mémoire et planifier les inférences dans le budget énergétique du produit. Elle suppose acquises les notions matérielles présentées dans [Accélérateur IA](accelerator.md). Pour connaître d'abord le rôle et les limites de l'accélérateur, consultez cet article.
 
 Le SDK expose les opérations accélérées via le HAL **NNACC** (accélérateur de réseaux neuronaux), avec des exemples distincts pour le [HAL](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/example/hal/nnacc/README_EN.md) et le [pilote RT-Thread](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/example/rt_device/nnacc/README_EN.md). Ces exemples valident une opération individuelle de convolution depthwise, pas le déploiement complet d'un modèle entraîné. Utilisez-les pour établir une base de référence fonctionnelle au niveau d'un opérateur ; choisissez et vérifiez séparément l'environnement d'exécution, les outils de conversion et la correspondance des couches.
 
@@ -28,26 +28,26 @@ Partez de la décision produit, pas du modèle :
 - Que se passe-t-il si le modèle embarqué se trompe — un faux positif ou un faux négatif est-il plus coûteux ?
 - Le modèle devra-t-il un jour être mis à jour sur le terrain, et comment ?
 
-Ces réponses déterminent tous les choix suivants : la taille du modèle, le budget mémoire, le dispositif à sélectionner et la durée pendant laquelle le système peut rester en veille entre deux inférences.
+Ces réponses déterminent tous les choix suivants : la taille du modèle, le budget mémoire, le composant à sélectionner et la durée pendant laquelle le système peut rester en veille entre deux inférences.
 
-## Choisir le bon dispositif SF32 { #pick-the-right-sf32-device }
+## Choisir le bon composant SF32 { #pick-the-right-sf32-device }
 
-Tous les dispositifs SF32 ne ciblent pas les charges de travail IA de la même manière :
+Tous les composants SF32 ne ciblent pas les charges de travail IA de la même manière :
 
-<div align="center"><em>Tableau : Choisir le bon dispositif SF32</em></div>
+<div align="center"><em>Tableau : Choisir le bon composant SF32</em></div>
 
 <div align="center" markdown style="max-width: 100%; overflow-x: auto;">
 
-| Exigence | Dispositif à privilégier |
+| Exigence | Composant à privilégier |
 |:------------|:-------------------------|
 | Classification légère et occasionnelle sur un produit à coût optimisé | SF32LB52x — gardez les modèles petits et orientés CPU. |
 | Appareil portable BLE avec des besoins de fusion de capteurs de base | SF32LB55x |
 | Pipeline de capteurs ou multimédia plus riche aux côtés de l'interface utilisateur | SF32LB56x |
-| IA en périphérie comme fonctionnalité principale — modèles plus grands, entrée caméra lorsque le dispositif choisi la prend en charge, ou fortes contraintes de latence | SF32LB58x |
+| IA en périphérie comme fonctionnalité principale — modèles plus grands, entrée caméra lorsque le composant choisi la prend en charge, ou fortes contraintes de latence | SF32LB58x |
 
 </div>
 
-Ce tableau constitue un point de départ, pas une garantie que le modèle tiendra en mémoire ou s'exécutera efficacement. Vérifiez la mémoire, les interfaces de capteurs, l'instance d'accélérateur et le support SDK de la référence retenue pour la charge complète. Le [guide NNACC du SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/docs/source/en/hal/nnacc.md) indique un accélérateur HCPU pour chacune des familles SF32LB55x et SF32LB56x, et un dans chacun des sous-systèmes HCPU et LCPU de SF32LB58x. Il ne confirme pas la disponibilité de NNACC sur SF32LB52x ou SF32LB57x ; cette absence d'information ne prouve pas l'absence de l'accélérateur. Ces nombres ne démontrent ni la compatibilité d'un modèle ni son efficacité énergétique. Voir [Positionnement par famille de dispositifs](accelerator.md#device-family-positioning) pour le contexte de sélection.
+Ce tableau constitue un point de départ, pas une garantie que le modèle tiendra en mémoire ou s'exécutera efficacement. Vérifiez la mémoire, les interfaces de capteurs, l'instance d'accélérateur et le support SDK de la référence retenue pour la charge complète. Le [guide NNACC du SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/docs/source/en/hal/nnacc.md) indique un accélérateur HCPU pour chacune des familles SF32LB55x et SF32LB56x, et un dans chacun des sous-systèmes HCPU et LCPU de SF32LB58x. Il ne confirme pas la disponibilité de NNACC sur SF32LB52x ou SF32LB57x ; cette absence d'information ne prouve pas l'absence de l'accélérateur. Ces nombres ne démontrent ni la compatibilité d'un modèle ni son efficacité énergétique. Voir [Positionnement par famille de composants](accelerator.md#device-family-positioning) pour le contexte de sélection.
 
 ## Le flux de développement du modèle { #the-model-development-workflow }
 
@@ -94,7 +94,7 @@ Avant de sélectionner un modèle, vérifiez chaque opérateur, ses paramètres 
 
 | Classe | Signification | Action |
 |:------|:--------|:-------|
-| Accéléré | Pris en charge directement par le chemin NNACC du dispositif cible. | À privilégier pour les couches les plus sollicitées. |
+| Accéléré | Pris en charge directement par le chemin NNACC du composant cible. | À privilégier pour les couches les plus sollicitées. |
 | Repli CPU | L'environnement choisi ou le firmware fournit une implémentation CPU vérifiée. | Mesurer son coût ; l'accepter uniquement si le pipeline complet atteint ses objectifs. |
 | Conversion nécessaire | Nécessite une conversion de disposition, de type ou de format. | Inclure le coût de conversion dans les budgets de latence et d'énergie. |
 | Non pris en charge | Non disponible dans l'environnement d'exécution cible. | Remplacer la couche ou modifier l'architecture du modèle. |
@@ -122,11 +122,11 @@ Les modèles compacts et quantifiés sont courants pour l'IA sur microcontrôleu
 
 </div>
 
-La quantification peut réduire les coûts mémoire et de calcul, mais revérifiez la précision après conversion avec des données de capteurs représentatives. Le guide du SDK v2.5.1 documente l'accélération de `arm_convolve_1x1_HWC_q7_fast_nonsquare`, `arm_convolve_HWC_q7_basic_nonsquare` et `arm_depthwise_separable_conv_HWC_q7_nonsquare`. La [configuration du HAL](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/Include/bf0_hal_nn_acc.h) utilise des tampons sur 8 bits et des décalages pour le biais et la sortie. Cela ne prouve pas que les points zéro et les échelles par canal de tout modèle int8 moderne sont directement compatibles. Vérifiez l'équivalence numérique et définissez, pour chaque couche non prise en charge, une implémentation CPU, une conversion ou un refus de déploiement.
+La quantification peut réduire les coûts mémoire et de calcul, mais revérifiez la précision après conversion avec des données de capteurs représentatives. Le guide du SDK v2.5.1 documente l'accélération de `arm_convolve_1x1_HWC_q7_fast_nonsquare`, `arm_convolve_HWC_q7_basic_nonsquare` et `arm_depthwise_separable_conv_HWC_q7_nonsquare`. La [configuration du HAL](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/Include/bf0_hal_nn_acc.h) utilise des tampons sur 8 bits et des décalages pour le biais et la sortie. Cela ne prouve pas que les points zéro et les échelles par canal de tout modèle int8 moderne sont directement compatibles. Vérifiez l'équivalence numérique ainsi que la solution prévue pour chaque couche non prise en charge : implémentation CPU, conversion ou refus de déploiement.
 
 ## Placement des tampons et hiérarchie mémoire { #buffer-placement-and-the-memory-hierarchy }
 
-La bande passante mémoire peut limiter les performances de l'IA même si la capacité de calcul est disponible. Sur les dispositifs SF32 avec SRAM, Flash, PSRAM et caches d'instructions/données STAR-MC1, vérifiez l'accessibilité de la mémoire et le coût du placement des tampons :
+La bande passante mémoire peut limiter les performances de l'IA même si la capacité de calcul est disponible. Sur les composants SF32 avec SRAM, Flash, PSRAM et caches d'instructions/données STAR-MC1, vérifiez l'accessibilité de la mémoire et le coût du placement des tampons :
 
 - Placez les tenseurs et tampons intermédiaires souvent utilisés dans une mémoire accessible au CPU et à l'instance d'accélérateur choisie, avec l'alignement et la disposition requis.
 - Placez les poids volumineux ou les ressources rarement utilisées en mémoire externe seulement si le chemin d'exécution le permet. Toute copie vers une mémoire accessible à l'accélérateur doit être incluse dans les budgets mémoire, latence et énergie.
@@ -179,7 +179,7 @@ Choisissez l'ordonnancement pour détecter les signaux requis dans le délai de 
 
 - Lorsque cela convient, déclenchez l'inférence sur de nouvelles données pertinentes, par exemple un seuil de capteur ou une trame audio complète. Conservez le traitement périodique s'il est nécessaire et vérifiez les faux négatifs et le pire délai de réponse après modification du déclencheur.
 - Regroupez les échantillons lorsque les exigences de latence le permettent, plutôt que d'exécuter de nombreuses petites inférences.
-- Lorsque le dispositif et le SDK le prennent en charge, déplacez la détection permanente légère vers le processeur basse consommation plutôt que de réveiller le CPU applicatif principal pour chaque échantillon.
+- Lorsque le composant et le SDK le prennent en charge, déplacez la détection permanente légère vers le processeur basse consommation plutôt que de réveiller le CPU applicatif principal pour chaque échantillon.
 - Mesurez l'**énergie par inférence** en intégrant la puissance d'alimentation mesurée (tension d'alimentation × courant) sur un intervalle clairement défini. Incluez la capture, le pré/post-traitement et les transitions réveil/veille dans le budget de la fonction. Une exécution plus rapide peut réduire l'énergie en activité ou permettre un retour plus tôt en veille, mais le gain dépend du courant, du trafic mémoire et du reste du système.
 
 Les conseils sur la consommation à l'échelle du système figurent dans la [vue d'ensemble de la conception basse consommation](../low-power/overview.md). Consultez-la en complément pour toute fonctionnalité IA qui doit fonctionner en continu ou presque.
@@ -242,7 +242,7 @@ Si la fonctionnalité IA est susceptible de s'améliorer après le lancement, co
 ## Liste de contrôle de mise en service { #bring-up-checklist }
 
 - [ ] Définir la décision locale que le produit doit prendre et le compromis acceptable latence/précision/consommation.
-- [ ] Sélectionner le dispositif SF32 en fonction de la taille du modèle et des besoins mémoire, pas seulement de l'objectif de coût.
+- [ ] Sélectionner le composant SF32 en fonction de la taille du modèle et des besoins mémoire, pas seulement de l'objectif de coût.
 - [ ] Construire et valider le pipeline complet (capture -> prétraitement -> inférence -> post-traitement) d'abord avec un modèle de test minimal, puis avec le modèle de production.
 - [ ] Convertir et quantifier le modèle réel, puis valider la précision par rapport à des données de capteurs réalistes.
 - [ ] Budgétiser la mémoire pour les poids, les tenseurs d'entrée/sortie et les activations intermédiaires ensemble.

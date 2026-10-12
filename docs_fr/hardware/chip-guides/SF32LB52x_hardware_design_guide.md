@@ -2,7 +2,7 @@
 icon: lucide/book-check
 hide:
     - navigation
-description: "Guide de conception matérielle pour le microcontrôleur SF32LB52x : présentation du dispositif, démarche de conception et liens vers les pages consacrées au schéma, à l’implantation et au routage du PCB, aux revues et aux listes de contrôle."
+description: "Guide de conception matérielle pour le microcontrôleur SF32LB52x : présentation du composant, démarche de conception et liens vers les pages consacrées au schéma, à l'implantation et au routage du PCB, aux revues et aux listes de contrôle."
 tags:
     - Matériel
     - Puce
@@ -12,15 +12,16 @@ tags:
 
 ## 1. Introduction { #1-introduction }
 
-Ce guide de conception matérielle fournit des recommandations de conception et de la documentation de référence sourcée pour les produits basés sur la famille SF32LB52x de microcontrôleurs AIoT ultra-basse consommation. Il s'adresse aux ingénieurs matériel, aux concepteurs de PCB et aux développeurs de produits qui conçoivent des dispositifs portés sur soi et alimentés par batterie ainsi que d'autres systèmes embarqués compacts.
+Ce guide de conception matérielle rassemble des recommandations et des informations de référence appuyées par des sources pour les produits basés sur la famille SF32LB52x de microcontrôleurs AIoT à très basse consommation. Il s'adresse aux ingénieurs matériel, aux concepteurs de PCB et aux développeurs de produits qui conçoivent des appareils portés sur soi et alimentés par batterie ainsi que d'autres systèmes embarqués compacts.
 
-Le guide couvre l'ensemble du processus de développement matériel, notamment la conception de l'alimentation, les circuits d'horloge, l’implantation et le routage RF, les interfaces d'affichage et de stockage, les circuits audio, les recommandations d’implantation et de routage du PCB et les considérations de fabrication. Le respect de ces recommandations permet de réduire les risques de développement, d'améliorer la fiabilité du système et de raccourcir le cycle de développement du produit.
+Le guide couvre l'ensemble du processus de développement matériel, notamment la conception de l'alimentation, les circuits d'horloge, l'implantation et le routage RF, les interfaces d'affichage et de stockage, les circuits audio, les recommandations d'implantation et de routage du PCB et les considérations de fabrication. Le respect de ces recommandations permet de réduire les risques de développement, d'améliorer la fiabilité du système et de raccourcir le cycle de développement du produit.
 
 Ce document suppose une compréhension de base de la conception matérielle embarquée et de la saisie de schémas. Il complète la fiche technique, le manuel de référence et la documentation SDK du SF32LB52x, qui restent la référence pour les spécifications électriques détaillées, le fonctionnement des périphériques et le développement logiciel.
 
 Le guide réunit deux notes d'application matérielle originales de SiFli dans une même démarche de conception : l'une pour les SF32LB520/3/5/7 alimentés par batterie, l'autre pour les 52B/D/E/G/J à alimentation externe régulée. Lorsque les formulations des sources ne concordent pas, il privilégie les références exactes des composants disponibles à la commande, une description explicite des domaines d'alimentation et la clarté nécessaire à la revue avant mise en production.
 
 ## 2. Ressources de développement { #2-development-resources }
+
 [SF32LB52x Product Brief]: https://downloads.sifli.com/user%20manual/PB5201-SF32LB52x-Product%20Brief.pdf
 [SF32LB52x Datasheet]: https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf
 [Manuel de référence SF32LB52x]: https://downloads.sifli.com/user%20manual/UM5201-SF32LB52x-User%20Manual%20V0p8p4.pdf
@@ -48,7 +49,7 @@ Le guide réunit deux notes d'application matérielle originales de SiFli dans u
 
 </div>
 
-## 3. Présentation du dispositif { #3-device-overview }
+## 3. Présentation du composant { #3-device-overview }
 
 La famille SF32LB52x combine des processeurs STAR-MC1 double cœur, une connectivité Bluetooth, une accélération graphique, de l'audio intégré, des interfaces d'affichage, des contrôleurs de stockage et une gestion de l'alimentation dans un boîtier QFN68 compact. La famille est optimisée pour les produits où le coût de la nomenclature (BOM), l'autonomie de la batterie et la surface du PCB sont tous déterminants.
 
@@ -68,7 +69,7 @@ La famille intègre :
 
 ### 3.2. Variantes { #32-variants }
 
-La famille SF32LB52x se divise en deux groupes de conception pratiques selon l'architecture d'alimentation : les dispositifs alimentés par batterie et les dispositifs à régulation externe, comme indiqué ci-dessous.
+La famille SF32LB52x se divise en deux groupes de conception pratiques selon l'architecture d'alimentation : les composants alimentés par batterie et les composants à régulation externe, comme indiqué ci-dessous.
 
 === "SF32LB520/3/5/7 (alimenté par batterie)"
 
@@ -120,7 +121,7 @@ Les deux groupes de conception utilisent le même boîtier QFN68.
 
 </div>
 
-Les deux groupes de conception diffèrent légèrement en ressources périphériques. Le groupe alimenté par batterie dispose de 44 GPIO, tandis que le groupe à alimentation régulée externe en dispose de 45 ; la différence provient des broches réservées à la charge sur les dispositifs alimentés par batterie.
+Les deux groupes de conception diffèrent légèrement en ressources périphériques. Le groupe alimenté par batterie dispose de 44 GPIO, tandis que le groupe à alimentation régulée externe en dispose de 45 ; la différence provient des broches réservées à la charge sur les composants alimentés par batterie.
 
 - 44/45 GPIO
 - 3x UART
@@ -153,14 +154,14 @@ Les applications typiques sont les systèmes embarqués portables où une longue
 - Montres connectées et bracelets de fitness d'entrée de gamme
 - Modules Bluetooth et adaptateurs sans fil
 - Accessoires audio Bluetooth
-- Capteurs intelligents et dispositifs portés sur soi
+- Capteurs intelligents et appareils portés sur soi
 - Étiquettes électroniques de rayon et badges intelligents
 - Liseuses électroniques
 - Imprimantes d'étiquettes portables
 - Afficheurs pour vélos et trottinettes électriques
-- Dispositifs d'interface homme-machine (IHM) connectés
+- Appareils d'interface homme-machine (IHM) connectés
 - Équipements industriels et médicaux portables
-- Autres dispositifs AIoT alimentés par batterie
+- Autres appareils AIoT alimentés par batterie
 
 ## 4. Aperçu de la conception { #4-design-at-a-glance }
 
@@ -176,8 +177,8 @@ Le tableau suivant résume l'architecture matérielle recommandée pour une appl
 |:---|:---|
 | Boîtier | QFN68L, 7 mm x 7 mm x 0,85 mm, pas de 0,35 mm |
 | PCB | PCB 4 couches PTH recommandé |
-| Alimentation | Batterie Li-ion/Li-Po à une cellule ou alimentation externe régulée, selon la variante du dispositif |
-| Charge de la batterie | Chargeur intégré sur les variantes prises en charge ou circuit intégré de charge externe, avec ou sans gestion du chemin d’alimentation (PPM) |
+| Alimentation | Batterie Li-ion/Li-Po à une cellule ou alimentation externe régulée, selon la variante du composant |
+| Charge de la batterie | Chargeur intégré sur les variantes prises en charge ou circuit intégré de charge externe, avec ou sans gestion du chemin d'alimentation (PPM) |
 | Inductance du convertisseur buck | 4,7 uH +/-20 %, DCR <= 0,4 Ω, Isat >= 450 mA |
 | Quartz | Quartz principal 48 MHz et quartz RTC 32,768 kHz |
 | RF | Piste à impédance contrôlée 50 Ω avec réseau d'adaptation en π réservé |
@@ -202,13 +203,13 @@ Suivez l'ordre dans lequel les décisions matérielles sont généralement arrê
 
 | Étape | Décision de conception | Sections principales |
 |:---|:---|:---|
-| 1 | Sélectionner le dispositif commercial exact et la variante d'alimentation | Présentation du dispositif, Sélection de la variante |
-| 2 | Confirmer le boîtier, le nombre de GPIO et les broches à fonction fixe | Boîtiers, Recommandations de conception du schéma |
-| 3 | Verrouiller le système minimal : arbre d'alimentation, stockage de démarrage, broches de bootstrap, accès de débogage, horloges, et stratégie de réveil | Conception du système minimal, Stockage, Débogage, Génération d'horloge |
-| 4 | Sélectionner la topologie RF, l'affichage, l'audio, les capteurs et les interfaces produit restantes | Génération d'horloge, RF, Interfaces utilisateur, Stockage et connectivité |
-| 5 | Revoir l'empilement PCB, le fanout, l'impédance et le routage sensible | Recommandations d’implantation et de routage du PCB |
-| 6 | Comparer avec les schémas de référence, les implantations PCB, les dessins mécaniques et les schémas d’alimentation des sources | Annexes A-E |
-| 7 | Réserver l'accès pour la mise en service, le débogage, le calibrage et les tests de production | Débogage, Production, Liste de contrôle de revue de conception |
+| 1 | Sélectionnez le composant commercial exact et la variante d'alimentation | Présentation du composant, Sélection de la variante |
+| 2 | Confirmez le boîtier, le nombre de GPIO et les broches à fonction fixe | Boîtiers, Recommandations de conception du schéma |
+| 3 | Verrouillez le système minimal : arbre d'alimentation, stockage de démarrage, broches de bootstrap, accès de débogage, horloges, et stratégie de réveil | Conception du système minimal, Stockage, Débogage, Génération d'horloge |
+| 4 | Sélectionnez la topologie RF, l'affichage, l'audio, les capteurs et les interfaces produit restantes | Génération d'horloge, RF, Interfaces utilisateur, Stockage et connectivité |
+| 5 | Revoyez l'empilement PCB, le fanout, l'impédance et le routage sensible | Recommandations d'implantation et de routage du PCB |
+| 6 | Comparez avec les schémas de référence, les implantations PCB, les dessins mécaniques et les schémas d'alimentation des sources | Annexes A-E |
+| 7 | Réservez l'accès pour la mise en service, le débogage, le calibrage et les tests de production | Débogage, Production, Liste de contrôle de revue de conception |
 
 </div>
 
@@ -227,16 +228,16 @@ Lorsqu'une conception réutilise un ancien schéma SF32LB52x, vérifiez d'abord 
 
 ### 4.4. Dossier de validation de la conception { #44-review-evidence-pack }
 
-Avant la mise en production du matériel, rassemblez le PDF du schéma, l'empilement PCB, le rapport d’impédance, les résultats de la vérification des composants par rapport à l’AVL, le rapport DRC et des captures d’écran de l’implantation et du routage des circuits RF, des quartz, de l’USB, du SDIO/eMMC, de l’audio, de l’alimentation et du stockage de démarrage. Archivez ces documents avec la révision de la carte : ils permettront de relier tout problème ultérieur de firmware, de RF ou de production à la version matérielle validée.
+Avant la mise en production du matériel, rassemblez le PDF du schéma, l'empilement PCB, le rapport d'impédance, les résultats de la vérification des composants par rapport à l'AVL, le rapport DRC et des captures d'écran de l'implantation et du routage des circuits RF, des quartz, de l'USB, du SDIO/eMMC, de l'audio, de l'alimentation et du stockage de démarrage. Archivez ces documents avec la révision de la carte : ils permettront de relier tout problème ultérieur de firmware, de RF ou de production à la version matérielle validée.
 
 
 ## 5. Utilisation des listes de contrôle { #using-the-checklists }
 
-Ce guide propose deux niveaux de listes de contrôle. Les listes courtes des sections 5.1.1.5, 5.5.3 et 7 regroupent les points les plus critiques pour une vérification technique rapide. La [Liste de contrôle du schéma](SF32LB52x_schematic_checklist.md) (section 5.8) et la [Liste de contrôle de l’implantation et du routage du PCB](SF32LB52x_pcb_layout_checklist.md) (section 6.15) reproduisent intégralement, point par point, le document SiFli [*SF32LB52 Schematic & PCB Checklist*][SiFli SF32LB52 Schematic & PCB Checklist (XLSX)] (V1.0, 2026-01-21). Publié avec le guide matériel sur le [wiki de SiFli][SiFli Chip Hardware Design Guide Index (Wiki)], il couvre les SF32LB520/3/5/7 alimentés par batterie et les SF32LB52B/D/E/G/J à alimentation externe.
+Ce guide propose deux niveaux de listes de contrôle. Les listes courtes des sections 5.1.1.5, 5.5.3 et 7 regroupent les points les plus critiques pour une vérification technique rapide. La [Liste de contrôle du schéma](SF32LB52x_schematic_checklist.md) (section 5.8) et la [Liste de contrôle de l'implantation et du routage du PCB](SF32LB52x_pcb_layout_checklist.md) (section 6.15) reproduisent intégralement, point par point, le document SiFli [*SF32LB52 Schematic & PCB Checklist*][SiFli SF32LB52 Schematic & PCB Checklist (XLSX)] (V1.0, 2026-01-21). Publié avec le guide matériel sur le [wiki de SiFli][SiFli Chip Hardware Design Guide Index (Wiki)], il couvre les SF32LB520/3/5/7 alimentés par batterie et les SF32LB52B/D/E/G/J à alimentation externe.
 
 Chaque point indique les variantes SF32LB52x concernées et sa catégorie : obligatoire (à valider avant mise en production) ou optionnel (recommandé lorsque la fonction est utilisée). « Toutes les variantes » désigne SF32LB520/3/5/7 et SF32LB52B/D/E/G/J, sauf restriction explicite. Le texte coloré et le texte sur <span class="flag-red flag-yellow">fond jaune</span> conservent les mises en évidence du tableur source. Celui-ci n'en explique pas les raisons : ces marques constituent des points d'attention supplémentaires et ne remplacent pas les autres vérifications du tableau. Les listes reprennent volontairement la présentation du tableur. Si une formulation est incomplète, incohérente ou trop concise, consultez aussi le guide matériel, la fiche technique, le manuel de référence et les indications de SiFli sur les références des modèles.
 
-Exécutez la [Liste de contrôle du schéma](SF32LB52x_schematic_checklist.md) pendant la revue du schéma, avant de commencer l’implantation et le routage du PCB. Exécutez la [Liste de contrôle de l’implantation et du routage du PCB](SF32LB52x_pcb_layout_checklist.md) pendant la revue de l’implantation et du routage, avant la livraison des fichiers Gerber. En pratique, chaque passage est généralement effectué deux fois : d'abord par l'ingénieur de conception, puis par un réviseur indépendant avant le gel de la conception ou la mise en fabrication.
+Exécutez la [Liste de contrôle du schéma](SF32LB52x_schematic_checklist.md) pendant la revue du schéma, avant de commencer l'implantation et le routage du PCB. Exécutez la [Liste de contrôle de l'implantation et du routage du PCB](SF32LB52x_pcb_layout_checklist.md) pendant la revue de l'implantation et du routage, avant la livraison des fichiers Gerber. En pratique, chaque passage est généralement effectué deux fois : d'abord par l'ingénieur de conception, puis par un réviseur indépendant avant le gel de la conception ou la mise en fabrication.
 
 Utilisez la liste comme un procès-verbal de validation, et non comme une liste à parcourir sans vérifier les points :
 
@@ -280,10 +281,10 @@ Le guide complet se poursuit à travers les pages ci-dessous. Chacune couvre une
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-bolt: __[Recommandations de conception du schéma](SF32LB52x_schematic_design.md)__ — système minimal, système d'alimentation, génération d'horloge, RF, interfaces utilisateur, stockage et connectivité, et accès nécessaires à la fabrication, répartis sur trois pages
+- :fontawesome-solid-bolt: __[Recommandations de conception du schéma](SF32LB52x_schematic_design.md)__ — système minimal, système d'alimentation, génération d'horloge, RF, interfaces utilisateur, stockage et connectivité, et points d'accès aux tests de production, répartis sur trois pages
 - :fontawesome-solid-list-check: __[Liste de contrôle du schéma](SF32LB52x_schematic_checklist.md)__ — liste de contrôle de revue de schéma point par point (section 5.8)
-- :fontawesome-solid-microchip: __[Recommandations d’implantation et de routage du PCB](SF32LB52x_pcb_layout.md)__ — empreinte, empilement, fanout, et recommandations de routage pour l'horloge, la RF, l'audio, l'USB, le SDIO et l'alimentation
-- :fontawesome-solid-list-check: __[Liste de contrôle de l’implantation et du routage du PCB](SF32LB52x_pcb_layout_checklist.md)__ — liste de contrôle détaillée pour la revue de l’implantation et du routage du PCB (section 6.15)
+- :fontawesome-solid-microchip: __[Recommandations d'implantation et de routage du PCB](SF32LB52x_pcb_layout.md)__ — empreinte, empilement, fanout, et recommandations de routage pour l'horloge, la RF, l'audio, l'USB, le SDIO et l'alimentation
+- :fontawesome-solid-list-check: __[Liste de contrôle de l'implantation et du routage du PCB](SF32LB52x_pcb_layout_checklist.md)__ — liste de contrôle détaillée pour la revue de l'implantation et du routage du PCB (section 6.15)
 - :fontawesome-solid-book-open: __[Liste de contrôle de revue de conception et références](SF32LB52x_review_and_reference.md)__ — liste de contrôle avant mise en production, documents connexes, annexes de schéma/PCB/mécanique/alimentation de référence, et historique des révisions
 
 </div>

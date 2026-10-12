@@ -9,9 +9,9 @@ tags:
     - チェックリスト
 ---
 
-# SF32LB52x ハードウェア設計ガイド — 回路図チェックリスト { #sf32lb52x-hardware-design-guide-schematic-checklist }
+# SF32LB52xハードウェア設計ガイド — 回路図チェックリスト { #sf32lb52x-hardware-design-guide-schematic-checklist }
 
-!!! note "SF32LB52x ハードウェア設計ガイドの一部"
+!!! note "SF32LB52xハードウェア設計ガイドの一部"
     このページは第5.8節の回路図チェックリストです。回路図設計指針の全3ページのうち1ページ目の[最小システム、電源、クロック](SF32LB52x_schematic_design.md)に戻ってください。
 
 ## 5.8. 回路図チェックリスト { #58-schematic-checklist }
@@ -22,7 +22,7 @@ tags:
 
 ### 5.8.1. パッケージ { #581-package }
 
-<div align="center"><em>表 5.8.1-1：パッケージのチェックリスト</em></div>
+<div align="center"><em>表 5.8.1-1: パッケージのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -34,7 +34,7 @@ tags:
 
 ### 5.8.2. 電源 { #582-power-supply }
 
-<div align="center"><em>表 5.8.2-1：電源チェックリスト</em></div>
+<div align="center"><em>表 5.8.2-1: 電源チェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -44,7 +44,7 @@ tags:
 | 2 | 充電器の接続直後に画面を点灯する必要がある場合、内蔵充電器は推奨されない。電源パス管理機能付きの外付け充電ICを推奨する | 520/3/5/7のみ | 必須 |
 | 3 | 内蔵充電器を使用するのは、ソフトウェアで画面を点灯する前に3.6 Vまで充電する必要があっても問題ない場合に限る | 520/3/5/7のみ | 必須 |
 | 4 | LDO出力を内蔵したOVPデバイス（例：LP5305AQVF）を推奨する。LDO出力は4.7～5.4 V、許容負荷電流は0.5 A以上、過電流保護のトリップ電流は0.7 A以上とする | 520/3/5/7のみ | 必須 |
-| 5 | OVLOが調整可能なOVPデバイスでは、分圧抵抗の許容差を1%、V_OVLO_THの誤差を3%未満とする。V_OVPの最小値と最大値はいずれも5.15–5.55 Vの範囲内とする。原表では5.15 Vを充電器の最大入力電圧、5.55 Vを52x充電器の入力上限と記載している。資料間の相違については表の後の注意事項を参照 | 520/3/5/7のみ | 必須 |
+| 5 | OVLOが調整可能なOVPデバイスでは、分圧抵抗の許容差を1%、V_OVLO_THの誤差を3%未満とする。V_OVPの最小値と最大値はいずれも5.15～5.55 Vの範囲内とする。原表では5.15 Vを充電器の最大入力電圧、5.55 Vを52x充電器の入力上限と記載している。資料間の相違については表の後の注意事項を参照 | 520/3/5/7のみ | 必須 |
 | 6 | チップ内蔵充電器を使用しない場合、VBUSを未接続にしてコンデンサを省略できる。ただし、この場合VBATを電源出力として使用できなくなるため、VBATに1 µFの外付けコンデンサを接続する | 520/3/5/7のみ | 必須 |
 | 7 | バッテリー電圧検出では、チップ内部のGPADCチャネルがすでにVBAT（またはVBATS）に接続されているため、VBATをGPADCピンにも接続しない | 全バリアント | 必須 |
 | 8 | <span class="flag-red">VCCおよびVBATピンの電源電圧が3.2 V～4.7 Vである</span> | 520/3/5/7のみ | 必須 |
@@ -56,7 +56,7 @@ tags:
 | 14 | AVDD_BRFをVSYS経由で給電する | 520/3/5/7のみ | 必須 |
 | 15 | AVDD33_AUDをLDO2経由で給電する | 520/3/5/7のみ | 必須 |
 | 16 | VSYSはMCU内部専用の電源であり、他の周辺デバイスには給電しない | 520/3/5/7のみ | 必須 |
-| 17 | メモリ、センサーなどの周辺デバイスにはLDO2_OUTを推奨する。電源制御用にロードスイッチを追加してもよい | 520/3/5/7のみ | 必須 |
+| 17 | メモリー、センサーなどの周辺デバイスにはLDO2_OUTを推奨する。電源制御用にロードスイッチを追加してもよい | 520/3/5/7のみ | 必須 |
 | 18 | <span class="flag-red">LDO2から給電するすべての周辺デバイスのピーク電流の合計が150 mA以下である</span> | 520/3/5/7のみ | 必須 |
 | 19 | 振動モーターにはLDO3_OUTから給電することを推奨する | 520/3/5/7のみ | 必須 |
 | 20 | <span class="flag-red">LDO3から給電するすべての周辺デバイスのピーク電流の合計が150 mA以下である</span> | 520/3/5/7のみ | 必須 |
@@ -74,14 +74,14 @@ tags:
 </div>
 
 !!! important "OVPしきい値とVBUS動作電圧の上限は別の値"
-    原チェックリストの項目5では、可変OVLOの選定範囲を5.15–5.55 Vとしています。一方、項目1のVBUS供給電圧範囲は4.6–5.5 Vです。5.55 VをVBUSに連続印加できる動作電圧と解釈しないでください。[電源システムの説明](SF32LB52x_schematic_design.md#52-power-system)には、元のアプリケーションノートに記載された別のOVP選定値も残しています。設計を承認する前に、採用するデバイスのしきい値と動作電圧の制限をSiFliに確認してください。
+    原チェックリストの項目5では、可変OVLOの選定範囲を5.15～5.55 Vとしています。一方、項目1のVBUS供給電圧範囲は4.6～5.5 Vです。5.55 VをVBUSに連続印加できる動作電圧と解釈しないでください。[電源システムの説明](SF32LB52x_schematic_design.md#52-power-system)には、元のアプリケーションノートに記載された別のOVP選定値も残しています。設計を承認する前に、採用するデバイスのしきい値と動作電圧の制限をSiFliに確認してください。
 
 !!! note "VBUS値の出典と適用範囲"
     Electrical Specification-A3はVBUS電源範囲を4.5～5.5 Vとしています。電池駆動バリアントのアプリケーションノートは電源表で4.6～5.5 Vとし、最大充電電流時にVBUSピンで4.6 V以上を求めています。これらの値は前提条件が異なります。チップ端子での最小電圧を確認する際は、電源の許容差と電圧降下を考慮してください。
 
 ### 5.8.3. 電源コンデンサとインダクタ { #583-power-supply-capacitors-and-inductors }
 
-<div align="center"><em>表 5.8.3-1：電源コンデンサとインダクタのチェックリスト</em></div>
+<div align="center"><em>表 5.8.3-1: 電源コンデンサとインダクタのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -120,7 +120,7 @@ tags:
 
 ### 5.8.4. クロック { #584-clock }
 
-<div align="center"><em>表 5.8.4-1：クロックチェックリスト</em></div>
+<div align="center"><em>表 5.8.4-1: クロックチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -136,7 +136,7 @@ tags:
 
 ### 5.8.5. ブートストラップ設定 { #585-bootstrap-configuration }
 
-<div align="center"><em>表 5.8.5-1：ブートストラップ設定チェックリスト</em></div>
+<div align="center"><em>表 5.8.5-1: ブートストラップ設定チェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -151,7 +151,7 @@ tags:
 
 ### 5.8.6. RF { #586-rf }
 
-<div align="center"><em>表 5.8.6-1：RFチェックリスト</em></div>
+<div align="center"><em>表 5.8.6-1: RFチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -166,7 +166,7 @@ tags:
 
 ### 5.8.7. I/Oリソース割り当て { #587-io-resource-allocation }
 
-<div align="center"><em>表 5.8.7-1：I/Oリソース割り当てチェックリスト</em></div>
+<div align="center"><em>表 5.8.7-1: I/Oリソース割り当てチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -180,7 +180,7 @@ tags:
 
 ### 5.8.8. ハードウェアウェイクアップ { #588-hardware-wake-up }
 
-<div align="center"><em>表 5.8.8-1：ハードウェアウェイクアップのチェックリスト</em></div>
+<div align="center"><em>表 5.8.8-1: ハードウェアウェイクアップのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -192,7 +192,7 @@ tags:
 
 ### 5.8.9. ストレージ { #589-storage }
 
-<div align="center"><em>表 5.8.9-1：ストレージチェックリスト</em></div>
+<div align="center"><em>表 5.8.9-1: ストレージチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -219,7 +219,7 @@ tags:
 
 ### 5.8.10. ディスプレイ { #5810-display }
 
-<div align="center"><em>表 5.8.10-1：ディスプレイチェックリスト</em></div>
+<div align="center"><em>表 5.8.10-1: ディスプレイチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -245,7 +245,7 @@ tags:
 
 ### 5.8.11. GPADC { #5811-gpadc }
 
-<div align="center"><em>表 5.8.11-1：GPADCチェックリスト</em></div>
+<div align="center"><em>表 5.8.11-1: GPADCチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -259,7 +259,7 @@ tags:
 
 ### 5.8.12. ボタン { #5812-buttons }
 
-<div align="center"><em>表 5.8.12-1：ボタンのチェックリスト</em></div>
+<div align="center"><em>表 5.8.12-1: ボタンのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -274,7 +274,7 @@ tags:
 
 ### 5.8.13. EOSおよびESD保護 { #5813-eos-and-esd-protection }
 
-<div align="center"><em>表 5.8.13-1：EOSおよびESD保護のチェックリスト</em></div>
+<div align="center"><em>表 5.8.13-1: EOSおよびESD保護のチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -291,7 +291,7 @@ tags:
 
 ### 5.8.14. I2C { #5814-i2c }
 
-<div align="center"><em>表 5.8.14-1：I2Cチェックリスト</em></div>
+<div align="center"><em>表 5.8.14-1: I2Cチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -306,7 +306,7 @@ tags:
 
 ### 5.8.15. アナログオーディオ { #5815-analog-audio }
 
-<div align="center"><em>表 5.8.15-1：アナログオーディオのチェックリスト</em></div>
+<div align="center"><em>表 5.8.15-1: アナログオーディオのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -325,7 +325,7 @@ tags:
 
 ### 5.8.16. SPI { #5816-spi }
 
-<div align="center"><em>表 5.8.16-1：SPIチェックリスト</em></div>
+<div align="center"><em>表 5.8.16-1: SPIチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -339,7 +339,7 @@ tags:
 
 ### 5.8.17. USARTおよびデバッグインターフェース { #5817-usart-and-debug-interface }
 
-<div align="center"><em>表 5.8.17-1：USARTおよびデバッグインターフェースのチェックリスト</em></div>
+<div align="center"><em>表 5.8.17-1: USARTおよびデバッグインターフェースのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -354,7 +354,7 @@ tags:
 
 ### 5.8.18. PWM { #5818-pwm }
 
-<div align="center"><em>表 5.8.18-1：PWMチェックリスト</em></div>
+<div align="center"><em>表 5.8.18-1: PWMチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -367,7 +367,7 @@ tags:
 
 ### 5.8.19. USB { #5819-usb }
 
-<div align="center"><em>表 5.8.19-1：USBチェックリスト</em></div>
+<div align="center"><em>表 5.8.19-1: USBチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -381,7 +381,7 @@ tags:
 
 ### 5.8.20. 消費電力 { #5820-power-consumption }
 
-<div align="center"><em>表 5.8.20-1：消費電力チェックリスト</em></div>
+<div align="center"><em>表 5.8.20-1: 消費電力チェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -404,13 +404,13 @@ tags:
 [^52a-category-note]: 原資料のこの行には区分が記載されていません。「原資料に記載なし」として保持し、必須または任意とは判断していません。採用するデバイスについて、適用範囲と合否基準を確認してください。
 
 !!! important "ストレージ電源スイッチのピン指定に関する資料間の差異"
-    本表には、チェックリストのワークブックにある「バッテリー駆動版の外付けFlashはPA11」という記載を残しています。ただし、本プロジェクトの資料優先順位では、より優先度の高いOpenSiFliのアプリケーションノートと回路設計ガイドが優先され、ブートストレージの電源スイッチにはPA21を指定しています。設計根拠にはPA21を用い、優先度の低いワークブックだけを理由にPA11へ変更しないでください。PA11が別の基板上イネーブルかピン割り当ての相違かは示されていないため、リリース前に対象ネットとバリアントをSiFliに確認してください。
+    本表には、チェックリストのワークブックにある「バッテリー駆動版の外付けFlashはPA11」という記載を残しています。ただし、本プロジェクトの資料優先順位では、より優先度の高いOpenSiFliのアプリケーションノートと回路図設計ガイドが優先され、ブートストレージの電源スイッチにはPA21を指定しています。設計根拠にはPA21を用い、優先度の低いワークブックだけを理由にPA11へ変更しないでください。PA11が別の基板上イネーブルかピン割り当ての相違かは示されていないため、リリース前に対象ネットとバリアントをSiFliに確認してください。
 
 </div>
 
 ### 5.8.21. 書き込み・デバッグ用テストポイント { #5821-download-and-debug-test-points }
 
-<div align="center"><em>表 5.8.21-1：書き込み・デバッグ用テストポイントのチェックリスト</em></div>
+<div align="center"><em>表 5.8.21-1: 書き込み・デバッグ用テストポイントのチェックリスト</em></div>
 
 <div align="center" markdown>
 

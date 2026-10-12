@@ -10,7 +10,7 @@ tags:
 
 ## Visão geral { #overview }
 
-SF32LB52x é uma família de MCUs da SiFli otimizada para reduzir custos, voltada a dispositivos vestíveis de entrada, HMIs gráficas compactas, periféricos Bluetooth e outros produtos AIoT com espaço limitado que ainda precisam de tela, áudio, armazenamento e conectividade sem fio integrados.
+SF32LB52x é uma família de MCUs da SiFli otimizada para reduzir custos, voltada a dispositivos vestíveis de entrada, HMIs gráficas compactas, periféricos Bluetooth e outros produtos AIoT com espaço limitado que ainda precisam de display, áudio, armazenamento e conectividade sem fio integrados.
 
 Em nível de plataforma, a família combina um núcleo de aplicação Arm Cortex-M33 STAR-MC1[^1] a 240 MHz com um núcleo controlador Bluetooth dedicado de baixo consumo a 24 MHz. Ao manter a conectividade Bluetooth e as tarefas sempre ativas separadas da aplicação, o chip consegue executar uma interface responsiva e a pilha principal da aplicação.
 
@@ -38,33 +38,33 @@ Esses grupos não são intercambiáveis na placa. As variantes alimentadas por b
 
 ## Recursos de desenvolvimento { #development-resources }
 
-[Resumo do produto (SF32LB520/3/5/7)]: https://downloads.sifli.com/docs/Product%20Brief/SF32LB52x/PB5201-SF32LB52x-Product%20Brief.pdf
-[Ficha técnica (SF32LB520/3/5/7)]: https://downloads.sifli.com/docs/Datasheet/SF32LB52x/DS5201-SF32LB52x-Datasheet%20V2p5p5.pdf
-[Resumo do produto (família SF32LB52X com alimentação externa)]: https://downloads.sifli.com/docs/Product%20Brief/SF32LB52x/PB5202-SF32LB52X-Product%20Brief%20V0p1.pdf
-[Ficha técnica (família SF32LB52X com alimentação externa)]: https://downloads.sifli.com/docs/Datasheet/SF32LB52X/DS5202-SF32LB52X-Datasheet%20V0p2p6.pdf
-[Manual do usuário]: https://downloads.sifli.com/docs/user%20manual/SF32LB52x/UM5201-SF32LB52x-User%20Manual%20V0p8p8.pdf
-[Guia de projeto de hardware (520/3/5/7)]: https://wiki.sifli.com/en/hardware/SF32LB520-3-5-7-HW-Application.html
-[Guia de projeto de hardware (52B/D/E/G/J)]: https://wiki.sifli.com/en/hardware/SF32LB52B-E-G-J-HW-Application.html
+[Product Brief (SF32LB520/3/5/7)]: https://downloads.sifli.com/docs/Product%20Brief/SF32LB52x/PB5201-SF32LB52x-Product%20Brief.pdf
+[Datasheet (SF32LB520/3/5/7)]: https://downloads.sifli.com/docs/Datasheet/SF32LB52x/DS5201-SF32LB52x-Datasheet%20V2p5p5.pdf
+[Product Brief (SF32LB52X external-supply family)]: https://downloads.sifli.com/docs/Product%20Brief/SF32LB52x/PB5202-SF32LB52X-Product%20Brief%20V0p1.pdf
+[Datasheet (SF32LB52X external-supply family)]: https://downloads.sifli.com/docs/Datasheet/SF32LB52X/DS5202-SF32LB52X-Datasheet%20V0p2p6.pdf
+[User Manual]: https://downloads.sifli.com/docs/user%20manual/SF32LB52x/UM5201-SF32LB52x-User%20Manual%20V0p8p8.pdf
+[Hardware Design Guide (520/3/5/7)]: https://wiki.sifli.com/en/hardware/SF32LB520-3-5-7-HW-Application.html
+[Hardware Design Guide (52B/D/E/G/J)]: https://wiki.sifli.com/en/hardware/SF32LB52B-E-G-J-HW-Application.html
 
 <!--
 [KiCad Files]:
 [Schematic]:
 -->
 
-[Comprar amostras]: https://sifli.taobao.com/
-[Comprar kits de desenvolvimento]: https://sifli.taobao.com/
+[Buy Samples]: https://sifli.taobao.com/
+[Buy Dev Kits]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Resumo do produto (SF32LB520/3/5/7)]__
-- :fontawesome-solid-file-pdf: __[Ficha técnica (SF32LB520/3/5/7)]__
-- :fontawesome-solid-file-pdf: __[Resumo do produto (família SF32LB52X com alimentação externa)]__
-- :fontawesome-solid-file-pdf: __[Ficha técnica (família SF32LB52X com alimentação externa)]__
-- :fontawesome-solid-file-pdf: __[Manual do usuário]__
-- :fontawesome-solid-file-lines: __[Guia de projeto de hardware (520/3/5/7)]__
-- :fontawesome-solid-file-lines: __[Guia de projeto de hardware (52B/D/E/G/J)]__
-- :fontawesome-solid-cart-shopping: __[Comprar amostras]__
-- :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento]__
+- :fontawesome-solid-file-pdf: __[Resumo do produto (SF32LB520/3/5/7)][Product Brief (SF32LB520/3/5/7)]__
+- :fontawesome-solid-file-pdf: __[Datasheet (SF32LB520/3/5/7)]__
+- :fontawesome-solid-file-pdf: __[Resumo do produto (família SF32LB52X com alimentação externa)][Product Brief (SF32LB52X external-supply family)]__
+- :fontawesome-solid-file-pdf: __[Datasheet (família SF32LB52X com alimentação externa)][Datasheet (SF32LB52X external-supply family)]__
+- :fontawesome-solid-file-pdf: __[Manual do usuário][User Manual]__
+- :fontawesome-solid-file-lines: __[Guia de projeto de hardware (520/3/5/7)][Hardware Design Guide (520/3/5/7)]__
+- :fontawesome-solid-file-lines: __[Guia de projeto de hardware (52B/D/E/G/J)][Hardware Design Guide (52B/D/E/G/J)]__
+- :fontawesome-solid-cart-shopping: __[Comprar amostras][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento][Buy Dev Kits]__
 
 </div>
 
@@ -161,7 +161,7 @@ Ao migrar entre capacidades de memória, as correspondências mais próximas sã
 
 </div>
 
-Esta tabela resume as principais variantes do [guia de modelos de chips da SiFli](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html); não é um catálogo completo de códigos de pedido. A ficha técnica vinculada da família com alimentação externa também lista o **SF32LB52HUD6** (1,8 V, QFN68L, PSRAM de 128 Mb), enquanto o guia de projeto de hardware usa ainda os padrões de sufixo `52AUx6` e `52D/F/HUx6`. As fontes disponíveis não apresentam uma única tabela coerente com todas as variantes. Antes de fechar o projeto, confirme na ficha técnica vigente a disponibilidade, os limites de alimentação, a interface de memória e as características de E/S de qualquer SKU desse tipo.
+Esta tabela resume as principais variantes do [guia de modelos de chips da SiFli](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html); não é um catálogo completo de códigos de pedido. O datasheet vinculado da família com alimentação externa também lista o **SF32LB52HUD6** (1,8 V, QFN68L, PSRAM de 128 Mb), enquanto o guia de projeto de hardware usa ainda os padrões de sufixo `52AUx6` e `52D/F/HUx6`. As fontes disponíveis não apresentam uma única tabela coerente com todas as variantes. Antes de fechar o projeto, confirme no datasheet vigente a disponibilidade, os limites de alimentação, a interface de memória e as características de E/S de qualquer SKU desse tipo.
 
 ## Caminho de integração { #integration-path }
 
@@ -169,8 +169,8 @@ Siga esta sequência para transformar uma seleção preliminar de SF32LB52x em u
 
 1. **Valide o fluxo de firmware.** Comece pelo [guia de início do SiFli SDK](../../getting-started/sifli/getting-started-sifli-sdk.md). Em seguida, use o [fluxo de trabalho do SiFli SDK](../../develop/platforms/sifli-sdk/overview.md) e os [exemplos](../../develop/examples/index.md) para validar os periféricos necessários e o comportamento do Bluetooth.
 2. **Escolha a forma de integração.** Avalie o [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) se um módulo de RF integrado atender ao produto; caso contrário, escolha a [placa de desenvolvimento SF32LB52](../devkits/SF32LB52-DevKit-LCD.md) mais próxima para validar firmware e periféricos desde o início.
-3. **Projete e revise o hardware.** Antes de liberar o esquemático ou o layout, consulte o [guia de projeto de hardware](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) e as listas de verificação de [esquemático](../../hardware/chip-guides/SF32LB52x_schematic_checklist.md) e [layout da PCB](../../hardware/chip-guides/SF32LB52x_pcb_layout_checklist.md). Confirme a família de alimentação correta: 520/3/5/7, 52B/E/G/J ou 52D.
-4. **Confirme as fontes oficiais.** Consulte a [ficha técnica](#development-resources) aplicável e o guia de projeto de hardware da SiFli para [520/3/5/7][Guia de projeto de hardware (520/3/5/7)] ou [52B/D/E/G/J][Guia de projeto de hardware (52B/D/E/G/J)], de acordo com o código exato do componente e o encapsulamento.
+3. **Projete e revise o hardware.** Antes de liberar o esquemático ou o layout, consulte o [guia de projeto de hardware](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) e os checklists de [esquemático](../../hardware/chip-guides/SF32LB52x_schematic_checklist.md) e [layout da PCB](../../hardware/chip-guides/SF32LB52x_pcb_layout_checklist.md). Confirme a família de alimentação correta: 520/3/5/7, 52B/E/G/J ou 52D.
+4. **Confirme as fontes oficiais.** Consulte o [datasheet](#development-resources) aplicável e o guia de projeto de hardware da SiFli para [520/3/5/7][Hardware Design Guide (520/3/5/7)] ou [52B/D/E/G/J][Hardware Design Guide (52B/D/E/G/J)], de acordo com o código exato do componente e o encapsulamento.
 
 ## Produtos relacionados { #related-products }
 
@@ -180,7 +180,7 @@ Siga esta sequência para transformar uma seleção preliminar de SF32LB52x em u
 
 ### Kits de desenvolvimento { #development-kits }
 
-- [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md) é a principal placa de bring-up com tela no ecossistema de módulos SF32LB52, com conexões QSPI e LCD MCU/8080.
+- [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md) é a principal placa de bring-up com display no ecossistema de módulos SF32LB52, com conexões QSPI e LCD MCU/8080.
 - [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) é a placa core compacta com alimentação externa para bring-up rápido de firmware, GPIO e baixo consumo em componentes da classe 52B/52J.
 - [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) é a menor placa de desenvolvimento da série 52, útil para produtos com restrição de espaço.
 - [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) é a opção de placa voltada ao baixo consumo, para avaliações focadas em bateria e experimentos com produtos compactos.
@@ -190,4 +190,4 @@ Siga esta sequência para transformar uma seleção preliminar de SF32LB52x em u
 Produtos típicos com SF32LB52 incluem smartwatches e pulseiras fitness de entrada, acessórios Bluetooth, controles gráficos compactos, etiquetas eletrônicas de prateleira, crachás inteligentes, impressoras portáteis de etiquetas e displays para e-bikes ou e-scooters com foco em custo.
 
 !!! note "Conteúdo gerado automaticamente"
-    Esta página foi elaborada sem um documento-fonte específico. Verifique as afirmações técnicas na documentação oficial da SiFli antes de confiar nelas.
+    Esta página foi elaborada sem um documento-fonte preexistente. Verifique as afirmações técnicas na documentação oficial da SiFli antes de confiar nelas.

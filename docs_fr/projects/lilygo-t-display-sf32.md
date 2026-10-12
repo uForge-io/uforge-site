@@ -14,18 +14,21 @@ tags:
     T-Display-SF32 est publié et maintenu par Xinyuan-LilyGO/LilyGO, et non par SiFli ou OpenSiFli. Pour les décisions propres à la carte (matériel, firmware et support), référez-vous aux dépôts de LilyGO. Les sources de SiFli restent la référence pour le composant SF32 et SiFli-SDK, mais cela ne signifie pas que SiFli a validé ou prend en charge cette carte LilyGO.
 
 ## Qu'est-ce que T-Display-SF32 ? { #what-is-t-display-sf32 }
+
 [Xinyuan-LilyGO/T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32) est une plateforme de développement bâtie autour d'un microcontrôleur SF32LB52x, d'un écran AMOLED CO5300 de 2,16 pouces et d'un contrôleur tactile CST9220. Le dépôt documente 16 MB de Flash, 8 MB de PSRAM, une IMU BHI260AP, un émetteur-récepteur LoRa SX1262, une interface microSD, l'audio, l'USB Type-C, la prise en charge de la recharge, le brochage de la carte, des exemples, les fichiers matériels, un répertoire de firmware d'usine et un rapport de consommation propre à la carte.
 
 Cette combinaison permet d'évaluer un appareil portable centré sur l'affichage, un contrôleur portatif, un terminal de capteurs portable ou une IHM connectée. Il s'agit d'une référence de plateforme, pas d'un produit fini : le dépôt expose de nombreuses voies matérielles, mais l'équipe produit doit sélectionner celles qui sont pertinentes, reproduire une configuration de référence connue et effectuer les mesures sur la révision exacte de la carte. Elle doit aussi qualifier l'alimentation, la radiofréquence, la sécurité, la maintenance logicielle et la récupération.
 
-La matrice des fonctions du dépôt distingue la carte T-SF32-Display autonome de l'extension facultative T-SF32-Keyboard. Le Wi-Fi (ESP32-C6), le GPS (L76K), le clavier matriciel et ses LED (TCA8418, AW21009, XL9555), le BME280, l'émetteur infrarouge et le moteur vibratoire (AW86224) nécessitent cette extension ; ne les incluez pas dans la configuration de base de la carte autonome.
+La matrice des fonctions du dépôt distingue la carte T-SF32-Display autonome de l'extension optionnelle T-SF32-Keyboard. Le Wi-Fi (ESP32-C6), le GPS (L76K), le clavier matriciel et ses LED (TCA8418, AW21009, XL9555), le BME280, l'émetteur infrarouge et le moteur vibratoire (AW86224) nécessitent cette extension ; ne les incluez pas dans la configuration de base de la carte autonome.
 
 ## Pourquoi l'implémentation SF32 ? { #why-the-sf32-implementation }
+
 T-Display-SF32 associe les capacités graphiques, Bluetooth, audio et basse consommation du SF32LB52x à des composants externes pour l'affichage, le tactile, la détection de mouvement, le stockage et LoRa. LilyGO fournit aussi la configuration de la carte, des pilotes dédiés, des exemples et un [fork distinct du SDK LilyGO](https://github.com/Xinyuan-LilyGO/SlFli-SDK-Lilygo), présenté comme dérivé de SiFli-SDK 2.4.0. Celui-ci peut accélérer la première mise en service de la carte par rapport à une cible générique du SDK sans modifications.
 
 En contrepartie, les responsabilités sont réparties. La prise en charge de la carte, les modifications des pilotes, les révisions matérielles, le firmware fourni et la relation entre le fork LilyGO et le SiFli-SDK maintenu en amont sont gérés en dehors de SiFli. Pour garantir la reproductibilité, fixez le commit de chaque dépôt, conservez une image d'usine et une image de récupération dont le fonctionnement est vérifié, et traitez toute migration vers une version plus récente du SiFli-SDK amont comme une modification technique explicite à tester.
 
 ## Résultat, portée et critères d'entrée { #outcome-scope-and-entry-criteria }
+
 **Résultat :** établir une référence T-Display-SF32 aux versions fixées ; valider l'écran/le tactile, les périphériques sélectionnés, le comportement d'alimentation et la récupération ; reproduire une compilation depuis les sources ; puis apporter une modification limitée à l'application, avec des preuves de régression exploitables lors de la revue produit.
 
 Cette page ne prouve pas que tous les périphériques sont montés sur chaque variante de carte, que le firmware du fournisseur est prêt pour la production, que le rapport de consommation s'applique à une autre révision ou charge de travail, ni que l'utilisation de LoRa est autorisée dans toutes les régions. Elle ne transfère pas non plus à SiFli le support du matériel ou des pilotes propres à LilyGO.
@@ -65,7 +68,7 @@ Avant de commencer, préparez :
 | Composant | Spécification requise | Rôle | Statut | Où l'obtenir | Compatibilité et remarques sur les substitutions |
 |:-----------|:----------------------|:-----|:-------|:-------------|:--------------------------------------------------|
 | Carte T-Display-SF32 | SF32LB52x ; la configuration documentée comprend un AMOLED CO5300 de 2,16 pouces, le tactile CST9220, 16 MB Flash, 8 MB PSRAM, l'IMU BHI260AP, le LoRa SX1262, le microSD, un microphone et un amplificateur de haut-parleur intégrés avec prise audio de 3,5 mm, ainsi que trois boutons utilisateur | Référence intégrée pour le calcul, l'affichage, les capteurs, la radio, le stockage et l'audio | Obligatoire | [Dépôt LilyGO](https://github.com/Xinyuan-LilyGO/T-Display-SF32) ; [fichiers matériels](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | Consigner la révision exacte de la carte et les composants réellement montés ; ne pas supposer que toutes les variantes ont la même configuration |
-| Extension T-SF32-Keyboard | Extension facultative avec Wi-Fi ESP32-C6, GPS L76K, sous-système clavier TCA8418/AW21009/XL9555, BME280, émetteur infrarouge et moteur vibratoire AW86224 | Ajoute les fonctions radio, de positionnement, de clavier, de détection environnementale, d'infrarouge et haptiques indiquées | Optionnel ; obligatoire uniquement pour ces fonctions | [Dépôt LilyGO](https://github.com/Xinyuan-LilyGO/T-Display-SF32) ; [fichiers matériels](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | Ces composants ne sont pas montés sur la carte T-SF32-Display autonome. Le Wi-Fi et le GPS partagent UART2 ; vérifier leur configuration conjointe sur l'extension |
+| Extension T-SF32-Keyboard | Extension optionnelle avec Wi-Fi ESP32-C6, GPS L76K, sous-système clavier TCA8418/AW21009/XL9555, BME280, émetteur infrarouge et moteur vibratoire AW86224 | Ajoute les fonctions radio, de positionnement, de clavier, de détection environnementale, d'infrarouge et haptiques indiquées | Optionnel ; obligatoire uniquement pour ces fonctions | [Dépôt LilyGO](https://github.com/Xinyuan-LilyGO/T-Display-SF32) ; [fichiers matériels](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | Ces composants ne sont pas montés sur la carte T-SF32-Display autonome. Le Wi-Fi et le GPS partagent UART2 ; vérifier leur configuration conjointe sur l'extension |
 | Connexion USB Type-C de données et alimentation contrôlée | Câble de données ; alimentation limitée en courant ou batterie protégée dont la tension peut être surveillée | Flashage, journaux et validation sûre de l'alimentation | Obligatoire | [Dépôt LilyGO](https://github.com/Xinyuan-LilyGO/T-Display-SF32) | Les lignes D+/D- du Type-C sont reliées au pont USB-UART CH343P. Ce port sert au flashage UART et aux journaux, pas à l'USB natif périphérique/hôte du SF32. Respecter aussi la condition de démarrage propre à la carte, supérieure à 3,5 V |
 | Accessoires de test selon l'interface | Carte microSD, charge audio/casque ou pair LoRa conforme à la bande autorisée, uniquement pour les interfaces évaluées | Tester les interfaces optionnelles de la carte | Optionnel ; à choisir selon le test | [Exemples](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/examples) | Avant connexion, confirmer le connecteur, la tension, la région et la révision avec les fichiers matériels |
 
@@ -87,6 +90,7 @@ Avant de commencer, préparez :
 </div>
 
 ## Choisir une configuration de référence prise en charge { #choose-a-supported-baseline }
+
 Le dépôt maintenu en amont utilise actuellement la branche `master` et ne désigne aucun tag comme référence logicielle universelle. Notez le commit exact au lieu d'indiquer « latest ». Le dépôt contient un répertoire `firmware/T-SF32-Factory-V1.2`, mais son nom ne remplace pas l'enregistrement de la révision de carte correspondante, du commit du dépôt et de la procédure de flashage.
 
 <div align="center"><em>Tableau : choix de la référence T-Display-SF32</em></div>
@@ -115,6 +119,7 @@ build_t-display-sf32_hcpu\uart_download.bat
 Conservez les commits réels des dépôts et du SDK, le résultat d'export de l'environnement, le journal complet de compilation, les images générées ainsi que les journaux de flashage et de démarrage. Le nombre de tâches parallèles peut varier, mais pas la cible ni les révisions des sources.
 
 ## Étapes du projet { #delivery-map }
+
 <div align="center"><em>Tableau : étapes du projet T-Display-SF32</em></div>
 
 <div align="center" markdown>
@@ -130,6 +135,7 @@ Conservez les commits réels des dépôts et du SDK, le résultat d'export de l'
 </div>
 
 ## Architecture système et dépendances { #system-architecture-and-dependencies }
+
 <div align="center"><em>Figure : périmètres produit et développement de T-Display-SF32</em></div>
 
 ```mermaid
@@ -147,6 +153,7 @@ flowchart LR
 Distinguez les domaines de panne : alimentation/charge de la carte, démarrage et flashage, écran/tactile, chaque périphérique sélectionné, prise en charge de la carte par LilyGO et SDK sous-jacent. Un exemple d'affichage qui échoue peut être lié à l'alimentation, à la révision de carte, à la configuration de la dalle/du tactile, à l'application ou à une incompatibilité entre SDK et pilote ; « le SDK est en panne » ne constitue pas un diagnostic suffisant.
 
 ## Étape 1 — Établir la référence fournisseur intacte { #stage-1-establish-the-untouched-vendor-baseline }
+
 **Objectif :** établir le comportement réel de la carte reçue et de la référence fournisseur avant toute modification des sources.
 
 1. Photographier les deux faces de la carte et noter ses références, les périphériques montés, l'écran et le tactile, la mémoire, les commutateurs, les connecteurs et le commit du dépôt.
@@ -157,10 +164,11 @@ Distinguez les domaines de panne : alimentation/charge de la carte, démarrage e
 
 **Preuves à conserver :** révision de la carte et photos, identité du dépôt/de l'image, détails de l'alimentation et de la batterie, journaux de flash et de démarrage, inventaire des composants montés, résultats fonctionnels et conditions des mesures de courant.
 
-**Critère de sortie de l'étape 1 :** deux démarrages à froid reproduisent la référence d'affichage/tactile identifiée ; le résultat de chaque périphérique monté dans le périmètre est consigné, et l'image d'origine ou une image de référence peut être restaurée.
+**Critère de sortie du point de contrôle 1 :** deux démarrages à froid reproduisent la référence d'affichage/tactile identifiée ; le résultat de chaque périphérique monté dans le périmètre est consigné, et l'image d'origine ou une image de référence peut être restaurée.
 
 ## Étape 2 — Valider les limites des périphériques, de l'alimentation et de la récupération { #stage-2-validate-peripheral-power-and-recovery-boundaries }
-**Objectif :** déterminer si les pannes peuvent être détectées et récupérées sans utilisation dangereuse de la batterie ni reflashage non documenté.
+
+**Objectif :** déterminer si les pannes peuvent être détectées et récupérées sans utilisation dangereuse de la batterie ni nouveau flashage non documenté.
 
 <div align="center"><em>Tableau : tests de panne et de récupération de T-Display-SF32</em></div>
 
@@ -178,19 +186,21 @@ Distinguez les domaines de panne : alimentation/charge de la carte, démarrage e
 
 </div>
 
-**Critère de sortie de l'étape 2 :** chaque test applicable possède un résultat répétable et un parcours de récupération ; tout firmware personnalisé protège contre la batterie faible, et aucune panne non résolue ne peut endommager la batterie ou bloquer la carte sans procédure de récupération documentée.
+**Critère de sortie du point de contrôle 2 :** chaque test applicable possède un résultat répétable et un parcours de récupération ; tout firmware personnalisé protège contre la batterie faible, et aucune panne non résolue ne peut endommager la batterie ou bloquer la carte sans procédure de récupération documentée.
 
 ## Étape 3 — Établir une base de code reproductible { #stage-3-build-a-reproducible-source-baseline }
-**Objectif :** permettre à un second ingénieur de reconstruire et flasher la même référence à partir de sources propres et épinglées.
+
+**Objectif :** permettre à un second ingénieur de reconstruire et flasher la même référence à partir de sources propres et figées.
 
 1. Récupérer les commits figés du dépôt de la carte et du fork du SDK LilyGO ; noter la version de base du SiFli-SDK amont déclarée par le fork.
 2. Configurer l'environnement PowerShell documenté et compiler `t-display-sf32_hcpu` depuis un répertoire propre.
 3. Conserver les preuves relatives à l'environnement, aux dépendances, à la configuration, à la mémoire/aux partitions, à l'image, au flashage et aux journaux série.
 4. Recommencer sur une autre machine ou après suppression de tous les résultats de compilation, puis exécuter la régression complète de l'étape 2.
 
-**Critère de sortie de l'étape 3 :** aucun ancien fichier image, fichier de carte non suivi ni remplacement SDK non documenté n'est nécessaire pour produire un firmware qui réussit l'étape 2.
+**Critère de sortie du point de contrôle 3 :** aucun ancien fichier image, fichier de carte non suivi ni remplacement SDK non documenté n'est nécessaire pour produire un firmware qui réussit l'étape 2.
 
 ## Étape 4 — Adapter un chemin produit à la fois { #stage-4-adapt-one-product-path-at-a-time }
+
 **Objectif :** apporter une modification utile tout en préservant les références fournisseur et de récupération qui fonctionnent.
 
 <div align="center"><em>Tableau : ordre des adaptations contrôlées de T-Display-SF32</em></div>
@@ -208,9 +218,10 @@ Distinguez les domaines de panne : alimentation/charge de la carte, démarrage e
 
 </div>
 
-**Critère de sortie de l'étape 4 :** le changement est relu, l'image d'origine reste restaurable et tous les tests applicables d'affichage, de tactile, de périphériques, d'alimentation, de flash et de récupération réussissent.
+**Critère de sortie du point de contrôle 4 :** le changement est relu, l'image d'origine reste restaurable et tous les tests applicables d'affichage, de tactile, de périphériques, d'alimentation, de flash et de récupération réussissent.
 
 ## Étape 5 — Revue de préparation produit { #stage-5-product-readiness-review }
+
 Avant de lancer un essai terrain ou de concevoir un circuit imprimé personnalisé, répondez aux questions suivantes :
 
 - Qui est responsable des fichiers de carte, du fork SDK LilyGO, des correctifs de pilotes, des mises à jour de sécurité et de la migration vers les futures versions de SiFli-SDK ?
@@ -221,12 +232,14 @@ Avant de lancer un essai terrain ou de concevoir un circuit imprimé personnalis
 - Les fichiers matériels, le firmware, le fork SDK, les exemples, les ressources et composants tiers ont-ils des licences compatibles avec la distribution envisagée ?
 - L'équipe accepte-t-elle de dépendre d'un prototype tiers, ou a-t-elle qualifié un fork maîtrisé et un plan de support ?
 
-**Critère de sortie de l'étape 5 :** chaque risque résiduel a un responsable, des preuves et une décision de traitement ; l'équipe a explicitement décidé de poursuivre, différer ou arrêter.
+**Critère de sortie du point de contrôle 5 :** chaque risque résiduel a un responsable, des preuves et une décision de traitement ; l'équipe a explicitement décidé de poursuivre, différer ou arrêter.
 
 ## Passage à la conception du produit { #handoff-to-product-design }
+
 Transmettez à l'étape suivante la référence SF32 exacte et les mémoires, les temporisations de l'écran et du tactile, les périphériques montés et leurs bus, l'arbre d'alimentation, le chargeur et la politique batterie, la stratégie antenne/RF, les connexions de démarrage et de flashage, le plan de partitions, les accès aux tests de production, la responsabilité du fork logiciel et le parcours de récupération validé. Poursuivez avec le [parcours d'intégration SF32LB52x](../sf32-products/chips/SF32LB52x.md#integration-path), le [guide de conception matérielle SF32LB52x](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [SiFli-SDK : compiler, flasher et surveiller la sortie série](../develop/platforms/sifli-sdk/build-flash-monitor.md) et [Conception pour la production](../hardware/design-for-production.md).
 
 ## Sources de référence { #authoritative-sources }
+
 - [Dépôt Xinyuan-LilyGO/T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32)
 - [README en chinois de T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32/blob/master/readme_cn.md)
 - [Exemples T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/examples)

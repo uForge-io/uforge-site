@@ -12,7 +12,7 @@ Das SDK unterteilt die Bluetooth-RF-Validierung in Signalisierungs-, Non-Signali
 <div align="center" markdown>
 <em>Tabelle: Umfang der RF-Testinhalte nach Familie</em>
 
-| Inhalt | Geltungsbereich nach Chipfamilie |
+| Inhalt | Geltungsbereich nach Familie |
 |---|---|
 | Vergleich der Testmodi und Messreihenfolge | Konsolidierter Workflow für SF32LB52x, SF32LB55x, SF32LB56x, SF32LB57x und SF32LB58x. |
 | Verfügbarkeit von Bluetooth-Classic-Tests | Erfordert ein Ziel mit Bluetooth Classic. SF32LB55x unterstützt nur BLE und keine Bluetooth-Classic-Testverfahren; verwenden Sie für diese Familie die BLE-Testpfade. |
@@ -31,24 +31,24 @@ Das SDK unterteilt die Bluetooth-RF-Validierung in Signalisierungs-, Non-Signali
 <div align="center" markdown>
 <em>Tabelle: Auswahl des Bluetooth- und RF-Testmodus</em>
 
-| Modus | Verwendung für | SDK-Einstieg | Steuerpfad |
+| Modus | Geeignet für | SDK-Einstieg | Steuerpfad |
 |---|---|---|---|
 | BT-Signalisierung | BQB-/QDID-Qualifizierung und protokollkonforme Leistungsbewertung | `bt_cm dut`, `gap_enb_dut_mode_req()` | Luftschnittstelle des Testers und LMP-Teststeuerung |
-| BT-Non-Signaling | RF-Abgleich während der Entwicklung und Fertigungsscreening | `bt_rftest`, `bt_enter_no_signal_dut_mode()` | Lokale herstellerspezifische HCI |
+| BT-Non-Signaling | RF-Abgleich während der Entwicklung und Prüfungen in der Fertigung | `bt_rftest`, `bt_enter_no_signal_dut_mode()` | Lokale herstellerspezifische HCI |
 | BLE-Non-Signaling (SIG DTM) | BLE-RF-Screening und SIG-DTM-Prüfpunkte | `bt_rftest bletx/blerx`, `ble_enter_dut_mode()` | Lokale HCI oder Standard-HCI, weitergeleitet über `bt_cm uart_dut` |
 | RF-Einzeltests | RF-Abgleich auf Platinenebene und FCC-/CE-Vorabprüfungen | `bt_cm uart_dut` + `SiFli_RfTool` | Das PC-Tool sendet jeweils eine Operation auf niedriger Ebene |
 
 </div>
 
-Bei der Signalisierung wird eine echte Bluetooth-Verbindung aufgebaut; sie dient der Qualifizierung. Beim Non-Signaling wird der RF-Teil direkt auf einen festen Kanal sowie Sende- oder Empfangszustand mit festgelegter Leistung eingestellt. Das ist der übliche Weg für Entwicklung und Fertigung. RF-Einzeltests nutzen das PC-Tool zur präzisen Steuerung von Träger oder Modulation und werden mit einem Analysator oder Leistungsmesser durchgeführt. BT-Non-Signaling und RF-Einzeltests sind SiFli-spezifische Abläufe, keine BQB-Tests.
+Bei der Signalisierung wird eine echte Bluetooth-Verbindung aufgebaut; sie ist der vorgesehene Weg zur Qualifizierung. Non-Signaling versetzt den RF-Teil direkt in einen Sende- oder Empfangszustand mit festem Kanal und fester Leistung. Das ist der übliche Weg für Entwicklung und Fertigung. RF-Einzeltests nutzen das PC-Tool zur präzisen Steuerung von Träger oder Modulation und werden mit einem Analysator oder Leistungsmesser durchgeführt. BT-Non-Signaling und RF-Einzeltests sind SiFli-spezifische Abläufe, keine BQB-Tests.
 
-Die folgenden Topologieabbildungen stammen aus dem RF-Testleitfaden für SF32LB52x. Sie verdeutlichen die Unterschiede zwischen PC, DUT, Tester und den UART-/HCI-/RF-Pfaden. Für die tatsächliche UART-Standardbelegung und Pin-Zuordnung verwenden Sie die Tabelle der Zielfamilie.
+Die folgenden Topologieabbildungen stammen aus dem RF-Testleitfaden für SF32LB52x. Sie verdeutlichen die Unterschiede zwischen PC, Prüfling, Tester und den UART-/HCI-/RF-Pfaden. Für die tatsächliche UART-Standardbelegung und Pin-Zuordnung verwenden Sie die Tabelle der Zielfamilie.
 
 ![BT-Signalisierungstest-Topologie](../../../../assets/develop/app-notes/rf/bt_signaling_test.png){ loading="lazy" }
-<div align="center"><em>Abbildung: Beispiel für SF32LB52x aus der Quellanleitung — BT-Signalisierung: Der PC konfiguriert den Tester, während DUT und Tester die RF-Verbindung aufbauen.</em></div>
+<div align="center"><em>Abbildung: Beispiel für SF32LB52x aus der Quellanleitung — BT-Signalisierung: Der PC konfiguriert den Tester, während Prüfling und Tester die RF-Verbindung aufbauen.</em></div>
 
 ![BT-Non-Signaling-Test-Topologie](../../../../assets/develop/app-notes/rf/non_signaling_test.png){ loading="lazy" }
-<div align="center"><em>Abbildung: Beispiel für SF32LB52x aus der Quellanleitung — BT-Non-Signaling: Der PC steuert den RF-Zustand des DUT direkt über serielle/HCI-Befehle.</em></div>
+<div align="center"><em>Abbildung: Beispiel für SF32LB52x aus der Quellanleitung — BT-Non-Signaling: Der PC steuert den RF-Zustand des Prüflings direkt über serielle/HCI-Befehle.</em></div>
 
 ![BLE-Signalisierungstest-Topologie](../../../../assets/develop/app-notes/rf/ble_signaling_test.png){ loading="lazy" }
 <div align="center"><em>Abbildung: Beispiel für SF32LB52x aus der Quellanleitung — BLE-DTM: Sowohl der UART-/HCI-Steuerpfad als auch der RF-Messpfad verbinden sich mit dem Tester.</em></div>
@@ -69,10 +69,10 @@ CONFIG_BT_RF_TEST=y
 
 ## BT-Signalisierungstest { #bt-signaling-test }
 
-1. Stellen Sie am DUT `VBAT`, `GND` sowie UART1 TX/RX bereit. Die Standardbelegung der UART1-Pins variiert je nach Gehäuse; verwenden Sie die Pin-Konfiguration des Projekts.
+1. Stellen Sie am Prüfling `VBAT`, `GND` sowie UART1 TX/RX bereit. Die Standardbelegung der UART1-Pins variiert je nach Gehäuse; verwenden Sie die Pin-Konfiguration des Projekts.
 2. Verbinden Sie für BLE-Signalisierung UART1 mit einem PC und senden Sie `bt_cm uart_dut`. Überprüfen Sie `04 0E 04 XX 03 0C 00` und stecken Sie dann die UART auf den Tester um.
-3. Halten Sie das DUT für BT-Signalisierung wach, senden Sie `bt_cm dut`, überprüfen Sie `Write scan enable success` und verbinden Sie das RF-Koaxialkabel mit dem Tester.
-4. In Bluetooth Signaling verwendet BLE die USB-zu-RS232-EUT-Steuerung mit 1.000.000 Baud; BT verwendet `None (EUT Control off)` und erkennt das DUT über die Luftschnittstelle.
+3. Halten Sie den Prüfling für BT-Signalisierung wach, senden Sie `bt_cm dut`, überprüfen Sie `Write scan enable success` und verbinden Sie das RF-Koaxialkabel mit dem Tester.
+4. Im Menü „Bluetooth Signaling“ verwendet BLE die EUT-Steuerung über USB-zu-RS232 mit 1 000 000 Baud; für BT wählen Sie `None (EUT Control off)` und erkennen den Prüfling über die Luftschnittstelle.
 5. Führen Sie TX in `Bluetooth 1 Multi Eval.` und RX in `Bluetooth 1 RX Meas.` aus. Verwenden Sie BER für Classic BT und PER für BLE; reduzieren Sie den Tester-TX-Pegel, um die Empfindlichkeit zu bestimmen.
 
 ## BT-/BLE-Non-Signaling-Befehle { #btble-non-signaling-commands }
@@ -91,17 +91,17 @@ Die genaue Argumentreihenfolge und die zulässigen Paketwerte sind release-spezi
 
 ## RF-Einzeltests mit SiFli_RfTool { #single-item-testing-with-sifli_rftool }
 
-Verbinden Sie UART1 des DUT mit 1.000.000 Baud mit dem PC. Schließen Sie den RF-Anschluss über ein Koaxialkabel an einen Tester, Spektrumanalysator oder Leistungsmesser an.
+Verbinden Sie UART1 des Prüflings mit dem PC und stellen Sie 1 000 000 Baud ein. Schließen Sie den RF-Anschluss über ein Koaxialkabel an einen Tester, Spektrumanalysator oder Leistungsmesser an.
 
 Senden Sie `bt_cm uart_dut` und prüfen Sie die Antwort `04 0E 04 XX 03 0C 00`. Wählen Sie anschließend in `SiFli_RfTool.exe` die Familie, den BLE- oder BT-Non-Signaling-Modus und den COM-Port aus.
 
-Stoppen Sie TX/RX, bevor Sie Kanal, PHY, Pakettyp oder Leistung ändern. Für BLE-RX kann ein Tester 1.500 Pakete senden; berechnen Sie `PER = (1500 - received) / 1500 × 100%` und protokollieren Sie den RSSI-Wert.
+Stoppen Sie TX/RX, bevor Sie Kanal, PHY, Pakettyp oder Leistung ändern. Für BLE-RX kann ein Tester 1 500 Pakete senden; berechnen Sie `PER = (1500 - received) / 1500 × 100%` und protokollieren Sie den RSSI-Wert.
 
 Verwenden Sie für Classic-BT-RX eine CMW500-GPRF-Wellenform und protokollieren Sie RSSI, Paket-/Bitfehleranzahl und BER/PER. Kompensieren Sie die Kabeldämpfung und kennzeichnen Sie die Ergebnisse als leitungsgebunden oder abgestrahlt.
 
 ## Das Ergebnis protokollieren { #record-the-result }
 
-Die Quellanleitung enthält außerdem eine vollständige HCI-Befehls-/Rückgabewert-Matrix. Verwenden Sie sie, wenn ein Befehl gesendet wird, das DUT aber nicht in den erwarteten Zustand wechselt. Behandeln Sie nicht jeden Vektor dieser Tabelle als plattformübergreifend gültige API; stimmen Sie die Befehle auf das Ziel-SDK und die Chipfamilie ab.
+Die Quellanleitung enthält außerdem eine vollständige HCI-Befehls-/Rückgabewert-Matrix. Verwenden Sie sie, wenn ein Befehl gesendet wird, der Prüfling aber nicht in den erwarteten Zustand wechselt. Behandeln Sie nicht jeden Vektor dieser Tabelle als plattformübergreifend gültige API; stimmen Sie die Befehle auf das Ziel-SDK und die Chipfamilie ab.
 
 <div align="center"><em>Tabelle: Beispiel-RX-Kanäle und Mittenfrequenzen aus der SF32LB52x-Matrix</em></div>
 

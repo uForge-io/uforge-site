@@ -32,7 +32,7 @@ Lisez ces pages avant de modifier l'organisation du firmware, le comportement de
 
 Avant de modifier le démarrage, l'OTA, le système de fichiers ou le stockage, vérifiez la table de partitions et la procédure de récupération. Une défaillance de l'application est gênante ; une erreur de configuration du démarrage ou des mises à jour peut rendre la carte difficile à récupérer.
 
-## Liste de vérification de la préparation produit { #product-readiness-checklist }
+## Liste de contrôle de la préparation produit { #product-readiness-checklist }
 
 - [ ] Une commande testée permettant de flasher l'ensemble de l'appareil est disponible en dehors du parcours OTA habituel.
 - [ ] La disposition des partitions est documentée dans le dépôt du produit.
@@ -40,4 +40,4 @@ Avant de modifier le démarrage, l'OTA, le système de fichiers ou le stockage, 
 - [ ] Si l'USB est utilisé, ses descripteurs et l'attribution du VID/PID sont documentés.
 - [ ] Les modes basse consommation ont été mesurés sur du matériel réel.
 - [ ] Les journaux de plantage peuvent être décodés à l'aide du binaire livré.
-- [ ] Les procédures de programmation en usine et pour le développement sont distinctes.
+- [ ] Les procédures de flashage en usine et pour le développement sont distinctes.

@@ -10,7 +10,7 @@
     try {
       var current = {{ current_language | tojson }};
       var configured = {{ configured_languages | tojson }};
-      var prefixes = { en: "", zh: "/zh", ja: "/ja", es: "/es", de: "/de", fr: "/fr", pt: "/pt", ru: "/ru" };
+      var prefixes = { en: "", zh: "/zh", ja: "/ja", es: "/es", de: "/de", fr: "/fr", pt: "/pt", ru: "/ru", ko: "/ko" };
       var pageUrl = {{ page.url | tojson }};
       var manual = localStorage.getItem("uf-lang-manual-preference");
 

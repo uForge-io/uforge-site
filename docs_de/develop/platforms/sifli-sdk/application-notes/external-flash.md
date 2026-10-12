@@ -23,21 +23,21 @@ Der SiFli-Flash-Controller kann mehrere Flash-Geräte gleichzeitig anbinden:
 |---|---:|---|---|
 | SF32LB52x | In dieser Quelle nicht angegeben | Leitfaden der Zielfamilie prüfen | QSPI-/MPI-Bezeichnung im Ziel-SDK prüfen |
 | SF32LB55x | 4 | Nur 4-Leitungs-PSRAM | QSPI |
-| SF32LB56x | 4 | 4-Leitungs- und 8-Leitungs-PSRAM | MPI-/QSPI-Kompatibilitätsnamen |
-| SF32LB58x | 5 | 4-Leitungs-, 8-Leitungs- und 16-Leitungs-PSRAM | MPI-/QSPI-Kompatibilitätsnamen |
+| SF32LB56x | 4 | 4-Leitungs- und 8-Leitungs-PSRAM | MPI-/QSPI-Bezeichnungen aus Kompatibilitätsgründen |
+| SF32LB58x | 5 | 4-Leitungs-, 8-Leitungs- und 16-Leitungs-PSRAM | MPI-/QSPI-Bezeichnungen aus Kompatibilitätsgründen |
 </div>
 
-Bei den Speichern kann es sich um NOR-Flash oder NAND-Flash handeln. Gegenüber SF32LB55x unterstützen die Controller von SF32LB56x und SF32LB58x zusätzlich PSRAM im 8-Leitungsmodus; SF32LB58x unterstützt darüber hinaus den 16-Leitungsmodus. Die ältere Controller-Generation heißt QSPI; die neuere, für weitere Speichertypen ausgelegte Generation heißt MPI.
+Bei den Speichern kann es sich um NOR-Flash oder NAND-Flash handeln. Gegenüber SF32LB55x unterstützen die Controller von SF32LB56x und SF32LB58x zusätzlich PSRAM im 8-Leitungsmodus; SF32LB58x unterstützt darüber hinaus den 16-Leitungsmodus. In der älteren Konfiguration wird der Controller als QSPI bezeichnet, in der neueren, speicherorientierten Konfiguration als MPI.
 
 Die üblichen Controller-Zuordnungen sind:
 
-- **SF32LB55x:** Controller 1 übernimmt normalerweise das On-Chip-NOR-Flash; Controller 2 und 3 hängen vom Board-Design ab; Controller 4 verbindet NOR-Flash und kann sowohl von LCPU als auch von HCPU angesprochen werden.
-- **SF32LB58x:** Controller 1 und 2 übernehmen je nach Gehäuse normalerweise On-Chip-NOR-Flash oder PSRAM; Controller 3 und 4 hängen vom Board-Design ab; Controller 5 ist On-Chip-NOR-Flash und kann sowohl von LCPU als auch von HCPU angesprochen werden.
-- **SF32LB56x:** Controller 1 und 2 übernehmen je nach Gehäuse normalerweise On-Chip-NOR-Flash oder PSRAM; Controller 3 hängt vom Board-Design ab; Controller 5 ist On-Chip-NOR-Flash und kann sowohl von LCPU als auch von HCPU angesprochen werden. Es gibt keinen Controller 4.
+- **SF32LB55x:** Controller 1 ist in der Regel mit integriertem NOR-Flash verbunden. Controller 2 und 3 hängen vom Platinenentwurf ab. Controller 4 ist mit NOR-Flash verbunden und kann sowohl von LCPU als auch von HCPU angesprochen werden.
+- **SF32LB58x:** Controller 1 und 2 sind je nach Gehäuse mit integriertem NOR-Flash oder PSRAM verbunden. Controller 3 und 4 hängen vom Platinenentwurf ab. Controller 5 ist mit integriertem NOR-Flash verbunden und kann sowohl von LCPU als auch von HCPU angesprochen werden.
+- **SF32LB56x:** Controller 1 und 2 sind je nach Gehäuse mit integriertem NOR-Flash oder PSRAM verbunden. Controller 3 hängt vom Platinenentwurf ab. Controller 5 ist mit integriertem NOR-Flash verbunden und kann sowohl von LCPU als auch von HCPU angesprochen werden. Einen Controller 4 gibt es nicht.
 
 Der Treiber ist in zwei Schichten aufgeteilt. Die HAL-Schicht stellt den Zugriff auf Hardwareregister und einfache Logik bereit. Die DRV-Schicht stellt Flash-Lese-/Schreib-/Löschoperationen, Initialisierung und Steuerung sowie von Geräten und Dateisystemen genutzte Schnittstellen bereit.
 
-Der Controller unterstützt Ein-Leitungs- und Vier-Leitungs-Flash-Operationen, DMA-Beschleunigung, Page-Programmierung, Page-Lesevorgänge sowie Sektor-/Block-Löschung. NOR-Flash kann außerdem direkt über die AHB-Speicherschnittstelle gelesen werden. Die grundlegende Löscheinheit hängt vom jeweiligen Flash-Baustein ab.
+Der Controller unterstützt Flash-Zugriffe im Ein- und Vier-Leitungsmodus, DMA-Beschleunigung, Page-Programmierung, Page-Lesevorgänge sowie das Löschen von Sektoren und Blöcken. NOR-Flash kann außerdem direkt über die AHB-Speicherschnittstelle gelesen werden. Die grundlegende Löscheinheit hängt vom jeweiligen Flash-Baustein ab.
 
 ## QSPI oder MPI konfigurieren { #2-configure-qspi-or-mpi }
 
@@ -262,7 +262,7 @@ int rt_flash_write(rt_uint32_t addr, const rt_uint8_t *buf, size_t size);
 rt_err_t rt_flash_erase(rt_uint32_t addr, size_t size);
 ```
 
-`rt_flash_read` und `rt_flash_write` geben bei Erfolg die tatsächlich übertragenen Byte zurück, bei einem Fehler `0`; `rt_flash_erase` gibt bei Erfolg `RT_EOK` zurück. Die Deklarationen wurden zur besseren Lesbarkeit vereinheitlicht. Prüfen Sie die tatsächlichen Header und Rückgabewerte im verwendeten SDK-Branch.
+`rt_flash_read` und `rt_flash_write` geben bei Erfolg die Anzahl der übertragenen Bytes zurück, bei einem Fehler `0`; `rt_flash_erase` gibt bei Erfolg `RT_EOK` zurück. Die Deklarationen wurden zur besseren Lesbarkeit vereinheitlicht. Prüfen Sie die tatsächlichen Header und Rückgabewerte im verwendeten SDK-Branch.
 
 Verwenden Sie `rt_flash_read` sowohl für NOR- als auch für NAND-Lesevorgänge; NOR kann alternativ über sein Speicherfenster gelesen werden, während NAND die API verwenden muss und der Aufrufer den Puffer selbst verwalten muss. Verwenden Sie `rt_flash_write` für beide Typen. Für Löschoperationen erfordert NOR normalerweise sektorausgerichtete Adresse und Länge (typischerweise 4 KB); NAND erfordert normalerweise blockausgerichtete Adresse und Länge (typischerweise 128 KB). Sichern und stellen Sie nicht ausgerichtete Daten selbst wieder her.
 
@@ -332,9 +332,9 @@ cleanup:
 
 ## Flash über RT-Thread MTD verwenden { #5-use-flash-through-rt-thread-mtd }
 
-RT-Thread stellt MTD-NOR- und MTD-NAND-Gerätetreiber bereit. Sind MTD- und Dateisystemoptionen in der Konfiguration aktiviert, werden die Geräte beim Start registriert. Fragen Sie einen Controller mit `rt_device_find("flash1")` ab; die Controller-Namen sind `flash1`, `flash2` und `flash3` (und der entsprechende Gerätename für jeden aktivierten Controller). Ein von null verschiedenes Ergebnis zeigt eine erfolgreiche Registrierung an.
+RT-Thread stellt MTD-NOR- und MTD-NAND-Gerätetreiber bereit. Sind MTD- und Dateisystemoptionen in der Konfiguration aktiviert, werden die Geräte beim Start registriert. Suchen Sie das Gerät mit `rt_device_find("flash1")`. Die Gerätenamen der Controller lauten `flash1`, `flash2` und `flash3`; für jeden weiteren aktivierten Controller wird der entsprechende Gerätename verwendet. Ein von null verschiedener Rückgabewert zeigt an, dass das Gerät erfolgreich registriert wurde.
 
-MTD wird von Dateisystemen und USB-Speicher genutzt. Anwendungscode findet das Gerät normalerweise und bindet es ein; die MTD-NOR-Schicht kapselt die Lese-/Schreiboperationen. Wenn Sie ein Gerät selbst registrieren, implementieren Sie die unten gezeigte Operationstabelle.
+MTD wird von Dateisystemen und USB-Speicher genutzt. Anwendungscode sucht das Gerät normalerweise und bindet es ein; die MTD-NOR-Schicht kapselt die Lese- und Schreiboperationen. Wenn Sie ein Gerät selbst registrieren, implementieren Sie die unten gezeigte Operationstabelle.
 
 ### MTD-NOR-Gerätestruktur { #mtd-nor-types }
 
@@ -551,7 +551,7 @@ typedef struct
 } FLASH_CMD_CFG_T;
 ```
 
-Dabei ist `cmd` die Befehls-ID (`0x06` für Write Enable und `0x05` für Read Status in den Beispielen der Anleitung). `func_mode` wählt Lesen oder Schreiben; `data_mode` legt fest, ob keine Daten oder Daten im 1-, 2- oder 4-Leitungsmodus übertragen werden; `dummy_cycle` gibt die Leertakte zwischen Befehl und Adresse beziehungsweise Daten an; `ab_size` und `ab_mode` beschreiben Alternate Bytes; `addr_size` und `addr_mode` legen Adresslänge und Leitungsmodus fest; `cmd_mode` bestimmt, ob der Befehl selbst über eine, zwei oder vier Leitungen gesendet wird.
+Dabei ist `cmd` die Befehls-ID (`0x06` für Write Enable und `0x05` für Read Status in den Beispielen der Anleitung). `func_mode` wählt Lesen oder Schreiben; `data_mode` legt fest, ob keine Daten oder Daten im 1-, 2- oder 4-Leitungsmodus übertragen werden; `dummy_cycle` gibt die zusätzlichen Taktzyklen zwischen Befehl und Adresse beziehungsweise Daten an; `ab_size` und `ab_mode` beschreiben die Alternate-Bytes; `addr_size` und `addr_mode` legen Adresslänge und Leitungsmodus fest; `cmd_mode` bestimmt, ob der Befehl selbst über eine, zwei oder vier Leitungen gesendet wird.
 
 ## Einen NAND-Flash-Baustein portieren { #8-port-a-nand-flash-part }
 
@@ -565,7 +565,7 @@ Die SiFli-Anleitung dokumentiert APM-PSRAM in 4-, 8- und 16-Leitungsmodi mit unt
 - SF32LB58x unterstützt 4-Leitungs-, 8-Leitungs- und 16-Leitungs-PSRAM.
 - SF32LB56x unterstützt 4-Leitungs- und 8-Leitungs-PSRAM.
 
-Verwenden Sie die MPI-/QSPI-Modus- und Speichergrößeneinstellungen, die zum Gehäuse, zur Board-Verdrahtung und zum PSRAM-Baustein passen.
+Verwenden Sie die MPI-/QSPI-Modus- und Speichergrößeneinstellungen, die zum Gehäuse, zur Platinenverdrahtung und zum PSRAM-Baustein passen.
 
 ## J-Link DSK und Open Flashloader verwenden { #10-use-j-link-dsk-and-open-flashloader }
 

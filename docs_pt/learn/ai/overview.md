@@ -71,7 +71,7 @@ Antes de converter o modelo, documente os requisitos exatos que o firmware preci
 
 <div align="center" markdown style="max-width: 100%; overflow-x: auto;">
 
-| Item do contrato | Decisão a ser definida |
+| Item do contrato | Decisão a ser fixada |
 |:--------------|:----------------------|
 | Formato da entrada | Janela de amostragem, tamanho da imagem, número de canais e layout dos tensores. |
 | Formato numérico | Largura dos inteiros, tratamento da escala e do zero-point, conjunto de dados para calibração. |

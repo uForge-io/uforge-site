@@ -93,7 +93,7 @@ A ordem exata dos argumentos e os valores de pacote aceitos dependem da versão 
 
 Conecte a UART1 do DUT ao PC a 1 000 000 baud. Conecte a porta RF, por cabo coaxial, a um testador, analisador de espectro ou medidor de potência.
 
-Envie `bt_cm uart_dut` e confirme a resposta `04 0E 04 XX 03 0C 00`. Em seguida, selecione a família, o modo BLE ou BT sem sinalização e a porta COM em `SiFli_RfTool.exe`.
+Envie `bt_cm uart_dut` e confirme a resposta `04 0E 04 XX 03 0C 00`. Em seguida, selecione a família, o modo `BLE non-signaling` (BLE sem sinalização) ou `BT non-signaling` (BT sem sinalização) e a porta COM em `SiFli_RfTool.exe`.
 
 Pare TX/RX antes de alterar o canal, a PHY, o tipo de pacote ou a potência. Para RX BLE, o testador pode enviar 1 500 pacotes; calcule `PER = (1500 - received) / 1500 × 100%` e registre o RSSI.
 

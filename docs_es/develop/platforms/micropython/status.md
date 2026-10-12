@@ -8,7 +8,7 @@ tags:
 
 # Estado de MicroPython { #micropython-status }
 
-En la documentación de SiFli y los repositorios de OpenSiFli consultados no se encontró un port oficial de MicroPython para SF32, una imagen de firmware ni un proceso de flasheo específico para una placa.
+En la documentación de SiFli y los repositorios de OpenSiFli consultados no se encontró un port oficial de MicroPython para SF32, una imagen de firmware ni un proceso de grabación específico para una placa.
 
 La revisión abarcó los [repositorios públicos de OpenSiFli en GitHub](https://github.com/OpenSiFli/) y el [portal de documentación de SiFli](https://docs.sifli.com/).
 
@@ -16,7 +16,7 @@ Esto no demuestra que no exista ningún experimento privado o comunitario. Sí s
 
 ## Recomendación actual { #current-recommendation }
 
-Por ahora, no presente MicroPython a los usuarios finales como una vía de desarrollo admitida para SF32. Mantenga esta página como referencia de estado y hoja de ruta hasta que haya un artefacto público que los desarrolladores puedan flashear y cuyo funcionamiento puedan reproducir.
+Por ahora, no presente MicroPython a los usuarios finales como una vía de desarrollo admitida para SF32. Mantenga esta página como referencia de estado y hoja de ruta hasta que haya un artefacto público que los desarrolladores puedan grabar y cuyo funcionamiento puedan reproducir.
 
 ## Qué debe incluir una página completa { #what-a-real-page-needs }
 
@@ -24,7 +24,7 @@ Antes de convertirla en un tutorial normal, SiFli debería publicar:
 
 - Imágenes de firmware por placa y configuración de memoria.
 - Repositorio fuente e instrucciones de compilación.
-- Comando de flasheo y comando de recuperación.
+- Comando de grabación y comando de recuperación.
 - UART y velocidad en baudios del REPL.
 - Mensaje de inicio esperado de MicroPython.
 - API `machine` compatibles.
@@ -49,9 +49,9 @@ Pruebe GPIO solo después de documentar los nombres de los pines.
 
 MicroPython podrá pasar de «estado» a «primeros pasos» cuando se cumplan todos estos puntos:
 
-- Repositorio público o página de publicación.
-- Binario específico de placa para al menos un kit de desarrollo SF32.
-- Comando de flasheo documentado.
+- Repositorio público o página de versiones.
+- Binario específico de placa para al menos una placa de desarrollo SF32.
+- Comando de grabación documentado.
 - Puerto REPL y velocidad en baudios documentados.
 - Vía de recuperación para volver al firmware de SiFli-SDK.
 - Lista de API `machine` compatibles.
@@ -59,4 +59,4 @@ MicroPython podrá pasar de «estado» a «primeros pasos» cuando se cumplan to
 
 ## Por qué importa { #why-this-matters }
 
-Una instrucción imprecisa como «descargue una imagen de MicroPython» no basta para empezar. Los usuarios necesitan una imagen exacta, una placa compatible, una herramienta de flasheo, los ajustes del REPL y una vía de recuperación. Sin ellos, una página de MicroPython aumenta la carga de soporte en vez de ayudar.
+Una instrucción imprecisa como «descargue una imagen de MicroPython» no basta para empezar. Los usuarios necesitan una imagen exacta, una placa compatible, una herramienta de grabación, los ajustes del REPL y una vía de recuperación. Sin ellos, una página de MicroPython aumenta la carga de soporte en vez de ayudar.

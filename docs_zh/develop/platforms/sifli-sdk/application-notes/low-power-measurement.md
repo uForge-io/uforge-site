@@ -50,7 +50,7 @@ sdk.py menuconfig
 
 | 系列 | 深度睡眠（Deep Sleep）/待机（Standby）唤醒行为 | 休眠（Hibernate）唤醒行为 |
 |---|---|---|
-| SF32LB52x | 深度睡眠下所有引脚均可通过 `WSR_GPIO1` 唤醒，不需要额外选择唤醒引脚。HCPU 与 LCPU 可以独立休眠。 | 调用 `HAL_PMU_EnterHibernate()` 前，配置 PMU 唤醒引脚和电平。 |
+| SF32LB52x | 深度睡眠下所有引脚均可通过 `WSR_GPIO1` 唤醒，不需要额外选择唤醒引脚。HCPU 与 LCPU 可以独立睡眠。 | 调用 `HAL_PMU_EnterHibernate()` 前，配置 PMU 唤醒引脚和电平。 |
 | SF32LB55x | 使用 55x 对应的 AON 唤醒引脚映射。 | Hibernate 下只有 LCPU 的唤醒引脚 `PIN0`–`PIN5` 可用于唤醒。使用 `HAL_PMU_EnablePinWakeup()` 并传入有效的 55x 引脚编号；这些引脚在 Hibernate 下为浮空输入，板级设计需要时应加外部上拉或下拉电阻。 |
 | SF32LB56x | 使用该系列对应的 HPAON/LPAON 唤醒引脚映射。 | PMU 支持两个唤醒源 `PIN0` 和 `PIN1`，可映射到 HCPU 或 LCPU 的唤醒引脚。请参考下方 PMU 映射示例。 |
 | SF32LB57x | 使用该系列对应的 HPAON/LPAON 唤醒引脚映射。 | PMU 支持两个唤醒源 `PIN0` 和 `PIN1`；57x 的 Hibernate 唤醒引脚索引范围为 0–13。将每个唤醒源映射到目标 HCPU/LCPU 唤醒引脚。 |
@@ -123,9 +123,9 @@ rt_kprintf("CR:0x%x, WER:0x%x\n", hwp_pmuc->CR, hwp_pmuc->WER);
 
 `pm_scenario_start()`/`pm_scenario_stop()` 提供 SDK 的 UI 和音频（Audio）场景策略：任一场景开启时使用高速模式，两者均关闭时使用中速模式。应测量能耗，不能只看瞬时电流，因为降频可能延长执行时间。
 
-## 理解子系统间的休眠时序 { #understand-inter-subsystem-sleep-sequencing }
+## 理解子系统间的睡眠时序 { #understand-inter-subsystem-sleep-sequencing }
 
-熄屏后，HPSYS 可以进入睡眠。55x/56x/58x 通常由 HPSYS 先睡眠，LPSYS 随后进入；现有资料明确记载的例外是 52x，HCPU 与 LCPU 可以独立休眠。现有资料未能确认 57x 的 ACPU 是否遵循相同顺序，请根据对应 SDK 版本核实其子系统策略。唤醒后，`gui_resume` 会开始新一轮熄屏判断。共享外设或 IPC 事务仍依赖某个核心时，应保持该核心运行。
+熄屏后，HPSYS 可以进入睡眠。55x/56x/58x 通常由 HPSYS 先睡眠，LPSYS 随后进入；现有资料明确记载的例外是 52x，HCPU 与 LCPU 可以独立睡眠。现有资料未能确认 57x 的 ACPU 是否遵循相同顺序，请根据对应 SDK 版本核实其子系统策略。唤醒后，`gui_resume` 会开始新一轮熄屏判断。共享外设或 IPC 事务仍依赖某个核心时，应保持该核心运行。
 
 临时打开 `BSP_PM_DEBUG`，在日志中搜索：
 
@@ -177,7 +177,7 @@ flowchart TD
 - PSRAM、NOR/NAND Flash、eMMC 或 SDIO 未进入低功耗状态；
 - 55x 的 USB `PA01` 内部有下拉，配置与外部电平冲突。
 
-在 `BSP_IO_Power_Down()` 和 `BSP_Power_Up()` 中实现板级电源切换；需要在熄屏/亮屏时立即切换显示或触摸电源时，使用 `BSP_TP_PowerDown/Up` 与 `BSP_LCD_PowerDown/Up`。如果从 NOR Flash 执行 XIP，Flash 休眠/唤醒代码必须放在保持供电的 RAM 中（`HAL_RAM_RET_CODE_SECT`）。
+在 `BSP_IO_Power_Down()` 和 `BSP_Power_Up()` 中实现板级电源切换；需要在熄屏/亮屏时立即切换显示或触摸电源时，使用 `BSP_TP_PowerDown/Up` 与 `BSP_LCD_PowerDown/Up`。如果从 NOR Flash 执行 XIP，Flash 睡眠/唤醒代码必须放在保持供电的 RAM 中（`HAL_RAM_RET_CODE_SECT`）。
 
 ## 记录可复现的测量结果 { #measure-and-record-a-reproducible-result }
 

@@ -1,6 +1,6 @@
 ---
 icon: lucide/network
-description: "SF32 蓝牙 PAN：BNEP 传输、NAP/GN/PANU 角色、手机共享网络的权衡、SiFli-SDK 配置与 OTA 验证。"
+description: "SF32 蓝牙 PAN：BNEP 传输、NAP/GN/PANU 角色、手机网络共享的权衡、SiFli-SDK 配置与 OTA 验证。"
 tags:
   - 蓝牙
 ---
@@ -15,7 +15,7 @@ tags:
 
 ## 蓝牙 PAN 的工作方式 { #how-bluetooth-pan-works }
 
-PAN 是蓝牙 SIG 定义的经典蓝牙（BR/EDR）应用规范（Profile）。它通过 **BNEP**（Bluetooth Network Encapsulation Protocol）在蓝牙 ACL 链路上传输以太网格式的数据包；BNEP 运行在 L2CAP 之上，而不是 RFCOMM。实现 PAN 需要 BR/EDR 和兼容的 PAN 协议栈，并不要求同时支持 BLE，因此仅支持经典蓝牙的硬件也可以实现 PAN。
+PAN 是蓝牙 SIG 定义的经典蓝牙（BR/EDR）Profile。它通过 **BNEP**（Bluetooth Network Encapsulation Protocol）在蓝牙 ACL 链路上传输以太网格式的数据包；BNEP 运行在 L2CAP 之上，而不是 RFCOMM。实现 PAN 需要 BR/EDR 和兼容的 PAN 协议栈，并不要求同时支持 BLE，因此仅支持经典蓝牙的硬件也可以实现 PAN。
 
 PAN 不能运行在 BLE 上，但独立的[互联网协议支持规范（IPSP）](https://www.bluetooth.com/specifications/specs/internet-protocol-support-profile-1-0/)支持通过 BLE 传输 IPv6 数据包。规范支持这项能力，不代表 SiFli-SDK 或手机热点服务已经实现 IPSP。下表中的 BLE 方案指 App 转发 GATT 数据，并非 IPSP 联网。
 
@@ -33,7 +33,7 @@ PAN 定义了三种角色：
 
 </div>
 
-PANU 可通过设备查询（inquiry）发现附近设备，再用 SDP 确认其 PAN 服务和角色。Class of Device 中的 Networking 标识只是发现设备时的提示，并不能证明该设备提供了可用的 NAP 服务。建立 ACL 连接和 L2CAP 上的 BNEP 连接后，NAP 会按其实现采用桥接或路由方式，将数据转发到外部网络。[PAN 规范](https://www.bluetooth.com/specifications/specs/personal-area-networking-profile-1-0/)中的 NAP 既可以是手机，也可以是 LAN 网关。任一方都可终止连接；在本文介绍的手机共享网络方案中，共享状态变化可能需要重新连接。
+PANU 可通过设备查询（inquiry）发现附近设备，再用 SDP 确认其 PAN 服务和角色。Class of Device 中的 Networking 标识只是发现设备时的提示，并不能证明该设备提供了可用的 NAP 服务。建立 ACL 连接和 L2CAP 上的 BNEP 连接后，NAP 会按其实现采用桥接或路由方式，将数据转发到外部网络。[PAN 规范](https://www.bluetooth.com/specifications/specs/personal-area-networking-profile-1-0/)中的 NAP 既可以是手机，也可以是 LAN 网关。任一方都可终止连接；在本文介绍的手机网络共享方案中，共享状态变化可能需要重新连接。
 
 ## 为什么选择 PAN 而不是 Wi-Fi { #why-use-pan-instead-of-wi-fi }
 
@@ -43,7 +43,7 @@ PANU 可通过设备查询（inquiry）发现附近设备，再用 SDP 确认其
 
 | 方案 | 适用场景 | 权衡 |
 |:-----|:---------|:-----|
-| 蓝牙 PAN | 产品已使用双模蓝牙，只需间歇性或中等 IP 流量，且配套手机通常就在附近。 | 吞吐量和覆盖范围取决于 BR/EDR 链路及 NAP 的上游网络。手机共享网络方案依赖该手机；其他方案也可以使用非手机的 NAP 网关。 |
+| 蓝牙 PAN | 产品已使用双模蓝牙，只需间歇性或中等 IP 流量，且配套手机通常就在附近。 | 吞吐量和覆盖范围取决于 BR/EDR 链路及 NAP 的上游网络。手机网络共享方案依赖该手机；其他方案也可以使用非手机的 NAP 网关。 |
 | 专用 Wi-Fi 射频 | 产品需要持续的高吞吐量，或需要不依赖手机的连接方式。 | 需要增加射频、天线、集成工作及相应的功耗预算。应根据所选射频或模组及最终产品，评估适用的射频合规要求。 |
 | BLE GATT → 配套 App → 互联网 | 产品只需交换少量数据，且 App 可以将数据转发到云端。 | 这种自定义转发方案并未给设备提供直接的 IP 连接。BLE IPSP 是另一种方案，需要单独确认设备协议栈和网关是否支持，不能与 PAN 混为一谈。 |
 
@@ -67,7 +67,7 @@ PANU 可通过设备查询（inquiry）发现附近设备，再用 SDP 确认其
 
 </div>
 
-对于需要持续流式传输或直接处理 HTTP/WebSocket 流量的语音助手、OTA 客户端及其他产品，只有在目标 iPhone 和 SDK 配置均经过验证后，PAN 才可作为避免依赖 BLE 中继 App 的联网方案。思澈科技（SiFli）v2.5.1 示例还启用了 A2DP，以规避 iOS 单独连接 PAN 的已记录问题；A2DP 是该示例的处理方式，并非 PAN 规范要求。PAN **不能**取代用于产品配置、用户认证、通知或本地控制的 App。[SF32 小智语音助手](../../projects/sf32-xiaozhi.md)提供了这一架构的可运行示例。
+对于需要持续流式传输或直接处理 HTTP/WebSocket 流量的语音助手、OTA 客户端及其他产品，只有在目标 iPhone 和 SDK 配置均经过验证后，PAN 才可作为避免依赖 BLE 中继 App 的联网方案。思澈科技（SiFli）v2.5.1 示例还启用了 A2DP，以规避 iOS 单独连接 PAN 的已记录问题；A2DP 是该示例的处理方式，并非 PAN 规范要求。PAN **不能**取代用于产品配置、用户认证、通知或本地控制的 App；它只是让应用数据面不再受该 App 中继的限制。[SF32 小智语音助手](../../projects/sf32-xiaozhi.md)提供了这一架构的可运行示例。
 
 ## SF32 各系列对 PAN 的支持 { #device-support-on-sf32 }
 
@@ -150,7 +150,7 @@ README 将目录写成了 `mbedtls_288`，但其截图和 [v2.5.1 证书生成�
 2. 在 SF32 设备请求 PAN **之前**，开启手机的蓝牙网络共享或 Personal Hotspot。
 3. 将手机与设备配对；当操作系统要求时，保持手机处于可被发现状态。
 4. 执行 `pan_cmd conn_pan`，再用示例中的 `weather` 等命令验证实际 IP 通信。仅确认蓝牙已连接还不够。
-5. 关闭网络共享、让手机休眠/唤醒并移出范围；确认产品预期的重连行为正常工作。
+5. 关闭网络共享、让手机睡眠/唤醒并移出范围；确认产品预期的重连行为正常工作。
 
 如果网络共享是在蓝牙连接建立之后才开启的，请使用 `pan_cmd conn_pan` 显式重新连接 PAN。
 
@@ -208,4 +208,4 @@ README 还将蓝牙地址分配列为排查项，可用 `nvds get_mac` 查看地
 - 在 iOS 上，BLE 配件可通过 Core Bluetooth 使用而无需 MFi；但通过 External Accessory/iAP 建立自定义 App 到经典蓝牙配件的数据通道属于 MFi 路径。PAN 则使用手机的网络共享服务，让 SF32 设备通过自身 IP 客户端联网，而不是依赖 BLE-App 中继。
 - 参考 PAN 示例列出了 SF32LB52x/56x/58x 目标板。SF32LB57x 的硬件支持双模蓝牙，但其 PAN 协议栈和目标板需单独验证；SF32LB55x 仅支持 BLE，无法运行 PAN。
 - SiFli-SDK 的 `example/bt/pan` 是一份可运行的参考实现，包含用于连接、重连和基于 PAN 的 OTA 分发的 Finsh 命令。
-- 当手机通常就在附近，且产品只需间歇性或中等速率的 IP 通信时，手机共享网络的 PAN 方案较合适。若需要持续高吞吐量或独立于手机运行，应评估专用 Wi-Fi 或其他独立网络路径，也可以考虑非手机的 NAP 网关。
+- 当手机通常就在附近，且产品只需间歇性或中等速率的 IP 通信时，手机网络共享的 PAN 方案较合适。若需要持续高吞吐量或独立于手机运行，应评估专用 Wi-Fi 或其他独立网络路径，也可以考虑非手机的 NAP 网关。

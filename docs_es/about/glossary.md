@@ -22,7 +22,7 @@ Referencia rápida de siglas y términos utilizados en todo el sitio μForge.io 
 
 ## Conectividad inalámbrica { #wireless-connectivity }
 
-* **BLE** — **Bluetooth Low Energy.** El modo de radio Bluetooth de bajo consumo sobre el que se construyen la mayoría de los productos SF32 de tipo vestible e IoT.
+* **BLE** — **Bluetooth Low Energy.** El modo de radio Bluetooth de bajo consumo en el que se basan la mayoría de los productos SF32 vestibles y de IoT.
 * **Wi-Fi** — Tecnología de red de área local inalámbrica. Cuando la documentación de un producto SF32 indica compatibilidad con Wi-Fi externo, la conexión se realiza a través de la interfaz SDIO. Antes de cerrar el diseño, confirme la referencia exacta, el enrutamiento de la placa, la alimentación y el soporte de software.
 * **Bluetooth de doble modo** — Compatibilidad con BLE y Bluetooth clásico (BR/EDR) en una misma radio. Se utiliza cuando un producto necesita ambos, por ejemplo, transmisión de audio (Bluetooth clásico o LE Audio) junto con un canal de control de bajo consumo. Disponible en SF32LB52x/56x/57x/58x; SF32LB55x solo admite BLE.
 * **GAP** — **Generic Access Profile (Perfil de Acceso Genérico).** La capa Bluetooth que rige los roles del dispositivo, la difusión (advertising) y el establecimiento de conexión — la base sobre la que se apoya toda aplicación BLE.
@@ -53,9 +53,9 @@ Referencia rápida de siglas y términos utilizados en todo el sitio μForge.io 
 ## Alimentación y fiabilidad { #power-and-reliability }
 
 * **PMU** — **Power Management Unit (Unidad de Gestión de Energía).** El bloque integrado que gestiona la regulación de voltaje (salidas BUCK/LDO) dentro de los chips SF32; algunos diseños lo combinan con un PMIC externo de SiFli (p. ej., SF30147C) para rieles de alimentación adicionales.
-* **PMIC** — **Power Management IC (circuito integrado de gestión de energía).** Chip externo dedicado que proporciona salidas de alimentación reguladas adicionales a las que suministra el PMU interno del MCU.
-* **LDO** — **Low-Dropout regulator (regulador lineal de baja caída de tensión).** Tipo de regulador lineal y una de las etapas de salida internas del PMU en los componentes SF32.
-* **BUCK** — Una topología de regulador de voltaje conmutado (no lineal), más eficiente que un LDO a mayor corriente, también integrada en el PMU de SF32.
+* **PMIC** — **Power Management IC (circuito integrado de gestión de energía).** Chip externo dedicado que proporciona salidas de alimentación reguladas adicionales a las que suministra la PMU interna de la MCU.
+* **LDO** — **Low-Dropout regulator (regulador lineal de baja caída de tensión).** Tipo de regulador lineal y una de las etapas de salida internas de la PMU en los componentes SF32.
+* **BUCK** — Una topología de regulador de voltaje conmutado (no lineal), más eficiente que un LDO a mayor corriente, también integrada en la PMU de SF32.
 * **TRNG** — **True Random Number Generator (generador de números aleatorios verdaderos).** Fuente de entropía de hardware basada en el ruido térmico físico, utilizada para generar claves criptográficas y habilitar funciones de seguridad.
 * **PSA** — **Platform Security Architecture.** Marco de seguridad y esquema de certificación de Arm. Algunas páginas de chips SF32 indican **PSA Certified Level 1**; compruebe en la documentación oficial del modelo exacto si está certificado y qué nivel tiene, sin asumir que se aplica a toda la familia.
 
@@ -76,7 +76,7 @@ Referencia rápida de siglas y términos utilizados en todo el sitio μForge.io 
 * **I2C** — **Inter-Integrated Circuit.** Un bus serial síncrono multipunto comúnmente utilizado para sensores y configuración de periféricos de baja velocidad.
 * **SDIO** — **Secure Digital Input Output.** Una interfaz de host utilizada por los diseños SF32 documentados para conectar un dispositivo Wi-Fi externo.
 * **DCMI** — **Digital Camera Module Interface.** Una interfaz de cámara paralela para conectar un sensor de imagen compatible.
-* **FreeIO** — La capacidad flexible de asignación de GPIO de SiFli, que permite mapear las señales compatibles a los GPIO adecuados dentro de las restricciones documentadas del dispositivo.
+* **FreeIO** — La capacidad flexible de asignación de GPIO de SiFli, que permite mapear las señales compatibles a las GPIO adecuadas dentro de las restricciones documentadas del dispositivo.
 * **PTM** — **Peripheral Task Machine (Máquina de Tareas de Periféricos).** Una función de hardware de SiFli para el manejo determinista de tareas de periféricos en los dispositivos compatibles.
 * **RTC** — **Real-Time Clock (Reloj de Tiempo Real).** Un periférico de mantenimiento de la hora que puede seguir funcionando (o despertar el sistema) independientemente de los dominios de reloj de la aplicación principal.
 
@@ -85,7 +85,7 @@ Referencia rápida de siglas y términos utilizados en todo el sitio μForge.io 
 * **QFN** — **Quad Flat No-lead package (encapsulado plano cuadrado sin terminales).** Tipo de encapsulado utilizado en los componentes SF32, identificado por el número de pines y las dimensiones del cuerpo (p. ej., QFN68).
 * **BGA** — **Ball Grid Array package.** Un encapsulado con bolas de soldadura dispuestas debajo del dispositivo, que permite una huella compacta y un mayor número de pines, pero requiere enrutamiento de escape de PCB y ensamblaje compatibles con BGA.
 * **BOM** — **Bill of Materials (lista de materiales).** Lista formal y detallada de componentes, elementos pasivos y piezas mecánicas necesarios para fabricar una placa de circuito impreso ensamblada (PCBA). Reducir la complejidad de la BOM es una razón importante para preferir los componentes y módulos recomendados por SiFli.
-* **EDA** — **Electronic Design Automation (Automatización de Diseño Electrónico).** Categoría de software de captura de esquemáticos, simulación SPICE y diseño de PCB. [Consulte la página de bibliotecas de herramientas EDA](../hardware/cad-components/eda-tool-libraries.md) para huellas y símbolos específicos de SF32.
+* **EDA** — **Electronic Design Automation (automatización del diseño electrónico).** Categoría de software de captura de esquemáticos, simulación SPICE y diseño de PCB. [Consulte la página de bibliotecas de herramientas EDA](../hardware/cad-components/eda-tool-libraries.md) para huellas y símbolos específicos de SF32.
 * **AVL** — **Approved Vendor List (Lista de Proveedores Aprobados).** La lista de componentes de segunda fuente calificados por SiFli (cristales, reguladores, memoria flash, etc.) verificados contra las tolerancias eléctricas de los diseños de hardware SF32. [Consulte la página de la lista de proveedores aprobados](../hardware/cad-components/sifli-approved-vendor-list.md).
 * **EVB** — **Evaluation Board (placa de evaluación).** Placa de referencia o desarrollo SF32 proporcionada por SiFli para iniciar y validar el diseño antes de disponer del hardware personalizado.
 * **FAE** — **Field Application Engineer (Ingeniero de Aplicaciones de Campo).** El contacto de soporte técnico de SiFli para preguntas de diseño de hardware que van más allá de lo que cubre la documentación pública.

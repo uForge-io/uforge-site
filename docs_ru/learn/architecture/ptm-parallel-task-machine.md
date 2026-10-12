@@ -39,19 +39,19 @@ PTM можно представить как небольшой программ
 <div align="center"><em>Рисунок: последовательность выполнения задачи PTM</em></div>
 
 ```text
-Приложение / прошивка
+Application / firmware
         │
         ▼
-CPU настраивает задачу PTM
+CPU configures PTM task
         │
         ▼
-PTM выполняет детерминированную последовательность периферийных задач
+PTM executes deterministic peripheral sequences
         │
-        ├── Чтение / запись IO
-        ├── Перенос данных через FIFO / DMA
-        ├── Доступ к памяти или регистрам по AHB
-        ├── Ожидание события / заданная задержка
-        └── Прерывание CPU или уведомление о внутреннем событии
+        ├── IO read/write
+        ├── FIFO / DMA data movement
+        ├── AHB memory or register access
+        ├── Event wait / fixed delay
+        └── CPU interrupt or internal event notification
 ```
 
 Главное архитектурное свойство PTM — возможность выполнять компактную последовательность собственных инструкций и взаимодействовать не только с выводами. PTM может читать и записывать IO, ожидать события, использовать пути FIFO/DMA, обращаться к памяти AHB и регистрам периферии и уведомлять CPU только тогда, когда требуется участие прошивки более высокого уровня.
@@ -60,7 +60,7 @@ PTM выполняет детерминированную последовате
 
 ## Основные возможности { #core-capabilities }
 
-В руководстве по проектированию аппаратуры SF32LB57x указаны **один блок PTM с 16 каналами**; в таблице мультиплексирования выводов перечислены PTM1_CH0–PTM1_CH15. С учетом определений SDK к документированным возможностям относятся:
+В руководстве по проектированию аппаратуры SF32LB57x указаны **один блок PTM с 16 каналами**; в таблице мультиплексирования выводов перечислены PTM1_CH0–PTM1_CH15. С учётом определений SDK к документированным возможностям относятся:
 
 - независимо управляемые ресурсы выполнения PTM;
 - компактный набор собственных инструкций;
@@ -184,13 +184,13 @@ PTM, PIO в RP2040 и PPI/DPPI от Nordic позволяют уменьшить
 <div align="center"><em>Рисунок: пути выполнения PPI, DPPI, PIO и PTM</em></div>
 
 ```text
-PPI:  Конечная точка события ──> канал PPI ──> конечная точка задачи
+PPI:  Event endpoint ──> PPI channel ──> Task endpoint
 
-DPPI: Публикующая периферия ──> канал DPPI ──> задача периферии-подписчика
+DPPI: Publisher peripheral ──> DPPI channel ──> Subscriber peripheral task
 
-PIO:  CPU/DMA ──> инструкции машины состояний PIO ──> временные параметры GPIO и FIFO
+PIO: CPU/DMA ──> PIO state-machine instructions ──> GPIO timing and FIFOs
 
-PTM:  Настройка CPU ──> инструкции задачи PTM ──> IO + события + FIFO/DMA + доступ по AHB
+PTM: CPU configuration ──> PTM task instructions ──> IO + events + FIFO/DMA + AHB access
 ```
 
 PPI и DPPI связывают события и задачи без выполнения программы, но только соединяют существующие события и задачи и не позволяют задать новую логику протокола. PIO задаёт новое поведение выводов с помощью машин состояний, однако в основном ограничен GPIO и FIFO. У PTM область применения шире: он может объединить в одном выполняемом сценарии управление временем IO, ожидание событий, перемещение данных, доступ к регистрам и координацию нескольких небольших задач.
@@ -227,7 +227,7 @@ DPPI — более новая модель Nordic. Периферийный б�
 
 Таким образом, PPI/DPPI, PIO и PTM не конкурируют за звание «лучшего» решения: они работают на разных уровнях — соединяют события, реализуют протоколы на уровне выводов и автоматизируют задачи периферии. В проектах на SF32LB57x сначала используйте стандартные периферийные блоки, а к PTM переходите, только если они не обеспечивают нужные временные параметры или последовательность действий.
 
-Источники: [определения инструкций PTM SiFli](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/Include/ptm_ins.h), [datasheet RP2040](https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf), [спецификация PPI от Nordic](https://docs.nordicsemi.com/r/bundle/ps_nrf52811/page/ppi.html) и [система событий DPPI от Nordic](https://docs.nordicsemi.com/r/bundle/ps_nrf54lv10a/page/ppi.html).
+Источники: [определения инструкций PTM SiFli](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/Include/ptm_ins.h), [даташит RP2040](https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf), [спецификация PPI от Nordic](https://docs.nordicsemi.com/r/bundle/ps_nrf52811/page/ppi.html) и [система событий DPPI от Nordic](https://docs.nordicsemi.com/r/bundle/ps_nrf54lv10a/page/ppi.html).
 
 ## Рекомендации по проектированию { #design-guidance }
 

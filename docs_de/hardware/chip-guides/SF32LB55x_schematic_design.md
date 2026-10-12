@@ -2,7 +2,7 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Richtlinien für den Schaltplanentwurf des SF32LB55x-MCU: Stromversorgungssystem, Boot-Modus, Takterzeugung, HF, Speicherschnittstellen, Display- und Touch-Schnittstellen sowie Wake-/GPADC-/Fertigungsschnittstellen."
+description: "Richtlinien für den Schaltplanentwurf des SF32LB55x-MCU: Stromversorgungssystem, Boot-Modus, Takterzeugung, RF, Speicherschnittstellen, Display- und Touch-Schnittstellen sowie Wake-/GPADC-/Fertigungsschnittstellen."
 tags:
     - Hardware
     - Chip
@@ -21,7 +21,7 @@ tags:
 | Stromversorgungssystem | PMU-Spannungsschienen, weitere Schienen, Kondensatoren, POR/BOR/Reset, BUCK-Induktivität. |
 | Boot-Modus | Spannungsdomäne des Mode-Pins, Pull-Widerstand, Download/Wiederherstellung und Produktionszugang. |
 | Takterzeugung | 48-MHz-Quarz, 32,768-kHz-Quarz und Prüfung der Anpassungskondensatoren. |
-| HF | HF-Anpassung, 50-Ohm-Antennenpfad, AVDD_BRF-Filterung und HF-Freihaltebereich. |
+| RF | RF-Anpassung, 50-Ohm-Antennenpfad, AVDD_BRF-Filterung und RF-Freihaltebereich. |
 | Speicherschnittstellen | OPI-PSRAM, QSPI-NOR/NAND/PSRAM und SDIO-eMMC/Micro-SD. |
 | Display und Touch | MIPI DSI, SPI/QSPI, MCU8080, JDI, Touch-Interrupt, Reset, Hintergrundbeleuchtung und Panel-Stromversorgung. |
 | Wake, GPADC und Fertigung | Weckquellen und Taster, Motor-PWM, GPADC-Spannungsteiler, Sensoren, Bluetooth-Audio, DBG-UART, SWD, Produktionsprogrammierung und Quarzkalibrierung. |
@@ -55,7 +55,7 @@ SF32LB551 im QFN68L besitzt keine Pins VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_VOUT
 
 | Weitere Versorgungspins | Mindestspannung (V) | Typische Spannung (V) | Maximalspannung (V) | Maximalstrom (mA) | Detaillierte Beschreibung |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| AVDD_BRF | 1,71 | 1,8 | 3,63 | 30 | HF-Stromversorgungseingang |
+| AVDD_BRF | 1,71 | 1,8 | 3,63 | 30 | RF-Stromversorgungseingang |
 | AVDD_DSI | 1,71 | 1,8 | 2,75 | 20 | MIPI-DSI-Stromversorgungseingang; muss versorgt werden |
 | VDD_SIP | 1,71 | 1,8 | 1,98 | 30 | Versorgungseingang für den im selben Gehäuse integrierten Speicherchip |
 | AVDD33 | 3,15 | 3,3 | 3,63 | 50 | Stromversorgungseingang |
@@ -70,7 +70,7 @@ SF32LB551 im QFN68L besitzt keine Pins VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_VOUT
 
 | Versorgungspins | Kondensator | Detaillierte Beschreibung |
 | :--- | :--- | :--- |
-| VDD1 VDD2 | 0,1 µF + 10 µF | VDD1 und VDD2 miteinander kurzschließen. Mindestens zwei Kondensatoren, 10 µF und 0,1 µF, nahe an den Pins platzieren |
+| VDD1 VDD2 | 0,1 µF + 10 µF | VDD1 und VDD2 miteinander verbinden. Mindestens zwei Kondensatoren, 10 µF und 0,1 µF, nahe an den Pins platzieren |
 | BUCK1_VSW BUCK1_VOUT | 0,1 µF + 4,7 µF | Mindestens zwei Kondensatoren, 4,7 µF und 0,1 µF, nahe an den Pins platzieren |
 | BUCK2_VSW BUCK2_VOUT | 0,1 µF + 4,7 µF | Mindestens zwei Kondensatoren, 4,7 µF und 0,1 µF, nahe an den Pins platzieren |
 | LDOVCC2_VOUT | 0,1 µF + 4,7 µF | Ist BUCK2 im BUCK-Modus konfiguriert, diesen Pin offen lassen; ist BUCK2 im LDO-Modus konfiguriert, BUCK2_VSW offen lassen, LDOVCC2_VOUT und BUCK2_VOUT kurzschließen und mindestens zwei Kondensatoren, 4,7 µF und 0,1 µF, nahe an den Pins platzieren |
@@ -89,13 +89,13 @@ SF32LB551 im QFN68L besitzt keine Pins VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_VOUT
 
 Platzieren Sie die erforderlichen Kondensatoren nahe an den zugehörigen Pins, halten Sie die BUCK-Stromschleifen kompakt und prüfen Sie den BUCK-/LDO-Betriebsmodus vor Beginn des PCB-Layouts. Überprüfen Sie die Reset-Schaltung und das POR-/BOR-Timing an der realen Hardware.
 
-Die Quellen widersprechen sich: Tabelle 3-3 des [chinesischen SiFli-Hardware-Anwendungshinweises](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) und Punkt 9 der [Schaltplan-Checkliste V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) nennen 1 µF für VDD_RTC, während [C0313 im Referenzschaltplan des Anwendungshinweises](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png) mit 0,1 µF beschriftet ist. Die Quellen erläutern nicht, wann welcher Wert gilt. Klären Sie den erforderlichen Wert für das konkrete Bauteil vor der Designfreigabe mit SiFli; lösen Sie den Widerspruch nicht durch Annahmen.
+Die Quellen widersprechen sich: Tabelle 3-3 des [chinesischen SiFli-Hardware-Anwendungshinweises](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) und Punkt 9 der [Schaltplan-Checkliste V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) nennen 1 µF für VDD_RTC, während [C0313 im Referenzschaltplan des Anwendungshinweises](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png) mit 0,1 µF beschriftet ist. Die Quellen erläutern nicht, wann welcher Wert gilt. Klären Sie den erforderlichen Wert für das konkrete Gerät vor der Designfreigabe mit SiFli; lösen Sie den Widerspruch nicht durch Annahmen.
 
-VDD1 und VDD2 müssen gleichzeitig eingeschaltet werden; SF32LB551 hat kein VDD2. Ziehen Sie RSTN zur Eingangsspannungsdomäne von VDD1 hoch und verbinden Sie 0,1 µF mit Masse. Die Referenzzeichnung kennzeichnet die Pull-up-Versorgung mit 1,8 V/3,3 V und verwendet einen 10-kΩ-Widerstand; wählen Sie den Pegel passend zur VDD1-Spannungsdomäne des Designs. Abbildung 5.1-1 zeigt einen POR-Pegel von 1,50 V, BOR einstellbar von 2,5 V bis 1,5 V und eine RSTN-Markierung bei 0,7 V. Die Messung in Abbildung 5.1-3 zeigt in diesem Beispiel etwa 700 µs zwischen Versorgungsanstieg und Reset-Freigabe; dies ist keine garantierte Verzögerung für jedes Design.
+VDD1 und VDD2 müssen gleichzeitig eingeschaltet werden; SF32LB551 hat kein VDD2. Ziehen Sie RSTN auf die Eingangsspannungsdomäne von VDD1 hoch und verbinden Sie einen 0,1-µF-Kondensator mit Masse. Die Referenzzeichnung kennzeichnet die Pull-up-Versorgung mit 1,8 V/3,3 V und verwendet einen 10-kΩ-Widerstand; wählen Sie den Pegel passend zur VDD1-Spannungsdomäne des Designs. Abbildung 5.1-1 zeigt einen POR-Pegel von 1,50 V, einen von 2,5 V bis 1,5 V einstellbaren BOR und eine RSTN-Markierung bei 0,7 V. Die Messung in Abbildung 5.1-3 zeigt in diesem Beispiel etwa 700 µs zwischen dem Anstieg der Versorgungsspannung und der Freigabe von Reset; dies ist keine garantierte Verzögerung für jedes Design.
 
-![Abbildung 5.1-1: Ein- und Ausschalt-Timing](../../sf32-products/chips/assets/55x/SF32LB55x-POR-BOR.png){ width="100%" loading="lazy" }
+![Abbildung 5.1-1: Ein- und Ausschaltverlauf](../../sf32-products/chips/assets/55x/SF32LB55x-POR-BOR.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Abbildung 5.1-1: Ein- und Ausschalt-Timing</em></div>
+<div align="center"><em>Abbildung 5.1-1: Ein- und Ausschaltverlauf</em></div>
 
 ![Abbildung 5.1-2: Reset-Schaltung](../../sf32-products/chips/assets/55x/SF32LB55x-RST-SCH.png){ width="100%" loading="lazy" }
 
@@ -123,8 +123,8 @@ Wählen Sie gemäß SiFlis Hardware-Anwendungshinweis eine BUCK-Induktivität vo
 
 | Moduskonfiguration | Detaillierte Beschreibung |
 | :--- | :--- |
-| High-Pegel | Nach dem Einschalten und Hochfahren des Chips wird der Download-Modus aufgerufen |
-| Low-Pegel | Nach dem Einschalten und Hochfahren des Chips springt er zum Start in den Benutzerprogrammbereich |
+| High-Pegel | Nach dem Einschalten und Hochfahren des Chips wechselt dieser in den Download-Modus |
+| Low-Pegel | Nach dem Einschalten und Hochfahren des Chips startet dieser das Benutzerprogramm |
 
 </div>
 
@@ -145,19 +145,19 @@ Der Mode-Pin gehört zur gleichen Spannungsdomäne wie VDDIOA. Halten Sie ihn mi
 
 </div>
 
-Platzieren Sie beide Quarze nahe am Chip, halten Sie die Leiterbahnen kurz und symmetrisch und sehen Sie Footprints für Anpassungskondensatoren vor. Schützen Sie die Quarznetze vor Störungen durch HF, BUCK, Display und Motor.
+Platzieren Sie beide Quarze nahe am Chip, halten Sie die Leiterbahnen kurz und symmetrisch und sehen Sie Footprints für Anpassungskondensatoren vor. Schützen Sie die Quarznetze vor Störungen durch RF, BUCK, Display und Motor.
 
-### 5.4. HF { #54-rf }
+### 5.4. RF { #54-rf }
 
-Das HF-Frontend des SF32LB55x enthält ein integriertes Breitband-Anpassungs- und Filternetzwerk. Legen Sie die HF-Leiterbahn mit einem Wellenwiderstand von 50 Ω aus und sehen Sie ein π-Anpassungsnetzwerk zur Filterung von Störaussendungen und zur Antennenanpassung vor. Bestimmen Sie die endgültigen Bauteilwerte anhand von Messungen mit der tatsächlichen Antenne und dem PCB-Layout. Ist die gewählte Antenne bereits angepasst, müssen im vorgesehenen Netzwerk normalerweise keine zusätzlichen Bauteile bestückt werden.
+Das RF-Frontend des SF32LB55x enthält ein integriertes Breitband-Anpassungs- und Filternetzwerk. Legen Sie die RF-Leiterbahn mit einem Wellenwiderstand von 50 Ω aus und sehen Sie ein π-Anpassungsnetzwerk zur Filterung von Störaussendungen und zur Antennenanpassung vor. Bestimmen Sie die endgültigen Bauteilwerte anhand von Messungen mit der tatsächlichen Antenne und dem PCB-Layout. Ist die gewählte Antenne bereits angepasst, müssen im vorgesehenen Netzwerk normalerweise keine zusätzlichen Bauteile bestückt werden.
 
-Führen Sie die HF-Leiterbahnen über einer durchgehenden Massefläche, platzieren Sie das Anpassungsnetzwerk möglichst nahe am Chip und den AVDD_BRF-Filter nahe am Pin. Halten Sie DC-DC-, VBAT-, Quarz-, Hochgeschwindigkeitstakt-, SPI-, SDIO-, I2S- und UART-Leiterbahnen vom HF-Bereich fern.
+Führen Sie die RF-Leiterbahnen über einer durchgehenden Massefläche, platzieren Sie das Anpassungsnetzwerk möglichst nahe am Chip und den AVDD_BRF-Filter nahe am Pin. Halten Sie DC-DC-, VBAT-, Quarz-, Hochgeschwindigkeitstakt-, SPI-, SDIO-, I2S- und UART-Leiterbahnen vom RF-Bereich fern.
 
-Die HF-Referenzschaltung setzt C0323 (15 pF/50 V) in Reihe mit ANT; die beiden Massezweige C0318 und C0319 bleiben unbestückt (NF). Dies sind Beispielwerte, keine universellen Antennenanpassungswerte.
+Die RF-Referenzschaltung setzt C0323 (15 pF/50 V) in Reihe mit ANT; die beiden Massezweige C0318 und C0319 bleiben unbestückt (NF). Dies sind Beispielwerte, keine universellen Antennenanpassungswerte.
 
-![Abbildung 5.4-1: Referenzschaltung zur HF-Anpassung](../../sf32-products/chips/assets/55x/SF32LB55x-RF-SCH.png){ width="100%" loading="lazy" }
+![Abbildung 5.4-1: Referenzschaltung zur RF-Anpassung](../../sf32-products/chips/assets/55x/SF32LB55x-RF-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Abbildung 5.4-1: Referenzschaltung zur HF-Anpassung</em></div>
+<div align="center"><em>Abbildung 5.4-1: Referenzschaltung zur RF-Anpassung</em></div>
 
 ### 5.5. Speicherschnittstellen { #55-storage-interfaces }
 
@@ -249,7 +249,7 @@ Jeder gezeigte PSRAM verwendet 1,8 V, drei 0,1-µF-Kondensatoren und einen 1-µF
 
 | Schnittstellensignal | QFN68 | BGA145/169 | Detaillierte Beschreibung |
 | :--- | :--- | :--- | :--- |
-| CS# | GPIO9 | PA61 | Chip-Select, aktiv Low |
+| CS# | GPIO9 | PA61 | Chip-Select, low-aktiv |
 | SO | GPIO7 | PA65 | Dateneingang (Daten-E/A-Leitung 1) |
 | WP# | GPIO6 | PA66 | Schreibschutz-Ausgang (Daten-E/A-Leitung 2) |
 | SI | GPIO8 | PA63 | Datenausgang (Daten-E/A-Leitung 0) |
@@ -264,7 +264,7 @@ Jeder gezeigte PSRAM verwendet 1,8 V, drei 0,1-µF-Kondensatoren und einen 1-µF
 
 | Schnittstellensignal | QFN68 | BGA145/169 | Detaillierte Beschreibung |
 | :--- | :--- | :--- | :--- |
-| CS# | GPIO16 | PA45 | Chip-Select, aktiv Low |
+| CS# | GPIO16 | PA45 | Chip-Select, low-aktiv |
 | SO | GPIO14 | PA49 | Dateneingang (Daten-E/A-Leitung 1) |
 | WP# | GPIO13 | PA51 | Schreibschutz-Ausgang (Daten-E/A-Leitung 2) |
 | SI | GPIO15 | PA47 | Datenausgang (Daten-E/A-Leitung 0) |
@@ -279,7 +279,7 @@ Jeder gezeigte PSRAM verwendet 1,8 V, drei 0,1-µF-Kondensatoren und einen 1-µF
 
 | Schnittstellensignal | QFN68 | BGA145/169 | Detaillierte Beschreibung |
 | :--- | :--- | :--- | :--- |
-| CS# | - | PB33 | Chip-Select, aktiv Low |
+| CS# | - | PB33 | Chip-Select, low-aktiv |
 | SO | - | PB36 | Dateneingang (Daten-E/A-Leitung 1) |
 | WP# | - | PB37 | Schreibschutz-Ausgang (Daten-E/A-Leitung 2) |
 | SI | - | PB35 | Datenausgang (Daten-E/A-Leitung 0) |
@@ -441,8 +441,8 @@ Der [SiFli-Hardware-Anwendungshinweis](https://github.com/OpenSiFli/SiFli-Wiki/b
 | JDI_G2 | PA77 | Grüne Bilddaten (gerade Pixel) |
 | JDI_B1 | PA78 | Blaue Bilddaten (ungerade Pixel) |
 | JDI_B2 | PA79 | Blaue Bilddaten (gerade Pixel) |
-| JDI_XFRP | PA45 | Flüssigkristall-Ansteuersignal ("An"-Pixel) |
-| JDI_VCOM/FRP | PA47 | Ansteuersignal der gemeinsamen Elektrode/Flüssigkristall-Ansteuersignal ("Aus"-Pixel) |
+| JDI_XFRP | PA45 | Flüssigkristall-Ansteuersignal („An“-Pixel) |
+| JDI_VCOM/FRP | PA47 | Ansteuersignal der gemeinsamen Elektrode/Flüssigkristall-Ansteuersignal („Aus“-Pixel) |
 
 </div>
 
@@ -495,11 +495,11 @@ Verwenden Sie für Motor-PWM einen GPIO mit GPTIM1_CHx. Wählen Sie das passende
 
 <div align="center"><em>Abbildung 5.7-2: Referenzschaltung des Motortreibers</em></div>
 
-<div align="center"><em>Tabelle 5.7-1: Wake-up-Interruptquellen</em></div>
+<div align="center"><em>Tabelle 5.7-1: Interrupt-Weckquellen</em></div>
 
 <div align="center" markdown>
 
-| Wake-up-Interruptquelle | QFN68 | BGA145/169 | Detaillierte Beschreibung |
+| Interrupt-Weckquelle | QFN68 | BGA145/169 | Detaillierte Beschreibung |
 | :--- | :--- | :--- | :--- |
 | WKUP_A0 | GPIO3 | PA77 | HCPU-Interruptsignal 0 |
 | WKUP_A1 | GPIO2 | PA78 | HCPU-Interruptsignal 1 |
@@ -514,9 +514,9 @@ Verwenden Sie für Motor-PWM einen GPIO mit GPTIM1_CHx. Wählen Sie das passende
 
 </div>
 
-Der SiFli-Hardware-Anwendungshinweis beschreibt einen fünfkanaligen 10-Bit-GPADC mit einem Eingangsbereich von 0–0,9 V. Für ein konservatives Platinendesign darf VIN nur unter 0,9 V direkt angeschlossen werden; höhere Spannungen müssen geteilt werden, sodass VADC unter 0,9 V bleibt. Für Batteriemessungen empfiehlt die Quelle R1:R2 etwa 5:1 und Widerstände im MΩ-Bereich: weniger Teilerstrom bedeutet längere Einschwingzeit. Die Schaltung enthält 0,1 µF von VADC nach Masse. Prüfen Sie mit `VADC = VIN × R2 / (R1 + R2)` die maximale Batteriespannung und Widerstandstoleranzen; die Ströme in Tabelle 5.7-2 gelten für VIN = 4,2 V, nicht für jeden Betriebsfall.
+Der SiFli-Hardware-Anwendungshinweis beschreibt einen fünfkanaligen 10-Bit-GPADC mit einem Eingangsbereich von 0–0,9 V. Für ein konservatives Platinendesign darf VIN nur unter 0,9 V direkt angeschlossen werden; höhere Spannungen müssen geteilt werden, sodass VADC unter 0,9 V bleibt. Für Akkumessungen empfiehlt die Quelle R1:R2 etwa 5:1 und Widerstände im MΩ-Bereich: weniger Teilerstrom bedeutet längere Einschwingzeit. Die Schaltung enthält 0,1 µF von VADC nach Masse. Prüfen Sie mit `VADC = VIN × R2 / (R1 + R2)` die maximale Akkuspannung und Widerstandstoleranzen; die Ströme in Tabelle 5.7-2 gelten für VIN = 4,2 V, nicht für jeden Betriebsfall.
 
-Quellenabweichung: Der höherrangige [OpenSiFli-Hardware-Anwendungshinweis](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) beschreibt einen 10-Bit-GPADC mit fünf Kanälen und einem Eingangsbereich von 0–0,9 V. Punkt 2 der [Schaltplan-Checkliste V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) legt 1,0 V als Maximum fest, nennt aber keine Kanalzahl. Das [Datenblatt SF32LB55x V1.7.2, Abschnitt 3.2.1](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf) beschreibt acht Single-Ended-Eingänge oder vier differentielle Eingangspaare mit Bereichen von 0–1,1 V bzw. −0,7 bis 0,7 V; die Pin-Tabelle führt GPADC_CH0–CH7 auf. Der aktuelle [SDK-ADC-Anwendungshinweis](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html) ordnet ebenfalls acht Kanäle (0–7) zu und nennt 1,1 V als maximale Abtastspannung. SiFli hat die Unterschiede bei Kanalzahl und Spannungsgrenzen nicht erklärt. Bis zur schriftlichen Klärung legt dieser Leitfaden weiterhin die Angaben der höher priorisierten Quelle als Entwurfsgrundlage zugrunde: fünf Kanäle und ein Eingangsbereich von 0–0,9 V. Halten Sie VADC unter 0,9 V, behandeln Sie 1,0 V und 1,1 V nicht als freigegebene Entwurfsgrenzen und bestätigen Sie die Kanalverfügbarkeit für das gewählte Bauteil und Gehäuse.
+Quellenabweichung: Der höherrangige [OpenSiFli-Hardware-Anwendungshinweis](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) beschreibt einen 10-Bit-GPADC mit fünf Kanälen und einem Eingangsbereich von 0–0,9 V. Punkt 2 der [Schaltplan-Checkliste V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) legt 1,0 V als Maximum fest, nennt aber keine Kanalzahl. Das [Datenblatt SF32LB55x V1.7.2, Abschnitt 3.2.1](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf) beschreibt acht Single-Ended-Eingänge oder vier differentielle Eingangspaare mit Bereichen von 0–1,1 V bzw. −0,7 bis 0,7 V; die Pin-Tabelle führt GPADC_CH0–CH7 auf. Der aktuelle [SDK-ADC-Anwendungshinweis](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html) ordnet ebenfalls acht Kanäle (0–7) zu und nennt 1,1 V als maximale Abtastspannung. SiFli hat die Unterschiede bei Kanalzahl und Spannungsgrenzen nicht erklärt. Bis zur schriftlichen Klärung legt dieser Leitfaden weiterhin die Angaben der höher priorisierten Quelle als Entwurfsgrundlage zugrunde: fünf Kanäle und ein Eingangsbereich von 0–0,9 V. Halten Sie VADC unter 0,9 V, behandeln Sie 1,0 V und 1,1 V nicht als freigegebene Entwurfsgrenzen und bestätigen Sie die Kanalverfügbarkeit für das gewählte Gerät und Gehäuse.
 
 ![Abbildung 5.7-3: GPADC-Eingang und Referenz-Spannungsteiler](../../sf32-products/chips/assets/55x/SF32LB55x-GPADC-SCH.png){ width="100%" loading="lazy" }
 
@@ -538,7 +538,7 @@ Quellenabweichung: Der höherrangige [OpenSiFli-Hardware-Anwendungshinweis](http
 
 Führen Sie I2C/SPI, Steuerung und Weckinterrupts von Herzfrequenz- und Beschleunigungssensoren über LCPU. Verwenden Sie DC-DC-Wandler, LDOs oder Lastschalter mit niedrigem Iq für bedarfsgerecht schaltbare Sensorversorgungen.
 
-Externes Bluetooth-Audio kommuniziert über HCPU-UART1. Passen Sie die Spannungspegel an oder verwenden Sie einen Pegelwandler; beim Abschalten des Moduls muss die Versorgung des Pegelwandlers gleichzeitig abgeschaltet werden, um Leckstrom zu vermeiden. Bleibt das Modul in Standby versorgt und ist sein Versorgungseingang aktiv-low, verwenden Sie einen LCPU-GPIO mit standardmäßigem PD-Verhalten.
+Externes Bluetooth-Audio kommuniziert über HCPU-UART1. Passen Sie die Spannungspegel an oder verwenden Sie einen Pegelwandler; beim Abschalten des Moduls muss die Versorgung des Pegelwandlers gleichzeitig abgeschaltet werden, um Leckstrom zu vermeiden. Bleibt das Modul in Standby versorgt und ist sein Versorgungseingang low-aktiv, verwenden Sie einen LCPU-GPIO mit standardmäßigem PD-Verhalten.
 
 <div align="center"><em>Tabelle 5.7-3: Debug- und Flash-Schnittstelle</em></div>
 
@@ -565,6 +565,6 @@ UART RXD darf nicht offen bleiben; aktivieren Sie beim Firmwarestart den interne
 
 Die Quellzeichnung verbindet VDD_1V8 mit Pin 1 (VTref). SWDIO und SWCLK sind jeweils über einen 22-Ω-Serienwiderstand mit Pin 7 beziehungsweise Pin 9 verbunden. Standard-[J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector) verwendet Pin 1 ebenfalls als [VTref](https://kb.segger.com/VTref), also als Eingang für die Zielspannungsreferenz und nicht als Stromversorgungsausgang des Debug-Probes. Prüfen Sie vor dem Anschluss eines Standardkabels die Steckerausrichtung und die Kompatibilität mit 1,8 V.
 
-![Abbildung 5.7-4: SWD-Quellschaltung: Adapterbelegung prüfen](../../sf32-products/chips/assets/55x/SF32LB55x-SWD-SCH.png){ width="100%" loading="lazy" }
+![Abbildung 5.7-4: SWD-Steckverbinder aus der Quelle: Adapterbelegung prüfen](../../sf32-products/chips/assets/55x/SF32LB55x-SWD-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Abbildung 5.7-4: SWD-Quellschaltung: Adapterbelegung prüfen</em></div>
+<div align="center"><em>Abbildung 5.7-4: SWD-Steckverbinder aus der Quelle: Adapterbelegung prüfen</em></div>

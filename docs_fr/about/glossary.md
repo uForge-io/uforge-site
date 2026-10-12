@@ -9,6 +9,7 @@ tags:
 Ce glossaire rassemble les sigles et termes employés sur μForge.io : vocabulaire général des systèmes embarqués et des communications sans fil, ainsi que noms propres à SiFli pour la plateforme SF32. Chaque entrée renvoie vers une page qui développe le sujet. Ce glossaire est un aide-mémoire ; il ne remplace pas le contexte de ces pages.
 
 ## Architecture et traitement { #architecture-and-processing }
+
 * **MCU** — **Microcontroller Unit (microcontrôleur).** Circuit intégré réunissant un cœur de processeur, de la mémoire et des périphériques d’entrée/sortie programmables. Il est optimisé pour exécuter un firmware dédié avec une faible surcharge, plutôt qu’un système d’exploitation généraliste.
 * **SoC** — **System on Chip (système sur puce).** Circuit intégré qui rassemble sur une même puce les circuits et composants nécessaires à un système informatique. Dans cette documentation, les composants SF32 sont classés comme des MCU : ils exécutent des firmwares de classe microcontrôleur et ne visent pas l’environnement complet d’un système d’exploitation pour processeur d’application.
 * **Arm Cortex-M33** — Architecture de processeur 32 bits Armv8-M Mainline utilisée par les cœurs applicatifs et Bluetooth de la famille SF32. Armv8-M Mainline permet d’ajouter l’extension de sécurité TrustZone, qui sépare matériellement le code et les données de confiance des autres. Contrairement aux Cortex-M3/M4 précédents, TrustZone dépend toutefois de la configuration de chaque implémentation silicium ; cette fonction n’est pas garantie pour tous les Cortex-M33 et n’est pas configurée sur les composants SF32LB52x à SF32LB58x actuels. Voir également STAR-MC1 ci-dessous et la [page du SF32LB52x](../sf32-products/chips/SF32LB52x.md).
@@ -20,12 +21,13 @@ Ce glossaire rassemble les sigles et termes employés sur μForge.io : vocabulai
 * **Accélérateur IA/ML** — Matériel qui accélère des traitements d’intelligence artificielle ou d’apprentissage automatique, par exemple l’inférence d’un petit réseau neuronal. Sa disponibilité dépend du composant ; vérifiez le sélecteur de produits et la fiche technique de la référence visée.
 
 ## Connectivité sans fil { #wireless-connectivity }
+
 * **BLE** — **Bluetooth Low Energy.** Mode radio Bluetooth à basse consommation sur lequel reposent de nombreux objets connectés et produits portables SF32.
 * **Wi-Fi** — Technologie de réseau local sans fil. Lorsqu’un produit SF32 documente la prise en charge du Wi-Fi externe, la connexion passe par son interface SDIO. Avant de figer la conception, vérifiez la référence exacte, le routage sur la carte, l’alimentation et la prise en charge logicielle.
 * **Bluetooth bimode** — Prise en charge de BLE et de Bluetooth Classic (BR/EDR) par la même radio. Cette configuration convient aux produits qui ont besoin des deux, par exemple pour diffuser de l’audio (Bluetooth Classic ou LE Audio) tout en conservant un canal de commande à basse consommation. Pris en charge par les SF32LB52x/56x/57x/58x ; le SF32LB55x ne prend en charge que BLE.
 * **GAP** — **Generic Access Profile.** Couche Bluetooth qui définit les rôles des appareils, la publicité et l’établissement des connexions ; elle constitue la base de toute application BLE.
 * **GATT** — **Generic Attribute Profile.** Couche Bluetooth qui définit la structure et l’échange des services et caractéristiques, c’est-à-dire les données exposées par un appareil BLE.
-* **Sibles** — Framework de services GATT du SiFli-SDK, construit au-dessus de la couche GAP standard. La plupart des produits Bluetooth SF32 partent d’un exemple existant fondé sur Sibles plutôt que de créer une base GATT de zéro. Voir la [vue d’ensemble Bluetooth](../learn/bluetooth/overview.md).
+* **Sibles** — Framework de services GATT du SiFli-SDK, construit au-dessus de la couche GAP standard. La plupart des produits Bluetooth SF32 partent d’un exemple existant fondé sur Sibles plutôt que de créer une base GATT de toutes pièces. Voir la [vue d’ensemble Bluetooth](../learn/bluetooth/overview.md).
 * **LE Audio** — Norme audio récente fondée sur Bluetooth Low Energy, qui comprend le codec LC3 et la diffusion Auracast, à distinguer des profils audio Bluetooth Classic. Prise en charge par les SF32LB52x/56x/57x/58x, mais pas par le SF32LB55x. Voir [Bluetooth Audio et LE Audio](../learn/bluetooth/processor.md).
 * **OTA** — **Over-The-Air (mise à jour du firmware par liaison radio).** Mise à jour du firmware d’un appareil par une liaison sans fil, généralement BLE, plutôt que par une connexion filaire.
 * **DFU** — **Device Firmware Update.** Catégorie générale de mécanismes et protocoles de mise à jour du firmware d’un appareil ; les mises à jour OTA par Bluetooth reposent généralement sur un mécanisme DFU.
@@ -49,6 +51,7 @@ Ce glossaire rassemble les sigles et termes employés sur μForge.io : vocabulai
 * **I2S** — **Inter-IC Sound.** Interface audio numérique standard permettant de connecter des codecs, des DAC ou d’autres périphériques audio.
 
 ## Alimentation et fiabilité { #power-and-reliability }
+
 * **PMU** — **Power Management Unit.** Bloc intégré aux puces SF32 qui assure la régulation des tensions, notamment par les sorties BUCK/LDO. Certaines conceptions l’associent à un PMIC SiFli externe, tel que le SF30147C, pour fournir d’autres rails d’alimentation.
 * **PMIC** — **Power Management IC.** Circuit intégré externe dédié à la fourniture de rails régulés supplémentaires au-delà de ceux de la PMU interne du MCU.
 * **LDO** — **Low-Dropout Regulator.** Régulateur linéaire et l’un des étages de sortie de la PMU intégrée aux composants SF32.
@@ -57,6 +60,7 @@ Ce glossaire rassemble les sigles et termes employés sur μForge.io : vocabulai
 * **PSA** — **Platform Security Architecture.** Cadre de sécurité et programme de certification d’Arm. Certaines pages de puces SF32 indiquent **PSA Certified Level 1** ; vérifiez le statut et le niveau de certification de la référence exacte dans sa documentation officielle, sans les extrapoler à toute la famille.
 
 ## Stockage et mémoire { #storage-and-memory }
+
 * **SRAM** — **Static RAM.** Mémoire de travail rapide intégrée à la puce, utilisée pour le code et les données de l’application.
 * **PSRAM** — **Pseudo-Static RAM.** Mémoire externe de plus grande capacité, souvent intégrée en SiP dans les modules SF32. Elle complète la SRAM interne pour les tampons graphiques et les applications plus volumineuses.
 * **NOR / NAND Flash** — Deux types de mémoire flash non volatile utilisés pour le firmware et les ressources. La NOR permet des lectures aléatoires rapides et convient souvent à l’exécution directe du code (XiP, Execute-in-Place). La NAND/SD-NAND offre une densité bien supérieure au prix d’accès aléatoires moins rapides ; elle convient au stockage en volume d’images, de polices et de journaux.
@@ -64,6 +68,7 @@ Ce glossaire rassemble les sigles et termes employés sur μForge.io : vocabulai
 * **eMMC** — **Embedded MultiMediaCard.** Interface de stockage NAND géré utilisée dans les conceptions SF32 nécessitant une capacité de stockage plus élevée.
 
 ## Périphériques et interfaces { #peripherals-and-interfaces }
+
 * **GPIO** — **General-Purpose Input/Output.** Broches numériques configurables pour les signaux simples, les boutons, les LED et les interfaces réalisées par bit-banging logiciel.
 * **I/O** — **Input/Output.** Terme générique désignant les broches et signaux périphériques par lesquels un appareil échange des données ou des commandes avec le reste du système.
 * **UART** — **Universal Asynchronous Receiver/Transmitter.** Interface série standard pour la console, le débogage et les communications simples point à point.

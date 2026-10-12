@@ -88,7 +88,7 @@ Für einen reproduzierbaren Ausgangspunkt verwenden Sie ein veröffentlichtes Re
     ```
 
 !!! info "SiFli-SDK enthält Submodule"
-    Die Option „Download ZIP“ von GitHub enthält nicht die erforderlichen Submodule. Verwenden Sie `git clone --recursive`. Falls Sie bereits ohne Submodule geklont haben, führen Sie `git submodule update --init --recursive` im SDK-Root aus.
+    Die Option „Download ZIP“ von GitHub enthält nicht die erforderlichen Submodule. Verwenden Sie `git clone --recursive`. Falls Sie bereits ohne Submodule geklont haben, führen Sie `git submodule update --init --recursive` im Stammverzeichnis des SDK aus.
 
 !!! note "Arbeiten Sie vom chinesischen Festland aus?"
     Setzen Sie vor der Installation `SIFLI_SDK_MIRROR_CHINA` in Ihrer Shell auf `1`: Verwenden Sie unter macOS/Linux `export SIFLI_SDK_MIRROR_CHINA=1` und in PowerShell `$env:SIFLI_SDK_MIRROR_CHINA = "1"`. Sie können das SDK auch aus dem [Gitee-Spiegelrepository](https://gitee.com/SiFli/sifli-sdk) statt von GitHub klonen. Weitere Informationen enthält die [Installationsanleitung](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/install/index.html).
@@ -114,7 +114,7 @@ Der Wert für `scons --board` ist der Name des Board-Verzeichnisses unter `custo
 
 </div>
 
-Bei einem Dual-Core-Board wird ohne Kern-Suffix die HCPU-Konfiguration gebaut. Sie können `_hcpu` explizit angeben oder `_lcpu` ergänzen, um die LCPU-Konfiguration zu bauen (zum Beispiel `scons --board=eh-lb551_lcpu`). Fehlt Ihre Board-Konfiguration in der Tabelle, finden Sie den aktuellen Stand in SiFlis [Liste der unterstützten Boards](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html).
+Bei einem Dual-Core-Board wird ohne Kern-Suffix die HCPU-Konfiguration gebaut. Sie können `_hcpu` explizit angeben oder `_lcpu` ergänzen, um die LCPU-Konfiguration zu bauen (zum Beispiel `scons --board=eh-lb551_lcpu`). Fehlt Ihre Board-Konfiguration in der Tabelle, nutzen Sie SiFlis [Liste der unterstützten Boards](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html) als maßgebliche Quelle.
 
 ## Das „Hello World“-Beispiel bauen { #build-the-hello-world-example }
 
@@ -151,7 +151,7 @@ Halten Sie das Board über USB verbunden und führen Sie dann das vom Build erze
     Geben Sie bei der Aufforderung `please input serial port number` nur die Nummer Ihres COM-Ports ein (z. B. `19` für `COM19`) und drücken Sie die Eingabetaste.
 
 !!! tip
-    Wenn das Download-Werkzeug nicht in den UART-Downloadmodus wechselt, setzen Sie das Board unmittelbar vor dem Start der Übertragung zurück. Bleibt das Problem bestehen, folgen Sie der Flash-Anleitung für das jeweilige Board.
+    Wenn das Download-Werkzeug nicht in den UART-Download-Modus wechselt, setzen Sie das Board unmittelbar vor dem Start der Übertragung zurück. Bleibt das Problem bestehen, folgen Sie der Flash-Anleitung für das jeweilige Board.
 
 ## Ergebnis ansehen { #see-it-run }
 
@@ -162,15 +162,15 @@ Sobald der Flash-Vorgang abgeschlossen ist, setzen Sie das Board zurück oder la
 Fahren Sie fort, sobald alle folgenden Punkte erfüllt sind:
 
 - Das Projekt wird fehlerfrei gebaut.
-- Das UART-Download-Skript wird abgeschlossen.
+- Das UART-Download-Skript wird vollständig ausgeführt.
 - Die serielle Konsole zeigt lesbare Boot-Ausgaben.
 - Das `hello_world`-Beispiel gibt nach dem Reset Text aus.
 
 ## Wie es weitergeht { #where-to-go-next }
 
-- **Chip wählen:** vergleichen Sie die Serien LB52, LB55, LB56 und LB58 in der [SF32-Familienübersicht](../../sf32-products/family/SF32_family.md).
-- **Weitere Beispiele erkunden:** über `hello_world` hinaus liefert das SDK Beispiele für BLE, klassisches Bluetooth, LVGL-Grafik, Audio und Energiesparmodi.
-- **Ein anderes Framework bevorzugen:** fahren Sie fort mit [Arduino](../arduino/getting-started-arduino.md), [Zephyr](../zephyr/getting-started-zephyr-upstream.md) oder [MicroPython](../micropython/getting-started-micropython.md).
+- **Chip wählen:** Vergleichen Sie die Serien LB52, LB55, LB56 und LB58 in der [SF32-Familienübersicht](../../sf32-products/family/SF32_family.md).
+- **Weitere Beispiele erkunden:** Über `hello_world` hinaus liefert das SDK Beispiele für BLE, klassisches Bluetooth, LVGL-Grafik, Audio und Energiesparmodi.
+- **Ein anderes Framework bevorzugen:** Fahren Sie fort mit [Arduino](../arduino/getting-started-arduino.md), [Zephyr](../zephyr/getting-started-zephyr-upstream.md) oder [MicroPython](../micropython/getting-started-micropython.md).
 - **Sie kommen nicht weiter?** In der [SiFli-FAQ](https://wiki.sifli.com/en/faq/index.html) finden Sie Hilfe zu häufigen Problemen mit Toolchain, J-Link und Debugging.
 
 ## Den funktionierenden Ausgangsstand dokumentieren { #what-sifli-should-add }

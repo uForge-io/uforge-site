@@ -69,13 +69,13 @@ Ein erfolgreicher Build bestätigt, dass Boardziel und Toolchain im Arbeitsberei
 
 ## Board flashen { #flash-the-board }
 
-Das Upstream-Board legt `sftool` als Standard-Flash-Runner fest. Installieren Sie [OpenSiFli sftool](https://github.com/OpenSiFli/sftool), stellen Sie sicher, dass es in `PATH` liegt, und versetzen Sie das Board gemäß der Board-Dokumentation in den seriellen Downloadmodus. Führen Sie dann Folgendes aus:
+Das Upstream-Board legt `sftool` als Standard-Flash-Runner fest. Installieren Sie [OpenSiFli sftool](https://github.com/OpenSiFli/sftool), stellen Sie sicher, dass es in `PATH` liegt, und versetzen Sie das Board gemäß der Board-Dokumentation in den seriellen Download-Modus. Führen Sie dann Folgendes aus:
 
 ```bash
 west flash
 ```
 
-Wenn das Flashen fehlschlägt, prüfen Sie die Auswahl des seriellen Ports, den Downloadmodus und die Runner-Hinweise in der [Board-Dokumentation](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html).
+Wenn das Flashen fehlschlägt, prüfen Sie die Auswahl des seriellen Ports, den Download-Modus und die Runner-Hinweise in der [Board-Dokumentation](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html).
 
 ## Serielle Konsole öffnen { #open-the-serial-console }
 
@@ -99,7 +99,7 @@ Wählen Sie anhand der Tabelle unterstützter Funktionen in der Upstream-Boarddo
 |:--------|:------|
 | `west boards` zeigt das SF32-Ziel nicht an | Prüfen Sie, ob der Arbeitsbereich mit Zephyr Upstream v4.3.0 oder höher initialisiert wurde und `west update` abgeschlossen ist. |
 | Build scheitert vor dem Kompilieren | Prüfen Sie, ob die Python-Umgebung aktiv, das Zephyr SDK für ARM Cortex-M installiert und die Anforderungen für v4.3.0 installiert sind. |
-| Board lässt sich bauen, aber nicht flashen | Prüfen Sie, ob `sftool` installiert und in `PATH` ist, der serielle Port stimmt und sich das Board im seriellen Downloadmodus befindet. |
+| Board lässt sich bauen, aber nicht flashen | Prüfen Sie, ob `sftool` installiert und in `PATH` ist, der serielle Port stimmt und sich das Board im seriellen Download-Modus befindet. |
 | Keine serielle Ausgabe | Prüfen Sie `usart1`, `1000000` Baud, die USB-zu-UART-Verbindung und ob ein anderes Terminal den Port belegt. |
 | Ein Peripheriebeispiel schlägt fehl | Prüfen Sie die Tabelle unterstützter Board-Funktionen und die Beispielkonfiguration. Das Basis-Boardziel aktiviert nicht zwingend alle Peripheriegeräte. |
 
@@ -108,5 +108,5 @@ Wählen Sie anhand der Tabelle unterstützter Funktionen in der Upstream-Boarddo
 ## Vor der Produktintegration { #before-product-integration }
 
 - Prüfen Sie die Tabelle der unterstützten Funktionen des Upstream-Boards und die Konfiguration des vorgesehenen Beispiels.
-- Validieren Sie die benötigten Schnittstellen, Leistung, Speichernutzung und den Stromverbrauch auf dem Zielboard mit der Produktkonfiguration. Ein erfolgreicher Hello-World-Build ist lediglich ein Smoke-Test der Toolchain.
+- Validieren Sie die benötigten Schnittstellen, die Leistung, die Speichernutzung und das Stromverbrauchsverhalten auf dem Zielboard und mit der Produktkonfiguration. Ein erfolgreicher Hello-World-Build ist lediglich ein Smoke-Test der Toolchain.
 - Vergleichen Sie den Funktionsumfang des Upstream-Ziels mit [SiFli-SDK](../sifli/getting-started-sifli-sdk.md), wenn Ihr Design eine für dieses Zephyr-Ziel nicht aufgeführte oder validierte Funktion benötigt.

@@ -12,6 +12,6 @@ Merci d'avoir contacté μForge.io. Nous vous répondrons rapidement.
 
 En attendant, vous pouvez continuer à parcourir le site :
 
-- [Prise en main](../getting-started/index.md)
-- [Présentation de la famille SF32](../sf32-products/family/SF32_family.md)
-- [Retour au formulaire de contact](contact.md)
+- [Vue d'ensemble de la prise en main](../getting-started/index.md)
+- [Famille SF32](../sf32-products/family/SF32_family.md)
+- [Nous contacter](contact.md)

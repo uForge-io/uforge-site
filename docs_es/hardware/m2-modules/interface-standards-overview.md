@@ -26,7 +26,7 @@ Esta sección presenta las convenciones para describir las interfaces de módulo
 
 ## Nomenclatura y compatibilidad eléctrica { #what-is-stable-and-what-must-be-verified }
 
-Aplique las reglas de nomenclatura de forma coherente en las descripciones de módulos, esquemas, notas de BOM y documentación del producto. Los nombres describen el perfil de interfaz previsto, no una especificación eléctrica o mecánica definitiva. Ni un nombre de perfil ni una forma de conector coincidente demuestran que un módulo y una placa portadora sean intercambiables.
+Aplique las reglas de nomenclatura de forma coherente en las descripciones de módulos, esquemáticos, notas de BOM y documentación del producto. Los nombres describen el perfil de interfaz previsto, no una especificación eléctrica o mecánica definitiva. Ni un nombre de perfil ni una forma de conector coincidente demuestran que un módulo y una placa portadora sean intercambiables.
 
 La definición a nivel de pin no garantiza que todos los módulos de μForge o encapsulados SF32 admitan todas las señales e interfaces asignadas ni todas las combinaciones de uso simultáneo. Antes de cerrar el diseño, contraste todos los puntos siguientes con el módulo, el chip y el encapsulado exactos que haya seleccionado y con la guía de diseño de hardware correspondiente:
 
@@ -43,6 +43,6 @@ La definición a nivel de pin no garantiza que todos los módulos de μForge o e
 2. Use las [Reglas de nomenclatura de la interfaz M2](M2%20Interface%20Naming%20Rules.md) para definir sin ambigüedad el perfil previsto.
 3. Use la [Definición de la interfaz M2](M2-interface-definition.md) para identificar señales candidatas y conflictos de uso compartido.
 4. Confirme cada contacto usado en la documentación específica del módulo y en las fuentes de SiFli aplicables.
-5. Antes de iniciar el diseño de PCB, registre en la revisión del esquema las versiones de los documentos, las revisiones del módulo y de la placa portadora, las excepciones confirmadas y los puntos pendientes.
+5. Antes de iniciar el diseño de PCB, registre en la revisión del esquemático las versiones de los documentos, las revisiones del módulo y de la placa portadora, las excepciones confirmadas y los puntos pendientes.
 
 Para revisar por completo la placa portadora, continúe con [Diseño para producción](../design-for-production.md). Para conocer los requisitos de implementación específicos del módulo, consulte la guía correspondiente en el grupo **Guías de diseño de hardware**.

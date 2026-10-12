@@ -1,7 +1,7 @@
 ---
 icon: lucide/layout-dashboard
 title: "LVGL SDKサンプル"
-description: "SiFli-SDKのLVGLサンプルを目的別に選び、画面の立ち上げ、ウィジェット、UI生成、圧縮リソース、動画、フォント、多言語対応を検証する。"
+description: "SiFli-SDKのLVGLサンプルを目的別に選び、画面の立ち上げ、ウィジェット、デザインツール、圧縮アセット、アニメーション、メディア、ウェアラブル向けUIを検証する。"
 tags:
   - グラフィックス
   - LVGL
@@ -24,10 +24,10 @@ SiFli-SDKのLVGLサンプルは、ディスプレイとUIを検証する出発�
 
 | 目的 | ここから始める | 確立できること | 次に進むタイミング |
 |:-----------------|:-----------|:----------------------------|:-------------|
-| 標準的なLVGLアプリケーションを立ち上げる | **[LVGL v8デモ](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_demos/README.html)**、**[LVGL v8公式サンプル](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_examples/README.html)**、**[LVGL v9デモ](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v9_demos/README.html)**、または**[LVGL v9公式サンプル](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v9_examples/README.html)** | 選択したLVGLバージョン、ボードのディスプレイドライバ、レンダリングループ、基本ウィジェット | 実際のパネルで画面更新（flush）処理と入力デバイスが安定して動作したら |
+| 標準的なLVGLアプリケーションを立ち上げる | **[LVGL v8デモ](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_demos/README.html)**、**[LVGL v8公式サンプル](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_examples/README.html)**、**[LVGL v9デモ](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v9_demos/README.html)**、または**[LVGL v9公式サンプル](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v9_examples/README.html)** | 選択したLVGLバージョン、ボードのディスプレイドライバー、レンダリングループ、基本ウィジェット | 実際のパネルで画面更新（flush）処理と入力デバイスが安定して動作したら |
 | UIデザインワークフローを評価する | **[gui_guider](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_tools_example/NXP_GUI_guider/README.html)**、**[SquareLine](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_tools_example/Square_Line/README.html)**、または**[EEZ Studio](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_tools_example/eez_studio/README.html)**の例 | 生成されたUIコードをSDKプロジェクトにどう組み込むか | 生成コードが問題なくビルドでき、LVGLのバージョンがプロジェクトと一致したら |
 | 焦点を絞ったUIの挙動を試作する | **[Basechart](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_basechart/README.html)**、**[Baselabel](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_baselabel/README.html)**、**[Follow](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_follow/README.html)**、**[Imgarray](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_imgarray/README.html)**、**[Imgbar](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_imgbar/README.html)**、**[Mulroller](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_mulroller/README.html)**、**[Multanim](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_multanim/README.html)**、**[Multlist](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_multlist/README.html)**、**[Multroller](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_multroller/README.html)**、**[Multslider](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_multslider/README.html)**、**[Sector](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_sector/README.html)**、**[Select](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_select/README.html)**、または**[Timeline](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_timeline/README.html)** | 特定のインタラクション、ウィジェット、配置、あるいはアニメーションパターン | 単体の表示要素から複数要素を組み合わせた製品画面へ進むとき |
-| アセット、アニメーション、またはメディアを検証する | **[eZipの動的読み込みv8](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/ezip/README.html)** / **[v9](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/ezip_v9/README.html)**、**[Lottie](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_lottie/README.html)**、**[ローカル動画再生](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_media/README.html)**、または**[ストリーミング再生](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/streaming_media/README.html)** | リッチなコンテンツを保存・デコード・描画・更新する処理経路 | 実機でリソース容量、メモリ配置、更新頻度、消費電力を測定し、製品の制約を満たすことを確認できたら |
+| アセット、アニメーション、またはメディアを検証する | **[eZipの動的読み込みv8](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/ezip/README.html)** / **[v9](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/ezip_v9/README.html)**、**[Lottie](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_lottie/README.html)**、**[ローカル動画再生](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_media/README.html)**、または**[ストリーミング再生](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/streaming_media/README.html)** | リッチなコンテンツを保存・デコード・描画・更新する処理経路 | 実機でリソース容量、メモリー配置、更新頻度、消費電力を測定し、製品の制約を満たすことを確認できたら |
 | 製品を想定した一連のUIを構築する | **[電子コンパス](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/compass/README.html)**、**[ゲーム索引](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/games/index.html)**（[マインスイーパーのREADME](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/lvgl/games/minesweeper/README.html)）、または**[時計UI v8](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/watch/README.html)** / **[v9](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/watch_v9/README.html)** | 画面遷移、インタラクション、複数機能を含む表示負荷 | 製品固有のデータ、ライフサイクルの挙動、性能限界を使ってデモ内容を置き換えられる段階になったら |
 
 </div>
@@ -44,15 +44,15 @@ LVGLサンプルを製品向けに変更する前に、サンプルで確認で�
 
 | 対象範囲 | サンプルで確認できること | 製品側で別途確認すること |
 |:---------|:--------------------------|:--------------------------------|
-| ボードとパネル | 既知のSDKボード構成とディスプレイ経路 | 実際に使うパネル、タッチコントローラ、電源投入シーケンス、ピン機能の割り当て、リセットタイミング、量産テスト手順 |
-| LVGL | バージョンごとの初期化とサンプルUIの動作 | 製品の画面構成、イベント管理の責務分担、メモリ上限、画面更新方針 |
+| ボードとパネル | 既知のSDKボード構成とディスプレイ経路 | 実際に使うパネル、タッチコントローラー、電源投入シーケンス、ピン機能の割り当て、リセットタイミング、量産テスト手順 |
+| LVGL | バージョンごとの初期化とサンプルUIの動作 | 製品の画面構成、イベント管理の責務分担、メモリー上限、画面更新方針 |
 | アセット | サポートされているサンプルアセットパス | アセットフォーマット、ストレージサイズ、ロード時間、キャッシュポリシー、ライセンス、失敗時の処理 |
 | レンダリング | 動作する描画・flushループ | 更新領域の管理方針、バッファ数、カラーフォーマット、DMA/キャッシュ処理、負荷下でのUI応答性 |
 | アプリケーション | 画面上で確認できるデモの動作 | センサー、Bluetooth、ストレージ、計時、低消費電力への遷移、復旧、ユーザーデータ |
 
 </div>
 
-まず実際のディスプレイとパネルインターフェースを確認し、基本的な画面更新（flush）処理を検証してください。LVGLデモだけで最終的なグラフィックス構成の準備が整ったと判断せず、[グラフィックス概要](overview.md)と[ディスプレイコントローラ](display-controller.md)も参照してください。
+まず実際のディスプレイとパネルインターフェースを確認し、基本的な画面更新（flush）処理を検証してください。LVGLデモだけで最終的なグラフィックス構成の準備が整ったと判断せず、[グラフィックス概要](overview.md)と[ディスプレイコントローラー](display-controller.md)も参照してください。
 
 ## LVGLバージョンを意図的に選ぶ { #choose-the-lvgl-version-deliberately }
 
@@ -71,7 +71,7 @@ LVGLサンプルを製品向けに変更する前に、サンプルで確認で�
 
 gui_guiderとEEZ Studioの公式サンプルは、どちらもLVGL v8を指定しています。SquareLineでは生成コードが使うデフォルトテーマも有効にします。生成されたサブディレクトリをビルド対象に含め、任意のeZip変換も公式手順に従ってください。ファイルのコピーだけでは組み込みは完了しません。
 
-生成コードはUIの構築を速めますが、ディスプレイドライバ、バッファ設計、入力ドライバ、電力管理の方針、統合テストの代わりにはなりません。再エクスポートで製品固有の変更を誤って上書きしないよう、生成ファイルと手作業で記述したアプリケーションロジックを分けて管理してください。
+生成コードはUIの構築を速めますが、ディスプレイドライバー、バッファ設計、入力ドライバー、電力管理の方針、統合テストの代わりにはなりません。再エクスポートで製品固有の変更を誤って上書きしないよう、生成ファイルと手作業で記述したアプリケーションロジックを分けて管理してください。
 
 ## ウィジェットとインタラクションのパターン { #widget-and-interaction-patterns }
 
@@ -86,7 +86,7 @@ LVGL v8の個別サンプルで、必要なUI動作を検証できます。た�
 
 個別ウィジェットのサンプルごとに対応ボードは異なります。たとえばMultanimとMultlistの**Supported Boards**には`sf32lb52-lcd_n16r8`と`sf32lb52-lchspi-ulp`が記載されていますが、後段の汎用ビルド手順ではより広い52x/56x/58xの対象が言及され、`eh-lb563`がビルド例として示されています。これらは同じ対応範囲を示すものではありません。該当READMEと現在のプロジェクト設定を確認し、インデックスやURLから他のウィジェットの互換性を推測しないでください。
 
-製品で特定の操作部品の動作が懸念される場合は、対応するサンプルから検証してください。最初は変更範囲を絞り、元の部品を動かしてから製品のデータへ置き換えます。大きな画面に組み込む前に、再描画の処理量とメモリ使用量を測定してください。見た目が単純でも、複数の部品を組み合わせるとフレームバッファ、グラフィックスリソースの読み出し帯域、入力イベントの処理スケジュールに負荷がかかります。
+製品で特定の操作部品の動作が懸念される場合は、対応するサンプルから検証してください。最初は変更範囲を絞り、元の部品を動かしてから製品のデータへ置き換えます。大きな画面に組み込む前に、再描画の処理量とメモリー使用量を測定してください。見た目が単純でも、複数の部品を組み合わせるとフレームバッファ、グラフィックスリソースの読み出し帯域、入力イベントの処理スケジュールに負荷がかかります。
 
 ## アセット、アニメーション、メディアのワークロード { #asset-animation-and-media-workloads }
 
@@ -94,7 +94,7 @@ eZipの動的読み込み例は、LVGL v8とLVGL v9の両方で利用可能で�
 
 GIF/APNGアニメーション素材向けに、SiFliは**Multimedia > AGIF**に [AGIF/APNG + LVGL v8](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/agif/lvgl/README.html)と [AGIF/APNG + LVGL v9](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/agif/lvgl_v9/README.html)の例も用意しています。各READMEには`eh-lb525`が記載されています。一方、現行の [GCCビルドマトリクス](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml)では、両方のプロジェクトパスが`devkit_lcd_boards`に登録されています。マトリクスへの登録はビルド対象を示すものであり、そのグループ内の全ボードで実機動作が検証済みという意味ではありません。製品の基準例として使う前に、対象ボードとSDKリビジョンを確認してください。
 
-動的eZipサンプルでは、ファイルパスによるアクセスとSRAM/PSRAMへの事前読み込みを比較できます。事前読み込みは追加メモリを使いますが、繰り返しのファイル読み込みを減らせます。リソース形式をLVGL v8/v9に合わせてください。公式v9のパスには、v8と異なり`A:/`などのドライブ接頭辞が必要です。実際のストレージ構成とドライブ文字の設定を確認します。v9 READMEには`sf32lb52-lcd_n16r8`、`sf32lb52-lcd_a128r16`、`sf32lb52-lchspi-ulp`、`sf32lb52-core_e8r16`、`sf32lb56-lcd_a128r12n1`、`sf32lb56-lcd_n16r12n1`、`sf32lb58-lcd_n16r32n1_dsi`、`sf32lb58-lcd_a128r32n1_qspi`、`sf32lb58-lcd_n16r32n1_qspi`が明記されています。この一覧はv9 READMEの対象であり、v8に転用したり、他のボードも対応していると推測したりしないでください。eZipのドキュメントでは、`-winsize 2048`の変換オプションが必要なのはSF32LB57のみです。
+動的eZipサンプルでは、ファイルパスによるアクセスとSRAM/PSRAMへの事前読み込みを比較できます。事前読み込みは追加メモリーを使いますが、繰り返しのファイル読み込みを減らせます。リソース形式をLVGL v8/v9に合わせてください。公式v9のパスには、v8と異なり`A:/`などのドライブ接頭辞が必要です。実際のストレージ構成とドライブ文字の設定を確認します。v9 READMEには`sf32lb52-lcd_n16r8`、`sf32lb52-lcd_a128r16`、`sf32lb52-lchspi-ulp`、`sf32lb52-core_e8r16`、`sf32lb56-lcd_a128r12n1`、`sf32lb56-lcd_n16r12n1`、`sf32lb58-lcd_n16r32n1_dsi`、`sf32lb58-lcd_a128r32n1_qspi`、`sf32lb58-lcd_n16r32n1_qspi`が明記されています。この一覧はv9 READMEの対象であり、v8に転用したり、他のボードも対応していると推測したりしないでください。eZipのドキュメントでは、`-winsize 2048`の変換オプションが必要なのはSF32LB57のみです。
 
 [Lottie](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_lottie/README.html)、[ローカル動画再生](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_media/README.html)、[ストリーミング再生](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/streaming_media/README.html)は、それぞれ異なる処理経路を検証するサンプルです。負荷の大小がこの順に決まるわけではありません。Lottie READMEは**未検証**と明記し、`eh-lb563`とSF32LB52x/SF32LB56xシリーズを挙げていますが、現行GCCビルドマトリクスではプロジェクトの登録がコメントアウトされています。このボード一覧を検証済みの対象とみなさないでください。ローカル動画READMEは`eh-lb523`と`sf32lb52-lcd_n16r8`を明示していますが、より広い対象を示す汎用ビルド手順も含みます。こちらもGCCビルドマトリクスではプロジェクトの登録がコメントアウトされているため、別の対象で使う場合はSDKの実際のチェックアウトを確認してください。サンプルは`disk/video_example.mp4`のH.264動画を再生し、TFカードを正常にマウントできた場合はカードのルートにある`video_example.mp4`を優先して読み込みます。ストリーミングREADMEが挙げるボードは`sf32lb52-lchspi-ulp`のみです。スマートフォンのBluetooth PANテザリングでネットワークに接続し、FFmpegを使います。BLEで動画を転送するサンプルではありません。
 
@@ -112,7 +112,7 @@ GIF/APNGアニメーション素材向けに、SiFliは**Multimedia > AGIF**に 
 
 電子コンパスと時計UIのサンプルでは、表示処理とアプリケーションの動作を合わせて確認できます。画面構成、入力・アニメーションのタイミング、表示負荷が増えた場合の影響を調べる際に利用してください。ゲーム索引にはマインスイーパーのサンプルがあります。READMEに記載されているのは`eh-lb563`とSF32LB52x/56xで、58xは含まれていません。58xで使う場合は、現在のSDKソースで対応状況を確認してください。
 
-ドキュメントに記載されたコンパスの基準構成は、`sf32lb52-lchspi-ulp`でMMC56x3の3軸磁力計をI2C接続して使用します。製品ではドライバ、配線、校正条件を確認してください。画面に方位角が表示されるだけでは、測定精度は保証できません。
+ドキュメントに記載されたコンパスの基準構成は、`sf32lb52-lchspi-ulp`でMMC56x3の3軸磁力計をI2C接続して使用します。製品ではドライバー、配線、校正条件を確認してください。画面に方位角が表示されるだけでは、測定精度は保証できません。
 
 ゲームや時計UIのサンプルは画面遷移を検討する出発点になります。ただし、データの管理主体、低消費電力時の動作、画面のウェイクアップ方針、通知、障害復旧は製品側で定義する必要があります。
 
@@ -130,14 +130,14 @@ v8の時計UI READMEにはSF32LB52x、SF32LB56x、SF32LB58xのLCDシリーズと
 | ハードウェアで実行する | 写真/動画、シリアルログ、パネルとタッチの挙動 | 実際のディスプレイと入力の経路を確認する |
 | 1つの製品要素を追加する | 変更履歴と、フレームレートおよび画面更新に関する測定結果 | 変更による不具合の原因を特定しやすくする |
 | 製品負荷をかける | Bluetooth、センサー、ストレージ、低消費電力への遷移を伴うUIの応答性 | 単体デモでは見えない組み込み時の制約を見つける |
-| 最終的な制約を記録する | バッファ使用量、メモリ配置、フレームレート、電力、既知の故障挙動 | サンプルを保守可能な技術資料にする |
+| 最終的な制約を記録する | バッファ使用量、メモリー配置、フレームレート、電力、既知の故障挙動 | サンプルを保守可能な技術資料にする |
 
 </div>
 
 ## 関連リソース { #related-resources }
 
 - ディスプレイ選定、フレームバッファ計画、LVGL統合、システムのトレードオフについては[グラフィックス概要](overview.md)。
-- コントローラ、バッファ、画面更新（flush）経路については[ディスプレイコントローラ](display-controller.md)。
+- コントローラー、バッファ、画面更新（flush）経路については[ディスプレイコントローラー](display-controller.md)。
 - SF32グラフィックスアクセラレーションと圧縮機能については[ePicasso](epicasso-gpu.md)、[eZip](ezip.md)、[TurboPixel](turbopixel.md)。
 - 分野横断のSDK例カタログについては[サンプル集](../../develop/examples/index.md)。
 - 現行の公式一覧とセットアップの詳細については[SiFli-SDK LVGL例インデックス](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/index.html)。

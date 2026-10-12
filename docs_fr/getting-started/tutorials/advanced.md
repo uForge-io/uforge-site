@@ -35,7 +35,7 @@ Les chemins des exemples et les cartes prises en charge peuvent varier selon la 
 
 **Dépannage :** si la consommation est bonne une fois puis se dégrade ensuite, vérifiez les chemins d'erreur et de reconnexion, la séquence d'extinction de l'affichage, la fermeture des sessions audio et tout minuteur créé après le démarrage.
 
-**Ce que vous avez appris :** comment passer de « le système devrait consommer peu » à une consommation mesurée, et comment repérer une demande PM qui n'a pas été libérée.
+**Ce que vous avez appris :** comment passer de « le système devrait consommer peu » à une consommation mesurée, et comment repérer une demande de gestion de l'alimentation laissée active sans être libérée.
 
 ## Ajouter des mises à jour de firmware OTA via BLE { #add-ota-firmware-updates-over-ble }
 
@@ -49,15 +49,15 @@ Les chemins des exemples et les cartes prises en charge peuvent varier selon la 
 2. Confirmez que le comportement normal du périphérique BLE fonctionne toujours avant de tenter une mise à jour.
 3. Déclenchez une mise à jour OTA et confirmez que l'appareil démarre sur la nouvelle image.
 4. Sur un appareil de test disposant d'une procédure de récupération documentée, provoquez un seul type d'interruption à la fois, par exemple en coupant la connexion pendant le transfert ou en sortant de portée. Ne coupez pas l'alimentation sauf si la documentation de la carte et la conception de récupération du produit confirment explicitement que le test est sûr.
-5. Vérifiez le comportement réellement prévu par le produit après une mise à jour interrompue ou rejetée : nouvelle tentative, reprise, mode de récupération ou rollback, par exemple. N'exigez le rollback que s'il est implémenté dans le démarrage et la conception des partitions.
-6. Testez l'OTA avec des données de bonding obsolètes, après avoir supprimé l'appareil du téléphone et après son redémarrage.
+5. Vérifiez le comportement réellement prévu par le produit après une mise à jour interrompue ou rejetée : nouvelle tentative, reprise, mode de récupération ou retour à la version précédente, par exemple. N'exigez ce retour que si l'architecture de démarrage et de partitionnement l'implémente.
+6. Testez l'OTA avec des données d'association BLE obsolètes, après avoir supprimé l'appareil de la liste des appareils mémorisés sur le téléphone et après avoir redémarré l'appareil.
 7. Si votre produit utilise déjà PAN pour les données, évaluez le chemin OTA via PAN comme un choix de conception distinct.
 
-**Critères de réussite :** après une OTA réussie, l'appareil démarre sur la nouvelle image. Une mise à jour interrompue ou rejetée suit la politique de récupération documentée du produit, et l'utilisateur peut identifier l'état de l'appareil. Ne supposez pas que toutes les OTA prennent en charge le rollback.
+**Critères de réussite :** après une OTA réussie, l'appareil démarre sur la nouvelle image. Une mise à jour interrompue ou rejetée suit la politique de récupération documentée du produit, et l'utilisateur peut identifier l'état de l'appareil. Ne supposez pas que toutes les solutions OTA prennent en charge le retour à la version précédente.
 
-**Dépannage :** vérifiez la disposition des partitions, la signature de l'image ou ses contrôles d'intégrité le cas échéant, la sélection de l'image au démarrage et le comportement de récupération, la prise en charge du rollback si elle est implémentée, les paramètres de connexion pendant le transfert et la nécessité de conserver les données de bonding ou de stockage après la mise à jour.
+**Dépannage :** vérifiez la disposition des partitions, la signature de l'image ou ses contrôles d'intégrité le cas échéant, la sélection de l'image au démarrage et le comportement de récupération, la prise en charge du retour à la version précédente si cette fonction est implémentée, les paramètres de connexion pendant le transfert et la nécessité de conserver les données d'association ou de stockage après la mise à jour.
 
-**Ce que vous avez appris :** l'influence de la disposition des partitions et de la politique de récupération sur l'OTA, et pourquoi une mise à jour réussie ne prouve pas à elle seule que l'appareil peut récupérer après une interruption.
+**Ce que vous avez appris :** comment la disposition des partitions, la validation de l'image, la sélection au démarrage et la politique de récupération déterminent le comportement OTA, et pourquoi une mise à jour réussie ne prouve pas à elle seule que l'appareil peut récupérer après une interruption.
 
 ## Mettre en service un module d'affichage personnalisé { #bring-up-a-custom-display-module }
 
@@ -149,8 +149,8 @@ Les chemins des exemples et les cartes prises en charge peuvent varier selon la 
 ## Liste de contrôle de validation avant livraison { #advanced-release-checklist }
 
 - [ ] Les valeurs de consommation sont mesurées, reproductibles et associées à des scénarios de test clairement nommés.
-- [ ] La réussite des mises à jour OTA, les contrôles d’intégrité et la récupération après interruption ont été testés conformément à la politique documentée du produit ; le rollback n’est considéré comme vérifié que s’il est implémenté par la conception.
-- [ ] La mise en route d'un afficheur personnalisé est validée avec des motifs avant la complexité LVGL.
+- [ ] La réussite des mises à jour OTA, les contrôles d'intégrité et la récupération après interruption ont été testés conformément à la politique documentée du produit ; le retour à la version précédente n'est considéré comme vérifié que si la conception l'implémente.
+- [ ] La mise en service d'un afficheur personnalisé est validée avec des motifs avant la complexité LVGL.
 - [ ] Les flux de profilage et de coredump sont documentés pour l'équipe.
 - [ ] Le Bluetooth multi-connexion est testé lors des reconnexions et dans les cas limites impliquant le téléphone ou l'accessoire.
 - [ ] Les pilotes personnalisés utilisent le modèle d'appareil RT-Thread et gèrent la veille/réveil.

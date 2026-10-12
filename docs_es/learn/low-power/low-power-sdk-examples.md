@@ -100,7 +100,7 @@ Para ver un ejemplo completo del ciclo entre el modelo y las mediciones, consult
 | Paso | Evidencia a conservar | Por qué importa |
 |:-----|:-----------------|:---------------|
 | Establecer la referencia inicial | Placa, conexión de alimentación, puentes, revisión del SDK, configuración y comportamiento esperado | Distingue el comportamiento del ejemplo original de los cambios posteriores del producto |
-| Definir un escenario | Estado PM, componentes activos, fuente de activación, duración y condición final | Evita registrar una corriente media sin contexto técnico |
+| Definir un escenario | Estado PM, componentes activos, fuente de activación, duración y condición final | Evite registrar una corriente media sin contexto técnico |
 | Medir corriente y tensión | Marcadores en la traza, corriente, tensión, potencia y energía | Permite comparar resultados entre líneas de alimentación y revisiones del firmware |
 | Incorporar el hardware del producto | Componentes externos, estados de los pines, líneas de alimentación y sensores actualizados | Revela fugas y consumos periféricos que no existen en la placa de desarrollo |
 | Contrastar el modelo energético | Frecuencia y duración de cada escenario, además de su energía medida | Permite ajustar la estimación diaria de consumo para que se aproxime al comportamiento medido del producto |

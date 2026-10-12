@@ -9,7 +9,7 @@ tags: [Entwicklung, SiFli-SDK, Anwendungshinweise, EZIP]
 
 Verwenden Sie das Dienstprogramm aus dem SDK-Branch Ihres Ziels: `$SDK_ROOT/tools/png2ezip/ezip.exe`. Es erzeugt EZIP-/PIXEL-Binärdaten oder C-Arrays für LVGL. Prüfen Sie zuerst den Binärheader und das Pixelformat und wählen Sie dann den passenden Konvertierungsbefehl. Soll das Bild von der EZIP-Hardware dekomprimiert werden, folgen Sie dem GZIP-Ablauf und der Integrationscheckliste gegen Ende.
 
-!!! note "Geltungsbereich nach Produktfamilie"
+!!! note "Geltungsbereich nach Familie"
     Die Leitfäden für die einzelnen Familien sind voneinander unabhängig. Wenn sich die unterstützten Eingabe- oder Ausgabeformate oder das Verhalten des Tools unterscheiden, richten Sie sich nach dem Leitfaden für die Zielfamilie und verwenden Sie das mit Ihrem SDK-Branch ausgelieferte Dienstprogramm. Leiten Sie die Unterstützung oder das Verhalten einer Familie nicht aus dem Leitfaden einer anderen Familie ab.
 
 ## Dateiformate { #1-file-formats }

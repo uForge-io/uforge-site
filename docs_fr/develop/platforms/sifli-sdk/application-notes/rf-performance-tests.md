@@ -2,7 +2,7 @@
 icon: lucide/radio-tower
 title: "Exécuter les tests RF du SDK SiFli"
 description: "Choisir le bon mode de test RF Bluetooth, le chemin de contrôle et l'équipement de mesure appropriés."
-tags: [Développement, SiFli-SDK, Notes d’application, RF]
+tags: [Développement, SiFli-SDK, Notes d'application, RF]
 ---
 
 # Exécuter les tests RF du SDK SiFli { #run-sifli-sdk-rf-tests }
@@ -15,7 +15,7 @@ Le SDK distingue trois modes de validation RF Bluetooth : les tests de signalisa
 | Contenu | Portée par famille |
 |---|---|
 | Comparaison des modes de test et séquence de mesure | Flux de travail consolidé pour SF32LB52x, SF32LB55x, SF32LB56x, SF32LB57x et SF32LB58x. |
-| Disponibilité des tests Bluetooth Classic | Nécessite une cible compatible avec Bluetooth Classic. Le SF32LB55x ne prend en charge que le BLE et pas les procédures de test Bluetooth Classic ; utilisez les tests BLE pour cette famille. |
+| Disponibilité des tests Bluetooth classique | Nécessite une cible compatible avec Bluetooth classique. Le SF32LB55x ne prend en charge que le BLE et pas les procédures de test Bluetooth classique ; utilisez les tests BLE pour cette famille. |
 | Prise en charge des outils pour SF32LB57x | Le [guide de test RF](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/rf_test_guide.html) indique les broches UART du SF32LB57x, mais le sélecteur de plateforme du [manuel SiFli_RfTool](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/SiFli_RfTool/SiFli_RfTool_UM.html) ne mentionne pas le 57x. N'utilisez cette information que pour le brochage ; vérifiez le chemin de test pris en charge par la version du SDK cible. |
 | Captures d'écran de topologie et matrice de commandes HCI | Exemples du guide RF du SF32LB52x ; utilisez la documentation de commandes et de broches de la famille cible pour l'implémentation. |
 | Configuration `CONFIG_BT_RF_TEST` | S'applique au chemin documenté hors 55x ; le `bt_rftest` du SF32LB55x n'utilise pas ce symbole. |
@@ -73,7 +73,7 @@ CONFIG_BT_RF_TEST=y
 2. Pour la signalisation BLE, connectez l'UART1 à un PC et envoyez `bt_cm uart_dut`. Vérifiez `04 0E 04 XX 03 0C 00`, puis déplacez l'UART vers le testeur.
 3. Pour la signalisation BT, maintenez le DUT éveillé, envoyez `bt_cm dut`, vérifiez `Write scan enable success`, puis connectez le coaxial RF au testeur.
 4. Dans Bluetooth Signaling, le BLE utilise le contrôle EUT USB-vers-RS232 à 1 000 000 bauds ; le BT utilise `None (EUT Control off)` et découvre le DUT par voie radio.
-5. Exécutez le TX dans `Bluetooth 1 Multi Eval.` et le RX dans `Bluetooth 1 RX Meas.`. Utilisez BER pour le Bluetooth Classic et PER pour le BLE ; réduisez le niveau TX du testeur pour déterminer la sensibilité.
+5. Exécutez le TX dans `Bluetooth 1 Multi Eval.` et le RX dans `Bluetooth 1 RX Meas.`. Utilisez BER pour le Bluetooth classique et PER pour le BLE ; réduisez le niveau TX du testeur pour déterminer la sensibilité.
 
 ## Commandes de non-signalisation BT/BLE { #btble-non-signaling-commands }
 

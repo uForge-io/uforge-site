@@ -1,6 +1,6 @@
 ---
 icon: lucide/minimize-2
-description: "Wie TurboPixel verlustbehaftete Framebuffer-Kompression mit festem Verhältnis nutzt, um Framebuffer-Speicherbedarf und Display-Lesezugriffe auf unterstützten SF32-Bauteilen zu reduzieren."
+description: "Wie TurboPixel verlustbehaftete Framebuffer-Kompression mit festem Verhältnis nutzt, um Framebuffer-Speicherbedarf und Display-Lesezugriffe auf unterstützten SF32-Geräten zu reduzieren."
 tags:
   - Grafik
 ---
@@ -9,9 +9,9 @@ tags:
 
 ## Übersicht { #overview }
 
-**TurboPixel** ist ein verlustbehaftetes Kompressionsformat mit festem Kompressionsverhältnis, das auf unterstützten SF32-Bauteilen die finale, gerenderte Bitmap komprimiert. Es ist Teil des Display-Pfads: **extDMA** komprimiert die Bitmap, und der Display-Controller dekomprimiert sie bei der Übertragung der Pixel an das Panel.
+**TurboPixel** ist ein verlustbehaftetes Kompressionsformat mit festem Kompressionsverhältnis, das auf unterstützten SF32-Geräten die finale, gerenderte Bitmap komprimiert. Es ist Teil des Display-Pfads: **extDMA** komprimiert die Bitmap, und der Display-Controller dekomprimiert sie bei der Übertragung der Pixel an das Panel.
 
-TurboPixel ist kein Asset-Speicherformat und ersetzt nicht [eZip](ezip.md). eZip komprimiert Quell-Assets verlustfrei, bevor sie aus dem Speicher gelesen werden; TurboPixel komprimiert die finale gerenderte Bitmap, um die durch Framebuffer-Verkehr benötigte PSRAM-Kapazität und PSRAM-Bandbreite zu reduzieren.
+TurboPixel ist kein Asset-Speicherformat und ersetzt nicht [eZip](ezip.md). eZip komprimiert Quell-Assets verlustfrei, bevor sie vom Speichermedium gelesen werden; TurboPixel komprimiert die finale gerenderte Bitmap, um den Speicherbedarf im PSRAM und den durch Framebuffer-Zugriffe verursachten PSRAM-Verkehr zu reduzieren.
 
 Den vollständigen Grafikablauf und die Position von TurboPixel gegenüber eZip, ePicasso und dem Display-Controller finden Sie unter [Grafikübersicht](overview.md#sf32-graphics-flow). Diese Seite konzentriert sich auf das Kompressionsverhalten, die Integrationskompromisse und die Verfügbarkeit von TurboPixel.
 
@@ -40,7 +40,7 @@ Beziehen Sie sowohl opake als auch alpha-geblendete Bildschirminhalte ein. Alpha
 |:---|:---|:---|---:|---:|---:|:---|
 | Opake UI | Kein Alpha | Noch festzulegen; der Framebuffer ist opak | Noch zu messen | Noch zu messen | Noch zu messen | Auflösung, Aktualisierungsrichtlinie und TurboPixel-Verhältnis/Konfiguration: noch festzulegen |
 | Alpha-geblendete UI, vor der Ausgabe zusammengesetzt | Pixelweises und/oder globales Alpha in Quellebenen | Noch festzulegen (nach dem Compositing in der Regel opak) | Noch zu messen | Noch zu messen | Noch zu messen | Inhalte mit Alpha-Blending dokumentieren; Kanten-, Schatten-, Verlaufs- und Textartefakte prüfen |
-| Alpha-erhaltender Ausgabepfad, sofern unterstützt | Alpha bis zum finalen Puffer erhalten | Noch festzulegen | Noch zu messen | Noch zu messen | Noch zu messen | Zielchip, SDK, Format und Display-Pfad vor dem Test bestätigen |
+| Ausgabepfad mit erhaltenem Alphakanal, sofern unterstützt | Alphakanal bleibt bis zum finalen Puffer erhalten | Noch festzulegen | Noch zu messen | Noch zu messen | Noch zu messen | Zielchip, SDK, Format und Display-Pfad vor dem Test bestätigen |
 
 </div>
 
@@ -69,7 +69,7 @@ Bei gleichem Pixelformat und gleicher Kompressionsstufe bleibt das nominale Verh
 TurboPixel sollte als Teil des vollständigen Display-Designs validiert werden:
 
 - Text, dünne Linien, Farbverläufe, Symbole, Fotografien, Animationen und kontrastreiche UI-Elemente auf sichtbare Artefakte testen.
-- Farbformat, Pufferausrichtung, extDMA-Pfad und Display-Controller-Konfiguration bestätigen, die vom gewählten Bauteil und SDK unterstützt werden.
+- Farbformat, Pufferausrichtung, extDMA-Pfad und Display-Controller-Konfiguration bestätigen, die vom gewählten Gerät und SDK unterstützt werden.
 - Frame-Zeit, PSRAM-Bandbreite, UI-Latenz und Energieverbrauch unter kombinierten Display-, Bluetooth-, Audio- und KI-Arbeitslasten messen.
 - Einen unkomprimierten Pfad während der Inbetriebnahme verfügbar halten, damit Bildqualitäts- und Treiberprobleme isoliert werden können.
 - TurboPixel nicht als verlustfrei darstellen, selbst wenn in einer bestimmten UI keine Artefakte sichtbar sind.
@@ -84,7 +84,7 @@ Der aktuelle OpenSiFli-LCDC-Header definiert das Support-Makro für komprimierte
 
 Für SF32LB55x ist eine Integrationsbesonderheit zu beachten: Der aktuelle OpenSiFli-LCDC-Header definiert das Makro für komprimierte Ebenen, wenn `HAL_EXTDMA_MODULE_ENABLED` aktiviert ist; ein Kommentar weist jedoch darauf hin, dass der LCPU-Pfad nicht aktiviert ist. Die veröffentlichte SDK-LCDC-Funktionstabelle kennzeichnet die Dekomprimierung komprimierter Ebenen auf 55x als nicht unterstützt, während das SF32LB55x-Datenblatt TurboPixel und die Dekomprimierung durch den LCD-Controller beschreibt. Ein Präprozessor-Makro belegt nicht, dass der vollständige Displaypfad validiert wurde. Betrachten Sie 55x daher als bedingt unterstützt und prüfen Sie die konkrete SDK-Version, den Kern, die Build-Konfiguration und die Zielhardware. Leiten Sie die Laufzeitunterstützung nicht allein aus dem Makro ab.
 
-Trennen Sie die Pufferzuständigkeit von Renderer, extDMA und Display-Controller. Erst nach dem Rendern darf komprimiert werden, nach der Kompression darf das Display lesen und nach dessen Nutzung darf der Puffer wiederverwendet werden. Bei cachebarem gemeinsamem Speicher schreiben Sie die vom Prozessor geänderten Quell-Cachezeilen vor dem Hardware-Lesezugriff mit einer Cache-Clean-Operation in den Speicher zurück. Bereiten Sie Ziel-Cachezeilen so vor, dass veränderte Cachezeilen das Hardware-Ergebnis nicht nachträglich überschreiben; invalidieren Sie nach Abschluss veraltete Cachezeilen, bevor die CPU liest. Beachten Sie Cachezeilengrenzen und benachbarte Daten. Kompressionsende ist nicht das Ende der Panel-Übertragung.
+Regeln Sie die Pufferübergabe zwischen Renderer, extDMA und Display-Controller eindeutig. Starten Sie die Kompression erst nach dem Rendering, übergeben Sie den Puffer nach abgeschlossener Kompression an den Display-Controller und verwenden Sie ihn erst wieder, wenn die Übertragung abgeschlossen ist. Bei cachebarem gemeinsamem Speicher schreiben Sie die vom Prozessor geänderten Quell-Cachezeilen vor dem Hardware-Lesezugriff mit einer Cache-Clean-Operation in den Speicher zurück. Bereiten Sie Ziel-Cachezeilen so vor, dass veränderte Cachezeilen das Hardware-Ergebnis nicht nachträglich überschreiben; invalidieren Sie nach Abschluss veraltete Cachezeilen, bevor die CPU liest. Beachten Sie Cachezeilengrenzen und benachbarte Daten. Das Ende der Kompression bedeutet nicht, dass auch die Panel-Übertragung abgeschlossen ist.
 
 Quelladresse, Zieladresse und extDMA-Übertragungslänge müssen auf 4 Byte ausgerichtet sein. Beachten Sie die SDK-Regeln für Zeilenstride, Blockaufteilung und Puffergröße; Rohbildbytes durch den nominalen Faktor zu teilen reicht nicht aus.
 
@@ -103,7 +103,7 @@ TurboPixel ist für die folgenden SF32-Familien dokumentiert:
 | **SF32LB56x** | Dokumentiert | extDMA komprimiert den finalen Framebuffer verlustbehaftet mit festem Verhältnis; der Display-Controller dekomprimiert ihn. |
 | **SF32LB57x** | Nicht verfügbar | Einen unkomprimierten Framebuffer oder eine andere unterstützte Speicher-/Bandbreitenstrategie verwenden. |
 | **SF32LB58x** | Dokumentiert | extDMA komprimiert den finalen Framebuffer verlustbehaftet mit festem Verhältnis; der Display-Controller dekomprimiert ihn. |
-| **Andere SF32-Familien** | Pro Bauteil bestätigen | TurboPixel-Unterstützung nicht aus eZip, ePicasso oder dem Vorhandensein von PSRAM ableiten. Das genaue Chip-Datenblatt, Referenzhandbuch, die SDK-Version und den Display-Treiber prüfen. |
+| **Andere SF32-Familien** | Je Gerät bestätigen | TurboPixel-Unterstützung nicht aus eZip, ePicasso oder dem Vorhandensein von PSRAM ableiten. Das genaue Chip-Datenblatt, Referenzhandbuch, die SDK-Version und den Display-Treiber prüfen. |
 
 </div>
 

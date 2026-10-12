@@ -7,7 +7,7 @@ tags:
 
 # Primeros pasos con los periféricos { #beginner-tutorials }
 
-Estos tutoriales continúan justo después de [Primeros pasos](../index.md). Debería tener instalada la cadena de herramientas de SiFli-SDK, haber flasheado `hello_world` al menos una vez y saber abrir la consola serie. Cada tutorial es deliberadamente breve: un concepto, un periférico y un criterio de éxito claro.
+Estos tutoriales continúan justo después de [Primeros pasos](../index.md). Debería tener instalada la cadena de herramientas de SiFli-SDK, haber grabado `hello_world` al menos una vez y saber abrir la consola serie. Cada tutorial es deliberadamente breve: un concepto, un periférico y un criterio de éxito claro.
 
 Los ejemplos asumen una placa de la clase SF32LB52-DevKit-LCD, como `sf32lb52-lcd_n16r8`. Si utiliza otra placa, sustituya el nombre de placa en el comando de compilación y confirme los nombres de pines, las instancias de periférico y la disposición de almacenamiento a partir de los archivos de soporte de esa placa.
 
@@ -34,9 +34,9 @@ Los ejemplos de C son fragmentos, no archivos fuente completos. Añada los encab
 |:-----|:------|
 | Nombre de placa | Coincide con una de las configuraciones de placa compatibles. |
 | Puerto serie | Se abre sin problemas y muestra la salida de arranque. |
-| Herramienta de flasheo | Permite volver a programar la placa sin cambiar los cables. |
+| Herramienta de grabación | Permite volver a grabar la placa sin cambiar los cables. |
 | Esquemático o archivos de placa | Disponibles antes de elegir recursos de GPIO, ADC, PWM o RTC. |
-| Un cambio cada vez | Compile, flashee y verifique después de cada pequeña modificación. |
+| Un cambio cada vez | Compile, grabe y verifique después de cada pequeña modificación. |
 
 </div>
 
@@ -72,7 +72,7 @@ int main(void)
 
 1. Copie el ejemplo de GPIO más cercano en su propio directorio de proyecto, o edítelo en el mismo sitio mientras aprende.
 2. Busque el pin del LED en el esquemático o en los archivos de soporte de la placa. No adivine la numeración de puerto y pin.
-3. Compile y flashee con el mismo nombre de placa usado para `hello_world`.
+3. Compile y grabe con el mismo nombre de placa usado para `hello_world`.
 4. Confirme que el LED parpadea a la velocidad esperada.
 5. Cambie el retardo a 100 ms, recompile y confirme que la velocidad de parpadeo visible cambia.
 
@@ -80,7 +80,7 @@ int main(void)
 
 **Si no funciona:** compruebe la polaridad activa, si el LED está conectado a través de un transistor, si el pin ya está en uso por otra función, y si el nombre de su placa coincide con el hardware que tiene delante.
 
-**Lo que ha aprendido:** la abstracción **PIN device** de RT-Thread, las definiciones de pines específicas de la placa y el ciclo básico de editar, compilar y flashear.
+**Lo que ha aprendido:** la abstracción **PIN device** de RT-Thread, las definiciones de pines específicas de la placa y el ciclo básico de editar, compilar y grabar.
 
 ## Lea un botón con entrada GPIO { #read-a-button-with-gpio-input }
 
@@ -92,7 +92,7 @@ int main(void)
 
 Leer un botón usa la misma API de PIN en modo de entrada. Empiece con una lectura simple para confirmar el cableado y el nivel lógico:
 
-En el SDK de SiFli, la API PIN device de RT-Thread no configura las resistencias pull-up o pull-down del pad mediante `rt_pin_mode()`. Para un botón activo en bajo, confirme que la placa incorpora una resistencia pull-up o configúrelo mediante el pinmux de esa placa con `HAL_PIN_Set(...)`. El pad, la función y el dominio de CPU dependen de la placa; no copies una asignación de pines sin verificarla.
+En el SDK de SiFli, la API PIN device de RT-Thread no configura las resistencias pull-up o pull-down del pad mediante `rt_pin_mode()`. Para un botón activo en bajo, confirme que la placa incorpora una resistencia pull-up o configúrelo mediante el pinmux de esa placa con `HAL_PIN_Set(...)`. El pad, la función y el dominio de CPU dependen de la placa; no copie una asignación de pines sin verificarla.
 
 ```c
 rt_pin_mode(BUTTON_PIN, PIN_MODE_INPUT);
@@ -103,7 +103,7 @@ if (rt_pin_read(BUTTON_PIN) == PIN_LOW)
 }
 ```
 
-Para aplicaciones que vayan más allá de una prueba rápida, usa una interrupción en vez de consultar continuamente el pin dentro de un bucle cerrado. Así el firmware puede reaccionar a un flanco de entrada sin leer el pin una y otra vez; si el diseño permite que la CPU entre en reposo entre eventos, también puede reducir el consumo:
+Para aplicaciones que vayan más allá de una prueba rápida, use una interrupción en vez de consultar continuamente el pin dentro de un bucle cerrado. Así el firmware puede reaccionar a un flanco de entrada sin leer el pin una y otra vez; si el diseño permite que la CPU entre en reposo entre eventos, también puede reducir el consumo:
 
 ```c
 rt_pin_attach_irq(BUTTON_PIN, PIN_IRQ_MODE_FALLING, button_isr, RT_NULL);
@@ -131,13 +131,13 @@ rt_pin_irq_enable(BUTTON_PIN, PIN_IRQ_ENABLE);
 
 **Empiece con:** `example/system/finsh`
 
-El shell **FinSH** de RT-Thread le ofrece un prompt interactivo `msh>` sobre la misma UART usada para los registros de arranque. Desarrolle estos hábitos desde el principio:
+El shell **FinSH** de RT-Thread le ofrece un prompt interactivo `msh>` sobre el mismo UART usada para los registros de arranque. Desarrolle estos hábitos desde el principio:
 
 - Utilice `rt_kprintf()` para un registro de depuración ligero en lugar de escrituras UART directas.
 - Utilice comandos de shell integrados como `list_thread`, `list_device` y comandos de memoria/estado para inspeccionar el sistema en ejecución.
 - Mantenga los registros breves y significativos; un registro excesivo puede cambiar el comportamiento de temporización y consumo.
 
-1. Flashee cualquiera de los ejemplos anteriores y vuelva a abrir su terminal serie.
+1. Grabe cualquiera de los ejemplos anteriores y vuelva a abrir su terminal serie.
 2. Pulse Intro para obtener el prompt `msh>`.
 3. Ejecute `list_thread` y `list_device`.
 4. Añada llamadas a `rt_kprintf()` al manejador de botón del Tutorial 2.
@@ -198,9 +198,9 @@ rt_pwm_enable(pwm, channel);
 2. Elija un periodo que se ajuste al periférico: lo bastante alto para evitar parpadeo visible del LED, o en el rango audible para un zumbador.
 3. Recorra el ciclo de trabajo para atenuar un LED de forma gradual.
 4. Pruebe algunos tonos fijos en un zumbador cambiando el periodo.
-5. Deshabilite el PWM y confirme que la salida vuelve a un estado de reposo seguro.
+5. Deshabilite la PWM y confirme que la salida vuelve a un estado de reposo seguro.
 
-**Criterios de éxito:** cambiar el ciclo de trabajo cambia el brillo, o cambiar el periodo cambia el tono, y deshabilitar el PWM deja la salida en el estado esperado.
+**Criterios de éxito:** cambiar el ciclo de trabajo cambia el brillo, o cambiar el periodo cambia el tono, y deshabilitar la PWM deja la salida en el estado esperado.
 
 **Si no funciona:** compruebe que el pin esté asignado a la instancia PWM correcta, que el número de canal sea válido, que el periodo y el ancho de pulso estén expresados en nanosegundos y que la carga externa no necesite un transistor de control.
 
@@ -227,7 +227,7 @@ rt_kprintf("%04d-%02d-%02d %02d:%02d:%02d\n",
 3. Haga un ciclo de apagado/encendido de la placa y confirme si la hora se conserva.
 4. Si la hora no se conserva, compruebe la ruta de alimentación de respaldo de la placa antes de modificar el firmware.
 
-Al probar la retención, no reinicies el RTC incondicionalmente en cada arranque: eso ocultaría si se conservó la hora anterior.
+Al probar la retención, no reinicie el RTC incondicionalmente en cada arranque: eso ocultaría si se conservó la hora anterior.
 
 **Criterios de éxito:** la hora avanza con normalidad mientras hay alimentación, y el comportamiento de retención coincide con el hardware de la placa.
 
@@ -243,18 +243,18 @@ Después de terminar los seis tutoriales cortos, combínelos en un pequeño proy
 2. Utilice el botón para iniciar o detener el muestreo.
 3. Lea un valor de ADC cada segundo mientras el muestreo esté activo.
 4. Imprima lecturas con marca de tiempo a través de FinSH.
-5. Utilice el brillo del PWM o el tono del zumbador para indicar si el muestreo está activo.
+5. Utilice el brillo de la PWM o el tono del zumbador para indicar si el muestreo está activo.
 
 **Criterio de aprobación:** el proyecto se ejecuta durante varios minutos sin activaciones repetidas del botón, registro descontrolado, ni reinicios inesperados.
 
 ## Lista de comprobación de la puesta en marcha de los primeros periféricos { #beginner-bring-up-checklist }
 
-- [ ] El nombre de placa, el puerto serie y el flujo de flasheo están validados.
+- [ ] El nombre de placa, el puerto serie y el flujo de grabación están validados.
 - [ ] La salida GPIO funciona en un LED real o en un pin medido.
 - [ ] La entrada GPIO funciona con polaridad y antirrebote confirmados.
 - [ ] El shell FinSH es utilizable, y `list_thread` / `list_device` funcionan.
 - [ ] Las lecturas del ADC son plausibles y se han convertido a unidades físicas.
-- [ ] Los ajustes de periodo/ciclo de trabajo del PWM producen la salida física esperada.
+- [ ] Los ajustes de periodo/ciclo de trabajo de la PWM producen la salida física esperada.
 - [ ] Se entiende el comportamiento del RTC, incluidas las limitaciones de retención.
 
 ## A dónde ir después { #where-to-go-next }

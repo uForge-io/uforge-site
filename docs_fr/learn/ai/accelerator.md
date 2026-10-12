@@ -8,15 +8,15 @@ tags:
 
 ## Introduction { #introduction }
 
-L'**accélérateur d'IA**, appelé NNACC dans le SDK, prend en charge certaines opérations de réseaux neuronaux sur des dispositifs SF32 sélectionnés. Il permet l'**IA en périphérie**, où l'inférence s'exécute localement sans dépendre d'un service cloud. Les gains de latence, d'occupation CPU ou d'énergie dépendent du modèle, du placement mémoire, du logiciel et de la charge du produit complet.
+L'**accélérateur d'IA**, appelé NNACC dans le SDK, prend en charge certaines opérations de réseaux neuronaux sur des composants SF32 sélectionnés. Il permet l'**IA en périphérie**, où l'inférence s'exécute localement sans dépendre d'un service cloud. Les gains de latence, d'occupation CPU ou d'énergie dépendent du modèle, du placement mémoire, du logiciel et de la charge du produit complet.
 
-Les appareils portables, les dispositifs de suivi de santé, les écrans intelligents, les accessoires vocaux, la fusion de capteurs et les produits AIoT compacts sont des applications possibles. Ces appareils sur batterie associent souvent Bluetooth, graphisme, audio, acquisition et interaction utilisateur. Déléguer certaines opérations au matériel peut libérer du temps CPU pour d'autres tâches, mais la réactivité et les économies d'énergie doivent être mesurées.
+Les appareils portables, les appareils de suivi de santé, les écrans intelligents, les accessoires vocaux, la fusion de capteurs et les produits AIoT compacts sont des applications possibles. Ces appareils sur batterie associent souvent Bluetooth, graphisme, audio, acquisition et interaction utilisateur. Déléguer certaines opérations au matériel peut libérer du temps CPU pour d'autres tâches, mais la réactivité et les économies d'énergie doivent être mesurées.
 
-Les fonctionnalités d'IA disponibles dépendent du dispositif SF32 et de sa prise en charge par le SDK. Avant de valider une architecture de modèle ou un plan mémoire, vérifiez toujours la fiche technique, le manuel de référence et la documentation du SDK de la puce cible.
+Les fonctionnalités d'IA disponibles dépendent du composant SF32 et de sa prise en charge par le SDK. Avant de valider une architecture de modèle ou un plan mémoire, vérifiez toujours la fiche technique, le manuel de référence et la documentation du SDK de la puce cible.
 
-Les informations ci-dessous sur les opérations CMSIS-NN et le nombre de ressources NNACC par dispositif s'appuient sur la documentation de SiFli-SDK v2.5.1. Le guide NNACC de cette version cite des ressources pour SF32LB55x/56x/58x, mais ne confirme pas leur disponibilité sur SF32LB52x ou SF32LB57x ; cette absence d'information ne prouve pas l'absence de l'accélérateur. Les contrôles de fenêtres d'adresses, le comportement d'attente et la configuration du GC032A sont des observations tirées des sources HAL ou du pilote de cette version, et non des garanties universelles pour toutes les révisions de puce ou versions du SDK. Le guide NNACC et les exemples cités n'établissent ni l'existence d'un convertisseur de modèle ou d'un moteur de graphe complet, ni un repli automatique sur CPU, ni la compatibilité de capture caméra de chaque composant et carte. Avant de figer la conception, vérifiez la révision et la configuration exactes du SDK, la révision de la puce, l'environnement d'exécution et la carte.
+Les informations ci-dessous sur les opérations CMSIS-NN et le nombre de ressources NNACC par composant s'appuient sur la documentation de SiFli-SDK v2.5.1. Le guide NNACC de cette version cite des ressources pour SF32LB55x/56x/58x, mais ne confirme pas leur disponibilité sur SF32LB52x ou SF32LB57x ; cette absence d'information ne prouve pas l'absence de l'accélérateur. Les contrôles de fenêtres d'adresses, le comportement d'attente et la configuration du GC032A sont des observations tirées des sources HAL ou du pilote de cette version, et non des garanties universelles pour toutes les révisions de puce ou versions du SDK. Le guide NNACC et les exemples cités n'établissent ni l'existence d'un convertisseur de modèle ou d'un moteur de graphe complet, ni un repli automatique sur CPU, ni la compatibilité de capture caméra de chaque composant et carte. Avant de figer la conception, vérifiez la révision et la configuration exactes du SDK, la révision de la puce, l'environnement d'exécution et la carte.
 
-Consultez cette page pour déterminer si une fonction d'IA locale convient au dispositif SF32 choisi et pour répartir la chaîne d'inférence entre capteurs, CPU, mémoire et accélérateur. Pour intégrer et déployer les modèles, commencez par la page complémentaire [Vue d'ensemble de l'IA](overview.md).
+Consultez cette page pour déterminer si une fonction d'IA locale convient au composant SF32 choisi et pour répartir la chaîne d'inférence entre capteurs, CPU, mémoire et accélérateur. Pour intégrer et déployer les modèles, commencez par la page complémentaire [Vue d'ensemble de l'IA](overview.md).
 
 ## Pourquoi l'IA embarquée est utile { #why-on-device-ai-matters }
 
@@ -28,7 +28,7 @@ De nombreux produits embarqués doivent pouvoir réagir de manière intelligente
 - Meilleur comportement hors ligne, car les fonctionnalités essentielles peuvent fonctionner sans accès réseau.
 - Une puissance moyenne plus faible n'est possible que si la fonction complète consomme moins d'énergie sur la même durée d'utilisation, à précision et couverture de détection équivalentes. Tenez compte du surcoût lié au déport des calculs.
 
-Pour les appareils portables et les dispositifs AIoT, ces avantages sont concrets. Une montre peut classer des gestes, détecter des niveaux d'activité, surveiller des signaux de santé, reconnaître de simples déclencheurs vocaux ou traiter des données de capteurs, tout en préservant la réactivité de l'écran, de Bluetooth et du processeur applicatif.
+Pour les appareils portables et les appareils AIoT, ces avantages sont concrets. Une montre peut classer des gestes, détecter des niveaux d'activité, surveiller des signaux de santé, reconnaître de simples déclencheurs vocaux ou traiter des données de capteurs, tout en préservant la réactivité de l'écran, de Bluetooth et du processeur applicatif.
 
 Ces avantages sont conditionnels. Le traitement local réduit le trafic sans fil seulement si le produit évite d'envoyer les données brutes. La confidentialité exige toujours un stockage adapté, des contrôles d'accès et la protection des données transmises. Les usages ci-dessous sont des possibilités de conception, pas une garantie que le SDK fournit tous les modèles.
 
@@ -73,16 +73,16 @@ Les accélérateurs d'IA sont utiles, car les réseaux neuronaux répètent souv
 
 Il s'agit d'exemples de calculs utilisés par les réseaux neuronaux, pas d'une liste des opérations prises en charge par le NNACC du SF32. Le [guide NNACC du SDK SiFli v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/docs/source/en/hal/nnacc.md) documente l'accélération NNACC de trois fonctions de convolution q7 de CMSIS-NN, dont la convolution par canal (depthwise convolution), et indique que l'implémentation CMSIS-NN avec NNACC est 8 fois plus rapide que l'implémentation ARM DSP de CMSIS-NN. Le guide ne précise pas les conditions de mesure de cette valeur : considérez-la comme une comparaison publiée par le fabricant, et non comme une garantie de réduction de la latence ou de la consommation énergétique sur l'ensemble du modèle. Vérifiez chaque opérateur du modèle et son format numérique par rapport à l'implémentation retenue ; ne supposez pas que la multiplication matricielle, l'activation ou le pooling bénéficient chacun d'une accélération indépendante. Le SDK propose aussi des API HAL pour piloter directement l'accélérateur, mais ne supposez pas que l'une ou l'autre interface fournisse un convertisseur de modèle complet ou un moteur de graphe. Le firmware ou un moteur d'inférence distinct doit orchestrer les couches et gérer les tampons ; un repli sur le CPU nécessite également une implémentation des opérateurs non pris en charge.
 
-Les ressources mémoire et la bande passante des dispositifs SF32 sont limitées : commencez donc par un modèle embarqué compact. Vérifiez la présence du NNACC et la prise en charge des opérateurs pour la référence exacte, puis mesurez la mémoire, la latence et l'énergie de toute la chaîne. Ne déduisez pas la compatibilité du seul nom de la famille.
+Les ressources mémoire et la bande passante des composants SF32 sont limitées : commencez donc par un modèle embarqué compact. Vérifiez la présence du NNACC et la prise en charge des opérateurs pour la référence exacte, puis mesurez la mémoire, la latence et l'énergie de toute la chaîne. Ne déduisez pas la compatibilité du seul nom de la famille.
 
 Les applications d'IA courantes comprennent :
 
 - La détection de mots-clés ou la détection simple d'événements vocaux.
 - La reconnaissance de gestes à partir des données d'accéléromètre et de gyroscope.
 - La classification d'activité et la détection d'état de mouvement.
-- La fusion de données de capteurs pour les appareils portables et les dispositifs de santé.
+- La fusion de données de capteurs pour les appareils portables et les appareils de santé.
 - L'analyse de signaux biométriques, selon les capteurs disponibles et les algorithmes pris en charge.
-- La classification simple d'images ou à partir de la caméra, sur les dispositifs disposant d'une entrée caméra.
+- La classification simple d'images ou à partir de la caméra, sur les composants disposant d'une entrée caméra.
 - La détection d'anomalies et le filtrage local d'événements.
 
 ## Rôles du CPU, de l'accélérateur et de la mémoire { #cpu-accelerator-and-memory-roles }
@@ -96,7 +96,7 @@ Pour se représenter le rôle de chacun, le CPU pilote le traitement tandis que 
 | Composant | Rôle typique |
 |:----------|:-------------|
 | **CPU applicatif** | Exécute la logique applicative, planifie l'inférence, gère les tampons et pilote l'interface utilisateur, le Bluetooth, le stockage et les règles système. |
-| **Processeur basse consommation** | Peut assurer une détection en continu ou des tâches d'arrière-plan sur les appareils où il est programmable par l'utilisateur. |
+| **Processeur basse consommation** | Peut assurer la surveillance continue des capteurs ou des tâches d'arrière-plan sur les appareils où il est programmable par l'utilisateur. |
 | **Accélérateur IA** | Exécute les opérations prises en charge par NNACC ; comparez le temps CPU et l'énergie de toute la chaîne à la référence logicielle. |
 | **DMA / système mémoire** | Assure les accès mémoire et les transferts configurés ; un transfert d'entrée ou de sortie NNACC ne nécessite pas systématiquement une copie DMA distincte. |
 | **Autres accélérateurs** | Les blocs audio, graphiques, cryptographiques ou de traitement des capteurs peuvent contribuer à l'ensemble de la chaîne produit. |
@@ -105,15 +105,15 @@ Pour se représenter le rôle de chacun, le CPU pilote le traitement tandis que 
 
 L'accélérateur ne remplace pas le CPU et n'exécute pas seul n'importe quel modèle. Le firmware prépare les entrées, configure les opérations prises en charge, attend leur fin, traite les résultats et pilote l'application. Une opération non prise en charge ne peut s'exécuter sur le CPU que si l'environnement d'inférence ou l'application fournit cette implémentation ; sinon, le déploiement peut échouer. La présence du matériel ne garantit pas un repli automatique sur le CPU.
 
-## Positionnement par famille de dispositifs { #device-family-positioning }
+## Positionnement par famille de composants { #device-family-positioning }
 
-Choisissez le dispositif selon les opérateurs, le budget mémoire et la charge du produit complet, plutôt que selon un classement global des familles. Le guide du SDK v2.5.1 documente un NNACC dans le sous-système HCPU de chaque famille SF32LB55x et SF32LB56x, et un dans chacun des sous-systèmes HCPU et LCPU du SF32LB58x. Ces ressources aident à choisir, mais ne garantissent ni une exécution plus rapide du modèle complet ni une baisse de l'énergie consommée. Vérifiez la disponibilité, la mémoire accessible et le support logiciel pour la référence et la configuration exactes.
+Choisissez le composant selon les opérateurs, le budget mémoire et la charge du produit complet, plutôt que selon un classement global des familles. Le guide du SDK v2.5.1 documente un NNACC dans le sous-système HCPU de chaque famille SF32LB55x et SF32LB56x, et un dans chacun des sous-systèmes HCPU et LCPU du SF32LB58x. Ces ressources aident à choisir, mais ne garantissent ni une exécution plus rapide du modèle complet ni une baisse de l'énergie consommée. Vérifiez la disponibilité, la mémoire accessible et le support logiciel pour la référence et la configuration exactes.
 
-<div align="center"><em>Tableau : Positionnement par famille de dispositifs</em></div>
+<div align="center"><em>Tableau : Positionnement par famille de composants</em></div>
 
 <div align="center" markdown style="max-width: 100%; overflow-x: auto;">
 
-| Famille de dispositifs | Positionnement IA |
+| Famille de composants | Positionnement IA |
 |:--------------|:---------------|
 | **SF32LB52x** | À envisager pour Bluetooth, audio et HMI simple à coût optimisé ; utiliser une implémentation CPU légère comme référence, sauf accélération spécifique vérifiée. |
 | **SF32LB55x** | Adapté aux appareils BLE portables et aux produits riches en capteurs ; utile pour la détection à basse consommation et les algorithmes compacts. |
@@ -166,7 +166,7 @@ Les traitements d'IA peuvent solliciter fortement la mémoire, même lorsque le 
 - Les tampons de prétraitement et de post-traitement.
 - Les données de l'interface utilisateur, de Bluetooth et de l'application utilisées en même temps.
 
-Selon la configuration SRAM interne, Flash, PSRAM et cache du dispositif choisi, placez les tenseurs fréquemment utilisés et les tampons intermédiaires là où CPU et accélérateur peuvent y accéder efficacement. Budgétez ensemble stockage externe, tampons de travail et copies, au lieu d'optimiser seulement la taille du modèle.
+Selon la configuration SRAM interne, Flash, PSRAM et cache du composant choisi, placez les tenseurs fréquemment utilisés et les tampons intermédiaires là où CPU et accélérateur peuvent y accéder efficacement. Budgétez ensemble stockage externe, tampons de travail et copies, au lieu d'optimiser seulement la taille du modèle.
 
 Vérifiez d'abord que le NNACC choisi peut accéder à chaque tampon ; les données en Flash ou PSRAM externes peuvent nécessiter une copie dans des tampons de travail. Comptez le temps de copie, la RAM de travail et l'énergie dans le budget. L'[implémentation HAL du SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/hal/bf0_hal_nn_acc.c) arrondit les tailles contrôlées à des multiples de 4 octets et refuse un tampon si son début et sa fin contrôlée appartiennent à des fenêtres d'adressage différentes de 1 MiB (1 048 576 octets). L'entrée et le biais doivent aussi partager une fenêtre. Une fin exactement à la limite de la fenêtre suivante échoue également. Planifiez les allocations selon ces contrôles et traitez les erreurs renvoyées avant de lancer l'opération suivante.
 
@@ -195,7 +195,7 @@ Regroupez les échantillons et utilisez les interruptions si la couverture de d�
 
 ### Caméra et entrée image { #camera-and-image-input }
 
-L'entrée caméra dépend de la puce, du boîtier, de la carte et du pilote de capture exacts. Le [pilote du capteur GC032A du SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/customer/peripherals/camera/gc032a/drv_gc032a.c) configure une sortie DVP sur 8 bits ou SPI sur deux bits ; cela ne prouve pas que les deux voies de capture fonctionnent sur tous les dispositifs SF32. Avant de choisir la caméra, vérifiez les broches, la capture par périphérique ou PTM, la temporisation du capteur et le pilote. L'image demande souvent des tampons et une bande passante plus importants que l'audio ou le mouvement, mais comparez les résolutions et cadences réelles.
+L'entrée caméra dépend de la puce, du boîtier, de la carte et du pilote de capture exacts. Le [pilote du capteur GC032A du SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/customer/peripherals/camera/gc032a/drv_gc032a.c) configure une sortie DVP sur 8 bits ou SPI sur deux bits ; cela ne prouve pas que les deux voies de capture fonctionnent sur tous les composants SF32. Avant de choisir la caméra, vérifiez les broches, la capture par périphérique ou PTM, la temporisation du capteur et le pilote. L'image demande souvent des tampons et une bande passante plus importants que l'audio ou le mouvement, mais comparez les résolutions et cadences réelles.
 
 Envisagez des images plus petites, des régions d'intérêt, une cadence réduite ou un modèle adapté à l'embarqué. Recadrer par firmware après capture réduit l'entrée du modèle, pas nécessairement le trafic caméra ni le tampon de capture. Pour réduire ces coûts, un recadrage dans le capteur ou une acquisition réduite peut être nécessaire.
 
@@ -255,13 +255,13 @@ Un produit d'IA embarquée réussi combine généralement un modèle compact, un
 
 Envisagez l'accélération IA du SF32 pour l'inférence locale compacte dans des produits connectés sur batterie lorsque les opérateurs pris en charge et le budget système mesuré conviennent :
 
-- La reconnaissance de gestes sur montres, bracelets et dispositifs portatifs.
+- La reconnaissance de gestes sur montres, bracelets et appareils portatifs.
 - La classification d'activité pour les produits de suivi sportif et de santé.
 - La détection d'événements vocaux ou de mots-clés pour les accessoires audio.
 - Les algorithmes de fusion de capteurs pour les appareils portables.
 - L'analyse de signaux biométriques, si les capteurs et le logiciel la prennent en charge.
-- La détection locale d'anomalies pour les dispositifs intelligents.
-- La classification simple d'images ou les événements déclenchés par la caméra, sur les dispositifs dotés d'une entrée caméra.
+- La détection locale d'anomalies pour les appareils intelligents.
+- La classification simple d'images ou les événements déclenchés par la caméra, sur les composants dotés d'une entrée caméra.
 - Une interface homme-machine (HMI) qui s'adapte au contexte d'utilisation.
 
 ## Points clés à retenir { #key-takeaways }

@@ -18,7 +18,7 @@ Utilisez le dessin du boîtier, respectez les exigences relatives au motif des p
 
 #### 6.1.1. Références d'empilage et de fabrication { #611-stack-up-and-fabrication }
 
-SiFli recommande un procédé PTH conventionnel et un circuit imprimé à quatre couches pour les QFN68L et BGA145. Pour le BGA169, la référence recommande un HDI à un niveau avec vias borgnes/enterrés. Les empilages illustrés à quatre et six couches ont une épaisseur finie de 0,7 mm ±10 %. Ce sont des constructions de référence, et non des limites universelles ; confirmez le dessin du boîtier, l'épaisseur finie et les capacités de fabrication auprès du fabricant du PCB.
+SiFli recommande un procédé PTH conventionnel et un circuit imprimé à quatre couches pour les QFN68L et BGA145. Pour le BGA169, la référence recommande une technologie HDI en une étape avec vias borgnes/enterrés. Les empilages illustrés à quatre et six couches ont une épaisseur finie de 0,7 mm ±10 %. Ce sont des constructions de référence, et non des limites universelles ; confirmez le dessin du boîtier, l'épaisseur finie et les capacités de fabrication auprès du fabricant du PCB.
 
 <div align="center"><em>Tableau 6.1-1 : Empilage PTH de référence à quatre couches</em></div>
 
@@ -71,14 +71,14 @@ La figure source indique une épaisseur finie de 0,7 mm ±10 % pour le circuit i
 - BGA145/BGA169 : billes de 0,25 mm de diamètre au pas de 0,5 mm ; le motif de référence indique une ouverture de masque de soudure de 0,33 mm et une ouverture de pâte de 0,25 mm.
 - QFN68L : pastilles périphériques de 0,2 × 0,55 mm au pas de 0,35 mm ; la référence indique une ouverture de masque de 0,3 × 0,65 mm et une ouverture de pâte de 0,2 × 0,55 mm. La pastille exposée mesure 5,49 mm de côté nominalement, dans une plage de 5,39 à 5,59 mm.
 
-Avant de libérer l'empreinte, vérifiez le dessin du boîtier et les règles de pochoir et de masque de soudure de l'assembleur.
+Avant de valider l'empreinte, vérifiez le dessin du boîtier et les règles de pochoir et de masque de soudure de l'assembleur.
 
 ### 6.2. Règles PCB générales { #62-general-pcb-rules }
 
 - Gardez les boucles BUCK courtes et larges, avec un courant de retour proche de la boucle de commutation.
-- Éloignez les zones RF, cristal, GPADC et audio des alimentations à commutation, des horloges d'affichage, des moteurs et des chargeurs.
+- Éloignez les zones RF, quartz, GPADC et audio des alimentations à commutation, des horloges d'affichage, des moteurs et des chargeurs.
 - Routez les interfaces mémoire et d'affichage haute vitesse au-dessus d'un plan de masse de référence continu.
-- Placez la protection ESD près des connecteurs et routez les signaux d'abord à travers le dispositif de protection.
+- Placez la protection ESD près des connecteurs et routez les signaux d'abord à travers le composant de protection.
 - Prévoyez suffisamment de points de test pour l'alimentation, le démarrage, le débogage, la RF et l'étalonnage de production.
 
 #### 6.2.1. Distances de fabrication { #621-fabrication-clearances }
@@ -123,9 +123,9 @@ Lorsque c'est possible, placez les horloges et les pistes d'alimentation bruyant
 
 Les pistes d'horloge doivent être courtes, blindées et isolées des signaux numériques rapides. La ligne RF doit être conçue pour une impédance de 50 Ω avec un réseau d'adaptation compact. Les pistes mémoire et d'affichage doivent avoir une longueur contrôlée selon leur vitesse et être regroupées par bus. Les signaux audio et GPADC doivent être blindés et éloignés des courants de commutation.
 
-#### 6.3.1. Implantation et routage des cristaux { #631-crystal-placement-and-routing }
+#### 6.3.1. Implantation et routage des quartz { #631-crystal-placement-and-routing }
 
-- Placez chaque cristal dans la zone blindée, à plus de 1 mm du bord du circuit et à plus de 5 mm des sources de chaleur telles que le PA, le chargeur et le PMU. Maintenez un dégagement d'au moins 0,25 mm autour du cristal.
+- Placez chaque quartz dans la zone blindée, à plus de 1 mm du bord du circuit et à plus de 5 mm des sources de chaleur telles que le PA, le chargeur et le PMU. Maintenez un dégagement d'au moins 0,25 mm autour du quartz.
 - Routez les pistes du quartz 48 MHz sur la couche supérieure, sur une longueur de 3 à 10 mm et avec une largeur de 0,1 mm. Espacez 48M_XI et 48M_XO d'au moins 0,15 mm, comme indiqué dans le [modèle de routage source](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-48M-M-PCB.png), et blindez-les par la masse en trois dimensions. Éloignez-les de VBAT, du DC-DC et des signaux rapides. Le texte source demande une zone sans cuivre sur les couches supérieure et adjacente sous la zone du quartz, et interdit le passage de pistes sans rapport dans cette zone.
 - Routez les pistes du quartz 32,768 kHz sur la couche supérieure, sur une longueur maximale de 10 mm et avec une largeur de 0,1 mm. Espacez XI et XO d'au moins 0,15 mm et blindez-les par la masse en trois dimensions. Le texte source demande une zone sans cuivre sur les couches supérieure et adjacente sous la zone du quartz, et interdit le passage de pistes sans rapport dans cette zone.
 
@@ -209,11 +209,11 @@ Chaque tableau ci-dessous couvre un domaine de revue de l'implantation et du rou
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | Le cristal est placé près de la puce | Toutes les variantes | Obligatoire |
-| 2 | Un blindage GND est appliqué autour du cristal | Toutes les variantes | Obligatoire |
-| 3 | La liste de contrôle demande une zone sans cuivre sous le cristal : la couche supérieure sur une carte 4 couches, et aussi les couches 2 et 3 si nécessaire | Toutes les variantes | Obligatoire |
-| 4 | La distance entre la piste du cristal et le cuivre de garde GND est supérieure à 3× la largeur de la piste | Toutes les variantes | Obligatoire |
-| 5 | Le signal du cristal 32 kHz ne longe pas BUCK1 en parallèle ; une masse est placée entre les deux | Toutes les variantes | Obligatoire |
+| 1 | Le quartz est placé près de la puce | Toutes les variantes | Obligatoire |
+| 2 | Un blindage GND est appliqué autour du quartz | Toutes les variantes | Obligatoire |
+| 3 | La liste de contrôle demande une zone sans cuivre sous le quartz : la couche supérieure sur une carte 4 couches, et aussi les couches 2 et 3 si nécessaire | Toutes les variantes | Obligatoire |
+| 4 | La distance entre la piste du quartz et le cuivre de garde GND est supérieure à 3× la largeur de la piste | Toutes les variantes | Obligatoire |
+| 5 | Le signal du quartz 32 kHz ne longe pas BUCK1 en parallèle ; une masse est placée entre les deux | Toutes les variantes | Obligatoire |
 
 </div>
 
@@ -227,7 +227,7 @@ Chaque tableau ci-dessous couvre un domaine de revue de l'implantation et du rou
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | Le dispositif de protection ESD du bouton est placé près du bouton | Toutes les variantes | Obligatoire |
+| 1 | Le composant de protection ESD du bouton est placé près du bouton | Toutes les variantes | Obligatoire |
 
 </div>
 
@@ -241,8 +241,8 @@ Chaque tableau ci-dessous couvre un domaine de revue de l'implantation et du rou
 |:---|:---|:---|:---|
 | 1 | La piste RF respecte l'exigence d'une impédance caractéristique de 50 Ω en configuration asymétrique (single-ended) | Toutes les variantes | Obligatoire |
 | 2 | Largeur de la piste RF ≥ 10 mil | Toutes les variantes | Obligatoire |
-| 3 | Prévoir de chaque côté de la piste RF une bande de cuivre GND d'au moins 60 mil de largeur, reliée au plan GND principal par suffisamment de vias de couture | Toutes les variantes | Obligatoire |
-| 4 | Réserver près de la puce l'emplacement d'un réseau d'adaptation d'antenne en pi | Toutes les variantes | Obligatoire |
+| 3 | Prévoyez de chaque côté de la piste RF une bande de cuivre GND d'au moins 60 mil de largeur, reliée au plan GND principal par suffisamment de vias de couture | Toutes les variantes | Obligatoire |
+| 4 | Réservez près de la puce l'emplacement d'un réseau d'adaptation d'antenne en pi | Toutes les variantes | Obligatoire |
 | 5 | Plan de masse GND continu sous le signal RF | Toutes les variantes | Obligatoire |
 | 6 | Aucune piste de signal numérique haute vitesse ne croise sous le signal RF | Toutes les variantes | Obligatoire |
 | 7 | Aucune piste d'alimentation à di/dt élevé ne croise sous le signal RF | Toutes les variantes | Obligatoire |
@@ -274,7 +274,7 @@ Chaque tableau ci-dessous couvre un domaine de revue de l'implantation et du rou
 |:---|:---|:---|:---|
 | 1 | Aucun signal à commutation rapide ne doit être routé en parallèle du signal GPADC, sauf si une garde appropriée est prévue | Toutes les variantes | Obligatoire |
 | 2 | Les résistances du diviseur de tension de batterie sont placées près de la broche d'entrée de la puce | Toutes les variantes | Obligatoire |
-| 3 | Le signal de mesure de la tension de la batterie doit être prélevé au connecteur de batterie et protégé par une piste de garde reliée à la masse | Toutes les variantes | Obligatoire |
+| 3 | Le signal de mesure de la tension de la batterie doit être prélevé au connecteur de batterie et protégé par une garde reliée à la masse | Toutes les variantes | Obligatoire |
 | 4 | Aucun signal à commutation rapide ne doit être routé en parallèle du signal SDMADC, sauf si une garde appropriée est prévue | 555 uniquement | Optionnel |
 
 </div>
@@ -288,7 +288,7 @@ Chaque tableau ci-dessous couvre un domaine de revue de l'implantation et du rou
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
 | 1 | Les points de test sont accessibles à une sonde ou peuvent être soudés sur un dispositif de test | Toutes les variantes | Obligatoire |
-| 2 | Les pastilles de test de téléchargement de programme et d'étalonnage du quartz (VBAT, GND, SWDCLK, SWDIO, MODE, RSTN, VDDIOA, UART3_TXD, UART3_RXD, etc.) doivent avoir un diamètre d'au moins 0,8 mm, être espacées de 2 mm et disposer d'une zone sans composant de 2 mm autour d'elles | Toutes les variantes | Obligatoire |
+| 2 | Les pastilles de test pour le téléchargement du programme et l'étalonnage du quartz (VBAT, GND, SWDCLK, SWDIO, MODE, RSTN, VDDIOA, UART3_TXD, UART3_RXD, etc.) doivent avoir un diamètre d'au moins 0,8 mm, être espacées de 2 mm et disposer d'une zone sans composant de 2 mm autour d'elles | Toutes les variantes | Obligatoire |
 
 </div>
 

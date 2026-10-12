@@ -1,6 +1,6 @@
 ---
 icon: lucide/rss
-description: "El blog de μForge.io reúne novedades de producto, información de versiones y análisis técnicos en profundidad sobre la documentación de SF32."
+description: "El blog de μForge.io reúne novedades de producto, notas de versión y análisis técnicos en profundidad sobre la documentación de SF32."
 ---
 
 # Blog { #blog }

@@ -14,7 +14,7 @@ hide:
 
 Ce guide de conception matérielle fournit des recommandations et des documents de référence pour les produits basés sur la famille de microcontrôleurs AIoT SF32LB56x, optimisés pour le traitement graphique. Il s'adresse aux ingénieurs matériels, aux concepteurs de PCB et aux développeurs de produits qui conçoivent des montres intelligentes, des systèmes HMI connectés, des dispositifs médicaux et de santé, des terminaux portatifs industriels, des instruments portables et des afficheurs évolués pour vélos à assistance électrique et trottinettes électriques.
 
-Le guide couvre l'ensemble du processus de développement matériel pour les conceptions SF32LB56xU et SF32LB56xV, y compris le choix du boîtier, l'alimentation du PMIC et du processeur, la réinitialisation, le mode de démarrage, les modes de fonctionnement, les cristaux, la RF, l'affichage, le stockage, l'audio, les capteurs, la planification des broches UART/I2C/GPTIM, l'implantation et le routage du PCB, la validation et la préparation à la production. Le respect de ces directives contribue à réduire les risques liés au schéma et à l'implantation du PCB, à préserver le comportement basse consommation et à maintenir visibles les différences entre les variantes U et V tout au long de la conception.
+Le guide couvre l'ensemble du processus de développement matériel pour les conceptions SF32LB56xU et SF32LB56xV, y compris le choix du boîtier, l'alimentation du PMIC et du processeur, la réinitialisation, le mode de démarrage, les modes de fonctionnement, les quartz, la RF, l'affichage, le stockage, l'audio, les capteurs, la planification des affectations de broches UART/I2C/GPTIM, l'implantation et le routage du PCB, la validation et la préparation à la production. Le respect de ces directives contribue à réduire les risques liés au schéma et à l'implantation du PCB, à préserver le comportement basse consommation et à tenir compte des différences entre les variantes U et V tout au long de la conception.
 
 Ce document suppose une compréhension de base de la conception matérielle embarquée, de la saisie de schémas et de la conception du PCB (implantation et routage). Il complète les notes d'application matérielle, fiches techniques, manuels utilisateur, conceptions de référence et liste des fournisseurs approuvés de SiFli pour le SF32LB56xU et le SF32LB56xV. Ces documents restent les sources faisant autorité pour les spécifications électriques, le multiplexage des broches, les dimensions du boîtier, la qualification des composants et les limites de production.
 
@@ -45,7 +45,7 @@ Ce document suppose une compréhension de base de la conception matérielle emba
 
 ### 3.1. Architecture { #31-architecture }
 
-Le SF32LB56x cible des produits d'affichage et HMI plus riches que les nœuds de capteurs qui utilisent uniquement le BLE. Les notes d'application matérielle officielles U et V partagent les mêmes thèmes techniques : distribution d'alimentation basée sur PMIC, cristaux 48 MHz et 32,768 kHz, conception RF, choix d'interface d'affichage, choix d'interface de stockage, audio, broches PBR, capteurs, planification UART/I2C/GPTIM, débogage/programmation, et étalonnage du cristal en production.
+Le SF32LB56x cible des produits d'affichage et HMI plus riches que les nœuds de capteurs qui utilisent uniquement le BLE. Les notes d'application matérielle officielles U et V partagent les mêmes thèmes techniques : distribution d'alimentation basée sur PMIC, quartz 48 MHz et 32,768 kHz, conception RF, choix d'interface d'affichage, choix d'interface de stockage, audio, broches PBR, capteurs, planification UART/I2C/GPTIM, débogage/flashage, et étalonnage du quartz en production.
 
 ### 3.2. Variantes et boîtiers { #32-variants-and-packages }
 
@@ -72,12 +72,12 @@ La variante U utilise un boîtier QFN68L. La variante V utilise un boîtier WBBG
 
 ### 3.3. Principales fonctionnalités matérielles { #33-major-hardware-features }
 
-- Distribution d'alimentation centrée sur le PMIC utilisant des exemples SF30147C.
-- Exigences de cristal 48 MHz et 32,768 kHz et modèles de cristaux recommandés.
+- Distribution d'alimentation centrée sur le PMIC, illustrée par des exemples utilisant le SF30147C.
+- Exigences de quartz 48 MHz et 32,768 kHz et modèles de quartz recommandés.
 - Conception RF Bluetooth et exigences d'adaptation d'antenne.
 - Affichage SPI/QSPI et JDI sur la variante U ; affichage SPI/QSPI, MCU8080, DPI et JDI sur la variante V.
 - Options de mémoire externe et de stockage de démarrage, y compris les interfaces de type SDIO/eMMC/SD NAND.
-- Boutons, moteur de vibration, interface audio, broches PBR, capteurs, UART/I2C, GPTIM, débogage/programmation et étalonnage.
+- Boutons, moteur de vibration, interface audio, broches PBR, capteurs, UART/I2C, GPTIM, débogage/flashage et étalonnage.
 
 ### 3.4. Applications typiques { #34-typical-applications }
 
@@ -113,27 +113,27 @@ Le SF32LB56x convient aux montres intelligentes, aux panneaux HMI connectés, au
 
 1. Sélectionnez la variante U ou V, le boîtier, l'interface d'affichage, l'option de stockage et le procédé PCB cible.
 2. Définissez la distribution d'alimentation du PMIC, les rails du processeur, la réinitialisation, la recharge et le contrôle basse consommation.
-3. Sélectionnez les cristaux, l'adaptation RF, l'affichage, le stockage, l'audio, les capteurs, les boutons, le moteur et les circuits PBR.
+3. Sélectionnez les quartz, l'adaptation RF, l'affichage, le stockage, l'audio, les capteurs, les boutons, le moteur et les circuits PBR.
 4. Verrouillez les affectations de broches et vérifiez les conflits entre les fonctions d'affichage, de stockage, d'audio, de débogage, de réveil et de production.
 5. Passez en revue le fanout du PCB, l'empilage, l'impédance, la RF, les horloges, l'USB/SDIO, l'audio, le DC-DC et l'ESD.
 6. Exécutez la liste de contrôle de conception avant le gel du schéma, la publication des données d'implantation du PCB, l'EVT et la mise à disposition de l'outillage de test en production.
 
 ### 4.3. Dossier documentaire pour la revue { #43-review-evidence-pack }
 
-Avant l'EVT, archivez les versions des notes d'application matérielle SF32LB56xU et SF32LB56xV, celles de la fiche technique et du manuel utilisateur, le PDF du schéma, l'empilage PCB, les capacités du procédé PCB, les rapports DRC/ERC, la configuration du PMIC, l'architecture d'alimentation, la configuration de démarrage et de stockage, les captures d'écran du routage de l'affichage et de l'implantation RF et des cristaux, les captures d'écran audio/analogique ainsi que le plan de programmation et d'étalonnage en production.
+Avant l'EVT, archivez les versions des notes d'application matérielle SF32LB56xU et SF32LB56xV, de la fiche technique et du manuel utilisateur, le PDF du schéma, l'empilage de couches du PCB, les capacités du procédé de fabrication du PCB, les rapports DRC/ERC, la configuration du PMIC, l'architecture d'alimentation, la configuration de démarrage et de stockage, des captures d'écran du routage de l'affichage et de l'implantation RF et des quartz, des circuits audio/analogiques, ainsi que le plan de flashage et d'étalonnage en production.
 
 ### 4.4. Utilisation des listes de contrôle { #using-the-checklists }
 
 Ce guide comprend deux niveaux de couverture des listes de contrôle. La liste courte de la section 7 réunit, pour une auto-vérification technique rapide, les éléments présentant le risque le plus élevé. La [liste de contrôle du schéma](SF32LB56x_schematic_checklist.md) (section 5.8) et la section 6.3 des [directives d'implantation et de routage du PCB](SF32LB56x_pcb_layout.md) reproduisent, point par point, la liste complète de SiFli *SF32LB56x Schematic & PCB Checklist* (V1.0, 2026-01-21), publiée avec les documents de conception matérielle sur le [wiki de SiFli][Index Wiki SiFli des guides de conception matérielle des puces]. Elle couvre les familles SF32LB56xU et SF32LB56xV ainsi que la variante SS6700A.
 
-Chaque point de contrôle précise les groupes de puces auxquels il s'applique et s'il est obligatoire (à valider avant la libération du design) ou optionnel (recommandé si la fonction est utilisée). Le texte en couleur et le <span class="flag-yellow">fond jaune</span> conservent les mises en évidence du classeur source. Comme celui-ci n'explique pas chaque surlignage, considérez-les comme des repères de revue supplémentaires, et non comme des substituts aux autres points du tableau.
+Chaque point de contrôle précise les groupes de puces auxquels il s'applique et s'il est obligatoire (à valider avant la libération du design) ou optionnel (recommandé si la fonction est utilisée). Le texte coloré et le texte sur <span class="flag-yellow">fond jaune</span> conservent les mises en évidence du classeur source. Comme celui-ci n'explique pas chaque surlignage, considérez ces éléments comme des repères de revue supplémentaires, et non comme des substituts aux autres points du tableau.
 
 Exécutez la [liste de contrôle du schéma](SF32LB56x_schematic_checklist.md) pendant la revue du schéma, avant de commencer l'implantation du PCB. Exécutez la liste de contrôle d'implantation et de routage du PCB (section 6.3) pendant la revue de l'implantation, avant la publication des fichiers Gerber. En pratique, chaque passage est généralement effectué deux fois : d'abord par l'ingénieur de conception, puis par un réviseur indépendant avant le gel de la conception ou la publication pour fabrication.
 
-Pour de meilleurs résultats, traitez la liste de contrôle comme un enregistrement de validation plutôt que comme une simple lecture :
+Pour tirer le meilleur parti de la liste de contrôle, utilisez-la comme un relevé de validation à renseigner plutôt que comme un simple document à lire :
 
 1. Confirmez d'abord la référence exacte de la pièce cible et le boîtier.
-2. Marquez chaque élément comme réussi / échoué / non applicable pendant la revue au lieu de lire le tableau passivement.
+2. Pour chaque élément, indiquez s'il est conforme, non conforme ou non applicable au lieu de vous contenter de lire le tableau.
 3. Vérifiez les lignes relatives à l'affichage, au stockage, au réveil et à la basse consommation par rapport aux sections correspondantes du guide de conception matérielle.
 4. Consignez les hypothèses propres au boîtier — notamment 56xU par rapport à 56xV, QFN par rapport à WBBGA, affichage DSI par rapport à SPI et utilisation de SD2/MPI3 pour le stockage — dans les notes de revue.
 

@@ -130,7 +130,7 @@ Los casos de uso típicos incluyen:
 - coordinación de varios módulos;
 - operaciones de memoria o registros por lotes;
 - pequeños bucles de control deterministas alrededor de dispositivos externos;
-- cubrir desfases de temporización entre un sensor, una pantalla, un actuador o un circuito integrado auxiliar y el firmware principal de la aplicación.
+- tender un puente sobre las diferencias de temporización del protocolo entre un sensor, una pantalla, un actuador o un circuito integrado auxiliar y el firmware principal de la aplicación.
 
 ### Límites de uso { #usage-boundaries }
 

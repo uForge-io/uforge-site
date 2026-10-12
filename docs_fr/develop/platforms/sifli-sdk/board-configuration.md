@@ -36,7 +36,7 @@ La carte sélectionnée peut affecter :
 - Partez de l'exemple SDK le plus proche pour la même carte.
 - Après un changement de carte, nettoyez les fichiers de compilation puis recompilez.
 
-## Liste de vérification de mise en service de la carte { #board-bring-up-checklist }
+## Liste de contrôle de mise en service de la carte { #board-bring-up-checklist }
 
 - [ ] Confirmer la variante de puce et le boîtier.
 - [ ] Confirmer le type, la capacité et la configuration de la Flash et de la PSRAM.

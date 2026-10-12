@@ -17,7 +17,7 @@ In der Produktentwicklung kann die Firmware zeitlich genau definierte Peripherie
 
 Die Aufgabenverteilung ist einfach: Die CPU konfiguriert und überwacht den Ablauf, PTM führt die wiederkehrenden, zeitkritischen Schritte aus. Dazu greift PTM auf I/O, FIFO/DMA, Ereignisse und den AHB-Bus zu. PTM ist daher mehr als ein Helfer zur GPIO-Signalerzeugung: Es automatisiert Peripherieabläufe mit einem kleinen programmierbaren Ausführungsmodul.
 
-Diese Seite ist relevant, wenn eine Standardperipherie das erforderliche Zeitverhalten oder Protokoll nicht unterstützt und eine Polling-Schleife auf der Haupt-CPU zusätzliche Latenz, Energieverbrauch oder Firmware-Komplexität verursachen würde. Sie richtet sich an Ingenieurinnen und Ingenieure, die die Aufgabenteilung zwischen Hardware und Firmware entwerfen, nicht an Anwenderinnen und Anwender, die lediglich GPIOs oder Timer im Alltag nutzen.
+Diese Seite ist relevant, wenn eine Standardperipherie das erforderliche Zeitverhalten oder Protokoll nicht unterstützt und eine Polling-Schleife auf der Haupt-CPU zusätzliche Latenz, Energieverbrauch oder Firmware-Komplexität verursachen würde. Sie richtet sich an Entwicklungsteams, die die Aufgabenteilung zwischen Hardware und Firmware festlegen, nicht an Entwickler, die GPIOs oder Timer lediglich im normalen Betrieb nutzen.
 
 ## Warum es PTM gibt { #why-ptm-exists }
 
@@ -34,33 +34,33 @@ Die Bearbeitung solcher Aufgaben in Interrupts kann die Interruptlast erhöhen u
 
 ## PTM in der SF32LB57x-Architektur { #ptm-in-the-sf32lb57x-architecture }
 
-PTM ist eine kleine programmierbare Engine, die mit der I/O-, Ereignis-, FIFO/DMA- und AHB-Bus-Infrastruktur des SF32LB57x-SoC verbunden ist. PTM ist für SF32LB57x dokumentiert. Prüfen Sie die Dokumentation des jeweiligen Bauteils, bevor Sie davon ausgehen, dass PTM auch bei einer anderen SF32-Familie verfügbar ist.
+PTM ist eine kleine programmierbare Engine, die mit der I/O-, Ereignis-, FIFO/DMA- und AHB-Bus-Infrastruktur des SF32LB57x-SoC verbunden ist. PTM ist für SF32LB57x dokumentiert. Prüfen Sie die Dokumentation des jeweiligen Geräts, bevor Sie davon ausgehen, dass PTM auch bei einer anderen SF32-Familie verfügbar ist.
 
 <div align="center"><em>Abbildung: Ablauf einer PTM-Aufgabe</em></div>
 
 ```text
-Anwendung / Firmware
+Application / firmware
         │
         ▼
-CPU konfiguriert PTM-Aufgabe
+CPU configures PTM task
         │
         ▼
-PTM führt eine deterministische Peripheriesequenz aus
+PTM executes deterministic peripheral sequences
         │
-        ├── I/O lesen / schreiben
-        ├── Datentransfer über FIFO / DMA
-        ├── Zugriff auf AHB-Speicher oder -Register
-        ├── Auf ein Ereignis warten / feste Verzögerung
-        └── CPU-Interrupt oder interne Ereignisbenachrichtigung
+        ├── IO read/write
+        ├── FIFO / DMA data movement
+        ├── AHB memory or register access
+        ├── Event wait / fixed delay
+        └── CPU interrupt or internal event notification
 ```
 
 Der architektonische Vorteil: PTM kann eine kompakte Folge eigener Befehle ausführen und mehr als nur Pins steuern. Es liest und schreibt I/O, wartet auf Ereignisse, nutzt FIFO/DMA-Pfade und greift auf AHB-Speicher sowie Peripherieregister zu. Die CPU wird erst benachrichtigt, wenn Firmware auf höherer Ebene eingreifen muss.
 
 So kann das System Standardperipherien für Standardaufgaben beibehalten und zugleich einen deterministischen Umsetzungsweg für die individuellen Zeitabläufe bieten, die in realen Hardwaredesigns auftreten.
 
-## Kernfähigkeiten { #core-capabilities }
+## PTM-Funktionen { #core-capabilities }
 
-Der SF32LB57x Hardware-Design-Leitfaden führt **einen PTM-Block mit 16 Kanälen** auf; die Pin-Multiplex-Tabelle nennt PTM1_CH0 bis PTM1_CH15. Zusammen mit den SDK-Definitionen sind folgende Funktionen dokumentiert:
+Der SF32LB57x Hardware-Design-Leitfaden führt **einen PTM-Block mit 16 Kanälen** auf; die Pin-Multiplex-Tabelle nennt PTM1_CH0 bis PTM1_CH15. Zusammen mit den SDK-Definitionen umfassen die dokumentierten Funktionen unter anderem:
 
 - unabhängig steuerbare PTM-Ausführungsressourcen;
 - ein kompakter, eigener Befehlssatz;
@@ -74,7 +74,7 @@ Der SF32LB57x Hardware-Design-Leitfaden führt **einen PTM-Block mit 16 Kanälen
 - zyklengenaue Timing-Kontrolle bei Ausführung aus dem PTM-TCM;
 - 16 IO-Kanäle im PTM-Block;
 - FIFO-Unterstützung mit DMA-Schnittstelle;
-- AHB-Buszugriff für Speicher- und Peripherie-Register-Operationen;
+- AHB-Buszugriff für Speicher- und Peripherieregisteroperationen;
 - CPU-Interrupt-Erzeugung;
 - interne Ereignisse zur Verknüpfung von Aufgabenabläufen;
 - SDK-Steuerfunktionen für Zurücksetzen, Start, Pause und Einzelschritt indizierter PTM-Ressourcen.
@@ -165,15 +165,15 @@ PTM, RP2040 PIO und Nordic PPI/DPPI können die CPU bei zeitkritischen Aufgaben 
 | Vergleichskriterium | SF32LB57x PTM | RP2040 PIO | Nordic PPI/DPPI |
 |:-----|:--------------|:-----------|:-----------|
 | Grundprinzip | Programmierbare Engine für deterministische I/O, individuelle Protokolle, Sensordatenerfassung und ereignisgesteuerte Peripherieabläufe. | Programmierbare I/O-Zustandsmaschinen für deterministische GPIO-Steuerung und eigene serielle Protokolle. | Hardwareverbindung zwischen Peripherieereignissen und -aufgaben zur CPU-unabhängigen Koordination, sofern die erforderlichen Endpunkte vorhanden sind. |
-| Ausführungseinheit | Indizierte PTM-Ausführungsressourcen; Verfügbarkeit beim gewählten Bauteil prüfen. | Zwei PIO-Blöcke mit je vier Zustandsmaschinen, insgesamt acht. | Ereigniskanäle leiten Trigger weiter, führen aber keine Programme aus. |
+| Ausführungseinheit | Indizierte PTM-Ausführungsressourcen; Verfügbarkeit beim gewählten Gerät prüfen. | Zwei PIO-Blöcke mit je vier Zustandsmaschinen, insgesamt acht. | Ereigniskanäle leiten Trigger weiter, führen aber keine Programme aus. |
 | Funktionsweise | PTM führt eigene Aufgabenbefehle aus. | Zustandsmaschinen führen PIO-Befehle Taktzyklus für Taktzyklus aus. | PPI verbindet Ereignis- und Aufgabenendpunkte; DPPI verwendet Publisher- und Subscriber-Peripherien auf einem gemeinsamen Kanal. |
-| Zeitverhalten | Taktzyklusgenaue Steuerung bei Ausführung aus dem PTM-TCM; unterstützt Warten und feste Verzögerungen. | Taktzyklusgenaue Ausführung mit Verzögerungs-Slots und Wait-Befehlen. | Ein Ereignis löst eine vorhandene Peripherieaufgabe aus. Das Zeitverhalten hängt von den verbundenen Peripherien und der Interconnect-Implementierung ab. |
+| Zeitverhalten | Taktzyklusgenaue Steuerung bei Ausführung aus dem PTM-TCM; unterstützt Warten und feste Verzögerungen. | Taktzyklusgenaue Ausführung mit Verzögerungsslots und Wartebefehlen. | Ein Ereignis löst eine vorhandene Peripherieaufgabe aus. Das Zeitverhalten hängt von den verbundenen Peripherien und der Interconnect-Implementierung ab. |
 | I/O | Der PTM-Block des SF32LB57x stellt insgesamt 16 I/O-Kanäle bereit. | Die Zustandsmaschinen steuern ausgewählte GPIO-Pins gemäß der Pin-Konfiguration. | Erzeugt keine GPIO-Signalformen direkt, kann aber Aufgaben von Peripherien wie GPIOTE und Timern auslösen. |
 | Befehle und Logik | Eigener Befehlssatz für I/O, Bus-Lese-/Schreibzugriffe, Datenoperationen, bedingte Sprünge, Wartezeiten und Verzögerungen. | Kompakter Befehlssatz für Pin-I/O, Schieben, Warten, Sprünge, FIFO-Push/Pull, IRQ und Datenbewegungen. | Keine Befehlsausführung, Schleifen, Verzweigungen oder Datenverarbeitung. |
 | Speicher- und Registerzugriff | Zugriff auf AHB-Speicher und Peripherieregister. | Schwerpunkt auf GPIO, FIFO und Schieberegistern; Daten und Konfiguration werden üblicherweise von CPU oder DMA bereitgestellt. | Kein Zugriff auf Speicher oder allgemeine Peripherieregister; verbindet nur verfügbare Ereignis- und Aufgabenendpunkte. |
 | FIFO/DMA | FIFO mit DMA-Schnittstelle. | TX/RX-FIFOs, üblicherweise in Verbindung mit DMA. | Kein eigener Datenpfad im Interconnect; kann Aufgaben DMA-fähiger Peripherien auslösen. |
 | Zusammenspiel mit der CPU | Kann CPU-Interrupts auslösen und Aufgabenabläufe über interne Ereignisse verknüpfen. | Nutzt IRQ-Flags, FIFOs und die Zusammenarbeit mit CPU oder DMA. | Die CPU konfiguriert die Kanäle; zur Laufzeit können Peripherien Aufgaben autonom durch Ereignisse auslösen. |
-| Typische Anwendungsfälle | Eigene Schnittstellenprotokolle, eigenes PWM, automatische Sensordatenerfassung, gebündelte Speicher-/Registeroperationen und Koordination mehrerer Module. | Eigene Schnittstellen nach Art von UART/SPI/I2S, WS2812-ähnliche Signalformen, serielle Protokolle auf Pin-Ebene und präzise GPIO-Zeitsteuerung. | RTC- oder Timer-Ereignisse, die ADC-Wandlungen, Zählvorgänge oder andere von Peripherien unterstützte Standardaufgaben auslösen. |
+| Typische Anwendungsfälle | Eigene Schnittstellenprotokolle, kundenspezifische PWM-Signale, automatische Sensordatenerfassung, gebündelte Speicher-/Registeroperationen und Koordination mehrerer Module. | Eigene Schnittstellen nach Art von UART/SPI/I2S, WS2812-ähnliche Signalformen, serielle Protokolle auf Pin-Ebene und präzise GPIO-Zeitsteuerung. | RTC- oder Timer-Ereignisse, die ADC-Wandlungen, Zählvorgänge oder andere von Peripherien unterstützte Standardaufgaben auslösen. |
 
 </div>
 
@@ -184,24 +184,24 @@ Die Ausführungspfade dieser Mechanismen sind:
 <div align="center"><em>Abbildung: Ausführungspfade von PPI, DPPI, PIO und PTM</em></div>
 
 ```text
-PPI:  Ereignisendpunkt ──> PPI-Kanal ──> Aufgabenendpunkt
+PPI:  Event endpoint ──> PPI channel ──> Task endpoint
 
-DPPI: Ereignis veröffentlichende Peripherie ──> DPPI-Kanal ──> abonnierte Peripherieaufgabe
+DPPI: Publisher peripheral ──> DPPI channel ──> Subscriber peripheral task
 
-PIO: CPU/DMA ──> PIO-Zustandsmaschinenbefehle ──> GPIO-Zeitsteuerung und FIFO
+PIO: CPU/DMA ──> PIO state-machine instructions ──> GPIO timing and FIFOs
 
-PTM: CPU-Konfiguration ──> PTM-Aufgabenbefehle ──> I/O + Ereignisse + FIFO/DMA + AHB-Zugriffe
+PTM: CPU configuration ──> PTM task instructions ──> IO + events + FIFO/DMA + AHB access
 ```
 
 PPI und DPPI verbinden Ereignisse ohne Befehlsausführung, verbinden aber nur vorhandene Ereignisse und Aufgaben; neue Protokolllogik lässt sich damit nicht definieren. PIO kann das Verhalten von Pins über Zustandsmaschinen programmieren, ist aber hauptsächlich auf GPIO und FIFO ausgerichtet. PTM deckt einen größeren Aufgabenbereich ab: Es kann I/O-Zeitsteuerung, das Warten auf Ereignisse, Datentransfers, Registerzugriffe und die Abstimmung kleiner Aufgaben in einem ausführbaren Ablauf zusammenfassen.
 
-PIO kann bei einer Wartebedingung oder einem vollen beziehungsweise leeren FIFO anhalten. Die Datenbereitstellung durch System-DMA ist keine Garantie für das Timing der Befehle. Auch die Ereignisweiterleitung hat eine implementierungsabhängige Latenz. Daraus lässt sich keine allgemeingültige Rangfolge des Energieverbrauchs ableiten. Domänenübergreifende DPPI-Verbindungen benötigen entsprechende Brücken im gewählten Bauteil; nicht jedes DPPI-System unterstützt sie.
+PIO kann bei einer Wartebedingung oder einem vollen beziehungsweise leeren FIFO anhalten. Die Datenbereitstellung durch System-DMA ist keine Garantie für das Timing der Befehle. Auch die Ereignisweiterleitung hat eine implementierungsabhängige Latenz. Daraus lässt sich keine allgemeingültige Rangfolge des Energieverbrauchs ableiten. Domänenübergreifende DPPI-Verbindungen benötigen entsprechende Brücken im gewählten Gerät; nicht jedes DPPI-System unterstützt sie.
 
 ### Nordic PPI und DPPI { #nordic-ppi-and-dppi }
 
 PPI ist das ältere Nordic-Modell und findet sich unter anderem in Geräten der nRF52-Familie. Die Software weist jedem Kanal einen Ereignis- und einen Aufgabenendpunkt zu. Ein Kanal kann zusätzlich einen Fork-Aufgabenendpunkt bereitstellen; auch dabei werden Ereignisse und Aufgaben explizit miteinander verbunden.
 
-DPPI ist das neuere Nordic-Modell. Eine Peripherie veröffentlicht ein Ereignis auf einem Kanal, den eine oder mehrere Peripherieaufgaben abonnieren können. Dadurch sind Ereignisquelle und Abonnenten voneinander entkoppelt. Das passt zu neueren Nordic-Architekturen mit mehreren Domänen. Muss ein Signal eine Stromversorgungsdomäne überqueren, kann eine PPI-Brücke unterstützte DPPI-Kanäle zwischen den Domänen übertragen.
+DPPI ist das neuere Nordic-Modell. Eine Peripherie veröffentlicht ein Ereignis auf einem Kanal, den eine oder mehrere Peripherieaufgaben abonnieren können. Dadurch sind Ereignisquelle und Abonnenten voneinander entkoppelt. Das passt zu neueren Nordic-Architekturen mit mehreren Domänen. Muss ein Signal eine Versorgungsdomänengrenze überqueren, kann eine PPI-Brücke unterstützte DPPI-Kanäle zwischen den Domänen übertragen.
 
 <div align="center"><em>Tabelle: Vergleich von Nordic PPI und DPPI</em></div>
 
@@ -231,7 +231,7 @@ Referenzen: [SiFli-PTM-Befehlsdefinitionen](https://github.com/OpenSiFli/SiFli-S
 
 ## Design-Leitfaden { #design-guidance }
 
-**Timing- und Energiegrenzen:** Taktzyklusgenaue Befehlssteuerung garantiert keine feste Dauer der gesamten Transaktion. AHB-Zugriffe, das Warten auf DMA-Abschluss und externe Ereignisse können variable Verzögerungen verursachen. Die benötigten Takte und Versorgungsdomänen von PTM, Speicher und Peripherie müssen aktiv bleiben. Eine inaktive CPU bedeutet nicht, dass PTM in jedem SoC-Schlafmodus arbeitet. Messen Sie die Gesamtenergie einschließlich weiterlaufender Takte und Aufweckaufwand und vergleichen Sie sie mit einer Standardperipherie-Implementierung.
+**Zeit- und Energiegrenzen:** Taktzyklusgenaues Befehls-Timing garantiert keine feste Dauer der gesamten Transaktion. AHB-Zugriffe, das Warten auf den DMA-Abschluss und externe Ereignisse können variable Verzögerungen verursachen. Die benötigten Takte und Versorgungsdomänen von PTM, Speicher und Peripherie müssen aktiv bleiben. Eine inaktive CPU bedeutet nicht, dass PTM in jedem SoC-Schlafmodus arbeitet. Messen Sie die Gesamtenergie einschließlich weiterlaufender Takte und Aufweckaufwand und vergleichen Sie sie mit einer Standardperipherie-Implementierung.
 
 **Ressourcenzuordnung:** Im SDK v2.5.1 nutzt der [RAMless-DPI-Displaytreiber](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/hal/bf0_hal_lcdc_aux.c) für SF32LB57x die im SDK als „PTM core 0“ bezeichnete Ausführungsressource, deren TCM, Ereignis 0, den zugehörigen Interrupt und einen zugewiesenen DMA-Kanal. Diese SDK-Bezeichnung belegt nicht die Zahl physischer PTM-Kerne. Das ist ein konkretes Beispiel für Buszugriffe und DMA-Koordination, keine frei wiederverwendbare Ressourcenzuordnung. Überschreiben Sie keine Ressourcen eines aktiven Treibers. Regeln Sie den Pufferzugriff zwischen CPU und DMA und führen Sie bei Bedarf Cache-Wartungsoperationen aus.
 
@@ -256,9 +256,9 @@ Ein gutes PTM-Design trennt deterministische Abläufe von anwendungsabhängigen 
 ## Wichtigste Erkenntnisse { #key-takeaways }
 
 - Der SF32LB57x Hardware-Design-Leitfaden dokumentiert einen PTM-Block mit 16 Kanälen; prüfen Sie bei anderen Familien die jeweilige Gerätedokumentation.
-- Prüfen Sie die implementierten PTM-Ressourcen des gewählten Bauteils und SDKs.
+- Prüfen Sie die implementierten PTM-Ressourcen des gewählten Geräts und SDKs.
 - PTM führt kompakte eigene Befehle aus dem PTM-TCM oder über den Systembus aus.
 - PTM unterstützt I/O-Steuerung, Bus- und Registerzugriffe, Datenoperationen, Wartezeiten, Verzögerungen, FIFO/DMA, Interrupts und interne Ereignisse.
 - Sie eignet sich für individuelle, deterministische Peripherieabläufe zwischen fest verdrahteter Hardware und normaler Firmware.
 - Konzeptionell ähnelt PTM RP2040 PIO, ist aber stärker ins System integriert und deckt einen größeren Aufgabenbereich ab.
-- Bei SF32LB57x-Designs kann PTM ein architektonisches Unterscheidungsmerkmal sein, sofern die Dokumentation des ausgewählten Bausteins die benötigten PTM-Ressourcen bestätigt. Besonders nützlich ist es für kundenspezifische Sensoren, Displays und Aktoren, Protokollanpassungen und die Peripherieautomatisierung mit geringer CPU-Last.
+- Bei SF32LB57x-Designs kann PTM ein architektonisches Unterscheidungsmerkmal sein, sofern die Dokumentation des ausgewählten Geräts die benötigten PTM-Ressourcen bestätigt. Besonders nützlich ist es für kundenspezifische Sensoren, Displays und Aktoren, Protokollanpassungen und die Peripherieautomatisierung mit geringer CPU-Last.

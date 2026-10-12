@@ -5,7 +5,7 @@
   deep links when a preview server rewrites navigation.
 -#}
 {% set offline = config.extra.offline and config.extra.offline.enabled %}
-{% set locale_prefixes = {"en": "", "zh": "/zh", "ja": "/ja", "es": "/es", "de": "/de", "fr": "/fr", "pt": "/pt", "ru": "/ru"} %}
+{% set locale_prefixes = {"en": "", "zh": "/zh", "ja": "/ja", "es": "/es", "de": "/de", "fr": "/fr", "pt": "/pt", "ru": "/ru", "ko": "/ko"} %}
 {% if config.extra.alternate | length > 1 %}
   <div class="md-header__option">
     <div class="md-select">
@@ -31,10 +31,10 @@
 {% if not offline and (config.extra.alternate | length) > 1 %}
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    var prefixes = { en: "", zh: "/zh", ja: "/ja", es: "/es", de: "/de", fr: "/fr", pt: "/pt", ru: "/ru" };
+    var prefixes = { en: "", zh: "/zh", ja: "/ja", es: "/es", de: "/de", fr: "/fr", pt: "/pt", ru: "/ru", ko: "/ko" };
     document.querySelectorAll(".uf-lang-switch[data-uf-language-target]").forEach(function (link) {
       link.addEventListener("click", function () {
-        var pagePath = window.location.pathname.replace(/^\/(?:zh|ja|es|de|fr|pt|ru)(?=\/|$)/, "") || "/";
+        var pagePath = window.location.pathname.replace(/^\/(?:zh|ja|es|de|fr|pt|ru|ko)(?=\/|$)/, "") || "/";
         var targetPath = (prefixes[link.dataset.ufLanguageTarget] || "") + pagePath;
         link.href = targetPath + window.location.search + window.location.hash;
         try {

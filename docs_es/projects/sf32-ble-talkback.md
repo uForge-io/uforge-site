@@ -22,7 +22,7 @@ Esta ruta reúne BLE, audio, pantalla, teclas, supervisión de batería y compor
 
 «Hasta ocho dispositivos y tres hablantes simultáneos» es un límite de la implementación upstream, no una capacidad de producto validada para todas las distancias, interferencias, pérdidas de paquetes y patrones de concurrencia. El material upstream tampoco especifica la autenticación de salas, la política de cifrado del enlace, una garantía de privacidad de voz, el estado normativo de la radio ni todo el alcance de licencias del componente binario `talk_back`. Cada uno de estos aspectos requiere una revisión de producto independiente.
 
-**Nota sobre la fuente de la placa:** La página china de SiFli Wiki para la placa ULP está marcada como pendiente de publicación; solo indica su uso en sensores de bajo consumo y dispositivos vestibles, opciones de sensores de 3 o 6 ejes y puntos de prueba reservados para medir bajo consumo. No es una especificación completa de la placa. Verifique los periféricos con la revisión física y el esquema; el comportamiento de Talkback descrito abajo procede del código fuente fijado de la aplicación.
+**Nota sobre la fuente de la placa:** La página china de SiFli Wiki para la placa ULP está marcada como pendiente de publicación; solo indica su uso en sensores de bajo consumo y dispositivos vestibles, opciones de sensores de 3 o 6 ejes y puntos de prueba reservados para medir bajo consumo. No es una especificación completa de la placa. Verifique los periféricos con la revisión física y el esquemático; el comportamiento de Talkback descrito abajo procede del código fuente fijado de la aplicación.
 
 ## Resultado, alcance y criterios de entrada { #outcome-scope-and-entry-criteria }
 
@@ -30,7 +30,7 @@ Esta ruta reúne BLE, audio, pantalla, teclas, supervisión de batería y compor
 
 **Fuera del alcance:** esta página no demuestra cobertura de largo alcance, calidad de voz con un enlace degradado, cifrado de extremo a extremo, certificación, consumo de producción, consistencia de antena, cumplimiento normativo ni compatibilidad con cualquier dispositivo BLE.
 
-**Criterios de entrada:** el equipo puede instalar el entorno de compilación de SiFli-SDK, programar firmware por UART, inspeccionar los registros y conectar de forma segura un altavoz y una batería. Para una referencia completa de voz se necesitan al menos dos placas de la misma revisión.
+**Criterios de entrada:** el equipo puede instalar el entorno de compilación de SiFli-SDK, grabar firmware por UART, inspeccionar los registros y conectar de forma segura un altavoz y una batería. Para una referencia completa de voz se necesitan al menos dos placas de la misma revisión.
 
 <div align="center"><em>Tabla: Condiciones del proyecto</em></div>
 
@@ -54,9 +54,9 @@ Esta ruta reúne BLE, audio, pantalla, teclas, supervisión de batería y compor
 
 | Componente | Especificación requerida | Función | Estado | Dónde obtenerlo | Notas de compatibilidad y sustitución |
 |:-----------|:-------------------------|:--------|:-------|:----------------|:-------------------------------------|
-| SF32LB52-DevKit-ULP / LCKFB-HSPI-SF32LB52-ULP | Destino `sf32lb52-lchspi-ulp`; mínimo 2 placas y máximo 8 | Ejecuta Talkback y proporciona BLE, micrófono, pantalla, teclas, LED RGB, alimentación y rutas de audio | Obligatorio | [Referencia de placa de μForge](../sf32-products/devkits/SF32LB52-DevKit-ULP.md); [página de la placa LCKFB](https://lckfb.com/project/detail/lckfb-hspi-sf32lb52-ulp?param=baseInfo); [tienda de muestras/kits de SiFli](https://sifli.taobao.com/) | Registre todas las revisiones de hardware; una placa SF32LB52 no validada no es un sustituto equivalente |
-| Altavoz | Un altavoz externo de 3 W/4 Ω o 2 W/8 Ω por placa, conectado mediante el conector GH-1.25 mm | Reproduce la voz recibida | Obligatorio | Suele incluirse con el kit de la placa; antes de comprarlo, compruebe el contenido del paquete en la [referencia de placa](../sf32-products/devkits/SF32LB52-DevKit-ULP.md) | No conecte una carga fuera de los límites del amplificador Class-D y el conector integrados |
-| Cables USB de datos y host | Un cable USB-C apto para datos por placa; host capaz de ejecutar las herramientas de SiFli-SDK | Alimentación, programación por UART y captura de registros | Obligatorio | Cable USB-C de datos estándar; las herramientas se obtienen de [SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) | Los cables solo de carga no permiten programar firmware; registre los puertos asignados y el entorno host |
+| SF32LB52-DevKit-ULP / LCKFB-HSPI-SF32LB52-ULP | Destino `sf32lb52-lchspi-ulp`; mínimo 2 placas y máximo 8 | Ejecuta Talkback y proporciona BLE, micrófono, pantalla, teclas, LED RGB, alimentación y rutas de audio | Obligatorio | [Referencia de placa de μForge](../sf32-products/devkits/SF32LB52-DevKit-ULP.md); [página de la placa LCKFB](https://lckfb.com/project/detail/lckfb-hspi-sf32lb52-ulp?param=baseInfo); [tienda de muestras y placas de desarrollo de SiFli](https://sifli.taobao.com/) | Registre todas las revisiones de hardware; una placa SF32LB52 no validada no es un sustituto equivalente |
+| Altavoz | Un altavoz externo de 3 W/4 Ω o 2 W/8 Ω por placa, conectado mediante el conector GH-1.25 mm | Reproduce la voz recibida | Obligatorio | Suele incluirse con la placa de desarrollo; antes de comprarlo, compruebe el contenido del paquete en la [referencia de placa](../sf32-products/devkits/SF32LB52-DevKit-ULP.md) | No conecte una carga fuera de los límites del amplificador Class-D y el conector integrados |
+| Cables USB de datos y host | Un cable USB-C apto para datos por placa; host capaz de ejecutar las herramientas de SiFli-SDK | Alimentación, grabación por UART y captura de registros | Obligatorio | Cable USB-C de datos estándar; las herramientas se obtienen de [SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) | Los cables solo de carga no permiten grabar firmware; registre los puertos asignados y el entorno host |
 | Batería de litio de una celda | Debe coincidir con el conector, la polaridad y la ruta de carga de la placa | Uso portátil, reposo/activación y validación del nivel de batería | Necesaria para validar el producto; opcional para pruebas funcionales de laboratorio | El repositorio Talkback no publica un canal de compra específico; confirme la interfaz en la [referencia de placa](../sf32-products/devkits/SF32LB52-DevKit-ULP.md) antes de adquirirla | Antes de conectarla, verifique polaridad, rango de voltaje, capacidad y protección; el aspecto del conector no demuestra compatibilidad |
 | Micrófono, teclas, LED RGB y pantalla integrados | Componentes originales de la placa de desarrollo | Capturan voz y muestran el rol, emparejamiento, transmisión, recepción y reposo | Integrados | Incluidos con la placa; no se adquieren por separado | Sustituir el hardware de audio o HMI es una adaptación que requiere pruebas de regresión de ganancia, temporización, códigos de tecla y mapa de estados |
 
@@ -71,10 +71,10 @@ Esta ruta reúne BLE, audio, pantalla, teclas, supervisión de batería y compor
 | Paquete o servicio | Versión o revisión requerida | Función | Estado | Dónde obtenerlo | Notas de compatibilidad y actualización |
 |:-------------------|:-----------------------------|:--------|:-------|:----------------|:--------------------------------------|
 | OpenSiFli `sifli-sdk-demo/talkback` | Commit revisado para el artículo [`6fa55ac`](https://github.com/OpenSiFli/sifli-sdk-demo/commit/6fa55ac65b51fca5eac6660a7e481a30e07388ee) | Aplicación, configuración de placa y punto de entrada de compilación | Obligatorio | [Directorio del código fuente de Talkback](https://github.com/OpenSiFli/sifli-sdk-demo/tree/main/talkback) | La rama upstream `main` cambia; fije un commit antes de recopilar evidencias. La ruta actual es `talkback/project`; la ruta `example/ble/talkback/project` del README está obsoleta |
-| SiFli-SDK | `conanfile.py` declara compatibilidad con `^2.4`; upstream no fija un commit exacto del SDK | Base de RT-Thread, BLE, audio, alimentación, compilación y programación del firmware | Obligatorio | [OpenSiFli/SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) | Elija y registre un commit concreto que satisfaga `^2.4`; `main`, al ser móvil, no es una revisión de referencia |
+| SiFli-SDK | `conanfile.py` declara compatibilidad con `^2.4`; upstream no fija un commit exacto del SDK | Base de RT-Thread, BLE, audio, alimentación, compilación y grabación del firmware | Obligatorio | [OpenSiFli/SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) | Elija y registre un commit concreto que satisfaga `^2.4`; `main`, al ser móvil, no es una revisión de referencia |
 | `talk_back/1.2@sifli` | `1.2` | Componente de red/audio BLE Talkback | Obligatorio | Resuelto mediante el [manifiesto Conan del proyecto](https://github.com/OpenSiFli/sifli-sdk-demo/blob/6fa55ac65b51fca5eac6660a7e481a30e07388ee/talkback/project/conanfile.py) | Upstream no publica en esa página el código fuente independiente, el hash del paquete, el servidor de paquetes ni toda la información de licencias; archive el paquete y el registro de resolución, y cierre este riesgo antes de usarlo en un producto |
 | Opus y configuración WebRTC AECM/AGC | Determinada conjuntamente por la aplicación, el SDK y la dependencia Conan fijados | Codificación de voz, tratamiento de eco y control de ganancia | Obligatorio | [Configuración del proyecto](https://github.com/OpenSiFli/sifli-sdk-demo/blob/6fa55ac65b51fca5eac6660a7e481a30e07388ee/talkback/project/proj.conf) y dependencias fijadas del SDK | No registre solo las macros de funciones; conserve las versiones resueltas de las bibliotecas y la información de licencias |
-| SCons, compilador y herramientas de programación UART | Versiones compatibles con el SiFli-SDK seleccionado | Configuran, compilan y programan las imágenes | Obligatorio | Incluidos en el entorno del [SiFli-SDK seleccionado](https://github.com/OpenSiFli/SiFli-SDK) | Registre el sistema operativo host, la versión de la cadena de herramientas, el comando de compilación y el hash del script generado |
+| SCons, compilador y herramientas de grabación UART | Versiones compatibles con el SiFli-SDK seleccionado | Configuran, compilan y programan las imágenes | Obligatorio | Incluidos en el entorno del [SiFli-SDK seleccionado](https://github.com/OpenSiFli/SiFli-SDK) | Registre el sistema operativo host, la versión de la cadena de herramientas, el comando de compilación y el hash del script generado |
 
 </div>
 
@@ -88,7 +88,7 @@ cd talkback/project
 scons --board=sf32lb52-lchspi-ulp -j8
 ```
 
-En Windows, el nombre del script generado para programar el firmware es `build_sf32lb52-lchspi-ulp_hcpu\uart_download.bat`. Ejecútelo e introduzca el puerto COM correspondiente cuando se le solicite. Use la misma imagen de referencia en todos los dispositivos y registre la identidad de cada placa y el hash de la imagen.
+En Windows, el nombre del script generado para grabar el firmware es `build_sf32lb52-lchspi-ulp_hcpu\uart_download.bat`. Ejecútelo e introduzca el puerto COM correspondiente cuando se le solicite. Use la misma imagen de referencia en todos los dispositivos y registre la identidad de cada placa y el hash de la imagen.
 
 ### Controles e indicaciones de estado predeterminados { #default-controls-and-state-indication }
 
@@ -155,9 +155,9 @@ Los principales ámbitos de fallo son el escaneo BLE y la creación de sala, la 
 2. Compile `sf32lb52-lchspi-ulp` en un directorio limpio y grabe la imagen en dos placas.
 3. Compruebe que cada dispositivo arranca como Slave con el LED rojo fijo y después pruebe las teclas, la pantalla, la batería y la ruta del altavoz.
 
-**Evidencias que se deben conservar:** manifiesto completo de versiones, registros de compilación/programación, hashes de firmware, revisiones de ambas placas y registros de arranque.
+**Evidencias que se deben conservar:** manifiesto completo de versiones, registros de compilación/grabación, hashes de firmware, revisiones de ambas placas y registros de arranque.
 
-**Criterio de salida de la etapa 1:** las mismas entradas generan de forma reproducible y graban en ambos dispositivos la misma imagen de referencia; el estado al arrancar coincide con el comportamiento upstream.
+**Criterio de salida del punto de control 1:** las mismas entradas generan de forma reproducible y graban en ambos dispositivos la misma imagen de referencia; el estado al arrancar coincide con el comportamiento upstream.
 
 ## Etapa 2 — Validar la configuración de sala y PTT bidireccional { #stage-2-validate-room-setup-and-bidirectional-ptt }
 
@@ -170,7 +170,7 @@ Los principales ámbitos de fallo son el escaneo BLE y la creación de sala, la 
 
 **Evidencias que se deben conservar:** roles, cronología de operaciones, estado del LED, registros UART, muestras de audio bidireccional y resultados de reintentos.
 
-**Criterio de salida de la etapa 2:** dos o más dispositivos completan repetidamente sesiones PTT bidireccionales; los indicadores coinciden con la dirección real del audio; y el tiempo de espera de 30 segundos vuelve a un estado explicable.
+**Criterio de salida del punto de control 2:** dos o más dispositivos completan repetidamente sesiones PTT bidireccionales; los indicadores coinciden con la dirección real del audio; y el tiempo de espera de 30 segundos vuelve a un estado explicable.
 
 ## Etapa 3 — Validar salida, reconexión y límites de capacidad { #stage-3-validate-leave-reconnect-and-capacity-boundaries }
 
@@ -183,7 +183,7 @@ Los principales ámbitos de fallo son el escaneo BLE y la creación de sala, la 
 
 **Evidencias que se deben conservar:** estado inicial, desencadenante, acción de recuperación, tiempo de recuperación, registros y participantes finales de la sala para cada fallo.
 
-**Criterio de salida de la etapa 3:** cada fallo objetivo tiene una ruta de recuperación explícita, repetible y comprensible para el usuario; y la capacidad/concurrencia necesaria se ha medido en el entorno de RF objetivo, no se ha inferido solo de los límites publicados.
+**Criterio de salida del punto de control 3:** cada fallo objetivo tiene una ruta de recuperación explícita, repetible y comprensible para el usuario; y la capacidad/concurrencia necesaria se ha medido en el entorno de RF objetivo, no se ha inferido solo de los límites publicados.
 
 ## Etapa 4 — Evaluar el audio, el rendimiento RF y el consumo energético { #stage-4-qualify-acoustics-rf-and-low-power }
 
@@ -196,7 +196,7 @@ Los principales ámbitos de fallo son el escaneo BLE y la creación de sala, la 
 
 **Evidencias que se deben conservar:** entorno, orientación de la placa/antena, archivos de audio, distancia e interferencia, trazas de corriente, condiciones de la batería y resultados de recuperación.
 
-**Criterio de salida de la etapa 4:** el equipo de producto ha definido y alcanzado los umbrales acústicos, de RF, alimentación y activación del entorno objetivo, y hay responsables y decisiones para cada resultado insuficiente.
+**Criterio de salida del punto de control 4:** el equipo de producto ha definido y alcanzado los umbrales acústicos, de RF, alimentación y activación del entorno objetivo, y hay responsables y decisiones para cada resultado insuficiente.
 
 ## Etapa 5 — Revisión de preparación del producto { #stage-5-product-readiness-review }
 
@@ -209,11 +209,11 @@ Antes de diseñar hardware propio, responda al menos a estas preguntas:
 - ¿Cómo se recupera el dispositivo de una batería baja, una pérdida anómala de alimentación, un firmware dañado o una actualización de campo fallida?
 - ¿Qué actividades de conformidad de Bluetooth, EMC, radio y batería son aplicables?
 
-**Criterio de salida de la etapa 5:** el registro de riesgos contiene evidencias, responsables, mitigaciones y una decisión explícita de continuar, aplazar o detenerse. Los aspectos de seguridad, licencias y normativa no pueden quedar como trabajo futuro sin responsable.
+**Criterio de salida del punto de control 5:** el registro de riesgos contiene evidencias, responsables, mitigaciones y una decisión explícita de continuar, aplazar o detenerse. Los aspectos de seguridad, licencias y normativa no pueden quedar como trabajo futuro sin responsable.
 
 ## Traspaso a la fase de diseño del producto { #handoff-to-product-design }
 
-El paquete de traspaso debe incluir el código, SDK y dependencias fijados; los roles y la máquina de estados; la matriz de capacidad y recuperación; las mediciones de audio, RF y alimentación; las hipótesis acústicas y de antena; los límites de batería/carga; el modelo de seguridad/privacidad; la información de licencias; los requisitos de pruebas de producción y el plan de recuperación. Utilice la [ruta de integración de SF32LB52x](../sf32-products/chips/SF32LB52x.md#integration-path) para seleccionar el chip, el módulo, la placa, la guía de diseño de hardware y la lista de comprobación. Traslade el comportamiento validado al esquema y al diseño de la PCB personalizada y vuelva a comprobarlo, en lugar de suponer que los resultados de la placa de desarrollo se transfieren sin cambios.
+El paquete de traspaso debe incluir el código, SDK y dependencias fijados; los roles y la máquina de estados; la matriz de capacidad y recuperación; las mediciones de audio, RF y alimentación; las hipótesis acústicas y de antena; los límites de batería/carga; el modelo de seguridad/privacidad; la información de licencias; los requisitos de pruebas de producción y el plan de recuperación. Utilice la [ruta de integración de SF32LB52x](../sf32-products/chips/SF32LB52x.md#integration-path) para seleccionar el chip, el módulo, la placa, la guía de diseño de hardware y la lista de comprobación. Traslade el comportamiento validado al esquemático y al diseño de la PCB personalizada y vuelva a comprobarlo, en lugar de suponer que los resultados de la placa de desarrollo se transfieren sin cambios.
 
 ## Fuentes de referencia { #authoritative-sources }
 - [Directorio OpenSiFli Talkback](https://github.com/OpenSiFli/sifli-sdk-demo/tree/main/talkback)

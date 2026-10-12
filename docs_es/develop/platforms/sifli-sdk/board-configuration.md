@@ -32,7 +32,7 @@ La placa seleccionada puede afectar a:
 
 - No deduzca el nombre de la placa a partir del nombre comercial.
 - No copie a SiFli-SDK un nombre de placa de Zephyr o Arduino.
-- Consulte el esquema de la placa o la página del kit de desarrollo al elegir GPIO, ADC, PWM, I2C, SPI o recursos de pantalla.
+- Consulte el esquemático de la placa o la página de la placa de desarrollo al elegir GPIO, ADC, PWM, I2C, SPI o recursos de pantalla.
 - Empiece con el ejemplo del SDK más cercano para esa misma placa.
 - Haga una compilación limpia después de cambiar de placa.
 
@@ -42,10 +42,10 @@ La placa seleccionada puede afectar a:
 - [ ] Confirme los tipos, las capacidades y la configuración de la Flash y la PSRAM.
 - [ ] Confirme la fuente de alimentación y el comportamiento del circuito de carga.
 - [ ] Confirme las fuentes y frecuencias de reloj que usa esta placa, incluidos 48 MHz y 32,768 kHz cuando corresponda.
-- [ ] Confirme la UART de descarga y la UART para la salida de registros.
+- [ ] Confirme el UART de descarga y el UART para la salida de registros.
 - [ ] Confirme las interfaces de pantalla y táctil.
 - [ ] Confirme la ruta de audio si se utiliza.
-- [ ] Confirme los pines de arranque y el comportamiento de reset.
+- [ ] Confirme los pines de arranque y el comportamiento de reinicio.
 - [ ] Confirme la distribución de particiones.
 
 No empiece a depurar la aplicación hasta que la configuración de la placa coincida con el hardware real.
@@ -67,7 +67,7 @@ En SiFli-SDK, use el identificador del SDK con `--board`; el nombre del producto
 
 ## Al portar a una placa personalizada { #when-porting-to-a-custom-board }
 
-Empiece por la configuración del kit de desarrollo o módulo más cercano y, después, cambie:
+Empiece por la configuración de la placa de desarrollo o módulo más cercano y, después, cambie:
 
 1. Configuración de la memoria Flash y la PSRAM.
 2. Multiplexación de pines.

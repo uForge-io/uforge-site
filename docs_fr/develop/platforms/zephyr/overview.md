@@ -10,7 +10,7 @@ tags:
 
 OpenSiFli développe activement la prise en charge de Zephyr dans [OpenSiFli/zephyr-downstream](https://github.com/OpenSiFli/zephyr-downstream) et [OpenSiFli/zephyr-hal_sifli-downstream](https://github.com/OpenSiFli/zephyr-hal_sifli-downstream). L'arborescence downstream comprend la carte `sf32lb52_devkit_lcd`, l'intégration du HAL SiFli, les fichiers devicetree SF32LB52, les pilotes, les tests et les overlays d'exemples.
 
-Utilisez Zephyr si vous avez besoin de ses API, du devicetree, de Kconfig, d'une structure RTOS portable ou d'une voie d'intégration avec ArduinoCore-zephyr. Pour bénéficier actuellement de la couverture la plus complète des fonctionnalités du fournisseur, utilisez SiFli-SDK.
+Utilisez Zephyr si vous avez besoin de ses API, du devicetree, de Kconfig, d'une structure RTOS portable ou d'une voie d'intégration avec ArduinoCore-zephyr. À ce jour, SiFli-SDK offre la couverture fonctionnelle du fournisseur la plus complète.
 
 Pour la configuration de l'espace de travail, la première compilation `hello_world`, le flashage et la vérification de la console, consultez [Démarrer avec Zephyr downstream](../../../getting-started/zephyr/getting-started-zephyr-upstream.md). Cette page présente la plateforme downstream une fois cette configuration de référence validée.
 
@@ -23,7 +23,7 @@ Références principales :
 
 ## Carte downstream vérifiée { #verified-downstream-board }
 
-<div align="center"><em>Tableau : Carte downstream vérifiée</em></div>
+<div align="center"><em>Tableau : carte downstream vérifiée</em></div>
 
 <div align="center" markdown>
 
@@ -40,7 +40,7 @@ Références principales :
 
 </div>
 
-La documentation de la carte downstream décrit le module SF32LB52x-MOD-N16R8 avec 8 Mo d'OPI-PSRAM, 128 Mb de QSPI-NOR, des cristaux de 48 MHz et 32,768 kHz, des interfaces d'affichage, de l'audio, de l'USB et du matériel microSD.
+La documentation de la carte downstream décrit le module SF32LB52x-MOD-N16R8 avec 8 Mo d'OPI-PSRAM, 128 Mb de QSPI-NOR, des quartz de 48 MHz et 32,768 kHz, des interfaces d'affichage et du matériel audio, USB et microSD.
 
 ## Limites de configuration { #configuration-boundaries }
 
@@ -55,9 +55,9 @@ La documentation de la carte downstream liste :
 - Le module SF32LB52x-MOD-N16R8 basé sur le SF32LB525UC6.
 - 8 Mo d'OPI-PSRAM.
 - 128 Mb de QSPI-NOR.
-- Des cristaux de 48 MHz et 32,768 kHz.
+- Des quartz de 48 MHz et 32,768 kHz.
 - Des interfaces d'affichage SPI/DSPI/QSPI et MCU/8080.
-- La prise en charge d'un écran tactile I2C.
+- La prise en charge de l'interface tactile I2C.
 - Une entrée microphone analogique et une sortie audio analogique avec PA classe D embarqué.
 - Des ports USB Type-C pour USB-vers-série et USB 2.0 FS.
 - microSD via SPI.
@@ -78,10 +78,10 @@ La présence dans l'arborescence ne signifie pas que chaque scénario produit es
 
 Après avoir validé la configuration de référence au premier démarrage, vérifiez un sous-système à la fois : E/S de la carte, comportement UART, affichage, stockage, Bluetooth, audio et gestion de l'alimentation. Conservez ensemble l'exemple, l'overlay, les fragments Kconfig, la révision downstream et le journal série pour chaque point de contrôle. La présence d'un pilote dans l'arborescence ne prouve pas que la combinaison applicative complète est prête pour la production.
 
-## Liste de vérification des risques downstream { #downstream-risk-checklist }
+## Liste de contrôle des risques downstream { #downstream-risk-checklist }
 
 - Utilisez-vous la version downstream d'OpenSiFli plutôt que Zephyr upstream ?
-- La révision du HAL est-elle épinglée ?
+- La révision du HAL est-elle figée ?
 - `west flash` utilise-t-il le runner `sftool` attendu ?
 - La console est-elle configurée à `1000000` bauds ?
 - Les overlays requis sont-ils inclus pour l'exemple ?

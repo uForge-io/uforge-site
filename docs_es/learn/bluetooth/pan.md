@@ -27,7 +27,7 @@ El perfil define tres roles:
 
 | Rol | Función |
 |:-----|:---------|
-| **NAP** (Network Access Point, punto de acceso a la red) | Conecta los dispositivos Bluetooth a una red externa y reenvía paquetes entre la piconet Bluetooth y esa red. Normalmente, el teléfono desempeña este papel cuando comparte su conexión o activa el punto de acceso personal. |
+| **NAP** (Network Access Point, punto de acceso a la red) | El NAP conecta los dispositivos Bluetooth a una red externa y reenvía paquetes entre la piconet Bluetooth y esa red. Normalmente, el teléfono desempeña este papel cuando comparte su conexión o activa el punto de acceso personal. |
 | **PANU** (PAN User, usuario PAN) | Rol de cliente. Se conecta a un dispositivo NAP (o GN) y utiliza su acceso a la red. Los dispositivos SF32 usan este rol. |
 | **GN** (Group Ad-hoc Network, red ad hoc de grupo) | Reenvía paquetes entre los dispositivos PANU conectados, pero no proporciona acceso a redes externas. Se usa para crear redes ad hoc entre dispositivos, no para acceder a Internet. |
 

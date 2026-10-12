@@ -11,7 +11,7 @@ hide:
 # Guide de conception matérielle du SF32LB58x — Liste de contrôle pour la revue de conception et références { #sf32lb58x-hardware-design-guide-design-review-checklist-and-references }
 
 !!! note "Fait partie du Guide de conception matérielle du SF32LB58x"
-    Cette page couvre les sections 7 à 10 : liste de contrôle pour la revue de conception, documents et références associés, annexes et historique des révisions. Retournez à la [liste de contrôle de disposition PCB](SF32LB58x_pcb_layout_checklist.md).
+    Cette page couvre les sections 7 à 10 : liste de contrôle pour la revue de conception, documents et références associés, annexes et historique des révisions. Retournez à la [liste de contrôle d'implantation du PCB](SF32LB58x_pcb_layout_checklist.md).
 
 ## 7. Liste de contrôle de revue de conception { #7-design-review-checklist }
 
@@ -27,7 +27,7 @@ hide:
 - [ ] Vérifiez que les vias des pastilles BGA sont centrés et que le plan de masse sous la puce est continu.
 - [ ] Vérifiez les références des composants clés par rapport à la dernière [liste des fournisseurs agréés SiFli][Liste des fournisseurs agréés SiFli (AVL)].
 - [ ] Incluez dans le dossier de revue l'empilement des couches, la capacité du procédé, les résultats d'impédance et de DRC, l'AVL ainsi que des captures des zones critiques du routage.
-- [ ] Résolvez les questions en suspens concernant le schéma, le routage et la fabrication avant la mise en fabrication du prototype ; consignez et suivez explicitement celles qui restent ouvertes.
+- [ ] Clôturez tous les points ouverts concernant le schéma, le routage et la fabrication avant d'autoriser la fabrication du prototype, ou consignez explicitement ceux qui restent à résoudre et suivez leur clôture.
 
 ## 8. Documents et références associés { #8-related-documents-and-references }
 
@@ -35,20 +35,20 @@ Utilisez les derniers documents officiels lors de la vérification des limites �
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Fiche produit SF32LB58x][SF32LB58x Product Brief]__
-- :fontawesome-solid-file-pdf: __[Fiche technique SF32LB58x][SF32LB58x Datasheet]__
-- :fontawesome-solid-file-pdf: __[Manuel utilisateur SF32LB58x][SF32LB58x User Manual]__
-- :fontawesome-solid-file-lines: __[Note d’application matérielle SF32LB58x]__
+- :fontawesome-solid-file-pdf: __[Fiche produit SF32LB58x]__
+- :fontawesome-solid-file-pdf: __[Fiche technique SF32LB58x]__
+- :fontawesome-solid-file-pdf: __[Manuel utilisateur SF32LB58x]__
+- :fontawesome-solid-file-lines: __[Note d'application matérielle SF32LB58x]__
 - :fontawesome-solid-file-excel: __[Liste des fournisseurs agréés SiFli (AVL)]__
 - :fontawesome-brands-wikipedia-w: __[Index des guides de conception matérielle SiFli pour les puces (Wiki)][SiFli Chip Hardware Design Guide Index (Wiki)]__
 
 </div>
 
-Ensemble, la [Liste de contrôle du schéma](SF32LB58x_schematic_checklist.md) (section 5.8) et la [Liste de contrôle de disposition PCB](SF32LB58x_pcb_layout_checklist.md) (section 6.18) reprennent les points applicables au schéma et au PCB du classeur *SF32LB58x Schematic & PCB Checklist* (V1.0, 2026-01-21), en complément des directives de conception correspondantes.
+Ensemble, la [Liste de contrôle du schéma](SF32LB58x_schematic_checklist.md) (section 5.8) et la [Liste de contrôle d'implantation du PCB](SF32LB58x_pcb_layout_checklist.md) (section 6.18) reprennent les points applicables au schéma et au PCB du classeur *SF32LB58x Schematic & PCB Checklist* (V1.0, 2026-01-21), en complément des directives de conception correspondantes.
 
-[SF32LB58x Product Brief]: https://downloads.sifli.com/silicon/PB0058-SF32LB58x-Product%20Brief%20V0p7.pdf
-[SF32LB58x Datasheet]: https://downloads.sifli.com/user%20manual/DS5801-SF32LB58x-Datasheet%20V1p8p3.pdf
-[SF32LB58x User Manual]: https://downloads.sifli.com/docs/user%20manual/SF32LB58x/UM5801%E2%80%90SF32LB58x%E2%80%90EN.pdf
+[Fiche produit SF32LB58x]: https://downloads.sifli.com/silicon/PB0058-SF32LB58x-Product%20Brief%20V0p7.pdf
+[Fiche technique SF32LB58x]: https://downloads.sifli.com/user%20manual/DS5801-SF32LB58x-Datasheet%20V1p8p3.pdf
+[Manuel utilisateur SF32LB58x]: https://downloads.sifli.com/docs/user%20manual/SF32LB58x/UM5801%E2%80%90SF32LB58x%E2%80%90EN.pdf
 [Note d’application matérielle SF32LB58x]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md
 [Liste des fournisseurs agréés SiFli (AVL)]: ../cad-components/sifli-approved-vendor-list.md
 [SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/hardware/index.html
@@ -65,13 +65,13 @@ Les annexes rassemblent le contexte d'application et de conception de référenc
 |:---|:---|
 | Contexte d'application d'un objet connecté portable riche en fonctionnalités ou d'un terminal intelligent | Annexe A : Un objet connecté portable ou un terminal intelligent typique |
 | Captures d'écran de schéma et exemples au niveau circuit | Section 5 et la note d'application matérielle du SF32LB58x |
-| Captures d'écran de routage PCB pour le BGA, le HDI, la RF, le DSI, l'USB, le SDIO, l'audio et l'alimentation | Section 6 et la note d'application matérielle du SF32LB58x |
+| Captures d'écran de routage du PCB pour le BGA, le HDI, la RF, le DSI, l'USB, le SDIO, l'audio et l'alimentation | Section 6 et la note d'application matérielle du SF32LB58x |
 
 </div>
 
 ### 9.1. Annexe A. Un objet connecté portable ou un terminal intelligent typique { #appendix-a-a-typical-smart-wearable-or-smart-terminal }
 
-Une conception typique basée sur le SF32LB58x pour un objet connecté portable ou un terminal intelligent comprend la MCU, le PMIC, un écran haute résolution, un contrôleur tactile, un stockage de démarrage, une mémoire externe ou de l'eMMC, des capteurs, un moteur de vibration, des entrées/sorties audio, une antenne Bluetooth, des quartz, l'USB ainsi que des interfaces de débogage et de test en production. Le boîtier BGA256 et les interfaces d'affichage et de stockage à haut débit font du choix du procédé HDI un élément de l'architecture système, et non un simple détail du routage PCB.
+Une conception typique basée sur le SF32LB58x pour un objet connecté portable ou un terminal intelligent comprend la MCU, le PMIC, un écran haute résolution, un contrôleur tactile, un stockage de démarrage, une mémoire externe ou de l'eMMC, des capteurs, un moteur de vibration, des entrées/sorties audio, une antenne Bluetooth, des quartz, l'USB ainsi que des interfaces de débogage et de test en production. Le boîtier BGA256 et les interfaces d'affichage et de stockage à haut débit font du choix du procédé HDI un élément de l'architecture système, et non un simple détail du routage du PCB.
 
 ## 10. Historique des révisions { #10-revision-history }
 
@@ -88,7 +88,7 @@ Une conception typique basée sur le SF32LB58x pour un objet connecté portable 
 
 ### 10.1. Historique des révisions de la liste de contrôle { #101-checklist-revision-history }
 
-La liste de contrôle point par point de la [Liste de contrôle du schéma](SF32LB58x_schematic_checklist.md) et de la [Liste de contrôle de disposition PCB](SF32LB58x_pcb_layout_checklist.md) est versionnée séparément du guide, suivant le classeur *SF32LB58x Schematic & PCB Checklist* propre à SiFli.
+La liste de contrôle point par point de la [Liste de contrôle du schéma](SF32LB58x_schematic_checklist.md) et de la [Liste de contrôle d'implantation du PCB](SF32LB58x_pcb_layout_checklist.md) est versionnée séparément du guide, suivant le classeur *SF32LB58x Schematic & PCB Checklist* propre à SiFli.
 
 <div align="center"><em>Tableau 10.1-1 : Historique des révisions de la liste de contrôle</em></div>
 

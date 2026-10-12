@@ -120,7 +120,7 @@ Um serviço BLE fácil de manter costuma seguir este padrão:
 
 <div align="center" markdown>
 
-| Etapa | Responsabilidade do firmware | Ponto de revisão |
+| Passo | Responsabilidade do firmware | Ponto de revisão |
 |:-----|:------------------------|:-------------|
 | Definir a interface do serviço | UUIDs, características, permissões e comportamento das notificações. | Compatibilidade com o aplicativo complementar e os requisitos de segurança. |
 | Registrar o serviço | Usar o caminho do framework Sibles/GATT adotado pelo exemplo mais próximo. | Evitar uma implementação de serviço isolada. |
@@ -209,7 +209,7 @@ O Bluetooth raramente funciona sozinho no SF32: ele compartilha o sistema com gr
 
 - Seções críticas longas ou interrupções desabilitadas no processador de aplicação podem atrasar o tratamento Bluetooth no host.
 - O tráfego do display e da PSRAM disputa largura de banda de memória com os buffers de áudio Bluetooth.
-- Interrupções de sensores que acordam o processador de aplicação com frequência excessiva podem anular a economia de energia obtida ao mantê-lo em repouso enquanto o processador Bluetooth cuida do enlace.
+- Interrupções de sensores que despertam o processador de aplicação com frequência excessiva podem anular a economia de energia obtida ao mantê-lo em repouso enquanto o processador Bluetooth cuida do enlace.
 
 Para uma visão do sistema, consulte [Coexistência com outras cargas de trabalho](processor.md#coexistence-with-other-workloads). Teste combinações realistas de pior caso — por exemplo, display ativo, áudio e um enlace BLE ocupado — em vez de validar cada subsistema isoladamente.
 
@@ -233,7 +233,7 @@ Valide o firmware Bluetooth com o mesmo rigor aplicado ao hardware de RF:
 |:--------|:----------------------|
 | Descoberta lenta ou pouco confiável | Intervalo/tipo dos anúncios, layout de RF e casamento da antena. |
 | Desconexões frequentes apesar de um enlace RF aparentemente bom | Timeout de supervisão curto demais, incompatibilidade no intervalo de conexão ou interferência de coexistência. |
-| Consumo elevado mesmo com a conexão “ociosa” | Latência do periférico desativada, processador de aplicação acordando com frequência excessiva ou tráfego GATT desnecessário. |
+| Consumo elevado mesmo com a conexão “ociosa” | Latência do periférico desativada, processador de aplicação despertando com frequência excessiva ou tráfego GATT desnecessário. |
 | Falhas ou interrupções no áudio | Esgotamento do buffer DMA (underrun), disputa por recursos com o tráfego de display/PSRAM ou problemas de temporização e configuração específicos do transporte (BR/EDR para áudio clássico; CIS/BIS para LE Audio). |
 | Falhas intermitentes de pareamento | Problemas no armazenamento dos vínculos, incompatibilidade de capacidade de E/S ou vínculo obsoleto em um dos lados. |
 | Bom alcance na bancada, mas ruim dentro do gabinete | Dessintonia da antena causada por gabinete/bateria/PCB, configuração de potência de TX ou rede de casamento de RF. |
@@ -250,7 +250,7 @@ Valide o firmware Bluetooth com o mesmo rigor aplicado ao hardware de RF:
 - Deixar a validação inicial de RF (antena, rede de casamento e precisão do cristal) para as revisões finais da PCB.
 - Presumir que ajustes apenas no firmware compensarão um layout de RF inadequado.
 
-## Lista de verificação para a validação inicial { #bring-up-checklist }
+## Checklist para a validação inicial { #bring-up-checklist }
 
 - [ ] Confirme se o produto exige apenas BLE ou Bluetooth de modo dual e escolha o dispositivo SF32 correspondente.
 - [ ] Identifique os exemplos de serviço/perfil do SDK mais próximos do caso de uso.

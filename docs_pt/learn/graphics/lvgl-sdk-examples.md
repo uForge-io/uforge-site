@@ -110,7 +110,7 @@ Os exemplos multilíngues para [LVGL v8](https://docs.sifli.com/projects/sdk/lat
 
 ## Bússola, jogos e interfaces de relógio { #compass-games-and-watch-interfaces }
 
-Os exemplos de bússola eletrônica e interface de relógio combinam exibição e funções da aplicação. Eles permitem avaliar telas, temporização da entrada e das animações e cargas gráficas mais amplas. O índice de jogos leva a um exemplo de Campo Minado. O README lista `eh-lb563` e as séries SF32LB52x/56x, mas não 58x; antes de usá-lo em 58x, confirme o suporte na versão atual do SDK.
+Os exemplos de bússola eletrônica e interface de relógio combinam exibição e funções da aplicação. Eles permitem avaliar telas, temporização da entrada e das animações e cargas gráficas mais amplas. O índice de jogos leva a um exemplo de Campo Minado. O README lista `eh-lb563` e as séries SF32LB52x/SF32LB56x, mas não 58x; antes de usá-lo em 58x, confirme o suporte na versão atual do SDK.
 
 O exemplo documentado de bússola usa um magnetômetro de três eixos MMC56x3 por I2C na `sf32lb52-lchspi-ulp`. Confira o driver, a fiação e a calibração para o produto real; exibir a direção não comprova, por si só, a precisão da medição.
 
@@ -124,7 +124,7 @@ O README do relógio v8 lista as séries LCD SF32LB52x, SF32LB56x e SF32LB58x, a
 
 <div align="center" markdown>
 
-| Etapa | Evidências a manter | Por que isso importa |
+| Passo | Evidências a manter | Por que isso importa |
 |:-----|:-----------------|:---------------|
 | Compilar o original | Revisão do SDK, nome da placa, configuração e log de compilação | Mantém uma base funcional conhecida |
 | Executar no hardware | Foto/vídeo, log serial e comportamento do painel e do toque | Confirma o caminho real de exibição e entrada |

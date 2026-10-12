@@ -1,38 +1,38 @@
 ---
 icon: lucide/list-checks
-description: "Lista de verificação esquemática, item a item, do MCU SF32LB58x, cobrindo alimentação, clock, RF, armazenamento, display e fabricação."
+description: "Checklist esquemática, item a item, do MCU SF32LB58x, cobrindo alimentação, clock, RF, armazenamento, display e fabricação."
 tags:
     - Hardware
     - Chip
-    - Lista de verificação
+    - Checklist
 hide:
     - navigation
 ---
 
-# Guia de projeto de hardware do SF32LB58x — Lista de verificação do esquemático { #sf32lb58x-hardware-design-guide-schematic-checklist }
+# Guia de projeto de hardware do SF32LB58x — Checklist do esquemático { #sf32lb58x-hardware-design-guide-schematic-checklist }
 
 !!! note "Parte do guia de projeto de hardware do SF32LB58x"
-    Esta página contém a lista de verificação esquemática, item a item, da Seção 5.8. Volte a [Diretrizes para o esquemático](SF32LB58x_schematic_design.md).
+    Esta página contém o checklist esquemática, item a item, da Seção 5.8. Volte a [Diretrizes para o esquemático](SF32LB58x_schematic_design.md).
 
-## 5.8. Lista de verificação do esquemático { #58-schematic-checklist }
+## 5.8. Checklist do esquemático { #58-schematic-checklist }
 
-Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições indicadas em cada item para determinar quando ele se aplica: verifique os itens obrigatórios quando essas condições forem atendidas e os opcionais quando a função ou opção de projeto correspondente for utilizada.
+Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições de aplicabilidade indicadas em cada item: confira os itens obrigatórios quando essas condições forem atendidas e os opcionais quando o recurso ou a opção de projeto correspondente for utilizado.
 
 ### 5.8.1. Encapsulamento { #581-package }
 
-<div align="center"><em>Tabela 5.8.1-1: Lista de verificação do encapsulamento</em></div>
+<div align="center"><em>Tabela 5.8.1-1: Checklist do encapsulamento</em></div>
 
 <div align="center" markdown>
 
 | Nº | Ponto de verificação | Categoria |
 |:---|:---|:---|
-| 1 | O encapsulamento do código de peça selecionado está correto, incluindo nomes e números dos pinos | Obrigatório |
+| 1 | O encapsulamento correspondente ao código de peça selecionado está correto, inclusive os nomes e números dos pinos | Obrigatório |
 
 </div>
 
 ### 5.8.2. Alimentação { #582-power-supply }
 
-<div align="center"><em>Tabela 5.8.2-1: Lista de verificação da alimentação</em></div>
+<div align="center"><em>Tabela 5.8.2-1: Checklist da alimentação</em></div>
 
 <div align="center" markdown>
 
@@ -67,17 +67,17 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições 
 </div>
 
 !!! note "Esclarecimento sobre a fonte"
-    O item 19 da lista de verificação de alimentação da planilha determina que a interface de controle TWI use pinos PB do MCU e acrescenta que esses pinos devem ser do tipo “PD”. Separadamente, o item 21 determina o uso da interface TWI dedicada do chip. A planilha não define “PD” nem explica como os dois requisitos se relacionam. A nota de aplicação de hardware da OpenSiFli informa que o SF32LB58x emula sinais TWI com dois GPIOs para controlar o SF30147C. Antes de fechar o esquemático, confirme com a SiFli qual interface e quais pinos devem ser usados.
+    O item 19 do checklist de alimentação da planilha exige que a interface de controle TWI use pinos PB do MCU e acrescenta que esses pinos devem ser do tipo “PD”. Separadamente, o item 21 exige o uso da interface TWI dedicada do chip. A planilha não define “PD” nem explica a relação entre os dois requisitos. A nota de aplicação de hardware da OpenSiFli informa que o SF32LB58x emula sinais TWI com dois GPIOs para controlar o SF30147C. Antes de fechar o esquemático, confirme com a SiFli qual interface e quais pinos devem ser usados.
 
 ### 5.8.3. Capacitores e indutores da alimentação { #583-power-supply-capacitors-and-inductors }
 
-<div align="center"><em>Tabela 5.8.3-1: Lista de verificação dos capacitores e indutores da alimentação</em></div>
+<div align="center"><em>Tabela 5.8.3-1: Checklist dos capacitores e indutores da alimentação</em></div>
 
 <div align="center" markdown>
 
 | Nº | Ponto de verificação | Categoria |
 |:---|:---|:---|
-| 1 | O capacitor bulk de PVDD1 é de pelo menos 10 µF | Obrigatório |
+| 1 | O capacitor de bulk de PVDD1 é de pelo menos 10 µF | Obrigatório |
 | 2 | O capacitor de PVDD2 é de pelo menos 10 µF | Obrigatório |
 | 3 | Capacitor de BUCK1_FB = 4.7 µF | Obrigatório |
 | 4 | Capacitor de BUCK2_FB = 4.7 µF | Obrigatório |
@@ -108,11 +108,11 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições 
 </div>
 
 !!! note "Divergência na corrente de saturação do indutor BUCK"
-    O item 24 da lista de verificação de capacitores e indutores da planilha especifica Isat ≥ 450 mA para um indutor fora da AVL. A nota de aplicação de hardware da OpenSiFli especifica Isat ≥ 500 mA para um indutor BUCK com L = 4,7 µH e DCR ≤ 0,4 Ω. A tabela mantém o valor de 450 mA da planilha; a [orientação de seleção de indutores BUCK no projeto esquemático](SF32LB58x_schematic_design.md#5114-buck-inductor-selection) usa 500 mA. Até que a SiFli esclareça a divergência, use um indutor com Isat de pelo menos 500 mA.
+    O item 24 do checklist de capacitores e indutores da planilha especifica Isat ≥ 450 mA para um indutor fora da AVL. A nota de aplicação de hardware da OpenSiFli especifica Isat ≥ 500 mA para um indutor BUCK com L = 4,7 µH e DCR ≤ 0,4 Ω. A tabela mantém o valor de 450 mA da planilha; a [orientação de seleção de indutores BUCK no projeto esquemático](SF32LB58x_schematic_design.md#5114-buck-inductor-selection) usa 500 mA. Até que a SiFli esclareça a divergência, use um indutor com Isat de pelo menos 500 mA.
 
 ### 5.8.4. Clock { #584-clock }
 
-<div align="center"><em>Tabela 5.8.4-1: Lista de verificação do clock</em></div>
+<div align="center"><em>Tabela 5.8.4-1: Checklist do clock</em></div>
 
 <div align="center" markdown>
 
@@ -127,7 +127,7 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições 
 
 ### 5.8.5. Reset { #585-reset }
 
-<div align="center"><em>Tabela 5.8.5-1: Lista de verificação do reset</em></div>
+<div align="center"><em>Tabela 5.8.5-1: Checklist do reset</em></div>
 
 <div align="center" markdown>
 
@@ -141,7 +141,7 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições 
 
 ### 5.8.6. Sinais de terra { #586-ground-signals }
 
-<div align="center"><em>Tabela 5.8.6-1: Lista de verificação dos sinais de terra</em></div>
+<div align="center"><em>Tabela 5.8.6-1: Checklist dos sinais de terra</em></div>
 
 <div align="center" markdown>
 
@@ -154,7 +154,7 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições 
 
 ### 5.8.7. Modo de inicialização { #587-boot-mode }
 
-<div align="center"><em>Tabela 5.8.7-1: Lista de verificação do modo de inicialização</em></div>
+<div align="center"><em>Tabela 5.8.7-1: Checklist do modo de inicialização</em></div>
 
 <div align="center" markdown>
 
@@ -167,14 +167,14 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições 
 
 ### 5.8.8. RF { #588-rf }
 
-<div align="center"><em>Tabela 5.8.8-1: Lista de verificação de RF</em></div>
+<div align="center"><em>Tabela 5.8.8-1: Checklist de RF</em></div>
 
 <div align="center" markdown>
 
 | Nº | Ponto de verificação | Categoria |
 |:---|:---|:---|
 | 1 | O sinal ANT está identificado com o requisito de impedância característica de 50 Ω em configuração não balanceada | Obrigatório |
-| 2 | Reserve uma rede de casamento tipo π no sinal ANT: um capacitor NC (não montar) em paralelo e um capacitor de 15 pF em série | Obrigatório |
+| 2 | Uma rede de casamento tipo π está reservada no sinal ANT: um capacitor NC (não montar) em paralelo e um capacitor de 15 pF em série | Obrigatório |
 | 3 | Se for necessário filtrar emissões espúrias, reserve uma rede de casamento tipo π com um indutor de 2.7 nH em série e um capacitor de 2 pF em paralelo | Opcional |
 | 4 | Se um amplificador de potência RF externo exigir controle de RXEN e TXEN pelo MCU, use somente PB39 para RXEN do PA e PB40 para TXEN do PA | Opcional |
 | 5 | <span class="flag-red">Se o chip Wi-Fi oferecer arbitragem de coexistência de antena:<br>(1) Recomenda-se o modo de 3 fios: o chip Wi-Fi controla a chave RF da antena Bluetooth/Wi-Fi e executa a arbitragem. Ele usa BT_ACTIVE e BT_PRIORITY, enviados pelo Bluetooth, para decidir se concede a antena ao Bluetooth; WLAN_ACTIVE pode desativar a transmissão e recepção Bluetooth durante a operação do Wi-Fi.<br>(2) BT_ACTIVE deve usar PB08 ou PB45, WLAN_ACTIVE deve usar PB09 ou PB41, e BT_PRIORITY pode usar qualquer GPIO PB.<br></span> | Opcional |
@@ -184,7 +184,7 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições 
 
 ### 5.8.9. Alocação de recursos de I/O { #589-io-resource-allocation }
 
-<div align="center"><em>Tabela 5.8.9-1: Lista de verificação da alocação de recursos de I/O</em></div>
+<div align="center"><em>Tabela 5.8.9-1: Checklist da alocação de recursos de I/O</em></div>
 
 <div align="center" markdown>
 
@@ -198,7 +198,7 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições 
 
 ### 5.8.10. Despertar por hardware { #5810-hardware-wake-up }
 
-<div align="center"><em>Tabela 5.8.10-1: Lista de verificação do despertar por hardware</em></div>
+<div align="center"><em>Tabela 5.8.10-1: Checklist do despertar por hardware</em></div>
 
 <div align="center" markdown>
 
@@ -212,7 +212,7 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições 
 
 ### 5.8.11. Armazenamento { #5811-storage }
 
-<div align="center"><em>Tabela 5.8.11-1: Lista de verificação do armazenamento</em></div>
+<div align="center"><em>Tabela 5.8.11-1: Checklist do armazenamento</em></div>
 
 <div align="center" markdown>
 
@@ -251,21 +251,21 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições 
 
 </div>
 
-No esquema de referência da EVB, VCC da SPI NAND Flash é conectado a VDD18_MPI4; essa alimentação também tem capacitores de 0,1 µF e 1 µF (6,3 V). Essas atribuições de pinos e valores de componentes são específicos da referência da EVB. Antes de usá-los, confira o encapsulamento do chip selecionado, a folha de dados da Flash e a configuração de multiplexação de pinos da placa de destino.
+No esquemático de referência da EVB, VCC da SPI NAND Flash é conectado a VDD18_MPI4; essa alimentação também tem capacitores de 0,1 µF e 1 µF (6,3 V). Essas atribuições de pinos e valores de componentes são específicos da referência da EVB. Antes de usá-los, confira o encapsulamento do chip selecionado, o datasheet da Flash e a configuração de multiplexação de pinos da placa de destino.
 
 A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder ao nível de E/S do periférico. A SiFli recomenda uma interface de 1,8 V para SPI NAND Flash e eMMC. Os dispositivos SD NAND aceitam apenas 3,3 V; portanto, ao usar SD NAND, configure VDDIOA2 para 3,3 V.
 
-### 5.8.12. Tela { #5812-display }
+### 5.8.12. Display { #5812-display }
 
-<div align="center"><em>Tabela 5.8.12-1: Lista de verificação do display</em></div>
+<div align="center"><em>Tabela 5.8.12-1: Checklist do display</em></div>
 
 <div align="center" markdown>
 
 | Nº | Ponto de verificação | Categoria |
 |:---|:---|:---|
-| 1 | O SF32LB58x conecta o display por DSI + LCDC2 conforme previsto | Obrigatório |
+| 1 | A conexão prevista para o display do SF32LB58x usa DSI + LCDC2 | Obrigatório |
 | 2 | As conexões dos sinais DSI estão corretas | Obrigatório |
-| 3 | <span class="flag-red">Se a tela usar apenas QSPI, recomenda-se a interface QSPI LCDC1 do HCPU para evitar problemas de taxa de quadros e RAM</span> | Obrigatório |
+| 3 | <span class="flag-red">Se o display usar apenas QSPI, recomenda-se a interface QSPI LCDC1 do HCPU para evitar problemas de taxa de quadros e RAM</span> | Obrigatório |
 | 4 | DSI_REXT está conectado ao GND por um resistor de 10 kΩ | Obrigatório |
 | 5 | A conexão de RSTB do LCDC está correta | Obrigatório |
 | 6 | A conexão de TE do LCDC está correta (ao sinal TE ou Fmark do painel) | Obrigatório |
@@ -280,7 +280,7 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 
 ### 5.8.13. GPADC { #5813-gpadc }
 
-<div align="center"><em>Tabela 5.8.13-1: Lista de verificação do GPADC</em></div>
+<div align="center"><em>Tabela 5.8.13-1: Checklist do GPADC</em></div>
 
 <div align="center" markdown>
 
@@ -296,7 +296,7 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 
 ### 5.8.14. SDMADC { #5814-sdmadc }
 
-<div align="center"><em>Tabela 5.8.14-1: Lista de verificação do SDMADC</em></div>
+<div align="center"><em>Tabela 5.8.14-1: Checklist do SDMADC</em></div>
 
 <div align="center" markdown>
 
@@ -310,7 +310,7 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 
 ### 5.8.15. Botões { #5815-buttons }
 
-<div align="center"><em>Tabela 5.8.15-1: Lista de verificação dos botões</em></div>
+<div align="center"><em>Tabela 5.8.15-1: Checklist dos botões</em></div>
 
 <div align="center" markdown>
 
@@ -325,7 +325,7 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 
 ### 5.8.16. Proteção contra sobrecarga elétrica (EOS) e descarga eletrostática (ESD) { #5816-eos-and-esd-protection }
 
-<div align="center"><em>Tabela 5.8.16-1: Lista de verificação da proteção EOS e ESD</em></div>
+<div align="center"><em>Tabela 5.8.16-1: Checklist da proteção EOS e ESD</em></div>
 
 <div align="center" markdown>
 
@@ -343,7 +343,7 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 
 ### 5.8.17. I2C { #5817-i2c }
 
-<div align="center"><em>Tabela 5.8.17-1: Lista de verificação do I2C</em></div>
+<div align="center"><em>Tabela 5.8.17-1: Checklist do I2C</em></div>
 
 <div align="center" markdown>
 
@@ -358,7 +358,7 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 
 ### 5.8.18. I2S { #5818-i2s }
 
-<div align="center"><em>Tabela 5.8.18-1: Lista de verificação do I2S</em></div>
+<div align="center"><em>Tabela 5.8.18-1: Checklist do I2S</em></div>
 
 <div align="center" markdown>
 
@@ -375,7 +375,7 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 
 ### 5.8.19. PDM e áudio analógico { #5819-pdm-and-analog-audio }
 
-<div align="center"><em>Tabela 5.8.19-1: Lista de verificação de PDM e áudio analógico</em></div>
+<div align="center"><em>Tabela 5.8.19-1: Checklist de PDM e áudio analógico</em></div>
 
 <div align="center" markdown>
 
@@ -390,13 +390,13 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 | 7 | Cada saída DAC, P e N, tem um resistor série de 1 kΩ, com um capacitor de 1.5 nF entre elas | Opcional |
 | 8 | AW8155 é o amplificador de áudio recomendado; ao usar essa peça, configure o software para o modo 4 / Class AB | Opcional |
 | 9 | <span class="flag-red">Ao realimentar a saída do PA de áudio para o ADC do MCU, adicione um divisor e filtro RC ou uma filtragem digital adicional; a tensão dividida deve permanecer na faixa de entrada do ADC, e a frequência de corte do filtro RC deve ser 20 kHz</span> | Opcional |
-| 10 | <span class="flag-red">Se a via ADC de áudio analógico integrada ao chip não for usada, recomenda-se conectar ADC1P/ADC1N e ADC2P/ADC2N ao terra, cada par por meio de um resistor série de 0 Ω</span> | Opcional |
+| 10 | <span class="flag-red">Se a entrada ADC de áudio analógico integrada ao chip não for usada, recomenda-se conectar ADC1P/ADC1N e ADC2P/ADC2N ao terra, cada par por meio de um resistor série de 0 Ω</span> | Opcional |
 
 </div>
 
 ### 5.8.20. SPI { #5820-spi }
 
-<div align="center"><em>Tabela 5.8.20-1: Lista de verificação do SPI</em></div>
+<div align="center"><em>Tabela 5.8.20-1: Checklist do SPI</em></div>
 
 <div align="center" markdown>
 
@@ -410,7 +410,7 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 
 ### 5.8.21. USART { #5821-usart }
 
-<div align="center"><em>Tabela 5.8.21-1: Lista de verificação do USART</em></div>
+<div align="center"><em>Tabela 5.8.21-1: Checklist do USART</em></div>
 
 <div align="center" markdown>
 
@@ -430,7 +430,7 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 
 ### 5.8.22. PWM { #5822-pwm }
 
-<div align="center"><em>Tabela 5.8.22-1: Lista de verificação do PWM</em></div>
+<div align="center"><em>Tabela 5.8.22-1: Checklist do PWM</em></div>
 
 <div align="center" markdown>
 
@@ -439,13 +439,13 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 | 1 | A alocação do pino PWM da retroiluminação está correta; use um GPTIMx diferente do PWM do motor, de preferência na interface PB, para evitar que a redução da frequência do HCPU afete a retroiluminação | Obrigatório |
 | 2 | A alocação do pino PWM do motor está correta; use um GPTIMx diferente do PWM da retroiluminação, de preferência na interface PB, para evitar que a redução da frequência do HCPU afete a vibração | Obrigatório |
 | 3 | Para controlar o motor por PWM, selecione um GPIO desabilitado por padrão, a fim de evitar comportamento anormal durante a gravação do firmware quando for usado um motor SMT | Obrigatório |
-| 4 | Os sinais que exigem saída PWM devem usar a interface PB; verifique também se há comportamento anormal na inicialização a frio | Obrigatório |
+| 4 | Os sinais que exigem saída PWM devem usar pinos do banco PB; verifique também se há comportamento anormal na inicialização a frio | Obrigatório |
 
 </div>
 
 ### 5.8.23. Depuração { #5823-debug }
 
-<div align="center"><em>Tabela 5.8.23-1: Lista de verificação de depuração</em></div>
+<div align="center"><em>Tabela 5.8.23-1: Checklist de depuração</em></div>
 
 <div align="center" markdown>
 
@@ -459,7 +459,7 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 
 ### 5.8.24. USB { #5824-usb }
 
-<div align="center"><em>Tabela 5.8.24-1: Lista de verificação do USB</em></div>
+<div align="center"><em>Tabela 5.8.24-1: Checklist do USB</em></div>
 
 <div align="center" markdown>
 
@@ -473,7 +473,7 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 
 ### 5.8.25. PBR { #5825-pbr }
 
-<div align="center"><em>Tabela 5.8.25-1: Lista de verificação do PBR</em></div>
+<div align="center"><em>Tabela 5.8.25-1: Checklist do PBR</em></div>
 
 <div align="center" markdown>
 
@@ -492,11 +492,11 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 !!! note "Aplicabilidade da fonte e verificação"
     O item 4 da lista PBR na [planilha de verificação original](https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) menciona o SF32LB567. No entanto, a planilha não confirma que os itens 4 e 5 da lista PBR sejam recomendações para o SF32LB58x; confirme a aplicabilidade com a SiFli antes de adotá-los.
 
-    O item 6 da lista de armazenamento da planilha diz que, durante a gravação em produção, PA43 deve ser levado ao nível alto para habilitar a “alimentação do MPI3”. Já a [nota oficial de aplicação de hardware do SF32LB58x](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md) descreve PA43 como o controle de alimentação da Flash externa e orienta levá-lo ao nível alto para alimentar essa Flash. A linha da checklist mantém o texto da planilha. Antes de fechar o procedimento de gravação em produção, confirme com a SiFli qual trilho de alimentação e quais interfaces PA43 realmente controla.
+    O item 6 da lista de armazenamento da planilha diz que, durante a gravação em produção, PA43 deve ser levado ao nível alto para habilitar a “alimentação do MPI3”. Já a [nota oficial de aplicação de hardware do SF32LB58x](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md) descreve PA43 como o controle de alimentação da Flash externa e orienta levá-lo ao nível alto para alimentar essa Flash. A linha do checklist mantém o texto da planilha. Antes de fechar o procedimento de gravação em produção, confirme com a SiFli qual trilho de alimentação e quais interfaces PA43 realmente controla.
 
 ### 5.8.26. Consumo de energia { #5826-power-consumption }
 
-<div align="center"><em>Tabela 5.8.26-1: Lista de verificação do consumo de energia</em></div>
+<div align="center"><em>Tabela 5.8.26-1: Checklist do consumo de energia</em></div>
 
 <div align="center" markdown>
 
@@ -512,7 +512,7 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 
 ### 5.8.27. Gravação e calibração do cristal { #5827-download-and-crystal-calibration }
 
-<div align="center"><em>Tabela 5.8.27-1: Lista de verificação de gravação e calibração do cristal</em></div>
+<div align="center"><em>Tabela 5.8.27-1: Checklist de gravação e calibração do cristal</em></div>
 
 <div align="center" markdown>
 

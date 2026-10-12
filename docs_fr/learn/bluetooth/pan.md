@@ -43,7 +43,7 @@ Le PANU peut découvrir les appareils proches par Inquiry et identifier leur ser
 
 | Approche | Convient bien quand | Compromis |
 |:---------|:---------------|:---------|
-| Bluetooth PAN | Le produit utilise déjà le Bluetooth bimode, n'a besoin que d'un trafic IP intermittent ou modéré et dispose généralement d'un téléphone appairé à proximité. | Le débit et la portée dépendent de BR/EDR et de la connexion amont du NAP. Une architecture avec partage de connexion dépend du téléphone ; d'autres architectures peuvent utiliser une passerelle NAP indépendante. |
+| Bluetooth PAN | Le produit utilise déjà le Bluetooth bimode, n'a besoin que d'un trafic IP intermittent ou modéré et dispose généralement d'un téléphone appairé à proximité. | Le débit et la portée dépendent de BR/EDR et de la connexion amont du NAP. Une architecture avec partage de connexion dépend du téléphone ; d'autres architectures peuvent utiliser une passerelle NAP autre qu'un téléphone. |
 | Radio Wi-Fi dédiée | Le produit a besoin d'un débit élevé et soutenu ou d'une connectivité indépendante du téléphone. | Ajoute une radio, une antenne, du travail d'intégration et un budget de consommation. Évaluez les exigences de conformité RF applicables à la radio ou au module choisi et au produit final. |
 | BLE GATT → application compagnon → Internet | Le produit échange de petites quantités de données que l'application peut transmettre au cloud. | Ce relais personnalisé ne fournit pas de connexion IP directe à l'appareil. BLE IPSP est une autre solution, dont la prise en charge doit être vérifiée dans la pile de l'appareil et la passerelle ; ce n'est pas PAN. |
 
@@ -128,7 +128,7 @@ Le téléphone joue le rôle de **NAP** et fait partie du chemin réseau du prod
 
 <div align="center" markdown>
 
-| Système mobile | Informations documentées par la plateforme | Premiers essais avec SF32 | Points à valider pour le produit |
+| Système mobile | Informations documentées par la plateforme | Conseils de mise en service SF32 | Points à valider pour le produit |
 |:----------|:----------------------------|:-----------------------|:-------------------------------|
 | **iOS / iPadOS avec service cellulaire** | La [documentation Apple sur le partage de connexion](https://support.apple.com/guide/iphone/share-your-internet-connection-iph45447ca6/27/ios/27) cite le Bluetooth comme méthode de connexion et précise que cette fonction partage la connexion Internet mobile du téléphone. | Suivez les [étapes iOS de SiFli Xiaozhi](https://docs.sifli.com/projects/xiaozhi/get-started/) : utilisez un téléphone avec un service cellulaire actif, activez le Partage de connexion avant l'appairage, laissez le Bluetooth activé, puis appairez et connectez l'appareil SF32 au téléphone. Si `sifli-pan` n'apparaît pas, le guide SiFli indique qu'un redémarrage du téléphone peut aider. | La disponibilité du Partage de connexion, les limites de données et le nombre d'appareils connectés dépendent de l'opérateur et du modèle d'iPhone. Testez chaque version d'iOS/iPadOS, catégorie d'appareil et forfait pris en charge. Ne déduisez pas la compatibilité PAN du seul fonctionnement du point d'accès Wi-Fi. |
 | **Android** | [Aide Android](https://support.google.com/android/answer/9059108) indique que la plupart des téléphones Android peuvent partager leurs données mobiles par Bluetooth : appairez d'abord les appareils, configurez la connexion réseau Bluetooth de l'autre appareil, puis activez le **partage de connexion Bluetooth**. | Activez le partage de connexion Bluetooth avant `pan_cmd conn_pan`. Le nom et l'emplacement des réglages varient selon le fabricant, la version d'Android et les règles de l'entreprise ; notez le chemin exact pour chaque téléphone testé. | Selon Google, la fonction est disponible sur la *plupart* des téléphones Android, mais pas tous. Les opérateurs peuvent limiter ou facturer le partage de connexion, et les fabricants peuvent masquer ou modifier le réglage. Testez les combinaisons téléphone/OS/opérateur prévues pour le produit au lieu de vous fier à la seule version d'Android. |
@@ -150,7 +150,7 @@ Suivez ces étapes pour chaque téléphone testé :
 2. Activez le partage de connexion Bluetooth ou le Point d'accès personnel du téléphone **avant** de demander une connexion PAN depuis l'appareil SF32.
 3. Appairez le téléphone et l'appareil, en gardant le téléphone découvrable lorsque l'OS l'exige.
 4. Exécutez `pan_cmd conn_pan`, puis vérifiez un échange IP réel, par exemple avec la commande `weather`. Une connexion Bluetooth réussie ne suffit pas.
-5. Désactivez le partage de connexion, mettez le téléphone en veille puis réactivez-le, et éloignez-le jusqu'à perdre la liaison. Vérifiez que le produit se reconnecte comme prévu.
+5. Désactivez le partage de connexion, mettez le téléphone en veille puis réactivez-le, et éloignez-le hors de portée. Vérifiez que le produit se reconnecte comme prévu.
 
 Si le partage n'est activé qu'après que la connexion Bluetooth est déjà établie, reconnectez explicitement le PAN avec `pan_cmd conn_pan`.
 
@@ -174,7 +174,7 @@ Le projet [assistant vocal SF32 Xiaozhi](../../projects/sf32-xiaozhi.md) est un 
 
 Le README recommande aussi de contrôler l'attribution de l'adresse Bluetooth. Lisez l'adresse avec `nvds get_mac`. Utilisez uniquement un OUI attribué à votre organisation ou autorisé pour le produit, avec une adresse unique par appareil ; ne copiez pas l'OUI d'un autre fabricant depuis un exemple. Dans `nvds update addr 6 xxxxxxYYYYYY`, `YYYYYY` est l'OUI avec l'ordre des octets inversé et `xxxxxx` représente les trois autres octets. Respectez l'ordre des octets de la commande au lieu de coller telle quelle une adresse MAC affichée.
 
-`CONFIG_NVDS_AUTO_UPDATE_MAC_ADDRESS` peut écraser une modification manuelle. Si une adresse de test autorisée n'est pas conservée, le README recommande de désactiver cette option, de recompiler et de reprogrammer le firmware, puis de définir à nouveau l'adresse. Il s'agit d'un diagnostic de test, pas d'une politique d'attribution en production : validez après redémarrage la politique automatique ou de programmation en usine retenue avant la commercialisation.
+`CONFIG_NVDS_AUTO_UPDATE_MAC_ADDRESS` peut écraser une modification manuelle. Si une adresse de test autorisée n'est pas conservée, le README recommande de désactiver cette option, de recompiler et de flasher à nouveau le firmware, puis de définir à nouveau l'adresse. Il s'agit d'un diagnostic de test, pas d'une politique d'attribution en production : validez après redémarrage la politique automatique ou de programmation en usine retenue avant la commercialisation.
 
 <div align="center"><em>Tableau : Dépannage du Bluetooth PAN</em></div>
 
@@ -199,7 +199,7 @@ Le README recommande aussi de contrôler l'attribution de l'adresse Bluetooth. L
 - [ ] Tester chaque modèle de téléphone, build d'OS, combinaison région/opérateur et chemin de réglage prévu. Ne pas annoncer une compatibilité générale « iOS/Android » sans ces essais.
 - [ ] Vérifier que l'OUI de l'adresse MAC Bluetooth de l'appareil est valide avant d'utiliser les fonctions réseau.
 - [ ] Si PAN sert au transport OTA, tester entièrement `pan_cmd ota_pan`, y compris le retour arrière, avant la mise sur le marché.
-- [ ] Définir la reconnexion et la reconnexion automatique (`set_retry_flag`, `set_retry_time`) selon la fréquence à laquelle le téléphone doit se trouver à portée.
+- [ ] Définir le comportement de reconnexion et de reconnexion automatique (`set_retry_flag`, `set_retry_time`) selon la fréquence à laquelle le téléphone doit se trouver à portée.
 
 ## Points clés à retenir { #key-takeaways }
 

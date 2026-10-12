@@ -1,6 +1,6 @@
 ---
 icon: lucide/layers
-description: "Directrices de diseño de PCB para el MCU SF32LB56x: huella, apilado de capas, trazado crítico y lista de comprobación punto por punto."
+description: "Directrices de diseño de PCB para la MCU SF32LB56x: huella, apilado de capas, trazado crítico y lista de comprobación punto por punto."
 tags:
     - Hardware
     - Chip
@@ -11,13 +11,13 @@ hide:
 # Guía de diseño de hardware SF32LB56x — Directrices de diseño de PCB { #sf32lb56x-hardware-design-guide-pcb-layout-guidelines }
 
 !!! note "Parte de la guía de diseño de hardware SF32LB56x"
-    Esta página recoge el apartado 6, Directrices de diseño de PCB. Vuelva a [Diseño del esquema](SF32LB56x_schematic_design.md) o continúe con la [Lista de comprobación de revisión del diseño y referencias](SF32LB56x_review_and_reference.md).
+    Esta página recoge el apartado 6, Directrices de diseño de PCB. Vuelva a [Diseño del esquemático](SF32LB56x_schematic_design.md) o continúe con la [Lista de comprobación de revisión del diseño y referencias](SF32LB56x_review_and_reference.md).
 
 ## 6. Directrices de diseño de PCB { #6-pcb-layout-guidelines }
 
 ### 6.1. Huella y apilado de capas { #61-footprint-and-stack-up }
 
-La variante U utiliza un encapsulado QFN68L de 68 pines, de 7 × 7 × 0,75 mm y con un paso de 0,35 mm. QFN admite PTH; SiFli recomienda una estructura PTH de cuatro capas, con todos los pines enrutados hacia fuera desde la capa superior. La variante V utiliza un WBBGA de 175 bolas, de 6,5 × 6,1 × 0,94 mm, con paso de bola de 0,4 mm y diámetro de 0,25 mm. No admite PTH y requiere HDI. Enrute hacia fuera las dos filas exteriores de bolas por la capa superior y las demás por capas internas. Antes de cerrar el diseño, confirme que el fabricante de PCB admite el apilado, la máscara antisoldante y la estrategia de fanout seleccionados.
+La variante U utiliza un encapsulado QFN68L de 68 pines, de 7 × 7 × 0,75 mm y con un paso de 0,35 mm. QFN admite PTH; SiFli recomienda una estructura PTH de cuatro capas, con todos los pines enrutados hacia fuera desde la capa superior. La variante V utiliza un WBBGA de 175 bolas, de 6,5 × 6,1 × 0,94 mm, con paso de bola de 0,4 mm y diámetro de 0,25 mm. No admite PTH y requiere HDI. Enrute hacia fuera las dos filas exteriores de bolas por la capa superior y las demás por capas internas. Antes de liberar el diseño de PCB, confirme que el fabricante admite el apilado, la máscara antisoldante y la estrategia de salida de pistas desde el encapsulado.
 
 ### 6.2. Trazado crítico { #62-critical-routing }
 
@@ -27,18 +27,18 @@ Coloque los cristales dentro del blindaje, a más de 1 mm del borde de la placa 
 
 #### 6.2.2. Trazado RF { #622-rf-routing }
 
-Enrute RF como una pista de impedancia controlada de 50 Ω, de preferencia con un ancho superior a 10 mil y por la capa superior; evite vías y esquinas agudas. Coloque la red de adaptación junto al chip, no junto a la antena. Sitúe el condensador de filtro AVDD_BRF cerca del pin del chip y conecte su masa directamente al plano principal mediante una vía. Disponga un blindaje de masa continuo y vías de stitching a ambos lados de la pista RF. No coloque alimentación de alto di/dt, relojes de alta velocidad ni señales I2C, SPI, SDIO, I2S o UART dentro de la zona RF o debajo de ella. Conecte firmemente a masa principal AVSS_RF1/2/3 de la variante U y AVSS_RRF, AVSS_TRF, AVSS_TRF2 y AVSS_BB de la variante V.
+Enrute RF como una pista de impedancia controlada de 50 Ω en configuración no balanceada, de preferencia con un ancho superior a 10 mil y por la capa superior; evite vías y esquinas agudas. Coloque la red de adaptación junto al chip, no junto a la antena. Sitúe el condensador de filtro AVDD_BRF cerca del pin del chip y conecte su masa directamente al plano principal mediante una vía. Disponga un blindaje de masa continuo y vías de cosido a ambos lados de la pista RF. No coloque alimentación de alto di/dt, relojes de alta velocidad ni señales I2C, SPI, SDIO, I2S o UART dentro de la zona RF o debajo de ella. Conecte firmemente a masa principal AVSS_RF1/2/3 de la variante U y AVSS_RRF, AVSS_TRF, AVSS_TRF2 y AVSS_BB de la variante V.
 
 #### 6.2.3. Alimentación y masa { #623-power-and-ground }
 
-Coloque el inductor BUCK y los condensadores de filtro cerca de los pines del chip. Mantenga BUCK_LX corta y ancha; BUCK_FB debe tener un ancho mínimo de 0,25 mm. No vierta cobre en la capa superior bajo el inductor; mantenga un plano de masa íntegro en la capa adyacente y no pase otras pistas por la zona del inductor. Conecte las masas de los condensadores de salida BUCK al plano principal con varias vías. Sitúe el condensador PVDD junto a su pin y enrute PVDD de forma corta y ancha; conecte PVSS a masa principal mediante vías. Coloque los condensadores de desacoplo de LDO y E/S cerca de sus pines y dimensione las pistas de alimentación según la corriente de carga.
+Coloque el inductor BUCK y los condensadores de filtro cerca de los pines del chip. Mantenga corta y ancha la pista BUCK_LX; la pista BUCK_FB debe tener un ancho mínimo de 0,25 mm. No vierta cobre en la capa superior bajo el inductor; mantenga un plano de masa íntegro en la capa adyacente y no pase otras pistas por la zona del inductor. Conecte las masas de los condensadores de salida BUCK al plano principal con varias vías. Sitúe el condensador PVDD junto a su pin y enrute PVDD con un trazado corto y ancho; conecte PVSS a masa principal mediante vías. Coloque los condensadores de desacoplo de LDO y E/S cerca de sus pines y dimensione las pistas de alimentación según la corriente de carga.
 
 !!! warning "Límites contradictorios para el ancho de PVDD"
     La guía de aplicación de hardware SF32LB56xU/V especifica un ancho mínimo de 0,5 mm para PVDD, mientras que la lista de comprobación de PCB correspondiente especifica 8 mil. Los valores difieren; confirme con SiFli o con el responsable del diseño de PCB cuál es el requisito aplicable antes de congelar el diseño.
 
 #### 6.2.4. Audio y señales analógicas { #624-audio-and-analog-signals }
 
-Alimente AVDD33_ANA y AVDD33_AUD por rutas estrella separadas, protéjalas con masa y manténgalas alejadas de fuentes de ruido de alta corriente. Coloque los condensadores de filtro AVDD33_AUD, MIC_BIAS y AUD_VREF junto a sus pines correspondientes y conecte su masa directamente a la masa principal. Enrute ADCP/ADCN como un par diferencial corto y protegido, con los componentes asociados cerca del chip. Enrute DACP/DACN como par diferencial, con capacitancia parásita inferior a 10 pF y longitud inferior a 2 cm, lejos de interferencias intensas. Proteja las pistas GPADC con masa y aléjelas de fuentes ruidosas como la medición de batería y temperatura.
+Enrute AVDD33_ANA y AVDD33_AUD como alimentaciones en estrella independientes, con guardas de masa, y manténgalas alejadas de fuentes de ruido de alta corriente. Coloque los condensadores de filtro AVDD33_AUD, MIC_BIAS y AUD_VREF junto a sus pines correspondientes y conecte su masa directamente a la masa principal. Enrute ADCP/ADCN como un par diferencial corto, protegido con guardas de masa, y sitúe los componentes asociados cerca del chip. Enrute DACP/DACN como par diferencial, con capacitancia parásita inferior a 10 pF y longitud inferior a 2 cm, lejos de interferencias intensas. Proteja las pistas GPADC con guardas de masa y aléjelas de fuentes ruidosas como las señales de medición de batería y temperatura.
 
 #### 6.2.5. USB y SDIO { #625-usb-and-sdio }
 
@@ -46,7 +46,7 @@ Enrute USB D+/D− (PA17/PA18) como par diferencial de 90 Ω protegido por masa.
 
 #### 6.2.6. EMI, ESD y puntos de prueba { #626-emi-esd-and-test-points }
 
-Evite tramos largos en capas superficiales, fuera del blindaje, para señales ruidosas de reloj y alimentación; use capas internas cuando sea posible. Coloque los dispositivos TVS/ESD cerca del conector correspondiente. Enrute cada señal primero por el dispositivo de protección y conecte su pad de masa a la masa principal con pistas cortas y anchas y vías. Sitúe el punto de prueba del cable de carga USB antes de su TVS y el TVS del conector de batería antes de la plataforma de batería, de modo que las líneas externas pasen por el TVS antes de llegar al chip. Conecte adecuadamente la red de masa bajo el chip al plano de masa principal mediante vías ciegas/enterradas.
+Evite tramos largos en capas superficiales, fuera del blindaje, para señales ruidosas de reloj y alimentación; use capas internas cuando sea posible. Coloque los dispositivos TVS/ESD cerca del conector correspondiente. Enrute cada señal primero por el dispositivo de protección y conecte su pad de masa a la masa principal con pistas cortas y anchas y vías. Sitúe el punto de prueba del cable de carga USB antes de su TVS y coloque el TVS del conector de batería antes de la plataforma de batería, de modo que las líneas externas pasen por el TVS antes de llegar al chip. Conecte adecuadamente la red de masa bajo el chip al plano de masa principal mediante vías ciegas/enterradas.
 
 ### 6.3. Lista de comprobación del diseño de PCB { #63-pcb-layout-checklist }
 
@@ -119,7 +119,7 @@ Cada tabla corresponde a un área de revisión del diseño de PCB. Si no aparece
 | 1 | Coloque el cristal cerca del chip | Obligatorio |
 | 2 | Disponga un apantallamiento GND alrededor del cristal | Obligatorio |
 | 3 | Mantenga una zona sin cobre bajo el cristal (placa PTH de 4 capas: capa superior; placa HDI de 6 capas: capa superior y capa 2) | Obligatorio |
-| 4 | Mantenga una separación del cobre de guarda GND superior a 1,5 veces el ancho de pista a lo largo de las pistas del cristal | Obligatorio |
+| 4 | Mantenga una separación entre el relleno de masa y las pistas del cristal superior a 1,5 veces el ancho de pista | Obligatorio |
 | 5 | Separe las dos pistas paralelas del cristal de 32 kHz más de 2 veces la separación entre pistas | Obligatorio |
 
 </div>
@@ -144,9 +144,9 @@ Cada tabla corresponde a un área de revisión del diseño de PCB. Si no aparece
 
 | N.º | Punto de comprobación | Categoría |
 |:---|:---|:---|
-| 1 | La pista RF cumple el requisito de impedancia característica single-ended de 50 Ω | Obligatorio |
-| 2 | Ancho de la pista RF ≥10 mil | Obligatorio |
-| 3 | Disponga al menos 60 mil de cobre GND a cada lado de la pista RF y conéctelo a la masa principal con suficientes vías de stitching | Obligatorio |
+| 1 | La pista RF cumple el requisito de impedancia característica de 50 Ω en configuración no balanceada | Obligatorio |
+| 2 | Ancho de la pista RF ≥ 10 mil | Obligatorio |
+| 3 | Disponga al menos 60 mil de cobre de masa a cada lado de la pista RF y conéctelo a la masa principal con suficientes vías de cosido | Obligatorio |
 | 4 | Coloque cerca del chip la red π de adaptación de antena prevista | Obligatorio |
 | 5 | Mantenga un plano GND continuo debajo de la señal RF | Obligatorio |
 | 6 | No pase pistas de señal digital de alta velocidad por debajo de la señal RF | Obligatorio |
@@ -193,7 +193,7 @@ Cada tabla corresponde a un área de revisión del diseño de PCB. Si no aparece
 | N.º | Punto de comprobación | Categoría |
 |:---|:---|:---|
 | 1 | La ubicación de los puntos de prueba es adecuada para medir con una sonda o soldar un útil de pruebas | Obligatorio |
-| 2 | Los puntos de prueba de descarga y calibración del cuarzo incluyen VBAT, GND, SWDIO, SWCLK, MODE, UART4_TXD, UART4_RXD y uno de los pines PB20/PB21/PB25; también VDDIO2 y VDDIO3 o VDDIO4 para U, o VDDIOA y VDDIOB para V, y cumplen los requisitos de tamaño y ubicación del útil | Obligatorio |
+| 2 | Los puntos de prueba para grabación y calibración del cristal incluyen VBAT, GND, SWDIO, SWCLK, MODE, UART4_TXD, UART4_RXD y uno de los pines PB20/PB21/PB25; también VDDIO2 y VDDIO3 o VDDIO4 para U, o VDDIOA y VDDIOB para V, y cumplen los requisitos de tamaño y ubicación del útil | Obligatorio |
 
 </div>
 

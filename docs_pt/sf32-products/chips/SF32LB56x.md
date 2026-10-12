@@ -1,6 +1,6 @@
 ---
 icon: lucide/microchip
-description: "SF32LB56x: família avançada de MCUs Bluetooth de modo duplo e consumo ultrabaixo para produtos que precisam de telas mais avançadas, áudio integrado, memória externa e maior capacidade de processamento em tarefas sempre ativas."
+description: "SF32LB56x: família avançada de MCUs Bluetooth de modo duplo e consumo ultrabaixo para produtos que precisam de displays mais avançados, áudio integrado, memória externa e maior capacidade de processamento em tarefas sempre ativas."
 tags:
     - Hardware
     - Chip
@@ -14,7 +14,7 @@ A série SF32LB56x é uma família avançada de microcontroladores AIoT de consu
 
 A arquitetura big.LITTLE de dois núcleos combina um processador de aplicação Arm Cortex-M33 STAR-MC1[^1] de alto desempenho, com frequência de até 240 MHz, e um processador Arm Cortex-M33 STAR-MC1 de consumo ultrabaixo, de até 96 MHz. O núcleo principal pode executar a interface do usuário, o display, o armazenamento e a lógica do produto, enquanto o núcleo de baixo consumo assume o sensoriamento contínuo, o controle do modo de espera e o gerenciamento do Bluetooth com um orçamento de energia menor.
 
-Segundo o resumo de produto e a ficha técnica oficiais da SiFli, a SF32LB56x é uma opção de maior integração para dispositivos conectados com muitos recursos de display e áudio. A família reúne Bluetooth 5.3 de modo duplo com BLE Audio, gráficos ePicasso 2.0, blocos integrados de conversão de áudio (ADC/DAC), um acelerador voltado a TinyML, opções de Flash integrada ao encapsulamento e suporte ampliado a memórias externas e interfaces de display. É uma opção adequada quando o projeto supera a SF32LB55x em conectividade sem fio, display ou áudio, mas ainda precisa do consumo e da integração típicos de um MCU.
+Segundo o resumo de produto e o datasheet oficiais da SiFli, a SF32LB56x é uma opção de maior integração para dispositivos conectados com muitos recursos de display e áudio. A família reúne Bluetooth 5.3 de modo duplo com BLE Audio, gráficos ePicasso 2.0, blocos integrados de conversão de áudio (ADC/DAC), um acelerador voltado a TinyML, opções de Flash integrada ao encapsulamento e suporte ampliado a memórias externas e interfaces de display. É uma opção adequada quando o projeto supera a SF32LB55x em conectividade sem fio, display ou áudio, mas ainda precisa do consumo e da integração típicos de um MCU.
 
 O guia de modelos de chips da SiFli também é relevante: as combinações de interfaces de display disponíveis na família SF32LB56x variam conforme o encapsulamento. Por isso, o código exato do componente e o encapsulamento devem ser decisões de arquitetura tomadas desde o início, e não detalhes deixados para a etapa final do projeto da PCB.
 
@@ -45,37 +45,37 @@ Considere a SF32LB56x quando o projeto precisar de um ou mais destes recursos:
 
 ## Recursos de desenvolvimento { #development-resources }
 
-[Resumo do produto]: https://downloads.sifli.com/docs/Product%20Brief/SF32LB56x/PB0056-SF32LB56x-Product%20Brief%20V1p2.pdf
-[Ficha técnica]: https://downloads.sifli.com/docs/Datasheet/sf32lb56/DS5601-SF32LB56x-Datasheet%20V1p9p3.pdf
-[Manual do usuário]: https://downloads.sifli.com/docs/user%20manual/SF32LB56x/UM5601-SF32LB56x-User%20mannual%20V1p0p5.pdf
-[Guia de projeto de hardware (U, wiki.sifli.com)]: https://wiki.sifli.com/en/hardware/SF32LB56xU-HW-Application.html
-[Guia de projeto de hardware (V, wiki.sifli.com)]: https://wiki.sifli.com/en/hardware/SF32LB56xV-HW-Application.html
-[Fonte da aplicação de hardware (U)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB56xU-HW-Application.md
-[Fonte da aplicação de hardware (V)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB56xV-HW-Application.md
-[Guia de projeto de hardware (μForge.io)]: ../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md
-[Fonte do checklist de projeto de hardware]: https://wiki.sifli.com/hardware/index.html
-[Documentação do SDK]: https://docs.sifli.com/projects/sdk/latest/sf32lb56x/index.html
-[Referência da API]: https://docs.sifli.com/projects/sdk/latest/sf32lb56x/api/index.html
+[Product Brief]: https://downloads.sifli.com/docs/Product%20Brief/SF32LB56x/PB0056-SF32LB56x-Product%20Brief%20V1p2.pdf
+[Datasheet]: https://downloads.sifli.com/docs/Datasheet/sf32lb56/DS5601-SF32LB56x-Datasheet%20V1p9p3.pdf
+[User Manual]: https://downloads.sifli.com/docs/user%20manual/SF32LB56x/UM5601-SF32LB56x-User%20mannual%20V1p0p5.pdf
+[Hardware Design Guide (U, wiki.sifli.com)]: https://wiki.sifli.com/en/hardware/SF32LB56xU-HW-Application.html
+[Hardware Design Guide (V, wiki.sifli.com)]: https://wiki.sifli.com/en/hardware/SF32LB56xV-HW-Application.html
+[Hardware Application Source (U)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB56xU-HW-Application.md
+[Hardware Application Source (V)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB56xV-HW-Application.md
+[Hardware Design Guide (μForge)]: ../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md
+[Hardware Design Checklist Source]: https://wiki.sifli.com/hardware/index.html
+[SDK Documentation]: https://docs.sifli.com/projects/sdk/latest/sf32lb56x/index.html
+[API Reference]: https://docs.sifli.com/projects/sdk/latest/sf32lb56x/api/index.html
 [SF32LB56-MOD]: ../modules/SF32LB56-MOD.md
-[Comprar amostras]: https://sifli.taobao.com/
-[Comprar kits de desenvolvimento]: https://sifli.taobao.com/
+[Buy Samples]: https://sifli.taobao.com/
+[Buy Dev Kits]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Resumo do produto]__
-- :fontawesome-solid-file-pdf: __[Ficha técnica]__
-- :fontawesome-solid-file-pdf: __[Manual do usuário]__
-- :fontawesome-solid-file-lines: __[Guia de projeto de hardware (U, wiki.sifli.com)]__
-- :fontawesome-solid-file-lines: __[Guia de projeto de hardware (V, wiki.sifli.com)]__
-- :fontawesome-brands-github: __[Fonte da aplicação de hardware (U)]__
-- :fontawesome-brands-github: __[Fonte da aplicação de hardware (V)]__
-- :fontawesome-solid-file-lines: __[Guia de projeto de hardware (μForge.io)]__
-- :fontawesome-solid-book: __[Documentação do SDK]__
-- :fontawesome-solid-book-open: __[Referência da API]__
-- :fontawesome-solid-list-check: __[Fonte do checklist de projeto de hardware]__
+- :fontawesome-solid-file-pdf: __[Resumo do produto][Product Brief]__
+- :fontawesome-solid-file-pdf: __[Datasheet]__
+- :fontawesome-solid-file-pdf: __[Manual do usuário][User Manual]__
+- :fontawesome-solid-file-lines: __[Guia de projeto de hardware (U, wiki.sifli.com)][Hardware Design Guide (U, wiki.sifli.com)]__
+- :fontawesome-solid-file-lines: __[Guia de projeto de hardware (V, wiki.sifli.com)][Hardware Design Guide (V, wiki.sifli.com)]__
+- :fontawesome-brands-github: __[Fonte da aplicação de hardware (U)][Hardware Application Source (U)]__
+- :fontawesome-brands-github: __[Fonte da aplicação de hardware (V)][Hardware Application Source (V)]__
+- :fontawesome-solid-file-lines: __[Guia de projeto de hardware (μForge.io)][Hardware Design Guide (μForge)]__
+- :fontawesome-solid-book: __[Documentação do SDK][SDK Documentation]__
+- :fontawesome-solid-book-open: __[Referência da API][API Reference]__
+- :fontawesome-solid-list-check: __[Fonte do checklist de projeto de hardware][Hardware Design Checklist Source]__
 - :fontawesome-solid-sim-card: __[SF32LB56-MOD]__
-- :fontawesome-solid-cart-shopping: __[Comprar amostras]__
-- :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento]__
+- :fontawesome-solid-cart-shopping: __[Comprar amostras][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento][Buy Dev Kits]__
 
 </div>
 
@@ -174,8 +174,8 @@ Siga esta sequência para transformar uma lista preliminar de componentes SF32LB
 
 1. **Valide o caminho de firmware.** Comece pelo [guia de introdução ao SiFli SDK](../../getting-started/sifli/getting-started-sifli-sdk.md). Em seguida, use o [fluxo de trabalho do SiFli SDK](../../develop/platforms/sifli-sdk/overview.md) e os [exemplos](../../develop/examples/index.md) para testar os caminhos de display, áudio, Bluetooth e armazenamento do projeto.
 2. **Escolha a forma de integração.** Avalie o [SF32LB56-MOD](../modules/SF32LB56-MOD.md) para reduzir o trabalho de integração de RF e memória de alta velocidade, ou use o [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) para validação em nível de placa.
-3. **Projete e revise o hardware.** Antes de liberar o esquemático ou o layout, consulte o [guia local de projeto de hardware](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md), incluindo as listas de verificação de [esquemático](../../hardware/chip-guides/SF32LB56x_schematic_checklist.md) e de layout da PCB. Mantenha o encapsulamento U/V e a interface de display alinhados ao componente escolhido.
-4. **Confirme as fontes oficiais.** Verifique o código exato do componente e o encapsulamento na [ficha técnica], no [manual do usuário], no guia de projeto de hardware aplicável para [U][Guia de projeto de hardware (U, wiki.sifli.com)] ou [V][Guia de projeto de hardware (V, wiki.sifli.com)] e na respectiva [fonte da aplicação de hardware (U)][Fonte da aplicação de hardware (U)] ou [fonte da aplicação de hardware (V)][Fonte da aplicação de hardware (V)].
+3. **Projete e revise o hardware.** Antes de liberar o esquemático ou o layout, consulte o [guia local de projeto de hardware](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md), incluindo os checklists de [esquemático](../../hardware/chip-guides/SF32LB56x_schematic_checklist.md) e de layout da PCB. Mantenha o encapsulamento U/V e a interface de display alinhados ao componente escolhido.
+4. **Confirme as fontes oficiais.** Verifique o código exato do componente e o encapsulamento no [datasheet], no [manual do usuário][User Manual], no guia de projeto de hardware aplicável para [U][Hardware Design Guide (U, wiki.sifli.com)] ou [V][Hardware Design Guide (V, wiki.sifli.com)] e na respectiva [fonte da aplicação de hardware (U)][Hardware Application Source (U)] ou [fonte da aplicação de hardware (V)][Hardware Application Source (V)].
 
 ## Produtos relacionados { #related-products }
 
@@ -185,11 +185,11 @@ O [SF32LB56-MOD](../modules/SF32LB56-MOD.md) reúne o chip SF32LB566VCB36, memó
 
 ### Kits de desenvolvimento { #development-kits }
 
-O [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) é um ponto de partida prático para o bring-up do firmware e para validar display, áudio, armazenamento, RF e consumo de energia antes de definir um projeto com o chip montado diretamente na placa ou com um módulo.
+O [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) é um ponto de partida prático para o bring-up do firmware e para validar display, áudio, armazenamento, RF e consumo de energia antes de definir um projeto chip-down ou com um módulo.
 
 ### Produtos de referência { #reference-products }
 
 Entre os produtos finais típicos com SF32LB56x estão smartwatches avançados, painéis HMI conectados, dispositivos de saúde, terminais portáteis industriais, instrumentos portáteis e displays avançados para e-bikes e e-scooters.
 
 !!! note "Conteúdo gerado automaticamente"
-    Esta página foi elaborada sem um documento-fonte específico. Verifique as afirmações técnicas na documentação oficial da SiFli antes de confiar nelas.
+    Esta página foi elaborada sem um documento-fonte preexistente. Verifique as afirmações técnicas na documentação oficial da SiFli antes de confiar nelas.

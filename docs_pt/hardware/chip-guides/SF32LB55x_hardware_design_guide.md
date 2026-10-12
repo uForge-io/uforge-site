@@ -12,39 +12,39 @@ tags:
 
 ## 1. Introdução { #1-introduction }
 
-Este guia reúne recomendações e materiais de referência para produtos baseados na família de microcontroladores SF32LB55x, voltada a aplicações AIoT de uso geral. O público-alvo inclui engenheiros de hardware, projetistas de PCB e desenvolvedores de produtos para wearables BLE, dispositivos a bateria com vários sensores, equipamentos de monitoramento de saúde e sistemas conectados compactos.
+Este guia reúne recomendações e materiais de referência para produtos baseados na família SF32LB55x, composta por microcontroladores de uso geral para aplicações AIoT. Destina-se a engenheiros de hardware, projetistas de PCB e desenvolvedores de produtos para wearables BLE, dispositivos alimentados por bateria e equipados com vários sensores, equipamentos de monitoramento da saúde e sistemas conectados compactos.
 
-O guia cobre todo o processo de desenvolvimento de hardware, incluindo a seleção do encapsulamento, o projeto da alimentação, os circuitos de clock, o layout de RF, a memória externa, as interfaces de display, as fontes de despertar, os sensores, o áudio, o acesso para depuração, o layout da PCB, a validação e a preparação para produção. Aplicar estas recomendações ajuda a reduzir riscos no esquemático e no layout, preservar o funcionamento de baixo consumo e manter o projeto alinhado aos requisitos do SF32LB55x para encapsulamento, alimentação, memória, RF e interfaces.
+O guia cobre todo o processo de desenvolvimento de hardware: seleção do encapsulamento, projeto da alimentação, circuitos de clock, layout de RF, memória externa e interfaces de display. Também aborda fontes de despertar, sensores, áudio, acesso para depuração, layout da PCB, validação e preparação para produção. Seguir estas recomendações ajuda a reduzir os riscos do esquemático e do layout, preservar a operação de baixo consumo e manter o projeto alinhado aos requisitos do SF32LB55x para encapsulamento, alimentação, memória, RF e interfaces.
 
-Este documento pressupõe conhecimentos básicos de projeto de hardware embarcado e captura de esquemáticos. Ele complementa o datasheet, o manual do usuário, a nota oficial de aplicação de hardware, os projetos de referência e a Lista de Fornecedores Aprovados da SiFli (AVL). Esses materiais oficiais continuam sendo a referência para especificações elétricas, multiplexação de pinos, dimensões dos encapsulamentos, qualificação de componentes e limites de produção.
+Este documento pressupõe familiaridade básica com projeto de hardware embarcado e captura de esquemáticos. Ele complementa o datasheet, o manual do usuário, a nota oficial de aplicação de hardware, os projetos de referência e a Lista de Fornecedores Aprovados da SiFli (AVL). Esses materiais oficiais continuam sendo a referência para especificações elétricas, multiplexação de pinos, dimensões dos encapsulamentos, qualificação de componentes e limites de produção.
 
-O SF32LB55x mantém uma convenção histórica de sufixos. Para determinar as interfaces disponíveis, os recursos que dependem do encapsulamento e a configuração exata da memória, consulte o código completo da peça e a documentação do encapsulamento; não se baseie apenas no sufixo.
+O SF32LB55x usa uma convenção legada de sufixos. Para verificar quais interfaces estão disponíveis, quais recursos dependem do encapsulamento e qual é a configuração exata da memória, consulte o código completo da peça e a documentação do encapsulamento; não deduza essas informações apenas pelo sufixo.
 
 ## 2. Recursos de desenvolvimento { #2-development-resources }
 
-[Nota de aplicação de hardware do SF32LB55x]: https://wiki.sifli.com/en/hardware/SF32LB55x-HW-Application.html
-[Arquivo-fonte da nota de aplicação de hardware do SF32LB55x]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB55x-HW-Application.md
-[Datasheet do SF32LB55x]: https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-Datasheet%20V1p7p2.pdf
-[Manual do usuário do SF32LB55x]: https://downloads.sifli.com/docs/user%20manual/SF32LB55x/UM5501%E2%80%90SF32LB55x%E2%80%90EN.pdf
-[Documentação do SDK do SF32LB55x]: https://docs.sifli.com/projects/sdk/latest/sf32lb55x/index.html
-[Referência da API do SF32LB55x]: https://docs.sifli.com/projects/sdk/latest/sf32lb55x/api/index.html
-[Visão geral da família SF32]: ../../sf32-products/family/SF32_family.md
-[Lista de Fornecedores Aprovados da SiFli (AVL)]: ../cad-components/sifli-approved-vendor-list.md
-[Comprar amostras]: https://sifli.taobao.com/
-[Comprar kits de desenvolvimento]: https://sifli.taobao.com/
+[SF32LB55x Hardware Application Note]: https://wiki.sifli.com/en/hardware/SF32LB55x-HW-Application.html
+[SF32LB55x Hardware Application Source]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB55x-HW-Application.md
+[SF32LB55x Datasheet]: https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-Datasheet%20V1p7p2.pdf
+[SF32LB55x User Manual]: https://downloads.sifli.com/docs/user%20manual/SF32LB55x/UM5501%E2%80%90SF32LB55x%E2%80%90EN.pdf
+[SF32LB55x SDK Documentation]: https://docs.sifli.com/projects/sdk/latest/sf32lb55x/index.html
+[SF32LB55x API Reference]: https://docs.sifli.com/projects/sdk/latest/sf32lb55x/api/index.html
+[SF32 Family Overview]: ../../sf32-products/family/SF32_family.md
+[SiFli Approved Vendor List (AVL)]: ../cad-components/sifli-approved-vendor-list.md
+[Buy Samples]: https://sifli.taobao.com/
+[Buy Dev Kits]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-lines: __[Nota de aplicação de hardware do SF32LB55x]__
-- :fontawesome-brands-github: __[Arquivo-fonte da nota de aplicação de hardware do SF32LB55x]__
-- :fontawesome-solid-file-pdf: __[Datasheet do SF32LB55x]__
-- :fontawesome-solid-file-pdf: __[Manual do usuário do SF32LB55x]__
-- :fontawesome-solid-book: __[Documentação do SDK do SF32LB55x]__
-- :fontawesome-solid-book-open: __[Referência da API do SF32LB55x]__
-- :fontawesome-solid-microchip: __[Visão geral da família SF32]__
-- :fontawesome-solid-file-excel: __[Lista de Fornecedores Aprovados da SiFli (AVL)]__
-- :fontawesome-solid-cart-shopping: __[Comprar amostras]__
-- :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento]__
+- :fontawesome-solid-file-lines: __[Nota de aplicação de hardware do SF32LB55x][SF32LB55x Hardware Application Note]__
+- :fontawesome-brands-github: __[Arquivo-fonte da nota de aplicação de hardware do SF32LB55x][SF32LB55x Hardware Application Source]__
+- :fontawesome-solid-file-pdf: __[Datasheet do SF32LB55x][SF32LB55x Datasheet]__
+- :fontawesome-solid-file-pdf: __[Manual do usuário do SF32LB55x][SF32LB55x User Manual]__
+- :fontawesome-solid-book: __[Documentação do SDK do SF32LB55x][SF32LB55x SDK Documentation]__
+- :fontawesome-solid-book-open: __[Referência da API do SF32LB55x][SF32LB55x API Reference]__
+- :fontawesome-solid-microchip: __[Visão geral da família SF32][SF32 Family Overview]__
+- :fontawesome-solid-file-excel: __[Lista de Fornecedores Aprovados da SiFli (AVL)][SiFli Approved Vendor List (AVL)]__
+- :fontawesome-solid-cart-shopping: __[Comprar amostras][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento][Buy Dev Kits]__
 
 </div>
 
@@ -52,9 +52,9 @@ O SF32LB55x mantém uma convenção histórica de sufixos. Para determinar as in
 
 ### 3.1. Arquitetura { #31-architecture }
 
-O SF32LB55x é voltado a produtos AIoT de baixo consumo que precisam responder prontamente ao usuário e manter baixo o consumo em standby e em sleep. Ele integra um transceptor Bluetooth 5.2 de baixo consumo, gerenciamento de energia e interfaces de memória e display. A integração de hardware deve considerar a seleção do encapsulamento, as linhas de alimentação do PMU, o modo de boot, os dois circuitos de cristal, o casamento de RF, a memória externa, a escolha de display MIPI/SPI/MCU8080/JDI, as conexões de GPADC e sensores, o áudio Bluetooth externo, o acesso para depuração e gravação e a calibração em produção.
+O SF32LB55x é voltado a produtos AIoT de baixo consumo que precisam responder rapidamente às interações do usuário e manter baixo o consumo em standby e no modo de suspensão. Ele integra um transceptor Bluetooth 5.2 de baixo consumo, gerenciamento de energia e interfaces de memória e display. A integração de hardware deve considerar a seleção do encapsulamento, as linhas de alimentação do PMU, o modo de boot, os dois circuitos de cristal, o casamento de RF, a memória externa, a escolha de display MIPI/SPI/MCU8080/JDI, as conexões de GPADC e sensores, o áudio Bluetooth externo, o acesso para depuração e gravação e a calibração em produção.
 
-As conexões de armazenamento incluem várias interfaces QSPI, uma interface OPI-PSRAM independente e suporte a SD/eMMC. A configuração de NOR Flash e PSRAM integradas ao encapsulamento varia conforme o código exato da peça. As interfaces de memória e display também dependem do encapsulamento. BGA145 oferece um canal de OPI-PSRAM externa; BGA169 oferece dois. A interface MIPI DSI com duas vias de dados está disponível em BGA145 e BGA169, não em QFN68L. Confira o mapa de pinos e a configuração de memória integrada ao encapsulamento da peça exata antes de atribuir os dispositivos externos.
+As conexões de armazenamento incluem várias interfaces QSPI, uma interface independente de OPI-PSRAM e suporte a SD/eMMC. A configuração das memórias NOR Flash e PSRAM integradas ao encapsulamento varia conforme o código exato da peça. As interfaces de memória e display também dependem do encapsulamento. BGA145 oferece um canal de OPI-PSRAM externa; BGA169 oferece dois. A interface MIPI DSI com duas vias de dados está disponível em BGA145 e BGA169, mas não em QFN68L. Confira o mapa de pinos e a configuração de memória integrada ao encapsulamento da peça exata antes de atribuir os dispositivos externos.
 
 ### 3.2. Variantes e encapsulamentos { #32-variants-and-packages }
 
@@ -96,7 +96,7 @@ O SF32LB55x está disponível nos encapsulamentos QFN68L, BGA145 e BGA169. Escol
 - Opções de encapsulamento QFN68L, BGA145 e BGA169.
 - Requisitos de projeto para os cristais de 48 MHz e 32,768 kHz.
 - Transceptor Bluetooth 5.2 de baixo consumo, requisitos de casamento de RF e layout da antena.
-- Interfaces OPI PSRAM, QSPI NOR/NAND Flash e PSRAM, SDIO eMMC ou Micro SD; a memória integrada varia conforme o código exato da peça.
+- OPI PSRAM; QSPI para NOR/NAND Flash e PSRAM; SDIO para eMMC ou Micro SD. A memória integrada varia conforme o código exato da peça.
 - Opções de display MIPI DSI, SPI/QSPI, MCU8080 e JDI.
 - Recomendações para botão de despertar, motor de vibração, interrupção de despertar, GPADC, sensores e áudio Bluetooth externo.
 - Suporte a DBG-UART, SWD, gravação em produção e calibração do cristal.
@@ -131,22 +131,22 @@ As aplicações previstas incluem pulseiras e outros wearables, dispositivos mó
 2. Defina a árvore de alimentação, as linhas de alimentação do PMU, o comportamento de BUCK/LDO e o circuito de reset.
 3. Selecione os cristais, a topologia de casamento de RF e as restrições de layout da antena.
 4. Atribua os pinos de memória, display, despertar, sensores, áudio, depuração e teste de produção.
-5. Defina o stack-up da PCB, fanout, impedância e restrições de ESD, RF e interfaces de alta velocidade.
-6. Revise a lista de verificação da Seção 7 antes de congelar o esquemático, liberar o layout e iniciar a EVT.
+5. Fixe o stack-up da PCB, fanout, impedância e restrições de ESD, RF e interfaces de alta velocidade.
+6. Revise o checklist da Seção 7 antes de congelar o esquemático, liberar o layout e iniciar a EVT.
 
 ### 4.3. Pacote de evidências da revisão { #43-review-evidence-pack }
 
 Antes da EVT, arquive as versões do datasheet e do manual do usuário, o desenho do encapsulamento, o PDF do esquemático, o stack-up da PCB, o relatório de impedância, os relatórios DRC/ERC, a árvore de alimentação, a tabela de modos de boot, capturas de tela do layout de RF e dos cristais, capturas do roteamento de memória e display e o plano de pontos de teste para produção.
 
-### 4.4. Como usar as listas de verificação { #using-the-checklists }
+### 4.4. Como usar os checklists { #using-the-checklists }
 
-Este guia oferece dois níveis de cobertura por listas de verificação. A lista resumida da Seção 7 reúne os itens de maior risco para uma verificação rápida pela equipe de engenharia. A [Lista de verificação do esquemático](SF32LB55x_schematic_checklist.md) (Seção 5.8) e a Seção 6.4 das [Diretrizes de layout da PCB](SF32LB55x_pcb_layout.md) reproduzem, item por item, a lista completa da SiFli, *SF32LB55x Schematic & PCB Checklist* (V1.0, 2026-01-21), publicada junto com os materiais de projeto de hardware no [wiki da SiFli][Índice de guias de projeto de hardware de chips SiFli (Wiki)]. O documento abrange os dispositivos 551/555/557 e a variante SS6600A8.
+Este guia oferece dois níveis de cobertura por checklists. A lista resumida da Seção 7 reúne os itens de maior risco para uma verificação rápida pela equipe de engenharia. O [Checklist do esquemático](SF32LB55x_schematic_checklist.md) (Seção 5.8) e a Seção 6.4 das [Diretrizes de layout da PCB](SF32LB55x_pcb_layout.md) reproduzem, item por item, a lista completa da SiFli, *SF32LB55x Schematic & PCB Checklist* (V1.0, 2026-01-21), publicada junto com os materiais de projeto de hardware no [wiki da SiFli][SiFli Chip Hardware Design Guide Index (Wiki)]. O documento abrange os dispositivos 551/555/557 e a variante SS6600A8.
 
-Cada item informa a quais grupos de variantes se aplica e se é obrigatório (deve ser aprovado antes da liberação) ou opcional (recomendado quando o recurso correspondente é usado). O texto colorido e o texto com <span class="flag-yellow">fundo amarelo</span> preservam os destaques de revisão da planilha original. Como a planilha não explica o motivo de cada destaque, considere-os sinalizações adicionais de atenção, não substitutos dos demais itens da mesma tabela.
+Cada item informa a quais grupos de variantes se aplica e se é obrigatório (deve ser aprovado antes da liberação) ou opcional (recomendado quando o recurso correspondente é usado). Os textos coloridos e os trechos com <span class="flag-yellow">fundo amarelo</span> preservam os destaques de revisão da planilha original. Como a planilha não explica o motivo de cada destaque, trate-os como alertas adicionais de revisão, não como substitutos dos demais itens da mesma tabela.
 
-Use a [Lista de verificação do esquemático](SF32LB55x_schematic_checklist.md) durante a revisão do esquemático, antes de iniciar o layout da PCB. Use a lista de verificação de layout (Seção 6.4) durante a revisão do layout, antes de liberar os arquivos Gerber. Na prática, cada etapa costuma ser feita duas vezes: primeiro pelo engenheiro responsável pelo projeto e, depois, por um revisor independente antes do congelamento do projeto ou da liberação para fabricação.
+Use o [Checklist do esquemático](SF32LB55x_schematic_checklist.md) durante a revisão do esquemático, antes de iniciar o layout da PCB. Use o checklist de layout (Seção 6.4) durante a revisão do layout, antes de liberar os arquivos Gerber. Na prática, cada etapa costuma ser feita duas vezes: primeiro pelo engenheiro responsável pelo projeto e, depois, por um revisor independente antes do congelamento do projeto ou da liberação para fabricação.
 
-Para obter melhores resultados, use a lista de verificação como registro formal de aprovação, não apenas como material de leitura:
+Para obter melhores resultados, use o checklist como registro formal de aprovação, não apenas como material de leitura:
 
 1. Primeiro, confirme o código exato da peça e o encapsulamento escolhido.
 2. Durante a revisão, marque cada item como aprovado, reprovado ou não aplicável; não se limite a ler a tabela.
@@ -169,7 +169,7 @@ Para obter melhores resultados, use a lista de verificação como registro forma
 
 </div>
 
-<div align="center"><em>Tabela 4.4-2: Histórico de versões da lista de verificação</em></div>
+<div align="center"><em>Tabela 4.4-2: Histórico de versões do checklist</em></div>
 
 <div align="center" markdown>
 
@@ -179,17 +179,17 @@ Para obter melhores resultados, use a lista de verificação como registro forma
 
 </div>
 
-[Índice de guias de projeto de hardware de chips SiFli (Wiki)]: https://wiki.sifli.com/hardware/index.html
+[SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## Continue o guia de projeto { #continue-the-design-guide }
+## Acesse as demais partes do guia { #continue-the-design-guide }
 
-O guia completo continua nas páginas abaixo. Cada uma cobre uma etapa do processo de projeto e pode ser acessada por aqui.
+O guia completo continua nas páginas a seguir. Cada uma aborda uma etapa do processo de projeto; acesse-as pelos links abaixo.
 
 <div class="grid cards" markdown>
 
 - :fontawesome-solid-bolt: __[Diretrizes de projeto do esquemático](SF32LB55x_schematic_design.md)__ — alimentação, modo de boot, geração de clock, RF, interfaces de armazenamento, display e toque, e interfaces de despertar/GPADC/fabricação
-- :fontawesome-solid-list-check: __[Lista de verificação do esquemático](SF32LB55x_schematic_checklist.md)__ — revisão do esquemático item por item (Seção 5.8)
-- :fontawesome-solid-microchip: __[Diretrizes de layout da PCB](SF32LB55x_pcb_layout.md)__ — footprint, stack-up, regras gerais de PCB, roteamento de interfaces e lista de verificação de layout item por item
+- :fontawesome-solid-list-check: __[Checklist do esquemático](SF32LB55x_schematic_checklist.md)__ — revisão do esquemático item por item (Seção 5.8)
+- :fontawesome-solid-microchip: __[Diretrizes de layout da PCB](SF32LB55x_pcb_layout.md)__ — footprint, stack-up, regras gerais de PCB, roteamento de interfaces e checklist de layout item por item
 - :fontawesome-solid-book-open: __[Checklist de revisão do projeto e referências](SF32LB55x_review_and_reference.md)__ — lista de liberação, documentos relacionados, apêndices e histórico de revisões
 
 </div>

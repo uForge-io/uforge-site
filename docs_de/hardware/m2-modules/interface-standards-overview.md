@@ -28,21 +28,21 @@ Dieser Abschnitt stellt die Konventionen zur Beschreibung von μForge-Modulschni
 
 Verwenden Sie die Benennungsregeln einheitlich in Modulbeschreibungen, Schaltplänen, Stücklistenhinweisen und Produktdokumentation. Die Namen beschreiben das vorgesehene Schnittstellenprofil, keine endgültige elektrische oder mechanische Spezifikation. Weder ein Profilname noch eine passende Steckverbinderform belegt die Austauschbarkeit von Modul und Trägerplatine.
 
-Die Definition auf Pin-Ebene ist keine Zusage, dass jedes μForge-Modul oder SF32-Gehäuse jedes zugewiesene Signal, jede Schnittstelle oder jede Kombination zur gleichzeitigen Nutzung unterstützt. Prüfen Sie vor einer Designfestlegung alle folgenden Punkte anhand des genau ausgewählten Moduls, Chips, Gehäuses und Hardware-Designleitfadens:
+Die Definition auf Pin-Ebene ist keine Zusage, dass jedes μForge-Modul oder SF32-Gehäuse jedes zugewiesene Signal, jede Schnittstelle oder jede Kombination zur gleichzeitigen Nutzung unterstützt. Prüfen Sie vor einer Designfestlegung alle folgenden Punkte anhand des genau ausgewählten Moduls, Chips, Gehäuses und Hardware-Design-Leitfadens:
 
 - mechanische Steckverbinderzeichnung, Kodierung, Pinnummerierung und Montagebeschränkungen;
 - Versorgungsspannungen, Spannungsdomänen, Strombelastbarkeit und Versorgungssequenz;
 - Schnittstellenverfügbarkeit, Pin-Multiplexing und alle sich gegenseitig ausschließenden Funktionen;
-- Signalintegrität, Impedanz, Längenanpassung sowie Anforderungen an ESD und HF-Freihaltebereiche;
+- Signalintegrität, Impedanz, Längenanpassung sowie Anforderungen an ESD und RF-Freihaltebereiche;
 - Debug-, Boot-, Wiederherstellungs- und Fertigungstestzugang; und
 - die Anforderungen der Trägerplatine an Display, Kamera, Audio, Speicher und Komponenten für drahtlose Kommunikation.
 
 ## Entscheidungspfad für die Trägerplatine { #carrier-board-decision-path }
 
-1. Wählen Sie das Modul aus und lesen Sie seine Einführung und seinen Hardware-Designleitfaden.
+1. Wählen Sie das Modul aus und lesen Sie seine Einführung und seinen Hardware-Design-Leitfaden.
 2. Verwenden Sie die [Benennungsregeln für die μForge-M2-Schnittstelle](M2%20Interface%20Naming%20Rules.md), um das beabsichtigte Profil eindeutig zu beschreiben.
 3. Verwenden Sie die [M2-Schnittstellendefinition](M2-interface-definition.md), um Kandidatensignale und Konflikte bei der gemeinsamen Nutzung zu identifizieren.
 4. Bestätigen Sie jeden verwendeten Kontakt in der modulspezifischen Dokumentation und der jeweils zutreffenden SiFli-Quelldokumentation.
 5. Halten Sie vor Beginn des Layouts die Dokumentversionen, die Revisionen von Modul und Trägerplatine, bestätigte Ausnahmen und offene Fragen in der Schaltplanprüfung fest.
 
-Fahren Sie für eine vollständige Trägerplatinen-Überprüfung mit [Design für die Produktion](../design-for-production.md) fort. Verwenden Sie für modulspezifische Implementierungsanforderungen den passenden Modul-Leitfaden in der Gruppe **Hardware-Designleitfäden**.
+Fahren Sie für eine vollständige Trägerplatinen-Überprüfung mit [Design für die Produktion](../design-for-production.md) fort. Verwenden Sie für modulspezifische Implementierungsanforderungen den passenden Modul-Leitfaden in der Gruppe **Hardware-Design-Leitfäden**.

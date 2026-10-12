@@ -17,36 +17,36 @@ hide:
 
 ### 6.1. Footprint und Lagenaufbau { #61-footprint-and-stack-up }
 
-Die U-Variante verwendet ein 68-poliges QFN68L-Gehäuse mit 7 × 7 × 0,75 mm und 0,35 mm Pinabstand. QFN unterstützt PTH; SiFli empfiehlt einen vierlagigen PTH-Aufbau, bei dem alle Pins auf der Oberseite aufgefächert werden. Die V-Variante verwendet ein WBBGA-Gehäuse mit 175 Kugeln, 6,5 × 6,1 × 0,94 mm, 0,4 mm Kugelabstand und 0,25 mm Kugeldurchmesser. PTH wird nicht unterstützt; erforderlich ist HDI. Die beiden äußersten Kugelreihen werden auf der Oberseite aufgefächert, die übrigen Kugeln auf Innenlagen. Vor der Layout-Freigabe ist zu bestätigen, dass der PCB-Hersteller den gewählten Lagenaufbau, Lötstopplack und Fanout unterstützt.
+Die U-Variante verwendet ein 68-poliges QFN68L-Gehäuse mit 7 × 7 × 0,75 mm und 0,35 mm Pinabstand. QFN unterstützt PTH. SiFli empfiehlt einen vierlagigen PTH-Aufbau, bei dem alle Pins auf der Oberseite aufgefächert werden. Die V-Variante verwendet ein WBBGA-Gehäuse mit 175 Kugeln, 6,5 × 6,1 × 0,94 mm, 0,4 mm Kugelabstand und 0,25 mm Kugeldurchmesser. PTH wird nicht unterstützt; erforderlich ist HDI. Fächern Sie die beiden äußersten Kugelreihen auf der Oberseite und die übrigen Kugeln auf Innenlagen auf. Bestätigen Sie vor der Layout-Freigabe, dass der PCB-Hersteller den gewählten Lagenaufbau, Lötstopplack und Fanout unterstützt.
 
 ### 6.2. Kritisches Routing { #62-critical-routing }
 
 #### 6.2.1. Taktführung { #621-clock-routing }
 
-Quarze innerhalb des Abschirmblechs platzieren, mehr als 1 mm vom Platinenrand und möglichst mindestens 5 mm von Wärmequellen wie PA, Ladegerät und PMU entfernt. Im Umkreis von mindestens 0,25 mm um den Quarzoszillator dürfen sich keine anderen Metallteile oder Bauteile befinden. Den 48-MHz-Quarz möglichst auf der Oberseite führen, 3–10 mm lang und 0,075 mm breit, mit dreidimensionaler Masseabschirmung. Abstand zu VBAT, DC-DC und Hochgeschwindigkeitssignalen halten. Den 32,768-kHz-Quarz auf der Oberseite führen, höchstens 10 mm lang und 0,075 mm breit; der Abstand zwischen 32K_XI und 32K_XO muss mindestens 0,15 mm betragen. Oberseite und benachbarte Lage unter beiden Quarzbereichen freihalten; keine anderen Leiterbahnen dürfen diese Bereiche kreuzen.
+Platzieren Sie die Quarze innerhalb des Abschirmblechs, mit mehr als 1 mm Abstand zum Platinenrand und möglichst mindestens 5 mm Abstand zu wärmeerzeugenden Bauteilen wie PA, Ladegerät und PMU. Halten Sie zu anderen Metallteilen und Bauteilen mindestens 0,25 mm Abstand zum Quarzschwingkreis. Führen Sie den 48-MHz-Quarz nach Möglichkeit auf der Oberseite. Die Leiterbahnen sollen 3–10 mm lang und 0,075 mm breit sein und eine dreidimensionale Masseabschirmung erhalten. Halten Sie Abstand zu VBAT, DC-DC und Hochgeschwindigkeitssignalen. Führen Sie den 32,768-kHz-Quarz auf der Oberseite; seine Leiterbahnen dürfen höchstens 10 mm lang und sollen 0,075 mm breit sein. Der Abstand zwischen 32K_XI und 32K_XO muss mindestens 0,15 mm betragen. Halten Sie die Oberseite und die benachbarte Lage unter beiden Quarzbereichen frei; keine anderen Leiterbahnen dürfen diese Bereiche kreuzen.
 
-#### 6.2.2. HF-Routing { #622-rf-routing }
+#### 6.2.2. RF-Routing { #622-rf-routing }
 
-HF als einseitige, impedanzkontrollierte 50-Ω-Leiterbahn ausführen, vorzugsweise breiter als 10 mil und, wo praktikabel, auf der Oberseite; Vias und scharfe Ecken vermeiden. Das Anpassnetzwerk nahe am Chip und nicht an der Antenne platzieren. Den AVDD_BRF-Filterkondensator nahe am Chip-Pin anordnen und seine Masse über ein Via direkt mit der Hauptmasse verbinden. Beidseitig der HF-Leiterbahn eine durchgehende Masseabschirmung mit Stitching-Vias vorsehen. Keine Hoch-di/dt-Versorgung, schnellen Takte oder I2C-, SPI-, SDIO-, I2S- und UART-Signale im HF-Bereich oder darunter führen. AVSS_RF1/2/3 der U-Variante sowie AVSS_RRF, AVSS_TRF, AVSS_TRF2 und AVSS_BB der V-Variante zuverlässig mit der Hauptmasse verbinden.
+Führen Sie die RF-Leiterbahn als unsymmetrische, impedanzkontrollierte Leitung mit 50 Ω, vorzugsweise breiter als 10 mil und, sofern praktikabel, auf der Oberseite. Vermeiden Sie Vias und scharfe Ecken. Platzieren Sie das Anpassnetzwerk nahe am Chip, nicht an der Antenne. Setzen Sie den AVDD_BRF-Filterkondensator nahe am Chip-Pin und verbinden Sie seine Masse über ein Via direkt mit der Hauptmasse. Sorgen Sie beidseitig der RF-Leiterbahn für eine durchgehende Masseabschirmung mit Stitching-Vias. Führen Sie weder Versorgungsleitungen mit hohem di/dt noch schnelle Takte noch I2C-, SPI-, SDIO-, I2S- und UART-Signale im RF-Bereich oder darunter. Verbinden Sie AVSS_RF1/2/3 der U-Variante sowie AVSS_RRF, AVSS_TRF, AVSS_TRF2 und AVSS_BB der V-Variante zuverlässig mit der Hauptmasse.
 
 #### 6.2.3. Versorgung und Masse { #623-power-and-ground }
 
-BUCK-Induktivität und Filterkondensatoren nahe an den Chip-Pins platzieren. BUCK_LX kurz und breit führen; BUCK_FB muss mindestens 0,25 mm breit sein. Unter der Induktivität auf der Oberseite kein Kupfer vorsehen, auf der benachbarten Lage eine durchgehende Massefläche sicherstellen und keine anderen Leiterbahnen durch den Induktivitätsbereich führen. Massen der BUCK-Ausgangskondensatoren mit mehreren Vias an die Hauptmasse anschließen. Den PVDD-Kondensator nahe am Pin platzieren und PVDD kurz und breit führen; PVSS über Vias mit der Hauptmasse verbinden. LDO- und I/O-Abblockkondensatoren nahe an den jeweiligen Pins platzieren und die Versorgungsleiterbahnen nach Laststrom dimensionieren.
+Platzieren Sie BUCK-Induktivität und Filterkondensatoren nahe an den Chip-Pins. Führen Sie BUCK_LX kurz und breit; BUCK_FB muss mindestens 0,25 mm breit sein. Sehen Sie auf der Oberseite unter der Induktivität kein Kupfer vor. Sorgen Sie auf der benachbarten Lage für eine durchgehende Massefläche und führen Sie keine anderen Leiterbahnen durch den Induktivitätsbereich. Verbinden Sie die Massen der BUCK-Ausgangskondensatoren mit mehreren Vias mit der Hauptmasse. Platzieren Sie den PVDD-Kondensator nahe am Pin und führen Sie PVDD kurz und breit. Verbinden Sie PVSS über Vias mit der Hauptmasse. Platzieren Sie die LDO- und I/O-Abblockkondensatoren nahe an den jeweiligen Pins und dimensionieren Sie die Versorgungsleiterbahnen nach dem Laststrom.
 
 !!! warning "Widersprüchliche Vorgaben zur PVDD-Leiterbahnbreite"
     Der SF32LB56xU/V-Hardwareleitfaden fordert für PVDD mindestens 0,5 mm Leiterbahnbreite; die zugehörige PCB-Checkliste nennt dagegen 8 mil. Die Angaben weichen voneinander ab. Vor dem Layout-Freeze ist mit SiFli oder der PCB-Designverantwortung zu klären, welche Vorgabe gilt.
 
 #### 6.2.4. Audio- und Analogsignale { #624-audio-and-analog-signals }
 
-AVDD33_ANA und AVDD33_AUD getrennt sternförmig führen, mit Masse abschirmen und von stark stromführenden Störquellen fernhalten. Filterkondensatoren für AVDD33_AUD, MIC_BIAS und AUD_VREF nahe an den jeweiligen Pins platzieren und ihre Masse direkt an die Hauptmasse anschließen. ADCP/ADCN als kurzes, abgeschirmtes Differenzpaar führen und die zugehörigen Bauteile nahe am Chip platzieren. DACP/DACN ebenfalls als Differenzpaar führen, mit parasitärer Kapazität unter 10 pF und Leiterbahnlänge unter 2 cm; starke Störquellen meiden. GPADC-Leiterbahnen mit Masse abschirmen und von Störquellen wie Batterie- und Temperaturmessung fernhalten.
+Führen Sie AVDD33_ANA und AVDD33_AUD getrennt und sternförmig, schirmen Sie die Leiterbahnen mit Masse ab und halten Sie sie von stark stromführenden Störquellen fern. Platzieren Sie die Filterkondensatoren für AVDD33_AUD, MIC_BIAS und AUD_VREF nahe an den jeweiligen Pins und verbinden Sie ihre Masse direkt mit der Hauptmasse. Führen Sie ADCP/ADCN als kurzes, abgeschirmtes Differenzpaar und platzieren Sie die zugehörigen Bauteile nahe am Chip. Führen Sie DACP/DACN ebenfalls als Differenzpaar; die parasitäre Kapazität muss unter 10 pF und die Leiterbahnlänge unter 2 cm liegen. Halten Sie die Leitungen von starken Störquellen fern. Schirmen Sie GPADC-Leiterbahnen mit Masse ab und halten Sie sie von Störquellen der Akku- und Temperaturmessung fern.
 
 #### 6.2.5. USB und SDIO { #625-usb-and-sdio }
 
-USB D+/D− (PA17/PA18) als abgeschirmtes Differenzpaar mit 90 Ω führen. ESD-Bauteile nahe am Steckverbinder platzieren und die Signale vor dem Chip zuerst durch sie führen; vor dem Schutzbauteil keine Signalabzweigung vorsehen. Die Masse des Bauteils über kurze, breite Leiterbahnen und Vias an die Hauptmasse anschließen. Die U-Variante besitzt eine SDIO-Schnittstelle, die V-Variante SDIO1 und SDIO2. SDIO-Signale gruppiert führen, Gesamtlänge höchstens 50 mm und Längenabweichung innerhalb der Gruppe höchstens 6 mm. Den Takt mit Masse abschirmen und auch DATA und CMD mit Masse schützen.
+Führen Sie USB D+/D− (PA17/PA18) als abgeschirmtes Differenzpaar mit 90 Ω. Platzieren Sie die ESD-Bauteile nahe am Steckverbinder und führen Sie die Signale auf dem Weg zum Chip zuerst durch diese Bauteile. Verzweigen Sie die Signale nicht vor dem Schutzbauteil. Verbinden Sie die Gerätemasse über kurze, breite Leiterbahnen und Vias mit der Hauptmasse. Die U-Variante besitzt eine SDIO-Schnittstelle, die V-Variante SDIO1 und SDIO2. Führen Sie die SDIO-Signale als Gruppe; die Gesamtlänge darf höchstens 50 mm und der Längenunterschied innerhalb der Gruppe höchstens 6 mm betragen. Schirmen Sie den Takt mit Masse ab und schützen Sie auch DATA und CMD mit Masse.
 
 #### 6.2.6. EMI, ESD und Testpunkte { #626-emi-esd-and-test-points }
 
-Lange Oberseiten-Leiterbahnen außerhalb des Abschirmblechs für störende Takt- und Versorgungssignale vermeiden; wenn möglich Innenlagen verwenden. TVS-/ESD-Bauteile nahe am jeweiligen Steckverbinder platzieren. Jedes Signal muss zuerst durch das Schutzbauteil geführt werden; dessen Massepad mit kurzen, breiten Leiterbahnen und Vias an die Hauptmasse anschließen. Den Testpunkt des USB-Ladekabels vor dessen TVS und die TVS am Batterieanschluss vor der Batterieplattform platzieren, sodass externe Leitungen vor dem Chip durch die TVS geführt werden. Das Masse-Netz unter dem Chip ausreichend anbinden und über Blind-/Buried-Vias mit der Hauptmassefläche verbinden.
+Vermeiden Sie lange Leiterbahnen auf der Oberseite außerhalb des Abschirmblechs für störende Takt- und Versorgungssignale; verwenden Sie nach Möglichkeit Innenlagen. Platzieren Sie TVS-/ESD-Bauteile nahe am jeweiligen Steckverbinder. Führen Sie jedes Signal zuerst durch das Schutzbauteil und verbinden Sie dessen Massepad über kurze, breite Leiterbahnen und Vias mit der Hauptmasse. Platzieren Sie den Testpunkt des USB-Ladekabels vor der zugehörigen TVS. Setzen Sie die TVS am Akkuanschluss vor der Akkuplattform, sodass externe Leitungen auf dem Weg zum Chip zuerst durch die TVS geführt werden. Binden Sie das Masse-Netz unter dem Chip mit ausreichend vielen Blind-/Buried-Vias an die Hauptmassefläche an.
 
 ### 6.3. PCB-Layout-Checkliste { #63-pcb-layout-checklist }
 
@@ -60,7 +60,7 @@ Die folgenden Tabellen decken jeweils einen Prüfbereich des PCB-Layouts ab. Ist
 
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
-| 1 | Das Footprint entspricht der Gehäusespezifikation | Erforderlich |
+| 1 | Der Footprint entspricht der Gehäusespezifikation | Erforderlich |
 
 </div>
 
@@ -136,21 +136,21 @@ Die folgenden Tabellen decken jeweils einen Prüfbereich des PCB-Layouts ab. Ist
 
 </div>
 
-#### 6.3.6. HF { #636-rf }
+#### 6.3.6. RF { #636-rf }
 
-<div align="center"><em>Tabelle 6.3-6: Checkliste HF</em></div>
+<div align="center"><em>Tabelle 6.3-6: Checkliste RF</em></div>
 
 <div align="center" markdown>
 
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
-| 1 | Die HF-Leiterbahn muss eine einseitige charakteristische Impedanz von 50 Ω aufweisen | Erforderlich |
-| 2 | HF-Leiterbahnbreite ≥10 mil | Erforderlich |
-| 3 | Auf jeder Seite der HF-Leiterbahn mindestens 60 mil Massekupfer vorsehen und mit ausreichend Massevias an die Hauptmassefläche anbinden | Erforderlich |
+| 1 | Die RF-Leiterbahn muss als unsymmetrische Leitung eine charakteristische Impedanz von 50 Ω aufweisen | Erforderlich |
+| 2 | RF-Leiterbahnbreite ≥10 mil | Erforderlich |
+| 3 | Auf jeder Seite der RF-Leiterbahn mindestens 60 mil Massekupfer vorsehen und mit ausreichend Massevias an die Hauptmassefläche anbinden | Erforderlich |
 | 4 | Das vorgesehene π-Antennenanpassungsnetzwerk nahe am Chip platzieren | Erforderlich |
-| 5 | Durchgehende GND-Fläche unter dem HF-Signal | Erforderlich |
-| 6 | Keine Leiterbahnen für digitale Hochgeschwindigkeitssignale unter der HF-Leiterbahn führen | Erforderlich |
-| 7 | Keine Versorgungsleiterbahnen mit hohem di/dt unter der HF-Leiterbahn führen | Erforderlich |
+| 5 | Durchgehende GND-Fläche unter dem RF-Signal | Erforderlich |
+| 6 | Keine Leiterbahnen für digitale Hochgeschwindigkeitssignale unter der RF-Leiterbahn führen | Erforderlich |
+| 7 | Keine Versorgungsleiterbahnen mit hohem di/dt unter der RF-Leiterbahn führen | Erforderlich |
 | 8 | AVSS_RF1, AVSS_RF2 und AVSS_RF3 sind durch verstärkte Masseanbindung mit der Hauptmassefläche verbunden | Erforderlich |
 
 </div>
@@ -180,7 +180,7 @@ Die folgenden Tabellen decken jeweils einen Prüfbereich des PCB-Layouts ab. Ist
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
 | 1 | Kein High-Speed-Signal verläuft ohne Masseabschirmung parallel zum GPADC-Signal | Erforderlich |
-| 2 | Spannungsteilerwiderstände für die Batteriespannung sind nahe am Chip-Eingangspin platziert | Erforderlich |
+| 2 | Spannungsteilerwiderstände für die Akkuspannung sind nahe am Chip-Eingangspin platziert | Erforderlich |
 
 </div>
 
@@ -193,7 +193,7 @@ Die folgenden Tabellen decken jeweils einen Prüfbereich des PCB-Layouts ab. Ist
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
 | 1 | Die Testpunktpositionen eignen sich für Messspitzen oder zum Löten in einer Prüfvorrichtung | Erforderlich |
-| 2 | Download- und Quarzkalibrierungs-Testpunkte umfassen VBAT, GND, SWDIO, SWCLK, MODE, UART4_TXD, UART4_RXD und einen der Pins PB20/PB21/PB25; zusätzlich VDDIO2 und VDDIO3 oder VDDIO4 bei U beziehungsweise VDDIOA und VDDIOB bei V, und erfüllen die Größen- und Positionsanforderungen der Prüfvorrichtung | Erforderlich |
+| 2 | Die Testpunkte für Download und Quarzkalibrierung umfassen VBAT, GND, SWDIO, SWCLK, MODE, UART4_TXD, UART4_RXD sowie einen der Pins PB20/PB21/PB25. Bei Variante U müssen außerdem VDDIO2 und VDDIO3 oder VDDIO4, bei Variante V VDDIOA und VDDIOB verfügbar sein. Die Größen- und Positionsanforderungen der Prüfvorrichtung sind einzuhalten. | Erforderlich |
 
 </div>
 

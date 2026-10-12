@@ -35,7 +35,7 @@ Mantenga en el proyecto de aplicación la lógica específica de esa aplicación
 
 ## Distribuir componentes con `sf-pkg` { #use-sf-pkg-to-distribute-components }
 
-Un componente es una unidad de ingeniería reutilizable. El registro de componentes de SiFli se basa en Conan; el subcomando actual del SDK es `sf-pkg`.
+Un componente es una unidad de ingeniería reutilizable. SiFli utiliza Conan como registro de paquetes; el subcomando actual del SDK es `sf-pkg`.
 
 Para consumir un paquete, ejecute `sdk.py sf-pkg init` desde el directorio `project` del proyecto SDK; se generará `conanfile.py`. Añada las referencias en el campo `requires` con el formato `package/version@<username>`, donde `<username>` es el nombre de usuario del registro de paquetes. Después, ejecute `sdk.py sf-pkg install` desde el mismo directorio. Los paquetes instalados se guardan en `project/sf-pkgs`; sus archivos Kconfig se integran en `menuconfig`, dentro de `SiFli External Components`.
 
@@ -55,10 +55,10 @@ Un componente está listo para compartirse cuando cumple estos criterios:
 - Se compila desde una copia limpia del repositorio, con los requisitos de entorno y dependencias documentados.
 - Incluye un ejemplo mínimo.
 - Documenta la configuración necesaria.
-- Evita depender de supuestos ocultos sobre la placa.
+- No depende de supuestos ocultos sobre la placa.
 - Informa de los errores con claridad.
 - Documenta cualquier uso de recursos globales, incluidas las reglas de propiedad y liberación.
-- Indica las reglas de propiedad de hilos, callbacks y memoria.
+- Define las reglas de propiedad de hilos, callbacks y memoria.
 
 ## Qué documentar { #what-to-record }
 

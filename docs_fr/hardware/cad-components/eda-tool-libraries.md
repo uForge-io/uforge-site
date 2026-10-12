@@ -13,7 +13,7 @@ tags:
 
 SiFli publie des bibliothèques de symboles de schéma et d'empreintes PCB pour la famille de puces et modules SF32. Utilisez ces fichiers comme point de départ pour la saisie des schémas et la conception du PCB, plutôt que de redessiner à la main les symboles, le brochage et la géométrie des pastilles à partir de la fiche technique.
 
-Ces bibliothèques réduisent les risques liés à la mise en service, mais elles ne remplacent pas la fiche technique, le plan de boîtier ni le guide de conception matérielle spécifique au dispositif. Avant la libération de la conception, vérifiez toujours le composant de bibliothèque sélectionné par rapport à la référence exacte, au boîtier, au brochage, à la géométrie des pastilles et aux recommandations de conception du PCB propres au dispositif.
+Ces bibliothèques réduisent les risques d'erreur lors de la mise en service, mais elles ne remplacent pas la fiche technique, le plan de boîtier ni le guide de conception matérielle de la puce ou du module concerné. Avant de valider la conception, comparez toujours le composant de bibliothèque sélectionné à la référence exacte, au boîtier, au brochage, à la géométrie des pastilles et aux recommandations de conception du PCB propres au composant.
 
 <div class="grid cards" markdown>
 
@@ -36,9 +36,9 @@ Ces bibliothèques réduisent les risques liés à la mise en service, mais elle
 | Outil EDA | Fichier | Format | Contenu | Distribution |
 |:---|:---|:---|:---|:---|
 | JLCEDA / LCEDA Pro | `ProPrj_sifli-iclib_2026-04-20.epro2` | Archive de projet LCEDA Pro | Symboles de schéma et empreintes PCB | Téléchargement direct |
-| PADS | `PADS-SIFLI-IC.ZIP` | Archive de bibliothèque Mentor/Siemens PADS | Symboles de schéma et decals PCB | Téléchargement direct |
+| PADS | `PADS-SIFLI-IC.ZIP` | Archive de bibliothèque Mentor/Siemens PADS | Symboles de schéma et empreintes PCB | Téléchargement direct |
 | OrCAD | `OrCAD-SIFLI-IC.OLB` | Bibliothèque Cadence OrCAD Capture | Symboles de schéma | Téléchargement direct |
-| KiCad | Archive ZIP d'une version ou métadonnées du package (`metadata.json`) | Bibliothèque de symboles, empreintes et modèles 3D KiCad | Symboles de schéma, empreintes PCB et modèles 3D | [Dépôt GitHub](https://github.com/OpenSiFli/kicad-libraries), versions publiées et numérotées |
+| KiCad | Archive ZIP d'une version ou métadonnées du package (`metadata.json`) | Bibliothèque de symboles, empreintes et modèles 3D KiCad | Symboles de schéma, empreintes PCB et modèles 3D | [Dépôt GitHub](https://github.com/OpenSiFli/kicad-libraries), versions publiées avec numéro de version |
 
 </div>
 
@@ -71,12 +71,12 @@ Le README du dépôt [OpenSiFli/kicad-libraries](https://github.com/OpenSiFli/ki
 
 ## Liste de contrôle de revue { #review-checklist }
 
-- [ ] Vérifiez la référence de bibliothèque et le suffixe de boîtier par rapport à la BOM avant la publication du schéma.
-- [ ] Vérifiez les noms et numéros de broches du symbole par rapport à la fiche technique de la puce et au guide de conception matérielle spécifique au dispositif.
+- [ ] Vérifiez la référence de bibliothèque et le suffixe de boîtier par rapport à la BOM avant de valider le schéma.
+- [ ] Vérifiez les noms et numéros de broches du symbole par rapport à la fiche technique de la puce et au guide de conception matérielle spécifique au composant.
 - [ ] Vérifiez la taille des pastilles de l'empreinte, le pas, l'encombrement de placement (courtyard), le traitement de la pastille exposée et le dégagement d'assemblage par rapport au plan de boîtier officiel.
 - [ ] Considérez les modèles 3D uniquement comme des aides au placement et à l'ajustement mécanique ; ne les utilisez pas comme cotes de fabrication ou d'assemblage.
 - [ ] Pour JLCEDA / LCEDA Pro, PADS et OrCAD, confirmez la couverture par composant après import ; l'index de téléchargement du wiki ne détaille pas la prise en charge de chaque composant.
-- [ ] Vérifiez les mises à jour des bibliothèques avant de commencer une conception. Conservez avec le projet la version de l'archive ou du package revu. SiFli peut mettre à jour les fichiers lorsque de nouveaux composants et modules sont qualifiés. Les mises à jour peuvent ajouter ou modifier des composants ; revérifiez donc toute version de remplacement avant de l'adopter.
+- [ ] Vérifiez les mises à jour des bibliothèques avant de commencer une conception. Conservez avec le projet la version de l'archive ou du paquet vérifiée. SiFli peut mettre à jour les fichiers lorsque de nouveaux composants et modules sont qualifiés. Les mises à jour peuvent ajouter ou modifier des composants ; revérifiez donc toute version de remplacement avant de l'adopter.
 
 ## Pages associées { #related-pages }
 

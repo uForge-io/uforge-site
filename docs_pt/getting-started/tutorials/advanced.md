@@ -1,13 +1,13 @@
 ---
 icon: lucide/rocket
-description: "Tutoriais SF32 de validação de produto: ajuste de baixo consumo com medições, OTA por BLE com recuperação após falhas, inicialização de displays personalizados, análise de falhas e coredumps, Bluetooth com múltiplas conexões e drivers personalizados."
+description: "Tutoriais SF32 de validação de produto: ajuste de baixo consumo com medições, OTA por BLE com recuperação após falhas, bring-up (ativação inicial) de displays personalizados, análise de falhas e core dumps, Bluetooth com múltiplas conexões e drivers personalizados."
 tags:
     - Tutoriais
 ---
 
 # Validação de produto { #advanced-tutorials }
 
-Estes tutoriais pressupõem que você já domina a [integração de subsistemas](intermediate.md): consegue inicializar um periférico, conectá-lo ao middleware e já lidou na prática com pelo menos um problema de coexistência. Esta etapa aborda o trabalho que transforma uma demonstração funcional em um produto pronto para ser lançado: medição de consumo, OTA com recuperação, inicialização de hardware personalizado, análise de falhas, Bluetooth com múltiplas conexões e drivers reutilizáveis.
+Estes tutoriais pressupõem que você já está familiarizado com a [integração de subsistemas](intermediate.md): consegue inicializar um periférico, conectá-lo ao middleware e já lidou na prática com pelo menos um problema de coexistência. Esta etapa aborda o trabalho que transforma uma demonstração funcional em um produto pronto para ser lançado: medição de consumo, OTA com recuperação, inicialização de hardware personalizado, análise de falhas, Bluetooth com múltiplas conexões e drivers reutilizáveis.
 
 A validação de produto não consiste tanto em copiar um exemplo, mas em reunir evidências. Em cada tutorial, registre a revisão da placa, a versão do SDK, o exemplo usado como base, a configuração do teste, os resultados esperados e observados e as alterações realizadas.
 
@@ -24,12 +24,12 @@ Os caminhos dos exemplos e as placas compatíveis podem variar conforme a versã
 **Comece por:** `example/pm/classical` e `example/pm/raise_wrist`
 
 1. Prepare a medição de corrente conforme descrito na [Visão geral de baixo consumo](../../learn/low-power/overview.md#measuring-power-in-practice).
-2. Registre valores de referência durante a inicialização, em atividade, em repouso com conexão, em repouso com o display desligado e, se disponível, em sono profundo (deep sleep).
+2. Registre valores de referência durante a inicialização, em atividade, em repouso com conexão, em repouso com o display desligado e, se disponível, em Deep Sleep (sono profundo).
 3. Comece pelo exemplo de PM “classical” e identifique onde `rt_pm_request(PM_SLEEP_MODE_IDLE)` impede a entrada em modos de baixo consumo mais profundos que IDLE e onde a chamada correspondente a `rt_pm_release(PM_SLEEP_MODE_IDLE)` remove essa restrição. Verifique também se a estrutura de drivers bloqueia o modo de suspensão automaticamente enquanto um periférico está ativo.
 4. Em seguida, analise como o exemplo raise-to-wake amostra o acelerômetro, reconhece gestos de pulso, acende o display e volta à suspensão. Verifique a sequência real de amostragem e despertar do exemplo; não presuma que ele usa uma interrupção.
 5. Aplique o mesmo princípio de baixo consumo ao seu produto. Quando o hardware e os drivers permitirem, use interrupções ou processamento orientado a eventos para evitar temporizadores e polling desnecessários.
 6. Repita as medições após cada alteração.
-7. Se a corrente durante o sono profundo estiver acima do esperado, use `list_thread`, `list_device`, logs de PM e instrumentação das fontes de despertar para encontrar o subsistema que continua ativo.
+7. Se a corrente durante o Deep Sleep estiver acima do esperado, use `list_thread`, `list_device`, logs de PM e instrumentação das fontes de despertar para encontrar o subsistema que continua ativo.
 
 **Critério de sucesso:** o firmware alcança o estado de baixo consumo esperado, as medições de corrente são repetíveis entre execuções e as fontes de despertar são intencionais, não acidentais.
 
@@ -59,7 +59,7 @@ Os caminhos dos exemplos e as placas compatíveis podem variar conforme a versã
 
 **O que você aprendeu:** como o layout das partições, a validação da imagem, a seleção de boot e a política de recuperação determinam o comportamento da OTA, e por que uma atualização bem-sucedida, por si só, não prova que seja possível recuperar o dispositivo após uma interrupção.
 
-## Inicialize um módulo de display personalizado { #bring-up-a-custom-display-module }
+## Faça o bring-up (ativação inicial) de um módulo de display personalizado { #bring-up-a-custom-display-module }
 
 **Objetivo:** adaptar um novo display LCD, AMOLED, EPD ou display de memória, em vez de usar somente um painel de referência já suportado.
 
@@ -67,10 +67,10 @@ Os caminhos dos exemplos e as placas compatíveis podem variar conforme a versã
 
 **Comece por:** o driver de display existente no SDK que mais se aproxima do seu painel
 
-1. Reúna a folha de dados do painel e identifique a sequência de inicialização, os parâmetros de temporização, o tipo de interface, os requisitos de reset e a sequência de alimentação.
+1. Reúna o datasheet do painel e identifique a sequência de inicialização, os parâmetros de temporização, o tipo de interface, os requisitos de reset e a sequência de alimentação.
 2. Confirme se o dispositivo e o encapsulamento SF32 selecionados oferecem suporte à interface e ao pinout necessários.
 3. Copie o driver de display existente mais próximo e substitua a sequência de inicialização e o mapa de registradores específicos do painel.
-4. Primeiro, valide o preenchimento da tela com cores sólidas. Não depure widgets LVGL antes que o painel consiga exibir padrões simples.
+4. Primeiro, valide o preenchimento do display com cores sólidas. Não depure widgets LVGL antes que o painel consiga exibir padrões simples.
 5. Verifique a ordem das cores e dos bytes, a orientação, a janela de endereçamento e o comportamento de atualização parcial.
 6. Reintegre o LVGL usado no exercício 2 de Integração de subsistemas.
 7. Se forem compatíveis com o chip, o caminho de display, o driver e o SDK selecionados, habilite um por vez DMA, atualização parcial e a aceleração ePicasso.
@@ -90,7 +90,7 @@ Os caminhos dos exemplos e as placas compatíveis podem variar conforme a versã
 
 **Comece por:** `example/system/cpu_usage_profiler` e `example/system/coredump`
 
-1. Execute o exemplo de profiling de uso da CPU com uma das cargas combinadas de Integração de subsistemas.
+1. Execute o exemplo de monitoramento do uso da CPU com uma das cargas combinadas de Integração de subsistemas.
 2. Identifique qual tarefa está consumindo tempo de CPU e se isso corresponde ao esperado.
 3. Introduza uma falha controlada em uma branch de teste ou em um exemplo descartável e capture um core dump.
 4. Use as ferramentas de análise de dump do SDK para localizar a função que falhou e a pilha de chamadas.
@@ -115,7 +115,7 @@ Os caminhos dos exemplos e as placas compatíveis podem variar conforme a versã
 2. Acrescente também o papel central. Por exemplo, o dispositivo pode atuar como periférico de um telefone e como central de um acessório com sensores.
 3. Amplie a implementação para várias conexões simultâneas.
 4. Registre, para cada conexão, o intervalo de conexão, a latência do escravo (slave latency), o timeout de supervisão (supervision timeout) e a taxa de notificações.
-5. Antes de atribuir o problema ao código da aplicação, estabeleça uma referência de vazão de dados (throughput) usando o exemplo correspondente do SDK.
+5. Antes de atribuir o problema ao código da aplicação, estabeleça uma referência da taxa de transferência de dados (throughput) usando o exemplo correspondente do SDK.
 6. Teste a reconexão, o modo de suspensão do telefone, a perda do acessório e rajadas simultâneas de notificações.
 
 **Critério de sucesso:** todas as funções previstas conectam, desconectam e reconectam de forma confiável, e os parâmetros escolhidos permanecem estáveis sob atividade combinada.
@@ -151,7 +151,7 @@ Os caminhos dos exemplos e as placas compatíveis podem variar conforme a versã
 - [ ] Os valores de consumo foram medidos, são repetíveis e estão associados a cenários de teste identificados.
 - [ ] O sucesso das atualizações OTA, as verificações de integridade e a recuperação após interrupções foram testados conforme a política documentada do produto; o rollback só é considerado validado se estiver implementado no projeto do produto.
 - [ ] A inicialização do display personalizado é validada com padrões antes de adicionar a complexidade do LVGL.
-- [ ] Os procedimentos de profiling e coredump estão documentados para a equipe.
+- [ ] Os procedimentos de análise do uso da CPU e de core dump estão documentados para a equipe.
 - [ ] O Bluetooth com múltiplas conexões foi testado em reconexões e casos-limite envolvendo o telefone ou o acessório.
 - [ ] Os drivers personalizados usam o modelo de dispositivos do RT-Thread e tratam a suspensão e o despertar.
 - [ ] Os testes de carga combinada incluem display, Bluetooth, armazenamento, áudio, sensores e IA, quando aplicável.

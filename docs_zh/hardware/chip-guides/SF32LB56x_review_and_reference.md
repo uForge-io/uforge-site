@@ -17,7 +17,7 @@ hide:
 
 - [ ] U/V 型号、封装、管脚定义和 PCB 工艺均已确认。
 - [ ] 芯片各电源轨、PMIC 输出、电容、复位、充电器及低功耗开关均已完成评审。
-- [ ] 工作模式、唤醒源、上拉电源轨及休眠期间的漏电情况均已完成评审。
+- [ ] 工作模式、唤醒源、上拉电源轨及睡眠期间的漏电情况均已完成评审。
 - [ ] 48 MHz 和 32.768 kHz 晶体参数、布局和走线已评审。
 - [ ] RF 匹配网络、天线布局及调谐方案均已完成。
 - [ ] 显示、存储、音频、传感器、PBR、UART/I2C、GPTIM、调试及量产相关管脚的分配均无冲突。
@@ -48,7 +48,7 @@ hide:
 
 ### 9.1. 附录 A. 典型 SF32LB56x 产品 { #appendix-a-a-typical-sf32lb56x-product }
 
-典型 SF32LB56x 产品包含 MCU、PMIC、显示和触摸控制器、启动存储、可选外部存储、传感器、振动马达、音频输入/输出、蓝牙天线、晶体，以及调试和量产测试接口。U 封装适合紧凑的 QFN 实现；V 封装支持更多接口，但需要规划 BGA/HDI 布局。
+典型 SF32LB56x 产品包含 MCU、PMIC、显示和触摸控制器、启动存储、可选外部存储、传感器、振动马达、音频输入/输出、蓝牙（Bluetooth）天线、晶体，以及调试和量产测试接口。U 封装适合紧凑的 QFN 实现；V 封装支持更多接口，但需要规划 BGA/HDI 布局。
 
 ## 10. 修订历史 { #10-revision-history }
 
@@ -64,7 +64,7 @@ hide:
 
 ### 10.1. 核对表修订历史 { #101-checklist-revision-history }
 
-[原理图核对表](SF32LB56x_schematic_checklist.md)以及 [PCB 布局指导](SF32LB56x_pcb_layout.md) 第 6.3 节中的逐项核对表均与设计指南分开进行版本管理，版本号以思澈科技（SiFli）官方 *SF32LB56x Schematic & PCB Checklist* 工作簿为准。
+[原理图核对表](SF32LB56x_schematic_checklist.md)以及 [PCB 布局指导](SF32LB56x_pcb_layout.md) 第 6.3 节中的逐项核对内容均独立于设计指南进行版本管理，版本号以思澈科技（SiFli）官方 *SF32LB56x Schematic & PCB Checklist* 工作簿为准。
 
 <div align="center"><em>表 10.1-1：核对表修订历史</em></div>
 

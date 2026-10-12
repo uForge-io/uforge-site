@@ -22,15 +22,16 @@ tags:
 - **LB** — Identifiant de gamme de produits
     - **LB** : série de MCU Bluetooth basse consommation
 - **5** — Famille de processeur
-    - **5** : dispositifs basés sur un processeur Arm Cortex-M33 STAR-MC1 de 32 bits, ou sur un processeur RISC-V de performances comparables
+    - **5** : composants basés sur un processeur Arm Cortex-M33 STAR-MC1 de 32 bits, ou sur un processeur RISC-V de performances comparables
 - **x** — Niveau de produit
     - **8 / 7** : configurations avec deux processeurs applicatifs et un processeur basse consommation ; le positionnement varie selon la famille.
     - **6 / 5** : milieu de gamme (un processeur applicatif et un processeur basse consommation)
     - **2** : optimisé pour réduire les coûts (un processeur applicatif et un contrôleur Bluetooth basse consommation dédié)
-- **y** — Variante du dispositif
+- **y** — Variante du composant
     - Sa valeur reflète généralement la capacité de PSRAM intégrée au boîtier ; la correspondance exacte dépend de la sous-famille du produit.
 
 ### Suffixe : *ZxYx6* { #suffix-zxyx6 }
+
 - **Z** — Type de boîtier
     - **U** : QFN68
     - **V** : BGA
@@ -38,7 +39,7 @@ tags:
 - **xYx** — Configuration de mémoire intégrée (Flash QSPI-NOR et PSRAM)
   *(Remarque : la correspondance exacte entre les codes et les configurations dépend du boîtier et de la famille de composants.)*
 
-`ZxYx6` est un schéma général de la famille, et non un modèle d'analyse à longueur fixe. Le nombre et l'ordre des codes mémoire varient selon la famille du dispositif et le boîtier : le code numérique de la Flash peut être omis et le code alphabétique de la PSRAM peut être répété lorsque plusieurs composants sont intégrés. Pour décoder une référence précise, consultez le tableau des variantes de sa famille.
+`ZxYx6` est un schéma général de la famille, et non un modèle d'analyse à longueur fixe. Le nombre et l'ordre des codes mémoire varient selon la famille du composant et le boîtier : le code numérique de la Flash peut être omis et le code alphabétique de la PSRAM peut être répété lorsque plusieurs composants sont intégrés. Pour décoder une référence précise, consultez le tableau des variantes de sa famille.
 <div align="center"><em>Définition des champs du suffixe de la référence</em></div>
 
 <div align="center" markdown>
@@ -56,7 +57,7 @@ tags:
 
 ### Codes mémoire propres au SF32LB57x { #sf32lb57x-memory-codes }
 
-Le schéma de numérotation du guide de conception matérielle SF32LB57x montre trois codes de position mémoire après le code du boîtier, dans l’ordre MPI1, MPI2 et MPI3 ; le code de température vient ensuite. Les codes propres à cette famille pour chaque position MPI sont les suivants :
+Le schéma de numérotation du guide de conception matérielle SF32LB57x montre trois codes de position mémoire après le code du boîtier, dans l'ordre MPI1, MPI2 et MPI3 ; le code de température vient ensuite. Les codes propres à cette famille pour chaque position MPI sont les suivants :
 
 <div align="center"><em>Tableau : codes mémoire SF32LB57x par position MPI</em></div>
 
@@ -64,7 +65,7 @@ Le schéma de numérotation du guide de conception matérielle SF32LB57x montre 
 
 | Code | Signification à la position MPI correspondante du SF32LB57x |
 |:-----|:------------------------------------------------------------|
-| `N` | Aucune mémoire SiP |
+| `N` | Aucune mémoire intégrée au boîtier |
 | `B` | PSRAM de 32 Mb |
 | `C` | PSRAM de 64 Mb |
 | `D` | PSRAM de 128 Mb |
@@ -84,6 +85,7 @@ Cette correspondance est propre au SF32LB57x. Vérifiez le code complet dans le 
 ### Exemples de références { #part-number-examples }
 
 #### Exemple 1 : SF32LB527UD6 { #example-1-sf32lb527ud6 }
+
 Caractéristiques de la configuration MCU à coût optimisé de la **série SF32LB52** :
 
 * **Configuration des processeurs :** un processeur applicatif et un processeur dédié au contrôle Bluetooth basse consommation (basé sur Arm Cortex-M33 STAR-MC1).
@@ -92,6 +94,7 @@ Caractéristiques de la configuration MCU à coût optimisé de la **série SF32
 * **Température de fonctionnement :** −40 °C à +85 °C (**6**, plage de température industrielle).
 
 #### Exemple 2 : SF32LB587VEE56 { #example-2-sf32lb587vee56 }
+
 Caractéristiques de la configuration MCU phare de la **série SF32LB58** :
 
 * **Configuration des processeurs :** deux processeurs applicatifs et un processeur basse consommation, basés sur Arm Cortex-M33 STAR-MC1.
@@ -101,11 +104,11 @@ Caractéristiques de la configuration MCU phare de la **série SF32LB58** :
 
 #### Exemple 3 : SF32LB57GVD776 { #example-3-sf32lb57gvd776 }
 
-Le tableau des variantes SF32LB57x indique que cette référence est en BGA112. Ses trois codes de position mémoire sont `D/7/7` : MPI1 contient une PSRAM de 128 Mb, et MPI2 et MPI3 contiennent chacun une NOR Flash de 128 Mb. Le `6` final indique la classe de température industrielle. Le deuxième `7` de `776` désigne donc la NOR Flash de MPI3. Consultez la [présentation de la famille SF32](SF32_family.md) pour l’interprétation GPIO de BGA112.
+Le tableau des variantes SF32LB57x indique que cette référence est en BGA112. Ses trois codes de position mémoire sont `D/7/7` : MPI1 contient une PSRAM de 128 Mb, et MPI2 et MPI3 contiennent chacun une NOR Flash de 128 Mb. Le `6` final indique la classe de température industrielle. Le deuxième `7` de `776` désigne donc la NOR Flash de MPI3. Consultez la [présentation de la famille SF32](SF32_family.md) pour l'interprétation GPIO de BGA112.
 
 #### Exemple 4 : SF32LB57ZVN7N6 { #example-4-sf32lb57zvn7n6 }
 
-Le tableau des variantes SF32LB57x indique également que cette référence est en BGA112. Ses codes de position mémoire sont `N/7/N` : aucune mémoire SiP sur MPI1, une NOR Flash de 128 Mb sur MPI2 et aucune mémoire SiP sur MPI3. Le `6` final indique la classe de température industrielle. La présentation de la famille explique pourquoi la notation `58 + 6` ne signifie pas 64 GPIO librement affectables.
+Le tableau des variantes SF32LB57x indique également que cette référence est en BGA112. Ses codes de position mémoire sont `N/7/N` : aucune mémoire intégrée au boîtier sur MPI1, une NOR Flash de 128 Mb sur MPI2 et aucune mémoire intégrée au boîtier sur MPI3. Le `6` final indique la classe de température industrielle. La présentation de la famille explique pourquoi la notation `58 + 6` ne signifie pas 64 GPIO librement affectables.
 
 ### Exceptions de suffixe héritées de la série 55x { #legacy-55x-suffix-exceptions }
 
@@ -127,7 +130,7 @@ La famille SF32LB55x ayant été définie avant la convention de nommage actuell
     - **x** identifie le niveau de produit : **8 / 7** correspond à deux processeurs applicatifs et un processeur basse consommation ; le positionnement varie selon la famille. **6 / 5** désigne le milieu de gamme et **2** une configuration optimisée en coût.
 - **MOD** — Produit module SiFli.
 - **y** — Sous-type de module, lorsque la famille en définit un
-    - **1** : alimentation directe par batterie Li-ion pour les dispositifs SF32LB520/3/5/7. La plage d'alimentation de la puce est de 3,2 à 4,7 V ; la configuration standard utilise le SF32LB525UC6 avec 8 MB d'OPI-PSRAM.
+    - **1** : alimentation directe par batterie Li-ion pour les composants SF32LB520/3/5/7. La plage d'alimentation de la puce est de 3,2 à 4,7 V ; la configuration standard utilise le SF32LB525UC6 avec 8 MB d'OPI-PSRAM.
     - **A** : fonctionnement standard en 3,3 V pour la famille SF32LB52B. L'alimentation directe par batterie Li-ion n'est pas prise en charge ; la plage d'alimentation de la puce est de 2,97 à 3,63 V. La configuration standard utilise le SF32LB52BU36 avec 1 MB de Flash QSPI-NOR intégrée.
     - **B** : fonctionnement standard en 3,3 V pour la famille 52E/52G/52J. L'alimentation directe par batterie Li-ion n'est pas prise en charge ; la plage d'alimentation de la puce est de 2,97 à 3,63 V. La configuration standard utilise le SF32LB52EUB6 avec 4 MB d'OPI-PSRAM intégrée.
 

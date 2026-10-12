@@ -8,13 +8,13 @@ tags:
 
 ## Einführung { #introduction }
 
-Der **KI-Beschleuniger**, im SDK NNACC genannt, übernimmt unterstützte Operationen neuronaler Netze auf ausgewählten SF32-Geräten. Er ermöglicht **Edge-KI** mit lokaler Inferenz, die nicht von einem Cloud-Dienst abhängt. Ob Latenz, CPU-Belegung oder Energiebedarf sinken, hängt vom Modell, der Speicherzuordnung, der Softwareimplementierung und der gesamten Produktlast ab.
+Der **KI-Beschleuniger**, im SDK NNACC genannt, übernimmt unterstützte Operationen neuronaler Netze auf ausgewählten SF32-Geräten. Er ermöglicht **Edge-KI** mit lokaler Inferenz, die nicht von einem Cloud-Dienst abhängt. Ob Latenz, CPU-Auslastung oder Energiebedarf sinken, hängt vom Modell, der Speicherzuordnung, der Softwareimplementierung und der gesamten Produktlast ab.
 
 Wearables, Gesundheitsmonitore, intelligente Displays, Sprachzubehör, Sensorfusionssysteme und kompakte AIoT-Produkte sind mögliche Anwendungen. Solche batteriebetriebenen Geräte verbinden häufig Bluetooth, Grafik, Audio, Sensorerfassung und Benutzerinteraktion. Das Delegieren unterstützter Operationen an die Hardware kann CPU-Zeit für andere Aufgaben freigeben; Reaktionsfähigkeit und Energieeinsparung müssen jedoch gemessen werden.
 
 Der genaue Funktionsumfang der KI hängt vom jeweiligen SF32-Gerät und der Unterstützung durch das SDK ab. Prüfen Sie stets das Datenblatt, das Referenzhandbuch und die SDK-Dokumentation für den Zielchip, bevor Sie sich auf eine Modellarchitektur oder Speicheraufteilung festlegen.
 
-Die folgenden Angaben zu CMSIS-NN-Operationen und zur NNACC-Anzahl je Gerät beruhen auf der Dokumentation zu SiFli-SDK v2.5.1. Der NNACC-Leitfaden dieser Version nennt Ressourcen für SF32LB55x/56x/58x, belegt aber keine Verfügbarkeit für SF32LB52x oder SF32LB57x; die fehlende Angabe beweist nicht, dass diese Familien keinen NNACC haben. Die Prüfungen von Adressfenstern, das Warteverhalten und die GC032A-Konfiguration sind Beobachtungen aus den HAL- oder Treiberquellen dieser Version, keine allgemeingültigen Garantien für alle Chiprevisionen oder SDK-Versionen. Der zitierte NNACC-Leitfaden und die Beispiele belegen weder einen durchgängigen Modellkonverter oder eine Graph-Laufzeitumgebung noch einen automatischen CPU-Fallback oder Kameraerfassung für jedes Bauteil und jede Platine. Prüfen Sie vor der Festlegung des Designs die genaue SDK-Version und -Konfiguration, Chiprevision, Laufzeitumgebung und Platine.
+Die folgenden Angaben zu CMSIS-NN-Operationen und zur NNACC-Anzahl je Gerät beruhen auf der Dokumentation zu SiFli-SDK v2.5.1. Der NNACC-Leitfaden dieser Version nennt Ressourcen für SF32LB55x/56x/58x, belegt aber keine Verfügbarkeit für SF32LB52x oder SF32LB57x; die fehlende Angabe beweist nicht, dass diese Familien keinen NNACC haben. Die Prüfungen von Adressfenstern, das Warteverhalten und die GC032A-Konfiguration sind Beobachtungen aus den HAL- oder Treiberquellen dieser Version, keine allgemeingültigen Garantien für alle Chiprevisionen oder SDK-Versionen. Der zitierte NNACC-Leitfaden und die Beispiele belegen weder einen durchgängigen Modellkonverter oder eine Graph-Laufzeitumgebung noch einen automatischen CPU-Fallback noch Kameraerfassung für jedes Gerät und jede Platine. Prüfen Sie vor der Festlegung des Designs die genaue SDK-Version und -Konfiguration, Chiprevision, Laufzeitumgebung und Platine.
 
 Diese Seite hilft Ihnen zu beurteilen, ob eine lokale KI-Funktion zum gewählten SF32-Gerät passt und wie sich die Inferenz auf Sensoren, CPU, Speicher und Beschleuniger verteilen lässt. Für die Integration und Bereitstellung von Modellen lesen Sie die ergänzende [KI-Übersicht](overview.md).
 
@@ -39,30 +39,30 @@ Eine vereinfachte Edge-KI-Verarbeitung auf SF32 sieht so aus:
 <div align="center"><em>Diagramm: Verarbeitungsschritte und firmwaregesteuerte Inferenz</em></div>
 
 ```text
-Sensoren / Audio / Kamera
+Sensors / Audio / Camera
         │
         ▼
-Vorverarbeitung
-  - Filterung
-  - Aufteilung in Frames
-  - Normalisierung
-  - Merkmalsextraktion
+Pre-processing
+  - filtering
+  - framing
+  - normalization
+  - feature extraction
         │
         ▼
-Firmware / Inferenzlaufzeit
-  - Steuerung des Modellgraphen
-  - von NNACC unterstützte Operationen
-  - sonstige Operationen auf der CPU, sofern implementiert
+Firmware / Inference Runtime
+  - model graph orchestration
+  - supported operations on NNACC
+  - other operations on CPU, if implemented
         │
         ▼
-Nachverarbeitung
-  - Schwellwertbildung
-  - Glättung
-  - Ereigniserkennung
-  - Anwendungsentscheidungen
+Post-processing
+  - thresholding
+  - smoothing
+  - event detection
+  - application decisions
         │
         ▼
-Anwendung, UI, Bluetooth oder Speicher
+Application, UI, Bluetooth, or Storage
 ```
 
 Der Beschleuniger ist nur ein Teil der vollständigen KI-Verarbeitungskette. Produkte benötigen weiterhin Datenerfassung und -pufferung, Vorverarbeitung, die Planung der Inferenz, Nachverarbeitung und Entscheidungslogik auf Anwendungsebene. Die beste Leistung ergibt sich meist, wenn die gesamte Verarbeitungskette auf die Speicherhierarchie und die verfügbaren Beschleuniger abgestimmt wird, statt Inferenz als isolierten Funktionsaufruf zu behandeln.
@@ -96,7 +96,7 @@ Als Orientierung gilt: Die CPU steuert den Ablauf, während der Beschleuniger au
 | Komponente | Typische Rolle |
 |:----------|:-------------|
 | **Anwendungs-CPU** | Führt die Anwendungslogik aus, plant die Inferenz, verwaltet Puffer und steuert Benutzeroberfläche, Bluetooth, Speicher und Systemrichtlinien. |
-| **Low-Power-Prozessor** | Kann auf Geräten, auf denen er benutzerprogrammierbar ist, die kontinuierliche Sensorüberwachung oder Hintergrundaufgaben übernehmen. |
+| **Low-Power-Prozessor** | Kann auf Geräten, auf denen er vom Anwender programmierbar ist, die kontinuierliche Sensorüberwachung oder Hintergrundaufgaben übernehmen. |
 | **KI-Beschleuniger** | Führt unterstützte NNACC-Operationen aus. Vergleichen Sie CPU-Zeit und Energiebedarf der gesamten Verarbeitungskette mit der Software-Referenz. |
 | **DMA-/Speichersystem** | Ermöglicht Speicherzugriffe und konfigurierte Datenübertragungen; nicht jeder NNACC-Ein- oder -Ausgang benötigt eine eigene DMA-Kopie. |
 | **Weitere Beschleuniger** | Audio-, Grafik-, Kryptografie- oder Sensorverarbeitungsblöcke können die gesamte Verarbeitungskette unterstützen. |
@@ -129,13 +129,13 @@ Diese Tabelle dient der Produktauswahl und ersetzt nicht das Datenblatt. Prüfen
 
 Ein typischer Entwicklungsablauf für eingebettete KI umfasst mehrere Phasen:
 
-1. Ein Modell anhand repräsentativer Daten auf einem Entwicklungsrechner trainieren oder auswählen.
-2. Das Modell durch sorgfältige Auswahl, Ausdünnen weniger relevanter Parameter (Pruning), Quantisierung oder Architekturänderungen an die Grenzen des eingebetteten Systems anpassen.
-3. Inferenz-Laufzeitumgebung und Modelldarstellung wählen oder implementieren, Operatorabdeckung und numerische Kompatibilität mit den gewählten SDK-Kerneln prüfen. Keinen Konverter für vollständige Modelle in der NNACC-HAL voraussetzen.
-4. Die numerische Genauigkeit nach der Konvertierung und Quantisierung überprüfen.
-5. Vorverarbeitung, Inferenz und Nachverarbeitung in die Firmware integrieren.
-6. Latenz, Speicherbedarf, Energieverbrauch und Genauigkeit auf der Zielhardware messen und profilieren.
-7. Realistische parallele Bluetooth-, Display-, Audio- und Sensorlasten einschließlich der Übergänge in die vorgesehenen Energiesparzustände und zurück testen.
+1. Trainieren oder wählen Sie ein Modell anhand repräsentativer Daten auf einem Entwicklungsrechner aus.
+2. Passen Sie das Modell durch sorgfältige Auswahl, Ausdünnen weniger relevanter Parameter (Pruning), Quantisierung oder Architekturänderungen an die Grenzen des eingebetteten Systems an.
+3. Wählen oder implementieren Sie Inferenz-Laufzeitumgebung und Modelldarstellung. Prüfen Sie Operatorabdeckung und numerische Kompatibilität mit den gewählten SDK-Kerneln. Setzen Sie keinen Konverter für vollständige Modelle in der NNACC-HAL voraus.
+4. Überprüfen Sie die numerische Genauigkeit nach der Konvertierung und Quantisierung.
+5. Integrieren Sie Vorverarbeitung, Inferenz und Nachverarbeitung in die Firmware.
+6. Messen und profilieren Sie Latenz, Speicherbedarf, Energieverbrauch und Genauigkeit auf der Zielhardware.
+7. Testen Sie realistische parallele Bluetooth-, Display-, Audio- und Sensorlasten einschließlich der Übergänge in die vorgesehenen Energiesparzustände und zurück.
 
 Der häufigste Fehler besteht darin, nur das neuronale Netz zu optimieren und den Rest der Verarbeitungskette zu vernachlässigen. In vielen eingebetteten Produkten sind Vorverarbeitung, Speichertransfers, das zeitliche Verhalten der Sensoren und Nachverarbeitung ebenso wichtig wie der Beschleuniger selbst.
 
@@ -162,7 +162,7 @@ KI-Anwendungen können speicherintensiv sein, selbst wenn das Modell klein wirkt
 - Eingabetensoren.
 - Puffer für Zwischenaktivierungen.
 - Ausgabetensoren.
-- Audioframes, Sensorfenster oder Kamerabilder.
+- Audio-Frames, Sensorfenster oder Kamerabilder.
 - Vor- und Nachverarbeitungspuffer.
 - Daten der Benutzeroberfläche, von Bluetooth und der Anwendung, die gleichzeitig verarbeitet werden.
 
@@ -170,7 +170,7 @@ Platzieren Sie häufig genutzte Tensoren und Zwischenpuffer entsprechend der int
 
 Prüfen Sie zunächst, ob der gewählte NNACC jeden Puffer erreichen kann. Daten in externem Flash oder PSRAM können eine Kopie in Arbeitspuffer erfordern. Berücksichtigen Sie Kopierzeit, Arbeits-RAM und Energiebedarf. Die [HAL-Implementierung des SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/hal/bf0_hal_nn_acc.c) rundet die geprüften Puffergrößen auf 4-Byte-Vielfache auf und lehnt einen Puffer ab, wenn Beginn und geprüftes Ende in unterschiedlichen 1-MiB-Adressfenstern (1 048 576 Byte) liegen. Eingabe und Bias müssen ebenfalls dasselbe Fenster nutzen. Ein Ende genau an der Grenze zum nächsten Fenster besteht die Prüfung nicht. Planen Sie die Speicherzuordnung nach diesen tatsächlichen Prüfbedingungen und behandeln Sie Fehlerrückgaben vor der nächsten Operation.
 
-Teilt die CPU Puffer mit DMA oder NNACC, darf während jeder Übertragung oder Operation nur der jeweils zuständige Teilnehmer darauf zugreifen. Schreiben Sie CPU-Eingaben vor dem Lesen durch die Hardware aus dem Cache zurück. Bereiten Sie die Cache-Zeilen des Zielpuffers vor dem Hardware-Schreibzugriff gemäß SDK vor, damit noch nicht zurückgeschriebene CPU-Cache-Zeilen später nicht das Ergebnis überschreiben. Nach bestätigtem Hardware-Abschluss invalidieren Sie veraltete CPU-Kopien vor dem Lesen der Ausgabe. Cache-Pflege muss vollständige Cache-Zeilen abdecken; vermeiden Sie gemeinsame Zeilen mit anderen noch verwendeten Daten. Das Zurückschreiben alter Ausgabedaten nach dem Hardware-Schreibzugriff kann das Ergebnis zerstören. Zurückschreiben und Invalidieren sind nicht austauschbar.
+Teilt die CPU Puffer mit DMA oder NNACC, darf während jeder Übertragung oder Operation nur der jeweils zuständige Teilnehmer darauf zugreifen. Schreiben Sie CPU-Eingaben vor dem Lesen durch die Hardware aus dem Cache zurück. Bereiten Sie die Cache-Zeilen des Zielpuffers vor dem Hardware-Schreibzugriff gemäß SDK vor, damit noch nicht zurückgeschriebene CPU-Cache-Zeilen später nicht das Ergebnis überschreiben. Nach bestätigtem Hardware-Abschluss invalidieren Sie veraltete CPU-Kopien vor dem Lesen der Ausgabe. Die Cache-Wartung muss vollständige Cache-Zeilen abdecken; vermeiden Sie gemeinsame Zeilen mit anderen noch verwendeten Daten. Das Zurückschreiben alter Ausgabedaten nach dem Hardware-Schreibzugriff kann das Ergebnis zerstören. Zurückschreiben und Invalidieren sind nicht austauschbar.
 
 ## Audio-, Sensor- und Kameraverarbeitung { #audio-sensor-and-camera-pipelines }
 
@@ -191,11 +191,11 @@ Typische Beispiele sind:
 
 Bei tragbaren Produkten stammen Sensordaten häufig von Beschleunigungssensoren, Gyroskopen, Herzfrequenzsensoren, SpO2-Sensoren, EKG-Frontends oder anderen Peripheriegeräten. KI kann Bewegungszustände, Gesten, Aktivitätsmuster oder gesundheitsbezogene Signalmerkmale klassifizieren.
 
-Bündeln Sie Abtastwerte und verwenden Sie Interrupts, soweit Erkennungsabdeckung und Latenz dies erlauben. Geeignete Hintergrundaufgaben auf einen benutzerprogrammierbaren Low-Power-Prozessor zu verlagern kann die Anwendungs-CPU seltener aufwecken. Berücksichtigen Sie jedoch dessen Aktivität, Sensorabtastung und Weckkosten im Vergleich. Schalten Sie die für die Ereigniserkennung nötige Erfassung nicht ab.
+Bündeln Sie Abtastwerte und verwenden Sie Interrupts, soweit Erkennungsabdeckung und Latenz dies erlauben. Geeignete Hintergrundaufgaben auf einen benutzerprogrammierbaren Low-Power-Prozessor zu verlagern, kann die Anwendungs-CPU seltener aufwecken. Berücksichtigen Sie jedoch dessen Aktivität, Sensorabtastung und Weckkosten im Vergleich. Schalten Sie die für die Ereigniserkennung nötige Erfassung nicht ab.
 
 ### Kamera- und Bildeingang { #camera-and-image-input }
 
-Der Kameraeingang hängt von Chip, Gehäuse, Board und Erfassungstreiber ab. Der [GC032A-Sensortreiber im SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/customer/peripherals/camera/gc032a/drv_gc032a.c) konfiguriert einen 8-Bit-DVP- oder Zwei-Bit-SPI-Sensorausgang. Das belegt nicht, dass beide Erfassungspfade auf jedem SF32-Gerät funktionieren. Prüfen Sie vor der Kameraauswahl Pins, Erfassung über Peripherie oder PTM, Sensortiming und Treiber. Bildverarbeitung benötigt häufig größere Framebuffer und mehr Bandbreite als Audio- oder Bewegungsverarbeitung; vergleichen Sie aber die tatsächlichen Auflösungen und Raten.
+Der Kameraeingang hängt von Chip, Gehäuse, Entwicklungsboard und Erfassungstreiber ab. Der [GC032A-Sensortreiber im SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/customer/peripherals/camera/gc032a/drv_gc032a.c) konfiguriert einen 8-Bit-DVP- oder Zwei-Bit-SPI-Sensorausgang. Das belegt nicht, dass beide Erfassungspfade auf jedem SF32-Gerät funktionieren. Prüfen Sie vor der Kameraauswahl Pins, Erfassung über Peripherie oder PTM, Sensortiming und Treiber. Bildverarbeitung benötigt häufig größere Framebuffer und mehr Bandbreite als Audio- oder Bewegungsverarbeitung; vergleichen Sie aber die tatsächlichen Auflösungen und Raten.
 
 Erwägen Sie kleinere Frames, Bildbereiche, niedrigere Bildraten oder ein für eingebettete Systeme ausgelegtes Modell. Zuschneiden in der Firmware nach der Erfassung verkleinert den Modelleingang, nicht zwingend den Kameradatenverkehr oder den Erfassungspuffer. Dafür können sensorinternes Zuschneiden oder eine geringere Datenerfassung nötig sein.
 
@@ -205,12 +205,12 @@ KI-Aufgaben sollten mit Blick auf den Rest des Systems geplant werden. Ein tragb
 
 Zu einer guten Zeitplanung gehören:
 
-- Periodische oder ereignisgesteuerte Inferenz entsprechend der nötigen Erkennungsabdeckung, dem Risiko übersehener Ereignisse und den Latenzanforderungen wählen.
-- Polling-Schleifen vermeiden, wenn Interrupts oder Ereignisse die Verarbeitung auslösen können.
-- Sensorabtastwerte bündeln, sofern die Latenzanforderungen dies erlauben.
-- Die Verzögerung vom Eingang bis zur Entscheidung begrenzen und zugleich das für zuverlässige Erkennung nötige Eingabefenster erhalten.
-- KI-Anwendungen mit Display- und Bluetooth-Aktivität koordinieren.
-- CPU und Beschleuniger erst nach bestätigtem Abschluss, Pufferübergabe und Freigabe der nötigen Energiemanagement-Sperren in zulässige Energiesparzustände versetzen; erforderliche Sensorerfassung und ausstehende Arbeiten weiterlaufen lassen.
+- Wählen Sie periodische oder ereignisgesteuerte Inferenz passend zur nötigen Erkennungsabdeckung, zum Risiko übersehener Ereignisse und zu den Latenzanforderungen.
+- Vermeiden Sie Polling-Schleifen, wenn Interrupts oder Ereignisse die Verarbeitung auslösen können.
+- Bündeln Sie Sensorabtastwerte, sofern die Latenzanforderungen dies erlauben.
+- Begrenzen Sie die Verzögerung vom Eingang bis zur Entscheidung und erhalten Sie zugleich das für zuverlässige Erkennung nötige Eingabefenster.
+- Koordinieren Sie KI-Anwendungen mit Display- und Bluetooth-Aktivität.
+- Versetzen Sie CPU und Beschleuniger erst nach bestätigtem Abschluss, Pufferübergabe und Freigabe der nötigen Energiemanagement-Sperren in zulässige Energiesparzustände. Lassen Sie erforderliche Sensorerfassung und ausstehende Arbeiten weiterlaufen.
 
 Ermitteln Sie die Energie der vollständigen Funktion, indem Sie die gemessene Versorgungsleistung (Versorgungsspannung × Strom) über die Zeit integrieren; die Inferenzlatenz allein reicht dafür nicht. Berücksichtigen Sie Sensorerfassung, Vorverarbeitung, Kopien, Beschleunigerbetrieb, CPU-Fallback, Nachverarbeitung und Leerlaufzeiten. Schnellere Ausführung kann aktive Energie sparen, ohne einen früheren Schlafzustand zu ermöglichen; der Nutzen hängt von den übrigen Systemlasten ab. Vergleichen Sie gleichwertige Erkennungsabdeckung und Genauigkeit, bevor Sie die Inferenzhäufigkeit reduzieren.
 
@@ -232,7 +232,7 @@ Bei eingebetteter KI müssen Genauigkeit, Latenz und Energiebedarf gegeneinander
 
 </div>
 
-Die richtige Balance hängt vom Produkt ab. Eine Gestenerkennung kann eine geringe Verzögerung tolerieren, wenn dadurch Energie gespart wird. Die Erkennung eines Sprachaktivierungsworts erfordert möglicherweise eine schnelle Reaktion, darf aber keine Fehlaktivierungen auslösen. Ein Algorithmus zur Gesundheitsüberwachung priorisiert möglicherweise Robustheit und lange Batterielaufzeit gegenüber einer sofortigen Klassifikation.
+Die richtige Balance hängt vom Produkt ab. Eine Gestenerkennung kann eine geringe Verzögerung tolerieren, wenn dadurch Energie gespart wird. Die Erkennung eines Sprachaktivierungsworts erfordert möglicherweise eine schnelle Reaktion, darf aber keine Fehlaktivierungen auslösen. Ein Algorithmus zur Gesundheitsüberwachung priorisiert möglicherweise Robustheit und lange Akkulaufzeit gegenüber einer sofortigen Klassifikation.
 
 ## Praktische Design-Hinweise { #practical-design-guidance }
 
@@ -266,7 +266,7 @@ SF32-KI-Beschleunigung kommt für kompakte lokale Inferenz in vernetzten, batter
 
 ## Wichtigste Erkenntnisse { #key-takeaways }
 
-- NNACC kann unterstützte Operationen übernehmen und die CPU-Belegung senken; Latenz- und Energievorteile müssen für die vollständige Funktion geprüft werden.
+- NNACC kann unterstützte Operationen übernehmen und die CPU-Auslastung senken; Latenz- und Energievorteile müssen für die vollständige Funktion geprüft werden.
 - Er ist Teil einer vollständigen Verarbeitungskette, die auch Sensoren, Audio- oder Kameraeingang, Vorverarbeitung, Speichertransfers, Nachverarbeitung und Anwendungslogik umfasst.
 - SDK v2.5.1 dokumentiert NNACC-Ressourcen für SF32LB55x, SF32LB56x und SF32LB58x, belegt die Verfügbarkeit für SF32LB52x oder SF32LB57x jedoch nicht. Prüfen Sie Teilenummer und Produktlast, statt aus dem Familiennamen auf Unterstützung oder deren Fehlen zu schließen.
 - Die tatsächliche Leistung hängt von Modellgröße, Quantisierung, unterstützten Operatoren, Speicherzuordnung, Cache-Verhalten, DMA und Laufzeitunterstützung des SDK ab.

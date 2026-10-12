@@ -88,7 +88,7 @@ Um componente só entra no estado de baixo consumo especificado quando seu drive
 | Responsabilidade por bloqueios e restrições de PM | Defina se cada bloqueio ou restrição de PM fica sob responsabilidade do driver do componente ou de um serviço de nível superior. Mantenha esses bloqueios ou restrições ativos apenas enquanto o recurso protegido for necessário e libere-os, em todos os caminhos de sucesso, erro e retorno antecipado, quando o componente puder permanecer inativo com segurança. | Os registros confirmam que os bloqueios e as restrições cobrem o intervalo necessário, não são liberados cedo demais e não permanecem ativos após a conclusão do trabalho ou um erro, impedindo a suspensão. |
 | Sequência de alimentação, habilitação, reset e clock | Respeite a ordem e os tempos exigidos ao ligar, usar e desligar o componente. | Os marcadores GPIO e a curva de consumo mostram que não restam intervalos de atividade ou picos de corrente não previstos. |
 | SPI, I2C, UART e outros barramentos de controle | Interrompa o tráfego desnecessário; coloque seleção de chip, clock, dados e interrupções no estado inativo especificado. | O componente permanece no estado de baixo consumo previsto entre transações. |
-| Pull-ups/pull-downs de GPIO e alta impedância | Configure cada pino de controle de forma deliberada: saída alta ou baixa, entrada com o pull-up ou pull-down correto, ou alta impedância apenas quando o circuito externo definir o nível. | Verifique a corrente com o dispositivo do outro lado da interface alimentado e sem alimentação, incluindo os estados de reset e padrão. |
+| Pull-ups/pull-downs de GPIO e alta impedância | Configure cada pino de controle de forma deliberada: saída alta ou baixa, entrada com o pull-up ou pull-down correto, ou alta impedância apenas quando o circuito externo definir o nível. | A corrente é verificada com o dispositivo do outro lado da interface alimentado e sem alimentação, incluindo os estados de reset e padrão. |
 | Interfaces entre domínios de alimentação | Não acione um componente desligado por um pino de controle ou de dados, a menos que o hardware permita expressamente esse funcionamento. | Não há alimentação reversa nem fuga quando qualquer lado da interface está desligado. |
 | Caminhos de erro e retomada | Restaure o estado correto após timeouts, falhas de transferência, despertares e resets do firmware. | Capturas prolongadas não mostram excesso de corrente persistente ou crescente causado por rotinas de limpeza incompletas. |
 
@@ -98,7 +98,7 @@ Níveis lógicos válidos não garantem baixa corrente de fuga. Pull-ups/pull-do
 
 ## Valide os cenários do firmware { #validate-firmware-scenarios }
 
-Depois de entender o comportamento dos componentes, meça os cenários completos do firmware que fazem parte da experiência do usuário. Um cenário inclui os componentes, estados de PM, despertares e tempos que ocorrem em conjunto. Para um smartwatch, comece pelos mesmos cenários do modelo de [Análise de consumo de um smartwatch](smartwatch-power-profiling.md): standby com tela apagada, notificações, alertas de chamada recebida, ativação da tela pelo gesto de erguer o pulso, medições automáticas de frequência cardíaca, medições manuais de SpO2, registro de exercícios, alarmes, monitoramento do sono e sincronização com o aplicativo. Adicione NFC, chamadas Bluetooth e AOD como cenários separados quando esses recursos estiverem habilitados.
+Depois de entender o comportamento dos componentes, meça os cenários completos do firmware que fazem parte da experiência do usuário. Um cenário inclui os componentes, estados de PM, despertares e tempos que ocorrem em conjunto. Para um smartwatch, comece pelos mesmos cenários do modelo de [Análise de consumo de um smartwatch](smartwatch-power-profiling.md): standby com display apagado, notificações, alertas de chamada recebida, ativação da tela pelo gesto de erguer o pulso, medições automáticas de frequência cardíaca, medições manuais de SpO2, registro de exercícios, alarmes, monitoramento do sono e sincronização com o aplicativo. Adicione NFC, chamadas Bluetooth e AOD como cenários separados quando esses recursos estiverem habilitados.
 
 <div align="center"><em>Tabela: registro de validação por cenário</em></div>
 
@@ -114,7 +114,7 @@ Depois de entender o comportamento dos componentes, meça os cenários completos
 
 </div>
 
-Use marcadores GPIO do firmware para dividir a curva em fases. Por exemplo, uma captura do gesto de erguer o pulso para ativar a tela pode distinguir reconhecimento do gesto, despertar do MCU, habilitação do display, renderização, tempo de tela acesa, redução de brilho ou apagamento e retorno à suspensão. Assim, um único valor de corrente média se desdobra em operações que as equipes de firmware e hardware podem otimizar.
+Use marcadores GPIO do firmware para dividir a curva em fases. Por exemplo, uma captura do gesto de erguer o pulso para ativar o display pode distinguir reconhecimento do gesto, despertar do MCU, habilitação do display, renderização, tempo de display aceso, redução de brilho ou apagamento e retorno à suspensão. Assim, um único valor de corrente média se desdobra em operações que as equipes de firmware e hardware podem otimizar.
 
 ## Concilie o perfil de uso diário com as medições { #reconcile-the-daily-use-profile }
 
@@ -156,9 +156,9 @@ Quando a medição e o modelo não concordarem, não altere a tabela apenas para
 
 ## Otimize os maiores consumos comprovados { #optimize-the-largest-verified-contributors }
 
-Use o perfil conciliado com as medições para decidir onde o esforço trará mais resultado. Separe duas perguntas: qual componente consome mais energia e qual cenário do produto consome mais energia? As respostas podem ser diferentes. O display pode ser o maior consumidor entre os componentes, enquanto a frequência do gesto de erguer o pulso para ativar a tela é o que torna esse cenário dominante.
+Use o perfil conciliado com as medições para decidir onde o esforço trará mais resultado. Separe duas perguntas: qual componente consome mais energia e qual cenário do produto consome mais energia? As respostas podem ser diferentes. O display pode ser o maior consumidor entre os componentes, enquanto a frequência do gesto de erguer o pulso para ativar o display é o que torna esse cenário dominante.
 
-1. **Melhore primeiro o firmware quando o comportamento for a causa.** Elimine despertares inesperados, reduza o polling, agrupe tarefas, encurte o tempo de tela acesa, evite redesenhos desnecessários, libere rapidamente restrições de PM e reduza os ciclos de trabalho dos sensores ou do rádio sem comprometer os requisitos do produto.
+1. **Melhore primeiro o firmware quando o comportamento for a causa.** Elimine despertares inesperados, reduza o polling, agrupe tarefas, encurte o tempo de display aceso, evite redesenhos desnecessários, libere rapidamente restrições de PM e reduza os ciclos de trabalho dos sensores ou do rádio sem comprometer os requisitos do produto.
 2. **Melhore o hardware quando a limitação do componente for real.** Considere sensores, memórias, reguladores, codecs, amplificadores, displays ou soluções hápticas de menor consumo somente após comparar a energia medida no modo de operação previsto, não uma corrente destacada no datasheet para um estado sem relação com o uso.
 3. **Meça novamente o componente e o cenário alterados.** Uma substituição pode deslocar o gargalo, alterar os tempos de despertar ou exigir outro ponto de operação do regulador.
 4. **Atualize o perfil e repita a comparação do dia completo.** A mudança só está concluída quando tanto a curva do cenário quanto o orçamento de energia do produto melhoram.

@@ -8,16 +8,16 @@ tags:
 
 # Rust { #rust }
 
-[OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs) ofrece HAL y PAC en Rust y trabajo sobre tablas de flash para los MCU de SiFli. Sus mantenedores indican que el proyecto sigue en desarrollo y aún no está listo para producción. Por eso, esta guía establece un **punto de partida para la evaluación**, no un flujo de trabajo de firmware de producción.
+[OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs) ofrece HAL y PAC en Rust y trabajo sobre tablas de flash para las MCU de SiFli. Sus mantenedores indican que el proyecto sigue en desarrollo y aún no está listo para producción. Por eso, esta guía establece un **punto de partida para la evaluación**, no un flujo de trabajo de firmware de producción.
 
-Antes de empezar, complete [Primeros pasos con SiFli-SDK](../sifli/getting-started-sifli-sdk.md) en la misma placa. Así tendrá una conexión serie y una ruta de recuperación ya validadas si no puede flashear o depurar el proyecto en Rust.
+Antes de empezar, complete [Primeros pasos con SiFli-SDK](../sifli/getting-started-sifli-sdk.md) en la misma placa. Así tendrá una conexión serie y una ruta de recuperación ya validadas si no puede grabar o depurar el proyecto en Rust.
 
 ## Qué necesita { #what-you-need }
 
 - Un SF32LB52 DevKit LCD y un cable de datos USB tipo C conectado al puerto USB-to-UART de la placa.
 - Familiaridad básica con Rust, el desarrollo embebido y la línea de comandos.
 - `git` y una cadena de herramientas de Rust actual instalada con [rustup](https://rustup.rs/).
-- La [guía de primeros pasos de sifli-rs](https://github.com/OpenSiFli/sifli-rs/blob/main/docs/get_started.md) y la [Guía de flasheo y depuración](https://github.com/OpenSiFli/sifli-rs/blob/main/docs/flash_and_debug.md) vigentes.
+- La [guía de primeros pasos de sifli-rs](https://github.com/OpenSiFli/sifli-rs/blob/main/docs/get_started.md) y la [Guía de grabación y depuración](https://github.com/OpenSiFli/sifli-rs/blob/main/docs/flash_and_debug.md) vigentes.
 
 !!! warning "Ruta de exploración"
     No utilice esta guía como prueba de que un chip, periférico, configuración de placa o pila de aplicación está listo para producción. Antes de invertir tiempo en adaptarlo, compruebe en el repositorio el estado de soporte del objetivo y del periférico concretos.
@@ -40,19 +40,19 @@ cd sifli-rs/examples/sf32lb52x
 
 El directorio de ejemplos contiene la configuración de objetivos de Cargo, el mapa de memoria, el script de compilación y los binarios de ejemplo. No copie estos archivos sin cambios a un producto: incorporan supuestos sobre la placa y la memoria flash que debe validar para el hardware de destino.
 
-## Configure el ejecutor de flasheo { #configure-the-flash-runner }
+## Configure el ejecutor de grabación { #configure-the-flash-runner }
 
-El repositorio documenta `sftool` como el ejecutor de flasheo habitual. En `examples/sf32lb52x/.cargo/config.toml`, configure el ejecutor con el puerto USB-to-UART de la placa, siguiendo la Guía de flasheo y depuración vigente. Su patrón documentado es:
+El repositorio documenta `sftool` como el ejecutor de grabación habitual. En `examples/sf32lb52x/.cargo/config.toml`, configure el ejecutor con el puerto USB-to-UART de la placa, siguiendo la Guía de grabación y depuración vigente. Su patrón documentado es:
 
 ```toml
 runner = 'sftool -c SF32LB52 -p <Your_Port> --compat write_flash'
 ```
 
-El primer flasheo puede requerir una tabla de flash, un bootloader y una imagen de aplicación. Las imágenes y direcciones exactas dependen de la disposición de placa/flash documentada. Siga la guía del repositorio en lugar de sustituir direcciones o binarios de Arduino, Zephyr o SiFli-SDK.
+La primera grabación puede requerir una tabla de flash, un bootloader y una imagen de aplicación. Las imágenes y direcciones exactas dependen de la disposición de placa/flash documentada. Siga la guía del repositorio en lugar de sustituir direcciones o binarios de Arduino, Zephyr o SiFli-SDK.
 
 ## Compile y ejecute el ejemplo de referencia { #build-and-run-the-baseline }
 
-Con el ejecutor configurado, compile y flashee el ejemplo Blinky sin modificar:
+Con el ejecutor configurado, compile y grabe el ejemplo Blinky sin modificar:
 
 ```bash
 cargo run --bin blinky

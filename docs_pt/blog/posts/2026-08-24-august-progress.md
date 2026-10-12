@@ -15,10 +15,10 @@ O [seletor de produtos SF32](../../sf32-products/product-selector.md) e as pági
 
 A biblioteca de [projetos](../../projects/index.md) agora reúne bases reproduzíveis para categorias reais de produtos. Cada projeto pretende ir além de uma demonstração: oferece uma base de hardware e software que você pode analisar, adaptar e usar para estimar o trabalho necessário no seu próprio projeto.
 
-Os guias de projeto de hardware, as listas de verificação e a seção Aprender apoiam as próximas etapas. O conteúdo aborda as restrições no nível da placa, a análise do consumo baseada em medições e exemplos executáveis de áudio, gráficos, USB, Bluetooth e baixo consumo.
+Os guias de projeto de hardware, os checklists e a seção Aprender apoiam as próximas etapas. O conteúdo aborda as restrições no nível da placa, a análise do consumo baseada em medições e exemplos executáveis de áudio, gráficos, USB, Bluetooth e baixo consumo.
 
 ### Quando a documentação não basta { #when-the-documentation-is-not-enough }
 
 A nova [página de contato](../../about/contact.md) permite perguntar diretamente sobre uma decisão de produto, uma lacuna na documentação ou um problema de integração. Suas dúvidas também nos ajudam a identificar em que pontos a μForge.io precisa ser mais clara.
 
-A μForge.io ainda está começando, mas o caminho já se delineia: selecionar os produtos mais adequados, partir de uma base funcional, validar o projeto e buscar ajuda quando os detalhes ficarem difíceis.
+A μForge.io ainda está começando, mas o caminho já se delineia: selecionar o produto certo, partir de uma base funcional, validar o projeto e buscar ajuda quando os detalhes ficarem difíceis.

@@ -20,7 +20,7 @@ tags:
 - integração do SoC SF32LB52 à árvore da aplicação ZMK;
 - configurações para placa única, teclado dividido, ZMK Studio e o shield `urchin_sf32lb52`;
 - um backend CherryUSB adaptado ao SF32;
-- uma partição NVS de 256 KB para configurações e suporte às configurações Bluetooth;
+- uma partição NVS de 256 KB para armazenar configurações e suporte à persistência das configurações Bluetooth;
 - um mapa de teclas do teclado dividido Urchin com três camadas, controles de perfil Bluetooth e atalhos de desbloqueio do ZMK Studio.
 
 Esta é uma adaptação em desenvolvimento, não uma versão de produto ZMK para SF32 identificada por uma tag de lançamento. O README na raiz do repositório derivado ainda é o README genérico do projeto principal ZMK e não oferece um guia de início rápido específico para SF32. Use a placa, o shield, o manifesto, o código-fonte e o commit como referência executável. Antes de adaptar, reúna evidências próprias de compilação limpa, gravação, funcionamento e recuperação.
@@ -144,7 +144,7 @@ Registre o `west list` final, o Kconfig e o devicetree gerados, os hashes dos ar
 |:------|:------------------|:--------------------|
 | 1. Configuração de referência sem alterações | O repositório derivado fixado, o alvo da placa, os shields, a fiação e o host funcionam em conjunto? | Imagens esquerda/direita com versões fixadas e uma sessão de digitação conhecida como funcional |
 | 2. Entrada, transporte e recuperação | É possível diagnosticar e recuperar falhas da matriz, USB, BLE, comunicação entre metades, configurações e Studio? | Cobertura das teclas e registro de injeção de falhas e recuperação |
-| 3. Reprodução do código-fonte | Um segundo ambiente consegue gerar as duas imagens sem depender de estado oculto? | Manifesto, compilações limpas, hashes dos artefatos, gravações e resultado repetido |
+| 3. Reprodução da compilação a partir do código-fonte | Um segundo ambiente consegue gerar as duas imagens sem depender de estado oculto? | Manifesto, compilações limpas, hashes dos artefatos, gravações e resultado repetido |
 | 4. Adaptação controlada | É possível alterar um comportamento do teclado ou um mapeamento de hardware sem quebrar a base? | Alteração delimitada, caminho de reversão e evidências de regressão |
 | 5. Revisão do produto | A adaptação está madura o bastante para uma PCB personalizada ou um protótipo com bateria? | Riscos atribuídos e decisão de prosseguir, adiar ou interromper |
 
@@ -182,7 +182,7 @@ Trate cada falha como um domínio distinto: matriz e fiação física, comunica�
 
 **Evidências a guardar:** registros das placas e da fiação, revisões do repositório derivado e do manifesto, configurações geradas, hashes das imagens, registros de gravação e inicialização, matriz completa de posições das teclas, resultados por camada, destino HID selecionado e versões do host/Studio.
 
-**Critério de saída da etapa 1:** duas inicializações a frio reproduzem as 38 posições, as três camadas, a comunicação da metade direita para a esquerda e pelo menos um destino HID do host; as duas metades continuam recuperáveis de forma independente.
+**Critério de saída do ponto de controle 1:** duas inicializações a frio reproduzem as 38 posições, as três camadas, a comunicação da metade direita para a esquerda e pelo menos um destino HID do host; as duas metades continuam recuperáveis de forma independente.
 
 ## Etapa 2 — Valide entrada, transporte, configurações e recuperação { #stage-2-validate-input-transport-settings-and-recovery }
 
@@ -200,22 +200,22 @@ Trate cada falha como um domínio distinto: matriz e fiação física, comunica�
 | Perda de BLE com o host | Desative o Bluetooth do host, troque o perfil e reconecte | O estado do destino HID e do perfil fica visível; a reconexão e a remoção deliberada dos vínculos seguem um procedimento registrado |
 | Persistência das configurações | Altere uma configuração reversível, desligue e ligue as duas metades e restaure a base | O estado NVS esperado persiste; há um procedimento documentado de reset/recuperação para remover estados danificados ou indesejados |
 | Limite do ZMK Studio | Tente uma alteração autorizada, interrompa a sessão em uma configuração recuperável e restaure | Apenas a imagem central expõe o Studio; alterações inválidas/incompletas não inutilizam o teclado |
-| Ciclo de alimentação | Reinicie cada metade separadamente e depois ambas ao mesmo tempo, registrando corrente e reativação | Funções, comunicação entre metades, destino HID e estado de liberação das teclas se recuperam de forma previsível |
+| Ciclo de alimentação | Reinicie cada metade separadamente e depois ambas ao mesmo tempo, registrando corrente e despertar | Funções, comunicação entre metades, destino HID e estado de liberação das teclas se recuperam de forma previsível |
 
 </div>
 
-**Critério de saída da etapa 2:** cada falha aplicável tem um resultado repetível de detecção e recuperação; nenhum teste deixa um estado HID preso; configurações ou vínculos podem voltar à base registrada sem substituir arquivos fora de controle de versão.
+**Critério de saída do ponto de controle 2:** cada falha aplicável tem um resultado repetível de detecção e recuperação; nenhum teste deixa um estado HID preso; configurações ou vínculos podem voltar à base registrada sem substituir arquivos fora de controle de versão.
 
 ## Etapa 3 — Crie uma configuração de referência reproduzível a partir do código-fonte { #stage-3-build-a-reproducible-source-baseline }
 
-**Objetivo:** permitir que outro engenheiro gere novamente as duas imagens e repita a etapa 2 a partir de fontes limpas.
+**Objetivo:** permitir que outro engenheiro gere novamente as duas imagens e repita a Etapa 2 a partir de fontes limpas.
 
 1. Comece com uma cópia de trabalho limpa do repositório derivado no commit registrado e execute `west init`, `west update` e `west zephyr-export` sem substituir módulos localmente.
 2. Salve `west list`, as versões do compilador e das ferramentas, o `.config` e o devicetree gerados, a saída de memória, os registros de compilação e os hashes dos dois artefatos.
-3. Grave as imagens identificadas como esquerda e direita nas metades correspondentes e repita todos os testes da etapa 2.
+3. Grave as imagens identificadas como esquerda e direita nas metades correspondentes e repita todos os testes da Etapa 2.
 4. Compare os artefatos e a configuração com o registro original; explique qualquer diferença não reproduzível antes de prosseguir.
 
-**Critério de saída da etapa 3:** um segundo ambiente gera imagens corretamente identificadas e aprovadas na etapa 2, sem overlays fora de controle de versão, resultados de compilação obsoletos ou revisões flutuantes de dependências.
+**Critério de saída do ponto de controle 3:** um segundo ambiente gera imagens corretamente identificadas e aprovadas na Etapa 2, sem overlays fora de controle de versão, resultados de compilação obsoletos ou revisões flutuantes de dependências.
 
 ## Etapa 4 — Adapte um limite do teclado por vez { #stage-4-adapt-one-keyboard-boundary-at-a-time }
 
@@ -228,15 +228,15 @@ Trate cada falha como um domínio distinto: matriz e fiação física, comunica�
 | Categoria da alteração | Boa primeira alteração | Regressão necessária |
 |:-----------------------|:-----------------------|:--------------------|
 | Mapa de teclas | Um vínculo de tecla, uma camada, uma função hold-tap ou uma combinação | Todas as posições e camadas, ordem de pressionamento/liberação, rollover, perda da comunicação entre metades e os dois destinos HID do host |
-| Matriz/PCB | Uma alteração em linha, coluna, entrada direta ou orientação do diodo | Revisão elétrica, devicetree gerado, matriz completa, curto-circuito e teclas fantasma (ghosting), reativação e recuperação |
+| Matriz/PCB | Uma alteração em linha, coluna, entrada direta ou orientação do diodo | Revisão elétrica, devicetree gerado, matriz completa, curto-circuito e teclas fantasma (ghosting), despertar e recuperação |
 | Studio | Um parâmetro editável ou item de layout exposto | Autorização, alterações válidas/inválidas, persistência, desconexão, restauração e compatibilidade entre versões |
 | Transporte | Um destino USB/BLE ou uma alteração da política de comunicação entre metades | Enumeração, pareamento, vínculos, troca de perfil, reconexão entre metades, prevenção de tecla presa e corrente |
-| Gestão de energia | Uma configuração de suspensão, reativação, varredura ou rádio | Corrente ativa, inativa e em suspensão por metade, latência, todas as fontes de reativação, reconexão entre metades e retenção das configurações |
-| Migração de dependências | Uma atualização de ZMK, Zephyr, HAL ou CherryUSB | Diff do manifesto, compilações limpas, diff das configurações geradas, todos os testes da etapa 2, corrente e reversão |
+| Gestão de energia | Uma configuração de suspensão, despertar, varredura ou rádio | Corrente ativa, inativa e em suspensão por metade, latência, todas as fontes de despertar, reconexão entre metades e retenção das configurações |
+| Migração de dependências | Uma atualização de ZMK, Zephyr, HAL ou CherryUSB | Diff do manifesto, compilações limpas, diff das configurações geradas, todos os testes da Etapa 2, corrente e reversão |
 
 </div>
 
-**Critério de saída da etapa 4:** a alteração foi revisada, as imagens e configurações originais podem ser restauradas e todos os testes aplicáveis de matriz, camadas, divisão, USB, BLE, Studio, alimentação e recuperação foram aprovados.
+**Critério de saída do ponto de controle 4:** a alteração foi revisada, as imagens e configurações originais podem ser restauradas e todos os testes aplicáveis de matriz, camadas, divisão, USB, BLE, Studio, alimentação e recuperação foram aprovados.
 
 ## Etapa 5 — Revisão de prontidão do produto { #stage-5-product-readiness-review }
 
@@ -246,11 +246,11 @@ Antes de projetar uma PCB de teclado personalizada ou um protótipo com bateria,
 - Quais recursos do projeto principal do ZMK foram realmente exercitados no SF32 e quais apenas existem na árvore herdada?
 - Como serão controlados na fabricação e na assistência a identificação das imagens esquerda/direita, a revisão da placa, o mapa de teclas, a configuração, os vínculos e o estado de restauração de fábrica?
 - Quais valores de corrente foram medidos em cada metade durante a operação ativa, em repouso conectado, desconectada e em suspensão, considerando a taxa de varredura, a reconexão e a proteção da bateria?
-- Quais hosts, sistemas operacionais, controladores USB, pilhas Bluetooth, caminhos de reativação, casos de rollover e condições de interferência foram testados?
+- Quais hosts, sistemas operacionais, controladores USB, pilhas Bluetooth, caminhos de despertar, casos de rollover e condições de interferência foram testados?
 - É possível recuperar o produto sem abri-lo ou descartá-lo após falha em atualização de dependência, alteração do Studio, gravação de configuração ou atualização em campo?
 - As licenças ZMK/Zephyr, os arquivos da PCB e do gabinete, o conteúdo do mapa de teclas, logotipos, fontes e configurações incluídas são compatíveis com a distribuição pretendida?
 
-**Critério de saída da etapa 5:** cada risco residual tem um responsável, evidências e uma decisão de tratamento; a equipe decidiu explicitamente prosseguir, adiar ou interromper.
+**Critério de saída do ponto de controle 5:** cada risco residual tem um responsável, evidências e uma decisão de tratamento; a equipe decidiu explicitamente prosseguir, adiar ou interromper.
 
 ## Transição para o projeto do produto { #handoff-to-product-design }
 Leve adiante o modelo exato do componente SF32 e sua memória, as funções e o transporte das metades, o mapa de linhas/colunas/entradas diretas, a orientação dos diodos, a conexão USB, as premissas de antena e gabinete, a política NVS/configurações, as interfaces de gravação e recuperação, o orçamento de energia por metade, os gabaritos de teste, a identificação das imagens e o manifesto fixado. Continue com [SF32LB52-DevKit-LCD](../sf32-products/devkits/SF32LB52-DevKit-LCD.md), os [limites da plataforma Zephyr](../develop/platforms/zephyr/overview.md), a [arquitetura Bluetooth](../learn/bluetooth/overview.md), o [guia de projeto de hardware do SF32LB52x](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) e [Projeto para produção](../hardware/design-for-production.md).

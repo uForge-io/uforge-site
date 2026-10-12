@@ -129,11 +129,11 @@ Les développeurs peuvent ainsi conserver un modèle logiciel graphique similair
 
 ## Intégration avec LVGL et les frameworks UI { #integration-with-lvgl-and-ui-frameworks }
 
-**LVGL** est couramment utilisé pour les interfaces graphiques embarquées sur SF32. L'application compose les écrans avec des widgets, styles, images, polices et animations. LVGL identifie les zones à redessiner ; son moteur de rendu logiciel ou son backend de dessin matériel produit les pixels. Le chemin de flush du pilote d'affichage transfère ces pixels vers l'écran et signale la fin du transfert. Distinguez la fin du rendu de la fin du transfert d'affichage.
+**LVGL** est couramment utilisé pour les interfaces graphiques embarquées sur SF32. L'application compose les écrans avec des widgets, styles, images, polices et animations. LVGL identifie les zones à redessiner ; son moteur de rendu logiciel ou sa voie de rendu matériel produit les pixels. Le chemin de flush du pilote d'affichage transfère ces pixels vers l'écran et signale la fin du transfert. Distinguez la fin du rendu de la fin du transfert d'affichage.
 
 ePicasso peut améliorer les performances de LVGL lorsque l'adaptation de LVGL pour SF32 confie au matériel les opérations de dessin prises en charge. Les opérations qui en tirent généralement le plus parti sont :
 
-- Les blits d'image.
+- La copie de blocs d'image (blit).
 - Les remplissages de couleur.
 - Le mélange alpha.
 - La mise à l'échelle d'image.
@@ -144,7 +144,7 @@ Une intégration LVGL robuste conserve des chemins de repli corrects exécutés 
 
 ## Considérations de mémoire et de bande passante { #memory-and-bandwidth-considerations }
 
-L'accélération graphique ne supprime pas le besoin d'une conception mémoire soignée. Dans de nombreux systèmes d'affichage embarqués, le bus mémoire est la ressource limitante : ePicasso, le CPU, le contrôleur d'affichage, les moteurs DMA, la Flash, la PSRAM, l'audio, et les sous-systèmes sans fil peuvent tous être en concurrence pour l'accès.
+L'accélération graphique ne supprime pas le besoin d'une conception mémoire soignée. Dans de nombreux systèmes d'affichage embarqués, le bus mémoire est la ressource limitante : ePicasso, le CPU, le contrôleur d'affichage, les moteurs DMA, la Flash, la PSRAM, l'audio et les sous-systèmes sans fil peuvent tous être en concurrence pour l'accès.
 
 Une bonne performance graphique dépend de plusieurs choix de conception :
 
@@ -155,7 +155,7 @@ Une bonne performance graphique dépend de plusieurs choix de conception :
 - Aligner les tampons de dessin et framebuffers selon les recommandations du SDK.
 - Définir clairement les règles de cohérence DMA et de cache lorsque les tampons sont partagés entre le CPU, ePicasso et le contrôleur d'affichage.
 
-Pour les tampons pouvant être mis en cache et partagés entre le CPU et ePicasso, suivez les règles du SDK sur le cache et la propriété des tampons. Effectuez un clean des données source écrites par le CPU avant leur lecture matérielle. Avant que le matériel écrive dans un tampon de destination, préparez celui-ci selon les règles du SDK afin que les lignes de cache CPU modifiées ne puissent pas écraser le résultat par la suite ; après la fin du traitement matériel, invalidez les lignes obsolètes avant une lecture par le CPU. Respectez l'alignement et les données voisines et ne modifiez pas un tampon détenu par le matériel. Consultez la [vue d'ensemble des graphismes](overview.md#memory-placement-strategy) pour ce flux.
+Pour les tampons pouvant être mis en cache et partagés entre le CPU et ePicasso, suivez les règles du SDK sur le cache et la propriété des tampons. Nettoyez les données source écrites par le CPU avant leur lecture par le matériel. Avant que le matériel écrive dans un tampon de destination, préparez celui-ci selon les règles du SDK afin que les lignes de cache CPU modifiées ne puissent pas écraser le résultat par la suite ; après la fin du traitement matériel, invalidez les lignes obsolètes avant une lecture par le CPU. Respectez l'alignement et les données voisines ; ne modifiez pas un tampon détenu par le matériel. Consultez la [vue d'ensemble des graphismes](overview.md#memory-placement-strategy) pour ce flux.
 
 La séparation des rôles décrite dans la [vue d'ensemble des graphismes](overview.md#sf32-graphics-flow) est essentielle pour diagnostiquer les performances de l'interface. Une mise à jour lente peut venir du temps de rendu, de la bande passante mémoire, du transfert vers le panneau, de la configuration de l'interface d'affichage ou de la synchronisation. ePicasso est surtout utile lorsque le rendu constitue le goulot d'étranglement. Si le transfert vers le panneau limite les performances, le rafraîchissement partiel, une profondeur de couleur réduite, une autre stratégie de tampon ou une interface plus rapide peuvent être plus efficaces.
 

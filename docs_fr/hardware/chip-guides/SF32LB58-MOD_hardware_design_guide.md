@@ -14,7 +14,7 @@ tags:
 
 **SF32LB58-MOD** est un module MCU Bluetooth basse consommation à usage général, construit autour de la puce SF32LB586VDD36 de SiFli. Celle-ci intègre un processeur Arm Cortex-M33 STAR-MC1 à trois cœurs, pouvant fonctionner jusqu'à 240 MHz. Le module comprend un quartz 48 MHz ; le quartz 32,768 kHz est proposé en option. Selon la référence, il intègre également de la mémoire HPI-PSRAM, de la Flash QSPI-NOR/NAND ou de l'eMMC. Ce module à montage en surface comporte 138 broches et mesure 24 × 24 × 3,1 mm.
 
-Ce guide couvre l'intégration matérielle au niveau module : définitions des broches, interfaces périphériques, caractéristiques électriques, exigences d'alimentation, schémas de référence, une liste de contrôle de conception schématique, les dimensions mécaniques et l'empreinte PCB, ainsi que les exigences de manipulation du produit. Il s'appuie sur la fiche technique SiFli **DS5802-SF32LB58-MOD V0.1**.
+Ce guide couvre l'intégration matérielle au niveau module : définition des broches, interfaces périphériques, caractéristiques électriques, exigences d'alimentation, schémas de référence, liste de contrôle du schéma, dimensions mécaniques, empreinte du PCB et exigences de manipulation du produit. Il s'appuie sur la fiche technique SiFli **DS5802-SF32LB58-MOD V0.1**.
 
 Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système mémoire et périphériques, en détail), voir [SF32LB58x](../../sf32-products/chips/SF32LB58x.md) et le [Guide de conception matérielle SF32LB58x](../chip-guides/SF32LB58x_hardware_design_guide.md).
 
@@ -31,9 +31,9 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système m�
 
 | Code du module | Flash | PSRAM | Flash standard | Température | Dimensions (mm) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB58-MOD-N16R32N1 | 16Mo QSPI-NOR | 16+16Mo HPI-PSRAM | 1Mo QSPI-NOR | -40~85°C | 24 × 24 × 3,1 |
-| SF32LB58-MOD-A128R32N1 | 128Mo QSPI-NAND | 16+16Mo HPI-PSRAM | 1Mo QSPI-NOR | -40~85°C | 24 × 24 × 3,1 |
-| SF32LB58-MOD-E4R32N1 | 4Go eMMC | 16+16Mo HPI-PSRAM | 1Mo QSPI-NOR | -40~85°C | 24 × 24 × 3,1 |
+| SF32LB58-MOD-N16R32N1 | 16 Mo QSPI-NOR | 16+16 Mo HPI-PSRAM | 1 Mo QSPI-NOR | -40~85 °C | 24 × 24 × 3,1 |
+| SF32LB58-MOD-A128R32N1 | 128 Mo QSPI-NAND | 16+16 Mo HPI-PSRAM | 1 Mo QSPI-NOR | -40~85 °C | 24 × 24 × 3,1 |
+| SF32LB58-MOD-E4R32N1 | 4 Go eMMC | 16+16 Mo HPI-PSRAM | 1 Mo QSPI-NOR | -40~85 °C | 24 × 24 × 3,1 |
 
 </div>
 
@@ -45,23 +45,23 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système m�
 
 | Élément | Spécification |
 | :--- | :--- |
-| Cœurs d'application (HCPU/ACPU) | 2x Arm Cortex-M33 STAR-MC1, jusqu'à 240MHz |
-| Cœur basse consommation (LCPU) | Arm Cortex-M33 STAR-MC1, jusqu'à 96MHz |
-| SRAM | 2176Ko (HCPU) + 512Ko (ACPU) + 1056Ko SRAM de rétention (LCPU) |
-| Sans fil | Bluetooth 5.3 double mode, rétrocompatible avec 4.2/4.1/4.0 ; prend en charge BLE et Bluetooth Classic |
+| Cœurs d'application (HCPU/ACPU) | 2x Arm Cortex-M33 STAR-MC1, jusqu'à 240 MHz |
+| Cœur basse consommation (LCPU) | Arm Cortex-M33 STAR-MC1, jusqu'à 96 MHz |
+| SRAM | 2176 Ko (HCPU) + 512 Ko (ACPU) + 1056 Ko SRAM de rétention (LCPU) |
+| Sans fil | Bluetooth 5.3 bimode, rétrocompatible avec 4.2/4.1/4.0 ; prend en charge BLE et Bluetooth Classic |
 | Graphisme | ePicasso 2.0 + Vivante GCNanoUltraV, jusqu'à 1024×1024, eZip 2.0, codec JPEG matériel |
 | Audio | 2x DAC audio 24 bits, 2x ADC audio Sigma-Delta 24 bits |
 | Stockage | 5x MPI (en boîtier + externe), 2x SD/SDIO/eMMC |
 | Boîtier | 138 broches, 24 × 24 × 3,1 mm |
-| Alimentation | VDD_3V3 (2,97–3,6V), VDD_1V8 (1,7–1,95V), VDDIOA/VDDIOA2/VDDIOB (1,7–3,6V) |
+| Alimentation | VDD_3V3 (2,97–3,6 V), VDD_1V8 (1,7–1,95 V), VDDIOA/VDDIOA2/VDDIOB (1,7–3,6 V) |
 | Antenne | Antenne externe via le point d'alimentation RF sur pastille « stamp-hole » ou un connecteur compatible IPEX, selon la référence |
-| Température de fonctionnement | -40 à 85°C |
+| Température de fonctionnement | -40 à 85 °C |
 
 </div>
 
 ## 3. Schéma fonctionnel { #3-functional-block-diagram }
 
-Le module intègre la puce SF32LB586VDD36, un quartz 48MHz, un quartz optionnel 32,768kHz, et, selon la référence produit, de la mémoire HPI-PSRAM, Flash QSPI-NOR/NAND ou eMMC en boîtier, ainsi que le réseau d'adaptation RF et le point d'alimentation RF de l'antenne.
+Le module intègre la puce SF32LB586VDD36, un quartz 48 MHz, un quartz optionnel 32,768 kHz, et, selon la référence produit, de la mémoire HPI-PSRAM, Flash QSPI-NOR/NAND ou eMMC en boîtier, ainsi que le réseau d'adaptation RF et le point d'alimentation RF de l'antenne.
 
 !!! info "Figure 3-1 : Schéma fonctionnel"
     Voir la Figure 2-1 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
@@ -85,7 +85,7 @@ Le module compte 138 broches au total, décrites dans le tableau ci-dessous.
 
 | Nom | N° | Type | MUX par défaut | E/S par défaut | Fonction |
 | :--- | :-: | :-: | :--- | :-: | :--- |
-| VDDIOB | 1 | P | 1,8/3,3V | P | Entrée d'alimentation E/S de l'interface PB |
+| VDDIOB | 1 | P | 1,8/3,3 V | P | Entrée d'alimentation E/S de l'interface PB |
 | PB36 | 2 | I/O/T | USART4_RXD | I | GPIO_B36, USART4_RXD, GPTIM3_CH1, #GPADC_CH4 |
 | PB37 | 3 | I/O/T | USART4_TXD | O | GPIO_B37, USART4_TXD, GPTIM3_CH2, #GPADC_CH5 |
 | PB54 | 4 | I/O/T | GPIO_B54 | I | GPIO_B54, #WKUP_PIN0 |
@@ -95,12 +95,12 @@ Le module compte 138 broches au total, décrites dans le tableau ci-dessous.
 | PA70 | 8 | I/O/T | GPIO_A70 | I/O | GPIO_A70, SD2_CMD, SPI2_CS |
 | PA81 | 9 | I/O/T | GPIO_A81 | I/O | GPIO_A81, SD2_DIO3 |
 | PA79 | 10 | I/O/T | GPIO_A79 | I/O | GPIO_A79, SD2_DIO2 |
-| BOOT_MODE | 11 | I | BOOT_MODE | I | 1 : mode téléchargement ; 0 : mode utilisateur |
-| RSTN | 12 | I | RSTN | I | 1 : mode utilisateur ; 0 : mode réinitialisation |
-| VDD_1V8 | 13 | P | 1,8V | P | Entrée d'alimentation du MCU principal et de la mémoire en boîtier |
+| BOOT_MODE | 11 | I | BOOT_MODE | I | 1 : mode de téléchargement ; 0 : mode utilisateur |
+| RSTN | 12 | I | RSTN | I | 1 : mode utilisateur ; 0 : mode de réinitialisation |
+| VDD_1V8 | 13 | P | 1,8 V | P | Entrée d'alimentation du MCU principal et de la mémoire en boîtier |
 | GND | 14 | P | Masse | P | Masse |
-| VDDIOA | 15 | P | 1,8/3,3V | P | Entrée d'alimentation E/S de l'interface PA, hors PA00–PA11 |
-| VDD_3V3 | 16 | P | 3,3V | P | Entrée d'alimentation analogique du MCU |
+| VDDIOA | 15 | P | 1,8/3,3 V | P | Entrée d'alimentation E/S de l'interface PA, hors PA00–PA11 |
+| VDD_3V3 | 16 | P | 3,3 V | P | Entrée d'alimentation analogique du MCU |
 | PA13 | 17 | I/O/T | GPIO_A13 | O | GPIO_A13, GPTIM1_CH2, ATIM1_BKIN, LCDC1_DPI_DE |
 | PA15 | 18 | I/O/T | GPIO_A15 | O | GPIO_A15, GPTIM1_CH3, ATIM1_BKIN2, LCDC1_DPI_VSYNC |
 | PA14 | 19 | I/O/T | GPIO_A14 | O | GPIO_A14, I2S1_LRCK, LCDC1_DPI_HSYNC |
@@ -129,7 +129,7 @@ Le module compte 138 broches au total, décrites dans le tableau ci-dessous.
 | PA24 | 42 | I/O/T | GPIO_A24 | O | GPIO_A24, LCDC1_8080_RSTB, LCDC1_SPI_RSTB, LCDC1_DPI_R2 |
 | PA23 | 43 | I/O/T | GPIO_A23 | O | GPIO_A23, PDM1_CLK, I2S1_BCK, USART2_CTS, I2C2_SDA, LCDC1_DPI_R1 |
 | PA22 | 44 | I/O/T | GPIO_A22 | O | GPIO_A22, PDM2_DATA, GPTIM1_ETR, ATIM2_CH1, LCDC1_DPI_R0, LCDC1_JDI_VST |
-| VDDIOA2 | 45 | P | 1,8/3,3V | P | Entrée d'alimentation E/S PA00–PA11 |
+| VDDIOA2 | 45 | P | 1,8/3,3 V | P | Entrée d'alimentation E/S PA00–PA11 |
 | GND | 46 | P | Masse | P | Masse |
 | DSI_D0N | 47 | O | DSI_D0N | O | Voie de données MIPI DSI 0, négative |
 | DSI_D0P | 48 | O | DSI_D0P | P | Voie de données MIPI DSI 0, positive |
@@ -228,7 +228,7 @@ Le module compte 138 broches au total, décrites dans le tableau ci-dessous.
 
 ### 4.3 Description physique des broches { #43-physical-pin-description }
 
-La figure de description physique des broches de la fiche technique regroupe les broches par famille fonctionnelle — SDIO, SPI, I2C, UART, GPTIM, interface LCD (DPI/8080/SPI/JDI/DSI), GPADC, MPI, audio analogique, mode boot, alimentation, antenne BT, CAN/USB, et SWD/UART de débogage — superposée au contour de la puce SF32LB586VDD36. Utilisez-la avec le tableau de définition des broches ci-dessus lors de la disposition des groupes de signaux sur le PCB hôte.
+La figure de description physique des broches de la fiche technique regroupe les broches par famille fonctionnelle — SDIO, SPI, I2C, UART, GPTIM, interface LCD (DPI/8080/SPI/JDI/DSI), GPADC, MPI, audio analogique, mode de démarrage, alimentation, antenne BT, CAN/USB, et SWD/UART de débogage — superposée au contour de la puce SF32LB586VDD36. Utilisez-la avec le tableau de définition des broches ci-dessus lors du placement des groupes de signaux sur le PCB hôte.
 
 !!! info "Figure 4-2 : Description physique des broches"
     Voir la Figure 3-2 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
@@ -239,11 +239,11 @@ La figure de description physique des broches de la fiche technique regroupe les
 
 Toute broche marquée `PAxx_I2C_UART` ou `PBxx_I2C_UART` dans le tableau ci-dessus peut être configurée en I2C ou en UART. La puce prend en charge jusqu'à 7 interfaces I2C et 6 interfaces UART au total.
 
-**UART** — Duplex intégral, débit jusqu'à 6Mbps, format de données configurable, contrôle de flux matériel (CTS/RTS), TX/RX multi-paquets par DMA. UART1–3 sont sur le HPSYS ; UART4–6 sont sur le LPSYS.
+**UART** — Duplex intégral, débit jusqu'à 6 Mbps, format de données configurable, contrôle de flux matériel (CTS/RTS), TX/RX multi-paquets par DMA. UART1–3 sont sur le HPSYS ; UART4–6 sont sur le LPSYS.
 
-**I2C** — Fonctionne en maître et en esclave, avec une FIFO de 8 octets et la prise en charge du DMA ; modes standard (100kbps), rapide (400kbps), rapide plus (1Mbps) et haute vitesse (3,4Mbps) ; adressage 7 bits/10 bits en mode maître ; étirement d'horloge (clock stretching) et filtre numérique anti-rebond configurable. I2C1–4 sont sur le HPSYS ; I2C5–7 sont sur le LPSYS.
+**I2C** — Fonctionne en maître et en esclave, avec une FIFO de 8 octets et la prise en charge du DMA ; modes standard (100 kbps), rapide (400 kbps), rapide plus (1 Mbps) et haute vitesse (3,4 Mbps) ; adressage 7 bits/10 bits en mode maître ; étirement d'horloge (clock stretching) et filtre numérique anti-rebond configurable. I2C1–4 sont sur le HPSYS ; I2C5–7 sont sur le LPSYS.
 
-**SPI** — Prend en charge les formats SSP/SPI (duplex intégral, maître ou esclave) et Microwire (semi-duplex, maître uniquement), largeur de données de 4 à 32 bits, polarité/phase d'horloge configurables, polarité de sélection de puce configurable, FIFO de 32 bits × 16 entrées, prise en charge DMA. SPI1/2 sont sur le HPSYS (48MHz max) ; SPI3/4 sont sur le LPSYS (24MHz max).
+**SPI** — Prend en charge les formats SSP/SPI (duplex intégral, maître ou esclave) et Microwire (semi-duplex, maître uniquement), largeur de données de 4 à 32 bits, polarité/phase d'horloge configurables, polarité de sélection de puce configurable, FIFO de 32 bits × 16 entrées, prise en charge DMA. SPI1/2 sont sur le HPSYS (48 MHz max) ; SPI3/4 sont sur le LPSYS (24 MHz max).
 
 **USB2.0 HS** — Un port Hôte/Périphérique haute vitesse, conforme USB2.0, points de terminaison configurables, prise en charge de la mise en veille/reprise, du protocole de demande de session et de négociation hôte, prise en charge des modes haute vitesse et pleine vitesse.
 
@@ -257,15 +257,15 @@ Toute broche marquée `PAxx_I2C_UART` ou `PBxx_I2C_UART` dans le tableau ci-dess
 
 ### 5.2 Traitement des signaux analogiques { #52-analog-signal-processing }
 
-**GPADC 12 bits** — ADC à approximations successives, taux d'échantillonnage max 4MS/s, plage d'entrée 0–3,3V en mode asymétrique / ±2,1V en mode différentiel, 8 voies asymétriques (ou 4 paires différentielles), modes de mesure unique/continue, 4 créneaux temporels configurables par mesure, déclenchement logiciel/matériel, prise en charge DMA.
+**GPADC 12 bits** — ADC à approximations successives, taux d'échantillonnage max 4 MS/s, plage d'entrée 0–3,3 V en mode asymétrique / ±2,1 V en mode différentiel, 8 voies asymétriques (ou 4 paires différentielles), modes de mesure unique/continue, 4 créneaux temporels configurables par mesure, déclenchement logiciel/matériel, prise en charge DMA.
 
-**Capteur de température** — résolution de 0,2°C, plage -40°C à 125°C, précision ±3°C, lecture par scrutation ou interruption.
+**Capteur de température** — résolution de 0,2 °C, plage -40 °C à 125 °C, précision ±3 °C, lecture par scrutation ou interruption.
 
-**DAC audio** — 2 voies intégrées 24 bits, taux d'échantillonnage 8kHz–48kHz, sortie différentielle.
+**DAC audio** — 2 voies intégrées 24 bits, taux d'échantillonnage 8 kHz–48 kHz, sortie différentielle.
 
-**PLL audio** — génération d'horloge fractionnaire-N avec une résolution de 48MHz/2^18, prenant en charge les taux d'échantillonnage dérivés 48MHz, 32,768kHz et 44,1kHz.
+**PLL audio** — génération d'horloge fractionnaire-N avec une résolution de 48 MHz/2^18, prenant en charge les taux d'échantillonnage dérivés 48 MHz, 32,768 kHz et 44,1 kHz.
 
-**ADC audio** — 2 voies intégrées 24 bits, taux d'échantillonnage 8kHz–48kHz, contrôle de gain indépendant par voie.
+**ADC audio** — 2 voies intégrées 24 bits, taux d'échantillonnage 8 kHz–48 kHz, contrôle de gain indépendant par voie.
 
 ## 6. Caractéristiques électriques { #6-electrical-characteristics }
 
@@ -277,8 +277,8 @@ Toute broche marquée `PAxx_I2C_UART` ou `PBxx_I2C_UART` dans le tableau ci-dess
 
 | Symbole | Paramètre | Min | Max | Unité |
 | :--- | :--- | :-: | :-: | :-: |
-| VDD_3V3 | Entrée d'alimentation 3,3V | -0,3 | 3,6 | V |
-| VDD_1V8 | Entrée d'alimentation 1,8V | -0,3 | 1,95 | V |
+| VDD_3V3 | Entrée d'alimentation 3,3 V | -0,3 | 3,6 | V |
+| VDD_1V8 | Entrée d'alimentation 1,8 V | -0,3 | 1,95 | V |
 | VDDIO | Entrée d'alimentation E/S | -0,3 | 3,6 | V |
 | Tstore | Température de stockage | -40 | 125 | °C |
 
@@ -292,8 +292,8 @@ Toute broche marquée `PAxx_I2C_UART` ou `PBxx_I2C_UART` dans le tableau ci-dess
 
 | Symbole | Paramètre | Min | Typ | Max | Unité |
 | :--- | :--- | :-: | :-: | :-: | :-: |
-| VDD_3V3 | Entrée d'alimentation 3,3V | 2,97 | 3,3 | 3,6 | V |
-| VDD_1V8 | Entrée d'alimentation 1,8V | 1,7 | 1,8 | 1,95 | V |
+| VDD_3V3 | Entrée d'alimentation 3,3 V | 2,97 | 3,3 | 3,6 | V |
+| VDD_1V8 | Entrée d'alimentation 1,8 V | 1,7 | 1,8 | 1,95 | V |
 | VDDIO | Entrée d'alimentation E/S | 1,7 | - | 3,6 | V |
 | TA | Température de fonctionnement | -40 | - | 85 | °C |
 
@@ -301,7 +301,7 @@ Toute broche marquée `PAxx_I2C_UART` ou `PBxx_I2C_UART` dans le tableau ci-dess
 
 ### 6.3 Caractéristiques électriques CC { #63-dc-electrical-characteristics }
 
-<div align="center"><em>Tableau 6.3-1 : Caractéristiques électriques CC (3,3V, 25°C)</em></div>
+<div align="center"><em>Tableau 6.3-1 : Caractéristiques électriques CC (3,3 V, 25 °C)</em></div>
 
 <div align="center" markdown>
 
@@ -318,7 +318,7 @@ Toute broche marquée `PAxx_I2C_UART` ou `PBxx_I2C_UART` dans le tableau ci-dess
 
 </div>
 
-<div align="center"><em>Tableau 6.3-2 : Caractéristiques électriques CC (1,8V, 25°C)</em></div>
+<div align="center"><em>Tableau 6.3-2 : Caractéristiques électriques CC (1,8 V, 25 °C)</em></div>
 
 <div align="center" markdown>
 
@@ -334,59 +334,59 @@ Les tableaux complets (incluant le courant de fuite d'entrée, les seuils de ré
 
 ### 6.4 Consommation électrique { #64-power-consumption }
 
-<div align="center"><em>Tableau 6.4-1 : Courant BLE (puissance TX 0dBm)</em></div>
+<div align="center"><em>Tableau 6.4-1 : Courant BLE (puissance TX 0 dBm)</em></div>
 
 <div align="center" markdown>
 
-| Symbole | Condition | @1,8V | @3,8V | Unité |
+| Symbole | Condition | @1,8 V | @3,8 V | Unité |
 | :--- | :--- | :-: | :-: | :-: |
-| I∆TX | Puissance TX = 0dBm | 4,19 | 2,21 | mA |
+| I∆TX | Puissance TX = 0 dBm | 4,19 | 2,21 | mA |
 | I∆RX | — | 4,03 | 2,12 | mA |
 
 </div>
 
-<div align="center"><em>Tableau 6.4-2 : Courant moyen BLE/BT Classic (alimentation 3,8V)</em></div>
+<div align="center"><em>Tableau 6.4-2 : Courant moyen BLE/BT Classic (alimentation 3,8 V)</em></div>
 
 <div align="center" markdown>
 
-| Mode | Intervalle | @0dBm | @10dBm | Unité |
+| Mode | Intervalle | @0 dBm | @10 dBm | Unité |
 | :--- | :-: | :-: | :-: | :-: |
-| BT Sniff (tentative=1) | 50ms | 146,4 | 178,6 | µA |
-| BT Sniff (tentative=1) | 1s | 7,3 | 8,9 | µA |
-| BLE ADV | 50ms | 166,9 | 251,8 | µA |
-| BLE ADV | 1s | 8,3 | 12,6 | µA |
-| BLE Connection | 50ms | 128,8 | 148,4 | µA |
-| BLE Connection | 1s | 6,4 | 7,4 | µA |
+| BT Sniff (attempt=1) | 50 ms | 146,4 | 178,6 | µA |
+| BT Sniff (attempt=1) | 1 s | 7,3 | 8,9 | µA |
+| BLE ADV | 50 ms | 166,9 | 251,8 | µA |
+| BLE ADV | 1 s | 8,3 | 12,6 | µA |
+| BLE Connection | 50 ms | 128,8 | 148,4 | µA |
+| BLE Connection | 1 s | 6,4 | 7,4 | µA |
 | Standby | — | 4,2 | — | µA |
 
 </div>
 
-<div align="center"><em>Tableau 6.4-3 : Puissance des processeurs (HPSYS/LPSYS, alimentation 3,8V)</em></div>
+<div align="center"><em>Tableau 6.4-3 : Puissance des processeurs (HPSYS/LPSYS, alimentation 3,8 V)</em></div>
 
 <div align="center" markdown>
 
 | Symbole | Condition | Courant (mA) | Incrément (µA/MHz) |
 | :--- | :--- | :-: | :-: |
-| ICoreMark | HPSYS @240MHz | 10,34 | 31,3 |
-| ICoreMark | LPSYS @48MHz | 0,89 | 27,6 |
-| IWhileLoop | HPSYS @240MHz | 7,98 | 21,3 |
-| IWhileLoop | LPSYS @48MHz | 0,67 | 18,7 |
+| ICoreMark | HPSYS @240 MHz | 10,34 | 31,3 |
+| ICoreMark | LPSYS @48 MHz | 0,89 | 27,6 |
+| IWhileLoop | HPSYS @240 MHz | 7,98 | 21,3 |
+| IWhileLoop | LPSYS @48 MHz | 0,67 | 18,7 |
 
 </div>
 
 ### 6.5 Performances RF Bluetooth bimode { #65-dual-mode-bluetooth-rf-performance }
 
-Prend en charge Bluetooth 5.3, rétrocompatible avec les versions 4.2/4.1/4.0, ainsi que BLE et Bluetooth Classic. Fréquence centrale des canaux de fonctionnement : 2402–2480MHz.
+Prend en charge Bluetooth 5.3, rétrocompatible avec les versions 4.2/4.1/4.0, ainsi que BLE et Bluetooth Classic. Fréquence centrale des canaux de fonctionnement : 2402–2480 MHz.
 
-**Émetteur BLE (1Mbps)** : puissance max 19dBm, plage de contrôle de puissance -20 à 19dBm.
+**Émetteur BLE (1 Mbps)** : puissance max 19 dBm, plage de contrôle de puissance -20 à 19 dBm.
 
-**Récepteur BLE** : sensibilité typique de -100dBm (1Mbps), -97dBm (2Mbps), -104,5dBm (LR S2/500kbps) et -107,5dBm (LR S8/125kbps), mesurée avec des paquets de 37 octets, un PER de 30,8 % et en condition « dirty-off ».
+**Récepteur BLE** : sensibilité typique de -100 dBm (1 Mbps), -97 dBm (2 Mbps), -104,5 dBm (LR S2/500 kbps) et -107,5 dBm (LR S8/125 kbps), mesurée avec des paquets de 37 octets, un PER de 30,8 % et en condition « dirty-off ».
 
-**BT Classic (Basic Data Rate)** : puissance d'émission max 19dBm ; sensibilité du récepteur -96,3dBm (dirty off) / -94dBm (dirty on) @0,1% BER.
+**BT Classic (Basic Data Rate)** : puissance d'émission max 19 dBm ; sensibilité du récepteur -96,3 dBm (dirty off) / -94 dBm (dirty on) @0,1 % BER.
 
-**BT Classic (Enhanced Data Rate)** : puissance d'émission max 13dBm ; sensibilité du récepteur π/4-DQPSK -95,5dBm ; sensibilité du récepteur 8DPSK -88,5dBm.
+**BT Classic (Enhanced Data Rate)** : puissance d'émission max 13 dBm ; sensibilité du récepteur π/4-DQPSK -95,5 dBm ; sensibilité du récepteur 8DPSK -88,5 dBm.
 
-Les tableaux complets min/typ/max pour toutes les performances TX/RX BLE 1Mbps/2Mbps/LR et TX/RX BT Classic BR/EDR figurent au §5.5 de la fiche technique officielle.
+Les tableaux complets min/typ/max pour toutes les performances TX/RX BLE 1 Mbps/2 Mbps/LR et TX/RX BT Classic BR/EDR figurent au §5.5 de la fiche technique officielle.
 
 ## 7. Alimentation du module { #7-module-power-supply }
 
@@ -415,24 +415,24 @@ La fiche technique fournit également un tableau d'affectation de broches recomm
 
 Utilisez ces éléments comme point de départ pour un schéma de production et adaptez la sélection des broches au mélange de périphériques spécifique de votre produit.
 
-## 9. Liste de contrôle de conception schématique { #9-schematic-design-checklist }
+## 9. Liste de contrôle de conception du schéma { #9-schematic-design-checklist }
 
-<div align="center"><em>Tableau 9-1 : Liste de contrôle de conception schématique</em></div>
+<div align="center"><em>Tableau 9-1 : Liste de contrôle de conception du schéma</em></div>
 
 <div align="center" markdown>
 
 | # | Point de contrôle |
 | :-: | :--- |
-| 1 | La plage de tension d'entrée VDD_3V3 doit être de 2,97V–3,6V ; placer un condensateur de 4,7µF près de la broche du module. |
-| 2 | La plage de tension d'entrée VDD_1V8 doit être de 1,7V–1,95V ; placer un condensateur de 4,7µF près de la broche du module. |
-| 3 | La plage de tension d'entrée VDDIOA, VDDIOA2 et VDDIOB doit être de 1,7V–3,6V ; placer des condensateurs près des broches du module. |
+| 1 | La plage de tension d'entrée VDD_3V3 doit être de 2,97 V–3,6 V ; placez un condensateur de 4,7 µF près de la broche du module. |
+| 2 | La plage de tension d'entrée VDD_1V8 doit être de 1,7 V–1,95 V ; placez un condensateur de 4,7 µF près de la broche du module. |
+| 3 | La plage de tension d'entrée VDDIOA, VDDIOA2 et VDDIOB doit être de 1,7 V–3,6 V ; placez des condensateurs près des broches du module. |
 
 </div>
 
 !!! note
     Ce guide ne reprend que les trois points ci-dessus. Consultez la liste complète du §7.3 de la [fiche technique officielle (PDF)](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) avant de finaliser un schéma de production.
 
-## 10. Dimensions du module et empreinte PCB { #10-module-dimensions-and-pcb-footprint }
+## 10. Dimensions du module et empreinte du PCB { #10-module-dimensions-and-pcb-footprint }
 
 ### 10.1 Dimensions du module { #101-module-dimensions }
 
@@ -441,9 +441,9 @@ Le module mesure 24 × 24 × 3,1 mm.
 !!! info "Figure 10-1 : Dimensions du module"
     Voir la Figure 8-1 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
 
-### 10.2 Empreinte PCB recommandée { #102-recommended-pcb-footprint }
+### 10.2 Empreinte du PCB recommandée { #102-recommended-pcb-footprint }
 
-!!! info "Figure 10-2 : Empreinte PCB recommandée"
+!!! info "Figure 10-2 : Empreinte du PCB recommandée"
     Voir la Figure 8-2 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
 
 ### 10.3 Connecteur d'antenne externe { #103-external-antenna-connector }
@@ -453,19 +453,19 @@ Pour les références prenant en charge une antenne externe, le module peut util
 !!! info "Figure 10-3 : Dimensions du connecteur d'antenne externe"
     Voir la Figure 8-3 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
 
-### 10.4 Placement du module dans la conception PCB { #104-module-placement-in-pcb-design }
+### 10.4 Placement du module dans la conception du PCB { #104-module-placement-in-pcb-design }
 
-Réservez la zone d'antenne du module de sorte qu'aucun composant, cuivre, piste, châssis métallique ou autre structure conductrice ne chevauche la zone d'exclusion RF. Utilisez la fiche technique officielle du module et le boîtier final du produit comme référence pour le dégagement de l'antenne et sa validation.
+Réservez la zone d'antenne du module de sorte qu'aucun composant, cuivre, piste, châssis métallique ou autre structure conductrice ne chevauche la zone d'exclusion RF. Utilisez la fiche technique officielle du module et l'enveloppe mécanique finale du produit comme référence pour le dégagement de l'antenne et sa validation.
 
 - Étendez la zone d'antenne au-delà du bord de la carte hôte lorsque cela est possible, avec le point d'alimentation proche du bord de la carte.
 - Si l'antenne ne peut pas dépasser le bord de la carte, prévoyez une zone d'exclusion généreuse (sans plan de cuivre, piste ni composant) et retirez, si possible, le matériau de la carte hôte sous l'antenne.
-- Pour les conceptions de produit final complètes, évaluez l'effet du boîtier sur l'antenne et effectuez une validation RF, incluant un test final de portée de communication sur le produit fini.
+- Pour les conceptions de produit final complètes, évaluez l'effet de l'enveloppe mécanique sur l'antenne et effectuez une validation RF, incluant un test final de portée de communication sur le produit fini.
 
 ## 11. Manipulation du produit { #11-product-handling }
 
 ### 11.1 Conditions de stockage { #111-storage-conditions }
 
-- Stockez les produits scellés dans un sachet barrière anti-humidité (MBB) à <40°C / 90%HR, sans condensation.
+- Stockez les produits scellés dans un sachet barrière anti-humidité (MBB) à < 40 °C / 90 % HR, sans condensation.
 - Après ouverture du sachet sous vide, utilisez le module dans la fenêtre de durée de vie hors sachet spécifiée pour son niveau de sensibilité à l'humidité (MSL) ; sinon, il doit être passé à l'étuve avant un second passage au four de refusion.
 
 ### 11.2 Décharge électrostatique (ESD) { #112-electrostatic-discharge-esd }

@@ -12,7 +12,7 @@ In der geprüften SiFli-Dokumentation und den OpenSiFli-Repositories wurde kein 
 
 Geprüft wurden die [öffentlichen OpenSiFli-Repositories auf GitHub](https://github.com/OpenSiFli/) und das [Dokumentationsportal von SiFli](https://docs.sifli.com/).
 
-Das beweist nicht, dass es keine privaten oder von der Community durchgeführten Experimente gibt. Es bedeutet jedoch, dass diese Site MicroPython nicht als verifizierten SF32-Entwicklungspfad darstellen sollte, solange kein öffentliches Firmware-Image oder Quellbaum zum Verlinken vorliegt.
+Das beweist nicht, dass es keine privaten oder von der Community durchgeführten Experimente gibt. Es bedeutet jedoch, dass diese Website MicroPython nicht als verifizierten SF32-Entwicklungspfad darstellen sollte, solange kein öffentliches Firmware-Image oder Quellcode-Repository verfügbar ist, auf das sie verweisen kann.
 
 ## Aktuelle Empfehlung { #current-recommendation }
 
@@ -47,10 +47,10 @@ Prüfen Sie GPIO erst, wenn die Pinbezeichnungen dokumentiert sind.
 
 ## Mindestkriterien für den Einstieg { #minimum-acceptance-criteria }
 
-Die MicroPython-Seite kann von einer Statusseite zu einer Anleitung „Erste Schritte“ werden, sobald alle folgenden Punkte erfüllt sind:
+Für MicroPython kann die Statusseite zu einer Anleitung „Erste Schritte“ ausgebaut werden, sobald alle folgenden Voraussetzungen erfüllt sind:
 
 - Ein öffentliches Repository oder eine Release-Seite.
-- Eine boardspezifische Binärdatei für mindestens ein SF32-Dev-Kit.
+- Eine boardspezifische Binärdatei für mindestens ein SF32-Entwicklungsboard.
 - Ein dokumentierter Flash-Befehl.
 - Ein dokumentierter REPL-Port und eine Baudrate.
 - Ein Recovery-Pfad zurück zur SiFli-SDK-Firmware.

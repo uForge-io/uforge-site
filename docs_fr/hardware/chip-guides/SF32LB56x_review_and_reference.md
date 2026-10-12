@@ -22,7 +22,7 @@ hide:
 - [ ] L'adaptation RF, l'implantation de l'antenne et le plan de réglage sont définis.
 - [ ] Les affectations de broches pour l'affichage, le stockage, l'audio, les capteurs, PBR, UART/I2C, GPTIM, le débogage et la production ne présentent aucun conflit.
 - [ ] Le fan-out QFN ou BGA, l'empilage des couches, l'impédance, le DRC et la stratégie ESD sont finalisés.
-- [ ] Le flux de programmation en production et d'étalonnage du cristal a été testé.
+- [ ] Le flux de flashage en production et d'étalonnage du quartz a été testé.
 
 ## 8. Documents et références connexes { #8-related-documents-and-references }
 

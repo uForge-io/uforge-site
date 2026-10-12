@@ -8,11 +8,11 @@ tags:
 
 # Energiesparendes Design im Überblick { #low-power-overview }
 
-## Ziel und Zielgruppe { #overview }
+## Zweck und Geltungsbereich { #overview }
 
 Dieser Leitfaden zeigt, wie sich SF32-Produkte in der Praxis energiesparend auslegen lassen: Welche Betriebsmodi gibt es, welche Komponenten belasten den Akku und wie muss die Firmware aufgebaut sein, damit das System möglichst lange in einem sparsamen Zustand bleibt? Der Energiebedarf ist eine Systemeigenschaft. Entscheidungen zu Bluetooth, Grafik, Audio und KI werden deshalb gemeinsam betrachtet.
 
-Die SiFli-SDK-Dokumentation beschreibt RT-Thread-basierte **PM-Middleware (Power Management)** für bestimmte Zielgeräte, darunter SF32LB52x. Verfügbare Modi und Aufweckverhalten können sich je nach Baustein und SDK-Konfiguration unterscheiden; maßgeblich ist die Dokumentation des jeweiligen Geräts. Bei Produktfamilien, deren SDK die Aufgaben des Bluetooth-Controllers einem separaten Prozessor zuweist (siehe [Bluetooth-Prozessorarchitektur](../bluetooth/processor.md)), kann der separate Prozessor Funkereignisse bearbeiten, ohne die Anwendungs-CPU jedes Mal aufzuwecken. Ob die Anwendungs-CPU schlafen kann, hängt von der Aufgabenverteilung, konfigurierten Weckquellen und der Inter-Prozessor-Kommunikation ab und muss am Zielgerät geprüft werden.
+Die SiFli-SDK-Dokumentation beschreibt RT-Thread-basierte **PM-Middleware (Power Management)** für bestimmte Zielgeräte, darunter SF32LB52x. Verfügbare Modi und Aufweckverhalten können sich je nach Gerät und SDK-Konfiguration unterscheiden; maßgeblich ist die Dokumentation des jeweiligen Geräts. Bei Produktfamilien, deren SDK die Aufgaben des Bluetooth-Controllers einem separaten Prozessor zuweist (siehe [Bluetooth-Prozessorarchitektur](../bluetooth/processor.md)), kann der separate Prozessor Funkereignisse bearbeiten, ohne die Anwendungs-CPU jedes Mal aufzuwecken. Ob die Anwendungs-CPU schlafen kann, hängt von der Aufgabenverteilung, konfigurierten Weckquellen und der Inter-Prozessor-Kommunikation ab und muss am Zielgerät geprüft werden.
 
 Diese Seite hilft, ein Ziel für die Akkulaufzeit in konkrete Firmware- und Hardwareentscheidungen zu übersetzen und durch Messungen zu belegen. Sie richtet sich an Entwickler, die vernetzten Standby, Displayverhalten, Audio, Sensorik, KI und Reaktionszeit gegeneinander abwägen müssen. Energiesparen ist mehr als ein einzelner API-Aufruf für den Schlafmodus.
 
@@ -30,7 +30,7 @@ Diese Ziele sollten früh in die Architekturentscheidungen einfließen, etwa in 
 
 ## Energiesparmodi und das PM-Framework { #power-modes-and-the-pm-framework }
 
-Die folgenden Kategorien sind konzeptionelle Systemzustände und keine genaue Liste der SF32-Hardwaremodi oder SDK-Enumerationswerte. Prüfen Sie in der Dokumentation des gewählten Bausteins und SDK die unterstützten Modi, Weckquellen und den Zustandserhalt:
+Die folgenden Kategorien sind konzeptionelle Systemzustände und keine genaue Liste der SF32-Hardwaremodi oder SDK-Enumerationswerte. Prüfen Sie in der Dokumentation des gewählten Geräts und SDK die unterstützten Modi, Weckquellen und den Zustandserhalt:
 
 <div align="center"><em>Tabelle: Energiesparmodi und das PM-Framework</em></div>
 
@@ -39,9 +39,9 @@ Die folgenden Kategorien sind konzeptionelle Systemzustände und keine genaue Li
 | Modus | Typischer Zustand | Wann verwendet |
 |:-----|:---------------|:----------|
 | **Aktiv** | CPU läuft; benötigte Peripherie ist eingeschaltet | Bedienung der Benutzeroberfläche, aktive Bluetooth-Übertragung, Audiostreaming, Sensorverarbeitung. |
-| **Leerlauf** | CPU wartet auf ein Ereignis oder einen Interrupt; der Peripheriezustand hängt von Baustein und Konfiguration ab | Zwischen UI-Bildaktualisierungen oder während das System auf die nächste geplante Aufgabe oder einen aktivierten Interrupt wartet. |
+| **Leerlauf** | CPU wartet auf ein Ereignis oder einen Interrupt; der Peripheriezustand hängt vom Gerät und von der Konfiguration ab | Zwischen UI-Bildaktualisierungen oder während das System auf die nächste geplante Aufgabe oder einen aktivierten Interrupt wartet. |
 | **Schlaf-/Niedrigenergiemodus** | Eine CPU oder ein Subsystem wechselt in einen unterstützten Niedrigenergiemodus; Takte, Domänen und Peripherie können je nach Modus angehalten werden oder aktiv bleiben | Vernetzter Standby oder Warten auf ein konfiguriertes Bluetooth-Ereignis, einen Sensorinterrupt oder einen Timer. |
-| **Tiefschlaf/Standby** | Ein bausteinspezifischer, tieferer Niedrigenergiemodus; abgeschaltete Domänen, Speichererhalt und Aufweckverhalten unterscheiden sich je nach Baustein | Längere Leerlaufphasen, sofern der gewählte Modus und die Aufweckanforderungen dies zulassen. |
+| **Tiefschlaf/Standby** | Ein gerätespezifischer, tieferer Niedrigenergiemodus; abgeschaltete Domänen, Speichererhalt und Aufweckverhalten unterscheiden sich je nach Gerät | Längere Leerlaufphasen, sofern der gewählte Modus und die Aufweckanforderungen dies zulassen. |
 
 </div>
 
@@ -54,7 +54,7 @@ Die Arbeitslast lässt das System zwischen Zuständen wechseln. Eine konfigurier
 
 Die Auswahl eines Energiesparmodus und die Schlafsperre sind unterschiedliche Mechanismen. Die SiFli-[PM-Middleware-Referenz für SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/middleware/pm.html) und der [Leitfaden zum Energiesparen für SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/low_power.html) dokumentieren, dass `rt_pm_request(PM_SLEEP_MODE_IDLE)` den Eintritt in LIGHT, DEEP und STANDBY bis zum passenden Aufruf von `rt_pm_release(PM_SLEEP_MODE_IDLE)` sperrt; die Anforderung wählt keinen tieferen Modus aus.
 
-Für die Umsetzung gilt der offizielle Leitfaden der jeweiligen Familie: [SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html), [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/low_power.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/low_power.html) oder [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/low_power.html). Verfügbare Modi, Eintrittsbedingungen, Weckquellen und der Umfang der Zustandserhaltung hängen von Chipfamilie, Board und SDK-Konfiguration ab. Der [SF32LB52x-Leitfaden zum Energiesparen](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html) enthält ein Hibernate-Aufweckpin-Beispiel, das ausdrücklich für 58x/56x/52x/57x gruppiert ist. Die gemeinsame SDK-[HAL-PMU-API-Referenz](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/pmu.html) nennt für SF32LB57x den von `HAL_PMU_EnablePinWakeup()` verwendeten Indexbereich von 0 bis 13. Diese Quellen belegen nur diese Pin-Konfiguration; sie belegen nicht, dass die Verfügbarkeit der RT-Thread-Modi, die Schwellenwerte der PM-Richtlinie oder das Verhalten beim Zustandserhalt von 52x auch für 57x gelten. Prüfen Sie diese Punkte in der Dokumentation des konkreten SDK und Bausteins. Eine konfigurierte Richtlinie kann grundsätzlich nur dann einen tieferen zulässigen Zustand auswählen, wenn Leerlaufintervall und weitere Eintrittsbedingungen dies erlauben. Eine nicht freigegebene Anforderung kann das System in einem flacheren Zustand als vorgesehen halten.
+Für die Umsetzung gilt der offizielle Leitfaden der jeweiligen Familie: [SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html), [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/low_power.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/low_power.html) oder [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/low_power.html). Verfügbare Modi, Eintrittsbedingungen, Weckquellen und der Umfang der Zustandserhaltung hängen von Chipfamilie, Board und SDK-Konfiguration ab. Der [SF32LB52x-Leitfaden zum Energiesparen](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html) enthält ein Hibernate-Aufweckpin-Beispiel, das ausdrücklich für 58x/56x/52x/57x gruppiert ist. Die gemeinsame SDK-[HAL-PMU-API-Referenz](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/pmu.html) nennt für SF32LB57x den von `HAL_PMU_EnablePinWakeup()` verwendeten Indexbereich von 0 bis 13. Diese Quellen belegen nur diese Pin-Konfiguration; sie belegen nicht, dass die Verfügbarkeit der RT-Thread-Modi, die Schwellenwerte der PM-Richtlinie oder das Verhalten beim Zustandserhalt von 52x auch für 57x gelten. Prüfen Sie diese Punkte in der Dokumentation des konkreten SDK und Geräts. Eine konfigurierte Richtlinie kann grundsätzlich nur dann einen tieferen zulässigen Zustand auswählen, wenn Leerlaufintervall und weitere Eintrittsbedingungen dies erlauben. Eine nicht freigegebene Anforderung kann das System in einem flacheren Zustand als vorgesehen halten.
 
 ## Hauptverbraucher in einem SF32-Produkt { #what-drains-power-on-an-sf32-product }
 
@@ -96,7 +96,7 @@ Wählen Sie ein SDK-Beispiel aus, das die größte Unsicherheit beim Energiebeda
 
 Verbindungs- und Advertising-Parameter bieten die wichtigsten Stellschrauben für den Bluetooth-Energiebedarf (siehe die vollständige Tabelle in der [Bluetooth-Übersicht](../bluetooth/overview.md#advertising-and-connection-parameters)):
 
-- Bei überwiegend inaktiven Verbindungen das Verbindungsintervall und die Slave-Latenz (Slave Latency) erhöhen.
+- Erhöhen Sie bei überwiegend inaktiven Verbindungen das Verbindungsintervall und die Slave-Latenz (Slave Latency).
 - Die Sendeleistung auf den niedrigsten Wert senken, der die erforderliche Reichweite noch gewährleistet.
 - Advertising weniger aggressiv konfigurieren, sobald ein Produkt eher mit Wiederverbindungen als mit erstmaliger Erkennung rechnet.
 - Wenn das gewählte SDK Bluetooth-Controllerereignisse auf einem separaten Prozessor verarbeitet, kann die Anwendungs-CPU zwischen Verbindungsereignissen schlafen, sofern keine Anwendungstask, Weckquelle oder Inter-Prozessor-Nachricht sie benötigt. Weckt der Anwendungscode sie bei jedem Bluetooth-Callback, verringert das diesen Vorteil. Prüfen Sie die Kern- und Aufgabenverteilung des Zielgeräts.
@@ -118,13 +118,13 @@ On-Device-Inferenz und Sensorabtastung sollten gezielt geplant werden, statt kon
 
 - Inferenz nur dann ausführen, wenn neue und relevante Daten vorliegen, statt unabhängig von den Eingangsdaten in festen Zeitabständen.
 - Leichte, dauerhaft benötigte Sensorverarbeitung – sofern Gerät und SDK es unterstützen – auf den Niedrigenergieprozessor verlagern. So muss der Hauptprozessor nicht für jeden Messwert aufwachen.
-- **Energie pro Inferenz oder Messwert** statt nur der Latenz messen. Eine schnellere Verarbeitung spart nur dann Energie, wenn das System dadurch früher in den Schlafmodus zurückkehren kann.
+- **Energie pro Inferenz oder Abtastung** statt nur der Latenz messen. Eine schnellere Verarbeitung spart nur dann Energie, wenn das System dadurch früher in den Schlafmodus zurückkehren kann.
 
 Siehe die [KI-Übersicht](../ai/overview.md#power-aware-inference-scheduling) für den Kompromiss zwischen Genauigkeit, Latenz und Stromverbrauch im Detail.
 
 ## Speicher und Takt { #memory-and-clock-considerations }
 
-Der Speicher, aus dem Code ausgeführt wird, beeinflusst sowohl die Leistung als auch den Energiebedarf. Bei SF32-Bausteinen, die entsprechende Cache-Funktionen implementieren und aktivieren, können Instruktions- und Datencaches Wartezeiten bei Flash- oder PSRAM-Zugriffen verringern. Eine kürzere aktive Ausführungszeit lässt dem System mehr Zeit zum Schlafen. Weitere Hinweise zu Caches und Speicherhierarchien enthält der Artikel [STAR-MC1](../architecture/star-mc1.md#memory-system-optimization).
+Der Speicher, aus dem Code ausgeführt wird, beeinflusst sowohl die Leistung als auch den Energiebedarf. Bei SF32-Geräten, die entsprechende Cache-Funktionen implementieren und aktivieren, können Instruktions- und Datencaches Wartezeiten bei Flash- oder PSRAM-Zugriffen verringern. Eine kürzere aktive Ausführungszeit lässt dem System mehr Zeit zum Schlafen. Weitere Hinweise zu Caches und Speicherhierarchien enthält der Artikel [STAR-MC1](../architecture/star-mc1.md#memory-system-optimization).
 
 Über die CPU selbst hinaus:
 
@@ -132,14 +132,14 @@ Der Speicher, aus dem Code ausgeführt wird, beeinflusst sowohl die Leistung als
 - Die Wahl der Taktquelle – Quarz oder interner Oszillator – sowie die aktiv bleibenden PLL- und Taktdomänen beeinflussen sowohl die Aufwecklatenz als auch die Leistungsaufnahme im Schlafmodus.
 - Eine niedrigere CPU-Frequenz kann in weniger anspruchsvollen Phasen Energie sparen. Stellen Sie jedoch sicher, dass die aktive Zeit nicht so stark zunimmt, dass der Vorteil verloren geht. Messen Sie den tatsächlichen Energiebedarf und nicht nur den momentanen Strom.
 
-## Hardware und HF-Auslegung { #hardware-and-rf-power-considerations }
+## Hardware und RF-Auslegung { #hardware-and-rf-power-considerations }
 
 Die Firmware kann nur innerhalb der durch die Hardware gesetzten Grenzen optimieren:
 
 - Entscheidend ist der Wirkungsgrad von PMIC und LDO bei den tatsächlichen Lastströmen des Produkts, nicht ein Spitzenwert bei einem irrelevanten Lastpunkt.
-- HF-Layout und Antennenabstimmung bestimmen mit, welche Sendeleistung für eine zuverlässige Funkreichweite erforderlich ist. Bei schlechtem HF-Design muss die Firmware möglicherweise die Sendeleistung erhöhen, was die Akkulaufzeit verkürzt. Siehe [Bluetooth-Prozessorarchitektur: HF und Takt](../bluetooth/processor.md#rf-and-clock-considerations).
-- Die Quarzgenauigkeit beeinflusst die HF-Zeitreserven und wie großzügig die Firmware Überwachungs-Timeouts und Aufweckreserven bemessen muss.
-- Test- und Kalibrierzugänge für die Produktion bereits im Design vorsehen. Die Optimierung von Stromverbrauch und HF-Eigenschaften endet oft nicht mit der ersten Hardware-Revision.
+- RF-Layout und Antennenabstimmung bestimmen mit, welche Sendeleistung für eine zuverlässige Funkreichweite erforderlich ist. Bei schlechtem RF-Design muss die Firmware möglicherweise die Sendeleistung erhöhen, was die Akkulaufzeit verkürzt. Siehe [Bluetooth-Prozessorarchitektur: RF und Takt](../bluetooth/processor.md#rf-and-clock-considerations).
+- Die Quarzgenauigkeit beeinflusst die RF-Zeitreserven und wie großzügig die Firmware Überwachungs-Timeouts und Aufweckreserven bemessen muss.
+- Test- und Kalibrierzugänge für die Produktion bereits im Design vorsehen. Die Optimierung von Stromverbrauch und RF-Eigenschaften endet oft nicht mit der ersten Hardware-Revision.
 
 ## Fallbeispiel: Display per Armbewegung aktivieren { #case-study-raise-to-wake }
 
@@ -168,7 +168,7 @@ Schätzen Sie für eine Gruppe sich gegenseitig ausschließender Betriebszustän
 
 ## Energieprofil erstellen: modellieren, messen, aktualisieren { #power-profiling-model-measure-update }
 
-Ein Energieprofil macht aus dem Budget einen wiederholbaren Entwicklungsprozess. Definieren Sie typische Nutzungsszenarien, erfassen Sie Spannung und Strom an der jeweiligen Versorgungsgrenze und berücksichtigen Sie Dauer und Häufigkeit jeder Last. Berechnen Sie die Energie über die Zeit und rechnen Sie Messwerte einzelner Versorgungsschienen unter Berücksichtigung der Wandlungsverluste auf den Akku um; Ströme von Schienen mit unterschiedlichen Spannungen dürfen nicht direkt addiert werden. Daraus lassen sich der mittlere Batteriestrom, der tägliche Ladungsverbrauch und die Akkulaufzeit abschätzen. Außerdem zeigt das Profil, welche Szenarien zuerst gemessen und optimiert werden sollten.
+Ein Energieprofil macht aus dem Budget einen wiederholbaren Entwicklungsprozess. Definieren Sie typische Nutzungsszenarien, erfassen Sie Spannung und Strom an der jeweiligen Versorgungsgrenze und berücksichtigen Sie Dauer und Häufigkeit jeder Last. Berechnen Sie die Energie über die Zeit und rechnen Sie Messwerte einzelner Versorgungsschienen unter Berücksichtigung der Wandlungsverluste auf den Akku um; Ströme von Schienen mit unterschiedlichen Spannungen dürfen nicht direkt addiert werden. Daraus lassen sich die durchschnittliche Stromaufnahme auf der Akkuseite, der tägliche Ladungsbedarf und die Akkulaufzeit abschätzen. Außerdem zeigt das Profil, welche Szenarien zuerst gemessen und optimiert werden sollten.
 
 <div align="center"><em>Diagramm: Regelkreis zur Erstellung eines Energieprofils</em></div>
 
@@ -182,7 +182,7 @@ flowchart LR
     F --> B
 ```
 
-Ein Energieprofil liefert eine Schätzung, keine Messung. Der [Online Power Profiler for Bluetooth LE](https://devzone.nordicsemi.com/power/w/opp/2/online-power-profiler-for-bluetooth-le) von Nordic folgt demselben Prinzip: Das Werkzeug verwendet aus Messungen abgeleitete Modelle, liefert aber weiterhin Erwartungswerte und keine Messung eines konkreten Produkts. Der tatsächliche Strom hängt unter anderem vom Silizium, dem Board-Layout, der Akkuspannung, der Temperatur, den HF-Bedingungen, dem Firmware-Timing und dem Anwendungsszenario ab.
+Ein Energieprofil liefert eine Schätzung, keine Messung. Der [Online Power Profiler for Bluetooth LE](https://devzone.nordicsemi.com/power/w/opp/2/online-power-profiler-for-bluetooth-le) von Nordic folgt demselben Prinzip: Das Werkzeug verwendet aus Messungen abgeleitete Modelle, liefert aber weiterhin Erwartungswerte und keine Messung eines konkreten Produkts. Der tatsächliche Strom hängt unter anderem vom Silizium, dem Board-Layout, der Akkuspannung, der Temperatur, den RF-Bedingungen, dem Firmware-Timing und dem Anwendungsszenario ab.
 
 Erfassen Sie für jedes Szenario die Annahmen, die die Energie wesentlich beeinflussen:
 
@@ -234,11 +234,11 @@ Verwenden Sie reproduzierbare Testszenarien, damit sich Messwerte verschiedener 
 | Testszenario | Zu aktivierende Funktionen | Erfolgskriterium |
 |:-----------|:---------------|:---------------|
 | Start bis Leerlauf | Normaler Systemstart, keine Kopplung, Display ausgeschaltet | Außer den benötigten Timern läuft keine regelmäßige Hintergrundarbeit. |
-| Vernetzter Leerlauf | BLE-Verbindung mit Bonding und den für die Produktion vorgesehenen Verbindungsparametern | Prüfen Sie, ob die laut Gerätearchitektur vorgesehene CPU zwischen Verbindungsereignissen ihren Zielmodus erreicht; kontrollieren Sie Bluetooth-Aufgabenverteilung und Aufweckverhalten. |
+| Vernetzter Leerlauf | BLE-Verbindung mit Bonding und den für die Produktion vorgesehenen Verbindungsparametern | Prüfen Sie, ob die laut Gerätearchitektur vorgesehene CPU bzw. der vorgesehene Kern zwischen Verbindungsereignissen den Zielmodus erreicht; kontrollieren Sie Bluetooth-Aufgabenverteilung und Aufweckverhalten. |
 | Kurzer Blick aufs Display | Display aktivieren, typischen Bildschirm aktualisieren, Dimm-Timeout abwarten | Hintergrundbeleuchtung und Animation enden nach dem Timeout. |
 | Audio aktiv | Wiedergabe- oder Aufnahmepfad aktiv | Kein Pufferunterlauf; der Codec wird nach der Sitzung abgeschaltet. |
 | KI aktiv | Echte Sensordaten und Inferenz ausführen | Der Energiebedarf pro Inferenz entspricht dem Budget. |
-| Worst Case | Bluetooth, Display und – sofern vorgesehen – Audio/KI gleichzeitig aktiv | Keine Verbindungsabbrüche oder Funktionsstörungen; thermische und elektrische Grenzwerte werden eingehalten. |
+| Worst Case | Bluetooth, Display und – sofern vorgesehen – Audio/KI gleichzeitig aktiv | Keine Verbindungsabbrüche oder Funktionsstörungen; Temperatur- und Leistungsgrenzwerte werden eingehalten. |
 
 </div>
 
@@ -256,7 +256,7 @@ Dokumentieren Sie Firmware-Version, Board-Revision, Akku- oder Versorgungsspannu
 | Hohe Stromaufnahme trotz inaktiver Bluetooth-Verbindung | Slave-Latenz ist nicht eingestellt oder die Anwendung wacht bei jedem Verbindungsereignis auf. |
 | Stromspitzen treten gleichzeitig mit Displayaktivität auf | Es wird der gesamte Bildschirm statt nur geänderter Bereiche aktualisiert, oder die Hintergrundbeleuchtung bleibt auf voller Helligkeit. |
 | Stromaufnahme steigt nach einem Firmware-Update | Ein neuer Timer, eine Polling-Schleife oder ein dauerhaft aktives Peripheriegerät wurde ohne Prüfung des Energiebedarfs eingeführt. |
-| Gute Messwerte auf dem Labortisch, aber hoher Verbrauch im Produkt | Eine Fehlanpassung von HF-Layout oder Antenne erzwingt eine höhere Sendeleistung; alternativ wirken sich Wärme oder Gehäuse auf das Ergebnis aus. |
+| Gute Messwerte auf dem Labortisch, aber hoher Verbrauch im Produkt | Eine Fehlanpassung von RF-Layout oder Antenne erzwingt eine höhere Sendeleistung; alternativ wirken sich Wärme oder Gehäuse auf das Ergebnis aus. |
 | Audio- oder KI-Funktionen belasten den Akku übermäßig | Der Codec oder Inferenzpfad bleibt zwischen den Sitzungen aktiv. Siehe [Audioübersicht](../audio/overview.md#power-considerations-for-audio) und [KI-Übersicht](../ai/overview.md#power-aware-inference-scheduling). |
 
 </div>
@@ -267,20 +267,20 @@ Dokumentieren Sie Firmware-Version, Board-Revision, Akku- oder Versorgungsspannu
 - Sensoren, Bluetooth-Status oder Timer regelmäßig abfragen, statt Interrupts und Ereignisse zu nutzen.
 - Eine PM-Anforderung nach Abschluss der zugehörigen Arbeit aktiv lassen.
 - Bei kleinen UI-Änderungen den gesamten Bildschirm neu zeichnen.
-- Mangelhaftes HF-Layout nicht beheben und stattdessen die Firmware-Sendeleistung erhöhen.
+- Mangelhaftes RF-Layout nicht beheben und stattdessen die Firmware-Sendeleistung erhöhen.
 - Nur den Momentanstrom messen, statt den Energiebedarf in einem realistischen Nutzungsszenario zu erfassen.
 - Messungen auf dem Labortisch durchführen, aber das fertige Produkt im endgültigen Gehäuse mit realer Antenne und Akku nicht prüfen.
 
 ## Checkliste für die Inbetriebnahme { #bring-up-checklist }
 
-- [ ] Ziel für die Akkulaufzeit, Zeitanteile je Betriebszustand und erforderliche Weckquellen festlegen.
-- [ ] Ermitteln, welche Subsysteme dauerhaft aktiv bleiben müssen und welche ereignisgesteuert arbeiten können.
-- [ ] Sicherstellen, dass jeder Treiber und jede Aufgabe die PM-Anforderung nach der Nutzung zeitnah freigibt.
-- [ ] Bluetooth-Advertising- und Verbindungsparameter auf das tatsächliche Nutzungsprofil des Produkts abstimmen.
-- [ ] Prüfen, ob das Display – sofern unterstützt – teilweise aktualisiert wird und die Hintergrundbeleuchtung dem Produktverhalten entspricht.
-- [ ] Alle periodischen Timer überprüfen und unnötige Timer entfernen oder zusammenfassen.
-- [ ] Strommessung einrichten und aktive Zustände, Leerlauf und Schlafmodus einzeln validieren.
-- [ ] Die kombinierte Worst-Case-Last testen (Bluetooth, Display sowie gegebenenfalls Audio und KI) und prüfen, ob das Energiebudget eingehalten wird.
+- [ ] Legen Sie das Ziel für die Akkulaufzeit, die Zeitanteile je Betriebszustand und die erforderlichen Weckquellen fest.
+- [ ] Ermitteln Sie, welche Subsysteme dauerhaft aktiv bleiben müssen und welche ereignisgesteuert arbeiten können.
+- [ ] Stellen Sie sicher, dass jeder Treiber und jede Aufgabe die PM-Anforderung nach der Nutzung zeitnah freigibt.
+- [ ] Stimmen Sie die Bluetooth-Advertising- und Verbindungsparameter auf das tatsächliche Nutzungsprofil des Produkts ab.
+- [ ] Prüfen Sie, ob das Display – sofern unterstützt – teilweise aktualisiert wird und die Hintergrundbeleuchtung dem Produktverhalten entspricht.
+- [ ] Überprüfen Sie alle periodischen Timer und entfernen oder bündeln Sie unnötige Timer.
+- [ ] Richten Sie die Strommessung ein und validieren Sie aktive Zustände, Leerlauf und Schlafmodus einzeln.
+- [ ] Testen Sie die kombinierte Worst-Case-Last (Bluetooth, Display sowie gegebenenfalls Audio und KI) und prüfen Sie, ob das Energiebudget eingehalten wird.
 - [ ] Den Energiebedarf nach jeder wesentlichen Firmware-Änderung erneut prüfen, nicht erst am Projektende.
 
 ## Wichtige Erkenntnisse { #key-takeaways }

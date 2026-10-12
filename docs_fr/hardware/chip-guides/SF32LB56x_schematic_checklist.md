@@ -44,21 +44,21 @@ Chaque tableau ci-dessous couvre un bloc fonctionnel du schéma. Appliquez une l
 | 4 | La sortie LDO_VOUT2 dispose d'un point de test ou d'un condensateur de filtrage facilement accessible pour mesurer la tension | Toutes les puces | Obligatoire |
 | 5 | La sortie VDD_RET dispose d'un point de test ou d'un condensateur de filtrage facilement accessible pour mesurer la tension | Toutes les puces | Obligatoire |
 | 6 | La sortie VDD_RTC dispose d'un point de test ou d'un condensateur de filtrage facilement accessible pour mesurer la tension | Toutes les puces | Obligatoire |
-| 7 | La tension d'alimentation VDDIO1 est de 1,8 V à 3,3 V ; le SF32LB56xU utilise 1,8 V et le SS6700A utilise 3,3 V. VDDIO1 peut être commutée avec la Flash externe sous le contrôle de PBR0. Si VDDIO1 n'est pas contrôlée par PBR0, assurez-vous qu'elle est alimentée pendant le téléchargement de programme. Si elle est contrôlée par un GPIO, PB22 est recommandé et l'outil de téléchargement doit activer ce rail | SF32LB560/561/563/56W et SS6700A | Obligatoire |
+| 7 | La tension de VDDIO1 doit être comprise entre 1,8 V et 3,3 V ; le SF32LB56xU utilise 1,8 V et le SS6700A utilise 3,3 V. VDDIO1 peut être commutée avec la Flash externe sous le contrôle de PBR0. Si VDDIO1 n'est pas contrôlée par PBR0, assurez-vous qu'elle est alimentée pendant le téléchargement de programme. Si elle est contrôlée par un GPIO, PB22 est recommandé et l'outil de téléchargement doit activer ce rail | SF32LB560/561/563/56W et SS6700A | Obligatoire |
 | 8 | Lorsque VDDIO1 est alimentée par le SF30147, LVSW1 est recommandé ; l'outil de téléchargement doit activer ce rail | SF32LB560/561/563/56W et SS6700A | Obligatoire |
-| 9 | La tension d'alimentation VDDIO2 est de 1,8 V à 3,3 V ; prévoyez une résistance série de 0 Ω sur la première révision de la carte (1,8 V est recommandé pour le SF32LB56xU et 3,3 V pour le SS6700A) | SF32LB560/561/563/56W et SS6700A | Obligatoire |
-| 10 | La tension d'alimentation VDDIO3 est de 1,8 V à 3,3 V ; prévoyez une résistance série de 0 Ω sur la première révision de la carte (1,8 V est recommandé pour le SF32LB56xU et 3,3 V pour le SS6700A) | SF32LB560/561/563/56W et SS6700A | Obligatoire |
-| 11 | La tension d'alimentation VDDIO4 est de 1,8 V à 3,3 V ; prévoyez une résistance série de 0 Ω sur la première révision de la carte (1,8 V est recommandé pour le SF32LB56xU ; le SS6700A ne dispose pas de ce rail d'alimentation) | SF32LB560/561/563/56W | Obligatoire |
-| 12 | La tension d'alimentation VDDIOA est de 1,8 V à 3,3 V ; prévoyez une résistance série de 0 Ω sur la première révision de la carte | SF32LB565/567 | Obligatoire |
-| 13 | La tension d'alimentation VDDIOA2 est de 1,8 V à 3,3 V ; prévoyez une résistance série de 0 Ω sur la première révision de la carte | SF32LB565/567 | Obligatoire |
-| 14 | La tension d'alimentation VDDIOB est de 1,8 V à 3,3 V ; prévoyez une résistance série de 0 Ω sur la première révision de la carte | SF32LB565/567 | Obligatoire |
+| 9 | La tension de VDDIO2 doit être comprise entre 1,8 V et 3,3 V ; prévoyez une résistance série de 0 Ω sur la première révision de la carte (1,8 V est recommandé pour le SF32LB56xU et 3,3 V pour le SS6700A) | SF32LB560/561/563/56W et SS6700A | Obligatoire |
+| 10 | La tension de VDDIO3 doit être comprise entre 1,8 V et 3,3 V ; prévoyez une résistance série de 0 Ω sur la première révision de la carte (1,8 V est recommandé pour le SF32LB56xU et 3,3 V pour le SS6700A) | SF32LB560/561/563/56W et SS6700A | Obligatoire |
+| 11 | La tension de VDDIO4 doit être comprise entre 1,8 V et 3,3 V ; prévoyez une résistance série de 0 Ω sur la première révision de la carte (1,8 V est recommandé pour le SF32LB56xU ; le SS6700A ne dispose pas de ce rail d'alimentation) | SF32LB560/561/563/56W | Obligatoire |
+| 12 | La tension de VDDIOA doit être comprise entre 1,8 V et 3,3 V ; prévoyez une résistance série de 0 Ω sur la première révision de la carte | SF32LB565/567 | Obligatoire |
+| 13 | La tension de VDDIOA2 doit être comprise entre 1,8 V et 3,3 V ; prévoyez une résistance série de 0 Ω sur la première révision de la carte | SF32LB565/567 | Obligatoire |
+| 14 | La tension de VDDIOB doit être comprise entre 1,8 V et 3,3 V ; prévoyez une résistance série de 0 Ω sur la première révision de la carte | SF32LB565/567 | Obligatoire |
 | 15 | La tension d'alimentation VDDIOSA est de 1,8 V, et un interrupteur de charge est prévu pour le contrôle d'alimentation | SF32LB565/567 | Obligatoire |
 | 16 | La tension d'alimentation VDDIOSB est de 1,8 V, et un interrupteur de charge est prévu pour le contrôle d'alimentation | SF32LB565/567 | Obligatoire |
 | 17 | La tension d'alimentation VDDIOSC est de 1,8 V et VDDIOSC doit toujours être alimentée | SF32LB565/567 | Obligatoire |
 | 18 | La tension d'alimentation AVDD33_ANA est de 3,3 V | Toutes les puces | Obligatoire |
 | 19 | La tension d'alimentation AVDD33_AUD est de 3,3 V | Toutes les puces | Obligatoire |
 | 20 | Il est recommandé d'utiliser un circuit intégré de charge avec gestion du chemin d'alimentation afin que le système puisse démarrer depuis l'entrée du chargeur lorsque la tension de la batterie est inférieure au seuil de mise sous tension | Toutes les puces | Obligatoire |
-| 21 | Si un circuit intégré de charge sans gestion du chemin d'alimentation est utilisé, le courant de précharge doit être d'au moins 40 mA | Toutes les puces | Obligatoire |
+| 21 | Si un circuit intégré de charge sans gestion du chemin d'alimentation est utilisé, le courant de charge lente doit être d'au moins 40 mA | Toutes les puces | Obligatoire |
 | 22 | Le cas échéant, la conception de l'alimentation doit assurer la compatibilité matérielle entre le SF32LB56xU et le SS6700 | SF32LB560/561/563/56W et SS6700A | Obligatoire |
 | 23 | Lorsque le SF30147 fournit l'alimentation, utilisez l'interface TWI dédiée du SF32LB56x pour le contrôle par registre | Toutes les puces | Obligatoire |
 | 24 | Si le TWI du SF30147 partage le bus I2C de l'accéléromètre, l'alimentation des résistances de pull-up de ce bus I2C doit rester activée pour que le TWI fonctionne correctement | Toutes les puces | Obligatoire |
@@ -115,10 +115,10 @@ Chaque tableau ci-dessous couvre un bloc fonctionnel du schéma. Appliquez une l
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | Le cristal principal 48 MHz est une référence répertoriée dans l'AVL | Toutes les puces | Obligatoire |
-| 2 | Si le cristal 48 MHz n'est pas répertorié dans l'AVL, il respecte 7 pF ≤ CL ≤ 12 pF (8,8 pF recommandé), tolérance de fréquence ≤±10 ppm, ESR ≤30 Ω (22 Ω recommandé) | Toutes les puces | Obligatoire |
-| 3 | Le cristal RTC 32,768 kHz est une référence répertoriée dans l'AVL | Toutes les puces | Obligatoire |
-| 4 | Si le cristal 32,768 kHz n'est pas répertorié dans l'AVL, il respecte CL ≤12,5 pF (7 pF recommandé), tolérance de fréquence ≤±20 ppm, ESR ≤80 kΩ (38 kΩ recommandé) | Toutes les puces | Obligatoire |
+| 1 | Le quartz principal 48 MHz est une référence répertoriée dans l'AVL | Toutes les puces | Obligatoire |
+| 2 | Si le quartz 48 MHz n'est pas répertorié dans l'AVL, il respecte 7 pF ≤ CL ≤ 12 pF (8,8 pF recommandé), tolérance de fréquence ≤±10 ppm, ESR ≤30 Ω (22 Ω recommandé) | Toutes les puces | Obligatoire |
+| 3 | Le quartz RTC 32,768 kHz est une référence répertoriée dans l'AVL | Toutes les puces | Obligatoire |
+| 4 | Si le quartz 32,768 kHz n'est pas répertorié dans l'AVL, il respecte CL ≤12,5 pF (7 pF recommandé), tolérance de fréquence ≤±20 ppm, ESR ≤80 kΩ (38 kΩ recommandé) | Toutes les puces | Obligatoire |
 
 </div>
 
@@ -155,7 +155,7 @@ Chaque tableau ci-dessous couvre un bloc fonctionnel du schéma. Appliquez une l
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | Le signal ANT est annoté avec l'exigence d'impédance caractéristique asymétrique (single-ended) de 50 Ω | Toutes les puces | Obligatoire |
+| 1 | Le signal ANT est annoté avec l'exigence d'une impédance caractéristique de 50 Ω en configuration asymétrique (single-ended) | Toutes les puces | Obligatoire |
 | 2 | Un réseau d'adaptation de type Pi est réservé sur le signal ANT : un condensateur parallèle NC (non implanté) et un condensateur série de 15 pF | Toutes les puces | Obligatoire |
 
 </div>
@@ -279,12 +279,12 @@ Chaque tableau ci-dessous couvre un bloc fonctionnel du schéma. Appliquez une l
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
 | 1 | L'interface de charge dispose d'une conception EOS, ESD et OVP | Toutes les puces | Obligatoire |
-| 2 | Le signal de détection d'insertion du chargeur dispose d'un dispositif ESD | Toutes les puces | Obligatoire |
-| 3 | L'interface de batterie dispose d'un dispositif ESD | Toutes les puces | Obligatoire |
-| 4 | L'interface d'antenne dispose d'un dispositif ESD | Toutes les puces | Obligatoire |
-| 5 | Les interfaces d'alimentation du LCD et du TP disposent de dispositifs ESD | Toutes les puces | Obligatoire |
-| 6 | Les lignes I2C, RST et INT du TP disposent de dispositifs ESD | Toutes les puces | Obligatoire |
-| 7 | L'interface d'alimentation et les lignes de signal du capteur de fréquence cardiaque disposent de dispositifs ESD | Toutes les puces | Obligatoire |
+| 2 | Le signal de détection d'insertion du chargeur dispose d'un composant ESD | Toutes les puces | Obligatoire |
+| 3 | L'interface de batterie dispose d'un composant ESD | Toutes les puces | Obligatoire |
+| 4 | L'interface d'antenne dispose d'un composant ESD | Toutes les puces | Obligatoire |
+| 5 | Les interfaces d'alimentation du LCD et du TP disposent de composants ESD | Toutes les puces | Obligatoire |
+| 6 | Les lignes I2C, RST et INT du TP disposent de composants ESD | Toutes les puces | Obligatoire |
+| 7 | L'interface d'alimentation et les lignes de signal du capteur de fréquence cardiaque disposent de composants ESD | Toutes les puces | Obligatoire |
 
 </div>
 
@@ -296,10 +296,10 @@ Chaque tableau ci-dessous couvre un bloc fonctionnel du schéma. Appliquez une l
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | L'affectation I2C tient compte du partitionnement HCPU/LCPU et de la nécessité pour le dispositif de fonctionner en mode basse consommation | Toutes les puces | Obligatoire |
+| 1 | L'affectation I2C tient compte du partitionnement HCPU/LCPU et de la nécessité pour le composant de fonctionner en mode basse consommation | Toutes les puces | Obligatoire |
 | 2 | L'I2C dispose de pull-ups avec la valeur de résistance correcte ; pour un fonctionnement à 400 kHz, des pull-ups de 2,2 kΩ sont recommandés. Utilisez le domaine de tension côté périphérique et coupez l'alimentation du pull-up avec le périphérique lors de la mise hors tension | Toutes les puces | Obligatoire |
 | 3 | Le signal d'interruption I2C prend en charge le réveil matériel lorsque nécessaire | Toutes les puces | Obligatoire |
-| 4 | Si plusieurs dispositifs partagent un bus I2C, leurs adresses sont distinctes | Toutes les puces | Obligatoire |
+| 4 | Si plusieurs composants partagent un bus I2C, leurs adresses sont distinctes | Toutes les puces | Obligatoire |
 | 5 | La ligne source de SiFli relative au PMIC SF30147C indique : « I2C SCL with TWI DAT use PB23; I2C SCL pull-up power supplyalways powered; TWI DATnormal SF30147C ». La formulation ne précise ni la relation entre les signaux ni le sens de « normal ». Avant la validation, vérifiez l'affectation de PB23, l'alimentation du pull-up et le fonctionnement de TWI DAT avec le SF30147C dans le schéma et la documentation officiels. | SF32LB560/561/563/56W et SS6700A | Obligatoire |
 
 </div>
@@ -436,10 +436,10 @@ Chaque tableau ci-dessous couvre un bloc fonctionnel du schéma. Appliquez une l
 | 4 | Pour le SF32LB56xU et le SS6700, l'alimentation de la Flash externe nécessite un interrupteur de charge contrôlé par PBR0 | SF32LB560/561/563/56W et SS6700A | Obligatoire |
 | 5 | <span class="flag-yellow">En mode Hibernate-off ou Standby-off, VDDIOSA et VDDIOSB du SF32LB56xV nécessitent un contrôle par interrupteur de charge via PBR0, tandis que VDDIOSC doit toujours être alimentée</span> | SF32LB565/567 | Obligatoire |
 | 6 | <span class="flag-yellow">L'alimentation de la Flash MPI3 du SF32LB56xV nécessite un interrupteur de charge contrôlé par PA03 ; activez l'alimentation de la Flash MPI3 pendant le téléchargement</span> | SF32LB565/567 | Obligatoire |
-| 7 | L'exigence de courant de base en Deep Sleep est consignée. Le courant en Deep Sleep est supérieur à celui du Standby et convient à un réveil fréquent avec des intervalles inférieurs à 200 ms ; toutes les broches PB prennent en charge le réveil, et le courant de base est de 90 µA | Toutes les puces | Obligatoire |
-| 8 | La somme des courants de base de tous les périphériques sélectionnés en mode Deep Sleep est consignée et respecte les exigences du projet | Toutes les puces | Obligatoire |
-| 9 | L'exigence de courant de base en Standby est consignée. Le Standby convient à un réveil moins fréquent avec des intervalles supérieurs à 200 ms ; seules PA50, PA51, PB33 et PB34 prennent en charge le réveil, et le courant de base est de 4-5 µA | SF32LB560/561/563/56W et SS6700A | Obligatoire |
-| 10 | L'exigence de courant de base en Standby est consignée. Le Standby convient à un réveil moins fréquent avec des intervalles supérieurs à 200 ms ; seules PA50, PA51, PA52, PA53, PA54, PB33, PB34, PB35 et PB36 prennent en charge le réveil, et le courant de base est de 4-5 µA | SF32LB565/567 | Obligatoire |
+| 7 | L'exigence de courant de référence en Deep Sleep est consignée. Le courant en Deep Sleep est supérieur à celui du Standby et convient à un réveil fréquent avec des intervalles inférieurs à 200 ms ; toutes les broches PB prennent en charge le réveil, et le courant de référence est de 90 µA | Toutes les puces | Obligatoire |
+| 8 | La somme des courants de référence de tous les périphériques sélectionnés en mode Deep Sleep est consignée et respecte les exigences du projet | Toutes les puces | Obligatoire |
+| 9 | L'exigence de courant de référence en Standby est consignée. Le Standby convient à un réveil moins fréquent avec des intervalles supérieurs à 200 ms ; seules PA50, PA51, PB33 et PB34 prennent en charge le réveil, et le courant de référence est de 4-5 µA | SF32LB560/561/563/56W et SS6700A | Obligatoire |
+| 10 | L'exigence de courant de référence en Standby est consignée. Le Standby convient à un réveil moins fréquent avec des intervalles supérieurs à 200 ms ; seules PA50, PA51, PA52, PA53, PA54, PB33, PB34, PB35 et PB36 prennent en charge le réveil, et le courant de référence est de 4-5 µA | SF32LB565/567 | Obligatoire |
 | 11 | Les courants des périphériques sélectionnés en mode Standby sont consignés et respectent les exigences du projet | Toutes les puces | Obligatoire |
 
 </div>

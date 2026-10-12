@@ -8,7 +8,7 @@ tags:
     - チップ
 ---
 
-# SF32LB55x ハードウェア設計ガイド — 回路図設計 { #sf32lb55x-hardware-design-guide-schematic-design-guidelines }
+# SF32LB55xハードウェア設計ガイド — 回路図設計 { #sf32lb55x-hardware-design-guide-schematic-design-guidelines }
 
 ## 5. 回路図設計ガイドライン { #5-schematic-design-guidelines }
 
@@ -140,8 +140,8 @@ Modeピンの電圧ドメインはVDDIOAと共通です。外付けの10 kΩ抵�
 
 | 水晶振動子 | 仕様要件 | 詳細説明 |
 |:-----------|:---------|:-----|
-| 48 MHz | 7 pF≦CL≦12 pF（推奨値 8.8 pF）、△F/F0≦±10 ppm、ESR≦30 Ω（推奨値 22 Ω） | 水晶発振器の消費電力は CL と ESR に関係します。両方の値が小さいほど消費電力は低くなります。消費電力を抑えるには、仕様範囲内で CL と ESR が比較的小さい部品を選びます。水晶振動子の近くに並列整合コンデンサー用のフットプリントを確保してください。CL<12 pFの場合、コンデンサーを実装する必要はありません |
-| 32.768 kHz | CL≦12.5 pF（推奨値 7 pF）、△F/F0≦±20 ppm、ESR≦80 kΩ（推奨値 38 kΩ） | 水晶振動子の消費電力は CL と ESR に関係します。両方の値が小さいほど消費電力は低くなります。消費電力を抑えるには、仕様範囲内で CL と ESR が比較的小さい部品を選びます。水晶振動子の近くに並列整合コンデンサー用のフットプリントを確保してください。CL<12.5 pFの場合、コンデンサーを実装する必要はありません |
+| 48 MHz | 7 pF≦CL≦12 pF（推奨値8.8 pF）、△F/F0≦±10 ppm、ESR≦30 Ω（推奨値22 Ω） | 水晶発振器の消費電力はCLとESRに関係します。両方の値が小さいほど消費電力は低くなります。消費電力を抑えるには、仕様範囲内でCLとESRが比較的小さい部品を選びます。水晶振動子の近くに並列整合コンデンサー用のフットプリントを確保してください。CL<12 pFの場合、コンデンサーを実装する必要はありません |
+| 32.768 kHz | CL≦12.5 pF（推奨値7 pF）、△F/F0≦±20 ppm、ESR≦80 kΩ（推奨値38 kΩ） | 水晶振動子の消費電力はCLとESRに関係します。両方の値が小さいほど消費電力は低くなります。消費電力を抑えるには、仕様範囲内でCLとESRが比較的小さい部品を選びます。水晶振動子の近くに並列整合コンデンサー用のフットプリントを確保してください。CL<12.5 pFの場合、コンデンサーを実装する必要はありません |
 
 </div>
 
@@ -163,13 +163,13 @@ RF基準回路ではANTにC0323（15 pF/50 V）を直列接続し、GNDへの並
 
 SF32LB55xはOPI PSRAM、QSPI NOR／NAND FlashおよびPSRAM、SDIO eMMCまたはMicro SDに対応します。パッケージによって使用可能なピンとインターフェースが異なるため、ピンを確定してPCBスタックアップをレビューする前にストレージを選定してください。
 
-BGA145の外付けOPI PSRAMは1チャネル、BGA169は2チャネルです。表5.5-1～5.5-3は、BGA145の構成とBGA169の2個のメモリを示しており、同一パッケージの3チャネルではありません。QSPIの各表はQSPI2、QSPI3、QSPI4に対応します。SDIOの各表はSDIO1の4ビット／8ビットモードとSDIO2の4ビットモードに対応します。
+BGA145の外付けOPI PSRAMは1チャネル、BGA169は2チャネルです。表5.5-1～5.5-3は、BGA145の構成とBGA169の2個のメモリーを示しており、同一パッケージの3チャネルではありません。QSPIの各表はQSPI2、QSPI3、QSPI4に対応します。SDIOの各表はSDIO1の4ビット／8ビットモードとSDIO2の4ビットモードに対応します。
 
 外付けQSPI PSRAMにはQSPI2を推奨します。HCPUのGPIOで外付けOPI/QSPI PSRAMの電源を制御する場合、PUタイプのHCPUピンを使用し、Highでオン、Lowでオフにしてください。内蔵FlashのVDD_SIPをスイッチ制御する場合はPA58を使用し、同じ極性で制御します。QSPI4にNOR Flashを追加するか決める前に、LCPUの加速度・心拍アルゴリズムに必要なFlash容量をSiFliのFAEと確認してください。
 
-原資料のOPI表では方向の表記が統一されていません。[BGA145のリファレンス回路図](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png)、[BGA169メモリ1のリファレンス回路図](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png)、[メモリ2のリファレンス回路図](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png)では、MCUのPA37/PA20およびPA07/PA08から外付けPSRAMのCS#とCLKへ接続されています。したがって、以下の表ではMCU側を基準にし、CS#とCLKをMCU出力／PSRAM入力として記載します。回路図ではDQS/DMの固定方向は確認できないため、選定したPSRAMのデータシートで機能と方向を確認してください。
+原資料のOPI表では方向の表記が統一されていません。[BGA145のリファレンス回路図](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png)、[BGA169メモリー1のリファレンス回路図](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png)、[メモリー2のリファレンス回路図](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png)では、MCUのPA37/PA20およびPA07/PA08から外付けPSRAMのCS#とCLKへ接続されています。したがって、以下の表ではMCU側を基準にし、CS#とCLKをMCU出力／PSRAM入力として記載します。回路図ではDQS/DMの固定方向は確認できないため、選定したPSRAMのデータシートで機能と方向を確認してください。
 
-図示の各PSRAMは1.8 V電源、0.1 µFを3個、1 µF/6.3 Vを1個使用します。未接続のRESET#やNC/CLK#は図示のメモリに固有です。選択した部品のデータシートを確認し、そのまま一般化しないでください。
+図示の各PSRAMは1.8 V電源、0.1 µFを3個、1 µF/6.3 Vを1個使用します。未接続のRESET#やNC/CLK#は図示のメモリーに固有です。選択した部品のデータシートを確認し、そのまま一般化しないでください。
 
 ![図 5.5-1: BGA145 OPI PSRAM基準回路](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png){ width="100%" loading="lazy" }
 
@@ -195,11 +195,11 @@ BGA145の外付けOPI PSRAMは1チャネル、BGA169は2チャネルです。表
 
 </div>
 
-![図 5.5-2: BGA169 OPI PSRAMメモリ1基準回路](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png){ width="100%" loading="lazy" }
+![図 5.5-2: BGA169 OPI PSRAMメモリー1基準回路](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>図 5.5-2: BGA169 OPI PSRAMメモリ1基準回路</em></div>
+<div align="center"><em>図 5.5-2: BGA169 OPI PSRAMメモリー1基準回路</em></div>
 
-<div align="center"><em>表 5.5-2: BGA169のOPI PSRAMメモリ1</em></div>
+<div align="center"><em>表 5.5-2: BGA169のOPI PSRAMメモリー1</em></div>
 
 <div align="center" markdown>
 
@@ -219,11 +219,11 @@ BGA145の外付けOPI PSRAMは1チャネル、BGA169は2チャネルです。表
 
 </div>
 
-![図 5.5-3: BGA169 OPI PSRAMメモリ2基準回路](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png){ width="100%" loading="lazy" }
+![図 5.5-3: BGA169 OPI PSRAMメモリー2基準回路](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>図 5.5-3: BGA169 OPI PSRAMメモリ2基準回路</em></div>
+<div align="center"><em>図 5.5-3: BGA169 OPI PSRAMメモリー2基準回路</em></div>
 
-<div align="center"><em>表 5.5-3: BGA169のOPI PSRAMメモリ2</em></div>
+<div align="center"><em>表 5.5-3: BGA169のOPI PSRAMメモリー2</em></div>
 
 <div align="center" markdown>
 
@@ -342,7 +342,7 @@ BGA145の外付けOPI PSRAMは1チャネル、BGA169は2チャネルです。表
 
 ディスプレイにはMIPI DSI、SPI／QSPI、MCU8080、JDIを選べます。ピン割り当てとPCB配線を決める前にパネルを選び、インターフェース幅、クロック、電源制御、タッチ割り込み、バックライト方式をまとめて確認してください。
 
-パラレルJDIとシリアルJDIは、PA側のLCDC1またはPB側のLCDC2に割り当てられた信号グループで利用できます。以下の表はPA/LCDC1のピン割り当てのみを示しています。SiFliはPB/LCDC2の利用を推奨しています。原資料にはLCDC2の個別ピン割り当て表がないため、実際の割り当てはチップのピンマルチプレクサ機能表で確認し、LCDC1の表から推定しないでください。
+パラレルJDIとシリアルJDIは、PA側のLCDC1またはPB側のLCDC2に割り当てられた信号グループで利用できます。以下の表はPA/LCDC1のピン割り当てのみを示しています。SiFliはPB/LCDC2の利用を推奨しています。原資料にはLCDC2の個別ピン割り当て表がないため、実際の割り当てはチップのピン多重化機能表で確認し、LCDC1の表から推定しないでください。
 
 <div align="center"><em>表 5.6-1: MIPI DSIディスプレイインターフェース</em></div>
 
@@ -481,7 +481,7 @@ BL_PWMにはGPTIM1_CHx機能を持つGPIOを使用し、冷間起動時にバッ
 
 ウェイク、アナログ、デバッグ、量産用アクセスは、筐体や治具を考慮して計画してください。ウェイクピンには明確なアイドルレベルとESD保護が必要です。GPADC分圧回路ではセトリング時間と漏れ電流のバランスを取り、EVTおよび量産でデバッグ／書き込みアクセスを確保してください。
 
-SF32LB55xはHCPUのウェイク源4系統（WKUP_A0–WKUP_A3）とLCPUの6系統（WKUP_B0–WKUP_B5）を備え、各信号は対応するCPUのみを起こします。Hibernateから起動できるのはLCPUの6系統だけです。10本の入力はフローティングにせず、用途に応じた外付けプルアップ／プルダウンでスリープ時のリークを防いでください。
+SF32LB55xはHCPUのウェイク源4系統（WKUP_A0～WKUP_A3）とLCPUの6系統（WKUP_B0～WKUP_B5）を備え、各信号は対応するCPUのみを起こします。Hibernateから起動できるのはLCPUの6系統だけです。10本の入力はフローティングにせず、用途に応じた外付けプルアップ／プルダウンでスリープ時のリークを防いでください。
 
 参考回路では、KEY1をPB48に接続し、10 kΩでVDD_1V8へプルアップしています。ESD保護とコンデンサーも示されています。KEY2側には10 kΩのプルアップとESD保護があり、ジャンパーでPA08、PA77、PA78のいずれかに接続する構成です。C0004はNF（未実装）と記されています。これらは回路例であり、すべての端子がウェイク対応という意味ではありません。PA08は表5.7-1に記載されていません。表に示すウェイク対応入力から実際に使用する端子を選び、各入力のアイドル時レベルを確定してください。
 
@@ -491,9 +491,9 @@ SF32LB55xはHCPUのウェイク源4系統（WKUP_A0–WKUP_A3）とLCPUの6系�
 
 モーターPWMにはGPTIM1_CHxを備えたGPIOを使います。PU/PDのピン特性を選び、コールドスタートでモーターが意図せず作動しないようにします。基準回路はGPIO17（PA44）、ローサイドトランジスタ、1 MΩのゲートプルダウンを使用し、モーターに3 V、MCUには別の3.3 V電源を供給します。
 
-![図 5.7-2: モータードライバの基準回路](../../sf32-products/chips/assets/55x/SF32LB55x-VIB-SCH.png){ width="100%" loading="lazy" }
+![図 5.7-2: モータードライバーの基準回路](../../sf32-products/chips/assets/55x/SF32LB55x-VIB-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>図 5.7-2: モータードライバの基準回路</em></div>
+<div align="center"><em>図 5.7-2: モータードライバーの基準回路</em></div>
 
 <div align="center"><em>表 5.7-1: ウェイクアップ割り込みソース</em></div>
 
@@ -514,7 +514,7 @@ SF32LB55xはHCPUのウェイク源4系統（WKUP_A0–WKUP_A3）とLCPUの6系�
 
 </div>
 
-SiFliのハードウェアアプリケーションガイドでは、GPADCは5チャネル、10ビットで、入力範囲は0–0.9 Vとされています。保守的な基板設計では、VINが0.9 V未満の場合のみ直接接続し、それ以上では分圧してVADCを0.9 V未満に保ちます。電池測定では、原資料のR1:R2が約5:1、MΩ級の抵抗を参考にしてください。分圧電流を減らすと整定時間が長くなります。図示の回路はVADCとGND間に0.1 µFを接続しています。`VADC = VIN × R2 / (R1 + R2)`で最大電池電圧と抵抗公差を確認します。表5.7-2の電流値はVIN = 4.2 Vでの値であり、すべての電池条件に当てはまりません。
+SiFliのハードウェアアプリケーションガイドでは、GPADCは5チャネル、10ビットで、入力範囲は0～0.9 Vとされています。保守的な基板設計では、VINが0.9 V未満の場合のみ直接接続し、それ以上では分圧してVADCを0.9 V未満に保ちます。電池測定では、原資料のR1:R2が約5:1、MΩ級の抵抗を参考にしてください。分圧電流を減らすと整定時間が長くなります。図示の回路はVADCとGND間に0.1 µFを接続しています。`VADC = VIN × R2 / (R1 + R2)`で最大電池電圧と抵抗公差を確認します。表5.7-2の電流値はVIN = 4.2 Vでの値であり、すべての電池条件に当てはまりません。
 
 資料間に差異があります。優先度の高い[OpenSiFliハードウェアアプリケーションガイド](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)は、GPADCを10ビット・5チャネル、入力範囲を0～0.9 Vとしています。[V1.0回路図チェックリスト](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)の項目2は最大入力電圧を1.0 Vとしていますが、チャネル数は示していません。一方、[SF32LB55xデータシートV1.7.2の3.2.1節](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)は、単端入力8チャネルまたは差動入力4組をサポートし、入力範囲をそれぞれ0～1.1 V、−0.7～0.7 Vとしています。ピン表にはGPADC_CH0～CH7が記載されています。現行の[SDK ADCガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html)も8チャネル（0～7）と最大サンプリング電圧1.1 Vを記載しています。SiFliはチャネル数と電圧上限の差を説明していません。書面で確認されるまで、本ガイドでは優先度の高い資料に基づき、GPADCを5チャネル、入力範囲を0～0.9 Vとして設計します。VADCを0.9 V未満に保ち、1.0 Vや1.1 Vを承認済みの設計上限と見なさず、対象の型番とパッケージで使用できるチャネルをSiFliに確認してください。
 

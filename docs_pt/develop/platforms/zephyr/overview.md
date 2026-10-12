@@ -78,7 +78,7 @@ A presença no código não significa que todo cenário de produto esteja pronto
 
 Depois de validar a configuração básica na primeira inicialização, teste um subsistema por vez: I/O da placa, comportamento da UART, display, armazenamento, Bluetooth, áudio e gerenciamento de energia. Em cada ponto de verificação, mantenha juntos o exemplo, o overlay, os fragmentos Kconfig, a revisão downstream e o log serial. A presença de um driver na árvore não comprova que a combinação completa da aplicação esteja pronta para produção.
 
-## Lista de verificação de riscos downstream { #downstream-risk-checklist }
+## Checklist de riscos downstream { #downstream-risk-checklist }
 
 - Você está usando o downstream do OpenSiFli, e não o Zephyr upstream?
 - A revisão do HAL está fixada?

@@ -29,7 +29,7 @@ La placa integra en una sola plataforma de evaluación el módulo MCU, conectore
 - Soporte de LCD QSPI/SPI/DSPI a través de un conector FPC de 22 pines
 - Soporte de LCD MCU/8080 de 8 bits a través del FPC y el encabezado de expansión de 40 pines
 - Soporte de panel táctil I2C
-- USB-C para programación y depuración por USB-UART, y para alimentar la placa
+- USB-C para grabación y depuración por USB-UART, y para alimentar la placa
 - Interfaz USB-C separada para USB 2.0 FS
 - Micrófono MEMS en placa y amplificador de potencia de audio Clase D
 - Ranura para tarjeta MicroSD usando SPI
@@ -73,7 +73,7 @@ Para una placa más pequeña con semiorificios metalizados en los bordes, use [S
 
 Los códigos y las configuraciones de memoria anteriores siguen la [guía de modelos de placas de desarrollo de SiFli](https://wiki.sifli.com/en/board/devkit_guide.html). Antes de diseñar, confirme la revisión en la serigrafía y en el paquete de diseño.
 
-Las fuentes oficiales usan denominaciones distintas para la memoria Flash de A128R16: la [guía de modelos de módulos de OpenSiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) identifica el módulo como SPI-NAND de 128 MB, mientras que la guía de modelos de placas indica QSPI-NAND de 128 MB para la SKU DevKit correspondiente. Las fuentes no aclaran si la diferencia se refiere al componente instalado o a la denominación de la interfaz. Antes de basarse en esta configuración, confirme el componente Flash y el modo de bus en el esquema y la BOM de la revisión exacta de la placa.
+Las fuentes oficiales usan denominaciones distintas para la memoria Flash de A128R16: la [guía de modelos de módulos de OpenSiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) identifica el módulo como SPI-NAND de 128 MB, mientras que la guía de modelos de placas indica QSPI-NAND de 128 MB para la SKU DevKit correspondiente. Las fuentes no aclaran si la diferencia se refiere al componente instalado o a la denominación de la interfaz. Antes de basarse en esta configuración, confirme el componente Flash y el modo de bus en el esquemático y la BOM de la revisión exacta de la placa.
 
 ## Notas de versión { #version-notes }
 
@@ -89,7 +89,7 @@ Las fuentes oficiales usan denominaciones distintas para la memoria Flash de A12
 
 </div>
 
-Verifique la serigrafía y el paquete de diseño para la revisión exacta de la placa antes de usar el mapa de pines para el diseño de placa portadora de producción o accesorios.
+Verifique la serigrafía y el paquete de diseño de la revisión exacta de la placa antes de usar el mapa de pines para diseñar la placa portadora o el útil de producción.
 
 ![Vista anotada frontal de SF32LB52-DevKit-LCD](assets/sf32lb52x/52KIT-LCD-T-Notes.png){ loading="lazy" }
 <div align="center"><em>SF32LB52-DevKit-LCD — Vista anotada frontal</em></div>
@@ -104,7 +104,7 @@ Verifique la serigrafía y el paquete de diseño para la revisión exacta de la 
 - Placa SF32LB52-DevKit-LCD
 - Módulo LCD compatible con la interfaz seleccionada
 - Cable de datos USB 2.0, Type-A a Type-C o equivalente
-- Computadora host con Windows, Linux o macOS
+- Equipo con Windows, Linux o macOS
 
 ### Hardware opcional { #optional-hardware }
 
@@ -116,10 +116,10 @@ Verifique la serigrafía y el paquete de diseño para la revisión exacta de la 
 ### Configuración básica { #basic-setup }
 
 1. Conecte el módulo LCD al conector LCD correcto.
-2. Conecte el puerto USB-UART Type-C a la computadora host.
+2. Conecte el puerto USB-UART Type-C al equipo.
 3. Abra SifliTrace o la herramienta de descarga de firmware de SiFli.
 4. Seleccione el puerto serial detectado.
-5. Encienda la placa y descargue o ejecute el firmware objetivo.
+5. Encienda la placa y descargue o ejecute el firmware de destino.
 6. Una vez encendida la pantalla, verifique las funciones táctiles, gráficas, de almacenamiento y de audio que requiera la aplicación.
 
 Use un cable USB compatible con la transferencia de datos. Un cable solo de carga puede alimentar la placa, pero no habilita la conexión serie ni la transferencia de datos por USB.
@@ -131,27 +131,27 @@ SF32LB52-DevKit-LCD se puede alimentar de dos formas principales:
 - Alimentación USB Type-C desde cualquiera de los conectores USB
 - Alimentación por batería a través del conector de batería en placa
 
-Para programar el firmware y depurar con normalidad, use el puerto USB-UART Type-C. La alimentación por batería resulta útil para probar la pantalla, el audio y el comportamiento de bajo consumo sin conectar un cable USB.
+Para grabar el firmware y depurar con normalidad, use el puerto USB-UART Type-C. La alimentación por batería resulta útil para probar la pantalla, el audio y el comportamiento de bajo consumo sin conectar un cable USB.
 
 La placa integra un cargador lineal ETA9640P. Admite una corriente de carga máxima de 1 A y viene configurada de forma predeterminada para una corriente constante de 450 mA. Use una batería Li-ion o Li-poly de una celda y compruebe la polaridad del conector en la serigrafía antes de conectarla.
 
 ## Descarga y depuración { #download-and-debug }
 
-El puerto USB-UART es la interfaz principal para programar el firmware y consultar los registros.
+El puerto USB-UART es la interfaz principal para grabar el firmware y consultar los registros.
 
 - **Modo de descarga**: habilite la opción BOOT en la herramienta de descarga, luego encienda o reinicie la placa.
 - **Modo de depuración/registro**: deshabilite la opción BOOT y encienda o reinicie la placa para iniciar el funcionamiento normal con registro por el puerto serie.
 
-Algunas placas SF32LB52x usan la señal RTS del adaptador USB-UART para reiniciar el MCU. Si la placa se reinicia inesperadamente al abrir por primera vez el puerto serie, deshabilite el control de flujo de módem o el control de flujo por hardware en la configuración avanzada del puerto serie del equipo host.
+Algunas placas SF32LB52x usan la señal RTS del adaptador USB-UART para reiniciar la MCU. Si la placa se reinicia inesperadamente al abrir por primera vez el puerto serie, deshabilite el control de flujo de módem o el control de flujo por hardware en la configuración avanzada del puerto serie del equipo.
 
-![Deshabilitar el control de flujo de módem en la configuración avanzada del puerto serial](assets/sf32lb52x/Modem.png){ loading="lazy" }
-<div align="center"><em>Deshabilitación del control de flujo de módem en la configuración del puerto serial</em></div>
+![Deshabilitar el control de flujo de módem en la configuración avanzada del puerto serie](assets/sf32lb52x/Modem.png){ loading="lazy" }
+<div align="center"><em>Deshabilitación del control de flujo de módem en la configuración del puerto serie</em></div>
 
 ## Interfaz de LCD y táctil { #lcd-and-touch-interface }
 
-La placa admite paneles LCD QSPI mediante un conector FPC de 22 pines y paso de 0,5 mm, vertical y con cierre abatible. Si el panel tiene un orden de pines distinto, utilice una placa adaptadora antes de conectarlo.
+La placa admite paneles LCD QSPI mediante un conector FPC vertical de 22 pines y paso de 0,5 mm, con pestaña abatible. Si el panel tiene un orden de pines distinto, utilice una placa adaptadora antes de conectarlo.
 
-Las capacidades de LCD y táctil soportadas incluyen:
+Entre las funciones compatibles de pantalla y táctiles se incluyen:
 
 - Señalización LCD SPI, DSPI y QSPI
 - Señalización LCD QSPI en modo DDR
@@ -194,7 +194,7 @@ La nota original de la placa de SiFli lista `TFT-H043A28WQISTKN22_V0-3` como un 
 
 </div>
 
-**Discrepancia en el número de pines; verifique antes de conectar una pantalla:** SiFli identifica el conector y la tabla de señales como de 22 pines, pero el dibujo asociado numera los contactos del 1 al 24 y marca GND en los pines 22–24. La fuente no explica la diferencia. Antes de elegir o conectar un cable flexible, compruebe el conector físico y el esquema de la revisión exacta; no dé por hecho que un cable de 22 pines encaja en un conector de 24 posiciones.
+**Discrepancia en el número de pines; verifique antes de conectar una pantalla:** SiFli identifica el conector y la tabla de señales como de 22 pines, pero el dibujo asociado numera los contactos del 1 al 24 y marca GND en los pines 22–24. La fuente no explica la diferencia. Antes de elegir o conectar un cable flexible, compruebe el conector físico y el esquemático de la revisión exacta; no dé por hecho que un cable de 22 pines encaja en un conector de 24 posiciones.
 
 ## Asignaciones clave de pines del módulo { #key-module-pin-assignments }
 

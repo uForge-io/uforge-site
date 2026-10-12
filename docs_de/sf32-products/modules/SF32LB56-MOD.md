@@ -10,11 +10,11 @@ tags:
 
 ## Überblick { #overview }
 
-SF32LB56-MOD ist eine universelle, stromsparende Bluetooth-MCU-Modulfamilie auf Basis der SF32LB56xV-Plattform von SiFli. Die Standardkonfiguration verwendet den SF32LB566VCB36 mit 4 MB + 8 MB OPI-PSRAM im SiP und 1 MB QSPI-NOR. Das kompakte Modul vereint Dual-Core-MCU-Verarbeitung, Bluetooth 5.3 mit BLE Audio, Grafikbeschleunigung, Audioschnittstellen, SKU-abhängige Flash-Varianten und einen integrierten HF-Pfad.
+SF32LB56-MOD ist eine universelle, stromsparende Bluetooth-MCU-Modulfamilie auf Basis der SF32LB56xV-Plattform von SiFli. Die Standardkonfiguration verwendet den SF32LB566VCB36 mit 4 MB + 8 MB OPI-PSRAM im SiP und 1 MB QSPI-NOR. Das kompakte Modul vereint Dual-Core-MCU-Verarbeitung, Bluetooth 5.3 mit BLE Audio, Grafikbeschleunigung, Audioschnittstellen, SKU-abhängige Flash-Varianten und einen integrierten RF-Pfad.
 
-Das Modul integriert den HF-Pfad, den Quarz und den schnellen Speicher. Als Antenne ist entweder eine Leiterplattenantenne auf dem Modul oder eine externe Antenne über einen IPEX-kompatiblen Anschluss vorgesehen. Das fertige Produkt muss hinsichtlich der HF-Leistung validiert werden; außerdem muss das Layout der Trägerplatine zur gewählten Antennenausführung passen. Die Schnittstellen und Speichervarianten unterstützen Produkte mit Anforderungen an Display, Audio, Sensorik und lokale Verarbeitung.
+Das Modul integriert den RF-Pfad, den Quarz und den schnellen Speicher. Als Antenne ist entweder eine Leiterplattenantenne auf dem Modul oder eine externe Antenne über einen IPEX-kompatiblen Anschluss vorgesehen. Das fertige Produkt muss hinsichtlich der RF-Leistung validiert werden; außerdem muss das Layout der Trägerplatine zur gewählten Antennenausführung passen. Die Schnittstellen und Speichervarianten unterstützen Produkte mit Anforderungen an Display, Audio, Sensorik und lokale Verarbeitung.
 
-Die Familie ist mit mehreren Speicherkonfigurationen erhältlich. Alle Varianten haben Außenmaße von 18,0 × 32,9 × 3,1 mm und sind für einen Betrieb von -40 bis 85 °C ausgelegt. Der auf DS5602 V0.3 basierende [Hardware-Designleitfaden für SF32LB56-MOD](../../hardware/chip-guides/SF32LB56-MOD_hardware_design_guide.md) enthält weitere Angaben zu Antenne und Layout. Die SiFli-Modellübersicht für Module führt die Speicherkonfigurationen auf, ordnet den einzelnen SKUs jedoch keine Antennenausführung zu. Klären Sie die Antennenausführung des gewählten Moduls mit SiFli, bevor Sie das Layout der Trägerplatine festlegen.
+Die Familie ist mit mehreren Speicherkonfigurationen erhältlich. Alle Varianten haben Außenmaße von 18,0 × 32,9 × 3,1 mm und sind für einen Betrieb von −40 °C bis +85 °C ausgelegt. Der auf DS5602 V0.3 basierende [Hardware-Design-Leitfaden für SF32LB56-MOD](../../hardware/chip-guides/SF32LB56-MOD_hardware_design_guide.md) enthält weitere Angaben zu Antenne und Layout. Die SiFli-Modellübersicht für Module führt die Speicherkonfigurationen auf, ordnet den einzelnen SKUs jedoch keine Antennenausführung zu. Klären Sie die Antennenausführung des gewählten Moduls mit SiFli, bevor Sie das Layout der Trägerplatine festlegen.
 
 !!! info
     Die nachfolgend aufgeführten Rechen-, Grafik- und Audiofunktionen beziehen sich auf die im Modul integrierte Plattform SF32LB56xV. Welche Funktionen extern verfügbar sind, hängt vom Modul-Pinout und der Pin-Multiplexierung ab. Architektur und vollständige Peripherie der Chipfamilie sind auf der Seite [SF32LB56x](../chips/SF32LB56x.md) beschrieben. Diese Seite behandelt die Modul-Integration, SKU-abhängige Speicherbestückung, Versorgungsschienen und Auswahlkriterien.
@@ -32,28 +32,28 @@ SiFli nennt für SF32LB56-MOD folgende Anwendungsbereiche:
 
 Ziehen Sie SF32LB56-MOD in Betracht, wenn das Design eine oder mehrere der folgenden Eigenschaften erfordert:
 
-- Integration von HF-Pfad, Antennenoption, Quarz und schnellem Speicher auf Modulebene
+- Integration von RF-Pfad, Antennenoption, Quarz und schnellem Speicher auf Modulebene
 - Unterschiedliche Speicherkonfigurationen entsprechend den aufgeführten Modul-SKUs
 - Schnittstellen für Display, Audio, Sensorik und lokale Verarbeitung
 - Kompakte Abmessungen für Produkte mit begrenztem Bauraum
 
 ## Entwicklungsressourcen { #development-resources }
 
-[Moduldatenblatt]: https://downloads.sifli.com/user%20manual/DS5602-SF32LB56-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p3.pdf
-[Chipübersicht]: ../chips/SF32LB56x.md
-[Hardware-Designleitfaden]: ../../hardware/chip-guides/SF32LB56-MOD_hardware_design_guide.md
-[Hardware-Designleitfaden SF32LB56x]: ../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md
-[Muster bestellen]: https://sifli.taobao.com/
-[Entwicklungskits kaufen]: https://sifli.taobao.com/
+[Module Datasheet]: https://downloads.sifli.com/user%20manual/DS5602-SF32LB56-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p3.pdf
+[Chip Introduction]: ../chips/SF32LB56x.md
+[Hardware Design Guide]: ../../hardware/chip-guides/SF32LB56-MOD_hardware_design_guide.md
+[SF32LB56x Hardware Design Guide]: ../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md
+[Buy Samples]: https://sifli.taobao.com/
+[Buy Dev Kits]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Moduldatenblatt]__
-- :fontawesome-solid-microchip: __[Chipübersicht]__
-- :fontawesome-solid-file-lines: __[Hardware-Designleitfaden]__
-- :fontawesome-solid-file-lines: __[Hardware-Designleitfaden SF32LB56x]__
-- :fontawesome-solid-cart-shopping: __[Muster bestellen]__
-- :fontawesome-solid-cart-shopping: __[Entwicklungskits kaufen]__
+- :fontawesome-solid-file-pdf: __[Moduldatenblatt][Module Datasheet]__
+- :fontawesome-solid-microchip: __[Chipübersicht][Chip Introduction]__
+- :fontawesome-solid-file-lines: __[Hardware-Design-Leitfaden][Hardware Design Guide]__
+- :fontawesome-solid-file-lines: __[Hardware-Design-Leitfaden SF32LB56x][SF32LB56x Hardware Design Guide]__
+- :fontawesome-solid-cart-shopping: __[Muster bestellen][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[Entwicklungsboards kaufen][Buy Dev Kits]__
 
 </div>
 
@@ -79,7 +79,7 @@ Ziehen Sie SF32LB56-MOD in Betracht, wenn das Design eine oder mehrere der folge
 
 ### Grafik und Display { #graphics-and-display }
 
-- 2D/2,5D-Grafik-Engine ePicasso 2.0
+- 2D/2.5D-Grafik-Engine ePicasso 2.0
 - Hardwarebeschleunigte Rotation, Skalierung, Spiegelung und Alpha-Blending
 - Grafik-Workloads bis 1024 × 1024
 - Verlustfreie Grafikdekompression mit eZip 2.0 und Unterstützung für eZip-A-Animationen
@@ -104,9 +104,9 @@ Jede PDM-Schnittstelle kann bis zu zwei digitale Mikrofone anbinden; beide Schni
 
 | Modulcode | Flash je SKU | PSRAM | Standard-Flash | Temperatur | Abmessungen |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB56-MOD-N16R12N1 | 16 MB QSPI-NOR | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40 bis 85 °C | 18,0 × 32,9 × 3,1 mm |
-| SF32LB56-MOD-A128R12N1 | 128 MB QSPI-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40 bis 85 °C | 18,0 × 32,9 × 3,1 mm |
-| SF32LB56-MOD-D128R12N1 | 128 MB SD-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40 bis 85 °C | 18,0 × 32,9 × 3,1 mm |
+| SF32LB56-MOD-N16R12N1 | 16 MB QSPI-NOR | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40 °C bis +85 °C | 18,0 × 32,9 × 3,1 mm |
+| SF32LB56-MOD-A128R12N1 | 128 MB QSPI-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40 °C bis +85 °C | 18,0 × 32,9 × 3,1 mm |
+| SF32LB56-MOD-D128R12N1 | 128 MB SD-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40 °C bis +85 °C | 18,0 × 32,9 × 3,1 mm |
 
 </div>
 
@@ -122,7 +122,7 @@ SiFli führt SF32LB566VCB36 mit 4 MB + 8 MB OPI-PSRAM und 1 MB QSPI-NOR als Stan
 - VDD_3V3, VDD_1V8 und VDDIO müssen gleichzeitig eingeschaltet werden
 - Der Schnittstellenpegel von PA00–PA11 ist fest auf 3,3 V eingestellt und folgt nicht VDDIO
 - 89-polige Modulschnittstelle
-- Betriebstemperatur: -40 bis 85 °C
+- Betriebstemperatur: −40 °C bis +85 °C
 
 ## Verwandte Produkte { #related-products }
 
@@ -130,7 +130,7 @@ SiFli führt SF32LB566VCB36 mit 4 MB + 8 MB OPI-PSRAM und 1 MB QSPI-NOR als Stan
 
 Basiert auf [SF32LB56x](../chips/SF32LB56x.md), insbesondere auf der Plattformfamilie SF32LB56xV. Weitere Informationen zu Architektur, Display, Audio und Gehäuse der zugrunde liegenden Chipfamilie finden Sie auf der Chipseite.
 
-### Entwicklungskits { #development-kits }
+### Entwicklungsboards { #development-kits }
 
 Das [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) eignet sich zur Validierung von Display, Audio, Speicher und Peripherietreibern. Die Dokumentation führt die Konfigurationen N16R12N1 und A128R12N1 auf. Prüfen Sie Modulkennzeichnung und Board-Revision, bevor Sie die Speicherausstattung als Designgrundlage verwenden.
 

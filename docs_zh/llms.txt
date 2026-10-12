@@ -136,7 +136,7 @@
 - [LVGL SDK 示例](https://uForge.io/zh/learn/graphics/lvgl-sdk-examples/): 按 UI 启动调试、控件、设计工具、压缩资源、动画、媒体和可穿戴界面等任务选择合适的 SiFli-SDK LVGL 示例。
 - [蓝牙概览](https://uForge.io/zh/learn/bluetooth/overview/): SF32 蓝牙概览：BLE 与双模选择、GATT 服务设计、连接参数调优、配对与安全、LE Audio 及共存问题。
 - [蓝牙处理器](https://uForge.io/zh/learn/bluetooth/processor/): 介绍 SF32 蓝牙处理器如何将射频时序与链路控制任务从应用处理器卸载到专用子系统，以支持低功耗常连接产品。
-- [蓝牙 PAN](https://uForge.io/zh/learn/bluetooth/pan/): SF32 蓝牙 PAN：BNEP 传输、NAP/GN/PANU 角色、手机共享网络的权衡、SiFli-SDK 配置与 OTA 验证。
+- [蓝牙 PAN](https://uForge.io/zh/learn/bluetooth/pan/): SF32 蓝牙 PAN：BNEP 传输、NAP/GN/PANU 角色、手机网络共享的权衡、SiFli-SDK 配置与 OTA 验证。
 - [蓝牙 SDK 示例](https://uForge.io/zh/learn/bluetooth/bluetooth-sdk-examples/): 按 BLE 服务、经典蓝牙应用规范、手机互操作、OTA、数据传输或 LE Audio 广播选择合适的 SiFli-SDK 蓝牙示例。
 - [蓝牙功耗测量与分析](https://uForge.io/zh/learn/bluetooth/bluetooth-low-power-profiling/): 面向 SF32 设备，实测 BLE、经典蓝牙和双模蓝牙的功耗，将测量波形与固件行为对应起来，并据此建立符合日常使用情况的能耗预算。
 - [AT 指令集](https://uForge.io/zh/learn/bluetooth/at-command-reference/): SF32LB57 双模蓝牙 AT 指令模组（SIFLI_AT）完整 AT 指令参考：指令格式、系统与设备、地址与标识、工作模式与可见性、配对与安全、串口与事件、连接管理、数据收发、自定义 GATT 各类命令，以及主动事件（URC）与 PDU 格式命令。
@@ -147,7 +147,7 @@
 - [音频 SDK 示例](https://uForge.io/zh/learn/audio/audio-sdk-examples/): 按 PDM 数字麦克风采集、录音、播放、编解码、存储和混音等任务选择合适的 SiFli-SDK 音频示例。
 - [低功耗概览](https://uForge.io/zh/learn/low-power/overview/): SF32 低功耗设计概览：电源模式、PM 中间件、真正消耗电池的因素，以及蓝牙（Bluetooth）、图形、音频与 AI 对功耗的影响。
 - [功耗测量与验证](https://uForge.io/zh/learn/low-power/measurement-and-validation/): 从器件到整机的 SF32 功耗测量与验证流程，覆盖电流、电压、能耗和续航模型准确性。
-- [低功耗 SDK 示例](https://uForge.io/zh/learn/low-power/low-power-sdk-examples/): 按休眠、唤醒源、GPIO、CPU、蓝牙（Bluetooth）、显示、UI 和可穿戴场景选择合适的 SiFli-SDK 电源管理示例。
+- [低功耗 SDK 示例](https://uForge.io/zh/learn/low-power/low-power-sdk-examples/): 按睡眠、唤醒源、GPIO、CPU、蓝牙（Bluetooth）、显示、UI 和可穿戴场景选择合适的 SiFli-SDK 电源管理示例。
 - [电池电量估算](https://uForge.io/zh/learn/low-power/battery-capacity-calculation/): 使用 SiFli-SDK 电池计算器，根据电池电压、充放电曲线、充电状态检测和多级滤波估算 SF32 产品的电池电量百分比。
 - [智能手表功耗建模与分析](https://uForge.io/zh/learn/low-power/smartwatch-power-profiling/): 从每日使用场景建立智能手表续航模型，再根据结果确定低功耗优化优先级。
 
@@ -169,7 +169,7 @@
 - [教程概览](https://uForge.io/zh/getting-started/tutorials/overview/): 按工程成果组织的实用 SF32 教程路线图：基础外设、子系统集成和产品验证。
 - [外设入门](https://uForge.io/zh/getting-started/tutorials/beginner/): hello_world 之后的 SF32 外设实操教程：GPIO、FinSH、ADC、PWM、RTC，以及一个基于开发板的小项目。
 - [子系统集成](https://uForge.io/zh/getting-started/tutorials/intermediate/): SF32 子系统集成教程：I2C 传感器、基础 LVGL 界面、BLE 外设服务、本地音频播放、文件系统存储，以及多子系统联合测试。
-- [产品验证](https://uForge.io/zh/getting-started/tutorials/advanced/): SF32 产品验证教程：实测低功耗调优、可恢复的 BLE OTA、自定义显示屏适配、崩溃与 core dump 分析、多连接蓝牙（Bluetooth）和自定义驱动。
+- [产品验证](https://uForge.io/zh/getting-started/tutorials/advanced/): SF32 产品验证教程：实测低功耗调优、可恢复的 BLE OTA、自定义显示屏适配、崩溃与 core dump 分析、多连接蓝牙（Bluetooth）（Bluetooth）和自定义驱动。
 
 ## 参考
 
@@ -190,5 +190,5 @@
 
 - 所有硬件设计指南均使用带编号的章节、表格和图（如“表 5.1-1”“图 5.2-3”），编号按 H3 小节划分；引用具体数值时请把这些编号视为稳定锚点。
 - 每个芯片/模块系列结构一致：简介页（器件概览、型号、封装、应用）和硬件设计指南（原理图指导、PCB 布局、制造检查清单）；部分芯片还有独立的硬件设计检查清单页。
-- 站点以八种语言发布：英文（参考版本，位于站点根路径）以及机器辅助翻译的中文（/zh/）、日文（/ja/）、西班牙文（/es/）、德文（/de/）、法文（/fr/）、葡萄牙文（/pt/）和俄文（/ru/）。每个译文页面在语言前缀下与英文页面路径相同。
+- 站点以九种语言发布：英文（参考版本，位于站点根路径）以及机器辅助翻译的中文（/zh/）、日文（/ja/）、西班牙文（/es/）、德文（/de/）、法文（/fr/）、葡萄牙文（/pt/）、俄文（/ru/）和韩文（/ko/）。每个译文页面在语言前缀下与英文页面路径相同。
 - 关于权威的电气规格、引脚映射和元器件认证，指南会链接到 SiFli 的数据手册、用户手册和 SiFli 认可供应商列表（AVL）。

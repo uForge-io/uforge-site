@@ -39,8 +39,8 @@ Incluya pantallas opacas y otras con mezcla alfa. Esta mezcla suele ocurrir ante
 | Escenario | Alfa de origen/capa | Formato y estado alfa del framebuffer final | Asignación/tráfico sin comprimir | Asignación/tráfico con TurboPixel | Respecto al framebuffer sin comprimir | Configuración de prueba/resultado visual |
 |:---|:---|:---|---:|---:|---:|:---|
 | UI opaca | Ninguna | Por determinar; framebuffer opaco | Por determinar | Por determinar | Por determinar | Resolución: por determinar; política de refresco: por determinar; factor/configuración de TurboPixel: por determinar |
-| UI con mezcla alfa, compuesta antes de la salida | Alfa por píxel y/o global en las capas de origen | Por determinar, normalmente opaco después de la composición | Por determinar | Por determinar | Por determinar | Registrar el contenido mezclado; verificar artefactos en bordes, sombras, degradados y texto |
-| Ruta de salida que preserva alfa, si está soportada | Alfa retenido hasta el búfer final | Por determinar | Por determinar | Por determinar | Por determinar | Confirmar el chip, SDK, formato y ruta de pantalla exactos antes de probar |
+| UI con mezcla alfa, compuesta antes de la salida | Alfa por píxel y/o global en las capas de origen | Por determinar, normalmente opaco después de la composición | Por determinar | Por determinar | Por determinar | Registrar el contenido mezclado: por determinar; verificar artefactos en bordes, sombras, degradados y texto |
+| Ruta de salida que preserva alfa, si está admitida | Alfa retenido hasta el búfer final | Por determinar | Por determinar | Por determinar | Por determinar | Confirmar el chip, SDK, formato y ruta de pantalla exactos antes de probar |
 
 </div>
 
@@ -58,7 +58,7 @@ Calcule el máximo de memoria ocupada simultáneamente, no solo ese mapa de bits
 
 El controlador de pantalla lee menos bytes de un framebuffer comprimido antes de descomprimirlo. Esto reduce las lecturas para visualización y la contención con la CPU, ePicasso, DMA, audio y actividad inalámbrica.
 
-No representa el ahorro de tráfico total. El renderizado sigue escribiendo píxeles, y la compresión lee su entrada y escribe su salida. Mida esas transferencias y su coincidencia con las lecturas de pantalla. En pantallas que se redibujan con frecuencia, la sobrecarga puede compensar el ahorro; el equilibrio cambia si se muestra repetidamente el mismo fotograma. Mida también la energía del sistema.
+Ese no es el ahorro total de tráfico de memoria. El renderizado sigue escribiendo píxeles, y la compresión lee su entrada y escribe su salida. Mida esas transferencias y su solapamiento con las lecturas de pantalla. En pantallas que se redibujan con frecuencia, la sobrecarga puede compensar el ahorro; el equilibrio cambia si se muestra repetidamente el mismo fotograma. Mida también la energía del sistema.
 
 ### Hacer predecible el presupuesto { #make-budgeting-predictable }
 
@@ -78,7 +78,7 @@ TurboPixel debe validarse como parte del diseño de pantalla completo:
 
 La guía extDMA citada enumera diez niveles nominales, mientras que la implementación de cálculo de tamaño del SDK citado admite los niveles 1, 2 y 3. No presuponga que su compilación acepta todos los niveles documentados. Valide el nivel elegido y el cálculo correspondiente de tamaño por fila; un valor no admitido puede activar otro ajuste en una función auxiliar.
 
-La guía extDMA incluye entradas RGB565, RGB888 y ARGB8888. Admitir una entrada no garantiza una ruta de pantalla comprimida que conserve el canal alfa. La rama LCDC sin el registro dedicado de descompresión de la capa 0 solo acepta RGB565/RGB888 para capas comprimidas; compruebe qué rama usa el chip. En el controlador LCDC citado, `HAL_LCDC_LayerSetCmpr` activa la compresión en la capa 0.
+La guía extDMA incluye entradas RGB565, RGB888 y ARGB8888. Admitir una entrada no garantiza una ruta de pantalla comprimida que conserve el canal alfa. La rama LCDC sin el registro dedicado de descompresión de la capa 0 acepta RGB565/RGB888 para capas comprimidas; compruebe qué rama usa el chip. En el controlador LCDC citado, `HAL_LCDC_LayerSetCmpr` activa la compresión en la capa 0.
 
 El encabezado LCDC actual de OpenSiFli define la macro de soporte para capas comprimidas solo cuando está habilitado `HAL_EXTDMA_MODULE_ENABLED`; la condición de familia excluye SF32LB52x y SF32LB57x. El encabezado establece anchos máximos de 512 píxeles para SF32LB55x/SF32LB56x y 1024 píxeles para SF32LB58x. Son límites de integración de la capa comprimida, no límites universales de resolución del panel. Un comentario del código también indica que la ruta LCPU aún no está habilitada.
 
@@ -98,10 +98,10 @@ TurboPixel está documentado para las siguientes familias SF32:
 
 | Familia SF32 | Estado de TurboPixel | Contexto de integración |
 |:---|:---|:---|
-| **SF32LB52x** | No disponible | Use un framebuffer sin comprimir u otra estrategia de memoria/ancho de banda soportada. |
+| **SF32LB52x** | No disponible | Use un framebuffer sin comprimir u otra estrategia de memoria/ancho de banda admitida. |
 | **SF32LB55x** | Condicional en el código actual; no validado de extremo a extremo | El encabezado LCDC actual define la capacidad de capas comprimidas con extDMA, pero indica que la ruta LCPU no está habilitada; la tabla publicada marca 55x como no compatible. Verifique el núcleo, la configuración del SDK y el hardware objetivo. |
 | **SF32LB56x** | Documentado | extDMA comprime el framebuffer final con pérdidas y un factor fijo; el controlador de pantalla lo descomprime. |
-| **SF32LB57x** | No disponible | Use un framebuffer sin comprimir u otra estrategia de memoria/ancho de banda soportada. |
+| **SF32LB57x** | No disponible | Use un framebuffer sin comprimir u otra estrategia de memoria/ancho de banda admitida. |
 | **SF32LB58x** | Documentado | extDMA comprime el framebuffer final con pérdidas y un factor fijo; el controlador de pantalla lo descomprime. |
 | **Otras familias SF32** | Confirmar por dispositivo | No infiera el soporte de TurboPixel a partir de eZip, ePicasso o la presencia de PSRAM. Verifique la hoja de datos exacta del chip, el manual de referencia, la versión del SDK y el controlador de pantalla. |
 

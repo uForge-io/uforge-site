@@ -35,17 +35,17 @@ CodeKit fournit une interface pour le flux de travail du SDK, sans remplacer le 
 - La racine du SDK.
 - Le nom de la carte.
 - Le répertoire du projet.
-- Les résultats de compilation.
+- Le répertoire de sortie de compilation.
 - Le chemin de flashage/téléchargement.
 - Le moniteur série.
 
 Si une action CodeKit échoue, reproduisez la commande SDK sous-jacente si possible. Cela clarifie les rapports de bug et aide à distinguer les problèmes d'extension des problèmes de SDK.
 
-Utilisez [SiFli-SDK](../platforms/sifli-sdk/overview.md) pour choisir la base prise en charge et [Compiler, flasher et surveiller la sortie série](../platforms/sifli-sdk/build-flash-monitor.md) pour documenter les opérations équivalentes en ligne de commande. Partez d'un [exemple SDK](../examples/index.md) correspondant avant d'adapter un projet CodeKit.
+Utilisez [SiFli-SDK](../platforms/sifli-sdk/overview.md) pour choisir la configuration de référence prise en charge et [Compiler, flasher et surveiller la sortie série](../platforms/sifli-sdk/build-flash-monitor.md) pour documenter les opérations équivalentes en ligne de commande. Partez d'un [exemple SDK](../examples/index.md) correspondant avant d'adapter un projet CodeKit.
 
 ## Modèle opérationnel { #operational-model }
 
-CodeKit est le plus utile lorsque ses actions dans l'éditeur restent reproductibles à partir du SDK sous-jacent. Considérez l'extension comme l'interface de contrôle et SiFli-SDK comme la référence faisant autorité pour la chaîne d'outils, la définition de carte, les résultats de compilation et les artefacts de téléchargement.
+CodeKit est le plus utile lorsque ses actions dans l'éditeur restent reproductibles à partir du SDK sous-jacent. Considérez l'extension comme l'interface de contrôle et SiFli-SDK comme la référence faisant autorité pour la chaîne d'outils, la définition de carte, le répertoire de sortie de compilation et les artefacts de téléchargement.
 
 La page [Bien démarrer avec CodeKit](../../getting-started/sifli/getting-started-sifli-codekit.md) explique l'installation de l'extension et l'exécution de `hello_world`. Une fois cette configuration de référence opérationnelle, utilisez CodeKit pour raccourcir le cycle édition-compilation-flashage-surveillance. Utilisez la ligne de commande du SDK pour automatiser, examiner ou reproduire une action en dehors de VS Code.
 
@@ -57,7 +57,7 @@ Pour chaque projet CodeKit, consignez :
 - Le chemin SiFli-SDK et la branche du SDK.
 - La carte sélectionnée dans CodeKit.
 - Le nom de carte SDK équivalent.
-- Le répertoire des résultats de compilation.
+- Le répertoire de sortie de compilation.
 - Le comportement de flashage/téléchargement.
 - Le débit en bauds du moniteur série.
 
@@ -65,7 +65,7 @@ Cela permet de reproduire une action de l'interface graphique depuis la ligne de
 
 ## Diagnostic des problèmes { #failure-boundaries }
 
-<div align="center"><em>Tableau : Stratégie de dépannage</em></div>
+<div align="center"><em>Tableau : stratégie de dépannage</em></div>
 
 <div align="center" markdown>
 
@@ -73,7 +73,7 @@ Cela permet de reproduire une action de l'interface graphique depuis la ligne de
 |:--------|:---------------|
 | SDK introuvable | Resélectionnez la racine du SDK et confirmez que l'installation du SDK est terminée. |
 | Échec de la compilation | Reproduisez le même projet avec `scons` si possible. |
-| Le flashage échoue alors que la première exécution de référence fonctionne | Comparez la carte et les résultats du projet à ceux de la base de référence fonctionnelle. Vérifiez ensuite si le port est occupé et contrôlez le mode de téléchargement. |
+| Le flashage échoue alors que la configuration de référence fonctionne | Comparez la carte sélectionnée et le répertoire de sortie du projet à ceux de la configuration de référence fonctionnelle, puis vérifiez que le port est libre et le mode de téléchargement. |
 | Le moniteur affiche des caractères illisibles | Confirmez le débit et le port sélectionnés. |
 | Commande d'interface manquante | Utilisez la palette de commandes et recherchez `SiFli`. |
 

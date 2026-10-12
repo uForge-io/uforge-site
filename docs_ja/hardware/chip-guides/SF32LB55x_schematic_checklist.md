@@ -9,7 +9,7 @@ tags:
     - チェックリスト
 ---
 
-# SF32LB55x ハードウェア設計ガイド — 回路図チェックリスト { #sf32lb55x-hardware-design-guide-schematic-checklist }
+# SF32LB55xハードウェア設計ガイド — 回路図チェックリスト { #sf32lb55x-hardware-design-guide-schematic-checklist }
 
 ## 5.8. 回路図チェックリスト { #58-schematic-checklist }
 
@@ -64,7 +64,7 @@ tags:
 
 </div>
 
-出典上の曖昧さ：元の V1.0 ワークブックでは項目19と20が同一で、どちらもSS6600A8のVDDIOAを3.3 Vとしています。[ハードウェアアプリケーションガイド](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB55x-HW-Application.md)では、VDDIOAはPA I/O電源、VDDIOBはPB I/O電源とされていますが、項目20が本来VDDIOBを指していたかは確認できません。チェックリストにはワークブックの記載をそのまま残しています。項目20を設計承認に使う前に、対象の電源レールをSiFliに確認してください。
+出典上の曖昧さ：元のV1.0ワークブックでは項目19と20が同一で、どちらもSS6600A8のVDDIOAを3.3 Vとしています。[ハードウェアアプリケーションガイド](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB55x-HW-Application.md)では、VDDIOAはPA I/O電源、VDDIOBはPB I/O電源とされていますが、項目20が本来VDDIOBを指していたかは確認できません。チェックリストにはワークブックの記載をそのまま残しています。項目20を設計承認に使う前に、対象の電源レールをSiFliに確認してください。
 
 ### 5.8.3. 電源コンデンサとインダクタ { #583-power-supply-capacitors-and-inductors }
 
@@ -228,7 +228,7 @@ tags:
 | 13 | OPI PSRAMの信号接続が正しい | 555/557のみ | 任意 |
 | 14 | QSPI2の信号接続が正しい | 全バリアント | 任意 |
 | 15 | QSPI3の信号接続が正しい | 全バリアント | 任意 |
-| 16 | <span class="flag-yellow">SF32LB555または<span class="flag-red">SF32LB557を使用する場合、心拍センサーのアルゴリズムが必要とするメモリ容量を確認する。LCPUの空き容量が不足する場合は、QSPI4に1 MBの外付けFlashを追加する</span></span> | 555/557のみ | 必須 |
+| 16 | <span class="flag-yellow">SF32LB555または<span class="flag-red">SF32LB557を使用する場合、心拍センサーのアルゴリズムが必要とするメモリー容量を確認する。LCPUの空き容量が不足する場合は、QSPI4に1 MBの外付けFlashを追加する</span></span> | 555/557のみ | 必須 |
 | 17 | 周辺デバイスのI/Oロジックレベルがメインチップと一致している | 全バリアント | 必須 |
 | 18 | <span class="flag-red">NOR Flashは主要部品選定ガイドで適合性が確認されている</span> | 全バリアント | 必須 |
 | 19 | <span class="flag-red">NAND Flashは主要部品選定ガイドで適合性が確認されている</span> | 全バリアント | 必須 |

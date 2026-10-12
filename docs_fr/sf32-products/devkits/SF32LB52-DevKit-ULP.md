@@ -10,15 +10,15 @@ tags:
 
 ## Présentation { #overview }
 
-Le SF32LB52-DevKit-ULP est aussi connu sous les noms **立创黄山派**, **LCKFB-HSPI-SF32LB52-ULP** et **SF32LB52-ULP**. C'est une carte de développement compacte, à très basse consommation, pour objets portables, basée sur la famille SF32LB52x. Elle se positionne comme plateforme de prototypage pour montres connectées et bracelets d'activité, et non comme une simple carte d'éclatement de MCU.
+Le SF32LB52-DevKit-ULP est aussi connu sous les noms **立创黄山派**, **LCKFB-HSPI-SF32LB52-ULP** et **SF32LB52-ULP**. C'est une carte de développement compacte, à très basse consommation, pour objets portables, basée sur la famille SF32LB52x. Elle se positionne comme plateforme de prototypage pour montres connectées et bracelets d'activité, et non comme une simple carte de prototypage donnant accès aux broches du MCU.
 
-Par rapport aux cartes LCD, Nano et Core-3p3, cette carte est plus proche d'un produit : elle réunit un module SF32LB52, un écran AMOLED, le tactile, un microphone, un amplificateur de haut-parleur, une LED RVB, un pilote de moteur vibrant, un capteur de mouvement, un capteur magnétique, un capteur de lumière ambiante, la charge de batterie et des cavaliers de mesure de puissance. Elle est donc particulièrement utile lorsque la question produit n'est pas seulement « le MCU fonctionne-t-il ? » mais « comment l'ensemble du système portable se comporte-t-il sur batterie ? »
+Par rapport aux cartes LCD, Nano et Core-3p3, cette carte est plus proche d'un produit : elle réunit un module SF32LB52, un écran AMOLED, le tactile, un microphone, un amplificateur de haut-parleur, une LED RVB, un pilote de moteur vibrant, un capteur de mouvement, un capteur magnétique, un capteur de lumière ambiante, la charge de batterie et des cavaliers de mesure du courant. Elle est donc particulièrement utile lorsque la question produit n'est pas seulement « le MCU fonctionne-t-il ? » mais « comment l'ensemble du système portable se comporte-t-il sur batterie ? »
 
 Le [guide de la carte ULP][Article d'origine du wiki SiFli] de SiFli reste pour l'instant un simple espace réservé. Pour la configuration détaillée de la carte, utilisez le [guide de la carte de développement Huangshan Pi][Guide d'origine Huangshan Pi de SiFli] de SiFli, en chinois, qui documente la carte V1.0.0 ; les valeurs de composants citées ci-dessous s'appuient sur cette révision. Le [wiki matériel LCKFB] distinct ne précise pas sa révision de carte et cite plusieurs références de composants différentes. Considérez-les comme un écart possible entre révisions ou entre sources, et non comme des composants interchangeables, et vérifiez le marquage réel de la carte, le schéma et la nomenclature avant tout travail de conception.
 
 **Note sur l'état de publication :** le guide SiFli V1.0.0 indique que la carte documentée était alors destinée à des tests internes et devait être révisée avant sa diffusion externe. Cette remarque ne vaut que pour cette révision de la source ; elle ne dit rien de l'état ni de la nomenclature des cartes ultérieures. Vérifiez la révision exacte de la carte et sa nomenclature.
 
-La [page de la carte dans le SDK SiFli][Page de la carte ULP dans le SDK SiFli] liste cette carte sous la cible `sf32lb52-lchspi-ulp`. La page du SDK et la section « contenu du kit » du guide Huangshan Pi en chinois emploient `SF32LB52X-MOD-1-N16R8`, tandis que le [guide des modèles de modules][Guide des modèles de modules de SiFli] de SiFli et le libellé du tableau GPIO emploient `SF32LB52-MOD-1-N16R8`. Les sources n'expliquent pas cette différence de « X ». La cible du SDK est sans ambiguïté ; vérifiez le marquage et la nomenclature du module réellement monté plutôt que de supposer que les deux graphies de la référence désignent des matériels différents.
+La [page de la carte dans le SDK SiFli][Page de la carte ULP dans le SDK SiFli] liste cette carte sous la cible `sf32lb52-lchspi-ulp`. La page du SDK et la section « contenu du kit » du guide Huangshan Pi en chinois emploient `SF32LB52X-MOD-1-N16R8`, tandis que le [guide des modèles de modules][Guide des modèles de modules de SiFli] de SiFli et le libellé du tableau GPIO emploient `SF32LB52-MOD-1-N16R8`. Les sources n'expliquent pas cette différence d'écriture de `X`. La cible du SDK est sans ambiguïté ; vérifiez le marquage et la nomenclature du module réellement monté plutôt que de supposer que les deux graphies de la référence désignent des matériels différents.
 
 ![Référence de montage de la carte portable SF32LB52-ULP](assets/sf32lb52x/52-ULP-1p85-install.png){ loading="lazy" }
 <div align="center"><em>SF32LB52-ULP — référence de montage de la carte portable</em></div>
@@ -47,7 +47,7 @@ Employez ces noms comme synonymes d'une même famille de cartes lorsque vous che
 
 - Module SF32LB52-MOD-1-N16R8 basé sur le SF32LB52x
 - Configuration de module standard avec SF32LB525UC6
-- PSRAM OPI de 8 Mo, interface à 144 MHz
+- PSRAM OPI de 8 MB, interface à 144 MHz
 - Flash NOR QSPI de 128 Mb, 72 MHz en mode STR
 - Quartz principal de 48 MHz et quartz RTC de 32,768 kHz
 - Antenne imprimée sur la carte
@@ -66,7 +66,7 @@ Employez ces noms comme synonymes d'une même famille de cartes lorsque vous che
 - Capteur magnétique 3 axes MMC5603NJ
 - Capteur de lumière ambiante LTR-303ALS-01
 - Chargeur de batterie et circuits de gestion d'énergie pour tester l'alimentation d'un objet portable
-- Connecteur d'extension 2x15 broches au pas de 1,27 mm avec GPIO et prise en charge de la mesure de puissance
+- Connecteur d'extension 2x15 broches au pas de 1,27 mm avec GPIO et prise en charge de la mesure du courant
 
 ## Quand utiliser cette carte { #when-to-use-this-board }
 
@@ -79,7 +79,7 @@ Choisissez le SF32LB52-DevKit-ULP / 立创黄山派 lorsque l'objectif est de va
 - Valider des scénarios de réveil déclenchés par des touches, des capteurs, le tactile ou des minuteries du firmware
 - Comparer le comportement énergétique proche du produit aux premières estimations de cartes de développement plus simples
 
-Pour une carte d'évaluation généraliste centrée sur l'écran, utilisez le [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md). Pour des prototypes compacts à base de module à souder, utilisez le [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md). Pour un accès direct maximal aux broches lors de la mise en route initiale sur banc, utilisez le [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md).
+Pour une carte d'évaluation généraliste centrée sur l'écran, utilisez le [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md). Pour des prototypes compacts à base de module à souder, utilisez le [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md). Pour un accès direct maximal aux broches lors de la mise en service initiale sur banc, utilisez le [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md).
 
 ## Configuration matérielle { #hardware-configuration }
 
@@ -91,7 +91,7 @@ Pour une carte d'évaluation généraliste centrée sur l'écran, utilisez le [S
 | :--- | :--- |
 | Module principal | SF32LB52-MOD-1-N16R8 |
 | MCU | SF32LB525UC6 |
-| PSRAM | PSRAM OPI de 8 Mo, interface à 144 MHz |
+| PSRAM | PSRAM OPI de 8 MB, interface à 144 MHz |
 | Flash | Flash NOR QSPI de 128 Mb, 72 MHz en mode STR |
 | Écran | AMOLED de 1,85 pouce (ZC-A1D85W-010), 390 x 450, 800 cd/m², Quad-SPI |
 | Pilote d'écran | CO5300AF-01 |
@@ -130,17 +130,17 @@ La carte prend en charge deux modes d'alimentation principaux :
 - Alimentation par USB Type-C
 - Fonctionnement autonome sur batterie
 
-L'entrée batterie est prévue pour une seule cellule Li-ion avec un connecteur GH1.25mm dans l'ordre de broches direct. La configuration de charge documentée prend en charge un courant de charge maximal de 500 mA, avec 450 mA comme réglage par défaut du courant constant.
+L'entrée batterie est prévue pour une seule cellule Li-ion avec un connecteur GH1.25mm à brochage direct. La configuration de charge documentée prend en charge un courant de charge maximal de 500 mA, avec 450 mA comme réglage par défaut du courant constant.
 
-Si la carte fonctionne sans batterie et que VBAT est alimenté par une alimentation de laboratoire, la plage d'entrée documentée de VBAT est de 3,7 V à 4,7 V, avec 3,8 V recommandés pour les essais d'alimentation en tension normale. Les seuils du SF32LB52-MOD-1-N16R8 sont documentés à 3,58 V pour la mise sous tension et 3,48 V pour la mise hors tension.
+Si la carte fonctionne sans batterie et que VBAT est alimenté par une alimentation de laboratoire, la plage d'entrée documentée de VBAT est de 3,7 V à 4,7 V, avec 3,8 V recommandés pour les essais à la tension nominale. Les seuils du SF32LB52-MOD-1-N16R8 sont documentés à 3,58 V pour la mise sous tension et 3,48 V pour la mise hors tension.
 
 Le guide matériel de LCKFB avertit que la fonction d'appui long sur la touche peut ne pas fonctionner lorsqu'aucune batterie n'est connectée. Vérifiez ce comportement sur la révision exacte de la carte et avec l'alimentation prévue.
 
-## Cavaliers de mesure de puissance { #power-measurement-jumpers }
+## Cavaliers de mesure du courant { #power-measurement-jumpers }
 
 La carte expose des cavaliers pour mesurer le courant sur les principaux chemins d'alimentation.
 
-<div align="center"><em>Correspondance des cavaliers de mesure de puissance</em></div>
+<div align="center"><em>Correspondance des cavaliers de mesure du courant</em></div>
 
 <div align="center" markdown>
 
@@ -156,9 +156,9 @@ En fonctionnement normal, les broches 5-6, 7-8 et 11-12 doivent être pontées p
 
 ## Téléchargement et débogage { #download-and-debug }
 
-Utilisez l'interface UART via USB Type-C pour le téléchargement du firmware, les journaux série et l'alimentation de la carte en développement courant.
+Utilisez l'interface UART via USB Type-C pour télécharger le firmware, consulter les journaux série et alimenter la carte pendant le développement normal.
 
-Matériel nécessaire pour la première mise en route :
+Matériel nécessaire pour la première mise en service :
 
 - Carte SF32LB52-DevKit-ULP / 立创黄山派
 - Câble de données USB 2.0

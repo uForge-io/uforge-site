@@ -8,7 +8,7 @@ tags:
 
 # 示例 { #examples }
 
-先从示例入手。通常，在目标开发板上改造一个已经跑通的示例，比从零搭建所有子系统更快，也更容易建立可验证的 SF32 固件基线。
+先从示例入手。SF32 固件通常在改造一个已经跑通、针对特定开发板的示例时进展更快，而不是从零搭建每个子系统。
 
 合适的示例不一定是最小的示例。应优先选择已经包含产品中最难部分的示例，例如蓝牙（Bluetooth）应用规范（Profile）、显示面板、音频链路、文件系统、OTA、USB、电源模式或 AI 加速器。
 
@@ -46,7 +46,7 @@ tags:
 | 命令行和系统检查 | `example/system/finsh` | 串口控制台、日志和基本运行时检查。 | [入门教程](../../getting-started/tutorials/beginner.md) |
 | ADC、PWM 或 RTC | `example/hal/adc`、`example/rt_device/pwm`、`example/rt_device/rtc` | 与具体开发板相关的引脚、时钟和外设配置。 | [入门教程](../../getting-started/tutorials/beginner.md) |
 | I2C 传感器 | `example/hal/i2c/master`、`example/rt_device/i2c/eeprom` | 电气连接、总线地址和可靠的重复传输。 | [中级教程](../../getting-started/tutorials/intermediate.md) |
-| LVGL 与产品显示屏 | `example/multimedia/lvgl/lvgl_v8_examples` | 在构建复杂页面前，先验证面板初始化、像素格式和稳定的屏幕刷新（flush）路径。 | [图形概览](../../learn/graphics/overview.md)、[显示控制器](../../learn/graphics/display-controller.md) |
+| LVGL 与本地显示屏 | `example/multimedia/lvgl/lvgl_v8_examples` | 在构建复杂页面前，先验证面板初始化、像素格式和稳定的屏幕刷新（flush）路径。 | [图形概览](../../learn/graphics/overview.md)、[显示控制器](../../learn/graphics/display-controller.md) |
 | BLE 外设服务 | `example/ble/peripheral`、`example/ble/hrpc` | 广播、连接、一个 GATT 特征以及重连行为。 | [蓝牙概览](../../learn/bluetooth/overview.md) |
 | 本地音频播放 | `example/multimedia/audio/local_music`、`mp3_sd_player` | 编解码器与开发板的音频链路、缓冲稳定性和播放结束后的资源释放。 | [音频概览](../../learn/audio/overview.md) |
 | Flash 存储 | `example/storage/littlefs/nor`、`example/storage/flashdb` | 挂载、读写行为，以及复位或存储满后的恢复。 | [中级教程](../../getting-started/tutorials/intermediate.md) |
@@ -58,13 +58,13 @@ tags:
 
 ## 如何选择示例 { #how-to-choose-an-example }
 
-选择示例时，依次确认：
+按以下顺序选择：
 
-1. 目标开发板。
-2. 使用的框架。
-3. 产品中实现难度最高的外设。
-4. 所需的中间件。
-5. 功耗和内存约束。
+1. 匹配开发板。
+2. 匹配框架。
+3. 匹配最难的外设。
+4. 匹配中间件。
+5. 匹配功耗或内存约束。
 
 例如，蓝牙音频产品应从更接近目标的音频/蓝牙示例开始，而不是从最简的 `hello_world` 开始，即使后者更容易理解。
 
@@ -76,7 +76,7 @@ tags:
 4. 重新构建并测试。
 5. 提交或记录该改动，再加入下一个子系统。
 
-前一小时里，这套流程可能会显得慢一些；但遇到第一个棘手故障时，有记录可供对照，后续排查就会快得多。
+这套流程在第一个小时会慢一些，但在遇到第一个棘手故障之后会快得多。
 
 ## 应保留的验证证据 { #evidence-to-keep }
 

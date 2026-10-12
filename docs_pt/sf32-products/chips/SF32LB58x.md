@@ -41,25 +41,25 @@ Escolha SF32LB58x quando o projeto exigir uma ou mais destas capacidades:
 
 ## Recursos de desenvolvimento { #development-resources }
 
-[Resumo do produto]: https://downloads.sifli.com/docs/Product%20Brief/SF32LB58x/PB5801-SF32LB58x-Product%20Brief%20V0p72.pdf
-[Ficha técnica]: https://downloads.sifli.com/docs/Datasheet/sf32lb58/DS5801-SF32LB58x-Datasheet%20V1p8p6.pdf
-[Manual do usuário]: https://downloads.sifli.com/docs/user%20manual/SF32LB58x/UM5801-SF32LB58x-User%20mannual%20V0p4p6.pdf
-[Guia de projeto original (wiki.sifli.com)]: https://wiki.sifli.com/en/hardware/SF32LB58x-HW-Application.html
-[Nota de aplicação de hardware (fonte GitHub)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md
-[Guia de projeto de hardware (μForge)]: ../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md
-[Comprar amostras]: https://sifli.taobao.com/
-[Comprar kits de desenvolvimento]: https://sifli.taobao.com/
+[Product Brief]: https://downloads.sifli.com/docs/Product%20Brief/SF32LB58x/PB5801-SF32LB58x-Product%20Brief%20V0p72.pdf
+[Datasheet]: https://downloads.sifli.com/docs/Datasheet/sf32lb58/DS5801-SF32LB58x-Datasheet%20V1p8p6.pdf
+[User Manual]: https://downloads.sifli.com/docs/user%20manual/SF32LB58x/UM5801-SF32LB58x-User%20mannual%20V0p4p6.pdf
+[Original Design Guide (wiki.sifli.com)]: https://wiki.sifli.com/en/hardware/SF32LB58x-HW-Application.html
+[Hardware Application Note (GitHub source)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md
+[Hardware Design Guide (μForge)]: ../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md
+[Buy Samples]: https://sifli.taobao.com/
+[Buy Dev Kits]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Resumo do produto]__
-- :fontawesome-solid-file-pdf: __[Ficha técnica]__
-- :fontawesome-solid-file-pdf: __[Manual do usuário]__
-- :fontawesome-solid-file-lines: __[Guia de projeto original (wiki.sifli.com)]__
-- :fontawesome-brands-github: __[Nota de aplicação de hardware (fonte GitHub)]__
-- :fontawesome-solid-file-lines: __[Guia de projeto de hardware (μForge)]__
-- :fontawesome-solid-cart-shopping: __[Comprar amostras]__
-- :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento]__
+- :fontawesome-solid-file-pdf: __[Resumo do produto][Product Brief]__
+- :fontawesome-solid-file-pdf: __[Datasheet]__
+- :fontawesome-solid-file-pdf: __[Manual do usuário][User Manual]__
+- :fontawesome-solid-file-lines: __[Guia de projeto original (wiki.sifli.com)][Original Design Guide (wiki.sifli.com)]__
+- :fontawesome-brands-github: __[Nota de aplicação de hardware (fonte GitHub)][Hardware Application Note (GitHub source)]__
+- :fontawesome-solid-file-lines: __[Guia de projeto de hardware (μForge)][Hardware Design Guide (μForge)]__
+- :fontawesome-solid-cart-shopping: __[Comprar amostras][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento][Buy Dev Kits]__
 
 </div>
 
@@ -84,7 +84,7 @@ Escolha SF32LB58x quando o projeto exigir uma ou mais destas capacidades:
 - Acelerador matricial de redes neurais para cargas de trabalho TinyML
 - Resoluções de display de até 1280 × 800
 - Suporte a displays MIPI DSI em modo comando e modo vídeo
-- Interfaces de display SPI, DSPI, QSPI (incluindo SPI para telas de papel eletrônico), MCU8080, JDI, RGB/DPI (RGB888 ou RGB565) e MIPI DSI
+- Interfaces de display SPI, DSPI, QSPI (incluindo SPI para displays de papel eletrônico), MCU8080, JDI, RGB/DPI (RGB888 ou RGB565) e MIPI DSI
 - Suporte a dois displays com conteúdos diferentes usando MIPI DSI em conjunto com SPI, DSPI ou QSPI
 - Adequado a cargas de trabalho locais de IA de borda, aprendizado de máquina e fusão de sensores
 
@@ -156,8 +156,8 @@ Siga esta sequência para transformar uma seleção inicial de SF32LB58x em um p
 
 1. **Valide a viabilidade do firmware.** Comece pelo [guia de introdução ao SiFli SDK](../../getting-started/sifli/getting-started-sifli-sdk.md). Em seguida, use o [fluxo de trabalho do SiFli SDK](../../develop/platforms/sifli-sdk/overview.md) e os [exemplos](../../develop/examples/index.md) para validar as configurações de display, gráficos, áudio, armazenamento e Bluetooth.
 2. **Escolha a opção de integração.** Avalie o [SF32LB58-MOD](../modules/SF32LB58-MOD.md) quando for importante reduzir os riscos de RF, BGA e layout de memória, ou use o [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) para validação inicial no nível da placa.
-3. **Projete e revise o hardware.** Antes de liberar o esquemático ou o layout, use o [guia de projeto de hardware](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md), incluindo as listas de verificação do [esquemático](../../hardware/chip-guides/SF32LB58x_schematic_checklist.md) e do [layout da PCB](../../hardware/chip-guides/SF32LB58x_pcb_layout_checklist.md). Valide desde cedo as premissas de HDI BGA256 e roteamento de memória.
-4. **Consulte as fontes oficiais.** Confirme a referência comercial exata e o encapsulamento nas fontes da SiFli: [Ficha técnica], [Manual do usuário], [Guia de projeto original (wiki.sifli.com)] e [Nota de aplicação de hardware (fonte GitHub)].
+3. **Projete e revise o hardware.** Antes de liberar o esquemático ou o layout, use o [guia de projeto de hardware](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md), incluindo os checklists do [esquemático](../../hardware/chip-guides/SF32LB58x_schematic_checklist.md) e do [layout da PCB](../../hardware/chip-guides/SF32LB58x_pcb_layout_checklist.md). Valide desde cedo as premissas de HDI BGA256 e roteamento de memória.
+4. **Consulte as fontes oficiais.** Confirme a referência comercial exata e o encapsulamento nas fontes da SiFli: [Datasheet], [Manual do usuário][User Manual], [Guia de projeto original (wiki.sifli.com)][Original Design Guide (wiki.sifli.com)] e [Nota de aplicação de hardware (fonte GitHub)][Hardware Application Note (GitHub source)].
 
 ## Produtos relacionados { #related-products }
 
@@ -174,4 +174,4 @@ O [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) é o ponto de partida
 Entre os produtos típicos baseados em SF32LB58x estão plataformas de relógios premium, HMIs vestíveis de alta resolução, painéis inteligentes, terminais conectados portáteis e dispositivos que combinam Bluetooth, display, áudio, armazenamento e cargas de IA local.
 
 !!! note "Conteúdo gerado automaticamente"
-    Esta página foi elaborada sem um documento-fonte específico. Verifique as afirmações técnicas na documentação oficial da SiFli antes de confiar nelas.
+    Esta página foi elaborada sem um documento-fonte preexistente. Verifique as afirmações técnicas na documentação oficial da SiFli antes de confiar nelas.

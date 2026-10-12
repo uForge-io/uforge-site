@@ -1,6 +1,6 @@
 ---
 icon: lucide/keyboard
-description: "Ein Engineering-Pfad für die ZMK-Portierung von OpenSiFli auf SF32LB52: die Basis der geteilten Urchin-Tastatur nachbauen, USB, BLE, Einstellungen und Wiederherstellung validieren und dann Tastenbelegung oder Hardware gezielt anpassen."
+description: "Ein technischer Ablauf zur Bewertung der ZMK-Portierung von OpenSiFli auf SF32LB52: die Basis der geteilten Urchin-Tastatur reproduzieren, USB, BLE, Einstellungen und Wiederherstellung validieren und anschließend Tastenbelegung oder Hardware gezielt anpassen."
 tags:
     - Projekte
     - Zephyr
@@ -12,9 +12,9 @@ tags:
 
 ## Was ist ZMK auf SF32? { #what-is-zmk-on-sf32 }
 
-[ZMK Firmware](https://zmk.dev/) ist eine unter MIT-Lizenz stehende Tastatur-Firmware auf Basis von Zephyr. Das Upstream-ZMK liefert das Anwendungsmodell, das viele kabelgebundene, drahtlose und geteilte Tastaturen nutzen: Matrix-Scan, Tastenbelegungen und Ebenen, Tastenverhalten, USB- und Bluetooth-HID, persistente Einstellungen sowie erweiterbare Board- und Shield-Definitionen.
+[ZMK Firmware](https://zmk.dev/) ist eine unter MIT-Lizenz stehende Tastatur-Firmware auf Basis von Zephyr. Das Upstream-Projekt ZMK stellt das Anwendungsmodell bereit, das viele kabelgebundene, drahtlose und geteilte Tastaturen nutzen: Matrixabtastung, Tastenbelegungen und Ebenen, Tastenverhalten, USB- und Bluetooth-HID, persistente Einstellungen sowie erweiterbare Board- und Shield-Definitionen.
 
-[OpenSiFli/zmk](https://github.com/OpenSiFli/zmk) ist der nachgelagerte Fork dieses Projekts von OpenSiFli. Der geprüfte Fork ergänzt:
+[OpenSiFli/zmk](https://github.com/OpenSiFli/zmk) ist ein von OpenSiFli gepflegter Fork des Projekts. Der geprüfte Fork ergänzt:
 
 - eine Board-Variante `sf32lb52_devkit_lcd/sf32lb525uc6/zmk`;
 - die Integration des SF32LB52-SoC im ZMK-Anwendungsbaum;
@@ -23,7 +23,7 @@ tags:
 - eine NVS-Einstellungspartition mit 256 KB und Unterstützung für Bluetooth-Einstellungen;
 - eine Tastenbelegung für die geteilte Urchin-Tastatur mit drei Ebenen, Bluetooth-Profilsteuerung und Bindungen zum Entsperren von ZMK Studio.
 
-Dies ist eine Entwicklungsportierung und kein mit einem Tag versehenes SF32-ZMK-Produkt-Release. Das README des Forks auf oberster Ebene ist weiterhin das generische Upstream-README von ZMK und enthält keinen SF32-spezifischen Schnellstart. Betrachten Sie Board, Shield, Manifest, Quellcode und Commit als ausführbare Referenz und verlangen Sie vor einer Anpassung eigene Nachweise zu sauberem Build, Download, Funktion und Wiederherstellung.
+Dies ist eine Entwicklungsportierung und kein mit einem Tag versehenes SF32-ZMK-Produkt-Release. Das README im Stammverzeichnis des Forks ist weiterhin das allgemeine Upstream-README von ZMK und enthält keinen SF32-spezifischen Schnellstart. Betrachten Sie Board, Shield, Manifest, Quellcode und Commit als ausführbare Referenz und verlangen Sie vor einer Anpassung eigene Nachweise zu sauberem Build, Download, Funktion und Wiederherstellung.
 
 ## Warum die SF32-Implementierung? { #why-the-sf32-implementation }
 
@@ -35,7 +35,7 @@ Damit eignet sich der Fork zur Evaluierung einer drahtlosen geteilten Tastatur, 
 
 **Ergebnis:** versionsgebundene linke und rechte Urchin-Images bauen und herunterladen, die vollständige Tastenmatrix, die Ebenen, USB-HID, die BLE-Pfade für Split und Host, die Persistenz der Einstellungen, die Grenze zu ZMK Studio und die Wiederherstellung validieren und dann eine kontrollierte Änderung an Tastenbelegung oder Hardware mit wiederholbaren Nachweisen durchführen.
 
-Diese Seite behauptet weder volle Funktionsparität mit Upstream-ZMK noch Kompatibilität mit beliebigen ZMK-Shields, serienreife Akkulaufzeit, validierte Funkleistung oder eine unterstützte Migration auf eine andere Zephyr-/ZMK-Revision. Sie definiert auch keine Tastatur-Leiterplatte für die Serie: Die Urchin-Konfiguration des Repositorys ordnet eine Referenz-Tastenmatrix den Pins des SF32LB52-DevKit-LCD zu und muss für eigene Hardware gezielt übersetzt werden.
+Diese Seite behauptet weder volle Funktionsparität mit Upstream-ZMK noch Kompatibilität mit beliebigen ZMK-Shields noch serienreife Akkulaufzeit noch validierte Funkleistung noch eine unterstützte Migration auf eine andere Zephyr-/ZMK-Revision. Sie definiert auch keine Tastatur-Leiterplatte für die Serie: Die Urchin-Konfiguration des Repositorys ordnet eine Referenz-Tastenmatrix den Pins des SF32LB52-DevKit-LCD zu und muss für eigene Hardware gezielt übersetzt werden.
 
 Halten Sie vor dem Start bereit:
 
@@ -47,7 +47,7 @@ Halten Sie vor dem Start bereit:
 - einen Bluetooth-Host, einen Host mit ZMK-Studio-Unterstützung, falls Studio im Umfang liegt, und eine Möglichkeit, den Strom jeder Hälfte zu messen;
 - ein Protokoll für Fork-Commit, Manifest-Revisionen, Board-/Shield-Bezeichner, Build- und Download-Logs, Tastentestergebnisse, Bonds, Einstellungszustand und Strommessungen.
 
-<div align="center"><em>Tabelle: Projektvertrag für ZMK auf SF32</em></div>
+<div align="center"><em>Tabelle: Projektbasis und Nachweise für ZMK auf SF32</em></div>
 
 <div align="center" markdown>
 
@@ -62,7 +62,7 @@ Halten Sie vor dem Start bereit:
 
 </div>
 
-## Hardware- und Softwarespezifikationen { #hardware-and-software-specifications }
+## Hardware- und Software-Spezifikationen { #hardware-and-software-specifications }
 
 ### Hardware-Spezifikation { #hardware-specification }
 
@@ -93,7 +93,7 @@ Halten Sie vor dem Start bereit:
 
 </div>
 
-## Eine unterstützte Basis wählen { #choose-a-supported-baseline }
+## Unterstützte Referenzkonfiguration auswählen { #choose-a-supported-baseline }
 
 Die geprüfte OpenSiFli-Basis ist der Commit `fd4d5843065f` vom 27.05.2026. Er enthält das Urchin-Shield und die zu diesem Commit verfügbare Aktualisierung der Board-Konfiguration, ist aber kein mit Tag versehenes SF32-ZMK-Release. Legen Sie diesen Commit für die erste Reproduktion fest oder erfassen und prüfen Sie ausdrücklich einen neueren Commit.
 
@@ -135,17 +135,17 @@ west build -s app -p always -d build-right \
 
 Erfassen Sie das finale `west list`, die erzeugte Kconfig- und Devicetree-Ausgabe, Artefakt-Hashes, die Zuordnung von Image zu Hälfte und das tatsächliche Download-Verfahren. Beginnen Sie erst mit dem Split-Test, wenn sich jedes Board unabhängig wiederherstellen lässt.
 
-## Lieferplan { #delivery-map }
+## Projektphasen und Entscheidungspunkte { #delivery-map }
 
-<div align="center"><em>Tabelle: Lieferplan für ZMK auf SF32</em></div>
+<div align="center"><em>Tabelle: Projektphasen und Entscheidungspunkte für ZMK auf SF32</em></div>
 
 <div align="center" markdown>
 
-| Stufe | Unterstützte Entscheidung | Erforderliches Ergebnis |
+| Phase | Entscheidungsfrage | Erforderliches Ergebnis |
 |:------|:---------------------|:----------------|
-| 1. Unveränderte Portierungsbasis | Arbeiten der festgelegte Fork, das Board-Target, die Shields, die Verdrahtung und der Host zusammen? | Versionsgebundene linke/rechte Images und eine bewährte Tipp-Sitzung |
+| 1. Unveränderte Portierungsbasis | Funktionieren der festgelegte Fork, das Board-Ziel, die Shields, die Verdrahtung und der Host zusammen? | Versionsgebundene linke/rechte Images und eine reproduzierbare Schreibprobe |
 | 2. Eingabe, Transport und Wiederherstellung | Sind Fehler bei Matrix, USB, BLE, Split, Einstellungen und Studio diagnostizierbar und behebbar? | Tastenabdeckung sowie Protokoll zu Fehlerinjektion und Wiederherstellung |
-| 3. Quellen-Reproduktion | Kann eine zweite Umgebung beide Images ohne verborgenen Zustand neu erzeugen? | Manifest, saubere Builds, Artefakt-Hashes, Downloads und Wiederholungsergebnis |
+| 3. Reproduzierbarer Build | Kann eine zweite Umgebung beide Images ohne verborgenen Zustand neu erzeugen? | Manifest, saubere Builds, Artefakt-Hashes, Downloads und Wiederholungsergebnis |
 | 4. Kontrollierte Anpassung | Lässt sich ein Tastaturverhalten oder eine Hardware-Zuordnung ändern, ohne die Basis zu beschädigen? | Begrenzte Änderung, Rollback-Pfad und Regressionsnachweise |
 | 5. Produktbewertung | Ist die Portierung reif genug für eine eigene Leiterplatte oder einen Akku-Prototyp? | Zugewiesene Risiken und eine Entscheidung: fortfahren/zurückstellen/stoppen |
 
@@ -171,7 +171,7 @@ flowchart LR
 
 Behandeln Sie Fehler als getrennte Domänen: physische Matrix/Verdrahtung, die Split-Verbindung von rechts nach links, USB auf der linken Seite, Host-Bluetooth, gespeicherte Bonds/Einstellungen, ZMK Studio, Board-Download/-Wiederherstellung und der festgelegte Abhängigkeits-Stack. Eine Taste, die den Host nicht erreicht, kann vor dem Scan, beim Split-Transport, in der zentralen Tastenbelegung oder am gewählten HID-Endpunkt ausfallen; diagnostizieren Sie den Pfad in dieser Reihenfolge.
 
-## Stufe 1 — Die unveränderte Portierungsbasis herstellen { #stage-1-establish-the-untouched-port-baseline }
+## Phase 1 — Die unveränderte Portierungsbasis herstellen { #stage-1-establish-the-untouched-port-baseline }
 
 **Ziel:** Die genaue OpenSiFli-Referenz nachweisen, bevor Tastenbelegung, Overlay oder Abhängigkeit geändert werden.
 
@@ -183,9 +183,9 @@ Behandeln Sie Fehler als getrennte Domänen: physische Matrix/Verdrahtung, die S
 
 **Aufzubewahrende Nachweise:** Aufzeichnungen zu Board und Verdrahtung, Revisionen von Fork und Manifest, erzeugte Konfigurationen, Image-Hashes, Download- und Boot-Logs, vollständige Matrix der Tastenpositionen, Ebenenergebnisse, Endpunktauswahl sowie Host-/Studio-Versionen.
 
-**Ausstiegskriterium von Tor 1:** Zwei Kaltstarts reproduzieren die vollständige 38-Positionen-Belegung, alle drei Ebenen, die Split-Verbindung von rechts nach links und mindestens einen gewählten Host-Endpunkt; beide Hälften bleiben unabhängig wiederherstellbar.
+**Abnahmekriterium für Kontrollpunkt 1:** Zwei Kaltstarts reproduzieren die vollständige 38-Positionen-Belegung, alle drei Ebenen, die Split-Verbindung von rechts nach links und mindestens einen gewählten Host-Endpunkt; beide Hälften bleiben unabhängig wiederherstellbar.
 
-## Stufe 2 — Eingabe, Transport, Einstellungen und Wiederherstellung validieren { #stage-2-validate-input-transport-settings-and-recovery }
+## Phase 2 — Eingabe, Transport, Einstellungen und Wiederherstellung validieren { #stage-2-validate-input-transport-settings-and-recovery }
 
 **Ziel:** Nachweisen, dass realistische Tastaturfehler sichtbar und behebbar sind, ohne aus einem unbekannten Zustand neu bauen zu müssen.
 
@@ -205,20 +205,20 @@ Behandeln Sie Fehler als getrennte Domänen: physische Matrix/Verdrahtung, die S
 
 </div>
 
-**Ausstiegskriterium von Tor 2:** Für jeden zutreffenden Fehler liegt ein wiederholbares Ergebnis zu Erkennung und Wiederherstellung vor, kein Test hinterlässt einen hängenden HID-Zustand, und Einstellungen oder Bonds lassen sich ohne Ersetzen unversionierter Dateien auf die erfasste Basis zurücksetzen.
+**Abnahmekriterium für Kontrollpunkt 2:** Für jeden zutreffenden Fehler liegt ein wiederholbares Ergebnis zu Erkennung und Wiederherstellung vor, kein Test hinterlässt einen hängenden HID-Zustand, und Einstellungen oder Bonds lassen sich ohne Ersetzen unversionierter Dateien auf die erfasste Basis zurücksetzen.
 
-## Stufe 3 — Eine reproduzierbare Quellbasis aufbauen { #stage-3-build-a-reproducible-source-baseline }
+## Phase 3 — Eine reproduzierbare Quellbasis aufbauen { #stage-3-build-a-reproducible-source-baseline }
 
-**Ziel:** Einem zweiten Ingenieur ermöglichen, beide Images neu zu erzeugen und Stufe 2 aus sauberen Quellen zu wiederholen.
+**Ziel:** Einem zweiten Ingenieur ermöglichen, beide Images neu zu erzeugen und Phase 2 aus sauberen Quellen zu wiederholen.
 
 1. Beginnen Sie mit einem sauberen Fork-Checkout beim erfassten Commit und führen Sie `west init`, `west update` und `west zephyr-export` ohne lokale Modulersetzung aus.
 2. Speichern Sie `west list`, Compiler-/Werkzeugversionen, die erzeugte `.config`, den erzeugten Devicetree, die Speicherausgabe, Build-Logs und beide Artefakte mit Hashes.
-3. Laden Sie die beschrifteten linken und rechten Images auf die richtigen Hälften herunter und wiederholen Sie den vollständigen Testsatz von Stufe 2.
+3. Laden Sie die beschrifteten linken und rechten Images auf die richtigen Hälften herunter und wiederholen Sie den vollständigen Testsatz aus Phase 2.
 4. Vergleichen Sie Artefakte und Konfiguration mit der ursprünglichen Aufzeichnung; erklären Sie jeden nicht reproduzierbaren Unterschied, bevor Sie fortfahren.
 
-**Ausstiegskriterium von Tor 3:** Eine zweite Umgebung erzeugt korrekt beschriftete Images, die Stufe 2 ohne unversionierte Overlays, veraltete Build-Ausgaben oder schwebende Abhängigkeitsrevisionen bestehen.
+**Abnahmekriterium für Kontrollpunkt 3:** Eine zweite Umgebung erzeugt korrekt beschriftete Images, die Phase 2 ohne unversionierte Overlays, veraltete Build-Ausgaben oder nicht fixierte Abhängigkeitsrevisionen bestehen.
 
-## Stufe 4 — Jeweils eine Tastatur-Grenze anpassen { #stage-4-adapt-one-keyboard-boundary-at-a-time }
+## Phase 4 — Jeweils eine Tastatur-Grenze anpassen { #stage-4-adapt-one-keyboard-boundary-at-a-time }
 
 **Ziel:** Eine Produktänderung vornehmen und dabei die bewährte Portierung und unabhängige Wiederherstellungspfade erhalten.
 
@@ -233,13 +233,13 @@ Behandeln Sie Fehler als getrennte Domänen: physische Matrix/Verdrahtung, die S
 | Studio | Ein bearbeitbarer Parameter oder die Freigabe eines Layouts | Autorisierung, gültige/ungültige Änderungen, Persistenz, Trennen, Wiederherstellen und Versionskompatibilität |
 | Transport | Eine Änderung an einem USB-/BLE-Endpunkt oder an der Split-Richtlinie | Enumeration, Pairing, Bonds, Profilwechsel, Split-Wiederverbindung, Vermeidung hängender Tasten und Strom |
 | Versorgung | Eine Einstellung für Schlafen, Aufwachen, Scan oder Funk | Strom je Hälfte aktiv/Leerlauf/Schlaf, Latenz, jede Weckquelle, Split-Wiederverbindung und Erhalt der Einstellungen |
-| Abhängigkeitsmigration | Eine Aktualisierung von ZMK, Zephyr, HAL oder CherryUSB | Manifest-Diff, saubere Builds, Diff der erzeugten Konfiguration, alle Tests von Stufe 2, Strom und Rollback |
+| Abhängigkeitsmigration | Eine Aktualisierung von ZMK, Zephyr, HAL oder CherryUSB | Manifest-Diff, saubere Builds, Diff der erzeugten Konfiguration, alle Tests aus Phase 2, Strom und Rollback |
 
 </div>
 
-**Ausstiegskriterium von Tor 4:** Die Änderung ist geprüft, ursprüngliche Images und Einstellungen lassen sich wiederherstellen, und alle zutreffenden Tests zu Matrix, Ebenen, Split, USB, BLE, Studio, Versorgung und Wiederherstellung bestehen.
+**Abnahmekriterium für Kontrollpunkt 4:** Die Änderung ist geprüft, ursprüngliche Images und Einstellungen lassen sich wiederherstellen, und alle zutreffenden Tests zu Matrix, Ebenen, Split, USB, BLE, Studio, Versorgung und Wiederherstellung bestehen.
 
-## Stufe 5 — Prüfung der Produktreife { #stage-5-product-readiness-review }
+## Phase 5 — Prüfung der Produktreife { #stage-5-product-readiness-review }
 
 Beantworten Sie vor dem Entwurf einer eigenen Tastatur-Leiterplatte oder eines Akku-Prototyps:
 
@@ -251,11 +251,11 @@ Beantworten Sie vor dem Entwurf einer eigenen Tastatur-Leiterplatte oder eines A
 - Lassen sich ein fehlgeschlagenes Abhängigkeitsupdate, eine Studio-Änderung, ein Schreibvorgang in die Einstellungen oder ein Update im Feld beheben, ohne das Produkt zu öffnen oder zu verschrotten?
 - Sind die Lizenzen von ZMK/Zephyr, Leiterplatten- und Gehäusedateien, Tastenbelegungsinhalte, Logos, Schriften und mitgelieferte Konfigurationen für den Vertrieb geeignet?
 
-**Ausstiegskriterium von Tor 5:** Jedes Restrisiko hat einen Verantwortlichen, Nachweise und eine Disposition, und das Team hat ausdrücklich entschieden: fortfahren, zurückstellen oder stoppen.
+**Abnahmekriterium für Kontrollpunkt 5:** Jedes Restrisiko hat einen Verantwortlichen, Nachweise und eine Disposition, und das Team hat ausdrücklich entschieden: fortfahren, zurückstellen oder stoppen.
 
 ## Übergabe an das Produktdesign { #handoff-to-product-design }
 
-Übernehmen Sie genaues SF32-Bauteil und Speicher, Split-Rollen und Transport, die Zuordnung von Zeilen/Spalten/direkten Eingängen, die Diodenrichtung, den USB-Anschluss, Annahmen zu Antenne und Gehäuse, die NVS-/Einstellungsrichtlinie, Download- und Wiederherstellungsschnittstellen, das Leistungsbudget je Hälfte, Testaufbauten, die Image-Kennzeichnung und das festgelegte Manifest. Fahren Sie fort mit [SF32LB52-DevKit-LCD](../sf32-products/devkits/SF32LB52-DevKit-LCD.md), der [Plattformgrenze von Zephyr](../develop/platforms/zephyr/overview.md), der [Bluetooth-Architektur](../learn/bluetooth/overview.md), dem [Hardware-Designleitfaden SF32LB52x](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) und [Design for Production](../hardware/design-for-production.md).
+Übernehmen Sie das genaue SF32-Gerät und den Speicher, Split-Rollen und Transport, die Zuordnung von Zeilen/Spalten/direkten Eingängen, die Diodenrichtung, den USB-Anschluss, Annahmen zu Antenne und Gehäuse, die NVS-/Einstellungsrichtlinie, Download- und Wiederherstellungsschnittstellen, das Energiebudget je Hälfte, Testaufbauten, die Image-Kennzeichnung und das festgelegte Manifest. Fahren Sie fort mit [SF32LB52-DevKit-LCD](../sf32-products/devkits/SF32LB52-DevKit-LCD.md), der [Plattformgrenze von Zephyr](../develop/platforms/zephyr/overview.md), der [Bluetooth-Architektur](../learn/bluetooth/overview.md), dem [Hardware-Design-Leitfaden SF32LB52x](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) und [Design for Production](../hardware/design-for-production.md).
 
 ## Maßgebliche Quellen { #authoritative-sources }
 

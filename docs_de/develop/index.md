@@ -9,9 +9,9 @@ tags:
 
 # Entwicklungsübersicht { #develop }
 
-Der Bereich Entwicklung hilft Ihnen dabei, aus einem funktionierenden SF32-Board wartbare Produkt-Firmware zu machen. Nutzen Sie ihn nach dem ersten erfolgreichen `hello_world`, um die passende Board-Konfiguration auszuwählen, Builds und Flash-Vorgänge reproduzierbar auszuführen, ein geeignetes Beispiel anzupassen, Produktfunktionen zu integrieren, Fehler zu diagnostizieren und Updates sowie Wiederherstellungswege zu planen.
+Dieser Bereich zeigt, wie Sie aus einem funktionierenden SF32-Board wartbare Produkt-Firmware entwickeln. Nutzen Sie ihn nach dem ersten erfolgreichen `hello_world`, um die passende Board-Konfiguration auszuwählen, Build und Flashen reproduzierbar durchzuführen, ein geeignetes Beispiel anzupassen, Produktfunktionen zu integrieren, Fehler zu diagnostizieren und Updates sowie Wiederherstellungswege zu planen.
 
-Nutzen Sie [Erste Schritte](../getting-started/index.md) für den ersten erfolgreichen Test auf einem Entwicklungsboard, [SF32-Produkte](../sf32-products/index.md) zur Auswahl von Chip und Entwicklungsboard, [Hardware](../hardware/index.md) für Schaltpläne und produktionsgerechte Hardware sowie [Lernen](../learn/index.md) für architektonische Grundlagen. In diesem Abschnitt finden Sie den technischen Arbeitsablauf und konkrete Umsetzungshinweise für einzelne Aufgaben.
+Nutzen Sie [Erste Schritte](../getting-started/index.md) für die erste erfolgreiche Inbetriebnahme eines Entwicklungsboards, [SF32-Produkte](../sf32-products/index.md) zur Auswahl von Chip und Entwicklungsboard, [Hardware](../hardware/index.md) für Schaltpläne und die Hardwareauslegung für die Serie sowie [Lernen](../learn/index.md) für architektonische Grundlagen. In diesem Abschnitt finden Sie den technischen Arbeitsablauf und konkrete Umsetzungshinweise für einzelne Aufgaben.
 
 !!! info "SiFli-Solution"
     SiFli-Solution ist ein separates Softwarepaket von SiFli, das μForge.io derzeit nicht dokumentiert. Die Hinweise hier beschränken sich auf SiFli-SDK und die unten aufgeführten Community-Pfade. Benötigt Ihr Produkt eine umfassendere Lösung für Displaygeräte, lesen Sie die offizielle [Dokumentation zu SiFli Solution](https://docs.sifli.com/projects/solution/index.html) und wenden Sie sich direkt an SiFli. Bei einem komplexen Produkt kann dieser Entwicklungsweg eine enge, direkte Zusammenarbeit mit SiFli erfordern.
@@ -23,9 +23,9 @@ Nutzen Sie [Erste Schritte](../getting-started/index.md) für den ersten erfolgr
 Bevor Sie Produktfunktionen entwickeln, richten Sie eine reproduzierbare Ausgangskonfiguration ein und dokumentieren Sie sie:
 
 1. Wählen Sie unter [Board-Konfiguration](platforms/sifli-sdk/board-configuration.md) die exakt passende SDK-Board-Konfiguration.
-2. Führen Sie den Ablauf [Kompilieren, Flashen und Überwachen der seriellen Ausgabe](platforms/sifli-sdk/build-flash-monitor.md) erfolgreich aus.
+2. Führen Sie den Ablauf [Bauen, Flashen und Überwachen der seriellen Ausgabe](platforms/sifli-sdk/build-flash-monitor.md) erfolgreich aus.
 3. Dokumentieren Sie SDK-Version oder Commit, Board-Namen, Build- und Flash-Befehle, serielle Einstellungen und ein Startprotokoll.
-4. Beginnen Sie mit dem nächstliegenden [Beispiel](examples/index.md), idealerweise eines, das bereits das anspruchsvollste Subsystem des Produkts nutzt.
+4. Beginnen Sie mit dem nächstliegenden [Beispiel](examples/index.md), idealerweise mit einem Beispiel, das bereits das anspruchsvollste Subsystem des Produkts nutzt.
 
 Diese Dokumentation dient als Referenz für spätere Änderungen an der Anwendung, Board-Portierungen, fehlgeschlagene Tests und die Wiederherstellung im Feld.
 
@@ -37,7 +37,7 @@ Diese Dokumentation dient als Referenz für spätere Änderungen an der Anwendun
 
 | Aufgabe | Hier beginnen | Danach verwenden |
 |:----------------|:-----------|:---------|
-| Firmware bauen und flashen; serielle Ausgabe prüfen | [Kompilieren, Flashen und Überwachen der seriellen Ausgabe](platforms/sifli-sdk/build-flash-monitor.md) | [Werkzeuge](tools/index.md) für skriptgesteuertes Flashen, Tracing und Absturzdiagnose. |
+| Firmware bauen und flashen; serielle Ausgabe prüfen | [Bauen, Flashen und Überwachen der seriellen Ausgabe](platforms/sifli-sdk/build-flash-monitor.md) | [Werkzeuge](tools/index.md) für skriptgesteuertes Flashen, Tracing und Absturzdiagnose. |
 | Firmware an ein Entwicklungsboard, Modul oder eine eigene Hardware anpassen | [Board-Konfiguration](platforms/sifli-sdk/board-configuration.md) | Der passende Hardware-Leitfaden und das nächstliegende boardspezifische Beispiel. |
 | Einen Treiber oder eine Middleware-Schicht in mehreren Projekten wiederverwenden | [Komponenten und `sf_pkg`](platforms/sifli-sdk/components.md) | Ein minimales Beispiel und eine dokumentierte Grenze der Konfigurierbarkeit. |
 | Eine konkrete Peripherie oder ein Subsystem implementieren | [SDK-Anwendungshinweise](platforms/sifli-sdk/sdk-application-notes.md) | Der verlinkte offizielle SDK-Leitfaden mit den genauen APIs, Konfigurationssymbolen und Befehlen. |
@@ -60,7 +60,7 @@ Die Anwendungshinweise sind nach Integrationsaufgabe statt nach der Reihenfolge 
 | Analog und Sensoren | [Messwerte mit GPADC erfassen](platforms/sifli-sdk/application-notes/adc-sampling.md) · [Sensoren integrieren und auslesen](platforms/sifli-sdk/application-notes/sensor-integration.md) |
 | Speicher und Grafikressourcen | [Externen Flash verwenden](platforms/sifli-sdk/application-notes/external-flash.md) · [Grafikressourcen mit EZIP komprimieren](platforms/sifli-sdk/application-notes/ezip-image-assets.md) |
 | Zuverlässigkeit, Energie und Fehlerdiagnose | [Watchdog konfigurieren](platforms/sifli-sdk/application-notes/watchdog.md) · [Energiesparfunktionen konfigurieren und messen](platforms/sifli-sdk/application-notes/low-power-measurement.md) · [Protokolle erfassen und Abstürze analysieren](platforms/sifli-sdk/application-notes/crash-analysis.md) |
-| HF- und Bluetooth-Validierung | [RF-Tests mit SiFli-SDK durchführen](platforms/sifli-sdk/application-notes/rf-performance-tests.md) · [Bluetooth-Signalisierungstests durchführen](platforms/sifli-sdk/application-notes/bluetooth-signalling-tests.md) · [Bluetooth-RF-Einzeltests durchführen](platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests.md) |
+| RF- und Bluetooth-Validierung | [RF-Tests mit SiFli-SDK durchführen](platforms/sifli-sdk/application-notes/rf-performance-tests.md) · [Bluetooth-Signalisierungstests durchführen](platforms/sifli-sdk/application-notes/bluetooth-signalling-tests.md) · [Bluetooth-RF-Einzeltests durchführen](platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests.md) |
 
 </div>
 
@@ -72,8 +72,8 @@ Die Anwendungshinweise sind nach Integrationsaufgabe statt nach der Reihenfolge 
 
 | Bereich | Zweck |
 |:-----|:--------|
-| [SiFli-SDK](platforms/sifli-sdk/overview.md) | Den unterstützten Referenzablauf einrichten: Konfiguration, Kompilieren, Flashen, wiederverwendbare Komponenten und Diagnose. |
-| [SDK-Anwendungshinweise](platforms/sifli-sdk/sdk-application-notes.md) | Das SDK für eine konkrete Aufgabe nutzen, etwa ADC, Sensoren, externen Flash, Energiesparfunktionen, Diagnose sowie HF- und Bluetooth-Tests. |
+| [SiFli-SDK](platforms/sifli-sdk/overview.md) | Den unterstützten Referenzablauf einrichten: Konfiguration, Build, Flashen, wiederverwendbare Komponenten und Diagnose. |
+| [SDK-Anwendungshinweise](platforms/sifli-sdk/sdk-application-notes.md) | Das SDK für eine konkrete Aufgabe nutzen, etwa ADC, Sensoren, externen Flash, Energiesparfunktionen, Diagnose sowie RF- und Bluetooth-Tests. |
 | [Beispiele](examples/index.md) | Eine funktionierende Implementierung für das konkrete Board und das anspruchsvollste Produkt-Subsystem auswählen und anpassen. |
 | [Werkzeuge](tools/index.md) | Werkzeuge für Download, Überwachung, Ablaufverfolgung, Absturzdiagnose, Ressourcenaufbereitung und Fertigung auswählen. |
 | [Firmware-Themen](firmware-topics/index.md) | Produktübergreifende Entscheidungen zu Partitionen, OTA/DFU, USB, Energiemanagement und Diagnosebelegen treffen. |

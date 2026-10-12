@@ -44,15 +44,15 @@ tags:
 |:---|:---|:---|:---|
 | Вход или выход GPIO | `example/hal/gpio`, `example/rt_device/gpio` | Правильность настройки мультиплексирования вывода, полярности и прерываний на реальной плате. | [Знакомство с периферией](../../getting-started/tutorials/beginner.md) |
 | Консоль и проверка системы | `example/system/finsh` | Работа последовательной консоли, журналов и базовой диагностики во время выполнения. | [Знакомство с периферией](../../getting-started/tutorials/beginner.md) |
-| ADC, PWM или RTC | `example/hal/adc`, `example/rt_device/pwm`, `example/rt_device/rtc` | Конфигурацию выводов, тактирования и периферии для конкретной платы. | [Знакомство с периферией](../../getting-started/tutorials/beginner.md) |
-| Датчик с I2C | `example/hal/i2c/master`, `example/rt_device/i2c/eeprom` | Электрическое подключение, адресацию на шине и надёжность повторных передач. | [Объединение подсистем](../../getting-started/tutorials/intermediate.md) |
-| LVGL и локальный дисплей | `example/multimedia/lvgl/lvgl_v8_examples` | Инициализацию панели, формат пикселей и стабильность обновления дисплея (flush) до создания сложных экранов. | [Обзор графики](../../learn/graphics/overview.md), [Контроллер дисплея](../../learn/graphics/display-controller.md) |
-| Сервис BLE-периферии | `example/ble/peripheral`, `example/ble/hrpc` | Рекламные пакеты, подключение, одну характеристику GATT и повторное подключение. | [Обзор Bluetooth](../../learn/bluetooth/overview.md) |
+| ADC, PWM или RTC | `example/hal/adc`, `example/rt_device/pwm`, `example/rt_device/rtc` | Конфигурация выводов, тактирования и периферии для конкретной платы. | [Знакомство с периферией](../../getting-started/tutorials/beginner.md) |
+| Датчик с I2C | `example/hal/i2c/master`, `example/rt_device/i2c/eeprom` | Электрическое подключение, адресация на шине и надёжность повторных передач. | [Объединение подсистем](../../getting-started/tutorials/intermediate.md) |
+| LVGL и локальный дисплей | `example/multimedia/lvgl/lvgl_v8_examples` | Инициализация панели, формат пикселей и стабильный путь обновления дисплея (flush) до создания сложных экранов. | [Обзор графики](../../learn/graphics/overview.md), [Контроллер дисплея](../../learn/graphics/display-controller.md) |
+| Сервис BLE-периферии | `example/ble/peripheral`, `example/ble/hrpc` | Рекламные пакеты, подключение, одна характеристика GATT и повторное подключение. | [Обзор Bluetooth](../../learn/bluetooth/overview.md) |
 | Локальное воспроизведение аудио | `example/multimedia/audio/local_music`, `mp3_sd_player` | Аудиотракт кодека и платы, стабильность буфера и освобождение ресурсов после воспроизведения. | [Обзор аудио](../../learn/audio/overview.md) |
-| Хранение данных во Flash | `example/storage/littlefs/nor`, `example/storage/flashdb` | Монтирование, чтение и запись, восстановление после сброса или заполнения накопителя. | [Объединение подсистем](../../getting-started/tutorials/intermediate.md) |
-| Низкое энергопотребление | `example/pm/classical`, `example/pm/raise_wrist` | Ток, измеренный в каждом обозначенном состоянии, и правильную работу источников пробуждения. | [Обзор энергосберегающего проектирования](../../learn/low-power/overview.md) |
+| Хранение данных во флеш-памяти | `example/storage/littlefs/nor`, `example/storage/flashdb` | Монтирование, чтение и запись, восстановление после сброса или заполнения накопителя. | [Объединение подсистем](../../getting-started/tutorials/intermediate.md) |
+| Низкое энергопотребление | `example/pm/classical`, `example/pm/raise_wrist` | Ток, измеренный в каждом обозначенном состоянии, и правильная работа источников пробуждения. | [Обзор энергосберегающего проектирования](../../learn/low-power/overview.md) |
 | BLE OTA | `example/ble/peripheral_with_ota` | Восстановление после прерванного обновления и откат на целевой аппаратуре. | [Проверка готовности изделия](../../getting-started/tutorials/advanced.md) |
-| Диагностика во время выполнения | `example/system/cpu_usage_profiler`, `example/system/coredump` | Воспроизводимую трассировку загрузки CPU или запись дампа при сбое до оптимизации. | [Проверка готовности изделия](../../getting-started/tutorials/advanced.md) |
+| Диагностика во время выполнения | `example/system/cpu_usage_profiler`, `example/system/coredump` | Воспроизводимая трассировка загрузки CPU или запись дампа при сбое до оптимизации. | [Проверка готовности изделия](../../getting-started/tutorials/advanced.md) |
 
 </div>
 

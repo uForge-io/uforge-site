@@ -10,9 +10,9 @@ tags:
 
 ## Überblick { #overview }
 
-SF32LB58-MOD ist ein energiesparendes Bluetooth-MCU-Modul auf Basis des SF32LB586VDD36 von SiFli. Die Standardkonfiguration umfasst 16 + 16 MB HPI-PSRAM und 1 MB QSPI-NOR. Das 24 × 24 × 3,1 mm große Modul vereint die Drei-Kern-Plattform, den HF-Pfad, den Quarz und verschiedene Speicheroptionen. Über die herausgeführten Schnittstellen lassen sich Display-, Audio-, Speicher- und Steuerungsfunktionen einbinden.
+SF32LB58-MOD ist ein energiesparendes Bluetooth-MCU-Modul auf Basis des SF32LB586VDD36 von SiFli. Die Standardkonfiguration umfasst 16 + 16 MB HPI-PSRAM und 1 MB QSPI-NOR. Das 24 × 24 × 3,1 mm große Modul vereint die Drei-Kern-Plattform, den RF-Pfad, den Quarz und verschiedene Speicheroptionen. Über die herausgeführten Schnittstellen lassen sich Display-, Audio-, Speicher- und Steuerungsfunktionen einbinden.
 
-Das Modul integriert den BGA256-Baustein, den HF-Pfad, den Quarz und den schnellen Speicher im Modul selbst. Dadurch verringert sich der Umfang der zugehörigen Leiterbahnführung auf der Trägerplatine des Produkts. Das fertige Produkt muss weiterhin hinsichtlich der HF-Leistung validiert werden und die geltenden Zulassungsanforderungen erfüllen. Klären Sie die Antennenausführung und Speicherkonfiguration der gewählten SKU, bevor Sie das Layout der Trägerplatine festlegen.
+Das Modul integriert den BGA256-Baustein, den RF-Pfad, den Quarz und den schnellen Speicher im Modul selbst. Dadurch verringert sich der Umfang der zugehörigen Leiterbahnführung auf der Trägerplatine des Produkts. Das fertige Produkt muss weiterhin hinsichtlich der RF-Leistung validiert werden und die geltenden Zulassungsanforderungen erfüllen. Klären Sie die Antennenausführung und Speicherkonfiguration der gewählten SKU, bevor Sie das Layout der Trägerplatine festlegen.
 
 Je nach Modul-SKU lässt sich die Plattform mit HPI-PSRAM sowie QSPI-NOR-, QSPI-NAND- oder eMMC-Speicher konfigurieren. Die herausgeführten Schnittstellen ermöglichen Produkte mit Display-, Audio-, Speicher- und Konnektivitätsfunktionen auf einer MCU-Plattform.
 
@@ -34,26 +34,26 @@ SiFli nennt für SF32LB58-MOD folgende Anwendungsbereiche:
 
 Ziehen Sie SF32LB58-MOD in Betracht, wenn das Design eine oder mehrere der folgenden Eigenschaften erfordert:
 
-- Integration von BGA256-Baustein, HF-Pfad, Quarz und schnellem Speicher auf Modulebene
+- Integration von BGA256-Baustein, RF-Pfad, Quarz und schnellem Speicher auf Modulebene
 - Modulintegrierte PCB-Antenne oder externe Antenne über metallisierte Halblöcher bzw. einen Anschluss, kompatibel mit Hirose U.FL, I-PEX MHFI und Amphenol AMC; SKU-Ausführung bestätigen
 - Speicheroptionen mit QSPI-NOR, QSPI-NAND oder eMMC entsprechend der SKU
 - Herausgeführte Schnittstellen für Display, Audio, Speicher und Steuerungsfunktionen
 
 ## Entwicklungsressourcen { #development-resources }
 
-[Moduldatenblatt]: https://downloads.sifli.com/user%20manual/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf
-[Chipübersicht]: ../chips/SF32LB58x.md
-[Hardware-Designleitfaden]: ../../hardware/chip-guides/SF32LB58-MOD_hardware_design_guide.md
-[Muster bestellen]: https://sifli.taobao.com/
-[Entwicklungskits kaufen]: https://sifli.taobao.com/
+[Module Datasheet]: https://downloads.sifli.com/user%20manual/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf
+[Chip Introduction]: ../chips/SF32LB58x.md
+[Hardware Design Guide]: ../../hardware/chip-guides/SF32LB58-MOD_hardware_design_guide.md
+[Buy Samples]: https://sifli.taobao.com/
+[Buy Dev Kits]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Moduldatenblatt]__
-- :fontawesome-solid-microchip: __[Chipübersicht]__
-- :fontawesome-solid-file-lines: __[Hardware-Designleitfaden]__
-- :fontawesome-solid-cart-shopping: __[Muster bestellen]__
-- :fontawesome-solid-cart-shopping: __[Entwicklungskits kaufen]__
+- :fontawesome-solid-file-pdf: __[Moduldatenblatt][Module Datasheet]__
+- :fontawesome-solid-microchip: __[Chipübersicht][Chip Introduction]__
+- :fontawesome-solid-file-lines: __[Hardware-Design-Leitfaden][Hardware Design Guide]__
+- :fontawesome-solid-cart-shopping: __[Muster bestellen][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[Entwicklungsboards kaufen][Buy Dev Kits]__
 
 </div>
 
@@ -79,7 +79,7 @@ Ziehen Sie SF32LB58-MOD in Betracht, wenn das Design eine oder mehrere der folge
 
 ### Grafik, Display und Multimedia { #graphics-display-and-multimedia }
 
-- ePicasso 2.0 2D/2,5D-Grafik-Engine
+- ePicasso 2.0 2D/2.5D-Grafik-Engine
 - Vivante GCNanoUltraV-Vektorgrafik-Engine
 - Hardware-JPEG-Codec
 - Zwei LCD-Controller mit Unterstützung für 8080, SPI, Dual-SPI, Quad-SPI, DPI/RGB, MIPI DSI und JDI
@@ -130,7 +130,7 @@ Die [Modellübersicht für SiFli-Module](https://wiki.sifli.com/en/silicon/%E6%A
 
 Basiert auf [SF32LB58x](../chips/SF32LB58x.md). Weitere Informationen zur Grafik-, Speicher- und Displayarchitektur der Chipfamilie finden Sie auf der Chipseite.
 
-### Entwicklungskits { #development-kits }
+### Entwicklungsboards { #development-kits }
 
 Das Board [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) eignet sich zur Firmwarevalidierung sowie zur Inbetriebnahme des Displays und zur Prüfung der Audio- und Speicherpfade, bevor ein eigenes Trägerboard für das Modul entwickelt wird.
 

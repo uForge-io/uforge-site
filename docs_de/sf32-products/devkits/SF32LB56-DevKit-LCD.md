@@ -36,9 +36,9 @@ SF32LB56-DevKit-LCD ist ein displayorientiertes Entwicklungsboard, das wahlweise
 | Speicher | MicroSD-Steckplatz über SDIO | Tests mit Medien, Protokollierung, Dateisystem und Assets. |
 | USB und Stromversorgung | Zwei USB-Type-C-Buchsen: eine für USB-zu-UART (laut Modellleitfaden CH343K) und eine für USB 2.0 FS; beide können das Board versorgen | Serielle Logs, Download/Debug, USB-Evaluierung und Versorgung am Prüfplatz. |
 | Spannungswandlung | 3,3-V- und 1,8-V-Wandler-ICs auf dem Board | Prüfen Sie die Anforderungen der Versorgungsschienen im Schaltplan, bevor Sie Lasten hinzufügen. |
-| Debug und Boot | 4-polige einreihige SWD-Stiftleiste mit 2,54 mm Raster; Boot-Jumper „Mode“; Tasten für Versorgung, Funktion und Reset | Firmware-Download, SWD-Debug und Auswahl des Boot-Modus. |
+| Debug und Boot | 4-polige einreihige SWD-Stiftleiste mit 2,54 mm Raster; Boot-Jumper „Mode“; Einschalt-, Funktions- und Reset-Tasten | Firmware-Download, SWD-Debug und Auswahl des Boot-Modus. |
 | Anzeigen | RGB-LED, per GPIO gesteuerte LED und Versorgungs-LED | Prüfung von Firmware- und Versorgungszustand. |
-| HF | Standardmäßig Antenne auf dem Board; IPEX-Auswahl über eine 0-Ω-Option | Bewertung von Antenne und Gehäuse mit der jeweiligen Modulkonfiguration. |
+| RF | Standardmäßig Antenne auf dem Board; IPEX-Auswahl über eine 0-Ω-Option | Bewertung von Antenne und Gehäuse mit der jeweiligen Modulkonfiguration. |
 
 </div>
 
@@ -64,8 +64,8 @@ Dies sind Build-Target-Bezeichner des SDK und nicht zwingend die auf einem Board
 ## Erster Validierungsablauf { #first-validation-path }
 
 1. Schließen Sie ein kompatibles 24-Bit-MIPI-DPI-Display an den 40-poligen FPC-Steckverbinder an und verwenden Sie die USB-zu-UART-Buchse mit einem datenfähigen USB-Kabel.
-2. Folgen Sie [Erste Schritte](../../getting-started/index.md), um eine bewährte Referenz für Build, Flashen und serielles Log herzustellen.
-3. Nehmen Sie einfarbige Testbilder auf dem Display in Betrieb, bevor Sie ein UI-Framework debuggen; siehe [Grafik-Überblick](../../learn/graphics/overview.md).
+2. Folgen Sie [Erste Schritte](../../getting-started/index.md), um einen reproduzierbaren Ausgangszustand für Build, Flashen und serielle Logs herzustellen.
+3. Geben Sie zunächst einfarbige Testmuster auf dem Display aus, bevor Sie ein UI-Framework debuggen; siehe [Grafik-Überblick](../../learn/graphics/overview.md).
 4. Fügen Sie Touch, Speicher, Audio oder Funk jeweils einzeln hinzu und testen Sie anschließend Koexistenz und Energieverhalten.
 5. Prüfen Sie vor einem eigenen Design [SF32LB56-MOD](../modules/SF32LB56-MOD.md) und [Design für die Produktion](../../hardware/design-for-production.md).
 

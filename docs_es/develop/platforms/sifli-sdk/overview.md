@@ -33,7 +33,7 @@ Elija SiFli-SDK si necesita:
 
 ## Modelo de desarrollo { #development-model }
 
-La página [Primeros pasos con SiFli-SDK](../../../getting-started/sifli/getting-started-sifli-sdk.md) establece la cadena de herramientas y una base funcional con `hello_world`. Después, mantenga la revisión del SDK, la placa, el directorio del ejemplo/proyecto, la configuración y los artefactos de compilación/programación correspondientes en un registro reproducible. Si el nombre de placa no especifica un núcleo, la salida HCPU suele seguir el formato `build_<board_name>_hcpu/`; por ejemplo, `sf32lb52-lcd_n16r8` genera `build_sf32lb52-lcd_n16r8_hcpu/`. Use el directorio generado para la placa y el núcleo resueltos, en lugar de construir su nombre manualmente.
+La página [Primeros pasos con SiFli-SDK](../../../getting-started/sifli/getting-started-sifli-sdk.md) establece la cadena de herramientas y una base funcional con `hello_world`. Después, mantenga la revisión del SDK, la placa, el directorio del ejemplo/proyecto, la configuración y los artefactos de compilación y descarga correspondientes en un registro reproducible. Si el nombre de placa no especifica un núcleo, la salida HCPU suele seguir el formato `build_<board_name>_hcpu/`; por ejemplo, `sf32lb52-lcd_n16r8` genera `build_sf32lb52-lcd_n16r8_hcpu/`. Use el directorio generado para la placa y el núcleo resueltos, en lugar de construir su nombre manualmente.
 
 Para desarrollar de forma reproducible, fije una rama del SDK, registre el nombre de placa, mantenga separados los cambios locales de placa y los archivos del proveedor, y haga cambios de configuración pequeños y fáciles de revisar. Consulte [Compilar, grabar y supervisar la salida serie](build-flash-monitor.md) para ver el flujo detallado.
 
@@ -87,7 +87,7 @@ Antes de comprometerse con SiFli-SDK para una rama de producto, responda:
 - ¿Qué archivos de soporte de placa son responsabilidad del producto y cuáles del proveedor?
 - ¿Qué ejemplos demuestran las funciones críticas?
 - ¿Qué tabla de particiones se usa para fabricación y OTA?
-- ¿Qué herramientas están aprobadas para programar en fábrica?
+- ¿Qué herramientas están aprobadas para grabar en fábrica?
 - ¿Qué registros estarán habilitados en las compilaciones de publicación?
 - ¿Qué imagen de recuperación se conservará para el laboratorio?
 

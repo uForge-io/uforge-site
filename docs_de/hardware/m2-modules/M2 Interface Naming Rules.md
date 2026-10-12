@@ -11,9 +11,9 @@ tags:
 
 ## Basisspezifikation { #base-specification }
 
-Dieses Dokument legt die Bezeichnungen des vorgeschlagenen μForge-Modulschnittstellensystems fest. Es beschreibt eine Namenskonvention, keinen veröffentlichten elektrischen oder mechanischen Standard.
+Dieses Dokument legt die Bezeichnungen des vorgeschlagenen μForge-Modulschnittstellensystems fest. Es beschreibt eine Benennungskonvention, keinen veröffentlichten elektrischen oder mechanischen Standard.
 
-In dieser Konvention bezeichnet **M2** die gemeinsame, verpflichtende Basisschnittstelle für Module, die das System übernehmen. Daraus folgt nicht, dass jedes bestehende μForge- oder SiFli-Modul M2 implementiert. Die Pinbelegung sowie die elektrischen und mechanischen Anforderungen befinden sich noch in Entwicklung und werden hier nicht festgelegt.
+In dieser Konvention bezeichnet **M2** die gemeinsame, verpflichtende Basisschnittstelle für Module, die diese Konvention verwenden. Daraus folgt nicht, dass jedes bestehende μForge- oder SiFli-Modul M2 implementiert. Die Pinbelegung sowie die elektrischen und mechanischen Anforderungen befinden sich noch in Entwicklung und werden hier nicht festgelegt.
 
 Bevor M2 als mit M.2 E-key kompatibel bezeichnet wird, muss eine veröffentlichte M2-Definition die mechanische Schnittstelle, Pinbelegung, elektrischen Grenzwerte, erforderlichen und optionalen Signale, Anforderungen an die Trägerplatine und Konformitätsregeln festlegen. Die aktuelle [M2-Schnittstellendefinition](M2-interface-definition.md) ist ein Entwurf. Die Bezeichnung M2 allein belegt weder elektrische Kompatibilität mit M.2 noch die Austauschbarkeit eines Moduls zwischen verschiedenen Trägerplatinen.
 
@@ -47,7 +47,7 @@ Dabei gilt:
 
 </div>
 
-Diese Beschreibungen geben den vorgesehenen Umfang der Kategorien an, keine abschließend festgelegten elektrischen Anforderungen. Die lokal verfügbare Arbeitsmappe mit dem Vorschlag enthält Kontaktbelegungspläne für M2 und M2xM. Der Artikel zur Schnittstellendefinition enthält außerdem Zusammenfassungen zu M2xN und M2xA, jedoch wurden keine Originalpläne zur Kontaktbelegung gefunden, mit denen sich diese Zusammenfassungen überprüfen ließen; sie sind daher ungeprüft. M2xH und M2xP sind reservierte Bezeichnungen ohne zugewiesene Kontakte.
+Diese Beschreibungen geben den vorgesehenen Umfang der Kategorien an, keine abschließend festgelegten elektrischen Anforderungen. Die lokal verfügbare Vorschlagsarbeitsmappe enthält Kontaktbelegungen für M2 und M2xM. Der Artikel zur Schnittstellendefinition enthält außerdem Zusammenfassungen zu M2xN und M2xA. Es wurden jedoch keine Original-Kontaktbelegungen gefunden, anhand derer sich diese Zusammenfassungen prüfen ließen; sie sind daher ungeprüft. M2xH und M2xP sind reservierte Bezeichnungen ohne zugewiesene Kontakte.
 
 ## Moduldeklaration { #module-declaration }
 

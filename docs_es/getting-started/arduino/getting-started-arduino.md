@@ -13,7 +13,7 @@ OpenSiFli cuenta con un núcleo Arduino en beta para SF32 basado en Zephyr: [Ope
 Este núcleo resulta adecuado para probar sketches, comprobar periféricos rápidamente, preparar demostraciones y desarrollar prototipos iniciales. Para firmware de producción, ajustar la pila Bluetooth, crear aplicaciones con mucha carga gráfica, optimizar el consumo o poner en marcha una placa personalizada, utilice [SiFli-SDK](../sifli/getting-started-sifli-sdk.md).
 
 !!! warning "Núcleo en beta"
-    OpenSiFli marca este núcleo de Arduino como **BETA** e indica que debe usarse solo para pruebas. Las funciones, las API, el comportamiento del cargador, el contenido del paquete y el proceso de publicación pueden cambiar. No lo consideres listo para producción.
+    OpenSiFli marca este núcleo de Arduino como **BETA** e indica que debe usarse solo para pruebas. Las funciones, las API, el comportamiento del cargador, el contenido del paquete y el proceso de publicación pueden cambiar. No lo considere listo para producción.
 
 ## Qué necesitará { #what-youll-need }
 
@@ -29,7 +29,7 @@ Este núcleo resulta adecuado para probar sketches, comprobar periféricos rápi
 - El paquete Arduino `sifli:sf32lb52` de OpenSiFli.
 - Un monitor serie.
 
-## Instala el paquete de placa { #install-the-board-package }
+## Instale el paquete de placa { #install-the-board-package }
 
 Abra **Arduino IDE > Settings** y añada esta URL en **Additional Boards Manager URLs**:
 
@@ -138,7 +138,7 @@ sketch
 
 ## Suba Blink { #upload-blink }
 
-Compruebe si la variante instalada del SF32LB52 DevKit LCD define `LED_BUILTIN`; no dé por hecho que los números de pin de Arduino son universales. Si la macro está disponible y la variante asigna el LED integrado, pruebe Blink cuando la prueba serie básica funcione. De lo contrario, consulte la documentación de la placa para confirmar la conexión y la polaridad del LED antes de elegir un GPIO.
+Compruebe si la variante instalada del SF32LB52 DevKit LCD define `LED_BUILTIN`; no dé por hecho que los números de pin de Arduino son universales. Si la macro está disponible y la variante asigna el LED integrado, pruebe Blink cuando la prueba serie básica funcione. De lo contrario, consulte la documentación de la placa para confirmar la conexión y la polaridad del LED antes de elegir una GPIO.
 
 ```cpp
 void setup() {

@@ -19,7 +19,7 @@ El desarrollo USB abarca el firmware, los descriptores, los sistemas operativos 
 - Almacenamiento MSC.
 - Micrófono/altavoz de audio USB.
 - MTP.
-- Compatibilidad con host USB para periféricos CDC, HID, MSC, UVC y UAC, cuando la admitan el SDK y la placa.
+- Compatibilidad con host USB para periféricos CDC, HID, MSC, UVC y UAC, cuando el SDK y la placa lo permitan.
 
 ## Flujo de trabajo práctico { #practical-workflow }
 

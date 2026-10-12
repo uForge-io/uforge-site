@@ -12,7 +12,7 @@ OpenSiFli desarrolla activamente el soporte para Zephyr en [OpenSiFli/zephyr-dow
 
 Use Zephyr si necesita sus API, devicetree, Kconfig, una estructura RTOS portable o una ruta conectada con ArduinoCore-zephyr. Si necesita acceder actualmente al conjunto más completo de funciones del fabricante, elija SiFli-SDK.
 
-Para configurar el espacio de trabajo, compilar el primer `hello_world`, programar la placa y verificar la consola, consulte [Primeros pasos con Zephyr Downstream](../../../getting-started/zephyr/getting-started-zephyr-upstream.md). Esta página trata la plataforma downstream una vez que esa base ya funciona.
+Para configurar el espacio de trabajo, compilar el primer `hello_world`, grabar la placa y verificar la consola, consulte [Primeros pasos con Zephyr Downstream](../../../getting-started/zephyr/getting-started-zephyr-upstream.md). Esta página trata la plataforma downstream una vez que esa base ya funciona.
 
 Referencias principales:
 
@@ -32,7 +32,7 @@ Referencias principales:
 | Placa | `sf32lb52_devkit_lcd` |
 | Nombre completo | SF32LB52-DevKit-LCD |
 | SoC | `sf32lb525uc6` |
-| Runner para programar la Flash | `sftool` |
+| Runner para grabar la Flash | `sftool` |
 | Argumento del runner | `--chip=SF32LB52` |
 | Consola | `usart1` |
 | Velocidad de consola | `1000000` baudios |

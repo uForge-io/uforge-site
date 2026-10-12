@@ -1,6 +1,6 @@
 ---
 icon: lucide/puzzle
-description: "Primeiros passos com o ArduinoCore-zephyr beta do OpenSiFli no SF32LB52 DevKit LCD: instale o pacote da placa, envie um teste serial e execute o Blink."
+description: "Primeiros passos com o ArduinoCore-zephyr beta do OpenSiFli no SF32LB52 DevKit LCD: instale o pacote da placa, grave um teste serial e execute o Blink."
 tags:
     - Primeiros passos
     - Arduino
@@ -96,13 +96,13 @@ Use **Dynamic** no fluxo com o loader do Zephyr. Use **Static** quando precisar 
 
 ## Coloque a placa no modo de download serial { #put-the-board-in-serial-download-mode }
 
-Segundo a documentação do OpenSiFli, na primeira utilização a placa precisa estar no modo de download serial. Siga a sequência de boot/reset do SF32LB52 DevKit LCD e, em seguida, envie o programa pelo Arduino IDE ou CLI.
+Segundo a documentação do OpenSiFli, na primeira utilização a placa precisa estar no modo de download serial. Siga a sequência de boot/reset do SF32LB52 DevKit LCD e, em seguida, faça a gravação pelo Arduino IDE ou CLI.
 
-A ferramenta de upload é `sftool`.
+A ferramenta de gravação é `sftool`.
 
-## Envie um teste serial básico { #upload-a-serial-smoke-test }
+## Grave um teste serial básico { #upload-a-serial-smoke-test }
 
-Comece verificando a saída serial. Ela confirma o upload, a reinicialização, a inicialização do ambiente de execução e o roteamento da saída para o console, sem depender da polaridade do LED:
+Comece verificando a saída serial. Ela confirma a gravação, a reinicialização, a inicialização do ambiente de execução e o roteamento da saída para o console, sem depender da polaridade do LED:
 
 ```cpp
 void setup() {
@@ -115,7 +115,7 @@ void loop() {
 }
 ```
 
-Envie o programa pelo Arduino IDE ou use o Arduino CLI:
+Faça a gravação pelo Arduino IDE ou use o Arduino CLI:
 
 ```bash
 arduino-cli compile \
@@ -136,7 +136,7 @@ Abra o Serial Monitor com a taxa de `115200` baud. No modo de compilação **Sta
 sketch
 ```
 
-## Envie o Blink { #upload-blink }
+## Grave o Blink { #upload-blink }
 
 Verifique se a variante instalada do SF32LB52 DevKit LCD define `LED_BUILTIN`; não presuma que os números dos pinos Arduino sejam universais. Se a macro estiver definida e a variante a mapear para o LED integrado, experimente o Blink depois que o teste serial básico funcionar. Caso contrário, consulte a documentação da placa para confirmar a conexão e a polaridade do LED antes de escolher um GPIO.
 
@@ -162,10 +162,10 @@ void loop() {
 | Sintoma | Verificação |
 |:--------|:------|
 | O pacote não aparece | Confirme o URL do índice de pacotes e use o Arduino IDE 2.x. |
-| O upload falha | Coloque a placa no modo de download serial e verifique se nenhum monitor serial está ocupando a porta. |
+| A gravação falha | Coloque a placa no modo de download serial e verifique se nenhum monitor serial está ocupando a porta. |
 | O sketch não inicia | Confira **Mode**. Em `Debug`, execute `sketch` no shell do Zephyr. |
 | Símbolo do Zephyr não definido | O README do core informa que talvez seja necessário exportar as funções ausentes do Zephyr em `loader/llext_exports.c` e recompilar o loader. |
-| Subsistema do Zephyr ausente | Ative a opção `CONFIG_` necessária no arquivo `.conf` da placa, recompile o loader e envie-o. |
+| Subsistema do Zephyr ausente | Ative a opção `CONFIG_` necessária no arquivo `.conf` da placa, recompile o loader e grave-o. |
 | Memória insuficiente | O shell do Zephyr e o carregamento dinâmico de sketches consomem RAM; reduza o uso da pilha ou troque o modo de compilação, conforme necessário. |
 
 </div>

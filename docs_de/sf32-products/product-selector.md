@@ -35,7 +35,7 @@ Der Selektor dient dazu, Ausschlusskriterien anzuwenden; er gibt keine automatis
 
 ### Integrationsstufe { #integration-level }
 
-Legen Sie die Integrationsstufe vor dem Vergleich einzelner Spezifikationen fest, wenn Zeitplan, HF-Aufwand oder Zuständigkeit für die Platine bereits feststehen. Mit einem Chip haben Sie die größte Gestaltungsfreiheit, übernehmen aber auch die Verantwortung für Stromversorgung, HF, Takt, Layout und Fertigungsreife. Ein Modul reduziert den Entwicklungs- und Integrationsaufwand auf Modulebene; die Trägerplatine müssen Sie weiterhin selbst entwickeln. Mit einem Entwicklungsboard lassen sich Firmware, Peripherieverhalten und Systemannahmen am schnellsten überprüfen. Es ist jedoch nicht automatisch für die Serienfertigung geeignet.
+Legen Sie die Integrationsstufe vor dem Vergleich einzelner Spezifikationen fest, wenn Zeitplan, RF-Aufwand oder Zuständigkeit für die Platine bereits feststehen. Mit einem Chip haben Sie die größte Gestaltungsfreiheit, übernehmen aber auch die Verantwortung für Stromversorgung, RF, Takt, Layout und Fertigungsreife. Ein Modul reduziert den Entwicklungs- und Integrationsaufwand auf Modulebene; die Trägerplatine müssen Sie weiterhin selbst entwickeln. Mit einem Entwicklungsboard lassen sich Firmware, Peripherieverhalten und Systemannahmen am schnellsten überprüfen. Es ist jedoch nicht automatisch für die Serienfertigung geeignet.
 
 ### Stromversorgung und Gehäuse { #power-supply-and-package }
 
@@ -72,13 +72,13 @@ Der interaktive Katalog enthält nur Chip- und Moduleinträge. Entwicklungsboard
 | Ausgangspunkt | Geeignet, wenn ... | Nächster Schritt |
 |:---------------|:---------------|:----------|
 | Chip | Sie eine eigene Leiterplatte entwickeln und Schnittstellen sowie Stromversorgung direkt kontrollieren möchten. | Wählen Sie eine Produktfamilie und prüfen Sie vor der Schaltplanerstellung den zugehörigen Leitfaden zur produktionsgerechten Hardwareauslegung. |
-| Modul | Sie HF- und Integrationsaufwand reduzieren, aber eine eigene Trägerplatine entwickeln möchten. | Lesen Sie die Modulbeschreibung, Schnittstellendefinition und den Modul-Designleitfaden. |
+| Modul | Sie RF- und Integrationsaufwand reduzieren, aber eine eigene Trägerplatine entwickeln möchten. | Lesen Sie die Modulbeschreibung, Schnittstellendefinition und den Modul-Designleitfaden. |
 | Entwicklungsboard | Sie Software, Peripherie oder ein Produktkonzept schnell überprüfen möchten. | Beginnen Sie mit dem Board, dessen Ausstattung am besten zum vorgesehenen Produkt passt, und führen Sie ein verifiziertes Beispiel aus. Verwenden Sie den Schaltplan als Referenz, nicht als Serienentwurf. |
 
 </div>
 
-## Vorauswahl bestätigen { #confirm-the-shortlist }
+## Vorauswahl abschließend prüfen { #confirm-the-shortlist }
 
-1. **Prüfen Sie den konkreten Baustein.** Bestätigen Sie anhand der [SF32-Familienübersicht](family/SF32_family.md), der Produktbeschreibung des Ergebnisses und der [Benennungsregeln](family/SF32_namingrule.md) die bestellbare Teilenummer, das Gehäuse, die Versorgungstopologie, die Speicherorganisation, die Schnittstellenbelegung und die Referenzhardware. Wählen Sie nicht allein nach einem hervorgehobenen Merkmal: Stellen Sie sicher, dass Display, Audio, Speicher, Sensoren, Bluetooth und Energiesparfunktionen im vorgesehenen Gehäuse und Platinendesign gemeinsam nutzbar sind.
+1. **Prüfen Sie den konkreten Baustein.** Prüfen Sie anhand der [SF32-Familienübersicht](family/SF32_family.md), der Produktbeschreibung des Ergebnisses und der [Benennungsregeln](family/SF32_namingrule.md) die bestellbare Teilenummer, das Gehäuse, die Versorgungstopologie, die Speicherorganisation, die Schnittstellenbelegung und die Referenzhardware. Wählen Sie nicht allein nach einem hervorgehobenen Merkmal: Stellen Sie sicher, dass Display, Audio, Speicher, Sensoren, Bluetooth und Energiesparfunktionen im vorgesehenen Gehäuse und Platinendesign gemeinsam nutzbar sind.
 2. **Erproben Sie den Softwarepfad.** Testen Sie [Erste Schritte](../getting-started/index.md), [Tutorials](../getting-started/tutorials/overview.md) und [Entwicklung](../develop/index.md) vor der Hardwarefestlegung auf dem verfügbaren Board, dessen Hardware der geplanten Zielkonfiguration am ähnlichsten ist.
 3. **Prüfen Sie die Fertigungsanforderungen.** Lesen Sie [Design für die Produktion](../hardware/design-for-production.md), bevor Sie Schaltplan, Layout, Stückliste oder Display- und Speicherwahl einfrieren.

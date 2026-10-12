@@ -142,7 +142,7 @@ Veja a habilitação geral do MPI e os exemplos de configuração por controlado
 O SF32LB56x usa uma configuração MPI essencialmente igual à do SF32LB58x, mas não possui MPI4.
 
 !!! warning "Verifique o exemplo de configuração MPI"
-    A documentação de origem da SiFli é contraditória quanto ao MPI1: o texto diz que ele usa NOR Flash por padrão e que o modo não pode ser alterado, mas o trecho de configuração seguinte define o modo 4 (PSRAM de 16 linhas). Além disso, `BSP_QSPI1_MEM_SIZE` tem valor `32`, embora o comentário indique 16 MB; para MPI4, o valor é `128` e o comentário indica 128 MB, enquanto a tabela de capacidade da EVB informa 64 MB. Este artigo mantém os valores de configuração da fonte sem inferir a codificação das macros ou a capacidade real do componente. Confira-os na configuração Kconfig/gerada da versão do SDK usada, no esquemático da placa e na folha de dados da memória.
+    A documentação de origem da SiFli é contraditória quanto ao MPI1: o texto diz que o MPI1 usa NOR Flash por padrão e que o modo não pode ser alterado, mas o trecho de configuração seguinte define o MPI1 para o modo 4 (PSRAM de 16 linhas). Além disso, `BSP_QSPI1_MEM_SIZE` tem valor `32`, embora o comentário indique 16 MB; para MPI4, o valor é `128` e o comentário indica 128 MB, enquanto a tabela de capacidade da EVB informa 64 MB. Este artigo mantém os valores de configuração da fonte sem inferir a codificação das macros ou a capacidade real do componente. Confira-os na configuração Kconfig/gerada da versão do SDK usada, no esquemático da placa e no datasheet da memória.
 
 ## Espaços de endereçamento da Flash { #3-flash-address-spaces }
 
@@ -472,7 +472,7 @@ Verifique:
 
 ### Comandos de operação { #operation-commands }
 
-Os comandos de leitura, gravação e apagamento variam conforme o fabricante e o componente. Compare a folha de dados do componente com os IDs de comando em `bf0_hal_qspi.h`; se nenhuma tabela existente for compatível, adicione uma nova tabela em `flash_table.c`.
+Os comandos de leitura, gravação e apagamento variam conforme o fabricante e o componente. Compare o datasheet do componente com os IDs de comando em `bf0_hal_qspi.h`; se nenhuma tabela existente for compatível, adicione uma nova tabela em `flash_table.c`.
 
 ```c
 /**
@@ -555,7 +555,7 @@ Aqui, `cmd` é o ID do comando (`0x06` para habilitar gravação e `0x05` para l
 
 ## Adicionar suporte a uma NAND Flash { #8-port-a-nand-flash-part }
 
-O driver de NAND segue o mesmo fluxo geral do driver de NOR, mas o conjunto de comandos e os tempos variam conforme o componente. Determine a sequência necessária com base na folha de dados. Alguns componentes usam tempos diferentes para a leitura do ID; se a configuração padrão não identificar corretamente a memória, ajuste a implementação dessa leitura ou informe o ID correto para selecionar a nova tabela de comandos.
+O driver de NAND segue o mesmo fluxo geral do driver de NOR, mas o conjunto de comandos e os tempos variam conforme o componente. Determine a sequência necessária com base no datasheet. Alguns componentes usam tempos diferentes para a leitura do ID; se a configuração padrão não identificar corretamente a memória, ajuste a implementação dessa leitura ou informe o ID correto para selecionar a nova tabela de comandos.
 
 ## Adicionar suporte a PSRAM { #9-port-psram }
 

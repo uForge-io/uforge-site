@@ -1,6 +1,6 @@
 ---
 icon: lucide/component
-description: "Lista de componentes aprobados por SiFli para diseños SF32: cristales, inductores reductores, Flash NOR/NAND y SD-NAND, y controladores LCD; incluye requisitos de selección y una lista de revisión de la BOM."
+description: "Lista de componentes aprobados por SiFli para diseños SF32: cristales, inductores reductores, Flash NOR/NAND y SD-NAND, y controladores LCD; incluye requisitos de selección y una lista de comprobación de revisión de la BOM."
 tags:
     - Hardware
     - Componentes

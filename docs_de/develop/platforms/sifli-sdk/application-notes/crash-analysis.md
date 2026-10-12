@@ -17,12 +17,12 @@ Die SDK-Leitfäden `debug_logging` und `crash_analysis` ergänzen sich: Logs zei
 
 | Familie | Debug- und Log-Verhalten |
 |---|---|
-| SF32LB52x, SF32LB56x, SF32LB58x | Der Quellleitfaden dokumentiert UART-Erfassung, `SifliUsartServer`/`AssertDumpUart` sowie die Wiederherstellung mit J-Link/Trace32. Verwenden Sie den Transport, der im ausgewählten Schlafzustand verfügbar bleibt. |
-| SF32LB55x | SWD kann mit `$SDK_ROOT/tools/segger/jlink_hcpu_a0.bat` und `jlink_lcpu_a0.bat` zwischen HCPU und LCPU umgeschaltet werden. Die ROM-Konsole des LCPU ist UART3 mit 1.000.000 Baud; HCPU kann UART1/2 oder SWD verwenden. Da SWD PB-IO nutzt, halten Sie LPSYS aktiv oder im Light Sleep, solange die Verbindung besteht. |
+| SF32LB52x, SF32LB56x, SF32LB58x | Der zugehörige SiFli-Leitfaden dokumentiert UART-Erfassung, `SifliUsartServer`/`AssertDumpUart` sowie die Wiederherstellung mit J-Link/Trace32. Verwenden Sie den Transport, der im ausgewählten Schlafzustand verfügbar bleibt. |
+| SF32LB55x | SWD kann mit `$SDK_ROOT/tools/segger/jlink_hcpu_a0.bat` und `jlink_lcpu_a0.bat` zwischen HCPU und LCPU umgeschaltet werden. Die ROM-Konsole des LCPU ist UART3 mit 1 000 000 Baud; HCPU kann UART1/2 oder SWD verwenden. Da SWD PB-IO nutzt, halten Sie LPSYS aktiv oder im Light Sleep, solange die Verbindung besteht. |
 
 </div>
 
-Wenn LPSYS aus dem Standby aufwacht, kehrt SWD zu HCPU zurück. Ein J-Link-Reset schaltet den ausgewählten Kern nicht selbst um. Ist die asynchrone Log-Ausgabe aktiviert, kann ein Assert-Dump abgeschnitten werden. Verwenden Sie für den Fehlerpfad daher eine synchrone oder aufbewahrte Erfassung.
+Wenn LPSYS aus dem Standby aufwacht, kehrt SWD zu HCPU zurück. Ein J-Link-Reset schaltet den ausgewählten Kern nicht selbst um. Ist die asynchrone Log-Ausgabe aktiviert, kann ein Assert-Dump abgeschnitten werden. Verwenden Sie für den Fehlerpfad daher einen synchronen oder persistent gespeicherten Mitschnitt.
 
 ## Ein Live- oder Post-Mortem-Paket erfassen { #capture-a-live-or-post-mortem-package }
 
@@ -45,7 +45,7 @@ Verwenden Sie bei älteren SDKs das familienspezifische Verfahren aus dem Quelll
 - J-Link/SWD: Fügen Sie J-Link zu `PATH` hinzu und führen Sie das Skript für die Zielfamilie aus; für SF32LB55x beispielsweise `$SDK_ROOT/tools/crash_dump_analyser/script/save_ram_55x.bat`. Das passende Skript sichert RAM, EPIC-Register und PSRAM.
 - Stellen Sie sicher, dass `RTOS → RT-Thread Kernel → Memory Management → Enable memory trace` aktiviert ist, wenn Nachweise für Heap-Lecks benötigt werden.
 
-Bei skriptbasierter Erfassung muss die `.jlink`-Datei zu Zielfamilie, PSRAM-Konfiguration und Verbindungsart passen. Für eine IP-Verbindung über `SifliUsartServer` ist das IP-Skript zu verwenden, für eine direkte J-Link-Verbindung über USB das USB-Skript. Bei einer unpassenden Kombination kann die Erfassung fehlschlagen.
+Bei skriptbasierter Erfassung muss die `.jlink`-Datei zur Zielfamilie, zur PSRAM-Konfiguration und zur Verbindungsart passen. Für eine IP-Verbindung über `SifliUsartServer` ist das IP-Skript zu verwenden, für eine direkte J-Link-Verbindung über USB das USB-Skript. Bei einer unpassenden Kombination kann die Erfassung fehlschlagen.
 
 ![SF32LB52x-Option Memory Trace im menuconfig](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_mem_trace.png){ loading="lazy" }
 <div align="center"><em>Abbildung: Beispiel aus dem SF32LB52x-Leitfaden — Memory Trace vor der Fehlerreproduktion aktivieren, wenn Heap-Nachweise benötigt werden.</em></div>
@@ -104,4 +104,4 @@ Der Bus-Monitor des SDK kann Zugriffe erfassen, die zu einem Bus-Fault führen. 
 ![Trace32-Beispiel für Heap-Callstack](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_heap_callstack.png){ loading="lazy" }
 <div align="center"><em>Abbildung: Beispiel aus dem SF32LB52x-Leitfaden — Heap-Callstack und Speicherfenster.</em></div>
 
-Offizielle Quellen nach Chipfamilie: [SF32LB52x Crash-Analyse](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/crash_analysis.html), [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/crash_analysis.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/crash_analysis.html) und [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/crash_analysis.html) sowie der passende [Leitfaden zu Debugging und Logging](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/debug_logging.html).
+Offizielle Quellen nach Familie: [SF32LB52x Crash-Analyse](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/crash_analysis.html), [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/crash_analysis.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/crash_analysis.html) und [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/crash_analysis.html) sowie der passende [Leitfaden zu Debugging und Logging](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/debug_logging.html).

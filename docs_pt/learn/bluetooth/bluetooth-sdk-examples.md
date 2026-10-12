@@ -40,7 +40,7 @@ Antes de alterar o projeto, registre a versão exata do SDK, o nome da placa, a 
 2. Comprove o comportamento essencial via rádio: descoberta, conexão, transferência, streaming ou recepção, conforme o caso.
 3. Repita o teste após reinicialização, desconexão, reconexão e ciclo de alimentação.
 4. Acrescente um serviço, fluxo de uso, rota de áudio ou política de energia específico do produto por vez.
-5. Teste novamente com a carga combinada do produto, incluindo tela, sensores, armazenamento, áudio e transições para modos de baixo consumo, quando aplicável.
+5. Teste novamente com a carga combinada do produto, incluindo display, sensores, armazenamento, áudio e transições para modos de baixo consumo, quando aplicável.
 
 Um exemplo funcional demonstra apenas o fluxo que cobre. Ele não comprova que a política de segurança, o alcance de rádio, a latência, o consumo de energia ou a interoperabilidade do produto estejam prontos para lançamento.
 

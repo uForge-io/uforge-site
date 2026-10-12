@@ -10,11 +10,11 @@ tags:
 
 ## Présentation { #overview }
 
-La série SF32LB58x occupe le niveau haut de gamme de la famille SF32LB5x. Elle cible les produits AIoT alimentés par batterie qui ont besoin de graphismes avancés, d'une grande capacité mémoire, du Bluetooth bimode, d'E/S audio et d'affichage riches et d'une forte densité de GPIO, sans passer à une plateforme de processeur applicatif plus volumineuse.
+La série SF32LB58x se situe au sommet de la gamme SF32LB5x. Elle cible les produits AIoT alimentés par batterie qui ont besoin de graphismes avancés, d'une grande capacité mémoire, du Bluetooth bimode, d'une connectique audio et d'affichage étendue et d'une forte densité de GPIO, sans adopter une plateforme plus volumineuse de la catégorie des processeurs applicatifs.
 
 Le SF32LB58x repose sur une architecture hétérogène à trois cœurs Arm Cortex-M33 STAR-MC1[^1]. Le HCPU et l'ACPU sont des cœurs hautes performances jusqu'à 240 MHz ; le LCPU fonctionne jusqu'à 96 MHz et vise les tâches sensibles à la consommation. Le HCPU gère le contrôle du système, l'interface utilisateur et le traitement applicatif général ; l'ACPU peut prendre en charge des charges de DSP audio ; et le LCPU convient au Bluetooth LE, à l'acquisition de capteurs et aux autres tâches basse consommation. Ce partitionnement permet au firmware de mettre le HCPU hors tension pour des charges adaptées, même si l'économie réelle dépend de l'application et de son firmware.
 
-SiFli documente 3 744 Ko de SRAM sur puce et des combinaisons, selon la référence, de flash NOR et de PSRAM OPI/HPI intégrées au boîtier. La famille offre aussi une prise en charge de l'affichage incluant MIPI DSI, l'accélération graphique vectorielle, l'USB 2.0 High-Speed et un boîtier BGA à nombre élevé d'E/S. Évaluez le SF32LB58x lorsqu'une conception exige une interface haute résolution, d'importantes ressources graphiques, du Wi-Fi externe via SDIO, ou les ressources de calcul et de mémoire pour des charges d'IA embarquée ou de fusion de capteurs.
+SiFli documente 3 744 Ko de SRAM sur puce et des combinaisons, selon la référence, de flash NOR et de PSRAM OPI/HPI intégrées au boîtier. La famille offre aussi une prise en charge de l'affichage incluant MIPI DSI, l'accélération graphique vectorielle, l'USB 2.0 High-Speed et un boîtier BGA offrant un grand nombre d'E/S. Évaluez le SF32LB58x lorsqu'une conception exige une interface haute résolution, d'importantes ressources graphiques, du Wi-Fi externe via SDIO ou des ressources de calcul et de mémoire adaptées à des charges d'IA embarquée ou de fusion de capteurs.
 
 [^1]: STAR-MC1 est un IP de CPU embarqué Armv8-M Mainline configurable, proposé par Arm China. Dans les composants SF32 compatibles, SiFli le documente comme processeur applicatif Arm Cortex-M33 STAR-MC1. Son modèle logiciel de classe Cortex-M33 facilite la reprise du firmware, des intergiciels, des portages de RTOS et des outils Cortex-M33 existants, sous réserve du travail d'intégration habituel propre à chaque composant. Ses configurations CU, SP et SE diffèrent principalement par le cache, la TCM, la XIPU et les capacités TrustZone ; les instructions personnalisées Arm/CDE et l'interface de coprocesseur sont des fonctions optionnelles à vérifier pour la référence SF32 exacte. La documentation SiFli peut employer ***Arm Cortex-M33 STAR-MC1*** ou ***Arm Cortex-M33*** selon le contexte.
 
@@ -93,8 +93,8 @@ Choisissez le SF32LB58x lorsque la conception exige une ou plusieurs de ces capa
 - Bluetooth 5.3 bimode
 - Prise en charge de Bluetooth Classic et de Bluetooth LE
 - Connectivité Wi-Fi externe via SDIO
-- 2x CAN audio intégrés
-- 2x CNA audio intégrés
+- 2x ADC audio intégrés
+- 2x DAC audio intégrés
 - 2 interfaces PDM, chacune pouvant gérer jusqu'à deux microphones numériques ; le nombre d'interfaces n'est pas le nombre de microphones, et les connexions utilisables dépendent aussi du multiplexage des broches et du routage de la carte
 - 3 interfaces I2S : I2S1 est en entrée seule ; I2S2 et I2S3 prennent en charge l'entrée et la sortie. Toutes fonctionnent en mode maître.
 - USB 2.0 High-Speed en modes hôte et périphérique
@@ -154,8 +154,8 @@ Lors du choix d'une variante, vérifiez d'abord ces points :
 
 Suivez cette séquence pour transformer une présélection SF32LB58x en conception validée :
 
-1. **Prouver le chemin du firmware.** Commencez par le [guide de prise en main du SDK SiFli](../../getting-started/sifli/getting-started-sifli-sdk.md), puis utilisez le [flux de travail du SDK SiFli](../../develop/platforms/sifli-sdk/overview.md) et les [exemples](../../develop/examples/index.md) pour valider la configuration de l'affichage, des graphismes, de l'audio, du stockage et du Bluetooth.
-2. **Choisir le support d'intégration.** Évaluez le [SF32LB58-MOD](../modules/SF32LB58-MOD.md) lorsque réduire les risques liés à la RF, au BGA et à l'implantation mémoire est précieux, ou utilisez le [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) pour une validation précoce au niveau de la carte.
+1. **Valider le parcours de développement du firmware.** Commencez par le [guide de prise en main du SDK SiFli](../../getting-started/sifli/getting-started-sifli-sdk.md), puis utilisez le [flux de travail du SDK SiFli](../../develop/platforms/sifli-sdk/overview.md) et les [exemples](../../develop/examples/index.md) pour valider la configuration de l'affichage, des graphismes, de l'audio, du stockage et du Bluetooth.
+2. **Choisir le mode d'intégration.** Évaluez le [SF32LB58-MOD](../modules/SF32LB58-MOD.md) pour réduire les risques liés à la conception RF, au boîtier BGA et au routage de la mémoire, ou utilisez le [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) pour une validation précoce au niveau de la carte.
 3. **Concevoir et relire le matériel.** Utilisez le [guide de conception matérielle](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md) local — y compris ses listes de contrôle du [schéma](../../hardware/chip-guides/SF32LB58x_schematic_checklist.md) et de l'[implantation du circuit imprimé](../../hardware/chip-guides/SF32LB58x_pcb_layout_checklist.md) — avant de valider le schéma ou l'implantation. Validez tôt les hypothèses sur le HDI BGA256 et le routage de la mémoire.
 4. **Vérifier la source faisant autorité.** Confirmez la référence commandable et le boîtier exacts à l'aide de la [fiche technique], du [manuel utilisateur], du [Guide de conception d'origine (wiki.sifli.com)] et de la [Note d'application matérielle (source GitHub)] de SiFli.
 
@@ -163,7 +163,7 @@ Suivez cette séquence pour transformer une présélection SF32LB58x en concepti
 
 ### Module { #module }
 
-Le [SF32LB58-MOD](../modules/SF32LB58-MOD.md) regroupe la puce SF32LB586VDD36, son réseau d'adaptation RF, ainsi que de la PSRAM HPI intégrée au boîtier et des options de stockage dans un module prêt à intégrer. Utilisez-le lorsque le projet a besoin des capacités de la série 58 mais doit réduire tôt, dans le développement matériel, les risques liés à la RF, au BGA et à l'implantation mémoire.
+Le [SF32LB58-MOD](../modules/SF32LB58-MOD.md) regroupe la puce SF32LB586VDD36, son réseau d'adaptation RF, ainsi que de la PSRAM HPI intégrée au boîtier et des options de stockage dans un module prêt à intégrer. Utilisez-le lorsque le projet a besoin des capacités de la série 58 tout en limitant, dès les premières étapes du développement matériel, les risques liés à la RF, au boîtier BGA et au routage de la mémoire.
 
 ### Kits de développement { #development-kits }
 

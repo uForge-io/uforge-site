@@ -37,10 +37,10 @@ tags: [开发, SiFli-SDK, 应用笔记, Bluetooth]
     UART 引脚表汇总了多个系列和封装的默认配置。后续拓扑图和综测仪截图均为思澈科技（SiFli）SF32LB52x 蓝牙信令测试指南中的示例，可用于理解信号路径，但不能据此推断其他封装的引脚或菜单配置。
 
 ![BLE 信令测试拓扑](../../../../assets/develop/app-notes/bluetooth-signalling/figure_1-1.jpg){ loading="lazy" }
-<div align="center"><em>图：思澈科技（SiFli）SF32LB52x 指南示例——BLE 信令：PC 先让 DUT 进入测试模式，再把 UART/HCI 控制链路切换到综测仪。</em></div>
+<div align="center"><em>图：SF32LB52x 源示例——BLE 信令：PC 先让 DUT 进入测试模式，再把 UART/HCI 控制链路切换到综测仪。</em></div>
 
 ![经典蓝牙信令测试拓扑](../../../../assets/develop/app-notes/bluetooth-signalling/figure_1-2.jpg){ loading="lazy" }
-<div align="center"><em>图：思澈科技（SiFli）SF32LB52x 指南示例——经典蓝牙信令：综测仪通过 RF 空口发现并连接 DUT。</em></div>
+<div align="center"><em>图：SF32LB52x 源示例——经典蓝牙信令：综测仪通过 RF 空口发现并连接 DUT。</em></div>
 
 ## 让 DUT 进入测试模式 { #put-the-dut-into-test-mode }
 
@@ -52,7 +52,7 @@ tags: [开发, SiFli-SDK, 应用笔记, Bluetooth]
 4. 断开 PC，将同一 UART1 接到综测仪的 USB 转 RS232 EUT 控制端口。
 
 ![BLE 进入测试模式的串口回显](../../../../assets/develop/app-notes/bluetooth-signalling/figure_2-1.png){ loading="lazy" }
-<div align="center"><em>图：思澈科技（SiFli）SF32LB52x 指南示例——确认 `04 0E 04 XX 03 0C 00` 后，再切换 UART 连接对象。</em></div>
+<div align="center"><em>图：SF32LB52x 源示例——确认 `04 0E 04 XX 03 0C 00` 后，再切换 UART 连接对象。</em></div>
 
 ### 经典蓝牙 { #classic-bluetooth }
 
@@ -65,10 +65,10 @@ tags: [开发, SiFli-SDK, 应用笔记, Bluetooth]
 在综测仪的 `Bluetooth Signaling` 应用中启用信令。BLE 在 `EUT Control` 中选择 `USB-to-RS232 adapter`、1,000,000 波特率和 `Low Energy burst type`；将 DUT 的 UART1 接到综测仪，并将 DUT 的射频同轴线接入综测仪的 RF 输入端，再执行 `Connection Check`，等待 `LE comm test passed`。经典蓝牙则将 `HW Interface` 设为 `None (EUT Control off)`，使用 `Inquire` 搜索 DUT 地址，再选择 `Connect Test Mode`。
 
 ![BLE 综测仪 EUT Control 设置](../../../../assets/develop/app-notes/bluetooth-signalling/figure_3-5.jpg){ loading="lazy" }
-<div align="center"><em>图：思澈科技（SiFli）SF32LB52x 指南示例——BLE 信令的 EUT Control、波特率和 Low Energy 设置。</em></div>
+<div align="center"><em>图：SF32LB52x 源示例——BLE 信令的 EUT Control、波特率和 Low Energy 设置。</em></div>
 
 ![经典蓝牙综测仪设置](../../../../assets/develop/app-notes/bluetooth-signalling/figure_3-7.jpg){ loading="lazy" }
-<div align="center"><em>图：思澈科技（SiFli）SF32LB52x 指南示例——经典蓝牙信令将 EUT Control 设为 `None (EUT Control off)`。</em></div>
+<div align="center"><em>图：SF32LB52x 源示例——经典蓝牙信令将 EUT Control 设为 `None (EUT Control off)`。</em></div>
 
 ## 执行 TX 测试 { #run-tx-measurements }
 

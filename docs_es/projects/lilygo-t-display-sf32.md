@@ -35,7 +35,7 @@ Esta página no demuestra que todas las variantes de la placa incluyan todos los
 
 Antes de empezar, tenga preparado lo siguiente:
 
-- La placa T-Display-SF32 exacta y su revisión de hardware, junto con su esquema o mapa de pines.
+- La placa T-Display-SF32 exacta y su revisión de hardware, junto con su esquemático o mapa de pines.
 - Una fuente de laboratorio con limitación de corriente o una batería protegida cuyo voltaje y estado puedan supervisarse.
 - Un cable USB de datos que funcione, la conexión Type-C documentada para grabar y una imagen de recuperación guardada.
 - Los commits fijados del repositorio T-Display-SF32 y del fork del SDK de LilyGO.
@@ -50,7 +50,7 @@ Antes de empezar, tenga preparado lo siguiente:
 | Área | Configuración inicial de referencia | Evidencias necesarias antes de adaptar |
 |:-----|:------------------------------------|:---------------------------------------|
 | Responsabilidad | Placa, repositorio y fork del SDK de LilyGO | Responsables de los repositorios, commits, revisión de la placa y límites del soporte |
-| Hardware | SF32LB52x, AMOLED/táctil de 2,16 pulgadas, memoria externa y periféricos instalados | Revisión del esquema/mapa de pines, registro de montaje e inventario de dispositivos instalados |
+| Hardware | SF32LB52x, AMOLED/táctil de 2,16 pulgadas, memoria externa y periféricos instalados | Revisión del esquemático/mapa de pines, registro de montaje e inventario de dispositivos instalados |
 | Firmware | Imagen de fábrica incluida o ejemplo sin modificar del repositorio | Identidad de la imagen, registro de grabación, registro de arranque y registro funcional |
 | Alimentación | Ruta USB/cargador/batería documentada por LilyGO | Límites de alimentación, resultado del arranque, comportamiento de apagado y corriente medida para la carga elegida |
 | Adaptación | Cambiar de uno en uno un ejemplo, la interfaz, un sensor, el almacenamiento, el audio o la radio | Cambio revisado, imagen de reversión y resultados completos de regresión |
@@ -69,7 +69,7 @@ Antes de empezar, tenga preparado lo siguiente:
 |:-----------|:-------------------------|:--------|:-------|:----------------|:-------------------------------------------|
 | Placa T-Display-SF32 | SF32LB52x; la configuración documentada incluye AMOLED CO5300 de 2,16 pulgadas, táctil CST9220, 16 MB Flash, 8 MB PSRAM, IMU BHI260AP, LoRa SX1262, microSD, micrófono y amplificador de altavoz integrados con conector de audio de 3,5 mm, y tres botones de usuario | Referencia integrada de cómputo, pantalla, sensores, radio, almacenamiento y audio | Obligatorio | [Repositorio LilyGO](https://github.com/Xinyuan-LilyGO/T-Display-SF32); [archivos de hardware](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | Registre la revisión exacta de la placa y los componentes instalados; no presuponga que todas las variantes tienen la misma población |
 | Expansión T-SF32-Keyboard | Expansión opcional con Wi-Fi ESP32-C6, GPS L76K, subsistema de teclado TCA8418/AW21009/XL9555, BME280, emisor infrarrojo y motor de vibración AW86224 | Añade las funciones inalámbricas, de posicionamiento, teclado, sensores ambientales, infrarrojos y háptica indicadas | Opcional; necesaria solo para esas funciones | [Repositorio LilyGO](https://github.com/Xinyuan-LilyGO/T-Display-SF32); [archivos de hardware](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | Estos componentes no están en la T-SF32-Display independiente; Wi-Fi y GPS comparten UART2, por lo que hay que validar la configuración conjunta de la expansión |
-| Conexión USB Type-C de datos y alimentación controlada | Cable con datos; fuente con límite de corriente o batería protegida cuya tensión pueda supervisarse | Carga de firmware y validación segura de alimentación | Obligatorio | [Repositorio LilyGO](https://github.com/Xinyuan-LilyGO/T-Display-SF32) | Las líneas D+/D- de Type-C llegan al puente USB-UART CH343P; este puerto sirve para programar por UART y obtener registros, no para el USB nativo de dispositivo/anfitrión del SF32. Siga también la condición de arranque específica de la placa (más de 3,5 V) |
+| Conexión USB Type-C de datos y alimentación controlada | Cable con datos; fuente con límite de corriente o batería protegida cuya tensión pueda supervisarse | Carga de firmware y validación segura de alimentación | Obligatorio | [Repositorio LilyGO](https://github.com/Xinyuan-LilyGO/T-Display-SF32) | Las líneas D+/D- de Type-C llegan al puente USB-UART CH343P; este puerto sirve para grabar por UART y obtener registros, no para el USB nativo de dispositivo/anfitrión del SF32. Siga también la condición de arranque específica de la placa (más de 3,5 V) |
 | Accesorios de prueba según la interfaz | Tarjeta microSD, carga de audio/auriculares o dispositivo LoRa en una banda permitida, solo para las interfaces evaluadas | Prueba las interfaces opcionales de la placa | Opcional; elegir según la prueba | [Ejemplos](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/examples) | Antes de conectar, confirme con los archivos de hardware el conector, la tensión, la región y la revisión |
 
 </div>
@@ -163,11 +163,11 @@ Analice los fallos por ámbitos: alimentación y carga de la placa, arranque y g
 
 **Evidencias que se deben conservar:** revisión y fotografías de la placa, identificación del repositorio y la imagen, datos de la fuente y la batería, registros de grabación y arranque, inventario de dispositivos instalados, resultados funcionales y condiciones de la prueba de corriente.
 
-**Criterio de salida de la etapa 1:** se reproduce en dos arranques en frío la configuración identificada de pantalla y táctil, hay resultados registrados para todos los periféricos instalados incluidos en el alcance y se puede restaurar la imagen original o una imagen conocida como funcional.
+**Criterio de salida del punto de control 1:** se reproduce en dos arranques en frío la configuración identificada de pantalla y táctil, hay resultados registrados para todos los periféricos instalados incluidos en el alcance y se puede restaurar la imagen original o una imagen conocida como funcional.
 
 ## Etapa 2 — Validar los límites de periféricos, alimentación y recuperación { #stage-2-validate-peripheral-power-and-recovery-boundaries }
 
-**Objetivo:** determinar si los fallos pueden detectarse y recuperarse sin usar la batería de forma insegura ni depender de una reprogramación sin documentar.
+**Objetivo:** determinar si los fallos pueden detectarse y recuperarse sin usar la batería de forma insegura ni depender de una nueva grabación sin documentar.
 
 <div align="center"><em>Tabla: Pruebas de fallos y recuperación de T-Display-SF32</em></div>
 
@@ -185,7 +185,7 @@ Analice los fallos por ámbitos: alimentación y carga de la placa, arranque y g
 
 </div>
 
-**Criterio de salida de la etapa 2:** cada prueba aplicable tiene un resultado repetible y una ruta de recuperación; cualquier firmware personalizado implementa protección por batería baja; y ningún fallo pendiente puede dañar la batería o dejar la placa inutilizable sin una ruta de recuperación documentada.
+**Criterio de salida del punto de control 2:** cada prueba aplicable tiene un resultado repetible y una ruta de recuperación; cualquier firmware personalizado implementa protección por batería baja; y ningún fallo pendiente puede dañar la batería o dejar la placa inutilizable sin una ruta de recuperación documentada.
 
 ## Etapa 3 — Crear una configuración de referencia reproducible desde el código fuente { #stage-3-build-a-reproducible-source-baseline }
 
@@ -194,9 +194,9 @@ Analice los fallos por ámbitos: alimentación y carga de la placa, arranque y g
 1. Obtenga los commits fijados del repositorio de la placa y del fork del SDK de LilyGO; registre la base del SiFli-SDK principal declarada por el fork.
 2. Configure el entorno PowerShell documentado y compile `t-display-sf32_hcpu` desde un directorio limpio.
 3. Guarde las evidencias del entorno, las dependencias, la configuración, la memoria/partición, la imagen, la grabación y los registros de consola serie.
-4. Repita el proceso en otro equipo o tras borrar todos los resultados de compilación y ejecute de nuevo todas las pruebas de regresión de la etapa 2.
+4. Repita el proceso en otro equipo o tras borrar todos los resultados de compilación y ejecute de nuevo todas las pruebas de regresión de la Etapa 2.
 
-**Criterio de salida de la etapa 3:** no se necesita una imagen obsoleta, un archivo de placa sin seguimiento ni una sustitución del SDK no documentada para obtener un firmware que supere la etapa 2.
+**Criterio de salida del punto de control 3:** no se necesita una imagen obsoleta, un archivo de placa sin seguimiento ni una sustitución del SDK no documentada para obtener un firmware que supere la Etapa 2.
 
 ## Etapa 4 — Adaptar una ruta del producto cada vez { #stage-4-adapt-one-product-path-at-a-time }
 
@@ -217,7 +217,7 @@ Analice los fallos por ámbitos: alimentación y carga de la placa, arranque y g
 
 </div>
 
-**Criterio de salida de la etapa 4:** el cambio se ha revisado, la imagen original sigue siendo recuperable y se superan todas las pruebas aplicables de pantalla, táctil, periféricos, alimentación, flash y recuperación.
+**Criterio de salida del punto de control 4:** el cambio se ha revisado, la imagen original sigue siendo recuperable y se superan todas las pruebas aplicables de pantalla, táctil, periféricos, alimentación, flash y recuperación.
 
 ## Etapa 5 — Revisión de preparación del producto { #stage-5-product-readiness-review }
 
@@ -231,11 +231,11 @@ Antes de comprometerse con una prueba de campo o una PCB propia, responda a esta
 - ¿Las licencias de los archivos de hardware, el firmware, el fork del SDK, los ejemplos, los recursos y los componentes de terceros son compatibles con la distribución prevista?
 - ¿El equipo acepta depender de un prototipo de terceros o ha validado un fork controlado y un plan de soporte?
 
-**Criterio de salida de la etapa 5:** todos los riesgos restantes tienen un responsable, evidencias y una resolución, y el equipo ha decidido expresamente continuar, aplazar o detenerse.
+**Criterio de salida del punto de control 5:** todos los riesgos restantes tienen un responsable, evidencias y una resolución, y el equipo ha decidido expresamente continuar, aplazar o detenerse.
 
 ## Traspaso a la fase de diseño del producto { #handoff-to-product-design }
 
-Traslade el número de pieza SF32 exacto y los dispositivos de memoria, los tiempos de pantalla y táctil, los periféricos montados y sus buses, la estructura de alimentación, la política del cargador y la batería, la estrategia de antena/RF, la conexión de arranque y grabación, el plan de particiones, los puntos de acceso para pruebas de producción, quién mantiene el fork de software y la ruta de recuperación demostrada. Continúe con la [ruta de integración de SF32LB52x](../sf32-products/chips/SF32LB52x.md#integration-path), la [guía de diseño de hardware de SF32LB52x](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [Compilar, grabar y monitorizar con SiFli-SDK](../develop/platforms/sifli-sdk/build-flash-monitor.md) y [Diseño para producción](../hardware/design-for-production.md).
+Traslade el número de pieza SF32 exacto y los dispositivos de memoria, los tiempos de pantalla y táctil, los periféricos montados y sus buses, la estructura de alimentación, la política del cargador y la batería, la estrategia de antena/RF, la conexión de arranque y grabación, el plan de particiones, los puntos de acceso para pruebas de producción, quién mantiene el fork de software y la ruta de recuperación demostrada. Continúe con la [ruta de integración de SF32LB52x](../sf32-products/chips/SF32LB52x.md#integration-path), la [guía de diseño de hardware de SF32LB52x](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [Compilar, grabar y supervisar con SiFli-SDK](../develop/platforms/sifli-sdk/build-flash-monitor.md) y [Diseño para producción](../hardware/design-for-production.md).
 
 ## Fuentes de referencia { #authoritative-sources }
 - [Repositorio Xinyuan-LilyGO/T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32)

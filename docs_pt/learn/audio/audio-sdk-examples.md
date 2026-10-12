@@ -52,7 +52,7 @@ A [visão geral de áudio](overview.md) explica as escolhas de interface e de si
 
 Use o exemplo PDM quando o produto precisar capturar áudio de microfones digitais, em vez de usar uma entrada analógica. O exemplo oficial suporta dois ou quatro microfones PDM, mas a criação do arquivo de gravação e sua reprodução dependem do modo de processamento. A topologia documentada usa os canais esquerdo e direito de `PDM1` para dois microfones e acrescenta `PDM2` para chegar a quatro. Uma interface PDM pode atender até dois microfones digitais; portanto, a quantidade de interfaces não equivale à quantidade de microfones. Confirme a configuração suportada pelo mapeamento de interfaces e canais do SoC de destino.
 
-A página oficial atual lista `sf32lb56-lcd_a128r12n1` como placa compatível. O modo `pdm open pdm12 4 raw` gera apenas logs, sem criar um arquivo de gravação. Os modos de processamento Anyka produzem saída mono, inclusive com quatro microfones: quatro entradas não significam um arquivo de quatro canais. Confira as dependências do algoritmo e o formato de saída antes de usar o exemplo como base para um arranjo de microfones.
+A página upstream atual lista `sf32lb56-lcd_a128r12n1` como placa compatível. O modo `pdm open pdm12 4 raw` gera apenas logs, sem criar um arquivo de gravação. Os modos de processamento Anyka produzem saída mono, inclusive com quatro microfones: quatro entradas não significam um arquivo de quatro canais. Confira as dependências do algoritmo e o formato de saída antes de usar o exemplo como base para um arranjo de microfones.
 
 Antes de adaptá-lo, confirme estes quatro pontos:
 
@@ -61,7 +61,7 @@ Antes de adaptá-lo, confirme estes quatro pontos:
 - A configuração de multiplexação de pinos da placa atribui as funções PDM antes da inicialização do driver.
 - O produto precisa dos serviços de gravação e reprodução habilitados pelo exemplo; eles não são necessários para fazer apenas a captura de dados PDM.
 
-A página oficial do exemplo PDM documenta a configuração da placa e o mapeamento de pinos usados pelo próprio exemplo. Use-os como referência validada, mas substitua-os pela fiação real da placa de destino, sem presumir que podem ser transferidos sem alterações. Consulte o [exemplo PDM](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html).
+A página upstream do exemplo PDM documenta a configuração da placa e o mapeamento de pinos usados pelo próprio exemplo. Use-os como referência validada, mas substitua-os pela fiação real da placa de destino, sem presumir que podem ser transferidos sem alterações. Consulte o [exemplo PDM](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html).
 
 ## Captura analógica e gravação/reprodução básica { #analog-capture-and-basic-recordplayback }
 
@@ -83,7 +83,7 @@ Os dois exemplos validam a reprodução, mas não definem uma arquitetura genér
 
 O **exemplo FLAC** cobre o fluxo completo sem perdas: grava PCM do microfone, codifica em FLAC, decodifica e reproduz o resultado. A página oficial lista as séries `sf32lb52-lcd`, `sf32lb56-lcd` e `sf32lb58-lcd`; são necessários FAT, `libFLAC` e componentes de áudio. É adequado para testar um pipeline de captura baseado em arquivos ou comparar o espaço de armazenamento com PCM sem compressão.
 
-O **exemplo Opus** cobre um fluxo de compressão voltado a aplicações de voz. A página oficial atual lista apenas `eh-lb525`. O exemplo captura a 16 kHz, processa quadros de 10 ms a aproximadamente 16 kbps e depois decodifica e reproduz o fluxo. A documentação também destaca que o tamanho de pilha necessário varia conforme o modo de codificação selecionado. Mantenha essa restrição ao usar o exemplo como base; depois de acrescentar tarefas da aplicação, não presuma que a pilha padrão da tarefa ainda será suficiente.
+O **exemplo Opus** cobre um fluxo de compressão voltado a aplicações de voz. A página upstream atual lista apenas `eh-lb525`. O exemplo captura a 16 kHz, processa quadros de 10 ms a aproximadamente 16 kbps e depois decodifica e reproduz o fluxo. A documentação também destaca que o tamanho de pilha necessário varia conforme o modo de codificação selecionado. Mantenha essa restrição ao usar o exemplo como base; depois de acrescentar tarefas da aplicação, não presuma que a pilha padrão da tarefa ainda será suficiente.
 
 O README oficial do SiFli-SDK indica configurações de pilha específicas para este exemplo: use `OPUS_STACK_SIZE` de 20k quando `opus_test()` chama `opus_encoder_ctl(encoder, OPUS_SET_FORCE_MODE(MODE_SILK_ONLY))`; sem esse modo forçado, a recomendação é 200k. Esses valores não são requisitos universais do Opus. Antes de adotá-los, confirme a revisão do SDK e o caminho de codificação usados e meça o pico de uso da pilha com a carga de trabalho do produto para dimensionar a tarefa.
 
@@ -91,7 +91,7 @@ Nenhum dos dois exemplos implementa uma chamada Bluetooth completa ou um produto
 
 ## Mixagem de três canais { #three-channel-mixing }
 
-A página oficial atual do **reprodutor de mixagem de três canais** lista `sf32lb52-lcd_n16r8` e `sf32lb56-lcd_n16r12n1` como placas testadas. O exemplo lê três arquivos de áudio locais, decodifica cada fluxo, reamostra as entradas que não estão em 48 kHz quando necessário, combina os fluxos PCM mono e reproduz a saída. O conjunto documentado contém dois MP3 e um WAV; use a imagem de sistema de arquivos e os nomes indicados, sem presumir que ela contém arquivos arbitrários.
+Atualmente, o **reprodutor de mixagem de três canais** consta como testado em `sf32lb52-lcd_n16r8` e `sf32lb56-lcd_n16r12n1`. O exemplo lê três arquivos de áudio locais, decodifica cada fluxo, reamostra as entradas que não estão em 48 kHz quando necessário, combina os fluxos PCM mono e reproduz a saída. O conjunto documentado contém dois MP3 e um WAV; use a imagem de sistema de arquivos e os nomes indicados, sem presumir que ela contém arquivos arbitrários.
 
 O mixer verificado soma as três amostras mono e divide por três, em vez de somá-las com ganho total. A execução documentada dura cerca de 50 segundos. Diferencie essa política de ganho e a duração limitada da demonstração dos requisitos de mixagem do produto.
 
@@ -109,7 +109,7 @@ O mixer verificado soma as três amostras mono e divide por três, em vez de som
 | Configuração | Componentes mínimos do SDK habilitados | Memória, sistema de arquivos, codecs, Audio Manager e opções realmente exigidos pelo produto |
 | Dados de áudio | Formato das amostras e arquivos conhecidos e validados | Taxa de amostragem, número de canais, tamanho dos buffers, latência-alvo e tratamento de erros |
 | Comportamento em execução | Sequência básica de captura ou reprodução | Concorrência com interface de usuário, Bluetooth e armazenamento; transições de baixo consumo, recuperação e encerramento |
-| Evidências | Comportamento esperado descrito pela fonte oficial | Log serial, arquivos de captura/reprodução, corrente medida e teste de regressão reproduzível |
+| Evidências | Comportamento esperado descrito pelo upstream | Log serial, arquivos de captura/reprodução, corrente medida e teste de regressão reproduzível |
 
 </div>
 

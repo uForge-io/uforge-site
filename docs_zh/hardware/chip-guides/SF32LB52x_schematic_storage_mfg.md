@@ -62,7 +62,7 @@ tags:
 </div>
 
 !!! note "eMMC 电源域（仅外部稳压供电型号）"
-    eMMC 有 VCC 和 VCCQ 两个电源域。方案 1：两个电源域一起开关，关断电流更低，但 eMMC 从低功耗休眠状态恢复更慢，CPU 平均功耗更高。方案 2：只开关 VCC，VCCQ 保持常供；关断电流高于方案 1，但 eMMC 恢复更快，CPU 平均功耗更低。
+    eMMC 有 VCC 和 VCCQ 两个电源域。方案 1：两个电源域一起开关，关断电流更低，但 eMMC 从低功耗睡眠状态恢复更慢，CPU 平均功耗更高。方案 2：只开关 VCC，VCCQ 保持常供；关断电流高于方案 1，但 eMMC 恢复更快，CPU 平均功耗更低。
 
 !!! important "存储接口的上拉电阻"
     外部稳压供电型号的应用说明规定：NOR Flash 无需外部上拉；SPI NAND 的 PA17（Hold#）需要上拉；SD NAND 的 PA13（D3）和 PA15（CMD）需要上拉；eMMC 的 PA17（D1）、PA13（D3）和 PA15（CMD）需要上拉。推荐阻值为 7.5 kΩ。电池供电型号的应用说明只提到 PA13/PA17 启动配置电阻焊盘，未说明是否也需要 PA15/CMD 上拉。未经确认，不要把外部稳压供电型号的 PA15 要求套用到电池型号；应向思澈科技（SiFli）核实具体型号和启动介质所需的上拉配置。
@@ -274,7 +274,9 @@ DBG_UART 单步调试和日志输出的具体用法，参见 SFtool 和 Impeller
 
 #### 5.7.3. 原理图和 PCB 图纸检查表 { #573-schematic-and-pcb-drawing-checklists }
 
-正式放行应以思澈科技（SiFli）在 Wiki 发布的[原理图与 PCB 官方检查表](https://downloads.sifli.com/hardware/files/documentation/SF32LB52%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)为依据；完整逐项内容见[原理图核对表](SF32LB52x_schematic_checklist.md)。本指南中的检查项用于正式评审前排查常见工程问题。
+正式放行应以思澈科技（SiFli）在 Wiki 发布的[原理图与 PCB 官方检查表][SiFli SF32LB52 Schematic & PCB Checklist (XLSX)]为依据；完整逐项内容见[原理图核对表](SF32LB52x_schematic_checklist.md)。本指南中的检查项用于正式评审前排查常见工程问题。
+
+[SiFli SF32LB52 Schematic & PCB Checklist (XLSX)]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx
 
 **发布检查表**
 

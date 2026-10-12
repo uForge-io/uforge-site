@@ -12,19 +12,19 @@ tags:
 
 Die Serie SF32LB56x ist eine fortschrittliche AIoT-Mikrocontrollerfamilie mit extrem niedrigem Energiebedarf für Produkte, die Dual-Mode-Bluetooth, anspruchsvollere Grafik, integriertes Audio, externen Speicher sowie mehr Display- und Speicherflexibilität benötigen als die SF32LB-Bausteine der unteren Klassen.
 
-Sie nutzt eine big.LITTLE-Dual-Core-Architektur mit einem Hochleistungs-Anwendungsprozessor Arm Cortex-M33 STAR-MC1[^1] mit bis zu 240 MHz und einem Arm-Cortex-M33-STAR-MC1-Prozessor mit extrem niedrigem Energiebedarf und bis zu 96 MHz. Durch diese Aufteilung kann der Hauptkern UI-, Display-, Speicher- und Produktlogik-Lasten übernehmen, während der Low-Power-Kern Always-on-Sensorik, Standby-Verhalten und Bluetooth-Steuerung mit geringerem Energiebudget abwickelt.
+Sie nutzt eine big.LITTLE-Dual-Core-Architektur mit einem Hochleistungs-Anwendungsprozessor Arm Cortex-M33 STAR-MC1[^1] mit bis zu 240 MHz und einem Arm-Cortex-M33-STAR-MC1-Prozessor mit extrem niedrigem Energiebedarf und bis zu 96 MHz. Durch diese Aufteilung kann der Hauptkern Lasten aus UI, Display, Speicher und Produktlogik übernehmen, während der Low-Power-Kern Always-on-Sensorik, Standby-Verhalten und Bluetooth-Steuerung mit geringerem Energiebudget abwickelt.
 
-Die offizielle Produktkurzbeschreibung und das Datenblatt von SiFli positionieren SF32LB56x als Wahl mit höherer Integration für display- und audioreiche vernetzte Geräte. Die Familie ergänzt Dual-Mode-Bluetooth 5.3 mit BLE-Audio-Unterstützung, ePicasso-2.0-Grafik, integrierte Audio-ADC/DAC-Pfade, einen auf TinyML ausgerichteten Beschleuniger, im Gehäuse integrierte Flash-Optionen sowie breitere Unterstützung für externen Speicher und Display-Schnittstellen. In der Praxis passt sie gut, wenn ein Design bei Funk-, Display- oder Audio-Komplexität über SF32LB55x hinausgewachsen ist, aber weiterhin MCU-Klasse bei Energiebedarf und Integration wünscht.
+Die offizielle Produktkurzbeschreibung und das Datenblatt von SiFli positionieren SF32LB56x als höher integrierte Lösung für vernetzte Geräte mit umfangreichen Display- und Audiofunktionen. Die Familie bietet Dual-Mode-Bluetooth 5.3 mit BLE-Audio-Unterstützung, ePicasso-2.0-Grafik, integrierte Audio-ADC/DAC-Pfade, einen auf TinyML ausgerichteten Beschleuniger, Flash-Optionen im Gehäuse sowie breitere Unterstützung für externen Speicher und Display-Schnittstellen. In der Praxis passt sie gut, wenn ein Design bei Funk-, Display- oder Audio-Komplexität über SF32LB55x hinausgewachsen ist, aber weiterhin mit einem Energiebedarf und Integrationsgrad auf MCU-Niveau auskommen soll.
 
 Auch der Chip-Modellleitfaden von SiFli ist hier wichtig: Die Familie SF32LB56x unterstützt je nach Gehäuse unterschiedliche Kombinationen von Display-Schnittstellen. Genaue Teilenummer und Gehäusewahl sind daher eine Architekturentscheidung ersten Ranges und kein spätes PCB-Detail.
 
-[^1]: STAR-MC1 ist ein konfigurierbares Armv8-M-Mainline-Embedded-CPU-IP von Arm China. In kompatiblen SF32-Bausteinen dokumentiert SiFli es als Arm-Cortex-M33-STAR-MC1-Anwendungsprozessor. Das Softwaremodell der Cortex-M33-Klasse erleichtert die Übernahme vorhandener Cortex-M33-Firmware, Middleware, RTOS-Portierungen und Werkzeuge, vorbehaltlich der üblichen bausteinspezifischen Integrationsarbeit. Die Konfigurationen CU, SP und SE unterscheiden sich hauptsächlich in Cache, TCM, XIPU und TrustZone-Fähigkeit; Arm Custom Instructions/CDE und die Coprozessor-Schnittstelle sind optionale Merkmale, die für das genaue SF32-Bauteil zu prüfen sind. In der SiFli-Dokumentation kann je nach Kontext ***Arm Cortex-M33 STAR-MC1*** oder ***Arm Cortex-M33*** stehen.
+[^1]: STAR-MC1 ist ein konfigurierbarer Embedded-CPU-IP-Baustein von Arm China auf Basis von Armv8-M Mainline. In kompatiblen SF32-Geräten dokumentiert SiFli STAR-MC1 als Anwendungsprozessor Arm Cortex-M33 STAR-MC1. Das Softwaremodell auf Cortex-M33-Niveau erleichtert die Übernahme vorhandener Cortex-M33-Firmware, Middleware, RTOS-Portierungen und Werkzeuge, vorbehaltlich der üblichen bausteinspezifischen Integrationsarbeit. Die Konfigurationen CU, SP und SE unterscheiden sich hauptsächlich bei Cache, TCM, XIPU und TrustZone; Arm Custom Instructions/CDE und die Coprozessor-Schnittstelle sind optionale Funktionen, die für das genaue SF32-Gerät zu prüfen sind. In der SiFli-Dokumentation steht je nach Kontext ***Arm Cortex-M33 STAR-MC1*** oder ***Arm Cortex-M33***.
 
 ## Anwendungen { #applications }
 
 **SF32LB56x empfiehlt sich für** Dual-Mode-Bluetooth-Produkte, die bessere Display-, Audio-, Speicher- oder lokale Verarbeitungsfähigkeit benötigen, darunter:
 
-- Smartwatches und Smart Bands
+- Smartwatches und Smart-Armbänder
 - Grafische Wearable-Produkte
 - Medizin- und Gesundheitsgeräte
 - Vernetzte HMI-Produkte
@@ -45,37 +45,37 @@ Wählen Sie SF32LB56x, wenn das Design eine oder mehrere dieser Fähigkeiten ben
 
 ## Entwicklungsressourcen { #development-resources }
 
-[Produktkurzbeschreibung]: https://downloads.sifli.com/docs/Product%20Brief/SF32LB56x/PB0056-SF32LB56x-Product%20Brief%20V1p2.pdf
-[Datenblatt]: https://downloads.sifli.com/docs/Datasheet/sf32lb56/DS5601-SF32LB56x-Datasheet%20V1p9p3.pdf
-[Benutzerhandbuch]: https://downloads.sifli.com/docs/user%20manual/SF32LB56x/UM5601-SF32LB56x-User%20mannual%20V1p0p5.pdf
-[Hardware-Designleitfaden (U, wiki.sifli.com)]: https://wiki.sifli.com/en/hardware/SF32LB56xU-HW-Application.html
-[Hardware-Designleitfaden (V, wiki.sifli.com)]: https://wiki.sifli.com/en/hardware/SF32LB56xV-HW-Application.html
-[Hardware-Applikationsquelle (U)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB56xU-HW-Application.md
-[Hardware-Applikationsquelle (V)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB56xV-HW-Application.md
-[Hardware-Designleitfaden (μForge)]: ../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md
-[Quelle der Hardware-Design-Checkliste]: https://wiki.sifli.com/hardware/index.html
-[SDK-Dokumentation]: https://docs.sifli.com/projects/sdk/latest/sf32lb56x/index.html
-[API-Referenz]: https://docs.sifli.com/projects/sdk/latest/sf32lb56x/api/index.html
+[Product Brief]: https://downloads.sifli.com/docs/Product%20Brief/SF32LB56x/PB0056-SF32LB56x-Product%20Brief%20V1p2.pdf
+[Datasheet]: https://downloads.sifli.com/docs/Datasheet/sf32lb56/DS5601-SF32LB56x-Datasheet%20V1p9p3.pdf
+[User Manual]: https://downloads.sifli.com/docs/user%20manual/SF32LB56x/UM5601-SF32LB56x-User%20mannual%20V1p0p5.pdf
+[Hardware Design Guide (U, wiki.sifli.com)]: https://wiki.sifli.com/en/hardware/SF32LB56xU-HW-Application.html
+[Hardware Design Guide (V, wiki.sifli.com)]: https://wiki.sifli.com/en/hardware/SF32LB56xV-HW-Application.html
+[Hardware Application Source (U)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB56xU-HW-Application.md
+[Hardware Application Source (V)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB56xV-HW-Application.md
+[Hardware Design Guide (μForge)]: ../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md
+[Hardware Design Checklist Source]: https://wiki.sifli.com/hardware/index.html
+[SDK Documentation]: https://docs.sifli.com/projects/sdk/latest/sf32lb56x/index.html
+[API Reference]: https://docs.sifli.com/projects/sdk/latest/sf32lb56x/api/index.html
 [SF32LB56-MOD]: ../modules/SF32LB56-MOD.md
-[Muster kaufen]: https://sifli.taobao.com/
-[Dev-Kits kaufen]: https://sifli.taobao.com/
+[Buy Samples]: https://sifli.taobao.com/
+[Buy Dev Kits]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Produktkurzbeschreibung]__
-- :fontawesome-solid-file-pdf: __[Datenblatt]__
-- :fontawesome-solid-file-pdf: __[Benutzerhandbuch]__
-- :fontawesome-solid-file-lines: __[Hardware-Designleitfaden (U, wiki.sifli.com)]__
-- :fontawesome-solid-file-lines: __[Hardware-Designleitfaden (V, wiki.sifli.com)]__
-- :fontawesome-brands-github: __[Hardware-Applikationsquelle (U)]__
-- :fontawesome-brands-github: __[Hardware-Applikationsquelle (V)]__
-- :fontawesome-solid-file-lines: __[Hardware-Designleitfaden (μForge)]__
-- :fontawesome-solid-book: __[SDK-Dokumentation]__
-- :fontawesome-solid-book-open: __[API-Referenz]__
-- :fontawesome-solid-list-check: __[Quelle der Hardware-Design-Checkliste]__
+- :fontawesome-solid-file-pdf: __[Produktkurzbeschreibung][Product Brief]__
+- :fontawesome-solid-file-pdf: __[Datenblatt][Datasheet]__
+- :fontawesome-solid-file-pdf: __[Benutzerhandbuch][User Manual]__
+- :fontawesome-solid-file-lines: __[Hardware-Design-Leitfaden (U, wiki.sifli.com)][Hardware Design Guide (U, wiki.sifli.com)]__
+- :fontawesome-solid-file-lines: __[Hardware-Design-Leitfaden (V, wiki.sifli.com)][Hardware Design Guide (V, wiki.sifli.com)]__
+- :fontawesome-brands-github: __[Hardware-Anwendungshinweis-Quelle (U)][Hardware Application Source (U)]__
+- :fontawesome-brands-github: __[Hardware-Anwendungshinweis-Quelle (V)][Hardware Application Source (V)]__
+- :fontawesome-solid-file-lines: __[Hardware-Design-Leitfaden (μForge)][Hardware Design Guide (μForge)]__
+- :fontawesome-solid-book: __[SDK-Dokumentation][SDK Documentation]__
+- :fontawesome-solid-book-open: __[API-Referenz][API Reference]__
+- :fontawesome-solid-list-check: __[Quelle der Hardware-Design-Checkliste][Hardware Design Checklist Source]__
 - :fontawesome-solid-sim-card: __[SF32LB56-MOD]__
-- :fontawesome-solid-cart-shopping: __[Muster kaufen]__
-- :fontawesome-solid-cart-shopping: __[Dev-Kits kaufen]__
+- :fontawesome-solid-cart-shopping: __[Muster kaufen][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[Entwicklungsboards kaufen][Buy Dev Kits]__
 
 </div>
 
@@ -96,7 +96,7 @@ Wählen Sie SF32LB56x, wenn das Design eine oder mehrere dieser Fähigkeiten ben
 
 ### Grafik, Display und KI { #graphics-display-and-ai }
 
-- ePicasso-2.0-2D/2,5D-Grafikbeschleunigung
+- ePicasso-2.0-2D/2.5D-Grafikbeschleunigung
 - 4-Ebenen-Alpha-Blending plus eine Hintergrundebene
 - Hardware-Drehung, -Skalierung, -Spiegelung und Umwandlung gängiger Formate
 - Grafik-Engine-Last bis zu 1024 × 1024
@@ -173,19 +173,19 @@ Für die aufgeführten Varianten ist ein Versorgungsspannungsbereich von 1,71 V 
 Mit dieser Abfolge machen Sie aus einer SF32LB56x-Vorauswahl ein validiertes Design:
 
 1. **Firmware-Pfad nachweisen.** Beginnen Sie mit der [Einstiegsanleitung zum SiFli SDK](../../getting-started/sifli/getting-started-sifli-sdk.md) und nutzen Sie dann den [SiFli-SDK-Workflow](../../develop/platforms/sifli-sdk/overview.md) und die [Beispiele](../../develop/examples/index.md), um den Ziel-Pfad für Display, Audio, Bluetooth und Speicher zu erproben.
-2. **Integrationsträger wählen.** Evaluieren Sie [SF32LB56-MOD](../modules/SF32LB56-MOD.md), um den Integrationsaufwand für HF und Hochgeschwindigkeitsspeicher zu verringern, oder nutzen Sie [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) für die Validierung auf Board-Ebene.
-3. **Hardware entwerfen und prüfen.** Nutzen Sie den lokalen [Hardware-Designleitfaden](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) — einschließlich seiner Checklisten für [Schaltplan](../../hardware/chip-guides/SF32LB56x_schematic_checklist.md) und PCB-Layout —, bevor Sie Schaltplan oder Layout freigeben. Halten Sie die Wahl von U/V-Gehäuse und Display-Schnittstelle konsistent mit dem gewählten Bauteil.
-4. **Maßgebliche Quelle prüfen.** Bestätigen Sie das genaue bestellbare Bauteil und Gehäuse anhand von SiFli-[Datenblatt][Datenblatt], [Benutzerhandbuch][Benutzerhandbuch], dem zutreffenden [U-Hardware-Designleitfaden][Hardware-Designleitfaden (U, wiki.sifli.com)] bzw. [V-Hardware-Designleitfaden][Hardware-Designleitfaden (V, wiki.sifli.com)] und der entsprechenden [U-Hardware-Applikationsquelle][Hardware-Applikationsquelle (U)] bzw. [V-Hardware-Applikationsquelle][Hardware-Applikationsquelle (V)].
+2. **Integrationslösung wählen.** Evaluieren Sie [SF32LB56-MOD](../modules/SF32LB56-MOD.md), um den Integrationsaufwand für RF und Hochgeschwindigkeitsspeicher zu verringern, oder nutzen Sie [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) für die Validierung auf Board-Ebene.
+3. **Hardware entwerfen und prüfen.** Nutzen Sie den lokalen [Hardware-Design-Leitfaden](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) — einschließlich seiner Checklisten für [Schaltplan](../../hardware/chip-guides/SF32LB56x_schematic_checklist.md) und PCB-Layout —, bevor Sie Schaltplan oder Layout freigeben. Halten Sie die Wahl von U/V-Gehäuse und Display-Schnittstelle konsistent mit dem gewählten Bauteil.
+4. **Maßgebliche Quelle prüfen.** Bestätigen Sie das genaue bestellbare Bauteil und Gehäuse anhand von SiFli-[Datenblatt][Datasheet], [Benutzerhandbuch][User Manual], dem zutreffenden [U-Hardware-Design-Leitfaden][Hardware Design Guide (U, wiki.sifli.com)] bzw. [V-Hardware-Design-Leitfaden][Hardware Design Guide (V, wiki.sifli.com)] und der entsprechenden [Quelle des U-Hardware-Anwendungshinweises][Hardware Application Source (U)] bzw. [Quelle des V-Hardware-Anwendungshinweises][Hardware Application Source (V)].
 
 ## Verwandte Produkte { #related-products }
 
 ### Modul { #module }
 
-[SF32LB56-MOD](../modules/SF32LB56-MOD.md) bündelt den Chip SF32LB566VCB36, Speicher, HF-Design und Antennenoptionen zu einem integrationsfertigen Modul. Es ist eine starke Wahl, wenn das Projekt die Fähigkeiten von SF32LB56x nutzen und zugleich das Risiko bei HF-Layout, Antennenanpassung, Quarzplatzierung und Integration des Hochgeschwindigkeitsspeichers senken will.
+[SF32LB56-MOD](../modules/SF32LB56-MOD.md) bündelt den Chip SF32LB566VCB36, Speicher, RF-Design und Antennenoptionen zu einem integrationsfertigen Modul. Es ist eine gute Wahl, wenn das Projekt die Fähigkeiten von SF32LB56x nutzen und zugleich das Risiko bei RF-Layout, Antennenanpassung, Quarzplatzierung und Integration des Hochgeschwindigkeitsspeichers senken will.
 
-### Entwicklungskits { #development-kits }
+### Entwicklungsboards { #development-kits }
 
-[SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) ist ein praktischer Ausgangspunkt für Firmware-Inbetriebnahme, Display-Validierung, Audio- und Speichertests, HF-Prüfungen und Leistungsprofilierung, bevor Sie sich auf ein Chip-down- oder modulbasiertes Design festlegen.
+[SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) ist ein praktischer Ausgangspunkt für Firmware-Inbetriebnahme, Display-Validierung, Audio- und Speichertests, RF-Prüfungen und Stromverbrauchsmessungen, bevor Sie sich auf ein Chip-down- oder modulbasiertes Design festlegen.
 
 ### Referenzprodukte { #reference-products }
 

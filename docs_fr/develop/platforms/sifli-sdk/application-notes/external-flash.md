@@ -2,24 +2,24 @@
 icon: lucide/hard-drive
 title: "Utiliser une mémoire Flash externe"
 description: "Configurer les contrôleurs, accéder aux mémoires NOR Flash, NAND Flash et PSRAM externes, monter les systèmes de fichiers associés et adapter les pilotes avec SiFli-SDK."
-tags: [Développement, SiFli-SDK, Notes d’application, Flash]
+tags: [Développement, SiFli-SDK, Notes d'application, Flash]
 ---
 
 # Utiliser une mémoire Flash externe { #use-external-flash }
 
 Cet article transforme le [guide d'utilisation de la Flash](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/flash_usage.html) de SiFli en une démarche pratique d'intégration pour les SF32LB52x, SF32LB55x, SF32LB56x et SF32LB58x. Il couvre la configuration du contrôleur, les espaces d'adressage propres à chaque famille, l'accès direct via RT-Thread, les systèmes de fichiers MTD, les régions réservées, le portage de nouvelles puces Flash, la PSRAM et la prise en charge du J-Link Open Flashloader.
 
-Le guide d’origine utilise `FLASH` à la fois pour la Flash NOR et la Flash NAND. Les exemples conservent ses symboles SDK et noms de dispositifs ; vérifiez la branche SDK cible et le schéma de la carte avant de reprendre une configuration dans un produit.
+Le guide d'origine utilise `FLASH` à la fois pour la Flash NOR et la Flash NAND. Les exemples conservent ses symboles SDK et noms de composants ; vérifiez la branche SDK cible et le schéma de la carte avant de reprendre une configuration dans un produit.
 
 ## Modèle et capacités du contrôleur { #1-controller-model-and-capabilities }
 
-Le contrôleur Flash SiFli peut connecter plusieurs dispositifs Flash simultanément :
+Le contrôleur Flash SiFli peut connecter plusieurs composants Flash simultanément :
 
 <div align="center" markdown>
 
 <em>Tableau : Capacités du contrôleur Flash par famille</em>
 
-| Famille | Nombre maximal de dispositifs | Modes de lignes PSRAM couverts par ce guide | Nommage du contrôleur dans les exemples |
+| Famille | Nombre maximal de composants | Modes de lignes PSRAM couverts par ce guide | Nommage du contrôleur dans les exemples |
 |---|---:|---|---|
 | SF32LB52x | Non indiqué dans cette source | Vérifiez le guide de la famille cible | Vérifiez le nommage QSPI/MPI du SDK cible |
 | SF32LB55x | 4 | PSRAM 4 lignes uniquement | QSPI |
@@ -27,7 +27,7 @@ Le contrôleur Flash SiFli peut connecter plusieurs dispositifs Flash simultané
 | SF32LB58x | 5 | PSRAM 4 lignes, 8 lignes et 16 lignes | Noms compatibles MPI/QSPI |
 </div>
 
-Les dispositifs peuvent être de la Flash NOR ou de la Flash NAND. Par rapport au SF32LB55x, les contrôleurs SF32LB56x et SF32LB58x prennent en charge la PSRAM en mode 8 lignes ; le SF32LB58x prend également en charge le mode 16 lignes. Les contrôleurs de la génération précédente sont appelés QSPI ; ceux de la génération plus récente, conçue pour différents types de mémoire, sont appelés MPI.
+Les composants peuvent être de la Flash NOR ou de la Flash NAND. Par rapport au SF32LB55x, les contrôleurs SF32LB56x et SF32LB58x prennent en charge la PSRAM en mode 8 lignes ; le SF32LB58x prend également en charge le mode 16 lignes. Les contrôleurs de la génération précédente sont appelés QSPI ; ceux de la génération plus récente, conçue pour différents types de mémoire, sont appelés MPI.
 
 Les affectations habituelles du contrôleur sont :
 
@@ -35,17 +35,17 @@ Les affectations habituelles du contrôleur sont :
 - **SF32LB58x :** les contrôleurs 1 et 2 gèrent normalement la Flash NOR intégrée ou la PSRAM, selon le boîtier ; les contrôleurs 3 et 4 dépendent de la conception de la carte ; le contrôleur 5 correspond à la Flash NOR intégrée et est accessible depuis le LCPU et le HCPU.
 - **SF32LB56x :** les contrôleurs 1 et 2 gèrent normalement la Flash NOR intégrée ou la PSRAM, selon le boîtier ; le contrôleur 3 dépend de la conception de la carte ; le contrôleur 5 correspond à la Flash NOR intégrée et est accessible depuis le LCPU et le HCPU. Il n'existe pas de contrôleur 4.
 
-Le pilote est réparti sur deux couches. La couche HAL fournit l'accès aux registres matériels et une logique simple. La couche DRV fournit les opérations de lecture/écriture/effacement de la Flash, l'initialisation et le contrôle, ainsi que les interfaces utilisées par les dispositifs et les systèmes de fichiers.
+Le pilote est réparti sur deux couches. La couche HAL fournit l'accès aux registres matériels et une logique simple. La couche DRV fournit les opérations de lecture/écriture/effacement de la Flash, l'initialisation et le contrôle, ainsi que les interfaces utilisées par les composants et les systèmes de fichiers.
 
 Le contrôleur prend en charge les opérations Flash sur une ou quatre lignes, l'accélération DMA, la programmation par page, la lecture par page, et l'effacement par secteur/bloc. La Flash NOR peut aussi être lue directement via l'interface mémoire AHB. L'unité d'effacement de base dépend de la puce Flash.
 
 ## Configurer QSPI ou MPI { #2-configure-qspi-or-mpi }
 
-Les attributs et l'utilisation de la Flash se configurent via `menuconfig`, qui génère `rtconfig.h`. Les options incluent l'activation du contrôleur, l'utilisation du DMA, l'enregistrement MTD, les paramètres du système de fichiers, la taille mémoire et la gestion de l'ID du dispositif (détection automatique ou définition manuelle).
+Les attributs et l'utilisation de la Flash se configurent via `menuconfig`, qui génère `rtconfig.h`. Les options incluent l'activation du contrôleur, l'utilisation du DMA, l'enregistrement MTD, les paramètres du système de fichiers, la taille mémoire et la gestion de l'ID du composant (détection automatique ou définition manuelle).
 
 ### Exemple QSPI pour SF32LB55x { #sf32lb55x-qspi-example }
 
-Dans `menuconfig`, le guide d’origine suit le chemin **RTOS → On-chip Peripheral Driver → Enable QSPI → Enable QSPI Driver → QSPI Controller 1 Enable**, puis configure le mode QSPI1, l'utilisation du système de fichiers, la taille mémoire et le choix entre la détection automatique de l'ID et sa définition manuelle.
+Dans `menuconfig`, le guide d'origine suit le chemin **RTOS → On-chip Peripheral Driver → Enable QSPI → Enable QSPI Driver → QSPI Controller 1 Enable**, puis configure le mode QSPI1, l'utilisation du système de fichiers, la taille mémoire et le choix entre la détection automatique de l'ID et sa définition manuelle.
 
 Les définitions `rtconfig.h` correspondantes sont :
 
@@ -59,7 +59,7 @@ Les définitions `rtconfig.h` correspondantes sont :
 #define BSP_QSPI1_CHIP_ID 0         /*FLASH1 DEV ID 由系统获取，不需要手动输入（这个配置是为了当有些FLASH获取ID的命令时序与默认设置不同时，手动添加ID以便查找正确的命令表）*/
 ```
 
-Pour une deuxième Flash NOR et une troisième Flash NAND, les exemples du guide d’origine sont :
+Pour une deuxième Flash NOR et une troisième Flash NAND, les exemples du guide d'origine sont :
 
 ```c
 #define BSP_ENABLE_QSPI2 1          /*使能QSPI2 模块*/
@@ -82,7 +82,7 @@ Pour une deuxième Flash NOR et une troisième Flash NAND, les exemples du guide
 
 ### Exemple MPI pour SF32LB58x { #sf32lb58x-mpi-example }
 
-Sur l'EVB SF32LB58x, le guide d’origine suit le chemin **RTOS → On-chip Peripheral Driver → Enable MPI → Enable QSPI Driver → MPI Controller 1 Enable**, puis configure le mode MPI, la taille mémoire et d'autres options du dispositif. Les valeurs de mode sont `0 NOR`, `1 NAND`, `2 PSRAM`, `3 OPSRAM`, `4 HPSRAM` et `5 LEGACY_PSRAM`.
+Sur l'EVB SF32LB58x, le guide d'origine suit le chemin **RTOS → On-chip Peripheral Driver → Enable MPI → Enable QSPI Driver → MPI Controller 1 Enable**, puis configure le mode MPI, la taille mémoire et d'autres options du composant. Les valeurs de mode sont `0 NOR`, `1 NAND`, `2 PSRAM`, `3 OPSRAM`, `4 HPSRAM` et `5 LEGACY_PSRAM`.
 
 Les exemples communs d'activation MPI et par contrôleur sont :
 
@@ -141,8 +141,8 @@ Les exemples communs d'activation MPI et par contrôleur sont :
 
 Le SF32LB56x utilise essentiellement la même configuration MPI que le SF32LB58x, à ceci près que le MPI4 n'est pas présent.
 
-!!! warning "Vérifier l’exemple de configuration MPI"
-    La documentation source de SiFli est contradictoire au sujet de MPI1 : le texte indique que MPI1 est relié par défaut à une mémoire NOR Flash et que son mode ne peut pas être modifié, tandis que l’extrait de configuration suivant règle MPI1 sur le mode 4 (PSRAM 16 lignes). De plus, `BSP_QSPI1_MEM_SIZE` vaut `32` alors que le commentaire indique 16 MB ; pour MPI4, la valeur est `128` et le commentaire indique 128 MB, tandis que le tableau de capacité de l’EVB indique 64 MB. Cet article conserve les valeurs de configuration de la source sans déduire l’encodage des macros ni la capacité réelle du composant. Vérifiez-les avec la configuration Kconfig/générée de la version du SDK cible, le schéma de la carte et la fiche technique de la mémoire.
+!!! warning "Vérifier l'exemple de configuration MPI"
+    La documentation source de SiFli est contradictoire au sujet de MPI1 : le texte indique que MPI1 est relié par défaut à une mémoire NOR Flash et que son mode ne peut pas être modifié, tandis que l'extrait de configuration suivant règle MPI1 sur le mode 4 (PSRAM 16 lignes). De plus, `BSP_QSPI1_MEM_SIZE` vaut `32` alors que le commentaire indique 16 MB ; pour MPI4, la valeur est `128` et le commentaire indique 128 MB, tandis que le tableau de capacité de l'EVB indique 64 MB. Cet article conserve les valeurs de configuration de la source sans déduire l'encodage des macros ni la capacité réelle du composant. Vérifiez-les avec la configuration Kconfig/générée de la version du SDK cible, le schéma de la carte et la fiche technique de la mémoire.
 
 ## Espaces d'adressage Flash { #3-flash-address-spaces }
 
@@ -253,7 +253,7 @@ Pour une Flash NAND de plus de 64 MB, le guide recommande de la raccorder à MPI
 
 ## Accéder à la Flash via RT-Thread { #4-access-flash-through-rt-thread }
 
-L'interface Flash de RT-Thread sélectionne le contrôleur à partir de l'adresse absolue. Appelez `rt_hw_flash_init` une fois que les paramètres du contrôleur et du dispositif ont été générés dans `rtconfig.h` :
+L'interface Flash de RT-Thread sélectionne le contrôleur à partir de l'adresse absolue. Appelez `rt_hw_flash_init` une fois que les paramètres du contrôleur et du composant ont été générés dans `rtconfig.h` :
 
 ```c
 int rt_hw_flash_init(void);
@@ -262,11 +262,11 @@ int rt_flash_write(rt_uint32_t addr, const rt_uint8_t *buf, size_t size);
 rt_err_t rt_flash_erase(rt_uint32_t addr, size_t size);
 ```
 
-`rt_flash_read` et `rt_flash_write` renvoient le nombre d’octets transférés en cas de succès et `0` en cas d’échec ; `rt_flash_erase` renvoie `RT_EOK` en cas de succès. Les déclarations ont été normalisées pour faciliter la lecture ; vérifiez les en-têtes et les valeurs de retour réels dans la branche du SDK cible.
+`rt_flash_read` et `rt_flash_write` renvoient le nombre d'octets transférés en cas de succès et `0` en cas d'échec ; `rt_flash_erase` renvoie `RT_EOK` en cas de succès. Les déclarations ont été normalisées pour faciliter la lecture ; vérifiez les en-têtes et les valeurs de retour réels dans la branche du SDK cible.
 
 Utilisez `rt_flash_read` pour les lectures NOR comme NAND ; la NOR peut aussi être lue via sa fenêtre mémoire, tandis que la NAND doit obligatoirement passer par l'API, l'appelant devant gérer lui-même le tampon. Utilisez `rt_flash_write` pour les deux types. Pour les opérations d'effacement, la NOR exige normalement une adresse et une longueur alignées sur un secteur (généralement 4 KB) ; la NAND exige normalement un alignement sur un bloc (généralement 128 KB). Sauvegardez et restaurez vous-même toute donnée non alignée.
 
-Lorsque la Flash ne prend pas en charge le XIP, le code ne peut pas effacer ni programmer la même Flash depuis laquelle il s'exécute. Placez le code du pilote Flash en SRAM. Le fragment de script d'édition de liens Keil du guide d’origine réserve 64 KB à `0x200E1000` :
+Lorsque la Flash ne prend pas en charge le XIP, le code ne peut pas effacer ni programmer la même Flash depuis laquelle il s'exécute. Placez le code du pilote Flash en SRAM. Le fragment de script d'édition de liens Keil du guide d'origine réserve 64 KB à `0x200E1000` :
 
 ```text
 LR_IROM1 0x10020000 0x100000  {    ; load region size_region
@@ -282,10 +282,10 @@ LR_IROM1 0x10020000 0x100000  {    ; load region size_region
 }
 ```
 
-L’exemple source de lecture/écriture contient un tampon de données non initialisé et une séquence de nettoyage incorrecte ; il ne doit donc pas être exécuté tel quel. L’exemple NOR Flash adapté reçoit l’adresse de test en paramètre et ne suppose pas d’adresse fixe dans le produit.
+L'exemple source de lecture/écriture contient un tampon de données non initialisé et une séquence de nettoyage incorrecte ; il ne doit donc pas être exécuté tel quel. L'exemple NOR Flash adapté reçoit l'adresse de test en paramètre et ne suppose pas d'adresse fixe dans le produit.
 
-!!! warning "L’effacement de la Flash est destructif"
-    N’exécutez ce test que dans une zone NOR dédiée, effaçable et réservée aux essais. Réglez `TEST_SIZE` sur la granularité d’effacement requise par le composant et le pilote, réservez au moins une unité d’effacement complète et respectez l’alignement de l’adresse et de la longueur. Ne ciblez pas la configuration de démarrage, les données de calibration, les images firmware/OTA, un système de fichiers ni les données utilisateur. Cet exemple ne s’applique pas à la NAND, qui nécessite également une gestion des blocs défectueux, de l’ECC, de l’OOB et des contraintes de pages/blocs propres au composant et au pilote.
+!!! warning "L'effacement de la Flash est destructif"
+    N'exécutez ce test que dans une zone NOR dédiée, effaçable et réservée aux essais. Réglez `TEST_SIZE` sur la granularité d'effacement requise par le composant et le pilote, réservez au moins une unité d'effacement complète et respectez l'alignement de l'adresse et de la longueur. Ne ciblez pas la configuration de démarrage, les données de calibration, les images firmware/OTA, un système de fichiers ni les données utilisateur. Cet exemple ne s'applique pas à la NAND, qui nécessite également une gestion des blocs défectueux, de l'ECC, de l'OOB et des contraintes de pages/blocs propres au composant et au pilote.
 
 ```c
 #include <rtthread.h>
@@ -439,7 +439,7 @@ L'exemple de système de fichiers NOR du guide SF32LB56x enregistre `flash1`, le
 
 ## Réserver des zones et examiner la disposition Flash actuelle { #6-reserve-and-review-the-current-flash-layout }
 
-Le [guide d’utilisation de la mémoire SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/memory_usage.html) décrit cette disposition QSPI1 par défaut : la zone de 64 KB comprise entre `0x10000000` et `0x1000FFFF` contient la table de configuration Flash, la table d’étalonnage et une zone réservée. Les 64 KB suivants, de `0x10010000` à `0x1001FFFF`, sont réservés au correctif de la ROM de démarrage ; le code utilisateur commence à `0x10020000`. Si `FLASH2` utilise une Flash NOR, les ressources d’image débutent à `0x64000000`. FlashDB (ou EasyFlash) utilise également des portions de `flash1` et `flash2` pour les variables et les journaux ; récupérez et repartitionnez ces régions selon les besoins du système.
+Le [guide d'utilisation de la mémoire SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/memory_usage.html) décrit cette disposition QSPI1 par défaut : la zone de 64 KB comprise entre `0x10000000` et `0x1000FFFF` contient la table de configuration Flash, la table d'étalonnage et une zone réservée. Les 64 KB suivants, de `0x10010000` à `0x1001FFFF`, sont réservés au correctif de la ROM de démarrage ; le code utilisateur commence à `0x10020000`. Si `FLASH2` utilise une Flash NOR, les ressources d'image débutent à `0x64000000`. FlashDB (ou EasyFlash) utilise également des portions de `flash1` et `flash2` pour les variables et les journaux ; réaffectez ces régions et redéfinissez leur découpage selon les besoins du système.
 
 ```c
 #define FLASH_TABLE_SIZE            (20*1024)
@@ -455,7 +455,7 @@ Le [guide d’utilisation de la mémoire SF32LB55x](https://docs.sifli.com/proje
 #define FLASH_USER_CODE_START_ADDR   (FLASH_BOOT_PATCH_END_ADDR + 1)   /* 0x10020000 */
 ```
 
-Traitez ces adresses comme la disposition par défaut du guide d’origine, et non comme un plan de partition universel. Comparez-les avec le script d'édition de liens cible, le bootloader, le plan OTA, les plages du système de fichiers et la capacité Flash réelle avant d'allouer les données produit.
+Traitez ces adresses comme la disposition par défaut du guide d'origine, et non comme un plan de partition universel. Comparez-les avec le script d'édition de liens cible, le bootloader, le plan OTA, les plages du système de fichiers et la capacité Flash réelle avant d'allouer les données produit.
 
 ## Ajouter la prise en charge d'une mémoire NOR Flash { #7-port-a-nor-flash-part }
 
@@ -468,7 +468,7 @@ Vérifiez :
 - la tension d'alimentation : 3,3 V ou 1,8 V ;
 - si la puce prend en charge le SPI simple, double et quadruple ligne ;
 - la fréquence maximale dans chaque mode de ligne ; et
-- tout autre détail requis par la conception matérielle. Le guide d’origine précise que la température de fonctionnement et la vitesse d'effacement/programmation ne sont pas nécessaires pour vérifier la compatibilité du portage logiciel à ce stade.
+- tout autre détail requis par la conception matérielle. Le guide d'origine précise que la température de fonctionnement et la vitesse d'effacement/programmation ne sont pas nécessaires pour vérifier la compatibilité du portage logiciel à ce stade.
 
 ### Commandes d'exploitation { #operation-commands }
 
@@ -551,7 +551,7 @@ typedef struct
 } FLASH_CMD_CFG_T;
 ```
 
-Ici, `cmd` est l'identifiant de commande (`0x06` pour l'activation en écriture et `0x05` pour la lecture du statut dans les exemples du guide d’origine). `func_mode` sélectionne la lecture ou l'écriture ; `data_mode` sélectionne l'absence de données ou leur transfert sur une, deux ou quatre lignes ; `dummy_cycle` décrit les cycles d'horloge entre la commande et l'adresse/les données ; `ab_size` et `ab_mode` décrivent les octets alternatifs ; `addr_size` et `addr_mode` décrivent la longueur de l'adresse et le mode de ligne ; `cmd_mode` indique si la commande elle-même est envoyée sur une, deux ou quatre lignes.
+Ici, `cmd` est l'identifiant de commande (`0x06` pour l'activation en écriture et `0x05` pour la lecture du statut dans les exemples du guide d'origine). `func_mode` sélectionne la lecture ou l'écriture ; `data_mode` sélectionne l'absence de données ou leur transfert sur une, deux ou quatre lignes ; `dummy_cycle` décrit les cycles d'horloge entre la commande et l'adresse/les données ; `ab_size` et `ab_mode` décrivent les octets alternatifs ; `addr_size` et `addr_mode` décrivent la longueur de l'adresse et le mode de ligne ; `cmd_mode` indique si la commande elle-même est envoyée sur une, deux ou quatre lignes.
 
 ## Ajouter la prise en charge d'une mémoire NAND Flash { #8-port-a-nand-flash-part }
 
@@ -559,7 +559,7 @@ Le portage NAND suit le même processus que le portage NOR, mais le jeu de comma
 
 ## Ajouter la prise en charge de la PSRAM { #9-port-psram }
 
-Le guide d’origine documente la prise en charge de la PSRAM APM en modes 4 lignes, 8 lignes et 16 lignes, pour des capacités de 4 MB à 32 MB :
+Le guide d'origine documente la prise en charge de la PSRAM APM en modes 4 lignes, 8 lignes et 16 lignes, pour des capacités de 4 MB à 32 MB :
 
 - SF32LB55x ne prend en charge que la PSRAM 4 lignes.
 - SF32LB58x prend en charge la PSRAM 4 lignes, 8 lignes et 16 lignes.
@@ -569,7 +569,7 @@ Utilisez les réglages de mode MPI/QSPI et de taille mémoire correspondant au b
 
 ## Utiliser le DSK J-Link et l'Open Flashloader { #10-use-j-link-dsk-and-open-flashloader }
 
-Le répertoire `tools/flash/jlink_drv` du SDK contient le paquet statique Device Support Kit (DSK) de SiFli pour J-Link. Le fichier `JLinkDevices.xml` à la racine décrit les relations entre le dispositif, la banque Flash et le chargeur Flash ; les fichiers ELF présents dans ses sous-répertoires sont les algorithmes Open Flashloader.
+Le répertoire `tools/flash/jlink_drv` du SDK contient le paquet statique Device Support Kit (DSK) de SiFli pour J-Link. Le fichier `JLinkDevices.xml` à la racine décrit les relations entre le composant, la banque Flash et le chargeur Flash ; les fichiers ELF présents dans ses sous-répertoires sont les algorithmes Open Flashloader.
 
 Installez J-Link V7.62 ou une version ultérieure, puis copiez l'intégralité du répertoire `tools/flash/jlink_drv` dans le répertoire `JLinkDevices\SiFli` de l'utilisateur courant. Sous Windows, le chemin par défaut est `C:\Users\<user>\AppData\Roaming\SEGGER\JLinkDevices\SiFli`.
 
@@ -577,20 +577,20 @@ Gardez ces règles synchronisées avec le projet de carte :
 
 - Depuis J-Link V7.62, tous les fichiers `*.xml` sous `JLinkDevices` sont analysés récursivement ; il n'est donc pas nécessaire de modifier le fichier `JLinkDevices.xml` de l'installation J-Link.
 - Les chemins des chargeurs Flash dans le XML sont résolus par rapport à `JLinkDevices.xml` ; copiez le répertoire complet, pas seulement les fichiers ELF sélectionnés.
-- Le dispositif sélectionné doit correspondre à `JLINK_DEVICE` dans `rtconfig.py`, par exemple `SF32LB56X`, `SF32LB56X_NAND` ou `SF32LB52X_NOR`.
+- Le composant sélectionné doit correspondre à `JLINK_DEVICE` dans `rtconfig.py`, par exemple `SF32LB56X`, `SF32LB56X_NAND` ou `SF32LB52X_NOR`.
 - Un `FlashBankInfo` peut contenir plusieurs entrées `LoaderInfo`. J-Link utilise le premier chargeur Flash par défaut. Sélectionnez explicitement un autre chargeur avec `_device "<DeviceName>?BankAddr=<FlashBankBase>&Loader=<LoaderName>"_` ou en appelant `_JLINK_ExecCommand("DEVICE_SelectLoader BankAddr=<FlashBankBase> Loader=<LoaderName>");_` depuis un script J-Link.
-- Les noms de dispositif sans suffixe tels que `SF32LB52X`, `SF32LB55X`, `SF32LB56X` et `SF32LB58X` incluent désormais les informations complètes sur les banques et les chargeurs Flash, avec une préférence pour le chargeur NOR. Les noms suffixés restent disponibles pour la compatibilité avec les scripts existants.
+- Les noms de composant sans suffixe tels que `SF32LB52X`, `SF32LB55X`, `SF32LB56X` et `SF32LB58X` incluent désormais les informations complètes sur les banques et les chargeurs Flash, avec une préférence pour le chargeur NOR. Les noms suffixés restent disponibles pour la compatibilité avec les scripts existants.
 
-## Liste de vérification d'intégration { #integration-checklist }
+## Liste de contrôle d'intégration { #integration-checklist }
 
 Avant d'utiliser une Flash externe dans un produit, consignez :
 
 1. la famille SF32 exacte, le boîtier, la puce Flash, la tension et les modes de ligne pris en charge ;
-2. le contrôleur QSPI/MPI, le mode, le DMA, la taille mémoire, l'ID du dispositif et les réglages MTD/système de fichiers ;
+2. le contrôleur QSPI/MPI, le mode, le DMA, la taille mémoire, l'ID du composant et les réglages MTD/système de fichiers ;
 3. la fenêtre d'adressage sélectionnée et les régions réservées pour la table, l'étalonnage, le correctif de démarrage, l'image, les ressources, les variables, les journaux et les données du système de fichiers ;
 4. l'alignement d'effacement et si le pilote s'exécute depuis la SRAM pendant la programmation/l'effacement ;
-5. le nom du dispositif MTD et le point de montage du système de fichiers, le cas échéant ; et
-6. le nom du dispositif J-Link de la carte et le chargeur Flash sélectionné.
+5. le nom du périphérique MTD et le point de montage du système de fichiers, le cas échéant ; et
+6. le nom du composant J-Link de la carte et le chargeur Flash sélectionné.
 
 ## Pages associées { #related-pages }
 

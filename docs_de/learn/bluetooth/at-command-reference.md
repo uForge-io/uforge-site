@@ -19,7 +19,7 @@ tags:
 
 </div>
 
-Diese Referenz dokumentiert die externe AT-Befehlsschnittstelle des SF32LB57-Dual-Mode-Bluetooth-Moduls (SIFLI_AT) in Version V1.2.1. Befehle und Antwortzeichenketten sind in Festbreitenschrift dargestellt; `\r` steht für ein Wagenrücklaufzeichen (0x0D), `\n` für einen Zeilenvorschub (0x0A). AT-Befehle werden als ASCII-Text übertragen; binäre Felder in PDU-Rahmen verwenden das Little-Endian-Format.
+Diese Referenz dokumentiert die externe AT-Befehlsschnittstelle des SF32LB57-Dual-Mode-Bluetooth-Moduls (SIFLI_AT) in Version V1.2.1. Befehle und Antwortzeichenketten sind in Monospace-Schrift dargestellt; `\r` steht für einen Wagenrücklauf (0x0D), `\n` für einen Zeilenvorschub (0x0A). AT-Befehle werden als ASCII-Text übertragen; binäre Felder in PDU-Rahmen verwenden Little-Endian-Byte-Reihenfolge.
 
 Dies ist die vollständige AT-Schnittstellenspezifikation, auf die von der Seite Bluetooth-AT-Befehlsmodul verwiesen wird.
 
@@ -75,9 +75,9 @@ AT-Befehle werden als ASCII-Text übertragen und mit einem Wagenrücklaufzeichen
 
 | Form | Befehl | Beschreibung |
 |:-----|:--------|:-------------|
-| Abfrage | `AT+<CMD>?\r` | Einen Parameter oder Status lesen |
-| Setzen | `AT+<CMD>=<param>[,<param>...]\r` | Einen Parameter schreiben |
-| Ausführen | `AT+<CMD>\r` | Eine Aktion auslösen |
+| Abfrage | `AT+<CMD>?\r` | Einen Parameter oder Status abfragen |
+| Setzen | `AT+<CMD>=<param>[,<param>...]\r` | Einen Parameter setzen |
+| Ausführen | `AT+<CMD>\r` | Eine Aktion ausführen |
 
 </div>
 
@@ -155,7 +155,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Befehl | `AT+NAME?\r` |
 | Antwort | `\r\n+NAME:<device name>\r\n\r\nOK\r\n` |
 | Parameter | Keine |
-| Hinweise | Gibt den aktuell eingestellten Gerätenamen ohne MAC-Suffix zurück. Das Suffix wirkt sich nur auf den ausgesendeten Namen aus. |
+| Hinweise | Gibt den aktuell eingestellten Gerätenamen ohne MAC-Suffix zurück. Das Suffix wirkt sich nur auf den in Advertising-Paketen sichtbaren Namen aus. |
 
 </div>
 
@@ -366,7 +366,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 |:-----|:--------|
 | Befehl | `AT+LBDADDR=<addr>\r` |
 | Antwort | Erfolg: `\r\nOK\r\n`; Fehlschlag: `\r\nERROR\r\n` |
-| Parameter | `addr`: die zu setzende Bluetooth-Adresse mit genau 12 Hex-Zeichen ohne Trennzeichen, höchstwertiges Byte zuerst, z. B. `001583112233`. |
+| Parameter | `addr`: die zu setzende Bluetooth-Adresse; sie muss aus genau 12 Hex-Zeichen ohne Trennzeichen bestehen, höchstwertiges Byte zuerst, z. B. `001583112233`. |
 | Hinweise | Die Adresse wird in der Konfiguration gespeichert und nach einem Reset wirksam. Ab Werk besteht der Wert nur aus Nullen; in diesem Fall wird die Adresse automatisch aus der Chip-UID erzeugt. |
 
 </div>
@@ -397,7 +397,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Befehl | `AT+BLEADDR=<addr>\r` |
 | Antwort | `\r\nERROR\r\n` |
 | Parameter | Keine |
-| Hinweise | Dieser Befehl akzeptiert kein direktes Setzen der BLE-Adresse — der Aufruf gibt immer `ERROR` zurück. Eine statische BLE-Zufallsadresse wird über `AT+RANDOMADDR=1` generiert. |
+| Hinweise | Mit diesem Befehl lässt sich die BLE-Adresse nicht direkt setzen; jeder Aufruf gibt `ERROR` zurück. Eine statische BLE-Zufallsadresse wird über `AT+RANDOMADDR=1` generiert. |
 
 </div>
 
@@ -463,9 +463,9 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 ### Betriebsmodus und Sichtbarkeit { #operating-mode-and-visibility }
 
-#### Auffindbarkeitsstatus abfragen { #query-discoverable-state }
+#### Sichtbarkeitsstatus abfragen { #query-discoverable-state }
 
-<div align="center"><em>Tabelle: Auffindbarkeitsstatus abfragen</em></div>
+<div align="center"><em>Tabelle: Sichtbarkeitsstatus abfragen</em></div>
 
 <div align="center" markdown>
 
@@ -473,14 +473,14 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 |:-----|:--------|
 | Befehl | `AT+DISCOVERABLE?\r` |
 | Antwort | Erfolg: `\r\n+DISCOVERABLE:<state>\r\n\r\nOK\r\n` |
-| Parameter | `state`: aktueller Auffindbarkeitsstatus. 0 = nicht auffindbar, 1 = auffindbar, 2 = teilweise auffindbar (gemischter Zustand). Die Bedeutung hängt vom Betriebsmodus ab: im BLE-Modus (`BTMODE=1`) spiegelt er die BLE-Advertising-Einstellung wider — 1 = ein, 0 = aus; im BT-Modus (`BTMODE=2`) spiegelt er Inquiry Scan und Page Scan wider — 1, wenn beide ein sind, 0, wenn beide aus sind, sonst 2; im Dual-Mode (`BTMODE=0`) ist er 1, wenn BLE-Advertising, Inquiry Scan und Page Scan alle ein sind, 0, wenn alle aus sind, sonst 2. |
-| Hinweise | Fragt nur den aktuellen Auffindbarkeitsstatus ab — ändert den Gerätezustand nicht. |
+| Parameter | `state`: aktueller Sichtbarkeitsstatus. 0 = nicht sichtbar, 1 = sichtbar, 2 = teilweise sichtbar (gemischter Zustand). Die Bedeutung hängt vom Betriebsmodus ab: im BLE-Modus (`BTMODE=1`) spiegelt der Wert die BLE-Advertising-Einstellung wider — 1 = ein, 0 = aus; im BT-Modus (`BTMODE=2`) den Inquiry-Scan und Page-Scan — 1, wenn beide aktiv sind, 0, wenn beide inaktiv sind, sonst 2; im Dual-Mode (`BTMODE=0`) ist der Wert 1, wenn BLE-Advertising, Inquiry-Scan und Page-Scan aktiv sind, 0, wenn alle inaktiv sind, sonst 2. |
+| Hinweise | Fragt nur den aktuellen Sichtbarkeitsstatus ab und ändert den Gerätezustand nicht. |
 
 </div>
 
-#### Auffindbarkeitsstatus setzen { #set-discoverable-state }
+#### Sichtbarkeitsstatus setzen { #set-discoverable-state }
 
-<div align="center"><em>Tabelle: Auffindbarkeitsstatus setzen</em></div>
+<div align="center"><em>Tabelle: Sichtbarkeitsstatus setzen</em></div>
 
 <div align="center" markdown>
 
@@ -488,8 +488,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 |:-----|:--------|
 | Befehl | `AT+DISCOVERABLE=<mode>\r` |
 | Antwort | Erfolg: `\r\nOK\r\n`; Fehlschlag: `\r\nERROR\r\n` |
-| Parameter | `mode`: 0 = Auffindbarkeit ausschalten, 1 = Auffindbarkeit einschalten. |
-| Hinweise | Wirkt entsprechend dem aktuellen Betriebsmodus: im BLE-Modus (`BTMODE=1`) schaltet es das BLE-Advertising ein oder aus; im BT-Modus (`BTMODE=2`) schaltet es Inquiry Scan und Page Scan ein oder aus; im Dual-Mode (`BTMODE=0`) steuert es BLE-Advertising, Inquiry Scan und Page Scan gemeinsam. |
+| Parameter | `mode`: 0 = Sichtbarkeit ausschalten, 1 = Sichtbarkeit einschalten. |
+| Hinweise | Die Wirkung hängt vom aktuellen Betriebsmodus ab: Im BLE-Modus (`BTMODE=1`) schaltet der Befehl das BLE-Advertising ein oder aus, im BT-Modus (`BTMODE=2`) den Inquiry-Scan und Page-Scan. Im Dual-Mode (`BTMODE=0`) steuert er BLE-Advertising, Inquiry-Scan und Page-Scan gemeinsam. |
 
 </div>
 
@@ -503,8 +503,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 |:-----|:--------|
 | Befehl | `AT+GATTDISCOVER?\r` |
 | Antwort | Erfolg: `\r\n+GATTDISCOVER:<state>\r\n\r\nOK\r\n`; Fehlschlag: `\r\nERROR\r\n` |
-| Parameter | `state`: der tatsächliche über die Luftschnittstelle gesendete BLE-Advertising-Status. 0 = kein Advertising, 1 = Advertising aktiv. |
-| Hinweise | Gibt den tatsächlichen On-Air-BLE-Advertising-Status zurück. Nicht verfügbar, wenn der Betriebsmodus nur BT ist (`BTMODE=2`) — gibt `ERROR` zurück. |
+| Parameter | `state`: tatsächlicher BLE-Advertising-Status auf der Luftschnittstelle. 0 = kein Advertising, 1 = Advertising aktiv. |
+| Hinweise | Gibt den tatsächlichen BLE-Advertising-Status auf der Luftschnittstelle zurück. Im reinen BT-Modus (`BTMODE=2`) ist die Abfrage nicht verfügbar und gibt `ERROR` zurück. |
 
 </div>
 
@@ -519,13 +519,13 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Befehl | `AT+GATTDISCOVER=<value>\r` |
 | Antwort | Erfolg: `\r\nOK\r\n`; Fehlschlag: `\r\nERROR\r\n` |
 | Parameter | `value`: 0 = BLE-Advertising stoppen, 1 = BLE-Advertising starten. |
-| Hinweise | Steuert direkt das Starten und Stoppen des BLE-Advertising. Nicht verfügbar, wenn der Betriebsmodus nur BT ist (`BTMODE=2`). |
+| Hinweise | Schaltet das BLE-Advertising direkt ein oder aus. Im reinen BT-Modus (`BTMODE=2`) ist der Befehl nicht verfügbar. |
 
 </div>
 
-#### SPP-Auffindbarkeitsstatus abfragen { #query-spp-discoverable-state }
+#### SPP-Sichtbarkeitsstatus abfragen { #query-spp-discoverable-state }
 
-<div align="center"><em>Tabelle: SPP-Auffindbarkeitsstatus abfragen</em></div>
+<div align="center"><em>Tabelle: SPP-Sichtbarkeitsstatus abfragen</em></div>
 
 <div align="center" markdown>
 
@@ -533,14 +533,14 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 |:-----|:--------|
 | Befehl | `AT+SPPDISCOVER?\r` |
 | Antwort | `\r\n+SPPDISCOVER:<state>\r\n\r\nOK\r\n` |
-| Parameter | `<state>`: aktueller Inquiry-Scan-Status, der die Auffindbarkeit steuert. 0 = aus, 1 = ein. |
+| Parameter | `<state>`: aktueller Inquiry-Scan-Status, der die Sichtbarkeit steuert. 0 = aus, 1 = ein. |
 | Hinweise | Gibt `ERROR` zurück, wenn `AT+BTMODE` gleich 1 ist (nur BLE). |
 
 </div>
 
-#### SPP-Auffindbarkeitsstatus setzen { #set-spp-discoverable-state }
+#### SPP-Sichtbarkeitsstatus setzen { #set-spp-discoverable-state }
 
-<div align="center"><em>Tabelle: SPP-Auffindbarkeitsstatus setzen</em></div>
+<div align="center"><em>Tabelle: SPP-Sichtbarkeitsstatus setzen</em></div>
 
 <div align="center" markdown>
 
@@ -548,7 +548,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 |:-----|:--------|
 | Befehl | `AT+SPPDISCOVER=<state>\r` |
 | Antwort | Erfolg: `\r\nOK\r\n`; Fehlschlag: `\r\nERROR\r\n` |
-| Parameter | `<state>`: Aktivierung des Inquiry Scan, der die Auffindbarkeit steuert. 0 = aus, 1 = ein. |
+| Parameter | `<state>`: Schalter für den Inquiry-Scan, der die Sichtbarkeit steuert. 0 = aus, 1 = ein. |
 | Hinweise | Gibt `ERROR` zurück, wenn `AT+BTMODE` gleich 1 ist (nur BLE). Ändert nur das Inquiry-Scan-Bit und lässt das Page-Scan-Bit unverändert. |
 
 </div>
@@ -578,7 +578,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 |:-----|:--------|
 | Befehl | `AT+SPPCONNECT=<state>\r` |
 | Antwort | Erfolg: `\r\nOK\r\n`; Fehlschlag: `\r\nERROR\r\n` |
-| Parameter | `<state>`: Aktivierung des Page Scan, der die Verbindbarkeit steuert. 0 = aus, 1 = ein. |
+| Parameter | `<state>`: Schalter für den Page-Scan, der die Verbindbarkeit steuert. 0 = aus, 1 = ein. |
 | Hinweise | Gibt `ERROR` zurück, wenn `AT+BTMODE` gleich 1 ist (nur BLE). Ändert nur das Page-Scan-Bit und lässt das Inquiry-Scan-Bit unverändert. |
 
 </div>
@@ -639,7 +639,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Befehl | `AT+COMMAND=<mode>\r` |
 | Antwort | Erfolg: `\r\nOK\r\n`; Fehlschlag: `\r\nERROR\r\n` |
 | Parameter | `mode`: Betriebsmodus. 0 = Transparenzmodus, 1 = Befehlsmodus. Das Modul startet nach dem Einschalten im Transparenzmodus. |
-| Hinweise | Wird sofort wirksam, nicht persistiert — kehrt nach einem Reset in den Transparenzmodus zurück. Im Transparenzmodus werden auf der seriellen Schnittstelle empfangene Daten unverändert an den verbundenen Peer weitergeleitet; im Befehlsmodus werden serielle Daten als AT-Befehle geparst. |
+| Hinweise | Wird sofort wirksam, aber nicht dauerhaft gespeichert; nach einem Reset gilt wieder der Transparenzmodus. In diesem Modus werden über die serielle Schnittstelle empfangene Daten unverändert an die verbundene Gegenstelle weitergeleitet. Im Befehlsmodus werden serielle Daten als AT-Befehle interpretiert. |
 
 </div>
 
@@ -780,7 +780,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Befehl | `AT+MULTICONN=<n>\r` |
 | Antwort | Erfolg: `\r\nOK\r\n`; Fehlschlag: `\r\nERROR\r\n` |
 | Parameter | `<n>`: 0 = Mehrfachverbindung deaktivieren; 1 = Mehrfachverbindung aktivieren. Wert ist 0 oder 1. Standard 1. |
-| Hinweise | Das Setzen aktualisiert die Konfiguration. Wenn Mehrfachverbindung aus ist, ist die Fähigkeit zu gleichzeitigen Verbindungen eingeschränkt; wenn ein, arbeitet sie gemäß den Einstellungen von `AT+BLEMULTICONN` und `AT+BTMULTICONN`. |
+| Hinweise | Das Setzen aktualisiert die Konfiguration. Ist die Mehrfachverbindung ausgeschaltet, sind gleichzeitige Verbindungen eingeschränkt. Ist sie eingeschaltet, richtet sich die Anzahl nach den Einstellungen von `AT+BLEMULTICONN` und `AT+BTMULTICONN`. |
 
 </div>
 
@@ -810,7 +810,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Befehl | `AT+BLEMULTICONN=<n>\r` |
 | Antwort | Erfolg: `\r\nOK\r\n`; Fehlschlag: `\r\nERROR\r\n` |
 | Parameter | `<n>`: maximale Anzahl gleichzeitiger BLE-Verbindungen, dezimal, Bereich 1–6. Standard 3. |
-| Hinweise | Kann nur gesetzt werden, wenn die Mehrfachverbindung aktiviert ist (`AT+MULTICONN=1`). Die Einstellung wird gespeichert. Erreicht die Anzahl der Verbindungen das Limit, wird das Advertising gestoppt und ist keine weitere Verbindung möglich. Sinkt die Zahl wieder unter das Limit, wird das Advertising automatisch fortgesetzt. |
+| Hinweise | Kann nur gesetzt werden, wenn die Mehrfachverbindung aktiviert ist (`AT+MULTICONN=1`). Die Einstellung wird gespeichert. Erreicht die Anzahl der Verbindungen den Grenzwert, wird das Advertising gestoppt; weitere Verbindungen sind dann nicht möglich. Sinkt die Zahl wieder unter den Grenzwert, wird das Advertising automatisch fortgesetzt. |
 
 </div>
 
@@ -840,7 +840,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Befehl | `AT+BTMULTICONN=<n>\r` |
 | Antwort | Erfolg: `\r\nOK\r\n`; Fehlschlag: `\r\nERROR\r\n` |
 | Parameter | `<n>`: maximale Anzahl gleichzeitiger Classic-Bluetooth-Verbindungen, dezimal, Bereich 1–7. Standard 7. |
-| Hinweise | Kann nur gesetzt werden, wenn die Mehrfachverbindung aktiviert ist (`AT+MULTICONN=1`). Die Einstellung wird gespeichert. Erreicht die Anzahl der Verbindungen das Limit, stoppt das Modul den Page Scan und setzt ihn automatisch fort, sobald die Anzahl wieder unter das Limit sinkt. |
+| Hinweise | Kann nur gesetzt werden, wenn die Mehrfachverbindung aktiviert ist (`AT+MULTICONN=1`). Die Einstellung wird gespeichert. Erreicht die Anzahl der Verbindungen den Grenzwert, stoppt das Modul den Page-Scan und setzt ihn automatisch fort, sobald die Anzahl wieder darunter liegt. |
 
 </div>
 
@@ -852,10 +852,10 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 | Element | Inhalt |
 |:-----|:--------|
-| Befehl | Eine trennen: `AT+DISCONN=<conn_hdl>\r`; alle trennen: `AT+DISCONN\r` |
+| Befehl | Eine Verbindung trennen: `AT+DISCONN=<conn_hdl>\r`; alle trennen: `AT+DISCONN\r` |
 | Antwort | Erfolg: `\r\nOK\r\n`; Fehlschlag oder nicht gefunden: `\r\nERROR\r\n` |
 | Parameter | `<conn_hdl>`: Verbindungs-Handle, hex. BLE-Verbindungs-Handles sind 1-basierte externe Handles (übereinstimmend mit dem, was `AT+CONNLIST` zurückgibt); BT-Verbindungen nutzen ihr ACL-Handle. `<conn_hdl>` = 0 wird als ungültige Eingabe behandelt und gibt `ERROR` zurück. |
-| Hinweise | Ohne Parameter (oder mit leerem Parameter) werden alle aktiven Verbindungen (BLE und BR/EDR) getrennt und `OK` zurückgegeben. Mit Parameter wird das Handle nachgeschlagen: zunächst gegen das externe BLE-Handle abgeglichen (internes Handle = `<conn_hdl>` - 1); wenn nicht gefunden, gegen das rohe BT-ACL-Handle abgeglichen; wenn keine passende Verbindung gefunden wird, wird `ERROR` zurückgegeben. Die Abfrageform `AT+DISCONN?` gibt `ERROR` zurück. |
+| Hinweise | Ohne Parameter (oder mit leerem Parameter) werden alle aktiven Verbindungen (BLE und BR/EDR) getrennt; der Befehl gibt `OK` zurück. Mit Parameter sucht das Modul zuerst nach dem externen BLE-Handle (internes Handle = `<conn_hdl>` - 1). Gibt es keinen Treffer, sucht es nach dem rohen BT-ACL-Handle. Wird keine passende Verbindung gefunden, gibt der Befehl `ERROR` zurück. Die Abfrageform `AT+DISCONN?` gibt ebenfalls `ERROR` zurück. |
 
 </div>
 
@@ -869,7 +869,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 |:-----|:--------|
 | Befehl | `AT+CONNLIST?\r` oder `AT+CONNLIST\r` |
 | Antwort | Jede aktive Verbindung wird als eine Zeile ausgegeben: `\r\n+CONNLIST:<conn_hdl>,<type>,<addr>,<extra>\r\n`; gefolgt von `\r\nOK\r\n` nach allen Zeilen; nur `\r\nOK\r\n`, wenn keine aktiven Verbindungen bestehen; bei einem nicht leeren Parameter: `\r\nERROR\r\n` |
-| Parameter | Ausgabefelder: `<conn_hdl>` — Verbindungs-Handle, 4 Hex-Ziffern, BLE nutzt ein 1-basiertes externes Handle; `<type>` — Verbindungstyp, BLE oder BT; `<addr>` — die Bluetooth-Adresse des Peers, 12 Hex-Ziffern (höchstwertiges Byte zuerst); `<extra>` — die aktuelle MTU bei BLE-Verbindungen, oder der Service-Kanal bei BT-Verbindungen, dezimal. |
+| Parameter | Ausgabefelder: `<conn_hdl>` — Verbindungs-Handle, 4 Hex-Ziffern; BLE verwendet ein 1-basiertes externes Handle. `<type>` — Verbindungstyp, BLE oder BT. `<addr>` — Bluetooth-Adresse der Gegenstelle, 12 Hex-Ziffern (höchstwertiges Byte zuerst). `<extra>` — aktuelle MTU bei BLE-Verbindungen oder Dienstkanal bei BT-Verbindungen, dezimal. |
 | Hinweise | Wird der Befehl mit einem nicht leeren Parameter aufgerufen, antwortet er mit `ERROR`. Das Modul prüft alle Verbindungsslots und gibt jede aktive Verbindung aus. |
 
 </div>
@@ -916,7 +916,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 |:-----|:--------|
 | Befehl | `AT+SPPSEND=<conn_hdl>,<data>\r` oder `AT+SPPSEND=,<data>\r` |
 | Antwort | Erfolg: `\r\nOK\r\n`; Fehlschlag: `\r\nERROR\r\n` |
-| Parameter | `conn_hdl`: Ziel-BT-Verbindungs-Handle, hex. Kann weggelassen oder auf 0 gesetzt werden; in diesem Fall wird die aktuell erste aktive BT-Verbindung verwendet. `data`: die zu sendenden Daten, eine Hex-Zeichenkette, wobei je zwei Zeichen ein Byte darstellen; darf nicht leer sein, und die Zeichenzahl muss gerade sein. Die tatsächliche in einem ASCII-AT-Frame übertragene Datenlänge ist zudem durch das Einzel-AT-Frame-Limit begrenzt. |
+| Parameter | `conn_hdl`: Ziel-BT-Verbindungs-Handle, hexadezimal. Kann weggelassen oder auf 0 gesetzt werden; in diesem Fall wird die erste aktuell aktive BT-Verbindung verwendet. `data`: zu sendende Daten als Hex-Zeichenkette; je zwei Zeichen bilden ein Byte. Der Wert darf nicht leer sein und muss eine gerade Zeichenzahl haben. Die übertragbare Datenmenge ist außerdem durch die maximale Länge eines ASCII-AT-Frames begrenzt. |
 | Hinweise | `conn_hdl` und `data` werden durch ein Komma getrennt; das Komma muss auch dann vorhanden sein, wenn `conn_hdl` weggelassen wird. Die Abfrageform wird nicht unterstützt. |
 
 </div>
@@ -964,7 +964,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Befehl | `AT+GATTSRV=<idx>,DEL\r` |
 | Antwort | `\r\nOK\r\n` |
 | Parameter | `idx`: Service-Slot-Nummer, 0–5 |
-| Hinweise | Löscht die Konfiguration dieses Slots im RAM. Ein bereits im Protokollstack registrierter Service kann zur Laufzeit nicht widerrufen werden — dieser Befehl löscht nur die RAM-Konfiguration |
+| Hinweise | Löscht die Konfiguration dieses Slots im RAM. Ein bereits registrierter Service kann zur Laufzeit nicht mehr aus dem Protokollstack entfernt werden; dieser Befehl löscht nur die RAM-Konfiguration. |
 
 </div>
 
@@ -978,7 +978,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 |:-----|:--------|
 | Befehl | `AT+GATTCHAR?<svc>\r` |
 | Antwort | Für jede Charakteristik dieses Service wird eine Zeile `\r\n+GATTCHAR:<svc>,<chr>,prop=0x<prop>,len=<max_len>\r\n` zurückgegeben, gefolgt von `\r\nOK\r\n`; falls der Service nicht existiert: `\r\nERROR\r\n` |
-| Parameter | `svc`: Service-Slot-Nummer, 0–5. `chr`: Charakteristik-Index. `prop`: die Property-Bits der Charakteristik, hex. `max_len`: maximale Länge des Charakteristikwerts |
+| Parameter | `svc`: Service-Slot-Nummer, 0–5. `chr`: Charakteristik-Index. `prop`: Eigenschaftsbits der Charakteristik, hexadezimal. `max_len`: maximale Länge des Charakteristikwerts |
 | Hinweise | Keine |
 
 </div>
@@ -993,8 +993,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 |:-----|:--------|
 | Befehl | `AT+GATTCHAR=<svc>,<chr>,<uuid>,<prop>,<len>\r` |
 | Antwort | Erfolg: `\r\nOK\r\n`; Fehlschlag: `\r\nERROR\r\n` |
-| Parameter | `svc`: Service-Slot-Nummer, 0–5. `chr`: Charakteristik-Index, 0–7. `uuid`: Charakteristik-UUID, höchstwertiges Byte zuerst, 4 Zeichen für 16 Bit, 32 Zeichen für 128 Bit. `prop`: eine Property-Zeichenkette bestehend aus den Zeichen R (lesen), W (schreiben mit Antwort), w (schreiben ohne Antwort), N (notify), I (indicate). `len`: maximale Länge des Charakteristikwerts, 1–512 |
-| Hinweise | Alle fünf Parameter sind erforderlich — das Weglassen eines beliebigen gibt `ERROR` zurück. Die UUID-Länge muss exakt 4 oder 32 Zeichen betragen. `prop` muss mindestens ein erkanntes Property-Zeichen enthalten; wird keines erkannt, wird `ERROR` zurückgegeben — nicht erkannte Zeichen innerhalb von `prop` werden schlicht ignoriert. `len` von 0 oder über 512 gibt `ERROR` zurück. Der übergeordnete Service muss bereits erstellt und noch nicht im Protokollstack registriert sein |
+| Parameter | `svc`: Service-Slot-Nummer, 0–5. `chr`: Charakteristik-Index, 0–7. `uuid`: Charakteristik-UUID, höchstwertiges Byte zuerst, 4 Zeichen für 16 Bit, 32 Zeichen für 128 Bit. `prop`: Eigenschaftszeichenkette aus den Zeichen R (Lesen), W (Schreiben mit Antwort), w (Schreiben ohne Antwort), N (Notify), I (Indicate). `len`: maximale Länge des Charakteristikwerts, 1–512 |
+| Hinweise | Alle fünf Parameter sind erforderlich; fehlt einer, gibt der Befehl `ERROR` zurück. Die UUID-Länge muss exakt 4 oder 32 Zeichen betragen. `prop` muss mindestens ein erkanntes Eigenschaftszeichen enthalten. Wird keines erkannt, gibt der Befehl `ERROR` zurück; nicht erkannte Zeichen in `prop` werden ignoriert. Ist `len` 0 oder größer als 512, gibt der Befehl `ERROR` zurück. Der übergeordnete Service muss bereits angelegt und darf noch nicht im Protokollstack registriert sein. |
 
 </div>
 
@@ -1009,7 +1009,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Befehl | `AT+GATTSTART\r` |
 | Antwort | `\r\n+GATTSTART:<count>\r\n` gefolgt von `\r\nOK\r\n`; Abfrageform `AT+GATTSTART?\r`: `\r\nERROR\r\n` |
 | Parameter | `count`: die Anzahl der bei diesem Aufruf erfolgreich im Protokollstack registrierten Services |
-| Hinweise | Registriert jeden Service, der genutzt wird, noch nicht registriert ist und mindestens eine Charakteristik besitzt, im Protokollstack. Einmal registriert, kann ein Service zur Laufzeit nicht mehr widerrufen oder neu konfiguriert werden. Die Abfrageform wird nicht unterstützt |
+| Hinweise | Registriert alle genutzten Services, die noch nicht registriert sind und mindestens eine Charakteristik besitzen, im Protokollstack. Ein registrierter Service kann zur Laufzeit weder entfernt noch neu konfiguriert werden. Die Abfrageform wird nicht unterstützt. |
 
 </div>
 
@@ -1023,8 +1023,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 |:-----|:--------|
 | Befehl | `AT+GATTSEND=<svc>,<chr>,<conn_hdl>,<hex>\r`; ohne Verbindungs-Handle: `AT+GATTSEND=<svc>,<chr>,,<hex>\r` |
 | Antwort | Erfolg: `\r\nOK\r\n`; Fehlschlag: `\r\nERROR\r\n`; Abfrageform `AT+GATTSEND?\r`: `\r\nERROR\r\n` |
-| Parameter | `svc`: Service-Slot-Nummer. `chr`: Charakteristik-Index. `conn_hdl`: BLE-Verbindungs-Handle, hex, 1-basiert, kann weggelassen werden. `hex`: die zu sendenden Daten, eine Hex-Zeichenkette mit gerader Zeichenzahl; die tatsächliche in einem ASCII-AT-Frame übertragene Datenlänge ist zudem durch das Einzel-AT-Frame-Limit begrenzt. |
-| Hinweise | Wird `conn_hdl` weggelassen, wird die aktuell erste BLE-Verbindung verwendet. Der Ziel-Service muss bereits registriert und der Charakteristik-Index gültig sein; enthalten die Properties der Charakteristik Indicate (I), wird eine Indication verwendet, andernfalls eine Notification. |
+| Parameter | `svc`: Service-Slot-Nummer. `chr`: Charakteristik-Index. `conn_hdl`: BLE-Verbindungs-Handle, hexadezimal und 1-basiert; kann weggelassen werden. `hex`: zu sendende Daten als Hex-Zeichenkette mit gerader Zeichenzahl. Die übertragbare Datenmenge ist außerdem durch die maximale Länge eines ASCII-AT-Frames begrenzt. |
+| Hinweise | Wird `conn_hdl` weggelassen, verwendet der Befehl die erste aktuell aktive BLE-Verbindung. Der Ziel-Service muss bereits registriert und der Charakteristik-Index gültig sein. Hat die Charakteristik die Eigenschaft Indicate (I), wird eine Indication verwendet; andernfalls wird eine Notification gesendet. |
 
 </div>
 
@@ -1058,9 +1058,9 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
-#### Automatischen GATT-Start beim Einschalten abfragen { #query-gatt-auto-load-on-power-up-switch }
+#### Automatisches Laden der GATT-Konfiguration beim Einschalten abfragen { #query-gatt-auto-load-on-power-up-switch }
 
-<div align="center"><em>Tabelle: Automatischen GATT-Start beim Einschalten abfragen</em></div>
+<div align="center"><em>Tabelle: Automatisches Laden der GATT-Konfiguration beim Einschalten abfragen</em></div>
 
 <div align="center" markdown>
 
@@ -1073,9 +1073,9 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
-#### Automatischen GATT-Start beim Einschalten einstellen { #set-gatt-auto-load-on-power-up-switch }
+#### Automatisches Laden der GATT-Konfiguration beim Einschalten einstellen { #set-gatt-auto-load-on-power-up-switch }
 
-<div align="center"><em>Tabelle: Automatischen GATT-Start beim Einschalten einstellen</em></div>
+<div align="center"><em>Tabelle: Automatisches Laden der GATT-Konfiguration beim Einschalten einstellen</em></div>
 
 <div align="center" markdown>
 
@@ -1088,9 +1088,9 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
-## Unaufgeforderte Ereignisse (URC) { #unsolicited-events-urc }
+## Unaufgeforderte Statusmeldungen (URCs) { #unsolicited-events-urc }
 
-Die folgenden Statusmeldungen sendet das Modul selbstständig; der Host muss sie nicht abfragen. Gesteuert wird ihre Ausgabe über `AT+EVT`. Im stillen Modus werden keine Ereignismeldungen ausgegeben.
+Die folgenden Statusmeldungen gibt das Modul selbst aus; der Host muss sie nicht anfordern. Ihre Ausgabe wird über `AT+EVT` gesteuert. Im stillen Modus gibt das Modul keine Statusmeldungen aus.
 
 ### IM_READY-Bereitschaftsmeldung { #im_ready-ready-indication }
 
@@ -1117,8 +1117,8 @@ Die folgenden Statusmeldungen sendet das Modul selbstständig; der Host muss sie
 |:-----|:--------|
 | Befehl | Keiner (wird von der Firmware selbst gemeldet, wenn eine Verbindung hergestellt wird) |
 | Antwort | Befehlsmodus: `\r\nIM_CONN <hdl>,<addr>,<mtu>\r\n`; Transparenzmodus: `\r\nIM_CONN\r\n` |
-| Parameter | `hdl`: Verbindungs-Handle, 4 Hex-Ziffern (Großbuchstaben, feste 4 Ziffern, mit Nullen aufgefüllt). BLE-Verbindungen zeigen ein 1-basiertes Handle an (internes Handle plus 1); andere Typen zeigen den rohen Wert an. `addr`: die Adresse des Peers, 12 Hex-Ziffern, höchstwertiges Byte zuerst. `mtu`: die MTU der aktuellen Verbindung, dezimal. |
-| Hinweise | Im Befehlsmodus wird jede neu hergestellte Verbindung einmal mit Handle, Peer-Adresse und MTU gemeldet. Im Transparenzmodus erfolgt die Meldung nur bei der ersten Verbindung (wenn die Anzahl aktiver Verbindungen 1 beträgt) und enthält keine Parameter. Die Ausgabe wird über `AT+EVT` gesteuert; `AT+EVT=1` unterdrückt diese Meldungen. |
+| Parameter | `hdl`: Verbindungs-Handle, 4 Hex-Ziffern (Großbuchstaben, feste 4 Ziffern, mit Nullen aufgefüllt). BLE-Verbindungen zeigen ein 1-basiertes Handle an (internes Handle plus 1); andere Typen zeigen den rohen Wert an. `addr`: Bluetooth-Adresse der Gegenstelle, 12 Hex-Ziffern, höchstwertiges Byte zuerst. `mtu`: MTU der aktuellen Verbindung, dezimal. |
+| Hinweise | Im Befehlsmodus wird jede neu hergestellte Verbindung einmal mit Handle, Adresse der Gegenstelle und MTU gemeldet. Im Transparenzmodus wird die Meldung nur bei der ersten Verbindung ausgegeben (wenn die Anzahl aktiver Verbindungen 1 beträgt) und enthält keine Parameter. Die Ausgabe wird über `AT+EVT` gesteuert; `AT+EVT=1` unterdrückt diese Meldungen. |
 
 </div>
 
@@ -1163,9 +1163,9 @@ Die folgenden Statusmeldungen sendet das Modul selbstständig; der Host muss sie
 | Element | Inhalt |
 |:-----|:--------|
 | Befehl | Ein binärer Frame (keine Text-AT-Zeile): `AT>` + opcode(2-Byte-Little-Endian) + len(2-Byte-Little-Endian) + body + `\r`. Hierbei ist opcode = `0x0101` (Bytefolge 01 01); len ist die Bytezahl von body; body = `conn_hdl`(2-Byte-Little-Endian) + `data`. `data` sind die zu sendenden Nutzdaten. |
-| Antwort | Keine Textantwort-Zeichenkette. Die Firmware leitet `data` je nach Verbindungstyp an den Peer weiter, ohne mit `OK`/`ERROR` zu antworten. |
+| Antwort | Keine Textantwort-Zeichenkette. Die Firmware leitet `data` je nach Verbindungstyp an die Gegenstelle weiter, ohne mit `OK`/`ERROR` zu antworten. |
 | Parameter | `opcode`: fest `0x0101`. `len`: Länge des Body in Byte, Bereich 2–508 (Frames unter 2 oder über `AT_RX_BUF_SIZE`-4 werden verworfen; `AT_RX_BUF_SIZE` = 512). `conn_hdl`: Ziel-Verbindungs-Handle; 1-basiert (externer Anzeigewert) für BLE-Verbindungen, rohes ACL-Handle für SPP-Verbindungen. `data`: Nutzdatenbytes, Länge = len-2, kann 0 sein. |
-| Hinweise | `conn_hdl` wird zunächst mit dem 1-basierten BLE-Handle abgeglichen (d. h. `conn_hdl`-1 entspricht einem BLE-Slot). Wird keine Übereinstimmung gefunden, wird der rohe Wert einem SPP-Slot zugeordnet. Wird keine Verbindung gefunden, wird der Frame verworfen. Bei einem BLE-Ziel durchsucht die Firmware die benutzerdefinierten GATT-Services und wählt zum Senden automatisch die erste Charakteristik mit Notify- oder Indicate-Property aus. Gibt es keine solche Charakteristik, werden keine Daten gesendet. Bei einem SPP-Ziel (BR/EDR) werden die Nutzdaten aus dem Feld `data` über den SPP-Kanal gesendet. Unmittelbar auf den Frame muss `\r` folgen; fehlt dieses Zeichen, wird der aktuelle Frame verworfen. Wenn innerhalb des PDU-Timeouts zwischen zwei Frames keine neuen Bytes eintreffen, wird der PDU-Empfangszustand zurückgesetzt. |
+| Hinweise | Bei der Auflösung von `conn_hdl` sucht das Modul zuerst nach dem 1-basierten BLE-Handle (`conn_hdl`-1 entspricht dem internen BLE-Slot). Gibt es keinen Treffer, sucht es nach dem rohen Handle eines SPP-Slots. Wird keine Verbindung gefunden, verwirft es den Frame. Bei einer BLE-Verbindung durchsucht die Firmware die benutzerdefinierten GATT-Services und wählt automatisch die erste Charakteristik mit Notify- oder Indicate-Eigenschaft aus. Gibt es keine solche Charakteristik, werden keine Daten gesendet. Bei einer SPP-Verbindung (BR/EDR) sendet die Firmware `data` über den SPP-Kanal. Unmittelbar auf den Frame muss `\r` folgen; andernfalls wird er verworfen. Treffen zwischen zwei Frames länger als das PDU-Timeout keine neuen Bytes ein, setzt die Firmware den PDU-Empfangszustand zurück. |
 
 </div>
 
@@ -1178,9 +1178,9 @@ Die folgenden Statusmeldungen sendet das Modul selbstständig; der Host muss sie
 | Element | Inhalt |
 |:-----|:--------|
 | Befehl | Ein binärer Frame (keine Text-AT-Zeile): `AT>` + opcode(2-Byte-Little-Endian) + len(2-Byte-Little-Endian) + body + `\r`. Hierbei ist opcode = `0x0102` (Bytefolge 02 01); len ist die Bytezahl von body; body = `conn_hdl`(2-Byte-Little-Endian) + `svc_idx`(1 Byte) + `char_idx`(1 Byte) + `data`. |
-| Antwort | Keine Textantwort-Zeichenkette. Die Firmware sendet `data` über den angegebenen Service/die Charakteristik an den Peer, ohne mit `OK`/`ERROR` zu antworten. |
-| Parameter | `opcode`: fest `0x0102`. `len`: Länge des Body, 4–508 Byte. Die allgemeine Untergrenze der Empfangsschicht beträgt 2 Byte; dieser Opcode benötigt jedoch mindestens 4 Byte einschließlich `svc_idx`+`char_idx`. Andernfalls wird der Frame verworfen. `conn_hdl`: Ziel-BLE-Verbindungs-Handle, 1-basiert (externer Anzeigewert). `svc_idx`: Index des benutzerdefinierten GATT-Service. `char_idx`: Charakteristik-Index innerhalb dieses Service. `data`: Nutzdatenbytes, Länge = len-4; eine Länge von 0 ist zulässig. |
-| Hinweise | Nur BLE-Verbindungen; ist die aufgelöste Verbindung vom SPP-Typ, wird der Frame verworfen. `svc_idx` muss einem registrierten benutzerdefinierten Service entsprechen, und `char_idx` muss kleiner als die Charakteristikanzahl dieses Service sein, andernfalls wird der Frame verworfen. Die angegebene Charakteristik muss eine Notify- oder Indicate-Property besitzen, andernfalls wird der Frame verworfen. Die Auflösung von `conn_hdl` folgt derselben Regel wie bei `0x0101` (zunächst 1-basiertes BLE-Handle, dann der rohe Wert). Auf den Frame muss unmittelbar `\r` folgen. |
+| Antwort | Keine Textantwort-Zeichenkette. Die Firmware sendet `data` über den angegebenen Service und die Charakteristik an die Gegenstelle, ohne mit `OK`/`ERROR` zu antworten. |
+| Parameter | `opcode`: fest `0x0102`. `len`: Länge des Body-Felds, 4–508 Byte. Die allgemeine Untergrenze der Empfangsschicht beträgt 2 Byte; dieser Opcode erfordert jedoch mindestens 4 Byte einschließlich `svc_idx` und `char_idx`. Andernfalls wird der Frame verworfen. `conn_hdl`: Ziel-BLE-Verbindungs-Handle, 1-basiert (externer Anzeigewert). `svc_idx`: Index des benutzerdefinierten GATT-Service. `char_idx`: Charakteristik-Index innerhalb dieses Service. `data`: Nutzdatenbytes, Länge = len-4; eine Länge von 0 ist zulässig. |
+| Hinweise | Der Befehl gilt nur für BLE-Verbindungen. Wird das Handle einer SPP-Verbindung zugeordnet, verwirft die Firmware den Frame. `svc_idx` muss einem registrierten benutzerdefinierten Service entsprechen und `char_idx` kleiner als die Anzahl seiner Charakteristiken sein; andernfalls wird der Frame verworfen. Die angegebene Charakteristik muss die Eigenschaft Notify oder Indicate besitzen. Andernfalls wird der Frame ebenfalls verworfen. `conn_hdl` wird wie bei `0x0101` aufgelöst: zuerst als 1-basiertes BLE-Handle, danach als rohes Handle. Unmittelbar auf den Frame muss `\r` folgen. |
 
 </div>
 
@@ -1195,7 +1195,7 @@ Die folgenden Statusmeldungen sendet das Modul selbstständig; der Host muss sie
 | Befehl | `AT+DISCONN\r` (ohne Parameter) oder `AT+DISCONN=<conn_hdl>\r` |
 | Antwort | Erfolg: `\r\nOK\r\n`; Fehlschlag: `\r\nERROR\r\n` |
 | Parameter | `conn_hdl`: das zu trennende Verbindungs-Handle, hex. BLE-Verbindungen sind 1-basiert (externer Anzeigewert); der Wert darf nicht 0 sein (0 wird als ungültige Eingabe behandelt und gibt `ERROR` zurück). SPP-Verbindungen verwenden das rohe ACL-Handle. |
-| Hinweise | Ohne Parameter werden alle aktuellen Verbindungen getrennt und `OK` zurückgegeben. Mit Parameter, Auflösereihenfolge: zunächst gegen das 1-basierte BLE-Handle abgeglichen (`conn_hdl`-1 trifft einen BLE-Slot); wenn nicht gefunden, gegen den rohen Wert für einen SPP-Slot abgeglichen; wird keine Verbindung gefunden, wird `ERROR` zurückgegeben. Bei BLE-Verbindungen wird die Trennung mit Grundcode `0x13` eingeleitet; bei SPP-Verbindungen wird die Trennung über die Peer-Adresse eingeleitet. Die Abfrageform `AT+DISCONN?` gibt `ERROR` zurück. |
+| Hinweise | Ohne Parameter werden alle aktuellen Verbindungen getrennt; der Befehl gibt `OK` zurück. Mit Parameter sucht das Modul zuerst nach dem 1-basierten BLE-Handle (`conn_hdl`-1 entspricht dem internen BLE-Slot). Gibt es keinen Treffer, sucht es nach dem rohen Handle eines SPP-Slots. Wird keine Verbindung gefunden, gibt der Befehl `ERROR` zurück. Bei BLE-Verbindungen wird die Trennung mit Grundcode `0x13` eingeleitet; bei SPP-Verbindungen erfolgt sie anhand der Adresse der Gegenstelle. Die Abfrageform `AT+DISCONN?` gibt `ERROR` zurück. |
 
 </div>
 
@@ -1209,7 +1209,7 @@ Die folgenden Statusmeldungen sendet das Modul selbstständig; der Host muss sie
 |:-----|:--------|
 | Befehl | Wird vom Modul selbst gemeldet — kein Befehl vom Host erforderlich. `IM_CONN` wird gemeldet, wenn eine Verbindung hergestellt wird, `IM_DISCONN`, wenn eine getrennt wird. |
 | Antwort | Befehlsmodus, Verbindung hergestellt: `\r\nIM_CONN <hdl>,<mac>,<mtu>\r\n`, wobei `<hdl>` ein 4-stelliges Hex-Handle, `<mac>` eine 12-stellige Hex-Adresse (höchstwertiges Byte zuerst) und `<mtu>` eine dezimale MTU ist. Befehlsmodus, Verbindung getrennt: `\r\nIM_DISCONN:<hdl>\r\n` (`<hdl>` sind 4 Hex-Ziffern). Der Transparenzmodus meldet `\r\nIM_CONN\r\n` (ohne Parameter) nur, wenn die erste Verbindung hergestellt wird, und meldet `IM_DISCONN` bei Trennung nicht. Beide Modi melden `\r\nIM_READY\r\n`, sobald alle Verbindungen getrennt wurden. |
-| Parameter | `<hdl>`: Verbindungs-Handle; BLE-Verbindungen werden 1-basiert angezeigt (intern 0-basiert plus 1), SPP-Verbindungen zeigen das rohe Handle an. `<mac>`: die Bluetooth-Adresse des Peers. `<mtu>`: die ausgehandelte MTU. |
+| Parameter | `<hdl>`: Verbindungs-Handle; BLE-Verbindungen werden 1-basiert angezeigt (intern 0-basiert plus 1), SPP-Verbindungen zeigen das rohe Handle an. `<mac>`: Bluetooth-Adresse der Gegenstelle. `<mtu>`: ausgehandelte MTU. |
 | Hinweise | Die Ausgabe wird über `AT+EVT` gesteuert: Bei 0 (Standard) werden die Meldungen normal ausgegeben; bei 1 werden `IM_READY`, `IM_CONN` und `IM_DISCONN` unterdrückt. Format und Inhalt richten sich nach dem aktuellen Betriebsmodus (Befehlsmodus oder Transparenzmodus), wie oben beschrieben. |
 
 </div>
@@ -1229,6 +1229,6 @@ Die folgenden Statusmeldungen sendet das Modul selbstständig; der Host muss sie
 | LAN/Netzwerkzugangspunkt | `0x000300` |
 | Audio/Video | `0x000400` |
 | Peripheriegerät (Tastatur/Maus usw.) | `0x000500` |
-| Bildgebung (Drucker/Scanner usw.) | `0x000600` |
+| Bildgebende Geräte (Drucker/Scanner usw.) | `0x000600` |
 
 </div>

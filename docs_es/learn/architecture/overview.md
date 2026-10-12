@@ -1,7 +1,7 @@
 ---
 icon: lucide/network
 title: "Resumen de arquitectura"
-description: "Decisiones de arquitectura SF32 sobre procesadores, memoria, Bluetooth y descarga a hardware, con comprobaciones específicas por dispositivo."
+description: "Decisiones de arquitectura SF32 sobre procesadores, memoria, Bluetooth y aceleración por hardware, con comprobaciones específicas por dispositivo."
 tags:
     - Arquitectura
     - Aprendizaje

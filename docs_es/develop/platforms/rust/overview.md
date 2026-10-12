@@ -8,11 +8,11 @@ tags:
 
 # Rust { #rust }
 
-OpenSiFli desarrolla código Rust en [OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs), que incluye HAL, PAC, crates para tablas Flash, ejemplos y notas sobre programación de la memoria Flash y depuración.
+OpenSiFli desarrolla código Rust en [OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs), que incluye HAL, PAC, crates para tablas Flash, ejemplos y notas sobre grabación de la memoria Flash y depuración.
 
-Los responsables del mantenimiento describen el proyecto como trabajo en curso y aún no apto para producción. Considere Rust en SF32 una vía exploratoria, salvo que su equipo esté dispuesto a trabajar a bajo nivel y contribuir correcciones al repositorio upstream.
+Los responsables del mantenimiento describen el proyecto como trabajo en curso y aún no apto para producción. Considere Rust en SF32 una vía exploratoria, salvo que su equipo esté dispuesto a trabajar a bajo nivel y aportar correcciones al proyecto de origen.
 
-Para configurar la cadena de herramientas inicial, compilar Blinky sin modificar y preparar el runner de programación, consulte [Primeros pasos con Rust](../../../getting-started/rust/getting-started-rust.md). Esta página ayuda a evaluar el alcance del soporte y decidir si conviene ir más allá de esa base.
+Para configurar la cadena de herramientas y el ejecutor de grabación, y compilar Blinky sin modificar, consulte [Primeros pasos con Rust](../../../getting-started/rust/getting-started-rust.md). Esta página ayuda a evaluar el alcance del soporte y decidir si conviene ir más allá de esa base.
 
 ## Crates mencionados por OpenSiFli { #crates-mentioned-by-opensifli }
 

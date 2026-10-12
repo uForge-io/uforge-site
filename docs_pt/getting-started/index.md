@@ -77,7 +77,7 @@ Antes de adotar um caminho de software, verifique se a documentação cobre a pl
 - Instruções de gravação/download para Windows, macOS e Linux.
 - A saída serial esperada para cada primeiro exemplo.
 - Procedimentos de recuperação após falhas de gravação ou uso de imagens de firmware inválidas.
-- Limitações conhecidas de cada framework, especialmente em Bluetooth, tela, armazenamento, USB e operação de baixo consumo.
+- Limitações conhecidas de cada framework, especialmente em Bluetooth, display, armazenamento, USB e operação de baixo consumo.
 - Notas de versão que indiquem quais versões do SDK, do CodeKit, dos pacotes, das imagens de firmware e do suporte às placas são compatíveis.
 
 Não presuma que um caminho disponível para uma placa também funcione em todas as placas SF32. Confirme a placa e a versão de software específicas que você pretende usar.

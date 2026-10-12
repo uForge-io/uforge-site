@@ -8,9 +8,9 @@ tags:
 
 ## Einführung { #introduction }
 
-**STAR-MC1** ist eine von Arm China entwickelte CPU-IP auf Basis von **Armv8-M Mainline**, demselben Architekturprofil, das auch Cortex-M33 verwendet. Dadurch ist das Armv8-M-Softwaremodell vertraut; eine unveränderte Wiederverwendung von Cortex-M33-Firmware ist damit jedoch nicht garantiert. Optionale Architekturerweiterungen, Kernkonfiguration, SoC-Peripherie, Start- und Linker-Konfiguration sowie SDK-Unterstützung können abweichen. Betrachten Sie für Cortex-M33 entwickelte Software als Ausgangspunkt für eine Portierung und validieren Sie sie mit dem Zielbaustein und SDK.
+**STAR-MC1** ist eine CPU-IP von Arm China auf Basis von **Armv8-M Mainline**, demselben Architekturprofil, das auch Cortex-M33 verwendet. Dadurch ist das Armv8-M-Softwaremodell vertraut; eine unveränderte Wiederverwendung von Cortex-M33-Firmware ist damit jedoch nicht garantiert. Optionale Architekturerweiterungen, Kernkonfiguration, SoC-Peripherie, Start- und Linker-Konfiguration sowie SDK-Unterstützung können abweichen. Betrachten Sie für Cortex-M33 entwickelte Software als Ausgangspunkt für eine Portierung und validieren Sie sie mit dem Zielbaustein und SDK.
 
-Bei SF32-Bausteinen mit STAR-MC1 kann die Anwendungs-CPU in der SiFli-Dokumentation je nach Kontext und Detailgrad als **Arm Cortex-M33**, **Cortex-M33 STAR-MC1** oder einfach **STAR-MC1** bezeichnet werden. Diese Bezeichnungen allein bestätigen weder optionale Kernfunktionen noch die genaue SoC-Konfiguration. Für die Bauteilauswahl ist die Dokumentation des konkreten Bausteins maßgeblich.
+Bei SF32-Geräten mit STAR-MC1 kann die Anwendungs-CPU in der SiFli-Dokumentation je nach Kontext und Detailgrad als **Arm Cortex-M33**, **Cortex-M33 STAR-MC1** oder einfach **STAR-MC1** bezeichnet werden. Diese Bezeichnungen allein bestätigen weder optionale Kernfunktionen noch die genaue SoC-Konfiguration. Für die Bauteilauswahl ist die Dokumentation des konkreten Geräts maßgeblich.
 
 Lesen Sie diese Seite, wenn Sie die Arm-Cortex-M-Familie kennen und STAR-MC1 hinsichtlich Software, Leistung oder Bauteilauswahl korrekt einordnen möchten. Sie erklärt, was vertraut bleibt, was je nach SoC-Implementierung variieren kann und warum STAR-MC1 nicht als direkter Ersatz für Cortex-M7 betrachtet werden sollte.
 
@@ -26,13 +26,13 @@ STAR-MC1 lässt sich nicht sinnvoll als **fest positionierter Prozessor zwischen
 
 | Wenn Ihnen dies vertraut ist | Was bei STAR-MC1 vertraut bleibt | Der praktische Unterschied | Nicht davon ausgehen, dass |
 |:------------|:------------------------------------|:-------------------------|:--------------|
-| Cortex-M4 | Bare-Metal- und RTOS-Entwicklung, Interrupts, DMA und die Entwicklung von Peripherietreibern. | STAR-MC1 nutzt das neuere Armv8-M-Softwaremodell und kann stärkere Speicher- und Beschleunigungsoptionen bereitstellen. | Cortex-M4-Binärdateien, Armv7E-M-Annahmen oder identische Debug-/Sicherheitsfunktionen gelten unverändert. |
-| Cortex-M33 | Das Armv8-M-Programmier-, Ausnahme- und Toolchain-Modell. | Je nach SoC-Implementierung kann das Speichersystem mehr Reserven für Flash-/PSRAM-intensive, UI-, Audio- oder vernetzte Workloads bieten. | Jedes STAR-MC1-basierte Bauteil hat Cache, TCM, DSP, FPU, CDE oder TrustZone aktiviert. |
+| Cortex-M4 | Bare-Metal- und RTOS-Entwicklung, Interrupts, DMA und die Entwicklung von Peripherietreibern. | STAR-MC1 nutzt das neuere Armv8-M-Softwaremodell und kann leistungsfähigere Speicher- und Beschleunigungsfunktionen bereitstellen. | Cortex-M4-Binärdateien, Armv7E-M-Annahmen oder identische Debug-/Sicherheitsfunktionen gelten unverändert. |
+| Cortex-M33 | Das Armv8-M-Programmier-, Ausnahme- und Toolchain-Modell. | Je nach SoC-Implementierung kann das Speichersystem mehr Reserven für Workloads mit hohem Flash-/PSRAM-Aufkommen sowie für UI, Audio und Konnektivität bieten. | Jedes STAR-MC1-basierte Gerät hat Cache, TCM, DSP, FPU, CDE oder TrustZone aktiviert. |
 | Cortex-M7 | Die Notwendigkeit, Speicherplatzierung, Cache-Verhalten, DMA-Kohärenz und Echtzeit-Latenz zu verwalten. | STAR-MC1 behält ein Fundament der Armv8-M-MCU-Klasse bei und eignet sich für flexible, energieeffiziente IoT-Designs. | Es ist ein direkter Ersatz für Cortex-M7 oder bietet denselben Durchsatz, dasselbe Speichersystem und dasselbe Software-Ökosystem. |
 
 </div>
 
-Wählen Sie für ein SF32-Projekt das Bauteil anhand des dokumentierten Speichers, der Peripherie und der SDK-Unterstützung aus – nicht allein aufgrund des STAR-MC1-Labels. Die öffentlichen STAR-MC1-Unterlagen beschreiben Armv8-M und führen Cache, TCM, DSP, Koprozessor-Schnittstellen sowie TrustZone als mögliche Funktionen auf. Ob eine Funktion in einem bestimmten Produkt implementiert und aktiviert ist, muss anhand der SoC-Dokumentation geprüft werden.
+Wählen Sie für ein SF32-Projekt das Gerät anhand des dokumentierten Speichers, der Peripherie und der SDK-Unterstützung aus – nicht allein aufgrund des STAR-MC1-Labels. Die öffentlichen STAR-MC1-Unterlagen beschreiben Armv8-M und führen Cache, TCM, DSP, Koprozessor-Schnittstellen sowie TrustZone als mögliche Funktionen auf. Ob eine Funktion in einem bestimmten Produkt implementiert und aktiviert ist, muss anhand der SoC-Dokumentation geprüft werden.
 
 ## Warum STAR-MC1 wichtig ist { #why-star-mc1-matters }
 
@@ -64,7 +64,7 @@ Aus Gründen der Kompaktheit verwendet die Tabelle `CM3`, `CM4`, `CM33`, `CM55` 
 | Software-Kompatibilität | Basis | CM3-kompatibel | Armv8-M-Softwaremodell; erfordert Armv8-M-Werkzeuge | CM33-kompatibel | CM33-kompatibel; Helium erfordert Armv8.1-M-Toolchain-Unterstützung | CM4-kompatibel (gleiche Armv7E-M-Familie) |
 | CoreMark/MHz-Referenzwerte* | 3,34 | 3,42 | 4,02 | 4,02† | 4,20 | 5,01 |
 | Relativer Leistungsbedarf (qualitativ)‡ | Sehr niedrig | Niedrig | Niedrig | Niedrig | Mittel | Hoch |
-| Rechenprofil (qualitativ) | Skalare Steuerung mit niedrigem Stromverbrauch | Skalares Echtzeit-DSP | Sichere, konfigurierbare skalare MCU | CM33-kompatible skalare CPU; die vom SoC implementierten Cache-, TCM- und kundenspezifischen Befehlsfunktionen können die Leistung auf Systemebene verbessern | Vektor-DSP/ML bei aktiviertem Helium | Hoher skalarer Durchsatz und hohe Speicherbandbreite |
+| Rechenprofil (qualitativ) | Skalare Steuerung mit niedrigem Stromverbrauch | Skalare DSP-Verarbeitung in Echtzeitanwendungen | Sichere, konfigurierbare skalare MCU | CM33-kompatible skalare CPU; die vom SoC implementierten Cache-, TCM- und kundenspezifischen Befehlsfunktionen können die Leistung auf Systemebene verbessern | Vektor-DSP/ML bei aktiviertem Helium | Hoher skalarer Durchsatz und hohe Speicherbandbreite |
 | Typische Anwendungsfelder | Steuerung mit geringer Komplexität und einfache Sensorknoten | Motorsteuerung, Audio-DSP und Sensorverarbeitung | Sichere vernetzte Endgeräte und IoT-Steuerung | Wearables mit anspruchsvoller Benutzeroberfläche, Bluetooth-Audio und Flash-/PSRAM-basierte IoT-Produkte | ML-Sensorfusion, Sprache/Audio, Bildverarbeitung und DSP | Reaktionsschnelle HMI, hoher Steuerungsdurchsatz und Netzwerktechnik |
 
 </div>
@@ -73,7 +73,7 @@ Aus Gründen der Kompaktheit verwendet die Tabelle `CM3`, `CM4`, `CM33`, `CM55` 
 
 † STAR-MC1 verwendet hier den CM33-Referenzwert, da er CM33-kompatibel ist. Dies ist eine Vergleichsbasis, kein von Arm veröffentlichtes oder gemessenes STAR-MC1-Ergebnis.
 
-‡ Dies ist ein architektonischer Positionierungsleitfaden, keine gemessenen Silizium-Daten. Der tatsächliche Stromverbrauch hängt von Prozesstechnologie, Spannung, Frequenz, Speicherarchitektur, aktivierten Funktionen, Peripherien, Firmware-Duty-Cycle und der finalen SoC-Implementierung ab.
+‡ Dies ist ein architektonischer Positionierungsleitfaden, keine gemessenen Silizium-Daten. Der tatsächliche Stromverbrauch hängt von Prozesstechnologie, Spannung, Frequenz, Speicherarchitektur, aktivierten Funktionen, Peripherien, Firmware-Duty-Cycle und der konkreten SoC-Implementierung ab.
 
 Die Zeilen zu Pipeline und Bus fassen die jeweilige Hauptausführungspipeline und Systemspeicherschnittstelle jeder IP zusammen. CM33 und STAR-MC1 teilen sich die C-AHB/S-AHB-Busanordnung. Cache und andere optionale Speicherfunktionen sind von dieser Busschnittstelle unabhängig; ihre Verfügbarkeit hängt von der Konfiguration und Implementierung des SoC ab. Dies ist keine Aussage über die auf jedem fertigen SoC aktivierten Schnittstellen. Debug-, Trace-, Koprozessor- und andere optionale Ports sind nicht aufgeführt.
 
@@ -94,11 +94,11 @@ Die wichtigsten Vorteile sind:
 - Bessere Leistung für Grafik, Audio, Protokoll-Stacks und UI-Frameworks.
 - Geringere Belastung des Speicherbusses, wenn derselbe Code oder dieselben Daten wiederverwendet werden.
 
-Bei cachefähigen Puffern ohne hardwareseitige Kohärenzgarantie müssen Treiber, die Speicher mit DMA, Display-Controllern, Audioschnittstellen oder anderen Busmastern teilen, die Cache-Pflegeregeln des SDK oder RTOS befolgen. Schreiben Sie CPU-geänderte Daten aus dem Cache zurück, bevor ein Peripheriebaustein sie liest. Bereiten Sie Empfangspuffer vor DMA-Schreibzugriffen vor und invalidieren Sie veraltete Cache-Lines nach Abschluss der Übertragung, bevor die CPU das Ergebnis liest. Solange DMA den Puffer besitzt, darf die CPU nicht darauf zugreifen. Reservieren Sie vollständige Cache-Lines, ohne sie mit unabhängigen Daten zu teilen, und beachten Sie die Abschlussprüfungen und Speicherbarrieren der Plattform. Nicht cachefähige oder hardwarekohärente Puffer erfordern weiterhin ihre jeweiligen Synchronisationsregeln. [PSRAM im Vergleich zu anderen Speichertypen für eingebettete Systeme](psram-and-memory-types.md#caches-and-external-memory-execution) erläutert die Übergabe des Pufferbesitzes und die Risiken durch geänderte, noch nicht zurückgeschriebene Cache-Lines.
+Bei cachefähigen Puffern ohne hardwareseitige Kohärenzgarantie müssen Treiber, die Speicher mit DMA, Display-Controllern, Audioschnittstellen oder anderen Busmastern teilen, die Cache-Wartungsregeln des SDK oder RTOS befolgen. Schreiben Sie CPU-geänderte Daten aus dem Cache zurück, bevor ein Peripheriebaustein sie liest. Bereiten Sie Empfangspuffer vor DMA-Schreibzugriffen vor und invalidieren Sie veraltete Cache-Lines nach Abschluss der Übertragung, bevor die CPU das Ergebnis liest. Solange DMA den Puffer besitzt, darf die CPU nicht darauf zugreifen. Reservieren Sie vollständige Cache-Lines, ohne sie mit unabhängigen Daten zu teilen, und beachten Sie die Abschlussprüfungen und Speicherbarrieren der Plattform. Nicht cachefähige oder hardwarekohärente Puffer erfordern weiterhin ihre jeweiligen Synchronisationsregeln. [PSRAM im Vergleich zu anderen Speichertypen für eingebettete Systeme](psram-and-memory-types.md#caches-and-external-memory-execution) erläutert die Übergabe des Pufferbesitzes und die Risiken durch geänderte, noch nicht zurückgeschriebene Cache-Lines.
 
 ### Armv8-M-Erweiterung für kundenspezifische Datenpfade { #armv8-m-custom-datapath-extension }
 
-Auf IP-Ebene definiert Arm die CDE-Befehlscodierung, während der SoC-Entwickler die kundenspezifischen Operationen und Datenpfade festlegt. CM33 unterstützt optionale Integer-CDE; Floating-Point-CDE hängt von FPU und Konfiguration ab. Das STAR-MC1-TRM beschreibt GPR-CDE- und FPCDE-Module. Diese IP-Beschreibung belegt jedoch nicht, dass CDE in einem bestimmten SF32-Bauteil oder SDK verfügbar ist. Die Versionshinweise zu [SiFli-SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/releases/tag/v2.5.1) dokumentieren eine Korrektur für versehentlich aktiviertes CDE beim SF32LB57x. Prüfen Sie die Unterstützung für das konkrete Zielbauteil und SDK, bevor Sie sich darauf verlassen. CM55 unterstützt optionale CDE ab r1, nicht in r0. CP0–CP7 sind Codierungsräume für Koprozessoren oder CDE und bedeuten weder acht kundenspezifische Befehle noch acht zusätzliche Beschleuniger. Prüfen Sie auch Core-Revision, implementierte Module sowie Compiler- und SDK-Unterstützung. Siehe das [CM33-Datenblatt](https://www.arm.com/-/media/Arm%20Developer%20Community/PDF/Processor%20Datasheets/Arm-Cortex-M33-Processor-Datasheet.pdf), die [CM55-Hinweise zu CDE-Revisionen](https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/armv8_2d00_m-based-processor-software-development-hints-and-tips) und die Kapitel B7/B8 des STAR-MC1-TRM.
+Auf IP-Ebene definiert Arm die CDE-Befehlscodierung, während der SoC-Entwickler die kundenspezifischen Operationen und Datenpfade festlegt. CM33 unterstützt optionale Integer-CDE; Floating-Point-CDE hängt von FPU und Konfiguration ab. Das STAR-MC1-TRM beschreibt GPR-CDE- und FPCDE-Module. Diese IP-Beschreibung belegt jedoch nicht, dass CDE in einem bestimmten SF32-Gerät oder SDK verfügbar ist. Die Versionshinweise zu [SiFli-SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/releases/tag/v2.5.1) dokumentieren eine Korrektur für versehentlich aktiviertes CDE beim SF32LB57x. Prüfen Sie die Unterstützung für das konkrete Zielbauteil und SDK, bevor Sie sich darauf verlassen. CM55 unterstützt optionale CDE ab r1, nicht in r0. CP0–CP7 sind Codierungsräume für Koprozessoren oder CDE und bedeuten weder acht kundenspezifische Befehle noch acht zusätzliche Beschleuniger. Prüfen Sie auch Core-Revision, implementierte Module sowie Compiler- und SDK-Unterstützung. Siehe das [CM33-Datenblatt](https://www.arm.com/-/media/Arm%20Developer%20Community/PDF/Processor%20Datasheets/Arm-Cortex-M33-Processor-Datasheet.pdf), die [CM55-Hinweise zu CDE-Revisionen](https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/armv8_2d00_m-based-processor-software-development-hints-and-tips) und die Kapitel B7/B8 des STAR-MC1-TRM.
 
 Dies kann für Workloads wie die folgenden nützlich sein:
 
@@ -138,7 +138,7 @@ STAR-MC1 ist ein Cortex-M33-kompatibler Kern mit einem konfigurierbaren Speicher
 | Kleine CoreMark-/DMIPS-ähnliche Schleifen | Meist begrenzt | Die Arbeitsmenge ist klein und passt möglicherweise bereits in schnellen Speicher. |
 | Code, der aus Flash oder PSRAM ausgeführt wird | Oft ist eine Verbesserung zu erwarten | Wenn das SoC den I-Cache implementiert und aktiviert, kann er Wartezyklen beim Befehlsabruf reduzieren. |
 | Datenintensive UI, Grafik und Middleware | Oft ist eine Verbesserung zu erwarten | Wenn das SoC den D-Cache implementiert und aktiviert, kann er die wiederholte Latenz beim Datenzugriff reduzieren. |
-| DMA-intensive Peripherie-Workloads | Hängt vom Software-Design ab | Cachefähige Puffer ohne Hardwarekohärenz benötigen Cache-Pflege; alle Puffer erfordern klare Zuständigkeit und Synchronisation. |
+| DMA-intensive Peripherie-Workloads | Hängt vom Software-Design ab | Cachefähige Puffer ohne Hardwarekohärenz benötigen Cache-Wartung; alle Puffer erfordern klare Zuständigkeit und Synchronisation. |
 | CDE-fähige Rechenroutinen | Mögliche Verbesserung | Kundenspezifische Befehle können ausgewählte Operationen beschleunigen. |
 
 </div>
@@ -152,7 +152,7 @@ In der Praxis:
 - Betrachten Sie Cortex-M33-Firmware als Ausgangspunkt für eine Quellcode-Portierung, nicht als direkt austauschbares Image. Prüfen Sie vor der Wiederverwendung die Zielkonfiguration und SDK-Unterstützung.
 - RTOS-, Interrupt-, Privilegien-, TrustZone- und Debug-Konzepte bleiben für Cortex-M-Entwickler vertraut.
 - Leistungssensitive Anwendungen sollten kritischen Code und Daten sorgfältig platzieren und die Cache- und Speicher-APIs des SDK nutzen.
-- Cachefähige DMA-Puffer benötigen explizite Cache-Pflege, wenn das Hardwaredesign keine Kohärenz garantiert; alle DMA-Puffer erfordern klare Zuständigkeit und Synchronisation.
+- Cachefähige DMA-Puffer benötigen explizite Cache-Wartung, wenn das Hardwaredesign keine Kohärenz garantiert; alle DMA-Puffer erfordern klare Zuständigkeit und Synchronisation.
 - Grafik-, Audio-, KI- und Konnektivitäts-Workloads profitieren am meisten, wenn der Software-Stack die Hardware-Beschleuniger und die Speicherhierarchie des SoC effektiv nutzt.
 
 Der Kern ist nicht dafür gedacht, jeden Cortex-M7-Anwendungsfall zu ersetzen. Erfordert eine Anwendung maximalen Single-Core-Durchsatz bei höherem Stromverbrauch, können Geräte der Cortex-M7-Klasse weiterhin geeignet sein. Für batteriebetriebene vernetzte Produkte bietet STAR-MC1 jedoch eine nützliche Balance aus Kompatibilität, Leistung und Energieeffizienz.
@@ -177,7 +177,7 @@ Typische Beispiele umfassen:
 - Wenn das SoC Befehls- und Daten-Caches aktiviert, können sie die reale Leistung verbessern, insbesondere wenn Code und Daten außerhalb des schnellen internen SRAM liegen.
 - CDE bietet einen Pfad zur Beschleunigung durch kundenspezifische Befehle, sofern SoC und Software-Stack dies unterstützen.
 - STAR-MC1 verbindet ein CM33-kompatibles Softwaremodell mit konfigurierbaren Speicher- und Beschleunigungsfunktionen; vergleichen Sie konkrete SoCs und gemessene Arbeitslasten statt nur Core-Bezeichnungen.
-- Bei SF32-Bausteinen mit STAR-MC1 können der Kern und die dazu im SoC implementierten Funktionen anspruchsvollere Grafik-, Audio-, AIoT- und Wearable-Anwendungen innerhalb eines MCU-orientierten Entwicklungsmodells unterstützen.
+- Bei SF32-Geräten mit STAR-MC1 können der Kern und die dazu im SoC implementierten Funktionen anspruchsvollere Grafik-, Audio-, AIoT- und Wearable-Anwendungen innerhalb eines MCU-orientierten Entwicklungsmodells unterstützen.
 
 ---
 

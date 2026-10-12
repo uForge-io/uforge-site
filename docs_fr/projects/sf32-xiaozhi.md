@@ -1,6 +1,6 @@
 ---
 icon: lucide/message-circle-more
-description: "Parcours complet de développement de l'assistant vocal open source Xiaozhi sur SF32LB52 : mise en route de la carte, provisionnement Bluetooth PAN, interaction vocale dans le cloud, personnalisation, OTA, validation et transfert à la production."
+description: "Parcours complet de développement de l'assistant vocal open source Xiaozhi sur SF32LB52 : mise en service de la carte, provisionnement Bluetooth PAN, interaction vocale dans le cloud, personnalisation, OTA, validation et transfert à la production."
 tags:
     - Projets
     - IA
@@ -11,14 +11,17 @@ tags:
 # Assistant vocal Xiaozhi sur SF32 { #sf32-xiaozhi-voice-assistant }
 
 ## Qu'est-ce que Xiaozhi ? { #what-is-xiaozhi }
+
 [Xiaozhi](https://github.com/78/xiaozhi-esp32) est un chatbot vocal open source fondé sur MCP, largement connu depuis son implémentation ESP32 en 2025. Il associe un appareil d'interaction vocale à des services cloud de grands modèles et à des extensions MCP côté appareil ou côté cloud. C'est donc un point de départ concret pour du matériel d'IA conversationnelle, et pas seulement une application de chat textuel.
 
 ## Pourquoi l'implémentation SF32 ? { #why-the-sf32-implementation }
+
 [78/xiaozhi-sf32](https://github.com/78/xiaozhi-sf32) est l'implémentation SF32, mais elle utilise volontairement un autre schéma de connectivité. Alors que le projet ESP32 d'origine prend en charge le Wi-Fi et d'autres connexions réseau directes, la version SF32 accède à Internet via le [Bluetooth PAN classique](../learn/bluetooth/pan.md), fourni par un téléphone appairé. Le téléphone prend ainsi en charge la connexion à Internet, ce qui peut réduire sensiblement la consommation électrique liée au réseau côté appareil dans une conception dépendante du téléphone. L'économie réelle dépend toutefois du téléphone, des conditions radio, du rapport cyclique des dialogues et de la politique d'alimentation. Cette approche convient particulièrement aux appareils personnels portables sur batterie, comme les pendentifs, badges, assistants compacts et petits appareils connectés portés sur soi.
 
 Cette référence produit est particulièrement utile, car elle réunit des aspects souvent traités séparément : matériel d'affichage et audio, réseau fourni par le téléphone, service vocal cloud, parcours d'activation utilisateur, commandes de l'appareil et capacité de mise à jour sur le terrain.
 
 ## Résultat, portée et critères d'entrée { #outcome-scope-and-entry-criteria }
+
 Cette page décrit un parcours d'ingénierie complet pour faire évoluer cette référence vers un produit. Elle **n'affirme pas** que Xiaozhi est un LLM hors ligne exécuté sur l'appareil, que toutes les fonctions amont sont qualifiées pour la production, ni qu'une carte de développement prise en charge équivaut à un produit fini certifié. L'appareil utilise Bluetooth PAN pour accéder à Internet par l'intermédiaire d'un téléphone appairé et s'appuie sur les services cloud Xiaozhi pour le dialogue. Avant tout engagement produit, vérifiez les conditions du service, la propriété du compte, la confidentialité, la sécurité, les coûts, la disponibilité et l'adéquation régionale.
 
 **Résultat :** obtenir un assistant vocal avec affichage reproductible, configurable via un téléphone, capable de mener un dialogue appuyé par le cloud, de contrôler une fonction sûre de l'appareil, de récupérer après la perte de la connexion PAN et de produire les preuves nécessaires à une décision de matériel personnalisé.
@@ -76,12 +79,13 @@ Les URL de composants tiers ci-dessus pointent vers des places de marché citée
 | Sources `78/xiaozhi-sf32` | Commit [`1d3ef641ace47fae68227e9173647fd5db01f6f5`](https://github.com/78/xiaozhi-sf32/commit/1d3ef641ace47fae68227e9173647fd5db01f6f5) | Sources de l'application et configuration de la carte | Obligatoire pour les étapes 3–4 | [Dépôt](https://github.com/78/xiaozhi-sf32) | Il s'agit de l'instantané source examiné pour cet article. Consigner tout commit ultérieur comme nouvelle référence et reprendre tous les contrôles. |
 | Sous-module SiFli-SDK | Commit [`0d2de1480f735e05017c41436e655a1688063881`](https://github.com/OpenSiFli/SiFli-SDK/tree/0d2de1480f735e05017c41436e655a1688063881) | Pilotes SF32, RTOS, middleware, scripts de chaîne d'outils et environnement SCons | Obligatoire pour les étapes 3–4 | [OpenSiFli/SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) via le sous-module `sdk` du dépôt | Utiliser la révision du sous-module enregistrée par le commit de l'application retenu ; ne pas mettre à jour le SDK séparément dans une référence conservée. |
 | Interface graphique sftool | v1.2.1 ; conserver le SHA-256 de l'artefact choisi pour l'OS depuis la page de version | Flashage de l'image précompilée et récupération locale | Obligatoire pour le parcours graphique documenté avec v1.4.0 | [Version v1.2.1 et artefacts par plateforme](https://github.com/OpenSiFli/sftool-gui/releases/tag/v1.2.1) | Noter l'OS hôte, le nom de l'artefact et son empreinte. Qualifier toute version ultérieure avant remplacement. |
-| Outils de l'hôte de compilation | Scripts d'installation/export fournis par le SiFli-SDK épinglé ; environnement SCons créé par ces scripts | Configuration et compilation des sources | Obligatoire pour les étapes 3–4 | [Guide officiel de compilation Xiaozhi depuis les sources](https://docs.sifli.com/projects/xiaozhi/source-build/) | Noter l'OS et l'architecture de l'hôte, le résultat des scripts et l'environnement exporté. Un outil installé globalement ne doit pas remplacer silencieusement celui du SDK épinglé. |
-| Console et service cloud Xiaozhi | Service hébergé sur `xiaozhi.me` ; noter date de validation, propriétaire du compte, configuration de l'agent et point d'accès | Activation, ASR/LLM/TTS en streaming et MCP cloud | Obligatoire pour le dialogue | [Console Xiaozhi](https://xiaozhi.me) | L'utilisateur ne peut pas épingler une version du service hébergé. Traiter son comportement, ses conditions, sa disponibilité et son accès régional comme des dépendances contrôlées de l'extérieur. |
+| Outils de l'hôte de compilation | Scripts d'installation/export fournis par le SiFli-SDK figé ; environnement SCons créé par ces scripts | Configuration et compilation des sources | Obligatoire pour les étapes 3–4 | [Guide officiel de compilation Xiaozhi depuis les sources](https://docs.sifli.com/projects/xiaozhi/source-build/) | Noter l'OS et l'architecture de l'hôte, le résultat des scripts et l'environnement exporté. Un outil installé globalement ne doit pas remplacer silencieusement celui du SDK figé. |
+| Console et service cloud Xiaozhi | Service hébergé sur `xiaozhi.me` ; noter date de validation, propriétaire du compte, configuration de l'agent et point d'accès | Activation, ASR/LLM/TTS en streaming et MCP cloud | Obligatoire pour le dialogue | [Console Xiaozhi](https://xiaozhi.me) | L'utilisateur ne peut pas figer une version du service hébergé. Traiter son comportement, ses conditions, sa disponibilité et son accès régional comme des dépendances contrôlées de l'extérieur. |
 
 </div>
 
 ## Choisir une configuration de référence prise en charge { #choose-a-supported-baseline }
+
 La documentation de démarrage rapide SiFli pour Xiaozhi répertorie quatre cibles avec firmware précompilé : SF32LB52-DevKit-ULP (Huangshan), SF32LB52-DevKit-LCD, SF32LB52-DevKit-Nano et la carte d'extension Xiaotangyuan. La documentation de compilation depuis les sources répertorie actuellement DevKit-ULP, DevKit-LCD et DevKit-Nano. Si la personnalisation des sources est une exigence du projet, choisissez une carte figurant dans cette dernière liste ; la présence d'une image précompilée ne garantit pas l'existence d'une cible de compilation documentée.
 
 <div align="center"><em>Tableau : choix de la carte</em></div>
@@ -98,6 +102,7 @@ La documentation de démarrage rapide SiFli pour Xiaozhi répertorie quatre cibl
 </div>
 
 ## Étapes du projet { #delivery-map }
+
 Considérez les étapes comme des points de décision, et non comme une liste de fonctionnalités. Chacune produit un élément vérifiable qui permet d'examiner et de reproduire la décision suivante.
 
 <div align="center"><em>Tableau : étapes du projet</em></div>
@@ -115,6 +120,7 @@ Considérez les étapes comme des points de décision, et non comme une liste de
 </div>
 
 ## Architecture système et dépendances { #system-architecture-and-dependencies }
+
 <div align="center"><em>Figure : flux produit de Xiaozhi sur SF32</em></div>
 
 ```mermaid
@@ -132,15 +138,17 @@ Le guide d'architecture officiel décrit le Bluetooth PAN sur Bluetooth classiqu
 Ce flux comporte quatre domaines de défaillance à diagnostiquer séparément : matériel et audio locaux, appairage Bluetooth et PAN, accès à Internet et au service cloud, configuration de l'application et du service. Un appairage BLE réussi ne prouve ni que la carte accède à Internet ni que le service vocal est activé.
 
 ## Étape 1 — Établir la référence intacte { #stage-1-establish-the-untouched-reference-baseline }
+
 1. Effectuez le montage matériel propre à la carte selon la procédure officielle. Pour le DevKit-LCD, cela comprend l'ensemble AMOLED/FPC spécifié, un haut-parleur connecté à `SPK`, `KEY1` pour le réveil et le dialogue, ainsi qu'un appui long sur `KEY2` pour éteindre l'appareil.
 2. Flashez le firmware précompilé pris en charge en suivant la procédure officielle Xiaozhi. Le guide de démarrage rapide recommande l'outil graphique de flashage ; à la date de publication du guide, il précise que le flashage depuis le terminal n'est pas pris en charge pour les firmwares à partir de la version 1.4.0.
 3. Sur le téléphone, activez le **partage Internet Bluetooth avant l'appairage**. Appairez-le avec `sifli-pan`, puis vérifiez dans l'interface de la carte et l'état de partage du téléphone que PAN est bien actif, et qu'il ne s'agit pas d'un simple appairage Bluetooth. Pour iOS, le guide officiel indique qu'un redémarrage du téléphone peut être nécessaire si `sifli-pan` n'apparaît pas.
 4. Suivez la procédure d'activation officielle dans la console Xiaozhi sur [xiaozhi.me](https://xiaozhi.me) : créez et configurez un agent, puis ajoutez le code d'appareil affiché par la carte.
 5. Lancez un dialogue à l'aide de la touche prévue ou du mécanisme d'activation configuré. Consignez dans le dossier projet la version du firmware, la carte, le modèle et le système du téléphone, ainsi que les identifiants du compte et de l'agent.
 
-**Critère de sortie de l'étape 1 :** après un démarrage à froid, l'appareil établit PAN, indique qu'il est activé, accepte une requête de dialogue, restitue une réponse et affiche l'état attendu de l'interface.
+**Critère de sortie du point de contrôle 1 :** après un démarrage à froid, l'appareil établit PAN, indique qu'il est activé, accepte une requête de dialogue, restitue une réponse et affiche l'état attendu de l'interface.
 
 ## Étape 2 — Prouver la récupération et le comportement critique du produit { #stage-2-prove-recovery-and-product-critical-behavior }
+
 Effectuez ces essais avant toute modification des sources. Ils transforment la démonstration en une base fiable :
 
 <div align="center"><em>Tableau : preuves de validation de la base</em></div>
@@ -151,7 +159,7 @@ Effectuez ces essais avant toute modification des sources. Ils transforment la d
 |:-----|:-------|:--------------|
 | PAN absent | Appairez le téléphone sans activer le partage Internet Bluetooth. | L'interface ou le journal signale clairement l'absence de PAN ; l'activation du partage et une nouvelle connexion rétablissent le service. |
 | Perte de PAN | Désactivez le partage, coupez Bluetooth ou éloignez-vous pendant une période d'inactivité ou un dialogue. | L'appareil détecte le problème, revient à un état récupérable et se reconnecte par le mécanisme documenté de réveil/reconnexion. |
-| Veille et réveil | Laissez l'appareil inactif jusqu'à sa mise en veille, puis utilisez la commande de réveil prévue. | Le réveil, la reconnexion et le dialogue suivant sont reproductibles sans reflasher. |
+| Veille et réveil | Laissez l'appareil inactif jusqu'à sa mise en veille, puis utilisez la commande de réveil prévue. | Le réveil, la reconnexion et le dialogue suivant sont reproductibles sans nouveau flashage. |
 | Audio et interface | Enchaînez plusieurs dialogues à un volume représentatif. | La capture est intelligible, la restitution est nette, l'interface reste réactive et aucun redémarrage ne survient. |
 | Indication de batterie | Chargez et déchargez la batterie à des niveaux représentatifs. | L'état affiché est plausible ; une batterie autre que la référence est identifiée comme nécessitant une calibration de courbe. |
 | Limite du service | Testez volontairement un compte ou agent auquel manque la configuration attendue. | La défaillance se distingue des problèmes de PAN et de matériel. |
@@ -160,9 +168,10 @@ Effectuez ces essais avant toute modification des sources. Ils transforment la d
 
 Le guide officiel avertit que la courbe `battery_table.c` fournie pour une carte peut être inexacte avec une autre batterie. Pour la batterie du produit, obtenez les données de charge et de décharge du fournisseur ou mesurez-les. Mettez à jour `charging_curve_table` et `discharge_curve_table`, recompilez, puis répétez les essais de batterie.
 
-**Critère de sortie de l'étape 2 :** chaque essai a un résultat consigné, les défaillances sont attribuables à leur domaine respectif et chaque procédure de reprise documentée fonctionne sans reflashage ni correction manuelle de l'état.
+**Critère de sortie du point de contrôle 2 :** chaque essai a un résultat consigné, les défaillances sont attribuables à leur domaine respectif et chaque procédure de reprise documentée fonctionne sans nouveau flashage ni correction manuelle de l'état.
 
 ## Étape 3 — Établir une base de code reproductible { #stage-3-build-a-reproducible-source-baseline }
+
 Le dépôt intègre SiFli-SDK sous forme de sous-module. Clonez-le récursivement et consignez le commit Xiaozhi ainsi que celui du sous-module SDK :
 
 ```bash
@@ -183,9 +192,10 @@ scons --board=sf32lb52-lchspi-ulp --board_search_path="../boards" -j8
 
 Consultez la page de compilation officielle propre à la carte pour connaître la cible exacte et le script de flashage ; ne réutilisez ni le nom de cible ULP ni le chemin de l'artefact généré pour une autre carte. Un dossier de compilation reproductible doit contenir le système d'exploitation hôte, le résultat de l'installation des outils, l'environnement exporté, l'argument de carte, les révisions amont et du SDK, le journal de compilation, l'image flashée et le journal série.
 
-**Critère de sortie de l'étape 3 :** un clone propre sur une seconde machine — ou après suppression du répertoire de compilation — produit une image qui passe tous les contrôles de l'étape 2.
+**Critère de sortie du point de contrôle 3 :** un clone propre sur une seconde machine — ou après suppression du répertoire de compilation — produit une image qui passe tous les contrôles de l'étape 2.
 
 ## Étape 4 — Adapter délibérément { #stage-4-adapt-deliberately }
+
 Ne modifiez qu'un élément à la fois et conservez l'image de référence validée. La documentation officielle de personnalisation traite du nom Bluetooth, des images statiques et animées, des polices, du DFU via PAN et de MCP.
 
 <div align="center"><em>Tableau : ordre recommandé des adaptations</em></div>
@@ -206,26 +216,29 @@ Pour MCP côté appareil, le guide officiel utilise `McpServer::AddCommonTools()
 
 Pour l'OTA via PAN, la documentation officielle distingue trois catégories d'images déployables séparément : le code, les ressources graphiques et les polices. L'adresse et la taille des images doivent être déterminées à partir de la table de partitions. Avant d'activer l'OTA en production, définissez une politique de version, contrôlez l'accès au serveur, vérifiez l'intégrité, testez une interruption et prévoyez une procédure de reprise locale ou filaire.
 
-**Critère de sortie de l'étape 4 :** la modification choisie, sa procédure de retour arrière ou de reprise et les résultats de non-régression applicables sont consignés. Le parcours de dialogue initial et les limites de sécurité de chaque action sur l'appareil restent validés.
+**Critère de sortie du point de contrôle 4 :** la modification choisie, sa procédure de retour arrière ou de reprise et les résultats de non-régression applicables sont consignés. Le parcours de dialogue initial et les limites de sécurité de chaque action sur l'appareil restent validés.
 
 ## Étape 5 — Revue de préparation produit { #stage-5-product-readiness-review }
+
 Ne passez pas à une conception matérielle personnalisée avant que l'équipe puisse répondre aux questions suivantes :
 
 - Quelles versions de téléphone et de système d'exploitation prennent en charge exactement le parcours d'appairage PAN, et quelle solution de repli prévoir sinon ?
-- Quels point de terminaison cloud, compte, agent, point de terminaison MCP et identifiants sont utilisés, et qui en est responsable et en assure la rotation ?
+- Quels points de terminaison cloud, compte, agent, point de terminaison MCP et identifiants sont utilisés, et qui en est responsable et en assure la rotation ?
 - Quelles données audio, d'appareil et d'utilisateur quittent l'appareil ? Comment le consentement est-il obtenu ? Quelles exigences s'appliquent à la conservation des données et aux régions ?
 - Quels courants sont mesurés pendant un dialogue, au repos connecté, en veille, en charge et au réveil avec la batterie et le boîtier prévus ?
 - Comment l'appareil récupère-t-il après une mise à jour échouée, la perte du téléphone, une panne cloud, une ressource corrompue ou une mauvaise configuration ?
 - Quels éléments du code amont, du service, du comportement du modèle et de l'infrastructure OTA sont maîtrisés par votre équipe produit, et lesquels dépendent de fournisseurs externes ?
 
-**Critère de sortie de l'étape 5 :** les réponses, les responsables désignés et les risques résiduels sont consignés et acceptés par l'équipe produit. Chaque point restant comporte une mesure d'atténuation, un report explicite ou une décision d'arrêt.
+**Critère de sortie du point de contrôle 5 :** les réponses, les responsables désignés et les risques résiduels sont consignés et acceptés par l'équipe produit. Chaque point restant comporte une mesure d'atténuation, un report explicite ou une décision d'arrêt.
 
 ## Passage à la conception du produit { #handoff-to-product-design }
+
 Intégrez le composant SF32 choisi, l'architecture d'alimentation, la conception de l'écran et de l'audio, la stratégie RF, le plan de stockage et de partitions, les essais de production et les hypothèses de reprise à la [conception pour la production](../hardware/design-for-production.md). Suivez le [parcours d'intégration SF32LB52](../sf32-products/chips/SF32LB52x.md#integration-path) pour choisir le composant, le module, la carte, le guide et la liste de contrôle adaptés.
 
 **Définition de l'achèvement du projet :** cette référence a rempli son rôle lorsqu'un nouveau membre de l'équipe peut reproduire la base choisie, relier chaque défaillance observée à son responsable ou à sa procédure de reprise, reconstruire l'image personnalisée et examiner les éléments nécessaires à la décision de concevoir un matériel spécifique. Elle devient alors une référence de développement produit, et non une démonstration non évaluée à transposer en production.
 
 ## Sources de référence { #authoritative-sources }
+
 - [Dépôt 78/xiaozhi-esp32](https://github.com/78/xiaozhi-esp32)
 - [Dépôt 78/xiaozhi-sf32](https://github.com/78/xiaozhi-sf32)
 - [Wiki SiFli : présentation d'AI Xiaozhi (en chinois)](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/application/xiaozhi.md)

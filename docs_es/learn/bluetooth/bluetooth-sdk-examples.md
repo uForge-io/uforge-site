@@ -36,7 +36,7 @@ Esta página clasifica por tarea de ingeniería los ejemplos de [Bluetooth clás
 
 Antes de cambiar el proyecto, registre la versión exacta del SDK, el nombre de la placa, la configuración, el dispositivo par o la aplicación, los ajustes de radio y los mensajes de registro esperados. Luego siga esta secuencia:
 
-1. Compile y programe el ejemplo sin modificar usando el nombre exacto de la placa y las instrucciones indicadas para la versión del SDK correspondiente. Si no se ha establecido la relación entre esa documentación y la revisión del SDK, o no consta que la placa sea compatible, trate la compatibilidad como no verificada antes de adaptar el ejemplo.
+1. Compile y grabe en la placa el ejemplo sin modificar, usando el nombre exacto de la placa y las instrucciones indicadas para la versión del SDK correspondiente. Si no se ha establecido la relación entre esa documentación y la revisión del SDK, o no consta que la placa sea compatible, trate la compatibilidad como no verificada antes de adaptar el ejemplo.
 2. Compruebe el comportamiento inalámbrico principal: descubrimiento, conexión, transferencia, transmisión o recepción, según corresponda.
 3. Repita la prueba después de reiniciar, desconectar, reconectar y apagar y volver a encender el dispositivo.
 4. Añada de uno en uno los servicios, recorridos de usuario, rutas de audio o políticas de consumo específicos del producto.

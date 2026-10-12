@@ -69,17 +69,17 @@ PSRAM verfügt über getrennte CBUS- und SBUS-Adressräume. Setzen Sie `exec` au
 
 ## v2: Benannte und typisierte JSON-Partitionen { #v2-named-and-typed-json-partitions }
 
-v2 verwendet ebenfalls `ptab.json`, aber der Header muss `"version": "2"` deklarieren. Die Speicherfelder bleiben `mem`, `base` und `regions`. Eine Region behält `offset` und `max_size` und kann `tags` und `custom` verwenden; v2 gibt der Region zusätzlich einen `name`, einen `type` und, bei einer Ausführungspartition, optional ein `core`.
+v2 verwendet ebenfalls `ptab.json`, aber der Header muss `"version": "2"` deklarieren. Die Speicherfelder bleiben `mem`, `base` und `regions`. Eine Region enthält weiterhin `offset` und `max_size` und kann `tags` und `custom` verwenden; zusätzlich erhält sie in v2 einen `name`, einen `type` und bei einer Ausführungspartition optional ein `core`.
 
 <div align="center"><em>Tabelle: v2-Regionsfelder und -Typen</em></div>
 <div align="center" markdown>
 
 | Feld oder Typ | Bedeutung |
 | --- | --- |
-| `name` | Partitionsname. Programm-Image-Namen müssen mit dem entsprechenden Programm- oder `AddCustomImg`-Namen übereinstimmen. Ein Programm mit mehreren Dateien kann `proj_name:1`, `proj_name:2` usw. verwenden. |
+| `name` | Partitionsname. Namen von Programm-Images müssen mit dem Namen des zugehörigen Programms oder dem `AddCustomImg`-Namen übereinstimmen. Ein Programm mit mehreren Dateien kann `proj_name:1`, `proj_name:2` usw. verwenden. |
 | `core` | Kern, der eine `app_exec`-Partition ausführt: `hcpu`, `lcpu` oder `acpu`. |
 | `app_img` | Primäre Partition, die ein Programm-Image speichert und vom Flash-Tool programmiert wird. |
-| `app_img2` | Backup-Programm-Image-Partition, normalerweise mit einer primären Partition für Updates gepaart. |
+| `app_img2` | Sicherungspartition für ein Programm-Image, normalerweise für Updates mit einer primären Partition gepaart. |
 | `app_exec` | Adressraum, aus dem das Programm ausgeführt wird. |
 
 </div>
@@ -128,7 +128,7 @@ Die von v3 generierte `FAL_PART_TABLE` enthält ausschließlich `data/flashdb_kv
 
 Für jede Partition erzeugt `ptab.h` die Makros `<NAME>_START_ADDR`, `<NAME>_SIZE` und `<NAME>_OFFSET`; `<NAME>` ist der Partitionsname in Großbuchstaben. Wenn der Speichertyp der Region erkannt wird, kommt `<NAME>_MEM_TYPE` hinzu. Bei einer `app/factory`-Partition verwendet `CODE_START_ADDR` die in `exec` angegebene Adresse, falls vorhanden, andernfalls die CBUS-Adresse der Partition.
 
-Verwenden Sie `exec: {region, offset}`, wenn Code nicht an Ort und Stelle ausgeführt werden kann, z. B. bei einer im NAND-Flash gespeicherten und in den PSRAM kopierten Anwendung. Ohne `exec` verwendet die generierte Code-Startadresse die CBUS-Speicheradresse der Partition. `attrs` fügt `ptab.h` benutzerdefinierte Makros hinzu.
+Verwenden Sie `exec: {region, offset}`, wenn eine Anwendung nicht direkt aus ihrem Speicherort ausgeführt werden kann, z. B. wenn sie im NAND-Flash gespeichert und in den PSRAM kopiert wird. Ohne `exec` verwendet die generierte Code-Startadresse die CBUS-Speicheradresse der Partition. `attrs` fügt `ptab.h` benutzerdefinierte Makros hinzu.
 
 ### Standardwerte und Projekt-Overlays { #defaults-and-project-overlays }
 

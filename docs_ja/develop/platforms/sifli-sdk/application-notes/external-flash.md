@@ -1,23 +1,23 @@
 ---
 icon: lucide/hard-drive
-title: "外付け Flash メモリーの使い方"
-description: "SiFli-SDK で外付け NOR Flash、NAND Flash、PSRAM を設定・アクセスし、ファイルシステムをマウントする方法と、ドライバーの移植方法を解説します。"
+title: "外付けFlashメモリーの使い方"
+description: "SiFli-SDKで外付けNOR Flash、NAND Flash、PSRAMを設定・アクセスし、ファイルシステムをマウントする方法と、ドライバーの移植方法を解説します。"
 tags: [開発, SiFli-SDK, アプリケーションノート, Flash]
 ---
 
-# 外付け Flash メモリーの使い方 { #use-external-flash }
+# 外付けFlashメモリーの使い方 { #use-external-flash }
 
-この記事では、SiFli の[Flash 使用ガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/flash_usage.html)を基に、SF32LB52x、SF32LB55x、SF32LB56x、SF32LB58x に外付けメモリーを組み込む手順をまとめています。コントローラー設定、ファミリー別のアドレス空間、RT-Thread からの直接アクセス、MTD ファイルシステム、予約領域、新しい Flash デバイス向けドライバーの移植、PSRAM、J-Link Open Flashloader への対応を扱います。
+この記事では、SiFliの[Flash使用ガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/flash_usage.html)を基に、SF32LB52x、SF32LB55x、SF32LB56x、SF32LB58xに外付けメモリーを組み込む手順をまとめています。コントローラー設定、ファミリー別のアドレス空間、RT-Threadからの直接アクセス、MTDファイルシステム、予約領域、新しいFlashデバイス向けドライバーの移植、PSRAM、J-Link Open Flashloaderへの対応を扱います。
 
-参照元のガイドでは、NOR Flash と NAND Flash の両方に `FLASH` という表記を使っています。サンプル内の SDK シンボルとデバイス名は変更していません。製品に設定を適用する前に、対象 SDK のブランチと基板回路図を確認してください。
+参照元のガイドでは、NOR FlashとNAND Flashの両方に`FLASH`という表記を使っています。サンプル内のSDKシンボルとデバイス名は変更していません。製品に設定を適用する前に、対象SDKのブランチと基板回路図を確認してください。
 
 ## コントローラーの構成と機能 { #1-controller-model-and-capabilities }
 
-SiFli の Flash コントローラーには、複数の Flash デバイスを同時に接続できます。
+SiFliのFlashコントローラーには、複数のFlashデバイスを同時に接続できます。
 
 <div align="center" markdown>
 
-<em>表：ファミリー別のFlashコントローラー機能</em>
+<em>表: ファミリー別のFlashコントローラー機能</em>
 
 | ファミリー | 最大デバイス数 | 本ガイドで扱うPSRAMのラインモード | サンプルでのコントローラー名 |
 |---|---:|---|---|
@@ -142,7 +142,7 @@ SF32LB58x EVBでは、参照元のガイドに従い **RTOS → On-chip Peripher
 SF32LB56xのMPI設定はSF32LB58xとほぼ同じですが、MPI4はありません。
 
 !!! warning "MPI設定例の確認"
-    SiFliの資料にはMPI1の設定について矛盾があります。説明文では「MPI1は標準でNOR Flashに接続され、モードを変更できない」とされていますが、続く設定例ではMPI1をモード4（16ラインPSRAM）に設定しています。また、例の `BSP_QSPI1_MEM_SIZE` は `32` ですがコメントは16 MB、MPI4の値は `128` でコメントは128 MBである一方、EVB容量表では64 MBです。本記事では設定値を原資料どおりに残し、マクロ値の意味や実容量を推測していません。対象SDKのKconfig／生成設定、基板回路図、メモリのデータシートで確認してください。
+    SiFliの資料にはMPI1の設定について矛盾があります。説明文では「MPI1は標準でNOR Flashに接続され、モードを変更できない」とされていますが、続く設定例ではMPI1をモード4（16ラインPSRAM）に設定しています。また、例の`BSP_QSPI1_MEM_SIZE`は`32`ですがコメントは16 MB、MPI4の値は`128`でコメントは128 MBである一方、EVB容量表では64 MBです。本記事では設定値を原資料どおりに残し、マクロ値の意味や実容量を推測していません。対象SDKのKconfig／生成設定、基板回路図、メモリーのデータシートで確認してください。
 
 ## Flashのアドレス空間 { #3-flash-address-spaces }
 
@@ -152,14 +152,14 @@ SF32LB56xのMPI設定はSF32LB58xとほぼ同じですが、MPI4はありませ�
 
 <div align="center" markdown>
 
-<em>表：SF32LB55x Flashコントローラーのアドレスウィンドウ</em>
+<em>表: SF32LB55x Flashコントローラーのアドレスウィンドウ</em>
 
 | コントローラー | 開始アドレス | 終了アドレス | 最大ウィンドウ | EVBの構成 |
 |:-----------|:------|:----|:---------------|:----------------|
 | FLASH1 | `0x10000000` | `0x11FFFFFF` | 32 × 1024 × 1024 bytes | EVB容量4 MB |
 | FLASH2 | `0x64000000` | `0x67FFFFFF` | 64 × 1024 × 1024 bytes | EVB容量32 MB |
-| FLASH3 | `0x68000000` | `0x6FFFFFFF` | 128 × 1024 × 1024 bytes | EVB では無効 |
-| FLASH4 | `0x12000000` | `0x13FFFFFF` | 32 × 1024 × 1024 bytes | EVB では無効 |
+| FLASH3 | `0x68000000` | `0x6FFFFFFF` | 128 × 1024 × 1024 bytes | EVBでは無効 |
+| FLASH4 | `0x12000000` | `0x13FFFFFF` | 32 × 1024 × 1024 bytes | EVBでは無効 |
 </div>
 
 コントローラーのベースアドレスは`mem_map.h`で定義されています。
@@ -177,7 +177,7 @@ SF32LB56xのMPI設定はSF32LB58xとほぼ同じですが、MPI4はありませ�
 
 <div align="center" markdown>
 
-<em>表：SF32LB58xのC-BUSアドレス空間</em>
+<em>表: SF32LB58xのC-BUSアドレス空間</em>
 
 | コントローラー | 開始アドレス | 終了アドレス | 最大ウィンドウ | EVBの構成 |
 |:-----------|:------|:----|:---------------|:----------------|
@@ -192,7 +192,7 @@ SF32LB56xのMPI設定はSF32LB58xとほぼ同じですが、MPI4はありませ�
 
 <div align="center" markdown>
 
-<em>表：SF32LB58xのS-BUSアドレス空間</em>
+<em>表: SF32LB58xのS-BUSアドレス空間</em>
 
 | コントローラー | 開始アドレス | 終了アドレス | 最大ウィンドウ | EVBの構成 |
 |:-----------|:------|:----|:---------------|:----------------|
@@ -218,7 +218,7 @@ SF32LB56xのMPI設定はSF32LB58xとほぼ同じですが、MPI4はありませ�
 
 <div align="center" markdown>
 
-<em>表：SF32LB56xのC-BUSアドレス空間</em>
+<em>表: SF32LB56xのC-BUSアドレス空間</em>
 
 | コントローラー | 開始アドレス | 終了アドレス | 最大ウィンドウ | EVBの構成 |
 |:-----------|:------|:----|:---------------|:----------------|
@@ -232,7 +232,7 @@ SF32LB56xのMPI設定はSF32LB58xとほぼ同じですが、MPI4はありませ�
 
 <div align="center" markdown>
 
-<em>表：SF32LB56xのS-BUSアドレス空間</em>
+<em>表: SF32LB56xのS-BUSアドレス空間</em>
 
 | コントローラー | 開始アドレス | 終了アドレス | 最大ウィンドウ |
 |:-----------|:------|:----|:---------------|
@@ -249,7 +249,7 @@ SF32LB56xのMPI設定はSF32LB58xとほぼ同じですが、MPI4はありませ�
 ```
 
 !!! note "アドレスウィンドウとデバイス容量の違い"
-    参照元では、SF32LB56x MPI3のC-BUS範囲を`0x14000000`–`0x17FFFFFF`としながら、そのサイズを128 MBと記載しています。開始・終了アドレスを含めて計算すると64 MBになるため、上表ではウィンドウサイズを64 MBとしています。参照元にあるEVBのデバイス容量128 MBは別の値として残しています。デバイス容量からこのC-BUSウィンドウのサイズは判断できません。使用前に対象SDKのメモリーマップを確認してください。
+    参照元では、SF32LB56x MPI3のC-BUS範囲を`0x14000000`～`0x17FFFFFF`としながら、そのサイズを128 MBと記載しています。開始・終了アドレスを含めて計算すると64 MBになるため、上表ではウィンドウサイズを64 MBとしています。参照元にあるEVBのデバイス容量128 MBは別の値として残しています。デバイス容量からこのC-BUSウィンドウのサイズは判断できません。使用前に対象SDKのメモリーマップを確認してください。
 
 ## RT-ThreadからFlashにアクセスする { #4-access-flash-through-rt-thread }
 
@@ -262,9 +262,9 @@ int rt_flash_write(rt_uint32_t addr, const rt_uint8_t *buf, size_t size);
 rt_err_t rt_flash_erase(rt_uint32_t addr, size_t size);
 ```
 
-`rt_flash_read` と `rt_flash_write` は、成功時に実際に転送したバイト数を返し、失敗時は `0` を返します。`rt_flash_erase` は成功時に `RT_EOK` を返します。読みやすさのために宣言を整理しています。実際のヘッダーと戻り値は、対象SDKブランチで確認してください。
+`rt_flash_read`と`rt_flash_write`は、成功時に実際に転送したバイト数を返し、失敗時は`0`を返します。`rt_flash_erase`は成功時に`RT_EOK`を返します。読みやすさのために宣言を整理しています。実際のヘッダーと戻り値は、対象SDKブランチで確認してください。
 
-NOR と NAND の読み出しには `rt_flash_read` を使用します。NOR はメモリーウィンドウから直接読み出すこともできますが、NAND では API を使用し、呼び出し側でバッファーを管理する必要があります。どちらの種類にも `rt_flash_write` を使用してください。消去時、NOR は通常セクター境界（一般に 4 KB）、NAND は通常ブロック境界（一般に 128 KB）にアドレスとサイズを合わせます。境界に揃わないデータは、呼び出し側で退避・復元してください。
+NORとNANDの読み出しには`rt_flash_read`を使用します。NORはメモリーウィンドウから直接読み出すこともできますが、NANDではAPIを使用し、呼び出し側でバッファーを管理する必要があります。どちらの種類にも`rt_flash_write`を使用してください。消去時、NORは通常セクター境界（一般に4 KB）、NANDは通常ブロック境界（一般に128 KB）にアドレスとサイズを合わせます。境界に揃わないデータは、呼び出し側で退避・復元してください。
 
 FlashがXIPに対応しない場合、実行中のコードと同じFlashを消去または書き込みすることはできません。FlashドライバーのコードをSRAMに配置してください。参照元のKeilリンカーフラグメントでは、`0x200E1000`から64 KBを予約しています。
 
@@ -285,7 +285,7 @@ LR_IROM1 0x10020000 0x100000  {    ; load region size_region
 元の読み書き確認サンプルには、初期化されていないデータバッファーと誤った後処理があり、そのまま実行できません。以下は、製品で使う固定アドレスを仮定せず、テスト領域のアドレスを引数で受け取るNOR Flash専用の例です。
 
 !!! warning "消去テストはデータを破壊します"
-    専用の消去可能なNORテスト領域でのみ実行し、`TEST_SIZE` はメモリとドライバーが要求する消去単位に合わせてください。テスト領域には少なくとも消去単位全体を確保し、アドレスと長さを適切に整列させてください。ブート設定、校正データ、ファームウェア／OTAイメージ、ファイルシステム、ユーザーデータは対象にしないでください。この例はNAND用ではありません。NANDではデバイスとドライバーに応じた不良ブロック、ECC、OOB、ページ／ブロックの処理も必要です。
+    専用の消去可能なNORテスト領域でのみ実行し、`TEST_SIZE`はメモリーとドライバーが要求する消去単位に合わせてください。テスト領域には少なくとも消去単位全体を確保し、アドレスと長さを適切に整列させてください。ブート設定、校正データ、ファームウェア／OTAイメージ、ファイルシステム、ユーザーデータは対象にしないでください。この例はNAND用ではありません。NANDではデバイスとドライバーに応じた不良ブロック、ECC、OOB、ページ／ブロックの処理も必要です。
 
 ```c
 #include <rtthread.h>
@@ -439,7 +439,7 @@ rt_err_t rt_mtd_nand_register_device(const char* name, struct rt_mtd_nand_device
 
 ## 現在のFlashレイアウトを確認し、領域を確保する { #6-reserve-and-review-the-current-flash-layout }
 
-SiFli の[SF32LB55x メモリー使用ガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/memory_usage.html)では、QSPI1 のデフォルト配置を次のように示しています。`0x10000000`～`0x1000FFFF` の 64 KB 領域には Flash 設定テーブル、キャリブレーションテーブル、予約領域が含まれます。続く `0x10010000`～`0x1001FFFF` の 64 KB はブート ROM パッチ用で、ユーザーコードは `0x10020000` から始まります。`FLASH2` が NOR Flash の場合、画像リソースは `0x64000000` から配置します。FlashDB（または EasyFlash）も `flash1` と `flash2` の一部を変数やログに使用します。システム要件に合わせてこれらの領域を確保し直し、再分割してください。
+SiFliの[SF32LB55xメモリー使用ガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/memory_usage.html)では、QSPI1のデフォルト配置を次のように示しています。`0x10000000`～`0x1000FFFF`の64 KB領域にはFlash設定テーブル、キャリブレーションテーブル、予約領域が含まれます。続く`0x10010000`～`0x1001FFFF`の64 KBはブートROMパッチ用で、ユーザーコードは`0x10020000`から始まります。`FLASH2`がNOR Flashの場合、画像リソースは`0x64000000`から配置します。FlashDB（またはEasyFlash）も`flash1`と`flash2`の一部を変数やログに使用します。システム要件に合わせてこれらの領域を確保し直し、再分割してください。
 
 ```c
 #define FLASH_TABLE_SIZE            (20*1024)
@@ -551,7 +551,7 @@ typedef struct
 } FLASH_CMD_CFG_T;
 ```
 
-`cmd` はコマンド ID です（参照元の例では、書き込み有効化が `0x06`、ステータス読み出しが `0x05` です）。`func_mode` は読み出しまたは書き込みを選択します。`data_mode` はデータなし、1／2／4 ラインのデータを選びます。`dummy_cycle` はコマンドとアドレス／データ間のクロック数です。`ab_size` と `ab_mode` は代替バイト（alternate bytes）のサイズとラインモードを、`addr_size` と `addr_mode` はアドレス長とラインモードを表します。`cmd_mode` はコマンド自体を 1／2／4 ラインのどれで送るかを示します。
+`cmd`はコマンドIDです（参照元の例では、書き込み有効化が`0x06`、ステータス読み出しが`0x05`です）。`func_mode`は読み出しまたは書き込みを選択します。`data_mode`はデータなし、1／2／4ラインのデータを選びます。`dummy_cycle`はコマンドとアドレス／データ間のクロック数です。`ab_size`と`ab_mode`は代替バイト（alternate bytes）のサイズとラインモードを、`addr_size`と`addr_mode`はアドレス長とラインモードを表します。`cmd_mode`はコマンド自体を1／2／4ラインのどれで送るかを示します。
 
 ## NAND Flashドライバーを移植する { #8-port-a-nand-flash-part }
 
@@ -569,7 +569,7 @@ NANDの移植手順はNORと同様ですが、コマンドセットとタイミ�
 
 ## J-Link DSKとOpen Flashloaderを使用する { #10-use-j-link-dsk-and-open-flashloader }
 
-SDK の `tools/flash/jlink_drv` ディレクトリには、SiFli の静的な J-Link Device Support Kit（DSK）が格納されています。ルートの `JLinkDevices.xml` にはデバイス、Flash バンク、ローダーの関係が記述されています。サブディレクトリ内の ELF ファイルは Open Flashloader のアルゴリズムです。
+SDKの`tools/flash/jlink_drv`ディレクトリには、SiFliの静的なJ-Link Device Support Kit（DSK）が格納されています。ルートの`JLinkDevices.xml`にはデバイス、Flashバンク、ローダーの関係が記述されています。サブディレクトリ内のELFファイルはOpen Flashloaderのアルゴリズムです。
 
 J-Link V7.62以降をインストールし、`tools/flash/jlink_drv`ディレクトリー全体を現在のユーザーの`JLinkDevices\SiFli`ディレクトリーにコピーします。Windowsのデフォルトパスは`C:\Users\<user>\AppData\Roaming\SEGGER\JLinkDevices\SiFli`です。
 
@@ -577,7 +577,7 @@ J-Link V7.62以降をインストールし、`tools/flash/jlink_drv`ディレク
 
 - J-Link V7.62以降は、`JLinkDevices`以下のすべての`*.xml`ファイルが再帰的に検索されます。そのため、J-Linkインストール先にある`JLinkDevices.xml`を変更する必要はありません。
 - XML内のローダーパスは`JLinkDevices.xml`からの相対パスとして解決されます。一部のELFファイルだけでなく、ディレクトリー全体をコピーしてください。
-- 選択したデバイスは、`rtconfig.py`の`JLINK_DEVICE`と一致させます。例：`SF32LB56X`、`SF32LB56X_NAND`、`SF32LB52X_NOR`。
+- 選択したデバイスは、`rtconfig.py`の`JLINK_DEVICE`と一致させる必要があります。例：`SF32LB56X`、`SF32LB56X_NAND`、`SF32LB52X_NOR`。
 - `FlashBankInfo`には複数の`LoaderInfo`を含められます。J-Linkはデフォルトで最初のローダーを使います。別のローダーを選ぶには、`_device "<DeviceName>?BankAddr=<FlashBankBase>&Loader=<LoaderName>"_`を明示するか、J-Linkスクリプトから`_JLINK_ExecCommand("DEVICE_SelectLoader BankAddr=<FlashBankBase> Loader=<LoaderName>");_`を呼び出します。
 - `SF32LB52X`、`SF32LB55X`、`SF32LB56X`、`SF32LB58X`などの接尾辞なしデバイス名には、現在は完全なバンク／ローダー情報が含まれており、NORローダーが優先されます。接尾辞付き名称は既存スクリプトとの互換性のために残されています。
 
@@ -595,8 +595,8 @@ J-Link V7.62以降をインストールし、`tools/flash/jlink_drv`ディレク
 ## 関連ページ { #related-pages }
 
 - [パーティションテーブル](../../../firmware-topics/partition-tables.md) — Flash領域とイメージ／OTAの配置を照合します。
-- [OTA と DFU](../../../firmware-topics/ota-dfu.md) — 製品データ領域を予約する前に、更新動作を確認します。
-- [SDK アプリケーションノート](../sdk-application-notes.md) — アプリケーションノートの一覧です。
+- [OTAとDFU](../../../firmware-topics/ota-dfu.md) — 製品データ領域を予約する前に、更新動作を確認します。
+- [SDKアプリケーションノート](../sdk-application-notes.md) — アプリケーションノートの一覧です。
 
 ## 公式資料 { #official-source }
 

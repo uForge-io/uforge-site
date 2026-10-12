@@ -7,13 +7,13 @@ description: "A μForge.io agora tem mais sete idiomas, traduzidos com ferrament
 
 Engenheiros de sistemas embarcados leem a documentação no idioma em que pensam. Por isso, a μForge.io agora tem traduções em chinês, japonês, espanhol, alemão, francês, português e russo, além do original em inglês.
 
-### Com ferramentas de LLM e muitas iterações { #built-with-llm-tools }
+### Com ferramentas baseadas em modelos de linguagem e muitas iterações { #built-with-llm-tools }
 
-Nada disso seria viável sem as ferramentas de LLM, e somos gratos por elas. Mas não foi uma única execução: foram necessárias muitas iterações, por dois motivos. O primeiro é o limite do plano de uso: um trabalho longo de tradução costumava atingir o limite antes de as páginas terminarem e precisava esperar uma reinicialização ou continuar em outro lugar. As várias reinicializações gratuitas do ChatGPT ajudaram muito, e agradecemos por isso. O segundo é que traduzir assim é lento e ineficiente: as páginas técnicas são longas e cheias de tabelas, código, nomes de pinos e links cruzados, então cada passada gerava algo que precisava ser conferido, corrigido e executado de novo.
+Nada disso seria viável sem as ferramentas baseadas em modelos de linguagem, e somos gratos por elas. Mas não bastou uma única execução: foram necessárias muitas iterações, por dois motivos. O primeiro é o limite do plano de uso: um trabalho longo de tradução costumava atingir o limite antes de terminar as páginas e precisava aguardar a renovação do limite ou continuar em outro ambiente. As várias renovações gratuitas do limite de uso oferecidas pelo ChatGPT ajudaram muito; agradecemos por isso. O segundo é que traduzir dessa forma é lento e ineficiente: as páginas técnicas são longas e cheias de tabelas, código, nomes de pinos e links cruzados. Por isso, cada etapa produzia uma versão que ainda precisava ser conferida, corrigida e processada novamente.
 
 ### Mantendo as traduções consistentes { #keeping-translations-consistent }
 
-Para que as iterações convergissem, mantemos um glossário com os termos que devem permanecer sem tradução (códigos de peças, unidades, nomes de protocolos) ou usar uma tradução aprovada, além de uma lista de verificação de qualidade que cobre a completude técnica, a correção de links e âncoras e a integridade do Markdown e do código. Cada idioma mantém a mesma estrutura de páginas do original em inglês, e as compilações são verificadas em modo estrito, de modo que um link quebrado ou uma página ausente gera um erro visível em vez de ser publicado em silêncio.
+Para que as iterações convergissem, mantemos um glossário com os termos que devem permanecer sem tradução (códigos de peças, unidades, nomes de protocolos) ou usar uma tradução aprovada, além de um checklist de qualidade que cobre a completude técnica, a correção de links e âncoras e a integridade do Markdown e do código. Cada idioma mantém a mesma estrutura de páginas do original em inglês. Os builds são validados em modo estrito: links quebrados ou páginas ausentes fazem a compilação falhar antes da publicação.
 
 ### Um aviso e um pedido { #caveat-and-request }
 

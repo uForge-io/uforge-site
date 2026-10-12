@@ -47,7 +47,7 @@ SF32ポートでは、Zephyrのデバイスツリー、Kconfig、`west`、キー
 - Bluetoothホスト、対象に含める場合はZMK Studio対応ホスト、左右それぞれの電流を測定する手段
 - フォークのコミット、マニフェストの各リビジョン、ボード／シールド識別子、ビルド・書き込みログ、キー試験結果、ボンド情報、設定状態、電流測定を記録する帳票
 
-<div align="center"><em>表：SF32向けZMKプロジェクトの前提条件</em></div>
+<div align="center"><em>表: SF32向けZMKプロジェクトの前提条件</em></div>
 
 <div align="center" markdown>
 
@@ -66,7 +66,7 @@ SF32ポートでは、Zephyrのデバイスツリー、Kconfig、`west`、キー
 
 ### ハードウェア仕様 { #hardware-specification }
 
-<div align="center"><em>表：SF32上のZMKハードウェア仕様</em></div>
+<div align="center"><em>表: SF32上のZMKハードウェア仕様</em></div>
 
 <div align="center" markdown>
 
@@ -80,7 +80,7 @@ SF32ポートでは、Zephyrのデバイスツリー、Kconfig、`west`、キー
 
 ### ソフトウェア仕様 { #software-specification }
 
-<div align="center"><em>表：SF32上のZMKソフトウェア仕様</em></div>
+<div align="center"><em>表: SF32上のZMKソフトウェア仕様</em></div>
 
 <div align="center" markdown>
 
@@ -94,9 +94,10 @@ SF32ポートでは、Zephyrのデバイスツリー、Kconfig、`west`、キー
 </div>
 
 ## サポート対象の基準構成を選ぶ { #choose-a-supported-baseline }
-確認済みのOpenSiFli基準は、2026-05-27時点のコミット`fd4d5843065f`です。このコミットで利用可能なUrchinシールドとボード設定の更新が含まれていますが、タグ付きSF32向けZMKリリースではありません。初回の再現ではこのコミットを固定するか、より新しいコミットを使う場合は明記してレビューしてください。
 
-<div align="center"><em>表：SF32向けZMKの基準状態の選定</em></div>
+確認済みのOpenSiFliの基準構成は、2026-05-27時点のコミット`fd4d5843065f`です。このコミットで利用可能なUrchinシールドとボード設定の更新が含まれていますが、タグ付きSF32向けZMKリリースではありません。初回の再現ではこのコミットを固定するか、より新しいコミットを使う場合は明記してレビューしてください。
+
+<div align="center"><em>表: SF32向けZMKの基準構成の選定</em></div>
 
 <div align="center" markdown>
 
@@ -136,7 +137,7 @@ west build -s app -p always -d build-right \
 
 ## プロジェクトの開発段階と判断ポイント { #delivery-map }
 
-<div align="center"><em>表：SF32 向け ZMK プロジェクトの開発段階と判断ポイント</em></div>
+<div align="center"><em>表: SF32向けZMKプロジェクトの開発段階と判断ポイント</em></div>
 
 <div align="center" markdown>
 
@@ -152,7 +153,7 @@ west build -s app -p always -d build-right \
 
 ## システム構成と依存関係 { #system-architecture-and-dependencies }
 
-<div align="center"><em>図：SF32LB52上のZMK分割キーボードの経路</em></div>
+<div align="center"><em>図: SF32LB52上のZMK分割キーボードの経路</em></div>
 
 ```mermaid
 flowchart LR
@@ -170,7 +171,7 @@ flowchart LR
 
 問題は、物理マトリクス／配線、右から左への分割リンク、左側USB、ホストのBluetooth、保存済みのボンド／設定、ZMK Studio、ボードの書き込み／復旧、固定した依存関係スタックに分けて扱ってください。キー入力がホストに届かない場合、スキャン前、分割通信中、セントラル側キーマップ、選択したHID接続先のいずれかで失敗している可能性があります。この順に診断します。
 
-## 段階1 — ポートの未変更基準環境を確立する { #stage-1-establish-the-untouched-port-baseline }
+## 段階1 — ポートの未変更の基準構成を確立する { #stage-1-establish-the-untouched-port-baseline }
 
 **目標：** キーマップ、オーバーレイ、依存関係を変更する前に、OpenSiFliの正確な基準構成を確認します。
 
@@ -182,13 +183,13 @@ flowchart LR
 
 **保管する証跡：** ボードと配線の記録、フォークとマニフェストのリビジョン、生成設定、イメージのハッシュ、書き込み・起動ログ、全キーの位置マトリクス、レイヤーの結果、接続先の選択、ホスト／Studioのバージョン。
 
-**段階1の終了条件：** コールドスタートを2回行い、38ポジションのキーマップ全体、3つすべてのレイヤー、右から左への分割リンク、少なくとも1つのホスト接続先を再現でき、左右両方を個別に復旧できること。
+**ゲート1の終了条件：** コールドスタートを2回行い、38ポジションのキーマップ全体、3つすべてのレイヤー、右から左への分割リンク、少なくとも1つのホスト接続先を再現でき、左右両方を個別に復旧できること。
 
 ## 段階2 — 入力、通信、設定、復旧を検証する { #stage-2-validate-input-transport-settings-and-recovery }
 
 **目標：** キーボードで想定される故障を、未知の状態から再ビルドすることなく検出・復旧できると確認します。
 
-<div align="center"><em>表：SF32向けZMKの故障・復旧試験</em></div>
+<div align="center"><em>表: SF32向けZMKの故障・復旧試験</em></div>
 
 <div align="center" markdown>
 
@@ -204,9 +205,9 @@ flowchart LR
 
 </div>
 
-**段階2の終了条件：** 該当するすべての故障で検出と復旧を再現でき、押しっぱなしのHID状態が残らず、未追跡ファイルに置き換えることなく設定やボンドを記録済みの基準状態へ戻せること。
+**ゲート2の終了条件：** 該当するすべての故障で検出と復旧を再現でき、押しっぱなしのHID状態が残らず、未追跡ファイルに置き換えることなく設定やボンドを記録済みの基準状態へ戻せること。
 
-## 段階3 — 再現可能なソースコード構成を整える { #stage-3-build-a-reproducible-source-baseline }
+## 段階3 — 再現可能なソースの基準構成を整える { #stage-3-build-a-reproducible-source-baseline }
 
 **目標：** 別のエンジニアがクリーンなソースから左右両方のイメージを再生成し、段階2を再実施できるようにします。
 
@@ -215,13 +216,13 @@ flowchart LR
 3. 左右が分かるようラベルを付けたイメージを各ボードへ書き込み、段階2の試験一式を再実施します。
 4. 成果物と設定を元の記録と比較し、再現できない差異があれば続行前に説明します。
 
-**段階3の終了条件：** 2つ目の環境で、未追跡オーバーレイ、古いビルド出力、固定されていない依存関係リビジョンを使わず、正しくラベル付けされたイメージが生成され、段階2に合格すること。
+**ゲート3の終了条件：** 2つ目の環境で、未追跡オーバーレイ、古いビルド出力、固定されていない依存関係リビジョンを使わず、正しくラベル付けされたイメージが生成され、段階2に合格すること。
 
 ## 段階4 — キーボードの境界を1つずつ変更する { #stage-4-adapt-one-keyboard-boundary-at-a-time }
 
 **目標：** 既知正常なポートと左右独立の復旧手段を保ちながら、製品向けの変更を1つ加えます。
 
-<div align="center"><em>表：SF32向けZMKの段階的な変更順序</em></div>
+<div align="center"><em>表: SF32向けZMKの段階的な変更順序</em></div>
 
 <div align="center" markdown>
 
@@ -236,7 +237,7 @@ flowchart LR
 
 </div>
 
-**段階4の終了条件：** 変更がレビューされ、元のイメージと設定を復元でき、該当するマトリクス、レイヤー、分割通信、USB、BLE、Studio、電源、復旧の試験すべてに合格していること。
+**ゲート4の終了条件：** 変更がレビューされ、元のイメージと設定を復元でき、該当するマトリクス、レイヤー、分割通信、USB、BLE、Studio、電源、復旧の試験すべてに合格していること。
 
 ## 段階5 — 製品化準備のレビュー { #stage-5-product-readiness-review }
 
@@ -250,13 +251,14 @@ flowchart LR
 - 依存関係更新、Studioの変更、設定書き込み、現場更新に失敗したとき、製品を分解・廃棄せずに復旧できますか。
 - ZMK／Zephyrのライセンス、PCBと筐体ファイル、キーマップの内容、ロゴ、フォント、同梱設定は配布可能ですか。
 
-**段階5の終了条件：** 残るリスクすべてに担当者、証跡、対応方針が割り当てられ、チームが続行、保留、中止のいずれかを明示的に決定していること。
+**ゲート5の終了条件：** 残るリスクすべてに担当者、証跡、対応方針が割り当てられ、チームが続行、保留、中止のいずれかを明示的に決定していること。
 
 ## 製品設計への引き継ぎ { #handoff-to-product-design }
 
 正確なSF32型番とメモリー、左右の役割と通信方式、行／列／直接入力の割り当て、ダイオード方向、USB接続、アンテナと筐体の前提、NVS／設定方針、書き込み・復旧用インターフェース、左右別の電力予算、試験治具、イメージ識別方法、固定したマニフェストを引き継いでください。続けて、[SF32LB52-DevKit-LCD](../sf32-products/devkits/SF32LB52-DevKit-LCD.md)、[Zephyrプラットフォームの境界](../develop/platforms/zephyr/overview.md)、[Bluetoothアーキテクチャ](../learn/bluetooth/overview.md)、[SF32LB52xハードウェア設計ガイド](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)、[量産設計](../hardware/design-for-production.md)を参照してください。
 
 ## 主な情報源 { #authoritative-sources }
+
 - [OpenSiFli/zmk SF32フォーク](https://github.com/OpenSiFli/zmk)
 - [確認済みOpenSiFli/zmkコミット](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e)
 - [確認済みコミットのSF32LB52 ZMKボードバリアント](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/sifli/sf32lb52_devkit_lcd)

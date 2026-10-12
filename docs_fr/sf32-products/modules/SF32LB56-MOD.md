@@ -1,6 +1,6 @@
 ---
 icon: lucide/card-sim
-description: "SF32LB56-MOD : famille polyvalente de modules MCU Bluetooth 5.3 basse consommation basée sur SF32LB56xV, avec 4 Mo + 8 Mo de mémoire OPI-PSRAM intégrée au boîtier et des variantes Flash selon le SKU."
+description: "SF32LB56-MOD : famille polyvalente de modules MCU Bluetooth 5.3 basse consommation basée sur SF32LB56xV, avec 4 MB + 8 MB de mémoire OPI-PSRAM intégrée au boîtier et des variantes Flash selon le SKU."
 tags:
   - Matériel
   - Module
@@ -10,9 +10,9 @@ tags:
 
 ## Présentation { #overview }
 
-La famille SF32LB56-MOD regroupe des modules MCU Bluetooth polyvalents et basse consommation basés sur la plateforme SF32LB56xV de SiFli. La configuration standard utilise le SF32LB566VCB36 avec 4 Mo + 8 Mo de mémoire OPI-PSRAM intégrée au boîtier et 1 Mo de QSPI-NOR. Le module compact réunit un MCU double cœur, le Bluetooth 5.3 avec BLE Audio, l'accélération graphique, des interfaces audio, des variantes Flash selon le SKU et un trajet RF intégré.
+La famille SF32LB56-MOD regroupe des modules MCU Bluetooth polyvalents et basse consommation basés sur la plateforme SF32LB56xV de SiFli. La configuration standard utilise le SF32LB566VCB36 avec 4 MB + 8 MB de mémoire OPI-PSRAM intégrée au boîtier et 1 MB de QSPI-NOR. Ce module compact associe un MCU à double cœur, le Bluetooth 5.3 avec BLE Audio, l'accélération graphique et des interfaces audio, avec plusieurs variantes Flash selon le SKU et une voie RF intégrée.
 
-Le module intègre le trajet RF, le quartz et la mémoire rapide ; l'antenne est soit une antenne PCB intégrée au module, soit une antenne externe raccordée par un connecteur compatible IPEX. Le produit final doit néanmoins faire l'objet d'une validation RF, et le routage de la carte porteuse doit tenir compte de la configuration d'antenne choisie. Les interfaces et variantes mémoire répondent aux besoins des produits équipés d'un écran, de fonctions audio, de capteurs et de capacités de traitement local.
+Le module intègre la voie RF, le quartz et la mémoire rapide. Il peut être équipé d'une antenne PCB ou raccordé à une antenne externe par un connecteur compatible IPEX. Le produit final doit néanmoins faire l'objet d'une validation RF, et le routage de la carte porteuse doit tenir compte de la configuration d'antenne choisie. Les interfaces et variantes mémoire répondent aux besoins des produits dotés d'un écran, de fonctions audio, de capteurs et de capacités de traitement local.
 
 La famille est proposée dans plusieurs configurations mémoire ; toutes mesurent 18,0 × 32,9 × 3,1 mm et fonctionnent de -40 à 85 °C. Le [guide de conception matérielle du SF32LB56-MOD](../../hardware/chip-guides/SF32LB56-MOD_hardware_design_guide.md), basé sur DS5602 V0.3, fournit des détails sur l'antenne et le routage. Le guide des modèles de modules de SiFli répertorie les configurations mémoire sans préciser quelle option d'antenne correspond à chaque SKU. Avant de finaliser le routage de la carte porteuse, confirmez auprès de SiFli la configuration d'antenne du module choisi.
 
@@ -25,7 +25,7 @@ SiFli indique les domaines d'application suivants pour le SF32LB56-MOD :
 
 - Objets connectés portés : montres connectées haut de gamme, bracelets connectés, dispositifs médicaux portables et équipements de fitness
 - Industrie : solutions d'affichage économiques, interfaces IHM graphiques, systèmes de contrôle de capteurs industriels, surveillance des équipements et instruments
-- Automobile : unités centrales de commande pour véhicules électriques, clés de voiture et dispositifs de télécommande automobile à porter sur soi
+- Automobile : unités centrales de commande pour véhicules électriques, clés de voiture et appareils de télécommande automobile à porter sur soi
 - Domotique : petits et moyens appareils électroménagers intelligents et serrures connectées
 - Usage général : concentrateurs de capteurs basse consommation et Bluetooth Mesh
 - Exemples d'AIoT : reconnaissance de commandes vocales, maison connectée, clés intelligentes et panneaux de commande intelligents
@@ -65,8 +65,8 @@ Envisagez le SF32LB56-MOD si la conception nécessite une ou plusieurs des fonct
 
 - HCPU : Arm Cortex-M33 STAR-MC1, jusqu'à 240 MHz et jusqu'à 370 DMIPS / 984 EEMBC CoreMark
 - LCPU : Arm Cortex-M33 STAR-MC1, jusqu'à 96 MHz et jusqu'à 148 DMIPS / 394 EEMBC CoreMark
-- Mémoire HCPU : cache d'instructions de 32 Ko, cache de données de 16 Ko et 800 Ko de SRAM, dont 128 Ko de SRAM de rétention
-- Mémoire LCPU : cache d'instructions de 16 Ko, cache de données de 8 Ko et 160 Ko de SRAM de rétention
+- Mémoire HCPU : cache d'instructions de 32 KB, cache de données de 16 KB et 800 KB de SRAM, dont 128 KB de SRAM de rétention
+- Mémoire LCPU : cache d'instructions de 16 KB, cache de données de 8 KB et 160 KB de SRAM de rétention
 - FPU simple précision et MPU sur les deux cœurs
 - Accélérateur matriciel pour réseaux neuronaux et accélérateurs de traitement du signal pour les tâches locales plus exigeantes
 
@@ -104,15 +104,15 @@ Chaque interface PDM peut prendre en charge jusqu'à deux microphones numérique
 
 | Code de module | Flash selon le SKU | PSRAM | Flash standard | Température | Dimensions |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB56-MOD-N16R12N1 | QSPI-NOR 16 Mo | OPI-PSRAM 4 + 8 Mo | QSPI-NOR 1 Mo | -40 à 85 °C | 18,0 × 32,9 × 3,1 mm |
-| SF32LB56-MOD-A128R12N1 | QSPI-NAND 128 Mo | OPI-PSRAM 4 + 8 Mo | QSPI-NOR 1 Mo | -40 à 85 °C | 18,0 × 32,9 × 3,1 mm |
-| SF32LB56-MOD-D128R12N1 | SD-NAND 128 Mo | OPI-PSRAM 4 + 8 Mo | QSPI-NOR 1 Mo | -40 à 85 °C | 18,0 × 32,9 × 3,1 mm |
+| SF32LB56-MOD-N16R12N1 | QSPI-NOR 16 MB | OPI-PSRAM 4 + 8 MB | QSPI-NOR 1 MB | -40 à 85 °C | 18,0 × 32,9 × 3,1 mm |
+| SF32LB56-MOD-A128R12N1 | QSPI-NAND 128 MB | OPI-PSRAM 4 + 8 MB | QSPI-NOR 1 MB | -40 à 85 °C | 18,0 × 32,9 × 3,1 mm |
+| SF32LB56-MOD-D128R12N1 | SD-NAND 128 MB | OPI-PSRAM 4 + 8 MB | QSPI-NOR 1 MB | -40 à 85 °C | 18,0 × 32,9 × 3,1 mm |
 
 </div>
 
 Le [guide des modèles de modules SiFli](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) répertorie ces trois configurations et précise que d'autres variantes peuvent être personnalisées. Avant de choisir, confirmez auprès de SiFli les références actuellement disponibles et leur configuration mémoire.
 
-SiFli indique comme configuration standard le SF32LB566VCB36 associé à 4 Mo + 8 Mo d'OPI-PSRAM intégrée au boîtier et à 1 Mo de QSPI-NOR ; cette mémoire correspond à la configuration N16R12N1. Le guide n'attribue pas de référence de puce distincte à A128R12N1 ou D128R12N1. Demandez à SiFli de confirmer la référence exacte de la puce pour ces SKU.
+SiFli indique comme configuration standard le SF32LB566VCB36 associé à 4 MB + 8 MB d'OPI-PSRAM et à 1 MB de QSPI-NOR ; cette mémoire correspond à la configuration N16R12N1. Le guide n'attribue pas de référence de puce distincte à A128R12N1 ou D128R12N1. Demandez à SiFli de confirmer la référence exacte de la puce pour ces SKU.
 
 ### Alimentation et E/S { #power-and-io }
 

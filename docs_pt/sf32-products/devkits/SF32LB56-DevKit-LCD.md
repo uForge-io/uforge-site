@@ -14,7 +14,7 @@ A SF32LB56-DevKit-LCD é uma placa de desenvolvimento voltada a aplicações com
 ## Principais aplicações { #what-it-is-best-for }
 
 - Aplicações de display com interfaces MIPI-DPI (RGB), SPI, DSPI, QSPI ou MCU/8080 de 8 bits.
-- Integração de touchscreen por I2C.
+- Integração de painel de toque por I2C.
 - Experimentos de áudio com entrada analógica para microfone e saída analógica pelo amplificador de potência Classe D integrado à placa.
 - Armazenamento em cartão TF via SDIO e desenvolvimento geral de drivers de periféricos.
 - Avaliação de uma arquitetura de produto baseada no módulo SF32LB56 antes de definir o projeto da placa portadora.
@@ -31,7 +31,7 @@ A SF32LB56-DevKit-LCD é uma placa de desenvolvimento voltada a aplicações com
 | Configuração A128R12N1 | SF32LB56-DevKit-LCD-A128R12N1 / SF32LB56-MOD-A128R12N1 | 128 MB QSPI-NAND, 4 + 8 MB OPI-PSRAM e 1 MB QSPI-NOR; para avaliação do módulo e planejamento da placa portadora. |
 | Dimensões e temperatura | 65 mm × 38 mm; faixa de operação de -40 °C a 85 °C segundo o guia de modelos | Planejamento mecânico e ambiental. |
 | Display | MIPI-DPI RGB de 24 bits por conector FPC de 40 pinos, passo de 0,5 mm e pinagem ALIENTEK; header 2 × 20 de 40 pinos expõe SPI/DSPI/QSPI e MCU/8080 de 8 bits | Bring-up do painel e desenvolvimento de drivers de display. |
-| Toque | Suporte a touchscreen I2C | Protótipos de displays interativos. |
+| Toque | Suporte a painel de toque I2C | Protótipos de displays interativos. |
 | Áudio | Uma entrada de microfone MEMS analógico e um canal de amplificador Classe D integrado; saída para alto-falante de até 3 W / 4 Ω segundo o guia de modelos | Gravação e reprodução local; confira a carga do alto-falante e a revisão da placa. |
 | Armazenamento | Slot MicroSD via SDIO | Testes de mídia, logs, sistema de arquivos e recursos. |
 | USB e alimentação | Dois conectores USB Type-C: um para USB-UART (CH343K segundo o guia de modelos) e outro para USB 2.0 FS; ambos podem alimentar a placa | Logs seriais, gravação/depuração, avaliação de USB e alimentação de bancada. |

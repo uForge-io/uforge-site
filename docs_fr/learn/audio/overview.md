@@ -1,16 +1,16 @@
 ---
 icon: lucide/volume-2
-title: "Vue d’ensemble de l’audio"
+title: "Vue d'ensemble de l'audio"
 description: "Vue d'ensemble du sous-système audio local du SF32 : chemin codec et DMA, choix d'interface, stratégie de mise en tampon, middleware Audio Server, et compromis de consommation."
 tags:
   - Audio
 ---
 
-# Vue d’ensemble de l’audio { #audio-overview }
+# Vue d'ensemble de l'audio { #audio-overview }
 
 ## Vue d'ensemble { #overview }
 
-Ce guide présente le **sous-système audio local** des dispositifs SF32 : la chaîne codec, DMA et middleware utilisée pour l'entrée microphone, la sortie haut-parleur ou ligne, ainsi que la lecture et l'enregistrement sur l'appareil. Il porte sur les choix pratiques d'interfaces, de tampons, de codecs, de middleware Audio Server et de consommation énergétique.
+Ce guide présente le **sous-système audio local** des composants SF32 : la chaîne codec, DMA et middleware utilisée pour l'entrée microphone, la sortie haut-parleur ou ligne, ainsi que la lecture et l'enregistrement sur l'appareil. Il porte sur les choix pratiques d'interfaces, de tampons, de codecs, de middleware Audio Server et de consommation énergétique.
 
 L'audio Bluetooth (A2DP et LE Audio) est un sujet connexe, mais distinct, présenté dans la [Vue d'ensemble Bluetooth](../bluetooth/overview.md#bluetooth-audio-and-le-audio). Cette page traite de la transmission sans fil ; celle-ci décrit ce qui se passe une fois les échantillons arrivés sur la puce : capture, mixage, décodage et activation du chemin audio physique.
 
@@ -81,18 +81,18 @@ Les réseaux analogiques/numériques mixtes exigent des chemins simultanés pris
 
 Choisissez et validez l'exemple SiFli-SDK le plus proche de votre cas avant de concevoir le comportement de l'application. Les [exemples audio du SDK](audio-sdk-examples.md) regroupent les exemples officiels de PDM, de capture analogique, d'enregistrement et de lecture, de musique locale, de carte SD, de FLAC, d'Opus et de mixage en fonction de la tâche d'ingénierie correspondante. La page indique également les contraintes liées à la carte, au multiplexage des broches, au stockage et à la configuration à vérifier avant d'adapter un exemple au produit.
 
-## Choisir le bon dispositif SF32 { #pick-the-right-sf32-device }
+## Choisir le bon composant SF32 { #pick-the-right-sf32-device }
 
 Les capacités audio varient selon la famille. Vérifiez la fiche technique de la référence visée ; ce tableau fournit un premier repère :
 
-<div align="center"><em>Tableau : Choisir le bon dispositif SF32</em></div>
+<div align="center"><em>Tableau : Choisir le bon composant SF32</em></div>
 
 <div align="center" markdown>
 
 | Famille | ADC/DAC audio intégrés | Interfaces PDM (maximum de microphones) | Interfaces I2S | Usage envisagé |
 |:---|:---|:---|:---|:---|
 | **SF32LB52x** | 1 ADC + 1 DAC | 1 (2) | 1 | Accessoires audio Bluetooth à coût optimisé, HMI compactes à commande vocale. |
-| **SF32LB55x** | Aucun ; un codec audio externe est requis pour l'audio analogique. | SF32LB551/555: 1 (2); SF32LB557: 2 (4) | SF32LB551/555: 1; SF32LB557: 2 | Appareils portables BLE et produits riches en capteurs où l'audio est secondaire. |
+| **SF32LB55x** | Aucun ; un codec audio externe est requis pour l'audio analogique. | SF32LB551/555 : 1 (2) ; SF32LB557 : 2 (4) | SF32LB551/555 : 1 ; SF32LB557 : 2 | Appareils portables BLE et produits riches en capteurs où l'audio est secondaire. |
 | **SF32LB56x** | 1 ADC + 1 DAC | 2 (4) | 1 | Produits HMI/écran plus riches nécessitant aussi une capture vocale multi-microphone. |
 | **SF32LB57x** | 2 ADC + 1 DAC | 2 (4) | 2 | Capture vocale multi-microphone et lecture locale. |
 | **SF32LB58x** | 2 ADC + 2 DAC | 2 (4) | 3 | Produits phares combinant audio, graphismes, IA et connectivité complexe. |
@@ -146,7 +146,7 @@ Que ce soit pour piloter un haut-parleur ou capturer un microphone, les mêmes f
 - **Fréquence d'échantillonnage et format** — définissez tôt la fréquence d'échantillonnage (par exemple, 16 kHz pour la voix, 44,1/48 kHz pour la musique) et la profondeur en bits ; convertir les formats à l'exécution consomme du temps CPU et de la mémoire.
 - **Double mise en tampon** — pendant que le DMA transfère une région, le logiciel remplit ou traite l'autre. Terminez avant que cette région soit de nouveau nécessaire ; deux tampons ne suffisent pas à éviter les débordements ou les épuisements.
 
-Pour les tampons en mémoire cacheable partagés avec le DMA, établissez la propriété et respectez l'alignement des lignes de cache ainsi que les règles de maintenance du SDK. Nettoyez les données de lecture écrites par le CPU avant leur lecture par DMA. Préparez les destinations de capture avant l'écriture DMA, puis invalidez la zone terminée avant sa lecture par le CPU, selon la politique de cache du dispositif. Ne modifiez ni ne réutilisez une zone occupée par DMA avant l'autorisation du rappel de fin ; ne placez pas de données étrangères dans les lignes de cache concernées.
+Pour les tampons en mémoire cacheable partagés avec le DMA, établissez la propriété et respectez l'alignement des lignes de cache ainsi que les règles de maintenance du SDK. Nettoyez les données de lecture écrites par le CPU avant leur lecture par DMA. Préparez les destinations de capture avant l'écriture DMA, puis invalidez la zone terminée avant sa lecture par le CPU, selon la politique de cache du composant. Ne modifiez ni ne réutilisez une zone occupée par DMA avant l'autorisation du rappel de fin ; ne placez pas de données étrangères dans les lignes de cache concernées.
 
 ## Choix de codec et de compression { #codec-and-compression-choices }
 
@@ -164,14 +164,14 @@ Distinguez le **codec audio matériel** (conversion ADC/DAC) du **codec de compr
 
 </div>
 
-Le SDK propose des exemples de musique locale, MP3 sur carte SD, Opus, enregistrement et chemins ADC/DAC doubles. L'exemple à deux canaux nécessite un dispositif et une carte qui les exposent ; toutes les puces SF32 ne possèdent pas deux ADC/DAC. Partez de la configuration prise en charge et mesurez le coût du décodage sur la cible.
+Le SDK propose des exemples de musique locale, MP3 sur carte SD, Opus, enregistrement et chemins ADC/DAC doubles. L'exemple à deux canaux nécessite un composant et une carte qui les exposent ; toutes les puces SF32 ne possèdent pas deux ADC/DAC. Partez de la configuration prise en charge et mesurez le coût du décodage sur la cible.
 
 ## Audio local et audio Bluetooth { #local-audio-vs-bluetooth-audio }
 
 Distinguez les deux chemins, même s'ils peuvent fonctionner simultanément :
 
 - **Audio local** (ce guide) — AUDCODEC/AUDPRC, microphones, haut-parleur/sortie ligne, lecture et enregistrement sur l'appareil.
-- **Audio Bluetooth** ([Vue d'ensemble Bluetooth](../bluetooth/overview.md#bluetooth-audio-and-le-audio)) — A2DP/AVRCP/HFP pour Classic Bluetooth, ou LE Audio unicast/broadcast si le dispositif, la pile et le SDK prennent en charge les rôles nécessaires. Une radio compatible BLE ne garantit pas, à elle seule, LE Audio.
+- **Audio Bluetooth** ([Vue d'ensemble Bluetooth](../bluetooth/overview.md#bluetooth-audio-and-le-audio)) — A2DP/AVRCP/HFP pour Classic Bluetooth, ou LE Audio unicast/broadcast si le composant, la pile et le SDK prennent en charge les rôles nécessaires. Une radio compatible BLE ne garantit pas, à elle seule, LE Audio.
 
 De nombreux produits combinent les deux : ils peuvent, par exemple, capter le son avec un microphone local et le transmettre par Bluetooth, ou recevoir de l'audio Bluetooth et le mixer avec une notification locale via Audio Server. Si les deux chemins sont actifs simultanément, précisez qui gère les tampons et comment le mixage est effectué.
 
@@ -246,7 +246,7 @@ Conservez un fichier WAV/PCM de référence validé et un enregistrement validé
 ## Erreurs courantes { #common-mistakes }
 
 - Servir chaque échantillon du périphérique par scrutation CPU plutôt que par DMA cadencé par le matériel.
-- Utiliser des tampons trop petits ou mal gérés, au point de manquer les échéances DMA ; recourir au double tampon lorsque le pilote le permet et que le cas s’y prête.
+- Utiliser des tampons trop petits ou mal gérés, au point de manquer les échéances DMA ; recourir au double tampon lorsque le cas s'y prête.
 - Choisir les types et nombres de microphones sans vérifier les instances PDM/I2S, les broches accessibles et les chemins simultanés.
 - Traiter l'audio Bluetooth et l'audio local comme totalement indépendants alors qu'ils s'exécuteront simultanément dans le produit réel.
 - Ignorer la cohérence du cache et les règles de propriété des tampons partagés entre DMA et CPU.
@@ -255,7 +255,7 @@ Conservez un fichier WAV/PCM de référence validé et un enregistrement validé
 
 ## Liste de contrôle de mise en service { #bring-up-checklist }
 
-- [ ] Vérifier pour le dispositif et la carte retenus les types et canaux de microphones, les instances PDM/I2S, les broches accessibles et les chemins simultanés pris en charge.
+- [ ] Vérifier pour le composant et la carte retenus les types et canaux de microphones, les instances PDM/I2S, les broches accessibles et les chemins simultanés pris en charge.
 - [ ] Définir la fréquence d'échantillonnage, la largeur stockée des échantillons, l'organisation des canaux et les tailles des tampons de capture et de lecture.
 - [ ] Mettre en service la capture choisie via ADC/AUDPRC, PDM ou I2S et la lecture via DAC ou I2S ; tester chaque sens avant le duplex intégral.
 - [ ] Une fois les chemins matériels opérationnels, intégrer les sessions prises en charge avec Audio Server et les pilotes correspondants ; conserver les tests HAL directs pour le diagnostic.
@@ -267,7 +267,7 @@ Conservez un fichier WAV/PCM de référence validé et un enregistrement validé
 ## À retenir { #key-takeaways }
 
 - Choisissez le chemin physique : AUDCODEC pour l'audio analogique, le bloc PDM pour la capture PDM et I2S pour l'audio numérique externe. Gérez les sessions prises en charge avec Audio Server et les pilotes, sans assimiler tous les chemins à une même chaîne de codec.
-- Choisissez les types de microphones et les chemins PDM/I2S selon les capacités du dispositif exact et la disposition des microphones, sans transposer les hypothèses d'une autre puce.
+- Choisissez les types de microphones et les chemins PDM/I2S selon les capacités du composant exact et la disposition des microphones, sans transposer les hypothèses d'une autre puce.
 - Utilisez des transferts DMA cadencés par le matériel et une capacité de tampon suffisante. Le double tampon est une solution courante lorsqu'elle est prise en charge, mais il faut toujours respecter les échéances des callbacks et de réutilisation des tampons.
 - L'audio local et l'audio Bluetooth sont des sous-systèmes distincts qui doivent souvent fonctionner ensemble ; planifiez explicitement le mixage et la gestion des tampons.
 - Gérez la consommation audio comme celle de Bluetooth et de l'IA : réduisez le temps d'activité, évitez les réveils CPU inutiles et mesurez des sessions réelles, pas seulement la lecture en régime stable.

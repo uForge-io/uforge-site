@@ -34,7 +34,7 @@ Examinez ensemble les rails d'alimentation du processeur, les condensateurs loca
 | MIC_BIAS | 1,4 | - | 2,8 | - | Sortie d'alimentation du microphone |
 | AVDD33_ANA | 3,15 | 3,3 | 3,45 | 50 | Entrée d'alimentation analogique + alimentation RFPA |
 | AVDD33_AUD | 3,15 | 3,3 | 3,45 | 50 | Alimentation audio analogique |
-| VDDIO1 | 1,71 | 1,8 | 1,98 | - | Entrée d'alimentation pour le dispositif de stockage co-packagé du grand cœur |
+| VDDIO1 | 1,71 | 1,8 | 1,98 | - | Entrée d'alimentation pour le composant de stockage co-packagé du grand cœur |
 | VDDIO2 | 1,71 | 1,8 | 3,45 | - | Entrée d'alimentation pour les GPIO PA (sauf PA5~11) |
 | VDDIO3 | 1,71 | 1,8 | 3,45 | - | Entrée d'alimentation pour PA5~11 |
 | VDDIO4 | 1,71 | 1,8 | 3,45 | - | Entrée d'alimentation pour les GPIO PB et la Flash co-packagée du petit cœur |
@@ -198,7 +198,7 @@ Examinez ensemble les rails d'alimentation du processeur, les condensateurs loca
 
 <div align="center"><em>Figure 5.1-8 : Circuit de référence de charge du SF32LB56xV</em></div>
 
-Sans gestion du chemin d'alimentation, le système et la batterie sont directement raccordés à VBAT. Cette solution est moins coûteuse, mais les circuits en aval ne peuvent pas être entièrement isolés de la batterie : les courants de fuite augmentent et l'objectif de basse consommation en Shipping Mode n'est pas atteint. Lorsque la batterie est en décharge profonde, le courant de précharge du chargeur doit dépasser la somme du courant du système et des fuites (i1+i2 dans le schéma source). Lorsque le système fonctionne, le courant de charge constant doit également dépasser i1+i2 ; sinon, la charge du système consomme une partie du courant de charge et la batterie risque de ne pas être complètement chargée. Un chargeur avec gestion du chemin d'alimentation sépare l'alimentation du système sur VSYS de la charge de la batterie sur VBAT, prend en charge le Shipping Mode et peut alimenter le système depuis VSYS même si la batterie est en décharge profonde.
+Sans gestion du chemin d'alimentation, le système et la batterie sont directement raccordés à VBAT. Cette solution est moins coûteuse, mais les circuits en aval ne peuvent pas être entièrement isolés de la batterie : les courants de fuite augmentent et l'objectif de basse consommation en Shipping Mode n'est pas atteint. Lorsque la batterie est en décharge profonde, le courant de charge lente du chargeur doit dépasser la somme du courant du système et des fuites (i1+i2 dans le schéma source). Lorsque le système fonctionne, le courant de charge constant doit également dépasser i1+i2 ; sinon, la charge du système consomme une partie du courant de charge et la batterie risque de ne pas être complètement chargée. Un chargeur avec gestion du chemin d'alimentation sépare l'alimentation du système sur VSYS de la charge de la batterie sur VBAT, prend en charge le Shipping Mode et peut alimenter le système depuis VSYS même si la batterie est en décharge profonde.
 
 La variante U propose trois topologies d'alimentation, à choisir selon la tension d'E/S des périphériques et l'objectif de consommation du système. Dans les trois cas, AVDD33_ANA et AVDD33_AUD sont alimentées en 3,3 V. La topologie la moins énergivore alimente PVDD et VDDIO1–VDDIO4 en 1,8 V et utilise des périphériques avec E/S 1,8 V. La topologie intermédiaire maintient PVDD et VDDIO1 à 1,8 V, tandis que VDDIO2–VDDIO4 et les E/S des périphériques sont à 3,3 V. Dans la topologie la plus énergivore, seule VDDIO1, qui alimente la PSRAM intégrée, reste à 1,8 V ; PVDD, VDDIO2–VDDIO4 et les E/S des périphériques sont à 3,3 V. Utilisez des interrupteurs de charge pour gérer dynamiquement l'alimentation des modules externes et laissez-les éteints par défaut lorsqu'ils ne sont pas utilisés. Pour les modules qui doivent rester alimentés, choisissez des composants à faible courant de repos. Le niveau matériel par défaut du GPIO de commande doit correspondre à la polarité d'activation de l'interrupteur afin qu'il reste éteint au démarrage. SiFli recommande une résistance de pull-up ou de pull-down de 1 MΩ sur l'entrée d'activation.
 
@@ -288,18 +288,18 @@ Tenez compte de l'alimentation des E/S mémoire lors de l'arrêt en basse consom
 
 ### 5.3. Génération d'horloge { #53-clock-generation }
 
-<div align="center"><em>Tableau 5.3-1 : Exigences du cristal</em></div>
+<div align="center"><em>Tableau 5.3-1 : Exigences du quartz</em></div>
 
 <div align="center" markdown>
 
-| Cristal | Exigences de spécification du cristal | Description détaillée |
+| Quartz | Exigences de spécification du quartz | Description détaillée |
 | :--- | :--- | :--- |
 | 48 MHz | 7 pF ≤ CL ≤ 12 pF (valeur recommandée : 8,8 pF) ; △F/F0 ≤ ±10 ppm ; ESR ≤ 30 Ω (valeur recommandée : 22 Ω) | La consommation de l'oscillateur à quartz dépend de CL et de l'ESR. Plus CL et ESR sont faibles, plus la consommation est basse. Pour la réduire, choisissez des composants dont CL et ESR sont relativement faibles dans la plage spécifiée. Prévoyez près du quartz des empreintes pour des condensateurs d'adaptation en parallèle. Si CL < 12 pF, aucun condensateur n'est nécessaire. |
 | 32,768 kHz | CL ≤ 12,5 pF (valeur recommandée : 7 pF) ; △F/F0 ≤ ±20 ppm ; ESR ≤ 80 kΩ (valeur recommandée : 38 kΩ) | La consommation du quartz dépend de CL et de l'ESR. Plus CL et ESR sont faibles, plus la consommation est basse. Pour la réduire, choisissez des composants dont CL et ESR sont relativement faibles dans la plage spécifiée. Prévoyez près du quartz des empreintes pour des condensateurs d'adaptation en parallèle. Si CL < 12,5 pF, aucun condensateur n'est nécessaire. |
 
 </div>
 
-<div align="center"><em>Tableau 5.3-2 : Modèles de cristaux recommandés</em></div>
+<div align="center"><em>Tableau 5.3-2 : Modèles de quartz recommandés</em></div>
 
 <div align="center" markdown>
 
@@ -350,7 +350,7 @@ Le choix de l'interface d'affichage dépend du boîtier. La variante U documente
 | WRX_SCL | PA37 | PA37 | Signal d'horloge |
 | DCX | PA39 | PA39 | Signal de données/commande en mode SPI 4 fils ; donnée 1 en mode Quad-SPI |
 | SDI_RDX | PA38 | PA38 | Signal d'entrée de données en mode SPI 3/4 fils ; donnée 0 en mode Quad-SPI |
-| SDO | PA38 | PA38 | Signal de sortie de données en mode SPI 3/4 fils ; veuillez le court-circuiter avec SDI_RDX |
+| SDO | PA38 | PA38 | Signal de sortie de données en mode SPI 3/4 fils ; reliez-le à SDI_RDX |
 | D0 | PA40 | PA40 | Donnée 2 en mode Quad-SPI |
 | D1 | PA41 | PA41 | Donnée 3 en mode Quad-SPI |
 | REST | PA05 | PB04 | Signal de reset du panneau d'affichage |
@@ -396,7 +396,7 @@ Le choix de l'interface d'affichage dépend du boîtier. La variante U documente
 | WRX_SCL | PA37 | Signal d'horloge |
 | DCX | PA39 | Signal de données/commande en mode SPI 4 fils ; donnée 1 en mode Quad-SPI |
 | SDI_RDX | PA38 | Signal d'entrée de données en mode SPI 3/4 fils ; donnée 0 en mode Quad-SPI |
-| SDO | PA38 | Signal de sortie de données en mode SPI 3/4 fils ; court-circuitez-le avec SDI_RDX |
+| SDO | PA38 | Signal de sortie de données en mode SPI 3/4 fils ; reliez-le à SDI_RDX |
 | D[0] | PA40 | Donnée 2 en mode Quad-SPI |
 | D[1] | PA41 | Donnée 3 en mode Quad-SPI |
 | REST | PA43 | Signal de reset pour l'affichage |
@@ -653,17 +653,17 @@ Pour un microphone analogique différentiel externe, placez des condensateurs de
 
 Les deux variantes prennent en charge le PWM pour les moteurs de vibration. Le moteur peut être alimenté directement depuis VBAT si son courant de démarrage ne déstabilise pas le système. Lorsque `BSP_PM_FREQ_SCALING` est défini à `1`, le changement de fréquence du HCPU modifie également la fréquence PWM des broches PA ; utilisez alors une broche PB. PB32 est une entrée d'alimentation/reset active à l'état haut ; un appui d'au moins 10 s déclenche le reset. Le schéma U relie le bouton à VDDIOB via 1 kΩ et ajoute un pull-down de 10 kΩ ainsi qu'un condensateur de 0,1 µF vers GND. Le schéma V utilise une résistance série de 1 kΩ depuis VDD_1V8 et un pull-down de 10 kΩ. Les autres boutons et encodeurs rotatifs nécessitent des pull-up. Pour un encodeur mécanique qui ne revient pas à l'état arrêt après rotation, l'alimentation du pull-up doit pouvoir être coupée en Standby afin d'éviter les fuites.
 
-U fournit PBR0–PBR2 et V fournit PBR0–PBR3. Au démarrage, PBR0 passe de Low à High et peut commander un interrupteur de charge externe ; les autres broches PBR sont à Low par défaut. Les broches PBR peuvent fonctionner en sortie en Standby et Hibernate et transporter LPTIM ; toutes sauf PBR0 peuvent aussi fournir une horloge de 32 kHz. Elles peuvent être configurées en entrées de réveil, mais le MCU ne reçoit pas d'interruption depuis cette entrée après son réveil. Privilégiez les broches PB du LCPU pour l'I2C, le SPI, la commande et les interruptions de réveil des capteurs. L'alimentation des capteurs peut être commutée selon les besoins depuis une sortie LVSW ou LDO du SF30147C.
+U fournit PBR0–PBR2 et V fournit PBR0–PBR3. Au démarrage, PBR0 passe de l'état bas à l'état haut et peut commander un interrupteur de charge externe ; les autres broches PBR sont à l'état bas par défaut. Les broches PBR peuvent fonctionner en sortie en Standby et Hibernate et transporter LPTIM ; toutes sauf PBR0 peuvent aussi fournir une horloge de 32 kHz. Elles peuvent être configurées en entrées de réveil, mais le MCU ne reçoit pas d'interruption depuis cette entrée après son réveil. Privilégiez les broches PB du LCPU pour l'I2C, le SPI, la commande et les interruptions de réveil des capteurs. L'alimentation des capteurs peut être commutée selon les besoins depuis une sortie LVSW ou LDO du SF30147C.
 
 Toutes les broches PA de U/V peuvent être multiplexées en UART, I2C ou GPTIM. Pour U, les exceptions sont PB32/PB33/PB34 et PBR0/PBR1/PBR2 ; pour V, PB32–PB36 et PBR0–PBR3. Vérifiez ces restrictions avec les affectations de réveil, de boutons et de PBR.
 
 ### 5.7. Fabrication { #57-manufacturing }
 
-Prévoyez l'accès au débogage et à la programmation, le mode de programmation en production, l'accès à l'étalonnage du quartz, des points de mesure de la puissance, l'accès aux tests RF et la visibilité de la commande du PMIC. Vérifiez que l'outillage de test peut alimenter la carte, imposer le mode de démarrage/téléchargement, communiquer avec la puce et recueillir les données d'étalonnage.
+Prévoyez l'accès au débogage et au flashage, le mode de flashage en production, l'accès à l'étalonnage du quartz, des points de mesure de la puissance, l'accès aux tests RF et la visibilité de la commande du PMIC. Vérifiez que l'outillage de test peut alimenter la carte, imposer le mode de démarrage/téléchargement, communiquer avec la puce et recueillir les données d'étalonnage.
 
 Réservez au minimum les points de test suivants : VBAT, GND, VDDIO2 sur U (VDDIOB sur V), Mode, SWDIO, SWCLK, UART4_RXD, UART4_TXD et l'une des broches PB20/PB21/PB25. Lors du raccordement d'un J-Link, configurez son alimentation sur entrée externe afin que la carte cible alimente le débogueur. Le dispositif de téléchargement de production et d'étalonnage du quartz doit pouvoir accéder à ces points.
 
-<div align="center"><em>Tableau 5.7-1 : Interface de débogage et de programmation du SF32LB56xU</em></div>
+<div align="center"><em>Tableau 5.7-1 : Interface de débogage et de flashage du SF32LB56xU</em></div>
 
 <div align="center" markdown>
 
@@ -676,7 +676,7 @@ Réservez au minimum les points de test suivants : VBAT, GND, VDDIO2 sur U (VDDI
 
 </div>
 
-<div align="center"><em>Tableau 5.7-2 : Interface de débogage et de programmation du SF32LB56xV</em></div>
+<div align="center"><em>Tableau 5.7-2 : Interface de débogage et de flashage du SF32LB56xV</em></div>
 
 <div align="center" markdown>
 

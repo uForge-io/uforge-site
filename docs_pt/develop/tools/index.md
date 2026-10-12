@@ -8,7 +8,7 @@ tags:
 
 # Ferramentas { #tools }
 
-Desenvolver para SF32 exige mais do que compilar o firmware. Um fluxo prático também envolve ferramentas para gravação, monitoramento serial, análise de falhas, captura de traces, conversão de imagens, ajuste de RF/áudio e programação na fábrica.
+Desenvolver para SF32 exige mais do que um compilador. Um fluxo prático também envolve ferramentas para gravação, monitoramento serial, análise de falhas, captura de traces, conversão de imagens, ajuste de RF/áudio e programação na fábrica.
 
 A tabela abaixo relaciona tarefas comuns às ferramentas correspondentes. Ela serve como orientação e não substitui os manuais; consulte a documentação vinculada para instruções de instalação, comandos exatos e procedimentos específicos de cada ferramenta.
 
@@ -44,7 +44,7 @@ Mantenha os dois métodos documentados no projeto até que a equipe adote um pad
 
 ## Ferramentas de logs e traces { #logging-and-trace-tools }
 
-Para o desenvolvimento cotidiano, um terminal serial costuma bastar. Em falhas difíceis de diagnosticar, capture logs estruturados e dados da falha:
+Para o desenvolvimento cotidiano, um terminal serial costuma bastar. Diante de falhas graves, capture logs estruturados e dados da falha:
 
 - Salve o log completo de inicialização, desde o reset.
 - Guarde os arquivos ELF, map e de símbolos que correspondam exatamente à imagem gravada.
@@ -55,15 +55,15 @@ Para o desenvolvimento cotidiano, um terminal serial costuma bastar. Em falhas d
 
 Produtos com uso intensivo de recursos gráficos devem documentar o processo de conversão desses recursos, sobretudo quando usam compressão eZip ou aceleração gráfica por hardware. Em produtos destinados à fabricação, documente as ferramentas de RF, áudio e produção separadamente das ferramentas de gravação usadas pelos desenvolvedores, para que a equipe da fábrica não dependa de comandos exclusivos do ambiente de desenvolvimento.
 
-## Lista de verificação para escolher ferramentas { #tool-selection-checklist }
+## Checklist para escolher ferramentas { #tool-selection-checklist }
 
-<div align="center"><em>Tabela: Lista de verificação para escolher ferramentas</em></div>
+<div align="center"><em>Tabela: Checklist para escolher ferramentas</em></div>
 
 <div align="center" markdown>
 
 | Necessidade | Ferramenta indicada |
 |:------------|:--------------------|
-| Primeira gravação do SDK | Script UART de gravação do SDK. |
+| Gravação inicial de firmware pelo SDK | Script UART de gravação do SDK. |
 | Gravação multiplataforma por script | `sftool`. |
 | Compilar e monitorar pelo VS Code | CodeKit. |
 | Falha após a inicialização | Log serial e ferramenta de análise de dumps de asserção. |

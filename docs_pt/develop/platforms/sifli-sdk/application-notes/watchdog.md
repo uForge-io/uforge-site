@@ -22,7 +22,7 @@ O SiFli-SDK documenta o watchdog em dois níveis: o hardware acessado pela HAL e
 </div>
 
 !!! warning "Escopo do guia do watchdog para RT-Thread"
-    O [guia de uso do watchdog](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/watchdog.html) é publicado no caminho `sf32lb52x`, mas o texto identifica explicitamente o SF32LB55X. Trate o tempo limite padrão de 30 segundos, a alimentação pela thread IDLE, o comportamento durante o sono e a sequência de reset da aplicação descritos abaixo como orientação para a configuração 55x documentada, e não como garantia válida para toda a família. Confira esses pontos no código-fonte e na configuração gerada para a família do alvo.
+    O [guia de uso do watchdog](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/watchdog.html) é publicado no caminho `sf32lb52x`, mas o texto identifica explicitamente o SF32LB55X. Trate o tempo limite padrão de 30 segundos, a alimentação pela thread IDLE, o comportamento durante o sono e a sequência de reset da aplicação descritos abaixo como orientação para a configuração 55x documentada, e não como garantia válida para toda a família. Confira esses pontos no código-fonte e na configuração gerada para a família do alvo.
 
 ## Ativar e configurar o watchdog { #enable-and-configure-the-watchdog }
 

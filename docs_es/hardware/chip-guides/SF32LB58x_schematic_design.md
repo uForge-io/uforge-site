@@ -2,7 +2,7 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Guía de diseño esquemático del MCU SF32LB58x: alimentación, generación de reloj, RF, interfaces de usuario, almacenamiento, conectividad y fabricación."
+description: "Guía de diseño esquemático de la MCU SF32LB58x: alimentación, generación de reloj, RF, interfaces de usuario, almacenamiento, conectividad y fabricación."
 tags:
     - Hardware
     - Chip
@@ -15,27 +15,27 @@ tags:
 
 ## 5. Directrices de diseño esquemático {#5-schematic-design-guidelines}
 
-Este capítulo sigue el flujo de diseño esquemático del SF32LB58x: empieza por el sistema mínimo y continúa con la alimentación, la generación de reloj, RF, las interfaces de usuario, el almacenamiento y la conectividad, y la fabricación. Cada apartado explica primero el objetivo de diseño y después recoge los requisitos del circuito, los riesgos habituales y las comprobaciones previas a la publicación del diseño.
+Este capítulo sigue el flujo de diseño esquemático del SF32LB58x: empieza por el sistema mínimo y continúa con la alimentación, la generación de reloj, RF, las interfaces de usuario, el almacenamiento y la conectividad, y la fabricación. Cada apartado explica primero el objetivo de diseño y después recoge los requisitos del circuito, los riesgos habituales y las comprobaciones previas a la liberación del diseño.
 
 <div align="center"><em>Tabla 5-1: Mapa de las secciones del diseño esquemático</em></div>
 
 <div align="center" markdown>
 
-| Grupo | Decisiones principales | Evidencias para la revisión final |
+| Grupo | Decisiones principales | Evidencias para liberar el diseño |
 |:---|:---|:---|
-| Diseño del sistema mínimo | Variante y encapsulado exactos, alimentación y reset, relojes, arranque y almacenamiento, depuración y recuperación | Revisión inicial de puesta en marcha y plan de arranque/recuperación |
-| Sistema de alimentación | PMIC del sistema, líneas del PMU del chip, inductores BUCK, condensadores LDO, reinicio y fuentes de activación de bajo consumo | Árbol de alimentación, configuración del PMIC, mediciones de las líneas y revisión de POR/BOR/reinicio |
+| Diseño del sistema mínimo | Variante y encapsulado exactos, alimentación y reinicio, relojes, arranque y almacenamiento, depuración y recuperación | Revisión inicial de puesta en marcha y plan de arranque/recuperación |
+| Sistema de alimentación | PMIC del sistema, líneas de la PMU del chip, inductores BUCK, condensadores LDO, reinicio y fuentes de activación de bajo consumo | Árbol de alimentación, configuración del PMIC, mediciones de las líneas y revisión de POR/BOR/reinicio |
 | Generación de reloj | Cristales de 48 MHz y 32,768 kHz | Verificación de las especificaciones, plan de condensadores de ajuste e imágenes del diseño de los cristales |
 | RF | Adaptación de RF y recorrido de la antena | Plan de impedancias, red de adaptación de RF, zona de exclusión de la antena e imágenes del diseño |
-| Interfaces de usuario | Pantalla, táctil/retroiluminación, audio, botones, motor y control PBR | Esquemas de las interfaces, asignación de pines, secuencia de alimentación y revisión de las señales analógicas/de audio |
+| Interfaces de usuario | Pantalla, táctil/retroiluminación, audio, botones, motor y control PBR | Esquemáticos de las interfaces, asignación de pines, secuencia de alimentación y revisión de las señales analógicas/de audio |
 | Almacenamiento y conectividad | Modo de arranque, MPI4, SD1/SD2, eMMC/SD NAND/tarjeta SD y USB 2.0 HS | Configuración de arranque, plan de alimentación del almacenamiento y evidencias del enrutamiento diferencial/de alta velocidad |
-| Fabricación | SWD, salidas UART de depuración, acceso para pruebas de producción y listas de comprobación del esquema/PCB | Plano de puntos de prueba, método de recuperación y plan de programación/calibración en producción |
+| Fabricación | SWD, salidas UART de depuración, acceso para pruebas de producción y listas de comprobación del esquemático/PCB | Plano de puntos de prueba, método de recuperación y plan de grabación/calibración en producción |
 
 </div>
 
 ### 5.1. Diseño del sistema mínimo {#51-minimum-system-design}
 
-Trate el sistema mínimo como el primer punto de control de la revisión esquemática. Antes de añadir periféricos específicos del producto, confirme el dispositivo y encapsulado exactos, las líneas de alimentación y los relojes necesarios, el comportamiento del reset, la configuración de arranque y el almacenamiento, y una ruta práctica de depuración y recuperación. Estas decisiones determinan si la placa puede encenderse, arrancar y ponerse en marcha de forma fiable.
+Trate el sistema mínimo como el primer punto de control de la revisión esquemática. Antes de añadir periféricos específicos del producto, confirme el dispositivo y encapsulado exactos, las líneas de alimentación y los relojes necesarios, el comportamiento del reinicio, la configuración de arranque y el almacenamiento, y una ruta práctica de depuración y recuperación. Estas decisiones determinan si la placa puede encenderse, arrancar y ponerse en marcha de forma fiable.
 
 <div align="center"><em>Tabla 5.1-1: Comprobaciones del diseño del sistema mínimo</em></div>
 
@@ -44,9 +44,9 @@ Trate el sistema mínimo como el primer punto de control de la revisión esquem�
 | Bloque | Comprobación de diseño para SF32LB58x | Guía detallada |
 |:---|:---|:---|
 | Dispositivo y encapsulado | Confirme la referencia y el encapsulado exactos; compruebe que la asignación de pines y la configuración de memoria integrada permiten las interfaces previstas. | [Variantes y encapsulados](SF32LB58x_hardware_design_guide.md#32-variants) |
-| Alimentación | Incluya las líneas necesarias del PMU y externas, los componentes BUCK y el desacoplo local. | [Sistema de alimentación](#51-power-system) |
+| Alimentación | Incluya las líneas necesarias de la PMU y externas, los componentes BUCK y el desacoplo local. | [Sistema de alimentación](#51-power-system) |
 | Relojes | Incluya el cristal principal de 48 MHz y el cristal RTC de 32,768 kHz, respetando las condiciones especificadas de carga y disposición. | [Generación de reloj](#52-clock-generation) |
-| Reset | Implemente el circuito RC externo de `RSTN` referido al dominio de alimentación `PVDD1`. | [Secuencia de encendido y reset](#5115-power-up-sequencing-and-reset) |
+| Reinicio | Implemente el circuito RC externo de `RSTN` referido al dominio de alimentación `PVDD1`. | [Secuencia de encendido y reinicio](#5115-power-up-sequencing-and-reset) |
 | Modo de arranque | Fije el pin `Mode` a un nivel estable mediante una resistencia de 10 kΩ; reserve un punto de prueba en las placas de producción y un jumper de recuperación en las placas de prueba. | [Configuración de arranque](#551-boot-configuration) |
 | Almacenamiento de arranque | Elija una interfaz de almacenamiento compatible y verifique la asignación de pines, la tensión de E/S y la alimentación según el dispositivo elegido. | [Almacenamiento](#552-storage) |
 | Acceso para la puesta en marcha | Reserve acceso en la placa a SWD y a las señales UART de depuración necesarias, además de las referencias de alimentación y tierra para la sonda. | [Interfaz de depuración y descarga](#561-debug-and-download-interface) |
@@ -57,7 +57,7 @@ Trate el sistema mínimo como el primer punto de control de la revisión esquem�
 ### 5.2. Sistema de alimentación {#51-power-system}
 
 #### 5.2.1. Alimentación {#511-power-supply}
-La serie SF32LB58x integra un PMU con dos salidas BUCK. Cada una requiere un inductor externo y un condensador conectado a la entrada de alimentación interna correspondiente. También incorpora tres salidas LDO que requieren condensadores externos. En diseños para relojes inteligentes, el SF32LB58x puede combinarse con el PMIC SF30147C de SiFli, que alimenta tanto al chip como a sus periféricos.
+La serie SF32LB58x integra una PMU con dos salidas BUCK. Cada una requiere un inductor externo y un condensador conectado a la entrada de alimentación interna correspondiente. También incorpora tres salidas LDO que requieren condensadores externos. En diseños para relojes inteligentes, el SF32LB58x puede combinarse con el PMIC SF30147C de SiFli, que alimenta tanto al chip como a sus periféricos.
 
 ##### 5.2.1.1. Distribución de alimentación del PMIC de SiFli {#5111-sifli-pmic-power-distribution}
 
@@ -88,13 +88,13 @@ Consulte la hoja de datos del SF30147C para obtener todos los detalles.
 
 ##### 5.2.1.2. Requisitos de alimentación del SF32LB58x {#5112-sf32lb58x-power-requirements}
 
-Las especificaciones de alimentación del PMU integrado en la serie SF32LB58x se resumen a continuación.
+Las especificaciones de alimentación de la PMU integrada en la serie SF32LB58x se resumen a continuación.
 
-<div align="center"><em>Tabla 5.2-2: Especificaciones de alimentación del PMU</em></div>
+<div align="center"><em>Tabla 5.2-2: Especificaciones de alimentación de la PMU</em></div>
 
 <div align="center" markdown>
 
-| Línea del PMU | Tensión mín. (V) | Tensión típica (V) | Tensión máx. (V) | Corriente máx. (mA) | Descripción |
+| Línea de la PMU | Tensión mín. (V) | Tensión típica (V) | Tensión máx. (V) | Corriente máx. (mA) | Descripción |
 |:---|:---|:---|:---|:---|:---|
 | PVDD1 | 1,71 | 1,8 | 3,6 | 100 | Entrada de alimentación PVDD1 |
 | PVDD2 | 1,71 | 1,8 | 3,6 | 50 | Entrada de alimentación PVDD2 |
@@ -180,9 +180,9 @@ Se recomienda conectar con pull-up la señal de reinicio RSTN al dominio de tens
 
 La serie SF32LB58x puede utilizar el PMIC SF30147C de SiFli para alimentar sus distintas líneas; consulte la asignación en la tabla 5.2-1. El chip también integra dos salidas BUCK y tres salidas LDO.
 
-![Figura 5.2-3: Esquema de alimentación con SF30147C](../../sf32-products/chips/assets/58x/sf32lb58x-30147-SCH.png){ width="100%" loading="lazy" }
+![Figura 5.2-3: Esquemático de alimentación con SF30147C](../../sf32-products/chips/assets/58x/sf32lb58x-30147-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 5.2-3: Esquema de alimentación con SF30147C</em></div>
+<div align="center"><em>Figura 5.2-3: Esquemático de alimentación con SF30147C</em></div>
 
 ![Figura 5.2-4: Circuito del convertidor DC-DC (BUCK) integrado](../../sf32-products/chips/assets/58x/sf32lb58x-BUCK-SCH.png){ width="100%" loading="lazy" }
 
@@ -194,7 +194,7 @@ La serie SF32LB58x puede utilizar el PMIC SF30147C de SiFli para alimentar sus d
 
 ##### 5.2.1.7. Lista de comprobación del diseño de alimentación {#5117-power-design-checklist}
 
-- [ ] Confirme que el rango de alimentación PVDD1/PVDD2 del modelo elegido (1,71 V–3,6 V) se ajusta al esquema de alimentación real.
+- [ ] Confirme que el rango de alimentación PVDD1/PVDD2 del modelo elegido (1,71 V–3,6 V) se ajusta al esquemático de alimentación real.
 - [ ] Compruebe que el inductor BUCK cumple 4,7 µH, DCR ≤ 0,4 Ω e Isat ≥ 500 mA.
 - [ ] Verifique que los condensadores de desacoplo de PVDD1/PVDD2, BUCK1/2_LX/FB, LDO_VOUT1, VDD_RET y VDD_RTC tienen los valores recomendados en esta sección.
 - [ ] Si utiliza el SF30147C, confirme que la asignación de tensión y corriente de sus siete interruptores de carga satisface los requisitos de los periféricos.
@@ -210,7 +210,7 @@ La serie SF32LB58x ofrece seis interfaces PBR con las siguientes característica
 2. PBR0-PBR5 pueden funcionar como salidas tanto en modo Standby como en modo Hibernate.
 3. PBR0-PBR5 pueden emitir la señal LPTIM.
 4. PBR0-PBR5 pueden emitir una señal de reloj de 32 kHz.
-5. PBR0-PBR3 pueden configurarse como entradas para recibir señales de activación; mientras el MCU está despierto, no generan una interrupción.
+5. PBR0-PBR3 pueden configurarse como entradas para recibir señales de activación; mientras la MCU está despierta, no recibe interrupciones.
 
 Todas las GPIO de la serie SF32LB58x admiten la activación desde los modos Light Sleep y Deep Sleep. En los modos Standby y Hibernate hay 16 fuentes de interrupción capaces de activar el chip: seis en PA y diez en PB.
 
@@ -278,9 +278,9 @@ Consulte la [lista de proveedores aprobados por SiFli][SiFli Approved Vendor Lis
 
 El frontal de RF del SF32LB58x integra en el chip una tecnología de filtrado y adaptación de banda ancha, por lo que basta con una pista de RF en la PCB con impedancia controlada de 50 Ω. Se recomienda reservar en el diseño una red de adaptación π para filtrar emisiones espurias y adaptar la antena.
 
-![Figura 5.4-1: Esquema del circuito de RF](../../sf32-products/chips/assets/58x/sf32lb58x-RF-SCH.png){ width="100%" loading="lazy" }
+![Figura 5.4-1: Esquemático del circuito de RF](../../sf32-products/chips/assets/58x/sf32lb58x-RF-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 5.4-1: Esquema del circuito de RF</em></div>
+<div align="center"><em>Figura 5.4-1: Esquemático del circuito de RF</em></div>
 
 !!! note "Nota"
     Los valores de los componentes de la red de adaptación deben determinarse mediante pruebas con la antena real y el diseño definitivo de la PCB.
@@ -290,7 +290,7 @@ El frontal de RF del SF32LB58x integra en el chip una tecnología de filtrado y 
 #### 5.5.1. Pantalla {#541-display}
 ##### 5.5.1.1. Interfaz de pantalla MIPI DSI {#5411-mipi-dsi-display-interface}
 
-La serie SF32LB58x admite una interfaz de pantalla MIPI DSI de dos carriles.
+La serie SF32LB58x admite una interfaz de pantalla MIPI DSI de dos líneas.
 
 <div align="center"><em>Tabla 5.5-1: Conexiones de señales MIPI DSI</em></div>
 
@@ -300,14 +300,14 @@ La serie SF32LB58x admite una interfaz de pantalla MIPI DSI de dos carriles.
 |:---|:---|:---|
 | CLKP | DSI_CLKP | Señal de reloj MIPI positiva |
 | CLKN | DSI_CLKN | Señal de reloj MIPI negativa |
-| D0P | DSI_D0P | Carril de datos MIPI 0 positivo |
-| D0N | DSI_D0N | Carril de datos MIPI 0 negativo |
-| D1P | DSI_D1P | Carril de datos MIPI 1 positivo |
-| D1N | DSI_D1N | Carril de datos MIPI 1 negativo |
+| D0P | DSI_D0P | Línea de datos MIPI 0 positiva |
+| D0N | DSI_D0N | Línea de datos MIPI 0 negativa |
+| D1P | DSI_D1P | Línea de datos MIPI 1 positiva |
+| D1N | DSI_D1N | Línea de datos MIPI 1 negativa |
 | - | AVDD18_DSI | Entrada de alimentación MIPI |
 | - | DSI_REXT | Resistencia externa de 10 kΩ a tierra |
 | - | AVSS_DSI | Tierra |
-| TE | PB2 | Señal de efecto de rasgado hacia el MCU para sincronizar el fotograma |
+| TE | PB2 | Señal de efecto de rasgado hacia la MCU para sincronizar el fotograma |
 | RESET | PB5 | Señal de reinicio de la pantalla |
 
 </div>
@@ -330,7 +330,7 @@ La serie SF32LB58x admite SPI de 3 y 4 hilos, así como Quad-SPI, para conectar 
 | D[0] | PA47 | PB04 | Dato 2 en modo Quad-SPI |
 | D[1] | PA45 | PB06 | Dato 3 en modo Quad-SPI |
 | REST | PA74 | PB05 | Señal de reinicio de la pantalla |
-| TE | PA43 | PB02 | Señal de efecto de rasgado hacia el MCU para sincronizar el fotograma |
+| TE | PA43 | PB02 | Señal de efecto de rasgado hacia la MCU para sincronizar el fotograma |
 
 </div>
 
@@ -357,7 +357,7 @@ La serie SF32LB58x admite una interfaz MCU8080 para conectar un panel LCD.
 | D[6] | PA52 | Dato 6 |
 | D[7] | PA58 | Dato 7 |
 | REST | PA24 | Reinicio |
-| TE | PA43 | Señal de efecto de rasgado hacia el MCU para sincronizar el fotograma |
+| TE | PA43 | Señal de efecto de rasgado hacia la MCU para sincronizar el fotograma |
 
 </div>
 
@@ -520,7 +520,7 @@ La serie SF32LB58x ofrece varias interfaces de audio con las siguientes caracter
 </div>
 
 !!! note "Nota sobre la multiplexación de pines"
-    I2S1_SDI comparte PA18 con PDM1_DATA, e I2S1_BCK comparte PA23 con PDM1_CLK. I2S1_LRCK utiliza PA14 y PDM2_DATA, PA22. Antes de finalizar el diseño del esquema, confirme en la configuración del software qué funciones de audio se habilitarán.
+    I2S1_SDI comparte PA18 con PDM1_DATA, e I2S1_BCK comparte PA23 con PDM1_CLK. I2S1_LRCK utiliza PA14 y PDM2_DATA, PA22. Antes de finalizar el diseño del esquemático, confirme en la configuración del software qué funciones de audio se habilitarán.
 
 La entrada de micrófono analógico del SF32LB58x admite los modos no balanceado y diferencial; en ambos casos se conecta en serie un condensador de 2,2 µF. AU_ADC1P/AU_ADC1N/AU_ADC2P/AU_ADC2N se conectan al lado del SF32LB58x. En la salida analógica, AU_DAC1P/AU_DAC1N/AU_DAC2P/AU_DAC2N son salidas del SF32LB58x que pueden alimentar la entrada de un amplificador de auriculares estéreo o de un amplificador de audio analógico externo. Tanto el amplificador de audio analógico como el amplificador de audio I2S se configuran mediante I2C3.
 
@@ -615,7 +615,7 @@ La placa de referencia EVB del SF32LB58x utiliza MPI4 de forma predeterminada pa
 </div>
 
 !!! note "Notas"
-    1. Si en la línea de producción se debe programar el firmware en la memoria Flash externa, el software de la herramienta de descarga debe poner en nivel alto PA43, el pin de control de alimentación de la Flash, para activarla.
+    1. Si en la línea de producción se debe grabar el firmware en la memoria Flash externa, el software de la herramienta de descarga debe poner en nivel alto PA43, el pin de control de alimentación de la Flash, para activarla.
     2. Conecte Hold# de la memoria SPI NAND Flash a su alimentación mediante una resistencia pull-up de 10 kΩ.
 
 ##### 5.6.2.2. Interfaz SDIO para eMMC y microSD {#5522-sdio-emmc-micro-sd-interface}
@@ -656,7 +656,7 @@ SD1 utiliza 12 GPIO (PA00-PA11) alimentadas desde el dominio VDDIOA2 y admite 1,
 </div>
 
 !!! note "Verificación de las etiquetas SD1"
-    La fuente indica que SD1 utiliza 12 GPIO (PA00–PA11), pero su tabla de señales solo incluye 10 señales (SD1_D[7:0], CLK y CMD). Además, la tabla describe tanto SD1_D2 como SD1_D6 como «Data 6». La fuente no especifica las dos GPIO omitidas ni aclara la etiqueta duplicada. Antes de cerrar el esquema, verifique la asignación completa de pines SD1 en la hoja de datos del chip.
+    La fuente indica que SD1 utiliza 12 GPIO (PA00–PA11), pero su tabla de señales solo incluye 10 señales (SD1_D[7:0], CLK y CMD). Además, la tabla describe tanto SD1_D2 como SD1_D6 como «Data 6». La fuente no especifica las dos GPIO omitidas ni aclara la etiqueta duplicada. Antes de cerrar el esquemático, verifique la asignación completa de pines SD1 en la hoja de datos del chip.
 
 <div align="center"><em>Tabla 5.6-4: Conexiones de señales SD2</em></div>
 
@@ -718,18 +718,18 @@ El SF32LB58x ofrece una interfaz SWD y seis interfaces UART seleccionables para 
 !!! note "Nota"
     Las señales UARTx RXD no deben quedar flotantes; habilite una resistencia pull-up interna durante la inicialización del software.
 
-#### 5.7.2. Programación en producción y acceso al hardware {#562-production-flashing-and-hardware-access}
+#### 5.7.2. Grabación en producción y acceso al hardware {#562-production-flashing-and-hardware-access}
 
-Planifique el acceso para la programación, recuperación y calibración en producción antes de cerrar el diseño de la carcasa y los útiles de prueba. Como mínimo, deje accesibles la alimentación, GND, SWD, las salidas UART de depuración necesarias y los pines de arranque/configuración. Incluya también los puntos de reinicio de la placa o de control del PMIC que hagan falta para recuperar un firmware que no arranque.
+Planifique el acceso para la grabación, recuperación y calibración en producción antes de cerrar el diseño de la carcasa y los útiles de prueba. Como mínimo, deje accesibles la alimentación, GND, SWD, las salidas UART de depuración necesarias y los pines de arranque/configuración. Incluya también los puntos de reinicio de la placa o de control del PMIC que hagan falta para recuperar un firmware que no arranque.
 
-#### 5.7.3. Listas de comprobación del esquema y la PCB {#563-schematic-and-pcb-drawing-checklists}
+#### 5.7.3. Listas de comprobación del esquemático y la PCB {#563-schematic-and-pcb-drawing-checklists}
 
-- [ ] El esquema de alimentación (alimentación directa desde el PMU integrado o combinación con SF30147C) se ajusta al presupuesto de energía del sistema.
+- [ ] El esquemático de alimentación (alimentación directa desde la PMU integrada o combinación con SF30147C) se ajusta al presupuesto de energía del sistema.
 - [ ] El pin Mode de configuración de arranque tiene una resistencia externa de 10 kΩ y un punto de prueba reservado en las placas de producción.
 - [ ] Las especificaciones de los cristales de 48 MHz y 32,768 kHz cumplen las recomendaciones, y se ha retirado el cobre de GND de la segunda capa situado debajo del cristal.
 - [ ] La selección de la interfaz de almacenamiento (MPI4/SD1/SD2) concuerda con la configuración de arranque y se ha verificado el pin PA43 de control de alimentación de la Flash externa.
 - [ ] La interfaz de pantalla elegida (MIPI-DSI/SPI-QSPI/MCU8080/DPI/JDI) concuerda con la asignación de pines de LCDC1/LCDC2.
-- [ ] Se han asignado los pines de depuración necesarios (SWD y hasta seis UART) y se ha habilitado el pull-up interno de UART RXD.
+- [ ] Se han asignado los pines de depuración necesarios (SWD y seis UART) y se ha habilitado el pull-up interno de UART RXD.
 - [ ] Se ha verificado la multiplexación de I2S/PDM y audio analógico, y se cumple el presupuesto de las pistas diferenciales.
 - [ ] USB DP y DM cuentan con protección TVS conectada a tierra, con una capacitancia de unión inferior a 5 pF.
 

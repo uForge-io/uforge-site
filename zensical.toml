@@ -343,29 +343,19 @@ link = "/"
 lang = "en"
 
 [[project.extra.alternate]]
-name = "中文"
-link = "/zh/"
-lang = "zh"
-
-[[project.extra.alternate]]
-name = "日本語"
-link = "/ja/"
-lang = "ja"
-
-[[project.extra.alternate]]
 name = "Español"
 link = "/es/"
 lang = "es"
 
 [[project.extra.alternate]]
-name = "Deutsch"
-link = "/de/"
-lang = "de"
-
-[[project.extra.alternate]]
 name = "Français"
 link = "/fr/"
 lang = "fr"
+
+[[project.extra.alternate]]
+name = "Deutsch"
+link = "/de/"
+lang = "de"
 
 [[project.extra.alternate]]
 name = "Português"
@@ -376,6 +366,21 @@ lang = "pt"
 name = "Русский"
 link = "/ru/"
 lang = "ru"
+
+[[project.extra.alternate]]
+name = "中文"
+link = "/zh/"
+lang = "zh"
+
+[[project.extra.alternate]]
+name = "日本語"
+link = "/ja/"
+lang = "ja"
+
+[[project.extra.alternate]]
+name = "한국어"
+link = "/ko/"
+lang = "ko"
 
 [[project.extra.social]]
 icon = "fontawesome/solid/envelope"

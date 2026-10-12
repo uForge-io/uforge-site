@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-Core-3p3: placa compacta de evaluación SF32LB52x con alimentación del MCU seleccionable por jumper entre 1,8 V y 3,3 V, y acceso directo a GPIO, pantalla, audio, USB y líneas de alimentación."
+description: "SF32LB52-DevKit-Core-3p3: placa compacta de evaluación SF32LB52x con alimentación de la MCU seleccionable por jumper entre 1,8 V y 3,3 V, y acceso directo a GPIO, pantalla, audio, USB y líneas de alimentación."
 tags:
     - Hardware
     - Placa de desarrollo
@@ -10,7 +10,7 @@ tags:
 
 ## Visión general { #overview }
 
-La SF32LB52-DevKit-Core-3p3 es una placa compacta para evaluar directamente los chips SF32LB52x. Un jumper de la placa permite seleccionar una alimentación de 1,8 V o 3,3 V para el MCU. Sus señales principales se exponen en los conectores del borde; los semiorificios metalizados permiten insertar pines de cabecera sin soldarlos. Está pensada para ingenieros que necesitan acceder directamente a GPIO, buses serie, señales de pantalla, audio, ADC, PWM y líneas de alimentación.
+La SF32LB52-DevKit-Core-3p3 es una placa compacta para evaluar directamente los chips SF32LB52x. Un jumper de la placa permite seleccionar una alimentación de 1,8 V o 3,3 V para la MCU. Sus señales principales se exponen en conectores de borde; los semiorificios metalizados permiten insertar pines de cabecera sin soldarlos. Está pensada para ingenieros que necesitan acceder directamente a GPIO, buses serie, señales de pantalla, audio, ADC, PWM y líneas de alimentación.
 
 Con unas dimensiones de 30,88 × 68 mm, es compacta para prototipos de banco y ofrece las interfaces necesarias para poner a punto el hardware y el firmware del SF32LB52x.
 
@@ -38,24 +38,24 @@ Con unas dimensiones de 30,88 × 68 mm, es compacta para prototipos de banco y o
 
 Las variantes con solo NOR son adecuadas para productos compactos con Bluetooth, aplicaciones de control e HMI sencillas. Elija una variante con PSRAM y NOR externa si la aplicación requiere recursos gráficos de mayor tamaño, búferes de imagen, sistemas de archivos o más espacio para la aplicación.
 
-**Discrepancia en la documentación; compruebe la etiqueta antes de seleccionar:** La [guía detallada de la Core-3p3](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Core-3p3.html) denomina la configuración SF32LB52JUD6 `R16N16 V1.0.0` (actual), mientras que la [guía de modelos de placas](https://wiki.sifli.com/en/board/devkit_guide.html) identifica la misma configuración JUD6 / 16 MB de PSRAM / 16 MB de NOR como `N16R16`. La línea de revisión de la guía detallada indica 8 MB de PSRAM integrada para EUB6, pero su lista de características y su tabla de variantes indican 4 MB. La [descripción de SF32LB52](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52/SF32LB52-Overview-B3.md) de SiFli también especifica 4 MB para EUB6; por eso, este artículo usa 4 MB. Si necesita confirmar el sufijo exacto de la placa, compruebe su serigrafía y el esquema/BOM correspondiente.
+**Discrepancia en la documentación; compruebe la etiqueta antes de seleccionar:** La [guía detallada de la Core-3p3](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Core-3p3.html) denomina la configuración SF32LB52JUD6 `R16N16 V1.0.0` (actual), mientras que la [guía de modelos de placas](https://wiki.sifli.com/en/board/devkit_guide.html) identifica la misma configuración JUD6 / 16 MB de PSRAM / 16 MB de NOR como `N16R16`. La línea de revisión de la guía detallada indica 8 MB de PSRAM integrada para EUB6, pero su lista de características y su tabla de variantes indican 4 MB. La [descripción de SF32LB52](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52/SF32LB52-Overview-B3.md) de SiFli también especifica 4 MB para EUB6; por eso, este artículo usa 4 MB. Si necesita confirmar el sufijo exacto de la placa, compruebe su serigrafía y el esquemático/BOM correspondiente.
 
 ## Aspectos destacados de la placa { #board-highlights }
 
 - Variantes de MCU SF32LB52x con configuraciones solo-NOR o PSRAM + NOR
 - Cristal principal de 48 MHz y cristal RTC de 32,768 kHz
-- Alimentación por USB Type-C y programación/depuración USB-UART mediante el CH340N
+- Alimentación por USB Type-C y grabación/depuración USB-UART mediante el CH340N
 - Antena PCBA integrada y conector de antena I-PEX
-- Alimentación del MCU seleccionable por jumper entre 1,8 V y 3,3 V
+- Alimentación de la MCU seleccionable por jumper entre 1,8 V y 3,3 V
 - Señales USB 2.0 FS disponibles en el conector lateral
-- La placa expone 37 GPIO; el MCU dispone de 3 UART, 4 interfaces I2C, 2 GPTIM, 2 interfaces SPI y 6 canales GPADC
-- Todos los GPIO pueden configurarse como UART, I2C o GPTIM; la multiplexación también incluye SPI, PWM, I2S, PDM y entradas de activación
+- La placa expone 37 GPIO; la MCU dispone de 3 UART, 4 interfaces I2C, 2 GPTIM, 2 interfaces SPI y 6 canales GPADC
+- Todos las GPIO pueden configurarse como UART, I2C o GPTIM; la multiplexación también incluye SPI, PWM, I2S, PDM y entradas de activación
 - Conector FPC de 16 pines con paso de 0,5 mm; las interfaces de pantalla admiten SPI, DSPI y Quad-SPI, incluido QSPI en modo DDR
 - Señales I2C para el panel táctil
 - Pines para micrófono analógico y salida de audio diferencial
 - Un LED de usuario
 - Tecla de encendido y tecla de función
-- Puntos de prueba para medir la corriente de cada línea por separado; SiFli también documenta pruebas de consumo del MCU, del sistema mínimo y de toda la placa
+- Puntos de prueba para medir la corriente de cada línea por separado; SiFli también documenta pruebas de consumo de la MCU, del sistema mínimo y de toda la placa
 
 ## Cuándo usar esta placa { #when-to-use-this-board }
 
@@ -77,19 +77,19 @@ La placa admite tres entradas de alimentación:
 - Entrada de 5 V por los terminales de 5 V y GND del conector de borde cuando el USB está desconectado
 - Entrada de 3,3 V por los terminales de 3,3 V y GND del conector de borde cuando el USB está desconectado; puede utilizarse una fuente de laboratorio externa
 
-Un jumper independiente selecciona la alimentación del MCU entre 1,8 V y 3,3 V. Esta selección no corresponde a los pines de alimentación externos de 1,8 V y 3,3 V del conector de borde. Antes de cambiar el jumper o alimentar circuitos externos, consulte el pinout y el esquema de la revisión concreta de la placa.
+Un jumper independiente selecciona la alimentación de la MCU entre 1,8 V y 3,3 V. Esta selección no corresponde a los pines de alimentación externos de 1,8 V y 3,3 V del conector de borde. Antes de cambiar el jumper o alimentar circuitos externos, consulte el pinout y el esquemático de la revisión concreta de la placa.
 
 Para medir la corriente de un único riel, conecte un amperímetro en serie con el riel que se vaya a medir, usando los puntos de medición de la placa.
 
 Al conectar USB Type-C, algunos pines del conector también pueden suministrar 3,3 V, 1,8 V y 5 V. Compruebe la dirección de cada pin antes de conectar circuitos externos.
 
-La placa incorpora un interruptor de alimentación. La señal RTS# del CH340N puede controlar la habilitación de la placa y permitir que la herramienta host reinicie el MCU durante la programación o la depuración.
+La placa incorpora un interruptor de alimentación. La señal RTS# del CH340N puede controlar la habilitación de la placa y permitir que la herramienta de grabación reinicie la MCU durante la grabación o la depuración.
 
-## Programación y depuración { #download-and-debug }
+## Grabación y depuración { #download-and-debug }
 
-Use el puerto UART USB Type-C para programar el firmware y depurar el software.
+Use el puerto UART USB Type-C para grabar el firmware y depurar el software.
 
-- **Modo de programación**: habilite BOOT en la herramienta de programación y después encienda o reinicie la placa.
+- **Modo de grabación**: habilite BOOT en la herramienta de grabación y después encienda o reinicie la placa.
 - **Modo de depuración/registro**: deshabilite BOOT y después encienda o reinicie la placa.
 - **Reinicio**: use el botón de reinicio/encendido integrado o la señal RTS controlada por la herramienta.
 
@@ -194,7 +194,7 @@ Algunas variantes incorporan 16 MB de Flash QSPI-NOR externa. El siguiente grupo
 
 <div align="center" markdown>
 
-| GPIO del MCU | Función compartida por Flash/SDIO |
+| GPIO de la MCU | Función compartida por Flash/SDIO |
 | :--- | :--- |
 | PA12 | MPI2_CS / SD1_D2 |
 | PA13 | MPI2_D1 / SD1_D3 |
@@ -222,7 +222,7 @@ Son identificadores de destinos de compilación del SDK, no necesariamente los n
 
 ## Documentos relacionados { #related-documents }
 
-[SF32LB52x Introducción al chip]: ../chips/SF32LB52x.md
+[Introducción al chip SF32LB52x]: ../chips/SF32LB52x.md
 [SF32LB52x Guía de diseño de hardware]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
 [Artículo original de la Wiki de SiFli]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-Core-3p3.md
 [Paquete de diseño]: https://downloads.sifli.com/hardware/files/documentation/ProPrj_SF32LB52-DevKit-Core-3p3-V100_2025-06-10.epro?
@@ -230,7 +230,7 @@ Son identificadores de destinos de compilación del SDK, no necesariamente los n
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-microchip: __[SF32LB52x Introducción al chip]__
+- :fontawesome-solid-microchip: __[Introducción al chip SF32LB52x]__
 - :fontawesome-solid-file-lines: __[SF32LB52x Guía de diseño de hardware]__
 - :fontawesome-brands-github: __[Artículo original de la Wiki de SiFli]__
 - :fontawesome-solid-download: __[Paquete de diseño]__

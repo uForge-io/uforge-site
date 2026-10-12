@@ -51,7 +51,7 @@ As variantes somente com NOR são adequadas a produtos compactos com Bluetooth, 
 - A placa expõe 37 GPIOs; o MCU oferece 3 UARTs, 4 interfaces I2C, 2 GPTIMs, 2 interfaces SPI e 6 canais GPADC
 - Todos os GPIOs podem ser configurados como UART, I2C ou GPTIM; a multiplexação também inclui SPI, PWM, I2S, PDM e entradas de despertar
 - Conector FPC de 16 pinos com passo de 0,5 mm; as interfaces de display incluem SPI, DSPI e Quad-SPI, com suporte a QSPI em modo DDR
-- Sinais I2C para o painel sensível ao toque
+- Sinais I2C para o painel de toque
 - Pinos para microfone analógico e saída de áudio diferencial
 - Um LED de usuário
 - Botão de alimentação e botão de função
@@ -109,7 +109,7 @@ Use a porta UART via USB Type-C para gravar o firmware e depurar o software.
 
 ## Interface de display { #display-interface }
 
-A placa aceita interfaces LCD por SPI, DSPI e Quad-SPI, incluindo QSPI em modo DDR, por meio de um conector FPC vertical de 16 pinos com passo de 0,5 mm, trava flip-up e contatos inferiores. O conector fornece sinais de reset do LCD, PWM da retroiluminação, TE, seleção de chip, clock, quatro linhas de dados e sinais I2C do painel sensível ao toque.
+A placa aceita interfaces LCD por SPI, DSPI e Quad-SPI, incluindo QSPI em modo DDR, por meio de um conector FPC vertical de 16 pinos com passo de 0,5 mm, trava flip-up e contatos inferiores. O conector fornece sinais de reset do LCD, PWM da retroiluminação, TE, seleção de chip, clock, quatro linhas de dados e sinais I2C do painel de toque.
 
 ![Cabo adaptador FPC](assets/sf32lb52x/FPC-22P.png){ loading="lazy" }
 <div align="center"><em>Cabo adaptador FPC</em></div>
@@ -134,10 +134,10 @@ A placa aceita interfaces LCD por SPI, DSPI e Quad-SPI, incluindo QSPI em modo D
 | 10 | PA08 | LCD D3 / PDM1_DAT |
 | 11 | 3,3 V | Saída de alimentação do display |
 | 12 | GND | Terra |
-| 13 | PA09 | Interrupção do touch |
-| 14 | PA11 | SDA do I2C do touch |
-| 15 | PA20 | SCL do I2C do touch |
-| 16 | PA10 | Reset do touch |
+| 13 | PA09 | Interrupção do toque |
+| 14 | PA11 | SDA do I2C do toque |
+| 15 | PA20 | SCL do I2C do toque |
+| 16 | PA10 | Reset do toque |
 
 </div>
 
@@ -145,7 +145,7 @@ O guia chinês da placa publicado pela SiFli informa que o módulo AMOLED de 1,8
 
 ## Resumo dos sinais dos conectores { #header-signal-summary }
 
-A placa disponibiliza dois conectores de borda com 24 pinos cada. Um lado reúne principalmente GPIOs gerais, SPI2, USB, GPADC e alimentação. O outro reúne sinais de LCD, painel tátil, UART de depuração, áudio e alimentação.
+A placa disponibiliza dois conectores de borda com 24 pinos cada. Um lado reúne principalmente GPIOs gerais, SPI2, USB, GPADC e alimentação. O outro reúne sinais de LCD, painel de toque, UART de depuração, áudio e alimentação.
 
 ![Pinagem da SF32LB52-DevKit-Core-3p3](assets/sf32lb52x/SF32LB52-DevKit-Core-3p3-T-pinout.svg){ loading="lazy" }
 <div align="center"><em>Pinagem da SF32LB52-DevKit-Core-3p3</em></div>
@@ -176,7 +176,7 @@ A placa disponibiliza dois conectores de borda com 24 pinos cada. Um lado reúne
 
 | Faixa de pinos | Sinais | Funções principais |
 | :--- | :--- | :--- |
-| 2-11 | PA00..PA09 | LCD, painel tátil, PDM, I2S, UART, I2C |
+| 2-11 | PA00..PA09 | LCD, painel de toque, PDM, I2S, UART, I2C |
 | 12-15 | MIC_ADC, MIC_BIAS, DACP, DACN | Microfone analógico e saída de áudio |
 | 17 | 1,8 V | Entrada ou saída de 1,8 V, conforme a alimentação USB |
 | 18-20 | PA10, PA11, PA20 | PA10: CTP_RST; PA11: CTP_SDA; PA20: CTP_SCL; os três aceitam UART, I2C e GPTIM |
@@ -222,18 +222,18 @@ Esses nomes identificam alvos de compilação do SDK e não necessariamente corr
 
 ## Documentos relacionados { #related-documents }
 
-[Apresentação do chip SF32LB52x]: ../chips/SF32LB52x.md
-[Guia de projeto de hardware SF32LB52x]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
-[Artigo original da Wiki da SiFli]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-Core-3p3.md
-[Pacote de projeto]: https://downloads.sifli.com/hardware/files/documentation/ProPrj_SF32LB52-DevKit-Core-3p3-V100_2025-06-10.epro?
-[Comprar amostras]: https://sifli.taobao.com/
+[SF32LB52x Chip Introduction]: ../chips/SF32LB52x.md
+[SF32LB52x Hardware Design Guide]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
+[Original SiFli Wiki Article]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-Core-3p3.md
+[Design Package]: https://downloads.sifli.com/hardware/files/documentation/ProPrj_SF32LB52-DevKit-Core-3p3-V100_2025-06-10.epro?
+[Buy Samples]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-microchip: __[Apresentação do chip SF32LB52x]__
-- :fontawesome-solid-file-lines: __[Guia de projeto de hardware SF32LB52x]__
-- :fontawesome-brands-github: __[Artigo original da Wiki da SiFli]__
-- :fontawesome-solid-download: __[Pacote de projeto]__
-- :fontawesome-solid-cart-shopping: __[Comprar amostras]__
+- :fontawesome-solid-microchip: __[Apresentação do chip SF32LB52x][SF32LB52x Chip Introduction]__
+- :fontawesome-solid-file-lines: __[Guia de projeto de hardware SF32LB52x][SF32LB52x Hardware Design Guide]__
+- :fontawesome-brands-github: __[Artigo original da Wiki da SiFli][Original SiFli Wiki Article]__
+- :fontawesome-solid-download: __[Pacote de projeto][Design Package]__
+- :fontawesome-solid-cart-shopping: __[Comprar amostras][Buy Samples]__
 
 </div>

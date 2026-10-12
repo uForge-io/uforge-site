@@ -14,13 +14,13 @@ tags:
 
 [OpenSiFli EPD Reader](https://github.com/OpenSiFli/EPD_Reader) passt [atomic14/diy-esp32-epub-reader](https://github.com/atomic14/diy-esp32-epub-reader) an die SiFli-Hardware `SF32-OED-EPD` an. Als Rechenkern dient SF32LB52x. EPUB-Dateien werden aus dem integrierten Dateisystem oder von einer TF-Karte gelesen, per ZIP/XML/XHTML geparst, mit FreeType-Schriften und Bilddecodern aufbereitet und anschließend mit Voll- und Teilaktualisierungs-Waveforms auf dem E-Paper-Panel dargestellt.
 
-Die aktuelle Anwendung umfasst Ansichten für Bibliothek, Inhaltsverzeichnis, Lesen, Leseeinstellungen, Funktionseinstellungen, Begrüßungsbildschirm und ausgeschaltetes Display, niedrigen Akkustand, Laden und Herunterfahren. Sie unterstützt Tasten und Touch, chinesische und englische Texte, dynamische TTF-/OTF-Schriften, Schriftgröße und -stärke, Zeilenabstand, Ränder sowie das Speichern der Leseeinstellungen auf der TF-Karte. Um Ressourcen zu sparen, sind für die mitgelieferte chinesische Schrift standardmäßig keine separaten Fett- und Kursivschnitte aktiviert. Prüfen Sie daher mit der Zielschrift, wie die Einstellungen zur Schriftstärke tatsächlich dargestellt werden. Das Projekt ist eine vollständige Referenz für ein Lesegerät mit seltenen Displayaktualisierungen, aber kein Nachweis allgemeiner EPUB-Konformität und kein serienreifer E-Reader.
+Die aktuelle Anwendung umfasst Ansichten für Bibliothek, Inhaltsverzeichnis, Lesen, Leseeinstellungen, Funktionseinstellungen, Begrüßungsbildschirm und ausgeschaltetes Display, niedrigen Akkustand, Laden und Herunterfahren. Sie unterstützt Tasten und Touch, chinesische und englische Texte, dynamische TTF-/OTF-Schriften, Schriftgröße und -stärke, Zeilenabstand, Ränder sowie das Speichern der Leseeinstellungen auf der TF-Karte. Um Ressourcen zu sparen, sind für die mitgelieferte chinesische Schrift standardmäßig keine separaten Fett- und Kursivschnitte aktiviert. Prüfen Sie daher mit der Zielschrift, wie die Einstellungen zur Schriftstärke tatsächlich dargestellt werden. Das Projekt ist eine vollständige Referenz für ein E-Paper-Lesegerät mit niedriger Aktualisierungsrate, aber kein Nachweis allgemeiner EPUB-Konformität und kein serienreifer E-Reader.
 
 ## Warum die SF32-Implementierung? { #why-the-sf32-implementation }
 
 Dieser Anwendungsweg vereint Speicher des SF32LB52, EPIC/LCDC-Displaybeschleunigung, Touch, Tasten, Akkuüberwachung und Energiesparverwaltung in einer Anwendung. Für ein Produktteam ist der Nutzen mehr als die Darstellung einer einzelnen Seite: Auf unterstützter Hardware lassen sich gemeinsam Speicherbedarf des Layouts, Geisterbilder bei Voll- und Teilaktualisierung, Anpassung der Waveforms, Energieverwaltung der TF-Karte, Schriftzugriff, Bedienablauf und Schlafverhalten bewerten.
 
-Der SiFli-Boardleitfaden verlinkt auf eine Musterangebotsseite, bestätigt jedoch nicht, dass das angebotene Board, Panel und Touchsystem der V1.1-Softwarebasis des Projekts entsprechen. Auch nennt er weder eine exakte Referenzbaugruppe noch eine separate Panel-Bezugsquelle. Angaben zur EPUB-Abdeckungsrate, zum Betriebstemperaturbereich des Panels, zur Lebensdauer im Produkteinsatz und zu den Strömen der einzelnen Betriebsarten fehlen ebenfalls. Deshalb gelten Hardware-Revision, Panel-/Touch-Kombination und Software-Commit hier als verbindliche technische Basis. Andere E-Paper-Module sind kein direkter Ersatz.
+Der SiFli-Boardleitfaden verweist auf ein Beispielangebot, bestätigt jedoch nicht, dass das angebotene Board, Panel und Touchsystem der V1.1-Softwarebasis des Projekts entsprechen. Auch nennt er weder eine exakte Referenzbaugruppe noch eine separate Panel-Bezugsquelle. Angaben zur EPUB-Abdeckungsrate, zum Betriebstemperaturbereich des Panels, zur Lebensdauer im Produkteinsatz und zu den Strömen der einzelnen Betriebsarten fehlen ebenfalls. Deshalb gelten Hardware-Revision, Panel-/Touch-Kombination und Software-Commit hier als verbindliche technische Basis. Andere E-Paper-Module sind kein direkter Ersatz.
 
 **Abgleich der Ausgangsbasis:** Der [SiFli-Leitfaden für SF32LB52-OED-6'-EPD](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-OED-6%27-EPD.md) beschreibt ein 6-Zoll-Panel OPM060DA mit 758 × 1024 Pixeln. Das Blockdiagramm zeigt außerdem die Boardpfade: eine 8-Bit-EPD-Schnittstelle im 8080-Modus, I²C-Touch, TF-Karte über SPI1, analoges Mikrofon/Audio-PA, USB-UART sowie Akku- und Ladeversorgung. Die festgelegte EPD-Reader-Konfiguration für V1.1 verwendet dagegen ein YZC085 V1.05 mit 1032 × 758 Pixeln; das Platinenfoto im Wiki ist mit V1.2 gekennzeichnet. Daraus lässt sich weder ableiten, dass OPM060DA und YZC085 austauschbar sind, noch dass V1.1 mit dem Wiki-Panel geliefert wird. Prüfen Sie die Aufdrucke auf der tatsächlichen Platine und dem Panel und verwenden Sie das passende Projektziel sowie die zugehörigen Waveform- und VCOM-Einstellungen.
 
@@ -28,22 +28,22 @@ Der SiFli-Boardleitfaden verlinkt auf eine Musterangebotsseite, bestätigt jedoc
 
 ## Ergebnis, Umfang und Eintrittskriterien { #outcome-scope-and-entry-criteria }
 
-**Ergebnis:** Auf dem festgelegten Board `SF32-OED-EPD_V1.1` mit dem Panel YZC085 V1.05 in der konfigurierten Auflösung 1032 × 758 den Build- und Flashvorgang reproduzieren und Bibliothek, Inhaltsverzeichnis, Lesefluss, Tasten-/Touch-Eingabe, Speicherung der Einstellungen, Voll-/Teilaktualisierung, niedrigen Akkustand, Schlafmodus und Herunterfahren prüfen und anschließend die für eine Produktentscheidung erforderlichen Nachweise aufbewahren.
+**Ergebnis:** Auf dem festgelegten Board `SF32-OED-EPD_V1.1` mit dem Panel YZC085 V1.05 und der konfigurierten Auflösung 1032 × 758 den Build- und Flashvorgang reproduzieren. Bibliothek, Inhaltsverzeichnis, Lesefluss, Tasten-/Touch-Eingabe, Speicherung der Einstellungen, Voll-/Teilaktualisierung, niedrigen Akkustand, Schlafmodus und Herunterfahren prüfen und anschließend die für eine Produktentscheidung erforderlichen Nachweise aufbewahren.
 
-**Nicht abgedeckt:** Diese Seite weist weder vollständige EPUB-/CSS-/Schriftkompatibilität noch DRM-Unterstützung, Waveform-Kompatibilität mit beliebigen Panels, kommerzielle Lesequalität, drahtlose Inhaltsverteilung, Zertifizierung oder Serienzuverlässigkeit nach. Der fixierte Quellstand enthält Bluetooth-/PAN-Konfigurationsoptionen und eine Statusanzeige; die Upstream-README beschreibt jedoch keinen Inhaltsübertragungsweg über diese Verbindung. Die reproduzierbare Basis beschränkt sich auf lokale Dateien. Netzwerkübertragung ist nicht verifiziert und bleibt außerhalb des Umfangs.
+**Nicht abgedeckt:** Diese Seite weist keine vollständige EPUB-/CSS-/Schriftkompatibilität, keine DRM-Unterstützung, keine Waveform-Kompatibilität mit beliebigen Panels, keine kommerzielle Lesequalität, keine drahtlose Inhaltsverteilung, keine Zertifizierung und keine Serienzuverlässigkeit nach. Der fixierte Quellstand enthält Bluetooth-/PAN-Konfigurationsoptionen und eine Statusanzeige; die Upstream-README beschreibt jedoch keinen Inhaltsübertragungsweg über diese Verbindung. Die reproduzierbare Basis beschränkt sich auf lokale Dateien. Netzwerkübertragung ist nicht verifiziert und bleibt außerhalb des Umfangs.
 
-**Eintrittskriterien:** Das Team kann SiFli-SDK-Anwendungen bauen und flashen und kann Board-Revision, Panelmodell, Ausrichtung des Flexkabels, Akkupolarität und Dateisystem der TF-Karte bestimmen. Sind Herkunft oder Hardwaredokumentation von Board und Panel unklar, setzen Sie Kaufzusagen aus, bis SiFli oder der Hardwareanbieter sie bestätigt.
+**Eintrittskriterien:** Das Team kann SiFli-SDK-Anwendungen bauen und flashen und Boardrevision, Panelmodell, Ausrichtung des Flexkabels, Akkupolarität sowie Dateisystem der TF-Karte bestimmen. Sind Herkunft oder Hardwaredokumentation von Board und Panel unklar, tätigen Sie keine Kaufzusage, bis SiFli oder der Hardwareanbieter diese Angaben bestätigt hat.
 
-<div align="center"><em>Tabelle: Projektvertrag</em></div>
+<div align="center"><em>Tabelle: Projektbasis und Nachweise</em></div>
 
 <div align="center" markdown>
 
 | Bereich | Anforderung an die Basis | Vor dem Fortfahren aufzubewahrende Nachweise |
 |:-----|:---------------------|:------------------------------------|
-| Versionsgrenze | Board, Panel, Touchcontroller, Anwendungs-Commit und SDK-Submodul-Commit festlegen | Fotos, Kennzeichnungen, Konfiguration, Commits, Image-Hashes und Kabelausrichtung |
-| Lesegrenze | Integrierte Beispiele, TF-Karten-Bücher, Inhaltsverzeichnisse, Bilder, chinesische/englische Texte und Einstellungen getrennt testen | Inhaltsmanifest, Seitenergebnisse, Protokolle und Fehlerklassifizierung |
-| Displaygrenze | Waveform, VCOM, Auflösung, Bus und Temperatur müssen zum Panel passen | Voll-/Teilaktualisierung, Geisterbilder, Aktualisierungszeit, Temperatur und Strommessungen |
-| Produktgrenze | Lizenzen, Inhaltsrechte, Stromversorgung, Zuverlässigkeit, Funk und Vorschriften erfordern eine separate Prüfung | Risikoregister, Verantwortliche und Entscheidung zum Fortfahren oder Stoppen |
+| Versionsstand | Board, Panel, Touchcontroller, Anwendungs-Commit und SDK-Submodul-Commit festlegen | Fotos, Kennzeichnungen, Konfiguration, Commits, Image-Hashes und Kabelausrichtung |
+| Lesefunktion | Integrierte Beispiele, Bücher auf der TF-Karte, Inhaltsverzeichnisse, Bilder, chinesische/englische Texte und Einstellungen getrennt testen | Inhaltsmanifest, Seitenergebnisse, Protokolle und Fehlerklassifizierung |
+| Displayanforderungen | Waveform, VCOM, Auflösung, Bus und Temperatur müssen zum Panel passen | Voll-/Teilaktualisierung, Geisterbilder, Aktualisierungszeit, Temperatur und Strommessungen |
+| Produktvalidierung | Lizenzen, Inhaltsrechte, Stromversorgung, Zuverlässigkeit, Funk und Vorschriften separat prüfen | Risikoregister, Verantwortliche und Entscheidung zum Fortfahren oder Stoppen |
 
 </div>
 
@@ -51,13 +51,13 @@ Der SiFli-Boardleitfaden verlinkt auf eine Musterangebotsseite, bestätigt jedoc
 
 ### Hardware-Spezifikation { #hardware-specification }
 
-<div align="center"><em>Tabelle: Hardwarespezifikation</em></div>
+<div align="center"><em>Tabelle: Hardware-Spezifikation</em></div>
 
 <div align="center" markdown>
 
 | Komponente | Erforderliche Spezifikation | Funktion | Status | Bezugsquelle | Hinweise zu Kompatibilität und Ersatz |
 |:----------|:-----------------------|:-----|:-------|:----------------|:-------------------------------------|
-| Board SF32-OED-EPD V1.1 | SF32LB52x; Softwareziel `sf32-oed-epd_v11`; die Speicheraufteilung des Projekts sieht einen 16-MiB-QSPI-NOR-Bereich und einen 8-MiB-PSRAM-Bereich vor | Verarbeitung, Speicher, Display, Eingabe, Akku- und Energiemanagement | Erforderlich | Der [SiFli-Boardleitfaden](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-OED-6%27-EPD.md) verlinkt auf eine Musterangebotsseite; bestätigen Sie Boardrevision, mitgeliefertes Panel und Touchhardware beim Anbieter. Verwenden Sie die [festgelegte Boardkonfiguration für V1.1](https://github.com/OpenSiFli/EPD_Reader/tree/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/sf32-oed-epd_v11), um das Softwareziel zu identifizieren | V1.2 und V1.2-SPI haben eigene Ziele und sind nicht allein aufgrund ähnlich aussehender Anschlüsse austauschbar |
+| Board SF32-OED-EPD V1.1 | SF32LB52x; Softwareziel `sf32-oed-epd_v11`; die Speicheraufteilung des Projekts sieht einen 16-MiB-QSPI-NOR-Bereich und einen 8-MiB-PSRAM-Bereich vor | Verarbeitung, Speicher, Display, Eingabe, Akku- und Energiemanagement | Erforderlich | Der [SiFli-Boardleitfaden](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-OED-6%27-EPD.md) verweist auf ein Beispielangebot; bestätigen Sie Boardrevision, mitgeliefertes Panel und Touchhardware beim Anbieter. Verwenden Sie die [festgelegte Boardkonfiguration für V1.1](https://github.com/OpenSiFli/EPD_Reader/tree/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/sf32-oed-epd_v11), um das Softwareziel zu identifizieren | V1.2 und V1.2-SPI haben eigene Ziele und sind nicht allein aufgrund ähnlich aussehender Anschlüsse austauschbar |
 | E-Paper-Modul YZC085 V1.05 | 1032 × 758; 8-Bit-EPD/DBI-Schnittstelle; Standardkonfiguration für V1.1. Die fixierte Projektkonfiguration und der zitierte Boardleitfaden belegen weder die physische Diagonale noch die DPI des Panels; anhand der Panelkennzeichnung und Herstellerunterlagen prüfen. | Darstellung der EPUB-Seiten und Benutzeroberfläche | Erforderlich | Keine Bezugsquelle veröffentlicht; physisches Modell anhand der [festgelegten Kconfig-Option](https://github.com/OpenSiFli/EPD_Reader/blob/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/project/Kconfig.proj) abgleichen | R7D005 (1448 × 1072) und OPM037A3 (240 × 416, SPI) sind eigene Konfigurationen und kein Ersatz ohne Umkonfiguration; Waveform, VCOM, Timing und Auflösung für jedes Panel validieren |
 | Touchschnittstelle FT5446U | `TSC_USING_FT5446U_V01` als Standard für V1.1 | Touchauswahl, Umblättern und nach oben wischbare Einblendung | Erforderlich, wenn Touch genutzt wird | Zusammen mit der passenden Baugruppe für Board und Panel V1.1 beziehen; keine separate Bezugsquelle veröffentlicht | V1.2 verwendet standardmäßig GT967, die 3,7-Zoll-SPI-Konfiguration FT6336U; die Treiber sind nicht austauschbar |
 | TF-Karte | Vom SPI-Speichertreiber des Boards und FAT-Dateisystem erkannt | EPUB-Massenspeicher, externe Schriften und Speicherung von `/settings.cfg` | Für den vollständigen Funktionsumfang erforderlich; nur für integrierte Beispiele optional | Standard-TF-Karte; das Projekt nennt weder Marke noch Kapazität | Die Firmware bevorzugt die TF-Karte. Kapazität, Format und Dateien dokumentieren sowie Entfernen und Wiederherstellung nach Beschädigung testen |
@@ -68,7 +68,7 @@ Der SiFli-Boardleitfaden verlinkt auf eine Musterangebotsseite, bestätigt jedoc
 
 ### Software-Spezifikation { #software-specification }
 
-<div align="center"><em>Tabelle: Softwarespezifikation</em></div>
+<div align="center"><em>Tabelle: Software-Spezifikation</em></div>
 
 <div align="center" markdown>
 
@@ -79,7 +79,7 @@ Der SiFli-Boardleitfaden verlinkt auf eine Musterangebotsseite, bestätigt jedoc
 | SiFli-SDK-Submodul | [`8a1eb8a`](https://github.com/OpenSiFli/SiFli-SDK/commit/8a1eb8a34be02c1df8529c9e8f0e69172bf9ef36) | RT-Thread, BSP, Dateisysteme, Bluetooth, Netzwerk, Energiemanagement, Build und Flashen | Erforderlich | [Repository-Submodul](https://github.com/OpenSiFli/EPD_Reader/tree/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/SiFli-SDK) | Dies ist die vom Projekt festgelegte SDK-Revision für reproduzierbare Builds; jedes Update erfordert Regressionstests für Display, Speicher, Eingabe und Stromversorgung |
 | EPUB-/Rendering-Abhängigkeiten | In der Anwendung festgelegt: EPDIY, tinyxml2, miniz 2.2.0, PNGdec, TJpgDec, FreeType und gebündelte Schrift | Archiv-, XML-/XHTML-, PNG-/JPEG-, Schrift- und EPD-Rendering | Erforderlich | Festgelegte Verzeichnisse [`lib/`](https://github.com/OpenSiFli/EPD_Reader/tree/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/lib) und [`font/`](https://github.com/OpenSiFli/EPD_Reader/tree/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/font) | Jede Lizenz und Font-NOTICE prüfen; die MIT-Lizenz des Hauptprojekts gilt nicht automatisch für Drittanbietercode und Schriften |
 | SCons, Compiler und UART-Programmierwerkzeuge | Umgebung passend zum festgelegten SDK-Commit | menuconfig, Build, Dateisystem-/Waveform-Images und Programmierung | Erforderlich | Im [festgelegten SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK/commit/8a1eb8a34be02c1df8529c9e8f0e69172bf9ef36) enthalten | Umgebung, Befehle, erzeugte Images und Programmierprotokolle aufbewahren |
-| EPUB- und Schriftdateien | Vom Team freigegebenes EPUB ohne DRM; optional `.ttf`/`.otf`, bis zu 64 externe Schriften | Lesemedien und Schriftauswahl | EPUB erforderlich; externe Schriften optional | Eigene/lizenzierte Inhalte; das Repository enthält Testbeispiele unter [`disk/`](https://github.com/OpenSiFli/EPD_Reader/tree/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/disk) | Das Team ist für Inhalts- und Schriftrechte verantwortlich; EPUB-Strukturen, Sprachen und Bilder der Zielprodukte testen |
+| EPUB- und Schriftdateien | Vom Team freigegebenes EPUB ohne DRM; optional `.ttf`/`.otf`, bis zu 64 externe Schriften | Lesemedien und Schriftauswahl | EPUB erforderlich; externe Schriften optional | Eigene oder lizenzierte Inhalte; das Repository enthält Testbeispiele unter [`disk/`](https://github.com/OpenSiFli/EPD_Reader/tree/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/disk) | Das Team ist für Inhalts- und Schriftrechte verantwortlich; EPUB-Strukturen, Sprachen und Bilder der Zielprodukte testen |
 
 </div>
 
@@ -101,11 +101,11 @@ scons --board=sf32-oed-epd_v11 --board_search_path=.. --menuconfig
 
 ## Projektphasen und Entscheidungspunkte { #delivery-map }
 
-<div align="center"><em>Tabelle: Entwicklungsphasen und Entscheidungen</em></div>
+<div align="center"><em>Tabelle: Projektphasen und Entscheidungspunkte</em></div>
 
 <div align="center" markdown>
 
-| Phase | Unterstützte Entscheidung | Mindestnachweise |
+| Phase | Entscheidungsfrage | Mindestnachweise |
 |:------|:-------------------|:-----------------|
 | Hardware und Quellstand fixieren | Entspricht die physische Baugruppe der Upstream-Basis V1.1? | Fotos der Kennzeichnungen und des Panels, Anschlussausrichtung, Commits, Submodule und Konfiguration |
 | Lesebasis herstellen | Kann das festgelegte Image den lokalen EPUB-Ablauf vollständig ausführen? | Build-/Programmierprotokolle, Beispielmanifest, Seiten und Eingabeprotokoll |
@@ -143,52 +143,52 @@ Die wichtigsten Fehlerbereiche sind Archiv-/XHTML-Parsing der Inhalte, Schriftda
 
 **Ziel:** nachweisen, dass Board, Panel, Touchcontroller und Quellcode dieselbe unterstützte Kombination beschreiben.
 
-1. Kennzeichnungen des Boards V1.1, SF32-Baustein, Panelmodell, Touchcontroller, Flexkabelausrichtung und Stromquelle erfassen.
+1. Kennzeichnungen des Boards V1.1, SF32-Gerät, Panelmodell, Touchcontroller, Flexkabelausrichtung und Stromquelle erfassen.
 2. Top-Level-Commit und SDK-Submodul fixieren und den vollständigen Submodulstatus sichern.
 3. In einer sauberen Umgebung bauen und flashen; Hashes aller erzeugten Images und Flashskripte sichern.
 
 **Aufzubewahrende Nachweise:** Fotos der Baugruppe, Bauteilkennungen, Git-Status, Konfiguration, Build-/Flashprotokolle, Image-Hashes und Startprotokoll.
 
-**Abnahmekriterium für Phase 1:** Die Baugruppe entspricht der Standardkombination `sf32-oed-epd_v11`; aus den fixierten Eingaben lässt sich reproduzierbar dasselbe Image erzeugen und starten.
+**Abnahmekriterium für Kontrollpunkt 1:** Die Baugruppe entspricht der Standardkombination `sf32-oed-epd_v11`; aus den fixierten Eingaben lässt sich reproduzierbar dasselbe Image erzeugen und starten.
 
 ## Phase 2 — Den unveränderten Leseablauf validieren { #stage-2-validate-the-untouched-reading-flow }
 
 **Ziel:** den zentralen Bedienablauf vor jeder Änderung nachweisen.
 
 1. EPUB-Dateien getrennt im integrierten Speicher und auf der TF-Karte suchen; die Firmware bevorzugt die TF-Karte.
-2. Den Ablauf Startseite → Bibliothek → Inhaltsverzeichnis → Lesen durchspielen. Dabei vier Bibliothekseinträge pro Seite, sechs Inhaltsverzeichniseinträge pro Seite und die Tasten-/Touch-Bedienung „auswählen, dann bestätigen“ prüfen.
-3. Vor- und Zurückblättern, die durch Wischen nach oben geöffnete Einblendung, Sprünge `-5/-1/+1/+5`, Rückkehr zu Inhaltsverzeichnis/Bibliothek und Aufruf der Leseeinstellungen prüfen.
+2. Den Ablauf „Home“ (Startseite) → „Library“ (Bibliothek) → „Contents“ (Inhaltsverzeichnis) → „Reading“ (Lesen) durchspielen. Dabei vier Bibliothekseinträge pro Seite, sechs Inhaltsverzeichniseinträge pro Seite und die Tasten-/Touch-Bedienung „auswählen, dann bestätigen“ prüfen.
+3. Vor- und Zurückblättern, die durch Wischen nach oben geöffnete Einblendung, Sprünge `-5/-1/+1/+5`, Rückkehr zu „Contents“/„Library“ und Aufruf von „reading-settings“ prüfen.
 4. Chinesische und englische Texte, PNG/JPEG sowie Kapitelnavigation testen und nicht unterstützte oder fehlerhafte Inhaltsstrukturen dokumentieren.
 
 **Aufzubewahrende Nachweise:** Quelle und Hashes der Test-EPUBs, Seitenfotos, Interaktionsablauf, Protokolle, Speicherreserve und klassifizierte Fehler.
 
-**Abnahmekriterium für Phase 2:** Der Hauptablauf lässt sich mit dem Zielsatz von Beispielen wiederholen. Jeder Fehler ist Inhalt, Schrift, Speicher, Arbeitsspeicher, Eingabe oder Display zugeordnet und wird nicht pauschal als „sporadisch“ abgetan.
+**Abnahmekriterium für Kontrollpunkt 2:** Der Hauptablauf lässt sich mit der vorgesehenen Auswahl an Test-EPUBs wiederholen. Jeder Fehler ist einer Kategorie zugeordnet: Inhalt, Schrift, Speicher, Arbeitsspeicher, Eingabe oder Display. Er wird nicht pauschal als „sporadisch“ abgetan.
 
 ## Phase 3 — Einstellungen, Speicherverhalten und Wiederherstellung validieren { #stage-3-qualify-settings-storage-and-recovery }
 
 **Ziel:** sicherstellen, dass echte Inhalte und Einstellungen den Nutzer nach Speicherereignissen nicht in einem nicht wiederherstellbaren Zustand zurücklassen.
 
-1. `.ttf`-/`.otf`-Dateien im TF-Verzeichnis `/fonts` ablegen und Suche, Auswahl von bis zu 64 externen Schriften sowie Rückfallverhalten bei nicht verfügbarer Schrift prüfen.
-2. Schriftgrößen von 24–48 px, Schriftstärke, Zeilenabstände von 1,0×–2,0×, Ränder von 5–20 px und Speicherung über Neustarts hinweg in `/settings.cfg` testen.
-3. An sicheren Stellen ohne laufenden Schreibvorgang Tests ohne Karte, mit Entfernen/Wiedereinsetzen, beschädigten Einstellungen und fehlenden Schriften durchführen. Die Karte nicht im laufenden Betrieb so entfernen, dass das Dateisystem absichtlich beschädigt wird.
-4. Die aktuelle Grenze prüfen: „Weiterlesen“ behält während des laufenden Betriebs den zuletzt geöffneten Buchindex und das Kapitel. Beschreiben Sie die Funktion nicht als vollständige Synchronisierung des Lesefortschritts über Neustarts hinweg.
+1. Legen Sie `.ttf`-/`.otf`-Dateien im TF-Verzeichnis `/fonts` ab und prüfen Sie Suche, Auswahl von bis zu 64 externen Schriften sowie Rückfallverhalten bei nicht verfügbarer Schrift.
+2. Testen Sie Schriftgrößen von 24–48 px, Schriftstärke, Zeilenabstände von 1,0×–2,0×, Ränder von 5–20 px und Speicherung über Neustarts hinweg in `/settings.cfg`.
+3. Führen Sie an sicheren Stellen ohne laufenden Schreibvorgang Tests ohne Karte, mit Entfernen/Wiedereinsetzen, beschädigten Einstellungen und fehlenden Schriften durch. Entfernen Sie die Karte nicht im laufenden Betrieb so, dass das Dateisystem absichtlich beschädigt wird.
+4. Die aktuelle Grenze prüfen: „Continue Reading“ (Weiterlesen) behält während des laufenden Betriebs den zuletzt geöffneten Buchindex und das Kapitel. Beschreiben Sie die Funktion nicht als vollständige Synchronisierung des Lesefortschritts über Neustarts hinweg.
 
 **Aufzubewahrende Nachweise:** Kartenspezifikation und -format, Asset-Manifest, Einstellungsdatei, Neustartergebnisse, Fehlerprotokolle und Wiederherstellungsmaßnahmen.
 
-**Abnahmekriterium für Phase 3:** Zielinhalte und Einstellungen lassen sich wiederholt laden. Bei fehlender Karte, ungültiger Konfiguration oder fehlender Schrift greifen verständliche Rückfallmechanismen, die eine Rückkehr zur Startseite nicht verhindern.
+**Abnahmekriterium für Kontrollpunkt 3:** Zielinhalte und Einstellungen lassen sich wiederholt laden. Bei fehlender Karte, ungültiger Konfiguration oder fehlender Schrift greifen verständliche Rückfallmechanismen, die eine Rückkehr zu Home (Startseite) ermöglichen.
 
 ## Phase 4 — E-Paper-Anzeigequalität und Stromverbrauch bewerten { #stage-4-qualify-e-paper-quality-and-power }
 
 **Ziel:** beurteilen, ob Paneltreiber und Energiesparrichtlinie zum vorgesehenen Leseerlebnis passen.
 
-1. Vollaktualisierungsintervalle von 5, 10, 20 und „jedes Mal“ (`0`) prüfen und Geisterbilder, Blinken, Aktualisierungszeit sowie Seitenkonsistenz dokumentieren.
+1. Vollaktualisierungsintervalle von 5, 10, 20 und „every time“ (bei jeder Aktualisierung; `0`) prüfen und Geisterbilder, Blinken, Aktualisierungszeit sowie Seitenkonsistenz dokumentieren.
 2. Waveform, VCOM und Timing des Zielpanels über den erwarteten Temperaturbereich validieren. Keine Werte aus einer anderen Panelkonfiguration übernehmen.
-3. Vom Nutzer wählbare Timeouts von 5/10/30 Minuten, 1 Stunde und „nie“ prüfen. Zusätzlich die unabhängige Standardeinstellung testen, die nach fünf Stunden ohne Interaktion in der Hauptschleife die Abschaltseite öffnet.
+3. Vom Nutzer wählbare Timeouts von 5/10/30 Minuten, 1 Stunde und „never“ (nie) prüfen. Zusätzlich die unabhängige Standardeinstellung testen, die nach fünf Stunden ohne Interaktion in der Hauptschleife die Abschaltseite öffnet.
 4. Akku-Prozentanzeige und Ladesymbol in der Statusleiste prüfen, einschließlich des Ausblendens des Ladesymbols bei 98 %. Strom bei Seiteneinteilung, Teil- und Vollaktualisierung, Leerlauf, Aufwecken/Schlafen der TF-Karte, niedrigem Akkustand, Laden und Herunterfahren messen.
 
 **Aufzubewahrende Nachweise:** Panel-/Waveform-Version, Temperatur, Seitenbilder, Aktualisierungsstatistiken, Stromverläufe, Akkuzustände sowie Ergebnisse zu Aufwecken und Herunterfahren.
 
-**Abnahmekriterium für Phase 4:** Grenzwerte für Displayqualität, Aktualisierungslatenz, Temperatur, Stromverbrauch und Wiederherstellung sind festgelegt und eingehalten. Für jede Abweichung gibt es eine ausdrückliche Entscheidung.
+**Abnahmekriterium für Kontrollpunkt 4:** Grenzwerte für Displayqualität, Aktualisierungslatenz, Temperatur, Stromverbrauch und Wiederherstellung sind festgelegt und eingehalten. Für jede Abweichung gibt es eine ausdrückliche Entscheidung.
 
 ## Phase 5 — Eine kontrollierte Anpassung vornehmen und die Reife überprüfen { #stage-5-make-a-controlled-adaptation-and-review-readiness }
 
@@ -198,7 +198,7 @@ Geeignete Änderungen sind beispielsweise das Hinzufügen einer lizenzierten Sch
 
 Bei der Produktbewertung müssen mindestens folgende Fragen beantwortet werden:
 
-- Welche Kompatibilitätsrate und welcher Speicherhöchstbedarf gelten für die vorgesehenen EPUB-/XHTML-/CSS-/Bild-/Sprachinhalte?
+- Welche Kompatibilitätsquote und welcher maximale Speicherbedarf gelten für die vorgesehenen EPUB-/XHTML-/CSS-/Bild-/Sprachinhalte?
 - Wer verantwortet Beschaffung und Spezifikation von Panel, Waveform, VCOM, Temperaturbereich und Lebensdauer?
 - Welche Verteilung erlauben die Lizenzen der Inhalte, Schriften, Hauptanwendung und sämtlicher Drittanbieterbibliotheken?
 - Wie wird das Gerät nach Beschädigung der TF-Karte oder Einstellungen, niedrigem Akkustand, fehlerhaftem Herunterfahren, beschädigter Firmware oder abgebrochenem Update wiederhergestellt?
@@ -207,11 +207,11 @@ Bei der Produktbewertung müssen mindestens folgende Fragen beantwortet werden:
 
 **Aufzubewahrende Nachweise:** Änderungsreview, Diff, Regressionsmatrix, Risikoregister, Verantwortliche und Produktentscheidung.
 
-**Abnahmekriterium für Phase 5:** Die kontrollierte Änderung besteht alle relevanten Regressionstests. Für verbleibende Risiken zu Inhalten, Display, Stromversorgung, Sicherheit, Lizenzen, Beschaffung und Vorschriften sind Verantwortliche und Maßnahmen festgelegt; die Entscheidung zum Fortfahren, Zurückstellen oder Stoppen ist dokumentiert.
+**Abnahmekriterium für Kontrollpunkt 5:** Die kontrollierte Änderung besteht alle relevanten Regressionstests. Für verbleibende Risiken zu Inhalten, Display, Stromversorgung, Sicherheit, Lizenzen, Beschaffung und Vorschriften sind Verantwortliche und Maßnahmen festgelegt; die Entscheidung zum Fortfahren, Zurückstellen oder Stoppen ist dokumentiert.
 
 ## Übergabe an das Produktdesign { #handoff-to-product-design }
 
-Das Übergabepaket sollte Revisionen von Board, Panel und Touch, fixierte Code- und SDK-Stände, Speicher und Partitionen, Dateisysteme, Schrift- und Inhaltsdateien, Waveform/VCOM/Timing, Richtlinie für Voll-/Teilaktualisierung, Eingabezuordnung, Akkukurve, Strommessungen, Fehlerwiederherstellung, Lizenzmanifest und Produktionsprüfplan enthalten. Nutzen Sie den [Integrationspfad für SF32LB52x](../sf32-products/chips/SF32LB52x.md#integration-path), um Chip, Modul, Board, Hardware-Designleitfaden und Checkliste auszuwählen. Entwickeln Sie die eigene Hardware anschließend ausgehend von der validierten Funktionsgrenze neu.
+Das Übergabepaket sollte Revisionen von Board, Panel und Touch, fixierte Code- und SDK-Stände, Speicher und Partitionen, Dateisysteme, Schrift- und Inhaltsdateien, Waveform/VCOM/Timing, Richtlinie für Voll-/Teilaktualisierung, Eingabezuordnung, Akkukurve, Strommessungen, Fehlerwiederherstellung, Lizenzmanifest und Produktionsprüfplan enthalten. Nutzen Sie den [Integrationspfad für SF32LB52x](../sf32-products/chips/SF32LB52x.md#integration-path), um Chip, Modul, Board, Hardware-Design-Leitfaden und Checkliste auszuwählen. Entwickeln Sie die eigene Hardware anschließend ausgehend von der validierten Funktionsgrenze neu.
 
 ## Maßgebliche Quellen { #authoritative-sources }
 

@@ -32,7 +32,7 @@ Diese Antworten bestimmen die Schnittstelle (I2S, PDM oder ADC/DAC), die Codec-K
 
 ## Der SF32-Audiosignalpfad { #the-sf32-audio-signal-path }
 
-Aufnahme und Wiedergabe verwenden unterschiedliche Signalwege. Die Abbildung zeigt übliche Wege; Verfügbarkeit und gleichzeitige Nutzung hängen von Bauteil, Gehäuse, Platine und SDK-Konfiguration ab.
+Aufnahme und Wiedergabe verwenden unterschiedliche Signalwege. Die Abbildung zeigt übliche Wege; Verfügbarkeit und gleichzeitige Nutzung hängen von Gerät, Gehäuse, Platine und SDK-Konfiguration ab.
 
 <div align="center"><em>Abbildung: Typischer lokaler SF32-Audiosignalpfad</em></div>
 
@@ -52,7 +52,7 @@ flowchart TB
     M ~~~ N
 ```
 
-**AUDCODEC** übernimmt die A/D- und D/A-Wandlung. **AUDPRC** verarbeitet auf unterstützten Signalwegen Mischung, Verstärkung und Abtastratenwandlung. PDM-Mikrofone liefern ihre Signale an den PDM-Block, der PCM erzeugt; sie durchlaufen nicht den analogen ADC. I2S verbindet externe digitale Audiogeräte. Eine PDM-Schnittstelle unterstützt über die Links-/Rechts-Kanalauswahl bis zu zwei kompatible Mikrofone; zwei Schnittstellen können bis zu vier Mikrofone anbinden, sofern Pins verfügbar sind und der Treiber dies zulässt.
+**AUDCODEC** übernimmt die A/D- und D/A-Wandlung. **AUDPRC** verarbeitet auf unterstützten Signalwegen Mischung, Verstärkung und Abtastratenwandlung. PDM-Mikrofone liefern ihre Signale an den PDM-Block, der PCM erzeugt; sie durchlaufen nicht den analogen ADC. I2S verbindet externe digitale Audiogeräte. Eine PDM-Schnittstelle kann über die Auswahl des linken oder rechten Kanals bis zu zwei kompatible Mikrofone anbinden; zwei Schnittstellen können bis zu vier Mikrofone anbinden, sofern Pins verfügbar sind und der Treiber dies zulässt.
 
 **Audio Server** verwaltet Streams und Sitzungen als Software, nicht als physischer Wandler zwischen Mikrofon und Lautsprecher. Anwendungen verwenden üblicherweise seine APIs und die zugehörigen Treiber. Direkte Treiber- oder HAL-Tests sind bei der Inbetriebnahme hilfreich. Wählen Sie zuerst den tatsächlichen Aufnahme- und Wiedergabeweg und prüfen Sie dann Takte, Sampleformate, DMA-Anforderungen und ob die Ausgangsstufe die vorgesehene Last ansteuern kann. Gehen Sie nicht davon aus, dass der integrierte DAC den gewählten Lautsprecher ohne externen Verstärker treiben kann.
 
@@ -60,7 +60,7 @@ Die Details zu diesen Signalwegen finden Sie im [AUDPRC/AUDCODEC-Treiberleitfade
 
 ## Mikrofone und digitale Schnittstellen { #choosing-interfaces-amic-dmic-and-i2s }
 
-AMIC und DMIC bezeichnen Mikrofontypen, PDM und I2S digitale Schnittstellen. Ein digitales Mikrofon kann PDM oder I2S verwenden. Zählen Sie Mikrofon, Kanal und Schnittstelle nicht als dieselbe Ressource.
+AMIC und DMIC bezeichnen Mikrofontypen; PDM und I2S hingegen sind digitale Schnittstellen. Ein digitales Mikrofon kann PDM oder I2S verwenden. Zählen Sie Mikrofon, Kanal und Schnittstelle nicht als dieselbe Ressource.
 
 <div align="center"><em>Tabelle: Mikrofone und digitale Schnittstellen</em></div>
 
@@ -83,7 +83,7 @@ Wählen und validieren Sie zunächst das passende SiFli-SDK-Beispiel, bevor Sie 
 
 ## Das richtige SF32-Gerät wählen { #pick-the-right-sf32-device }
 
-Die Audiofunktionen unterscheiden sich je nach Familie. Prüfen Sie das Datenblatt des konkreten Bauteils; die Tabelle bietet eine erste Orientierung:
+Die Audiofunktionen unterscheiden sich je nach Familie. Prüfen Sie das Datenblatt des konkreten Geräts; die Tabelle bietet eine erste Orientierung:
 
 <div align="center"><em>Tabelle: Das richtige SF32-Gerät wählen</em></div>
 
@@ -164,28 +164,28 @@ Unterscheiden Sie einen **Hardware-Audio-Codec** (ADC/DAC-Wandlung) von einem **
 
 </div>
 
-Das SDK bietet Beispiele für lokale Musik, SD-Karten-MP3, Opus, Aufnahme und duale ADC/DAC-Pfade. Das Zweikanalbeispiel benötigt ein Bauteil und eine Platine mit diesen Kanälen; nicht jedes SF32-Bauteil hat zwei ADCs/DACs. Beginnen Sie mit der unterstützten Konfiguration und messen Sie den Decodieraufwand auf dem Zielgerät.
+Das SDK bietet Beispiele für lokale Musik, SD-Karten-MP3, Opus, Aufnahme und duale ADC/DAC-Pfade. Das Zweikanalbeispiel benötigt ein Gerät und eine Platine mit diesen Kanälen; nicht jedes SF32-Gerät hat zwei ADCs/DACs. Beginnen Sie mit der unterstützten Konfiguration und messen Sie den Decodieraufwand auf dem Zielgerät.
 
 ## Lokales Audio vs. Bluetooth-Audio { #local-audio-vs-bluetooth-audio }
 
 Unterscheiden Sie die beiden Signalwege konzeptionell, auch wenn sie gleichzeitig aktiv sein können:
 
 - **Lokales Audio** (dieser Leitfaden) — AUDCODEC/AUDPRC, Mikrofone, Lautsprecher/Line-out, geräteinterne Wiedergabe und Aufnahme.
-- **Bluetooth-Audio** ([Bluetooth-Übersicht](../bluetooth/overview.md#bluetooth-audio-and-le-audio)) — A2DP/AVRCP/HFP für Classic Bluetooth oder LE-Audio-Unicast/Broadcast, sofern Bauteil, Stack und SDK die erforderlichen Rollen unterstützen. Eine BLE-fähige Funkhardware allein garantiert kein LE Audio.
+- **Bluetooth-Audio** ([Bluetooth-Übersicht](../bluetooth/overview.md#bluetooth-audio-and-le-audio)) — A2DP/AVRCP/HFP für Classic Bluetooth oder LE-Audio-Unicast/Broadcast, sofern Gerät, Stack und SDK die erforderlichen Rollen unterstützen. Eine BLE-fähige Funkhardware allein garantiert kein LE Audio.
 
 In vielen Produkten werden beide Signalwege kombiniert: etwa indem ein lokales Mikrofon Audio erfasst und dieses über Bluetooth gestreamt wird oder indem empfangenes Bluetooth-Audio im Audio Server mit einem lokalen Benachrichtigungston gemischt wird. Legen Sie ausdrücklich fest, wer die Puffer verwaltet und wie gemischt wird, wenn beide Signalwege gleichzeitig aktiv sind.
 
-## Audio-Checkliste für Schaltplan und Platine { #board-level-audio-checklist }
+## Audio-Checkliste auf Platinenebene { #board-level-audio-checklist }
 
 Firmware kann schlechtes analoges Design nicht vollständig verbergen. Prüfen Sie diese Punkte bei Schaltplan- und Leiterplattenarbeit:
 
-<div align="center"><em>Tabelle: Audio-Checkliste für Schaltplan und Platine</em></div>
+<div align="center"><em>Tabelle: Audio-Checkliste auf Platinenebene</em></div>
 
 <div align="center" markdown>
 
 | Bereich | Hinweise |
 |:-----|:---------|
-| Mikrofonvorspannung und Leiterbahnführung | Halten Sie analoge Mikrofonleitungen kurz, störungsarm und fern von Takten, HF-Signalen und hochstromführenden Schaltknoten. |
+| Mikrofonvorspannung und Leiterbahnführung | Halten Sie analoge Mikrofonleitungen kurz, störungsarm und fern von Takten, RF-Signalen und hochstromführenden Schaltknoten. |
 | Masseführung | Vermeiden Sie störbehaftete Rückstrompfade über die Massebezüge von Mikrofon oder Lautsprecher. |
 | Versorgungsschienen | Filtern Sie Codec- und Mikrofonversorgungen gemäß Referenzdesign und Mikrofon-Datenblatt. |
 | Lautsprecher-/Verstärkerpfad | Prüfen Sie Last, Verstärkung, Wärmeverhalten, Knackunterdrückung und Verhalten des Abschaltpins. |
@@ -194,7 +194,7 @@ Firmware kann schlechtes analoges Design nicht vollständig verbergen. Prüfen S
 
 </div>
 
-Prüfen Sie bei Produkten mit HF und analogem Audio die Störgeräusche unter realen Bedingungen: Bluetooth aktiv, Display in Betrieb, Ladegerät angeschlossen und endgültiges Gehäuse montiert.
+Prüfen Sie bei Produkten mit RF und analogem Audio die Störgeräusche unter realen Bedingungen: Bluetooth aktiv, Display in Betrieb, Ladegerät angeschlossen und endgültiges Gehäuse montiert.
 
 ## Leistungsaufnahme bei Audio { #power-considerations-for-audio }
 
@@ -245,24 +245,24 @@ Bewahren Sie eine geprüfte WAV-/PCM-Referenzdatei und eine geprüfte Aufnahme v
 
 ## Häufige Fehler { #common-mistakes }
 
-- Jedes Peripherie-Sample per CPU-Polling bedienen, statt hardwaregetaktete DMA zu nutzen.
-- Zu kleine oder schlecht verwaltete Puffer verwenden, die DMA-Fristen verfehlen; Doppelpufferung nutzen, wenn Treiber und Anwendungsfall sie unterstützen.
-- Mikrofontypen und -zahlen wählen, ohne PDM/I2S-Instanzen, herausgeführte Pins und gleichzeitig nutzbare Signalwege zu prüfen.
-- Bluetooth-Audio und lokales Audio als vollständig unabhängige Pfade behandeln, obwohl sie im Produkt gleichzeitig laufen.
-- Cache-Kohärenz und Besitzregeln für zwischen DMA und CPU geteilte Puffer ignorieren.
-- Ungenutzte Audiowege zwischen Sitzungen aktiv lassen oder einen für kontinuierliches Mithören erforderlichen Aufnahmeweg abschalten.
-- Sich auf ein komprimiertes Format festlegen, bevor bestätigt ist, dass der Decodieraufwand ins Leistungs- und CPU-Budget passt.
+- Bedienen Sie nicht jedes Peripherie-Sample per CPU-Polling, sondern nutzen Sie hardwaregetaktete DMA.
+- Verwenden Sie keine zu kleinen oder schlecht verwalteten Puffer, die DMA-Fristen verfehlen; nutzen Sie Doppelpufferung, wenn Treiber und Anwendungsfall sie unterstützen.
+- Wählen Sie Mikrofontypen und -zahlen erst, nachdem Sie PDM/I2S-Instanzen, herausgeführte Pins und gleichzeitig nutzbare Signalwege geprüft haben.
+- Behandeln Sie Bluetooth-Audio und lokales Audio nicht als vollständig unabhängige Pfade, wenn sie im Produkt gleichzeitig laufen.
+- Ignorieren Sie nicht die Cache-Kohärenz- und Zuständigkeitsregeln für Puffer, die DMA und CPU gemeinsam nutzen.
+- Lassen Sie ungenutzte Audiowege nicht zwischen Sitzungen aktiv und schalten Sie keinen Aufnahmeweg ab, den kontinuierliches Mithören erfordert.
+- Legen Sie sich nicht auf ein komprimiertes Format fest, bevor Sie bestätigt haben, dass der Decodieraufwand ins Leistungs- und CPU-Budget passt.
 
 ## Inbetriebnahme-Checkliste { #bring-up-checklist }
 
-- [ ] Mikrofontypen und Kanalzahlen, PDM/I2S-Instanzen, herausgeführte Pins und unterstützte gleichzeitige Signalwege für das konkrete Gerät und Board prüfen.
-- [ ] Abtastrate, gespeicherte Sample-Breite, Kanalanordnung und Puffergrößen für Aufnahme und Wiedergabe festlegen.
-- [ ] Den gewählten Aufnahmeweg über ADC/AUDPRC, PDM oder I2S und den Wiedergabeweg über DAC oder I2S in Betrieb nehmen; vor Vollduplex jede Richtung einzeln testen.
-- [ ] Nach erfolgreicher Hardwareprüfung unterstützte Sitzungen mit Audio Server und den zugehörigen Treibern integrieren; direkte HAL-Tests zur Diagnose beibehalten.
-- [ ] Audioformat (PCM/MP3/Opus) wählen und gegebenenfalls den Decodieraufwand einschließlich CPU-Last, Speicherbedarf und Energie messen.
-- [ ] DMA-Pufferbesitz, Ausrichtung sowie Cache-Bereinigung und -Invalidierung prüfen.
-- [ ] Lokales Audio und Bluetooth-Audio gleichzeitig testen, wenn das Produkt beide verwendet.
-- [ ] Leistungsaufnahme im aktiven und inaktiven Zustand messen; Abschalt- und Neustartsequenzen, Pinzustände und den für kontinuierliches Mithören erforderlichen Aufnahmeweg prüfen.
+- [ ] Prüfen Sie Mikrofontypen und Kanalzahlen, PDM/I2S-Instanzen, herausgeführte Pins und gleichzeitig nutzbare Signalwege für das konkrete Gerät und Entwicklungsboard.
+- [ ] Legen Sie Abtastrate, gespeicherte Sample-Breite, Kanalanordnung und Puffergrößen für Aufnahme und Wiedergabe fest.
+- [ ] Nehmen Sie den gewählten Aufnahmeweg über ADC/AUDPRC, PDM oder I2S und den Wiedergabeweg über DAC oder I2S in Betrieb; testen Sie vor Vollduplex jede Richtung einzeln.
+- [ ] Integrieren Sie nach erfolgreicher Hardwareprüfung unterstützte Sitzungen mit Audio Server und den zugehörigen Treibern; behalten Sie direkte HAL-Tests zur Diagnose bei.
+- [ ] Wählen Sie das Audioformat (PCM/MP3/Opus) und messen Sie gegebenenfalls den Decodieraufwand einschließlich CPU-Last, Speicherbedarf und Energie.
+- [ ] Prüfen Sie DMA-Pufferbesitz, Ausrichtung sowie Cache-Bereinigung und -Invalidierung.
+- [ ] Testen Sie lokales Audio und Bluetooth-Audio gleichzeitig, wenn das Produkt beide verwendet.
+- [ ] Messen Sie die Leistungsaufnahme im aktiven und inaktiven Zustand; prüfen Sie Abschalt- und Neustartsequenzen, Pinzustände und den für kontinuierliches Mithören erforderlichen Aufnahmeweg.
 
 ## Wichtigste Erkenntnisse { #key-takeaways }
 

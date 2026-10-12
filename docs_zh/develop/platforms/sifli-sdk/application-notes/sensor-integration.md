@@ -191,7 +191,7 @@ int lsm6dsl_gpio_int_enable(void)
 注册分为两部分：
 
 1. 分配一个或多个 `rt_sensor_device` 实例，并调用 `rt_hw_sensor_register` 注册。
-2. 提供 `sensor_ops` 回调，实现数据读取、模式控制以及休眠 / 唤醒。
+2. 提供 `sensor_ops` 回调，实现数据读取、模式控制以及睡眠 / 唤醒。
 
 SDK 指南中的 BMP280 示例分别注册温度和气压通道，设置单位和范围，复制公共配置，并让两个设备共享回调表：
 

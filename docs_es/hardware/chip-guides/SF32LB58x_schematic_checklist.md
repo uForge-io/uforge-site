@@ -1,6 +1,6 @@
 ---
 icon: lucide/list-checks
-description: "Lista de comprobación para revisar los esquemas del MCU SF32LB58x, incluidos alimentación, reloj, RF, almacenamiento, pantalla y fabricación."
+description: "Lista de comprobación para revisar los esquemáticos de la MCU SF32LB58x, incluidos alimentación, reloj, RF, almacenamiento, pantalla y fabricación."
 tags:
     - Hardware
     - Chip
@@ -14,7 +14,7 @@ hide:
 !!! note "Parte de la guía de diseño de hardware SF32LB58x"
     Esta página cubre la lista de comprobación detallada del esquemático de la sección 5.8. Vuelva a las [Directrices de diseño esquemático](SF32LB58x_schematic_design.md).
 
-## 5.8. Lista de comprobación del esquema { #58-schematic-checklist }
+## 5.8. Lista de comprobación del esquemático { #58-schematic-checklist }
 
 Cada tabla corresponde a un bloque funcional del esquemático. Determine cuándo se aplica cada punto según las condiciones que indique: revise los puntos obligatorios cuando se cumplan esas condiciones y los opcionales cuando se utilice la función o la opción de diseño correspondiente.
 
@@ -56,10 +56,10 @@ Cada tabla corresponde a un bloque funcional del esquemático. Determine cuándo
 | 16 | La tensión de alimentación de AVDD_BRF es de 1,8 V-3,3 V y debe coincidir con la de VDD1 | Obligatorio |
 | 17 | La tensión de alimentación de AVDD33_AUD es de 3,3 V | Obligatorio |
 | 18 | La tensión de alimentación de AVDD18_DSI es de 1,8 V | Obligatorio |
-| 19 | Cuando SF30147C suministre alimentación, la interfaz de control TWI debe usar pines PB del MCU y estos deben ser pines PD | Obligatorio |
+| 19 | Cuando SF30147C suministre alimentación, la interfaz de control TWI debe usar pines PB de la MCU y estos deben ser pines PD | Obligatorio |
 | 20 | El circuito de carga debe incluir gestión de la ruta de alimentación para que el sistema pueda alimentarse desde la entrada de 5 V del cargador cuando la tensión de la batería sea demasiado baja | Obligatorio |
 | 21 | Cuando SF30147C suministre alimentación, utilice la interfaz TWI de control dedicada del chip | Obligatorio |
-| 22 | Cuando SF30147C suministre alimentación, los raíles controlados mediante EN deben usar PVDD o AVDD como dominio de alimentación de la señal EN; no controle EN desde una GPIO del MCU. Como alternativa, conecte EN a tierra y controle mediante registros la salida del raíl correspondiente | Obligatorio |
+| 22 | Cuando SF30147C suministre alimentación, los raíles controlados mediante EN deben usar PVDD o AVDD como dominio de alimentación de la señal EN; no controle EN desde una GPIO de la MCU. Como alternativa, conecte EN a tierra y controle mediante registros la salida del raíl correspondiente | Obligatorio |
 | 23 | Cuando SF30147C suministre alimentación, <span class="flag-red">BUCK y LDO1</span> solo se pueden controlar mediante sus señales de habilitación respectivas, EN_BUCK y EN_LDO1; no se ofrece control interno por registros | Obligatorio |
 | 24 | En 58x, las alimentaciones PVDD y VDDIOB deben coincidir. Si PVDD es inferior a VDDIOB, por ejemplo VDDIOB = 3,3 V y PVDD = 1,8 V, VDDIOB presenta una fuga de aproximadamente 15 µA en Standby y Hibernate | Obligatorio |
 | 25 | En 58x, el pin B4 es VDD_EXT1 y el pin B5 es VDD_EXT2; se pueden dejar sin conectar en el diseño | Obligatorio |
@@ -67,7 +67,7 @@ Cada tabla corresponde a un bloque funcional del esquemático. Determine cuándo
 </div>
 
 !!! note "Aclaración sobre la fuente"
-    El punto 19 de la lista de comprobación de alimentación de la hoja de cálculo indica que la interfaz de control TWI debe usar pines PB del MCU y que esos pines deben ser «PD». El punto 21 pide, por separado, utilizar la interfaz TWI dedicada del chip. La hoja no define «PD» ni explica cómo se relacionan ambos requisitos. La nota de aplicación de hardware de OpenSiFli indica que el SF32LB58x emula las señales TWI con dos GPIO para controlar el SF30147C. Antes de cerrar el esquemático, confirme con SiFli qué interfaz y qué pines deben utilizarse.
+    El punto 19 de la lista de comprobación de alimentación de la hoja de cálculo indica que la interfaz de control TWI debe usar pines PB de la MCU y que esos pines deben ser «PD». El punto 21 pide, por separado, utilizar la interfaz TWI dedicada del chip. La hoja no define «PD» ni explica cómo se relacionan ambos requisitos. La nota de aplicación de hardware de OpenSiFli indica que el SF32LB58x emula las señales TWI con dos GPIO para controlar el SF30147C. Antes de cerrar el esquemático, confirme con SiFli qué interfaz y qué pines deben utilizarse.
 
 ### 5.8.3. Condensadores e inductores de alimentación { #583-power-supply-capacitors-and-inductors }
 
@@ -161,7 +161,7 @@ Cada tabla corresponde a un bloque funcional del esquemático. Determine cuándo
 | N.º | Punto de comprobación | Categoría |
 |:---|:---|:---|
 | 1 | MODE tiene un pull-down interno; reserve un pull-up de 10 kΩ a VDDIOA y ponga MODE a nivel alto durante la descarga del programa | Obligatorio |
-| 2 | <span class="flag-red">La señal MODE tiene un punto de prueba reservado y debe llevarse hasta el útil de programación de producción</span> | Obligatorio |
+| 2 | <span class="flag-red">La señal MODE tiene un punto de prueba reservado y debe llevarse hasta el útil de grabación de producción</span> | Obligatorio |
 
 </div>
 
@@ -176,7 +176,7 @@ Cada tabla corresponde a un bloque funcional del esquemático. Determine cuándo
 | 1 | Anote en la señal ANT el requisito de impedancia característica single-ended de 50 Ω | Obligatorio |
 | 2 | Reserve una red de adaptación tipo pi en ANT: un condensador paralelo NC (sin montar) y un condensador en serie de 15 pF | Obligatorio |
 | 3 | Si se requiere filtrado de emisiones espurias, reserve una red de adaptación tipo pi con un inductor en serie de 2,7 nH y un condensador paralelo de 2 pF | Opcional |
-| 4 | Si un PA RF externo requiere que el MCU controle RXEN y TXEN, use exclusivamente PB39 para PA RXEN y PB40 para PA TXEN | Opcional |
+| 4 | Si un PA RF externo requiere que la MCU controle RXEN y TXEN, use exclusivamente PB39 para PA RXEN y PB40 para PA TXEN | Opcional |
 | 5 | <span class="flag-red">Si el chip Wi-Fi admite arbitraje de coexistencia de antena:<br>(1) Se recomienda el modo de 3 hilos: el chip Wi-Fi controla el conmutador RF de la antena Bluetooth/Wi-Fi y realiza el arbitraje. Emplea BT_ACTIVE y BT_PRIORITY de Bluetooth para decidir si concede el uso de la antena a Bluetooth; WLAN_ACTIVE puede deshabilitar la transmisión/recepción Bluetooth durante la actividad Wi-Fi.<br>(2) BT_ACTIVE debe usar PB08 o PB45; WLAN_ACTIVE, PB09 o PB41; BT_PRIORITY puede usar cualquier GPIO PB.</span> | Opcional |
 | 6 | Si el chip Wi-Fi no admite arbitraje de coexistencia de antena:<br>(1) Se recomienda el modo de 1 hilo: Bluetooth controla el conmutador RF de la antena Bluetooth/Wi-Fi, arbitra mediante BT_ACTIVE y notifica al chip Wi-Fi.<br>(2) Si Wi-Fi puede emitir una señal de estado operativo, este esquema se puede ampliar al modo de 2 hilos: conecte la salida Wi-Fi a WLAN_ACTIVE para que Bluetooth pueda bloquear transmisiones/recepciones Bluetooth de baja prioridad mientras Wi-Fi está activo, sin afectar Bluetooth cuando Wi-Fi está inactivo.<br>(3) BT_ACTIVE debe usar PB08 o PB45; WLAN_ACTIVE debe usar PB09 o PB41 | Opcional |
 
@@ -190,8 +190,8 @@ Cada tabla corresponde a un bloque funcional del esquemático. Determine cuándo
 
 | N.º | Punto de comprobación | Categoría |
 |:---|:---|:---|
-| 1 | Se proporciona una tabla de asignación de recursos GPIO que coincide con el esquema | Obligatorio |
-| 2 | La asignación GPIO de la tabla de recursos coincide con el esquema | Obligatorio |
+| 1 | Se proporciona una tabla de asignación de recursos GPIO que coincide con el esquemático | Obligatorio |
+| 2 | La asignación GPIO de la tabla de recursos coincide con el esquemático | Obligatorio |
 | 3 | La asignación GPIO real sigue las recomendaciones de SiFli; consulte el archivo de configuración de E/S de la EVB | Obligatorio |
 
 </div>
@@ -205,7 +205,7 @@ Cada tabla corresponde a un bloque funcional del esquemático. Determine cuándo
 | N.º | Punto de comprobación | Categoría |
 |:---|:---|:---|
 | 1 | <span class="flag-red">Las fuentes de interrupción de activación de HCPU son correctas: PA64, PA65, PA66, PA67, PA68 y PA69, seis pines en total</span> | Obligatorio |
-| 2 | <span class="flag-red">Las fuentes de interrupción de activación de LCPU son correctas: PB54, PB55, PB56, PB57, PB58, PB59, PBR0, PBR1, PBR2 y PBR3, diez pines en total. Después de que el MCU despierte, PBR0-PBR3 no pueden recibir señales de interrupción</span> | Obligatorio |
+| 2 | <span class="flag-red">Las fuentes de interrupción de activación de LCPU son correctas: PB54, PB55, PB56, PB57, PB58, PB59, PBR0, PBR1, PBR2 y PBR3, diez pines en total. Después de que la MCU se despierte, PBR0-PBR3 no pueden recibir señales de interrupción</span> | Obligatorio |
 | 3 | <span class="flag-red">Las señales de interrupción y control de los periféricos de LCPU, como el sensor G y el sensor de frecuencia cardíaca, deben conectarse a GPIO PB</span> | Obligatorio |
 
 </div>
@@ -223,8 +223,8 @@ Cada tabla corresponde a un bloque funcional del esquemático. Determine cuándo
 | 3 | PBR0 habilita las alimentaciones VDDIOSA y VDDIOSB | Obligatorio |
 | 4 | MPI3 o MPI4 se pueden usar para memoria NOR o SPI NAND externa | Obligatorio |
 | 5 | El pin HOLD# de la memoria SPI NAND tiene un pull-up de 10 kΩ a la alimentación de dicha memoria | Obligatorio |
-| 6 | Si en producción hay que programar memoria Flash externa en MPI3 o MPI4, la herramienta de descarga pone PA43 a nivel alto para habilitar la alimentación de MPI3 | Obligatorio |
-| 7 | Si en producción hay que programar eMMC o SD NAND en SDIO1, la herramienta de descarga habilita la alimentación correspondiente | Obligatorio |
+| 6 | Si en producción hay que grabar memoria Flash externa en MPI3 o MPI4, la herramienta de descarga pone PA43 a nivel alto para habilitar la alimentación de MPI3 | Obligatorio |
+| 7 | Si en producción hay que grabar eMMC o SD NAND en SDIO1, la herramienta de descarga habilita la alimentación correspondiente | Obligatorio |
 | 8 | <span class="flag-red">Los interruptores de tensión controlados por PBR0/PA43 se activan en alto y se desactivan en bajo. En Hibernate, PBR0 controla VDDIOSA/VDDIOSB, VDDIOSC permanece siempre alimentada y PA43 controla la alimentación de la Flash externa</span> | Obligatorio |
 | 9 | Si la interfaz SD1 se conecta a eMMC o SD NAND, las señales están conectadas correctamente | Obligatorio |
 | 10 | El nivel de la interfaz de E/S de eMMC o SD NAND coincide con VDDIOA2 | Obligatorio |
@@ -251,7 +251,7 @@ Cada tabla corresponde a un bloque funcional del esquemático. Determine cuándo
 
 </div>
 
-En el esquema de referencia de la EVB, VCC de la SPI NAND Flash se conecta a VDD18_MPI4; esta alimentación también lleva condensadores de 0,1 µF y 1 µF (6,3 V). Estas asignaciones de pines y valores de componentes corresponden únicamente a la referencia de la EVB. Antes de aplicarlos, compruébelos con el encapsulado del chip seleccionado, la hoja de datos de la Flash y la configuración de multiplexación de pines de la placa.
+En el esquemático de referencia de la EVB, VCC de la SPI NAND Flash se conecta a VDD18_MPI4; esta alimentación también lleva condensadores de 0,1 µF y 1 µF (6,3 V). Estas asignaciones de pines y valores de componentes corresponden únicamente a la referencia de la EVB. Antes de aplicarlos, compruébelos con el encapsulado del chip seleccionado, la hoja de datos de la Flash y la configuración de multiplexación de pines de la placa.
 
 La alimentación de E/S de SD1, VDDIOA2, admite 1,8 V o 3,3 V y debe ajustarse al nivel de E/S del periférico. SiFli recomienda una interfaz de 1,8 V para SPI NAND Flash y eMMC. Los dispositivos SD NAND solo admiten 3,3 V; por tanto, al utilizar SD NAND, VDDIOA2 debe configurarse a 3,3 V.
 
@@ -290,7 +290,7 @@ La alimentación de E/S de SD1, VDDIOA2, admite 1,8 V o 3,3 V y debe ajustarse a
 | 2 | El rango de entrada GPADC es correcto; la tensión máxima de entrada no debe superar AVDD33_ANA | Opcional |
 | 3 | Divisor de tensión de batería recomendado: resistencia de 470 kΩ y 1 % en el lado de alimentación, resistencia de 1 MΩ y 1 % a tierra y condensador de filtro de 100 nF | Obligatorio |
 | 4 | <span class="flag-red">Para cada señal con divisor resistivo medida por GPADC, use resistencias divisoras con tolerancia del 1 %; cada canal GPADC debe tener un condensador de filtro de 100 nF colocado cerca del pin del chip</span> | Obligatorio |
-| 5 | <span class="flag-red">El ADC puede detectar varios botones y ahorrar pines; por ejemplo, si PB32 se usa como botón ADC, no use la batería como alimentación pull-up</span> | Obligatorio |
+| 5 | <span class="flag-red">El ADC puede detectar varios botones y ahorrar pines; por ejemplo, si PB32 se usa como botón ADC, no use la batería como fuente de tensión para el pull-up</span> | Obligatorio |
 
 </div>
 
@@ -350,7 +350,7 @@ La alimentación de E/S de SD1, VDDIOA2, admite 1,8 V o 3,3 V y debe ajustarse a
 | N.º | Punto de comprobación | Categoría |
 |:---|:---|:---|
 | 1 | La asignación de I2C tiene en cuenta la distribución entre HCPU y LCPU y si el dispositivo debe funcionar en modo de bajo consumo | Obligatorio |
-| 2 | Los pull-ups de I2C tienen el valor de resistencia adecuado; para funcionar a 400 kHz se recomiendan pull-ups de 2,2 kΩ. Use el dominio de tensión del periférico y desconecta la alimentación de los pull-ups junto con el periférico durante el apagado | Obligatorio |
+| 2 | Los pull-ups de I2C tienen el valor de resistencia adecuado; para funcionar a 400 kHz se recomiendan pull-ups de 2,2 kΩ. Use el dominio de tensión del periférico y desconecte la alimentación de los pull-ups junto con el periférico durante el apagado | Obligatorio |
 | 3 | Cuando sea necesario, la señal de interrupción de I2C permite la activación por hardware | Obligatorio |
 | 4 | Si varios dispositivos comparten un bus I2C, sus direcciones son distintas | Obligatorio |
 
@@ -366,7 +366,7 @@ La alimentación de E/S de SD1, VDDIOA2, admite 1,8 V o 3,3 V y debe ajustarse a
 |:---|:---|:---|
 | 1 | <span class="flag-red">I2S1 solo admite entrada y funciona únicamente en modo maestro; el micrófono está conectado a I2S1 según lo previsto</span> | Opcional |
 | 2 | <span class="flag-red">I2S2 admite entrada y salida únicamente en modo maestro y puede conectarse a dispositivos DAC/ADC de un códec externo</span> | Opcional |
-| 3 | <span class="flag-red">I2S3 admite entrada y salida únicamente en modo maestro; es adecuado para casos de bajo consumo en los que HCPU duerme y LCPU recibe/procesa audio mediante I2S3</span> | Opcional |
+| 3 | <span class="flag-red">I2S3 admite entrada y salida únicamente en modo maestro; es adecuado para casos de bajo consumo en los que HCPU está en reposo y LCPU recibe/procesa audio mediante I2S3</span> | Opcional |
 | 4 | Las señales I2S están conectadas correctamente | Opcional |
 | 5 | <span class="flag-red">La conexión del micrófono digital a la interfaz I2S1 es correcta</span> | Opcional |
 | 6 | El nivel lógico de E/S del periférico coincide con el del chip principal | Opcional |
@@ -389,8 +389,8 @@ La alimentación de E/S de SD1, VDDIOA2, admite 1,8 V o 3,3 V y debe ajustarse a
 | 6 | Cada una de las dos entradas ADC de audio debe incluir un condensador de bloqueo de CC de al menos 2,2 µF | Opcional |
 | 7 | Cada ruta P y N de salida DAC tiene una resistencia en serie de 1 kΩ y un condensador de 1,5 nF entre ambas | Opcional |
 | 8 | AW8155 es el amplificador de audio recomendado; si se utiliza, configúrelo por software en el modo 4 / Clase AB | Opcional |
-| 9 | <span class="flag-red">Si la salida PA de audio se realimenta a la entrada ADC del MCU, añada un divisor y un filtro RC o filtrado digital adicional. La tensión dividida debe permanecer dentro del rango de entrada del ADC y la frecuencia de corte del filtro RC debe ser de 20 kHz</span> | Opcional |
-| 10 | <span class="flag-red">Si no se utiliza la ruta ADC de audio analógico integrada en el chip, se recomienda conectar ADC1P/ADC1N y ADC2P/ADC2N a tierra, cada par mediante resistencias en serie de 0 Ω</span> | Opcional |
+| 9 | <span class="flag-red">Si la salida PA de audio se realimenta a la entrada ADC de la MCU, añada un divisor y un filtro RC o filtrado digital adicional. La tensión dividida debe permanecer dentro del rango de entrada del ADC y la frecuencia de corte del filtro RC debe ser de 20 kHz</span> | Opcional |
+| 10 | <span class="flag-red">Si no se utiliza la ruta ADC de audio analógico integrada en el chip, se recomienda conectar cada señal —ADC1P, ADC1N, ADC2P y ADC2N— a tierra mediante su propia resistencia en serie de 0 Ω</span> | Opcional |
 
 </div>
 
@@ -402,7 +402,7 @@ La alimentación de E/S de SD1, VDDIOA2, admite 1,8 V o 3,3 V y debe ajustarse a
 
 | N.º | Punto de comprobación | Categoría |
 |:---|:---|:---|
-| 1 | La conexión SPI es correcta; SDO y SDI están cruzados correctamente entre el MCU y el periférico | Opcional |
+| 1 | La conexión SPI es correcta; SDO y SDI están cruzados correctamente entre la MCU y el periférico | Opcional |
 | 2 | Se han confirmado y se cumplen los requisitos de temporización del periférico SPI | Opcional |
 | 3 | El nivel lógico de E/S del periférico coincide con el del chip principal | Opcional |
 
@@ -436,9 +436,9 @@ La alimentación de E/S de SD1, VDDIOA2, admite 1,8 V o 3,3 V y debe ajustarse a
 
 | N.º | Punto de comprobación | Categoría |
 |:---|:---|:---|
-| 1 | La asignación de pines PWM para la retroiluminación es correcta; use un GPTIMx distinto del PWM del motor, preferentemente en la interfaz PB, para evitar que una reducción de frecuencia de HCPU afecte a la retroiluminación | Obligatorio |
-| 2 | La asignación de pines PWM del motor es correcta; use un GPTIMx distinto del PWM de la retroiluminación, preferentemente en la interfaz PB, para evitar que una reducción de frecuencia de HCPU afecte a la vibración | Obligatorio |
-| 3 | Para controlar el motor mediante PWM, seleccione una GPIO deshabilitada por defecto a fin de evitar comportamientos anómalos durante la programación del firmware cuando se utiliza un motor SMT | Obligatorio |
+| 1 | La asignación de pines PWM para la retroiluminación es correcta; use un GPTIMx distinto de la PWM del motor, preferentemente en la interfaz PB, para evitar que una reducción de frecuencia de HCPU afecte a la retroiluminación | Obligatorio |
+| 2 | La asignación de pines PWM del motor es correcta; use un GPTIMx distinto de la PWM de la retroiluminación, preferentemente en la interfaz PB, para evitar que una reducción de frecuencia de HCPU afecte a la vibración | Obligatorio |
+| 3 | Para controlar el motor mediante PWM, seleccione una GPIO deshabilitada por defecto a fin de evitar comportamientos anómalos durante la grabación del firmware cuando se utiliza un motor SMT | Obligatorio |
 | 4 | Las señales que requieran salida PWM deben usar la interfaz PB; compruebe también que no haya comportamientos anómalos durante el arranque en frío | Obligatorio |
 
 </div>
@@ -467,7 +467,7 @@ La alimentación de E/S de SD1, VDDIOA2, admite 1,8 V o 3,3 V y debe ajustarse a
 |:---|:---|:---|
 | 1 | La conexión de la interfaz USB es correcta | Opcional |
 | 2 | La interfaz USB tiene protección ESD | Opcional |
-| 3 | Durante el funcionamiento normal, mientras USB permanezca habilitado, el lado del PC/dispositivo puede detectar la conexión y desconexión.<br>Si se deben detectar conexiones y desconexiones mientras el MCU está en suspensión, añada un divisor resistivo en VBUS; su salida debe ser un nivel alto que coincida con la tensión de E/S y conectarse a un pin de activación del MCU. Se recomienda compartir el pin de activación de detección de conexión del cargador | Opcional |
+| 3 | Durante el funcionamiento normal, mientras USB permanezca habilitado, el lado del PC/dispositivo puede detectar la conexión y desconexión.<br>Si se deben detectar conexiones y desconexiones mientras la MCU está en suspensión, añada un divisor resistivo en VBUS; su salida debe ser un nivel alto que coincida con la tensión de E/S y conectarse a un pin de activación de la MCU. Se recomienda compartir el pin de activación de detección de conexión del cargador | Opcional |
 
 </div>
 
@@ -485,14 +485,14 @@ La alimentación de E/S de SD1, VDDIOA2, admite 1,8 V o 3,3 V y debe ajustarse a
 | 4 | <span class="flag-red">Para el SF32LB567 se recomienda LPTIM3: LPTIM3_OUT y LPTIM3_OUT_BAR emiten desde los pines PBR señales de 21-25 kHz con ciclos de trabajo distintos y polaridad opuesta</span> | Opcional |
 | 5 | <span class="flag-red">Las señales de 21-25 kHz con polaridad opuesta y ciclos de trabajo distintos también pueden salir desde HCPU ATIM. Seleccione señales ATIMx_CHx y ATIMx_CHxN adecuadas junto con Pin_Config y tenga en cuenta el efecto de reducir la frecuencia de HCPU</span> | Opcional |
 | 6 | PBR0-PBR5 pueden emitir una señal de reloj de 32 kHz | Opcional |
-| 7 | <span class="flag-red">PBR0-PBR3 se pueden configurar como entradas de activación; sin embargo, después de que el MCU despierte, PBR0-PBRx no puede recibir interrupciones y solo puede detectar niveles 0/1. Úselo con precaución</span> | Opcional |
+| 7 | <span class="flag-red">PBR0-PBR3 se pueden configurar como entradas de activación; sin embargo, después de que la MCU despierte, PBR0-PBRx no pueden recibir interrupciones y solo pueden detectar niveles 0/1. Utilice esta función con precaución</span> | Opcional |
 
 </div>
 
 !!! note "Alcance de la fuente y verificación técnica"
     El punto 4 de la lista PBR de la [hoja de cálculo original](https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) menciona SF32LB567. Sin embargo, la hoja no confirma que los puntos 4 y 5 de la lista PBR sean recomendaciones para SF32LB58x; consulte a SiFli antes de aplicarlos.
 
-    El punto 6 de la lista de comprobación de almacenamiento de la hoja de cálculo indica que, durante la programación en producción, se debe poner PA43 a nivel alto para habilitar la «alimentación de MPI3». En cambio, la [nota oficial de aplicación de hardware de SF32LB58x](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md) describe PA43 como el control de alimentación de la Flash externa y especifica que debe ponerse a nivel alto para alimentarla. La fila de la lista conserva el texto de la hoja. Antes de cerrar el procedimiento de programación en producción, confirme con SiFli qué línea de alimentación y qué interfaces controla realmente PA43.
+    El punto 6 de la lista de comprobación de almacenamiento de la hoja de cálculo indica que, durante la grabación en producción, se debe poner PA43 a nivel alto para habilitar la «alimentación de MPI3». En cambio, la [nota oficial de aplicación de hardware de SF32LB58x](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md) describe PA43 como el control de alimentación de la Flash externa y especifica que debe ponerse a nivel alto para alimentarla. La fila de la lista conserva el texto de la hoja. Antes de cerrar el procedimiento de grabación en producción, confirme con SiFli qué línea de alimentación y qué interfaces controla realmente PA43.
 
 ### 5.8.26. Consumo de energía { #5826-power-consumption }
 
@@ -519,7 +519,7 @@ La alimentación de E/S de SD1, VDDIOA2, admite 1,8 V o 3,3 V y debe ajustarse a
 | N.º | Punto de comprobación | Categoría |
 |:---|:---|:---|
 | 1 | Reserve puntos de prueba SWD para VBAT, GND, SWDIO, SDCLK, MODE, RSTN, VDDIOA y VDDIOB | Obligatorio |
-| 2 | Si se necesita una placa de descarga fuera de línea para programar el firmware, reserve puntos de prueba para VBAT, GND, UART4_TXD, UART4_RXD, MODE, RSTN y VDDIOA | Opcional |
+| 2 | Si se necesita una placa de descarga fuera de línea para grabar el firmware, reserve puntos de prueba para VBAT, GND, UART4_TXD, UART4_RXD, MODE, RSTN y VDDIOA | Opcional |
 | 3 | Si se requiere calibración del cristal, reserve un punto de prueba para ella; se recomienda PB45 | Opcional |
 
 </div>

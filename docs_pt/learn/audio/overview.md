@@ -93,7 +93,7 @@ Os recursos de áudio variam entre as famílias. Consulte o datasheet do modelo 
 |:---|:---|:---|:---|:---|
 | **SF32LB52x** | 1 ADC + 1 DAC | 1 (2) | 1 | Acessórios de áudio Bluetooth com foco em baixo custo e HMIs compactas com suporte a voz. |
 | **SF32LB55x** | Nenhum; use um codec de áudio externo para áudio analógico. | SF32LB551/555: 1 (2); SF32LB557: 2 (4) | SF32LB551/555: 1; SF32LB557: 2 | Dispositivos vestíveis BLE e produtos com muitos sensores, nos quais o áudio é secundário. |
-| **SF32LB56x** | 1 ADC + 1 DAC | 2 (4) | 1 | Produtos com HMI e telas mais avançadas que também precisam captar voz com vários microfones. |
+| **SF32LB56x** | 1 ADC + 1 DAC | 2 (4) | 1 | Produtos com HMI e displays mais avançados que também precisam captar voz com vários microfones. |
 | **SF32LB57x** | 2 ADC + 1 DAC | 2 (4) | 2 | Captura de voz com vários microfones e reprodução local. |
 | **SF32LB58x** | 2 ADC + 2 DAC | 2 (4) | 3 | Produtos topo de linha que combinam áudio, gráficos, IA e conectividade complexa. |
 
@@ -246,7 +246,7 @@ Mantenha um arquivo WAV/PCM de referência validado e uma amostra de áudio vali
 ## Erros comuns { #common-mistakes }
 
 - Atender cada amostra do periférico por polling da CPU em vez de DMA sincronizado pelo hardware.
-- Usar buffers insuficientes ou mal gerenciados, que não atendem aos prazos de DMA; usar bufferização dupla quando o driver oferecer suporte e ela for adequada.
+- Usar buffers insuficientes ou mal gerenciados, que não atendem aos prazos de DMA; usar bufferização dupla quando houver suporte e ela for adequada.
 - Escolher tipos e quantidades de microfone sem verificar as instâncias PDM/I2S, os pinos acessíveis e os caminhos simultâneos.
 - Tratar o áudio Bluetooth e o áudio local como totalmente independentes quando funcionarão simultaneamente no produto real.
 - Ignorar a coerência de cache e as regras de propriedade dos buffers compartilhados entre DMA e CPU.

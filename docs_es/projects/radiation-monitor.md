@@ -14,16 +14,16 @@ tags:
 
 [SiFliSparks/RadiationMonitor](https://github.com/SiFliSparks/RadiationMonitor) es un visor portátil de intensidad de señal en la banda Bluetooth, basado en SF32LB52 y SiFli-SDK. El firmware recorre 79 puntos de frecuencia entre 2402 y 2480 MHz y representa los valores recibidos en un gráfico de barras LVGL. KEY2 inicia o detiene el barrido y permite consultar el historial guardado.
 
-El proyecto sirve para estudiar su ruta de barrido de la banda Bluetooth, el procesamiento de datos en tiempo real, la visualización de frecuencias y la interacción con un solo botón. No es un analizador de espectro calibrado ni identifica el origen de la señal recibida. Las emisiones cercanas de 2,4 GHz y las condiciones de medida pueden influir en el gráfico. Sin calibración ni una comparación en condiciones controladas, sus valores no son adecuados para mediciones reglamentarias, de certificación o de RF de precisión.
+El proyecto permite estudiar el barrido de la banda Bluetooth, el procesamiento de datos en tiempo real, la visualización de frecuencias y la interacción con un solo botón. No es un analizador de espectro calibrado ni identifica el origen de la señal recibida. Las transmisiones cercanas en 2,4 GHz y las condiciones de medida pueden influir en el gráfico. Sin calibración ni una comparación en condiciones controladas, sus valores no son adecuados para mediciones reglamentarias, de certificación o de RF de precisión.
 
 ![Interfaz de Radiation Monitor en funcionamiento](https://raw.githubusercontent.com/SiFliSparks/RadiationMonitor/main/assets/img.jpg)
 <div align="center"><em>Interfaz de gráfico de barras de 79 puntos de Radiation Monitor</em></div>
 
 ## ¿Por qué la implementación con SF32? { #why-the-sf32-implementation }
 
-SF32LB52 integra Bluetooth 5.3 de modo dual, un MCU de doble núcleo y capacidades de pantalla. El proyecto usa SiFli-SDK y LVGL para procesar localmente el muestreo de frecuencias, el suavizado, el historial y las actualizaciones de pantalla. Es un punto de partida útil para experimentar con un panel de visualización de RF, un indicador de interferencias en campo o una interfaz de diagnóstico de producto.
+SF32LB52 integra Bluetooth 5.3 de modo dual, una MCU de doble núcleo y capacidades de pantalla. El proyecto usa SiFli-SDK y LVGL para procesar localmente el muestreo de frecuencias, el suavizado, el historial y las actualizaciones de pantalla. Es un punto de partida útil para experimentar con un panel de visualización de RF, un indicador de interferencias en campo o una interfaz de diagnóstico de producto.
 
-El repositorio no especifica un procedimiento de calibración, un presupuesto de incertidumbre ni condiciones de medida trazables. Por ello, hay que volver a validar los resultados para las revisiones concretas del silicio, SDK y firmware, así como para la placa, la antena, la carcasa, el ruido de la placa y la temporización. Trasladar el método a otra placa SF32LB52 o a una PCB de producto exige validarlo de nuevo; una compilación correcta no demuestra que las mediciones sean equivalentes.
+El repositorio no especifica un procedimiento de calibración, un presupuesto de incertidumbre ni condiciones de medida trazables. Por ello, vuelva a validar los resultados para las revisiones concretas del silicio, el SDK y el firmware, así como para la placa, la antena, la carcasa, el ruido de la placa y la temporización. Trasladar el método a otra placa SF32LB52 o a una PCB de producto exige una nueva validación; una compilación correcta no demuestra que las mediciones sean equivalentes.
 
 ## Resultado, alcance y criterios de entrada { #outcome-scope-and-entry-criteria }
 
@@ -63,7 +63,7 @@ Antes de empezar, tenga preparado:
 
 | Componente | Especificación necesaria | Función | Estado | Dónde obtenerlo | Compatibilidad y notas sobre sustituciones |
 |:-----------|:-------------------------|:--------|:-------|:----------------|:-------------------------------------------|
-| SF32LB52-LCHSPI-ULP / Huangshan Pi | Use como referencia inicial el destino de placa SCons de SiFli `sf32lb52-lchspi-ulp`; registre la revisión exacta de la placa, la antena y la pantalla | Ejecuta el escaneo Bluetooth, el gráfico, los controles y la interfaz de historial | Obligatorio; hay que confirmar el montaje exacto | [Referencia relacionada de μForge DevKit-ULP](../sf32-products/devkits/SF32LB52-DevKit-ULP.md); [lista de placas compatibles de SiFli](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/index.html); [página LCKFB](https://lckfb.com/project/detail/lckfb-hspi-sf32lb52-ulp?param=baseInfo); [código del proyecto](https://github.com/SiFliSparks/RadiationMonitor) | El directorio de salida `build_sf32lb52-lchspi-ulp_hcpu` del README no identifica la PCB, la antena ni la revisión de pantalla exactas |
+| SF32LB52-LCHSPI-ULP / Huangshan Pi | Use como referencia inicial el nombre de placa para SCons de SiFli `sf32lb52-lchspi-ulp`; registre la revisión exacta de la placa, la antena y la pantalla | Ejecuta el barrido Bluetooth, el gráfico, los controles y la interfaz del historial | Obligatorio; confirme el montaje exacto | [Referencia relacionada de μForge DevKit-ULP](../sf32-products/devkits/SF32LB52-DevKit-ULP.md); [lista de placas compatibles de SiFli](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/index.html); [página LCKFB](https://lckfb.com/project/detail/lckfb-hspi-sf32lb52-ulp?param=baseInfo); [código del proyecto](https://github.com/SiFliSparks/RadiationMonitor) | El directorio de salida `build_sf32lb52-lchspi-ulp_hcpu` del README no identifica la PCB, la antena ni la revisión exactas de la pantalla |
 | Host, cable USB de datos y alimentación controlada | Host con las herramientas SiFli-SDK seleccionadas, cable con datos, registro serie y fuente supervisada | Compilar, descargar, observar y repetir mediciones | Obligatorio | [Inicio rápido de SiFli-SDK](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/index.html) | Registre puerto, tensión, versiones de host/herramientas y método de recuperación |
 
 </div>
@@ -148,7 +148,7 @@ Los principales dominios de fallo son la entrada RF/antena, el comportamiento de
 
 **Evidencia que se debe conservar:** revisiones de código/SDK/placa, registros de compilación/descarga, descripción del entorno, configuración de la fuente, distancia/orientación, registro serie, capturas de pantalla y resultado del reinicio.
 
-**Criterio de salida de la etapa 1:** dos arranques independientes barren y muestran 79 puntos; los cambios en el escenario controlado producen variaciones repetibles en la misma dirección; se han comprobado los índices de pantalla y las etiquetas de frecuencia.
+**Criterio de salida del punto de control 1:** dos arranques independientes barren y muestran 79 puntos; los cambios en el escenario controlado producen variaciones repetibles en la misma dirección; se han comprobado los índices de pantalla y las etiquetas de frecuencia.
 
 ## Etapa 2 — Validar el procesamiento, el historial y la recuperación { #stage-2-validate-processing-history-and-recovery }
 
@@ -169,18 +169,18 @@ Los principales dominios de fallo son la entrada RF/antena, el comportamiento de
 
 </div>
 
-**Criterio de salida de la etapa 2:** el suavizado, la profundidad del historial, el estado del botón y el comportamiento tras el reinicio coinciden con el código; los estados anómalos se pueden observar y no pasan inadvertidos.
+**Criterio de salida del punto de control 2:** el suavizado, la profundidad del historial, el estado del botón y el comportamiento tras el reinicio coinciden con el código; los estados anómalos se pueden observar y no pasan inadvertidos.
 
 ## Etapa 3 — Crear una base de código reproducible { #stage-3-build-a-reproducible-source-baseline }
 
-**Objetivo:** reconstruir desde un entorno limpio la imagen validada en la etapa 2.
+**Objetivo:** reconstruir desde un entorno limpio la imagen validada en la Etapa 2.
 
 1. Registre el commit del proyecto y del SDK, el sistema operativo anfitrión, las versiones de SCons y del compilador, y el argumento real de placa.
 2. Elimine los archivos de compilación, vuelva a configurar y compile; conserve las imágenes, la salida de memoria/particiones y los registros completos.
 3. Grabe el firmware con el script de descarga generado y registre el puerto, la velocidad en baudios y el resultado.
-4. Repita la compilación en otro ordenador o directorio limpio y vuelva a ejecutar las comprobaciones principales de la etapa 2.
+4. Repita la compilación en otro ordenador o directorio limpio y vuelva a ejecutar las comprobaciones principales de la Etapa 2.
 
-**Criterio de salida de la etapa 3:** el proyecto genera una imagen equivalente en comportamiento sin depender de archivos de placa no versionados, archivos generados ni resultados de compilación obsoletos.
+**Criterio de salida del punto de control 3:** el proyecto genera una imagen equivalente en comportamiento sin depender de archivos de placa no versionados, archivos generados ni resultados de compilación obsoletos.
 
 ## Etapa 4 — Aplicar un cambio controlado de medición o interfaz { #stage-4-make-one-controlled-measurement-or-ui-adaptation }
 
@@ -190,7 +190,7 @@ Entre los cambios posibles están registrar valores sin procesar, añadir etique
 
 Si añade calibración, defina la fuente de referencia, frecuencia, nivel de entrada, antena/cable, distancia, orientación, temperatura e incertidumbre. Un desplazamiento global rara vez basta para compensar la respuesta en frecuencia, las variaciones entre placas y los efectos de la carcasa.
 
-**Criterio de salida de la etapa 4:** el cambio supera las regresiones originales de 79 puntos, inicio/detención, historial, reinicio y fuente controlada; toda afirmación de precisión identifica el instrumento de referencia y las condiciones.
+**Criterio de salida del punto de control 4:** el cambio supera las regresiones originales de 79 puntos, inicio/detención, historial, reinicio y fuente controlada; toda afirmación de precisión identifica el instrumento de referencia y las condiciones.
 
 ## Etapa 5 — Revisión de preparación para producto { #stage-5-product-readiness-review }
 
@@ -203,7 +203,7 @@ El equipo debe responder:
 - ¿La latencia medida del barrido de 79 puntos con el suavizado verificado en el código satisface los requisitos de la interfaz?
 - ¿Cómo se resolverán los derechos de distribución y comerciales si RadiationMonitor y el código incorporado no tienen una licencia explícita de nivel superior?
 
-**Criterio de salida de la etapa 5:** hay responsables asignados para el objetivo de medición, el plan de calibración, la estrategia de concurrencia de radio, las licencias, el hardware y el software, y se registra una decisión de continuar, aplazar o detener.
+**Criterio de salida del punto de control 5:** hay responsables asignados para el objetivo de medición, el plan de calibración, la estrategia de concurrencia de radio, las licencias, el hardware y el software, y se registra una decisión de continuar, aplazar o detener.
 
 ## Traspaso a la fase de diseño del producto { #handoff-to-product-design }
 

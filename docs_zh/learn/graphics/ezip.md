@@ -29,7 +29,7 @@ eZip 适合纳入量产资源生成流程，不宜当作处理任意文件的通
 - **静态与动画资源。** GraphicsTool 可将 PNG、GIF 和 APNG 转换为 eZip 静态资源或 eZip-A 动画。
 - **支持器件上的硬件辅助解码。** 在选定芯片、SDK、源格式和驱动路径支持时，可减少应用 CPU 的解码负担。
 - **图形工具工作流。** 思澈科技（SiFli）的 GraphicsTool 支持常用源格式、尺寸调整、图像转换、批量处理以及 eZip/eZip-A 生成。
-- **与支持该功能的芯片上的 ePicasso 联动。** 直接输出可省去存放完整解码源图像的缓冲区，减少缓冲区容量需求和内存访问流量。
+- **在支持的器件上与 ePicasso 集成。** 直接输出可省去存放完整解码源图像的缓冲区，减少缓冲区容量需求和内存访问流量。
 
 “无损”指的是压缩过程不丢失编码器输入的像素数据，并不代表此前的转换也无损。缩放图像、将 RGB888 转为 RGB565 或丢弃 alpha 都可能在压缩前造成信息损失。校验时，应将解码结果与尺寸、像素格式相同的编码器输入比较；需要透明度时必须保留 alpha。
 
@@ -37,13 +37,13 @@ eZip 适合纳入量产资源生成流程，不宜当作处理任意文件的通
 
 对于图形资源，应以 PNG 作为实际基线：思澈科技（SiFli）将 eZip 描述为在保持图像无损和透明度支持的同时，压缩比略高于 PNG。实际文件缩减程度仍会受图像尺寸、像素格式、透明度、调色板使用和图像细节影响。应使用已批准的转换配置测量代表性资源，不应依据单一百分比进行容量预算。
 
-思澈科技（SiFli）的 EZIP 工具也支持使用 GZIP 或 LZ4 模式压缩通用文件。这与将图形资源转换为 eZip 格式是不同的处理流程。通用数据的压缩比取决于源数据：重复性或结构化数据可能压缩得较好；已经压缩过的 JPEG 图像、MP4 视频、ZIP 压缩包或加密数据，则可能几乎无法进一步压缩。用于非图形数据前，应验证输出大小以及目标器件支持的解压路径。
+思澈科技（SiFli）的 EZIP 工具也支持使用 GZIP 或 LZ4 模式压缩通用文件。这与将图形资源转换为 eZip 格式是不同的处理流程。通用数据的压缩比取决于源数据：重复性或结构化数据可能压缩得较好；已经压缩过的 JPEG 图像、MP4 视频、ZIP 压缩包或加密数据，则可能几乎无法进一步压缩。用于非图形数据前，应验证输出大小以及目标器件支持的解码模式。
 
 EZIP HAL 将图形 eZip、GZIP 和 LZ4 定义为不同工作模式。通用 GZIP/LZ4 解压使用 AHB 内存输出路径，而不是直接向 EPIC 输出。OTA 压缩包必须匹配所选模式及其支持的数据封装和大小限制；图形 `.ezip` 文件不能与任意压缩升级包混用。
 
 ## 代表性图像大小实测模板 { #representative-image-size-comparison-placeholder }
 
-本节用于记录代表性**不透明**和**带 Alpha** UI 图像的同条件实测结果。请使用已批准版本和配置的工具，从每张源图像完成转换后再替换占位符。结果中应保留源图像尺寸、颜色格式、Alpha 处理方式和 JPEG 质量设置。eZip 和 PNG 保留源图像的透明度；JPEG 不携带 alpha，因此其透明图像对比必须使用有记录的预合成背景，且不能表述为等效的 alpha 保留。
+本节用于记录代表性**不透明**和**带 Alpha** UI 图像的同条件实测结果。使用已批准的工具版本和配置转换每张源图像后，替换占位符。结果中应保留源图像尺寸、颜色格式、Alpha 处理方式和 JPEG 质量设置。eZip 和 PNG 保留源图像的透明度；JPEG 不携带 alpha，因此其透明图像对比必须使用有记录的预合成背景，且不能表述为等效的 alpha 保留。
 
 <div align="center"><em>代表性图像文件大小实测模板</em></div>
 
@@ -90,7 +90,7 @@ EZIP HAL 将图形 eZip、GZIP 和 LZ4 定义为不同工作模式。通用 GZIP
 
 <div align="center" markdown>
 
-| 实现 | 代表性 SF32 系列 | 已确认的能力 | 设计要点 |
+| 实现 | 代表性 SF32 系列 | 文档记载的能力 | 设计要点 |
 |:---|:---|:---|:---|
 | **eZip** | SF32LB55x | 无损图像解压，可直接连接 ePicasso；SDK 不为该系列提供原生 eZip-A 支持。 | 使用静态 eZip 资源，不要默认支持原生 eZip-A 动画。 |
 | **eZip 2.0** | SF32LB52x、SF32LB56x、SF32LB58x | 无损图像解压和原生 eZip-A 动画支持。SF32LB58x 另有独立的 JPEG 编解码器。 | 核实动画及其存储需求；JPEG/MJPEG 应按独立的媒体处理路径设计。 |
@@ -142,7 +142,7 @@ EZIP HAL 将图形 eZip、GZIP 和 LZ4 定义为不同工作模式。通用 GZIP
 - 根据有依据的实现和输出路径选型，不要仅凭版本号推断能力。JPEGD 与 EZIP 应分开考虑，SF32LB57x 资源须使用规定的压缩窗口。
 - 用好 eZip，需要建立可追溯的资源生成流程：源图像、转换设置、存储位置、图形引擎集成和目标硬件测试都不可忽略。
 
-## 原始参考资料 { #primary-references }
+## 主要参考资料 { #primary-references }
 
 - [GraphicsTool 与资源准备](https://wiki.sifli.com/tools/图形转换工具.html)
 - [EZIP HAL 模式、输出路径、对齐和动画支持](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/hal/ezip.html)
@@ -150,5 +150,5 @@ EZIP HAL 将图形 eZip、GZIP 和 LZ4 定义为不同工作模式。通用 GZIP
 - [EZIP HAL 的模式、对齐及动画支持](https://github.com/OpenSiFli/SiFli-SDK/blob/main/drivers/Include/bf0_hal_ezip.h)
 - [LVGL eZip 示例与转换参数](https://github.com/OpenSiFli/SiFli-SDK/blob/main/example/multimedia/lvgl/ezip_v9/README_EN.md)
 - [移动端 eZip SDK 文档](https://docs.sifli.com/projects/solution/mobile-sdk/ezip/index.html)
-- 产品简介：[SF32LB52x](https://downloads.sifli.com/user%20manual/PB5201-SF32LB52x-Product%20Brief.pdf), [SF32LB55x](https://downloads.sifli.com/silicon/PB0001-SF32LB55x-Product%20Brief%20V1p3.pdf), [SF32LB56x](https://downloads.sifli.com/silicon/PB0056-SF32LB56x-Product%20Brief%20V1p1.pdf), [SF32LB58x](https://downloads.sifli.com/silicon/PB0058-SF32LB58x-Product%20Brief%20V0p7.pdf)
+- 产品简介：[SF32LB52x](https://downloads.sifli.com/user%20manual/PB5201-SF32LB52x-Product%20Brief.pdf)、[SF32LB55x](https://downloads.sifli.com/silicon/PB0001-SF32LB55x-Product%20Brief%20V1p3.pdf)、[SF32LB56x](https://downloads.sifli.com/silicon/PB0056-SF32LB56x-Product%20Brief%20V1p1.pdf)、[SF32LB58x](https://downloads.sifli.com/silicon/PB0058-SF32LB58x-Product%20Brief%20V0p7.pdf)
 - [独立 JPEGD 接口](https://github.com/OpenSiFli/SiFli-SDK/blob/main/drivers/Include/bf0_hal_jpegd.h)

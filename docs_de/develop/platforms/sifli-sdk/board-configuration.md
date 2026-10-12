@@ -32,7 +32,7 @@ Das gewählte Board kann Folgendes beeinflussen:
 
 - Den Board-Namen nicht aus dem Marketingnamen erraten.
 - Keinen Board-Namen aus Zephyr oder Arduino in SiFli-SDK übernehmen.
-- Beim Auswählen von GPIO-, ADC-, PWM-, I2C-, SPI- oder Display-Ressourcen den Schaltplan des Boards oder die Seite des Dev-Kits heranziehen.
+- Beim Auswählen von GPIO-, ADC-, PWM-, I2C-, SPI- oder Display-Ressourcen den Schaltplan des Boards oder die Seite des Entwicklungsboards heranziehen.
 - Mit dem nächstliegenden SDK-Beispiel für dasselbe Board beginnen.
 - Nach einem Board-Wechsel sauber neu bauen.
 
@@ -67,7 +67,7 @@ Verwenden Sie mit SiFli-SDK die SDK-Kennung für `--board`; der Produktname ist 
 
 ## Bei der Portierung auf ein eigenes Board { #when-porting-to-a-custom-board }
 
-Beginnen Sie mit der ähnlichsten Konfiguration eines Dev-Kits oder Moduls und passen Sie anschließend Folgendes an:
+Beginnen Sie mit der ähnlichsten Konfiguration eines Entwicklungsboards oder Moduls und passen Sie anschließend Folgendes an:
 
 1. Flash- und PSRAM-Konfiguration.
 2. Pin-Mux.

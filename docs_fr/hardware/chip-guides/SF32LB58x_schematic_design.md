@@ -2,22 +2,22 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Directives de conception schématique pour le MCU SF32LB58x : système d'alimentation, génération d'horloge, RF, interfaces utilisateur, stockage et connectivité, et fabrication."
+description: "Directives de conception de schéma pour la MCU SF32LB58x : système d'alimentation, génération d'horloge, RF, interfaces utilisateur, stockage et connectivité et fabrication."
 tags:
     - Matériel
     - Puce
 ---
 
-# Guide de conception matérielle du SF32LB58x — Directives de conception schématique {#sf32lb58x-hardware-design-guide-schematic-design-guidelines}
+# Guide de conception matérielle du SF32LB58x — Directives de conception de schéma {#sf32lb58x-hardware-design-guide-schematic-design-guidelines}
 
 !!! note "Fait partie du Guide de conception matérielle du SF32LB58x"
-    Cette page couvre la section 5, Directives de conception schématique. Commencez par l'[aperçu du Guide de conception matérielle du SF32LB58x](SF32LB58x_hardware_design_guide.md) pour la sélection du dispositif et le flux de conception complet, poursuivez vers la [Liste de contrôle du schéma](SF32LB58x_schematic_checklist.md), ou passez directement à [Conception et routage du PCB](SF32LB58x_pcb_layout.md).
+    Cette page couvre la section 5, Directives de conception de schéma. Commencez par l'[aperçu du Guide de conception matérielle du SF32LB58x](SF32LB58x_hardware_design_guide.md) pour la sélection du composant et le flux de conception complet, poursuivez vers la [Liste de contrôle du schéma](SF32LB58x_schematic_checklist.md), ou passez directement à [Conception et routage du PCB](SF32LB58x_pcb_layout.md).
 
-## 5. Directives de conception schématique {#5-schematic-design-guidelines}
+## 5. Directives de conception de schéma {#5-schematic-design-guidelines}
 
-Ce chapitre suit le flux de conception schématique du SF32LB58x : il commence par le système minimal, puis traite l'alimentation, la génération d'horloge, la RF, les interfaces utilisateur, le stockage et la connectivité, et enfin la fabrication. Chaque sous-section part de l'intention de conception, puis détaille les exigences de circuit, les risques courants et les vérifications de sortie pour la plateforme SF32LB58x.
+Ce chapitre suit le flux de conception du schéma du SF32LB58x : il commence par le système minimal, puis traite l'alimentation, la génération d'horloge, la RF, les interfaces utilisateur, le stockage et la connectivité, et enfin la fabrication. Chaque sous-section part de l'intention de conception, puis détaille les exigences de circuit, les risques courants et les vérifications de sortie pour la plateforme SF32LB58x.
 
-<div align="center"><em>Tableau 5-1 : Plan des sections schématiques</em></div>
+<div align="center"><em>Tableau 5-1 : Plan des sections du schéma</em></div>
 
 <div align="center" markdown>
 
@@ -57,6 +57,7 @@ Considérez le système minimal comme le premier jalon de revue du schéma. Avan
 ### 5.2. Système d'alimentation {#51-power-system}
 
 #### 5.2.1. Alimentation {#511-power-supply}
+
 La série SF32LB58x intègre une PMU avec deux sorties BUCK et trois sorties LDO. Chaque sortie BUCK nécessite une inductance et un condensateur externes et doit être reliée à l'entrée d'alimentation interne correspondante ; les sorties LDO nécessitent également des condensateurs externes. Pour une montre connectée, le SF32LB58x peut être associé au PMIC SF30147C de SiFli, qui alimente à la fois le SF32LB58x et ses périphériques.
 
 ##### 5.2.1.1. Distribution d'alimentation PMIC SiFli {#5111-sifli-pmic-power-distribution}
@@ -196,9 +197,9 @@ La série SF32LB58x peut utiliser le PMIC SF30147C de SiFli pour alimenter ses d
 
 - [ ] Confirmez que la plage d'alimentation PVDD1/PVDD2 (1,71 V–3,6 V) du modèle sélectionné correspond au schéma d'alimentation réel
 - [ ] L'inductance BUCK respecte 4,7 µH, DCR ≤ 0,4 Ω, Isat ≥ 500 mA
-- [ ] Les condensateurs de découplage PVDD1/PVDD2, BUCK1/2_LX/FB, LDO_VOUT1, VDD_RET, et VDD_RTC utilisent les valeurs recommandées listées dans cette section
+- [ ] Les condensateurs de découplage PVDD1/PVDD2, BUCK1/2_LX/FB, LDO_VOUT1, VDD_RET et VDD_RTC utilisent les valeurs recommandées listées dans cette section
 - [ ] En cas d'utilisation du SF30147C, l'allocation tension/courant des 7 commutateurs de charge correspond aux exigences des périphériques
-- [ ] Le délai RC du circuit de réinitialisation RSTN répond aux exigences de temporisation de réinitialisation du dispositif
+- [ ] Le délai RC du circuit de réinitialisation RSTN répond aux exigences de temporisation de réinitialisation du composant
 
 #### 5.2.2. Modes de fonctionnement et sources de réveil {#512-operating-modes-and-wake-sources}
 
@@ -210,7 +211,7 @@ La série SF32LB58x fournit 6 interfaces PBR, avec les caractéristiques clés s
 2. PBR0-PBR5 peuvent tous agir comme sorties à la fois en modes Standby et Hibernate ;
 3. PBR0-PBR5 peuvent générer le signal LPTIM ;
 4. PBR0-PBR5 peuvent générer un signal d'horloge 32 kHz ;
-5. PBR0-PBR3 peuvent être configurées comme entrées pour recevoir des signaux de réveil. Lorsque le MCU est actif, ces entrées ne génèrent toutefois pas d'interruption.
+5. PBR0-PBR3 peuvent être configurées comme entrées pour recevoir des signaux de réveil. Lorsque la MCU est actif, ces entrées ne génèrent toutefois pas d'interruption.
 
 Tous les GPIO de la série SF32LB58x peuvent réveiller le système en mode Light Sleep et Deep Sleep. En modes Standby et Hibernate, 16 sources d'interruption de réveil sont disponibles : six sur PA et dix sur PB.
 
@@ -243,6 +244,7 @@ Tous les GPIO de la série SF32LB58x peuvent réveiller le système en mode Ligh
     Le texte source indique 16 sources d'interruption capables de réveiller le système : 6 sur PA et 10 sur PB. Toutefois, le tableau répertorie 6 broches PB, 6 broches PA et 4 broches PBR. La source ne précise pas si les broches PBR sont incluses dans le décompte de PB. Confirmez le regroupement auprès de SiFli avant de vous fier aux totaux PA/PB.
 
 ### 5.3. Génération d'horloge {#52-clock-generation}
+
 La série SF32LB58x nécessite 2 sources d'horloge externes : un quartz principal 48 MHz et un quartz RTC 32,768 kHz.
 
 <div align="center"><em>Tableau 5.3-1 : Exigences de spécification du quartz</em></div>
@@ -262,10 +264,10 @@ La série SF32LB58x nécessite 2 sources d'horloge externes : un quartz principa
 
 | Modèle | Fournisseur | Paramètres |
 |:---|:---|:---|
-| E1SB48E001G00E | Hosonic | F0 = 48,000000 MHz, ΔF/F0 = -6 ~ 8 ppm, CL = 8,8 pF, ESR ≤ 22 Ω Max, TOPR = -30 ~ 85°C, Boîtier 2016 (métrique) |
-| ETST00327000LE | Hosonic | F0 = 32,768 kHz, ΔF/F0 = -20 ~ 20 ppm, CL = 7 pF, ESR ≤ 70 kΩ Max, TOPR = -40 ~ 85°C, Boîtier 3215 (métrique) |
-| SX20Y048000B31T-8.8 | TKD | F0 = 48,000000 MHz, ΔF/F0 = -10 ~ 10 ppm, CL = 8,8 pF, ESR ≤ 40 Ω Max, TOPR = -20 ~ 75°C, Boîtier 2016 (métrique) |
-| SF32K32768D71T01 | TKD | F0 = 32,768 kHz, ΔF/F0 = -20 ~ 20 ppm, CL = 7 pF, ESR ≤ 70 kΩ Max, TOPR = -40 ~ 85°C, Boîtier 3215 (métrique) |
+| E1SB48E001G00E | Hosonic | F0 = 48,000000 MHz, ΔF/F0 = -6 ~ 8 ppm, CL = 8,8 pF, ESR ≤ 22 Ω Max, TOPR = -30 ~ 85 °C, Boîtier 2016 (métrique) |
+| ETST00327000LE | Hosonic | F0 = 32,768 kHz, ΔF/F0 = -20 ~ 20 ppm, CL = 7 pF, ESR ≤ 70 kΩ Max, TOPR = -40 ~ 85 °C, Boîtier 3215 (métrique) |
+| SX20Y048000B31T-8.8 | TKD | F0 = 48,000000 MHz, ΔF/F0 = -10 ~ 10 ppm, CL = 8,8 pF, ESR ≤ 40 Ω Max, TOPR = -20 ~ 75 °C, Boîtier 2016 (métrique) |
+| SF32K32768D71T01 | TKD | F0 = 32,768 kHz, ΔF/F0 = -20 ~ 20 ppm, CL = 7 pF, ESR ≤ 70 kΩ Max, TOPR = -40 ~ 85 °C, Boîtier 3215 (métrique) |
 
 </div>
 
@@ -283,11 +285,12 @@ Le front-end RF du SF32LB58x utilise une technologie de filtre d'adaptation larg
 <div align="center"><em>Figure 5.4-1 : Schéma du circuit RF</em></div>
 
 !!! note "Remarque"
-    Les valeurs des composants du réseau d'adaptation doivent être déterminées par des tests effectués sur l'antenne réelle et la disposition PCB réelle.
+    Les valeurs des composants du réseau d'adaptation doivent être déterminées par des tests effectués sur l'antenne réelle et l'implantation réelle du PCB.
 
 ### 5.5. Interfaces utilisateur {#54-user-interfaces}
 
 #### 5.5.1. Affichage {#541-display}
+
 ##### 5.5.1.1. Interface d'affichage MIPI DSI {#5411-mipi-dsi-display-interface}
 
 La série SF32LB58x prend en charge une interface d'affichage MIPI DSI à deux voies.
@@ -307,7 +310,7 @@ La série SF32LB58x prend en charge une interface d'affichage MIPI DSI à deux v
 | - | AVDD18_DSI | Entrée d'alimentation MIPI |
 | - | DSI_REXT | Résistance externe de 10 kΩ vers la masse |
 | - | AVSS_DSI | Masse |
-| TE | PB2 | Signal TE de synchronisation de trame vers le MCU |
+| TE | PB2 | Signal TE de synchronisation de trame vers la MCU |
 | RESET | PB5 | Signal de réinitialisation de l'affichage |
 
 </div>
@@ -330,7 +333,7 @@ La série SF32LB58x prend en charge les interfaces SPI à 3 ou 4 fils et Quad-SP
 | D[0] | PA47 | PB04 | Données 2 en mode Quad-SPI |
 | D[1] | PA45 | PB06 | Données 3 en mode Quad-SPI |
 | REST | PA74 | PB05 | Signal de réinitialisation de l'affichage |
-| TE | PA43 | PB02 | Signal TE de synchronisation de trame vers le MCU |
+| TE | PA43 | PB02 | Signal TE de synchronisation de trame vers la MCU |
 
 </div>
 
@@ -357,7 +360,7 @@ La série SF32LB58x prend en charge une interface MCU8080 pour connecter un pann
 | D[6] | PA52 | Données 6 |
 | D[7] | PA58 | Données 7 |
 | REST | PA24 | Réinitialisation |
-| TE | PA43 | Signal TE de synchronisation de trame vers le MCU |
+| TE | PA43 | Signal TE de synchronisation de trame vers la MCU |
 
 </div>
 
@@ -456,11 +459,11 @@ La série SF32LB58x propose plusieurs interfaces audio, avec les caractéristiqu
 4. I2S3 est recommandé pour connecter un codec audio.
 5. Deux interfaces d'entrée PDM sont disponibles pour les microphones numériques. Chaque interface PDM peut connecter jusqu'à deux microphones numériques ; le nombre d'interfaces ne correspond donc pas au nombre de microphones.
 6. Deux entrées pour microphones analogiques sont prises en charge. Chacune nécessite un condensateur de liaison en série d'au moins 2,2 µF pour bloquer la composante continue ; la sortie MIC_BIAS du SF32LB58x les alimente.
-7. Un amplificateur de puissance audio analogique externe peut être connecté. Routez les pistes P/N de chaque canal DAC en paire différentielle, avec un blindage relié à la masse, et maintenez la capacité parasite sous 10 pF. La source donne des limites contradictoires pour la longueur des pistes ; voir la note ci-dessous.
+7. Un amplificateur de puissance audio analogique externe peut être connecté. Acheminez les pistes P/N de chaque canal DAC en paire différentielle, avec un blindage relié à la masse, et maintenez la capacité parasite sous 10 pF. La source donne des limites contradictoires pour la longueur des pistes ; voir la note ci-dessous.
 8. Des écouteurs analogiques stéréo peuvent être connectés.
 
 !!! note "Divergence de longueur des pistes DAC dans la source"
-    La note d'application matérielle de SiFli donne deux limites différentes pour la longueur des pistes DAC : le résumé audio indique `<2 cm`, tandis que la section détaillée de routage PCB du DAC indique `<2 mm`. La source n'explique pas cet écart. Confirmez auprès de SiFli la limite applicable avant de finaliser le PCB ; ne supposez pas qu'une valeur remplace l'autre.
+    La note d'application matérielle de SiFli donne deux limites différentes pour la longueur des pistes DAC : le résumé audio indique `<2 cm`, tandis que la section détaillée de routage du PCB du DAC indique `<2 mm`. La source n'explique pas cet écart. Confirmez auprès de SiFli la limite applicable avant de finaliser le PCB ; ne supposez pas qu'une valeur remplace l'autre.
 
 ![Figure 5.5-1 : Circuit d'entrée audio analogique différentielle](../../sf32-products/chips/assets/58x/sf32lb58x-DIFAU-SCH.png){ width="100%" loading="lazy" }
 
@@ -568,6 +571,7 @@ La série SF32LB58x prend en charge plusieurs sorties PWM, pouvant piloter un mo
 ### 5.6. Stockage et connectivité {#55-storage-and-connectivity}
 
 #### 5.6.1. Configuration de démarrage {#551-boot-configuration}
+
 La série SF32LB58x fournit une broche `Mode` pour configurer le mode de démarrage.
 
 <div align="center"><em>Tableau 5.6-1 : Configuration du mode</em></div>
@@ -584,7 +588,7 @@ La série SF32LB58x fournit une broche `Mode` pour configurer le mode de démarr
 !!! note "Remarques"
     1. Le domaine de tension de la broche `Mode` est identique à celui de VDDIOA ;
     2. Reliez `Mode` à l'alimentation ou à GND par une résistance de 10 kΩ afin de stabiliser son niveau. La broche ne doit pas rester flottante ni changer d'état ;
-    3. Un point de test pour la broche `Mode` doit être réservé sur les cartes de production pour le téléchargement du firmware et la calibration du quartz ; un cavalier n'est pas requis ;
+    3. Un point de test pour la broche `Mode` doit être réservé sur les cartes de production pour le téléchargement du firmware et l'étalonnage du quartz ; un cavalier n'est pas requis ;
     4. Sur les cartes de test, il est recommandé de réserver un cavalier pour la broche `Mode` afin de pouvoir démarrer la carte en mode téléchargement après un plantage du firmware.
 
 #### 5.6.2. Stockage {#552-storage}
@@ -593,7 +597,7 @@ La série SF32LB58x prend en charge les interfaces MPI3 ou MPI4 pour la Flash NO
 
 ##### 5.6.2.1. Interface Flash QSPI NAND {#5521-qspi-nand-flash-interface}
 
-La carte de référence EVB du SF32LB58x utilise par défaut MPI4 pour connecter un dispositif Flash SPI NAND externe.
+La carte de référence EVB du SF32LB58x utilise par défaut MPI4 pour connecter un composant Flash SPI NAND externe.
 
 ![Figure 5.6-1 : Circuit de référence de la Flash SPI NAND](../../sf32-products/chips/assets/58x/sf32lb58x-SPINAND-SCH.png){ width="100%" loading="lazy" }
 
@@ -675,7 +679,7 @@ SD1 utilise 12 GPIO (PA00-PA11) alimentés par le domaine VDDIOA2. Celui-ci peut
 
 #### 5.6.3. USB {#553-usb}
 
-L'USB de la série SF32LB58x prend en charge l'USB 2.0 HS en modes hôte et périphérique. Prévoyez une protection TVS reliant chacune des lignes USB DP et DM à la masse ; la capacité de jonction de la TVS doit être inférieure à 5 pF. Routez DP/DM en paire différentielle avec une impédance de 90 Ω sur le circuit imprimé.
+L'USB de la série SF32LB58x prend en charge l'USB 2.0 HS en modes hôte et périphérique. Prévoyez une protection TVS reliant chacune des lignes USB DP et DM à la masse ; la capacité de jonction de la TVS doit être inférieure à 5 pF. Acheminez DP/DM en paire différentielle avec une impédance de 90 Ω sur le circuit imprimé.
 
 ![Figure 5.6-5 : Circuit d'interface USB](../../sf32-products/chips/assets/58x/sf32lb58x-USB-SCH.png){ width="100%" loading="lazy" }
 
@@ -684,6 +688,7 @@ L'USB de la série SF32LB58x prend en charge l'USB 2.0 HS en modes hôte et pér
 ### 5.7. Fabrication {#56-manufacturing}
 
 #### 5.7.1. Interface de débogage et de téléchargement {#561-debug-and-download-interface}
+
 La série SF32LB58x prend en charge l'interface de débogage standard Arm® SWD, qui permet le débogage pas à pas avec les outils EDA. Lorsqu'une sonde SEGGER® J-Link® est utilisée, configurez-la pour être alimentée par une source externe, en l'occurrence la carte SF32LB58x.
 
 ![Figure 5.7-1 : Circuit d'interface de débogage SWD](../../sf32-products/chips/assets/58x/sf32lb58x-SWD-SCH.png){ width="100%" loading="lazy" }
@@ -720,7 +725,7 @@ Le SF32LB58x offre 1 interface SWD plus 6 interfaces UART sélectionnables pour 
 
 #### 5.7.2. Flashage de production et accès matériel {#562-production-flashing-and-hardware-access}
 
-Prévoyez l'accès à la programmation en production, à la récupération et à l'étalonnage avant de figer le boîtier du produit et le gabarit de test. Au minimum, gardez accessibles l'alimentation, la masse, le SWD, les sorties UART de débogage nécessaires et les broches de démarrage/configuration. Prévoyez également les points de réinitialisation de la carte ou de commande du PMIC nécessaires pour récupérer un système dont le firmware ne démarre pas.
+Prévoyez l'accès au flashage en production, à la récupération et à l'étalonnage avant de figer le boîtier du produit et le gabarit de test. Au minimum, gardez accessibles l'alimentation, la masse, le SWD, les sorties UART de débogage nécessaires et les broches de démarrage/configuration. Prévoyez également les points de réinitialisation de la carte ou de commande du PMIC nécessaires pour récupérer un système dont le firmware ne démarre pas.
 
 #### 5.7.3. Listes de contrôle du schéma et du dessin PCB {#563-schematic-and-pcb-drawing-checklists}
 

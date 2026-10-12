@@ -255,7 +255,7 @@ flowchart LR
     B --> C["Marquer et attribuer les segments de la trace de mesure"]
     C --> D["Calculer l'énergie par scénario terminé"]
     D --> E["Extrapoler selon l'usage quotidien réel"]
-    E --> F["Comparer avec le budget de puissance"]
+    E --> F["Comparer avec le budget énergétique"]
     F --> G["Optimiser le poste le plus énergivore"]
     G --> A
 ```
@@ -312,6 +312,6 @@ Utilisez les exemples SiFli-SDK pour reproduire un état Bluetooth avant de mesu
 
 - [Vue d'ensemble Bluetooth](overview.md) pour le BLE, le Bluetooth classique, les profils, la sécurité et la coexistence système.
 - [Exemples du SDK Bluetooth](bluetooth-sdk-examples.md) pour la sélection de projets Bluetooth classique, BLE et LE Audio.
-- [Vue d'ensemble de la conception basse consommation](../low-power/overview.md) pour la conception PM et le budget de puissance complet du produit.
+- [Vue d'ensemble de la conception basse consommation](../low-power/overview.md) pour la conception PM et le budget énergétique complet du produit.
 - [Mesurer et valider la consommation énergétique](../low-power/measurement-and-validation.md) pour le flux de validation du composant au produit.
 - [Analyse de la consommation d'une montre connectée](../low-power/smartwatch-power-profiling.md) pour un exemple de modèle énergétique quotidien.

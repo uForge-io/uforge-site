@@ -2,7 +2,7 @@
 icon: lucide/battery-low
 title: "Configurer les modes basse consommation et mesurer le courant"
 description: "Configurer les modes de gestion d'énergie de SiFli-SDK, les sources de réveil, les horloges et les mesures de courant au niveau carte."
-tags: [Développement, SiFli-SDK, Notes d’application, Basse consommation]
+tags: [Développement, SiFli-SDK, Notes d'application, Basse consommation]
 ---
 
 # Configurer les modes basse consommation et mesurer le courant { #configure-and-measure-low-power }
@@ -51,13 +51,13 @@ Utilisez les fichiers `pinmux.c`/`drv_io.c` de la carte et les API de l'exemple 
 | Famille | Réveil depuis Deep Sleep ou Standby | Réveil depuis Hibernate |
 |---|---|---|
 | SF32LB52x | Dans Deep Sleep, toutes les broches peuvent déclencher le réveil via `WSR_GPIO1` ; aucune sélection supplémentaire n'est nécessaire. Le HCPU et le LCPU peuvent entrer en veille indépendamment. | Configurez la broche et le niveau de réveil PMU avant d'appeler `HAL_PMU_EnterHibernate()`. |
-| SF32LB55x | Utilisez la correspondance AON propre à la famille 55x. | En Hibernate, seules les broches de réveil LCPU `PIN0`–`PIN5` peuvent réveiller le système. Utilisez `HAL_PMU_EnablePinWakeup()` avec un numéro de broche valide pour les 55x. Ces broches sont flottantes en Hibernate ; prévoyez une résistance de tirage externe lorsque la carte l’exige. |
-| SF32LB56x | Utilisez la correspondance de broches HPAON/LPAON propre à la famille. | La PMU prend en charge deux sources de réveil, `PIN0` et `PIN1`, assignables à une broche de réveil HCPU ou LCPU. Voir l’exemple de configuration PMU ci-dessous. |
-| SF32LB57x | Utilisez la correspondance de broches HPAON/LPAON propre à la famille. | La PMU prend en charge deux sources de réveil, `PIN0` et `PIN1` ; l’index des broches de réveil Hibernate va de 0 à 13. Associez chaque source à la broche de réveil HCPU/LCPU visée. |
-| SF32LB58x | Utilisez la correspondance de broches HPAON/LPAON propre à la famille. | La PMU prend en charge deux sources de réveil, `PIN0` et `PIN1`, assignables à une broche de réveil HCPU ou LCPU. Voir l’exemple de configuration PMU ci-dessous. |
+| SF32LB55x | Utilisez la correspondance AON propre à la famille 55x. | En Hibernate, seules les broches de réveil LCPU `PIN0`–`PIN5` peuvent réveiller le système. Utilisez `HAL_PMU_EnablePinWakeup()` avec un numéro de broche valide pour les 55x. Ces broches sont flottantes en Hibernate ; prévoyez une résistance de tirage externe lorsque la carte l'exige. |
+| SF32LB56x | Utilisez la correspondance de broches HPAON/LPAON propre à la famille. | La PMU prend en charge deux sources de réveil, `PIN0` et `PIN1`, assignables à une broche de réveil HCPU ou LCPU. Voir l'exemple de configuration PMU ci-dessous. |
+| SF32LB57x | Utilisez la correspondance de broches HPAON/LPAON propre à la famille. | La PMU prend en charge deux sources de réveil, `PIN0` et `PIN1` ; l'index des broches de réveil Hibernate va de 0 à 13. Associez chaque source à la broche de réveil HCPU/LCPU visée. |
+| SF32LB58x | Utilisez la correspondance de broches HPAON/LPAON propre à la famille. | La PMU prend en charge deux sources de réveil, `PIN0` et `PIN1`, assignables à une broche de réveil HCPU ou LCPU. Voir l'exemple de configuration PMU ci-dessous. |
 </div>
 
-Pour Hibernate sur SF32LB52x, SF32LB56x, SF32LB57x et SF32LB58x, l’exemple ci-dessous associe un GPIO à la source de réveil PMU `PIN0`. Il ne s’applique pas au SF32LB55x, qui utilise la procédure distincte indiquée dans le tableau. Sur SF32LB57x, l’index des broches de réveil PMU va de 0 à 13. Vérifiez l’affectation choisie dans le manuel utilisateur du composant visé et dans le schéma de la carte.
+Pour Hibernate sur SF32LB52x, SF32LB56x, SF32LB57x et SF32LB58x, l'exemple ci-dessous associe un GPIO à la source de réveil PMU `PIN0`. Il ne s'applique pas au SF32LB55x, qui utilise la procédure distincte indiquée dans le tableau. Sur SF32LB57x, l'index des broches de réveil PMU va de 0 à 13. Vérifiez l'affectation choisie dans le manuel utilisateur du composant visé et dans le schéma de la carte.
 
 ```c
 HAL_PMU_SelectWakeupPin(0,
@@ -66,7 +66,7 @@ HAL_PMU_EnablePinWakeup(0, AON_PIN_MODE_HIGH);
 rt_kprintf("CR:0x%x, WER:0x%x\n", hwp_pmuc->CR, hwp_pmuc->WER);
 ```
 
-Un réveil depuis Hibernate équivaut à un démarrage à froid et positionne `PM_HIBERNATE_BOOT` ; contrairement au réveil depuis Standby, l’exécution ne reprend pas au point d’interruption. Si une même IO doit réveiller le système depuis Standby et depuis Hibernate, configurez les deux chemins. Sur les 55x, les broches de réveil en Hibernate sont des entrées flottantes ; prévoyez une résistance de tirage externe lorsque la carte l’exige.
+Un réveil depuis Hibernate équivaut à un démarrage à froid et positionne `PM_HIBERNATE_BOOT` ; contrairement au réveil depuis Standby, l'exécution ne reprend pas au point d'interruption. Si une même broche doit réveiller le système depuis Standby et depuis Hibernate, configurez les deux chemins. Sur les 55x, les broches de réveil en Hibernate sont des entrées flottantes ; prévoyez une résistance de tirage externe lorsque la carte l'exige.
 
 ## Comprendre les états de veille { #understand-the-sleep-states }
 
@@ -97,7 +97,7 @@ Un réveil depuis Hibernate équivaut à un démarrage à froid et positionne `P
 
 </div>
 
-Le guide SDK actuel sur la basse consommation cité ne fournit pas de données comparables de rétention SRAM et de temps de réveil pour le SF32LB57x. Ne transposez pas au SF32LB57x les capacités de rétention ni les durées d’une autre famille ; vérifiez-les dans la version du SDK et la documentation du composant cible.
+Le guide SDK actuel sur la basse consommation cité ne fournit pas de données comparables de rétention SRAM et de temps de réveil pour le SF32LB57x. Ne transposez pas au SF32LB57x les capacités de rétention ni les durées d'une autre famille ; vérifiez-les dans la version du SDK et la documentation du composant cible.
 
 Dans le tableau précédent, `PM_SLEEP_MODE_LIGHT`, `PM_SLEEP_MODE_DEEP` et `PM_SLEEP_MODE_STANDBY` correspondent respectivement aux modes Light Sleep, Deep Sleep et Standby.
 
@@ -154,7 +154,7 @@ Le guide SiFli schématise également le chemin « extinction de l'écran → ID
 %%{init: {"flowchart": {"htmlLabels": true, "wrappingWidth": 260}}}%%
 flowchart TD
     A["<div style='width:260px;text-align:center'>Délai de verrouillage d'écran dépassé,<br/>l'écran s'éteint</div>"] --> B["<div style='width:260px;text-align:center'>Tous les threads de travail sont inactifs ;<br/>le thread IDLE s'exécute</div>"]
-    B --> C["<div style='width:260px;text-align:center'>Lorsque les conditions sont remplies,<br/>entrée en mode veille</div>"]
+    B --> C["<div style='width:260px;text-align:center'>Si toutes les conditions sont réunies,<br/>le système entre en veille</div>"]
 ```
 
 <div align="center"><em>Figure : Flux d'exemple SF32LB52x — réveil du LPSYS vers le HPSYS.</em></div>
@@ -171,8 +171,8 @@ flowchart TD
 
 Mesurez d'abord le système minimal : déconnectez l'écran, le capteur, le chargeur et les autres charges amovibles, puis rajoutez-les une à une. Les sources de fuite courantes sont :
 
-- un dispositif externe qui reste alimenté ;
-- une sortie maintenue à l'état haut vers un dispositif mis hors tension ;
+- un appareil externe qui reste alimenté ;
+- une sortie maintenue à l'état haut vers un appareil mis hors tension ;
 - une entrée flottante ou une configuration de tirage haut/bas inadaptée ;
 - une PSRAM, une Flash NOR/NAND, une eMMC ou une interface SDIO qui n'a pas été mise dans son état basse consommation ;
 - une configuration `PA01` de l'USB des 55x qui entre en conflit avec sa résistance de tirage bas interne.
@@ -183,4 +183,4 @@ Implémentez les transitions spécifiques à la carte dans `BSP_IO_Power_Down()`
 
 Pour chaque mesure, consignez la famille et la révision du SDK, la révision de carte, la tension d'alimentation, le point de mesure et la bande passante de l'instrument, la configuration du firmware, les composants mémoire installés, les périphériques actifs, la source de réveil, le mode de veille et le journal de transition. Indiquez l'état et les conditions de test avec le courant mesuré ; ne comparez pas des valeurs isolées mesurées sur des cartes ou dans des modes différents.
 
-Sources officielles par famille : [SF32LB52x](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/low_power.html), [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/low_power.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/low_power.html) et [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/low_power.html). La [référence API PMU du SDK](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/pmu.html) documente la plage d’index des broches de réveil Hibernate du SF32LB57x.
+Sources officielles par famille : [SF32LB52x](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/low_power.html), [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/low_power.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/low_power.html) et [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/low_power.html). La [référence API PMU du SDK](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/pmu.html) documente la plage d'index des broches de réveil Hibernate du SF32LB57x.

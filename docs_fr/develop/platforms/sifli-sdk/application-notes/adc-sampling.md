@@ -2,7 +2,7 @@
 icon: lucide/chart-no-axes-column
 title: "Échantillonnage avec le GPADC"
 description: "Utiliser l'ADC à usage général (GPADC) sur SF32LB52x, SF32LB55x, SF32LB56x, SF32LB57x et SF32LB58x : limites électriques, cartographie des broches, accès au périphérique et étalonnage."
-tags: [Développement, SiFli-SDK, Notes d’application, ADC]
+tags: [Développement, SiFli-SDK, Notes d'application, ADC]
 ---
 
 # Échantillonnage avec le GPADC { #sample-with-gpadc }
@@ -13,7 +13,7 @@ Le GPADC est l'ADC à usage général de SiFli, destiné notamment à mesurer le
 
 ## Portée de l'ADC et modèle de canaux { #adc-scope-and-channel-model }
 
-Les notes d'application du SDK pour SF32LB52x, SF32LB55x, SF32LB56x et SF32LB58x utilisent huit canaux ADC, `GPADC_CH0` à `GPADC_CH7`, pour des sources analogiques telles que les sorties de capteurs et la tension de batterie. La table des canaux ADC du SDK pour SF32LB57x définit douze canaux : `PA28`–`PA38` correspondent à `GPADC_CH0`–`GPADC_CH10`, et le canal de détection de batterie est `GPADC_CH11` (nommé `BAT` dans la table du SDK). Le guide de conception matérielle SF32LB57x nomme le signal correspondant du boîtier `VBAT` ou `VBATS` selon la variante d'alimentation. Une mesure correcte dépend du canal choisi, du réseau d'entrée et de l'étalonnage logiciel adapté au composant cible.
+Les notes d'application du SDK pour SF32LB52x, SF32LB55x, SF32LB56x et SF32LB58x utilisent huit canaux ADC, `GPADC_CH0` à `GPADC_CH7`, pour des sources analogiques telles que les sorties de capteurs et la tension de batterie. La table des canaux ADC du SDK pour SF32LB57x définit douze canaux : `PA28`–`PA38` correspondent à `GPADC_CH0`–`GPADC_CH10`, et le canal de détection de batterie est `GPADC_CH11` (nommé `BAT` dans la table du SDK). Le guide de conception matérielle SF32LB57x nomme le signal correspondant du boîtier `VBAT` ou `VBATS` selon la variante d'alimentation. La valeur de tension obtenue dépend du canal sélectionné, de son réseau d'entrée et de l'étalonnage logiciel adapté au composant cible.
 
 SF32LB52x possède un circuit dédié de mesure de batterie sur `GPADC_CH7` (`BAT`) : selon l'exemple du SDK, ce canal est relié à VBAT via un diviseur interne, et le facteur de conversion `vbat_factor` du SDK est appliqué pour obtenir la tension de batterie. En revanche, `GPADC_CH7` correspond au pad externe `PB32` sur SF32LB56x et `PB39` sur SF32LB58x. Le canal de mesure de batterie du SF32LB57x est `GPADC_CH11` ; utilisez le signal `VBAT` ou `VBATS` correspondant à la variante d'alimentation et respectez les limites propres à ce domaine. Ne déduisez pas qu'un canal relié à la batterie sur la carte est un canal batterie dédié dans la puce.
 
@@ -246,14 +246,14 @@ Pour l'entrée de mesure de batterie du SF32LB55x sur `PB10`, vérifiez la confi
 
 ## Vérification de mise en service { #bring-up-check }
 
-Avant d'ajouter une acquisition multi-canaux ou cyclique, vérifiez un canal avec une entrée stable mesurée indépendamment :
+Avant d'ajouter une acquisition multi-canaux ou cyclique, vérifiez un canal avec une tension d'entrée stable, mesurée indépendamment :
 
-1. Confirmez sa cartographie de broche spécifique à la famille cible et sa configuration analogique.
+1. Confirmez la correspondance broche-canal propre à la famille cible et la configuration analogique.
 2. Confirmez que la sortie du diviseur reste dans la limite d'entrée ADC de la famille cible.
 3. Comparez les résultats bruts et étalonnés avec la tension appliquée.
 4. Conservez les conditions de diviseur et d'étalonnage avec le journal de test de la carte.
 
-Lors du raccordement de l'UART de journalisation du SF32LB56x à un PC externe, le niveau de référence de l'adaptateur série doit correspondre à la tension d'E/S du circuit. La FAQ ADC d'OpenSiFli avertit qu'un adaptateur référencé à 5 V sur des E/S à 3,3 V peut fortement sous-estimer les mesures de l'ADC ; une batterie de 4 V peut, par exemple, être lue à 3,3 V.
+Lors du raccordement de l'UART de journalisation du SF32LB56x à un PC externe, la tension de référence de l'adaptateur série doit correspondre à la tension d'E/S du circuit. La FAQ ADC d'OpenSiFli avertit qu'un adaptateur référencé à 5 V sur des E/S à 3,3 V peut fortement sous-estimer les mesures de l'ADC ; une batterie de 4 V peut, par exemple, être lue à 3,3 V.
 
 ## Source officielle { #official-source }
 

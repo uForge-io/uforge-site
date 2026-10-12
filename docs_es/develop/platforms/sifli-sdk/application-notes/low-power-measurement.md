@@ -7,7 +7,7 @@ tags: [Desarrollo, SiFli-SDK, Notas de aplicación, Bajo consumo]
 
 # Configurar modos de bajo consumo y medir corriente { #configure-and-measure-low-power }
 
-Las guías de bajo consumo de SiFli-SDK abarcan varias arquitecturas SF32. SF32LB52x, SF32LB55x y SF32LB56x usan dos núcleos: HCPU, en HPSYS, funciona hasta 240 MHz para tareas de alto rendimiento, y LCPU, en LPSYS, hasta 48 MHz para Bluetooth y sensores. SF32LB57x y SF32LB58x añaden un ACPU a la arquitectura HCPU/LCPU; en SF32LB58x, el LCPU de bajo consumo funciona hasta 96 MHz. El número de núcleos, los límites de frecuencia y el comportamiento de bajo consumo varían según la familia, así que consulte la guía del SDK correspondiente al dispositivo de destino.
+Las guías de bajo consumo de SiFli-SDK abarcan varias arquitecturas SF32. SF32LB52x, SF32LB55x y SF32LB56x usan dos núcleos: HCPU, en HPSYS, funciona hasta 240 MHz para tareas de alto rendimiento, y LCPU, en LPSYS, hasta 48 MHz para Bluetooth y sensores. SF32LB57x y SF32LB58x añaden un ACPU a la arquitectura HCPU/LCPU; en SF32LB58x, la LCPU de bajo consumo funciona hasta 96 MHz. El número de núcleos, los límites de frecuencia y el comportamiento de bajo consumo varían según la familia, así que consulte la guía del SDK correspondiente al dispositivo de destino.
 
 ## Configurar el marco de gestión de energía { #configure-the-power-management-framework }
 
@@ -51,13 +51,13 @@ Use `pinmux.c`/`drv_io.c` de la placa y las API del ejemplo correspondiente del 
 | Familia | Activación desde Deep Sleep/Standby | Activación desde Hibernate |
 |---|---|---|
 | SF32LB52x | En Deep Sleep, cualquier pin puede activar el sistema mediante `WSR_GPIO1`; no hace falta seleccionar un pin de activación adicional. HCPU y LCPU pueden suspenderse de forma independiente. | Configure el pin y el nivel de activación de la PMU antes de llamar a `HAL_PMU_EnterHibernate()`. |
-| SF32LB55x | Use el mapa de pines AON específico de 55x. | En Hibernate, solo los pines de activación `PIN0`–`PIN5` del LCPU pueden despertar el sistema. Use `HAL_PMU_EnablePinWakeup()` con un número de pin válido para 55x. Estos pines quedan como entradas flotantes en Hibernate; añada una resistencia externa de pull-up o pull-down si el diseño de la placa lo requiere. |
+| SF32LB55x | Use el mapa de pines AON específico de 55x. | En Hibernate, solo los pines de activación `PIN0`–`PIN5` de la LCPU pueden despertar el sistema. Use `HAL_PMU_EnablePinWakeup()` con un número de pin válido para 55x. Estos pines quedan como entradas flotantes en Hibernate; añada una resistencia externa de pull-up o pull-down si el diseño de la placa lo requiere. |
 | SF32LB56x | Use el mapa de pines HPAON/LPAON específico de la familia. | La PMU admite dos fuentes de activación, `PIN0` y `PIN1`, que pueden asignarse a un pin de activación de HCPU o LCPU. Consulte el ejemplo de asignación de la PMU siguiente. |
 | SF32LB57x | Use el mapa de pines HPAON/LPAON específico de la familia. | La PMU admite dos fuentes de activación, `PIN0` y `PIN1`; el índice del pin de activación de Hibernate en 57x va de 0 a 13. Asigne cada fuente al pin de activación HCPU/LCPU correspondiente. |
 | SF32LB58x | Use el mapa de pines HPAON/LPAON específico de la familia. | La PMU admite dos fuentes de activación, `PIN0` y `PIN1`, que pueden asignarse a un pin de activación de HCPU o LCPU. Consulte el ejemplo de asignación de la PMU siguiente. |
 </div>
 
-Para Hibernate en SF32LB52x, SF32LB56x, SF32LB57x y SF32LB58x, el ejemplo siguiente asigna un GPIO a la fuente de activación `PIN0` de la PMU. No se aplica a SF32LB55x, que usa el procedimiento independiente indicado en la tabla. En SF32LB57x, el índice del pin de activación de la PMU va de 0 a 13. Confirme la asignación elegida con el manual del dispositivo de destino y el diseño de la placa.
+Para Hibernate en SF32LB52x, SF32LB56x, SF32LB57x y SF32LB58x, el ejemplo siguiente asigna una GPIO a la fuente de activación `PIN0` de la PMU. No se aplica a SF32LB55x, que usa el procedimiento independiente indicado en la tabla. En SF32LB57x, el índice del pin de activación de la PMU va de 0 a 13. Confirme la asignación elegida con el manual del dispositivo de destino y el diseño de la placa.
 
 ```c
 HAL_PMU_SelectWakeupPin(0,

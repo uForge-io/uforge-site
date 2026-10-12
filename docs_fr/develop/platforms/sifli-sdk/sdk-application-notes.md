@@ -1,11 +1,11 @@
 ---
 icon: lucide/notebook-tabs
-title: "Notes d’application du SDK"
+title: "Notes d'application du SDK"
 description: "Un parcours de lecture par tâche, avec des liens vers les sources, pour les guides d'utilisation de SiFli-SDK destinés au développement SF32."
 tags:
     - Développement
     - SiFli-SDK
-    - Notes d’application
+    - Notes d'application
 ---
 
 # Notes d'application du SDK { #sdk-application-notes }
@@ -16,7 +16,7 @@ Ces articles fournissent des conseils pratiques d'intégration, mais ne remplace
 
 ## Lire par tâche { #read-by-task }
 
-<div align="center"><em>Tableau : Parcours de lecture des notes d'application du SDK</em></div>
+<div align="center"><em>Tableau : parcours de lecture des notes d'application du SDK</em></div>
 
 <div align="center" markdown>
 

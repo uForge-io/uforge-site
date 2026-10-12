@@ -45,7 +45,7 @@ tags:
 
 | Feld | Typ | Optionen | Beschreibung |
 | :--- | :--- | :--- | :--- |
-| **x** | Numerisch | **1** bis **6** | Allgemeine Zuordnung der QSPI-NOR-Flash-Kapazität:<br>• **1**: 2 Mb<br>• **2**: 4 Mb<br>• **3**: 8 Mb<br>• **4**: 16 Mb<br>• **5**: 32 Mb<br>• **6**: 64 Mb<br>SF32LB57x verwendet zusätzlich die Codes **7** und **8**; siehe die familiespezifische Zuordnung unten. |
+| **x** | Numerisch | **1** bis **6** | Allgemeine Zuordnung der QSPI-NOR-Flash-Kapazität:<br>• **1**: 2 Mb<br>• **2**: 4 Mb<br>• **3**: 8 Mb<br>• **4**: 16 Mb<br>• **5**: 32 Mb<br>• **6**: 64 Mb<br>SF32LB57x verwendet zusätzlich die Codes **7** und **8**; die Zuordnung für diese Familie ist unten aufgeführt. |
 | **Y** | Alphabetisch | **A** bis **E** | Integrierte PSRAM-Kapazität und Schnittstelle:<br>• **A**: 16 Mb QPI-PSRAM<br>• **B**: 32 Mb OPI-PSRAM<br>• **C**: 64 Mb OPI-PSRAM<br>• **D**: 128 Mb OPI/HPI-PSRAM<br>• **E**: 256 Mb HPI-PSRAM |
 
 </div>
@@ -56,7 +56,7 @@ tags:
 
 ### SF32LB57x-spezifische Speichercodes { #sf32lb57x-memory-codes }
 
-Die Teilenummerngrafik im SF32LB57x-Hardwaredesign-Leitfaden zeigt nach dem Gehäusecode drei Speicherpositionscodes in der Reihenfolge MPI1, MPI2 und MPI3; danach folgt der Temperaturcode. Für jede MPI-Position gelten bei SF32LB57x diese familiespezifischen Codes:
+Die Teilenummerngrafik im SF32LB57x-Hardware-Design-Leitfaden zeigt nach dem Gehäusecode drei Speicherpositionscodes in der Reihenfolge MPI1, MPI2 und MPI3; danach folgt der Temperaturcode. Für jede MPI-Position gelten bei SF32LB57x folgende Codes:
 
 <div align="center"><em>Tabelle: SF32LB57x-Speichercodes nach MPI-Position</em></div>
 
@@ -64,7 +64,7 @@ Die Teilenummerngrafik im SF32LB57x-Hardwaredesign-Leitfaden zeigt nach dem Geh�
 
 | Code | Bedeutung an der entsprechenden MPI-Position bei SF32LB57x |
 |:-----|:-----------------------------------------------------------|
-| `N` | Kein SiP-Speicher |
+| `N` | Kein Speicherbaustein im selben Gehäuse wie der Chip |
 | `B` | 32 Mb PSRAM |
 | `C` | 64 Mb PSRAM |
 | `D` | 128 Mb PSRAM |
@@ -105,7 +105,7 @@ Die SF32LB57x-Variantentabelle führt diese Bestellnummer als BGA112. Ihre drei 
 
 #### Beispiel 4: SF32LB57ZVN7N6 { #example-4-sf32lb57zvn7n6 }
 
-Die SF32LB57x-Variantentabelle führt auch diese Bestellnummer als BGA112. Ihre Speicherpositionscodes lauten `N/7/N`: MPI1 hat keinen SiP-Speicher, MPI2 enthält 128 Mb NOR-Flash und MPI3 hat keinen SiP-Speicher. Die abschließende `6` steht für die industrielle Temperaturklasse. Die Familienübersicht erklärt, warum `58 + 6` nicht 64 frei zuweisbare GPIOs bedeutet.
+Die SF32LB57x-Variantentabelle führt auch diese Bestellnummer als BGA112. Ihre Speicherpositionscodes lauten `N/7/N`: Für MPI1 und MPI3 ist jeweils kein Speicherbaustein im selben Gehäuse wie der Chip vorgesehen; MPI2 enthält 128 Mb NOR-Flash. Die abschließende `6` steht für die industrielle Temperaturklasse. Die Familienübersicht erklärt, warum `58 + 6` nicht 64 frei zuweisbare GPIOs bedeutet.
 
 ### 55x-Ausnahmen mit älterem Suffixformat { #legacy-55x-suffix-exceptions }
 
@@ -127,9 +127,9 @@ Die SF32LB55x-Familie wurde vor der aktuellen Namenskonvention definiert; deshal
     - **x** kennzeichnet die Produktstufe: **8 / 7** steht für zwei Anwendungsprozessoren und einen Low-Power-Prozessor; die Positionierung hängt von der Familie ab. **6 / 5** bezeichnet die Mittelklasse, **2** eine kostenoptimierte Ausführung.
 - **MOD** — SiFli-Modulprodukt.
 - **y** — Modul-Subtyp, wenn die Familie einen definiert
-    - **1**: Direkter Li-Ion-Batteriebetrieb für SF32LB520/3/5/7. Die Versorgungsspannung des Chips muss zwischen 3,2 und 4,7 V liegen. Die Standardkonfiguration basiert auf SF32LB525UC6 mit 8 MB OPI-PSRAM.
-    - **A**: Regulärer 3,3-V-Betrieb für die SF32LB52B-Familie. Eine direkte Versorgung aus einer Li-Ion-Batterie wird nicht unterstützt; die Versorgungsspannung des Chips muss zwischen 2,97 und 3,63 V liegen. Die Standardkonfiguration basiert auf SF32LB52BU36 mit integriertem 1 MB QSPI-NOR-Flash.
-    - **B**: Regulärer 3,3-V-Betrieb für die 52E/52G/52J-Familie. Eine direkte Versorgung aus einer Li-Ion-Batterie wird nicht unterstützt; die Versorgungsspannung des Chips muss zwischen 2,97 und 3,63 V liegen. Die Standardkonfiguration basiert auf SF32LB52EUB6 mit integriertem 4 MB OPI-PSRAM.
+    - **1**: Direkter Li-Ion-Akkubetrieb für SF32LB520/3/5/7. Die Versorgungsspannung des Chips muss zwischen 3,2 und 4,7 V liegen. Die Standardkonfiguration basiert auf SF32LB525UC6 mit 8 MB OPI-PSRAM.
+    - **A**: Regulärer 3,3-V-Betrieb für die SF32LB52B-Familie. Eine direkte Versorgung aus einem Li-Ion-Akku wird nicht unterstützt; die Versorgungsspannung des Chips muss zwischen 2,97 und 3,63 V liegen. Die Standardkonfiguration basiert auf SF32LB52BU36 mit integriertem 1 MB QSPI-NOR-Flash.
+    - **B**: Regulärer 3,3-V-Betrieb für die 52E/52G/52J-Familie. Eine direkte Versorgung aus einem Li-Ion-Akku wird nicht unterstützt; die Versorgungsspannung des Chips muss zwischen 2,97 und 3,63 V liegen. Die Standardkonfiguration basiert auf SF32LB52EUB6 mit integriertem 4 MB OPI-PSRAM.
 
 Das `-A`-Modul ist nicht mit externem NOR-Flash bestückt. Es kann mit externem NOR-Flash oder SDIO-Peripheriegeräten wie Wi-Fi, SD-NAND und eMMC im 4-Bit-Modus verbunden werden.
 
@@ -153,9 +153,9 @@ Die drei Suffixfelder werden ohne Trennzeichen aneinandergereiht: `Aaaa` bezeich
 
 #### Beispiel 1: SF32LB52-MOD-1-N16R8 { #example-1-sf32lb52-mod-1-n16r8 }
 
-**SF32LB52-Modul für Li-Ion-Batteriebetrieb:**
+**SF32LB52-Modul für Li-Ion-Akkubetrieb:**
 
-* **Modul-Subtyp:** `-1` steht für direkten Li-Ion-Batteriebetrieb. Die Versorgungsspannung des Chips liegt zwischen 3,2 und 4,7 V.
+* **Modul-Subtyp:** `-1` steht für direkten Li-Ion-Akkubetrieb. Die Versorgungsspannung des Chips liegt zwischen 3,2 und 4,7 V.
 * **Variabler Flash:** `N16` bezeichnet 16 MB QSPI-NOR-Flash.
 * **PSRAM:** `R8` bezeichnet 8 MB OPI-PSRAM.
 

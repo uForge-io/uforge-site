@@ -138,7 +138,7 @@ Esta tabela distingue os pinos da face inferior, os da face superior e a coluna 
 
 ### Descrição dos pinos M2 { #m2-pin-descriptions }
 
-Os grupos e as cores seguem a tabela de contatos acima. A planilha não define as direções de E/S; esta coluna é uma referência provisória para integração, vista do módulo: I significa entrada, O saída e I/O operação bidirecional. As direções separadas por vírgulas seguem a ordem dos sinais. As linhas SPI e PDM pressupõem que o módulo fornece o clock; as linhas SWD pressupõem um depurador externo. Confirme cada direção e requisito elétrico na documentação do módulo e do SoC selecionados.
+Os grupos e as cores seguem a tabela de contatos acima. A planilha não define as direções de E/S; esta coluna é uma referência provisória para integração, vista do módulo: I significa entrada, O saída e I/O entrada/saída bidirecional. As direções separadas por vírgulas seguem a ordem dos sinais. As linhas SPI e PDM pressupõem que o módulo fornece o clock; as linhas SWD pressupõem um depurador externo. Confirme cada direção e requisito elétrico na documentação do módulo e do SoC selecionados.
 
 Em I2C, I/O descreve as linhas bidirecionais SDA/SCL; não garante todos os modos de controlador/dispositivo alvo nem suporte a clock stretching. Confirme a configuração dos pinos e os resistores de pull-up do módulo real. Consulte a [especificação I2C da NXP](https://www.nxp.com/docs/en/user-guide/UM10204.pdf). A hipótese de saída de clock e entrada de dados PDM segue a conexão entre microfone e host ilustrada na [nota de aplicação PDM da ST](https://www.st.com/resource/en/application_note/an5027-interfacing-pdm-digital-microphones-using-stm32-mcus-and-mpus-stmicroelectronics.pdf); ela não comprova suporte em um módulo específico.
 
@@ -204,7 +204,7 @@ Em I2C, I/O descreve as linhas bidirecionais SDA/SCL; não garante todos os modo
 - A planilha trata SWD como um recurso multiplexado com duas opções de roteamento: posições do UART de depuração (`SWDIO` no pino 43 e `SWCLK` no pino 41) ou de interrupção/reset do toque (`SWDIO` no pino 51 e `SWCLK` no pino 49). Implemente apenas uma opção por módulo e defina uma estratégia de recuperação antes de reutilizar qualquer um desses contatos.
 - SPI1 compartilha a rota do cartão TF de 1 bit. As linhas também usam os nomes genéricos do controlador `SDIO1_D0–D3`/`CMD`/`CLK`; os pinos 65/67 ainda têm as funções `CAN_TX`/`CAN_RX`.
 - As linhas de dados Wi-Fi SDIO2 também usam os nomes genéricos do controlador `SDIO2_D0–D3`/`CMD`/`CLK`; vários desses contatos podem funcionar como entradas analógicas `GPADC`.
-- SPI2 e I2C3/I2C4 (contatos 58, 56, 54 e 52) podem transportar sinais de microfone digital `PDM1`/`PDM2`, além dos nomes GPIO genéricos `G0–G3`/`BUS0–BUS3`.
+- Os contatos 58, 56, 54 e 52 podem ser usados por SPI2 e I2C3/I2C4 ou, alternativamente, transportar sinais `PDM1`/`PDM2` de microfones digitais. Eles também têm os aliases GPIO genéricos `G0–G3`/`BUS0–BUS3`.
 - No grupo de seis posições `G11–G16`/`BUS11–BUS16`, UART3 usa os contatos 38/36, UART2 os 39/37 e I2C2 SDA/SCL os 35/34. São pares distintos, não três barramentos compartilhando os mesmos pinos. Cada par compartilha os contatos com os nomes GPIO correspondentes; confirme a operação simultânea no módulo selecionado.
 - Os grupos de display QSPI e toque capacitivo são separados no nível de sinais, mas sua alimentação, reset e comportamento de despertar devem ser revisados como um único subsistema de display.
 - `CAN_TX` e `CAN_RX` são sinais lógicos multiplexados nos pinos 65/67, não contatos exclusivos. A placa portadora ainda precisa de um transceptor CAN e da proteção adequada ao barramento do produto.
@@ -267,7 +267,7 @@ M2xA é um resumo não verificado de controle de motores e aquisição nesta pá
 
 ## Declaração do módulo e checklist de implementação { #module-declaration-and-implementation-checklist }
 
-A declaração do módulo deve identificar a atribuição base e cada mapa de extensão compatível, por exemplo, `M2`, `M2 + M2xM` ou `M2 + M2xN + M2xA`. Também deve informar a quantidade de conectores com formato M2 implementados, suas categorias, as funções opcionais implementadas e os modos mutuamente exclusivos.
+Recomenda-se que a declaração do módulo identifique a atribuição base e cada mapa de extensão compatível, por exemplo, `M2`, `M2 + M2xM` ou `M2 + M2xN + M2xA`, e informe a quantidade de conectores com formato M2 implementados, suas categorias, as funções opcionais implementadas e os modos mutuamente exclusivos.
 
 Antes de adotar este rascunho, verifique:
 

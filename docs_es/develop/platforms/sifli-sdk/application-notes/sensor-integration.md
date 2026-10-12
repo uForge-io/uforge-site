@@ -16,7 +16,7 @@ Los ejemplos usan un sensor de seis ejes LSM6DSL (acelerómetro y giroscopio) y 
 
 ## Confirmar el hardware y la interfaz del sensor { #1-confirm-the-hardware-and-sensor-interface }
 
-Empiece por la hoja de datos del sensor e identifique tanto su función como su interfaz de host. La guía del SDK enumera como ejemplos sensores de seis ejes (acelerómetro y giroscopio), temperatura, presión barométrica, geomagnetismo, luz, GPS y motores. Las interfaces de host cubiertas aquí son I2C, SPI y UART.
+Empiece por la hoja de datos del sensor e identifique tanto su función como su interfaz de host. La guía del SDK enumera como ejemplos sensores de seis ejes (acelerómetro y giroscopio), temperatura, presión barométrica, geomagnetismo, luz, GPS y sensores de motor. Las interfaces de host cubiertas aquí son I2C, SPI y UART.
 
 Antes de escribir el controlador:
 
@@ -29,7 +29,7 @@ Antes de escribir el controlador:
 
 Los controladores de periféricos de SiFli-SDK se encuentran en `rtos/rthread/bsp/sifli/peripherals`. Después de elegir el bus y la implementación, cree un directorio para el nuevo dispositivo. Añada sus entradas `menuconfig` a `rtos/rthread/bsp/sifli/peripherals/Kconfig`, incluidos:
 
-- el interruptor para habilitar el sensor;
+- la opción para habilitar el sensor;
 - la selección y el nombre de una interfaz compatible, como I2C, SPI o UART;
 - la configuración de GPIO para alimentación, reset, chip select e interrupción; y
 - funciones opcionales del sensor, como detección de actividad, podómetro o soporte FIFO.
@@ -190,7 +190,7 @@ Añada un archivo `sensor_xxx.c` al directorio del nuevo dispositivo. Su funció
 
 El registro consta de dos partes:
 
-1. Asignar y registrar una o varias instancias `rt_sensor_device` con `rt_hw_sensor_register`.
+1. Reservar memoria para una o varias instancias `rt_sensor_device` y registrarlas con `rt_hw_sensor_register`.
 2. Proporcionar los callbacks `sensor_ops` para leer datos, controlar el modo y gestionar las transiciones de suspensión/reactivación.
 
 El ejemplo BMP280 de la guía del SDK registra por separado los canales de temperatura y presión barométrica, define sus unidades y rangos, copia la configuración común y comparte la tabla de callbacks:

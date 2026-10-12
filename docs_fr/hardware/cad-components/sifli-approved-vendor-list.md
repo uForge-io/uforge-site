@@ -11,9 +11,9 @@ tags:
 
 ## À quoi sert cette liste { #what-this-list-is-for }
 
-La **liste de fournisseurs approuvés (AVL)** consigne les qualifications de composants réalisées par SiFli pour les conceptions SF32. V0.3 répertorie des résonateurs à quartz, des inductances de convertisseurs abaisseurs, des mémoires Flash NOR/NAND, de la SD-NAND et un pilote LCD ; la feuille des contrôleurs tactiles est vide. Utilisez cette liste pour présélectionner des composants et repérer des fournisseurs de remplacement. Validez ensuite la référence exacte sur votre carte, avec le firmware prévu, dans le boîtier du produit et au regard du procédé de fabrication et de la chaîne d’approvisionnement envisagés. L’inscription ne remplace pas la validation du produit.
+La **liste de fournisseurs approuvés (AVL)** consigne les qualifications de composants réalisées par SiFli pour les conceptions SF32. V0.3 répertorie des résonateurs à quartz, des inductances de convertisseurs abaisseurs, des mémoires Flash NOR/NAND, de la SD-NAND et un pilote LCD ; la feuille des contrôleurs tactiles est vide. Utilisez cette liste pour présélectionner des composants et repérer des fournisseurs de remplacement. Validez ensuite la référence exacte sur votre carte, avec le firmware prévu, dans le boîtier du produit et au regard du procédé de fabrication et de la chaîne d'approvisionnement envisagés. L'inscription ne remplace pas la validation du produit.
 
-Cette page reprend le classeur AVL officiel de SiFli, **`SIFLI-MCU-AVL-认证表`, version V0.3 (2026-01-21)**. L’AVL peut évoluer à mesure que de nouvelles références sont qualifiées ; cette page présente la version V0.3 datée du 2026-01-21 et n’est pas actualisée en temps réel. Cette vérification confirme uniquement le contenu de V0.3 ; elle ne permet pas d’établir si une référence reste qualifiée dans une révision ultérieure de l’AVL. Consultez le classeur source en vigueur avant de figer la BOM :
+Cette page reprend le classeur AVL officiel de SiFli, **`SIFLI-MCU-AVL-认证表`, version V0.3 (2026-01-21)**. L'AVL peut évoluer à mesure que de nouvelles références sont qualifiées ; cette page présente la version V0.3 datée du 2026-01-21 et n'est pas actualisée en temps réel. Cette vérification confirme uniquement le contenu de V0.3 ; elle ne permet pas d'établir si une référence reste qualifiée dans une révision ultérieure de l'AVL. Consultez le classeur source en vigueur avant de figer la BOM :
 
 <div class="grid cards" markdown>
 
@@ -23,12 +23,12 @@ Cette page reprend le classeur AVL officiel de SiFli, **`SIFLI-MCU-AVL-认证表
 </div>
 
 !!! note "Comment utiliser cette liste"
-    La source donne des exigences générales pour les quartz et les inductances de convertisseurs abaisseurs ; les autres tableaux consignent surtout les données de chaque référence. Évaluez les candidats selon ces exigences sans supposer que chaque composant inscrit respecte toutes les limites générales : les incohérences de la source sont signalées ci-dessous. Les colonnes entièrement vides, notamment la prise en charge des outils de téléchargement Flash, sont omises ; cela ne confirme pas cette prise en charge. Dans les tableaux détaillés, un tiret (—) signifie généralement que la version V0.3 ne fournit aucune valeur pour le champ concerné. Dans les cellules d’horloge DTR des NOR Flash, il correspond en revanche à la mention explicite « non pris en charge » de la source ; voir la note sur les NOR Flash.
+    La source donne des exigences générales pour les quartz et les inductances de convertisseurs abaisseurs ; les autres tableaux consignent surtout les données de chaque référence. Évaluez les candidats selon ces exigences sans supposer que chaque composant inscrit respecte toutes les limites générales : les incohérences de la source sont signalées ci-dessous. Les colonnes entièrement vides, notamment la prise en charge des outils de téléchargement Flash, sont omises ; cela ne confirme pas cette prise en charge. Dans les tableaux détaillés, un tiret (—) signifie généralement que la version V0.3 ne fournit aucune valeur pour le champ concerné. Dans les cellules d'horloge DTR des NOR Flash, il correspond en revanche à la mention explicite « non pris en charge » de la source ; voir la note sur les NOR Flash.
 
 Pour établir votre nomenclature, procédez en trois étapes plutôt que de simplement choisir une référence :
 
 1. **Présélectionnez selon les exigences.** Vérifiez la capacité, la tension d'alimentation, le boîtier et les exigences propres à chaque type de composant (capacité de charge des quartz, DCR/Isat des inductances, fréquence SDR/DTR des mémoires Flash) en fonction de votre schéma et de votre budget énergétique.
-2. **Vérifiez aussi les contraintes que ne révèlent pas les principales caractéristiques de la fiche technique.** Confirmez la plage de température requise pour l'exploitation et le stockage, l'ID fabricant/JEDEC exact attendu par le firmware et la prise en charge de l'OTA, du système de fichiers ou de l'outil de programmation sur cette référence précise, et non seulement sur une autre référence de la même famille.
+2. **Vérifiez aussi les contraintes que ne révèlent pas les principales caractéristiques de la fiche technique.** Confirmez la plage de température requise pour l'exploitation et le stockage, l'ID fabricant/JEDEC exact attendu par le firmware et la prise en charge de l'OTA, du système de fichiers ou de l'outil de téléchargement sur cette référence précise, et non seulement sur une autre référence de la même famille.
 3. **Validez sur le matériel réel avant la production en série.** Mesurez les courants en veille et en fonctionnement sur votre carte, vérifiez à nouveau le calibrage RF du quartz avec le PCB et le boîtier définitifs, et identifiez au moins une seconde source pour chaque composant à fournisseur unique.
 
 ## Aperçu de la couverture { #coverage-at-a-glance }
@@ -45,12 +45,12 @@ Pour établir votre nomenclature, procédez en trois étapes plutôt que de simp
 | Mémoire Flash NOR | 44 | Capacité, rail de tension, horloge SDR/DTR, ID indiqué, courant en veille/deep-power-down |
 | Mémoire Flash SPI-NAND | 18 | Capacité, mode ECC, géométrie page/bloc, Golden Block, courants veille/lecture/programmation |
 | Mémoire Flash SD-NAND | 5 | Compatibilité SD 2.0, fonctionnement à 50 MHz, courant en veille, plage de température de fonctionnement |
-| Pilotes LCD | 1 | Une référence répertoriée ; confirmez les contraintes temporelles de la dalle, le pilote et le mode d’interface avant la sortie |
+| Pilotes LCD | 1 | Une référence répertoriée ; confirmez les contraintes temporelles de la dalle, le pilote et le mode d'interface avant la sortie |
 | Contrôleurs de dalles tactiles | 0 | Aucune entrée dans V0.3 ; confirmez séparément la qualification et le pilote |
 
 </div>
 
-Ce résumé présente la couverture de V0.3. Le choix des composants d’affichage et tactiles mérite une attention particulière : cette version ne contient qu’un pilote LCD et aucun contrôleur tactile. Confirmez la référence auprès de SiFli et validez-la dans le produit ; son ajout à une révision ultérieure ne supprime pas cette exigence.
+Ce résumé présente la couverture de V0.3. Le choix des composants d'affichage et tactiles mérite une attention particulière : cette version ne contient qu'un pilote LCD et aucun contrôleur tactile. Confirmez la référence auprès de SiFli et validez-la dans le produit ; son ajout à une révision ultérieure ne supprime pas cette exigence.
 
 ## Historique des révisions { #revision-history }
 
@@ -83,16 +83,16 @@ L'AVL couvre les quartz système de 48 MHz et les quartz RTC de 32,768 kHz. Cons
 
 | Référence qualifiée | Fournisseur | CL | ΔF/F0 | ESR | Temp. de fonctionnement | Boîtier | Temps de démarrage | Courant additionnel | CBANK_SEL optimal | Décalage de fréq. TX Ch39 (−35°C / 25°C / 105°C) |
 |:--------------|:-------|:---|:------|:----|:----------------|:--------|:--------------|:-------------|:-------------------|:---------------------------------------------|
-| E1SB48E001G00E | Hosonic (鸿星) | 8,8 pF | −10 à +9 ppm | ≤22 Ω | −30°C à +85°C | métrique 2016 | <700 µs | 0 µA | 0x1C9 | −32 à −1 kHz / ±20 kHz / +33 à +73 kHz |
-| SX20Y048000B31T-8.8 | TKD (泰晶) | 8,8 pF | ±10 ppm | ≤40 Ω | −20°C à +75°C | métrique 2016 | <800 µs | <30 µA | 0x1DC | −52 à −15 kHz / ±22 kHz / +50 à +100 kHz |
-| SX20Y048000B31T001 | TKD (泰晶) | 8,8 pF | ±10 ppm | ≤40 Ω | −40°C à +85°C | métrique 2016 | <800 µs | <30 µA | 0x1F7 | −53 à +13 kHz / ±30 kHz / +44 à +90 kHz |
-| CN4048M00085C822000 | JWT (晶威特) | 8 pF | ±8 ppm | ≤22 Ω | −30°C à +85°C | métrique 2016 | <700 µs | 0 µA | 0x195 | −40 à +1 kHz / −25 à +14 kHz / +12 à +45 kHz |
-| HS48000013 | 汇隆电子 | 8,8 pF | ±10 ppm | ≤22 Ω | −30°C à +85°C | métrique 2016 | <700 µs | <12 µA | 0x1F3 | −27 à +8 kHz / −25 à +10 kHz / −1,2 à +32 kHz |
-| SX20Y048000B81T003 | TKD (泰晶) | 8 pF | ±10 ppm | ≤40 Ω | −30°C à +85°C | métrique 2016 | <700 µs | <10 µA | 0x1F4 | −41 à +7 kHz / −30 à +20 kHz / +5 à +57 kHz |
-| L214S480D11-S | Lucki (蓝晶) | 8 pF | ±10 ppm | ≤30 Ω | −30°C à +85°C | métrique 2016 | <750 µs | <50 µA | 0x196 | −38 à 0 kHz / −28 à 0 kHz / −4 à +45 kHz |
-| 8Y48090002 | TXC (晶技) | 8,8 pF | −6 à +8 ppm | ≤22 Ω | −30°C à +85°C | métrique 2016 | <700 µs | <30 µA | 0x1D0 | −34 à −9,6 kHz / — / +27,9 à +46,1 kHz |
-| 9S48000051 | 惠伦晶体 | 8,8 pF | −6 à +8 ppm | ≤20 Ω | −30°C à +85°C | métrique 2016 | <700 µs | <15 µA | — | — |
-| CN4048M000885C822000 | JWT (晶威特) | 8,8 pF | ±8 ppm | ≤22 Ω | −30°C à +85°C | métrique 2016 | <700 µs | <10 µA | 0x1D0 | −34 à −9,6 kHz / −25 à +10 kHz / +27,9 à +46,1 kHz |
+| E1SB48E001G00E | Hosonic (鸿星) | 8,8 pF | −10 à +9 ppm | ≤22 Ω | −30°C à +85°C | format métrique 2016 | <700 µs | 0 µA | 0x1C9 | −32 à −1 kHz / ±20 kHz / +33 à +73 kHz |
+| SX20Y048000B31T-8.8 | TKD (泰晶) | 8,8 pF | ±10 ppm | ≤40 Ω | −20°C à +75°C | format métrique 2016 | <800 µs | <30 µA | 0x1DC | −52 à −15 kHz / ±22 kHz / +50 à +100 kHz |
+| SX20Y048000B31T001 | TKD (泰晶) | 8,8 pF | ±10 ppm | ≤40 Ω | −40°C à +85°C | format métrique 2016 | <800 µs | <30 µA | 0x1F7 | −53 à +13 kHz / ±30 kHz / +44 à +90 kHz |
+| CN4048M00085C822000 | JWT (晶威特) | 8 pF | ±8 ppm | ≤22 Ω | −30°C à +85°C | format métrique 2016 | <700 µs | 0 µA | 0x195 | −40 à +1 kHz / −25 à +14 kHz / +12 à +45 kHz |
+| HS48000013 | 汇隆电子 | 8,8 pF | ±10 ppm | ≤22 Ω | −30°C à +85°C | format métrique 2016 | <700 µs | <12 µA | 0x1F3 | −27 à +8 kHz / −25 à +10 kHz / −1,2 à +32 kHz |
+| SX20Y048000B81T003 | TKD (泰晶) | 8 pF | ±10 ppm | ≤40 Ω | −30°C à +85°C | format métrique 2016 | <700 µs | <10 µA | 0x1F4 | −41 à +7 kHz / −30 à +20 kHz / +5 à +57 kHz |
+| L214S480D11-S | Lucki (蓝晶) | 8 pF | ±10 ppm | ≤30 Ω | −30°C à +85°C | format métrique 2016 | <750 µs | <50 µA | 0x196 | −38 à 0 kHz / −28 à 0 kHz / −4 à +45 kHz |
+| 8Y48090002 | TXC (晶技) | 8,8 pF | −6 à +8 ppm | ≤22 Ω | −30°C à +85°C | format métrique 2016 | <700 µs | <30 µA | 0x1D0 | −34 à −9,6 kHz / — / +27,9 à +46,1 kHz |
+| 9S48000051 | 惠伦晶体 | 8,8 pF | −6 à +8 ppm | ≤20 Ω | −30°C à +85°C | format métrique 2016 | <700 µs | <15 µA | — | — |
+| CN4048M000885C822000 | JWT (晶威特) | 8,8 pF | ±8 ppm | ≤22 Ω | −30°C à +85°C | format métrique 2016 | <700 µs | <10 µA | 0x1D0 | −34 à −9,6 kHz / −25 à +10 kHz / +27,9 à +46,1 kHz |
 
 </div>
 
@@ -112,11 +112,11 @@ Les courants supplémentaires du tableau des quartz n'ont ni valeur de référen
 
 | Référence qualifiée | Fournisseur | CL | ΔF/F0 | ESR | Temp. de fonctionnement | Boîtier | Pourcentages de la source ; signification à confirmer (−35°C / 25°C / 105°C) |
 |:--------------|:-------|:---|:------|:----|:----------------|:--------|:-------------------------------------|
-| ETST00327000LE | Hosonic (鸿星) | 7 pF | ±20 ppm | ≤70 kΩ | −40°C à +85°C | métrique 3215 | 32 % à 55 % / 43 % à 54 % / 38 % à 45 % |
-| SF32K32768D71T01 | TKD (泰晶) | 7 pF | ±20 ppm | ≤70 kΩ | −40°C à +85°C | métrique 3215 | 33 % à 54 % / 42 % à 56 % / 35 % à 44 % |
-| X1A0001210008xx | Epson (爱普生) | 7 pF | ±20 ppm | ≤90 kΩ | −40°C à +85°C | métrique 1610 | 35 % à 61 % / 42 % à 58 % / 36 % à 48 % |
-| DH2032K76807T2719002 | JWT (晶威特) | 7 pF | ±20 ppm | ≤70 kΩ | −40°C à +85°C | métrique 3215 | 43 % à 60 % / 45 % à 59 % / 37 % à 48 % |
-| SF32WK32768D71T024 | TKD (泰晶) | 7 pF | ±20 ppm | ≤70 kΩ | −40°C à +85°C | métrique 3215 | 34 % à 55 % / 41 % à 54 % / 36 % à 46 % |
+| ETST00327000LE | Hosonic (鸿星) | 7 pF | ±20 ppm | ≤70 kΩ | −40°C à +85°C | format métrique 3215 | 32 % à 55 % / 43 % à 54 % / 38 % à 45 % |
+| SF32K32768D71T01 | TKD (泰晶) | 7 pF | ±20 ppm | ≤70 kΩ | −40°C à +85°C | format métrique 3215 | 33 % à 54 % / 42 % à 56 % / 35 % à 44 % |
+| X1A0001210008xx | Epson (爱普生) | 7 pF | ±20 ppm | ≤90 kΩ | −40°C à +85°C | format métrique 1610 | 35 % à 61 % / 42 % à 58 % / 36 % à 48 % |
+| DH2032K76807T2719002 | JWT (晶威特) | 7 pF | ±20 ppm | ≤70 kΩ | −40°C à +85°C | format métrique 3215 | 43 % à 60 % / 45 % à 59 % / 37 % à 48 % |
+| SF32WK32768D71T024 | TKD (泰晶) | 7 pF | ±20 ppm | ≤70 kΩ | −40°C à +85°C | format métrique 3215 | 34 % à 55 % / 41 % à 54 % / 36 % à 46 % |
 
 </div>
 
@@ -135,24 +135,24 @@ Le classeur indique 32,76 kHz pour chaque composant à trois températures d'ess
 
 | Référence qualifiée | Fournisseur | Type | Tolérance | SRF | DCR | Isat | Irms | Boîtier |
 |:--------------|:-------|:-----|:----------|:----|:----|:-----|:-----|:--------|
-| WPN201610U4R7MT | Sunlord | Bobiné | ±20 % | 21 MHz | ≤288 mΩ | 1,3 A | 1,45 A | 0806 (métrique 2016) |
-| WPN201610H4R7MT | Sunlord | Bobiné | ±20 % | 25 MHz | ≤425 mΩ | 1,2 A | 1,0 A | 0806 (métrique 2016) |
-| HTTX20161T-4R7MDR | Cyntec | Bobiné | ±20 % | — | ≤250 mΩ | 1,7 A | 1,5 A | 0806 (métrique 2016) |
-| VLS201612CX-4R7M-1 | TDK | Bobiné | ±20 % | 51 MHz | ≤252 mΩ | 0,88 A | 1,32 A | 0806 (métrique 2016) |
-| CIGW201610GL4R7MLE | Samsung | Bobiné | ±20 % | — | ≤240 mΩ | 1,4 A | 1,4 A | 0806 (métrique 2016) |
-| DFE201612E-4R7M=P2 | Murata | Bobiné | ±20 % | — | ≤252 mΩ | 1,8 A | 1,2 A | 0806 (métrique 2016) |
-| SWAI201610H4R7M | 三体微 | Bobiné | ±20 % | — | ≤390 mΩ | 1,3 A | 1,05 A | 0806 (métrique 2016) |
-| FSHJ201610-4R7M | 方磁 | Bobiné | ±20 % | — | ≤425 mΩ | 1,1 A | 0,9 A | 0806 (métrique 2016) |
+| WPN201610U4R7MT | Sunlord | Bobiné | ±20 % | 21 MHz | ≤288 mΩ | 1,3 A | 1,45 A | 0806 (format métrique 2016) |
+| WPN201610H4R7MT | Sunlord | Bobiné | ±20 % | 25 MHz | ≤425 mΩ | 1,2 A | 1,0 A | 0806 (format métrique 2016) |
+| HTTX20161T-4R7MDR | Cyntec | Bobiné | ±20 % | — | ≤250 mΩ | 1,7 A | 1,5 A | 0806 (format métrique 2016) |
+| VLS201612CX-4R7M-1 | TDK | Bobiné | ±20 % | 51 MHz | ≤252 mΩ | 0,88 A | 1,32 A | 0806 (format métrique 2016) |
+| CIGW201610GL4R7MLE | Samsung | Bobiné | ±20 % | — | ≤240 mΩ | 1,4 A | 1,4 A | 0806 (format métrique 2016) |
+| DFE201612E-4R7M=P2 | Murata | Bobiné | ±20 % | — | ≤252 mΩ | 1,8 A | 1,2 A | 0806 (format métrique 2016) |
+| SWAI201610H4R7M | 三体微 | Bobiné | ±20 % | — | ≤390 mΩ | 1,3 A | 1,05 A | 0806 (format métrique 2016) |
+| FSHJ201610-4R7M | 方磁 | Bobiné | ±20 % | — | ≤425 mΩ | 1,1 A | 0,9 A | 0806 (format métrique 2016) |
 
 </div>
 
-La présence dans ce tableau ne rend pas les huit inductances électriquement interchangeables. WPN201610H4R7MT et FSHJ201610-4R7M ont chacune une DCR maximale indiquée de 425 mΩ, supérieure à l'exigence générale de 0,4 Ω. Le classeur n'explique pas cette divergence ; confirmez leur acceptabilité auprès de SiFli au lieu de supposer qu'elles respectent cette limite. Pour chaque candidate, vérifiez les pertes liées à la DCR, Isat, Irms, SRF, l'empreinte, la hauteur et l'élévation de température en fonction du courant réel dans l'inductance et des conditions du convertisseur, et non du courant moyen du produit complet.
+La présence dans ce tableau ne rend pas les huit inductances électriquement interchangeables. WPN201610H4R7MT et FSHJ201610-4R7M ont chacune une DCR maximale indiquée de 425 mΩ, supérieure à l'exigence générale de 0,4 Ω. Le classeur n'explique pas cette divergence ; confirmez leur acceptabilité auprès de SiFli au lieu de supposer qu'elles respectent cette limite. Pour chaque composant, vérifiez les pertes liées à la DCR, Isat, Irms, SRF, l'empreinte, la hauteur et l'élévation de température en fonction du courant réel dans l'inductance et des conditions du convertisseur, et non du courant moyen du produit complet.
 
 ---
 
 ## Mémoire Flash NOR { #nor-flash }
 
-V0.3 répertorie 44 références de Flash NOR de 4 Mb à 256 Mb, regroupées par capacité. Les fréquences indiquées concernent les mémoires et ne garantissent pas ces vitesses sur tous les composants SF32 ou toutes les cartes. Vérifiez les commandes de lecture, les limites du contrôleur, les contraintes temporelles et l’identification par le pilote pour votre conception. La source nomme les valeurs hexadécimales « Manufacture ID », mais elles comprennent aussi des champs d’identification du composant : comparez la réponse complète attendue, pas seulement l’octet du fabricant. Calculez la consommation active et en veille avec des courants dont les conditions de fonctionnement sont documentées.
+V0.3 répertorie 44 références de Flash NOR de 4 Mb à 256 Mb, regroupées par capacité. Les fréquences indiquées concernent les mémoires et ne garantissent pas ces vitesses sur tous les composants SF32 ou toutes les cartes. Vérifiez les commandes de lecture, les limites du contrôleur, les contraintes temporelles et l'identification par le pilote pour votre conception. La source nomme les valeurs hexadécimales « Manufacture ID », mais elles comprennent aussi des champs d'identification du composant : comparez la réponse complète attendue, pas seulement l'octet du fabricant. Calculez la consommation active et en veille avec des courants dont les conditions de fonctionnement sont documentées.
 
 ### 4 Mb – 16 Mb { #4-mb-16-mb }
 
@@ -253,7 +253,7 @@ Aucun des six composants de cette tranche de capacité ne prend en charge le mod
 
 ## Mémoire Flash SPI-NAND { #spi-nand-flash }
 
-V0.3 répertorie 18 références SPI-NAND de 512 Mb et 1 Gb. Avec un pilote et une pile logicielle compatibles, elles peuvent stocker des fichiers ou des données ; FatFS, FlashDB et LittleFS en sont des exemples, mais la compatibilité avec la référence choisie doit être validée. L’accès page par page, la gestion de l’ECC et celle des blocs défectueux diffèrent de l’accès XIP direct en NOR. Pour toutes les références, la valeur indiquée dans le classeur pour **Golden Block** est `block0`, sans précision sur les conditions de garantie ni sur les routines du firmware qui en dépendent. Vérifiez ces hypothèses dans la documentation du composant et du SDK.
+V0.3 répertorie 18 références SPI-NAND de 512 Mb et 1 Gb. Avec un pilote et une pile logicielle compatibles, elles peuvent stocker des fichiers ou des données ; FatFS, FlashDB et LittleFS en sont des exemples, mais la compatibilité avec la référence choisie doit être validée. L'accès page par page, la gestion de l'ECC et celle des blocs défectueux diffèrent de l'accès XIP direct en NOR. Pour toutes les références, la valeur indiquée dans le classeur pour **Golden Block** est `block0`, sans précision sur les conditions de garantie ni sur les routines du firmware qui en dépendent. Vérifiez ces hypothèses dans la documentation du composant et du SDK.
 
 Pour GD5F1GM7RE et GD5F1GM7UE, la source indique `2048+64` octets par page, mais `128K+8K` octets par bloc. Les tailles de la zone de réserve ne concordent pas avec un calcul direct à partir des pages. Le tableau conserve les deux valeurs ; confirmez la géométrie des pages, des blocs et des zones de réserve dans la fiche technique de la référence exacte avant de configurer le pilote.
 
@@ -337,14 +337,14 @@ V0.3 répertorie cinq références SD-NAND qualifiées de 1 Gb avec une interfac
 
 </div>
 
-XSSD01GGAI est donné pour 0°C à +70°C. Les quatre autres références ont une limite inférieure de −25°C ou −30°C et une limite supérieure de +85°C. Utilisez les limites réelles de chaque ligne sans supposer une même classe de température, puis vérifiez la marge nécessaire pour l’environnement du produit.
+XSSD01GGAI est donné pour 0°C à +70°C. Les quatre autres références ont une limite inférieure de −25°C ou −30°C et une limite supérieure de +85°C. Utilisez les limites réelles de chaque ligne sans supposer une même classe de température, puis vérifiez la marge nécessaire pour l'environnement du produit.
 
 ---
 
 ## Pilote LCD { #lcd-driver }
 
-!!! warning "Pilotes d’affichage répertoriés dans V0.3"
-    V0.3 contient un pilote LCD. Le [classeur V0.3](https://downloads.sifli.com/hardware/files/documentation/SIFLI-MCU-AVL-%E8%AE%A4%E8%AF%81%E8%A1%A8-V0.3-20260121.xlsx) est une version figée, pas un lien vers les révisions futures. L’absence d’une référence ne signifie pas qu’elle n’est pas prise en charge ; confirmez-la auprès de SiFli avant de la retenir pour la production. MIPI et QSPI sont les interfaces du pilote d’affichage, pas nécessairement de chaque composant SF32. Vérifiez les interfaces et le pilote logiciel du circuit choisi ; consultez la [présentation graphique](../../learn/graphics/overview.md) et l’[architecture GPU ePicasso](../../learn/graphics/epicasso-gpu.md). La source indique `?MHz` pour SDR, sans valeur précise, et signale DDR comme non pris en charge.
+!!! warning "Pilotes d'affichage répertoriés dans V0.3"
+    V0.3 contient un pilote LCD. Le [classeur V0.3](https://downloads.sifli.com/hardware/files/documentation/SIFLI-MCU-AVL-%E8%AE%A4%E8%AF%81%E8%A1%A8-V0.3-20260121.xlsx) est une version figée, pas un lien vers les révisions futures. L'absence d'une référence ne signifie pas qu'elle n'est pas prise en charge ; confirmez-la auprès de SiFli avant de la retenir pour la production. MIPI et QSPI sont les interfaces du pilote d'affichage, pas nécessairement de chaque composant SF32. Vérifiez les interfaces et le pilote logiciel du circuit choisi ; consultez la [présentation graphique](../../learn/graphics/overview.md) et l'[architecture GPU ePicasso](../../learn/graphics/epicasso-gpu.md). La source indique `?MHz` pour SDR, sans valeur précise, et signale DDR comme non pris en charge.
 
 <div align="center"><em>Composants qualifiés — pilote LCD</em></div>
 
@@ -360,7 +360,7 @@ XSSD01GGAI est donné pour 0°C à +70°C. Les quatre autres références ont un
 
 ## Contrôleur de dalle tactile { #touch-panel-controller }
 
-V0.3 ne contient aucune référence de contrôleur tactile. Cela ne permet pas de conclure sur la qualification dans les révisions ultérieures ni sur l’absence de prise en charge d’un composant. Pour une référence envisagée, demandez aux équipes FAE ou commerciales de SiFli de confirmer la qualification et la disponibilité du pilote, en fournissant le code de commande exact et les exigences du produit. Consultez les [coordonnées de contact](../../about/index.md).
+V0.3 ne contient aucune référence de contrôleur tactile. Cela ne permet pas de conclure sur la qualification dans les révisions ultérieures ni sur l'absence de prise en charge d'un composant. Pour une référence envisagée, demandez aux équipes FAE ou commerciales de SiFli de confirmer la qualification et la disponibilité du pilote, en fournissant le code de commande exact et les exigences du produit. Consultez les [coordonnées de contact](../../about/index.md).
 
 ---
 
@@ -373,9 +373,9 @@ Avant de figer un schéma ou une BOM, vérifiez chaque composant AVL sélectionn
 - [ ] Le boîtier, la géométrie des pastilles, la hauteur et les contraintes d'assemblage correspondent à la bibliothèque PCB et au processus de fabrication.
 - [ ] Le firmware peut identifier correctement le composant par son ID JEDEC/fabricant ou, le cas échéant, par une vérification équivalente à l'exécution.
 - [ ] Le comportement de démarrage, de téléchargement, d'OTA, de système de fichiers, d'affichage ou de pilote tactile a été vérifié sur le composant exact.
-- [ ] Le courant basse consommation a été mesuré sur du matériel réel, et non recopié directement depuis l'AVL ou la fiche technique du composant.
+- [ ] Le courant en mode basse consommation a été mesuré sur du matériel réel, et non recopié directement depuis l'AVL ou la fiche technique du composant.
 - [ ] Le décalage de fréquence du quartz, le comportement de CBANK_SEL et le calibrage RF sont validés sur le PCB, l'antenne et le boîtier finaux.
-- [ ] Le timing d'effacement/programmation/lecture de la Flash est testé dans la plage de tension et de température attendue du produit.
+- [ ] La durée des opérations d'effacement, de programmation et de lecture de la Flash est testée dans la plage de tension et de température attendue du produit.
 - [ ] Au moins un fournisseur alternatif est identifié pour chaque composant à risque élevé de la BOM, notamment les quartz, les inductances, la Flash et les dalles d'affichage.
 
 Cette liste de contrôle applique volontairement des critères plus stricts que « le composant figure dans l'AVL ». L'AVL réduit l'espace de recherche ; la mise sur le marché dépend toujours des résultats de validation obtenus sur la carte.
@@ -383,13 +383,13 @@ Cette liste de contrôle applique volontairement des critères plus stricts que 
 ## Liste de contrôle d'approvisionnement { #sourcing-checklist }
 
 - [ ] Vérifiez la référence et le suffixe de révision par rapport à l'AVL téléchargeable actuelle — les versions datées du classeur, dont cette page, deviennent obsolètes à mesure que de nouveaux lots sont qualifiés.
-- [ ] Pour les composants Flash, confirmez que l'ID Manufacturer/JEDEC attendu par votre code de mise en service correspond au composant exact commandé, pas seulement à la famille — certaines familles partagent un nom commercial mais renvoient des octets d'ID différents.
-- [ ] Pour la NAND, la SD-NAND et tout composant servant au stockage d'un système de fichiers, vérifiez sur le matériel réel la prise en charge du démarrage et de l'outil de programmation, la procédure de mise à jour OTA et le fonctionnement de FatFS/FlashDB/LittleFS. Une lecture correcte lors de la mise en service ne suffit pas à valider le composant pour l'OTA.
-- [ ] Vérifiez CBANK_SEL et le décalage de fréquence TX Ch39 indiqué sur votre carte. Le classeur ne précise ni le routage de référence ni le dispositif de mesure complet ; confirmez le mode et les conditions d’essai avant de comparer les résultats.
-- [ ] Mesurez sur votre carte les courants de veille, de deep-power-down et de lecture. L’AVL ne documente pas entièrement l’origine et les conditions de chaque valeur ; vérifiez la fiche technique et les conditions de mesure.
+- [ ] Pour les composants Flash, confirmez que l'ID fabricant/JEDEC attendu par votre code de mise en service correspond au composant exact commandé, pas seulement à la famille — certaines familles partagent un nom commercial mais renvoient des octets d'ID différents.
+- [ ] Pour la NAND, la SD-NAND et tout composant servant au stockage d'un système de fichiers, vérifiez sur le matériel réel la prise en charge du démarrage et de l'outil de téléchargement, la procédure de mise à jour OTA et le fonctionnement de FatFS/FlashDB/LittleFS. Une lecture correcte lors de la mise en service ne suffit pas à valider le composant pour l'OTA.
+- [ ] Vérifiez CBANK_SEL et le décalage de fréquence TX Ch39 indiqué sur votre carte. Le classeur ne précise ni le routage de référence ni le dispositif de mesure complet ; confirmez le mode et les conditions d'essai avant de comparer les résultats.
+- [ ] Mesurez sur votre carte les courants de veille, de deep-power-down et de lecture. L'AVL ne documente pas entièrement l'origine et les conditions de chaque valeur ; vérifiez la fiche technique et les conditions de mesure.
 - [ ] Confirmez que le boîtier et l'empreinte PCB correspondent à votre bibliothèque et à vos capacités d'assemblage, pas seulement à la spécification électrique.
 - [ ] Pour tout composant ne figurant pas encore dans cette liste, qualifiez-le par rapport à la ligne d'exigence de sa classe de composant avant de l'engager dans une BOM, et envisagez de partager les données de qualification avec SiFli.
-- [ ] Identifiez une seconde source pour chaque composant à fournisseur unique. V0.3 contient un pilote LCD et aucun contrôleur tactile ; confirmez la disponibilité et la prise en charge actuelles sans considérer cet instantané comme l’état le plus récent.
+- [ ] Identifiez une seconde source pour chaque composant à fournisseur unique. V0.3 contient un pilote LCD et aucun contrôleur tactile ; confirmez la disponibilité et la prise en charge actuelles sans considérer cet instantané comme l'état le plus récent.
 - [ ] Revérifiez cette liste avant chaque gel important de la nomenclature : cette version datée n'est pas une base de données actualisée en temps réel.
 
 ## Pages associées { #related-pages }

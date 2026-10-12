@@ -17,7 +17,7 @@ tags:
 
 - [ ] Проверка минимальной системы завершена: задокументированы точный вариант, корпус, дерево питания, загрузочный носитель, выводы настройки загрузки, доступ для отладки и программирования, тактирование и стратегия пробуждения
 - [ ] Подтверждены точная модель чипа и вариант питания; схемы питания двух вариантов не смешаны
-- [ ] Напряжения на выводах питания процессора (VBUS/VBAT/VCC или PVDD/VDDIOA/VDD_SIP) находятся в пределах, указанных в техническом описании
+- [ ] Напряжения на выводах питания процессора (VBUS/VBAT/VCC или PVDD/VDDIOA/VDD_SIP) находятся в пределах, указанных в даташите
 - [ ] Дроссель BUCK соответствует требованиям: 4,7 uH ±20%, DCR ≤0,4 Ω, Isat ≥450 mA
 - [ ] Для варианта с питанием от аккумулятора проверены цепь зарядки, диапазон напряжений компонента OVP и ёмкость на выходе встроенного LDO
 - [ ] Кварцевые резонаторы 48 MHz и 32,768 kHz соответствуют рекомендованным характеристикам; соблюдены требования к разводке и запретным зонам
@@ -31,32 +31,32 @@ tags:
 
 ## 8. Документы и справочные материалы { #8-related-documents-and-references }
 
-[Техническое описание SF32LB52x (официальный PDF)]: https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?
-[Руководство пользователя SF32LB52x (официальный PDF)]: https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?
-[Пакет эталонного аппаратного проекта SF32LB52]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83%E8%AE%BE%E8%AE%A1-20250619.zip?
-[Рекомендации по аппаратному применению SF32LB520/3/5/7 (источник)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB520-3-5-7-HW-Application.md
-[Рекомендации по аппаратному применению 52B/D/E/G/J (источник)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52B-E-G-J-HW-Application.md
-[Перечень одобренных поставщиков SiFli на сайте]: ../cad-components/sifli-approved-vendor-list.md
-[Чек-лист SiFli для схемы и PCB SF32LB52 (XLSX)]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx
-[Указатель руководств SiFli по аппаратному проектированию (Wiki)]: https://wiki.sifli.com/en/hardware/index.html
+[SF32LB52x Datasheet (Official PDF)]: https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?
+[SF32LB52x User Manual (Official PDF)]: https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?
+[SF32LB52 Hardware Reference Design Package]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83%E8%AE%BE%E8%AE%A1-20250619.zip?
+[SF32LB520/3/5/7 Hardware Application Note (Source)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB520-3-5-7-HW-Application.md
+[52B/D/E/G/J Hardware Application Note (Source)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52B-E-G-J-HW-Application.md
+[Local SiFli Approved Vendor List]: ../cad-components/sifli-approved-vendor-list.md
+[SiFli SF32LB52 Schematic & PCB Checklist (XLSX)]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx
+[SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/en/hardware/index.html
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Техническое описание SF32LB52x (официальный PDF)]__
-- :fontawesome-solid-file-pdf: __[Руководство пользователя SF32LB52x (официальный PDF)]__
-- :fontawesome-solid-file-zipper: __[Пакет эталонного аппаратного проекта SF32LB52]__
-- :fontawesome-brands-github: __[Рекомендации по аппаратному применению SF32LB520/3/5/7 (источник)]__
-- :fontawesome-brands-github: __[Рекомендации по аппаратному применению 52B/D/E/G/J (источник)]__
-- :fontawesome-solid-file-excel: __[Перечень одобренных поставщиков SiFli на сайте]__
-- :fontawesome-solid-file-excel: __[Чек-лист SiFli для схемы и PCB SF32LB52 (XLSX)]__
-- :fontawesome-brands-wikipedia-w: __[Указатель руководств SiFli по аппаратному проектированию (Wiki)]__
+- :fontawesome-solid-file-pdf: __[Даташит SF32LB52x (официальный PDF)][SF32LB52x Datasheet (Official PDF)]__
+- :fontawesome-solid-file-pdf: __[Руководство пользователя SF32LB52x (официальный PDF)][SF32LB52x User Manual (Official PDF)]__
+- :fontawesome-solid-file-zipper: __[Пакет эталонного аппаратного проекта SF32LB52][SF32LB52 Hardware Reference Design Package]__
+- :fontawesome-brands-github: __[Рекомендации по аппаратному применению SF32LB520/3/5/7 (источник)][SF32LB520/3/5/7 Hardware Application Note (Source)]__
+- :fontawesome-brands-github: __[Рекомендации по аппаратному применению 52B/D/E/G/J (источник)][52B/D/E/G/J Hardware Application Note (Source)]__
+- :fontawesome-solid-file-excel: __[Перечень одобренных поставщиков SiFli на сайте][Local SiFli Approved Vendor List]__
+- :fontawesome-solid-file-excel: __[Чек-лист SiFli для схемы и PCB SF32LB52 (XLSX)][SiFli SF32LB52 Schematic & PCB Checklist (XLSX)]__
+- :fontawesome-brands-wikipedia-w: __[Указатель руководств SiFli по аппаратному проектированию (Wiki)][SiFli Chip Hardware Design Guide Index (Wiki)]__
 
 </div>
 
 Дополнительные источники:
 
 - [Краткое описание SF32LB52x](https://downloads.sifli.com/user%20manual/PB5201-SF32LB52x-Product%20Brief.pdf)
-- [Техническое описание SF32LB52x](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf)
+- [Даташит SF32LB52x](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf)
 - [Справочное руководство SF32LB52x](https://downloads.sifli.com/user%20manual/UM5201-SF32LB52x-User%20Manual%20V0p8p4.pdf)
 - [Рекомендации по аппаратному применению SF32LB520/3/5/7](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB520-3-5-7-HW-Application.md)
 - [Рекомендации по аппаратному применению 52B/D/E/G/J](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52B-E-G-J-HW-Application.md)
@@ -68,7 +68,7 @@ tags:
 В исходных рекомендациях SiFli приведены следующие эталонные схемы, примеры разводки PCB, механические чертежи и схемы питания. Приложения сохраняют эти иллюстрации для проверки проекта; основные рекомендации по проектированию остаются в разделах 5 и 6.
 
 !!! note "Как пользоваться иллюстрациями"
-    Рассматривайте иллюстрации как эталонные схемы и примеры разводки из исходных рекомендаций. Окончательную реализацию для выбранного устройства и изделия проверяйте по правилам, таблицам, техническому описанию, справочному руководству, актуальному пакету эталонного проекта и AVL.
+    Рассматривайте иллюстрации как эталонные схемы и примеры разводки из исходных рекомендаций. Окончательную реализацию для выбранного устройства и изделия проверяйте по правилам, таблицам, даташиту, справочному руководству, актуальному пакету эталонного проекта и AVL.
 
 <div align="center"><em>Таблица 9-1: Содержание приложений</em></div>
 
@@ -78,7 +78,7 @@ tags:
 |:---|:---|
 | Примеры структурных схем умных часов для двух групп SF32LB52x | Приложение A: типовое применение в умных часах |
 | Примеры схем RF, памяти/загрузки, кнопок, двигателя, аудио, тактирования, USB и DC/DC | Приложение B: эталонные схемы |
-| Примеры размещения и разводки RF, памяти, аудио, стека слоёв, fanout, тактовых цепей, USB и DC/DC | Приложение C: эталонная разводка PCB |
+| Примеры размещения и разводки RF, памяти, аудио, стека слоёв, вывода трасс из корпуса, тактовых цепей, USB и DC/DC | Приложение C: эталонная разводка PCB |
 | Чертежи габаритов, формы корпуса и посадочного места | Приложение D: механические чертежи |
 | Эталонные схемы и разводка зарядки, OVP, дерева питания и PMU | Приложение E: питание |
 
@@ -234,9 +234,9 @@ tags:
 
 <div align="center"><em>Рисунок 9.3-8: Эталонные правила проектирования PCB</em></div>
 
-![Рисунок 9.3-9: Эталонный fanout QFN](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-FANOUT.png){ loading="lazy" }
+![Рисунок 9.3-9: Эталонный вывод трасс из корпуса QFN](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-FANOUT.png){ loading="lazy" }
 
-<div align="center"><em>Рисунок 9.3-9: Эталонный fanout QFN</em></div>
+<div align="center"><em>Рисунок 9.3-9: Эталонный вывод трасс из корпуса QFN</em></div>
 
 ![Рисунок 9.3-10: Эталонное размещение кварцевых резонаторов](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-CRYSTAL.png){ loading="lazy" }
 
@@ -282,13 +282,13 @@ tags:
 
 ### 9.4. Приложение D. Механические чертежи { #appendix-d-mechanical }
 
-![Рисунок 9.4-1: Чертеж корпуса SF32LB520/3/5/7](../../sf32-products/chips/assets/52xA/sf32lb52x-A-package-layout.png){ loading="lazy" }
+![Рисунок 9.4-1: Чертёж корпуса SF32LB520/3/5/7](../../sf32-products/chips/assets/52xA/sf32lb52x-A-package-layout.png){ loading="lazy" }
 
-<div align="center"><em>Рисунок 9.4-1: Чертеж корпуса SF32LB520/3/5/7</em></div>
+<div align="center"><em>Рисунок 9.4-1: Чертёж корпуса SF32LB520/3/5/7</em></div>
 
-![Рисунок 9.4-2: Чертеж корпуса 52B/D/E/G/J](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ loading="lazy" }
+![Рисунок 9.4-2: Чертёж корпуса 52B/D/E/G/J](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ loading="lazy" }
 
-<div align="center"><em>Рисунок 9.4-2: Чертеж корпуса 52B/D/E/G/J</em></div>
+<div align="center"><em>Рисунок 9.4-2: Чертёж корпуса 52B/D/E/G/J</em></div>
 
 ![Рисунок 9.4-3: Габариты корпуса QFN68L](../../sf32-products/chips/assets/52xB/sf32lb52X-B-QFN68L-POD.png){ loading="lazy" }
 

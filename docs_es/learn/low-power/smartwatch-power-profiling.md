@@ -19,7 +19,7 @@ Para conocer las pautas de arquitectura y firmware, consulte el [Resumen del dis
 
 ## Sistema del reloj y límites del modelo { #smartwatch-system-overview }
 
-Empiece por delimitar el sistema que representa el modelo. El libro de trabajo describe un reloj inteligente alimentado por batería que incluye un MCU, una pantalla AMOLED, un motor háptico y una categoría de carga no desglosada llamada `Other`. No especifica el tamaño ni la resolución del panel, el nivel de brillo, la arquitectura de radio ni los sensores concretos. Trate los valores de corriente de la pantalla como entradas del modelo, no como mediciones ni como especificaciones de un panel determinado. `Other` es una categoría del modelo, no un componente físico.
+Empiece por delimitar el sistema que representa el modelo. El libro de trabajo describe un reloj inteligente alimentado por batería que incluye una MCU, una pantalla AMOLED, un motor háptico y una categoría de carga no desglosada llamada `Other`. No especifica el tamaño ni la resolución del panel, el nivel de brillo, la arquitectura de radio ni los sensores concretos. Trate los valores de corriente de la pantalla como entradas del modelo, no como mediciones ni como especificaciones de un panel determinado. `Other` es una categoría del modelo, no un componente físico.
 
 <div align="center"><em>Tabla: sistema del reloj y parámetros del modelo</em></div>
 
@@ -37,7 +37,7 @@ Empiece por delimitar el sistema que representa el modelo. El libro de trabajo d
 
 ## Consumo por escenario { #power-consumption-by-scenario }
 
-Un escenario representa una actividad completa del usuario o del sistema, no un componente aislado. Por ejemplo, una notificación puede despertar el MCU, encender la pantalla AMOLED, activar el motor háptico y mantener otras cargas en segundo plano. En la matriz, cada fila `Display` corresponde a la pantalla AMOLED. Las filas de cada escenario se mantienen juntas y conservan los valores diarios calculados para facilitar la trazabilidad. Las hipótesis de frecuencia y duración que determinan esos valores se detallan más adelante en el perfil de uso diario.
+Un escenario representa una actividad completa del usuario o del sistema, no un componente aislado. Por ejemplo, una notificación puede despertar la MCU, encender la pantalla AMOLED, activar el motor háptico y mantener otras cargas en segundo plano. En la matriz, cada fila `Display` corresponde a la pantalla AMOLED. Las filas de cada escenario se mantienen juntas y conservan los valores diarios calculados para facilitar la trazabilidad. Las hipótesis de frecuencia y duración que determinan esos valores se detallan más adelante en el perfil de uso diario.
 
 <div align="center"><em>Tabla: modelo completo de consumo por componente</em></div>
 
@@ -185,7 +185,7 @@ Las celdas de escenario vacías en la matriz original son intencionales. Despué
 
 El orden de los escenarios aporta más información práctica que la estimación final de autonomía. Empiece por comprobar las hipótesis de optimización relacionadas con los mayores consumidores.
 
-<div align="center"><em>Tabla: contribución de los escenarios activos en el modelo del reloj</em></div>
+<div align="center"><em>Tabla: contribución de los escenarios habilitados en el modelo del reloj</em></div>
 
 <div align="center" markdown>
 
@@ -204,11 +204,11 @@ El orden de los escenarios aporta más información práctica que la estimación
 
 </div>
 
-<div align="center"><em>Gráfico: contribución de los escenarios activos en el modelo del reloj</em></div>
+<div align="center"><em>Gráfico: contribución de los escenarios habilitados en el modelo del reloj</em></div>
 
 ```mermaid
 pie showData
-    title Consumo diario (mAh/día) por escenario activo
+    title Consumo diario (mAh/día) por escenario habilitado
     "Activación al levantar la muñeca" : 4.9020
     "Notificaciones" : 3.9996
     "Seguimiento del sueño" : 2.3040
@@ -244,36 +244,36 @@ pie showData
     "Pantalla AMOLED (9,56 mAh/día)" : 9.5595
     "MCU (4,62 mAh/día)" : 4.6163
     "Motor háptico (2,22 mAh/día)" : 2.2203
-    "Other (sin desglosar, 1,29 mAh/día)" : 1.2866
+    "Other / unallocated (sin desglosar, 1,29 mAh/día)" : 1.2866
 ```
 
 El gráfico mantiene deliberadamente la última porción como `Other / unallocated` (sin desglosar). El libro de trabajo no aporta valores independientes, referidos a la batería, para Bluetooth, el acelerómetro ni el giroscopio. Que el escenario de llamada Bluetooth esté desactivado no significa que el Bluetooth no consuma energía: la sincronización con la aplicación también podría usar la radio, pero el modelo no separa ese consumo. La categoría `Other` podría incluir los sensores, pero los datos disponibles no permiten distinguir el consumo del acelerómetro del del giroscopio.
 
 Para crear un gráfico con cinco categorías —MCU, pantalla, motor háptico, Bluetooth y una categoría conjunta para el acelerómetro y el giroscopio—, añada filas separadas para los estados inactivo y de transferencia de Bluetooth, y para los modos de funcionamiento y ciclos de trabajo de ambos sensores. Mida cada fila en la entrada de la batería o aplique el rendimiento medido del regulador antes de sumarla al total de mAh del lado de la batería. Después sustituya la porción `Other / unallocated`; no agregue por separado consumos de sensores o Bluetooth que podrían solaparse con ella.
 
-### Separar el consumo base del MCU, el trabajo por escenario y las cargas de los sensores { #separate-standby-mcu-active-mcu-and-sensors }
+### Separar el consumo base de la MCU, el trabajo por escenario y las cargas de los sensores { #separate-standby-mcu-active-mcu-and-sensors }
 
-El libro de trabajo incluye una categoría `MCU`, pero no separa el renderizado gráfico como una ruta de ejecución propia. Por tanto, el análisis más sólido distingue entre la partida del MCU en reposo de referencia y las partidas del MCU asignadas a los distintos escenarios; el consumo de los sensores no aparece como una categoría independiente.
+El libro de trabajo incluye una categoría `MCU`, pero no separa el renderizado gráfico como una ruta de ejecución propia. Por tanto, el análisis más sólido distingue entre la partida de la MCU en reposo de referencia y las partidas de la MCU asignadas a los distintos escenarios; el consumo de los sensores no aparece como una categoría independiente.
 
 <div align="center"><em>Tabla: desglose de la categoría MCU del libro de trabajo</em></div>
 
 <div align="center" markdown>
 
-| Actividad del MCU | Consumo diario | Parte del consumo diario total | Parte del consumo del MCU | Interpretación |
+| Actividad de la MCU | Consumo diario | Parte del consumo diario total | Parte del consumo de la MCU | Interpretación |
 |:-------------------|------------:|----------------------------:|--------------------:|:---------------|
-| Reposo de referencia | 1,49 mAh | 8,40 % | 32,18 % | 0,102 mA durante las 14,56 h restantes del modelo. Es una hipótesis del consumo del MCU a nivel de sistema, no una medición verificada de la corriente de fuga del silicio sin encapsular (die). |
+| Reposo de referencia | 1,49 mAh | 8,40 % | 32,18 % | 0,102 mA durante las 14,56 h restantes del modelo. Es una hipótesis del consumo de la MCU a nivel de sistema, no una medición verificada de la corriente de fuga del silicio sin encapsular (die). |
 | Interacciones con la pantalla encendida | 1,30 mAh | 7,36 % | 28,19 % | Incluye los escenarios de mensajes, llamadas entrantes, activación al levantar la muñeca, SpO2, ejercicio, alarmas y sincronización con la aplicación. Abarca la gestión de eventos y el posible trabajo gráfico. |
-| Seguimiento del sueño | 1,66 mAh | 9,41 % | 36,04 % | 0,208 mA durante 8 h; es el mayor aporte individual del MCU en el modelo. |
-| Medición automática de frecuencia cardíaca | 0,17 mAh | 0,94 % | 3,59 % | Medición programada y procesamiento asociado en el MCU. |
-| **Total del MCU** | **4,62 mAh** | **26,11 %** | **100 %** | Suma de todas las entradas explícitas del MCU en el libro de trabajo. |
+| Seguimiento del sueño | 1,66 mAh | 9,41 % | 36,04 % | 0,208 mA durante 8 h; es el mayor aporte individual de la MCU en el modelo. |
+| Medición automática de frecuencia cardíaca | 0,17 mAh | 0,94 % | 3,59 % | Medición programada y procesamiento asociado en la MCU. |
+| **Total de la MCU** | **4,62 mAh** | **26,11 %** | **100 %** | Suma de todas las entradas explícitas de la MCU en el libro de trabajo. |
 
 </div>
 
-<div align="center"><em>Gráfico: desglose del consumo diario del MCU por grupo de actividad</em></div>
+<div align="center"><em>Gráfico: desglose del consumo diario de la MCU por grupo de actividad</em></div>
 
 ```mermaid
 pie showData
-    title Consumo diario del MCU (mAh/día) por grupo de actividad
+    title Consumo diario de la MCU (mAh/día) por grupo de actividad
     "Reposo de referencia" : 1.4854
     "Interacciones con la pantalla encendida" : 1.3013
     "Seguimiento del sueño" : 1.6640
@@ -282,10 +282,10 @@ pie showData
 
 Dos comparaciones evitan una conclusión engañosa:
 
-- **Partida de reposo de referencia del MCU frente a las partidas de escenarios con pantalla encendida:** el reposo de referencia representa 1,49 mAh al día, ligeramente más que los 1,30 mAh al día asignados al MCU en el conjunto de escenarios de interacción con la pantalla encendida. En este modelo, reducir la corriente de referencia supuesta es tan importante como reducir el trabajo total del MCU asociado a esos escenarios. El libro de trabajo no mide por separado las ráfagas de procesamiento gráfico.
-- **Partida de reposo de referencia del MCU frente al resto de sus partidas explícitas:** las demás entradas del MCU suman 3,13 mAh al día, 2,11 veces el valor de reposo de referencia. El seguimiento del sueño es la mayor partida individual fuera del reposo de referencia, con 1,66 mAh al día; se trata de una asignación del MCU a un escenario, no de una medición exclusiva de la corriente de la CPU en actividad.
+- **Partida de reposo de referencia de la MCU frente a las partidas de escenarios con pantalla encendida:** el reposo de referencia representa 1,49 mAh al día, ligeramente más que los 1,30 mAh al día asignados a la MCU en el conjunto de escenarios de interacción con la pantalla encendida. En este modelo, reducir la corriente de referencia supuesta es tan importante como reducir el trabajo total de la MCU asociado a esos escenarios. El libro de trabajo no mide por separado las ráfagas de procesamiento gráfico.
+- **Partida de reposo de referencia de la MCU frente al resto de sus partidas explícitas:** las demás entradas de la MCU suman 3,13 mAh al día, 2,11 veces el valor de reposo de referencia. El seguimiento del sueño es la mayor partida individual fuera del reposo de referencia, con 1,66 mAh al día; se trata de una asignación de la MCU a un escenario, no de una medición exclusiva de la corriente de la CPU en actividad.
 
-El libro de trabajo no tiene una categoría específica para los sensores. Su consumo podría estar incluido en `Other`, junto con el del PMIC, la radio, las corrientes de fuga y otras cargas de fondo. Esta categoría suma 1,29 mAh al día (7,28 %). Incluso si se atribuyera todo `Other` a los sensores, la partida explícita del MCU seguiría siendo mayor: 4,62 mAh al día frente a 1,29 mAh, unas 3,59 veces más. Esta es una comparación entre categorías del modelo, no una medición directa del silicio del MCU frente a los sensores. Para conocer el consumo real de estos, el modelo debe separar sus líneas de alimentación del resto de las cargas agrupadas en `Other`.
+El libro de trabajo no tiene una categoría específica para los sensores. Su consumo podría estar incluido en `Other`, junto con el del PMIC, la radio, las corrientes de fuga y otras cargas de fondo. Esta categoría suma 1,29 mAh al día (7,28 %). Incluso si se atribuyera todo `Other` a los sensores, la partida explícita de la MCU seguiría siendo mayor: 4,62 mAh al día frente a 1,29 mAh, unas 3,59 veces más. Esta es una comparación entre categorías del modelo, no una medición directa del silicio de la MCU frente a los sensores. Para conocer el consumo real de estos, el modelo debe separar sus líneas de alimentación del resto de las cargas agrupadas en `Other`.
 
 <div align="center"><em>Tabla: próximas mediciones para separar las cargas restantes</em></div>
 
@@ -293,8 +293,8 @@ El libro de trabajo no tiene una categoría específica para los sensores. Su co
 
 | Pregunta | Qué incluye actualmente el modelo | Medición necesaria |
 |:---------|:--------------------------|:-------------------|
-| ¿Cuál es la corriente de fuga del MCU? | El valor de reposo del `MCU` incluye algo más que la fuga del propio die. | Mida la alimentación del MCU en el estado de bajo consumo previsto y, por separado, las fugas a nivel de placa. |
-| ¿Cuánto consume el renderizado gráfico? | El tiempo del MCU con la pantalla encendida también incluye el despertar, la gestión de eventos y el trabajo del controlador de pantalla. | Marque en el firmware el intervalo de renderizado e integre la corriente durante ese período. |
+| ¿Cuál es la corriente de fuga de la MCU? | El valor de reposo del `MCU` incluye algo más que la fuga del propio die. | Mida la alimentación de la MCU en el estado de bajo consumo previsto y, por separado, las fugas a nivel de placa. |
+| ¿Cuánto consume el renderizado gráfico? | El tiempo de la MCU con la pantalla encendida también incluye el despertar, la gestión de eventos y el trabajo del controlador de pantalla. | Marque en el firmware el intervalo de renderizado e integre la corriente durante ese período. |
 | ¿Qué consumo corresponde a los sensores? | No tienen una categoría propia y podrían estar incluidos en `Other`. | Mida cada línea de alimentación de los sensores o añada una fila por modo y ciclo de trabajo. |
 | ¿Qué incluye el resto de `Other`? | Agrupa el PMIC, la radio, las fugas y los sensores. | Desactive o aísle una línea de alimentación o subsistema cada vez y contraste la suma con el consumo total medido en la batería. |
 
@@ -304,9 +304,9 @@ El libro de trabajo no tiene una categoría específica para los sensores. Su co
 
 Empiece por el mayor consumidor del modelo y valide el orden con mediciones. Para este caso, conviene seguir esta secuencia:
 
-1. **Gestión de la pantalla:** mida el ciclo completo de activación al levantar la muñeca. Reduzca los falsos disparos del gesto, el tiempo de pantalla encendida, el brillo, los redibujados completos y las animaciones innecesarias antes de perseguir ahorros de unos pocos microamperios en el MCU.
+1. **Gestión de la pantalla:** mida el ciclo completo de activación al levantar la muñeca. Reduzca los falsos disparos del gesto, el tiempo de pantalla encendida, el brillo, los redibujados completos y las animaciones innecesarias antes de perseguir ahorros de unos pocos microamperios en la MCU.
 2. **Gestión de notificaciones:** agrupe las notificaciones no urgentes cuando la experiencia de usuario lo permita. Compruebe si cada evento necesita activar tanto la pantalla como la respuesta háptica.
-3. **Reposo conectado:** confirme que el MCU vuelve al modo de bajo consumo previsto después de cada evento. Revise los temporizadores periódicos, los bucles de sondeo, las funciones callback de Bluetooth y las solicitudes al gestor de energía.
+3. **Reposo conectado:** confirme que la MCU vuelve al modo de bajo consumo previsto después de cada evento. Revise los temporizadores periódicos, los bucles de sondeo, las funciones callback de Bluetooth y las solicitudes al gestor de energía.
 4. **Patrones hápticos:** ajuste la amplitud y la duración mediante pruebas de percepción. Un patrón más corto o suave puede ahorrar energía sin restar claridad a las alertas.
 5. **Sensado de larga duración:** analice el seguimiento del sueño y el registro de ejercicio como escenarios completos, incluidos el ciclo de trabajo de los sensores, el procesamiento, el tráfico de memoria y el uso de la radio.
 
@@ -322,9 +322,9 @@ El modelo resulta útil cuando se contrasta periódicamente con mediciones reale
 
 | Escenario | Qué medir | Qué actualizar en el modelo |
 |:---------------|:----------------|:---------------------------------|
-| Reposo con la pantalla apagada | Corriente media y despertares inesperados durante una captura prolongada | Consumo de fondo del MCU, los sensores, el PMIC y otras cargas. |
+| Reposo con la pantalla apagada | Corriente media y despertares inesperados durante una captura prolongada | Consumo de fondo de la MCU, los sensores, el PMIC y otras cargas. |
 | Activación al levantar la muñeca | Detección del gesto, latencia de activación, corriente de la pantalla y tiempo encendida | Frecuencia real del evento, duración de pantalla y consumo de la interfaz. |
-| Notificación | Actividad del MCU, la pantalla, el motor háptico y Bluetooth durante una alerta | Consumo por notificación y frecuencia diaria correcta. |
+| Notificación | Actividad de la MCU, la pantalla, el motor háptico y Bluetooth durante una alerta | Consumo por notificación y frecuencia diaria correcta. |
 | Seguimiento del sueño | Captura de una noche completa o de un intervalo representativo y repetible | Ciclo de trabajo de los sensores y consumo del procesamiento periódico. |
 | Registro de ejercicio | Actividad de sensores, pantalla, almacenamiento y radio durante la sesión prevista | Consumo por sesión y frecuencia semanal realista. |
 | AOD, NFC y llamadas Bluetooth | Mediciones independientes antes de incluir estas funciones en la previsión | Escenarios propios, no un pequeño ajuste al consumo en reposo. |

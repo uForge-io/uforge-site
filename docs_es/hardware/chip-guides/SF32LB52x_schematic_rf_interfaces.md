@@ -2,7 +2,7 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Guía de diseño esquemático de RF e interfaces de usuario para el MCU SF32LB52x: adaptación de antena, pantalla, audio, botones y motor vibrador."
+description: "Guía de diseño esquemático de RF e interfaces de usuario para la MCU SF32LB52x: adaptación de antena, pantalla, audio, botones y motor vibrador."
 tags:
     - Hardware
     - Chip
@@ -29,9 +29,9 @@ Maximice la sensibilidad Bluetooth y el rendimiento radiado manteniendo el contr
 
 La impedancia característica de la pista de RF es de 50 Ω. Si la antena ya está adaptada, no se necesitan componentes de RF adicionales; aun así, se recomienda reservar una red de adaptación tipo π para filtrar emisiones espurias o ajustar la antena.
 
-![Figura 5.4-1: Esquema del circuito de RF](../../sf32-products/chips/assets/52xB/sf32lb52X-B-rf-diagram.png){ width="100%" loading="lazy" }
+![Figura 5.4-1: Esquemático del circuito de RF](../../sf32-products/chips/assets/52xB/sf32lb52X-B-rf-diagram.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 5.4-1: Esquema del circuito de RF</em></div>
+<div align="center"><em>Figura 5.4-1: Esquemático del circuito de RF</em></div>
 
 La figura 5.4-1 muestra un condensador en serie de 15 pF y 50 V (C0323); las posiciones en derivación C0318 y C0319 están marcadas como NF (sin montar). Son valores de referencia, no una adaptación válida para cualquier antena. Coloque la red cerca del pin de RF del chip y determine su montaje final a partir de mediciones del producto ensamblado.
 
@@ -88,8 +88,8 @@ Modelos de controladores LCD compatibles:
 
 </div>
 
-!!! note "Las interfaces del controlador de pantalla no son las capacidades del MCU"
-    La tabla 5.5-1 enumera las interfaces que ofrecen los controladores LCD, no interfaces que estén todas disponibles en SF32LB52x. Que un controlador admita MIPI-DSI o un bus MCU 8080 de 8 bits no demuestra que el MCU admita esa interfaz. Elija una interfaz compatible tanto con el modelo exacto del MCU como con el controlador.
+!!! note "Las interfaces del controlador de pantalla no son las capacidades de la MCU"
+    La tabla 5.5-1 enumera las interfaces que ofrecen los controladores LCD, no interfaces que estén todas disponibles en SF32LB52x. Que un controlador admita MIPI-DSI o un bus MCU 8080 de 8 bits no demuestra que la MCU admita esa interfaz. Elija una interfaz compatible tanto con el modelo exacto de la MCU como con el controlador.
 
 ##### 5.5.1.1. Interfaz de pantalla SPI/QSPI { #5511-spiqspi-display-interface }
 
@@ -107,14 +107,14 @@ Modelos de controladores LCD compatibles:
 | D[0] | PA07 | Dato 2 en Quad-SPI |
 | D[1] | PA08 | Dato 3 en Quad-SPI |
 | RESET | PA00 | Reinicio de pantalla |
-| TE | PA02 | Señal de efecto de desgarro (tearing effect) hacia el MCU |
+| TE | PA02 | Señal de efecto de desgarro (tearing effect) hacia la MCU |
 
 </div>
 
 ##### 5.5.1.2. Interfaz de pantalla JDI { #5512-jdi-display-interface }
 
 !!! important "Terminología JDI en la fuente"
-    Las notas de aplicación originales describen JDI serie en sus resúmenes de capacidades, pero identifican la siguiente tabla de pines como JDI paralelo. Aquí se conservan las asignaciones de la fuente. Antes de cerrar el esquema, confirme el modo JDI previsto, los requisitos del panel y la compatibilidad del modelo exacto del MCU. No considere intercambiables las interfaces serie y paralela.
+    Las notas de aplicación originales describen JDI serie en sus resúmenes de capacidades, pero identifican la siguiente tabla de pines como JDI paralelo. Aquí se conservan las asignaciones de la fuente. Antes de cerrar el esquemático, confirme el modo JDI previsto, los requisitos del panel y la compatibilidad del modelo exacto de la MCU. No considere intercambiables las interfaces serie y paralela.
 
 <div align="center"><em>Tabla 5.5-3: Conexiones de señales JDI paralelas</em></div>
 
@@ -245,7 +245,7 @@ La interfaz de audio ofrece:
 
 <div align="center"><em>Figura 5.5-2: Circuito de entrada no diferencial para micrófono ECM analógico</em></div>
 
-Los circuitos de micrófono de referencia filtran MIC_BIAS con una resistencia en serie de 1 kΩ y un condensador a masa de 1 uF y 6,3 V. El circuito ECM añade una resistencia de polarización del micrófono de 4,7 kΩ. Ambos muestran un condensador de entrada a masa de 0,01 uF: es un filtro en derivación, no el condensador de acoplamiento en serie requerido en el recorrido de señal. Mantenga esta distinción al adaptar los circuitos.
+Los circuitos de micrófono de referencia filtran MIC_BIAS con una resistencia en serie de 1 kΩ y un condensador a masa de 1 µF y 6,3 V. El circuito ECM añade una resistencia de polarización del micrófono de 4,7 kΩ. Ambos muestran un condensador de entrada a masa de 0,01 µF: es un filtro en derivación, no el condensador de acoplamiento en serie requerido en el recorrido de señal. Mantenga esta distinción al adaptar los circuitos.
 
 ![Figura 5.5-3: Circuito de amplificador de audio analógico](../../sf32-products/chips/assets/52xB/sf32lb52X-B-DAC-PA.png){ width="100%" loading="lazy" }
 
@@ -266,7 +266,7 @@ Los circuitos de micrófono de referencia filtran MIC_BIAS con una resistencia e
 - [ ] El plan de puesta en marcha verifica la polarización del micrófono, el ruido de fondo del ADC, la salida DAC, la habilitación del PA y el ruido audible.
 
 !!! important "Complete los recorridos del micrófono y del DAC"
-    La fuente conecta MEMS_MIC_ADC_IN y ECM_MIC_ADC_IN a ADCP. Incluya en serie el condensador de acoplamiento de al menos 2,2 uF indicado arriba; el condensador de 0,01 uF conectado a masa en los circuitos de micrófono no lo sustituye. Coloque el filtro paso bajo diferencial del recuadro discontinuo de la figura 5.5-3 cerca del MCU. Mantenga la capacitancia de las pistas de salida del DAC por debajo de 10 pF y su longitud por debajo de 2 cm.
+    La fuente conecta MEMS_MIC_ADC_IN y ECM_MIC_ADC_IN a ADCP. Incluya en serie el condensador de acoplamiento de al menos 2,2 µF indicado arriba; el condensador de 0,01 µF conectado a masa en los circuitos de micrófono no lo sustituye. Coloque el filtro paso bajo diferencial del recuadro discontinuo de la figura 5.5-3 cerca de la MCU. Mantenga la capacitancia de las pistas de salida del DAC por debajo de 10 pF y su longitud por debajo de 2 cm.
 
 #### 5.5.3. Botones { #553-buttons }
 
@@ -287,7 +287,7 @@ PA34 admite el reinicio por pulsación larga y puede implementarse con un botón
 
 <div align="center"><em>Figura 5.5-4: Circuito del botón de encendido/reinicio por pulsación larga</em></div>
 
-El circuito de referencia utiliza R0703 (5,1 kΩ) entre VSYS_3V3 y el botón, R0702 (100 kΩ) para mantener PA34 en nivel bajo y C0720 (0,1 uF) conectado a masa. También incluye protección ESD. Estos valores corresponden al diseño ilustrado; al adaptarlo, compruebe los umbrales de entrada, el antirrebote, las fugas y los tiempos de reinicio.
+El circuito de referencia utiliza R0703 (5,1 kΩ) entre VSYS_3V3 y el botón, R0702 (100 kΩ) para mantener PA34 en nivel bajo y C0720 (0,1 µF) conectado a masa. También incluye protección ESD. Estos valores corresponden al diseño ilustrado; al adaptarlo, compruebe los umbrales de entrada, el antirrebote, las fugas y los tiempos de reinicio.
 
 ##### 5.5.3.2. Botón de codificador rotatorio mecánico { #5532-mechanical-rotary-encoder-button }
 

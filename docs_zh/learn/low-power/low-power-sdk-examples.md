@@ -1,7 +1,7 @@
 ---
 icon: lucide/battery-charging
 title: "低功耗 SDK 示例"
-description: "按休眠、唤醒源、GPIO、CPU、蓝牙（Bluetooth）、显示、UI 和可穿戴场景选择合适的 SiFli-SDK 电源管理示例。"
+description: "按睡眠、唤醒源、GPIO、CPU、蓝牙（Bluetooth）、显示、UI 和可穿戴场景选择合适的 SiFli-SDK 电源管理示例。"
 tags:
   - 低功耗
   - 示例
@@ -21,15 +21,15 @@ SiFli-SDK 的电源管理示例可作为测量与集成验证的起点，但不�
 
 | 工程目标 | 建议起点 | 示例可用于确认的内容 | 面向产品重新核对的内容 |
 |:---------|:---------|:-----------------|:-------------------------|
-| 验证基本电源管理（PM）状态进入与唤醒行为 | [PM 示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/classical/README.html) | SDK 的基础电源管理配置和休眠/唤醒流程 | 实际唤醒源、时钟依赖、保持状态，以及各驱动对 PM 状态的请求 |
-| 表征低功耗下的 GPIO 活动 | [GPIO 功耗测试](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/gpio/README.html) | 定时器周期唤醒、GPIO 访问，以及唤醒、休眠和 I/O 活动的差异 | 外部上拉/下拉、断电外设、引脚复用、电源轨和非预期漏电路径 |
+| 验证基本电源管理（PM）状态进入与唤醒行为 | [PM 示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/classical/README.html) | SDK 的基础电源管理配置和睡眠/唤醒流程 | 实际唤醒源、时钟依赖、保持状态，以及各驱动对 PM 状态的请求 |
+| 表征低功耗下的 GPIO 活动 | [GPIO 功耗测试](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/gpio/README.html) | 定时器周期唤醒、GPIO 访问，以及唤醒、睡眠和 I/O 活动的差异 | 外部上拉/下拉、断电外设、引脚复用、电源轨和非预期漏电路径 |
 | 区分计算工作与关机行为 | [处理器功耗测试](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/coremark/README.html) | CPU 基准/循环工作负载、关机、RTC 唤醒和引脚唤醒 | 内核频率、工作负载、唤醒引脚极性、开发板专用唤醒映射和供电电压 |
 | 测量蓝牙场景 | [BLE 广播与连接功耗测试](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/ble/README.html) 或 [BLE/BT 功耗测试](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) | 可重复的广播、连接和蓝牙活动场景 | 射频环境、发射功率、广播/连接间隔、对端行为、天线和应用回调 |
-| 对比 AMOLED 灭屏和常亮策略 | [AMOLED 功耗测试](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/AMOLED/README.html) | 显示刷新、灭屏休眠和常亮屏的对比 | 实际面板、亮度、刷新策略、显示电源轨和实际使用占空比 |
+| 对比 AMOLED 灭屏和常亮策略 | [AMOLED 功耗测试](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/AMOLED/README.html) | 显示刷新、灭屏睡眠和常亮屏的对比 | 实际面板、亮度、刷新策略、显示电源轨和实际使用占空比 |
 | 测量 JDI 显示路径 | [JDI 功耗测试](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/jdi/README.html) | 文档所述 JDI 配置下的显示专用低功耗行为 | 面板型号、更新区域、控制器配置、电源轨和刷新频率 |
 | 集成低功耗图形 UI | [GUI_PM 低功耗示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/gui_pm/README.html) | UI 行为、显示状态和 PM 策略之间的关系 | 产品页面生命周期、动画、触摸或控制器唤醒源和脏区域策略 |
 | 表征屏幕刷新工作负载 | [屏幕刷新场景功耗测试示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/lcd_refresh/README.html) | 产品工作负载中显示刷新的贡献 | 分辨率、像素格式、变化区域、接口速率、缓冲策略和内容更新频率 |
-| 构建传感器触发的可穿戴交互 | [抬腕亮屏示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/raise_wrist/README.html) | 传感器唤醒、亮屏工作和重新休眠 | 传感器选择、手势算法、采样间隔、亮屏超时、电池模型和每日使用实测值 |
+| 构建传感器触发的可穿戴交互 | [抬腕亮屏示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/raise_wrist/README.html) | 传感器唤醒、亮屏工作和重新睡眠 | 传感器选择、手势算法、采样间隔、亮屏超时、电池模型和每日使用实测值 |
 
 </div>
 
@@ -64,9 +64,9 @@ SiFli-SDK 的电源管理示例可作为测量与集成验证的起点，但不�
 
 ## 基础 PM、GPIO 和处理器测试 { #baseline-pm-gpio-and-processor-tests }
 
-在加入产品工作负载之前，应先使用 [PM 示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/classical/README.html)确认预期的休眠状态和唤醒源是否有效。记录请求的 PM 状态，并核实系统实际进入的状态；若系统始终未进入请求的深度休眠状态，应先核查配置，以及 PM 状态请求由哪个驱动或子系统管理，再考虑微调参数。
+在加入产品工作负载之前，应先使用 [PM 示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/classical/README.html)确认预期的睡眠状态和唤醒源是否有效。记录请求的 PM 状态，并核实系统实际进入的状态；若系统始终未进入请求的深度睡眠状态，应先核查配置，以及 PM 状态请求由哪个驱动或子系统管理，再考虑微调参数。
 
-当某个接口看似没有活动却仍抬高待机电流时，**GPIO 功耗测试**是合适起点。其文档场景会周期性唤醒并读取 GPIO，因此有助于分离休眠电流、唤醒电流和 I/O 活动电流。产品审查还必须更进一步：检查内部与外部上拉/下拉、高阻状态、跨电源域连接、连到已断电外设的引脚、复位默认状态，以及任何 ESD 或反向供电路径。逻辑状态正确的信号仍可能产生漏电。
+当某个接口看似没有活动却仍抬高待机电流时，**GPIO 功耗测试**是合适起点。其文档场景会周期性唤醒并读取 GPIO，因此有助于分离睡眠电流、唤醒电流和 I/O 活动电流。产品审查还必须更进一步：检查内部与外部上拉/下拉、高阻状态、跨电源域连接、连到已断电外设的引脚、复位默认状态，以及任何 ESD 或反向供电路径。逻辑状态正确的信号仍可能产生漏电。
 
 **处理器功耗测试**区分了几种本质不同的条件：CPU 计算、简单循环工作负载、关机、定时器唤醒和引脚唤醒。它适合表征活动计算的代价和唤醒机制，但不能直接预测应用能耗。在将其数据纳入功耗预算之前，应以具有代表性的产品固件工作负载替代基准程序或循环。
 
@@ -76,7 +76,7 @@ SiFli-SDK 的电源管理示例可作为测量与集成验证的起点，但不�
 
 显示相关示例用于分别验证以下设计选择：
 
-- **AMOLED 功耗测试**对比灭屏休眠与常亮屏策略。该例程中的模式切换和续航估算仅适用于文档所述的开发板、面板、亮度、刷新时序和使用模型，不能直接套用到所有 AMOLED 产品。
+- **AMOLED 功耗测试**对比灭屏睡眠与常亮屏策略。该例程中的模式切换和续航估算仅适用于文档所述的开发板、面板、亮度、刷新时序和使用模型，不能直接套用到所有 AMOLED 产品。
 - [JDI 功耗测试](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/jdi/README.html)为 JDI 显示路径提供了对应的平台专用基线。
 - [GUI_PM 低功耗示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/gui_pm/README.html)将 UI 生命周期决策与 PM 行为联系起来。
 - [屏幕刷新场景](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/lcd_refresh/README.html)专注于显示更新本身的负载。
@@ -85,7 +85,7 @@ SiFli-SDK 的电源管理示例可作为测量与集成验证的起点，但不�
 
 ## 将抬腕亮屏视为完整场景 { #raise-to-wake-as-a-complete-scenario }
 
-**抬腕亮屏**项目特别有价值，因为它将传感器采样、手势识别、显示唤醒、有限的交互时长和再次休眠组合在一个场景中。它验证的是一个产品场景，而不是孤立功耗状态。
+**抬腕亮屏**项目特别有价值，因为它将传感器采样、手势识别、显示唤醒、有限的交互时长和再次睡眠组合在一个场景中。它验证的是一个产品场景，而不是孤立功耗状态。
 
 SiFli-SDK 示例中的续航估算依赖文档中给出的电池容量、每日抬腕次数、亮屏时长、传感器、采样间隔、开发板和实测电流。改造时应保留其计算结构：测量亮屏状态，测量灭屏状态，说明每日事件次数，并计算组合后的每日能耗。随后必须用产品自身的数值更新模型，而不能直接沿用示例中的数值。
 

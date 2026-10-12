@@ -10,9 +10,9 @@ tags:
 
 ## Présentation { #overview }
 
-SF32LB52-MOD-1 regroupe des modules MCU à basse consommation dotés du Bluetooth et basés sur la plateforme SF32LB52x. La variante standard N16R8 utilise le SF32LB525UC6. Le module de 27,9 × 18,0 × 3,1 mm réunit la plateforme double cœur Arm Cortex-M33 STAR-MC1, le circuit RF, un quartz de 48 MHz et la connexion d'antenne. Le type d'antenne dépend de la référence : antenne PCB intégrée au module ou antenne externe raccordée via un connecteur IPEX.
+SF32LB52-MOD-1 est une famille de modules MCU Bluetooth basse consommation basés sur la plateforme SF32LB52x. La variante standard N16R8 utilise le SF32LB525UC6. Le module de 27,9 × 18,0 × 3,1 mm réunit la plateforme double cœur Arm Cortex-M33 STAR-MC1, le circuit RF, un quartz de 48 MHz et la connexion d'antenne. Le type d'antenne dépend de la référence : antenne PCB intégrée au module ou antenne externe raccordée via un connecteur IPEX.
 
-La DS5203 V0.3 décrit une antenne PCB intégrée au module et indique qu'un autre modèle accepte une antenne externe via IPEX, sans toutefois associer ces options aux références mémoire publiées. Avant de finaliser le routage de la carte porteuse, confirmez auprès de SiFli la configuration d'antenne exacte. Le produit final doit néanmoins faire l'objet d'une validation RF et satisfaire aux exigences de certification applicables. Les interfaces exposées permettent de réaliser des produits connectés compacts utilisant les fonctions Bluetooth, graphiques et audio de la plateforme.
+La fiche technique DS5203 V0.3 décrit une antenne PCB intégrée au module et indique qu'un autre modèle peut être équipé d'une antenne externe raccordée via IPEX, sans toutefois associer ces options aux références mémoire publiées. Avant de finaliser le routage de la carte porteuse, confirmez auprès de SiFli la configuration d'antenne exacte. Le produit final doit néanmoins faire l'objet d'une validation RF et obtenir les certifications applicables au produit. Les interfaces exposées donnent accès aux fonctions Bluetooth, graphiques et audio utilisées dans les produits connectés compacts.
 
 Selon le code de commande, le composant monté sur le module peut intégrer de l'OPI-PSRAM dans son boîtier. Les interfaces du module donnent accès aux principales fonctions de la famille de puces, notamment GPIO, SPI, LCD, MPI, UART, I2C, PWM, SDIO, USB 2.0 FS et les signaux audio analogiques.
 
@@ -27,8 +27,8 @@ Selon le code de commande, le composant monté sur le module peut intégrer de l
 - Hubs de capteurs Bluetooth et accessoires connectés
 - Serrures intelligentes, équipements de maison connectée et appareils compacts
 - Petits équipements IHM avec affichage graphique
-- Clés électroniques de véhicule et télécommandes à porter sur soi
-- Produits connectés avec écran destinés aux projets sensibles au coût
+- Clés de véhicule et télécommandes portables
+- Produits connectés avec écran soumis à des contraintes de coût
 
 Envisagez le SF32LB52-MOD-1 si le produit nécessite une ou plusieurs des fonctions suivantes :
 
@@ -64,9 +64,9 @@ Envisagez le SF32LB52-MOD-1 si le produit nécessite une ou plusieurs des foncti
 ### Calcul et mémoire { #compute-and-memory }
 
 - Cœur applicatif Arm Cortex-M33 STAR-MC1 (HCPU), jusqu'à 240 MHz et avec une performance maximale de 370 DMIPS / 984 EEMBC CoreMark
-- Cache d'instructions de 32 Ko et cache de données de 16 Ko
-- 512 Ko de SRAM de rétention
-- Cœur Arm Cortex-M33 STAR-MC1 dédié à très basse consommation (LCPU), jusqu'à 24 MHz, avec 64 Ko de SRAM de rétention
+- Cache d'instructions de 32 KB et cache de données de 16 KB
+- 512 KB de SRAM de rétention
+- Cœur Arm Cortex-M33 STAR-MC1 dédié à très basse consommation (LCPU), jusqu'à 24 MHz, avec 64 KB de SRAM de rétention
 - FPU simple précision et MPU sur les deux cœurs
 - OPI-PSRAM intégrée au boîtier du composant selon la référence du module
 
@@ -124,14 +124,14 @@ Une interface PDM peut prendre en charge jusqu'à deux microphones numériques :
 
 | Code de module | Puce | Flash | PSRAM | Température | Dimensions |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB52-MOD-1-N16R8 | SF32LB525UC6 | QSPI-NOR 16 Mo | OPI-PSRAM 8 Mo | −40 °C à +85 °C | 27,9 × 18,0 × 3,1 mm |
-| SF32LB52-MOD-1-A128R16 | SF32LB527UD6 | SPI-NAND 128 Mo | OPI-PSRAM 16 Mo | −40 °C à +85 °C | 27,9 × 18,0 × 3,1 mm |
+| SF32LB52-MOD-1-N16R8 | SF32LB525UC6 | QSPI-NOR 16 MB | OPI-PSRAM 8 MB | −40 °C à +85 °C | 27,9 × 18,0 × 3,1 mm |
+| SF32LB52-MOD-1-A128R16 | SF32LB527UD6 | SPI-NAND 128 MB | OPI-PSRAM 16 MB | −40 °C à +85 °C | 27,9 × 18,0 × 3,1 mm |
 
 </div>
 
 Le [guide des modèles de modules de SiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) et le guide d'application EPD mentionnent également A128R16, mais la fiche DS5203 V0.3 liée ici ne répertorie que N16R8. Avant de choisir A128R16, vérifiez auprès de SiFli sa disponibilité actuelle et sa configuration mémoire.
 
-Les sources officielles emploient des désignations différentes pour la mémoire Flash d'A128R16 : le [guide OpenSiFli des modèles de modules](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) indique une SPI-NAND de 128 Mo, tandis que le [guide SiFli des modèles de cartes](https://wiki.sifli.com/board/devkit_guide.html) indique une QSPI-NAND de 128 Mo pour la référence DevKit correspondante. Les sources ne précisent pas si cette différence concerne le composant monté ou la désignation de l'interface. Avant d'utiliser la configuration de la carte comme référence du module, vérifiez le composant Flash et le mode de bus dans le schéma et la BOM de la révision exacte de la carte.
+Les sources officielles emploient des désignations différentes pour la mémoire Flash d'A128R16 : le [guide OpenSiFli des modèles de modules](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) indique une SPI-NAND de 128 MB, tandis que le [guide SiFli des modèles de cartes](https://wiki.sifli.com/board/devkit_guide.html) indique une QSPI-NAND de 128 MB pour la référence DevKit correspondante. Les sources ne précisent pas si cette différence concerne le composant monté ou la désignation de l'interface. Avant d'utiliser la configuration de la carte comme référence du module, vérifiez le composant Flash et le mode de bus dans le schéma et la BOM de la révision exacte de la carte.
 
 ## Produits associés { #related-products }
 
@@ -145,4 +145,4 @@ Les cartes [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md), [SF32LB52-D
 
 ### Produits de référence { #reference-products }
 
-Les produits finaux typiques comprennent les montres connectées d'entrée et de milieu de gamme, les bracelets d'activité, les hubs de capteurs Bluetooth, les serrures intelligentes et les dispositifs IHM graphiques compacts.
+Les produits finaux typiques comprennent les montres connectées d'entrée et de milieu de gamme, les bracelets d'activité, les hubs de capteurs Bluetooth, les serrures intelligentes et les appareils IHM graphiques compacts.

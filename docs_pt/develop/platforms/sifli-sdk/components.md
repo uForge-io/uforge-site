@@ -37,7 +37,7 @@ Mantenha no projeto da aplicação a lógica específica daquela aplicação at�
 
 Um componente é uma unidade de engenharia reutilizável. O registro de componentes da SiFli é baseado no Conan; o subcomando atual na linha de comando do SDK é `sf-pkg`.
 
-Para consumir um pacote, execute `sdk.py sf-pkg init` no diretório `project` do projeto SDK; o comando cria o arquivo `conanfile.py`. Adicione as referências ao campo `requires` no formato `package/version@<username>`, em que `<username>` é o nome de usuário do registro de pacotes. Em seguida, execute `sdk.py sf-pkg install` nesse mesmo diretório. Os pacotes instalados ficam em `project/sf-pkgs`; os arquivos Kconfig deles são integrados ao `menuconfig`, em `SiFli External Components`.
+Para consumir um pacote, execute `sdk.py sf-pkg init` no diretório `project` do projeto SDK; o comando cria o arquivo `conanfile.py`. Adicione as referências ao campo `requires` no formato `package/version@<username>`, usando o nome de usuário do registro de pacotes. Em seguida, execute `sdk.py sf-pkg install` nesse mesmo diretório. Os pacotes instalados ficam em `project/sf-pkgs`; os arquivos Kconfig deles são integrados ao `menuconfig`, em `SiFli External Components`.
 
 Para publicar um componente, execute `sdk.py sf-pkg new --name <package_name>` no diretório do componente e revise o `conanfile.py` gerado. É possível acrescentar `--support-sdk-version <sdk_version_range>` para definir a faixa compatível durante a criação. Com ou sem essa opção, confira se a receita declara em `support_sdk_version` a faixa de versões do SDK pretendida e ajuste-a se necessário. Adote uma versão semântica para o pacote e complete os metadados e as dependências. Depois de se autenticar no registro, compile e envie o pacote:
 

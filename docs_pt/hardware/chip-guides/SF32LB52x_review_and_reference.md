@@ -2,7 +2,7 @@
 icon: lucide/clipboard-check
 hide:
     - navigation
-description: "Checklist de revisão, documentos, figuras de referência de esquemas, PCB, mecânica e alimentação, e histórico de revisões do guia de hardware do SF32LB52x."
+description: "Checklist de revisão, documentos, figuras de referência de esquemáticos, PCB, mecânica e alimentação, e histórico de revisões do guia de hardware do SF32LB52x."
 tags:
     - Hardware
     - Chip
@@ -17,13 +17,13 @@ tags:
 
 - [ ] A revisão do sistema mínimo está concluída: variante exata, encapsulamento, árvore de alimentação, meio de boot, pinos de configuração de boot, acesso para depuração e gravação, clocks e estratégia de despertar estão documentados
 - [ ] O modelo exato do chip e a variante de alimentação foram confirmados, sem misturar os esquemas de alimentação das duas variantes
-- [ ] Os pinos de alimentação do processador (VBUS/VBAT/VCC ou PVDD/VDDIOA/VDD_SIP) operam dentro da faixa de tensão especificada na folha de dados
+- [ ] Os pinos de alimentação do processador (VBUS/VBAT/VCC ou PVDD/VDDIOA/VDD_SIP) operam dentro da faixa de tensão especificada no datasheet
 - [ ] O indutor BUCK atende a 4,7 uH ±20%, DCR ≤0,4 Ω e Isat ≥450 mA
 - [ ] Variante alimentada por bateria: caminho de carga, faixa de tensão do componente OVP e capacitância de saída do LDO integrado foram verificados
 - [ ] Os cristais de 48 MHz e 32,768 kHz atendem às especificações recomendadas, e o roteamento e as áreas de exclusão atendem aos requisitos
 - [ ] A trilha RF tem impedância de 50 Ω, e a rede de casamento está próxima ao chip
 - [ ] A configuração de boot pelo armazenamento, incluindo a opção eMMC da variante com alimentação regulada externa, corresponde à configuração dos pinos Bootstrap
-- [ ] Verifique se o pino de controle do interruptor de alimentação do armazenamento corresponde à variante exata; resolva, antes da liberação, a divergência PA11/PA21 entre a lista de verificação oficial e as notas de aplicação
+- [ ] O pino de controle da chave de alimentação do armazenamento foi verificado para a variante exata; resolva, antes da liberação, a divergência PA11/PA21 entre o checklist oficial e as notas de aplicação
 - [ ] USB DP/DN são roteados como par diferencial com impedância diferencial de 90 Ω
 - [ ] Os sinais SDIO são roteados em conjunto, com comprimento total ≤50 mm, diferença de comprimento no grupo ≤6 mm e blindagem de GND
 - [ ] Os pinos multiplexados DBG_UART/SWD e os pontos de teste de produção estão reservados
@@ -31,32 +31,32 @@ tags:
 
 ## 8. Documentos e referências { #8-related-documents-and-references }
 
-[Folha de dados do SF32LB52x (PDF oficial)]: https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?
-[Manual do usuário do SF32LB52x (PDF oficial)]: https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?
-[Pacote de projeto de referência do SF32LB52]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83%E8%AE%BE%E8%AE%A1-20250619.zip?
-[Nota de aplicação de hardware do SF32LB520/3/5/7 (fonte)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB520-3-5-7-HW-Application.md
-[Nota de aplicação de hardware do 52B/D/E/G/J (fonte)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52B-E-G-J-HW-Application.md
-[Lista de fornecedores aprovados pela SiFli no site]: ../cad-components/sifli-approved-vendor-list.md
-[Checklist SiFli de esquemático e PCB do SF32LB52 (XLSX)]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx
-[Índice SiFli de guias de projeto de hardware (Wiki)]: https://wiki.sifli.com/en/hardware/index.html
+[SF32LB52x Datasheet (Official PDF)]: https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?
+[SF32LB52x User Manual (Official PDF)]: https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?
+[SF32LB52 Hardware Reference Design Package]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83%E8%AE%BE%E8%AE%A1-20250619.zip?
+[SF32LB520/3/5/7 Hardware Application Note (Source)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB520-3-5-7-HW-Application.md
+[52B/D/E/G/J Hardware Application Note (Source)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52B-E-G-J-HW-Application.md
+[Local SiFli Approved Vendor List]: ../cad-components/sifli-approved-vendor-list.md
+[SiFli SF32LB52 Schematic & PCB Checklist (XLSX)]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx
+[SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/en/hardware/index.html
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Folha de dados do SF32LB52x (PDF oficial)]__
-- :fontawesome-solid-file-pdf: __[Manual do usuário do SF32LB52x (PDF oficial)]__
-- :fontawesome-solid-file-zipper: __[Pacote de projeto de referência do SF32LB52]__
-- :fontawesome-brands-github: __[Nota de aplicação de hardware do SF32LB520/3/5/7 (fonte)]__
-- :fontawesome-brands-github: __[Nota de aplicação de hardware do 52B/D/E/G/J (fonte)]__
-- :fontawesome-solid-file-excel: __[Lista de fornecedores aprovados pela SiFli no site]__
-- :fontawesome-solid-file-excel: __[Checklist SiFli de esquemático e PCB do SF32LB52 (XLSX)]__
-- :fontawesome-brands-wikipedia-w: __[Índice SiFli de guias de projeto de hardware (Wiki)]__
+- :fontawesome-solid-file-pdf: __[Datasheet do SF32LB52x (PDF oficial)][SF32LB52x Datasheet (Official PDF)]__
+- :fontawesome-solid-file-pdf: __[Manual do usuário do SF32LB52x (PDF oficial)][SF32LB52x User Manual (Official PDF)]__
+- :fontawesome-solid-file-zipper: __[Pacote de projeto de referência do SF32LB52][SF32LB52 Hardware Reference Design Package]__
+- :fontawesome-brands-github: __[Nota de aplicação de hardware do SF32LB520/3/5/7 (fonte)][SF32LB520/3/5/7 Hardware Application Note (Source)]__
+- :fontawesome-brands-github: __[Nota de aplicação de hardware do 52B/D/E/G/J (fonte)][52B/D/E/G/J Hardware Application Note (Source)]__
+- :fontawesome-solid-file-excel: __[Lista de fornecedores aprovados da SiFli neste site][Local SiFli Approved Vendor List]__
+- :fontawesome-solid-file-excel: __[Checklist SiFli de esquemático e PCB do SF32LB52 (XLSX)][SiFli SF32LB52 Schematic & PCB Checklist (XLSX)]__
+- :fontawesome-brands-wikipedia-w: __[Índice SiFli de guias de projeto de hardware (Wiki)][SiFli Chip Hardware Design Guide Index (Wiki)]__
 
 </div>
 
 Outras referências:
 
 - [Resumo do produto SF32LB52x](https://downloads.sifli.com/user%20manual/PB5201-SF32LB52x-Product%20Brief.pdf)
-- [Folha de dados do SF32LB52x](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf)
+- [Datasheet do SF32LB52x](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf)
 - [Manual de referência do SF32LB52x](https://downloads.sifli.com/user%20manual/UM5201-SF32LB52x-User%20Manual%20V0p8p4.pdf)
 - [Nota de aplicação de hardware do SF32LB520/3/5/7](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB520-3-5-7-HW-Application.md)
 - [Nota de aplicação de hardware do 52B/D/E/G/J](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52B-E-G-J-HW-Application.md)
@@ -65,10 +65,10 @@ Os [checklists do esquemático](SF32LB52x_schematic_checklist.md) (Seção 5.8) 
 
 ## 9. Apêndices { #9-appendices }
 
-As notas de aplicação originais da SiFli incluem as figuras de referência de esquemas elétricos, layout de PCB, mecânica e alimentação apresentadas a seguir. Os apêndices mantêm essas figuras como material de referência para a revisão; as Seções 5 e 6 continuam sendo as principais orientações de projeto.
+As notas de aplicação originais da SiFli incluem as figuras de referência de esquemáticos, layout de PCB, mecânica e alimentação apresentadas a seguir. Os apêndices mantêm essas figuras como material de referência para a revisão; as Seções 5 e 6 continuam sendo as principais orientações de projeto.
 
 !!! note "Como usar estas figuras"
-    Use estas figuras como circuitos de referência e exemplos de layout das notas de aplicação originais. Confirme a implementação final para o dispositivo e o produto escolhidos usando as regras, tabelas, folha de dados, manual de referência, pacote de projeto de referência mais recente e AVL.
+    Use estas figuras como circuitos de referência e exemplos de layout das notas de aplicação originais. Confirme a implementação final para o dispositivo e o produto escolhidos usando as regras, tabelas, datasheet, manual de referência, pacote de projeto de referência mais recente e AVL.
 
 <div align="center"><em>Tabela 9-1: Mapa dos apêndices</em></div>
 
@@ -77,7 +77,7 @@ As notas de aplicação originais da SiFli incluem as figuras de referência de 
 | Necessidade | Onde começar |
 |:---|:---|
 | Exemplos de diagrama de blocos de smartwatch para os dois grupos SF32LB52x | Apêndice A: aplicação típica de smartwatch |
-| Exemplos de esquemas de RF, armazenamento/boot, botões, motor, áudio, clock, USB e DC/DC | Apêndice B: esquemas de referência |
+| Exemplos de circuitos esquemáticos de RF, armazenamento/boot, botões, motor, áudio, clock, USB e DC/DC | Apêndice B: esquemáticos de referência |
 | Exemplos de posicionamento e roteamento de PCB para RF, armazenamento, áudio, empilhamento de camadas, fanout, clock, USB e DC/DC | Apêndice C: layouts de PCB de referência |
 | Desenhos de dimensões, formato e padrão de pads do encapsulamento | Apêndice D: mecânica |
 | Circuitos e layouts de referência de carga, OVP, árvore de alimentação e PMU | Apêndice E: alimentação |
@@ -98,7 +98,7 @@ As Figuras 9.1-1 e 9.1-2 mostram display QSPI, acelerômetro/giroscópio por SPI
 
 <div align="center"><em>Figura 9.1-2: Diagrama de aplicação de smartwatch (52B/D/E/G/J)</em></div>
 
-### 9.2. Apêndice B. Esquemas de referência { #appendix-b-reference-schematics }
+### 9.2. Apêndice B. Esquemáticos de referência { #appendix-b-reference-schematics }
 
 **RF**
 
@@ -106,9 +106,9 @@ As Figuras 9.1-1 e 9.1-2 mostram display QSPI, acelerômetro/giroscópio por SPI
 
 <div align="center"><em>Figura 9.2-1: Diagrama de blocos do front-end RF</em></div>
 
-![Figura 9.2-2: Esquema de referência de RF](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-RF.png){ loading="lazy" }
+![Figura 9.2-2: Esquemático de referência de RF](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-RF.png){ loading="lazy" }
 
-<div align="center"><em>Figura 9.2-2: Esquema de referência de RF</em></div>
+<div align="center"><em>Figura 9.2-2: Esquemático de referência de RF</em></div>
 
 ![Figura 9.2-3: Referência de conexão do circuito RF](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-RF-2.png){ loading="lazy" }
 
@@ -124,9 +124,9 @@ As Figuras 9.1-1 e 9.1-2 mostram display QSPI, acelerômetro/giroscópio por SPI
 
 <div align="center"><em>Figura 9.2-5: Referência de configuração de boot (52B/D/E/G/J)</em></div>
 
-![Figura 9.2-6: Esquema de referência de SDIO](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-SDIO.png){ loading="lazy" }
+![Figura 9.2-6: Esquemático de referência de SDIO](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-SDIO.png){ loading="lazy" }
 
-<div align="center"><em>Figura 9.2-6: Esquema de referência de SDIO</em></div>
+<div align="center"><em>Figura 9.2-6: Esquemático de referência de SDIO</em></div>
 
 **Botões, motor e áudio**
 
@@ -154,43 +154,43 @@ As Figuras 9.1-1 e 9.1-2 mostram display QSPI, acelerômetro/giroscópio por SPI
 
 <div align="center"><em>Figura 9.2-12: Circuito de referência do microfone ECM analógico</em></div>
 
-![Figura 9.2-13: Circuito de referência do DAC analógico ao PA](../../sf32-products/chips/assets/52xB/sf32lb52X-B-DAC-PA.png){ loading="lazy" }
+![Figura 9.2-13: Circuito de referência do DAC para o amplificador de potência de áudio](../../sf32-products/chips/assets/52xB/sf32lb52X-B-DAC-PA.png){ loading="lazy" }
 
-<div align="center"><em>Figura 9.2-13: Circuito de referência do DAC analógico ao PA</em></div>
+<div align="center"><em>Figura 9.2-13: Circuito de referência do DAC para o amplificador de potência de áudio</em></div>
 
-![Figura 9.2-14: Esquema de referência da alimentação de áudio](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-AUDIO-PWR.png){ loading="lazy" }
+![Figura 9.2-14: Esquemático de referência da alimentação de áudio](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-AUDIO-PWR.png){ loading="lazy" }
 
-<div align="center"><em>Figura 9.2-14: Esquema de referência da alimentação de áudio</em></div>
+<div align="center"><em>Figura 9.2-14: Esquemático de referência da alimentação de áudio</em></div>
 
-![Figura 9.2-15: Esquema de referência do ADC de áudio](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-AUDIO-ADC.png){ loading="lazy" }
+![Figura 9.2-15: Esquemático de referência do ADC de áudio](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-AUDIO-ADC.png){ loading="lazy" }
 
-<div align="center"><em>Figura 9.2-15: Esquema de referência do ADC de áudio</em></div>
+<div align="center"><em>Figura 9.2-15: Esquemático de referência do ADC de áudio</em></div>
 
-![Figura 9.2-16: Esquema de referência do DAC de áudio](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-AUDIO-DAC.png){ loading="lazy" }
+![Figura 9.2-16: Esquemático de referência do DAC de áudio](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-AUDIO-DAC.png){ loading="lazy" }
 
-<div align="center"><em>Figura 9.2-16: Esquema de referência do DAC de áudio</em></div>
+<div align="center"><em>Figura 9.2-16: Esquemático de referência do DAC de áudio</em></div>
 
 **Clock**
 
-![Figura 9.2-17: Esquema do cristal de 48 MHz](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-48M-SCH.png){ loading="lazy" }
+![Figura 9.2-17: Esquemático do cristal de 48 MHz](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-48M-SCH.png){ loading="lazy" }
 
-<div align="center"><em>Figura 9.2-17: Esquema do cristal de 48 MHz</em></div>
+<div align="center"><em>Figura 9.2-17: Esquemático do cristal de 48 MHz</em></div>
 
-![Figura 9.2-18: Esquema do cristal de 32,768 kHz](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-32K-SCH.png){ loading="lazy" }
+![Figura 9.2-18: Esquemático do cristal de 32,768 kHz](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PCB-32K-SCH.png){ loading="lazy" }
 
-<div align="center"><em>Figura 9.2-18: Esquema do cristal de 32,768 kHz</em></div>
+<div align="center"><em>Figura 9.2-18: Esquemático do cristal de 32,768 kHz</em></div>
 
 **USB**
 
-![Figura 9.2-19: Esquema de referência de USB](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-USB.png){ loading="lazy" }
+![Figura 9.2-19: Esquemático de referência de USB](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-USB.png){ loading="lazy" }
 
-<div align="center"><em>Figura 9.2-19: Esquema de referência de USB</em></div>
+<div align="center"><em>Figura 9.2-19: Esquemático de referência de USB</em></div>
 
 **DC/DC**
 
-![Figura 9.2-20: Esquema de referência de DC/DC](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-DCDC.png){ loading="lazy" }
+![Figura 9.2-20: Esquemático de referência de DC/DC](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-DCDC.png){ loading="lazy" }
 
-<div align="center"><em>Figura 9.2-20: Esquema de referência de DC/DC</em></div>
+<div align="center"><em>Figura 9.2-20: Esquemático de referência de DC/DC</em></div>
 
 ### 9.3. Apêndice C. Layouts de PCB de referência { #appendix-c-reference-pcb-layouts }
 
@@ -336,17 +336,17 @@ As figuras abaixo mostram circuitos externos de carregamento com e sem gerenciam
 
 <div align="center"><em>Figura 9.5-7: Estrutura de alimentação (SF32LB520/3/5/7)</em></div>
 
-![Figura 9.5-8: Esquema de referência de VCC](../../sf32-products/chips/assets/52xA/sf32LB52x-A-SCH-VCC.png){ loading="lazy" }
+![Figura 9.5-8: Esquemático de referência de VCC](../../sf32-products/chips/assets/52xA/sf32LB52x-A-SCH-VCC.png){ loading="lazy" }
 
-<div align="center"><em>Figura 9.5-8: Esquema de referência de VCC</em></div>
+<div align="center"><em>Figura 9.5-8: Esquemático de referência de VCC</em></div>
 
 ![Figura 9.5-9: Layout de PCB de referência de VCC](../../sf32-products/chips/assets/52xA/sf32LB52x-A-PCB-VCC.png){ loading="lazy" }
 
 <div align="center"><em>Figura 9.5-9: Layout de PCB de referência de VCC</em></div>
 
-![Figura 9.5-10: Esquema de referência de carga](../../sf32-products/chips/assets/52xA/sf32LB52x-A-SCH-CHG.png){ loading="lazy" }
+![Figura 9.5-10: Esquemático de referência de carga](../../sf32-products/chips/assets/52xA/sf32LB52x-A-SCH-CHG.png){ loading="lazy" }
 
-<div align="center"><em>Figura 9.5-10: Esquema de referência de carga</em></div>
+<div align="center"><em>Figura 9.5-10: Esquemático de referência de carga</em></div>
 
 ![Figura 9.5-11: Layout de PCB de referência de carga](../../sf32-products/chips/assets/52xA/sf32LB52x-A-PCB-CHG.png){ loading="lazy" }
 

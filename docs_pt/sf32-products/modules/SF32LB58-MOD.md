@@ -41,19 +41,19 @@ Considere o SF32LB58-MOD quando o projeto precisar de um ou mais destes recursos
 
 ## Recursos de desenvolvimento { #development-resources }
 
-[Ficha técnica do módulo]: https://downloads.sifli.com/user%20manual/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf
-[Introdução ao chip]: ../chips/SF32LB58x.md
-[Guia de projeto de hardware]: ../../hardware/chip-guides/SF32LB58-MOD_hardware_design_guide.md
-[Comprar amostras]: https://sifli.taobao.com/
-[Comprar kits de desenvolvimento]: https://sifli.taobao.com/
+[Module Datasheet]: https://downloads.sifli.com/user%20manual/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf
+[Chip Introduction]: ../chips/SF32LB58x.md
+[Hardware Design Guide]: ../../hardware/chip-guides/SF32LB58-MOD_hardware_design_guide.md
+[Buy Samples]: https://sifli.taobao.com/
+[Buy Dev Kits]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Ficha técnica do módulo]__
-- :fontawesome-solid-microchip: __[Introdução ao chip]__
-- :fontawesome-solid-file-lines: __[Guia de projeto de hardware]__
-- :fontawesome-solid-cart-shopping: __[Comprar amostras]__
-- :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento]__
+- :fontawesome-solid-file-pdf: __[Datasheet do módulo][Module Datasheet]__
+- :fontawesome-solid-microchip: __[Introdução ao chip][Chip Introduction]__
+- :fontawesome-solid-file-lines: __[Guia de projeto de hardware][Hardware Design Guide]__
+- :fontawesome-solid-cart-shopping: __[Comprar amostras][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento][Buy Dev Kits]__
 
 </div>
 
@@ -84,7 +84,7 @@ Considere o SF32LB58-MOD quando o projeto precisar de um ou mais destes recursos
 - Codec JPEG por hardware
 - Dois controladores LCD com suporte a 8080, SPI, Dual-SPI, Quad-SPI, DPI/RGB, MIPI DSI e JDI
 - TurboPixel: o extDMA comprime o framebuffer final com perda e taxa fixa, e o controlador de display descomprime os dados. Isso reduz a largura de banda da PSRAM e a capacidade de framebuffer exigidas por determinada carga de trabalho.
-- Os dois controladores LCD oferecem suporte ao modo de tela sempre ativa (always-on display).
+- Os dois controladores LCD oferecem suporte ao modo de display sempre ativo (always-on display).
 
 ### Áudio { #audio }
 

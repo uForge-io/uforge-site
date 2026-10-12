@@ -28,8 +28,8 @@ Antes de transformar esta página em um tutorial propriamente dito, a SiFli deve
 - UART usada pelo REPL e respectiva taxa de baud.
 - Mensagem de inicialização esperada do MicroPython.
 - APIs `machine` compatíveis.
-- Comportamento do sistema de arquivos e dos modos de segurança e recuperação.
-- Limitações conhecidas de tela, Bluetooth, armazenamento, USB e baixo consumo.
+- Comportamento do sistema de arquivos e dos modos seguro e de recuperação.
+- Limitações conhecidas de display, Bluetooth, armazenamento, USB e baixo consumo.
 
 ## Primeiro teste rápido sugerido { #suggested-first-smoke-test }
 

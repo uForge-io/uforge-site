@@ -14,7 +14,7 @@ La serie SF32LB56x es una familia avanzada de microcontroladores AIoT de consumo
 
 La familia utiliza una arquitectura big.LITTLE de doble núcleo: un procesador de aplicación Arm Cortex-M33 STAR-MC1[^1] de alto rendimiento, con una frecuencia de hasta 240 MHz, y un procesador Arm Cortex-M33 STAR-MC1 de consumo ultrabajo, de hasta 96 MHz. El núcleo principal se ocupa de la interfaz de usuario, la pantalla, el almacenamiento y la lógica del producto; el núcleo de bajo consumo gestiona la detección siempre activa, el modo de espera y el control de Bluetooth con un presupuesto energético menor.
 
-La ficha de producto y la hoja de datos oficiales de SiFli presentan SF32LB56x como una opción de mayor integración para dispositivos conectados con abundantes funciones de pantalla y audio. La familia incorpora Bluetooth 5.3 de modo dual con BLE Audio, gráficos ePicasso 2.0, ADC y DAC de audio integrados, un acelerador para TinyML, opciones de Flash integrada en el encapsulado y más interfaces para memoria externa y pantallas. Es una opción adecuada cuando el diseño supera las capacidades de SF32LB55x en conectividad inalámbrica, visualización o audio, pero sigue necesitando la eficiencia y el nivel de integración propios de un MCU.
+La ficha de producto y la hoja de datos oficiales de SiFli presentan SF32LB56x como una opción de mayor integración para dispositivos conectados con abundantes funciones de pantalla y audio. La familia incorpora Bluetooth 5.3 de modo dual con BLE Audio, gráficos ePicasso 2.0, ADC y DAC de audio integrados, un acelerador para TinyML, opciones de Flash integrada en el encapsulado y más interfaces para memoria externa y pantallas. Es una opción adecuada cuando el diseño supera las capacidades de SF32LB55x en conectividad inalámbrica, visualización o audio, pero sigue necesitando la eficiencia y el nivel de integración propios de una MCU.
 
 También es importante consultar la guía de modelos de chips de SiFli: las interfaces de pantalla disponibles en SF32LB56x dependen del encapsulado. Por ello, el código de pedido y el encapsulado deben definirse al establecer la arquitectura, no dejarse para la fase final del diseño de la PCB.
 
@@ -58,7 +58,7 @@ Elija SF32LB56x si el diseño requiere una o varias de estas capacidades:
 [Referencia de la API]: https://docs.sifli.com/projects/sdk/latest/sf32lb56x/api/index.html
 [SF32LB56-MOD]: ../modules/SF32LB56-MOD.md
 [Comprar muestras]: https://sifli.taobao.com/
-[Comprar kits de desarrollo]: https://sifli.taobao.com/
+[Comprar placas de desarrollo]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
@@ -75,7 +75,7 @@ Elija SF32LB56x si el diseño requiere una o varias de estas capacidades:
 - :fontawesome-solid-list-check: __[Fuente de la lista de comprobación de diseño de hardware]__
 - :fontawesome-solid-sim-card: __[SF32LB56-MOD]__
 - :fontawesome-solid-cart-shopping: __[Comprar muestras]__
-- :fontawesome-solid-cart-shopping: __[Comprar kits de desarrollo]__
+- :fontawesome-solid-cart-shopping: __[Comprar placas de desarrollo]__
 
 </div>
 
@@ -183,7 +183,7 @@ Siga estos pasos para convertir una selección preliminar de SF32LB56x en un dis
 
 [SF32LB56-MOD](../modules/SF32LB56-MOD.md) integra el chip SF32LB566VCB36, la memoria, el diseño de RF y las opciones de antena en un módulo listo para incorporar al producto. Es una opción adecuada para aprovechar las prestaciones de SF32LB56x y reducir los riesgos asociados al diseño de RF, la adaptación de antena, la colocación del cristal y la integración de memoria de alta velocidad.
 
-### Kits de desarrollo { #development-kits }
+### Placas de desarrollo { #development-kits }
 
 [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) es un punto de partida práctico para poner en marcha el firmware y validar la pantalla, el audio, el almacenamiento, la RF y el consumo antes de decidirse por un diseño con el chip integrado directamente o por un módulo.
 

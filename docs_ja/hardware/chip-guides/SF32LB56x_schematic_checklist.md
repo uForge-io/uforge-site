@@ -9,9 +9,9 @@ hide:
     - navigation
 ---
 
-# SF32LB56x ハードウェア設計ガイド — 回路図チェックリスト { #sf32lb56x-hardware-design-guide-schematic-checklist }
+# SF32LB56xハードウェア設計ガイド — 回路図チェックリスト { #sf32lb56x-hardware-design-guide-schematic-checklist }
 
-!!! note "SF32LB56x ハードウェア設計ガイドの一部"
+!!! note "SF32LB56xハードウェア設計ガイドの一部"
     このページでは、5.8節の回路図チェック項目を確認できます。[回路図設計ガイド](SF32LB56x_schematic_design.md)に戻ると、各項目の設計背景を確認できます。
 
 ## 5.8. 回路図チェックリスト { #58-schematic-checklist }
@@ -20,7 +20,7 @@ hide:
 
 ### 5.8.1. パッケージ { #581-package }
 
-<div align="center"><em>表 5.8.1-1：パッケージのチェックリスト</em></div>
+<div align="center"><em>表 5.8.1-1: パッケージのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -32,7 +32,7 @@ hide:
 
 ### 5.8.2. 電源 { #582-power-supply }
 
-<div align="center"><em>表 5.8.2-1：電源チェックリスト</em></div>
+<div align="center"><em>表 5.8.2-1: 電源チェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -60,17 +60,17 @@ hide:
 | 20 | バッテリー電圧が電源オンしきい値を下回っていても充電入力からシステムを起動できるよう、電源パス管理機能付き充電ICの使用を推奨する | 全チップ | 必須 |
 | 21 | 電源パス管理機能のない充電ICを使用する場合、トリクル充電電流を40 mA以上とする | 全チップ | 必須 |
 | 22 | 該当する場合、SF32LB56xUとSS6700の電源設計にハードウェア互換性を持たせる | SF32LB560/561/563/56WおよびSS6700A | 必須 |
-| 23 | SF30147から給電する場合、レジスタ制御にはSF32LB56x専用のTWIインターフェースを使用する | 全チップ | 必須 |
+| 23 | SF30147から給電する場合、レジスター制御にはSF32LB56x専用のTWIインターフェースを使用する | 全チップ | 必須 |
 | 24 | SF30147のTWIがGセンサーのI2Cバスを共有する場合、TWIが正常に動作できるようGセンサーI2Cのプルアップ電源を常時オンにする | 全チップ | 必須 |
-| 25 | SF30147から給電する場合、EN制御のロードスイッチやLDOを使用してもよい。ENの電源ドメインはPVDDまたはAVDDとし、1.8 V／3.3 VレベルのMCU GPIOからスイッチを制御しない。代わりにENをGNDに接続し、レジスタで対応する電源レール出力を制御してもよい | 全チップ | 必須 |
-| 26 | SF30147から給電する場合、BUCKとLDO1はそれぞれのイネーブル信号EN_BUCK、EN_LDO1でのみ制御でき、内部レジスタによる制御には対応しない | 全チップ | 必須 |
+| 25 | SF30147から給電する場合、EN制御のロードスイッチやLDOを使用してもよい。ENの電源ドメインはPVDDまたはAVDDとし、1.8 V／3.3 VレベルのMCU GPIOからスイッチを制御しない。代わりにENをGNDに接続し、レジスターで対応する電源レール出力を制御してもよい | 全チップ | 必須 |
+| 26 | SF30147から給電する場合、BUCKとLDO1はそれぞれのイネーブル信号EN_BUCK、EN_LDO1でのみ制御でき、内部レジスターによる制御には対応しない | 全チップ | 必須 |
 | 27 | 56xのPVDDは、SF32LB56xUではVDDIO3、SF32LB56xVではVDDIOBと一致させる。PVDDの方が低い場合、たとえばI/O電源が3.3 VでPVDDが1.8 Vの場合、StandbyおよびHibernate時にI/O電源レールで約15 µAのリーク電流が発生する | 全チップ | 必須 |
 
 </div>
 
 ### 5.8.3. 電源コンデンサとインダクタ { #583-power-supply-capacitors-and-inductors }
 
-<div align="center"><em>表 5.8.3-1：電源コンデンサとインダクタのチェックリスト</em></div>
+<div align="center"><em>表 5.8.3-1: 電源コンデンサとインダクタのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -109,7 +109,7 @@ hide:
 
 ### 5.8.4. クロック { #584-clock }
 
-<div align="center"><em>表 5.8.4-1：クロックチェックリスト</em></div>
+<div align="center"><em>表 5.8.4-1: クロックチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -124,7 +124,7 @@ hide:
 
 ### 5.8.5. グラウンド信号 { #585-ground-signals }
 
-<div align="center"><em>表 5.8.5-1：グラウンド信号チェックリスト</em></div>
+<div align="center"><em>表 5.8.5-1: グラウンド信号チェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -136,7 +136,7 @@ hide:
 
 ### 5.8.6. ブートモード { #586-boot-mode }
 
-<div align="center"><em>表 5.8.6-1：ブートモードチェックリスト</em></div>
+<div align="center"><em>表 5.8.6-1: ブートモードチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -149,7 +149,7 @@ hide:
 
 ### 5.8.7. RF { #587-rf }
 
-<div align="center"><em>表 5.8.7-1：RFチェックリスト</em></div>
+<div align="center"><em>表 5.8.7-1: RFチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -162,7 +162,7 @@ hide:
 
 ### 5.8.8. I/Oリソース割り当て { #588-io-resource-allocation }
 
-<div align="center"><em>表 5.8.8-1：I/Oリソース割り当てチェックリスト</em></div>
+<div align="center"><em>表 5.8.8-1: I/Oリソース割り当てチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -177,7 +177,7 @@ hide:
 
 ### 5.8.9. ハードウェアウェイクアップ { #589-hardware-wake-up }
 
-<div align="center"><em>表 5.8.9-1：ハードウェアウェイクアップのチェックリスト</em></div>
+<div align="center"><em>表 5.8.9-1: ハードウェアウェイクアップのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -192,7 +192,7 @@ hide:
 
 ### 5.8.10. ストレージ { #5810-storage }
 
-<div align="center"><em>表 5.8.10-1：ストレージチェックリスト</em></div>
+<div align="center"><em>表 5.8.10-1: ストレージチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -201,7 +201,7 @@ hide:
 | 1 | MPI3（SD2）にSPI NAND FlashまたはSD NAND Flashを接続する。SF32LB56xUの外付けFlashでは、Flash電源電圧がVDDIO3と一致することを確認する | SF32LB560/561/563/56WおよびSS6700A | 必須 |
 | 2 | MPI3（SD2）にSPI NAND FlashまたはSD NAND Flashを接続し、FlashのI/OレベルをVDDIOA2と一致させる | SF32LB565/567 | 必須 |
 | 3 | SPI NAND FlashのHOLD#ピンを10 kΩ抵抗でSPI NAND Flashの電源にプルアップする | 全チップ | 必須 |
-| 4 | MPI3にNOR Flashを接続する（SS6700Aの外部メモリにはNOR Flashを使用する） | 全チップ | 必須 |
+| 4 | MPI3にNOR Flashを接続する（SS6700Aの外部メモリーにはNOR Flashを使用する） | 全チップ | 必須 |
 | 5 | 量産時にMPI3（SD2）Flashへ書き込む必要がある場合、プログラム書き込み中に外付けFlashの電源を有効にする | 全チップ | 必須 |
 | 6 | PBR0または他のGPIOで制御する電源スイッチは、Highでオン、Lowでオフとする | 全チップ | 必須 |
 | 7 | SD2インターフェースにSD NANDを接続する場合、信号接続が正しい | 全チップ | 必須 |
@@ -218,7 +218,7 @@ hide:
 
 ### 5.8.11. ディスプレイ { #5811-display }
 
-<div align="center"><em>表 5.8.11-1：ディスプレイチェックリスト</em></div>
+<div align="center"><em>表 5.8.11-1: ディスプレイチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -241,7 +241,7 @@ hide:
 
 ### 5.8.12. GPADC { #5812-gpadc }
 
-<div align="center"><em>表 5.8.12-1：GPADCチェックリスト</em></div>
+<div align="center"><em>表 5.8.12-1: GPADCチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -257,7 +257,7 @@ hide:
 
 ### 5.8.13. ボタン { #5813-buttons }
 
-<div align="center"><em>表 5.8.13-1：ボタンのチェックリスト</em></div>
+<div align="center"><em>表 5.8.13-1: ボタンのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -272,7 +272,7 @@ hide:
 
 ### 5.8.14. EOS／ESD保護 { #5814-eos-and-esd-protection }
 
-<div align="center"><em>表 5.8.14-1：EOS／ESD保護のチェックリスト</em></div>
+<div align="center"><em>表 5.8.14-1: EOS／ESD保護のチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -290,7 +290,7 @@ hide:
 
 ### 5.8.15. I2C { #5815-i2c }
 
-<div align="center"><em>表 5.8.15-1：I2Cのチェックリスト</em></div>
+<div align="center"><em>表 5.8.15-1: I2Cのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -306,7 +306,7 @@ hide:
 
 ### 5.8.16. アナログオーディオ { #5816-analog-audio }
 
-<div align="center"><em>表 5.8.16-1：アナログオーディオのチェックリスト</em></div>
+<div align="center"><em>表 5.8.16-1: アナログオーディオのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -328,7 +328,7 @@ hide:
 
 ### 5.8.17. SPI { #5817-spi }
 
-<div align="center"><em>表 5.8.17-1：SPIのチェックリスト</em></div>
+<div align="center"><em>表 5.8.17-1: SPIのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -342,7 +342,7 @@ hide:
 
 ### 5.8.18. USART { #5818-usart }
 
-<div align="center"><em>表 5.8.18-1：USARTのチェックリスト</em></div>
+<div align="center"><em>表 5.8.18-1: USARTのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -361,7 +361,7 @@ hide:
 
 ### 5.8.19. PWM { #5819-pwm }
 
-<div align="center"><em>表 5.8.19-1：PWMのチェックリスト</em></div>
+<div align="center"><em>表 5.8.19-1: PWMのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -376,7 +376,7 @@ hide:
 
 ### 5.8.20. デバッグ { #5820-debug }
 
-<div align="center"><em>表 5.8.20-1：デバッグのチェックリスト</em></div>
+<div align="center"><em>表 5.8.20-1: デバッグのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -391,7 +391,7 @@ hide:
 
 ### 5.8.21. USB { #5821-usb }
 
-<div align="center"><em>表 5.8.21-1：USBのチェックリスト</em></div>
+<div align="center"><em>表 5.8.21-1: USBのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -405,7 +405,7 @@ hide:
 
 ### 5.8.22. PBR { #5822-pbr }
 
-<div align="center"><em>表 5.8.22-1：PBRのチェックリスト</em></div>
+<div align="center"><em>表 5.8.22-1: PBRのチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -424,7 +424,7 @@ hide:
 
 ### 5.8.23. 消費電力 { #5823-power-consumption }
 
-<div align="center"><em>表 5.8.23-1：消費電力のチェックリスト</em></div>
+<div align="center"><em>表 5.8.23-1: 消費電力のチェックリスト</em></div>
 
 <div align="center" markdown>
 
@@ -446,7 +446,7 @@ hide:
 
 ### 5.8.24. 書き込み { #5824-download }
 
-<div align="center"><em>表 5.8.24-1：書き込みのチェックリスト</em></div>
+<div align="center"><em>表 5.8.24-1: 書き込みのチェックリスト</em></div>
 
 <div align="center" markdown>
 

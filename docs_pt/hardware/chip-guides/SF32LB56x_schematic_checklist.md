@@ -1,6 +1,6 @@
 ---
 icon: lucide/list-checks
-description: "Checklist item a item para revisão do esquemático do MCU SF32LB56x, cobrindo alimentação, clock, RF, armazenamento, display e produção."
+description: "Checklist detalhado para revisar o esquemático do MCU SF32LB56x, cobrindo alimentação, clock, RF, armazenamento, display e produção."
 tags:
     - Hardware
     - Chip
@@ -12,11 +12,11 @@ hide:
 # Guia de projeto de hardware SF32LB56x — checklist do esquemático { #sf32lb56x-hardware-design-guide-schematic-checklist }
 
 !!! note "Parte do guia de projeto de hardware SF32LB56x"
-    Esta página cobre a Seção 5.8, o checklist item a item do esquemático. Consulte também as [Diretrizes para o esquemático](SF32LB56x_schematic_design.md).
+    Esta página cobre a Seção 5.8, com verificações detalhadas do esquemático. Consulte também as [Diretrizes para o esquemático](SF32LB56x_schematic_design.md).
 
 ## 5.8. Checklist do esquemático { #58-schematic-checklist }
 
-Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a coluna "Aplica-se a", use cada item somente nas variantes nela indicadas.
+Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver uma coluna "Aplica-se a", aplique cada item somente às variantes indicadas nela.
 
 ### 5.8.1. Encapsulamento { #581-package }
 
@@ -38,33 +38,33 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 
 | Nº | Verificação | Aplica-se a | Categoria |
 |:---|:---|:---|:---|
-| 1 | A tensão de alimentação PVDD é de 1.8 V a 3.3 V; recomenda-se 1.8 V para SF32LB56xU/SF32LB56xV e 3.3 V para SS6700A. | Todos os chips | Obrigatório |
+| 1 | A tensão de alimentação de PVDD deve ficar entre 1,8 V e 3,3 V. Recomenda-se 1,8 V para SF32LB56xU/SF32LB56xV e 3,3 V para SS6700A. | Todos os chips | Obrigatório |
 | 2 | As conexões BUCK_LX e BUCK_FB estão corretas. | Todos os chips | Obrigatório |
 | 3 | A saída LDO_VOUT1 tem um ponto de teste ou um capacitor de filtro que facilite a medição de tensão. | Todos os chips | Obrigatório |
 | 4 | A saída LDO_VOUT2 tem um ponto de teste ou um capacitor de filtro que facilite a medição de tensão. | Todos os chips | Obrigatório |
 | 5 | A saída VDD_RET tem um ponto de teste ou um capacitor de filtro que facilite a medição de tensão. | Todos os chips | Obrigatório |
 | 6 | A saída VDD_RTC tem um ponto de teste ou um capacitor de filtro que facilite a medição de tensão. | Todos os chips | Obrigatório |
-| 7 | A tensão de VDDIO1 é de 1.8 V a 3.3 V; SF32LB56xU usa 1.8 V e SS6700A usa 3.3 V. VDDIO1 pode ser comutado junto com a Flash externa sob controle de PBR0. Se PBR0 não controlar VDDIO1, mantenha esse trilho alimentado durante o download do programa. Se o controle for por GPIO, recomenda-se PB22 e a ferramenta de download deve habilitar o trilho. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
-| 8 | Quando VDDIO1 for alimentado pelo SF30147, recomenda-se LVSW1; a ferramenta de download deve habilitar esse trilho. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
-| 9 | A tensão de VDDIO2 é de 1.8 V a 3.3 V; reserve um resistor série de 0 Ω na primeira revisão da placa (recomenda-se 1.8 V para SF32LB56xU e 3.3 V para SS6700A). | SF32LB560/561/563/56W e SS6700A | Obrigatório |
-| 10 | A tensão de VDDIO3 é de 1.8 V a 3.3 V; reserve um resistor série de 0 Ω na primeira revisão da placa (recomenda-se 1.8 V para SF32LB56xU e 3.3 V para SS6700A). | SF32LB560/561/563/56W e SS6700A | Obrigatório |
-| 11 | A tensão de VDDIO4 é de 1.8 V a 3.3 V; reserve um resistor série de 0 Ω na primeira revisão da placa (recomenda-se 1.8 V para SF32LB56xU; SS6700A não possui esse trilho). | SF32LB560/561/563/56W | Obrigatório |
-| 12 | A tensão de VDDIOA é de 1.8 V a 3.3 V; reserve um resistor série de 0 Ω na primeira revisão da placa. | SF32LB565/567 | Obrigatório |
-| 13 | A tensão de VDDIOA2 é de 1.8 V a 3.3 V; reserve um resistor série de 0 Ω na primeira revisão da placa. | SF32LB565/567 | Obrigatório |
-| 14 | A tensão de VDDIOB é de 1.8 V a 3.3 V; reserve um resistor série de 0 Ω na primeira revisão da placa. | SF32LB565/567 | Obrigatório |
-| 15 | A alimentação de VDDIOSA é de 1.8 V e há uma chave de carga para controlar a alimentação. | SF32LB565/567 | Obrigatório |
-| 16 | A alimentação de VDDIOSB é de 1.8 V e há uma chave de carga para controlar a alimentação. | SF32LB565/567 | Obrigatório |
-| 17 | A alimentação de VDDIOSC é de 1.8 V e VDDIOSC deve permanecer sempre alimentado. | SF32LB565/567 | Obrigatório |
-| 18 | A alimentação de AVDD33_ANA é de 3.3 V. | Todos os chips | Obrigatório |
-| 19 | A alimentação de AVDD33_AUD é de 3.3 V. | Todos os chips | Obrigatório |
+| 7 | A tensão de VDDIO1 deve ficar entre 1,8 V e 3,3 V; use 1,8 V no SF32LB56xU e 3,3 V no SS6700A. VDDIO1 pode ser controlado junto com a alimentação da Flash externa por PBR0. Se PBR0 não controlar VDDIO1, mantenha esse trilho alimentado durante o download do programa. Se o controle for feito por GPIO, recomenda-se PB22, e a ferramenta de download deve habilitar o trilho. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
+| 8 | Quando VDDIO1 for alimentado pelo SF30147, recomenda-se usar LVSW1; a ferramenta de download deve habilitar esse trilho. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
+| 9 | A tensão de VDDIO2 deve ficar entre 1,8 V e 3,3 V. Reserve um resistor série de 0 Ω na primeira revisão da placa; recomenda-se 1,8 V para SF32LB56xU e 3,3 V para SS6700A. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
+| 10 | A tensão de VDDIO3 deve ficar entre 1,8 V e 3,3 V. Reserve um resistor série de 0 Ω na primeira revisão da placa; recomenda-se 1,8 V para SF32LB56xU e 3,3 V para SS6700A. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
+| 11 | A tensão de VDDIO4 deve ficar entre 1,8 V e 3,3 V. Reserve um resistor série de 0 Ω na primeira revisão da placa; recomenda-se 1,8 V para SF32LB56xU. O SS6700A não tem esse trilho. | SF32LB560/561/563/56W | Obrigatório |
+| 12 | A tensão de VDDIOA deve ficar entre 1,8 V e 3,3 V. Reserve um resistor série de 0 Ω na primeira revisão da placa. | SF32LB565/567 | Obrigatório |
+| 13 | A tensão de VDDIOA2 deve ficar entre 1,8 V e 3,3 V. Reserve um resistor série de 0 Ω na primeira revisão da placa. | SF32LB565/567 | Obrigatório |
+| 14 | A tensão de VDDIOB deve ficar entre 1,8 V e 3,3 V. Reserve um resistor série de 0 Ω na primeira revisão da placa. | SF32LB565/567 | Obrigatório |
+| 15 | VDDIOSA deve ser alimentado com 1,8 V e contar com uma chave de carga para controlar sua alimentação. | SF32LB565/567 | Obrigatório |
+| 16 | VDDIOSB deve ser alimentado com 1,8 V e contar com uma chave de carga para controlar sua alimentação. | SF32LB565/567 | Obrigatório |
+| 17 | VDDIOSC deve ser alimentado com 1,8 V e permanecer sempre ligado. | SF32LB565/567 | Obrigatório |
+| 18 | AVDD33_ANA deve ser alimentado com 3,3 V. | Todos os chips | Obrigatório |
+| 19 | AVDD33_AUD deve ser alimentado com 3,3 V. | Todos os chips | Obrigatório |
 | 20 | Recomenda-se usar no circuito de carga um CI carregador com gerenciamento do caminho de alimentação, para que o sistema possa ligar pela entrada do carregador quando a tensão da bateria estiver abaixo do limite de inicialização. | Todos os chips | Obrigatório |
 | 21 | Se for usado um CI carregador sem gerenciamento do caminho de alimentação, a corrente de carga lenta (trickle charge) deve ser de pelo menos 40 mA. | Todos os chips | Obrigatório |
 | 22 | Quando aplicável, o projeto da alimentação deve ser compatível em hardware entre SF32LB56xU e SS6700. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
 | 23 | Quando o SF30147 fornecer alimentação, use a interface TWI dedicada do SF32LB56x para controlar os registradores. | Todos os chips | Obrigatório |
 | 24 | Se o TWI do SF30147 compartilhar o barramento I2C do acelerômetro, mantenha sempre alimentada a fonte dos pull-ups do I2C do acelerômetro para que o TWI funcione normalmente. | Todos os chips | Obrigatório |
-| 25 | Quando o SF30147 fornecer alimentação, podem ser usadas chaves de carga e LDOs controlados por EN. O domínio de alimentação de EN deve ser PVDD ou AVDD; não controle a chave por um GPIO do MCU com nível de 1.8 V ou 3.3 V. Como alternativa, conecte EN ao terra e controle por registradores a saída do trilho correspondente. | Todos os chips | Obrigatório |
+| 25 | Quando o SF30147 fornecer alimentação, podem ser usadas chaves de carga e LDOs controlados por EN. O pino EN deve usar o domínio de alimentação PVDD ou AVDD; não controle a chave por um GPIO do MCU em 1,8 V ou 3,3 V. Como alternativa, conecte EN ao terra e controle por registradores a saída do trilho correspondente. | Todos os chips | Obrigatório |
 | 26 | Quando o SF30147 fornecer alimentação, BUCK e LDO1 só podem ser controlados pelos respectivos sinais de habilitação EN_BUCK e EN_LDO1; não há controle por registradores internos. | Todos os chips | Obrigatório |
-| 27 | O PVDD da família 56x deve corresponder a VDDIO3 no SF32LB56xU ou a VDDIOB no SF32LB56xV. Se PVDD for menor, por exemplo, com o trilho de E/S em 3.3 V e PVDD em 1.8 V, haverá cerca de 15 uA de fuga no trilho de E/S nos modos Standby e Hibernate. | Todos os chips | Obrigatório |
+| 27 | O PVDD da família 56x deve ter a mesma tensão de VDDIO3 no SF32LB56xU ou de VDDIOB no SF32LB56xV. Se PVDD tiver tensão menor — por exemplo, com o trilho de E/S em 3,3 V e PVDD em 1,8 V —, a corrente de fuga no trilho de E/S será de cerca de 15 µA nos modos Standby e Hibernate. | Todos os chips | Obrigatório |
 
 </div>
 
@@ -76,31 +76,31 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 
 | Nº | Verificação | Aplica-se a | Categoria |
 |:---|:---|:---|:---|
-| 1 | O capacitor de bulk de PVDD é de pelo menos 10 uF. | Todos os chips | Obrigatório |
-| 2 | O capacitor de BUCK_FB é de 4.7 uF. | Todos os chips | Obrigatório |
-| 3 | O capacitor de LDO_VOUT1 é de 4.7 uF. | Todos os chips | Obrigatório |
-| 4 | O capacitor de LDO_VOUT2 é de 4.7 uF. | Todos os chips | Obrigatório |
-| 5 | O capacitor de VDD_RET é de 0.47 uF. | Todos os chips | Obrigatório |
-| 6 | O capacitor de VDD_RTC é de 1 uF. | Todos os chips | Obrigatório |
-| 7 | O capacitor de VDDIO1 é de pelo menos 1 uF. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
-| 8 | O capacitor de VDDIO2 é de pelo menos 1 uF. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
-| 9 | O capacitor de VDDIO3 é de pelo menos 1 uF. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
-| 10 | O capacitor de VDDIO4 é de pelo menos 1 uF. | SF32LB560/561/563/56W | Obrigatório |
-| 11 | O capacitor de VDDIOA é de pelo menos 1 uF. | SF32LB565/567 | Obrigatório |
-| 12 | O capacitor de VDDIOA2 é de pelo menos 1 uF. | SF32LB565/567 | Obrigatório |
-| 13 | O capacitor de VDDIOB é de pelo menos 1 uF. | SF32LB565/567 | Obrigatório |
-| 14 | O capacitor de VDDIOSA é de pelo menos 0.1 uF. | SF32LB565/567 | Obrigatório |
-| 15 | O capacitor de VDDIOSB é de pelo menos 0.1 uF. | SF32LB565/567 | Obrigatório |
-| 16 | O capacitor de VDDIOSC é de pelo menos 0.1 uF. | SF32LB565/567 | Obrigatório |
-| 17 | O capacitor de MIC_BIAS é de 1 uF. | Todos os chips | Obrigatório |
-| 18 | O capacitor de AVDD33_ANA é de pelo menos 4.7 uF. | Todos os chips | Obrigatório |
-| 19 | O capacitor de AVDD33_AUD é de pelo menos 4.7 uF. | Todos os chips | Obrigatório |
-| 20 | O capacitor de AVDD33_BRF é de pelo menos 4.7 uF. | SF32LB565/567 | Obrigatório |
-| 21 | O capacitor de AUD_VREF é de 1 uF. | Todos os chips | Obrigatório |
-| 22 | O capacitor de GPADC VREFP é de 4.7 uF. | Todos os chips | Obrigatório |
+| 1 | O capacitor de reserva (bulk) de PVDD deve ter pelo menos 10 µF. | Todos os chips | Obrigatório |
+| 2 | O capacitor de BUCK_FB deve ter 4,7 µF. | Todos os chips | Obrigatório |
+| 3 | O capacitor de LDO_VOUT1 deve ter 4,7 µF. | Todos os chips | Obrigatório |
+| 4 | O capacitor de LDO_VOUT2 deve ter 4,7 µF. | Todos os chips | Obrigatório |
+| 5 | O capacitor de VDD_RET deve ter 0,47 µF. | Todos os chips | Obrigatório |
+| 6 | O capacitor de VDD_RTC deve ter 1 µF. | Todos os chips | Obrigatório |
+| 7 | O capacitor de VDDIO1 deve ter pelo menos 1 µF. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
+| 8 | O capacitor de VDDIO2 deve ter pelo menos 1 µF. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
+| 9 | O capacitor de VDDIO3 deve ter pelo menos 1 µF. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
+| 10 | O capacitor de VDDIO4 deve ter pelo menos 1 µF. | SF32LB560/561/563/56W | Obrigatório |
+| 11 | O capacitor de VDDIOA deve ter pelo menos 1 µF. | SF32LB565/567 | Obrigatório |
+| 12 | O capacitor de VDDIOA2 deve ter pelo menos 1 µF. | SF32LB565/567 | Obrigatório |
+| 13 | O capacitor de VDDIOB deve ter pelo menos 1 µF. | SF32LB565/567 | Obrigatório |
+| 14 | O capacitor de VDDIOSA deve ter pelo menos 0,1 µF. | SF32LB565/567 | Obrigatório |
+| 15 | O capacitor de VDDIOSB deve ter pelo menos 0,1 µF. | SF32LB565/567 | Obrigatório |
+| 16 | O capacitor de VDDIOSC deve ter pelo menos 0,1 µF. | SF32LB565/567 | Obrigatório |
+| 17 | O capacitor de MIC_BIAS deve ter 1 µF. | Todos os chips | Obrigatório |
+| 18 | O capacitor de AVDD33_ANA deve ter pelo menos 4,7 µF. | Todos os chips | Obrigatório |
+| 19 | O capacitor de AVDD33_AUD deve ter pelo menos 4,7 µF. | Todos os chips | Obrigatório |
+| 20 | O capacitor de AVDD33_BRF deve ter pelo menos 4,7 µF. | SF32LB565/567 | Obrigatório |
+| 21 | O capacitor de AUD_VREF deve ter 1 µF. | Todos os chips | Obrigatório |
+| 22 | O capacitor de GPADC VREFP deve ter 4,7 µF. | Todos os chips | Obrigatório |
 | 23 | O indutor BUCK é um código de peça listado na [Lista de fornecedores aprovados da SiFli] (AVL). | Todos os chips | Obrigatório |
-| 24 | Se o indutor BUCK não for recomendado pela SiFli, ele atende a L = 4.7 uH, DCR &lt;= 0.4 ohm e Isat &gt;= 450 mA. | Todos os chips | Obrigatório |
-| 25 | A tensão de alimentação de PVDD deve ser 1.8 V. Recomenda-se usar um conversor DCDC de VBAT para 1.8 V. | Todos os chips | Obrigatório |
+| 24 | Se o indutor BUCK não for recomendado pela SiFli, ele deve atender a L = 4,7 µH, DCR &lt;= 0,4 Ω e Isat &gt;= 450 mA. | Todos os chips | Obrigatório |
+| 25 | A tensão de alimentação de PVDD deve ser 1,8 V. Recomenda-se usar um conversor DCDC de VBAT para 1,8 V. | Todos os chips | Obrigatório |
 | 26 | Se houver GPS ou outros periféricos sensíveis a interferência, reserve um footprint para capacitor de derivação para terra em BUCK_LX; o valor depende dos resultados dos testes. | Todos os chips | Obrigatório |
 | 27 | A corrente quiescente do conversor DCDC selecionado está registrada e atende aos requisitos do projeto. | Todos os chips | Obrigatório |
 | 28 | A corrente quiescente do LDO selecionado está registrada e atende aos requisitos do projeto. | Todos os chips | Obrigatório |
@@ -116,9 +116,9 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 | Nº | Verificação | Aplica-se a | Categoria |
 |:---|:---|:---|:---|
 | 1 | O cristal principal de 48 MHz tem código de peça listado na AVL. | Todos os chips | Obrigatório |
-| 2 | Se o cristal de 48 MHz não estiver na AVL, atende a 7 pF ≤ CL ≤ 12 pF (recomendado: 8.8 pF), tolerância de frequência ≤±10 ppm e ESR ≤30 Ω (recomendado: 22 Ω). | Todos os chips | Obrigatório |
-| 3 | O cristal RTC de 32.768 kHz tem código de peça listado na AVL. | Todos os chips | Obrigatório |
-| 4 | Se o cristal de 32.768 kHz não estiver na AVL, atende a CL ≤12.5 pF (recomendado: 7 pF), tolerância de frequência ≤±20 ppm e ESR ≤80 kΩ (recomendado: 38 kΩ). | Todos os chips | Obrigatório |
+| 2 | Se o cristal de 48 MHz não estiver na AVL, deve atender a 7 pF ≤ CL ≤ 12 pF (recomendado: 8,8 pF), tolerância de frequência ≤ ±10 ppm e ESR ≤ 30 Ω (recomendado: 22 Ω). | Todos os chips | Obrigatório |
+| 3 | O cristal RTC de 32,768 kHz tem código de peça listado na AVL. | Todos os chips | Obrigatório |
+| 4 | Se o cristal de 32,768 kHz não estiver na AVL, deve atender a CL ≤ 12,5 pF (recomendado: 7 pF), tolerância de frequência ≤ ±20 ppm e ESR ≤ 80 kΩ (recomendado: 38 kΩ). | Todos os chips | Obrigatório |
 
 </div>
 
@@ -142,7 +142,7 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 
 | Nº | Verificação | Aplica-se a | Categoria |
 |:---|:---|:---|:---|
-| 1 | MODE tem um pull-down interno; reserve um pull-up de 10 kΩ para VDDIOA e coloque MODE em nível alto durante o download do programa. | Todos os chips | Obrigatório |
+| 1 | MODE tem um pull-down interno. Reserve um pull-up de 10 kΩ para VDDIOA e coloque MODE em nível alto durante o download do programa. | Todos os chips | Obrigatório |
 | 2 | O sinal MODE tem um ponto de teste reservado e deve ser disponibilizado no dispositivo de programação da produção. | Todos os chips | Obrigatório |
 
 </div>
@@ -156,7 +156,7 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 | Nº | Verificação | Aplica-se a | Categoria |
 |:---|:---|:---|:---|
 | 1 | O sinal ANT está identificado com o requisito de impedância característica single-ended de 50 Ω. | Todos os chips | Obrigatório |
-| 2 | Há uma rede de casamento tipo Pi reservada no sinal ANT: um capacitor NC em paralelo (não montar) e um capacitor de 15 pF em série. | Todos os chips | Obrigatório |
+| 2 | Reserve no sinal ANT uma rede de casamento tipo Pi com um capacitor NC em paralelo (não montar) e um capacitor de 15 pF em série. | Todos os chips | Obrigatório |
 
 </div>
 
@@ -185,7 +185,7 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 |:---|:---|:---|:---|
 | 1 | As fontes de interrupção para despertar de Hibernate/Standby estão corretas: PA50, PA51, PB32, PB33, PB34, PBR0, PBR1 e PBR2, oito pinos ao todo. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
 | 2 | As fontes de interrupção para despertar de Hibernate/Standby estão corretas: PA50-PA54, PB32-PB36 e PBR0-PBR3, quatorze pinos ao todo. | SF32LB565/567 | Obrigatório |
-| 3 | Os pinos de despertar podem acordar HCPU ou LCPU conforme a configuração de software. | Todos os chips | Obrigatório |
+| 3 | Os pinos de despertar podem despertar o HCPU ou o LCPU conforme a configuração de software. | Todos os chips | Obrigatório |
 | 4 | Os sinais de interrupção e controle dos periféricos do lado LCPU, como acelerômetro e sensor de frequência cardíaca, devem ser conectados a GPIOs PB. | Todos os chips | Obrigatório |
 
 </div>
@@ -234,7 +234,7 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 | 8 | A interface LCD suporta modos como SPI de 3/4 fios, SPI com duas/quatro linhas de dados, JDI serial e modos semelhantes. | Todos os chips | Opcional |
 | 9 | LCD SPI em modo de 3 fios: CS em PA36, CLK em PA37 e DATA em PA38; em modo de 4 fios: CS em PA36, CLK em PA37, DATA em PA38 e DC em PA39. | Todos os chips | Opcional |
 | 10 | O nível lógico de E/S do periférico corresponde ao do chip principal. | Todos os chips | Obrigatório |
-| 11 | Se o modo AOD do LCD for necessário, mantenha sempre alimentado o pino LCD_RST (PA05) pela VDDIO3. Não conecte VDDIO3 à alimentação da Flash externa: desligar essa alimentação durante a suspensão também pode desligar VDDIO3 e LCD_RST e causar anomalias no AOD. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
+| 11 | Se o AOD do LCD for necessário, mantenha VDDIO3, que alimenta LCD_RST (PA05), sempre ligada. Não conecte VDDIO3 à alimentação da Flash externa: desligá-la durante a suspensão também pode cortar a alimentação de VDDIO3 e LCD_RST e causar anomalias no AOD. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
 | 12 | Para LCDs DSI, conecte os sinais de dados e clock DSI. Painéis DSI em modo de vídeo funcionam como painéis RGB e não têm sinal TE; os painéis DSI em modo de comando têm TE, e o DSI17801 requer TE. Recomenda-se conectar TE e RST; o uso final depende do LCD selecionado. | SF32LB565/567 | Obrigatório |
 
 </div>
@@ -248,7 +248,7 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 | Nº | Verificação | Aplica-se a | Categoria |
 |:---|:---|:---|:---|
 | 1 | A entrada do GPADC está conectada ao pino correspondente. | Todos os chips | Opcional |
-| 2 | A faixa de entrada do GPADC está correta; a tensão máxima de entrada não deve exceder AVDD33_AVA (3.3 V). | Todos os chips | Opcional |
+| 2 | A faixa de entrada do GPADC está correta; a tensão máxima de entrada não deve exceder AVDD33_AVA (3,3 V). | Todos os chips | Opcional |
 | 3 | Divisor recomendado para medir a tensão da bateria: resistor de 470 kΩ com tolerância de 1% no lado da alimentação, resistor de 1 MΩ com tolerância de 1% para o terra e capacitor de filtro de 100 nF. | Todos os chips | Obrigatório |
 | 4 | Para cada sinal medido pelo GPADC por meio de divisor resistivo, use resistores com tolerância de 1%; cada canal GPADC deve ter um capacitor de filtro de 100 nF próximo ao pino do chip. | Todos os chips | Obrigatório |
 | 5 | O ADC pode detectar vários botões e economizar pinos; por exemplo, quando PB32 for usado como botão ADC, não use a bateria como alimentação do pull-up. | Todos os chips | Obrigatório |
@@ -282,7 +282,7 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 | 2 | O sinal de detecção de conexão do carregador tem um dispositivo de proteção contra ESD. | Todos os chips | Obrigatório |
 | 3 | A interface da bateria tem um dispositivo de proteção contra ESD. | Todos os chips | Obrigatório |
 | 4 | A interface da antena tem um dispositivo de proteção contra ESD. | Todos os chips | Obrigatório |
-| 5 | As interfaces de alimentação do LCD e do painel tátil (TP) têm dispositivos de proteção contra ESD. | Todos os chips | Obrigatório |
+| 5 | As interfaces de alimentação do LCD e do painel de toque (TP) têm dispositivos de proteção contra ESD. | Todos os chips | Obrigatório |
 | 6 | As linhas I2C, RST e INT do TP têm dispositivos de proteção contra ESD. | Todos os chips | Obrigatório |
 | 7 | A interface de alimentação e as linhas de sinal do sensor de frequência cardíaca têm dispositivos de proteção contra ESD. | Todos os chips | Obrigatório |
 
@@ -297,10 +297,10 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 | Nº | Verificação | Aplica-se a | Categoria |
 |:---|:---|:---|:---|
 | 1 | A atribuição do I2C considera a divisão entre HCPU/LCPU e se o dispositivo precisa operar em modo de baixo consumo. | Todos os chips | Obrigatório |
-| 2 | O I2C tem pull-ups com o valor correto de resistor; para operação a 400 kHz, recomendam-se pull-ups de 2.2 kΩ. Use o domínio de tensão do lado do periférico e desligue a alimentação dos pull-ups junto com o periférico ao desligá-lo. | Todos os chips | Obrigatório |
+| 2 | O I2C tem pull-ups com o valor de resistência correto; para operar a 400 kHz, recomenda-se usar resistores de pull-up de 2,2 kΩ. Use o domínio de tensão do lado do periférico e desligue a alimentação dos resistores de pull-up junto com o periférico. | Todos os chips | Obrigatório |
 | 3 | O sinal de interrupção do I2C permite despertar por hardware quando necessário. | Todos os chips | Obrigatório |
 | 4 | Se vários dispositivos compartilharem um barramento I2C, seus endereços são distintos. | Todos os chips | Obrigatório |
-| 5 | A linha de origem da SiFli para o PMIC SF30147C diz: “I2C SCL with TWI DAT use PB23; I2C SCL pull-up power supplyalways powered; TWI DATnormal SF30147C”. A redação não esclarece a relação entre os sinais nem o significado de “normal”. Antes da liberação, confirme a atribuição de PB23, a alimentação do pull-up e o funcionamento de TWI DAT com o SF30147C no esquemático e na documentação oficiais. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
+| 5 | A linha da fonte SiFli sobre o PMIC SF30147C diz: “I2C SCL with TWI DAT use PB23; I2C SCL pull-up power supplyalways powered; TWI DATnormal SF30147C”. A redação não esclarece a relação entre os sinais nem o que significa “normal”. Antes da liberação, confirme a atribuição de PB23, a alimentação do pull-up e o funcionamento de TWI DAT com o SF30147C, consultando o esquemático e a documentação oficiais. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
 
 </div>
 
@@ -314,12 +314,12 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 |:---|:---|:---|:---|
 | 1 | A conexão do microfone MEMS está correta. | Todos os chips | Obrigatório |
 | 2 | O microfone MEMS é alimentado por MIC_BIAS. | Todos os chips | Obrigatório |
-| 3 | A conexão do microfone analógico ECM single-ended está correta. | Todos os chips | Obrigatório |
-| 4 | O microfone analógico ECM single-ended é alimentado por MIC_BIAS. | Todos os chips | Obrigatório |
+| 3 | A conexão do microfone ECM analógico com saída single-ended está correta. | Todos os chips | Obrigatório |
+| 4 | O microfone ECM analógico com saída single-ended é alimentado por MIC_BIAS. | Todos os chips | Obrigatório |
 | 5 | A conexão do microfone analógico ECM diferencial está correta. | Todos os chips | Obrigatório |
 | 6 | O microfone analógico ECM diferencial é alimentado por MIC_BIAS. | Todos os chips | Obrigatório |
-| 7 | Todas as entradas do ADC de áudio têm capacitor de bloqueio CC de pelo menos 2.2 uF. | Todos os chips | Obrigatório |
-| 8 | Cada saída do DAC de áudio, DACP e DACN, tem um resistor em série de 1 kΩ próximo ao chip; há um capacitor de 1.5 nF em paralelo entre DACP e DACN. | Todos os chips | Obrigatório |
+| 7 | Todas as entradas do ADC de áudio têm um capacitor de bloqueio CC de pelo menos 2,2 µF. | Todos os chips | Obrigatório |
+| 8 | Cada saída do DAC de áudio (DACP e DACN) tem um resistor de 1 kΩ em série, próximo ao chip; entre DACP e DACN, há um capacitor de 1,5 nF em paralelo. | Todos os chips | Obrigatório |
 | 9 | O AW8155 é o amplificador de áudio recomendado; ao usar esse componente, configure-o por software para Mode 4 / Class AB. | Todos os chips | Obrigatório |
 | 10 | Ao realimentar a saída do PA de áudio para o ADC do MCU, adicione um divisor e filtro RC ou filtragem digital adicional; a tensão dividida deve permanecer dentro da faixa de entrada do ADC e a frequência de corte do filtro RC deve ser 20 kHz. | Todos os chips | Obrigatório |
 | 11 | Se o caminho ADC analógico de áudio integrado ao chip não for usado, recomenda-se conectar ADCP e ADCN ao terra, cada um por meio de um resistor série de 0 Ω. | Todos os chips | Obrigatório |
@@ -354,8 +354,8 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 | 4 | Na conexão a um periférico, RXD do lado do MCU conecta-se a TXD do periférico e TXD do lado do MCU conecta-se a RXD do periférico. | Todos os chips | Obrigatório |
 | 5 | Quando PA17/PA18 forem multiplexados como UART para periféricos, durante o reset do MCU assegure que os periféricos conectados estejam desligados ou que o software mantenha os dois pinos em nível baixo. | Todos os chips | Obrigatório |
 | 6 | O nível lógico de E/S do periférico corresponde ao do chip principal. | Todos os chips | Obrigatório |
-| 7 | Os pontos de teste de USARTs não utilizados são reservados para uso alternativo. | Todos os chips | Opcional |
-| 8 | Recomenda-se conectar a UART dos periféricos à interface HCPU para evitar que o software HCPU use uma interface UART do LCPU. | Todas as variantes | Obrigatório |
+| 7 | Reserve os pontos de teste das USARTs não utilizadas para uma eventual necessidade. | Todos os chips | Opcional |
+| 8 | Recomenda-se conectar os periféricos UART à interface do HCPU, para evitar que o software do HCPU precise usar uma interface UART do LCPU. | Todas as variantes | Obrigatório |
 
 </div>
 
@@ -370,7 +370,7 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 | 1 | A alocação do pino PWM da retroiluminação está correta; o controle da retroiluminação do LCD deve usar GPIOs PB com função PWM. | Todos os chips | Opcional |
 | 2 | A alocação do pino PWM do motor está correta; o controle da vibração do motor deve usar GPIOs PB com função PWM. | Todos os chips | Opcional |
 | 3 | Para o controle PWM do motor, selecione um GPIO desabilitado por padrão para evitar comportamento anormal durante a gravação do firmware quando for usado um motor SMT. | Todos os chips | Opcional |
-| 4 | As saídas PWM além da retroiluminação e do motor também devem usar a interface PB; verifique o comportamento na inicialização a frio. | Todos os chips | Opcional |
+| 4 | As demais saídas PWM, além das da retroiluminação e do motor, também devem usar pinos PB. Verifique seu comportamento na inicialização a frio. | Todos os chips | Opcional |
 
 </div>
 
@@ -399,7 +399,7 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 |:---|:---|:---|:---|
 | 1 | A conexão da interface USB está correta. | Todos os chips | Opcional |
 | 2 | A interface USB tem proteção contra ESD. | Todos os chips | Opcional |
-| 3 | Durante a operação normal, fora do modo de sono, o lado do PC/dispositivo consegue detectar conexão e remoção enquanto o USB permanece habilitado.<br>Se o MCU precisar detectar conexão e remoção durante o sono, adicione um divisor resistivo de VBUS; a saída do divisor deve corresponder ao nível alto da tensão de E/S e ser conectada a um pino de despertar do MCU. Recomenda-se compartilhar o pino de despertar usado para detectar a conexão do carregador. | Todos os chips | Opcional |
+| 3 | Durante a operação normal, fora do modo de suspensão, o lado do PC/dispositivo consegue detectar conexão e remoção enquanto o USB permanece habilitado.<br>Se o MCU também precisar detectar conexão e remoção durante a suspensão, adicione um divisor resistivo em VBUS. A saída do divisor deve atingir um nível lógico alto compatível com a tensão de E/S e ser conectada a um pino de despertar do MCU. Recomenda-se compartilhar esse pino com a entrada de despertar usada para detectar a conexão do carregador. | Todos os chips | Opcional |
 
 </div>
 
@@ -414,8 +414,8 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 | 1 | PBR0 muda de 0 para 1 durante a inicialização e pode controlar algumas chaves de carga externas; PBR1-PBR2 têm saída baixa por padrão. | Todos os chips | Obrigatório |
 | 2 | PBR0-PBRx podem ser usados como saídas nos modos Standby e Hibernate. | Todos os chips | Opcional |
 | 3 | PBR0-PBRx podem emitir sinais LPTIM. | Todos os chips | Opcional |
-| 4 | Para o modelo 567, recomenda-se LPTIM3: LPTIM3_OUT e LPTIM3_OUT_BAR emitem pelos pinos PBR sinais de 21-25 kHz, com ciclos de trabalho diferentes e polaridades opostas. | Todos os chips | Opcional |
-| 5 | Os sinais de 21-25 kHz com ciclos de trabalho diferentes e polaridades opostas também podem ser emitidos pelo ATIM do HCPU; selecione sinais ATIMx_CHx e ATIMx_CHxN adequados junto com Pin_Config e considere o impacto da redução da frequência do HCPU. | Todos os chips | Opcional |
+| 4 | Para o modelo 567, recomenda-se usar LPTIM3: LPTIM3_OUT e LPTIM3_OUT_BAR emitem pelos pinos PBR sinais de 21–25 kHz, com ciclos de trabalho diferentes e polaridades opostas. | Todos os chips | Opcional |
+| 5 | O ATIM do HCPU também pode emitir sinais de 21–25 kHz com ciclos de trabalho diferentes e polaridades opostas. Selecione os sinais ATIMx_CHx e ATIMx_CHxN adequados junto com Pin_Config e considere o efeito da redução da frequência do HCPU. | Todos os chips | Opcional |
 | 6 | PBR1-PBRx podem emitir um sinal de clock de 32 kHz. | Todos os chips | Opcional |
 | 7 | PBR0-PBRx podem ser configurados como entradas para sinais de despertar. | Todos os chips | Opcional |
 | 8 | Quando PBR for usado como pino de despertar, o software deve consultá-lo após o despertar do MCU. Ele atende a níveis que mudam lentamente, como os de botões e detecção do carregador; pulsos rápidos, como interrupções de frequência cardíaca, devem usar um GPIO comum compatível com despertar, não PBR. | Todos os chips | Opcional |
@@ -431,16 +431,16 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 | Nº | Verificação | Aplica-se a | Categoria |
 |:---|:---|:---|:---|
 | 1 | Para todos os pinos de habilitação de MOSFET, LDO e DCDC usados na comutação da alimentação, reserve um pull-down de 1 MΩ para o terra quando a habilitação for ativa em nível alto; ajuste o valor se necessário para o projeto. | Todos os chips | Obrigatório |
-| 2 | Alimente o PVDD do SF32LB56x com 1.8 V usando um DCDC de baixa corrente quiescente e mantenha-o sempre ligado. | Todos os chips | Obrigatório |
+| 2 | Alimente o PVDD do SF32LB56x com 1,8 V usando um conversor DCDC de baixa corrente quiescente e mantenha-o sempre ligado. | Todos os chips | Obrigatório |
 | 3 | Para SF32LB56xU e SS6700, VDDIO1 requer controle por chave de carga. Use PBR0 como sinal de controle; se houver GPIOs disponíveis, PB22 pode controlar a alimentação. A ferramenta de download deve habilitar VDDIO1. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
 | 4 | Para SF32LB56xU e SS6700, a alimentação da Flash externa requer uma chave de carga controlada por PBR0. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
 | 5 | <span class="flag-yellow">Nos modos Hibernate-off ou Standby-off, VDDIOSA e VDDIOSB do SF32LB56xV requerem controle por chave de carga via PBR0; VDDIOSC deve permanecer sempre alimentada.</span> | SF32LB565/567 | Obrigatório |
 | 6 | <span class="flag-yellow">A alimentação da Flash MPI3 do SF32LB56xV requer uma chave de carga controlada por PA03; habilite a alimentação da Flash MPI3 durante o download.</span> | SF32LB565/567 | Obrigatório |
-| 7 | Registre o requisito de corrente de base em Deep Sleep. A corrente em Deep Sleep é maior que em Standby e esse modo é adequado para despertares frequentes, com intervalos inferiores a 200 ms; todos os pinos PB aceitam despertar e a corrente de base é 90 uA. | Todos os chips | Obrigatório |
-| 8 | Registre a soma das correntes de base de todos os periféricos selecionados no modo Deep Sleep e confirme que atende aos requisitos do projeto. | Todos os chips | Obrigatório |
-| 9 | Registre o requisito de corrente de base em Standby. Esse modo é adequado para despertares menos frequentes, com intervalos superiores a 200 ms; somente PA50, PA51, PB33 e PB34 aceitam despertar e a corrente de base é 4-5 uA. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
-| 10 | Registre o requisito de corrente de base em Standby. Esse modo é adequado para despertares menos frequentes, com intervalos superiores a 200 ms; somente PA50, PA51, PA52, PA53, PA54, PB33, PB34, PB35 e PB36 aceitam despertar e a corrente de base é 4-5 uA. | SF32LB565/567 | Obrigatório |
-| 11 | Registre a corrente dos periféricos selecionados no modo Standby e confirme que atende aos requisitos do projeto. | Todos os chips | Obrigatório |
+| 7 | O requisito de corrente de base em Deep Sleep está registrado. A corrente em Deep Sleep é maior que em Standby, e esse modo é adequado para despertares frequentes, com intervalos inferiores a 200 ms. Todos os pinos PB permitem despertar, e a corrente de base é 90 µA. | Todos os chips | Obrigatório |
+| 8 | A soma das correntes de base de todos os periféricos selecionados no modo Deep Sleep está registrada e atende aos requisitos do projeto. | Todos os chips | Obrigatório |
+| 9 | O requisito de corrente de base em Standby está registrado. Esse modo é adequado para despertares menos frequentes, com intervalos superiores a 200 ms. Somente PA50, PA51, PB33 e PB34 permitem despertar, e a corrente de base é de 4–5 µA. | SF32LB560/561/563/56W e SS6700A | Obrigatório |
+| 10 | O requisito de corrente de base em Standby está registrado. Esse modo é adequado para despertares menos frequentes, com intervalos superiores a 200 ms. Somente PA50, PA51, PA52, PA53, PA54, PB33, PB34, PB35 e PB36 permitem despertar, e a corrente de base é de 4–5 µA. | SF32LB565/567 | Obrigatório |
+| 11 | A corrente dos periféricos selecionados no modo Standby está registrada e atende aos requisitos do projeto. | Todos os chips | Obrigatório |
 
 </div>
 
@@ -457,4 +457,4 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Quando houver a col
 
 </div>
 
-[Lista de componentes aprovados para SF32]: ../cad-components/sifli-approved-vendor-list.md
+[SiFli Approved Vendor List]: ../cad-components/sifli-approved-vendor-list.md

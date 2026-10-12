@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-LCD: placa de desenvolvimento SF32LB52x voltada a displays, para o bring-up rápido de produtos com displays SPI, QSPI e MCU/8080, com touch, áudio, armazenamento e suporte a bateria."
+description: "SF32LB52-DevKit-LCD: placa de desenvolvimento SF32LB52x voltada a displays, para o bring-up rápido de produtos com displays SPI, QSPI e MCU/8080, com toque, áudio, armazenamento e suporte a bateria."
 tags:
     - Hardware
     - Placa de desenvolvimento
@@ -12,7 +12,7 @@ tags:
 
 A SF32LB52-DevKit-LCD é uma placa de desenvolvimento para aplicações com display da família SF32LB52x. Baseada em um módulo SF32LB52x, ela permite desenvolver rapidamente produtos que usam interfaces de display SPI, DSPI, QSPI ou MCU/8080.
 
-A placa reúne em uma única plataforma de avaliação o módulo MCU, conectores para display, interface touch, entrada para microfone analógico, saída de áudio analógica, USB Type-C, depuração USB-UART, slot para cartão TF e conexão para bateria. É um ponto de partida prático para desenvolver interfaces homem-máquina (HMI) de relógios inteligentes, painéis compactos, periféricos com display e outras aplicações SF32LB52x que precisam de uma tela desde o início do desenvolvimento.
+A placa reúne em uma única plataforma de avaliação o módulo MCU, conectores para display, interface de toque, entrada para microfone analógico, saída de áudio analógica, USB Type-C, depuração USB-UART, slot para cartão TF e conexão para bateria. É um ponto de partida prático para desenvolver interfaces homem-máquina (HMI) de relógios inteligentes, painéis compactos, periféricos com display e outras aplicações SF32LB52x que precisam de uma tela desde o início do desenvolvimento.
 
 ![Vista frontal da SF32LB52-DevKit-LCD](assets/sf32lb52x/SF32LB52x-DevKit-LCD_Front_Look.png){ loading="lazy" }
 <div align="center"><em>SF32LB52-DevKit-LCD — vista frontal</em></div>
@@ -28,7 +28,7 @@ A placa reúne em uma única plataforma de avaliação o módulo MCU, conectores
 - Plataforma de módulo SF32LB52x compatível com SF32LB52-MOD-1, SF32LB52-MOD-A e SF32LB52-MOD-B
 - Suporte a LCD QSPI/SPI/DSPI por conector FPC de 22 pinos
 - Suporte a LCD MCU/8080 de 8 bits pelo FPC e pelo conector de expansão de 40 pinos
-- Suporte a painel touch via I2C
+- Suporte a painel de toque via I2C
 - USB Type-C para gravação/depuração via USB-UART e alimentação da placa
 - Interface USB Type-C separada para aplicações USB 2.0 FS
 - Microfone MEMS integrado e amplificador de potência de áudio classe D
@@ -41,7 +41,7 @@ A placa reúne em uma única plataforma de avaliação o módulo MCU, conectores
 Escolha a SF32LB52-DevKit-LCD quando o projeto precisar de uma plataforma de display pronta para uso, em vez de uma placa de breakout mínima.
 
 - Fazer o bring-up de painéis LCD QSPI, SPI, DSPI ou MCU/8080
-- Validar a integração do painel touch
+- Validar a integração do painel de toque
 - Testar o LVGL ou aplicações de interface gráfica personalizadas no SF32LB52x
 - Avaliar a entrada do microfone e a saída para alto-falante
 - Prototipar o armazenamento em cartão TF
@@ -62,7 +62,7 @@ Para uma placa menor com furos semicirculares metalizados nas bordas, use a [SF3
 | Fontes de clock | Cristal principal de 48 MHz e cristal RTC de 32,768 kHz no módulo |
 | RF | Antena integrada à placa ou conector IPEX, selecionados por resistor de 0 Ω |
 | Display | QSPI/SPI/DSPI e MCU/8080 de 8 bits |
-| Touch | Interface touch I2C |
+| Toque | Interface de toque I2C |
 | Áudio | Entrada de microfone MEMS e amplificador de alto-falante classe D |
 | Armazenamento | Slot para cartão MicroSD via SPI |
 | USB | USB-UART Type-C e USB 2.0 FS Type-C |
@@ -120,7 +120,7 @@ Antes de usar o mapa de pinos no projeto de uma placa portadora ou de um disposi
 3. Abra o SifliTrace ou a ferramenta de gravação de firmware da SiFli.
 4. Selecione a porta serial detectada.
 5. Ligue a placa e grave ou execute o firmware de destino.
-6. Quando o display acender, verifique as funções de touch, gráficos, armazenamento e áudio necessárias para a aplicação.
+6. Quando o display acender, verifique as funções de toque, gráficos, armazenamento e áudio necessárias para a aplicação.
 
 Use um cabo USB que realmente permita a transferência de dados. Um cabo apenas para carregamento pode alimentar a placa, mas não disponibiliza a interface serial nem a interface de dados USB.
 
@@ -147,17 +147,17 @@ Algumas placas SF32LB52x usam o sinal RTS do conversor USB-UART para reset. Se a
 ![Desabilitar o controle de fluxo por modem nas configurações avançadas da porta serial](assets/sf32lb52x/Modem.png){ loading="lazy" }
 <div align="center"><em>Desativação do controle de fluxo por modem nas configurações da porta serial</em></div>
 
-## Interface de LCD e touch { #lcd-and-touch-interface }
+## Interface de LCD e toque { #lcd-and-touch-interface }
 
 A placa aceita painéis LCD QSPI por meio de um conector FPC vertical de 22 pinos, com passo de 0,5 mm e trava basculante. Se o painel tiver outra ordem de pinos, use uma placa adaptadora antes de conectá-lo.
 
-Os recursos de LCD e touch incluem:
+Os recursos de LCD e toque incluem:
 
 - Sinais LCD SPI, DSPI e QSPI
 - Sinais LCD QSPI no modo DDR
 - Sinais LCD MCU/8080 de 8 bits
 - Reset do LCD, seleção de chip, clock, dados, TE e PWM da retroiluminação
-- SDA/SCL I2C do painel touch, interrupção e reset
+- SDA/SCL I2C do painel de toque, interrupção e reset
 
 A documentação original da placa da SiFli lista `TFT-H043A28WQISTKN22_V0-3` como um modelo de display compatível.
 
@@ -186,10 +186,10 @@ A documentação original da placa da SiFli lista `TFT-H043A28WQISTKN22_V0-3` co
 | 15 | PA03 | MCU8080 CS / QSPI CS / SPI CS |
 | 16 | PA06 | MCU8080 DC / QSPI D1 / SPI DC |
 | 17 | VDD_3V3 | Saída de 3,3 V |
-| 18 | PA31 | Interrupção do touch |
-| 19 | PA33 | SDA I2C do touch |
-| 20 | PA30 | SCL I2C do touch |
-| 21 | PA09 | Reset do touch |
+| 18 | PA31 | Interrupção do toque |
+| 19 | PA33 | SDA I2C do toque |
+| 20 | PA30 | SCL I2C do toque |
+| 21 | PA09 | Reset do toque |
 | 22 | GND | Terra |
 
 </div>
@@ -217,8 +217,8 @@ A documentação original da placa da SiFli lista `TFT-H043A28WQISTKN22_V0-3` co
 | PA02 | TE / QSPI TE | Sinal de sincronização TE (Tearing Effect) do LCD |
 | PA01 | BL_PWM | Controle da retroiluminação |
 | PA00 | RSTB | Reset do LCD |
-| PA33 / PA30 | I2C SDA / SCL | Painel touch |
-| PA31 / PA09 | Touch INT / RST | Painel touch |
+| PA33 / PA30 | I2C SDA / SCL | Painel de toque |
+| PA31 / PA09 | Toque INT / RST | Painel de toque |
 | PA24, PA25, PA28, PA29 | SPI1 | Interface do cartão TF |
 | PA26 | Detecção de cartão / LED | Função compartilhada |
 | PA20 / PA27 | UART RX/TX | UART do usuário |
@@ -263,20 +263,20 @@ Esses nomes identificam alvos de compilação do SDK e não necessariamente corr
 
 ## Documentos relacionados { #related-documents }
 
-[Apresentação do chip SF32LB52x]: ../chips/SF32LB52x.md
-[Guia de projeto de hardware SF32LB52x]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
+[SF32LB52x Chip Introduction]: ../chips/SF32LB52x.md
+[SF32LB52x Hardware Design Guide]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
 [SF32LB52-MOD-1]: ../modules/SF32LB52-MOD-1.md
-[Artigo original da Wiki da SiFli]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-LCD.md
-[Pacote de projeto]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-DevKit-LCD_V1.2.0.zip?
-[Comprar amostras]: https://sifli.taobao.com/
+[Original SiFli Wiki Article]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-LCD.md
+[Design Package]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-DevKit-LCD_V1.2.0.zip?
+[Buy Samples]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-microchip: __[Apresentação do chip SF32LB52x]__
-- :fontawesome-solid-file-lines: __[Guia de projeto de hardware SF32LB52x]__
+- :fontawesome-solid-microchip: __[Apresentação do chip SF32LB52x][SF32LB52x Chip Introduction]__
+- :fontawesome-solid-file-lines: __[Guia de projeto de hardware SF32LB52x][SF32LB52x Hardware Design Guide]__
 - :fontawesome-solid-cubes: __[SF32LB52-MOD-1]__
-- :fontawesome-brands-github: __[Artigo original da Wiki da SiFli]__
-- :fontawesome-solid-download: __[Pacote de projeto]__
-- :fontawesome-solid-cart-shopping: __[Comprar amostras]__
+- :fontawesome-brands-github: __[Artigo original da Wiki da SiFli][Original SiFli Wiki Article]__
+- :fontawesome-solid-download: __[Pacote de projeto][Design Package]__
+- :fontawesome-solid-cart-shopping: __[Comprar amostras][Buy Samples]__
 
 </div>

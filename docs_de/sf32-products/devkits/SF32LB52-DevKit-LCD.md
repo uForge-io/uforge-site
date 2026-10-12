@@ -60,7 +60,7 @@ Für ein kleineres Board mit Lötrandkontakten verwenden Sie das [SF32LB52-DevKi
 | SF32LB52-DevKit-LCD-1-N16R8 | SF32LB52-MOD-1-N16R8 / SF32LB525UC6; 16 MB QSPI-NOR + 8 MB OPI-PSRAM |
 | SF32LB52-DevKit-LCD-1-A128R16 | SF32LB52-MOD-1-A128R16 / SF32LB527UD6; 128 MB QSPI-NAND + 16 MB OPI-PSRAM |
 | Takte | 48-MHz-Hauptquarz und 32,768-kHz-RTC-Quarz auf dem Modul |
-| HF | Antenne auf dem Board oder IPEX-Steckverbinder, per 0-Ω-Widerstand gewählt |
+| RF | Antenne auf dem Board oder IPEX-Steckverbinder, per 0-Ω-Widerstand gewählt |
 | Display | QSPI/SPI/DSPI und 8-Bit-MCU/8080 |
 | Touch | I2C-Touch-Schnittstelle |
 | Audio | MEMS-Mikrofoneingang und Class-D-Lautsprecherverstärker |
@@ -71,7 +71,7 @@ Für ein kleineres Board mit Lötrandkontakten verwenden Sie das [SF32LB52-DevKi
 
 </div>
 
-Die Board-Codes und Speicherkonfigurationen oben folgen dem [Modellleitfaden für Entwicklungsboards](https://wiki.sifli.com/en/board/devkit_guide.html) von SiFli. Prüfen Sie die Revision anhand der Board-Kennzeichnung und des passenden Designpakets, bevor Sie ein Board als Design-Referenzkonfiguration verwenden.
+Die Board-Codes und Speicherkonfigurationen oben folgen dem [Modellleitfaden für Entwicklungsboards](https://wiki.sifli.com/en/board/devkit_guide.html) von SiFli. Prüfen Sie die Revision anhand der Board-Kennzeichnung und des passenden Designpakets, bevor Sie das Board als Ausgangspunkt für ein eigenes Design verwenden.
 
 Die Flash-Bezeichnungen für A128R16 unterscheiden sich zwischen den offiziellen Quellen: Der [OpenSiFli-Leitfaden zu Modulmodellen](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) nennt das Modul 128 MB SPI-NAND, während der Leitfaden zu Boardmodellen die entsprechende DevKit-SKU als 128 MB QSPI-NAND aufführt. Die Quellen erläutern nicht, ob dies das bestückte Bauteil oder nur die Bezeichnung der Schnittstelle betrifft. Bestätigen Sie Flash-Bauteil und Busmodus anhand von Schaltplan und Stückliste der genauen Board-Revision, bevor Sie sich auf diese Konfiguration verlassen.
 
@@ -84,7 +84,7 @@ Die Flash-Bezeichnungen für A128R16 unterscheiden sich zwischen den offiziellen
 | Version | Modulbasis | Hinweise |
 | :--- | :--- | :--- |
 | V1.2.0 | SF32LB52-MOD-1 / SF32LB52-MOD-A / SF32LB52-MOD-B | SD-Kartenerkennung auf PA26 geändert. Die aktuellen SiFli-Modelllisten enthalten die beiden oben gezeigten MOD-1-Konfigurationen. |
-| V1.1.0 | SF32LB52-MOD-A / SF32LB52-MOD-B | Überarbeitet wurden Laderschaltung, Versorgungsumschaltung, Verstärkung des Audio-Leistungsverstärkers, Reset-Verhalten, RGB-LED-Schaltung, Pinkompatibilität der Module, HF-Versorgungsfilterung, Dual-Flash-Unterstützung, SD-Kartenerkennung, optionales SDIO-WLAN, Antennen-Freihaltebereich und VBUS-Schutz |
+| V1.1.0 | SF32LB52-MOD-A / SF32LB52-MOD-B | Überarbeitet wurden Laderschaltung, Versorgungsumschaltung, Verstärkung des Audio-Leistungsverstärkers, Reset-Verhalten, RGB-LED-Schaltung, Pinkompatibilität der Module, RF-Versorgungsfilterung, Dual-Flash-Unterstützung, SD-Kartenerkennung, optionales SDIO-WLAN, Antennen-Freihaltebereich und VBUS-Schutz |
 | V1.0.0 | Früheres SF32LB52-Modul | Erste öffentliche Board-Version |
 
 </div>
@@ -122,7 +122,7 @@ Prüfen Sie Bestückungsdruck und Designpaket der genauen Board-Revision, bevor 
 5. Versorgen Sie das Board und laden Sie die Ziel-Firmware herunter bzw. führen Sie sie aus.
 6. Prüfen Sie, nachdem das Display leuchtet, Touch, Grafik, Speicher und Audio entsprechend den Anforderungen der Anwendung.
 
-Verwenden Sie ein echtes datenfähiges USB-Kabel. Reine Ladekabel können das Board versorgen, stellen aber die serielle oder die USB-Datenschnittstelle nicht bereit.
+Verwenden Sie ein USB-Kabel, das Daten übertragen kann. Reine Ladekabel können das Board versorgen, stellen aber die serielle oder die USB-Datenschnittstelle nicht bereit.
 
 ## Stromversorgung { #power }
 
@@ -149,7 +149,7 @@ Einige SF32LB52x-Boards nutzen das RTS-Signal des USB-zu-UART-Bausteins für den
 
 ## LCD- und Touch-Schnittstelle { #lcd-and-touch-interface }
 
-Das Board unterstützt QSPI-LCD-Panels über einen 22-poligen FPC-Steckverbinder mit 0,5 mm Raster. Der Steckverbinder ist eine vertikale Ausführung mit Klappverriegelung. Verwendet ein Panel eine andere Pinreihenfolge, setzen Sie vor dem Anschließen eine Adapterplatine ein.
+Das Board unterstützt QSPI-LCD-Panels über einen 22-poligen FPC-Steckverbinder mit 0,5 mm Rastermaß. Der Steckverbinder ist vertikal ausgeführt und hat eine Klappverriegelung. Verwendet ein Panel eine andere Pinreihenfolge, setzen Sie vor dem Anschließen eine Adapterplatine ein.
 
 Unterstützte LCD- und Touch-Funktionen:
 
@@ -263,20 +263,20 @@ Dies sind Build-Target-Bezeichner des SDK und nicht zwingend die auf einem Board
 
 ## Verwandte Dokumente { #related-documents }
 
-[SF32LB52x-Chipeinführung]: ../chips/SF32LB52x.md
-[SF32LB52x-Hardware-Designleitfaden]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
+[SF32LB52x Chip Introduction]: ../chips/SF32LB52x.md
+[SF32LB52x Hardware Design Guide]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
 [SF32LB52-MOD-1]: ../modules/SF32LB52-MOD-1.md
-[Originalartikel im SiFli-Wiki]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-LCD.md
-[Designpaket]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-DevKit-LCD_V1.2.0.zip?
-[Muster kaufen]: https://sifli.taobao.com/
+[Original SiFli Wiki Article]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-LCD.md
+[Design Package]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-DevKit-LCD_V1.2.0.zip?
+[Buy Samples]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-microchip: __[SF32LB52x-Chipeinführung]__
-- :fontawesome-solid-file-lines: __[SF32LB52x-Hardware-Designleitfaden]__
+- :fontawesome-solid-microchip: __[SF32LB52x-Chipeinführung][SF32LB52x Chip Introduction]__
+- :fontawesome-solid-file-lines: __[SF32LB52x-Hardware-Design-Leitfaden][SF32LB52x Hardware Design Guide]__
 - :fontawesome-solid-cubes: __[SF32LB52-MOD-1]__
-- :fontawesome-brands-github: __[Originalartikel im SiFli-Wiki]__
-- :fontawesome-solid-download: __[Designpaket]__
-- :fontawesome-solid-cart-shopping: __[Muster kaufen]__
+- :fontawesome-brands-github: __[Originalartikel im SiFli-Wiki][Original SiFli Wiki Article]__
+- :fontawesome-solid-download: __[Designpaket][Design Package]__
+- :fontawesome-solid-cart-shopping: __[Muster kaufen][Buy Samples]__
 
 </div>

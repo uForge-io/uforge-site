@@ -16,7 +16,7 @@ tags:
 
 ## 6.15. Checklist de layout da PCB { #615-pcb-layout-checklist }
 
-O checklist de PCB original não tem uma coluna “Aplica-se a”. Aplique cada verificação apenas quando a variante e o circuito escolhidos incluírem o pino, a alimentação ou a função indicada; marque as funções ausentes como não aplicáveis. Preserve as categorias Obrigatório/Opcional da fonte, mas não interprete Opcional como autorização para omitir um componente exigido pela especificação do dispositivo.
+O checklist de PCB original não tem uma coluna “Aplica-se a”. Aplique cada verificação apenas quando a variante e o circuito escolhidos incluírem o pino, a alimentação ou a função indicada; marque as funções ausentes como não aplicáveis. Mantenha as categorias Obrigatório/Opcional da fonte, mas não interprete Opcional como autorização para omitir um componente exigido pela especificação do dispositivo.
 
 !!! note "Tratamento do cobre sob o cristal na fonte"
     O item 3 de clock do checklist não especifica quais camadas devem ter uma área sem cobre. A nota de aplicação das variantes alimentadas por bateria se contradiz: a seção de clock pede remover o plano GND da L2 sob o cristal, enquanto a seção de roteamento de PCB proíbe vazios nos planos e recortes de cobre na camada superior e nas adjacentes, e mostra GND contínuo na L2. O guia separado de layout de PCB repete essa proibição. Confirme com a SiFli o tratamento do empilhamento escolhido antes de liberar o projeto; não o deduza apenas do texto do checklist.
@@ -90,8 +90,8 @@ O checklist de PCB original não tem uma coluna “Aplica-se a”. Aplique cada 
 |:---|:---|:---|
 | 1 | Cristal posicionado próximo ao chip | Obrigatório |
 | 2 | Blindagem de GND ao redor do cristal | Obrigatório |
-| 3 | Confirme com a SiFli o tratamento do cobre ao redor do cristal para o empilhamento escolhido; consulte a nota acima sobre divergência entre fontes | Obrigatório |
-| 4 | A distância entre a borda de cada trilha do cristal e o cobre GND adjacente deve superar 1,5× a largura da trilha | Obrigatório |
+| 3 | O tratamento do cobre na área do cristal está confirmado com a SiFli para o empilhamento escolhido; consulte a nota acima sobre divergência entre fontes | Obrigatório |
+| 4 | A distância entre a borda de cada trilha do cristal e o cobre GND adjacente é superior a 1,5× a largura da trilha | Obrigatório |
 | 5 | Espaçamento ≥0,15 mm entre as trilhas XI/XO paralelas do cristal de 32,768 kHz | Obrigatório |
 
 </div>

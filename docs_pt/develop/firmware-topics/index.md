@@ -22,7 +22,7 @@ Leia estas páginas antes de alterar a organização do firmware, o comportament
 |:------|:---------------|
 | [Tabelas de partições](partition-tables.md) | Define a organização do firmware, do sistema de arquivos, do OTA e do armazenamento. |
 | [OTA e DFU](ota-dfu.md) | São necessários para atualizações em campo e planos de recuperação. |
-| [USB e CherryUSB](usb-cherryusb.md) | Apresenta recursos USB nos modos dispositivo e host, além do que uma simples indicação na ficha técnica revela. |
+| [USB e CherryUSB](usb-cherryusb.md) | Apresenta recursos USB nos modos dispositivo e host, além do que uma simples indicação no datasheet revela. |
 | [Gerenciamento de energia](power-management.md) | Transforma uma demonstração funcional em um produto pronto para operar com bateria. |
 | [Logs e análise de falhas](logging-crash-analysis.md) | Permitem diagnosticar as falhas. |
 
@@ -32,7 +32,7 @@ Leia estas páginas antes de alterar a organização do firmware, o comportament
 
 Antes de alterar o comportamento da inicialização, do OTA, do sistema de arquivos ou do armazenamento, entenda a tabela de partições e verifique o procedimento de recuperação. Uma falha da aplicação é inconveniente; um layout incorreto de inicialização ou atualização pode dificultar a recuperação da placa.
 
-## Lista de verificação de prontidão do produto { #product-readiness-checklist }
+## Checklist de prontidão do produto { #product-readiness-checklist }
 
 - [ ] Há um comando testado para gravar o dispositivo inteiro, independente do fluxo normal de OTA.
 - [ ] O layout das partições está documentado no repositório do produto.

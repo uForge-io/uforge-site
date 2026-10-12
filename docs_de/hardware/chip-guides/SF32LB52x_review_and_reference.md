@@ -15,12 +15,12 @@ tags:
 
 ## 7. Design-Review-Checkliste { #7-design-review-checklist }
 
-- [ ] Die Prüfung des Mindestsystems ist abgeschlossen: genaue Variante, Gehäuse, Versorgungsstruktur, Boot-Medium, Bootstrap-Pins, Debug-/Download-Zugang, Takte und Weckstrategie sind dokumentiert
+- [ ] Die Prüfung des Minimalsystems ist abgeschlossen: genaue Variante, Gehäuse, Versorgungsstruktur, Boot-Medium, Bootstrap-Pins, Debug-/Download-Zugang, Takte und Weckstrategie sind dokumentiert
 - [ ] Das exakte Chipmodell und die Stromversorgungsvariante sind bestätigt, und Stromversorgungsschaltpläne der beiden Varianten wurden nicht vermischt
 - [ ] Die Versorgungspins des Prozessors (VBUS/VBAT/VCC oder PVDD/VDDIOA/VDD_SIP) liegen innerhalb des im Datenblatt angegebenen Spannungsbereichs
 - [ ] Die BUCK-Induktivität erfüllt 4,7 µH ±20 %, DCR ≤0,4 Ω, Isat ≥450 mA
-- [ ] Bei der batteriebetriebenen Variante: Ladepfad, Spannungsbereich des OVP-Bauteils und Ausgangskapazität des integrierten LDO sind geprüft
-- [ ] Die Quarze mit 48 MHz und 32,768 kHz erfüllen die empfohlenen Spezifikationen, Routing und Sperrzonen sind eingehalten
+- [ ] Bei der akkubetriebenen Variante: Ladepfad, Spannungsbereich des OVP-Bauteils und Ausgangskapazität des integrierten LDO sind geprüft
+- [ ] Die Quarze mit 48 MHz und 32,768 kHz erfüllen die empfohlenen Spezifikationen; Routing und Freihaltebereiche sind eingehalten
 - [ ] Die RF-Leiterbahn ist auf 50 Ω ausgelegt und das Anpassnetzwerk nahe am Chip platziert
 - [ ] Die Boot-Konfiguration des Speichers (einschließlich der eMMC-Option der extern geregelten Versorgungsvariante) stimmt mit den Bootstrap-Pin-Einstellungen überein
 - [ ] Steuerpin des Speicherversorgungsschalters für die genaue Variante verifizieren; die Abweichung PA11/PA21 zwischen offizieller Checkliste und Anwendungshinweisen vor der Freigabe klären
@@ -68,7 +68,7 @@ Die [Schaltplan-Checkliste](SF32LB52x_schematic_checklist.md) (Abschnitt 5.8) un
 Die ursprünglichen SiFli-Anwendungshinweise enthalten die folgenden Referenzabbildungen zu Schaltplan, PCB-Layout, Mechanik und Stromversorgung. Die Anhänge bewahren diese Quellabbildungen zur Dokumentation der Designprüfung; die Abschnitte 5 und 6 bleiben die maßgeblichen Designrichtlinien.
 
 !!! note "Verwendung dieser Abbildungen"
-    Nutzen Sie diese Abbildungen als Referenzschaltungen und Layoutbeispiele aus den ursprünglichen Anwendungshinweisen. Bestätigen Sie die endgültige Umsetzung für das konkrete Bauteil und Produkt anhand der Regeln, Tabellen, des Datenblatts, des Referenzhandbuchs, des aktuellen Referenzdesign-Pakets und der AVL.
+    Nutzen Sie diese Abbildungen als Referenzschaltungen und Layoutbeispiele aus den ursprünglichen Anwendungshinweisen. Bestätigen Sie die endgültige Umsetzung für das konkrete Gerät und Produkt anhand der Regeln, Tabellen, des Datenblatts, des Referenzhandbuchs, des aktuellen Referenzdesign-Pakets und der AVL.
 
 <div align="center"><em>Tabelle 9-1: Anhangsübersicht</em></div>
 
@@ -76,7 +76,7 @@ Die ursprünglichen SiFli-Anwendungshinweise enthalten die folgenden Referenzabb
 
 | Bedarf | Hier beginnen |
 |:---|:---|
-| Blockdiagramm-Beispiele für Smartwatches für beide SF32LB52x-Design-Gruppen | Anhang A: Eine typische Smartwatch-Anwendung |
+| Blockdiagramm-Beispiele für Smartwatches für beide SF32LB52x-Variantengruppen | Anhang A: Eine typische Smartwatch-Anwendung |
 | Schaltplanbeispiele zu RF, Speicher/Boot-Konfiguration, Tasten, Motor, Audio, Takt, USB und DC/DC | Anhang B: Referenzschaltpläne |
 | PCB-Platzierungs- und Routing-Beispiele für RF, Speicher, Audio, Stack-up, Fanout, Takt, USB und DC/DC | Anhang C: Referenz-PCB-Layouts |
 | Zeichnungen zu Gehäuseumriss, Gehäuseform und empfohlenem Land-Pattern | Anhang D: Mechanik |
@@ -86,7 +86,7 @@ Die ursprünglichen SiFli-Anwendungshinweise enthalten die folgenden Referenzabb
 
 ### 9.1. Anhang A. Eine typische Smartwatch-Anwendung { #appendix-a-a-typical-smart-watch-application }
 
-Ein typisches Smartwatch-Design mit dem SF32LB52x umfasst den Mikrocontroller, das Display, den Touch-Controller, den Speicher, Sensoren, den Vibrationsmotor, Audio-Ein- und -Ausgänge, die Bluetooth-Antenne, Taktquellen, die Stromversorgung, eine Debug-Schnittstelle und Zugänge für Produktionstests. Bei der batteriebetriebenen Variante kommt eine Ladeschaltung hinzu.
+Ein typisches Smartwatch-Design mit dem SF32LB52x umfasst den Mikrocontroller, das Display, den Touch-Controller, den Speicher, Sensoren, den Vibrationsmotor, Audio-Ein- und -Ausgänge, die Bluetooth-Antenne, Taktquellen, die Stromversorgung, eine Debug-Schnittstelle und Zugänge für Produktionstests. Bei der akkubetriebenen Variante kommt eine Ladeschaltung hinzu.
 Die Abbildungen 9.1-1 und 9.1-2 zeigen ein QSPI-Display, Beschleunigungssensor/Gyroskop über SPI, ein Herzfrequenzmodul über I2C, ein analoges Mikrofon und den DAC-Verstärker-Pfad, einen PWM-gesteuerten Vibrationsmotor, den 48-MHz-Takt, den Bluetooth-RF-Pfad sowie SWD/UART. QSPI NAND, SD NAND und NOR Flash sind Speicherbeispiele, keine vollständige Liste der Boot-Medien. Beide Diagramme zeigen einen externen Lader und einen Buck/LDO-Pfad. Wählen Sie die tatsächliche Versorgungsarchitektur anhand von Abschnitt 5.2; das Blockdiagramm schreibt diese Schaltung nicht vor.
 
 
@@ -304,7 +304,7 @@ Die Abbildungen 9.1-1 und 9.1-2 zeigen ein QSPI-Display, Beschleunigungssensor/G
 
 ### 9.5. Anhang E. Stromversorgung { #appendix-e-power }
 
-**SF32LB520/3/5/7 (batteriebetrieben)**
+**SF32LB520/3/5/7 (akkubetrieben)**
 
 Die folgenden Abbildungen zeigen externe Ladeschaltungen mit und ohne Power-Path-Management (PPM) sowie anschließend die integrierte Ladeschaltung.
 
@@ -375,7 +375,7 @@ Die folgenden Abbildungen zeigen externe Ladeschaltungen mit und ohne Power-Path
 | Version | Datum | Hinweis |
 |:---|:---|:---|
 | 1.1 | 2026-07 | Das Stromversorgungssystem wurde zu einem gleichrangigen Schaltplanabschnitt; Takterzeugung und RF wurden in separate Abschnitte aufgeteilt und die folgenden Schaltplanabschnitte neu nummeriert. |
-| 1.0 | Dieses Dokument | Beide offiziellen Hardware-Anwendungshinweise wurden in einem Leitfaden zusammengeführt; Tabs trennen die Inhalte für batteriebetriebene und extern geregelte Varianten. |
+| 1.0 | Dieses Dokument | Beide offiziellen Hardware-Anwendungshinweise wurden in einem Leitfaden zusammengeführt; Tabs trennen die Inhalte für akkubetriebene und extern geregelte Varianten. |
 | 0.0.1 | 10/2024 | Erstveröffentlichung von `SF32LB520-3-5-7-HW-Application` |
 | 0.0.1 | 10/2024 | Erstveröffentlichung von `SF32LB52B-E-G-J-HW-Application` |
 

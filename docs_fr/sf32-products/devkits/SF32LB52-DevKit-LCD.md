@@ -38,7 +38,7 @@ La carte réunit sur une même plateforme d'évaluation le module MCU, les conne
 
 ## Quand utiliser cette carte { #when-to-use-this-board }
 
-Choisissez la SF32LB52-DevKit-LCD lorsque le projet a besoin d'une plateforme d'affichage prête à l'emploi plutôt que d'une carte d'éclatement minimale.
+Choisissez la SF32LB52-DevKit-LCD lorsque le projet a besoin d'une plateforme d'affichage prête à l'emploi plutôt que d'une carte de prototypage minimale.
 
 - Mettre en service des dalles LCD QSPI, SPI, DSPI ou MCU/8080
 - Valider l'intégration d'un panneau tactile
@@ -47,7 +47,7 @@ Choisissez la SF32LB52-DevKit-LCD lorsque le projet a besoin d'une plateforme d'
 - Réaliser un prototype de stockage sur carte TF
 - Comparer les options de module avant de s'engager sur un circuit imprimé personnalisé
 
-Pour une carte plus petite à bords crénelés, utilisez la [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md). Pour un accès maximal aux broches et aux signaux, utilisez la [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md).
+Pour une carte plus petite à demi-trous métallisés, utilisez la [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md). Pour un accès maximal aux broches et aux signaux, utilisez la [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md).
 
 ## Configuration matérielle { #hardware-configuration }
 
@@ -73,7 +73,7 @@ Pour une carte plus petite à bords crénelés, utilisez la [SF32LB52-DevKit-Nan
 
 Les codes de cartes et les configurations mémoire ci-dessus suivent le [guide des modèles de cartes de développement](https://wiki.sifli.com/en/board/devkit_guide.html) de SiFli. Avant d'utiliser une carte comme base de conception, vérifiez sa révision par rapport au marquage de la carte et au paquet de conception correspondant.
 
-Les libellés du Flash de la A128R16 diffèrent selon les sources officielles : le [guide OpenSiFli des modèles de modules](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) désigne le module comme 128 Mo de SPI-NAND, tandis que le guide des modèles de cartes indique la référence DevKit correspondante comme 128 Mo de QSPI-NAND. Les sources n'expliquent pas si cela reflète le composant monté ou seulement la formulation de l'interface. Confirmez le composant Flash et le mode de bus dans le schéma et la nomenclature de la révision exacte de la carte avant de vous appuyer sur cette configuration.
+Les désignations de mémoire Flash de la variante A128R16 diffèrent selon les sources officielles : le [guide OpenSiFli des modèles de modules](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) désigne le module comme équipé de 128 Mo de SPI-NAND, tandis que le guide des modèles de cartes indique 128 Mo de QSPI-NAND pour la référence DevKit correspondante. Les sources n'expliquent pas si cette différence concerne le composant monté ou seulement la désignation de l'interface. Avant de vous appuyer sur cette configuration, confirmez le composant de mémoire Flash et le mode de bus dans le schéma et la nomenclature de la révision exacte de la carte.
 
 ## Notes de version { #version-notes }
 
@@ -131,7 +131,7 @@ La SF32LB52-DevKit-LCD peut être alimentée de deux manières principales :
 - Alimentation USB Type-C par l'un ou l'autre des connecteurs USB
 - Alimentation par batterie via le connecteur de batterie de la carte
 
-Pour le téléchargement du firmware et le débogage courant, utilisez le port Type-C USB-UART. L'alimentation par batterie est utile pour tester l'affichage, l'audio et le comportement basse consommation sans fil.
+Pour le téléchargement du firmware et le débogage courant, utilisez le port Type-C USB-UART. L'alimentation par batterie est utile pour tester l'affichage, l'audio et le comportement basse consommation sans alimentation filaire.
 
 La carte intègre un chargeur linéaire ETA9640P. Le courant de charge maximal pris en charge est de 1 A, et le réglage par défaut du courant constant est de 450 mA. Utilisez une batterie Li-ion ou Li-polymère à un élément et vérifiez la polarité du connecteur sur la sérigraphie de la carte avant de brancher la batterie.
 
@@ -196,7 +196,7 @@ La note d'origine de la carte publiée par SiFli indique `TFT-H043A28WQISTKN22_V
 
 **Divergence sur le nombre de broches dans la source — à vérifier avant de connecter un écran :** SiFli décrit le connecteur et la table des signaux comme étant à 22 broches, mais le schéma de connexion qui les accompagne numérote les contacts de 1 à 24 et indique les broches 22 à 24 comme GND. La source ne résout pas cette divergence. Vérifiez le connecteur physique et le schéma de la révision exacte de la carte avant de choisir ou de câbler une nappe flexible ; ne supposez pas qu'un câble à 22 broches s'adapte à un connecteur à 24 positions.
 
-## Affectations clés des broches du module { #key-module-pin-assignments }
+## Principales affectations des broches du module { #key-module-pin-assignments }
 
 ![Définition de l'embase 40 broches de la SF32LB52-DevKit-LCD](assets/sf32lb52x/SF32LB52x_DevKit-40p-define.png){ loading="lazy" }
 <div align="center"><em>Définition de l'embase 40 broches</em></div>
@@ -249,7 +249,7 @@ La carte comprend un microphone MEMS et un amplificateur de puissance audio.
 
 ## Stockage { #storage }
 
-Le support MicroSD est relié via SPI. Il convient pour valider des systèmes de fichiers, des ressources d'image, des journaux et l'enregistrement de données avant de passer à une carte personnalisée.
+Le logement MicroSD est relié via SPI. Il convient pour valider des systèmes de fichiers, des ressources d'image, des journaux et l'enregistrement de données avant de passer à une carte personnalisée.
 
 ## Cibles de compilation du SDK { #sdk-build-targets }
 
@@ -267,7 +267,7 @@ Ce sont des identifiants de cibles de compilation du SDK, pas nécessairement le
 [Guide de conception matérielle SF32LB52x]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
 [SF32LB52-MOD-1]: ../modules/SF32LB52-MOD-1.md
 [Article original du wiki SiFli]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-LCD.md
-[Paquet de conception]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-DevKit-LCD_V1.2.0.zip?
+[Dossier de conception]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-DevKit-LCD_V1.2.0.zip?
 [Acheter des échantillons]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
@@ -276,7 +276,7 @@ Ce sont des identifiants de cibles de compilation du SDK, pas nécessairement le
 - :fontawesome-solid-file-lines: __[Guide de conception matérielle SF32LB52x]__
 - :fontawesome-solid-cubes: __[SF32LB52-MOD-1]__
 - :fontawesome-brands-github: __[Article original du wiki SiFli]__
-- :fontawesome-solid-download: __[Paquet de conception]__
+- :fontawesome-solid-download: __[Dossier de conception]__
 - :fontawesome-solid-cart-shopping: __[Acheter des échantillons]__
 
 </div>

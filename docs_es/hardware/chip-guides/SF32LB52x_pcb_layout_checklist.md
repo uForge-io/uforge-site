@@ -2,7 +2,7 @@
 icon: lucide/list-checks
 hide:
     - navigation
-description: "Lista de comprobación punto por punto para revisar el diseño de PCB del MCU SF32LB52x. Incluye verificaciones de encapsulado, trazado, alimentación y masa."
+description: "Lista de comprobación punto por punto para revisar el diseño de PCB de la MCU SF32LB52x. Incluye verificaciones de encapsulado, trazado, alimentación y masa."
 tags:
     - Hardware
     - Chip
@@ -162,7 +162,7 @@ La lista de PCB original no incluye una columna «Aplicable a». Aplique cada co
 | N.º | Punto de comprobación | Categoría |
 |:---|:---|:---|
 | 1 | La ubicación de los puntos de prueba permite el contacto de una sonda o una conexión soldada al útil de pruebas | Obligatorio |
-| 2 | Los puntos de prueba para programar y descargar el firmware (VBAT, GND, PA18/DBG_UART_RXD, PA19/DBG_UART_TXD, LDO2_OUT, PA0, PA1, PA34, etc.) cumplen los requisitos de tamaño y ubicación del útil de pruebas | Obligatorio |
+| 2 | Los puntos de prueba para grabar y descargar el firmware (VBAT, GND, PA18/DBG_UART_RXD, PA19/DBG_UART_TXD, LDO2_OUT, PA0, PA1, PA34, etc.) cumplen los requisitos de tamaño y ubicación del útil de pruebas | Obligatorio |
 
 </div>
 

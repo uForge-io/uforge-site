@@ -12,6 +12,7 @@ tags:
 La section Produits SF32 vous aide à passer d’une idée de produit à une conception SF32 réalisable. Vous y découvrirez les familles SF32, pourrez choisir puis valider le matériel, trouver une base technique réutilisable et accéder aux ressources nécessaires à la préparation de la production.
 
 ## Choisir votre point de départ { #choose-your-starting-point }
+
 <div align="center"><em>Parcours de sélection du matériel</em></div>
 
 <div align="center" markdown>
@@ -20,13 +21,14 @@ La section Produits SF32 vous aide à passer d’une idée de produit à une con
 |:----------|:-----------|:--------------------|
 | Découvrir la famille SF32 | [Comprendre SF32](family/SF32_family.md) | Une comparaison des familles et les règles pour interpréter la référence d’un composant disponible à la commande. |
 | Transformer une idée en plan produit | [Planifier un produit](family/product-planning.md) | Une démarche par étapes, des exigences et du choix du composant à la validation de la carte et à la préparation de la production. |
-| Choisir une puce ou un module | [Sélecteur de produits SF32](product-selector.md) | Un outil interactif pour filtrer les puces et modules, les critères de choix et les présentations des produits. Les cartes de développement sont répertoriées séparément pour la validation. |
-| Réutiliser une base technique | [Conceptions de référence](../hardware/reference-designs/reference-designs.md) | Des bases matérielles et logicielles reproductibles, leur périmètre de validation et leurs limites de réutilisation. |
-| Préparer une conception de carte pour la production | [Conception pour la production](../hardware/design-for-production.md) | Guides de conception, listes de contrôle, définitions d’interfaces, composants de la liste approuvée et bibliothèques EDA officielles. |
+| Choisir une puce ou un module | [Sélecteur de produits SF32](product-selector.md) | Un outil interactif pour établir une présélection de puces et de modules, consulter les critères de choix et accéder aux présentations des produits. Les cartes de développement sont répertoriées séparément pour la validation. |
+| Réutiliser une base technique | [Conceptions de référence](../hardware/reference-designs/reference-designs.md) | Des bases matérielles et logicielles reproductibles, leurs points de validation et leurs limites de réutilisation. |
+| Finaliser une conception de carte | [Conception pour la production](../hardware/design-for-production.md) | Guides de conception, listes de contrôle, définitions d’interfaces, composants de la liste approuvée et bibliothèques EDA officielles. |
 
 </div>
 
 ## Contenu de cette section { #what-this-section-covers }
+
 Consultez d’abord la [présentation de la famille SF32](family/SF32_family.md) pour découvrir les familles disponibles et leurs principales différences fonctionnelles. Une fois la famille et le boîtier ciblés, les [règles de nomenclature](family/SF32_namingrule.md) vous aideront à décoder la référence complète.
 
 Utilisez le [sélecteur de produits SF32](product-selector.md) lorsque le choix dépend de l’alimentation, du boîtier, de l’affichage, de l’audio, de la mémoire, des GPIO, de la connectivité ou de fonctions matérielles spécialisées. Il sert à établir une première liste de candidats ; la référence exacte, le boîtier, les limites électriques et le routage sur la carte doivent ensuite être vérifiés dans la documentation SiFli correspondante.

@@ -9,9 +9,9 @@ tags:
 
 # Audio-SDK-Beispiele { #audio-sdk-examples }
 
-Die Audio-Beispiele des SiFli-SDK sind praktische Ausgangspunkte, um einen vollständigen Signalpfad zu prüfen. Sie sind keine fertige Produkt-Firmware. Wählen Sie das Beispiel, das den anspruchsvollsten Teil Ihres Designs bereits abdeckt — Mikrofonaufnahme, Lautsprecherausgabe, Speicherung, Codec oder mehrere gleichzeitige Audioströme. Führen Sie das unveränderte Beispiel zunächst auf dem Zielboard aus; passen Sie danach jeweils nur ein Subsystem an.
+Die Audio-Beispiele des SiFli-SDK sind praktische Ausgangspunkte, um einen vollständigen Signalpfad zu prüfen. Sie sind keine fertige Produkt-Firmware. Wählen Sie das Beispiel, das den anspruchsvollsten Teil Ihres Designs bereits abdeckt — Mikrofonaufnahme, Lautsprecherausgabe, Speicherung, Codec oder mehrere gleichzeitige Audioströme. Führen Sie das unveränderte Beispiel zunächst auf dem vorgesehenen Entwicklungsboard aus; passen Sie danach jeweils nur ein Subsystem an.
 
-Diese Seite ordnet ausgewählte SiFli-SDK-Audiobeispiele nach Entwicklungsaufgabe. Der offizielle [Audio-Index](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/index.html) dient als Einstieg. Die Tabelle nennt die Boards, die auf den offiziellen SiFli-Seiten zum Zeitpunkt dieser Prüfung ausdrücklich aufgeführt sind; aus einem Seriennamen folgt keine Unterstützung für jedes Board oder jede SDK-Version dieser Serie. Prüfen Sie vor dem Build die genaue Seite und die Dateien des Zielboards.
+Diese Seite ordnet ausgewählte SiFli-SDK-Audiobeispiele nach Entwicklungsaufgabe. Der offizielle [Audio-Index](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/index.html) dient als Einstieg. Die Tabelle nennt die Entwicklungsboards, die auf den offiziellen SiFli-Seiten zum Zeitpunkt dieser Prüfung ausdrücklich aufgeführt sind; aus einem Seriennamen folgt keine Unterstützung für jedes Entwicklungsboard oder jede SDK-Version dieser Serie. Prüfen Sie vor dem Build die genaue Seite und die Dateien des Zielboards.
 
 ## Das passende Beispiel auswählen { #start-with-the-right-example }
 
@@ -19,10 +19,10 @@ Diese Seite ordnet ausgewählte SiFli-SDK-Audiobeispiele nach Entwicklungsaufgab
 
 <div align="center" markdown>
 
-| Entwicklungsziel | Empfohlenes Beispiel | Was sich damit prüfen lässt | Offiziell dokumentierte Boards und Einschränkungen |
+| Entwicklungsziel | Empfohlenes Beispiel | Was sich damit prüfen lässt | Offiziell dokumentierte Entwicklungsboards und Einschränkungen |
 |:-----------------|:-----------|:---------------|:----------------------------|
 | Zwei oder vier digitale Mikrofone erfassen | [PDM-Beispiel](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html) | PDM-Erfassung; WAV-Aufnahme und Wiedergabe in dafür vorgesehenen Verarbeitungsmodi | Aktuell ist nur `sf32lb56-lcd_a128r12n1` aufgeführt. Prüfen Sie PDM-Verdrahtung und Pin-Mux. In der Beschreibung der Pin-Konfiguration ist der Boardname als `f32lb56-lcd_a128r12n1` falsch geschrieben (das führende `s` fehlt); der Build-Befehl verwendet den korrekten Namen. |
-| Zwei analoge Mikrofone erfassen | [Beispiel für lokale Musikwiedergabe mit Stereolautsprechern (Local Music Example for stereo speaker, Dual-ADC/DAC)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/dual_adc_dac/README.html) | Gleichzeitige Erfassung in getrennten PCM-Dateien; Auswahl eines Mikrofons zur Wiedergabe über den Lautsprecher | Erfordert ein kundenspezifisches SF32LB58x-Board und läuft nicht auf SiFli-Modulboards. Benötigt zwei analoge Mikrofone und zwei analoge Lautsprecher. |
+| Zwei analoge Mikrofone erfassen | [Beispiel für lokale Musikwiedergabe mit Stereolautsprechern (Local Music Example for stereo speaker, Dual-ADC/DAC)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/dual_adc_dac/README.html) | Gleichzeitige Erfassung in getrennten PCM-Dateien; Auswahl eines Mikrofons zur Wiedergabe über den Lautsprecher | Erfordert ein kundenspezifisches SF32LB58x-Entwicklungsboard und läuft nicht auf SiFli-Modulboards. Benötigt zwei analoge Mikrofone und zwei analoge Lautsprecher. |
 | Grundlegende Mikrofon-zu-Lautsprecher-Funktion prüfen | [Aufnahmebeispiel](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/record/README.html) | Fünf Sekunden Mikrofonaufnahme in einen PCM-Puffer im Speicher, danach automatische Wiedergabe | `eh-lb525` sowie die Serien `sf32lb52-lcd`, `sf32lb56-lcd` oder `sf32lb58-lcd`; ein Lautsprecher ist erforderlich. |
 | Eine vorbereitete Audiodatei aus dem Root-Dateisystem abspielen | [Beispiel für lokale Musikwiedergabe](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/local_music/README.html) | Wiedergabe der vorbereiteten `16k.wav` aus der eingebundenen FAT-Root-Partition; MP3 ist ebenfalls möglich, sofern die Datei hineinpasst | `eh-lb525` sowie die Serien `sf32lb52-lcd`, `sf32lb56-lcd` oder `sf32lb58-lcd`; FAT-Root-Partition und Lautsprecher erforderlich. |
 | Musik von einer SD-Karte abspielen | [MP3-Player für lokale Musikwiedergabe](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/mp3_sd_player/README.html) | MP3- oder WAV-Wiedergabe aus dem SD-Kartenverzeichnis `music` sowie Lautstärkeregelung über die Shell | Aktuell ist nur `sf32lb52-lchspi-ulp` aufgeführt. Benötigt SPI1, FAT/MSD und einen Lautsprecher; für die Erkennung langer Tastendrücke ist außerdem ein externer Akku nötig. |
@@ -34,14 +34,14 @@ Diese Seite ordnet ausgewählte SiFli-SDK-Audiobeispiele nach Entwicklungsaufgab
 
 ## Gemeinsame Voraussetzungen { #shared-starting-point }
 
-Die meisten Beispiele haben dieselben Voraussetzungen: Die benötigte Audio-Hardware muss auf dem Entwicklungsboard vorhanden und korrekt angeschlossen sein. Die Board-Konfiguration muss die erforderlichen Audio-Blöcke aktivieren, und das Beispiel muss das jeweilige Zielboard unterstützen. Beispiele, die Dateien lesen oder schreiben, benötigen außerdem ein eingebundenes Dateisystem. Übernehmen Sie Boardnamen, Pinbelegungen oder `menuconfig`-Einstellungen nicht ungeprüft aus anderen Beispielen, sondern gleichen Sie sie mit der offiziellen SiFli-Seite und den Konfigurationsdateien des Zielboards ab.
+Die meisten Beispiele haben dieselben Voraussetzungen: Die benötigte Audio-Hardware muss auf dem Entwicklungsboard vorhanden und korrekt angeschlossen sein. Die Konfiguration des Entwicklungsboards muss die erforderlichen Audio-Blöcke aktivieren, und das Beispiel muss das jeweilige Entwicklungsboard unterstützen. Beispiele, die Dateien lesen oder schreiben, benötigen außerdem ein eingebundenes Dateisystem. Übernehmen Sie Boardnamen, Pinbelegungen oder `menuconfig`-Einstellungen nicht ungeprüft aus anderen Beispielen, sondern gleichen Sie sie mit der offiziellen SiFli-Seite und den Konfigurationsdateien des Entwicklungsboards ab.
 
 !!! warning "Vorhandene Dateisystemdaten schützen"
     Das Opus-Beispiel aus v2.5.1 ruft nach einem fehlgeschlagenen Mounten des Wurzeldateisystems `dfs_mkfs()` auf ([Quellcode](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/example/multimedia/audio/opus/src/main.c)). Übernehmen Sie diese automatische Formatierung nicht ohne ausdrückliche Datenerhaltungsstrategie in ein Produkt. Ein Mountfehler berechtigt nicht zum Löschen von Nutzerdaten.
 
 Beschränken Sie die erste Prüfung bei allen Beispielen bewusst auf das Wesentliche:
 
-1. Kompilieren und flashen Sie das unveränderte Projekt für ein unterstütztes Board.
+1. Bauen Sie das unveränderte Projekt für ein unterstütztes Entwicklungsboard und flashen Sie es.
 2. Prüfen Sie das erwartete Aufnahme- oder Wiedergabeverhalten mit nachweislich funktionierender Audio-Hardware und geprüften Dateien.
 3. Dokumentieren Sie SDK-Revision, Boardname, Konfiguration, Pinbelegung und serielle Ausgabe.
 4. Ändern Sie genau ein produktspezifisches Element und wiederholen Sie denselben Test.
@@ -52,16 +52,16 @@ Die [Audioübersicht](overview.md) erläutert die Schnittstellen- und Systements
 
 Verwenden Sie das PDM-Beispiel, wenn das Produkt digitale Mikrofone statt eines analogen Mikrofoneingangs benötigt. Das offizielle Beispiel unterstützt zwei oder vier PDM-Mikrofone; ob eine Aufnahmedatei entsteht und wie sie wiedergegeben wird, hängt vom Verarbeitungsmodus ab. In der dokumentierten Topologie dienen der linke und rechte Kanal von `PDM1` für zwei Mikrofone; mit `PDM2` werden vier erreicht. Eine PDM-Schnittstelle kann bis zu zwei digitale Mikrofone bedienen; die Zahl der Schnittstellen entspricht daher nicht der Mikrofonanzahl. Prüfen Sie die unterstützte Konfiguration anhand der Schnittstellen- und Kanalzuordnung des Ziel-SoC.
 
-Die aktuelle offizielle Seite führt `sf32lb56-lcd_a128r12n1` als unterstütztes Board. `pdm open pdm12 4 raw` erzeugt nur Protokollausgaben, keine Aufnahmedatei. Die Anyka-Verarbeitungsmodi liefern auch bei vier Mikrofonen Monoausgabe. Vier Eingänge bedeuten daher keine vierkanalige Ausgabedatei. Prüfen Sie Algorithmusabhängigkeiten und Ausgabeformat, bevor Sie das Beispiel als Grundlage für ein Mikrofonarray nutzen.
+Die aktuelle offizielle Seite führt `sf32lb56-lcd_a128r12n1` als unterstütztes Entwicklungsboard. `pdm open pdm12 4 raw` erzeugt nur Protokollausgaben, keine Aufnahmedatei. Die Anyka-Verarbeitungsmodi liefern auch bei vier Mikrofonen Monoausgabe. Vier Eingänge bedeuten daher keine vierkanalige Ausgabedatei. Prüfen Sie Algorithmusabhängigkeiten und Ausgabeformat, bevor Sie das Beispiel als Grundlage für ein Mikrofonarray nutzen.
 
 Prüfen Sie vor der Anpassung diese vier Punkte:
 
 - Der gewählte Chip und das Entwicklungsboard stellen die benötigten PDM-Signale bereit.
 - Mikrofontakt, Datenleitungen, Versorgung und Masseführung entsprechen dem Mikrofon-Datenblatt.
-- Die Pin-Mux-Konfiguration des Boards weist die PDM-Funktionen zu, bevor der Treiber gestartet wird.
+- Die Pin-Mux-Konfiguration des Entwicklungsboards weist die PDM-Funktionen zu, bevor der Treiber gestartet wird.
 - Das Produkt benötigt die im Beispiel aktivierten Aufnahme- und Wiedergabedienste tatsächlich; für die reine PDM-Erfassung sind sie nicht erforderlich.
 
-Die offizielle PDM-Seite dokumentiert eine eigene Board-Konfiguration und beispielhafte Pinbelegung. Nutzen Sie diese als geprüfte Referenz, ersetzen Sie sie jedoch durch die tatsächliche Verdrahtung des Zielboards. Übernehmen Sie die Angaben nicht ungeprüft. Siehe das [PDM-Beispiel](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html).
+Die offizielle PDM-Seite dokumentiert eine eigene Entwicklungsboard-Konfiguration und beispielhafte Pinbelegung. Nutzen Sie diese als geprüfte Referenz, ersetzen Sie sie jedoch durch die tatsächliche Verdrahtung des Zielboards. Übernehmen Sie die Angaben nicht ungeprüft. Siehe das [PDM-Beispiel](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html).
 
 ## Analoge Erfassung sowie einfache Aufnahme und Wiedergabe { #analog-capture-and-basic-recordplayback }
 
@@ -91,9 +91,9 @@ Keines der beiden Beispiele bildet einen vollständigen Bluetooth-Anruf oder ein
 
 ## Drei Audiokanäle mischen { #three-channel-mixing }
 
-Die aktuelle offizielle Seite des **Dreikanal-Audiomixers** führt `sf32lb52-lcd_n16r8` und `sf32lb56-lcd_n16r12n1` als getestete Boards auf. Das Beispiel liest drei lokale Audiodateien, decodiert jeden Stream, tastet Eingaben mit einer anderen Abtastrate als 48 kHz bei Bedarf neu ab, mischt die Mono-PCM-Streams und gibt das Ergebnis wieder. Die dokumentierten Beispieldateien umfassen zwei MP3-Dateien und eine WAV-Datei. Verwenden Sie das angegebene Dateisystem-Image und die Dateinamen; beliebige Audiodateien sind darin nicht zwingend enthalten.
+Die aktuelle offizielle Seite des **Dreikanal-Audiomixers** führt `sf32lb52-lcd_n16r8` und `sf32lb56-lcd_n16r12n1` als getestete Entwicklungsboards auf. Das Beispiel liest drei lokale Audiodateien, decodiert jeden Stream, tastet Eingaben mit einer anderen Abtastrate als 48 kHz bei Bedarf neu ab, mischt die Mono-PCM-Streams und gibt das Ergebnis wieder. Die dokumentierten Beispieldateien umfassen zwei MP3-Dateien und eine WAV-Datei. Verwenden Sie das angegebene Dateisystem-Image und die Dateinamen; beliebige Audiodateien sind darin nicht zwingend enthalten.
 
-Der geprüfte Mixer addiert die drei Mono-Samples und teilt durch drei, statt sie mit voller Verstärkung zu summieren. Der dokumentierte Durchlauf dauert etwa 50 Sekunden. Trennen Sie diese Verstärkungsstrategie und die begrenzte Demodauer von den Mischanforderungen des Produkts.
+Die geprüfte Implementierung des Mixers addiert die drei Mono-Samples und teilt durch drei, statt sie mit voller Verstärkung zu summieren. Der dokumentierte Durchlauf dauert etwa 50 Sekunden. Trennen Sie diese Verstärkungsstrategie und die begrenzte Demonstrationsdauer von den Mischanforderungen des Produkts.
 
 Das ist eine geeignete Referenz für gleichzeitig abgespielte Ansagen, Effekte und Musik, wenn das Produkt festlegen muss, welche Klänge überlagert werden dürfen. Eine fertige Audiorichtlinie ist damit nicht gegeben: Legen Sie Stream-Prioritäten, Lautstärkeregelung, Verhalten bei Übersteuerung, Speicherbudget und Reaktion auf eine verpasste Frist beim Lesen oder Decodieren fest. Der Artikel [Audio-Server und Pufferung](audio-server-buffering.md) hilft, diese Laufzeitbedingungen genauer festzulegen.
 
@@ -105,7 +105,7 @@ Das ist eine geeignete Referenz für gleichzeitig abgespielte Ansagen, Effekte u
 
 | Bereich | Aus dem Beispiel übernehmen | Für das Produkt erneut prüfen |
 |:---------|:----------------------|:----------------------------|
-| Hardware | Nachweislich funktionierende Board-Verdrahtung und unterstützter Peripheriepfad | Mikrofon- oder Lautsprechermodell, Verstärkung, Versorgungsschienen, Pin-Mux, Layout und Zugang für Fertigungstests |
+| Hardware | Nachweislich funktionierende Verdrahtung des Entwicklungsboards und unterstützter Peripheriepfad | Mikrofon- oder Lautsprechermodell, Verstärkung, Versorgungsschienen, Pin-Mux, Layout und Zugang für Fertigungstests |
 | Konfiguration | Minimal erforderliche SDK-Komponenten | Speicher, Dateisystem, Codecs, Audio Manager und die tatsächlich benötigten Funktionsoptionen |
 | Audiodaten | Sample-Format und geprüfte Audiodateien | Abtastrate, Kanalanzahl, Puffergrößen, Latenzziel und Fehlerbehandlung |
 | Laufzeitverhalten | Grundlegender Ablauf für Aufnahme oder Wiedergabe | Gleichzeitiger Betrieb mit UI, Bluetooth und Speicher, Übergänge in und aus Energiesparzuständen, Fehlerbehandlung und Sitzungsabbau |

@@ -12,7 +12,7 @@ tags:
 
 Esta guía explica cómo diseñar productos SF32 de bajo consumo: qué modos de funcionamiento existen, qué elementos consumen más batería y cómo organizar el firmware para que el sistema pase el mayor tiempo posible en estados de bajo consumo. El consumo depende del sistema en su conjunto: las decisiones sobre Bluetooth, gráficos, audio e IA repercuten directamente en la autonomía, por lo que aquí se analizan de forma conjunta.
 
-La documentación del SDK de SiFli describe middleware de **PM (Power Management, gestión de energía)** basado en RT-Thread para determinados dispositivos, incluido SF32LB52x. Los modos disponibles y el comportamiento de activación pueden variar según el dispositivo y la configuración del SDK; consulte la documentación del objetivo concreto. En las familias cuyo SDK asigna las tareas del controlador Bluetooth a un procesador independiente (véase [Procesador Bluetooth](../bluetooth/processor.md)), el procesador independiente puede atender los eventos de radio sin despertar la CPU de aplicación en cada ocasión. Que esta pueda permanecer suspendida depende de la asignación de tareas, las fuentes de activación configuradas y el tráfico entre procesadores; compruébelo en el dispositivo de destino.
+La documentación del SDK de SiFli describe middleware de **PM (Power Management, gestión de energía)** basado en RT-Thread para determinados dispositivos, incluido SF32LB52x. Los modos disponibles y el comportamiento de activación pueden variar según el dispositivo y la configuración del SDK; consulte la documentación del objetivo concreto. En las familias cuyo SDK asigna las tareas del controlador Bluetooth a un procesador independiente (consulte [Procesador Bluetooth](../bluetooth/processor.md)), el procesador independiente puede atender los eventos de radio sin despertar la CPU de aplicación en cada ocasión. Que esta pueda permanecer suspendida depende de la asignación de tareas, las fuentes de activación configuradas y el tráfico entre procesadores; compruébelo en el dispositivo de destino.
 
 Use esta guía para traducir un objetivo de autonomía en decisiones de hardware y firmware respaldadas por mediciones. Está dirigida a quienes deben equilibrar el reposo conectado, la pantalla, el audio, los sensores, la IA y la respuesta del producto. El ahorro de energía no se resuelve con una sola llamada a una API de suspensión.
 
@@ -69,7 +69,7 @@ Cada subsistema tiene un perfil de consumo distinto:
 | **CPU** | Tiempo de ejecución activo, no solo la velocidad de reloj | Esta guía |
 | **Radio Bluetooth** | Intervalo de publicidad, intervalo de conexión, latencia del esclavo (Slave Latency), potencia de transmisión | [Resumen de Bluetooth](../bluetooth/overview.md#advertising-and-connection-parameters) |
 | **Pantalla** | Frecuencia de actualización, actualización completa o parcial, retroiluminación | [Controlador de pantalla: refresco parcial y regiones modificadas](../graphics/display-controller.md#partial-refresh-and-dirty-regions) |
-| **Códec de audio/DMA** | Duración de la sesión, frecuencia de muestreo y si el códec permanece encendido entre sesiones | [Resumen del audio local](../audio/overview.md#power-considerations-for-audio) |
+| **Códec de audio/DMA** | Duración de la sesión, frecuencia de muestreo y si el códec permanece encendido entre sesiones | [Descripción general del audio](../audio/overview.md#power-considerations-for-audio) |
 | **Inferencia de IA** | Frecuencia de inferencia y tamaño de la ventana, no solo el tamaño del modelo | [Resumen de IA](../ai/overview.md#power-aware-inference-scheduling) |
 | **Sistema de memoria** | Actividad de la caché/PSRAM y frecuencia con que se ejecuta código desde memoria externa lenta | [STAR-MC1](../architecture/star-mc1.md) |
 | **Sensores** | Frecuencia de consulta frente a muestreo activado por interrupciones | Esta guía |
@@ -94,7 +94,7 @@ Antes de estimar la autonomía del producto, elija un ejemplo del SDK que permit
 
 ## Optimice el consumo de Bluetooth { #bluetooth-power-tuning }
 
-Los parámetros de conexión y de publicidad son las principales herramientas para reducir el consumo de Bluetooth (véase la tabla completa en el [resumen de Bluetooth](../bluetooth/overview.md#advertising-and-connection-parameters)):
+Los parámetros de conexión y de publicidad son las principales herramientas para reducir el consumo de Bluetooth (consulte la tabla completa en el [resumen de Bluetooth](../bluetooth/overview.md#advertising-and-connection-parameters)):
 
 - En enlaces que suelen estar inactivos, aumente el intervalo de conexión y la latencia del esclavo (Slave Latency).
 - Reduzca la potencia de transmisión al nivel mínimo que aún proporcione el alcance necesario.
@@ -105,9 +105,9 @@ Para medir por escenarios el consumo real con solo Bluetooth clásico, solo BLE 
 
 ## Consumo de la pantalla y la retroiluminación { #display-and-backlight-power }
 
-En los wearables y dispositivos de mano, la pantalla y la retroiluminación suelen constituir la mayor fuente individual de consumo energético:
+En los dispositivos vestibles y de mano, la pantalla y la retroiluminación suelen constituir la mayor fuente individual de consumo energético:
 
-- Cuando el panel y la interfaz lo permitan, actualice solo las regiones modificadas en lugar de redibujar toda la pantalla (véase [Controlador de pantalla: refresco parcial y regiones modificadas](../graphics/display-controller.md#partial-refresh-and-dirty-regions)).
+- Cuando el panel y la interfaz lo permitan, actualice solo las regiones modificadas en lugar de redibujar toda la pantalla (consulte [Controlador de pantalla: refresco parcial y regiones modificadas](../graphics/display-controller.md#partial-refresh-and-dirty-regions)).
 - Durante la inactividad, reduzca el brillo de la pantalla o apague la retroiluminación cuando corresponda. Detenga también las animaciones cuando la pantalla esté atenuada o cubierta.
 - Para productos con pantalla siempre encendida, compare paneles como EPD, JDI/memory-in-pixel, AMOLED y TFT según la energía medida en ese modo y la experiencia de uso requerida. Elija el panel y la estrategia de funcionamiento que se ajusten al presupuesto, en lugar de mantener continuamente el modo activo habitual.
 - Incluya la pantalla siempre encendida como una partida independiente del presupuesto energético: cambia de forma sustancial qué significa que el producto esté inactivo.
@@ -137,7 +137,7 @@ Más allá de la propia CPU:
 La estrategia del firmware está limitada por las posibilidades del hardware:
 
 - La eficiencia del PMIC/LDO a las corrientes que realmente demanda el producto importa más que las cifras destacadas para puntos de carga que no se aplican.
-- El diseño de RF y la sintonización de la antena determinan la potencia de transmisión necesaria para alcanzar el alcance requerido de forma fiable. Un diseño deficiente puede obligar al firmware a aumentar esa potencia y reducir así la autonomía. Véase [Procesador Bluetooth: consideraciones de RF y reloj](../bluetooth/processor.md#rf-and-clock-considerations).
+- El diseño de RF y la sintonización de la antena determinan la potencia de transmisión necesaria para alcanzar el alcance requerido de forma fiable. Un diseño deficiente puede obligar al firmware a aumentar esa potencia y reducir así la autonomía. Consulte [Procesador Bluetooth: consideraciones de RF y reloj](../bluetooth/processor.md#rf-and-clock-considerations).
 - La precisión del cristal afecta a los márgenes de temporización de RF y a cuán conservadores deben ser los tiempos de espera de supervisión y los márgenes de activación que configura el firmware.
 - Prevea puntos de acceso para las pruebas y la calibración durante la producción. La optimización del consumo y de RF suele continuar después de la primera revisión del hardware.
 
@@ -157,7 +157,7 @@ Cuantifique el objetivo del producto antes de optimizar el firmware. Una tabla s
 |:------|:-----------------|:------------|
 | Envío/almacenamiento | ¿Cuánto tiempo puede permanecer almacenado el producto antes del primer uso? | Corriente en Deep Sleep, retención del RTC y corrientes de fuga de componentes externos. |
 | Conectado e inactivo | ¿Cuántas horas al día permanece emparejado pero sin usarse? | Intervalo BLE, latencia del esclavo, interrupciones de sensores y consumo con la pantalla apagada. |
-| Consulta rápida de pantalla | ¿Con qué frecuencia se activa la pantalla y durante cuánto tiempo? | Retroiluminación, actualización parcial, ráfaga de actividad de CPU/interfaz y controlador táctil. |
+| Vista rápida de la pantalla | ¿Con qué frecuencia se activa la pantalla y durante cuánto tiempo? | Retroiluminación, actualización parcial, ráfaga de actividad de CPU/interfaz y controlador táctil. |
 | Sesión de audio | ¿Durante cuánto tiempo se reproduce, graba o realiza una llamada? | Códec, DMA, audio Bluetooth y ancho de banda de memoria. |
 | Ráfaga de IA | ¿Con qué frecuencia se ejecuta la inferencia? | Captura de sensores, preprocesamiento, tiempo de acelerador/CPU y posprocesamiento. |
 | OTA/mantenimiento | ¿Con qué frecuencia se esperan actualizaciones? | Intervalo de conexión corto, borrado y escritura de Flash, almacenamiento para restauración. |
@@ -235,7 +235,7 @@ Use escenarios de prueba repetibles para comparar los resultados entre versiones
 |:-----------|:---------------|:---------------|
 | Arranque hasta reposo | Arranque normal, sin emparejamiento y con la pantalla apagada | No hay actividad periódica aparte de los temporizadores necesarios. |
 | Conectado e inactivo | Enlace BLE con bonding y parámetros de conexión previstos para producción | Compruebe que la CPU o el núcleo previsto para dormir alcanza su estado de bajo consumo objetivo entre eventos del enlace; confirme la asignación de tareas Bluetooth y el comportamiento de activación del dispositivo. |
-| Consulta de la interfaz | Reactivación de la pantalla, actualización típica y espera hasta que se atenúe | La retroiluminación y las animaciones se detienen al cumplirse el tiempo de espera. |
+| Interacción con la interfaz | Reactivación de la pantalla, actualización típica y espera hasta que se atenúe | La retroiluminación y las animaciones se detienen al cumplirse el tiempo de espera. |
 | Audio activo | Ruta de reproducción o grabación activa | No hay interrupciones por falta de datos; el códec se apaga al terminar la sesión. |
 | IA activa | Datos reales del sensor y ejecución de una inferencia | La energía por inferencia se ajusta al presupuesto. |
 | Peor caso | Bluetooth, pantalla y audio/IA activos simultáneamente, según corresponda | No hay desconexiones ni fallos de funcionamiento, y no se superan los límites térmicos o de consumo eléctrico. |
@@ -257,7 +257,7 @@ Registre la versión del firmware, la revisión de la placa, la tensión de la b
 | Los picos de consumo coinciden con la actividad de la pantalla | Se redibuja la pantalla completa en vez de actualizar solo las zonas modificadas, o la retroiluminación queda al máximo. |
 | El consumo aumenta tras actualizar el firmware | Se añadió un temporizador, un bucle de sondeo o un periférico siempre activo sin revisar su impacto energético. |
 | Buen resultado en el banco, pero consumo alto en el producto | Una antena mal ajustada obliga a aumentar la potencia de transmisión, o la temperatura y la carcasa alteran el resultado respecto al banco. |
-| El audio o la IA agotan la batería en exceso | La ruta del códec o de inferencia permanece activa entre sesiones. Véanse el [resumen del audio local](../audio/overview.md#power-considerations-for-audio) y el [resumen de IA](../ai/overview.md#power-aware-inference-scheduling). |
+| El audio o la IA agotan la batería en exceso | La ruta del códec o de inferencia permanece activa entre sesiones. Véanse la [descripción general del audio](../audio/overview.md#power-considerations-for-audio) y el [resumen de IA](../ai/overview.md#power-aware-inference-scheduling). |
 
 </div>
 

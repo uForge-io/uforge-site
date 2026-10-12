@@ -7,7 +7,7 @@ tags:
 
 # Produktvalidierung { #advanced-tutorials }
 
-Diese Tutorials setzen voraus, dass Sie die [Subsystemintegration](intermediate.md) beherrschen: Sie können Peripheriegeräte in Betrieb nehmen und an Middleware anbinden und haben bereits mindestens ein Koexistenzproblem selbst erlebt. Hier geht es um die Arbeit, die eine funktionierende Demo von einem auslieferbaren Produkt unterscheidet: gemessene Leistungsaufnahme, OTA mit geprüftem Wiederherstellungsverhalten, wiederholbare Inbetriebnahme eigener Hardware, Absturzanalyse, Bluetooth mit mehreren Verbindungen und wiederverwendbare Treiber.
+Diese Tutorials setzen voraus, dass Sie mit der [Subsystemintegration](intermediate.md) vertraut sind: Sie können Peripheriegeräte in Betrieb nehmen und an Middleware anbinden und haben bereits mindestens ein Koexistenzproblem selbst erlebt. Hier geht es um die Arbeit, die eine funktionierende Demo von einem auslieferbaren Produkt unterscheidet: gemessene Leistungsaufnahme, OTA mit geprüftem Wiederherstellungsverhalten, wiederholbare Inbetriebnahme eigener Hardware, Absturzanalyse, Bluetooth mit mehreren Verbindungen und wiederverwendbare Treiber.
 
 Bei der Produktvalidierung zählt nicht das Kopieren eines einzelnen Beispiels, sondern der nachvollziehbare Nachweis. Dokumentieren Sie für jedes Tutorial die Board-Revision, SDK-Version, das zugrunde liegende Beispiel, den Testaufbau, das erwartete und das beobachtete Ergebnis sowie alle Änderungen.
 
@@ -17,13 +17,13 @@ Beispielpfade und unterstützte Boards können je nach SDK-Version variieren. Pr
 
 ## Energiesparmodi und Weckquellen abstimmen { #tune-low-power-modes-and-wake-sources }
 
-**Ziel:** die Akkulaufzeit durch Messungen belegen, statt die Firmware allein deshalb für stromsparend zu halten, weil sie eine Sleep-Funktion aufruft.
+**Ziel:** belastbare Messdaten zum Stromverbrauch erfassen, statt die Firmware allein deshalb für stromsparend zu halten, weil sie eine Sleep-Funktion aufruft.
 
 **Zeit:** 2+ Stunden, plus Mess-Setup
 
 **Ausgangspunkt:** `example/pm/classical`, `example/pm/raise_wrist`
 
-1. Richten Sie die Strommessung wie in der [Energiesparendes Design im Überblick](../../learn/low-power/overview.md#measuring-power-in-practice) beschrieben ein.
+1. Richten Sie die Strommessung wie im Artikel [Energiesparendes Design im Überblick](../../learn/low-power/overview.md#measuring-power-in-practice) beschrieben ein.
 2. Erfassen Sie Vergleichswerte für den Start, den aktiven Betrieb, den Ruhezustand bei bestehender Verbindung, den Ruhezustand bei ausgeschaltetem Display und – sofern verfügbar – Deep Sleep.
 3. Beginnen Sie mit dem klassischen PM-Beispiel und ermitteln Sie, wo `rt_pm_request(PM_SLEEP_MODE_IDLE)` den Eintritt in tiefere Energiesparmodi als IDLE blockiert und wo der passende Aufruf `rt_pm_release(PM_SLEEP_MODE_IDLE)` diese Beschränkung wieder aufhebt. Prüfen Sie außerdem, ob das Treiber-Framework den Ruhezustand bei aktiver Peripherie automatisch blockiert.
 4. Untersuchen Sie anschließend das Raise-to-Wake-Beispiel: Wie erfasst es Beschleunigungsdaten, erkennt eine Handgelenkbewegung, schaltet das Display ein und kehrt in den Schlaf zurück? Prüfen Sie den tatsächlichen Ablauf der Abtastung und des Aufwachens; gehen Sie nicht von einem Interrupt aus.
@@ -33,9 +33,9 @@ Beispielpfade und unterstützte Boards können je nach SDK-Version variieren. Pr
 
 **Erfolgskriterien:** Die Firmware erreicht den erwarteten Energiesparzustand, der Stromverbrauch ist über mehrere Durchläufe reproduzierbar, und Weckquellen sind beabsichtigt statt zufällig.
 
-**Fehlerbehebung:** Schwankt der Stromverbrauch zwischen den Messungen, prüfen Sie Fehler- und Wiederverbindungspfade, die Abschaltsequenz des Displays und das Beenden von Audiositzungen sowie alle nach dem Start angelegten Timer.
+**Fehlerbehebung:** Ist eine Messung unauffällig, eine spätere jedoch nicht, prüfen Sie Fehler- und Wiederverbindungspfade, die Abschaltsequenz des Displays und das Beenden von Audiositzungen sowie alle nach dem Start angelegten Timer.
 
-**Was Sie gelernt haben:** wie Sie von „sollte stromsparend sein“ zu nachgewiesenem Stromsparverhalten gelangen und eine PM-Anforderung finden, die versehentlich nicht aufgehoben wird.
+**Was Sie gelernt haben:** wie Sie von „sollte stromsparend sein“ zu nachgewiesenem Stromsparverhalten gelangen und eine PM-Anforderung aufspüren, die versehentlich nicht zurückgenommen wurde.
 
 ## OTA-Firmware-Updates über BLE hinzufügen { #add-ota-firmware-updates-over-ble }
 
@@ -46,8 +46,8 @@ Beispielpfade und unterstützte Boards können je nach SDK-Version variieren. Pr
 **Ausgangspunkt:** `example/ble/peripheral_with_ota`
 
 1. Bauen und flashen Sie das OTA-fähige Peripherie-Beispiel.
-2. Bestätigen Sie, dass normales BLE-Peripherieverhalten weiterhin funktioniert, bevor Sie ein Update versuchen.
-3. Lösen Sie ein OTA-Update aus und bestätigen Sie, dass das Gerät das neue Image bootet.
+2. Prüfen Sie vor dem Update, ob das normale BLE-Peripherieverhalten weiterhin funktioniert.
+3. Lösen Sie ein OTA-Update aus und prüfen Sie, ob das Gerät anschließend das neue Image startet.
 4. Testen Sie auf einem Gerät mit dokumentiertem Wiederherstellungsweg jeweils nur einen Unterbrechungsfall, etwa eine Trennung während der Übertragung oder das Verlassen der Funkreichweite. Unterbrechen Sie die Stromversorgung nur, wenn Board-Dokumentation und Wiederherstellungsdesign des Produkts den Test ausdrücklich als sicher ausweisen.
 5. Prüfen Sie, welches Verhalten das Produkt nach einem unterbrochenen oder abgelehnten Update tatsächlich implementiert, etwa Wiederholung, Fortsetzung, Wiederherstellungsmodus oder Rollback. Setzen Sie Rollback nur voraus, wenn es im Boot- und Partitionsdesign umgesetzt ist.
 6. Testen Sie OTA in drei Fällen: mit veralteten Bonding-Daten, nachdem Sie das Gerät auf dem Smartphone entfernt haben und nach einem Neustart des Geräts.
@@ -68,10 +68,10 @@ Beispielpfade und unterstützte Boards können je nach SDK-Version variieren. Pr
 **Ausgangspunkt:** der vorhandene Display-Treiber im SDK, der Ihrem Panel am nächsten kommt
 
 1. Beschaffen Sie das Panel-Datenblatt und ermitteln Sie Initialisierungssequenz, Timing-Parameter, Schnittstellentyp, Reset-Anforderungen und Einschaltsequenz.
-2. Bestätigen Sie, dass das gewählte SF32-Gerät und sein Gehäuse die erforderliche Schnittstelle und Pinbelegung unterstützen.
+2. Prüfen Sie, ob das gewählte SF32-Gerät und sein Gehäuse die erforderliche Schnittstelle und Pinbelegung unterstützen.
 3. Übernehmen Sie den ähnlichsten vorhandenen Display-Treiber und ersetzen Sie die panelspezifische Initialisierungssequenz und Registerbelegung.
 4. Testen Sie zuerst einfarbige Flächen. Debuggen Sie LVGL-Widgets erst, wenn das Panel einfache Muster korrekt anzeigt.
-5. Verifizieren Sie Farbreihenfolge, Byte-Reihenfolge, Ausrichtung, Adressfenster und das Verhalten bei partiellen Aktualisierungen.
+5. Prüfen Sie Farbreihenfolge, Byte-Reihenfolge, Ausrichtung, Adressfenster und das Verhalten bei partiellen Aktualisierungen.
 6. Binden Sie LVGL aus „Subsystemintegration“, Übung 2, wieder ein.
 7. Aktivieren Sie DMA, partielle Aktualisierung und ePicasso-Beschleunigung einzeln nacheinander, sofern der gewählte Chip, Displaypfad, Treiber und SDK diese Funktionen unterstützen.
 8. Testen Sie die Abläufe für Display aus, Schlafen, Aufwachen und erneute Initialisierung.
@@ -84,7 +84,7 @@ Beispielpfade und unterstützte Boards können je nach SDK-Version variieren. Pr
 
 ## CPU-Auslastung profilieren und einen Absturz analysieren { #profile-cpu-usage-and-analyze-a-crash }
 
-**Ziel:** Probleme debuggen, die sich unter einem live angeschlossenen Debugger nicht bequem reproduzieren lassen.
+**Ziel:** Probleme debuggen, die sich mit angeschlossenem Debugger nicht ohne Weiteres reproduzieren lassen.
 
 **Zeit:** 2 Stunden
 
@@ -118,7 +118,7 @@ Beispielpfade und unterstützte Boards können je nach SDK-Version variieren. Pr
 5. Ermitteln Sie mit dem SDK-Durchsatzbeispiel zunächst einen Referenzdurchsatz, bevor Sie die Ursache im Anwendungscode suchen.
 6. Testen Sie Wiederverbindungen, den Ruhezustand des Smartphones, den Verlust des Zubehörs und gleichzeitige Benachrichtigungsbursts.
 
-**Erfolgskriterien:** Alle vorgesehenen Rollen verbinden, trennen und verbinden sich zuverlässig erneut, und die Entscheidungen zu Verbindungsparametern bleiben unter kombinierter Aktivität stabil.
+**Erfolgskriterien:** Das Gerät kann in allen vorgesehenen Rollen zuverlässig Verbindungen herstellen, trennen und erneut aufbauen. Die gewählten Verbindungsparameter bleiben auch bei kombinierter Aktivität stabil.
 
 **Fehlerbehebung:** Achten Sie auf inkompatible Parameteranforderungen, zu viel Benachrichtigungsverkehr, blockierende Anwendungs-Callbacks und eine Energiesteuerung, die die Haupt-CPU bei jedem Verbindungsereignis aufweckt.
 
@@ -135,12 +135,12 @@ Beispielpfade und unterstützte Boards können je nach SDK-Version variieren. Pr
 1. Prüfen Sie, wie das SDK Board-Definitionen, Pin-Muxing, Takte und Peripherietreiber organisiert.
 2. Beginnen Sie mit dem vorhandenen Treiber, der Ihrer Peripherie architektonisch am nächsten kommt.
 3. Halten Sie Buszugriff, Geräteregistrierung, Konfiguration und Anwendungslogik getrennt.
-4. Registrieren Sie das Gerät und bestätigen Sie, dass es unter `list_device` erscheint.
+4. Registrieren Sie das Gerät und prüfen Sie, ob es unter `list_device` erscheint.
 5. Testen Sie es auf dieselbe Weise, wie Sie ADC-, PWM-, I2C- und Speichergeräte in früheren Tutorials getestet haben.
 6. Ergänzen Sie die Fehlerbehandlung für fehlende Hardware, ungültige Argumente, Zeitüberschreitungen und Suspend/Resume.
 7. Falls der Treiber wiederverwendbar ist, verpacken Sie ihn als SDK-Komponente, statt ihn zwischen Produkten zu kopieren.
 
-**Erfolgskriterien:** Der Anwendungscode kann den Treiber über das normale RT-Thread-Gerätemodell finden und verwenden, und der Treiber verhält sich über Init-, Nutzungs-, Fehler- und Sleep-/Wake-Pfade hinweg vorhersehbar.
+**Erfolgskriterien:** Der Anwendungscode kann den Treiber über das normale RT-Thread-Gerätemodell finden und verwenden. Bei Initialisierung, Betrieb, Fehlern und Sleep-/Wake-Übergängen verhält sich der Treiber vorhersehbar.
 
 **Fehlerbehebung:** Wenn der Treiber nur aus einer Anwendungsdatei heraus funktioniert, umgeht er wahrscheinlich das Gerätemodell. Refaktorieren Sie ihn, bis er sich wie die eingebauten Geräte anfühlt.
 
@@ -158,4 +158,4 @@ Beispielpfade und unterstützte Boards können je nach SDK-Version variieren. Pr
 
 ## Wie es weitergeht { #where-to-go-next }
 
-Damit verfügen Sie über das vollständige Werkzeugset: Peripherie, Middleware, Verständnis für Koexistenz, konsequentes Energiemanagement, OTA, Inbetriebnahme eigener Hardware, Post-Mortem-Debugging und Treiberintegration. Der [Beispiele-Katalog](../../develop/examples/index.md) und die [Grafikübersicht](../../learn/graphics/overview.md) dienen Ihnen anschließend als laufende Referenzen. Schlagen Sie dort gezielt nach, statt die Inhalte der Reihe nach durchzuarbeiten.
+Damit verfügen Sie über das nötige Werkzeugset: Peripherie, Middleware, Koexistenztests, konsequentes Energiemanagement, OTA, Inbetriebnahme eigener Hardware, Absturzanalyse und Treiberintegration. Der [Beispiele-Katalog](../../develop/examples/index.md) und die [Grafikübersicht](../../learn/graphics/overview.md) dienen Ihnen anschließend als laufende Referenzen. Schlagen Sie dort gezielt nach, statt die Inhalte der Reihe nach durchzuarbeiten.

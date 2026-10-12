@@ -12,7 +12,7 @@ tags:
 
 ## 1. Aperçu { #1-overview }
 
-**SF32LB52-MOD-1** est un module MCU Bluetooth basse consommation certifié, à usage général, construit autour de la puce SF32LB525UC6 de SiFli (Arm Cortex-M33 STAR-MC1 double cœur, jusqu'à 240 MHz). Il intègre un quartz de 48 MHz, un quartz optionnel de 32,768 kHz et une puce nue OPI-PSRAM de 64 Mb optionnelle, intégrée dans le même boîtier. Le module CMS comporte 68 broches et mesure 27,9 × 18,0 × 3,1 mm.
+**SF32LB52-MOD-1** est un module Bluetooth à microcontrôleur basse consommation certifié et polyvalent, construit autour de la puce SF32LB525UC6 de SiFli (Arm Cortex-M33 STAR-MC1 double cœur, jusqu'à 240 MHz). Il intègre un quartz de 48 MHz, un quartz optionnel de 32,768 kHz et, en option, une puce nue OPI-PSRAM de 64 Mb dans le même boîtier monté en surface, qui comporte 68 broches et mesure 27,9 × 18,0 × 3,1 mm.
 
 Ce guide traite de l'intégration matérielle du module : définition des broches, interfaces périphériques, caractéristiques électriques, exigences d'alimentation, schémas de référence, liste de contrôle du schéma, dimensions mécaniques, empreinte PCB et précautions de manipulation. Il s'appuie sur la fiche technique SiFli **DS5203-SF32LB52-MOD-1 V0.3**.
 
@@ -31,7 +31,7 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système m�
 
 | Code du module | Flash | PSRAM | Température | Dimensions (mm) |
 | :--- | :--- | :--- | :--- | :--- |
-| SF32LB52-MOD-1-N16R8 | QSPI-NOR 16 Mo | OPI-PSRAM 8 Mo | -40~85°C | 27,9 × 18,0 × 3,1 |
+| SF32LB52-MOD-1-N16R8 | QSPI-NOR 16 Mo | OPI-PSRAM 8 Mo | −40 à 85 °C | 27,9 × 18,0 × 3,1 |
 
 </div>
 
@@ -47,18 +47,18 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système m�
 | Cœur basse consommation (LCPU) | Arm Cortex-M33 STAR-MC1, jusqu'à 24 MHz, 64 Ko de SRAM |
 | Sans fil | Bluetooth 5.3 double mode avec BLE Audio |
 | Graphisme | Moteur ePicasso 2.0 2D/2.5D, jusqu'à 512×512, décompression sans perte eZip 2.0 |
-| Audio | 1x DAC audio 24 bits, 1x ADC audio Sigma-Delta 24 bits |
-| Stockage | OPI-PSRAM en boîtier optionnelle (144 MHz) ; 1x MPI externe (QSPI) ; 1x SD/SDIO/eMMC |
+| Audio | 1 × DAC audio 24 bits, 1 × ADC audio Sigma-Delta 24 bits |
+| Stockage | OPI-PSRAM en boîtier optionnelle (144 MHz) ; 1 × MPI externe (QSPI) ; 1 × SD/SDIO/eMMC |
 | Boîtier | 68 broches, 27,9 × 18,0 × 3,1 mm |
 | Alimentation | VSYS 3,2–4,7 V (Li-ion) ou 3,7–4,7 V (DCDC/LDO, 3,8 V recommandé) |
 | Antenne | Antenne PCB embarquée, ou externe via connecteur IPEX (selon référence commerciale) |
-| Température de fonctionnement | -40 à 85°C |
+| Température de fonctionnement | −40 à 85 °C |
 
 </div>
 
 ## 3. Schéma fonctionnel { #3-functional-block-diagram }
 
-Le module intègre la puce SF32LB525UC6, un quartz de 48 MHz et un quartz optionnel de 32,768 kHz. Sur ce SKU, il intègre également une puce OPI-PSRAM de 64 Mb dans le boîtier, ainsi qu'un réseau d'adaptation RF et une ligne RF d'alimentation de l'antenne.
+Le module intègre la puce SF32LB525UC6, un quartz de 48 MHz et un quartz optionnel de 32,768 kHz. Sur ce SKU, il intègre également une puce OPI-PSRAM de 64 Mb dans le boîtier, ainsi qu'un réseau d'adaptation RF et une ligne d'alimentation RF pour l'antenne.
 
 !!! info "Figure 3-1 : Schéma fonctionnel"
     Voir la Figure 2-1 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
@@ -255,14 +255,14 @@ VDD est le rail d'alimentation des E/S ; VOH/VOL sont mesurées sous charge haut
 
 | Mode | Intervalle | @0dBm | @4dBm | @10dBm | Unité |
 | :--- | :-: | :-: | :-: | :-: | :-: |
-| BT Sniff (tentative=1) | 50ms | 129,5 | 135,6 | 160,9 | µA |
-| BT Sniff (tentative=1) | 1s | 6,0 | 6,3 | 7,6 | µA |
-| BLE ADV | 50ms | 171,6 | 217,6 | 298,3 | µA |
-| BLE ADV | 1s | 8,9 | 9,5 | 17,0 | µA |
-| Connexion BLE | 50ms | 95,0 | 105,0 | 118,7 | µA |
-| Connexion BLE | 1s | 4,1 | 4,6 | 9,1 | µA |
-| Scan (Inquiry ou Page) | — | 33,4 | — | — | µA |
-| Both Scan | — | 67,3 | — | — | µA |
+| BT Sniff (tentative=1) | 50 ms | 129,5 | 135,6 | 160,9 | µA |
+| BT Sniff (tentative=1) | 1 s | 6,0 | 6,3 | 7,6 | µA |
+| BLE ADV | 50 ms | 171,6 | 217,6 | 298,3 | µA |
+| BLE ADV | 1 s | 8,9 | 9,5 | 17,0 | µA |
+| Connexion BLE | 50 ms | 95,0 | 105,0 | 118,7 | µA |
+| Connexion BLE | 1 s | 4,1 | 4,6 | 9,1 | µA |
+| Balayage (Inquiry ou Page) | — | 33,4 | — | — | µA |
+| Balayage combiné (Both Scan) | — | 67,3 | — | — | µA |
 | Veille | — | 20,0 | — | — | µA |
 
 </div>
@@ -326,7 +326,7 @@ Utilisez ces éléments comme point de départ pour un schéma de production et 
 | :-: | :--- |
 | 1 | VSYS peut se connecter directement à une batterie Li-ion ; si alimenté via DCDC/LDO, 3,8 V est recommandé. VBATS est la broche de détection de tension batterie (plage 0–4,7 V) — n'utilisez pas de pont diviseur résistif externe ; connectez directement le signal à mesurer à VBATS. |
 | 2 | Placez un condensateur 4,7 µF et un condensateur 0,1 µF près de la broche VSYS. |
-| 3 | Placez un condensateur 0,1 µF près de la broche VBATS. |
+| 3 | Placez un condensateur de 0,1 µF près de la broche VBATS. |
 | 4 | VDD33_VOUT2 est la sortie du LDO 3,3 V, courant max 150 mA — ne dépassez pas cette valeur avec la charge externe. |
 | 5 | La capacité totale sur VDD33_VOUT2 doit être ≤ 7,4 µF. |
 | 6 | Le niveau logique de l'interface IO du module est 3,3 V — tout périphérique connecté doit également utiliser des niveaux logiques 3,3 V. |
@@ -336,8 +336,8 @@ Utilisez ces éléments comme point de départ pour un schéma de production et 
 | 10 | Les broches marquées `#GPADC_CHx` dans le tableau des broches prennent en charge une entrée analogique dans la plage 0–3,3 V. |
 | 11 | Les broches marquées `PAxx_TIM` dans le tableau des broches prennent en charge une sortie PWM. |
 | 12 | PA34 prend en charge un reset par appui long de 10 secondes, actif haut ; ajoutez une résistance de tirage vers le bas de 10 kΩ dans la conception. |
-| 13 | Réservez des composants de protection ESD pour les interfaces batterie et panneau tactile (TP), ainsi que pour les autres signaux exposés à l'extérieur si nécessaire. |
-| 14 | Il est recommandé de placer une résistance série de 100 Ω sur chacun des signaux PA18/PA19 lorsqu'ils sont multiplexés en DBG_UART pour la programmation et le débogage. |
+| 13 | Réservez des composants de protection ESD pour les interfaces de batterie et d'écran tactile (TP), ainsi que pour les autres interfaces exposées à l'extérieur, si nécessaire. |
+| 14 | Placez une résistance série de 100 Ω sur chacun des signaux PA18/PA19 lorsqu'ils sont multiplexés en DBG_UART pour la programmation et le débogage. |
 
 </div>
 
@@ -389,9 +389,9 @@ Pratique recommandée :
 
 ### 11.1 Conditions de stockage { #111-storage-conditions }
 
-- Stockez les produits scellés dans un sac barrière anti-humidité (MBB) à <40°C / 90 % HR, sans condensation.
+- Stockez les produits scellés dans un sac barrière anti-humidité (MBB) à <40 °C / 90 % HR, sans condensation.
 - Niveau de sensibilité à l'humidité du module (MSL) : 3.
-- Après ouverture du sac sous vide, utilisez le module dans les 168 heures à 25±5°C / 60 % HR ; au-delà, il doit être étuvé avant sa réintroduction dans la ligne de production.
+- Après ouverture du sac sous vide, utilisez le module dans les 168 heures à 25 ± 5 °C / 60 % HR ; au-delà, il doit être étuvé avant sa réintroduction dans la ligne de production.
 
 ### 11.2 Décharge électrostatique (ESD) { #112-electrostatic-discharge-esd }
 

@@ -155,7 +155,7 @@ void loop() {
 
 ## Dépannage { #troubleshooting }
 
-<div align="center"><em>Tableau : Dépannage</em></div>
+<div align="center"><em>Tableau : dépannage</em></div>
 
 <div align="center" markdown>
 

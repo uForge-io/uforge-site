@@ -8,7 +8,7 @@ tags:
 
 # Beispiele { #examples }
 
-Beginnen Sie mit Beispielen. SF32-Firmware entsteht meist schneller, wenn Sie ein funktionierendes boardspezifisches Beispiel anpassen, statt jedes Subsystem von Grund auf neu zu erstellen.
+Beginnen Sie mit einem passenden Beispiel. Die Entwicklung von SF32-Firmware geht meist schneller, wenn Sie ein funktionierendes boardspezifisches Beispiel anpassen, statt jedes Subsystem von Grund auf neu zu erstellen.
 
 Das kleinste Beispiel ist nicht automatisch das beste. Wählen Sie eines, das bereits den anspruchsvollsten Teil Ihres Produkts enthält: Bluetooth-Profil, Display, Audio-Signalweg, Dateisystem, OTA, USB, Energiesparzustand oder KI-Beschleuniger.
 
@@ -22,11 +22,11 @@ Das kleinste Beispiel ist nicht automatisch das beste. Wählen Sie eines, das be
 |:-----|:-----------|
 | Erstinbetriebnahme | `example/get-started/hello_world/rtt/project` |
 | LED-Blinken / GPIO | `example/get-started/blink/rtt` oder GPIO-Beispiele aus HAL und RT-Device. |
-| Bluetooth | BLE-, BT-Classic-, LE-Audio-, Durchsatz-, Beacon-, OTA- und Profil-Beispiele. Beginnen Sie mit der Aufgabenübersicht [Bluetooth-SDK-Beispiele](../../learn/bluetooth/bluetooth-sdk-examples.md). |
-| Grafik | LVGL-Demos, Design-Tool-Integrationen, Widgets, komprimierte Assets, Animation/Medien und Beispiele für bestimmte Displays. Beginnen Sie mit der Aufgabenübersicht [LVGL-SDK-Beispiele](../../learn/graphics/lvgl-sdk-examples.md). |
-| Audio | Wiedergabe, Aufnahme, PDM-Erfassung, Codec, Opus, MP3, Mischen und USB-Audio, sofern unterstützt. Beginnen Sie mit der Aufgabenübersicht [Audio-SDK-Beispiele](../../learn/audio/audio-sdk-examples.md). |
+| Bluetooth | BLE-, BT-Classic-, LE-Audio-, Durchsatz-, Beacon-, OTA- und Profilbeispiele. Beginnen Sie mit der Aufgabenübersicht [Bluetooth-SDK-Beispiele](../../learn/bluetooth/bluetooth-sdk-examples.md). |
+| Grafik | LVGL-Demos, Design-Tool-Integrationen, Widgets, komprimierte Assets, Animationen, Medien und Beispiele für bestimmte Displays. Beginnen Sie mit der Aufgabenübersicht [LVGL-SDK-Beispiele](../../learn/graphics/lvgl-sdk-examples.md). |
+| Audio | Wiedergabe, Aufnahme, PDM-Erfassung, Codec, Opus, MP3, Audiomischung und USB-Audio, sofern unterstützt. Beginnen Sie mit der Aufgabenübersicht [Audio-SDK-Beispiele](../../learn/audio/audio-sdk-examples.md). |
 | Energiesparen | Beispiele zu PM-Zuständen, GPIO, Prozessor, Bluetooth, Display, UI und Wearable-Szenarien. Beginnen Sie mit der Aufgabenübersicht [Energiesparbeispiele des SiFli-SDK](../../learn/low-power/low-power-sdk-examples.md). |
-| Speicher | Dateisystem-, Flash-, SD- und Partitions-Beispiele. |
+| Speicher | Beispiele zu Dateisystemen, Flash, SD und Partitionen. |
 | USB | CherryUSB-Device- und -Host-Beispiele. |
 | KI | NNACC-HAL- und RT-Device-Beispiele. |
 
@@ -42,12 +42,12 @@ Verwenden Sie diese Tabelle, nachdem Sie den relevanten Bereich ausgewählt habe
 
 | Entwicklungsziel | Repräsentativer SDK-Ausgangspunkt | Was zuerst zu prüfen ist | Weiter mit |
 |:---|:---|:---|:---|
-| GPIO-Ausgabe oder -Eingabe | `example/hal/gpio`, `example/rt_device/gpio` | Korrektes Pin-Mux, Polarität und Interrupt-Verhalten auf dem tatsächlichen Board. | [Einstieg in die Peripherie](../../getting-started/tutorials/beginner.md) |
+| GPIO-Ausgabe oder -Eingabe | `example/hal/gpio`, `example/rt_device/gpio` | Korrekte Pin-Multiplex-Konfiguration, Polarität und Interrupt-Verhalten auf dem konkreten Board. | [Einstieg in die Peripherie](../../getting-started/tutorials/beginner.md) |
 | Konsole und Systemprüfung | `example/system/finsh` | Serielle Konsole, Logs und grundlegende Laufzeitprüfung. | [Einstieg in die Peripherie](../../getting-started/tutorials/beginner.md) |
 | ADC, PWM oder RTC | `example/hal/adc`, `example/rt_device/pwm`, `example/rt_device/rtc` | Board-spezifische Pin-, Takt- und Peripheriekonfiguration. | [Einstieg in die Peripherie](../../getting-started/tutorials/beginner.md) |
 | I2C-Sensor | `example/hal/i2c/master`, `example/rt_device/i2c/eeprom` | Elektrischer Anschluss, Busadressierung und zuverlässige wiederholte Übertragungen. | [Subsystemintegration](../../getting-started/tutorials/intermediate.md) |
 | LVGL und lokales Display | `example/multimedia/lvgl/lvgl_v8_examples` | Panel-Initialisierung, Pixelformat und ein stabiler Flush-Pfad, bevor komplexe Ansichten erstellt werden. | [Grafikübersicht](../../learn/graphics/overview.md), [Display-Controller](../../learn/graphics/display-controller.md) |
-| GATT-Dienst im BLE-Peripheral-Modus | `example/ble/peripheral`, `example/ble/hrpc` | Advertising, Verbindung, eine GATT-Charakteristik und Wiederverbindungsverhalten. | [Bluetooth-Übersicht](../../learn/bluetooth/overview.md) |
+| BLE-Peripheral-Dienst | `example/ble/peripheral`, `example/ble/hrpc` | Advertising, Verbindung, eine GATT-Charakteristik und Wiederverbindungsverhalten. | [Bluetooth-Übersicht](../../learn/bluetooth/overview.md) |
 | Lokale Audiowiedergabe | `example/multimedia/audio/local_music`, `mp3_sd_player` | Codec-/Board-Pfad, Pufferstabilität und Aufräumen nach der Wiedergabe. | [Audioübersicht](../../learn/audio/overview.md) |
 | Flash-Speicher | `example/storage/littlefs/nor`, `example/storage/flashdb` | Einhängen, Lese-/Schreibverhalten und Wiederherstellung nach einem Reset oder bei vollem Speicher. | [Subsystemintegration](../../getting-started/tutorials/intermediate.md) |
 | Energiesparverhalten | `example/pm/classical`, `example/pm/raise_wrist` | Gemessener Strom in benannten Zuständen und korrektes Verhalten der Weckquellen. | [Energiesparendes Design im Überblick](../../learn/low-power/overview.md) |
@@ -56,7 +56,7 @@ Verwenden Sie diese Tabelle, nachdem Sie den relevanten Bereich ausgewählt habe
 
 </div>
 
-## Wie man ein Beispiel auswählt { #how-to-choose-an-example }
+## So wählen Sie ein Beispiel aus { #how-to-choose-an-example }
 
 Gehen Sie in dieser Reihenfolge vor:
 
@@ -93,11 +93,11 @@ Dokumentieren Sie für jedes Beispiel, das zur Produktbasis wird:
 
 ## Regel zur Beispielauswahl { #example-selection-rule }
 
-Wählen Sie das Beispiel, das zum am stärksten eingeschränkten Teil des Produkts passt:
+Wählen Sie das Beispiel für das Subsystem mit den strengsten technischen Randbedingungen:
 
 - Bei Bluetooth-Produkten mit dem nächstliegenden Profil beginnen.
 - Bei Display-Produkten mit dem Display- und LVGL-Pfad beginnen.
-- Bei Akku-Produkten mit einem Energiesparbeispiel beginnen.
+- Bei akkubetriebenen Produkten mit einem Energiesparbeispiel beginnen.
 - Bei OTA-Produkten mit dem Update-Ablauf und dem Partitionslayout beginnen.
 
 Fügen Sie dann die übrigen Subsysteme nacheinander hinzu.

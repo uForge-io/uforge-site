@@ -2,7 +2,7 @@
 icon: lucide/layers
 hide:
     - navigation
-description: "Pautas de diseño de PCB para el MCU SF32LB58x: huella del encapsulado, apilado de capas, fanout y trazado de reloj, RF, audio, USB, SDIO, DSI y alimentación."
+description: "Pautas de diseño de PCB para la MCU SF32LB58x: huella del encapsulado, apilado de capas, fanout y trazado de reloj, RF, audio, USB, SDIO, DSI y alimentación."
 tags:
     - Hardware
     - Chip
@@ -92,7 +92,7 @@ Las pistas de las dos primeras filas de bolas BGA salen por la capa superior; la
 
 ### 6.5. Trazado de la interfaz de reloj { #65-clock-interface-routing }
 
-Coloque el cristal dentro de una cubierta de apantallamiento, a más de 1 mm del borde de la PCB y lo más lejos posible de los componentes que generan calor —como el PA, el circuito de carga y el PMU—, idealmente a más de 5 mm, para evitar que afecten al desplazamiento de frecuencia del cristal. Mantenga una distancia superior a 0,25 mm entre la zona de exclusión del cristal y otros metales o componentes.
+Coloque el cristal dentro de una cubierta de apantallamiento, a más de 1 mm del borde de la PCB y lo más lejos posible de los componentes que generan calor —como el PA, el circuito de carga y la PMU—, idealmente a más de 5 mm, para evitar que afecten al desplazamiento de frecuencia del cristal. Mantenga una distancia superior a 0,25 mm entre la zona de exclusión del cristal y otros metales o componentes.
 
 Trace el cristal de 48 MHz en la capa superior, con una longitud de 3–10 mm y un ancho de pista de 0,075 mm, y aplíquele apantallamiento 3D completo. Aléjelo de VBAT, DC/DC y las líneas de señal de alta velocidad. No trace otras señales por la capa superior ni por la capa adyacente bajo la zona del cristal de 48 MHz.
 
@@ -105,9 +105,9 @@ Trace el cristal de 32,768 kHz en la capa superior, con una longitud ≤10 mm, u
 
 <div align="center"><em>Figura 6.5-1: Colocación del cristal</em></div>
 
-![Figura 6.5-2: Esquema del cristal de 48 MHz](../../sf32-products/chips/assets/58x/sf32lb58x-48M-SCH.png){ width="100%" loading="lazy" }
+![Figura 6.5-2: Esquemático del cristal de 48 MHz](../../sf32-products/chips/assets/58x/sf32lb58x-48M-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 6.5-2: Esquema del cristal de 48 MHz</em></div>
+<div align="center"><em>Figura 6.5-2: Esquemático del cristal de 48 MHz</em></div>
 
 ![Figura 6.5-3: Modelo de trazado del cristal de 48 MHz](../../sf32-products/chips/assets/58x/sf32lb58x-48M-M-PCB.png){ width="100%" loading="lazy" }
 
@@ -117,9 +117,9 @@ Trace el cristal de 32,768 kHz en la capa superior, con una longitud ≤10 mm, u
 
 <div align="center"><em>Figura 6.5-4: Referencia de trazado del cristal de 48 MHz</em></div>
 
-![Figura 6.5-5: Esquema del cristal de 32,768 kHz](../../sf32-products/chips/assets/58x/sf32lb58x-32K-SCH.png){ width="100%" loading="lazy" }
+![Figura 6.5-5: Esquemático del cristal de 32,768 kHz](../../sf32-products/chips/assets/58x/sf32lb58x-32K-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 6.5-5: Esquema del cristal de 32,768 kHz</em></div>
+<div align="center"><em>Figura 6.5-5: Esquemático del cristal de 32,768 kHz</em></div>
 
 ![Figura 6.5-6: Modelo de trazado del cristal de 32,768 kHz](../../sf32-products/chips/assets/58x/sf32lb58x-32K-M-PCB.png){ width="100%" loading="lazy" }
 
@@ -133,27 +133,27 @@ Trace el cristal de 32,768 kHz en la capa superior, con una longitud ≤10 mm, u
 
 Coloque el circuito de adaptación RF lo más cerca posible del chip, no junto a la antena. Sitúe el condensador de desacoplo de alimentación RF AVDD_BRF lo más cerca posible del pin del chip y conecte sus vías de tierra directamente al plano GND principal.
 
-Cuando sea posible, trace las pistas RF en la capa superior para evitar vías que degraden el rendimiento; se recomienda un ancho de pista superior a 10 mil. Aplique apantallamiento 3D completo y evite ángulos agudos o rectos. Añada vías de tierra de apantallamiento a ambos lados de la pista RF y controla su impedancia a 50 Ω. Mantenga DC-DC, VBAT y las señales digitales de alta velocidad —como el cristal, los relojes de alta frecuencia y las señales de interfaz I2C/SPI/SDIO/I2S/UART— fuera de la zona de trazado RF. AVSS_RRF, AVSS_TRF, AVSS_TRF2, AVSS_VCO y AVSS_BB son pines de tierra del circuito RF y deben conectarse correctamente a tierra; coloque vías ciegas directamente en sus pads para conectarlos a la tierra principal.
+Cuando sea posible, trace las pistas RF en la capa superior para evitar vías que degraden el rendimiento; se recomienda un ancho de pista superior a 10 mil. Aplique apantallamiento 3D completo y evite ángulos agudos o rectos. Añada vías de tierra de apantallamiento a ambos lados de la pista RF y controle su impedancia a 50 Ω. Mantenga DC-DC, VBAT y las señales digitales de alta velocidad —como el cristal, los relojes de alta frecuencia y las señales de interfaz I2C/SPI/SDIO/I2S/UART— fuera de la zona de trazado RF. AVSS_RRF, AVSS_TRF, AVSS_TRF2, AVSS_VCO y AVSS_BB son pines de tierra del circuito RF y deben conectarse correctamente a tierra; coloque vías ciegas directamente en sus pads para conectarlos a la tierra principal.
 
-![Figura 6.6-1: Esquema de la red π y del circuito de alimentación](../../sf32-products/chips/assets/58x/sf32lb58x-%CF%80-SCH.png){ width="100%" loading="lazy" }
+![Figura 6.6-1: Esquemático de la red π y del circuito de alimentación](../../sf32-products/chips/assets/58x/sf32lb58x-%CF%80-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 6.6-1: Esquema de la red π y del circuito de alimentación</em></div>
+<div align="center"><em>Figura 6.6-1: Esquemático de la red π y del circuito de alimentación</em></div>
 
 ![Figura 6.6-2: Diseño de PCB de la red π y del circuito de alimentación](../../sf32-products/chips/assets/58x/sf32lb58x-%CF%80-PCB.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 6.6-2: Diseño de PCB de la red π y del circuito de alimentación</em></div>
 
-![Figura 6.6-3: Esquema del circuito de señal RF](../../sf32-products/chips/assets/58x/sf32lb58x-RF-R-SCH.png){ width="100%" loading="lazy" }
+![Figura 6.6-3: Esquemático del circuito de señal RF](../../sf32-products/chips/assets/58x/sf32lb58x-RF-R-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 6.6-3: Esquema del circuito de señal RF</em></div>
+<div align="center"><em>Figura 6.6-3: Esquemático del circuito de señal RF</em></div>
 
 ![Figura 6.6-4: Trazado de señal RF en la PCB](../../sf32-products/chips/assets/58x/sf32lb58x-RF-R-PCB.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 6.6-4: Trazado de señal RF en la PCB</em></div>
 
-![Figura 6.6-5: Esquema de tierra del circuito RF](../../sf32-products/chips/assets/58x/sf32lb58x-RF-VSS-SCH.png){ width="100%" loading="lazy" }
+![Figura 6.6-5: Esquemático de tierra del circuito RF](../../sf32-products/chips/assets/58x/sf32lb58x-RF-VSS-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 6.6-5: Esquema de tierra del circuito RF</em></div>
+<div align="center"><em>Figura 6.6-5: Esquemático de tierra del circuito RF</em></div>
 
 ![Figura 6.6-6: Tierra del circuito RF en la PCB](../../sf32-products/chips/assets/58x/sf32lb58x-RF-VSS-PCB.png){ width="100%" loading="lazy" }
 
@@ -170,25 +170,25 @@ AU_DAC1P/AU_DAC1N y AU_DAC2P/AU_DAC2N son los dos pares de salida analógica. Co
 !!! warning "Las fuentes discrepan sobre la longitud máxima de las pistas DAC"
     La guía de PCB limita la longitud de las pistas DAC a menos de 2 mm, mientras que el libro de trabajo de la lista de comprobación indica menos de 2 cm (20 mm). Los límites difieren por un factor de diez. No elija ni sustituya un límite sin confirmarlo con SiFli.
 
-![Figura 6.7-1: Esquema de alimentación de audio](../../sf32-products/chips/assets/58x/sf32lb58x-AU-PWR-SCH.png){ width="100%" loading="lazy" }
+![Figura 6.7-1: Esquemático de alimentación de audio](../../sf32-products/chips/assets/58x/sf32lb58x-AU-PWR-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 6.7-1: Esquema de alimentación de audio</em></div>
+<div align="center"><em>Figura 6.7-1: Esquemático de alimentación de audio</em></div>
 
 ![Figura 6.7-2: Diseño de PCB del filtrado de alimentación de audio](../../sf32-products/chips/assets/58x/sf32lb58x-AU-PWR-PCB.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 6.7-2: Diseño de PCB del filtrado de alimentación de audio</em></div>
 
-![Figura 6.7-3: Esquema de entrada de audio analógico](../../sf32-products/chips/assets/58x/sf32lb58x-AUADC-SCH.png){ width="100%" loading="lazy" }
+![Figura 6.7-3: Esquemático de entrada de audio analógico](../../sf32-products/chips/assets/58x/sf32lb58x-AUADC-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 6.7-3: Esquema de entrada de audio analógico</em></div>
+<div align="center"><em>Figura 6.7-3: Esquemático de entrada de audio analógico</em></div>
 
 ![Figura 6.7-4: Diseño de PCB de entrada de audio analógico](../../sf32-products/chips/assets/58x/sf32lb58x-AUADC-PCB.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 6.7-4: Diseño de PCB de entrada de audio analógico</em></div>
 
-![Figura 6.7-5: Esquema de salida de audio analógico](../../sf32-products/chips/assets/58x/sf32lb58x-AUDAC-SCH.png){ width="100%" loading="lazy" }
+![Figura 6.7-5: Esquemático de salida de audio analógico](../../sf32-products/chips/assets/58x/sf32lb58x-AUDAC-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 6.7-5: Esquema de salida de audio analógico</em></div>
+<div align="center"><em>Figura 6.7-5: Esquemático de salida de audio analógico</em></div>
 
 ![Figura 6.7-6: Diseño de PCB de salida de audio analógico](../../sf32-products/chips/assets/58x/sf32lb58x-AUDAC-PCB.png){ width="100%" loading="lazy" }
 
@@ -198,9 +198,9 @@ AU_DAC1P/AU_DAC1N y AU_DAC2P/AU_DAC2N son los dos pares de salida analógica. Co
 
 Coloque el condensador de desacoplo AVDD33_USB y la resistencia de calibración USB2_REXT cerca de sus respectivos pines. Las pistas USB deben pasar por los pines del componente de protección ESD antes de llegar al chip, y el pin de tierra de dicho componente debe conectarse bien a la tierra principal. Trace USB DP/DN como un par diferencial con impedancia diferencial controlada a 90 Ω y apantallamiento 3D.
 
-![Figura 6.8-1: Esquema de señal USB](../../sf32-products/chips/assets/58x/sf32lb58x-USBS-SCH.png){ width="100%" loading="lazy" }
+![Figura 6.8-1: Esquemático de señal USB](../../sf32-products/chips/assets/58x/sf32lb58x-USBS-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 6.8-1: Esquema de señal USB</em></div>
+<div align="center"><em>Figura 6.8-1: Esquemático de señal USB</em></div>
 
 ![Figura 6.8-2: Diseño de PCB de señal USB](../../sf32-products/chips/assets/58x/sf32lb58x-USBS-PCB.png){ width="100%" loading="lazy" }
 
@@ -255,7 +255,7 @@ Coloque el inductor de alimentación DC-DC y los condensadores de desacoplo cerc
 
 ### 6.12. Trazado de la alimentación { #612-power-supply-routing }
 
-PVDD1 y PVDD2 son las entradas de alimentación del módulo PMU integrado. Coloque sus condensadores de desacoplo cerca de los pines y use pistas lo más anchas posible; nunca menos de 0,5 mm. PVSS1 y PVSS2 son pines de tierra del módulo PMU y deben conectarse a la tierra principal mediante vías. No los deje flotantes, ya que afectaría al rendimiento general del PMU.
+PVDD1 y PVDD2 son las entradas de alimentación del módulo PMU integrado. Coloque sus condensadores de desacoplo cerca de los pines y use pistas lo más anchas posible; nunca menos de 0,5 mm. PVSS1 y PVSS2 son pines de tierra del módulo PMU y deben conectarse a la tierra principal mediante vías. No los deje flotantes, ya que afectaría al rendimiento general de la PMU.
 
 ![Figura 6.12-1: Diagrama del circuito DC-DC](../../sf32-products/chips/assets/58x/sf32lb58x-DCDC-R-SCH.png){ width="100%" loading="lazy" }
 
@@ -326,7 +326,7 @@ Coloque los puntos de prueba de las líneas de carga USB antes del diodo TVS y s
 
 <div align="center"><em>Figura 6.17-2: Referencia de trazado del TVS</em></div>
 
-Para evitar que la máscara de soldadura cubra los pads y preservar la fiabilidad de las uniones, las vías de los pads BGA deben quedar centradas en la bola; no las desplace. Para mejorar el rendimiento de fabricación, consulta las figuras de referencia de conexión de bolas BGA.
+Para evitar que la máscara de soldadura cubra los pads y preservar la fiabilidad de las uniones, las vías de los pads BGA deben quedar centradas en la bola; no las desplace. Para mejorar el rendimiento de fabricación, consulte las figuras de referencia de conexión de bolas BGA.
 
 ![Figura 6.17-3: Referencia de colocación de vías BGA](../../sf32-products/chips/assets/58x/sf32lb58x-BGA-VIA-PCB.png){ width="100%" loading="lazy" }
 

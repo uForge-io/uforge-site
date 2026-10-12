@@ -38,7 +38,7 @@ Die Variante N4 eignet sich für kompakte Steuerungen, Bluetooth und einfache UI
 
 **Quellenabweichung — vor der Auswahl prüfen:** Der [ausführliche Nano-Board-Leitfaden](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html) von SiFli nennt seine Konfiguration mit 16 MB OPI-PSRAM + 16 MB NOR `R16N16 V1.0.0`; der [aktuelle Modellleitfaden für Entwicklungsboards](https://wiki.sifli.com/en/board/devkit_guide.html) führt dieselbe Speicherkonfiguration als `N16R16` auf und listet `A128R16` mit 16 MB OPI-PSRAM + 128 MB QSPI-NAND separat. Der ausführliche Leitfaden beschreibt A128R16 nicht gesondert. Verlassen Sie sich für diese SKU auf den Eintrag im Modellleitfaden, statt Angaben aus der Beschreibung des N16R16-Boards zu übertragen. Prüfen Sie vor der Wahl von Firmware oder Speicherlayout die Kennzeichnung des Boards sowie den aktuellen Schaltplan bzw. die Stückliste.
 
-Auch bei den Abmessungen des Nano-Boards weichen die SiFli-Quellen leicht voneinander ab: Der ausführliche Leitfaden nennt 21 × 51 mm, der Modellleitfaden 51 × 20,32 mm. Die Seite von 51 mm stimmt überein, die kürzere Abmessung unterscheidet sich um 0,68 mm. Diese Seite verwendet den genaueren Wert des Modellleitfadens; prüfen Sie die mechanische Zeichnung der konkreten Board-Revision, bevor Sie Gehäuse oder Trägerplatine entwerfen.
+Auch bei den Abmessungen des Nano-Boards weichen die SiFli-Quellen leicht voneinander ab: Der ausführliche Leitfaden nennt 21 × 51 mm, der Modellleitfaden 51 × 20,32 mm. Die längere Abmessung von 51 mm stimmt überein, die kürzere unterscheidet sich um 0,68 mm. Diese Seite verwendet den genaueren Wert des Modellleitfadens; prüfen Sie die mechanische Zeichnung der konkreten Board-Revision, bevor Sie Gehäuse oder Trägerplatine entwerfen.
 
 ## Highlights des Boards { #board-highlights }
 
@@ -60,10 +60,10 @@ Wählen Sie das SF32LB52-DevKit-Nano, wenn der Prototyp nahe am Formfaktor des E
 - Kompakte Bluetooth- und Display-Prototypen aufbauen
 - Das Board auf eine Trägerplatine löten
 - Produktnahe Pinbelegungen testen, bevor ein eigenes Board entworfen wird
-- Konfigurationen nur mit NOR, mit QSPI-NOR und mit QSPI-NAND jeweils mit PSRAM vergleichen
+- Die Variante mit ausschließlich NOR-Flash sowie QSPI-NOR- und QSPI-NAND-Varianten mit PSRAM vergleichen
 - LCD-, Audio-, Sensor- und USB-Funktionen auf kleiner Fläche in Betrieb nehmen
 
-Für einfachere Verdrahtung am Prüfplatz und eine breitere Herausführung der Signale verwenden Sie das [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md). Für ein display-lastiges Board mit Lader, TF-Karte, Mikrofon und Lautsprecherverstärker verwenden Sie das [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md).
+Für einfachere Verdrahtung am Prüfplatz und eine breitere Herausführung der Signale verwenden Sie das [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md). Für ein Board mit umfangreicher Display-Ausstattung, Lader, TF-Karte, Mikrofon und Lautsprecherverstärker verwenden Sie das [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md).
 
 ## Stromversorgung { #power }
 
@@ -81,8 +81,8 @@ Das Board enthält einen Versorgungsschalter, der über das Signal RTS# des CH34
 
 Verwenden Sie für Firmware-Download und serielle Logs die UART-Schnittstelle über USB Type-C.
 
-- **Download-Modus**: BOOT im Download-Werkzeug aktivieren, dann das Board mit Spannung versorgen oder zurücksetzen.
-- **Debug-/Log-Modus**: BOOT deaktivieren, dann das Board mit Spannung versorgen oder zurücksetzen.
+- **Download-Modus**: Aktivieren Sie BOOT im Download-Werkzeug und versorgen Sie das Board dann mit Spannung oder setzen Sie es zurück.
+- **Debug-/Log-Modus**: Deaktivieren Sie BOOT und versorgen Sie das Board dann mit Spannung oder setzen Sie es zurück.
 - **RTS-Reset-Verhalten**: Wenn das Öffnen der seriellen Schnittstelle das Board unerwartet zurücksetzt oder abschaltet, deaktivieren Sie in den Einstellungen der seriellen Schnittstelle des Hosts die Modem- bzw. Hardware-Flusssteuerung.
 
 ![Modem-Flusssteuerung in den erweiterten Einstellungen der seriellen Schnittstelle deaktivieren](assets/sf32lb52x/Modem.png){ loading="lazy" }
@@ -195,9 +195,9 @@ Das Board unterstützt QSPI-LCD-Panels über einen 16-poligen FPC-Signalsatz. Di
 
 ## Pins für externen Flash und SDIO { #external-flash-and-sdio-pins }
 
-Die Variante N16R16 enthält externen 16-MB-QSPI-NOR-Flash. Die Pingruppe für den Speicher lautet:
+Die Variante N16R16 enthält externen 16-MB-QSPI-NOR-Flash. Die gemeinsam genutzte Pin-Gruppe für Speicher und SDIO lautet:
 
-<div align="center"><em>Pingruppe für externen Flash und SDIO</em></div>
+<div align="center"><em>Pin-Gruppe für externen Flash und SDIO</em></div>
 
 <div align="center" markdown>
 
@@ -230,18 +230,18 @@ Dies sind Build-Target-Bezeichner des SDK und nicht zwingend die auf einem Board
 
 ## Verwandte Dokumente { #related-documents }
 
-[SF32LB52x-Chipeinführung]: ../chips/SF32LB52x.md
-[SF32LB52x-Hardware-Designleitfaden]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
-[Originalartikel im SiFli-Wiki]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-Nano.md
-[Designpaket]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-DevKit-Nano_V1.0.0.zip?
-[Muster kaufen]: https://sifli.taobao.com/
+[SF32LB52x Chip Introduction]: ../chips/SF32LB52x.md
+[SF32LB52x Hardware Design Guide]: ../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md
+[Original SiFli Wiki Article]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-Nano.md
+[Design Package]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-DevKit-Nano_V1.0.0.zip?
+[Buy Samples]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-microchip: __[SF32LB52x-Chipeinführung]__
-- :fontawesome-solid-file-lines: __[SF32LB52x-Hardware-Designleitfaden]__
-- :fontawesome-brands-github: __[Originalartikel im SiFli-Wiki]__
-- :fontawesome-solid-download: __[Designpaket]__
-- :fontawesome-solid-cart-shopping: __[Muster kaufen]__
+- :fontawesome-solid-microchip: __[SF32LB52x-Chipeinführung][SF32LB52x Chip Introduction]__
+- :fontawesome-solid-file-lines: __[SF32LB52x-Hardware-Design-Leitfaden][SF32LB52x Hardware Design Guide]__
+- :fontawesome-brands-github: __[Originalartikel im SiFli-Wiki][Original SiFli Wiki Article]__
+- :fontawesome-solid-download: __[Designpaket][Design Package]__
+- :fontawesome-solid-cart-shopping: __[Muster kaufen][Buy Samples]__
 
 </div>

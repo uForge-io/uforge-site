@@ -41,9 +41,9 @@ Verwenden Sie heute SiFli-SDK für Produktions-Firmware.
 
 ## Prüfpunkte zur Bewertung { #evaluation-gates }
 
-Beginnen Sie erst mit einer Produktportierung, wenn die Erstinbetriebnahme auf dem Ziel-Board funktioniert. Erbringen Sie anschließend für jede benötigte Peripherie, jedes Flash-Layout, jeden Debug-Pfad und jede Laufzeitfunktion einen separaten Nachweis. Dokumentieren Sie zu jedem Ergebnis den Upstream-Commit, das Rust-Target, die Cargo-Konfiguration, die Board-Revision und das Recovery-Verfahren.
+Beginnen Sie erst mit einer Produktportierung, wenn die Erstinbetriebnahme auf dem Ziel-Board funktioniert. Validieren Sie anschließend jede benötigte Peripherie, jedes Flash-Layout, jeden Debug-Pfad und jede Laufzeitfunktion einzeln. Dokumentieren Sie zu jedem Ergebnis den Upstream-Commit, das Rust-Target, die Cargo-Konfiguration, die Board-Revision und das Wiederherstellungsverfahren.
 
-Da das Repository `sifli-hal`, `sifli-pac`, Flash-Table-Tooling und Beispiele im Embassy-Stil (async) verwendet, hängt eine erfolgreiche Anwendung auch von deren Zusammenspiel ab, nicht nur davon, ob ein Crate kompiliert. Halten Sie bei der Untersuchung einer Lücke den Reproduzierer so klein wie möglich.
+Da das Repository `sifli-hal`, `sifli-pac`, Werkzeuge für Flash-Tabellen und Beispiele im Embassy-Stil (async) verwendet, hängt der Anwendungserfolg auch davon ab, wie diese Komponenten zusammenspielen, und nicht nur davon, ob ein Crate kompiliert. Halten Sie bei der Untersuchung einer Lücke das Reproduktionsbeispiel so klein wie möglich.
 
 ## Risiko-Checkliste { #risk-checklist }
 
@@ -62,7 +62,7 @@ Da das Repository `sifli-hal`, `sifli-pac`, Flash-Table-Tooling und Beispiele im
 
 | Gute Eignung | Schlechte Eignung |
 |:---------|:---------|
-| Experimente und Treiber-Exploration. | Produktionszeitplan, der Hersteller-Support erfordert. |
+| Experimente und die Erkundung von Treibern. | Produktionszeitplan, der Hersteller-Support erfordert. |
 | Teams, die bereits Embedded Rust verwenden. | Produkte, die heute vollständige Bluetooth-/Display-/Audio-Stacks benötigen. |
 | Beitrag zur Reife von HAL/PAC. | Einmalige Prototypen, bei denen Arduino- oder SDK-Beispiele schneller sind. |
 

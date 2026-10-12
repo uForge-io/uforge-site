@@ -2,7 +2,7 @@
 icon: lucide/list-checks
 hide:
     - navigation
-description: "Punktweise Checkliste zur Prüfung des SF32LB58x-PCB-Layouts mit Prüfpunkten zu Gehäuse, Stromversorgung, Takt, HF, Audio, Hochgeschwindigkeitssignalen und Lagenaufbau."
+description: "Detaillierte Checkliste für das PCB-Layout des SF32LB58x mit Prüfpunkten zu Gehäuse, Stromversorgung, Takt, RF, Audio, Hochgeschwindigkeitssignalen und Lagenaufbau."
 tags:
     - Hardware
     - Chip
@@ -12,7 +12,7 @@ tags:
 # SF32LB58x Hardware-Design-Leitfaden — PCB-Layout-Checkliste { #sf32lb58x-hardware-design-guide-pcb-layout-checklist }
 
 !!! note "Teil des Hardware-Design-Leitfadens für SF32LB58x"
-    Diese Seite enthält die Checkliste aus Abschnitt 6.18 zur Prüfung des PCB-Layouts. Zurück zu den [Richtlinien für das PCB-Layout](SF32LB58x_pcb_layout.md).
+    Diese Seite enthält die Checkliste aus Abschnitt 6.18 für die Prüfung des PCB-Layouts. Zurück zu den [PCB-Layout-Richtlinien](SF32LB58x_pcb_layout.md).
 
 ## 6.18. PCB-Layout-Checkliste { #618-pcb-layout-checklist }
 
@@ -38,21 +38,21 @@ Jede Tabelle behandelt einen eigenen Prüfbereich des PCB-Layouts. Fehlt die Spa
 
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
-| 1 | VDD1-Versorgungsleiterbahn mindestens 8 mil | Erforderlich |
-| 2 | VDD2-Versorgungsleiterbahn mindestens 8 mil | Erforderlich |
-| 3 | Die Leiterbahnen BUCK1_VSW und BUCK1_VOUT sind jeweils mindestens 8 mil breit | Erforderlich |
-| 4 | Die Leiterbahnen BUCK2_VSW und BUCK2_VOUT sind jeweils mindestens 8 mil breit | Erforderlich |
-| 5 | VDDIOA-Versorgungsleiterbahn mindestens 10 mil | Erforderlich |
-| 6 | VDDIOA2-Versorgungsleiterbahn mindestens 10 mil | Erforderlich |
-| 7 | VDDIOB-Versorgungsleiterbahn mindestens 10 mil | Erforderlich |
-| 8 | VDDIOSA-Versorgungsleiterbahn mindestens 6 mil | Erforderlich |
-| 9 | VDDIOSB-Versorgungsleiterbahn mindestens 6 mil | Erforderlich |
-| 10 | VDDIOSC-Versorgungsleiterbahn mindestens 6 mil | Erforderlich |
-| 11 | AVDD33_USB-Versorgungsleiterbahn mindestens 6 mil | Erforderlich |
-| 12 | AVDD33_ANA-Versorgungsleiterbahn mindestens 6 mil | Erforderlich |
-| 13 | Die AVDD_BRF-Versorgungsleiterbahn ist mindestens 8 mil breit | Erforderlich |
-| 14 | AVDD33_AUD-Versorgungsleiterbahn mindestens 6 mil | Erforderlich |
-| 15 | AVDD33_DSI-Versorgungsleiterbahn mindestens 8 mil | Erforderlich |
+| 1 | Leiterbahnbreite der VDD1-Versorgung: mindestens 8 mil | Erforderlich |
+| 2 | Leiterbahnbreite der VDD2-Versorgung: mindestens 8 mil | Erforderlich |
+| 3 | Leiterbahnbreite von BUCK1_VSW und BUCK1_VOUT: jeweils mindestens 8 mil | Erforderlich |
+| 4 | Leiterbahnbreite von BUCK2_VSW und BUCK2_VOUT: jeweils mindestens 8 mil | Erforderlich |
+| 5 | Leiterbahnbreite der VDDIOA-Versorgung: mindestens 10 mil | Erforderlich |
+| 6 | Leiterbahnbreite der VDDIOA2-Versorgung: mindestens 10 mil | Erforderlich |
+| 7 | Leiterbahnbreite der VDDIOB-Versorgung: mindestens 10 mil | Erforderlich |
+| 8 | Leiterbahnbreite der VDDIOSA-Versorgung: mindestens 6 mil | Erforderlich |
+| 9 | Leiterbahnbreite der VDDIOSB-Versorgung: mindestens 6 mil | Erforderlich |
+| 10 | Leiterbahnbreite der VDDIOSC-Versorgung: mindestens 6 mil | Erforderlich |
+| 11 | Leiterbahnbreite der AVDD33_USB-Versorgung: mindestens 6 mil | Erforderlich |
+| 12 | Leiterbahnbreite der AVDD33_ANA-Versorgung: mindestens 6 mil | Erforderlich |
+| 13 | Leiterbahnbreite der AVDD_BRF-Versorgung: mindestens 8 mil | Erforderlich |
+| 14 | Leiterbahnbreite der AVDD33_AUD-Versorgung: mindestens 6 mil | Erforderlich |
+| 15 | Leiterbahnbreite der AVDD33_DSI-Versorgung: mindestens 8 mil | Erforderlich |
 
 </div>
 
@@ -64,26 +64,26 @@ Jede Tabelle behandelt einen eigenen Prüfbereich des PCB-Layouts. Fehlt die Spa
 
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
-| 1 | VDD1-Kondensator ist nah am Pin platziert | Erforderlich |
-| 2 | VDD2-Kondensator ist nah am Pin platziert | Erforderlich |
-| 3 | BUCK1-Induktivität ist nah am Chip platziert | Erforderlich |
-| 4 | BUCK1-Kondensator ist so nah wie möglich am Chip-Pin platziert | Erforderlich |
-| 5 | BUCK2-Induktivität ist nah am Chip platziert | Erforderlich |
-| 6 | BUCK2-Kondensator ist so nah wie möglich am Chip-Pin platziert | Erforderlich |
-| 7 | HPSYS_LDO_VOUT-Kondensator ist nah am Pin platziert | Erforderlich |
-| 8 | LPMU_VDD07_RET-Kondensator ist nah am Pin platziert | Erforderlich |
-| 9 | LPMU_VDD11_RTC-Kondensator ist nah am Pin platziert | Erforderlich |
-| 10 | VDDIOA-Kondensator ist nah am Pin platziert | Erforderlich |
-| 11 | VDDIOA2-Kondensator ist nah am Pin platziert | Erforderlich |
-| 12 | VDDIOB-Kondensator ist nah am Pin platziert | Erforderlich |
-| 13 | VDDIOSA-Kondensator ist nah am Pin platziert | Erforderlich |
-| 14 | VDDIOSB-Kondensator ist nah am Pin platziert | Erforderlich |
-| 15 | VDDIOSC-Kondensator ist nah am Pin platziert | Erforderlich |
-| 16 | AVDD33_USB-Kondensator ist nah am Pin platziert | Erforderlich |
-| 17 | AVDD33_ANA-Kondensator ist nah am Pin platziert | Erforderlich |
-| 18 | AVDD_BRF-Kondensator ist nah am Pin platziert | Erforderlich |
-| 19 | AVDD33_AUD-Kondensator ist nah am Pin platziert | Erforderlich |
-| 20 | AVDD33_DSI-Kondensator ist nah am Pin platziert | Erforderlich |
+| 1 | Kondensator für VDD1 nahe am Pin platziert | Erforderlich |
+| 2 | Kondensator für VDD2 nahe am Pin platziert | Erforderlich |
+| 3 | BUCK1-Induktivität nahe am Chip platziert | Erforderlich |
+| 4 | BUCK1-Kondensator so nahe wie möglich am Chip-Pin platziert | Erforderlich |
+| 5 | BUCK2-Induktivität nahe am Chip platziert | Erforderlich |
+| 6 | BUCK2-Kondensator so nahe wie möglich am Chip-Pin platziert | Erforderlich |
+| 7 | Kondensator für HPSYS_LDO_VOUT nahe am Pin platziert | Erforderlich |
+| 8 | Kondensator für LPMU_VDD07_RET nahe am Pin platziert | Erforderlich |
+| 9 | Kondensator für LPMU_VDD11_RTC nahe am Pin platziert | Erforderlich |
+| 10 | Kondensator für VDDIOA nahe am Pin platziert | Erforderlich |
+| 11 | Kondensator für VDDIOA2 nahe am Pin platziert | Erforderlich |
+| 12 | Kondensator für VDDIOB nahe am Pin platziert | Erforderlich |
+| 13 | Kondensator für VDDIOSA nahe am Pin platziert | Erforderlich |
+| 14 | Kondensator für VDDIOSB nahe am Pin platziert | Erforderlich |
+| 15 | Kondensator für VDDIOSC nahe am Pin platziert | Erforderlich |
+| 16 | Kondensator für AVDD33_USB nahe am Pin platziert | Erforderlich |
+| 17 | Kondensator für AVDD33_ANA nahe am Pin platziert | Erforderlich |
+| 18 | Kondensator für AVDD_BRF nahe am Pin platziert | Erforderlich |
+| 19 | Kondensator für AVDD33_AUD nahe am Pin platziert | Erforderlich |
+| 20 | Kondensator für AVDD33_DSI nahe am Pin platziert | Erforderlich |
 
 </div>
 
@@ -117,20 +117,20 @@ Jede Tabelle behandelt einen eigenen Prüfbereich des PCB-Layouts. Fehlt die Spa
 
 </div>
 
-### 6.18.6. HF { #6186-rf }
+### 6.18.6. RF { #6186-rf }
 
-<div align="center"><em>Tabelle 6.18.6-1: HF-Checkliste</em></div>
+<div align="center"><em>Tabelle 6.18.6-1: RF-Checkliste</em></div>
 
 <div align="center" markdown>
 
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
-| 1 | Die HF-Leiterbahn erfüllt die Anforderung an eine unsymmetrische Wellenimpedanz von 50 Ω | Erforderlich |
-| 2 | HF-Leiterbahnbreite ≥10 mil | Erforderlich |
+| 1 | Die RF-Leiterbahn ist für eine einseitige Impedanz von 50 Ω ausgelegt | Erforderlich |
+| 2 | RF-Leiterbahnbreite ≥10 mil | Erforderlich |
 | 3 | Für ein π-förmiges Antennenanpassnetzwerk ist nahe am Chip ein Footprint reserviert | Erforderlich |
-| 4 | Durchgehende GND-Ebene unterhalb des HF-Signals | Erforderlich |
-| 5 | Keine digitalen Hochgeschwindigkeitssignal-Leiterbahnen kreuzen unterhalb des HF-Signals | Erforderlich |
-| 6 | Unterhalb des HF-Signals verlaufen keine Versorgungsleiterbahnen mit hohem di/dt | Erforderlich |
+| 4 | Durchgehende GND-Ebene unterhalb des RF-Signals | Erforderlich |
+| 5 | Keine digitalen Hochgeschwindigkeitssignal-Leiterbahnen kreuzen unterhalb des RF-Signals | Erforderlich |
+| 6 | Unterhalb des RF-Signals verlaufen keine Versorgungsleiterbahnen mit hohem di/dt | Erforderlich |
 
 </div>
 
@@ -179,7 +179,7 @@ Jede Tabelle behandelt einen eigenen Prüfbereich des PCB-Layouts. Fehlt die Spa
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
 | 1 | Schnell schaltende Signale nicht parallel zum GPADC-Signal führen; ist das nicht vermeidbar, eine geeignete Masseabschirmung vorsehen | Erforderlich |
-| 2 | Batteriespannungsteiler-Widerstände sind nah am Chip-Eingangspin platziert | Erforderlich |
+| 2 | Akkuspannungsteiler-Widerstände sind nah am Chip-Eingangspin platziert | Erforderlich |
 | 3 | Schnell schaltende Signale nicht parallel zum SDMADC-Signal führen; ist das nicht vermeidbar, eine geeignete Masseabschirmung vorsehen | Optional |
 
 </div>
@@ -192,7 +192,7 @@ Jede Tabelle behandelt einen eigenen Prüfbereich des PCB-Layouts. Fehlt die Spa
 
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
-| 1 | Die Testpunktpositionen eignen sich für Prüfspitzen oder Lötverbindungen zum Prüfadapter | Erforderlich |
+| 1 | Die Testpunkte sind so positioniert, dass Prüfspitzen oder Lötverbindungen zum Prüfadapter sicher angesetzt werden können | Erforderlich |
 | 2 | Die Testpunkte für Firmware-Download und Quarzkalibrierung (VBAT, GND, SWDIO, SWCLK, VDDIOB, MODE, RESET, UART4_TXD, UART4_RXD usw.) erfüllen die Größen- und Positionsvorgaben des Prüfadapters | Erforderlich |
 
 </div>

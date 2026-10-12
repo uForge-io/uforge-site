@@ -11,7 +11,7 @@ tags:
 
 ## Objetivo { #purpose }
 
-SiFli publica bibliotecas de símbolos esquemáticos y huellas de PCB para la familia de chips y módulos SF32. Use estos archivos como punto de partida para crear esquemas y diseños de PCB, en lugar de redibujar a mano los símbolos, la asignación de pines y los patrones de pads a partir de la hoja de datos.
+SiFli publica bibliotecas de símbolos esquemáticos y huellas de PCB para la familia de chips y módulos SF32. Use estos archivos como punto de partida para crear esquemáticos y diseños de PCB, en lugar de redibujar a mano los símbolos, la asignación de pines y los patrones de pads a partir de la hoja de datos.
 
 Las bibliotecas reducen el riesgo en la puesta en marcha, pero no sustituyen la hoja de datos, el plano del encapsulado ni la guía de diseño de hardware específica del dispositivo. Antes de cerrar el diseño, compare siempre la pieza seleccionada de la biblioteca con el número de pieza exacto, el encapsulado, la asignación de pines, el patrón de pads y las pautas de diseño correspondientes.
 
@@ -36,7 +36,7 @@ Las bibliotecas reducen el riesgo en la puesta en marcha, pero no sustituyen la 
 | Herramienta EDA | Archivo | Formato | Contenido | Distribución |
 |:----------------|:--------|:--------|:----------|:-------------|
 | JLCEDA / LCEDA Pro | `ProPrj_sifli-iclib_2026-04-20.epro2` | Archivo de proyecto LCEDA Pro | Símbolos esquemáticos y huellas de PCB | Descarga directa |
-| PADS | `PADS-SIFLI-IC.ZIP` | Archivo de biblioteca Mentor/Siemens PADS | Símbolos esquemáticos y decals de PCB | Descarga directa |
+| PADS | `PADS-SIFLI-IC.ZIP` | Archivo de biblioteca Mentor/Siemens PADS | Símbolos esquemáticos y huellas de PCB | Descarga directa |
 | OrCAD | `OrCAD-SIFLI-IC.OLB` | Biblioteca Cadence OrCAD Capture | Símbolos esquemáticos | Descarga directa |
 | KiCad | ZIP de versión o metadatos del paquete (`metadata.json`) | Biblioteca KiCad de símbolos, huellas y modelos 3D | Símbolos esquemáticos, huellas de PCB y modelos 3D | [Repositorio GitHub](https://github.com/OpenSiFli/kicad-libraries), versiones publicadas |
 
@@ -71,7 +71,7 @@ El README de [OpenSiFli/kicad-libraries](https://github.com/OpenSiFli/kicad-libr
 
 ## Lista de comprobación de revisión { #review-checklist }
 
-- [ ] Antes de publicar el esquema, compruebe que el número de pieza y el sufijo de encapsulado de la biblioteca coinciden con la BOM.
+- [ ] Antes de publicar el esquemático, compruebe que el número de pieza y el sufijo de encapsulado de la biblioteca coinciden con la BOM.
 - [ ] Compare los nombres y números de pin del símbolo con la hoja de datos del chip y la guía de diseño de hardware específica del dispositivo.
 - [ ] Verifique el tamaño de los pads, el paso, el área de separación de la huella (courtyard), el tratamiento del pad expuesto y las holguras de montaje con el plano oficial del encapsulado.
 - [ ] Use los modelos 3D únicamente para facilitar la colocación y comprobar el ajuste mecánico; no los use como dimensiones de fabricación o montaje.

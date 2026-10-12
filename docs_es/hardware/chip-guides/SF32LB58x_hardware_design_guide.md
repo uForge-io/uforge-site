@@ -2,7 +2,7 @@
 icon: lucide/book-check
 hide:
     - navigation
-description: "Guía de diseño de hardware para el MCU SF32LB58x: arquitectura de alimentación, diseño de reloj y RF, pantalla, almacenamiento, audio y diseño de PCB."
+description: "Guía de diseño de hardware para la MCU SF32LB58x: arquitectura de alimentación, diseño de reloj y RF, pantalla, almacenamiento, audio y diseño de PCB."
 tags:
     - Hardware
     - Chip
@@ -16,7 +16,7 @@ Esta guía ofrece recomendaciones y material de referencia para desarrollar prod
 
 La guía cubre todo el proceso de desarrollo de hardware: PMIC y distribución de alimentación, fanout de BGA256, planificación del apilado HDI, circuitos de reloj, diseño RF, MIPI-DSI, USB2.0 High-Speed, SDIO/eMMC, circuitos de audio, diseño de PCB, validación y preparación para la fabricación. Seguir estas recomendaciones ayuda a reducir los riesgos de los diseños BGA/HDI de alta densidad, proteger la integridad de señal en interfaces de alta velocidad y asegurar que el producto cumpla los requisitos de alimentación, encapsulado y producción de SF32LB58x.
 
-Se presupone que el lector conoce los fundamentos del diseño de hardware embebido, la elaboración de esquemas y el diseño de PCB de alta densidad. Esta guía complementa la hoja de datos, el manual de usuario, la nota oficial de aplicación de hardware, el paquete de diseño de referencia y la lista de proveedores aprobados por SiFli para SF32LB58x. Estos documentos siguen siendo las fuentes de referencia para las especificaciones eléctricas, la multiplexación de pines, las dimensiones del encapsulado, la cualificación de componentes y los límites de producción.
+Se presupone que el lector conoce los fundamentos del diseño de hardware embebido, la elaboración de esquemáticos y el diseño de PCB de alta densidad. Esta guía complementa la hoja de datos, el manual de usuario, la nota oficial de aplicación de hardware, el paquete de diseño de referencia y la lista de proveedores aprobados por SiFli para SF32LB58x. Estos documentos siguen siendo las fuentes de referencia para las especificaciones eléctricas, la multiplexación de pines, las dimensiones del encapsulado, la cualificación de componentes y los límites de producción.
 
 ## 2. Recursos de desarrollo { #2-development-resources }
 
@@ -24,10 +24,10 @@ Se presupone que el lector conoce los fundamentos del diseño de hardware embebi
 [Hoja de datos SF32LB58x]: https://downloads.sifli.com/docs/Datasheet/sf32lb58/DS5801-SF32LB58x-Datasheet%20V1p8p6.pdf
 [Manual de usuario SF32LB58x]: https://downloads.sifli.com/docs/user%20manual/SF32LB58x/UM5801-SF32LB58x-User%20mannual%20V0p4p6.pdf
 [Nota de aplicación de hardware SF32LB58x]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md
-[Libro de comprobación esquemática y de PCB SF32LB58x]: https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx
+[Lista de comprobación del esquemático y de PCB SF32LB58x]: https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx
 [Lista de proveedores aprobados por SiFli (AVL)]: ../cad-components/sifli-approved-vendor-list.md
 [Comprar muestras]: https://sifli.taobao.com/
-[Comprar kits de desarrollo]: https://sifli.taobao.com/
+[Comprar placas de desarrollo]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
@@ -35,10 +35,10 @@ Se presupone que el lector conoce los fundamentos del diseño de hardware embebi
 - :fontawesome-solid-file-pdf: __[Hoja de datos SF32LB58x]__
 - :fontawesome-solid-file-pdf: __[Manual de usuario SF32LB58x]__
 - :fontawesome-solid-file-lines: __[Nota de aplicación de hardware SF32LB58x]__
-- :fontawesome-solid-file-excel: __[Libro de comprobación esquemática y de PCB SF32LB58x]__
+- :fontawesome-solid-file-excel: __[Lista de comprobación del esquemático y de PCB SF32LB58x]__
 - :fontawesome-solid-file-excel: __[Lista de proveedores aprobados por SiFli (AVL)]__
 - :fontawesome-solid-cart-shopping: __[Comprar muestras]__
-- :fontawesome-solid-cart-shopping: __[Comprar kits de desarrollo]__
+- :fontawesome-solid-cart-shopping: __[Comprar placas de desarrollo]__
 
 </div>
 
@@ -58,7 +58,7 @@ Se presupone que el lector conoce los fundamentos del diseño de hardware embebi
 | Interfaces de pantalla | MIPI-DSI, SPI/QSPI, MCU8080, DPI, JDI paralelo/serie |
 | Almacenamiento | NOR Flash/PSRAM en SiP según el modelo; NOR o SPI NAND Flash externa mediante MPI3 o MPI4; interfaces SDIO SD1 y SD2 |
 | Audio | 3 interfaces I2S, 2 interfaces PDM, entrada/salida de audio analógico diferencial y compatibilidad con PA de audio analógico externo y PA de audio I2S |
-| Interrupciones de activación | Todos los GPIO pueden activar el chip desde Light/Deep Sleep. Standby/Hibernate admite 16 fuentes de interrupción de activación: 6 en PA y 10 en PB |
+| Interrupciones de activación | Todos las GPIO pueden activar el chip desde Light/Deep Sleep. Standby/Hibernate admite 16 fuentes de interrupción de activación: 6 en PA y 10 en PB |
 | Interfaz PBR | Seis pines PBR. PBR0 pasa de nivel bajo a alto al encenderse y puede controlar algunos LSW externos; PBR1-PBR5 están en nivel bajo de forma predeterminada. PBR0-PBR5 pueden emitir LPTIM o una señal de reloj de 32 kHz y seguir funcionando como salidas durante Standby/Hibernate. PBR0-PBR3 pueden configurarse como entradas de activación, pero no generan interrupciones mientras la MCU está activa. |
 
 </div>
@@ -116,7 +116,7 @@ SF32LB58x es adecuado para productos conectados que combinan gráficos avanzados
 | Inductor BUCK | 4,7 μH, DCR ≤0,4 Ω, Isat ≥500 mA |
 | Reloj | Cristal principal de 48 MHz + cristal RTC de 32,768 kHz |
 | RF | Pista con impedancia controlada de 50 Ω y espacio reservado para una red π de adaptación |
-| Pantalla | MIPI-DSI (2 carriles), SPI de 3/4 hilos, Quad-SPI, MCU8080, DPI y JDI paralelo/serie; asignación de pines para las dos LCDC: LCDC1 (PA) / LCDC2 (PB) |
+| Pantalla | MIPI-DSI (2 líneas), SPI de 3/4 hilos, Quad-SPI, MCU8080, DPI y JDI paralelo/serie; asignación de pines para las dos LCDC: LCDC1 (PA) / LCDC2 (PB) |
 | Almacenamiento | NOR o SPI NAND Flash externa mediante MPI3 o MPI4. En la EVB de SiFli, MPI4 se usa para SPI NAND, SD1 para eMMC o SD NAND, y SD2 para tarjeta SD o dispositivo Wi-Fi |
 | Audio | 3 interfaces I2S (solo en modo maestro), 2 interfaces PDM y entrada/salida de audio analógico diferencial |
 | Depuración | 1 interfaz SWD + 6 salidas UART de depuración seleccionables |
@@ -143,7 +143,7 @@ SF32LB58x es adecuado para productos conectados que combinan gráficos avanzados
 
 ### 4.3. Cómo utilizar esta guía { #43-how-to-use-this-guide }
 
-Siga el orden de revisión de la placa: confirme el encapsulado y la configuración de memoria en SiP, cierre el apilado HDI y la estrategia del PMIC, revise el almacenamiento de arranque y el trazado de pantalla y, después, verifique los relojes, RF, USB, audio, depuración y acceso a las pruebas de producción. El apartado 5 es la referencia para el esquemático, el apartado 6 para la implementación de PCB y el apartado 7 es la lista de comprobación para la publicación.
+Siga el orden de revisión de la placa: confirme el encapsulado y la configuración de memoria en SiP, cierre el apilado HDI y la estrategia del PMIC, revise el almacenamiento de arranque y el trazado de pantalla y, después, verifique los relojes, RF, USB, audio, depuración y acceso a las pruebas de producción. El apartado 5 es la referencia para el esquemático, el apartado 6 para la implementación de PCB y el apartado 7 contiene la lista de comprobación previa a la liberación.
 
 ### 4.4. Paquete de evidencias para la revisión { #44-review-evidence-pack }
 
@@ -153,9 +153,9 @@ Antes de liberar el prototipo, archive el PDF del esquemático, el apilado de la
 
 Esta guía incluye dos niveles de cobertura mediante listas de comprobación. Las listas breves incluidas en los apartados 5.2.1.7 y 5.7.3 reúnen los puntos de mayor riesgo para una revisión de ingeniería rápida. La [Lista de comprobación del esquemático](SF32LB58x_schematic_checklist.md) (apartado 5.8) y la [Lista de comprobación del diseño de PCB](SF32LB58x_pcb_layout_checklist.md) (apartado 6.18) reproducen, punto por punto, la lista completa de SiFli *SF32LB58x Schematic & PCB Checklist* (V1.0, 2026-01-21).
 
-Cada punto es obligatorio (debe superarse antes de la publicación) u opcional (recomendado cuando se utilice la función correspondiente). El texto en color y el texto con <span class="flag-yellow">fondo amarillo</span> conservan el énfasis de revisión del libro de cálculo de origen. Como este no explica el motivo de cada resaltado, considérelos indicadores adicionales de revisión, no sustitutos de otros puntos de la misma tabla que no estén resaltados.
+Cada punto es obligatorio (debe superarse antes de la liberación) u opcional (recomendado cuando se utilice la función correspondiente). El texto en color y el texto con <span class="flag-yellow">fondo amarillo</span> conservan el énfasis de revisión de la hoja de cálculo de origen. Como esta no explica el motivo de cada resaltado, considérelos indicadores adicionales de revisión, no sustitutos de otros puntos de la misma tabla que no estén resaltados.
 
-El libro de comprobación de origen especifica Isat ≥ 450 mA para un inductor BUCK que no figure en la AVL, mientras que la nota oficial de aplicación de hardware especifica Isat ≥ 500 mA para L = 4,7 µH y DCR ≤ 0,4 Ω. La lista conserva el valor del libro. Hasta que SiFli aclare la diferencia, use un inductor no incluido en la AVL con Isat de al menos 500 mA.
+La hoja de cálculo de origen especifica Isat ≥ 450 mA para un inductor BUCK que no figure en la AVL, mientras que la nota oficial de aplicación de hardware especifica Isat ≥ 500 mA para L = 4,7 µH y DCR ≤ 0,4 Ω. La lista conserva el valor de la hoja de cálculo. Hasta que SiFli aclare la diferencia, use un inductor no incluido en la AVL con Isat de al menos 500 mA.
 
 Use la [Lista de comprobación del esquemático](SF32LB58x_schematic_checklist.md) durante la revisión del esquemático y antes de iniciar el diseño de PCB. Use la [Lista de comprobación del diseño de PCB](SF32LB58x_pcb_layout_checklist.md) durante la revisión del trazado y antes de publicar los archivos Gerber. En la práctica, cada revisión suele realizarse dos veces: primero por el ingeniero de diseño y después por un revisor independiente antes de congelar el diseño o liberarlo para fabricación.
 
@@ -182,13 +182,13 @@ Para sacarles el máximo partido, utilice las listas como registros de aprobaci�
 
 </div>
 
-<div align="center"><em>Tabla 4.5-2: Historial de versiones del documento de la lista de comprobación</em></div>
+<div align="center"><em>Tabla 4.5-2: Historial de versiones de la lista de comprobación</em></div>
 
 <div align="center" markdown>
 
 | N.º | Versión | Fecha | Notas de publicación |
 |:---|:---|:---|:---|
-| 1 | V1.0 | 2026-01-21 | Primera publicación del documento de la lista de comprobación de esquemático y PCB |
+| 1 | V1.0 | 2026-01-21 | Primera publicación de la lista de comprobación de esquemático y PCB |
 
 </div>
 
@@ -199,7 +199,7 @@ La guía completa continúa en las siguientes páginas, cada una dedicada a una 
 <div class="grid cards" markdown>
 
 - :fontawesome-solid-bolt: __[Directrices de diseño esquemático](SF32LB58x_schematic_design.md)__ — sistema de alimentación, generación de reloj, RF, interfaces de usuario, almacenamiento y conectividad, y fabricación
-- :fontawesome-solid-list-check: __[Lista de comprobación del esquemático](SF32LB58x_schematic_checklist.md)__ — lista de comprobación punto por punto para revisar esquemas (apartado 5.8)
+- :fontawesome-solid-list-check: __[Lista de comprobación del esquemático](SF32LB58x_schematic_checklist.md)__ — lista de comprobación punto por punto para revisar esquemáticos (apartado 5.8)
 - :fontawesome-solid-microchip: __[Pautas de diseño de PCB](SF32LB58x_pcb_layout.md)__ — huella del encapsulado, apilado, fanout y trazado de reloj, RF, audio, USB, SDIO, DSI y alimentación
 - :fontawesome-solid-list-check: __[Lista de comprobación del diseño de PCB](SF32LB58x_pcb_layout_checklist.md)__ — lista de comprobación punto por punto para revisar el diseño de PCB (apartado 6.18)
 - :fontawesome-solid-book-open: __[Lista de comprobación de revisión de diseño y referencias](SF32LB58x_review_and_reference.md)__ — lista de comprobación de publicación, documentos relacionados, apéndices e historial de revisiones

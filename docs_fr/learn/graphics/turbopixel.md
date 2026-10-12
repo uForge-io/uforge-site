@@ -22,7 +22,7 @@ Consultez cette page si la capacité du framebuffer ou le trafic de lecture de l
 TurboPixel a deux propriétés déterminantes :
 
 - **Rapport fixe pour une configuration donnée.** Le format de pixel en entrée et le niveau de compression déterminent le facteur nominal ; il ne varie pas avec les détails de l'image. L'allocation dépend aussi de l'alignement des lignes et du découpage en blocs. Utilisez les règles de taille de la puce et du SDK choisis, pas un rapport repris d'une autre configuration.
-- **Compression avec perte.** Le décodage TurboPixel ne garantit pas la restitution de chaque valeur de pixel d'origine. Le format sacrifie une part de la fidélité de l'image pour réduire de façon prévisible l'utilisation de la PSRAM et le trafic sur cette mémoire.
+- **Compression avec perte.** Un bitmap décompressé par TurboPixel n'est pas garanti de restituer chaque valeur de pixel d'origine. Le format sacrifie une part de la fidélité de l'image pour réduire de façon prévisible l'utilisation de la PSRAM et le trafic sur cette mémoire.
 
 La compression avec perte peut être un compromis judicieux dans un système d'affichage embarqué contraint, mais la décision dépend du produit. Évaluez des écrans représentatifs à la résolution et à la profondeur de couleur du panneau cible, à la distance d'observation prévue et avec le rythme de rafraîchissement attendu. Ne vous fiez pas uniquement à une image de test générique.
 
@@ -71,7 +71,7 @@ TurboPixel doit être validé dans le cadre de la conception d'affichage complè
 - Testez le texte, les lignes fines, les dégradés, les icônes, les photographies, les animations et les éléments d'UI à fort contraste pour détecter des artefacts visibles.
 - Confirmez que l'appareil et le SDK choisis prennent en charge le format de couleur, l'alignement des tampons, le chemin extDMA et la configuration du contrôleur d'affichage.
 - Mesurez le temps de trame, la bande passante PSRAM, la latence de l'interface et la consommation sous des charges combinées d'affichage, Bluetooth, audio et IA.
-- Gardez un chemin non compressé disponible pendant la mise en route afin que les problèmes de qualité d'image et de pilote puissent être isolés.
+- Gardez un chemin non compressé disponible pendant la mise en service afin que les problèmes de qualité d'image et de pilote puissent être isolés.
 - Ne présentez pas TurboPixel comme sans perte, même lorsque les artefacts ne sont pas visibles dans une UI particulière.
 
 ## Vérifications d'intégration au SDK { #sdk-integration-checks }

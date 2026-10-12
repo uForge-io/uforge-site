@@ -34,7 +34,7 @@ En SF32LB55x, los pines de UART1 varían según el modelo. Para las pruebas BLE/
     La tabla UART consolida la comparación entre familias y encapsulados. La topología y las capturas de `SiFli_RfTool` que aparecen a continuación son ejemplos de la guía SF32LB52x; en la herramienta, seleccione la familia real del chip y verifique la asignación UART del proyecto de destino.
 
 !!! warning "Asignación UART de SF32LB58x contradictoria entre guías oficiales"
-    La [guía de pruebas RF individuales de Bluetooth](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/app_note/bt_individual_test_guide.html) indica UART1 TX/RX como PA32/PA31, mientras que la [guía general de pruebas RF](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/app_note/rf_test_guide.html) indica PA31/PA32 para la UART de depuración RF. Antes de cablear, confirme la ruta de prueba del firmware y el pinmux de la placa. No dé por hecho que estas asignaciones, específicas de cada guía, son intercambiables.
+    La [guía de pruebas RF individuales de Bluetooth](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/app_note/bt_individual_test_guide.html) indica UART1 TX/RX como PA32/PA31, mientras que la [guía general de pruebas RF](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/app_note/rf_test_guide.html) indica PA31/PA32 para el UART de depuración RF. Antes de cablear, confirme la ruta de prueba del firmware y el pinmux de la placa. No dé por hecho que estas asignaciones, específicas de cada guía, son intercambiables.
 
 ![Topología de la prueba RF individual de Bluetooth](../../../../assets/develop/app-notes/bluetooth-single-item/figure_11-1.png){ loading="lazy" }
 <div align="center"><em>Figura: Ejemplo de la guía SF32LB52x: el PC controla el DUT mediante UART/HCI, mientras que el puerto RF se conecta por coaxial al equipo de prueba o al analizador de espectro.</em></div>
@@ -48,7 +48,7 @@ En SF32LB55x, los pines de UART1 varían según el modelo. Para las pruebas BLE/
 
 ## Transmitir una señal BLE o Bluetooth clásico { #transmit-a-ble-or-classic-bt-signal }
 
-1. Abra `SiFli_RfTool.exe`, seleccione la familia del chip, BLE non-signaling o BT non-signaling y el puerto COM de UART1; conecte a 1 000 000 baudios.
+1. Abra `SiFli_RfTool.exe`, seleccione la familia del chip, BLE non-signaling o BT non-signaling y el puerto COM de UART1; establezca la conexión a una velocidad de 1 000 000 baudios.
 2. Para BLE, ajuste Frequency, Data Length, payload y PHY; después seleccione Start TX. Detenga TX antes de cambiar el canal o PHY.
 3. Para Bluetooth clásico, ajuste Frequency, Data Length y Packet Type; después seleccione Start TX. Detenga TX antes de cambiar los parámetros del paquete.
 4. Configure el equipo de prueba con el mismo canal, tipo de paquete, carga útil y PHY. Si no dispone de un equipo de prueba de comunicaciones, puede observar la forma de onda con un analizador de espectro.

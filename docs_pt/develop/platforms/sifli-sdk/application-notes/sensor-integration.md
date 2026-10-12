@@ -7,7 +7,7 @@ tags: [Desenvolvimento, SiFli-SDK, Notas de aplicação, Sensores]
 
 # Integrar e ler sensores { #integrate-and-read-sensors }
 
-Este artigo adapta o [guia de integração de sensores](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/sensor.html) da SiFli a um fluxo prático de desenvolvimento de drivers. O guia também está disponível para SF32LB52x, SF32LB55x, SF32LB56x e SF32LB58x; confirme o ramo do SDK de destino antes de reutilizar caminhos ou símbolos. O fluxo cobre desde a consulta à folha de dados do sensor e a verificação das conexões da placa até a configuração do Kconfig, callbacks de leitura e escrita do barramento, tratamento de interrupções, registro no framework de sensores do RT-Thread e validação pela linha de comando.
+Este artigo adapta o [guia de integração de sensores](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/sensor.html) da SiFli a um fluxo prático de desenvolvimento de drivers. O guia também está disponível para SF32LB52x, SF32LB55x, SF32LB56x e SF32LB58x; confirme o ramo do SDK de destino antes de reutilizar caminhos ou símbolos. O fluxo cobre desde a consulta ao datasheet do sensor e a verificação das conexões da placa até a configuração do Kconfig, callbacks de leitura e escrita do barramento, tratamento de interrupções, registro no framework de sensores do RT-Thread e validação pela linha de comando.
 
 Os exemplos usam o sensor de seis eixos LSM6DSL (acelerômetro e giroscópio) e o sensor de temperatura e pressão barométrica BMP280. Os nomes de API e os identificadores reproduzem os exemplos do guia do SDK; confira o ramo de destino antes de copiá-los para um produto.
 
@@ -16,7 +16,7 @@ Os exemplos usam o sensor de seis eixos LSM6DSL (acelerômetro e giroscópio) e 
 
 ## Confirme o hardware e a interface do sensor { #1-confirm-the-hardware-and-sensor-interface }
 
-Comece pela folha de dados do sensor e identifique sua função e a interface usada para conectá-lo ao sistema. O guia do SDK cita como exemplos sensores de seis eixos (acelerômetro e giroscópio), de temperatura, pressão barométrica, geomagnéticos e de luz, além de sensores GPS e de motor. As interfaces de host compatíveis neste guia são I2C, SPI e UART.
+Comece pelo datasheet do sensor e identifique sua função e a interface usada para conectá-lo ao sistema. O guia do SDK cita como exemplos sensores de seis eixos (acelerômetro e giroscópio), de temperatura, pressão barométrica, geomagnéticos e de luz, além de sensores GPS e de motor. As interfaces de host compatíveis neste guia são I2C, SPI e UART.
 
 Antes de escrever o driver:
 
@@ -91,7 +91,7 @@ Este exemplo segue o guia SF32LB52x. Guias de outras famílias ou ramos do SDK p
 
 ### Localize o barramento e implemente o acesso aos registradores { #find-the-bus-and-implement-register-access }
 
-Use `rt_i2c_bus_device_find` ou `rt_device_find` para obter o dispositivo de barramento. Em seguida, chame a API de leitura e escrita correspondente à interface escolhida. A folha de dados do sensor é a referência para o endereço do dispositivo, o mapa de registradores, a sequência de comandos e a largura dos registradores.
+Use `rt_i2c_bus_device_find` ou `rt_device_find` para obter o dispositivo de barramento. Em seguida, chame a API de leitura e escrita correspondente à interface escolhida. O datasheet do sensor é a referência para o endereço do dispositivo, o mapa de registradores, a sequência de comandos e a largura dos registradores.
 
 ```c
 int LSM6DSL_I2C_Init()
@@ -274,7 +274,7 @@ __exit:
 }
 ```
 
-Defina `type`, `vendor`, `model`, `unit`, `intf_type`, o intervalo de medição válido e o período mínimo conforme a folha de dados do dispositivo. Garanta que o caminho de limpeza libere todos os recursos se uma alocação ou qualquer registro falhar.
+Defina `type`, `vendor`, `model`, `unit`, `intf_type`, o intervalo de medição válido e o período mínimo conforme o datasheet do dispositivo. Garanta que o caminho de limpeza libere todos os recursos se uma alocação ou qualquer registro falhar.
 
 **Atenção à limpeza do exemplo de origem:** se o registro do sensor de temperatura for concluído e, em seguida, falhar a alocação ou o registro do sensor barométrico, o caminho de limpeza do exemplo libera o sensor de temperatura sem antes desfazer o registro. No código do produto, controle quais dispositivos foram registrados com sucesso, remova cada dispositivo do registro usando a API de remoção compatível com a versão do RT-Thread do alvo e só então libere sua memória. Não copie esse caminho de erro sem ajustes.
 

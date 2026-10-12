@@ -26,7 +26,7 @@ SF32デバイスでは、複数のソフトウェア開発環境を利用でき�
 | **Zephyr** | Zephyr v4.3.0以降、`sf32lb52_devkit_lcd`はupstreamでメンテナンスされています。 | [Zephyr upstream](zephyr/getting-started-zephyr-upstream.md) |
 | **Arduino** | OpenSiFliはSF32LB52 DevKit LCD向けにArduinoCore-zephyrのベータ版パッケージを公開しています。 | [Arduino](arduino/getting-started-arduino.md) |
 | **Rust** | OpenSiFliの`sifli-rs`でRustを評価できますが、開発中のため量産用途には対応していません。 | [Rust](rust/getting-started-rust.md) |
-| **MicroPython** | 公式のファームウェアイメージ、フラッシュコマンド、REPL設定、対応API詳細が必要です。 | [MicroPython](micropython/getting-started-micropython.md) |
+| **MicroPython** | 公式のファームウェアイメージ、書き込みコマンド、REPL設定、対応API詳細が必要です。 | [MicroPython](micropython/getting-started-micropython.md) |
 
 </div>
 
@@ -56,9 +56,9 @@ SF32デバイスでは、複数のソフトウェア開発環境を利用でき�
 - サンプルをボードに書き込んだ。
 - シリアルコンソールを開いた。
 - ブートログ、`hello_world`、シェルプロンプト、REPLバナーなど、想定どおりの出力を確認した。
-- 動作したボード名、シリアルポート、フラッシュコマンドを記録した。
+- 動作したボード名、シリアルポート、書き込みコマンドを記録した。
 
-これらの情報をプロジェクトのメモに記録してください。サンプルを変更し始めた後も、動作する構成へすぐに戻るための手がかりになります。
+これらの情報をプロジェクトのメモに残しておいてください。サンプルを変更し始めた後も、動作する構成へすぐに戻るための手がかりになります。
 
 ## チュートリアルへ進む { #continue-with-tutorials }
 

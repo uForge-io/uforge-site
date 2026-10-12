@@ -8,22 +8,22 @@ tags:
     - Chip
 ---
 
-# Guía de diseño de hardware SF32LB52x — Lista de revisión del diseño y referencias { #sf32lb52x-hardware-design-guide-design-review-checklist-and-references }
+# Guía de diseño de hardware SF32LB52x — Lista de comprobación para la revisión del diseño y referencias { #sf32lb52x-hardware-design-guide-design-review-checklist-and-references }
 
 !!! note "Parte de la guía de diseño de hardware SF32LB52x"
-    Esta página abarca las secciones 7–10: lista de revisión del diseño, documentos y referencias relacionados, apéndices e historial de revisiones. Vuelva a las [Pautas de diseño de PCB](SF32LB52x_pcb_layout.md).
+    Esta página abarca las secciones 7–10: lista de comprobación para la revisión del diseño, documentos y referencias relacionados, apéndices e historial de revisiones. Vuelva a las [Pautas de diseño de PCB](SF32LB52x_pcb_layout.md).
 
-## 7. Lista de revisión del diseño { #7-design-review-checklist }
+## 7. Lista de comprobación para la revisión del diseño { #7-design-review-checklist }
 
 - [ ] La revisión del sistema mínimo está completa: se han documentado la variante exacta, el encapsulado, el árbol de alimentación, el medio de arranque, los pines de configuración de arranque, el acceso de depuración y descarga, los relojes y la estrategia de reactivación
 - [ ] Se han confirmado el modelo exacto del chip y la variante de alimentación; no se han mezclado los esquemáticos de alimentación de ambas variantes
 - [ ] Los pines de alimentación del procesador (VBUS/VBAT/VCC o PVDD/VDDIOA/VDD_SIP) están dentro del rango de tensión de la hoja de datos
-- [ ] El inductor BUCK cumple 4,7 uH ±20 %, DCR ≤0,4 Ω e Isat ≥450 mA
+- [ ] El inductor BUCK cumple 4,7 µH ±20 %, DCR ≤0,4 Ω e Isat ≥450 mA
 - [ ] Variante alimentada por batería: se han verificado la ruta de carga, el rango de tensión del dispositivo OVP y la capacitancia de salida del LDO integrado
 - [ ] Los cristales de 48 MHz y 32,768 kHz cumplen las especificaciones recomendadas, y el trazado y las zonas de exclusión también satisfacen los requisitos
 - [ ] La pista RF tiene una impedancia de 50 Ω y la red de adaptación está situada cerca del chip
 - [ ] La configuración de arranque desde almacenamiento (incluida la opción eMMC de la variante alimentada mediante un regulador externo) coincide con los ajustes de los pines Bootstrap
-- [ ] Se ha verificado que el pin de control del interruptor de alimentación del almacenamiento corresponde a la variante exacta; la discrepancia PA11/PA21 entre la lista de comprobación oficial y las notas de aplicación debe resolverse antes de publicar el diseño
+- [ ] Se ha verificado que el pin de control del interruptor de alimentación del almacenamiento corresponde a la variante exacta; la discrepancia PA11/PA21 entre la lista de comprobación oficial y las notas de aplicación debe resolverse antes de liberar el diseño
 - [ ] USB DP/DN se trazan como par diferencial con una impedancia diferencial de 90 Ω
 - [ ] Las señales SDIO se trazan juntas, con una longitud total ≤50 mm, una diferencia de longitud dentro del grupo ≤6 mm y apantallamiento de masa
 - [ ] Se han reservado los pines multiplexados DBG_UART/SWD y los puntos de prueba de producción
@@ -77,16 +77,16 @@ Las notas de aplicación originales de SiFli incluyen las siguientes figuras de 
 | Necesidad | Punto de partida |
 |:---|:---|
 | Ejemplos de diagramas de bloques de relojes inteligentes para ambos grupos de diseño SF32LB52x | Apéndice A: ejemplo de aplicación de un reloj inteligente |
-| Ejemplos de esquemas para RF, almacenamiento y arranque, botones, motor, audio, reloj, USB y DC/DC | Apéndice B: esquemáticos de referencia |
+| Ejemplos de esquemáticos para RF, almacenamiento y arranque, botones, motor, audio, reloj, USB y DC/DC | Apéndice B: esquemáticos de referencia |
 | Ejemplos de colocación y trazado de PCB para RF, almacenamiento, audio, apilado, fanout, reloj, USB y DC/DC | Apéndice C: diseños de referencia de PCB |
 | Planos del contorno, la forma y el patrón de pads del encapsulado | Apéndice D: mecánica |
-| Esquemas y diseños de referencia para carga, OVP, arquitectura de alimentación y PMU | Apéndice E: alimentación |
+| Esquemáticos y diseños de referencia para carga, OVP, arquitectura de alimentación y PMU | Apéndice E: alimentación |
 
 </div>
 
 ### 9.1. Apéndice A. Ejemplo de aplicación de un reloj inteligente { #appendix-a-a-typical-smart-watch-application }
 
-Un diseño habitual de reloj inteligente basado en SF32LB52x incluye el MCU, pantalla, controlador táctil, almacenamiento, sensores, motor de vibración, entrada/salida de audio, antena Bluetooth, fuentes de reloj, gestión de alimentación e interfaces de depuración y de prueba en producción. El diseño alimentado por batería incluye además la gestión de carga.
+Un diseño habitual de reloj inteligente basado en SF32LB52x incluye la MCU, pantalla, controlador táctil, almacenamiento, sensores, motor de vibración, entrada/salida de audio, antena Bluetooth, fuentes de reloj, gestión de alimentación e interfaces de depuración y de prueba en producción. El diseño alimentado por batería incluye además la gestión de carga.
 Las figuras 9.1-1 y 9.1-2 muestran una pantalla QSPI, acelerómetro/giroscopio por SPI, módulo de frecuencia cardíaca por I2C, micrófono analógico y ruta DAC-amplificador, motor de vibración controlado por PWM, reloj de 48 MHz, ruta RF Bluetooth y acceso SWD/UART. QSPI NAND, SD NAND y NOR Flash son ejemplos de almacenamiento, no una lista exhaustiva de medios de arranque. Ambos diagramas muestran un cargador externo y una ruta Buck/LDO; elija la arquitectura de alimentación según el apartado 5.2, sin interpretar el diagrama como un circuito obligatorio.
 
 

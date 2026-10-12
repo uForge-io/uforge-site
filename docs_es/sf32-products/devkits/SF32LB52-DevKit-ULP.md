@@ -10,15 +10,15 @@ tags:
 
 ## Visión general { #overview }
 
-El SF32LB52-DevKit-ULP también se conoce como **立创黄山派**, **LCKFB-HSPI-SF32LB52-ULP** y **SF32LB52-ULP**. Es una placa compacta de desarrollo de muy bajo consumo basada en la familia SF32LB52x, concebida para crear prototipos de relojes inteligentes y pulseras de actividad, no solo para ofrecer acceso básico al MCU.
+El SF32LB52-DevKit-ULP también se conoce como **立创黄山派**, **LCKFB-HSPI-SF32LB52-ULP** y **SF32LB52-ULP**. Es una placa compacta de desarrollo de muy bajo consumo basada en la familia SF32LB52x, concebida para crear prototipos de relojes inteligentes y pulseras de actividad, no solo para ofrecer acceso básico a la MCU.
 
-Frente a las placas LCD, Nano y Core-3p3, esta ofrece una configuración más cercana a un producto final: reúne un módulo SF32LB52, una pantalla AMOLED táctil, micrófono, amplificador de altavoz, LED RGB, controlador de motor vibratorio, sensores de movimiento, de campo magnético y de luz ambiental, circuito de carga y puentes para medir corriente. Resulta especialmente útil para evaluar no solo si funciona el MCU, sino también cómo se comporta el sistema vestible completo cuando funciona con batería.
+Frente a las placas LCD, Nano y Core-3p3, esta ofrece una configuración más cercana a un producto final: reúne un módulo SF32LB52, una pantalla AMOLED táctil, micrófono, amplificador de altavoz, LED RGB, controlador de motor vibratorio, sensores de movimiento, de campo magnético y de luz ambiental, circuito de carga y puentes para medir corriente. Resulta especialmente útil para evaluar no solo si funciona la MCU, sino también cómo se comporta el sistema vestible completo cuando funciona con batería.
 
-La [guía de la placa ULP][Artículo original de la Wiki de SiFli] sigue siendo una página provisional. La fuente primaria para la configuración detallada es la guía oficial china de la placa [Huangshan Pi][Guía SiFli de Huangshan Pi], que documenta la versión V1.0.0 y cuyos datos se usan aquí como referencia para esa revisión. La [wiki de hardware de LCKFB][Wiki de hardware LCKFB] no identifica la revisión y contiene varios números de componente distintos. No se ha establecido si reflejan otra revisión o documentación desactualizada; no los considere intercambiables y contraste la unidad con sus marcas, esquema y BOM.
+La [guía de la placa ULP][Artículo original de la Wiki de SiFli] sigue siendo una página provisional. La fuente primaria para la configuración detallada es la guía oficial china de la placa [Huangshan Pi][Guía SiFli de Huangshan Pi], que documenta la versión V1.0.0 y cuyos datos se usan aquí como referencia para esa revisión. La [wiki de hardware de LCKFB][Wiki de hardware LCKFB] no identifica la revisión y contiene varios números de componente distintos. No se ha establecido si reflejan otra revisión o documentación desactualizada; no los considere intercambiables y contraste la unidad con sus marcas, esquemático y BOM.
 
 **Nota sobre el estado de publicación:** La guía SiFli V1.0.0 indica que la placa documentada se destinaba entonces a pruebas internas y que se modificaría antes de publicarse externamente. Esta afirmación se refiere a esa revisión de la fuente; no permite determinar el estado ni la BOM de placas posteriores. Compruebe la revisión exacta de la placa y su BOM.
 
-La [página de placas del SDK de SiFli][Página de la placa ULP en el SDK de SiFli] identifica este objetivo de compilación como `sf32lb52-lchspi-ulp`. Esa página y la sección de contenido del kit de la guía china de Huangshan Pi escriben `SF32LB52X-MOD-1-N16R8`, mientras que la [guía de modelos de módulos de SiFli][Guía de modelos de módulos SiFli] y el encabezado de la tabla GPIO utilizan `SF32LB52-MOD-1-N16R8`. Las fuentes no explican la diferencia de la `X`. El objetivo del SDK sí está confirmado; compruebe la referencia impresa en el módulo instalado y la BOM, sin deducir que las dos grafías designan hardware distinto.
+La [página de placas del SDK de SiFli][Página de la placa ULP en el SDK de SiFli] identifica este objetivo de compilación como `sf32lb52-lchspi-ulp`. Esa página y la sección de contenido del paquete de la guía china de Huangshan Pi escriben `SF32LB52X-MOD-1-N16R8`, mientras que la [guía de modelos de módulos de SiFli][Guía de modelos de módulos SiFli] y el encabezado de la tabla GPIO utilizan `SF32LB52-MOD-1-N16R8`. Las fuentes no explican la diferencia de la `X`. El objetivo del SDK sí está confirmado; compruebe la referencia impresa en el módulo instalado y la BOM, sin deducir que las dos grafías designan hardware distinto.
 
 ![Configuración de referencia del SF32LB52-ULP para un dispositivo vestible](assets/sf32lb52x/52-ULP-1p85-install.png){ loading="lazy" }
 <div align="center"><em>SF32LB52-ULP — Configuración de referencia para un dispositivo vestible</em></div>
@@ -41,7 +41,7 @@ La [página de placas del SDK de SiFli][Página de la placa ULP en el SDK de SiF
 
 </div>
 
-Use estos nombres como alias de la misma familia al buscar documentación de hardware, ejemplos, páginas de compra o información de la comunidad. Para consultar esquemas, asignaciones de pines o la BOM, confirme siempre la revisión exacta de la placa y la documentación correspondiente del proveedor.
+Use estos nombres como alias de la misma familia al buscar documentación de hardware, ejemplos, páginas de compra o información de la comunidad. Para consultar esquemáticos, asignaciones de pines o la BOM, confirme siempre la revisión exacta de la placa y la documentación correspondiente del proveedor.
 
 ## Aspectos destacados de la placa { #board-highlights }
 
@@ -56,7 +56,7 @@ Use estos nombres como alias de la misma familia al buscar documentación de har
 - Micrófono MEMS en placa
 - Salida de audio analógico con amplificador de altavoz Clase D
 - Conector para altavoces externos de 3 W / 4 Ω o 2 W / 8 Ω
-- Interfaz UART USB Type-C a través de CH340N para programación del firmware, depuración y alimentación
+- Interfaz UART USB Type-C a través de CH340N para grabación del firmware, depuración y alimentación
 - Señales USB 2.0 FS expuestas a través del conector de expansión de 30 pines
 - Ranura para tarjeta MicroSD usando SPI
 - Una tecla de función y una tecla de encendido/reinicio
@@ -110,18 +110,18 @@ Para una placa de evaluación general centrada en pantalla, use [SF32LB52-DevKit
 
 </div>
 
-**Los componentes varían entre fuentes o revisiones: verifique antes de diseñar.** La guía SiFli V1.0.0 de [Huangshan Pi][Guía SiFli de Huangshan Pi] especifica el cargador SY6103, el OVP SY5320 y el LED RGB SK6812MINI-HS. La [wiki de hardware de LCKFB][Wiki de hardware LCKFB], que no identifica la revisión, indica LP5305AQVF y WS2812B-2020; además, cita AW32001ECSR en la lista de características y AW23001ECSR en la sección de carga. Las fuentes no permiten determinar si las diferencias se deben a una revisión distinta o a documentación sin actualizar. Aquí se toman los datos de SiFli como referencia para V1.0.0. Antes de depender de las características de un componente, compruebe las marcas de la unidad, el esquema y la BOM.
+**Los componentes varían entre fuentes o revisiones: verifique antes de diseñar.** La guía SiFli V1.0.0 de [Huangshan Pi][Guía SiFli de Huangshan Pi] especifica el cargador SY6103, el OVP SY5320 y el LED RGB SK6812MINI-HS. La [wiki de hardware de LCKFB][Wiki de hardware LCKFB], que no identifica la revisión, indica LP5305AQVF y WS2812B-2020; además, cita AW32001ECSR en la lista de características y AW23001ECSR en la sección de carga. Las fuentes no permiten determinar si las diferencias se deben a una revisión distinta o a documentación sin actualizar. Aquí se toman los datos de SiFli como referencia para V1.0.0. Antes de depender de las características de un componente, compruebe las marcas de la unidad, el esquemático y la BOM.
 
 ## Contenido del paquete { #package-contents }
 
-La documentación indica que el kit Huangshan Pi incluye:
+La documentación indica que el paquete de la placa Huangshan Pi incluye:
 
 - Placa principal
 - Placa de pantalla
 - Batería
 - Altavoz
 
-Antes de preparar el entorno de evaluación, compruebe el contenido del kit adquirido. Los accesorios pueden variar según el vendedor o el lote de fabricación.
+Antes de preparar el entorno de evaluación, compruebe el contenido del paquete adquirido. Los accesorios pueden variar según el vendedor o el lote de fabricación.
 
 ## Alimentación y batería { #power-and-battery }
 
@@ -156,7 +156,7 @@ Para el funcionamiento normal, mantenga puenteados los pares de pines 5-6, 7-8 y
 
 ## Carga de firmware y depuración { #download-and-debug }
 
-Durante el desarrollo, use la interfaz UART por USB Type-C para programar el firmware, consultar los registros serie y alimentar la placa.
+Durante el desarrollo, use la interfaz UART por USB Type-C para grabar el firmware, consultar los registros serie y alimentar la placa.
 
 Material necesario para la primera puesta en marcha:
 
@@ -189,7 +189,7 @@ El nombre exacto del destino de placa en SiFli-SDK es `sf32lb52-lchspi-ulp`; use
 | PA43 | KEY2 |
 | PA42 | Audio_PA_EN |
 | PA41 | Interrupción táctil |
-| PA40 / PA39 | Sensor I2C1 SCL / SDA, según la tabla de asignación GPIO; véase la discrepancia con el pin del conector indicada abajo |
+| PA40 / PA39 | Sensor I2C1 SCL / SDA, según la tabla de asignación GPIO; consulte la discrepancia con el pin del conector indicada abajo |
 | PA38 | Control de conmutación de VSYS a VSYS_1 |
 | PA37 / PA33 | Táctil I2C SCL / SDA |
 | PA36 / PA35 | USB DM / DP |
@@ -226,7 +226,7 @@ El conector de expansión de 30 pines expone señales de alimentación, USB, sen
 | 9-10 | GND | Tierra |
 | 11-12 | VCC_3V3_S / VCC_3V3 | Puenteado para el funcionamiento normal; abierto para medir la corriente de 3,3 V |
 | 13 / 15 | PA36 / PA35 | USB DM / DP |
-| 14 / 16 | PB39 / PA40 | La tabla SiFli V1.0.0 del conector indica Sensor I2C1 SDA / SCL; el pin 14 no coincide con la tabla GPIO (véase abajo) |
+| 14 / 16 | PB39 / PA40 | La tabla SiFli V1.0.0 del conector indica Sensor I2C1 SDA / SCL; el pin 14 no coincide con la tabla GPIO (consulte abajo) |
 | 17 | PA32 | Datos de LED RGB, también utilizable como GPIO |
 | 18 | PA30 | Control de alimentación del sensor; el uso como GPIO puede afectar el comportamiento de PA39/PA40 |
 | 19-23 | PA29, PA24, PA28, PA25, PA27 | Pines de SPI1/tarjeta SD; usarlos para expansión entra en conflicto con la tarjeta TF integrada |
@@ -237,7 +237,7 @@ El conector de expansión de 30 pines expone señales de alimentación, USB, sen
 
 </div>
 
-**Discrepancia en la asignación de pines: verificar antes de conectar.** En la tabla GPIO de SiFli V1.0.0, Sensor I2C1_SDA corresponde a PA39; en la tabla del conector de 30 pines, el pin 14 figura como PB39/I2C1_SDA y el pin 16 como PA40/I2C1_SCL. La documentación de LCKFB también presenta la diferencia PA39/PB39, sin identificar la revisión ni explicar la ruta. No está confirmado qué pad del MCU llega al pin 14. Antes de conectar un periférico, consulte el esquema/BOM de la unidad y compruebe la continuidad; no dé por hecho que PA39 y PB39 son intercambiables.
+**Discrepancia en la asignación de pines: verificar antes de conectar.** En la tabla GPIO de SiFli V1.0.0, Sensor I2C1_SDA corresponde a PA39; en la tabla del conector de 30 pines, el pin 14 figura como PB39/I2C1_SDA y el pin 16 como PA40/I2C1_SCL. La documentación de LCKFB también presenta la diferencia PA39/PB39, sin identificar la revisión ni explicar la ruta. No está confirmado qué pad de la MCU llega al pin 14. Antes de conectar un periférico, consulte el esquemático/BOM de la unidad y compruebe la continuidad; no dé por hecho que PA39 y PB39 son intercambiables.
 
 ## Interfaz de pantalla y táctil { #display-and-touch-interface }
 
@@ -274,7 +274,7 @@ La placa utiliza una pantalla AMOLED y expone las señales de un FPC QSPI de 22 
 
 </div>
 
-**Discrepancia en el pinout; verifique antes de conectar la pantalla:** La tabla FPC de 22 pines de SiFli V1.0.0 asigna PB05 al pin 14 para QSPI D0, mientras que su tabla GPIO independiente indica PA05. La tabla FPC de LCKFB también asigna PB05, mientras que su tabla GPIO indica PA05; ninguna fuente explica cómo se relacionan la etiqueta del pad del módulo y la del conector. La ruta eléctrica sigue sin confirmarse: revise el esquema/BOM de la revisión concreta y compruebe la continuidad; no dé por intercambiables PA05 y PB05.
+**Discrepancia en el pinout; verifique antes de conectar la pantalla:** La tabla FPC de 22 pines de SiFli V1.0.0 asigna PB05 al pin 14 para QSPI D0, mientras que su tabla GPIO independiente indica PA05. La tabla FPC de LCKFB también asigna PB05, mientras que su tabla GPIO indica PA05; ninguna fuente explica cómo se relacionan la etiqueta del pad del módulo y la del conector. La ruta eléctrica sigue sin confirmarse: revise el esquemático/BOM de la revisión concreta y compruebe la continuidad; no dé por intercambiables PA05 y PB05.
 
 ## Cómo medir el consumo { #power-measurement-guidance }
 

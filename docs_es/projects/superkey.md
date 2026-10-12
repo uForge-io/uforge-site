@@ -18,7 +18,7 @@ SuperKey va más allá de un teclado de accesos directos. La implementación de 
 
 - salida USB HID de teclado y controles multimedia;
 - recepción de datos de rendimiento del PC, meteorología, configuración y estado de alimentación por USB CDC o UART de 1 Mbps;
-- páginas en tres pantallas para monitorizar el rendimiento, consultar el tiempo, ver la hora, usar utilidades, acceder a la música y definir asignaciones de teclas;
+- páginas en tres pantallas para supervisar el rendimiento, consultar el tiempo, ver la hora, usar utilidades, acceder a la música y definir asignaciones de teclas;
 - aplicación complementaria [SuperKeyHub](https://github.com/SiFliSparks/SuperKeyHub) para recopilar datos del host, configurar funciones y actualizar el firmware;
 - hardware reproducible mediante el diseño abierto [sf32-keyboard](https://oshwhub.com/sifli/sf32-keyboard).
 
@@ -27,7 +27,7 @@ SuperKey va más allá de un teclado de accesos directos. La implementación de 
 
 ## ¿Por qué la implementación con SF32? { #why-the-sf32-implementation }
 
-SuperKey necesita gráficos, varias pantallas, un dispositivo USB compuesto, teclas y codificador, sensores, efectos RGB, un sistema de archivos y audio opcional. SF32LB52 mantiene estas tareas en tiempo real en el MCU, por lo que el dispositivo puede iniciar su interfaz y ofrecer funciones HID básicas aunque la aplicación complementaria no esté ejecutándose. La aplicación del host se ocupa de la telemetría del ordenador y los datos de Internet, que es más adecuado gestionar desde un sistema operativo de escritorio.
+SuperKey necesita gráficos, varias pantallas, un dispositivo USB compuesto, teclas y codificador, sensores, efectos RGB, un sistema de archivos y audio opcional. SF32LB52 mantiene estas tareas en tiempo real en la MCU, por lo que el dispositivo puede iniciar su interfaz y ofrecer funciones HID básicas aunque la aplicación complementaria no esté ejecutándose. La aplicación del host se ocupa de la telemetría del ordenador y los datos de Internet, que es más adecuado gestionar desde un sistema operativo de escritorio.
 
 Esta división encaja con controladores de escritorio, teclados para flujos de trabajo, paneles de estado e interfaces HMI compactas, pero crea dependencias explícitas. Las pantallas de datos avanzadas requieren la aplicación complementaria, controladores y API externas; las versiones del firmware y del host deben ser compatibles; y la pérdida de USB, la suspensión del host y una configuración dañada requieren pruebas de recuperación independientes.
 
@@ -40,9 +40,9 @@ Esta página no demuestra que la PCB abierta esté lista para producción ni que
 Antes de empezar, tenga preparado:
 
 - hardware SuperKey montado según el diseño abierto, con tres LCD GC9107, teclas, codificador y conexión USB de datos;
-- un ordenador con Windows 10/11 para la ruta principal documentada; el repositorio de SuperKeyHub indica compatibilidad con Windows y macOS, pero valide la programación de la placa, CDC y la recuperación en el sistema operativo elegido;
+- un ordenador con Windows 10/11 para la ruta principal documentada; el repositorio de SuperKeyHub indica compatibilidad con Windows y macOS, pero valide la grabación de la placa, CDC y la recuperación en el sistema operativo elegido;
 - una versión de SuperKeyHub compatible con el firmware;
-- un entorno SiFli-SDK, el submódulo del SDK clonado de forma recursiva y una conexión funcional de programación/recuperación;
+- un entorno SiFli-SDK, el submódulo del SDK clonado de forma recursiva y una conexión funcional de grabación/recuperación;
 - una API Key, API Host y configuración de ciudad válidos de QWeather, si se va a probar la meteorología;
 - un registro de pruebas de enumeración USB, registros serie, respuesta de teclas, estado de pantalla y recuperación tras suspensión.
 
@@ -53,7 +53,7 @@ Antes de empezar, tenga preparado:
 | Área | Base conocida | Evidencia necesaria antes de adaptar |
 |:-----|:--------------|:-------------------------------------|
 | Hardware | Hardware abierto `sf32-keyboard` y destino de placa `sf32lb52-superkey` | Revisión de PCB/montaje, LCD y dispositivos de entrada, alimentación y conexión USB |
-| Firmware | Repositorio SuperKey, submódulo SiFli-SDK, RT-Thread, LVGL v9 y CherryUSB | Commit del firmware y SDK, registro de compilación, imagen y registro de programación |
+| Firmware | Repositorio SuperKey, submódulo SiFli-SDK, RT-Thread, LVGL v9 y CherryUSB | Commit del firmware y SDK, registro de compilación, imagen y registro de grabación |
 | Aplicación complementaria | SuperKeyHub con protocolo de firmware compatible | Versión de la aplicación, sistema operativo, puerto, configuración de API y registro de conexión |
 | Funciones básicas | HID, CDC, tres pantallas, codificador, teclas, sensor y modos de alimentación | Registro de arranque en frío, actualización de datos, entrada, desconexión y recuperación tras suspensión |
 | Adaptación | Cambiar una sola función de interfaz, tecla, LED o campo de datos cada vez | Cambio revisado, imagen para volver atrás y resultado completo de regresión |
@@ -71,7 +71,7 @@ Antes de empezar, tenga preparado:
 | Componente | Especificación necesaria | Función | Estado | Dónde obtenerlo | Compatibilidad y notas sobre sustituciones |
 |:-----------|:-------------------------|:--------|:-------|:----------------|:-------------------------------------------|
 | Conjunto de hardware abierto SuperKey | Configuración SF32LB52 con tres LCD GC9107 de 128 × 128, tres LED RGB, cuatro teclas, encoder rotatorio, SHT30 y USB, según el proyecto | Control del teclado macro, pantallas, entrada, sensores y USB HID/CDC | Obligatorio | [Diseño abierto `sf32-keyboard`](https://oshwhub.com/sifli/sf32-keyboard); [repositorio SuperKey](https://github.com/SiFliSparks/SuperKey) | Los archivos de diseño no son una especificación de placa montada disponible para compra; deben registrarse las revisiones de pines y de montaje |
-| PC host y conexión USB de datos | Windows 10/11 es la ruta principal documentada; conexión USB de datos | Ejecuta SuperKeyHub, proporciona el host HID/CDC y permite descarga/recuperación | Obligatorio | [Documentación SuperKey](https://sparks.sifli.com/projects/superkey/) | El repositorio de SuperKeyHub indica compatibilidad con Windows/macOS; valide CDC, DFU, programación y recuperación en el sistema elegido |
+| PC host y conexión USB de datos | Windows 10/11 es la ruta principal documentada; conexión USB de datos | Ejecuta SuperKeyHub, proporciona el host HID/CDC y permite descarga/recuperación | Obligatorio | [Documentación SuperKey](https://sparks.sifli.com/projects/superkey/) | El repositorio de SuperKeyHub indica compatibilidad con Windows/macOS; valide CDC, DFU, grabación y recuperación en el sistema elegido |
 | Cuenta y configuración de API de QWeather | API Key, API Host y configuración de ciudad | Función opcional de información meteorológica | Opcional | [QWeather](https://www.qweather.com/) | No suba credenciales al repositorio; valide los términos y la disponibilidad del servicio |
 
 </div>
@@ -102,8 +102,8 @@ La página de versiones del proyecto incluye el firmware [v1.4.2](https://github
 | Firmware | SuperKey v1.4.2 o un commit validado por el equipo | Las versiones del firmware y del protocolo del host deben coincidir |
 | Aplicación complementaria | Versión o commit de SuperKeyHub verificado con el firmware v1.4.2 | El material citado no establece una combinación fija; valide los datos CDC, la configuración y DFU en el sistema operativo elegido |
 | Objetivo de compilación | `sf32lb52-superkey`, con archivos de placa en `app/boards` | No es un objetivo genérico para placas de desarrollo SF32LB52 |
-| Comunicación | Valide primero el USB compuesto HID + CDC; valide aparte la UART de 1 Mbps si se utiliza | «USB enumerado» no demuestra que funcionen las dos interfaces HID y CDC |
-| Actualización | DFU por CDC iniciado desde la aplicación y una ruta cableada de programación/recuperación que se conserva | No es una solución de actualización en campo hasta validar interrupciones, incompatibilidades y recuperación |
+| Comunicación | Valide primero el USB compuesto HID + CDC; valide aparte el UART de 1 Mbps si se utiliza | «USB enumerado» no demuestra que funcionen las dos interfaces HID y CDC |
+| Actualización | DFU por CDC iniciado desde la aplicación y una ruta cableada de grabación/recuperación que se conserva | No es una solución de actualización en campo hasta validar interrupciones, incompatibilidades y recuperación |
 
 </div>
 
@@ -130,7 +130,7 @@ En Windows, utilice los scripts correspondientes de instalación y configuració
 |:------|:---------------------------|:-------------------|
 | 1. Base sin modificar | ¿Funcionan juntos el hardware abierto, el firmware y la aplicación complementaria tal como se ha registrado? | Sesión funcional conocida con versiones fijadas |
 | 2. Comunicación y recuperación | ¿Se pueden diagnosticar y recuperar los fallos de USB, serie, suspensión, desconexión y configuración? | Registro de inyección de fallos y recuperación |
-| 3. Reproducir la compilación desde el código fuente | ¿Puede el equipo reconstruir la misma imagen desde un clon limpio? | Entorno de compilación, imagen, programación y resultado repetible |
+| 3. Reproducir la compilación desde el código fuente | ¿Puede el equipo reconstruir la misma imagen desde un clon limpio? | Entorno de compilación, imagen, grabación y resultado repetible |
 | 4. Adaptación controlada | ¿Se puede cambiar una función del producto sin romper la base? | Cambio acotado, ruta de vuelta atrás y evidencia de regresión |
 | 5. Revisión de producto | ¿Es una referencia suficientemente sólida para una PCB, carcasa o lote piloto propios? | Riesgos con responsables y decisión de continuar, aplazar o detener |
 
@@ -165,7 +165,7 @@ Clasifique los fallos en cinco dominios: hardware/pantalla del dispositivo, entr
 
 **Evidencia que se debe conservar:** revisión del hardware, etiqueta/commit del firmware, commit del SDK, versión de la aplicación complementaria, sistema operativo, configuración del puerto y la API, enumeración USB, registros, pantallas y registro de entrada.
 
-**Criterio de salida de la etapa 1:** dos arranques en frío completan la entrada HID, la actualización de datos CDC y la interacción con las tres pantallas; los registros o estados observables permiten distinguir cada dominio de fallo.
+**Criterio de salida del punto de control 1:** dos arranques en frío completan la entrada HID, la actualización de datos CDC y la interacción con las tres pantallas; los registros o estados observables permiten distinguir cada dominio de fallo.
 
 ## Etapa 2 — Validar los límites de fallo y recuperación { #stage-2-validate-fault-and-recovery-boundaries }
 
@@ -182,22 +182,22 @@ Clasifique los fallos en cinco dominios: hardware/pantalla del dispositivo, entr
 | Suspensión del host | Active `power_mode sleep/normal` y ejecute un ciclo de suspensión/reactivación del host | LCD, LED, retroiluminación y sensores se detienen/reanudan según lo previsto, y los datos vuelven a actualizarse |
 | Versiones incompatibles | En una configuración controlada, pruebe una combinación incompatible de aplicación y firmware | Se rechaza la combinación o se muestra un error diagnosticable, sin aplicar una actualización incompatible |
 | Fallo de API | Use una configuración meteorológica no válida o desconecte la red | El fallo meteorológico no afecta HID, CDC, la interfaz local ni la recuperación |
-| Interrupción de DFU | Interrumpa una actualización en una unidad de prueba recuperable | La ruta cableada de programación conservada restaura la imagen conocida |
+| Interrupción de DFU | Interrumpa una actualización en una unidad de prueba recuperable | La ruta cableada de grabación conservada restaura la imagen conocida |
 
 </div>
 
-**Criterio de salida de la etapa 2:** cada fallo aplicable tiene un resultado repetible de detección y recuperación, sin necesidad de reparar manualmente estados no documentados.
+**Criterio de salida del punto de control 2:** cada fallo aplicable tiene un resultado repetible de detección y recuperación, sin necesidad de reparar manualmente estados no documentados.
 
 ## Etapa 3 — Crear una base de código reproducible { #stage-3-build-a-reproducible-source-baseline }
 
-**Objetivo:** permitir que otro ingeniero compile, programe el firmware y repita la etapa 2 desde un clon limpio.
+**Objetivo:** permitir que otro ingeniero compile, grabe el firmware y repita la Etapa 2 desde un clon limpio.
 
 1. Clone el repositorio de forma recursiva y registre los commits de SuperKey y SiFli-SDK.
 2. Compile desde cero con el destino `sf32lb52-superkey` y la ruta de búsqueda `../boards`.
-3. Guarde el registro de compilación, la salida de memoria/particiones, el script de programación, las imágenes generadas y el registro serie.
-4. Repita la compilación en un segundo ordenador o después de borrar el directorio de compilación; programe el firmware en el mismo hardware y vuelva a ejecutar las regresiones principales.
+3. Guarde el registro de compilación, la salida de memoria/particiones, el script de grabación, las imágenes generadas y el registro serie.
+4. Repita la compilación en un segundo ordenador o después de borrar el directorio de compilación; grabe el firmware en el mismo hardware y vuelva a ejecutar las regresiones principales.
 
-**Criterio de salida de la etapa 3:** no se necesitan archivos sin seguimiento, resultados antiguos ni sustituciones manuales de binarios para generar una imagen que supere la etapa 2.
+**Criterio de salida del punto de control 3:** no se necesitan archivos sin seguimiento, resultados antiguos ni sustituciones manuales de binarios para generar una imagen que supere la Etapa 2.
 
 ## Etapa 4 — Adaptar una variable del producto cada vez { #stage-4-adapt-one-product-variable-at-a-time }
 
@@ -217,7 +217,7 @@ Clasifique los fallos en cinco dominios: hardware/pantalla del dispositivo, entr
 
 </div>
 
-**Criterio de salida de la etapa 4:** se ha revisado el cambio, se puede recuperar la imagen original y pasan las pruebas HID, CDC, pantalla, entrada, suspensión y recuperación.
+**Criterio de salida del punto de control 4:** se ha revisado el cambio, se puede recuperar la imagen original y pasan las pruebas HID, CDC, pantalla, entrada, suspensión y recuperación.
 
 ## Etapa 5 — Revisión de preparación para producto { #stage-5-product-readiness-review }
 
@@ -230,11 +230,11 @@ Antes de crear hardware propio o un lote piloto, el equipo debe responder:
 - ¿Cómo se recuperan la configuración, las asignaciones de teclas y el estado de actualización tras perder alimentación o dañarse el almacenamiento?
 - ¿Las licencias de la PCB abierta, la carcasa, las fuentes, los iconos, la música y las API de terceros permiten la distribución prevista?
 
-**Criterio de salida de la etapa 5:** cada riesgo restante tiene un responsable, evidencia y resolución; el equipo ha decidido continuar, aplazar o detener.
+**Criterio de salida del punto de control 5:** cada riesgo restante tiene un responsable, evidencia y resolución; el equipo ha decidido continuar, aplazar o detener.
 
 ## Traspaso a la fase de diseño del producto { #handoff-to-product-design }
 
-Traslade la selección de SF32 y memoria, los descriptores USB HID/CDC, las conexiones de las tres pantallas y la retroiluminación, las interfaces de entrada y sensores, la política de alimentación y suspensión, el sistema de archivos y las particiones de actualización, el protocolo de la aplicación complementaria, los puntos de prueba de producción y la ruta de recuperación validada. Continúe con [SF32LB52x](../sf32-products/chips/SF32LB52x.md), la [guía de diseño de hardware SF32LB52x](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [Compilar, grabar y monitorizar con SiFli-SDK](../develop/platforms/sifli-sdk/build-flash-monitor.md) y [Diseño para producción](../hardware/design-for-production.md).
+Traslade la selección de SF32 y memoria, los descriptores USB HID/CDC, las conexiones de las tres pantallas y la retroiluminación, las interfaces de entrada y sensores, la política de alimentación y suspensión, el sistema de archivos y las particiones de actualización, el protocolo de la aplicación complementaria, los puntos de prueba de producción y la ruta de recuperación validada. Continúe con [SF32LB52x](../sf32-products/chips/SF32LB52x.md), la [guía de diseño de hardware SF32LB52x](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [Compilar, grabar y supervisar con SiFli-SDK](../develop/platforms/sifli-sdk/build-flash-monitor.md) y [Diseño para producción](../hardware/design-for-production.md).
 
 ## Fuentes de referencia { #authoritative-sources }
 - [Repositorio de firmware SiFliSparks/SuperKey](https://github.com/SiFliSparks/SuperKey)

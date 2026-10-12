@@ -2,18 +2,18 @@
 icon: lucide/list-checks
 hide:
     - navigation
-description: "Lista de comprobación para revisar los esquemas del MCU SF32LB55x, incluidos alimentación, reloj, RF, almacenamiento, pantalla y fabricación."
+description: "Lista de comprobación para revisar los esquemáticos de la MCU SF32LB55x, incluidos alimentación, reloj, RF, almacenamiento, pantalla y fabricación."
 tags:
     - Hardware
     - Chip
     - Lista de comprobación
 ---
 
-# Guía de diseño de hardware SF32LB55x — Lista de comprobación del esquema { #sf32lb55x-hardware-design-guide-schematic-checklist }
+# Guía de diseño de hardware SF32LB55x — Lista de comprobación del esquemático { #sf32lb55x-hardware-design-guide-schematic-checklist }
 
-## 5.8. Lista de comprobación del esquema { #58-schematic-checklist }
+## 5.8. Lista de comprobación del esquemático { #58-schematic-checklist }
 
-Cada tabla corresponde a un bloque funcional del esquema. Cuando exista la columna «Aplicable a», aplique cada fila únicamente a las variantes indicadas.
+Cada tabla corresponde a un bloque funcional del esquemático. Cuando exista la columna «Aplicable a», aplique cada fila únicamente a las variantes indicadas.
 
 El texto rojo y el fondo amarillo conservan el énfasis de revisión de la hoja de cálculo fuente. Esta no explica el motivo de cada marca; considérelas señales adicionales para la revisión, sin que cambien la categoría «Obligatorio/Opcional» del punto.
 
@@ -57,8 +57,8 @@ El texto rojo y el fondo amarillo conservan el énfasis de revisión de la hoja 
 | 18 | La tensión de alimentación de VDDIOB es de 1,8 V a 3,3 V; reserve una resistencia en serie de 0 Ω en la primera revisión de la placa | Solo 551/555/557 | Obligatorio |
 | 19 | <span class="flag-red">La tensión de alimentación de VDDIOA es de 3,3 V; reserve una resistencia en serie de 0 Ω en la primera revisión de la placa</span> | <span class="flag-red">Solo SS6600A8</span> | <span class="flag-red">Obligatorio</span> |
 | 20 | <span class="flag-red">La tensión de alimentación de VDDIOA es de 3,3 V; reserve una resistencia en serie de 0 Ω en la primera revisión de la placa</span> | <span class="flag-red">Solo SS6600A8</span> | <span class="flag-red">Obligatorio</span> |
-| 21 | Cuando el SF30147C alimente el sistema, la interfaz de control TWI debe usar pines PB del MCU con pull-down (PD) predeterminado | Solo 551/555/557 | Obligatorio |
-| 22 | Cuando SF30147C suministre alimentación, los raíles controlados mediante EN deben usar PVDD o AVDD como dominio de alimentación de EN; no controle EN desde un GPIO del MCU. Como alternativa, conecte EN a tierra y controle mediante registros la salida del raíl correspondiente | Solo 551/555/557 | Obligatorio |
+| 21 | Cuando el SF30147C alimente el sistema, la interfaz de control TWI debe usar pines PB de la MCU, que deben ser pines PD | Solo 551/555/557 | Obligatorio |
+| 22 | Cuando SF30147C suministre alimentación, los raíles controlados mediante EN deben usar PVDD o AVDD como dominio de alimentación de EN; no controle EN desde una GPIO de la MCU. Como alternativa, conecte EN a tierra y controle mediante registros la salida del raíl correspondiente | Solo 551/555/557 | Obligatorio |
 | 23 | Cuando SF30147C suministre alimentación, BUCK y LDO1 solo se pueden controlar mediante sus señales de habilitación respectivas, EN_BUCK y EN_LDO1; no se ofrece control interno por registros | Solo 551/555/557 | Obligatorio |
 | 24 | El circuito de carga debe incluir gestión de la ruta de alimentación para que el sistema pueda alimentarse desde la entrada de 5 V del cargador cuando la tensión de la batería sea demasiado baja | Todas las variantes | Obligatorio |
 
@@ -99,7 +99,7 @@ Ambigüedad de la fuente: los puntos 19 y 20 del libro de trabajo V1.0 original 
 
 </div>
 
-Las fuentes discrepan: la tabla 3-3 de la [guía de aplicación de hardware en chino de SiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) y el punto 9 de la [lista de comprobación esquemática V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) especifican 1 µF para VDD_RTC, mientras que [C0313 en el esquema de referencia](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png) indica 0,1 µF. Las fuentes no explican cuándo se aplica cada valor. Antes de cerrar el diseño, confirme con SiFli el valor requerido para el dispositivo concreto; no resuelva la discrepancia por suposición.
+Las fuentes discrepan: la tabla 3-3 de la [guía de aplicación de hardware en chino de SiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) y el punto 9 de la [lista de comprobación esquemática V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) especifican 1 µF para VDD_RTC, mientras que [C0313 en el esquemático de referencia](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png) indica 0,1 µF. Las fuentes no explican cuándo se aplica cada valor. Antes de cerrar el diseño, confirme con SiFli el valor requerido para el dispositivo concreto; no resuelva la discrepancia por suposición.
 
 ### 5.8.4. Reloj { #584-clock }
 
@@ -153,7 +153,7 @@ Las fuentes discrepan: la tabla 3-3 de la [guía de aplicación de hardware en c
 
 | N.º | Punto de comprobación | Aplicable a | Categoría |
 |:---|:---|:---|:---|
-| 1 | <span class="flag-red">MODE tiene por defecto un pull-down de 10 kΩ a tierra y se conecta a VDDIOA mediante pull-up durante la programación/descarga</span> | Todas las variantes | Obligatorio |
+| 1 | <span class="flag-red">MODE tiene por defecto un pull-down de 10 kΩ a tierra y se conecta a VDDIOA mediante pull-up durante la grabación/descarga</span> | Todas las variantes | Obligatorio |
 | 2 | <span class="flag-red">Reserve un punto de prueba para MODE</span> | Todas las variantes | Obligatorio |
 | 3 | Si hay espacio en la PCB, reserve un conector de 3 pines para seleccionar pull-up o pull-down con un puente | Todas las variantes | Obligatorio |
 
@@ -167,7 +167,7 @@ Las fuentes discrepan: la tabla 3-3 de la [guía de aplicación de hardware en c
 
 | N.º | Punto de comprobación | Aplicable a | Categoría |
 |:---|:---|:---|:---|
-| 1 | La señal ANT está anotada con el requisito de impedancia característica de 50 Ω en configuración no balanceada (single-ended) | Todas las variantes | Obligatorio |
+| 1 | La señal ANT está anotada con el requisito de impedancia característica de 50 Ω en configuración no balanceada | Todas las variantes | Obligatorio |
 | 2 | Hay una red de adaptación tipo pi reservada en ANT: un condensador en paralelo NC (sin montar) y un condensador en serie de 15 pF | Todas las variantes | Obligatorio |
 | 3 | Si se requiere filtrar las emisiones espurias, reserve una red pi con un inductor en serie de 3,0 nH y un condensador en derivación de 1,5 pF | Todas las variantes |    |
 | 4 | <span class="flag-red">Si es necesario controlar un PA o LNA externo, conecte PB05 a RX_EN y PB25 a TX_EN</span> | Todas las variantes | Opcional |
@@ -184,8 +184,8 @@ La hoja fuente deja vacía la categoría del punto 3 de RF; por eso se mantiene 
 
 | N.º | Punto de comprobación | Aplicable a | Categoría |
 |:---|:---|:---|:---|
-| 1 | Se proporciona una tabla de asignación de recursos GPIO que coincide con el esquema | Todas las variantes | Obligatorio |
-| 2 | La asignación GPIO de la tabla de recursos coincide con el esquema | Todas las variantes | Obligatorio |
+| 1 | Se proporciona una tabla de asignación de recursos GPIO que coincide con el esquemático | Todas las variantes | Obligatorio |
+| 2 | La asignación GPIO de la tabla de recursos coincide con el esquemático | Todas las variantes | Obligatorio |
 | 3 | La asignación GPIO real sigue las recomendaciones de SiFli; consulte el archivo de configuración de E/S de la EVB | Todas las variantes | Obligatorio |
 
 </div>
@@ -216,13 +216,13 @@ La hoja fuente deja vacía la categoría del punto 3 de RF; por eso se mantiene 
 | 1 | QSPI2 se diseña con el orden de prioridad PSRAM > NOR > NAND | Todas las variantes | Obligatorio |
 | 2 | Si el código se ejecuta desde la memoria NOR SiP integrada, PA58 controla el interruptor de alimentación de VDD_SIP | Todas las variantes | Obligatorio |
 | 3 | Si el código se ejecuta desde memoria NOR externa en QSPI2, PA58 controla el interruptor de alimentación de QSPI2 | Todas las variantes | Obligatorio |
-| 4 | Si en producción hay que programar la memoria Flash externa de QSPI2, PA58 debe controlar su interruptor de alimentación | Todas las variantes | Obligatorio |
+| 4 | Si en producción hay que grabar la memoria Flash externa de QSPI2, PA58 debe controlar su interruptor de alimentación | Todas las variantes | Obligatorio |
 | 5 | <span class="flag-red">El interruptor de tensión controlado por PA58 se activa en alto y se desactiva en bajo</span> | Todas las variantes | Obligatorio |
 | 6 | <span class="flag-red">Se recomiendan resistencias en serie de 33 Ω en las líneas CLK y de datos de la memoria Flash</span> | Todas las variantes | Obligatorio |
 | 7 | QSPI3 se conecta según lo previsto a memoria NAND o eMMC | Solo 555/557 | Opcional |
 | 8 | PA41 controla el interruptor de alimentación de QSPI3; <span class="flag-red">la alimentación de QSPI3 está desactivada por defecto y un interruptor activo en alto debe usar el pull-down interno predeterminado</span> | Solo 555/557 | Opcional |
 | 9 | <span class="flag-red">Si PA41 no controla el interruptor de alimentación de QSPI3, confirme con el equipo de software qué E/S alternativa se utilizará</span> | Solo 555/557 | Opcional |
-| 10 | Si en producción hay que programar la memoria Flash externa de QSPI3, PA58 debe controlar su interruptor de alimentación | Solo 555/557 | Obligatorio |
+| 10 | Si en producción hay que grabar la memoria Flash externa de QSPI3, PA58 debe controlar su interruptor de alimentación | Solo 555/557 | Obligatorio |
 | 11 | PA70 controla el interruptor de alimentación de la PSRAM OPI; <span class="flag-red">la alimentación de PSRAM está activada por defecto y un interruptor activo en alto debe usar el pull-up interno predeterminado</span> | Solo 555/557 | Opcional |
 | 12 | <span class="flag-red">La PSRAM OPI es un modelo compatible y figura como validada en la guía de selección de componentes clave</span> | Solo 555/557 | Opcional |
 | 13 | Las señales de la PSRAM OPI están conectadas correctamente | Solo 555/557 | Opcional |
@@ -255,8 +255,8 @@ La hoja fuente deja vacía la categoría del punto 3 de RF; por eso se mantiene 
 | 10 | <span class="flag-red">LCD SPI de 3 hilos: CS a GPIO22, PA31 o PB33; CLK a GPIO23, PA20 o PB32; DATA a GPIO21, PA34 o PB35.<br>Modo de 4 hilos: las mismas opciones de CS, CLK y DATA, y DC a GPIO20, PA36 o PB36</span> | Todas las variantes | Obligatorio |
 | 11 | Las señales TP siguen la asignación de pines recomendada (consulte el archivo de configuración de E/S de la EVB) | Todas las variantes | Obligatorio |
 | 12 | El nivel lógico de E/S del periférico coincide con el del chip principal | Todas las variantes | Obligatorio |
-| 13 | Si el diseño debe admitir una pantalla siempre activa con la pantalla apagada, conecte la interfaz QSPI LCD a pines PA del MCU; se recomiendan GPIO PB para señales de control como LCD_EN y LCD_RST | <span class="flag-red">Solo 551/SS6600A8</span> | Obligatorio |
-| 14 | Si el diseño debe admitir una pantalla siempre activa con la pantalla apagada, conecte la interfaz QSPI LCD a pines PA del MCU o conecte la interfaz MIPI LCD al MCU; se recomiendan GPIO PB para señales de control como LCD_EN y LCD_RST | Solo 555/557 | Obligatorio |
+| 13 | Si el diseño debe admitir una pantalla siempre activa con la pantalla apagada, conecte la interfaz QSPI LCD a pines PA de la MCU; se recomiendan GPIO PB para señales de control como LCD_EN y LCD_RST | <span class="flag-red">Solo 551/SS6600A8</span> | Obligatorio |
+| 14 | Si el diseño debe admitir una pantalla siempre activa con la pantalla apagada, conecte la interfaz QSPI LCD a pines PA de la MCU o conecte la interfaz MIPI LCD a la MCU; se recomiendan GPIO PB para señales de control como LCD_EN y LCD_RST | Solo 555/557 | Obligatorio |
 
 </div>
 
@@ -275,7 +275,7 @@ La hoja fuente deja vacía la categoría del punto 3 de RF; por eso se mantiene 
 
 </div>
 
-Las fuentes discrepan: la [guía de aplicación de hardware OpenSiFli, de mayor prioridad](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) describe un GPADC de 10 bits y cinco canales, con un rango de entrada de 0–0,9 V. El punto 2 de la [hoja de cálculo original V1.0 de la lista de comprobación](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) fija un máximo de 1,0 V, pero no especifica el número de canales. La [hoja de datos SF32LB55x V1.7.2, sección 3.2.1](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf) especifica ocho entradas single-ended o cuatro pares diferenciales, con rangos de 0–1,1 V y −0,7 a 0,7 V, respectivamente; su tabla de pines enumera GPADC_CH0–CH7. La [guía ADC actual del SDK](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html) también asigna ocho canales (0–7) e indica 1,1 V como tensión máxima de muestreo. SiFli no ha explicado las diferencias en el número de canales ni en los límites de tensión. La fila 2 de la lista conserva el valor de 1,0 V de la hoja de cálculo; hasta que SiFli lo aclare por escrito, diseñe conforme al rango de 0–0,9 V de la guía de mayor prioridad y mantenga VADC en un máximo de 0,9 V. No trate 1,0 V ni 1,1 V como límites de diseño aprobados y confirme la disponibilidad de canales para el dispositivo y el encapsulado seleccionados.
+Las fuentes discrepan: la [guía de aplicación de hardware OpenSiFli, de mayor prioridad](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) describe un GPADC de 10 bits y cinco canales, con un rango de entrada de 0–0,9 V. El punto 2 de la [hoja de cálculo original V1.0 de la lista de comprobación](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) fija un máximo de 1,0 V, pero no especifica el número de canales. La [hoja de datos SF32LB55x V1.7.2, sección 3.2.1](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf) especifica ocho entradas no diferenciales o cuatro pares diferenciales, con rangos de 0–1,1 V y −0,7 a 0,7 V, respectivamente; su tabla de pines enumera GPADC_CH0–CH7. La [guía ADC actual del SDK](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html) también asigna ocho canales (0–7) e indica 1,1 V como tensión máxima de muestreo. SiFli no ha explicado las diferencias en el número de canales ni en los límites de tensión. La fila 2 de la lista conserva el valor de 1,0 V de la hoja de cálculo; hasta que SiFli lo aclare por escrito, diseñe conforme al rango de 0–0,9 V de la guía de mayor prioridad y mantenga VADC en un máximo de 0,9 V. No trate 1,0 V ni 1,1 V como límites de diseño aprobados y confirme la disponibilidad de canales para el dispositivo y el encapsulado seleccionados.
 
 ### 5.8.14. SDMADC { #5814-sdmadc }
 
@@ -380,7 +380,7 @@ Las fuentes discrepan: la [guía de aplicación de hardware OpenSiFli, de mayor 
 
 | N.º | Punto de comprobación | Aplicable a | Categoría |
 |:---|:---|:---|:---|
-| 1 | La conexión SPI es correcta: <span class="flag-red">SDO del MCU se conecta a SDI del periférico y SDI del MCU a SDO del periférico</span> | Todas las variantes | Opcional |
+| 1 | La conexión SPI es correcta: <span class="flag-red">SDO de la MCU se conecta a SDI del periférico y SDI de la MCU a SDO del periférico</span> | Todas las variantes | Opcional |
 | 2 | Se han confirmado y se cumplen los requisitos de temporización del periférico SPI | Todas las variantes | Opcional |
 | 3 | El nivel lógico de E/S del periférico coincide con el del chip principal | Todas las variantes | Opcional |
 
@@ -398,7 +398,7 @@ Las fuentes discrepan: la [guía de aplicación de hardware OpenSiFli, de mayor 
 | 2 | <span class="flag-red">Añada puntos de prueba a USART3 y, si es necesario, una resistencia pull-up; se recomienda una resistencia en serie de 100 Ω, ajustable según el diseño real</span> | Todas las variantes | Obligatorio |
 | 3 | Conecte a USART1 o USART2 los dispositivos que deban funcionar en HCPU | Todas las variantes | Opcional |
 | 4 | Conecte a USART4 o USART5 los dispositivos que deban funcionar en LCPU | Todas las variantes | Opcional |
-| 5 | <span class="flag-red">Al conectar un periférico, conecte RXD del MCU a TXD del periférico y TXD del MCU a RXD del periférico</span> | Todas las variantes | Obligatorio |
+| 5 | <span class="flag-red">Al conectar un periférico, conecte RXD de la MCU a TXD del periférico y TXD de la MCU a RXD del periférico</span> | Todas las variantes | Obligatorio |
 | 6 | El nivel lógico de E/S del periférico coincide con el del chip principal | Todas las variantes | Obligatorio |
 | 7 | Los puntos de prueba USART no utilizados se reservan como respaldo | Todas las variantes | Opcional |
 | 8 | <span class="flag-red">Si UART1 se conecta a un dispositivo, reserve puntos de prueba</span> | Todas las variantes | Obligatorio |
@@ -417,7 +417,7 @@ Las fuentes discrepan: la [guía de aplicación de hardware OpenSiFli, de mayor 
 |:---|:---|:---|:---|
 | 1 | La asignación de pines PWM para la retroiluminación es correcta; use un GPTIMx distinto del del motor, preferentemente en la interfaz PB, para evitar que la reducción de frecuencia de HCPU afecte a la retroiluminación | Todas las variantes | Opcional |
 | 2 | La asignación de pines PWM del motor es correcta; use un GPTIMx distinto del de la retroiluminación, preferentemente en la interfaz PB, para evitar que la reducción de frecuencia de HCPU afecte a la vibración | Todas las variantes | Opcional |
-| 3 | Se recomienda asignar el pin PWM del motor a la interfaz PB, preferentemente PB24 o PB25, para evitar comportamientos anómalos durante la programación al utilizar un motor SMT | Todas las variantes | Opcional |
+| 3 | Se recomienda asignar el pin PWM del motor a la interfaz PB, preferentemente PB24 o PB25, para evitar comportamientos anómalos durante la grabación al utilizar un motor SMT | Todas las variantes | Opcional |
 | 4 | Las señales que requieran salida PWM deben usar la interfaz PB; compruebe también que no haya comportamientos anómalos durante el arranque en frío | Todas las variantes | Opcional |
 
 </div>
@@ -432,7 +432,7 @@ Las fuentes discrepan: la [guía de aplicación de hardware OpenSiFli, de mayor 
 |:---|:---|:---|:---|
 | 1 | Las señales SWD están conectadas correctamente | Todas las variantes | Opcional |
 | 2 | Reserve correctamente la referencia de alimentación de E/S en el conector J-Link o en los puntos de prueba | Todas las variantes | Opcional |
-| 3 | <span class="flag-yellow">Para programar unidades de producción SF32LB555x XXXX, además de PVDD, VDDIOA, VDDIOB, VDDSIP, AVDD33 y AVDD_BRF, también debe alimentarse AVDD_DSI</span> | Solo 555/557 | Obligatorio |
+| 3 | <span class="flag-yellow">Para grabar unidades de producción SF32LB555x XXXX, además de PVDD, VDDIOA, VDDIOB, VDDSIP, AVDD33 y AVDD_BRF, también debe alimentarse AVDD_DSI</span> | Solo 555/557 | Obligatorio |
 
 </div>
 
@@ -446,7 +446,7 @@ Las fuentes discrepan: la [guía de aplicación de hardware OpenSiFli, de mayor 
 |:---|:---|:---|:---|
 | 1 | La conexión de la interfaz USB es correcta | Todas las variantes | Opcional |
 | 2 | La interfaz USB tiene protección ESD | Todas las variantes | Opcional |
-| 3 | Durante el funcionamiento normal, mientras USB permanezca habilitado, el lado del PC/dispositivo puede detectar la conexión y desconexión.<br>Si se deben detectar conexiones y desconexiones mientras el MCU está en suspensión, añada un divisor resistivo en VBUS; su salida debe ser un nivel alto que coincida con la tensión de E/S y conectarse a un pin de activación del MCU. Se recomienda compartir el pin de activación de detección de conexión del cargador | Todas las variantes | Opcional |
+| 3 | Durante el funcionamiento normal, mientras USB permanezca habilitado, el lado del PC/dispositivo puede detectar la conexión y desconexión.<br>Si se deben detectar conexiones y desconexiones mientras la MCU está en suspensión, añada un divisor resistivo en VBUS; su salida debe ser un nivel alto que coincida con la tensión de E/S y conectarse a un pin de activación de la MCU. Se recomienda compartir el pin de activación de detección de conexión del cargador | Todas las variantes | Opcional |
 
 </div>
 
@@ -483,7 +483,7 @@ Las fuentes discrepan: la [guía de aplicación de hardware OpenSiFli, de mayor 
 
 | N.º | Punto de comprobación | Aplicable a | Categoría |
 |:---|:---|:---|:---|
-| 1 | Si se necesita una placa de descarga sin conexión para programar el firmware, reserve puntos de prueba para VBAT, GND, UART3_TXD, UART3_RXD, MODE y RESET | Todas las variantes | Opcional |
+| 1 | Si se necesita una placa de descarga sin conexión para grabar el firmware, reserve puntos de prueba para VBAT, GND, UART3_TXD, UART3_RXD, MODE y RESET | Todas las variantes | Opcional |
 | 2 | Si se requiere calibrar el cristal, reserve PB08. Si PB08 se conecta a un periférico, se recomienda usarlo como salida y no conectar condensadores externos | Todas las variantes | Opcional |
 
 </div>

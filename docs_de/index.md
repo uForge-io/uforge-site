@@ -1,7 +1,7 @@
 ---
 icon: lucide/home
 title: "SF32-Plattform für Embedded-Entwicklung"
-description: "Open-Source-Dokumentation zu SF32-Mikrocontrollern mit extrem niedrigem Energieverbrauch, Modulen, Entwicklungsboards, SDK-Workflows und produktionsreifen Hardware-Designleitfäden."
+description: "Open-Source-Dokumentation zu SF32-Mikrocontrollern mit extrem niedrigem Energieverbrauch, Modulen, Entwicklungsboards, SDK-Workflows und produktionsreifen Hardware-Design-Leitfäden."
 image: assets/home/sf32-chip-hero.png
 hide:
   - navigation
@@ -236,9 +236,9 @@ hide:
 
     :fontawesome-solid-code:{ .uf-step-icon .uf-icon-purple }
 
-    **Kompilieren**
+    **Bauen**
 
-    Kompilieren Sie Beispiele oder erstellen Sie eine eigene Anwendung.
+    Bauen Sie Beispiele oder erstellen Sie eine eigene Anwendung.
 
 - <span class="uf-step-num uf-step-3">3</span>
 

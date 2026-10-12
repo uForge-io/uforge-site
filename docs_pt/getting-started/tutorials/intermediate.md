@@ -27,7 +27,7 @@ Os caminhos dos exemplos e as placas compatíveis podem variar conforme a versã
 |:------------|:---------------|
 | Shell funcional | Você precisa dos comandos `list_thread` e `list_device`, dos logs e de recursos para inspeção rápida. |
 | Entrada/saída GPIO já validada | Muitas demonstrações com middleware ainda dependem de botões, LEDs ou interrupções. |
-| Esquema da placa | Os pinos I2C e do display, o caminho de áudio e a configuração de armazenamento variam conforme a placa. |
+| Esquemático da placa | Os pinos I2C e do display, o caminho de áudio e a configuração de armazenamento variam conforme a placa. |
 | Configuração-base funcional | Preserve uma compilação comprovadamente funcional antes de combinar recursos. |
 | Possibilidade de medir corrente | A integração de subsistemas pode alterar o consumo em repouso, mesmo quando tudo parece funcionar. |
 
@@ -49,7 +49,7 @@ rt_i2c_transfer(bus, msgs, 2);
 
 O nome `i2c1` é apenas ilustrativo. Use o nome do dispositivo I2C registrado pela sua placa e confirme que `rt_device_find()` retorna um dispositivo válido antes de usar o barramento.
 
-1. Consulte a folha de dados do sensor para confirmar o endereço I2C, o mapa de registradores, a tensão de alimentação e os resistores de pull-up necessários.
+1. Consulte o datasheet do sensor para confirmar o endereço I2C, o mapa de registradores, a tensão de alimentação e os resistores de pull-up necessários.
 2. Confirme qual barramento `i2cX` e quais pinos a placa utiliza.
 3. Adapte o exemplo de EEPROM ou mestre I2C para se comunicar com o sensor. Se ele tiver um registrador de identificação, leia-o primeiro; caso contrário, comece por um registrador cujo comportamento esperado seja conhecido.
 4. Decodifique uma medição real e imprima o resultado pelo shell.
@@ -64,7 +64,7 @@ O nome `i2c1` é apenas ilustrativo. Use o nome do dispositivo I2C registrado pe
 
 ## Crie uma interface LVGL básica { #build-a-basic-lvgl-screen }
 
-**Objetivo:** exibir um elemento real de interface na tela, em vez de escrever diretamente no framebuffer.
+**Objetivo:** exibir um elemento real de interface no display, em vez de escrever diretamente no framebuffer.
 
 **Tempo:** 45 a 60 minutos
 
@@ -76,7 +76,7 @@ lv_label_set_text(label, "Hello, SF32!");
 lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
 ```
 
-1. Inicialize o driver do display e confirme que a tela exibe preenchimentos de cor sólida antes de depurar os widgets LVGL.
+1. Faça o bring-up (ativação inicial) do driver do display e confirme que o painel exibe áreas de cor sólida antes de depurar os widgets LVGL.
 2. Crie um rótulo e um widget de botão.
 3. Configure o callback do botão para alterar o texto do rótulo.
 4. Adicione uma animação simples e observe o uso de CPU ou o tempo de quadro pelas ferramentas do shell.
@@ -86,7 +86,7 @@ lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
 
 **Solução de problemas:** separe problemas do painel dos problemas do LVGL. Se os preenchimentos de cor sólida falharem, verifique alimentação, reset, sequência de inicialização, formato de pixel e ordem dos bytes antes de alterar o código LVGL.
 
-**O que você aprendeu:** o modelo de objetos e eventos do LVGL e a sequência de inicialização do display que serve de base para projetos com uso intenso de gráficos.
+**O que você aprendeu:** o modelo de objetos e eventos do LVGL e a sequência de bring-up do display que serve de base para projetos com uso intenso de gráficos.
 
 ## Anuncie e conecte-se como periférico BLE { #advertise-and-connect-as-a-ble-peripheral }
 
@@ -105,9 +105,9 @@ lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
 
 **Critério de sucesso:** o dispositivo transmite anúncios, estabelece a conexão, disponibiliza o serviço GATT configurado, troca dados conforme as propriedades escolhidas para a característica e retorna a um estado limpo após desconectar e reconectar.
 
-**Solução de problemas:** teste estes cenários: dados de bonding desatualizados, remoção do dispositivo pelo telefone, reinicialização da placa durante uma conexão e alteração dos parâmetros de conexão. Muitos problemas de BLE só aparecem depois da primeira conexão bem-sucedida.
+**Solução de problemas:** teste estes cenários: vínculos BLE obsoletos, remoção do dispositivo pelo telefone, reinicialização da placa durante uma conexão e alteração dos parâmetros de conexão. Muitos problemas de BLE só aparecem depois da primeira conexão bem-sucedida.
 
-**O que você aprendeu:** o fluxo de transmissão de anúncios -> conexão -> notificação GATT, usado pela maioria dos produtos BLE.
+**O que você aprendeu:** a sequência anúncio BLE -> conexão -> notificação GATT, usada pela maioria dos produtos BLE.
 
 ## Reproduza áudio local a partir do armazenamento { #play-local-audio-from-storage }
 
@@ -119,7 +119,7 @@ lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
 
 A documentação atual lista `sf32lb52-lchspi-ulp` como plataforma compatível com `example/multimedia/audio/mp3_sd_player`. Não presuma que ele funciona na sua placa: antes de usá-lo, confira as [plataformas compatíveis e os requisitos de hardware](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/mp3_sd_player/README.html).
 
-1. Copie um arquivo WAV ou MP3 pequeno para o meio de armazenamento esperado pelo exemplo.
+1. Copie um arquivo WAV ou MP3 pequeno para o armazenamento esperado pelo exemplo.
 2. Compile e grave o exemplo.
 3. Confirme se a reprodução começa, se o áudio está limpo e se a placa não reinicia quando a reprodução é iniciada.
 4. Integre a lógica de início e parada da reprodução ao tratador de botão do exercício 2 de Primeiros periféricos.
@@ -187,7 +187,7 @@ close(fd);
 ## Checklist de integração de subsistemas { #intermediate-integration-checklist }
 
 - [ ] Cada tutorial começa por um exemplo funcional do SDK, já validado.
-- [ ] Cada caminho de hardware é validado primeiro: leitura de um registrador ou valor conhecido do sensor, preenchimento de cor no painel, anúncios BLE, saída de áudio ou montagem do armazenamento.
+- [ ] Cada caminho de hardware é validado primeiro: leitura de um registrador ou valor conhecido do sensor, preenchimento de cor no painel, anúncios BLE, saída de áudio ou montagem do sistema de arquivos.
 - [ ] Quando aplicável, o recurso continua funcionando após reset e desconexão/reconexão.
 - [ ] Os caminhos de erro foram testados: sensor ausente, arquivo inexistente, telefone desconectado e armazenamento cheio.
 - [ ] Foi realizado pelo menos um teste com carga combinada.

@@ -74,7 +74,7 @@ La famille SF32LB propose différentes configurations de processeur basse consom
 | **SF32LB52x** | Bluetooth bimode, Bluetooth classique + BLE | Le LCPU exécute la pile Bluetooth ; il n'est pas ouvert au code applicatif | Modules Bluetooth à coût maîtrisé, accessoires audio, objets connectés d'entrée de gamme et interfaces HMI compactes. |
 | **SF32LB55x** | BLE | Le LCPU peut exécuter les tâches applicatives prises en charge par le SDK | Objets connectés BLE et produits basse consommation riches en capteurs. |
 | **SF32LB56x** | Bluetooth bimode, Bluetooth classique + BLE | Le LCPU peut exécuter les tâches applicatives prises en charge par le SDK | Produits à affichage plus riche, HMI connectées et appareils portables. |
-| **SF32LB57x** | Bluetooth bimode, Bluetooth classique + BLE | Le LCPU gère Bluetooth et les tâches soumises à des contraintes de consommation énergétique ; vérifier celles prises en charge par le SDK | Produits répartissant graphisme et audio local entre HCPU et ACPU. |
+| **SF32LB57x** | Bluetooth bimode, Bluetooth classique + BLE | Le LCPU gère Bluetooth et les tâches sensibles à la consommation ; vérifiez celles prises en charge par le SDK | Produits répartissant graphisme et audio local entre HCPU et ACPU. |
 | **SF32LB58x** | Bluetooth bimode, Bluetooth classique + BLE | Le LCPU peut exécuter les tâches applicatives prises en charge par le SDK | Produits haut de gamme avec graphisme, audio, IA et besoins de connectivité complexes. |
 
 </div>
@@ -124,7 +124,7 @@ Le fonctionnement bimode peut être plus exigeant que le BLE seul, car l'audio e
 
 ## Audio Bluetooth et LE Audio { #bluetooth-audio-and-le-audio }
 
-Les produits audio Bluetooth imposent des contraintes supplémentaires à l'architecture du système. Ils doivent parfois gérer simultanément la temporisation radio, la mise en mémoire tampon, le traitement du codec, la synchronisation des horloges et les mises à jour de l'interface utilisateur.
+Les produits audio Bluetooth imposent des contraintes supplémentaires à l'architecture du système. Ils impliquent parfois simultanément la temporisation radio, la mise en mémoire tampon, le traitement du codec, la synchronisation des horloges et les mises à jour de l'interface utilisateur.
 
 Un système audio Bluetooth SF32 bien conçu sépare généralement les responsabilités :
 
@@ -148,7 +148,7 @@ Le sous-système Bluetooth est particulièrement utile lorsque le processeur app
 
 Ce modèle maintient autant que possible le CPU principal en dehors de l'état actif. Le processeur Bluetooth et la radio se réveillent aux événements de connexion prévus, exécutent les opérations de protocole nécessaires, puis permettent au système de repasser dans un état moins énergivore.
 
-Le profil de consommation réel dépend de l'intervalle de connexion, de la puissance d'émission, du comportement des annonces, du mode de veille, de la configuration du cristal, de la disposition RF, de la politique du firmware et de la fréquence de réveil du processeur applicatif.
+Le profil de consommation réel dépend de l'intervalle de connexion, de la puissance d'émission, du comportement des annonces, du mode de veille, de la configuration du quartz, de la disposition RF, de la politique du firmware et de la fréquence de réveil du processeur applicatif.
 
 ## Rôles de l'hôte, du contrôleur et de l'application { #host-controller-and-application-boundaries }
 
@@ -176,7 +176,7 @@ Le processeur applicatif contrôle généralement le comportement au niveau prod
 - Démarrer et arrêter les annonces BLE.
 - Créer ou accepter des connexions.
 - Gérer les services et caractéristiques GATT.
-- Gérer l'appairage, le bonding et la politique de sécurité.
+- Gérer l'appairage, l'association persistante des clés (bonding) et la politique de sécurité.
 - Échanger des données applicatives avec un téléphone ou une passerelle.
 - Mettre à jour l'interface utilisateur lorsque l'état Bluetooth change.
 - Coordonner les flux audio, les capteurs et les modes d'alimentation.
@@ -193,12 +193,12 @@ Les considérations matérielles importantes incluent :
 
 - Utiliser le réseau d'adaptation RF et la disposition d'antenne recommandés.
 - Garder la piste RF courte, à impédance contrôlée et bien isolée des signaux bruyants.
-- Suivre les exigences de cristal du guide de conception matérielle.
+- Suivre les exigences de quartz du guide de conception matérielle.
 - Fournir des rails d'alimentation propres et un découplage local aux circuits RF et d'horloge.
-- Préserver les points de test nécessaires à l'étalonnage RF et au téléchargement du firmware en production.
+- Préserver les points de test nécessaires à l'étalonnage RF et au flashage du firmware en production.
 - Éviter de faire passer des pistes rapides d'écran, de stockage ou d'alimentation à découpage près des chemins RF sensibles.
 
-Les équipes logicielles et matérielles doivent considérer les performances Bluetooth comme une propriété du système. Les paramètres du firmware ne peuvent pas compenser entièrement une mauvaise disposition RF ou des horloges instables.
+Les équipes logicielles et matérielles doivent considérer les performances Bluetooth comme une propriété du système. Les paramètres du firmware ne peuvent pas compenser entièrement un mauvais routage RF ou des horloges instables.
 
 ## Coexistence avec d'autres charges de travail { #coexistence-with-other-workloads }
 
@@ -251,5 +251,5 @@ Une conception robuste associe généralement le processeur Bluetooth à des par
 - Un LCPU programmable permet des tâches applicatives dans les limites du SDK ; l'accès au code du contrôleur et sa personnalisation doivent être confirmés séparément. Utilisez les mises à jour du fabricant et validez les changements.
 - Le BLE est optimisé pour les produits connectés basse consommation ; le Bluetooth bimode ajoute des cas d'usage du Bluetooth classique, tels que l'audio et la prise en charge de profils hérités.
 - Le processeur Bluetooth permet au CPU applicatif principal de rester en veille pendant que les connexions, les annonces BLE et les événements radio planifiés se poursuivent.
-- De bonnes performances Bluetooth dépendent à la fois de l'architecture du firmware et de la conception matérielle, notamment de la disposition RF, des horloges, de l'alimentation, de l'adaptation de l'antenne et de l'étalonnage.
+- De bonnes performances Bluetooth dépendent à la fois de l'architecture du firmware et de la conception matérielle, notamment du routage RF, des horloges, de l'alimentation, de l'adaptation de l'antenne et de l'étalonnage.
 - Traitez Bluetooth comme un sous-système comportant des frontières hôte/contrôleur, des échanges interprocesseurs, des choix de gestion de l'énergie et des contraintes liées aux ressources partagées.

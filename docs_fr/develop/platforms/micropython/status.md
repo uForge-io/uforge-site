@@ -12,7 +12,7 @@ Les recherches dans la documentation SiFli et les dépôts OpenSiFli vérifiés 
 
 Cette vérification a porté sur les [dépôts publics d'OpenSiFli sur GitHub](https://github.com/OpenSiFli/) et le [portail documentaire de SiFli](https://docs.sifli.com/).
 
-Cela ne prouve pas qu'aucune expérimentation privée ou communautaire n'existe. Cela signifie que ce site ne devrait pas présenter MicroPython comme une voie de développement SF32 vérifiée avant qu'une image publique du firmware ou un arbre public du code source puisse être référencé.
+Cela ne prouve pas qu'aucune expérimentation privée ou communautaire n'existe. Cela signifie que ce site ne devrait pas présenter MicroPython comme une voie de développement SF32 vérifiée avant de pouvoir référencer une image publique du firmware ou un dépôt de code source public.
 
 ## Recommandation actuelle { #current-recommendation }
 
@@ -50,7 +50,7 @@ Ne testez le GPIO qu'une fois les noms de broches documentés.
 MicroPython peut passer d'une page de suivi à une page de prise en main lorsque tous les éléments suivants sont disponibles :
 
 - Un dépôt public ou une page des versions.
-- Un binaire spécifique à une carte pour au moins un kit de développement SF32.
+- Un binaire spécifique à une carte pour au moins une carte de développement SF32.
 - Une commande de flashage documentée.
 - Un port REPL et un débit en bauds documentés.
 - Une voie de récupération vers le firmware SiFli-SDK.

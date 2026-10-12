@@ -27,7 +27,7 @@ Neste contexto, **estática** e **dinâmica** descrevem como uma célula de RAM 
 
 A PSRAM costuma usar internamente um **arranjo de células dinâmicas semelhante ao da DRAM**. O próprio dispositivo PSRAM executa o refresh e oculta, dentro do encapsulamento, boa parte do controle específico da DRAM. Por isso, seu modelo de acesso pelo host se aproxima mais do da SRAM: o host lê e grava um espaço de memória endereçável sem precisar programar o refresh periódico. Isso não significa que toda PSRAM tenha a mesma interface elétrica ou temporização da SRAM. Ela é **pseudoestática** porque a RAM dinâmica *imita o comportamento externo da RAM estática*, não porque a célula de armazenamento tenha se tornado estática.
 
-A simplificação ocorre na interface; ela não elimina as limitações físicas. A PSRAM ainda tem latência de comando, comportamento de rajada (burst), limites de clock, modos de suspensão, restrições de acesso e consumo específicos do dispositivo. Consulte a folha de dados da PSRAM escolhida, em vez de tratar todos os componentes PSRAM como intercambiáveis.
+A simplificação ocorre na interface; ela não elimina as limitações físicas. A PSRAM ainda tem latência de comando, comportamento de rajada (burst), limites de clock, modos de suspensão, restrições de acesso e consumo específicos do dispositivo. Consulte o datasheet da PSRAM escolhida, em vez de tratar todos os componentes PSRAM como intercambiáveis.
 
 !!! note "O que a PSRAM não é"
     PSRAM não é armazenamento não volátil, não garante a latência da SRAM interna nem garante largura de banda suficiente para o sistema. Ela resolve um problema de capacidade; o dispositivo e a carga de trabalho escolhidos determinam os custos de latência, consumo e largura de banda.
@@ -70,9 +70,9 @@ Uma organização comum em sistemas embarcados é:
 <div align="center"><em>Diagrama: organização típica da memória em um sistema embarcado</em></div>
 
 ```text
-Imagem de firmware, recursos e configurações a preservar -> Armazenamento não volátil
-Buffers grandes ativos e framebuffers                    -> PSRAM
-Pilhas acessadas com frequência, estado de controle e dados DMA -> SRAM interna
+Persistent firmware image, assets, settings -> Non-volatile storage
+Active large buffers and framebuffers -> PSRAM
+Hot stacks, control state, DMA data  -> Internal SRAM
 ```
 
 Essa é uma política de alocação, não uma regra que todo buffer precise seguir. Uma imagem pequena reutilizada com frequência pode ficar na SRAM; um modelo grande pode permanecer na Flash ou na PSRAM; e um sistema de exibição pode precisar de PSRAM simplesmente porque um framebuffer completo não cabe na memória interna.
@@ -149,11 +149,11 @@ Meça o tempo de quadro, a falta de dados nos buffers, os ciclos de espera da CP
 
 Algumas PSRAMs da AP Memory oferecem o modo **Half-Sleep**, um estado de consumo ultrabaixo que retém os dados armazenados. Ele é útil quando um buffer grande precisa permanecer válido enquanto o sistema pausa a atividade da PSRAM, mas o produto não pode recarregar o buffer a partir da Flash nem recalculá-lo depois de cada intervalo ocioso.
 
-Half-Sleep é um **modo de energia específico do dispositivo**, não um recurso genérico da PSRAM. A [folha de dados da PSRAM AP Memory APS6408L-OBMx DDR OPI Xccela](https://www.apmemory.com/wp-content/uploads/APS6408L-OBM-BA.pdf) documenta uma implementação desse modo. O tempo de entrada e saída, a codificação do registrador de modo, o comportamento permitido do clock, a corrente, os limites de temperatura e as garantias de retenção **não podem ser generalizados** entre famílias ou revisões de PSRAM. Consulte a folha de dados exata e confirme o suporte do SDK para o componente instalado.
+Half-Sleep é um **modo de energia específico do dispositivo**, não um recurso genérico da PSRAM. O [datasheet da PSRAM AP Memory APS6408L-OBMx DDR OPI Xccela](https://www.apmemory.com/wp-content/uploads/APS6408L-OBM-BA.pdf) documenta uma implementação desse modo. O tempo de entrada e saída, a codificação do registrador de modo, o comportamento permitido do clock, a corrente, os limites de temperatura e as garantias de retenção **não podem ser generalizados** entre famílias ou revisões de PSRAM. Consulte o datasheet exato e confirme o suporte do SDK para o componente instalado.
 
 ### Economia relativa de energia { #relative-power-saving }
 
-As comparações abaixo usam a ficha da AP Memory Rev. 3.7, disponível no [site do fabricante](https://www.apmemory.com/wp-content/uploads/APS6408L-OBM-BA.pdf). Confirme a revisão e o componente instalado antes de aplicar seus limites.
+As comparações abaixo usam o datasheet da AP Memory Rev. 3.7, disponível no [site do fabricante](https://www.apmemory.com/wp-content/uploads/APS6408L-OBM-BA.pdf). Confirme a revisão e o componente instalado antes de aplicar seus limites.
 
 Para o mesmo componente de referência APS6408L-OBMx com **retenção de toda a matriz**, a AP Memory publica as seguintes correntes médias típicas em espera padrão e Half-Sleep. Com a mesma tensão de alimentação, a redução relativa da corrente também corresponde à redução relativa da potência consumida pela PSRAM.
 

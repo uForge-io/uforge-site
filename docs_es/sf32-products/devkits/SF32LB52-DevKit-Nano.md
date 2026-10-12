@@ -36,7 +36,7 @@ La placa mide 51 mm × 20,32 mm y expone los recursos principales del SF32LB52x 
 
 La variante N4 es adecuada para productos compactos de control y Bluetooth, así como para aplicaciones con interfaces de usuario sencillas. N16R16 combina 16 MB de OPI-PSRAM con 16 MB de QSPI-NOR, mientras que A128R16 combina 16 MB de OPI-PSRAM con 128 MB de QSPI-NAND. Ambas variantes sirven para aplicaciones que necesitan recursos gráficos de mayor tamaño, sistemas de archivos externos o una zona de trabajo o búfer de imagen en PSRAM.
 
-**Discrepancia entre fuentes; verifique antes de seleccionar:** La [guía detallada de la placa Nano](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html) denomina `R16N16 V1.0.0` a su configuración con 16 MB de OPI-PSRAM y 16 MB de NOR. La [guía vigente de modelos de placas](https://wiki.sifli.com/en/board/devkit_guide.html) identifica esa misma configuración como `N16R16` y especifica por separado `A128R16` con 16 MB de OPI-PSRAM y 128 MB de QSPI-NAND. La guía detallada no describe A128R16; para ese SKU, use la información de la guía de modelos y no extrapole otros detalles de N16R16. Antes de elegir firmware o memoria, compruebe la serigrafía y el esquema/BOM actualizados.
+**Discrepancia entre fuentes; verifique antes de seleccionar:** La [guía detallada de la placa Nano](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html) denomina `R16N16 V1.0.0` a su configuración con 16 MB de OPI-PSRAM y 16 MB de NOR. La [guía vigente de modelos de placas](https://wiki.sifli.com/en/board/devkit_guide.html) identifica esa misma configuración como `N16R16` y especifica por separado `A128R16` con 16 MB de OPI-PSRAM y 128 MB de QSPI-NAND. La guía detallada no describe A128R16; para ese SKU, use la información de la guía de modelos y no extrapole otros detalles de N16R16. Antes de elegir firmware o memoria, compruebe la serigrafía y el esquemático/BOM actualizados.
 
 Las fuentes de SiFli también difieren ligeramente en las dimensiones de la placa Nano: la guía detallada indica 21 × 51 mm, mientras que la guía de modelos especifica 51 × 20,32 mm. La dimensión de 51 mm coincide, pero la medida del lado corto difiere en 0,68 mm. Esta página adopta el valor más preciso de la guía de modelos; antes de diseñar una carcasa o una placa portadora, compruebe el plano mecánico de la revisión concreta.
 
@@ -58,7 +58,7 @@ Las fuentes de SiFli también difieren ligeramente en las dimensiones de la plac
 Elija SF32LB52-DevKit-Nano cuando quiera evaluar un prototipo con dimensiones y montaje próximos a los del producto final.
 
 - Construir prototipos compactos de Bluetooth y pantalla
-- Soldar la placa en un PCB portador
+- Soldar la placa en una PCB portador
 - Validar una asignación de pines representativa del producto antes de diseñar una placa propia
 - Comparar la variante con solo Flash NOR y las variantes con PSRAM y Flash QSPI-NOR o QSPI-NAND
 - Poner en marcha funciones de LCD, audio, sensor y USB en una huella pequeña
@@ -201,7 +201,7 @@ La variante N16R16 incorpora 16 MB de Flash QSPI-NOR externa. El grupo de pines 
 
 <div align="center" markdown>
 
-| GPIO del MCU | Función compartida de Flash / SDIO |
+| GPIO de la MCU | Función compartida de Flash / SDIO |
 | :--- | :--- |
 | PA12 | MPI2_CS / SD1_D2 |
 | PA13 | MPI2_D1 / SD1_D3 |

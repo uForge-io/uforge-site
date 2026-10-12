@@ -1,6 +1,6 @@
 ---
 icon: lucide/card-sim
-description: "SF32LB58-MOD : module MCU Bluetooth basse consommation basé sur le SF32LB586VDD36 ; configuration standard avec 16 + 16 Mo de HPI-PSRAM et 1 Mo de QSPI-NOR, plus des variantes NOR, NAND ou eMMC."
+description: "SF32LB58-MOD : module MCU Bluetooth basse consommation basé sur le SF32LB586VDD36 ; configuration standard avec 16 + 16 MB de HPI-PSRAM et 1 MB de QSPI-NOR, plus des variantes NOR, NAND ou eMMC."
 tags:
   - Matériel
   - Module
@@ -10,16 +10,16 @@ tags:
 
 ## Présentation { #overview }
 
-Le SF32LB58-MOD est un module MCU Bluetooth basse consommation de SiFli, basé sur le SF32LB586VDD36. La configuration standard comprend 16 + 16 Mo de HPI-PSRAM et 1 Mo de QSPI-NOR. Le module de 24 × 24 × 3,1 mm réunit la plateforme à trois cœurs, le circuit RF, le quartz et plusieurs options mémoire. Ses interfaces exposées permettent d'intégrer des fonctions d'affichage, d'audio, de stockage et de commande.
+Le SF32LB58-MOD est un module MCU Bluetooth basse consommation de SiFli, basé sur le SF32LB586VDD36. La configuration standard comprend 16 + 16 MB de HPI-PSRAM et 1 MB de QSPI-NOR. Ce module de 24 × 24 × 3,1 mm réunit la plateforme à trois cœurs, le circuit RF, le quartz et les options mémoire, et expose des interfaces pour l'affichage, l'audio, le stockage et la commande.
 
-Le module intègre le composant BGA256, le circuit RF, le quartz et la mémoire rapide, ce qui réduit le routage correspondant sur la carte porteuse du produit. Le produit final doit néanmoins faire l'objet d'une validation RF et satisfaire aux exigences réglementaires applicables. Avant de finaliser la conception de la carte porteuse, confirmez la configuration d'antenne et de mémoire de la référence choisie.
+Le module intègre le composant BGA256, le circuit RF, le quartz et la mémoire rapide, ce qui réduit le routage correspondant sur la carte porteuse du produit. Le produit final doit néanmoins faire l'objet d'une validation RF et obtenir les homologations réglementaires applicables. Avant de finaliser la conception de la carte porteuse, confirmez la configuration d'antenne et de mémoire de la référence choisie.
 
 Selon la référence choisie, la plateforme peut associer une HPI-PSRAM à une mémoire QSPI-NOR, QSPI-NAND ou eMMC. Les interfaces disponibles permettent de développer des produits dotés de fonctions d'affichage, d'audio, de stockage et de connectivité tout en conservant une plateforme reposant sur un MCU.
 
-La DS5802 V0.1 décrit une antenne PCB intégrée au module et des options de raccordement d'une antenne externe. Celle-ci peut être raccordée par des demi-trous métallisés ou par le connecteur externe de première génération, compatible avec les connecteurs Hirose U.FL, I-PEX MHFI et Amphenol AMC. La fiche ne précise pas quelle configuration correspond à chaque référence ; confirmez auprès de SiFli l'implémentation d'antenne du module choisi avant de finaliser le routage de la carte porteuse.
+La fiche technique DS5802 V0.1 décrit une antenne PCB intégrée au module et des options de raccordement d'une antenne externe. Celle-ci peut être raccordée par des demi-trous métallisés ou par le connecteur externe de première génération, compatible avec les connecteurs Hirose U.FL, I-PEX MHFI et Amphenol AMC. La fiche technique ne précise pas quelle configuration correspond à chaque référence ; confirmez auprès de SiFli l'implémentation d'antenne du module choisi avant de finaliser le routage de la carte porteuse.
 
 !!! info
-    Pour l'architecture et les périphériques de la famille de puces, consultez la page [SF32LB58x](../chips/SF32LB58x.md). Cette page traite de l'intégration du module, des configurations mémoire, des alimentations et du choix du produit.
+    Pour l'architecture et les périphériques de la puce sous-jacente, consultez la page [SF32LB58x](../chips/SF32LB58x.md). Cette page traite de l'intégration du module, des configurations mémoire, des alimentations et du choix du produit.
 
 ## Applications { #applications }
 
@@ -27,9 +27,9 @@ SiFli indique les domaines d'application suivants pour le SF32LB58-MOD :
 
 - Objets connectés portables : montres connectées haut de gamme, bracelets connectés, dispositifs médicaux portables et équipements de fitness
 - Industrie : solutions d'affichage économiques, IHM graphiques, centres de contrôle de capteurs industriels, surveillance des équipements et instruments
-- Automobile : unités centrales de commande pour véhicules électriques, clés de voiture et dispositifs portés sur soi utilisés comme télécommandes pour véhicules
+- Automobile : unités centrales de commande pour véhicules électriques, clés de voiture et télécommandes de véhicule à porter sur soi
 - Domotique : petits et moyens appareils électroménagers intelligents et serrures connectées
-- Usage général : concentrateurs de capteurs à basse consommation et Bluetooth Mesh
+- Applications générales : concentrateurs de capteurs à basse consommation et Bluetooth Mesh
 - Exemples d'AIoT : reconnaissance de commandes vocales, maison connectée, clés intelligentes et panneaux de commande intelligents
 
 Envisagez le SF32LB58-MOD si la conception nécessite une ou plusieurs des fonctions suivantes :
@@ -67,7 +67,7 @@ Envisagez le SF32LB58-MOD si la conception nécessite une ou plusieurs des fonct
 - 1 cœur Arm Cortex-M33 STAR-MC1 à basse consommation, programmable par l'utilisateur, jusqu'à 96 MHz
 - Jusqu'à 370 DMIPS / 984 EEMBC CoreMark par cœur applicatif
 - Jusqu'à 148 DMIPS / 394 EEMBC CoreMark sur le cœur basse consommation
-- SRAM 2176 Ko (HCPU) + SRAM 512 Ko (ACPU) + SRAM de rétention 1056 Ko (LCPU)
+- SRAM 2176 KB (HCPU) + SRAM 512 KB (ACPU) + SRAM de rétention 1056 KB (LCPU)
 - FPU simple précision et MPU sur tous les cœurs
 
 ### Connectivité sans fil { #wireless-connectivity }
@@ -104,9 +104,9 @@ Le [guide matériel SF32LB58x](https://wiki.sifli.com/en/hardware/SF32LB58x-HW-A
 
 | Code de module | Stockage au choix | PSRAM | Flash standard | Température | Dimensions |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB58-MOD-N16R32N1 | QSPI-NOR 16 Mo | HPI-PSRAM 16 + 16 Mo | QSPI-NOR 1 Mo | −40 °C à +85 °C | 24 × 24 × 3,1 mm |
-| SF32LB58-MOD-A128R32N1 | QSPI-NAND 128 Mo | HPI-PSRAM 16 + 16 Mo | QSPI-NOR 1 Mo | −40 °C à +85 °C | 24 × 24 × 3,1 mm |
-| SF32LB58-MOD-E4R32N1 | eMMC 4 Go | HPI-PSRAM 16 + 16 Mo | QSPI-NOR 1 Mo | −40 °C à +85 °C | 24 × 24 × 3,1 mm |
+| SF32LB58-MOD-N16R32N1 | QSPI-NOR 16 MB | HPI-PSRAM 16 + 16 MB | QSPI-NOR 1 MB | −40 °C à +85 °C | 24 × 24 × 3,1 mm |
+| SF32LB58-MOD-A128R32N1 | QSPI-NAND 128 MB | HPI-PSRAM 16 + 16 MB | QSPI-NOR 1 MB | −40 °C à +85 °C | 24 × 24 × 3,1 mm |
+| SF32LB58-MOD-E4R32N1 | eMMC 4 GB | HPI-PSRAM 16 + 16 MB | QSPI-NOR 1 MB | −40 °C à +85 °C | 24 × 24 × 3,1 mm |
 
 </div>
 
@@ -128,7 +128,7 @@ Le [guide des modèles de modules SiFli](https://wiki.sifli.com/en/silicon/%E6%A
 
 ### Puce { #chip }
 
-Basé sur le [SF32LB58x](../chips/SF32LB58x.md). Pour en savoir plus sur l'architecture graphique, mémoire et d'affichage de la famille, consultez la page de la puce.
+Basé sur le [SF32LB58x](../chips/SF32LB58x.md). Consultez la page de la puce pour l'architecture graphique, mémoire et d'affichage qui sous-tend le module.
 
 ### Cartes de développement { #development-kits }
 

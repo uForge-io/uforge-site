@@ -1,8 +1,8 @@
 ---
 icon: lucide/satellite-dish
 title: "Intégrer et lire des capteurs"
-description: "Ajouter un pilote de capteur à SiFli-SDK, enregistrer le dispositif via RT-Thread et le valider depuis le shell FinSH."
-tags: [Développement, SiFli-SDK, Notes d’application, Capteurs]
+description: "Ajouter un pilote de capteur à SiFli-SDK, enregistrer le périphérique via RT-Thread et le valider depuis le shell FinSH."
+tags: [Développement, SiFli-SDK, Notes d'application, Capteurs]
 ---
 
 # Intégrer et lire des capteurs { #integrate-and-read-sensors }
@@ -16,18 +16,18 @@ Les exemples utilisent un capteur six axes LSM6DSL (accéléromètre et gyroscop
 
 ## Confirmer le matériel et l'interface du capteur { #1-confirm-the-hardware-and-sensor-interface }
 
-Commencez par la fiche technique du capteur et identifiez à la fois sa fonction et son interface hôte. Le guide du SDK cite comme exemples des capteurs six axes (accéléromètre et gyroscope), de température, de pression barométrique, géomagnétiques et de lumière, ainsi que des capteurs GPS et de moteur. Les interfaces hôtes prises en charge dans ce guide sont I2C, SPI et UART.
+Commencez par la fiche technique du capteur et identifiez à la fois sa fonction et son interface hôte. Le guide du SDK cite comme exemples des capteurs six axes (accéléromètre et gyroscope), de température, de pression barométrique, de champ magnétique et de lumière, ainsi que des capteurs GPS et de moteur. Les interfaces hôtes prises en charge dans ce guide sont I2C, SPI et UART.
 
 Avant d'écrire un pilote :
 
 - Vérifiez dans la conception matérielle que le bus sélectionné est activé et routé vers les broches du boîtier.
-- Vérifiez que le capteur et le dispositif SF32 partagent des plages de tension et de fréquence compatibles.
-- Identifiez le nom du bus, l'adresse du dispositif, le signal de sélection de puce (chip select, le cas échéant), le contrôle d'alimentation, la réinitialisation et les broches d'interruption.
+- Vérifiez que le capteur et le composant SF32 partagent des plages de tension et de fréquence compatibles.
+- Identifiez le nom du bus, l'adresse du composant, le signal de sélection de puce (chip select, le cas échéant), le contrôle d'alimentation, la réinitialisation et les broches d'interruption.
 - Définissez avec le responsable de l'application les opérations d'accès aux données et de commande que le pilote doit proposer.
 
 ## Préparer le pilote et la configuration de compilation { #2-prepare-the-driver-and-build-configuration }
 
-Les pilotes de périphériques SiFli-SDK se trouvent sous `rtos/rthread/bsp/sifli/peripherals`. Après avoir choisi le bus et l'implémentation, ajoutez un répertoire pour le nouveau dispositif. Ajoutez ses entrées `menuconfig` à `rtos/rthread/bsp/sifli/peripherals/Kconfig`, notamment :
+Les pilotes de périphériques SiFli-SDK se trouvent sous `rtos/rthread/bsp/sifli/peripherals`. Après avoir choisi le bus et l'implémentation, ajoutez un répertoire pour le nouveau composant. Ajoutez ses entrées `menuconfig` à `rtos/rthread/bsp/sifli/peripherals/Kconfig`, notamment :
 
 - l'option d'activation du capteur ;
 - la sélection et le nom d'une interface prise en charge, par exemple I2C, SPI ou UART ;
@@ -83,15 +83,15 @@ Le groupe peut proposer plusieurs modèles pris en charge, tels que LSM6DSL et S
 
 - `ACC_USING_LSM6DSL` active le pilote LSM6DSL.
 - `LSM6DSL_USING_I2C` sélectionne I2C (`1`) ou SPI (`0`). Omettez ce symbole lorsque le capteur ne prend en charge qu'une seule interface.
-- `LSM6DSL_BUS_NAME` nomme le dispositif de bus que le pilote de capteur RT-Thread doit trouver.
+- `LSM6DSL_BUS_NAME` nomme le périphérique de bus que le pilote de capteur RT-Thread trouvera.
 - `LSM6DSL_INT_GPIO_BIT` et `LSM6DSL_INT2_GPIO_BIT` décrivent les broches d'interruption lorsque la carte les assigne.
-- `LSM_USING_AWT`, `LSM_USING_PEDO` et `LSM6DSL_USE_FIFO` représentent des fonctions spécifiques au dispositif ; ne les définissez que si le pilote sélectionné les prend en charge.
+- `LSM_USING_AWT`, `LSM_USING_PEDO` et `LSM6DSL_USE_FIFO` représentent des fonctions spécifiques au composant ; ne les définissez que si le pilote sélectionné les prend en charge.
 
 Cet exemple suit le guide SF32LB52x. Les guides d'autres familles ou branches du SDK peuvent proposer des options ou des chemins de menu différents ; vérifiez les symboles effectivement définis dans la branche cible avant de reprendre l'exemple.
 
 ### Trouver le bus et implémenter l'accès aux registres { #find-the-bus-and-implement-register-access }
 
-Utilisez `rt_i2c_bus_device_find` ou `rt_device_find` pour obtenir le dispositif de bus. Appelez ensuite l'API de lecture/écriture de bus correspondant à l'interface sélectionnée. La fiche technique du capteur reste l'autorité pour l'adresse du dispositif, la table des registres, la séquence de commandes et la largeur des registres.
+Utilisez `rt_i2c_bus_device_find` ou `rt_device_find` pour obtenir le périphérique de bus. Appelez ensuite l'API de lecture/écriture de bus correspondant à l'interface sélectionnée. La fiche technique du capteur reste l'autorité pour l'adresse du composant, la table des registres, la séquence de commandes et la largeur des registres.
 
 ```c
 int LSM6DSL_I2C_Init()
@@ -184,9 +184,9 @@ int lsm6dsl_gpio_int_enable(void)
 }
 ```
 
-## Enregistrer le dispositif capteur RT-Thread { #4-register-the-rt-thread-sensor-device }
+## Enregistrer le périphérique capteur RT-Thread { #4-register-the-rt-thread-sensor-device }
 
-Ajoutez un fichier `sensor_xxx.c` dans le répertoire du nouveau périphérique. Ce fichier rend le capteur accessible via le framework de capteurs de RT-Thread : le code applicatif peut ainsi utiliser le périphérique capteur plutôt qu'appeler directement les fonctions d'accès aux registres propres au bus.
+Ajoutez un fichier `sensor_xxx.c` dans le répertoire du nouveau périphérique. Ce fichier rend le capteur accessible via le framework de capteurs de RT-Thread : le code applicatif peut ainsi utiliser le périphérique capteur plutôt que d'appeler directement les fonctions d'accès aux registres propres au bus.
 
 L'enregistrement comporte deux parties :
 
@@ -276,13 +276,13 @@ __exit:
 
 Réglez `type`, `vendor`, `model`, `unit`, `intf_type`, la plage valide et la période minimale sur les valeurs indiquées dans la fiche technique du périphérique. Prévoyez la libération de toutes les ressources si une allocation ou l'un des deux enregistrements échoue.
 
-**Attention au nettoyage de l'exemple source :** si l'enregistrement du capteur de température réussit, puis que l'allocation ou l'enregistrement du baromètre échoue, la routine de nettoyage de l'exemple libère le capteur de température sans l'avoir d'abord désenregistré. Dans le code produit, suivez les périphériques effectivement enregistrés, désenregistrez chacun d'eux au moyen de l'API de suppression prise en charge par la version RT-Thread cible, puis libérez son stockage. Ne reprenez pas cette gestion d'erreur telle quelle.
+**Attention au nettoyage de l'exemple source :** si l'enregistrement du capteur de température réussit, puis que l'allocation ou l'enregistrement du baromètre échoue, la routine de nettoyage de l'exemple libère le capteur de température sans l'avoir d'abord désenregistré. Dans le code produit, suivez l'état d'enregistrement des périphériques, désenregistrez chacun d'eux au moyen de l'API de suppression prise en charge par la version RT-Thread cible, puis libérez son stockage. Ne reprenez pas cette gestion d'erreur telle quelle.
 
 ## Valider le pilote depuis FinSH { #5-validate-the-driver-from-finsh }
 
 Une fois le pilote intégré dans l'image, ajoutez une fonction en ligne de commande et enregistrez-la avec `FINSH_FUNCTION_EXPORT_ALIAS`. Une commande de validation utile devrait couvrir :
 
-- l'initialisation du capteur et la détection de l'adresse du dispositif ;
+- l'initialisation du capteur et la détection de l'adresse du composant ;
 - les lectures et écritures de registres via I2C ou SPI ; et
 - un résultat fonctionnel spécifique au capteur, tel que la pression, la température ou l'accélération.
 

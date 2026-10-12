@@ -15,7 +15,7 @@ Planeje a captura de logs antes do primeiro teste em campo. Se um dispositivo fa
 
 ## Configuração mínima de logs { #minimum-logging-setup }
 
-Registre os seguintes dados em cada build do firmware:
+Registre os seguintes dados em cada compilação do firmware:
 
 - Versão do firmware.
 - Branch ou commit do SDK.
@@ -40,13 +40,13 @@ Registre os seguintes dados em cada build do firmware:
 
 <div align="center" markdown>
 
-| Etapa | Logs recomendados |
+| Fase | Logs recomendados |
 |:------|:------------------|
 | Bring-up da placa | Logs detalhados de periféricos e inicialização. |
 | Desenvolvimento de funcionalidades | Logs de depuração por módulo relativos à funcionalidade em teste. |
-| Ajuste do consumo de energia | Mantenha os logs no mínimo; a própria saída dos logs pode alterar o comportamento de consumo. |
+| Ajuste do consumo de energia | Reduza os logs ao mínimo; a própria gravação de logs altera o consumo. |
 | Versão candidata | Avisos, erros, versão, motivo da inicialização e verificações essenciais de integridade. |
-| Build de diagnóstico em campo | Logs direcionados ao subsistema suspeito. |
+| Versão de diagnóstico em campo | Logs direcionados ao subsistema suspeito. |
 
 </div>
 
@@ -54,7 +54,7 @@ Registre os seguintes dados em cada build do firmware:
 
 - O log completo, do reset até a falha.
 - A identificação exata do binário.
-- Os arquivos de símbolos ou um build reproduzível.
+- Os arquivos de símbolos ou uma compilação reproduzível.
 - A informação sobre se a falha também ocorre em um exemplo do SDK sem modificações.
 - A lista de periféricos conectados e a fonte de alimentação.
 - A informação sobre se a falha persiste após apagar toda a Flash e gravar o firmware novamente.

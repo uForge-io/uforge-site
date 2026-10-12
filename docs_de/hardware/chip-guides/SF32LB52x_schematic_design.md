@@ -15,7 +15,7 @@ tags:
 
 ## 5. Schaltplan-Designrichtlinien { #5-schematic-design-guidelines }
 
-Dieses Kapitel führt auf drei Seiten durch den Schaltplanentwurf. Prüfen Sie zuerst das Minimalsystem, danach auf dieser Seite das Stromversorgungssystem und die Takterzeugung, auf der nächsten Seite RF und Benutzerschnittstellen und zuletzt Speicher, Fertigungszugang sowie PCB-abhängige Entscheidungen. Klären Sie für jeden Funktionsblock zunächst das Entwurfsziel und die betroffenen Varianten. Prüfen Sie anschließend die Schaltungsanforderungen, Pin-Zuweisungen, häufigen Fehler und Freigabe-Checklisten.
+Dieses Kapitel führt Sie auf drei Seiten durch den Schaltplanentwurf. Prüfen Sie zuerst das Minimalsystem, anschließend auf dieser Seite die Stromversorgung und die Takterzeugung, auf der nächsten Seite RF und Benutzerschnittstellen und zuletzt Speicher, Fertigungszugang sowie PCB-abhängige Entscheidungen. Klären Sie für jeden Funktionsblock zunächst das Entwurfsziel und die betroffenen Varianten. Prüfen Sie danach die Schaltungsanforderungen, Pin-Zuweisungen, häufigen Fehler und Freigabe-Checklisten.
 
 <div align="center"><em>Tabelle 5-1: Übersicht der Schaltplanabschnitte</em></div>
 
@@ -24,7 +24,7 @@ Dieses Kapitel führt auf drei Seiten durch den Schaltplanentwurf. Prüfen Sie z
 | Block | Hauptentscheidung | Freigabenachweis |
 |:---|:---|:---|
 | Minimalsystem-Design | Exakte Variante, Gehäuse, Boot-Speicher, Bootstrap-Pins, Debug-/Download-Zugang und Mindestablauf zur Inbetriebnahme | Minimalsystem-Review, Bootstrap-Tabelle, Debug-Testpunkte, Boot- und Recovery-Plan |
-| Stromversorgungssystem | Variantenspezifische Versorgungsstruktur, Ladepfad, BUCK, LDOs, Versorgung des Boot-Speichers, Betriebsmodi und Wake-Quellen | Prüfung der Versorgungsstruktur, AVL-Bauteile, Lade-/OVP-Einstellungen, Low-Power- und Wake-Quellen-Plan |
+| Stromversorgungssystem | Variantenspezifische Versorgungsstruktur, Ladepfad, BUCK, LDOs, Versorgung des Boot-Speichers, Betriebsmodi und Weckquellen | Prüfung der Versorgungsstruktur, AVL-Bauteile, Lade-/OVP-Einstellungen, Energiespar- und Weckquellenplan |
 | Takterzeugung | Auswahl, Lastkapazität und Kalibrierungsannahmen der 48-MHz- und 32,768-kHz-Quarze | Quarz-CL/ESR-Prüfung, Screenshots von Platzierung und Routing, Kalibrierungsplan |
 | RF | RF-Anpassung, Antennenpfad und Tuning-Zugang | RF-Impedanzplan, Screenshot der Anpassnetzwerk-Platzierung, Antennen-Tuning-Plan |
 | Benutzerschnittstellen | Display, Audio, Tasten und Vibrationsmotor | Schnittstellen-Schaltplan-Review, Timing-/Steuerungspins, Versorgungssequenz, Prüfung der Analogschaltung |
@@ -35,42 +35,42 @@ Dieses Kapitel führt auf drei Seiten durch den Schaltplanentwurf. Prüfen Sie z
 
 ### 5.1. Minimalsystem-Design { #51-minimum-system-design }
 
-Das Minimalsystem-Design ist die erste Freigabestufe im Schaltplanentwurf eines SF32LB52x-Boards. Es umfasst die Entscheidungen, die vor dem Hinzufügen produktspezifischer Peripherie stimmen müssen: exakte Gerätevariante, Gehäuse, Versorgungsstruktur, Boot-Medium, Bootstrap-Widerstände, Steuerung der Speicherversorgung, Debug-/Download-Zugang, Taktquellen und Wake-Verhalten. Änderungen an der Display- oder Sensorverkabelung lassen sich oft noch spät vornehmen. Eine falsche Bootstrap-Konfiguration des Speichers, fehlender Debug-Zugang, eine instabile Versorgung oder unpassende Annahmen zu den Versorgungszuständen können dagegen den normalen Betrieb der Platine verhindern.
+Das Minimalsystem-Design ist die erste Freigabestufe im Schaltplanentwurf eines SF32LB52x-Boards. Es umfasst alle Entscheidungen, die vor dem Hinzufügen produktspezifischer Peripherie geklärt sein müssen: genaue Gerätevariante, Gehäuse, Versorgungsstruktur, Boot-Medium, Bootstrap-Widerstände, Steuerung der Speicherversorgung, Debug-/Download-Zugang, Taktquellen und Weckverhalten. Änderungen an der Display- oder Sensorverkabelung lassen sich oft noch spät vornehmen. Eine falsche Bootstrap-Konfiguration des Speichers, fehlender Debug-Zugang, eine instabile Versorgung oder ungeeignete Annahmen zu den Versorgungszuständen können dagegen den normalen Betrieb der Platine verhindern.
 
 Prüfen Sie den ersten Schaltplanentwurf in folgender Reihenfolge:
 
 1. Wählen Sie das exakte Gerät und Gehäuse aus Abschnitt 3.2 und Abschnitt 3.3.
-2. Wählen Sie den korrekten Strompfad: `SF32LB520/3/5/7` für wiederaufladbare batteriebetriebene Produkte oder `52B/D/E/G/J` für extern geregelte Produkte.
-3. Legen Sie die Stromversorgungsentscheidungen in Abschnitt 5.2 fest, einschließlich `VBUS`/`VBAT`/`VCC` oder `PVDD`/`VDDIOA`/`VDD_SIP`, BUCK, interner LDO-Entkopplung, RF-/Audio-Schienen und aller Low-Power-Lastschalter.
+2. Wählen Sie den korrekten Strompfad: `SF32LB520/3/5/7` für wiederaufladbare akkubetriebene Produkte oder `52B/D/E/G/J` für extern geregelte Produkte.
+3. Legen Sie die Stromversorgungsentscheidungen in Abschnitt 5.2 fest, einschließlich `VBUS`/`VBAT`/`VCC` oder `PVDD`/`VDDIOA`/`VDD_SIP`, BUCK, Entkopplung der internen LDOs, RF-/Audio-Versorgungsschienen und aller Lastschalter für Energiesparzustände.
 4. Wählen Sie das Boot-Medium und bestücken Sie die Bootstrap-Pull-Optionen von `PA13`/`PA17` passend zur Boot-Tabelle in Abschnitt 5.6.1.
-5. Klären Sie den Steuerpin des Lastschalters für den Boot-Speicher vor dem Layout anhand der Quellenabweichung. Anwendungshinweis und Schaltplan-Leitfaden nennen `PA21`; die offizielle Checkliste nennt dagegen `PA11` für externe Flash-Speicher bei akkubetriebenen Varianten.
+5. Klären Sie vor dem Layout anhand der Quellenabweichung, welcher Pin den Lastschalter für den Boot-Speicher steuert. Anwendungshinweis und Schaltplan-Leitfaden nennen `PA21`; die offizielle Checkliste nennt dagegen `PA11` für externe Flash-Speicher bei akkubetriebenen Varianten.
 6. Reservieren Sie `PA18`/`PA19`, Masse und eine gültige Spannungsreferenz für den DBG_UART-/SWD-Zugang, bevor Gehäuse und Fertigungsvorrichtung endgültig festgelegt werden.
 7. Wählen Sie die 48-MHz- und 32,768-kHz-Quarze aus Abschnitt 5.3.1 und halten Sie deren Platzierungsvorgaben während des Schaltplan-Reviews sichtbar.
-8. Legen Sie Wake-Pins, das Verhalten der Einschalttaste, Ladeereignisse und die Abschaltzustände von Speicher und Sensoren fest, bevor die Low-Power-Strategie der Firmware endgültig definiert wird.
+8. Legen Sie Weck-Pins, das Verhalten der Einschalttaste, Ladeereignisse und die Abschaltzustände von Speicher und Sensoren fest, bevor die Energiesparstrategie der Firmware endgültig definiert wird.
 
-Nach dieser Prüfung sollte die Schaltung ohne optionale Produktperipherie einschaltbar sein, vom gewählten Medium booten, einen Wiederherstellungszugang bereitstellen, die Taktkalibrierung durchführen und den vorgesehenen Low-Power-Zustand erreichen können.
+Nach dieser Prüfung sollte sich die Schaltung ohne optionale Produktperipherie einschalten lassen, vom gewählten Medium booten, einen Wiederherstellungszugang bereitstellen, die Taktkalibrierung durchführen und den vorgesehenen Energiesparzustand erreichen.
 
 ### 5.2. Stromversorgungssystem { #52-power-system }
 
-Die Stromversorgung umfasst Versorgungsspannungen, Lastschalter, Ladepfad, OVP, interne LDOs, Wake-Verhalten und Low-Power-Zustände. Sie bildet die Grundlage für ein zuverlässiges Minimalsystem. Legen Sie sie vor der Bauteilplatzierung fest, da die weitere Auslegung von Display, Speicher, RF, Audio und Sensoren davon abhängt.
+Die Stromversorgung umfasst Versorgungsspannungen, Lastschalter, Ladepfad, OVP, interne LDOs, Weckverhalten und Energiesparzustände. Sie bildet die Grundlage für ein zuverlässiges Minimalsystem. Legen Sie sie vor der Bauteilplatzierung fest, da davon die weitere Auslegung von Display, Speicher, RF, Audio und Sensoren abhängt.
 
 #### 5.2.1. Stromversorgung { #521-power-supply }
 
 **Kurzübersicht**
 
-- Batteriebetriebene Geräte verwenden den `SF32LB520/3/5/7`-Pfad mit Entscheidungen zu `VBUS`, `VBAT`, `VCC`, Laden und OVP.
+- Akkubetriebene Geräte verwenden den `SF32LB520/3/5/7`-Pfad mit Entscheidungen zu `VBUS`, `VBAT`, `VCC`, Laden und OVP.
 - Die Geräte `52B/D/E/G/J` verwenden den extern geregelten Versorgungspfad für `PVDD` und `VDDIOA`. Konfigurieren Sie `VDD_SIP` passend zum genauen Chipmodell: Die Versorgung kann extern oder über den internen LDO erfolgen. Ein interner Ladepfad ist nicht vorhanden.
 - BUCK-Induktivität, interne LDO-Entkopplung, RF-/Audio-Schienen und Standby-Lastschalter müssen vor der PCB-Platzierung festgelegt sein.
 
 **Entwurfsziel**
 
-Entwerfen Sie eine stabile, leckstromarme Versorgungsstruktur für die gewählte Variante. Vermeiden Sie überlastete interne LDO-Ausgänge und Störungen auf den RF- und Audio-Versorgungen. Ungenutzte Lasten und der Boot-Speicher lassen sich in Low-Power-Modi abschalten.
+Entwerfen Sie für die gewählte Variante eine stabile Versorgungsstruktur mit geringem Leckstrom. Vermeiden Sie eine Überlastung der internen LDO-Ausgänge und Störungen auf den RF- und Audio-Versorgungsschienen. Ungenutzte Lasten und der Boot-Speicher lassen sich in Energiesparmodi abschalten.
 
 ##### 5.2.1.1. Anforderungen an die Prozessor-Stromversorgung { #5211-processor-power-supply-requirements }
 
-=== "SF32LB520/3/5/7 (batteriebetrieben)"
+=== "SF32LB520/3/5/7 (akkubetrieben)"
 
-    <div align="center"><em>Tabelle 5.2-1: Anforderungen an die Stromversorgung (batteriebetriebene Variante)</em></div>
+    <div align="center"><em>Tabelle 5.2-1: Anforderungen an die Stromversorgung (akkubetriebene Variante)</em></div>
 
     <div align="center" markdown>
 
@@ -95,7 +95,7 @@ Entwerfen Sie eine stabile, leckstromarme Versorgungsstruktur für die gewählte
 
     </div>
 
-    (1) Bei Versorgung des VCC-Eingangs aus einer Lithiumbatterie liegt der softwareseitige Standard-Schwellwert für niedrigen Batteriestand bei 3,48 V. Bei Versorgung durch eine Konstantspannungsquelle beträgt der unterstützte Bereich 3,6–4,7 V; empfohlen werden 3,8 V.
+    (1) Bei Versorgung des VCC-Eingangs aus einem Lithium-Akku liegt der softwareseitige Standard-Schwellwert für niedrigen Akkustand bei 3,48 V. Bei Versorgung durch eine Konstantspannungsquelle beträgt der unterstützte Bereich 3,6–4,7 V; empfohlen werden 3,8 V.
     (2) VSYS versorgt AVDD_BRF.
     (3) VDD18_VOUT: SF32LB520U36 benötigt eine externe 3,3-V-Versorgung; SF32LB523/5/7Ux6 verwenden den internen LDO und benötigen keine externe Versorgung. Konfigurieren Sie den internen VDD18-LDO softwareseitig entsprechend dem Chipmodell und aktivieren Sie ihn bei externer Versorgung nicht.
     (4) VDD33_VOUT1: bei SF32LB520U36 versorgt es nur VDD18_VOUT, externen Flash und AVDD33_AUD; bei SF32LB523/5/7Ux6 versorgt es nur externen Flash und AVDD33_AUD.
@@ -136,15 +136,15 @@ Beide Versorgungsvarianten verwenden dieselbe Induktivitätsspezifikation.
 !!! important "Wichtige Parameter der Leistungsinduktivität"
     L (Induktivität) = 4,7 µH ± 20 %, DCR (Gleichstromwiderstand) ≤ 0,4 Ω, Isat (Sättigungsstrom) ≥ 450 mA.
 
-##### 5.2.1.3. Batterie- und Ladesteuerung { #5213-battery-and-charging-control }
+##### 5.2.1.3. Akku- und Ladesteuerung { #5213-battery-and-charging-control }
 
-=== "SF32LB520/3/5/7 (batteriebetrieben)"
+=== "SF32LB520/3/5/7 (akkubetrieben)"
 
     Die Ladeschaltung kann mit einem externen Lade-IC oder dem im Mikrocontroller integrierten Ladeblock realisiert werden.
 
     **Externer Lademanagement-Chip**
 
-    Externe Lade-ICs gibt es mit oder ohne Power-Path-Management (PPM). Ohne PPM versorgt die Batterie direkt die Pins VBAT und VCC. Mit PPM versorgt der VSYS-Ausgang des Lade-ICs den VCC-Pin. Der VBAT-Anschluss des Lade-ICs ist sowohl mit der Batterie als auch mit dem VBAT-Pin des Mikrocontrollers verbunden. In beiden Fällen wird die Batteriespannung über den VBAT-Pin gemessen. Dessen integrierter GPADC-Kanal bietet eine Abtastgenauigkeit von ±30 mV.
+    Externe Lade-ICs gibt es mit oder ohne Power-Path-Management (PPM). Ohne PPM versorgt der Akku direkt die Pins VBAT und VCC. Mit PPM versorgt der VSYS-Ausgang des Lade-ICs den VCC-Pin. Der VBAT-Anschluss des Lade-ICs ist sowohl mit dem Akku als auch mit dem VBAT-Pin des Mikrocontrollers verbunden. In beiden Fällen wird die Akkuspannung über den VBAT-Pin gemessen. Dessen integrierter GPADC-Kanal bietet eine Abtastgenauigkeit von ±30 mV.
 
     ![Abbildung 5.2-1: Externe Ladeschaltung ohne PPM](../../sf32-products/chips/assets/52xA/sf32lb52x-CHG-NPPM.png){ width="100%" loading="lazy" }
 
@@ -158,7 +158,7 @@ Beide Versorgungsvarianten verwenden dieselbe Induktivitätsspezifikation.
 
     **Integriertes On-Chip-Lademanagement-Modul**
 
-    Ist das Gerät wegen niedriger Batteriespannung ausgeschaltet, muss der Akku bei Verwendung des integrierten Ladeblocks nach Anschluss des Ladegeräts zunächst die Einschaltschwelle erreichen. Erst dann kann das System booten und die Ladeanzeige darstellen.
+    Ist das Gerät wegen niedriger Akkuspannung ausgeschaltet, muss der Akku bei Verwendung des integrierten Ladeblocks nach Anschluss des Ladegeräts zunächst die Einschaltschwelle erreichen. Erst dann kann das System booten und die Ladeanzeige darstellen.
 
     ![Abbildung 5.2-3: Integrierte Lademanagement-Schaltung](../../sf32-products/chips/assets/52xA/sf32lb52x-CHG-INNER.png){ width="100%" loading="lazy" }
 
@@ -166,7 +166,7 @@ Beide Versorgungsvarianten verwenden dieselbe Induktivitätsspezifikation.
 
     **Auswahl des OVP-Chips (bei Verwendung des integrierten Lademoduls)**
 
-    Der VBUS-Eingangsbereich beträgt 4,5 V–5,5 V, wählen Sie daher einen der folgenden OVP-Chip-Typen:
+    Der VBUS-Eingangsbereich beträgt 4,5 V–5,5 V. Wählen Sie daher einen der folgenden OVP-Chip-Typen:
 
     - OVP-Chip mit einstellbarem OVLO, z. B. AW32905FCR — OVLO zwischen 5,2 V und 5,5 V einstellen (VOVLO_TH-Toleranz ≤3 %, Widerstandstoleranz ≤1 %)
     - OVP-Chip mit geregeltem Ausgang, z. B. SGM4064YDE8G oder LP5305AQVF — der Reglerausgang muss zwischen 4,5 V und 5,4 V liegen
@@ -206,11 +206,11 @@ Beide Versorgungsvarianten verwenden dieselbe Induktivitätsspezifikation.
 === "52B/D/E/G/J (extern geregelt versorgt)"
 
     !!! info "Nicht zutreffend"
-        Diese Variante wird direkt aus einer extern geregelten Quelle versorgt und **verfügt über keine Lademanagement-Schaltung**. Dieser Abschnitt gilt nicht. Wenn Ihr Produkt Batteriebetrieb und Laden benötigt, verwenden Sie stattdessen die Serie SF32LB520/3/5/7.
+        Diese Variante wird direkt aus einer extern geregelten Quelle versorgt und **verfügt über keine Lademanagement-Schaltung**. Dieser Abschnitt gilt nicht. Wenn Ihr Produkt Akkubetrieb und Laden benötigt, verwenden Sie stattdessen die Serie SF32LB520/3/5/7.
 
 ##### 5.2.1.4. Verringerung der Standby-Leistungsaufnahme { #5214-reducing-standby-power }
 
-=== "SF32LB520/3/5/7 (batteriebetrieben)"
+=== "SF32LB520/3/5/7 (akkubetrieben)"
 
     Empfohlene Stromversorgungsstruktur: **VDD33_VOUT2** versorgt den Vibrationsmotor, **VDD33_VOUT1** versorgt externen Flash und Sensoren, und das LCD verwendet einen externen LDO.
 
@@ -228,46 +228,46 @@ Beide Versorgungsvarianten verwenden dieselbe Induktivitätsspezifikation.
 
 ##### 5.2.1.5. Checkliste Stromversorgungsdesign { #5215-power-design-checklist }
 
-- [ ] Bestätigt, welche Stromversorgungsvariante (batteriebetrieben / extern geregelte Versorgung) zum exakten Chipmodell passt
+- [ ] Bestätigt, welche Stromversorgungsvariante (akkubetrieben / extern geregelte Versorgung) zum exakten Chipmodell passt
 - [ ] Die BUCK-Induktivität erfüllt 4,7 µH ±20 %, DCR ≤0,4 Ω, Isat ≥450 mA
 - [ ] Alle internen LDO-Entkopplungskondensatoren sind gemäß Anforderungen platziert
 - [ ] Die LCD-Stromversorgung ist isoliert und wird nicht direkt vom internen LDO gespeist
 - [ ] Audio- und RF-Versorgungen sind ordnungsgemäß gefiltert
-- [ ] Bei der batteriebetriebenen Variante: Ladepfad und Spannungsbereiche des OVP-Bauteils geprüft; bei der extern geregelten Variante: VDD_SIP-/VDDIOA-Versorgung korrekt für das Chipmodell konfiguriert
+- [ ] Bei der akkubetriebenen Variante: Ladepfad und Spannungsbereiche des OVP-Bauteils geprüft; bei der extern geregelten Variante: VDD_SIP-/VDDIOA-Versorgung korrekt für das Chipmodell konfiguriert
 
 **Häufige Fehler - Stromversorgung**
 
 - Das LCD wird direkt von einem internen LDO statt von einem externen LDO versorgt.
-- Annahmen zur batteriebetriebenen und zur extern geregelten Stromversorgung werden im selben Schaltplan vermischt.
+- Annahmen zur akkubetriebenen und zur extern geregelten Stromversorgung werden im selben Schaltplan vermischt.
 - `VDD_SIP` bleibt während Hibernate bei Varianten eingeschaltet, bei denen ein Leckstromrisiko am Speicher besteht.
 - Die Wahl eines Lade- oder OVP-Bauteils erfolgt, ohne den Worst-Case-VBUS-Strom und -Spannungsbereich zu prüfen.
 
 **Inbetriebnahmeprüfungen - Stromversorgung**
 
 - Messen Sie `VCC`/`PVDD`, den BUCK-Ausgang, RF-/Audio-Schienen und die Speicherversorgung, bevor die Firmware Peripherie aktiviert.
-- Prüfen Sie bei batteriebetriebenen Designs den Ladegeräteanschluss, die Vorladung, die Konstantstromladung und den erneuten Ladebeginn.
+- Prüfen Sie bei akkubetriebenen Designs den Ladegeräteanschluss, die Vorladung, die Konstantstromladung und den erneuten Ladebeginn.
 - Messen Sie den Standby- und Hibernate-Strom bei ausgeschalteten Lastschaltern für Display, Sensoren, Speicher und Motor.
 
-#### 5.2.2. Betriebsmodi und Wake-Quellen { #522-operating-modes-and-wake-sources }
+#### 5.2.2. Betriebsmodi und Weckquellen { #522-operating-modes-and-wake-sources }
 
 **Kurzübersicht**
 
 - Active und Sleep ermöglichen eine schnelle Interrupt-Reaktion. DeepSleep und Standby senken den Stromverbrauch, benötigen aber mehr Zeit zum Aufwachen.
 - Hibernate ist der Zustand mit dem niedrigsten Stromverbrauch, aber SRAM wird nicht erhalten und einige externe Versorgungen müssen abgeschaltet werden.
-- Die Auswahl wake-fähiger GPIOs beeinflusst Tasten, Touch-Interrupt, Lade-Events und Sensor-Wake-Verhalten.
+- Die Auswahl weckfähiger GPIOs beeinflusst Tasten, Touch-Interrupts, Ladeereignisse und das Weckverhalten von Sensoren.
 
 **Entwurfsziel**
 
-Wählen Sie Wake-Quellen und Anfangszustände der externen Lastschalter so, dass das Produkt den vorgesehenen Low-Power-Zustand ohne Leckstrompfade oder verpasste Wake-Ereignisse erreicht.
+Wählen Sie Weckquellen und Anfangszustände der externen Lastschalter so, dass das Produkt den vorgesehenen Energiesparzustand ohne Leckstrompfade oder verpasste Weckereignisse erreicht.
 
-!!! note "Gemeinsames Design"
-    Betriebsmodi und Wake-Quellen-Verhalten gelten über die gesamte SF32LB52x-Familie hinweg, sofern nicht eine produktspezifische Versorgungsstruktur eine externe Wake-Quelle absichtlich deaktiviert.
+!!! note "Gemeinsame Auslegung"
+    Die Betriebsmodi und das Verhalten der Weckquellen gelten für die gesamte SF32LB52x-Familie, sofern eine produktspezifische Versorgungsstruktur nicht ausdrücklich eine externe Weckquelle deaktiviert.
 
 <div align="center"><em>Tabelle 5.2-3: CPU-Modus-Tabelle</em></div>
 
 <div align="center" markdown>
 
-| Modus | CPU | Peripherie | SRAM | IO | LPTIM | Wake-Quelle | Wake-Zeit |
+| Modus | CPU | Peripherie | SRAM | IO | LPTIM | Weckquelle | Weckzeit |
 |:---|:---|:---|:---|:---|:---|:---|:---|
 | Active | Läuft | Läuft | Zugänglich | Kann umschalten | Läuft | - | - |
 | Sleep | Gestoppt | Läuft | Zugänglich | Kann umschalten | Läuft | Beliebiger Interrupt | <0,5 µs |
@@ -277,13 +277,13 @@ Wählen Sie Wake-Quellen und Anfangszustände der externen Lastschalter so, dass
 
 </div>
 
-Die gesamte Familie unterstützt 15 wake-fähige Interrupt-Quellen in den Modi Standby und Hibernate:
+Die gesamte Familie unterstützt 15 weckfähige Interruptquellen in den Modi Standby und Hibernate:
 
-<div align="center"><em>Tabelle 5.2-4: Interrupt-Wake-up-Quellen-Tabelle</em></div>
+<div align="center"><em>Tabelle 5.2-4: Interrupt-Weckquellen</em></div>
 
 <div align="center" markdown>
 
-| Wake-Quelle | Pin | Wake-Quelle | Pin |
+| Weckquelle | Pin | Weckquelle | Pin |
 |:---|:---|:---|:---|
 | LWKUP_PIN0 | PA24 | LWKUP_PIN12 | PA36 |
 | LWKUP_PIN1 | PA25 | LWKUP_PIN13 | PA37 |
@@ -299,10 +299,10 @@ Die gesamte Familie unterstützt 15 wake-fähige Interrupt-Quellen in den Modi S
 
 **Checkliste Betriebsmodi**
 
-- [ ] Benötigte Wake-Pins sind zugewiesen, bevor das Pin-Mux eingefroren wird.
-- [ ] Pull-Zustände an Wake-Pins sind mit Standby und Hibernate kompatibel.
+- [ ] Benötigte Weck-Pins sind zugewiesen, bevor das Pin-Mux eingefroren wird.
+- [ ] Pull-Zustände an Weck-Pins sind mit Standby und Hibernate kompatibel.
 - [ ] Externe Speicher- und Sensorversorgungen weisen im Hibernate-Modus keinen Leckstrom über I/O-Pins auf.
-- [ ] Firmware- und Hardware-Teams stimmen überein, welcher Zustand für Versand, Lager und normalen Standby verwendet wird.
+- [ ] Firmware- und Hardwareteams haben abgestimmt, welcher Zustand für Versand, Lagerung und normalen Standby verwendet wird.
 
 ### 5.3. Takterzeugung { #53-clock-generation }
 
@@ -369,7 +369,7 @@ Die vollständigen, laufend gepflegten Qualifizierungsdaten finden Sie in der [S
 
 - [ ] Die 48-MHz- und 32,768-kHz-Quarze erfüllen die AVL-/Datenblattanforderungen.
 - [ ] Quarz-Lastkapazität und ESR sind gegen die Oszillatorgrenzwerte geprüft.
-- [ ] Sperrzone, Leiterbahnlänge, Leiterbahnbreite, Abstand und Masseabschirmung sind im PCB-Review geprüft.
+- [ ] Freihaltebereich, Leiterbahnlänge, Leiterbahnbreite, Abstand und Masseabschirmung sind im PCB-Review geprüft.
 - [ ] Der Inbetriebnahmeplan umfasst die Messung der 48-MHz- und 32-kHz-Takte sowie die Prüfung der Bluetooth-Frequenzkalibrierung.
 
 ---

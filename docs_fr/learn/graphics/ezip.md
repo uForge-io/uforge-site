@@ -126,10 +126,10 @@ Versionnez les profils de conversion, les versions des outils et du SDK, les som
 ## Recommandations de conception et de mise au point { #design-and-debugging-guidance }
 
 - **Utilisez eZip pour les ressources.** Elles peuvent résider dans la NOR Flash, la PSRAM, la NAND ou un système de fichiers, mais le décodeur n'interprète pas les chemins de fichiers. Le pilote de stockage doit fournir ou charger les données par un accès matériel compatible. Le HAL impose un alignement sur 4 octets aux tampons d'entrée et de sortie AHB. eZip ne compresse pas le framebuffer final.
-- **Prévoyez la bande passante de transfert des ressources.** eZip peut réduire le trafic lié à leur transfert, mais les pixels décodés doivent toujours emprunter le chemin de rendu et d'affichage décrit dans la [Vue d'ensemble des graphismes](overview.md#sf32-graphics-flow).
+- **Dimensionnez la bande passante de transfert des ressources.** eZip peut réduire le trafic lié à leur transfert, mais les pixels décodés doivent toujours emprunter le chemin de rendu et d'affichage décrit dans la [Vue d'ensemble des graphismes](overview.md#sf32-graphics-flow).
 - **Prévoyez une solution de repli sur le processeur.** Tous les types de ressources, formats de pixel ou opérations d'interface ne disposent pas nécessairement d'une voie de décodage ou de traitement graphique matériel.
 - **Validez l'emplacement mémoire.** Testez les ressources et les tampons de dessin en SRAM interne, NOR Flash, PSRAM ou stockage amovible ; chaque choix influe sur la latence et la contention du bus.
-- **Testez une charge de travail représentative.** Mesurez le temps de chargement à froid, la cadence d'animation, la latence de l'interface et la consommation lorsque le Bluetooth, l'audio, les capteurs et le rafraîchissement de l'écran fonctionnent simultanément.
+- **Testez la charge de travail réelle.** Mesurez le temps de chargement à froid, la cadence d'animation, la latence de l'interface et la consommation lorsque le Bluetooth, l'audio, les capteurs et le rafraîchissement de l'écran fonctionnent simultanément.
 - **Figez les paramètres de conversion avant la mise en production.** Une mise à jour de l'outil ou une modification des paramètres peut affecter la compatibilité des fichiers générés, leur qualité, l'espace de stockage requis et les performances de décodage.
 
 ## Points clés à retenir { #key-takeaways }

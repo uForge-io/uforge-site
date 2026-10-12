@@ -2,7 +2,7 @@
 icon: lucide/layers
 hide:
     - navigation
-description: "Pautas de diseño de PCB para el MCU SF32LB55x: huella, apilado de capas, reglas generales de PCB, trazado de interfaces y lista de comprobación detallada del diseño de PCB."
+description: "Pautas de diseño de PCB para la MCU SF32LB55x: huella, apilado de capas, reglas generales de PCB, trazado de interfaces y lista de comprobación detallada del diseño de PCB."
 tags:
     - Hardware
     - Chip
@@ -272,10 +272,10 @@ Cada tabla cubre un área de revisión del diseño de PCB. Si una tabla no inclu
 
 | N.º | Punto de comprobación | Aplicable a | Categoría |
 |:---|:---|:---|:---|
-| 1 | La señal GPADC no comparte un trazado paralelo con señales de conmutación rápida, salvo que se disponga una guarda adecuada | Todas las variantes | Obligatorio |
+| 1 | Evite trazar señales de conmutación rápida en paralelo con la señal GPADC, salvo que esta cuente con una guarda adecuada | Todas las variantes | Obligatorio |
 | 2 | Las resistencias del divisor de tensión de batería están cerca del pin de entrada del chip | Todas las variantes | Obligatorio |
 | 3 | La señal de detección de tensión de la batería debe tomarse del conector de batería y contar con guarda de tierra | Todas las variantes | Obligatorio |
-| 4 | La señal SDMADC no comparte un trazado paralelo con señales de conmutación rápida, salvo que se disponga una guarda adecuada | Solo 555 | Opcional |
+| 4 | Evite trazar señales de conmutación rápida en paralelo con la señal SDMADC, salvo que esta cuente con una guarda adecuada | Solo 555 | Opcional |
 
 </div>
 

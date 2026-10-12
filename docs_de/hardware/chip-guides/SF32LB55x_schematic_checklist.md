@@ -2,7 +2,7 @@
 icon: lucide/list-checks
 hide:
     - navigation
-description: "Punktweise Schaltplan-Prüfcheckliste für den SF32LB55x-MCU, mit Prüfungen zu Stromversorgung, Takt, HF, Speicher, Display und Fertigung."
+description: "Punktweise Schaltplan-Prüfcheckliste für den SF32LB55x-MCU, mit Prüfungen zu Stromversorgung, Takt, RF, Speicher, Display und Fertigung."
 tags:
     - Hardware
     - Chip
@@ -13,9 +13,9 @@ tags:
 
 ## 5.8. Schaltplan-Checkliste { #58-schematic-checklist }
 
-Jede Tabelle deckt einen funktionalen Schaltplanblock ab. Wenn eine Tabelle die Spalte „Gilt für“ enthält, wenden Sie jeden Prüfpunkt nur auf die dort aufgeführten Varianten an.
+Jede Tabelle deckt einen funktionalen Schaltplanblock ab. Ein Prüfpunkt gilt nur für die Varianten, die in der Spalte „Gilt für“ aufgeführt sind.
 
-Roter Text und gelbe Hintergründe übernehmen die Prüfhinweise aus der Quell-Arbeitsmappe. Da die Arbeitsmappe die Gründe für die einzelnen Markierungen nicht erläutert, sind sie als zusätzliche Prüfhilfen zu verstehen; die Einstufung als „Erforderlich/Optional“ bleibt davon unberührt.
+Rot hervorgehobener Text und gelbe Hinterlegungen übernehmen die Prüfhinweise aus der Quell-Arbeitsmappe. Da die Arbeitsmappe die Gründe für die einzelnen Markierungen nicht erläutert, sind sie als zusätzliche Prüfhilfen zu verstehen; die Einstufung als „Erforderlich/Optional“ bleibt davon unberührt.
 
 ### 5.8.1. Gehäuse { #581-package }
 
@@ -37,9 +37,9 @@ Roter Text und gelbe Hintergründe übernehmen die Prüfhinweise aus der Quell-A
 
 | Nr. | Prüfpunkt | Gilt für | Kategorie |
 |:---|:---|:---|:---|
-| 1 | VDD1-Versorgungsspannung ist 1,8 V-3,3 V | Nur 551/555/557 | Erforderlich |
+| 1 | VDD1-Versorgungsspannung beträgt 1,8 V–3,3 V | Nur 551/555/557 | Erforderlich |
 | 2 | <span class="flag-red">VDD1-Versorgungsspannung ist 3,3 V</span> | <span class="flag-red">Nur SS6600A8</span> | <span class="flag-red">Erforderlich</span> |
-| 3 | VDD2-Versorgungsspannung ist 1,8 V-3,3 V | Nur 555/557 | Erforderlich |
+| 3 | VDD2-Versorgungsspannung beträgt 1,8 V–3,3 V | Nur 555/557 | Erforderlich |
 | 4 | BUCK1_VSW- und BUCK1_VOUT-Verbindungen sind korrekt | Alle Varianten | Erforderlich |
 | 5 | BUCK2_VSW- und BUCK2_VOUT-Verbindungen sind korrekt | Nur 555/557 | Erforderlich |
 | 6 | LDOVCC2_VOUT-Verbindung ist korrekt | Nur 555/557 | Erforderlich |
@@ -51,16 +51,16 @@ Roter Text und gelbe Hintergründe übernehmen die Prüfhinweise aus der Quell-A
 | 12 | VDD_SIP-Versorgungsspannung ist 1,8 V, und es ist ein Lastschalter vorgesehen, damit sie abgeschaltet werden kann | Nur 551/555/557 | Erforderlich |
 | 13 | <span class="flag-red">VDD_SIP-Versorgungsspannung ist 3,3 V, und es ist ein Lastschalter vorgesehen, damit sie abgeschaltet werden kann</span> | <span class="flag-red">Nur SS6600A8</span> | <span class="flag-red">Erforderlich</span> |
 | 14 | AVDD33-Versorgungsspannung ist 3,3 V | Alle Varianten | Erforderlich |
-| 15 | AVDD_BRF-Versorgungsspannung ist 1,8 V-3,3 V und muss mit der VDD1-Versorgung übereinstimmen | Nur 551/555/557 | Erforderlich |
+| 15 | AVDD_BRF-Versorgungsspannung beträgt 1,8 V–3,3 V und muss mit der VDD1-Versorgung übereinstimmen | Nur 551/555/557 | Erforderlich |
 | 16 | <span class="flag-red">AVDD_BRF-Versorgungsspannung ist 3,3 V</span> | <span class="flag-red">Nur SS6600A8</span> | <span class="flag-red">Erforderlich</span> |
-| 17 | VDDIOA-Versorgungsspannung ist 1,8 V-3,3 V; in der ersten Board-Revision einen 0-Ω-Serienwiderstand reservieren | Nur 551/555/557 | Erforderlich |
-| 18 | VDDIOB-Versorgungsspannung ist 1,8 V-3,3 V; in der ersten Board-Revision einen 0-Ω-Serienwiderstand reservieren | Nur 551/555/557 | Erforderlich |
-| 19 | <span class="flag-red">VDDIOA-Versorgungsspannung ist 3,3 V; in der ersten Board-Revision einen 0-Ω-Serienwiderstand reservieren</span> | <span class="flag-red">Nur SS6600A8</span> | <span class="flag-red">Erforderlich</span> |
-| 20 | <span class="flag-red">VDDIOA-Versorgungsspannung ist 3,3 V; in der ersten Board-Revision einen 0-Ω-Serienwiderstand reservieren</span> | <span class="flag-red">Nur SS6600A8</span> | <span class="flag-red">Erforderlich</span> |
+| 17 | VDDIOA-Versorgungsspannung beträgt 1,8 V–3,3 V; für die erste Board-Revision einen Footprint für einen 0-Ω-Serienwiderstand vorsehen | Nur 551/555/557 | Erforderlich |
+| 18 | VDDIOB-Versorgungsspannung beträgt 1,8 V–3,3 V; für die erste Board-Revision einen Footprint für einen 0-Ω-Serienwiderstand vorsehen | Nur 551/555/557 | Erforderlich |
+| 19 | <span class="flag-red">VDDIOA-Versorgungsspannung beträgt 3,3 V; für die erste Board-Revision einen Footprint für einen 0-Ω-Serienwiderstand vorsehen</span> | <span class="flag-red">Nur SS6600A8</span> | <span class="flag-red">Erforderlich</span> |
+| 20 | <span class="flag-red">VDDIOA-Versorgungsspannung beträgt 3,3 V; für die erste Board-Revision einen Footprint für einen 0-Ω-Serienwiderstand vorsehen</span> | <span class="flag-red">Nur SS6600A8</span> | <span class="flag-red">Erforderlich</span> |
 | 21 | Wenn SF30147C die Stromversorgung übernimmt, muss die TWI-Steuerschnittstelle MCU-PB-Pins verwenden, und diese Pins müssen PD-Pins sein | Nur 551/555/557 | Erforderlich |
 | 22 | Wenn SF30147C die Stromversorgung übernimmt, müssen über EN gesteuerte Schienen PVDD oder AVDD als EN-Spannungsdomäne verwenden; EN nicht über ein MCU-GPIO steuern. Alternativ EN mit Masse verbinden und den entsprechenden Schienenausgang über Register steuern | Nur 551/555/557 | Erforderlich |
 | 23 | Wenn SF30147C die Stromversorgung übernimmt, können BUCK und LDO1 nur über ihre jeweiligen Enable-Signale EN_BUCK und EN_LDO1 gesteuert werden; eine interne Registersteuerung ist nicht vorgesehen | Nur 551/555/557 | Erforderlich |
-| 24 | Die Ladeschaltung muss über ein Power-Path-Management verfügen, damit das System bei zu niedriger Batteriespannung über den 5-V-Eingang des Ladegeräts versorgt werden kann | Alle Varianten | Erforderlich |
+| 24 | Die Ladeschaltung muss über ein Power-Path-Management verfügen, damit das System bei zu niedriger Akkuspannung über den 5-V-Eingang des Ladegeräts versorgt werden kann | Alle Varianten | Erforderlich |
 
 </div>
 
@@ -92,14 +92,14 @@ Unklarheit in der Quelle: Die Punkte 19 und 20 der ursprünglichen Checkliste V1
 | 16 | BUCK1-Induktivität ist eine von SiFli empfohlene Teilenummer | Nur 551/555/557 | Erforderlich |
 | 17 | BUCK2-Induktivität ist eine von SiFli empfohlene Teilenummer | Nur 555/557 | Erforderlich |
 | 18 | Wenn die BUCK-Induktivität nicht von SiFli empfohlen ist, muss sie L = 4,7 µH, DCR ≤ 0,4 Ω und Isat ≥ 450 mA erfüllen | Alle Varianten | Erforderlich |
-| 19 | Bei GPS oder anderen störempfindlichen Peripheriegeräten einen Footprint für einen Ableitkondensator gegen Masse an BUCK_LX reservieren; der Wert richtet sich nach den tatsächlichen Testergebnissen | Alle Varianten | Erforderlich |
+| 19 | Bei GPS oder anderen störempfindlichen Peripheriegeräten einen Footprint für einen nach Masse geschalteten Kondensator an BUCK_LX vorsehen; der Wert richtet sich nach den tatsächlichen Testergebnissen | Alle Varianten | Erforderlich |
 | 20 | <span class="flag-red">Bei der Umwandlung von VBAT auf 1,8 V für VDD1 und VDD2 (nur 555) einen DCDC-Wandler verwenden; keinen LDO verwenden</span> | Nur 551/555/557 | Erforderlich |
 | 21 | <span class="flag-red">Der Ruhestrom des gewählten DCDC-Wandlers ist dokumentiert und erfüllt die Projektanforderungen</span> | Alle Varianten | Erforderlich |
 | 22 | <span class="flag-red">Der Ruhestrom des gewählten LDO ist dokumentiert und erfüllt die Projektanforderungen</span> | Alle Varianten | Erforderlich |
 
 </div>
 
-Die Quellen widersprechen sich: Tabelle 3-3 des [chinesischen SiFli-Hardware-Anwendungshinweises](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) und Punkt 9 der [verlinkten Quell-Arbeitsmappe der Checkliste V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) nennen 1 µF für VDD_RTC, während [C0313 im Referenzschaltplan](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png) mit 0,1 µF beschriftet ist. Die Quellen erläutern nicht, wann welcher Wert gilt. Klären Sie den erforderlichen Wert für das konkrete Bauteil vor der Designfreigabe mit SiFli; lösen Sie den Widerspruch nicht durch Annahmen.
+Die Quellen widersprechen sich: Tabelle 3-3 des [chinesischen SiFli-Hardware-Anwendungshinweises](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) und Punkt 9 der [verlinkten Quell-Arbeitsmappe der Checkliste V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) nennen 1 µF für VDD_RTC, während [C0313 im Referenzschaltplan](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png) mit 0,1 µF beschriftet ist. Die Quellen erläutern nicht, wann welcher Wert gilt. Klären Sie den erforderlichen Wert für das konkrete Gerät vor der Designfreigabe mit SiFli; lösen Sie den Widerspruch nicht durch Annahmen.
 
 ### 5.8.4. Takt { #584-clock }
 
@@ -155,13 +155,13 @@ Die Quellen widersprechen sich: Tabelle 3-3 des [chinesischen SiFli-Hardware-Anw
 |:---|:---|:---|:---|
 | 1 | <span class="flag-red">MODE ist standardmäßig mit 10 kΩ gegen Masse heruntergezogen (Pull-down) und wird während Programmierung/Download auf VDDIOA hochgezogen</span> | Alle Varianten | Erforderlich |
 | 2 | <span class="flag-red">Das MODE-Signal verfügt über einen reservierten Testpunkt</span> | Alle Varianten | Erforderlich |
-| 3 | Wenn der PCB-Platz es zulässt, eine 3-Pin-Stiftleiste reservieren, damit Pull-up oder Pull-down per Jumper-Kappe ausgewählt werden kann | Alle Varianten | Erforderlich |
+| 3 | Wenn der PCB-Platz es zulässt, eine 3-polige Stiftleiste vorsehen, damit sich Pull-up oder Pull-down mit einem Jumper auswählen lässt | Alle Varianten | Erforderlich |
 
 </div>
 
-### 5.8.8. HF { #588-rf }
+### 5.8.8. RF { #588-rf }
 
-<div align="center"><em>Tabelle 5.8.8-1: Checkliste HF</em></div>
+<div align="center"><em>Tabelle 5.8.8-1: Checkliste RF</em></div>
 
 <div align="center" markdown>
 
@@ -190,18 +190,18 @@ In der Quell-Arbeitsmappe ist die Kategorie für RF-Punkt 3 leer; sie bleibt dah
 
 </div>
 
-### 5.8.10. Hardware-Wake-up { #5810-hardware-wake-up }
+### 5.8.10. Hardwareseitiges Wecken { #5810-hardware-wake-up }
 
-<div align="center"><em>Tabelle 5.8.10-1: Checkliste Hardware-Wake-up</em></div>
+<div align="center"><em>Tabelle 5.8.10-1: Checkliste zum hardwareseitigen Wecken</em></div>
 
 <div align="center" markdown>
 
 | Nr. | Prüfpunkt | Gilt für | Kategorie |
 |:---|:---|:---|:---|
-| 1 | <span class="flag-red">HCPU-Wake-up-Interruptquellen sind korrekt: PA77, PA78, PA79 und PA80; nicht zum Aufwecken über die Ein-/Aus-Taste verwenden</span> | Alle Varianten | Erforderlich |
-| 2 | <span class="flag-red">LCPU-Wake-up-Interruptquellen sind korrekt: PB43, PB44, PB45, PB46, PB47 und PB48, insgesamt sechs Pins, die zum Aufwecken über die Ein-/Aus-Taste verwendet werden können</span> | Alle Varianten | Erforderlich |
+| 1 | <span class="flag-red">HCPU-Interrupt-Weckquellen sind korrekt: PA77, PA78, PA79 und PA80; nicht zum Aufwecken über die Ein-/Aus-Taste verwenden</span> | Alle Varianten | Erforderlich |
+| 2 | <span class="flag-red">LCPU-Interrupt-Weckquellen sind korrekt: PB43, PB44, PB45, PB46, PB47 und PB48, insgesamt sechs Pins, die zum Aufwecken über die Ein-/Aus-Taste verwendet werden können</span> | Alle Varianten | Erforderlich |
 | 3 | <span class="flag-red">Interrupt- und Steuersignale für LCPU-seitige Peripheriegeräte wie G-Sensor und Herzfrequenzsensor müssen mit PB-GPIOs verbunden werden</span> | Alle Varianten | Erforderlich |
-| 4 | <span class="flag-red">Die UART3 entsprechende LCPU-Interruptquelle wird korrekt verwendet; sie wird nur zur Tasten-Aufweckung empfohlen</span> | Alle Varianten | Erforderlich |
+| 4 | <span class="flag-red">Die UART3 zugeordnete LCPU-Interruptquelle wird korrekt verwendet; sie wird nur zum Wecken per Taste empfohlen</span> | Alle Varianten | Erforderlich |
 
 </div>
 
@@ -217,13 +217,13 @@ In der Quell-Arbeitsmappe ist die Kategorie für RF-Punkt 3 leer; sie bleibt dah
 | 2 | Wird der Code aus dem internen SiP-NOR-Flash ausgeführt, muss PA58 den Versorgungsschalter für VDD_SIP steuern | Alle Varianten | Erforderlich |
 | 3 | Wird der Code aus externem NOR-Flash an QSPI2 ausgeführt, muss PA58 den Versorgungsschalter für QSPI2 steuern | Alle Varianten | Erforderlich |
 | 4 | Muss externes Flash an QSPI2 in der Produktion programmiert werden, muss PA58 dessen Versorgungsschalter steuern | Alle Varianten | Erforderlich |
-| 5 | <span class="flag-red">Der von PA58 gesteuerte Spannungsschalter ist bei High aktiv (ein) und bei Low inaktiv (aus)</span> | Alle Varianten | Erforderlich |
+| 5 | <span class="flag-red">Der von PA58 gesteuerte Spannungsschalter ist high-aktiv (ein) und low-aktiv (aus)</span> | Alle Varianten | Erforderlich |
 | 6 | <span class="flag-red">An Flash-CLK- und Datenleitungen werden 33-Ω-Serienwiderstände empfohlen</span> | Alle Varianten | Erforderlich |
 | 7 | QSPI3 ist wie vorgesehen mit NAND-Flash oder eMMC verbunden | Nur 555/557 | Optional |
-| 8 | Den QSPI3-Versorgungsschalter über PA41 steuern; <span class="flag-red">QSPI3 ist standardmäßig ausgeschaltet. Bei einem aktiv-high geschalteten Versorgungsschalter den standardmäßigen internen Pull-down verwenden</span> | Nur 555/557 | Optional |
+| 8 | Den QSPI3-Versorgungsschalter über PA41 steuern; <span class="flag-red">QSPI3 ist standardmäßig ausgeschaltet. Bei einem high-aktiven Versorgungsschalter den standardmäßigen internen Pull-down verwenden</span> | Nur 555/557 | Optional |
 | 9 | <span class="flag-red">Wird für die Steuerung des QSPI3-Versorgungsschalters nicht PA41 verwendet, die alternative I/O-Zuweisung mit der Software abstimmen</span> | Nur 555/557 | Optional |
 | 10 | Muss externes Flash an QSPI3 in der Produktion programmiert werden, muss PA58 dessen Versorgungsschalter steuern | Nur 555/557 | Erforderlich |
-| 11 | Den OPI-PSRAM-Versorgungsschalter über PA70 steuern; <span class="flag-red">PSRAM ist standardmäßig eingeschaltet. Bei einem aktiv-high geschalteten Versorgungsschalter den standardmäßigen internen Pull-up verwenden</span> | Nur 555/557 | Optional |
+| 11 | Den OPI-PSRAM-Versorgungsschalter über PA70 steuern; <span class="flag-red">PSRAM ist standardmäßig eingeschaltet. Bei einem high-aktiven Versorgungsschalter den standardmäßigen internen Pull-up verwenden</span> | Nur 555/557 | Optional |
 | 12 | <span class="flag-red">Der OPI-PSRAM ist ein unterstütztes Modell und im Leitfaden zur Auswahl der Schlüsselkomponenten als qualifiziert aufgeführt</span> | Nur 555/557 | Optional |
 | 13 | OPI-PSRAM-Signalverbindungen sind korrekt | Nur 555/557 | Optional |
 | 14 | QSPI2-Signalverbindung ist korrekt | Alle Varianten | Optional |
@@ -270,12 +270,12 @@ In der Quell-Arbeitsmappe ist die Kategorie für RF-Punkt 3 leer; sie bleibt dah
 |:---|:---|:---|:---|
 | 1 | GPADC-Eingang ist mit dem entsprechenden Pin verbunden | Alle Varianten | Optional |
 | 2 | GPADC-Eingangsbereich ist korrekt; die maximale Eingangsspannung darf 1,0 V nicht überschreiten | Alle Varianten | Optional |
-| 3 | Empfehlung für den Batteriespannungsteiler: 1-MΩ-1%-Widerstand versorgungsseitig, 220-kΩ-1%-Widerstand gegen Masse und 100-nF-Filterkondensator | Alle Varianten | Erforderlich |
+| 3 | Empfehlung für den Akkuspannungsteiler: 1-MΩ-1%-Widerstand versorgungsseitig, 220-kΩ-1%-Widerstand gegen Masse und 100-nF-Filterkondensator | Alle Varianten | Erforderlich |
 | 4 | Für jedes über GPADC gemessene Spannungsteilersignal Teilerwiderstände mit 1 % Toleranz verwenden; <span class="flag-red">jeder GPADC-Kanal muss einen 100-nF-Filterkondensator nahe am Chip-Pin aufweisen</span> | Alle Varianten | Erforderlich |
 
 </div>
 
-Die Quellen widersprechen sich: Der höherrangige [OpenSiFli-Hardware-Anwendungshinweis](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) beschreibt einen 10-Bit-GPADC mit fünf Kanälen und einem Eingangsbereich von 0–0,9 V. Punkt 2 der [verlinkten Quell-Arbeitsmappe der Checkliste V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) legt 1,0 V als Maximum fest, nennt aber keine Kanalzahl. Das [Datenblatt SF32LB55x V1.7.2, Abschnitt 3.2.1](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf) beschreibt acht Single-Ended-Eingänge oder vier differentielle Eingangspaare, mit Bereichen von 0–1,1 V bzw. −0,7 bis 0,7 V; die Pin-Tabelle führt GPADC_CH0–CH7 auf. Der aktuelle [SDK-ADC-Anwendungshinweis](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html) ordnet ebenfalls acht Kanäle (0–7) zu und nennt 1,1 V als maximale Abtastspannung. SiFli hat die Unterschiede bei Kanalzahl und Spannungsgrenzen nicht erklärt. Checklistenpunkt 2 behält den Arbeitsmappenwert von 1,0 V bei; bis zur schriftlichen Klärung muss die Auslegung jedoch dem höher priorisierten Anwendungshinweis mit 0–0,9 V folgen, und VADC ist auf höchstens 0,9 V zu begrenzen. 1,0 V und 1,1 V sind nicht als freigegebene Entwurfsgrenzen zu behandeln. Bestätigen Sie außerdem die Kanalverfügbarkeit für das gewählte Bauteil und Gehäuse.
+Die Quellen widersprechen sich: Der höherrangige [OpenSiFli-Hardware-Anwendungshinweis](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) beschreibt einen 10-Bit-GPADC mit fünf Kanälen und einem Eingangsbereich von 0–0,9 V. Punkt 2 der [verlinkten Quell-Arbeitsmappe der Checkliste V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) legt 1,0 V als Maximum fest, nennt aber keine Kanalzahl. Das [Datenblatt SF32LB55x V1.7.2, Abschnitt 3.2.1](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf) beschreibt acht Single-Ended-Eingänge oder vier differentielle Eingangspaare, mit Bereichen von 0–1,1 V bzw. −0,7 bis 0,7 V; die Pin-Tabelle führt GPADC_CH0–CH7 auf. Der aktuelle [SDK-ADC-Anwendungshinweis](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html) ordnet ebenfalls acht Kanäle (0–7) zu und nennt 1,1 V als maximale Abtastspannung. SiFli hat die Unterschiede bei Kanalzahl und Spannungsgrenzen nicht erklärt. Checklistenpunkt 2 behält den Arbeitsmappenwert von 1,0 V bei; bis zur schriftlichen Klärung muss die Auslegung jedoch dem höher priorisierten Anwendungshinweis mit 0–0,9 V folgen, und VADC ist auf höchstens 0,9 V zu begrenzen. 1,0 V und 1,1 V sind nicht als freigegebene Entwurfsgrenzen zu behandeln. Bestätigen Sie außerdem die Kanalverfügbarkeit für das gewählte Gerät und Gehäuse.
 
 ### 5.8.14. SDMADC { #5814-sdmadc }
 
@@ -301,7 +301,7 @@ Die Quellen widersprechen sich: Der höherrangige [OpenSiFli-Hardware-Anwendungs
 |:---|:---|:---|:---|
 | 1 | Mit dem Kunden klären, ob die Taste eine Aufweckfunktion benötigt | Alle Varianten | Erforderlich |
 | 2 | Tastenverbindung ist korrekt: Pull-up vorhanden, korrekter Widerstandswert und korrekte Pull-up-Spannungsdomäne | Alle Varianten | Erforderlich |
-| 3 | <span class="flag-red">Die Power-Taste muss PB43, PB44, PB45, PB46, PB47 oder PB48 verwenden</span> | Alle Varianten | Erforderlich |
+| 3 | <span class="flag-red">Die Ein-/Aus-Taste muss PB43, PB44, PB45, PB46, PB47 oder PB48 verwenden</span> | Alle Varianten | Erforderlich |
 | 4 | Alle Tastensignale verfügen über ESD-Schutz | Alle Varianten | Erforderlich |
 
 </div>
@@ -316,7 +316,7 @@ Die Quellen widersprechen sich: Der höherrangige [OpenSiFli-Hardware-Anwendungs
 |:---|:---|:---|:---|
 | 1 | Die Ladeschnittstelle verfügt über Schutz gegen EOS, ESD und Überspannung (OVP) | Alle Varianten | Erforderlich |
 | 2 | Das Signal zur Ladegeräteerkennung verfügt über ein ESD-Bauteil | Alle Varianten | Erforderlich |
-| 3 | Die Batterieschnittstelle verfügt über ein ESD-Bauteil | Alle Varianten | Erforderlich |
+| 3 | Die Akkuschnittstelle verfügt über ein ESD-Bauteil | Alle Varianten | Erforderlich |
 | 4 | Die Antennenschnittstelle verfügt über ein ESD-Bauteil | Alle Varianten | Erforderlich |
 | 5 | LCD- und TP-Versorgungsschnittstellen verfügen über ESD-Bauteile | Alle Varianten | Erforderlich |
 | 6 | TP-I2C-, RST- und INT-Leitungen verfügen über ESD-Bauteile | Alle Varianten | Erforderlich |
@@ -351,7 +351,7 @@ Die Quellen widersprechen sich: Der höherrangige [OpenSiFli-Hardware-Anwendungs
 | 2 | I2S2 unterstützt Ein- und Ausgang; der Audio-Decoder oder Codec ist wie vorgesehen mit I2S2 verbunden | Alle Varianten | Optional |
 | 3 | I2S-Signalverbindungen sind korrekt | Alle Varianten | Optional |
 | 4 | Die I2S-Verbindung für zwei Mikrofone ist korrekt | Alle Varianten | Optional |
-| 5 | Die Mikrofon-Teilespezifikation ist bestätigt und wird vom Chip unterstützt | Alle Varianten | Optional |
+| 5 | Die Mikrofonspezifikation ist bestätigt und wird vom Chip unterstützt | Alle Varianten | Optional |
 | 6 | Falls MCLK benötigt wird, ist dessen Verbindung als korrekt bestätigt | Alle Varianten | Optional |
 | 7 | Der I/O-Logikpegel des Peripheriegeräts entspricht dem des Hauptchips | Alle Varianten | Optional |
 
@@ -367,7 +367,7 @@ Die Quellen widersprechen sich: Der höherrangige [OpenSiFli-Hardware-Anwendungs
 |:---|:---|:---|:---|
 | 1 | PDM-Verbindung ist korrekt | Nur 555/557 | Optional |
 | 2 | Die Verbindung von zwei digitalen Mikrofonen über PDM ist korrekt | Nur 555/557 | Optional |
-| 3 | Die Mikrofon-Teilespezifikation ist bestätigt und wird vom Chip unterstützt | Nur 555/557 | Optional |
+| 3 | Die Mikrofonspezifikation ist bestätigt und wird vom Chip unterstützt | Nur 555/557 | Optional |
 | 4 | Der I/O-Logikpegel des Peripheriegeräts entspricht dem des Hauptchips | Nur 555/557 | Optional |
 
 </div>
@@ -381,7 +381,7 @@ Die Quellen widersprechen sich: Der höherrangige [OpenSiFli-Hardware-Anwendungs
 | Nr. | Prüfpunkt | Gilt für | Kategorie |
 |:---|:---|:---|:---|
 | 1 | SPI-Verbindung ist korrekt: <span class="flag-red">MCU-SDO verbindet sich mit Peripherie-SDI, und MCU-SDI verbindet sich mit Peripherie-SDO</span> | Alle Varianten | Optional |
-| 2 | SPI-Peripherie-Timing-Anforderungen sind bestätigt und werden unterstützt | Alle Varianten | Optional |
+| 2 | Die Zeitvorgaben der SPI-Peripherie sind bestätigt und werden unterstützt | Alle Varianten | Optional |
 | 3 | Der I/O-Logikpegel des Peripheriegeräts entspricht dem des Hauptchips | Alle Varianten | Optional |
 
 </div>
@@ -400,10 +400,10 @@ Die Quellen widersprechen sich: Der höherrangige [OpenSiFli-Hardware-Anwendungs
 | 4 | Geräte, die auf der LCPU laufen müssen, sind mit USART4 oder USART5 verbunden | Alle Varianten | Optional |
 | 5 | <span class="flag-red">Beim Anschluss an eine Peripherie verbindet sich MCU-RXD mit Peripherie-TXD und MCU-TXD mit Peripherie-RXD</span> | Alle Varianten | Erforderlich |
 | 6 | Der I/O-Logikpegel des Peripheriegeräts entspricht dem des Hauptchips | Alle Varianten | Erforderlich |
-| 7 | Ungenutzte USART-Testpunkte werden für die Reserveverwendung vorgehalten | Alle Varianten | Optional |
+| 7 | Ungenutzte USART-Testpunkte werden als Reserve vorgehalten | Alle Varianten | Optional |
 | 8 | <span class="flag-red">Wenn UART1 mit einem Gerät verbunden ist, werden Testpunkte reserviert</span> | Alle Varianten | Erforderlich |
 | 9 | <span class="flag-red">Wenn UART mit einem UART-zu-USB-Chip verbunden ist, müssen RX und TX trennbar sein</span> | Alle Varianten | Erforderlich |
-| 10 | <span class="flag-red">Für UART, das mit Peripheriegeräten verbunden ist, wird die Verwendung der HCPU-Schnittstelle empfohlen, um zu vermeiden, dass HCPU-Software eine LCPU-UART-Schnittstelle nutzt</span> | Alle Varianten | Erforderlich |
+| 10 | <span class="flag-red">Für Peripheriegeräte wird eine HCPU-UART-Schnittstelle empfohlen, damit HCPU-Software nicht versehentlich eine LCPU-UART-Schnittstelle nutzt</span> | Alle Varianten | Erforderlich |
 
 </div>
 
@@ -417,8 +417,8 @@ Die Quellen widersprechen sich: Der höherrangige [OpenSiFli-Hardware-Anwendungs
 |:---|:---|:---|:---|
 | 1 | Die Pin-Zuweisung für die Hintergrundbeleuchtungs-PWM ist korrekt; einen anderen GPTIMx als für den Motor verwenden, vorzugsweise auf der PB-Schnittstelle, um zu vermeiden, dass eine HCPU-Frequenzreduzierung die Hintergrundbeleuchtung beeinflusst | Alle Varianten | Optional |
 | 2 | Die Pin-Zuweisung für die Motor-PWM ist korrekt; einen anderen GPTIMx als für die Hintergrundbeleuchtung verwenden, vorzugsweise auf der PB-Schnittstelle, um zu vermeiden, dass eine HCPU-Frequenzreduzierung die Vibration beeinflusst | Alle Varianten | Optional |
-| 3 | Der Motor-PWM-Steuerpin wird auf der PB-Schnittstelle empfohlen, vorzugsweise PB24 oder PB25, um abnormales Verhalten während der Programmierung bei Verwendung eines SMT-Motors zu vermeiden | Alle Varianten | Optional |
-| 4 | Signale, die einen PWM-Ausgang benötigen, müssen die PB-Schnittstelle verwenden; zusätzlich auf abnormales Verhalten beim Kaltstart prüfen | Alle Varianten | Optional |
+| 3 | Für den Motor-PWM-Steuerpin wird die PB-Schnittstelle empfohlen, vorzugsweise PB24 oder PB25, um Fehlverhalten während der Programmierung bei Verwendung eines SMT-Motors zu vermeiden | Alle Varianten | Optional |
+| 4 | Signale, die einen PWM-Ausgang benötigen, müssen die PB-Schnittstelle verwenden; zusätzlich auf Fehlverhalten beim Kaltstart prüfen | Alle Varianten | Optional |
 
 </div>
 
@@ -483,7 +483,7 @@ Die Quellen widersprechen sich: Der höherrangige [OpenSiFli-Hardware-Anwendungs
 
 | Nr. | Prüfpunkt | Gilt für | Kategorie |
 |:---|:---|:---|:---|
-| 1 | Wird ein Offline-Download-Board zum Programmieren der Firmware benötigt, die Testpunkte VBAT, GND, UART3_TXD, UART3_RXD, MODE und RESET reservieren | Alle Varianten | Optional |
+| 1 | Wird ein Offline-Download-Board zum Programmieren der Firmware benötigt, Testpunkte für VBAT, GND, UART3_TXD, UART3_RXD, MODE und RESET vorsehen | Alle Varianten | Optional |
 | 2 | Wenn eine Quarzkalibrierung erforderlich ist, PB08 vorsehen. Wird PB08 an ein Peripheriegerät angeschlossen, sollte der Pin vorzugsweise als Ausgang dienen; ein externer Kondensator darf nicht angeschlossen werden | Alle Varianten | Optional |
 
 </div>

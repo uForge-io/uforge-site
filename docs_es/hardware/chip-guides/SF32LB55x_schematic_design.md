@@ -2,7 +2,7 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Guía de diseño esquemático para el MCU SF32LB55x: sistema de alimentación, modo de arranque, generación de reloj, RF, interfaces de almacenamiento, interfaces de pantalla y táctil, y conexiones de activación, GPADC y fabricación."
+description: "Guía de diseño esquemático para la MCU SF32LB55x: sistema de alimentación, modo de arranque, generación de reloj, RF, interfaces de almacenamiento, interfaces de pantalla y táctil, y conexiones de activación, GPADC y fabricación."
 tags:
     - Hardware
     - Chip
@@ -12,7 +12,7 @@ tags:
 
 ## 5. Directrices de diseño esquemático { #5-schematic-design-guidelines }
 
-<div align="center"><em>Tabla 5-1: Mapa de secciones del esquema</em></div>
+<div align="center"><em>Tabla 5-1: Mapa de secciones del esquemático</em></div>
 
 <div align="center" markdown>
 
@@ -24,7 +24,7 @@ tags:
 | RF | Adaptación de RF, ruta de antena de 50 ohmios, filtrado de AVDD_BRF y zona de exclusión de RF. |
 | Interfaces de almacenamiento | PSRAM OPI, NOR/NAND/PSRAM QSPI y eMMC/Micro SD SDIO. |
 | Pantalla y táctil | MIPI DSI, SPI/QSPI, MCU8080, JDI, interrupción táctil, reinicio, retroiluminación y alimentación del panel. |
-| Activación, GPADC y fabricación | Fuentes y botones de activación, PWM del motor, divisores GPADC, sensores, audio Bluetooth, DBG-UART, SWD, programación en producción y calibración del cristal. |
+| Activación, GPADC y fabricación | Fuentes y botones de activación, PWM del motor, divisores GPADC, sensores, audio Bluetooth, DBG-UART, SWD, grabación en producción y calibración del cristal. |
 
 </div>
 
@@ -89,9 +89,9 @@ El SF32LB551 en QFN68L no tiene los pines VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_V
 
 Coloque los condensadores necesarios cerca de los pines correspondientes, mantenga compactos los lazos de corriente BUCK y compruebe el modo de funcionamiento BUCK/LDO antes del diseño de PCB. Verifique el circuito de reinicio y la temporización POR/BOR en el hardware real.
 
-Las fuentes discrepan: la tabla 3-3 de la [guía de aplicación de hardware de SiFli en chino](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) y el punto 9 de la [lista de comprobación de esquemático V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) especifican 1 µF para VDD_RTC, mientras que [C0313 en el esquema de referencia de la guía](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png) está marcado como 0,1 µF. Las fuentes no explican cuándo se aplica cada valor. Confirme con SiFli el valor requerido para el dispositivo concreto antes de liberar el diseño; no resuelva la discrepancia por suposición.
+Las fuentes discrepan: la tabla 3-3 de la [guía de aplicación de hardware de SiFli en chino](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) y el punto 9 de la [lista de comprobación de esquemático V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) especifican 1 µF para VDD_RTC, mientras que [C0313 en el esquemático de referencia de la guía](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png) está marcado como 0,1 µF. Las fuentes no explican cuándo se aplica cada valor. Confirme con SiFli el valor requerido para el dispositivo concreto antes de liberar el diseño; no resuelva la discrepancia por suposición.
 
-Alimente VDD1 y VDD2 simultáneamente; el SF32LB551 no tiene VDD2. Conecte RSTN mediante pull-up al dominio de tensión de entrada de VDD1 y añada un condensador de 0,1 µF a tierra. El esquema de referencia etiqueta la alimentación del pull-up como 1,8 V/3,3 V y usa una resistencia de 10 kΩ; elija el nivel que corresponda al dominio VDD1 del diseño. La Figura 5.1-1 muestra un nivel POR de 1,50 V, BOR configurable de 2,5 V a 1,5 V y una marca RSTN de 0,7 V. La medida de la Figura 5.1-3 muestra unos 700 µs desde la subida de alimentación hasta la liberación del reset en ese ejemplo; no es un retardo garantizado para todos los diseños.
+Alimente VDD1 y VDD2 simultáneamente; el SF32LB551 no tiene VDD2. Conecte RSTN mediante pull-up al dominio de tensión de entrada de VDD1 y añada un condensador de 0,1 µF a tierra. El esquemático de referencia etiqueta la alimentación del pull-up como 1,8 V/3,3 V y usa una resistencia de 10 kΩ; elija el nivel que corresponda al dominio VDD1 del diseño. La Figura 5.1-1 muestra un nivel POR de 1,50 V, BOR configurable de 2,5 V a 1,5 V y una marca RSTN de 0,7 V. La medida de la Figura 5.1-3 muestra unos 700 µs desde la subida de alimentación hasta la liberación del reset en ese ejemplo; no es un retardo garantizado para todos los diseños.
 
 ![Figura 5.1-1: Temporización de encendido y apagado](../../sf32-products/chips/assets/55x/SF32LB55x-POR-BOR.png){ width="100%" loading="lazy" }
 
@@ -165,9 +165,9 @@ SF32LB55x admite PSRAM OPI, flash NOR/NAND QSPI y PSRAM, así como eMMC o Micro 
 
 BGA145 ofrece un canal de OPI PSRAM externa; BGA169 ofrece dos. Las tablas 5.5-1 a 5.5-3 describen la configuración BGA145 y las dos memorias BGA169, no tres canales en un mismo encapsulado. Las tablas QSPI corresponden a QSPI2, QSPI3 y QSPI4. Las tablas SDIO cubren SDIO1 en modos de 4/8 bits y SDIO2 en modo de 4 bits.
 
-Se recomienda QSPI2 para PSRAM QSPI externa. Si un GPIO del HCPU controla la alimentación de una PSRAM OPI/QSPI externa, use un pin HCPU de tipo PU, con nivel alto para encender y bajo para apagar. Si conmuta VDD_SIP para la Flash interna, use PA58 con la misma polaridad. Consulte al FAE de SiFli sobre el espacio Flash para los algoritmos de acelerómetro y frecuencia cardíaca del LCPU antes de decidir si añade NOR Flash en QSPI4.
+Se recomienda QSPI2 para PSRAM QSPI externa. Si una GPIO de la HCPU controla la alimentación de una PSRAM OPI/QSPI externa, use un pin HCPU de tipo PU, con nivel alto para encender y bajo para apagar. Si conmuta VDD_SIP para la Flash interna, use PA58 con la misma polaridad. Consulte al FAE de SiFli sobre el espacio Flash para los algoritmos de acelerómetro y frecuencia cardíaca de la LCPU antes de decidir si añade NOR Flash en QSPI4.
 
-Las tablas OPI originales usan descripciones de dirección incoherentes. En el [esquema de referencia BGA145](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png), el [esquema de referencia BGA169 del dispositivo 1](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png) y el [del dispositivo 2](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png), los pines PA37/PA20 y PA07/PA08 del MCU, respectivamente, controlan CS# y CLK de la PSRAM externa. Por ello, las tablas siguientes describen CS# y CLK desde el lado del MCU: salida del MCU y entrada de la PSRAM. Los esquemas no indican una dirección fija para DQS/DM; consulte la función y la dirección en la hoja de datos de la PSRAM seleccionada.
+Las tablas OPI originales usan descripciones de dirección incoherentes. En el [esquemático de referencia BGA145](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png), el [esquemático de referencia BGA169 del dispositivo 1](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png) y el [del dispositivo 2](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png), los pines PA37/PA20 y PA07/PA08 de la MCU, respectivamente, controlan CS# y CLK de la PSRAM externa. Por ello, las tablas siguientes describen CS# y CLK desde el lado de la MCU: salida de la MCU y entrada de la PSRAM. Los esquemáticos no indican una dirección fija para DQS/DM; consulte la función y la dirección en la hoja de datos de la PSRAM seleccionada.
 
 Cada PSRAM ilustrada usa 1,8 V, tres condensadores de 0,1 µF y uno de 1 µF/6,3 V. Las conexiones RESET# y NC/CLK# sin conectar son propias del dispositivo mostrado; consulte la hoja de datos de la memoria elegida.
 
@@ -179,10 +179,10 @@ Cada PSRAM ilustrada usa 1,8 V, tres condensadores de 0,1 µF y uno de 1 µF/6,3
 
 <div align="center" markdown>
 
-| Señal PSRAM | Pin del MCU | Descripción detallada |
+| Señal PSRAM | Pin de la MCU | Descripción detallada |
 |:------------|:----|:------------|
-| CS# | PA37 | Salida del MCU; entrada de la PSRAM |
-| CLK | PA20 | Salida del MCU; entrada de la PSRAM |
+| CS# | PA37 | Salida de la MCU; entrada de la PSRAM |
+| CLK | PA20 | Salida de la MCU; entrada de la PSRAM |
 | DQS | PA35 | DQS/DM; consulte la función y la dirección en la hoja de datos de la PSRAM seleccionada |
 | DQ0 | PA28 | Entrada/salida de datos 0 |
 | DQ1 | PA29 | Entrada/salida de datos 1 |
@@ -203,10 +203,10 @@ Cada PSRAM ilustrada usa 1,8 V, tres condensadores de 0,1 µF y uno de 1 µF/6,3
 
 <div align="center" markdown>
 
-| Señal PSRAM | Pin del MCU | Descripción detallada |
+| Señal PSRAM | Pin de la MCU | Descripción detallada |
 |:------------|:----|:------------|
-| CS# | PA07 | Salida del MCU; entrada de la PSRAM |
-| CLK | PA08 | Salida del MCU; entrada de la PSRAM |
+| CS# | PA07 | Salida de la MCU; entrada de la PSRAM |
+| CLK | PA08 | Salida de la MCU; entrada de la PSRAM |
 | DQS | PA15 | DQS/DM; consulte la función y la dirección en la hoja de datos de la PSRAM seleccionada |
 | DQ0 | PA02 | Entrada/salida de datos 0 |
 | DQ1 | PA04 | Entrada/salida de datos 1 |
@@ -227,10 +227,10 @@ Cada PSRAM ilustrada usa 1,8 V, tres condensadores de 0,1 µF y uno de 1 µF/6,3
 
 <div align="center" markdown>
 
-| Señal PSRAM | Pin del MCU | Descripción detallada |
+| Señal PSRAM | Pin de la MCU | Descripción detallada |
 |:------------|:----|:------------|
-| CS# | PA07 | Salida del MCU; entrada de la PSRAM |
-| CLK | PA08 | Salida del MCU; entrada de la PSRAM |
+| CS# | PA07 | Salida de la MCU; entrada de la PSRAM |
+| CLK | PA08 | Salida de la MCU; entrada de la PSRAM |
 | DQS | PA26 | DQS/DM; consulte la función y la dirección en la hoja de datos de la PSRAM seleccionada |
 | DQ0 | PA18 | Entrada/salida de datos 0 |
 | DQ1 | PA22 | Entrada/salida de datos 1 |
@@ -359,16 +359,16 @@ JDI admite interfaces paralelas y seriales mediante los grupos de señales multi
 | - | AVDD18_DSI | Entrada de alimentación MIPI |
 | - | DSI_REXT | Conecte una resistencia externa de 10 kΩ a tierra |
 | - | AVSS_DSI | Tierra |
-| TE | PA77 | Señal de tearing effect para la sincronización con el frame del MCU |
+| TE | PA77 | Señal de tearing effect para la sincronización con el frame de la MCU |
 | RESET | PB17 | Señal de reinicio del panel |
 
 </div>
 
 Notas de asignación de pines de pantalla:
 
-- TE también puede conectarse a otro GPIO del grupo PA.
+- TE también puede conectarse a otra GPIO del grupo PA.
 - Si el panel admite la señal TE mediante DSI, no se necesita un pin TE independiente.
-- RESET también puede conectarse a otro GPIO del grupo PB.
+- RESET también puede conectarse a otra GPIO del grupo PB.
 
 <div align="center"><em>Tabla 5.6-2: Interfaz de pantalla SPI/QSPI</em></div>
 
@@ -384,14 +384,14 @@ Notas de asignación de pines de pantalla:
 | D[0] | GPIO19 | PB37 | Datos 2 en modo Quad-SPI |
 | D[1] | GPIO18 | PB07 | Datos 3 en modo Quad-SPI |
 | RESET | GPIO2 | PB17 | Señal de reinicio del panel |
-| TE | GPIO3 | PB77 | Señal de tearing effect para la sincronización con el frame del MCU |
+| TE | GPIO3 | PB77 | Señal de tearing effect para la sincronización con el frame de la MCU |
 
 </div>
 
 Notas de asignación de pines de pantalla:
 
-- TE puede usar PA77 u otro GPIO del grupo PA configurado para emular la señal.
-- RESET puede usar cualquier GPIO. Para una pantalla siempre encendida (AOD), SiFli recomienda un GPIO del grupo PB.
+- TE puede usar PA77 u otra GPIO del grupo PA configurada para emular la señal.
+- RESET puede usar cualquier GPIO. Para una pantalla siempre encendida (AOD), SiFli recomienda una GPIO del grupo PB.
 
 <div align="center"><em>Tabla 5.6-3: Interfaz de pantalla MCU8080</em></div>
 
@@ -412,14 +412,14 @@ Notas de asignación de pines de pantalla:
 | D[6] | GPIO13 | - | Datos 6 |
 | D[7] | GPIO12 | - | Datos 7 |
 | RESET | GPIO2 | - | Reinicio |
-| TE | GPIO3 | - | Señal de tearing effect para la sincronización con el frame del MCU |
+| TE | GPIO3 | - | Señal de tearing effect para la sincronización con el frame de la MCU |
 
 </div>
 
 Notas de asignación de pines de pantalla:
 
-- TE puede usar PA77 u otro GPIO del grupo PA configurado para emular la señal.
-- RESET puede usar cualquier GPIO. Para una pantalla siempre encendida (AOD), SiFli recomienda un GPIO del grupo PB.
+- TE puede usar PA77 u otra GPIO del grupo PA configurada para emular la señal.
+- RESET puede usar cualquier GPIO. Para una pantalla siempre encendida (AOD), SiFli recomienda una GPIO del grupo PB.
 
 La [guía de aplicación de hardware de SiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB55x-HW-Application.md) identifica RDX como señal de lectura, pero termina su descripción con «para escribir datos». Esa frase contradice tanto el nombre RDX como la señal WRX de escritura asociada; aquí se considera un error de redacción de la fuente. La posibilidad de lectura y sus tiempos dependen del controlador de pantalla elegido; compruébelos en su hoja de datos.
 
@@ -427,7 +427,7 @@ La [guía de aplicación de hardware de SiFli](https://github.com/OpenSiFli/SiFl
 
 <div align="center" markdown>
 
-| Señal JDI | Pin del MCU (LCDC1) | Descripción detallada |
+| Señal JDI | Pin de la MCU (LCDC1) | Descripción detallada |
 |:----------|:------------|:----------------------|
 | JDI_VCK | PA20 | Reloj de desplazamiento del controlador vertical |
 | JDI_VST | PA31 | Señal de inicio del controlador vertical |
@@ -450,7 +450,7 @@ La [guía de aplicación de hardware de SiFli](https://github.com/OpenSiFli/SiFl
 
 <div align="center" markdown>
 
-| Señal JDI | Pin del MCU (LCDC1) | Descripción detallada |
+| Señal JDI | Pin de la MCU (LCDC1) | Descripción detallada |
 |:----------|:------------|:----------------------|
 | JDI_SCS | PA31 | Señal de selección de chip |
 | JDI_SCLK | PA20 | Señal de reloj serie |
@@ -475,7 +475,7 @@ La [guía de aplicación de hardware de SiFli](https://github.com/OpenSiFli/SiFl
 
 </div>
 
-Para BL_PWM, use un GPIO con función GPTIM1_CHx y configure un estado adecuado de pull-up o pull-down para evitar que la retroiluminación se encienda inesperadamente durante el arranque en frío.
+Para BL_PWM, use una GPIO con función GPTIM1_CHx y configure un estado adecuado de pull-up o pull-down para evitar que la retroiluminación se encienda inesperadamente durante el arranque en frío.
 
 ### 5.7. Interfaces de activación, GPADC y fabricación { #57-wake-gpadc-and-manufacturing-interfaces }
 
@@ -489,7 +489,7 @@ En el circuito de referencia, KEY1 se conecta a PB48 con un pull-up de 10 kΩ a 
 
 <div align="center"><em>Figura 5.7-1: Circuito de referencia del botón de activación</em></div>
 
-Use un GPIO con GPTIM1_CHx para el PWM del motor. Seleccione el comportamiento PU/PD adecuado para evitar una activación involuntaria al arrancar en frío. El circuito de referencia usa GPIO17 (PA44), un transistor de lado bajo y una resistencia de 1 MΩ a tierra en la puerta, con alimentación de 3 V para el motor y otra de 3,3 V para el MCU.
+Use una GPIO con GPTIM1_CHx para la PWM del motor. Seleccione el comportamiento PU/PD adecuado para evitar una activación involuntaria al arrancar en frío. El circuito de referencia usa GPIO17 (PA44), un transistor de lado bajo y una resistencia de 1 MΩ a tierra en la puerta, con alimentación de 3 V para el motor y otra de 3,3 V para la MCU.
 
 ![Figura 5.7-2: Circuito de referencia del controlador del motor](../../sf32-products/chips/assets/55x/SF32LB55x-VIB-SCH.png){ width="100%" loading="lazy" }
 
@@ -516,7 +516,7 @@ Use un GPIO con GPTIM1_CHx para el PWM del motor. Seleccione el comportamiento P
 
 La guía de aplicación de hardware de SiFli describe un GPADC de cinco canales y 10 bits, con un rango de entrada de 0–0,9 V. Para un diseño conservador, conecte VIN directamente solo si es inferior a 0,9 V; para tensiones superiores, use un divisor que mantenga VADC por debajo de 0,9 V. Para medir la batería, la fuente recomienda una relación R1:R2 cercana a 5:1 y resistencias del orden de MΩ: reducir la corriente aumenta el tiempo de establecimiento. El circuito añade un condensador de 0,1 µF entre VADC y tierra. Use `VADC = VIN × R2 / (R1 + R2)` y compruebe la tensión máxima de batería y las tolerancias; las corrientes de la tabla 5.7-2 corresponden a VIN = 4,2 V, no a todas las condiciones.
 
-Discrepancia entre fuentes: la [guía de aplicación de hardware OpenSiFli, de mayor prioridad](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) describe un GPADC de 10 bits y cinco canales, con un rango de entrada de 0–0,9 V. El punto 2 de la [lista de comprobación de esquemático V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) fija un máximo de 1,0 V, pero no especifica el número de canales. La [hoja de datos SF32LB55x V1.7.2, sección 3.2.1](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf) especifica ocho entradas no diferenciales (single-ended) o cuatro pares diferenciales, con rangos de 0–1,1 V y −0,7 a 0,7 V, respectivamente; su tabla de pines enumera GPADC_CH0–CH7. La [guía ADC actual del SDK](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html) también asigna ocho canales (0–7) e indica 1,1 V como tensión máxima de muestreo. SiFli no ha explicado las diferencias en el número de canales ni en los límites de tensión. Hasta que se aclare por escrito, esta guía mantiene como base de diseño el criterio de la fuente de mayor prioridad: cinco canales y un rango de entrada de 0–0,9 V. Mantenga VADC por debajo de 0,9 V; no trate 1,0 V ni 1,1 V como límites aprobados y confirme la disponibilidad de canales para el dispositivo y el encapsulado seleccionados.
+Discrepancia entre fuentes: la [guía de aplicación de hardware OpenSiFli, de mayor prioridad](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) describe un GPADC de 10 bits y cinco canales, con un rango de entrada de 0–0,9 V. El punto 2 de la [lista de comprobación de esquemático V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) fija un máximo de 1,0 V, pero no especifica el número de canales. La [hoja de datos SF32LB55x V1.7.2, sección 3.2.1](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf) especifica ocho entradas no diferenciales o cuatro pares diferenciales, con rangos de 0–1,1 V y −0,7 a 0,7 V, respectivamente; su tabla de pines enumera GPADC_CH0–CH7. La [guía ADC actual del SDK](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html) también asigna ocho canales (0–7) e indica 1,1 V como tensión máxima de muestreo. SiFli no ha explicado las diferencias en el número de canales ni en los límites de tensión. Hasta que se aclare por escrito, esta guía mantiene como base de diseño el criterio de la fuente de mayor prioridad: cinco canales y un rango de entrada de 0–0,9 V. Mantenga VADC por debajo de 0,9 V; no trate 1,0 V ni 1,1 V como límites aprobados y confirme la disponibilidad de canales para el dispositivo y el encapsulado seleccionados.
 
 ![Figura 5.7-3: Entrada GPADC y divisor de referencia](../../sf32-products/chips/assets/55x/SF32LB55x-GPADC-SCH.png){ width="100%" loading="lazy" }
 
@@ -536,9 +536,9 @@ Discrepancia entre fuentes: la [guía de aplicación de hardware OpenSiFli, de m
 
 </div>
 
-Conecte al LCPU las interfaces I2C/SPI, de control y de interrupción de activación de los sensores de frecuencia cardíaca y aceleración. Use DC-DC, LDO o interruptores de carga de bajo Iq para conmutar sus alimentaciones según sea necesario.
+Conecte a la LCPU las interfaces I2C/SPI, de control y de interrupción de activación de los sensores de frecuencia cardíaca y aceleración. Use DC-DC, LDO o interruptores de carga de bajo Iq para conmutar sus alimentaciones según sea necesario.
 
-El audio Bluetooth externo se comunica por UART1 del HCPU. Iguale los niveles de tensión o añada un traductor; al cortar la alimentación del módulo, corte simultáneamente la del traductor para evitar fugas. Si el módulo permanece alimentado durante Standby y su habilitación es activa en bajo, use un GPIO del LCPU con comportamiento PD predeterminado.
+El audio Bluetooth externo se comunica por UART1 de la HCPU. Iguale los niveles de tensión o añada un traductor; al cortar la alimentación del módulo, corte simultáneamente la del traductor para evitar fugas. Si el módulo permanece alimentado durante Standby y su habilitación es activa en bajo, use una GPIO de la LCPU con comportamiento PD predeterminado.
 
 <div align="center"><em>Tabla 5.7-3: Interfaz de depuración y grabación</em></div>
 
@@ -561,7 +561,7 @@ El audio Bluetooth externo se comunica por UART1 del HCPU. Iguale los niveles de
 
 </div>
 
-No deje UART RXD flotante; habilite el pull-up interno durante la inicialización del firmware. UART3 es el puerto de registro predeterminado. SiFli ofrece un programador autónomo para programación en producción y calibración del cristal. Reserve al menos VBAT, GND, VDDIOA, VDDIOB, RSTN, Mode, SWDIO, SWCLK, RXD1, TXD1, RXD3 y TXD3 como puntos de prueba. El subconjunto de producción es VBAT, GND, boot_mode, VDDIOB, RXD3 y TXD3. VBAT y boot_mode son etiquetas de la fuente para el banco de pruebas: identifique la alimentación real y la conexión Mode antes de cablear.
+No deje UART RXD flotante; habilite el pull-up interno durante la inicialización del firmware. UART3 es el puerto de registro predeterminado. SiFli ofrece un grabador autónomo para grabación en producción y calibración del cristal. Reserve al menos VBAT, GND, VDDIOA, VDDIOB, RSTN, Mode, SWDIO, SWCLK, RXD1, TXD1, RXD3 y TXD3 como puntos de prueba. El subconjunto de producción es VBAT, GND, boot_mode, VDDIOB, RXD3 y TXD3. VBAT y boot_mode son etiquetas de la fuente para el banco de pruebas: identifique la alimentación real y la conexión Mode antes de cablear.
 
 El dibujo original conecta VDD_1V8 al pin 1 (VTref). SWDIO y SWCLK se conectan a los pines 7 y 9, respectivamente, cada uno mediante una resistencia en serie de 22 Ω. El [J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector) estándar también usa el pin 1 para [VTref](https://kb.segger.com/VTref), la entrada de referencia de tensión del objetivo, no una salida de alimentación de la sonda. Compruebe la orientación del conector y la compatibilidad con 1,8 V antes de conectar un cable estándar.
 

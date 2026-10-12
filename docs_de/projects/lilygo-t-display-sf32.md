@@ -11,15 +11,15 @@ tags:
 # LilyGO T-Display-SF32 { #lilygo-t-display-sf32 }
 
 !!! warning "Drittanbieterprojekt – kein SiFli-Projekt"
-    T-Display-SF32 wird von Xinyuan-LilyGO/LilyGO veröffentlicht und gepflegt, nicht von SiFli oder OpenSiFli. Für boardspezifische Hardware-, Firmware- und Supportentscheidungen sind die Repositories von LilyGO maßgeblich. SiFlis Quellen bleiben für den zugrunde liegenden SF32-Baustein und SiFli-SDK maßgeblich; daraus folgt jedoch nicht, dass SiFli dieses LilyGO-Board validiert oder unterstützt.
+    T-Display-SF32 wird von Xinyuan-LilyGO/LilyGO veröffentlicht und gepflegt, nicht von SiFli oder OpenSiFli. Für boardspezifische Hardware-, Firmware- und Supportentscheidungen sind die Repositories von LilyGO maßgeblich. SiFlis Quellen bleiben für das zugrunde liegende SF32-Gerät und SiFli-SDK maßgeblich; daraus folgt jedoch nicht, dass SiFli dieses LilyGO-Board validiert oder unterstützt.
 
 ## Was ist T-Display-SF32? { #what-is-t-display-sf32 }
 
 [Xinyuan-LilyGO/T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32) ist eine Entwicklungsplattform mit SF32LB52x-MCU und einem 2,16-Zoll-AMOLED-Display CO5300 mit Touchcontroller CST9220. Das Repository dokumentiert 16 MB Flash, 8 MB PSRAM, eine BHI260AP-IMU, LoRa mit SX1262, eine microSD-Schnittstelle, Audio, USB Type-C, Ladeunterstützung, Board-Pinbelegungen, Beispielanwendungen, Hardwaredateien, ein Verzeichnis mit Werksfirmware und einen boardspezifischen Stromverbrauchsbericht.
 
-Damit eignet sich das Board zur Bewertung eines displayorientierten Wearables, eines Handheld-Controllers, eines mobilen Sensorterminals oder einer vernetzten HMI. Es ist eine Plattformreferenz, kein fertiges Produkt: Das Repository stellt zahlreiche Hardwarepfade bereit, doch das Produktteam muss die relevanten Pfade auswählen, eine bekannte Basis reproduzieren, sie auf genau seiner Board-Revision messen und Stromversorgung, HF, Sicherheit, Softwarepflege und Wiederherstellung qualifizieren.
+Damit eignet sich das Board zur Bewertung eines displayorientierten Wearables, eines Handheld-Controllers, eines mobilen Sensorterminals oder einer vernetzten HMI. Es ist eine Plattformreferenz, kein fertiges Produkt: Das Repository stellt zahlreiche Hardwarepfade bereit, doch das Produktteam muss die relevanten Pfade auswählen, eine bekannte Basis reproduzieren, sie auf genau seiner Board-Revision messen und Stromversorgung, RF, Sicherheit, Softwarepflege und Wiederherstellung qualifizieren.
 
-Die Funktionsmatrix des Repositorys unterscheidet das eigenständige T-SF32-Display-Board von der optionalen T-SF32-Keyboard-Erweiterung. WLAN (ESP32-C6), GPS (L76K), Matrix-Tastatur und LEDs (TCA8418, AW21009, XL9555), BME280, Infrarotsender und Vibrationsmotor (AW86224) setzen diese Erweiterung voraus und gehören nicht zur Baseline des eigenständigen Boards.
+Die Funktionsmatrix des Repositorys unterscheidet das eigenständige T-SF32-Display-Board von der optionalen T-SF32-Keyboard-Erweiterung. WLAN (ESP32-C6), GPS (L76K), Matrix-Tastatur und LEDs (TCA8418, AW21009, XL9555), BME280, Infrarotsender und Vibrationsmotor (AW86224) setzen diese Erweiterung voraus und gehören nicht zur Ausgangsbasis des eigenständigen Boards.
 
 ## Warum eine Umsetzung auf SF32-Basis? { #why-the-sf32-implementation }
 
@@ -31,7 +31,7 @@ Der Preis dafür liegt in der Zuständigkeit. Boardunterstützung, Treiberänder
 
 **Ergebnis:** eine versionsfixierte T-Display-SF32-Basis herstellen, Display/Touch, ausgewählte Peripherie, Stromverhalten und Wiederherstellung prüfen, einen Build aus dem Quellcode reproduzieren und anschließend eine klar begrenzte Anwendungsänderung mit Regressionsnachweisen umsetzen, die sich für eine Produktbewertung eignen.
 
-Diese Seite belegt weder, dass jede Peripherie auf jeder Boardvariante bestückt ist, noch dass die Herstellerfirmware serienreif ist, der Stromverbrauchsbericht für andere Revisionen oder Arbeitslasten gilt oder LoRa-Betrieb in jeder Region zulässig ist. Sie überträgt auch keine SiFli-Unterstützung auf LilyGO-spezifische Hardware oder Treiber.
+Diese Seite belegt weder, dass jede Peripherie auf jeder Boardvariante bestückt ist, noch dass die Herstellerfirmware serienreif ist, noch dass der Stromverbrauchsbericht für andere Revisionen oder Arbeitslasten gilt, noch dass LoRa-Betrieb in jeder Region zulässig ist. Sie überträgt auch keine SiFli-Unterstützung auf LilyGO-spezifische Hardware oder Treiber.
 
 Vor dem Start benötigen Sie:
 
@@ -43,7 +43,7 @@ Vor dem Start benötigen Sie:
 - Testzubehör nur für relevante Schnittstellen, zum Beispiel eine microSD-Karte, Kopfhörer oder eine Audiolast sowie einen LoRa-Gegenpart für ein zulässiges Frequenzband;
 - eine Dokumentation von Firmwareversionen, Build-Protokollen, serieller Ausgabe, Fotos, Strommessungen sowie Fehler- und Wiederherstellungstests.
 
-<div align="center"><em>Tabelle: Projektvertrag für T-Display-SF32</em></div>
+<div align="center"><em>Tabelle: Projektbasis und Nachweise für T-Display-SF32</em></div>
 
 <div align="center" markdown>
 
@@ -61,7 +61,7 @@ Vor dem Start benötigen Sie:
 
 ### Hardware-Spezifikation { #hardware-specification }
 
-<div align="center"><em>Tabelle: T-Display-SF32-Hardwarespezifikation</em></div>
+<div align="center"><em>Tabelle: Hardware-Spezifikation von T-Display-SF32</em></div>
 
 <div align="center" markdown>
 
@@ -76,7 +76,7 @@ Vor dem Start benötigen Sie:
 
 ### Software-Spezifikation { #software-specification }
 
-<div align="center"><em>Tabelle: T-Display-SF32-Softwarespezifikation</em></div>
+<div align="center"><em>Tabelle: Software-Spezifikation von T-Display-SF32</em></div>
 
 <div align="center" markdown>
 
@@ -116,15 +116,15 @@ scons --board=t-display-sf32_hcpu -j8
 build_t-display-sf32_hcpu\uart_download.bat
 ```
 
-Dokumentieren Sie die tatsächlichen Repository- und SDK-Commits, das Ergebnis des Umgebungsexports, das vollständige Build-Protokoll, erzeugte Images sowie Flash- und Bootprotokoll. Die Zahl paralleler Jobs darf variieren, Buildziel und Quellrevisionen nicht.
+Dokumentieren Sie die tatsächlichen Repository- und SDK-Commits, die eingerichtete SDK-Umgebung, das vollständige Build-Protokoll, erzeugte Images sowie Flash- und Bootprotokoll. Die Zahl paralleler Jobs darf variieren, Buildziel und Quellrevisionen nicht.
 
 ## Projektphasen und Entscheidungspunkte { #delivery-map }
 
-<div align="center"><em>Tabelle: Entwicklungsphasen für T-Display-SF32</em></div>
+<div align="center"><em>Tabelle: Projektphasen und Entscheidungspunkte für T-Display-SF32</em></div>
 
 <div align="center" markdown>
 
-| Phase | Unterstützte Entscheidung | Erforderliches Ergebnis |
+| Phase | Entscheidungsfrage | Erforderliches Ergebnis |
 |:------|:---------------------|:----------------|
 | 1. Herstellerbasis | Funktionieren das unveränderte Board und die Firmware wie identifiziert zusammen? | Versionsfixierte, fotografisch dokumentierte, nachweislich funktionsfähige Sitzung |
 | 2. Peripherie und Wiederherstellung | Sind ausgewählte Schnittstellen, Stromzustände und Fehler beobachtbar und wiederherstellbar? | Protokoll zu Fehlerinjektion, Messung und Wiederherstellung |
@@ -147,7 +147,7 @@ flowchart LR
     H["Build- und Flashwerkzeuge des Entwicklungsrechners"] -->|"UART-Flashen und Protokolle"| F
     R["LilyGO-Board-Repository"] --> H
     S["LilyGO-SDK-Fork\nauf Basis des SiFli-SDK"] --> H
-    O["SiFli-Baustein- und SDK-Quellen"] -. "Referenz der Plattformbasis" .-> S
+    O["SiFli-Geräte- und SDK-Quellen"] -. "Referenz der Plattformbasis" .-> S
 ```
 
 Betrachten Sie Fehler als getrennte Bereiche: Stromversorgung/Laden des Boards, Start und Flashen, Display/Touch, jede ausgewählte Peripherie, LilyGO-Boardunterstützung und das zugrunde liegende SDK. Ein fehlgeschlagenes Displaybeispiel kann etwa auf Stromversorgung, Board-Revision, Panel-/Touchkonfiguration, Anwendung oder eine Unvereinbarkeit von SDK und Treiber zurückgehen. „Das SDK ist ausgefallen“ ist keine ausreichende Diagnose.
@@ -156,15 +156,15 @@ Betrachten Sie Fehler als getrennte Bereiche: Stromversorgung/Laden des Boards, 
 
 **Ziel:** vor jeder Quellcodeänderung nachweisen, wie sich das gelieferte Board und die Herstellerbasis tatsächlich verhalten.
 
-1. Beide Platinenseiten fotografieren und Kennzeichnungen, bestückte Peripherie, Display-/Touchbauteile, Speicher, Schalter, Anschlüsse und Repository-Commit dokumentieren.
+1. Fotografieren Sie beide Platinenseiten und dokumentieren Sie Kennzeichnungen, bestückte Peripherie, Display-/Touchbauteile, Speicher, Schalter, Anschlüsse und Repository-Commit.
 2. Stromquelle und Polarität prüfen. LilyGO weist darauf hin, dass zum Start mehr als 3,5 V erforderlich sind. Verwenden Sie eine überwachte Stromquelle und keinen tiefentladenen Akku als Testmethode.
-3. Nur eine nachweislich zum Board passende Basis flashen oder zunächst die vorhandene Firmware ausführen, sofern ihre Herkunft bekannt ist. Das Originalimage nach Möglichkeit sichern.
-4. Das Menü auf dem Gerät oder unveränderte Beispiele für Display/Touch und jede für das Produkt ausgewählte Peripherie testen. Nicht verfügbare oder nicht bestückte Funktionen dokumentieren, statt sie als Fehler zu werten.
-5. Zweimal kalt starten und Bootprotokolle, UI-Fotos, Touch-/Eingabeergebnisse sowie einen Stromverlauf für eine klar definierte Leerlauf-/Aktivitätslast sichern.
+3. Flashen Sie nur eine nachweislich zum Board passende Basis oder führen Sie zunächst die vorhandene Firmware aus, sofern ihre Herkunft bekannt ist. Sichern Sie das Originalimage nach Möglichkeit.
+4. Testen Sie das Menü auf dem Gerät oder unveränderte Beispiele für Display/Touch und jede für das Produkt ausgewählte Peripherie. Dokumentieren Sie nicht verfügbare oder nicht bestückte Funktionen, statt sie als Fehler zu werten.
+5. Starten Sie zweimal kalt und sichern Sie Bootprotokolle, UI-Fotos, Touch-/Eingabeergebnisse sowie einen Stromverlauf für eine klar definierte Leerlauf-/Aktivitätslast.
 
 **Aufzubewahrende Nachweise:** Board-Revision und Fotos, Repository-/Image-Identität, Angaben zu Versorgung und Akku, Flash- und Bootprotokolle, Inventar der bestückten Bauteile, Funktionsergebnisse und Bedingungen der Strommessung.
 
-**Abnahmekriterium für Phase 1:** Zwei Kaltstarts reproduzieren die identifizierte Display-/Touch-Basis. Für jede relevante bestückte Peripherie liegt ein Ergebnis vor, und das Original- oder ein bekannt gutes Image lässt sich wiederherstellen.
+**Abnahmekriterium für Kontrollpunkt 1:** Zwei Kaltstarts reproduzieren die identifizierte Display-/Touch-Basis. Für jede relevante bestückte Peripherie liegt ein Ergebnis vor, und das Original- oder ein bekannt gutes Image lässt sich wiederherstellen.
 
 ## Phase 2 — Peripherie-, Strom- und Wiederherstellungsgrenzen validieren { #stage-2-validate-peripheral-power-and-recovery-boundaries }
 
@@ -176,17 +176,17 @@ Betrachten Sie Fehler als getrennte Bereiche: Stromversorgung/Laden des Boards, 
 
 | Test | Vorgehen | Erfolgsnachweis |
 |:-----|:-------|:--------------|
-| Startreserve | Strombegrenztes Labornetzteil um den vorgesehenen Betriebsbereich variieren, ohne dokumentierte Grenzwerte zu überschreiten | Start-/Abschaltschwellen und Verhalten sind gemessen; wiederholte Resets oder undefinierte Zustände werden nicht übergangen |
-| Niedrigakku-Richtlinie | Warn- und Abschaltschwellen kontrolliert mit einer Versorgung prüfen | Eigene Firmware warnt und schaltet ab, bevor die sichere Entladegrenze des ausgewählten Akkus erreicht wird |
+| Startverhalten im Spannungsbereich | Strombegrenztes Labornetzteil im vorgesehenen Betriebsbereich variieren, ohne dokumentierte Grenzwerte zu überschreiten | Start-/Abschaltschwellen und Verhalten sind gemessen; wiederholte Resets oder undefinierte Zustände werden nicht übergangen |
+| Verhalten bei niedrigem Akkustand | Warn- und Abschaltschwellen kontrolliert mit einer Versorgung prüfen | Eigene Firmware warnt und schaltet ab, bevor die sichere Entladegrenze des ausgewählten Akkus erreicht wird |
 | Laden im ausgeschalteten Zustand | Nach Abschaltung durch Werksfirmware USB-Strom anschließen und den dokumentierten Aufweckweg per Taste verwenden | Ladezustand und ausschließlich durch Tastendruck ausgelöstes Aufwecken entsprechen dem Herstellerhinweis; USB-Anschluss allein wird nicht fälschlich als Startweg gewertet |
 | Display-/Touch-Unterbrechung | Während der UI-Nutzung zurücksetzen oder aus-/einschalten und Touchtests an Kanten/Ecken wiederholen | Display und Touch kehren ohne dauerhafte Beschädigung oder Fehleingaben in einen definierten Zustand zurück |
 | Wechselbarer Speicher | Testkarte nur an kontrollierten Punkten entfernen, beschädigen oder ersetzen | Fehler durch fehlende/fehlerhafte Karte sind diagnostizierbar; die Anwendung beschädigt keinen unbeteiligten Zustand und hängt sich nicht auf |
-| LoRa-Pfad | Gegenstelle im zulässigen Frequenzband und kontrollierter HF-Aufbau verwenden | Frequenz und Konfiguration sind dokumentiert; Timeout und Wiederverbindung sind sichtbar; ohne Messung wird keine Reichweite behauptet |
+| LoRa-Pfad | Gegenstelle im zulässigen Frequenzband und kontrollierter RF-Aufbau verwenden | Frequenz und Konfiguration sind dokumentiert; Timeout und Wiederverbindung sind sichtbar; ohne Messung wird keine Reichweite behauptet |
 | Flash-Wiederherstellung | Einen Test-Flashvorgang nur auf einem wiederherstellbaren Gerät unterbrechen; anschließend den dokumentierten Type-C-/UART-Pfad verwenden | Das gesicherte, bekannte Image lässt sich mit dokumentierten Werkzeugen und Schritten wiederherstellen |
 
 </div>
 
-**Abnahmekriterium für Phase 2:** Jeder relevante Test hat ein reproduzierbares Ergebnis und einen Wiederherstellungsweg. Für jede eigene Firmware ist ein Schutz bei niedrigem Akkustand implementiert; kein ungelöster Fehler kann den Akku beschädigen oder das Board ohne dokumentierten Recovery-Pfad unbrauchbar machen.
+**Abnahmekriterium für Kontrollpunkt 2:** Jeder relevante Test hat ein reproduzierbares Ergebnis und einen Wiederherstellungsweg. Für jede eigene Firmware ist ein Schutz bei niedrigem Akkustand implementiert; kein ungelöster Fehler kann den Akku beschädigen oder das Board ohne dokumentierten Recovery-Pfad unbrauchbar machen.
 
 ## Phase 3 — Eine reproduzierbare Quellbasis erstellen { #stage-3-build-a-reproducible-source-baseline }
 
@@ -197,7 +197,7 @@ Betrachten Sie Fehler als getrennte Bereiche: Stromversorgung/Laden des Boards, 
 3. Nachweise zu Umgebung, Abhängigkeiten, Konfiguration, Speicher/Partitionen, Image, Flashvorgang und seriellen Protokollen sichern.
 4. Auf einem anderen Rechner oder nach Löschen sämtlicher Build-Ausgaben wiederholen und anschließend die vollständige Regression aus Phase 2 durchführen.
 
-**Abnahmekriterium für Phase 3:** Um eine Firmware zu erzeugen, die Phase 2 besteht, sind weder veraltete Images noch nicht versionierte Boarddateien oder undokumentierte SDK-Ersetzungen erforderlich.
+**Abnahmekriterium für Kontrollpunkt 3:** Um eine Firmware zu erzeugen, die Phase 2 besteht, sind weder veraltete Images noch nicht versionierte Boarddateien noch undokumentierte SDK-Ersetzungen erforderlich.
 
 ## Phase 4 — Jeweils einen Produktpfad anpassen { #stage-4-adapt-one-product-path-at-a-time }
 
@@ -218,7 +218,7 @@ Betrachten Sie Fehler als getrennte Bereiche: Stromversorgung/Laden des Boards, 
 
 </div>
 
-**Abnahmekriterium für Phase 4:** Die Änderung ist geprüft, das Originalimage wiederherstellbar und alle relevanten Tests für Display, Touch, Peripherie, Stromversorgung, Flashen und Wiederherstellung sind bestanden.
+**Abnahmekriterium für Kontrollpunkt 4:** Die Änderung ist geprüft, das Originalimage wiederherstellbar und alle relevanten Tests für Display, Touch, Peripherie, Stromversorgung, Flashen und Wiederherstellung sind bestanden.
 
 ## Phase 5 — Produktreife-Überprüfung { #stage-5-product-readiness-review }
 
@@ -232,11 +232,11 @@ Vor einem Feldversuch oder einer eigenen Leiterplatte sind folgende Fragen zu be
 - Sind Hardwaredateien, Firmware, SDK-Fork, Beispiele, Assets und Drittanbieterkomponenten mit den Lizenzen für die geplante Verteilung vereinbar?
 - Akzeptiert das Team die Abhängigkeit von einem Drittanbieterprototyp, oder hat es einen kontrollierten Fork und Supportplan qualifiziert?
 
-**Abnahmekriterium für Phase 5:** Für jedes Restrisiko gibt es Verantwortliche, Nachweise und eine Behandlung. Das Team hat ausdrücklich entschieden, fortzufahren, zurückzustellen oder abzubrechen.
+**Abnahmekriterium für Kontrollpunkt 5:** Für jedes Restrisiko gibt es Verantwortliche, Nachweise und eine Behandlung. Das Team hat ausdrücklich entschieden, fortzufahren, zurückzustellen oder abzubrechen.
 
 ## Übergabe an das Produktdesign { #handoff-to-product-design }
 
-In die nächste Entwicklungsphase gehören die genaue SF32-Variante und Speicherbausteine, Display-/Touch-Timing, bestückte Peripherie und Busse, Stromversorgungsbaum, Ladegerät und Akkurichtlinie, Antennen-/HF-Konzept, Boot-/Flashanschluss, Partitionsplan, Zugriff für Produktionstests, Zuständigkeit für den Software-Fork und der nachgewiesene Wiederherstellungsweg. Weiter geht es mit dem [Integrationspfad für SF32LB52x](../sf32-products/chips/SF32LB52x.md#integration-path), dem [SF32LB52x Hardware-Design-Leitfaden](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [SiFli-SDK: Kompilieren, Flashen und Überwachen](../develop/platforms/sifli-sdk/build-flash-monitor.md) und [Design für die Produktion](../hardware/design-for-production.md).
+In die nächste Entwicklungsphase gehören die genaue SF32-Variante und Speicherbausteine, Display-/Touch-Timing, bestückte Peripherie und Busse, Stromversorgungsbaum, Ladegerät und Akkurichtlinie, Antennen-/RF-Konzept, Boot-/Flashanschluss, Partitionsplan, Zugriff für Produktionstests, Zuständigkeit für den Software-Fork und der nachgewiesene Wiederherstellungsweg. Weiter geht es mit dem [Integrationspfad für SF32LB52x](../sf32-products/chips/SF32LB52x.md#integration-path), dem [SF32LB52x Hardware-Design-Leitfaden](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [SiFli-SDK: Bauen, Flashen und Überwachen](../develop/platforms/sifli-sdk/build-flash-monitor.md) und [Design für die Produktion](../hardware/design-for-production.md).
 
 ## Maßgebliche Quellen { #authoritative-sources }
 

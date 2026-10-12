@@ -8,6 +8,7 @@ Disallow: /de/about/others/
 Disallow: /fr/about/others/
 Disallow: /pt/about/others/
 Disallow: /ru/about/others/
+Disallow: /ko/about/others/
 
 Sitemap: https://uForge.io/sitemap.xml
 Sitemap: https://uForge.io/zh/sitemap.xml
@@ -17,3 +18,4 @@ Sitemap: https://uForge.io/de/sitemap.xml
 Sitemap: https://uForge.io/fr/sitemap.xml
 Sitemap: https://uForge.io/pt/sitemap.xml
 Sitemap: https://uForge.io/ru/sitemap.xml
+Sitemap: https://uForge.io/ko/sitemap.xml

@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-Nano : carte de développement SF32LB52x compacte à bords crénelés pour des prototypes proches du produit, la mise en service de petits affichages et l'évaluation par brasage."
+description: "SF32LB52-DevKit-Nano : carte de développement SF32LB52x compacte à demi-trous métallisés pour des prototypes proches du produit, la mise en service de petits affichages et l'évaluation par brasage."
 tags:
     - Matériel
     - Carte de développement
@@ -10,7 +10,7 @@ tags:
 
 ## Vue d'ensemble { #overview }
 
-La SF32LB52-DevKit-Nano est une petite carte de développement SF32LB52x destinée aux prototypes compacts et à l'évaluation embarquée. Elle utilise des demi-trous crénelés sur le pourtour de la carte, ce qui la rend adaptée aussi bien comme carte de développement autonome que comme module à braser dans les premiers prototypes de produit.
+La SF32LB52-DevKit-Nano est une petite carte de développement SF32LB52x destinée aux prototypes compacts et à l'évaluation embarquée. Elle utilise des demi-trous métallisés sur le pourtour de la carte, ce qui la rend adaptée aussi bien comme carte de développement autonome que comme module à braser dans les premiers prototypes de produit.
 
 La carte mesure 51 mm × 20,32 mm et expose les principales ressources du SF32LB52x nécessaires au développement avec GPIO, UART, I2C, SPI, LCD, I2S, GPADC, PWM, USB et audio analogique.
 
@@ -28,24 +28,24 @@ La carte mesure 51 mm × 20,32 mm et expose les principales ressources du SF32LB
 
 | Variante | MCU | Mémoire dans le boîtier | Flash externe |
 | :--- | :--- | :--- | :--- |
-| SF32LB52-DevKit-Nano-N4 | SF32LB52BU56 | 4 Mo de Flash SPI NOR | Aucun |
-| SF32LB52-DevKit-Nano-N16R16 | SF32LB52JUD6 | 16 Mo de PSRAM OPI | 16 Mo de Flash QSPI-NOR |
-| SF32LB52-DevKit-Nano-A128R16 | SF32LB52JUD6 | 16 Mo de PSRAM OPI | 128 Mo de Flash QSPI-NAND |
+| SF32LB52-DevKit-Nano-N4 | SF32LB52BU56 | 4 MB de Flash SPI NOR | Aucun |
+| SF32LB52-DevKit-Nano-N16R16 | SF32LB52JUD6 | 16 MB de PSRAM OPI | 16 MB de Flash QSPI-NOR |
+| SF32LB52-DevKit-Nano-A128R16 | SF32LB52JUD6 | 16 MB de PSRAM OPI | 128 MB de Flash QSPI-NAND |
 
 </div>
 
-La variante N4 convient aux applications compactes de commande, de Bluetooth et d'interface simple. La N16R16 associe 16 Mo de PSRAM OPI à 16 Mo de QSPI-NOR, tandis que la A128R16 associe 16 Mo de PSRAM OPI à 128 Mo de QSPI-NAND. Toutes deux conviennent aux applications qui ont besoin de ressources d'affichage plus volumineuses, de systèmes de fichiers externes ou d'un tampon d'image ou d'une mémoire de travail en PSRAM.
+La variante N4 convient aux applications compactes de commande, de Bluetooth et d'interface simple. La N16R16 associe 16 MB de PSRAM OPI à 16 MB de QSPI-NOR, tandis que la variante A128R16 associe 16 MB de PSRAM OPI à 128 MB de QSPI-NAND. Toutes deux conviennent aux applications qui ont besoin de ressources d'affichage plus volumineuses, de systèmes de fichiers externes ou d'un tampon d'image ou d'une mémoire de travail en PSRAM.
 
-**Divergence entre sources — à vérifier avant le choix :** le [guide détaillé de la carte Nano](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html) de SiFli appelle sa configuration 16 Mo de PSRAM OPI + 16 Mo de NOR `R16N16 V1.0.0` ; le [guide actuel des modèles de cartes de développement](https://wiki.sifli.com/en/board/devkit_guide.html) répertorie la même configuration mémoire sous le nom `N16R16` et indique séparément `A128R16` avec 16 Mo de PSRAM OPI + 128 Mo de QSPI-NAND. Le guide détaillé ne décrit pas spécifiquement la A128R16. Pour cette référence, fiez-vous à l'entrée du guide des modèles plutôt que de transposer des éléments de la description de la carte N16R16. Avant de choisir un firmware ou une organisation du stockage, vérifiez le marquage de la carte ainsi que le schéma et la nomenclature actuels.
+**Divergence entre sources — à vérifier avant le choix :** le [guide détaillé de la carte Nano](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html) de SiFli appelle sa configuration 16 MB de PSRAM OPI + 16 MB de NOR `R16N16 V1.0.0` ; le [guide actuel des modèles de cartes de développement](https://wiki.sifli.com/en/board/devkit_guide.html) répertorie la même configuration mémoire sous le nom `N16R16` et indique séparément `A128R16` avec 16 MB de PSRAM OPI + 128 MB de QSPI-NAND. Le guide détaillé ne décrit pas spécifiquement la A128R16. Pour cette référence, fiez-vous à l'entrée du guide des modèles plutôt que de transposer des éléments de la description de la carte N16R16. Avant de choisir un firmware ou une organisation du stockage, vérifiez le marquage de la carte ainsi que le schéma et la nomenclature actuels.
 
 Les sources SiFli diffèrent aussi légèrement sur les dimensions de la carte Nano : le guide détaillé indique 21 × 51 mm, tandis que le guide des modèles indique 51 × 20,32 mm. Le côté de 51 mm concorde, mais la dimension la plus courte diffère de 0,68 mm. Cette page retient la valeur plus précise du guide des modèles ; vérifiez le plan mécanique de la révision exacte de la carte avant de concevoir un boîtier ou une carte porteuse.
 
 ## Points forts de la carte { #board-highlights }
 
 - Carte compacte de 51 mm × 20,32 mm
-- Bords à demi-trous crénelés pour des prototypes à braser
+- Demi-trous métallisés pour des prototypes à braser
 - Alimentation USB Type-C et téléchargement/débogage USB-UART via CH340N
-- GPIO, UART, I2C, SPI, GPADC, PWM, I2S, PDM et broches capables de réveil exposés
+- Les fonctions GPIO, UART, I2C, SPI, GPADC, PWM, I2S et PDM, ainsi que les broches capables de réveiller le système, sont exposées
 - Prise en charge d'un LCD QSPI via un chemin FPC 16 broches, généralement avec un câble adaptateur 22 broches vers 16 broches
 - Prise en charge d'un panneau tactile I2C
 - Entrée microphone analogique et broches de sortie audio différentielle
@@ -63,15 +63,15 @@ Choisissez la SF32LB52-DevKit-Nano lorsque le prototype doit rester proche du fo
 - Comparer les configurations NOR seule, QSPI-NOR et QSPI-NAND avec PSRAM
 - Mettre en service les fonctions LCD, audio, capteurs et USB dans un faible encombrement
 
-Pour un câblage plus facile sur banc et un accès plus large aux signaux, utilisez la [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md). Pour une carte riche en affichage avec chargeur, carte TF, microphone et amplificateur de haut-parleur, utilisez la [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md).
+Pour un câblage plus facile sur banc et un accès plus large aux signaux, utilisez la [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md). Pour une carte davantage orientée vers l'affichage, avec chargeur, carte TF, microphone et amplificateur de haut-parleur, utilisez la [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md).
 
 ## Alimentation { #power }
 
 La carte prend en charge trois modes d'alimentation :
 
 - Alimentation USB Type-C, recommandée pour le développement
-- Entrée 3,3 V via les broches crénelées 3.3V et GND lorsque l'USB n'est pas connecté
-- Entrée 5 V via les broches crénelées 5V et GND lorsque l'USB n'est pas connecté
+- Entrée 3,3 V via les demi-trous métallisés 3.3V et GND lorsque l'USB n'est pas connecté
+- Entrée 5 V via les demi-trous métallisés 5V et GND lorsque l'USB n'est pas connecté
 
 Lorsque l'USB Type-C est connecté, certaines broches 3,3 V et 5 V peuvent servir de sorties. Vérifiez le sens du courant avant de raccorder des circuits externes.
 
@@ -103,9 +103,9 @@ Utilisez l'interface UART via USB Type-C pour le téléchargement du firmware et
 
 </div>
 
-## Récapitulatif des broches crénelées { #castellated-pin-summary }
+## Récapitulatif des demi-trous métallisés { #castellated-pin-summary }
 
-La carte Nano expose deux groupes de broches de bord. Le premier groupe comprend l'audio, le SPI1, l'UART de débogage, l'alimentation proche de l'USB et des broches compatibles GPADC. Le second groupe comprend le SPI2, l'USB FS, des GPIO capables de réveil et l'alimentation.
+La carte Nano expose deux groupes de demi-trous métallisés sur son pourtour. Le premier groupe comprend l'audio, le SPI1, l'UART de débogage, l'alimentation proche de l'USB et des broches compatibles GPADC. Le second groupe comprend le SPI2, l'USB FS, des GPIO capables de réveiller le système et l'alimentation.
 
 ### Signaux du bord côté face { #front-side-edge-signals }
 
@@ -195,7 +195,7 @@ La carte prend en charge les dalles LCD QSPI via un jeu de signaux FPC à 16 bro
 
 ## Broches du Flash externe et du SDIO { #external-flash-and-sdio-pins }
 
-La variante N16R16 comprend un Flash QSPI-NOR externe de 16 Mo. Le groupe de broches de stockage est le suivant :
+La variante N16R16 comprend un Flash QSPI-NOR externe de 16 MB. Le groupe de broches de stockage est le suivant :
 
 <div align="center"><em>Groupe de broches du Flash externe et du SDIO</em></div>
 

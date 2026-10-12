@@ -1,12 +1,12 @@
 ---
 icon: lucide/terminal
-description: "Der tägliche Entwicklungsablauf mit dem SiFli-SDK: Umgebung aktivieren, mit scons bauen, per UART-Downloadskript oder sftool flashen und die serielle Ausgabe überwachen."
+description: "Der tägliche Entwicklungsablauf mit dem SiFli-SDK: Umgebung aktivieren, mit scons bauen, per UART-Download oder sftool flashen und die serielle Ausgabe überwachen."
 tags:
     - Entwicklung
     - SiFli-SDK
 ---
 
-# Kompilieren, Flashen und Überwachen der seriellen Ausgabe { #build-flash-monitor }
+# Bauen, Flashen und Überwachen der seriellen Ausgabe { #build-flash-monitor }
 
 Diese Seite beschreibt den täglichen Entwicklungsablauf mit dem SiFli-SDK: Umgebung aktivieren, mit `scons` bauen, das Board flashen und die Logs beobachten.
 
@@ -30,7 +30,7 @@ Installieren Sie die SDK-Umgebung anhand der [offiziellen Installationsanleitung
 
 Das Export-Skript lädt die zur aktuellen SDK-Arbeitskopie gehörende Umgebung in das jeweilige Terminal. Installations- und Verwaltungsschritte unterscheiden sich je nach SDK-Version; folgen Sie deshalb der passenden offiziellen Anleitung.
 
-## Kompilieren { #build }
+## Bauen { #build }
 
 Aus dem Verzeichnis eines Beispielprojekts:
 
@@ -42,7 +42,7 @@ Wählen Sie einen zu Ihrem Rechner passenden Wert für `-j`. Wenn die Board-Kenn
 
 ## Bereinigen und neu bauen { #clean-rebuilds }
 
-Führen Sie eine Bereinigung mit anschließendem Neuaufbau durch, wenn Sie das Board wechseln, die Konfiguration wesentlich ändern oder ein verdächtiges Build-Artefakt untersuchen. Führen Sie dazu im Verzeichnis des Beispielprojekts die SCons-Bereinigungsoption aus:
+Bereinigen Sie den Build, wenn Sie das Board wechseln, die Konfiguration wesentlich ändern oder ein verdächtiges Build-Artefakt untersuchen. Führen Sie dazu im Verzeichnis des Beispielprojekts die dokumentierte SCons-Bereinigungsoption aus:
 
 ```bash
 scons -c
@@ -91,7 +91,7 @@ Halten Sie fest:
 |:-----|:-----|
 | Aktivieren | Die SDK-Umgebung in das aktuelle Terminal laden. |
 | Konfigurieren | Board und Funktionsoptionen auswählen. |
-| Kompilieren | Board-spezifische Binärdateien erzeugen. |
+| Bauen | Board-spezifische Binärdateien erzeugen. |
 | Flashen | Das Image auf die Hardware übertragen. |
 | Überwachen | Boot- und Anwendungsverhalten bestätigen. |
 | Dokumentieren | Befehle und Protokolldetails für die Reproduzierbarkeit sichern. |

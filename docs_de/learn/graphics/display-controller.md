@@ -9,11 +9,11 @@ tags:
 
 ## Übersicht { #overview }
 
-Der **Display-Controller** (LCDC) überträgt vorbereitete Pixel über die gewählte Schnittstelle an das Panel. Bei unterstützten Bauteilen und Konfigurationen dekomprimiert er außerdem einen TurboPixel-Framebuffer während der Ausgabe. LCDC unterstützt ein begrenztes Alpha-Blending seiner Ausgabeebenen über einem einfarbigen Hintergrund. Dokumentiert sind Ebene 0 und Ebene 1; SF32LB52x unterstützt Ebene 1 nicht. Diese Funktion ersetzt weder das allgemeine UI-Rendering noch die Bildkomposition mit ePicasso. Die Dekodierung von eZip-Bildressourcen bleibt ein separater Vorgang.
+Der **Display-Controller** (LCDC) überträgt vorbereitete Pixel über die gewählte Schnittstelle an das Panel. Bei unterstützten Geräten und Konfigurationen dekomprimiert er außerdem einen TurboPixel-Framebuffer während der Ausgabe. LCDC unterstützt ein begrenztes Alpha-Blending seiner Ausgabeebenen über einem einfarbigen Hintergrund. Dokumentiert sind Ebene 0 und Ebene 1; SF32LB52x unterstützt Ebene 1 nicht. Diese Funktion ersetzt weder das allgemeine UI-Rendering noch die Bildkomposition mit ePicasso. Die Dekodierung von eZip-Bildressourcen bleibt ein separater Vorgang.
 
 Primärquelle: [SiFli-LCDC-HAL-Dokumentation](https://github.com/OpenSiFli/SiFli-SDK/blob/121aa105565ee6bcbab6a15c1cb3b5571f5cc8e5/docs/source/zh_CN/hal/lcdc.md).
 
-Der obige Link ist auf einen bestimmten SiFli-SDK-Commit festgelegt. Er dokumentiert das HAL-Verhalten in dieser Revision, belegt jedoch nicht, dass jede Schnittstelle, Ebene oder Funktion auf jedem SF32-Bauteil und Gehäuse oder in anderen SDK-Versionen verfügbar ist. Prüfen Sie die konkrete Kombination aus Bauteil, Gehäuse und SDK-Version Ihres Projekts.
+Der obige Link ist auf einen bestimmten SiFli-SDK-Commit festgelegt. Er dokumentiert das HAL-Verhalten in dieser Revision, belegt jedoch nicht, dass jede Schnittstelle, Ebene oder Funktion auf jedem SF32-Gerät und Gehäuse oder in anderen SDK-Versionen verfügbar ist. Prüfen Sie die konkrete Kombination aus Gerät, Gehäuse und SDK-Version Ihres Projekts.
 
 Den vollständigen Ablauf von der Ressource bis zum Panel finden Sie unter [Grafikübersicht](overview.md#sf32-graphics-flow). Dieser Artikel konzentriert sich auf den Controller, die Panel-Anbindung und die Treiberintegration.
 
@@ -23,7 +23,7 @@ Lesen Sie diese Seite, wenn Sie eine Panel-Schnittstelle auswählen, einen LVGL-
 
 EPD und Memory-in-Pixel bezeichnen Paneltechnologien oder Verfahren zur Pixelaktualisierung, keine austauschbaren Busstandards. Ein EPD-Modul kann einen externen Controller über SPI ansprechen; für SF32LB57x ist außerdem ein LCDC-Direktmodus zur EPD-Ansteuerung dokumentiert. JDI bietet serielle und parallele Schnittstellenmodi mit unterschiedlichen Signalen. Prüfen Sie die elektrische Schnittstelle und die Wartungsanforderungen des Panels, nicht nur dessen Displaykategorie.
 
-Die Panel-Wahl beeinflusst Bandbreite, Pufferstrategie, Pin-Nutzung, Stromverbrauch, Initialisierungskomplexität und PCB-Risiko. Bestätigen Sie die genaue Schnittstellenliste für das gewählte Bauteil und Gehäuse.
+Die Panel-Wahl beeinflusst Bandbreite, Pufferstrategie, Pin-Nutzung, Stromverbrauch, Initialisierungskomplexität und PCB-Risiko. Bestätigen Sie die genaue Schnittstellenliste für das gewählte Gerät und Gehäuse.
 
 <div align="center"><em>Optionen für Display-Schnittstellen und Paneltechnologien</em></div>
 
@@ -44,7 +44,7 @@ Die Panel-Wahl beeinflusst Bandbreite, Pufferstrategie, Pin-Nutzung, Stromverbra
 
 Zum Beispiel kann ein kleines SPI/QSPI-Panel Teilaktualisierungen bevorzugen, während ein RGB/DPI-Panel eine dauerhaft ausreichende Bandbreite für kontinuierliches Scanout benötigt. Wählen Sie eine Schnittstelle nicht allein anhand des theoretischen Durchsatzes: Berücksichtigen Sie Pixelformat, Auflösung, Aktualisierungsverhalten, Panel-GRAM und andere PSRAM-Nutzer.
 
-## Schnittstellenmatrix pro Bauteil { #per-device-interface-matrix }
+## Schnittstellenmatrix pro Gerät { #per-device-interface-matrix }
 
 Die folgende Matrix unterstützt die Auswahl einer Familie; sie ist keine Pin-Zuordnungstabelle. Sie fasst die für die jeweilige SF32-Familie oder Siliziumvariante dokumentierten Display-Schnittstellen zusammen. Ein Strich bedeutet, dass die Dokumentation die Schnittstelle für diese Zeile nicht aufführt. Ein GPIO-gesteuerter externer Controller oder eine boardspezifische Implementierung ist damit nicht ausgeschlossen. Prüfen Sie vor dem Schaltplanabschluss immer den genauen Bestellcode, das Gehäuse, die Pin-Multiplexierung, die SDK-Version und den Panel-Treiber.
 
@@ -67,7 +67,7 @@ Behandeln Sie bei **SF32LB56x** die U- und V-Varianten nicht als austauschbar. S
 
 Die SiFli-Chipmodellübersicht führt DPI/RGB als Schnittstelle der SF32LB55x-Familie auf, ordnet DPI in ihrer Tabelle der einzelnen Bestellnummern jedoch keinem der dort aufgeführten SKUs zu. Behandeln Sie dies nur als Hinweis auf Familienebene und prüfen Sie vor einer DPI-Auslegung die Unterstützung und Pinverfügbarkeit für die genaue Bestellnummer. Die U/V-Unterscheidung bei SF32LB56x folgt den getrennten Hardwareleitfäden, nicht der HAL-Tabelle für die gesamte Familie.
 
-Die beiden SF32LB52x-Hardwareleitfäden widersprechen sich bei JDI: In den Übersichten wird serielles JDI genannt, während die detaillierten JDI-Abschnitte parallele Signalbelegungen zeigen. Daher führt die Matrix beide dokumentierten Angaben auf, ohne eine Pin-Verfügbarkeit für ein konkretes Bauteil zu garantieren. Vor dem Designabschluss LCDC-Mapping, SDK/Treiber und Panelsignale der genauen Variante prüfen.
+Die beiden SF32LB52x-Hardwareleitfäden widersprechen sich bei JDI: In den Übersichten wird serielles JDI genannt, während die detaillierten JDI-Abschnitte parallele Signalbelegungen zeigen. Daher führt die Matrix beide dokumentierten Angaben auf, ohne eine Pin-Verfügbarkeit für ein konkretes Gerät zu garantieren. Vor dem Designabschluss LCDC-Mapping, SDK/Treiber und Panelsignale der genauen Variante prüfen.
 
 Bei SF32LB52x ist zwischen der dokumentierten 8-Bit-Parallel-EPD-Signalschnittstelle und dem LCDC-Direktmodus für EPD zu unterscheiden. Der Hardwareleitfaden für 52B/D/E/G/J führt parallele EPD-Signale und die TPS-PMIC-Steuerung auf; die Versionshinweise des SiFli-SDK v2.5.1 dokumentieren die direkte LCDC-EPD-Ansteuerung dagegen für SF32LB57x. Leiten Sie daraus nicht ab, dass ein 52x-Design denselben LCDC-Direktmodus wie 57x verwenden kann. Treiber und Timing-Implementierung für die konkrete Variante prüfen.
 
@@ -95,11 +95,11 @@ Bei cachebarem gemeinsam genutztem Speicher bereinigen Sie den Cache der von der
 
 | Entscheidung | Zu validierende Richtung |
 |:---|:---|
-| Übertragungsbereich | Nur geänderte Bereiche übertragen, wenn Panel und Treiber dies unterstützen. |
-| Pufferung | Teil-, Vollbild-, Einzel- oder Doppelpufferung anhand von Latenz- und Speicheranforderungen wählen. |
-| Synchronisation | Puffer erst freigeben oder wiederverwenden, wenn die Hardware ihn nicht mehr liest; bei kontinuierlichem Scanout den Pufferwechsel bestätigen. |
-| Pixelformat | Panel, Treiber, Renderer und jeden Beschleunigerpfad abstimmen, um Konvertierung im Hot-Path zu vermeiden. |
-| Cache | Von der CPU beschriebene Puffer vor dem Hardware-Lesezugriff bereinigen (clean); von der Hardware beschriebene Puffer vor dem CPU-Lesezugriff invalidieren (invalidate). |
+| Übertragungsbereich | Übertragen Sie nur geänderte Bereiche, sofern Panel und Treiber dies unterstützen. |
+| Pufferung | Wählen Sie Teil-, Vollbild-, Einzel- oder Doppelpufferung anhand der Latenz- und Speicheranforderungen. |
+| Synchronisation | Geben Sie Puffer erst frei oder verwenden Sie sie wieder, wenn die Hardware sie nicht mehr liest. Bestätigen Sie bei kontinuierlichem Scanout den Pufferwechsel. |
+| Pixelformat | Stimmen Sie Panel, Treiber, Renderer und Beschleunigerpfad aufeinander ab, um Formatkonvertierungen im zeitkritischen Pfad zu vermeiden. |
+| Cache | Bereinigen Sie von der CPU beschriebene Puffer vor dem Hardware-Lesezugriff (clean). Invalidieren Sie von der Hardware beschriebene Puffer vor dem CPU-Lesezugriff (invalidate). |
 
 </div>
 
@@ -115,15 +115,15 @@ Eine vollständige Bildschirmaktualisierung ist bei animationsreichen Bildschirm
 
 Nehmen Sie das Panel schrittweise in Betrieb, bevor Sie Widgets oder Anwendungsverhalten debuggen:
 
-1. Versorgungsschienen, Reset-Timing, Backlight-/Enable-Pins und die grundlegende Stromaufnahme prüfen.
-2. Die Initialisierungssequenz des Panel-Herstellers exakt wie geliefert senden.
-3. Einfarbige Testbilder anzeigen, um Byte-Reihenfolge, Pixelformat und Fehler in der Schnittstellenverdrahtung zu erkennen.
-4. Einfache geometrische Muster zeichnen, um Stride, Fensteradressierung und Koordinaten zu prüfen.
-5. Bilder und Text hinzufügen, um Farbkonvertierung, Schriftarten und die Platzierung der Ressourcen zu prüfen.
-6. Teilaktualisierung, DMA, TurboPixel und Grafikbeschleunigung nacheinander aktivieren.
-7. Schlafmodus, Display-Aus, Aufwachen und Reinitialisierungspfade testen.
+1. Prüfen Sie Versorgungsschienen, Reset-Timing, Backlight-/Enable-Pins und die grundlegende Stromaufnahme.
+2. Senden Sie die Initialisierungssequenz des Panel-Herstellers exakt wie geliefert.
+3. Zeigen Sie einfarbige Testbilder an, um Byte-Reihenfolge, Pixelformat und Fehler in der Schnittstellenverdrahtung zu erkennen.
+4. Zeichnen Sie einfache geometrische Muster, um Stride, Fensteradressierung und Koordinaten zu prüfen.
+5. Fügen Sie Bilder und Text hinzu, um Farbkonvertierung, Schriftarten und die Platzierung der Ressourcen zu prüfen.
+6. Aktivieren Sie Teilaktualisierung, DMA, TurboPixel und Grafikbeschleunigung nacheinander.
+7. Testen Sie Schlafmodus, Display-Aus, Aufwachen und Reinitialisierungspfade.
 
-Prüfen Sie zuerst einfarbige Bilder und Muster mit einer Minimalkonfiguration der vorgesehenen Panelschnittstelle. Wiederholen Sie diese Tests nach dem Hinzufügen von DMA, Kompression oder Beschleunigung über jeden neuen Pfad, bevor Sie die vollständige LVGL-UI testen.
+Validieren Sie zuerst einfarbige Bilder und Muster mit einer Minimalkonfiguration der vorgesehenen Panelschnittstelle. Wiederholen Sie diese Tests nach dem Hinzufügen von DMA, Kompression oder Beschleunigung über jeden neuen Pfad, bevor Sie die vollständige LVGL-UI testen.
 
 ## Isolierung von Fehlern im Display-Pfad { #isolate-display-path-failures }
 
@@ -148,29 +148,29 @@ Behandeln Sie jede Stufe als separate Grenze. Das vermeidet, Panel-Befehle, LVGL
 
 ### SPI- und QSPI-AMOLED/TFT { #spi-and-qspi-amoledtft }
 
-Teilaktualisierungen bevorzugen, RGB565 verwenden, wo es geeignet ist und Animationsbereiche klein halten. Bei kleinen Änderungen keine Vollbildneuzeichnung auslösen; den geänderten Bereich vor der Übertragung rendern und zusammensetzen.
+Bevorzugen Sie Teilaktualisierungen, verwenden Sie RGB565, sofern geeignet, und halten Sie Animationsbereiche klein. Lösen Sie bei kleinen Änderungen keine Vollbildneuzeichnung aus; rendern und komponieren Sie den geänderten Bereich vor der Übertragung.
 
 ### RGB-/DPI-Panels { #rgb-dpi-panels }
 
-Dauerhafte Scanout-Bandbreite neben CPU-, ePicasso-, DMA- und anderem Speicherverkehr einplanen. Eine Framebuffer-Strategie für die erforderliche Aktualisierungsrate wählen, Doppelpufferung in Betracht ziehen, wenn der Speicher es erlaubt, und Timing sowie Signalintegrität im PCB-Design berücksichtigen.
+Planen Sie die kontinuierliche Scanout-Bandbreite zusammen mit CPU-, ePicasso-, DMA- und anderem Speicherverkehr ein. Wählen Sie eine Framebuffer-Strategie für die erforderliche Aktualisierungsrate, ziehen Sie Doppelpufferung in Betracht, sofern der Speicher dies erlaubt, und berücksichtigen Sie Timing sowie Signalintegrität im PCB-Design.
 
 ### MIPI-DSI-Panels { #mipi-dsi-panels }
 
-Den Panel-Modus wählen, bevor das Bauteil festgelegt wird. **SF32LB55x unterstützt nur den MIPI-DSI-Kommandomodus**, sodass der Panel-Controller internes SRAM/GRAM zum Halten des aktualisierten Bilds bereitstellen muss. **SF32LB58x unterstützt sowohl Kommando- als auch Videomodus**: Kommandomodus-Panels benötigen Controller-RAM, während der Videomodus einen RAM-losen Panel-Controller aus dem kontinuierlichen Pixelstrom ansteuern kann. Initialisierung frühzeitig validieren, Low-Power-Zustände und Aufwach-Timing testen und die erforderliche Datenrate unterhalb des nutzbaren Schnittstellendurchsatzes halten und dabei Protokoll-Overhead, Timing-Vorgaben und weiteren Speicherverkehr berücksichtigen.
+Wählen Sie den Panel-Modus, bevor Sie das Gerät festlegen. **SF32LB55x unterstützt nur den MIPI-DSI-Kommandomodus**, sodass der Panel-Controller internes SRAM/GRAM zum Halten des aktualisierten Bilds bereitstellen muss. **SF32LB58x unterstützt sowohl Kommando- als auch Videomodus**: Kommandomodus-Panels benötigen Controller-RAM, während der Videomodus einen RAM-losen Panel-Controller aus dem kontinuierlichen Pixelstrom ansteuern kann. Validieren Sie die Initialisierung frühzeitig, testen Sie Energiesparzustände und Aufwach-Timing und halten Sie die erforderliche Datenrate unter dem nutzbaren Schnittstellendurchsatz. Berücksichtigen Sie dabei Protokoll-Overhead, Timing-Vorgaben und weiteren Speicherverkehr.
 
 ### EPD-Displays { #epd-displays }
 
-Für seltene Aktualisierungen auslegen; Teilaktualisierungsmodi nur nutzen, wenn unterstützt und visuell akzeptabel. Animationsannahmen vermeiden und Display-PMIC-, VCOM- und Ansteuerungswellenform-Anforderungen einplanen.
+Legen Sie EPD auf seltene Aktualisierungen aus und verwenden Sie Teilaktualisierungsmodi nur, wenn sie unterstützt und visuell akzeptabel sind. Vermeiden Sie Annahmen zu Animationen und planen Sie die Anforderungen an Display-PMIC, VCOM und Ansteuerungswellenform ein.
 
 ### JDI-Schnittstellen und Memory-in-Pixel-Panels { #jdi-memory-in-pixel-displays }
 
-JDI bezeichnet hier serielle oder parallele Panel-Schnittstellenmodi; Memory-in-Pixel ist eine Paneltechnologie. In manchen Low-Power-Displaydesigns treten sie gemeinsam auf, die Begriffe sind jedoch nicht austauschbar. Bei einem MIP-Panel können kleine Aktualisierungsbereiche und ein geeignetes UI-Layout die Speicherung des Pixelzustands bei versorgtem Panel nutzen. Das bedeutet weder nichtflüchtige Bildspeicherung noch einen Standby-Verbrauch des Gesamtsystems von null. COM-Inversion und weitere Wartungsvorgänge gemäß Datenblatt des konkreten Panels ausführen; anschließend Aktualisierungsverhalten, Lesbarkeit im Freien und Leistungsaufnahme unter Produktbedingungen messen.
+JDI bezeichnet hier serielle oder parallele Panel-Schnittstellenmodi; Memory-in-Pixel ist eine Paneltechnologie. In manchen Energiespar-Displaydesigns treten sie gemeinsam auf, die Begriffe sind jedoch nicht austauschbar. Nutzen Sie bei einem MIP-Panel kleine Aktualisierungsbereiche und ein geeignetes UI-Layout, um den gespeicherten Pixelzustand bei versorgtem Panel auszunutzen. Das bedeutet weder nichtflüchtige Bildspeicherung noch einen Standby-Verbrauch des Gesamtsystems von null. Beachten Sie COM-Inversion und weitere Wartungsvorgänge gemäß Datenblatt des konkreten Panels. Messen Sie anschließend Aktualisierungsverhalten, Lesbarkeit im Freien und Leistungsaufnahme unter Produktbedingungen.
 
 ## Checkliste für die Produktionsübergabe { #production-handoff-checklist }
 
 Bevor Sie den Display-Pfad als abgeschlossen betrachten, dokumentieren Sie die Entscheidungen, die ein anderer Ingenieur reproduzieren muss:
 
-- Genaues SF32-Bauteil, Gehäuse, SDK-Version, Board-Revision, Panel-Teilenummer und Panel-Controller-Revision.
+- Genaues SF32-Gerät, Gehäuse, SDK-Version, Board-Revision, Panel-Teilenummer und Panel-Controller-Revision.
 - Schnittstellenmodus, Pin-Zuordnung, Pixelformat, Byte-/Farbreihenfolge, angestrebtes Aktualisierungsverhalten und Quelle der Panel-Initialisierung.
 - Speicherorte, Größen, Ausrichtung von Zeichenpuffer und Framebuffer, Zuständigkeit für Cache-Wartung und DMA-/Controller-Abschlusssignal.
 - Richtlinie zur Teilaktualisierung, Panel-Fenster-Regeln und alle Bereiche, die gemeinsam aktualisiert werden müssen, um Artefakte zu vermeiden.

@@ -68,7 +68,7 @@ ArduinoCore-zephyr kombiniert die Arduino-API für Sketches mit einem Zephyr-Loa
 |:-------|:---------|:------------------------|
 | Build-Modus `Standard` | Startet den Sketch, nachdem er geladen wurde. | Für normalen Sketch-Betrieb verwenden. |
 | Build-Modus `Debug` | Lässt die Zephyr-Shell auf `sketch` warten. | Nur nützlich, wenn die Shell Teil des Debug-Workflows ist. |
-| Link-Modus `Dynamic` | Verpackt den Sketch für den normalen Loader-basierten Ablauf. | Bindet den Loader in Laufzeit- und Speicherbudget ein. |
+| Link-Modus `Dynamic` | Verpackt den Sketch für den normalen Loader-basierten Ablauf. | Laufzeit und Speicherbedarf des Loaders müssen im Budget berücksichtigt werden. |
 | Link-Modus `Static` | Verwendet ein statisch gelinktes Image. | Für Loader-bezogene Untersuchungen oder wenn die Kompromisse ausdrücklich verstanden werden. |
 
 </div>
@@ -83,17 +83,17 @@ Betrachten Sie den Arduino-Core als Integrationsschicht, nicht als Ersatz für d
 
 Stellen Sie vor der Aufnahme einer Bibliothek oder Funktion in einen Produktprototyp alle folgenden Punkte sicher:
 
-- Die genaue Paketversion, FQBN, Build-Modus und Link-Modus.
-- Die Revision des Ziel-Boards und das zugehörige Verfahren für serielles Herunterladen und Wiederherstellung.
+- Exakte Angaben zu Paketversion, FQBN, Build-Modus und Link-Modus.
+- Die Revision des Ziel-Boards sowie das Verfahren für den seriellen Download und die Wiederherstellung.
 - Ein getestetes Beispiel für die benötigte Peripherie oder Bibliothek.
 - Ein messbares RAM- und Flash-Budget mit der vorgesehenen Loader-Konfiguration.
-- Ein Recovery-Weg über den Arduino-Loader oder SiFli-SDK-Firmware.
+- Ein Wiederherstellungsweg über den Arduino-Loader oder SiFli-SDK-Firmware.
 
 Schließen Sie nicht allein deshalb auf Bibliotheksunterstützung, weil eine Arduino-API oder ein ähnlich benannter Zephyr-Treiber existiert. Validieren Sie die vollständige Kombination aus Sketch, Loader, Board und Paket auf der Zielhardware.
 
 ## Diagnose und Eskalation { #diagnose-and-escalate }
 
-Beginnen Sie mit dem Leitfaden zur ersten Inbetriebnahme, wenn ein Board nicht erkannt, geflasht oder zum Blink-Test gebracht werden kann. Sobald diese Baseline funktioniert, nutzen Sie die folgende Zuordnung, um die Fehlersuche zu verkürzen.
+Beginnen Sie mit dem Leitfaden zur ersten Inbetriebnahme, wenn ein Board nicht erkannt oder geflasht werden kann oder Blink nicht ausführt. Sobald diese Baseline funktioniert, nutzen Sie die folgende Zuordnung, um die Fehlersuche zu verkürzen.
 
 <div align="center"><em>Tabelle: Zuständigkeit bei Arduino-Problemen</em></div>
 
@@ -105,11 +105,11 @@ Beginnen Sie mit dem Leitfaden zur ersten Inbetriebnahme, wenn ein Board nicht e
 | Fehlende Zephyr-Funktion oder fehlendes Subsystem | Core-README und Loader-Exporte/-Konfiguration prüfen. |
 | Speicherfehler oder Instabilität | Das Sketch-Budget messen; dynamisches Laden und die Zephyr-Shell berücksichtigen; Static nur mit Recovery-Plan bewerten. |
 | Bibliothek kompiliert, aber Hardware funktioniert nicht | Board-Pin-Annahmen bestätigen und gegen ein minimales, board-spezifisches Beispiel testen. |
-| Upload oder Recovery schlägt fehl | Die dokumentierte Arduino-Baseline neu herstellen, danach bei Bedarf den SiFli-SDK-Recovery-Pfad des Boards verwenden. |
+| Upload oder Wiederherstellung schlägt fehl | Die dokumentierte Arduino-Baseline neu herstellen, danach bei Bedarf den Wiederherstellungspfad des Boards mit SiFli-SDK verwenden. |
 
 </div>
 
-Für einen nützlichen Fehlerbericht geben Sie die Paketversion, IDE- oder CLI-Version, das Betriebssystem, die FQBN, den Build-Modus, den Link-Modus, die Board-Revision, die vollständige Upload-Ausgabe und das serielle Log an.
+Für einen nützlichen Fehlerbericht geben Sie die Paketversion, IDE- oder CLI-Version, das Betriebssystem, die FQBN, den Build-Modus, den Link-Modus, die Board-Revision, die vollständige Upload-Ausgabe und das serielle Protokoll an.
 
 ## Verwandte Seiten { #related-pages }
 

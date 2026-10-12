@@ -14,7 +14,7 @@ La serie SF32LB58x se sitúa en la gama más alta de la familia SF32LB5x. Está 
 
 SF32LB58x integra tres núcleos Arm Cortex-M33 STAR-MC1[^1] en una arquitectura heterogénea. HCPU y ACPU son los núcleos de alto rendimiento y funcionan hasta 240 MHz; LCPU alcanza 96 MHz y está orientado a tareas sensibles al consumo. HCPU gestiona el sistema, la interfaz de usuario y el procesamiento general de aplicaciones; ACPU puede encargarse de tareas de DSP de audio; LCPU es adecuado para Bluetooth LE, adquisición de datos de sensores y otras tareas de bajo consumo. Una asignación adecuada puede permitir apagar HCPU en ciertos escenarios, aunque el ahorro real depende de la carga de trabajo y de la implementación del firmware.
 
-SiFli documenta 3744 KB de SRAM en el chip y distintas combinaciones de Flash NOR, OPI-PSRAM y HPI-PSRAM integradas en el encapsulado, según el SKU. La familia también ofrece interfaces de pantalla como MIPI DSI, aceleración de gráficos vectoriales, USB 2.0 High-Speed y encapsulado BGA con un elevado número de E/S. Conviene evaluar SF32LB58x en diseños que necesitan una interfaz gráfica de alta resolución, abundantes recursos gráficos, Wi-Fi externo por SDIO o recursos de cómputo y memoria para IA en el borde o fusión de sensores.
+SiFli documenta 3 744 KB de SRAM en el chip y distintas combinaciones de Flash NOR, OPI-PSRAM y HPI-PSRAM integradas en el encapsulado, según el SKU. La familia también ofrece interfaces de pantalla como MIPI DSI, aceleración de gráficos vectoriales, USB 2.0 High-Speed y encapsulado BGA con un elevado número de E/S. Conviene evaluar SF32LB58x en diseños que necesitan una interfaz gráfica de alta resolución, abundantes recursos gráficos, Wi-Fi externo por SDIO o recursos de cómputo y memoria para tareas de IA en el borde o de fusión de sensores.
 
 [^1]: STAR-MC1 es una IP configurable de CPU embebida Armv8-M Mainline de Arm China. En los dispositivos SF32 compatibles, SiFli lo documenta como un procesador de aplicación Arm Cortex-M33 STAR-MC1. Su modelo de software de clase Cortex-M33 ayuda a que el firmware, middleware, adaptaciones de RTOS y herramientas Cortex-M33 existentes se puedan reutilizar, sujeto al trabajo normal de integración específico del dispositivo. Sus configuraciones CU, SP y SE varían principalmente en capacidad de caché, TCM, XIPU y TrustZone; las instrucciones personalizadas de Arm/CDE y la interfaz de coprocesador son capacidades opcionales que deben verificarse para el componente SF32 exacto. La documentación de SiFli puede usar ***Arm Cortex-M33 STAR-MC1*** o ***Arm Cortex-M33*** según el contexto.
 
@@ -48,7 +48,7 @@ Elija SF32LB58x si el diseño requiere una o más de estas capacidades:
 [Nota de aplicación de hardware (fuente en GitHub)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md
 [Guía de diseño de hardware (μForge.io)]: ../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md
 [Comprar muestras]: https://sifli.taobao.com/
-[Comprar kits de desarrollo]: https://sifli.taobao.com/
+[Comprar placas de desarrollo]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
@@ -59,7 +59,7 @@ Elija SF32LB58x si el diseño requiere una o más de estas capacidades:
 - :fontawesome-brands-github: __[Nota de aplicación de hardware (fuente en GitHub)]__
 - :fontawesome-solid-file-lines: __[Guía de diseño de hardware (μForge.io)]__
 - :fontawesome-solid-cart-shopping: __[Comprar muestras]__
-- :fontawesome-solid-cart-shopping: __[Comprar kits de desarrollo]__
+- :fontawesome-solid-cart-shopping: __[Comprar placas de desarrollo]__
 
 </div>
 
@@ -70,7 +70,7 @@ Elija SF32LB58x si el diseño requiere una o más de estas capacidades:
 ### Procesamiento y memoria { #compute-and-memory }
 
 - 3 núcleos Arm Cortex-M33 STAR-MC1: HCPU y ACPU hasta 240 MHz, y LCPU hasta 96 MHz
-- 3744 KB de SRAM en el chip
+- 3 744 KB de SRAM en el chip
 - Flash NOR integrada en el encapsulado: de 1 MB a 8 MB en total, según el SKU
 - Opciones de OPI-PSRAM o HPI-PSRAM integradas en el encapsulado; HPI-PSRAM de hasta 2 × 32 MB, según el SKU
 - La Flash NOR externa o SPI NAND se conecta mediante MPI3/MPI4; SD NAND, eMMC, tarjetas SD o Wi-Fi externo se conectan mediante SDIO. Las combinaciones disponibles dependen de la selección de interfaces y de la asignación de pines.
@@ -103,7 +103,7 @@ Elija SF32LB58x si el diseño requiere una o más de estas capacidades:
 
 - PMU integrada con 2 salidas BUCK y 3 salidas LDO
 - Compatibilidad opcional con el PMIC SF30147C para diseñar el árbol de alimentación de dispositivos vestibles
-- El encapsulado BGA256 es adecuado para diseños MCU de alta densidad que integran pantalla, almacenamiento, audio y conectividad
+- El encapsulado BGA256 es adecuado para diseños de alta densidad basados en MCU que integran pantalla, almacenamiento, audio y conectividad
 - La SRAM en el chip, las opciones de PSRAM integrada en el encapsulado y las interfaces de pantalla permiten atender diseños con grandes necesidades de gráficos y memoria
 
 ### Periféricos y E/S { #peripherals-and-ios }
@@ -111,8 +111,8 @@ Elija SF32LB58x si el diseño requiere una o más de estas capacidades:
 **Nota sobre el recuento de GPIO:** La actual [guía de modelos de chips de SiFli](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) indica 94 GPIO HCPU y 66 GPIO LCPU, 160 en total, para los modelos SF32LB58x que incluye. Una hoja de datos anterior desglosa el total en 94 GPIO HPSYS y 60 GPIO LPSYS, más 6 salidas AON GPO (154 GPIO + 6 AON GPO). Como las fuentes clasifican esas seis salidas siempre activas de forma distinta, la diferencia de categorías no demuestra por sí sola que cambie el total de pines del encapsulado ni significa que los 160 sean GPIO de asignación libre. El [índice de productos de SiFli](https://wiki.sifli.com/silicon/index.html) enlaza la hoja de datos vigente V1.8.6. Antes de diseñar la placa, compruebe allí el recuento y la tabla de funciones de pines del modelo exacto. La [FAQ de GPIO de SiFli](https://wiki.sifli.com/en/faq/mcu/gpio.html) trata PBR como un banco independiente de E/S de bajo consumo; no lo sume al total HCPU/LCPU salvo que la fuente lo incluya expresamente.
 
 - 160 GPIO (94 HCPU + 66 LCPU, según la guía actual de modelos de chips)
-- 2x interfaces CAN
-- 2x interfaces SDIO
+- 2 interfaces CAN
+- 2 interfaces SDIO
 - Interfaz de depuración SWD
 - 6 interfaces UART que pueden seleccionarse para la salida de depuración
 - RTC, watchdog, activación por GPIO, activación por PBR, PWM, I2C, SPI e interfaces analógicas de propósito general
@@ -165,7 +165,7 @@ Siga estos pasos para convertir una selección preliminar de SF32LB58x en un dis
 
 [SF32LB58-MOD](../modules/SF32LB58-MOD.md) integra el chip SF32LB586VDD36, su red de adaptación de RF, la HPI-PSRAM integrada en el encapsulado y opciones de almacenamiento en un módulo listo para incorporar al diseño. Es adecuado para proyectos que necesitan las prestaciones de la serie 58 y quieren reducir desde el inicio los riesgos de RF, BGA y diseño de memoria.
 
-### Kits de desarrollo { #development-kits }
+### Placas de desarrollo { #development-kits }
 
 [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) es el punto de partida para las decisiones de diseño relacionadas con el árbol de alimentación, la pantalla, el almacenamiento, el audio, RF, USB y SDIO.
 

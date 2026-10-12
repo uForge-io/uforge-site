@@ -1,6 +1,6 @@
 ---
 icon: lucide/list-checks
-description: "Checklist de revisão do esquema do SF32LB52x: encapsulamento, alimentação, clock, RF, armazenamento, display e preparação para fabricação."
+description: "Checklist de revisão do esquemático do SF32LB52x: encapsulamento, alimentação, clock, RF, armazenamento, display e preparação para fabricação."
 hide:
     - navigation
 tags:
@@ -9,16 +9,16 @@ tags:
     - Checklist
 ---
 
-# Guia de projeto de hardware do SF32LB52x — checklist do esquema { #sf32lb52x-hardware-design-guide-schematic-checklist }
+# Guia de projeto de hardware do SF32LB52x — checklist do esquemático { #sf32lb52x-hardware-design-guide-schematic-checklist }
 
 !!! note "Parte do guia de projeto de hardware do SF32LB52x"
-    Esta página apresenta a seção 5.8, com os pontos de verificação do esquema. Volte a [Sistema mínimo, alimentação e clock](SF32LB52x_schematic_design.md), a primeira das três páginas de orientações para o projeto do esquema.
+    Esta página apresenta a seção 5.8, com os pontos de verificação do esquemático. Volte a [Sistema mínimo, alimentação e clock](SF32LB52x_schematic_design.md), a primeira das três páginas de orientações para o projeto do esquemático.
 
-## 5.8. Checklist do esquema { #58-schematic-checklist }
+## 5.8. Checklist do esquemático { #58-schematic-checklist }
 
-Cada tabela cobre um bloco funcional do esquema. A coluna “Aplicável a” indica os modelos ou as revisões de silício específicos quando o item não se aplica a todas as variantes.
+Cada tabela cobre um bloco funcional do esquemático. A coluna “Aplicável a” indica os modelos ou as revisões de silício específicos quando o item não se aplica a todas as variantes.
 
-“Obrigatório” significa que o item deve ser verificado quando aplicável; não exige instalar todos os periféricos listados. Os itens condicionais só se aplicam quando o circuito ou a função correspondente está presente. Preserve as categorias Obrigatório/Opcional da fonte e diferencie recomendações de limites obrigatórios.
+“Obrigatório” significa que o item deve ser verificado quando aplicável; não exige instalar todos os periféricos listados. Os itens condicionais só se aplicam quando o circuito ou a função correspondente está presente. Mantenha as categorias Obrigatório/Opcional da fonte e diferencie recomendações de limites obrigatórios.
 
 ### 5.8.1. Encapsulamento { #581-package }
 
@@ -77,7 +77,7 @@ Cada tabela cobre um bloco funcional do esquema. A coluna “Aplicável a” ind
     O item 5 da fonte indica 5,15–5,55 V para selecionar um OVLO ajustável, enquanto o item 1 limita a alimentação VBUS do chip a 4,6–5,5 V. Não interprete 5,55 V como uma tensão contínua permitida em VBUS. A [seção do sistema de alimentação](SF32LB52x_schematic_design.md#52-power-system) explica as diferenças entre as fontes e cita outra faixa de seleção OVP da nota de aplicação. Antes de aprovar o projeto, confirme com a SiFli os limiares e os limites de operação do componente escolhido.
 
 !!! note "Origem e aplicação dos valores de VBUS"
-    A Electrical Specification-A3 indica uma faixa de alimentação VBUS de 4,5–5,5 V. A nota de aplicação das variantes alimentadas por bateria indica 4,6–5,5 V em sua tabela de alimentação e exige pelo menos 4,6 V no pino VBUS durante a corrente máxima de carga. Esses valores têm contextos diferentes; considere a tolerância da alimentação e a queda de tensão ao verificar a tensão mínima no chip.
+    A seção Electrical Specification-A3 indica uma faixa de alimentação VBUS de 4,5–5,5 V. A nota de aplicação das variantes alimentadas por bateria indica 4,6–5,5 V em sua tabela de alimentação e exige pelo menos 4,6 V no pino VBUS durante a corrente máxima de carga. Esses valores têm contextos diferentes; considere a tolerância da alimentação e a queda de tensão ao verificar a tensão mínima no chip.
 
 ### 5.8.3. Capacitores e indutores da alimentação { #583-power-supply-capacitors-and-inductors }
 
@@ -172,8 +172,8 @@ Cada tabela cobre um bloco funcional do esquema. A coluna “Aplicável a” ind
 
 | Nº | Ponto de verificação | Aplicável a | Categoria |
 |:---|:---|:---|:---|
-| 1 | Foi fornecida uma tabela de alocação de GPIOs correspondente ao esquema | Todas as variantes | Obrigatório |
-| 2 | A alocação de GPIOs na tabela corresponde ao esquema | Todas as variantes | Obrigatório |
+| 1 | Foi fornecida uma tabela de alocação de GPIOs correspondente ao esquemático | Todas as variantes | Obrigatório |
+| 2 | A alocação de GPIOs na tabela corresponde ao esquemático | Todas as variantes | Obrigatório |
 | 3 | A alocação dos GPIOs segue as recomendações da SiFli; consulte o arquivo de configuração de I/O do HDK | Todas as variantes | Obrigatório |
 
 </div>
@@ -232,13 +232,13 @@ Cada tabela cobre um bloco funcional do esquema. A coluna “Aplicável a” ind
 | 5 | A conexão de RSTB do LCD está correta; recomenda-se PA0 | Todas as variantes | Obrigatório |
 | 6 | A conexão de TE do LCDC está correta; conecta-se ao sinal TE ou Fmark do painel | Todas as variantes | Obrigatório |
 | 7 | Os sinais do painel de toque (TP) seguem a atribuição de pinos recomendada; consulte o arquivo de configuração de I/O da EVB | Todas as variantes | Obrigatório |
-| 8 | Foi definido se o produto precisa de tela sempre ligada | Todas as variantes | Obrigatório |
+| 8 | Foi definido se o produto precisa de display sempre ligado | Todas as variantes | Obrigatório |
 | 9 | O display é alimentado por um LDO de baixa corrente quiescente; <span class="flag-red">recomenda-se PA30 para controlar o enable do LDO</span> | Todas as variantes | Obrigatório |
 | 10 | Foi definido se TP e LCD precisam de controle de alimentação independente ou compartilhado | Todas as variantes | Obrigatório |
 | 11 | Se o LCD integrar um sensor de luz, esse sensor também recebe alimentação | Todas as variantes | Obrigatório |
 | 12 | Para o backlight de um LCD TFT, use um GPIO com pull-down (PD) se o controle for ativo em nível alto e um GPIO com pull-up (PU) se for ativo em nível baixo | Todas as variantes | Obrigatório |
 | 13 | <span class="flag-red">LCD SPI: modo de 3 fios — CS em PA03, CLK em PA04 e DATA em PA05; modo de 4 fios — CS em PA03, CLK em PA04, DATA em PA05 e DC em PA06</span> | Todas as variantes | Obrigatório |
-| 14 | Display Sharp Memory/JDI conectado à interface JDI do MCU: VCOM e VB em PA24; VA em PA25; R0/G0/B0 do display em R1/G1/B1 do MCU; R1/G1/B1 do display em R2/G2/B2 do MCU; GSP em VST; BSP em HST; GCK em VCK; BCK em HCK; GEN em ENB; INTB em XRST | Todas as variantes | Obrigatório |
+| 14 | O display Sharp Memory/JDI conectado à interface JDI do MCU deve ter: VCOM e VB em PA24; VA em PA25; R0/G0/B0 do display em R1/G1/B1 do MCU; R1/G1/B1 do display em R2/G2/B2 do MCU; GSP em VST; BSP em HST; GCK em VCK; BCK em HCK; GEN em ENB; INTB em XRST | Todas as variantes | Obrigatório |
 | 15 | O nível lógico de I/O do periférico corresponde ao do MCU | Todas as variantes | Obrigatório |
 
 </div>
@@ -400,7 +400,7 @@ Cada tabela cobre um bloco funcional do esquema. A coluna “Aplicável a” ind
 | 11 | O requisito de corrente de repouso em Standby foi definido e registrado | Todas as variantes | Obrigatório |
 | 12 | <span class="flag-red">A soma das correntes de repouso de todos os periféricos selecionados em Standby está registrada e atende aos requisitos do projeto</span> | <span class="flag-red">Todas as variantes</span> | Obrigatório |
 
-[^52a-note]: A planilha de origem indica “52A/52D”. As variantes descritas no [guia de projeto de hardware do SF32LB52x][SF32LB52x Hardware Design Guide - Dev] são SF32LB52B/D/E/G/J; a indicação “52A” da planilha não identifica uma dessas variantes. Confirme o modelo exato e sua folha de dados antes de aplicar este item; não substitua automaticamente “52A” por outro modelo.
+[^52a-note]: A planilha de origem indica “52A/52D”. As variantes descritas no [guia de projeto de hardware do SF32LB52x][SF32LB52x Hardware Design Guide - Dev] são SF32LB52B/D/E/G/J; a indicação “52A” da planilha não identifica uma dessas variantes. Confirme o modelo exato e seu datasheet antes de aplicar este item; não substitua automaticamente “52A” por outro modelo.
 [^52a-category-note]: A planilha de origem deixa a categoria desta linha em branco. A indicação “Não especificado na fonte” preserva essa omissão, sem classificar o item como obrigatório ou opcional. Confirme a aplicabilidade e o critério de aprovação para o componente escolhido.
 
 !!! important "Divergência entre as fontes sobre o pino da chave de alimentação do armazenamento"

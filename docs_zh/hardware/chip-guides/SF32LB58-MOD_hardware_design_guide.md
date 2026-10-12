@@ -33,7 +33,7 @@ tags:
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | SF32LB58-MOD-N16R32N1 | 16 MB QSPI-NOR | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40∼85°C | 24 × 24 × 3.1 |
 | SF32LB58-MOD-A128R32N1 | 128 MB QSPI-NAND | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40∼85°C | 24 × 24 × 3.1 |
-| SF32LB58-MOD-E4R32N1 | 4GB eMMC | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40∼85°C | 24 × 24 × 3.1 |
+| SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40∼85°C | 24 × 24 × 3.1 |
 
 </div>
 
@@ -45,11 +45,11 @@ tags:
 
 | 项目 | 规格 |
 | :--- | :--- |
-| 性能处理器（HCPU/ACPU） | 2× Arm Cortex-M33 STAR-MC1，最高 240 MHz |
+| 应用处理器（HCPU/ACPU） | 2× Arm Cortex-M33 STAR-MC1，最高 240 MHz |
 | 低功耗处理器（LCPU） | Arm Cortex-M33 STAR-MC1，最高 96 MHz |
 | SRAM | 2176 KB（HCPU）+512 KB（ACPU）+1056 KB Retention SRAM（LCPU） |
 | 无线连接 | 双模蓝牙 5.3，向下兼容 4.2/4.1/4.0，支持低功耗蓝牙和经典蓝牙 |
-| 图形显示 | ePicasso 2.0 + Vivante GCNanoUltraV，最大解析度 1024×1024，eZip 2.0，JPEG 硬件编解码 |
+| 图形显示 | ePicasso 2.0 + Vivante GCNanoUltraV，最大分辨率 1024×1024，eZip 2.0，JPEG 硬件编解码 |
 | 音频 | 2× 24-bit 音频 DAC，2× 24-bit 音频 Sigma-Delta ADC |
 | 存储 | 5× MPI（合封+外挂），2× SD/SDIO/eMMC |
 | 封装 | 138 管脚，24 × 24 × 3.1 mm |
@@ -224,26 +224,26 @@ tags:
 *注：P: 电源；I：输入；O：输出；T：可设置为高阻; AO: 音频输出；AI：音频输入。*
 
 !!! note
-    PIN2 (USART_RXD)、PIN3(USART_TXD) 是默认打印口、程序调试接口、程序下载接口。
+    管脚 2（USART_RXD）和管脚 3（USART_TXD）是默认的日志输出、程序调试和程序下载接口。
 
-### 4.3 芯片管脚分布图 { #43-physical-pin-description }
+### 4.3 实物管脚描述 { #43-physical-pin-description }
 
 技术规格书图 3-2 按功能分组展示了 SDIO、SPI、I2C、UART、GPTIM、LCD 接口（DPI/8080/SPI/JDI/DSI）、GPADC、MPI、模拟音频、启动模式、电源、蓝牙天线、CAN/USB 以及 SWD/调试 UART 等信号在 SF32LB586VDD36 芯片轮廓上的分布。规划主板信号分组和走线时，应结合上方的管脚定义表一并确认。
 
-!!! info "图 4-2：芯片管脚分布图"
+!!! info "图 4-2：实物管脚描述图"
     完整图示请参见官方技术规格书图3-2（本指南未复现该图）。
 
 ## 5. 外设 { #5-peripherals }
 
 ### 5.1 通信接口 { #51-communication-interfaces }
 
-表 4-1“功能描述”列中标注为 `PAxx_I2C_UART` 或 `PBxx_I2C_UART` 的管脚，均可配置为 I2C 或 UART。整个芯片最多可配置 7 路 I2C 和 6 路 UART。
+表 4.2-1“功能”列中标注为 `PAxx_I2C_UART` 或 `PBxx_I2C_UART` 的管脚，均可配置为 I2C 或 UART。整个芯片最多可配置 7 路 I2C 和 6 路 UART。
 
 **UART** — 全双工，波特率高达 6 Mbps，可配置数据格式，支持硬件流控（CTS/RTS）与 DMA 多包收发。UART1、UART2、UART3 位于 HPSYS；UART4、UART5、UART6 位于 LPSYS。
 
 **I2C** — 支持 Master 和 Slave 角色，内置 8 字节 FIFO，支持 DMA 批量读写。支持标准模式（100 kbps）、快速模式（400 kbps）、快速模式+（1 Mbps）和高速模式（3.4 Mbps）；Master 支持 7/10 比特寻址，并支持时钟延展及可配置的数字防抖动滤波。I2C1~4 位于 HPSYS；I2C5~7 位于 LPSYS。
 
-**SPI** — 支持 SSP/SPI（全双工，Master 或 Slave）和 Microwire（半双工，仅 Master）3 种通信格式，支持 4~32 位数据宽度，时钟极性/相位可配，片选极性可配，FIFO 深度 32Bits×16Entry，收发均支持 DMA。SPI1、SPI2 位于 HPSYS（最大时钟 48 MHz）；SPI3、SPI4 位于 LPSYS（最大时钟 24 MHz）。
+**SPI** — 支持 SSP/SPI（全双工，Master 或 Slave）和 Microwire（半双工，仅 Master）两种格式，支持 4~32 位数据宽度，时钟极性/相位可配，片选极性可配，FIFO 深度 32Bits×16Entry，收发均支持 DMA。SPI1、SPI2 位于 HPSYS（最大时钟 48 MHz）；SPI3、SPI4 位于 LPSYS（最大时钟 24 MHz）。
 
 **USB2.0 HS** — 一路高速 Host/Device 接口，符合 USB2.0 协议规范，软件可配置端点，支持挂起/恢复、会话请求协议和主机协商协议，支持高速及全速模式。
 
@@ -299,7 +299,7 @@ tags:
 
 </div>
 
-### 6.3 基本电气特性 { #63-dc-electrical-characteristics }
+### 6.3 直流电气特性 { #63-dc-electrical-characteristics }
 
 <div align="center"><em>表 6.3-1：直流电气特性（3.3 V, 25°C）</em></div>
 
@@ -423,9 +423,9 @@ tags:
 
 | 序号 | 检查点 |
 | :-: | :--- |
-| 1 | VDD_3V3 输入电压范围必须是 2.97 V~3.6 V，靠近模组 PIN 脚放置 4.7 μF 电容。 |
-| 2 | VDD_1V8 输入电压范围必须是 1.7 V~1.95 V，靠近模组 PIN 脚放置 4.7 μF 电容。 |
-| 3 | VDDIOA、VDDIOA2、VDDIOB 输入电压范围必须是 1.7 V~3.6 V，靠近模组 PIN 脚放置电容。 |
+| 1 | VDD_3V3 输入电压范围必须是 2.97 V~3.6 V，靠近模组管脚放置 4.7 μF 电容。 |
+| 2 | VDD_1V8 输入电压范围必须是 1.7 V~1.95 V，靠近模组管脚放置 4.7 μF 电容。 |
+| 3 | VDDIOA、VDDIOA2、VDDIOB 输入电压范围必须是 1.7 V~3.6 V，靠近模组管脚放置电容。 |
 
 </div>
 
@@ -446,7 +446,7 @@ tags:
 !!! info "图 10-2：推荐 PCB 封装图"
     完整图示请参见官方技术规格书图8-2（本指南未复现该图）。
 
-### 10.3 外部天线连接器尺寸 { #103-external-antenna-connector }
+### 10.3 外部天线连接器 { #103-external-antenna-connector }
 
 对于支持外部天线的型号，模组可通过邮票孔 RF 馈点或 IPEX 兼容连接器外接天线（根据型号选配）。
 
@@ -458,7 +458,7 @@ tags:
 需要预留好模组天线区域的位置，确保该区域没有器件、铺铜、走线、机壳金属或其他导电结构。天线净空和验证要求应以官方模组规格书以及最终整机结构为准。
 
 - 尽可能将天线区域伸出板边，馈点靠近板边位置。
-- 如果天线无法伸出板边，请给 PCB 天线预留足够大的净空区域（严禁铺铜、走线、摆放元件），并尽可能切割掉天线下方区域的底板材料。
+- 如果天线无法伸出板边，请给 PCB 天线预留足够大的净空区域（不得铺铜、走线或摆放元件），并尽可能切割掉天线下方区域的底板材料。
 - 涉及整机设计时，应考虑外壳对天线的影响并进行 RF 验证；仍需在最终整机上测试通信距离等指标，以确认射频性能。
 
 ## 11. 产品处理 { #11-product-handling }

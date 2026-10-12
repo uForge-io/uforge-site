@@ -39,13 +39,13 @@ Rust pode ser uma boa escolha se você quiser:
 
 Por enquanto, use o SiFli-SDK para firmware de produção.
 
-## Critérios de avaliação { #evaluation-gates }
+## Pontos de controle de avaliação { #evaluation-gates }
 
 Antes de iniciar a adaptação para um produto, confirme que a configuração de referência para os primeiros passos funciona na placa de destino. Em seguida, valide separadamente cada periférico, layout Flash, caminho de depuração e recurso de execução necessário. Registre, para cada resultado, o commit upstream, o target Rust, a configuração do Cargo, a revisão da placa e o procedimento de recuperação.
 
 O repositório usa `sifli-hal`, `sifli-pac`, ferramentas para tabelas Flash e exemplos assíncronos no estilo Embassy. Portanto, o sucesso da aplicação também depende da interação entre esses componentes, não apenas de uma crate compilar. Ao investigar uma lacuna, mantenha o caso de reprodução o menor possível.
 
-## Lista de verificação de riscos { #risk-checklist }
+## Checklist de riscos { #risk-checklist }
 
 - A crate oferece suporte ao chip exato?
 - A HAL cobre o periférico necessário?
@@ -63,7 +63,7 @@ O repositório usa `sifli-hal`, `sifli-pac`, ferramentas para tabelas Flash e ex
 | Adequado | Inadequado |
 |:---------|:-----------|
 | Experimentos e exploração de drivers. | Projetos com cronograma de produção que exigem suporte do fornecedor. |
-| Equipes que já usam Rust embarcado. | Produtos que precisam agora de stacks completos de Bluetooth, tela e áudio. |
+| Equipes que já usam Rust embarcado. | Produtos que precisam agora de stacks completos de Bluetooth, display e áudio. |
 | Contribuir para a maturidade da HAL/PAC. | Protótipos pontuais em que Arduino ou exemplos do SDK permitem avançar mais rápido. |
 
 </div>

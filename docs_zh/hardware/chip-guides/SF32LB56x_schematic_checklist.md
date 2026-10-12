@@ -209,7 +209,7 @@ hide:
 | 9 | SD NAND 的 I/O 电平与 VDDIO2 匹配 | SF32LB560/561/563/56W 和 SS6700A | 必检 |
 | 10 | Flash CLK 与数据线带 33 Ω 串联电阻 | 所有芯片 | 必检 |
 | 11 | 外设器件的 I/O 逻辑电平与主芯片匹配 | 所有芯片 | 必检 |
-| 12 | LCPU 共封装 NOR Flash 始终上电，默认由 PBR0 控制外部 Flash 电源。<br>(1) 若 GPIO 资源有限，PBR0 也可控制 561/2/3/W 共封装 PSRAM 的电源（VDDIO1）。若 PSRAM 中存有需要在休眠期间保留的数据，则不要关闭 PSRAM 或外部 Flash 的电源。<br>(2) 若 GPIO 资源充足，可使用 PB22 控制 PSRAM 电源开关 | SF32LB560/561/563/56W 和 SS6700A | 必检 |
+| 12 | LCPU 共封装 NOR Flash 始终上电，默认由 PBR0 控制外部 Flash 电源。<br>(1) 若 GPIO 资源有限，PBR0 也可控制 561/2/3/W 共封装 PSRAM 的电源（VDDIO1）。若 PSRAM 中存有需要在睡眠期间保留的数据，则不要关闭 PSRAM 或外部 Flash 的电源。<br>(2) 若 GPIO 资源充足，可使用 PB22 控制 PSRAM 电源开关 | SF32LB560/561/563/56W 和 SS6700A | 必检 |
 | 13 | <span class="flag-yellow">VDDIOSA 与 VDDIOSB 由 PBR0 控制，VDDIOSC 始终上电，外部 Flash 供电由 PA03 控制</span> | SF32LB565/567 | 必检 |
 | 14 | NOR Flash 已在关键器件选型指南中通过验证 | 所有芯片 | 必检 |
 | 15 | SPI/SD NAND Flash 已在关键器件选型指南中通过验证 | 所有芯片 | 必检 |
@@ -234,7 +234,7 @@ hide:
 | 8 | LCD 接口支持 3/4 线 SPI、双数据线/四数据线 SPI、串行 JDI 等模式 | 所有芯片 | 可选 |
 | 9 | SPI LCD：3 线模式下，CS 接 PA36，CLK 接 PA37，DATA 接 PA38；4 线模式下，CS 接 PA36，CLK 接 PA37，DATA 接 PA38，DC 接 PA39 | 所有芯片 | 可选 |
 | 10 | 外设器件的 I/O 逻辑电平与主芯片匹配 | 所有芯片 | 必检 |
-| 11 | 若需要 LCD AOD，则需注意 LCD_RST（PA05）由 VDDIO3 供电，必须始终上电，且 VDDIO3 不可与外部 Flash 电源绑定，否则休眠时关闭 Flash 电源可能同时关闭 VDDIO3 和 LCD_RST，导致 AOD 异常 | SF32LB560/561/563/56W 和 SS6700A | 必检 |
+| 11 | 若需要 LCD AOD，则需注意 LCD_RST（PA05）由 VDDIO3 供电，必须始终上电，且 VDDIO3 不可与外部 Flash 电源绑定，否则睡眠时关闭 Flash 电源可能同时关闭 VDDIO3 和 LCD_RST，导致 AOD 异常 | SF32LB560/561/563/56W 和 SS6700A | 必检 |
 | 12 | 对于 DSI LCD，应连接 DSI 数据与时钟信号。DSI 视频模式面板的工作方式类似 RGB 面板，不带 TE 信号；DSI 命令模式面板带 TE 信号，且 DSI17801 需要 TE。TE 和 RST 均建议使用，具体使用方式取决于所选 LCD | SF32LB565/567 | 必检 |
 
 </div>
@@ -399,7 +399,7 @@ hide:
 |:---|:---|:---|:---|
 | 1 | USB 接口连接正确 | 所有芯片 | 可选 |
 | 2 | USB 接口具备 ESD 保护 | 所有芯片 | 可选 |
-| 3 | 正常非休眠工作时，只要 USB 保持使能，PC/设备端即可感知插拔；<br>若 MCU 进入睡眠且仍需感知插拔，则需增加 VBUS 分压电路，使分压输出与 IO 电压匹配的高电平并送入 MCU 唤醒引脚，推荐与充电器插入检测唤醒引脚共用 | 所有芯片 | 可选 |
+| 3 | 正常非睡眠工作时，只要 USB 保持使能，PC/设备端即可感知插拔；<br>若 MCU 进入睡眠且仍需感知插拔，则需增加 VBUS 分压电路，使分压输出与 IO 电压匹配的高电平并送入 MCU 唤醒引脚，推荐与充电器插入检测唤醒引脚共用 | 所有芯片 | 可选 |
 
 </div>
 

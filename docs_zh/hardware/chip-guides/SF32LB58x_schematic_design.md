@@ -23,7 +23,7 @@ tags:
 
 | 分组 | 主要决策 | 发布前验证材料 |
 |:---|:---|:---|
-| 最小系统设计 | 准确型号和封装、电源与复位、时钟、启动与存储、调试与恢复访问 | 首次上电调试评审、启动与恢复方案 |
+| 最小系统设计 | 准确型号和封装、电源与复位、时钟、启动与存储、调试与恢复访问 | 首次启动调试评审、启动与恢复方案 |
 | 电源系统 | 系统 PMIC、芯片 PMU 电源轨、BUCK 电感、LDO 电容、复位、低功耗唤醒源 | 电源树、PMIC 设置、电源轨实测、POR/BOR/复位评审 |
 | 时钟生成 | 48 MHz 和 32.768 kHz 晶体 | 晶体规格检查、匹配电容方案、晶体布局截图 |
 | RF | RF 匹配和天线路径 | 阻抗方案、RF 匹配网络、天线禁布区、布局截图 |
@@ -49,7 +49,7 @@ tags:
 | 复位 | 按 `PVDD1` 电源域实现外部 `RSTN` RC 复位电路。 | [上电时序和复位](#5115-power-up-sequencing-and-reset) |
 | 启动模式 | 使用 10 kΩ 电阻将 `Mode` 管脚稳定上拉或下拉；量产板预留测试点，测试板建议预留恢复跳线。 | [启动配置](#551-boot-configuration) |
 | 启动存储 | 选择支持的存储接口，并根据所选器件核实管脚分配、I/O 电压和供电方案。 | [存储](#552-storage) |
-| 上电调试 | 预留 SWD 和所需 UART 调试信号的板级访问，并为调试器提供所需的电源和地参考。 | [调试与下载接口](#561-debug-and-download-interface) |
+| 启动调试访问 | 预留 SWD 和所需 UART 调试信号的板级访问，并为调试器提供所需的电源和地参考。 | [调试与下载接口](#561-debug-and-download-interface) |
 | 低功耗行为 | 根据目标睡眠模式确认所需唤醒源和外部电源控制方式。 | [工作模式与唤醒源](#512-operating-modes-and-wake-sources) |
 
 </div>
@@ -84,7 +84,7 @@ SF30147C 面向超低功耗可穿戴产品，是一款高集成度、高效率�
 
 </div>
 
-该芯片的详细情况请参见 SF30147C 的芯片技术规格书。
+详细信息请参见 SF30147C 芯片数据手册。
 
 ##### 5.2.1.2. SF32LB58x 供电要求 {#5112-sf32lb58x-power-requirements}
 
@@ -194,7 +194,7 @@ SF32LB58x 系列可使用思澈科技（SiFli）的 PMIC SF30147C 为各电源�
 
 ##### 5.2.1.7. 电源设计检查清单 {#5117-power-design-checklist}
 
-- [ ] 明确所选型号的 PVDD1/PVDD2 供电范围（1.71 V–3.6 V）与实际供电方案匹配
+- [ ] 确认所选型号的 PVDD1/PVDD2 供电范围（1.71 V–3.6 V）与实际供电方案匹配
 - [ ] BUCK 电感满足 4.7 uH，DCR ≤ 0.4 Ω，Isat ≥ 500 mA
 - [ ] PVDD1/PVDD2、BUCK1/2_LX/FB、LDO_VOUT1、VDD_RET、VDD_RTC 各管脚外接电容满足本节列出的推荐值
 - [ ] 若使用 SF30147C，7 路负载开关的电压/电流分配与外设需求一致
@@ -204,9 +204,9 @@ SF32LB58x 系列可使用思澈科技（SiFli）的 PMIC SF30147C 为各电源�
 
 低功耗方案应结合 PBR 功能、可唤醒中断、存储器电源开关、传感器供电，以及外部 PMIC 的负载开关一并评审。
 
-SF32LB58x 系列芯片提供 6 个 PBR 接口，其主要特点：
+SF32LB58x 系列芯片提供 6 个 PBR 接口，其主要特点如下：
 
-1. PBR0 在开机阶段会从 0 变 1，用来做某些外部 LSW 控制，PBR1-PBR5 都是默认输出 0；
+1. PBR0 在上电过程中由 0 变为 1，可用于驱动某些外部 LSW；PBR1-PBR5 默认输出 0；
 2. PBR0-PBR5 在待机（Standby）和休眠（Hibernate）模式下均可用作输出；
 3. PBR0-PBR5 可以输出 LPTIM 信号；
 4. PBR0-PBR5 可以输出 32 kHz 时钟信号；
@@ -240,7 +240,7 @@ SF32LB58x 系列的所有 GPIO 均可配置为轻度睡眠（Light Sleep）和�
 </div>
 
 !!! note "唤醒源数量需向原厂确认"
-    原资料称共有 16 个可唤醒中断源，其中 PA 有 6 个、PB 有 10 个；但表格列出 PB 引脚 6 个、PA 引脚 6 个，以及 PBR 引脚 4 个。原资料未说明 PBR 是否计入 PB 的数量。依据 PA/PB 数量进行设计前，请向 SiFli 确认统计口径。
+    原资料称共有 16 个可唤醒中断源，其中 PA 有 6 个、PB 有 10 个；但表格列出 PB 引脚 6 个、PA 引脚 6 个，以及 PBR 引脚 4 个。原资料未说明 PBR 是否计入 PB 的数量。依据 PA/PB 数量进行设计前，请向思澈科技（SiFli）确认统计口径。
 
 ### 5.3. 时钟生成 {#52-clock-generation}
 SF32LB58x 系列芯片需要外部提供 2 个时钟源：48 MHz 主晶体和 32.768 kHz RTC 晶体。
@@ -276,7 +276,7 @@ SF32LB58x 系列芯片需要外部提供 2 个时钟源：48 MHz 主晶体和 32
 
 ### 5.4. RF {#53-rf}
 
-SF32LB58x 系列芯片的射频本身采用了片上集成宽带匹配滤波技术，只需保证射频 PCB 走线为 50 Ω 特征阻抗即可。设计时建议预留 π 型匹配网络用来做杂散滤波和天线匹配。
+SF32LB58x 系列芯片的射频本身采用了片上集成宽带匹配滤波技术，只需保证射频 PCB 走线为 50 Ω 特征阻抗即可。设计时应预留 π 型匹配网络，用于杂散滤波和天线匹配。
 
 ![图 5.4-1：射频电路图](../../sf32-products/chips/assets/58x/sf32lb58x-RF-SCH.png){ width="100%" loading="lazy" }
 
@@ -314,7 +314,7 @@ SF32LB58x 系列支持双通道 MIPI DSI 显示接口。
 
 ##### 5.5.1.2. SPI/QSPI 显示接口 {#5412-spiqspi-display-interface}
 
-SF32LB58x 系列支持 3 线/4 线 SPI 和 Quad-SPI 接口连接 LCD。HCPU（大核）使用 PA 上的 LCDC1，LCPU（小核）使用 PB 上的 LCDC2。
+SF32LB58x 系列支持 3 线/4 线 SPI 和 Quad-SPI 接口连接 LCD。HCPU 使用 PA 上的 LCDC1，LCPU 使用 PB 上的 LCDC2。
 
 <div align="center"><em>表 5.5-2：SPI/QSPI 信号连接方式</em></div>
 
@@ -615,12 +615,12 @@ SF32LB58x EVB 默认通过 MPI4 接口连接外置 SPI NAND Flash，信号连接
 </div>
 
 !!! note "注意"
-    1. 如果产线需要下载程序到外置 FLASH 中，需要在下载工具软件中，将外部 FLASH 的电源控制脚 PA43 置高，打开外置 FLASH 的电源。
+    1. 如果产线需要将固件烧录到外置 Flash，下载工具软件必须将外置 Flash 的电源控制脚 PA43 置高，以打开其电源。
     2. SPI NAND Flash 的 Hold# 管脚需要通过 10 kΩ 电阻上拉至 SPI NAND Flash 的供电电源。
 
 ##### 5.6.2.2. SDIO、eMMC 与 Micro SD 接口 {#5522-sdio-emmc-micro-sd-interface}
 
-SF32LB58x 系列芯片支持 2 路 SDIO 接口，EVB 板默认 SD1 接 eMMC 或 SD NAND，SD2 接 SD 卡或 WIFI 芯片。
+SF32LB58x 系列芯片支持 2 路 SDIO 接口，EVB 板默认 SD1 接 eMMC 或 SD NAND，SD2 接 SD 卡或 Wi-Fi 芯片。
 
 SD1 使用 12 个 GPIO（PA00–PA11），其电源域为 VDDIOA2，支持 1.8 V 或 3.3 V，可根据外设的接口电平选择。SPI NAND Flash 和 eMMC 推荐使用 1.8 V 接口电平；SD NAND Flash 器件仅支持 3.3 V 接口电平，因此使用这类器件时，VDDIOA2 必须设为 3.3 V。
 

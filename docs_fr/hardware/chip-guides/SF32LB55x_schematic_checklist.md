@@ -37,9 +37,9 @@ Le texte rouge et les fonds jaunes reprennent les mises en évidence de contrôl
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | La tension d'alimentation VDD1 est de 1,8 V à 3,3 V | 551/555/557 uniquement | Obligatoire |
+| 1 | La tension de VDD1 doit être comprise entre 1,8 V et 3,3 V | 551/555/557 uniquement | Obligatoire |
 | 2 | <span class="flag-red">La tension d'alimentation VDD1 est de 3,3 V</span> | <span class="flag-red">SS6600A8 uniquement</span> | <span class="flag-red">Obligatoire</span> |
-| 3 | La tension d'alimentation VDD2 est de 1,8 V à 3,3 V | 555/557 uniquement | Obligatoire |
+| 3 | La tension de VDD2 doit être comprise entre 1,8 V et 3,3 V | 555/557 uniquement | Obligatoire |
 | 4 | Les connexions BUCK1_VSW et BUCK1_VOUT sont correctes | Toutes les variantes | Obligatoire |
 | 5 | Les connexions BUCK2_VSW et BUCK2_VOUT sont correctes | 555/557 uniquement | Obligatoire |
 | 6 | La connexion LDOVCC2_VOUT est correcte | 555/557 uniquement | Obligatoire |
@@ -109,11 +109,11 @@ Les sources divergent : le tableau 3-3 du [guide d'application matérielle chino
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | Le cristal principal 48 MHz est une référence répertoriée dans l'AVL | Toutes les variantes | Obligatoire |
-| 2 | Si le cristal 48 MHz n'est pas répertorié dans l'AVL, il respecte 7 pF ≤ CL ≤ 12 pF (8,8 pF recommandé), tolérance de fréquence ≤±10 ppm, ESR ≤30 Ω (22 Ω recommandé) | Toutes les variantes | Obligatoire |
-| 3 | Le cristal RTC 32,768 kHz est une référence répertoriée dans l'AVL | Toutes les variantes | Obligatoire |
-| 4 | Si le cristal 32,768 kHz n'est pas répertorié dans l'AVL, il respecte CL ≤12,5 pF (7 pF recommandé), tolérance de fréquence ≤±20 ppm, ESR ≤80 kΩ (38 kΩ recommandé) | Toutes les variantes | Obligatoire |
-| 5 | <span class="flag-yellow">Si le cristal 32,768 kHz est omis, la pastille XI doit être reliée à la masse</span> | <span class="flag-yellow">Toutes les variantes</span> | <span class="flag-yellow">Obligatoire</span> |
+| 1 | Le quartz principal 48 MHz est une référence répertoriée dans l'AVL | Toutes les variantes | Obligatoire |
+| 2 | Si le quartz 48 MHz n'est pas répertorié dans l'AVL, il respecte 7 pF ≤ CL ≤ 12 pF (8,8 pF recommandé), tolérance de fréquence ≤±10 ppm, ESR ≤30 Ω (22 Ω recommandé) | Toutes les variantes | Obligatoire |
+| 3 | Le quartz RTC 32,768 kHz est une référence répertoriée dans l'AVL | Toutes les variantes | Obligatoire |
+| 4 | Si le quartz 32,768 kHz n'est pas répertorié dans l'AVL, il respecte CL ≤12,5 pF (7 pF recommandé), tolérance de fréquence ≤±20 ppm, ESR ≤80 kΩ (38 kΩ recommandé) | Toutes les variantes | Obligatoire |
+| 5 | <span class="flag-yellow">Si le quartz 32,768 kHz est omis, la pastille XI doit être reliée à la masse</span> | <span class="flag-yellow">Toutes les variantes</span> | <span class="flag-yellow">Obligatoire</span> |
 
 </div>
 
@@ -217,7 +217,7 @@ Le classeur source ne renseigne pas la catégorie du point RF 3 ; elle reste don
 | 2 | Si le code s'exécute depuis la mémoire NOR flash SiP interne, le contrôle de l'interrupteur d'alimentation VDD_SIP est PA58 | Toutes les variantes | Obligatoire |
 | 3 | Si le code s'exécute depuis une mémoire NOR flash externe sur QSPI2, le contrôle de l'interrupteur d'alimentation QSPI2 est PA58 | Toutes les variantes | Obligatoire |
 | 4 | Si une mémoire flash externe sur QSPI2 doit être programmée en production, son interrupteur d'alimentation doit être contrôlé par PA58 | Toutes les variantes | Obligatoire |
-| 5 | <span class="flag-red">L'interrupteur de tension contrôlé par PA58 est activé à l'état haut et désactivé à l'état bas</span> | Toutes les variantes | Obligatoire |
+| 5 | <span class="flag-red">L'interrupteur d'alimentation contrôlé par PA58 est activé à l'état haut et désactivé à l'état bas</span> | Toutes les variantes | Obligatoire |
 | 6 | <span class="flag-red">Des résistances série de 33 Ω sont recommandées sur les lignes CLK et de données de la mémoire flash</span> | Toutes les variantes | Obligatoire |
 | 7 | QSPI3 est connecté à la mémoire NAND flash ou eMMC comme prévu | 555/557 uniquement | Optionnel |
 | 8 | Le contrôle de l'interrupteur d'alimentation QSPI3 est PA41 ; <span class="flag-red">l'alimentation QSPI3 est désactivée par défaut, et un interrupteur actif à l'état haut doit utiliser le pull-down interne par défaut</span> | 555/557 uniquement | Optionnel |
@@ -255,8 +255,8 @@ Le classeur source ne renseigne pas la catégorie du point RF 3 ; elle reste don
 | 10 | <span class="flag-red">LCD SPI, mode 3 fils : CS connecté à GPIO22 ou PA31 ou PB33, CLK connecté à GPIO23 ou PA20 ou PB32, DATA connecté à GPIO21 ou PA34 ou PB35 ; <br>mode 4 fils : CS connecté à GPIO22 ou PA31 ou PB33, CLK connecté à GPIO23 ou PA20 ou PB32, DATA connecté à GPIO21 ou PA34 ou PB35, DC connecté à GPIO20 ou PA36 ou PB36</span> | Toutes les variantes | Obligatoire |
 | 11 | Les signaux TP suivent l'affectation de broches recommandée (référez-vous au fichier de configuration d'E/S de l'EVB) | Toutes les variantes | Obligatoire |
 | 12 | Le niveau logique d'E/S du périphérique correspond à celui de la puce principale | Toutes les variantes | Obligatoire |
-| 13 | Si la conception doit prendre en charge l'affichage écran éteint (always-on), connectez l'interface QSPI du LCD aux broches PA du MCU ; les GPIO PB sont recommandés pour LCD_EN, LCD_RST et les signaux de contrôle similaires | <span class="flag-red">551/SS6600A8 uniquement</span> | Obligatoire |
-| 14 | Si la conception doit prendre en charge l'affichage écran éteint (always-on), connectez l'interface QSPI du LCD aux broches PA du MCU ou reliez l'interface MIPI du LCD au MCU ; les GPIO PB sont recommandés pour LCD_EN, LCD_RST et les signaux de contrôle similaires | 555/557 uniquement | Obligatoire |
+| 13 | Si la conception doit prendre en charge un affichage permanent avec écran éteint (always-on), connectez l'interface QSPI du LCD aux broches PA du MCU ; les GPIO PB sont recommandés pour LCD_EN, LCD_RST et les signaux de contrôle similaires | <span class="flag-red">551/SS6600A8 uniquement</span> | Obligatoire |
+| 14 | Si la conception doit prendre en charge un affichage permanent avec écran éteint (always-on), connectez l'interface QSPI du LCD aux broches PA du MCU ou reliez l'interface MIPI du LCD au MCU ; les GPIO PB sont recommandés pour LCD_EN, LCD_RST et les signaux de contrôle similaires | 555/557 uniquement | Obligatoire |
 
 </div>
 
@@ -315,12 +315,12 @@ Les sources divergent : le [guide d'application matérielle OpenSiFli, de priori
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
 | 1 | L'interface de charge comporte des protections EOS, ESD et OVP | Toutes les variantes | Obligatoire |
-| 2 | Le signal de détection d'insertion du chargeur dispose d'un dispositif ESD | Toutes les variantes | Obligatoire |
-| 3 | L'interface de batterie dispose d'un dispositif ESD | Toutes les variantes | Obligatoire |
-| 4 | L'interface d'antenne dispose d'un dispositif ESD | Toutes les variantes | Obligatoire |
-| 5 | Les interfaces d'alimentation du LCD et du TP disposent de dispositifs ESD | Toutes les variantes | Obligatoire |
-| 6 | Les lignes I2C, RST et INT du TP disposent de dispositifs ESD | Toutes les variantes | Obligatoire |
-| 7 | L'interface d'alimentation et les lignes de signal du capteur de fréquence cardiaque disposent de dispositifs ESD | Toutes les variantes | Obligatoire |
+| 2 | Le signal de détection d'insertion du chargeur dispose d'un composant ESD | Toutes les variantes | Obligatoire |
+| 3 | L'interface de batterie dispose d'un composant ESD | Toutes les variantes | Obligatoire |
+| 4 | L'interface d'antenne dispose d'un composant ESD | Toutes les variantes | Obligatoire |
+| 5 | Les interfaces d'alimentation du LCD et du TP disposent de composants ESD | Toutes les variantes | Obligatoire |
+| 6 | Les lignes I2C, RST et INT du TP disposent de composants ESD | Toutes les variantes | Obligatoire |
+| 7 | L'interface d'alimentation et les lignes de signal du capteur de fréquence cardiaque disposent de composants ESD | Toutes les variantes | Obligatoire |
 
 </div>
 
@@ -332,10 +332,10 @@ Les sources divergent : le [guide d'application matérielle OpenSiFli, de priori
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | L'affectation I2C tient compte du partitionnement HCPU/LCPU et de la nécessité pour le dispositif de fonctionner en mode basse consommation | Toutes les variantes | Obligatoire |
+| 1 | L'affectation I2C tient compte du partitionnement HCPU/LCPU et de la nécessité pour le composant de fonctionner en mode basse consommation | Toutes les variantes | Obligatoire |
 | 2 | Les résistances de pull-up I2C ont la valeur adaptée ; des résistances de 2,2 kΩ sont recommandées pour un fonctionnement à 400 kHz. Utilisez le domaine de tension du périphérique et coupez l'alimentation des pull-ups en même temps que celle du périphérique | Toutes les variantes | Obligatoire |
 | 3 | Le signal d'interruption I2C prend en charge le réveil matériel lorsque nécessaire | Toutes les variantes | Obligatoire |
-| 4 | Si plusieurs dispositifs partagent un bus I2C, leurs adresses sont différenciées | Toutes les variantes | Obligatoire |
+| 4 | Si plusieurs composants partagent un bus I2C, leurs adresses sont différenciées | Toutes les variantes | Obligatoire |
 
 </div>
 
@@ -396,13 +396,13 @@ Les sources divergent : le [guide d'application matérielle OpenSiFli, de priori
 |:---|:---|:---|:---|
 | 1 | USART3 est conçu comme interface de téléchargement et de journalisation | Toutes les variantes | Obligatoire |
 | 2 | <span class="flag-red">USART3 dispose de points de test et d'une résistance de pull-up si nécessaire ; une résistance série de 100 Ω est recommandée et peut être ajustée selon la conception réelle</span> | Toutes les variantes | Obligatoire |
-| 3 | Les dispositifs devant fonctionner sur le HCPU sont connectés à USART1 ou USART2 | Toutes les variantes | Optionnel |
-| 4 | Les dispositifs devant fonctionner sur le LCPU sont connectés à USART4 ou USART5 | Toutes les variantes | Optionnel |
+| 3 | Les composants devant fonctionner sur le HCPU sont connectés à USART1 ou USART2 | Toutes les variantes | Optionnel |
+| 4 | Les composants devant fonctionner sur le LCPU sont connectés à USART4 ou USART5 | Toutes les variantes | Optionnel |
 | 5 | <span class="flag-red">Lors de la connexion à un périphérique, le RXD du MCU se connecte au TXD du périphérique et le TXD du MCU se connecte au RXD du périphérique</span> | Toutes les variantes | Obligatoire |
 | 6 | Le niveau logique d'E/S du périphérique correspond à celui de la puce principale | Toutes les variantes | Obligatoire |
 | 7 | Les points de test USART inutilisés sont réservés pour un usage de secours | Toutes les variantes | Optionnel |
-| 8 | <span class="flag-red">Si UART1 se connecte à un dispositif, des points de test sont réservés</span> | Toutes les variantes | Obligatoire |
-| 9 | <span class="flag-red">Si UART se connecte à une puce UART-vers-USB, RX et TX doivent pouvoir être déconnectés</span> | Toutes les variantes | Obligatoire |
+| 8 | <span class="flag-red">Si UART1 se connecte à un composant, des points de test sont réservés</span> | Toutes les variantes | Obligatoire |
+| 9 | <span class="flag-red">Si UART se connecte à un convertisseur UART-USB, RX et TX doivent pouvoir être déconnectés</span> | Toutes les variantes | Obligatoire |
 | 10 | <span class="flag-red">Il est recommandé que l'UART connecté aux périphériques utilise l'interface HCPU afin d'éviter que le logiciel HCPU n'utilise une interface UART du LCPU</span> | Toutes les variantes | Obligatoire |
 
 </div>
@@ -446,7 +446,7 @@ Les sources divergent : le [guide d'application matérielle OpenSiFli, de priori
 |:---|:---|:---|:---|
 | 1 | La connexion de l'interface USB est correcte | Toutes les variantes | Optionnel |
 | 2 | L'interface USB dispose d'une protection ESD | Toutes les variantes | Optionnel |
-| 3 | En fonctionnement normal hors sommeil, tant que l'USB reste actif, le PC/dispositif peut détecter l'insertion et le retrait ; <br>si cette détection doit rester possible lorsque le MCU est en sommeil, ajoutez un diviseur résistif sur VBUS. Sa sortie, à un niveau haut adapté à la tension d'E/S, doit être reliée à une broche de réveil du MCU ; il est recommandé de partager la broche de réveil utilisée pour détecter l'insertion du chargeur | Toutes les variantes | Optionnel |
+| 3 | En fonctionnement normal, hors mode veille, tant que l'USB reste actif, le PC ou l'appareil peut détecter les connexions et déconnexions ; <br>si cette détection doit rester possible lorsque le MCU est en veille, ajoutez un diviseur résistif sur VBUS. Sa sortie, à un niveau haut adapté à la tension d'E/S, doit être reliée à une broche de réveil du MCU ; il est recommandé de partager la broche de réveil utilisée pour détecter l'insertion du chargeur | Toutes les variantes | Optionnel |
 
 </div>
 
@@ -467,23 +467,23 @@ Les sources divergent : le [guide d'application matérielle OpenSiFli, de priori
 | 7 | Pour les signaux GPIO qui contrôlent une charge en pilotant un niveau haut, utilisez un pull-down de 1 MΩ lorsque cela n'affecte pas la fonction, afin de réduire la fuite | Toutes les variantes | Obligatoire |
 | 8 | Lorsqu'une sortie GPIO PA doit rester haute pendant le sommeil, sélectionnez une broche PU | Toutes les variantes | Obligatoire |
 | 9 | Lorsqu'une sortie GPIO PA doit rester basse pendant le sommeil, sélectionnez une broche PD | Toutes les variantes | Obligatoire |
-| 10 | L'exigence de courant de base en mode Hibernate est consignée | Toutes les variantes | Obligatoire |
-| 11 | <span class="flag-red">La somme des courants de base des périphériques sélectionnés en mode Hibernate est consignée et respecte les exigences du projet</span> | Toutes les variantes | Obligatoire |
-| 12 | L'exigence de courant de base en mode Standby est consignée | Toutes les variantes | Obligatoire |
-| 13 | <span class="flag-red">La somme des courants de base des périphériques sélectionnés en mode Standby est consignée et respecte les exigences du projet</span> | Toutes les variantes | Obligatoire |
+| 10 | L'exigence de courant de référence en mode Hibernate est consignée | Toutes les variantes | Obligatoire |
+| 11 | <span class="flag-red">La somme des courants de référence des périphériques sélectionnés en mode Hibernate est consignée et respecte les exigences du projet</span> | Toutes les variantes | Obligatoire |
+| 12 | L'exigence de courant de référence en mode Standby est consignée | Toutes les variantes | Obligatoire |
+| 13 | <span class="flag-red">La somme des courants de référence des périphériques sélectionnés en mode Standby est consignée et respecte les exigences du projet</span> | Toutes les variantes | Obligatoire |
 | 14 | Pour les broches de réveil PB43-PB48 utilisées comme sorties, réservez un pull-up ou pull-down externe car les pulls internes sont désactivés en Standby | Toutes les variantes | Obligatoire |
 
 </div>
 
-### 5.8.26. Téléchargement hors ligne et étalonnage du cristal { #5826-offline-download-and-crystal-calibration }
+### 5.8.26. Téléchargement hors ligne et étalonnage du quartz { #5826-offline-download-and-crystal-calibration }
 
-<div align="center"><em>Tableau 5.8.26-1 : Liste de contrôle du téléchargement hors ligne et de l'étalonnage du cristal</em></div>
+<div align="center"><em>Tableau 5.8.26-1 : Liste de contrôle du téléchargement hors ligne et de l'étalonnage du quartz</em></div>
 
 <div align="center" markdown>
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
 | 1 | Si une carte de téléchargement hors ligne est requise pour programmer le firmware, réservez les points de test VBAT, GND, UART3_TXD, UART3_RXD, MODE et RESET | Toutes les variantes | Optionnel |
-| 2 | Si un étalonnage du cristal est nécessaire, réservez PB08. S'il est connecté à un périphérique, il est préférable de l'utiliser en sortie et de ne connecter aucun condensateur externe | Toutes les variantes | Optionnel |
+| 2 | Si un étalonnage du quartz est nécessaire, réservez PB08. S'il est connecté à un périphérique, il est préférable de l'utiliser en sortie et de ne connecter aucun condensateur externe | Toutes les variantes | Optionnel |
 
 </div>

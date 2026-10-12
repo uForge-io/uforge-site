@@ -2,24 +2,24 @@
 icon: lucide/book-check
 hide:
     - navigation
-description: "Hardware-Design-Leitfaden für das SF32LB52-MOD-1 Bluetooth-MCU-Modul: Anleitung zu Stromversorgung, Schnittstellen und PCB-Integration."
+description: "Hardware-Design-Leitfaden für das Bluetooth-MCU-Modul SF32LB52-MOD-1 mit Hinweisen zu Stromversorgung, Schnittstellen und PCB-Integration."
 tags:
     - Hardware
     - Modul
 ---
 
-# SF32LB52-MOD-1 Hardware-Design-Leitfaden { #sf32lb52-mod-1-hardware-design-guide }
+# Hardware-Design-Leitfaden für SF32LB52-MOD-1 { #sf32lb52-mod-1-hardware-design-guide }
 
 ## 1. Übersicht { #1-overview }
 
-**SF32LB52-MOD-1** ist ein zertifiziertes, universell einsetzbares stromsparendes Bluetooth-MCU-Modul auf Basis des SF32LB525UC6-Chips von SiFli (Arm Cortex-M33 STAR-MC1 Dual-Core, bis zu 240 MHz). Es integriert einen 48-MHz-Quarz, einen optionalen 32,768-kHz-Quarz sowie einen optionalen im Gehäuse untergebrachten 64-Mb-OPI-PSRAM-Die in einem einzigen oberflächenmontierbaren Gehäuse mit 68 Pins und den Abmessungen 27,9 × 18,0 × 3,1 mm.
+**SF32LB52-MOD-1** ist ein zertifiziertes Universalmodul für stromsparende Bluetooth-Anwendungen. Es basiert auf dem SiFli-Chip SF32LB525UC6 mit zwei Arm-Cortex-M33-STAR-MC1-Kernen und einer Taktfrequenz von bis zu 240 MHz. Im 68-poligen SMD-Modulgehäuse (27,9 × 18,0 × 3,1 mm) sind ein 48-MHz-Quarz, optional ein 32,768-kHz-Quarz und bei dieser Variante ein 64-Mb-OPI-PSRAM-Die integriert.
 
-Dieser Leitfaden behandelt die Hardware-Integration auf Modulebene: Pin-Definitionen, Peripherieschnittstellen, elektrische Eigenschaften, Anforderungen an die Stromversorgung, Referenzschaltpläne, eine Schaltplan-Design-Checkliste, mechanische Abmessungen und PCB-Footprint sowie Anforderungen an die Produkthandhabung. Er basiert auf dem SiFli-Datenblatt **DS5203-SF32LB52-MOD-1 V0.3**.
+Dieser Leitfaden beschreibt die Hardware-Integration auf Modulebene. Er enthält Pinbelegungen, Peripherieschnittstellen, elektrische Kenndaten, Anforderungen an die Stromversorgung, Referenzschaltpläne, eine Checkliste für den Schaltplanentwurf, mechanische Abmessungen und das empfohlene PCB-Footprint sowie Hinweise zur Handhabung. Grundlage ist das SiFli-Datenblatt **DS5203-SF32LB52-MOD-1 V0.3**.
 
-Für die zugrunde liegende Chiparchitektur (Kerne, Grafik, Speicheruntersystem und Peripherie im Detail) siehe [SF32LB52x](../../sf32-products/chips/SF32LB52x.md) und den [SF32LB52x Hardware-Design-Leitfaden](../chip-guides/SF32LB52x_hardware_design_guide.md).
+Weitere Einzelheiten zur Chiparchitektur, zu den Kernen, zur Grafik, zum Speichersubsystem und zu den Peripherieeinheiten finden Sie unter [SF32LB52x](../../sf32-products/chips/SF32LB52x.md) und im [SF32LB52x Hardware-Design-Leitfaden](../chip-guides/SF32LB52x_hardware_design_guide.md).
 
-!!! note "Umgang mit Quelle und Abbildungen"
-    Dieser Leitfaden folgt **DS5203-SF32LB52-MOD-1 V0.3** für modulspezifische technische Daten. Einige Pinbelegungs-, Schaltplan- und Mechanikzeichnungen im Datenblatt sind Rasterbilder und werden hier referenziert statt neu gezeichnet. Abbildungs- und Tabellennummern unten folgen der Nummerierung dieses Leitfadens; Bildunterschriften für nicht reproduzierte Abbildungen zitieren die entsprechende Abbildungsnummer im offiziellen Datenblatt.
+!!! note "Quellen und Abbildungen"
+    Die modulspezifischen technischen Angaben in diesem Leitfaden basieren auf **DS5203-SF32LB52-MOD-1 V0.3**. Pinbelegungs-, Schaltplan- und mechanische Zeichnungen aus dem Datenblatt liegen teilweise nur als Rasterbilder vor; deshalb verweisen wir auf sie, statt sie neu zu zeichnen. Abbildungs- und Tabellennummern folgen der Nummerierung dieses Leitfadens. Bei nicht übernommenen Abbildungen ist zusätzlich die Nummer der entsprechenden Abbildung im offiziellen Datenblatt angegeben.
 
 ## 2. Kurzübersicht des Designs { #2-quick-design-summary }
 
@@ -29,9 +29,9 @@ Für die zugrunde liegende Chiparchitektur (Kerne, Grafik, Speicheruntersystem u
 
 <div align="center" markdown>
 
-| Modulcode | Flash | PSRAM | Temperatur | Abmessungen (mm) |
+| Modulcode | Flash | PSRAM | Temperaturbereich | Abmessungen (mm) |
 | :--- | :--- | :--- | :--- | :--- |
-| SF32LB52-MOD-1-N16R8 | 16 MB QSPI-NOR | 8 MB OPI-PSRAM | -40~85 °C | 27,9 × 18,0 × 3,1 |
+| SF32LB52-MOD-1-N16R8 | 16 MB QSPI-NOR | 8 MB OPI-PSRAM | -40 bis 85 °C | 27,9 × 18,0 × 3,1 |
 
 </div>
 
@@ -41,40 +41,40 @@ Für die zugrunde liegende Chiparchitektur (Kerne, Grafik, Speicheruntersystem u
 
 <div align="center" markdown>
 
-| Punkt | Spezifikation |
+| Merkmal | Spezifikation |
 | :--- | :--- |
 | Anwendungskern (HCPU) | Arm Cortex-M33 STAR-MC1, bis zu 240 MHz, 512 KB SRAM |
 | Low-Power-Kern (LCPU) | Arm Cortex-M33 STAR-MC1, bis zu 24 MHz, 64 KB SRAM |
 | Funk | Dual-Mode-Bluetooth 5.3 mit BLE Audio |
-| Grafik | ePicasso-2.0-2D/2.5D-Engine, bis zu 512×512, eZip-2.0-verlustfreie Dekompression |
+| Grafik | ePicasso-2.0-2D/2.5D-Grafik-Engine, bis zu 512×512, verlustfreie Dekompression mit eZip 2.0 |
 | Audio | 1x 24-Bit-Audio-DAC, 1x 24-Bit-Audio-Sigma-Delta-ADC |
-| Speicher | Optionales im Gehäuse integriertes OPI-PSRAM (144 MHz); 1x externes MPI (QSPI); 1x SD/SDIO/eMMC |
+| Speicher | Optionaler im Gehäuse integrierter OPI-PSRAM (144 MHz); 1x externes MPI (QSPI); 1x SD/SDIO/eMMC |
 | Gehäuse | 68-Pin, 27,9 × 18,0 × 3,1 mm |
 | Stromversorgung | VSYS 3,2–4,7 V (Li-Ion) oder 3,7–4,7 V (DCDC/LDO, 3,8 V empfohlen) |
-| Antenne | PCB-Onboard-Antenne oder extern über IPEX-Steckverbinder (je nach Teilenummer) |
+| Antenne | Integrierte PCB-Antenne oder externe Antenne über IPEX-Steckverbinder (je nach Teilenummer) |
 | Betriebstemperatur | -40 bis 85 °C |
 
 </div>
 
 ## 3. Funktionsblockschaltbild { #3-functional-block-diagram }
 
-Das Modul integriert den SF32LB525UC6-Chip, einen 48-MHz-Quarz, einen optionalen 32,768-kHz-Quarz und – bei dieser Variante – einen im Gehäuse integrierten 64-Mb-OPI-PSRAM-Die, zusammen mit dem RF-Anpassnetzwerk und der Antennenzuleitung.
+Das Modul enthält den SF32LB525UC6-Chip, einen 48-MHz-Quarz und optional einen 32,768-kHz-Quarz. Bei dieser Variante ist außerdem ein 64-Mb-OPI-PSRAM-Die im Gehäuse integriert. Hinzu kommen das RF-Anpassnetzwerk und die Antennenzuleitung.
 
 !!! info "Abbildung 3-1: Funktionsblockschaltbild"
-    Siehe Abbildung 2-1 im offiziellen Datenblatt für diese Abbildung — in diesem Leitfaden nicht reproduziert.
+    Die Abbildung ist in diesem Leitfaden nicht enthalten. Sie finden sie als Abbildung 2-1 im offiziellen Datenblatt.
 
-## 4. Pin-Definition { #4-pin-definition }
+## 4. Pinbelegung { #4-pin-definition }
 
 ### 4.1 Pinbelegungsdiagramm { #41-pinout-diagram }
 
-Das Modul führt 68 Pins entlang seines Umfangs heraus. Pin 1 ist an der Ecke nahe der Antennenzone markiert; die Pins sind gegen den Uhrzeigersinn um das Gehäuse herum nummeriert.
+Das Modul hat 68 Anschlusspins an seinem Rand. Pin 1 ist an der Ecke nahe der Antennenzone markiert. Die Nummerierung verläuft gegen den Uhrzeigersinn um das Gehäuse.
 
 !!! info "Abbildung 4.1-1: Pinbelegungsdiagramm, Draufsicht"
-    Siehe Abbildung 3-1 im offiziellen Datenblatt für diese Abbildung — in diesem Leitfaden nicht reproduziert.
+    Die Abbildung ist in diesem Leitfaden nicht enthalten. Sie finden sie als Abbildung 3-1 im offiziellen Datenblatt.
 
-### 4.2 Pin-Definitionstabelle { #42-pin-definition-table }
+### 4.2 Pinbelegungstabelle { #42-pin-definition-table }
 
-Das Modul verfügt über insgesamt 68 Pins, die in der folgenden Tabelle beschrieben sind.
+Die folgende Tabelle beschreibt alle 68 Modulanschlüsse.
 
 <div align="center"><em>Tabelle 4.2-1: Pin-Definitionstabelle</em></div>
 
@@ -82,7 +82,7 @@ Das Modul verfügt über insgesamt 68 Pins, die in der folgenden Tabelle beschri
 
 | Name | Nr. | Typ | Standard-MUX | Standard-I/O | Funktion |
 | :--- | :-: | :-: | :--- | :-: | :--- |
-| GND | 1 | P | Ground | P | Masse |
+| GND | 1 | P | Masse | P | Masse |
 | PA44 | 2 | I/O/T | GPIO_A44 | O | GPIO_A44, PA44_I2C_UART, PA44_TIM, #WKUP_PIN20 |
 | PA43 | 3 | I/O/T | GPIO_A43 | O | GPIO_A43, PA43_I2C_UART, PA43_TIM, LCDC1_JDI_G2, LCDC1_8080_DIO7, #WKUP_PIN19 |
 | PA42 | 4 | I/O/T | GPIO_A42 | O | GPIO_A42, PA42_I2C_UART, PA42_TIM, LCDC1_JDI_R2, LCDC1_8080_DIO6, #WKUP_PIN18 |
@@ -107,8 +107,8 @@ Das Modul verfügt über insgesamt 68 Pins, die in der folgenden Tabelle beschri
 | PA29 | 23 | I/O/T | GPIO_A29 | O | GPIO_A29, SPI1_CS, I2S1_BCK, PA29_I2C_UART, PA29_TIM, #GPADC_CH2 |
 | PA30 | 24 | I/O/T | GPIO_A30 | O | GPIO_A30, I2S1_LRCK, PA30_I2C_UART, PA30_TIM, #GPADC_CH3 |
 | PA31 | 25 | I/O/T | GPIO_A31 | I | GPIO_A31, PA31_I2C_UART, PA31_TIM, #GPADC_CH4 |
-| GND | 26 | P | Ground | P | Masse |
-| VSYS | 27 | P | VSYS | P | Hauptversorgungseingang. Li-Ion-Batterieversorgungsbereich 3,2–4,7 V; bei Versorgung über DCDC/LDO (nicht Li-Ion) beträgt der Bereich 3,7–4,7 V, 3,8 V empfohlen |
+| GND | 26 | P | Masse | P | Masse |
+| VSYS | 27 | P | VSYS | P | Haupteingang für die Versorgung. Li-Ion-Akku: 3,2–4,7 V; Versorgung über DCDC/LDO (kein Li-Ion-Akku): 3,7–4,7 V, empfohlen sind 3,8 V |
 | PA20 | 28 | I/O/T | GPIO_A20 | I | GPIO_A20, PA20_I2C_UART, PA20_TIM |
 | PA19 | 29 | I/O/T | GPIO_A19 | O | GPIO_A19, SWCLK, PA19_I2C_UART, PA19_TIM |
 | PA18 | 30 | I/O/T | GPIO_A18 | O | GPIO_A18, SWDIO, PA18_I2C_UART, PA18_TIM |
@@ -116,7 +116,7 @@ Das Modul verfügt über insgesamt 68 Pins, die in der folgenden Tabelle beschri
 | PA10 | 32 | I/O/T | GPIO_A10 | O | GPIO_A10, PA10_I2C_UART, PA10_TIM |
 | AU_DAC1P_OUT | 33 | AO | AU_DAC1P_OUT | AO | Differenzieller Audio-DAC-Ausgang, positiv |
 | AU_DAC1N_OUT | 34 | AO | AU_DAC1N_OUT | AO | Differenzieller Audio-DAC-Ausgang, negativ |
-| GND | 35 | P | Ground | P | Masse |
+| GND | 35 | P | Masse | P | Masse |
 | MIC_BIAS | 36 | P | MIC_BIAS | P | Mikrofon-Vorspannung |
 | MIC_ADC_IN | 37 | AI | MIC_ADC_IN | AI | Analoger Audioeingang |
 | PA09 | 38 | I/O/T | GPIO_A09 | I/O | GPIO_A09, PA09_I2C_UART, PA09_TIM |
@@ -129,8 +129,8 @@ Das Modul verfügt über insgesamt 68 Pins, die in der folgenden Tabelle beschri
 | PA02 | 45 | I/O/T | GPIO_A02 | O | GPIO_A02, LCDC1_SPI_TE, I2S1_MCLK, PA02_I2C_UART, PA02_TIM, LCDC1_JDI_B2, LCDC1_8080_TE |
 | PA01 | 46 | I/O/T | GPIO_A01 | O | GPIO_A01, PA01_I2C_UART, PA01_TIM |
 | PA00 | 47 | I/O/T | GPIO_A00 | O | GPIO_A00, LCDC1_SPI_RSTB, PA00_I2C_UART, PA00_TIM, LCDC1_8080_RSTB |
-| GND | 48–60 | P | Ground | P | Masse (13 Pins) |
-| VBATS | 61 | P | VBAT | P | Batteriespannungs-Erfassungseingang |
+| GND | 48–60 | P | Masse | P | Masse (13 Pins) |
+| VBATS | 61 | P | VBAT | P | Akkuspannungs-Erfassungseingang |
 | NC | 62 | — | NC | — | Nicht angeschlossen |
 | PA15 | 63 | I/O/T | GPIO_A15 | I/O | GPIO_A15, MPI2_DIO0, SD1_CMD, PA15_I2C_UART, PA15_TIM |
 | PA16 | 64 | I/O/T | GPIO_A16 | O | GPIO_A16, MPI2_CLK, SD1_DIO0, PA16_I2C_UART, PA16_TIM |
@@ -141,62 +141,62 @@ Das Modul verfügt über insgesamt 68 Pins, die in der folgenden Tabelle beschri
 
 </div>
 
-*Legende: P = Versorgung; I = Eingang; O = Ausgang; T = kann als hochohmig konfiguriert werden; AO = Audioausgang; AI = Audioeingang.*
+*Legende: P = Versorgung; I = Eingang; O = Ausgang; T = hochohmig konfigurierbar; AO = Audioausgang; AI = Audioeingang.*
 
 !!! note
-    Pin 29 (DBG_UART_TXD) und Pin 30 (DBG_UART_RXD) bilden den Standardanschluss für Log-Ausgabe, Programmdebugging und Programm-Download.
+    Pin 29 (DBG_UART_TXD) und Pin 30 (DBG_UART_RXD) dienen standardmäßig als Schnittstelle für Log-Ausgabe, Debugging und Programm-Download.
 
-### 4.3 Physische Pin-Beschreibung { #43-physical-pin-description }
+### 4.3 Physische Pinbelegung { #43-physical-pin-description }
 
-Die Abbildung zur physischen Pin-Beschreibung im Datenblatt zeigt die Funktionsgruppen auf dem Die-Umriss des SF32LB525UC6: SDIO, SPI, I2C, UART, GPTIM, LCD-Schnittstelle, GPADC, MPI, analoges Audio, externer 32K-Oszillator, externes Wake-up und SWD/Debug-UART. Nutzen Sie die Abbildung zusammen mit der obigen Pin-Definitionstabelle, um die Signalgruppen auf der Trägerplatine anzuordnen.
+Die Abbildung zur physischen Pinbelegung im Datenblatt ordnet die Funktionsgruppen auf dem Die-Umriss des SF32LB525UC6 an: SDIO, SPI, I2C, UART, GPTIM, LCD-Schnittstelle, GPADC, MPI, analoges Audio, externer 32K-Oszillator, externe Wake-up-Signale und SWD/Debug-UART. Verwenden Sie sie zusammen mit der obigen Pin-Tabelle, um die Signalgruppen auf der Trägerplatine anzuordnen.
 
-!!! info "Abbildung 4.3-1: Physische Pin-Beschreibung"
-    Siehe Abbildung 3-2 im offiziellen Datenblatt für diese Abbildung — in diesem Leitfaden nicht reproduziert.
+!!! info "Abbildung 4.3-1: Physische Pinbelegung"
+    Die Abbildung ist in diesem Leitfaden nicht enthalten. Sie finden sie als Abbildung 3-2 im offiziellen Datenblatt.
 
 ## 5. Peripherie { #5-peripherals }
 
 ### 5.1 Kommunikationsschnittstellen { #51-communication-interfaces }
 
-Jeder in der obigen Tabelle mit `PAxx_I2C_UART` markierte Pin kann entweder als I2C oder UART konfiguriert werden. Das Datenblatt nennt als konfigurierbare Höchstzahl 4 I2C- und 3 UART-Schnittstellen.
+Jeder in der obigen Tabelle mit `PAxx_I2C_UART` markierte Pin lässt sich entweder als I2C- oder als UART-Pin konfigurieren. Laut Datenblatt können maximal 4 I2C- und 3 UART-Schnittstellen konfiguriert werden.
 
 !!! important "Widersprüchliche Angaben zur Anzahl der Peripherieschnittstellen"
-    Später listet dasselbe Datenblatt I2C1–I2C7 und UART1–UART6 auf. Diese Angaben widersprechen den zuvor genannten Höchstzahlen. Klären Sie mit SiFli, wie viele Schnittstellen in der konkreten Modul-/SoC-Konfiguration tatsächlich verfügbar sind; leiten Sie aus den Controller-Nummern nicht ab, dass alle gleichzeitig nutzbar sind.
+    An späterer Stelle führt dasselbe Datenblatt I2C1–I2C7 und UART1–UART6 auf. Das widerspricht den zuvor genannten Höchstzahlen von 4 I2C- und 3 UART-Schnittstellen. Klären Sie mit SiFli, wie viele Schnittstellen in der konkreten Modul-/SoC-Konfiguration tatsächlich verfügbar sind. Die aufgeführten Controller-Nummern belegen nicht, dass alle Schnittstellen gleichzeitig genutzt werden können.
 
-**UART** — Vollduplex, bis zu 6 Mbit/s Baudrate, konfigurierbares Datenformat, Hardware-Flusskontrolle (CTS/RTS), DMA-Mehrpaket-TX/RX. UART1–3 liegen auf HPSYS; UART4–6 liegen auf LPSYS.
+**UART** — Vollduplex mit bis zu 6 Mbit/s, konfigurierbarem Datenformat, Hardware-Flusskontrolle (CTS/RTS) und DMA-gestütztem Mehrpaket-TX/RX. UART1–3 befinden sich auf HPSYS, UART4–6 auf LPSYS.
 
-**I2C** — Master- und Slave-fähig, 8-Byte-FIFO, DMA-Unterstützung, Standard- (100 kbit/s), Fast- (400 kbit/s), Fast-Mode-Plus- (1 Mbit/s) und High-Speed-Modus (3,4 Mbit/s), 7-Bit-/10-Bit-Adressierung als Master sowie ein konfigurierbarer digitaler Filter zur Unterdrückung kurzer Störimpulse. I2C1–4 liegen auf HPSYS; I2C5–7 liegen auf LPSYS.
+**I2C** — Betrieb als Master oder Slave, 8-Byte-FIFO und DMA-Unterstützung. Unterstützt werden Standard Mode (100 kbit/s), Fast Mode (400 kbit/s), Fast Mode Plus (1 Mbit/s) und High-Speed Mode (3,4 Mbit/s), 7-Bit- und 10-Bit-Adressierung im Masterbetrieb sowie ein konfigurierbarer digitaler Filter zur Unterdrückung kurzer Störimpulse. I2C1–4 befinden sich auf HPSYS, I2C5–7 auf LPSYS.
 
-**SPI** — Unterstützt SSP/SPI (Vollduplex, Master oder Slave) und Microwire (Halbduplex, nur Master) Formate. 4–32-Bit-Datenbreite, konfigurierbare Taktpolarität/-phase (SPO/SPH), konfigurierbare Chip-Select-Polarität, 32-Bit × 16-Einträge-FIFO, DMA-Unterstützung, bis zu 48 MHz Takt.
+**SPI** — Unterstützt die Formate SSP/SPI (Vollduplex, Master oder Slave) und Microwire (Halbduplex, nur Master). Die Datenbreite beträgt 4 bis 32 Bit; Taktpolarität und -phase (SPO/SPH) sowie die Chip-Select-Polarität sind konfigurierbar. Das FIFO umfasst 16 Einträge zu je 32 Bit; DMA wird unterstützt. Der Takt reicht bis 48 MHz.
 
-**USB2.0 FS** — Ein Full-Speed-Host-/Device-Port mit konfigurierbaren Endpunkten, Suspend/Resume, dynamischer FIFO-Größenanpassung, Unterstützung für Session Request und Host Negotiation Protocol sowie integriertem USB2.0-FS-PHY.
+**USB2.0 FS** — Ein Full-Speed-Port, der als Host oder Device betrieben werden kann. Er bietet konfigurierbare Endpunkte, Suspend/Resume, eine dynamisch anpassbare FIFO-Größe sowie Unterstützung für Session Request und Host Negotiation Protocol. Der USB2.0-FS-PHY ist integriert.
 
-**MPI (Memory Peripheral Interface)** — Unterstützt SPI-NOR-Flash und SPI-NAND-Flash mit 1-, 2- oder 4-Leitungsbetrieb sowie den Zugriff im Register- und Memory-Mapped-Modus mit automatischer Hardware-Umschaltung. An die MPI2-Schnittstelle des Moduls kann externer SPI-NOR- oder SPI-NAND-Flash angeschlossen werden. Ist im Modul bereits Flash bestückt, sind die sechs MPI2-Signale (PA12, PA13, PA14, PA15, PA16 und PA17) extern nicht nutzbar.
+**MPI (Memory Peripheral Interface)** — Unterstützt SPI-NOR- und SPI-NAND-Flash mit 1, 2 oder 4 Datenleitungen sowie Registerzugriffe und den Memory-Mapped-Modus mit automatischer Umschaltung durch die Hardware. An MPI2 des Moduls kann externer SPI-NOR- oder SPI-NAND-Flash angeschlossen werden. Ist das Modul bereits mit Flash bestückt, sind die sechs MPI2-Signale PA12, PA13, PA14, PA15, PA16 und PA17 von außen nicht zugänglich.
 
-**SD/SDIO/eMMC** — Konform zu SD 3.0, SDIO 3.0 und eMMC 4.5.1; unterstützt SDSC-/SDHC-/SDXC-/SDHS-Karten, SDR12/25/50, Single-Line- und 4-Line-SDR-Modi, 2-KB-FIFO, DMA-Datenbewegung, bis zu 48 MHz (kein DDR). Hinweis: Die SDIO-Schnittstelle teilt sich die IO mit MPI2 — beide können nicht gleichzeitig verwendet werden.
+**SD/SDIO/eMMC** — Konform zu SD 3.0, SDIO 3.0 und eMMC 4.5.1. Unterstützt werden SDSC-/SDHC-/SDXC-/SDHS-Karten, SDR12/25/50, SDR-Modi mit einer oder vier Datenleitungen, ein 2-KB-FIFO und DMA-gestützte Datenübertragung mit bis zu 48 MHz (kein DDR). Hinweis: SDIO und MPI2 verwenden dieselben IO-Pins und können daher nicht gleichzeitig betrieben werden.
 
-**I2S** — Master/Slave, Vollduplex, Left-Justified-/Right-Justified-/Standard-Formate, 8-Bit- und 16-Bit-Mono/Stereo, bis zu 24-Bit-PCM-Breite.
+**I2S** — Betrieb als Master oder Slave, Vollduplex, Left-Justified-, Right-Justified- und Standard-Formate, Mono oder Stereo mit 8 oder 16 Bit sowie PCM-Wortbreiten bis 24 Bit.
 
-**LCD-Schnittstelle** — DBI-Seriell-SPI-Modus (3-Line/4-Line, Dual-/Quad-Datenleitung) und paralleler 8080-Modus (8-/16-/24-Bit-Busbreite). Unterstützt je nach Modus die Farbformate RGB332/RGB444/RGB565/RGB666/RGB888.
+**LCD-Schnittstelle** — Serieller DBI-SPI-Modus mit 3 oder 4 Leitungen und Dual-/Quad-Datenleitungen sowie paralleler 8080-Modus mit 8, 16 oder 24 Bit Busbreite. Je nach Modus werden die Farbformate RGB332/RGB444/RGB565/RGB666/RGB888 unterstützt.
 
 ### 5.2 Analoge Signalverarbeitung { #52-analog-signal-processing }
 
-**12-Bit-GPADC** — SAR-ADC, max. Abtastrate 4 MS/s, Eingangsbereich 0–3,3 V unsymmetrisch / ±2,1 V differenziell, 7 unsymmetrische Kanäle + 1 Batteriespannungskanal (oder 3 differenzielle Paare), Einzel-/Dauermessmodi, 4 konfigurierbare Zeitschlitze pro Messung, Software-/Hardware-Trigger, DMA-Unterstützung.
+**12-Bit-GPADC** — SAR-ADC mit einer maximalen Abtastrate von 4 MS/s. Der Eingangsbereich beträgt 0–3,3 V bei einseitiger Messung beziehungsweise ±2,1 V bei Differenzmessung. Verfügbar sind 7 einseitige Kanäle plus 1 Akkuspannungskanal oder 3 differentielle Kanalpaare. Unterstützt werden Einzel- und Dauermessungen, 4 konfigurierbare Zeitfenster pro Messung, Software- und Hardware-Trigger sowie DMA.
 
-**Temperatursensor** — 0,2 °C Auflösung, Bereich -40 °C bis 125 °C, ±3 °C Genauigkeit, Auslesen per Polling oder Interrupt.
+**Temperatursensor** — Auflösung 0,2 °C, Messbereich -40 °C bis 125 °C und Genauigkeit ±3 °C; die Messwerte können per Polling oder Interrupt ausgelesen werden.
 
-**Audio-DAC** — Ein 24-Bit-DAC-Ausgangspfad, Abtastraten 8 kHz–48 kHz, differenzieller Ausgang.
+**Audio-DAC** — Ein 24-Bit-Ausgangspfad mit Abtastraten von 8 kHz bis 48 kHz und differenziellem Ausgang.
 
-**Audio-PLL** — Fractional-N-Takterzeugung mit einer Auflösung von 48 MHz/2^18; unterstützt die folgenden abgeleiteten Abtastraten: 48 MHz, 32,768 kHz und 44,1 kHz.
+**Audio-PLL** — Fractional-N-Takterzeugung mit einer Auflösung von 48 MHz/2^18. Unterstützt werden daraus abgeleitete Abtastraten von 48 MHz, 32,768 kHz und 44,1 kHz.
 
-**Audio-ADC** — Ein 24-Bit-Sigma-Delta-ADC-Eingangspfad, Abtastraten 8 kHz–48 kHz.
+**Audio-ADC** — Ein 24-Bit-Sigma-Delta-Eingangspfad mit Abtastraten von 8 kHz bis 48 kHz.
 
 ## 6. Elektrische Eigenschaften { #6-electrical-characteristics }
 
-### 6.1 Absolute Grenzwerte { #61-absolute-maximum-ratings }
+### 6.1 Absolute Maximalwerte { #61-absolute-maximum-ratings }
 
-Das Überschreiten der Werte in der folgenden Tabelle kann das Modul dauerhaft beschädigen. Dies sind reine Belastungsgrenzwerte; ein funktionaler Betrieb außerhalb der empfohlenen Betriebsbedingungen in §6.2 wird dadurch nicht impliziert. Längere Belastung unter absoluten Grenzwertbedingungen kann die Zuverlässigkeit des Moduls verringern.
+Das Überschreiten der Werte in der folgenden Tabelle kann das Modul dauerhaft beschädigen. Dies sind reine Belastungsgrenzwerte; ein funktionsfähiger Betrieb außerhalb der empfohlenen Betriebsbedingungen in §6.2 ist dadurch nicht zugesichert. Längere Belastung nahe den absoluten Maximalwerten kann die Zuverlässigkeit des Moduls verringern.
 
-<div align="center"><em>Tabelle 6.1-1: Absolute Grenzwerte</em></div>
+<div align="center"><em>Tabelle 6.1-1: Absolute Maximalwerte</em></div>
 
 <div align="center" markdown>
 
@@ -215,7 +215,7 @@ Das Überschreiten der Werte in der folgenden Tabelle kann das Modul dauerhaft b
 
 | Symbol | Parameter | Min | Typ | Max | Einheit |
 | :--- | :--- | :-: | :-: | :-: | :-: |
-| VSYS | Li-Ion-Batterieversorgung | 3,2 | - | 4,7 | V |
+| VSYS | Li-Ion-Akkuversorgung | 3,2 | - | 4,7 | V |
 | VSYS | Nicht-Li-Ion-Versorgung über DCDC/LDO | 3,7 | 3,8 | 4,7 | V |
 | TA | Betriebstemperatur | -40 | - | 85 | °C |
 
@@ -230,91 +230,91 @@ Das Überschreiten der Werte in der folgenden Tabelle kann das Modul dauerhaft b
 | Symbol | Parameter | Min | Typ | Max | Einheit |
 | :--- | :--- | :-: | :-: | :-: | :-: |
 | CIN | Pin-Kapazität | 2,5 | 3 | 3,5 | pF |
-| VIH | Eingangsspannung High | 0,7×VDD | - | VDD | V |
-| VIL | Eingangsspannung Low | VSS | - | 0,3×VDD | V |
+| VIH | High-Pegel am Eingang | 0,7×VDD | - | VDD | V |
+| VIL | Low-Pegel am Eingang | VSS | - | 0,3×VDD | V |
 | IIH | Eingangsstrom High | - | 10 | 40 | nA |
 | IIL | Eingangsstrom Low | - | 10 | 40 | nA |
-| VOH | Ausgangsspannung High (hochohmige Last) | 0,8×VDD | - | VDD | V |
-| VOL | Ausgangsspannung Low (hochohmige Last) | VSS | - | 0,2×VDD | V |
-| IOH | Ausgangstreiberstrom High | 24 | 30 | 38 | mA |
-| IOL | Ausgangstreiberstrom Low | 24 | 30 | 38 | mA |
+| VOH | High-Pegel am Ausgang (hochohmige Last) | 0,8×VDD | - | VDD | V |
+| VOL | Low-Pegel am Ausgang (hochohmige Last) | VSS | - | 0,2×VDD | V |
+| IOH | Ausgangsstrom bei High-Pegel | 24 | 30 | 38 | mA |
+| IOL | Ausgangsstrom bei Low-Pegel | 24 | 30 | 38 | mA |
 | RPU | Interner Pull-up (Vpad=0,8×VDD) | 7 | 10 | 20 | kΩ |
 | RPD | Interner Pull-down (Vpad=0,2×VDD) | 7 | 10 | 20 | kΩ |
-| VIH_nRST | Reset-Freigabespannung | 0,7×VDD | - | VDD | V |
-| VIL_nRST | Reset-Auslösespannung | VSS | - | 0,3×VDD | V |
+| VIH_nRST | Freigabeschwelle für Reset | 0,7×VDD | - | VDD | V |
+| VIL_nRST | Auslöseschwelle für Reset | VSS | - | 0,3×VDD | V |
 
 </div>
 
-VDD ist die I/O-Versorgungsschiene; VOH/VOL werden unter hochohmiger Last gemessen.
+VDD bezeichnet die Versorgungsschiene der I/O-Pins. VOH und VOL werden bei hochohmiger Last gemessen.
 
 ### 6.4 Stromverbrauch { #64-power-consumption }
 
-<div align="center"><em>Tabelle 6.4-1: Durchschnittlicher Bluetooth- und BLE-Strom (3,8-V-Versorgung)</em></div>
+<div align="center"><em>Tabelle 6.4-1: Durchschnittlicher Stromverbrauch bei Bluetooth und BLE (Versorgung mit 3,8 V)</em></div>
 
 <div align="center" markdown>
 
-| Modus | Intervall | @0dBm | @4dBm | @10dBm | Einheit |
+| Modus | Intervall | @ 0 dBm | @ 4 dBm | @ 10 dBm | Einheit |
 | :--- | :-: | :-: | :-: | :-: | :-: |
-| BT Sniff (Versuch=1) | 50 ms | 129,5 | 135,6 | 160,9 | µA |
-| BT Sniff (Versuch=1) | 1 s | 6,0 | 6,3 | 7,6 | µA |
+| BT Sniff (attempt=1) | 50 ms | 129,5 | 135,6 | 160,9 | µA |
+| BT Sniff (attempt=1) | 1 s | 6,0 | 6,3 | 7,6 | µA |
 | BLE ADV | 50 ms | 171,6 | 217,6 | 298,3 | µA |
 | BLE ADV | 1 s | 8,9 | 9,5 | 17,0 | µA |
 | BLE-Verbindung | 50 ms | 95,0 | 105,0 | 118,7 | µA |
 | BLE-Verbindung | 1 s | 4,1 | 4,6 | 9,1 | µA |
 | Scan (Inquiry oder Page) | — | 33,4 | — | — | µA |
-| Beide Scans | — | 67,3 | — | — | µA |
+| Inquiry- und Page-Scan | — | 67,3 | — | — | µA |
 | Sleep | — | 20,0 | — | — | µA |
 
 </div>
 
-<div align="center"><em>Tabelle 6.4-2: Prozessor-Stromverbrauch (3,8-V-Versorgung)</em></div>
+<div align="center"><em>Tabelle 6.4-2: Prozessorstrom (Versorgung mit 3,8 V)</em></div>
 
 <div align="center" markdown>
 
-| Takt | Strom (µA) | Zuwachs (µA/MHz) |
+| Benchmark / Takt | Strom (µA) | Stromzunahme (µA/MHz) |
 | :--- | :-: | :-: |
-| CoreMark @192MHz | 7360 | 35 |
-| CoreMark @48MHz | 1550 | 27 |
-| WhileLoop @192MHz | 5490 | 27 |
-| WhileLoop @48MHz | 1250 | 20 |
+| CoreMark @ 192 MHz | 7360 | 35 |
+| CoreMark @ 48 MHz | 1550 | 27 |
+| WhileLoop @ 192 MHz | 5490 | 27 |
+| WhileLoop @ 48 MHz | 1250 | 20 |
 
 </div>
 
 ### 6.5 Dual-Mode-Bluetooth-RF-Leistung { #65-dual-mode-bluetooth-rf-performance }
 
-Unterstützt Bluetooth 5.3 und ist abwärtskompatibel zu 4.2/4.1/4.0. Betriebskanal-Mittenfrequenz: 2402–2480 MHz.
+Das Modul unterstützt Bluetooth 5.3 und ist abwärtskompatibel zu Bluetooth 4.2/4.1/4.0. Die Mittenfrequenzen der Betriebskanäle liegen zwischen 2402 und 2480 MHz.
 
-**BLE-Sender (1 Mbit/s)**: maximale Leistung 19 dBm, Leistungsregelbereich -20 bis 19 dBm, Δf1avg = 250 kHz typ. und Δf2max = 210 kHz typ. Dies sind Frequenzabweichungen (das Datenblatt bezeichnet die Einträge als maximale/minimale Modulation), kein dimensionsloser Modulationsindex. Die typische anfängliche Trägerfrequenztoleranz beträgt ±20 kHz.
+**BLE-Sender (1 Mbit/s)**: maximale Sendeleistung 19 dBm, Leistungsregelbereich -20 bis 19 dBm, Δf1avg = 250 kHz (typ.) und Δf2max = 210 kHz (typ.). Dabei handelt es sich um Frequenzabweichungen. Das Datenblatt bezeichnet die Einträge als maximale beziehungsweise minimale Modulation; sie sind jedoch kein dimensionsloser Modulationsindex. Die typische anfängliche Trägerfrequenztoleranz beträgt ±20 kHz.
 
-**BLE-Empfänger (1 Mbit/s)**: Empfindlichkeit -100 dBm (dirty off) / -99,3 dBm (dirty on) @30,8 % PER, Gleichkanal-C/I 7 dB.
+**BLE-Empfänger (1 Mbit/s)**: Empfindlichkeit -100 dBm (dirty off) beziehungsweise -99,3 dBm (dirty on) bei 30,8 % PER; Gleichkanal-C/I: 7 dB.
 
-**Classic BT (Basic Data Rate)**: max. Sendeleistung 18 dBm; Empfängerempfindlichkeit -96,3 dBm (dirty off) / -94 dBm (dirty on) @0,1 % BER.
+**Classic BT (Basic Data Rate)**: maximale Sendeleistung 18 dBm; Empfängerempfindlichkeit -96,3 dBm (dirty off) beziehungsweise -94 dBm (dirty on) bei 0,1 % BER.
 
-**Classic BT (Enhanced Data Rate)**: max. Sendeleistung 13 dBm; π/4-DQPSK-Empfängerempfindlichkeit -95,5 dBm; 8DPSK-Empfängerempfindlichkeit -88,5 dBm.
+**Classic BT (Enhanced Data Rate)**: maximale Sendeleistung 13 dBm; Empfängerempfindlichkeit -95,5 dBm bei π/4-DQPSK und -88,5 dBm bei 8DPSK.
 
-Vollständige Min/Typ/Max-Tabellen für alle BLE-1-Mbit/s-/2-Mbit/s-TX/RX-Leistungswerte und die Classic-BT-BR/EDR-TX/RX-Leistung finden sich in §5.5 des offiziellen Datenblatts.
+Die vollständigen Tabellen mit Minimal-, Typ- und Maximalwerten für BLE-TX/RX bei 1 und 2 Mbit/s sowie für Classic-BT-BR/EDR-TX/RX finden Sie in Abschnitt 5.5 des offiziellen Datenblatts.
 
 ## 7. Stromversorgung des Moduls { #7-module-power-supply }
 
-Das Modul verfügt über einen einzigen Hauptversorgungseingang, **VSYS**, der direkt von einer Li-Ion-/Li-Po-Batterie (3,2–4,7 V) oder von einem DCDC-/LDO-Regler (3,7–4,7 V, 3,8 V empfohlen) versorgt werden kann.
+Das Modul hat einen Haupteingang für die Versorgung: **VSYS**. Er kann direkt von einem Li-Ion-/Li-Po-Akku (3,2–4,7 V) oder über einen DCDC-/LDO-Regler (3,7–4,7 V; empfohlen sind 3,8 V) versorgt werden.
 
-**VBATS** ist der Batteriespannungs-Erfassungspin, der intern von einem ADC über einen Bereich von 0–4,7 V abgetastet wird. Verwenden Sie an VBATS keinen externen Widerstandsteiler — verbinden Sie das zu messende Signal direkt mit dem Pin.
+**VBATS** ist der Eingang zur Erfassung der Akkuspannung. Ein interner ADC misst dort Spannungen von 0 bis 4,7 V. Verwenden Sie keinen externen Widerstandsteiler, sondern verbinden Sie das zu messende Signal direkt mit VBATS.
 
-**VDD33_VOUT2** ist der Ausgang des internen 3,3-V-LDO des Moduls und kann bis zu 150 mA an externe Peripherie liefern; die Gesamtkapazität auf dieser Schiene darf 7,4 µF nicht überschreiten.
+**VDD33_VOUT2** ist der Ausgang des integrierten 3,3-V-LDO und kann externe Peripherie mit bis zu 150 mA versorgen. Die Gesamtkapazität an dieser Versorgungsschiene darf 7,4 µF nicht überschreiten.
 
 ## 8. Referenzschaltplan und Pin-Zuordnung { #8-reference-schematic-and-pin-assignment }
 
-Das Datenblatt stellt einen vollständigen Referenzschaltplan für ein Entwicklungsboard auf Basis des SF32LB52-MOD-1 bereit, der Stromversorgung, Reset, JTAG/SWD, UART, SDIO, LCD und Audioschaltungen abdeckt.
+Das Datenblatt enthält einen vollständigen Referenzschaltplan für ein Entwicklungsboard mit SF32LB52-MOD-1. Er umfasst die Stromversorgung, Reset, JTAG/SWD, UART, SDIO, LCD und Audioschaltungen.
 
 !!! info "Abbildung 8-1: Referenzschaltplan des Entwicklungsboards"
-    Siehe Abbildungen 7-2–7-6 im offiziellen Datenblatt für diese Abbildung — in diesem Leitfaden nicht reproduziert.
+    Der Schaltplan ist in diesem Leitfaden nicht enthalten. Die einzelnen Blätter finden Sie als Abbildungen 7-2 bis 7-6 im offiziellen Datenblatt.
 
-Das Datenblatt stellt außerdem eine empfohlene Pin-Zuordnungstabelle für dieses Referenzboard bereit.
+Das Datenblatt enthält außerdem eine Tabelle mit der empfohlenen Pinbelegung dieses Referenzboards.
 
 !!! info "Abbildung 8-2: Empfohlene Pin-Zuordnung für das Referenzboard"
-    Siehe Abbildung 7-7 im offiziellen Datenblatt für diese Abbildung — in diesem Leitfaden nicht reproduziert.
+    Die Tabelle ist in diesem Leitfaden nicht enthalten. Sie finden sie als Abbildung 7-7 im offiziellen Datenblatt.
 
-Verwenden Sie diese als Ausgangspunkt für einen Produktionsschaltplan und passen Sie die Pin-Auswahl an die spezifische Peripherie-Kombination Ihres Produkts an.
+Verwenden Sie die Referenzunterlagen als Ausgangspunkt für den Schaltplan Ihres Serienprodukts und wählen Sie die Pins passend zu den tatsächlich benötigten Peripherieeinheiten.
 
 ## 9. Schaltplan-Design-Checkliste { #9-schematic-design-checklist }
 
@@ -322,22 +322,22 @@ Verwenden Sie diese als Ausgangspunkt für einen Produktionsschaltplan und passe
 
 <div align="center" markdown>
 
-| # | Prüfpunkt |
+| Nr. | Prüfpunkt |
 | :-: | :--- |
-| 1 | VSYS kann direkt an eine Li-Ion-Batterie angeschlossen werden; bei Versorgung über DCDC/LDO werden 3,8 V empfohlen. VBATS ist der Batteriespannungs-Erfassungspin (Bereich 0–4,7 V) — verwenden Sie keinen externen Widerstandsteiler; verbinden Sie das zu messende Signal direkt mit VBATS. |
-| 2 | Platzieren Sie je einen 4,7-µF- und einen 0,1-µF-Kondensator nahe dem VSYS-Pin. |
-| 3 | Platzieren Sie einen 0,1-µF-Kondensator nahe dem VBATS-Pin. |
-| 4 | VDD33_VOUT2 ist der 3,3-V-LDO-Ausgang, max. Strom 150 mA — diesen Wert mit externer Last nicht überschreiten. |
-| 5 | Die Gesamtkapazität an VDD33_VOUT2 muss ≤ 7,4 µF sein. |
-| 6 | Der IO-Schnittstellenpegel des Moduls ist 3,3 V — jede angeschlossene Peripherie muss ebenfalls 3,3-V-Logikpegel verwenden. |
-| 7 | Ist der interne 32K-Quarz des Moduls bestückt, stehen PA22 und PA23 extern nicht zur Verfügung. |
-| 8 | Ist bereits Flash im Modul bestückt, stehen die 6 MPI2-Signale (PA12, PA13, PA14, PA15, PA16, PA17) extern nicht zur Verfügung. |
-| 9 | Die SDIO-Schnittstelle und MPI2 teilen sich die IO und können nicht gleichzeitig verwendet werden. |
-| 10 | In der Pin-Tabelle mit `#GPADC_CHx` markierte Pins unterstützen analogen Eingang im Bereich 0–3,3 V. |
-| 11 | In der Pin-Tabelle mit `PAxx_TIM` markierte Pins unterstützen PWM-Ausgang. |
-| 12 | PA34 unterstützt einen 10-Sekunden-Long-Press-Reset, aktiv high; sehen Sie im Design einen 10-kΩ-Pull-down-Widerstand vor. |
-| 13 | ESD-Schutzbauteile für Batterie- und Touchpanel-Schnittstellen (TP) sowie bei Bedarf für weitere nach außen geführte Schnittstellen vorsehen. |
-| 14 | PA18/PA19, gemultiplext als DBG_UART für Programmierung/Debug, sollten jeweils einen 100-Ω-Serienwiderstand erhalten. |
+| 1 | VSYS kann direkt an einen Li-Ion-Akku angeschlossen werden. Bei Versorgung über DCDC/LDO werden 3,8 V empfohlen. VBATS erfasst die Akkuspannung im Bereich von 0 bis 4,7 V. Verwenden Sie dort keinen externen Widerstandsteiler, sondern verbinden Sie das zu messende Signal direkt mit VBATS. |
+| 2 | Platzieren Sie nahe am VSYS-Pin jeweils einen Kondensator mit 4,7 µF und einen mit 0,1 µF. |
+| 3 | Platzieren Sie nahe am VBATS-Pin einen Kondensator mit 0,1 µF. |
+| 4 | VDD33_VOUT2 ist der 3,3-V-LDO-Ausgang und liefert maximal 150 mA. Überschreiten Sie diesen Grenzwert nicht, wenn Sie externe Lasten anschließen. |
+| 5 | Die Gesamtkapazität an VDD33_VOUT2 darf 7,4 µF nicht überschreiten. |
+| 6 | Die I/O-Pins des Moduls arbeiten mit 3,3-V-Logikpegeln. Auch die angeschlossenen Peripheriebausteine müssen 3,3-V-Logikpegel verwenden. |
+| 7 | Ist der interne 32K-Quarz des Moduls bestückt, sind PA22 und PA23 von außen nicht verfügbar. |
+| 8 | Ist Flash im Modul bestückt, sind die 6 MPI2-Signale PA12, PA13, PA14, PA15, PA16 und PA17 von außen nicht verfügbar. |
+| 9 | SDIO und MPI2 verwenden dieselben I/O-Pins und können daher nicht gleichzeitig betrieben werden. |
+| 10 | Die in der Pin-Tabelle mit `#GPADC_CHx` markierten Pins unterstützen analoge Eingangsspannungen von 0 bis 3,3 V. |
+| 11 | Die in der Pin-Tabelle mit `PAxx_TIM` markierten Pins unterstützen PWM-Ausgabe. |
+| 12 | PA34 unterstützt einen 10-Sekunden-Reset bei langem Tastendruck (High-aktiv). Sehen Sie dafür einen 10-kΩ-Pull-down-Widerstand vor. |
+| 13 | Sehen Sie ESD-Schutzbauteile für die Akku- und Touchpanel-Schnittstellen (TP) sowie bei Bedarf für weitere nach außen geführte Schnittstellen vor. |
+| 14 | Für PA18 und PA19, die für Programmierung und Debugging als DBG_UART gemultiplext werden, wird jeweils ein 100-Ω-Serienwiderstand empfohlen. |
 
 </div>
 
@@ -345,53 +345,53 @@ Verwenden Sie diese als Ausgangspunkt für einen Produktionsschaltplan und passe
 
 ### 10.1 Modulabmessungen { #101-module-dimensions }
 
-Das Modul misst 27,9 × 18,0 × 3,1 mm.
+Das Modul ist 27,9 × 18,0 × 3,1 mm groß.
 
 !!! info "Abbildung 10.1-1: Modulabmessungen — Ansicht von oben, seitlich und von unten"
-    Siehe Abbildung 8-1 im offiziellen Datenblatt für diese Abbildung — in diesem Leitfaden nicht reproduziert.
+    Die Abbildung ist in diesem Leitfaden nicht enthalten. Sie finden sie als Abbildung 8-1 im offiziellen Datenblatt.
 
 ### 10.2 Empfohlener PCB-Footprint { #102-recommended-pcb-footprint }
 
 !!! info "Abbildung 10.2-1: Empfohlener PCB-Footprint"
-    Siehe Abbildung 8-2 im offiziellen Datenblatt für diese Abbildung — in diesem Leitfaden nicht reproduziert.
+    Die Abbildung ist in diesem Leitfaden nicht enthalten. Sie finden sie als Abbildung 8-2 im offiziellen Datenblatt.
 
 ### 10.3 Externer Antennenanschluss { #103-external-antenna-connector }
 
-Für SKUs mit Unterstützung einer externen Antenne verwendet das Modul einen Steckverbinder-Footprint der ersten Generation, kompatibel mit:
+Bei SKUs mit externer Antenne verwendet das Modul ein Anschluss-Footprint der ersten Generation. Es ist kompatibel mit:
 
 - Hirose-U.FL-Serie
 - I-PEX-MHFI-Steckverbindern
 - Amphenol-AMC-Steckverbindern
 
 !!! info "Abbildung 10.3-1: Abmessungen des externen Antennenanschlusses"
-    Siehe Abbildung 8-3 im offiziellen Datenblatt für diese Abbildung — in diesem Leitfaden nicht reproduziert.
+    Die Abbildung ist in diesem Leitfaden nicht enthalten. Sie finden sie als Abbildung 8-3 im offiziellen Datenblatt.
 
 ### 10.4 Modulplatzierung im PCB-Design { #104-module-placement-in-pcb-design }
 
-Wenn das Endprodukt ein Design mit aufgesetztem Modul verwendet, reservieren Sie ausreichend Platz, damit keine anderen Bauteile oder Metallflächen die PCB-Antennenzone des Moduls überlappen, um eine Verschlechterung des Abstrahlwirkungsgrads zu vermeiden. Planen Sie die Position des Moduls auf dem Host-Board so, dass die Auswirkung auf die Antennenleistung minimiert wird.
+Wenn Sie das Modul auf der Leiterplatte des Endprodukts einsetzen, darf dessen PCB-Antennenzone nicht von anderen Bauteilen oder Metallflächen überdeckt werden. Andernfalls kann die Abstrahleffizienz sinken. Platzieren Sie das Modul so auf der Trägerplatine, dass die Antennenleistung möglichst wenig beeinträchtigt wird.
 
 Empfohlene Vorgehensweise:
 
-- Verlängern Sie die Antennenfläche des Moduls über den Rand des Host-Boards hinaus, mit dem Speisepunkt nahe am Boardrand.
+- Lassen Sie die Antennenzone des Moduls über den Rand der Trägerplatine hinausragen und platzieren Sie den Speisepunkt nahe am Platinenrand.
 
 !!! info "Abbildung 10.4-1: Empfohlene Modulplatzierung"
-    Siehe Abbildung 8-4 im offiziellen Datenblatt für diese Abbildung — in diesem Leitfaden nicht reproduziert.
+    Die Abbildung ist in diesem Leitfaden nicht enthalten. Sie finden sie als Abbildung 8-4 im offiziellen Datenblatt.
 
-- Kann die Antenne nicht über den Boardrand hinausragen, sehen Sie eine Sperrzone von mindestens 15 mm um die PCB-Antenne vor — keine Kupferflächen, keine Leiterbahnen, keine Bauteile — und entfernen Sie nach Möglichkeit das Host-Board-Material unterhalb der Antenne.
+- Kann die Antennenzone nicht über den Platinenrand hinausragen, halten Sie um die PCB-Antenne einen mindestens 15 mm breiten Bereich frei von Kupferflächen, Leiterbahnen und Bauteilen. Entfernen Sie nach Möglichkeit auch das Leiterplattenmaterial unter der Antenne.
 
-!!! info "Abbildung 10.4-2: Antennen-Sperrzone"
-    Siehe Abbildung 8-5 im offiziellen Datenblatt für diese Abbildung — in diesem Leitfaden nicht reproduziert.
+!!! info "Abbildung 10.4-2: Antennen-Freihaltebereich"
+    Die Abbildung ist in diesem Leitfaden nicht enthalten. Sie finden sie als Abbildung 8-5 im offiziellen Datenblatt.
 
-- Halten Sie den Antennenspeisepunkt auch im Layout mit Sperrzone nahe am Boardrand.
-- Bewerten Sie für vollständige Endprodukt-Designs den Einfluss des Gehäuses auf die Antenne und führen Sie eine RF-Validierung durch, einschließlich eines abschließenden Kommunikationsreichweitentests am fertigen Produkt.
+- Halten Sie auch bei diesem Layout den Antennenspeisepunkt nahe am Platinenrand.
+- Prüfen Sie bei einem vollständigen Endprodukt den Einfluss des Gehäuses auf die Antenne. Validieren Sie die RF-Leistung und führen Sie am fertigen Produkt abschließend einen Reichweitentest durch.
 
 ## 11. Produkthandhabung { #11-product-handling }
 
 ### 11.1 Lagerbedingungen { #111-storage-conditions }
 
-- Lagern Sie Produkte versiegelt in einem Moisture Barrier Bag (MBB) bei <40 °C / 90 % RH, nicht kondensierend.
+- Lagern Sie die Produkte versiegelt in einem Moisture Barrier Bag (MBB) bei <40 °C / 90 % RH und vermeiden Sie Kondensation.
 - Feuchteempfindlichkeitsklasse (MSL) des Moduls: 3.
-- Nach dem Öffnen des Vakuumbeutels das Modul innerhalb von 168 Stunden bei 25±5 °C / 60 % RH verwenden; andernfalls ist es vor der erneuten Zuführung in die Fertigungslinie zu backen.
+- Verarbeiten Sie das Modul nach dem Öffnen des Vakuumbeutels innerhalb von 168 Stunden bei 25±5 °C / 60 % RH. Andernfalls muss es vor der Rückführung in die Fertigung gemäß Datenblattvorgabe gebacken werden.
 
 ### 11.2 Elektrostatische Entladung (ESD) { #112-electrostatic-discharge-esd }
 
@@ -400,14 +400,14 @@ Empfohlene Vorgehensweise:
 
 ### 11.3 Reflow-Profil { #113-reflow-profile }
 
-Für das Modul wird empfohlen, den Reflow-Prozess nur einmal zu durchlaufen.
+Das Modul sollte nur einmal einem Reflow-Prozess unterzogen werden.
 
 !!! info "Abbildung 11.3-1: Empfohlenes Reflow-Temperaturprofil"
-    Siehe Abbildung 9-1 im offiziellen Datenblatt für diese Abbildung — in diesem Leitfaden nicht reproduziert.
+    Die Abbildung ist in diesem Leitfaden nicht enthalten. Sie finden sie als Abbildung 9-1 im offiziellen Datenblatt.
 
 ### 11.4 Ultraschallvibration { #114-ultrasonic-vibration }
 
-Vermeiden Sie es, SiFli-Module Vibrationen durch Ultraschallschweiß- oder Ultraschallreinigungsgeräte auszusetzen. Ultraschallvibration kann mit den internen Quarzoszillatoren des Moduls in Resonanz treten, was zu Quarzausfall oder Fehlfunktion führen und das Modul funktionsunfähig machen oder seine Leistung beeinträchtigen kann.
+Setzen Sie SiFli-Module keinen Vibrationen durch Ultraschallschweiß- oder Ultraschallreinigungsgeräte aus. Solche Vibrationen können die internen Quarzoszillatoren anregen und Resonanzeffekte verursachen. Dadurch können die Quarze ausfallen oder fehlerhaft arbeiten, sodass das Modul unbrauchbar wird oder seine Leistung nachlässt.
 
 ## 12. Verwandte Dokumente { #12-related-documents }
 
@@ -430,4 +430,4 @@ Vermeiden Sie es, SiFli-Module Vibrationen durch Ultraschallschweiß- oder Ultra
 
 </div>
 
-Dieser Leitfaden basiert auf dem oben genannten Datenblattinhalt; die maßgebliche und aktuellste Revision entnehmen Sie bitte dem offiziellen PDF.
+Dieser Leitfaden basiert auf dem genannten Datenblatt. Die maßgebliche und aktuelle Fassung finden Sie im offiziellen PDF.

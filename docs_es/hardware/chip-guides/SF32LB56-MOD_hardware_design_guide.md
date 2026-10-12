@@ -14,7 +14,7 @@ hide:
 
 **SF32LB56-MOD** es una familia de módulos MCU Bluetooth de bajo consumo y propósito general de SiFli, basada en la serie SF32LB56xV.
 
-Esta guía toma como referencia la **especificación técnica DS5602-SF32LB56-MOD V0.3** y reúne la información específica del módulo necesaria para diseñar el esquema, planificar el PCB, validar el hardware y preparar la producción. Incluye las variantes de memoria, la interfaz de 89 pines, las tres líneas de alimentación, las interfaces de pantalla, audio y almacenamiento, la ubicación de la antena, los requisitos de manipulación y la lista de comprobación del esquema.
+Esta guía toma como referencia la **especificación técnica DS5602-SF32LB56-MOD V0.3** y reúne la información específica del módulo necesaria para diseñar el esquemático, planificar la PCB, validar el hardware y preparar la producción. Incluye las variantes de memoria, la interfaz de 89 pines, las tres líneas de alimentación, las interfaces de pantalla, audio y almacenamiento, la ubicación de la antena, los requisitos de manipulación y la lista de comprobación del esquemático.
 
 !!! note "Fuente y recomendaciones"
     Salvo que se indiquen expresamente como pautas de integración o recomendaciones de diseño, los valores técnicos siguientes se basan en la **especificación técnica DS5602-SF32LB56-MOD V0.3**.
@@ -23,7 +23,7 @@ Esta guía toma como referencia la **especificación técnica DS5602-SF32LB56-MO
 
 ### 2.1 Arquitectura { #21-architecture }
 
-SF32LB56-MOD utiliza una plataforma MCU de doble núcleo de la serie SF32LB56xV. El HCPU procesa las aplicaciones y los gráficos; el LCPU ejecuta las tareas permanentes de bajo consumo. El HCPU es un núcleo Arm Cortex-M33 STAR-MC1 de hasta 240 MHz, y el LCPU es del mismo tipo, de hasta 96 MHz. Ambos admiten FPU y MPU.
+SF32LB56-MOD utiliza una plataforma MCU de doble núcleo de la serie SF32LB56xV. La HCPU procesa las aplicaciones y los gráficos; la LCPU ejecuta las tareas permanentes de bajo consumo. La HCPU es un núcleo Arm Cortex-M33 STAR-MC1 de hasta 240 MHz, y la LCPU es del mismo tipo, de hasta 96 MHz. Ambos admiten FPU y MPU.
 
 El módulo admite Bluetooth 5.3 y ofrece aceleración de pantalla, entrada y salida de audio, interfaces de memoria externa, USB 2.0 FS, SD/SDIO/eMMC, I2S, UART, I2C, SPI, PWM, GPADC y acceso para depuración y descarga.
 
@@ -56,7 +56,7 @@ El módulo admite Bluetooth 5.3 y ofrece aceleración de pantalla, entrada y sal
 | IA/DSP | Acelerador matricial de hasta 1,92 GOPS, FFT, FIR y CORDIC |
 | Almacenamiento | Opciones de Flash/PSRAM del módulo, MPI3 y compatibilidad con SD/SDIO/eMMC |
 | Seguridad | AES, HASH, CRC, TRNG, Secure Boot, eFuse de 1024 bits y PSA Certified Level 1 |
-| Antena | Antena integrada en el PCB o antena externa mediante un conector compatible con IPEX |
+| Antena | Antena integrada en la PCB o antena externa mediante un conector compatible con IPEX |
 
 </div>
 
@@ -81,7 +81,7 @@ Entre las aplicaciones habituales se incluyen relojes inteligentes de gama alta,
 | Modo de arranque | BOOT_MODE en alto selecciona el modo de descarga; en bajo, el modo de usuario. |
 | Conflicto con la Flash interna | PA06–PA11 están conectados por defecto a la Flash interna del módulo y no están disponibles externamente. |
 | Conflicto SDIO/MPI3 | SDIO y MPI3 comparten recursos de E/S y no pueden utilizarse simultáneamente. |
-| Fuentes de activación | PA50, PA51, PB32 y PB35 pueden recibir interrupciones mientras el MCU está en suspensión. |
+| Fuentes de activación | PA50, PA51, PB32 y PB35 pueden recibir interrupciones mientras la MCU está en suspensión. |
 | PWRKEY | PB32 admite un reinicio al mantener el nivel alto durante 10 s y requiere una resistencia pulldown de 10 kΩ. |
 | Antena | Mantenga el área de la antena PCB libre de cobre, pistas, componentes y metal. Si la antena no sobresale del borde de la placa, deje una separación mínima de 15 mm. |
 | Fabricación | MSL 3; utilícelo dentro de las 168 horas posteriores a la apertura a 25 ± 5 °C / 60 % HR u hornéelo antes de reutilizarlo. |
@@ -108,14 +108,14 @@ Entre las aplicaciones habituales se incluyen relojes inteligentes de gama alta,
 
 ### 3.3 Árbol de alimentación { #33-power-tree }
 
-VDD_3V3 alimenta PVDD, AVDD33_ANA, AVDD33_AUD, AVDD_BRF y VDDIOA2 del MCU, además de la Flash interna del módulo. SiFli recomienda utilizar un LDO para este raíl. VDD_1V8 alimenta la memoria incluida en el mismo encapsulado que el MCU. VDDIO alimenta los puertos de E/S VDDIOA/VDDIOB del MCU.
+VDD_3V3 alimenta PVDD, AVDD33_ANA, AVDD33_AUD, AVDD_BRF y VDDIOA2 de la MCU, además de la Flash interna del módulo. SiFli recomienda utilizar un LDO para este raíl. VDD_1V8 alimenta la memoria incluida en el mismo encapsulado que la MCU. VDDIO alimenta los puertos de E/S VDDIOA/VDDIOB de la MCU.
 
 !!! info "Figura 3.3-1: Diagrama de alimentación de SF32LB56-MOD"
     Consulte la figura 7-1 de DS5602 V0.3.
 
 ### 3.4 Diagrama de bloques del sistema { #34-system-block-diagram }
 
-El diagrama de bloques del módulo muestra el MCU SF32LB56xV, los recursos de memoria, la ruta RF, las opciones de antena, las entradas de alimentación y los grupos de interfaces externas.
+El diagrama de bloques del módulo muestra la MCU SF32LB56xV, los recursos de memoria, la ruta RF, las opciones de antena, las entradas de alimentación y los grupos de interfaces externas.
 
 !!! info "Figura 3.4-1: Diagrama funcional de bloques de SF32LB56-MOD"
     Consulte la figura 2-1 de DS5602 V0.3.
@@ -125,17 +125,17 @@ El diagrama de bloques del módulo muestra el MCU SF32LB56xV, los recursos de me
 ### 4.1 Secuencia de diseño { #41-design-sequence }
 
 1. Seleccione la variante de memoria según el tamaño del firmware, los recursos gráficos, las necesidades de almacenamiento externo y el coste objetivo.
-2. Elija la variante con antena integrada en el PCB o con antena externa antes de cerrar el diseño mecánico.
+2. Elija la variante con antena integrada en la PCB o con antena externa antes de cerrar el diseño mecánico.
 3. Defina la arquitectura de alimentación para VDD_3V3, VDD_1V8 y VDDIO, y confirme que los tres raíles se encienden simultáneamente.
 4. Asigne los pines de pantalla, almacenamiento, USB, audio, sensores, activación, depuración y pruebas de producción.
 5. Resuelva los conflictos de recursos compartidos, en especial entre SDIO y MPI3, y los pines PA06–PA11 utilizados por la Flash interna.
-6. Añada desacoplamiento, protección ESD, el pulldown de PWRKEY y las resistencias en serie para la LCD y la UART de depuración.
+6. Añada desacoplamiento, protección ESD, el pulldown de PWRKEY y las resistencias en serie para la LCD y el UART de depuración.
 7. Coloque el módulo respetando la separación de antena y el área de exclusión requeridas.
-8. Antes de la liberación, revise el esquema y el PCB con la lista de comprobación de la sección 7.
+8. Antes de la liberación, revise el esquemático y la PCB con la lista de comprobación de la sección 7.
 
 ### 4.2 Secuencia de revisión { #42-review-sequence }
 
-Realice las revisiones por etapas: esquema, multiplexación de pines, encendido, RF/antena, diseño del PCB, puesta en marcha de la primera unidad, validación RF, evaluación ambiental y de fiabilidad, y pruebas de producción.
+Realice las revisiones por etapas: esquemático, multiplexación de pines, encendido, RF/antena, diseño de la PCB, puesta en marcha de la primera unidad, validación RF, evaluación ambiental y de fiabilidad, y pruebas de producción.
 
 ### 4.3 Hitos { #43-milestones }
 
@@ -145,15 +145,15 @@ Realice las revisiones por etapas: esquema, multiplexación de pines, encendido,
 
 | Hito | Evidencias requeridas |
 | :--- | :--- |
-| Cierre del esquema | Variante seleccionada, conflictos de pines resueltos, raíles de alimentación verificados y lista de comprobación completada. |
+| Cierre del esquemático | Variante seleccionada, conflictos de pines resueltos, raíles de alimentación verificados y lista de comprobación completada. |
 | Cierre del diseño | Área de exclusión de antena comprobada, desacoplamiento de alimentación colocado e interfaces de alta velocidad revisadas. |
 | Puesta en marcha EVT | Superadas las pruebas iniciales de raíles, modo de arranque, UART/SWD, Flash, pantalla, USB, audio y RF. |
 | DVT | Validados el alcance RF, la corriente, el comportamiento térmico, la suspensión/reactivación, la estrategia ESD y el efecto de la carcasa. |
-| Liberación de producción | Completados la programación, los pads de prueba, las reglas de inspección, la manipulación MSL/reflujo y los registros de revisión. |
+| Liberación de producción | Completados la grabación, los pads de prueba, las reglas de inspección, la manipulación MSL/reflujo y los registros de revisión. |
 
 </div>
 
-## 5. Diseño del esquema { #5-schematic-design }
+## 5. Diseño del esquemático { #5-schematic-design }
 
 ### 5.1 Sistema de alimentación { #51-power-system }
 
@@ -165,9 +165,9 @@ Realice las revisiones por etapas: esquema, multiplexación de pines, encendido,
 
 | Raíl | Rango de funcionamiento recomendado | Función |
 | :--- | :--- | :--- |
-| VDD_3V3 | 2,97–3,6 V | PVDD del MCU, dominios analógicos de 3,3 V, dominio analógico RF, VDDIOA2 y Flash interna. |
-| VDD_1V8 | 1,7–1,95 V | Alimentación de la memoria incluida en el mismo encapsulado que el MCU. |
-| VDDIO | 1,7–3,6 V | Alimentación de E/S VDDIOA/VDDIOB del MCU. |
+| VDD_3V3 | 2,97–3,6 V | PVDD de la MCU, dominios analógicos de 3,3 V, dominio analógico RF, VDDIOA2 y Flash interna. |
+| VDD_1V8 | 1,7–1,95 V | Alimentación de la memoria incluida en el mismo encapsulado que la MCU. |
+| VDDIO | 1,7–3,6 V | Alimentación de E/S VDDIOA/VDDIOB de la MCU. |
 
 </div>
 
@@ -175,7 +175,7 @@ VDD_3V3, VDD_1V8 y VDDIO deben encenderse simultáneamente. Coloque un condensad
 
 #### 5.1.2 Modos de funcionamiento { #512-operating-modes }
 
-BOOT_MODE selecciona el comportamiento de arranque: nivel alto para el modo de descarga y nivel bajo para el modo de usuario. Mantenga definido el estado de la señal BOOT_MODE durante el reinicio y la programación de producción. PB32/PWRKEY admite el reinicio al mantener el nivel alto durante 10 s y requiere una resistencia pulldown de 10 kΩ.
+BOOT_MODE selecciona el comportamiento de arranque: nivel alto para el modo de descarga y nivel bajo para el modo de usuario. Mantenga definido el estado de la señal BOOT_MODE durante el reinicio y la grabación de producción. PB32/PWRKEY admite el reinicio al mantener el nivel alto durante 10 s y requiere una resistencia pulldown de 10 kΩ.
 
 ### 5.2 Reloj y RF { #52-timing-and-rf }
 
@@ -204,7 +204,7 @@ La plataforma del módulo utiliza un oscilador de cristal de 48 MHz y admite osc
 
 </div>
 
-El módulo admite una antena integrada en el PCB o una antena externa mediante un conector compatible con IPEX. Valide el alcance de comunicación y el rendimiento RF con la carcasa final, no solo en un banco de pruebas abierto.
+El módulo admite una antena integrada en la PCB o una antena externa mediante un conector compatible con IPEX. Valide el alcance de comunicación y el rendimiento RF con la carcasa final, no solo en un banco de pruebas abierto.
 
 ### 5.3 Interfaces de usuario { #53-user-interfaces }
 
@@ -229,7 +229,7 @@ PB32 es la entrada PWRKEY y admite el reinicio al mantener el nivel alto durante
 
 #### 5.3.4 Motores y cargas PWM { #534-motor-and-pwm-loads }
 
-Los pines identificados como GPTIM en la figura de asignación recomendada de la hoja de datos admiten salida PWM. Utilice controladores externos para motores, retroiluminación, zumbadores u otras cargas; no conecte cargas inductivas o de corriente elevada directamente a los GPIO del módulo.
+Los pines identificados como GPTIM en la figura de asignación recomendada de la hoja de datos admiten salida PWM. Utilice controladores externos para motores, retroiluminación, zumbadores u otras cargas; no conecte cargas inductivas o de corriente elevada directamente a las GPIO del módulo.
 
 ### 5.4 Almacenamiento y conectividad { #54-storage-and-connectivity }
 
@@ -239,33 +239,33 @@ La familia de módulos ofrece Flash principal según el SKU, 4+8 MB de OPI-PSRAM
 
 #### 5.4.2 Sensores { #542-sensors }
 
-GPADC admite conversiones de 12 bits, una frecuencia de muestreo de hasta 4 MS/s, un rango de entrada de extremo único (single-ended) de 0–3,3 V y un rango diferencial de -2,1 V a +2,1 V; también admite disparo por software o hardware y DMA. Los pines marcados GPADC_CHx admiten entrada analógica. Mantenga cortas las pistas, filtre las señales y aléjelas del ruido de conmutación de la LCD y de RF.
+GPADC admite conversiones de 12 bits, una frecuencia de muestreo de hasta 4 MS/s, un rango de entrada no diferencial de 0–3,3 V y un rango diferencial de -2,1 V a +2,1 V; también admite disparo por software o hardware y DMA. Los pines marcados GPADC_CHx admiten entrada analógica. Mantenga cortas las pistas, filtre las señales y aléjelas del ruido de conmutación de la LCD y de RF.
 
 #### 5.4.3 UART/I2C { #543-uarti2c }
 
-UART admite funcionamiento full-duplex hasta 6 Mbps. I2C admite los modos estándar (100 kbps), rápido (400 kbps), rápido plus (1 Mbps) y alta velocidad (3,4 Mbps). Muchos GPIO están multiplexados como `PAxx_I2C_UART` o `PBxx_I2C_UART`; confirme el plan de multiplexación definitivo antes de cerrar el esquema.
+UART admite funcionamiento full-duplex hasta 6 Mbps. I2C admite los modos estándar (100 kbps), rápido (400 kbps), rápido plus (1 Mbps) y alta velocidad (3,4 Mbps). Muchos GPIO están multiplexados como `PAxx_I2C_UART` o `PBxx_I2C_UART`; confirme el plan de multiplexación definitivo antes de cerrar el esquemático.
 
 UART4_TXD en el pin 6 y UART4_RXD en el pin 7 forman el puerto serie predeterminado para la salida de consola, la descarga y la depuración del programa. PA16 y PA17 pueden multiplexarse como DBG_UART; si se utilizan para descargar o depurar el programa, requieren resistencias en serie de 100 Ω.
 
 #### 5.4.4 USB, SPI, SDIO e I2S { #544-usb-spi-sdio-and-i2s }
 
-USB 2.0 FS admite los modos host y dispositivo mediante un PHY integrado. SPI admite los formatos SSP/SPI y Microwire; el SPI de HPSYS alcanza 48 MHz y el de LPSYS, 24 MHz. SDMMC1 admite SD 3.0, SDIO 3.0 y eMMC 4.5.1 en modos SDR y DDR; SDMMC2 admite las funciones SD/SDIO/eMMC en modo SDR hasta 48 MHz. I2S admite los modos maestro y esclavo, funcionamiento full-duplex, los formatos left/right/standard y un ancho PCM de hasta 24 bits.
+USB 2.0 FS admite los modos host y dispositivo mediante un PHY integrado. SPI admite los formatos SSP/SPI y Microwire; la SPI de HPSYS alcanza 48 MHz y el de LPSYS, 24 MHz. SDMMC1 admite SD 3.0, SDIO 3.0 y eMMC 4.5.1 en modos SDR y DDR; SDMMC2 admite las funciones SD/SDIO/eMMC en modo SDR hasta 48 MHz. I2S admite los modos maestro y esclavo, funcionamiento full-duplex, los formatos left/right/standard y un ancho PCM de hasta 24 bits.
 
 ### 5.5 Fabricación { #55-manufacturing }
 
 #### 5.5.1 Depuración { #551-debug }
 
-SWDIO en el pin 79 y SWCLK en el pin 80 son pines SWD de depuración y descarga. Mantenga accesible SWD en los primeros prototipos y en los útiles de producción. Exponga también la ruta UART4 predeterminada para descarga y depuración, salvo que el producto disponga de otro método de programación aprobado.
+SWDIO en el pin 79 y SWCLK en el pin 80 son pines SWD de depuración y descarga. Mantenga accesible SWD en los primeros prototipos y en los útiles de producción. Exponga también la ruta UART4 predeterminada para descarga y depuración, salvo que el producto disponga de otro método de grabación aprobado.
 
 #### 5.5.2 Producción { #552-production }
 
 Reserve puntos de acceso de producción para alimentación, masa, modo de arranque, reset/PWRKEY, SWD, descarga UART y las interfaces de calibración o prueba RF de la placa. El software de prueba final debe verificar el arranque, la Flash, la pantalla, el panel táctil, el audio, USB, los sensores, la comunicación RF, la suspensión/reactivación y el consumo de corriente.
 
-## 6. Diseño del PCB { #6-pcb-layout }
+## 6. Diseño de la PCB { #6-pcb-layout }
 
 ### 6.1 Mecánica y huella { #61-mechanical-and-footprint }
 
-El módulo mide 18,0 × 32,9 × 3,1 mm. Utilice la huella de PCB recomendada en la hoja de datos y confirme con el ensamblador del PCB el patrón de pads, la expansión de la máscara de soldadura, las aperturas de pasta, las zonas de exclusión y la zona de ocupación del componente (courtyard).
+El módulo mide 18,0 × 32,9 × 3,1 mm. Utilice la huella de PCB recomendada en la hoja de datos y confirme con el ensamblador de la PCB el patrón de pads, la expansión de la máscara de soldadura, las aperturas de pasta, las zonas de exclusión y la zona de ocupación del componente (courtyard).
 
 !!! info "Figura 6.1-1: Dimensiones del módulo SF32LB56-MOD"
     Consulte la figura 8-1 de DS5602 V0.3.
@@ -275,7 +275,7 @@ El módulo mide 18,0 × 32,9 × 3,1 mm. Utilice la huella de PCB recomendada en 
 
 ### 6.2 Ubicación de la antena { #62-antenna-placement }
 
-Si el producto utiliza la antena integrada en el PCB, mantenga el área de la antena libre de componentes y metal. Siempre que sea posible, coloque el módulo de modo que dicha área sobresalga del borde de la placa portadora y que el punto de alimentación quede cerca del borde.
+Si el producto utiliza la antena integrada en la PCB, mantenga el área de la antena libre de componentes y metal. Siempre que sea posible, coloque el módulo de modo que dicha área sobresalga del borde de la placa portadora y que el punto de alimentación quede cerca del borde.
 
 Si la antena no puede sobresalir del borde de la placa, deje una separación mínima de 15 mm. No coloque cobre, pistas ni componentes en esta zona y, en la medida de lo posible, recorte el material de la placa portadora situado bajo la antena PCB.
 
@@ -294,7 +294,7 @@ Para diseños con antena externa, la hoja de datos describe un conector de prime
 
 ### 6.4 Lista de comprobación del diseño { #64-layout-checklist }
 
-<div align="center"><em>Tabla 6.4-1: Lista de comprobación del diseño del PCB</em></div>
+<div align="center"><em>Tabla 6.4-1: Lista de comprobación del diseño de la PCB</em></div>
 
 <div align="center" markdown>
 
@@ -401,9 +401,9 @@ VDD es la alimentación de E/S. VOH y VOL se miden con una carga de alta impedan
 
 </div>
 
-### 7.3 Lista de comprobación del esquema { #73-schematic-checklist }
+### 7.3 Lista de comprobación del esquemático { #73-schematic-checklist }
 
-<div align="center"><em>Tabla 7.3-1: Lista de comprobación del diseño del esquema</em></div>
+<div align="center"><em>Tabla 7.3-1: Lista de comprobación del diseño del esquemático</em></div>
 
 <div align="center" markdown>
 
@@ -415,7 +415,7 @@ VDD es la alimentación de E/S. VOH y VOL se miden con una carga de alta impedan
 | 4 | El nivel de la interfaz de E/S del módulo es de 3,3 V donde así se especifica; los niveles de los periféricos conectados deben ser compatibles. |
 | 5 | Si el módulo incorpora Flash interna, PA06, PA07, PA08, PA09, PA10 y PA11 no pueden utilizarse externamente. |
 | 6 | SDIO y MPI3 comparten recursos de E/S y no pueden utilizarse simultáneamente. |
-| 7 | PA50, PA51, PB32 y PB35 pueden recibir interrupciones mientras el MCU está en suspensión. |
+| 7 | PA50, PA51, PB32 y PB35 pueden recibir interrupciones mientras la MCU está en suspensión. |
 | 8 | PB32 admite el reinicio al mantener el nivel alto durante 10 s; añada un pulldown de 10 kΩ. |
 | 9 | Los pines marcados GPADC_CHx admiten entrada analógica de 0–3,3 V. |
 | 10 | Los pines marcados GPTIM admiten salida PWM. |
@@ -467,7 +467,7 @@ VDD es la alimentación de E/S. VOH y VOL se miden con una carga de alta impedan
 
 ### 9.1. Apéndice A. Referencia para la planificación de pines { #appendix-a-pin-planning-reference }
 
-DS5602 V0.3 incluye la tabla completa de definición de los 89 pines y el pinout visto desde arriba. La tabla siguiente destaca los pines y grupos de señales que suelen afectar al riesgo del esquema, al acceso de arranque/depuración o a la planificación de recursos compartidos.
+DS5602 V0.3 incluye la tabla completa de definición de los 89 pines y la distribución de pines vista desde arriba. La tabla siguiente destaca los pines y grupos de señales que suelen afectar al riesgo del esquemático, al acceso de arranque/depuración o a la planificación de recursos compartidos.
 
 <div align="center"><em>Tabla 9.1-1: Pines y grupos de señales críticos</em></div>
 
@@ -475,8 +475,8 @@ DS5602 V0.3 incluye la tabla completa de definición de los 89 pines y el pinout
 
 | Pin / grupo | Función / restricción |
 | :--- | :--- |
-| Pin 6 PB17 | UART4_TXD, TX de la UART predeterminada para salida de consola, descarga y depuración. |
-| Pin 7 PB16 | UART4_RXD, RX de la UART predeterminada para salida de consola, descarga y depuración. |
+| Pin 6 PB17 | UART4_TXD, TX del UART predeterminada para salida de consola, descarga y depuración. |
+| Pin 7 PB16 | UART4_RXD, RX del UART predeterminada para salida de consola, descarga y depuración. |
 | Pin 25 BOOT_MODE | Alto: modo de descarga; bajo: modo de usuario. |
 | Pin 26 VDD_3V3 | Raíl de 3,3 V, rango de funcionamiento de 2,97–3,6 V. |
 | Pin 27 VDD_1V8 | Raíl de 1,8 V, rango de funcionamiento de 1,7–1,95 V. |

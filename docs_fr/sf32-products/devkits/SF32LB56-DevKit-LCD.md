@@ -9,9 +9,9 @@ tags:
 
 # SF32LB56-DevKit-LCD { #sf32lb56-devkit-lcd }
 
-SF32LB56-DevKit-LCD est une carte de développement orientée affichage, disponible avec le module SF32LB56-MOD-N16R12N1 ou SF32LB56-MOD-A128R12N1, tous deux fondés sur un composant de la série SF32LB56xV. Utilisez-la pour évaluer les interfaces d'affichage, l'audio, le stockage amovible et les pilotes de périphériques avant de concevoir votre propre carte SF32LB56x.
+SF32LB56-DevKit-LCD est une carte de développement axée sur l'affichage, proposée avec le module SF32LB56-MOD-N16R12N1 ou SF32LB56-MOD-A128R12N1, tous deux basés sur un composant de la série SF32LB56xV. Elle permet d'évaluer les interfaces d'affichage, l'audio, le stockage amovible et les pilotes de périphériques avant de concevoir une carte SF32LB56x personnalisée.
 
-## Pour quels usages elle convient le mieux { #what-it-is-best-for }
+## Usages principaux { #what-it-is-best-for }
 
 - Applications d'affichage utilisant les interfaces MIPI-DPI (RVB), SPI, DSPI, QSPI ou MCU 8 bits/8080.
 - Intégration d'un écran tactile via I2C.
@@ -27,8 +27,8 @@ SF32LB56-DevKit-LCD est une carte de développement orientée affichage, disponi
 
 | Ressource | Réalisation sur la carte | Usage pratique |
 |:----------|:-------------------------|:---------------|
-| Configuration N16R12N1 | SF32LB56-DevKit-LCD-N16R12N1 / SF32LB56-MOD-N16R12N1 | 16 Mo de QSPI-NOR, 4 Mo + 8 Mo de PSRAM OPI et 1 Mo de QSPI-NOR ; évaluation modulaire et planification de la carte porteuse. |
-| Configuration A128R12N1 | SF32LB56-DevKit-LCD-A128R12N1 / SF32LB56-MOD-A128R12N1 | 128 Mo de QSPI-NAND, 4 Mo + 8 Mo de PSRAM OPI et 1 Mo de QSPI-NOR ; évaluation modulaire et planification de la carte porteuse. |
+| Configuration N16R12N1 | SF32LB56-DevKit-LCD-N16R12N1 / SF32LB56-MOD-N16R12N1 | 16 MB de QSPI-NOR, 4 MB + 8 MB de PSRAM OPI et 1 MB de QSPI-NOR ; évaluation modulaire et planification de la carte porteuse. |
+| Configuration A128R12N1 | SF32LB56-DevKit-LCD-A128R12N1 / SF32LB56-MOD-A128R12N1 | 128 MB de QSPI-NAND, 4 MB + 8 MB de PSRAM OPI et 1 MB de QSPI-NOR ; évaluation modulaire et planification de la carte porteuse. |
 | Dimensions et température | 65 mm × 38 mm ; -40 °C à 85 °C selon le guide des modèles | Planification mécanique et environnementale. |
 | Affichage | MIPI-DPI RVB 24 bits via un connecteur FPC 40 broches au pas de 0,5 mm avec le brochage ALIENTEK ; signaux SPI/DSPI/QSPI et MCU 8 bits/8080 sur l'embase 40 broches (2 × 20) | Mise en service des dalles et développement de pilotes d'affichage. |
 | Tactile | Prise en charge d'un écran tactile I2C | Prototypes d'affichages interactifs. |
@@ -42,7 +42,7 @@ SF32LB56-DevKit-LCD est une carte de développement orientée affichage, disponi
 
 </div>
 
-**Remarque sur les sources — confirmer la révision de la carte :** le guide détaillé de la carte publié par SiFli indique que la carte documentée porte le module `SF32LB56-MOD-A128R12N1`, avec 4 Mo + 8 Mo de PSRAM OPI co-intégrée et 1 Gbit de QSPI-NAND ; il prévient que ces caractéristiques mémoire peuvent changer avant la publication officielle. Le guide des modèles actuel répertorie N16R12N1 et A128R12N1, chacun avec 4 + 8 Mo de PSRAM OPI et 1 Mo de QSPI-NOR standard. Pour A128R12N1, les 128 Mo de QSPI-NAND du guide des modèles équivalent en capacité au 1 Gbit du guide détaillé. Ces capacités concordent donc pour A128R12N1 ; toutefois, le guide détaillé ne mentionne pas le NOR standard de 1 Mo et n'établit pas quelle référence est montée sur chaque carte ou révision. Le guide des modèles prévoit deux canaux de débogage USB-UART sur le CH343K, tandis que le guide détaillé décrit les rôles des connecteurs Type-C comme USB-UART et USB 2.0 FS sans documenter l'affectation des canaux aux connecteurs. Consultez le schéma et la nomenclature correspondants avant de vous appuyer sur un canal UART particulier. Confirmez le marquage du module et le schéma/la nomenclature correspondants avant d'utiliser un exemplaire précis comme base de produit.
+**Remarque sur les sources — confirmer la révision de la carte :** le guide détaillé de la carte publié par SiFli indique que la carte documentée porte le module `SF32LB56-MOD-A128R12N1`, avec 4 MB + 8 MB de PSRAM OPI co-intégrée et 1 Gbit de QSPI-NAND ; il prévient que ces caractéristiques mémoire peuvent changer avant la publication officielle. Le guide des modèles actuel répertorie N16R12N1 et A128R12N1, chacun avec 4 + 8 MB de PSRAM OPI et 1 MB de QSPI-NOR standard. Pour A128R12N1, les 128 MB de QSPI-NAND du guide des modèles équivalent en capacité au 1 Gbit du guide détaillé. Ces capacités concordent donc pour A128R12N1 ; toutefois, le guide détaillé ne mentionne pas le NOR standard de 1 MB et n'établit pas quelle référence est montée sur chaque carte ou révision. Le guide des modèles prévoit deux canaux de débogage USB-UART sur le CH343K, tandis que le guide détaillé décrit les rôles des connecteurs Type-C comme USB-UART et USB 2.0 FS sans documenter l'affectation des canaux aux connecteurs. Consultez le schéma et la nomenclature correspondants avant de vous appuyer sur un canal UART particulier. Confirmez le marquage du module et le schéma/la nomenclature correspondants avant d'utiliser un exemplaire précis comme base de produit.
 
 **Divergence sur le pont USB-UART — vérifier le composant monté :** le schéma fonctionnel du guide détaillé de la carte désigne le pont comme CH342K, alors que le guide des modèles l'identifie comme CH343K. Vérifiez le composant réel dans le schéma et la nomenclature de la révision de votre carte.
 
@@ -50,7 +50,7 @@ SF32LB56-DevKit-LCD est une carte de développement orientée affichage, disponi
 
 ## Programmation et débogage { #programming-and-debug }
 
-Pour le mode de téléchargement, installez le cavalier Mode avant de mettre la carte sous tension ou de la réinitialiser ; retirez-le pour le démarrage normal de l'application et le fonctionnement avec journal série. Reliez l'hôte au port Type-C USB-UART avec un câble compatible données. Le port Type-C USB 2.0 FS distinct est disponible pour les tests USB natifs. La carte fournit aussi une embase SWD 4 broches à une rangée, au pas de 2,54 mm, pour un débogueur compatible. Les deux connecteurs Type-C peuvent alimenter la carte ; reportez-vous au guide de la carte et au schéma pour l'alimentation prévue.
+Pour le mode de téléchargement, installez le cavalier Mode avant de mettre la carte sous tension ou de la réinitialiser ; retirez-le pour le démarrage normal de l'application et le fonctionnement avec journal série. Reliez l'hôte au port Type-C USB-UART avec un câble permettant le transfert de données. Le port Type-C USB 2.0 FS distinct est disponible pour les tests USB natifs. La carte fournit aussi une embase SWD 4 broches à une rangée, au pas de 2,54 mm, pour un débogueur compatible. Les deux connecteurs Type-C peuvent alimenter la carte ; reportez-vous au guide de la carte et au schéma pour l'alimentation prévue.
 
 ## Cibles de compilation du SDK { #sdk-build-targets }
 
@@ -63,7 +63,7 @@ Ce sont des identifiants de cibles de compilation du SDK, pas nécessairement le
 
 ## Premier parcours de validation { #first-validation-path }
 
-1. Connectez un écran MIPI-DPI 24 bits compatible au connecteur FPC 40 broches et utilisez le port USB-UART avec un câble USB compatible données.
+1. Connectez un écran MIPI-DPI 24 bits compatible au connecteur FPC 40 broches et utilisez le port USB-UART avec un câble USB permettant le transfert de données.
 2. Suivez [Démarrage](../../getting-started/index.md) pour établir une base de référence fiable de compilation, de flashage et de journal série.
 3. Mettez en service des motifs d'affichage unis avant de déboguer un framework d'interface ; voir [Vue d'ensemble des graphiques](../../learn/graphics/overview.md).
 4. Ajoutez le tactile, le stockage, l'audio ou le sans-fil un sous-système à la fois, puis testez la coexistence et le comportement énergétique.

@@ -1,6 +1,6 @@
 ---
 icon: lucide/code
-description: "Primeira avaliação do sifli-rs da OpenSiFli no SF32LB52: instale os targets Rust, compile o exemplo Blinky sem modificações, configure o sftool e mantenha um caminho de recuperação pelo SDK."
+description: "Primeira avaliação do sifli-rs da OpenSiFli no SF32LB52: instale os alvos de compilação do Rust, compile o exemplo Blinky sem modificações, configure o sftool e mantenha um caminho de recuperação pelo SDK."
 tags:
     - Primeiros passos
     - Rust
@@ -16,15 +16,15 @@ Antes de começar, conclua o guia [Primeiros passos com o SiFli-SDK](../sifli/ge
 
 - Uma SF32LB52 DevKit LCD e um cabo de dados USB Type-C conectado à porta USB-to-UART da placa.
 - Conhecimentos básicos de Rust, desenvolvimento embarcado e linha de comando.
-- `git` e uma toolchain Rust atual instalada com [rustup](https://rustup.rs/).
+- `git` e uma cadeia de ferramentas Rust atual instalada com [rustup](https://rustup.rs/).
 - O [guia Get Started do sifli-rs](https://github.com/OpenSiFli/sifli-rs/blob/main/docs/get_started.md) e o [guia Flash and Debug](https://github.com/OpenSiFli/sifli-rs/blob/main/docs/flash_and_debug.md) mais recentes.
 
-!!! warning "Etapa de avaliação"
-    Não use este guia como prova de que um chip, periférico, configuração de placa ou stack de aplicação está pronto para produção. Antes de investir em uma adaptação, confira no repositório o status de suporte do target e do periférico específicos.
+!!! warning "Caminho de exploração"
+    Não use este guia como evidência de prontidão para produção de um chip, periférico, configuração de placa ou pilha de aplicação. Antes de investir em uma adaptação, confira no repositório o status de suporte do alvo e do periférico específicos.
 
-## Prepare o target Rust { #prepare-the-rust-target }
+## Prepare o alvo de compilação do Rust { #prepare-the-rust-target }
 
-O guia do repositório usa targets Rust Arm Cortex-M. Instale os targets indicados:
+O guia do repositório usa alvos de compilação Rust para Arm Cortex-M. Instale os alvos indicados:
 
 ```bash
 rustup target add thumbv8m.main-none-eabi
@@ -38,11 +38,11 @@ git clone https://github.com/OpenSiFli/sifli-rs.git
 cd sifli-rs/examples/sf32lb52x
 ```
 
-O diretório de exemplos contém a configuração de target do Cargo, o mapa de memória, o script de build e os binários de exemplo. Não copie esses arquivos sem alterações para um produto: eles incorporam premissas sobre a placa e a flash que precisam ser verificadas para o hardware de destino.
+O diretório de exemplos contém a configuração do alvo no Cargo, o mapa de memória, o script de compilação e os binários de exemplo. Não copie esses arquivos sem alterações para um produto: eles incorporam premissas sobre a placa e a flash que precisam ser verificadas para o hardware de destino.
 
-## Configure o runner de gravação { #configure-the-flash-runner }
+## Configure a ferramenta de gravação { #configure-the-flash-runner }
 
-O repositório documenta o `sftool` como o runner de gravação habitual. Em `examples/sf32lb52x/.cargo/config.toml`, configure-o para usar a porta USB-to-UART da placa, seguindo o guia Flash and Debug atualizado. O padrão documentado é:
+O repositório documenta o `sftool` como a ferramenta habitual de gravação. Em `examples/sf32lb52x/.cargo/config.toml`, configure-o para usar a porta USB-to-UART da placa, seguindo a versão atualizada do guia Flash and Debug. O comando documentado é:
 
 ```toml
 runner = 'sftool -c SF32LB52 -p <Your_Port> --compat write_flash'
@@ -62,7 +62,7 @@ Considere a compilação bem-sucedida apenas a primeira verificação. Confirme 
 
 ## Se o exemplo de referência falhar { #if-the-baseline-fails }
 
-Primeiro, confirme que a configuração de referência do SiFli-SDK ainda funciona na placa. Depois, registre o target Rust, o commit, o exemplo selecionado, a configuração do Cargo, o comando e a saída do `sftool`, a revisão da placa e o log serial ou de depuração. O guia upstream informa que a depuração pode ficar instável no comportamento de idle/WFI e que a tabela de flash precisa comportar a imagem da aplicação.
+Primeiro, confirme que a configuração de referência do SiFli-SDK ainda funciona na placa. Depois, registre o alvo de compilação do Rust, o commit, o exemplo selecionado, a configuração do Cargo, o comando e a saída do `sftool`, a revisão da placa e o log serial ou de depuração. O guia upstream informa que a depuração pode ficar instável durante o comportamento idle/WFI e que a tabela de flash precisa comportar a imagem da aplicação.
 
 Para decisões sobre arquitetura, escopo de suporte e adequação ao produto, consulte [Rust em Develop](../../develop/platforms/rust/overview.md).
 

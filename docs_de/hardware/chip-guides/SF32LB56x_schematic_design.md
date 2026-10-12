@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "Schaltplan-Design-Richtlinien für den SF32LB56x-MCU: Stromversorgungssystem, Betriebsmodi und Weckquellen, Takterzeugung, HF, Display-/Touch-/Hintergrundbeleuchtungs-Schnittstellen, Speicher/Sensoren/Audio/Konnektivität sowie Fertigung."
+description: "Schaltplanrichtlinien für den SF32LB56x-MCU: Stromversorgungssystem, Betriebsmodi und Weckquellen, Takterzeugung, RF, Display-/Touch-/Hintergrundbeleuchtungs-Schnittstellen, Speicher/Sensoren/Audio/Konnektivität sowie Fertigung."
 tags:
     - Hardware
     - Chip
@@ -13,17 +13,17 @@ hide:
 !!! note "Teil des SF32LB56x Hardware-Design-Leitfadens"
     Diese Seite behandelt Abschnitt 5, die Schaltplanrichtlinien. Beginnen Sie mit der [Übersicht zum SF32LB56x Hardware-Design-Leitfaden](SF32LB56x_hardware_design_guide.md), um das Gerät auszuwählen und den vollständigen Designablauf kennenzulernen. Fahren Sie dann mit der [Schaltplan-Checkliste](SF32LB56x_schematic_checklist.md) fort oder springen Sie direkt zu den [PCB-Layout-Richtlinien](SF32LB56x_pcb_layout.md).
 
-## 5. Schaltplan-Design-Richtlinien { #5-schematic-design-guidelines }
+## 5. Schaltplanrichtlinien { #5-schematic-design-guidelines }
 
 ### 5.1. Stromversorgungssystem { #51-power-system }
 
-Versorgungsschienen des Prozessors, erforderliche lokale Kondensatoren, Zuordnung der PMIC-Ausgänge, Reset-Zeitverhalten und Anschlüsse der Ladeschaltung gemeinsam prüfen. Bei den U- und V-Varianten ist das Vorgehen für das Stromversorgungsdesign gleich, die Versorgungspin-Bezeichnungen und die Lastzuweisung unterscheiden sich jedoch.
+Prüfen Sie die Versorgungsschienen des Prozessors, die erforderlichen lokalen Kondensatoren, die Zuordnung der PMIC-Ausgänge, das Reset-Zeitverhalten und die Anschlüsse der Ladeschaltung gemeinsam. Bei den U- und V-Varianten ist das Vorgehen für das Stromversorgungsdesign gleich; die Bezeichnungen der Versorgungspins und die Lastzuweisung unterscheiden sich jedoch.
 
-<div align="center"><em>Tabelle 5.1-1: SF32LB56xU Prozessor-Spannungsschienen</em></div>
+<div align="center"><em>Tabelle 5.1-1: Spannungsschienen des SF32LB56xU-Prozessors</em></div>
 
 <div align="center" markdown>
 
-| PMU-Stromversorgungspin | Minimalspannung (V) | Typische Spannung (V) | Maximalspannung (V) | Maximalstrom (mA) | Detaillierte Beschreibung |
+| PMU-Versorgungspin | Mindestspannung (V) | Typische Spannung (V) | Maximalspannung (V) | Maximalstrom (mA) | Detaillierte Beschreibung |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | PVDD | 1,7 | 1,8 | 3,6 | 100 | PVDD-Stromversorgungseingang |
 | BUCK_LX BUCK_FB | - | 1,25 | - | 100 | BUCK_LX-Ausgang, mit der Induktivität verbunden; interner Stromversorgungseingang, verbunden mit dem anderen Ende der Induktivität und einem externen Kondensator |
@@ -34,20 +34,20 @@ Versorgungsschienen des Prozessors, erforderliche lokale Kondensatoren, Zuordnun
 | MIC_BIAS | 1,4 | - | 2,8 | - | Mikrofon-Stromversorgungsausgang |
 | AVDD33_ANA | 3,15 | 3,3 | 3,45 | 50 | Analoger Stromversorgungseingang + RFPA-Stromversorgungseingang |
 | AVDD33_AUD | 3,15 | 3,3 | 3,45 | 50 | Analoge Audio-Stromversorgung |
-| VDDIO1 | 1,71 | 1,8 | 1,98 | - | Stromversorgungseingang für den intern gehäusten Speicherbaustein des Big-Cores |
+| VDDIO1 | 1,71 | 1,8 | 1,98 | - | Versorgungseingang für den im Gehäuse integrierten Speicherbaustein des Big-Cores |
 | VDDIO2 | 1,71 | 1,8 | 3,45 | - | Stromversorgungseingang für PA-GPIO (außer PA5~11) |
 | VDDIO3 | 1,71 | 1,8 | 3,45 | - | Stromversorgungseingang für PA5~11 |
-| VDDIO4 | 1,71 | 1,8 | 3,45 | - | Stromversorgungseingang für PB-GPIO und intern gehäustes Flash des Small-Cores |
+| VDDIO4 | 1,71 | 1,8 | 3,45 | - | Versorgungseingang für PB-GPIOs und den im Gehäuse integrierten Flashspeicher des Small-Cores |
 | GPADC_VREF | - | - | - | - | GPADC-Referenzspannungseingang; nur ein externer Kondensator wird angeschlossen, keine externe Stromversorgung erforderlich |
 | AUD_VREF | - | - | - | - | Audio-Referenzspannungseingang; nur ein externer Kondensator wird angeschlossen, keine externe Stromversorgung erforderlich |
 
 </div>
 
-<div align="center"><em>Tabelle 5.1-2: SF32LB56xV Prozessor-Spannungsschienen</em></div>
+<div align="center"><em>Tabelle 5.1-2: Spannungsschienen des SF32LB56xV-Prozessors</em></div>
 
 <div align="center" markdown>
 
-| PMU-Stromversorgungspin | Minimalspannung (V) | Typische Spannung (V) | Maximalspannung (V) | Maximalstrom (mA) | Detaillierte Beschreibung |
+| PMU-Versorgungspin | Mindestspannung (V) | Typische Spannung (V) | Maximalspannung (V) | Maximalstrom (mA) | Detaillierte Beschreibung |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | PVDD | 1,71 | 1,8 | 3,6 | 100 | PVDD-Stromversorgungseingang |
 | BUCK_LX BUCK_FB | - | 1,25 | - | 100 | BUCK_LX-Ausgang, mit der Induktivität verbunden; interner Stromversorgungseingang, verbunden mit dem anderen Ende der Induktivität und einem externen Kondensator |
@@ -56,7 +56,7 @@ Versorgungsschienen des Prozessors, erforderliche lokale Kondensatoren, Zuordnun
 | VDD_RET | - | 0,9 | - | 1 | RET-LDO-Ausgang, mit externem Kondensator verbunden |
 | VDD_RTC | - | 1,1 | - | 1 | RTC-LDO-Ausgang, mit externem Kondensator verbunden |
 | MIC_BIAS | 1,4 | - | 2,8 | - | Mikrofon-Stromversorgungsausgang |
-| AVDD_BRF | 1,71 | 1,8 | 3,3 | 1 | HF-Stromversorgungseingang |
+| AVDD_BRF | 1,71 | 1,8 | 3,3 | 1 | RF-Stromversorgungseingang |
 | AVDD33_ANA | 3,15 | 3,3 | 3,45 | 50 | Analoger Stromversorgungseingang + RFPA-Stromversorgungseingang |
 | AVDD33_AUD | 3,15 | 3,3 | 3,45 | 50 | Analoge Audio-Stromversorgung |
 | VDDIOA | 1,71 | 1,8 | 3,45 | - | PA12-PA78-I/O-Stromversorgungseingang |
@@ -70,11 +70,11 @@ Versorgungsschienen des Prozessors, erforderliche lokale Kondensatoren, Zuordnun
 
 </div>
 
-<div align="center"><em>Tabelle 5.1-3: SF32LB56xU Erforderliche Stromversorgungskondensatoren</em></div>
+<div align="center"><em>Tabelle 5.1-3: Erforderliche Versorgungskondensatoren des SF32LB56xU</em></div>
 
 <div align="center" markdown>
 
-| Stromversorgungspin | Kondensator | Detaillierte Beschreibung |
+| Versorgungspin | Kondensator | Detaillierte Beschreibung |
 | :--- | :--- | :--- |
 | PVDD | 0,1 µF + 10 µF | Mindestens zwei Kondensatoren, 10 µF und 0,1 µF, nahe am Pin platzieren. |
 | BUCK_LX BUCK_FB | 0,1 µF + 4,7 µF | Mindestens zwei Kondensatoren, 4,7 µF und 0,1 µF, nahe am Pin platzieren. |
@@ -94,11 +94,11 @@ Versorgungsschienen des Prozessors, erforderliche lokale Kondensatoren, Zuordnun
 
 </div>
 
-<div align="center"><em>Tabelle 5.1-4: SF32LB56xV Erforderliche Stromversorgungskondensatoren</em></div>
+<div align="center"><em>Tabelle 5.1-4: Erforderliche Versorgungskondensatoren des SF32LB56xV</em></div>
 
 <div align="center" markdown>
 
-| Stromversorgungspin | Kondensator | Detaillierte Beschreibung |
+| Versorgungspin | Kondensator | Detaillierte Beschreibung |
 | :--- | :--- | :--- |
 | PVDD | 0,1 µF + 10 µF | Mindestens zwei Kondensatoren, 10 µF und 0,1 µF, nahe am Pin platzieren. |
 | BUCK_LX BUCK_FB | 0,1 µF + 4,7 µF | Mindestens zwei Kondensatoren, 4,7 µF und 0,1 µF, nahe am Pin platzieren. |
@@ -125,7 +125,7 @@ Versorgungsschienen des Prozessors, erforderliche lokale Kondensatoren, Zuordnun
 
 <div align="center" markdown>
 
-| SF30147C-Stromversorgungspin | Minimalspannung (V) | Maximalspannung (V) | Maximalstrom (mA) | Detaillierte Beschreibung |
+| SF30147C-Versorgungspin | Mindestspannung (V) | Maximalspannung (V) | Maximalstrom (mA) | Detaillierte Beschreibung |
 | :--- | :--- | :--- | :--- | :--- |
 | VBUCK | 1,8 | 1,8 | 500 | 1,8-V-Ausgang; die Zuordnung zu Versorgungspins der U-Variante darf nicht aus dieser Zeile abgeleitet werden |
 | LVSW1 | 1,8 | 1,8 | 100 | 1,8-V-Stromversorgungsausgang |
@@ -145,11 +145,11 @@ Versorgungsschienen des Prozessors, erforderliche lokale Kondensatoren, Zuordnun
 !!! warning "PMIC-Versorgungsschienen der U-Variante prüfen"
     In SiFlis ursprünglicher Stromverteilungstabelle für die U-Variante stehen VDDIOA, VDDIOA2, VDDIOB, VDDIOSA/B/C und AVDD_BRF. Diese Bezeichnungen stimmen nicht mit der Prozessorspannungstabelle der U-Variante im selben Leitfaden überein. Die obige Tabelle enthält daher nur die Spannungs- und Stromgrenzwerte der PMIC-Ausgänge. Leiten Sie daraus keine Zuordnung zu den Chip-Versorgungspins der U-Variante ab; prüfen Sie die tatsächliche Verbindung vor der Layoutfreigabe anhand der passenden Schaltplanrevision und des SF30147C-Datenblatts.
 
-<div align="center"><em>Tabelle 5.1-6: SF30147C-PMIC-Stromverteilungsbeispiel für V</em></div>
+<div align="center"><em>Tabelle 5.1-6: Beispiel für die SF30147C-PMIC-Stromverteilung bei der V-Variante</em></div>
 
 <div align="center" markdown>
 
-| SF30147C-Stromversorgungspin | Minimalspannung (V) | Maximalspannung (V) | Maximalstrom (mA) | Detaillierte Beschreibung |
+| SF30147C-Versorgungspin | Mindestspannung (V) | Maximalspannung (V) | Maximalstrom (mA) | Detaillierte Beschreibung |
 | :--- | :--- | :--- | :--- | :--- |
 | VBUCK | 1,8 | 1,8 | 500 | 1,8-V-Stromversorgungseingang für SF32LB56xV PVDD, VDDIOA, VDDIOA2, VDDIOB, VDDIOSA, VDDIOSB, VDDIOSC, AVDD_BRF usw. |
 | LVSW1 | 1,8 | 1,8 | 100 | Logik-Stromversorgungseingang für I2S-Class-K-PA |
@@ -282,24 +282,24 @@ Entscheidungen zu Betriebsmodus, Weckquelle, Versorgung der Pull-up-Widerstände
 
 </div>
 
-BOOT_MODE legt das Startverhalten fest: High aktiviert den Downloadmodus. Bei Low sucht die ROM nach einem Benutzerprogramm, startet es gegebenenfalls und wechselt andernfalls in den Downloadmodus. Der Mode-Pin der U-Variante hat einen internen Pull-down, darf unbeschaltet bleiben, wenn er nicht verwendet wird, und gehört zur VDDIO2-Domäne. Der Mode-Pin der V-Variante gehört zu VDDIOA und sollte mit einem 10-kΩ-Pull-up oder -Pull-down stabil gehalten werden; nicht offen lassen und nicht durch Störungen umschalten lassen. Für Produktionsboards einen Mode-Testpunkt vorsehen; auf Entwicklungsboards ist ein Jumper für die Wiederherstellung hilfreich.
+BOOT_MODE legt das Startverhalten fest: High aktiviert den Download-Modus. Bei Low sucht die ROM nach einem Benutzerprogramm, startet es gegebenenfalls und wechselt andernfalls in den Download-Modus. Der Mode-Pin der U-Variante hat einen internen Pull-down, darf unbeschaltet bleiben, wenn er nicht verwendet wird, und gehört zur VDDIO2-Domäne. Der Mode-Pin der V-Variante gehört zu VDDIOA und sollte mit einem 10-kΩ-Pull-up oder -Pull-down stabil gehalten werden. Lassen Sie ihn nicht offen und verhindern Sie ein unbeabsichtigtes Umschalten durch Störungen. Sehen Sie für Produktionsboards einen Mode-Testpunkt vor; auf Entwicklungsboards ist ein Jumper zur Wiederherstellung hilfreich.
 
-Berücksichtigen Sie die Speicher-I/O-Versorgung bei stromsparenden Abschaltungen. Im Standby der U-Variante bleiben GPIO-Pegel erhalten und VDDIO1 kann eingeschaltet bleiben; versetzen Sie an MPI1/MPI2 angeschlossene Speicher in den Niedrigenergiemodus. Im Hibernate bleiben GPIO-Pegel nicht erhalten. Schalten Sie daher VDDIO1 ab, um Leckstrom über die I/O des integrierten Speichers zu verhindern. Halten Sie bei der V-Variante die I/O des integrierten Speichers im Standby versorgt. Schalten Sie vor Hibernate VDDIOSA und VDDIOSB über PBR0 ab und versetzen Sie den NOR-Flash in Deep Power-Down. VDDIOSC muss weiterhin versorgt werden.
+Berücksichtigen Sie die Speicher-I/O-Versorgung bei stromsparenden Abschaltungen. Im Standby der U-Variante bleiben GPIO-Pegel erhalten und VDDIO1 kann eingeschaltet bleiben; versetzen Sie an MPI1/MPI2 angeschlossene Speicher in den Energiesparmodus. Im Hibernate bleiben GPIO-Pegel nicht erhalten. Schalten Sie daher VDDIO1 ab, um Leckstrom über die I/O des integrierten Speichers zu verhindern. Halten Sie bei der V-Variante die I/O des integrierten Speichers im Standby versorgt. Schalten Sie vor Hibernate VDDIOSA und VDDIOSB über PBR0 ab und versetzen Sie den NOR-Flash in Deep Power-Down. VDDIOSC muss weiterhin versorgt werden.
 
 ### 5.3. Takterzeugung { #53-clock-generation }
 
-<div align="center"><em>Tabelle 5.3-1: Kristallanforderungen</em></div>
+<div align="center"><em>Tabelle 5.3-1: Quarzanforderungen</em></div>
 
 <div align="center" markdown>
 
-| Kristall | Anforderungen an die Kristallspezifikation | Detaillierte Beschreibung |
+| Quarz | Spezifikationsanforderungen | Detaillierte Beschreibung |
 | :--- | :--- | :--- |
 | 48 MHz | 7 pF ≤ CL ≤ 12 pF (empfohlener Wert: 8,8 pF); △F/F0 ≤ ±10 ppm; ESR ≤ 30 Ω (empfohlener Wert: 22 Ω) | Die Leistungsaufnahme des Quarzoszillators hängt von CL und ESR ab. Je kleiner CL und ESR, desto geringer die Leistungsaufnahme. Wählen Sie innerhalb des vorgegebenen Bereichs Bauteile mit möglichst kleinen CL- und ESR-Werten. Sehen Sie neben dem Quarz Platz für parallel geschaltete Anpassungskondensatoren vor. Bei CL < 12 pF müssen keine Kondensatoren bestückt werden. |
 | 32,768 kHz | CL ≤ 12,5 pF (empfohlener Wert: 7 pF); △F/F0 ≤ ±20 ppm; ESR ≤ 80 kΩ (empfohlener Wert: 38 kΩ) | Die Leistungsaufnahme des Quarzes hängt von CL und ESR ab. Je kleiner CL und ESR, desto geringer die Leistungsaufnahme. Wählen Sie innerhalb des vorgegebenen Bereichs Bauteile mit möglichst kleinen CL- und ESR-Werten. Sehen Sie neben dem Quarz Platz für parallel geschaltete Anpassungskondensatoren vor. Bei CL < 12,5 pF muss kein Kondensator bestückt werden. |
 
 </div>
 
-<div align="center"><em>Tabelle 5.3-2: Empfohlene Kristallmodelle</em></div>
+<div align="center"><em>Tabelle 5.3-2: Empfohlene Quarzmodelle</em></div>
 
 <div align="center" markdown>
 
@@ -312,13 +312,13 @@ Berücksichtigen Sie die Speicher-I/O-Versorgung bei stromsparenden Abschaltunge
 
 </div>
 
-Die 48-MHz- und 32,768-kHz-Quarze nahe am Chip platzieren, Footprints für Anpassungskondensatoren vorsehen und die Quarz-Leiterbahnen vor Störungen durch BUCK, HF, Display, Motor und Ladeschaltung schützen.
+Platzieren Sie die 48-MHz- und 32,768-kHz-Quarze nahe am Chip, sehen Sie Footprints für Anpassungskondensatoren vor und schützen Sie die Quarz-Leiterbahnen vor Störungen durch BUCK, RF, Display, Motor und Ladeschaltung.
 
-### 5.4. HF { #54-rf }
+### 5.4. RF { #54-rf }
 
-Bei SF32LB56xU- und SF32LB56xV-Designs den HF-Pfad als Leiterbahn mit kontrolliertem Wellenwiderstand von 50 Ω auslegen. Ist die gewählte Antenne bereits angepasst, sind normalerweise keine zusätzlichen HF-Bauteile erforderlich. Dennoch sollte ein π-Anpassungsnetzwerk zur Unterdrückung unerwünschter Aussendungen und für den abschließenden Antennenabgleich vorgesehen werden.
+Bei SF32LB56xU- und SF32LB56xV-Designs den RF-Pfad als Leiterbahn mit kontrolliertem Wellenwiderstand von 50 Ω auslegen. Ist die gewählte Antenne bereits angepasst, sind normalerweise keine zusätzlichen RF-Bauteile erforderlich. Dennoch sollte ein π-Anpassungsnetzwerk zur Unterdrückung unerwünschter Aussendungen und für den abschließenden Antennenabgleich vorgesehen werden.
 
-Das HF-Anpassungsnetzwerk nahe am Chip und nicht an der Antenne platzieren. Die AVDD_BRF-Filterung nahe am Chip-Pin halten und die Kondensatormassen direkt mit der Hauptmasse verbinden. HF nach Möglichkeit auf der Außenlage routen, Durchkontaktierungen und scharfe Ecken vermeiden, entlang beider Seiten der HF-Leiterbahn dichte Masse-Durchkontaktierungen vorsehen und DC-DC-, VBAT-, Quarz-, Hochgeschwindigkeitstakt-, I2C-, SPI-, SDIO-, I2S- und UART-Signale vom HF-Bereich fernhalten.
+Das RF-Anpassungsnetzwerk nahe am Chip und nicht an der Antenne platzieren. Die AVDD_BRF-Filterung nahe am Chip-Pin halten und die Kondensatormassen direkt mit der Hauptmasse verbinden. RF nach Möglichkeit auf der Außenlage routen, Durchkontaktierungen und scharfe Ecken vermeiden, entlang beider Seiten der RF-Leiterbahn dichte Masse-Durchkontaktierungen vorsehen und DC-DC-, VBAT-, Quarz-, Hochgeschwindigkeitstakt-, I2C-, SPI-, SDIO-, I2S- und UART-Signale vom RF-Bereich fernhalten.
 
 ### 5.5. Display-, Touch- und Hintergrundbeleuchtungs-Schnittstellen { #55-display-touch-and-backlight-interfaces }
 
@@ -354,7 +354,7 @@ Die Auswahl der Display-Schnittstelle hängt vom Gehäuse ab. Für die U-Variant
 | D0 | PA40 | PA40 | Daten 2 im Quad-SPI-Modus |
 | D1 | PA41 | PA41 | Daten 3 im Quad-SPI-Modus |
 | REST | PA05 | PB04 | Reset-Signal für das Display-Panel |
-| TE | PA33 | PA33 | Tearing-Effect-Signal zur Bildsynchronisierung am MCU |
+| TE | PA33 | PA33 | Tearing-Effect-Signal zur Synchronisierung mit dem MCU-Frame |
 
 </div>
 
@@ -400,7 +400,7 @@ Die Auswahl der Display-Schnittstelle hängt vom Gehäuse ab. Für die U-Variant
 | D[0] | PA40 | Daten 2 im Quad-SPI-Modus |
 | D[1] | PA41 | Daten 3 im Quad-SPI-Modus |
 | REST | PA43 | Reset-Signal für das Display |
-| TE | PA33 | Tearing-Effect-Signal zur Bildsynchronisierung am MCU |
+| TE | PA33 | Tearing-Effect-Signal zur Synchronisierung mit dem MCU-Frame |
 
 </div>
 
@@ -413,7 +413,7 @@ Die Auswahl der Display-Schnittstelle hängt vom Gehäuse ab. Für die U-Variant
 | CSX | PA36 | Chip-Select |
 | WRX | PA37 | Schreib-Strobe-Signal zum Schreiben von Daten |
 | DCX | PA39 | Auswahl zwischen Display-Daten/-Befehl |
-| RDX | PA38 | Lese-Strobe-Signal für Daten |
+| RDX | PA38 | Lese-Strobe-Signal zum Schreiben von Daten |
 | D[0] | PA40 | Daten 0 |
 | D[1] | PA41 | Daten 1 |
 | D[2] | PA28 | Daten 2 |
@@ -423,7 +423,7 @@ Die Auswahl der Display-Schnittstelle hängt vom Gehäuse ab. Für die U-Variant
 | D[6] | PA32 | Daten 6 |
 | D[7] | PA34 | Daten 7 |
 | REST | PA43 | Reset |
-| TE | PA33 | Tearing-Effect-Signal zur Bildsynchronisierung am MCU |
+| TE | PA33 | Tearing-Effect-Signal zur Synchronisierung mit dem MCU-Frame |
 
 </div>
 
@@ -438,7 +438,7 @@ Die Auswahl der Display-Schnittstelle hängt vom Gehäuse ab. Für die U-Variant
 | HSYNC | PA44 | Horizontales Synchronisationssignal |
 | VSYNC | PA42 | Vertikales Synchronisationssignal |
 | SD | PA50 | Steuert das Abschalten des Displays |
-| CM | PA51 | Schaltet zwischen Normal Color und Reduced Color Mode um |
+| CM | PA51 | Schaltet zwischen der Einstellung „Normal Color“ (normale Farbdarstellung) und „Reduced Color Mode“ (reduzierte Farbdarstellung) um |
 | R0 | PA14 | Pixelsignal |
 | R1 | PA13 | Pixelsignal |
 | R2 | PA16 | Pixelsignal |
@@ -484,8 +484,8 @@ Die Auswahl der Display-Schnittstelle hängt vom Gehäuse ab. Für die U-Variant
 | JDI_G2 | PA32 | Grüne Bilddaten (gerade Pixel) |
 | JDI_B1 | PA30 | Blaue Bilddaten (ungerade Pixel) |
 | JDI_B2 | PA28 | Blaue Bilddaten (gerade Pixel) |
-| JDI_XFRP | PBR1 | Flüssigkristall-Ansteuersignal ("An"-Pixel) |
-| JDI_VCOM/FRP | PBR2 | Ansteuersignal der gemeinsamen Elektrode/Flüssigkristall-Ansteuersignal ("Aus"-Pixel) |
+| JDI_XFRP | PBR1 | Flüssigkristall-Ansteuersignal („An“-Pixel) |
+| JDI_VCOM/FRP | PBR2 | Ansteuersignal der gemeinsamen Elektrode/Flüssigkristall-Ansteuersignal („Aus“-Pixel) |
 
 </div>
 
@@ -527,7 +527,7 @@ Speicher- und Display-Busse sollten nicht unabhängig voneinander zugewiesen wer
 
 | Flash-Signal | I/O-Signal | Detaillierte Beschreibung |
 | :--- | :--- | :--- |
-| CS# | PA06 | Chip-Select, aktiv Low. |
+| CS# | PA06 | Chip-Select, low-aktiv. |
 | SO | PA07 | Dateneingang (Daten-E/A 1) |
 | WP# | PA08 | Schreibschutz-Ausgang (Daten-E/A 2) |
 | SI | PA09 | Datenausgang (Daten-E/A 0) |
@@ -557,7 +557,7 @@ Speicher- und Display-Busse sollten nicht unabhängig voneinander zugewiesen wer
 
 | Flash-Signal | I/O-Signal | Detaillierte Beschreibung |
 | :--- | :--- | :--- |
-| CS# | PA06 | Chip-Select, aktiv Low. |
+| CS# | PA06 | Chip-Select, low-aktiv. |
 | SO | PA07 | Dateneingang (Daten-E/A 1) |
 | WP# | PA08 | Schreibschutz-Ausgang (Daten-E/A 2) |
 | SI | PA09 | Datenausgang (Daten-E/A 0) |
@@ -651,7 +651,7 @@ Die Speicher-I/O-Versorgung muss zum Logikpegel des angeschlossenen Speichers pa
 
 Bei einem externen differentiellen Analogmikrofon müssen an den ADC-Eingängen DC-Sperrkondensatoren von mindestens 2,2 µF vorgesehen und das Mikrofon über MIC_BIAS versorgt werden. Die U-Referenzschaltung für ein MEMS-Mikrofon führt MIC_BIAS über 1 kΩ und ergänzt einen 4,7-µF-Bypasskondensator; am Mikrofonausgang ist außerdem ein 0,01-µF-Koppelkondensator dargestellt. Die U-Referenz für den Analog-PA verwendet 33-nF-Eingangskoppelkondensatoren; der differentielle Tiefpassfilter liegt nahe am Chip. Analoge DAC-Ausgänge als massegeschütztes Differenzialpaar routen, mit weniger als 10 pF parasitärer Kapazität und weniger als 2 cm Leiterbahnlänge. Die V-Variante bietet zusätzlich I2S; der Referenz-I2S-Verstärker wird über I2C3 konfiguriert. Audio-Versorgungs- und Referenzkondensatoren nahe an den Pins platzieren und Analog-Audio von Schaltreglern und Hochgeschwindigkeitssignalen fernhalten.
 
-Beide Varianten unterstützen PWM für Vibrationsmotoren. Der Motor darf direkt aus VBAT versorgt werden, sofern sein Anlaufstrom das System nicht destabilisiert. Ist `BSP_PM_FREQ_SCALING` auf `1` gesetzt, verändert die HCPU-Frequenzskalierung auch die PWM-Frequenz an den PA-Pins. Verwenden Sie in diesem Fall einen PB-Pin. PB32 ist ein aktiv-hoher Power-/Reset-Eingang; ein langer Tastendruck von mindestens 10 s löst einen Reset aus. Die U-Referenzschaltung verbindet die Taste über 1 kΩ mit VDDIOB und ergänzt einen 10-kΩ-Pull-down sowie einen 0,1-µF-Kondensator nach GND. Die V-Referenz verwendet einen 1-kΩ-Serienwiderstand von VDD_1V8 und einen 10-kΩ-Pull-down. Andere Tasten und Drehgeber benötigen Pull-ups. Bei mechanischen Drehgebern, die nach der Betätigung nicht in den Aus-Zustand zurückkehren, muss die Pull-up-Versorgung im Standby abschaltbar sein, um Leckstrom zu vermeiden.
+Beide Varianten unterstützen PWM für Vibrationsmotoren. Der Motor darf direkt aus VBAT versorgt werden, sofern sein Anlaufstrom das System nicht destabilisiert. Ist `BSP_PM_FREQ_SCALING` auf `1` gesetzt, verändert die HCPU-Frequenzskalierung auch die PWM-Frequenz an den PA-Pins. Verwenden Sie in diesem Fall einen PB-Pin. PB32 ist ein high-aktiver Power-/Reset-Eingang; ein langer Tastendruck von mindestens 10 s löst einen Reset aus. Die U-Referenzschaltung verbindet die Taste über 1 kΩ mit VDDIOB und ergänzt einen 10-kΩ-Pull-down sowie einen 0,1-µF-Kondensator nach GND. Die V-Referenz verwendet einen 1-kΩ-Serienwiderstand von VDD_1V8 und einen 10-kΩ-Pull-down. Andere Tasten und Drehgeber benötigen Pull-ups. Bei mechanischen Drehgebern, die nach der Betätigung nicht in den Aus-Zustand zurückkehren, muss die Pull-up-Versorgung im Standby abschaltbar sein, um Leckstrom zu vermeiden.
 
 U stellt PBR0–PBR2, V PBR0–PBR3 bereit. Beim Start wechselt PBR0 von Low nach High und kann einen externen Lastschalter steuern; die übrigen PBR-Pins starten standardmäßig Low. PBR-Pins können im Standby und Hibernate als Ausgänge arbeiten und LPTIM-Signale führen; alle außer PBR0 können außerdem einen 32-kHz-Takt ausgeben. PBR-Pins lassen sich auch als Weckeingänge konfigurieren, der MCU kann nach dem Aufwachen jedoch keinen Interrupt von diesem Eingang empfangen. Für Sensor-I2C, SPI, Steuerung und Interrupt-Wecksignale sind PB-Pins des LCPU vorzuziehen. Die Sensorversorgung kann bei Bedarf über einen LVSW- oder LDO-Ausgang des SF30147C geschaltet werden.
 
@@ -659,9 +659,9 @@ Alle PA-Pins von U/V können als UART, I2C oder GPTIM gemultiplext werden. Ausna
 
 ### 5.7. Fertigung { #57-manufacturing }
 
-Zugang für Debugging und Programmierung, Produktionsprogrammiermodus, Zugang zur Quarzkalibrierung, Messpunkte für die Leistungsmessung, HF-Testzugang und Einsehbarkeit der PMIC-Steuerung vorsehen. Sicherstellen, dass die Prüfvorrichtung die Platine versorgen, den Boot-/Download-Modus erzwingen, mit dem Chip kommunizieren und Kalibrierungsdaten erfassen kann.
+Sehen Sie Zugang für Debugging und Programmierung, den Produktionsprogrammiermodus, Zugang zur Quarzkalibrierung, Messpunkte für die Leistungsmessung, RF-Testzugang und Einsehbarkeit der PMIC-Steuerung vor. Stellen Sie sicher, dass die Prüfvorrichtung die Platine versorgen, den Boot-/Download-Modus erzwingen, mit dem Chip kommunizieren und Kalibrierungsdaten erfassen kann.
 
-Mindestens folgende Produktions-Testpunkte vorsehen: VBAT, GND, bei U VDDIO2 (bei V VDDIOB), Mode, SWDIO, SWCLK, UART4_RXD, UART4_TXD und einer der Pins PB20/PB21/PB25. Stellen Sie beim Anschluss eines J-Link die Debugger-Versorgung auf externe Einspeisung, damit die Zielplatine den Debugger versorgt. Die Vorrichtung für Produktionsprogrammierung und Quarzkalibrierung muss auf diese Testpunkte zugreifen können.
+Sehen Sie mindestens folgende Produktions-Testpunkte vor: VBAT, GND, bei U VDDIO2 (bei V VDDIOB), Mode, SWDIO, SWCLK, UART4_RXD, UART4_TXD und einen der Pins PB20/PB21/PB25. Stellen Sie beim Anschluss eines J-Link die Debugger-Versorgung auf externe Einspeisung, damit die Zielplatine den Debugger versorgt. Die Vorrichtung für Produktionsprogrammierung und Quarzkalibrierung muss auf diese Testpunkte zugreifen können.
 
 <div align="center"><em>Tabelle 5.7-1: SF32LB56xU Debug- und Flash-Schnittstelle</em></div>
 

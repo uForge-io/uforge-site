@@ -1,6 +1,6 @@
 ---
 icon: lucide/radio-tower
-description: "Cómo el procesador Bluetooth dedicado de SF32 descarga de la CPU de aplicaciones la temporización de radio y el control del enlace para habilitar productos conectados de bajo consumo."
+description: "Cómo el procesador Bluetooth dedicado de SF32 evita que la CPU de aplicaciones tenga que encargarse de la temporización de radio y del control del enlace, lo que permite crear productos conectados de bajo consumo."
 tags:
   - Bluetooth
 ---
@@ -10,7 +10,7 @@ tags:
 
 El **procesador Bluetooth** es el subsistema dedicado al control inalámbrico de los dispositivos SF32LB. Se encarga de las funciones Bluetooth sujetas a estrictos requisitos de temporización, como la planificación de radio, el control del enlace, el mantenimiento de conexiones en modo de bajo consumo y la coordinación con el procesador de aplicaciones principal.
 
-Esta arquitectura resulta útil en productos conectados alimentados por batería. En lugar de despertar la CPU de aplicación para cada evento inalámbrico, los dispositivos SF32 usan una arquitectura multinúcleo heterogénea: el procesador de aplicaciones gestiona la lógica del producto y las funciones orientadas al usuario, mientras que un procesador Bluetooth de bajo consumo o un procesador siempre activo mantiene el enlace inalámbrico.
+Esta arquitectura resulta útil en productos conectados alimentados por batería. En lugar de activar la CPU de aplicación para cada evento inalámbrico, los dispositivos SF32 usan una arquitectura multinúcleo heterogénea: el procesador de aplicaciones gestiona la lógica del producto y las funciones orientadas al usuario, mientras que un procesador Bluetooth de bajo consumo o un procesador siempre activo mantiene el enlace inalámbrico.
 
 El alcance de las tareas de aplicación que puede ejecutar el procesador de bajo consumo varía entre familias. Consulte la comparación siguiente y confirme en el SDK la asignación de tareas de la referencia concreta.
 
@@ -24,13 +24,13 @@ Al separar esas funciones inalámbricas sensibles a la temporización de la carg
 
 - Menor consumo medio mientras se mantiene una conexión activa.
 - Temporización de radio más fiable cuando la interfaz de usuario, los gráficos, el audio o la IA someten el sistema a una carga elevada.
-- Atención de eventos de radio en el controlador sin activar la CPU de aplicación en cada evento.
-- Separación más limpia entre el firmware de aplicación y el firmware de control de protocolo.
-- Mejor soporte para productos que deben permanecer conectados mientras la CPU principal está en reposo.
+- El controlador puede atender eventos de radio sin activar la CPU de aplicación en cada evento.
+- Una separación más clara entre el firmware de aplicación y el firmware de control de protocolo.
+- Mayor capacidad para mantener conectados los productos mientras la CPU principal está en reposo.
 
-En los wearables y otros dispositivos portátiles, esta separación resulta especialmente útil. El dispositivo puede permanecer conectado en un estado de bajo consumo la mayor parte del tiempo y activarse solo ante una interacción del usuario, un evento de sensor, una actualización de pantalla, actividad de audio o una sincronización con el teléfono.
+En productos vestibles y portátiles, esta separación resulta especialmente útil. El dispositivo puede permanecer conectado en un estado de bajo consumo la mayor parte del tiempo y activarse solo ante una interacción del usuario, un evento de sensor, una actualización de pantalla, actividad de audio o una sincronización con el teléfono.
 
-Son posibilidades de diseño, no cifras garantizadas de consumo o reactivación. La ubicación de la pila host, las interrupciones, el arranque del reloj, la política de reposo y el tráfico de la aplicación determinan el resultado medido. Mida la corriente y el tiempo de respuesta con el firmware y la carga previstos.
+Son posibilidades de diseño, no cifras garantizadas de consumo o reactivación. La ubicación de la pila de protocolos del host, las interrupciones, la puesta en marcha del reloj, la política de reposo y el tráfico de la aplicación determinan el resultado medido. Mida la corriente y el tiempo de respuesta con el firmware y la carga previstos.
 
 ## Posición en el sistema SF32 { #position-in-the-sf32-system }
 
@@ -59,7 +59,7 @@ Procesador Bluetooth / firmware del controlador
 Radio Bluetooth y etapa frontal de RF
 ```
 
-La división exacta entre el firmware del host, el controlador y la aplicación depende del SDK, de la configuración de la pila y de los requisitos del producto. En cualquier caso, el procesador de aplicaciones no es la única CPU que participa en el funcionamiento de Bluetooth: el subsistema Bluetooth tiene su propio contexto de ejecución y está diseñado para ofrecer un comportamiento inalámbrico determinista y eficiente en consumo.
+La división exacta entre el firmware del host, el controlador y la aplicación depende del SDK, de la configuración de la pila y de los requisitos del producto. En cualquier caso, el procesador de aplicaciones no es la única CPU que participa en el funcionamiento de Bluetooth: el subsistema Bluetooth tiene su propio contexto de ejecución y está diseñado para ofrecer un comportamiento inalámbrico determinista con un consumo eficiente.
 
 ## Diferencias entre familias de dispositivos { #device-family-differences }
 
@@ -71,15 +71,15 @@ La familia SF32LB ofrece distintas configuraciones de procesador de bajo consumo
 
 | Familia de dispositivos | Capacidad Bluetooth | Función del procesador de bajo consumo | Aplicaciones habituales |
 |:--------------|:---------------------|:-------------------------|:--------------------|
-| **SF32LB52x** | Bluetooth de modo dual, Bluetooth clásico + BLE | El LCPU ejecuta la pila Bluetooth; no está disponible para el código de aplicación | Módulos Bluetooth de coste ajustado, accesorios de audio, dispositivos portátiles de gama básica e interfaces HMI compactas. |
-| **SF32LB55x** | BLE | El LCPU puede ejecutar tareas de aplicación admitidas por el SDK | Dispositivos portátiles BLE y productos de bajo consumo con numerosos sensores. |
-| **SF32LB56x** | Bluetooth de modo dual, Bluetooth clásico + BLE | El LCPU puede ejecutar tareas de aplicación admitidas por el SDK | Productos con pantallas más avanzadas, HMI conectadas y dispositivos portátiles. |
-| **SF32LB57x** | Bluetooth de modo dual, Bluetooth clásico + BLE | El LCPU gestiona Bluetooth y otras tareas sujetas a restricciones de consumo energético; confirme cuáles admite el SDK | Productos que distribuyen gráficos y audio local entre HCPU y ACPU. |
-| **SF32LB58x** | Bluetooth de modo dual, Bluetooth clásico + BLE | El LCPU puede ejecutar tareas de aplicación admitidas por el SDK | Productos de gama alta con gráficos, audio, IA y requisitos complejos de conectividad. |
+| **SF32LB52x** | Bluetooth de modo dual, Bluetooth clásico + BLE | La LCPU ejecuta la pila Bluetooth; no está disponible para el código de aplicación | Módulos Bluetooth de coste ajustado, accesorios de audio, dispositivos vestibles de gama básica e interfaces HMI compactas. |
+| **SF32LB55x** | BLE | La LCPU puede ejecutar tareas de aplicación admitidas por el SDK | Dispositivos vestibles BLE y productos de bajo consumo con numerosos sensores. |
+| **SF32LB56x** | Bluetooth de modo dual, Bluetooth clásico + BLE | La LCPU puede ejecutar tareas de aplicación admitidas por el SDK | Productos con pantallas más avanzadas, HMI conectadas y dispositivos vestibles. |
+| **SF32LB57x** | Bluetooth de modo dual, Bluetooth clásico + BLE | La LCPU gestiona Bluetooth y otras tareas sujetas a restricciones de consumo energético; confirme cuáles admite el SDK | Productos que distribuyen gráficos y audio local entre HCPU y ACPU. |
+| **SF32LB58x** | Bluetooth de modo dual, Bluetooth clásico + BLE | La LCPU puede ejecutar tareas de aplicación admitidas por el SDK | Productos de gama alta con gráficos, audio, IA y requisitos complejos de conectividad. |
 
 </div>
 
-La [guía HAL de SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/hal/index.html) de SiFli indica que el LCPU ejecuta la pila de protocolo Bluetooth y no está disponible para las aplicaciones. Las guías HAL de [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/hal/index.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/hal/index.html) y [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/index.html) describen cómo ejecutar en el LCPU tareas de bajo consumo, como BLE y el procesamiento de sensores. Para **SF32LB57x**, la [guía ACPU del SDK](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/acpu.html) identifica una arquitectura HCPU/ACPU/LCPU y asigna al LCPU tareas como BLE y el procesamiento de sensores, pero no especifica si admite otras tareas de usuario ni en qué medida. No extrapole la programabilidad del LCPU de una familia a otra. Para la referencia concreta, compruebe la configuración de núcleos en la hoja de datos y confirme que la versión del SDK y la configuración de la placa elegidas permiten ejecutar la tarea de aplicación prevista en el LCPU. Si esa combinación no está documentada, marque la asignación como no verificada; antes de adoptarla, compruebe también la memoria disponible y los límites de planificación.
+La [guía HAL de SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/hal/index.html) de SiFli indica que la LCPU ejecuta la pila de protocolo Bluetooth y no está disponible para las aplicaciones. Las guías HAL de [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/hal/index.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/hal/index.html) y [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/index.html) describen cómo ejecutar en la LCPU tareas de bajo consumo, como BLE y el procesamiento de sensores. Para **SF32LB57x**, la [guía ACPU del SDK](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/acpu.html) identifica una arquitectura HCPU/ACPU/LCPU y asigna a la LCPU tareas como BLE y el procesamiento de sensores, pero no especifica si admite otras tareas de usuario ni en qué medida. No extrapole la programabilidad de la LCPU de una familia a otra. Para la referencia concreta, compruebe la configuración de núcleos en la hoja de datos y confirme que la versión del SDK y la configuración de la placa elegidas permiten ejecutar la tarea de aplicación prevista en la LCPU. Si esa combinación no está documentada, marque la asignación como no verificada; antes de adoptarla, compruebe también la memoria disponible y los límites de planificación.
 
 La misma guía ACPU diferencia las funciones de los núcleos de aplicación: SF32LB57x usa ACPU para procesar audio y gráficos, mientras que SF32LB58x lo destina al procesamiento DSP de audio. Estas tareas son distintas de las funciones del controlador Bluetooth; confirme la asignación disponible para la placa y el SDK elegidos.
 
@@ -87,9 +87,9 @@ Las capacidades Bluetooth de la tabla resumen documentación de cada familia; no
 
 ### Programabilidad de la aplicación y firmware del controlador { #controller-firmware-programmability }
 
-Que el LCPU admita tareas de aplicación no implica que se pueda acceder al código fuente del controlador Bluetooth o sustituir la pila de radio. Las actualizaciones de firmware, los mecanismos de parche, la memoria disponible y las restricciones de planificación dependen del dispositivo y del SDK.
+Que la LCPU admita tareas de aplicación no implica que se pueda acceder al código fuente del controlador Bluetooth o sustituir la pila de radio. Las actualizaciones de firmware, los mecanismos de parche, la memoria disponible y las restricciones de planificación dependen del dispositivo y del SDK.
 
-- **Desarrollo de aplicaciones de bajo consumo.** Traslade al LCPU la adquisición de sensores, el procesamiento ligero y la gestión del sistema cuando la configuración lo permita. Presupueste la memoria de la pila, el tiempo de ejecución y la comunicación con HCPU.
+- **Desarrollo de aplicaciones de bajo consumo.** Traslade a la LCPU la adquisición de sensores, el procesamiento ligero y la gestión del sistema cuando la configuración lo permita. Presupueste la memoria de la pila, el tiempo de ejecución y la comunicación con HCPU.
 - **Mantenimiento y personalización del controlador.** Use las actualizaciones y los mecanismos de parche del fabricante para el dispositivo y SDK elegidos. Que el núcleo de aplicación sea programable no demuestra que se disponga del código fuente propietario del controlador o de una pila de radio alternativa. Confirme esas posibilidades por separado con SiFli.
 
 Una configuración dedicada al controlador también puede recibir actualizaciones del fabricante; su imagen no es necesariamente inmutable. Valide los cambios respecto a la cualificación Bluetooth, la interoperabilidad, la compatibilidad entre host y controlador y la recuperación tras fallos de OTA. Distinga la reversión para recuperar el equipo de la política de seguridad que impide instalar versiones antiguas vulnerables.
@@ -218,9 +218,9 @@ El procesador Bluetooth reduce el riesgo de incumplir los plazos de temporizaci�
 
 El procesador Bluetooth ocupa un lugar central en muchas categorías de productos SF32:
 
-- Módulos Bluetooth y adaptadores serie.
-- Relojes inteligentes y pulseras de fitness de nivel de entrada.
-- Sensores de salud BLE y dispositivos portátiles.
+- Módulos Bluetooth y adaptadores en serie.
+- Relojes inteligentes y pulseras de actividad de gama básica.
+- Sensores de salud BLE y dispositivos vestibles.
 - Accesorios de audio Bluetooth.
 - Insignias inteligentes y etiquetas electrónicas de estante.
 - Paneles conectados al teléfono y dispositivos HMI.
@@ -237,18 +237,18 @@ Al diseñar firmware Bluetooth para SF32, comience por definir los requisitos de
 - ¿Se requiere audio Bluetooth?
 - ¿Qué intervalo de conexión, latencia y tasa de transferencia se necesitan?
 - ¿Con qué frecuencia debe activarse el procesador de aplicaciones principal?
-- ¿Qué eventos deben reactivar el sistema desde la suspensión profunda o el reposo?
+- ¿Qué eventos deben reactivar el sistema desde Deep Sleep (suspensión profunda) o Standby (reposo)?
 - ¿Las tareas de sensor o interfaz de usuario compiten con la temporización de Bluetooth?
 - ¿Qué objetivos de alcance de RF y potencia de transmisión se requieren?
-- ¿Cómo se programará el firmware en los equipos y se calibrará la RF durante la producción?
+- ¿Cómo se grabará el firmware en los equipos y se calibrará la RF durante la producción?
 
 Un diseño robusto suele combinar el procesador Bluetooth con parámetros de conexión bien elegidos, código de aplicación basado en eventos, una gestión planificada de los estados de bajo consumo y un diseño de RF adecuado.
 
 ## Conclusiones clave { #key-takeaways }
 
 - Los dispositivos SF32LB usan un subsistema dedicado de procesamiento Bluetooth o de bajo consumo para mantener una temporización inalámbrica fiable y reducir el consumo.
-- SF32LB52x dedica el LCPU al controlador Bluetooth. SF32LB55x, SF32LB56x y SF32LB58x admiten en el LCPU tareas de aplicación definidas por el SDK en configuraciones documentadas. SF32LB57x usa el LCPU para Bluetooth y tareas sensibles al consumo, pero verifique en el SDK y la placa de destino que se admite cada tarea de usuario prevista.
-- Un LCPU programable admite tareas de aplicación dentro de los límites del SDK; el acceso al código del controlador y su personalización deben confirmarse por separado. Use actualizaciones del fabricante y valide los cambios.
+- SF32LB52x dedica la LCPU al controlador Bluetooth. SF32LB55x, SF32LB56x y SF32LB58x admiten en la LCPU tareas de aplicación definidas por el SDK en configuraciones documentadas. SF32LB57x usa la LCPU para Bluetooth y tareas sensibles al consumo, pero verifique en el SDK y la placa de destino que se admite cada tarea de usuario prevista.
+- Una LCPU programable admite tareas de aplicación dentro de los límites del SDK; el acceso al código del controlador y su personalización deben confirmarse por separado. Use actualizaciones del fabricante y valide los cambios.
 - BLE está optimizado para productos conectados de bajo consumo; el Bluetooth de modo dual añade casos de uso del Bluetooth clásico, como el audio y la compatibilidad con perfiles heredados.
 - El procesador Bluetooth permite que la CPU de aplicaciones principal permanezca en reposo mientras continúan las conexiones, los anuncios BLE y los eventos de radio programados.
 - El rendimiento de Bluetooth depende tanto de la arquitectura del firmware como del hardware: diseño de RF, relojes, alimentación, adaptación de la antena y calibración.

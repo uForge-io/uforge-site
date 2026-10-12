@@ -13,7 +13,7 @@ Le **contrôleur d'affichage** (LCDC) transmet au panneau les pixels déjà pré
 
 Source primaire : [documentation LCDC HAL de SiFli](https://github.com/OpenSiFli/SiFli-SDK/blob/121aa105565ee6bcbab6a15c1cb3b5571f5cc8e5/docs/source/zh_CN/hal/lcdc.md).
 
-Le lien ci-dessus est épinglé sur un commit précis de SiFli-SDK. Il décrit le comportement du HAL dans cette révision, sans établir que chaque interface, couche ou fonction est disponible sur tous les composants et boîtiers SF32 ni dans les autres versions du SDK. Vérifiez la combinaison exacte composant, boîtier et version du SDK utilisée par le projet.
+Le lien ci-dessus est figé sur un commit précis de SiFli-SDK. Il décrit le comportement du HAL dans cette révision, sans établir que chaque interface, couche ou fonction est disponible sur tous les composants et boîtiers SF32 ni dans les autres versions du SDK. Vérifiez la combinaison exacte composant, boîtier et version du SDK utilisée par le projet.
 
 Consultez la [vue d'ensemble des graphismes](overview.md#sf32-graphics-flow) pour suivre le parcours complet des ressources jusqu'au panneau. Cet article se concentre sur le contrôleur, le raccordement du panneau et l'intégration du pilote logiciel.
 
@@ -65,9 +65,9 @@ Le tableau ci-dessous aide à choisir une famille ; il ne définit pas l'affecta
 
 Pour **SF32LB56x**, ne considérez pas les variantes U et V comme interchangeables. Pour **SF32LB55x** et **SF32LB58x**, n'intégrez pas le MIPI DSI au schéma avant d'avoir confirmé le boîtier exact, les broches DSI disponibles et les exigences de voies et de mode du panneau. SF32LB55x ne prend en charge que le mode commande : il ne convient donc pas à un panneau sans RAM fonctionnant en mode vidéo. Une conception EPD doit aussi tenir compte des contraintes temporelles, de la forme d'onde et de l'alimentation propres au panneau ; la seule interface ne suffit pas à définir la conception.
 
-Les deux guides matériels SF32LB52x ne concordent pas sur JDI : leur aperçu mentionne le JDI série, tandis que les sections détaillées donnent des affectations de signaux parallèles. La matrice reprend donc les deux indications documentées, sans garantir la disponibilité des broches pour une référence précise. Avant de figer la conception, vérifiez le multiplexage LCDC, le SDK/pilote et les signaux du panneau pour la variante exacte.
-
 Le guide des modèles de puces SiFli répertorie DPI/RGB parmi les interfaces de la famille SF32LB55x, mais son tableau par référence ne confirme pas DPI pour les références listées. Il s'agit donc d'une indication au niveau de la famille seulement : avant de s'appuyer sur DPI, vérifiez sa prise en charge et la disponibilité des broches pour la référence exacte. La distinction U/V de SF32LB56x suit les guides d'application matériels distincts, et non le tableau HAL commun à la famille.
+
+Les deux guides matériels SF32LB52x ne concordent pas sur JDI : leur aperçu mentionne le JDI série, tandis que les sections détaillées donnent des affectations de signaux parallèles. La matrice reprend donc les deux indications documentées, sans garantir la disponibilité des broches pour une référence précise. Avant de figer la conception, vérifiez le multiplexage LCDC, le SDK/pilote et les signaux du panneau pour la variante exacte.
 
 Pour SF32LB52x, distinguez l'interface de signaux EPD parallèle 8 bits documentée du mode EPD direct du LCDC. Le guide matériel des SF32LB52B/D/E/G/J répertorie les signaux EPD parallèles et la commande du PMIC TPS ; séparément, les notes de version du SiFli-SDK v2.5.1 documentent la commande directe EPD par LCDC pour SF32LB57x. N'en déduisez pas qu'une conception 52x peut utiliser le mode EPD direct du LCDC du SF32LB57x ; vérifiez le pilote et la mise en œuvre des contraintes temporelles pour la variante exacte.
 
@@ -111,7 +111,7 @@ La plupart des interfaces utilisateur embarquées n'ont pas besoin de redessiner
 
 Le rafraîchissement plein écran convient aux écrans riches en animations, aux transitions ou aux panneaux qui effectuent naturellement un balayage à partir d'un framebuffer complet. Le choix dépend de la bande passante de l'interface d'affichage, du comportement du panneau et du budget mémoire, pas uniquement du réglage du framework d'interface utilisateur.
 
-## Séquence de mise en route du panneau { #panel-bring-up-sequence }
+## Séquence de mise en service du panneau { #panel-bring-up-sequence }
 
 Mettez le panneau en service par étapes avant de déboguer les widgets ou le comportement applicatif :
 
@@ -152,7 +152,7 @@ Privilégiez le rafraîchissement partiel, utilisez RGB565 lorsque cela convient
 
 ### Panneaux RGB / DPI { #rgb-dpi-panels }
 
-Prévoyez la bande passante de balayage continue en tenant compte du trafic du CPU, d'ePicasso, du DMA et des autres accès mémoire. Choisissez une stratégie de framebuffer adaptée à la fréquence de rafraîchissement requise, envisagez le double buffering si la mémoire le permet et tenez compte des contraintes temporelles et de l'intégrité du signal lors de la conception du PCB.
+Prévoyez la bande passante de balayage continue en tenant compte du trafic du CPU, d'ePicasso, du DMA et des autres accès mémoire. Choisissez une stratégie de framebuffer adaptée à la fréquence de rafraîchissement requise, envisagez le double buffering si la mémoire le permet et tenez compte des contraintes temporelles et de l'intégrité du signal lors de la conception de la PCB.
 
 ### Panneaux MIPI DSI { #mipi-dsi-panels }
 
@@ -164,9 +164,9 @@ Concevez pour des mises à jour peu fréquentes ; utilisez les modes de mise à 
 
 ### Interfaces JDI et panneaux Memory-in-Pixel { #jdi-memory-in-pixel-displays }
 
-Dans cet article, JDI désigne les modes d'interface série ou parallèle du panneau ; Memory-in-Pixel désigne une technologie de panneau. Ils peuvent être associés dans certaines conceptions basse consommation, mais ne sont pas synonymes. Avec un panneau MIP, de petites zones de mise à jour et une interface adaptée peuvent exploiter la conservation de l'état des pixels lorsque le panneau est alimenté. Cela ne signifie ni stockage non volatil de l'image ni consommation nulle du système en veille. Respectez la fiche technique du panneau pour l'inversion COM et les autres opérations d'entretien, puis mesurez le rafraîchissement, la lisibilité en extérieur et la consommation dans les conditions du produit.
+Dans cet article, JDI désigne les modes d'interface série ou parallèle du panneau ; Memory-in-Pixel désigne une technologie de panneau. Ils peuvent être associés dans certaines conceptions basse consommation, mais ne sont pas synonymes. Avec un panneau MIP, de petites zones de mise à jour et un agencement adapté de l'interface graphique peuvent exploiter la conservation de l'état des pixels lorsque le panneau est alimenté. Cela ne signifie ni stockage non volatil de l'image ni consommation nulle du système en veille. Respectez la fiche technique du panneau pour l'inversion COM et les autres opérations de maintenance, puis mesurez le rafraîchissement, la lisibilité en extérieur et la consommation dans les conditions du produit.
 
-## Liste de vérification pour le passage en production { #production-handoff-checklist }
+## Liste de contrôle pour le passage en production { #production-handoff-checklist }
 
 Avant de traiter le chemin d'affichage comme complet, enregistrez les choix qu'un autre ingénieur doit pouvoir reproduire :
 
@@ -177,12 +177,12 @@ Avant de traiter le chemin d'affichage comme complet, enregistrez les choix qu'u
 - Temps de rendu mesuré, temps de transfert, trafic PSRAM de pointe/moyen le cas échéant, et courant pour des états d'interface représentatifs.
 - Résultats de test de veille, extinction d'écran, réveil, et récupération, y compris le comportement après un transfert échoué ou interrompu.
 
-Cet enregistrement transforme la prise en charge de l'affichage d'un résultat de mise en route ponctuel en une intégration produit reproductible. Revalidez-le chaque fois que le panneau, le SDK, la disposition mémoire, le format de pixel, ou le pilote d'affichage change.
+Cet enregistrement transforme la prise en charge de l'affichage d'un résultat de mise en service ponctuel en une intégration produit reproductible. Revalidez-le chaque fois que le panneau, le SDK, la disposition mémoire, le format de pixel, ou le pilote d'affichage change.
 
 ## Points clés à retenir { #key-takeaways }
 
 - Le contrôleur d'affichage gère la sortie vers le panneau ; il est distinct de la composition des pixels par ePicasso et de la décompression des ressources eZip.
-- Le choix de l'interface détermine une grande partie de la bande passante, de la stratégie de tampon, de la consommation, du nombre de broches et de la conception du PCB.
+- Le choix de l'interface détermine une grande partie de la bande passante, de la stratégie de tampon, de la consommation, du nombre de broches et de la conception de la PCB.
 - Traitez le transfert des pixels, la synchronisation, la gestion du cache et l'initialisation du panneau comme des tâches essentielles du firmware.
 - Validez le panneau avec des motifs simples avant d'activer l'interface utilisateur de plus haut niveau, le DMA, TurboPixel ou les fonctions d'accélération.
 - Diagnostiquez les défaillances en examinant une frontière du chemin d'affichage à la fois, puis consignez la configuration validée et les mesures pour le transfert à la production.

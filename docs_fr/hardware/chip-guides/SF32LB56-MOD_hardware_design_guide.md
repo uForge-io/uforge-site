@@ -62,7 +62,7 @@ Le module prend en charge la connectivité Bluetooth 5.3 et fournit l'accéléra
 
 ### 2.4 Applications typiques { #24-typical-applications }
 
-Les applications typiques incluent les montres intelligentes haut de gamme, les bracelets connectés, les équipements médicaux portables, les équipements de fitness, les tableaux de bord de vélos électriques, les clés de voiture, les télécommandes pour véhicules portées sur soi, les appareils électroménagers intelligents, les serrures intelligentes, les dispositifs HMI graphiques, les concentrateurs de capteurs industriels, les terminaux de surveillance industrielle, les concentrateurs de capteurs basse consommation et les dispositifs Bluetooth Mesh.
+Les applications typiques incluent les montres intelligentes haut de gamme, les bracelets connectés, les équipements médicaux portables, les équipements de fitness, les tableaux de bord de vélos électriques, les clés de voiture, les télécommandes pour véhicules portées sur soi, les appareils électroménagers intelligents, les serrures intelligentes, les appareils HMI graphiques, les concentrateurs de capteurs industriels, les terminaux de surveillance industrielle, les concentrateurs de capteurs basse consommation et les appareils Bluetooth Mesh.
 
 ## 3. Vue d'ensemble de la conception { #3-design-at-a-glance }
 
@@ -99,10 +99,10 @@ Les applications typiques incluent les montres intelligentes haut de gamme, les 
 | VDD_3V3 | Condensateur de 4,7 µF | Placez-le près de la broche d'alimentation du module. |
 | VDD_1V8 | Condensateur de 4,7 µF | Placez-le près de la broche d'alimentation du module. |
 | VDDIO | Condensateur de 4,7 µF | Placez-le près de la broche d'alimentation du module. |
-| PB32/PWRKEY | Pull-down de 10 kΩ | Requis pour une réinitialisation après un appui de 10 s à l'état haut. |
+| PB32/PWRKEY | Pull-down de 10 kΩ | Obligatoire pour une réinitialisation après un appui de 10 s à l'état haut. |
 | Signaux RGB du LCD | Résistances en série de 33–100 Ω | Ajoutez-les sur les lignes de signal RGB. |
 | UART de débogage PA16/PA17 | Résistances en série de 100 Ω | Requises sur l'interface UART multiplexée de téléchargement et de débogage. |
-| Écran tactile / connecteurs utilisateur | Protection ESD | Réservez des dispositifs ESD sur les interfaces exposées telles que le TP. |
+| Écran tactile / connecteurs utilisateur | Protection ESD | Réservez des composants ESD sur les interfaces exposées telles que le TP. |
 
 </div>
 
@@ -131,7 +131,7 @@ Le schéma-bloc du module montre le MCU SF32LB56xV, les ressources mémoire, le 
 5. Résolvez les conflits de ressources partagées, en particulier SDIO contre MPI3 et les broches Flash PA06–PA11 utilisées en interne.
 6. Ajoutez le découplage, l'ESD, le pull-down PWRKEY et les résistances en série pour le LCD et l'UART de débogage.
 7. Placez le module avec le dégagement et la zone interdite d'antenne requis.
-8. Passez en revue le schéma et le PCB par rapport à la liste de contrôle de la section 7 avant la publication.
+8. Passez en revue le schéma et le PCB par rapport à la liste de contrôle de la section 7 avant la validation finale.
 
 ### 4.2 Séquence de revue { #42-review-sequence }
 
@@ -181,7 +181,7 @@ BOOT_MODE sélectionne le mode de démarrage : état haut pour le téléchargeme
 
 #### 5.2.1 Horloge { #521-clock }
 
-La plateforme du module utilise un oscillateur à cristal de 48 MHz et prend en charge des oscillateurs RC basse consommation à 1 MHz/48 MHz, un oscillateur RC ultra-basse consommation à 10 kHz, et un oscillateur à cristal optionnel de 32,768 kHz. Respectez les recommandations d'implantation et de mise à la masse des circuits d'horloge de la conception de référence du module, et évitez les procédés ultrasoniques qui peuvent solliciter mécaniquement le cristal interne.
+La plateforme du module utilise un oscillateur à quartz de 48 MHz et prend en charge des oscillateurs RC basse consommation à 1 MHz/48 MHz, un oscillateur RC ultra-basse consommation à 10 kHz, et un oscillateur à quartz optionnel de 32,768 kHz. Respectez les recommandations d'implantation et de mise à la masse des circuits d'horloge de la conception de référence du module, et évitez les procédés ultrasoniques qui peuvent solliciter mécaniquement le quartz interne.
 
 #### 5.2.2 RF { #522-rf }
 
@@ -212,7 +212,7 @@ Le module prend en charge une antenne intégrée sur PCB ou une antenne externe 
 
 Le contrôleur LCD prend en charge le mode DBI SPI série, Dual-SPI, Quad-SPI, le mode parallèle 8080, DPI/RGB et JDI. La figure d'affectation de broches recommandée dans la fiche technique associe les groupes LCD_DPI_24, LCD_DPI_8, LCD_QSPI, LCD_8080, E-Paper et de type Raspberry Pi aux broches du module.
 
-Ajoutez des résistances en série de 33–100 Ω sur les lignes de signal RGB du LCD. Gardez le routage RGB, de l'affichage SPI et de l'écran tactile court et cohérent en impédance, et prévoyez une protection ESD pour les interfaces tactiles ou de connecteur exposées.
+Ajoutez des résistances en série de 33–100 Ω sur les lignes de signal RGB du LCD. Gardez les routages RGB, de l'affichage SPI et de l'écran tactile courts et cohérents, et prévoyez une protection ESD pour les interfaces tactiles ou de connecteur exposées.
 
 !!! info "Figure 5.3-1 : Affectation de broches recommandée pour la carte de développement"
     Voir la figure 7-6 du DS5602 V0.3.
@@ -225,7 +225,7 @@ Routez l'audio analogique à l'écart des nœuds de commutation bruyants, des ho
 
 #### 5.3.3 Boutons { #533-buttons }
 
-PB32 est l'entrée PWRKEY et déclenche une réinitialisation après un appui de 10 s à l'état haut. Ajoutez la résistance de pull-down de 10 kΩ requise et assurez-vous que le circuit du bouton ne peut pas rester flottant pendant le transport, la veille profonde ou les séquences d'alimentation.
+PB32 est l'entrée PWRKEY et déclenche une réinitialisation après un appui de 10 s à l'état haut. Ajoutez la résistance de pull-down de 10 kΩ requise et assurez-vous que le circuit du bouton ne peut pas rester flottant pendant le transport, le mode Deep Sleep ou les séquences d'alimentation.
 
 #### 5.3.4 Moteur et charges PWM { #534-motor-and-pwm-loads }
 
@@ -255,7 +255,7 @@ L'USB2.0 FS prend en charge le mode Hôte/Périphérique avec un PHY intégré. 
 
 #### 5.5.1 Débogage { #551-debug }
 
-SWDIO sur la broche 79 et SWCLK sur la broche 80 sont les broches de débogage/téléchargement SWD. Gardez le SWD accessible sur les premiers prototypes et les gabarits de production. Exposez également le chemin de téléchargement/débogage UART4 par défaut, sauf si le produit dispose d'un autre chemin de programmation approuvé.
+SWDIO sur la broche 79 et SWCLK sur la broche 80 sont les broches de débogage/téléchargement SWD. Gardez le SWD accessible sur les premiers prototypes et sur l'outillage de test en production. Exposez également le chemin de téléchargement/débogage UART4 par défaut, sauf si le produit dispose d'un autre chemin de programmation approuvé.
 
 #### 5.5.2 Production { #552-production }
 
@@ -301,12 +301,12 @@ Pour les conceptions à antenne externe, la fiche technique décrit un connecteu
 | Domaine | Vérification |
 | :--- | :--- |
 | Alimentation | Les condensateurs de 4,7 µF sont près des broches VDD_3V3, VDD_1V8 et VDDIO. |
-| Masse | Les broches de masse du module se connectent à un système de masse basse impédance avec des vias de couture près des chemins haute vitesse et RF. |
+| Masse | Les broches de masse du module se connectent à un système de masse basse impédance avec des vias de raccordement à la masse près des chemins haute vitesse et RF. |
 | Antenne | La zone interdite d'antenne ne comporte aucune intrusion de cuivre, de pistes, de composants, de vis, de blindage, de métal de batterie ou de métal de boîtier. |
 | Affichage | Les lignes RGB/SPI du LCD sont courtes, routées en tenant compte de l'impédance et équipées des résistances en série requises. |
 | USB | Les lignes USB DP/DM sont routées comme une paire différentielle adaptée avec une protection ESD près du connecteur. |
 | Audio analogique | MIC_BIAS, MIC_ADC_IN et les sorties DAC évitent les régulateurs à commutation, les horloges du LCD et les zones d'alimentation RF. |
-| Débogage | Le SWD et le chemin de téléchargement/débogage UART sont accessibles sur les prototypes et les gabarits de production. |
+| Débogage | Le SWD et le chemin de téléchargement/débogage UART sont accessibles sur les prototypes et sur l'outillage de test en production. |
 
 </div>
 
@@ -419,7 +419,7 @@ VDD est l'alimentation des E/S. VOH et VOL sont mesurées sous charge à haute i
 | 8 | PB32 déclenche une réinitialisation après un appui de 10 s à l'état haut ; une résistance de pull-down de 10 kΩ est requise. |
 | 9 | Les broches marquées GPADC_CHx prennent en charge une entrée analogique de 0–3,3 V. |
 | 10 | Les broches marquées GPTIM prennent en charge la sortie PWM. |
-| 11 | Les interfaces telles que le TP nécessitent des dispositifs de protection ESD. |
+| 11 | Les interfaces telles que le TP nécessitent des composants de protection ESD. |
 | 12 | Les signaux RGB du LCD nécessitent des résistances en série de 33–100 Ω. |
 | 13 | PA16 et PA17 multiplexées en DBG_UART sont des broches de téléchargement/débogage du programme et nécessitent des résistances en série de 100 Ω. |
 
@@ -439,7 +439,7 @@ VDD est l'alimentation des E/S. VOH et VOL sont mesurées sous charge à haute i
 | ESD HBM | ±2000 V. |
 | ESD CDM | ±500 V. |
 | Refusion | SiFli recommande un seul passage de refusion pour le module. |
-| Procédé ultrasonique | Évitez le soudage ultrasonique ou le nettoyage ultrasonique ; les vibrations peuvent endommager ou dégrader les cristaux internes. |
+| Procédé ultrasonique | Évitez le soudage ultrasonique ou le nettoyage ultrasonique ; les vibrations peuvent endommager ou dégrader les quartz internes. |
 
 </div>
 
@@ -506,7 +506,7 @@ Le DS5602 V0.3 fournit le tableau complet de définition des 89 broches ainsi qu
 
 </div>
 
-### 10.2. Historique des révisions de la fiche technique source { #source-datasheet-revision-history }
+### 10.2. Historique des révisions de la fiche technique d'origine { #source-datasheet-revision-history }
 
 <div align="center"><em>Tableau 10.2-1 : Historique des révisions de la fiche technique source</em></div>
 

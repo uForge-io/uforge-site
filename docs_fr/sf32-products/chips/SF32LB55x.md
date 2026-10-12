@@ -22,7 +22,7 @@ Le guide des modèles de puces de SiFli précise que le SF32LB55x a été défin
 
 ## Applications { #applications }
 
-**SF32LB55x est recommandé pour** les produits BLE d'abord qui exigent une interface plus riche, une mémoire de travail plus grande ou des boîtiers plus flexibles que les MCU d'objets portables d'entrée de gamme, notamment :
+**SF32LB55x est recommandé pour** les produits axés sur le BLE qui exigent une interface plus riche, une mémoire de travail plus grande ou des boîtiers plus flexibles que les MCU d'objets portables d'entrée de gamme, notamment :
 
 - Montres connectées et bracelets d'activité
 - Objets portables de suivi de la santé
@@ -79,8 +79,8 @@ Choisissez le SF32LB55x lorsque la conception exige une ou plusieurs de ces capa
 
 ### Calcul et mémoire { #compute-and-memory }
 
-- Processeur applicatif hautes performances Arm Cortex-M33 STAR-MC1, jusqu'à 240MHz
-- Processeur Arm Cortex-M33 STAR-MC1 à très basse consommation, jusqu'à 48MHz
+- Processeur applicatif hautes performances Arm Cortex-M33 STAR-MC1, jusqu'à 240 MHz
+- Processeur Arm Cortex-M33 STAR-MC1 à très basse consommation, jusqu'à 48 MHz
 - Jusqu'à 360 DMIPS / 965 EEMBC CoreMark sur le processeur applicatif
 - Jusqu'à 72 DMIPS / 193 EEMBC CoreMark sur le processeur basse consommation
 - 1 088 Ko de SRAM applicative, dont 64 Ko de SRAM de rétention
@@ -91,9 +91,9 @@ Choisissez le SF32LB55x lorsque la conception exige une ou plusieurs de ces capa
 
 - Moteur graphique 2,5D ePicasso avec rotation, mise à l'échelle, effet miroir et fusion alpha matériels
 - eZip décompresse les graphismes sans perte et peut être chaîné avec ePicasso
-- La couche de transformation d'ePicasso prend en charge des résolutions jusqu'à 640 × 640 ; les couches génériques et la sortie d'affichage vont jusqu'à 1024 × 1024, et la sortie d'affichage atteint 60 i/s
-- Le contrôleur LCD prend en charge les interfaces 8080, SPI, Dual-SPI, Quad-SPI, DPI, MIPI DSI et écrans réflectifs JDI sur les variantes concernées ; vérifiez la disponibilité pour le modèle choisi
-- La compression de tampon d'image TurboPixel permet au contrôleur LCD de lire des données d'image compressées et de les décompresser pour l'affichage, réduisant le stockage du tampon d'image et la bande passante de lecture
+- La couche de transformation d'ePicasso prend en charge des résolutions jusqu'à 640 × 640 ; les couches génériques et la sortie d'affichage prennent en charge jusqu'à 1024 × 1024, avec une cadence d'affichage pouvant atteindre 60 i/s
+- Le contrôleur LCD prend en charge les interfaces 8080, SPI, Dual-SPI, Quad-SPI, DPI et MIPI DSI, ainsi que les écrans réflectifs JDI sur les variantes compatibles ; vérifiez la disponibilité pour le modèle choisi
+- La compression de tampon d'image TurboPixel permet au contrôleur LCD de lire des données d'image compressées et de les décompresser pour l'affichage, réduisant ainsi la mémoire requise pour le tampon d'image et les besoins en bande passante de lecture
 - Deux contrôleurs LCD ; les interfaces d'affichage permanent (always-on) et la capacité double écran dépendent du modèle et du boîtier choisis
 - Accélérateur matriciel de réseaux de neurones pour charges TinyML, jusqu'à 1,92 GOPS et 5,73 TOPS/W
 
@@ -116,11 +116,11 @@ Choisissez le SF32LB55x lorsque la conception exige une ou plusieurs de ces capa
 - Jusqu'à 5 interfaces UART, 6 I2C et 4 SPI sur l'ensemble de la famille ; les nombres varient selon le modèle, comme indiqué ci-dessous
 - Le nombre d'interfaces I2S et PDM varie selon le modèle (voir le tableau). Chaque interface PDM peut connecter jusqu'à deux microphones numériques ; le nombre d'interfaces n'est donc pas le nombre de microphones. Vérifiez aussi la disponibilité des broches pour le modèle choisi.
 
-<div align="center"><em>Nombres de périphériques et de CAN publiés par modèle (SS6600A8 non spécifié)</em></div>
+<div align="center"><em>Nombres de périphériques et d'ADC publiés par modèle (SS6600A8 non spécifié)</em></div>
 
 <div align="center" markdown>
 
-| Modèle | UART | I2C | SPI | I2S | PDM | CAN Sigma-Delta 16 bits |
+| Modèle | UART | I2C | SPI | I2S | PDM | ADC Sigma-Delta 16 bits |
 | :--- | ---: | ---: | ---: | ---: | ---: | :--- |
 | SS6600A8 | Non spécifié | Non spécifié | Non spécifié | Non spécifié | Non spécifié | Non spécifié |
 | SF32LB551U4O5 | 2 | 3 | 2 | 1 | 1 | Absent |
@@ -129,12 +129,12 @@ Choisissez le SF32LB55x lorsque la conception exige une ou plusieurs de ces capa
 
 </div>
 
-**Note sur la source pour le SS6600A8 :** le [guide des modèles de puces SiFli][Guide des modèles de puces SiFli] actuel indique le boîtier, la mémoire intégrée, les GPIO et l'interface d'affichage de ce composant, mais ne précise pas ses nombres d'UART, I2C, SPI, I2S, PDM ou de CAN Sigma-Delta. Le tableau 0-1 de la [fiche technique DS5501 V1.7.2][Fiche technique] ne comporte pas non plus de ligne distincte pour le SS6600A8. Ses nombres sont donc marqués « Non spécifié » ; ne les déduisez pas du SF32LB551U4O5 sous prétexte que les deux utilisent le QFN68L. Confirmez la configuration auprès de SiFli avant d'affecter les broches.
+**Note sur la source pour le SS6600A8 :** le [guide des modèles de puces SiFli][Guide des modèles de puces SiFli] actuel indique le boîtier, la mémoire intégrée, les GPIO et l'interface d'affichage de ce composant, mais ne précise pas ses nombres d'UART, I2C, SPI, I2S, PDM ou d'ADC Sigma-Delta. Le tableau 0-1 de la [fiche technique DS5501 V1.7.2][Fiche technique] ne comporte pas non plus de ligne distincte pour le SS6600A8. Ses nombres sont donc marqués « Non spécifié » ; ne les déduisez pas du SF32LB551U4O5 sous prétexte que les deux utilisent le QFN68L. Confirmez la configuration auprès de SiFli avant d'affecter les broches.
 
 - 1 × interface USB 2.0 FS hôte/périphérique
-- 1 × GPADC 10 bits (CAN SAR) : la fiche technique indique jusqu'à 8 entrées asymétriques ou 4 paires différentielles, avec une plage d'entrée asymétrique de 0–1,1 V
-- **Écart entre sources pour le CAN :** la [fiche technique DS5501 V1.7.2][Fiche technique] indique jusqu'à 8 entrées asymétriques ou 4 paires différentielles et une plage asymétrique de 0–1,1 V. La [note d'application matérielle du SF32LB55x][Note d'application matérielle (source GitHub)] indique 5 canaux et une plage d'entrée de 0–0,9 V. Confirmez l'affectation des canaux et les limites pour le composant exact et la révision du SDK avant de concevoir le frontal analogique.
-- CAN Sigma-Delta 16 bits à 5 canaux sur les modèles BGA145 et BGA169 ci-dessus ; absent des modèles QFN68L
+- 1 × GPADC 10 bits (ADC SAR) : la fiche technique indique jusqu'à 8 entrées asymétriques ou 4 paires différentielles, avec une plage d'entrée asymétrique de 0–1,1 V
+- **Écart entre sources pour l'ADC :** la [fiche technique DS5501 V1.7.2][Fiche technique] indique jusqu'à 8 entrées asymétriques ou 4 paires différentielles et une plage asymétrique de 0–1,1 V. La [note d'application matérielle du SF32LB55x][Note d'application matérielle (source GitHub)] indique 5 canaux et une plage d'entrée de 0–0,9 V. Confirmez l'affectation des canaux et les limites pour le composant exact et la révision du SDK avant de concevoir le frontal analogique.
+- ADC Sigma-Delta 16 bits à 5 canaux sur les modèles BGA145 et BGA169 ci-dessus ; absent des modèles QFN68L
 - Capteur de température
 - 2 × comparateurs de tension basse consommation
 - Contrôleur de tâches périphériques (PTC)
@@ -151,9 +151,9 @@ Choisissez le SF32LB55x lorsque la conception exige une ou plusieurs de ces capa
 
 ## Variantes de la famille { #family-variants }
 
-Les composants SF32LB55x sont proposés en boîtiers QFN et BGA. Choisissez le boîtier tôt, car le nombre de GPIO, la mémoire intégrée, le choix de l'interface d'affichage et le procédé de circuit imprimé varient sensiblement selon le boîtier.
+Les composants SF32LB55x sont proposés en boîtiers QFN et BGA. Choisissez le boîtier dès le début du projet, car le nombre de GPIO, la mémoire intégrée, les interfaces d'affichage disponibles et les contraintes de fabrication du circuit imprimé varient sensiblement selon le boîtier.
 
-Le choix du boîtier n'est pas ici une simple décision d'implantation. Le [guide des modèles de puces][Guide des modèles de puces SiFli] de SiFli précise explicitement que la famille 55x prend en charge tout ou partie des interfaces d'affichage selon le boîtier ; le boîtier doit donc être arrêté avant de finaliser la planification de l'affichage, de la mémoire et du budget de broches. Les composants d'un même boîtier sont compatibles broche à broche ; confirmez la configuration mémoire exacte et les besoins d'affichage avant de choisir un remplaçant compatible.
+Le choix du boîtier n'est pas ici une simple décision d'implantation. Le [guide des modèles de puces][Guide des modèles de puces SiFli] de SiFli précise que, selon le boîtier, la famille 55x prend en charge la totalité ou seulement une partie des interfaces d'affichage. Il faut donc arrêter ce choix avant de finaliser les options d'affichage et de mémoire ainsi que le budget de broches. Les composants d'un même boîtier sont compatibles broche à broche ; confirmez la configuration mémoire exacte et les besoins d'affichage avant de choisir un composant de remplacement compatible.
 
 <div align="center"><em>Options d'E/S par boîtier du SF32LB55x</em></div>
 
@@ -189,7 +189,7 @@ Pour le SF32LB557VD3A6, le guide des modèles de puces SiFli actuel et le tablea
 
 Suivez cette séquence pour transformer une présélection SF32LB55x en conception validée :
 
-1. **Prouver le chemin du firmware.** Commencez par le [guide de prise en main du SDK SiFli](../../getting-started/sifli/getting-started-sifli-sdk.md), puis utilisez le [flux de travail du SDK SiFli](../../develop/platforms/sifli-sdk/overview.md) et les [exemples](../../develop/examples/index.md) pour valider le comportement requis de l'affichage, du Bluetooth et de la basse consommation.
+1. **Valider le parcours de développement du firmware.** Commencez par le [guide de prise en main du SDK SiFli](../../getting-started/sifli/getting-started-sifli-sdk.md), puis utilisez le [flux de travail du SDK SiFli](../../develop/platforms/sifli-sdk/overview.md) et les [exemples](../../develop/examples/index.md) pour valider le comportement requis de l'affichage, du Bluetooth et de la basse consommation.
 2. **Planifier le matériel d'évaluation.** μForge ne répertorie actuellement aucun module ni carte de développement spécifique au SF32LB55. Utilisez le [sélecteur de produits SF32](../product-selector.md) pour choisir la plateforme d'évaluation disponible la plus proche, puis vérifiez la couverture du boîtier et des interfaces avant de transposer les résultats à une conception 55x.
 3. **Concevoir et relire le matériel.** Avant de valider le schéma ou l'implantation, utilisez le [guide de conception matérielle](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) de μForge, y compris ses listes de contrôle du [schéma](../../hardware/chip-guides/SF32LB55x_schematic_checklist.md) et de l'implantation du circuit imprimé.
 4. **Vérifier la source faisant autorité.** Confirmez la référence commandable et le boîtier exacts à l'aide de la [fiche technique][Fiche technique], du [manuel utilisateur][Manuel utilisateur], du [guide de conception d'origine][Guide de conception d'origine (wiki.sifli.com)] et de la [source de la note d'application matérielle][Note d'application matérielle (source GitHub)] de SiFli.

@@ -39,21 +39,21 @@ Considere o SF32LB52-MOD-1 quando o produto precisar de um ou mais destes recurs
 
 ## Recursos de desenvolvimento { #development-resources }
 
-[Ficha técnica do módulo]: https://downloads.sifli.com/user%20manual/DS5203-SF32LB52-MOD-1%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p3.pdf
-[Introdução ao chip]: ../chips/SF32LB52x.md
-[Guia de projeto de hardware]: ../../hardware/chip-guides/SF32LB52-MOD-1_hardware_design_guide.md
-[Guia de projeto original (wiki.sifli.com, variante EPD)]: https://wiki.sifli.com/en/hardware/SF32LB52-MOD-1-EPD-HW-Application.html
-[Comprar amostras]: https://sifli.taobao.com/
-[Comprar kits de desenvolvimento]: https://sifli.taobao.com/
+[Module Datasheet]: https://downloads.sifli.com/user%20manual/DS5203-SF32LB52-MOD-1%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p3.pdf
+[Chip Introduction]: ../chips/SF32LB52x.md
+[Hardware Design Guide]: ../../hardware/chip-guides/SF32LB52-MOD-1_hardware_design_guide.md
+[Original Design Guide (wiki.sifli.com, EPD variant)]: https://wiki.sifli.com/en/hardware/SF32LB52-MOD-1-EPD-HW-Application.html
+[Buy Samples]: https://sifli.taobao.com/
+[Buy Dev Kits]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Ficha técnica do módulo]__
-- :fontawesome-solid-microchip: __[Introdução ao chip]__
-- :fontawesome-solid-file-lines: __[Guia de projeto de hardware]__
-- :fontawesome-solid-file-lines: __[Guia de projeto original (wiki.sifli.com, variante EPD)]__
-- :fontawesome-solid-cart-shopping: __[Comprar amostras]__
-- :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento]__
+- :fontawesome-solid-file-pdf: __[Datasheet do módulo][Module Datasheet]__
+- :fontawesome-solid-microchip: __[Introdução ao chip][Chip Introduction]__
+- :fontawesome-solid-file-lines: __[Guia de projeto de hardware][Hardware Design Guide]__
+- :fontawesome-solid-file-lines: __[Guia de projeto original (wiki.sifli.com, variante EPD)][Original Design Guide (wiki.sifli.com, EPD variant)]__
+- :fontawesome-solid-cart-shopping: __[Comprar amostras][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento][Buy Dev Kits]__
 
 </div>
 

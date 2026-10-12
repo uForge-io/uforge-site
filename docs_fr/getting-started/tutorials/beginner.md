@@ -26,7 +26,7 @@ Laissez un terminal série ouvert. Vous résoudrez plus facilement la plupart de
 
 Les exemples C sont des extraits, pas des fichiers source complets. Ajoutez les en-têtes, déclarations, initialisations propres à la carte, vérifications des valeurs de retour et libérations de ressources nécessaires à votre projet et à votre version du SDK.
 
-<div align="center"><em>Tableau : Avant de commencer</em></div>
+<div align="center"><em>Tableau : avant de commencer</em></div>
 
 <div align="center" markdown>
 
@@ -176,7 +176,7 @@ rt_uint32_t voltage_0p1mV = rt_adc_read(adc, channel);
 
 **Si cela ne fonctionne pas :** vérifiez le multiplexage de broches, le numéro de canal, l'échelle et l'étalonnage documentés du pilote, la plage d'entrée, si l'entrée est flottante, et si le capteur a besoin d'alimentation ou d'un temps de stabilisation avant l'échantillonnage.
 
-**Ce que vous avez appris :** le motif `rt_device_find()` utilisé dans tous les pilotes de périphériques RT-Thread. Vous réutiliserez ce motif pour l'I2C, le SPI, le PWM, le stockage, et les pilotes personnalisés.
+**Ce que vous avez appris :** le motif `rt_device_find()` utilisé dans tous les pilotes de périphériques RT-Thread. Vous réutiliserez ce motif pour l'I2C, le SPI, le PWM, le stockage et les pilotes personnalisés.
 
 ## Piloter une sortie PWM { #drive-a-pwm-output }
 
@@ -195,8 +195,8 @@ rt_pwm_enable(pwm, channel);
 ```
 
 1. Choisissez un canal compatible PWM et confirmez le multiplexage de broches.
-2. Choisissez une période adaptée au périphérique : suffisamment élevée pour éviter un scintillement visible de la LED, ou dans la plage audible pour un buzzer.
-3. Balayez le rapport cyclique pour faire varier progressivement la luminosité d'une LED.
+2. Choisissez une période adaptée au périphérique : elle donne une fréquence assez élevée pour éviter le scintillement visible de la LED, ou une fréquence audible pour un buzzer.
+3. Faites varier le rapport cyclique pour augmenter ou réduire progressivement la luminosité d'une LED.
 4. Essayez quelques tonalités fixes sur un buzzer en changeant la période.
 5. Désactivez le PWM et confirmez que la sortie revient à un état de repos sûr.
 
@@ -204,7 +204,7 @@ rt_pwm_enable(pwm, channel);
 
 **Si cela ne fonctionne pas :** vérifiez si la broche est routée vers l'instance PWM, si le numéro de canal est correct, si la période et l'impulsion sont en nanosecondes, et si la charge externe a besoin d'un transistor de commande.
 
-**Ce que vous avez appris :** la configuration période/rapport cyclique et le même motif de pilote de périphérique du Tutoriel 4 appliqué à une classe de périphérique différente.
+**Ce que vous avez appris :** la configuration de la période et du rapport cyclique, ainsi que l'application du modèle de pilote de périphérique du Tutoriel 4 à une autre catégorie de périphériques.
 
 ## Lire et régler l'heure avec le RTC { #keep-time-with-the-rtc }
 
@@ -247,7 +247,7 @@ Après avoir terminé les six courts tutoriels, combinez-les en un petit projet 
 
 **Critère de réussite :** le projet fonctionne plusieurs minutes sans déclenchements répétés du bouton, journaux incontrôlés ni réinitialisations inattendues.
 
-## Liste de vérification pour la mise en service des premiers périphériques { #beginner-bring-up-checklist }
+## Liste de contrôle pour la mise en service des premiers périphériques { #beginner-bring-up-checklist }
 
 - [ ] Le nom de carte, le port série et la procédure de flashage ont été validés.
 - [ ] La sortie GPIO fonctionne sur une vraie LED ou une broche mesurée.

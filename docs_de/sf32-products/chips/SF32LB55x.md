@@ -22,7 +22,7 @@ Der Chip-Modellleitfaden von SiFli weist darauf hin, dass SF32LB55x vor den spä
 
 ## Anwendungen { #applications }
 
-**SF32LB55x empfiehlt sich für** BLE-orientierte Produkte, die eine stärkere Bedienoberfläche, größeren Arbeitsspeicher oder flexiblere Gehäuse benötigen als einfache Wearable-MCUs, darunter:
+**SF32LB55x empfiehlt sich für** BLE-orientierte Produkte, die eine stärkere Bedienoberfläche, größeren Arbeitsspeicher oder eine größere Gehäuseauswahl benötigen als einfache Wearable-MCUs, darunter:
 
 - Smartwatches und Fitnessarmbänder
 - Wearables zur Gesundheitsüberwachung
@@ -92,16 +92,16 @@ Wählen Sie SF32LB55x, wenn das Design eine oder mehrere dieser Fähigkeiten ben
 - 2.5D-Grafik-Engine ePicasso mit Hardware-Drehung, -Skalierung, -Spiegelung und Alpha-Blending
 - eZip dekomprimiert Grafiken verlustfrei und lässt sich mit ePicasso verketten
 - Die Transformationsebene von ePicasso unterstützt Auflösungen bis 640 × 640; generische Ebenen und die Display-Ausgabe unterstützen bis zu 1024 × 1024, und die Display-Ausgabe erreicht bis zu 60 fps
-- Der LCD-Controller unterstützt bei geeigneten Varianten die Schnittstellen 8080, SPI, Dual-SPI, Quad-SPI, DPI, MIPI DSI und JDI-Reflexivdisplays; prüfen Sie die Verfügbarkeit für das gewählte Modell
+- Der LCD-Controller unterstützt bei geeigneten Varianten die Schnittstellen 8080, SPI, Dual-SPI, Quad-SPI, DPI, MIPI DSI und JDI-Schnittstellen für reflektive Displays; prüfen Sie die Verfügbarkeit für das gewählte Modell
 - Die Framebuffer-Kompression TurboPixel lässt den LCD-Controller komprimierte Bilddaten lesen und für die Anzeige dekomprimieren, was Framebuffer-Speicher und Lesebandbreite reduziert
 - Zwei LCD-Controller; Always-on-Display-Schnittstellen und Dual-Display-Fähigkeit hängen vom gewählten Modell und Gehäuse ab
-- Matrix-Beschleuniger für neuronale Netze für TinyML-Lasten, bis zu 1,92 GOPS und 5,73 TOPS/W
+- Matrix-Beschleuniger für neuronale Netze für TinyML-Workloads, bis zu 1,92 GOPS und 5,73 TOPS/W
 
 ### Drahtlose Konnektivität { #wireless-connectivity }
 
 - Bluetooth Low Energy 5.2
 - BLE-Modi mit 125 kbps, 500 kbps, 1 Mbps und 2 Mbps
-- Empfindlichkeit bis -100 dBm im 1-Mbps-Modus
+- Empfindlichkeit bis −100 dBm im 1-Mbps-Modus
 - Maximale Sendeleistung: 10 dBm
 - Spitzenstrom im Empfang: 2,0 mA bei 3,3 V
 
@@ -143,7 +143,7 @@ Wählen Sie SF32LB55x, wenn das Design eine oder mehrere dieser Fähigkeiten ben
 ### Stromversorgung und Gehäuse { #power-supply-and-package }
 
 - Der Versorgungsspannungsbereich ist variantenspezifisch: 2,97 V bis 3,63 V für SS6600A8; 1,71 V bis 3,63 V für 551U4O5 und die ausgewählten BGA-Varianten
-- Die Betriebstemperatur ist variantenspezifisch: -20 °C bis +70 °C für die dokumentierten QFN-Varianten; -40 °C bis +85 °C für die ausgewählten BGA-Varianten
+- Die Betriebstemperatur ist variantenspezifisch: −20 °C bis +70 °C für die dokumentierten QFN-Varianten; −40 °C bis +85 °C für die ausgewählten BGA-Varianten
 - Integriertes Energiemanagement mit zwei hocheffizienten Buck-Reglern und Low-Power-LDO
 - Schlafstrom mit RTC-Aufwachen: 600 nA
 - Schlafstrom mit Pin-Aufwachen: 280 nA
@@ -175,11 +175,11 @@ Die folgenden aktuellen Modelle aus dem Chip-Modellleitfaden von SiFli verdeutli
 
 | Teilenummer | Gehäuse | Integrierter Speicher | Im Modellleitfaden aufgeführte Display-Schnittstellen | Auswahlhinweise |
 | :--- | :--- | :--- | :--- | :--- |
-| SS6600A8 | QFN68L | Zwei 4-MB-QSPI-NOR-Bausteine, als ein 8-MB-OSPI-NOR-Baustein konfiguriert; kein PSRAM im Gehäuse | QSPI, 8080 | 49 GPIOs; 2,97 V bis 3,63 V; -20 °C bis +70 °C; kompakte Option ohne PSRAM im Gehäuse |
-| SF32LB551U4O5 | QFN68L | 4 MB QSPI-NOR-Boot-Flash + 4 MB OPI-PSRAM | QSPI, 8080 | 49 GPIOs; 1,71 V bis 3,63 V; -20 °C bis +70 °C; kompakte Option mit integriertem PSRAM |
-| SF32LB555V4O6 | BGA145 | 4 MB QSPI-NOR-Boot-Flash + 4 MB OPI-PSRAM | MIPI DSI Command-Modus, QSPI, 8080 | 95 GPIOs; -40 °C bis +85 °C; ausgewogene BGA145-Wahl für Display-Produkte mit 4 MB PSRAM |
-| SF32LB555V436 | BGA145 | 4 MB QSPI-NOR-Boot-Flash + 8 MB OPI-PSRAM | MIPI DSI Command-Modus, QSPI, 8080 | 95 GPIOs; -40 °C bis +85 °C; BGA145-Option für Designs, die doppelt so viel integrierten PSRAM wie SF32LB555V4O6 benötigen |
-| SF32LB557VD3A6 | BGA169 | 1 MB QSPI-NOR-Boot-Flash + 16 MB OPI-PSRAM + 2 MB QPI-PSRAM | MIPI DSI Command-Modus, QSPI, 8080, JDI/Sharp MIP | 113 GPIOs; -40 °C bis +85 °C; unterstützt MIPI DSI plus SPI/DSPI-Dual-Displays mit unabhängigem Inhalt |
+| SS6600A8 | QFN68L | Zwei 4-MB-QSPI-NOR-Bausteine, als ein 8-MB-OSPI-NOR-Baustein konfiguriert; kein PSRAM im Gehäuse | QSPI, 8080 | 49 GPIOs; 2,97 V bis 3,63 V; −20 °C bis +70 °C; kompakte Option ohne PSRAM im Gehäuse |
+| SF32LB551U4O5 | QFN68L | 4 MB QSPI-NOR-Boot-Flash + 4 MB OPI-PSRAM | QSPI, 8080 | 49 GPIOs; 1,71 V bis 3,63 V; −20 °C bis +70 °C; kompakte Option mit integriertem PSRAM |
+| SF32LB555V4O6 | BGA145 | 4 MB QSPI-NOR-Boot-Flash + 4 MB OPI-PSRAM | MIPI DSI Command-Modus, QSPI, 8080 | 95 GPIOs; −40 °C bis +85 °C; ausgewogene BGA145-Wahl für Display-Produkte mit 4 MB PSRAM |
+| SF32LB555V436 | BGA145 | 4 MB QSPI-NOR-Boot-Flash + 8 MB OPI-PSRAM | MIPI DSI Command-Modus, QSPI, 8080 | 95 GPIOs; −40 °C bis +85 °C; BGA145-Option für Designs, die doppelt so viel integrierten PSRAM wie SF32LB555V4O6 benötigen |
+| SF32LB557VD3A6 | BGA169 | 1 MB QSPI-NOR-Boot-Flash + 16 MB OPI-PSRAM + 2 MB QPI-PSRAM | MIPI DSI Command-Modus, QSPI, 8080, JDI/Sharp MIP | 113 GPIOs; −40 °C bis +85 °C; unterstützt MIPI DSI plus SPI/DSPI-Dual-Displays mit unabhängigem Inhalt |
 
 </div>
 

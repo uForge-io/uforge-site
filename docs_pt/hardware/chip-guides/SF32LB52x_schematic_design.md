@@ -8,10 +8,10 @@ tags:
     - Microcontrolador
 ---
 
-# Guia de hardware do SF32LB52x — Projeto do esquemático { #sf32lb52x-hardware-design-guide-schematic-design-guidelines }
+# Guia de projeto de hardware do SF32LB52x — Projeto do esquemático { #sf32lb52x-hardware-design-guide-schematic-design-guidelines }
 
-!!! note "Parte do guia de hardware do SF32LB52x"
-    As orientações de projeto do esquemático estão distribuídas em três páginas: esta página (Seções 5.1–5.3: sistema mínimo, alimentação e clock), [RF e interfaces de usuário](SF32LB52x_schematic_rf_interfaces.md) (Seções 5.4–5.5) e [Armazenamento e fabricação](SF32LB52x_schematic_storage_mfg.md) (Seções 5.6–5.7). Comece pela [visão geral do guia de hardware do SF32LB52x](SF32LB52x_hardware_design_guide.md) para selecionar o dispositivo e consultar o fluxo completo de projeto, ou use o [Checklist do esquemático](SF32LB52x_schematic_checklist.md) para a revisão item a item.
+!!! note "Parte do guia de projeto de hardware do SF32LB52x"
+    As orientações de projeto do esquemático estão distribuídas em três páginas: esta página (Seções 5.1–5.3: sistema mínimo, alimentação e clock), [RF e interfaces de usuário](SF32LB52x_schematic_rf_interfaces.md) (Seções 5.4–5.5) e [Armazenamento e fabricação](SF32LB52x_schematic_storage_mfg.md) (Seções 5.6–5.7). Comece pela [visão geral do guia de projeto de hardware do SF32LB52x](SF32LB52x_hardware_design_guide.md) para selecionar o dispositivo e consultar o fluxo completo de projeto, ou use o [Checklist do esquemático](SF32LB52x_schematic_checklist.md) para a revisão item a item.
 
 ## 5. Orientações de projeto do esquemático { #5-schematic-design-guidelines }
 
@@ -29,7 +29,7 @@ Este capítulo acompanha o projeto do esquemático ao longo de três páginas. R
 | RF | Casamento de RF, caminho da antena e acesso para ajuste | Plano de impedância de RF, captura do posicionamento da rede de casamento e plano de ajuste da antena |
 | Interfaces de usuário | Display, áudio, botões e motor de vibração | Revisão das interfaces no esquemático, pinos de temporização e controle, sequenciamento de alimentação e revisão analógica |
 | Armazenamento e conectividade | Meio de boot, pinos de bootstrap, chave de alimentação do armazenamento, sensores, UART/I2C e GPTIM | Tabela de bootstrap, divergência PA11/PA21 nas fontes, atribuição dos barramentos e revisão da alimentação do armazenamento |
-| Fabricação | DBG_UART/SWD, pontos de teste, gravação na produção, acesso para calibração e checklists de liberação | Desenho dos pontos de teste, plano da bancada de teste de produção e evidências completas de liberação |
+| Fabricação | DBG_UART/SWD, pontos de teste, gravação na produção, acesso para calibração e checklists de liberação | Desenho dos pontos de teste, plano do gabarito de teste de produção e evidências completas de liberação |
 
 </div>
 
@@ -43,8 +43,8 @@ Na primeira revisão do esquemático, siga esta sequência:
 2. Escolha o caminho de alimentação correto: `SF32LB520/3/5/7` para produtos com bateria recarregável, ou `52B/D/E/G/J` para produtos com alimentação externa regulada.
 3. Fixe as decisões de alimentação da Seção 5.2, incluindo `VBUS`/`VBAT`/`VCC` ou `PVDD`/`VDDIOA`/`VDD_SIP`, BUCK, desacoplamento dos LDOs internos, alimentações de RF/áudio e todas as chaves de carga para baixo consumo.
 4. Selecione o meio de boot e instale os resistores de pull-up/pull-down de bootstrap em `PA13`/`PA17` conforme a tabela de boot da Seção 5.6.1.
-5. Confirme o pino de controle da chave de alimentação do armazenamento de boot antes de concluir o layout. A nota de aplicação e o guia do esquemático indicam `PA21`, mas o checklist oficial indica `PA11` para a Flash externa nas variantes alimentadas por bateria.
-6. Reserve `PA18`/`PA19`, terra e uma referência de alimentação válida para acesso DBG_UART/SWD antes de finalizar o gabinete e o dispositivo de teste de produção.
+5. Confirme o pino de controle da chave de alimentação do armazenamento de boot antes de concluir o layout. As notas de aplicação e o guia do esquemático indicam `PA21`, mas o checklist oficial indica `PA11` para a Flash externa nas variantes alimentadas por bateria.
+6. Reserve `PA18`/`PA19`, terra e uma referência de alimentação válida para acesso DBG_UART/SWD antes de finalizar o gabinete e o gabarito de teste de produção.
 7. Selecione os cristais de 48 MHz e 32,768 kHz conforme a Seção 5.3.1 e considere suas restrições de posicionamento durante a revisão do esquemático.
 8. Defina pinos de despertar, comportamento do botão de alimentação, eventos do carregador e estados de desligamento do armazenamento e sensores antes de finalizar a política de baixo consumo do firmware.
 
@@ -59,7 +59,7 @@ O projeto da alimentação define as linhas de alimentação, chaves de carga, c
 **Resumo**
 
 - Os modelos alimentados por bateria usam `SF32LB520/3/5/7` com `VBUS`, `VBAT` e `VCC`; também é necessário definir as opções de carregamento e OVP.
-- Os modelos com alimentação externa regulada usam `52B/D/E/G/J`, com `PVDD` e `VDDIOA` regulados externamente. Configure `VDD_SIP` conforme o modelo exato: ele pode usar uma fonte externa ou o LDO interno. Não há circuito interno de carregamento.
+- Os modelos de alimentação regular usam `52B/D/E/G/J`, com `PVDD` e `VDDIOA` regulados externamente. Configure `VDD_SIP` conforme o modelo exato: ele pode usar uma fonte externa ou o LDO interno. Não há circuito interno de carregamento.
 - Defina o indutor BUCK, o desacoplamento dos LDOs internos, as alimentações de RF/áudio e as chaves de carga para o modo Standby antes de posicionar os componentes na PCB.
 
 **Objetivo do projeto**
@@ -100,9 +100,9 @@ Projete uma árvore de alimentação estável e com baixa corrente de fuga, adeq
     (3) VDD18_VOUT: SF32LB520U36 requer alimentação externa de 3,3 V; SF32LB523/5/7Ux6 usam o LDO interno e não precisam de alimentação externa. Configure o LDO VDD18 interno no software conforme o modelo do chip e não o habilite quando houver alimentação externa.
     (4) VDD33_VOUT1: no SF32LB520U36, alimenta apenas VDD18_VOUT, a Flash externa e AVDD33_AUD; no SF32LB523/5/7Ux6, alimenta apenas a Flash externa e AVDD33_AUD.
 
-=== "52B/D/E/G/J (alimentação externa regulada)"
+=== "52B/D/E/G/J (alimentação regular)"
 
-    <div align="center"><em>Tabela 5.2-2: Requisitos de alimentação dos modelos com fonte externa regulada</em></div>
+    <div align="center"><em>Tabela 5.2-2: Requisitos de alimentação dos modelos de alimentação regular</em></div>
 
     <div align="center" markdown>
 
@@ -191,7 +191,7 @@ Os dois grupos de projeto usam a mesma especificação de indutor.
     !!! important "Observações sobre o módulo de carga integrado"
         - Faixa de entrada VBUS: 4,6 V–5,5 V
         - Faixa de entrada VCC: 3,2 V–4,7 V
-        - Corrente padrão de pré-carga: 56 mA; tensão de transição da pré-carga para corrente constante: 3,0 V
+        - Corrente padrão de carga lenta (trickle): 56 mA; tensão de transição da carga lenta para corrente constante: 3,0 V
         - Corrente constante de carga padrão: 65 mA, ajustável entre 5–560 mA
         - Tensão de carga completa padrão: 4,2 V, ajustável até 4,45 V
         - Tensão de reinício da carga: tensão de carga completa - 0,15 V
@@ -203,10 +203,10 @@ Os dois grupos de projeto usam a mesma especificação de indutor.
         - AVDD33_AUD deve ser alimentado por VDD33_VOUT1, não por VSYS
         - Não alimente o LCD pelo LDO interno: use um LDO externo
 
-=== "52B/D/E/G/J (alimentação externa regulada)"
+=== "52B/D/E/G/J (alimentação regular)"
 
     !!! info "Não se aplica"
-        Os modelos com alimentação externa regulada recebem energia diretamente de uma fonte regulada e **não possuem circuito de gerenciamento de carga**. Esta seção não se aplica a eles. Se o produto precisar de alimentação por bateria e carregamento, use a série SF32LB520/3/5/7.
+        Os modelos de alimentação regular são alimentados diretamente por uma fonte externa regulada e **não possuem circuito de gerenciamento de carga**. Esta seção não se aplica a eles. Se o produto precisar de alimentação por bateria e carregamento, use a série SF32LB520/3/5/7.
 
 ##### 5.2.1.4. Redução do consumo em Standby { #5214-reducing-standby-power }
 
@@ -220,7 +220,7 @@ Os dois grupos de projeto usam a mesma especificação de indutor.
 
     Defina cuidadosamente o estado padrão dos GPIOs que controlam as chaves de alimentação. Acrescente resistores de pull-up/pull-down na faixa de megaohms para que as chaves de carga permaneçam desligadas por padrão. Selecione LDOs e chaves de carga com baixa corrente quiescente (Iq) e baixa corrente em desligamento (Istb). Nos dispositivos de alimentação que permanecem ligados, dê atenção especial a Iq.
 
-=== "52B/D/E/G/J (alimentação externa regulada)"
+=== "52B/D/E/G/J (alimentação regular)"
 
     Use chaves de carga para gerenciar dinamicamente a alimentação de cada bloco funcional. Para módulos ou caminhos que permanecem ligados, escolha componentes com baixa corrente quiescente.
 
@@ -228,24 +228,24 @@ Os dois grupos de projeto usam a mesma especificação de indutor.
 
 ##### 5.2.1.5. Checklist de alimentação { #5215-power-design-checklist }
 
-- [ ] O grupo de alimentação (bateria / fonte externa regulada) foi confirmado para o modelo exato do chip
+- [ ] O grupo de alimentação (bateria / alimentação regular) foi confirmado para o modelo exato do chip
 - [ ] O indutor BUCK atende a 4,7 uH ±20%, DCR ≤0,4 Ω, Isat ≥450 mA
 - [ ] Todos os capacitores de desacoplamento dos LDOs internos foram posicionados conforme os requisitos
 - [ ] A alimentação do LCD está isolada e não é fornecida diretamente pelo LDO interno
 - [ ] As alimentações de áudio e RF estão filtradas adequadamente
-- [ ] Modelos com bateria: caminho de carregamento e faixas de tensão do OVP verificados; modelos com fonte externa regulada: VDD_SIP/VDDIOA configurados corretamente para o modelo do chip
+- [ ] Modelos com bateria: caminho de carregamento e faixas de tensão do OVP verificados; modelos de alimentação regular: VDD_SIP/VDDIOA configurados corretamente para o modelo do chip
 
 **Erros frequentes: alimentação**
 
 - Alimentar o LCD diretamente por um LDO interno, em vez de usar um LDO externo.
-- Misturar premissas de alimentação por bateria e por fonte externa regulada no mesmo esquemático.
+- Misturar premissas de alimentação por bateria e de alimentação regular no mesmo esquemático.
 - Manter `VDD_SIP` alimentado durante Hibernate em modelos com risco de fuga no armazenamento.
 - Escolher um carregador ou OVP sem verificar a corrente e a faixa de tensão de VBUS no pior caso.
 
 **Verificações de bring-up: alimentação**
 
 - Meça `VCC`/`PVDD`, a saída BUCK, as alimentações de RF/áudio e a alimentação do armazenamento antes de o firmware habilitar os periféricos.
-- Confirme a conexão do carregador, a pré-carga, a carga com corrente constante e o reinício de carga nos projetos com bateria.
+- Confirme a conexão do carregador, a carga lenta (trickle), a carga com corrente constante e o reinício de carga nos projetos com bateria.
 - Meça a corrente em Standby e Hibernate com as chaves de carga do display, dos sensores, do armazenamento e do motor desligadas.
 
 #### 5.2.2. Modos de operação e fontes de despertar { #522-operating-modes-and-wake-sources }
@@ -302,7 +302,7 @@ Toda a família suporta 15 fontes de interrupção capazes de despertar o sistem
 - [ ] Os pinos necessários para despertar foram definidos antes de finalizar o pin-mux.
 - [ ] Os estados de pull-up/pull-down dos pinos de despertar são compatíveis com Standby e Hibernate.
 - [ ] As alimentações externas do armazenamento e sensores não provocam fugas pelos pinos de I/O em Hibernate.
-- [ ] As equipes de hardware e firmware acordaram os estados usados durante o transporte, no armazenamento em prateleira e no modo Standby normal.
+- [ ] As equipes de hardware e firmware concordam sobre qual estado é usado no transporte, no armazenamento em prateleira e no Standby normal.
 
 ### 5.3. Geração de clock { #53-clock-generation }
 
@@ -316,7 +316,7 @@ Toda a família suporta 15 fontes de interrupção capazes de despertar o sistem
 
 **Objetivo do projeto**
 
-Forneça clocks estáveis e com baixo jitter, minimizando a corrente dos osciladores, a deriva de frequência, a interferência de RF e os riscos de inicialização.
+Forneça clocks estáveis e com baixo jitter, minimizando a corrente dos osciladores, a deriva de frequência, a interferência de RF e os riscos de bring-up.
 
 O chip requer duas fontes externas de clock: um cristal principal de 48 MHz e um cristal de RTC de 32,768 kHz. Os requisitos são iguais para os dois grupos.
 

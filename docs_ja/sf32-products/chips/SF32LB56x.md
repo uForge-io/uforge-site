@@ -111,8 +111,8 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 - 感度：BLE 1 Mbpsで−100 dBm、BRで−96.3 dBm、EDR2で−95.5 dBm、EDR3で−88.5 dBm
 - 最大送信電力：BR/BLEで19 dBm、EDR2/EDR3で13 dBm
 - BR受信ピーク電流：3.3 Vで2.2 mA
-- 24ビットHiFiオーディオDAC機能ブロック × 1、SNR 108 dB
-- 24ビットHiFiオーディオADC機能ブロック × 1、SNR 99 dB
+- 24ビットHiFiオーディオDAC × 1、SNR 108 dB
+- 24ビットHiFiオーディオADC × 1、SNR 99 dB
 - PDMインターフェース × 2、I2Sインターフェース × 1
 
 ### セキュリティ { #security }

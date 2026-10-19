@@ -46,7 +46,7 @@ SiFli-SDK 오디오 예제는 전체 신호 경로를 위한 실용적인 출발
 3. SDK 리비전, 보드 이름, 구성, 핀 할당, 시리얼 로그를 기록합니다.
 4. 제품에 특화된 요소를 하나 변경한 뒤 같은 테스트를 반복합니다.
 
-[오디오 개요](overview.md)는 이 샘플들의 배경이 되는 인터페이스와 시스템 선택을 설명합니다. 버퍼 소유권, 세션 해제, 디스플레이 또는 Bluetooth 워크로드와의 공존은 [Audio Server와 버퍼링](audio-server-buffering.md)에서 이어서 확인하십시오.
+[오디오 개요](overview.md)는 이 샘플들의 배경이 되는 인터페이스와 시스템 선택을 설명합니다. 버퍼 소유권, 세션 해제, 디스플레이 또는 Bluetooth 워크로드와의 공존은 [Audio Server 및 버퍼링](audio-server-buffering.md)에서 이어서 확인하십시오.
 
 ## 디지털 마이크 캡처: PDM { #digital-microphone-capture-pdm }
 
@@ -65,7 +65,7 @@ SiFli-SDK 오디오 예제는 전체 신호 경로를 위한 실용적인 출발
 
 ## 아날로그 캡처와 기본 녹음/재생 { #analog-capture-and-basic-recordplayback }
 
-**Record Example**은 마이크 캡처와 이어지는 로컬 재생을 검증하는 가장 빠른 경로입니다. 5초 동안 PCM 메모리 버퍼에 녹음한 뒤 버퍼를 스피커로 자동 재생합니다. 공식 페이지는 `eh-lb525`, `sf32lb52-lcd` 시리즈, `sf32lb56-lcd` 시리즈, `sf32lb58-lcd` 시리즈를 나열합니다. 파일 시스템, 압축, Bluetooth 전송, 다중 마이크를 추가하기 전에 여기서 시작하십시오.
+**Record Example**은 마이크 입력을 캡처한 뒤 로컬에서 재생하는 경로를 가장 빠르게 검증할 수 있는 예제입니다. 5초 동안 PCM 메모리 버퍼에 녹음한 다음, 해당 버퍼를 스피커로 자동 재생합니다. 공식 페이지는 `eh-lb525`, `sf32lb52-lcd` 시리즈, `sf32lb56-lcd` 시리즈, `sf32lb58-lcd` 시리즈를 나열합니다. 파일 시스템, 압축, Bluetooth 전송, 다중 마이크를 추가하기 전에 이 예제로 시작하십시오.
 
 **Local Music Example for stereo speaker**(dual ADC/DAC 예제)는 커스텀 SF32LB58x 보드를 위한 특수한 기준 예제입니다. 공식 페이지에 따르면 SiFli 모듈 보드에서는 동작하지 않으며 아날로그 마이크 2개와 아날로그 스피커 2개가 필요합니다. `mic2file` 명령은 두 마이크를 별도의 PCM 파일로 녹음하고, `mic2speaker 0` 또는 `mic2speaker 1`은 실시간 스피커 모니터링용 마이크를 선택합니다. 이 커스텀 아날로그 토폴로지가 제품과 일치할 때만 사용하고, 그렇지 않다면 더 단순한 Record Example로 시작하십시오.
 
@@ -116,6 +116,6 @@ SiFli-SDK 오디오 예제는 전체 신호 경로를 위한 실용적인 출발
 ## 관련 자료 { #related-resources }
 
 - 인터페이스, 세션 형태, 전력 고려 사항, 검증은 [오디오 개요](overview.md)를 참고하십시오.
-- 스트림 소유권, DMA 버퍼, 제품 부하 테스트는 [Audio Server와 버퍼링](audio-server-buffering.md)을 참고하십시오.
+- 스트림 소유권, DMA 버퍼, 제품 부하 테스트는 [Audio Server 및 버퍼링](audio-server-buffering.md)을 참고하십시오.
 - 도메인을 아우르는 SDK 예제 카탈로그는 [예제](../../develop/examples/index.md)를 참고하십시오.
-- 현재 공식 목록과 개별 설정 방법은 [SiFli-SDK Audio Example Index](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/index.html)를 참고하십시오.
+- 현재 공식 목록과 개별 설정 방법은 [SiFli-SDK 오디오 예제 색인](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/index.html)을 참고하십시오.

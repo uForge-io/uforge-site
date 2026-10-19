@@ -11,7 +11,7 @@ hide:
 # Guide de conception matérielle SF32LB56x — Directives de conception du schéma { #sf32lb56x-hardware-design-guide-schematic-design-guidelines }
 
 !!! note "Fait partie du guide de conception matérielle SF32LB56x"
-    Cette page couvre la section 5, les directives de conception du schéma. Commencez par l'[aperçu du guide de conception matérielle SF32LB56x](SF32LB56x_hardware_design_guide.md) pour choisir le composant et consulter le flux de conception complet. Poursuivez avec la [liste de contrôle du schéma](SF32LB56x_schematic_checklist.md) ou passez directement aux [directives d'implantation et de routage du PCB](SF32LB56x_pcb_layout.md).
+    Cette page couvre la section 5, les directives de conception du schéma. Commencez par l'[aperçu du guide de conception matérielle SF32LB56x](SF32LB56x_hardware_design_guide.md) pour choisir le composant et consulter le flux de conception complet. Poursuivez avec la [liste de contrôle du schéma](SF32LB56x_schematic_checklist.md) ou passez directement aux [directives d'implantation et de routage de la PCB](SF32LB56x_pcb_layout.md).
 
 ## 5. Directives de conception du schéma { #5-schematic-design-guidelines }
 
@@ -34,10 +34,10 @@ Examinez ensemble les rails d'alimentation du processeur, les condensateurs loca
 | MIC_BIAS | 1,4 | - | 2,8 | - | Sortie d'alimentation du microphone |
 | AVDD33_ANA | 3,15 | 3,3 | 3,45 | 50 | Entrée d'alimentation analogique + alimentation RFPA |
 | AVDD33_AUD | 3,15 | 3,3 | 3,45 | 50 | Alimentation audio analogique |
-| VDDIO1 | 1,71 | 1,8 | 1,98 | - | Entrée d'alimentation pour le composant de stockage co-packagé du grand cœur |
+| VDDIO1 | 1,71 | 1,8 | 1,98 | - | Entrée d'alimentation pour le composant de stockage intégré au boîtier du grand cœur |
 | VDDIO2 | 1,71 | 1,8 | 3,45 | - | Entrée d'alimentation pour les GPIO PA (sauf PA5~11) |
 | VDDIO3 | 1,71 | 1,8 | 3,45 | - | Entrée d'alimentation pour PA5~11 |
-| VDDIO4 | 1,71 | 1,8 | 3,45 | - | Entrée d'alimentation pour les GPIO PB et la Flash co-packagée du petit cœur |
+| VDDIO4 | 1,71 | 1,8 | 3,45 | - | Entrée d'alimentation pour les GPIO PB et la Flash intégrée au boîtier du petit cœur |
 | GPADC_VREF | - | - | - | - | Entrée de tension de référence du GPADC ; connectez uniquement un condensateur externe, aucune alimentation externe requise |
 | AUD_VREF | - | - | - | - | Entrée de tension de référence audio ; connectez uniquement un condensateur externe, aucune alimentation externe requise |
 
@@ -198,15 +198,15 @@ Examinez ensemble les rails d'alimentation du processeur, les condensateurs loca
 
 <div align="center"><em>Figure 5.1-8 : Circuit de référence de charge du SF32LB56xV</em></div>
 
-Sans gestion du chemin d'alimentation, le système et la batterie sont directement raccordés à VBAT. Cette solution est moins coûteuse, mais les circuits en aval ne peuvent pas être entièrement isolés de la batterie : les courants de fuite augmentent et l'objectif de basse consommation en Shipping Mode n'est pas atteint. Lorsque la batterie est en décharge profonde, le courant de charge lente du chargeur doit dépasser la somme du courant du système et des fuites (i1+i2 dans le schéma source). Lorsque le système fonctionne, le courant de charge constant doit également dépasser i1+i2 ; sinon, la charge du système consomme une partie du courant de charge et la batterie risque de ne pas être complètement chargée. Un chargeur avec gestion du chemin d'alimentation sépare l'alimentation du système sur VSYS de la charge de la batterie sur VBAT, prend en charge le Shipping Mode et peut alimenter le système depuis VSYS même si la batterie est en décharge profonde.
+Sans gestion du chemin d'alimentation, le système et la batterie sont directement raccordés à VBAT. Cette solution est moins coûteuse, mais les circuits en aval ne peuvent pas être entièrement isolés de la batterie : les courants de fuite augmentent et l'objectif de basse consommation en Shipping Mode n'est pas atteint. Lorsque la batterie est en surdécharge, le courant de charge lente du chargeur doit dépasser la somme du courant du système et des fuites (i1+i2 dans le schéma source). Lorsque le système fonctionne, le courant de charge constant doit également dépasser i1+i2 ; sinon, la charge du système consomme une partie du courant de charge et la batterie risque de ne pas être complètement chargée. Un chargeur avec gestion du chemin d'alimentation sépare l'alimentation du système sur VSYS de la charge de la batterie sur VBAT, prend en charge le Shipping Mode et peut alimenter le système depuis VSYS même si la batterie est en surdécharge.
 
-La variante U propose trois topologies d'alimentation, à choisir selon la tension d'E/S des périphériques et l'objectif de consommation du système. Dans les trois cas, AVDD33_ANA et AVDD33_AUD sont alimentées en 3,3 V. La topologie la moins énergivore alimente PVDD et VDDIO1–VDDIO4 en 1,8 V et utilise des périphériques avec E/S 1,8 V. La topologie intermédiaire maintient PVDD et VDDIO1 à 1,8 V, tandis que VDDIO2–VDDIO4 et les E/S des périphériques sont à 3,3 V. Dans la topologie la plus énergivore, seule VDDIO1, qui alimente la PSRAM intégrée, reste à 1,8 V ; PVDD, VDDIO2–VDDIO4 et les E/S des périphériques sont à 3,3 V. Utilisez des interrupteurs de charge pour gérer dynamiquement l'alimentation des modules externes et laissez-les éteints par défaut lorsqu'ils ne sont pas utilisés. Pour les modules qui doivent rester alimentés, choisissez des composants à faible courant de repos. Le niveau matériel par défaut du GPIO de commande doit correspondre à la polarité d'activation de l'interrupteur afin qu'il reste éteint au démarrage. SiFli recommande une résistance de pull-up ou de pull-down de 1 MΩ sur l'entrée d'activation.
+La variante U propose trois topologies d'alimentation, à choisir selon la tension d'E/S des périphériques et l'objectif de consommation du système. Dans les trois cas, AVDD33_ANA et AVDD33_AUD sont alimentées en 3,3 V. La topologie la moins énergivore alimente PVDD et VDDIO1–VDDIO4 en 1,8 V et utilise des périphériques avec E/S 1,8 V. La topologie intermédiaire maintient PVDD et VDDIO1 à 1,8 V, tandis que VDDIO2–VDDIO4 et les E/S des périphériques sont à 3,3 V. Dans la topologie la plus énergivore, seule VDDIO1, qui alimente la PSRAM intégrée, reste à 1,8 V ; PVDD, VDDIO2–VDDIO4 et les E/S des périphériques sont à 3,3 V. Utilisez des interrupteurs de charge pour gérer dynamiquement l'alimentation des modules externes et laissez-les éteints par défaut lorsqu'ils ne sont pas utilisés. Pour les modules qui doivent rester alimentés, choisissez des composants à faible courant de repos. Le niveau matériel par défaut du GPIO de commande doit correspondre à la polarité d'activation de l'interrupteur afin qu'il reste éteint au démarrage. SiFli recommande une résistance de rappel de 1 MΩ, vers le haut ou vers le bas, sur l'entrée d'activation.
 
 La PMU de la variante U termine la réinitialisation à la mise sous tension (POR) lorsque PVDD atteint 1,5 V. Une baisse de PVDD déclenche une réinitialisation par sous-tension (BOR) lorsque le seuil configuré est atteint ; ce seuil est réglable de 1,5 à 2,5 V.
 
 ### 5.2. Modes de fonctionnement et sources de réveil { #52-operating-modes-and-wake-sources }
 
-Examinez ensemble le mode de fonctionnement, la source de réveil, l'alimentation des résistances de pull-up et le courant de fuite. Utilisez des broches compatibles avec le réveil pour les boutons, l'écran tactile, les interruptions des capteurs, les événements du chargeur et les autres signaux de réveil en basse consommation.
+Le mode de fonctionnement, la source de réveil, l'alimentation des résistances de rappel et le courant de fuite devraient être examinés ensemble. Utilisez des broches compatibles avec le réveil pour les boutons, l'écran tactile, les interruptions des capteurs, les événements du chargeur et les autres signaux de réveil en basse consommation.
 
 <div align="center"><em>Tableau 5.2-1 : Modes de fonctionnement du SF32LB56xU</em></div>
 
@@ -219,9 +219,9 @@ Examinez ensemble le mode de fonctionnement, la source de réveil, l'alimentatio
 | DEEPWFI | Arrêté | Actif | Accessible | Commutable | Actif | Toute interruption | < 5 µs |
 | Light sleep | Arrêté | Arrêté | Non accessible, entièrement conservée | Niveau maintenu | Actif | RTC, GPIO, LPTIM, inter-système, Bluetooth, comparateur | < 100 µs |
 | Deep sleep | Arrêté | Arrêté | Non accessible, entièrement conservée | Niveau maintenu | Actif |  | < 300 µs |
-| Standby | Reset | Reset | Non accessible, LP entièrement conservée, HP conserve seulement 160 Ko | Niveau maintenu | Actif | RTC, boutons, LPTIM, inter-système, Bluetooth | 1,5 ms + reprise |
-| Hibernate rtc | Reset | Reset | Données non conservées | Haute impédance | Reset | RTC, boutons | > 2 ms |
-| Hibernate pin | Reset | Reset | Données non conservées | Haute impédance | Reset | Boutons | > 2 ms |
+| Standby | En réinitialisation | En réinitialisation | Non accessible, LP entièrement conservée, HP conserve seulement 160 Ko | Niveau maintenu | Actif | RTC, boutons, LPTIM, inter-système, Bluetooth | 1,5 ms + reprise |
+| Hibernate rtc | En réinitialisation | En réinitialisation | Données non conservées | Haute impédance | En réinitialisation | RTC, boutons | > 2 ms |
+| Hibernate pin | En réinitialisation | En réinitialisation | Données non conservées | Haute impédance | En réinitialisation | Boutons | > 2 ms |
 
 </div>
 
@@ -236,9 +236,9 @@ Examinez ensemble le mode de fonctionnement, la source de réveil, l'alimentatio
 | DEEPWFI | Arrêté | Actif | Accessible | Commutable | Actif | Toute interruption | < 5 µs |
 | Light sleep | Arrêté | Arrêté | Non accessible, entièrement conservée | Niveau maintenu | Actif | RTC/GPIO/LPTIM/LPCOMP/interruption inter-système/Bluetooth | < 100 µs |
 | Deep sleep | Arrêté | Arrêté | Non accessible, entièrement conservée | Niveau maintenu | Actif | RTC/GPIO/LPTIM/LPCOMP/interruption inter-système/Bluetooth | < 300 µs |
-| Standby | Reset | Reset | Non accessible, LP entièrement conservée, HP conserve seulement 160 Ko | Niveau maintenu | Actif | RTC/boutons/LPTIM/interruption inter-système/Bluetooth | 1,5 ms + reprise |
-| Hibernate rtc | Reset | Reset | Données non conservées | Haute impédance | Reset | RTC/boutons | > 2 ms |
-| Hibernate pin | Reset | Reset | Données non conservées | Haute impédance | Reset | Boutons | > 2 ms |
+| Standby | En réinitialisation | En réinitialisation | Non accessible, LP entièrement conservée, HP conserve seulement 160 Ko | Niveau maintenu | Actif | RTC/boutons/LPTIM/interruption inter-système/Bluetooth | 1,5 ms + reprise |
+| Hibernate rtc | En réinitialisation | En réinitialisation | Données non conservées | Haute impédance | En réinitialisation | RTC/boutons | > 2 ms |
+| Hibernate pin | En réinitialisation | En réinitialisation | Données non conservées | Haute impédance | En réinitialisation | Boutons | > 2 ms |
 
 </div>
 
@@ -282,7 +282,7 @@ Examinez ensemble le mode de fonctionnement, la source de réveil, l'alimentatio
 
 </div>
 
-BOOT_MODE sélectionne le démarrage : un niveau haut active le mode téléchargement ; à niveau bas, la ROM recherche un programme utilisateur, le lance s'il existe et passe sinon en mode téléchargement. La broche Mode de la variante U possède un pull-down interne, peut rester non connectée lorsqu'elle est inutilisée et appartient au domaine VDDIO2. La broche Mode de la variante V appartient au domaine VDDIOA et doit être stabilisée par un pull-up ou pull-down de 10 kΩ ; ne la laissez pas flottante et évitez les changements d'état dus aux interférences. Réservez un point de test Mode sur les cartes de production ; un cavalier de récupération est utile sur les cartes de développement.
+BOOT_MODE sélectionne le démarrage : un niveau haut active le mode téléchargement ; à niveau bas, la ROM recherche un programme utilisateur, le lance s'il existe et passe sinon en mode téléchargement. La broche Mode de la variante U possède un rappel interne au niveau bas (pull-down), peut rester non connectée lorsqu'elle est inutilisée et appartient au domaine VDDIO2. La broche Mode de la variante V appartient au domaine VDDIOA et devrait être maintenue stable par une résistance de rappel de 10 kΩ au niveau haut ou bas ; ne la laissez pas flottante et évitez les changements d'état dus aux interférences. Réservez un point de test Mode sur les cartes de production ; un cavalier de récupération est utile sur les cartes de développement.
 
 Tenez compte de l'alimentation des E/S mémoire lors de l'arrêt en basse consommation. En Standby sur la variante U, les niveaux GPIO sont conservés et VDDIO1 peut rester alimenté ; placez en mode basse consommation les mémoires reliées à MPI1/MPI2. En Hibernate, les niveaux GPIO ne sont pas conservés : coupez VDDIO1 pour éviter les fuites par les E/S de la mémoire intégrée. Sur la variante V, gardez les E/S de la mémoire intégrée alimentées en Standby. Avant Hibernate, coupez VDDIOSA et VDDIOSB via PBR0 et placez la mémoire NOR en Deep Power-Down. VDDIOSC doit rester alimenté.
 
@@ -316,13 +316,13 @@ Placez les quartz de 48 MHz et de 32,768 kHz près de la puce, prévoyez des emp
 
 ### 5.4. RF { #54-rf }
 
-Pour les conceptions SF32LB56xU et SF32LB56xV, routez le signal RF sur une piste à impédance contrôlée de 50 Ω. Si l'antenne choisie est déjà adaptée, aucun composant RF supplémentaire n'est généralement nécessaire. Prévoyez néanmoins un réseau d'adaptation en π pour supprimer les émissions parasites et effectuer l'accord final de l'antenne.
+Pour les conceptions SF32LB56xU et SF32LB56xV, routez le signal RF sur une piste à impédance contrôlée de 50 Ω. Si l'antenne choisie est déjà adaptée, aucun composant RF supplémentaire n'est généralement nécessaire. La conception devrait néanmoins prévoir un réseau d'adaptation en π pour supprimer les émissions parasites et effectuer l'accord final de l'antenne.
 
-Placez le réseau d'adaptation RF près de la puce, et non de l'antenne. Gardez le filtre AVDD_BRF près de la broche du circuit, reliez directement les masses des condensateurs au plan de masse principal et routez la RF sur la couche supérieure si possible. Évitez les vias et les angles vifs, ajoutez de nombreux vias de blindage à la masse de part et d'autre de la piste RF, et éloignez de la zone RF les pistes DC-DC, VBAT, du quartz, de l'horloge haute vitesse, de l'I2C, du SPI, du SDIO, de l'I2S et de l'UART.
+Placez le réseau d'adaptation RF près de la puce, et non de l'antenne. Gardez le filtre AVDD_BRF près de la broche de la puce, reliez directement les masses des condensateurs au plan de masse principal et routez la RF sur la couche supérieure si possible. Évitez les vias et les angles vifs, ajoutez de nombreux vias de blindage à la masse de part et d'autre de la piste RF, et éloignez de la zone RF les pistes DC-DC, VBAT, du quartz, de l'horloge haute vitesse, de l'I2C, du SPI, du SDIO, de l'I2S et de l'UART.
 
 ### 5.5. Interfaces d'affichage, tactiles et de rétroéclairage { #55-display-touch-and-backlight-interfaces }
 
-Le choix de l'interface d'affichage dépend du boîtier. La variante U documente les interfaces d'affichage SPI/QSPI et JDI ; la variante V documente également les options MCU8080 et DPI. Affectez les signaux d'interruption tactile, de reset et de commande du rétroéclairage en tenant compte des fonctions de réveil et des besoins d'accès en production.
+Le choix de l'interface d'affichage dépend du boîtier. La variante U documente les interfaces d'affichage SPI/QSPI et JDI ; la variante V documente également les options MCU8080 et DPI. Les signaux d'interruption tactile, de réinitialisation et de commande du rétroéclairage devraient être affectés en tenant compte des fonctions de réveil et des besoins d'accès en production.
 
 <div align="center"><em>Tableau 5.5-1 : Exemples de pilotes d'affichage</em></div>
 
@@ -353,8 +353,8 @@ Le choix de l'interface d'affichage dépend du boîtier. La variante U documente
 | SDO | PA38 | PA38 | Signal de sortie de données en mode SPI 3/4 fils ; reliez-le à SDI_RDX |
 | D0 | PA40 | PA40 | Donnée 2 en mode Quad-SPI |
 | D1 | PA41 | PA41 | Donnée 3 en mode Quad-SPI |
-| REST | PA05 | PB04 | Signal de reset du panneau d'affichage |
-| TE | PA33 | PA33 | Signal Tearing Effect pour la synchronisation des trames côté MCU |
+| REST | PA05 | PB04 | Signal de réinitialisation du panneau d'affichage |
+| TE | PA33 | PA33 | Signal TE (Tearing Effect) de synchronisation avec les trames de la MCU |
 
 </div>
 
@@ -399,8 +399,8 @@ Le choix de l'interface d'affichage dépend du boîtier. La variante U documente
 | SDO | PA38 | Signal de sortie de données en mode SPI 3/4 fils ; reliez-le à SDI_RDX |
 | D[0] | PA40 | Donnée 2 en mode Quad-SPI |
 | D[1] | PA41 | Donnée 3 en mode Quad-SPI |
-| REST | PA43 | Signal de reset pour l'affichage |
-| TE | PA33 | Signal Tearing Effect pour la synchronisation des trames côté MCU |
+| REST | PA43 | Signal de réinitialisation pour l'affichage |
+| TE | PA33 | Signal TE (Tearing Effect) de synchronisation avec les trames de la MCU |
 
 </div>
 
@@ -413,7 +413,7 @@ Le choix de l'interface d'affichage dépend du boîtier. La variante U documente
 | CSX | PA36 | Sélection de puce |
 | WRX | PA37 | Signal de validation d'écriture pour écrire des données |
 | DCX | PA39 | Sélection données/commande d'affichage |
-| RDX | PA38 | Signal de strobe de lecture des données |
+| RDX | PA38 | Signal de strobe de lecture pour écrire des données |
 | D[0] | PA40 | Donnée 0 |
 | D[1] | PA41 | Donnée 1 |
 | D[2] | PA28 | Donnée 2 |
@@ -422,8 +422,8 @@ Le choix de l'interface d'affichage dépend du boîtier. La variante U documente
 | D[5] | PA31 | Donnée 5 |
 | D[6] | PA32 | Donnée 6 |
 | D[7] | PA34 | Donnée 7 |
-| REST | PA43 | Reset |
-| TE | PA33 | Signal Tearing Effect pour la synchronisation des trames côté MCU |
+| REST | PA43 | Réinitialisation |
+| TE | PA33 | Signal TE (Tearing Effect) de synchronisation avec les trames de la MCU |
 
 </div>
 
@@ -474,7 +474,7 @@ Le choix de l'interface d'affichage dépend du boîtier. La variante U documente
 | :--- | :--- | :--- |
 | JDI_VCK | PA41 | Horloge de décalage pour le pilote vertical |
 | JDI_VST | PA40 | Signal de démarrage pour le pilote vertical |
-| JDI_XRST | PA39 | Signal de reset pour les pilotes horizontal et vertical |
+| JDI_XRST | PA39 | Signal de réinitialisation pour les pilotes horizontal et vertical |
 | JDI_HCK | PA36 | Horloge de décalage pour le pilote horizontal |
 | JDI_HST | PA38 | Signal de démarrage pour le pilote horizontal |
 | JDI_ENB | PA43 | Signal de validation d'écriture pour la mémoire de pixels |
@@ -519,7 +519,7 @@ Le choix de l'interface d'affichage dépend du boîtier. La variante U documente
 
 ### 5.6. Stockage, capteurs, audio et connectivité { #56-storage-sensors-audio-and-connectivity }
 
-N'affectez pas les bus de stockage et d'affichage indépendamment : ils mobilisent tous deux des groupes de GPIO précieux et peuvent influer sur l'empilage des couches du PCB. Avant de figer le schéma, confirmez le type de stockage de démarrage, les pull-up, le domaine de tension, le comportement de l'interrupteur d'alimentation et l'accès à l'outillage de test.
+Il est préférable de ne pas affecter les bus de stockage et d'affichage indépendamment : ils mobilisent tous deux des groupes de GPIO précieux et peuvent influer sur l'empilage des couches de la PCB. Avant de figer le schéma, confirmez le type de stockage de démarrage, les résistances de rappel, le domaine de tension, le comportement de l'interrupteur d'alimentation et l'accès à l'outillage de test.
 
 <div align="center"><em>Tableau 5.6-1 : Interface Flash QSPI du SF32LB56xU</em></div>
 
@@ -651,9 +651,9 @@ Adaptez l'alimentation des E/S mémoire au niveau logique de la mémoire connect
 
 Pour un microphone analogique différentiel externe, placez des condensateurs de blocage CC d'au moins 2,2 µF sur les entrées ADC et alimentez le microphone depuis MIC_BIAS. Le schéma de référence U pour microphone MEMS alimente MIC_BIAS via 1 kΩ et ajoute un condensateur de découplage de 4,7 µF ; il montre également un condensateur de couplage de 0,01 µF sur la sortie du microphone. Le schéma de référence U pour PA analogique utilise des condensateurs de couplage d'entrée de 33 nF et place le filtre passe-bas différentiel près de la puce. Routez les sorties DAC analogiques en paire différentielle protégée par la masse ; limitez la capacité parasite à moins de 10 pF et la longueur à moins de 2 cm. La variante V dispose aussi d'I2S ; son amplificateur I2S de référence se configure via I2C3. Placez les condensateurs d'alimentation et de référence audio près de leurs broches et éloignez l'audio analogique des convertisseurs à découpage et des signaux numériques rapides.
 
-Les deux variantes prennent en charge le PWM pour les moteurs de vibration. Le moteur peut être alimenté directement depuis VBAT si son courant de démarrage ne déstabilise pas le système. Lorsque `BSP_PM_FREQ_SCALING` est défini à `1`, le changement de fréquence du HCPU modifie également la fréquence PWM des broches PA ; utilisez alors une broche PB. PB32 est une entrée d'alimentation/reset active à l'état haut ; un appui d'au moins 10 s déclenche le reset. Le schéma U relie le bouton à VDDIOB via 1 kΩ et ajoute un pull-down de 10 kΩ ainsi qu'un condensateur de 0,1 µF vers GND. Le schéma V utilise une résistance série de 1 kΩ depuis VDD_1V8 et un pull-down de 10 kΩ. Les autres boutons et encodeurs rotatifs nécessitent des pull-up. Pour un encodeur mécanique qui ne revient pas à l'état arrêt après rotation, l'alimentation du pull-up doit pouvoir être coupée en Standby afin d'éviter les fuites.
+Les deux variantes prennent en charge le PWM pour les moteurs de vibration. Le moteur peut être alimenté directement depuis VBAT si son courant de démarrage ne déstabilise pas le système. Lorsque `BSP_PM_FREQ_SCALING` est défini à `1`, le changement de fréquence du HCPU modifie également la fréquence PWM des broches PA ; utilisez alors une broche PB. PB32 est une entrée d'alimentation/réinitialisation active à l'état haut ; un appui d'au moins 10 s déclenche la réinitialisation. Le schéma U relie le bouton à VDDIOB via 1 kΩ et ajoute une résistance de rappel vers le bas de 10 kΩ ainsi qu'un condensateur de 0,1 µF vers GND. Le schéma V utilise une résistance série de 1 kΩ depuis VDD_1V8 et une résistance de rappel vers le bas de 10 kΩ. Les autres boutons et encodeurs rotatifs nécessitent des résistances de rappel vers le haut. Pour un encodeur mécanique qui ne revient pas à l'état arrêt après rotation, l'alimentation de la résistance de rappel vers le haut doit pouvoir être coupée en Standby afin d'éviter les fuites.
 
-U fournit PBR0–PBR2 et V fournit PBR0–PBR3. Au démarrage, PBR0 passe de l'état bas à l'état haut et peut commander un interrupteur de charge externe ; les autres broches PBR sont à l'état bas par défaut. Les broches PBR peuvent fonctionner en sortie en Standby et Hibernate et transporter LPTIM ; toutes sauf PBR0 peuvent aussi fournir une horloge de 32 kHz. Elles peuvent être configurées en entrées de réveil, mais le MCU ne reçoit pas d'interruption depuis cette entrée après son réveil. Privilégiez les broches PB du LCPU pour l'I2C, le SPI, la commande et les interruptions de réveil des capteurs. L'alimentation des capteurs peut être commutée selon les besoins depuis une sortie LVSW ou LDO du SF30147C.
+U fournit PBR0–PBR2 et V fournit PBR0–PBR3. Au démarrage, PBR0 passe de l'état bas à l'état haut et peut commander un interrupteur de charge externe ; les autres broches PBR sont à l'état bas par défaut. Les broches PBR peuvent fonctionner en sortie en Standby et Hibernate et transporter LPTIM ; toutes sauf PBR0 peuvent aussi fournir une horloge de 32 kHz. Elles peuvent être configurées en entrées de réveil, mais la MCU ne reçoit pas d'interruption depuis cette entrée après son réveil. Privilégiez les broches PB du LCPU pour l'I2C, le SPI, la commande et les interruptions de réveil des capteurs. L'alimentation des capteurs peut être commutée selon les besoins depuis une sortie LVSW ou LDO du SF30147C.
 
 Toutes les broches PA de U/V peuvent être multiplexées en UART, I2C ou GPTIM. Pour U, les exceptions sont PB32/PB33/PB34 et PBR0/PBR1/PBR2 ; pour V, PB32–PB36 et PBR0–PBR3. Vérifiez ces restrictions avec les affectations de réveil, de boutons et de PBR.
 

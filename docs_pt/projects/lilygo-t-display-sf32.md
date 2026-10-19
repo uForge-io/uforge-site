@@ -3,7 +3,7 @@ icon: lucide/watch
 description: "Um roteiro de engenharia de produto para a plataforma T-Display-SF32 de terceiros da LilyGO: estabelecer a base do fornecedor, validar o display, os periféricos, a alimentação e a recuperação, reproduzir a compilação do SiFli-SDK e fazer adaptações controladas."
 tags:
     - Projetos
-    - Tela
+    - Display
     - Dispositivos vestíveis
     - Terceiros
 ---
@@ -22,11 +22,13 @@ Essa combinação torna a placa útil para avaliar dispositivos vestíveis centr
 A matriz de recursos do repositório distingue a placa T-SF32-Display independente da expansão opcional T-SF32-Keyboard. Wi-Fi (ESP32-C6), GPS (L76K), teclado matricial e LEDs (TCA8418, AW21009 e XL9555), BME280, transmissor infravermelho e motor de vibração (AW86224) exigem essa expansão; não os inclua na base da placa independente.
 
 ## Por que escolher a implementação com SF32? { #why-the-sf32-implementation }
+
 O T-Display-SF32 reúne os recursos gráficos, Bluetooth, áudio e baixo consumo do SF32LB52x com dispositivos externos de display, toque, movimento, armazenamento e LoRa em uma única placa. A LilyGO também fornece a configuração da placa, drivers específicos, exemplos e um [fork do SDK da LilyGO](https://github.com/Xinyuan-LilyGO/SlFli-SDK-Lilygo), descrito como derivado do SiFli-SDK 2.4.0. Isso pode simplificar o bring-up inicial (ativação inicial) da placa em comparação com partir de um alvo genérico e sem modificações do SDK.
 
 O contraponto é a responsabilidade de manutenção. O suporte à placa, as alterações nos drivers, as revisões de hardware, o firmware incluído e a relação entre o fork do SDK da LilyGO e o SiFli-SDK upstream são controlados fora da SiFli. Para reproduzir o projeto, fixe os commits dos dois repositórios, preserve uma imagem de fábrica/recuperação funcional e trate qualquer migração para uma versão upstream mais recente do SDK como uma alteração explícita de engenharia.
 
 ## Resultado, escopo e critérios de entrada { #outcome-scope-and-entry-criteria }
+
 **Resultado esperado:** estabelecer uma base do T-Display-SF32 com versões fixadas; validar display/toque, periféricos selecionados, alimentação e recuperação; reproduzir a compilação a partir do código-fonte; e então fazer uma alteração delimitada na aplicação, acompanhada de evidências de regressão para a revisão do produto.
 
 Esta página não comprova que todas as variantes da placa tenham todos os periféricos montados, que o firmware do fornecedor esteja pronto para produção, que o relatório de consumo se aplique a outra revisão ou carga de trabalho, nem que o uso de LoRa seja permitido em todas as regiões. Ela também não estende o suporte da SiFli ao hardware ou aos drivers específicos da LilyGO.
@@ -88,6 +90,7 @@ Antes de começar, tenha:
 </div>
 
 ## Escolher uma configuração de referência suportada { #choose-a-supported-baseline }
+
 Atualmente, o repositório upstream usa a branch `master` e não apresenta uma versão identificada por tag como base universal de software. Registre o commit exato em vez de escrever “mais recente”. O repositório contém o diretório `firmware/T-SF32-Factory-V1.2`, mas esse nome não substitui o registro da revisão correspondente da placa, do commit do repositório e do procedimento de gravação.
 
 <div align="center"><em>Tabela: seleção da base do T-Display-SF32</em></div>
@@ -116,6 +119,7 @@ build_t-display-sf32_hcpu\uart_download.bat
 Registre os commits usados do repositório e do SDK, a saída de exportação do ambiente, o log completo da compilação, as imagens geradas e os logs de gravação e inicialização. O número de tarefas executadas em paralelo pode variar; o alvo e as revisões do código-fonte, não.
 
 ## Etapas do projeto { #delivery-map }
+
 <div align="center"><em>Tabela: etapas do projeto T-Display-SF32</em></div>
 
 <div align="center" markdown>
@@ -124,13 +128,14 @@ Registre os commits usados do repositório e do SDK, a saída de exportação do
 |:------|:---------------------|:----------------|
 | 1. Base do fornecedor | A combinação original de placa e firmware funciona conforme identificada? | Sessão funcional fotografada e com versões fixadas |
 | 2. Validação de periféricos e recuperação | As interfaces, estados de alimentação e falhas selecionados podem ser observados e recuperados? | Registro de injeção de falhas, medições e recuperação |
-| 3. Reprodução da compilação | A equipe consegue reconstruir e gravar o mesmo comportamento a partir de fontes limpas? | Ambiente, imagem, log de gravação e resultado repetido |
+| 3. Reprodução a partir de fontes limpas | A equipe consegue reconstruir e gravar o mesmo comportamento a partir de fontes limpas? | Ambiente, imagem, log de gravação e resultado repetido |
 | 4. Adaptação controlada | É possível alterar um comportamento do produto sem quebrar a base? | Alteração delimitada, caminho de reversão e evidências de regressão |
 | 5. Revisão do produto | A plataforma de terceiros é adequada para continuar o protótipo ou criar hardware próprio? | Riscos atribuídos a responsáveis e decisão de prosseguir, adiar ou parar |
 
 </div>
 
 ## Arquitetura do sistema e dependências { #system-architecture-and-dependencies }
+
 <div align="center"><em>Figura: limites do produto e do desenvolvimento do T-Display-SF32</em></div>
 
 ```mermaid
@@ -155,7 +160,7 @@ Trate as falhas como áreas distintas: alimentação/carregamento da placa, inic
 2. Verifique a fonte e a polaridade. A LilyGO alerta que a inicialização exige mais de 3,5 V; use uma fonte monitorada e não teste com uma célula profundamente descarregada.
 3. Grave somente uma base que corresponda comprovadamente à placa ou execute primeiro o firmware existente, se sua procedência for conhecida. Preserve a imagem original quando as ferramentas permitirem.
 4. Teste o menu no próprio dispositivo ou exemplos sem alterações para display/toque e cada periférico selecionado para o produto. Registre funções indisponíveis ou não instaladas, em vez de tratá-las como falhas.
-5. Faça duas inicializações a frio e guarde logs de inicialização, fotos da interface, resultados de toque/entrada e um traço de corrente para uma carga ociosa/ativa claramente definida.
+5. Faça duas inicializações a frio e guarde logs de inicialização, fotos da interface, resultados de toque/entrada e uma curva de corrente para uma carga ociosa/ativa claramente definida.
 
 **Evidências a preservar:** revisão e fotos da placa, identificação do repositório/imagem, dados da fonte e bateria, logs de gravação e inicialização, inventário dos dispositivos instalados, resultados funcionais e condições do teste de corrente.
 
@@ -208,7 +213,7 @@ Trate as falhas como áreas distintas: alimentação/carregamento da placa, inic
 | Sensor | Um valor ou evento da IMU | Identidade do dispositivo, faixa, taxa de amostragem, tratamento de erros, corrente ociosa e comportamento ao despertar |
 | Armazenamento/áudio | Uma operação de arquivo ou caminho de reprodução | Mídia ausente, dados malformados, limites de volume/saída, interrupção de alimentação e recuperação do sistema de arquivos |
 | LoRa | Uma troca de pacotes delimitada em banda permitida | Registro da configuração, timeout, tentativas, corrente, coexistência e revisão regulatória |
-| Alimentação | Uma alteração de sono/despertar ou controle de linha de alimentação | Todas as fontes de despertar, estado do display/periféricos, desligamento por bateria fraca, carregamento e ciclos repetidos |
+| Alimentação | Uma alteração de suspensão/despertar ou controle de linha de alimentação | Todas as fontes de despertar, estado do display/periféricos, desligamento por bateria fraca, carregamento e ciclos repetidos |
 | Migração do SDK | Uma atualização candidata do fork da LilyGO ou do SDK upstream | Diff da configuração da placa, compilação limpa, regressão de todos os periféricos, medições de corrente e reversão |
 
 </div>
@@ -223,16 +228,18 @@ Antes de avançar para um teste de campo ou uma PCB própria, responda:
 - Quais revisões da placa e periféricos instalados compõem a base do produto, e como as unidades recebidas serão identificadas e testadas?
 - Quais valores de corrente foram medidos em atividade, repouso, suspensão, inicialização e desligamento, com o brilho do display, o ciclo de trabalho do rádio, o armazenamento e a configuração de sensores previstos?
 - Como serão verificados a proteção da bateria, o carregamento, o comportamento térmico, o gabinete, o acesso aos conectores e a recuperação com o dispositivo desligado?
-- Quais região LoRa, antena, plano de frequências, parâmetros de transmissão e obrigações regulatórias se aplicam?
+- Quais regiões LoRa, antena, plano de frequências, parâmetros de transmissão e obrigações regulatórias se aplicam?
 - Os arquivos de hardware, firmware, fork do SDK, exemplos, recursos e componentes de terceiros têm licenças compatíveis com a distribuição pretendida?
 - A equipe aceita a dependência de um protótipo de terceiros ou já qualificou um fork controlado e um plano de suporte?
 
 **Critério de saída do ponto de controle 5:** cada risco residual tem um responsável, evidências e uma decisão registrada, e a equipe decidiu explicitamente prosseguir, adiar ou parar.
 
 ## Transição para o projeto do produto { #handoff-to-product-design }
+
 Leve adiante o modelo exato do SF32 e os dispositivos de memória, a temporização do display/toque, os periféricos instalados e seus barramentos, a árvore de alimentação, a política do carregador e da bateria, a estratégia de antena/RF, a conexão de boot/gravação, o plano de partições, o acesso aos testes de produção, a responsabilidade pelo fork do software e o caminho de recuperação comprovado. Continue pelo [caminho de integração do SF32LB52x](../sf32-products/chips/SF32LB52x.md#integration-path), [guia de projeto de hardware do SF32LB52x](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [compilação, gravação e monitoramento do SiFli-SDK](../develop/platforms/sifli-sdk/build-flash-monitor.md) e [projeto para produção](../hardware/design-for-production.md).
 
 ## Fontes de referência { #authoritative-sources }
+
 - [Repositório Xinyuan-LilyGO/T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32)
 - [README do T-Display-SF32 em chinês](https://github.com/Xinyuan-LilyGO/T-Display-SF32/blob/master/readme_cn.md)
 - [Exemplos do T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/examples)

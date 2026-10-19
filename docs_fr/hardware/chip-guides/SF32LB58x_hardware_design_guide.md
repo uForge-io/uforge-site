@@ -2,7 +2,7 @@
 icon: lucide/book-check
 hide:
     - navigation
-description: "Guide de conception matérielle pour le MCU SF32LB58x : architecture d'alimentation, conception d'horloge et RF, affichage, stockage, audio, et directives d'implantation du PCB."
+description: "Guide de conception matérielle pour le MCU SF32LB58x : architecture d'alimentation, conception d'horloge et RF, affichage, stockage, audio, et recommandations de placement et de routage du PCB."
 tags:
     - Matériel
     - Puce
@@ -14,9 +14,9 @@ tags:
 
 Ce guide fournit des recommandations et des documents de référence pour concevoir des produits autour de la famille SF32LB58x de microcontrôleurs AIoT performants. Il s'adresse aux ingénieurs en matériel, aux concepteurs de circuits imprimés et aux développeurs de produits alimentés par batterie qui ont besoin d'interfaces utilisateur évoluées, d'une grande capacité mémoire, du Bluetooth bimode, de fonctions audio, de nombreux GPIO et d'une basse consommation en veille.
 
-Le guide couvre toutes les étapes du développement matériel : PMIC et distribution d'alimentation, fanout du BGA256, planification de l'empilement HDI, circuits d'horloge, conception RF, MIPI-DSI, USB 2.0 High-Speed, SDIO/eMMC, circuits audio, routage du PCB, validation et préparation à la fabrication. Ces recommandations contribuent à réduire les risques liés aux conceptions BGA/HDI denses, à préserver l'intégrité des signaux sur les interfaces haute vitesse et à respecter les exigences du SF32LB58x en matière d'alimentation, de boîtier et de production.
+Le guide couvre toutes les étapes du développement matériel : PMIC et distribution d'alimentation, fanout du BGA256, planification de l'empilement HDI, circuits d'horloge, conception RF, MIPI-DSI, USB 2.0 High-Speed, SDIO/eMMC, circuits audio, placement et routage du PCB, validation et préparation à la fabrication. Ces recommandations contribuent à réduire les risques liés aux conceptions BGA/HDI denses, à préserver l'intégrité des signaux sur les interfaces haute vitesse et à respecter les exigences du SF32LB58x en matière d'alimentation, de boîtier et de production.
 
-Ce document suppose une connaissance de base de la conception matérielle embarquée, de la saisie de schémas et du routage de circuits imprimés haute densité. Il complète la fiche technique et le manuel utilisateur du SF32LB58x, la note d'application matérielle officielle, le dossier de conception de référence et la liste des fournisseurs agréés par SiFli. Ces documents restent les sources de référence pour les spécifications électriques, le multiplexage des broches, les dimensions du boîtier, la qualification des composants et les limites de production.
+Ce document suppose une connaissance de base de la conception matérielle embarquée, de la saisie de schémas et du placement et du routage de circuits imprimés haute densité. Il complète la fiche technique et le manuel utilisateur du SF32LB58x, la note d'application matérielle officielle, le dossier de conception de référence et la liste des fournisseurs agréés par SiFli. Ces documents restent les sources de référence pour les spécifications électriques, le multiplexage des broches, les dimensions du boîtier, la qualification des composants et les limites de production.
 
 ## 2. Ressources de développement { #2-development-resources }
 
@@ -36,9 +36,9 @@ Ce document suppose une connaissance de base de la conception matérielle embarq
 - :fontawesome-solid-file-pdf: __[Manuel utilisateur du SF32LB58x]__
 - :fontawesome-solid-file-lines: __[Note d'application matérielle du SF32LB58x]__
 - :fontawesome-solid-file-excel: __[Classeur de la liste de contrôle du schéma et du PCB du SF32LB58x]__
-- :fontawesome-solid-file-excel: __[Liste de fournisseurs approuvés SiFli (AVL)][Liste de fournisseurs approuvés SiFli (AVL)]__
-- :fontawesome-solid-cart-shopping: __[Acheter des échantillons][Acheter des échantillons]__
-- :fontawesome-solid-cart-shopping: __[Acheter des kits de développement][Acheter des kits de développement]__
+- :fontawesome-solid-file-excel: __[Liste de fournisseurs approuvés SiFli (AVL)]__
+- :fontawesome-solid-cart-shopping: __[Acheter des échantillons]__
+- :fontawesome-solid-cart-shopping: __[Acheter des kits de développement]__
 
 </div>
 
@@ -65,7 +65,7 @@ Ce document suppose une connaissance de base de la conception matérielle embarq
 
 ### 3.2. Variantes { #32-variants }
 
-Avant de figer le schéma, vérifiez la référence exacte du SF32LB58x et sa configuration de mémoire SiP dans la dernière fiche technique et l'AVL. La famille est une plateforme BGA256 qui nécessite un circuit imprimé HDI ; la mémoire SiP varie selon le modèle. Elle permet de connecter une Flash NOR ou SPI NAND externe via MPI3 ou MPI4. Sur l'EVB SiFli, MPI4 est l'interface par défaut pour la SPI NAND externe ; SD1 est utilisé pour l'eMMC ou la SD NAND, et SD2 pour une carte SD ou un périphérique Wi-Fi. Avant de finaliser la conception, vérifiez également le brochage de la variante choisie et le routage de la carte cible.
+Avant de figer le schéma, vérifiez la référence exacte du SF32LB58x et sa configuration de mémoire SiP dans la dernière fiche technique et l'AVL. Considérez la famille comme une plateforme BGA256 réservée au HDI ; la mémoire SiP varie selon le modèle. Elle permet de connecter une Flash NOR ou SPI NAND externe via MPI3 ou MPI4. Sur l'EVB SiFli, MPI4 est l'interface par défaut pour la SPI NAND externe ; SD1 est utilisé pour l'eMMC ou la SD NAND, et SD2 pour une carte SD ou un périphérique Wi-Fi. Avant de finaliser la conception, vérifiez également le brochage de la variante choisie et le routage de la carte cible.
 
 ### 3.3. Boîtiers { #33-packages }
 
@@ -75,7 +75,7 @@ Avant de figer le schéma, vérifiez la référence exacte du SF32LB58x et sa co
 
 | Nom du boîtier | Dimensions | Pas des broches |
 |:---|:---|:---|
-| BGA256 | 8,5 mm x 6,5 mm x 0,94 mm | 0,4 mm |
+| BGA256 | 8,5 mm × 6,5 mm × 0,94 mm | 0,4 mm |
 
 </div>
 
@@ -84,7 +84,7 @@ Avant de figer le schéma, vérifiez la référence exacte du SF32LB58x et sa co
 - Boîtier BGA256 au pas de 0,4 mm, avec un fanout dense pour l'alimentation et les GPIO.
 - Procédé HDI obligatoire ; les cartes à trous traversants (PTH) ne sont pas prises en charge.
 - PMU intégrée avec 2 sorties BUCK et 3 sorties LDO internes.
-- PMIC système SF30147C en option pour gérer l'alimentation de systèmes de type montre connectée.
+- PMIC système SF30147C en option pour la distribution d'alimentation de systèmes de classe montre.
 - Le MIPI-DSI, l'USB2.0 HS, le SDIO/eMMC, la RF, l'audio et le fanout BGA dense nécessitent une confirmation précoce de l'empilement et de l'impédance.
 
 ### 3.5. Applications typiques { #35-typical-applications }
@@ -133,38 +133,38 @@ Le SF32LB58x convient aux produits connectés qui combinent graphismes avancés,
 | Étape | Décision de conception | Sections principales |
 |:---|:---|:---|
 | 1 | Confirmez la référence de commande, la configuration mémoire SiP et les hypothèses concernant le boîtier BGA256 | Présentation du composant, Boîtiers |
-| 2 | Figez l'empilement HDI, la structure des vias, les règles d'impédance et les capacités d'assemblage avant de commencer le routage | Conception et routage du PCB |
+| 2 | Figez l'empilement HDI, la structure des vias, les règles d'impédance et les capacités d'assemblage avant de commencer le routage | Recommandations de placement et de routage du PCB |
 | 3 | Décidez si le PMIC système SF30147C en option est nécessaire, puis définissez les rails d'alimentation de la PMU de la puce, les inductances BUCK, les condensateurs LDO, la réinitialisation et la séquence d'alimentation | Système d'alimentation |
 | 4 | Choisissez le stockage de démarrage, l'interface d'affichage, le mode USB, l'utilisation du SDIO/eMMC, la topologie audio et l'accès au débogage | Stockage et connectivité, Interfaces utilisateur, Fabrication |
-| 5 | Examinez les captures d'écran du routage de l'horloge, de la RF, du DSI, de l'USB 2.0 HS, du SDIO/eMMC, de l'audio, du DC/DC, du fanout BGA et de l'ESD | Génération d'horloge, RF, Conception et routage du PCB |
-| 6 | Archivez le schéma, l'empilement, les rapports DRC et d'impédance, la vérification AVL, les documents de fabrication et les preuves de conception pertinentes avant de lancer la fabrication du prototype | Liste de contrôle pour la revue de conception |
+| 5 | Examinez les captures d'écran du routage de l'horloge, de la RF, du DSI, de l'USB 2.0 HS, du SDIO/eMMC, de l'audio, du DC/DC, du fanout BGA et de l'ESD | Génération d'horloge, RF, Recommandations de placement et de routage du PCB |
+| 6 | Archivez le schéma, l'empilement, les rapports DRC et d'impédance, la vérification AVL, les documents de fabrication et les preuves ciblées de placement et de routage avant la publication du prototype | Liste de contrôle pour la revue de conception |
 
 </div>
 
 ### 4.3. Comment utiliser ce guide { #43-how-to-use-this-guide }
 
-Suivez l'ordre d'une revue de carte : confirmez d'abord le boîtier et la configuration mémoire SiP, puis figez l'empilement HDI et la stratégie PMIC. Vérifiez ensuite le stockage de démarrage et le routage de l'affichage, puis les horloges, la RF, l'USB, l'audio, le débogage et l'accès aux tests de production. La section 5 définit la base du schéma, la section 6 la mise en œuvre sur PCB et la section 7 la liste de contrôle de sortie.
+Suivez l'ordre d'une revue de carte : confirmez d'abord le boîtier et la configuration mémoire SiP, puis figez l'empilement HDI et la stratégie PMIC. Vérifiez ensuite le stockage de démarrage et le routage de l'affichage, puis les horloges, la RF, l'USB, l'audio, le débogage et l'accès aux tests de production. La section 5 définit la base du schéma, la section 6 la mise en œuvre sur PCB et la section 7 la liste de contrôle de publication.
 
 ### 4.4. Dossier de preuves de revue { #44-review-evidence-pack }
 
-Avant de lancer la fabrication du prototype, archivez le PDF du schéma, l'empilement PCB, les informations sur les capacités de fabrication des vias et du procédé, les rapports d'impédance et DRC ainsi que la vérification de l'AVL. Conservez également des captures d'écran ciblées du routage du PMIC, des inductances BUCK, du DSI, de l'USB, du SDIO/eMMC, de la RF, des quartz, de l'audio, du fanout BGA, des retours de masse et des points d'entrée ESD.
+Avant la publication du prototype, archivez le PDF du schéma, l'empilement PCB, les informations sur les capacités de fabrication des vias et du procédé, les rapports d'impédance et DRC ainsi que la vérification de l'AVL. Conservez également des captures d'écran ciblées du routage du PMIC, des inductances BUCK, du DSI, de l'USB, du SDIO/eMMC, de la RF, des quartz, de l'audio, du fanout BGA, des retours de masse et des points d'entrée ESD.
 
 ### 4.5. Utilisation des listes de contrôle { #using-the-checklists }
 
-Ce guide propose deux niveaux de listes de contrôle. Les listes abrégées des sections 5.2.1.7 et 5.7.3 regroupent les points présentant les risques les plus élevés pour une vérification technique rapide. La [Liste de contrôle du schéma](SF32LB58x_schematic_checklist.md) (section 5.8) et la [Liste de contrôle d'implantation du PCB](SF32LB58x_pcb_layout_checklist.md) (section 6.18) reprennent, point par point, la *SF32LB58x Schematic & PCB Checklist* complète de SiFli (V1.0, 2026-01-21).
+Ce guide propose deux niveaux de listes de contrôle. Les listes abrégées des sections 5.2.1.7 et 5.7.3 regroupent les points présentant les risques les plus élevés pour une vérification technique rapide. La [Liste de contrôle du schéma](SF32LB58x_schematic_checklist.md) (section 5.8) et la [Liste de contrôle de placement et de routage du PCB](SF32LB58x_pcb_layout_checklist.md) (section 6.18) reprennent, point par point, la *SF32LB58x Schematic & PCB Checklist* complète de SiFli (V1.0, 2026-01-21).
 
-Chaque point est soit obligatoire (à valider avant l'approbation finale de la conception), soit optionnel (recommandé si la fonction concernée est utilisée). Le texte en couleur et le texte sur <span class="flag-yellow">fond jaune</span> reprennent les mises en évidence du classeur source. Celui-ci n'en précise pas la raison pour chaque cas : considérez-les comme des repères de revue supplémentaires, et non comme un remplacement des autres points du tableau.
+Chaque point est soit obligatoire (à valider avant la publication), soit optionnel (recommandé si la fonction concernée est utilisée). Le texte en couleur et le texte sur <span class="flag-yellow">fond jaune</span> reprennent les mises en évidence du classeur source. Celui-ci n'en précise pas la raison pour chaque cas : considérez-les comme des repères de revue supplémentaires, et non comme un remplacement des autres points du tableau.
 
 Le classeur de la liste de contrôle source spécifie Isat ≥ 450 mA pour une inductance BUCK hors AVL, tandis que la note d'application matérielle officielle spécifie Isat ≥ 500 mA pour L = 4,7 µH et DCR ≤ 0,4 Ω. La liste de contrôle conserve la valeur du classeur. Dans l'attente d'une clarification de SiFli, choisissez une inductance hors AVL avec un Isat d'au moins 500 mA.
 
-Utilisez la [Liste de contrôle du schéma](SF32LB58x_schematic_checklist.md) lors de la revue du schéma, avant de commencer le routage du PCB. Utilisez la [Liste de contrôle d'implantation du PCB](SF32LB58x_pcb_layout_checklist.md) lors de la revue du routage, avant la livraison des fichiers Gerber. En pratique, chaque vérification est généralement menée deux fois : d'abord par l'ingénieur de conception, puis par une personne indépendante avant le gel de la conception ou le lancement en fabrication.
+Utilisez la [Liste de contrôle du schéma](SF32LB58x_schematic_checklist.md) lors de la revue du schéma, avant de commencer le routage du PCB. Utilisez la [Liste de contrôle de placement et de routage du PCB](SF32LB58x_pcb_layout_checklist.md) lors de la revue du routage, avant la publication des fichiers Gerber. En pratique, chaque vérification est généralement menée deux fois : d'abord par l'ingénieur de conception, puis par une personne indépendante avant le gel de la conception ou le lancement en fabrication.
 
 Pour tirer le meilleur parti des listes de contrôle, utilisez-les comme des documents de validation et non comme de simples listes à lire :
 
 1. Confirmez d'abord la référence exacte du composant et la configuration mémoire SiP.
 2. Pendant la revue, indiquez pour chaque point s'il est conforme, non conforme ou non applicable, au lieu de vous limiter à lire le tableau.
 3. Recoupez les points concernant l'affichage, le stockage, le réveil et la basse consommation avec les sections correspondantes du guide de conception matérielle.
-4. Consignez toute hypothèse en suspens dans les notes de revue avant la sortie.
+4. Consignez toute hypothèse en suspens dans les notes de revue avant la publication.
 
 <div align="center"><em>Tableau 4.5-1 : Modèle d'enregistrement de revue</em></div>
 
@@ -198,10 +198,10 @@ Le guide complet se poursuit sur les pages ci-dessous. Chacune couvre une étape
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-bolt: __[Directives de conception de schéma](SF32LB58x_schematic_design.md)__ — système d'alimentation, génération d'horloge, RF, interfaces utilisateur, stockage et connectivité et fabrication
+- :fontawesome-solid-bolt: __[Recommandations de conception du schéma](SF32LB58x_schematic_design.md)__ — système d'alimentation, génération d'horloge, RF, interfaces utilisateur, stockage et connectivité et fabrication
 - :fontawesome-solid-list-check: __[Liste de contrôle du schéma](SF32LB58x_schematic_checklist.md)__ — liste de contrôle de revue du schéma point par point (Section 5.8)
-- :fontawesome-solid-microchip: __[Conception et routage du PCB](SF32LB58x_pcb_layout.md)__ — empreinte du boîtier, empilement, fanout et routage de l'horloge, de la RF, de l'audio, de l'USB, du SDIO, du DSI et de l'alimentation
-- :fontawesome-solid-list-check: __[Liste de contrôle d'implantation du PCB](SF32LB58x_pcb_layout_checklist.md)__ — liste de contrôle de revue d'implantation du PCB point par point (Section 6.18)
-- :fontawesome-solid-book-open: __[Liste de contrôle pour la revue de conception et références](SF32LB58x_review_and_reference.md)__ — liste de contrôle de sortie, documents associés, annexes, et historique des révisions
+- :fontawesome-solid-microchip: __[Recommandations de placement et de routage du PCB](SF32LB58x_pcb_layout.md)__ — empreinte du boîtier, empilement, fanout et routage de l'horloge, de la RF, de l'audio, de l'USB, du SDIO, du DSI et de l'alimentation
+- :fontawesome-solid-list-check: __[Liste de contrôle de placement et de routage du PCB](SF32LB58x_pcb_layout_checklist.md)__ — liste de contrôle de revue de placement et de routage du PCB point par point (Section 6.18)
+- :fontawesome-solid-book-open: __[Liste de contrôle pour la revue de conception et références](SF32LB58x_review_and_reference.md)__ — liste de contrôle de publication, documents associés, annexes, et historique des révisions
 
 </div>

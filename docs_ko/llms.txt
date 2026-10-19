@@ -21,18 +21,18 @@
 ## 하드웨어 — 작업 허브
 
 - [SF32 제품](https://uForge.io/ko/sf32-products/): SF32 하드웨어를 살펴보고, 제품을 계획하고, 칩, 모듈 또는 개발 보드를 선택하고, 레퍼런스 디자인을 재사용하고, 양산 설계를 준비하는 시작점입니다.
-- [하드웨어](https://uForge.io/ko/hardware/): SF32 레퍼런스 기준 구성을 재사용하거나 선택한 디바이스를 구현한 다음, 양산을 위해 설계를 준비합니다.
+- [하드웨어](https://uForge.io/ko/hardware/): SF32 레퍼런스 기준 구성을 재사용하거나 선택한 디바이스에 맞춰 설계를 진행한 뒤, 양산을 준비합니다.
 - [제품 계획하기](https://uForge.io/ko/sf32-products/family/product-planning/): SF32 제품 계획의 전체 경로: 디바이스와 통합 수준을 선택하고, 보드에서 소프트웨어를 검증한 다음, 설계를 양산에 대비해 준비합니다.
-- [레퍼런스 디자인](https://uForge.io/ko/hardware/reference-designs/reference-designs/): μForge 레퍼런스 디자인 여정입니다. 재현 가능한 하드웨어 및 소프트웨어 검증 경로를 비교하고, 제품과 가장 가까운 경로를 따라가십시오.
+- [레퍼런스 디자인](https://uForge.io/ko/hardware/reference-designs/reference-designs/): μForge 레퍼런스 디자인 여정입니다. 재현 가능한 하드웨어·소프트웨어 검증 경로를 비교하고, 제품에 가장 잘 맞는 경로를 선택하십시오.
 - [커넥티드 웨어러블 레퍼런스 디자인 여정](https://uForge.io/ko/hardware/reference-designs/connected-wearable-journey/): SF32LB52 개발 보드 검증에서 시작하여 커스텀 커넥티드 웨어러블의 하드웨어 및 펌웨어 릴리스 계획까지 이어지는 실용적인 SF32 레퍼런스 디자인 여정입니다.
-- [SF32 제품 선택기](https://uForge.io/ko/sf32-products/product-selector/): 제품 제약 조건으로 SF32 칩과 모듈 후보를 추린 다음, 지원되는 하드웨어에서 구현 경로를 검증합니다.
+- [SF32 제품 선택기](https://uForge.io/ko/sf32-products/product-selector/): 제품 요구 사항에 맞춰 SF32 칩과 모듈 후보를 추리고, 지원되는 하드웨어에서 실제 구현 경로를 검증합니다.
 - [양산 설계](https://uForge.io/ko/hardware/design-for-production/): SF32 하드웨어의 양산 설계 시작점: 칩 및 모듈 설계 가이드, 체크리스트, 인터페이스 정의, 승인 부품, EDA 라이브러리.
 
 ## 하드웨어 — 칩
 
 - [SF32 제품군](https://uForge.io/ko/sf32-products/family/SF32_family/): SF32LB5xx 제품군 개요: 이기종 Cortex-M33 코어, Bluetooth, ePicasso 그래픽, 엣지 AI를 소개하고 비교표와 빠른 칩 선택 가이드를 제공합니다.
 - [SF32 명명 규칙](https://uForge.io/ko/sf32-products/family/SF32_namingrule/): SF32LB5xyZxYx6 파트 넘버를 해독하는 방법: 제품 등급, PSRAM 변형, 패키지 유형, 내장 플래시/PSRAM 용량, 온도 등급을 실제 예시와 함께 설명합니다.
-- [SF32LB52x](https://uForge.io/ko/sf32-products/chips/SF32LB52x/): SF32LB52x: 웨어러블과 소형 AIoT 제품을 위한 비용 최적화 듀얼 코어 Arm Cortex-M33 AIoT MCU 제품군으로, 배터리 전원 SF32LB520/3/5/7과 외부 전원 52B/D/E/G/J 변형으로 구성됩니다.
+- [SF32LB52x](https://uForge.io/ko/sf32-products/chips/SF32LB52x/): SF32LB52x: 웨어러블과 소형 AIoT 제품을 위한 비용 효율적인 듀얼 코어 Arm Cortex-M33 AIoT MCU 제품군으로, 배터리 전원 SF32LB520/3/5/7과 외부 전원 52B/D/E/G/J 변형으로 구성됩니다.
 - [SF32LB52x 하드웨어 설계 가이드](https://uForge.io/ko/hardware/chip-guides/SF32LB52x_hardware_design_guide/): SF32LB52x MCU 하드웨어 설계 가이드: 디바이스 개요, 설계 흐름, 회로도, PCB 레이아웃, 검토, 체크리스트 페이지로 연결되는 링크를 제공합니다.
 - [SF32LB52x 하드웨어 설계 가이드 — 회로 설계 가이드라인](https://uForge.io/ko/hardware/chip-guides/SF32LB52x_schematic_design/): SF32LB52x MCU 회로 설계 가이드라인: 최소 시스템 설계, 전원 시스템, 클럭 생성.
 - [SF32LB52x 하드웨어 설계 가이드 — RF 및 사용자 인터페이스](https://uForge.io/ko/hardware/chip-guides/SF32LB52x_schematic_rf_interfaces/): SF32LB52x MCU의 RF 및 사용자 인터페이스 회로 설계 가이드라인: 안테나 매칭, 디스플레이, 오디오, 버튼, 진동 모터.
@@ -53,7 +53,7 @@
 - [SF32LB56x 하드웨어 설계 가이드 — 회로도 체크리스트](https://uForge.io/ko/hardware/chip-guides/SF32LB56x_schematic_checklist/): SF32LB56x MCU의 전원, 클럭, RF, 스토리지, 디스플레이, 제조 점검을 다루는 항목별 회로도 검토 체크리스트입니다.
 - [SF32LB56x 하드웨어 설계 가이드 — PCB 레이아웃 가이드라인](https://uForge.io/ko/hardware/chip-guides/SF32LB56x_pcb_layout/): SF32LB56x MCU의 PCB 레이아웃 가이드라인: 풋프린트, 스택업, 핵심 라우팅, 항목별 PCB 레이아웃 체크리스트입니다.
 - [SF32LB56x 하드웨어 설계 가이드 — 설계 검토 체크리스트 및 참고 자료](https://uForge.io/ko/hardware/chip-guides/SF32LB56x_review_and_reference/): SF32LB56x 하드웨어 설계 가이드의 설계 검토 체크리스트, 관련 문서와 참고 자료, 부록, 개정 이력입니다.
-- [SF32LB58x](https://uForge.io/ko/sf32-products/chips/SF32LB58x/): SF32LB58x: 상당한 그래픽, 디스플레이, 메모리, 주변 장치 요구 사항을 가진 연결형 제품을 위한 플래그십 등급 AIoT MCU 제품군.
+- [SF32LB58x](https://uForge.io/ko/sf32-products/chips/SF32LB58x/): SF32LB58x: 고급 그래픽, 디스플레이, 메모리, 주변 장치가 필요한 연결형 제품을 위한 플래그십 AIoT MCU 제품군.
 - [SF32LB58x 하드웨어 설계 가이드](https://uForge.io/ko/hardware/chip-guides/SF32LB58x_hardware_design_guide/): SF32LB58x MCU의 하드웨어 설계 가이드: 전원 아키텍처, 클럭 및 RF 설계, 디스플레이, 스토리지, 오디오, PCB 레이아웃 가이드라인입니다.
 - [SF32LB58x 하드웨어 설계 가이드 — 회로 설계 가이드라인](https://uForge.io/ko/hardware/chip-guides/SF32LB58x_schematic_design/): SF32LB58x MCU 회로 설계 가이드라인: 전원 시스템, 클럭 생성, RF, 사용자 인터페이스, 스토리지와 연결, 양산.
 - [SF32LB58x 하드웨어 설계 가이드 — 회로도 체크리스트](https://uForge.io/ko/hardware/chip-guides/SF32LB58x_schematic_checklist/): SF32LB58x MCU의 전원, 클럭, RF, 스토리지, 디스플레이, 제조 점검을 다루는 항목별 회로도 검토 체크리스트입니다.
@@ -74,17 +74,17 @@
 
 ## 하드웨어 — 개발 보드
 
-- [SF32LB52-DevKit-LCD](https://uForge.io/ko/sf32-products/devkits/SF32LB52-DevKit-LCD/): SF32LB52-DevKit-LCD: 터치, 오디오, 스토리지, 배터리를 지원하며 SPI, QSPI, MCU/8080 디스플레이 제품을 빠르게 브링업할 수 있는 디스플레이 중심 SF32LB52x 개발 보드입니다.
+- [SF32LB52-DevKit-LCD](https://uForge.io/ko/sf32-products/devkits/SF32LB52-DevKit-LCD/): SF32LB52-DevKit-LCD: 터치, 오디오, 스토리지를 지원하고 배터리 구동도 평가할 수 있는 SF32LB52x 디스플레이 중심 개발 보드입니다. SPI, QSPI, MCU/8080 디스플레이 제품의 초기 구동과 검증에 적합합니다.
 - [SF32LB52-DevKit-Core-3p3](https://uForge.io/ko/sf32-products/devkits/SF32LB52-DevKit-Core-3p3/): SF32LB52-DevKit-Core-3p3: MCU 전원을 점퍼로 1.8 V 또는 3.3 V 중에서 선택할 수 있으며 GPIO, 디스플레이, 오디오, USB, 전원 레일에 직접 접근할 수 있는 소형 SF32LB52x 평가 보드입니다.
-- [SF32LB52-DevKit-Nano](https://uForge.io/ko/sf32-products/devkits/SF32LB52-DevKit-Nano/): SF32LB52-DevKit-Nano: 제품에 가까운 프로토타입, 소형 디스플레이 브링업, 솔더다운 평가를 위한 소형 캐슬레이션 SF32LB52x 개발 보드입니다.
+- [SF32LB52-DevKit-Nano](https://uForge.io/ko/sf32-products/devkits/SF32LB52-DevKit-Nano/): SF32LB52-DevKit-Nano: 최종 제품에 가까운 시제품 제작과 소형 디스플레이 초기 구동·검증, 납땜 실장 평가에 적합한 소형 캐슬레이션 SF32LB52x 개발 보드입니다.
 - [SF32LB52-DevKit-ULP](https://uForge.io/ko/sf32-products/devkits/SF32LB52-DevKit-ULP/): SF32LB52-DevKit-ULP: AMOLED, 터치, 센서, 오디오, 배터리 충전, 전류 측정을 지원하여 시스템 수준 저전력 평가에 적합한 웨어러블 지향 SF32LB52x 개발 보드입니다.
 - [SF32LB56-DevKit-LCD](https://uForge.io/ko/sf32-products/devkits/SF32LB56-DevKit-LCD/): SF32LB56-DevKit-LCD 개발 보드: SF32LB56xV 모듈 기반의 디스플레이, 오디오, 스토리지, 주변 장치 개발 플랫폼입니다.
-- [SF32LB58-DevKit-LCD](https://uForge.io/ko/sf32-products/devkits/SF32LB58-DevKit-LCD/): SF32LB58-DevKit-LCD: MIPI DSI, RGB, QSPI 패널 브링업을 위한 SF32LB58x 개발 보드로, 오디오, SDIO, CAN, 확장 인터페이스를 갖추고 있습니다.
+- [SF32LB58-DevKit-LCD](https://uForge.io/ko/sf32-products/devkits/SF32LB58-DevKit-LCD/): SF32LB58-DevKit-LCD: MIPI DSI, RGB, QSPI 디스플레이 브링업(초기 구동 및 검증)을 위한 SF32LB58x 개발 보드로, 오디오, SDIO, CAN, 확장 인터페이스를 갖추고 있습니다.
 
 ## 하드웨어 — 기타 리소스
 
 - [부품 및 CAD 라이브러리](https://uForge.io/ko/hardware/cad-components/components-and-cad-libraries/): SF32 양산 설계에 부품 인증 기록과 공식 CAD 데이터를 활용하고, BOM과 PCB 레이아웃을 올바른 순서로 검토하는 방법을 설명합니다.
-- [SF32 승인 업체 목록](https://uForge.io/ko/hardware/cad-components/sifli-approved-vendor-list/): SF32 설계를 위한 SiFli 승인 업체 목록으로, 인증된 크리스털, buck 인덕터, NOR/NAND 및 SD-NAND 플래시, LCD 드라이버와 선정 요구 사항, BOM 검토 체크리스트를 다룹니다.
+- [SF32 승인 업체 목록](https://uForge.io/ko/hardware/cad-components/sifli-approved-vendor-list/): SF32 설계를 위한 SiFli 승인 업체 목록으로, 인증된 크리스털, BUCK 인덕터, NOR/NAND 및 SD-NAND 플래시, LCD 드라이버, 부품 선정 요구 사항과 BOM 검토 체크리스트를 다룹니다.
 - [SF32 EDA 툴 라이브러리](https://uForge.io/ko/hardware/cad-components/eda-tool-libraries/): SF32 칩과 모듈을 위한 SiFli 공식 회로도 심볼 및 PCB 풋프린트 라이브러리(JLCEDA/LCEDA Pro, PADS, OrCAD, KiCad)의 다운로드 링크와 검토 체크리스트입니다.
 
 ## 개발
@@ -92,27 +92,27 @@
 - [개발 개요](https://uForge.io/ko/develop/): SiFli-SDK로 SF32 제품을 개발하기 위한 작업 중심 안내서: 일상 워크플로, 애플리케이션 노트, 예제, 도구, 펌웨어 주제, 커뮤니티 경로.
 - [개발 개요](https://uForge.io/ko/develop/): SiFli-SDK로 SF32 제품을 개발하기 위한 작업 중심 안내서: 일상 워크플로, 애플리케이션 노트, 예제, 도구, 펌웨어 주제, 커뮤니티 경로.
 - [SiFli-SDK](https://uForge.io/ko/develop/platforms/sifli-sdk/overview/): SF32 개발의 레퍼런스 경로인 SiFli-SDK를 다룹니다. 핵심 scons 빌드와 sdk.py menuconfig 워크플로, 보드 이름, 프로젝트 구조, 양산 준비 점검 질문을 설명합니다.
-- [빌드, 플래시, 모니터](https://uForge.io/ko/develop/platforms/sifli-sdk/build-flash-monitor/): SiFli-SDK 개발자의 일상 루프: 환경 활성화, scons 빌드, UART 플래싱 또는 sftool을 통한 플래시 기록, 시리얼 출력 모니터링.
-- [보드 설정](https://uForge.io/ko/develop/platforms/sifli-sdk/board-configuration/): SiFli-SDK --board 이름이 펌웨어를 실제 SF32 하드웨어와 연결하는 방식: 플래시/PSRAM 레이아웃, 핀 먹스, 디스플레이 및 오디오 경로, 보드 브링업 체크리스트.
-- [컴포넌트와 `sf-pkg`](https://uForge.io/ko/develop/platforms/sifli-sdk/components/): SiFli-SDK 예제 코드를 재사용 가능한 컴포넌트와 `sf-pkg` 패키지로 만드는 방법: 품질 기준, 문서화할 내용, 피해야 할 일반적인 패키징 함정.
+- [빌드, 플래싱, 모니터링](https://uForge.io/ko/develop/platforms/sifli-sdk/build-flash-monitor/): SiFli-SDK의 일상적인 개발 흐름을 설명합니다. 환경을 활성화하고 scons로 빌드한 뒤 UART 또는 sftool로 펌웨어를 기록하고 시리얼 출력을 확인합니다.
+- [보드 설정](https://uForge.io/ko/develop/platforms/sifli-sdk/board-configuration/): SiFli-SDK --board 이름이 펌웨어와 실제 SF32 하드웨어를 연결하는 방식을 설명합니다. 플래시/PSRAM 레이아웃, 핀 멀티플렉서, 디스플레이 및 오디오 경로, 보드 브링업 체크리스트를 다룹니다.
+- [컴포넌트와 `sf-pkg`](https://uForge.io/ko/develop/platforms/sifli-sdk/components/): SiFli-SDK 예제 코드를 재사용 가능한 컴포넌트와 `sf-pkg` 패키지로 만드는 방법을 설명합니다. 품질 기준, 문서화 항목, 패키징 시 흔히 발생하는 문제를 다룹니다.
 - [디버깅 및 진단](https://uForge.io/ko/develop/platforms/sifli-sdk/debugging-diagnostics/): sftool, AssertDump, SiFli_Trace, RT-Thread 셸로 SF32 펌웨어를 디버깅하는 방법과, 반복 가능한 재현 순서 및 크래시 리포트 체크리스트.
-- [SDK 애플리케이션 노트](https://uForge.io/ko/develop/platforms/sifli-sdk/sdk-application-notes/): SF32 개발을 위한 SiFli-SDK 사용 가이드를 작업 중심으로 정리하고 소스를 연결한 읽기 경로입니다.
+- [SDK 애플리케이션 노트](https://uForge.io/ko/develop/platforms/sifli-sdk/sdk-application-notes/): SF32 개발을 위한 SiFli-SDK 사용 가이드를 작업별로 정리하고 관련 원문으로 이어 주는 안내입니다.
 - [GPADC로 샘플링하기](https://uForge.io/ko/develop/platforms/sifli-sdk/application-notes/adc-sampling/): SF32LB52x, SF32LB55x, SF32LB56x, SF32LB57x, SF32LB58x에서 범용 ADC(GPADC)를 사용하는 방법: 전기적 한계, 패드 매핑, 디바이스 접근, 캘리브레이션.
 - [센서 통합 및 읽기](https://uForge.io/ko/develop/platforms/sifli-sdk/application-notes/sensor-integration/): SiFli-SDK에 센서를 추가하고, RT-Thread를 통해 연결하고, 디바이스를 등록하고, FinSH 셸에서 검증합니다.
-- [외부 플래시 사용](https://uForge.io/ko/develop/platforms/sifli-sdk/application-notes/external-flash/): SiFli-SDK로 외부 NOR 플래시, NAND 플래시, PSRAM을 구성하고, 접근하고, 마운트하고, 포팅합니다.
-- [워치독 설정](https://uForge.io/ko/develop/platforms/sifli-sdk/application-notes/watchdog/): SiFli-SDK로 SF32 HCPU 및 LCPU 워치독 경로를 활성화하고, 피드하고, 검증합니다.
-- [EZIP으로 그래픽 에셋 압축하기](https://uForge.io/ko/develop/platforms/sifli-sdk/application-notes/ezip-image-assets/): SiFli-SDK를 사용하여 PNG 에셋을 EZIP, PIXEL, LVGL C, 하드웨어 압축 해제가 가능한 GZIP 형식으로 변환합니다.
+- [외부 플래시 사용](https://uForge.io/ko/develop/platforms/sifli-sdk/application-notes/external-flash/): SiFli-SDK를 사용해 외부 NOR 플래시, NAND 플래시, PSRAM을 구성하고 접근, 마운트, 포팅하는 방법을 설명합니다.
+- [워치독 설정](https://uForge.io/ko/develop/platforms/sifli-sdk/application-notes/watchdog/): SiFli-SDK로 SF32 HCPU 및 LCPU 워치독 경로를 활성화하고 카운터 갱신 동작을 검증합니다.
+- [EZIP으로 그래픽 에셋 압축하기](https://uForge.io/ko/develop/platforms/sifli-sdk/application-notes/ezip-image-assets/): SiFli-SDK를 사용해 PNG 에셋을 EZIP, PIXEL, LVGL C 및 하드웨어에서 압축 해제할 수 있는 GZIP 형식으로 변환합니다.
 - [저전력 구성 및 측정](https://uForge.io/ko/develop/platforms/sifli-sdk/application-notes/low-power-measurement/): SiFli-SDK의 전원 모드, 웨이크업 소스, 클럭, 보드 수준 전류 측정을 구성합니다.
-- [로그 캡처와 크래시 분석](https://uForge.io/ko/develop/platforms/sifli-sdk/application-notes/crash-analysis/): 일치하는 로그와 메모리를 캡처하고, 크래시 컨텍스트를 복원하며, SiFli-SDK 도구로 assertion 또는 hard fault를 분석합니다.
-- [SiFli SDK RF 테스트 실행](https://uForge.io/ko/develop/platforms/sifli-sdk/application-notes/rf-performance-tests/): 올바른 Bluetooth RF 테스트 모드, 제어 경로, 측정 장비를 선택합니다.
+- [로그 캡처와 크래시 분석](https://uForge.io/ko/develop/platforms/sifli-sdk/application-notes/crash-analysis/): 일치하는 로그와 메모리를 캡처하고, 크래시 컨텍스트를 복원하며, SiFli-SDK 도구로 어서트 또는 hard fault를 분석합니다.
+- [SiFli-SDK RF 테스트 실행](https://uForge.io/ko/develop/platforms/sifli-sdk/application-notes/rf-performance-tests/): 올바른 Bluetooth RF 테스트 모드, 제어 경로, 측정 장비를 선택합니다.
 - [Bluetooth 시그널링 테스트 실행하기](https://uForge.io/ko/develop/platforms/sifli-sdk/application-notes/bluetooth-signalling-tests/): SF32 DUT를 Bluetooth 테스터에 연결하여 BLE 또는 Classic Bluetooth 시그널링 측정을 수행합니다.
-- [Bluetooth 단일 항목 RF 테스트 실행하기](https://uForge.io/ko/develop/platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests/): SiFli_RfTool을 사용하여 보드 튜닝과 사전 인증 작업을 위해 BLE 또는 Classic Bluetooth RF를 한 번에 하나의 동작씩 제어합니다.
-- [CodeKit](https://uForge.io/ko/develop/tools/codekit/): SiFli CodeKit의 VS Code 확장이 SiFli-SDK 개발에서 어떤 위치에 있는지 설명합니다. 프로젝트 설정, 빌드/플래시/모니터 워크플로, 문제 해결을 다룹니다.
+- [Bluetooth 개별 RF 테스트 실행](https://uForge.io/ko/develop/platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests/): SiFli_RfTool로 BLE 또는 Classic Bluetooth RF를 한 번에 한 가지 동작씩 제어하여 보드를 튜닝하고 사전 적합성 시험을 수행합니다.
+- [CodeKit](https://uForge.io/ko/develop/tools/codekit/): SiFli CodeKit의 VS Code 확장이 SiFli-SDK 개발 과정에서 어떤 역할을 하는지 설명합니다. 프로젝트 설정, 빌드/펌웨어 기록/모니터링 흐름, 문제 해결을 다룹니다.
 - [Zephyr](https://uForge.io/ko/develop/platforms/zephyr/overview/): SF32LB52 DevKit LCD를 위한 OpenSiFli의 다운스트림 Zephyr 지원을 다룹니다. 보드 식별 정보, 구성 경계, 드라이버 범위, 통합 위험을 설명합니다.
 - [Arduino](https://uForge.io/ko/develop/platforms/arduino/overview/): SF32LB52 DevKit LCD용 ArduinoCore-zephyr: 플랫폼 적합성, 보드 식별 정보, 로더 및 빌드 모드 선택, 통합 한계, 에스컬레이션 경로를 설명합니다.
 - [MicroPython 현황](https://uForge.io/ko/develop/platforms/micropython/status/): SF32의 MicroPython 현황: 아직 공식 포트가 확인되지 않았으며, 지원 경로가 되기 위해 갖추어야 할 승인 기준을 설명합니다.
 - [Rust](https://uForge.io/ko/develop/platforms/rust/overview/): OpenSiFli의 sifli-rs(sifli-hal, sifli-pac)를 통한 SF32 커뮤니티 Rust 지원 평가: 현재 성숙도, 적합한 시나리오와 적합하지 않은 시나리오, 위험 체크리스트.
-- [도구](https://uForge.io/ko/develop/tools/): SF32 개발용 도구 맵입니다. sftool, SDK UART 플래싱 스크립트, CodeKit 동작, 크래시/트레이스 도구, 에셋 및 양산 툴링을 사용 사례별로 정리합니다.
+- [도구](https://uForge.io/ko/develop/tools/): SF32 개발 도구를 사용 사례별로 정리합니다. sftool, SDK UART 다운로드 스크립트, CodeKit 기능, 크래시/트레이스 도구, 에셋 및 양산 도구를 다룹니다.
 - [펌웨어 주제](https://uForge.io/ko/develop/firmware-topics/): 플랫폼 공통 SF32 펌웨어 주제 개요: 파티션 테이블, OTA/DFU, USB, 전원 관리, 로깅/크래시 분석.
 - [파티션 테이블](https://uForge.io/ko/develop/firmware-topics/partition-tables/): SiFli-SDK 파티션 테이블로 SF32 메모리 레이아웃을 기술하는 방법입니다. 레거시 JSON v1/v2 형식과 권장 YAML v3 형식, 오버레이, 생성 파일, 검증을 비교합니다.
 - [OTA와 DFU](https://uForge.io/ko/develop/firmware-topics/ota-dfu/): USB-CDC, BLE, Bluetooth PAN 펌웨어 업데이트에 SiFli-SDK DFU v2 미들웨어를 사용하는 방법과, 문서화된 애플리케이션 및 로더 예제 쌍을 설명합니다.
@@ -131,7 +131,7 @@
 - [그래픽 개요](https://uForge.io/ko/learn/graphics/overview/): SF32 UI 구축 개요: 디스플레이 선택, 프레임버퍼 전략, LVGL 통합, ePicasso 가속, 부드러운 그래픽을 위한 메모리 배치를 다룹니다.
 - [ePicasso 2D / 2.5D 그래픽 엔진](https://uForge.io/ko/learn/graphics/epicasso-gpu/): SiFli의 ePicasso 2D/2.5D 그래픽 엔진이 SF32에서 임베디드 UI 렌더링을 가속하는 방식과, LVGL, 메모리, 디스플레이 컨트롤러와 함께 동작하는 방식을 설명합니다.
 - [eZip 무손실 압축과 하드웨어 디코딩](https://uForge.io/ko/learn/graphics/ezip/): SiFli eZip과 eZip-A가 지원되는 SF32 디바이스에서 임베디드 UI 에셋의 저장 공간, 메모리 대역폭, CPU 디코딩 부담을 줄이는 방식을 설명합니다.
-- [TurboPixel 프레임버퍼 압축](https://uForge.io/ko/learn/graphics/turbopixel/): TurboPixel의 고정 비율 손실 프레임버퍼 압축이 지원되는 SF32 디바이스에서 버퍼 저장 공간과 디스플레이 읽기 트래픽을 줄이는 방법을 설명합니다.
+- [TurboPixel 프레임버퍼 압축](https://uForge.io/ko/learn/graphics/turbopixel/): TurboPixel의 고정 압축률 기반 손실 프레임버퍼 압축이 지원되는 SF32 디바이스에서 버퍼 저장 공간과 디스플레이 읽기 트래픽을 줄이는 방법을 설명합니다.
 - [디스플레이 컨트롤러](https://uForge.io/ko/learn/graphics/display-controller/): SF32 디스플레이 컨트롤러가 준비된 픽셀을 패널로 전송하는 방식을 인터페이스 선택, 플러시 경로, 부분 리프레시, 패널 브링업까지 포함하여 설명합니다.
 - [LVGL SDK 예제](https://uForge.io/ko/learn/graphics/lvgl-sdk-examples/): UI 브링업, 위젯, 디자인 툴, 압축 에셋, 애니메이션, 미디어, 웨어러블 인터페이스에 맞는 SiFli-SDK LVGL 예제를 선택하는 방법을 안내합니다.
 - [Bluetooth 개요](https://uForge.io/ko/learn/bluetooth/overview/): SF32의 Bluetooth 개요: BLE와 듀얼 모드 비교, GATT 서비스 설계, 연결 파라미터 튜닝, 페어링/보안, LE Audio, 공존.
@@ -148,7 +148,7 @@
 - [저전력 개요](https://uForge.io/ko/learn/low-power/overview/): SF32 저전력 설계 개요: 전원 모드, PM 미들웨어, 배터리를 소모하는 요인, 그리고 Bluetooth, 그래픽, 오디오, AI가 전력에 미치는 영향을 다룹니다.
 - [전력 측정과 검증](https://uForge.io/ko/learn/low-power/measurement-and-validation/): SF32 설계에서 전류, 전압, 에너지, 배터리 수명 모델의 정확도를 측정하는 컴포넌트에서 제품까지의 워크플로입니다.
 - [저전력 SDK 예제](https://uForge.io/ko/learn/low-power/low-power-sdk-examples/): 슬립, 웨이크업 소스, GPIO, CPU, Bluetooth, 디스플레이, UI, 웨어러블 전력 시나리오에 알맞은 SiFli-SDK 전원 관리 예제를 선택합니다.
-- [배터리 충전 상태(SoC) 추정](https://uForge.io/ko/learn/low-power/battery-capacity-calculation/): SiFli-SDK 배터리 계산기, 일치하는 충전/방전 곡선, 충전기 상태 감지, 다단계 필터링을 사용하여 SF32 제품에서 배터리 전압으로부터 배터리 잔량 비율을 추정합니다.
+- [배터리 충전 잔량(SoC) 추정](https://uForge.io/ko/learn/low-power/battery-capacity-calculation/): SiFli-SDK 배터리 계산기, 충전·방전 곡선, 충전기 상태 감지, 다단계 필터링을 사용해 SF32 제품의 배터리 전압으로부터 충전 잔량을 추정합니다.
 - [스마트워치 전력 프로파일링](https://uForge.io/ko/learn/low-power/smartwatch-power-profiling/): 일일 사용 시나리오로 스마트워치 배터리 수명 모델을 구축하고 검증한 뒤, 그 결과로 저전력 작업의 우선순위를 정합니다.
 
 ## 프로젝트

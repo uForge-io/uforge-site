@@ -12,7 +12,7 @@ tags:
 
 ## 1. Übersicht { #1-overview }
 
-**SF32LB52-MOD-1** ist ein zertifiziertes Universalmodul für stromsparende Bluetooth-Anwendungen. Es basiert auf dem SiFli-Chip SF32LB525UC6 mit zwei Arm-Cortex-M33-STAR-MC1-Kernen und einer Taktfrequenz von bis zu 240 MHz. Im 68-poligen SMD-Modulgehäuse (27,9 × 18,0 × 3,1 mm) sind ein 48-MHz-Quarz, optional ein 32,768-kHz-Quarz und bei dieser Variante ein 64-Mb-OPI-PSRAM-Die integriert.
+**SF32LB52-MOD-1** ist ein zertifiziertes Universalmodul für stromsparende Bluetooth-Anwendungen. Es basiert auf dem SiFli-Chip SF32LB525UC6 mit zwei Arm-Cortex-M33-STAR-MC1-Kernen und einer Taktfrequenz von bis zu 240 MHz. Im 68-poligen SMD-Modulgehäuse (27,9 × 18,0 × 3,1 mm) sind ein 48-MHz-Quarz, optional ein 32,768-kHz-Quarz und optional ein 64-Mb-OPI-PSRAM-Die im Gehäuse integriert.
 
 Dieser Leitfaden beschreibt die Hardware-Integration auf Modulebene. Er enthält Pinbelegungen, Peripherieschnittstellen, elektrische Kenndaten, Anforderungen an die Stromversorgung, Referenzschaltpläne, eine Checkliste für den Schaltplanentwurf, mechanische Abmessungen und das empfohlene PCB-Footprint sowie Hinweise zur Handhabung. Grundlage ist das SiFli-Datenblatt **DS5203-SF32LB52-MOD-1 V0.3**.
 
@@ -172,7 +172,7 @@ Jeder in der obigen Tabelle mit `PAxx_I2C_UART` markierte Pin lässt sich entwed
 
 **MPI (Memory Peripheral Interface)** — Unterstützt SPI-NOR- und SPI-NAND-Flash mit 1, 2 oder 4 Datenleitungen sowie Registerzugriffe und den Memory-Mapped-Modus mit automatischer Umschaltung durch die Hardware. An MPI2 des Moduls kann externer SPI-NOR- oder SPI-NAND-Flash angeschlossen werden. Ist das Modul bereits mit Flash bestückt, sind die sechs MPI2-Signale PA12, PA13, PA14, PA15, PA16 und PA17 von außen nicht zugänglich.
 
-**SD/SDIO/eMMC** — Konform zu SD 3.0, SDIO 3.0 und eMMC 4.5.1. Unterstützt werden SDSC-/SDHC-/SDXC-/SDHS-Karten, SDR12/25/50, SDR-Modi mit einer oder vier Datenleitungen, ein 2-KB-FIFO und DMA-gestützte Datenübertragung mit bis zu 48 MHz (kein DDR). Hinweis: SDIO und MPI2 verwenden dieselben IO-Pins und können daher nicht gleichzeitig betrieben werden.
+**SD/SDIO/eMMC** — Konform zu SD 3.0, SDIO 3.0 und eMMC 4.5.1. Unterstützt werden SDSC-/SDHC-/SDXC-/SDHS-Karten, SDR12/25/50, SDR-Modi mit einer oder vier Datenleitungen, ein 2-KB-FIFO und DMA-gestützte Datenübertragung mit bis zu 48 MHz (kein DDR). Hinweis: SDIO und MPI2 verwenden dieselben I/O-Pins und können daher nicht gleichzeitig betrieben werden.
 
 **I2S** — Betrieb als Master oder Slave, Vollduplex, Left-Justified-, Right-Justified- und Standard-Formate, Mono oder Stereo mit 8 oder 16 Bit sowie PCM-Wortbreiten bis 24 Bit.
 
@@ -180,7 +180,7 @@ Jeder in der obigen Tabelle mit `PAxx_I2C_UART` markierte Pin lässt sich entwed
 
 ### 5.2 Analoge Signalverarbeitung { #52-analog-signal-processing }
 
-**12-Bit-GPADC** — SAR-ADC mit einer maximalen Abtastrate von 4 MS/s. Der Eingangsbereich beträgt 0–3,3 V bei einseitiger Messung beziehungsweise ±2,1 V bei Differenzmessung. Verfügbar sind 7 einseitige Kanäle plus 1 Akkuspannungskanal oder 3 differentielle Kanalpaare. Unterstützt werden Einzel- und Dauermessungen, 4 konfigurierbare Zeitfenster pro Messung, Software- und Hardware-Trigger sowie DMA.
+**12-Bit-GPADC** — SAR-ADC mit einer maximalen Abtastrate von 4 MS/s. Der Eingangsbereich beträgt 0–3,3 V bei einseitiger Messung beziehungsweise ±2,1 V bei Differenzmessung. Verfügbar sind 7 einseitige Kanäle plus 1 Akkuspannungskanal oder 3 differenzielle Kanalpaare. Unterstützt werden Einzel- und Dauermessungen, 4 konfigurierbare Zeitfenster pro Messung, Software- und Hardware-Trigger sowie DMA.
 
 **Temperatursensor** — Auflösung 0,2 °C, Messbereich -40 °C bis 125 °C und Genauigkeit ±3 °C; die Messwerte können per Polling oder Interrupt ausgelesen werden.
 
@@ -350,14 +350,14 @@ Das Modul ist 27,9 × 18,0 × 3,1 mm groß.
 !!! info "Abbildung 10.1-1: Modulabmessungen — Ansicht von oben, seitlich und von unten"
     Die Abbildung ist in diesem Leitfaden nicht enthalten. Sie finden sie als Abbildung 8-1 im offiziellen Datenblatt.
 
-### 10.2 Empfohlener PCB-Footprint { #102-recommended-pcb-footprint }
+### 10.2 Empfohlenes PCB-Footprint { #102-recommended-pcb-footprint }
 
-!!! info "Abbildung 10.2-1: Empfohlener PCB-Footprint"
+!!! info "Abbildung 10.2-1: Empfohlenes PCB-Footprint"
     Die Abbildung ist in diesem Leitfaden nicht enthalten. Sie finden sie als Abbildung 8-2 im offiziellen Datenblatt.
 
 ### 10.3 Externer Antennenanschluss { #103-external-antenna-connector }
 
-Bei SKUs mit externer Antenne verwendet das Modul ein Anschluss-Footprint der ersten Generation. Es ist kompatibel mit:
+Bei SKUs mit externer Antenne verwendet das Modul ein Anschluss-Footprint der ersten Generation, das kompatibel ist mit:
 
 - Hirose-U.FL-Serie
 - I-PEX-MHFI-Steckverbindern
@@ -391,7 +391,7 @@ Empfohlene Vorgehensweise:
 
 - Lagern Sie die Produkte versiegelt in einem Moisture Barrier Bag (MBB) bei <40 °C / 90 % RH und vermeiden Sie Kondensation.
 - Feuchteempfindlichkeitsklasse (MSL) des Moduls: 3.
-- Verarbeiten Sie das Modul nach dem Öffnen des Vakuumbeutels innerhalb von 168 Stunden bei 25±5 °C / 60 % RH. Andernfalls muss es vor der Rückführung in die Fertigung gemäß Datenblattvorgabe gebacken werden.
+- Verarbeiten Sie das Modul nach dem Öffnen des Vakuumbeutels innerhalb von 168 Stunden bei 25±5 °C / 60 % RH. Andernfalls muss es vor der Rückführung in die Fertigung gebacken werden.
 
 ### 11.2 Elektrostatische Entladung (ESD) { #112-electrostatic-discharge-esd }
 

@@ -9,9 +9,9 @@ tags:
 
 # Panorama del desarrollo { #develop }
 
-La sección de desarrollo explica cómo convertir una placa SF32 funcional en un firmware de producto mantenible. Úsela después de ejecutar `hello_world` por primera vez para elegir la configuración de placa, repetir compilaciones y grabaciones, adaptar un ejemplo adecuado, integrar funciones del producto, diagnosticar fallos y planificar actualizaciones y recuperación.
+La sección de desarrollo explica cómo convertir una placa SF32 funcional en un firmware de producto mantenible. Úsela después de ejecutar `hello_world` por primera vez para elegir la configuración de placa, compilar y grabar de forma reproducible, adaptar un ejemplo adecuado, integrar funciones del producto, diagnosticar fallos y planificar actualizaciones y recuperación.
 
-Para la primera ejecución de la placa, consulte [Primeros pasos](../getting-started/index.md); para elegir el dispositivo y la placa de desarrollo, [Productos SF32](../sf32-products/index.md); para esquemáticos y hardware de producción, [Hardware](../hardware/index.md); y para conocer los fundamentos de arquitectura, [Aprendizaje](../learn/index.md). Esta sección se centra en el flujo de ingeniería y en la orientación de implementación para tareas concretas.
+Para la primera ejecución de la placa, consulte [Primeros pasos](../getting-started/index.md); para elegir el dispositivo y la placa de desarrollo, [Productos SF32](../sf32-products/index.md); para esquemáticos y hardware de producción, [Hardware](../hardware/index.md); y para conocer los fundamentos de arquitectura, [Aprendizaje](../learn/index.md). Utilice esta sección cuando necesite el flujo de trabajo de ingeniería y orientación de implementación para tareas concretas.
 
 !!! info "SiFli-Solution"
     SiFli-Solution es otro paquete de software de SiFli que μForge.io no documenta actualmente. La información de esta sección se limita a SiFli-SDK y a las opciones comunitarias indicadas a continuación. Si su producto necesita una solución más completa para dispositivos con pantalla, consulte la [documentación oficial de SiFli Solution](https://docs.sifli.com/projects/solution/index.html) y póngase en contacto directamente con SiFli. Un producto complejo que siga esta vía puede requerir una colaboración directa y estrecha con SiFli.
@@ -60,7 +60,7 @@ Las notas de aplicación se organizan por tarea de integración, no según el or
 | Señales analógicas y sensores | [Muestreo con GPADC](platforms/sifli-sdk/application-notes/adc-sampling.md) · [Integración y lectura de sensores](platforms/sifli-sdk/application-notes/sensor-integration.md) |
 | Almacenamiento y recursos gráficos | [Uso de memoria Flash externa](platforms/sifli-sdk/application-notes/external-flash.md) · [Comprimir recursos gráficos con EZIP](platforms/sifli-sdk/application-notes/ezip-image-assets.md) |
 | Fiabilidad, consumo y depuración | [Configurar el watchdog](platforms/sifli-sdk/application-notes/watchdog.md) · [Configurar modos de bajo consumo y medir corriente](platforms/sifli-sdk/application-notes/low-power-measurement.md) · [Capturar registros y analizar fallos](platforms/sifli-sdk/application-notes/crash-analysis.md) |
-| Validación de RF y Bluetooth | [Realizar pruebas RF con SiFli SDK](platforms/sifli-sdk/application-notes/rf-performance-tests.md) · [Realizar pruebas de señalización Bluetooth](platforms/sifli-sdk/application-notes/bluetooth-signalling-tests.md) · [Realizar pruebas RF individuales de Bluetooth](platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests.md) |
+| Validación de RF y Bluetooth | [Realizar pruebas RF con SiFli-SDK](platforms/sifli-sdk/application-notes/rf-performance-tests.md) · [Realizar pruebas de señalización Bluetooth](platforms/sifli-sdk/application-notes/bluetooth-signalling-tests.md) · [Realizar pruebas RF individuales de Bluetooth](platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests.md) |
 
 </div>
 
@@ -108,6 +108,6 @@ Antes de considerar que una ruta de firmware está lista para incorporarse al pr
 - ¿Qué SDK, paquete, rama o commit generó el firmware?
 - ¿Qué comandos de compilación, grabación, supervisión y recuperación completa funcionan?
 - ¿Qué ejemplo o prueba demuestra el funcionamiento de cada periférico y subsistema requerido?
-- ¿Se validaron el diseño de particiones, el comportamiento de actualización, el objetivo de consumo y el procedimiento para decodificar los volcados de fallos?
+- ¿Qué diseño de particiones, comportamiento de actualización, objetivo de consumo y procedimiento de decodificación de fallos se han validado?
 
 Si falta alguna respuesta, el trabajo puede seguir siendo un prototipo útil, pero todavía no se dispone de una base de firmware reproducible para el producto.

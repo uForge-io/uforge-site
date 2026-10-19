@@ -59,7 +59,7 @@ Bluetooth Processor / Controller Firmware
 Bluetooth Radio and RF Front End
 ```
 
-Die genaue Aufteilung zwischen Host-, Controller- und Anwendungs-Firmware hängt vom SDK, der Stack-Konfiguration und den Produktanforderungen ab. Der Hauptanwendungsprozessor ist jedoch nicht die einzige CPU, die am Bluetooth-Betrieb beteiligt ist. Das Bluetooth-Subsystem hat einen eigenen Ausführungskontext und ist darauf ausgelegt, das Funkverhalten deterministisch und energieeffizient zu halten.
+Die genaue Aufteilung zwischen Host-, Controller- und Anwendungs-Firmware hängt vom SDK, der Stack-Konfiguration und den Produktanforderungen ab. Konzeptionell sollten Sie den Hauptanwendungsprozessor jedoch nicht als einzige am Bluetooth-Betrieb beteiligte CPU betrachten. Das Bluetooth-Subsystem hat einen eigenen Ausführungskontext und ist darauf ausgelegt, das Funkverhalten deterministisch und energieeffizient zu halten.
 
 ## Unterschiede zwischen Gerätefamilien { #device-family-differences }
 
@@ -74,7 +74,7 @@ Je nach Geräteklasse unterscheidet sich bei der SF32LB-Familie die Auslegung de
 | **SF32LB52x** | Dual-Mode-Bluetooth, BT Classic + BLE | Die LCPU führt den Bluetooth-Stack aus; sie ist nicht für Anwendungscode freigegeben | Kostenoptimierte Bluetooth-Module, Audiozubehör, tragbare Geräte im Einstiegssegment und kompakte HMI-Systeme. |
 | **SF32LB55x** | BLE | SDK-unterstützte Anwendungsaufgaben können auf der LCPU laufen | Tragbare BLE-Geräte und stromsparende Produkte mit vielen Sensoren. |
 | **SF32LB56x** | Dual-Mode-Bluetooth, BT Classic + BLE | SDK-unterstützte Anwendungsaufgaben können auf der LCPU laufen | Produkte mit anspruchsvoller Displayausstattung, vernetzte HMI-Systeme und tragbare Geräte. |
-| **SF32LB57x** | Dual-Mode-Bluetooth, BT Classic + BLE | Die LCPU übernimmt Bluetooth und stromsparende Aufgaben; prüfen Sie die unterstützte Aufgabenverteilung im SDK | Produkte mit Grafik und lokaler Audioverarbeitung auf HCPU/ACPU. |
+| **SF32LB57x** | Dual-Mode-Bluetooth, BT Classic + BLE | Die LCPU übernimmt Bluetooth und stromsparende Aufgaben; prüfen Sie die unterstützte Aufgabenverteilung im SDK | Produkte mit Grafik und lokaler Audioverarbeitung auf der HCPU/ACPU. |
 | **SF32LB58x** | Dual-Mode-Bluetooth, BT Classic + BLE | SDK-unterstützte Anwendungsaufgaben können auf der LCPU laufen | Flaggschiffprodukte mit anspruchsvoller Grafik, Audio, KI und komplexen Konnektivitätsanforderungen. |
 
 </div>
@@ -89,7 +89,7 @@ Die Bluetooth-Angaben in der Tabelle fassen die Dokumentation auf Familienebene 
 
 Dass die LCPU Anwendungsaufgaben ausführen kann, bedeutet weder Zugriff auf den Bluetooth-Controller-Quellcode noch die Möglichkeit, den Funkstack zu ersetzen. Unterstützte Firmware-Updates, Patch-Verfahren, Speicherbudgets und die Grenzen der Aufgabenplanung hängen vom Gerät und SDK ab.
 
-- **Energiesparende Anwendungen entwickeln.** Verlagern Sie geeignete Sensorerfassung, einfache Verarbeitung und Systemverwaltung auf LCPU, soweit unterstützt. Planen Sie Stack-Speicher, Ausführungszeit und die Kommunikation mit HCPU ein.
+- **Energiesparende Anwendungen entwickeln.** Verlagern Sie geeignete Sensorerfassung, einfache Verarbeitung und Systemverwaltung auf die LCPU, soweit unterstützt. Planen Sie Stack-Speicher, Ausführungszeit und die Kommunikation mit der HCPU ein.
 - **Controller warten und anpassen.** Nutzen Sie die vom Hersteller unterstützten Firmware-Updates und Patch-Verfahren für Gerät und SDK. Ein programmierbarer Anwendungskern belegt weder den Zugang zum proprietären Controller-Quellcode noch die Verfügbarkeit eines alternativen Funkstacks. Klären Sie diese Möglichkeiten gesondert mit SiFli.
 
 Auch eine reine Controller-Konfiguration kann Updates vom Hersteller erhalten; das Firmware-Image ist nicht zwangsläufig unveränderlich. Prüfen Sie bei Änderungen, ob die Anforderungen an Bluetooth-Qualifizierung, Interoperabilität, Host-Controller-Kompatibilität und OTA-Wiederherstellung erfüllt sind. Unterscheiden Sie einen Rollback zur Fehlerbehebung von einer Sicherheitsrichtlinie, die die Installation verwundbarer älterer Firmware verhindert.
@@ -124,7 +124,7 @@ Der Dual-Mode-Betrieb kann anspruchsvoller sein als der reine BLE-Betrieb, da Au
 
 ## Bluetooth-Audio und LE Audio { #bluetooth-audio-and-le-audio }
 
-Bluetooth-Audioprodukte stellen zusätzliche Anforderungen an die Systemarchitektur. Gleichzeitig müssen Funkzeitvorgaben, Pufferung, Codec-Verarbeitung und Taktsynchronisation eingehalten und gegebenenfalls auch Aktualisierungen der Benutzeroberfläche verarbeitet werden.
+Bluetooth-Audioprodukte stellen zusätzliche Anforderungen an die Systemarchitektur. Audio-Workloads umfassen gleichzeitig Funkzeitsteuerung, Pufferung, Codec-Verarbeitung, Taktsynchronisation und mitunter Aktualisierungen der Benutzeroberfläche.
 
 Ein gut gestaltetes SF32-Bluetooth-Audiosystem trennt typischerweise die Verantwortlichkeiten:
 
@@ -167,7 +167,7 @@ Bluetooth-Software wird oft in zwei Hauptschichten beschrieben:
 
 In einem SF32-System sind die Aufgaben des Controllers eng an den Bluetooth-Prozessor und das Funksubsystem gebunden. Je nach Stack-Architektur können die Host-Funktionen auf dem Anwendungsprozessor, in der System-Firmware oder in vom SDK bereitgestellten Komponenten laufen.
 
-Für Anwendungsentwickler ist entscheidend, dass Bluetooth-Funktionen über mehrere Prozessoren verteilt sein können. Gemeinsam genutzter Speicher, Kommunikation zwischen Prozessoren, Ereignisse und SDK-APIs gehören daher zur Produktarchitektur. Behandeln Sie Bluetooth als Subsystem und nicht nur als Bibliothek, die in die Hauptanwendung eingebunden ist.
+Für Anwendungsentwickler ist entscheidend, dass Bluetooth-Verhalten CPU-Grenzen überschreitet. Gemeinsam genutzter Speicher, Kommunikation zwischen Prozessoren, Ereignisse und SDK-APIs gehören zur Produktarchitektur. Behandeln Sie Bluetooth als Subsystem und nicht nur als Bibliothek, die in die Hauptanwendung eingebunden ist.
 
 ## Interaktion mit dem Anwendungsprozessor { #interaction-with-the-application-processor }
 
@@ -202,9 +202,9 @@ Software- und Hardwareteams sollten die Bluetooth-Leistung als Systemeigenschaft
 
 ## Koexistenz mit anderen Systemlasten { #coexistence-with-other-workloads }
 
-SF32-Geräte betreiben Bluetooth häufig parallel zu Grafik, Audio, Sensoren, Speicherzugriffen und gelegentlich externem WLAN. Diese Subsysteme teilen sich Versorgung, Takte, Speicherbandbreite, Pins und Rechenzeit der CPU.
+SF32-Geräte betreiben Bluetooth häufig parallel zu Grafik, Audio, Sensoren, Massenspeicher und gelegentlich externem WLAN. Diese Subsysteme teilen sich Versorgung, Takte, Speicherbandbreite, Pins und Rechenzeit der CPU.
 
-Beim Parallelbetrieb sind insbesondere folgende Punkte zu prüfen:
+Zu den häufigen Koexistenzproblemen zählen:
 
 - Display-Aktualisierungen oder PSRAM-Zugriffe, die Speicherbandbreite beanspruchen.
 - Audio-DMA und Bluetooth-Audiopuffer, die eine stabile Zeitsteuerung erfordern.
@@ -212,7 +212,7 @@ Beim Parallelbetrieb sind insbesondere folgende Punkte zu prüfen:
 - Externes WLAN oder andere RF-Quellen, die die Bluetooth-Leistung beeinträchtigen können.
 - Lange kritische Abschnitte oder deaktivierte Interrupts, die die Bluetooth-Verarbeitung auf der Host-Seite verzögern.
 
-Der Bluetooth-Prozessor verringert das Risiko von Zeitsteuerungsproblemen, beseitigt aber nicht alle Engpässe bei gemeinsam genutzten Ressourcen. Produkte mit Audio, umfangreicher Benutzeroberfläche oder externer Funkverbindung sollten unter realistischen Bedingungen mit hoher Systemlast getestet werden.
+Der Bluetooth-Prozessor verringert das Risiko von Zeitsteuerungsproblemen, beseitigt aber nicht alle Engpässe bei gemeinsam genutzten Ressourcen. Produkte mit Audio, umfangreicher Benutzeroberfläche oder externer Funkverbindung sollten unter realistischen Worst-Case-Lasten getestet werden.
 
 ## Typische Anwendungsfälle { #typical-use-cases }
 
@@ -246,10 +246,10 @@ Ein robustes Design kombiniert den Bluetooth-Prozessor in der Regel mit sorgfäl
 
 ## Wichtigste Erkenntnisse { #key-takeaways }
 
-- SF32LB-Geräte nutzen ein dediziertes Bluetooth- bzw. Low-Power-Prozessor-Subsystem, damit die Funkkommunikation zeitgerecht und energieeffizient abläuft.
-- Beim SF32LB52x dient die LCPU ausschließlich als Bluetooth-Controller. Bei SF32LB55x, SF32LB56x und SF32LB58x können Anwendungsaufgaben auf der LCPU laufen, sofern die verwendete SDK- und Boardkonfiguration dies unterstützt; prüfen Sie die konkrete Kombination. Beim SF32LB57x übernimmt die LCPU Bluetooth und energiesensible Aufgaben; prüfen Sie jedoch für jede geplante Benutzeraufgabe die Unterstützung im Ziel-SDK und auf dem Board.
-- Eine programmierbare LCPU ermöglicht Anwendungsaufgaben innerhalb der SDK-Grenzen. Quellcodezugriff und Anpassbarkeit des Controller-Stacks sind gesondert zu klären. Nutzen Sie unterstützte Hersteller-Updates und prüfen Sie Controller-Änderungen.
+- SF32LB-Geräte nutzen ein dediziertes Bluetooth- bzw. Low-Power-Prozessor-Subsystem, damit die Funkkommunikation zuverlässig und energieeffizient abläuft.
+- Beim SF32LB52x dient die LCPU ausschließlich als Bluetooth-Controller. Bei SF32LB55x, SF32LB56x und SF32LB58x unterstützt die LCPU in dokumentierten Konfigurationen SDK-definierte Anwendungsaufgaben. Beim SF32LB57x übernimmt die LCPU Bluetooth und energiesensible Aufgaben; prüfen Sie jedoch für jede geplante Benutzeraufgabe die Unterstützung im Ziel-SDK und auf dem Board.
+- Eine programmierbare LCPU ermöglicht Anwendungsaufgaben innerhalb der SDK-Grenzen. Quellcodezugriff und Anpassbarkeit des Controller-Stacks sind gesondert zu klären. Nutzen Sie unterstützte Hersteller-Updates und validieren Sie Controller-Änderungen.
 - BLE ist für vernetzte Produkte mit niedrigem Energiebedarf optimiert. Dual-Mode-Bluetooth ergänzt Anwendungsfälle von Bluetooth Classic, etwa Audio und ältere Profile.
 - Der Bluetooth-Prozessor ermöglicht es der Haupt-CPU, im Ruhezustand zu bleiben, während Verbindungen, Advertising und geplante Funkereignisse weiterlaufen.
-- Die Bluetooth-Leistung hängt sowohl von der Firmware-Architektur als auch von der Hardware ab, darunter RF-Layout, Taktung, Spannungsversorgung, Antennenabstimmung und Kalibrierung.
+- Die Bluetooth-Leistung hängt sowohl von der Firmware-Architektur als auch von der Hardware ab, darunter RF-Layout, Takte, Spannungsversorgung, Antennenabstimmung und Kalibrierung.
 - Behandeln Sie Bluetooth als Subsystem mit Host-Controller-Grenzen, Kommunikation zwischen Prozessoren, Energiestrategie und gemeinsam genutzten Ressourcen.

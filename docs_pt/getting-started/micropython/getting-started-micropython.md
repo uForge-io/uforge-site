@@ -19,4 +19,4 @@ A página de [status do MicroPython](../../develop/platforms/micropython/status.
 
 ## O que um tutorial validado precisa { #what-sifli-should-publish }
 
-Antes de seguir um futuro tutorial de MicroPython para SF32, confirme se ele especifica uma imagem compatível com a placa, comandos testados de gravação e recuperação, a porta e a velocidade de transmissão (baud rate) do REPL, o comportamento do sistema de arquivos e uma matriz atualizada de suporte aos periféricos. Até que esses detalhes estejam disponíveis na [página de status](../../develop/platforms/micropython/status.md), use o caminho do SiFli-SDK indicado acima para a primeira ativação da placa.
+Antes de seguir um futuro tutorial de MicroPython para SF32, confirme se ele especifica uma imagem compatível com a placa, comandos testados de gravação e recuperação, a porta e a velocidade de transmissão (baud rate) do REPL, o comportamento do sistema de arquivos e uma matriz atualizada de suporte aos periféricos. Até que esses detalhes estejam disponíveis na [página de status](../../develop/platforms/micropython/status.md), use o caminho do SiFli-SDK indicado acima para o primeiro bring-up.

@@ -27,13 +27,13 @@ tags:
 
 ## 왜 SF32 구현인가? { #why-the-sf32-implementation }
 
-SF32 포트는 Zephyr의 devicetree, Kconfig, `west`, 키맵, 쉴드, 분리형 키보드 규약을 유지하면서 ZMK의 키보드 모델을 SF32LB52에서 실행하는 방법을 보여 줍니다. `urchin_sf32lb52` 레퍼런스는 38키 레이아웃을 두 반쪽으로 나눕니다. 왼쪽 구성은 ZMK 분리형의 센트럴이며 CherryUSB와 ZMK Studio를 활성화하고 호스트에 USB HID를 제공할 수 있습니다. 오른쪽 구성은 분리형 페리퍼럴입니다. 양쪽 모두 ZMK BLE를 활성화합니다.
+SF32 포트는 Zephyr의 devicetree, Kconfig, `west`, 키맵, 쉴드, 분리형 키보드 규약을 유지하면서 ZMK의 키보드 모델을 SF32LB52에서 실행하는 방법을 보여 줍니다. `urchin_sf32lb52` 레퍼런스는 38키 레이아웃을 두 반쪽으로 나눕니다. 왼쪽 구성은 ZMK 분리형의 센트럴로, CherryUSB와 ZMK Studio를 활성화해 호스트에 USB HID를 제공할 수 있습니다. 오른쪽 구성은 분리형 페리퍼럴이며, 양쪽 구성 모두 ZMK BLE를 활성화합니다.
 
 따라서 이 포크는 SF32에서 무선 분리형 키보드, USB/Bluetooth 데스크톱 입력 디바이스, 프로그래밍 가능한 매크로 패드, 맞춤형 휴먼 인터페이스 제품을 평가하는 데 유용합니다. 단점은 의존성의 성숙도입니다. 포크의 `west` 매니페스트는 커스텀 Zephyr 브랜치(`v4.3+sf32-zmk_fixes`), 고정된 SiFli HAL 리비전, 커스텀 CherryUSB `zephyr-adapt` 브랜치를 고정합니다. 이들은 포트의 호환성 경계에 속하므로, 전체 마이그레이션과 회귀 검증 없이는 업스트림의 "최신" 리비전으로 교체할 수 없습니다.
 
 ## 목표, 범위, 시작 조건 { #outcome-scope-and-entry-criteria }
 
-**목표:** 버전이 고정된 왼쪽 및 오른쪽 Urchin 이미지를 빌드하고 기록하여, 전체 키 매트릭스, 레이어, USB HID, BLE 분리형 및 호스트 경로, 설정 유지, ZMK Studio 경계, 복구를 검증합니다. 이후 반복 가능한 증거와 함께 키맵 또는 하드웨어를 한 가지만 제한적으로 변경합니다.
+**목표:** 버전이 고정된 왼쪽 및 오른쪽 Urchin 이미지를 빌드하고 플래시에 기록하여, 전체 키 매트릭스, 레이어, USB HID, BLE 분리형 및 호스트 경로, 설정 유지, ZMK Studio 경계, 복구를 검증합니다. 이후 반복 가능한 증거와 함께 키맵 또는 하드웨어를 한 가지만 제한적으로 변경합니다.
 
 이 페이지는 업스트림 ZMK 기능과의 완전한 동등성, 임의의 ZMK 쉴드와의 호환성, 양산 수준의 배터리 수명, 검증된 무선 성능, 다른 Zephyr/ZMK 리비전으로의 지원되는 마이그레이션을 주장하지 않습니다. 또한 양산용 키보드 PCB를 정의하지도 않습니다. 저장소의 Urchin 구성은 레퍼런스 키 매트릭스를 SF32LB52-DevKit-LCD 핀에 매핑하므로, 커스텀 하드웨어에는 신중하게 변환해야 합니다.
 
@@ -47,7 +47,7 @@ SF32 포트는 Zephyr의 devicetree, Kconfig, `west`, 키맵, 쉴드, 분리형 
 - Bluetooth 호스트, Studio를 범위에 포함한다면 ZMK Studio를 사용할 수 있는 호스트, 각 반쪽의 전류를 측정할 방법
 - 포크 커밋, 매니페스트 리비전, 보드/쉴드 식별자, 빌드 및 플래싱 로그, 키 테스트 결과, 본드, 설정 상태, 전류 측정값에 대한 기록
 
-<div align="center"><em>표: SF32 기반 ZMK 프로젝트 계약</em></div>
+<div align="center"><em>표: SF32 기반 ZMK 프로젝트 합의 사항</em></div>
 
 <div align="center" markdown>
 
@@ -57,7 +57,7 @@ SF32 포트는 Zephyr의 devicetree, Kconfig, `west`, 키맵, 쉴드, 분리형 
 | 보드 | `sf32lb52_devkit_lcd/sf32lb525uc6/zmk` | 정확한 보드 리비전, 플래싱/복구 경로, 콘솔 로그 |
 | 분리형 레퍼런스 | 센트럴 `urchin_sf32lb52_left`와 페리퍼럴 `urchin_sf32lb52_right` | 배선, 이미지와 반쪽의 대응, 전체 매트릭스 테스트, 분리형 링크 결과 |
 | 호스트 경로 | 센트럴 반쪽의 USB/CherryUSB 및 BLE HID | 열거, 페어링/본드, 재연결, 프로필, 오류 복구 증거 |
-| 구성 | 3개 레이어 키맵, NVS 설정, 왼쪽의 ZMK Studio | 키별 결과, 유지 테스트, Studio 인증, 롤백 기록 |
+| 구성 | 3개 레이어 키맵, NVS 설정, 왼쪽의 ZMK Studio | 키별 결과, 설정 유지 테스트, Studio 인증, 롤백 기록 |
 | 적용 | 한 번에 하나의 키맵, 매트릭스, 전송, 전원 또는 의존성 변경 | 검토된 변경, 원본 이미지, 전체 회귀 결과 |
 
 </div>
@@ -72,9 +72,9 @@ SF32 포트는 Zephyr의 devicetree, Kconfig, `west`, 키맵, 쉴드, 분리형 
 
 | 구성 요소 | 필수 사양 | 역할 | 상태 | 구하는 곳 | 호환성 및 대체 참고 사항 |
 |:----------|:-----------------------|:-----|:-------|:----------------|:-------------------------------------|
-| SF32LB52-DevKit-LCD 보드 2개 | 보드 타깃 `sf32lb52_devkit_lcd/sf32lb525uc6/zmk`; 두 보드의 리비전을 기록 | 문서화된 분리형 기준 구성의 센트럴 및 페리퍼럴 반쪽 | 분리형 테스트에 필수 | [μForge 보드 레퍼런스](../sf32-products/devkits/SF32LB52-DevKit-LCD.md); [검토한 커밋의 OpenSiFli 보드 변형](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/sifli/sf32lb52_devkit_lcd) | 센트럴 이미지와 페리퍼럴 이미지는 역할/구성이 다릅니다. 두 보드 모두 독립적인 복구 수단을 유지하십시오. |
-| Urchin 분리형 키보드 픽스처와 상호 연결 | `urchin_sf32lb52_left` 및 `urchin_sf32lb52_right` 오버레이에 맞게 배선한 38키 매트릭스 | 키 매트릭스, 분리형 전송, 역할별 동작 검증 | 전체 분리형 검증에 필수 | [검토한 커밋의 Urchin 쉴드](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/shields/urchin_sf32lb52) | 오버레이는 배선 레퍼런스이며, 다른 PCB나 임의의 쉴드에 대한 보증이 아닙니다. |
-| USB/BLE 호스트와 데이터 케이블 | 센트럴 반쪽용 USB 호스트; Bluetooth HID 호스트; 페리퍼럴 반쪽용으로 따로 접근할 수 있는 전원/플래싱 경로 | 호스트 연결, 입력 검증, 로그, 복구 | 필수 | [OpenSiFli ZMK 포크](https://github.com/OpenSiFli/zmk) | 호스트 OS, BLE 본드 상태, 케이블/포트, 각 반쪽의 복구 연결을 기록하십시오. |
+| SF32LB52-DevKit-LCD 보드 2개 | 보드 타깃 `sf32lb52_devkit_lcd/sf32lb525uc6/zmk`; 두 보드의 리비전을 기록 | 문서화된 분리형 기준 구성의 센트럴 및 페리퍼럴 반쪽 | 분리형 테스트에 필수 | [μForge 보드 레퍼런스](../sf32-products/devkits/SF32LB52-DevKit-LCD.md); [검토한 커밋의 OpenSiFli 보드 변형](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/sifli/sf32lb52_devkit_lcd) | 센트럴 이미지와 페리퍼럴 이미지는 역할/구성이 다릅니다. 두 보드 모두 독립적인 복구 수단을 유지하십시오 |
+| Urchin 분리형 키보드 픽스처와 상호 연결 | `urchin_sf32lb52_left` 및 `urchin_sf32lb52_right` 오버레이에 맞게 배선한 38키 매트릭스 | 키 매트릭스, 분리형 전송, 역할별 동작 검증 | 전체 분리형 검증에 필수 | [검토한 커밋의 Urchin 쉴드](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/shields/urchin_sf32lb52) | 오버레이는 배선 레퍼런스이며, 다른 PCB나 임의의 쉴드에 대한 보증이 아닙니다 |
+| USB/BLE 호스트와 데이터 케이블 | 센트럴 반쪽용 USB 호스트; Bluetooth HID 호스트; 페리퍼럴 반쪽용으로 따로 접근할 수 있는 전원/플래싱 경로 | 호스트 연결, 입력 검증, 로그, 복구 | 필수 | [OpenSiFli ZMK 포크](https://github.com/OpenSiFli/zmk) | 호스트 OS, BLE 본드 상태, 케이블/포트, 각 반쪽의 복구 연결을 기록하십시오 |
 
 </div>
 
@@ -86,10 +86,10 @@ SF32 포트는 Zephyr의 devicetree, Kconfig, `west`, 키맵, 쉴드, 분리형 
 
 | 패키지 또는 서비스 | 필수 버전 또는 리비전 | 역할 | 상태 | 구하는 곳 | 호환성 및 업데이트 참고 사항 |
 |:-------------------|:-----------------------------|:-----|:-------|:----------------|:-------------------------------|
-| OpenSiFli/zmk | 검토한 커밋 [`fd4d5843065f`](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e) | SF32 보드 포트, ZMK 애플리케이션, Urchin 구성 | 필수 | [검토한 커밋의 저장소](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e) | 태그가 지정된 SF32 ZMK 릴리스가 아닙니다. 포팅과 검증 없이 업스트림 ZMK로 대체하지 마십시오. |
-| West 매니페스트 의존성 | 고정된 포크 커밋의 `app/west.yml`이 확정하는 정확한 리비전 | Zephyr, `hal_sifli`, CherryUSB 및 기타 모듈 | 필수 | [고정된 west 매니페스트](https://github.com/OpenSiFli/zmk/blob/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/west.yml) | `west list`를 실행해 결과를 보관하십시오. 의존성을 따로 업데이트하지 마십시오. |
-| Zephyr `west` 툴체인 및 빌드 도구 | 고정된 매니페스트와 호환되는 버전; 설치된 버전과 호스트 OS를 기록 | 구성, 빌드, 왼쪽/오른쪽 이미지 생성 | 필수 | [ZMK 문서](https://zmk.dev/docs); [Zephyr 문서](https://docs.zephyrproject.org/) | 클린 워크스페이스에서 두 이미지를 다시 빌드하고, 각각의 빌드 디렉터리와 해시를 따로 보관하십시오. |
-| ZMK Studio 호스트 | 선택한 구성에서 Studio를 활성화한 경우, 호환되는 호스트/애플리케이션 버전 | 선택 사항인 키맵/구성 경로 | 선택 | [ZMK Studio 문서](https://zmk.dev/docs/features/studio) | 검토한 구성은 왼쪽/센트럴 반쪽에서 Studio를 제공합니다. 제품에 사용하기 전에 인증과 롤백을 검증하십시오. |
+| OpenSiFli/zmk | 검토한 커밋 [`fd4d5843065f`](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e) | SF32 보드 포트, ZMK 애플리케이션, Urchin 구성 | 필수 | [검토한 커밋의 저장소](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e) | 태그가 지정된 SF32 ZMK 릴리스가 아닙니다. 포팅과 검증 없이 업스트림 ZMK로 대체하지 마십시오 |
+| West 매니페스트 의존성 | 고정된 포크 커밋의 `app/west.yml`이 확정하는 정확한 리비전 | Zephyr, `hal_sifli`, CherryUSB 및 기타 모듈 | 필수 | [고정된 west 매니페스트](https://github.com/OpenSiFli/zmk/blob/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/west.yml) | `west list`를 실행해 결과를 보관하십시오. 의존성을 따로 업데이트하지 마십시오 |
+| Zephyr `west` 툴체인 및 빌드 도구 | 고정된 매니페스트와 호환되는 버전; 설치된 버전과 호스트 OS를 기록 | 구성, 빌드, 왼쪽/오른쪽 이미지 생성 | 필수 | [ZMK 문서](https://zmk.dev/docs); [Zephyr 문서](https://docs.zephyrproject.org/) | 클린 워크스페이스에서 두 이미지를 다시 빌드하고, 각각의 빌드 디렉터리와 해시를 따로 보관하십시오 |
+| ZMK Studio 호스트 | 선택한 구성에서 Studio를 활성화한 경우, 호환되는 호스트/애플리케이션 버전 | 선택 사항인 키맵/구성 경로 | 선택 | [ZMK Studio 문서](https://zmk.dev/docs/features/studio) | 검토한 구성은 왼쪽/센트럴 반쪽에서 Studio를 제공합니다. 제품에 사용하기 전에 인증과 롤백을 검증하십시오 |
 
 </div>
 
@@ -103,13 +103,13 @@ SF32 포트는 Zephyr의 devicetree, Kconfig, `west`, 키맵, 쉴드, 분리형 
 
 | 기준 구성 요소 | 권장 시작점 | 핵심 제약 |
 |:-----------------|:------------------|:--------------------|
-| ZMK 포크 | OpenSiFli/zmk `fd4d5843065f` | 업스트림 zmkfirmware/zmk로 대체하지 마십시오. 이 SF32 포트가 들어 있지 않습니다. |
-| 보드 타깃 | `sf32lb52_devkit_lcd/sf32lb525uc6/zmk` | SF32LB52-DevKit-LCD의 ZMK 전용 변형입니다. |
-| 제품에 가까운 쉴드 | `urchin_sf32lb52_left` 및 `urchin_sf32lb52_right` | 오버레이마다 GPIO 맵과 역할이 다르므로 이미지를 서로 바꿔 쓸 수 없습니다. |
-| 진단용 쉴드 | `sf32lb52_test`, `sf32lb52_split_test_left/right`, `sf32lb52_zmkstudio_test` | 포트 개발용 레퍼런스이며, 제품 호환성에 대한 약속이 아닙니다. |
-| 분리형 역할 | 왼쪽 = 센트럴; 오른쪽 = 페리퍼럴 | USB와 ZMK Studio는 왼쪽 구성에서 활성화됩니다. 대칭이라고 가정하지 마십시오. |
-| 의존성 매니페스트 | 커스텀 Zephyr `v4.3+sf32-zmk_fixes`, 고정된 `hal_sifli`, 커스텀 CherryUSB `zephyr-adapt` | 의존성 하나만 업데이트해도 호환성 경계가 바뀝니다. |
-| 라이선스 | ZMK 포크와 식별된 SF32 추가분은 MIT 헤더/라이선스를 사용 | 모든 모듈, 하드웨어, 키맵 에셋, 제품 콘텐츠를 별도로 검토하십시오. |
+| ZMK 포크 | OpenSiFli/zmk `fd4d5843065f` | 업스트림 zmkfirmware/zmk로 대체하지 마십시오. 이 SF32 포트가 들어 있지 않습니다 |
+| 보드 타깃 | `sf32lb52_devkit_lcd/sf32lb525uc6/zmk` | SF32LB52-DevKit-LCD의 ZMK 전용 변형입니다 |
+| 실제 제품 구성에 가까운 쉴드 | `urchin_sf32lb52_left` 및 `urchin_sf32lb52_right` | 오버레이마다 GPIO 맵과 역할이 다르므로 이미지를 서로 바꿔 쓸 수 없습니다 |
+| 진단용 쉴드 | `sf32lb52_test`, `sf32lb52_split_test_left/right`, `sf32lb52_zmkstudio_test` | 포트 개발용 레퍼런스이며, 제품 호환성에 대한 약속이 아닙니다 |
+| 분리형 역할 | 왼쪽 = 센트럴; 오른쪽 = 페리퍼럴 | USB와 ZMK Studio는 왼쪽 구성에서 활성화됩니다. 대칭이라고 가정하지 마십시오 |
+| 의존성 매니페스트 | 커스텀 Zephyr `v4.3+sf32-zmk_fixes`, 고정된 `hal_sifli`, 커스텀 CherryUSB `zephyr-adapt` | 의존성 하나만 업데이트해도 호환성 경계가 바뀝니다 |
+| 라이선스 | ZMK 포크와 식별된 SF32 추가분은 MIT 헤더/라이선스를 사용 | 모든 모듈, 하드웨어, 키맵 에셋, 제품 콘텐츠를 별도로 검토하십시오 |
 
 </div>
 
@@ -147,7 +147,7 @@ west build -s app -p always -d build-right \
 | 2. 입력, 전송, 복구 | 매트릭스, USB, BLE, 분리형, 설정, Studio 오류를 진단하고 복구할 수 있는가? | 키 커버리지와 오류 주입 및 복구 기록 |
 | 3. 소스 재현 | 두 번째 환경에서 숨은 상태 없이 두 이미지를 다시 생성할 수 있는가? | 매니페스트, 클린 빌드, 산출물 해시, 플래싱, 반복 결과 |
 | 4. 범위를 제한한 적용 | 기준 구성을 깨지 않고 키보드 동작 하나 또는 하드웨어 매핑 하나를 변경할 수 있는가? | 범위가 한정된 변경, 롤백 경로, 회귀 증거 |
-| 5. 제품 검토 | 이 포트는 커스텀 PCB나 배터리 프로토타입에 쓸 만큼 성숙했는가? | 책임자가 정해진 리스크와 진행/보류/중단 결정 |
+| 5. 제품 검토 | 이 포트는 커스텀 PCB나 배터리 프로토타입에 쓸 만큼 성숙했는가? | 책임자가 정해진 위험와 진행/보류/중단 결정 |
 
 </div>
 
@@ -195,7 +195,7 @@ flowchart LR
 
 | 테스트 | 방법 | 통과 증거 |
 |:-----|:-------|:--------------|
-| 매트릭스 커버리지 | 모든 위치, 롤오버 조합, 각 레이어, 두 직접 입력을 모두 동작시킴 | 누락, 중복, 눌린 채 고정, 역할이 뒤바뀐 키가 없음; 누름/뗌 순서가 기록됨 |
+| 매트릭스 커버리지 | 모든 위치, 롤오버 조합, 각 레이어, 두 직접 입력 모두를 동작시킴 | 누락, 중복, 눌린 채 고정, 역할이 뒤바뀐 키가 없음; 누름/뗌 순서가 기록됨 |
 | 분리형 링크 끊김 | 유휴 상태와 타이핑 중에 오른쪽 반쪽의 전원을 끄거나 범위 밖으로 이동 | 왼쪽 키와 호스트 링크가 정의된 상태를 유지함; 오른쪽 반쪽이 재플래싱이나 잔류 키 없이 재연결됨 |
 | USB 중단 | 입력 및 Studio 사용 중에 왼쪽 USB 데이터 경로를 분리했다가 다시 연결 | HID와 Studio가 각각 독립적으로 복구됨; 눌린 채 고정된 수정자 키나 손상된 설정이 남지 않음 |
 | 호스트 BLE 끊김 | 호스트 Bluetooth를 끄고, 프로필을 전환한 뒤 재연결 | 엔드포인트/프로필 상태가 보임; 재연결과 의도적인 본드 삭제가 기록된 경로를 따름 |
@@ -251,11 +251,11 @@ flowchart LR
 - 실패한 의존성 업데이트, Studio 변경, 설정 쓰기, 현장 업데이트를 제품을 열거나 폐기하지 않고 복구할 수 있습니까?
 - ZMK/Zephyr 라이선스, PCB 및 인클로저 파일, 키맵 콘텐츠, 로고, 글꼴, 번들된 구성이 배포에 적합합니까?
 
-**게이트 5 종료 기준:** 모든 잔여 리스크에 책임자, 증거, 처리 결정이 있고, 팀이 진행, 보류, 중단 중 하나를 명시적으로 결정했습니다.
+**게이트 5 종료 기준:** 모든 잔여 위험에 책임자, 증거, 처리 결정이 있고, 팀이 진행, 보류, 중단 중 하나를 명시적으로 결정했습니다.
 
 ## 제품 설계로의 인계 { #handoff-to-product-design }
 
-정확한 SF32 부품과 메모리, 분리형 역할과 전송, 행/열/직접 입력 맵, 다이오드 방향, USB 연결, 안테나와 인클로저 가정, NVS/설정 정책, 플래싱 및 복구 인터페이스, 반쪽별 전력 예산, 테스트 픽스처, 이미지 식별, 고정된 매니페스트를 다음 단계로 넘기십시오. 이어서 [SF32LB52-DevKit-LCD](../sf32-products/devkits/SF32LB52-DevKit-LCD.md), [Zephyr](../develop/platforms/zephyr/overview.md), [Bluetooth 개요](../learn/bluetooth/overview.md), [SF32LB52x 하드웨어 설계 가이드](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [양산 설계](../hardware/design-for-production.md)를 참고하십시오.
+정확한 SF32 부품과 메모리, 분리형 역할과 전송, 행/열/직접 입력 맵, 다이오드 방향, USB 연결, 안테나와 인클로저 가정, NVS/설정 정책, 플래싱 및 복구 인터페이스, 반쪽별 전력 예산, 테스트 픽스처, 이미지 식별, 고정된 매니페스트를 다음 단계로 넘기십시오. 이어서 [SF32LB52-DevKit-LCD](../sf32-products/devkits/SF32LB52-DevKit-LCD.md), [Zephyr 플랫폼 경계](../develop/platforms/zephyr/overview.md), [Bluetooth 아키텍처](../learn/bluetooth/overview.md), [SF32LB52x 하드웨어 설계 가이드](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [양산 설계](../hardware/design-for-production.md)를 참고하십시오.
 
 ## 주요 정보 출처 { #authoritative-sources }
 

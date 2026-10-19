@@ -26,7 +26,7 @@ Bevor Sie GATT-Code schreiben, legen Sie fest, was das Produkt tatsächlich ben�
 - Bluetooth-Audio — Classic (A2DP/AVRCP/HFP) oder LE Audio?
 - Typisches Verbindungsintervall, Latenz- und Durchsatzanforderungen.
 - Wie oft der Anwendungsprozessor aufwachen muss und wie lange er jeweils im Schlafzustand bleiben kann.
-- Ob das Produkt mit vorhandenen telefonseitigen Diensten (Benachrichtigungen, Medienkontrolle, Anrufe) interoperieren muss oder nur mit einer eigenen Companion-App.
+- Ob das Produkt mit vorhandenen telefonseitigen Services (Benachrichtigungen, Medienkontrolle, Anrufe) interoperieren muss oder nur mit einer eigenen Companion-App.
 - Erwartete Reichweite, Antennen-/Gehäusebeschränkungen und RF-Zulassungsziele.
 - Ob Firmware-Updates über Bluetooth ausgeliefert werden.
 
@@ -198,7 +198,7 @@ Wenn das Produkt den Durchsatz nahe an die maximale Datenrate der Verbindung bri
 
 Es gibt zwei gängige Übertragungswege:
 
-- **DFU-artige Updates über BLE**, integriert in eine Peripheral-Verbindung (siehe das Beispiel `peripheral_with_ota` dafür, wie OTA in eine normale Peripheral-GATT-Rolle eingebunden wird).
+- **DFU-artige Updates über BLE**, integriert in eine Peripheral-Verbindung (das Beispiel `peripheral_with_ota` zeigt, wie OTA in eine normale Peripheral-GATT-Rolle eingebunden wird).
 - **PAN OTA**, das Firmware über eine Bluetooth-PAN-Netzwerkverbindung für Dual-Mode-Produkte liefert, die PAN bereits für Daten nutzen.
 
 Planen und testen Sie vor der Auslieferung für beide Wege das Partitionslayout, die Wiederherstellung nach Fehlern und das Rollback. Prüfen Sie für BLE-OTA ein kürzeres Verbindungsintervall und eine Peripheral-Latenz von null während der Übertragung; stellen Sie danach die normalen Energiespareinstellungen wieder her. PAN-OTA nutzt Classic Bluetooth. Optimieren Sie Durchsatz und Wiederherstellung nach Fehlern dafür separat, statt BLE-Verbindungsparameter zu übernehmen.
@@ -242,13 +242,13 @@ Bluetooth-Firmware sollte mit derselben Disziplin validiert werden wie RF-Hardwa
 
 ## Häufige Fehler { #common-mistakes }
 
-- Auswahl reiner BLE-Hardware, nachdem das Produkt bereits Classic-Audio benötigt.
+- Auswählen reiner BLE-Hardware, nachdem das Produkt bereits Classic-Audio benötigt.
 - Unnötiges Neuimplementieren der Service-Infrastruktur oder Erzwingen eines eigenen Datenmodells in einem ungeeigneten Standardprofil.
 - Belassen der Peripheral-Latenz bei 0 für Verbindungen, die die meiste Zeit inaktiv sind.
-- Vernachlässigung von Koexistenztests bis zur späten Integration, wenn Display/Audio/Bluetooth erstmals kombiniert werden.
-- Pairing und Bonding erst spät als Frage der Nutzerführung behandeln, statt den Ablauf von Anfang an zu gestalten.
+- Ignorieren von Koexistenztests bis zur späten Integration, wenn Display/Audio/Bluetooth erstmals kombiniert werden.
+- Behandeln von Pairing und Bonding als nachträgliche Frage der Nutzerführung, statt den Ablauf von Anfang an zu gestalten.
 - Auslassen der RF-Bring-up-Validierung (Antenne, Anpassnetzwerk, Quarzgenauigkeit) bis zu den finalen Leiterplattenrevisionen.
-- Die Annahme, reines Firmware-Tuning könne ein schlechtes RF-Layout kompensieren.
+- Annehmen, reines Firmware-Tuning könne ein schlechtes RF-Layout kompensieren.
 
 ## Inbetriebnahme-Checkliste { #bring-up-checklist }
 

@@ -14,11 +14,11 @@ Cette architecture est utile aux produits connectés alimentés par batterie. Le
 
 La possibilité d'exécuter du code applicatif sur ce processeur basse consommation, et son étendue, varient selon la famille. Consultez le comparatif ci-dessous et vérifiez la répartition des tâches prise en charge par le SDK de la référence choisie.
 
-Lisez cette page pour comprendre où s'exécutent la temporisation Bluetooth et le firmware du contrôleur, si le processeur basse consommation de la variante choisie est programmable par l'utilisateur, et comment laisser le CPU applicatif en veille tout en maintenant la connexion. Pour concevoir les services et intégrer Bluetooth au produit, consultez la [Vue d'ensemble Bluetooth](overview.md).
+Lisez cette page pour comprendre où s'exécutent la temporisation Bluetooth et le firmware du contrôleur, si le processeur basse consommation de la famille choisie est programmable par l'utilisateur, et comment laisser le CPU applicatif en veille tout en maintenant la connexion. Pour concevoir les services et intégrer Bluetooth au produit, consultez la [Vue d'ensemble Bluetooth](overview.md).
 
 ## Pourquoi un processeur Bluetooth dédié est important { #why-a-dedicated-bluetooth-processor-matters }
 
-Le Bluetooth n'est pas simplement un protocole logiciel exécuté de temps à autre en arrière-plan. Un appareil connecté doit respecter des contraintes strictes de temporisation radio pour les annonces BLE, le scan, les événements de connexion, les échanges de paquets, le transport audio, le chiffrement et la coexistence avec les autres activités du système.
+Le Bluetooth n'est pas simplement un protocole logiciel exécuté de temps à autre en arrière-plan. Un appareil connecté doit respecter des contraintes strictes de temporisation radio pour les annonces, le scan, les événements de connexion, les échanges de paquets, le transport audio, le chiffrement et la coexistence avec les autres activités du système.
 
 En isolant ces fonctions sans fil sensibles aux contraintes de temporisation de la charge principale de l'application, un sous-système Bluetooth dédié apporte plusieurs avantages :
 
@@ -28,7 +28,7 @@ En isolant ces fonctions sans fil sensibles aux contraintes de temporisation de 
 - Séparation plus nette entre le firmware applicatif et le firmware de contrôle de protocole.
 - Meilleure prise en charge des produits devant rester connectés pendant que le CPU principal dort.
 
-Pour les appareils portables, cette séparation est particulièrement précieuse. L'appareil peut rester connecté dans un état basse consommation la majeure partie du temps et ne se réveiller que pour une interaction utilisateur, un événement capteur, une mise à jour de l'écran, une activité audio ou une synchronisation avec le téléphone.
+Pour les produits portés sur soi et les appareils portables, cette séparation est particulièrement précieuse. L'appareil peut rester connecté dans un état basse consommation la majeure partie du temps et ne se réveiller que pour une interaction utilisateur, un événement capteur, une mise à jour de l'écran, une activité audio ou une synchronisation avec le téléphone.
 
 Ce sont des possibilités offertes par l'architecture, pas des valeurs garanties de consommation ou de réveil. L'emplacement de la pile hôte, les interruptions, le démarrage de l'horloge, la politique de veille et le trafic applicatif déterminent le résultat mesuré. Mesurez le courant et le temps de réponse avec le firmware et la charge prévus.
 
@@ -59,7 +59,7 @@ Processeur Bluetooth / firmware du contrôleur
 Radio Bluetooth et étage RF
 ```
 
-La répartition exacte entre le firmware hôte, le contrôleur et l'application dépend du SDK, de la configuration de la pile et des exigences du produit. Le processeur applicatif principal ne doit toutefois pas être considéré comme le seul processeur impliqué dans le fonctionnement Bluetooth. Le sous-système Bluetooth dispose de son propre contexte d'exécution et vise à assurer un comportement sans fil déterministe tout en limitant la consommation.
+La répartition exacte entre le firmware hôte, le contrôleur et l'application dépend du SDK, de la configuration de la pile et des exigences du produit. Le processeur applicatif principal ne devrait toutefois pas être considéré comme le seul processeur impliqué dans le fonctionnement Bluetooth. Le sous-système Bluetooth dispose de son propre contexte d'exécution et vise à assurer un comportement sans fil déterministe tout en limitant la consommation.
 
 ## Différences entre familles d'appareils { #device-family-differences }
 
@@ -173,7 +173,7 @@ Pour les développeurs d'applications, l'essentiel est que le fonctionnement Blu
 
 Le processeur applicatif contrôle généralement le comportement au niveau produit :
 
-- Démarrer et arrêter les annonces BLE.
+- Démarrer et arrêter les annonces.
 - Créer ou accepter des connexions.
 - Gérer les services et caractéristiques GATT.
 - Gérer l'appairage, l'association persistante des clés (bonding) et la politique de sécurité.
@@ -246,10 +246,10 @@ Une conception robuste associe généralement le processeur Bluetooth à des par
 
 ## Points clés à retenir { #key-takeaways }
 
-- Les appareils SF32LB s'appuient sur un processeur Bluetooth ou basse consommation dédié pour assurer un fonctionnement sans fil déterministe et économe en énergie.
+- Les appareils SF32LB s'appuient sur un processeur Bluetooth ou basse consommation dédié pour assurer un fonctionnement sans fil fiable et économe en énergie.
 - Le SF32LB52x réserve le LCPU au contrôleur Bluetooth. Les SF32LB55x, SF32LB56x et SF32LB58x prennent en charge sur le LCPU des tâches applicatives définies par le SDK, dans les configurations documentées. Le SF32LB57x utilise le LCPU pour le Bluetooth et les tâches sensibles à la consommation, mais vérifiez la prise en charge de chaque tâche utilisateur prévue sur le SDK et la carte cibles.
 - Un LCPU programmable permet des tâches applicatives dans les limites du SDK ; l'accès au code du contrôleur et sa personnalisation doivent être confirmés séparément. Utilisez les mises à jour du fabricant et validez les changements.
 - Le BLE est optimisé pour les produits connectés basse consommation ; le Bluetooth bimode ajoute des cas d'usage du Bluetooth classique, tels que l'audio et la prise en charge de profils hérités.
-- Le processeur Bluetooth permet au CPU applicatif principal de rester en veille pendant que les connexions, les annonces BLE et les événements radio planifiés se poursuivent.
+- Le processeur Bluetooth permet au CPU applicatif principal de rester en veille pendant que les connexions, les annonces et les événements radio planifiés se poursuivent.
 - De bonnes performances Bluetooth dépendent à la fois de l'architecture du firmware et de la conception matérielle, notamment du routage RF, des horloges, de l'alimentation, de l'adaptation de l'antenne et de l'étalonnage.
 - Traitez Bluetooth comme un sous-système comportant des frontières hôte/contrôleur, des échanges interprocesseurs, des choix de gestion de l'énergie et des contraintes liées aux ressources partagées.

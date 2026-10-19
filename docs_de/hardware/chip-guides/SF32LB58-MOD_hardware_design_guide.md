@@ -12,7 +12,7 @@ tags:
 
 ## 1. Übersicht { #1-overview }
 
-**SF32LB58-MOD** ist ein universell einsetzbares Bluetooth-MCU-Modul mit niedrigem Stromverbrauch auf Basis des SiFli-Chips SF32LB586VDD36. Der Chip enthält einen dreikernigen Arm-Cortex-M33-STAR-MC1-Prozessor mit bis zu 240 MHz. Das Modul ist mit einem 48-MHz-Quarz ausgestattet; ein 32,768-kHz-Quarz ist optional. Je nach Bestellcode sind außerdem HPI-PSRAM, QSPI-NOR-/NAND-Flash oder eMMC integriert. Das SMD-Modul hat 138 Pins und misst 24 × 24 × 3,1 mm.
+**SF32LB58-MOD** ist ein universell einsetzbares Bluetooth-MCU-Modul mit niedrigem Stromverbrauch auf Basis des SiFli-Chips SF32LB586VDD36. Der Chip enthält einen dreikernigen Arm-Cortex-M33-STAR-MC1-Prozessor mit bis zu 240 MHz. Das Modul ist mit einem 48-MHz-Quarz ausgestattet; ein 32,768-kHz-Quarz ist optional. Je nach SKU sind außerdem HPI-PSRAM, QSPI-NOR-/NAND-Flash oder eMMC integriert. Das SMD-Modul hat 138 Pins und misst 24 × 24 × 3,1 mm.
 
 Dieser Leitfaden behandelt die Hardware-Integration auf Modulebene: Pindefinitionen, Peripherieschnittstellen, elektrische Eigenschaften, Anforderungen an die Stromversorgung, Referenzschaltpläne, eine Schaltplan-Design-Checkliste, mechanische Abmessungen und PCB-Footprint sowie Anforderungen an die Produkthandhabung. Er basiert auf dem SiFli-Datenblatt **DS5802-SF32LB58-MOD V0.1**.
 
@@ -241,7 +241,7 @@ Jeder in der obigen Tabelle mit `PAxx_I2C_UART` oder `PBxx_I2C_UART` markierte P
 
 **UART** — Vollduplex, Baudrate bis zu 6 Mbps, konfigurierbares Datenformat, Hardware-Flusssteuerung (CTS/RTS) und DMA-Mehrfachpaket-TX/RX. UART1–3 befinden sich auf HPSYS, UART4–6 auf LPSYS.
 
-**I2C** — Unterstützt Master- und Slave-Betrieb, einen 8-Byte-FIFO, DMA, Standard-Modus (100 kbps), Fast-Modus (400 kbps), Fast Mode Plus (1 Mbps) und High-Speed-Modus (3,4 Mbps), 7-Bit-/10-Bit-Adressierung als Master, Clock-Stretching sowie einen konfigurierbaren digitalen Entprellfilter. I2C1–4 befinden sich auf HPSYS, I2C5–7 auf LPSYS.
+**I2C** — Unterstützt Master- und Slave-Betrieb, einen 8-Byte-FIFO, DMA, Standard-Modus (100 kbps), Fast-Modus (400 kbps), Fast Mode Plus (1 Mbps) und High-Speed-Modus (3,4 Mbps), 7-Bit-/10-Bit-Adressierung als Master, Clock-Stretching sowie eine konfigurierbare digitale Störimpulsfilterung (Glitch-Filter). I2C1–4 befinden sich auf HPSYS, I2C5–7 auf LPSYS.
 
 **SPI** — Unterstützt das SSP-/SPI-Format (Vollduplex, Master oder Slave) und das Microwire-Format (Halbduplex, nur Master), eine Datenbreite von 4 bis 32 Bit, konfigurierbare Taktpolarität und -phase, konfigurierbare Chip-Select-Polarität, einen FIFO mit 16 Einträgen zu je 32 Bit sowie DMA. SPI1/2 befinden sich auf HPSYS (max. 48 MHz), SPI3/4 auf LPSYS (max. 24 MHz).
 
@@ -253,7 +253,7 @@ Jeder in der obigen Tabelle mit `PAxx_I2C_UART` oder `PBxx_I2C_UART` markierte P
 
 **I2S** — Nur Master, Vollduplex, linksbündige/rechtsbündige/Standardformate, 8-Bit und 16-Bit Mono/Stereo, bis zu 24-Bit-PCM-Breite.
 
-**LCD-Schnittstelle** — DBI-serieller SPI-Modus (3-Leitungen/4-Leitungen, duale/quad Datenleitung) und paralleler 8080-Modus (8/16/24-Bit-Busbreite). Unterstützt die Farbformate RGB332/RGB444/RGB565/RGB666/RGB888 je nach Modus. Ein dedizierter MIPI-DSI-Leitungssatz (Takt + 2 Datenleitungen) ist ebenfalls an den Pins 47–52 verfügbar.
+**LCD-Schnittstelle** — DBI-serieller SPI-Modus (3-Leitungen/4-Leitungen, Dual-/Quad-Datenleitungen) und paralleler 8080-Modus (8/16/24-Bit-Busbreite). Unterstützt die Farbformate RGB332/RGB444/RGB565/RGB666/RGB888 je nach Modus. Ein dedizierter MIPI-DSI-Leitungssatz (Takt + 2 Datenleitungen) ist ebenfalls an den Pins 47–52 verfügbar.
 
 ### 5.2 Analoge Signalverarbeitung { #52-analog-signal-processing }
 
@@ -263,7 +263,7 @@ Jeder in der obigen Tabelle mit `PAxx_I2C_UART` oder `PBxx_I2C_UART` markierte P
 
 **Audio-DAC** — Zwei integrierte 24-Bit-Kanäle mit Abtastraten von 8 kHz bis 48 kHz und Differenzausgang.
 
-**Audio-PLL** — Fractional-N-Takterzeugung mit einer Auflösung von 48 MHz/2^18; als unterstützte, daraus abgeleitete Abtastraten nennt die Quelle 48 MHz, 32,768 kHz und 44,1 kHz.
+**Audio-PLL** — Fractional-N-Takterzeugung mit einer Auflösung von 48 MHz/2^18, unterstützt werden die abgeleiteten Abtastraten 48 MHz, 32,768 kHz und 44,1 kHz.
 
 **Audio-ADC** — Zwei integrierte 24-Bit-Kanäle mit Abtastraten von 8 kHz bis 48 kHz und unabhängiger Verstärkungsregelung pro Kanal.
 
@@ -277,10 +277,10 @@ Jeder in der obigen Tabelle mit `PAxx_I2C_UART` oder `PBxx_I2C_UART` markierte P
 
 | Symbol | Parameter | Min | Max | Einheit |
 | :--- | :--- | :-: | :-: | :-: |
-| VDD_3V3 | 3,3-V-Versorgungseingang | -0,3 | 3,6 | V |
-| VDD_1V8 | 1,8-V-Versorgungseingang | -0,3 | 1,95 | V |
-| VDDIO | I/O-Versorgungseingang | -0,3 | 3,6 | V |
-| Tstore | Lagertemperatur | -40 | 125 | °C |
+| VDD_3V3 | 3,3-V-Versorgungseingang | −0,3 | 3,6 | V |
+| VDD_1V8 | 1,8-V-Versorgungseingang | −0,3 | 1,95 | V |
+| VDDIO | I/O-Versorgungseingang | −0,3 | 3,6 | V |
+| Tstore | Lagertemperatur | −40 | 125 | °C |
 
 </div>
 
@@ -295,7 +295,7 @@ Jeder in der obigen Tabelle mit `PAxx_I2C_UART` oder `PBxx_I2C_UART` markierte P
 | VDD_3V3 | 3,3-V-Versorgungseingang | 2,97 | 3,3 | 3,6 | V |
 | VDD_1V8 | 1,8-V-Versorgungseingang | 1,7 | 1,8 | 1,95 | V |
 | VDDIO | I/O-Versorgungseingang | 1,7 | - | 3,6 | V |
-| TA | Betriebstemperatur | -40 | - | 85 | °C |
+| TA | Betriebstemperatur | −40 | - | 85 | °C |
 
 </div>
 
@@ -308,12 +308,12 @@ Jeder in der obigen Tabelle mit `PAxx_I2C_UART` oder `PBxx_I2C_UART` markierte P
 | Symbol | Parameter | Min | Typ | Max | Einheit |
 | :--- | :--- | :-: | :-: | :-: | :-: |
 | CIN | Pin-Kapazität | 2,5 | 3 | 3,5 | pF |
-| VIH | Eingang High-Spannung | 0,7×VDD | - | VDD | V |
-| VIL | Eingang Low-Spannung | VSS | - | 0,3×VDD | V |
-| VOH | Ausgang High-Spannung (hochohmige Last) | 0,8×VDD | - | VDD | V |
-| VOL | Ausgang Low-Spannung (hochohmige Last) | VSS | - | 0,2×VDD | V |
-| IOH | Ausgang High-Treiberstrom | 24 | 30 | 38 | mA |
-| IOL | Ausgang Low-Treiberstrom | 24 | 30 | 38 | mA |
+| VIH | High-Pegel-Eingangsspannung | 0,7×VDD | - | VDD | V |
+| VIL | Low-Pegel-Eingangsspannung | VSS | - | 0,3×VDD | V |
+| VOH | High-Pegel-Ausgangsspannung (hochohmige Last) | 0,8×VDD | - | VDD | V |
+| VOL | Low-Pegel-Ausgangsspannung (hochohmige Last) | VSS | - | 0,2×VDD | V |
+| IOH | High-Pegel-Ausgangstreiberstrom | 24 | 30 | 38 | mA |
+| IOL | Low-Pegel-Ausgangstreiberstrom | 24 | 30 | 38 | mA |
 | RPU / RPD | Interner Pull-up/Pull-down | 7 | 10 | 20 | kΩ |
 
 </div>
@@ -324,8 +324,8 @@ Jeder in der obigen Tabelle mit `PAxx_I2C_UART` oder `PBxx_I2C_UART` markierte P
 
 | Symbol | Parameter | Min | Typ | Max | Einheit |
 | :--- | :--- | :-: | :-: | :-: | :-: |
-| IOH | Ausgang High-Treiberstrom | 8 | 10 | 13 | mA |
-| IOL | Ausgang Low-Treiberstrom | 8 | 10 | 13 | mA |
+| IOH | High-Pegel-Ausgangstreiberstrom | 8 | 10 | 13 | mA |
+| IOL | Low-Pegel-Ausgangstreiberstrom | 8 | 10 | 13 | mA |
 | RPU / RPD | Interner Pull-up/Pull-down | 10 | 17 | 30 | kΩ |
 
 </div>
@@ -386,7 +386,7 @@ Das Modul unterstützt Bluetooth 5.3 und ist abwärtskompatibel zu Bluetooth 4.2
 
 **Classic BT (Enhanced Data Rate):** maximale Sendeleistung 13 dBm; Empfängerempfindlichkeit −95,5 dBm für π/4-DQPSK und −88,5 dBm für 8DPSK.
 
-Vollständige Min/Typ/Max-Tabellen für alle BLE 1 Mbps/2 Mbps/LR-TX/RX-Leistungswerte und Classic-BT-BR/EDR-TX/RX-Leistungswerte sind in §5.5 des offiziellen Datenblatts enthalten.
+Vollständige Min/Typ/Max-Tabellen für die gesamte TX-/RX-Leistung von BLE 1 Mbps/2 Mbps/LR und von Classic BT BR/EDR sind in §5.5 des offiziellen Datenblatts enthalten.
 
 ## 7. Modul-Stromversorgung { #7-module-power-supply }
 

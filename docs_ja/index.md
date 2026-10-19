@@ -1,7 +1,7 @@
 ---
 icon: lucide/home
 title: "SF32組み込み開発プラットフォーム"
-description: "SF32超低消費電力MCU、モジュール、開発ボード、SDKの開発フロー、量産を見据えたハードウェア設計ガイドをまとめたオープンソースドキュメントです。"
+description: "SF32超低消費電力MCU、モジュール、開発ボード、SDKの開発フロー、量産対応のハードウェア設計ガイドをまとめたオープンソースドキュメントです。"
 image: assets/home/sf32-chip-hero.png
 hide:
   - navigation
@@ -17,7 +17,7 @@ hide:
 
 # 次世代の組み込み機器を<br>つくろう { #build-the-next-generationof-embedded-devices }
 
-***μForge.io*** は、革新的な半導体ソリューションの開発を支えるオープンソースプラットフォームです。SiFliのSF32超低消費電力MCUを起点に、チップ、モジュール、開発ボード、SDK、ドキュメント、量産を見据えたリファレンス設計まで、開発に必要なリソースを一か所に集約しています。これにより、開発者はネットワーク接続、インテリジェントな機能、優れた省電力性を備えた組み込み製品を、統合の手間を抑えながら、アイデアから量産までより迅速に開発できます。
+***μForge.io*** は、革新的な半導体ソリューションの開発を支えるオープンソースプラットフォームです。SiFliのSF32超低消費電力MCUを起点に、チップ、モジュール、開発ボード、SDK、ドキュメント、量産対応のリファレンスデザインまで、開発に必要なリソースを一か所に集約しています。これにより、開発者はネットワーク接続、インテリジェントな機能、優れた省電力性を備えた組み込み製品を、アイデアから量産まで、よりスムーズかつ迅速に開発できます。
 
 <div class="uf-hero-actions" markdown>
 
@@ -33,7 +33,7 @@ hide:
 &nbsp;&nbsp;&nbsp;
 :fontawesome-solid-users: 活発なコミュニティ
 &nbsp;&nbsp;&nbsp;
-:fontawesome-solid-shield-halved: 量産を見据えた設計
+:fontawesome-solid-shield-halved: 量産対応
 &nbsp;&nbsp;&nbsp;
 :fontawesome-solid-rotate: 継続的な更新
 
@@ -48,7 +48,7 @@ hide:
   <span class="uf-spotlight-item__art uf-spotlight-item__art--silicon" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">半導体</span>
   <span class="uf-spotlight-item__title">SF32ファミリー</span>
-  <span class="uf-spotlight-item__copy">超低消費電力で、接続性と高度な処理を備えた組み込み製品向け。</span>
+  <span class="uf-spotlight-item__copy">超低消費電力で、接続性とインテリジェントな機能を備えた組み込み製品向け。</span>
 </a>
 
 <a class="uf-spotlight-item uf-spotlight-item--board" href="sf32-products/index.md" data-radius="250">
@@ -67,7 +67,7 @@ hide:
 
 <a class="uf-spotlight-item uf-spotlight-item--learn" href="learn/index.md" data-radius="255">
   <span class="uf-spotlight-item__art uf-spotlight-item__art--learn" aria-hidden="true"></span>
-  <span class="uf-spotlight-item__eyebrow">学ぶ</span>
+  <span class="uf-spotlight-item__eyebrow">技術情報</span>
   <span class="uf-spotlight-item__title">CPU・GPU</span>
   <span class="uf-spotlight-item__copy">グラフィックス、Bluetooth、オーディオ、低消費電力の設計ガイド。</span>
 </a>
@@ -86,7 +86,7 @@ hide:
 
 - :fontawesome-solid-microchip:{ .uf-ql-icon .uf-purple } **ハードウェア**
 
-    MCU、モジュール、開発ボード、量産を見据えたリファレンス設計。
+    MCU、モジュール、開発ボード、量産対応のリファレンスデザイン。
 
     [ハードウェアを見る :material-arrow-right:](sf32-products/family/SF32_family.md){ .uf-link-purple }
 
@@ -118,7 +118,7 @@ hide:
 
 - :fontawesome-solid-microchip:{ .uf-icon-blue } **高い処理性能**
 
-    コア数と機能はデバイスによって異なります。ファミリーにはシングルコアからトライコアまでの構成があり、複数のシリーズでCortex-M33 / STAR-MC1を採用しています。キャッシュ、FPU、MPUの搭載有無は、個々のチップとSoC実装によって異なるため、対象品番のドキュメントを確認してください。一部のデバイスでは、最大64 MBのパッケージ内PSRAMを利用できます。
+    コア数と機能はデバイスによって異なります。ファミリーにはシングルコアからトライコアまでの構成があり、複数のファミリーでCortex-M33 / STAR-MC1を採用しています。キャッシュ、FPU、MPUの搭載有無は、個々のチップとSoC実装によって異なるため、対象品番のドキュメントを確認してください。一部のデバイスでは、最大64 MBのパッケージ内PSRAMを利用できます。
 
 - :fontawesome-brands-bluetooth:{ .uf-icon-blue } **Bluetooth接続**
 

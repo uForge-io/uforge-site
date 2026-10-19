@@ -12,7 +12,7 @@ tags:
 
 ## 1. Descripción general { #1-overview }
 
-**SF32LB52-MOD-1** es un módulo MCU Bluetooth certificado, de uso general y bajo consumo, basado en el chip SF32LB525UC6 de SiFli (Arm Cortex-M33 STAR-MC1 de doble núcleo, hasta 240 MHz). Integra un cristal de 48 MHz, un cristal opcional de 32,768 kHz y un chip OPI-PSRAM opcional de 64 Mb integrado en el mismo encapsulado, todo en un único encapsulado de montaje superficial de 68 pines y 27,9 × 18,0 × 3,1 mm.
+**SF32LB52-MOD-1** es un módulo MCU Bluetooth certificado, de uso general y bajo consumo, basado en el chip SF32LB525UC6 de SiFli (Arm Cortex-M33 STAR-MC1 de doble núcleo, hasta 240 MHz). Integra un cristal de 48 MHz, un cristal opcional de 32,768 kHz y un chip OPI-PSRAM opcional de 64 Mb en un único encapsulado de montaje superficial de 68 pines y 27,9 × 18,0 × 3,1 mm.
 
 Esta guía cubre la integración de hardware a nivel de módulo: definición de pines, interfaces periféricas, características eléctricas, requisitos de alimentación, esquemáticos de referencia, lista de comprobación del esquemático, dimensiones mecánicas y huella de PCB, y requisitos de manipulación del producto. Se basa en la hoja de datos de SiFli **DS5203-SF32LB52-MOD-1 V0.3**.
 
@@ -58,7 +58,7 @@ Para conocer en más detalle la arquitectura del chip (núcleos, gráficos, subs
 
 ## 3. Diagrama de bloques funcional { #3-functional-block-diagram }
 
-El módulo integra el chip SF32LB525UC6, un cristal de 48 MHz y otro opcional de 32,768 kHz. Esta SKU también incorpora en el encapsulado un chip OPI-PSRAM de 64 Mb, además de la red de adaptación RF y la línea de alimentación de la antena.
+El módulo integra el chip SF32LB525UC6, un cristal de 48 MHz y otro opcional de 32,768 kHz. Esta SKU también incorpora en el encapsulado un chip OPI-PSRAM de 64 Mb, además de la red de adaptación RF y la línea de alimentación RF de la antena.
 
 !!! info "Figura 3-1: Diagrama de bloques funcional"
     El diagrama no se reproduce en esta guía. Consulte la figura 2-1 de la hoja de datos oficial.
@@ -148,7 +148,7 @@ El módulo tiene 68 pines en total, que se describen en la tabla siguiente.
 
 ### 4.3 Descripción física de los pines { #43-physical-pin-description }
 
-    La figura de descripción física de pines de la hoja de datos agrupa las señales por función —SDIO, SPI, I2C, UART, GPTIM, interfaz LCD, GPADC, MPI, audio analógico, oscilador externo de 32K, activación externa y UART de depuración/SWD— sobre el contorno del chip SF32LB525UC6. Consúltela junto con la tabla de definición de pines al distribuir los grupos de señales en la PCB portadora.
+La figura de descripción física de pines de la hoja de datos agrupa las señales por función —SDIO, SPI, I2C, UART, GPTIM, interfaz LCD, GPADC, MPI, audio analógico, oscilador externo de 32K, activación externa y UART de depuración/SWD— sobre el contorno del chip SF32LB525UC6. Consúltela junto con la tabla de definición de pines al distribuir los grupos de señales en la PCB anfitriona.
 
 !!! info "Figura 4.3-1: Descripción física de los pines"
     El diagrama no se reproduce en esta guía. Consulte la figura 3-2 de la hoja de datos oficial.
@@ -168,11 +168,11 @@ Todos los pines marcados como `PAxx_I2C_UART` en la tabla anterior se pueden con
 
 **SPI** — Admite los formatos SSP/SPI (full-duplex, maestro o esclavo) y Microwire (half-duplex, solo maestro). Ancho de datos de 4–32 bits; polaridad/fase del reloj (SPO/SPH) y polaridad de selección de chip configurables; FIFO de 32 bits × 16 entradas, DMA y reloj de hasta 48 MHz.
 
-**USB2.0 FS** — Un puerto full-speed de host/dispositivo con puntos de conexión configurables, suspensión/reanudación, tamaño de FIFO dinámico, solicitud de sesión y protocolo de negociación con el host; incluye un PHY USB2.0 FS.
+**USB2.0 FS** — Un puerto full-speed de host/dispositivo con endpoints configurables, suspensión/reanudación, tamaño de FIFO dinámico, solicitud de sesión y protocolo de negociación con el host; incluye un PHY USB2.0 FS.
 
 **MPI (Memory Peripheral Interface)** — Admite memorias SPI NOR Flash (1/2/4 líneas) y SPI NAND Flash (1/2/4 líneas), con acceso en modo de registros y modo memory-mapped y conmutación automática por hardware. La interfaz MPI2 del módulo permite conectar memorias SPI NOR/NAND externas. Si el módulo ya incorpora Flash, sus seis señales externas MPI2 (PA12, PA13, PA14, PA15, PA16 y PA17) no están disponibles externamente.
 
-**SD/SDIO/eMMC** — Cumple SD 3.0, SDIO 3.0 y eMMC 4.5.1; admite tarjetas SDSC/SDHC/SDXC/SDHS, SDR12/25/50, modos SDR de una y cuatro líneas, FIFO de 2KB y transferencias DMA, hasta 48MHz (sin DDR). Nota: SDIO comparte las señales de E/S con MPI2; no se pueden usar simultáneamente.
+**SD/SDIO/eMMC** — Cumple SD 3.0, SDIO 3.0 y eMMC 4.5.1; admite tarjetas SDSC/SDHC/SDXC/SDHS, SDR12/25/50, modos SDR de una y cuatro líneas, FIFO de 2 KB y transferencias DMA, hasta 48 MHz (sin DDR). Nota: SDIO comparte las señales de E/S con MPI2; no se pueden usar simultáneamente.
 
 **I2S** — Modos maestro/esclavo y full-duplex; formatos alineados a la izquierda, a la derecha y estándar; mono/estéreo de 8 y 16 bits, y ancho PCM de hasta 24 bits.
 
@@ -253,7 +253,7 @@ VDD es la línea de alimentación de E/S; VOH/VOL se miden con una carga de alta
 
 <div align="center" markdown>
 
-| Modo | Intervalo | @0dBm | @4dBm | @10dBm | Unidad |
+| Modo | Intervalo | @0 dBm | @4 dBm | @10 dBm | Unidad |
 | :--- | :-: | :-: | :-: | :-: | :-: |
 | BT Sniff (intento=1) | 50 ms | 129,5 | 135,6 | 160,9 | µA |
 | BT Sniff (intento=1) | 1 s | 6,0 | 6,3 | 7,6 | µA |
@@ -273,10 +273,10 @@ VDD es la línea de alimentación de E/S; VOH/VOL se miden con una carga de alta
 
 | Reloj | Corriente (µA) | Incremento (µA/MHz) |
 | :--- | :-: | :-: |
-| CoreMark @192MHz | 7360 | 35 |
-| CoreMark @48MHz | 1550 | 27 |
-| WhileLoop @192MHz | 5490 | 27 |
-| WhileLoop @48MHz | 1250 | 20 |
+| CoreMark @192 MHz | 7360 | 35 |
+| CoreMark @48 MHz | 1550 | 27 |
+| WhileLoop @192 MHz | 5490 | 27 |
+| WhileLoop @48 MHz | 1250 | 20 |
 
 </div>
 
@@ -292,7 +292,7 @@ Admite Bluetooth 5.3 y es retrocompatible con 4.2/4.1/4.0. La frecuencia central
 
 **Classic BT (Enhanced Data Rate)**: potencia máxima de transmisión de 13 dBm; sensibilidad de recepción de -95,5 dBm para π/4-DQPSK y de -88,5 dBm para 8DPSK.
 
-La sección §5.5 de la hoja de datos oficial incluye tablas completas con valores mínimos/típicos/máximos para el rendimiento TX/RX de BLE 1Mbps/2Mbps y Classic BT BR/EDR.
+La sección §5.5 de la hoja de datos oficial incluye tablas completas con valores mínimos/típicos/máximos para el rendimiento TX/RX de BLE 1 Mbps/2 Mbps y Classic BT BR/EDR.
 
 ## 7. Alimentación del módulo { #7-module-power-supply }
 
@@ -377,7 +377,7 @@ Práctica recomendada:
 !!! info "Figura 10.4-1: Colocación recomendada del módulo"
     El diagrama no se reproduce en esta guía. Consulte la figura 8-4 de la hoja de datos oficial.
 
-- Si la antena no puede sobresalir del borde de la placa, deje una zona de exclusión de al menos 15 mm alrededor de la antena de la PCB, sin planos de cobre, pistas ni componentes; cuando sea posible, elimine también el material de la placa portadora situado bajo la antena.
+- Si la antena no puede sobresalir del borde de la placa, deje una zona de exclusión de al menos 15 mm alrededor de la antena de la PCB, sin planos de cobre, pistas ni componentes; cuando sea posible, elimine también el material de la placa anfitriona situado bajo la antena.
 
 !!! info "Figura 10.4-2: Zona de exclusión de la antena"
     El diagrama no se reproduce en esta guía. Consulte la figura 8-5 de la hoja de datos oficial.

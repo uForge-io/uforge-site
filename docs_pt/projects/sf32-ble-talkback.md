@@ -148,7 +148,7 @@ Os principais domínios de falha são a busca BLE e a criação de salas, a sinc
 
 **Evidências a registrar:** manifesto completo de versões, logs de compilação e gravação, hashes do firmware, revisão de ambas as placas e registros de inicialização.
 
-**Critério para atingir o ponto de controle 1:** os mesmos insumos geram e gravam de forma reproduzível a mesma imagem de referência nos dois dispositivos, e o estado inicial corresponde ao comportamento upstream.
+**Critério de saída do ponto de controle 1:** os mesmos insumos geram e gravam de forma reproduzível a mesma imagem de referência nos dois dispositivos, e o estado inicial corresponde ao comportamento upstream.
 
 ## Etapa 2 — Validar a configuração da sala e o PTT bidirecional { #stage-2-validate-room-setup-and-bidirectional-ptt }
 
@@ -161,7 +161,7 @@ Os principais domínios de falha são a busca BLE e a criação de salas, a sinc
 
 **Evidências a registrar:** papéis dos dispositivos, sequência de operação, estados do LED, logs UART, amostras de áudio bidirecional e resultados das tentativas.
 
-**Critério para atingir o ponto de controle 2:** pelo menos dois dispositivos concluem repetidas sessões PTT bidirecionais, os indicadores correspondem ao sentido real do áudio e o timeout de 30 segundos retorna a um estado explicável.
+**Critério de saída do ponto de controle 2:** pelo menos dois dispositivos concluem repetidas sessões PTT bidirecionais, os indicadores correspondem ao sentido real do áudio e o timeout de 30 segundos retorna a um estado explicável.
 
 ## Etapa 3 — Validar saída, reconexão e limites de capacidade { #stage-3-validate-leave-reconnect-and-capacity-boundaries }
 
@@ -174,7 +174,7 @@ Os principais domínios de falha são a busca BLE e a criação de salas, a sinc
 
 **Evidências a registrar:** estado inicial, evento disparador, ação de recuperação, tempo de recuperação, logs e composição final da sala para cada falha.
 
-**Critério para atingir o ponto de controle 3:** cada falha prevista tem uma forma de recuperação explícita, repetível e compreensível para o usuário; a capacidade e a simultaneidade necessárias foram medidas no ambiente de RF pretendido, em vez de simplesmente presumidas a partir dos limites declarados.
+**Critério de saída do ponto de controle 3:** cada falha prevista tem uma forma de recuperação explícita, repetível e compreensível para o usuário; a capacidade e a simultaneidade necessárias foram medidas no ambiente de RF pretendido, em vez de simplesmente presumidas a partir dos limites declarados.
 
 ## Etapa 4 — Avaliar áudio, desempenho de RF e consumo de energia { #stage-4-qualify-acoustics-rf-and-low-power }
 
@@ -187,7 +187,7 @@ Os principais domínios de falha são a busca BLE e a criação de salas, a sinc
 
 **Evidências a registrar:** ambiente, orientação da placa e da antena, arquivos de áudio, distância e interferência, traços de corrente, condições da bateria e resultados de recuperação.
 
-**Critério para atingir o ponto de controle 4:** a equipe definiu e atendeu aos limites de acústica, RF, consumo e ativação para o ambiente pretendido, atribuindo responsáveis e ações a cada requisito não atendido.
+**Critério de saída do ponto de controle 4:** a equipe definiu e atendeu aos limites de acústica, RF, consumo e ativação para o ambiente pretendido, atribuindo responsáveis e ações a cada requisito não atendido.
 
 ## Etapa 5 — Revisar a prontidão do produto { #stage-5-product-readiness-review }
 
@@ -200,7 +200,7 @@ Antes de desenvolver o hardware próprio, responda pelo menos às seguintes perg
 - Como o dispositivo se recupera de bateria fraca, perda anormal de alimentação, firmware corrompido ou falha na atualização em campo?
 - Quais atividades de conformidade são aplicáveis a Bluetooth, compatibilidade eletromagnética (EMC), rádio e bateria?
 
-**Critério para atingir o ponto de controle 5:** o registro de riscos contém evidências, responsáveis, medidas de mitigação e uma decisão explícita de prosseguir, adiar ou interromper. Segurança, licenciamento e regulamentação não podem ficar como pendências futuras sem responsável.
+**Critério de saída do ponto de controle 5:** o registro de riscos contém evidências, responsáveis, medidas de mitigação e uma decisão explícita de prosseguir, adiar ou interromper. Segurança, licenciamento e regulamentação não podem ficar como pendências futuras sem responsável.
 
 ## Transição para o projeto do produto { #handoff-to-product-design }
 O pacote de transição deve incluir o código-fonte, o SDK e as dependências fixados; os papéis e a máquina de estados; a matriz de capacidade e recuperação; as medições de áudio, RF e alimentação; as premissas de antena e acústica; os limites da bateria e do carregamento; o modelo de segurança e privacidade; os documentos de licenciamento; os requisitos de teste de produção e o plano de recuperação. Use o [caminho de integração do SF32LB52x](../sf32-products/chips/SF32LB52x.md#integration-path) para selecionar o chip, o módulo, a placa, o guia de projeto de hardware e o checklist. Leve os comportamentos validados para o esquemático e o layout próprios e verifique-os novamente, em vez de presumir que os resultados da placa de desenvolvimento se transferem sem alterações.

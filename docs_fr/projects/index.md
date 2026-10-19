@@ -1,7 +1,7 @@
 ---
 icon: lucide/folder-kanban
 title: "Projets μForge : présentation"
-description: "Des projets μForge de bout en bout qui associent du matériel choisi, une base logicielle, des preuves de validation et un transfert vers la production."
+description: "Des projets μForge de bout en bout qui associent du matériel choisi, une base logicielle, des preuves de validation et un passage de relais vers la production."
 tags:
     - Projets
 ---
@@ -59,7 +59,7 @@ Cette catégorie regroupe les projets basés directement sur Zephyr ou sur une c
 
 ## Contenu attendu de chaque projet { #what-every-project-includes }
 
-Chaque projet μForge devrait documenter son résultat cible, son lectorat, les versions matérielles et logicielles prises en charge, les prérequis, le dépôt source, les étapes de compilation organisées par jalon, les critères de validation, les mesures et les éléments nécessaires à son adaptation au produit. Un projet constitue un point de départ pour l’ingénierie ; il ne remplace pas la validation de production du matériel final ni l’évaluation de l’intégration des services, de la sécurité, de la confidentialité et des exigences réglementaires.
+Chaque projet μForge devrait documenter son résultat cible, son lectorat, les versions matérielles et logicielles prises en charge, les prérequis, le dépôt source, les étapes de compilation organisées par jalon, les critères de validation, les mesures et le passage de relais pour l’adaptation au produit. Un projet constitue un point de départ pour l’ingénierie ; il ne remplace pas la validation de production du matériel final ni l’évaluation de l’intégration des services, de la sécurité, de la confidentialité et des exigences réglementaires.
 
 !!! note "Contenu généré automatiquement"
-    Cette page a été rédigée sans document source préexistant. Vérifiez les affirmations techniques à l’aide de la documentation officielle de SiFli avant de les considérer comme fiables.
+    Cette page a été compilée et rédigée sans document source préexistant. Vérifiez les affirmations techniques à l’aide de la documentation officielle de SiFli avant de les considérer comme fiables.

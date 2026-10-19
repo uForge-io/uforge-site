@@ -19,7 +19,7 @@ tags:
 チップのアーキテクチャ（CPUコア、グラフィックス、メモリーサブシステム、周辺機能）の詳細は、[SF32LB58x](../../sf32-products/chips/SF32LB58x.md)および[SF32LB58xハードウェア設計ガイド](../chip-guides/SF32LB58x_hardware_design_guide.md)を参照してください。
 
 !!! note "情報源と図の扱い"
-    モジュール固有の技術情報は **DS5802-SF32LB58-MOD V0.1**に準拠しています。データシートに掲載されたピン配置図、回路図、機構図の一部はラスター画像のため、本ガイドでは再作図せず参照先を示しています。以下の図表番号は本サイト内のガイドで一貫する番号です。転載していない図については、公式データシート内の対応する図番号をキャプションに記載しています。
+    モジュール固有の技術情報は **DS5802-SF32LB58-MOD V0.1**に準拠しています。データシートに掲載されたピン配置図、回路図、機構図の一部はラスター画像のため、本ガイドでは再作図せず参照先を示しています。以下の図表番号は、本サイトのガイドごとの番号体系に従っています。転載していない図については、公式データシート内の対応する図番号をキャプションに記載しています。
 
 ## 2. 設計要点 { #2-quick-design-summary }
 
@@ -31,9 +31,9 @@ tags:
 
 | モジュール型番 | Flash | PSRAM | 標準搭載Flash | 動作温度 | 外形寸法 (mm) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB58-MOD-N16R32N1 | 16MB QSPI-NOR | 16+16MB HPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 24 × 24 × 3.1 |
-| SF32LB58-MOD-A128R32N1 | 128MB QSPI-NAND | 16+16MB HPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 24 × 24 × 3.1 |
-| SF32LB58-MOD-E4R32N1 | 4GB eMMC | 16+16MB HPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 24 × 24 × 3.1 |
+| SF32LB58-MOD-N16R32N1 | 16 MB QSPI-NOR | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85°C | 24 × 24 × 3.1 |
+| SF32LB58-MOD-A128R32N1 | 128 MB QSPI-NAND | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85°C | 24 × 24 × 3.1 |
+| SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85°C | 24 × 24 × 3.1 |
 
 </div>
 
@@ -45,15 +45,15 @@ tags:
 
 | 項目 | 仕様 |
 | :--- | :--- |
-| アプリケーションコア (HCPU/ACPU) | Arm Cortex-M33 STAR-MC1 × 2、最大240MHz |
-| 低消費電力コア (LCPU) | Arm Cortex-M33 STAR-MC1、最大96MHz |
-| SRAM | 2176KB (HCPU) + 512KB (ACPU) + 1056KB リテンションSRAM (LCPU) |
+| アプリケーションコア (HCPU/ACPU) | Arm Cortex-M33 STAR-MC1 × 2、最大240 MHz |
+| 低消費電力コア (LCPU) | Arm Cortex-M33 STAR-MC1、最大96 MHz |
+| SRAM | 2176 KB (HCPU) + 512 KB (ACPU) + 1056 KB リテンションSRAM (LCPU) |
 | 無線 | デュアルモードBluetooth 5.3（4.2/4.1/4.0との下位互換性あり、BLEおよびClassic Bluetooth対応） |
 | グラフィックス | ePicasso 2.0 + Vivante GCNanoUltraV、最大1024×1024、eZip 2.0、ハードウェアJPEGコーデック |
 | オーディオ | 24-bitオーディオDAC × 2、24-bitオーディオSigma-Delta ADC × 2 |
 | ストレージ | MPI × 5（パッケージ内蔵および外付け）、SD/SDIO/eMMC × 2 |
 | パッケージ | 138ピン、24 × 24 × 3.1 mm |
-| 電源 | VDD_3V3 (2.97～3.6V)、VDD_1V8 (1.7～1.95V)、VDDIOA/VDDIOA2/VDDIOB (1.7～3.6V) |
+| 電源 | VDD_3V3 (2.97～3.6 V)、VDD_1V8 (1.7～1.95 V)、VDDIOA/VDDIOA2/VDDIOB (1.7～3.6 V) |
 | アンテナ | 型番に応じて、スタンプホールRF給電部またはIPEX互換コネクターを介して外部アンテナを接続 |
 | 動作温度 | -40～85°C |
 
@@ -61,7 +61,7 @@ tags:
 
 ## 3. 機能ブロック図 { #3-functional-block-diagram }
 
-本モジュールにはSF32LB586VDD36チップ、48MHz水晶振動子、オプションの32.768kHz水晶振動子、およびSKUに応じたパッケージ内蔵HPI-PSRAM、QSPI-NOR/NAND FlashまたはeMMCが搭載され、RF整合回路とアンテナ給電部も備えています。
+本モジュールにはSF32LB586VDD36チップ、48 MHz水晶振動子、オプションの32.768 kHz水晶振動子、およびSKUに応じたパッケージ内蔵HPI-PSRAM、QSPI-NOR/NAND FlashまたはeMMCが搭載され、RF整合回路とアンテナ給電部も備えています。
 
 !!! info "図 3-1: 機能ブロック図"
     本ガイドには転載していません。公式データシートの図2-1を参照してください。
@@ -85,7 +85,7 @@ tags:
 
 | 信号名 | 番号 | 種別 | 既定のMUX | 既定のI/O | 機能 |
 | :--- | :-: | :-: | :--- | :-: | :--- |
-| VDDIOB | 1 | P | 1.8/3.3V | P | PBインターフェースのIO電源入力 |
+| VDDIOB | 1 | P | 1.8/3.3 V | P | PBインターフェースのIO電源入力 |
 | PB36 | 2 | I/O/T | USART4_RXD | I | GPIO_B36, USART4_RXD, GPTIM3_CH1, #GPADC_CH4 |
 | PB37 | 3 | I/O/T | USART4_TXD | O | GPIO_B37, USART4_TXD, GPTIM3_CH2, #GPADC_CH5 |
 | PB54 | 4 | I/O/T | GPIO_B54 | I | GPIO_B54, #WKUP_PIN0 |
@@ -97,10 +97,10 @@ tags:
 | PA79 | 10 | I/O/T | GPIO_A79 | I/O | GPIO_A79, SD2_DIO2 |
 | BOOT_MODE | 11 | I | BOOT_MODE | I | 1: ダウンロードモード、0: ユーザーモード |
 | RSTN | 12 | I | RSTN | I | 1: ユーザーモード、0: リセットモード |
-| VDD_1V8 | 13 | P | 1.8V | P | MCUおよびパッケージ内蔵メモリーの主電源入力 |
+| VDD_1V8 | 13 | P | 1.8 V | P | MCUおよびパッケージ内蔵メモリーの主電源入力 |
 | GND | 14 | P | GND | P | グラウンド |
-| VDDIOA | 15 | P | 1.8/3.3V | P | PAインターフェースのIO電源入力（PA00～PA11を除く） |
-| VDD_3V3 | 16 | P | 3.3V | P | MCUアナログ電源入力 |
+| VDDIOA | 15 | P | 1.8/3.3 V | P | PAインターフェースのIO電源入力（PA00～PA11を除く） |
+| VDD_3V3 | 16 | P | 3.3 V | P | MCUアナログ電源入力 |
 | PA13 | 17 | I/O/T | GPIO_A13 | O | GPIO_A13, GPTIM1_CH2, ATIM1_BKIN, LCDC1_DPI_DE |
 | PA15 | 18 | I/O/T | GPIO_A15 | O | GPIO_A15, GPTIM1_CH3, ATIM1_BKIN2, LCDC1_DPI_VSYNC |
 | PA14 | 19 | I/O/T | GPIO_A14 | O | GPIO_A14, I2S1_LRCK, LCDC1_DPI_HSYNC |
@@ -129,7 +129,7 @@ tags:
 | PA24 | 42 | I/O/T | GPIO_A24 | O | GPIO_A24, LCDC1_8080_RSTB, LCDC1_SPI_RSTB, LCDC1_DPI_R2 |
 | PA23 | 43 | I/O/T | GPIO_A23 | O | GPIO_A23, PDM1_CLK, I2S1_BCK, USART2_CTS, I2C2_SDA, LCDC1_DPI_R1 |
 | PA22 | 44 | I/O/T | GPIO_A22 | O | GPIO_A22, PDM2_DATA, GPTIM1_ETR, ATIM2_CH1, LCDC1_DPI_R0, LCDC1_JDI_VST |
-| VDDIOA2 | 45 | P | 1.8/3.3V | P | PA00～PA11のIO電源入力 |
+| VDDIOA2 | 45 | P | 1.8/3.3 V | P | PA00～PA11のIO電源入力 |
 | GND | 46 | P | GND | P | グラウンド |
 | DSI_D0N | 47 | O | DSI_D0N | O | MIPI DSIデータレーン0、負極 |
 | DSI_D0P | 48 | O | DSI_D0P | P | MIPI DSIデータレーン0、正極 |
@@ -239,17 +239,17 @@ tags:
 
 上表で`PAxx_I2C_UART`または`PBxx_I2C_UART`と記されたピンは、I2CまたはUARTとして設定できます。チップ全体で最大7系統のI2Cと6系統のUARTをサポートします。
 
-**UART** — 全二重、最大6Mbpsのボーレート、データ形式の設定、ハードウェアフロー制御（CTS/RTS）、DMAによる複数パケットの送受信に対応します。UART1～3はHPSYS、UART4～6はLPSYSにあります。
+**UART** — 全二重、最大6 Mbpsのボーレート、データ形式の設定、ハードウェアフロー制御（CTS/RTS）、DMAによる複数パケットの送受信に対応します。UART1～3はHPSYS、UART4～6はLPSYSにあります。
 
-**I2C** — マスター／スレーブ、8バイトFIFO、DMAに対応します。標準（100kbps）、Fast（400kbps）、Fast-mode Plus（1Mbps）、High-speed（3.4Mbps）の各モード、マスター時の7-bit／10-bitアドレス指定、クロックストレッチ、設定可能なデジタルグリッチ除去フィルターをサポートします。I2C1～4はHPSYS、I2C5～7はLPSYSにあります。
+**I2C** — マスター／スレーブ、8バイトFIFO、DMAに対応します。標準（100 kbps）、Fast（400 kbps）、Fast-mode Plus（1 Mbps）、High-speed（3.4 Mbps）の各モード、マスター時の7-bit／10-bitアドレス指定、クロックストレッチ、設定可能なデジタルグリッチ除去フィルターをサポートします。I2C1～4はHPSYS、I2C5～7はLPSYSにあります。
 
-**SPI** — SSP/SPI形式（全二重、マスター／スレーブ）およびMicrowire形式（半二重、マスターのみ）に対応します。データ幅は4～32 bitで、クロック極性／位相とチップセレクト極性を設定できます。32-bit × 16エントリーFIFOとDMAに対応します。SPI1/2はHPSYS（最大48MHz）、SPI3/4はLPSYS（最大24MHz）にあります。
+**SPI** — SSP/SPI形式（全二重、マスター／スレーブ）およびMicrowire形式（半二重、マスターのみ）に対応します。データ幅は4～32 bitで、クロック極性／位相とチップセレクト極性を設定できます。32-bit × 16エントリーFIFOとDMAに対応します。SPI1/2はHPSYS（最大48 MHz）、SPI3/4はLPSYS（最大24 MHz）にあります。
 
 **USB2.0 HS** — USB 2.0準拠の高速ホスト／デバイスポートを1系統備えます。エンドポイント設定、サスペンド／レジューム、セッション要求、ホストネゴシエーションプロトコルに対応し、High-speedおよびFull-speedで動作します。
 
 **MPI (Memory Peripheral Interface)** — SPI NOR Flash（1/2/4線、DTRモード）およびSPI NAND Flash（1/2/4線）に対応し、レジスターモードとメモリーマップモードをハードウェアで自動的に切り替えてアクセスします。本モジュールのMPI4インターフェースには外付けSPI NOR/NAND Flashを接続できます。
 
-**SD/SDIO/eMMC** — SD 3.0およびeMMC 4.5.1に準拠し、チェーンDMAと1KB FIFOを備えたホストコントローラーとして動作します。SDSC/SDHC/SDXC/SDHSカード、UHS-1（SDR12/25/50/104/DDR50）、1線／4線／8線SDRモード、4線／8線DDRモードに対応します。
+**SD/SDIO/eMMC** — SD 3.0およびeMMC 4.5.1に準拠し、チェーンDMAと1 KB FIFOを備えたホストコントローラーとして動作します。SDSC/SDHC/SDXC/SDHSカード、UHS-1（SDR12/25/50/104/DDR50）、1線／4線／8線SDRモード、4線／8線DDRモードに対応します。
 
 **I2S** — マスター専用、全二重。左詰め／右詰め／標準フォーマット、8-bit／16-bitのモノラル／ステレオ、最大24-bitのPCM幅に対応します。
 
@@ -257,15 +257,15 @@ tags:
 
 ### 5.2 アナログ信号処理 { #52-analog-signal-processing }
 
-**12-bit GPADC** — SAR ADC、最大サンプリングレート4MS/s、シングルエンド入力範囲0～3.3V／差動入力範囲±2.1V。シングルエンド8チャネル（または差動4ペア）、単発／連続測定、測定ごとに設定可能な4つのタイムスロット、ソフトウェア／ハードウェアトリガー、DMAに対応します。
+**12-bit GPADC** — SAR ADC、最大サンプリングレート4 MS/s、シングルエンド入力範囲0～3.3 V／差動入力範囲±2.1 V。シングルエンド8チャネル（または差動4ペア）、単発／連続測定、測定ごとに設定可能な4つのタイムスロット、ソフトウェア／ハードウェアトリガー、DMAに対応します。
 
 **温度センサー** — 分解能0.2°C、測定範囲-40°C～125°C、精度±3°C。ポーリングまたは割り込みによる読み出しに対応します。
 
-**オーディオDAC** — 24-bitの内蔵チャネルを2系統備え、サンプリングレート8kHz～48kHz、差動出力に対応します。
+**オーディオDAC** — 24-bitの内蔵チャネルを2系統備え、サンプリングレート8 kHz～48 kHz、差動出力に対応します。
 
-**オーディオPLL** — 48MHz/2^18の分解能を持つFractional-N方式のクロック生成に対応し、48MHz、32.768kHz、44.1kHzを基準とするサンプリングレートを生成できます。
+**オーディオPLL** — 48 MHz/2^18の分解能を持つFractional-N方式のクロック生成に対応し、48 MHz、32.768 kHz、44.1 kHzを基準とするサンプリングレートを生成できます。
 
-**オーディオADC** — 24-bitの内蔵チャネルを2系統備え、サンプリングレート8kHz～48kHz、チャネルごとに独立したゲイン制御に対応します。
+**オーディオADC** — 24-bitの内蔵チャネルを2系統備え、サンプリングレート8 kHz～48 kHz、チャネルごとに独立したゲイン制御に対応します。
 
 ## 6. 電気的特性 { #6-electrical-characteristics }
 
@@ -277,8 +277,8 @@ tags:
 
 | 記号 | 項目 | 最小 | 最大 | 単位 |
 | :--- | :--- | :-: | :-: | :-: |
-| VDD_3V3 | 3.3V電源入力 | -0.3 | 3.6 | V |
-| VDD_1V8 | 1.8V電源入力 | -0.3 | 1.95 | V |
+| VDD_3V3 | 3.3 V電源入力 | -0.3 | 3.6 | V |
+| VDD_1V8 | 1.8 V電源入力 | -0.3 | 1.95 | V |
 | VDDIO | I/O電源入力 | -0.3 | 3.6 | V |
 | Tstore | 保存温度 | -40 | 125 | °C |
 
@@ -292,8 +292,8 @@ tags:
 
 | 記号 | 項目 | 最小 | 標準 | 最大 | 単位 |
 | :--- | :--- | :-: | :-: | :-: | :-: |
-| VDD_3V3 | 3.3V電源入力 | 2.97 | 3.3 | 3.6 | V |
-| VDD_1V8 | 1.8V電源入力 | 1.7 | 1.8 | 1.95 | V |
+| VDD_3V3 | 3.3 V電源入力 | 2.97 | 3.3 | 3.6 | V |
+| VDD_1V8 | 1.8 V電源入力 | 1.7 | 1.8 | 1.95 | V |
 | VDDIO | I/O電源入力 | 1.7 | - | 3.6 | V |
 | TA | 動作温度 | -40 | - | 85 | °C |
 
@@ -301,7 +301,7 @@ tags:
 
 ### 6.3 DC電気的特性 { #63-dc-electrical-characteristics }
 
-<div align="center"><em>表 6.3-1: DC電気的特性 (3.3V、25°C)</em></div>
+<div align="center"><em>表 6.3-1: DC電気的特性 (3.3 V、25°C)</em></div>
 
 <div align="center" markdown>
 
@@ -318,7 +318,7 @@ tags:
 
 </div>
 
-<div align="center"><em>表 6.3-2: DC電気的特性 (1.8V、25°C)</em></div>
+<div align="center"><em>表 6.3-2: DC電気的特性 (1.8 V、25°C)</em></div>
 
 <div align="center" markdown>
 
@@ -334,59 +334,59 @@ tags:
 
 ### 6.4 消費電力 { #64-power-consumption }
 
-<div align="center"><em>表 6.4-1: BLE電流 (TX出力0dBm)</em></div>
+<div align="center"><em>表 6.4-1: BLE電流 (TX出力0 dBm)</em></div>
 
 <div align="center" markdown>
 
-| 記号 | 条件 | @1.8V | @3.8V | 単位 |
+| 記号 | 条件 | @1.8 V | @3.8 V | 単位 |
 | :--- | :--- | :-: | :-: | :-: |
-| I∆TX | TX出力 = 0dBm | 4.19 | 2.21 | mA |
+| I∆TX | TX出力 = 0 dBm | 4.19 | 2.21 | mA |
 | I∆RX | — | 4.03 | 2.12 | mA |
 
 </div>
 
-<div align="center"><em>表 6.4-2: BLE／Classic BTの平均電流 (電源3.8V)</em></div>
+<div align="center"><em>表 6.4-2: BLE／Classic BTの平均電流 (電源3.8 V)</em></div>
 
 <div align="center" markdown>
 
-| モード | 間隔 | @0dBm | @10dBm | 単位 |
+| モード | 間隔 | @0 dBm | @10 dBm | 単位 |
 | :--- | :-: | :-: | :-: | :-: |
-| BT Sniff (attempt=1) | 50ms | 146.4 | 178.6 | µA |
-| BT Sniff (attempt=1) | 1s | 7.3 | 8.9 | µA |
-| BLE ADV | 50ms | 166.9 | 251.8 | µA |
-| BLE ADV | 1s | 8.3 | 12.6 | µA |
-| BLE接続 | 50ms | 128.8 | 148.4 | µA |
-| BLE接続 | 1s | 6.4 | 7.4 | µA |
+| BT Sniff (attempt=1) | 50 ms | 146.4 | 178.6 | µA |
+| BT Sniff (attempt=1) | 1 s | 7.3 | 8.9 | µA |
+| BLE ADV | 50 ms | 166.9 | 251.8 | µA |
+| BLE ADV | 1 s | 8.3 | 12.6 | µA |
+| BLE接続 | 50 ms | 128.8 | 148.4 | µA |
+| BLE接続 | 1 s | 6.4 | 7.4 | µA |
 | Standby | — | 4.2 | — | µA |
 
 </div>
 
-<div align="center"><em>表 6.4-3: プロセッサー消費電流 (HPSYS/LPSYS、電源3.8V)</em></div>
+<div align="center"><em>表 6.4-3: プロセッサー消費電流 (HPSYS/LPSYS、電源3.8 V)</em></div>
 
 <div align="center" markdown>
 
 | 記号 | 条件 | 電流 (mA) | 増分 (µA/MHz) |
 | :--- | :--- | :-: | :-: |
-| ICoreMark | HPSYS @240MHz | 10.34 | 31.3 |
-| ICoreMark | LPSYS @48MHz | 0.89 | 27.6 |
-| IWhileLoop | HPSYS @240MHz | 7.98 | 21.3 |
-| IWhileLoop | LPSYS @48MHz | 0.67 | 18.7 |
+| ICoreMark | HPSYS @240 MHz | 10.34 | 31.3 |
+| ICoreMark | LPSYS @48 MHz | 0.89 | 27.6 |
+| IWhileLoop | HPSYS @240 MHz | 7.98 | 21.3 |
+| IWhileLoop | LPSYS @48 MHz | 0.67 | 18.7 |
 
 </div>
 
 ### 6.5 デュアルモードBluetooth RF性能 { #65-dual-mode-bluetooth-rf-performance }
 
-Bluetooth 5.3に対応し、4.2/4.1/4.0との下位互換性があります。BLEおよびClassic Bluetoothに対応します。動作チャネルの中心周波数は2402～2480MHzです。
+Bluetooth 5.3に対応し、4.2/4.1/4.0との下位互換性があります。BLEおよびClassic Bluetoothに対応します。動作チャネルの中心周波数は2402～2480 MHzです。
 
-**BLE送信機 (1Mbps)**: 最大出力19dBm、出力制御範囲-20～19dBm。
+**BLE送信機 (1 Mbps)**: 最大出力19 dBm、出力制御範囲-20～19 dBm。
 
-**BLE受信機**: 代表感度は、1Mbpsで-100dBm、2Mbpsで-97dBm、LR S2/500kbpsで-104.5dBm、LR S8/125kbpsで-107.5dBmです。37バイトのパケットを使用し、dirty-off、PER 30.8%の条件で測定された値です。
+**BLE受信機**: 代表感度は、1 Mbpsで-100 dBm、2 Mbpsで-97 dBm、LR S2/500 kbpsで-104.5 dBm、LR S8/125 kbpsで-107.5 dBmです。37バイトのパケットを使用し、dirty-off、PER 30.8%の条件で測定された値です。
 
-**Classic BT (Basic Data Rate)**: 最大送信出力19dBm、受信感度-96.3dBm (dirty off) / -94dBm (dirty on)、BER 0.1%。
+**Classic BT (Basic Data Rate)**: 最大送信出力19 dBm、受信感度-96.3 dBm (dirty off) / -94 dBm (dirty on)、BER 0.1%。
 
-**Classic BT (Enhanced Data Rate)**: 最大送信出力13dBm、π/4-DQPSKの受信感度-95.5dBm、8DPSKの受信感度-88.5dBm。
+**Classic BT (Enhanced Data Rate)**: 最大送信出力13 dBm、π/4-DQPSKの受信感度-95.5 dBm、8DPSKの受信感度-88.5 dBm。
 
-BLEの1Mbps/2Mbps/LR送受信性能およびClassic BT BR/EDR送受信性能の最小／標準／最大値は、公式データシートの§5.5に記載されています。
+BLEの1 Mbps/2 Mbps/LR送受信性能およびClassic BT BR/EDR送受信性能の最小／標準／最大値は、公式データシートの§5.5に記載されています。
 
 ## 7. モジュールの電源 { #7-module-power-supply }
 
@@ -423,9 +423,9 @@ BLEの1Mbps/2Mbps/LR送受信性能およびClassic BT BR/EDR送受信性能の�
 
 | 番号 | 確認項目 |
 | :-: | :--- |
-| 1 | VDD_3V3の入力電圧は2.97V～3.6Vの範囲にする必要があります。モジュールピンの近くに4.7µFのコンデンサーを配置してください。 |
-| 2 | VDD_1V8の入力電圧は1.7V～1.95Vの範囲にする必要があります。モジュールピンの近くに4.7µFのコンデンサーを配置してください。 |
-| 3 | VDDIOA、VDDIOA2、VDDIOBの入力電圧は1.7V～3.6Vの範囲にする必要があります。各モジュールピンの近くにコンデンサーを配置してください。 |
+| 1 | VDD_3V3の入力電圧は2.97 V～3.6 Vの範囲にする必要があります。モジュールピンの近くに4.7 µFのコンデンサーを配置してください。 |
+| 2 | VDD_1V8の入力電圧は1.7 V～1.95 Vの範囲にする必要があります。モジュールピンの近くに4.7 µFのコンデンサーを配置してください。 |
+| 3 | VDDIOA、VDDIOA2、VDDIOBの入力電圧は1.7 V～3.6 Vの範囲にする必要があります。各モジュールピンの近くにコンデンサーを配置してください。 |
 
 </div>
 
@@ -481,7 +481,7 @@ BLEの1Mbps/2Mbps/LR送受信性能およびClassic BT BR/EDR送受信性能の�
 
 ### 11.4 超音波振動 { #114-ultrasonic-vibration }
 
-SiFliモジュールを超音波溶着機や超音波洗浄装置の振動にさらさないでください。超音波振動がモジュール内の水晶発振子と共振し、水晶の破損や誤動作を引き起こして、モジュールが動作不能になったり性能が低下したりするおそれがあります。
+SiFliモジュールを超音波溶着機や超音波洗浄装置の振動にさらさないでください。超音波振動がモジュール内の水晶振動子と共振し、水晶の破損や誤動作を引き起こして、モジュールが動作不能になったり性能が低下したりするおそれがあります。
 
 !!! note
     製造工程仕様を確定する前に、[公式データシートPDF](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf)の§9を参照し、SF32LB58-MODの最終的な吸湿感度レベル、フロアライフ期間、ESD上限、リフロー要件を確認してください。

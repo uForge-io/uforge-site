@@ -198,7 +198,7 @@ Revise em conjunto os trilhos de alimentação do processador, os capacitores lo
 
 <div align="center"><em>Figura 5.1-8: Circuito de referência de carga do SF32LB56xV</em></div>
 
-Sem gerenciamento do caminho de alimentação, o sistema fica ligado diretamente à bateria em VBAT. Essa solução custa menos, mas os circuitos a jusante não podem ser totalmente isolados da bateria; com isso, aumenta a corrente de fuga e não se atinge a meta de baixo consumo do Shipping Mode. Se a bateria estiver excessivamente descarregada, a corrente de pré-carga do carregador (trickle) deve superar a soma da corrente do sistema e das fugas (i1+i2 no diagrama de origem). Durante a operação do sistema, a corrente de carga na fase de corrente constante também deve superar i1+i2; caso contrário, parte dela alimentará a carga do sistema, e a bateria talvez não carregue completamente. Um carregador com gerenciamento do caminho de alimentação separa a alimentação do sistema em VSYS do carregamento da bateria em VBAT, oferece suporte ao Shipping Mode e pode alimentar o sistema por VSYS mesmo quando a bateria está excessivamente descarregada.
+Sem gerenciamento do caminho de alimentação, o sistema fica ligado diretamente à bateria em VBAT. Essa solução custa menos, mas os circuitos a jusante não podem ser totalmente isolados da bateria; com isso, aumenta a corrente de fuga e não se atinge a meta de baixo consumo do Shipping Mode. Se a bateria estiver excessivamente descarregada, a corrente de carga lenta (trickle charge) do carregador deve superar a soma da corrente do sistema e das fugas (i1+i2 no diagrama de origem). Durante a operação do sistema, a corrente de carga na fase de corrente constante também deve superar i1+i2; caso contrário, parte dela alimentará a carga do sistema, e a bateria talvez não carregue completamente. Um carregador com gerenciamento do caminho de alimentação separa a alimentação do sistema em VSYS do carregamento da bateria em VBAT, oferece suporte ao Shipping Mode e pode alimentar o sistema por VSYS mesmo quando a bateria está excessivamente descarregada.
 
 Na variante U, escolha entre três topologias de alimentação conforme a tensão de I/O dos periféricos e a meta de consumo do sistema. Nas três, AVDD33_ANA e AVDD33_AUD são alimentados com 3,3 V. A topologia de menor consumo alimenta PVDD e VDDIO1–VDDIO4 com 1,8 V e usa periféricos com I/O de 1,8 V. A topologia intermediária mantém PVDD e VDDIO1 em 1,8 V, enquanto VDDIO2–VDDIO4 e o I/O dos periféricos usam 3,3 V. Na topologia de maior consumo, somente VDDIO1, que alimenta a PSRAM integrada ao encapsulamento, permanece em 1,8 V; PVDD, VDDIO2–VDDIO4 e o I/O dos periféricos usam 3,3 V. Use chaves de carga para controlar dinamicamente a alimentação dos módulos externos e mantenha-as desligadas por padrão quando não estiverem em uso. Para os módulos que precisam permanecer ligados, escolha componentes com baixa corrente quiescente. O nível lógico padrão do GPIO de controle deve corresponder à polaridade de habilitação da chave, para mantê-la desligada durante a inicialização. A SiFli recomenda um resistor pull-up ou pull-down de 1 MΩ na entrada de habilitação.
 
@@ -284,7 +284,7 @@ Revise em conjunto as decisões sobre modo de operação, fonte de despertar, al
 
 BOOT_MODE seleciona o comportamento de inicialização: nível alto entra no modo de download; em nível baixo, a ROM procura um programa do usuário, inicia-o se existir e, caso contrário, entra no modo de download. O pino Mode da variante U tem pull-down interno, pode ficar flutuante quando não utilizado e pertence ao domínio VDDIO2. O pino Mode da variante V pertence ao domínio VDDIOA e deve ficar estável com pull-up ou pull-down de 10 kΩ; não o deixe flutuante nem permita que interferências alterem seu nível. Reserve um ponto de teste Mode nas placas de produção; um jumper de recuperação é útil em placas de desenvolvimento.
 
-Considere a alimentação de I/O da memória ao projetar os modos de baixo consumo. Na variante U, os níveis GPIO são mantidos em Standby e VDDIO1 pode continuar alimentado; coloque as memórias conectadas a MPI1/MPI2 em modo de baixo consumo. Em Hibernate, os níveis GPIO não são mantidos; desligue VDDIO1 para evitar corrente de fuga pelas linhas de I/O da memória integrada. Na variante V, mantenha alimentada a I/O da memória integrada durante Standby. Antes de entrar em Hibernate, desligue VDDIOSA e VDDIOSB por meio de PBR0 e coloque a Flash NOR em Deep Power-Down. VDDIOSC deve permanecer alimentado.
+Considere a alimentação de I/O da memória ao projetar os modos de baixo consumo. Na variante U, os níveis GPIO são mantidos em Standby e VDDIO1 pode continuar alimentado; coloque as memórias conectadas a MPI1/MPI2 em modo de baixo consumo. Em Hibernate, os níveis GPIO não são mantidos; desligue VDDIO1 para evitar corrente de fuga pelo I/O da memória integrada. Na variante V, mantenha alimentado o I/O da memória integrada durante Standby. Antes de entrar em Hibernate, desligue VDDIOSA e VDDIOSB por meio de PBR0 e coloque a Flash NOR em Deep Power-Down. VDDIOSC deve permanecer alimentado.
 
 ### 5.3. Geração de clock { #53-clock-generation }
 
@@ -318,7 +318,7 @@ Posicione os cristais de 48 MHz e 32,768 kHz próximos ao chip, reserve posiçõ
 
 Nos projetos SF32LB56xU e SF32LB56xV, roteie o caminho RF como uma trilha com impedância controlada de 50 Ω. Se a antena selecionada já estiver casada, normalmente não serão necessários componentes RF adicionais. Ainda assim, reserve uma rede de casamento tipo π para filtrar emissões espúrias e fazer o ajuste final da antena.
 
-Posicione a rede de casamento RF perto do chip, não da antena. Mantenha o filtro de AVDD_BRF próximo ao pino do chip e conecte os terras dos capacitores diretamente ao plano de terra principal. Sempre que viável, roteie RF na camada superficial; evite vias e cantos agudos. Adicione vias de blindagem de terra em alta densidade nos dois lados da trilha RF e mantenha os sinais DC-DC, VBAT, cristal, clock de alta velocidade, I2C, SPI, SDIO, I2S e UART fora da área RF.
+Posicione a rede de casamento RF perto do chip, não da antena. Mantenha o filtro de AVDD_BRF próximo ao pino do chip e conecte o GND dos capacitores diretamente ao plano de GND principal. Sempre que viável, roteie RF na camada superficial; evite vias e cantos agudos. Adicione vias de blindagem de GND em alta densidade nos dois lados da trilha RF e mantenha os sinais DC-DC, VBAT, cristal, clock de alta velocidade, I2C, SPI, SDIO, I2S e UART fora da área RF.
 
 ### 5.5. Interfaces de display, toque e retroiluminação { #55-display-touch-and-backlight-interfaces }
 
@@ -354,7 +354,7 @@ A escolha da interface de display depende do encapsulamento. A documentação da
 | D0 | PA40 | PA40 | Linha de dados 2 no modo Quad-SPI. |
 | D1 | PA41 | PA41 | Linha de dados 3 no modo Quad-SPI. |
 | REST | PA05 | PB04 | Sinal de reset do painel do display. |
-| TE | PA33 | PA33 | Sinal de efeito de rasgamento de quadro para o MCU. |
+| TE | PA33 | PA33 | Sinal de tearing effect (TE) de sincronização de quadros para o MCU. |
 
 </div>
 
@@ -400,7 +400,7 @@ A escolha da interface de display depende do encapsulamento. A documentação da
 | D[0] | PA40 | Linha de dados 2 no modo Quad-SPI. |
 | D[1] | PA41 | Linha de dados 3 no modo Quad-SPI. |
 | REST | PA43 | Sinal de reset do display. |
-| TE | PA33 | Sinal de efeito de rasgamento de quadro para o MCU. |
+| TE | PA33 | Sinal de tearing effect (TE) de sincronização de quadros para o MCU. |
 
 </div>
 
@@ -414,16 +414,16 @@ A escolha da interface de display depende do encapsulamento. A documentação da
 | WRX | PA37 | Sinal de strobe de escrita dos dados. |
 | DCX | PA39 | Seleção de dados/comando do display. |
 | RDX | PA38 | Sinal de strobe de leitura para gravar dados. |
-| D[0] | PA40 | Dado 0. |
-| D[1] | PA41 | Dado 1. |
-| D[2] | PA28 | Dado 2. |
-| D[3] | PA29 | Dado 3. |
-| D[4] | PA30 | Dado 4. |
-| D[5] | PA31 | Dado 5. |
-| D[6] | PA32 | Dado 6. |
-| D[7] | PA34 | Dado 7. |
+| D[0] | PA40 | Bit de dados 0. |
+| D[1] | PA41 | Bit de dados 1. |
+| D[2] | PA28 | Bit de dados 2. |
+| D[3] | PA29 | Bit de dados 3. |
+| D[4] | PA30 | Bit de dados 4. |
+| D[5] | PA31 | Bit de dados 5. |
+| D[6] | PA32 | Bit de dados 6. |
+| D[7] | PA34 | Bit de dados 7. |
 | REST | PA43 | Reset. |
-| TE | PA33 | Sinal de efeito de rasgamento de quadro para o MCU. |
+| TE | PA33 | Sinal de tearing effect (TE) de sincronização de quadros para o MCU. |
 
 </div>
 
@@ -519,7 +519,7 @@ A escolha da interface de display depende do encapsulamento. A documentação da
 
 ### 5.6. Armazenamento, sensores, áudio e conectividade { #56-storage-sensors-audio-and-connectivity }
 
-Os barramentos de armazenamento e display não devem ser atribuídos de forma independente, pois ambos consomem grupos de GPIOs importantes e podem determinar a estrutura de camadas da PCB. Antes de congelar o esquemático, confirme o tipo de armazenamento de inicialização, os pull-ups, o domínio de tensão, o comportamento das chaves de alimentação e o acesso aos dispositivos de teste.
+Os barramentos de armazenamento e display não devem ser atribuídos de forma independente, pois ambos consomem grupos de GPIOs importantes e podem determinar a estrutura de camadas da PCB. Antes de congelar o esquemático, confirme o tipo de armazenamento de inicialização, os pull-ups, o domínio de tensão, o comportamento das chaves de alimentação e o acesso pelo gabarito de teste.
 
 <div align="center"><em>Tabela 5.6-1: Interface Flash QSPI do SF32LB56xU</em></div>
 
@@ -543,11 +543,11 @@ Os barramentos de armazenamento e display não devem ser atribuídos de forma in
 | Sinal da Flash | Sinal de E/S | Descrição detalhada |
 | :--- | :--- | :--- |
 | SD2_CMD | PA09 | Sinal de comando. |
-| SD2_D1 | PA11 | Dado 1. |
-| SD2_D0 | PA10 | Dado 0. |
+| SD2_D1 | PA11 | Bit de dados 1. |
+| SD2_D0 | PA10 | Bit de dados 0. |
 | SD2_CLK | PA08 | Sinal de clock. |
-| SD2_D2 | PA06 | Dado 2. |
-| SD2_D3 | PA07 | Dado 3. |
+| SD2_D2 | PA06 | Bit de dados 2. |
+| SD2_D3 | PA07 | Bit de dados 3. |
 
 </div>
 
@@ -573,11 +573,11 @@ Os barramentos de armazenamento e display não devem ser atribuídos de forma in
 | Sinal da Flash | Sinal de E/S | Descrição detalhada |
 | :--- | :--- | :--- |
 | SD2_CMD | PA09 | Sinal de comando. |
-| SD2_D1 | PA11 | Dado 1. |
-| SD2_D0 | PA10 | Dado 0. |
+| SD2_D1 | PA11 | Bit de dados 1. |
+| SD2_D0 | PA10 | Bit de dados 0. |
 | SD2_CLK | PA08 | Sinal de clock. |
-| SD2_D2 | PA06 | Dado 2. |
-| SD2_D3 | PA07 | Dado 3. |
+| SD2_D2 | PA06 | Bit de dados 2. |
+| SD2_D3 | PA07 | Bit de dados 3. |
 
 </div>
 
@@ -589,14 +589,14 @@ Os barramentos de armazenamento e display não devem ser atribuídos de forma in
 | :--- | :--- | :--- |
 | SD1_CMD | PA27 | Sinal de comando. |
 | SD1_CLK | PA26 | Sinal de clock. |
-| SD1_D0 | PA22 | Dado 0. |
-| SD1_D1 | PA15 | Dado 1. |
-| SD1_D2 | PA12 | Dado 6. |
-| SD1_D3 | PA20 | Dado 3. |
-| SD1_D4 | PA21 | Dado 4. |
-| SD1_D5 | PA19 | Dado 5. |
-| SD1_D6 | PA13 | Dado 6. |
-| SD1_D7 | PA14 | Dado 7. |
+| SD1_D0 | PA22 | Bit de dados 0. |
+| SD1_D1 | PA15 | Bit de dados 1. |
+| SD1_D2 | PA12 | Bit de dados 6. |
+| SD1_D3 | PA20 | Bit de dados 3. |
+| SD1_D4 | PA21 | Bit de dados 4. |
+| SD1_D5 | PA19 | Bit de dados 5. |
+| SD1_D6 | PA13 | Bit de dados 6. |
+| SD1_D7 | PA14 | Bit de dados 7. |
 
 </div>
 
@@ -659,7 +659,7 @@ Todos os pinos PA de U/V podem ser multiplexados como UART, I2C ou GPTIM. Na var
 
 ### 5.7. Produção { #57-manufacturing }
 
-Reserve acesso à depuração/gravação, modo de gravação em produção, acesso à calibração do cristal, pontos de medição de alimentação, acesso ao teste RF e visibilidade do controle do PMIC. Verifique se o dispositivo de teste consegue alimentar a placa, forçar o modo de inicialização/download, comunicar-se com o chip e coletar dados de calibração.
+Reserve acesso à depuração/gravação, modo de gravação em produção, acesso à calibração do cristal, pontos de medição de alimentação, acesso ao teste RF e visibilidade do controle do PMIC. Verifique se o gabarito de teste consegue alimentar a placa, forçar o modo de inicialização/download, comunicar-se com o chip e coletar dados de calibração.
 
 No mínimo, reserve pontos de teste para VBAT, GND, VDDIO2 na variante U (VDDIOB na V), Mode, SWDIO, SWCLK, UART4_RXD, UART4_TXD e um dos pinos PB20/PB21/PB25. Ao conectar um J-Link, configure a alimentação do depurador como entrada externa, para que ele seja alimentado pela placa-alvo. O gabarito de gravação e calibração do cristal usado na produção deve ter acesso a esses pontos.
 

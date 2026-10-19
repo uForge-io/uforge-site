@@ -20,18 +20,18 @@ tags:
 - 最新の[sifli-rs入門ガイド (Get Started guide)](https://github.com/OpenSiFli/sifli-rs/blob/main/docs/get_started.md)と[書き込み・デバッグガイド (Flash and Debug Guide)](https://github.com/OpenSiFli/sifli-rs/blob/main/docs/flash_and_debug.md)。
 
 !!! warning "試験評価用の手順"
-    このガイドを、チップ、ペリフェラル、ボード構成、アプリケーションスタックが本番運用可能であることの根拠として使用しないでください。移植作業に着手する前に、対象のターゲットとペリフェラルについて、リポジトリのサポート状況情報を確認してください。
+    このガイドを、チップ、ペリフェラル、ボード構成、アプリケーションスタックが本番運用可能であることの根拠として使用しないでください。移植作業に着手する前に、対象のターゲットとペリフェラルについて、リポジトリーのサポート状況情報を確認してください。
 
 ## Rustターゲットの準備 { #prepare-the-rust-target }
 
-このリポジトリのガイドはArm Cortex-M Rustターゲットを使用しています。ガイドに記載されているターゲットをインストールしてください。
+このリポジトリーのガイドはArm Cortex-M Rustターゲットを使用しています。ガイドに記載されているターゲットをインストールしてください。
 
 ```bash
 rustup target add thumbv8m.main-none-eabi
 rustup target add thumbv8m.main-none-eabihf
 ```
 
-リポジトリをクローンし、SF32LB52のサンプルディレクトリから作業してください。
+リポジトリーをクローンし、SF32LB52のサンプルディレクトリから作業してください。
 
 ```bash
 git clone https://github.com/OpenSiFli/sifli-rs.git
@@ -42,13 +42,13 @@ cd sifli-rs/examples/sf32lb52x
 
 ## 書き込みランナーの設定 { #configure-the-flash-runner }
 
-このリポジトリでは、通常の書き込みランナーとして`sftool`が文書化されています。`examples/sf32lb52x/.cargo/config.toml`で、最新の書き込み・デバッグガイド (Flash and Debug Guide) に従い、ボードのUSB-to-UARTポートにランナーを設定します。文書化されているパターンは次のとおりです。
+このリポジトリーでは、通常の書き込みランナーとして`sftool`が文書化されています。`examples/sf32lb52x/.cargo/config.toml`で、最新の書き込み・デバッグガイド (Flash and Debug Guide) に従い、ボードのUSB-to-UARTポートにランナーを設定します。文書化されているパターンは次のとおりです。
 
 ```toml
 runner = 'sftool -c SF32LB52 -p <Your_Port> --compat write_flash'
 ```
 
-最初の書き込みには、フラッシュテーブル、ブートローダー、アプリケーションイメージが必要になる場合があります。正確なイメージとアドレスは、文書化されたボード/フラッシュの構成に依存します。ArduinoやZephyr、SiFli-SDKからアドレスやバイナリを流用するのではなく、リポジトリのガイドに従ってください。
+最初の書き込みには、フラッシュテーブル、ブートローダー、アプリケーションイメージが必要になる場合があります。正確なイメージとアドレスは、文書化されたボード/フラッシュの構成に依存します。ArduinoやZephyr、SiFli-SDKからアドレスやバイナリを流用するのではなく、リポジトリーのガイドに従ってください。
 
 ## 基準構成のビルドと実行 { #build-and-run-the-baseline }
 
@@ -68,4 +68,4 @@ cargo run --bin blinky
 
 ## サンプルを再利用する前に { #what-sifli-should-add }
 
-サンプルを変更する前に、リポジトリに使用するボードとペリフェラルのサポートが明記されていることを確認し、対応するRustターゲット、ブートローダー、フラッシュテーブルのレイアウト、デバッグ手順を確認してください。動作確認済みのSiFli-SDK構成を、復旧手段として確保してください。
+サンプルを変更する前に、リポジトリーに使用するボードとペリフェラルのサポートが明記されていることを確認し、対応するRustターゲット、ブートローダー、フラッシュテーブルのレイアウト、デバッグ手順を確認してください。動作確認済みのSiFli-SDK構成を、復旧手段として確保してください。

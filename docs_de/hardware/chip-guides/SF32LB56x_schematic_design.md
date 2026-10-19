@@ -282,7 +282,7 @@ Entscheidungen zu Betriebsmodus, Weckquelle, Versorgung der Pull-up-Widerstände
 
 </div>
 
-BOOT_MODE legt das Startverhalten fest: High aktiviert den Download-Modus. Bei Low sucht die ROM nach einem Benutzerprogramm, startet es gegebenenfalls und wechselt andernfalls in den Download-Modus. Der Mode-Pin der U-Variante hat einen internen Pull-down, darf unbeschaltet bleiben, wenn er nicht verwendet wird, und gehört zur VDDIO2-Domäne. Der Mode-Pin der V-Variante gehört zu VDDIOA und sollte mit einem 10-kΩ-Pull-up oder -Pull-down stabil gehalten werden. Lassen Sie ihn nicht offen und verhindern Sie ein unbeabsichtigtes Umschalten durch Störungen. Sehen Sie für Produktionsboards einen Mode-Testpunkt vor; auf Entwicklungsboards ist ein Jumper zur Wiederherstellung hilfreich.
+BOOT_MODE legt das Startverhalten fest: High aktiviert den Download-Modus. Bei Low sucht das ROM nach einem Benutzerprogramm, startet es gegebenenfalls und wechselt andernfalls in den Download-Modus. Der Mode-Pin der U-Variante hat einen internen Pull-down, darf unbeschaltet bleiben, wenn er nicht verwendet wird, und gehört zur VDDIO2-Domäne. Der Mode-Pin der V-Variante gehört zu VDDIOA und sollte mit einem 10-kΩ-Pull-up oder -Pull-down stabil gehalten werden. Lassen Sie ihn nicht offen und verhindern Sie ein unbeabsichtigtes Umschalten durch Störungen. Sehen Sie für Produktionsboards einen Mode-Testpunkt vor; auf Entwicklungsboards ist ein Jumper zur Wiederherstellung hilfreich.
 
 Berücksichtigen Sie die Speicher-I/O-Versorgung bei stromsparenden Abschaltungen. Im Standby der U-Variante bleiben GPIO-Pegel erhalten und VDDIO1 kann eingeschaltet bleiben; versetzen Sie an MPI1/MPI2 angeschlossene Speicher in den Energiesparmodus. Im Hibernate bleiben GPIO-Pegel nicht erhalten. Schalten Sie daher VDDIO1 ab, um Leckstrom über die I/O des integrierten Speichers zu verhindern. Halten Sie bei der V-Variante die I/O des integrierten Speichers im Standby versorgt. Schalten Sie vor Hibernate VDDIOSA und VDDIOSB über PBR0 ab und versetzen Sie den NOR-Flash in Deep Power-Down. VDDIOSC muss weiterhin versorgt werden.
 
@@ -318,7 +318,7 @@ Platzieren Sie die 48-MHz- und 32,768-kHz-Quarze nahe am Chip, sehen Sie Footpri
 
 Bei SF32LB56xU- und SF32LB56xV-Designs den RF-Pfad als Leiterbahn mit kontrolliertem Wellenwiderstand von 50 Ω auslegen. Ist die gewählte Antenne bereits angepasst, sind normalerweise keine zusätzlichen RF-Bauteile erforderlich. Dennoch sollte ein π-Anpassungsnetzwerk zur Unterdrückung unerwünschter Aussendungen und für den abschließenden Antennenabgleich vorgesehen werden.
 
-Das RF-Anpassungsnetzwerk nahe am Chip und nicht an der Antenne platzieren. Die AVDD_BRF-Filterung nahe am Chip-Pin halten und die Kondensatormassen direkt mit der Hauptmasse verbinden. RF nach Möglichkeit auf der Außenlage routen, Durchkontaktierungen und scharfe Ecken vermeiden, entlang beider Seiten der RF-Leiterbahn dichte Masse-Durchkontaktierungen vorsehen und DC-DC-, VBAT-, Quarz-, Hochgeschwindigkeitstakt-, I2C-, SPI-, SDIO-, I2S- und UART-Signale vom RF-Bereich fernhalten.
+Platzieren Sie das RF-Anpassungsnetzwerk nahe am Chip und nicht an der Antenne. Halten Sie die AVDD_BRF-Filterung nahe am Chip-Pin und verbinden Sie die Kondensatormassen direkt mit der Hauptmasse. Routen Sie RF nach Möglichkeit auf der Außenlage, vermeiden Sie Durchkontaktierungen und scharfe Ecken, sehen Sie entlang beider Seiten der RF-Leiterbahn dichte Masse-Durchkontaktierungen vor und halten Sie DC-DC-, VBAT-, Quarz-, Hochgeschwindigkeitstakt-, I2C-, SPI-, SDIO-, I2S- und UART-Signale vom RF-Bereich fern.
 
 ### 5.5. Display-, Touch- und Hintergrundbeleuchtungs-Schnittstellen { #55-display-touch-and-backlight-interfaces }
 
@@ -519,7 +519,7 @@ Die Auswahl der Display-Schnittstelle hängt vom Gehäuse ab. Für die U-Variant
 
 ### 5.6. Speicher, Sensoren, Audio und Konnektivität { #56-storage-sensors-audio-and-connectivity }
 
-Speicher- und Display-Busse sollten nicht unabhängig voneinander zugewiesen werden, da beide wichtige GPIO-Gruppen belegen und den Lagenaufbau der Leiterplatte beeinflussen können. Vor der Freigabe des Schaltplans Boot-Speicher, Pull-ups, Spannungsdomäne, Verhalten des Lastschalters und Zugang zur Prüfvorrichtung bestätigen.
+Speicher- und Display-Busse sollten nicht unabhängig voneinander zugewiesen werden, da beide wichtige GPIO-Gruppen belegen und den Lagenaufbau der Leiterplatte beeinflussen können. Bestätigen Sie vor der Freigabe des Schaltplans Boot-Speicher, Pull-ups, Spannungsdomäne, Verhalten des Lastschalters und Zugang zur Prüfvorrichtung.
 
 <div align="center"><em>Tabelle 5.6-1: SF32LB56xU QSPI-Flash-Schnittstelle</em></div>
 
@@ -622,8 +622,8 @@ Die Speicher-I/O-Versorgung muss zum Logikpegel des angeschlossenen Speichers pa
 
 | Audio-Signal | I/O | Detaillierte Beschreibung |
 | :--- | :--- | :--- |
-| AU_ADC1P | ADCP | Positiver Eingang bei differentieller Beschaltung oder unsymmetrischer Analogeingang für ein Mikrofon |
-| AU_ADC1N | ADCN | Negativer Eingang bei differentieller Mikrofonbeschaltung oder GND |
+| AU_ADC1P | ADCP | Positiver Eingang bei differenzieller Beschaltung oder unsymmetrischer Analogeingang für ein Mikrofon |
+| AU_ADC1N | ADCN | Negativer Eingang bei differenzieller Mikrofonbeschaltung oder GND |
 | AU_DAC1P | DACP | Differenzieller analoger Ausgang P |
 | AU_DAC1N | DACN | Differenzieller analoger Ausgang N |
 
@@ -635,8 +635,8 @@ Die Speicher-I/O-Versorgung muss zum Logikpegel des angeschlossenen Speichers pa
 
 | Audio-Signal | I/O | Detaillierte Beschreibung |
 | :--- | :--- | :--- |
-| AU_ADC1P | ADCP | Positiver Eingang bei differentieller Beschaltung oder unsymmetrischer Analogeingang für ein Mikrofon |
-| AU_ADC1N | ADCN | Negativer Eingang bei differentieller Mikrofonbeschaltung oder GND |
+| AU_ADC1P | ADCP | Positiver Eingang bei differenzieller Beschaltung oder unsymmetrischer Analogeingang für ein Mikrofon |
+| AU_ADC1N | ADCN | Negativer Eingang bei differenzieller Mikrofonbeschaltung oder GND |
 | AU_DAC1P | DACP | Differenzieller analoger Ausgang P |
 | AU_DAC1N | DACN | Differenzieller analoger Ausgang N |
 | I2S1_LRCK | PA71 | I2S2-Rahmentakt |
@@ -649,7 +649,7 @@ Die Speicher-I/O-Versorgung muss zum Logikpegel des angeschlossenen Speichers pa
 !!! warning "I2S-Instanz der V-Variante prüfen"
     Die SiFli-Pintabelle und die Netzbezeichnungen im Schaltplan kennzeichnen diese Pins als I2S1_LRCK/SDI/SDO/BCK, die Tabellenbeschreibungen bezeichnen sie jedoch als I2S2-Signale. Die Peripherieinstanz ist damit nicht eindeutig; prüfen Sie sie vor der Pinzuweisung anhand der veröffentlichten Pin-Mux-Dokumentation.
 
-Bei einem externen differentiellen Analogmikrofon müssen an den ADC-Eingängen DC-Sperrkondensatoren von mindestens 2,2 µF vorgesehen und das Mikrofon über MIC_BIAS versorgt werden. Die U-Referenzschaltung für ein MEMS-Mikrofon führt MIC_BIAS über 1 kΩ und ergänzt einen 4,7-µF-Bypasskondensator; am Mikrofonausgang ist außerdem ein 0,01-µF-Koppelkondensator dargestellt. Die U-Referenz für den Analog-PA verwendet 33-nF-Eingangskoppelkondensatoren; der differentielle Tiefpassfilter liegt nahe am Chip. Analoge DAC-Ausgänge als massegeschütztes Differenzialpaar routen, mit weniger als 10 pF parasitärer Kapazität und weniger als 2 cm Leiterbahnlänge. Die V-Variante bietet zusätzlich I2S; der Referenz-I2S-Verstärker wird über I2C3 konfiguriert. Audio-Versorgungs- und Referenzkondensatoren nahe an den Pins platzieren und Analog-Audio von Schaltreglern und Hochgeschwindigkeitssignalen fernhalten.
+Bei einem externen differenziellen Analogmikrofon müssen an den ADC-Eingängen DC-Sperrkondensatoren von mindestens 2,2 µF vorgesehen und das Mikrofon über MIC_BIAS versorgt werden. Die U-Referenzschaltung für ein MEMS-Mikrofon führt MIC_BIAS über 1 kΩ und ergänzt einen 4,7-µF-Bypasskondensator; am Mikrofonausgang ist außerdem ein 0,01-µF-Koppelkondensator dargestellt. Die U-Referenz für den Analog-PA verwendet 33-nF-Eingangskoppelkondensatoren; der differenzielle Tiefpassfilter liegt nahe am Chip. Analoge DAC-Ausgänge als massegeschütztes Differenzialpaar routen, mit weniger als 10 pF parasitärer Kapazität und weniger als 2 cm Leiterbahnlänge. Die V-Variante bietet zusätzlich I2S; der Referenz-I2S-Verstärker wird über I2C3 konfiguriert. Audio-Versorgungs- und Referenzkondensatoren nahe an den Pins platzieren und Analog-Audio von Schaltreglern und Hochgeschwindigkeitssignalen fernhalten.
 
 Beide Varianten unterstützen PWM für Vibrationsmotoren. Der Motor darf direkt aus VBAT versorgt werden, sofern sein Anlaufstrom das System nicht destabilisiert. Ist `BSP_PM_FREQ_SCALING` auf `1` gesetzt, verändert die HCPU-Frequenzskalierung auch die PWM-Frequenz an den PA-Pins. Verwenden Sie in diesem Fall einen PB-Pin. PB32 ist ein high-aktiver Power-/Reset-Eingang; ein langer Tastendruck von mindestens 10 s löst einen Reset aus. Die U-Referenzschaltung verbindet die Taste über 1 kΩ mit VDDIOB und ergänzt einen 10-kΩ-Pull-down sowie einen 0,1-µF-Kondensator nach GND. Die V-Referenz verwendet einen 1-kΩ-Serienwiderstand von VDD_1V8 und einen 10-kΩ-Pull-down. Andere Tasten und Drehgeber benötigen Pull-ups. Bei mechanischen Drehgebern, die nach der Betätigung nicht in den Aus-Zustand zurückkehren, muss die Pull-up-Versorgung im Standby abschaltbar sein, um Leckstrom zu vermeiden.
 

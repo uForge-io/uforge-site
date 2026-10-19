@@ -15,7 +15,7 @@ Referencia primaria: [documentación de LCDC HAL de SiFli](https://github.com/Op
 
 El enlace anterior está fijado a un commit concreto de SiFli-SDK. Documenta el comportamiento de HAL en esa revisión, pero no demuestra que todas las interfaces, capas o funciones estén disponibles en todos los dispositivos o encapsulados SF32 ni en otras versiones del SDK. Verifique la combinación exacta de dispositivo, encapsulado y versión del SDK del proyecto.
 
-Consulte el [resumen de gráficos](overview.md#sf32-graphics-flow) para ver el recorrido completo desde los recursos hasta el panel. Este artículo se centra en el controlador de pantalla, la conexión del panel y la integración del controlador de software.
+Consulte el [resumen de gráficos](overview.md#sf32-graphics-flow) para ver el recorrido completo desde los recursos hasta el panel. Este artículo se centra en el controlador de pantalla, la conexión del panel y la integración del driver.
 
 Consulte esta página al elegir la interfaz del panel, definir cómo LVGL transfiere los píxeles al panel o poner en marcha un panel nuevo. Distingue la salida del controlador de la decodificación de recursos y la composición de píxeles para ayudar a localizar cada problema en la capa adecuada.
 
@@ -32,7 +32,7 @@ La elección del panel afecta al ancho de banda, la estrategia de búfer, el uso
 | Interfaz o tipo de panel | Uso típico | Notas de diseño |
 |:---|:---|:---|
 | **SPI de 3 o 4 líneas** | Paneles TFT o AMOLED pequeños, HMI simples | Requiere pocos pines y un enrutamiento sencillo, pero ofrece un ancho de banda limitado para animaciones a pantalla completa. |
-| **Dual-SPI / Quad-SPI** | AMOLED para dispositivos vestibles y pantallas compactas | Mejor ancho de banda que la SPI básico manteniendo un número de pines moderado. |
+| **Dual-SPI / Quad-SPI** | AMOLED para dispositivos vestibles y pantallas compactas | Mejor ancho de banda que la SPI básica manteniendo un número de pines moderado. |
 | **Interfaz MCU 8080** | Paneles con interfaz paralela | Ofrece más ancho de banda que SPI en serie, pero utiliza más pines. |
 | **RGB / DPI** | Pantallas grandes o con alta frecuencia de refresco | Flujo continuo de píxeles, mayor ancho de banda y número de pines, y requisitos de temporización más estrictos. |
 | **MIPI DSI** | AMOLED de alta densidad o paneles avanzados | Ofrece un ancho de banda elevado con pocos pines, pero exige una inicialización más compleja y una integridad de señal más estricta. |
@@ -46,7 +46,7 @@ Por ejemplo, un panel SPI/QSPI pequeño puede aprovechar las actualizaciones par
 
 ## Matriz de interfaces por dispositivo { #per-device-interface-matrix }
 
-La siguiente matriz sirve para seleccionar una familia; no es una tabla de asignación de pines. Resume las interfaces de pantalla documentadas para cada familia SF32 o variante de silicio. Un guion indica que esa interfaz no está documentada para la fila correspondiente; no excluye el uso de un controlador externo gestionado por GPIO ni una implementación específica de la placa. Antes de cerrar el esquemático, confirme el código exacto del dispositivo, el encapsulado, la multiplexación de pines, la versión del SDK y el controlador del panel.
+La siguiente matriz sirve para seleccionar una familia; no es una tabla de asignación de pines. Resume las interfaces de pantalla documentadas para cada familia SF32 o variante de silicio. Un guion indica que esa interfaz no está documentada para la fila correspondiente; no excluye el uso de un controlador externo gestionado por GPIO ni una implementación específica de la placa. Antes de cerrar el esquemático, confirme el código exacto del dispositivo, el encapsulado, la multiplexación de pines, la versión del SDK y el driver del panel.
 
 <div align="center"><em>Matriz de interfaces de pantalla SF32</em></div>
 
@@ -54,36 +54,36 @@ La siguiente matriz sirve para seleccionar una familia; no es una tabla de asign
 
 | Familia o variante SF32 | Interfaces de LCD/panel documentadas | Restricción de encapsulado o variante | Criterio práctico de selección |
 |:---|:---|:---|:---|
-| **SF32LB52x** | SPI de 3/4 hilos, Dual-SPI, Quad-SPI, MCU/8080 (MIPI DBI), JDI serie/paralelo; EPD mediante controlador SPI; la guía de hardware de 52B/D/E/G/J también documenta la interfaz de señales EPD paralela de 8 bits | Los modelos 52x enumerados usan QFN68L. La guía de hardware de 52B/D/E/G/J especifica señales y control del PMIC TPS, pero esto no demuestra que exista soporte del modo EPD de accionamiento directo mediante LCDC. Verifique el controlador y la variante exacta. | Diseños compactos SPI/QSPI, 8080 y JDI; para EPD paralelo, confirme la implementación de GPIO, temporización y control de alimentación TPS de la variante elegida. |
+| **SF32LB52x** | SPI de 3/4 hilos, Dual-SPI, Quad-SPI, MCU/8080 (MIPI DBI), JDI serie/paralelo; EPD mediante controlador SPI; la guía de hardware de 52B/D/E/G/J también documenta la interfaz de señales EPD paralela de 8 bits | Los modelos 52x enumerados usan QFN68L. La guía de hardware de 52B/D/E/G/J especifica señales y control del PMIC TPS, pero esto no demuestra que exista soporte del modo EPD de accionamiento directo mediante LCDC. Verifique el driver y la variante exacta. | Diseños compactos SPI/QSPI, 8080 y JDI; para EPD paralelo, confirme la implementación de GPIO, temporización y control de alimentación TPS de la variante elegida. |
 | **SF32LB55x** | SPI de 3/4 hilos, Dual-SPI, Quad-SPI, MCU/8080, DPI/RGB, JDI serie/paralelo, MIPI DSI en modo comando | La interfaz MIPI DSI documentada, con 2 líneas de datos, está disponible en encapsulados BGA145/169; JDI y el funcionamiento con dos pantallas mediante MIPI DSI + SPI/DSPI solo se documentan para 557VD3A6. El modo comando requiere un controlador de panel con SRAM/GRAM interna. | Dispositivos vestibles y otros productos conectados con pantalla, con un encapsulado BGA compatible y un panel MIPI en modo comando. |
 | **SF32LB56xU** | SPI de 3/4 hilos, Dual-SPI, Quad-SPI, JDI serie | Las variantes U listadas usan QFN68L; confirme el código exacto y la multiplexación de pines. | Diseños compactos con panel serie que priorizan el ancho de banda QSPI y un menor número de pines. |
 | **SF32LB56xV** | SPI de 3/4 hilos, Dual-SPI, Quad-SPI, DBI 8080, DPI/RGB, JDI serie/paralelo | Las variantes V listadas usan WBBGA175 (BGA175 en la guía de modelos); confirme los pines necesarios y el enrutamiento para el código exacto. | Diseños de alta resolución o frecuencia de refresco que necesitan 8080, DPI/RGB o JDI paralelo. |
-| **SF32LB57x** | SPI de 3/4 hilos, Dual-SPI, Quad-SPI, 8080/DBI de 8/16 bits, DPI/RGB, JDI y modo EPD directo de LCDC | Las opciones de encapsulado incluyen QFN68L, QFN80L y BGA112; confirme el código exacto, los pines disponibles y la ruta de control del panel. | Diseños con uso intensivo de gráficos que requieren una interfaz paralela o serie, JDI o EPD. |
+| **SF32LB57x** | SPI de 3/4 hilos, Dual-SPI, Quad-SPI, 8080/DBI de 8/16 bits, DPI/RGB, JDI y modo EPD directo de LCDC | Las opciones de encapsulado incluyen QFN68L, QFN80L y BGA112; confirme el código exacto, los pines disponibles y la ruta del driver del panel. | Diseños con uso intensivo de gráficos que requieren una interfaz paralela o serie, JDI o EPD. |
 | **SF32LB58x** | SPI de 3/4 hilos, Dual-SPI, Quad-SPI, MCU/8080, DPI/RGB, JDI serie/paralelo, MIPI DSI de 2 líneas de datos, en modo comando y en modo de vídeo | Los códigos de pedido enumerados usan BGA256. El modo comando usa un controlador de panel con SRAM/GRAM interna; el modo de vídeo también admite controladores de panel sin RAM. La guía de modelos también enumera pantallas duales mediante MIPI DSI + SPI/DSPI/QSPI. Confirme el controlador LCD y la multiplexación de pines para el diseño exacto. | Diseños de UI de alta resolución y exigentes en ancho de banda, incluidos los de doble pantalla y los paneles MIPI DSI con o sin RAM en el controlador. |
 
 </div>
 
-En **SF32LB56x**, no considere intercambiables las variantes U y V. Para **SF32LB55x** y **SF32LB58x**, no asigne MIPI DSI en el esquemático hasta confirmar el encapsulado exacto, los pines DSI disponibles y el número de líneas de datos y el modo de funcionamiento que requiere el panel. En particular, SF32LB55x solo admite el modo comando, por lo que no es compatible con un panel sin RAM que funcione en modo de vídeo. Los diseños EPD también requieren planificar la temporización, la forma de onda y la alimentación específicas del panel; conocer la interfaz no basta para completar el diseño.
+En **SF32LB56x**, no considere intercambiables las variantes U y V. Para **SF32LB55x** y **SF32LB58x**, no reserve MIPI DSI en el esquemático hasta confirmar el encapsulado exacto, los pines DSI disponibles y el número de líneas de datos y el modo de funcionamiento que requiere el panel. En particular, SF32LB55x solo admite el modo comando, por lo que no es compatible con un panel sin RAM que funcione en modo de vídeo. Los diseños EPD también requieren planificar la temporización, la forma de onda y la alimentación específicas del panel; conocer la interfaz no basta para completar el diseño.
 
-Las dos guías de hardware de SF32LB52x no coinciden en JDI: el resumen menciona JDI serie, mientras que las secciones detalladas muestran asignaciones de señales paralelas. Por eso la matriz conserva ambas capacidades documentadas, pero no garantiza la disponibilidad de pines para un código concreto. Antes de cerrar el diseño, confirme el mapeo LCDC, el SDK y el controlador, así como las señales del panel de la variante exacta.
+Las dos guías de hardware de SF32LB52x no coinciden en JDI: el resumen menciona JDI serie, mientras que las secciones detalladas muestran asignaciones de señales paralelas. Por eso la matriz conserva ambas capacidades documentadas, pero no garantiza la disponibilidad de pines para un código concreto. Antes de cerrar el diseño, confirme el mapeo LCDC, el SDK y el driver, así como las señales del panel de la variante exacta.
 
 La guía de modelos de chips de SiFli incluye DPI/RGB entre las interfaces de la familia SF32LB55x, pero su tabla por código de pedido no asigna DPI a los SKU enumerados. Considérelo únicamente como evidencia a nivel de familia y confirme la compatibilidad con DPI y la disponibilidad de pines para el código exacto antes de depender de esta interfaz. La distinción U/V de SF32LB56x se basa en sus guías de hardware separadas, no en la tabla HAL de toda la familia.
 
-En SF32LB52x, distinga la interfaz de señales EPD paralela de 8 bits documentada del modo EPD directo de LCDC. La guía de hardware de 52B/D/E/G/J incluye las señales EPD paralelas y el control del PMIC TPS; por separado, las notas de versión de SiFli-SDK v2.5.1 documentan este modo en SF32LB57x. No dé por hecho que un diseño 52x puede utilizar el modo EPD directo de LCDC de 57x; compruebe el controlador y la implementación de temporización para la variante concreta.
+En SF32LB52x, distinga la interfaz de señales EPD paralela de 8 bits documentada del modo EPD directo de LCDC. La guía de hardware de 52B/D/E/G/J incluye las señales EPD paralelas y el control del PMIC TPS; por separado, las notas de versión de SiFli-SDK v2.5.1 documentan este modo en SF32LB57x. No dé por hecho que un diseño 52x puede utilizar el modo EPD directo de LCDC de 57x; compruebe el driver y la implementación de temporización para la variante concreta.
 
 Fuentes de las interfaces: [guía de modelos de chips de SiFli](https://wiki.sifli.com/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html), [guía de hardware SF32LB52x con batería](https://wiki.sifli.com/hardware/SF32LB520-3-5-7-HW-Application.html), [guía de hardware 52B/D/E/G/J](https://wiki.sifli.com/hardware/SF32LB52B-E-G-J-HW-Application.html), [SF32LB55x](https://wiki.sifli.com/hardware/SF32LB55x-HW-Application.html), [SF32LB56xU](https://wiki.sifli.com/hardware/SF32LB56xU-HW-Application.html), [SF32LB56xV](https://wiki.sifli.com/hardware/SF32LB56xV-HW-Application.html), [SF32LB58x](https://wiki.sifli.com/hardware/SF32LB58x-HW-Application.html) y [notas de soporte SF32LB57x en el SDK](https://github.com/OpenSiFli/SiFli-SDK/releases/tag/v2.5.1).
 
 ## Controlador, búferes y transferencia a pantalla { #controller-buffers-and-flush-paths }
 
-El diagrama de referencia de LCDC distingue el área visible del panel, la ventana de actualización y la región del búfer de origen. Aplique de forma coherente los desplazamientos de columna y fila. La ventana puede solaparse solo parcialmente con la región del búfer de origen; los píxeles de la ventana sin datos de origen muestran el color de fondo. Compruebe conjuntamente las coordenadas, el origen del búfer y el stride, sin asumir que el búfer y la ventana coinciden.
+El diagrama de referencia de LCDC distingue el área visible del panel, la ventana de actualización y la región del búfer de origen. Aplique de forma coherente los desplazamientos de columna y fila. La ventana puede solaparse solo parcialmente con la región del búfer de origen; los píxeles de la ventana sin datos de origen muestran el color de fondo. Compruebe conjuntamente las coordenadas, el origen del búfer y el paso (stride), sin asumir que el búfer y la ventana coinciden.
 
-El framework de UI genera los píxeles modificados; el controlador de software y el LCDC los envían al panel. La ruta apropiada depende del panel:
+El framework de UI genera los píxeles modificados; el driver de pantalla y el controlador los envían al panel. La ruta apropiada depende del panel:
 
-- Un controlador SPI/QSPI o 8080 suele definir una ventana del panel y transferir solo la región modificada.
+- Un driver SPI/QSPI u 8080 suele definir una ventana del panel y transferir solo la región modificada.
 - Un controlador que escanea un framebuffer consume datos de píxeles de la memoria según la temporización de pantalla.
 - Una ruta capaz de TurboPixel lee el mapa de bits final comprimido y lo descomprime en la etapa del controlador de pantalla.
 
-En LVGL, el callback de actualización de pantalla (flush) marca el límite entre el renderizado y la salida. Debe tener en cuenta la región que se actualiza, iniciar la operación adecuada de DMA o del controlador y señalar que ha terminado solo cuando el framework pueda reutilizar el búfer de dibujo sin riesgo. Mantenga explícitas las reglas de limpieza (clean) e invalidación (invalidate) de caché siempre que la CPU y el hardware compartan búferes.
+En LVGL, el callback de actualización de pantalla (flush) marca el límite entre el renderizado y la salida. Se recomienda que tenga en cuenta la región que se actualiza, inicie la operación adecuada de DMA o del controlador y señale que ha terminado solo cuando el framework pueda reutilizar el búfer de dibujo sin riesgo. Mantenga explícitas las reglas de limpieza (clean) e invalidación (invalidate) de caché siempre que la CPU y el hardware compartan búferes.
 
 El momento de reutilizar un búfer depende de la ruta de transferencia. Al transferir a la memoria del panel, libere el búfer de dibujo solo cuando el hardware haya terminado de leerlo. En el barrido continuo, una interrupción de cuadro no basta para liberar el framebuffer activo: espere a que se confirme el cambio de búfer y el controlador deje de leer el anterior. La finalización de la transferencia y el refresco visible son eventos distintos; use la señal TE o la temporización de cuadro del panel cuando sea necesario para evitar tearing.
 
@@ -95,10 +95,10 @@ Si la memoria compartida admite caché, limpie la caché de los datos de origen 
 
 | Decisión | Qué validar |
 |:---|:---|
-| Región transferida | Transferir solo las zonas modificadas cuando el panel y el controlador lo permitan. |
+| Región transferida | Transferir solo las zonas modificadas cuando el panel y el driver lo permitan. |
 | Búferes | Elegir entre búfer parcial, de cuadro completo, simple o doble según la latencia y la memoria disponibles. |
 | Sincronización | Libere o reutilice el búfer solo cuando el hardware deje de leerlo; confirme el cambio de búfer durante el barrido continuo. |
-| Formato de píxel | Hacer coincidir el panel, el controlador, el renderizador y cualquier ruta de aceleración para evitar conversiones en la ruta crítica. |
+| Formato de píxel | Hacer coincidir el panel, el driver, el renderizador y cualquier ruta de aceleración para evitar conversiones en la ruta crítica. |
 | Caché | Limpiar (clean) los búferes escritos por la CPU antes de que el hardware los lea; invalidar (invalidate) los búferes escritos por hardware antes de que la CPU los lea. |
 
 </div>
@@ -107,7 +107,7 @@ Si la memoria compartida admite caché, limpie la caché de los datos de origen 
 
 El renderizado parcial y la transferencia parcial al panel son optimizaciones distintas. Un flujo continuo RGB/DPI o DSI en modo de vídeo puede seguir enviando el cuadro completo aunque solo cambie una pequeña región de memoria. En EPD, compruebe las formas de onda admitidas, la dependencia de la temperatura, las imágenes residuales y los intervalos de refresco completo; una región más pequeña no garantiza una actualización válida.
 
-La mayoría de las interfaces de usuario embebidas no necesitan redibujar toda la pantalla en cada fotograma. LVGL sigue las zonas invalidadas y el controlador puede transferir solo las áreas modificadas. Esto resulta especialmente útil con paneles SPI/QSPI, dispositivos portátiles a batería, páginas estáticas con pequeños valores cambiantes y pantallas EPD o JDI.
+La mayoría de las interfaces de usuario embebidas no necesitan redibujar toda la pantalla en cada fotograma. LVGL sigue las zonas invalidadas y el driver puede transferir solo las áreas modificadas. Esto resulta especialmente útil con paneles SPI/QSPI, dispositivos vestibles a batería, páginas estáticas con pequeños valores cambiantes y pantallas EPD o JDI.
 
 El refresco de pantalla completa es apropiado para pantallas con mucha animación, transiciones o paneles que escanean de forma natural desde un framebuffer completo. La elección depende del ancho de banda de la interfaz de pantalla, del comportamiento del panel y del presupuesto de memoria, no solo del ajuste del framework de UI.
 
@@ -118,7 +118,7 @@ Ponga en marcha el panel en etapas antes de depurar widgets o el comportamiento 
 1. Compruebe las líneas de alimentación, la temporización del reinicio, los pines de retroiluminación y habilitación, y el consumo de corriente de referencia.
 2. Envíe la secuencia de inicialización del proveedor del panel exactamente como se proporciona.
 3. Muestre colores sólidos para detectar errores en el orden de bytes, el formato de píxel o el cableado de la interfaz.
-4. Dibuje patrones geométricos simples para verificar el paso (stride), el direccionamiento de ventana y las coordenadas.
+4. Dibuje patrones geométricos simples para verificar el stride, el direccionamiento de ventana y las coordenadas.
 5. Añada imágenes y texto para comprobar la conversión de color, las fuentes y la ubicación de los recursos.
 6. Habilite el refresco parcial, DMA, TurboPixel y la aceleración gráfica de uno en uno.
 7. Pruebe las rutas de suspensión, apagado de pantalla, activación y reinicialización.
@@ -139,8 +139,8 @@ Trate cada etapa como un límite independiente. Cambiar a la vez los comandos de
 | Se muestran colores sólidos, pero los colores son incorrectos | Formato de píxel entre el renderizador y el panel | Muestre barras de prueba rojas, verdes, azules, negras y blancas. | Orden RGB/BGR, orden de bytes, profundidad de color o conversión de formato. |
 | La imagen está desplazada, recortada o presenta desgarro (tearing) | Direccionamiento y sincronización | Dibuje una cuadrícula y después pruebe repetidamente una región de actualización fija. | Coordenadas de ventana, stride, temporización del panel, reutilización de búfer o sincronización de DMA incompleta. |
 | La interfaz de usuario estática funciona, pero la animación da tirones | Etapas de renderizado, transferencia y memoria | Mida por separado el tiempo de renderizado y el tiempo hasta completar la transferencia. | Área de redibujado excesiva, contención de PSRAM, interfaz lenta o estrategia de búfer inadecuada. |
-| Los artefactos aparecen solo después de suspensión/activación | Transición de estado de energía | Vuelva a ejecutar la prueba de relleno/cuadrícula después de cada ruta soportada de apagado y activación de pantalla. | Estado de panel perdido, omisión de reinicio/inicialización, secuenciación de rieles, o estado obsoleto de caché/búfer. |
-| Una función falla solo cuando está habilitada | Ruta opcional específica | Habilite DMA, refresco parcial, ePicasso o TurboPixel de uno en uno. | Configuración no admitida, problema de alineación o caché, o error de integración del controlador. |
+| Los artefactos aparecen solo después de suspensión/activación | Transición de estado de energía | Vuelva a ejecutar la prueba de relleno/cuadrícula después de cada ruta soportada de apagado y activación de pantalla. | Estado de panel perdido, omisión de reinicio/inicialización, secuenciación de las líneas de alimentación, o estado obsoleto de caché/búfer. |
+| Una función falla solo cuando está habilitada | Ruta opcional específica | Habilite DMA, refresco parcial, ePicasso o TurboPixel de uno en uno. | Configuración no admitida, problema de alineación o caché, o error de integración del driver. |
 
 </div>
 
@@ -177,7 +177,7 @@ Antes de tratar la ruta de pantalla como completa, registre las decisiones que o
 - Tiempo de renderizado medido, tiempo de transferencia, tráfico de PSRAM pico/promedio donde sea relevante, y corriente para estados de UI representativos.
 - Resultados de prueba de suspensión, apagado de pantalla, activación, y recuperación, incluyendo el comportamiento después de una transferencia fallida o interrumpida.
 
-Este registro convierte el soporte de pantalla de un resultado puntual de puesta en marcha en una integración de producto repetible. Vuelva a validarlo siempre que cambien el panel, el SDK, el diseño de memoria, el formato de píxel o el controlador de pantalla.
+Este registro convierte el soporte de pantalla de un resultado puntual de puesta en marcha en una integración de producto repetible. Vuelva a validarlo siempre que cambien el panel, el SDK, el diseño de memoria, el formato de píxel o el driver de pantalla.
 
 ## Puntos clave { #key-takeaways }
 

@@ -28,18 +28,18 @@ Wählen Sie SiFli-SDK, wenn Sie Folgendes benötigen:
 - Einen dokumentierten Entwicklungspfad mit von SiFli gepflegter Board-Unterstützung und Beispielen für den gewählten Chip und die gewählte SDK-Version.
 - Beispiele und Middleware für Bluetooth, Display, Audio, Energiemanagement, Speicher, USB und OTA, sofern sie vom gewählten Ziel und Release unterstützt werden.
 - RT-Thread-Integration und Shell-Werkzeuge.
-- Board-Konfiguration über SDK-Board-Namen wie `sf32lb52-lcd_n16r8`.
+- Board-Konfiguration über SDK-Boardnamen wie `sf32lb52-lcd_n16r8`.
 - Zugriff auf SiFli-spezifische Middleware, Tools, Partitionslayouts und Produktionsabläufe.
 
 ## Entwicklungsmodell { #development-model }
 
-Die Seite [Erste Schritte mit SiFli-SDK](../../../getting-started/sifli/getting-started-sifli-sdk.md) richtet die Toolchain ein und prüft eine funktionierende `hello_world`-Referenz. Halten Sie danach SDK-Revision, ausgewähltes Board, Beispiel-/Projektverzeichnis, Konfiguration und die zugehörigen Build- und Flash-Artefakte gemeinsam in einem reproduzierbaren Build-Protokoll fest. Wenn der Board-Name keinen Core angibt, folgt das HCPU-Ausgabeverzeichnis häufig dem Muster `build_<board_name>_hcpu/`; für `sf32lb52-lcd_n16r8` lautet es beispielsweise `build_sf32lb52-lcd_n16r8_hcpu/`. Verwenden Sie das tatsächlich für das aufgelöste Board-/Core-Ziel erzeugte Verzeichnis, statt den Namen manuell zusammenzusetzen.
+Die Seite [Erste Schritte mit SiFli-SDK](../../../getting-started/sifli/getting-started-sifli-sdk.md) richtet die Toolchain ein und prüft eine funktionierende `hello_world`-Referenz. Halten Sie danach SDK-Revision, ausgewähltes Board, Beispiel-/Projektverzeichnis, Konfiguration und die zugehörigen Build- und Flash-Artefakte gemeinsam in einem reproduzierbaren Build-Protokoll fest. Wenn der Boardname keinen Core angibt, folgt das HCPU-Ausgabeverzeichnis häufig dem Muster `build_<board_name>_hcpu/`; für `sf32lb52-lcd_n16r8` lautet es beispielsweise `build_sf32lb52-lcd_n16r8_hcpu/`. Verwenden Sie das tatsächlich für das aufgelöste Board-/Core-Ziel erzeugte Verzeichnis, statt den Namen manuell zusammenzusetzen.
 
-Legen Sie für reproduzierbare Entwicklung einen SDK-Branch fest, dokumentieren Sie den Board-Namen, halten Sie lokale Board-Änderungen getrennt von den Herstellerdateien und nehmen Sie Konfigurationsänderungen in kleinen, überprüfbaren Schritten vor. Der detaillierte Ablauf zum Bauen, Flashen und Überwachen ist unter [Bauen, Flashen und Überwachen der seriellen Ausgabe](build-flash-monitor.md) beschrieben.
+Legen Sie für reproduzierbare Entwicklung einen SDK-Branch fest, dokumentieren Sie den Boardnamen, halten Sie lokale Board-Änderungen getrennt von den Herstellerdateien und nehmen Sie Konfigurationsänderungen in kleinen, überprüfbaren Schritten vor. Der detaillierte Ablauf zum Bauen, Flashen und Überwachen ist unter [Bauen, Flashen und Überwachen der seriellen Ausgabe](build-flash-monitor.md) beschrieben.
 
-## Board-Namen { #board-names }
+## Boardnamen { #board-names }
 
-Die Board-Namen des SiFli-SDK sind SDK-spezifisch und stimmen möglicherweise nicht mit Zephyr-Board-Namen, Arduino-FQBNs oder Marketing-Board-Namen überein. Übernehmen Sie den Namen stets aus der Liste der vom SDK unterstützten Boards oder aus der Dokumentation des Beispiels.
+Die Boardnamen des SiFli-SDK sind SDK-spezifisch und stimmen möglicherweise nicht mit Zephyr-Boardnamen, Arduino-FQBNs oder Marketing-Boardnamen überein. Übernehmen Sie den Namen stets aus der Liste der vom SDK unterstützten Boards oder aus der Dokumentation des Beispiels.
 
 Für SF32LB52 DevKit LCD-Boards lautet ein in Einstiegsbeispielen häufig verwendeter SDK-Boardname:
 
@@ -97,7 +97,7 @@ Beantworten Sie die folgenden Fragen, bevor Sie SiFli-SDK für einen Produkt-Bra
 - [Board-Konfiguration](board-configuration.md)
 - [Komponenten und `sf-pkg`](components.md)
 - [Beispiele](../../examples/index.md) — das am besten passende, nachweislich funktionierende Beispiel wählen, bevor ein Subsystem angepasst wird.
-- [CodeKit](../../tools/codekit.md) — nutzen Sie den VS-Code-Ablauf bei Bedarf und halten Sie SDK-Board-Namen und Build-Protokoll im gesamten Projekt konsistent.
+- [CodeKit](../../tools/codekit.md) — nutzen Sie den VS-Code-Ablauf bei Bedarf und halten Sie SDK-Boardnamen und Build-Protokoll im gesamten Projekt konsistent.
 - [SDK-Anwendungshinweise](sdk-application-notes.md)
 - [Partitionstabellen](../../firmware-topics/partition-tables.md)
 - [Fehlersuche und Diagnose](debugging-diagnostics.md)

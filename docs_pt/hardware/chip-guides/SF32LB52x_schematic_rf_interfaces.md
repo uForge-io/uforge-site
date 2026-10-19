@@ -205,7 +205,7 @@ O SF32LB52x oferece uma interface I2C para o controlador de toque, com entrada d
 - [ ] A interface, profundidade de cor, resolução e largura de banda atendem ao painel escolhido.
 - [ ] Reset, TE, PWM do backlight, I2C de toque e interrupção de toque foram atribuídos e documentados.
 - [ ] A alimentação e o sequenciamento do display são compatíveis com standby e despertar.
-- [ ] O plano de inicialização cobre reset, leitura de ID/dados do painel quando disponível, backlight, interrupção de toque e primeira imagem.
+- [ ] O plano de bring-up cobre reset, leitura de ID/dados do painel quando disponível, backlight, interrupção de toque e primeira imagem.
 
 #### 5.5.2. Interface de áudio { #552-audio-interface }
 
@@ -263,7 +263,7 @@ Os circuitos de referência dos microfones filtram MIC_BIAS com um resistor em s
 - [ ] O posicionamento dos componentes de MIC_BIAS, ADCP, DACP e DACN foi revisado com base nos exemplos de layout.
 - [ ] DACP/DACN estão roteados como um par diferencial curto e blindado.
 - [ ] Os capacitores de filtro de áudio estão próximos dos pinos, com conexões de terra de baixo ruído.
-- [ ] O plano de inicialização cobre a polarização do microfone, o piso de ruído do ADC, a saída DAC, a habilitação do PA e o ruído audível.
+- [ ] O plano de bring-up cobre a polarização do microfone, o piso de ruído do ADC, a saída DAC, a habilitação do PA e o ruído audível.
 
 !!! important "Complete os caminhos do microfone e do DAC"
     A fonte conecta MEMS_MIC_ADC_IN e ECM_MIC_ADC_IN a ADCP. Inclua em série o capacitor de bloqueio de DC de pelo menos 2,2 uF exigido acima; o capacitor de 0,01 uF ligado ao terra nos circuitos de microfone não o substitui. Posicione o filtro passa-baixas diferencial no quadro tracejado da Figura 5.5-3 perto do MCU, mantendo a capacitância das trilhas de saída do DAC abaixo de 10 pF e o comprimento abaixo de 2 cm.
@@ -310,7 +310,7 @@ Os sinais A e B do encoder se conectam a PA35 e PA36 por resistores de 0 Ω. Cad
 - [ ] O nível padrão do botão de alimentação/reset por pressão longa está correto.
 - [ ] O comportamento de despertar foi verificado nos estados de baixo consumo pretendidos.
 - [ ] Os requisitos de proteção ESD e debounce mecânico foram revisados.
-- [ ] O plano de inicialização inclui pressão curta, pressão longa, despertar e reset.
+- [ ] O plano de bring-up inclui pressão curta, pressão longa, despertar e reset.
 
 #### 5.5.4. Motor de vibração { #554-vibration-motor }
 
@@ -340,4 +340,4 @@ Os dois circuitos de motor usam PA20 para controlar um MOSFET de lado baixo, com
 - [ ] O driver do motor, a proteção contra flyback/ESD e a capacidade de corrente da alimentação foram revisados.
 - [ ] A alimentação do motor fica desligada por padrão em standby e no modo de envio.
 - [ ] A atribuição do pino PWM não conflita com display, armazenamento ou depuração.
-- [ ] O plano de inicialização cobre a varredura do duty cycle PWM, a corrente de partida, o ruído audível e as fugas em standby.
+- [ ] O plano de bring-up cobre a varredura do duty cycle PWM, a corrente de partida, o ruído audível e as fugas em standby.

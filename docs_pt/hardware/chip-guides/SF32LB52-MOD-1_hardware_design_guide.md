@@ -12,7 +12,7 @@ tags:
 
 ## 1. Visão geral { #1-overview }
 
-O **SF32LB52-MOD-1** é um módulo Bluetooth certificado, de uso geral e baixo consumo, baseado no chip SF32LB525UC6 da SiFli (Arm Cortex-M33 STAR-MC1 de núcleo duplo, até 240 MHz). Ele integra um cristal de 48 MHz e aceita, como opção, um cristal de 32,768 kHz e uma pastilha de memória OPI-PSRAM de 64 Mb integrada ao encapsulamento. O módulo tem 68 pinos e mede 27,9 × 18,0 × 3,1 mm.
+O **SF32LB52-MOD-1** é um módulo Bluetooth certificado, de uso geral e baixo consumo, baseado no chip SF32LB525UC6 da SiFli (Arm Cortex-M33 STAR-MC1 de núcleo duplo, até 240 MHz). Ele integra um cristal de 48 MHz e aceita, como opção, um cristal de 32,768 kHz e um die de memória OPI-PSRAM de 64 Mb integrado ao encapsulamento. O módulo tem 68 pinos e mede 27,9 × 18,0 × 3,1 mm.
 
 Este guia trata da integração de hardware no nível do módulo: definição de pinos, interfaces de periféricos, características elétricas, requisitos de alimentação, esquemáticos de referência, checklist do esquemático, dimensões mecânicas e footprint da PCB, além dos requisitos de manuseio do produto. O conteúdo baseia-se no datasheet da SiFli **DS5203-SF32LB52-MOD-1 V0.3**.
 
@@ -58,7 +58,7 @@ Para conhecer em mais detalhe a arquitetura do chip (núcleos, gráficos, subsis
 
 ## 3. Diagrama de blocos funcionais { #3-functional-block-diagram }
 
-O módulo integra o chip SF32LB525UC6, um cristal de 48 MHz, um cristal opcional de 32,768 kHz e, nesta SKU, uma pastilha de memória OPI-PSRAM de 64 Mb no encapsulamento, além da rede de casamento de RF e da linha de alimentação da antena.
+O módulo integra o chip SF32LB525UC6, um cristal de 48 MHz, um cristal opcional de 32,768 kHz e, nesta SKU, um die de memória OPI-PSRAM de 64 Mb no encapsulamento, além da rede de casamento de RF e do ponto de alimentação da antena.
 
 !!! info "Figura 3-1: diagrama de blocos funcionais"
     Consulte a Figura 2-1 do datasheet oficial. O diagrama não é reproduzido neste guia.
@@ -82,7 +82,7 @@ A tabela a seguir descreve os 68 pinos do módulo.
 
 | Nome | Nº | Tipo | MUX padrão | I/O padrão | Função |
 | :--- | :-: | :-: | :--- | :-: | :--- |
-| GND | 1 | P | Ground | P | Terra |
+| GND | 1 | P | Ground | P | GND |
 | PA44 | 2 | I/O/T | GPIO_A44 | O | GPIO_A44, PA44_I2C_UART, PA44_TIM, #WKUP_PIN20 |
 | PA43 | 3 | I/O/T | GPIO_A43 | O | GPIO_A43, PA43_I2C_UART, PA43_TIM, LCDC1_JDI_G2, LCDC1_8080_DIO7, #WKUP_PIN19 |
 | PA42 | 4 | I/O/T | GPIO_A42 | O | GPIO_A42, PA42_I2C_UART, PA42_TIM, LCDC1_JDI_R2, LCDC1_8080_DIO6, #WKUP_PIN18 |
@@ -107,7 +107,7 @@ A tabela a seguir descreve os 68 pinos do módulo.
 | PA29 | 23 | I/O/T | GPIO_A29 | O | GPIO_A29, SPI1_CS, I2S1_BCK, PA29_I2C_UART, PA29_TIM, #GPADC_CH2 |
 | PA30 | 24 | I/O/T | GPIO_A30 | O | GPIO_A30, I2S1_LRCK, PA30_I2C_UART, PA30_TIM, #GPADC_CH3 |
 | PA31 | 25 | I/O/T | GPIO_A31 | I | GPIO_A31, PA31_I2C_UART, PA31_TIM, #GPADC_CH4 |
-| GND | 26 | P | Ground | P | Terra |
+| GND | 26 | P | Ground | P | GND |
 | VSYS | 27 | P | VSYS | P | Entrada principal de alimentação. Faixa com bateria Li-ion: 3,2–4,7 V; com DCDC/LDO (sem Li-ion): 3,7–4,7 V, com 3,8 V recomendado |
 | PA20 | 28 | I/O/T | GPIO_A20 | I | GPIO_A20, PA20_I2C_UART, PA20_TIM |
 | PA19 | 29 | I/O/T | GPIO_A19 | O | GPIO_A19, SWCLK, PA19_I2C_UART, PA19_TIM |
@@ -116,7 +116,7 @@ A tabela a seguir descreve os 68 pinos do módulo.
 | PA10 | 32 | I/O/T | GPIO_A10 | O | GPIO_A10, PA10_I2C_UART, PA10_TIM |
 | AU_DAC1P_OUT | 33 | AO | AU_DAC1P_OUT | AO | Saída diferencial positiva do DAC de áudio |
 | AU_DAC1N_OUT | 34 | AO | AU_DAC1N_OUT | AO | Saída diferencial negativa do DAC de áudio |
-| GND | 35 | P | Ground | P | Terra |
+| GND | 35 | P | Ground | P | GND |
 | MIC_BIAS | 36 | P | MIC_BIAS | P | Tensão de polarização do microfone |
 | MIC_ADC_IN | 37 | AI | MIC_ADC_IN | AI | Entrada de áudio analógica |
 | PA09 | 38 | I/O/T | GPIO_A09 | I/O | GPIO_A09, PA09_I2C_UART, PA09_TIM |
@@ -129,7 +129,7 @@ A tabela a seguir descreve os 68 pinos do módulo.
 | PA02 | 45 | I/O/T | GPIO_A02 | O | GPIO_A02, LCDC1_SPI_TE, I2S1_MCLK, PA02_I2C_UART, PA02_TIM, LCDC1_JDI_B2, LCDC1_8080_TE |
 | PA01 | 46 | I/O/T | GPIO_A01 | O | GPIO_A01, PA01_I2C_UART, PA01_TIM |
 | PA00 | 47 | I/O/T | GPIO_A00 | O | GPIO_A00, LCDC1_SPI_RSTB, PA00_I2C_UART, PA00_TIM, LCDC1_8080_RSTB |
-| GND | 48–60 | P | Ground | P | Terra (13 pinos) |
+| GND | 48–60 | P | Ground | P | GND (13 pinos) |
 | VBATS | 61 | P | VBAT | P | Entrada de detecção da tensão da bateria |
 | NC | 62 | — | NC | — | Não conectado |
 | PA15 | 63 | I/O/T | GPIO_A15 | I/O | GPIO_A15, MPI2_DIO0, SD1_CMD, PA15_I2C_UART, PA15_TIM |
@@ -160,7 +160,7 @@ Na figura de descrição física dos pinos do datasheet, os pinos são agrupados
 Qualquer pino marcado como `PAxx_I2C_UART` na tabela acima pode ser configurado como I2C ou UART. O datasheet informa um máximo configurável de 4 interfaces I2C e 3 UART.
 
 !!! important "Divergência na contagem de periféricos do datasheet"
-    Mais adiante, o mesmo datasheet enumera I2C1–I2C7 e UART1–UART6, em conflito com os máximos informados. Confirme com a SiFli quantas interfaces estão realmente disponíveis na configuração específica do módulo/SoC; não conclua que todos os controladores listados podem ser usados simultaneamente.
+    Mais adiante, o mesmo datasheet enumera I2C1–I2C7 e UART1–UART6, em conflito com os máximos informados de 4 interfaces I2C e 3 UART. Confirme com a SiFli quantas interfaces estão realmente disponíveis na configuração específica do módulo/SoC; não conclua que todos os controladores listados podem ser usados simultaneamente.
 
 **UART** — Operação full-duplex, taxa de transmissão de até 6 Mbps, formato de dados configurável, controle de fluxo por hardware (CTS/RTS) e transmissão e recepção de múltiplos pacotes via DMA. UART1–3 ficam em HPSYS; UART4–6, em LPSYS.
 
@@ -335,7 +335,7 @@ Use esses materiais como ponto de partida para o esquemático do produto e adapt
 | 9 | A interface SDIO compartilha os pinos de I/O com a MPI2 e não pode ser usada simultaneamente com ela. |
 | 10 | Os pinos marcados como `#GPADC_CHx` na tabela de pinos aceitam entrada analógica na faixa de 0–3,3 V. |
 | 11 | Os pinos marcados como `PAxx_TIM` na tabela de pinos aceitam saída PWM. |
-| 12 | PA34 permite acionar o reset mantendo o nível alto por 10 s; inclua um resistor pull-down de 10 kΩ no projeto. |
+| 12 | PA34 oferece reset por pressão longa de 10 s, ativo em nível alto; inclua um resistor pull-down de 10 kΩ no projeto. |
 | 13 | Reserve componentes de proteção ESD para as interfaces da bateria e do painel de toque (TP), além de outras interfaces expostas externamente quando necessário. |
 | 14 | Quando PA18/PA19 forem multiplexados como DBG_UART para gravação e depuração, recomenda-se instalar um resistor de 100 Ω em série com cada pino. |
 

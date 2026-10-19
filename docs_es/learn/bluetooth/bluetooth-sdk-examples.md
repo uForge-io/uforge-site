@@ -32,7 +32,7 @@ Esta página clasifica por tarea de ingeniería los ejemplos de [Bluetooth clás
 
 </div>
 
-## Use el ejemplo como referencia de validación { #bring-up-an-example-as-evidence }
+## Ponga en marcha un ejemplo como evidencia { #bring-up-an-example-as-evidence }
 
 Antes de cambiar el proyecto, registre la versión exacta del SDK, el nombre de la placa, la configuración, el dispositivo par o la aplicación, los ajustes de radio y los mensajes de registro esperados. Luego siga esta secuencia:
 
@@ -42,7 +42,7 @@ Antes de cambiar el proyecto, registre la versión exacta del SDK, el nombre de 
 4. Añada de uno en uno los servicios, recorridos de usuario, rutas de audio o políticas de consumo específicos del producto.
 5. Vuelva a probar con la carga combinada del producto, incluidos la pantalla, los sensores, el almacenamiento, el audio y las transiciones a estados de bajo consumo cuando corresponda.
 
-Un ejemplo funcional solo demuestra el flujo que cubre. No acredita que la política de seguridad, el alcance de radio, la latencia, el consumo o la interoperabilidad del producto estén listos para su lanzamiento.
+Un ejemplo funcional solo demuestra el flujo que cubre. No acredita que la política de seguridad, el alcance de radio, la latencia, el consumo o la interoperabilidad del producto estén listos para su liberación.
 
 ## Ejemplos BLE { #ble-examples }
 

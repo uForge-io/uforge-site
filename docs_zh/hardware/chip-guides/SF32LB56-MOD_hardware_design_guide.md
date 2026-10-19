@@ -100,15 +100,15 @@ SF32LB56-MOD 基于 SF32LB56xV 系列双核 MCU 平台：HCPU 负责应用和图
 | VDD_1V8 | 4.7 μF 电容 | 靠近模组电源管脚。 |
 | VDDIO | 4.7 μF 电容 | 靠近模组电源管脚。 |
 | PB32/PWRKEY | 10 kΩ 下拉电阻 | 用于高有效长按复位。 |
-| LCD RGB 信号 | 33–100Ω 串联电阻 | 串在 RGB 信号线上。 |
-| PA16/PA17 调试 UART | 100Ω 串联电阻 | 用于复用的程序下载和调试接口。 |
+| LCD RGB 信号 | 33–100 Ω 串联电阻 | 串在 RGB 信号线上。 |
+| PA16/PA17 调试 UART | 100 Ω 串联电阻 | 用于复用的程序下载和调试接口。 |
 | TP 等外部接口 | ESD 器件 | 暴露接口需预留 ESD 防护。 |
 
 </div>
 
 ### 3.3 电源树 { #33-power-tree }
 
-VDD_3V3 为 MCU 的 PVDD、AVDD33_ANA、AVDD33_AUD、AVDD_BRF、VDDIOA2 以及模组内部 Flash 供电，官方建议使用 LDO。VDD_1V8 为 MCU 合封存储器供电。VDDIO 为 MCU 的 VDDIOA/VDDIOB I/O 端口供电。
+VDD_3V3 为 MCU 的 PVDD、AVDD33_ANA、AVDD33_AUD、AVDD_BRF、VDDIOA2 以及模组内部 Flash 供电，思澈科技（SiFli）建议该电源轨使用 LDO。VDD_1V8 为 MCU 合封存储器供电。VDDIO 为 MCU 的 VDDIOA/VDDIOB I/O 端口供电。
 
 !!! info "图 3.3-1：SF32LB56-MOD 模组供电示意图"
     见 DS5602 V0.3 图 7-1。
@@ -146,7 +146,7 @@ VDD_3V3 为 MCU 的 PVDD、AVDD33_ANA、AVDD33_AUD、AVDD_BRF、VDDIOA2 以及�
 | 里程碑 | 需要确认的证据 |
 | :--- | :--- |
 | 原理图冻结 | 型号已选定，管脚冲突已清除，电源检查完成，核对表已完成。 |
-| PCB 冻结 | 天线净空、电源去耦、高速接口和生产测试点已检查。 |
+| PCB 冻结 | 天线净空已检查，电源去耦已布置，高速接口已评审。 |
 | EVT 启动调试 | 电源、启动模式、UART/SWD、Flash、显示、USB、音频和 RF 冒烟测试通过。 |
 | DVT | RF 距离、电流、温升、睡眠/唤醒、ESD 策略和外壳影响验证完成。 |
 | 量产发布 | 烧录、测试点、检验规则、MSL/回流焊处理和版本记录完成。 |
@@ -181,7 +181,7 @@ BOOT_MODE 控制启动行为：高电平为下载模式，低电平为用户模�
 
 #### 5.2.1 时钟 { #521-clock }
 
-模组平台使用 48 MHz 晶振，并支持 1 MHz/48 MHz 低功耗 RC、10 kHz 超低功耗 RC，以及可选 32.768 kHz 晶振。时钟相关布局和接地应参考模组参考设计；生产过程中应避免超声波焊接或超声波清洗对内部晶振造成机械应力。
+模组平台使用 48 MHz 晶振，并支持 1 MHz/48 MHz 低功耗 RC、10 kHz 超低功耗 RC，以及可选 32.768 kHz 晶振。时钟相关布局和接地应参考模组参考设计；生产过程中应避免超声波焊接或超声波清洗对内部晶体造成机械应力。
 
 #### 5.2.2 RF { #522-rf }
 
@@ -194,17 +194,17 @@ BOOT_MODE 控制启动行为：高电平为下载模式，低电平为用户模�
 | 蓝牙频率范围 | 2402–2480 MHz |
 | BLE 最大发射功率 | 19 dBm |
 | BLE 发射功率控制范围 | -20 至 19 dBm |
-| BLE 1 Mbps 灵敏度 | dirty off 条件下为 -100 dBm；dirty on 条件下为 -99.3 dBm |
-| BLE 2 Mbps 灵敏度 | 未施加干扰（dirty off）时 -97 dBm；施加干扰（dirty on）时 -96.5 dBm |
+| BLE 1 Mbps 灵敏度 | dirty off 时 -100 dBm；dirty on 时 -99.3 dBm |
+| BLE 2 Mbps 灵敏度 | dirty off 时 -97 dBm；dirty on 时 -96.5 dBm |
 | BR 最大发射功率 | 19 dBm |
 | EDR 最大发射功率 | 13 dBm |
-| BR 灵敏度 | 未施加干扰（dirty off）时 -96.3 dBm；施加干扰（dirty on）时 -94 dBm |
-| EDR2 灵敏度 | 未施加干扰（dirty off）时 -95.5 dBm；施加干扰（dirty on）时 -95 dBm |
-| EDR3 灵敏度 | 未施加干扰（dirty off）时 -88.5 dBm；施加干扰（dirty on）时 -87 dBm |
+| BR 灵敏度 | dirty off 时 -96.3 dBm；dirty on 时 -94 dBm |
+| EDR2 灵敏度 | dirty off 时 -95.5 dBm；dirty on 时 -95 dBm |
+| EDR3 灵敏度 | dirty off 时 -88.5 dBm；dirty on 时 -87 dBm |
 
 </div>
 
-模组支持 PCB 板载天线，也支持通过 IPEX 兼容连接器连接外部天线。整机必须在最终外壳中验证通信距离和 RF 性能。
+模组支持 PCB 板载天线，也支持通过 IPEX 兼容连接器连接外部天线。应在最终外壳中验证通信距离和 RF 性能，而不能只在开放的测试台上验证。
 
 ### 5.3 用户接口 { #53-user-interfaces }
 
@@ -212,7 +212,7 @@ BOOT_MODE 控制启动行为：高电平为下载模式，低电平为用户模�
 
 LCD 控制器支持 DBI 串行 SPI、Dual-SPI、Quad-SPI、8080、DPI/RGB 和 JDI。官方推荐管脚分配图给出了 LCD_DPI_24、LCD_DPI_8、LCD_QSPI、LCD_8080、E-Paper 和 Raspberry Pi 风格接口的管脚映射。
 
-LCD RGB 信号线需要串 33–100Ω 电阻。RGB、SPI 显示和触摸接口走线应短而一致，TP 等外部接口需要预留 ESD 防护。
+LCD RGB 信号线需要串 33–100 Ω 电阻。RGB、SPI 显示和触摸接口走线应短而一致，TP 等外部接口需要预留 ESD 防护。
 
 !!! info "图 5.3-1：开发板推荐管脚分配图"
     见 DS5602 V0.3 图 7-6。
@@ -225,7 +225,7 @@ LCD RGB 信号线需要串 33–100Ω 电阻。RGB、SPI 显示和触摸接口�
 
 #### 5.3.3 按键 { #533-buttons }
 
-PB32 是 PWRKEY 输入，支持高有效 10 s 长按复位。设计中必须增加 10 kΩ 下拉电阻，并确保运输、深睡和上电过程中该信号不会悬空。
+PB32 是 PWRKEY 输入，支持高有效 10 s 长按复位。设计中必须增加 10 kΩ 下拉电阻，并确保运输、深度睡眠（Deep Sleep）和上电过程中该信号不会悬空。
 
 #### 5.3.4 马达和 PWM 负载 { #534-motor-and-pwm-loads }
 
@@ -239,13 +239,13 @@ PB32 是 PWRKEY 输入，支持高有效 10 s 长按复位。设计中必须增�
 
 #### 5.4.2 传感器 { #542-sensors }
 
-GPADC 支持 12-bit 转换、最高 4MS/s、0–3.3 V 单端输入、-2.1 V 至 +2.1 V 差分输入、软件/硬件触发和 DMA。标注 GPADC_CHx 的管脚支持模拟输入，走线应尽量短并增加必要滤波，同时远离 LCD 和 RF 开关噪声。
+GPADC 支持 12-bit 转换、最高 4 MS/s、0–3.3 V 单端输入、-2.1 V 至 +2.1 V 差分输入、软件/硬件触发和 DMA。标注 GPADC_CHx 的管脚支持模拟输入，走线应尽量短并增加必要滤波，同时远离 LCD 和 RF 开关噪声。
 
 #### 5.4.3 UART/I2C { #543-uarti2c }
 
-UART 支持全双工，最高 6 Mbps。I2C 支持 100 kbps、400 kbps、1 Mbps 和 3.4 Mbps 模式。许多 GPIO 可复用为 `PAxx_I2C_UART` 或 `PBxx_I2C_UART`，原理图冻结前必须完成最终复用表。
+UART 支持全双工，最高 6 Mbps。I2C 支持 100 kbps、400 kbps、1 Mbps 和 3.4 Mbps 模式。许多 GPIO 可复用为 `PAxx_I2C_UART` 或 `PBxx_I2C_UART`，请在原理图冻结前确认最终复用方案。
 
-管脚 6 UART4_TXD 和管脚 7 UART4_RXD 是默认打印串口，并支持程序下载和调试。PA16、PA17 可复用为 DBG_UART，用作程序下载和调试时需要串 100Ω 电阻。
+管脚 6 UART4_TXD 和管脚 7 UART4_RXD 是默认打印串口，并支持程序下载和调试。PA16、PA17 可复用为 DBG_UART，用作程序下载和调试时需要串 100 Ω 电阻。
 
 #### 5.4.4 USB、SPI、SDIO 和 I2S { #544-usb-spi-sdio-and-i2s }
 
@@ -255,7 +255,7 @@ USB2.0 FS 支持 Host/Device 并集成 PHY。SPI 支持 SSP/SPI 与 Microwire，
 
 #### 5.5.1 调试 { #551-debug }
 
-管脚 79 SWDIO 和管脚 80 SWCLK 是 SWD 调试/下载接口。早期样机和量产夹具都应保留 SWD 访问能力。除非已有经过验证的替代烧录路径，也应保留默认 UART4 下载/调试通道。
+管脚 79 SWDIO 和管脚 80 SWCLK 是 SWD 调试/下载接口。早期样机和量产夹具都应保留 SWD 访问能力。除非产品已有其他经认可的烧录路径，也应保留默认 UART4 下载/调试通道。
 
 #### 5.5.2 量产 { #552-production }
 
@@ -275,9 +275,9 @@ USB2.0 FS 支持 Host/Device 并集成 PHY。SPI 支持 SSP/SPI 与 Microwire，
 
 ### 6.2 天线摆放 { #62-antenna-placement }
 
-如果使用 PCB 板载天线，必须预留天线区域，区域内不得放置器件或金属。优先让模组天线区域伸出底板板边，馈点靠近底板板边。
+如果使用 PCB 板载天线，应预留天线区域，区域内不放置器件或金属。优先让模组天线区域伸出底板板边，馈点靠近底板板边。
 
-如果天线不能伸出板边，应提供至少 15 mm 净空区域。净空区禁止铺铜、走线和摆放器件，PCB 天线下方的底板区域应尽量切除，以降低底板材料对天线的影响。
+如果天线不能伸出板边，应提供至少 15 mm 净空区域。净空区禁止铺铜、走线和摆放器件，PCB 天线下方的底板区域应尽量切除。
 
 !!! info "图 6.2-1：模组推荐摆放示意图"
     见 DS5602 V0.3 图 8-4。
@@ -301,9 +301,9 @@ USB2.0 FS 支持 Host/Device 并集成 PHY。SPI 支持 SSP/SPI 与 Microwire，
 | 类别 | 检查项 |
 | :--- | :--- |
 | 电源 | VDD_3V3、VDD_1V8、VDDIO 的 4.7 μF 电容靠近模组管脚。 |
-| 地 | 模组地管脚接入低阻抗地系统，高速和 RF 附近有足够地过孔。 |
+| 地 | 模组地管脚接入低阻抗地系统，高速和 RF 附近有缝合地过孔。 |
 | 天线 | 天线禁布区无铜、无走线、无器件、无螺丝、无屏蔽罩和外壳金属侵入。 |
-| 显示 | LCD RGB/SPI 走线短且一致，并加入所需串联电阻。 |
+| 显示 | LCD RGB/SPI 走线短，并注意阻抗控制，同时加入所需串联电阻。 |
 | USB | USB DP/DM 按差分对布线，ESD 靠近连接器。 |
 | 模拟音频 | MIC_BIAS、MIC_ADC_IN 和 DAC 输出远离开关电源、LCD 时钟和 RF 馈线区域。 |
 | 调试 | SWD 和 UART 下载/调试接口在样机和量产夹具上可访问。 |
@@ -358,7 +358,7 @@ USB2.0 FS 支持 Host/Device 并集成 PHY。SPI 支持 SSP/SPI 与 Microwire，
 | RPU | 内部上拉电阻 | 7 | 10 | 20 | kΩ |
 | RPD | 内部下拉电阻 | 7 | 10 | 20 | kΩ |
 | VIH_nRST | 复位释放电压 | 0.7×VDD | - | VDD | V |
-| VIL_nRST | 复位电压 | VSS | - | 0.3×VDD | V |
+| VIL_nRST | 复位触发电压 | VSS | - | 0.3×VDD | V |
 
 </div>
 
@@ -420,8 +420,8 @@ VDD 为 I/O 电源。VOH 和 VOL 的测量条件为高阻负载。
 | 9 | 标注 GPADC_CHx 的管脚支持 0–3.3 V 模拟输入。 |
 | 10 | 标注 GPTIM 的管脚支持 PWM 输出。 |
 | 11 | TP 等接口需要 ESD 防护器件。 |
-| 12 | LCD RGB 信号线需要串 33–100Ω 电阻。 |
-| 13 | PA16、PA17 复用为 DBG_UART 时是程序下载和调试接口，需要串 100Ω 电阻。 |
+| 12 | LCD RGB 信号线需要串 33–100 Ω 电阻。 |
+| 13 | PA16、PA17 复用为 DBG_UART 时是程序下载和调试接口，需要串 100 Ω 电阻。 |
 
 </div>
 

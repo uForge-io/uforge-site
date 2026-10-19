@@ -33,7 +33,7 @@ SF32製品の各ページでは、製品アイデアを実装可能な設計へ�
 
 電源構成、パッケージ、ディスプレイ、オーディオ、メモリー、GPIO、接続機能、専用ハードウェアなどの要件から候補を選ぶ場合は、[SF32製品セレクター](product-selector.md) をご利用ください。このツールでできるのは候補の絞り込みまでです。最終的な型番、パッケージ、電気的仕様、基板上の配線は、該当するSiFliの資料で必ず確認してください。
 
-採用する方向が決まったら、[リファレンスデザイン](../hardware/reference-designs/reference-designs.md) と [量産に向けた設計](../hardware/design-for-production.md) に進んでください。デバイス選定から、リファレンス基板、設計ガイド、CADライブラリ、BOMの検討、設計レビュー用チェックリスト、初期動作確認の記録まで確認できます。
+採用する方向が決まったら、[リファレンスデザイン](../hardware/reference-designs/reference-designs.md) と [量産に向けた設計](../hardware/design-for-production.md) に進んでください。デバイス選定から、リファレンス基板、設計ガイド、CADライブラリ、BOMの検討、設計レビュー用チェックリスト、立ち上げの記録まで確認できます。
 
 ## ハードウェアから探す { #browse-hardware-directly }
 

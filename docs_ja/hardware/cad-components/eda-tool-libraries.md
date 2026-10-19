@@ -38,17 +38,17 @@ SiFliは、SF32チップおよびモジュール向けの回路図シンボル�
 | JLCEDA / LCEDA Pro | `ProPrj_sifli-iclib_2026-04-20.epro2` | LCEDA Proプロジェクトアーカイブ | 回路図シンボルとPCBフットプリント | 直接ダウンロード |
 | PADS | `PADS-SIFLI-IC.ZIP` | Mentor/Siemens PADSライブラリアーカイブ | 回路図シンボルとPCB Decal | 直接ダウンロード |
 | OrCAD | `OrCAD-SIFLI-IC.OLB` | Cadence OrCAD Captureライブラリ | 回路図シンボル | 直接ダウンロード |
-| KiCad | リリースZIPまたはパッケージメタデータ（`metadata.json`） | KiCadのシンボル、フットプリント、3Dモデルライブラリ | 回路図シンボル、PCBフットプリント、3Dモデル | [GitHubリポジトリ](https://github.com/OpenSiFli/kicad-libraries)、バージョン付きリリース |
+| KiCad | リリースZIPまたはパッケージメタデータ（`metadata.json`） | KiCadのシンボル、フットプリント、3Dモデルライブラリ | 回路図シンボル、PCBフットプリント、3Dモデル | [GitHubリポジトリー](https://github.com/OpenSiFli/kicad-libraries)、バージョン付きリリース |
 
 </div>
 
 JLCEDA / LCEDA ProとPADSはアーカイブ、OrCADは単独の`.OLB`ライブラリファイルとして配布されています。Wikiのダウンロード一覧には部品ごとの対応表がないため、対象のEDAツールに読み込み、選定した部品が含まれていることを確認してください。
 
-リンク先のKiCadリポジトリでは、ソース、バージョン付きリリース、対応デバイス表を公開しています。対応状況を確認しやすい一方、すべてのSF32バリアントが含まれることを保証するものではありません。
+リンク先のKiCadリポジトリーでは、ソース、バージョン付きリリース、対応デバイス表を公開しています。対応状況を確認しやすい一方、すべてのSF32バリアントが含まれることを保証するものではありません。
 
 ## KiCadライブラリの詳細 { #kicad-library-detail }
 
-[OpenSiFli/kicad-libraries](https://github.com/OpenSiFli/kicad-libraries) リポジトリは、SiFli公式のKiCad用シンボル、フットプリント、3DモデルライブラリをCC-BY-SA-4.0で提供しています。このレビューでは2026-10-05に[リリース`1.0.0`](https://github.com/OpenSiFli/kicad-libraries/releases/tag/1.0.0)を確認しました。新規設計の前に、より新しいリリースがないか確認してください。
+[OpenSiFli/kicad-libraries](https://github.com/OpenSiFli/kicad-libraries) リポジトリーは、SiFli公式のKiCad用シンボル、フットプリント、3DモデルライブラリをCC-BY-SA-4.0で提供しています。このレビューでは2026-10-05に[リリース`1.0.0`](https://github.com/OpenSiFli/kicad-libraries/releases/tag/1.0.0)を確認しました。新規設計の前に、より新しいリリースがないか確認してください。
 
 <div align="center"><em>KiCadライブラリの対応状況</em></div>
 
@@ -62,7 +62,7 @@ JLCEDA / LCEDA ProとPADSはアーカイブ、OrCADは単独の`.OLB`ライブ�
 
 </div>
 
-この表は2026-10-05に確認したリポジトリのREADMEに基づくもので、各リリースのピンをすべて検証した結果ではありません。ワイルドカードで示されたチップ群から、すべての発注品番への対応を判断することはできません。実際にインストールするファイルで、選定したシンボル、フットプリント、パッケージを確認してください。
+この表は2026-10-05に確認したリポジトリーのREADMEに基づくもので、各リリースのピンをすべて検証した結果ではありません。ワイルドカードで示されたチップ群から、すべての発注品番への対応を判断することはできません。実際にインストールするファイルで、選定したシンボル、フットプリント、パッケージを確認してください。
 
 !!! note "上流の部品番号表記について"
     OpenSiFliのKiCadライブラリREADMEでは、チップの行が`SF32LB52XUx`と`SF32LB52xUx`と記載されています。SiFliの命名規則では、大文字`X`は英字の外部電源タイプ、小文字`x`は数字のバッテリー駆動タイプを表すワイルドカードです。このページでは、それぞれを μForgeの他の資料で使う明示的なグループSF32LB52B/D/E/G/JおよびSF32LB520/3/5/7に展開しています。

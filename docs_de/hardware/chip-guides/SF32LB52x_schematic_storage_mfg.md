@@ -21,7 +21,7 @@ tags:
 
 - Externe Boot-Speicher können SPI NOR, SPI NAND oder SD NAND sein; eMMC ist bei unterstützten Varianten mit externer geregelter Versorgung verfügbar.
 - Die Bootstrap-Pins `PA13` und `PA17` wählen das Boot-Medium.
-- Anwendungshinweise und Schaltungsentwurfsleitfaden nennen `PA21` zum Schalten der Boot-Speicherversorgung, während die offizielle Checkliste `PA11` für externen Flash bei akkubetriebenen Varianten nennt. Lassen Sie den zutreffenden Steuerpin für das konkrete Design von SiFli bestätigen. Unabhängig davon muss NOR-Flash ab 32 MB am MPI über PA21 aus- und wieder eingeschaltet werden können, damit die ROM ihn nach einem Reset oder dem Wechsel in Hibernate erkennt. Bei Varianten mit Co-Packaged Memory muss VDD_SIP in Hibernate abgeschaltet werden, um Leckströme an den Memory-I/Os zu vermeiden.
+- Anwendungshinweise und Leitfaden zum Schaltplanentwurf nennen `PA21` zum Schalten der Boot-Speicherversorgung, während die offizielle Checkliste `PA11` für externen Flash bei akkubetriebenen Varianten nennt. Lassen Sie den zutreffenden Steuerpin für das konkrete Design von SiFli bestätigen. Unabhängig davon muss NOR-Flash ab 32 MB am MPI über PA21 aus- und wieder eingeschaltet werden können, damit das ROM ihn nach einem Reset oder dem Wechsel in Hibernate erkennt. Bei Varianten mit Speicher im selben Gehäuse muss VDD_SIP in Hibernate abgeschaltet werden, um Leckströme an den Memory-I/Os zu vermeiden.
 
 **Design-Ziel**
 
@@ -120,18 +120,18 @@ Der Chip unterstützt externes SPI-NOR-Flash, SPI-NAND-Flash und SD-NAND-Flash. 
         Das ursprüngliche SiFli-Quelldokument verwendet in diesem Abschnitt die Suffixe „SF32LB52AUx6“ und „SF32LB52D/F/HUx6“. Sie weichen von der B/D/E/G/J-Modellbenennung am Anfang desselben Dokuments ab. Dieser Leitfaden unterscheidet deshalb nach dem tatsächlich im Gehäuse integrierten Speichertyp (Flash oder PSRAM). Prüfen Sie im Zweifelsfall das genaue Chipmodell und das zugehörige Datenblatt.
 
 !!! important "Überlappende Boot-Einträge bestätigen"
-    Die Anwendungshinweise nennen H/X für SD NAND, während der separate SF32LB52x-Schaltungsentwurfsleitfaden H/L angibt; der Anwendungshinweis für Varianten mit externer geregelter Versorgung nennt außerdem H/H für eMMC. Da X normalerweise einen beliebigen Logikpegel bezeichnet, überlappen die Einträge dieser Variante, und die Quellen erklären den Unterschied nicht. Leiten Sie die endgültigen Strap-Pegel nicht allein aus diesen Tabellen ab; bestätigen Sie die genaue Variante und das ROM-Verhalten mit SiFli. Die Referenzschaltungen verwenden Pull-ups mit 7,5 kΩ: in Abbildung 5.6-1 an der 3,3-V-Schiene VDD33_VOUT1, in Abbildung 5.6-2 an VDDIOA mit 3,3 V.
+    Die Anwendungshinweise nennen H/X für SD NAND, während der separate SF32LB52x-Leitfaden zum Schaltplanentwurf H/L angibt; der Anwendungshinweis für Varianten mit externer geregelter Versorgung nennt außerdem H/H für eMMC. Da X normalerweise einen beliebigen Logikpegel bezeichnet, überlappen die Einträge dieser Variante, und die Quellen erklären den Unterschied nicht. Leiten Sie die endgültigen Strap-Pegel nicht allein aus diesen Tabellen ab; bestätigen Sie die genaue Variante und das ROM-Verhalten mit SiFli. Die Referenzschaltungen verwenden Pull-ups mit 7,5 kΩ: in Abbildung 5.6-1 an der 3,3-V-Schiene VDD33_VOUT1, in Abbildung 5.6-2 an VDDIOA mit 3,3 V.
 
 ##### 5.6.1.3. Versorgungssteuerung des Boot-Speichers { #5613-boot-storage-power-control }
 
-Die höherrangigen OpenSiFli-Anwendungshinweise und der Schaltungsentwurfsleitfaden nennen `PA21` als Steuersignal für den Versorgungsschalter (High: ein, Low: aus); dieser Leitfaden verwendet `PA21` daher als quellenbasierten Entwurfswert. Das über das SiFli-Wiki verlinkte Checklisten-Arbeitsblatt nennt dagegen `PA11` für externen Flash bei batteriegespeisten Varianten. Ersetzen Sie PA21 nicht allein aufgrund dieses Arbeitsblatts durch `PA11`. Ob `PA11` ein separates Enable-Signal auf der Platine oder eine abweichende Pinzuordnung bezeichnet, bleibt offen; klären Sie das konkrete Netz und die Variante vor der Freigabe mit SiFli.
+Die höherrangigen OpenSiFli-Anwendungshinweise und der Leitfaden zum Schaltplanentwurf nennen `PA21` als Steuersignal für den Versorgungsschalter (High: ein, Low: aus); dieser Leitfaden verwendet `PA21` daher als quellenbasierten Entwurfswert. Das über das SiFli-Wiki verlinkte Checklisten-Arbeitsblatt nennt dagegen `PA11` für externen Flash bei batteriegespeisten Varianten. Ersetzen Sie PA21 nicht allein aufgrund dieses Arbeitsblatts durch `PA11`. Ob `PA11` ein separates Enable-Signal auf der Platine oder eine abweichende Pinzuordnung bezeichnet, bleibt offen; klären Sie das konkrete Netz und die Variante vor der Freigabe mit SiFli.
 
 === "SF32LB520/3/5/7 (akkubetrieben)"
 
     - Speisen Sie bei SF32LB520Ux6 mit Flash-Speicher im selben Gehäuse VDD18_VOUT aus VDD33_VOUT1 und deaktivieren Sie den internen VDD18_VOUT-LDO.
     - Verwenden Sie bei SF32LB523/5/7Ux6 mit PSRAM im selben Gehäuse den internen LDO; VDD18_VOUT kann auch extern versorgt werden.
-    - Versorgen Sie externen NOR-Flash von VDD33_VOUT1; ein zusätzlicher Versorgungsschalter ist nicht erforderlich.
-    - Versorgen Sie externen SPI-NAND- oder SD-NAND-Flash von VDD33_VOUT1 und ergänzen Sie einen Versorgungsschalter.
+    - Versorgen Sie externen NOR-Flash aus VDD33_VOUT1; ein zusätzlicher Versorgungsschalter ist nicht erforderlich.
+    - Versorgen Sie externen SPI-NAND- oder SD-NAND-Flash aus VDD33_VOUT1 und ergänzen Sie einen Versorgungsschalter.
     - Das Referenzdesign sieht an PA13 und PA17 Footprints für Pull-up-Widerstände vor. Bestücken Sie sie je nach Speichertyp; empfohlen werden 7,5 kΩ.
 
 === "52B/D/E/G/J (mit externer geregelter Versorgung)"
@@ -141,7 +141,7 @@ Die höherrangigen OpenSiFli-Anwendungshinweise und der Schaltungsentwurfsleitfa
     - Die Stromversorgung des externen Speichers ist unabhängig von VDD_SIP; ergänzen Sie daher einen separaten Versorgungsschalter.
     - Die Abwägungen zu den eMMC-Versorgungsdomänen VCC/VCCQ sind in Abschnitt 5.6.1.1 beschrieben.
     - Der Anwendungshinweis nennt **PA21** für bootbezogene Speicher-Versorgungsschalter; die Quellenabweichung für externen Flash bei akkubetriebenen Varianten ist oben beschrieben.
-    - Ein über MPI (Memory Peripheral Interface, Schnittstelle für SPI-NOR/SPI-NAND) angeschlossener NOR-Flash-Speicher mit mindestens 32 MB muss über PA21 aus- und wieder eingeschaltet werden können, damit er beim Neustart der MCU oder beim Wechsel in Hibernate den 4-Byte-Adressmodus verlässt; andernfalls erkennt die ROM den Flash nicht. NOR-Flash-Speicher mit höchstens 16 MB kann dauerhaft versorgt bleiben.
+    - Ein über MPI (Memory Peripheral Interface, Schnittstelle für SPI-NOR/SPI-NAND) angeschlossener NOR-Flash-Speicher mit mindestens 32 MB muss über PA21 aus- und wieder eingeschaltet werden können, damit er beim Neustart der MCU oder beim Wechsel in Hibernate den 4-Byte-Adressmodus verlässt; andernfalls erkennt das ROM den Flash nicht. NOR-Flash-Speicher mit höchstens 16 MB kann dauerhaft versorgt bleiben.
     - Das Referenzdesign sieht an PA13 und PA17 Footprints für Pull-up-Widerstände vor. Je nach Speichertyp bestücken; empfohlen werden 7,5 kΩ.
 
 **Häufige Fehler beim Speicherdesign**
@@ -203,11 +203,11 @@ Der SF32LB52x unterstützt die Zuordnung von UART- und I2C-Funktionen auf belieb
 **Kurzübersicht**
 
 - GPTIM-Funktionen können beliebigen PA-Pins zugeordnet werden.
-- Timerfunktionen dienen für PWM-Ausgänge, Eingangserfassung, Motorsteuerung, Hintergrundbeleuchtung und produktspezifische Zeitsteuerung.
+- Timerfunktionen werden für PWM-Ausgänge, Eingangserfassung, Motorsteuerung, Hintergrundbeleuchtung und produktspezifische Zeitsteuerung genutzt.
 
 **Design-Ziel**
 
-Legen Sie timerbezogene Pin-Funktionen früh fest. So müssen PWM-, Capture- und Taktsignale später nicht auf ungünstig geroutete oder mit Weckfunktionen kollidierende Pins gelegt werden.
+Legen Sie timerbezogene Pin-Funktionen früh fest. So müssen PWM-, Capture- und Timing-Funktionen später nicht auf ungünstig geroutete oder mit Weckfunktionen kollidierende Pins gelegt werden.
 
 Der SF32LB52x unterstützt die Zuordnung von GPTIM-Funktionen auf beliebige PA-Pins.
 
@@ -241,7 +241,7 @@ Hinweise zum Einzelschritt-Debugging und zur Log-Ausgabe über DBG_UART finden S
 | Debug-Signal | Pin | Beschreibung |
 |:---|:---|:---|
 | DBG_UART_RXD | PA18 | Debug-UART-Empfang |
-| DBG_UART_TXD | PA19 | Debug-UART-Sendung |
+| DBG_UART_TXD | PA19 | Debug-UART, Senden (TX) |
 
 </div>
 
@@ -249,7 +249,7 @@ Hinweise zum Einzelschritt-Debugging und zur Log-Ausgabe über DBG_UART finden S
 
 - [ ] `PA18`/`PA19`, Masse und die erforderliche Spannungsreferenz sind auf Testpads oder Steckverbinder-Pins zugänglich.
 - [ ] Der Debug-Zugang bleibt nach Gehäuse-, Akku- und Display-Montage verfügbar.
-- [ ] Der UART-Signalpegel beträgt 3,3 V und ist mit dem gewählten Adapter oder der Testvorrichtung kompatibel.
+- [ ] Der UART-Signalpegel ist 3,3-V-kompatibel mit dem gewählten Adapter oder der Testvorrichtung.
 - [ ] Für eine Leiterplatte, auf der die Anwendungsfirmware nicht startet, ist ein Wiederherstellungsweg dokumentiert.
 
 #### 5.7.2. Produktionsprogrammierung und Quarzkalibrierung { #572-production-flashing-and-crystal-calibration }

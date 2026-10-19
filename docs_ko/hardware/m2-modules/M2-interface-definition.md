@@ -28,7 +28,7 @@ tags:
 
 ## 커넥터 규칙 { #connector-convention }
 
-로컬 제안 워크북의 M2 시트에서는 카드 에지에서 볼 때 홀수 번호 컨택트가 위쪽 면에, 짝수 번호 컨택트가 아래쪽 면에 표시됩니다. 24–31번 위치는 컨택트 맵에서 빠져 있으며 제안된 키/노치 영역으로 표시됩니다. 이 도면은 M.2 E-key 사양에 대한 기구적 준수를 입증하지 않습니다.
+로컬 제안 워크북의 M2 시트에서는 카드 에지에서 볼 때 홀수 번호 컨택트가 위쪽 면에, 짝수 번호 컨택트가 아래쪽 면에 표시됩니다. 24–31번 위치는 컨택트 맵에서 빠져 있으며 제안된 키/노치 영역으로 표시됩니다. 이 도면만으로는 M.2 E-key 사양의 기계적 요구 사항을 충족한다고 볼 수 없습니다.
 
 <div align="center"><em>표: M2 커넥터 및 확장 요약</em></div>
 
@@ -56,13 +56,13 @@ M2는 소형 커넥티드 제품을 위한 기본 프로파일입니다. 이 할
 | 기능 | 할당된 신호 | 설계 의도 |
 | --- | --- | --- |
 | 전원 | `USB_VIN`, `VBAT/VBATS`, `3.3V`, `CHG_INT`, GND | 제안 맵의 레이블입니다. 전압, 전류, 시퀀싱 요건은 여기에 명시되어 있지 않습니다. |
-| QSPI 디스플레이 | `LCDC1_SPI_CS`, `CLK`, `DIO0–DIO3`, `CS2`, `TE`, `RSTB`, `LCD_BL_PWM` | QSPI 디스플레이 패널, 백라이트, 선택적 보조 칩 셀렉트. |
+| QSPI 디스플레이 | `LCDC1_SPI_CS`, `CLK`, `DIO0–DIO3`, `CS2`, `TE`, `RSTB`, `LCD_BL_PWM` | QSPI 디스플레이 패널, 백라이트, 선택적 보조 칩 선택 신호. |
 | 정전식 터치 | `CTP_I2C1_SDA`, `CTP_I2C1_SCL`, `CTP_INT`, `CTP_REST` | 정전식 터치 제어 및 인터럽트. |
-| Wi-Fi | `WiFi_SD2_CLK`, `CMD`, `D0–D3`, `PDN`, `INT`, `WAKE` | 4비트 SDIO Wi-Fi 컴패니언 인터페이스. |
+| Wi-Fi | `WiFi_SD2_CLK`, `CMD`, `D0–D3`, `PDN`, `INT`, `WAKE` | Wi-Fi 모듈 연결용 4비트 SDIO 인터페이스. |
 | TF 카드 | `TF_SD1_CMD`, `CLK`, `D0`, `TF_DET` | 1비트 TF 카드 인터페이스와 카드 감지. |
-| 아날로그 오디오 | `ADC_1P/N`, `ADC_2P/N`, `MIC_BIAS`, `DAC_1P/N`, `DAC_2P/N`, `AU_PA_EN` | 아날로그 입력 쌍 2개, 마이크 바이어스, DAC 쌍 2개, PA 인에이블. |
+| 아날로그 오디오 | `ADC_1P/N`, `ADC_2P/N`, `MIC_BIAS`, `DAC_1P/N`, `DAC_2P/N`, `AU_PA_EN` | 아날로그 입력 쌍 2개, 마이크 바이어스, DAC 쌍 2개, PA 활성화 신호. |
 | 디버그 및 복구 | `DBG_UART1_TXD/RXD`, `SWDIO`, `SWCLK`, `SWD_SW`, `BOOT_MODE` | 디버그 UART, SWD, 부트/복구 선택. |
-| 범용 시리얼 버스 | SPI1/SPI2, I2C2–I2C4, UART2/UART3, 범용 GPIO/버스 라인(`G0–G17`/`BUS0–BUS17`) | 모듈 핀 먹스를 통해 선택하는 제품별 버스입니다. I2C1은 터치 컨트롤러에 할당되어 있습니다. 일부 SPI2/I2C3/I2C4/UART3 위치는 대안으로 `PDM1`/`PDM2` 디지털 마이크 신호를 전달할 수 있습니다. |
+| 범용 시리얼 버스 | SPI1/SPI2, I2C2–I2C4, UART2/UART3, 범용 GPIO/버스 라인(`G0–G17`/`BUS0–BUS17`) | 모듈의 핀 멀티플렉싱 설정으로 선택하는 제품별 버스입니다. I2C1은 터치 컨트롤러에 할당되어 있습니다. 일부 SPI2/I2C3/I2C4/UART3 위치는 대안으로 `PDM1`/`PDM2` 디지털 마이크 신호를 전달할 수 있습니다. |
 | 기타 제어 | `CAN_TX/RX`, USB/USB 호스트 신호, `PWR_KEY` | 필드 버스, USB 역할 제어, 전원 키 입력. |
 
 </div>
@@ -71,7 +71,7 @@ M2는 소형 커넥티드 제품을 위한 기본 프로파일입니다. 이 할
 
 <div align="center"><em>그림: M2 신호 그룹 색상 범례</em></div>
 
-<div class="m2-visual-guide" role="img" aria-label="Color key for the M2 two-sided pinout table">
+<div class="m2-visual-guide" role="img" aria-label="M2 양면 핀 배치 표의 색상 범례">
 <div class="m2-category-band">
 <div class="m2-category m2-audio">오디오</div>
 <div class="m2-category m2-display">디스플레이</div>
@@ -155,7 +155,7 @@ I2C의 경우 I/O는 양방향 SDA/SCL 버스 라인을 설명하는 것이며, 
 | <span class="m2-chip m2-power">전원</span> | `USB_DET` | I | USB 감지 신호. |
 | <span class="m2-chip m2-power">전원</span> | `USBHOST_D+`, `USBHOST_D−` | I/O | USB 호스트 모드 데이터 쌍으로, 기본 USB 포트와는 별개입니다. |
 | <span class="m2-chip m2-power">전원</span> | `USB_OTG` | I/O | 제안 워크북의 신호 레이블입니다. 해당 시트는 이를 "현재 플랫폼에서 지원되지 않음"으로 표시합니다. 컨택트 레이블만으로 지원을 추론하지 마십시오. |
-| <span class="m2-chip m2-display">디스플레이</span> | `LCDC1_SPI_CS`, `LCDC1_SPI_CS2` | O | QSPI 디스플레이의 기본 및 선택적 보조 칩 셀렉트. |
+| <span class="m2-chip m2-display">디스플레이</span> | `LCDC1_SPI_CS`, `LCDC1_SPI_CS2` | O | QSPI 디스플레이의 기본 및 선택적 보조 칩 선택 신호. |
 | <span class="m2-chip m2-display">디스플레이</span> | `LCDC1_SPI_CLK` | O | QSPI 디스플레이 클럭. |
 | <span class="m2-chip m2-display">디스플레이</span> | `LCDC1_SPI_DIO0`–`DIO3` | I/O | QSPI 디스플레이 데이터 라인. |
 | <span class="m2-chip m2-display">디스플레이</span> | `LCDC1_SPI_TE` | I | 패널에서 오는 티어링 이펙트 동기 입력. |
@@ -164,27 +164,27 @@ I2C의 경우 I/O는 양방향 SDA/SCL 버스 라인을 설명하는 것이며, 
 | <span class="m2-chip m2-touch">터치</span> | `CTP_I2C1_SDA`, `CTP_I2C1_SCL` | I/O | 정전식 터치 컨트롤러 I²C 버스. |
 | <span class="m2-chip m2-touch">터치</span> | `CTP_INT` | I | 터치 컨트롤러 인터럽트. |
 | <span class="m2-chip m2-touch">터치</span> | `CTP_REST` | O | 터치 컨트롤러 리셋. 워크북은 이 신호를 `CTP_REST`로 표기합니다. |
-| <span class="m2-chip m2-wireless">Wi-Fi / SDIO</span> | `WiFi_SD2_CLK`, `WiFi_SD2_CMD` | O, I/O | Wi-Fi 컴패니언 SDIO 클럭과 커맨드. |
-| <span class="m2-chip m2-wireless">Wi-Fi / SDIO</span> | `WiFi_SD2_D0`, `WiFi_SD2_D1`, `WiFi_SD2_D2`, `WiFi_SD2_D3` | I/O | Wi-Fi 컴패니언 SDIO 데이터 라인(4비트). |
+| <span class="m2-chip m2-wireless">Wi-Fi / SDIO</span> | `WiFi_SD2_CLK`, `WiFi_SD2_CMD` | O, I/O | Wi-Fi 모듈 연결용 SDIO 클럭과 커맨드. |
+| <span class="m2-chip m2-wireless">Wi-Fi / SDIO</span> | `WiFi_SD2_D0`, `WiFi_SD2_D1`, `WiFi_SD2_D2`, `WiFi_SD2_D3` | I/O | Wi-Fi 모듈 연결용 4비트 SDIO 데이터 라인. |
 | <span class="m2-chip m2-wireless">Wi-Fi / SDIO</span> | `WiFi_PDN` | O | Wi-Fi 모듈 파워다운 제어. |
 | <span class="m2-chip m2-wireless">Wi-Fi / SDIO</span> | `WiFi_INT` | I | Wi-Fi 인터럽트. 65번 핀을 `SDIO1_D2`/`CAN_TX`와 공유합니다. |
 | <span class="m2-chip m2-wireless">Wi-Fi / SDIO</span> | `WiFi_WAKE` | I/O | Wi-Fi 웨이크 신호. 67번 핀을 `SDIO1_D3`/`CAN_RX`와 공유합니다. |
 | <span class="m2-chip m2-wireless">Wi-Fi / SDIO</span> | `TF_SD1_CMD`, `TF_SD1_CLK`, `TF_SD1_D0` | I/O, O, I/O | 1비트 TF 카드 SDIO 커맨드, 클럭, 데이터. |
 | <span class="m2-chip m2-wireless">Wi-Fi / SDIO</span> | `TF_DET` | I | TF 카드 삽입 감지. |
-| <span class="m2-chip m2-wireless">Wi-Fi / SDIO</span> | `SDIO1_D0–D3`, `SDIO2_D0–D3` | I/O | TF 카드(SDIO1) 버스와 Wi-Fi 컴패니언(SDIO2) 버스의 동일한 물리 라인에 대한 일반적인 컨트롤러 수준 별칭입니다. 모듈이 양쪽 모두에서 완전한 4비트 SDIO를 필요로 하는 경우가 아니면 위의 역할별 이름을 사용하십시오. |
+| <span class="m2-chip m2-wireless">Wi-Fi / SDIO</span> | `SDIO1_D0–D3`, `SDIO2_D0–D3` | I/O | TF 카드(SDIO1)와 Wi-Fi 모듈(SDIO2) 버스의 동일한 물리 라인을 가리키는 컨트롤러 관점의 일반 별칭입니다. 모듈이 양쪽 버스 모두에서 완전한 4비트 SDIO를 사용해야 하는 경우가 아니라면 위의 역할별 이름을 사용하십시오. |
 | <span class="m2-chip m2-wireless">Wi-Fi / SDIO</span> | `CAN_TX`, `CAN_RX` | O, I | 로직 레벨 CAN 트랜시버 인터페이스로, `WiFi_INT`/`WiFi_WAKE`와 함께 65번과 67번 핀에 멀티플렉싱됩니다. 캐리어에는 여전히 제품 버스에 적합한 CAN 트랜시버와 보호 회로가 필요합니다. |
 | <span class="m2-chip m2-wireless">Wi-Fi / SDIO</span> | `GPADC` | I | 이 맵에서는 Wi-Fi SDIO 컨택트 74, 72, 70, 68, 66, 64번과 60번 컨택트의 `PWR_KEY`가 ADC 대체 기능을 가집니다. |
 | <span class="m2-chip m2-audio">오디오</span> | `ADC_1P/N`, `ADC_2P/N` | I | 차동 아날로그 마이크 입력 쌍 2개. |
 | <span class="m2-chip m2-audio">오디오</span> | `MIC_BIAS` | O | 마이크 바이어스 전원. |
 | <span class="m2-chip m2-audio">오디오</span> | `DAC_1P/N`, `DAC_2P/N` | O | 차동 오디오 출력 쌍 2개. |
-| <span class="m2-chip m2-audio">오디오</span> | `AU_PA_EN` | O | 오디오 파워 앰프 인에이블. |
+| <span class="m2-chip m2-audio">오디오</span> | `AU_PA_EN` | O | 오디오 파워 앰프 활성화 신호. |
 | <span class="m2-chip m2-bus">SPI / I²C / UART</span> | `SPI1_CS#`, `SPI1_SCK`, `SPI1_MOSI`, `SPI1_MISO` | O, O, O, I | SPI1, TF 카드 경로와 멀티플렉싱됩니다. |
 | <span class="m2-chip m2-bus">SPI / I²C / UART</span> | `SPI2_CS#`, `SPI2_SCK`, `SPI2_MOSI`, `SPI2_MISO` | O, O, O, I | SPI2, I2C3 및 UART2와 멀티플렉싱됩니다. |
 | <span class="m2-chip m2-bus">SPI / I²C / UART</span> | `I2C2_SDA`, `I2C2_SCL` | I/O | I2C2는 35번 컨택트에 SDA를, 34번 컨택트에 SCL을 사용합니다. 이전의 `MPI/SD` 공유 설명은 이 컨택트 맵으로는 확인되지 않습니다. |
 | <span class="m2-chip m2-bus">SPI / I²C / UART</span> | `I2C3_SDA`, `I2C3_SCL` | I/O | I2C3, SPI2와 멀티플렉싱됩니다. |
 | <span class="m2-chip m2-bus">SPI / I²C / UART</span> | `I2C4_SDA`, `I2C4_SCL` | I/O | I2C4, SPI2 및 UART3와 멀티플렉싱됩니다. |
-| <span class="m2-chip m2-bus">SPI / I²C / UART</span> | `UART2_TXD/RXD`, `UART2_CTS/RTS` | O/I, I/O | UART2는 TF 카드 및 SPI2 그룹과 39/37번 컨택트에 대체 위치가 있습니다. 이전의 `MPI/SD` 공유 설명은 확인되지 않았으므로, 모듈의 실제 먹스 선택을 점검하십시오. |
-| <span class="m2-chip m2-bus">SPI / I²C / UART</span> | `UART3_TXD/RXD` | O/I | UART3는 SPI2/I2C4 그룹과 38/36번 컨택트에 대체 위치가 있습니다. 이전의 `MPI/SD` 공유 설명은 확인되지 않았으므로, 모듈의 실제 먹스 선택을 점검하십시오. |
+| <span class="m2-chip m2-bus">SPI / I²C / UART</span> | `UART2_TXD/RXD`, `UART2_CTS/RTS` | O/I, I/O | UART2는 TF 카드 및 SPI2 그룹과 39/37번 컨택트에 대체 위치가 있습니다. 이전의 `MPI/SD` 공유 설명은 확인되지 않았으므로, 모듈의 실제 핀 멀티플렉싱 설정을 확인하십시오. |
+| <span class="m2-chip m2-bus">SPI / I²C / UART</span> | `UART3_TXD/RXD` | O/I | UART3는 SPI2/I2C4 그룹과 38/36번 컨택트에 대체 위치가 있습니다. 이전의 `MPI/SD` 공유 설명은 확인되지 않았으므로, 모듈의 실제 핀 멀티플렉싱 설정을 확인하십시오. |
 | <span class="m2-chip m2-bus">SPI / I²C / UART</span> | `G0–G17`/`BUS0–BUS17` | I/O | 범용 GPIO/버스 컨택트이며, 위치에 따라 SPI2, I2C2–I2C4, UART2/UART3, `PDM1`/`PDM2`, 또는 SWD와 멀티플렉싱됩니다. |
 | <span class="m2-chip m2-audio">오디오</span> | `PDM1_CLK/DATA`, `PDM2_CLK/DATA` | O, I | 디지털 마이크 쌍마다 CLK는 모듈 출력이고 DATA는 모듈 입력입니다. 이 기능들은 58, 56, 54, 52번 컨택트를 SPI2/I2C3/I2C4/UART3와 공유합니다. |
 | <span class="m2-chip m2-debug">전용</span> | `DBG_UART1_TXD/RXD` | O/I | 디버그 UART, SWD와 멀티플렉싱됩니다. |
@@ -197,7 +197,7 @@ I2C의 경우 I/O는 양방향 SDA/SCL 버스 라인을 설명하는 것이며, 
 </div>
 
 !!! info "Wi-Fi SDIO 데이터 레이블 정정"
-    로컬 제안 워크북은 64번 컨택트를 `WiFi_SD2_D1`에 할당하며, 이전 리비전에서 이곳에 D3 레이블이 중복되어 있었다고 기록합니다. 이는 초안 워크북 내부의 정정일 뿐이며, SiFli 1차 자료의 핀 먹스 확인이 아닙니다. 두 SDIO 버스는 모두 Alt 열에 일반적인 컨트롤러 수준 별칭도 갖고 있습니다. Wi-Fi 컴패니언 버스는 `SDIO2_D0–D3`/`SDIO2_CMD`/`SDIO2_CLK`, TF 카드 버스는 `SDIO1_D0–D3`/`SDIO1_CMD`/`SDIO1_CLK`이며, 이는 역할별 이름과 함께 표기됩니다.
+    로컬 제안 워크북은 64번 컨택트를 `WiFi_SD2_D1`에 할당하며, 이전 리비전에서 이곳에 D3 레이블이 중복되어 있었다고 기록합니다. 이는 초안 워크북 내부의 정정일 뿐, SiFli 1차 자료로 핀 멀티플렉싱을 확인한 결과는 아닙니다. 두 SDIO 버스는 모두 Alt 열에 컨트롤러 관점의 일반 별칭도 갖고 있습니다. Wi-Fi 모듈 버스는 `SDIO2_D0–D3`/`SDIO2_CMD`/`SDIO2_CLK`, TF 카드 버스는 `SDIO1_D0–D3`/`SDIO1_CMD`/`SDIO1_CLK`이며, 역할별 이름과 함께 표기됩니다.
 
 ### M2 공유 규칙 { #m2-sharing-rules }
 
@@ -211,7 +211,7 @@ I2C의 경우 I/O는 양방향 SDA/SCL 버스 라인을 설명하는 것이며, 
 
 ## M2xM 멀티미디어 프로파일 { #m2xm-multimedia-profile }
 
-M2xM은 멀티미디어 할당 초안입니다. 로컬 제안 워크북은 DPI와 DVP를 기본 신호 그룹으로, MIPI DSI와 CSI를 대안으로 표시하지만, 먹스 제어나 동시 사용 제약은 정의하지 않습니다. 이러한 레이블은 특정 μForge 모듈이나 SoC 패키지에서의 지원을 입증하지 않습니다. 구현하기 전에 선택한 모듈 문서에서 디바이스 기능과 라우팅을 확인하십시오.
+M2xM은 멀티미디어 할당 초안입니다. 로컬 제안 워크북은 DPI와 DVP를 기본 신호 그룹으로, MIPI DSI와 CSI를 대안으로 표시하지만, 핀 멀티플렉싱 제어나 동시 사용 제약은 정의하지 않습니다. 이러한 레이블은 특정 μForge 모듈이나 SoC 패키지에서의 지원을 입증하지 않습니다. 구현 전에 선택한 모듈 문서에서 디바이스 기능과 신호 라우팅을 확인하십시오.
 
 <div align="center"><em>표: M2xM 기능 할당</em></div>
 

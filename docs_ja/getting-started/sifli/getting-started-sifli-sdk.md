@@ -23,14 +23,14 @@ Arduino、Zephyr、MicroPythonを使う予定でも、まずこのガイドを�
 **ソフトウェア**
 
 - [git](https://git-scm.com/)
-- [`uv`](https://docs.astral.sh/uv/getting-started/installation/)によってブートストラップされるC/C++ツールチェーン（SiFli-SDKのインストーラーが、コンパイラ、デバッガー、Python環境を取得します）
-- [SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK)リポジトリ自体
+- [`uv`](https://docs.astral.sh/uv/getting-started/installation/)によってブートストラップされるC/C++ツールチェーン（SiFli-SDKのインストーラーが、コンパイラー、デバッガー、Python環境を取得します）
+- [SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK)リポジトリー自体
 
 **公式リファレンス**
 
 - [SiFli-SDKのインストールガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/install/index.html)
 - [SiFli-SDKの対応ボード一覧](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)
-- [OpenSiFliのSiFli-SDKリポジトリ](https://github.com/OpenSiFli/SiFli-SDK)
+- [OpenSiFliのSiFli-SDKリポジトリー](https://github.com/OpenSiFli/SiFli-SDK)
 - [OpenSiFli SiFli-SDKのリリース一覧](https://github.com/OpenSiFli/SiFli-SDK/releases)
 
 !!! tip "IDEの方がお好みですか?"
@@ -93,7 +93,7 @@ Arduino、Zephyr、MicroPythonを使う予定でも、まずこのガイドを�
 !!! note "中国本土から利用する場合"
     インストール前に、使用するシェルで`SIFLI_SDK_MIRROR_CHINA`を`1`に設定してください。macOS/Linuxでは`export SIFLI_SDK_MIRROR_CHINA=1`、PowerShellでは`$env:SIFLI_SDK_MIRROR_CHINA = "1"`を使います。GitHubの代わりに[Giteeミラー](https://gitee.com/SiFli/sifli-sdk)からクローンする方法もあります。詳しくは[インストールガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/install/index.html)を参照してください。
 
-`install.sh` / `install.ps1`は、対応するコンパイラ、デバッガー、Python依存関係をダウンロードします。SDKのバージョンが変わったら再実行してください。`export.sh` / `export.ps1`は、現在のターミナルでその環境を有効化します。ビルドのために新しいターミナルを開くたびに実行してください。WindowsではPowerShellから`.ps1`スクリプトを実行してください。
+`install.sh` / `install.ps1`は、対応するコンパイラー、デバッガー、Python依存関係をダウンロードします。SDKのバージョンが変わったら再実行してください。`export.sh` / `export.ps1`は、現在のターミナルでその環境を有効化します。ビルドのために新しいターミナルを開くたびに実行してください。WindowsではPowerShellから`.ps1`スクリプトを実行してください。
 
 ## ボードターゲットの選択 { #choose-the-board-target }
 

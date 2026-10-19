@@ -8,9 +8,9 @@ tags:
 
 ## Introduction { #introduction }
 
-L'**accélérateur d'IA**, appelé NNACC dans le SDK, prend en charge certaines opérations de réseaux neuronaux sur des composants SF32 sélectionnés. Il permet l'**IA en périphérie**, où l'inférence s'exécute localement sans dépendre d'un service cloud. Les gains de latence, d'occupation CPU ou d'énergie dépendent du modèle, du placement mémoire, du logiciel et de la charge du produit complet.
+L'**accélérateur d'IA**, appelé NNACC dans le SDK, décharge le CPU des opérations de réseaux neuronaux prises en charge sur des composants SF32 sélectionnés. Il permet l'**IA en périphérie**, où l'inférence s'exécute localement sans dépendre d'un service cloud. Les gains de latence, d'occupation CPU ou d'énergie dépendent du modèle, du placement mémoire, du logiciel et de la charge du produit complet.
 
-Les appareils portables, les appareils de suivi de santé, les écrans intelligents, les accessoires vocaux, la fusion de capteurs et les produits AIoT compacts sont des applications possibles. Ces appareils sur batterie associent souvent Bluetooth, graphisme, audio, acquisition et interaction utilisateur. Déléguer certaines opérations au matériel peut libérer du temps CPU pour d'autres tâches, mais la réactivité et les économies d'énergie doivent être mesurées.
+Les appareils portables, les appareils de suivi de santé, les écrans intelligents, les accessoires vocaux, la fusion de capteurs et les produits AIoT compacts sont des applications possibles. Ces appareils sur batterie associent souvent Bluetooth, graphiques, audio, acquisition et interaction utilisateur. Déléguer les opérations prises en charge au matériel peut libérer du temps CPU pour d'autres tâches, mais la réactivité et les économies d'énergie doivent être mesurées.
 
 Les fonctionnalités d'IA disponibles dépendent du composant SF32 et de sa prise en charge par le SDK. Avant de valider une architecture de modèle ou un plan mémoire, vérifiez toujours la fiche technique, le manuel de référence et la documentation du SDK de la puce cible.
 
@@ -26,7 +26,7 @@ De nombreux produits embarqués doivent pouvoir réagir de manière intelligente
 - Meilleure confidentialité, car les données biométriques, audio ou de mouvement brutes peuvent rester locales.
 - Trafic sans fil réduit, car seuls les événements ou résumés doivent être transmis.
 - Meilleur comportement hors ligne, car les fonctionnalités essentielles peuvent fonctionner sans accès réseau.
-- Une puissance moyenne plus faible n'est possible que si la fonction complète consomme moins d'énergie sur la même durée d'utilisation, à précision et couverture de détection équivalentes. Tenez compte du surcoût lié au déport des calculs.
+- Une puissance moyenne plus faible n'est possible que si la fonction complète consomme moins d'énergie sur la même durée d'utilisation, à précision et couverture de détection équivalentes. Tenez compte du surcoût du délestage.
 
 Pour les appareils portables et les appareils AIoT, ces avantages sont concrets. Une montre peut classer des gestes, détecter des niveaux d'activité, surveiller des signaux de santé, reconnaître de simples déclencheurs vocaux ou traiter des données de capteurs, tout en préservant la réactivité de l'écran, de Bluetooth et du processeur applicatif.
 
@@ -71,7 +71,7 @@ L'accélérateur n'est qu'un élément de la chaîne complète de traitement de 
 
 Les accélérateurs d'IA sont utiles, car les réseaux neuronaux répètent souvent les mêmes opérations mathématiques des milliers, voire des millions de fois : convolutions, multiplications matricielles, opérations vectorielles, fonctions d'activation, agrégation (pooling) et autres calculs en virgule fixe. Un matériel dédié peut exécuter certaines de ces opérations avec une meilleure efficacité énergétique qu'un CPU généraliste.
 
-Il s'agit d'exemples de calculs utilisés par les réseaux neuronaux, pas d'une liste des opérations prises en charge par le NNACC du SF32. Le [guide NNACC du SDK SiFli v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/docs/source/en/hal/nnacc.md) documente l'accélération NNACC de trois fonctions de convolution q7 de CMSIS-NN, dont la convolution par canal (depthwise convolution), et indique que l'implémentation CMSIS-NN avec NNACC est 8 fois plus rapide que l'implémentation ARM DSP de CMSIS-NN. Le guide ne précise pas les conditions de mesure de cette valeur : considérez-la comme une comparaison publiée par le fabricant, et non comme une garantie de réduction de la latence ou de la consommation énergétique sur l'ensemble du modèle. Vérifiez chaque opérateur du modèle et son format numérique par rapport à l'implémentation retenue ; ne supposez pas que la multiplication matricielle, l'activation ou le pooling bénéficient chacun d'une accélération indépendante. Le SDK propose aussi des API HAL pour piloter directement l'accélérateur, mais ne supposez pas que l'une ou l'autre interface fournisse un convertisseur de modèle complet ou un moteur de graphe. Le firmware ou un moteur d'inférence distinct doit orchestrer les couches et gérer les tampons ; un repli sur le CPU nécessite également une implémentation des opérateurs non pris en charge.
+Il s'agit d'exemples de calculs utilisés par les réseaux neuronaux, pas d'une liste des opérations prises en charge par le NNACC du SF32. Le [guide NNACC du SDK SiFli v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/docs/source/en/hal/nnacc.md) documente l'accélération NNACC de trois fonctions de convolution q7 de CMSIS-NN, dont la convolution séparable en profondeur (depthwise convolution), et indique que l'implémentation CMSIS-NN avec le NNACC est 8 fois plus rapide que l'implémentation ARM DSP de CMSIS-NN. Le guide ne précise pas les conditions de mesure de cette valeur : considérez-la comme une comparaison publiée par le fabricant, et non comme une garantie de réduction de la latence ou de la consommation énergétique sur l'ensemble du modèle. Vérifiez chaque opérateur du modèle et son format numérique par rapport à l'implémentation retenue ; ne supposez pas que la multiplication matricielle, l'activation ou le pooling bénéficient chacun d'une accélération indépendante. Le SDK propose aussi des API HAL pour piloter directement l'accélérateur, mais ne supposez pas que l'une ou l'autre interface fournisse un convertisseur de modèle complet ou un moteur de graphe. Le firmware ou un moteur d'inférence distinct doit orchestrer les couches et gérer les tampons ; un repli sur le CPU nécessite également une implémentation des opérateurs non pris en charge.
 
 Les ressources mémoire et la bande passante des composants SF32 sont limitées : commencez donc par un modèle embarqué compact. Vérifiez la présence du NNACC et la prise en charge des opérateurs pour la référence exacte, puis mesurez la mémoire, la latence et l'énergie de toute la chaîne. Ne déduisez pas la compatibilité du seul nom de la famille.
 
@@ -87,7 +87,7 @@ Les applications d'IA courantes comprennent :
 
 ## Rôles du CPU, de l'accélérateur et de la mémoire { #cpu-accelerator-and-memory-roles }
 
-Pour se représenter le rôle de chacun, le CPU pilote le traitement tandis que l'accélérateur prend en charge certaines opérations de calcul intensives.
+Un bon modèle mental : le CPU pilote le flux de traitement, tandis que l'accélérateur prend en charge certains noyaux de calcul intensifs.
 
 <div align="center"><em>Tableau : Rôles du CPU, de l'accélérateur et de la mémoire</em></div>
 
@@ -97,7 +97,7 @@ Pour se représenter le rôle de chacun, le CPU pilote le traitement tandis que 
 |:----------|:-------------|
 | **CPU applicatif** | Exécute la logique applicative, planifie l'inférence, gère les tampons et pilote l'interface utilisateur, le Bluetooth, le stockage et les règles système. |
 | **Processeur basse consommation** | Peut assurer la surveillance continue des capteurs ou des tâches d'arrière-plan sur les appareils où il est programmable par l'utilisateur. |
-| **Accélérateur IA** | Exécute les opérations prises en charge par NNACC ; comparez le temps CPU et l'énergie de toute la chaîne à la référence logicielle. |
+| **Accélérateur IA** | Exécute les opérations prises en charge par le NNACC ; comparez le temps CPU et l'énergie de toute la chaîne à la référence logicielle. |
 | **DMA / système mémoire** | Assure les accès mémoire et les transferts configurés ; un transfert d'entrée ou de sortie NNACC ne nécessite pas systématiquement une copie DMA distincte. |
 | **Autres accélérateurs** | Les blocs audio, graphiques, cryptographiques ou de traitement des capteurs peuvent contribuer à l'ensemble de la chaîne produit. |
 
@@ -118,8 +118,8 @@ Choisissez le composant selon les opérateurs, le budget mémoire et la charge d
 | **SF32LB52x** | À envisager pour Bluetooth, audio et HMI simple à coût optimisé ; utiliser une implémentation CPU légère comme référence, sauf accélération spécifique vérifiée. |
 | **SF32LB55x** | Adapté aux appareils BLE portables et aux produits riches en capteurs ; utile pour la détection à basse consommation et les algorithmes compacts. |
 | **SF32LB56x** | À envisager pour une UI plus riche, une HMI connectée et des chaînes de capteurs ou multimédia ; vérifier la configuration choisie et les opérateurs du NNACC HCPU. |
-| **SF32LB57x** | Le guide cité ne confirme pas la disponibilité de NNACC pour cette famille ; vérifiez la référence, la carte et le support SDK des opérateurs, du runtime et de la mémoire avant de la choisir pour l'IA. |
-| **SF32LB58x** | À envisager pour des traitements combinant IA, graphisme et audio lorsque la mémoire et les ressources HCPU/LCPU de la référence choisie répondent aux besoins du produit ; vérifier les opérateurs, les coûts d'intégration et l'énergie mesurée. |
+| **SF32LB57x** | Le guide cité ne confirme pas la disponibilité du NNACC pour cette famille ; vérifiez la référence, la carte et le support SDK des opérateurs, du runtime et de la mémoire avant de la choisir pour l'IA. |
+| **SF32LB58x** | À envisager pour des traitements combinant IA, graphiques et audio lorsque la mémoire et les ressources HCPU/LCPU de la référence choisie répondent aux besoins du produit ; vérifier les opérateurs, les coûts d'intégration et l'énergie mesurée. |
 
 </div>
 
@@ -143,7 +143,7 @@ L'erreur la plus courante consiste à optimiser uniquement le réseau neuronal e
 
 L'IA embarquée sur microcontrôleur repose généralement sur des modèles compacts et des formats numériques efficaces. Les modèles quantifiés, souvent représentés par des entiers sur 8 bits, peuvent réduire l'empreinte mémoire, la bande passante requise et le coût de calcul par rapport aux modèles à virgule flottante.
 
-Un modèle sur 8 bits n'est pas automatiquement compatible avec NNACC. La [configuration HAL du SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/Include/bf0_hal_nn_acc.h) utilise des tampons `int8_t` et les champs `bias_shift` / `out_shift`. Cela ne démontre pas la prise en charge de points zéro arbitraires, d'échelles par canal ou de tous les opérateurs int8 actuels. Vérifiez la disposition des tenseurs, le traitement du signe, les décalages et la représentation du biais par rapport au noyau retenu ; comparez ensuite ses sorties à une référence logicielle avec des entrées représentatives et des valeurs limites.
+Un modèle sur 8 bits n'est pas automatiquement compatible avec le NNACC. La [configuration HAL du SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/Include/bf0_hal_nn_acc.h) utilise des tampons `int8_t` et les champs `bias_shift` / `out_shift`. Cela ne démontre pas la prise en charge de points zéro arbitraires, d'échelles par canal ou de tous les opérateurs int8 actuels. Vérifiez la disposition des tenseurs, le traitement du signe, les décalages et la représentation du biais par rapport au noyau retenu ; comparez ensuite ses sorties à une référence logicielle avec des entrées représentatives et des valeurs limites.
 
 La quantification comporte des compromis :
 
@@ -168,9 +168,9 @@ Les traitements d'IA peuvent solliciter fortement la mémoire, même lorsque le 
 
 Selon la configuration SRAM interne, Flash, PSRAM et cache du composant choisi, placez les tenseurs fréquemment utilisés et les tampons intermédiaires là où CPU et accélérateur peuvent y accéder efficacement. Budgétez ensemble stockage externe, tampons de travail et copies, au lieu d'optimiser seulement la taille du modèle.
 
-Vérifiez d'abord que le NNACC choisi peut accéder à chaque tampon ; les données en Flash ou PSRAM externes peuvent nécessiter une copie dans des tampons de travail. Comptez le temps de copie, la RAM de travail et l'énergie dans le budget. L'[implémentation HAL du SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/hal/bf0_hal_nn_acc.c) arrondit les tailles contrôlées à des multiples de 4 octets et refuse un tampon si son début et sa fin contrôlée appartiennent à des fenêtres d'adressage différentes de 1 MiB (1 048 576 octets). L'entrée et le biais doivent aussi partager une fenêtre. Une fin exactement à la limite de la fenêtre suivante échoue également. Planifiez les allocations selon ces contrôles et traitez les erreurs renvoyées avant de lancer l'opération suivante.
+Vérifiez d'abord que le NNACC choisi peut accéder à chaque tampon ; un placement en Flash ou PSRAM externe n'est pas automatiquement utilisable sans copies intermédiaires dans des tampons de travail. Comptez le temps de copie, la RAM de travail et l'énergie dans le budget. L'[implémentation HAL du SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/hal/bf0_hal_nn_acc.c) arrondit les tailles contrôlées à des multiples de 4 octets et refuse un tampon si son début et sa fin contrôlée appartiennent à des fenêtres d'adressage différentes de 1 MiB (1 048 576 octets). L'entrée et le biais doivent aussi partager une fenêtre. Une fin exactement à la limite de la fenêtre suivante échoue également. Planifiez les allocations selon ces contrôles et traitez les erreurs renvoyées avant de lancer l'opération suivante.
 
-Si le CPU partage des tampons avec le DMA ou NNACC, attribuez un accès exclusif pendant chaque transfert ou opération. Écrivez en mémoire les entrées modifiées dans le cache du CPU avant leur lecture par le matériel. Préparez les lignes de cache du tampon de destination selon le SDK avant l'écriture matérielle, pour éviter qu'une ligne modifiée du CPU ne remplace ensuite le résultat. Après confirmation de la fin du traitement matériel, invalidez les copies obsolètes du CPU avant de lire la sortie. Les opérations de maintenance doivent couvrir des lignes entières ; évitez de les partager avec d'autres données encore utilisées. Réécrire en mémoire une ancienne ligne de cache de la sortie après l'écriture du matériel peut détruire le résultat. L'écriture en mémoire (clean) et l'invalidation (invalidate) ne sont pas interchangeables.
+Si le CPU partage des tampons avec le DMA ou le NNACC, attribuez un accès exclusif pendant chaque transfert ou opération. Écrivez en mémoire les entrées modifiées dans le cache du CPU avant leur lecture par le matériel. Préparez les lignes de cache du tampon de destination selon le SDK avant l'écriture matérielle, pour éviter qu'une ligne modifiée du CPU ne remplace ensuite le résultat. Après confirmation de la fin du traitement matériel, invalidez les copies obsolètes du CPU avant de lire la sortie. Les opérations de maintenance doivent couvrir des lignes entières ; évitez de les partager avec d'autres données encore utilisées. Réécrire en mémoire une ancienne ligne de cache de la sortie après l'écriture du matériel peut détruire le résultat. L'écriture en mémoire (clean) et l'invalidation (invalidate) ne sont pas interchangeables.
 
 ## Chaînes de traitement audio, capteurs et caméra { #audio-sensor-and-camera-pipelines }
 
@@ -178,7 +178,7 @@ L'accélération IA fonctionne rarement de façon isolée. Elle s'intègre gén�
 
 ### Audio et voix { #audio-and-voice }
 
-La détection de voix ou d'événements audio peut comprendre l'entrée microphone, les tampons DMA, le découpage en trames, le filtrage, l'extraction de caractéristiques, l'inférence et le lissage des résultats. NNACC exécute les opérations neuronales prises en charge ; le firmware ou l'environnement choisi gère le reste du graphe, tandis que le CPU ou le sous-système audio gère les échantillons et caractéristiques. Le modèle et une implémentation logicielle validée restent nécessaires.
+La détection de voix ou d'événements audio peut comprendre l'entrée microphone, les tampons DMA, le découpage en trames, le filtrage, l'extraction de caractéristiques, l'inférence et le lissage des résultats. Le NNACC exécute les opérations neuronales prises en charge ; le firmware ou l'environnement choisi gère le reste du graphe, tandis que le CPU ou le sous-système audio gère les échantillons et caractéristiques. Le modèle et une implémentation logicielle validée restent nécessaires.
 
 Les exemples typiques incluent :
 
@@ -195,7 +195,7 @@ Regroupez les échantillons et utilisez les interruptions si la couverture de d�
 
 ### Caméra et entrée image { #camera-and-image-input }
 
-L'entrée caméra dépend de la puce, du boîtier, de la carte et du pilote de capture exacts. Le [pilote du capteur GC032A du SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/customer/peripherals/camera/gc032a/drv_gc032a.c) configure une sortie DVP sur 8 bits ou SPI sur deux bits ; cela ne prouve pas que les deux voies de capture fonctionnent sur tous les composants SF32. Avant de choisir la caméra, vérifiez les broches, la capture par périphérique ou PTM, la temporisation du capteur et le pilote. L'image demande souvent des tampons et une bande passante plus importants que l'audio ou le mouvement, mais comparez les résolutions et cadences réelles.
+L'entrée caméra dépend de la puce, du boîtier, de la carte et du pilote de capture exacts. Le [pilote du capteur GC032A du SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/customer/peripherals/camera/gc032a/drv_gc032a.c) configure une sortie DVP sur 8 bits ou SPI sur deux bits ; cela ne prouve pas que les deux voies de capture fonctionnent sur tous les composants SF32. Avant de choisir la caméra, vérifiez les broches, la capture par périphérique ou PTM, le cadencement du capteur et le pilote. L'image demande souvent des tampons et une bande passante plus importants que l'audio ou le mouvement, mais comparez les résolutions et cadences réelles.
 
 Envisagez des images plus petites, des régions d'intérêt, une cadence réduite ou un modèle adapté à l'embarqué. Recadrer par firmware après capture réduit l'entrée du modèle, pas nécessairement le trafic caméra ni le tampon de capture. Pour réduire ces coûts, un recadrage dans le capteur ou une acquisition réduite peut être nécessaire.
 
@@ -205,12 +205,12 @@ Les tâches d'IA doivent être planifiées en tenant compte du reste du système
 
 Bonnes pratiques de planification :
 
-- Choisir une inférence périodique ou déclenchée par événement selon la couverture de détection, le risque de manquer des événements et les exigences de latence.
-- Éviter les boucles d'interrogation périodique (polling) lorsque des interruptions ou des événements peuvent déclencher le traitement.
-- Regrouper les échantillons de capteurs lorsque les exigences de latence le permettent.
-- Borner la latence de l'entrée à la décision tout en conservant la fenêtre nécessaire à une détection fiable.
-- Coordonner les traitements d'IA avec l'activité de l'affichage et de Bluetooth.
-- Remettre le CPU et l'accélérateur dans les états basse consommation autorisés après confirmation de la fin, transfert des tampons et libération des verrous de gestion de l'énergie ; maintenir l'acquisition nécessaire et les autres travaux en attente.
+- Choisissez une inférence périodique ou déclenchée par événement selon la couverture de détection, le risque de manquer des événements et les exigences de latence.
+- Évitez les boucles d'interrogation périodique (polling) lorsque des interruptions ou des événements peuvent déclencher le traitement.
+- Regroupez les échantillons de capteurs lorsque les exigences de latence le permettent.
+- Bornez la latence de l'entrée à la décision tout en conservant la fenêtre nécessaire à une détection fiable.
+- Coordonnez les traitements d'IA avec l'activité de l'affichage et de Bluetooth.
+- Remettez le CPU et l'accélérateur dans les états basse consommation autorisés après confirmation de la fin, transfert des tampons et libération des verrous de gestion de l'énergie ; maintenez l'acquisition nécessaire et les autres travaux en attente.
 
 Mesurez l'énergie de la fonction complète en intégrant dans le temps la puissance d'alimentation mesurée (tension d'alimentation × courant) ; la latence d'inférence seule ne suffit pas. Incluez l'acquisition, le prétraitement, les copies, les calculs accélérés, le repli sur le CPU, le post-traitement et les périodes inactives. Une exécution plus rapide peut réduire l'énergie en activité sans permettre une veille plus précoce ; les gains dépendent des autres charges du système. Comparez une couverture de détection et une précision équivalentes avant de réduire la fréquence d'inférence.
 
@@ -226,9 +226,9 @@ La conception d'IA embarquée consiste à arbitrer entre trois objectifs : la pr
 
 | Objectif | Conséquences habituelles sur la conception |
 |:-----|:------------------------|
-| Précision accrue | Peut demander un modèle plus grand, davantage de caractéristiques ou une fenêtre d'entrée plus longue ; vérifier le gain réel de précision et le coût mémoire. |
-| Latence réduite | Réduire les délais d'acquisition, d'attente et de calcul. Une fenêtre plus courte peut dégrader la précision ; une cadence d'inférence accrue peut augmenter l'énergie. |
-| Consommation réduite | Utiliser des modèles compacts et un placement efficace ; réduire la fréquence seulement si la couverture de détection le permet, puis vérifier acquisition et stratégie de veille. |
+| Précision accrue | Peut demander un modèle plus grand, davantage de caractéristiques ou une fenêtre d'entrée plus longue ; vérifiez le gain réel de précision et le coût mémoire. |
+| Latence réduite | Réduisez les délais d'acquisition, d'attente et de calcul. Une fenêtre plus courte peut dégrader la précision ; une cadence d'inférence accrue peut augmenter l'énergie. |
+| Consommation réduite | Utilisez des modèles compacts et un placement efficace ; réduisez la fréquence seulement si la couverture de détection le permet, puis vérifiez l'acquisition et la stratégie de veille. |
 
 </div>
 
@@ -266,7 +266,7 @@ Envisagez l'accélération IA du SF32 pour l'inférence locale compacte dans des
 
 ## Points clés à retenir { #key-takeaways }
 
-- NNACC peut prendre en charge des opérations compatibles et réduire l'occupation CPU ; les gains de latence et d'énergie doivent être vérifiés pour la fonction complète.
+- Le NNACC peut délester le CPU des opérations compatibles et réduire son occupation ; les gains de latence et d'énergie doivent être vérifiés pour la fonction complète.
 - Il s'intègre à une chaîne complète comprenant les capteurs, l'entrée audio ou caméra, le prétraitement, les transferts mémoire, le post-traitement et la logique applicative.
 - Le SDK v2.5.1 documente des ressources NNACC pour SF32LB55x, SF32LB56x et SF32LB58x, mais ne confirme pas leur disponibilité sur SF32LB52x ou SF32LB57x ; vérifiez la référence et la charge réelles sans déduire la présence ou l'absence de l'accélérateur du seul nom de famille.
 - Les performances réelles dépendent de la taille du modèle, de la quantification, des opérateurs pris en charge, du placement mémoire, de la gestion du cache, du comportement du DMA et de l'environnement d'exécution fourni par le SDK.

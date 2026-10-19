@@ -12,7 +12,7 @@ tags:
 
 ## 5. 회로 설계 가이드라인 { #5-schematic-design-guidelines }
 
-<div align="center"><em>표 5-1: 회로도 섹션 구성</em></div>
+<div align="center"><em>표 5-1: 회로도 절 구성</em></div>
 
 <div align="center" markdown>
 
@@ -83,7 +83,7 @@ QFN68L 패키지의 SF32LB551에는 VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_VOUT, A
 | AVDD_DSI | 0.1 µF + 10 µF | 10 µF와 0.1 µF 커패시터를 각각 하나 이상, 해당 핀 가까이에 배치합니다 |
 | AVDD33 | 4.7 µF | 4.7 µF 커패시터를 최소 한 개 핀 가까이에 배치합니다 |
 | AVDD_BRF | 1 µF | 1 µF 커패시터를 최소 한 개 핀 가까이에 배치합니다 |
-| VDDIOA VDDIOB | 2 × 0.1 µF + 2 × 1 µF | 각 핀 가까이에 1 µF와 0.1 µF 커패시터를 각각 하나씩 배치합니다 |
+| VDDIOA VDDIOB | 2 × 0.1 µF + 2 × 1 µF | 각 핀 가까이에 1 µF와 0.1 µF 커패시터를 각각 하나 이상 배치합니다 |
 
 </div>
 
@@ -91,7 +91,7 @@ QFN68L 패키지의 SF32LB551에는 VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_VOUT, A
 
 원본 문서들의 내용이 서로 다릅니다. [SiFli의 중국어 하드웨어 애플리케이션 가이드](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)의 표 3-3과 [V1.0 회로도 체크리스트](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)의 9번 항목은 VDD_RTC를 1 µF로 지정하지만, [가이드 레퍼런스 회로도의 C0313](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png)은 0.1 µF로 표기되어 있습니다. 각 값이 언제 적용되는지는 설명되어 있지 않습니다. 설계를 릴리스하기 전에 해당 디바이스에 필요한 값을 SiFli에 확인하십시오. 이 불일치를 추정으로 해결해서는 안 됩니다.
 
-VDD1과 VDD2에는 동시에 전원을 공급합니다. SF32LB551에는 VDD2가 없습니다. RSTN은 VDD1 입력 전압 도메인으로 풀업하고 0.1 µF를 그라운드에 연결합니다. 레퍼런스 도면은 풀업 레일을 1.8 V/3.3 V로 표기하고 10 kΩ 저항을 사용합니다. 선택한 설계의 VDD1 도메인에 해당하는 레벨을 사용하십시오. 그림 5.1-1은 1.50 V POR 레벨, 2.5 V에서 1.5 V까지 설정 가능한 BOR, 0.7 V RSTN 표시를 보여 줍니다. 그림 5.1-3의 측정 트레이스는 해당 예제에서 전원이 상승한 시점부터 리셋이 해제되기까지 약 700 µs가 걸림을 보여 주며, 이는 모든 설계에 보장되는 리셋 지연 시간이 아닙니다.
+VDD1과 VDD2에는 동시에 전원을 공급합니다. SF32LB551에는 VDD2가 없습니다. RSTN은 VDD1 입력 전압 도메인으로 풀업하고 0.1 µF 커패시터를 그라운드에 연결합니다. 레퍼런스 도면은 풀업 레일을 1.8 V/3.3 V로 표기하고 10 kΩ 저항을 사용합니다. 선택한 설계의 VDD1 도메인에 해당하는 레벨을 사용하십시오. 그림 5.1-1은 1.50 V POR 레벨, 2.5 V에서 1.5 V까지 설정 가능한 BOR, 0.7 V RSTN 표시를 보여 줍니다. 그림 5.1-3의 측정 트레이스는 해당 예제에서 전원이 상승한 시점부터 리셋이 해제되기까지 약 700 µs가 걸림을 보여 주며, 이는 모든 설계에 보장되는 리셋 지연 시간이 아닙니다.
 
 ![그림 5.1-1: 전원 켜기 및 끄기 타이밍](../../sf32-products/chips/assets/55x/SF32LB55x-POR-BOR.png){ width="100%" loading="lazy" }
 
@@ -128,7 +128,7 @@ SiFli의 하드웨어 애플리케이션 노트에 지정된 대로, DCR이 0.4 
 
 </div>
 
-High 모드는 전원을 켠 뒤 다운로드 모드로 진입하고, Low 모드는 사용자 프로그램을 부팅합니다. 양산 픽스처가 필요한 부트 상태를 강제할 수 있어야 하며, 제품 인클로저나 테스트 접근 제약 때문에 부트 관련 핀에 접근하지 못하는 일이 없도록 하십시오.
+High 모드는 전원을 켠 뒤 다운로드 모드로 진입하고, Low 모드는 사용자 프로그램을 부팅합니다. 양산 픽스처가 필요한 부트 상태를 강제할 수 있어야 하며, 제품 케이스나 테스트 접근 제약 때문에 부트 관련 핀에 접근하지 못하는 일이 없도록 하십시오.
 
 Mode 핀은 VDDIOA 전압 도메인을 공유합니다. 외부 10 kΩ 저항으로 필요한 전원 또는 그라운드 레벨에 고정하고, 플로팅 상태로 두거나 의도하지 않은 토글이 발생하지 않도록 하십시오. 양산 보드는 펌웨어 플래싱과 크리스털 캘리브레이션을 위해 Mode 테스트 포인트를 노출해야 하며, 점퍼는 필요하지 않습니다. 테스트 보드에는 애플리케이션이 멈췄을 때 다운로드 모드로 부팅하여 복구할 수 있도록 점퍼를 확보해 두십시오.
 
@@ -140,8 +140,8 @@ Mode 핀은 VDDIOA 전압 도메인을 공유합니다. 외부 10 kΩ 저항으�
 
 | 크리스털 | 크리스털 사양 요구 사항 | 상세 설명 |
 | :--- | :--- | :--- |
-| 48MHz | 7pF≦CL≦12pF (권장값 8.8pF) △F/F0≦±10ppm ESR≦30 ohms (권장값 22ohms) | 크리스털 오실레이터의 소비 전력은 CL 및 ESR과 관련이 있습니다. CL과 ESR이 작을수록 소비 전력이 낮아집니다. 최적의 전력 성능을 위해서는 요구 범위 안에서 CL과 ESR이 비교적 작은 부품을 사용하는 것이 좋습니다. 크리스털 옆에 병렬 매칭 커패시터를 확보해 둡니다. CL<12pF이면 커패시터를 실장할 필요가 없습니다 |
-| 32.768KHz | CL≦12.5pF (권장값 7pF) △F/F0≦±20ppm ESR≦80k ohms (권장값 38Kohms) | 크리스털의 소비 전력은 CL 및 ESR과 관련이 있습니다. CL과 ESR이 작을수록 소비 전력이 낮아집니다. 최적의 소비 전력 성능을 위해서는 요구 범위 안에서 CL과 ESR이 비교적 작은 부품을 사용하는 것이 좋습니다. 크리스털 옆에 병렬 매칭 커패시터를 확보해 둡니다. CL<12.5pF이면 커패시터를 납땜할 필요가 없습니다 |
+| 48 MHz | 7 pF ≤ CL ≤ 12 pF (권장값 8.8 pF), △F/F0 ≤ ±10 ppm, ESR ≤ 30 Ω (권장값 22 Ω) | 크리스털 오실레이터의 소비 전력은 CL과 ESR에 따라 달라집니다. 두 값이 작을수록 소비 전력도 낮아집니다. 전력 성능을 최적화하려면 요구 범위 안에서 CL과 ESR이 비교적 작은 부품을 선택하는 것이 좋습니다. 크리스털 옆에는 병렬 매칭 커패시터 풋프린트를 확보하십시오. CL < 12 pF이면 커패시터를 실장하지 않아도 됩니다. |
+| 32.768 kHz | CL ≤ 12.5 pF (권장값 7 pF), △F/F0 ≤ ±20 ppm, ESR ≤ 80 kΩ (권장값 38 kΩ) | 크리스털의 소비 전력은 CL과 ESR에 따라 달라집니다. 두 값이 작을수록 소비 전력도 낮아집니다. 전력 성능을 최적화하려면 요구 범위 안에서 CL과 ESR이 비교적 작은 부품을 선택하는 것이 좋습니다. 크리스털 옆에는 병렬 매칭 커패시터 풋프린트를 확보하십시오. CL < 12.5 pF이면 커패시터를 실장하지 않아도 됩니다. |
 
 </div>
 
@@ -167,9 +167,9 @@ BGA145에는 외부 OPI-PSRAM 채널이 하나 있고, BGA169에는 두 개 있�
 
 외부 QSPI PSRAM에는 QSPI2를 우선 사용하십시오. HCPU GPIO로 외부 OPI/QSPI PSRAM 전원을 제어하는 경우, High로 활성화하고 Low로 비활성화하는 PU 유형의 HCPU 핀을 사용하십시오. 내부 플래시용 VDD_SIP를 스위칭하는 경우에는 같은 High 켜짐/Low 꺼짐 극성으로 PA58을 사용하십시오. QSPI4 NOR 플래시를 추가할지 결정하기 전에, LCPU 가속도계 및 심박 알고리즘에 필요한 플래시 공간을 SiFli의 FAE에게 평가해 달라고 요청하십시오.
 
-원본 표들은 방향 표기가 일관되지 않습니다. [BGA145 레퍼런스 회로도](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png)와 [BGA169 디바이스 1](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png) 및 [디바이스 2 레퍼런스 회로도](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png)에서 MCU 핀 PA37/PA20과 PA07/PA08은 각각 외부 PSRAM의 CS# 및 CLK 핀을 구동합니다. 따라서 아래 표는 CS#와 CLK를 MCU 쪽에서 본 방향, 즉 MCU 출력과 PSRAM 입력으로 설명합니다. 회로도로는 DQS/DM의 방향이 고정되어 있는지 확인할 수 없으므로, 선택한 PSRAM 데이터시트에서 그 기능과 방향을 확인하십시오.
+원본 표들은 방향 표기가 일관되지 않습니다. [BGA145 레퍼런스 회로도](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png)와 [BGA169 디바이스 1](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png) 및 [디바이스 2 레퍼런스 회로도](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png)에서 MCU 핀 PA37/PA20과 PA07/PA08은 각각 외부 PSRAM의 CS# 및 CLK 핀을 구동합니다. 따라서 아래 표는 CS#과 CLK를 MCU 쪽에서 본 방향, 즉 MCU 출력과 PSRAM 입력으로 설명합니다. 회로도로는 DQS/DM의 방향이 고정되어 있는지 확인할 수 없으므로, 선택한 PSRAM 데이터시트에서 그 기능과 방향을 확인하십시오.
 
-도시된 각 PSRAM은 1.8 V 전원, 0.1 µF 커패시터 세 개, 1 µF/6.3 V 커패시터 한 개를 사용합니다. 연결되지 않은 것으로 표시된 RESET# 및 NC/CLK# 연결은 도시된 메모리 부품에 해당하는 내용이므로, 일반화하지 말고 선택한 부품의 데이터시트를 확인하십시오.
+그림에 표시된 각 PSRAM은 1.8 V 전원, 0.1 µF 커패시터 세 개, 1 µF/6.3 V 커패시터 한 개를 사용합니다. 연결되지 않은 것으로 표시된 RESET# 및 NC/CLK# 연결은 그림에 표시된 메모리 부품에 해당하는 내용이므로, 일반화하지 말고 선택한 부품의 데이터시트를 확인하십시오.
 
 ![그림 5.5-1: BGA145 OPI PSRAM 레퍼런스 회로](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png){ width="100%" loading="lazy" }
 
@@ -249,7 +249,7 @@ BGA145에는 외부 OPI-PSRAM 채널이 하나 있고, BGA169에는 두 개 있�
 
 | 인터페이스 신호 | QFN68 | BGA145/169 | 상세 설명 |
 | :--- | :--- | :--- | :--- |
-| CS# | GPIO9 | PA61 | 칩 셀렉트, active low |
+| CS# | GPIO9 | PA61 | 칩 셀렉트, Low 활성 |
 | SO | GPIO7 | PA65 | 데이터 입력 (데이터 입출력 1) |
 | WP# | GPIO6 | PA66 | 쓰기 보호 출력 (데이터 입출력 2) |
 | SI | GPIO8 | PA63 | 데이터 출력 (데이터 입출력 0) |
@@ -264,7 +264,7 @@ BGA145에는 외부 OPI-PSRAM 채널이 하나 있고, BGA169에는 두 개 있�
 
 | 인터페이스 신호 | QFN68 | BGA145/169 | 상세 설명 |
 | :--- | :--- | :--- | :--- |
-| CS# | GPIO16 | PA45 | 칩 셀렉트, active low |
+| CS# | GPIO16 | PA45 | 칩 셀렉트, Low 활성 |
 | SO | GPIO14 | PA49 | 데이터 입력 (데이터 입출력 1) |
 | WP# | GPIO13 | PA51 | 쓰기 보호 출력 (데이터 입출력 2) |
 | SI | GPIO15 | PA47 | 데이터 출력 (데이터 입출력 0) |
@@ -279,7 +279,7 @@ BGA145에는 외부 OPI-PSRAM 채널이 하나 있고, BGA169에는 두 개 있�
 
 | 인터페이스 신호 | QFN68 | BGA145/169 | 상세 설명 |
 | :--- | :--- | :--- | :--- |
-| CS# | - | PB33 | 칩 셀렉트, active low |
+| CS# | - | PB33 | 칩 셀렉트, Low 활성 |
 | SO | - | PB36 | 데이터 입력 (데이터 입출력 1) |
 | WP# | - | PB37 | 쓰기 보호 출력 (데이터 입출력 2) |
 | SI | - | PB35 | 데이터 출력 (데이터 입출력 0) |
@@ -479,7 +479,7 @@ BL_PWM에는 GPTIM1_CHx 기능이 있는 GPIO를 사용하고, 콜드 스타트 
 
 ### 5.7. 웨이크, GPADC, 제조 인터페이스 { #57-wake-gpadc-and-manufacturing-interfaces }
 
-웨이크, 아날로그, 디버그, 양산 접근 수단은 인클로저와 픽스처를 염두에 두고 계획해야 합니다. 웨이크 핀에는 정해진 유휴 레벨과 ESD 보호가 필요하고, GPADC 분압기는 안정화 시간과 누설 사이의 균형을 맞춰야 하며, 디버그/플래싱 접근 수단은 EVT와 양산 단계에서도 접근할 수 있어야 합니다.
+웨이크, 아날로그, 디버그, 양산 접근 수단은 케이스와 픽스처를 염두에 두고 계획해야 합니다. 웨이크 핀에는 정해진 유휴 레벨과 ESD 보호가 필요하고, GPADC 분압기는 안정화 시간과 누설 사이의 균형을 맞춰야 하며, 디버그/플래싱 접근 수단은 EVT와 양산 단계에서도 접근할 수 있어야 합니다.
 
 SF32LB55x는 HCPU 웨이크 소스 네 개(WKUP_A0–WKUP_A3)와 LCPU 웨이크 소스 여섯 개(WKUP_B0–WKUP_B5)를 제공합니다. 각 소스는 연결된 CPU를 깨우며, Hibernate에서 시스템을 깨울 수 있는 것은 LCPU 소스 여섯 개뿐입니다. 이 열 개의 입력은 어느 것도 플로팅 상태로 두면 안 되며, 기능에 맞게 외부 풀업 또는 풀다운 저항을 추가하여 슬립 중 누설을 방지하십시오.
 
@@ -514,9 +514,13 @@ SF32LB55x는 HCPU 웨이크 소스 네 개(WKUP_A0–WKUP_A3)와 LCPU 웨이크 
 
 </div>
 
-SiFli의 하드웨어 애플리케이션 가이드는 입력 범위가 0–0.9 V인 5채널 10비트 GPADC를 설명합니다. 보수적인 보드 설계를 위해서는 VIN이 0.9 V 미만일 때만 직접 연결하고, 그보다 높은 전압은 VADC가 0.9 V 미만이 되도록 분압하십시오. 배터리 감지에는 원본 문서가 R1:R2를 5:1 근처로 하고 MΩ 범위의 저항을 사용할 것을 제안하며, 분압기 전류를 낮추는 대신 안정화 시간이 길어집니다. 도시된 분압기는 VADC와 그라운드 사이에 0.1 µF를 추가합니다. `VADC = VIN × R2 / (R1 + R2)`를 사용하고 최대 배터리 전압과 저항 허용 오차를 확인하십시오. 표 5.7-2의 전류 값은 VIN = 4.2 V 기준이며 모든 배터리 조건에 해당하지는 않습니다.
+SiFli의 하드웨어 애플리케이션 가이드는 입력 범위가 0–0.9 V인 5채널 10비트 GPADC를 설명합니다. 보수적인 보드 설계를 위해서는 VIN이 0.9 V 미만일 때만 직접 연결하고, 그보다 높은 전압은 VADC가 0.9 V 미만이 되도록 분압하십시오. 배터리 감지에는 원본 문서가 R1:R2를 5:1 근처로 하고 MΩ 범위의 저항을 사용할 것을 제안하며, 분압기 전류를 낮추는 대신 안정화 시간이 길어집니다. 그림에 표시된 분압기는 VADC와 그라운드 사이에 0.1 µF를 추가합니다. `VADC = VIN × R2 / (R1 + R2)`를 사용하고 최대 배터리 전압과 저항 허용 오차를 확인하십시오. 표 5.7-2의 전류 값은 VIN = 4.2 V 기준이며 모든 배터리 조건에 해당하지는 않습니다.
 
-원본 불일치: 우선순위가 더 높은 [OpenSiFli 하드웨어 애플리케이션 가이드](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)는 입력 범위가 0–0.9 V인 5채널 10비트 GPADC를 설명합니다. [V1.0 회로도 체크리스트](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)의 2번 항목은 최대 1.0 V로 정하지만 채널 수는 지정하지 않습니다. 반면 [SF32LB55x 데이터시트 V1.7.2의 3.2.1절](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)은 단일 종단 입력 8개 또는 차동 쌍 4개를 지정하며, 단일 종단 범위는 0–1.1 V, 차동 범위는 −0.7~0.7 V이고, 핀 표에는 GPADC_CH0–CH7이 나열되어 있습니다. 현재 [SDK ADC 가이드](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html)도 채널을 8개(0–7)로 매핑하고 샘플링 최대 전압을 1.1 V로 기재합니다. SiFli는 이처럼 상충하는 채널 수와 전압 한계를 설명하지 않았습니다. 따라서 이 가이드는 서면 확인이 있을 때까지 우선순위가 더 높은 하드웨어 애플리케이션의 5채널 및 0–0.9 V 설계 기준을 유지합니다. VADC를 0.9 V 미만으로 유지하십시오. 1.0 V나 1.1 V를 승인된 설계 한계로 취급해서는 안 되며, 선택한 디바이스와 패키지에서 사용할 수 있는 채널을 확인하십시오.
+원본 문서 간 GPADC 사양이 일치하지 않습니다. 우선순위가 더 높은 [OpenSiFli 하드웨어 애플리케이션 가이드](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)는 입력 범위가 0–0.9 V인 5채널 10비트 GPADC를 설명합니다. [V1.0 회로도 체크리스트](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) 2번 항목에는 최대 입력이 1.0 V로 적혀 있지만 채널 수는 명시되어 있지 않습니다.
+
+반면 [SF32LB55x 데이터시트 V1.7.2의 3.2.1절](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)은 싱글 엔디드 입력 8개 또는 차동 입력 쌍 4개를 지정합니다. 싱글 엔디드 입력 범위는 0–1.1 V, 차동 입력 범위는 −0.7~0.7 V이며, 핀 표에는 GPADC_CH0–CH7이 나열되어 있습니다. 최신 [SDK ADC 가이드](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html)도 채널 8개(0–7)를 매핑하고 최대 샘플링 전압을 1.1 V로 기재합니다.
+
+SiFli는 채널 수와 입력 전압 한계가 서로 다른 이유를 설명하지 않았습니다. 따라서 서면 확인을 받기 전까지 이 가이드에서는 우선순위가 더 높은 하드웨어 애플리케이션 가이드의 기준인 5채널, 0–0.9 V를 유지합니다. VADC는 0.9 V 미만으로 유지하십시오. 1.0 V나 1.1 V를 승인된 설계 한계로 간주하지 말고, 선택한 디바이스와 패키지에서 사용할 수 있는 채널을 확인하십시오.
 
 ![그림 5.7-3: GPADC 입력 및 분압기 레퍼런스](../../sf32-products/chips/assets/55x/SF32LB55x-GPADC-SCH.png){ width="100%" loading="lazy" }
 
@@ -538,7 +542,7 @@ SiFli의 하드웨어 애플리케이션 가이드는 입력 범위가 0–0.9 V
 
 심박 센서와 가속도계의 I2C/SPI, 제어, 웨이크 인터럽트 인터페이스는 LCPU를 통해 라우팅하십시오. 센서 전원을 필요에 따라 전환할 수 있도록 Iq가 낮은 DC-DC 컨버터, LDO 또는 로드 스위치를 선택하십시오.
 
-외부 Bluetooth 오디오는 HCPU UART1을 통해 통신합니다. 전압 레벨을 맞추거나 레벨 트랜슬레이터를 추가하십시오. 모듈 전원을 차단할 때는 누설을 방지하기 위해 트랜슬레이터 전원도 동시에 차단하십시오. SF32LB55x가 Standby에 진입한 동안 오디오 모듈에 전원이 계속 공급되고 전원 인에이블이 active-low이면, 기본값이 PD인 LCPU GPIO를 사용하십시오.
+외부 Bluetooth 오디오는 HCPU UART1을 통해 통신합니다. 전압 레벨을 맞추거나 레벨 트랜슬레이터를 추가하십시오. 모듈 전원을 차단할 때는 누설을 방지하기 위해 트랜슬레이터 전원도 동시에 차단하십시오. SF32LB55x가 Standby에 진입한 동안 오디오 모듈에 전원이 계속 공급되고 전원 인에이블이 Low 활성이면, 기본값이 PD인 LCPU GPIO를 사용하십시오.
 
 <div align="center"><em>표 5.7-3: 디버그 및 플래싱 인터페이스</em></div>
 
@@ -561,7 +565,7 @@ SiFli의 하드웨어 애플리케이션 가이드는 입력 범위가 0–0.9 V
 
 </div>
 
-UART RXD를 플로팅 상태로 두지 말고, 펌웨어 초기화 중에 내부 풀업을 활성화하십시오. UART3이 기본 로그 포트입니다. SiFli는 양산 플래싱과 크리스털 캘리브레이션을 위한 오프라인 프로그래머를 제공합니다. 최소한 VBAT, GND, VDDIOA, VDDIOB, RSTN, Mode, SWDIO, SWCLK, RXD1, TXD1, RXD3, TXD3 테스트 포인트를 확보해 두십시오. 양산 픽스처에 필요한 부분 집합은 VBAT, GND, boot_mode, VDDIOB, RXD3, TXD3입니다. VBAT와 boot_mode는 원본의 픽스처 레이블이므로, 배선하기 전에 실제 보드의 전원 및 Mode 연결에 대응시키십시오.
+UART RXD를 플로팅 상태로 두지 말고, 펌웨어 초기화 중에 내부 풀업을 활성화하십시오. UART3이 기본 로그 포트입니다. SiFli는 양산 플래싱과 크리스털 캘리브레이션을 위한 오프라인 프로그래머를 제공합니다. 최소한 VBAT, GND, VDDIOA, VDDIOB, RSTN, Mode, SWDIO, SWCLK, RXD1, TXD1, RXD3, TXD3 테스트 포인트를 확보해 두십시오. 양산 픽스처에 필요한 부분 집합은 VBAT, GND, boot_mode, VDDIOB, RXD3, TXD3입니다. VBAT와 boot_mode는 원본의 픽스처 라벨이므로, 배선하기 전에 실제 보드의 전원 및 Mode 연결에 대응시키십시오.
 
 원본 도면은 VDD_1V8을 커넥터 1번 핀(VTref)에, SWDIO를 7번 핀에, SWCLK를 9번 핀에 각각 22 Ω 직렬 저항을 통해 연결합니다. 표준 [J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector)도 1번 핀을 [VTref](https://kb.segger.com/VTref), 즉 프로브 전원 출력이 아닌 타깃 전압 기준 입력으로 사용합니다. 표준 케이블을 연결하기 전에 헤더 방향과 1.8 V 호환성을 확인하십시오.
 

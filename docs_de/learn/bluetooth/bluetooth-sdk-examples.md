@@ -32,11 +32,11 @@ Diese Seite ordnet die Beispiele für [Classic Bluetooth](https://docs.sifli.com
 
 </div>
 
-## Ein Beispiel als Validierungsbasis in Betrieb nehmen { #bring-up-an-example-as-evidence }
+## Ein Beispiel als Nachweisgrundlage in Betrieb nehmen { #bring-up-an-example-as-evidence }
 
 Protokollieren Sie vor Änderungen am Projekt die genaue SDK-Version, den Boardnamen, die Konfiguration, das Gegenstellengerät oder die App, die Funkeinstellungen und die erwarteten Logmeldungen. Gehen Sie anschließend wie folgt vor:
 
-1. Bauen und flashen Sie das unveränderte Beispiel mit dem exakten Boardnamen und den Anweisungen, die für den passenden SDK-Release angegeben sind. Ist die Zuordnung zwischen Dokumentation und SDK-Stand oder die Boardunterstützung nicht belegt, behandeln Sie sie vor der Anpassung als ungeprüft.
+1. Bauen und flashen Sie das unveränderte Beispiel mit dem exakten Boardnamen und den Anweisungen, die für den passenden SDK-Release angegeben sind. Ist die Zuordnung zwischen Dokumentation und SDK-Stand oder die Boardunterstützung nicht belegt, behandeln Sie die Kompatibilität vor der Anpassung als ungeprüft.
 2. Prüfen Sie das zentrale Funkverhalten: Geräteerkennung, Verbindung, Übertragung, Streaming oder Empfang, je nach Anwendungsfall.
 3. Wiederholen Sie den Test nach Reset, Trennung, Wiederverbindung sowie Aus- und Einschalten.
 4. Ergänzen Sie jeweils einen produktspezifischen Service, Benutzerablauf, Audiopfad oder eine Energiesparrichtlinie.

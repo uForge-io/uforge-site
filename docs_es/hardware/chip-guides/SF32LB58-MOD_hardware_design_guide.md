@@ -83,7 +83,7 @@ El módulo tiene 138 pines en total, descritos en la siguiente tabla.
 
 <div align="center" markdown>
 
-| Nombre | N.º | Tipo | MUX predeterminado | I/O predeterminado | Función |
+| Nombre | N.º | Tipo | MUX predeterminado | E/S predeterminada | Función |
 | :--- | :-: | :-: | :--- | :-: | :--- |
 | VDDIOB | 1 | P | 1,8/3,3 V | P | Entrada de alimentación de E/S de la interfaz PB |
 | PB36 | 2 | I/O/T | USART4_RXD | I | GPIO_B36, USART4_RXD, GPTIM3_CH1, #GPADC_CH4 |
@@ -99,7 +99,7 @@ El módulo tiene 138 pines en total, descritos en la siguiente tabla.
 | RSTN | 12 | I | RSTN | I | 1: modo de usuario; 0: modo de reinicio |
 | VDD_1V8 | 13 | P | 1,8 V | P | Entrada de alimentación principal de la MCU y de la memoria integrada en el encapsulado |
 | GND | 14 | P | Tierra | P | Tierra |
-| VDDIOA | 15 | P | 1,8/3,3 V | P | Entrada de alimentación IO de la interfaz PA, excepto PA00–PA11 |
+| VDDIOA | 15 | P | 1,8/3,3 V | P | Entrada de alimentación de E/S de la interfaz PA, excepto PA00–PA11 |
 | VDD_3V3 | 16 | P | 3,3 V | P | Entrada de alimentación analógica de la MCU |
 | PA13 | 17 | I/O/T | GPIO_A13 | O | GPIO_A13, GPTIM1_CH2, ATIM1_BKIN, LCDC1_DPI_DE |
 | PA15 | 18 | I/O/T | GPIO_A15 | O | GPIO_A15, GPTIM1_CH3, ATIM1_BKIN2, LCDC1_DPI_VSYNC |
@@ -129,7 +129,7 @@ El módulo tiene 138 pines en total, descritos en la siguiente tabla.
 | PA24 | 42 | I/O/T | GPIO_A24 | O | GPIO_A24, LCDC1_8080_RSTB, LCDC1_SPI_RSTB, LCDC1_DPI_R2 |
 | PA23 | 43 | I/O/T | GPIO_A23 | O | GPIO_A23, PDM1_CLK, I2S1_BCK, USART2_CTS, I2C2_SDA, LCDC1_DPI_R1 |
 | PA22 | 44 | I/O/T | GPIO_A22 | O | GPIO_A22, PDM2_DATA, GPTIM1_ETR, ATIM2_CH1, LCDC1_DPI_R0, LCDC1_JDI_VST |
-| VDDIOA2 | 45 | P | 1,8/3,3 V | P | Entrada de alimentación IO de PA00–PA11 |
+| VDDIOA2 | 45 | P | 1,8/3,3 V | P | Entrada de alimentación de E/S de PA00–PA11 |
 | GND | 46 | P | Tierra | P | Tierra |
 | DSI_D0N | 47 | O | DSI_D0N | O | Carril de datos MIPI DSI 0, negativo |
 | DSI_D0P | 48 | O | DSI_D0P | P | Carril de datos MIPI DSI 0, positivo |
@@ -150,11 +150,11 @@ El módulo tiene 138 pines en total, descritos en la siguiente tabla.
 | PB11 | 63 | I/O/T | SWDIO | I/O | SWDIO, GPIO_B11, USART4_TXD, GPTIM5_CH4 |
 | PB07 | 64 | I/O/T | SWCLK | O | SWCLK, GPIO_B07, USART4_RXD, GPTIM4_CH4 |
 | GND | 65 | P | Tierra | P | Tierra |
-| AU_DAC1N_OUT | 66 | AO | AU_DAC1N_OUT | AO | Salida diferencial negativa de Audio DAC1 |
-| AU_DAC1P_OUT | 67 | AO | AU_DAC1P_OUT | AO | Salida diferencial positiva de Audio DAC1 |
+| AU_DAC1N_OUT | 66 | AO | AU_DAC1N_OUT | AO | Salida diferencial negativa del DAC de audio 1 |
+| AU_DAC1P_OUT | 67 | AO | AU_DAC1P_OUT | AO | Salida diferencial positiva del DAC de audio 1 |
 | MIC_BIAS | 68 | P | MIC_BIAS | P | Tensión de polarización del micrófono |
-| AU_ADC1N_IN | 69 | AI | AU_ADC1N_IN | AI | Entrada diferencial negativa de Audio ADC1 |
-| AU_ADC1P_IN | 70 | AI | AU_ADC1P_IN | AI | Entrada diferencial positiva de Audio ADC1 |
+| AU_ADC1N_IN | 69 | AI | AU_ADC1N_IN | AI | Entrada diferencial negativa del ADC de audio 1 |
+| AU_ADC1P_IN | 70 | AI | AU_ADC1P_IN | AI | Entrada diferencial positiva del ADC de audio 1 |
 | GND | 71 | P | Tierra | P | Tierra |
 | BT_ANT | 72 | I/O | BT_ANT | I/O | Entrada/salida de señal RF Bluetooth |
 | PB51 | 73 | I/O/T | GPIO_B51 | I/O | GPIO_B51, PMIC_SDA, USART4_CTS, USART5_CTS, LPCOMP1_OUT |
@@ -213,10 +213,10 @@ El módulo tiene 138 pines en total, descritos en la siguiente tabla.
 | PB38 | 126 | I/O/T | GPIO_B38 | I/O | GPIO_B38, USART6_CTS, GPTIM3_CH3 |
 | PB47 | 127 | I/O/T | GPIO_B47 | I/O | GPIO_B47, I2C5_SDA, USART6_RXD, GPTIM5_CH2 |
 | PB48 | 128 | I/O/T | GPIO_B48 | I/O | GPIO_B48, I2C5_SCL, USART6_TXD, GPTIM5_CH3 |
-| AU_DAC2N_OUT | 129 | AO | AU_DAC2N_OUT | AO | Salida diferencial negativa de Audio DAC2 |
-| AU_DAC2P_OUT | 130 | AO | AU_DAC2P_OUT | AO | Salida diferencial positiva de Audio DAC2 |
-| AU_ADC2N_IN | 131 | AI | AU_ADC2N_IN | AI | Entrada diferencial negativa de Audio ADC2 |
-| AU_ADC2P_IN | 132 | AI | AU_ADC2P_IN | AI | Entrada diferencial positiva de Audio ADC2 |
+| AU_DAC2N_OUT | 129 | AO | AU_DAC2N_OUT | AO | Salida diferencial negativa del DAC de audio 2 |
+| AU_DAC2P_OUT | 130 | AO | AU_DAC2P_OUT | AO | Salida diferencial positiva del DAC de audio 2 |
+| AU_ADC2N_IN | 131 | AI | AU_ADC2N_IN | AI | Entrada diferencial negativa del ADC de audio 2 |
+| AU_ADC2P_IN | 132 | AI | AU_ADC2P_IN | AI | Entrada diferencial positiva del ADC de audio 2 |
 | GND | 133–138 | P | Tierra | P | Tierra (6 pines) |
 
 </div>
@@ -241,7 +241,7 @@ Cualquier pin marcado como `PAxx_I2C_UART` o `PBxx_I2C_UART` en la tabla anterio
 
 **UART** — Dúplex completo, velocidad de transmisión de hasta 6 Mbps, formato de datos configurable, control de flujo por hardware (CTS/RTS) y transmisión/recepción DMA de varios paquetes. UART1–3 pertenecen a HPSYS; UART4–6, a LPSYS.
 
-**I2C** — Admite los modos maestro y esclavo, FIFO de 8 bytes y DMA; los modos estándar (100 kbps), rápido (400 kbps), fast-mode-plus (1 Mbps) y alta velocidad (3,4 Mbps); direccionamiento maestro de 7 o 10 bits; estiramiento del reloj (clock stretching), y un filtro digital antirrebote configurable. I2C1–4 pertenecen a HPSYS; I2C5–7, a LPSYS.
+**I2C** — Admite los modos maestro y esclavo, FIFO de 8 bytes y DMA; los modos estándar (100 kbps), rápido (400 kbps), modo rápido plus (1 Mbps) y alta velocidad (3,4 Mbps); direccionamiento maestro de 7 o 10 bits; estiramiento del reloj (clock stretching), y un filtro digital antirrebote configurable. I2C1–4 pertenecen a HPSYS; I2C5–7, a LPSYS.
 
 **SPI** — Admite formatos SSP/SPI (dúplex completo, maestro o esclavo) y Microwire (semidúplex, solo maestro), anchura de datos de 4–32 bits, polaridad/fase de reloj configurable y polaridad de selección de chip configurable. Incluye FIFO de 32 bits × 16 entradas y DMA. SPI1/2 están en HPSYS (máx. 48 MHz); SPI3/4, en LPSYS (máx. 24 MHz).
 
@@ -257,7 +257,7 @@ Cualquier pin marcado como `PAxx_I2C_UART` o `PBxx_I2C_UART` en la tabla anterio
 
 ### 5.2 Procesamiento de señales analógicas { #52-analog-signal-processing }
 
-**GPADC de 12 bits** — ADC SAR, frecuencia máxima de muestreo de 4 MS/s, rango de entrada de 0–3,3 V en modo single-ended / ±2,1 V en modo diferencial, 8 canales single-ended (o 4 pares diferenciales), modos de medición única/continua, 4 intervalos configurables por medición, disparo por software/hardware y DMA.
+**GPADC de 12 bits** — ADC SAR, frecuencia máxima de muestreo de 4 MS/s, rango de entrada de 0–3,3 V en modo asimétrico / ±2,1 V en modo diferencial, 8 canales asimétricos (o 4 pares diferenciales), modos de medición única/continua, 4 intervalos configurables por medición, disparo por software/hardware y DMA.
 
 **Sensor de temperatura** — Resolución de 0,2 °C, rango de -40 °C a 125 °C, precisión de ±3 °C y lectura por sondeo o interrupción.
 
@@ -279,7 +279,7 @@ Cualquier pin marcado como `PAxx_I2C_UART` o `PBxx_I2C_UART` en la tabla anterio
 | :--- | :--- | :-: | :-: | :-: |
 | VDD_3V3 | Entrada de alimentación de 3,3 V | -0,3 | 3,6 | V |
 | VDD_1V8 | Entrada de alimentación de 1,8 V | -0,3 | 1,95 | V |
-| VDDIO | Entrada de alimentación de I/O | -0,3 | 3,6 | V |
+| VDDIO | Entrada de alimentación de E/S | -0,3 | 3,6 | V |
 | Tstore | Temperatura de almacenamiento | -40 | 125 | °C |
 
 </div>
@@ -294,7 +294,7 @@ Cualquier pin marcado como `PAxx_I2C_UART` o `PBxx_I2C_UART` en la tabla anterio
 | :--- | :--- | :-: | :-: | :-: | :-: |
 | VDD_3V3 | Entrada de alimentación de 3,3 V | 2,97 | 3,3 | 3,6 | V |
 | VDD_1V8 | Entrada de alimentación de 1,8 V | 1,7 | 1,8 | 1,95 | V |
-| VDDIO | Entrada de alimentación de I/O | 1,7 | - | 3,6 | V |
+| VDDIO | Entrada de alimentación de E/S | 1,7 | - | 3,6 | V |
 | TA | Temperatura de funcionamiento | -40 | - | 85 | °C |
 
 </div>
@@ -466,7 +466,7 @@ Reserve la zona de antena del módulo para que ningún componente, cobre, pista,
 ### 11.1 Condiciones de almacenamiento { #111-storage-conditions }
 
 - Guarde los productos sellados en una bolsa barrera contra la humedad (MBB), a <40 °C / 90 % HR, sin condensación.
-- Tras abrir la bolsa de vacío, utilice el módulo dentro del tiempo de exposición especificado por su nivel de sensibilidad a la humedad (MSL); de lo contrario, deberá hornearlo antes de una segunda pasada de reflujo.
+- Tras abrir la bolsa de vacío, utilice el módulo dentro del tiempo de exposición especificado por su nivel de sensibilidad a la humedad (MSL); de lo contrario, deberá secarlo en horno antes de una segunda pasada de reflujo.
 
 ### 11.2 Descarga electrostática (ESD) { #112-electrostatic-discharge-esd }
 

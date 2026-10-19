@@ -24,7 +24,7 @@ tags:
 | RF | RF整合、50 Ωアンテナ経路、AVDD_BRFのフィルタリング、RFキープアウト |
 | ストレージインターフェース | OPI PSRAM、QSPI NOR／NAND／PSRAM、SDIO eMMC／Micro SD |
 | ディスプレイとタッチ | MIPI DSI、SPI／QSPI、MCU8080、JDI、タッチ割り込み、リセット、バックライト、パネル電源 |
-| ウェイク、GPADC、製造インターフェース | ウェイク源とボタン、モーターPWM、GPADC分圧、センサー、Bluetoothオーディオ、DBG-UART、SWD、量産書き込み、水晶校正。 |
+| ウェイク、GPADC、製造インターフェース | ウェイクアップ要因とボタン、モーターPWM、GPADC分圧、センサー、Bluetoothオーディオ、DBG-UART、SWD、量産書き込み、水晶校正。 |
 
 </div>
 
@@ -68,7 +68,7 @@ QFN68LのSF32LB551には、VDD2、BUCK2_VSW、BUCK2_VOUT、LDOVCC2_VOUT、AVDD_D
 
 <div align="center" markdown>
 
-| 電源ピン | コンデンサ | 詳細説明 |
+| 電源ピン | コンデンサー | 詳細説明 |
 |:---------|:------------|:-----|
 | VDD1 VDD2 | 0.1 µF + 10 µF | VDD1とVDD2を同一ネットに接続します。10 µFと0.1 µFのコンデンサーを各1個以上、ピンの近くに配置してください |
 | BUCK1_VSW BUCK1_VOUT | 0.1 µF + 4.7 µF | 4.7 µFと0.1 µFのコンデンサーを各1個以上、ピンの近くに配置してください |
@@ -89,9 +89,9 @@ QFN68LのSF32LB551には、VDD2、BUCK2_VSW、BUCK2_VOUT、LDOVCC2_VOUT、AVDD_D
 
 必要なコンデンサーは対応するピンの近くに配置し、BUCKの電流ループを小さく保ち、レイアウト前にBUCK／LDOの動作モードを確認してください。リセット回路とPOR／BORのタイミングは実機で検証します。
 
-資料間に不一致があります。[SiFliの中国語版ハードウェアアプリケーションガイド](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)の表3-3と[V1.0回路図チェックリスト](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)の項目9は、VDD_RTCに1 µFを指定しています。一方、[同ガイドのリファレンス回路図でC0313](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png)は0.1 µFと記載されています。各値の適用条件は資料に説明されていません。設計リリース前に対象デバイスの値をSiFliへ確認し、推測で不一致を解消しないでください。
+資料間に不一致があります。[SiFliの中国語版ハードウェアアプリケーションガイド](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)の表3-3と[V1.0回路図チェックリスト](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)の項目9は、VDD_RTCに1 µFを指定しています。一方、[同ガイドの基準回路図でC0313](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png)は0.1 µFと記載されています。各値の適用条件は資料に説明されていません。設計リリース前に対象デバイスの値をSiFliへ確認し、推測で不一致を解消しないでください。
 
-VDD1とVDD2は同時に投入してください。SF32LB551にはVDD2がありません。RSTNをVDD1の入力電圧ドメインへプルアップし、0.1 µFをGNDへ接続します。基準図ではプルアップ電源が1.8 V/3.3 Vと記され、抵抗は10 kΩです。設計で使用するVDD1の電圧ドメインに合ったレベルを選んでください。図5.1-1には、PORレベル1.50 V、2.5 V～1.5 Vの範囲で設定できるBOR、RSTNの0.7 Vのマーカーが示されています。図5.1-3の実測波形では、電源の立ち上がりからリセット解除まで約700 µsです。これは当該例の測定結果であり、すべての設計で保証される遅延ではありません。
+VDD1とVDD2は同時に投入してください。SF32LB551にはVDD2がありません。RSTNをVDD1の入力電圧ドメインへプルアップし、0.1 µFをGNDへ接続します。基準回路図ではプルアップ電源が1.8 V/3.3 Vと記され、抵抗は10 kΩです。設計で使用するVDD1の電圧ドメインに合ったレベルを選んでください。図5.1-1には、PORレベル1.50 V、2.5 V～1.5 Vの範囲で設定できるBOR、RSTNの0.7 Vのマーカーが示されています。図5.1-3の実測波形では、電源の立ち上がりからリセット解除まで約700 µsです。これは当該例の測定結果であり、すべての設計で保証される遅延ではありません。
 
 ![図 5.1-1: 電源オン／オフのタイミング](../../sf32-products/chips/assets/55x/SF32LB55x-POR-BOR.png){ width="100%" loading="lazy" }
 
@@ -113,7 +113,7 @@ VDD1とVDD2は同時に投入してください。SF32LB551にはVDD2があり�
 
 <div align="center"><em>図 5.1-5: QFN DC-DC基準回路</em></div>
 
-SiFliのハードウェアアプリケーションノートに従い、BUCK用インダクタは4.7 µH、直流抵抗DCR ≤ 0.4 Ω、飽和電流Isat ≥ 450 mAを満たすものを選びます。
+SiFliのハードウェアアプリケーションノートに従い、BUCK用インダクターは4.7 µH、直流抵抗DCR ≤ 0.4 Ω、飽和電流Isat ≥ 450 mAを満たすものを選びます。
 
 ### 5.2. ブートモード { #52-boot-mode }
 
@@ -130,7 +130,7 @@ SiFliのハードウェアアプリケーションノートに従い、BUCK用�
 
 Highモードでは電源投入後にダウンロードモードへ入り、Lowモードではユーザープログラムを起動します。量産治具で必要なブート状態を強制できること、また製品筐体や試験アクセスによってブート関連ピンが操作できなくならないことを確認してください。
 
-Modeピンの電圧ドメインはVDDIOAと共通です。外付けの10 kΩ抵抗で対応する電源またはGNDに接続し、安定したレベルを保ってください。フローティングや意図しないレベル変化は避けます。量産基板では、ファームウェア書き込みと水晶校正用のModeテストポイントが必須ですが、ジャンパは不要です。試験基板にはジャンパ用の領域を確保し、アプリケーションが停止した場合にダウンロードモードで起動して復旧できるようにしてください。
+Modeピンの電圧ドメインはVDDIOAと共通です。外付けの10 kΩ抵抗で対応する電源またはGNDに接続し、安定したレベルを保ってください。フローティングや意図しないレベル変化は避けます。量産基板では、ファームウェア書き込みと水晶校正用のModeテストポイントが必須ですが、ジャンパーは不要です。試験基板にはジャンパー用の領域を確保し、アプリケーションが停止した場合にダウンロードモードで起動して復旧できるようにしてください。
 
 ### 5.3. クロック生成 { #53-clock-generation }
 
@@ -167,7 +167,7 @@ BGA145の外付けOPI PSRAMは1チャネル、BGA169は2チャネルです。表
 
 外付けQSPI PSRAMにはQSPI2を推奨します。HCPUのGPIOで外付けOPI/QSPI PSRAMの電源を制御する場合、PUタイプのHCPUピンを使用し、Highでオン、Lowでオフにしてください。内蔵FlashのVDD_SIPをスイッチ制御する場合はPA58を使用し、同じ極性で制御します。QSPI4にNOR Flashを追加するか決める前に、LCPUの加速度・心拍アルゴリズムに必要なFlash容量をSiFliのFAEと確認してください。
 
-原資料のOPI表では方向の表記が統一されていません。[BGA145のリファレンス回路図](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png)、[BGA169メモリー1のリファレンス回路図](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png)、[メモリー2のリファレンス回路図](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png)では、MCUのPA37/PA20およびPA07/PA08から外付けPSRAMのCS#とCLKへ接続されています。したがって、以下の表ではMCU側を基準にし、CS#とCLKをMCU出力／PSRAM入力として記載します。回路図ではDQS/DMの固定方向は確認できないため、選定したPSRAMのデータシートで機能と方向を確認してください。
+原資料のOPI表では方向の表記が統一されていません。[BGA145の基準回路図](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png)、[BGA169メモリー1の基準回路図](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png)、[メモリー2の基準回路図](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png)では、MCUのPA37/PA20およびPA07/PA08から外付けPSRAMのCS#とCLKへ接続されています。したがって、以下の表ではMCU側を基準にし、CS#とCLKをMCU出力／PSRAM入力として記載します。回路図ではDQS/DMの固定方向は確認できないため、選定したPSRAMのデータシートで機能と方向を確認してください。
 
 図示の各PSRAMは1.8 V電源、0.1 µFを3個、1 µF/6.3 Vを1個使用します。未接続のRESET#やNC/CLK#は図示のメモリーに固有です。選択した部品のデータシートを確認し、そのまま一般化しないでください。
 
@@ -481,9 +481,9 @@ BL_PWMにはGPTIM1_CHx機能を持つGPIOを使用し、冷間起動時にバッ
 
 ウェイク、アナログ、デバッグ、量産用アクセスは、筐体や治具を考慮して計画してください。ウェイクピンには明確なアイドルレベルとESD保護が必要です。GPADC分圧回路ではセトリング時間と漏れ電流のバランスを取り、EVTおよび量産でデバッグ／書き込みアクセスを確保してください。
 
-SF32LB55xはHCPUのウェイク源4系統（WKUP_A0～WKUP_A3）とLCPUの6系統（WKUP_B0～WKUP_B5）を備え、各信号は対応するCPUのみを起こします。Hibernateから起動できるのはLCPUの6系統だけです。10本の入力はフローティングにせず、用途に応じた外付けプルアップ／プルダウンでスリープ時のリークを防いでください。
+SF32LB55xはHCPUのウェイクアップ要因4系統（WKUP_A0～WKUP_A3）とLCPUのウェイクアップ要因6系統（WKUP_B0～WKUP_B5）を備え、各信号は対応するCPUのみを起こします。Hibernateから起動できるのはLCPUの6系統だけです。10本の入力はフローティングにせず、用途に応じた外付けプルアップ／プルダウンでスリープ時のリークを防いでください。
 
-参考回路では、KEY1をPB48に接続し、10 kΩでVDD_1V8へプルアップしています。ESD保護とコンデンサーも示されています。KEY2側には10 kΩのプルアップとESD保護があり、ジャンパーでPA08、PA77、PA78のいずれかに接続する構成です。C0004はNF（未実装）と記されています。これらは回路例であり、すべての端子がウェイク対応という意味ではありません。PA08は表5.7-1に記載されていません。表に示すウェイク対応入力から実際に使用する端子を選び、各入力のアイドル時レベルを確定してください。
+基準回路では、KEY1をPB48に接続し、10 kΩでVDD_1V8へプルアップしています。ESD保護とコンデンサーも示されています。KEY2側には10 kΩのプルアップとESD保護があり、ジャンパーでPA08、PA77、PA78のいずれかに接続する構成です。C0004はNF（未実装）と記されています。これらは回路例であり、すべての端子がウェイク対応という意味ではありません。PA08は表5.7-1に記載されていません。表に示すウェイク対応入力から実際に使用する端子を選び、各入力のアイドル時レベルを確定してください。
 
 ![図 5.7-1: ウェイクボタンの基準回路](../../sf32-products/chips/assets/55x/SF32LB55x-KEY-SCH.png){ width="100%" loading="lazy" }
 
@@ -514,9 +514,9 @@ SF32LB55xはHCPUのウェイク源4系統（WKUP_A0～WKUP_A3）とLCPUの6系�
 
 </div>
 
-SiFliのハードウェアアプリケーションガイドでは、GPADCは5チャネル、10ビットで、入力範囲は0～0.9 Vとされています。保守的な基板設計では、VINが0.9 V未満の場合のみ直接接続し、それ以上では分圧してVADCを0.9 V未満に保ちます。電池測定では、原資料のR1:R2が約5:1、MΩ級の抵抗を参考にしてください。分圧電流を減らすと整定時間が長くなります。図示の回路はVADCとGND間に0.1 µFを接続しています。`VADC = VIN × R2 / (R1 + R2)`で最大電池電圧と抵抗公差を確認します。表5.7-2の電流値はVIN = 4.2 Vでの値であり、すべての電池条件に当てはまりません。
+SiFliのハードウェアアプリケーションガイドでは、GPADCは5チャネル、10ビットで、入力範囲は0～0.9 Vとされています。保守的な基板設計では、VINが0.9 V未満の場合のみ直接接続し、それ以上では分圧してVADCを0.9 V未満に保ちます。バッテリー測定では、原資料のR1:R2が約5:1、MΩ級の抵抗を参考にしてください。分圧電流を減らすとセトリング時間が長くなります。図示の回路はVADCとGND間に0.1 µFを接続しています。`VADC = VIN × R2 / (R1 + R2)`で最大バッテリー電圧と抵抗公差を確認します。表5.7-2の電流値はVIN = 4.2 Vでの値であり、すべてのバッテリー条件に当てはまりません。
 
-資料間に差異があります。優先度の高い[OpenSiFliハードウェアアプリケーションガイド](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)は、GPADCを10ビット・5チャネル、入力範囲を0～0.9 Vとしています。[V1.0回路図チェックリスト](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)の項目2は最大入力電圧を1.0 Vとしていますが、チャネル数は示していません。一方、[SF32LB55xデータシートV1.7.2の3.2.1節](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)は、単端入力8チャネルまたは差動入力4組をサポートし、入力範囲をそれぞれ0～1.1 V、−0.7～0.7 Vとしています。ピン表にはGPADC_CH0～CH7が記載されています。現行の[SDK ADCガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html)も8チャネル（0～7）と最大サンプリング電圧1.1 Vを記載しています。SiFliはチャネル数と電圧上限の差を説明していません。書面で確認されるまで、本ガイドでは優先度の高い資料に基づき、GPADCを5チャネル、入力範囲を0～0.9 Vとして設計します。VADCを0.9 V未満に保ち、1.0 Vや1.1 Vを承認済みの設計上限と見なさず、対象の型番とパッケージで使用できるチャネルをSiFliに確認してください。
+資料間に差異があります。優先度の高い[OpenSiFliハードウェアアプリケーションガイド](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)は、GPADCを10ビット・5チャネル、入力範囲を0～0.9 Vとしています。[V1.0回路図チェックリスト](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)の項目2は最大入力電圧を1.0 Vとしていますが、チャネル数は示していません。一方、[SF32LB55xデータシートV1.7.2の3.2.1節](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)は、シングルエンド入力8チャネルまたは差動入力4組をサポートし、入力範囲をそれぞれ0～1.1 V、−0.7～0.7 Vとしています。ピン表にはGPADC_CH0～CH7が記載されています。現行の[SDK ADCガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html)も8チャネル（0～7）と最大サンプリング電圧1.1 Vを記載しています。SiFliはチャネル数と電圧上限の差を説明していません。書面で確認されるまで、本ガイドでは優先度の高い資料に基づき、GPADCを5チャネル、入力範囲を0～0.9 Vとして設計します。VADCを0.9 V未満に保ち、1.0 Vや1.1 Vを承認済みの設計上限と見なさず、対象の型番とパッケージで使用できるチャネルをSiFliに確認してください。
 
 ![図 5.7-3: GPADC入力と分圧の基準回路](../../sf32-products/chips/assets/55x/SF32LB55x-GPADC-SCH.png){ width="100%" loading="lazy" }
 
@@ -526,7 +526,7 @@ SiFliのハードウェアアプリケーションガイドでは、GPADCは5チ
 
 <div align="center" markdown>
 
-| 抵抗の組み合わせ | R1 (kΩ) ±1% | R2 (kΩ) ±1% | 電圧整定時間 (ms) | Iq (µA) (VIN = 4.2 V) |
+| 抵抗の組み合わせ | R1 (kΩ) ±1% | R2 (kΩ) ±1% | 電圧セトリング時間 (ms) | Iq (µA) (VIN = 4.2 V) |
 |:-----------------|--------------:|--------------:|------------------------:|---------------------:|
 | 1 | 1000 | 220 | 138 | 3.44 |
 | 2 | 2000 | 430 | 250 | 1.73 |
@@ -563,8 +563,8 @@ SiFliのハードウェアアプリケーションガイドでは、GPADCは5チ
 
 UART RXDをフローティングにせず、ファームウェア初期化時に内部プルアップを有効にします。UART3はデフォルトのログポートです。SiFliは量産書き込みと水晶校正用のオフライン書き込み器を提供しています。VBAT、GND、VDDIOA、VDDIOB、RSTN、Mode、SWDIO、SWCLK、RXD1、TXD1、RXD3、TXD3のテストポイントを最低限設けます。量産治具で必要なサブセットはVBAT、GND、boot_mode、VDDIOB、RXD3、TXD3です。VBATとboot_modeは原資料の治具信号名なので、配線前に実際の基板電源とMode接続へ対応付けてください。
 
-原図では、VDD_1V8をコネクタの1番ピン（VTref）に接続し、SWDIOとSWCLKをそれぞれ22 Ωの直列抵抗を介して7番ピンと9番ピンに接続しています。標準の[J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector)でも1番ピンは[VTref](https://kb.segger.com/VTref)、つまりターゲット電圧の基準入力であり、プローブの電源出力ではありません。標準ケーブルを接続する前に、コネクタの向きと1.8 Vへの対応を確認してください。
+原図では、VDD_1V8をコネクターの1番ピン（VTref）に接続し、SWDIOとSWCLKをそれぞれ22 Ωの直列抵抗を介して7番ピンと9番ピンに接続しています。標準の[J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector)でも1番ピンは[VTref](https://kb.segger.com/VTref)、つまりターゲット電圧の基準入力であり、プローブの電源出力ではありません。標準ケーブルを接続する前に、コネクターの向きと1.8 Vへの対応を確認してください。
 
-![図 5.7-4: 原資料のSWDコネクタ：変換配線を確認](../../sf32-products/chips/assets/55x/SF32LB55x-SWD-SCH.png){ width="100%" loading="lazy" }
+![図 5.7-4: 原資料のSWDコネクター：変換配線を確認](../../sf32-products/chips/assets/55x/SF32LB55x-SWD-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>図 5.7-4: 原資料のSWDコネクタ：変換配線を確認</em></div>
+<div align="center"><em>図 5.7-4: 原資料のSWDコネクター：変換配線を確認</em></div>

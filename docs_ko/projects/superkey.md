@@ -22,7 +22,7 @@ SuperKey는 단순한 단축키 패드 이상입니다. 다음과 같은 제품 
 - 호스트 데이터를 수집하고, 기능을 구성하고, 펌웨어 업데이트를 실행하는 컴패니언 애플리케이션 [SuperKeyHub](https://github.com/SiFliSparks/SuperKeyHub)
 - 공개된 [sf32-keyboard 설계](https://oshwhub.com/sifli/sf32-keyboard)를 통한 재현 가능한 하드웨어
 
-![SuperKey three-display user interface](https://raw.githubusercontent.com/SiFliSparks/SuperKey/main/docs/src/.vuepress/public/assets/image/SuperKeyUI.png)
+![SuperKey의 3개 디스플레이 사용자 인터페이스](https://raw.githubusercontent.com/SiFliSparks/SuperKey/main/docs/src/.vuepress/public/assets/image/SuperKeyUI.png)
 <div align="center"><em>SuperKey 3개 디스플레이 사용자 인터페이스</em></div>
 
 ## 왜 SF32 구현인가? { #why-the-sf32-implementation }
@@ -35,7 +35,7 @@ SuperKey에는 그래픽, 여러 디스플레이, 복합 USB 디바이스, 키�
 
 **목표:** 버전이 고정된 SuperKey를 재현하고, HID, CDC, 3개 디스플레이 UI, 입력, 센싱, 슬립 복구를 검증한 다음, 한 종류의 동작만 변경하면서 제품 검토에 적합한 빌드, 통신, 회귀 증거를 보관합니다.
 
-이 페이지는 공개된 PCB가 양산 준비가 되어 있다거나, 모든 PC 텔레메트리 소스, 날씨 서비스, 시리얼 브리지, USB 호스트, 운영체제 버전과 호환된다는 것을 입증하지 않습니다. 주식, 날씨, 성능 데이터는 SuperKeyHub 버전, 서드파티 API, 시스템 권한, 호스트 하드웨어에 따라 달라질 수 있습니다.
+이 페이지는 공개된 PCB가 양산 준비가 되어 있다거나, 모든 PC 텔레메트리 소스, 날씨 서비스, 시리얼 브리지, USB 호스트, 운영체제 버전과 호환된다는 것을 입증하지 않습니다. 주식 시세, 날씨, 성능 데이터는 SuperKeyHub 버전, 서드파티 API, 시스템 권한, 호스트 하드웨어에 따라 달라질 수 있습니다.
 
 시작하기 전에 다음을 준비하십시오.
 
@@ -46,7 +46,7 @@ SuperKey에는 그래픽, 여러 디스플레이, 복합 USB 디바이스, 키�
 - 날씨를 범위에 포함하는 경우, 유효한 QWeather API Key, API Host, 도시 설정.
 - USB 열거, 시리얼 로그, 키 동작, 디스플레이 상태, 슬립 복구에 대한 테스트 기록.
 
-<div align="center"><em>표: SuperKey 프로젝트 계약</em></div>
+<div align="center"><em>표: SuperKey 프로젝트 기준 및 적용 전 검증 항목</em></div>
 
 <div align="center" markdown>
 
@@ -158,11 +158,11 @@ flowchart LR
 
 **목표:** 코드를 변경하기 전에 전체 레퍼런스 경로를 입증합니다.
 
-1. 업스트림 조립 자료에 따라 LCD 케이블 방향, 스위치, 인코더, 인클로저, USB 커넥터를 확인하고, PCB와 펌웨어 리비전을 기록합니다.
-2. 맞는 SuperKeyHub를 설치합니다. 디바이스 열거를 확인한 다음 HID와 CDC를 각각 독립적으로 테스트합니다.
-3. 날씨 자격 증명, 포트, 1 Mbps 시리얼 동작을 구성합니다. 컴패니언이 없을 때의 동작을 기록한 다음, 컴패니언을 연결하고 데이터 전달을 활성화합니다.
-4. 3개 디스플레이 탐색, 키 매핑, 미디어 제어, 인코더, SHT30 데이터, LED 효과, 텔레메트리 갱신 주기 한 번을 검증합니다.
-5. 콜드 스타트하고 반복합니다. UI 사진, 컴패니언 로그, 디바이스 로그, 버전 조회 결과를 저장합니다.
+1. 업스트림 조립 자료를 참고해 LCD 케이블 방향, 스위치, 인코더, 인클로저, USB 커넥터를 확인하고 PCB와 펌웨어 리비전을 기록하십시오.
+2. 호환되는 SuperKeyHub를 설치하십시오. 디바이스 열거를 확인한 다음 HID와 CDC를 각각 독립적으로 테스트하십시오.
+3. 날씨 자격 증명, 포트, 1 Mbps 시리얼 동작을 구성하십시오. 컴패니언이 없을 때의 동작을 기록한 뒤 컴패니언을 연결하고 데이터 전달을 활성화하십시오.
+4. 3개 디스플레이 탐색, 키 매핑, 미디어 제어, 인코더, SHT30 데이터, LED 효과, 텔레메트리 갱신 주기 한 번을 검증하십시오.
+5. 콜드 스타트 후 테스트를 반복하십시오. UI 사진, 컴패니언 로그, 디바이스 로그, 버전 조회 결과를 저장하십시오.
 
 **보관할 증거:** 하드웨어 리비전, 펌웨어 태그/커밋, SDK 커밋, 컴패니언 버전, OS, 포트와 API 구성, USB 열거, 로그, 디스플레이, 입력 기록.
 
@@ -193,10 +193,10 @@ flowchart LR
 
 **목표:** 두 번째 엔지니어가 클린 체크아웃에서 빌드, 기록하고 2단계를 반복할 수 있게 합니다.
 
-1. 재귀적으로 클론하고 SuperKey와 SiFli-SDK 커밋을 모두 기록합니다.
-2. `sf32lb52-superkey`와 `../boards` 검색 경로로 클린 빌드합니다.
-3. 빌드 로그, 메모리/파티션 출력, 플래싱 스크립트, 생성된 이미지, 시리얼 로그를 저장합니다.
-4. 두 번째 컴퓨터에서 빌드하거나 빌드 디렉터리를 삭제한 뒤 다시 빌드하고, 같은 하드웨어에 기록한 다음, 핵심 회귀 테스트를 반복합니다.
+1. 저장소를 재귀적으로 클론하고 SuperKey와 SiFli-SDK 커밋을 모두 기록하십시오.
+2. `sf32lb52-superkey`와 `../boards` 검색 경로를 사용해 클린 빌드하십시오.
+3. 빌드 로그, 메모리/파티션 출력, 플래싱 스크립트, 생성된 이미지, 시리얼 로그를 저장하십시오.
+4. 두 번째 컴퓨터에서 빌드하거나 빌드 디렉터리를 삭제한 뒤 다시 빌드하십시오. 같은 하드웨어에 기록한 다음 핵심 회귀 테스트를 반복하십시오.
 
 **게이트 3 종료 기준:** 추적되지 않는 파일, 오래된 산출물, 수동 바이너리 교체 없이 2단계를 통과하는 이미지를 생성할 수 있습니다.
 
@@ -235,7 +235,7 @@ flowchart LR
 
 ## 제품 설계로의 인계 { #handoff-to-product-design }
 
-SF32 및 메모리 선택, USB HID/CDC 디스크립터, 디스플레이 3개와 백라이트 연결, 입력/센서 인터페이스, 전원 및 슬립 정책, 파일 시스템과 업데이트 파티션, 컴패니언 프로토콜, 양산 테스트 포인트, 검증된 복구 경로를 이어서 가져가십시오. 이어서 [SF32LB52x](../sf32-products/chips/SF32LB52x.md), [SF32LB52x 하드웨어 설계 가이드](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [빌드, 플래시, 모니터](../develop/platforms/sifli-sdk/build-flash-monitor.md), [양산 설계](../hardware/design-for-production.md)를 참조하십시오.
+SF32 및 메모리 선택, USB HID/CDC 디스크립터, 디스플레이 3개와 백라이트 연결, 입력/센서 인터페이스, 전원 및 슬립 정책, 파일 시스템과 업데이트 파티션, 컴패니언 프로토콜, 양산 테스트 포인트, 검증된 복구 경로를 이어서 가져가십시오. 이어서 [SF32LB52x](../sf32-products/chips/SF32LB52x.md), [SF32LB52x 하드웨어 설계 가이드](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [SiFli-SDK 빌드, 플래싱, 모니터링](../develop/platforms/sifli-sdk/build-flash-monitor.md), [양산 설계](../hardware/design-for-production.md)를 참조하십시오.
 
 ## 주요 정보 출처 { #authoritative-sources }
 

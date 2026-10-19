@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-Nano：紧凑型半孔 SF32LB52x 开发板，适合贴装式原型、小型显示模组调试和接近成品形态的评估。"
+description: "SF32LB52-DevKit-Nano：紧凑型半孔 SF32LB52x 开发板，适合贴装式原型、小型显示模组启动调试和接近成品形态的评估。"
 tags:
     - 硬件
     - 开发板
@@ -61,7 +61,7 @@ N4 变体适合紧凑型控制、蓝牙（Bluetooth）和简单 UI 应用。N16R
 - 将开发板焊接到载板 PCB 上
 - 在自定义板设计前测试接近成品的引脚分配
 - 对比仅含 NOR Flash 的配置，以及搭配 PSRAM 的 QSPI-NOR、QSPI-NAND 配置
-- 在小尺寸板型中验证 LCD、音频、传感器和 USB 功能
+- 在小尺寸板型中启动调试 LCD、音频、传感器和 USB 功能
 
 如果需要更方便的台式接线和更宽裕的信号引出，使用 [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md)。如果需要带充电器、TF 卡、麦克风和扬声器功放的显示型开发板，请使用 [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md)。
 

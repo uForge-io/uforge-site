@@ -10,9 +10,9 @@ tags:
 
 ## Objetivo e público-alvo { #overview }
 
-Este guia apresenta o projeto de baixo consumo em dispositivos SF32: modos de energia, o que realmente consome a bateria e como organizar o firmware para que o sistema permaneça o maior tempo possível em estados de baixo consumo. O consumo depende do sistema como um todo. Decisões sobre Bluetooth, gráficos, áudio e IA afetam diretamente a autonomia e, por isso, são analisadas em conjunto.
+Este guia apresenta o projeto de baixo consumo em dispositivos SF32: modos de energia, o que realmente consome a bateria e como organizar o firmware para que o sistema permaneça o maior tempo possível em estados de baixo consumo. O consumo de energia é uma questão que envolve o sistema como um todo: decisões sobre Bluetooth, gráficos, áudio e IA afetam o consumo e, por isso, este guia reúne esses efeitos.
 
-A documentação do SDK da SiFli descreve o middleware **PM (Power Management, gerenciamento de energia)** baseado em RT-Thread para algumas plataformas, incluindo o SF32LB52x. Os modos disponíveis e o comportamento de despertar podem variar conforme o dispositivo e a configuração do SDK; consulte a documentação do dispositivo em questão. Nas famílias em que o SDK atribui as tarefas do controlador Bluetooth a um processador separado (consulte [Processador Bluetooth](../bluetooth/processor.md)), o processador separado pode tratar os eventos de rádio sem despertar a CPU da aplicação a cada evento. A possibilidade de ela permanecer suspensa depende da distribuição das tarefas, das fontes de despertar configuradas e do tráfego entre processadores; valide esse comportamento no dispositivo de destino.
+A documentação do SDK da SiFli descreve o middleware **PM (Power Management, gerenciamento de energia)** baseado em RT-Thread para algumas plataformas, incluindo o SF32LB52x. Os modos disponíveis e o comportamento de despertar podem variar conforme o dispositivo e a configuração do SDK; consulte a documentação do dispositivo em questão. Nas famílias em que o SDK atribui as tarefas do controlador Bluetooth a um processador separado (consulte [Arquitetura do processador Bluetooth](../bluetooth/processor.md)), o processador separado pode tratar os eventos de rádio sem despertar a CPU da aplicação a cada evento. A possibilidade de ela permanecer suspensa depende da distribuição das tarefas, das fontes de despertar configuradas e do tráfego entre processadores; valide esse comportamento no dispositivo de destino.
 
 Use esta página para transformar uma meta de autonomia em decisões de hardware e firmware sustentadas por medições. Ela se destina a engenheiros que precisam equilibrar standby conectado, display, áudio, sensores, IA e tempo de resposta ao usuário. Entrar em suspensão não se resume a chamar uma API.
 
@@ -41,14 +41,14 @@ As categorias abaixo são estados conceituais do sistema, não uma lista exata d
 | **Ativo** | CPU em execução e periféricos habilitados conforme necessário | Interação com a interface, transferência Bluetooth, streaming de áudio e processamento de sensores. |
 | **Inativo (Idle)** | A CPU aguarda um evento ou uma interrupção; o estado dos periféricos depende do dispositivo e da configuração | Entre quadros da interface ou enquanto aguarda a próxima tarefa programada ou uma interrupção habilitada. |
 | **Suspensão / baixo consumo** | Uma CPU ou um subsistema entra em um estado de baixo consumo compatível; clocks, domínios e periféricos podem parar ou continuar ativos conforme esse estado | Standby conectado ou espera por um evento Bluetooth, uma interrupção de sensor ou um temporizador configurados. |
-| **Suspensão profunda / standby** | Estado de baixo consumo mais profundo e específico do dispositivo; domínios ativos reduzidos; a retenção e o despertar variam | Períodos longos de inatividade, quando o modo escolhido e os requisitos de despertar permitem. |
+| **Deep Sleep / Standby** | Estado de baixo consumo mais profundo e específico do dispositivo; domínios ativos reduzidos; a retenção e o despertar variam | Períodos longos de inatividade, quando o modo escolhido e os requisitos de despertar permitem. |
 
 </div>
 
 Durante a execução normal, o sistema alterna entre estados. Uma fonte de despertar configurada desperta a CPU ou o subsistema; a sequência de despertar e restauração dos clocks varia conforme o dispositivo. Ao concluir o trabalho, os drivers ou tarefas responsáveis devem liberar as solicitações de PM que impedem a suspensão, para que a política configurada selecione um estado de baixo consumo permitido. A curva abaixo é ilustrativa: mostra transições relativas, não correntes ou tempos específicos de um dispositivo.
 
 <div align="center">
-<img src="assets/power-mode-transition-pt.svg" alt="Curva ilustrativa de corrente relativa com suspensão profunda, despertar, trabalho ativo, inatividade e retorno ao baixo consumo" width="960">
+<img src="assets/power-mode-transition-pt.svg" alt="Curva ilustrativa de corrente relativa com Deep Sleep, despertar, trabalho ativo, inatividade e retorno ao baixo consumo" width="960">
 <br><em>Diagrama: transições ilustrativas de energia durante uma tarefa curta</em>
 </div>
 
@@ -68,7 +68,7 @@ Cada subsistema tem um perfil de consumo diferente:
 |:----------|:--------------------|:------|
 | **CPU** | Tempo de execução ativa, não apenas frequência de clock | Este guia |
 | **Rádio Bluetooth** | Intervalo de advertising, intervalo de conexão, latência do periférico (slave latency) e potência de TX | [Visão geral do Bluetooth](../bluetooth/overview.md#advertising-and-connection-parameters) |
-| **Display** | Frequência de atualização, atualização completa ou parcial e iluminação de fundo | [Controlador de display: atualização parcial](../graphics/display-controller.md#partial-refresh-and-dirty-regions) |
+| **Display** | Frequência de atualização, atualização completa ou parcial e retroiluminação | [Controlador de display: atualização parcial](../graphics/display-controller.md#partial-refresh-and-dirty-regions) |
 | **Codec de áudio/DMA** | Duração da sessão ativa, taxa de amostragem e alimentação mantida entre sessões | [Visão geral de áudio](../audio/overview.md#power-considerations-for-audio) |
 | **Inferência de IA** | Frequência de inferência e tamanho da janela, não apenas tamanho do modelo | [Visão geral de IA](../ai/overview.md#power-aware-inference-scheduling) |
 | **Sistema de memória** | Atividade de cache/PSRAM e frequência de execução de código em memória externa lenta | [STAR-MC1](../architecture/star-mc1.md) |
@@ -103,12 +103,12 @@ Os parâmetros de conexão e advertising são os principais ajustes para o consu
 
 Para medir, por cenário, o consumo real com apenas Bluetooth clássico, apenas BLE e ambos operando em modo dual, consulte [Medição e análise do consumo de energia em Bluetooth](../bluetooth/bluetooth-low-power-profiling.md).
 
-## Consumo do display e da iluminação de fundo { #display-and-backlight-power }
+## Consumo do display e da retroiluminação { #display-and-backlight-power }
 
-Displays e iluminação de fundo frequentemente representam o maior consumo individual em produtos vestíveis ou portáteis:
+Displays e retroiluminação frequentemente representam o maior consumo individual em produtos vestíveis ou portáteis:
 
 - Use atualização parcial e de regiões alteradas em vez de redesenhar toda a tela quando o painel e a interface permitirem; consulte [Controlador de display: atualização parcial](../graphics/display-controller.md#partial-refresh-and-dirty-regions).
-- Durante a inatividade, reduza o brilho do display ou desligue a iluminação de fundo, se houver. Pare também as animações quando a tela estiver escurecida ou coberta.
+- Durante a inatividade, reduza o brilho do display ou desligue a retroiluminação, se houver. Pare também as animações quando a tela estiver escurecida ou coberta.
 - Para produtos com display sempre ativo, compare painéis como EPD, JDI/memory-in-pixel, AMOLED e TFT pela energia medida nesse modo e pela experiência de uso exigida. Escolha o painel e a política de operação que atendam ao orçamento, em vez de manter continuamente um modo normal de display ativo.
 - Trate o display sempre ativo como uma linha independente no orçamento, pois ela muda substancialmente o significado de “inativo” para o produto.
 
@@ -137,7 +137,7 @@ Além da CPU:
 A política do firmware só pode funcionar dentro dos limites do hardware:
 
 - A eficiência do PMIC/LDO nas correntes reais do produto importa mais que valores destacados para cargas sem relação com o uso.
-- Layout de RF e ajuste da antena afetam a potência de TX necessária para obter alcance confiável. Um projeto de RF ruim força o firmware a compensar com mais potência e reduz a autonomia; consulte [Processador Bluetooth: considerações sobre RF e clock](../bluetooth/processor.md#rf-and-clock-considerations).
+- Layout de RF e ajuste da antena afetam a potência de TX necessária para obter alcance confiável. Um projeto de RF ruim força o firmware a compensar com mais potência e reduz a autonomia; consulte [Arquitetura do processador Bluetooth: considerações sobre RF e clock](../bluetooth/processor.md#rf-and-clock-considerations).
 - A precisão do cristal afeta as margens de temporização de RF e o quanto o firmware precisa ser conservador nos timeouts de supervisão e nas margens de despertar.
 - Preveja acesso para teste e calibração na produção. O ajuste de energia e RF costuma continuar após a primeira revisão do hardware.
 
@@ -155,20 +155,20 @@ Transforme as metas do produto em números antes de ajustar o firmware. Uma plan
 
 | Estado | Pergunta orientadora | Item do orçamento |
 |:------|:-----------------|:------------|
-| Em estoque / armazenamento | Quanto tempo o produto pode ficar armazenado antes do primeiro uso? | Corrente de suspensão profunda, retenção do RTC e fugas em componentes externos. |
+| Em estoque / armazenamento | Quanto tempo o produto pode ficar armazenado antes do primeiro uso? | Corrente em Deep Sleep, retenção do RTC e fugas em componentes externos. |
 | Conectado e inativo | Quantas horas por dia ele fica pareado, mas sem uso? | Intervalo BLE, latência do periférico, interrupções de sensores e corrente com o display apagado. |
-| Consulta rápida do display | Com que frequência o display desperta e por quanto tempo? | Iluminação de fundo, atualização parcial, atividade breve de CPU/interface e controlador de toque. |
+| Consulta rápida do display | Com que frequência o display desperta e por quanto tempo? | Retroiluminação, atualização parcial, atividade breve de CPU/interface e controlador de toque. |
 | Sessão de áudio | Quanto tempo dura a reprodução, a gravação ou a chamada? | Codec, DMA, áudio Bluetooth e largura de banda da memória. |
 | Processamento breve de IA | Com que frequência a inferência é executada? | Captura do sensor, pré-processamento, tempo do acelerador/CPU e pós-processamento. |
 | OTA / manutenção | Com que frequência são esperadas atualizações? | Intervalo de conexão curto, apagamento/escrita de Flash e armazenamento para rollback. |
 
 </div>
 
-Para um conjunto de estados de operação mutuamente exclusivos, estime `average current = state current x duty cycle` e some as contribuições de cada estado. Se houver cargas simultâneas, inclua-as no total do cenário correspondente para não contar estados sobrepostos duas vezes. Isso revela problemas de projeto cedo: uma meta de 20 μA em suspensão não compensa um produto que passa tempo demais com iluminação de fundo intensa ou inferência ativa em intervalos fixos.
+Para um conjunto de estados de operação mutuamente exclusivos, estime `average current = state current x duty cycle` e some as contribuições de cada estado. Se houver cargas simultâneas, inclua-as no total do cenário correspondente para não contar estados sobrepostos duas vezes. Isso revela problemas de projeto cedo: uma meta de 20 μA em suspensão não compensa um produto que passa tempo demais com retroiluminação intensa ou inferência ativa em intervalos fixos.
 
 ## Análise de consumo: modele, meça e atualize { #power-profiling-model-measure-update }
 
-A análise de consumo transforma o orçamento em um ciclo de engenharia reproduzível. Defina cenários representativos, registre tensão e corrente no limite de alimentação pertinente e considere a duração e a frequência de cada carga. Calcule a energia ao longo do tempo e converta as medições de cada linha de alimentação para o consumo equivalente no lado da bateria, incluindo as perdas de conversão; não some diretamente correntes de linhas com tensões diferentes. Assim, estime a corrente média da bateria, a carga consumida por dia e a autonomia, além de priorizar os cenários que devem ser medidos e otimizados.
+A análise de consumo transforma o orçamento em um ciclo de engenharia reproduzível. Defina cenários representativos, registre tensão e corrente no limite de alimentação pertinente e considere a duração e a frequência de cada carga. Calcule a energia ao longo do tempo e concilie as medições por linha de alimentação com o consumo no lado da bateria, incluindo as perdas de conversão; não some diretamente correntes de linhas com tensões diferentes. Assim, estime a corrente média da bateria, a carga consumida por dia e a autonomia, além de priorizar os cenários que devem ser medidos e otimizados.
 
 <div align="center"><em>Diagrama: ciclo de análise de consumo</em></div>
 
@@ -235,7 +235,7 @@ Use cenários reproduzíveis para comparar melhorias entre revisões do firmware
 |:-----------|:---------------|:---------------|
 | Inicialização até o estado inativo | Inicialização normal, sem pareamento, display apagado | Nenhum trabalho periódico além dos temporizadores necessários. |
 | Conectado e inativo | Enlace BLE com bonding e parâmetros de conexão de produção | Verifique se a CPU ou o núcleo que deveria dormir atinge o estado de baixo consumo desejado entre eventos de enlace; confirme a distribuição das tarefas Bluetooth e o comportamento de despertar. |
-| Consulta da interface | Despertar do display, atualização típica de uma tela e timeout de redução de brilho | Iluminação de fundo e animações param após o timeout. |
+| Consulta da interface | Despertar do display, atualização típica de uma tela e timeout de redução de brilho | Retroiluminação e animações param após o timeout. |
 | Áudio ativo | Caminho de reprodução ou gravação ativo | Sem underrun; o codec desliga após a sessão. |
 | IA ativa | Entrada real do sensor e inferência breve | Energia por inferência compatível com o orçamento. |
 | Pior caso | Bluetooth + display + áudio/IA, conforme o produto | Sem desconexões, falhas ou problemas de limite térmico ou de potência. |
@@ -252,9 +252,9 @@ Registre versão do firmware, revisão da placa, tensão da bateria/fonte, tempe
 
 | Sintoma | O que verificar |
 |:--------|:----------------------|
-| O dispositivo nunca entra em suspensão profunda | Driver ou tarefa mantém uma solicitação de PM ativa; procure chamadas de liberação ausentes. |
+| O dispositivo nunca entra em Deep Sleep | Driver ou tarefa mantém uma solicitação de PM ativa; procure chamadas de liberação ausentes. |
 | Consumo alto apesar de uma conexão Bluetooth inativa | Latência do periférico não configurada ou aplicação despertando em cada evento de conexão. |
-| Picos de consumo coincidem com atividade do display | Redesenho completo em vez de atualização parcial ou iluminação de fundo mantida no brilho máximo. |
+| Picos de consumo coincidem com atividade do display | Redesenho completo em vez de atualização parcial ou retroiluminação mantida no brilho máximo. |
 | Consumo cresce após atualizar o firmware | Novo temporizador, loop de polling ou periférico sempre ativo sem revisão de energia. |
 | Bom consumo na bancada, pior no produto | Desajuste de RF/antena exige mais potência de TX, ou há efeitos térmicos/do gabinete ausentes na bancada. |
 | Áudio ou IA consomem bateria em excesso | Codec ou caminho de inferência permanece ativo entre sessões; consulte [Visão geral de áudio](../audio/overview.md#power-considerations-for-audio) e [Visão geral de IA](../ai/overview.md#power-aware-inference-scheduling). |
@@ -271,13 +271,13 @@ Registre versão do firmware, revisão da placa, tensão da bateria/fonte, tempe
 - Medir apenas corrente instantânea em vez da energia de um cenário de uso realista.
 - Validar apenas na bancada, nunca no gabinete final com antena e bateria reais.
 
-## Checklist para a integração inicial { #bring-up-checklist }
+## Checklist de bring-up { #bring-up-checklist }
 
 - [ ] Defina autonomia alvo, ciclo de trabalho e fontes de despertar necessárias.
 - [ ] Identifique quais subsistemas precisam permanecer ativos continuamente e quais podem ser totalmente acionados por eventos.
 - [ ] Confirme que cada driver/tarefa libera a solicitação de PM logo após o uso.
 - [ ] Ajuste os parâmetros de advertising/conexão Bluetooth ao uso real do produto.
-- [ ] Confirme a atualização parcial quando disponível e uma política de iluminação de fundo compatível com o uso.
+- [ ] Confirme a atualização parcial quando disponível e uma política de retroiluminação compatível com o uso.
 - [ ] Revise os temporizadores periódicos e elimine ou agrupe os desnecessários.
 - [ ] Prepare a medição de corrente e valide separadamente os estados ativo, inativo e em suspensão.
 - [ ] Teste a pior carga combinada, Bluetooth + display + áudio + IA conforme aplicável, e confirme o orçamento de energia.

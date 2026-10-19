@@ -1,6 +1,6 @@
 ---
 icon: lucide/list-checks
-description: "Checklist esquemática, item a item, do MCU SF32LB58x, cobrindo alimentação, clock, RF, armazenamento, display e fabricação."
+description: "Checklist esquemático, item a item, do MCU SF32LB58x, cobrindo alimentação, clock, RF, armazenamento, display e fabricação."
 tags:
     - Hardware
     - Chip
@@ -12,7 +12,7 @@ hide:
 # Guia de projeto de hardware do SF32LB58x — Checklist do esquemático { #sf32lb58x-hardware-design-guide-schematic-checklist }
 
 !!! note "Parte do guia de projeto de hardware do SF32LB58x"
-    Esta página contém o checklist esquemática, item a item, da Seção 5.8. Volte a [Diretrizes para o esquemático](SF32LB58x_schematic_design.md).
+    Esta página contém o checklist esquemático, item a item, da Seção 5.8. Volte a [Diretrizes para o esquemático](SF32LB58x_schematic_design.md).
 
 ## 5.8. Checklist do esquemático { #58-schematic-checklist }
 
@@ -38,30 +38,30 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições 
 
 | Nº | Ponto de verificação | Categoria |
 |:---|:---|:---|
-| 1 | A tensão de alimentação de PVDD1 é de 1.8 V a 3.3 V | Obrigatório |
-| 2 | A tensão de alimentação de PVDD2 é de 1.8 V a 3.3 V | Obrigatório |
+| 1 | A tensão de alimentação de PVDD1 é de 1,8 V a 3,3 V | Obrigatório |
+| 2 | A tensão de alimentação de PVDD2 é de 1,8 V a 3,3 V | Obrigatório |
 | 3 | As conexões de BUCK1_LX e BUCK1_FB estão corretas | Obrigatório |
 | 4 | As conexões de BUCK2_LX e BUCK2_FB estão corretas | Obrigatório |
 | 5 | A saída LDO_VOUT1 tem um ponto de teste ou um capacitor de filtragem que facilite a medição da tensão | Obrigatório |
 | 6 | A saída VDD_RET tem um ponto de teste ou um capacitor de filtragem que facilite a medição da tensão | Obrigatório |
 | 7 | A saída VDD_RTC tem um ponto de teste ou um capacitor de filtragem que facilite a medição da tensão | Obrigatório |
-| 8 | A tensão de alimentação de VDDIOA é de 1.8 V a 3.3 V; reserve um resistor série de 0 Ω na primeira revisão da placa | Obrigatório |
-| 9 | A tensão de alimentação de VDDIOA2 é de 1.8 V a 3.3 V; reserve um resistor série de 0 Ω na primeira revisão da placa | Obrigatório |
-| 10 | A tensão de alimentação de VDDIOB é de 1.8 V a 3.3 V; reserve um resistor série de 0 Ω na primeira revisão da placa | Obrigatório |
-| 11 | A tensão de alimentação de VDDIOSA é de 1.8 V e há uma chave de carga para desligá-la | Obrigatório |
-| 12 | A tensão de alimentação de VDDIOSB é de 1.8 V e há uma chave de carga para desligá-la | Obrigatório |
-| 13 | A tensão de alimentação de VDDIOSC é de 1.8 V e deve permanecer sempre ligada | Obrigatório |
-| 14 | A tensão de alimentação de AVDD33_USB é de 3.3 V | Obrigatório |
-| 15 | A tensão de alimentação de AVDD33_ANA é de 3.3 V | Obrigatório |
-| 16 | A tensão de alimentação de AVDD_BRF é de 1.8 V a 3.3 V e deve corresponder à alimentação de VDD1 | Obrigatório |
-| 17 | A tensão de alimentação de AVDD33_AUD é de 3.3 V | Obrigatório |
-| 18 | A tensão de alimentação de AVDD18_DSI é de 1.8 V | Obrigatório |
+| 8 | A tensão de alimentação de VDDIOA é de 1,8 V a 3,3 V; reserve um resistor série de 0 Ω na primeira revisão da placa | Obrigatório |
+| 9 | A tensão de alimentação de VDDIOA2 é de 1,8 V a 3,3 V; reserve um resistor série de 0 Ω na primeira revisão da placa | Obrigatório |
+| 10 | A tensão de alimentação de VDDIOB é de 1,8 V a 3,3 V; reserve um resistor série de 0 Ω na primeira revisão da placa | Obrigatório |
+| 11 | A tensão de alimentação de VDDIOSA é de 1,8 V e há uma chave de carga para desligá-la | Obrigatório |
+| 12 | A tensão de alimentação de VDDIOSB é de 1,8 V e há uma chave de carga para desligá-la | Obrigatório |
+| 13 | A tensão de alimentação de VDDIOSC é de 1,8 V e deve permanecer sempre ligada | Obrigatório |
+| 14 | A tensão de alimentação de AVDD33_USB é de 3,3 V | Obrigatório |
+| 15 | A tensão de alimentação de AVDD33_ANA é de 3,3 V | Obrigatório |
+| 16 | A tensão de alimentação de AVDD_BRF é de 1,8 V a 3,3 V e deve corresponder à alimentação de VDD1 | Obrigatório |
+| 17 | A tensão de alimentação de AVDD33_AUD é de 3,3 V | Obrigatório |
+| 18 | A tensão de alimentação de AVDD18_DSI é de 1,8 V | Obrigatório |
 | 19 | Quando o SF30147C fornece alimentação, a interface de controle TWI deve usar pinos PB do MCU, e esses pinos devem ser do tipo PD | Obrigatório |
 | 20 | O circuito de carregamento deve ter gerenciamento do caminho de alimentação, para que o sistema seja alimentado pela entrada de 5 V do carregador quando a tensão da bateria estiver baixa demais | Obrigatório |
 | 21 | Quando o SF30147C fornece alimentação, use a interface TWI dedicada do chip | Obrigatório |
 | 22 | Quando o SF30147C fornece alimentação, os trilhos controlados por EN devem usar PVDD ou AVDD como domínio de alimentação de EN; não controle EN por um GPIO do MCU. Como alternativa, conecte EN ao terra e controle a saída do trilho correspondente por registradores | Obrigatório |
 | 23 | Quando o SF30147C fornece alimentação, <span class="flag-red">BUCK e LDO1</span> só podem ser controlados por seus respectivos sinais de habilitação, EN_BUCK e EN_LDO1; não há controle por registrador interno | Obrigatório |
-| 24 | Nos modelos 58x, as alimentações PVDD e VDDIOB devem corresponder. Se PVDD for menor que VDDIOB, por exemplo, VDDIOB = 3.3 V e PVDD = 1.8 V, haverá cerca de 15 µA de corrente de fuga em VDDIOB nos modos Standby e Hibernate | Obrigatório |
+| 24 | Nos modelos 58x, as alimentações PVDD e VDDIOB devem corresponder. Se PVDD for menor que VDDIOB, por exemplo, VDDIOB = 3,3 V e PVDD = 1,8 V, haverá cerca de 15 µA de corrente de fuga em VDDIOB nos modos Standby e Hibernate | Obrigatório |
 | 25 | No 58x, o pino B4 é VDD_EXT1 e o pino B5 é VDD_EXT2; eles podem ficar sem conexão no projeto | Obrigatório |
 
 </div>
@@ -79,10 +79,10 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições 
 |:---|:---|:---|
 | 1 | O capacitor de bulk de PVDD1 é de pelo menos 10 µF | Obrigatório |
 | 2 | O capacitor de PVDD2 é de pelo menos 10 µF | Obrigatório |
-| 3 | Capacitor de BUCK1_FB = 4.7 µF | Obrigatório |
-| 4 | Capacitor de BUCK2_FB = 4.7 µF | Obrigatório |
-| 5 | Capacitor de LDO_VOUT1 = 4.7 µF | Obrigatório |
-| 6 | Capacitor de VDD_RET = 0.47 µF | Obrigatório |
+| 3 | Capacitor de BUCK1_FB = 4,7 µF | Obrigatório |
+| 4 | Capacitor de BUCK2_FB = 4,7 µF | Obrigatório |
+| 5 | Capacitor de LDO_VOUT1 = 4,7 µF | Obrigatório |
+| 6 | Capacitor de VDD_RET = 0,47 µF | Obrigatório |
 | 7 | Capacitor de VDD_RTC = 1 µF | Obrigatório |
 | 8 | Capacitor de VDDIOA ≥ 1 µF | Obrigatório |
 | 9 | Capacitor de VDDIOA2 ≥ 1 µF | Obrigatório |
@@ -91,17 +91,17 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições 
 | 12 | Capacitor de VDDIOSB ≥ 1 µF | Obrigatório |
 | 13 | Capacitor de VDDIOSC ≥ 1 µF | Obrigatório |
 | 14 | Capacitor de AVDD33_USB ≥ 1 µF | Obrigatório |
-| 15 | Capacitor de AVDD33_ANA ≥ 4.7 µF | Obrigatório |
-| 16 | Capacitor de AVDD_BRF ≥ 4.7 µF | Obrigatório |
-| 17 | Capacitor de AVDD33_AUD ≥ 4.7 µF | Obrigatório |
+| 15 | Capacitor de AVDD33_ANA ≥ 4,7 µF | Obrigatório |
+| 16 | Capacitor de AVDD_BRF ≥ 4,7 µF | Obrigatório |
+| 17 | Capacitor de AVDD33_AUD ≥ 4,7 µF | Obrigatório |
 | 18 | Capacitor de AUD_VREF = 1 µF | Obrigatório |
-| 19 | Capacitor de AVDD18_DSI ≥ 4.7 µF | Obrigatório |
+| 19 | Capacitor de AVDD18_DSI ≥ 4,7 µF | Obrigatório |
 | 20 | Capacitor de MIC_BIAS = 1 µF | Obrigatório |
-| 21 | Capacitor de GPADC VREFP = 4.7 µF | Obrigatório |
+| 21 | Capacitor de GPADC VREFP = 4,7 µF | Obrigatório |
 | 22 | <span class="flag-red">As alimentações de PVDD1, PVDD2 e AVDD_BRF, bem como a alimentação do pull-up de RSTN, devem ser iguais</span> | Obrigatório |
 | 23 | Os indutores BUCK1 e BUCK2 usam códigos de peça recomendados pela SiFli | Obrigatório |
-| 24 | Se o indutor BUCK não for um dos recomendados pela SiFli, ele deve atender a L = 4.7 uH, DCR &lt;= 0.4 ohm e Isat &gt;= 450 mA | Obrigatório |
-| 25 | <span class="flag-red">Quando PVDD1 e PVDD2 forem alimentados a 1.8 V a partir de VBAT, use um conversor DCDC para gerar 1.8 V; não use um LDO</span> | Obrigatório |
+| 24 | Se o indutor BUCK não for um dos recomendados pela SiFli, ele deve atender a L = 4,7 µH, DCR ≤ 0,4 Ω e Isat ≥ 450 mA | Obrigatório |
+| 25 | <span class="flag-red">Quando PVDD1 e PVDD2 forem alimentados a 1,8 V a partir de VBAT, use um conversor DCDC para gerar 1,8 V; não use um LDO</span> | Obrigatório |
 | 26 | <span class="flag-red">A corrente quiescente do conversor DCDC selecionado foi registrada e atende aos requisitos do projeto</span> | Obrigatório |
 | 27 | <span class="flag-red">A corrente quiescente do LDO selecionado foi registrada e atende aos requisitos do projeto</span> | Obrigatório |
 
@@ -119,9 +119,9 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições 
 | Nº | Ponto de verificação | Categoria |
 |:---|:---|:---|
 | 1 | O cristal principal de 48 MHz consta na lista AVL | Obrigatório |
-| 2 | Se o cristal de 48 MHz não constar na lista AVL, deve atender a 7 pF ≤ CL ≤ 12 pF (8.8 pF recomendado), desvio de frequência dentro de ±10 ppm e ESR ≤30 Ω (22 Ω recomendado) | Obrigatório |
-| 3 | O cristal RTC de 32.768 kHz consta na lista AVL | Obrigatório |
-| 4 | Se o cristal de 32.768 kHz não constar na lista AVL, deve atender a CL ≤12.5 pF (7 pF recomendado), desvio de frequência dentro de ±20 ppm e ESR ≤80 kΩ (38 kΩ recomendado) | Obrigatório |
+| 2 | Se o cristal de 48 MHz não constar na lista AVL, deve atender a 7 pF ≤ CL ≤ 12 pF (8,8 pF recomendado), desvio de frequência dentro de ±10 ppm e ESR ≤30 Ω (22 Ω recomendado) | Obrigatório |
+| 3 | O cristal RTC de 32,768 kHz consta na lista AVL | Obrigatório |
+| 4 | Se o cristal de 32,768 kHz não constar na lista AVL, deve atender a CL ≤12,5 pF (7 pF recomendado), desvio de frequência dentro de ±20 ppm e ESR ≤80 kΩ (38 kΩ recomendado) | Obrigatório |
 
 </div>
 
@@ -134,7 +134,7 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições 
 | Nº | Ponto de verificação | Categoria |
 |:---|:---|:---|
 | 1 | RSTN está com pull-up ligado à mesma alimentação de PVDD1 | Obrigatório |
-| 2 | Há um capacitor de 0.1 uF entre RSTN e terra | Obrigatório |
+| 2 | Há um capacitor de 0,1 µF entre RSTN e terra | Obrigatório |
 | 3 | RSTN tem proteção contra ESD | Obrigatório |
 
 </div>
@@ -173,9 +173,9 @@ Cada tabela abaixo cobre um bloco funcional do esquemático. Use as condições 
 
 | Nº | Ponto de verificação | Categoria |
 |:---|:---|:---|
-| 1 | O sinal ANT está identificado com o requisito de impedância característica de 50 Ω em configuração não balanceada | Obrigatório |
+| 1 | O sinal ANT está identificado com o requisito de impedância característica de 50 Ω em configuração single-ended | Obrigatório |
 | 2 | Uma rede de casamento tipo π está reservada no sinal ANT: um capacitor NC (não montar) em paralelo e um capacitor de 15 pF em série | Obrigatório |
-| 3 | Se for necessário filtrar emissões espúrias, reserve uma rede de casamento tipo π com um indutor de 2.7 nH em série e um capacitor de 2 pF em paralelo | Opcional |
+| 3 | Se for necessário filtrar emissões espúrias, reserve uma rede de casamento tipo π com um indutor de 2,7 nH em série e um capacitor de 2 pF em paralelo | Opcional |
 | 4 | Se um amplificador de potência RF externo exigir controle de RXEN e TXEN pelo MCU, use somente PB39 para RXEN do PA e PB40 para TXEN do PA | Opcional |
 | 5 | <span class="flag-red">Se o chip Wi-Fi oferecer arbitragem de coexistência de antena:<br>(1) Recomenda-se o modo de 3 fios: o chip Wi-Fi controla a chave RF da antena Bluetooth/Wi-Fi e executa a arbitragem. Ele usa BT_ACTIVE e BT_PRIORITY, enviados pelo Bluetooth, para decidir se concede a antena ao Bluetooth; WLAN_ACTIVE pode desativar a transmissão e recepção Bluetooth durante a operação do Wi-Fi.<br>(2) BT_ACTIVE deve usar PB08 ou PB45, WLAN_ACTIVE deve usar PB09 ou PB41, e BT_PRIORITY pode usar qualquer GPIO PB.<br></span> | Opcional |
 | 6 | Se o chip Wi-Fi não oferecer arbitragem de coexistência de antena:<br>(1) Recomenda-se o modo de 1 fio: o Bluetooth controla a chave RF da antena Bluetooth/Wi-Fi, arbitra por meio de BT_ACTIVE e notifica o chip Wi-Fi.<br>(2) Se o Wi-Fi puder emitir um sinal de estado operacional, essa configuração pode passar ao modo de 2 fios: conecte a saída do Wi-Fi a WLAN_ACTIVE para que o Bluetooth bloqueie transmissões e recepções de baixa prioridade enquanto o Wi-Fi estiver ativo, sem afetar o Bluetooth quando o Wi-Fi estiver ocioso.<br>(3) BT_ACTIVE deve usar PB08 ou PB45, e WLAN_ACTIVE deve usar PB09 ou PB41 | Opcional |
@@ -350,7 +350,7 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 | Nº | Ponto de verificação | Categoria |
 |:---|:---|:---|
 | 1 | A atribuição do I2C considera a divisão entre HCPU e LCPU e se o dispositivo precisa operar em modo de baixo consumo | Obrigatório |
-| 2 | O I2C tem pull-ups com o valor de resistência correto; para operação a 400 kHz, recomenda-se 2.2 kΩ. Use o domínio de tensão do periférico e desligue a alimentação dos pull-ups junto com o periférico | Obrigatório |
+| 2 | O I2C tem pull-ups com o valor de resistência correto; para operação a 400 kHz, recomenda-se 2,2 kΩ. Use o domínio de tensão do periférico e desligue a alimentação dos pull-ups junto com o periférico | Obrigatório |
 | 3 | O sinal de interrupção do I2C permite despertar por hardware quando necessário | Obrigatório |
 | 4 | Se vários dispositivos compartilharem o mesmo barramento I2C, seus endereços são distintos | Obrigatório |
 
@@ -365,7 +365,7 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 | Nº | Ponto de verificação | Categoria |
 |:---|:---|:---|
 | 1 | <span class="flag-red">I2S1 aceita somente entrada e opera apenas no modo mestre; o microfone está conectado a I2S1 conforme previsto</span> | Opcional |
-| 2 | <span class="flag-red">I2S2 aceita entrada e saída somente no modo mestre e pode ser conectado a dispositivos externos, como codec, DAC e ADC</span> | Opcional |
+| 2 | <span class="flag-red">I2S2 aceita entrada e saída somente no modo mestre e pode ser conectado a dispositivos externos de codec DAC/ADC</span> | Opcional |
 | 3 | <span class="flag-red">I2S3 aceita entrada e saída somente no modo mestre; é adequado para cenários de baixo consumo nos quais o HCPU dorme e o LCPU recebe/processa áudio por I2S3</span> | Opcional |
 | 4 | As conexões dos sinais I2S estão corretas | Opcional |
 | 5 | <span class="flag-red">A conexão do microfone digital à interface I2S1 está correta</span> | Opcional |
@@ -386,10 +386,10 @@ A alimentação de E/S VDDIOA2 da SD1 aceita 1,8 V ou 3,3 V e deve corresponder 
 | 3 | O nível lógico de I/O do periférico corresponde ao do chip principal | Opcional |
 | 4 | A conexão dos dois microfones analógicos está correta | Opcional |
 | 5 | O microfone analógico é alimentado pela saída MIC_BIAS | Opcional |
-| 6 | Cada uma das duas entradas ADC de áudio tem um capacitor de bloqueio CC de pelo menos 2.2 uF | Opcional |
-| 7 | Cada saída DAC, P e N, tem um resistor série de 1 kΩ, com um capacitor de 1.5 nF entre elas | Opcional |
+| 6 | Cada uma das duas entradas ADC de áudio tem um capacitor de bloqueio CC de pelo menos 2,2 µF | Opcional |
+| 7 | Cada saída DAC, P e N, tem um resistor série de 1 kΩ, com um capacitor de 1,5 nF entre elas | Opcional |
 | 8 | AW8155 é o amplificador de áudio recomendado; ao usar essa peça, configure o software para o modo 4 / Class AB | Opcional |
-| 9 | <span class="flag-red">Ao realimentar a saída do PA de áudio para o ADC do MCU, adicione um divisor e filtro RC ou uma filtragem digital adicional; a tensão dividida deve permanecer na faixa de entrada do ADC, e a frequência de corte do filtro RC deve ser 20 kHz</span> | Opcional |
+| 9 | <span class="flag-red">Ao realimentar a saída do PA de áudio para o ADC do MCU, adicione um divisor e filtro RC ou uma filtragem digital adicional; a tensão dividida deve permanecer na faixa de entrada do ADC, e recomenda-se que a frequência de corte do filtro RC seja de 20 kHz</span> | Opcional |
 | 10 | <span class="flag-red">Se a entrada ADC de áudio analógico integrada ao chip não for usada, recomenda-se conectar ADC1P/ADC1N e ADC2P/ADC2N ao terra, cada par por meio de um resistor série de 0 Ω</span> | Opcional |
 
 </div>

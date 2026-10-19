@@ -11,7 +11,7 @@ Estes tutoriais pressupõem que você já está familiarizado com a [integraçã
 
 A validação de produto não consiste tanto em copiar um exemplo, mas em reunir evidências. Em cada tutorial, registre a revisão da placa, a versão do SDK, o exemplo usado como base, a configuração do teste, os resultados esperados e observados e as alterações realizadas.
 
-Use esta série quando sua responsabilidade for além de fazer um recurso funcionar uma única vez: é preciso medir o consumo, recuperar o dispositivo após falhas de atualização, repetir a inicialização de hardware personalizado e reunir evidências de problemas que ocorrem fora do fluxo normal.
+Use esta série quando sua responsabilidade for além de fazer um recurso funcionar uma única vez: é preciso medir o consumo, recuperar o dispositivo após falhas de atualização, repetir o bring-up de hardware personalizado e reunir evidências de problemas que ocorrem fora do fluxo normal.
 
 Os caminhos dos exemplos e as placas compatíveis podem variar conforme a versão do SDK. Antes de compilar, consulte a lista “Supported Platforms” e os requisitos de hardware e configuração de cada exemplo; o suporte a um exercício não garante suporte aos demais exemplos nem a todas as combinações de recursos.
 
@@ -150,7 +150,7 @@ Os caminhos dos exemplos e as placas compatíveis podem variar conforme a versã
 
 - [ ] Os valores de consumo foram medidos, são repetíveis e estão associados a cenários de teste identificados.
 - [ ] O sucesso das atualizações OTA, as verificações de integridade e a recuperação após interrupções foram testados conforme a política documentada do produto; o rollback só é considerado validado se estiver implementado no projeto do produto.
-- [ ] A inicialização do display personalizado é validada com padrões antes de adicionar a complexidade do LVGL.
+- [ ] O bring-up do display personalizado é validado com padrões antes de adicionar a complexidade do LVGL.
 - [ ] Os procedimentos de análise do uso da CPU e de core dump estão documentados para a equipe.
 - [ ] O Bluetooth com múltiplas conexões foi testado em reconexões e casos-limite envolvendo o telefone ou o acessório.
 - [ ] Os drivers personalizados usam o modelo de dispositivos do RT-Thread e tratam a suspensão e o despertar.
@@ -158,4 +158,4 @@ Os caminhos dos exemplos e as placas compatíveis podem variar conforme a versã
 
 ## Próximos passos { #where-to-go-next }
 
-A esta altura, você já tem um conjunto completo de ferramentas: periféricos, middleware, compreensão de coexistência, disciplina de consumo, OTA, inicialização de hardware personalizado, análise pós-falha e integração de drivers. Daqui em diante, consulte o catálogo de [Exemplos](../../develop/examples/index.md) e a [Visão geral de gráficos](../../learn/graphics/overview.md) como referências contínuas. Consulte os tópicos conforme cada necessidade, em vez de percorrê-los em sequência.
+A esta altura, você já tem um conjunto completo de ferramentas: periféricos, middleware, compreensão de coexistência, disciplina de consumo, OTA, bring-up de hardware personalizado, análise pós-falha e integração de drivers. Daqui em diante, consulte o catálogo de [Exemplos](../../develop/examples/index.md) e a [Visão geral de gráficos](../../learn/graphics/overview.md) como referências contínuas. Consulte os tópicos conforme cada necessidade, em vez de percorrê-los em sequência.

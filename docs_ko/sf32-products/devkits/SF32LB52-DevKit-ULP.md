@@ -10,20 +10,20 @@ tags:
 
 ## 개요 { #overview }
 
-SF32LB52-DevKit-ULP는 **立创黄山派**, **LCKFB-HSPI-SF32LB52-ULP**, **SF32LB52-ULP**라고도 불립니다. SF32LB52x 제품군을 기반으로 한 소형 초저전력 웨어러블 개발 보드이며, 단순한 MCU 브레이크아웃 보드가 아니라 스마트워치와 피트니스 밴드 프로토타입 플랫폼으로 자리매김하고 있습니다.
+SF32LB52-DevKit-ULP는 **立创黄山派**, **LCKFB-HSPI-SF32LB52-ULP**, **SF32LB52-ULP**라는 이름으로도 알려져 있습니다. SF32LB52x 제품군을 기반으로 한 소형 초저전력 웨어러블 개발 보드로, 단순한 MCU 브레이크아웃 보드보다 스마트워치와 피트니스 밴드 시제품 제작에 적합한 구성을 갖췄습니다.
 
-LCD, Nano, Core-3p3 보드와 비교하면 이 보드는 실제 제품에 더 가깝습니다. SF32LB52 모듈, AMOLED 디스플레이, 터치, 마이크, 스피커 앰프, RGB LED, 진동 모터 구동부, 모션 센서, 자기 센서, 주변광 센서, 배터리 충전, 전력 측정용 점퍼를 하나로 결합했습니다. 따라서 제품 설계의 질문이 단순히 "MCU가 동작하는가?"가 아니라 "배터리로 구동할 때 웨어러블 시스템 전체가 어떻게 동작하는가?"일 때 특히 유용합니다.
+LCD, Nano, Core-3p3 보드보다 실제 제품 구성에 가깝습니다. SF32LB52 모듈, AMOLED 디스플레이, 터치, 마이크, 스피커 앰프, RGB LED, 진동 모터 구동부, 모션 센서, 자기 센서, 주변광 센서, 배터리 충전 회로, 전력 측정 점퍼를 한 보드에 통합했습니다. 따라서 "MCU가 동작하는가?"를 확인하는 데 그치지 않고, 배터리로 구동하는 웨어러블 시스템 전체의 동작을 평가할 때 특히 유용합니다.
 
-SiFli의 [ULP 보드 가이드][Original SiFli Wiki Article]는 아직 자리 표시자 상태입니다. 상세한 보드 구성은 보드 V1.0.0을 문서화한 SiFli의 중국어 [Huangshan Pi 개발 보드 가이드][Original SiFli Huangshan Pi Guide]를 참조하십시오. 아래의 부품 값은 해당 리비전의 기준입니다. 별도의 [LCKFB 하드웨어 위키][LCKFB hardware wiki]는 보드 리비전을 밝히지 않으며 서로 다른 여러 부품 번호를 나열합니다. 이를 호환되는 부품이 아니라 리비전 또는 출처 불일치 가능성으로 취급하고, 설계 작업 전에 실제 보드 마킹, 회로도, BOM을 확인하십시오.
+SiFli의 [ULP 보드 가이드][Original SiFli Wiki Article]는 아직 자리 표시자입니다. 상세 구성은 V1.0.0 보드를 다루는 SiFli의 중국어 [Huangshan Pi 개발 보드 가이드][Original SiFli Huangshan Pi Guide]를 참조하십시오. 아래 부품 값은 해당 리비전의 기준입니다. 별도의 [LCKFB 하드웨어 위키][LCKFB hardware wiki]는 보드 리비전을 명시하지 않고 여러 부품 번호를 나열합니다. 이를 서로 호환되는 부품으로 간주하지 말고, 리비전 또는 출처 간 불일치 가능성을 고려해 설계 전에 실제 보드 마킹, 회로도, BOM을 확인하십시오.
 
 **릴리스 상태 주의:** SiFli의 V1.0.0 가이드는 문서화된 보드가 당시 내부 시험용이었으며 외부 릴리스 전에 개정될 것이라고 밝힙니다. 이 설명은 해당 소스 리비전에만 해당하며, 이후 보드의 상태나 BOM을 보증하지 않습니다. 정확한 보드 리비전과 BOM을 확인하십시오.
 
 [SiFli SDK 보드 페이지][SiFli SDK ULP Board Page]는 이 보드의 타깃을 `sf32lb52-lchspi-ulp`로 표기합니다. SDK 보드 페이지와 중국어 Huangshan Pi 가이드의 패키지 구성품 섹션은 `SF32LB52X-MOD-1-N16R8`을 사용하는 반면, SiFli [모듈 모델 가이드][SiFli Module Model Guide]와 GPIO 표 캡션은 `SF32LB52-MOD-1-N16R8`을 사용합니다. 이러한 `X`의 차이에 대한 설명은 소스에 없습니다. SDK 타깃은 명확하므로, 두 SKU 표기가 서로 다른 하드웨어를 가리킨다고 추정하지 말고 실제로 장착된 모듈의 마킹과 BOM을 확인하십시오.
 
-![SF32LB52-ULP wearable board assembly reference](assets/sf32lb52x/52-ULP-1p85-install.png){ loading="lazy" }
+![SF32LB52-ULP 웨어러블 보드 조립 참고도](assets/sf32lb52x/52-ULP-1p85-install.png){ loading="lazy" }
 <div align="center"><em>SF32LB52-ULP — 웨어러블 보드 조립 참고도</em></div>
 
-![Huangshan Pi SF32LB52 block diagram](assets/sf32lb52x/HSP_Block_Diagram.svg){ loading="lazy" }
+![Huangshan Pi SF32LB52 블록 다이어그램](assets/sf32lb52x/HSP_Block_Diagram.svg){ loading="lazy" }
 <div align="center"><em>Huangshan Pi SF32LB52 — 블록 다이어그램</em></div>
 
 ## 명칭 { #naming }
@@ -41,32 +41,32 @@ SiFli의 [ULP 보드 가이드][Original SiFli Wiki Article]는 아직 자리 �
 
 </div>
 
-하드웨어 문서, 예제, 구매 페이지, 커뮤니티 자료를 검색할 때 이 이름들을 같은 보드 제품군의 별칭으로 사용하십시오. 회로도, 핀 배치 또는 BOM 작업에서는 항상 정확한 보드 리비전과 벤더 문서 세트를 확인하십시오.
+하드웨어 문서, 예제, 구매 페이지, 커뮤니티 자료를 검색할 때 이 이름들을 같은 보드 제품군의 별칭으로 참고하십시오. 회로도, 핀 배치, BOM을 검토할 때는 정확한 보드 리비전과 해당 벤더의 문서를 확인하십시오.
 
 ## 보드 주요 특징 { #board-highlights }
 
 - SF32LB52x 기반 SF32LB52-MOD-1-N16R8 모듈
 - SF32LB525UC6 표준 모듈 구성
-- 8MB OPI-PSRAM, 144MHz 인터페이스
-- 128Mb QSPI-NOR 플래시, 72MHz STR 모드
-- 48MHz 메인 크리스털과 32.768kHz RTC 크리스털
+- 8 MB OPI-PSRAM, 144 MHz 인터페이스
+- 128 Mb QSPI-NOR 플래시, 72 MHz STR 모드
+- 48 MHz 메인 크리스털과 32.768 kHz RTC 크리스털
 - 온보드 PCBA 안테나
 - 1.85인치 AMOLED 디스플레이, 390 x 450 해상도
 - 터치를 지원하는 Quad-SPI 디스플레이 인터페이스
 - 온보드 MEMS 마이크
 - Class-D 스피커 앰프를 갖춘 아날로그 오디오 출력
-- 3W/4ohm 또는 2W/8ohm 스피커용 외부 스피커 커넥터
+- 3 W / 4 Ω 또는 2 W / 8 Ω 스피커용 외부 스피커 커넥터
 - 플래싱, 디버그, 전원 공급을 위한 CH340N 기반 USB Type-C UART 인터페이스
 - 30핀 확장 커넥터로 노출되는 USB2.0 FS 신호
 - SPI를 사용하는 MicroSD 카드 슬롯
 - 기능 키 1개와 전원/리셋 키 1개
 - SK6812MINI-HS RGB LED (SiFli Huangshan Pi V1.0.0 가이드 기준이며, 버전이 표기되지 않은 LCKFB 페이지에는 WS2812B-2020으로 기재되어 있음)
-- 외부 모터 솔더 패드를 갖춘 진동 모터 구동 회로
+- 외부 모터 실장용 패드를 갖춘 진동 모터 구동 회로
 - LSM6DS3TR-C 6축 IMU
 - MMC5603NJ 3축 자기 센서
 - LTR-303ALS-01 주변광 센서
 - 웨어러블 전원 테스트를 위한 배터리 충전기 및 전원 관리 디바이스
-- GPIO와 전류 측정을 지원하는 2x15핀, 1.27mm 피치 확장 헤더
+- GPIO와 전류 측정을 지원하는 2 × 15핀, 1.27 mm 피치 확장 헤더
 
 ## 이 보드를 사용하는 경우 { #when-to-use-this-board }
 
@@ -75,11 +75,11 @@ SiFli의 [ULP 보드 가이드][Original SiFli Wiki Article]는 아직 자리 �
 - 시계, 밴드, 센서가 풍부한 웨어러블 프로토타입 제작
 - SF32LB52x 플랫폼에서 AMOLED UI 동작 평가
 - 터치, 모션 센싱, 자기 센싱, 주변광 센싱, 오디오, 진동, RGB LED 동작을 함께 테스트
-- 슬립 및 활성 사용 중 배터리, 시스템, 3.3V 전류 경로 측정
+- 슬립 및 활성 사용 중 배터리, 시스템, 3.3 V 전류 경로 측정
 - 버튼, 센서, 터치, 펌웨어 타이머로 구동되는 웨이크업 흐름 검증
 - 더 단순한 DevKit 보드의 초기 추정치와 실제 제품에 가까운 전력 동작 비교
 
-디스플레이 중심의 범용 평가 보드가 필요하면 [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md)를 사용하십시오. 솔더링 방식의 소형 모듈 프로토타이핑에는 [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md)를 사용하십시오. 초기 벤치 브링업 단계에서 핀에 최대한 직접 접근하려면 [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md)를 사용하십시오.
+디스플레이 중심의 범용 평가 보드가 필요하면 [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md)를 사용하십시오. 납땜 실장 방식의 소형 모듈 시제품 제작에는 [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md)를 사용하십시오. 벤치에서 초기 구동과 검증을 진행하면서 핀에 최대한 직접 접근하려면 [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md)를 사용하십시오.
 
 ## 하드웨어 구성 { #hardware-configuration }
 
@@ -91,8 +91,8 @@ SiFli의 [ULP 보드 가이드][Original SiFli Wiki Article]는 아직 자리 �
 | :--- | :--- |
 | 코어 모듈 | SF32LB52-MOD-1-N16R8 |
 | MCU | SF32LB525UC6 |
-| PSRAM | 8MB OPI-PSRAM, 144MHz 인터페이스 |
-| 플래시 | 128Mb QSPI-NOR 플래시, 72MHz STR 모드 |
+| PSRAM | 8 MB OPI-PSRAM, 144 MHz 인터페이스 |
+| 플래시 | 128 Mb QSPI-NOR 플래시, 72 MHz STR 모드 |
 | 디스플레이 | 1.85인치 AMOLED (ZC-A1D85W-010), 390 x 450, 800 cd/m², Quad-SPI |
 | 디스플레이 드라이버 | CO5300AF-01 |
 | 디스플레이 전원 IC | BV6802W |
@@ -130,9 +130,9 @@ Huangshan Pi 보드 세트에는 다음이 포함되는 것으로 문서화되�
 - USB Type-C 전원
 - 배터리 단독 전원
 
-배터리 입력은 정방향 핀 순서의 GH1.25mm 커넥터를 사용하는 단일 셀 Li-ion 배터리용입니다. 문서화된 충전 구성은 최대 충전 전류 500mA, 기본 정전류 설정 450mA를 지원합니다.
+배터리 입력은 정방향 핀 순서의 GH1.25mm 커넥터를 사용하는 단일 셀 Li-ion 배터리용입니다. 문서화된 충전 구성은 최대 충전 전류 500 mA, 기본 정전류 설정 450 mA를 지원합니다.
 
-배터리 없이 벤치 전원으로 VBAT를 공급하여 보드를 사용할 때 문서화된 VBAT 입력 범위는 3.7V~4.7V이며, 정상 전압 공급 테스트에는 3.8V를 권장합니다. SF32LB52-MOD-1-N16R8의 전원 임계값은 전원 켜짐 3.58V, 전원 꺼짐 3.48V로 문서화되어 있습니다.
+배터리 없이 벤치 전원으로 VBAT를 공급하여 보드를 사용할 때 문서화된 VBAT 입력 범위는 3.7 V~4.7 V이며, 정상 전압 공급 테스트에는 3.8 V를 권장합니다. SF32LB52-MOD-1-N16R8의 전원 임계값은 전원 켜짐 3.58 V, 전원 꺼짐 3.48 V로 문서화되어 있습니다.
 
 LCKFB 하드웨어 가이드는 배터리가 연결되지 않은 경우 길게 누르기 키 기능이 동작하지 않을 수 있다고 경고합니다. 정확한 보드 리비전과 의도한 전원 구성에서 이 동작을 확인하십시오.
 
@@ -148,7 +148,7 @@ LCKFB 하드웨어 가이드는 배터리가 연결되지 않은 경우 길게 �
 | :--- | :--- | :--- |
 | 5-6 | VBAT 경로 | 배터리/충전기와 하위 시스템 사이에 전류계 삽입 |
 | 7-8 | VSYS 경로 | VSYS 경로에 전류계 삽입 |
-| 11-12 | VCC_3V3 경로 | 3.3V 메인 레일에 전류계 삽입 |
+| 11-12 | VCC_3V3 경로 | 3.3 V 메인 레일에 전류계 삽입 |
 
 </div>
 
@@ -158,7 +158,7 @@ LCKFB 하드웨어 가이드는 배터리가 연결되지 않은 경우 길게 �
 
 일반적인 개발 중 펌웨어 플래싱, 시리얼 로그, 보드 전원 공급에는 USB Type-C UART 인터페이스를 사용하십시오.
 
-첫 브링업에 필수인 하드웨어:
+초기 구동과 검증에 필요한 하드웨어:
 
 - SF32LB52-DevKit-ULP / 立创黄山派 보드
 - USB 2.0 데이터 케이블
@@ -168,7 +168,7 @@ LCKFB 하드웨어 가이드는 배터리가 연결되지 않은 경우 길게 �
 
 - 외부 스피커
 - TF 카드
-- 450mAh 이상의 Li-ion 배터리
+- 450 mAh 이상의 Li-ion 배터리
 - UART 디버그와 네이티브 USB 테스트를 동시에 해야 할 때 사용할 두 번째 USB 케이블
 
 데이터 전송이 가능한 USB 케이블을 사용하십시오. 충전 전용 케이블은 보드에 전원을 공급할 수는 있지만 시리얼 데이터 인터페이스를 노출하지 않습니다.
@@ -219,12 +219,12 @@ SiFli의 SDK는 `scons --board=<board_name>`과 함께 정확한 보드 타깃 �
 
 | 핀 그룹 | 신호 | 비고 |
 | :--- | :--- | :--- |
-| 1-2 | USB_VBUS_5V | USB 연결 시 USB의 5V; USB가 연결되지 않은 경우 5V 입력으로 사용 가능 |
+| 1-2 | USB_VBUS_5V | USB 연결 시 USB의 5 V; USB가 연결되지 않은 경우 5 V 입력으로 사용 가능 |
 | 3-4 | GND | 그라운드 |
 | 5-6 | VBAT_S / VBAT | 정상 동작 시 단락; VBAT 전류 측정 시 개방 |
 | 7-8 | VSYS_S / VSYS | 정상 동작 시 단락; VSYS 전류 측정 시 개방 |
 | 9-10 | GND | 그라운드 |
-| 11-12 | VCC_3V3_S / VCC_3V3 | 정상 동작 시 단락; 3.3V 전류 측정 시 개방 |
+| 11-12 | VCC_3V3_S / VCC_3V3 | 정상 동작 시 단락; 3.3 V 전류 측정 시 개방 |
 | 13 / 15 | PA36 / PA35 | USB DM / DP |
 | 14 / 16 | PB39 / PA40 | SiFli의 V1.0.0 헤더 표는 이를 센서 I2C1 SDA / SCL로 표기하며, 14번 핀은 GPIO 배정 표와 충돌함(아래 참조) |
 | 17 | PA32 | RGB LED 데이터, GPIO로도 사용 가능 |
@@ -265,7 +265,7 @@ SiFli의 SDK는 `scons --board=<board_name>`과 함께 정확한 보드 타깃 �
 | 14 | PB05 (SiFli V1.0.0 FPC 표) | QSPI D0 / SPI SDI; 별도의 GPIO 배정 표에는 PA05로 기재 |
 | 15 | PA03 | QSPI/SPI 칩 셀렉트 |
 | 16 | PA06 | QSPI D1 / SPI DC |
-| 17 | VDD_3V3 | 3.3V 출력 |
+| 17 | VDD_3V3 | 3.3 V 출력 |
 | 18 | PA41 | 터치 인터럽트 |
 | 19 | PA33 | 터치 I2C SDA |
 | 20 | PA37 | 터치 I2C SCL |
@@ -300,11 +300,11 @@ SiFli의 SDK는 `scons --board=<board_name>`과 함께 정확한 보드 타깃 �
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-microchip: __[SF32LB52x Chip Introduction]__
-- :fontawesome-solid-file-lines: __[SF32LB52x Hardware Design Guide]__
-- :fontawesome-brands-github: __[Original SiFli Wiki Article]__
-- :fontawesome-solid-up-right-from-square: __[LCKFB Project Page]__
-- :fontawesome-solid-book: __[LCKFB Hardware Wiki]__
-- :fontawesome-solid-cart-shopping: __[Buy Samples]__
+- :fontawesome-solid-microchip: __[SF32LB52x 칩 소개][SF32LB52x Chip Introduction]__
+- :fontawesome-solid-file-lines: __[SF32LB52x 하드웨어 설계 가이드][SF32LB52x Hardware Design Guide]__
+- :fontawesome-brands-github: __[SiFli 위키 원문][Original SiFli Wiki Article]__
+- :fontawesome-solid-up-right-from-square: __[LCKFB 프로젝트 페이지][LCKFB Project Page]__
+- :fontawesome-solid-book: __[LCKFB 하드웨어 위키][LCKFB Hardware Wiki]__
+- :fontawesome-solid-cart-shopping: __[샘플 구매][Buy Samples]__
 
 </div>

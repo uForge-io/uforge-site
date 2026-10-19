@@ -110,8 +110,8 @@ tags:
 | 21 | BUCK 인덕터가 [SiFli 승인 업체 목록(AVL)][SiFli Approved Vendor List]에 등재된 부품 번호입니다 | 모든 변형 | 필수 |
 | 22 | BUCK 인덕터가 AVL에 등재되지 않은 경우 L = 4.7 uH, DCR ≤0.4 Ω, Isat ≥450 mA를 충족합니다 | 모든 변형 | 필수 |
 | 23 | <span class="flag-red">GPS 또는 간섭에 민감한 다른 주변 장치가 있으면 BUCK_LX에 그라운드로 연결되는 커패시터의 풋프린트를 확보해 둡니다. 값은 실제 테스트 결과에 따라 달라집니다</span> | <span class="flag-red">모든 변형</span> | 필수 |
-| 24 | <span class="flag-red">선택한 DCDC의 정지 전류를 기록했으며 프로젝트 요구 사항을 충족합니다</span> | <span class="flag-red">모든 변형</span> | 필수 |
-| 25 | <span class="flag-red">선택한 LDO의 정지 전류를 기록했으며 프로젝트 요구 사항을 충족합니다</span> | <span class="flag-red">모든 변형</span> | 필수 |
+| 24 | <span class="flag-red">선택한 DCDC의 정지 전류(quiescent current)를 기록했으며 프로젝트 요구 사항을 충족합니다</span> | <span class="flag-red">모든 변형</span> | 필수 |
+| 25 | <span class="flag-red">선택한 LDO의 정지 전류(quiescent current)를 기록했으며 프로젝트 요구 사항을 충족합니다</span> | <span class="flag-red">모든 변형</span> | 필수 |
 
 </div>
 
@@ -209,7 +209,7 @@ tags:
 | 9 | <span class="flag-red">MPI가 32 MB 이상의 NOR 플래시를 구동하는 경우, 플래시 전원을 끌 수 있도록 PA21로 플래시 전원을 스위칭할 수 있어야 합니다</span> | <span class="flag-red">52B/D/E/G/J</span> | 필수 |
 | 10 | SD1을 SD NAND 디바이스에 연결하는 경우 신호 연결이 올바릅니다 | 모든 변형 | 필수 |
 | 11 | <span class="flag-red">플래시 CLK와 데이터 라인에 33 Ω 직렬 저항이 있습니다</span> | <span class="flag-red">모든 변형</span> | 필수 |
-| 12 | <span class="flag-red">외부 NOR 플래시 두 개를 사용하는 경우 CLK/D0~D3은 공유하며, 플래시 1의 CS는 PA12를, 플래시 2의 CS는 내부 풀업 핀인 PA26을 사용합니다. 이 핀은 리셋 시 기본값이 high(비선택)이므로 active-low CS 신호에 적합합니다</span> | <span class="flag-red">모든 변형</span> | 필수 |
+| 12 | <span class="flag-red">외부 NOR 플래시 두 개를 사용하는 경우 CLK/D0~D3은 공유하며, 플래시 1의 CS는 PA12를, 플래시 2의 CS는 내부 풀업 핀인 PA26을 사용합니다. 이 핀은 리셋 시 기본값이 High(비선택)이므로 Low 활성 CS 신호에 적합합니다</span> | <span class="flag-red">모든 변형</span> | 필수 |
 | 13 | <span class="flag-red">외부 NOR 플래시 두 개를 사용하는 경우 첫 번째는 16 MB여야 하며, 두 번째는 8 MB 또는 16 MB일 수 있습니다</span> | <span class="flag-red">모든 변형</span> | 필수 |
 | 14 | 주변 장치의 I/O 로직 레벨이 메인 칩과 일치합니다 | 모든 변형 | 필수 |
 | 15 | <span class="flag-red">선택한 NOR 플래시 부품이 핵심 부품 선정 가이드에 인증된 부품으로 등재되어 있습니다. 그렇지 않으면 ROM이 인식하지 못해 시스템이 부팅되지 않을 수 있습니다</span> | <span class="flag-red">모든 변형</span> | 필수 |
@@ -236,9 +236,9 @@ tags:
 | 9 | Iq가 낮은 LDO가 디스플레이에 전원을 공급하며, <span class="flag-red">LDO 활성화 제어에는 PA30 사용을 권장합니다</span> | 모든 변형 | 필수 |
 | 10 | TP와 LCD 전원의 독립성 요구 사항(공유 제어 또는 개별 제어)을 확인했습니다 | 모든 변형 | 필수 |
 | 11 | LCD에 조도 센서가 통합된 경우 조도 센서의 전원도 함께 공급합니다 | 모든 변형 | 필수 |
-| 12 | TFT LCD 백라이트 제어: 백라이트가 high 신호에서 켜지고 low 신호에서 꺼지는 경우(active-high) 풀다운(PD) GPIO를 사용하고, low 신호에서 켜지고 high 신호에서 꺼지는 경우(active-low) 풀업(PU) GPIO를 사용합니다 | 모든 변형 | 필수 |
+| 12 | TFT LCD 백라이트 제어: 백라이트가 High 신호에서 켜지고 Low 신호에서 꺼지는 경우(High 활성) 풀다운(PD) GPIO를 사용하고, Low 신호에서 켜지고 High 신호에서 꺼지는 경우(Low 활성) 풀업(PU) GPIO를 사용합니다 | 모든 변형 | 필수 |
 | 13 | <span class="flag-red">SPI LCD: 3선 모드 — CS는 PA03, CLK는 PA04, DATA는 PA05에 연결합니다. 4선 모드 — CS는 PA03, CLK는 PA04, DATA는 PA05, DC는 PA06에 연결합니다</span> | 모든 변형 | 필수 |
-| 14 | MCU의 JDI 인터페이스에 연결하는 Sharp Memory/JDI 디스플레이: VCOM과 VB는 MCU PA24에, VA는 MCU PA25에, R0/G0/B0는 MCU R1/G1/B1에, R1/G1/B1은 MCU R2/G2/B2에, GSP는 MCU VST에, BSP는 MCU HST에, GCK는 MCU VCK에, BCK는 MCU HCK에, GEN은 MCU ENB에, INTB는 MCU XRST에 연결합니다 | 모든 변형 | 필수 |
+| 14 | MCU의 JDI 인터페이스에 연결하는 Sharp Memory/JDI 디스플레이: VCOM과 VB는 MCU PA24에, VA는 MCU PA25에, R0/G0/B0 신호는 MCU R1/G1/B1에, R1/G1/B1은 MCU R2/G2/B2에, GSP는 MCU VST에, BSP는 MCU HST에, GCK는 MCU VCK에, BCK는 MCU HCK에, GEN은 MCU ENB에, INTB는 MCU XRST에 연결합니다 | 모든 변형 | 필수 |
 | 15 | 주변 장치의 I/O 로직 레벨이 메인 칩과 일치합니다 | 모든 변형 | 필수 |
 
 </div>
@@ -267,7 +267,7 @@ tags:
 |:---|:---|:---|:---|
 | 1 | 버튼 웨이크업 요구 사항(필요 여부)을 확인했습니다 | 모든 변형 | 필수 |
 | 2 | 일반 버튼 연결이 올바릅니다(풀업 존재, 올바른 저항 값, 올바른 풀업 전압 도메인) | 모든 변형 | 필수 |
-| 3 | 전원 버튼은 PA34를 사용하며 active-high이고 10초 길게 누르면 리셋됩니다. <span class="flag-red">10 kΩ 풀다운 저항은 반드시 메인 보드에 있어야 합니다</span> | 모든 변형 | 필수 |
+| 3 | 전원 버튼은 PA34를 사용하며 High 활성이고 10초 길게 누르면 리셋됩니다. <span class="flag-red">10 kΩ 풀다운 저항은 반드시 메인 보드에 있어야 합니다</span> | 모든 변형 | 필수 |
 | 4 | 모든 버튼 신호에 ESD 보호가 있습니다 | 모든 변형 | 필수 |
 
 </div>
@@ -345,7 +345,7 @@ tags:
 
 | 번호 | 점검 항목 | 적용 대상 | 구분 |
 |:---|:---|:---|:---|
-| 1 | PA18/PA19(DBG_UART로 멀티플렉싱)는 프로그램 플래싱 및 디버그 인터페이스를 이루며, 테스트 포인트를 확보해 두고 <span class="flag-red">100 Ω 직렬 저항을 둡니다</span> | 모든 변형 | 필수 |
+| 1 | PA18/PA19(DBG_UART로 멀티플렉싱)는 프로그램 다운로드 및 디버그 인터페이스를 이루며, 테스트 포인트를 확보해 두고 <span class="flag-red">100 Ω 직렬 저항을 둡니다</span> | 모든 변형 | 필수 |
 | 2 | 디바이스에 연결할 때 MCU RXD는 주변 장치의 TXD에, MCU TXD는 주변 장치의 RXD에 연결합니다 | 모든 변형 | 필수 |
 | 3 | PA35/PA36을 주변 장치에 대한 UART로 멀티플렉싱하는 경우, MCU 리셋 시점에 연결된 주변 장치의 전원이 꺼져 있거나 소프트웨어가 이 핀을 low로 구동하도록 합니다 | 모든 변형 | 필수 |
 | 4 | 주변 장치의 I/O 로직 레벨이 메인 칩과 일치합니다 | 모든 변형 | 필수 |
@@ -373,9 +373,9 @@ tags:
 
 | 번호 | 점검 항목 | 적용 대상 | 구분 |
 |:---|:---|:---|:---|
-| 1 | USB 인터페이스 연결이 올바릅니다 | 전체 변형 | 선택 |
-| 2 | USB 인터페이스에 ESD 보호가 있습니다 | 전체 변형 | 선택 |
-| 3 | 일반(비슬립) 동작 중 USB를 활성화해 두면 호스트가 삽입/제거를 감지할 수 있습니다. MCU가 슬립 중일 때 감지가 필요하면, IO 전압에 맞는 레벨을 MCU의 웨이크업 핀으로 출력하는 VBUS 분압 회로를 추가하며, 이 핀을 충전기 삽입 감지와 공유하기를 권장합니다 | 전체 변형 | 선택 |
+| 1 | USB 인터페이스 연결이 올바릅니다 | 모든 변형 | 선택 |
+| 2 | USB 인터페이스에 ESD 보호가 있습니다 | 모든 변형 | 선택 |
+| 3 | 일반(비슬립) 동작 중 USB를 활성화해 두면 호스트가 삽입/제거를 감지할 수 있습니다. MCU가 슬립 중일 때 감지가 필요하면, IO 전압에 맞는 레벨을 MCU의 웨이크업 핀으로 출력하는 VBUS 분압 회로를 추가하며, 이 핀을 충전기 삽입 감지와 공유하기를 권장합니다 | 모든 변형 | 선택 |
 
 </div>
 
@@ -387,7 +387,7 @@ tags:
 
 | 번호 | 점검 항목 | 적용 대상 | 구분 |
 |:---|:---|:---|:---|
-| 1 | LDO/DCDC 부품은 active-high 활성화를 사용합니다. 출력이 기본적으로 꺼져 있는 경우 EN에서 그라운드로 1 M~5.1 MΩ 풀다운을 추가하며, 값은 프로젝트의 소비 전력 요구 사항에 맞춥니다 | 모든 변형 | 필수 |
+| 1 | LDO/DCDC 부품은 High 활성 EN을 사용합니다. 출력이 기본적으로 꺼져 있는 경우 EN에서 그라운드로 1 M~5.1 MΩ 풀다운을 추가하며, 값은 프로젝트의 소비 전력 요구 사항에 맞춥니다 | 모든 변형 | 필수 |
 | 2 | MOSFET 기반 전원 스위칭은 PMOS+NMOS 조합을 사용하며, 제어 핀은 high가 활성화, low가 비활성화이고 제어 핀에서 그라운드로 1 MΩ 풀다운을 둡니다 | 모든 변형 | 필수 |
 | 3 | 외부 플래시 전원 스위치는 PA11로 제어합니다 | 520/3/5/7 전용 | 필수 |
 | 4 | <span class="flag-red">외부 플래시 전원 스위치와 VDD_SIP 전원 스위치는 모두 PA21로 제어합니다</span> | <span class="flag-red">52A/D</span>[^52a-note] | 원본에 명시되지 않음[^52a-category-note] |
@@ -395,10 +395,10 @@ tags:
 | 6 | LDO2 또는 LDO3를 GPIO 풀업 전원으로 사용하는 경우, LDO2/LDO3 전원이 꺼지는 시나리오에서도 설계 요구 사항을 충족하는지 확인했습니다 | 520/3/5/7 전용 | 필수 |
 | 7 | I2C 풀업 전원은 누설을 피하기 위해 주변 장치의 IO 전원과 함께 스위칭됩니다 | 모든 변형 | 필수 |
 | 8 | PA09 사용 참고: 화면이 켜질 때 high로 구동해 활성화하고, 슬립 시 low로 구동합니다 | 실리콘 리비전 A2 이하 | 필수 |
-| 9 | Deep Sleep 모드의 기준 전류 요구 사항을 정의하고 기록했습니다 | 모든 변형 | 필수 |
-| 10 | <span class="flag-red">선택한 모든 주변 장치의 Deep Sleep 모드 기준 전류 합계를 기록했으며 프로젝트 요구 사항을 충족합니다</span> | <span class="flag-red">모든 변형</span> | 필수 |
-| 11 | Standby 모드의 기준 전류 요구 사항을 정의하고 기록했습니다 | 모든 변형 | 필수 |
-| 12 | <span class="flag-red">선택한 모든 주변 장치의 Standby 모드 기준 전류 합계를 기록했으며 프로젝트 요구 사항을 충족합니다</span> | <span class="flag-red">모든 변형</span> | 필수 |
+| 9 | Deep Sleep 모드의 기본 소비 전류 요구 사항을 정의하고 기록했습니다 | 모든 변형 | 필수 |
+| 10 | <span class="flag-red">선택한 모든 주변 장치의 Deep Sleep 모드 기본 소비 전류 합계를 기록했으며 프로젝트 요구 사항을 충족합니다</span> | <span class="flag-red">모든 변형</span> | 필수 |
+| 11 | Standby 모드의 기본 소비 전류 요구 사항을 정의하고 기록했습니다 | 모든 변형 | 필수 |
+| 12 | <span class="flag-red">선택한 모든 주변 장치의 Standby 모드 기본 소비 전류 합계를 기록했으며 프로젝트 요구 사항을 충족합니다</span> | <span class="flag-red">모든 변형</span> | 필수 |
 
 [^52a-note]: 원본 스프레드시트에는 "52A/52D"로 기재되어 있습니다. [SF32LB52x 하드웨어 설계 가이드][SF32LB52x Hardware Design Guide - Dev]에서 설명하는 변형은 SF32LB52B/D/E/G/J이며, 스프레드시트의 "52A" 표기는 이 변형 중 어느 것도 가리키지 않습니다. 이 행을 적용하기 전에 정확한 디바이스와 데이터시트를 확인하십시오. "52A"를 다른 모델로 자동 치환하지 마십시오.
 
@@ -408,15 +408,15 @@ tags:
 
 </div>
 
-### 5.8.21. 플래싱 및 디버그 테스트 포인트 { #5821-download-and-debug-test-points }
+### 5.8.21. 다운로드 및 디버그 테스트 포인트 { #5821-download-and-debug-test-points }
 
-<div align="center"><em>표 5.8.21-1: 플래싱 및 디버그 테스트 포인트 체크리스트</em></div>
+<div align="center"><em>표 5.8.21-1: 다운로드 및 디버그 테스트 포인트 체크리스트</em></div>
 
 <div align="center" markdown>
 
 | 번호 | 점검 항목 | 적용 대상 | 구분 |
 |:---|:---|:---|:---|
-| 1 | 프로그램 플래싱/디버그 테스트 포인트로 VBAT, GND, PA18(DBG_UART_RXD), PA19(DBG_UART_TXD), VSYS, PA34 및 유사한 테스트 포인트를 확보해 둡니다 | 모든 변형 | 필수 |
+| 1 | 프로그램 다운로드/디버그를 위해 VBAT, GND, PA18(DBG_UART_RXD), PA19(DBG_UART_TXD), VSYS, PA34 등의 테스트 포인트를 확보해 둡니다 | 모든 변형 | 필수 |
 
 </div>
 

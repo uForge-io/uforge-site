@@ -335,7 +335,7 @@ Chaque tableau ci-dessous couvre un bloc fonctionnel du schéma. Appliquez une l
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
 | 1 | La connexion SPI est correcte ; SDO et SDI sont correctement croisés entre le MCU et le périphérique | Toutes les puces | Optionnel |
-| 2 | Les exigences de timing du périphérique SPI sont confirmées et prises en charge | Toutes les puces | Optionnel |
+| 2 | Les exigences de minutage du périphérique SPI sont confirmées et prises en charge | Toutes les puces | Optionnel |
 | 3 | Le niveau logique d'E/S du périphérique correspond à celui de la puce principale | Toutes les puces | Optionnel |
 
 </div>

@@ -29,13 +29,13 @@ tags:
 
 SF32 移植展示了如何在 SF32LB52 上运行 ZMK 键盘模型，同时保留 Zephyr 的设备树（devicetree）、Kconfig、`west`、键位映射、扩展板配置和分体键盘约定。`urchin_sf32lb52` 参考把 38 键布局分到左右两半；左侧配置承担 ZMK 分体中央端（central）角色，启用 CherryUSB 与 ZMK Studio，并可向主机提供 USB HID；右侧配置承担外设端（peripheral）角色。两侧均启用 ZMK BLE。
 
-因此，该派生仓库适合评估基于 SF32 的无线分体键盘、USB/蓝牙桌面输入设备、可编程宏键盘或定制人机输入产品。代价在于依赖成熟度：该仓库的 `west` 清单固定了自定义 Zephyr 分支（`v4.3+sf32-zmk_fixes`）、指定的 SiFli HAL 修订版，以及自定义 CherryUSB `zephyr-adapt` 分支。这些依赖共同构成移植兼容边界；未经完整迁移和回归，不得替换为上游“最新版”。
+因此，该派生仓库适合评估基于 SF32 的无线分体键盘、USB/蓝牙桌面输入设备、可编程宏键盘或定制人机输入产品。代价在于依赖成熟度：该仓库的 `west` 清单固定了自定义 Zephyr 分支（`v4.3+sf32-zmk_fixes`）、指定的 SiFli HAL 修订版，以及自定义 CherryUSB `zephyr-adapt` 分支。这些依赖共同构成移植兼容边界；未经完整迁移和回归，不能替换为上游“最新版”修订。
 
 ## 成果、范围与进入条件 { #outcome-scope-and-entry-criteria }
 
-**目标成果：**构建并下载版本锁定的 Urchin 左右侧镜像；验证完整按键矩阵、层、USB HID、BLE 分体与主机路径、设置持久化、ZMK Studio 边界和恢复；然后完成一项受控 keymap 或硬件改动，并保留可复现证据。
+**目标成果：**构建并下载版本锁定的 Urchin 左右侧镜像；验证完整按键矩阵、层、USB HID、BLE 分体与主机路径、设置持久化、ZMK Studio 边界和恢复；然后完成一项受控键位映射或硬件改动，并保留可复现证据。
 
-本页不声称已经实现全部上游 ZMK 功能、兼容任意 ZMK 扩展板配置、达到量产电池续航、完成无线电性能验证，或支持迁移到其他 Zephyr/ZMK 版本。本页也不定义量产键盘 PCB：仓库中的 Urchin 配置只是把参考按键矩阵映射到 SF32LB52-DevKit-LCD 引脚，任何定制硬件都必须重新进行有意识的转换和验证。
+本页不声称已经实现全部上游 ZMK 功能、兼容任意 ZMK 扩展板配置、达到量产电池续航、完成无线电性能验证，或支持迁移到其他 Zephyr/ZMK 版本。本页也不定义量产键盘 PCB：仓库中的 Urchin 配置只是把参考按键矩阵映射到 SF32LB52-DevKit-LCD 引脚，必须经过有意的转换，才能用于任何定制硬件。
 
 开始前应准备：
 
@@ -51,7 +51,7 @@ SF32 移植展示了如何在 SF32LB52 上运行 ZMK 键盘模型，同时保留
 
 <div align="center" markdown>
 
-| 范围 | 经检查的基线 | 进入适配前必须保留的证据 |
+| 范围 | 经审查的基线 | 进入适配前必须保留的证据 |
 |:-----|:---------------|:-------------------------|
 | 派生仓库 | 固定 commit 的 OpenSiFli/zmk | 仓库 commit、与上游项目的关系、清单版本和本地差异记录 |
 | 开发板 | `sf32lb52_devkit_lcd/sf32lb525uc6/zmk` | 确切板卡版本、下载/恢复路径和控制台日志 |
@@ -63,6 +63,7 @@ SF32 移植展示了如何在 SF32LB52 上运行 ZMK 键盘模型，同时保留
 </div>
 
 ## 硬件与软件规格 { #hardware-and-software-specifications }
+
 ### 硬件规格 { #hardware-specification }
 
 <div align="center"><em>表：SF32 上的 ZMK 硬件规格</em></div>
@@ -85,15 +86,16 @@ SF32 移植展示了如何在 SF32LB52 上运行 ZMK 键盘模型，同时保留
 
 | 软件包或服务 | 所需版本或修订版 | 用途 | 状态 | 获取方式或来源 | 兼容性与更新说明 |
 |:-------------|:-----------------|:-----|:-----|:---------------|:-----------------|
-| OpenSiFli/zmk | 已审查提交版本 [`fd4d5843065f`](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e) | SF32 开发板移植、ZMK 应用和 Urchin 配置 | 必需 | [固定提交版本的代码仓库](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e) | 这不是带标签的 SF32 ZMK 发布版本；未经移植和验证，不要改用上游 ZMK |
+| OpenSiFli/zmk | 经审查提交版本 [`fd4d5843065f`](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e) | SF32 开发板移植、ZMK 应用和 Urchin 配置 | 必需 | [固定提交版本的代码仓库](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e) | 这不是带标签的 SF32 ZMK 发布版本；未经移植和验证，不要改用上游 ZMK |
 | West manifest 依赖项 | 固定仓库提交中 `app/west.yml` 解析出的精确修订版 | Zephyr、`hal_sifli`、CherryUSB 和其他模块 | 必需 | [固定提交中的 west manifest](https://github.com/OpenSiFli/zmk/blob/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/west.yml) | 执行并留存 `west list` 结果；不要独立更新依赖项 |
 | Zephyr `west` 工具链和构建工具 | 与固定 manifest 兼容的版本；记录已安装版本和主机操作系统 | 配置、构建并生成左右两侧镜像 | 必需 | [ZMK 文档](https://zmk.dev/docs)；[Zephyr 文档](https://docs.zephyrproject.org/) | 在干净工作区分别重新构建两侧镜像，并保留独立构建目录和哈希 |
-| ZMK Studio 主机 | 若所选配置启用 Studio，则使用兼容的主机/应用版本 | 可选的键位映射和配置路径 | 可选 | [ZMK Studio 文档](https://zmk.dev/docs/features/studio) | 已审查配置仅在左侧中央端启用 Studio；投入产品前验证授权和回滚 |
+| ZMK Studio 主机 | 若所选配置启用 Studio，则使用兼容的主机/应用版本 | 可选的键位映射和配置路径 | 可选 | [ZMK Studio 文档](https://zmk.dev/docs/features/studio) | 经审查配置仅在左侧中央端启用 Studio；投入产品前验证授权和回滚 |
 
 </div>
 
 ## 选择受支持的基线 { #choose-a-supported-baseline }
-经检查的 OpenSiFli 基线提交为 2026-05-27 的 `fd4d5843065f`，其中包含当时 Urchin 扩展板配置与开发板配置的更新，但它并不是带正式发布标签的 SF32 ZMK 版本。初次复现应固定该 commit；如选择更新的 commit，必须明确记录并重新评审。
+
+经审查的 OpenSiFli 基线提交为 2026-05-27 的 `fd4d5843065f`，其中包含当时 Urchin 扩展板配置与开发板配置的更新，但它并不是带正式发布标签的 SF32 ZMK 版本。初次复现应固定该 commit；如选择更新的 commit，必须明确记录并重新评审。
 
 <div align="center"><em>表：SF32 ZMK 基线选择</em></div>
 
@@ -107,7 +109,7 @@ SF32 移植展示了如何在 SF32LB52 上运行 ZMK 键盘模型，同时保留
 | 诊断扩展板配置 | `sf32lb52_test`、`sf32lb52_split_test_left/right` 和 `sf32lb52_zmkstudio_test` | 它们是移植开发参考，不代表产品兼容承诺 |
 | 分体角色 | 左侧 = central；右侧 = peripheral | USB 与 ZMK Studio 只在左侧配置中启用；不得假定左右对称 |
 | 依赖清单 | 自定义 Zephyr `v4.3+sf32-zmk_fixes`、固定 `hal_sifli` 和自定义 CherryUSB `zephyr-adapt` | 更新任何一项依赖都会改变兼容边界 |
-| 许可证 | ZMK 派生仓库和已识别 SF32 新增文件采用 MIT 许可证头/许可证 | 模块、硬件、keymap 素材和产品内容仍需分别评审 |
+| 许可证 | ZMK 派生仓库和已识别 SF32 新增文件采用 MIT 许可证头/许可证 | 模块、硬件、键位映射素材和产品内容仍需分别评审 |
 
 </div>
 
@@ -133,9 +135,9 @@ west build -s app -p always -d build-right \
 
 应记录最终 `west list`、生成的 Kconfig 与 devicetree、产物哈希、镜像与半侧标签，以及实际下载流程。在两块开发板均可独立恢复前，不要进入分体测试。
 
-## 项目阶段与决策要点 { #delivery-map }
+## 交付路径 { #delivery-map }
 
-<div align="center"><em>表：SF32 上 ZMK 项目阶段</em></div>
+<div align="center"><em>表：SF32 上 ZMK 交付路径</em></div>
 
 <div align="center" markdown>
 
@@ -145,7 +147,7 @@ west build -s app -p always -d build-right \
 | 2. 输入、传输与恢复 | 矩阵、USB、BLE、分体、设置和 Studio 故障是否可诊断并恢复？ | 按键覆盖、故障注入和恢复记录 |
 | 3. 源码复现 | 第二套环境能否在没有隐藏状态的前提下重建两个镜像？ | 清单、干净构建、产物哈希、下载和重复结果 |
 | 4. 可控适配 | 能否修改一项键盘行为或硬件映射而不破坏原基线？ | 受控改动、回滚路径和回归证据 |
-| 5. 产品评审 | 移植成熟度是否足以进入定制 PCB 或电池原型？ | 风险负责人和继续/延期/停止决定 |
+| 5. 产品评审 | 移植成熟度是否足以进入定制 PCB 或电池原型？ | 已指定责任人的风险，以及继续/延期/停止决定 |
 
 </div>
 
@@ -167,7 +169,7 @@ flowchart LR
     M --> R
 ```
 
-应把故障分为独立范围：物理矩阵/接线、右到左分体链路、左侧 USB、主机蓝牙、已保存的绑定/设置、ZMK Studio、开发板下载/恢复，以及固定依赖栈。按键没有到达主机，可能在扫描前、分体传输期间、中央端 keymap 或所选 HID 端点处失败；应按这一路径依次诊断。
+应把故障分为独立范围：物理矩阵/接线、右到左分体链路、左侧 USB、主机蓝牙、已保存的绑定/设置、ZMK Studio、开发板下载/恢复，以及固定依赖栈。按键没有到达主机，可能在扫描前、分体传输期间、中央端键位映射或所选 HID 端点处失败；应按这一路径依次诊断。
 
 ## 阶段 1 — 建立未经修改的移植基线 { #stage-1-establish-the-untouched-port-baseline }
 
@@ -181,7 +183,7 @@ flowchart LR
 
 **应保留证据：**开发板和接线记录、派生仓库 commit 与清单版本、生成配置、镜像哈希、下载与启动日志、完整按键位置矩阵、分层结果、端点选择，以及主机/Studio 版本。
 
-**关口 1 退出条件：**两次冷启动均能复现全部 38 个位置、三层键位映射、右到左分体链路和至少一个所选主机接口；两侧均可独立恢复。
+**关口 1 退出条件：**两次冷启动均能复现全部 38 个位置、三层键位映射、右到左分体链路和至少一个所选主机端点；两侧均可独立恢复。
 
 ## 阶段 2 — 验证输入、传输、设置与恢复 { #stage-2-validate-input-transport-settings-and-recovery }
 
@@ -193,8 +195,8 @@ flowchart LR
 
 | 测试 | 方法 | 通过证据 |
 |:-----|:-----|:---------|
-| 矩阵覆盖 | 验证每个位置、组合按键、各层和两侧直接输入 | 不缺键、不重复、不粘键、不交换角色；按下/释放顺序已有记录 |
-| 分体链路丢失 | 空闲和输入期间关闭右侧电源或移出连接范围 | 左侧按键和主机链路行为明确；右侧无需重新烧录即可重连，且不会留下粘键状态 |
+| 矩阵覆盖 | 验证每个位置、多键同时按下（rollover）组合、各层和两侧直接输入 | 不缺键、不重复、不粘键、不交换角色；按下/释放顺序已有记录 |
+| 分体链路丢失 | 空闲和输入期间关闭右侧电源或移出连接范围 | 左侧按键和主机链路行为明确；右侧无需重新烧录即可重连，且不会残留陈旧的按键状态 |
 | USB 中断 | 输入和使用 Studio 期间断开/重连左侧 USB 数据路径 | HID 与 Studio 能够独立恢复；不留下粘滞修饰键或损坏设置 |
 | 主机 BLE 丢失 | 关闭主机蓝牙、切换连接配置并重新连接 | 端点/连接配置状态可见；重连与主动清除绑定均有记录路径 |
 | 设置持久化 | 修改一项可逆设置，重启两侧，再恢复基线 | 预期 NVS 状态能够持久化；已有记录的复位/恢复路径可移除损坏或非预期状态 |
@@ -226,7 +228,7 @@ flowchart LR
 
 | 改动类别 | 合理起点 | 必须回归 |
 |:---------|:---------|:---------|
-| 键位映射 | 一个按键绑定、层、hold-tap 或组合键 | 全部位置/层、按下-释放顺序、多键输入、分体中断和两个主机接口 |
+| 键位映射 | 一个按键绑定、层、hold-tap 或组合键 | 全部位置/层、按下-释放顺序、多键输入、分体中断和两个主机端点 |
 | 矩阵/PCB | 一项行、列、直接输入或二极管方向改动 | 电气评审、生成的 devicetree、完整矩阵、短路/鬼键、唤醒和恢复 |
 | Studio | 一个可编辑参数或布局暴露项 | 授权、有效/无效改动、持久化、断连、恢复和版本兼容性 |
 | 传输 | 一项 USB/BLE 端点或分体策略改动 | 枚举、配对、绑定、连接配置切换、分体重连、防粘键和电流 |
@@ -243,21 +245,22 @@ flowchart LR
 
 - OpenSiFli ZMK 派生仓库、自定义 Zephyr 分支、SiFli HAL 版本、CherryUSB 适配，以及后续安全或兼容更新分别由谁负责？
 - 哪些上游 ZMK 功能已经在 SF32 上实际验证？哪些只是继承代码树中存在？
-- 量产和售后如何管理左右镜像标识、板卡版本、keymap、配置、绑定和恢复出厂状态？
-- 两侧在活动、连接空闲、断连和睡眠状态下的实测电流是多少？扫描速率、重连行为和电池保护如何影响结果？
+- 量产和售后如何管理左右镜像标识、板卡版本、键位映射、配置、绑定和恢复出厂状态？
+- 两侧在活动、连接空闲、断连和睡眠状态下的实测电流分别是多少（包括扫描速率、重连行为和电池保护）？
 - 已覆盖哪些主机、操作系统、USB 控制器、蓝牙协议栈、唤醒路径、多键输入情况和干扰环境？
 - 依赖更新、Studio 改动、设置写入或现场升级失败后，能否在不拆机或报废产品的情况下恢复？
-- ZMK/Zephyr 许可证、PCB 和外壳文件、keymap 内容、Logo、字体和所有随附配置是否允许预期分发？
+- ZMK/Zephyr 许可证、PCB 和外壳文件、键位映射内容、Logo、字体和所有随附配置是否允许预期分发？
 
 **关口 5 退出条件：**每项剩余风险都有负责人、证据和处置结论，团队已明确决定继续、延期或停止。
 
-## 产品设计阶段交接 { #handoff-to-product-design }
+## 交接给产品设计 { #handoff-to-product-design }
 
 交接资料应包含确切 SF32 型号与存储器、分体角色与传输方式、行/列/直接输入映射、二极管方向、USB 连接、天线和外壳假设、NVS/设置策略、下载和恢复接口、分侧功耗预算、测试夹具、镜像标识和固定依赖清单。后续可参阅 [SF32LB52-DevKit-LCD](../sf32-products/devkits/SF32LB52-DevKit-LCD.md)、[Zephyr 平台边界](../develop/platforms/zephyr/overview.md)、[蓝牙架构](../learn/bluetooth/overview.md)、[SF32LB52x 硬件设计指南](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)和[面向量产的设计](../hardware/design-for-production.md)。
 
 ## 权威来源 { #authoritative-sources }
+
 - [OpenSiFli/zmk SF32 派生仓库](https://github.com/OpenSiFli/zmk)
-- [经检查的 OpenSiFli/zmk commit](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e)
+- [经审查的 OpenSiFli/zmk commit](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e)
 - [SF32LB52 ZMK 开发板变体（经审查提交版本）](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/sifli/sf32lb52_devkit_lcd)
 - [Urchin SF32LB52 分体扩展板配置（经审查提交版本）](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/shields/urchin_sf32lb52)
 - [OpenSiFli ZMK west 清单（经审查提交版本）](https://github.com/OpenSiFli/zmk/blob/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/west.yml)

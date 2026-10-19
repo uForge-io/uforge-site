@@ -35,7 +35,7 @@ Este documento pressupõe conhecimentos básicos de hardware embarcado, captura 
 - :fontawesome-solid-file-pdf: __[Datasheet SF32LB58x][SF32LB58x Datasheet]__
 - :fontawesome-solid-file-pdf: __[Manual do usuário SF32LB58x][SF32LB58x User Manual]__
 - :fontawesome-solid-file-lines: __[Nota de aplicação de hardware SF32LB58x][SF32LB58x Hardware Application Note]__
-- :fontawesome-solid-file-excel: __[Planilha do checklist esquemática e de PCB do SF32LB58x][SF32LB58x Schematic & PCB Checklist workbook]__
+- :fontawesome-solid-file-excel: __[Planilha do checklist do esquemático e da PCB do SF32LB58x][SF32LB58x Schematic & PCB Checklist workbook]__
 - :fontawesome-solid-file-excel: __[Lista de fornecedores aprovados da SiFli (AVL)][SiFli Approved Vendor List (AVL)]__
 - :fontawesome-solid-cart-shopping: __[Comprar amostras][Buy Samples]__
 - :fontawesome-solid-cart-shopping: __[Comprar kits de desenvolvimento][Buy Dev Kits]__
@@ -84,7 +84,7 @@ Antes de congelar o esquemático, confirme os códigos de pedido do SF32LB58x e 
 - Encapsulamento BGA256 com passo de 0,4 mm e fanout denso de alimentação e GPIO.
 - O projeto exige processo de PCB HDI e não é compatível com PTH.
 - PMU integrada com 2 saídas BUCK e 3 saídas LDO internas.
-- O PMIC de sistema SF30147C pode ser usado opcionalmente na distribuição de alimentação de sistemas da categoria de relógios inteligentes.
+- O PMIC de sistema SF30147C pode ser usado opcionalmente na distribuição de alimentação de sistemas de classe smartwatch.
 - MIPI-DSI, USB 2.0 HS, SDIO/eMMC, RF, áudio e o fanout denso do BGA exigem confirmação antecipada do stack-up e das regras de impedância.
 
 ### 3.5. Aplicações típicas { #35-typical-applications }
@@ -96,7 +96,7 @@ O SF32LB58x é adequado para produtos conectados que combinam recursos gráficos
 - Displays inteligentes e painéis conectados
 - Dispositivos vestíveis com recursos de IA
 - Sistemas de IA de borda e fusão de sensores
-- Interfaces homem-máquina baseadas em LVGL e de alta resolução
+- Dispositivos HMI (interface homem-máquina) de alta resolução baseados em LVGL
 - Terminais médicos e industriais portáteis
 - Acessórios Bluetooth + Wi-Fi que usam um dispositivo Wi-Fi externo via SDIO
 
@@ -151,7 +151,7 @@ Antes de liberar o protótipo, arquive o PDF do esquemático, o stack-up da PCB,
 
 ### 4.5. Como usar os checklists { #using-the-checklists }
 
-Este guia contém dois níveis de checklists. As listas resumidas nas Seções 5.2.1.7 e 5.7.3 reúnem os itens de maior risco para uma autoverificação rápida durante o projeto. O [Checklist do esquemático](SF32LB58x_schematic_checklist.md) (Seção 5.8) e o [Checklist do layout da PCB](SF32LB58x_pcb_layout_checklist.md) (Seção 6.18) reproduzem, item por item, a lista completa *SF32LB58x Schematic & PCB Checklist* da SiFli (V1.0, 2026-01-21).
+Este guia contém dois níveis de checklists. Os checklists resumidos nas Seções 5.2.1.7 e 5.7.3 reúnem os itens de maior risco para uma autoverificação rápida durante o projeto. O [Checklist do esquemático](SF32LB58x_schematic_checklist.md) (Seção 5.8) e o [Checklist do layout da PCB](SF32LB58x_pcb_layout_checklist.md) (Seção 6.18) reproduzem, item por item, o checklist completo *SF32LB58x Schematic & PCB Checklist* da SiFli (V1.0, 2026-01-21).
 
 Cada item é classificado como Obrigatório (precisa ser aprovado antes da liberação) ou Opcional (recomendado quando o recurso correspondente estiver em uso). As marcações coloridas e o texto com <span class="flag-yellow">fundo amarelo</span> preservam os destaques de revisão da planilha original. Como a planilha não informa o motivo de cada destaque, trate essas marcações como alertas adicionais; elas não substituem os demais itens, inclusive os que não estão destacados.
 
@@ -159,7 +159,7 @@ As fontes divergem quanto à corrente de saturação do indutor BUCK. A planilha
 
 Execute o [Checklist do esquemático](SF32LB58x_schematic_checklist.md) durante a revisão do esquemático, antes de iniciar o layout da PCB. Execute o [Checklist do layout da PCB](SF32LB58x_pcb_layout_checklist.md) durante a revisão do layout, antes de liberar os arquivos Gerber. Em geral, cada etapa é feita duas vezes: primeiro pelo engenheiro responsável pelo projeto e depois por um revisor independente, antes do congelamento do projeto ou da liberação para fabricação.
 
-Para obter melhores resultados, use a lista como registro de aprovação, não apenas como material de leitura:
+Para obter melhores resultados, use o checklist como registro de aprovação, não apenas como material de leitura:
 
 1. Confirme primeiro o número de peça de destino e a configuração de memória integrada ao SiP.
 2. Durante a revisão, marque cada item como aprovado, reprovado ou não aplicável; não se limite a percorrer a tabela.
@@ -202,6 +202,6 @@ O guia completo continua nas páginas abaixo. Cada uma cobre uma etapa do proces
 - :fontawesome-solid-list-check: __[Checklist do esquemático](SF32LB58x_schematic_checklist.md)__ — revisão item por item do esquemático (Seção 5.8)
 - :fontawesome-solid-microchip: __[Diretrizes de layout da PCB](SF32LB58x_pcb_layout.md)__ — encapsulamento, stack-up, fanout e roteamento de clock, RF, áudio, USB, SDIO, DSI e alimentação
 - :fontawesome-solid-list-check: __[Checklist do layout da PCB](SF32LB58x_pcb_layout_checklist.md)__ — revisão item por item do layout da PCB (Seção 6.18)
-- :fontawesome-solid-book-open: __[Checklist de revisão do projeto e referências](SF32LB58x_review_and_reference.md)__ — critérios de liberação, documentos relacionados, apêndices e histórico de revisões
+- :fontawesome-solid-book-open: __[Checklist de revisão do projeto e referências](SF32LB58x_review_and_reference.md)__ — checklist de liberação, documentos relacionados, apêndices e histórico de revisões
 
 </div>

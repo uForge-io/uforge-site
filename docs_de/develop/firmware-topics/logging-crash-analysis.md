@@ -19,7 +19,7 @@ Erfassen Sie für jeden Firmware-Build:
 
 - Firmware-Version.
 - SDK-Branch oder Commit.
-- Board-Name und -Revision.
+- Boardname und -Revision.
 - Startursache.
 - Version des Partitionslayouts.
 - Ergebnisse der Initialisierung wichtiger Subsysteme.
@@ -42,7 +42,7 @@ Erfassen Sie für jeden Firmware-Build:
 
 | Phase | Empfohlene Protokollierung |
 |:------|:------------------|
-| Inbetriebnahme der Platine | Ausführliche Protokolle zu Peripherie und Startvorgang. |
+| Board-Inbetriebnahme | Ausführliche Protokolle zu Peripherie und Startvorgang. |
 | Funktionsentwicklung | Modulbezogene Debug-Protokolle rund um die geprüfte Funktion. |
 | Optimierung des Stromverbrauchs | Möglichst wenige Protokolle, da die Protokollierung selbst das Energieverhalten verändert. |
 | Freigabekandidat | Warnungen, Fehler, Version, Startursache und wichtige Zustandsprüfungen. |

@@ -11,7 +11,7 @@ tags:
 
 La section Développement vous accompagne pour passer d'une carte SF32 fonctionnelle à un firmware de produit maintenable. Après le premier `hello_world`, utilisez-la pour choisir une configuration de carte, reproduire de manière fiable la compilation et le flashage, adapter un exemple approprié, intégrer les fonctions du produit, diagnostiquer les défaillances et planifier les mises à jour et la récupération.
 
-Consultez [Vue d'ensemble de la prise en main](../getting-started/index.md) pour votre première mise en route d'une carte, [Produits SF32](../sf32-products/index.md) pour choisir le composant et la carte de développement, [Matériel](../hardware/index.md) pour les schémas et le matériel destiné à la production, et [Aperçu de la section Apprendre](../learn/index.md) pour les bases de l'architecture. Cette section décrit le flux de travail d'ingénierie et fournit des conseils de mise en œuvre par tâche.
+Consultez [Prise en main](../getting-started/index.md) pour votre première mise en route d'une carte, [Produits SF32](../sf32-products/index.md) pour choisir le composant et la carte de développement, [Matériel](../hardware/index.md) pour les schémas et le matériel destiné à la production, et [Apprendre](../learn/index.md) pour les bases de l'architecture. Cette section décrit le flux de travail d'ingénierie et fournit des conseils de mise en œuvre par tâche.
 
 !!! info "SiFli-Solution"
     SiFli-Solution est un ensemble logiciel distinct proposé par SiFli, que μForge.io ne documente pas actuellement. Les indications fournies ici se limitent à SiFli-SDK et aux parcours communautaires listés ci-dessous. Si votre produit nécessite une solution plus complète pour les appareils dotés d'un écran, consultez la [documentation officielle de SiFli Solution](https://docs.sifli.com/projects/solution/index.html) et contactez directement SiFli. Un produit complexe empruntant cette voie peut nécessiter un accompagnement direct et approfondi de SiFli.
@@ -42,7 +42,7 @@ Ce relevé servira de référence pour les modifications ultérieures de l'appli
 | Réutiliser un pilote ou une couche middleware dans plusieurs projets | [Composants et `sf_pkg`](platforms/sifli-sdk/components.md) | Un exemple minimal et le périmètre de configuration documenté. |
 | Mettre en œuvre un périphérique ou un sous-système concret | [Notes d'application du SDK](platforms/sifli-sdk/sdk-application-notes.md) | Le guide officiel du SDK correspondant, pour connaître les API, symboles de configuration et commandes exacts. |
 | Démarrer un produit à partir de code déjà fonctionnel | [Exemples](examples/index.md) | La configuration de carte correspondante, puis des tests après chaque modification. |
-| Diagnostiquer une défaillance ou recueillir des preuves de validation du produit | [Débogage et diagnostics](platforms/sifli-sdk/debugging-diagnostics.md) | [Journalisation et analyse des plantages](firmware-topics/logging-crash-analysis.md). |
+| Diagnostiquer une défaillance ou recueillir des preuves sur le produit | [Débogage et diagnostics](platforms/sifli-sdk/debugging-diagnostics.md) | [Journalisation et analyse des plantages](firmware-topics/logging-crash-analysis.md). |
 | Modifier l'organisation du démarrage, le stockage, les mises à jour, l'USB ou la consommation | [Sujets liés au firmware](firmware-topics/index.md) | Consultez le sujet pertinent (partitions, mises à jour, USB, énergie ou journalisation) avant de modifier le code. |
 
 </div>
@@ -76,14 +76,14 @@ Les notes d'application sont classées par tâche d'intégration plutôt que sel
 | [Notes d'application du SDK](platforms/sifli-sdk/sdk-application-notes.md) | Appliquer le SDK à une tâche ciblée : ADC, capteurs, Flash externe, basse consommation, diagnostics, RF ou tests Bluetooth. |
 | [Exemples](examples/index.md) | Sélectionner et adapter une implémentation fonctionnelle pour la carte exacte et le sous-système produit le plus exigeant. |
 | [Outils](tools/index.md) | Choisir les outils de téléchargement, de surveillance, de traçage, de diagnostic des plantages, de gestion des ressources et de production. |
-| [Sujets liés au firmware](firmware-topics/index.md) | Prendre les décisions communes aux projets concernant les partitions, l'OTA/DFU, l'USB, la gestion de l'énergie et les éléments de diagnostic. |
-| [Zephyr](platforms/zephyr/overview.md) | Évaluer Zephyr, Arduino, MicroPython ou Rust dans le périmètre et selon le niveau de maturité indiqués sur chaque page. |
+| [Sujets liés au firmware](firmware-topics/index.md) | Prendre les décisions transversales concernant les partitions, l'OTA/DFU, l'USB, la gestion de l'énergie et les éléments de diagnostic. |
+| [Expérimental / communauté](platforms/zephyr/overview.md) | Évaluer Zephyr, Arduino, MicroPython ou Rust dans le périmètre et selon le niveau de maturité indiqués sur chaque page. |
 
 </div>
 
 ## Évaluer les parcours communautaires de manière réfléchie { #evaluate-community-paths-deliberately }
 
-Le parcours [Zephyr](platforms/zephyr/overview.md), présenté dans le groupe « Expérimental / communauté », s'adresse aux équipes qui ont une raison précise de sortir du parcours SDK de référence. Cela ne signifie pas que le niveau de prise en charge pour la production est équivalent.
+Le groupe [Expérimental / communauté](platforms/zephyr/overview.md) s'adresse aux équipes qui ont une raison précise de sortir du parcours SDK de référence. Cela n'implique pas un niveau de prise en charge équivalent pour la production.
 
 <div align="center"><em>Tableau : Adéquation des parcours communautaires</em></div>
 
@@ -100,9 +100,9 @@ Le parcours [Zephyr](platforms/zephyr/overview.md), présenté dans le groupe «
 
 Avant de retenir l'un de ces parcours pour un produit, validez sur la carte exacte chaque périphérique requis, l'organisation de la mémoire Flash, la méthode de débogage et la procédure de récupération. Conservez avec le code source du produit la révision testée, la configuration, les commandes et les résultats.
 
-## Vérifier la maturité du firmware avant son intégration au produit { #product-ready-development-evidence }
+## Preuves de développement prêtes pour le produit { #product-ready-development-evidence }
 
-Avant de considérer le développement du firmware comme suffisamment abouti pour un produit, assurez-vous de pouvoir répondre à ces questions :
+Avant de considérer un parcours firmware comme prêt pour le produit, assurez-vous de pouvoir répondre à ces questions :
 
 - Quel composant, quelle révision de carte ou de matériel personnalisé, et quelle configuration ont été testés ?
 - Quel SDK, quel package, quelle branche ou quel commit a servi à produire le firmware ?

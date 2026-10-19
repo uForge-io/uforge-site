@@ -48,13 +48,13 @@ Para obter mais detalhes sobre a arquitetura do chip subjacente (núcleos, gráf
 | Núcleos de aplicação (HCPU/ACPU) | 2 × Arm Cortex-M33 STAR-MC1, até 240 MHz |
 | Núcleo de baixo consumo (LCPU) | Arm Cortex-M33 STAR-MC1, até 96 MHz |
 | SRAM | 2.176 KB (HCPU) + 512 KB (ACPU) + 1.056 KB de SRAM de retenção (LCPU) |
-| Conectividade sem fio | Bluetooth 5.3 em modo dual, retrocompatível com 4.2/4.1/4.0; compatível com BLE e Bluetooth Classic |
+| Conectividade sem fio | Bluetooth 5.3 de modo duplo, retrocompatível com 4.2/4.1/4.0; compatível com BLE e Bluetooth Classic |
 | Gráficos | ePicasso 2.0 + Vivante GCNanoUltraV, resolução de até 1024 × 1024, eZip 2.0 e codec JPEG por hardware |
 | Áudio | 2 × DAC de áudio de 24 bits e 2 × ADC Sigma-Delta de áudio de 24 bits |
 | Armazenamento | 5 × MPI (no encapsulamento e externo), 2 × SD/SDIO/eMMC |
 | Encapsulamento | 138 pinos, 24 × 24 × 3,1 mm |
 | Alimentação | VDD_3V3 (2,97–3,6 V), VDD_1V8 (1,7–1,95 V), VDDIOA/VDDIOA2/VDDIOB (1,7–3,6 V) |
-| Antena | Antena externa conectada por um ponto de alimentação de RF em furo metalizado castelado ou por um conector compatível com IPEX, conforme o código do módulo |
+| Antena | Antena externa conectada por uma alimentação de RF em furo castelado (stamp hole) ou por um conector compatível com IPEX, conforme o código do módulo |
 | Temperatura de operação | -40 a 85 °C |
 
 </div>
@@ -239,11 +239,11 @@ Na figura de descrição física dos pinos do datasheet, eles são agrupados por
 
 Qualquer pino identificado como `PAxx_I2C_UART` ou `PBxx_I2C_UART` na tabela acima pode ser configurado para I2C ou UART. O chip oferece até sete interfaces I2C e seis interfaces UART.
 
-**UART** — Comunicação full-duplex, com taxa de transmissão de até 6 Mbps, formato de dados configurável, controle de fluxo por hardware (CTS/RTS) e transmissão e recepção de vários pacotes via DMA. UART1–3 ficam em HPSYS; UART4–6, em LPSYS.
+**UART** — Comunicação full-duplex (bidirecional simultânea), com taxa de transmissão de até 6 Mbps, formato de dados configurável, controle de fluxo por hardware (CTS/RTS) e transmissão e recepção de vários pacotes via DMA. UART1–3 ficam em HPSYS; UART4–6, em LPSYS.
 
 **I2C** — Opera como mestre ou escravo, com FIFO de 8 bytes e suporte a DMA. Oferece os modos Standard (100 kbps), Fast (400 kbps), Fast-mode Plus (1 Mbps) e High-speed (3,4 Mbps), endereçamento de 7 ou 10 bits no modo mestre, clock stretching e filtro digital configurável para rejeitar glitches. I2C1–4 ficam em HPSYS; I2C5–7, em LPSYS.
 
-**SPI** — Suporta os formatos SSP/SPI (full-duplex, mestre ou escravo) e Microwire (half-duplex, somente mestre), largura de dados de 4 a 32 bits, polaridade e fase de clock configuráveis, polaridade de chip-select configurável, FIFO com 16 entradas de 32 bits e DMA. SPI1/2 ficam em HPSYS (máx. 48 MHz); SPI3/4, em LPSYS (máx. 24 MHz).
+**SPI** — Suporta os formatos SSP/SPI (full-duplex, mestre ou escravo) e Microwire (half-duplex, bidirecional alternado, somente mestre), largura de dados de 4 a 32 bits, polaridade e fase de clock configuráveis, polaridade de chip-select configurável, FIFO com 16 entradas de 32 bits e DMA. SPI1/2 ficam em HPSYS (máx. 48 MHz); SPI3/4, em LPSYS (máx. 24 MHz).
 
 **USB 2.0 HS** — Uma porta de alta velocidade compatível com USB 2.0, que pode operar como Host ou Device. Oferece endpoints configuráveis, suspensão e retomada, solicitação de sessão e suporte ao protocolo de negociação do Host, além dos modos high-speed e full-speed.
 
@@ -257,7 +257,7 @@ Qualquer pino identificado como `PAxx_I2C_UART` ou `PBxx_I2C_UART` na tabela aci
 
 ### 5.2 Processamento de sinais analógicos { #52-analog-signal-processing }
 
-**GPADC de 12 bits** — ADC SAR, taxa máxima de amostragem de 4 MS/s, faixa de entrada de 0 a 3,3 V em modo single-ended ou ±2,1 V em modo diferencial, oito canais single-ended (ou quatro pares diferenciais), modos de medição única e contínua, quatro intervalos de tempo configuráveis por medição, disparo por software ou hardware e suporte a DMA.
+**GPADC de 12 bits** — ADC SAR, taxa máxima de amostragem de 4 MS/s, faixa de entrada de 0 a 3,3 V em modo single-ended (não diferencial) ou ±2,1 V em modo diferencial, oito canais single-ended (ou quatro pares diferenciais), modos de medição única e contínua, quatro intervalos de tempo configuráveis por medição, disparo por software ou hardware e suporte a DMA.
 
 **Sensor de temperatura** — resolução de 0,2 °C, faixa de -40 °C a 125 °C, precisão de ±3 °C e leitura por consulta periódica (polling) ou por interrupção.
 
@@ -374,13 +374,13 @@ As tabelas completas (incluindo corrente de fuga de entrada, limiares de reset e
 
 </div>
 
-### 6.5 Desempenho de RF do Bluetooth de modo dual { #65-dual-mode-bluetooth-rf-performance }
+### 6.5 Desempenho de RF do Bluetooth de modo duplo { #65-dual-mode-bluetooth-rf-performance }
 
 Compatível com Bluetooth 5.3 e retrocompatível com 4.2/4.1/4.0, incluindo BLE e Bluetooth Classic. A frequência central dos canais de operação vai de 2402 a 2480 MHz.
 
 **Transmissor BLE (1 Mbps)**: potência máxima de 19 dBm; faixa de controle de potência de -20 a 19 dBm.
 
-**Receptor BLE**: sensibilidade típica de -100 dBm (1 Mbps), -97 dBm (2 Mbps), -104,5 dBm (LR S2/500 kbps) e -107,5 dBm (LR S8/125 kbps), medida com pacotes de 37 bytes, PER de 30,8% e condição dirty-off.
+**Receptor BLE**: sensibilidade típica de -100 dBm (1 Mbps), -97 dBm (2 Mbps), -104,5 dBm (LR S2/500 kbps) e -107,5 dBm (LR S8/125 kbps), medida com pacotes de 37 bytes, PER de 30,8% e condição dirty-off (dirty transmitter desligado).
 
 **Bluetooth Classic (Basic Data Rate)**: potência máxima de transmissão de 19 dBm; sensibilidade do receptor de -96,3 dBm (dirty off) / -94 dBm (dirty on), com BER de 0,1%.
 
@@ -392,11 +392,11 @@ As tabelas completas com valores mínimos/típicos/máximos do desempenho de tra
 
 O módulo tem cinco entradas de alimentação: **VDD_3V3**, **VDD_1V8**, **VDDIOA**, **VDDIOA2** e **VDDIOB**.
 
-- **VDD_3V3** alimenta os trilhos AVDD33_ANA, AVDD33_AUD e AVDD_USB do chip e a entrada VDD do eMMC integrado ao módulo, quando presente. Recomenda-se usar um LDO.
-- **VDD_1V8** alimenta os trilhos PVDD1, PVDD2, AVDD_BRF e AVDD18_DSI do chip, além da memória integrada ao encapsulamento.
-- **VDDIOA** alimenta o trilho VDDIOA do chip, a entrada VIO do eMMC integrado ao módulo (quando presente) e a Flash externa.
-- **VDDIOA2** alimenta o trilho VDDIOA2 do chip, que atende PA00–PA11.
-- **VDDIOB** alimenta o trilho VDDIOB do chip.
+- **VDD_3V3** alimenta as linhas de alimentação AVDD33_ANA, AVDD33_AUD e AVDD_USB do chip e a entrada VDD do eMMC integrado ao módulo, quando presente. Recomenda-se uma alimentação por LDO.
+- **VDD_1V8** alimenta as linhas de alimentação PVDD1, PVDD2, AVDD_BRF e AVDD18_DSI do chip, além da memória integrada ao encapsulamento.
+- **VDDIOA** alimenta a linha de alimentação VDDIOA do chip, a entrada VIO do eMMC integrado ao módulo (quando presente) e a Flash externa.
+- **VDDIOA2** alimenta a linha de alimentação VDDIOA2 do chip, que atende PA00–PA11.
+- **VDDIOB** alimenta a linha de alimentação VDDIOB do chip.
 
 !!! info "Figura 7-1: Diagrama de blocos da alimentação do módulo"
     Consulte a Figura 7-1 do datasheet oficial; o diagrama não é reproduzido neste guia.
@@ -448,7 +448,7 @@ O módulo mede 24 × 24 × 3,1 mm.
 
 ### 10.3 Conector de antena externa { #103-external-antenna-connector }
 
-Nos SKUs compatíveis com antena externa, o módulo pode usar um ponto de alimentação de RF em furo metalizado castelado ou um conector compatível com IPEX, conforme o código do módulo.
+Nos SKUs compatíveis com antena externa, o módulo pode usar uma alimentação de RF em furo castelado (stamp hole) ou um conector compatível com IPEX, conforme o código do módulo.
 
 !!! info "Figura 10-3: Dimensões do conector de antena externa"
     Consulte a Figura 8-3 do datasheet oficial; o desenho não é reproduzido neste guia.
@@ -465,7 +465,7 @@ Reserve a zona da antena do módulo e impeça que componentes, cobre, trilhas, m
 
 ### 11.1 Condições de armazenamento { #111-storage-conditions }
 
-- Armazene os produtos selados em uma embalagem barreira contra umidade (MBB), abaixo de 40 °C e com umidade relativa de 90%, sem condensação.
+- Armazene os produtos selados em uma embalagem barreira contra umidade (MBB), a menos de 40 °C e com umidade relativa inferior a 90%, sem condensação.
 - Após abrir a embalagem a vácuo, use o módulo dentro do período de exposição especificado para seu nível de sensibilidade à umidade (MSL); caso contrário, ele deve passar por secagem em estufa antes de uma segunda etapa de refusão.
 
 ### 11.2 Descarga eletrostática (ESD) { #112-electrostatic-discharge-esd }

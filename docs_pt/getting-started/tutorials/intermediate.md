@@ -195,4 +195,4 @@ close(fd);
 
 ## Próximos passos { #where-to-go-next }
 
-[Validação de produto](advanced.md) aborda o ajuste de baixo consumo, atualizações OTA, a inicialização de displays e drivers personalizados, conexões Bluetooth simultâneas e depuração em produção. Essa etapa transforma demonstrações funcionais em firmware pronto para um produto.
+[Validação de produto](advanced.md) aborda o ajuste de baixo consumo, atualizações OTA, o bring-up de displays e drivers personalizados, conexões Bluetooth simultâneas e depuração em produção. Essa etapa transforma demonstrações funcionais em firmware pronto para um produto.

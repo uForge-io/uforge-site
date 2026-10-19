@@ -41,12 +41,12 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 | Nr. | Prüfpunkt | Gilt für | Kategorie |
 |:---|:---|:---|:---|
 | 1 | VBUS-Versorgungsspannung ist <span class="flag-red">4,6 V–5,5 V</span> | nur 520/3/5/7 | Erforderlich |
-| 2 | Soll das Display unmittelbar beim Anschließen des Ladegeräts einschalten, wird der interne Ladeblock nicht empfohlen; bevorzugt wird ein externer Lade-IC mit Power-Path-Management | nur 520/3/5/7 | Erforderlich |
-| 3 | Der integrierte Lader ist nur geeignet, wenn es akzeptabel ist, den Akku zunächst bis auf 3,6 V zu laden, bevor die Software das Display einschaltet | nur 520/3/5/7 | Erforderlich |
+| 2 | Soll das Display unmittelbar beim Anschließen des Ladegeräts einschalten, wird das interne Ladegerät nicht empfohlen; bevorzugt wird ein externer Lade-IC mit Power-Path-Management | nur 520/3/5/7 | Erforderlich |
+| 3 | Das integrierte Ladegerät ist nur geeignet, wenn es akzeptabel ist, den Akku zunächst bis auf 3,6 V zu laden, bevor die Software das Display einschaltet | nur 520/3/5/7 | Erforderlich |
 | 4 | Ein OVP-Bauteil mit integriertem LDO-Ausgang (z. B. LP5305AQVF) wird empfohlen: LDO-Ausgang 4,7–5,4 V, Belastbarkeit ≥0,5 A, Überstromschutz-Auslösung ≥0,7 A | nur 520/3/5/7 | Erforderlich |
-| 5 | Bei einem OVP-Bauteil mit einstellbarem OVLO müssen die Teilerwiderstände 1 % Toleranz haben, und der Fehler von V_OVLO_TH muss unter 3 % liegen. Sowohl der minimale als auch der maximale V_OVP-Wert müssen innerhalb von 5,15–5,55 V liegen. Die Quelle bezeichnet 5,15 V als maximale Eingangsspannung des Ladegeräts und 5,55 V als obere Eingangsgrenze des 52x-Ladeblocks; siehe den Hinweis zu den abweichenden Quellenangaben nach der Tabelle | nur 520/3/5/7 | Erforderlich |
-| 6 | Wird der integrierte Lader nicht verwendet, kann VBUS unbeschaltet bleiben und der zugehörige Kondensator entfallen. VBAT kann dann jedoch nicht mehr als Versorgungsausgang dienen; deshalb einen externen 1-µF-Kondensator an VBAT anschließen | nur 520/3/5/7 | Erforderlich |
-| 7 | Akkuspannungserfassung: Der Chip führt bereits einen internen GPADC-Kanal auf VBAT (bzw. VBATS) — VBAT nicht zusätzlich auf einen GPADC-Pin führen | Alle Varianten | Erforderlich |
+| 5 | Bei einem OVP-Bauteil mit einstellbarem OVLO müssen die Teilerwiderstände 1 % Toleranz haben, und der Fehler von V_OVLO_TH muss unter 3 % liegen. Sowohl der minimale als auch der maximale V_OVP-Wert müssen innerhalb von 5,15–5,55 V liegen. Die Quelle bezeichnet 5,15 V als maximale Eingangsspannung des Ladegeräts und 5,55 V als obere Eingangsgrenze des 52x-Ladegeräts; siehe den Hinweis zu den abweichenden Quellenangaben nach der Tabelle | nur 520/3/5/7 | Erforderlich |
+| 6 | Wird das integrierte Ladegerät nicht verwendet, kann VBUS unbeschaltet bleiben und der zugehörige Kondensator entfallen. VBAT kann dann jedoch nicht mehr als Versorgungsausgang dienen; schließen Sie in diesem Fall einen externen 1-µF-Kondensator an VBAT an | nur 520/3/5/7 | Erforderlich |
+| 7 | Akkuspannungserfassung: Der Chip führt bereits einen internen GPADC-Kanal auf VBAT (bzw. VBATS) — führen Sie VBAT nicht zusätzlich auf einen GPADC-Pin | Alle Varianten | Erforderlich |
 | 8 | <span class="flag-red">Versorgungsspannung an den Pins VCC und VBAT ist 3,2 V–4,7 V</span> | nur 520/3/5/7 | Erforderlich |
 | 9 | BUCK_LX- und BUCK_FB-Verbindungen sind korrekt | Alle Varianten | Erforderlich |
 | 10 | Für die Spannungsmessung am Ausgang VDD_VOUT1 ist ein Prüfpunkt oder ein gut zugänglicher Filterkondensator vorgesehen | Alle Varianten | Erforderlich |
@@ -55,7 +55,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 | 13 | Für die Spannungsmessung am Ausgang VDD_RTC ist ein Prüfpunkt oder ein gut zugänglicher Filterkondensator vorgesehen | Alle Varianten | Erforderlich |
 | 14 | AVDD_BRF wird über VSYS versorgt | nur 520/3/5/7 | Erforderlich |
 | 15 | AVDD33_AUD wird über LDO2 versorgt | nur 520/3/5/7 | Erforderlich |
-| 16 | VSYS ist eine ausschließlich MCU-intern genutzte Versorgung — nicht zur Versorgung anderer Peripherie verwenden | nur 520/3/5/7 | Erforderlich |
+| 16 | VSYS ist eine ausschließlich MCU-intern genutzte Versorgung — verwenden Sie sie nicht zur Versorgung anderer Peripherie | nur 520/3/5/7 | Erforderlich |
 | 17 | LDO2_OUT wird zur Versorgung von Speicher, Sensoren und ähnlichen Peripheriegeräten empfohlen; bei Bedarf kann zur Steuerung der Versorgung ein Lastschalter eingefügt werden | nur 520/3/5/7 | Erforderlich |
 | 18 | <span class="flag-red">Die Summe der Spitzenströme aller von LDO2 versorgten Peripheriegeräte beträgt höchstens 150 mA</span> | nur 520/3/5/7 | Erforderlich |
 | 19 | LDO3_OUT wird zur Versorgung des Vibrationsmotors empfohlen | nur 520/3/5/7 | Erforderlich |
@@ -63,7 +63,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 | 21 | Das LCD benötigt eine eigene LDO-Versorgung mit niedrigem Ruhestrom (Iq) | Alle Varianten | Erforderlich |
 | 22 | Die LED des Herzfrequenzsensors sollte aus VBAT versorgt werden | Alle Varianten | Erforderlich |
 | 23 | Der Ladeeingang benötigt eine OVP-Schaltung | Alle Varianten | Erforderlich |
-| 24 | Muss das System bei zu niedriger Akkuspannung aus den 5 V am Ladeeingang versorgt werden, wird ein Lade-IC mit Power-Path-Management empfohlen; <span class="flag-red">die an VCC anliegende Spannung darf 4,7 V nicht überschreiten</span> | nur 520/3/5/7 | Erforderlich |
+| 24 | Wird ein Power-Path-Management benötigt, weil die Akkuspannung zu niedrig ist und 5 V am Ladeeingang anliegen, wird ein Lade-IC mit Power-Path-Management empfohlen; <span class="flag-red">die an VCC anliegende Spannung darf 4,7 V nicht überschreiten</span> | nur 520/3/5/7 | Erforderlich |
 | 25 | <span class="flag-red">SF32LB52DUB6: PVDD = 1,8 V</span> | nur 52D | Erforderlich |
 | 26 | <span class="flag-red">SF32LB52B/E/G/JUX6: PVDD = 3,3 V</span> | 52B/E/G/J | Erforderlich |
 | 27 | <span class="flag-red">SF32LB52BU36 und SF32LB52BU56: VDD_SIP benötigt eine externe 3,3-V-Versorgung</span> | nur 52B | Erforderlich |
@@ -107,9 +107,9 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 | 18 | AUD_VREF-Kondensator = 1 µF | Alle Varianten | Erforderlich |
 | 19 | <span class="flag-red flag-yellow">VSYS-Kondensator = 4,7 µF</span> | <span class="flag-red flag-yellow">nur 520/3/5/7</span> | Erforderlich |
 | 20 | GPADC-VREFP-Kondensator = 4,7 µF | Alle Varianten | Erforderlich |
-| 21 | Die Teilenummer der BUCK-Induktivität steht auf der [Liste der von SiFli freigegebenen Lieferanten (AVL)][SiFli Approved Vendor List] | Alle Varianten | Erforderlich |
+| 21 | Die Teilenummer der BUCK-Induktivität steht in der [von SiFli freigegebenen Lieferantenliste][SiFli Approved Vendor List] (AVL) | Alle Varianten | Erforderlich |
 | 22 | Ist die BUCK-Induktivität nicht AVL-gelistet, erfüllt sie L = 4,7 µH, DCR ≤0,4 Ω, Isat ≥450 mA | Alle Varianten | Erforderlich |
-| 23 | <span class="flag-red">Bei GPS oder anderen störempfindlichen Peripheriegeräten einen Footprint für einen parallel nach Masse geschalteten Kondensator an BUCK_LX vorsehen; die Kapazität ist anhand der tatsächlichen Testergebnisse festzulegen</span> | <span class="flag-red">Alle Varianten</span> | Erforderlich |
+| 23 | <span class="flag-red">Bei GPS oder anderen störempfindlichen Peripheriegeräten sehen Sie an BUCK_LX einen Footprint für einen parallel nach Masse geschalteten Kondensator vor; legen Sie die Kapazität anhand der tatsächlichen Testergebnisse fest</span> | <span class="flag-red">Alle Varianten</span> | Erforderlich |
 | 24 | <span class="flag-red">Ruhestrom des gewählten DCDC ist dokumentiert und erfüllt die Projektanforderungen</span> | <span class="flag-red">Alle Varianten</span> | Erforderlich |
 | 25 | <span class="flag-red">Ruhestrom des gewählten LDO ist dokumentiert und erfüllt die Projektanforderungen</span> | <span class="flag-red">Alle Varianten</span> | Erforderlich |
 
@@ -160,7 +160,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 | 1 | Für das ANT-Signal ist im Schaltplan eine Impedanz von 50 Ω für eine unsymmetrische Leitung angegeben | Alle Varianten | Erforderlich |
 | 2 | Für das ANT-Signal ist ein π-Anpassnetzwerk vorgesehen: ein paralleler NC-Kondensator (nicht bestückt) und ein 15-pF-Serienkondensator | Alle Varianten | Erforderlich |
 | 3 | Falls eine Filterung von Nebenwellen erforderlich ist, ist ein π-Anpassnetzwerk mit einer 2,7-nH-Serieninduktivität und einem 2-pF-Parallelkondensator vorgesehen | Alle Varianten | Optional |
-| 4 | <span class="flag-red">Falls eine externe PA-/LNA-Steuerung erforderlich ist, PA00 mit RX_EN und PA01 mit TX_EN verbinden</span> | Alle Varianten | Optional |
+| 4 | <span class="flag-red">Falls eine externe PA-/LNA-Steuerung erforderlich ist, sind PA00 mit RX_EN und PA01 mit TX_EN verbunden</span> | Alle Varianten | Optional |
 
 </div>
 
@@ -238,7 +238,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 | 11 | Wenn das LCD einen Lichtsensor integriert, ist auch dessen Stromversorgung bereitgestellt | Alle Varianten | Erforderlich |
 | 12 | TFT-LCD-Hintergrundbeleuchtungssteuerung: Schaltet die Hintergrundbeleuchtung bei einem High-Signal ein und bei Low aus (high-aktiv); verwenden Sie einen Pull-down-(PD)-GPIO. Schaltet sie bei Low ein und bei High aus (low-aktiv), verwenden Sie einen Pull-up-(PU)-GPIO | Alle Varianten | Erforderlich |
 | 13 | <span class="flag-red">SPI-LCD: 3-Draht-Modus — CS an PA03, CLK an PA04, DATA an PA05; 4-Draht-Modus — CS an PA03, CLK an PA04, DATA an PA05, DC an PA06</span> | Alle Varianten | Erforderlich |
-| 14 | Sharp-Memory-/JDI-Display an der JDI-Schnittstelle des MCU: VCOM und VB an MCU-PA24, VA an MCU-PA25, R0/G0/B0 an MCU-R1/G1/B1, R1/G1/B1 an MCU-R2/G2/B2, GSP an MCU-VST, BSP an MCU-HST, GCK an MCU-VCK, BCK an MCU-HCK, GEN an MCU-ENB und INTB an MCU-XRST anschließen | Alle Varianten | Erforderlich |
+| 14 | Sharp-Memory-/JDI-Display an der JDI-Schnittstelle der MCU: Schließen Sie VCOM und VB an MCU-PA24, VA an MCU-PA25, R0/G0/B0 an MCU-R1/G1/B1, R1/G1/B1 an MCU-R2/G2/B2, GSP an MCU-VST, BSP an MCU-HST, GCK an MCU-VCK, BCK an MCU-HCK, GEN an MCU-ENB und INTB an MCU-XRST an | Alle Varianten | Erforderlich |
 | 15 | Der I/O-Logikpegel des Peripheriegeräts stimmt mit dem des Hauptchips überein | Alle Varianten | Erforderlich |
 
 </div>
@@ -253,7 +253,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 |:---|:---|:---|:---|
 | 1 | Der GPADC-Eingang ist mit dem entsprechenden Pin verbunden <span class="flag-red">(PA28–PA34, 7 GPIOs können als GPADC-Eingänge verwendet werden)</span> | Alle Varianten | Optional |
 | 2 | Die in GPADC eingespeiste Spannung bleibt innerhalb von 0–3,3 V | Alle Varianten | Optional |
-| 3 | Für jeden von GPADC gemessenen Widerstandsteiler-Eingang Teilerwiderstände mit 1 % Toleranz verwenden; <span class="flag-red">jeder GPADC-Kanal hat einen 100-nF-Filterkondensator nahe am Chip-Pin</span> | Alle Varianten | Erforderlich |
+| 3 | Verwenden Sie für jeden von GPADC gemessenen Widerstandsteiler-Eingang Teilerwiderstände mit 1 % Toleranz; <span class="flag-red">jeder GPADC-Kanal hat einen 100-nF-Filterkondensator nahe am Chip-Pin</span> | Alle Varianten | Erforderlich |
 
 </div>
 
@@ -265,7 +265,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 
 | Nr. | Prüfpunkt | Gilt für | Kategorie |
 |:---|:---|:---|:---|
-| 1 | Es ist geklärt, ob die Tasten den MCU aufwecken müssen | Alle Varianten | Erforderlich |
+| 1 | Es ist geklärt, ob die Tasten die MCU aufwecken müssen | Alle Varianten | Erforderlich |
 | 2 | Der Anschluss eines normalen Tasters ist korrekt ausgelegt (Pull-up vorhanden, Widerstandswert und Pull-up-Spannungsdomäne korrekt) | Alle Varianten | Erforderlich |
 | 3 | Der Ein-/Aus-Taster verwendet PA34 und ist high-aktiv; ein 10 Sekunden langer Tastendruck löst einen Reset aus. <span class="flag-red">Der 10-kΩ-Pull-down-Widerstand muss sich auf der Hauptplatine befinden.</span> | Alle Varianten | Erforderlich |
 | 4 | Alle Tastensignale verfügen über ESD-Schutz | Alle Varianten | Erforderlich |
@@ -297,10 +297,10 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 
 | Nr. | Prüfpunkt | Gilt für | Kategorie |
 |:---|:---|:---|:---|
-| 1 | I2C verfügt über Pull-ups mit korrektem Widerstandswert; für 400-kHz-Betrieb werden 2,2-kΩ-Pull-ups empfohlen; die peripherieseitige Spannungsdomäne verwenden und die Pull-up-Versorgung beim Abschalten zusammen mit der Peripherie abschalten | Alle Varianten | Erforderlich |
+| 1 | I2C verfügt über Pull-ups mit korrektem Widerstandswert; für 400-kHz-Betrieb werden 2,2-kΩ-Pull-ups empfohlen; verwenden Sie die peripherieseitige Spannungsdomäne und schalten Sie die Pull-up-Versorgung beim Abschalten zusammen mit der Peripherie ab | Alle Varianten | Erforderlich |
 | 2 | Das I2C-Interrupt-Signal unterstützt bei Bedarf das hardwareseitige Wecken | Alle Varianten | Erforderlich |
 | 3 | I2C-Geräte wie Beschleunigungs-, Herzfrequenz- und geomagnetische Sensoren unterstützen das Auslesen aller Daten in einem einzigen Burst-Lesezugriff | Alle Varianten | Erforderlich |
-| 4 | Teilen sich mehrere Geräte einen I2C-Bus, müssen sie unterschiedliche Adressen haben | Alle Varianten | Erforderlich |
+| 4 | Teilen sich mehrere Geräte einen I2C-Bus, sind ihre Adressen unterscheidbar | Alle Varianten | Erforderlich |
 
 </div>
 
@@ -318,7 +318,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 | 4 | Das analoge unsymmetrische ECM-Mikrofon wird von MIC_BIAS versorgt | Alle Varianten | Optional |
 | 5 | Alle Audio-ADC-Eingänge haben einen DC-Blockkondensator von mindestens 2,2 µF | Alle Varianten | Optional |
 | 6 | Die Audio-DAC-Ausgänge DACP und DACN haben jeweils einen 1-kΩ-Serienwiderstand nahe am Chip, mit einem 1,5-nF-Kondensator parallel zwischen DACP und DACN | Alle Varianten | Optional |
-| 7 | <span class="flag-red">Als Audio-Leistungsverstärker wird der AW8155B empfohlen; er ist per Software auf den Class-A/B-Modus einzustellen. Andere Verstärker müssen durch Tests verifiziert werden.</span> | Alle Varianten | Optional |
+| 7 | <span class="flag-red">Als Audio-Leistungsverstärker wird der AW8155B empfohlen; er wird per Software für den Class-A/B-Modus konfiguriert. Andere Verstärker müssen durch Tests verifiziert werden.</span> | Alle Varianten | Optional |
 | 8 | <span class="flag-red">Wird der integrierte analoge Audio-ADC-Pfad nicht verwendet, wird empfohlen, ADCP über einen 0-Ω-Widerstand mit Masse zu verbinden</span> | Alle Varianten | Optional |
 
 </div>
@@ -331,7 +331,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 
 | Nr. | Prüfpunkt | Gilt für | Kategorie |
 |:---|:---|:---|:---|
-| 1 | Die SPI-Verbindungen sind korrekt: SDO des MCU ist mit SDI der Peripherie verbunden, SDI des MCU mit SDO der Peripherie | Alle Varianten | Optional |
+| 1 | Die SPI-Verbindungen sind korrekt: SDO der MCU ist mit SDI der Peripherie verbunden, SDI der MCU mit SDO der Peripherie | Alle Varianten | Optional |
 | 2 | Die Timing-Anforderungen der SPI-Peripherie sind erfüllt | Alle Varianten | Optional |
 | 3 | Der I/O-Logikpegel des Peripheriegeräts stimmt mit dem des Hauptchips überein | Alle Varianten | Optional |
 
@@ -346,8 +346,8 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 | Nr. | Prüfpunkt | Gilt für | Kategorie |
 |:---|:---|:---|:---|
 | 1 | PA18/PA19 (gemultiplext als DBG_UART) bilden die Programm-Download- und Debug-Schnittstelle — Testpunkte sind reserviert, <span class="flag-red">mit einem 100-Ω-Serienwiderstand</span> | Alle Varianten | Erforderlich |
-| 2 | Die UART-Verbindungen sind korrekt: RXD des MCU ist mit TXD der Peripherie verbunden, TXD des MCU mit RXD der Peripherie | Alle Varianten | Erforderlich |
-| 3 | Wenn PA35/PA36 als UART mit einem Peripheriegerät verbunden sind, muss dieses beim Reset des MCU ausgeschaltet sein oder die Software muss die Pins auf Low setzen | Alle Varianten | Erforderlich |
+| 2 | Die UART-Verbindungen sind korrekt: RXD der MCU ist mit TXD der Peripherie verbunden, TXD der MCU mit RXD der Peripherie | Alle Varianten | Erforderlich |
+| 3 | Wenn PA35/PA36 als UART mit einem Peripheriegerät verbunden sind, stellen Sie sicher, dass dieses beim Reset der MCU ausgeschaltet ist oder die Software die Pins auf Low setzt | Alle Varianten | Erforderlich |
 | 4 | Der I/O-Logikpegel des Peripheriegeräts stimmt mit dem des Hauptchips überein | Alle Varianten | Erforderlich |
 
 </div>
@@ -375,7 +375,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 |:---|:---|:---|:---|
 | 1 | Die USB-Schnittstellenverbindung ist korrekt | Alle Varianten | Optional |
 | 2 | Die USB-Schnittstelle verfügt über ESD-Schutz | Alle Varianten | Optional |
-| 3 | Ist USB im normalen Betrieb (außerhalb des Schlafmodus) eingeschaltet, kann der Host das An- und Abstecken erkennen. Soll dies auch im Schlafmodus des MCU möglich sein, sehen Sie einen VBUS-Spannungsteiler vor, der am Weck-Pin des MCU einen zum I/O-Pegel passenden Spannungspegel ausgibt. Verwenden Sie diesen Pin möglichst zugleich zur Erkennung eines angeschlossenen Ladegeräts. | Alle Varianten | Optional |
+| 3 | Ist USB im normalen Betrieb (außerhalb des Schlafmodus) eingeschaltet, kann der Host das An- und Abstecken erkennen. Soll dies auch im Schlafmodus der MCU möglich sein, wird ein VBUS-Spannungsteiler hinzugefügt, der am Weck-Pin der MCU einen zum I/O-Pegel passenden Pegel ausgibt; es wird empfohlen, diesen Pin zugleich zur Erkennung eines angeschlossenen Ladegeräts zu nutzen. | Alle Varianten | Optional |
 
 </div>
 
@@ -387,14 +387,14 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 
 | Nr. | Prüfpunkt | Gilt für | Kategorie |
 |:---|:---|:---|:---|
-| 1 | LDOs und DCDCs haben einen high-aktiven Enable-Eingang. Ist der Ausgang standardmäßig ausgeschaltet, einen Pull-down-Widerstand von 1 MΩ bis 5,1 MΩ zwischen EN und Masse vorsehen; den Wert an die Anforderungen an die Stromaufnahme des Projekts anpassen | Alle Varianten | Erforderlich |
-| 2 | Für die MOSFET-basierte Versorgungsschaltung eine PMOS-/NMOS-Kombination verwenden. Der Steuerpin schaltet bei High ein und bei Low aus; er ist über einen 1-MΩ-Pull-down-Widerstand mit Masse verbunden | Alle Varianten | Erforderlich |
+| 1 | LDOs und DCDCs haben einen high-aktiven Enable-Eingang. Ist der Ausgang standardmäßig ausgeschaltet, sehen Sie einen Pull-down-Widerstand von 1 MΩ bis 5,1 MΩ zwischen EN und Masse vor und passen Sie den Wert an die Anforderungen an die Stromaufnahme des Projekts an | Alle Varianten | Erforderlich |
+| 2 | Verwenden Sie für die MOSFET-basierte Versorgungsschaltung eine PMOS-/NMOS-Kombination. Der Steuerpin schaltet bei High ein und bei Low aus; er ist über einen 1-MΩ-Pull-down-Widerstand mit Masse verbunden | Alle Varianten | Erforderlich |
 | 3 | Der Versorgungsschalter für den externen Flash wird über PA11 gesteuert | nur 520/3/5/7 | Erforderlich |
 | 4 | <span class="flag-red">Der Versorgungsschalter für den externen Flash und der VDD_SIP-Versorgungsschalter werden beide über PA21 gesteuert</span> | <span class="flag-red">52A/D</span>[^52a-note] | In der Quelle nicht angegeben[^52a-category-note] |
 | 5 | VSYS ist, wenn als GPIO-Pull-up-Versorgung verwendet, immer eingeschaltet; dies ist als mit den Anforderungen an die Stromaufnahme vereinbar bestätigt | nur 520/3/5/7 | Erforderlich |
 | 6 | Wird LDO2 oder LDO3 als GPIO-Pull-up-Versorgung verwendet, ist bestätigt, dass das Szenario mit abgeschaltetem LDO2/LDO3 weiterhin die Designanforderungen erfüllt | nur 520/3/5/7 | Erforderlich |
 | 7 | Die I2C-Pull-up-Versorgung schaltet zusammen mit der IO-Versorgung der Peripherie, um Leckströme zu vermeiden | Alle Varianten | Erforderlich |
-| 8 | PA09-Hinweis: Beim Einschalten des Displays auf High setzen und im Schlafmodus auf Low ziehen | Siliziumrevision A2 oder älter | Erforderlich |
+| 8 | PA09-Hinweis: Setzen Sie den Pin beim Einschalten des Displays auf High und ziehen Sie ihn im Schlafmodus auf Low | Siliziumrevision A2 oder älter | Erforderlich |
 | 9 | Der erforderliche Ruhestrom im Deep-Sleep-Modus ist festgelegt und dokumentiert | Alle Varianten | Erforderlich |
 | 10 | <span class="flag-red">Die Summe der Ruheströme aller ausgewählten Peripheriegeräte im Deep-Sleep-Modus ist dokumentiert und erfüllt die Projektanforderungen</span> | <span class="flag-red">Alle Varianten</span> | Erforderlich |
 | 11 | Der erforderliche Ruhestrom im Standby-Modus ist festgelegt und dokumentiert | Alle Varianten | Erforderlich |
@@ -416,7 +416,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 
 | Nr. | Prüfpunkt | Gilt für | Kategorie |
 |:---|:---|:---|:---|
-| 1 | Für Programmierung und Debugging sind Testpunkte für VBAT, GND, PA18 (DBG_UART_RXD), PA19 (DBG_UART_TXD), VSYS, PA34 und weitere erforderliche Signale vorgesehen | Alle Varianten | Erforderlich |
+| 1 | Für Programmierung und Debugging sind Testpunkte für VBAT, GND, PA18 (DBG_UART_RXD), PA19 (DBG_UART_TXD), VSYS, PA34 und ähnliche Testpunkte vorgesehen | Alle Varianten | Erforderlich |
 
 </div>
 

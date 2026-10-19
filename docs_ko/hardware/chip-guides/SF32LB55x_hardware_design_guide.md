@@ -35,16 +35,16 @@ SF32LB55x는 레거시 접미사 규칙을 사용합니다. 인터페이스 가�
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-lines: __[SF32LB55x Hardware Application Note]__
-- :fontawesome-brands-github: __[SF32LB55x Hardware Application Source]__
-- :fontawesome-solid-file-pdf: __[SF32LB55x Datasheet]__
-- :fontawesome-solid-file-pdf: __[SF32LB55x User Manual]__
-- :fontawesome-solid-book: __[SF32LB55x SDK Documentation]__
-- :fontawesome-solid-book-open: __[SF32LB55x API Reference]__
-- :fontawesome-solid-microchip: __[SF32 Family Overview]__
-- :fontawesome-solid-file-excel: __[SiFli Approved Vendor List (AVL)]__
-- :fontawesome-solid-cart-shopping: __[Buy Samples]__
-- :fontawesome-solid-cart-shopping: __[Buy Dev Kits]__
+- :fontawesome-solid-file-lines: __[SF32LB55x 하드웨어 애플리케이션 노트][SF32LB55x Hardware Application Note]__
+- :fontawesome-brands-github: __[SF32LB55x 하드웨어 애플리케이션 소스][SF32LB55x Hardware Application Source]__
+- :fontawesome-solid-file-pdf: __[SF32LB55x 데이터시트][SF32LB55x Datasheet]__
+- :fontawesome-solid-file-pdf: __[SF32LB55x 사용자 매뉴얼][SF32LB55x User Manual]__
+- :fontawesome-solid-book: __[SF32LB55x SDK 문서][SF32LB55x SDK Documentation]__
+- :fontawesome-solid-book-open: __[SF32LB55x API 레퍼런스][SF32LB55x API Reference]__
+- :fontawesome-solid-microchip: __[SF32 제품군 개요][SF32 Family Overview]__
+- :fontawesome-solid-file-excel: __[SiFli 승인 업체 목록 (AVL)][SiFli Approved Vendor List (AVL)]__
+- :fontawesome-solid-cart-shopping: __[샘플 구매][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[개발 키트 구매][Buy Dev Kits]__
 
 </div>
 

@@ -11,7 +11,7 @@ tags:
 
 ## 소개 { #introduction }
 
-**PTM**은 **Parallel Task Machine**의 약자로, SF32LB57x용으로 문서화된 프로그래머블 주변 장치 태스크 엔진입니다. 일반 펌웨어 루프로 처리하기에는 타이밍에 너무 민감하고, 고정 기능 주변 장치로 처리하기에는 너무 특수하며, 메인 Cortex-M33을 계속 투입하기에는 규모가 너무 작은 작업을 위한 것입니다.
+**PTM**은 **Parallel Task Machine**의 약자로, SF32LB57x용으로 문서화된 프로그래머블 주변 장치 태스크 엔진입니다. 일반 펌웨어 루프로 제때 처리하기 어려울 만큼 타이밍에 민감하고, 고정 기능 주변 장치로 처리하기에는 너무 특수하며, 메인 Cortex-M33을 계속 투입하기에는 규모가 너무 작은 작업을 위한 것입니다.
 
 실제 제품 관점에서 PTM을 사용하면 펌웨어가 결정적(deterministic) 주변 장치 동작을 오프로드할 수 있습니다. 대상은 사이클 단위로 민감한 IO 시퀀싱, 커스텀 프로토콜 처리, 센서 수집, PWM과 유사한 파형, 빠른 트리거 응답, 외부 이벤트에 연동된 소규모 레지스터 또는 메모리 워크플로입니다.
 
@@ -119,7 +119,7 @@ PTM은 이벤트 지향적입니다. 이벤트 또는 고정 지연을 기다릴
 
 ## 대표적인 PTM 활용 사례 { #typical-ptm-use-cases }
 
-SF32LB57x 설계에서 PTM은 주변 장치 동작이 고정 기능 블록으로 처리하기에는 너무 특수하고 일반 펌웨어 루프로 처리하기에는 타이밍에 너무 민감할 때 가장 유용합니다.
+SF32LB57x 설계에서 PTM은 주변 장치 동작이 고정 기능 블록으로 처리하기에는 너무 특수하고 일반 펌웨어 루프로 제때 처리하기 어려울 만큼 타이밍에 민감할 때 가장 유용합니다.
 
 대표적인 활용 사례는 다음과 같습니다.
 
@@ -227,7 +227,7 @@ DPPI는 Nordic의 더 새로운 모델입니다. 주변 장치가 채널에 이�
 
 따라서 PPI/DPPI, PIO, PTM은 "더 낫다, 더 못하다"로 경쟁하는 선택지가 아닙니다. 이들은 서로 다른 계층에서 각각 이벤트 연결, 핀 수준 프로토콜, 주변 장치 태스크 자동화를 담당합니다. SF32LB57x에서는 표준 주변 장치로 시작하고, 필요한 타이밍이나 워크플로가 그 능력을 넘어설 때만 PTM을 사용하십시오.
 
-참고 자료: [SiFli PTM instruction definitions](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/Include/ptm_ins.h), [RP2040 Datasheet](https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf), [Nordic PPI specification](https://docs.nordicsemi.com/r/bundle/ps_nrf52811/page/ppi.html), [Nordic DPPI event system](https://docs.nordicsemi.com/r/bundle/ps_nrf54lv10a/page/ppi.html)
+참고 자료: [SiFli PTM 명령어 정의](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/Include/ptm_ins.h), [RP2040 데이터시트](https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf), [Nordic PPI 사양](https://docs.nordicsemi.com/r/bundle/ps_nrf52811/page/ppi.html), [Nordic DPPI 이벤트 시스템](https://docs.nordicsemi.com/r/bundle/ps_nrf54lv10a/page/ppi.html)
 
 ## 설계 지침 { #design-guidance }
 

@@ -180,7 +180,7 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 ### 开发套件 { #development-kits }
 
 - [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md) 是面向 SF32LB52 模组生态的主力显示开发板，支持 QSPI 和 MCU/8080 LCD 连接。
-- [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) 是面向 52B/52J 类外部供电设计的紧凑型核心板，适合快速完成固件、GPIO 与低功耗验证。
+- [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) 是面向 52B/52J 类外部供电设计的紧凑型核心板，适合快速完成固件、GPIO 与低功耗启动调试。
 - [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) 是 52 系列中尺寸最小的开发板，更接近体积受限产品的开发形态。
 - [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) 更偏向低功耗与电池应用评估，适合做紧凑型方案实验。
 

@@ -156,7 +156,7 @@ Si le partage n'est activé qu'après que la connexion Bluetooth est déjà éta
 
 ### Définir la matrice des téléphones pris en charge par le produit { #define-a-shipping-phone-support-matrix }
 
-Pour un produit grand public, publiez les combinaisons prises en charge **modèle de téléphone + version d'OS + opérateur/région**, plutôt qu'une simple mention « iOS » ou « Android ». Pour chaque modèle testé, consignez au minimum : modèle, build de l'OS, opérateur, service cellulaire actif et état de la SIM/eSIM, nom du réglage de partage de connexion, délai de première connexion, reconnexion après verrouillage de l'écran ou perte de la liaison radio, résultat avec un trafic soutenu et actions nécessaires pour rétablir le service. Reprenez ces essais après toute modification de l'application, du firmware PAN, de l'OS du téléphone ou du profil opérateur.
+Pour un produit grand public, publiez les combinaisons prises en charge **modèle de téléphone + version d'OS + opérateur/région**, plutôt qu'une simple mention « iOS » ou « Android ». Pour chaque modèle testé, consignez au minimum : modèle, numéro de compilation de l'OS, opérateur, service cellulaire actif et état de la SIM/eSIM, nom du réglage de partage de connexion, délai de première connexion, reconnexion après verrouillage de l'écran ou perte de la liaison radio, résultat avec un trafic soutenu et actions nécessaires pour rétablir le service. Reprenez ces essais après toute modification de l'application, du firmware PAN, de l'OS du téléphone ou du profil opérateur.
 
 ## Mise à jour OTA via PAN { #pan-based-ota-delivery }
 
@@ -196,7 +196,7 @@ Le README recommande aussi de contrôler l'attribution de l'adresse Bluetooth. L
 - [ ] Déterminer si la dépendance de PAN au partage de connexion du téléphone convient au produit ou si une radio Wi-Fi dédiée est nécessaire.
 - [ ] Mettre en service `example/bt/pan` sur la carte cible et vérifier le partage de connexion côté téléphone (Point d'accès personnel sous iOS/iPadOS ou partage Bluetooth sous Android).
 - [ ] Valider de bout en bout une connexion PAN réelle et au moins une opération réseau, par exemple la commande `weather` de l'exemple.
-- [ ] Tester chaque modèle de téléphone, build d'OS, combinaison région/opérateur et chemin de réglage prévu. Ne pas annoncer une compatibilité générale « iOS/Android » sans ces essais.
+- [ ] Tester chaque modèle de téléphone, numéro de compilation de l'OS, combinaison région/opérateur et chemin de réglage prévu. Ne pas annoncer une compatibilité générale « iOS/Android » sans ces essais.
 - [ ] Vérifier que l'OUI de l'adresse MAC Bluetooth de l'appareil est valide avant d'utiliser les fonctions réseau.
 - [ ] Si PAN sert au transport OTA, tester entièrement `pan_cmd ota_pan`, y compris le retour arrière, avant la mise sur le marché.
 - [ ] Définir le comportement de reconnexion et de reconnexion automatique (`set_retry_flag`, `set_retry_time`) selon la fréquence à laquelle le téléphone doit se trouver à portée.

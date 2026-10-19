@@ -9,7 +9,7 @@ tags:
 
 # PSRAM frente a otros tipos de memoria para sistemas embebidos { #psram-vs-other-embedded-memory-types }
 
-En muchos productos embebidos, la PSRAM —**RAM pseudoestática**— complementa la capacidad limitada de la SRAM interna con memoria de trabajo adicional. Puede alojar framebuffers, recursos gráficos grandes, búferes de audio, datos de modelos o conjuntos de trabajo de la aplicación que no caben en la SRAM. En algunos productos de bajo consumo, como los dispositivos vestibles, puede reducir el consumo del sistema frente a un subsistema de DRAM discreta; el resultado depende de los dispositivos de memoria, el controlador, los estados de funcionamiento y la carga de trabajo. Sigue siendo memoria volátil: no sustituye a la Flash ni es necesariamente apropiada para datos con requisitos estrictos de latencia.
+En muchos productos embebidos, la PSRAM —**RAM pseudoestática**— es el nivel práctico de capacidad entre la escasa SRAM interna y el almacenamiento no volátil. Úsela para framebuffers, recursos gráficos grandes, búferes de audio, datos de modelos o conjuntos de trabajo de la aplicación que no caben en la SRAM interna. En algunos productos de bajo consumo, como los dispositivos vestibles, puede reducir el consumo del sistema frente a un subsistema de DRAM discreta; el resultado depende de los dispositivos de memoria, el controlador, los estados de funcionamiento y la carga de trabajo. Sigue siendo memoria volátil: no sustituye a la Flash ni es necesariamente apropiada para datos con requisitos estrictos de latencia.
 
 Esta guía explica cómo decidir qué datos ubicar en SRAM, PSRAM o almacenamiento persistente. Para confirmar qué memoria incluye un SKU concreto, consulte la [Familia SF32](../../sf32-products/family/SF32_family.md) y la documentación correspondiente al chip, módulo o placa seleccionados.
 
@@ -22,7 +22,7 @@ La regla práctica es sencilla: use PSRAM para ampliar la capacidad, reserve SRA
 
 En este contexto, **estática** y **dinámica** describen cómo conserva un bit una celda de RAM mientras está alimentada. **No** indican si los datos sobreviven a un corte de alimentación: tanto la SRAM como la DRAM son volátiles.
 
-- Un bit de **SRAM** se mantiene en un latch estático. Una vez escrito, permanece válido sin refresco periódico mientras el dispositivo esté alimentado y funcionando dentro de especificación. La contrapartida es una celda de memoria más grande, lo que limita la capacidad y eleva el área de silicio y el costo por bit.
+- Un bit de **SRAM** se mantiene en un latch estático. Una vez escrito, permanece válido sin refresco periódico mientras el dispositivo esté alimentado y funcionando dentro de especificación. La contrapartida es una celda de memoria más grande, lo que limita la capacidad y eleva el área de silicio y el coste por bit.
 - Un bit de **DRAM** se mantiene como carga en un condensador. Esa carga se fuga con el tiempo, por lo que el bit debe leerse y restaurarse periódicamente —una operación de **refresco**— antes de que la carga caiga demasiado. La celda más pequeña le da a la DRAM una ventaja de densidad, pero normalmente requiere un controlador compatible con DRAM que programe el refresco y respete sus reglas de temporización.
 
 La PSRAM suele usar internamente una **matriz de celdas dinámicas, similar a la DRAM**. El dispositivo PSRAM realiza el refresco y oculta gran parte del control específico de la DRAM dentro del encapsulado. Por eso, su modelo de acceso desde el host se parece más al de la SRAM: el host lee y escribe en un espacio de memoria direccionable sin tener que programar el refresco periódico. Esto no significa que toda PSRAM comparta la interfaz eléctrica o la temporización de la SRAM. Es **pseudoestática** porque la RAM dinámica *imita el comportamiento externo de la RAM estática*, no porque la propia celda de almacenamiento se haya vuelto estática.
@@ -30,7 +30,7 @@ La PSRAM suele usar internamente una **matriz de celdas dinámicas, similar a la
 La simplificación está en la interfaz, no en la eliminación de las contrapartidas físicas. La PSRAM sigue teniendo latencia de comando específica del dispositivo, comportamiento de ráfaga, límites de reloj, modos de suspensión, restricciones de acceso y consumo de energía. Consulte la hoja de datos del dispositivo seleccionado; no dé por hecho que todos los dispositivos PSRAM son intercambiables.
 
 !!! note "Lo que la PSRAM no es"
-    La PSRAM no es almacenamiento no volátil y no garantiza por sí sola una latencia comparable a la SRAM interna ni un ancho de banda suficiente para el sistema. Resuelve un problema de capacidad; el dispositivo y la carga de trabajo seleccionados determinan el costo en latencia, consumo y ancho de banda.
+    La PSRAM no es almacenamiento no volátil y no garantiza por sí sola una latencia comparable a la SRAM interna ni un ancho de banda suficiente para el sistema. Resuelve un problema de capacidad; el dispositivo y la carga de trabajo seleccionados determinan el coste en latencia, consumo y ancho de banda.
 
 ## Comparación de tipos de memoria { #memory-type-comparison }
 
@@ -41,10 +41,10 @@ La simplificación está en la interfaz, no en la eliminación de las contrapart
 | Tipo de memoria | ¿Conserva los datos sin alimentación? | Característica central | Ventaja habitual | Principal compromiso de diseño | Uso habitual en sistemas embebidos |
 |:------------|:----------------------------|:--------------------|:-----------------|:----------------------|:----------------------|
 | **SRAM** | No | Latch estático; sin refresco | La SRAM interna suele ofrecer una latencia baja y predecible; la temporización real depende de la ruta de memoria del SoC y de la contención | Ineficiente en área, por lo que la capacidad en chip es limitada; las corrientes de fuga importan en diseños siempre activos | Pilas de llamadas, código/datos de uso frecuente, descriptores DMA, búferes necesarios para atender interrupciones con baja latencia y memorias estrechamente acopladas |
-| **DRAM** | No | Almacenamiento basado en condensador con refresco gestionado externamente y un controlador DRAM | Alta densidad y bajo costo por bit en grandes capacidades | Refresco, complejidad del controlador, temporización de fila/banco y tareas de gestión de energía | Memoria principal en sistemas con procesador de aplicación y sistemas embebidos de alta capacidad |
+| **DRAM** | No | Almacenamiento basado en condensador con refresco gestionado externamente y un controlador DRAM | Alta densidad y bajo coste por bit en grandes capacidades | Refresco, complejidad del controlador, temporización de fila/banco y tareas de gestión de energía | Memoria principal en sistemas con procesador de aplicación y sistemas embebidos de alta capacidad |
 | **PSRAM** | No | Almacenamiento similar a DRAM, con refresco y control gestionados dentro del dispositivo de memoria y un modelo de acceso desde el host similar al de la SRAM | Amplía la capacidad de trabajo más allá de la SRAM interna; en algunos diseños de ancho de banda bajo o moderado, puede simplificar la integración y reducir el consumo del sistema frente a un subsistema de DRAM discreta | Latencia más alta y menos predecible que la SRAM interna; ancho de banda de interfaz limitado y compartido con otros clientes | Framebuffers, búferes grandes de UI/audio/IA, recursos descomprimidos y conjuntos de trabajo de aplicación |
 | **RRAM / ReRAM** | Sí | La resistencia de una celda cambia para representar datos | Memoria embebida no volátil potencialmente compacta y bajo consumo en espera | El comportamiento de escritura, la durabilidad, la retención, la variabilidad y la disponibilidad dependen en gran medida del proceso y del producto | Configuración no volátil, almacenamiento de código/datos o usos especializados de memoria embebida cuando exista una tecnología compatible |
-| **MRAM** | Sí | El estado magnético representa los datos | Acceso no volátil rápido, alta durabilidad y sin refresco | El costo, la densidad, la energía de escritura y la capacidad disponible varían según la generación y el producto MRAM | Estado persistente, almacenamiento de código/datos o datos de trabajo no volátiles rápidos en dispositivos compatibles |
+| **MRAM** | Sí | El estado magnético representa los datos | Acceso no volátil rápido, alta durabilidad y sin refresco | El coste, la densidad, la energía de escritura y la capacidad disponible varían según la generación y el producto MRAM | Estado persistente, almacenamiento de código/datos o datos de trabajo no volátiles rápidos en dispositivos compatibles |
 
 </div>
 
@@ -54,15 +54,15 @@ La tabla es cualitativa. «Más rápido», «más denso» y «menor consumo» so
 
 La PSRAM suele estar orientada a un punto de operación distinto al de la DRAM discreta convencional: capacidad y ancho de banda moderados, una interfaz más simple, menos sobrecarga para el controlador y modos de bajo consumo en el dispositivo. En algunos dispositivos vestibles, equipos portátiles y sistemas alimentados por batería que no necesitan un ancho de banda comparable al de la DRAM, esta combinación puede reducir el consumo del sistema. No es una garantía general: compare los dispositivos de memoria, el controlador, los estados de funcionamiento y una carga representativa en el sistema de destino.
 
-Esto no es una promesa universal por byte o por acceso. Una interfaz PSRAM operada a una frecuencia de reloj elevada, un framebuffer leído continuamente o un tráfico intenso de pantalla/audio/IA pueden seguir dominando el presupuesto de consumo de la memoria. Compare las corrientes en actividad, en espera, de retención y durante la reanudación para los dispositivos seleccionados, con el reloj, el voltaje, la temperatura y el patrón de acceso reales. Use modos como Half-Sleep cuando estén disponibles y resulten beneficiosos.
+Esto no es una promesa universal por byte o por acceso. Una interfaz PSRAM operada a una frecuencia de reloj elevada, un framebuffer leído continuamente o un tráfico intenso de pantalla/audio/IA pueden seguir dominando el presupuesto de consumo de la memoria. Compare las corrientes en actividad, en espera, de retención y durante la reanudación para los dispositivos seleccionados, con el reloj, la tensión, la temperatura y el patrón de acceso reales. Use modos como Half-Sleep cuando estén disponibles y resulten beneficiosos.
 
 ## Dónde encaja cada tipo de memoria en el sistema { #where-each-memory-fits-in-a-system }
 
 Piense en términos de vida útil de los datos y urgencia de acceso:
 
 1. Coloque en la SRAM interna u otra memoria documentada de baja latencia el código o los datos **sensibles a las interrupciones, de acceso frecuente y críticos en latencia**.
-2. Coloque los **conjuntos de trabajo activos grandes** en PSRAM cuando el beneficio de capacidad supere el costo de latencia y ancho de banda.
-3. Coloque los **datos que deben sobrevivir a la pérdida de energía** en una tecnología no volátil: comúnmente Flash NOR, Flash NAND, eMMC, o —en sistemas que lo ofrezcan— RRAM o MRAM.
+2. Coloque los **conjuntos de trabajo activos grandes** en PSRAM cuando el beneficio de capacidad supere el coste de latencia y ancho de banda.
+3. Coloque los **datos que deben sobrevivir a la pérdida de energía** en una tecnología no volátil: comúnmente NOR Flash, NAND Flash, eMMC, o —en sistemas que lo ofrezcan— RRAM o MRAM.
 4. Mantenga los **recursos de acceso poco frecuente** en almacenamiento no volátil y traslade o decodifique solo la parte necesaria para la operación actual.
 
 Un diseño embebido común es por tanto:
@@ -79,7 +79,7 @@ Esta es una estrategia de ubicación, no una regla que deba aplicarse a todos lo
 
 ## El ancho de banda de la interfaz limita el rendimiento de la PSRAM { #psram-performance-is-an-interface-budget }
 
-La capacidad de la PSRAM no hace que su ancho de banda sea ilimitado. El host accede a ella mediante interfaces como OPI o HPI en las configuraciones SF32 compatibles. Esa ruta puede ser compartida por la CPU, las cachés, DMA, los gráficos, el barrido de pantalla, el audio, la conectividad inalámbrica y el almacenamiento. Aunque la capacidad de PSRAM sea suficiente, el producto puede presentar tirones o sufrir falta de datos en el búfer (underrun) cuando varios clientes solicitan la interfaz a la vez.
+La capacidad de la PSRAM no hace que su ancho de banda sea ilimitado. El host accede a ella mediante interfaces como OPI o HPI en las configuraciones SF32 compatibles. Esa ruta puede ser compartida por la CPU, las cachés, DMA, los gráficos, el barrido de pantalla, el audio, la conectividad inalámbrica y el almacenamiento. Aunque la capacidad de PSRAM sea suficiente, el producto puede presentar tirones o sufrir un agotamiento del búfer (underrun) cuando varios clientes solicitan la interfaz a la vez.
 
 ### Ancho de interfaz y tasa de transferencia { #interface-width-and-transfer-rate }
 
@@ -112,7 +112,7 @@ La [guía de modelos de chip de SiFli](https://github.com/OpenSiFli/SiFli-Wiki/b
 
 El beneficio más valioso de una disposición de doble canal no es simplemente una cifra de ancho de banda agregado más alta. Cuando el mapa de memoria SF32 seleccionado y la configuración de pantalla/controlador permiten asignar memoria de forma independiente, se puede reservar un canal para el cliente con mayores exigencias de ancho de banda y usar el otro para el resto de los accesos del sistema.
 
-Una pantalla RGB/DPI es un ejemplo común. Su controlador debe leer el framebuffer continuamente a la frecuencia del reloj de píxel; una lectura retrasada puede provocar una falta de datos en el búfer (underrun), artefactos visuales o un refresco inestable. Ubicar el framebuffer en la memoria atendida por un canal de PSRAM y colocar en el otro los recursos de UI, los búferes de audio y otros datos de trabajo que utilizan la CPU, ePicasso o DMA puede reducir la contención evitable en la ruta de lectura de la pantalla.
+Una pantalla RGB/DPI es un ejemplo común. Su controlador debe leer el framebuffer continuamente a la frecuencia del reloj de píxel; una lectura retrasada puede provocar un agotamiento del búfer, artefactos visuales o un refresco inestable. Ubicar el framebuffer en la memoria atendida por un canal de PSRAM y colocar en el otro los recursos de UI, los búferes de audio y otros datos de trabajo que utilizan la CPU, ePicasso o DMA puede reducir la contención evitable en la ruta de lectura de la pantalla.
 
 Use esto como una estrategia de asignación de ancho de banda, no como una promesa automática. Verifique que el dispositivo seleccionado exponga el mapeo de canales requerido, que la dirección base del framebuffer caiga en el canal previsto y que el controlador de pantalla y los demás maestros de bus puedan usar los canales de forma independiente. Mida la estabilidad del escaneo, el tiempo de cuadro y la carga concurrente de audio/Bluetooth/CPU; el intercalado de direcciones, una interconexión compartida o un diseño de búfer inadecuado pueden reducir el beneficio esperado.
 
@@ -143,7 +143,7 @@ Para un diseño intensivo en PSRAM, valide estas preguntas en el hardware objeti
 - ¿Qué sucede cuando el refresco de pantalla, el audio Bluetooth y el trabajo de la aplicación ocurren juntos?
 - ¿El comportamiento de espera o suspensión de la PSRAM seleccionada cumple con el requisito de retención y duración de batería?
 
-Mida el tiempo de cuadro, los underruns de búfer, las esperas de CPU, la corriente y el comportamiento de recuperación. No infiera el rendimiento del sistema únicamente a partir de la capacidad de la PSRAM o el ancho de la interfaz.
+Mida el tiempo de cuadro, los agotamientos de búfer, las esperas de CPU, la corriente y el comportamiento de recuperación. No infiera el rendimiento del sistema únicamente a partir de la capacidad de la PSRAM o el ancho de la interfaz.
 
 ## Half-Sleep en las PSRAM de AP Memory compatibles { #half-sleep-on-applicable-ap-memory-psram }
 
@@ -155,7 +155,7 @@ Half-Sleep es un **modo de bajo consumo específico del dispositivo**, no una fu
 
 Las comparaciones siguientes se basan en la hoja de datos de AP Memory Rev. 3.7, disponible en el [sitio web del fabricante](https://www.apmemory.com/wp-content/uploads/APS6408L-OBM-BA.pdf). Confirme la revisión y el componente instalado antes de aplicar sus límites.
 
-Para la misma pieza de referencia APS6408L-OBMx con **retención de toda la matriz de memoria**, AP Memory publica las siguientes corrientes típicas medias de espera y Half-Sleep. Al mismo voltaje de alimentación, la reducción relativa de corriente es también la reducción relativa de consumo de la PSRAM.
+Para la misma pieza de referencia APS6408L-OBMx con **retención de toda la matriz de memoria**, AP Memory publica las siguientes corrientes típicas medias de espera y Half-Sleep. A la misma tensión de alimentación, la reducción relativa de corriente es también la reducción relativa de consumo de la PSRAM.
 
 <div align="center"><em>Tabla: ahorro de Half-Sleep en APS6408L-OBMx con retención de toda la matriz</em></div>
 
@@ -163,12 +163,12 @@ Para la misma pieza de referencia APS6408L-OBMx con **retención de toda la matr
 
 | Temperatura | Corriente de espera estándar | Corriente Half-Sleep | Reducción relativa |
 |:------------|:------------------------:|:------------------:|:------------------:|
-| 25 °C | 66 µA | 20 µA | alrededor del 70% |
-| 85 °C | 190 µA | 120 µA | alrededor del 37% |
+| 25 °C | 66 µA | 20 µA | alrededor del 70 % |
+| 85 °C | 190 µA | 120 µA | alrededor del 37 % |
 
 </div>
 
-A 25 °C, Half-Sleep usa por tanto aproximadamente el **30% de la corriente de espera estándar de la pieza de referencia** mientras conserva toda la matriz de memoria. El ahorro es menor a 85 °C porque la corriente de retención aumenta con la temperatura. Estas cifras comparan dos estados de inactividad/retención —no Half-Sleep frente a la corriente activa de lectura/escritura— y son valores típicos, no garantías de diseño. Los ajustes de refresco parcial de la matriz pueden cambiar aún más la corriente, pero pueden no retener cada región de memoria; úselos solo cuando la política de retención de datos lo permita.
+A 25 °C, Half-Sleep usa por tanto aproximadamente el **30 % de la corriente de espera estándar de la pieza de referencia** mientras conserva toda la matriz de memoria. El ahorro es menor a 85 °C porque la corriente de retención aumenta con la temperatura. Estas cifras comparan dos estados de inactividad/retención —no Half-Sleep frente a la corriente activa de lectura/escritura— y son valores típicos, no garantías de diseño. Los ajustes de refresco parcial de la matriz pueden cambiar aún más la corriente, pero pueden no retener cada región de memoria; úselos solo cuando la política de retención de datos lo permita.
 
 ### Reglas de diseño para Half-Sleep { #design-rules-for-half-sleep }
 
@@ -177,11 +177,11 @@ No confunda la condición de 150 ms para la corriente con los 150 µs de duraci�
 Las notas de las tablas de corriente de la hoja de datos de referencia especifican un dispositivo de 64 Mb sin conmutación del reloj; las cifras de refresco lento a 25 °C requieren activar Slow Refresh Frequency. El rango especificado para VDD y VDDQ es de 1,62 a 1,98 V. La corriente especificada de Half-Sleep solo se garantiza después de 150 ms en ese modo; esto no convierte los valores típicos de la tabla en límites garantizados. Para períodos de inactividad más cortos, mida la forma de onda completa de entrada, retención y salida, en lugar de aplicar la corriente estabilizada a todo el intervalo.
 
 - Entre en Half-Sleep solo después de que todos los clientes de CPU, DMA, pantalla, audio, conectividad inalámbrica y almacenamiento hayan dejado de acceder a la región de PSRAM. Una transacción durante la entrada o la suspensión puede corromper la transferencia o despertar el dispositivo inesperadamente.
-- Trate la salida como un costo de activación programado. El firmware debe respetar la temporización de salida especificada antes de que el código, el DMA o un controlador de periférico vuelva a acceder a la PSRAM.
+- Trate la salida como un coste de activación programado. El firmware debe respetar la temporización de salida especificada antes de que el código, el DMA o un controlador de periférico vuelva a acceder a la PSRAM.
 - Mantenga la alimentación de la PSRAM y las señales requeridas por el dispositivo seleccionado dentro de su especificación de retención. Half-Sleep retiene los datos solo mientras se cumplan sus condiciones de energía documentadas; no es un reemplazo del almacenamiento no volátil.
 - Mida el estado completo del sistema, no solo la corriente de la PSRAM. Los ahorros pueden perderse si la CPU, la pantalla, el reloj de interfaz u otro subsistema permanece activo.
 
-En períodos de inactividad cortos, el costo de entrar y salir del modo puede superar el ahorro. En pausas más largas, conservar un framebuffer, un recurso decodificado o un búfer de modelo en Half-Sleep evita recargas o reconstrucciones costosas. Determine el tiempo a partir del cual se obtiene un ahorro neto con la energía medida en actividad, Half-Sleep y reactivación en la placa objetivo.
+En períodos de inactividad cortos, el coste de entrar y salir del modo puede superar el ahorro. En pausas más largas, conservar un framebuffer, un recurso decodificado o un búfer de modelo en Half-Sleep evita recargas o reconstrucciones costosas. Determine el tiempo a partir del cual se obtiene un ahorro neto con la energía medida en actividad, Half-Sleep y reactivación en la placa objetivo.
 
 ## PSRAM en diseños SF32 { #psram-in-sf32-designs }
 

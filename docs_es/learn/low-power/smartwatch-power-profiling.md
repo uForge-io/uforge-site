@@ -139,7 +139,7 @@ Use el rendimiento medido del regulador para la corriente de carga prevista. El 
 
 La columna «Power-Conversion Efficiency (%)» del libro de trabajo se calcula como `load voltage / battery voltage`. La fórmula posterior divide por ese valor y por la tensión de la batería, por lo que los términos de tensión se cancelan. El consumo diario resultante equivale simplemente a la corriente de la carga multiplicada por el tiempo: se considera que la corriente de la batería es igual a la de la carga, en lugar de modelar una conversión de potencia ideal. Esto se aproxima a un regulador lineal sin corriente de reposo; no es un modelo general para un regulador conmutado.
 
-Por ejemplo, una carga de 1 mA a 3,3 V alimentada desde una batería de 3,87 V mediante un convertidor ideal demandaría unos 0,853 mA de la batería, mientras que el libro de trabajo cuenta 1 mA. El resultado de un convertidor real depende de su rendimiento y de su corriente de reposo. Por tanto, esta hipótesis de conversión por sí sola no permite determinar si la estimación de autonomía es optimista o conservadora. El orden de los escenarios sigue siendo útil para revisar las hipótesis de corriente y duración, pero no constituye un presupuesto definitivo. Para un producto, sustituya el valor auxiliar por el rendimiento medido de cada línea de alimentación y rango de carga. Incluya la corriente de reposo sin contabilizarla dos veces si ya está incluida en la medición, además de las pérdidas del circuito de protección de la batería y de la ruta de carga.
+Por ejemplo, una carga de 1 mA a 3,3 V alimentada desde una batería de 3,87 V mediante un convertidor ideal demandaría unos 0,853 mA de la batería, mientras que el libro de trabajo cuenta 1 mA. El resultado de un convertidor real depende de su rendimiento y de su corriente de reposo. Por tanto, esta hipótesis de conversión por sí sola no permite determinar si la estimación de autonomía es optimista o conservadora. El orden de los escenarios sigue siendo útil para revisar las hipótesis de corriente y duración, pero no constituye un presupuesto definitivo. Para un presupuesto de producción, sustituya el valor auxiliar por el rendimiento medido de cada línea de alimentación y rango de carga. Incluya la corriente de reposo sin contabilizarla dos veces si ya está incluida en la medición, además de las pérdidas del circuito de protección de la batería y de la ruta de carga.
 
 ## Calcular el consumo diario a partir del uso del producto { #calculate-daily-consumption-from-product-usage }
 
@@ -151,15 +151,15 @@ El impacto de un escenario depende del uso que se haga del producto. El libro de
 
 | Escenario | Veces al día | Duración de cada uso | Duración total diaria | Parte del consumo diario | Estado |
 |:---------|--------------------:|------------------------:|-----------------------:|----------------------:|:----------------|
-| Reposo de referencia | 1 | Segundos restantes del día (`=G7`) | 52.425,7 s | 11,69 % | Habilitado |
+| Reposo de referencia | 1 | Segundos restantes del día (`=G7`) | 52 425,7 s | 11,69 % | Habilitado |
 | Notificación de mensaje | 100 | 5 s | 500 s | 22,62 % | Habilitado |
 | Alerta de llamada entrante | 10 | 10 s | 100 s | 4,52 % | Habilitado |
-| Activación al levantar la muñeca | 200 | 5 s | 1.000 s | 27,72 % | Habilitado |
-| Medición automática de frecuencia cardíaca | 48 | 60 s | 2.880 s | 1,48 % | Habilitado |
+| Activación al levantar la muñeca | 200 | 5 s | 1 000 s | 27,72 % | Habilitado |
+| Medición automática de frecuencia cardíaca | 48 | 60 s | 2 880 s | 1,48 % | Habilitado |
 | Medición manual de SpO2 | 2 | 40 s | 80 s | 2,22 % | Habilitado |
 | Registro de ejercicio | 1 | `3600 / 7` s | 514,3 s | 12,35 % | Habilitado; una hora por semana, prorrateada por día |
 | Vibración de alarma | 3 | 30 s | 90 s | 3,91 % | Habilitado |
-| Seguimiento del sueño | 1 | `8 x 3600` s | 28.800 s | 13,03 % | Habilitado |
+| Seguimiento del sueño | 1 | `8 x 3600` s | 28 800 s | 13,03 % | Habilitado |
 | Sincronización de datos con la aplicación | 20 | 0,5 s | 10 s | 0,45 % | Habilitado |
 | Transacción con tarjeta NFC | 0 | 5 s | 0 s | 0,00 % | Deshabilitado |
 | Llamada Bluetooth | 0 | `2 x 60` s | 0 s | 0,00 % | Deshabilitado |
@@ -178,7 +178,7 @@ Las celdas de escenario vacías en la matriz original son intencionales. Despué
 |:-------|:------------|------:|
 | Capacidad de batería utilizable | `250 mAh x (1 - 7%)` | 232,5 mAh |
 | Consumo diario modelado | Suma de todas las cargas de escenario habilitadas | 17,68 mAh/día |
-| Corriente promedio de batería | `17.68 mAh/day / 24 h` | 0,74 mA |
+| Corriente media de la batería | `17.68 mAh/day / 24 h` | 0,74 mA |
 | Duración de batería estimada | `232.5 mAh / 17.68 mAh/day` | 13,15 días |
 
 </div>
@@ -282,7 +282,7 @@ pie showData
 
 Dos comparaciones evitan una conclusión engañosa:
 
-- **Partida de reposo de referencia de la MCU frente a las partidas de escenarios con pantalla encendida:** el reposo de referencia representa 1,49 mAh al día, ligeramente más que los 1,30 mAh al día asignados a la MCU en el conjunto de escenarios de interacción con la pantalla encendida. En este modelo, reducir la corriente de referencia supuesta es tan importante como reducir el trabajo total de la MCU asociado a esos escenarios. El libro de trabajo no mide por separado las ráfagas de procesamiento gráfico.
+- **Partida de reposo de referencia de la MCU frente a las partidas de escenarios con pantalla encendida:** el reposo de referencia representa 1,49 mAh al día, ligeramente más que los 1,30 mAh al día asignados a la MCU en el conjunto de escenarios de interacción con la pantalla encendida. En este modelo, reducir la corriente de referencia supuesta importa al menos tanto como reducir el trabajo total de la MCU asociado a esos escenarios. El libro de trabajo no mide por separado las ráfagas de procesamiento gráfico.
 - **Partida de reposo de referencia de la MCU frente al resto de sus partidas explícitas:** las demás entradas de la MCU suman 3,13 mAh al día, 2,11 veces el valor de reposo de referencia. El seguimiento del sueño es la mayor partida individual fuera del reposo de referencia, con 1,66 mAh al día; se trata de una asignación de la MCU a un escenario, no de una medición exclusiva de la corriente de la CPU en actividad.
 
 El libro de trabajo no tiene una categoría específica para los sensores. Su consumo podría estar incluido en `Other`, junto con el del PMIC, la radio, las corrientes de fuga y otras cargas de fondo. Esta categoría suma 1,29 mAh al día (7,28 %). Incluso si se atribuyera todo `Other` a los sensores, la partida explícita de la MCU seguiría siendo mayor: 4,62 mAh al día frente a 1,29 mAh, unas 3,59 veces más. Esta es una comparación entre categorías del modelo, no una medición directa del silicio de la MCU frente a los sensores. Para conocer el consumo real de estos, el modelo debe separar sus líneas de alimentación del resto de las cargas agrupadas en `Other`.
@@ -308,7 +308,7 @@ Empiece por el mayor consumidor del modelo y valide el orden con mediciones. Par
 2. **Gestión de notificaciones:** agrupe las notificaciones no urgentes cuando la experiencia de usuario lo permita. Compruebe si cada evento necesita activar tanto la pantalla como la respuesta háptica.
 3. **Reposo conectado:** confirme que la MCU vuelve al modo de bajo consumo previsto después de cada evento. Revise los temporizadores periódicos, los bucles de sondeo, las funciones callback de Bluetooth y las solicitudes al gestor de energía.
 4. **Patrones hápticos:** ajuste la amplitud y la duración mediante pruebas de percepción. Un patrón más corto o suave puede ahorrar energía sin restar claridad a las alertas.
-5. **Sensado de larga duración:** analice el seguimiento del sueño y el registro de ejercicio como escenarios completos, incluidos el ciclo de trabajo de los sensores, el procesamiento, el tráfico de memoria y el uso de la radio.
+5. **Detección de larga duración:** analice el seguimiento del sueño y el registro de ejercicio como escenarios completos, incluidos el ciclo de trabajo de los sensores, el procesamiento, el tráfico de memoria y el uso de la radio.
 
 No optimice una cifra aislada de la hoja de cálculo. Un cambio que parezca eficiente puede aumentar la frecuencia de activación, empeorar la experiencia de usuario o prolongar tanto el tiempo activo que anule el ahorro previsto.
 

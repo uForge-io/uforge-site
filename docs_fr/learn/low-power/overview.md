@@ -21,7 +21,7 @@ Utilisez ce guide pour traduire un objectif d'autonomie en décisions matériell
 Avant d'implémenter la gestion de l'énergie, définissez l'autonomie et le comportement attendus du produit :
 
 - Autonomie visée (heures, jours ou semaines) et capacité de la batterie.
-- Profil d'utilisation attendu : quelle part de la journée l'appareil est-il utilisé activement, connecté mais inactif, ou complètement en veille ?
+- Rapport cyclique attendu : quelle part de la journée l'appareil est-il utilisé activement, connecté mais inactif, ou complètement en veille ?
 - Quels événements doivent réveiller le système, et dans quel délai ?
 - Quels sous-systèmes doivent rester actifs en permanence — par exemple, une liaison Bluetooth, un écran toujours allumé ou une détection vocale — et lesquels peuvent fonctionner uniquement à la demande d'un événement ?
 - Comportement de charge et nombre de cycles prévus, si ces éléments interviennent dans la stratégie énergétique du produit.
@@ -67,7 +67,7 @@ Chaque sous-système a un profil de consommation qui lui est propre :
 | Sous-système | Principal facteur de consommation | Guide |
 |:----------|:--------------------|:------|
 | **CPU** | Temps d'exécution actif, pas seulement la fréquence d'horloge | Ce guide |
-| **Radio Bluetooth** | Intervalle de publicité, intervalle de connexion, latence de l'esclave (Slave Latency), puissance d'émission | [Vue d'ensemble Bluetooth](../bluetooth/overview.md#advertising-and-connection-parameters) |
+| **Radio Bluetooth** | Intervalle d'annonce, intervalle de connexion, latence de l'esclave (Slave Latency), puissance d'émission | [Vue d'ensemble Bluetooth](../bluetooth/overview.md#advertising-and-connection-parameters) |
 | **Affichage** | Fréquence de rafraîchissement, mises à jour plein écran ou partielles, rétroéclairage | [Contrôleur d'affichage : rafraîchissement partiel](../graphics/display-controller.md#partial-refresh-and-dirty-regions) |
 | **Codec audio/DMA** | Durée de la session, fréquence d'échantillonnage et maintien ou non du codec sous tension entre les sessions | [Vue d'ensemble de l'audio](../audio/overview.md#power-considerations-for-audio) |
 | **Inférence IA** | Fréquence d'inférence et taille de fenêtre, pas seulement taille du modèle | [Vue d'ensemble de l'IA](../ai/overview.md#power-aware-inference-scheduling) |
@@ -82,7 +82,7 @@ Aucune intervention isolée ne résout tous ces problèmes. Optimiser un produit
 
 Les gains les plus importants viennent généralement de l'architecture du firmware, et non d'astuces de bas niveau :
 
-- **Préférez les interruptions et les événements aux interrogations périodiques (polling).** Une boucle de polling maintient le CPU actif même lorsqu'il n'y a rien à faire.
+- **Préférez les interruptions et les événements aux interrogations périodiques (polling).** Une boucle d'interrogation maintient le CPU actif même lorsqu'il n'y a rien à faire.
 - **Regroupez les traitements.** Lorsque la latence le permet, accumulez les mesures des capteurs, les événements Bluetooth ou les blocs audio, puis traitez-les ensemble au lieu de réveiller le système pour chacun.
 - **Libérez rapidement les demandes PM qui empêchent la veille.** Un pilote ou une tâche qui maintient une demande bloquant l'entrée dans un état basse consommation plus profond doit libérer la demande correspondante dès que ce blocage n'est plus nécessaire. Sinon, le système peut rester dans un état moins profond que prévu.
 - **Concevez les parcours de l'interface et de l'audio pour réagir aux événements**, plutôt que de les interroger périodiquement, dans la mesure permise par le framework.
@@ -90,18 +90,18 @@ Les gains les plus importants viennent généralement de l'architecture du firmw
 
 ## Commencer par un exemple basse consommation validé { #start-from-a-verified-power-example }
 
-Avant d'estimer l'autonomie du produit, choisissez un exemple du SDK qui valide le facteur de consommation le plus incertain. [Exemples du SDK pour la basse consommation](low-power-sdk-examples.md) présentent les projets officiels PM, GPIO, processeur, Bluetooth, affichage, interface graphique, rafraîchissement de l'écran et activation au lever du poignet, ainsi que les scénarios qu'ils illustrent. L'article précise aussi quelles hypothèses relatives à l'alimentation, à la carte, à la configuration, à la source de réveil, au circuit externe et à la charge de travail doivent être revérifiées avant d'utiliser un exemple comme élément de validation du produit.
+Avant d'estimer l'autonomie du produit, choisissez un exemple du SDK qui valide le facteur de consommation le plus incertain. [Exemples du SDK pour la basse consommation](low-power-sdk-examples.md) présente les projets officiels PM, GPIO, processeur, Bluetooth, affichage, interface graphique, rafraîchissement de l'écran et activation au lever du poignet, ainsi que les scénarios qu'ils illustrent. L'article précise aussi quelles hypothèses relatives à l'alimentation, à la carte, à la configuration, à la source de réveil, au circuit externe et à la charge de travail doivent être revérifiées avant d'utiliser un exemple comme élément de validation du produit.
 
 ## Réduire la consommation du Bluetooth { #bluetooth-power-tuning }
 
-Les paramètres de connexion et de publicité sont les principaux leviers pour réduire la consommation du Bluetooth (voir le tableau complet dans la [Vue d'ensemble Bluetooth](../bluetooth/overview.md#advertising-and-connection-parameters)) :
+Les paramètres de connexion et d'annonce sont les principaux leviers pour réduire la consommation du Bluetooth (voir le tableau complet dans la [Vue d'ensemble Bluetooth](../bluetooth/overview.md#advertising-and-connection-parameters)) :
 
 - Pour les liaisons généralement inactives, augmentez l'intervalle de connexion et la latence de l'esclave (Slave Latency).
 - Réduisez la puissance d'émission au niveau minimal qui garantit encore la portée requise.
 - Quand le produit attend surtout des reconnexions et n'a plus besoin d'être découvert pour la première fois, réduisez la fréquence des annonces.
 - Lorsque le SDK retenu traite les événements du contrôleur Bluetooth sur un processeur distinct, le CPU applicatif peut rester en veille entre les événements de connexion si aucune tâche, source de réveil ou communication interprocesseur ne le sollicite. Le réveiller à chaque callback Bluetooth réduit cet avantage ; vérifiez la répartition des cœurs et des tâches sur l'appareil cible.
 
-Pour mesurer la consommation réelle, scénario par scénario, en Bluetooth classique seul, en BLE seul et en mode dual combinant les deux, consultez [Mesurer et analyser la consommation Bluetooth](../bluetooth/bluetooth-low-power-profiling.md).
+Pour mesurer la consommation réelle, scénario par scénario, en Bluetooth classique seul, en BLE seul et en bimode (les deux modes combinés), consultez [Mesurer et analyser la consommation Bluetooth](../bluetooth/bluetooth-low-power-profiling.md).
 
 ## Consommation de l'affichage et du rétroéclairage { #display-and-backlight-power }
 
@@ -164,7 +164,7 @@ Chiffrez les objectifs du produit avant d'optimiser le firmware. Un tableau simp
 
 </div>
 
-Pour un ensemble d'états de fonctionnement mutuellement exclusifs, estimez `average current = state current x duty cycle` (courant moyen = courant dans l'état × facteur d'utilisation), puis additionnez les contributions de chaque état. Si des charges fonctionnent simultanément, incluez-les dans le total du scénario correspondant pour ne pas compter deux fois des états qui se chevauchent. Vous repérerez ainsi les problèmes de conception en amont : viser 20 µA en veille ne sauvera pas un produit qui passe trop de temps avec un rétroéclairage intense ou une boucle d'inférence à intervalle fixe actifs.
+Pour un ensemble d'états de fonctionnement mutuellement exclusifs, estimez `average current = state current x duty cycle` (courant moyen = courant dans l'état × rapport cyclique), puis additionnez les contributions de chaque état. Si des charges fonctionnent simultanément, incluez-les dans le total du scénario correspondant pour ne pas compter deux fois des états qui se chevauchent. Vous repérerez ainsi les problèmes de conception en amont : viser 20 µA en veille ne sauvera pas un produit qui passe trop de temps avec un rétroéclairage intense ou une boucle d'inférence à intervalle fixe actifs.
 
 ## Établir un profil énergétique : modéliser, mesurer, actualiser { #power-profiling-model-measure-update }
 
@@ -255,7 +255,7 @@ Consignez la version du firmware, la révision de la carte, la tension de la bat
 | L'appareil n'atteint jamais le mode Deep Sleep | Un pilote ou une tâche ne libère pas une demande PM. Recherchez les appels de libération manquants. |
 | Consommation élevée malgré une connexion Bluetooth inactive | La latence de l'esclave n'est pas configurée ou l'application se réveille à chaque événement de connexion. |
 | Les pics de courant coïncident avec l'activité de l'affichage | L'écran entier est redessiné au lieu d'être partiellement actualisé, ou le rétroéclairage reste à pleine luminosité. |
-| La consommation augmente après une mise à jour du firmware | Un nouveau minuteur, une boucle de polling ou un périphérique toujours actif a été ajouté sans vérifier son impact énergétique. |
+| La consommation augmente après une mise à jour du firmware | Un nouveau minuteur, une boucle d'interrogation ou un périphérique toujours actif a été ajouté sans vérifier son impact énergétique. |
 | Bons résultats au banc, consommation plus élevée dans le produit | Un mauvais accord RF/de l'antenne impose une puissance d'émission supérieure, ou le boîtier et la température modifient les résultats. |
 | L'audio ou l'IA décharge excessivement la batterie | Le codec ou le chemin d'inférence reste actif entre les sessions. Voir la [vue d'ensemble de l'audio](../audio/overview.md#power-considerations-for-audio) et la [vue d'ensemble de l'IA](../ai/overview.md#power-aware-inference-scheduling). |
 
@@ -273,10 +273,10 @@ Consignez la version du firmware, la révision de la carte, la tension de la bat
 
 ## Liste de contrôle de mise en service { #bring-up-checklist }
 
-- [ ] Définir l'autonomie visée, le profil d'utilisation et les sources de réveil nécessaires.
+- [ ] Définir l'autonomie visée, le rapport cyclique et les sources de réveil nécessaires.
 - [ ] Déterminer quels sous-systèmes doivent rester actifs en permanence et lesquels peuvent fonctionner à la demande d'événements.
 - [ ] Vérifier que chaque pilote et chaque tâche libère rapidement sa demande PM après utilisation.
-- [ ] Adapter les paramètres de publicité et de connexion Bluetooth à l'utilisation réelle du produit.
+- [ ] Adapter les paramètres d'annonce et de connexion Bluetooth à l'utilisation réelle du produit.
 - [ ] Vérifier que l'affichage utilise le rafraîchissement partiel lorsque c'est possible et que le rétroéclairage suit le comportement prévu.
 - [ ] Examiner les minuteurs périodiques et supprimer ou regrouper ceux qui sont inutiles.
 - [ ] Mettre en place les mesures de courant et valider séparément les états actif, inactif et veille.

@@ -1,6 +1,6 @@
 ---
 icon: lucide/puzzle
-description: "Primeiros passos com o ArduinoCore-zephyr beta do OpenSiFli no SF32LB52 DevKit LCD: instale o pacote da placa, grave um teste serial e execute o Blink."
+description: "Passo a passo da primeira execução do ArduinoCore-zephyr beta do OpenSiFli no SF32LB52 DevKit LCD: instale o pacote da placa, grave um teste serial e execute o Blink."
 tags:
     - Primeiros passos
     - Arduino
@@ -10,7 +10,7 @@ tags:
 
 O OpenSiFli oferece um core Arduino beta para SF32 baseado no Zephyr: [OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr). O projeto publica o pacote Arduino `sifli:sf32lb52`, exibido no Boards Manager como **SiFli Serial Boards**, e atualmente tem como alvo a placa **SiFli SF32LB52 DevKit LCD**.
 
-Este core é uma boa opção para testar sketches, verificar rapidamente periféricos, fazer demonstrações e desenvolver protótipos iniciais. Para firmware de produção, ajuste da pilha Bluetooth, aplicações com muitos recursos gráficos, otimização de baixo consumo ou inicialização de uma placa personalizada, use o [SiFli-SDK](../sifli/getting-started-sifli-sdk.md).
+Este core é uma boa opção para testar sketches, verificar rapidamente periféricos, fazer demonstrações e desenvolver protótipos iniciais. Para firmware de produção, ajuste da pilha Bluetooth, aplicações com muitos recursos gráficos, otimização de baixo consumo ou bring-up de uma placa personalizada, use o [SiFli-SDK](../sifli/getting-started-sifli-sdk.md).
 
 !!! warning "Core beta"
     O OpenSiFli identifica este core Arduino como **BETA** e recomenda seu uso apenas para testes. Funcionalidades, APIs, comportamento do loader, conteúdo do pacote e processo de lançamento podem mudar. Não o considere pronto para produção.

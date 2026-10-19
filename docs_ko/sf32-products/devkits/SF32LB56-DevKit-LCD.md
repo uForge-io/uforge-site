@@ -9,13 +9,13 @@ tags:
 
 # SF32LB56-DevKit-LCD { #sf32lb56-devkit-lcd }
 
-SF32LB56-DevKit-LCD는 SF32LB56-MOD-N16R12N1 또는 SF32LB56-MOD-A128R12N1 모듈 중 하나를 탑재할 수 있는 디스플레이 지향 개발 보드이며, 두 모듈 모두 SF32LB56xV 시리즈 디바이스를 사용합니다. 커스텀 SF32LB56x 보드를 설계하기 전에 디스플레이 인터페이스, 오디오, 이동식 스토리지, 주변 장치 드라이버를 평가하는 데 사용하십시오.
+SF32LB56-DevKit-LCD는 SF32LB56-MOD-N16R12N1 또는 SF32LB56-MOD-A128R12N1 모듈을 탑재하는 디스플레이 중심 개발 보드입니다. 두 모듈 모두 SF32LB56xV 시리즈 디바이스를 사용합니다. 커스텀 SF32LB56x 보드를 설계하기 전에 이 보드로 디스플레이 인터페이스, 오디오, 이동식 스토리지, 주변 장치 드라이버를 평가할 수 있습니다.
 
 ## 가장 적합한 용도 { #what-it-is-best-for }
 
 - MIPI-DPI(RGB), SPI, DSPI, QSPI 또는 8비트 MCU/8080 인터페이스를 사용하는 디스플레이 애플리케이션.
 - I2C를 통한 터치스크린 통합.
-- 아날로그 마이크 입력과 온보드 Class-D 파워 앰프를 통한 아날로그 출력을 사용하는 오디오 실험.
+- 아날로그 마이크 입력과 온보드 Class-D 파워 앰프 출력을 활용한 오디오 실험.
 - SDIO/TF 카드 스토리지와 범용 주변 장치 드라이버 개발.
 - 캐리어 보드를 확정하기 전에 SF32LB56 모듈 기반 제품 아키텍처 평가.
 
@@ -30,7 +30,7 @@ SF32LB56-DevKit-LCD는 SF32LB56-MOD-N16R12N1 또는 SF32LB56-MOD-A128R12N1 모�
 | N16R12N1 구성 | SF32LB56-DevKit-LCD-N16R12N1 / SF32LB56-MOD-N16R12N1 | 16 MB QSPI-NOR, 4 MB + 8 MB OPI-PSRAM, 1 MB QSPI-NOR; 모듈 기반 평가 및 캐리어 보드 계획. |
 | A128R12N1 구성 | SF32LB56-DevKit-LCD-A128R12N1 / SF32LB56-MOD-A128R12N1 | 128 MB QSPI-NAND, 4 MB + 8 MB OPI-PSRAM, 1 MB QSPI-NOR; 모듈 기반 평가 및 캐리어 보드 계획. |
 | 보드 크기 및 온도 | 65 mm × 38 mm; 모델 가이드 기준 -40 °C~85 °C | 기구 및 환경 계획. |
-| 디스플레이 | ALIENTEK 핀 순서를 사용하는 40핀, 0.5 mm FPC 커넥터를 통한 24비트 MIPI-DPI RGB; 40핀 2 × 20 헤더의 SPI/DSPI/QSPI 및 8비트 MCU/8080 신호 | 패널 브링업 및 디스플레이 드라이버 개발. |
+| 디스플레이 | ALIENTEK 핀 순서를 사용하는 40핀, 0.5 mm FPC 커넥터를 통한 24비트 MIPI-DPI RGB; 40핀 2 × 20 헤더의 SPI/DSPI/QSPI 및 8비트 MCU/8080 신호 | 패널 브링업(초기 구동 및 검증)과 디스플레이 드라이버 개발. |
 | 터치 | I2C 터치스크린 지원 | 인터랙티브 디스플레이 프로토타입. |
 | 오디오 | 아날로그 MEMS 마이크 입력 1개와 온보드 Class-D PA 채널 1개; 모델 가이드 기준 스피커 출력 최대 3 W / 4 Ω | 녹음 및 로컬 재생 실험; 스피커 부하와 보드 리비전을 확인하십시오. |
 | 스토리지 | SDIO를 통한 MicroSD 슬롯 | 미디어, 로깅, 파일 시스템, 에셋 테스트. |
@@ -64,8 +64,8 @@ SiFli SDK는 `scons --board=<board_name>`과 함께 다음의 정확한 보드 �
 ## 첫 검증 경로 { #first-validation-path }
 
 1. 호환되는 24비트 MIPI-DPI 디스플레이를 40핀 FPC 커넥터에 연결하고, 데이터 전송이 가능한 USB 케이블로 USB-UART 포트를 사용하십시오.
-2. [시작하기 개요](../../getting-started/index.md)를 따라 검증된 빌드, 플래싱, 시리얼 로그 기준을 확립하십시오.
-3. UI 프레임워크를 디버깅하기 전에 단색 패턴 표시부터 브링업하십시오. [그래픽 개요](../../learn/graphics/overview.md)를 참조하십시오.
+2. [시작하기 개요](../../getting-started/index.md)를 따라 정상 동작이 확인된 빌드, 플래싱, 시리얼 로그 기준을 마련하십시오.
+3. UI 프레임워크를 디버깅하기 전에 단색 패턴부터 표시해 초기 구동을 확인하십시오. [그래픽 개요](../../learn/graphics/overview.md)를 참조하십시오.
 4. 터치, 스토리지, 오디오 또는 무선을 한 번에 하나의 서브시스템씩 추가한 다음 공존 및 전력 동작을 테스트하십시오.
 5. 커스텀 설계 전에 [SF32LB56-MOD](../modules/SF32LB56-MOD.md)와 [양산 설계](../../hardware/design-for-production.md)를 검토하십시오.
 

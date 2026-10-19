@@ -14,7 +14,7 @@ hide:
 
 **SF32LB56-MOD** es una familia de módulos MCU Bluetooth de bajo consumo y propósito general de SiFli, basada en la serie SF32LB56xV.
 
-Esta guía toma como referencia la **especificación técnica DS5602-SF32LB56-MOD V0.3** y reúne la información específica del módulo necesaria para diseñar el esquemático, planificar la PCB, validar el hardware y preparar la producción. Incluye las variantes de memoria, la interfaz de 89 pines, las tres líneas de alimentación, las interfaces de pantalla, audio y almacenamiento, la ubicación de la antena, los requisitos de manipulación y la lista de comprobación del esquemático.
+Esta guía toma como referencia la **especificación técnica DS5602-SF32LB56-MOD V0.3** y reúne la información específica del módulo necesaria para diseñar el esquemático, planificar la PCB, validar el hardware y preparar la producción. Incluye las variantes de memoria, la interfaz de 89 pines, los tres raíles de alimentación, las interfaces de pantalla, audio y almacenamiento, la ubicación de la antena, los requisitos de manipulación y la lista de comprobación del esquemático.
 
 !!! note "Fuente y recomendaciones"
     Salvo que se indiquen expresamente como pautas de integración o recomendaciones de diseño, los valores técnicos siguientes se basan en la **especificación técnica DS5602-SF32LB56-MOD V0.3**.
@@ -221,7 +221,7 @@ Añada resistencias en serie de 33–100 Ω en las líneas RGB de la LCD. Manten
 
 El módulo ofrece salidas DAC de audio analógico, MIC_BIAS, MIC_ADC_IN, I2S y pines compatibles con PDM. El DAC de audio es una ruta de salida de 24 bits compatible con frecuencias de muestreo de 8 kHz a 48 kHz, con una SNR y un rango dinámico de 109 dB. El ADC de audio es una ruta de entrada Sigma-Delta de 24 bits compatible con frecuencias de muestreo de 8 kHz a 48 kHz, con una SNR y un rango dinámico de 99 dB.
 
-Aleje las pistas de audio analógico de los nodos de conmutación ruidosos, los relojes LCD y la línea de alimentación de RF de la antena. Coloque los filtros de MIC_BIAS y MIC_ADC_IN cerca del circuito del micrófono conectado.
+Aleje las pistas de audio analógico de los nodos de conmutación ruidosos, los relojes LCD y las estructuras de alimentación de la antena. Coloque los filtros de MIC_BIAS y MIC_ADC_IN cerca del circuito del micrófono conectado.
 
 #### 5.3.3 Botones { #533-buttons }
 
@@ -239,17 +239,17 @@ La familia de módulos ofrece Flash principal según el SKU, 4+8 MB de OPI-PSRAM
 
 #### 5.4.2 Sensores { #542-sensors }
 
-GPADC admite conversiones de 12 bits, una frecuencia de muestreo de hasta 4 MS/s, un rango de entrada no diferencial de 0–3,3 V y un rango diferencial de -2,1 V a +2,1 V; también admite disparo por software o hardware y DMA. Los pines marcados GPADC_CHx admiten entrada analógica. Mantenga cortas las pistas, filtre las señales y aléjelas del ruido de conmutación de la LCD y de RF.
+GPADC admite conversiones de 12 bits, una frecuencia de muestreo de hasta 4 MS/s, un rango de entrada asimétrico (single-ended) de 0–3,3 V y un rango diferencial de -2,1 V a +2,1 V; también admite disparo por software o hardware y DMA. Los pines marcados GPADC_CHx admiten entrada analógica. Mantenga cortas las pistas, filtre las señales y aléjelas del ruido de conmutación de la LCD y de RF.
 
 #### 5.4.3 UART/I2C { #543-uarti2c }
 
-UART admite funcionamiento full-duplex hasta 6 Mbps. I2C admite los modos estándar (100 kbps), rápido (400 kbps), rápido plus (1 Mbps) y alta velocidad (3,4 Mbps). Muchos GPIO están multiplexados como `PAxx_I2C_UART` o `PBxx_I2C_UART`; confirme el plan de multiplexación definitivo antes de cerrar el esquemático.
+UART admite funcionamiento full-duplex hasta 6 Mbps. I2C admite los modos estándar (100 kbps), rápido (400 kbps), rápido plus (1 Mbps) y alta velocidad (3,4 Mbps). Muchas GPIO están multiplexados como `PAxx_I2C_UART` o `PBxx_I2C_UART`; confirme el plan de multiplexación definitivo antes de cerrar el esquemático.
 
 UART4_TXD en el pin 6 y UART4_RXD en el pin 7 forman el puerto serie predeterminado para la salida de consola, la descarga y la depuración del programa. PA16 y PA17 pueden multiplexarse como DBG_UART; si se utilizan para descargar o depurar el programa, requieren resistencias en serie de 100 Ω.
 
 #### 5.4.4 USB, SPI, SDIO e I2S { #544-usb-spi-sdio-and-i2s }
 
-USB 2.0 FS admite los modos host y dispositivo mediante un PHY integrado. SPI admite los formatos SSP/SPI y Microwire; la SPI de HPSYS alcanza 48 MHz y el de LPSYS, 24 MHz. SDMMC1 admite SD 3.0, SDIO 3.0 y eMMC 4.5.1 en modos SDR y DDR; SDMMC2 admite las funciones SD/SDIO/eMMC en modo SDR hasta 48 MHz. I2S admite los modos maestro y esclavo, funcionamiento full-duplex, los formatos left/right/standard y un ancho PCM de hasta 24 bits.
+USB 2.0 FS admite los modos host y dispositivo mediante un PHY integrado. SPI admite los formatos SSP/SPI y Microwire; la SPI de HPSYS alcanza 48 MHz y la de LPSYS, 24 MHz. SDMMC1 admite SD 3.0, SDIO 3.0 y eMMC 4.5.1 en modos SDR y DDR; SDMMC2 admite las funciones SD/SDIO/eMMC en modo SDR hasta 48 MHz. I2S admite los modos maestro y esclavo, funcionamiento full-duplex, los formatos left/right/standard y un ancho PCM de hasta 24 bits.
 
 ### 5.5 Fabricación { #55-manufacturing }
 
@@ -259,7 +259,7 @@ SWDIO en el pin 79 y SWCLK en el pin 80 son pines SWD de depuración y descarga.
 
 #### 5.5.2 Producción { #552-production }
 
-Reserve puntos de acceso de producción para alimentación, masa, modo de arranque, reset/PWRKEY, SWD, descarga UART y las interfaces de calibración o prueba RF de la placa. El software de prueba final debe verificar el arranque, la Flash, la pantalla, el panel táctil, el audio, USB, los sensores, la comunicación RF, la suspensión/reactivación y el consumo de corriente.
+Reserve puntos de acceso de producción para alimentación, masa, modo de arranque, reinicio/PWRKEY, SWD, descarga UART y las interfaces de calibración o prueba RF de la placa. Se recomienda que el software de prueba final cubra el arranque, la Flash, la pantalla, el panel táctil, el audio, USB, los sensores, la comunicación RF, la suspensión/reactivación y el consumo de corriente.
 
 ## 6. Diseño de la PCB { #6-pcb-layout }
 
@@ -356,9 +356,9 @@ Para diseños con antena externa, la hoja de datos describe un conector de prime
 | IOH | Corriente de excitación de salida alta | 24 | 30 | 38 | mA |
 | IOL | Corriente de excitación de salida baja | 24 | 30 | 38 | mA |
 | RPU | Pull-up interno | 7 | 10 | 20 | kΩ |
-| RPD | Pulldown interno | 7 | 10 | 20 | kΩ |
-| VIH_nRST | Tensión para liberar el reset | 0,7×VDD | - | VDD | V |
-| VIL_nRST | Tensión para activar el reset | VSS | - | 0,3×VDD | V |
+| RPD | Pull-down interno | 7 | 10 | 20 | kΩ |
+| VIH_nRST | Tensión de liberación del reinicio | 0,7×VDD | - | VDD | V |
+| VIL_nRST | Tensión de activación del reinicio | VSS | - | 0,3×VDD | V |
 
 </div>
 
@@ -378,9 +378,9 @@ VDD es la alimentación de E/S. VOH y VOL se miden con una carga de alta impedan
 | BLE ADV | Intervalo de 1 s | 15,7 µA |
 | Conexión BLE | Intervalo de 50 ms | 172,8 µA |
 | Conexión BLE | Intervalo de 1 s | 11,5 µA |
-| Exploración | Exploración de consulta o de localización | 36,8 µA |
-| Exploración dual | Exploración de consulta y de localización | 64,0 µA |
-| En espera | - | 4,6 µA |
+| Scan | Inquiry Scan o Page Scan | 36,8 µA |
+| Both Scan | Inquiry Scan y Page Scan | 64,0 µA |
+| Standby | - | 4,6 µA |
 
 </div>
 
@@ -475,8 +475,8 @@ DS5602 V0.3 incluye la tabla completa de definición de los 89 pines y la distri
 
 | Pin / grupo | Función / restricción |
 | :--- | :--- |
-| Pin 6 PB17 | UART4_TXD, TX del UART predeterminada para salida de consola, descarga y depuración. |
-| Pin 7 PB16 | UART4_RXD, RX del UART predeterminada para salida de consola, descarga y depuración. |
+| Pin 6 PB17 | UART4_TXD, TX predeterminado del UART para salida de consola, descarga y depuración. |
+| Pin 7 PB16 | UART4_RXD, RX predeterminado del UART para salida de consola, descarga y depuración. |
 | Pin 25 BOOT_MODE | Alto: modo de descarga; bajo: modo de usuario. |
 | Pin 26 VDD_3V3 | Raíl de 3,3 V, rango de funcionamiento de 2,97–3,6 V. |
 | Pin 27 VDD_1V8 | Raíl de 1,8 V, rango de funcionamiento de 1,7–1,95 V. |
@@ -512,7 +512,7 @@ DS5602 V0.3 incluye la tabla completa de definición de los 89 pines y la distri
 
 <div align="center" markdown>
 
-| Fecha | Versión | Notas de publicación |
+| Fecha | Versión | Notas de versión |
 | :--- | :--- | :--- |
 | 2025-11 | 0.3 | Se actualizaron las descripciones del ADC y el DAC de audio del capítulo 4. |
 | 2025-02 | 0.2 | Se actualizaron los pines del módulo y la información relacionada. |

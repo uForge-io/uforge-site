@@ -80,13 +80,13 @@ example/get-started/hello_world/rtt/project
 
 ## Board auswählen { #select-the-board }
 
-Wählen Sie die Board-Konfiguration, die zu Ihrer Hardware passt. Für ein Board der Klasse SF32LB52-DevKit-LCD lautet der gängige Board-Name:
+Wählen Sie die Board-Konfiguration, die zu Ihrer Hardware passt. Für ein Board der Klasse SF32LB52-DevKit-LCD lautet der gängige Boardname:
 
 ```text
 sf32lb52-lcd_n16r8
 ```
 
-Wenn Sie ein anderes Board verwenden, wählen Sie den passenden Namen aus der CodeKit-Liste oder der SDK-Dokumentation zu unterstützten Boards. Der Board-Name legt Speicherlayout, Pinbelegung, Flash-Einstellungen und Standardperipherie fest.
+Wenn Sie ein anderes Board verwenden, wählen Sie den passenden Namen aus der CodeKit-Liste oder der SDK-Dokumentation zu unterstützten Boards. Der Boardname legt Speicherlayout, Pinbelegung, Flash-Einstellungen und Standardperipherie fest.
 
 ## Bauen { #build }
 

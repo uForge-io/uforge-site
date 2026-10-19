@@ -74,7 +74,7 @@ Cada tabla cubre un bloque funcional del esquemático. La columna «Aplicable a�
 </div>
 
 !!! important "Los umbrales OVP no son los límites de funcionamiento de VBUS"
-    La lista de comprobación de la fuente indica 5,15–5,55 V para seleccionar un OVLO ajustable en el punto 5, mientras que el punto 1 reproduce la comprobación de VBUS de 4,6–5,5 V del libro de comprobación. No interprete 5,55 V como una tensión continua admisible en VBUS. La [explicación del sistema de alimentación](SF32LB52x_schematic_design.md#52-power-system) detalla las diferencias entre fuentes y cita un rango de selección OVP distinto de la nota de aplicación. Antes de aceptar el diseño, confirme con SiFli los umbrales y los límites de funcionamiento del dispositivo elegido.
+    La lista de comprobación de la fuente indica 5,15–5,55 V para seleccionar un OVLO ajustable en el punto 5, mientras que el punto 1 reproduce la comprobación de VBUS de 4,6–5,5 V de la hoja de cálculo de la lista de comprobación. No interprete 5,55 V como una tensión continua admisible en VBUS. La [explicación del sistema de alimentación](SF32LB52x_schematic_design.md#52-power-system) detalla las diferencias entre fuentes y cita un rango de selección OVP distinto de la nota de aplicación. Antes de aceptar el diseño, confirme con SiFli los umbrales y los límites de funcionamiento del dispositivo elegido.
 
 !!! note "Origen y alcance de los valores de VBUS"
     Electrical Specification-A3 indica un rango de alimentación VBUS de 4,5–5,5 V. La nota de aplicación de las variantes con batería indica 4,6–5,5 V en su tabla de alimentación y exige al menos 4,6 V en el pin VBUS con la corriente máxima de carga. Estos valores corresponden a contextos distintos; al comprobar la tensión mínima en el chip, tenga en cuenta la tolerancia de la alimentación y la caída de tensión.
@@ -157,7 +157,7 @@ Cada tabla cubre un bloque funcional del esquemático. La columna «Aplicable a�
 
 | N.º | Punto de comprobación | Aplicable a | Categoría |
 |:---|:---|:---|:---|
-| 1 | Se indica en la señal ANT el requisito de impedancia característica de 50 Ω en modo single-ended | Todas las variantes | Obligatorio |
+| 1 | Se indica en la señal ANT el requisito de impedancia característica asimétrica (single-ended) de 50 Ω | Todas las variantes | Obligatorio |
 | 2 | Se reserva una red de adaptación en π para ANT: un condensador paralelo NC (no montar) y un condensador en serie de 15 pF | Todas las variantes | Obligatorio |
 | 3 | Si es necesario filtrar emisiones espurias, se reserva una red de adaptación en π con un inductor en serie de 2,7 nH y un condensador paralelo de 2 pF | Todas las variantes | Opcional |
 | 4 | <span class="flag-red">Si se requiere control externo de PA/LNA, PA00 se conecta a RX_EN y PA01 a TX_EN</span> | Todas las variantes | Opcional |
@@ -314,8 +314,8 @@ Cada tabla cubre un bloque funcional del esquemático. La columna «Aplicable a�
 |:---|:---|:---|:---|
 | 1 | La conexión del micrófono MEMS es correcta | Todas las variantes | Opcional |
 | 2 | El micrófono MEMS se alimenta desde MIC_BIAS | Todas las variantes | Opcional |
-| 3 | La conexión del micrófono analógico ECM single-ended es correcta | Todas las variantes | Opcional |
-| 4 | El micrófono analógico ECM single-ended se alimenta desde MIC_BIAS | Todas las variantes | Opcional |
+| 3 | La conexión del micrófono analógico ECM asimétrico (single-ended) es correcta | Todas las variantes | Opcional |
+| 4 | El micrófono analógico ECM asimétrico (single-ended) se alimenta desde MIC_BIAS | Todas las variantes | Opcional |
 | 5 | Todas las entradas ADC de audio tienen un condensador de acoplamiento de al menos 2,2 µF | Todas las variantes | Opcional |
 | 6 | Las salidas DAC de audio DACP y DACN tienen cada una una resistencia en serie de 1 kΩ cerca del chip, y un condensador de 1,5 nF conectado en paralelo entre DACP y DACN | Todas las variantes | Opcional |
 | 7 | <span class="flag-red">Se recomienda el amplificador de potencia de audio AW8155B, configurado por software en modo Class A/B; cualquier otro amplificador requiere validación mediante pruebas</span> | Todas las variantes | Opcional |
@@ -395,16 +395,16 @@ Cada tabla cubre un bloque funcional del esquemático. La columna «Aplicable a�
 | 6 | Si LDO2 o LDO3 alimenta los pull-up de GPIO, confirmar que apagar el LDO correspondiente sigue cumpliendo los requisitos de diseño | Solo 520/3/5/7 | Obligatorio |
 | 7 | Para evitar corrientes de fuga, conmutar la alimentación de los pull-up de I2C junto con la alimentación de E/S del periférico | Todas las variantes | Obligatorio |
 | 8 | Nota sobre PA09: se pone a nivel alto para habilitar al encender la pantalla y a nivel bajo durante la suspensión | Revisiones de silicio A2 y anteriores | Obligatorio |
-| 9 | Se define y registra el requisito de corriente de reposo en modo Deep Sleep | Todas las variantes | Obligatorio |
-| 10 | <span class="flag-red">Se registra la suma de las corrientes de reposo de todos los periféricos seleccionados en modo Deep Sleep y se confirma que cumple los requisitos del proyecto</span> | <span class="flag-red">Todas las variantes</span> | Obligatorio |
-| 11 | Se define y registra el requisito de corriente de reposo en modo Standby | Todas las variantes | Obligatorio |
-| 12 | <span class="flag-red">Se registra la suma de las corrientes de reposo de todos los periféricos seleccionados en modo Standby y se confirma que cumple los requisitos del proyecto</span> | <span class="flag-red">Todas las variantes</span> | Obligatorio |
+| 9 | Se define y registra el requisito de corriente de referencia en modo Deep Sleep | Todas las variantes | Obligatorio |
+| 10 | <span class="flag-red">Se registra la suma de las corrientes de referencia de todos los periféricos seleccionados en modo Deep Sleep y se confirma que cumple los requisitos del proyecto</span> | <span class="flag-red">Todas las variantes</span> | Obligatorio |
+| 11 | Se define y registra el requisito de corriente de referencia en modo Standby | Todas las variantes | Obligatorio |
+| 12 | <span class="flag-red">Se registra la suma de las corrientes de referencia de todos los periféricos seleccionados en modo Standby y se confirma que cumple los requisitos del proyecto</span> | <span class="flag-red">Todas las variantes</span> | Obligatorio |
 
-[^52a-note]: La hoja de cálculo original indica «52A/52D». La [guía de diseño de hardware del SF32LB52x][SF32LB52x Hardware Design Guide - Dev] describe las variantes SF32LB52B/D/E/G/J; la etiqueta «52A» no identifica ninguna de ellas. Confirme la referencia exacta y su hoja de datos antes de aplicar esta fila; no sustituya automáticamente «52A» por otro modelo.
-[^52a-category-note]: La fuente deja en blanco la categoría de esta fila. Se conserva como «No especificado en la fuente», sin asignarle la categoría Obligatorio u Opcional. Confirme su aplicabilidad y el criterio de aceptación para el dispositivo elegido.
+[^52a-note]: La hoja de cálculo fuente indica «52A/52D». La [guía de diseño de hardware del SF32LB52x][SF32LB52x Hardware Design Guide - Dev] describe las variantes SF32LB52B/D/E/G/J; la etiqueta «52A» no identifica ninguna de ellas. Confirme la referencia exacta y su hoja de datos antes de aplicar esta fila; no sustituya automáticamente «52A» por otro modelo.
+[^52a-category-note]: La fuente deja en blanco la categoría de esta fila. Se conserva como «No especificado en la fuente», sin asignarle la categoría Obligatorio u Opcional. Confirme su aplicabilidad y el criterio de liberación para el dispositivo elegido.
 
 !!! important "Discrepancia entre fuentes sobre el pin del interruptor de alimentación del almacenamiento"
-    Esta tabla conserva la entrada PA11 del libro de comprobación para la conmutación de la Flash externa en SF32LB520/3/5/7. Según la prioridad de fuentes de este proyecto, prevalecen las guías de aplicación de OpenSiFli y la guía de diseño de esquemáticos, de mayor prioridad, que especifican PA21 para la conmutación de la alimentación del almacenamiento de arranque; use PA21 como criterio respaldado por las fuentes y no adopte PA11 basándose solo en el libro de menor prioridad. El libro no aclara si PA11 es una habilitación independiente a nivel de placa o un conflicto de asignación de pines. Confirme con SiFli la red y la variante exactas antes de la liberación.
+    Esta tabla conserva la entrada PA11 de la hoja de cálculo de la lista de comprobación para la conmutación de la Flash externa en SF32LB520/3/5/7. Según la prioridad de fuentes de este proyecto, prevalecen las guías de aplicación de OpenSiFli y la guía de diseño de esquemáticos, de mayor prioridad, que especifican PA21 para la conmutación de la alimentación del almacenamiento de arranque; use PA21 como criterio respaldado por las fuentes y no adopte PA11 basándose solo en la hoja de cálculo de menor prioridad. La hoja de cálculo no aclara si PA11 es una habilitación independiente a nivel de placa o un conflicto de asignación de pines. Confirme con SiFli la red y la variante exactas antes de la liberación.
 
 </div>
 

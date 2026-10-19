@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-LCD：面向显示应用的 SF32LB52x 开发板，适合快速验证 SPI、QSPI 和 MCU/8080 屏幕，并集成触摸、音频、存储和电池支持。"
+description: "SF32LB52-DevKit-LCD：面向显示应用的 SF32LB52x 开发板，适合快速启动调试 SPI、QSPI 和 MCU/8080 屏幕，并集成触摸、音频、存储和电池支持。"
 tags:
     - 硬件
     - 开发板
@@ -40,7 +40,7 @@ SF32LB52-DevKit-LCD 是一块面向显示应用的 SF32LB52x 家族开发板。�
 
 当项目需要现成的显示平台，而不是最小化引出板时，选择 SF32LB52-DevKit-LCD。
 
-- 验证 QSPI、SPI、DSPI 或 MCU/8080 LCD 面板
+- 启动调试 QSPI、SPI、DSPI 或 MCU/8080 LCD 面板
 - 验证触摸面板集成
 - 在 SF32LB52x 上测试 LVGL 或自定义 UI 应用
 - 评估麦克风输入和扬声器输出

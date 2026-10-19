@@ -239,7 +239,7 @@ Se o recurso de IA puder ser aprimorado após o lançamento, planeje desde cedo 
 - Testar o recurso de IA isoladamente e só descobrir os problemas de coexistência depois da integração completa do produto.
 - Otimizar a latência do modelo e ignorar as etapas de pré e pós-processamento ao redor da inferência.
 
-## Checklist de integração inicial { #bring-up-checklist }
+## Checklist de bring-up { #bring-up-checklist }
 
 - [ ] Defina a decisão local que o produto precisa tomar e o equilíbrio aceitável entre latência, precisão e consumo de energia.
 - [ ] Selecione o dispositivo SF32 com base no tamanho do modelo e na memória necessária, não apenas na meta de custo.

@@ -25,11 +25,11 @@ tags:
 
 **Objetivo de diseño**
 
-Elija el medio de arranque y el esquemático de alimentación del almacenamiento en función del tamaño del firmware, la estrategia de actualización y los estados de bajo consumo. El diseño también debe permitir que la ROM arranque de forma fiable tras un reinicio o tras entrar en Hibernate.
+Elija el medio de arranque y la arquitectura de alimentación del almacenamiento en función del tamaño del firmware, la estrategia de actualización y los estados de bajo consumo. El diseño también debe permitir que la ROM arranque de forma fiable tras un reinicio o tras entrar en Hibernate.
 
 ##### 5.6.1.1. Descripción de la interfaz de almacenamiento { #5611-storage-interface-description }
 
-El chip admite SPI NOR Flash, SPI NAND Flash y SD NAND Flash externos. **eMMC solo es compatible con las variantes 52B/D/E/G/J alimentadas por una fuente externa regulada.**
+El chip admite SPI NOR Flash, SPI NAND Flash y SD NAND Flash externos. **eMMC solo es compatible con las variantes 52B/D/E/G/J de alimentación regular (regular-powered).**
 
 <div align="center"><em>Tabla 5.6-1: Conexiones de señales SPI NOR/NAND Flash</em></div>
 
@@ -61,7 +61,7 @@ El chip admite SPI NOR Flash, SPI NAND Flash y SD NAND Flash externos. **eMMC so
 
 </div>
 
-!!! note "Dominios de alimentación de eMMC (solo variantes con alimentación externa regulada)"
+!!! note "Dominios de alimentación de eMMC (solo variantes de alimentación regular)"
     Los dispositivos eMMC tienen dos dominios de alimentación: VCC y VCCQ. Opción 1: conmutar ambos; reduce la corriente en estado apagado, pero la recuperación de eMMC desde el modo de bajo consumo es más lenta y aumenta el consumo medio de CPU. Opción 2: conmutar solo VCC y mantener VCCQ siempre activo; la corriente en estado apagado es mayor que en la opción 1, pero eMMC se recupera más rápido y el consumo medio de CPU es menor.
 
 !!! important "Resistencias de pull-up de las interfaces de almacenamiento"
@@ -92,18 +92,18 @@ El chip admite SPI NOR Flash, SPI NAND Flash y SD NAND Flash externos. **eMMC so
 
     </div>
 
-=== "52B/D/E/G/J (alimentación externa regulada)"
+=== "52B/D/E/G/J (alimentación regular)"
 
     El chip admite el arranque desde SPI NOR Flash integrada en el encapsulado, SPI NOR Flash externa, SPI NAND Flash externa, SD NAND Flash externa o memoria **eMMC** externa:
 
     - El modelo con Flash integrada en el encapsulado (SF32LB52BU36) arranca desde ella de forma predeterminada.
     - Los modelos con PSRAM integrada en el encapsulado (SF32LB52DUB6/EUB6/GUC6/JUD6) deben arrancar desde almacenamiento externo.
 
-    ![Figura 5.6-2: Circuito recomendado para los pines bootstrap (variante con alimentación externa regulada)](../../sf32-products/chips/assets/52xB/sf32lb52X-B-Bootstrap.png){ width="100%" loading="lazy" }
+    ![Figura 5.6-2: Circuito recomendado para los pines bootstrap (variante de alimentación regular)](../../sf32-products/chips/assets/52xB/sf32lb52X-B-Bootstrap.png){ width="100%" loading="lazy" }
 
-    <div align="center"><em>Figura 5.6-2: Circuito recomendado para los pines bootstrap (variante con alimentación externa regulada)</em></div>
+    <div align="center"><em>Figura 5.6-2: Circuito recomendado para los pines bootstrap (variante de alimentación regular)</em></div>
 
-    <div align="center"><em>Tabla 5.6-4: Ajustes de arranque (variante con alimentación externa regulada)</em></div>
+    <div align="center"><em>Tabla 5.6-4: Ajustes de arranque (variante de alimentación regular)</em></div>
 
     <div align="center" markdown>
 
@@ -120,11 +120,11 @@ El chip admite SPI NOR Flash, SPI NAND Flash y SD NAND Flash externos. **eMMC so
         En esta sección, el documento original de SiFli usa los sufijos "SF32LB52AUx6" y "SF32LB52D/F/HUx6", que no coinciden con la nomenclatura B/D/E/G/J utilizada al inicio del mismo documento. Esta guía vuelve a expresar la diferencia según el tipo real de memoria integrada en el encapsulado (Flash o PSRAM). Si tiene dudas, verifique el modelo exacto del chip y su hoja de datos.
 
 !!! important "Confirme las entradas de arranque que se solapan"
-    Las notas de aplicación indican H/X para SD NAND, mientras que la guía de diseño de esquemáticos SF32LB52x independiente indica H/L; además, la nota de aplicación de las variantes con alimentación externa regulada indica H/H para eMMC. Como X suele significar cualquiera de los dos niveles lógicos, las entradas de las variantes con alimentación externa regulada se solapan y las fuentes no explican la diferencia. No deduzca los niveles finales de configuración solo a partir de estas tablas; confirme con SiFli la variante exacta y el comportamiento de la ROM. Los circuitos de referencia usan pull-ups de 7,5 kΩ: la figura 5.6-1 los conecta a VDD33_VOUT1 de 3,3 V y la figura 5.6-2 a VDDIOA de 3,3 V.
+    Las notas de aplicación indican H/X para SD NAND, mientras que la guía de diseño de esquemáticos SF32LB52x independiente indica H/L; además, la nota de aplicación de las variantes de alimentación regular indica H/H para eMMC. Como X suele significar cualquiera de los dos niveles lógicos, las entradas de las variantes de alimentación regular se solapan y las fuentes no explican la diferencia. No deduzca los niveles finales de configuración solo a partir de estas tablas; confirme con SiFli la variante exacta y el comportamiento de la ROM. Los circuitos de referencia usan pull-ups de 7,5 kΩ: la figura 5.6-1 los conecta a VDD33_VOUT1 de 3,3 V y la figura 5.6-2 a VDDIOA de 3,3 V.
 
 ##### 5.6.1.3. Control de alimentación del almacenamiento de arranque { #5613-boot-storage-power-control }
 
-Las guías de aplicación y de diseño de esquemáticos de OpenSiFli, de mayor prioridad, asignan `PA21` al control del interruptor (nivel alto: encendido; nivel bajo: apagado); utilice `PA21` como base de diseño respaldada por las fuentes. En cambio, el libro de comprobación enlazado desde la wiki de SiFli asigna `PA11` a la Flash externa de las variantes con batería. No utilice `PA11` basándose únicamente en ese libro. Este no aclara si `PA11` es otra señal de habilitación de la placa o una discrepancia de asignación; confirme con SiFli la red y la variante exactas antes de liberar el diseño.
+Las guías de aplicación y de diseño de esquemáticos de OpenSiFli, de mayor prioridad, asignan `PA21` al control del interruptor (nivel alto: encendido; nivel bajo: apagado); utilice `PA21` como base de diseño respaldada por las fuentes. En cambio, el libro de Excel de comprobación enlazado desde la wiki de SiFli asigna `PA11` a la Flash externa de las variantes con batería. No utilice `PA11` basándose únicamente en ese libro de Excel. Este no aclara si `PA11` es otra señal de habilitación de la placa o una discrepancia de asignación; confirme con SiFli la red y la variante exactas antes de liberar el diseño.
 
 === "SF32LB520/3/5/7 (alimentación por batería)"
 
@@ -134,7 +134,7 @@ Las guías de aplicación y de diseño de esquemáticos de OpenSiFli, de mayor p
     - Alimente SPI NAND o SD NAND externas desde VDD33_VOUT1 y añada un interruptor de alimentación.
     - El diseño de referencia reserva huellas para resistencias pull-up en PA13 y PA17; móntelas según el tipo de almacenamiento. Se recomiendan 7,5 kΩ.
 
-=== "52B/D/E/G/J (alimentación externa regulada)"
+=== "52B/D/E/G/J (alimentación regular)"
 
     - Para el modelo con Flash integrada en el encapsulado (SF32LB52BU36), añada un interruptor de alimentación en VDD_SIP.
     - Para los modelos con PSRAM integrada en el encapsulado (SF32LB52DUB6/EUB6/GUC6/JUD6), el interruptor de VDD_SIP es opcional si PVDD = 3,3 V y VDD_SIP usa el LDO interno; es obligatorio si PVDD = 1,8 V.
@@ -156,7 +156,7 @@ Las guías de aplicación y de diseño de esquemáticos de OpenSiFli, de mayor p
 - [ ] El medio de arranque se ha seleccionado y documentado antes del diseño de la PCB.
 - [ ] Las opciones de polarización bootstrap de `PA13`/`PA17` coinciden con la tabla de arranque.
 - [ ] Los interruptores de alimentación necesarios para el almacenamiento de arranque se controlan mediante el pin confirmado por la fuente para la variante; la discrepancia PA11/PA21 se ha resuelto con SiFli.
-- [ ] Se han evaluado las alternativas de VCC/VCCQ de eMMC para los diseños con alimentación externa regulada.
+- [ ] Se han evaluado las alternativas de VCC/VCCQ de eMMC para los diseños con alimentación regular.
 - [ ] El plan de puesta en marcha incluye la selección del modo de arranque, la temporización de la alimentación del almacenamiento, la lectura del ID y la descarga del firmware.
 
 #### 5.6.2. Sensores { #562-sensors }
@@ -188,7 +188,7 @@ SF32LB52x puede conectarse a sensores de frecuencia cardíaca, acelerómetros, s
 
 **Objetivo de diseño**
 
-Aproveche la asignación flexible de pines para simplificar el trazado sin ocupar los pines necesarios para bootstrap, activación, acceso de depuración o útiles de producción.
+Aproveche la asignación flexible de pines para simplificar el trazado sin ocupar los pines necesarios para bootstrap, activación, acceso de depuración o el utillaje de producción.
 
 SF32LB52x permite asignar las funciones UART e I2C a cualquier pin PA.
 
@@ -228,7 +228,7 @@ SF32LB52x permite asignar las funciones GPTIM a cualquier pin PA.
 
 **Objetivo de diseño**
 
-Garantice el acceso para cargar firmware, consultar registros de depuración, depurar paso a paso y recuperar el sistema tras un fallo, incluso después de definir la carcasa y el útil de producción.
+Garantice el acceso para cargar firmware, consultar registros de depuración, depurar paso a paso y recuperar el sistema tras un fallo, incluso después de definir la carcasa y el utillaje de producción.
 
 SF32LB52x admite la interfaz DBG_UART para descarga y depuración, conectada a un PC mediante un adaptador UART-USB de 3,3 V. SWD y DBG_UART se multiplexan en PA18 y PA19; la configuración predeterminada tras el encendido es DBG_UART, que permite tanto la depuración paso a paso como la salida de registros.
 
@@ -249,7 +249,7 @@ Para la depuración paso a paso y la salida de registros mediante DBG_UART, cons
 
 - [ ] `PA18`/`PA19`, masa y la referencia de alimentación necesaria están disponibles en pads de prueba o pines de conector.
 - [ ] El acceso de depuración sigue disponible después de montar la carcasa, la batería y la pantalla.
-- [ ] El nivel de tensión UART de 3,3 V es compatible con el adaptador o útil seleccionado.
+- [ ] El nivel de tensión UART de 3,3 V es compatible con el adaptador o utillaje seleccionado.
 - [ ] Se ha documentado el procedimiento de recuperación de una placa que no puede arrancar el firmware de aplicación.
 
 #### 5.7.2. Grabación de producción y calibración del cristal { #572-production-flashing-and-crystal-calibration }
@@ -257,7 +257,7 @@ Para la depuración paso a paso y la salida de registros mediante DBG_UART, cons
 **Resumen rápido**
 
 - La grabación de producción y la calibración del cristal requieren una alimentación estable, acceso a DBG_UART, PA01 y los puntos de prueba necesarios de alimentación y masa.
-- Diseñe el acceso del útil antes de cerrar el contorno mecánico de la PCB y la carcasa.
+- Diseñe el acceso del utillaje antes de cerrar el contorno mecánico de la PCB y la carcasa.
 
 **Objetivo de diseño**
 
@@ -268,7 +268,7 @@ SiFli proporciona una herramienta de descarga sin conexión para grabar el firmw
 **Lista de comprobación de producción**
 
 - [ ] Se han reservado puntos de prueba para PVDD/VBAT, GND, AVDD33, DBG_UART_RXD, DBG_UART_TXD y PA01.
-- [ ] El útil previsto puede acceder a los pads de prueba después del montaje mecánico.
+- [ ] El utillaje previsto puede acceder a los pads de prueba después del montaje mecánico.
 - [ ] Se han definido con fabricación el flujo de calibración del cristal y los límites de aceptación/rechazo.
 - [ ] Los registros de grabación, calibración y pruebas funcionales se pueden asociar a la revisión de la placa.
 

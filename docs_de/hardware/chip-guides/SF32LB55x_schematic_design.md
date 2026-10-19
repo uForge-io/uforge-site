@@ -2,7 +2,7 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Richtlinien für den Schaltplanentwurf des SF32LB55x-MCU: Stromversorgungssystem, Boot-Modus, Takterzeugung, RF, Speicherschnittstellen, Display- und Touch-Schnittstellen sowie Wake-/GPADC-/Fertigungsschnittstellen."
+description: "Richtlinien für den Schaltplanentwurf des SF32LB55x-MCU: Stromversorgungssystem, Boot-Modus, Takterzeugung, RF, Speicherschnittstellen, Display- und Touch-Schnittstellen sowie Weck-/GPADC-/Fertigungsschnittstellen."
 tags:
     - Hardware
     - Chip
@@ -24,7 +24,7 @@ tags:
 | RF | RF-Anpassung, 50-Ohm-Antennenpfad, AVDD_BRF-Filterung und RF-Freihaltebereich. |
 | Speicherschnittstellen | OPI-PSRAM, QSPI-NOR/NAND/PSRAM und SDIO-eMMC/Micro-SD. |
 | Display und Touch | MIPI DSI, SPI/QSPI, MCU8080, JDI, Touch-Interrupt, Reset, Hintergrundbeleuchtung und Panel-Stromversorgung. |
-| Wake, GPADC und Fertigung | Weckquellen und Taster, Motor-PWM, GPADC-Spannungsteiler, Sensoren, Bluetooth-Audio, DBG-UART, SWD, Produktionsprogrammierung und Quarzkalibrierung. |
+| Weck-, GPADC- und Fertigungsschnittstellen | Weckquellen und Taster, Motor-PWM, GPADC-Spannungsteiler, Sensoren, Bluetooth-Audio, DBG-UART, SWD, Produktionsprogrammierung und Quarzkalibrierung. |
 
 </div>
 
@@ -87,7 +87,7 @@ SF32LB551 im QFN68L besitzt keine Pins VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_VOUT
 
 </div>
 
-Platzieren Sie die erforderlichen Kondensatoren nahe an den zugehörigen Pins, halten Sie die BUCK-Stromschleifen kompakt und prüfen Sie den BUCK-/LDO-Betriebsmodus vor Beginn des PCB-Layouts. Überprüfen Sie die Reset-Schaltung und das POR-/BOR-Timing an der realen Hardware.
+Platzieren Sie die erforderlichen Kondensatoren nahe an den zugehörigen Pins, halten Sie die BUCK-Stromschleifen kompakt und prüfen Sie den BUCK-/LDO-Betriebsmodus vor Beginn des PCB-Layouts. Die Reset-Schaltung und das POR-/BOR-Timing sollten an der realen Hardware überprüft werden.
 
 Die Quellen widersprechen sich: Tabelle 3-3 des [chinesischen SiFli-Hardware-Anwendungshinweises](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) und Punkt 9 der [Schaltplan-Checkliste V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) nennen 1 µF für VDD_RTC, während [C0313 im Referenzschaltplan des Anwendungshinweises](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png) mit 0,1 µF beschriftet ist. Die Quellen erläutern nicht, wann welcher Wert gilt. Klären Sie den erforderlichen Wert für das konkrete Gerät vor der Designfreigabe mit SiFli; lösen Sie den Widerspruch nicht durch Annahmen.
 
@@ -161,11 +161,11 @@ Die RF-Referenzschaltung setzt C0323 (15 pF/50 V) in Reihe mit ANT; die beiden M
 
 ### 5.5. Speicherschnittstellen { #55-storage-interfaces }
 
-SF32LB55x unterstützt OPI-PSRAM, QSPI-NOR-/NAND-Flash und PSRAM sowie SDIO für eMMC oder Micro-SD. Da die Gehäuseauswahl die verfügbaren Pins und Schnittstellen beeinflusst, muss die Speicherauswahl vor der Pin-Festlegung und der Prüfung des PCB-Lagenaufbaus abgeschlossen sein.
+SF32LB55x unterstützt OPI-PSRAM, QSPI-NOR-/NAND-Flash und PSRAM sowie SDIO für eMMC oder Micro-SD. Da die Gehäuseauswahl die verfügbaren Pins und Schnittstellen beeinflusst, sollte die Speicherauswahl vor der Pin-Festlegung und der Prüfung des PCB-Lagenaufbaus abgeschlossen werden.
 
 BGA145 bietet einen externen OPI-PSRAM-Kanal, BGA169 zwei. Tabellen 5.5-1 bis 5.5-3 beschreiben die BGA145-Konfiguration und die beiden BGA169-Speicherbausteine, nicht drei Kanäle in einem Gehäuse. Die QSPI-Tabellen entsprechen QSPI2, QSPI3 und QSPI4. Die SDIO-Tabellen zeigen SDIO1 im 4-/8-Bit-Modus und SDIO2 im 4-Bit-Modus.
 
-Für externen QSPI-PSRAM wird QSPI2 empfohlen. Steuert ein HCPU-GPIO die Versorgung eines externen OPI/QSPI-PSRAM, verwenden Sie einen HCPU-Pin vom Typ PU: High schaltet ein, Low aus. Wird VDD_SIP für internen Flash geschaltet, muss PA58 mit derselben Polarität verwendet werden. Lassen Sie den Flashbedarf der LCPU-Beschleunigungs- und Herzfrequenzalgorithmen von SiFlis FAE bewerten, bevor Sie zusätzlichen NOR-Flash an QSPI4 vorsehen.
+Für externen QSPI-PSRAM wird QSPI2 empfohlen. Steuert ein HCPU-GPIO die Versorgung eines externen OPI/QSPI-PSRAM, verwenden Sie einen HCPU-Pin vom Typ PU: High schaltet ein, Low aus. Wird VDD_SIP für internen Flash geschaltet, verwenden Sie PA58 mit derselben Polarität (High schaltet ein, Low aus). Lassen Sie den Flashbedarf der LCPU-Beschleunigungs- und Herzfrequenzalgorithmen von SiFlis FAE bewerten, bevor Sie zusätzlichen NOR-Flash an QSPI4 vorsehen.
 
 Die Richtungsangaben in den ursprünglichen OPI-Tabellen sind uneinheitlich. Im [BGA145-Referenzschaltplan](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png), im [BGA169-Referenzschaltplan für Speicher 1](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png) und im [Referenzschaltplan für Speicher 2](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png) steuern die MCU-Pins PA37/PA20 bzw. PA07/PA08 die CS#- und CLK-Pins des externen PSRAM. Die folgenden Tabellen geben CS# und CLK daher aus MCU-Sicht an: MCU-Ausgang, PSRAM-Eingang. Die Schaltpläne legen keine feste Richtung für DQS/DM fest; prüfen Sie Funktion und Richtung im Datenblatt des ausgewählten PSRAM.
 
@@ -183,7 +183,7 @@ Jeder gezeigte PSRAM verwendet 1,8 V, drei 0,1-µF-Kondensatoren und einen 1-µF
 | :--- | :--- | :--- |
 | CS# | PA37 | MCU-Ausgang; PSRAM-Eingang |
 | CLK | PA20 | MCU-Ausgang; PSRAM-Eingang |
-| DQS | PA35 | DQS/DM; Funktion und Richtung im Datenblatt der ausgewählten PSRAM prüfen |
+| DQS | PA35 | DQS/DM; Funktion und Richtung im Datenblatt des ausgewählten PSRAM prüfen |
 | DQ0 | PA28 | Dateneingang/-ausgang 0 |
 | DQ1 | PA29 | Dateneingang/-ausgang 1 |
 | DQ2 | PA30 | Dateneingang/-ausgang 2 |
@@ -475,7 +475,7 @@ Der [SiFli-Hardware-Anwendungshinweis](https://github.com/OpenSiFli/SiFli-Wiki/b
 
 </div>
 
-Für BL_PWM ist ein GPIO mit GPTIM1_CHx-Funktion zu verwenden. Legen Sie einen geeigneten Pull-up- oder Pull-down-Pegel fest, damit sich die Hintergrundbeleuchtung beim Kaltstart nicht unbeabsichtigt einschaltet.
+Verwenden Sie für BL_PWM einen GPIO mit GPTIM1_CHx-Funktion. Legen Sie einen geeigneten Pull-up- oder Pull-down-Pegel fest, damit sich die Hintergrundbeleuchtung beim Kaltstart nicht unbeabsichtigt einschaltet.
 
 ### 5.7. Weck-, GPADC- und Fertigungsschnittstellen { #57-wake-gpadc-and-manufacturing-interfaces }
 
@@ -516,7 +516,7 @@ Verwenden Sie für Motor-PWM einen GPIO mit GPTIM1_CHx. Wählen Sie das passende
 
 Der SiFli-Hardware-Anwendungshinweis beschreibt einen fünfkanaligen 10-Bit-GPADC mit einem Eingangsbereich von 0–0,9 V. Für ein konservatives Platinendesign darf VIN nur unter 0,9 V direkt angeschlossen werden; höhere Spannungen müssen geteilt werden, sodass VADC unter 0,9 V bleibt. Für Akkumessungen empfiehlt die Quelle R1:R2 etwa 5:1 und Widerstände im MΩ-Bereich: weniger Teilerstrom bedeutet längere Einschwingzeit. Die Schaltung enthält 0,1 µF von VADC nach Masse. Prüfen Sie mit `VADC = VIN × R2 / (R1 + R2)` die maximale Akkuspannung und Widerstandstoleranzen; die Ströme in Tabelle 5.7-2 gelten für VIN = 4,2 V, nicht für jeden Betriebsfall.
 
-Quellenabweichung: Der höherrangige [OpenSiFli-Hardware-Anwendungshinweis](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) beschreibt einen 10-Bit-GPADC mit fünf Kanälen und einem Eingangsbereich von 0–0,9 V. Punkt 2 der [Schaltplan-Checkliste V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) legt 1,0 V als Maximum fest, nennt aber keine Kanalzahl. Das [Datenblatt SF32LB55x V1.7.2, Abschnitt 3.2.1](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf) beschreibt acht Single-Ended-Eingänge oder vier differentielle Eingangspaare mit Bereichen von 0–1,1 V bzw. −0,7 bis 0,7 V; die Pin-Tabelle führt GPADC_CH0–CH7 auf. Der aktuelle [SDK-ADC-Anwendungshinweis](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html) ordnet ebenfalls acht Kanäle (0–7) zu und nennt 1,1 V als maximale Abtastspannung. SiFli hat die Unterschiede bei Kanalzahl und Spannungsgrenzen nicht erklärt. Bis zur schriftlichen Klärung legt dieser Leitfaden weiterhin die Angaben der höher priorisierten Quelle als Entwurfsgrundlage zugrunde: fünf Kanäle und ein Eingangsbereich von 0–0,9 V. Halten Sie VADC unter 0,9 V, behandeln Sie 1,0 V und 1,1 V nicht als freigegebene Entwurfsgrenzen und bestätigen Sie die Kanalverfügbarkeit für das gewählte Gerät und Gehäuse.
+Quellenabweichung: Der höher priorisierte [OpenSiFli-Hardware-Anwendungshinweis](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) beschreibt einen 10-Bit-GPADC mit fünf Kanälen und einem Eingangsbereich von 0–0,9 V. Punkt 2 der [Schaltplan-Checkliste V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) legt 1,0 V als Maximum fest, nennt aber keine Kanalzahl. Das [Datenblatt SF32LB55x V1.7.2, Abschnitt 3.2.1](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf) beschreibt acht Single-Ended-Eingänge oder vier differentielle Eingangspaare mit Bereichen von 0–1,1 V bzw. −0,7 bis 0,7 V; die Pin-Tabelle führt GPADC_CH0–CH7 auf. Der aktuelle [SDK-ADC-Anwendungshinweis](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html) ordnet ebenfalls acht Kanäle (0–7) zu und nennt 1,1 V als maximale Abtastspannung. SiFli hat die Unterschiede bei Kanalzahl und Spannungsgrenzen nicht erklärt. Bis zur schriftlichen Klärung legt dieser Leitfaden weiterhin die Angaben der höher priorisierten Quelle als Entwurfsgrundlage zugrunde: fünf Kanäle und ein Eingangsbereich von 0–0,9 V. Halten Sie VADC unter 0,9 V, behandeln Sie 1,0 V und 1,1 V nicht als freigegebene Entwurfsgrenzen und bestätigen Sie die Kanalverfügbarkeit für das gewählte Gerät und Gehäuse.
 
 ![Abbildung 5.7-3: GPADC-Eingang und Referenz-Spannungsteiler](../../sf32-products/chips/assets/55x/SF32LB55x-GPADC-SCH.png){ width="100%" loading="lazy" }
 
@@ -538,7 +538,7 @@ Quellenabweichung: Der höherrangige [OpenSiFli-Hardware-Anwendungshinweis](http
 
 Führen Sie I2C/SPI, Steuerung und Weckinterrupts von Herzfrequenz- und Beschleunigungssensoren über LCPU. Verwenden Sie DC-DC-Wandler, LDOs oder Lastschalter mit niedrigem Iq für bedarfsgerecht schaltbare Sensorversorgungen.
 
-Externes Bluetooth-Audio kommuniziert über HCPU-UART1. Passen Sie die Spannungspegel an oder verwenden Sie einen Pegelwandler; beim Abschalten des Moduls muss die Versorgung des Pegelwandlers gleichzeitig abgeschaltet werden, um Leckstrom zu vermeiden. Bleibt das Modul in Standby versorgt und ist sein Versorgungseingang low-aktiv, verwenden Sie einen LCPU-GPIO mit standardmäßigem PD-Verhalten.
+Externes Bluetooth-Audio kommuniziert über HCPU-UART1. Passen Sie die Spannungspegel an oder verwenden Sie einen Pegelwandler; schalten Sie beim Abschalten des Moduls gleichzeitig die Versorgung des Pegelwandlers ab, um Leckstrom zu vermeiden. Bleibt das Modul in Standby versorgt und ist sein Versorgungseingang low-aktiv, verwenden Sie einen LCPU-GPIO mit standardmäßigem PD-Verhalten.
 
 <div align="center"><em>Tabelle 5.7-3: Debug- und Flash-Schnittstelle</em></div>
 

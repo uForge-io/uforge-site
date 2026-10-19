@@ -126,7 +126,7 @@ Die v8-Smartwatch-README nennt die SF32LB52x-, SF32LB56x- und SF32LB58x-LCD-Seri
 
 | Schritt | Zu bewahrender Beleg | Warum es wichtig ist |
 |:-----|:-----------------|:---------------|
-| Das Original bauen | SDK-Revision, Board-Name, Konfiguration und Build-Log | Bewahrt eine nachweislich funktionierende Referenz |
+| Das Original bauen | SDK-Revision, Boardname, Konfiguration und Build-Log | Bewahrt eine nachweislich funktionierende Referenz |
 | Auf Hardware ausführen | Foto/Video, serielles Log, Panel- und Touch-Verhalten | Bestätigt den tatsächlichen Display- und Eingabepfad |
 | Ein Produktelement hinzufügen | Änderungsprotokoll sowie Messwerte zur Bildrate und zum Aktualisierungsverhalten | Erleichtert es, Regressionen konkreten Änderungen zuzuordnen |
 | Produktlast testen | UI-Reaktionsfähigkeit mit Bluetooth, Sensoren, Speicher und Low-Power-Übergängen | Zeigt Integrationsgrenzen auf, die eine eigenständige Demo nicht sichtbar macht |

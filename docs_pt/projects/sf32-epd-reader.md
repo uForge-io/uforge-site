@@ -141,7 +141,7 @@ Os principais domínios de falha são a análise do arquivo compactado e do XHTM
 
 **Evidências a registrar:** fotos do conjunto, identificadores dos componentes, estado do Git, configuração, logs de compilação/gravação, hashes das imagens e log de inicialização.
 
-**Critério para atingir o ponto de controle 1:** o conjunto corresponde à combinação padrão `sf32-oed-epd_v11`, e os insumos fixados geram e inicializam de forma reproduzível a mesma imagem.
+**Critério de saída do ponto de controle 1:** o conjunto corresponde à combinação padrão `sf32-oed-epd_v11`, e os insumos fixados geram e inicializam de forma reproduzível a mesma imagem.
 
 ## Etapa 2 — Validar o fluxo de leitura sem alterações { #stage-2-validate-the-untouched-reading-flow }
 
@@ -154,7 +154,7 @@ Os principais domínios de falha são a análise do arquivo compactado e do XHTM
 
 **Evidências a registrar:** origem e hash dos EPUBs de teste, fotos das páginas, sequência de interação, logs, memória disponível e falhas classificadas.
 
-**Critério para atingir o ponto de controle 2:** o fluxo principal se repete no conjunto de amostras previsto, e cada falha é classificada como conteúdo, fonte, armazenamento, memória, entrada ou display, em vez de ser descrita apenas como “intermitente”.
+**Critério de saída do ponto de controle 2:** o fluxo principal se repete no conjunto de amostras previsto, e cada falha é classificada como conteúdo, fonte, armazenamento, memória, entrada ou display, em vez de ser descrita apenas como “intermitente”.
 
 ## Etapa 3 — Validar configurações, armazenamento e recuperação { #stage-3-qualify-settings-storage-and-recovery }
 
@@ -167,7 +167,7 @@ Os principais domínios de falha são a análise do arquivo compactado e do XHTM
 
 **Evidências a registrar:** especificação e formato do cartão, manifesto de arquivos, arquivo de configurações, resultados após reinicialização, logs de erro e ações de recuperação.
 
-**Critério para atingir o ponto de controle 3:** o conteúdo e as configurações previstos carregam de forma repetível; ausência do cartão, configuração inválida ou fonte ausente acionam alternativas compreensíveis sem impedir o retorno à tela Início.
+**Critério de saída do ponto de controle 3:** o conteúdo e as configurações previstos carregam de forma repetível; ausência do cartão, configuração inválida ou fonte ausente acionam alternativas compreensíveis sem impedir o retorno à tela Início.
 
 ## Etapa 4 — Avaliar a qualidade do display de tinta eletrônica e o consumo de energia { #stage-4-qualify-e-paper-quality-and-power }
 
@@ -180,7 +180,7 @@ Os principais domínios de falha são a análise do arquivo compactado e do XHTM
 
 **Evidências a registrar:** versão do painel e da forma de onda, temperatura, imagens das páginas, estatísticas de atualização, traços de corrente, condições da bateria e resultados de ativação/desligamento.
 
-**Critério para atingir o ponto de controle 4:** os limites de qualidade do display, latência de atualização, temperatura, consumo e recuperação estão definidos e foram atendidos; cada desvio tem um encaminhamento explícito.
+**Critério de saída do ponto de controle 4:** os limites de qualidade do display, latência de atualização, temperatura, consumo e recuperação estão definidos e foram atendidos; cada desvio tem um encaminhamento explícito.
 
 ## Etapa 5 — Fazer uma adaptação controlada e revisar a prontidão { #stage-5-make-a-controlled-adaptation-and-review-readiness }
 
@@ -199,7 +199,7 @@ Na revisão do produto, responda pelo menos às seguintes perguntas:
 
 **Evidências a registrar:** revisão da alteração, diff, matriz de regressão, registro de riscos, responsáveis e decisão sobre o produto.
 
-**Critério para atingir o ponto de controle 5:** a alteração controlada passa por todos os testes de regressão aplicáveis, e os riscos restantes de conteúdo, display, alimentação, segurança, licenciamento, fornecimento e regulamentação têm responsáveis, medidas de mitigação e uma decisão de prosseguir, adiar ou interromper.
+**Critério de saída do ponto de controle 5:** a alteração controlada passa por todos os testes de regressão aplicáveis, e os riscos restantes de conteúdo, display, alimentação, segurança, licenciamento, fornecimento e regulamentação têm responsáveis, medidas de mitigação e uma decisão de prosseguir, adiar ou interromper.
 
 ## Transição para o projeto do produto { #handoff-to-product-design }
 O pacote de transição deve incluir as revisões da placa, do painel e do toque; código-fonte e SDK fixados; memória e partições; sistemas de arquivos; fontes e conteúdo; forma de onda/VCOM/temporização; política de atualização completa/parcial; mapa de entradas; curva da bateria; medições de consumo; recuperação de falhas; manifesto de licenças e plano de testes de produção. Use o [caminho de integração do SF32LB52x](../sf32-products/chips/SF32LB52x.md#integration-path) para selecionar chip, módulo, placa, guia de projeto de hardware e checklist; em seguida, projete o hardware próprio com base nos limites funcionais já validados.

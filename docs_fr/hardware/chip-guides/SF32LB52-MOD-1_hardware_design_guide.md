@@ -16,7 +16,7 @@ tags:
 
 Ce guide traite de l'intégration matérielle du module : définition des broches, interfaces périphériques, caractéristiques électriques, exigences d'alimentation, schémas de référence, liste de contrôle du schéma, dimensions mécaniques, empreinte PCB et précautions de manipulation. Il s'appuie sur la fiche technique SiFli **DS5203-SF32LB52-MOD-1 V0.3**.
 
-Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système mémoire et périphériques plus en détail), voir [SF32LB52x](../../sf32-products/chips/SF32LB52x.md) et le [Guide de conception matérielle SF32LB52x](../chip-guides/SF32LB52x_hardware_design_guide.md).
+Pour l'architecture sous-jacente de la puce (cœurs, graphiques, sous-système mémoire et périphériques plus en détail), voir [SF32LB52x](../../sf32-products/chips/SF32LB52x.md) et le [Guide de conception matérielle SF32LB52x](../chip-guides/SF32LB52x_hardware_design_guide.md).
 
 !!! note "Gestion des sources et figures"
     Ce guide suit la fiche technique **DS5203-SF32LB52-MOD-1 V0.3** pour les données techniques spécifiques au module. Certains schémas de brochage, de circuit et de dimensions mécaniques de la fiche technique sont des images matricielles et sont référencés plutôt que redessinés ici. Les numéros de figure et de tableau ci-dessous suivent la numérotation locale de ce guide sur le site ; les légendes des schémas non reproduits citent le numéro de figure correspondant dans la fiche technique officielle.
@@ -31,7 +31,7 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système m�
 
 | Code du module | Flash | PSRAM | Température | Dimensions (mm) |
 | :--- | :--- | :--- | :--- | :--- |
-| SF32LB52-MOD-1-N16R8 | QSPI-NOR 16 Mo | OPI-PSRAM 8 Mo | −40 à 85 °C | 27,9 × 18,0 × 3,1 |
+| SF32LB52-MOD-1-N16R8 | QSPI-NOR 16 Mo | OPI-PSRAM 8 Mo | -40 à 85 °C | 27,9 × 18,0 × 3,1 |
 
 </div>
 
@@ -46,19 +46,19 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système m�
 | Cœur applicatif (HCPU) | Arm Cortex-M33 STAR-MC1, jusqu'à 240 MHz, 512 Ko de SRAM |
 | Cœur basse consommation (LCPU) | Arm Cortex-M33 STAR-MC1, jusqu'à 24 MHz, 64 Ko de SRAM |
 | Sans fil | Bluetooth 5.3 double mode avec BLE Audio |
-| Graphisme | Moteur ePicasso 2.0 2D/2.5D, jusqu'à 512×512, décompression sans perte eZip 2.0 |
+| Graphiques | Moteur ePicasso 2.0 2D/2.5D, jusqu'à 512×512, décompression sans perte eZip 2.0 |
 | Audio | 1 × DAC audio 24 bits, 1 × ADC audio Sigma-Delta 24 bits |
 | Stockage | OPI-PSRAM en boîtier optionnelle (144 MHz) ; 1 × MPI externe (QSPI) ; 1 × SD/SDIO/eMMC |
 | Boîtier | 68 broches, 27,9 × 18,0 × 3,1 mm |
 | Alimentation | VSYS 3,2–4,7 V (Li-ion) ou 3,7–4,7 V (DCDC/LDO, 3,8 V recommandé) |
 | Antenne | Antenne PCB embarquée, ou externe via connecteur IPEX (selon référence commerciale) |
-| Température de fonctionnement | −40 à 85 °C |
+| Température de fonctionnement | -40 à 85 °C |
 
 </div>
 
 ## 3. Schéma fonctionnel { #3-functional-block-diagram }
 
-Le module intègre la puce SF32LB525UC6, un quartz de 48 MHz et un quartz optionnel de 32,768 kHz. Sur ce SKU, il intègre également une puce OPI-PSRAM de 64 Mb dans le boîtier, ainsi qu'un réseau d'adaptation RF et une ligne d'alimentation RF pour l'antenne.
+Le module intègre la puce SF32LB525UC6, un quartz de 48 MHz et un quartz optionnel de 32,768 kHz. Sur ce SKU, il intègre également une puce OPI-PSRAM de 64 Mb dans le boîtier, ainsi qu'un réseau d'adaptation RF et le point d'alimentation de l'antenne.
 
 !!! info "Figure 3-1 : Schéma fonctionnel"
     Voir la Figure 2-1 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
@@ -148,7 +148,7 @@ Le module compte 68 broches au total, décrites dans le tableau ci-dessous.
 
 ### 4.3 Description physique des broches { #43-physical-pin-description }
 
-Le schéma de description physique des broches de la fiche technique indique les groupes fonctionnels sur le contour de la puce SF32LB525UC6 : SDIO, SPI, I2C, UART, GPTIM, interface LCD, GPADC, MPI, audio analogique, oscillateur externe 32K, réveil externe et SWD/UART de débogage. Utilisez ce schéma avec le tableau de définition des broches ci-dessus pour organiser les groupes de signaux sur le PCB hôte.
+Le schéma de description physique des broches de la fiche technique indique les groupes fonctionnels sur le contour de la puce SF32LB525UC6 : SDIO, SPI, I2C, UART, GPTIM, interface LCD, GPADC, MPI, audio analogique, oscillateur externe 32K, réveil externe et SWD/UART de débogage. Utilisez ce schéma avec le tableau de définition des broches ci-dessus pour organiser les groupes de signaux sur la PCB hôte.
 
 !!! info "Figure 4.3-1 : Description physique des broches"
     Voir la Figure 3-2 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
@@ -166,7 +166,7 @@ Toute broche marquée `PAxx_I2C_UART` dans le tableau ci-dessus peut être confi
 
 **I2C** — Fonctionne en modes maître et esclave, avec une FIFO de 8 octets et la prise en charge du DMA. Il prend en charge les modes standard (100 kbps), rapide (400 kbps), rapide-plus (1 Mbps) et haute vitesse (3,4 Mbps), l'adressage sur 7 ou 10 bits en mode maître, ainsi qu'un filtre numérique anti-glitch configurable. I2C1–4 sont sur HPSYS ; I2C5–7 sont sur LPSYS.
 
-**SPI** — Prend en charge les formats SSP/SPI (duplex intégral, maître ou esclave) et Microwire (semi-duplex, maître uniquement). La largeur des données est de 4 à 32 bits ; la polarité et la phase de l'horloge (SPO/SPH), ainsi que la polarité de sélection du circuit, sont configurables. La FIFO contient 16 entrées de 32 bits ; le DMA est pris en charge en émission comme en réception, avec une horloge jusqu'à 48 MHz.
+**SPI** — Prend en charge les formats SSP/SPI (duplex intégral, maître ou esclave) et Microwire (semi-duplex, maître uniquement). La largeur des données est de 4 à 32 bits ; la polarité et la phase de l'horloge (SPO/SPH), ainsi que la polarité de sélection du circuit, sont configurables. La FIFO contient 16 entrées de 32 bits ; le DMA est pris en charge, avec une horloge jusqu'à 48 MHz.
 
 **USB2.0 FS** — Un port hôte/périphérique pleine vitesse, avec points de terminaison configurables, suspension/reprise, dimensionnement dynamique de la FIFO, prise en charge du protocole de demande de session et du protocole de négociation de l'hôte, ainsi qu'un PHY USB2.0 FS intégré.
 
@@ -221,9 +221,9 @@ Dépasser les valeurs du tableau ci-dessous peut endommager le module de façon 
 
 </div>
 
-### 6.3 Caractéristiques électriques CC (3,3 V, 25°C) { #63-dc-electrical-characteristics-33v-25c }
+### 6.3 Caractéristiques électriques CC (3,3 V, 25 °C) { #63-dc-electrical-characteristics-33v-25c }
 
-<div align="center"><em>Tableau 6.3-1 : Caractéristiques électriques CC (3,3 V, 25°C)</em></div>
+<div align="center"><em>Tableau 6.3-1 : Caractéristiques électriques CC (3,3 V, 25 °C)</em></div>
 
 <div align="center" markdown>
 
@@ -238,10 +238,10 @@ Dépasser les valeurs du tableau ci-dessous peut endommager le module de façon 
 | VOL | Tension de sortie basse (charge haute impédance) | VSS | - | 0,2×VDD | V |
 | IOH | Courant d'attaque de sortie haut | 24 | 30 | 38 | mA |
 | IOL | Courant d'attaque de sortie bas | 24 | 30 | 38 | mA |
-| RPU | Tirage vers le haut interne (Vpad=0,8×VDD) | 7 | 10 | 20 | kΩ |
-| RPD | Tirage vers le bas interne (Vpad=0,2×VDD) | 7 | 10 | 20 | kΩ |
-| VIH_nRST | Tension de relâchement du reset | 0,7×VDD | - | VDD | V |
-| VIL_nRST | Tension d'activation du reset | VSS | - | 0,3×VDD | V |
+| RPU | Rappel interne vers le haut (Vpad=0,8×VDD) | 7 | 10 | 20 | kΩ |
+| RPD | Rappel interne vers le bas (Vpad=0,2×VDD) | 7 | 10 | 20 | kΩ |
+| VIH_nRST | Tension de relâchement de la réinitialisation | 0,7×VDD | - | VDD | V |
+| VIL_nRST | Tension d'activation de la réinitialisation | VSS | - | 0,3×VDD | V |
 
 </div>
 
@@ -253,16 +253,16 @@ VDD est le rail d'alimentation des E/S ; VOH/VOL sont mesurées sous charge haut
 
 <div align="center" markdown>
 
-| Mode | Intervalle | @0dBm | @4dBm | @10dBm | Unité |
+| Mode | Intervalle | @0 dBm | @4 dBm | @10 dBm | Unité |
 | :--- | :-: | :-: | :-: | :-: | :-: |
-| BT Sniff (tentative=1) | 50 ms | 129,5 | 135,6 | 160,9 | µA |
-| BT Sniff (tentative=1) | 1 s | 6,0 | 6,3 | 7,6 | µA |
+| BT Sniff (attempt=1) | 50 ms | 129,5 | 135,6 | 160,9 | µA |
+| BT Sniff (attempt=1) | 1 s | 6,0 | 6,3 | 7,6 | µA |
 | BLE ADV | 50 ms | 171,6 | 217,6 | 298,3 | µA |
 | BLE ADV | 1 s | 8,9 | 9,5 | 17,0 | µA |
 | Connexion BLE | 50 ms | 95,0 | 105,0 | 118,7 | µA |
 | Connexion BLE | 1 s | 4,1 | 4,6 | 9,1 | µA |
 | Balayage (Inquiry ou Page) | — | 33,4 | — | — | µA |
-| Balayage combiné (Both Scan) | — | 67,3 | — | — | µA |
+| Balayage combiné (Inquiry et Page) | — | 67,3 | — | — | µA |
 | Veille | — | 20,0 | — | — | µA |
 
 </div>
@@ -273,10 +273,10 @@ VDD est le rail d'alimentation des E/S ; VOH/VOL sont mesurées sous charge haut
 
 | Horloge | Courant (µA) | Incrément (µA/MHz) |
 | :--- | :-: | :-: |
-| CoreMark @192MHz | 7360 | 35 |
-| CoreMark @48MHz | 1550 | 27 |
-| WhileLoop @192MHz | 5490 | 27 |
-| WhileLoop @48MHz | 1250 | 20 |
+| CoreMark @192 MHz | 7360 | 35 |
+| CoreMark @48 MHz | 1550 | 27 |
+| WhileLoop @192 MHz | 5490 | 27 |
+| WhileLoop @48 MHz | 1250 | 20 |
 
 </div>
 
@@ -286,13 +286,13 @@ Prend en charge le Bluetooth 5.3, rétrocompatible avec 4.2/4.1/4.0. Fréquence 
 
 **Émetteur BLE (1 Mbps)** : puissance maximale de 19 dBm, plage de contrôle de puissance de -20 à 19 dBm, Δf1avg = 250 kHz typ. et Δf2max = 210 kHz typ. Il s'agit de valeurs d'excursion de fréquence (la fiche technique intitule ces paramètres modulation maximale/minimale), et non d'un indice de modulation sans dimension. La tolérance initiale typique de la fréquence porteuse est de ±20 kHz.
 
-**Récepteur BLE (1Mbps)** : sensibilité -100 dBm (dirty off) / -99,3 dBm (dirty on) @30,8 % PER, C/I co-canal 7 dB.
+**Récepteur BLE (1 Mbps)** : sensibilité -100 dBm (mode dirty désactivé) / -99,3 dBm (mode dirty activé) @30,8 % PER, C/I co-canal 7 dB.
 
-**BT classique (Basic Data Rate)** : puissance d'émission max 18 dBm ; sensibilité du récepteur -96,3 dBm (dirty off) / -94 dBm (dirty on) @0,1 % BER.
+**BT classique (Basic Data Rate)** : puissance d'émission max 18 dBm ; sensibilité du récepteur -96,3 dBm (mode dirty désactivé) / -94 dBm (mode dirty activé) @0,1 % BER.
 
 **BT classique (Enhanced Data Rate)** : puissance d'émission max 13 dBm ; sensibilité du récepteur π/4-DQPSK -95,5 dBm ; sensibilité du récepteur 8DPSK -88,5 dBm.
 
-Les tableaux complets min/typ/max pour toutes les performances TX/RX BLE 1Mbps/2Mbps et les performances TX/RX BT classique BR/EDR sont fournis au §5.5 de la fiche technique officielle.
+Les tableaux complets min/typ/max pour toutes les performances TX/RX BLE 1 Mbps/2 Mbps et les performances TX/RX BT classique BR/EDR sont fournis au §5.5 de la fiche technique officielle.
 
 ## 7. Alimentation du module { #7-module-power-supply }
 
@@ -304,7 +304,7 @@ Le module dispose d'une entrée d'alimentation principale unique, **VSYS**, qui 
 
 ## 8. Schéma de référence et affectation des broches { #8-reference-schematic-and-pin-assignment }
 
-La fiche technique fournit un schéma de référence complet pour une carte de développement basée sur le SF32LB52-MOD-1, couvrant l'alimentation, le reset, JTAG/SWD, UART, SDIO, LCD, et les circuits audio.
+La fiche technique fournit un schéma de référence complet pour une carte de développement basée sur le SF32LB52-MOD-1, couvrant l'alimentation, la réinitialisation, JTAG/SWD, UART, SDIO, LCD, et les circuits audio.
 
 !!! info "Figure 8-1 : Schéma de référence de la carte de développement"
     Voir les Figures 7-2 à 7-6 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
@@ -335,9 +335,9 @@ Utilisez ces éléments comme point de départ pour un schéma de production et 
 | 9 | L'interface SDIO et MPI2 partagent les IO et ne peuvent pas être utilisées simultanément. |
 | 10 | Les broches marquées `#GPADC_CHx` dans le tableau des broches prennent en charge une entrée analogique dans la plage 0–3,3 V. |
 | 11 | Les broches marquées `PAxx_TIM` dans le tableau des broches prennent en charge une sortie PWM. |
-| 12 | PA34 prend en charge un reset par appui long de 10 secondes, actif haut ; ajoutez une résistance de tirage vers le bas de 10 kΩ dans la conception. |
+| 12 | PA34 prend en charge une réinitialisation par appui long de 10 secondes, active à l'état haut ; ajoutez une résistance de rappel vers le bas (pull-down) de 10 kΩ dans la conception. |
 | 13 | Réservez des composants de protection ESD pour les interfaces de batterie et d'écran tactile (TP), ainsi que pour les autres interfaces exposées à l'extérieur, si nécessaire. |
-| 14 | Placez une résistance série de 100 Ω sur chacun des signaux PA18/PA19 lorsqu'ils sont multiplexés en DBG_UART pour la programmation et le débogage. |
+| 14 | PA18/PA19, lorsqu'ils sont multiplexés en DBG_UART pour la programmation et le débogage, devraient chacun comporter une résistance série de 100 Ω. |
 
 </div>
 
@@ -391,7 +391,7 @@ Pratique recommandée :
 
 - Stockez les produits scellés dans un sac barrière anti-humidité (MBB) à <40 °C / 90 % HR, sans condensation.
 - Niveau de sensibilité à l'humidité du module (MSL) : 3.
-- Après ouverture du sac sous vide, utilisez le module dans les 168 heures à 25 ± 5 °C / 60 % HR ; au-delà, il doit être étuvé avant sa réintroduction dans la ligne de production.
+- Après ouverture du sac sous vide, utilisez le module dans les 168 heures à 25 ± 5 °C / 60 % HR ; dans le cas contraire, étuvez-le avant sa réintroduction dans la ligne de production.
 
 ### 11.2 Décharge électrostatique (ESD) { #112-electrostatic-discharge-esd }
 

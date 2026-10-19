@@ -89,11 +89,12 @@ Antes de começar, prepare:
 | OpenSiFli/zmk | Commit revisado [`fd4d5843065f`](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e) | Adaptação para SF32, aplicação ZMK e configuração Urchin | Obrigatório | [Repositório no commit revisado](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e) | Não é uma versão marcada do ZMK para SF32; não substitua esta adaptação pelo projeto principal sem migrá-la e validá-la |
 | Dependências do manifesto west | Revisões exatas resolvidas por `app/west.yml` no commit fixado | Zephyr, `hal_sifli`, CherryUSB e outros módulos | Obrigatório | [Manifesto west fixado](https://github.com/OpenSiFli/zmk/blob/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/west.yml) | Execute e preserve `west list`; não atualize dependências separadamente |
 | Ferramentas `west`/Zephyr e toolchain de compilação | Versões compatíveis com o manifesto fixado; registre versões instaladas e SO do host | Configura, compila e gera as imagens esquerda/direita | Obrigatório | [Documentação ZMK](https://zmk.dev/docs); [documentação Zephyr](https://docs.zephyrproject.org/) | Recompile ambas em espaço de trabalho limpo e preserve diretórios e hashes separados |
-| Host ZMK Studio | Versão de host/aplicação compatível, caso Studio esteja ativado na configuração selecionada | Caminho opcional de configuração/keymap | Opcional | [Documentação do ZMK Studio](https://zmk.dev/docs/features/studio) | A configuração revisada ativa Studio na metade esquerda/central; valide autorização e reversão antes do uso no produto |
+| Host ZMK Studio | Versão de host/aplicação compatível, caso o Studio esteja habilitado na configuração selecionada | Caminho opcional de configuração/keymap | Opcional | [Documentação do ZMK Studio](https://zmk.dev/docs/features/studio) | A configuração revisada habilita o Studio na metade esquerda/central; valide autorização e reversão antes do uso no produto |
 
 </div>
 
 ## Escolher uma configuração de referência suportada { #choose-a-supported-baseline }
+
 A base OpenSiFli analisada é o commit `fd4d5843065f`, de 27/05/2026. Ela inclui a atualização do shield Urchin e da configuração da placa disponível nesse commit, mas não é uma versão ZMK para SF32 identificada por tag. Fixe esse commit para a reprodução inicial ou registre e revise explicitamente qualquer commit mais recente.
 
 <div align="center"><em>Tabela: seleção da base ZMK no SF32</em></div>
@@ -102,13 +103,13 @@ A base OpenSiFli analisada é o commit `fd4d5843065f`, de 27/05/2026. Ela inclui
 
 | Elemento da base | Ponto de partida recomendado | Limitação importante |
 |:-----------------|:----------------------------|:--------------------|
-| Repositório derivado ZMK | OpenSiFli/zmk `fd4d5843065f` | Não a substitua por zmkfirmware/zmk; o projeto principal não inclui esta adaptação para SF32. |
-| Alvo da placa | `sf32lb52_devkit_lcd/sf32lb525uc6/zmk` | Variante do SF32LB52-DevKit-LCD específica para ZMK. |
-| Shields próximos de um produto | `urchin_sf32lb52_left` e `urchin_sf32lb52_right` | Os overlays definem mapas GPIO e funções diferentes; as imagens não são intercambiáveis. |
-| Shields de diagnóstico | `sf32lb52_test`, `sf32lb52_split_test_left/right` e `sf32lb52_zmkstudio_test` | São referências para o desenvolvimento da adaptação, não garantias de compatibilidade de produto. |
-| Função de cada metade | Esquerda = central; direita = periférica | USB e ZMK Studio são habilitados na configuração esquerda; não presuma simetria entre as metades. |
-| Manifesto de dependências | Zephyr personalizado `v4.3+sf32-zmk_fixes`, `hal_sifli` fixado e CherryUSB personalizado `zephyr-adapt` | Atualizar qualquer uma dessas dependências altera o limite de compatibilidade. |
-| Licença | O repositório derivado de ZMK e as adições identificadas para SF32 usam cabeçalhos/licença MIT | Revise separadamente os módulos, o hardware, os recursos do mapa de teclas e o conteúdo do produto. |
+| Repositório derivado ZMK | OpenSiFli/zmk `fd4d5843065f` | Não a substitua por zmkfirmware/zmk; o projeto principal não inclui esta adaptação para SF32 |
+| Alvo da placa | `sf32lb52_devkit_lcd/sf32lb525uc6/zmk` | Variante do SF32LB52-DevKit-LCD específica para ZMK |
+| Shields próximos de um produto | `urchin_sf32lb52_left` e `urchin_sf32lb52_right` | Os overlays definem mapas GPIO e funções diferentes; as imagens não são intercambiáveis |
+| Shields de diagnóstico | `sf32lb52_test`, `sf32lb52_split_test_left/right` e `sf32lb52_zmkstudio_test` | São referências para o desenvolvimento da adaptação, não garantias de compatibilidade de produto |
+| Função de cada metade | Esquerda = central; direita = periférica | USB e ZMK Studio são habilitados na configuração esquerda; não presuma simetria entre as metades |
+| Manifesto de dependências | Zephyr personalizado `v4.3+sf32-zmk_fixes`, `hal_sifli` fixado e CherryUSB personalizado `zephyr-adapt` | Atualizar qualquer uma dessas dependências altera o limite de compatibilidade |
+| Licença | O repositório derivado de ZMK e as adições identificadas para SF32 usam cabeçalhos/licença MIT | Revise separadamente os módulos, o hardware, os recursos do mapa de teclas e o conteúdo do produto |
 
 </div>
 
@@ -200,7 +201,7 @@ Trate cada falha como um domínio distinto: matriz e fiação física, comunica�
 | Perda de BLE com o host | Desative o Bluetooth do host, troque o perfil e reconecte | O estado do destino HID e do perfil fica visível; a reconexão e a remoção deliberada dos vínculos seguem um procedimento registrado |
 | Persistência das configurações | Altere uma configuração reversível, desligue e ligue as duas metades e restaure a base | O estado NVS esperado persiste; há um procedimento documentado de reset/recuperação para remover estados danificados ou indesejados |
 | Limite do ZMK Studio | Tente uma alteração autorizada, interrompa a sessão em uma configuração recuperável e restaure | Apenas a imagem central expõe o Studio; alterações inválidas/incompletas não inutilizam o teclado |
-| Ciclo de alimentação | Reinicie cada metade separadamente e depois ambas ao mesmo tempo, registrando corrente e despertar | Funções, comunicação entre metades, destino HID e estado de liberação das teclas se recuperam de forma previsível |
+| Ciclo de alimentação | Desligue e ligue cada metade separadamente e depois ambas ao mesmo tempo, registrando corrente e despertar | Funções, comunicação entre metades, destino HID e estado de liberação das teclas se recuperam de forma previsível |
 
 </div>
 
@@ -236,7 +237,7 @@ Trate cada falha como um domínio distinto: matriz e fiação física, comunica�
 
 </div>
 
-**Critério de saída do ponto de controle 4:** a alteração foi revisada, as imagens e configurações originais podem ser restauradas e todos os testes aplicáveis de matriz, camadas, divisão, USB, BLE, Studio, alimentação e recuperação foram aprovados.
+**Critério de saída do ponto de controle 4:** a alteração foi revisada, as imagens e configurações originais podem ser restauradas e todos os testes aplicáveis de matriz, camadas, comunicação entre metades, USB, BLE, Studio, alimentação e recuperação foram aprovados.
 
 ## Etapa 5 — Revisão de prontidão do produto { #stage-5-product-readiness-review }
 
@@ -245,7 +246,7 @@ Antes de projetar uma PCB de teclado personalizada ou um protótipo com bateria,
 - Quem mantém o repositório derivado ZMK da OpenSiFli, o ramo personalizado do Zephyr, a revisão do SiFli HAL, a adaptação CherryUSB e as futuras atualizações de segurança ou compatibilidade?
 - Quais recursos do projeto principal do ZMK foram realmente exercitados no SF32 e quais apenas existem na árvore herdada?
 - Como serão controlados na fabricação e na assistência a identificação das imagens esquerda/direita, a revisão da placa, o mapa de teclas, a configuração, os vínculos e o estado de restauração de fábrica?
-- Quais valores de corrente foram medidos em cada metade durante a operação ativa, em repouso conectado, desconectada e em suspensão, considerando a taxa de varredura, a reconexão e a proteção da bateria?
+- Quais são as correntes medidas de cada metade nos estados ativo, em repouso conectado, desconectado e em suspensão, incluindo a taxa de varredura, o comportamento de reconexão e a proteção da bateria?
 - Quais hosts, sistemas operacionais, controladores USB, pilhas Bluetooth, caminhos de despertar, casos de rollover e condições de interferência foram testados?
 - É possível recuperar o produto sem abri-lo ou descartá-lo após falha em atualização de dependência, alteração do Studio, gravação de configuração ou atualização em campo?
 - As licenças ZMK/Zephyr, os arquivos da PCB e do gabinete, o conteúdo do mapa de teclas, logotipos, fontes e configurações incluídas são compatíveis com a distribuição pretendida?
@@ -253,9 +254,11 @@ Antes de projetar uma PCB de teclado personalizada ou um protótipo com bateria,
 **Critério de saída do ponto de controle 5:** cada risco residual tem um responsável, evidências e uma decisão de tratamento; a equipe decidiu explicitamente prosseguir, adiar ou interromper.
 
 ## Transição para o projeto do produto { #handoff-to-product-design }
+
 Leve adiante o modelo exato do componente SF32 e sua memória, as funções e o transporte das metades, o mapa de linhas/colunas/entradas diretas, a orientação dos diodos, a conexão USB, as premissas de antena e gabinete, a política NVS/configurações, as interfaces de gravação e recuperação, o orçamento de energia por metade, os gabaritos de teste, a identificação das imagens e o manifesto fixado. Continue com [SF32LB52-DevKit-LCD](../sf32-products/devkits/SF32LB52-DevKit-LCD.md), os [limites da plataforma Zephyr](../develop/platforms/zephyr/overview.md), a [arquitetura Bluetooth](../learn/bluetooth/overview.md), o [guia de projeto de hardware do SF32LB52x](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) e [Projeto para produção](../hardware/design-for-production.md).
 
 ## Fontes de referência { #authoritative-sources }
+
 - [Repositório derivado OpenSiFli/zmk para SF32](https://github.com/OpenSiFli/zmk)
 - [Commit analisado do OpenSiFli/zmk](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e)
 - [Variante de placa ZMK SF32LB52 no commit revisado](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/sifli/sf32lb52_devkit_lcd)

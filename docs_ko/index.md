@@ -1,7 +1,7 @@
 ---
 icon: lucide/home
 title: "SF32 임베디드 개발 플랫폼"
-description: "SF32 초저전력 마이크로컨트롤러, 모듈, 개발 보드, SDK 워크플로, 양산에 바로 적용할 수 있는 하드웨어 설계 가이드를 다루는 오픈소스 문서입니다."
+description: "SF32 초저전력 마이크로컨트롤러, 모듈, 개발 보드, SDK 워크플로, 양산 대응 하드웨어 설계 가이드를 다루는 오픈소스 문서입니다."
 image: assets/home/sf32-chip-hero.png
 hide:
   - navigation
@@ -13,7 +13,7 @@ hide:
 <div class="uf-hero uf-spotlight-hero" markdown>
 <div class="uf-hero-content" markdown>
 
-<span class="uf-badge">오픈소스 · 실리콘에서 양산까지 · 임베디드 개발자를 위한</span>
+<span class="uf-badge">오픈소스 · 실리콘부터 양산까지 · 임베디드 개발자용</span>
 
 # 차세대 임베디드 디바이스를<br>만들어 보십시오 { #build-the-next-generationof-embedded-devices }
 
@@ -48,7 +48,7 @@ hide:
   <span class="uf-spotlight-item__art uf-spotlight-item__art--silicon" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">실리콘</span>
   <span class="uf-spotlight-item__title">SF32 제품군</span>
-  <span class="uf-spotlight-item__copy">초저전력, 연결형, 지능형 임베디드 제품을 위한 제품군입니다.</span>
+  <span class="uf-spotlight-item__copy">초저전력, 연결성, 지능을 갖춘 임베디드 제품을 위한 제품군입니다.</span>
 </a>
 
 <a class="uf-spotlight-item uf-spotlight-item--board" href="sf32-products/index.md" data-radius="250">
@@ -112,13 +112,13 @@ hide:
 
 ---
 
-## 왜 ***SF32***를 선택해야 할까요? { #why-choose-sf32 .uf-center-heading }
+## ***SF32***를 선택하는 이유 { #why-choose-sf32 .uf-center-heading }
 
 <div class="grid cards uf-why-grid" markdown>
 
 - :fontawesome-solid-microchip:{ .uf-icon-blue } **고성능**
 
-    코어 수와 기능은 디바이스마다 다릅니다. 제품군은 싱글 코어부터 트라이 코어 설계까지 이어지며, 여러 제품군에서 Cortex-M33 / STAR-MC1 프로세싱을 제공합니다. 캐시, FPU, MPU 지원 여부는 개별 칩과 SoC 구현에 따라 다르므로 부품별 문서를 확인하십시오. 일부 디바이스는 패키지 내장 PSRAM을 최대 64 MB까지 제공합니다.
+    코어 수와 기능은 디바이스마다 다릅니다. 제품군은 싱글 코어부터 트라이 코어 설계까지 이어지며, 여러 제품군에서 Cortex-M33 / STAR-MC1 프로세서를 사용합니다. 캐시, FPU, MPU 지원 여부는 개별 칩과 SoC 구현에 따라 다르므로 부품별 문서를 확인하십시오. 일부 디바이스는 패키지 내장 PSRAM을 최대 64 MB까지 제공합니다.
 
 - :fontawesome-brands-bluetooth:{ .uf-icon-blue } **Bluetooth 연결성**
 
@@ -134,7 +134,7 @@ hide:
 
 - :fontawesome-solid-brain:{ .uf-icon-amber } **AI 가속**
 
-    일부 SF32 디바이스는 TinyML 및 기타 엣지 추론 워크로드를 위한 신경망 가속기를 내장합니다.
+    일부 SF32 디바이스는 TinyML 및 기타 엣지 추론 워크로드를 위한 신경망 가속 기능을 내장합니다.
 
 - :fontawesome-solid-leaf:{ .uf-icon-green } **초저전력**
 
@@ -150,7 +150,7 @@ hide:
 
 - <span class="uf-mcu-chip">SF32LB52</span>
 
-    <span class="uf-mcu-headtext">**SF32LB52x**{ .uf-mcu-title } <span class="uf-mcu-sub">필수 기능 웨어러블 MCU</span></span>
+    <span class="uf-mcu-headtext">**SF32LB52x**{ .uf-mcu-title } <span class="uf-mcu-sub">에센셜 웨어러블 MCU</span></span>
 
     ---
 
@@ -166,7 +166,7 @@ hide:
 
 - <span class="uf-mcu-chip">SF32LB55</span>
 
-    <span class="uf-mcu-headtext">**SF32LB55x**{ .uf-mcu-title } <span class="uf-mcu-sub">주력 BLE 웨어러블 MCU</span></span>
+    <span class="uf-mcu-headtext">**SF32LB55x**{ .uf-mcu-title } <span class="uf-mcu-sub">메인스트림 BLE 웨어러블 MCU</span></span>
 
     ---
 
@@ -220,7 +220,7 @@ hide:
 <!--
 ---
 
-## Get Started in 5 Steps { .uf-center-heading }
+## 5단계로 시작하기 { .uf-center-heading }
 
 <div class="grid cards uf-steps" markdown>
 
@@ -228,41 +228,41 @@ hide:
 
     :fontawesome-solid-download:{ .uf-step-icon .uf-icon-blue }
 
-    **Install**
+    **설치**
 
-    Install the uSDK and development tools.
+    uSDK와 개발 도구를 설치합니다.
 
 - <span class="uf-step-num uf-step-2">2</span>
 
     :fontawesome-solid-code:{ .uf-step-icon .uf-icon-purple }
 
-    **Build**
+    **빌드**
 
-    Build examples or create your own application.
+    예제를 빌드하거나 애플리케이션을 직접 만듭니다.
 
 - <span class="uf-step-num uf-step-3">3</span>
 
     :fontawesome-solid-bolt:{ .uf-step-icon .uf-icon-pink }
 
-    **Flash**
+    **플래싱**
 
-    Flash the firmware to your board or device.
+    보드 또는 디바이스에 펌웨어를 기록합니다.
 
 - <span class="uf-step-num uf-step-4">4</span>
 
     :fontawesome-solid-bug:{ .uf-step-icon .uf-icon-amber }
 
-    **Debug**
+    **디버깅**
 
-    Debug with powerful tools and logging.
+    다양한 도구와 로그를 활용해 문제를 분석합니다.
 
 - <span class="uf-step-num uf-step-5">5</span>
 
     :fontawesome-solid-rocket:{ .uf-step-icon .uf-icon-green }
 
-    **Run & Ship**
+    **실행 및 출시**
 
-    Run, optimize, and deploy your product.
+    제품을 실행하고 최적화한 뒤 배포합니다.
 
 </div>
 
@@ -271,14 +271,14 @@ hide:
 <div class="uf-bottom-row" markdown>
 <div class="uf-bottom-col" markdown>
 
-## Featured Projects
+## 주요 프로젝트
 
 <div class="uf-project-list" markdown>
 
-- <span class="uf-proj-thumb uf-proj-blue">⌚</span> **Smart Watch Demo** — Complete smartwatch demo with UI
-- <span class="uf-proj-thumb uf-proj-blue">🎵</span> **Bluetooth Audio** — LE Audio broadcast and playback
-- <span class="uf-proj-thumb uf-proj-amber">🤖</span> **AI Gesture Recognition** — TinyML example with on-device AI
-- <span class="uf-proj-thumb uf-proj-green">💡</span> **Matter Light** — Matter over Thread lighting example
+- <span class="uf-proj-thumb uf-proj-blue">⌚</span> **스마트워치 데모** — UI를 포함한 스마트워치 데모
+- <span class="uf-proj-thumb uf-proj-blue">🎵</span> **Bluetooth 오디오** — LE Audio 브로드캐스트 및 재생
+- <span class="uf-proj-thumb uf-proj-amber">🤖</span> **AI 제스처 인식** — 온디바이스 AI를 활용하는 TinyML 예제
+- <span class="uf-proj-thumb uf-proj-green">💡</span> **Matter 조명** — Thread 기반 Matter 조명 예제
 
 </div>
 
@@ -287,39 +287,39 @@ hide:
 </div>
 <div class="uf-bottom-col" markdown>
 
-## Latest News
+## 최신 소식
 
-[**uSDK v2.1.0 Released**](blog/usdk-v210.md) <span class="uf-news-date">May 12, 2025</span>
-:   New graphics, AI SDK and performance improvements.
+[**uSDK v2.1.0 출시**](blog/usdk-v210.md) <span class="uf-news-date">May 12, 2025</span>
+:   그래픽 기능과 AI SDK가 추가되고 성능이 개선되었습니다.
 
-[**SF32LB58 Development Board Available**](blog/sf32lb58-devboard.md) <span class="uf-news-date">Apr 28, 2025</span>
-:   High-performance board for advanced applications.
+[**SF32LB58 개발 보드 출시**](blog/sf32lb58-devboard.md) <span class="uf-news-date">Apr 28, 2025</span>
+:   고급 애플리케이션을 위한 고성능 보드입니다.
 
-[**GUIX on SF32 – Getting Started Guide**](blog/guix-getting-started.md) <span class="uf-news-date">Apr 15, 2025</span>
-:   Build beautiful UI with the GUIX graphics library.
+[**SF32에서 GUIX 시작하기**](blog/guix-getting-started.md) <span class="uf-news-date">Apr 15, 2025</span>
+:   GUIX 그래픽 라이브러리로 UI를 구현합니다.
 
-[**Bluetooth LE Audio Examples Added**](blog/le-audio-examples.md) <span class="uf-news-date">Apr 02, 2025</span>
-:   New LE Audio broadcast and unicast examples.
+[**Bluetooth LE Audio 예제 추가**](blog/le-audio-examples.md) <span class="uf-news-date">Apr 02, 2025</span>
+:   LE Audio 브로드캐스트 및 유니캐스트 예제가 추가되었습니다.
 
 [모든 소식 보기 :material-arrow-right:](blog/index.md){ .uf-link-blue }
 
 </div>
 <div class="uf-bottom-col" markdown>
 
-## Join the Community
+## 커뮤니티 참여
 
-Connect with developers, ask questions, and share your projects.
+개발자들과 소통하고, 질문을 나누고, 프로젝트를 공유하십시오.
 
 <div class="uf-comm-list" markdown>
 
-- :fontawesome-brands-github:{ .uf-comm-icon-gray } **GitHub Discussions** — Ask questions, share ideas
-- :fontawesome-brands-discord:{ .uf-comm-icon-purple } **Discord Server** — Real-time chat with the community
-- :fontawesome-solid-comments:{ .uf-comm-icon-blue } **Developer Forum** — In-depth technical discussions
-- :fontawesome-brands-weixin:{ .uf-comm-icon-green } **WeChat Group** — Join the μForge developer community
+- :fontawesome-brands-github:{ .uf-comm-icon-gray } **GitHub Discussions** — 질문하고 아이디어를 나눌 수 있습니다.
+- :fontawesome-brands-discord:{ .uf-comm-icon-purple } **Discord 서버** — 커뮤니티와 실시간으로 대화할 수 있습니다.
+- :fontawesome-solid-comments:{ .uf-comm-icon-blue } **개발자 포럼** — 깊이 있는 기술 토론을 나눌 수 있습니다.
+- :fontawesome-brands-weixin:{ .uf-comm-icon-green } **WeChat 그룹** — μForge 개발자 커뮤니티에 참여할 수 있습니다.
 
 </div>
 
-[Community Overview :material-arrow-right:](community/index.md){ .uf-link-blue }
+[커뮤니티 개요 :material-arrow-right:](community/index.md){ .uf-link-blue }
 
 </div>
 </div>

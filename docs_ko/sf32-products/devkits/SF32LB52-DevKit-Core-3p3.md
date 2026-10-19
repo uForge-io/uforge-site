@@ -12,12 +12,12 @@ tags:
 
 SF32LB52-DevKit-Core-3p3는 SF32LB52x 칩을 직접 평가하기 위한 소형 개발 보드입니다. 보드의 점퍼로 MCU 전원을 1.8 V 또는 3.3 V 중에서 선택합니다. 주요 MCU 신호는 에지 헤더로 노출되며, 캐슬레이션 스루홀에는 납땜 없이 핀 헤더를 끼울 수 있습니다. GPIO, 직렬 버스, 디스플레이 신호, 오디오, ADC, PWM, 전원 레일에 직접 접근해야 하는 엔지니어에게 적합한 보드입니다.
 
-크기는 30.88 mm × 68 mm로, 벤치 프로토타입에 쓰기에 작으면서도 SF32LB52x 하드웨어 및 펌웨어 브링업에 실용적인 인터페이스를 제공합니다.
+크기는 30.88 mm × 68 mm로, 벤치 프로토타입에 적합한 소형 보드이면서도 SF32LB52x 하드웨어와 펌웨어를 초기 구동·검증하는 데 필요한 인터페이스를 제공합니다.
 
-![SF32LB52-DevKit-Core-3p3 front view](assets/sf32lb52x/Core-3p3_Front_look.png){ width="50%" loading="lazy" }
+![SF32LB52-DevKit-Core-3p3 전면](assets/sf32lb52x/Core-3p3_Front_look.png){ width="50%" loading="lazy" }
 <div align="center"><em>SF32LB52-DevKit-Core-3p3 — 전면</em></div>
 
-![SF32LB52-DevKit-Core-3p3 back view](assets/sf32lb52x/Core-3p3_Back_look.png){ width="50%" loading="lazy" }
+![SF32LB52-DevKit-Core-3p3 후면](assets/sf32lb52x/Core-3p3_Back_look.png){ width="50%" loading="lazy" }
 <div align="center"><em>SF32LB52-DevKit-Core-3p3 — 후면</em></div>
 
 ## 보드 변형 { #board-variants }
@@ -36,7 +36,7 @@ SF32LB52-DevKit-Core-3p3는 SF32LB52x 칩을 직접 평가하기 위한 소형 �
 
 </div>
 
-소형 Bluetooth, 제어, 간단한 HMI 작업에는 NOR 전용 변형(variant)을 사용하십시오. 애플리케이션에 더 큰 그래픽 에셋, 프레임버퍼, 파일 시스템 또는 애플리케이션 저장 공간이 필요하면 PSRAM + 외장 NOR 변형을 사용하십시오.
+소형 Bluetooth, 제어, 간단한 HMI 애플리케이션에는 NOR만 탑재한 변형을 사용하십시오. 더 큰 그래픽 에셋, 프레임버퍼, 파일 시스템 또는 애플리케이션 저장 공간이 필요하면 PSRAM과 외장 NOR를 함께 탑재한 변형을 사용하십시오.
 
 **출처 간 불일치 — 선택하기 전에 보드 라벨을 확인하십시오:** SiFli의 [상세 Core-3p3 보드 가이드](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Core-3p3.html)는 SF32LB52JUD6 구성을 `R16N16 V1.0.0`(현재 버전)으로 부르지만, [개발 보드 모델 가이드](https://wiki.sifli.com/en/board/devkit_guide.html)는 동일한 JUD6 / 16 MB PSRAM / 16 MB NOR 구성을 `N16R16`으로 나열합니다. 상세 가이드의 리비전 정보 행에는 EUB6의 코패키지 PSRAM이 8 MB라고 되어 있으나, 같은 가이드의 기능 목록과 변형 표에는 4 MB라고 되어 있습니다. SiFli의 [SF32LB52 개요](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52/SF32LB52-Overview-B3.md)도 EUB6를 4 MB로 명시하므로 이 문서에서는 4 MB를 사용합니다. 정확한 보드 접미사가 중요한 경우에는 보드 마킹과 이에 대응하는 회로도/BOM을 확인하십시오.
 
@@ -61,13 +61,13 @@ SF32LB52-DevKit-Core-3p3는 SF32LB52x 칩을 직접 평가하기 위한 소형 �
 
 SF32LB52x 신호에 가장 직접적으로 접근해야 한다면 SF32LB52-DevKit-Core-3p3를 선택하십시오.
 
-- 사용자 정의 도터보드 또는 센서 보드 브링업
+- 사용자 정의 도터보드 또는 센서 보드의 초기 구동 및 검증
 - SF32LB52x 메모리 변형 평가
 - LCD, 오디오, USB, GPIO 기능 프로토타이핑
 - 개별 전원 레일의 전류 측정
 - 소형 제품 PCB를 설계하기 전에 펌웨어 검증
 
-더 작은 캐슬레이션 모듈 형태의 보드가 필요하면 [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md)를 사용하십시오. 오디오 앰프, TF 카드 슬롯, 배터리 충전기를 갖춘 완성형 디스플레이 보드가 필요하면 [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md)를 사용하십시오.
+캐슬레이션 패드가 있는 더 작은 보드가 필요하면 [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md)를 사용하십시오. 오디오 앰프, TF 카드 슬롯, 배터리 충전기를 갖춘 디스플레이 보드가 필요하면 [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md)를 사용하십시오.
 
 ## 전원 { #power }
 
@@ -77,13 +77,13 @@ SF32LB52x 신호에 가장 직접적으로 접근해야 한다면 SF32LB52-DevKi
 - USB가 연결되지 않은 경우, 에지 헤더의 5 V 및 GND 핀을 통한 5 V 입력
 - USB가 연결되지 않은 경우, 에지 헤더의 3.3 V 및 GND 핀을 통한 3.3 V 입력. 외부 벤치 전원 공급 장치를 사용할 수 있습니다.
 
-별도의 보드 점퍼로 MCU 전원을 1.8 V와 3.3 V 중에서 선택합니다. 이 설정은 외부용 1.8 V 및 3.3 V 헤더 전원 핀과는 별개입니다. 점퍼를 변경하거나 외부 회로에 전원을 공급하기 전에 해당 보드 리비전의 핀 배치도와 회로도를 확인하십시오.
+별도의 보드 점퍼로 MCU 전원을 1.8 V와 3.3 V 중에서 선택합니다. 이 설정은 헤더의 외부 1.8 V 및 3.3 V 전원 핀과는 별개입니다. 점퍼를 변경하거나 외부 회로에 전원을 공급하기 전에 해당 보드 리비전의 핀 배치도와 회로도를 확인하십시오.
 
 단일 레일 전류를 측정하려면 보드의 측정 지점에서 측정 대상 레일에 직렬로 전류계를 연결하십시오.
 
 USB Type-C가 연결되면 이 보드는 선택된 헤더 핀을 통해 3.3 V, 1.8 V, 5 V 출력도 제공할 수 있습니다. 외부 회로를 연결하기 전에 필요한 방향을 확인하십시오.
 
-보드에는 전원 스위치가 있습니다. CH340N의 RTS# 신호로 보드 인에이블을 제어할 수 있으므로, 플래싱 또는 디버그 작업 중에 호스트 툴이 MCU를 리셋할 수 있습니다.
+보드에는 전원 스위치가 있습니다. CH340N의 RTS# 신호로 보드 활성화를 제어할 수 있으므로, 플래싱이나 디버그 중 호스트 툴에서 MCU를 리셋할 수 있습니다.
 
 ## 플래싱 및 디버그 { #download-and-debug }
 
@@ -95,14 +95,14 @@ USB Type-C가 연결되면 이 보드는 선택된 헤더 핀을 통해 3.3 V, 1
 
 ## 사용자 컨트롤 { #user-controls }
 
-<div align="center"><em>사용자 컨트롤 신호</em></div>
+<div align="center"><em>사용자 조작 신호</em></div>
 
 <div align="center" markdown>
 
 | 기능 | GPIO | 동작 |
 | :--- | :--- | :--- |
 | LED | PA32 | 액티브 하이 |
-| KEY1 | PA34 | 액티브 하이, 10초 길게 누르면 리셋 지원 |
+| KEY1 | PA34 | 액티브 하이, 10초간 길게 누르면 리셋 지원 |
 | KEY2 | PA33 | 액티브 하이 |
 
 </div>
@@ -111,7 +111,7 @@ USB Type-C가 연결되면 이 보드는 선택된 헤더 핀을 통해 3.3 V, 1
 
 이 보드는 0.5 mm 피치, 플립업 래치, 하단 접점을 갖춘 수직형 16핀 FPC 커넥터를 통해 DDR 모드 QSPI를 포함한 SPI, DSPI, Quad-SPI LCD 인터페이스를 지원합니다. 이 커넥터에는 LCD 리셋, 백라이트 PWM, TE, 칩 셀렉트, 클럭, 데이터 라인 4개, I2C 터치 신호가 연결됩니다.
 
-![FPC adapter cable](assets/sf32lb52x/FPC-22P.png){ loading="lazy" }
+![FPC 어댑터 케이블](assets/sf32lb52x/FPC-22P.png){ loading="lazy" }
 <div align="center"><em>FPC 어댑터 케이블</em></div>
 
 ### 16핀 LCD FPC 신호 맵 { #16-pin-lcd-fpc-signal-map }
@@ -141,13 +141,13 @@ USB Type-C가 연결되면 이 보드는 선택된 헤더 핀을 통해 3.3 V, 1
 
 </div>
 
-SiFli의 중국어 보드 가이드에는 1.85인치 AMOLED 모듈이 16핀 FPC 케이블로 직접 연결된다고 되어 있습니다. 반면 영어 가이드는 FPC-22p 케이블을 명시하며, 그림 파일 이름도 `FPC-22P`입니다. 보드 커넥터 자체는 16핀입니다. 출처 자료만으로는 이 불일치를 해소할 수 없으므로, 디스플레이 모듈을 연결하기 전에 케이블 핀 수와 핀 매핑을 디스플레이 모듈 자료와 대조하여 확인하십시오.
+SiFli의 중국어 보드 가이드는 1.85인치 AMOLED 모듈이 16핀 FPC 케이블로 직접 연결된다고 설명합니다. 반면 영어 가이드는 FPC-22p 케이블을 명시하고 그림 파일 이름도 `FPC-22P`로 표기합니다. 보드 커넥터 자체는 16핀입니다. 출처만으로는 이 불일치를 해소할 수 없으므로, 디스플레이를 연결하기 전에 케이블의 핀 수와 핀 배치를 디스플레이 모듈 자료와 대조하십시오.
 
 ## 헤더 신호 요약 { #header-signal-summary }
 
 이 보드는 24핀 에지 헤더 2개를 노출합니다. 첫 번째 쪽은 범용 GPIO, SPI2, USB, GPADC, 전원에 중점을 두고, 두 번째 쪽은 LCD, 터치, 디버그 UART, 오디오, 전원에 중점을 둡니다.
 
-![SF32LB52-DevKit-Core-3p3 pinout](assets/sf32lb52x/SF32LB52-DevKit-Core-3p3-T-pinout.svg){ loading="lazy" }
+![SF32LB52-DevKit-Core-3p3 핀 배치](assets/sf32lb52x/SF32LB52-DevKit-Core-3p3-T-pinout.svg){ loading="lazy" }
 <div align="center"><em>SF32LB52-DevKit-Core-3p3 핀 배치도</em></div>
 
 ### 범용 I/O 헤더 { #general-io-header }
@@ -161,7 +161,7 @@ SiFli의 중국어 보드 가이드에는 1.85인치 AMOLED 모듈이 16핀 FPC 
 | 2-9 | PA44..PA37 | UART, I2C, GPTIM, SPI2, 웨이크업 입력 |
 | 10-11 | PA36 / PA35 | USB DM / USB DP, UART, I2C, GPTIM |
 | 12-15 | PA31..PA28 | GPADC3..0, SPI1, I2S1, UART, I2C |
-| 17 | 3.3V | USB 전원 상태에 따라 3.3V 입력 또는 출력 |
+| 17 | 3.3V | USB 전원 상태에 따라 3.3 V 입력 또는 출력 |
 | 18-21 | PA27..PA24 | 웨이크업 입력, SPI1, I2S1 |
 | 22 | PA34 | UART, I2C, GPTIM, GPADC6, WKUP10 |
 | 23-24 | PA33 / PA32 | UART, I2C, GPTIM, GPADC5 / GPADC4 |
@@ -178,11 +178,11 @@ SiFli의 중국어 보드 가이드에는 1.85인치 AMOLED 모듈이 16핀 FPC 
 | :--- | :--- | :--- |
 | 2-11 | PA00..PA09 | LCD, 터치, PDM, I2S, UART, I2C |
 | 12-15 | MIC_ADC, MIC_BIAS, DACP, DACN | 아날로그 마이크 및 오디오 출력 |
-| 17 | 1.8V | USB 전원 상태에 따라 1.8V 입력 또는 출력 |
+| 17 | 1.8V | USB 전원 상태에 따라 1.8 V 입력 또는 출력 |
 | 18-20 | PA10, PA11, PA20 | PA10: CTP_RST, PA11: CTP_SDA, PA20: CTP_SCL. 모두 UART, I2C, GPTIM 지원 |
 | 21 | PA21 | UART, I2C, GPTIM |
 | 22-23 | PA18 / PA19 | UART0 RX/TX, SWDIO/SWCLK, 플래싱/디버그 |
-| 24 | 5V | USB 전원 상태에 따라 5V 입력 또는 출력 |
+| 24 | 5V | USB 전원 상태에 따라 5 V 입력 또는 출력 |
 
 </div>
 
@@ -230,10 +230,10 @@ SiFli SDK 빌드 구성은 `scons --board=<board_name>`과 함께 다음의 정�
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-microchip: __[SF32LB52x Chip Introduction]__
-- :fontawesome-solid-file-lines: __[SF32LB52x Hardware Design Guide]__
-- :fontawesome-brands-github: __[Original SiFli Wiki Article]__
-- :fontawesome-solid-download: __[Design Package]__
-- :fontawesome-solid-cart-shopping: __[Buy Samples]__
+- :fontawesome-solid-microchip: __[SF32LB52x 칩 소개][SF32LB52x Chip Introduction]__
+- :fontawesome-solid-file-lines: __[SF32LB52x 하드웨어 설계 가이드][SF32LB52x Hardware Design Guide]__
+- :fontawesome-brands-github: __[SiFli 위키 원문][Original SiFli Wiki Article]__
+- :fontawesome-solid-download: __[설계 패키지][Design Package]__
+- :fontawesome-solid-cart-shopping: __[샘플 구매][Buy Samples]__
 
 </div>

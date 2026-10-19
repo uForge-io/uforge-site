@@ -175,11 +175,11 @@ Unterscheiden Sie die beiden Signalwege konzeptionell, auch wenn sie gleichzeiti
 
 In vielen Produkten werden beide Signalwege kombiniert: etwa indem ein lokales Mikrofon Audio erfasst und dieses über Bluetooth gestreamt wird oder indem empfangenes Bluetooth-Audio im Audio Server mit einem lokalen Benachrichtigungston gemischt wird. Legen Sie ausdrücklich fest, wer die Puffer verwaltet und wie gemischt wird, wenn beide Signalwege gleichzeitig aktiv sind.
 
-## Audio-Checkliste auf Platinenebene { #board-level-audio-checklist }
+## Audio-Checkliste auf Boardebene { #board-level-audio-checklist }
 
 Firmware kann schlechtes analoges Design nicht vollständig verbergen. Prüfen Sie diese Punkte bei Schaltplan- und Leiterplattenarbeit:
 
-<div align="center"><em>Tabelle: Audio-Checkliste auf Platinenebene</em></div>
+<div align="center"><em>Tabelle: Audio-Checkliste auf Boardebene</em></div>
 
 <div align="center" markdown>
 

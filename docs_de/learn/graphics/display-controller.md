@@ -17,7 +17,7 @@ Der obige Link ist auf einen bestimmten SiFli-SDK-Commit festgelegt. Er dokument
 
 Den vollständigen Ablauf von der Ressource bis zum Panel finden Sie unter [Grafikübersicht](overview.md#sf32-graphics-flow). Dieser Artikel konzentriert sich auf den Controller, die Panel-Anbindung und die Treiberintegration.
 
-Lesen Sie diese Seite, wenn Sie eine Panel-Schnittstelle auswählen, einen LVGL-Flush-Pfad definieren oder ein neues Panel auf der Hardware in Betrieb nehmen. Sie trennt die Controller-Ausgabearbeit von der Asset-Dekodierung und der Pixelzusammensetzung, sodass Display-Probleme auf der richtigen Ebene isoliert werden können.
+Lesen Sie diese Seite, wenn Sie eine Panel-Schnittstelle auswählen, einen LVGL-Flush-Pfad definieren oder ein neues Panel auf der Hardware in Betrieb nehmen. Sie trennt die Ausgabeaufgaben des Controllers von der Asset-Dekodierung und der Pixelzusammensetzung, sodass Display-Probleme auf der richtigen Ebene isoliert werden können.
 
 ## Auswahl der Display-Schnittstelle { #select-the-display-interface }
 
@@ -46,7 +46,7 @@ Zum Beispiel kann ein kleines SPI/QSPI-Panel Teilaktualisierungen bevorzugen, w�
 
 ## Schnittstellenmatrix pro Gerät { #per-device-interface-matrix }
 
-Die folgende Matrix unterstützt die Auswahl einer Familie; sie ist keine Pin-Zuordnungstabelle. Sie fasst die für die jeweilige SF32-Familie oder Siliziumvariante dokumentierten Display-Schnittstellen zusammen. Ein Strich bedeutet, dass die Dokumentation die Schnittstelle für diese Zeile nicht aufführt. Ein GPIO-gesteuerter externer Controller oder eine boardspezifische Implementierung ist damit nicht ausgeschlossen. Prüfen Sie vor dem Schaltplanabschluss immer den genauen Bestellcode, das Gehäuse, die Pin-Multiplexierung, die SDK-Version und den Panel-Treiber.
+Die folgende Matrix unterstützt die Auswahl einer Familie; sie ist keine Pin-Zuordnungstabelle. Sie fasst die für die jeweilige SF32-Familie oder Siliziumvariante dokumentierten Display-Schnittstellen zusammen. Ein Strich bedeutet, dass die Dokumentation die Schnittstelle für diese Zeile nicht aufführt. Ein GPIO-gesteuerter externer Controller oder eine boardspezifische Implementierung ist damit nicht ausgeschlossen. Prüfen Sie vor dem Schaltplanabschluss immer die genaue Bestellnummer, das Gehäuse, die Pin-Multiplexierung, die SDK-Version und den Panel-Treiber.
 
 <div align="center"><em>SF32-Display-Schnittstellenmatrix</em></div>
 
@@ -54,7 +54,7 @@ Die folgende Matrix unterstützt die Auswahl einer Familie; sie ist keine Pin-Zu
 
 | SF32-Familie / Variante | Dokumentierte LCD-/Panel-Schnittstellen | Gehäuse- oder Variantenbeschränkung | Praktische Auswahlrichtung |
 |:---|:---|:---|:---|
-| **SF32LB52x** | 3-/4-Draht-SPI, Dual-SPI, Quad-SPI, MCU/8080 (MIPI DBI), serielles/paralleles JDI; EPD über SPI-Controller; der Hardwareleitfaden für 52B/D/E/G/J dokumentiert zudem eine 8-Bit-Parallel-EPD-Signalschnittstelle | Die aufgeführten 52x-Modelle verwenden QFN68L. Der Hardwareleitfaden führt Signalbelegung und TPS-PMIC-Steuerung für 52B/D/E/G/J auf; daraus folgt jedoch keine Unterstützung des LCDC-Direktmodus für EPD. Treiber und genaue Variante prüfen. | Geeignet für kompakte SPI/QSPI-, 8080- und JDI-Designs; bei parallelem EPD GPIO-, Timing- und TPS-Stromversorgungssteuerung für die gewählte Variante verifizieren. |
+| **SF32LB52x** | 3-/4-Draht-SPI, Dual-SPI, Quad-SPI, MCU/8080 (MIPI DBI), serielles/paralleles JDI; SPI-angebundenes EPD; der Hardwareleitfaden für 52B/D/E/G/J dokumentiert zudem eine 8-Bit-Parallel-EPD-Signalschnittstelle | Die aufgeführten 52x-Modelle verwenden QFN68L. Der Hardwareleitfaden führt Signalbelegung und TPS-PMIC-Steuerung für 52B/D/E/G/J auf; daraus folgt jedoch keine Unterstützung des LCDC-Direktmodus für EPD. Treiber und genaue Variante prüfen. | Geeignet für kompakte SPI/QSPI-, 8080- und JDI-Designs; bei parallelem EPD GPIO-, Timing- und TPS-Stromversorgungssteuerung für die gewählte Variante verifizieren. |
 | **SF32LB55x** | 3-/4-Draht-SPI, Dual-SPI, Quad-SPI, MCU/8080, DPI/RGB, serielles/paralleles JDI, MIPI-DSI-Kommandomodus | Die dokumentierte MIPI-DSI-Schnittstelle mit 2 Daten-Lanes ist bei BGA145/169-Gehäusen verfügbar; JDI und der Dual-Display-Betrieb über MIPI DSI + SPI/DSPI sind nur für 557VD3A6 aufgeführt. Der Kommandomodus erfordert einen Panel-Controller mit internem SRAM/GRAM. | Wearables und andere vernetzte Geräte mit Display, kompatiblem BGA-Gehäuse und MIPI-Panel im Kommandomodus. |
 | **SF32LB56xU** | 3-/4-Draht-SPI, Dual-SPI, Quad-SPI, serielles JDI | Die aufgeführten U-Varianten verwenden QFN68L; genaue Bestellnummer und Pin-Multiplexierung prüfen. | Geeignet für kompakte serielle Panel-Designs, bei denen QSPI-Bandbreite und eine geringere Pin-Anzahl wichtig sind. |
 | **SF32LB56xV** | 3-/4-Draht-SPI, Dual-SPI, Quad-SPI, DBI 8080, DPI/RGB, serielles/paralleles JDI | Die aufgeführten V-Varianten verwenden WBBGA175 (BGA175 in der Modellübersicht); benötigte Pins und Platinenrouting für die genaue Bestellnummer prüfen. | Geeignet für höhere Auflösungen oder Bildwiederholraten und für Designs mit 8080, DPI/RGB oder parallelem JDI. |
@@ -71,7 +71,7 @@ Die beiden SF32LB52x-Hardwareleitfäden widersprechen sich bei JDI: In den Über
 
 Bei SF32LB52x ist zwischen der dokumentierten 8-Bit-Parallel-EPD-Signalschnittstelle und dem LCDC-Direktmodus für EPD zu unterscheiden. Der Hardwareleitfaden für 52B/D/E/G/J führt parallele EPD-Signale und die TPS-PMIC-Steuerung auf; die Versionshinweise des SiFli-SDK v2.5.1 dokumentieren die direkte LCDC-EPD-Ansteuerung dagegen für SF32LB57x. Leiten Sie daraus nicht ab, dass ein 52x-Design denselben LCDC-Direktmodus wie 57x verwenden kann. Treiber und Timing-Implementierung für die konkrete Variante prüfen.
 
-Quellen zu den Schnittstellen: [SiFli-Chipmodellübersicht](https://wiki.sifli.com/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html), [SF32LB52x-Hardwareleitfaden für batteriegespeiste Varianten](https://wiki.sifli.com/hardware/SF32LB520-3-5-7-HW-Application.html), [52B/D/E/G/J-Hardwareleitfaden](https://wiki.sifli.com/hardware/SF32LB52B-E-G-J-HW-Application.html), [SF32LB55x](https://wiki.sifli.com/hardware/SF32LB55x-HW-Application.html), [SF32LB56xU](https://wiki.sifli.com/hardware/SF32LB56xU-HW-Application.html), [SF32LB56xV](https://wiki.sifli.com/hardware/SF32LB56xV-HW-Application.html), [SF32LB58x](https://wiki.sifli.com/hardware/SF32LB58x-HW-Application.html) und [SF32LB57x-SDK-Unterstützung](https://github.com/OpenSiFli/SiFli-SDK/releases/tag/v2.5.1).
+Quellen zu den Schnittstellen: [SiFli-Chipmodellübersicht](https://wiki.sifli.com/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html), [SF32LB52x-Hardwareleitfaden für akkubetriebene Varianten](https://wiki.sifli.com/hardware/SF32LB520-3-5-7-HW-Application.html), [52B/D/E/G/J-Hardwareleitfaden](https://wiki.sifli.com/hardware/SF32LB52B-E-G-J-HW-Application.html), [SF32LB55x](https://wiki.sifli.com/hardware/SF32LB55x-HW-Application.html), [SF32LB56xU](https://wiki.sifli.com/hardware/SF32LB56xU-HW-Application.html), [SF32LB56xV](https://wiki.sifli.com/hardware/SF32LB56xV-HW-Application.html), [SF32LB58x](https://wiki.sifli.com/hardware/SF32LB58x-HW-Application.html) und [SF32LB57x-SDK-Unterstützung](https://github.com/OpenSiFli/SiFli-SDK/releases/tag/v2.5.1).
 
 ## Controller, Puffer und Flush-Pfade { #controller-buffers-and-flush-paths }
 
@@ -135,11 +135,11 @@ Behandeln Sie jede Stufe als separate Grenze. Das vermeidet, Panel-Befehle, LVGL
 
 | Symptom | Zuerst zu prüfende Grenze | Gezielter Test | Wahrscheinliche Ursachenklasse |
 |:---|:---|:---|:---|
-| Panel bleibt dunkel | Stromversorgung, Reset und Panel-Initialisierung | Versorgungsschienen und Reset messen, die Initialisierung des Herstellers ausführen und ein einfarbiges Testbild anzeigen. | Einschaltsequenz, Reset-Polarität, Initialisierungsbefehle oder physische Verbindung der Schnittstelle. |
+| Panel bleibt leer | Stromversorgung, Reset und Panel-Initialisierung | Versorgungsschienen und Reset messen, die Initialisierung des Herstellers ausführen und ein einfarbiges Testbild anzeigen. | Einschaltsequenz, Reset-Polarität, Initialisierungsbefehle oder physische Verbindung der Schnittstelle. |
 | Einfarbige Testbilder funktionieren, aber die Farben stimmen nicht | Pixelformat zwischen Renderer und Panel | Testbalken in Rot, Grün, Blau, Schwarz und Weiß anzeigen. | RGB-/BGR-Reihenfolge, Byte-Reihenfolge, Farbtiefe oder Formatkonvertierung. |
 | Bild ist verschoben, abgeschnitten oder zeigt Tearing | Adressierung und Synchronisation | Ein Raster zeichnen, dann einen festen Aktualisierungsbereich wiederholt testen. | Fensterkoordinaten, Stride, Panel-Timing, Pufferwiederverwendung oder unvollständige DMA-Synchronisation. |
-| Statische UI funktioniert, aber Animationen ruckeln | Rendering-, Übertragungs- und Speicherpfad | Renderzeit und Übertragungsdauer getrennt messen. | Zu große Neuzeichnungsbereiche, PSRAM-Konkurrenz, langsame Schnittstelle oder ungeeignete Pufferstrategie. |
-| Artefakte treten nur nach Schlaf/Aufwachen auf | Übergang des Stromzustands | Fill-/Raster-Test nach jedem unterstützten Display-Aus- und Aufwach-Pfad erneut ausführen. | Verlorener Panel-Zustand, ausgelassener Reset/Init, Versorgungssequenzierung oder veralteter Cache-/Pufferzustand. |
+| Statische UI funktioniert, aber Animationen ruckeln | Rendering-, Übertragungs- und Speicherpfad | Renderzeit und Dauer bis zum Flush-Abschluss getrennt messen. | Zu große Neuzeichnungsbereiche, PSRAM-Konkurrenz, langsame Schnittstelle oder ungeeignete Pufferstrategie. |
+| Artefakte treten nur nach Schlaf/Aufwachen auf | Übergang des Stromzustands | Test mit einfarbigen Bildern und Raster nach jedem unterstützten Display-Aus- und Aufwach-Pfad erneut ausführen. | Verlorener Panel-Zustand, ausgelassener Reset/Init, Versorgungssequenzierung oder veralteter Cache-/Pufferzustand. |
 | Ein Feature schlägt nur bei Aktivierung fehl | Spezifischer optionaler Pfad | DMA, Teilaktualisierung, ePicasso oder TurboPixel einzeln aktivieren. | Nicht unterstützte Konfiguration, Ausrichtungs-/Cache-Regel oder Treiberintegrationsfehler. |
 
 </div>
@@ -156,7 +156,7 @@ Planen Sie die kontinuierliche Scanout-Bandbreite zusammen mit CPU-, ePicasso-, 
 
 ### MIPI-DSI-Panels { #mipi-dsi-panels }
 
-Wählen Sie den Panel-Modus, bevor Sie das Gerät festlegen. **SF32LB55x unterstützt nur den MIPI-DSI-Kommandomodus**, sodass der Panel-Controller internes SRAM/GRAM zum Halten des aktualisierten Bilds bereitstellen muss. **SF32LB58x unterstützt sowohl Kommando- als auch Videomodus**: Kommandomodus-Panels benötigen Controller-RAM, während der Videomodus einen RAM-losen Panel-Controller aus dem kontinuierlichen Pixelstrom ansteuern kann. Validieren Sie die Initialisierung frühzeitig, testen Sie Energiesparzustände und Aufwach-Timing und halten Sie die erforderliche Datenrate unter dem nutzbaren Schnittstellendurchsatz. Berücksichtigen Sie dabei Protokoll-Overhead, Timing-Vorgaben und weiteren Speicherverkehr.
+Wählen Sie den Panel-Modus, bevor Sie sich auf das Bauteil festlegen. **SF32LB55x unterstützt nur den MIPI-DSI-Kommandomodus**, sodass der Panel-Controller internes SRAM/GRAM zum Halten des aktualisierten Bilds bereitstellen muss. **SF32LB58x unterstützt sowohl Kommando- als auch Videomodus**: Kommandomodus-Panels benötigen Controller-RAM, während der Videomodus einen RAM-losen Panel-Controller aus dem kontinuierlichen Pixelstrom ansteuern kann. Validieren Sie die Initialisierung frühzeitig, testen Sie Energiesparzustände und Aufwach-Timing und halten Sie die erforderliche Datenrate unter dem nutzbaren Schnittstellendurchsatz. Berücksichtigen Sie dabei Protokoll-Overhead, Timing-Vorgaben und weiteren Speicherverkehr.
 
 ### EPD-Displays { #epd-displays }
 
@@ -177,7 +177,7 @@ Bevor Sie den Display-Pfad als abgeschlossen betrachten, dokumentieren Sie die E
 - Gemessene Render-Zeit, Übertragungszeit, Spitzen-/Durchschnitts-PSRAM-Verkehr, sofern relevant, und Stromaufnahme für repräsentative UI-Zustände.
 - Testergebnisse für Schlaf, Display-Aus, Aufwachen und Wiederherstellung, einschließlich des Verhaltens nach einer fehlgeschlagenen oder unterbrochenen Übertragung.
 
-Diese Dokumentation macht die Display-Unterstützung von einem einmaligen Inbetriebnahmeergebnis zu einer wiederholbaren Produktintegration. Validieren Sie sie erneut, wann immer sich Panel, SDK, Speicherlayout, Pixelformat oder Display-Treiber ändern.
+Diese Aufzeichnung macht die Display-Unterstützung von einem einmaligen Inbetriebnahmeergebnis zu einer wiederholbaren Produktintegration. Validieren Sie sie erneut, wann immer sich Panel, SDK, Speicherlayout, Pixelformat oder Display-Treiber ändern.
 
 ## Wichtige Erkenntnisse { #key-takeaways }
 

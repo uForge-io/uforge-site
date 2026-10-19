@@ -16,7 +16,7 @@ Las funciones de IA disponibles dependen del dispositivo SF32 y del soporte que 
 
 La información sobre las operaciones CMSIS-NN y los recursos NNACC por dispositivo que se presenta a continuación se basa en la documentación de SiFli-SDK v2.5.1. La guía NNACC de esa versión especifica recursos para SF32LB55x/56x/58x, pero no establece su disponibilidad en SF32LB52x ni SF32LB57x; esa omisión no demuestra que carezcan de NNACC. Las comprobaciones de ventanas de direcciones, el comportamiento de espera y la configuración de GC032A son observaciones de las fuentes HAL o del controlador de esa versión, no garantías universales para todas las revisiones de silicio ni versiones del SDK. La guía y los ejemplos NNACC citados no demuestran que exista un conversor de modelos o un entorno de ejecución de grafos completo, una alternativa automática en CPU ni compatibilidad de captura de cámara para todos los componentes y placas. Antes de cerrar el diseño, verifique la revisión y configuración exactas del SDK, la revisión del chip, el entorno de inferencia y la placa.
 
-Consulte esta página para determinar si una función de IA local encaja en el dispositivo SF32 elegido y cómo repartir el proceso de inferencia entre los sensores, la CPU, la memoria y el acelerador. Para integrar y desplegar modelos, consulte primero el [Resumen de IA](overview.md).
+Consulte esta página para determinar si una función de IA local encaja en el dispositivo SF32 elegido y cómo repartir la cadena de inferencia entre los sensores, la CPU, la memoria y el acelerador. Para integrar y desplegar modelos, consulte primero el [Resumen de IA](overview.md).
 
 ## Por qué importa la IA en el dispositivo { #why-on-device-ai-matters }
 
@@ -28,13 +28,13 @@ Muchos productos embebidos necesitan ofrecer funciones inteligentes sin transmit
 - Mejor comportamiento sin conexión, porque las funciones principales pueden funcionar sin acceso a la red.
 - Menor potencia media solo si la función completa consume menos energía durante el mismo intervalo de uso, con precisión y cobertura de detección equivalentes e incluida la sobrecarga de delegar operaciones al acelerador.
 
-En los dispositivos portátiles y AIoT, estos beneficios son concretos. Un reloj puede clasificar gestos, detectar niveles de actividad, supervisar señales de salud, reconocer activadores de voz sencillos o procesar datos de sensores, sin que la pantalla, Bluetooth y el procesador de aplicación pierdan capacidad de respuesta.
+En los dispositivos vestibles y AIoT, estos beneficios son concretos. Un reloj puede clasificar gestos, detectar niveles de actividad, supervisar señales de salud, reconocer activadores de voz sencillos o procesar datos de sensores, sin que la pantalla, Bluetooth y el procesador de aplicación pierdan capacidad de respuesta.
 
 Estos beneficios tienen condiciones. El procesamiento local reduce el tráfico inalámbrico solo si el producto evita enviar datos brutos; la privacidad sigue exigiendo almacenamiento adecuado, controles de acceso y protección de los datos transmitidos. Los casos siguientes son posibilidades de diseño, no una afirmación de que el SDK incluya todos los modelos.
 
 ## Posición en el sistema SF32 { #position-in-the-sf32-system }
 
-Un proceso simplificado de IA en el borde en SF32 se representa así:
+Una cadena simplificada de IA en el borde en SF32 se representa así:
 
 <div align="center"><em>Diagrama: Etapas de procesamiento e inferencia controlada por firmware</em></div>
 
@@ -65,7 +65,7 @@ Postprocesamiento
 Aplicación, UI, Bluetooth o almacenamiento
 ```
 
-El acelerador es solo una parte del proceso completo de IA. El producto también debe adquirir datos, gestionar búferes, preprocesar las entradas, planificar la inferencia, posprocesar los resultados y aplicar la lógica de decisión. Por lo general, se obtiene un mejor rendimiento al diseñar toda la cadena teniendo en cuenta la jerarquía de memoria y los aceleradores disponibles, en lugar de tratar la inferencia como una llamada de función aislada.
+El acelerador es solo una parte de la cadena completa de IA. El producto también debe adquirir datos, gestionar búferes, preprocesar las entradas, planificar la inferencia, posprocesar los resultados y aplicar la lógica de decisión. Por lo general, se obtiene un mejor rendimiento al diseñar toda la cadena teniendo en cuenta la jerarquía de memoria y los aceleradores disponibles, en lugar de tratar la inferencia como una llamada de función aislada.
 
 ## Qué hace el acelerador de IA { #what-the-ai-accelerator-does }
 
@@ -73,14 +73,14 @@ Los aceleradores de IA son útiles porque muchas aplicaciones de redes neuronale
 
 Estos son ejemplos de cálculos de redes neuronales, no una lista de operaciones compatibles con NNACC de SF32. La [guía NNACC de SiFli-SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/docs/source/en/hal/nnacc.md) documenta la aceleración de tres funciones de convolución q7 de CMSIS-NN, incluida la convolución depthwise (por canal), y afirma que la implementación de CMSIS-NN con NNACC es 8 veces más rápida que la implementación ARM DSP de CMSIS-NN. La guía no indica las condiciones de prueba de esta cifra; tómela como una comparación publicada por el proveedor, no como garantía de que reduzca la latencia o el consumo energético del modelo completo. Compruebe cada operador del modelo y su formato numérico frente a la implementación elegida; no suponga que la multiplicación matricial, la activación o el pooling cuentan con aceleración independiente. El SDK también ofrece API HAL para controlar directamente el acelerador, pero no dé por hecho que ninguna de estas interfaces incluya un conversor completo de modelos o un entorno de ejecución del grafo. El firmware o un entorno de inferencia independiente debe coordinar las capas y gestionar los búferes; la ejecución alternativa en CPU también requiere una implementación para los operadores no compatibles.
 
-Los dispositivos SF32 tienen límites de memoria y ancho de banda, así que conviene empezar con un modelo embebido compacto. Compruebe la disponibilidad de NNACC y la compatibilidad de los operadores para la pieza exacta; después, mida la memoria, la latencia y la energía de todo el proceso. No deduzca la compatibilidad únicamente por el nombre de la familia.
+Los dispositivos SF32 tienen límites de memoria y ancho de banda, así que conviene empezar con un modelo embebido compacto. Compruebe la disponibilidad de NNACC y la compatibilidad de los operadores para la pieza exacta; después, mida la memoria, la latencia y la energía de toda la cadena. No deduzca la compatibilidad únicamente por el nombre de la familia.
 
 Entre las aplicaciones habituales de IA se encuentran:
 
 - Detección de palabras clave o detección simple de eventos de voz.
 - Reconocimiento de gestos a partir de datos de acelerómetro y giroscopio.
 - Clasificación de actividad y detección de estado de movimiento.
-- Fusión de sensores para dispositivos portátiles y de salud.
+- Fusión de sensores para dispositivos vestibles y de salud.
 - Análisis de señales biométricas, dependiendo del soporte de sensores y algoritmos.
 - Clasificación sencilla de imágenes o clasificación basada en cámara, en dispositivos con entrada de cámara.
 - Detección de anomalías y filtrado local de eventos.
@@ -99,7 +99,7 @@ Para entender el reparto de tareas, considere que la CPU coordina el proceso y q
 | **Procesador de bajo consumo** | Puede encargarse de la supervisión continua de sensores o de tareas en segundo plano en los dispositivos donde sea programable por el usuario. |
 | **Acelerador de IA** | Ejecuta operaciones compatibles con NNACC; compare el tiempo de CPU y la energía de toda la cadena con la implementación de referencia por software. |
 | **DMA / sistema de memoria** | Proporciona acceso a memoria y transferencias cuando están configuradas; no todas las entradas o salidas de NNACC necesitan una copia DMA independiente. |
-| **Otros aceleradores** | Los bloques de audio, gráficos, criptografía o procesamiento de sensores pueden contribuir al proceso completo del producto. |
+| **Otros aceleradores** | Los bloques de audio, gráficos, criptografía o procesamiento de sensores pueden contribuir a la cadena completa del producto. |
 
 </div>
 
@@ -116,7 +116,7 @@ Elija el dispositivo según los operadores, el presupuesto de memoria y la carga
 | Familia de dispositivos | Posicionamiento para IA |
 |:--------------|:---------------|
 | **SF32LB52x** | Considérelo para Bluetooth, audio y HMI básica con coste ajustado; tome una implementación ligera en CPU como referencia salvo que se verifique una aceleración específica. |
-| **SF32LB55x** | Adecuado para dispositivos BLE portátiles y productos con numerosos sensores; útil para tareas de sensado de bajo consumo y algoritmos compactos. |
+| **SF32LB55x** | Adecuado para dispositivos BLE vestibles y productos con numerosos sensores; útil para tareas de detección de bajo consumo y algoritmos compactos. |
 | **SF32LB56x** | Considérelo para UI más completas, HMI conectada y cadenas de sensores o multimedia; verifique la configuración elegida y los operadores compatibles con el NNACC de HCPU. |
 | **SF32LB57x** | La guía citada no establece la disponibilidad de NNACC para esta familia; verifique el componente, la placa y el soporte de operadores, runtime y memoria del SDK antes de elegirlo para IA. |
 | **SF32LB58x** | Considérelo para cargas que combinan IA, gráficos y audio cuando la memoria y los recursos HCPU/LCPU de la referencia elegida cubran los requisitos del producto; verifique operadores, costes de integración y energía medida. |
@@ -137,7 +137,7 @@ El desarrollo habitual de un modelo de IA embebida consta de varias etapas:
 6. Mida y perfile la latencia, el uso de memoria, el consumo y la precisión en el hardware objetivo.
 7. Pruebe cargas reales con Bluetooth, pantalla, audio y sensores funcionando en paralelo, incluidas las transiciones de entrada y salida de los estados de bajo consumo previstos.
 
-El error más común es optimizar únicamente la red neuronal y descuidar el resto del proceso. En muchos productos embebidos, el preprocesamiento, las transferencias de memoria, la temporización de los sensores y el posprocesamiento son tan importantes como el propio acelerador.
+El error más común es optimizar únicamente la red neuronal y descuidar el resto de la cadena. En muchos productos embebidos, el preprocesamiento, las transferencias de memoria, la temporización de los sensores y el posprocesamiento son tan importantes como el propio acelerador.
 
 ## Cuantización y tamaño del modelo { #quantization-and-model-size }
 
@@ -172,9 +172,9 @@ Primero verifique que el NNACC elegido pueda acceder a cada búfer; los datos en
 
 Si la CPU comparte búferes con DMA o NNACC, asigne un único propietario durante cada transferencia u operación. Escriba en memoria las líneas de caché de las entradas modificadas por la CPU antes de que el hardware las lea. Prepare las líneas de caché del destino según el SDK antes de la escritura del hardware, para que las líneas sucias de la CPU no sobrescriban después el resultado. Tras confirmar la finalización, invalide las copias obsoletas de la CPU antes de leer la salida. Alinee los rangos de mantenimiento a líneas completas y evite compartirlas con otros datos en uso. Limpiar una copia antigua de la salida después de que el hardware la escriba puede destruir el resultado; limpiar e invalidar no son operaciones intercambiables.
 
-## Canalizaciones de audio, sensores y cámara { #audio-sensor-and-camera-pipelines }
+## Cadenas de audio, sensores y cámara { #audio-sensor-and-camera-pipelines }
 
-La aceleración de IA rara vez funciona sola. Generalmente es parte de una canalización de sensores, audio o cámara.
+La aceleración de IA rara vez funciona sola. Generalmente es parte de una cadena de sensores, audio o cámara.
 
 ### Audio y voz { #audio-and-voice }
 
@@ -189,19 +189,19 @@ Los ejemplos típicos incluyen:
 
 ### Movimiento y fusión de sensores { #motion-and-sensor-fusion }
 
-En los dispositivos portátiles, los datos pueden proceder de acelerómetros, giroscopios, sensores de frecuencia cardíaca, sensores de SpO2, circuitos de adquisición de ECG y otros periféricos. La IA puede clasificar estados de movimiento, gestos, patrones de actividad o características de señales relacionadas con la salud.
+En los dispositivos vestibles, los datos pueden proceder de acelerómetros, giroscopios, sensores de frecuencia cardíaca, sensores de SpO2, circuitos de adquisición de ECG y otros periféricos. La IA puede clasificar estados de movimiento, gestos, patrones de actividad o características de señales relacionadas con la salud.
 
 Agrupe muestras y utilice interrupciones cuando lo permitan la cobertura de detección y la latencia exigidas. Trasladar tareas de fondo adecuadas a un procesador de bajo consumo programable por el usuario puede reducir los despertares de la CPU de aplicación, pero incluya su actividad, el muestreo y los despertares en la comparación. No desactive la adquisición necesaria para detectar el evento.
 
 ### Cámara y entrada de imagen { #camera-and-image-input }
 
-La entrada de cámara depende del chip, encapsulado, placa y controlador de captura concretos. El [controlador del sensor GC032A del SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/customer/peripherals/camera/gc032a/drv_gc032a.c) configura una salida DVP de 8 bits o SPI de dos bits; esto no demuestra que ambas rutas de captura funcionen en todos los dispositivos SF32. Antes de elegir la cámara, verifique pines, soporte de captura mediante periféricos o PTM, temporización del sensor y controlador. Las imágenes suelen requerir búferes y ancho de banda mayores que el audio o el movimiento, pero compare las resoluciones y tasas reales.
+La entrada de cámara depende del chip, encapsulado, placa y controlador de captura concretos. El [controlador del sensor GC032A del SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/customer/peripherals/camera/gc032a/drv_gc032a.c) configura una salida DVP de 8 bits o SPI de dos bits; esto no demuestra que ambas rutas de captura funcionen en todos los dispositivos SF32. Antes de elegir la cámara, verifique pines, soporte de captura mediante periféricos o PTM, temporización del sensor y controlador. Las imágenes suelen requerir búferes y ancho de banda mayores que el audio o el movimiento, pero compare las resoluciones y frecuencias reales.
 
-Considere imágenes más pequeñas, regiones de interés, tasas de cuadros menores o un modelo diseñado para sistemas embebidos. Recortar por firmware después de la captura reduce la entrada del modelo, pero no necesariamente el tráfico de la cámara ni el búfer de captura; para reducir esos costes puede ser necesario recortar en el sensor o adquirir menos datos.
+Considere imágenes más pequeñas, regiones de interés, frecuencias de fotogramas menores o un modelo diseñado para sistemas embebidos. Recortar por firmware después de la captura reduce la entrada del modelo, pero no necesariamente el tráfico de la cámara ni el búfer de captura; para reducir esos costes puede ser necesario recortar en el sensor o adquirir menos datos.
 
 ## Planificación y gestión de energía { #scheduling-and-power-management }
 
-Las tareas de IA deben planificarse teniendo en cuenta el resto del sistema. Un producto portátil puede necesitar mantener Bluetooth conectado, actualizar la pantalla, capturar audio, leer sensores y ejecutar inferencia sin exceder los objetivos de energía o latencia.
+Las tareas de IA deben planificarse teniendo en cuenta el resto del sistema. Un producto vestible puede necesitar mantener Bluetooth conectado, actualizar la pantalla, capturar audio, leer sensores y ejecutar inferencia sin exceder los objetivos de energía o latencia.
 
 Las buenas prácticas de planificación incluyen:
 
@@ -258,7 +258,7 @@ Considere la aceleración de IA de SF32 para inferencia local compacta en produc
 - Reconocimiento de gestos en relojes, pulseras y dispositivos de mano.
 - Clasificación de actividad para productos de fitness y salud.
 - Detección de eventos de voz o palabras clave para accesorios de audio.
-- Algoritmos de fusión de sensores para dispositivos portátiles.
+- Algoritmos de fusión de sensores para dispositivos vestibles.
 - Análisis de señales biométricas cuando lo permitan los sensores y el software.
 - Detección local de anomalías para dispositivos inteligentes.
 - Clasificación sencilla de imágenes o eventos activados por la cámara, en dispositivos con entrada de cámara.
@@ -267,7 +267,7 @@ Considere la aceleración de IA de SF32 para inferencia local compacta en produc
 ## Conclusiones clave { #key-takeaways }
 
 - NNACC puede delegar operaciones compatibles al hardware y reducir la ocupación de CPU; las ventajas de latencia y energía deben verificarse para la función completa.
-- Forma parte de un proceso completo que también incluye sensores, entrada de audio o cámara, preprocesamiento, transferencias de memoria, posprocesamiento y lógica de aplicación.
+- Forma parte de una cadena completa que también incluye sensores, entrada de audio o cámara, preprocesamiento, transferencias de memoria, posprocesamiento y lógica de aplicación.
 - El SDK v2.5.1 documenta recursos NNACC en SF32LB55x, SF32LB56x y SF32LB58x, pero no establece su disponibilidad en SF32LB52x ni SF32LB57x; verifique el componente y la carga concretos, sin inferir disponibilidad o ausencia por el nombre de la familia.
 - El rendimiento real depende del tamaño y la cuantización del modelo, los operadores compatibles, la ubicación de los datos en memoria, el mantenimiento de la caché, el comportamiento del DMA y el entorno de ejecución del SDK.
 - La inferencia local resulta útil si cumple los objetivos de respuesta, funcionamiento sin conexión, privacidad o tráfico inalámbrico del producto; el hardware acelerador por sí solo no garantiza esos beneficios.

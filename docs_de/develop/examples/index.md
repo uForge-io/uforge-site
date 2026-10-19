@@ -71,7 +71,7 @@ Ein Bluetooth-Audio-Produkt sollte beispielsweise mit einem passenden Audio-/Blu
 ## Anpassungs-Workflow { #adaptation-workflow }
 
 1. Das unveränderte Beispiel bauen und flashen.
-2. Den erfolgreichen Build-Befehl, Board-Namen, Flash-Befehl, seriellen Port und das Log sichern.
+2. Den erfolgreichen Build-Befehl, Boardnamen, Flash-Befehl, seriellen Port und das Log sichern.
 3. Eine Produktänderung vornehmen.
 4. Neu bauen und erneut testen.
 5. Die Änderung committen oder dokumentieren, bevor ein weiteres Subsystem hinzugefügt wird.
@@ -83,7 +83,7 @@ Dieser Ablauf ist in der ersten Stunde langsamer und nach dem ersten schwerwiege
 Dokumentieren Sie für jedes Beispiel, das zur Produktbasis wird:
 
 - SDK-Branch oder Paketversion.
-- Board-Name oder FQBN.
+- Boardname oder FQBN.
 - Erforderliche Konfigurationsoptionen.
 - Erforderliche Pins und Peripherie.
 - Erwartete serielle Ausgabe.

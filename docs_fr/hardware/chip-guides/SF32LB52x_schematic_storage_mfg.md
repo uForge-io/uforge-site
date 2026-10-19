@@ -11,7 +11,7 @@ tags:
 # Guide de conception matérielle SF32LB52x — Stockage et fabrication { #sf32lb52x-hardware-design-guide-storage-manufacturing }
 
 !!! note "Fait partie du Guide de conception matérielle SF32LB52x"
-    Cette page couvre les sections 5.6-5.7 des recommandations de conception du schéma : stockage, connectivité et fabrication. Retournez à [RF et interfaces utilisateur](SF32LB52x_schematic_rf_interfaces.md), ou consultez la [liste de contrôle du schéma](SF32LB52x_schematic_checklist.md).
+    Cette page couvre les sections 5.6-5.7 des recommandations de conception du schéma : stockage, connectivité et fabrication. Retournez à [RF et interfaces utilisateur](SF32LB52x_schematic_rf_interfaces.md), ou consultez la [liste de contrôle du schéma](SF32LB52x_schematic_checklist.md) pour la revue point par point.
 
 ### 5.6. Stockage et connectivité { #56-storage-and-connectivity }
 
@@ -25,7 +25,7 @@ tags:
 
 **Objectif de conception**
 
-Choisissez le support de démarrage et son schéma d'alimentation en fonction de la taille du firmware, de la stratégie de mise à jour et des états basse consommation, en veillant aussi à un démarrage fiable par la ROM après un reset ou l'entrée en mode Hibernate.
+Choisissez le support de démarrage et son schéma d'alimentation en fonction de la taille du firmware, de la stratégie de mise à jour et des états basse consommation, en veillant aussi à un démarrage fiable par la ROM après une réinitialisation ou l'entrée en mode Hibernate.
 
 ##### 5.6.1.1. Description de l'interface de stockage { #5611-storage-interface-description }
 
@@ -141,7 +141,7 @@ Les notes d'application OpenSiFli et le guide de conception du schéma, qui ont 
     - L'alimentation du stockage externe est indépendante de VDD_SIP — ajoutez un interrupteur d'alimentation séparé
     - Voir la section 5.6.1.1 pour les compromis de domaine d'alimentation VCC/VCCQ de l'eMMC
     - La note d'application indique **PA21** pour les interrupteurs d'alimentation du stockage liés au démarrage ; la divergence entre les sources concernant la Flash externe des variantes alimentées par batterie est signalée plus haut
-    - Les mémoires Flash NOR de 32 Mo ou plus connectées via MPI (Memory Peripheral Interface, interface de périphériques mémoire utilisée avec les mémoires SPI-NOR/SPI-NAND) doivent pouvoir être mises hors tension par PA21. Elles quittent ainsi le mode d'adressage sur 4 octets au redémarrage du MCU ou à l'entrée en Hibernate ; sinon, la ROM ne reconnaîtra pas la Flash. Les Flash NOR de 16 Mo ou moins peuvent rester alimentées en permanence.
+    - Les mémoires Flash NOR de 32 Mo ou plus connectées via MPI (Memory Peripheral Interface, interface de périphériques mémoire utilisée avec les mémoires SPI-NOR/SPI-NAND) doivent pouvoir être mises hors tension par PA21. Elles quittent ainsi le mode d'adressage sur 4 octets au redémarrage de la MCU ou à l'entrée en Hibernate ; sinon, la ROM ne reconnaîtra pas la Flash. Les Flash NOR de 16 Mo ou moins peuvent rester alimentées en permanence.
     - Le circuit de référence prévoit des emplacements pour les résistances de pull-up de PA13 et PA17. Montez-les selon le type de mémoire ; la valeur recommandée est 7,5 kΩ.
 
 **Erreurs courantes - Stockage**
@@ -153,9 +153,9 @@ Les notes d'application OpenSiFli et le guide de conception du schéma, qui ont 
 
 **Liste de contrôle du stockage**
 
-- [ ] Le support de démarrage est sélectionné et documenté avant le routage du PCB.
-- [ ] Les niveaux de tirage des broches de bootstrap `PA13`/`PA17` correspondent au tableau de démarrage.
-- [ ] Les commutateurs nécessaires au stockage de démarrage sont commandés par la broche propre à la variante, confirmée par la source ; la divergence PA11/PA21 a été résolue avec SiFli.
+- [ ] Le support de démarrage est sélectionné et documenté avant le routage de la PCB.
+- [ ] Les options de rappel (pull-up/pull-down) des broches de bootstrap `PA13`/`PA17` correspondent au tableau de démarrage.
+- [ ] Les interrupteurs d'alimentation nécessaires au stockage de démarrage sont commandés par la broche propre à la variante, confirmée par la source ; la divergence PA11/PA21 a été résolue avec SiFli.
 - [ ] Le compromis VCC/VCCQ de l'eMMC est évalué pour les conceptions à alimentation externe régulée.
 - [ ] Le plan de mise en service couvre les niveaux des broches de configuration de démarrage, les temps d'établissement de l'alimentation mémoire, la lecture de son identifiant et le transfert du firmware.
 
@@ -170,12 +170,12 @@ Les notes d'application OpenSiFli et le guide de conception du schéma, qui ont 
 
 Assurer des connexions fiables pour l'alimentation, les interruptions et les bus des capteurs, tout en permettant l'arrêt correct des capteurs inutilisés dans les modes basse consommation.
 
-Le SF32LB52x peut se connecter à des capteurs de fréquence cardiaque, des accéléromètres, des capteurs géomagnétiques et d'autres composants similaires. Choisissez un commutateur d'alimentation à faible courant de repos (Iq) pour couper et rétablir leur alimentation.
+Le SF32LB52x peut se connecter à des capteurs de fréquence cardiaque, des accéléromètres, des capteurs géomagnétiques et d'autres composants similaires. Choisissez un interrupteur de charge à faible courant de repos (Iq) pour couper et rétablir leur alimentation.
 
 **Liste de contrôle des capteurs**
 
-- [ ] Les broches de bus, d'interruption, de reset et d'activation de l'alimentation des capteurs sont affectées.
-- [ ] Le courant de repos (Iq) et le courant à l'arrêt du commutateur d'alimentation des capteurs respectent l'objectif de veille.
+- [ ] Les broches de bus, d'interruption, de réinitialisation et d'activation de l'alimentation des capteurs sont affectées.
+- [ ] Le courant de repos (Iq) et le courant à l'arrêt de l'interrupteur de charge des capteurs respectent l'objectif de veille.
 - [ ] Les résistances de pull-up sont reliées au rail d'alimentation E/S approprié du capteur.
 - [ ] Le plan de mise en service comprend la recherche des composants sur le bus, le réveil par interruption et les cycles de coupure/rétablissement de l'alimentation du capteur.
 
@@ -194,7 +194,7 @@ Le SF32LB52x permet d'affecter les fonctions UART et I2C à n'importe quelle bro
 
 **Liste de contrôle UART/I2C**
 
-- [ ] Les tirages vers le haut, les domaines de tension, et la capacité de bus sont corrects pour chaque bus I2C.
+- [ ] Les résistances de pull-up, les domaines de tension, et la capacité de bus sont corrects pour chaque bus I2C.
 - [ ] Les broches UART nécessaires pour les logs, le téléchargement, ou les modules externes sont accessibles.
 - [ ] Le multiplexage des broches n'entre pas en conflit avec les fonctions de bootstrap, de réveil, d'affichage, de stockage, ou de débogage.
 
@@ -257,7 +257,7 @@ Pour le débogage pas à pas et la sortie des journaux via DBG_UART, consultez l
 **Résumé rapide**
 
 - La programmation de production et le calibrage du quartz nécessitent une alimentation stable, un accès DBG_UART, PA01, et les points de test d'alimentation/masse requis.
-- L'accès pour le montage de test doit être conçu avant que le contour mécanique du PCB et le boîtier ne soient figés.
+- L'accès pour le montage de test doit être conçu avant que le contour mécanique de la PCB et le boîtier ne soient figés.
 
 **Objectif de conception**
 
@@ -274,7 +274,7 @@ SiFli fournit un programmateur autonome pour écrire le firmware en production e
 
 #### 5.7.3. Listes de contrôle de schéma et de dessin PCB { #573-schematic-and-pcb-drawing-checklists }
 
-Utilisez la [liste de contrôle officielle du schéma et du PCB][SiFli SF32LB52 Schematic & PCB Checklist (XLSX)], publiée sur le wiki de SiFli, comme étape formelle d'approbation avant fabrication. Consultez la [Liste de contrôle du schéma](SF32LB52x_schematic_checklist.md) pour la version complète, point par point. Les listes de contrôle de ce guide aident à repérer les problèmes courants avant la revue formelle.
+Utilisez la [liste de contrôle officielle du schéma et de la PCB][SiFli SF32LB52 Schematic & PCB Checklist (XLSX)], publiée sur le wiki de SiFli, comme étape formelle d'approbation avant fabrication. Consultez la [Liste de contrôle du schéma](SF32LB52x_schematic_checklist.md) pour la version complète, point par point. Les listes de contrôle de ce guide aident à repérer les problèmes courants avant la revue formelle.
 
 [SiFli SF32LB52 Schematic & PCB Checklist (XLSX)]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx
 

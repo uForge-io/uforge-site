@@ -17,19 +17,19 @@ Le dépôt est une référence logicielle, et non une console de jeu terminée n
 
 ## Pourquoi ce portage SF32 ? { #why-the-sifli-implementation }
 
-Une application de style Arduboy est un moyen compact d'exercer plusieurs décisions de produit embarqué à la fois : une boucle de rendu prévisible, de petites ressources monochromes ou à basse résolution, une entrée par boutons, un timing audio et un budget mémoire étroitement borné. Porter ce modèle sur SF32 peut fournir une référence précoce utile pour des jeux portables, des démonstrateurs d'interface, des appareils éducatifs et d'autres produits dont l'interaction est locale et déterministe.
+Une application de style Arduboy est un moyen compact d'exercer plusieurs décisions de produit embarqué à la fois : une boucle de rendu prévisible, de petites ressources monochromes ou à basse résolution, une entrée par boutons, un minutage audio et un budget mémoire étroitement borné. Porter ce modèle sur SF32 peut fournir une référence précoce utile pour des jeux portables, des démonstrateurs d'interface, des appareils éducatifs et d'autres produits dont l'interaction est locale et déterministe.
 
 L'intérêt n'est pas que chaque sketch Arduboy fonctionne sans modification. L'intérêt est la frontière que le portage met en évidence :
 
 - Le jeu peut conserver sa logique de haut niveau de mise à jour, d'entrée, de dessin et de ressources tant qu'il reste dans l'API Arduboy2 prise en charge.
-- Le portage doit traduire les hypothèses sur l'affichage, les boutons, l'audio, le timing et le stockage qui étaient implicites dans le matériel d'origine.
-- Tout sketch qui pilote directement des registres AVR, des broches propres à Arduboy, des transactions d'affichage, des timers ou la disposition de l'EEPROM exige une adaptation délibérée et des preuves de non-régression distinctes.
+- Le portage doit traduire les hypothèses sur l'affichage, les boutons, l'audio, le minutage et le stockage qui étaient implicites dans le matériel d'origine.
+- Tout sketch qui pilote directement des registres AVR, des broches propres à Arduboy, des transactions d'affichage, des minuteurs ou la disposition de l'EEPROM exige une adaptation délibérée et des preuves de non-régression distinctes.
 
 Ce sont des attentes d'ingénierie, et non des déclarations de compatibilité mesurées. Confirmez-les par rapport au dépôt OpenSiFli actuel et consignez le résultat exact pour la carte et le commit retenus.
 
 ## Résultat, portée et critères d'entrée { #outcome-scope-and-entry-criteria }
 
-Cette page définit un parcours par étapes depuis la référence OpenSiFli jusqu'à un jeu ou une démo interactive SF32 reproductible. Elle n'affirme **pas** que le portage prend en charge toutes les fonctions d'Arduboy2, tous les jeux Arduboy, toutes les cartes SF32, ni un timing d'affichage et d'audio de qualité production. Elle n'établit pas non plus de droits de licence sur les jeux, polices, graphismes ou autres ressources copiés depuis des dépôts tiers.
+Cette page définit un parcours par étapes depuis la référence OpenSiFli jusqu'à un jeu ou une démo interactive SF32 reproductible. Elle n'affirme **pas** que le portage prend en charge toutes les fonctions d'Arduboy2, tous les jeux Arduboy, toutes les cartes SF32, ni un minutage d'affichage et d'audio de qualité production. Elle n'établit pas non plus de droits de licence sur les jeux, polices, graphiques ou autres ressources copiés depuis des dépôts tiers.
 
 **Résultat :** une compilation Arduboy2-SiFli sous gestion de versions qui exécute un exemple du dépôt ou un petit sketch de test, démontre le chemin retenu pour l'affichage/les entrées/l'audio, et consigne les preuves nécessaires pour décider si un jeu plus important ou une adaptation produit se justifie.
 
@@ -68,7 +68,7 @@ Avant de commencer, ayez à disposition :
 | Composant | Spécification requise | Rôle | Statut | Où l'obtenir | Notes de compatibilité et de substitution |
 |:----------|:-----------------------|:-----|:-------|:----------------|:-------------------------------------|
 | Carte de développement SF32LB52 | Variante ArduinoCore-Zephyr `sf32lb52_devkit_lcd_sf32lb525uc6` ; le dépôt ne fixe pas de révision de carte physique | Exécute le portage et fournit les broches de MCU associées | Obligatoire | [Source d'Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) ; [Variante d'ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) | Ceci identifie la variante logicielle de carte et la correspondance des broches, et non un assemblage physique validé ; comparez la révision réelle de la carte et son schéma avant le câblage |
-| OLED monochrome | 128 × 64 pixels, connecté via SPI1 ; le dépôt n'identifie ni le module exact ni le contrôleur | Affiche le tampon d'image du jeu | Obligatoire | [Source d'Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | L'OLED est un périphérique externe ; vérifiez le contrôleur, la tension, le connecteur, l'orientation et le timing par rapport au module et à la carte avant utilisation |
+| OLED monochrome | 128 × 64 pixels, connecté via SPI1 ; le dépôt n'identifie ni le module exact ni le contrôleur | Affiche le tampon d'image du jeu | Obligatoire | [Source d'Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | L'OLED est un périphérique externe ; vérifiez le contrôleur, la tension, le connecteur, l'orientation et le minutage par rapport au module et à la carte avant utilisation |
 | Six boutons de jeu | Entrées compatibles Arduboy ; actives à l'état bas avec résistances de rappel haut, selon la correspondance des broches du dépôt | Lit les commandes directionnelles et A/B | Obligatoire | [Source d'Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Les boutons sont externes ; vérifiez les E/S Arduino associées sur la carte physique et consignez le câblage et le comportement d'anti-rebond |
 | EEPROM externe | AT24C02 ou AT24C32 via I2C1 à l'adresse `0x50` | Prend en charge les fonctions de bibliothèque reposant sur l'EEPROM | Optionnel ; requis seulement pour les fonctions qui utilisent l'EEPROM | [Source d'Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Confirmez le composant retenu, la tension, les résistances de rappel et le câblage du bus ; le dépôt ne précise pas d'assemblage d'EEPROM monté |
 | Sortie audio et indicateur RVB | Les backends audio pris en charge par le dépôt utilisent les sorties haut-parleur associées ; une LED RVB externe à cathode commune est pilotée par PWM logiciel | Son et indication de couleur optionnels | Optionnel ; à choisir selon le sketch testé | [Source d'Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | La source ne définit pas de nomenclature complète pour le haut-parleur et la LED ; vérifiez le circuit externe, la correspondance des broches, le courant et le comportement audio |
@@ -92,20 +92,20 @@ Avant de commencer, ayez à disposition :
 
 ## Choisir une configuration de référence prise en charge { #choose-a-supported-baseline }
 
-Commencez par la combinaison de carte et de logiciel nommée dans le dépôt OpenSiFli plutôt que de choisir une carte du catalogue produit par similarité. Le paquet de carte, le câblage de l'écran, la correspondance des entrées, la méthode de téléversement et les hypothèses de la bibliothèque font partie de la base.
+Commencez par la combinaison de carte et de logiciel nommée dans le dépôt OpenSiFli plutôt que de choisir une carte du catalogue produit par similarité. Le paquet de carte, le câblage de l'écran, la correspondance des entrées, la méthode de téléversement et les hypothèses de la bibliothèque font partie de la configuration de référence.
 
 Le dépôt Arduboy2-SiFli ne fournit pas la correspondance des broches de la carte dans un fichier distinct : son README publie le [tableau de correspondance des E/S SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli#sifli-io-mapping). Les définitions de broches logiques de la bibliothèque se trouvent dans [`pins_sifli.h`](https://github.com/OpenSiFli/Arduboy2-SiFli/blob/master/src/platforms/sifli/pins_sifli.h), tandis que le routage propre à la carte figure dans la [surcouche Devicetree](https://github.com/OpenSiFli/ArduinoCore-zephyr/blob/main/variants/sf32lb52_devkit_lcd_sf32lb525uc6/sf32lb52_devkit_lcd_sf32lb525uc6.overlay) d'ArduinoCore-Zephyr. Ces sources définissent une base logicielle, et non un assemblage physique validé ; vérifiez la révision réelle de la carte et son schéma avant le câblage.
 
-<div align="center"><em>Tableau : Sélection de la base</em></div>
+<div align="center"><em>Tableau : Sélection de la configuration de référence</em></div>
 
 <div align="center" markdown>
 
-| Élément de la base | À sélectionner à partir de | À ne pas supposer |
+| Élément de la configuration | À sélectionner à partir de | À ne pas supposer |
 |:-----------------|:---------------|:--------------|
 | Carte cible | La variante ArduinoCore-Zephyr `sf32lb52_devkit_lcd_sf32lb525uc6` identifiée par le README d'Arduboy2-SiFli, puis le schéma de la carte physique. | Que la variante logicielle prouve que chaque révision de carte physique ou assemblage de périphériques est compatible. |
 | Cœur Arduino | Le paquet OpenSiFli et la révision documentés pour la cible. | Que le dernier paquet soit interchangeable avec la révision utilisée par le dépôt. |
 | Affichage et entrées | Les définitions de broches/de configuration du dépôt et le schéma de la carte physique. | Que la géométrie d'affichage, la polarité des boutons ou les noms de broches de l'Arduboy d'origine correspondent à la carte SF32. |
-| Audio | Le chemin de sortie pris en charge par le dépôt et toute configuration propre à la carte. | Qu'une API de tonalité prouve que le timing du haut-parleur, le volume et le comportement énergétique sont prêts pour un produit. |
+| Audio | Le chemin de sortie pris en charge par le dépôt et toute configuration propre à la carte. | Qu'une API de tonalité prouve que le minutage du haut-parleur, le volume et le comportement énergétique sont prêts pour un produit. |
 | Téléversement et récupération | Le flux Arduino ou `sftool` documenté pour la carte retenue. | Qu'un téléversement réussi sur un hôte prouve un chemin de mise à jour récupérable sur le terrain. |
 
 </div>
@@ -120,10 +120,10 @@ Utilisez les étapes comme des points de décision, et non comme une liste de fo
 
 <div align="center" markdown>
 
-| Étape | Décision qu'elle appuie | Livrable requis |
+| Étape | Décision qu'elle étaye | Livrable requis |
 |:------|:---------------------|:----------------|
 | 1. Référence intacte | Le portage documenté se compile-t-il, se téléverse-t-il et s'exécute-t-il sur la base retenue ? | Un sketch validé, la trace du commit/des paquets, le journal de téléversement et le comportement observé. |
-| 2. Validation des périphériques | L'affichage, les entrées, l'audio, la réinitialisation et le timing se comportent-ils de façon prévisible sur la carte réelle ? | Un relevé de test des périphériques avec les défaillances et le comportement de récupération. |
+| 2. Validation des périphériques | L'affichage, les entrées, l'audio, la réinitialisation et le minutage se comportent-ils de façon prévisible sur la carte réelle ? | Un relevé de test des périphériques avec les défaillances et le comportement de récupération. |
 | 3. Base source reproductible | Un autre ingénieur peut-il reconstruire la même image à partir d'une extraction propre ? | Un artefact de compilation propre, une trace de l'environnement et un résultat répété. |
 | 4. Adaptation contrôlée d'un jeu | Une modification bornée de jeu ou d'interface peut-elle être introduite sans casser le portage ? | Une modification relue, une trace de ressources/licences et un résultat de non-régression. |
 | 5. Revue de maturité produit | La référence est-elle assez solide pour justifier du matériel sur mesure ou un investissement logiciel plus important ? | Un registre des risques avec responsables, preuves, mesures d'atténuation et une décision de poursuivre/différer/arrêter. |
@@ -138,21 +138,21 @@ Utilisez les étapes comme des points de décision, et non comme une liste de fo
 flowchart LR
     G["Sketch du jeu\nmise à jour, entrées, dessin, ressources"] --> A["Arduboy2-SiFli\ncouche de compatibilité"]
     A --> C["Cœur Arduino\npaquet de carte et exécution"]
-    C --> S["SiFli-SDK / SF32\nGPIO, affichage, timers, stockage, audio"]
+    C --> S["SiFli-SDK / SF32\nGPIO, affichage, minuteurs, stockage, audio"]
     S --> H["Carte SF32 retenue\naffichage, boutons, haut-parleur, USB"]
     A --> R["Tests de référence\njournal série et contrôles visuels"]
 ```
 
 Ceci est un modèle de décision, et non l'affirmation que le dépôt emploie exactement ces noms de modules internes. Confirmez les frontières réelles du code source avant de modifier le portage. Les chemins produit importants sont :
 
-- **Image et timing :** la boucle de jeu doit se mettre à jour et rendre à une cadence répétable, et tout comportement audio ou d'entrée sensible au timing doit être mesuré sur la carte cible.
+- **Image et minutage :** la boucle de jeu doit se mettre à jour et produire le rendu à une cadence répétable, et tout comportement audio ou d'entrée sensible au minutage doit être mesuré sur la carte cible.
 - **Affichage :** la couche de compatibilité doit faire correspondre le tampon et la géométrie du jeu au contrôleur d'affichage, au format de pixel, à l'orientation et au chemin de rafraîchissement retenus.
 - **Entrées :** les noms des boutons, la polarité, l'anti-rebond, les appuis simultanés et le comportement de réveil/réinitialisation doivent être vérifiés par rapport au câblage de la carte.
-- **Audio :** la génération de tonalité, la propriété des timers, la connexion du haut-parleur, le volume et le comportement de mise en sourdine doivent être traités comme propres à la carte tant qu'ils ne sont pas vérifiés.
+- **Audio :** la génération de tonalité, la propriété des minuteurs, la connexion du haut-parleur, le volume et le comportement de mise en sourdine doivent être traités comme propres à la carte tant qu'ils ne sont pas vérifiés.
 - **Ressources et stockage :** les polices, sprites, données sonores, disposition de la flash et utilisation de la RAM doivent être mesurés après l'édition de liens du jeu retenu.
-- **Récupération :** conservez un chemin de téléversement et de récupération connu avant d'expérimenter des changements de timing, de mémoire ou de basse consommation.
+- **Récupération :** conservez un chemin de téléversement et de récupération connu avant d'expérimenter des changements de minutage, de mémoire ou de basse consommation.
 
-Les principaux domaines de défaillance sont la compatibilité application/API, la configuration de l'affichage, le câblage des entrées, le comportement audio/timers, la mémoire et le placement des ressources, ainsi que le téléversement/la récupération. Une défaillance dans un domaine ne doit pas être simplement signalée comme « le portage ne fonctionne pas ».
+Les principaux domaines de défaillance sont la compatibilité application/API, la configuration de l'affichage, le câblage des entrées, le comportement audio/minuteurs, la mémoire et le placement des ressources, ainsi que le téléversement/la récupération. Une défaillance dans un domaine ne doit pas être simplement signalée comme « le portage ne fonctionne pas ».
 
 ## Étape 1 — Établir la référence intacte { #stage-1-establish-the-untouched-reference }
 
@@ -167,18 +167,18 @@ Les principaux domaines de défaillance sont la compatibilité application/API, 
 
 **Critère de sortie du point de contrôle 1 :** la référence intacte se compile et se téléverse sur la carte retenue, et son comportement documenté est répétable après une réinitialisation ou un cycle d'alimentation.
 
-## Étape 2 — Valider les frontières des périphériques et du timing { #stage-2-validate-peripheral-and-timing-boundaries }
+## Étape 2 — Valider les frontières des périphériques et du minutage { #stage-2-validate-peripheral-and-timing-boundaries }
 
 **Objectif :** distinguer une compilation réussie d'une base d'appareil de jeu utilisable.
 
 1. Exercez l'effacement de l'écran, la mise à jour d'image complète, le rendu de sprites ou de bitmaps, le chemin du texte et toutes les hypothèses de géométrie/d'orientation utilisées par l'exemple.
 2. Exercez chaque entrée utilisée par le projet, y compris le relâchement, les appuis simultanés, les appuis rapides et, le cas échéant, le comportement de réinitialisation ou de réveil.
-3. Si l'audio est inclus, vérifiez le démarrage/l'arrêt de la tonalité, l'interaction avec les timers, la mise en sourdine et l'effet de l'activité d'affichage et d'entrée sur le chemin sonore.
+3. Si l'audio est inclus, vérifiez le démarrage/l'arrêt de la tonalité, l'interaction avec les minuteurs, la mise en sourdine et l'effet de l'activité d'affichage et d'entrée sur le chemin sonore.
 4. Interrompez le flux normal par une réinitialisation, un débranchement/rebranchement et une séquence d'entrée invalide ou incomplète. Consignez si la carte revient à un état utilisable de téléversement et d'exécution.
 
-**Preuves à conserver :** résultats d'affichage visuels ou capturés, matrice des entrées, observations de timing, observations audio, journal de réinitialisation/récupération, et tout courant ou toute latence mesurés qui influencent la décision produit.
+**Preuves à conserver :** résultats d'affichage visuels ou capturés, matrice des entrées, observations de minutage, observations audio, journal de réinitialisation/récupération, et tout courant ou toute latence mesurés qui influencent la décision produit.
 
-**Critère de sortie du point de contrôle 2 :** le chemin de périphériques retenu est assez bien compris pour distinguer les bogues applicatifs des problèmes de configuration de la carte, de timing ou d'alimentation.
+**Critère de sortie du point de contrôle 2 :** le chemin de périphériques retenu est assez bien compris pour distinguer les bogues applicatifs des problèmes de configuration de la carte, de minutage ou d'alimentation.
 
 ## Étape 3 — Construire une base source reproductible { #stage-3-build-a-reproducible-source-baseline }
 
@@ -186,7 +186,7 @@ Les principaux domaines de défaillance sont la compatibilité application/API, 
 
 1. Partez d'une extraction propre et initialisez chaque dépendance requise par le dépôt.
 2. Consignez le paquet de carte, la version d'Arduino IDE/CLI, les versions du compilateur et des outils, les fichiers de configuration et toutes les ressources générées.
-3. Compilez depuis un répertoire propre, enregistrez l'image obtenue ainsi que les informations de carte mémoire et de taille lorsqu'elles sont disponibles, et consignez la commande de téléversement ou la sortie de l'outil.
+3. Compilez depuis un répertoire propre, enregistrez l'image obtenue ainsi que les informations de carte d'implantation mémoire (fichier map) et de taille lorsqu'elles sont disponibles, et consignez la commande de téléversement ou la sortie de l'outil.
 4. Répétez sur une seconde machine ou après suppression du répertoire de compilation.
 
 **Preuves à conserver :** révision des sources, révisions des dépendances, manifeste de l'hôte et des outils, journal de compilation, binaire ou autre artefact, rapport de taille, journal de téléversement et journal série.
@@ -206,18 +206,18 @@ Commencez par un petit sketch ou jeu dont les besoins en affichage, entrées, au
 | Classe de modification | Commencer par | Non-régression requise |
 |:-------------|:-----------|:--------------------|
 | Identité et interface | Écran-titre, police, sprite, palette ou disposition de l'écran. | Contrôles de compilation, de téléversement, de mise à jour d'image, d'entrées et d'intégrité des ressources. |
-| Logique de jeu | Une règle bornée, un niveau ou une transition d'état. | Séquence d'entrées répétable, réinitialisation, persistance du score/de l'état le cas échéant, et timing des images. |
-| Audio | Une tonalité ou un court effet via le chemin pris en charge. | Démarrage/arrêt, mise en sourdine, interaction avec les timers et comportement sous charge d'affichage/d'entrée. |
+| Logique de jeu | Une règle bornée, un niveau ou une transition d'état. | Séquence d'entrées répétable, réinitialisation, persistance du score/de l'état le cas échéant, et minutage des images. |
+| Audio | Une tonalité ou un court effet via le chemin pris en charge. | Démarrage/arrêt, mise en sourdine, interaction avec les minuteurs et comportement sous charge d'affichage/d'entrée. |
 | Stockage | Une petite modification de sauvegarde ou de chargement de ressources. | Rapport de taille, comportement en cas de coupure d'alimentation, gestion de la corruption et récupération propre. |
 | Adaptation de la carte | Un changement délibéré de correspondance d'écran, de bouton ou de haut-parleur. | Justification par le schéma et le brochage, non-régression complète des périphériques et retour à l'image de référence. |
 
 </div>
 
-Ne copiez pas d'accès aux registres AVR, d'hypothèses de broches d'origine d'Arduboy ni d'adresses de stockage dans le projet SF32 sans décision de conception appuyée sur des sources. Conservez les licences des jeux et ressources tiers à côté du code source adapté, et retirez tout élément dont les conditions de redistribution ne sont pas claires.
+Ne copiez pas d'accès aux registres AVR, d'hypothèses de broches d'origine d'Arduboy ni d'adresses de stockage dans le projet SF32 sans décision de conception étayée par des sources. Conservez les licences des jeux et ressources tiers à côté du code source adapté, et retirez tout élément dont les conditions de redistribution ne sont pas claires.
 
-**Preuves à conserver :** différentiel relu, provenance des ressources, image avant/après, journaux de compilation et de téléversement, résultats de non-régression et image de retour arrière.
+**Preuves à conserver :** diff relu, provenance des ressources, image avant/après, journaux de compilation et de téléversement, résultats de non-régression et image de retour arrière.
 
-**Critère de sortie du point de contrôle 4 :** le jeu adapté réussit les contrôles de référence des périphériques, et ses limites de mémoire, de timing, de récupération et de licence sont consignées.
+**Critère de sortie du point de contrôle 4 :** le jeu adapté réussit les contrôles de référence des périphériques, et ses limites de mémoire, de minutage, de récupération et de licence sont consignées.
 
 ## Étape 5 — Revue de maturité produit { #stage-5-product-readiness-review }
 
@@ -232,9 +232,9 @@ Ne passez pas d'une démonstration de portage à du matériel sur mesure ou à u
 
 **Critère de sortie du point de contrôle 5 :** les risques restants ont des responsables nommés et des preuves ; chaque élément fait l'objet d'une atténuation, d'un report explicite ou d'une décision d'arrêt.
 
-## Transfert vers la conception produit { #handoff-to-product-design }
+## Passage à la conception du produit { #handoff-to-product-design }
 
-Reportez le composant SF32 retenu, l'architecture d'affichage et d'entrées, le plan audio/timers, la disposition de la flash et des ressources, les mesures de puissance, la méthode de récupération et les hypothèses de test en production dans la section [Matériel](../hardware/index.md). Utilisez le [sélecteur de produits SF32](../sf32-products/product-selector.md) lorsque les exigences d'affichage, de mémoire, de boîtier, de consommation ou de connectivité du jeu modifient la présélection de composants. Pour la base logicielle, commencez par [Prise en main d'Arduino](../getting-started/arduino/getting-started-arduino.md), puis poursuivez avec la [vue d'ensemble de la plateforme Arduino](../develop/platforms/arduino/overview.md).
+Reportez le composant SF32 retenu, l'architecture d'affichage et d'entrées, le plan audio/minuteurs, la disposition de la flash et des ressources, les mesures de puissance, la méthode de récupération et les hypothèses de test en production dans la section [Matériel](../hardware/index.md). Utilisez le [sélecteur de produits SF32](../sf32-products/product-selector.md) lorsque les exigences d'affichage, de mémoire, de boîtier, de consommation ou de connectivité du jeu modifient la présélection de composants. Pour la base logicielle, commencez par [Prise en main d'Arduino](../getting-started/arduino/getting-started-arduino.md), puis poursuivez avec la [vue d'ensemble de la plateforme Arduino](../develop/platforms/arduino/overview.md).
 
 La référence a rempli son rôle pour le développement du produit lorsqu'un autre ingénieur peut reconstruire le portage, reproduire les résultats des périphériques, expliquer chaque adaptation propre à la carte et relire les preuves avant l'approbation d'une carte sur mesure ou d'une bibliothèque de jeux étendue.
 

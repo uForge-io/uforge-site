@@ -30,7 +30,7 @@ Antes de escrever qualquer código GATT, determine o que o produto realmente pre
 - Qual é o alcance esperado? Quais são as restrições da antena e do gabinete e as metas de certificação de RF?
 - As atualizações de firmware serão entregues por Bluetooth?
 
-Essas respostas orientam quase todas as decisões seguintes: qual dispositivo da família escolher, quais exemplos do SDK usar como ponto de partida e por quanto tempo a CPU principal pode permanecer em repouso.
+Essas respostas orientam a escolha do dispositivo, os exemplos do SDK que servirão de ponto de partida e por quanto tempo a CPU principal pode permanecer em repouso.
 
 ## Escolha entre BLE, Bluetooth clássico e modo dual { #choose-ble-classic-or-dual-mode }
 
@@ -40,7 +40,7 @@ BLE é uma boa opção padrão para a maioria dos dispositivos vestíveis e sens
 
 ### Bluetooth clássico e modo dual { #classic-bluetooth-and-dual-mode }
 
-Inclua Bluetooth clássico quando o produto precisar de streaming de áudio (A2DP/AVRCP), chamadas em viva-voz (HFP), enlaces de dados seriais (SPP) ou compatibilidade com perfis clássicos existentes. Projetos de modo dual exigem mais do escalonamento do rádio e da coexistência do que projetos apenas com BLE; o processador Bluetooth dedicado ajuda a isolar essas tarefas do restante do sistema.
+Inclua Bluetooth clássico quando o produto precisar de streaming de áudio (A2DP/AVRCP), chamadas em viva-voz (HFP), enlaces de dados seriais (SPP) ou compatibilidade com perfis clássicos existentes. Projetos de modo dual exigem mais do escalonamento do rádio e da coexistência do que projetos apenas com BLE; é exatamente essa a carga de trabalho que o processador Bluetooth dedicado foi projetado para isolar do restante do sistema.
 
 Nem todos os dispositivos SF32 oferecem Bluetooth de modo dual. Antes de definir o número de peça, consulte a tabela de dispositivos em [Processador Bluetooth](processor.md#device-family-differences).
 
@@ -58,7 +58,7 @@ Escolha o dispositivo com base nos recursos de conectividade exigidos pelo produ
 | Bluetooth de modo dual com custo otimizado (acessório de áudio ou módulo) | SF32LB52x |
 | Bluetooth de modo dual com display/interface mais avançados | SF32LB56x |
 | Bluetooth de modo dual com dois núcleos de aplicação para gráficos e áudio local | SF32LB57x |
-| Produto topo de linha que exige Bluetooth, gráficos, IA e mais memória | SF32LB58x |
+| Produto topo de linha que exige Bluetooth, gráficos, IA e memória de grande capacidade | SF32LB58x |
 | O núcleo de baixo consumo dedicado apenas ao controlador Bluetooth é suficiente | SF32LB52x |
 | É necessário executar no núcleo de baixo consumo tarefas adicionais, sempre ativas e programáveis pelo usuário | SF32LB55x / SF32LB56x / SF32LB58x |
 
@@ -68,7 +68,7 @@ Se o produto também exigir recursos de display, memória ou IA, compare-os nas 
 
 ## Serviços GATT e o framework Sibles { #gatt-services-and-the-sibles-framework }
 
-O SiFli-SDK oferece o framework **Sibles** para registrar e usar serviços GATT. O GATT define a hierarquia de serviços e características, além do acesso aos atributos; o GAP trata da publicidade, descoberta de dispositivos, estabelecimento de conexões e dos papéis correspondentes. São responsabilidades complementares, não uma camada GATT construída sobre o GAP. Comece pelo exemplo do SDK mais próximo, em vez de criar um banco de dados GATT do zero.
+O SiFli-SDK oferece o framework **Sibles** para registrar e usar serviços GATT. O GATT define a hierarquia de serviços e características, além do acesso aos atributos; o GAP trata da descoberta de dispositivos, dos anúncios (advertising), do estabelecimento de conexões e dos papéis correspondentes. São responsabilidades complementares, não uma camada GATT construída sobre o GAP. Comece pelo exemplo do SDK mais próximo, em vez de criar um banco de dados GATT do zero.
 
 O SDK inclui exemplos de implementação de vários perfis padrão e específicos do fornecedor:
 
@@ -108,9 +108,9 @@ Perfis de áudio e perfis legados tendem a impor requisitos mais rigorosos de te
 Há dois caminhos, conforme a abordagem de áudio:
 
 - **Áudio Bluetooth clássico** — A2DP para streaming, AVRCP para controle de reprodução e HFP para chamadas. É maduro e amplamente compatível com telefones e fones de ouvido existentes.
-- **LE Audio** — usa o [Perfil Básico de Áudio (Basic Audio Profile, BAP)](https://www.bluetooth.com/specifications/specs/basic-audio-profile-1-0-2/), que define procedimentos para gerenciar fluxos LE Audio unicast e broadcast. O SDK inclui exemplos de fonte e receptor de difusão, além de um exemplo que combina uma fonte de difusão LE Audio com Bluetooth clássico para produtos que precisam oferecer suporte às duas tecnologias durante uma transição.
+- **LE Audio** — usa o [Perfil Básico de Áudio (Basic Audio Profile, BAP)](https://www.bluetooth.com/specifications/specs/basic-audio-profile-1-0-2/), que define procedimentos para gerenciar fluxos LE Audio de unidifusão (unicast) e de difusão (broadcast). O SDK inclui exemplos de fonte e receptor de difusão, além de um exemplo que combina uma fonte de difusão LE Audio com Bluetooth clássico para produtos que precisam oferecer suporte às duas tecnologias durante uma transição.
 
-Os dois caminhos exigem temporização estável, buffers e transferência confiável de amostras de áudio, normalmente por DMA. Avalie SF32LB52x/56x/58x conforme os papéis de áudio Bluetooth e as configurações do SDK necessários ao produto. O SF32LB55x oferece apenas BLE e não pode fornecer áudio Bluetooth clássico; isso não significa ausência de recursos de áudio local. Para DMA e buffers, consulte [Visão geral de áudio](../audio/overview.md) e [Processador Bluetooth](processor.md#bluetooth-audio-and-le-audio).
+Os dois caminhos exigem temporização estável, buffers e transferência confiável de amostras de áudio, normalmente por DMA. Selecione SF32LB52x/56x/58x quando os papéis de áudio Bluetooth e as configurações do SDK que eles oferecem atenderem aos requisitos do produto. O SF32LB55x oferece apenas BLE e não pode fornecer áudio Bluetooth clássico; isso não significa ausência de recursos de áudio local. Para DMA e buffers, consulte [Visão geral de áudio](../audio/overview.md) e [Processador Bluetooth](processor.md#bluetooth-audio-and-le-audio).
 
 ## Padrão de implementação para serviços Sibles { #implementation-pattern-for-sibles-services }
 
@@ -123,11 +123,11 @@ Um serviço BLE fácil de manter costuma seguir este padrão:
 | Passo | Responsabilidade do firmware | Ponto de revisão |
 |:-----|:------------------------|:-------------|
 | Definir a interface do serviço | UUIDs, características, permissões e comportamento das notificações. | Compatibilidade com o aplicativo complementar e os requisitos de segurança. |
-| Registrar o serviço | Usar o caminho do framework Sibles/GATT adotado pelo exemplo mais próximo. | Evitar uma implementação de serviço isolada. |
-| Anunciar de forma intencional | Incluir apenas os dados necessários à descoberta e à reconexão. | Manter os dados dos anúncios pequenos e estáveis. |
-| Validar as gravações | Conferir tamanho, estado, permissões e sequência de comandos. | Impedir que dados malformados do aplicativo desestabilizem o firmware. |
-| Enviar notificações com critério | Enviar alterações ou dados agrupados, sem repetir estados desnecessariamente. | Reduzir o tempo de rádio ativo e o consumo em repouso. |
-| Preservar o estado | Armazene com segurança as chaves de pareamento e as configurações do produto. Mantenha as assinaturas CCCD por cliente: preserve-as entre conexões para clientes vinculados e restaure o valor padrão para os não vinculados. | Verifique a recuperação após reinicialização e OTA; trate alterações no banco GATT sem restaurar cegamente handles antigos. |
+| Registrar o serviço | Use o caminho do framework Sibles/GATT adotado pelo exemplo mais próximo. | Evite uma implementação de serviço isolada. |
+| Anunciar de forma intencional | Inclua apenas os dados necessários à descoberta e à reconexão. | Mantenha os dados dos anúncios pequenos e estáveis. |
+| Validar as gravações | Confira tamanho, estado, permissões e sequência de comandos. | Impeça que dados malformados do aplicativo desestabilizem o firmware. |
+| Enviar notificações com critério | Envie alterações ou dados agrupados, sem repetir estados desnecessariamente. | Reduza o tempo de rádio ativo e o consumo em repouso. |
+| Preservar o estado | Armazene com segurança as chaves de vínculo e as configurações do produto. Mantenha as assinaturas CCCD por cliente: preserve-as entre conexões para clientes vinculados e restaure o valor padrão para os não vinculados. | Verifique a recuperação após reinicialização e OTA; trate alterações no banco GATT sem restaurar cegamente handles antigos. |
 
 </div>
 
@@ -168,7 +168,7 @@ Defina parâmetros Bluetooth para cada fase do produto, em vez de tentar usar um
 | Fase | Objetivo típico | Direção dos parâmetros |
 |:------|:-------------|:--------------------|
 | Primeira descoberta | Experiência rápida | Intervalo dos anúncios curto, identidade clara do dispositivo e duração limitada. |
-| Reconexão | Menor consumo médio | Aumentar o intervalo dos anúncios após o timeout; usar comportamento direcionado ou filtrado quando apropriado. |
+| Reconexão | Menor consumo médio | Intervalo dos anúncios maior após o timeout; comportamento direcionado ou filtrado quando apropriado. |
 | Controle interativo | Baixa latência | Intervalo de conexão menor e latência do periférico baixa ou igual a zero. |
 | Conectado em repouso | Autonomia | Intervalo de conexão maior, latência do periférico diferente de zero e o mínimo de notificações. |
 | Transferência OTA por BLE | Taxa de transferência e confiabilidade | Intervalo curto, sem latência do periférico e timeout de supervisão conservador. |
@@ -180,10 +180,10 @@ Documente as transições entre as fases. Muitos problemas aparentemente “alea
 
 ## Pareamento, vínculos e segurança { #pairing-bonding-and-security }
 
-O BLE pode estabelecer uma conexão sem pareamento. O pareamento gera chaves de segurança; o bonding as armazena para conexões posteriores. Defina quais serviços exigem criptografia, autenticação e armazenamento persistente das chaves, em vez de exigir bonding em todos os produtos:
+O BLE pode estabelecer uma conexão sem pareamento. O pareamento gera chaves de segurança; o vínculo (bonding) as armazena para conexões posteriores. Defina quais serviços exigem criptografia, autenticação e armazenamento persistente das chaves, em vez de exigir vínculo em todos os produtos:
 
 - Decida desde o início entre Just Works, inserção de um código de pareamento (Passkey Entry) e comparação numérica. Just Works não protege contra ataques de intermediário (MITM): uma conexão criptografada não é necessariamente autenticada. Escolha o método conforme as capacidades de E/S dos dois dispositivos e os requisitos de segurança do produto; consulte os [requisitos de segurança do Bluetooth GAP](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-60/out/en/host/generic-access-profile.html).
-- No [ANCS](https://developer.apple.com/library/archive/documentation/CoreBluetooth/Reference/AppleNotificationCenterServiceSpecification/Specification/Specification.html), a autorização no telefone é diferente da criptografia do enlace e da vinculação; trate a recusa ou revogação dessa autorização. Tanto ANCS quanto [AMS](https://developer.apple.com/library/archive/documentation/CoreBluetooth/Reference/AppleMediaService_Reference/Specification/Specification.html) podem aparecer ou desaparecer durante uma conexão. Monitore Service Changed e refaça a descoberta do serviço, sem presumir que o pareamento garante sua disponibilidade permanente.
+- No [ANCS](https://developer.apple.com/library/archive/documentation/CoreBluetooth/Reference/AppleNotificationCenterServiceSpecification/Specification/Specification.html), a autorização no telefone é diferente da criptografia do enlace e do vínculo; trate a recusa ou revogação dessa autorização. Tanto ANCS quanto [AMS](https://developer.apple.com/library/archive/documentation/CoreBluetooth/Reference/AppleMediaService_Reference/Specification/Specification.html) podem aparecer ou desaparecer durante uma conexão. Monitore Service Changed e refaça a descoberta do serviço, sem presumir que o pareamento garante sua disponibilidade permanente.
 - Armazene as informações de vínculo segundo a abordagem de armazenamento/particionamento recomendada pelo SDK, para que os vínculos sobrevivam a reinicializações e atualizações OTA.
 - Defina um fluxo para parear novamente e para “esquecer o dispositivo”, tanto na interface do produto quanto no telefone.
 - Trate a política de segurança (requisitos de criptografia, capacidade de E/S e tamanho da chave) como uma decisão do produto, não como uma configuração padrão a deixar sem revisão.
@@ -233,7 +233,7 @@ Valide o firmware Bluetooth com o mesmo rigor aplicado ao hardware de RF:
 |:--------|:----------------------|
 | Descoberta lenta ou pouco confiável | Intervalo/tipo dos anúncios, layout de RF e casamento da antena. |
 | Desconexões frequentes apesar de um enlace RF aparentemente bom | Timeout de supervisão curto demais, incompatibilidade no intervalo de conexão ou interferência de coexistência. |
-| Consumo elevado mesmo com a conexão “ociosa” | Latência do periférico desativada, processador de aplicação despertando com frequência excessiva ou tráfego GATT desnecessário. |
+| Consumo elevado mesmo com a conexão “ociosa” | Latência do periférico não definida, processador de aplicação despertando com frequência excessiva ou tráfego GATT desnecessário. |
 | Falhas ou interrupções no áudio | Esgotamento do buffer DMA (underrun), disputa por recursos com o tráfego de display/PSRAM ou problemas de temporização e configuração específicos do transporte (BR/EDR para áudio clássico; CIS/BIS para LE Audio). |
 | Falhas intermitentes de pareamento | Problemas no armazenamento dos vínculos, incompatibilidade de capacidade de E/S ou vínculo obsoleto em um dos lados. |
 | Bom alcance na bancada, mas ruim dentro do gabinete | Dessintonia da antena causada por gabinete/bateria/PCB, configuração de potência de TX ou rede de casamento de RF. |
@@ -247,10 +247,10 @@ Valide o firmware Bluetooth com o mesmo rigor aplicado ao hardware de RF:
 - Manter a latência do periférico em 0 em enlaces que passam a maior parte do tempo ociosos.
 - Adiar os testes de coexistência até a integração final, quando display, áudio e Bluetooth são combinados pela primeira vez.
 - Tratar pareamento e vínculo como detalhes secundários, em vez de projetar o fluxo de uso.
-- Deixar a validação inicial de RF (antena, rede de casamento e precisão do cristal) para as revisões finais da PCB.
+- Deixar a validação de bring-up de RF (antena, rede de casamento e precisão do cristal) para as revisões finais da PCB.
 - Presumir que ajustes apenas no firmware compensarão um layout de RF inadequado.
 
-## Checklist para a validação inicial { #bring-up-checklist }
+## Checklist de bring-up { #bring-up-checklist }
 
 - [ ] Confirme se o produto exige apenas BLE ou Bluetooth de modo dual e escolha o dispositivo SF32 correspondente.
 - [ ] Identifique os exemplos de serviço/perfil do SDK mais próximos do caso de uso.

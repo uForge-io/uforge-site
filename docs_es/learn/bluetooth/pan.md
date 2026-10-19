@@ -164,7 +164,7 @@ OTA está habilitado de forma predeterminada en el ejemplo PAN. El comando `pan_
 
 El README también describe un fallo de compilación cuando el destino elegido no dispone de un `ptab.json` adecuado para OTA. Sus capturas muestran cómo deshabilitar el subproyecto DFU y el soporte de actualización del middleware para probar el ejemplo sin OTA. Esta medida de diagnóstico elimina OTA; no sirve para comercializar un producto que deba admitir actualizaciones. Antes de habilitar la ruta OTA, proporcione y valide el mapa de particiones y la configuración de actualización correctos.
 
-PAN proporciona transporte, no una garantía de autenticidad del firmware ni de recuperación. Para el lanzamiento, valide la autenticación del servidor, la autenticidad e integridad de la imagen, la compatibilidad de destino y versión y la recuperación tras interrupciones. Pruebe tanto la pérdida de conexión como los cortes de alimentación y verifique la recuperación o reversión real del bootloader; no dé por hecho que el comando de descarga las incorpora.
+PAN proporciona transporte, no una garantía de autenticidad del firmware ni de recuperación. Para la liberación, valide la autenticación del servidor, la autenticidad e integridad de la imagen, la compatibilidad de destino y versión y la recuperación tras interrupciones. Pruebe tanto la pérdida de conexión como los cortes de alimentación y verifique la recuperación o reversión real del bootloader; no dé por hecho que el comando de descarga las incorpora.
 
 ## Ejemplo de producto SF32 que utiliza PAN { #a-real-sf32-product-using-pan }
 

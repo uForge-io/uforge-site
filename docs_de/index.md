@@ -17,7 +17,7 @@ hide:
 
 # Bauen Sie die nächste Generation<br>von Embedded-Geräten { #build-the-next-generationof-embedded-devices }
 
-***μForge.io*** ist eine Open-Source-Entwicklungsplattform für innovative Halbleiterlösungen. Den Einstieg bildet die SF32-Familie von SiFli mit ihren Mikrocontrollern mit extrem niedrigem Energieverbrauch. Von Chips und Modulen über Entwicklungsboards, SDKs und Dokumentation bis hin zu produktionsreifen Referenzdesigns bündelt ***μForge.io*** alle Ressourcen für die Produktentwicklung an einem Ort. So können Entwickler vernetzte, intelligente und energieeffiziente Embedded-Produkte schneller und mit weniger Integrationsaufwand von der Idee bis zur Produktion bringen.
+***μForge.io*** ist eine Open-Source-Entwicklungsplattform für innovative Halbleiterlösungen. Den Einstieg bildet die SF32-Familie von SiFli mit ihren Mikrocontrollern mit extrem niedrigem Energieverbrauch. Von Chips und Modulen über Entwicklungsboards, SDKs und Dokumentation bis hin zu produktionsreifen Referenzdesigns bündelt ***μForge.io*** den gesamten Stack an einem Ort. So können Entwickler vernetzte, intelligente und energieeffiziente Embedded-Produkte schneller und mit weniger Reibungsverlusten von der Idee bis zur Produktion bringen.
 
 <div class="uf-hero-actions" markdown>
 
@@ -55,7 +55,7 @@ hide:
   <span class="uf-spotlight-item__art uf-spotlight-item__art--board" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">Hardware</span>
   <span class="uf-spotlight-item__title">Module &amp; Entwicklungsboards</span>
-  <span class="uf-spotlight-item__copy">Validierte Hardware beschleunigt den Weg vom Entwurf bis zur Produktion.</span>
+  <span class="uf-spotlight-item__copy">Getestete Hardware beschleunigt den Weg vom Entwurf bis zur Produktion.</span>
 </a>
 
 <a class="uf-spotlight-item uf-spotlight-item--sdk" href="develop/index.md" data-radius="245">
@@ -69,13 +69,13 @@ hide:
   <span class="uf-spotlight-item__art uf-spotlight-item__art--learn" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">Lernen</span>
   <span class="uf-spotlight-item__title">CPU und GPU</span>
-  <span class="uf-spotlight-item__copy">Leitfäden zu Grafik, Bluetooth, Audio und energieeffizientem Betrieb.</span>
+  <span class="uf-spotlight-item__copy">Leitfäden zu Grafik, Bluetooth, Audio und Energiesparbetrieb.</span>
 </a>
 
 <a class="uf-spotlight-item uf-spotlight-item--examples" href="projects/index.md" data-radius="230">
   <span class="uf-spotlight-item__art uf-spotlight-item__art--examples" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">Projekte</span>
-  <span class="uf-spotlight-item__title">Smartwatch und HMI</span>
+  <span class="uf-spotlight-item__title">Watch und HMI</span>
   <span class="uf-spotlight-item__copy">Anwendungsbeispiele in Produktionsqualität.</span>
 </a>
 
@@ -98,7 +98,7 @@ hide:
 
 - :fontawesome-solid-book:{ .uf-ql-icon .uf-blue } **Lernen**
 
-    Architektur- und Subsystemanleitungen für Grafik, Bluetooth, KI, Audio und Niedrigenergiebetrieb.
+    Architektur- und Subsystemanleitungen für Grafik, Bluetooth, KI, Audio und Energiesparbetrieb.
 
     [Lerninhalte ansehen :material-arrow-right:](learn/index.md){ .uf-link-blue }
 
@@ -118,11 +118,11 @@ hide:
 
 - :fontawesome-solid-microchip:{ .uf-icon-blue } **Hohe Leistung**
 
-    Kernanzahl und Funktionen unterscheiden sich je nach Baustein. Die Familie reicht von Ein- bis Dreikern-Designs; mehrere Serien verwenden Cortex-M33-/STAR-MC1-Prozessoren. Ob Cache, FPU und MPU verfügbar sind, hängt vom jeweiligen Chip und der SoC-Implementierung ab; maßgeblich ist die Dokumentation des konkreten Bausteins. Ausgewählte Bausteine bieten bis zu 64 MB PSRAM im Gehäuse.
+    Kernanzahl und Funktionen unterscheiden sich je nach Gerät. Die Familie reicht von Ein- bis Dreikern-Designs; mehrere Serien verwenden Cortex-M33-/STAR-MC1-Prozessoren. Ob Cache, FPU und MPU verfügbar sind, hängt vom jeweiligen Chip und der SoC-Implementierung ab; maßgeblich ist die Dokumentation des konkreten Geräts. Ausgewählte Geräte bieten bis zu 64 MB PSRAM im Gehäuse.
 
 - :fontawesome-brands-bluetooth:{ .uf-icon-blue } **Bluetooth-Konnektivität**
 
-    Modi und Funktionen unterscheiden sich je nach Familie und Bauteil. Je nach Gerät werden Bluetooth Classic und LE, LE Audio sowie Long-Range-PHY unterstützt. Die genauen Fähigkeiten stehen auf der jeweiligen Chipseite.
+    Modi und Funktionen unterscheiden sich je nach Familie und Gerät. Je nach Gerät werden Bluetooth Classic und LE, LE Audio sowie Long-Range-PHY unterstützt. Die genauen Fähigkeiten stehen auf der jeweiligen Chipseite.
 
 - :fontawesome-solid-cube:{ .uf-icon-purple } **Grafikbeschleunigung**
 
@@ -130,7 +130,7 @@ hide:
 
 - :fontawesome-solid-volume-high:{ .uf-icon-pink } **Audio-Subsystem**
 
-    Die Audiofunktionen unterscheiden sich je nach Familie und Bauteil. Unterstützte Geräte bieten analoges Audio, I²S, PDM und hardwaregestützte digitale Audioverarbeitung.
+    Die Audiofunktionen unterscheiden sich je nach Familie und Gerät. Unterstützte Geräte bieten analoges Audio, I²S, PDM und hardwaregestützte digitale Audioverarbeitung.
 
 - :fontawesome-solid-brain:{ .uf-icon-amber } **KI-Beschleunigung**
 
@@ -150,7 +150,7 @@ hide:
 
 - <span class="uf-mcu-chip">SF32LB52</span>
 
-    <span class="uf-mcu-headtext">**SF32LB52x**{ .uf-mcu-title } <span class="uf-mcu-sub">Einsteiger-MCU für Wearables</span></span>
+    <span class="uf-mcu-headtext">**SF32LB52x**{ .uf-mcu-title } <span class="uf-mcu-sub">Essential-MCU für Wearables</span></span>
 
     ---
 

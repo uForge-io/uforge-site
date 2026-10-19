@@ -43,7 +43,7 @@ Le package public actuel cible le SF32LB52 DevKit LCD. Conservez ces valeurs dan
 
 | Élément | Valeur |
 |:-----|:------|
-| Titre dans le Boards Manager | **SiFli Serial Boards** |
+| Titre dans le Boards Manager (gestionnaire de cartes) | **SiFli Serial Boards** |
 | Plateforme Arduino | `sifli:sf32lb52` |
 | Carte | **SiFli SF32LB52 DevKit LCD** |
 | FQBN | `sifli:sf32lb52:sf32lb52devkitlcd` |

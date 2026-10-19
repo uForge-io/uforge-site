@@ -2,7 +2,7 @@
 icon: lucide/battery-low
 title: "저전력 구성 및 측정"
 description: "SiFli-SDK의 전원 모드, 웨이크업 소스, 클럭, 보드 수준 전류 측정을 구성합니다."
-tags: [Develop, SiFli-SDK, 애플리케이션 노트, 저전력]
+tags: [개발, SiFli-SDK, 애플리케이션 노트, 저전력]
 ---
 
 # 저전력 구성 및 측정 { #configure-and-measure-low-power }
@@ -30,7 +30,7 @@ sdk.py menuconfig
 | `Sifli middleware → Enable Low power support → Enable PM Debug` | `BSP_PM_DEBUG` | 전원 관리 전이를 출력합니다. 최종 전류 측정 시에는 비활성화하십시오. |
 </div>
 
-생성된 `rtconfig.h`에는 보통 `RT_USING_PM`, `BSP_USING_PM`, 그리고 선택한 모드 심볼이 들어 있습니다. 동작하는 레퍼런스로 시작하려면 `example/pm/classical`을 사용하십시오. 이 기능을 비활성화하려면 같은 menuconfig 선택을 반대로 되돌립니다.
+생성된 `rtconfig.h`에는 보통 `RT_USING_PM`, `BSP_USING_PM`, 선택한 모드 심볼이 포함됩니다. 참고 구현으로는 `example/pm/classical`을 확인하십시오. 기능을 비활성화하려면 동일한 menuconfig 항목을 해제하십시오.
 
 아래 그림은 SF32LB52x 원본 가이드에서 가져온 것이며, 핵심 메뉴 위치 두 곳을 보여 줍니다. 실제 프로젝트에서는 대상 제품군의 SDK 메뉴를 기준으로 삼으십시오.
 
@@ -50,7 +50,7 @@ sdk.py menuconfig
 
 | 제품군 | Deep/Standby 웨이크업 동작 | Hibernate 웨이크업 동작 |
 |---|---|---|
-| SF32LB52x | Deep Sleep에서는 모든 핀이 `WSR_GPIO1`을 통해 웨이크업할 수 있으며, 웨이크업 핀을 별도로 선택할 필요가 없습니다. HCPU와 LCPU는 서로 독립적으로 슬립할 수 있습니다. | `HAL_PMU_EnterHibernate()`를 호출하기 전에 PMU 웨이크업 핀과 레벨을 구성하십시오. |
+| SF32LB52x | Deep Sleep에서는 모든 핀으로 `WSR_GPIO1` 웨이크업을 사용할 수 있으므로 웨이크업 핀을 별도로 선택할 필요가 없습니다. HCPU와 LCPU는 서로 독립적으로 슬립할 수 있습니다. | `HAL_PMU_EnterHibernate()`를 호출하기 전에 PMU 웨이크업 핀과 레벨을 구성하십시오. |
 | SF32LB55x | 55x AON 웨이크업 핀 맵을 사용합니다. | LCPU 웨이크업 핀 `PIN0`–`PIN5`만 Hibernate에서 웨이크업할 수 있습니다. 유효한 55x 핀 번호와 함께 `HAL_PMU_EnablePinWakeup()`을 사용하십시오. 이 핀들은 Hibernate에서 플로팅 상태가 되므로 보드에서 필요하면 외부 풀 저항을 추가합니다. |
 | SF32LB56x | 제품군별 HPAON/LPAON 웨이크업 핀 맵을 사용합니다. | PMU는 `PIN0`과 `PIN1`의 두 웨이크업 소스를 지원하며, 각각 HCPU 또는 LCPU 웨이크업 핀에 매핑됩니다. 아래의 PMU 매핑 예제를 사용하십시오. |
 | SF32LB57x | 제품군별 HPAON/LPAON 웨이크업 핀 맵을 사용합니다. | PMU는 `PIN0`과 `PIN1`의 두 웨이크업 소스를 지원하며, 57x의 Hibernate 핀 인덱스 범위는 0–13입니다. 각 소스를 의도한 HCPU/LCPU 웨이크업 핀에 매핑합니다. |
@@ -78,9 +78,9 @@ Hibernate 웨이크업은 `PM_HIBERNATE_BOOT`이 설정된 콜드 부트이며, 
 |---|---|---|---|
 | `PM_SLEEP_MODE_IDLE` | CPU가 WFI/WFE에서 대기하며, 클럭과 주변 장치는 계속 동작합니다. | SRAM에 계속 접근할 수 있으며, 모든 인터럽트로 웨이크업할 수 있습니다. | <1 µs |
 | `PM_SLEEP_MODE_LIGHT` | 고속 클럭이 정지하고, 서브시스템이 32 kHz로 전환됩니다. | LPTIM, RTC, LCPU BLE MAC, 메일박스 또는 웨이크업 핀. | 30–100 µs |
-| `PM_SLEEP_MODE_DEEP` | Light Sleep과 같지만 전원이 `RET_LDO`로 전환됩니다. | SRAM 리텐션과 웨이크업 소스는 제품군에 따라 다릅니다. 아래 제품군별 표를 참조하십시오. | 100 µs–1 ms |
+| `PM_SLEEP_MODE_DEEP` | Light Sleep과 비슷하지만 전원 공급이 `RET_LDO`로 전환됩니다. | SRAM 리텐션과 웨이크업 소스는 제품군에 따라 다릅니다. 아래 제품군별 표를 참조하십시오. | 100 µs–1 ms |
 | `PM_SLEEP_MODE_STANDBY` | CPU와 해당 주변 장치가 리셋되거나 꺼지며, 핀 상태는 유지됩니다. | 리텐션되는 SRAM 용량과 웨이크업 소스는 제품군에 따라 다르며, 소프트웨어는 AON 상태로 Standby 부트를 식별합니다. | 1–2 ms |
-| Hibernate | 모든 서브시스템의 전원이 꺼지며, 32 kHz 크리스털은 유지됩니다. | RTC 또는 PMU 웨이크업 핀. RAM은 유지되지 않습니다. `HAL_PMU_EnterHibernate()`. | >2 ms |
+| Hibernate | 모든 서브시스템의 전원이 꺼지고 32 kHz 크리스털만 동작을 유지합니다. | RTC 또는 PMU 웨이크업 핀. RAM은 유지되지 않습니다. `HAL_PMU_EnterHibernate()`. | >2 ms |
 | Shutdown | 모든 서브시스템의 전원이 꺼지며, RC10K는 유지됩니다. | RTC 또는 PMU 웨이크업 핀. RAM은 유지되지 않으며 IO는 고임피던스 상태가 됩니다. `HAL_PMU_EnterShutdown()`. | >2 ms |
 </div>
 
@@ -101,11 +101,11 @@ Hibernate 웨이크업은 `PM_HIBERNATE_BOOT`이 설정된 콜드 부트이며, 
 
 이 표에서 `PM_SLEEP_MODE_LIGHT`, `PM_SLEEP_MODE_DEEP`, `PM_SLEEP_MODE_STANDBY`는 각각 Light Sleep, Deep Sleep, Standby에 해당합니다.
 
-위의 제품군별 값은 인용한 SDK 가이드의 참고 수치이며, 보드에서 보장되는 타이밍이 아닙니다. SF32LB52x 가이드에 따르면 PSRAM이 있을 때 HCPU는 전원이 꺼질 RAM의 데이터를 PSRAM에 백업하고 웨이크업 후 복원하며, PSRAM이 없으면 64 KB의 Retention RAM을 백업 대상으로 사용합니다. 이 백업 영역은 제품군별 표에 나온 SRAM 리텐션 용량과는 별개입니다(예를 들어 SF32LB52x Standby 항목에는 유지되는 HPSYS SRAM이 384 KB로 나와 있습니다). 다른 제품군의 SDK 가이드에서 확인되지 않는 한, 이 백업 정책이나 용량이 그 제품군에도 적용된다고 가정하지 마십시오. 실제 전류는 활성화된 주변 장치, IO 레벨, 외부 메모리, 보드에 따라서도 달라집니다.
+위 제품군별 값은 인용한 SDK 가이드의 참고 수치이며, 실제 보드에서 보장되는 타이밍은 아닙니다. SF32LB52x 가이드에 따르면 PSRAM이 있으면 HCPU는 전원이 차단될 RAM의 데이터를 PSRAM에 백업했다가 웨이크업 후 복원합니다. PSRAM이 없으면 64 KB Retention RAM을 백업 영역으로 사용합니다. 이 백업 영역은 제품군별 표에 기재된 SRAM 리텐션 용량과 별개입니다. 예를 들어 SF32LB52x Standby 항목에는 HPSYS SRAM 384 KB가 유지된다고 되어 있습니다. 다른 제품군의 SDK 가이드에서 확인되지 않았다면 이 백업 정책이나 용량이 해당 제품군에도 적용된다고 가정하지 마십시오. 실제 전류는 활성 주변 장치, IO 레벨, 외부 메모리, 보드 구성에도 영향을 받습니다.
 
 ## 동작 중 클럭 제어 { #control-clocks-while-awake }
 
-idle 스레드가 슬립 상태로 진입할 수 없는 경우, WFI 자동 주파수 감소로 전류를 낮출 수 있습니다. 이 방법은 EPIC, EZIP, LCDC, USB, SD가 모두 유휴 상태일 때만 안전합니다. 애플리케이션이 SDK의 LVGL/디바이스 관리 기능을 사용하지 않는다면, 주변 장치 동작 구간을 `rt_pm_hw_device_start()`와 `rt_pm_hw_device_stop()`으로 감싸십시오. 분주비는 `HAL_RCC_HCPU_SetDeepWFIDiv()`로 구성하며, 오디오 워크로드는 보통 낮춘 클럭을 48 MHz로 제한하고 그 외 워크로드는 4 MHz를 사용할 수 있습니다. `HPSYS_RCC_DBGR_FORCE_HP`는 SDK 가이드에서 요구하는 대로 설정하십시오.
+idle 스레드가 슬립 상태로 진입하지 못하면 WFI 자동 클럭 저감 기능으로 전류를 줄일 수 있습니다. 단, EPIC, EZIP, LCDC, USB, SD가 모두 유휴 상태일 때만 안전합니다. 애플리케이션이 SDK의 LVGL/디바이스 관리 기능을 사용하지 않는다면 주변 장치 동작 구간을 `rt_pm_hw_device_start()`와 `rt_pm_hw_device_stop()`으로 감싸십시오. 분주비는 `HAL_RCC_HCPU_SetDeepWFIDiv()`로 설정합니다. 오디오 워크로드에서는 낮춘 클럭을 보통 48 MHz로 제한하고, 다른 워크로드에서는 4 MHz를 사용할 수 있습니다. `HPSYS_RCC_DBGR_FORCE_HP`는 SDK 가이드의 요구 사항에 따라 설정하십시오.
 
 동작 중인 작업에는 `rt_pm_run_enter()`를 사용합니다.
 
@@ -121,11 +121,11 @@ idle 스레드가 슬립 상태로 진입할 수 없는 경우, WFI 자동 주�
 | `PM_RUN_MODE_LOW_SPEED` | 24 MHz |
 </div>
 
-`pm_scenario_start()`/`pm_scenario_stop()`은 SDK의 UI 및 Audio 정책을 제공합니다. 두 시나리오 중 하나라도 활성이면 고속이 선택되고, 둘 다 비활성이면 중속이 선택됩니다. 클럭을 낮추면 실행 시간이 길어질 수 있으므로, 순간 전류만이 아니라 에너지를 측정하십시오.
+`pm_scenario_start()`/`pm_scenario_stop()`은 SDK의 UI 및 Audio 전원 정책을 적용합니다. 두 시나리오 중 하나라도 활성화되면 고속 모드를 선택하고, 둘 다 비활성화되면 중속 모드를 선택합니다. 클럭을 낮추면 실행 시간이 길어질 수 있으므로 순간 전류뿐 아니라 에너지도 측정하십시오.
 
 ## 서브시스템 간 슬립 순서 이해 { #understand-inter-subsystem-sleep-sequencing }
 
-화면이 꺼지면 HPSYS가 슬립에 들어갈 수 있습니다. 55x/56x/58x에서는 보통 HPSYS 다음에 LPSYS가 슬립에 들어가며, 52x 제품군은 HCPU/LCPU가 독립적으로 슬립하도록 허용하는, 문서화된 예외입니다. 인용한 자료에서는 57x ACPU에도 같은 순서가 적용되는지 확인되지 않으므로, 해당 SDK 릴리스에서 서브시스템 정책을 확인하십시오. 웨이크업 후에는 `gui_resume`이 새로운 화면 꺼짐 판단 주기를 시작합니다. 공유 주변 장치나 IPC 트랜잭션이 아직 코어를 필요로 하는 동안에는 해당 코어를 깨어 있는 상태로 유지하십시오.
+화면이 꺼지면 HPSYS가 슬립에 들어갈 수 있습니다. 55x/56x/58x에서는 보통 HPSYS가 먼저 슬립한 뒤 LPSYS가 슬립합니다. 52x 제품군은 HCPU와 LCPU가 독립적으로 슬립할 수 있는 예외로 문서화되어 있습니다. 인용한 자료만으로는 57x ACPU에도 같은 순서가 적용되는지 확인할 수 없으므로 해당 SDK 릴리스의 서브시스템 정책을 확인하십시오. 웨이크업 후 `gui_resume`은 다음 화면 꺼짐 판단 주기를 시작합니다. 공유 주변 장치나 IPC 트랜잭션에 코어가 계속 필요하다면 해당 코어를 깨어 있는 상태로 유지하십시오.
 
 `BSP_PM_DEBUG`를 일시적으로 활성화하고 로그에서 다음을 검색합니다.
 
@@ -141,7 +141,7 @@ idle 스레드가 슬립 상태로 진입할 수 없는 경우, WFI 자동 주�
 | `[pm]WSR:0x...` | 웨이크업 원인. 제품군 사용자 매뉴얼을 참조하여 비트를 해석합니다. |
 </div>
 
-예상한 슬립이 일어나지 않으면 `list_thread`, `pm_dump`, `list_timer`를 확인하십시오. idle 스레드가 실행되어야 하고, 어떤 코드도 `rt_pm_request(PM_SLEEP_MODE_IDLE)`를 유지하고 있지 않아야 하며, 가장 가까운 OS 타이머가 정책 임계값(일반적으로 HCPU는 100 ms, LCPU는 10 ms)보다 멀리 있어야 하고, 웨이크업 조건이 비활성 상태여야 하며, IPC 큐가 비어 있어야 합니다. 임계값보다 짧은 주기적 지연이 있으면 슬립이 계속 일어나지 않을 수 있습니다.
+예상한 슬립이 일어나지 않으면 `list_thread`, `pm_dump`, `list_timer`를 확인하십시오. idle 스레드가 실행되어야 하고, 어떤 코드도 `rt_pm_request(PM_SLEEP_MODE_IDLE)` 요청을 유지하고 있지 않아야 합니다. 다음 OS 타이머까지 남은 시간은 정책 임계값(일반적으로 HCPU 100 ms, LCPU 10 ms)보다 길어야 합니다. 또한 웨이크업 조건이 비활성 상태이고 IPC 큐가 비어 있어야 합니다. 임계값보다 짧은 주기적 지연이 있으면 슬립에 진입하지 못할 수 있습니다.
 
 원본 가이드는 "화면 꺼짐 → IDLE → 조건이 충족되면 슬립" 경로와 "키가 LPSYS를 깨우고, LCPU가 메일박스를 통해 HCPU로 이벤트를 보내면 시스템이 자동으로 HPSYS를 깨우는" 경로도 도식화합니다. 이 도식은 로그 순서를 확인하는 데 유용하지만, 표현과 흐름은 SF32LB52x 예시이므로 다른 제품군의 WSR 비트 할당을 추정하는 데 사용해서는 안 됩니다.
 
@@ -169,18 +169,18 @@ flowchart TD
 
 ## 보드 수준 누설 전류 줄이기 { #reduce-board-level-leakage }
 
-먼저 최소 시스템을 측정합니다. 디스플레이, 센서, 충전기 등 분리할 수 있는 부하를 모두 연결 해제한 다음, 하나씩 다시 추가합니다. 흔한 누설 원인은 다음과 같습니다.
+먼저 최소 시스템 구성을 측정하십시오. 디스플레이, 센서, 충전기 등 분리할 수 있는 부하를 모두 분리한 뒤 하나씩 다시 연결합니다. 흔한 누설 원인은 다음과 같습니다.
 
 - 전원이 계속 공급되는 외부 디바이스
-- 전원이 꺼진 디바이스로 High를 출력하는 출력 핀
+- 전원이 꺼진 디바이스에 High를 출력하는 핀
 - 플로팅 입력 또는 일치하지 않는 풀업/풀다운
 - 저전력 상태로 전환하지 않은 PSRAM, NOR/NAND 플래시, eMMC 또는 SDIO
 - 내부 풀다운과 충돌하는 55x USB `PA01` 구성
 
-보드별 전환은 `BSP_IO_Power_Down()`과 `BSP_Power_Up()`에 구현하고, 화면 꺼짐/켜짐 시점에 디스플레이나 터치 전원을 즉시 바꾸어야 한다면 `BSP_TP_PowerDown/Up`과 `BSP_LCD_PowerDown/Up`을 사용하십시오. XIP가 NOR 플래시에서 실행되는 경우, 플래시 슬립/웨이크업 루틴은 리텐션 RAM(`HAL_RAM_RET_CODE_SECT`)에 배치하십시오.
+보드별 전원 전환은 `BSP_IO_Power_Down()`과 `BSP_Power_Up()`에 구현하십시오. 화면이 꺼지거나 켜질 때 디스플레이 또는 터치 전원을 즉시 전환해야 한다면 `BSP_TP_PowerDown/Up`과 `BSP_LCD_PowerDown/Up`을 사용하십시오. NOR 플래시에서 XIP로 실행한다면 플래시 슬립/웨이크업 루틴을 리텐션 RAM(`HAL_RAM_RET_CODE_SECT`)에 배치하십시오.
 
 ## 재현 가능한 결과 측정 및 기록 { #measure-and-record-a-reproducible-result }
 
-측정할 때마다 제품군과 SDK 리비전, 보드 리비전, 공급 전압, 계측기 위치와 대역폭, 펌웨어 구성, 메모리 실장 여부, 활성 주변 장치, 웨이크업 소스, 슬립 모드, 전이 로그를 기록하십시오. 전류 값에는 상태와 시험 조건을 함께 보고하고, 다른 보드나 다른 모드의 값을 조건 없이 비교하지 마십시오.
+측정할 때마다 제품군과 SDK 리비전, 보드 리비전, 공급 전압, 계측기 연결 위치와 대역폭, 펌웨어 구성, 메모리 실장 여부, 활성 주변 장치, 웨이크업 소스, 슬립 모드, 전이 로그를 기록하십시오. 전류 값은 상태와 시험 조건을 함께 제시하고, 조건이 다른 보드나 모드의 값을 그대로 비교하지 마십시오.
 
 제품군별 공식 출처: [SF32LB52x](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/low_power.html), [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/low_power.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/low_power.html), [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/low_power.html). SDK의 [PMU API 레퍼런스](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/pmu.html)에는 SF32LB57x의 Hibernate 웨이크업 핀 인덱스 범위가 문서화되어 있습니다.

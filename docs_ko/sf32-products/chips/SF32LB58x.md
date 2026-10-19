@@ -1,6 +1,6 @@
 ---
 icon: lucide/microchip
-description: "SF32LB58x: 상당한 그래픽, 디스플레이, 메모리, 주변 장치 요구 사항을 가진 연결형 제품을 위한 플래그십 등급 AIoT MCU 제품군."
+description: "SF32LB58x: 고급 그래픽, 디스플레이, 메모리, 주변 장치가 필요한 연결형 제품을 위한 플래그십 AIoT MCU 제품군."
 tags:
     - 하드웨어
     - 칩
@@ -10,13 +10,13 @@ tags:
 
 ## 개요
 
-SF32LB58x 시리즈는 SF32LB5x 제품군의 플래그십 등급입니다. 더 큰 애플리케이션 프로세서급 플랫폼으로 넘어가지 않고도 고급 그래픽, 대용량 메모리, 듀얼 모드 Bluetooth, 풍부한 오디오/디스플레이 I/O, 높은 GPIO 밀도가 필요한 배터리 전원 AIoT 제품을 대상으로 합니다.
+SF32LB58x 시리즈는 SF32LB5x 제품군의 플래그십입니다. 더 큰 애플리케이션 프로세서급 플랫폼으로 전환하지 않고도 고급 그래픽, 대용량 메모리, 듀얼 모드 Bluetooth, 풍부한 오디오·디스플레이 I/O, 높은 GPIO 밀도가 필요한 배터리 구동 AIoT 제품을 대상으로 합니다.
 
 SF32LB58x는 이기종 3코어 Arm Cortex-M33 STAR-MC1[^1] 아키텍처를 사용합니다. HCPU와 ACPU는 최대 240 MHz로 동작하는 고성능 코어이고, LCPU는 최대 96 MHz로 동작하며 전력에 민감한 작업을 담당합니다. HCPU는 시스템 제어, 사용자 인터페이스, 일반 애플리케이션 처리를 맡고, ACPU는 오디오 DSP 워크로드를 처리할 수 있으며, LCPU는 Bluetooth LE, 센서 데이터 수집 및 기타 저전력 작업에 적합합니다. 이러한 분할을 통해 펌웨어는 적절한 워크로드에서 HCPU의 전원을 끌 수 있지만, 실제 절감 효과는 애플리케이션과 펌웨어에 따라 달라집니다.
 
-SiFli는 3,744 KB의 온칩 SRAM과, SKU에 따라 달라지는 코패키지 NOR 플래시 및 OPI-/HPI-PSRAM 조합을 문서화하고 있습니다. 이 제품군은 MIPI DSI를 포함한 디스플레이 지원, 벡터 그래픽 가속, USB 2.0 High-Speed, I/O 수가 많은 BGA 패키지도 제공합니다. 고해상도 UI, 상당한 그래픽 에셋, SDIO를 통한 외부 Wi-Fi가 필요하거나, 엣지 AI 또는 센서 퓨전 워크로드를 위한 연산 및 메모리 리소스가 필요한 설계에서 SF32LB58x를 평가하십시오.
+SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/HPI-PSRAM 조합을 문서화하고 있습니다. 이 제품군은 MIPI DSI를 포함한 디스플레이 인터페이스, 벡터 그래픽 가속, USB 2.0 High-Speed, GPIO 수가 많은 BGA 패키지도 제공합니다. 고해상도 UI, 많은 그래픽 에셋, SDIO를 통한 외부 Wi-Fi가 필요하거나 엣지 AI 및 센서 퓨전 작업에 필요한 연산·메모리 리소스를 확보해야 하는 설계라면 SF32LB58x를 검토하십시오.
 
-[^1]: STAR-MC1은 Arm China의 구성 가능한 Armv8-M Mainline 임베디드 CPU IP입니다. 호환되는 SF32 디바이스에서 SiFli는 이를 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서로 문서화합니다. Cortex-M33급 소프트웨어 모델 덕분에 기존 Cortex-M33 펌웨어, 미들웨어, RTOS 포트, 툴을 이어서 사용하기 쉬우며, 디바이스별 일반적인 통합 작업은 필요합니다. CU, SP, SE 구성은 주로 캐시, TCM, XIPU, TrustZone 기능에서 차이가 나며, Arm Custom Instructions/CDE와 코프로세서 인터페이스는 선택 기능이므로 해당 SF32 부품에서 지원되는지 반드시 확인해야 합니다. SiFli 문서는 문맥에 따라 ***Arm Cortex-M33 STAR-MC1*** 또는 ***Arm Cortex-M33***이라는 표기를 사용할 수 있습니다.
+[^1]: STAR-MC1은 Arm China의 구성 가능한 Armv8-M Mainline 임베디드 CPU IP입니다. 호환되는 SF32 디바이스에서 SiFli는 이를 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서로 문서화합니다. Cortex-M33급 소프트웨어 모델은 기존 Cortex-M33용 펌웨어, 미들웨어, RTOS 포트, 개발 도구를 활용하는 데 도움이 됩니다. 다만 실제 디바이스에 맞춘 통합 작업은 여전히 필요합니다. CU, SP, SE 구성은 주로 캐시, TCM, XIPU, TrustZone 기능에서 차이가 나며, Arm Custom Instructions/CDE와 코프로세서 인터페이스는 선택 기능이므로 해당 SF32 부품에서 지원되는지 반드시 확인해야 합니다. SiFli 문서는 문맥에 따라 ***Arm Cortex-M33 STAR-MC1*** 또는 ***Arm Cortex-M33***이라는 표기를 사용할 수 있습니다.
 
 ## 애플리케이션
 
@@ -52,14 +52,14 @@ SiFli는 3,744 KB의 온칩 SRAM과, SKU에 따라 달라지는 코패키지 NOR
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Product Brief]__
-- :fontawesome-solid-file-pdf: __[Datasheet]__
-- :fontawesome-solid-file-pdf: __[User Manual]__
-- :fontawesome-solid-file-lines: __[Original Design Guide (wiki.sifli.com)]__
-- :fontawesome-brands-github: __[Hardware Application Note (GitHub source)]__
-- :fontawesome-solid-file-lines: __[Hardware Design Guide (μForge)]__
-- :fontawesome-solid-cart-shopping: __[Buy Samples]__
-- :fontawesome-solid-cart-shopping: __[Buy Dev Kits]__
+- :fontawesome-solid-file-pdf: __[제품 개요서][Product Brief]__
+- :fontawesome-solid-file-pdf: __[데이터시트][Datasheet]__
+- :fontawesome-solid-file-pdf: __[사용자 설명서][User Manual]__
+- :fontawesome-solid-file-lines: __[원본 설계 가이드(wiki.sifli.com)][Original Design Guide (wiki.sifli.com)]__
+- :fontawesome-brands-github: __[하드웨어 애플리케이션 노트(GitHub 소스)][Hardware Application Note (GitHub source)]__
+- :fontawesome-solid-file-lines: __[하드웨어 설계 가이드(μForge)][Hardware Design Guide (μForge)]__
+- :fontawesome-solid-cart-shopping: __[샘플 구매][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[개발 키트 구매][Buy Dev Kits]__
 
 </div>
 

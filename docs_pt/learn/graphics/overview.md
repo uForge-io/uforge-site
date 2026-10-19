@@ -91,7 +91,7 @@ A escolha do display afeta quase todas as decisões gráficas. Antes de otimizar
 
 Um AMOLED pequeno com SPI ou QSPI se comporta de forma muito diferente de um painel RGB, MIPI DSI, JDI de memória ou EPD. O mesmo framework de interface pode atender a vários tipos de display, mas a estratégia de buffers e atualização precisa mudar conforme o painel.
 
-Para escolher a interface, projetar o caminho de flush e inicializar o painel, consulte [Controlador de display](display-controller.md).
+Para escolher a interface, projetar o caminho de flush e fazer o bring-up do painel, consulte [Controlador de display](display-controller.md).
 
 ## Comece por um exemplo LVGL validado { #start-from-a-verified-lvgl-example }
 
@@ -300,7 +300,7 @@ O desempenho gráfico costuma ser limitado pelo tráfego de memória. Posicione 
 
 Quando a CPU e o hardware gráfico ou de display compartilharem buffers, siga as regras do SDK para cache e propriedade dos buffers. Antes de o hardware ler dados escritos pela CPU, execute clean nas linhas de cache correspondentes e conclua a sincronização necessária. Antes de o hardware gravar no buffer, prepare-o para impedir que linhas sujas do cache da CPU sejam gravadas posteriormente na memória e sobrescrevam o resultado. Aguarde o término da transferência e invalide as linhas desatualizadas antes de a CPU ler o resultado. Respeite o alinhamento das linhas de cache e os dados vizinhos; não altere um buffer enquanto ele estiver sob controle do hardware. Use as rotinas compatíveis do SDK: clean e invalidate não são intercambiáveis.
 
-Para atualização parcial, comportamento específico do painel e sequência de inicialização, consulte [Controlador de display](display-controller.md).
+Para atualização parcial, comportamento específico do painel e sequência de bring-up, consulte [Controlador de display](display-controller.md).
 
 ## Prepare os recursos gráficos { #asset-preparation }
 

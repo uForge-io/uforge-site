@@ -20,7 +20,7 @@ El proyecto utiliza Opus para codificar la voz y combina el LED RGB, las teclas 
 
 Esta ruta reúne BLE, audio, pantalla, teclas, supervisión de batería y comportamiento de bajo consumo del SF32LB52 en una configuración de referencia funcional. El equipo puede evaluar el rendimiento de red y audio en hardware de desarrollo compatible antes de invertir en un diseño personalizado de RF, audio y alimentación.
 
-«Hasta ocho dispositivos y tres hablantes simultáneos» es un límite de la implementación upstream, no una capacidad de producto validada para todas las distancias, interferencias, pérdidas de paquetes y patrones de concurrencia. El material upstream tampoco especifica la autenticación de salas, la política de cifrado del enlace, una garantía de privacidad de voz, el estado normativo de la radio ni todo el alcance de licencias del componente binario `talk_back`. Cada uno de estos aspectos requiere una revisión de producto independiente.
+«Hasta ocho dispositivos y tres hablantes simultáneos» es un límite de la implementación original, no una capacidad de producto validada para todas las distancias, interferencias, pérdidas de paquetes y patrones de concurrencia. El material del proyecto original tampoco especifica la autenticación de salas, la política de cifrado del enlace, una garantía de privacidad de voz, el estado normativo de la radio ni todo el alcance de licencias del componente binario `talk_back`. Cada uno de estos aspectos requiere una revisión de producto independiente.
 
 **Nota sobre la fuente de la placa:** La página china de SiFli Wiki para la placa ULP está marcada como pendiente de publicación; solo indica su uso en sensores de bajo consumo y dispositivos vestibles, opciones de sensores de 3 o 6 ejes y puntos de prueba reservados para medir bajo consumo. No es una especificación completa de la placa. Verifique los periféricos con la revisión física y el esquemático; el comportamiento de Talkback descrito abajo procede del código fuente fijado de la aplicación.
 
@@ -38,7 +38,7 @@ Esta ruta reúne BLE, audio, pantalla, teclas, supervisión de batería y compor
 
 | Área | Requisito de referencia | Evidencias que se conservan antes de continuar |
 |:-----|:------------------------|:----------------------------------------------|
-| Límite de reproducción | Mantener intactos al principio el destino upstream, las dependencias y la interacción predeterminada | Revisión de la placa, commit de la aplicación, revisión del SDK, registro de resolución de dependencias y hash del firmware |
+| Límite de reproducción | Mantener intactos al principio el destino del proyecto original, las dependencias y la interacción predeterminada | Revisión de la placa, commit de la aplicación, revisión del SDK, registro de resolución de dependencias y hash del firmware |
 | Límite funcional | Demostrar creación/unión, PTT, salida, reconexión del Slave, reposo/activación e indicación de batería | Registro de operaciones, registros UART, estados del LED y resultados de recuperación ante fallos |
 | Límite del producto | Acústica, RF, seguridad, privacidad, licencias, alimentación y normativa requieren validaciones independientes | Riesgos, responsables, plan de resolución y decisión de continuar/detenerse |
 
@@ -70,9 +70,9 @@ Esta ruta reúne BLE, audio, pantalla, teclas, supervisión de batería y compor
 
 | Paquete o servicio | Versión o revisión requerida | Función | Estado | Dónde obtenerlo | Notas de compatibilidad y actualización |
 |:-------------------|:-----------------------------|:--------|:-------|:----------------|:--------------------------------------|
-| OpenSiFli `sifli-sdk-demo/talkback` | Commit revisado para el artículo [`6fa55ac`](https://github.com/OpenSiFli/sifli-sdk-demo/commit/6fa55ac65b51fca5eac6660a7e481a30e07388ee) | Aplicación, configuración de placa y punto de entrada de compilación | Obligatorio | [Directorio del código fuente de Talkback](https://github.com/OpenSiFli/sifli-sdk-demo/tree/main/talkback) | La rama upstream `main` cambia; fije un commit antes de recopilar evidencias. La ruta actual es `talkback/project`; la ruta `example/ble/talkback/project` del README está obsoleta |
-| SiFli-SDK | `conanfile.py` declara compatibilidad con `^2.4`; upstream no fija un commit exacto del SDK | Base de RT-Thread, BLE, audio, alimentación, compilación y grabación del firmware | Obligatorio | [OpenSiFli/SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) | Elija y registre un commit concreto que satisfaga `^2.4`; `main`, al ser móvil, no es una revisión de referencia |
-| `talk_back/1.2@sifli` | `1.2` | Componente de red/audio BLE Talkback | Obligatorio | Resuelto mediante el [manifiesto Conan del proyecto](https://github.com/OpenSiFli/sifli-sdk-demo/blob/6fa55ac65b51fca5eac6660a7e481a30e07388ee/talkback/project/conanfile.py) | Upstream no publica en esa página el código fuente independiente, el hash del paquete, el servidor de paquetes ni toda la información de licencias; archive el paquete y el registro de resolución, y cierre este riesgo antes de usarlo en un producto |
+| OpenSiFli `sifli-sdk-demo/talkback` | Commit revisado para el artículo [`6fa55ac`](https://github.com/OpenSiFli/sifli-sdk-demo/commit/6fa55ac65b51fca5eac6660a7e481a30e07388ee) | Aplicación, configuración de placa y punto de entrada de compilación | Obligatorio | [Directorio del código fuente de Talkback](https://github.com/OpenSiFli/sifli-sdk-demo/tree/main/talkback) | La rama `main` del proyecto original cambia; fije un commit antes de recopilar evidencias. La ruta actual es `talkback/project`; la ruta `example/ble/talkback/project` del README está obsoleta |
+| SiFli-SDK | `conanfile.py` declara compatibilidad con `^2.4`; el proyecto original no fija un commit exacto del SDK | Base de RT-Thread, BLE, audio, alimentación, compilación y grabación del firmware | Obligatorio | [OpenSiFli/SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) | Elija y registre un commit concreto que satisfaga `^2.4`; `main`, al ser móvil, no es una revisión de referencia |
+| `talk_back/1.2@sifli` | `1.2` | Componente de red/audio BLE Talkback | Obligatorio | Resuelto mediante el [manifiesto Conan del proyecto](https://github.com/OpenSiFli/sifli-sdk-demo/blob/6fa55ac65b51fca5eac6660a7e481a30e07388ee/talkback/project/conanfile.py) | El proyecto original no publica en esa página el código fuente independiente, el hash del paquete, el servidor de paquetes ni toda la información de licencias; archive el paquete y el registro de resolución, y cierre este riesgo antes de usarlo en un producto |
 | Opus y configuración WebRTC AECM/AGC | Determinada conjuntamente por la aplicación, el SDK y la dependencia Conan fijados | Codificación de voz, tratamiento de eco y control de ganancia | Obligatorio | [Configuración del proyecto](https://github.com/OpenSiFli/sifli-sdk-demo/blob/6fa55ac65b51fca5eac6660a7e481a30e07388ee/talkback/project/proj.conf) y dependencias fijadas del SDK | No registre solo las macros de funciones; conserve las versiones resueltas de las bibliotecas y la información de licencias |
 | SCons, compilador y herramientas de grabación UART | Versiones compatibles con el SiFli-SDK seleccionado | Configuran, compilan y programan las imágenes | Obligatorio | Incluidos en el entorno del [SiFli-SDK seleccionado](https://github.com/OpenSiFli/SiFli-SDK) | Registre el sistema operativo host, la versión de la cadena de herramientas, el comando de compilación y el hash del script generado |
 
@@ -157,7 +157,7 @@ Los principales ámbitos de fallo son el escaneo BLE y la creación de sala, la 
 
 **Evidencias que se deben conservar:** manifiesto completo de versiones, registros de compilación/grabación, hashes de firmware, revisiones de ambas placas y registros de arranque.
 
-**Criterio de salida del punto de control 1:** las mismas entradas generan de forma reproducible y graban en ambos dispositivos la misma imagen de referencia; el estado al arrancar coincide con el comportamiento upstream.
+**Criterio de salida del punto de control 1:** las mismas entradas generan de forma reproducible y graban en ambos dispositivos la misma imagen de referencia; el estado al arrancar coincide con el comportamiento del proyecto original.
 
 ## Etapa 2 — Validar la configuración de sala y PTT bidireccional { #stage-2-validate-room-setup-and-bidirectional-ptt }
 
@@ -174,7 +174,7 @@ Los principales ámbitos de fallo son el escaneo BLE y la creación de sala, la 
 
 ## Etapa 3 — Validar salida, reconexión y límites de capacidad { #stage-3-validate-leave-reconnect-and-capacity-boundaries }
 
-**Objetivo:** confirmar que las rutas de recuperación upstream y los límites de capacidad no dejan al usuario sin poder operar el dispositivo.
+**Objetivo:** confirmar que las rutas de recuperación del proyecto original y los límites de capacidad no dejan al usuario sin poder operar el dispositivo.
 
 1. Para salir durante una conversación, suelte KEY2 antes de pulsar brevemente KEY1; un dispositivo no puede salir mientras transmite.
 2. Un Slave que se haya unido correctamente anteriormente puede reconectar con una pulsación breve de KEY1 en espera. El Master no dispone de una ruta equivalente de reconexión.
@@ -183,7 +183,7 @@ Los principales ámbitos de fallo son el escaneo BLE y la creación de sala, la 
 
 **Evidencias que se deben conservar:** estado inicial, desencadenante, acción de recuperación, tiempo de recuperación, registros y participantes finales de la sala para cada fallo.
 
-**Criterio de salida del punto de control 3:** cada fallo objetivo tiene una ruta de recuperación explícita, repetible y comprensible para el usuario; y la capacidad/concurrencia necesaria se ha medido en el entorno de RF objetivo, no se ha inferido solo de los límites publicados.
+**Criterio de salida del punto de control 3:** cada fallo objetivo tiene una ruta de recuperación explícita, repetible y comprensible para el usuario; y la capacidad/concurrencia necesaria se ha medido en el entorno de RF objetivo, no se ha copiado de la declaración de límites.
 
 ## Etapa 4 — Evaluar el audio, el rendimiento RF y el consumo energético { #stage-4-qualify-acoustics-rf-and-low-power }
 

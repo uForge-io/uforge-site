@@ -6,11 +6,11 @@ hide:
   - toc
 ---
 
-# 감사합니다 — 메시지를 받았습니다 { #thanks-we-got-your-message }
+# 감사합니다 — 메시지가 접수되었습니다 { #thanks-we-got-your-message }
 
 μForge.io에 문의해 주셔서 감사합니다. 곧 답변드리겠습니다.
 
-그동안 아래 페이지를 둘러보셔도 좋습니다.
+답변을 기다리는 동안 아래 페이지도 살펴보실 수 있습니다.
 
 - [시작하기 개요](../getting-started/index.md)
 - [SF32 제품군 개요](../sf32-products/family/SF32_family.md)

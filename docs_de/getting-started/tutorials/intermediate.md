@@ -187,7 +187,7 @@ close(fd);
 ## Checkliste zur Subsystemintegration { #intermediate-integration-checklist }
 
 - [ ] Jedes Tutorial beginnt mit einem SDK-Beispiel, dessen Funktion bereits nachgewiesen wurde.
-- [ ] Zuerst wird jeder Hardwarepfad überprüft: ein bekanntes Sensorregister oder einen Messwert lesen, ein einfarbiges Testbild anzeigen, BLE-Advertising prüfen, Audio wiedergeben oder Speicher einbinden.
+- [ ] Zuerst wird jeder Hardwarepfad überprüft: ein bekanntes Sensorregister oder ein bekannter Messwert, die Panel-Füllung mit einer einfarbigen Fläche, BLE-Advertising, die Audioausgabe oder das Einbinden des Speichers.
 - [ ] Die Funktion übersteht Reset und, sofern zutreffend, Trennung/Wiederverbindung.
 - [ ] Fehlerpfade werden getestet: fehlender Sensor, fehlende Datei, getrenntes Telefon, voller Speicher.
 - [ ] Mindestens ein kombinierter Lasttest wurde durchgeführt.

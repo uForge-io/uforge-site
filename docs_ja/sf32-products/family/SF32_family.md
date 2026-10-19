@@ -186,5 +186,5 @@ SF32プラットフォームはソフトウェアとSDKの基盤を共有して�
 - [SiFli公式サイト](https://www.sifli.com/)
 - [SiFli Wiki](https://wiki.sifli.com/)
 - [SiFliソフトウェアドキュメント](https://docs.sifli.com/)
-- [OpenSiFli GitHubリポジトリ](https://github.com/OpenSiFli/)
+- [OpenSiFli GitHubリポジトリー](https://github.com/OpenSiFli/)
 - [SiFli公式Taobaoストア](https://sifli.taobao.com/)

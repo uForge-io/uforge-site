@@ -12,7 +12,7 @@ tags:
 
 **SF32** 제품군, 특히 **SF32LB5xx** 시리즈는 SiFli Technologies가 배터리로 구동되는 AIoT 및 웨어러블 애플리케이션을 위해 개발한 고집적 초저전력 32비트 마이크로컨트롤러 포트폴리오입니다.
 
-**SF32** 디바이스는 기존 마이크로컨트롤러와 애플리케이션 프로세서 사이의 간극을 메우도록 설계되었으며, 저전력 센서 처리, 무선 연결, 그래픽 가속, 멀티미디어 처리, 대용량 통합 메모리를 소형 System-in-Package(SiP) 아키텍처로 결합합니다. 이 제품군은 스마트워치, 피트니스 트래커, 스마트 디스플레이, 휴대용 의료 기기, 엣지 처리 기능을 갖춘 커넥티드 액세서리와 같은 제품을 위해 설계되었습니다.
+**SF32** 디바이스는 기존 마이크로컨트롤러와 애플리케이션 프로세서 사이의 공백을 메우도록 설계되었습니다. 저전력 센서 처리, 무선 연결, 그래픽 가속, 멀티미디어 처리, 대용량 통합 메모리를 소형 System-in-Package(SiP) 아키텍처로 결합합니다. 이 제품군은 스마트워치, 피트니스 트래커, 스마트 디스플레이, 휴대용 의료 기기, 엣지 처리 기능을 갖춘 커넥티드 액세서리를 대상으로 합니다.
 
 **LB**(Low-Power Bluetooth) 시리즈는 최초의 SF32 제품 라인입니다. 애플리케이션 중심의 추가 시리즈가 계획되어 있습니다.
 
@@ -34,7 +34,7 @@ tags:
 
 - :lucide-clipboard-check:{ .uf-hw-icon .uf-hw-green } **양산 설계**
 
-    선택한 부품에서 회로도, 레이아웃, BOM, CAD, 체크리스트, 브링업 증빙으로 이어집니다.
+    선택한 부품에서 회로도, 레이아웃, BOM, CAD, 체크리스트, 브링업(초기 구동 및 검증) 증빙으로 이어집니다.
 
     [양산 작업 계획하기 :material-arrow-right:](../../hardware/design-for-production.md){ .uf-hw-link-green }
 
@@ -44,7 +44,7 @@ tags:
 
 1. **이기종 멀티 코어 아키텍처**
 
-    SF32LB 마이크로컨트롤러는 Arm Cortex-M33 STAR-MC1 기반의 이기종 멀티 코어 아키텍처를 채택하여 고성능 애플리케이션 처리와 초저전력 백그라운드 동작의 균형을 맞춥니다. 디바이스에 따라 이 아키텍처는 하나 이상의 애플리케이션 프로세서와 함께 Bluetooth 연결, 센서 처리, 상시 동작(always-on) 시스템 기능을 담당하는 전용 저전력 프로세서를 포함할 수 있습니다.
+    SF32LB 마이크로컨트롤러는 Arm Cortex-M33 STAR-MC1 기반의 이기종 멀티코어 아키텍처를 채택해 고성능 애플리케이션 처리와 초저전력 백그라운드 동작을 함께 지원합니다. 디바이스에 따라 하나 이상의 애플리케이션 프로세서와 Bluetooth 연결, 센서 처리, 상시 동작(always-on) 시스템 기능을 담당하는 전용 저전력 프로세서를 포함할 수 있습니다.
 
     !!! info "STAR-MC1 프로세서"
         STAR-MC1은 Arm China의 구성 가능한 Armv8-M Mainline CPU IP이며, 호환되는 SF32 디바이스에서 Cortex-M33급 애플리케이션 프로세서로 사용됩니다. Cortex-M33 대상 펌웨어, 미들웨어, RTOS 포트, 툴은 디바이스별 일반적인 통합 작업을 거치면 계속 활용할 수 있습니다. CU, SP, SE 구성은 주로 캐시, TCM, XIPU, TrustZone 기능에서 차이가 나며, Arm Custom Instructions/CDE와 코프로세서 인터페이스는 선택 기능입니다. SiFli 문서는 문맥에 따라 ***Arm Cortex-M33 STAR-MC1*** 또는 ***Arm Cortex-M33***이라는 표기를 사용할 수 있습니다.
@@ -62,7 +62,7 @@ tags:
 
     모든 SF32LB 마이크로컨트롤러는 SiFli가 자체 개발한 2.5D 그래픽 엔진 ePicasso와 별도의 디스플레이 컨트롤러를 통합합니다.
 
-    하드웨어 가속은 다음과 같은 일반적인 그래픽 작업에서 CPU 부하를 크게 줄여 줍니다.
+    하드웨어 가속은 다음과 같은 일반적인 그래픽 작업에서 CPU 부하를 크게 낮춥니다.
 
     * 알파 블렌딩
     * 이미지 스케일링
@@ -83,7 +83,7 @@ tags:
 
 4. **엣지 AI 및 신경망 가속**
 
-    일부 SF32 디바이스는 머신러닝, 멀티미디어 처리, 센서 퓨전 워크로드를 위한 전용 하드웨어 가속기를 통합합니다.
+    일부 SF32 디바이스에는 머신러닝, 멀티미디어 처리, 센서 퓨전 워크로드를 위한 전용 하드웨어 가속기가 탑재됩니다.
 
     제공되는 기능은 다음을 포함할 수 있습니다.
 
@@ -110,35 +110,35 @@ tags:
 
 <div align="center"><em>SF32 마이크로컨트롤러 비교</em></div>
 
-아래 값은 제품군 수준의 성능을 요약한 것이며 모든 SKU가 보장하는 성능이 아닙니다. 인터페이스 지원 여부와 리소스 개수는 정확한 부품 번호, 패키지 또는 구성에 따라 달라질 수 있으므로 선택한 부품의 데이터시트를 확인하십시오.
+아래 값은 제품군 수준의 기능을 요약한 것으로, 모든 SKU에서 보장되는 것은 아닙니다. 인터페이스 지원 여부와 리소스 개수는 정확한 파트 넘버, 패키지 또는 구성에 따라 달라질 수 있으므로 선택한 부품의 데이터시트를 확인하십시오.
 
 <div align="center" markdown>
 
 | 기능 | SF32LB52x | SF32LB55x | SF32LB56x | SF32LB57x | SF32LB58x |
 |----------|----------|----------|----------|----------|----------|
-| 포지셔닝 | 엔트리급 | BLE 전용 주력 | 고급 | 향상된 컴퓨팅 | 플래그십 |
-| 애플리케이션 CPU | Cortex-M33 @240MHz | Cortex-M33 @240MHz | Cortex-M33 @240MHz | 2× Cortex-M33 @240MHz | 2× Cortex-M33 @240MHz |
+| 제품 포지션 | 엔트리급 | BLE 전용 주류형 | 고급형 | 컴퓨팅 성능 강화형 | 플래그십 |
+| 애플리케이션 CPU | Cortex-M33 @240 MHz | Cortex-M33 @240 MHz | Cortex-M33 @240 MHz | 2× Cortex-M33 @240 MHz | 2× Cortex-M33 @240 MHz |
 | 저전력 CPU | Cortex-M33 @24/48 MHz, 전용 Bluetooth 컨트롤러 | Cortex-M33 @48 MHz, 사용자 프로그래밍 가능 | Cortex-M33 @48/96 MHz, 사용자 프로그래밍 가능 | Cortex-M33 @24 MHz, 전용 Bluetooth 컨트롤러 | Cortex-M33 @48/96 MHz, 사용자 프로그래밍 가능 |
 | 내부 SRAM | 576 KB | 1,312 KB | 960 KB | 592 KB | 3.7 MB |
 | Bluetooth | BT Classic + BLE | BLE | BT Classic + BLE | BT Classic + BLE | BT Classic + BLE |
 | 그래픽 가속기 | 2.5D<br>ePicasso 2.0 Lite | 2.5D<br>ePicasso 1.0 | 2.5D<br>ePicasso 2.0 | 2.5D<br>ePicasso 3.0 + eZip 3.0 | 2.5D + 벡터 그래픽<br>ePicasso 2.0 + Vivante GCNanoUltraV |
 | 디스플레이 지원 | SPI / DSPI / QSPI / 8080 / EPD / JDI | SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI |
-| 오디오 ADC | 1x | n/a | 1x | 2x | 2x |
-| 오디오 DAC | 1x | n/a | 1x | 1x | 2x |
-| PDM 오디오 인터페이스 | 1x | 1–2x* | 2x | 2x | 2x |
-| I²S 오디오 인터페이스 | 1x | 1–2x* | 1x | 2x | 3x |
+| 오디오 ADC | 1개 | 해당 없음 | 1개 | 2개 | 2개 |
+| 오디오 DAC | 1개 | 해당 없음 | 1개 | 1개 | 2개 |
+| PDM 오디오 인터페이스 | 1개 | 1~2개* | 2개 | 2개 | 2개 |
+| I²S 오디오 인터페이스 | 1개 | 1~2개* | 1개 | 2개 | 3개 |
 | USB | 2.0 FS | 2.0 FS | 2.0 FS | 2.0 FS | 2.0 HS |
-| CAN | n/a | n/a | 1x | 2x | 2x |
+| CAN | 해당 없음 | 해당 없음 | 1개 | 2개 | 2개 |
 | 인패키지 PSRAM | 최대 16 MB | 최대 16 MB + 2 MB | 최대 16 MB | 최대 32 MB | 최대 32 MB + 32 MB |
 | 인패키지 NOR 플래시 | 최대 4 MB | 최대 8 MB | 최대 1 MB | 최대 32 MB | 최대 8 MB |
 | GPIO 수 | 44 / 45 | 49 / 95 / 113* | 44 / 120 | 46 / 47 / 58; BGA112는 최대 6개의 추가 I/O* | 154 |
 | 패키지 종류 | QFN68 | QFN68 / BGA145 / BGA169 | QFN68 / BGA175 | QFN68 / QFN80 / BGA112 | BGA256 |
-| 패키지 풋프린트 (L × W) | 7 × 7 mm | 7 × 7 mm | QFN: 7 × 7 mm<br>BGA: 6.5 × 6.1 mm | QFN68: 7 × 7 mm<br> QFN80: 8 × 8 mm<br>BGA: 5.4 × 4.4 mm | 8.5 × 6.5 mm |
-| 전원 | 3.2–4.7 V (520/3/5/7)<br>2.97–3.63 V (52B/E/G/J)<br>1.8 V (52D) | 1.71–3.63 V | 1.71–3.63 V | 3.2–4.7 V<br>2.97–3.63 V | 1.71–3.63 V |
+| 패키지 크기 (L × W) | 7 × 7 mm | 7 × 7 mm | QFN: 7 × 7 mm<br>BGA: 6.5 × 6.1 mm | QFN68: 7 × 7 mm<br> QFN80: 8 × 8 mm<br>BGA: 5.4 × 4.4 mm | 8.5 × 6.5 mm |
+| 전원 공급 전압 | 3.2–4.7 V (520/3/5/7)<br>2.97–3.63 V (52B/E/G/J)<br>1.8 V (52D) | 1.71–3.63 V | 1.71–3.63 V | 3.2–4.7 V<br>2.97–3.63 V | 1.71–3.63 V |
 
 </div>
 
-**SF32LB55x 변형(variant) 참고:** 오디오 인터페이스 개수는 주문 코드에 따라 달라집니다. SF32LB551/553/555 변형은 PDM과 I²S 인터페이스가 각각 1개이고, SF32LB557VD3A6은 각각 2개입니다. 최신 [SF32LB55x 데이터시트(V1.7.2)](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)의 패키지 요약은 BGA169의 GPIO를 119개(HCPU 71개 + LCPU 48개)로 기재하지만, 같은 데이터시트의 상세 제품 시리즈 표는 SF32LB557에 대해 HCPU 71개 + LCPU 42개 = 113개로 기재합니다. 현재 [SiFli Chip Model Guide](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)도 SF32LB557VD3A6에 대해 71 + 42 = 113으로 기재합니다. SiFli는 데이터시트 내의 이 불일치를 설명하지 않으며, 이 비교는 부품별 GPIO 113개 수치를 사용합니다. 핀을 배정하기 전에 정확한 SKU를 해당 데이터시트와 핀 표에서 확인하십시오. 각 PDM 인터페이스에는 디지털 마이크를 최대 2개 연결할 수 있으며, 인터페이스 개수가 곧 마이크 개수는 아닙니다.
+**SF32LB55x 변형 참고:** 오디오 인터페이스 개수는 주문 코드에 따라 달라집니다. SF32LB551/553/555 변형은 PDM과 I²S 인터페이스가 각각 1개이고, SF32LB557VD3A6은 각각 2개입니다. 최신 [SF32LB55x 데이터시트(V1.7.2)](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)의 패키지 요약은 BGA169의 GPIO를 119개(HCPU 71개 + LCPU 48개)로 기재하지만, 같은 데이터시트의 상세 제품 시리즈 표는 SF32LB557에 대해 HCPU 71개 + LCPU 42개 = 113개로 기재합니다. 현재 [SiFli Chip Model Guide](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)도 SF32LB557VD3A6에 대해 71 + 42 = 113으로 기재합니다. SiFli는 데이터시트 내의 이 불일치를 설명하지 않으며, 이 비교는 부품별 GPIO 113개 수치를 사용합니다. 핀을 배정하기 전에 정확한 SKU를 해당 데이터시트와 핀 표에서 확인하십시오. 각 PDM 인터페이스에는 디지털 마이크를 최대 2개 연결할 수 있으며, 인터페이스 개수가 곧 마이크 개수는 아닙니다.
 
 **SF32LB55x 인패키지 NOR 참고:** 제품군 최대 8 MB에는 별도로 문서화된 SS6600A8 구성이 포함됩니다. 이는 4 MB QSPI-NOR 디바이스 2개를 하나의 8 MB OSPI-NOR 디바이스로 구성한 것입니다. SF32LB55x에 나열된 SF32 접두사 주문 코드는 최대 4 MB의 인패키지 NOR 플래시를 갖추고 있습니다. 정확한 모델을 확인하십시오.
 
@@ -165,7 +165,7 @@ SF32LB5xx 제품군은 비용에 최적화된 Bluetooth 제품부터 고급 그�
 
 <div align="center" markdown>
 
-| 선택 ... | 애플리케이션에 필요한 사항 ... | 대표 애플리케이션 |
+| 선택 대상 | 애플리케이션 요구 사항 | 대표 적용 사례 |
 | : ---      | : ---  | : --- |
 | SF32LB52x  | • 듀얼 모드 Bluetooth(BT/BLE)<br> • 통합 오디오 ADC 및 DAC<br> • 통합 Li-ion 배터리 충전<br> • 최대 45개 GPIO<br> • 최대 512 × 512 디스플레이 해상도<br> • 소형이며 비용 효율적인 솔루션<br> | • 보급형 스마트워치 및 피트니스 밴드<br> • Bluetooth 모듈 및 무선 어댑터<br> • Bluetooth 오디오 액세서리<br> • 스마트 센서 및 웨어러블 디바이스<br> • 전자 가격표 및 스마트 배지<br> • 휴대용 라벨 프린터<br> • eBike 및 eScooter 디스플레이<br> • 기본 LVGL 기반 HMI 디바이스 |
 | SF32LB55x  | • Bluetooth Low Energy(BLE)<br> • MIPI DSI 커맨드 모드 디스플레이<br>• 센서 처리 알고리즘을 위한 대용량 SRAM<br> • 45개를 초과하는 GPIO<br> • 확장된 저전력 처리 기능 | • 피트니스 밴드 및 활동 트래커<br> • 스포츠 및 사이클링 컴퓨터<br> • 센서가 풍부한 웨어러블 디바이스<br> • 건강 모니터링 디바이스<br> • 배터리 구동 BLE 주변 장치 |

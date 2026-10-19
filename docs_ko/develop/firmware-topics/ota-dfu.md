@@ -2,7 +2,7 @@
 icon: lucide/upload-cloud
 description: "USB-CDC, BLE, Bluetooth PAN 펌웨어 업데이트에 SiFli-SDK DFU v2 미들웨어를 사용하는 방법과, 문서화된 애플리케이션 및 로더 예제 쌍을 설명합니다."
 tags:
-    - Develop
+    - 개발
     - OTA
     - DFU
 ---
@@ -34,9 +34,9 @@ dfu_v2/
 
 ## 호환성과 구성 { #compatibility-and-configuration }
 
-DFU v2는 기본적으로 비활성화되어 있으므로, 미들웨어 구성에서 `USING_DFU_V2`를 명시적으로 활성화하십시오. HCPU(`BF0_HCPU`)에서만 사용할 수 있으며, 레거시 DFU 옵션 `BSP_USING_DFU` 또는 `USING_DFU_PAN`과 함께 활성화할 수 없습니다. DFU v2를 활성화하면 이어받기 전송을 지원하기 위해 FlashDB(`PKG_USING_FLASHDB`)가 선택됩니다.
+DFU v2는 기본적으로 비활성화되어 있으므로, 미들웨어 구성에서 `USING_DFU_V2`를 명시적으로 활성화하십시오. HCPU(`BF0_HCPU`)에서만 사용할 수 있으며, 레거시 DFU 옵션 `BSP_USING_DFU` 또는 `USING_DFU_PAN`과 함께 활성화할 수 없습니다. DFU v2를 활성화하면 전송을 중단한 뒤 이어서 진행할 수 있도록 FlashDB(`PKG_USING_FLASHDB`)가 선택됩니다.
 
-USB CDC와 BLE는 푸시 전송이며 서로 배타적입니다. `DFU_V2_USE_CDC_TRANSPORT` 또는 `DFU_V2_USE_BLE_TRANSPORT`로 하나를 선택하십시오. Bluetooth PAN은 풀 전송을 사용하며, 디바이스 시작 모드(`DFU_V2_USE_DEVICE_MODE`) 및 WebClient와 함께 `DFU_V2_USE_PAN_TRANSPORT`를 활성화하십시오. 제품의 업데이트 아키텍처를 확정하기 전에 타깃 SDK 릴리스에서 사용 가능한 옵션을 확인하십시오.
+USB CDC와 BLE는 푸시 방식이며 동시에 사용할 수 없습니다. `DFU_V2_USE_CDC_TRANSPORT` 또는 `DFU_V2_USE_BLE_TRANSPORT` 중 하나를 선택하십시오. Bluetooth PAN은 디바이스가 업데이트를 가져오는 풀(pull) 방식입니다. 디바이스 시작 모드(`DFU_V2_USE_DEVICE_MODE`)와 WebClient를 함께 사용해 `DFU_V2_USE_PAN_TRANSPORT`를 활성화하십시오. 제품의 업데이트 아키텍처를 확정하기 전에 타깃 SDK 릴리스에서 사용할 수 있는 옵션을 확인하십시오.
 
 ## 업데이트 채널 선택 { #choose-an-update-channel }
 
@@ -57,7 +57,7 @@ USB CDC와 BLE는 푸시 전송이며 서로 배타적입니다. `DFU_V2_USE_CDC
 - [ ] 선택한 전송 채널이 제품에서 사용할 수 있는 연결 경로와 일치합니다.
 - [ ] 애플리케이션과 대응하는 로더를 하나의 업데이트 흐름으로 빌드하고 테스트했습니다.
 - [ ] 지원되는 타깃 보드를 해당 예제의 README에서 확인했습니다.
-- [ ] 제품의 업데이트 중단, 복구, 양산 서비스 시 동작이 정의되어 있습니다.
+- [ ] 업데이트가 중단됐을 때의 복구 절차와 양산·서비스 환경의 대응 방식을 정의했습니다.
 - [ ] 제품 릴리스에 대해 펌웨어 이미지의 진본성과 무결성, 버전 정책, 파티션 용량을 검토했습니다.
 - [ ] 정상적인 애플리케이션에 의존하지 않고도 업데이트 실패 로그를 수집할 수 있습니다.
 

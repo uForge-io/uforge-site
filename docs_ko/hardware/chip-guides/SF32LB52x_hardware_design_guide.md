@@ -35,15 +35,15 @@ tags:
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[SF32LB52x Product Brief]__
-- :fontawesome-solid-file-pdf: __[SF32LB52x Datasheet]__
-- :fontawesome-solid-file-pdf: __[SF32LB52x Reference Manual]__
-- :fontawesome-solid-file-lines: __[SF32LB52x Hardware Design Guide (520/3/5/7)]__
-- :fontawesome-solid-file-lines: __[SF32LB52x Hardware Design Guide (52B/D/E/G/J)]__
-- :fontawesome-solid-file-excel: __[SiFli Approved Vendor List (AVL)]__
-- :fontawesome-solid-cart-shopping: __[Buy Samples]__
-- :fontawesome-solid-cart-shopping: __[Buy Dev Kits]__
-- :fontawesome-brands-github: __[KiCad Files]__
+- :fontawesome-solid-file-pdf: __[SF32LB52x 제품 개요서][SF32LB52x Product Brief]__
+- :fontawesome-solid-file-pdf: __[SF32LB52x 데이터시트][SF32LB52x Datasheet]__
+- :fontawesome-solid-file-pdf: __[SF32LB52x 레퍼런스 매뉴얼][SF32LB52x Reference Manual]__
+- :fontawesome-solid-file-lines: __[SF32LB52x 하드웨어 설계 가이드 (520/3/5/7)][SF32LB52x Hardware Design Guide (520/3/5/7)]__
+- :fontawesome-solid-file-lines: __[SF32LB52x 하드웨어 설계 가이드 (52B/D/E/G/J)][SF32LB52x Hardware Design Guide (52B/D/E/G/J)]__
+- :fontawesome-solid-file-excel: __[SiFli 승인 업체 목록 (AVL)][SiFli Approved Vendor List (AVL)]__
+- :fontawesome-solid-cart-shopping: __[샘플 구매][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[개발 키트 구매][Buy Dev Kits]__
+- :fontawesome-brands-github: __[KiCad 파일][KiCad Files]__
 - :fontawesome-solid-sim-card: __[SF32LB52-MOD-1]__
 
 </div>
@@ -131,10 +131,10 @@ SF32LB52x 제품군은 전원 아키텍처에 따라 실질적으로 두 가지 
 - SDIO 스토리지 인터페이스 1개
 - PDM 오디오 인터페이스 1개
 - 차동 아날로그 오디오 출력 1개
-- 싱글 엔드 아날로그 오디오 입력 1개
+- 싱글 엔디드 아날로그 오디오 입력 1개
 - 단일/듀얼/쿼드 데이터 라인 SPI 디스플레이 인터페이스, 직렬 JDI 디스플레이 인터페이스
 - GRAM이 있는 디스플레이와 없는 디스플레이를 모두 지원
-- UART 플래싱과 소프트웨어 디버그 지원
+- UART 다운로드 및 소프트웨어 디버그 지원
 
 핀 배치 다이어그램은 아래와 같으며, 두 배치의 차이는 회로도 설계 절에서 다시 다룹니다.
 

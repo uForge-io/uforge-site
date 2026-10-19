@@ -23,8 +23,8 @@
 - [SF32製品](https://uForge.io/ja/sf32-products/): SF32ハードウェアを理解し、製品を計画し、チップ・モジュール・開発ボードを選定し、リファレンスデザインを再利用し、量産設計を準備するための出発点です。
 - [ハードウェア](https://uForge.io/ja/hardware/): SF32の基準構成を再利用するか、選定したデバイスを使って設計し、量産に向けて仕上げます。
 - [製品を計画する](https://uForge.io/ja/sf32-products/family/product-planning/): SF32製品の企画から量産準備までの一連の流れ。デバイスと実装形態を選び、開発ボードでソフトウェアを検証してから、量産に向けて設計を準備します。
-- [リファレンス設計](https://uForge.io/ja/hardware/reference-designs/reference-designs/): μForgeのリファレンス設計を比較し、再現可能なハードウェア／ソフトウェア検証の流れから、製品に最も近いものを選びます。
-- [コネクテッド・ウェアラブルのリファレンス設計](https://uForge.io/ja/hardware/reference-designs/connected-wearable-journey/): SF32LB52開発ボードでの検証から、コネクテッド・ウェアラブルのカスタムハードウェア／ファームウェアのリリースまでを進める、実践的なリファレンス設計の道筋です。
+- [リファレンスデザイン](https://uForge.io/ja/hardware/reference-designs/reference-designs/): μForgeのリファレンスデザインを比較し、再現可能なハードウェア／ソフトウェア検証の流れから、製品に最も近いものを選びます。
+- [コネクテッド・ウェアラブルのリファレンスデザイン](https://uForge.io/ja/hardware/reference-designs/connected-wearable-journey/): SF32LB52開発ボードでの検証から、コネクテッド・ウェアラブルのカスタムハードウェア／ファームウェアのリリースまでを進める、実践的なリファレンスデザインの道筋です。
 - [SF32製品選定ツール](https://uForge.io/ja/sf32-products/product-selector/): 製品の制約条件からSF32チップとモジュールを絞り込み、対応ハードウェアで実装パスを検証します。
 - [量産に向けた設計](https://uForge.io/ja/hardware/design-for-production/): SF32ハードウェアの量産設計の入口。チップ／モジュールの設計ガイド、チェックリスト、インターフェース定義、適合性確認済み部品、EDAライブラリをまとめています。
 
@@ -49,7 +49,7 @@
 - [SF32LB55xハードウェア設計ガイド — 設計レビュー用チェックリストと参考資料](https://uForge.io/ja/hardware/chip-guides/SF32LB55x_review_and_reference/): SF32LB55xハードウェア設計ガイドの設計レビュー用チェックリスト、関連資料、参考文献、付録、改訂履歴。
 - [SF32LB56x](https://uForge.io/ja/sf32-products/chips/SF32LB56x/): SF32LB56x: 高機能なディスプレイ、内蔵オーディオ、外部メモリー、常時動作時の処理能力を必要とする製品向けの、先進的なデュアルモードBluetooth対応・超低消費電力MCUファミリー。
 - [SF32LB56xハードウェア設計ガイド](https://uForge.io/ja/hardware/chip-guides/SF32LB56x_hardware_design_guide/): SF32LB56x MCUのハードウェア設計ガイドです。電源システム、クロック生成、RF、ディスプレイ、オーディオ、PCBレイアウトについて説明します。
-- [SF32LB56xハードウェア設計ガイド — 回路図設計ガイドライン](https://uForge.io/ja/hardware/chip-guides/SF32LB56x_schematic_design/): SF32LB56x MCUの回路図設計ガイド。電源、動作モードとウェイクアップ源、クロック生成、RF、ディスプレイ／タッチ／バックライト、ストレージ／センサー／オーディオ／接続機能、製造について説明します。
+- [SF32LB56xハードウェア設計ガイド — 回路図設計ガイドライン](https://uForge.io/ja/hardware/chip-guides/SF32LB56x_schematic_design/): SF32LB56x MCUの回路図設計ガイド。電源、動作モードとウェイクアップ要因、クロック生成、RF、ディスプレイ／タッチ／バックライト、ストレージ／センサー／オーディオ／接続機能、製造について説明します。
 - [SF32LB56xハードウェア設計ガイド — 回路図チェックリスト](https://uForge.io/ja/hardware/chip-guides/SF32LB56x_schematic_checklist/): SF32LB56x MCUの電源、クロック、RF、ストレージ、ディスプレイ、製造に関する回路図レビュー用チェックリスト。
 - [SF32LB56xハードウェア設計ガイド — PCBレイアウトガイドライン](https://uForge.io/ja/hardware/chip-guides/SF32LB56x_pcb_layout/): SF32LB56x MCUのPCBレイアウトガイドです。フットプリント、基板積層、重要信号の配線、項目別のPCBレイアウトチェックリストを説明します。
 - [SF32LB56xハードウェア設計ガイド — 設計レビュー用チェックリストと参考資料](https://uForge.io/ja/hardware/chip-guides/SF32LB56x_review_and_reference/): SF32LB56xハードウェア設計ガイドの設計レビュー用チェックリスト、関連資料、参考文献、付録、改訂履歴。
@@ -128,20 +128,20 @@
 - [STAR-MC1](https://uForge.io/ja/learn/architecture/star-mc1/): Arm ChinaのSTAR-MC1 Armv8-M Mainline CPU IPと、Cortex-M33とのアーキテクチャ上の関係、SF32ファームウェアへの影響を紹介します。
 - [PSRAMと組み込みシステムで使われる他のメモリーの比較](https://uForge.io/ja/learn/architecture/psram-and-memory-types/): 組み込みシステムにおけるPSRAM: 疑似スタティックRAMがSRAMをどのように拡張するか、DRAM、RRAM、MRAMとの違い、そしてSF32のメモリー階層全体でのデータ配置方法。
 - [PTM（Parallel Task Machine）](https://uForge.io/ja/learn/architecture/ptm-parallel-task-machine/): SF32LB57xの資料に記載されたPTM（Parallel Task Machine）の概要。タイミング要件の厳しいI/Oシーケンスや独自プロトコルをCPUから切り離して処理する、プログラマブルなペリフェラルタスク実行エンジンです。
-- [グラフィックス概要](https://uForge.io/ja/learn/graphics/overview/): SF32 UI構築の概要: ディスプレイ選定、フレームバッファ戦略、LVGL統合、ePicassoアクセラレーション、滑らかなグラフィックスのためのメモリー配置。
+- [グラフィックス概要](https://uForge.io/ja/learn/graphics/overview/): SF32 UI構築の概要: ディスプレイ選定、フレームバッファー戦略、LVGL統合、ePicassoアクセラレーション、滑らかなグラフィックスのためのメモリー配置。
 - [ePicasso 2D / 2.5Dグラフィックスエンジン](https://uForge.io/ja/learn/graphics/epicasso-gpu/): SiFliのePicasso 2D/2.5Dグラフィックスエンジンが、SF32上で組み込みUIレンダリングをどのように高速化し、LVGL、メモリー、ディスプレイコントローラーとどのように連携するか。
 - [eZipのロスレス圧縮とハードウェアデコード](https://uForge.io/ja/learn/graphics/ezip/): SiFliのeZipとeZip-Aが、対応するSF32デバイスでUIリソースの保存容量、メモリー帯域、CPUのデコード負荷をどう削減するかを説明します。
-- [TurboPixelフレームバッファ圧縮](https://uForge.io/ja/learn/graphics/turbopixel/): 対応するSF32デバイスで、TurboPixelの固定圧縮率・非可逆圧縮によりフレームバッファの保存容量と表示読み出し量を減らす方法。
-- [ディスプレイコントローラー](https://uForge.io/ja/learn/graphics/display-controller/): SF32のディスプレイコントローラーが、インターフェース選定、描画データの転送経路、部分更新、パネルの初期動作確認を含め、ピクセルをパネルへ出力する仕組みを解説します。
+- [TurboPixelフレームバッファー圧縮](https://uForge.io/ja/learn/graphics/turbopixel/): 対応するSF32デバイスで、TurboPixelの固定圧縮率・非可逆圧縮によりフレームバッファーの保存容量と表示読み出し量を減らす方法。
+- [ディスプレイコントローラー](https://uForge.io/ja/learn/graphics/display-controller/): SF32のディスプレイコントローラーが、インターフェース選定、描画データの転送経路、部分更新、パネルの立ち上げを含め、ピクセルをパネルへ出力する仕組みを解説します。
 - [LVGL SDKサンプル](https://uForge.io/ja/learn/graphics/lvgl-sdk-examples/): SiFli-SDKのLVGLサンプルを目的別に選び、画面の立ち上げ、ウィジェット、デザインツール、圧縮アセット、アニメーション、メディア、ウェアラブル向けUIを検証する。
-- [Bluetooth概要](https://uForge.io/ja/learn/bluetooth/overview/): SF32のBluetooth設計：BLEとデュアルモードの選択、GATTサービス、接続パラメータ、ペアリングとセキュリティ、LE Audio、他の処理との共存。
+- [Bluetooth概要](https://uForge.io/ja/learn/bluetooth/overview/): SF32のBluetooth設計：BLEとデュアルモードの選択、GATTサービス、接続パラメーター、ペアリングとセキュリティ、LE Audio、他の処理との共存。
 - [Bluetoothプロセッサー](https://uForge.io/ja/learn/bluetooth/processor/): SF32の専用Bluetoothプロセッサーが無線タイミングとリンク制御をアプリケーションCPUから引き受け、低消費電力の常時接続製品を実現する仕組みを解説します。
 - [Bluetooth PAN](https://uForge.io/ja/learn/bluetooth/pan/): SF32のBluetooth PAN：BNEPによる転送、NAP/GN/PANUの役割、スマートフォンのテザリングを使う際の判断基準、SiFli-SDKの設定とOTAの検証。
-- [Bluetooth SDKの例](https://uForge.io/ja/learn/bluetooth/bluetooth-sdk-examples/): BLEサービス、Classic Bluetoothプロファイル、スマートフォン統合、OTA、データ転送、LE Audioブロードキャストに適したSiFli-SDK Bluetoothの例を選ぶ。
+- [Bluetooth SDKサンプル](https://uForge.io/ja/learn/bluetooth/bluetooth-sdk-examples/): BLEサービス、Classic Bluetoothプロファイル、スマートフォン統合、OTA、データ転送、LE Audioブロードキャストに適したSiFli-SDK Bluetoothのサンプルを選ぶ。
 - [Bluetoothの消費電力を測定・分析する](https://uForge.io/ja/learn/bluetooth/bluetooth-low-power-profiling/): SF32デバイスでBLE、Classic Bluetooth、デュアルモード動作時の消費電力を測定し、電流トレースをファームウェアの動作と対応付けて、日常使用時のエネルギー予算に反映する方法を解説します。
 - [ATコマンドセット](https://uForge.io/ja/learn/bluetooth/at-command-reference/): SF32LB57デュアルモードBluetoothモジュール（SIFLI_AT）のATコマンドリファレンスです。コマンド形式、システムとデバイス、アドレスと識別情報、動作モードと可視性、ペアリングとセキュリティ、シリアルポートとイベント、接続管理、データ転送、カスタムGATTコマンド、非同期イベント（URC）、PDU形式コマンドを網羅します。
 - [AI概要](https://uForge.io/ja/learn/ai/overview/): SF32上でオンデバイスAIを実装するための概要。デバイス選定、NNACC HALの利用、メモリー使用量の見積もり、電力予算に合わせた推論スケジューリングを扱います。
-- [AIアクセラレータ](https://uForge.io/ja/learn/ai/accelerator/): SF32 NNACCの対応演算、CPU・ランタイムの役割、メモリー制約、組み込みAIのレイテンシとエネルギー評価。
+- [AIアクセラレーター](https://uForge.io/ja/learn/ai/accelerator/): SF32 NNACCの対応演算子、CPU・ランタイムの役割、メモリー制約、組み込みAIのレイテンシとエネルギー評価。
 - [オーディオ概要](https://uForge.io/ja/learn/audio/overview/): SF32のローカルオーディオサブシステムの概要: コーデックとDMAパス、インターフェース選定、バッファリング戦略、Audio Serverミドルウェア、電力トレードオフ。
 - [Audio Serverとバッファリング](https://uForge.io/ja/learn/audio/audio-server-buffering/): SF32のAudio ServerとDMAバッファリングに関する実践ガイドです。再生・録音の途切れ防止と、Bluetoothやグラフィックス処理との共存を扱います。
 - [オーディオSDKサンプル](https://uForge.io/ja/learn/audio/audio-sdk-examples/): PDMマイクの録音、再生、コーデック、ストレージ、ミキシングなど、目的に合ったSiFli-SDKのオーディオサンプルを選べます。
@@ -149,7 +149,7 @@
 - [電力測定と検証](https://uForge.io/ja/learn/low-power/measurement-and-validation/): SF32設計における電流、電圧、エネルギー、バッテリー駆動時間の見積もりを、部品から製品まで段階的に測定・検証する手順です。
 - [低消費電力SDKサンプル](https://uForge.io/ja/learn/low-power/low-power-sdk-examples/): スリープ、ウェイクアップ要因、GPIO、CPU、Bluetooth、ディスプレイ、UI、ウェアラブル機器の電力シナリオに適したSiFli-SDKの電源管理サンプルを選びます。
 - [バッテリー残量の推定](https://uForge.io/ja/learn/low-power/battery-capacity-calculation/): SiFli-SDKのバッテリー計算ミドルウェアを使い、バッテリー電圧からSF32製品の残量を推定します。充放電カーブ、充電状態検出、多段階フィルターの設定を説明します。
-- [スマートウォッチの消費電力分析](https://uForge.io/ja/learn/low-power/smartwatch-power-profiling/): 日常の利用シナリオからスマートウォッチの電池駆動時間モデルを作成・検証し、低消費電力化の優先項目を見極めます。
+- [スマートウォッチの消費電力分析](https://uForge.io/ja/learn/low-power/smartwatch-power-profiling/): 日常の利用シナリオからスマートウォッチのバッテリー駆動時間モデルを作成・検証し、低消費電力化の優先項目を見極めます。
 
 ## プロジェクト
 

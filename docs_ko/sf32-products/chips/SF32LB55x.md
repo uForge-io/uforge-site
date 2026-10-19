@@ -18,11 +18,11 @@ SiFli의 공식 제품 브리프와 데이터시트에는 BLE 5.2, ePicasso 2.5D
 
 SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제품군보다 먼저 정의되었기 때문에, 접미사가 새로운 번호 체계를 완전히 따르지 않습니다. 디바이스를 선택할 때는 전체 주문 부품 번호와 패키지별 기능 표를 사용하고, 접미사만으로 모든 기능을 추정하지 마십시오.
 
-[^1]: STAR-MC1은 Arm China의 구성 가능한 Armv8-M Mainline 임베디드 CPU IP입니다. 호환되는 SF32 디바이스에서 SiFli는 이를 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서로 문서화합니다. Cortex-M33급 소프트웨어 모델 덕분에 기존 Cortex-M33 펌웨어, 미들웨어, RTOS 포트, 툴을 이어서 사용하기 쉬우며, 디바이스별 일반적인 통합 작업은 필요합니다. CU, SP, SE 구성은 주로 캐시, TCM, XIPU, TrustZone 기능에서 차이가 나며, Arm Custom Instructions/CDE와 코프로세서 인터페이스는 선택 기능이므로 해당 SF32 부품에서 지원되는지 반드시 확인해야 합니다. SiFli 문서는 문맥에 따라 ***Arm Cortex-M33 STAR-MC1*** 또는 ***Arm Cortex-M33***이라는 표기를 사용할 수 있습니다.
+[^1]: STAR-MC1은 Arm China의 구성 가능한 Armv8-M Mainline 임베디드 CPU IP입니다. 호환되는 SF32 디바이스에서 SiFli는 이를 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서로 문서화합니다. Cortex-M33급 소프트웨어 모델은 기존 Cortex-M33용 펌웨어, 미들웨어, RTOS 포트, 개발 도구를 활용하는 데 도움이 됩니다. 다만 실제 디바이스에 맞춘 통합 작업은 여전히 필요합니다. CU, SP, SE 구성은 주로 캐시, TCM, XIPU, TrustZone 기능에서 차이가 나며, Arm Custom Instructions/CDE와 코프로세서 인터페이스는 선택 기능이므로 해당 SF32 부품에서 지원되는지 반드시 확인해야 합니다. SiFli 문서는 문맥에 따라 ***Arm Cortex-M33 STAR-MC1*** 또는 ***Arm Cortex-M33***이라는 표기를 사용할 수 있습니다.
 
 ## 애플리케이션
 
-**SF32LB55x는 다음과 같이** 보급형 웨어러블 MCU보다 강력한 UI, 더 큰 작업 메모리, 더 유연한 패키지가 필요한 BLE 중심 제품에 **권장됩니다.**
+**SF32LB55x는** 보급형 웨어러블 MCU보다 강력한 UI, 더 큰 작업 메모리, 더 유연한 패키지가 필요한 BLE 중심 제품에 **권장되며**, 대표적인 예는 다음과 같습니다.
 
 - 스마트워치 및 피트니스 밴드
 - 건강 모니터링 웨어러블
@@ -34,7 +34,7 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 
 설계에 다음 기능 중 하나 이상이 필요하면 SF32LB55x를 선택하십시오.
 
-- 매우 낮은 수신 전류의 BLE 5.2 연결
+- 수신 전류가 매우 낮은 BLE 5.2 연결
 - MIPI DSI 커맨드 모드 디스플레이 지원
 - LVGL, 그래픽 에셋, 센싱, TinyML 워크로드를 위한 더 큰 SRAM
 - 사용자가 프로그래밍할 수 있는 저전력 프로세서
@@ -58,18 +58,18 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Product Brief]__
-- :fontawesome-solid-file-pdf: __[Datasheet]__
-- :fontawesome-solid-file-pdf: __[User Manual]__
-- :fontawesome-solid-file-lines: __[Original Design Guide (wiki.sifli.com)]__
-- :fontawesome-brands-github: __[Hardware Application Note (GitHub source)]__
-- :fontawesome-solid-list: __[SiFli Chip Model Guide]__
-- :fontawesome-solid-file-lines: __[Hardware Design Guide (μForge)]__
-- :fontawesome-solid-book: __[SDK Documentation]__
-- :fontawesome-solid-book-open: __[API Reference]__
-- :fontawesome-solid-list-check: __[Hardware Design Checklist Source]__
-- :fontawesome-solid-cart-shopping: __[Buy Samples]__
-- :fontawesome-solid-cart-shopping: __[Buy Dev Kits]__
+- :fontawesome-solid-file-pdf: __[제품 개요서][Product Brief]__
+- :fontawesome-solid-file-pdf: __[데이터시트][Datasheet]__
+- :fontawesome-solid-file-pdf: __[사용자 설명서][User Manual]__
+- :fontawesome-solid-file-lines: __[원본 설계 가이드(wiki.sifli.com)][Original Design Guide (wiki.sifli.com)]__
+- :fontawesome-brands-github: __[하드웨어 애플리케이션 노트(GitHub 소스)][Hardware Application Note (GitHub source)]__
+- :fontawesome-solid-list: __[SiFli 칩 모델 가이드][SiFli Chip Model Guide]__
+- :fontawesome-solid-file-lines: __[하드웨어 설계 가이드(μForge)][Hardware Design Guide (μForge)]__
+- :fontawesome-solid-book: __[SDK 문서][SDK Documentation]__
+- :fontawesome-solid-book-open: __[API 레퍼런스][API Reference]__
+- :fontawesome-solid-list-check: __[하드웨어 설계 체크리스트 원본][Hardware Design Checklist Source]__
+- :fontawesome-solid-cart-shopping: __[샘플 구매][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[개발 키트 구매][Buy Dev Kits]__
 
 </div>
 
@@ -79,8 +79,8 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 
 ### 연산 및 메모리
 
-- 최대 240MHz의 고성능 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서
-- 최대 48MHz의 초저전력 Arm Cortex-M33 STAR-MC1 프로세서
+- 최대 240 MHz의 고성능 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서
+- 최대 48 MHz의 초저전력 Arm Cortex-M33 STAR-MC1 프로세서
 - 애플리케이션 프로세서에서 최대 360 DMIPS / 965 EEMBC CoreMark
 - 저전력 프로세서에서 최대 72 DMIPS / 193 EEMBC CoreMark
 - 64 KB 리텐션 SRAM을 포함한 1,088 KB 애플리케이션 SRAM
@@ -90,11 +90,11 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 ### 그래픽, 디스플레이, AI
 
 - 하드웨어 회전, 스케일링, 미러링, 알파 블렌딩을 지원하는 ePicasso 2.5D 그래픽 엔진
-- eZip은 그래픽을 무손실로 압축 해제하며 ePicasso와 연결하여 사용할 수 있음
-- ePicasso 변환 레이어는 최대 640 × 640 해상도를 지원하며, 일반 레이어와 디스플레이 출력은 최대 1024 × 1024를 지원하고, 디스플레이 출력은 최대 60 fps에 도달함
-- LCD 컨트롤러는 지원되는 변형(variant)에서 8080, SPI, Dual-SPI, Quad-SPI, DPI, MIPI DSI, JDI 반사형 디스플레이 인터페이스를 지원하며, 선택한 모델에서 사용 가능한지 확인해야 함
-- TurboPixel 프레임버퍼 압축으로 LCD 컨트롤러가 압축된 프레임 데이터를 읽고 표시용으로 압축 해제하므로, 프레임버퍼 저장 공간과 읽기 대역폭 요구량이 줄어듦
-- 듀얼 LCD 컨트롤러. 상시 표시(always-on display) 인터페이스와 듀얼 디스플레이 기능은 선택한 모델과 패키지에 따라 달라짐
+- eZip은 그래픽을 무손실로 압축 해제하며 ePicasso와 연결하여 사용할 수 있습니다.
+- ePicasso 변환 레이어는 최대 640 × 640 해상도를 지원하며, 일반 레이어와 디스플레이 출력은 최대 1024 × 1024를 지원하고, 디스플레이 출력은 최대 60 fps에 도달합니다.
+- LCD 컨트롤러는 지원되는 변형에서 8080, SPI, Dual-SPI, Quad-SPI, DPI, MIPI DSI, JDI 반사형 디스플레이 인터페이스를 지원하며, 선택한 모델에서 사용 가능한지 확인해야 합니다.
+- TurboPixel 프레임버퍼 압축으로 LCD 컨트롤러가 압축된 프레임 데이터를 읽고 표시용으로 압축 해제하므로, 프레임버퍼 저장 공간과 읽기 대역폭 요구량이 줄어듭니다.
+- 듀얼 LCD 컨트롤러. 상시 표시(always-on display) 인터페이스와 듀얼 디스플레이 기능은 선택한 모델과 패키지에 따라 달라집니다.
 - TinyML 워크로드용 신경망 행렬 가속기, 최대 1.92 GOPS 및 5.73 TOPS/W
 
 ### 무선 연결
@@ -113,8 +113,8 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 
 ### 주변 장치 및 I/O
 
-- 제품군 전체에서 최대 UART 5개, I2C 6개, SPI 4개 인터페이스. 개수는 아래 표와 같이 모델에 따라 다름
-- I2S 및 PDM 인터페이스 개수는 모델에 따라 다름(표 참조). PDM 인터페이스 하나에 디지털 마이크를 최대 2개 연결할 수 있으므로 인터페이스 개수와 마이크 개수는 같지 않으며, 선택한 모델의 핀 사용 가능 여부도 확인해야 합니다.
+- 제품군 전체에서 최대 UART 5개, I2C 6개, SPI 4개 인터페이스. 개수는 아래 표와 같이 모델에 따라 다릅니다.
+- I2S 및 PDM 인터페이스 개수는 모델에 따라 다름(표 참조). PDM 인터페이스 하나에 디지털 마이크를 최대 2개 연결할 수 있으므로 인터페이스 개수와 마이크 개수는 같지 않으며, 선택한 모델의 핀 사용 가능 여부도 확인하십시오.
 
 <div align="center"><em>모델별로 공개된 주변 장치 및 ADC 개수(SS6600A8은 지정되지 않음)</em></div>
 
@@ -132,18 +132,18 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 **SS6600A8 출처 참고:** 현재 [SiFli 칩 모델 가이드][SiFli Chip Model Guide]에는 이 부품의 패키지, 코패키지 메모리, GPIO, 디스플레이 인터페이스가 나열되어 있지만, 모델별 UART, I2C, SPI, I2S, PDM, Sigma-Delta ADC 개수는 지정되어 있지 않습니다. [DS5501 V1.7.2 데이터시트][Datasheet]의 Table 0-1에도 SS6600A8의 별도 행이 없습니다. 따라서 이 부품의 개수는 "지정되지 않음"으로 표시했으며, 둘 다 QFN68L을 사용한다는 이유만으로 SF32LB551U4O5의 값을 적용해서는 안 됩니다. 핀을 할당하기 전에 SiFli에 구성을 확인하십시오.
 
 - USB 2.0 FS 호스트/디바이스 인터페이스 1개
-- 10비트 GPADC(SAR ADC) 1개: 데이터시트에는 싱글 엔디드 입력 최대 8개 또는 차동 쌍 4개, 싱글 엔디드 입력 범위 0–1.1 V로 명시되어 있음
-- **ADC 출처 불일치:** [DS5501 V1.7.2 데이터시트][Datasheet]에는 싱글 엔디드 입력 최대 8개 또는 차동 쌍 4개와 싱글 엔디드 범위 0–1.1 V가 명시되어 있습니다. [SF32LB55x 하드웨어 애플리케이션 노트][Hardware Application Note (GitHub source)]에는 5채널과 0–0.9 V 입력 범위로 기재되어 있습니다. 아날로그 프런트엔드를 설계하기 전에 해당 부품과 SDK 리비전의 채널 매핑 및 한계를 확인하십시오.
-- 위 표의 BGA145 및 BGA169 모델에는 5채널 16비트 Sigma-Delta ADC가 있으며, QFN68L 모델에는 없음
+- 10비트 GPADC(SAR ADC) 1개: 데이터시트에는 싱글 엔디드 입력 최대 8개 또는 차동 쌍 4개, 싱글 엔디드 입력 범위 0~1.1 V로 명시되어 있습니다.
+- **ADC 출처 불일치:** [DS5501 V1.7.2 데이터시트][Datasheet]에는 싱글 엔디드 입력 최대 8개 또는 차동 쌍 4개와 싱글 엔디드 범위 0~1.1 V가 명시되어 있습니다. [SF32LB55x 하드웨어 애플리케이션 노트][Hardware Application Note (GitHub source)]에는 5채널과 0~0.9 V 입력 범위로 기재되어 있습니다. 아날로그 프런트엔드를 설계하기 전에 해당 부품과 SDK 리비전의 채널 매핑 및 한계를 확인하십시오.
+- 위 표의 BGA145 및 BGA169 모델에는 5채널 16비트 Sigma-Delta ADC가 있으며, QFN68L 모델에는 없습니다.
 - 온도 센서
 - 저전력 전압 비교기 2개
 - Peripheral Task Controller(PTC)
-- GPIO 개수는 패키지에 따라 다르며, 아래의 패키지 표와 출처 불일치 참고 사항 참조
+- GPIO 개수는 패키지에 따라 다르므로, 아래의 패키지 표와 출처 불일치 참고 사항을 참조하십시오.
 
 ### 전원 공급 및 패키지
 
-- 전원 공급 범위는 변형별로 다름: SS6600A8은 2.97 V~3.63 V, 551U4O5와 선택된 BGA 변형은 1.71 V~3.63 V
-- 동작 온도는 변형별로 다름: 문서화된 QFN 변형은 -20 °C~+70 °C, 선택된 BGA 변형은 -40 °C~+85 °C
+- 전원 공급 범위는 변형별로 다릅니다. SS6600A8은 2.97~3.63 V, 551U4O5와 선택된 BGA 변형은 1.71~3.63 V입니다.
+- 동작 온도는 변형별로 다릅니다. 문서화된 QFN 변형은 -20~+70 °C, 선택된 BGA 변형은 -40~+85 °C입니다.
 - 고효율 buck 레귤레이터 2개와 저전력 LDO를 갖춘 통합 전원 관리
 - RTC 웨이크업 시 슬립 전류: 600 nA
 - 핀 웨이크업 시 슬립 전류: 280 nA
@@ -153,7 +153,7 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 
 SF32LB55x 디바이스는 QFN 및 BGA 패키지로 제공됩니다. GPIO 개수, 내장 메모리, 디스플레이 인터페이스 선택, PCB 공정이 모두 패키지에 따라 크게 달라지므로 패키지를 일찍 선택하십시오.
 
-여기서 패키지 선택은 단순한 레이아웃 문제가 아닙니다. SiFli의 [칩 모델 가이드][SiFli Chip Model Guide]에는 55x 제품군이 패키지에 따라 디스플레이 인터페이스 집합 전체 또는 일부만 지원한다고 명시되어 있으므로, 디스플레이, 메모리, 핀 예산 계획을 확정하기 전에 패키지 선택을 먼저 확정해야 합니다. 같은 패키지의 부품은 핀 호환이 되지만, 호환되는 대체품을 선택하기 전에 정확한 메모리 구성과 디스플레이 요구 사항을 확인하십시오.
+여기서 패키지 선택은 단순한 레이아웃 문제가 아닙니다. SiFli의 [칩 모델 가이드][SiFli Chip Model Guide]에는 55x 제품군이 패키지에 따라 디스플레이 인터페이스 집합 전체 또는 일부만 지원한다고 명시되어 있으므로, 디스플레이, 메모리, 핀 예산 계획을 확정하기 전에 패키지 선택을 먼저 확정하는 것이 좋습니다. 같은 패키지의 부품은 핀 호환이 되지만, 호환되는 대체품을 선택하기 전에 정확한 메모리 구성과 디스플레이 요구 사항을 확인하십시오.
 
 <div align="center"><em>SF32LB55x 패키지별 I/O 옵션</em></div>
 
@@ -175,11 +175,11 @@ SiFli 칩 모델 가이드에 나열된 다음의 현재 모델은 패키지와 
 
 | 부품 번호 | 패키지 | 내장 메모리 | 모델 가이드에 나열된 디스플레이 인터페이스 | 선택 참고 사항 |
 | :--- | :--- | :--- | :--- | :--- |
-| SS6600A8 | QFN68L | 4 MB QSPI NOR 두 개를 8 MB OSPI NOR 하나로 구성, 코패키지 PSRAM 없음 | QSPI, 8080 | GPIO 49개, 2.97 V~3.63 V, -20 °C~+70 °C, 코패키지 PSRAM이 없는 소형 옵션 |
-| SF32LB551U4O5 | QFN68L | 4 MB QSPI NOR 부트 플래시 + 4 MB OPI-PSRAM | QSPI, 8080 | GPIO 49개, 1.71 V~3.63 V, -20 °C~+70 °C, PSRAM이 내장된 소형 옵션 |
-| SF32LB555V4O6 | BGA145 | 4 MB QSPI NOR 부트 플래시 + 4 MB OPI-PSRAM | MIPI DSI 커맨드 모드, QSPI, 8080 | GPIO 95개, -40 °C~+85 °C, 4 MB PSRAM이 필요한 디스플레이 제품에 적합한 균형 잡힌 BGA145 선택 |
-| SF32LB555V436 | BGA145 | 4 MB QSPI NOR 부트 플래시 + 8 MB OPI-PSRAM | MIPI DSI 커맨드 모드, QSPI, 8080 | GPIO 95개, -40 °C~+85 °C, SF32LB555V4O6의 두 배인 내장 PSRAM이 필요할 때의 BGA145 옵션 |
-| SF32LB557VD3A6 | BGA169 | 1 MB QSPI NOR 부트 플래시 + 16 MB OPI-PSRAM + 2 MB QPI-PSRAM | MIPI DSI 커맨드 모드, QSPI, 8080, JDI/Sharp MIP | GPIO 113개, -40 °C~+85 °C, MIPI DSI와 SPI/DSPI 듀얼 디스플레이에서 서로 독립된 콘텐츠를 지원 |
+| SS6600A8 | QFN68L | 4 MB QSPI NOR 두 개를 8 MB OSPI NOR 하나로 구성, 코패키지 PSRAM 없음 | QSPI, 8080 | GPIO 49개, 2.97~3.63 V, -20~+70 °C, 코패키지 PSRAM이 없는 소형 옵션 |
+| SF32LB551U4O5 | QFN68L | 4 MB QSPI NOR 부트 플래시 + 4 MB OPI-PSRAM | QSPI, 8080 | GPIO 49개, 1.71~3.63 V, -20~+70 °C, PSRAM이 내장된 소형 옵션 |
+| SF32LB555V4O6 | BGA145 | 4 MB QSPI NOR 부트 플래시 + 4 MB OPI-PSRAM | MIPI DSI 커맨드 모드, QSPI, 8080 | GPIO 95개, -40~+85 °C, 4 MB PSRAM이 필요한 디스플레이 제품에 적합한 균형 잡힌 BGA145 선택 |
+| SF32LB555V436 | BGA145 | 4 MB QSPI NOR 부트 플래시 + 8 MB OPI-PSRAM | MIPI DSI 커맨드 모드, QSPI, 8080 | GPIO 95개, -40~+85 °C, SF32LB555V4O6의 두 배인 내장 PSRAM이 필요할 때의 BGA145 옵션 |
+| SF32LB557VD3A6 | BGA169 | 1 MB QSPI NOR 부트 플래시 + 16 MB OPI-PSRAM + 2 MB QPI-PSRAM | MIPI DSI 커맨드 모드, QSPI, 8080, JDI/Sharp MIP | GPIO 113개, -40~+85 °C, MIPI DSI와 SPI/DSPI 듀얼 디스플레이에서 서로 독립된 콘텐츠를 지원 |
 
 </div>
 
@@ -190,8 +190,8 @@ SF32LB557VD3A6에 대해 현재 SiFli 칩 모델 가이드와 DS5501 V1.7.2 데�
 SF32LB55x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따르십시오.
 
 1. **펌웨어 경로 검증.** [SiFli SDK 시작 가이드](../../getting-started/sifli/getting-started-sifli-sdk.md)로 시작한 다음, [SiFli SDK 워크플로](../../develop/platforms/sifli-sdk/overview.md)와 [예제](../../develop/examples/index.md)를 사용해 필요한 디스플레이, Bluetooth, 저전력 동작을 검증하십시오.
-2. **평가 하드웨어 계획.** μForge.io는 현재 SF32LB55 전용 모듈이나 개발 보드를 카탈로그에 올려 두지 않았습니다. [SF32 제품 선택기](../product-selector.md)로 가장 가까운 평가 플랫폼을 선택한 다음, 그 결과를 55x 설계에 적용하기 전에 패키지와 인터페이스 커버리지를 확인하십시오.
-3. **하드웨어 설계 및 검토.** 회로도 또는 레이아웃을 릴리스하기 전에 μForge.io [SF32LB55x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md)와 그 [회로도](../../hardware/chip-guides/SF32LB55x_schematic_checklist.md) 및 PCB 레이아웃 체크리스트를 사용하십시오.
+2. **평가 하드웨어 계획.** μForge는 현재 SF32LB55 전용 모듈이나 개발 보드를 카탈로그에 올려 두지 않았습니다. [SF32 제품 선택기](../product-selector.md)로 가장 가까운 평가 플랫폼을 선택한 다음, 그 결과를 55x 설계에 적용하기 전에 패키지와 인터페이스 커버리지를 확인하십시오.
+3. **하드웨어 설계 및 검토.** 회로도 또는 레이아웃을 릴리스하기 전에 μForge [SF32LB55x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md)와 그 [회로도](../../hardware/chip-guides/SF32LB55x_schematic_checklist.md) 및 PCB 레이아웃 체크리스트를 사용하십시오.
 4. **주요 정보 출처 확인.** 실제 주문할 부품과 패키지를 SiFli [데이터시트][Datasheet], [사용자 매뉴얼][User Manual], [원본 설계 가이드][Original Design Guide (wiki.sifli.com)], [하드웨어 애플리케이션 노트 소스][Hardware Application Note (GitHub source)]와 대조하여 확인하십시오.
 
 ## 관련 제품

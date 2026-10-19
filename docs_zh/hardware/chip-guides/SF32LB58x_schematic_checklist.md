@@ -26,7 +26,7 @@ hide:
 
 | 序号 | 检查项 | 类别 |
 |:---|:---|:---|
-| 1 | 所选料号的封装正确，包括引脚名称与引脚编号 | 必检 |
+| 1 | 所选料号的封装正确，包括管脚名称与管脚编号 | 必检 |
 
 </div>
 
@@ -56,7 +56,7 @@ hide:
 | 16 | AVDD_BRF 供电电压为 1.8 V-3.3 V，且必须与 VDD1 供电一致 | 必检 |
 | 17 | AVDD33_AUD 供电电压为 3.3 V | 必检 |
 | 18 | AVDD18_DSI 供电电压为 1.8 V | 必检 |
-| 19 | 当 SF30147C 提供电源时，TWI 控制接口必须使用 MCU 的 PB 引脚，且这些引脚必须是 PD 引脚 | 必检 |
+| 19 | 当 SF30147C 提供电源时，TWI 控制接口必须使用 MCU 的 PB 管脚，且这些管脚必须是 PD 管脚 | 必检 |
 | 20 | 充电电路需要具备电源路径管理（power-path management）能力，以便在电池电压过低时，系统可由充电器 5 V 输入供电 | 必检 |
 | 21 | 当 SF30147C 提供电源时，使用芯片专用 TWI 控制接口 | 必检 |
 | 22 | 当 SF30147C 提供电源时，由 EN 控制的电源轨必须使用 PVDD 或 AVDD 作为 EN 的供电域；不要直接由 MCU GPIO 控制 EN。或者将 EN 接地，并通过寄存器控制对应电源轨输出 | 必检 |
@@ -77,30 +77,30 @@ hide:
 
 | 序号 | 检查项 | 类别 |
 |:---|:---|:---|
-| 1 | PVDD1 大电容至少为 10 uF | 必检 |
-| 2 | PVDD2 电容至少为 10 uF | 必检 |
-| 3 | BUCK1_FB 电容 = 4.7 uF | 必检 |
-| 4 | BUCK2_FB 电容 = 4.7 uF | 必检 |
-| 5 | LDO_VOUT1 电容 = 4.7 uF | 必检 |
-| 6 | VDD_RET 电容 = 0.47 uF | 必检 |
-| 7 | VDD_RTC 电容 = 1 uF | 必检 |
-| 8 | VDDIOA 电容 &gt;= 1 uF | 必检 |
-| 9 | VDDIOA2 电容 &gt;= 1 uF | 必检 |
-| 10 | VDDIOB 电容 &gt;= 1 uF | 必检 |
-| 11 | VDDIOSA 电容 &gt;= 1 uF | 必检 |
-| 12 | VDDIOSB 电容 &gt;= 1 uF | 必检 |
-| 13 | VDDIOSC 电容 &gt;= 1 uF | 必检 |
-| 14 | AVDD33_USB 电容 &gt;= 1 uF | 必检 |
-| 15 | AVDD33_ANA 电容 &gt;= 4.7 uF | 必检 |
-| 16 | AVDD_BRF 电容 &gt;= 4.7 uF | 必检 |
-| 17 | AVDD33_AUD 电容 &gt;= 4.7 uF | 必检 |
-| 18 | AUD_VREF 电容 = 1 uF | 必检 |
-| 19 | AVDD18_DSI 电容 &gt;= 4.7 uF | 必检 |
-| 20 | MIC_BIAS 电容 = 1 uF | 必检 |
-| 21 | GPADC VREFP 电容 = 4.7 uF | 必检 |
+| 1 | PVDD1 大电容至少为 10 μF | 必检 |
+| 2 | PVDD2 电容至少为 10 μF | 必检 |
+| 3 | BUCK1_FB 电容 = 4.7 μF | 必检 |
+| 4 | BUCK2_FB 电容 = 4.7 μF | 必检 |
+| 5 | LDO_VOUT1 电容 = 4.7 μF | 必检 |
+| 6 | VDD_RET 电容 = 0.47 μF | 必检 |
+| 7 | VDD_RTC 电容 = 1 μF | 必检 |
+| 8 | VDDIOA 电容 &gt;= 1 μF | 必检 |
+| 9 | VDDIOA2 电容 &gt;= 1 μF | 必检 |
+| 10 | VDDIOB 电容 &gt;= 1 μF | 必检 |
+| 11 | VDDIOSA 电容 &gt;= 1 μF | 必检 |
+| 12 | VDDIOSB 电容 &gt;= 1 μF | 必检 |
+| 13 | VDDIOSC 电容 &gt;= 1 μF | 必检 |
+| 14 | AVDD33_USB 电容 &gt;= 1 μF | 必检 |
+| 15 | AVDD33_ANA 电容 &gt;= 4.7 μF | 必检 |
+| 16 | AVDD_BRF 电容 &gt;= 4.7 μF | 必检 |
+| 17 | AVDD33_AUD 电容 &gt;= 4.7 μF | 必检 |
+| 18 | AUD_VREF 电容 = 1 μF | 必检 |
+| 19 | AVDD18_DSI 电容 &gt;= 4.7 μF | 必检 |
+| 20 | MIC_BIAS 电容 = 1 μF | 必检 |
+| 21 | GPADC VREFP 电容 = 4.7 μF | 必检 |
 | 22 | <span class="flag-red">PVDD1、PVDD2、AVDD_BRF 以及 RSTN 上拉电源必须相同</span> | 必检 |
-| 23 | BUCK1 与 BUCK2 电感的料号均收录于思澈科技（SiFli）合格供应商名录（AVL） | 必检 |
-| 24 | 若 BUCK 电感的料号未收录于思澈科技（SiFli）合格供应商名录（AVL），则需满足 L = 4.7 uH、DCR ≤ 0.4 Ω、Isat ≥ 450 mA | 必检 |
+| 23 | BUCK1 与 BUCK2 电感均为思澈科技（SiFli）推荐的料号 | 必检 |
+| 24 | 若 BUCK 电感不是思澈科技（SiFli）推荐的料号，则需满足 L = 4.7 μH、DCR ≤ 0.4 Ω、Isat ≥ 450 mA | 必检 |
 | 25 | <span class="flag-red">当 PVDD1 和 PVDD2 由 VBAT 转 1.8 V 供电时，应使用 DCDC 生成 1.8 V；不要使用 LDO</span> | 必检 |
 | 26 | <span class="flag-red">已记录所选 DCDC 的静态电流，且满足项目要求</span> | 必检 |
 | 27 | <span class="flag-red">已记录所选 LDO 的静态电流，且满足项目要求</span> | 必检 |
@@ -108,7 +108,7 @@ hide:
 </div>
 
 !!! note "BUCK 电感饱和电流的来源差异"
-    工作簿“电源电容-电感”核对表第 24 项规定，非 AVL 推荐电感的 Isat 至少为 450 mA；OpenSiFli 硬件应用说明对 L = 4.7 μH、DCR ≤ 0.4 Ω 的 BUCK 电感规定 Isat 至少为 500 mA。表格保留工作簿中的 450 mA 原值；[原理图设计中的 BUCK 电感选型](SF32LB58x_schematic_design.md#5114-buck-inductor-selection)按 500 mA 执行。在思澈科技（SiFli）澄清前，非 AVL 电感应满足至少 500 mA 的 Isat 要求。
+    工作簿“电源电容-电感”核对表第 24 项规定，非 AVL 电感的 Isat 至少为 450 mA；OpenSiFli 硬件应用说明对 L = 4.7 μH、DCR ≤ 0.4 Ω 的 BUCK 电感规定 Isat 至少为 500 mA。表格保留工作簿中的 450 mA 原值；[原理图设计中的 BUCK 电感选型](SF32LB58x_schematic_design.md#5114-buck-inductor-selection)按 500 mA 执行。在思澈科技（SiFli）澄清前，非 AVL 电感应满足至少 500 mA 的 Isat 要求。
 
 ### 5.8.4. 时钟 { #584-clock }
 
@@ -119,9 +119,9 @@ hide:
 | 序号 | 检查项 | 类别 |
 |:---|:---|:---|
 | 1 | 主 48 MHz 晶体为 AVL 清单内料号 | 必检 |
-| 2 | 若 48 MHz 晶体不在 AVL 清单内，则需满足 7 pF ≤ CL ≤ 12 pF（推荐 8.8 pF）、频偏 ≤±10 ppm、ESR ≤30 Ω（推荐 22 Ω） | 必检 |
+| 2 | 若 48 MHz 晶体不在 AVL 清单内，则需满足 7 pF ≤ CL ≤ 12 pF（推荐 8.8 pF）、频率容差 ≤±10 ppm、ESR ≤30 Ω（推荐 22 Ω） | 必检 |
 | 3 | RTC 32.768 kHz 晶体为 AVL 清单内料号 | 必检 |
-| 4 | 若 32.768 kHz 晶体不在 AVL 清单内，则需满足 CL ≤12.5 pF（推荐 7 pF）、频偏 ≤±20 ppm、ESR ≤80 kΩ（推荐 38 kΩ） | 必检 |
+| 4 | 若 32.768 kHz 晶体不在 AVL 清单内，则需满足 CL ≤12.5 pF（推荐 7 pF）、频率容差 ≤±20 ppm、ESR ≤80 kΩ（推荐 38 kΩ） | 必检 |
 
 </div>
 
@@ -134,7 +134,7 @@ hide:
 | 序号 | 检查项 | 类别 |
 |:---|:---|:---|
 | 1 | RSTN 上拉到与 PVDD1 相同的电源 | 必检 |
-| 2 | RSTN 预留 0.1 uF 对地电容 | 必检 |
+| 2 | RSTN 预留 0.1 μF 对地电容 | 必检 |
 | 3 | RSTN 具备 ESD 保护 | 必检 |
 
 </div>
@@ -177,7 +177,7 @@ hide:
 | 2 | ANT 信号预留 Pi 型匹配网络：一个并联 NC（不贴装）电容和一个 15 pF 串联电容 | 必检 |
 | 3 | 若需考虑杂散发射滤波，则预留 Pi 型匹配网络，包含 2.7 nH 串联电感和 2 pF 并联电容 | 可选 |
 | 4 | 若外部 RF PA 需要 MCU 控制 RXEN 与 TXEN，则 PA 的 RXEN 仅使用 PB39，PA 的 TXEN 仅使用 PB40 | 可选 |
-| 5 | <span class="flag-red">若 Wi-Fi 芯片支持天线共存仲裁：<br> (1) 推荐使用 3 线模式：由 Wi-Fi 芯片控制蓝牙（Bluetooth）与 Wi-Fi 共用的天线 RF 开关并执行仲裁。Wi-Fi 芯片使用 BT_ACTIVE 和 BT_PRIORITY 判断是否授予蓝牙天线所有权，WLAN_ACTIVE 可在 Wi-Fi 工作期间屏蔽蓝牙收发。<br> (2) BT_ACTIVE 必须使用 PB08 或 PB45，WLAN_ACTIVE 必须使用 PB09 或 PB41，BT_PRIORITY 可使用任意 PB GPIO。<br></span> | 可选 |
+| 5 | <span class="flag-red">若 Wi-Fi 芯片支持天线共存仲裁：<br> (1) 推荐使用 3 线模式：由 Wi-Fi 芯片控制蓝牙（Bluetooth）与 Wi-Fi 共用的天线 RF 开关并执行仲裁。Wi-Fi 芯片使用来自蓝牙的 BT_ACTIVE 和 BT_PRIORITY 判断是否授予蓝牙天线所有权，WLAN_ACTIVE 可在 Wi-Fi 工作期间屏蔽蓝牙收发。<br> (2) BT_ACTIVE 必须使用 PB08 或 PB45，WLAN_ACTIVE 必须使用 PB09 或 PB41，BT_PRIORITY 可使用任意 PB GPIO。<br></span> | 可选 |
 | 6 | 若 Wi-Fi 芯片不支持天线共存仲裁：<br>(1) 推荐使用 1 线模式，由蓝牙控制蓝牙/Wi-Fi 天线 RF 开关，并通过 BT_ACTIVE 进行仲裁，同时通知 Wi-Fi 芯片。<br> (2) 若 Wi-Fi 可输出运行状态信号，则该方案可升级为 2 线模式：将 Wi-Fi 输出连接到 WLAN_ACTIVE，使蓝牙在 Wi-Fi 活动时屏蔽低优先级蓝牙收发，而在 Wi-Fi 空闲时不影响蓝牙。<br> (3) BT_ACTIVE 必须使用 PB08 或 PB45，WLAN_ACTIVE 必须使用 PB09 或 PB41 | 可选 |
 
 </div>
@@ -204,8 +204,8 @@ hide:
 
 | 序号 | 检查项 | 类别 |
 |:---|:---|:---|
-| 1 | <span class="flag-red">HCPU 唤醒中断源使用正确：PA64、PA65、PA66、PA67、PA68、PA69，共 6 个引脚</span> | 必检 |
-| 2 | <span class="flag-red">LCPU 唤醒中断源使用正确：PB54、PB55、PB56、PB57、PB58、PB59、PBR0、PBR1、PBR2、PBR3，共 10 个引脚。MCU 唤醒后，PBR0-PBR3 无法接收中断信号</span> | 必检 |
+| 1 | <span class="flag-red">HCPU 唤醒中断源使用正确：PA64、PA65、PA66、PA67、PA68、PA69，共 6 个管脚</span> | 必检 |
+| 2 | <span class="flag-red">LCPU 唤醒中断源使用正确：PB54、PB55、PB56、PB57、PB58、PB59、PBR0、PBR1、PBR2、PBR3，共 10 个管脚。MCU 唤醒后，PBR0-PBR3 无法接收中断信号</span> | 必检 |
 | 3 | <span class="flag-red">G-sensor、心率传感器等 LCPU 侧外设的中断与控制信号必须连接到 PB GPIO</span> | 必检 |
 
 </div>
@@ -222,9 +222,9 @@ hide:
 | 2 | VDDIOSC 始终上电 | 必检 |
 | 3 | VDDIOSA 与 VDDIOSB 由 PBR0 使能 | 必检 |
 | 4 | MPI3 或 MPI4 可用于外部 NOR Flash 或 SPI NAND Flash | 必检 |
-| 5 | SPI NAND Flash 的 HOLD# 引脚通过 10 kΩ 电阻上拉到 SPI NAND Flash 供电 | 必检 |
+| 5 | SPI NAND Flash 的 HOLD# 管脚通过 10 kΩ 电阻上拉到 SPI NAND Flash 供电 | 必检 |
 | 6 | 若量产需要烧录 MPI3 或 MPI4 上的外部 Flash，则下载工具将 PA43 拉高以使能 MPI3 电源 | 必检 |
-| 7 | 若量产需要烧录 SDIO1 上的 eMMC 或 SD NAND，则下载工具必须使能对应电源 | 必检 |
+| 7 | 若量产需要烧录 SDIO1 上的 eMMC 或 SD NAND，则由下载工具使能对应电源 | 必检 |
 | 8 | <span class="flag-red">PBR0/PA43 控制的电压开关为高电平开、低电平关。在休眠（Hibernate）中，PBR0 控制 VDDIOSA/VDDIOSB 电源切换，VDDIOSC 始终上电，PA43 控制外部 Flash 电源切换</span> | 必检 |
 | 9 | 若 SD1 接口连接到 eMMC 或 SD NAND，则信号连接正确 | 必检 |
 | 10 | eMMC 或 SD NAND 的 I/O 接口电平与 VDDIOA2 匹配 | 必检 |
@@ -251,9 +251,9 @@ hide:
 
 </div>
 
-EVB 参考原理图中，SPI NAND Flash 的 VCC 接 VDD18_MPI4；该电源上还接有 0.1 µF 和 1 µF（6.3 V）电容。上述管脚映射和元件值仅对应 EVB 参考电路。实际设计前，应根据所选芯片封装、Flash 数据手册及目标板的管脚复用配置进行核对。
+EVB 参考原理图中，SPI NAND Flash 的 VCC 接 VDD18_MPI4；该电源上还接有 0.1 μF 和 1 μF（6.3 V）电容。上述管脚映射和元件值仅对应 EVB 参考电路。实际设计前，应根据所选芯片封装、Flash 数据手册及目标板的管脚复用配置进行核对。
 
-SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设的 I/O 电平设置。思澈科技（SiFli）建议 SPI NAND Flash 和 eMMC 使用 1.8 V 接口电平；SD NAND 颗粒仅支持 3.3 V，因此使用 SD NAND 时，VDDIOA2 必须接 3.3 V。
+SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设的 I/O 电平设置。思澈科技（SiFli）建议 SPI NAND Flash 和 eMMC 使用 1.8 V 接口电平；SD NAND 颗粒仅支持 3.3 V，因此使用 SD NAND 时，应将 VDDIOA2 设为 3.3 V。
 
 ### 5.8.12. 显示 { #5812-display }
 
@@ -268,8 +268,8 @@ SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设�
 | 3 | <span class="flag-red">若 LCD 仅使用 QSPI 接口，建议使用 HCPU 的 LCDC1 QSPI 接口，以避免帧率与 RAM 问题</span> | 必检 |
 | 4 | DSI_REXT 通过 10 kΩ 电阻接地 | 必检 |
 | 5 | LCDC RSTB 连接正确 | 必检 |
-| 6 | LCDC TE 连接正确（连接到面板的 TE 或 Fmark 信号） | 必检 |
-| 7 | TP 信号遵循推荐引脚分配（参考 EVB I/O 配置文件） | 必检 |
+| 6 | LCDC 防撕裂同步（TE）连接正确（连接到面板的 TE 或 Fmark 信号） | 必检 |
+| 7 | TP 信号遵循推荐管脚分配（参考 EVB I/O 配置文件） | 必检 |
 | 8 | LCD 接口支持 MIPI-DSI、3/4 线 SPI、双/四线数据 SPI、DBI 8080、DPI 以及并行/串行 JDI 接口 | 必检 |
 | 9 | <span class="flag-red">SPI LCD：3 线模式下，CS 接 PA44 或 PB08，CLK 接 PA46 或 PB10，DATA 接 PA50 或 PB09；<br>4 线模式下，CS 接 PA44 或 PB08，CLK 接 PA46 或 PB10，DATA 接 PA50 或 PB09，DC 接 PA48 或 PB03</span> | 必检 |
 | 10 | 确认 LCD 是否必须支持 AOD；若需要，则 QSPI 面板必须连接到 HCPU，而 JDI 面板可连接到 LCPU | 必检 |
@@ -286,11 +286,11 @@ SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设�
 
 | 序号 | 检查项 | 类别 |
 |:---|:---|:---|
-| 1 | GPADC 输入连接到对应引脚 | 可选 |
+| 1 | GPADC 输入连接到对应管脚 | 可选 |
 | 2 | GPADC 输入范围正确；最大输入电压不得超过 AVDD33_ANA | 可选 |
 | 3 | 电池电压分压建议：电源侧使用 470 kΩ 1% 电阻，对地使用 1 MΩ 1% 电阻，并增加 100 nF 滤波电容 | 必检 |
-| 4 | <span class="flag-red">对每一路由 GPADC 测量的分压信号，分压电阻均使用 1% 精度；每个 GPADC 通道都必须在靠近芯片引脚处放置 100 nF 滤波电容</span> | 必检 |
-| 5 | <span class="flag-red">ADC 可用于检测多个按键，以节省引脚；例如当 PB32 被用作 ADC 按键时，不要使用电池作为其上拉电源</span> | 必检 |
+| 4 | <span class="flag-red">对每一路由 GPADC 测量的分压信号，分压电阻均使用 1% 精度；每个 GPADC 通道都必须在靠近芯片管脚处放置 100 nF 滤波电容</span> | 必检 |
+| 5 | <span class="flag-red">ADC 可用于检测多个按键，以节省管脚；例如当 PB32 被用作 ADC 按键时，不要使用电池作为其上拉电源</span> | 必检 |
 
 </div>
 
@@ -302,7 +302,7 @@ SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设�
 
 | 序号 | 检查项 | 类别 |
 |:---|:---|:---|
-| 1 | SDMADC 输入连接到对应引脚 | 可选 |
+| 1 | SDMADC 输入连接到对应管脚 | 可选 |
 | 2 | SDMADC 输入范围正确；建议最大输入电压不超过 AVDD33_ANA | 可选 |
 | 3 | SDMADC_VREF 与 SDMADC_VSS_VREF 连接正确 | 必检 |
 
@@ -365,8 +365,8 @@ SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设�
 | 序号 | 检查项 | 类别 |
 |:---|:---|:---|
 | 1 | <span class="flag-red">I2S1 仅支持输入，且仅工作在主模式；麦克风按预期连接到 I2S1</span> | 可选 |
-| 2 | <span class="flag-red">I2S2 仅支持主模式下输入与输出，可连接外部 codec DAC/ADC 器件</span> | 可选 |
-| 3 | <span class="flag-red">I2S3 仅支持主模式下输入与输出；适用于 HCPU 睡眠、LCPU 通过 I2S3 接收/处理音频的低功耗场景</span> | 可选 |
+| 2 | <span class="flag-red">I2S2 仅在主模式下支持输入和输出，可连接外部 codec DAC/ADC 器件</span> | 可选 |
+| 3 | <span class="flag-red">I2S3 仅在主模式下支持输入和输出；适用于 HCPU 睡眠、LCPU 通过 I2S3 接收/处理音频的低功耗场景</span> | 可选 |
 | 4 | I2S 信号连接正确 | 可选 |
 | 5 | <span class="flag-red">I2S1 接口数字麦克风连接正确</span> | 可选 |
 | 6 | 外设器件的 I/O 逻辑电平与主芯片匹配 | 可选 |
@@ -386,7 +386,7 @@ SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设�
 | 3 | 外设器件的 I/O 逻辑电平与主芯片匹配 | 可选 |
 | 4 | 模拟双麦连接正确 | 可选 |
 | 5 | 模拟麦克风由 MIC_BIAS 输出供电 | 可选 |
-| 6 | 两路音频 ADC 输入都必须各自带至少 2.2 uF 隔直电容 | 可选 |
+| 6 | 两路音频 ADC 输入都必须各自带至少 2.2 μF 隔直电容 | 可选 |
 | 7 | DAC 输出 P 路与 N 路各有一个 1 kΩ 串联电阻，并在两者之间并联一个 1.5 nF 电容 | 可选 |
 | 8 | 推荐使用 AW8155 作为音频功放；使用推荐器件时，在软件中配置为 Mode 4 / Class AB 模式 | 可选 |
 | 9 | <span class="flag-red">将音频 PA 输出反馈到 MCU ADC 时，需增加分压与 RC 滤波，或增加数字滤波；分压后的电压必须保持在 ADC 输入范围内，RC 滤波截止频率应为 20 kHz</span> | 可选 |
@@ -436,8 +436,8 @@ SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设�
 
 | 序号 | 检查项 | 类别 |
 |:---|:---|:---|
-| 1 | 背光 PWM 引脚分配正确；使用与马达 PWM 不同的 GPTIMx，优先放在 PB 接口上，以避免 HCPU 降频影响背光 | 必检 |
-| 2 | 马达 PWM 引脚分配正确；使用与背光 PWM 不同的 GPTIMx，优先放在 PB 接口上，以避免 HCPU 降频影响振动 | 必检 |
+| 1 | 背光 PWM 管脚分配正确；使用与马达 PWM 不同的 GPTIMx，优先放在 PB 接口上，以避免 HCPU 降频影响背光 | 必检 |
+| 2 | 马达 PWM 管脚分配正确；使用与背光 PWM 不同的 GPTIMx，优先放在 PB 接口上，以避免 HCPU 降频影响振动 | 必检 |
 | 3 | 对于马达 PWM 控制，应选择默认关闭的 GPIO，以避免使用 SMT 马达时在固件编程阶段出现异常 | 必检 |
 | 4 | 需要 PWM 输出的信号必须使用 PB 接口，同时检查冷启动异常行为 | 必检 |
 
@@ -467,7 +467,7 @@ SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设�
 |:---|:---|:---|
 | 1 | USB 接口连接正确 | 可选 |
 | 2 | USB 接口具备 ESD 保护 | 可选 |
-| 3 | 正常非睡眠工作时，只要 USB 保持使能，PC/设备端即可感知插拔；<br>若 MCU 进入睡眠且仍需感知插拔，则需增加 VBUS 分压电路，使分压输出与 IO 电压匹配的高电平并送入 MCU 唤醒引脚，推荐与充电器插入检测唤醒引脚共用 | 可选 |
+| 3 | 正常非睡眠工作时，只要 USB 保持使能，PC/设备端即可感知插拔；<br>若 MCU 进入睡眠且仍需感知插拔，则需增加 VBUS 分压电路，使分压输出与 IO 电压匹配的高电平并送入 MCU 唤醒管脚，推荐与充电器插入检测唤醒管脚共用 | 可选 |
 
 </div>
 
@@ -482,7 +482,7 @@ SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设�
 | 1 | PBR0 在上电过程中会从 0 变为 1，可用于部分外部负载开关控制；PBR1-PBR5 默认输出低电平 | 必检 |
 | 2 | PBR0-PBR5 可在待机（Standby）和休眠（Hibernate）中作为输出使用 | 可选 |
 | 3 | PBR0-PBR5 可输出 LPTIM 信号 | 可选 |
-| 4 | <span class="flag-red">对于 SF32LB567，推荐使用 LPTIM3：LPTIM3_OUT 与 LPTIM3_OUT_BAR 可从 PBR 引脚输出 21-25 kHz、占空比不同且极性相反的信号</span> | 可选 |
+| 4 | <span class="flag-red">对于 SF32LB567，推荐使用 LPTIM3：LPTIM3_OUT 与 LPTIM3_OUT_BAR 可从 PBR 管脚输出 21-25 kHz、占空比不同且极性相反的信号</span> | 可选 |
 | 5 | <span class="flag-red">这些 21-25 kHz、极性相反且占空比不同的信号，也可由 HCPU 的 ATIM 输出；需结合 Pin_Config 选择合适的 ATIMx_CHx 与 ATIMx_CHxN 信号，并考虑 HCPU 降频的影响</span> | 可选 |
 | 6 | PBR0-PBR5 可输出 32 kHz 时钟信号 | 可选 |
 | 7 | <span class="flag-red">PBR0-PBR3 可配置为唤醒输入，但 MCU 唤醒后 PBR0-PBRx 不能接收中断信号，只能检测 0/1 电平，使用时需谨慎</span> | 可选 |
@@ -490,9 +490,9 @@ SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设�
 </div>
 
 !!! note "来源适用范围与技术核实"
-    [原始核对表工作簿](https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)中，PBR 核对表第 4 项明确提到 SF32LB567，但工作簿并未说明 PBR 核对表第 4、5 项也适用于 SF32LB58x；采用前请向思澈科技（SiFli）确认。
+    [来源核对表工作簿](https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)中，PBR 核对表第 4 项明确提到 SF32LB567，但工作簿并未说明 PBR 核对表第 4、5 项也适用于 SF32LB58x；采用前请向思澈科技（SiFli）确认。
 
-    工作簿“存储”核对表第 6 项写明，量产烧录时将 PA43 拉高以使能“MPI3 电源”。但[思澈科技（SiFli）官方 SF32LB58x 硬件应用说明](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md)将 PA43 描述为外部 Flash 电源控制脚，并要求拉高 PA43 以接通外部 Flash 电源。清单条目仍保留工作簿中的原文。量产下载方案定版前，请向思澈科技（SiFli）确认该引脚实际控制的电源轨及接口适用范围。
+    工作簿“存储”核对表第 6 项写明，量产烧录时将 PA43 拉高以使能“MPI3 电源”。但[思澈科技（SiFli）官方 SF32LB58x 硬件应用说明](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md)将 PA43 描述为外部 Flash 电源控制脚，并要求拉高 PA43 以接通外部 Flash 电源。核对表条目仍保留工作簿中的原文。量产下载方案定版前，请向思澈科技（SiFli）确认该管脚实际控制的电源轨及接口适用范围。
 
 ### 5.8.26. 功耗 { #5826-power-consumption }
 
@@ -502,7 +502,7 @@ SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设�
 
 | 序号 | 检查项 | 类别 |
 |:---|:---|:---|
-| 1 | 对所有用于电源开关控制的 MOSFET、LDO 和 DCDC 使能引脚，当使能为高电平有效时，预留一个 1 MΩ 对地下拉 | 必检 |
+| 1 | 对所有用于电源开关控制的 MOSFET、LDO 和 DCDC 使能管脚，当使能为高电平有效时，预留一个 1 MΩ 对地下拉 | 必检 |
 | 2 | 已记录休眠（Hibernate）模式的底电流要求 | 必检 |
 | 3 | <span class="flag-red">已记录休眠（Hibernate）模式下所选外设的底电流总和，且满足项目要求</span> | 必检 |
 | 4 | 已记录待机（Standby）模式的底电流要求 | 必检 |

@@ -15,7 +15,7 @@ tags:
 
 ## 5. Schaltplan-Designrichtlinien { #5-schematic-design-guidelines }
 
-Dieses Kapitel führt Sie auf drei Seiten durch den Schaltplanentwurf. Prüfen Sie zuerst das Minimalsystem, anschließend auf dieser Seite die Stromversorgung und die Takterzeugung, auf der nächsten Seite RF und Benutzerschnittstellen und zuletzt Speicher, Fertigungszugang sowie PCB-abhängige Entscheidungen. Klären Sie für jeden Funktionsblock zunächst das Entwurfsziel und die betroffenen Varianten. Prüfen Sie danach die Schaltungsanforderungen, Pin-Zuweisungen, häufigen Fehler und Freigabe-Checklisten.
+Dieses Kapitel führt Sie auf drei Seiten durch den Schaltplanentwurf. Prüfen Sie zuerst das Minimalsystem, anschließend auf dieser Seite die Stromversorgung und die Takterzeugung, auf der nächsten Seite RF und Benutzerschnittstellen und zuletzt Speicher, Fertigungszugang sowie PCB-abhängige Entscheidungen. Klären Sie für jeden Funktionsblock zunächst das Entwurfsziel und die betroffenen Varianten. Prüfen Sie danach die Schaltungsanforderungen, Pin-Zuweisungen, häufige Fehler und Freigabe-Checklisten.
 
 <div align="center"><em>Tabelle 5-1: Übersicht der Schaltplanabschnitte</em></div>
 
@@ -35,7 +35,7 @@ Dieses Kapitel führt Sie auf drei Seiten durch den Schaltplanentwurf. Prüfen S
 
 ### 5.1. Minimalsystem-Design { #51-minimum-system-design }
 
-Das Minimalsystem-Design ist die erste Freigabestufe im Schaltplanentwurf eines SF32LB52x-Boards. Es umfasst alle Entscheidungen, die vor dem Hinzufügen produktspezifischer Peripherie geklärt sein müssen: genaue Gerätevariante, Gehäuse, Versorgungsstruktur, Boot-Medium, Bootstrap-Widerstände, Steuerung der Speicherversorgung, Debug-/Download-Zugang, Taktquellen und Weckverhalten. Änderungen an der Display- oder Sensorverkabelung lassen sich oft noch spät vornehmen. Eine falsche Bootstrap-Konfiguration des Speichers, fehlender Debug-Zugang, eine instabile Versorgung oder ungeeignete Annahmen zu den Versorgungszuständen können dagegen den normalen Betrieb der Platine verhindern.
+Das Minimalsystem-Design ist die erste Freigabestufe im Schaltplanentwurf eines SF32LB52x-Boards. Es umfasst die Entscheidungen, die vor dem Hinzufügen produktspezifischer Peripherie feststehen müssen: genaue Gerätevariante, Gehäuse, Versorgungsstruktur, Boot-Medium, Bootstrap-Widerstände, Steuerung der Speicherversorgung, Debug-/Download-Zugang, Taktquellen und Weckverhalten. Änderungen an der Display- oder Sensorverkabelung lassen sich oft noch spät vornehmen. Ein falscher Speicher-Strap, fehlender Debug-Zugang, eine instabile Versorgungsschiene oder eine unverträgliche Annahme zu den Energiezuständen lassen sich dagegen in der Regel nicht mehr ausgleichen.
 
 Prüfen Sie den ersten Schaltplanentwurf in folgender Reihenfolge:
 
@@ -100,7 +100,7 @@ Entwerfen Sie für die gewählte Variante eine stabile Versorgungsstruktur mit g
     (3) VDD18_VOUT: SF32LB520U36 benötigt eine externe 3,3-V-Versorgung; SF32LB523/5/7Ux6 verwenden den internen LDO und benötigen keine externe Versorgung. Konfigurieren Sie den internen VDD18-LDO softwareseitig entsprechend dem Chipmodell und aktivieren Sie ihn bei externer Versorgung nicht.
     (4) VDD33_VOUT1: bei SF32LB520U36 versorgt es nur VDD18_VOUT, externen Flash und AVDD33_AUD; bei SF32LB523/5/7Ux6 versorgt es nur externen Flash und AVDD33_AUD.
 
-=== "52B/D/E/G/J (extern geregelt versorgt)"
+=== "52B/D/E/G/J (extern geregelte Versorgung)"
 
     <div align="center"><em>Tabelle 5.2-2: Anforderungen an die Stromversorgung (extern geregelte Variante)</em></div>
 
@@ -140,7 +140,7 @@ Beide Versorgungsvarianten verwenden dieselbe Induktivitätsspezifikation.
 
 === "SF32LB520/3/5/7 (akkubetrieben)"
 
-    Die Ladeschaltung kann mit einem externen Lade-IC oder dem im Mikrocontroller integrierten Ladeblock realisiert werden.
+    Für die Ladeschaltung gibt es zwei Möglichkeiten: einen externen Lademanagement-Chip oder das integrierte On-Chip-Lademanagement-Modul.
 
     **Externer Lademanagement-Chip**
 
@@ -158,7 +158,7 @@ Beide Versorgungsvarianten verwenden dieselbe Induktivitätsspezifikation.
 
     **Integriertes On-Chip-Lademanagement-Modul**
 
-    Ist das Gerät wegen niedriger Akkuspannung ausgeschaltet, muss der Akku bei Verwendung des integrierten Ladeblocks nach Anschluss des Ladegeräts zunächst die Einschaltschwelle erreichen. Erst dann kann das System booten und die Ladeanzeige darstellen.
+    Ist das Gerät wegen niedriger Akkuspannung ausgeschaltet, muss der Akku bei Verwendung des integrierten Lademoduls nach dem Anschluss eines Ladegeräts zunächst die Einschaltschwelle erreichen. Erst dann kann das System booten und die Ladeanzeige darstellen.
 
     ![Abbildung 5.2-3: Integrierte Lademanagement-Schaltung](../../sf32-products/chips/assets/52xA/sf32lb52x-CHG-INNER.png){ width="100%" loading="lazy" }
 
@@ -172,7 +172,7 @@ Beide Versorgungsvarianten verwenden dieselbe Induktivitätsspezifikation.
     - OVP-Chip mit geregeltem Ausgang, z. B. SGM4064YDE8G oder LP5305AQVF — der Reglerausgang muss zwischen 4,5 V und 5,4 V liegen
 
     !!! important "VBUS-Werte weichen zwischen den Quelldokumenten ab"
-        Der OpenSiFli-Anwendungshinweis für batteriegespeiste Varianten enthält widersprüchliche VBUS-Angaben: Im Abschnitt zur OVP-Auswahl werden für den VBUS-Pin des Chips 4,5–5,5 V genannt, in der Versorgungstabelle und den Hinweisen zum integrierten Ladegerät dagegen 4,6–5,5 V; außerdem muss der VBUS-Pin bei maximalem Ladestrom mindestens 4,6 V führen. Electrical Specification-A3 nennt allgemein 4,5–5,5 V, während das Referenz-Ladeschaltbild mit 4,3–5,5 V beschriftet ist. Halten Sie bei integriertem Ladegerät bis zur Klärung des maßgeblichen Mindestwerts durch SiFli unter maximaler Last mindestens 4,6 V am Pin ein. Die 4,3-V-Beschriftung ist kein freigegebener Mindestwert.
+        Der OpenSiFli-Anwendungshinweis für akkubetriebene Varianten enthält widersprüchliche VBUS-Angaben: Im Abschnitt zur OVP-Auswahl werden für den VBUS-Pin des Chips 4,5–5,5 V genannt, in der Versorgungstabelle und den Hinweisen zum integrierten Lademodul dagegen 4,6–5,5 V; außerdem muss der VBUS-Pin bei maximalem Ladestrom mindestens 4,6 V führen. Electrical Specification-A3 nennt allgemein 4,5–5,5 V, während das Referenz-Ladeschaltbild mit 4,3–5,5 V beschriftet ist. Halten Sie bei einem Design mit integriertem Lademodul bis zur Klärung des maßgeblichen Mindestwerts durch SiFli unter maximaler Last mindestens 4,6 V am Pin ein. Die 4,3-V-Beschriftung ist kein freigegebener Mindestwert.
 
         Derselbe Anwendungshinweis legt `VIN_OVLO` für OVP-Bausteine mit einstellbarem OVLO auf 5,2–5,5 V fest; die Toleranz von `VOVLO_TH` darf höchstens 3 %, die von R1/R2 höchstens 1 % betragen. Bei OVP-Bausteinen mit geregeltem Ausgang muss der LDO-Ausgang 4,5–5,4 V betragen. Dies sind topologiespezifische OVP-Einstellungen und keine austauschbaren Betriebsbereiche für VBUS. Berücksichtigen Sie Bauteiltoleranzen und bestätigen Sie die freigegebene Schaltung mit SiFli.
 
@@ -195,15 +195,15 @@ Beide Versorgungsvarianten verwenden dieselbe Induktivitätsspezifikation.
         - Standard-Konstantladestrom: 65 mA, einstellbar 5–560 mA
         - Standard-Vollladespannung: 4,2 V, einstellbar bis zu 4,45 V
         - Wiederaufladespannung: Vollladespannung - 0,15 V
-        - VBUS des Laders muss mindestens 350 mA liefern; die VBUS-Pin-Spannung darf bei maximalem Ladestrom nicht unter 4,6 V fallen
-        - Bei kabellosem Laden sicherstellen, dass die Versorgungsfähigkeit des kabellosen Laders den Konstantladestrom übersteigt
+        - VBUS des Ladegeräts muss mindestens 350 mA liefern; die VBUS-Pin-Spannung darf bei maximalem Ladestrom nicht unter 4,6 V fallen
+        - Bei kabellosem Laden sicherstellen, dass die Versorgungsfähigkeit des kabellosen Ladegeräts den Konstantladestrom übersteigt
 
     !!! important "Hinweise zum integrierten LDO"
         - Die Gesamtkapazität an den Ausgangspfaden VDD33_VOUT1 und VDD33_VOUT2 darf 9,6 µF nicht überschreiten
         - AVDD33_AUD muss von VDD33_VOUT1 versorgt werden, nicht von VSYS
         - Das LCD darf nicht vom internen LDO versorgt werden — einen externen LDO verwenden
 
-=== "52B/D/E/G/J (extern geregelt versorgt)"
+=== "52B/D/E/G/J (extern geregelte Versorgung)"
 
     !!! info "Nicht zutreffend"
         Diese Variante wird direkt aus einer extern geregelten Quelle versorgt und **verfügt über keine Lademanagement-Schaltung**. Dieser Abschnitt gilt nicht. Wenn Ihr Produkt Akkubetrieb und Laden benötigt, verwenden Sie stattdessen die Serie SF32LB520/3/5/7.
@@ -220,7 +220,7 @@ Beide Versorgungsvarianten verwenden dieselbe Induktivitätsspezifikation.
 
     Legen Sie den hardwareseitigen Anfangszustand der GPIOs zur Lastschaltersteuerung sorgfältig fest. Verwenden Sie Pull-up-/Pull-down-Widerstände im Megaohm-Bereich, damit die Lastschalter standardmäßig ausgeschaltet sind. Wählen Sie bei der LDO- und Lastschalterauswahl Bauteile mit niedrigem Ruhestrom (Iq) und niedrigem Abschaltstrom (Istb), und achten Sie besonders auf Iq bei dauerhaft eingeschalteten Stromversorgungsbauteilen.
 
-=== "52B/D/E/G/J (extern geregelt versorgt)"
+=== "52B/D/E/G/J (extern geregelte Versorgung)"
 
     Verwenden Sie Lastschalter für das dynamische Power-Management jedes Funktionsblocks; wählen Sie für dauerhaft eingeschaltete Module oder Pfade Bauteile mit niedrigem Ruhestrom.
 
@@ -312,7 +312,7 @@ Die gesamte Familie unterstützt 15 weckfähige Interruptquellen in den Modi Sta
 
 - Verwenden Sie einen 48-MHz-Hauptquarz und einen 32,768-kHz-RTC-Quarz.
 - Bevorzugen Sie Bauteile mit niedrigem CL und niedrigem ESR aus der AVL, um Startstrom und statischen Strom zu reduzieren.
-- Halten Sie Quarzleiterbahnen kurz, abgeschirmt und entfernt von Wärme-, RF-, Lader-, PMU- und DC/DC-Störungen.
+- Halten Sie Quarzleiterbahnen kurz, abgeschirmt und entfernt von Wärme-, RF-, Ladegeräte-, PMU- und DC/DC-Störungen.
 
 **Entwurfsziel**
 
@@ -361,8 +361,8 @@ Die vollständigen, laufend gepflegten Qualifizierungsdaten finden Sie in der [S
 **Häufige Fehler - Takt**
 
 - Auswahl eines Quarzes nur nach Frequenz und Gehäuse, ohne Prüfung von CL, ESR, Toleranz und Temperaturbereich.
-- Platzierung des Quarzes in der Nähe von PA, Lader, PMU, RF-Anpassung oder anderen Wärme-/Störquellen.
-- Belassen von Kupfer oder Hochgeschwindigkeits-Routing unter dem Quarz-Sperrbereich.
+- Platzierung des Quarzes in der Nähe von PA, Ladeschaltung, PMU, RF-Anpassung oder anderen Wärme-/Störquellen.
+- Belassen von Kupfer oder Hochgeschwindigkeits-Routing im Freihaltebereich unter dem Quarz.
 - Lange, parallele 32-kHz-Leiterbahnen ohne Abstand oder Masseabschirmung.
 
 **Checkliste Takt**

@@ -10,7 +10,7 @@ tags:
 
 MicroPython aún no cuenta con un procedimiento de inicio verificado para SF32. En las fuentes de SiFli y OpenSiFli consultadas no se documentan actualmente imágenes oficiales de firmware específicas para cada placa, procedimientos de grabación ni configuraciones de REPL.
 
-Utilice [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) para establecer una configuración de referencia reproducible de placa, cable, puerto serie y grabación. No siga instrucciones genéricas de instalación de MicroPython ni utilice una imagen destinada a otro MCU o placa.
+Utilice [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) para establecer una configuración de referencia reproducible de placa, cable, puerto serie y grabación. No siga instrucciones genéricas de instalación de MicroPython ni utilice una imagen destinada a otra MCU o placa.
 
 La página [Estado de MicroPython](../../develop/platforms/micropython/status.md) recoge los artefactos públicos concretos y los criterios de aceptación necesarios antes de que esta página pueda convertirse en un tutorial.
 

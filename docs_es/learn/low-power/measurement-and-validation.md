@@ -139,7 +139,7 @@ flowchart LR
     E -- "Sí" --> H["Priorizar los consumos confirmados y optimizar el mayor"]
 ```
 
-Si las mediciones no concuerdan con el modelo, no modifique la tabla solo para forzar el ajuste. Busque una causa comprobable: una carga omitida, un ciclo de trabajo incorrecto, una estimación errónea de las pérdidas del regulador, una activación inesperada, un componente que quedó encendido o un punto de medida distinto del definido por el modelo. Actualice la tabla únicamente con datos obtenidos después de corregir y volver a medir el hardware o el firmware. Antes del lanzamiento, establezca un criterio de concordancia específico para el producto; el error aceptable dependerá de la autonomía que se declare, del rango de funcionamiento y de la incertidumbre restante.
+Si las mediciones no concuerdan con el modelo, no modifique la tabla solo para forzar el ajuste. Busque una causa comprobable: una carga omitida, un ciclo de trabajo incorrecto, una estimación errónea de las pérdidas del regulador, una activación inesperada, un componente que quedó encendido o un punto de medida distinto del definido por el modelo. Actualice la tabla únicamente con datos obtenidos después de corregir y volver a medir el hardware o el firmware. Antes de la liberación, establezca un criterio de concordancia específico para el producto; el error aceptable dependerá de la autonomía que se declare, del rango de funcionamiento y de la incertidumbre restante.
 
 <div align="center"><em>Tabla: Cómo interpretar las diferencias entre el perfil y las mediciones</em></div>
 
@@ -163,7 +163,7 @@ Use el perfil ya contrastado para priorizar el trabajo. Distinga dos preguntas: 
 3. **Vuelva a medir el componente y el escenario modificados.** Un reemplazo puede cambiar cuál es el principal consumidor, alterar los tiempos de activación o exigir otro punto de funcionamiento del regulador.
 4. **Actualice el perfil y repita la comparación de un día completo.** El cambio solo se valida si mejoran tanto la traza del escenario como el presupuesto energético del producto.
 
-## Evidencias antes del lanzamiento { #release-evidence }
+## Evidencias antes de la liberación { #release-evidence }
 
 Antes de anunciar la autonomía del producto, conserve las mediciones de componentes y escenarios, el perfil de uso diario, los registros de tensión, los marcadores de firmware y las hipótesis versionadas que relacionan esos datos. Repita las etapas afectadas cuando cambien la planificación del firmware, la gestión de la pantalla, los parámetros de radio, la frecuencia de muestreo de los sensores, los componentes de alimentación o las hipótesis de uso del producto.
 

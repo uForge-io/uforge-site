@@ -133,7 +133,7 @@ DS5802 V0.1 列出了模组板载 PCB 天线和外接天线方案。外接天线
 
 ### 开发板 { #development-kits }
 
-[SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) 可用于验证固件、调通显示并测试音频和存储链路，再据此开展模组载板设计。
+[SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) 可用于验证固件、启动调试显示并测试音频和存储链路，再据此开展模组载板设计。
 
 ### 参考产品 { #reference-products }
 

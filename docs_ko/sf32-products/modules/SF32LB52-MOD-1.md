@@ -12,16 +12,16 @@ tags:
 
 SF32LB52-MOD-1은 SF32LB52x 플랫폼을 기반으로 하는 저전력 Bluetooth MCU 모듈 제품군입니다. 표준 N16R8 SKU는 SF32LB525UC6을 사용합니다. 27.9 × 18.0 × 3.1 mm 크기의 이 모듈은 듀얼 코어 Arm Cortex-M33 STAR-MC1 플랫폼, RF 회로, 48 MHz 크리스털, 안테나 연결부를 하나로 결합합니다. 부품 번호에 따라 온보드 PCB 안테나 또는 외부 안테나용 IPEX 커넥터를 사용합니다.
 
-DS5203 V0.3에는 온모듈 PCB 안테나가 기재되어 있고 IPEX로 연결하는 외부 안테나는 다른 모델에서 사용할 수 있다고 되어 있지만, 안테나 옵션을 공개된 메모리 SKU 목록과 대응시키지는 않습니다. 캐리어 보드 레이아웃을 확정하기 전에 정확한 안테나 구성을 SiFli에 확인하십시오. 완성된 제품에는 여전히 RF 검증과 해당하는 제품 수준 인증이 필요합니다. 노출된 인터페이스는 소형 연결 제품에서 사용하는 Bluetooth, 그래픽, 오디오 기능을 제공합니다.
+DS5203 V0.3에는 모듈 탑재 PCB 안테나가 기재되어 있고, IPEX로 연결하는 외부 안테나는 다른 모델에서 사용할 수 있다고 설명되어 있습니다. 다만 안테나 옵션을 공개된 메모리 SKU 목록과 대응시키지는 않습니다. 캐리어 보드 레이아웃을 확정하기 전에 정확한 안테나 구성을 SiFli에 확인하십시오. 완제품에는 RF 검증과 해당하는 제품 단위 인증도 필요합니다. 모듈 인터페이스를 통해 소형 커넥티드 제품에 필요한 Bluetooth, 그래픽, 오디오 기능을 사용할 수 있습니다.
 
 선택한 SKU에 따라 칩 패키지에 OPI-PSRAM이 포함될 수 있습니다. 모듈 인터페이스는 GPIO, SPI, LCD, MPI, UART, I2C, PWM, SDIO, USB 2.0 FS, 아날로그 오디오를 포함하여 기반 칩 제품군의 주요 기능을 노출합니다.
 
 !!! info
-    기반 칩 제품군, 아키텍처, 주변 장치 구성은 [SF32LB52x](../chips/SF32LB52x.md)를 참고하십시오. 이 페이지는 모듈 수준의 통합, 전원, 패키지, 변형(variant) 선택에 초점을 맞춥니다.
+    기반 칩 제품군의 아키텍처와 주변 장치 구성은 [SF32LB52x](../chips/SF32LB52x.md)를 참고하십시오. 이 페이지에서는 모듈 통합, 전원, 패키지, 모듈 변형 선택을 다룹니다.
 
 ## 애플리케이션 { #applications }
 
-**SF32LB52-MOD-1은** RF와 레이아웃 리스크를 줄이면서 Bluetooth, 그래픽, 오디오 기능이 필요한 다음과 같은 제품에 **권장됩니다.**
+**SF32LB52-MOD-1은 RF 및 레이아웃 위험을 줄이면서 Bluetooth, 그래픽, 오디오 기능을 구현해야 하는 다음 제품에 권장됩니다.**
 
 - 스마트워치, 피트니스 밴드, 웨어러블 의료 제품
 - Bluetooth 센서 허브와 연결형 액세서리
@@ -30,7 +30,7 @@ DS5203 V0.3에는 온모듈 PCB 안테나가 기재되어 있고 IPEX로 연결�
 - 차량 키 및 웨어러블 리모컨 제품
 - 비용에 민감한 연결형 디스플레이 디바이스
 
-제품에 다음 기능 중 하나 이상이 필요하다면 SF32LB52-MOD-1을 검토하십시오.
+제품에 다음 기능 중 하나 이상이 필요하면 SF32LB52-MOD-1을 검토하십시오.
 
 - PCB 안테나와 외부 안테나 옵션을 갖춘 모듈 수준의 RF 통합
 - 칩 플랫폼의 Bluetooth, 그래픽, 오디오 기능을 위한 노출된 인터페이스
@@ -48,12 +48,12 @@ DS5203 V0.3에는 온모듈 PCB 안테나가 기재되어 있고 IPEX로 연결�
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Module Datasheet]__
-- :fontawesome-solid-microchip: __[Chip Introduction]__
-- :fontawesome-solid-file-lines: __[Hardware Design Guide]__
-- :fontawesome-solid-file-lines: __[Original Design Guide (wiki.sifli.com, EPD variant)]__
-- :fontawesome-solid-cart-shopping: __[Buy Samples]__
-- :fontawesome-solid-cart-shopping: __[Buy Dev Kits]__
+- :fontawesome-solid-file-pdf: __[모듈 데이터시트][Module Datasheet]__
+- :fontawesome-solid-microchip: __[칩 소개][Chip Introduction]__
+- :fontawesome-solid-file-lines: __[하드웨어 설계 가이드][Hardware Design Guide]__
+- :fontawesome-solid-file-lines: __[원본 설계 가이드(wiki.sifli.com, EPD 변형)][Original Design Guide (wiki.sifli.com, EPD variant)]__
+- :fontawesome-solid-cart-shopping: __[샘플 구매][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[개발 키트 구매][Buy Dev Kits]__
 
 </div>
 

@@ -8,7 +8,7 @@ tags:
 
 ## 소개 { #introduction }
 
-**ePicasso**는 SF32 마이크로컨트롤러 제품군을 위한 SiFli의 2D/2.5D 그래픽 가속 엔진입니다. 지원되는 반복적인 픽셀 작업을 애플리케이션 CPU에서 오프로드하여, 임베디드 UI가 MCU급 전력 예산 안에서 부드러운 효과, 즉각적인 상호작용, 효율적인 디스플레이 업데이트를 제공할 수 있게 합니다.
+**ePicasso**는 SF32 마이크로컨트롤러 제품군을 위한 SiFli의 2D/2.5D 그래픽 가속 엔진입니다. 반복적으로 수행되는 지원 가능 픽셀 연산을 애플리케이션 CPU 대신 처리하여, 임베디드 UI가 MCU급 전력 예산 안에서 부드러운 효과와 빠른 상호작용을 제공하고 디스플레이를 효율적으로 업데이트하도록 돕습니다.
 
 SF32 그래픽 흐름에서 ePicasso는 리소스를 렌더러가 사용할 수 있게 된 이후, 최종 비트맵이 디스플레이 컨트롤러에 도달하기 전에 동작합니다. 이미지 복사, 블렌딩, 스케일링, 회전, 레이어 합성 같은 픽셀 처리 작업을 가속합니다. eZip은 에셋 압축 해제를 수행하여 디코딩된 이미지 데이터를 ePicasso에 전달할 수 있으며, 디스플레이 컨트롤러는 준비된 픽셀을 패널로 전송합니다. 리소스에서 패널까지의 전체 경로는 [그래픽 개요](overview.md#sf32-graphics-flow)를 참고하십시오.
 
@@ -81,7 +81,7 @@ SF32 문서에서 ePicasso는 데스크톱급 프로그래머블 3D GPU가 아�
 
 ## ePicasso 구현 비교 { #epicasso-generation-comparison }
 
-엔진 이름만 비교하지 말고 각 디바이스 제품군의 구현을 비교하십시오. 디스플레이 해상도, 레이어 수, 지원 포맷, eZip 기능, 외부 메모리 대역폭, 드라이버 지원도 선택한 SF32 디바이스, 패키지, SDK, 보드 설계에 따라 달라집니다. SiFli의 [SF32LB52x 제품 브리프](https://downloads.sifli.com/user%20manual/PB5201-SF32LB52x-Product%20Brief.pdf)는 해당 엔진을 ePicasso 2.0이라고 명명합니다. [SF32LB56x 데이터시트](https://downloads.sifli.com/silicon/DS0056-SF32LB56x-Datasheet%20V1p8.pdf)는 4개의 포어그라운드 레이어, 전용 마스크 레이어 1개, 단색 배경 레이어 1개를 명시하며, TurboPixel은 LCD 컨트롤러의 프레임버퍼 압축 기능으로 별도 문서화합니다. [SF32LB58x 데이터시트](https://downloads.sifli.com/user%20manual/DS5801-SF32LB58x-Datasheet%20V1p8p3.pdf)는 ePicasso 2.0과 별도의 Vivante GCNanoUltraV 벡터 엔진을 문서화합니다.
+엔진 이름만 비교하지 말고 각 디바이스 제품군의 구현을 비교하십시오. 디스플레이 해상도, 레이어 수, 지원 포맷, eZip 기능, 외부 메모리 대역폭, 드라이버 지원도 선택한 SF32 디바이스, 패키지, SDK, 보드 설계에 따라 달라집니다. SiFli의 [SF32LB52x 제품 브리프](https://downloads.sifli.com/user%20manual/PB5201-SF32LB52x-Product%20Brief.pdf)는 해당 엔진을 ePicasso 2.0이라고 명명합니다. [SF32LB56x 데이터시트](https://downloads.sifli.com/silicon/DS0056-SF32LB56x-Datasheet%20V1p8.pdf)는 전경 레이어 네 개, 전용 마스크 레이어 하나, 단색 배경 레이어 하나를 명시하며, TurboPixel은 LCD 컨트롤러의 프레임버퍼 압축 기능으로 별도 문서화합니다. [SF32LB58x 데이터시트](https://downloads.sifli.com/user%20manual/DS5801-SF32LB58x-Datasheet%20V1p8p3.pdf)는 ePicasso 2.0과 별도의 Vivante GCNanoUltraV 벡터 엔진을 문서화합니다.
 
 <div align="center"><em>ePicasso 구현 비교</em></div>
 
@@ -90,8 +90,8 @@ SF32 문서에서 ePicasso는 데스크톱급 프로그래머블 3D GPU가 아�
 | 문서화된 엔진 | 대표 SF32 제품군 | 그래픽 범위 | 문서화된 차별점 | 실용적인 적합성 |
 |:---|:---|:---|:---|:---|
 | **ePicasso** | SF32LB55x | 2.5D UI 가속 | 하드웨어 회전, 스케일링, 수평 미러링, 알파 블렌딩. 수직 미러링은 지원되지 않습니다. eZip 무손실 에셋 워크플로. | 보급형 설계보다 풍부한 UI가 필요한 BLE 웨어러블과 소형 HMI |
-| **ePicasso 2.0** | SF32LB52x | 2D/2.5D UI 가속 | 비용 최적화 그래픽 구성에서의 eZip 2.0 에셋 압축 해제 | 보급형 웨어러블, Bluetooth 제품, e-paper, 소형 HMI |
-| **ePicasso 2.0** | SF32LB56x | 2D/2.5D UI 가속 | 알파 블렌딩되는 포어그라운드 레이어 4개, 전용 마스크 레이어 1개, 단색 배경 레이어 1개. 하드웨어 회전/스케일링과 수평 미러링(수직 미러링은 지원되지 않음). 포맷 변환. eZip 2.0. 별도의 TurboPixel 프레임버퍼 압축 | 고해상도 디스플레이와 더 풍부한 LVGL 인터페이스. 선택한 디바이스와 SDK의 작업 지원 여부를 확인하십시오. |
+| **ePicasso 2.0** | SF32LB52x | 2D/2.5D UI 가속 | 원가 최적화형 그래픽 구성에서 eZip 2.0 에셋 압축 해제 | 보급형 웨어러블, Bluetooth 제품, e-paper, 소형 HMI |
+| **ePicasso 2.0** | SF32LB56x | 2D/2.5D UI 가속 | 알파 블렌딩되는 전경 레이어 네 개, 전용 마스크 레이어 하나, 단색 배경 레이어 하나. 하드웨어 회전/스케일링과 수평 미러링(수직 미러링은 지원되지 않음). 포맷 변환. eZip 2.0. 별도의 TurboPixel 프레임버퍼 압축 | 고해상도 디스플레이와 더 풍부한 LVGL 인터페이스. 선택한 디바이스와 SDK의 작업 지원 여부를 확인하십시오. |
 | **ePicasso 2.0** | SF32LB58x | 2D/2.5D UI 가속 | ePicasso 2.0과 별도의 Vivante GCNanoUltraV 벡터 그래픽 엔진을 포함합니다. 각 엔진이 지원하는 기능은 독립적으로 확인하십시오. | 고해상도, 그래픽 중심 제품. 대상 SDK가 각 엔진에서 지원하는 기능을 확인하십시오. |
 | **ePicasso (EPIC)** | SF32LB57x | 2D/2.5D UI 가속 | 회전, 스케일링, 행렬 변환, 수평 및 수직 미러링, 알파 블렌딩, 다중 레이어 합성. EZIP는 디코딩된 eZip/eZip-A 에셋을 EPIC에 전달합니다. EPIC 포맷 표에는 SF32LB57x의 JPEG 입력이 별도로 나열되어 있으며, SDK는 독립형 JPEGD HAL 디코더도 제공하는데 이는 별개의 경로입니다. | 그래픽 중심, 카메라 지원, 멀티미디어 지향 연결형 제품 |
 
@@ -117,7 +117,7 @@ SF32 디바이스마다 서로 다른 ePicasso 구성을 통합합니다. 최종
 
 | 디바이스 제품군 | 그래픽 가속기 | 일반적인 포지셔닝 |
 |:--------------|:---------------------|:--------------------|
-| **SF32LB52x** | ePicasso 2.0 2D/2.5D 가속기 | 비용 최적화 웨어러블, Bluetooth, 소형 HMI 제품 |
+| **SF32LB52x** | ePicasso 2.0 2D/2.5D 가속기 | 원가 최적화형 웨어러블, Bluetooth 제품, 소형 HMI |
 | **SF32LB55x** | ePicasso 2.5D 가속기 | 디스플레이가 필요한 BLE 웨어러블 및 센서 비중이 높은 디바이스 |
 | **SF32LB56x** | ePicasso 2.0 2D/2.5D 가속기 | 고해상도 디스플레이 제품과 더 풍부한 LVGL 방식의 인터페이스 |
 | **SF32LB57x** | ePicasso(EPIC) 2D/2.5D 가속기 | 그래픽 중심, 카메라 지원, 멀티미디어 지향 연결형 제품 |
@@ -133,7 +133,7 @@ SF32 디바이스마다 서로 다른 ePicasso 구성을 통합합니다. 최종
 
 SF32 포트가 지원되는 드로우 작업을 하드웨어로 전달하면 ePicasso가 LVGL 성능을 향상시킬 수 있습니다. 가속 효과가 가장 큰 지점은 보통 다음과 같습니다.
 
-- 이미지 블릿
+- 이미지 복사(blit)
 - 색상 채우기
 - 알파 블렌딩
 - 이미지 스케일링

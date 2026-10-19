@@ -21,7 +21,7 @@ tags:
 
 - As opções de boot externo incluem SPI NOR, SPI NAND e SD NAND; eMMC está disponível nos modelos compatíveis com alimentação externa regulada.
 - Os pinos de bootstrap `PA13` e `PA17` selecionam a mídia de boot.
-- As notas de aplicação e o guia de projeto do esquemático indicam `PA21` para comutar a alimentação do armazenamento de boot, enquanto o checklist oficial indica `PA11` para a Flash externa das variantes alimentadas por bateria. Confirme com a SiFli qual pino de controle se aplica ao projeto exato. Como requisito separado, a Flash NOR de 32 MB ou mais conectada via MPI deve poder ser desligada e religada por PA21 para que a ROM a reconheça após um reset ou a entrada em Hibernate. Nas variantes com memória integrada ao encapsulamento, VDD_SIP deve ser desligado durante o Hibernate para evitar fuga de corrente nas E/S dessa memória.
+- As notas de aplicação e o guia de projeto do esquemático indicam `PA21` para comutar a alimentação do armazenamento de boot, enquanto o checklist oficial indica `PA11` para a Flash externa das variantes alimentadas por bateria. Confirme com a SiFli qual pino de controle se aplica ao projeto exato. Como requisito separado, a Flash NOR de 32 MB ou mais conectada via MPI deve poder ser desligada e religada por PA21 para que a ROM a reconheça após um reset ou a entrada em Hibernate. Durante o Hibernate, VDD_SIP deve ficar desligado para evitar fuga de corrente nas E/S da memória integrada ao encapsulamento.
 
 **Objetivo do projeto**
 
@@ -62,7 +62,7 @@ O chip aceita Flash SPI NOR, SPI NAND e SD NAND externas. **eMMC é compatível 
 </div>
 
 !!! note "Domínios de alimentação do eMMC (somente variantes alimentadas por fonte regulada externa)"
-    Os chips eMMC têm dois domínios de alimentação: VCC e VCCQ. Opção 1: chavear os dois juntos — reduz a corrente no desligamento, mas torna mais lenta a recuperação do eMMC após o modo sleep e aumenta o consumo médio do processador. Opção 2: chavear somente VCC e manter VCCQ sempre ligado — a corrente no desligamento é maior do que na opção 1, mas a recuperação do eMMC é mais rápida e o consumo médio do processador é menor.
+    Os chips eMMC têm dois domínios de alimentação: VCC e VCCQ. Opção 1: comutar os dois juntos — reduz a corrente no desligamento, mas torna mais lenta a recuperação do eMMC após o modo sleep e aumenta o consumo médio do processador. Opção 2: comutar somente VCC e manter VCCQ sempre ligado — a corrente no desligamento é maior do que na opção 1, mas a recuperação do eMMC é mais rápida e o consumo médio do processador é menor.
 
 !!! important "Pull-ups das interfaces de armazenamento"
     A nota de aplicação dos modelos com alimentação externa regulada especifica: NOR Flash não exige pull-up externo; SPI NAND exige um em PA17 (Hold#); SD NAND exige pull-ups em PA13 (D3) e PA15 (CMD); eMMC exige pull-ups em PA17 (D1), PA13 (D3) e PA15 (CMD). O valor recomendado é 7,5 kΩ. A nota das variantes alimentadas por bateria menciona apenas os footprints de bootstrap PA13/PA17 e não informa se o pull-up PA15/CMD também é necessário. Não aplique às variantes com bateria o requisito PA15 dos modelos com alimentação regulada sem confirmação; valide com a SiFli os pull-ups para a variante e a mídia de boot específicas.
@@ -86,9 +86,9 @@ O chip aceita Flash SPI NOR, SPI NAND e SD NAND externas. **eMMC é compatível 
 
     | Bootstrap[1] (PA13) | Bootstrap[0] (PA17) | Mídia de boot |
     |:---|:---|:---|
-    | L | L | SPI NOR Flash |
-    | L | H | SPI NAND Flash |
-    | H | X | SD NAND Flash |
+    | L | L | Flash SPI NOR |
+    | L | H | Flash SPI NAND |
+    | H | X | Flash SD NAND |
 
     </div>
 
@@ -109,9 +109,9 @@ O chip aceita Flash SPI NOR, SPI NAND e SD NAND externas. **eMMC é compatível 
 
     | Bootstrap[1] (PA13) | Bootstrap[0] (PA17) | Mídia de boot |
     |:---|:---|:---|
-    | L | L | SPI NOR Flash |
-    | L | H | SPI NAND Flash |
-    | H | X | SD NAND Flash |
+    | L | L | Flash SPI NOR |
+    | L | H | Flash SPI NAND |
+    | H | X | Flash SD NAND |
     | H | H | eMMC |
 
     </div>
@@ -156,8 +156,8 @@ As notas de aplicação e o guia de projeto de esquemático da OpenSiFli, de mai
 - [ ] A mídia de boot foi selecionada e documentada antes do layout da PCB.
 - [ ] As opções de pull-up de bootstrap em `PA13`/`PA17` correspondem à tabela de boot.
 - [ ] Todas as chaves de alimentação necessárias ao armazenamento de boot são controladas pelo pino específico da variante confirmado pela fonte; a divergência entre PA11 e PA21 foi resolvida com a SiFli.
-- [ ] O compromisso entre VCC e VCCQ do eMMC foi avaliado nos projetos alimentados por fonte regulada externa.
-- [ ] O plano de inicialização cobre os straps do modo de boot, a sequência temporal das linhas de alimentação do armazenamento, a leitura do ID e o download do firmware.
+- [ ] As alternativas de alimentação de VCC/VCCQ do eMMC foram avaliadas nos projetos alimentados por fonte regulada externa.
+- [ ] O plano de bring-up cobre os straps do modo de boot, a sequência temporal das linhas de alimentação do armazenamento, a leitura do ID e o download do firmware.
 
 #### 5.6.2. Sensores { #562-sensors }
 
@@ -170,14 +170,14 @@ As notas de aplicação e o guia de projeto de esquemático da OpenSiFli, de mai
 
 Mantenha confiáveis a alimentação, as interrupções e o roteamento dos barramentos dos sensores, permitindo desligar corretamente os sensores que não estiverem em uso durante os modos de baixo consumo.
 
-O SF32LB52x pode se conectar a sensores de frequência cardíaca, acelerômetros, sensores geomagnéticos e outros semelhantes. Para chavear a alimentação dos sensores, escolha uma chave de carga com baixa corrente quiescente (Iq).
+O SF32LB52x pode se conectar a sensores de frequência cardíaca, acelerômetros, sensores geomagnéticos e outros semelhantes. Para comutar a alimentação dos sensores, escolha uma chave de carga com baixa corrente quiescente (Iq).
 
 **Checklist dos sensores**
 
 - [ ] Os pinos de barramento, interrupção, reset e habilitação da alimentação de cada sensor estão definidos.
 - [ ] A corrente quiescente (Iq) e a corrente no estado desligado da chave de carga dos sensores atendem à meta de standby.
 - [ ] Os resistores de pull-up estão conectados à linha de alimentação de E/S correta dos sensores.
-- [ ] O plano de inicialização inclui a varredura do barramento, o despertar por interrupção e o ciclo de alimentação dos sensores.
+- [ ] O plano de bring-up inclui a varredura do barramento, o despertar por interrupção e o ciclo de alimentação dos sensores.
 
 #### 5.6.3. Atribuição de pinos UART e I2C { #563-uart-and-i2c-pin-assignment }
 
@@ -188,7 +188,7 @@ O SF32LB52x pode se conectar a sensores de frequência cardíaca, acelerômetros
 
 **Objetivo do projeto**
 
-Use o mapeamento flexível de pinos para simplificar o roteamento sem bloquear os straps de boot, os pinos de despertar, o acesso de depuração ou os pontos de contato do dispositivo de teste de produção.
+Use o mapeamento flexível de pinos para simplificar o roteamento sem bloquear os straps de boot, os pinos de despertar, o acesso de depuração ou os pontos de contato do gabarito de teste de produção.
 
 O SF32LB52x permite mapear as funções UART e I2C para quaisquer pinos PA.
 
@@ -215,7 +215,7 @@ O SF32LB52x permite mapear as funções GPTIM para quaisquer pinos PA.
 
 - [ ] Os canais de temporizador necessários para PWM, captura ou malhas de controle estão listados na tabela de pinagem.
 - [ ] Os pinos GPTIM não conflitam com os requisitos de backlight, motor, depuração ou armazenamento.
-- [ ] O plano de inicialização inclui a verificação da frequência PWM, da faixa de ciclo de trabalho e da polaridade dos pinos.
+- [ ] O plano de bring-up inclui a verificação da frequência PWM, da faixa de ciclo de trabalho e da polaridade dos pinos.
 
 ### 5.7. Fabricação { #57-manufacturing }
 
@@ -228,7 +228,7 @@ O SF32LB52x permite mapear as funções GPTIM para quaisquer pinos PA.
 
 **Objetivo do projeto**
 
-Garanta acesso para gravar firmware, consultar logs, depurar passo a passo e recuperar o sistema de falhas, mesmo depois de definidos o gabinete do produto e o dispositivo de teste de produção.
+Garanta acesso para gravar firmware, consultar logs, depurar passo a passo e recuperar o sistema de falhas, mesmo depois de definidos o gabinete do produto e o gabarito de teste de produção.
 
 O SF32LB52x oferece a interface DBG_UART para download e depuração, que pode ser conectada a um PC por meio de um adaptador UART-USB de 3,3 V. SWD e DBG_UART são multiplexados nos pinos PA18 e PA19. A configuração padrão após a energização é DBG_UART, que permite depuração passo a passo e saída de logs.
 
@@ -247,17 +247,17 @@ Para depuração passo a passo e saída de logs por DBG_UART, consulte os manuai
 
 **Checklist da depuração**
 
-- [ ] `PA18`/`PA19`, o terra e a referência de alimentação necessária estão disponíveis em pads de teste ou pinos de um conector.
+- [ ] `PA18`/`PA19`, o GND e a referência de alimentação necessária estão disponíveis em pads de teste ou pinos de um conector.
 - [ ] O acesso de depuração continua disponível depois da montagem do gabinete, da bateria e do display.
-- [ ] O nível de tensão UART de 3,3 V é compatível com o adaptador ou dispositivo de teste escolhido.
+- [ ] O nível de tensão UART de 3,3 V é compatível com o adaptador ou gabarito de teste escolhido.
 - [ ] O procedimento de recuperação está documentado para placas que não conseguem inicializar o firmware da aplicação.
 
 #### 5.7.2. Gravação em produção e calibração do cristal { #572-production-flashing-and-crystal-calibration }
 
 **Resumo rápido**
 
-- A programação em produção e a calibração do cristal exigem alimentação estável, acesso à DBG_UART, PA01 e os pontos de teste necessários de alimentação e terra.
-- O acesso do dispositivo de teste deve ser previsto antes de definir o contorno mecânico da PCB e o gabinete.
+- A programação em produção e a calibração do cristal exigem alimentação estável, acesso à DBG_UART, PA01 e os pontos de teste necessários de alimentação e GND.
+- O acesso do gabarito de teste deve ser previsto antes de definir o contorno mecânico da PCB e o gabinete.
 
 **Objetivo do projeto**
 
@@ -268,13 +268,13 @@ A SiFli fornece um downloader offline para gravar o firmware de produção e cal
 **Checklist de produção**
 
 - [ ] Os pontos de teste PVDD/VBAT, GND, AVDD33, DBG_UART_RXD, DBG_UART_TXD e PA01 estão previstos.
-- [ ] Os pads de teste permanecem acessíveis ao dispositivo de teste previsto após a montagem mecânica.
+- [ ] Os pads de teste permanecem acessíveis ao gabarito de teste previsto após a montagem mecânica.
 - [ ] O fluxo de calibração do cristal e os limites de aprovação/reprovação foram definidos com a equipe de fabricação.
 - [ ] Os registros de programação, calibração e testes funcionais podem ser associados à revisão da placa.
 
 #### 5.7.3. Checklists de esquemático e layout da PCB { #573-schematic-and-pcb-drawing-checklists }
 
-Use o [checklist oficial de esquemático e PCB][SiFli SF32LB52 Schematic & PCB Checklist (XLSX)], publicada no wiki da SiFli, como ponto de controle formal de liberação. Consulte o [Checklist do esquemático](SF32LB52x_schematic_checklist.md) para ver a versão completa, item por item. As listas deste guia ajudam a detectar problemas comuns de engenharia antes da revisão formal.
+Use o [checklist oficial de esquemático e PCB][SiFli SF32LB52 Schematic & PCB Checklist (XLSX)], publicado na wiki da SiFli, como ponto de controle formal de liberação. Consulte o [Checklist do esquemático](SF32LB52x_schematic_checklist.md) para ver a versão completa, item por item. As listas deste guia ajudam a detectar problemas comuns de engenharia antes da revisão formal.
 
 [SiFli SF32LB52 Schematic & PCB Checklist (XLSX)]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx
 

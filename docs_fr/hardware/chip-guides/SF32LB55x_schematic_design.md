@@ -18,12 +18,12 @@ tags:
 
 | Groupe | Sujets |
 |:---|:---|
-| Système d'alimentation | Rails du PMU, autres rails, condensateurs, POR/BOR/reset, inductance BUCK. |
+| Système d'alimentation | Rails du PMU, autres rails, condensateurs, POR/BOR/réinitialisation, inductance BUCK. |
 | Mode de démarrage | Domaine de tension de la broche Mode, résistance de rappel, téléchargement, récupération et accès en production. |
 | Génération d'horloge | Quartz 48 MHz, quartz 32,768 kHz, et revue des condensateurs d'adaptation. |
-| RF | Adaptation RF, chemin d'antenne à 50 ohms, filtrage AVDD_BRF, et zone interdite RF. |
+| RF | Adaptation RF, chemin d'antenne à 50 ohms, filtrage AVDD_BRF, et zone d'exclusion RF. |
 | Interfaces de stockage | OPI PSRAM, QSPI NOR/NAND/PSRAM, et SDIO eMMC/Micro SD. |
-| Affichage et tactile | MIPI DSI, SPI/QSPI, MCU8080, JDI, interruption tactile, reset, rétroéclairage et alimentation du panneau. |
+| Affichage et tactile | MIPI DSI, SPI/QSPI, MCU8080, JDI, interruption tactile, réinitialisation, rétroéclairage et alimentation du panneau. |
 | Réveil, GPADC et fabrication | Sources et boutons de réveil, PWM du moteur, diviseurs GPADC, capteurs, audio Bluetooth, DBG-UART, SWD, flashage en production et étalonnage du quartz. |
 
 </div>
@@ -57,7 +57,7 @@ Le SF32LB551 en QFN68L ne possède pas les broches VDD2, BUCK2_VSW, BUCK2_VOUT, 
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | AVDD_BRF | 1,71 | 1,8 | 3,63 | 30 | Entrée d'alimentation RF |
 | AVDD_DSI | 1,71 | 1,8 | 2,75 | 20 | Entrée d'alimentation MIPI DSI ; l'alimentation doit être fournie |
-| VDD_SIP | 1,71 | 1,8 | 1,98 | 30 | Entrée d'alimentation pour la puce mémoire co-packagée |
+| VDD_SIP | 1,71 | 1,8 | 1,98 | 30 | Entrée d'alimentation pour la puce mémoire intégrée |
 | AVDD33 | 3,15 | 3,3 | 3,63 | 50 | Entrée d'alimentation |
 | VDDIOA | 1,71 | 1,8 | 3,63 | - | Entrée d'alimentation E/S PA |
 | VDDIOB | 1,71 | 1,8 | 3,63 | - | Entrée d'alimentation E/S PB |
@@ -91,19 +91,19 @@ Placez les condensateurs requis près des broches correspondantes, gardez les bo
 
 Les sources sont contradictoires : le tableau 3-3 du [guide d'application matérielle chinois de SiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) et le point 9 de la [liste de contrôle de schéma V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) indiquent 1 µF pour VDD_RTC, tandis que [C0313 sur le schéma de référence du guide](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png) est marqué 0,1 µF. Les sources ne précisent pas les conditions d'application de chaque valeur. Avant la validation de la conception, confirmez auprès de SiFli la valeur requise pour le composant exact ; ne tranchez pas cette divergence par hypothèse.
 
-Alimentez VDD1 et VDD2 simultanément ; le SF32LB551 n'a pas de VDD2. Reliez RSTN au domaine de tension d'entrée de VDD1 par une résistance de rappel et ajoutez 0,1 µF vers la masse. Le schéma de référence indique 1,8 V/3,3 V pour l'alimentation du rappel et utilise une résistance de 10 kΩ ; choisissez le niveau correspondant au domaine VDD1 de la conception. La Figure 5.1-1 montre un niveau POR de 1,50 V, un BOR configurable de 2,5 V à 1,5 V et un repère RSTN à 0,7 V. La mesure de la Figure 5.1-3 indique environ 700 µs entre la montée de l'alimentation et la libération du reset dans cet exemple ; ce n'est pas un délai garanti pour toutes les conceptions.
+Alimentez VDD1 et VDD2 simultanément ; le SF32LB551 n'a pas de VDD2. Reliez RSTN au domaine de tension d'entrée de VDD1 par une résistance de rappel et ajoutez 0,1 µF vers la masse. Le schéma de référence indique 1,8 V/3,3 V pour l'alimentation du rappel et utilise une résistance de 10 kΩ ; choisissez le niveau correspondant au domaine VDD1 de la conception. La Figure 5.1-1 montre un niveau POR de 1,50 V, un BOR configurable de 2,5 V à 1,5 V et un repère RSTN à 0,7 V. La mesure de la Figure 5.1-3 indique environ 700 µs entre la montée de l'alimentation et la levée de la réinitialisation dans cet exemple ; ce n'est pas un délai garanti pour toutes les conceptions.
 
 ![Figure 5.1-1 : Minutage de mise sous/hors tension](../../sf32-products/chips/assets/55x/SF32LB55x-POR-BOR.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 5.1-1 : Minutage de mise sous/hors tension</em></div>
 
-![Figure 5.1-2 : Circuit de reset](../../sf32-products/chips/assets/55x/SF32LB55x-RST-SCH.png){ width="100%" loading="lazy" }
+![Figure 5.1-2 : Circuit de réinitialisation](../../sf32-products/chips/assets/55x/SF32LB55x-RST-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figure 5.1-2 : Circuit de reset</em></div>
+<div align="center"><em>Figure 5.1-2 : Circuit de réinitialisation</em></div>
 
-![Figure 5.1-3 : Mesure de la mise sous tension et du reset](../../sf32-products/chips/assets/55x/SF32LB55x-RST-Test.png){ width="100%" loading="lazy" }
+![Figure 5.1-3 : Mesure de la mise sous tension et de la réinitialisation](../../sf32-products/chips/assets/55x/SF32LB55x-RST-Test.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figure 5.1-3 : Mesure de la mise sous tension et du reset</em></div>
+<div align="center"><em>Figure 5.1-3 : Mesure de la mise sous tension et de la réinitialisation</em></div>
 
 ![Figure 5.1-4 : Circuit de référence DC-DC pour BGA](../../sf32-products/chips/assets/55x/SF32LB55x-BUCK-BGA-SCH.png){ width="100%" loading="lazy" }
 
@@ -128,7 +128,7 @@ Conformément à la note d'application matérielle de SiFli, choisissez une indu
 
 </div>
 
-Avec un niveau haut, la puce entre en mode de téléchargement après la mise sous tension ; avec un niveau bas, elle démarre le programme utilisateur. Assurez-vous que l'outillage de test en production peut imposer l'état de démarrage requis et que les broches de démarrage restent accessibles malgré le coffret du produit et les contraintes d'accès aux points de test.
+Avec un niveau haut, la puce entre en mode de téléchargement après la mise sous tension ; avec un niveau bas, elle démarre le programme utilisateur. Assurez-vous que l'outillage de test en production peut imposer l'état de démarrage requis et que les broches de démarrage restent accessibles malgré le boîtier mécanique du produit et les contraintes d'accès aux points de test.
 
 La broche Mode appartient au même domaine de tension que VDDIOA. Maintenez son niveau stable avec une résistance externe de 10 kΩ reliée à l'alimentation correspondante ou à GND ; ne la laissez pas flottante et évitez les transitions involontaires. Les cartes de production doivent prévoir un point de test Mode pour le flashage du firmware et l'étalonnage du quartz ; un cavalier n'est pas nécessaire. Sur les cartes de test, réservez un cavalier afin de pouvoir récupérer une application bloquée en démarrant en mode téléchargement.
 
@@ -149,7 +149,7 @@ Placez les deux quartz près de la puce, gardez leurs pistes courtes et symétri
 
 ### 5.4. RF { #54-rf }
 
-Le frontal RF du SF32LB55x intègre une technologie de filtrage et d'adaptation large bande. Maintenez l'impédance caractéristique de la piste RF du PCB à 50 Ω et prévoyez un réseau d'adaptation en π pour filtrer les émissions parasites et adapter l'antenne. Déterminez les valeurs finales des composants par des essais avec l'antenne et le PCB réels. Si l'antenne choisie est déjà adaptée, il n'est généralement pas nécessaire de monter des composants supplémentaires dans le réseau prévu.
+Le frontal RF du SF32LB55x intègre une technologie de filtrage et d'adaptation large bande. Maintenez l'impédance caractéristique de la piste RF de la PCB à 50 Ω et prévoyez un réseau d'adaptation en π pour filtrer les émissions parasites et adapter l'antenne. Déterminez les valeurs finales des composants par des essais avec l'antenne et la PCB réelles. Si l'antenne choisie est déjà adaptée, il n'est généralement pas nécessaire de monter des composants supplémentaires dans le réseau prévu.
 
 Routez les pistes RF au-dessus d'un plan de référence de masse continu, placez le réseau d'adaptation au plus près de la puce et le filtre AVDD_BRF près de la broche. Éloignez de la zone RF les pistes DC-DC, VBAT, du quartz, de l'horloge haute vitesse, du SPI, du SDIO, de l'I2S et de l'UART.
 
@@ -161,13 +161,13 @@ Le circuit RF de référence place C0323 (15 pF/50 V) en série avec ANT et lais
 
 ### 5.5. Interfaces de stockage { #55-storage-interfaces }
 
-Le SF32LB55x prend en charge les options OPI PSRAM, mémoire flash QSPI NOR/NAND et PSRAM, et SDIO eMMC ou Micro SD. Le choix du boîtier affecte les broches et interfaces disponibles, donc le choix du stockage doit être finalisé avant le verrouillage des broches et la revue de l'empilage PCB.
+Le SF32LB55x prend en charge les options OPI PSRAM, mémoire flash QSPI NOR/NAND et PSRAM, et SDIO eMMC ou Micro SD. Le choix du boîtier affecte les broches et interfaces disponibles, donc le choix du stockage devrait être finalisé avant le verrouillage des broches et la revue de l'empilage PCB.
 
 BGA145 dispose d'un canal OPI PSRAM externe, BGA169 de deux. Les tableaux 5.5-1 à 5.5-3 décrivent la configuration BGA145 et les deux mémoires BGA169, et non trois canaux sur un même boîtier. Les tableaux QSPI correspondent à QSPI2, QSPI3 et QSPI4. Les tableaux SDIO couvrent SDIO1 en modes 4/8 bits et SDIO2 en mode 4 bits.
 
 QSPI2 est recommandé pour une PSRAM QSPI externe. Si un GPIO du HCPU commande l'alimentation d'une PSRAM OPI/QSPI externe, utilisez une broche HCPU de type PU : niveau haut pour activer, bas pour couper. Pour commuter VDD_SIP de la Flash interne, utilisez PA58 avec la même polarité. Demandez au FAE de SiFli d'évaluer l'espace Flash requis par les algorithmes d'accéléromètre et de fréquence cardiaque du LCPU avant de décider d'ajouter une NOR Flash sur QSPI4.
 
-Les indications de direction des tableaux OPI d'origine ne sont pas cohérentes. Dans le [schéma de référence BGA145](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png), le [schéma BGA169 pour la mémoire 1](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png) et le [schéma pour la mémoire 2](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png), les broches MCU PA37/PA20 et PA07/PA08 pilotent respectivement CS# et CLK de la PSRAM externe. Les tableaux ci-dessous décrivent donc CS# et CLK du point de vue du MCU : sortie MCU, entrée PSRAM. Les schémas n'indiquent pas de direction fixe pour DQS/DM ; vérifiez sa fonction et sa direction dans la fiche technique de la PSRAM choisie.
+Les indications de direction des tableaux OPI d'origine ne sont pas cohérentes. Dans le [schéma de référence BGA145](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png), le [schéma BGA169 pour la mémoire 1](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png) et le [schéma pour la mémoire 2](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png), les broches MCU PA37/PA20 et PA07/PA08 pilotent respectivement CS# et CLK de la PSRAM externe. Les tableaux ci-dessous décrivent donc CS# et CLK du point de vue de la MCU : sortie MCU, entrée PSRAM. Les schémas n'indiquent pas de direction fixe pour DQS/DM ; vérifiez sa fonction et sa direction dans la fiche technique de la PSRAM choisie.
 
 Chaque PSRAM illustrée utilise 1,8 V, trois condensateurs de 0,1 µF et un de 1 µF/6,3 V. Les connexions RESET# et NC/CLK# laissées ouvertes concernent le composant représenté ; consultez la fiche technique du composant choisi sans les généraliser.
 
@@ -359,12 +359,12 @@ Les interfaces JDI parallèle et série utilisent les groupes de signaux multipl
 | - | AVDD18_DSI | Entrée d'alimentation MIPI |
 | - | DSI_REXT | Connectez une résistance externe de 10 K vers la masse |
 | - | AVSS_DSI | Masse |
-| TE | PA77 | Signal TE de synchronisation avec les trames du MCU |
-| RESET | PB17 | Signal de reset pour le panneau d'affichage |
+| TE | PA77 | Signal TE de synchronisation avec les trames de la MCU |
+| RESET | PB17 | Signal de réinitialisation du panneau d'affichage |
 
 </div>
 
-Notes d'affectation des broches d'affichage :
+Notes de sélection des broches d'affichage :
 
 - TE peut utiliser un autre GPIO du groupe PA.
 - Si le panneau prend en charge le signal TE via DSI, aucune broche TE distincte n'est nécessaire.
@@ -383,12 +383,12 @@ Notes d'affectation des broches d'affichage :
 | SDO | GPIO21 | PB35 | Signal de sortie de données en mode SPI 3/4 fils ; reliez-le à SDI_RDX |
 | D[0] | GPIO19 | PB37 | Donnée 2 en mode Quad-SPI |
 | D[1] | GPIO18 | PB07 | Donnée 3 en mode Quad-SPI |
-| RESET | GPIO2 | PB17 | Signal de reset pour le panneau d'affichage |
-| TE | GPIO3 | PB77 | Signal TE de synchronisation avec les trames du MCU |
+| RESET | GPIO2 | PB17 | Signal de réinitialisation du panneau d'affichage |
+| TE | GPIO3 | PB77 | Signal TE de synchronisation avec les trames de la MCU |
 
 </div>
 
-Notes d'affectation des broches d'affichage :
+Notes de sélection des broches d'affichage :
 
 - TE peut utiliser PA77 ou un autre GPIO du groupe PA configuré pour émuler ce signal.
 - RESET peut utiliser n'importe quel GPIO. Pour un affichage permanent (AOD), SiFli recommande un GPIO du groupe PB.
@@ -411,12 +411,12 @@ Notes d'affectation des broches d'affichage :
 | D[5] | GPIO14 | - | Donnée 5 |
 | D[6] | GPIO13 | - | Donnée 6 |
 | D[7] | GPIO12 | - | Donnée 7 |
-| RESET | GPIO2 | - | Reset |
-| TE | GPIO3 | - | Signal TE de synchronisation avec les trames du MCU |
+| RESET | GPIO2 | - | Réinitialisation |
+| TE | GPIO3 | - | Signal TE de synchronisation avec les trames de la MCU |
 
 </div>
 
-Notes d'affectation des broches d'affichage :
+Notes de sélection des broches d'affichage :
 
 - TE peut utiliser PA77 ou un autre GPIO du groupe PA configuré pour émuler ce signal.
 - RESET peut utiliser n'importe quel GPIO. Pour un affichage permanent (AOD), SiFli recommande un GPIO du groupe PB.
@@ -431,7 +431,7 @@ Le [guide d'application matérielle de SiFli](https://github.com/OpenSiFli/SiFli
 | :--- | :--- | :--- |
 | JDI_VCK | PA20 | Horloge de décalage pour le pilote vertical |
 | JDI_VST | PA31 | Signal de démarrage pour le pilote vertical |
-| JDI_XRST | PA34 | Signal de reset pour les pilotes horizontal et vertical |
+| JDI_XRST | PA34 | Signal de réinitialisation pour les pilotes horizontal et vertical |
 | JDI_HCK | PA36 | Horloge de décalage pour le pilote horizontal |
 | JDI_HST | PA38 | Signal de démarrage pour le pilote horizontal |
 | JDI_ENB | PA42 | Signal de validation d'écriture pour la mémoire de pixels |
@@ -475,11 +475,11 @@ Le [guide d'application matérielle de SiFli](https://github.com/OpenSiFli/SiFli
 
 </div>
 
-Pour BL_PWM, utilisez un GPIO disposant de la fonction GPTIM1_CHx et configurez un état de pull-up ou pull-down adapté afin d'éviter l'allumage inattendu du rétroéclairage au démarrage à froid.
+Pour BL_PWM, utilisez un GPIO disposant de la fonction GPTIM1_CHx et configurez un rappel au niveau haut ou bas adapté afin d'éviter l'allumage inattendu du rétroéclairage au démarrage à froid.
 
 ### 5.7. Interfaces de réveil, GPADC et fabrication { #57-wake-gpadc-and-manufacturing-interfaces }
 
-Les accès liés au réveil, aux mesures analogiques, au débogage et à la production doivent être planifiés en tenant compte du coffret et des gabarits de test. Les broches de réveil nécessitent des niveaux de repos définis et une protection ESD. Les diviseurs de tension GPADC doivent concilier temps de stabilisation et courant de fuite, et les accès au débogage et au téléchargement doivent rester disponibles pendant l'EVT et la production.
+Les accès liés au réveil, aux mesures analogiques, au débogage et à la production doivent être planifiés en tenant compte du boîtier mécanique du produit et des gabarits de test. Les broches de réveil nécessitent des niveaux de repos définis et une protection ESD. Les diviseurs de tension GPADC doivent concilier temps de stabilisation et courant de fuite, et les accès au débogage et au téléchargement doivent rester disponibles pendant l'EVT et la production.
 
 SF32LB55x possède quatre sources de réveil HCPU (WKUP_A0–WKUP_A3) et six LCPU (WKUP_B0–WKUP_B5). Chacune réveille son CPU ; seules les six sources LCPU permettent de sortir de Hibernate. Aucune de ces dix entrées ne doit rester flottante : ajoutez des résistances externes de rappel au niveau haut ou bas selon la fonction pour éviter les fuites en sommeil.
 
@@ -489,7 +489,7 @@ Dans le circuit de référence, KEY1 est relié à PB48 avec un rappel de 10 kΩ
 
 <div align="center"><em>Figure 5.7-1 : Circuit de référence du bouton de réveil</em></div>
 
-Utilisez un GPIO avec GPTIM1_CHx pour le PWM du moteur. Choisissez le comportement PU/PD adapté pour éviter une activation au démarrage à froid. Le circuit de référence utilise GPIO17 (PA44), un transistor côté masse et une résistance de rappel de grille de 1 MΩ, avec 3 V pour le moteur et une alimentation MCU séparée de 3,3 V.
+Utilisez un GPIO avec GPTIM1_CHx pour le PWM du moteur. Choisissez le comportement PU/PD adapté pour éviter une activation au démarrage à froid. Le circuit de référence utilise GPIO17 (PA44), un transistor côté masse et une résistance de rappel vers la masse (pull-down) de 1 MΩ sur la grille, avec 3 V pour le moteur et une alimentation MCU séparée de 3,3 V.
 
 ![Figure 5.7-2 : Circuit de référence du moteur](../../sf32-products/chips/assets/55x/SF32LB55x-VIB-SCH.png){ width="100%" loading="lazy" }
 

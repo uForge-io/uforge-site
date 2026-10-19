@@ -185,7 +185,7 @@ SF32LB56x 同时覆盖紧凑型 QFN68L 与高 I/O 的 WBBGA175 料号，并提�
 
 ### 开发板 { #development-kits }
 
-[SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) 开发板适合作为固件开发、显示验证、音频与存储测试、RF 检查以及功耗剖析的起点，尤其适合在投入芯片级或模组级硬件开发前先完成软件与系统验证。
+[SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) 开发板适合作为固件启动调试、显示验证、音频与存储测试、RF 检查以及功耗剖析的起点，尤其适合在投入芯片级或模组级硬件开发前先完成软件与系统验证。
 
 ### 参考产品 { #reference-products }
 

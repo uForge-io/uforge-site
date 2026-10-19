@@ -115,7 +115,7 @@ Unter Windows lautet der Dateiname des erzeugten Flashskripts `build_sf32lb52-lc
 
 | Phase | Entscheidungsfrage | Mindestnachweise |
 |:------|:-------------------|:-----------------|
-| Unveränderte Basis etablieren | Lassen sich die fixierten Quellen zuverlässig bauen, flashen und starten? | Versionsmanifest, Protokoll eines sauberen Builds, Image-Hash und Startprotokoll |
+| Unveränderte Basis einrichten | Lassen sich die fixierten Quellen zuverlässig bauen, flashen und starten? | Versionsmanifest, Protokoll eines sauberen Builds, Image-Hash und Startprotokoll |
 | Sprache zwischen zwei Geräten validieren | Funktionieren Raumerstellung, Beitritt und PTT im Standardablauf? | Rollen, LEDs, Tastenaktionen und bidirektionaler Sprachtest mit zwei Geräten |
 | Netzwerk und Wiederherstellung validieren | Sind die Grenzen für Verlassen, Timeout, Wiederverbindung und Gleichzeitigkeit akzeptabel? | Fehler-Injektionsmatrix, Wiederherstellungszeit, Protokolle und Fehlerzustände |
 | Audio und Stromversorgung bewerten | Passen Akustik und Akkuverhalten zum vorgesehenen Formfaktor? | Messungen von Audioqualität, Latenz, Reichweite, Stromaufnahme, Schlaf- und Aufwachverhalten |
@@ -148,7 +148,7 @@ flowchart LR
 
 Die wichtigsten Fehlerbereiche sind BLE-Scan und Raumerstellung, Synchronisierung des Raumzustands, Planung gleichzeitiger Sprecher, Opus-/Akustikpfad, Tastenereignisse, niedriger Akkustand und Schlafmodus, Wiederherstellung per Einschalttaste sowie nicht veröffentlichte Details zur Komponente und Lizenzierung. Prüfen Sie zuerst Rolle und Zustand und unterscheiden Sie anschließend Funk-, Audio- und lokale Stromversorgungsfehler.
 
-## Phase 1 — Die unveränderte Quellbasis etablieren { #stage-1-establish-the-untouched-source-baseline }
+## Phase 1 — Die unveränderte Quellbasis einrichten { #stage-1-establish-the-untouched-source-baseline }
 
 **Ziel:** Nachweisen, dass fixierte Quellen, SDK und aufgelöste Abhängigkeiten reproduzierbar dasselbe Image erzeugen.
 

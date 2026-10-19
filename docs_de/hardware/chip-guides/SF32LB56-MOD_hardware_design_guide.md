@@ -79,7 +79,7 @@ Typische Anwendungen umfassen High-End-Smartwatches, Smart Bands, tragbare mediz
 | I/O-Pegel | VDDIO unterstützt 1,7–3,6 V, PA00–PA11 sind jedoch fest auf 3,3 V eingestellt. Prüfen Sie jedes angeschlossene Peripheriegerät. |
 | Debug/Download | UART4_TXD/UART4_RXD sind die Standard-UART-Pins für Logausgabe, Download und Debug; SWDIO/SWCLK unterstützen den SWD-Download. |
 | Boot-Modus | Ein High-Pegel an BOOT_MODE wählt den Download-Modus, ein Low-Pegel den Benutzermodus. |
-| Konflikt mit internem Flash | PA06–PA11 sind standardmäßig mit dem internen Modul-Flash verbunden und extern nicht verfügbar. |
+| Konflikt mit internem Flash | PA06–PA11 sind standardmäßig mit dem internen Flash des Moduls verbunden und extern nicht verfügbar. |
 | SDIO-/MPI3-Konflikt | SDIO und MPI3 teilen sich I/O-Ressourcen und können nicht gleichzeitig verwendet werden. |
 | Weckquellen | PA50, PA51, PB32 und PB35 können Interrupts empfangen, während sich die MCU im Schlafmodus befindet. |
 | PWRKEY | PB32 unterstützt einen Reset nach 10 s langem Drücken bei High-Pegel; ein 10-kΩ-Pull-down ist erforderlich. |
@@ -108,7 +108,7 @@ Typische Anwendungen umfassen High-End-Smartwatches, Smart Bands, tragbare mediz
 
 ### 3.3 Stromversorgungsbaum { #33-power-tree }
 
-VDD_3V3 versorgt MCU-PVDD, AVDD33_ANA, AVDD33_AUD, AVDD_BRF, VDDIOA2 und das interne Modul-Flash. SiFli empfiehlt für diese Schiene einen LDO. VDD_1V8 versorgt den Speicher, der sich im selben Gehäuse wie die MCU befindet. VDDIO versorgt die VDDIOA-/VDDIOB-I/O-Ports der MCU.
+VDD_3V3 versorgt MCU-PVDD, AVDD33_ANA, AVDD33_AUD, AVDD_BRF, VDDIOA2 und den internen Flash des Moduls. SiFli empfiehlt für diese Schiene einen LDO. VDD_1V8 versorgt den Speicher, der sich im selben Gehäuse wie die MCU befindet. VDDIO versorgt die VDDIOA-/VDDIOB-I/O-Ports der MCU.
 
 !!! info "Abbildung 3.3-1: SF32LB56-MOD Stromversorgungsdiagramm"
     Siehe Abbildung 7-1 in DS5602 V0.3.
@@ -165,7 +165,7 @@ Verwenden Sie eine gestufte Prüfreihenfolge: Schaltplanprüfung, Pin-Mux-Prüfu
 
 | Schiene | Empfohlener Betriebsbereich | Zweck |
 | :--- | :--- | :--- |
-| VDD_3V3 | 2,97–3,6 V | MCU-PVDD, analoge 3,3-V-Domänen, analoge RF-Domäne, VDDIOA2, internes Flash. |
+| VDD_3V3 | 2,97–3,6 V | MCU-PVDD, analoge 3,3-V-Domänen, analoge RF-Domäne, VDDIOA2, interner Flash. |
 | VDD_1V8 | 1,7–1,95 V | Versorgung des Speichers, der sich im selben Gehäuse wie die MCU befindet. |
 | VDDIO | 1,7–3,6 V | VDDIOA-/VDDIOB-I/O-Versorgung der MCU. |
 
@@ -235,17 +235,17 @@ Die in der empfohlenen Pin-Zuweisungsabbildung des Datenblatts mit GPTIM gekennz
 
 #### 5.4.1 Speicher { #541-storage }
 
-Die Modulfamilie stellt SKU-abhängiges Haupt-Flash, 4+8 MB OPI-PSRAM und 1 MB Backup-QSPI-NOR-Flash bereit. MPI3 kann extern SPI-NOR oder SPI-NAND anbinden, aber PA06–PA11 sind standardmäßig mit dem internen Modul-Flash verbunden und extern nicht verfügbar. SDIO und MPI3 teilen sich I/O-Ressourcen und können nicht gleichzeitig verwendet werden.
+Die Modulfamilie stellt SKU-abhängigen Haupt-Flash, 4+8 MB OPI-PSRAM und 1 MB Backup-QSPI-NOR-Flash bereit. MPI3 kann extern SPI-NOR oder SPI-NAND anbinden, aber PA06–PA11 sind standardmäßig mit dem internen Flash des Moduls verbunden und extern nicht verfügbar. SDIO und MPI3 teilen sich I/O-Ressourcen und können nicht gleichzeitig verwendet werden.
 
 #### 5.4.2 Sensoren { #542-sensors }
 
-GPADC unterstützt 12-Bit-Wandlung, eine Abtastrate von bis zu 4 MS/s, einen Eingangsbereich von 0–3,3 V single-ended, einen Differenzeingangsbereich von -2,1 V bis +2,1 V, Software-/Hardware-Trigger und DMA. Mit GPADC_CHx gekennzeichnete Pins unterstützen Analogeingänge; analoge Pfade kurz, gefiltert und fern von LCD- und RF-Schaltstörungen halten.
+GPADC unterstützt 12-Bit-Wandlung, eine Abtastrate von bis zu 4 MS/s, einen Eingangsbereich von 0–3,3 V single-ended, einen Differenzeingangsbereich von -2,1 V bis +2,1 V, Software-/Hardware-Trigger und DMA. Mit GPADC_CHx gekennzeichnete Pins unterstützen Analogeingänge; halten Sie analoge Pfade kurz, gefiltert und fern von LCD- und RF-Schaltstörungen.
 
 #### 5.4.3 UART/I2C { #543-uarti2c }
 
-UART unterstützt Vollduplex-Betrieb bis zu 6 Mbps. I2C unterstützt die Standardmodi 100 kbps, Fast 400 kbps, Fast-Mode Plus 1 Mbps und High-Speed 3,4 Mbps. Viele GPIOs sind als `PAxx_I2C_UART` oder `PBxx_I2C_UART` gemultiplext; den endgültigen Mux-Plan vor dem Schaltplan-Freeze bestätigen.
+UART unterstützt Vollduplex-Betrieb bis zu 6 Mbps. I2C unterstützt die Standardmodi 100 kbps, Fast 400 kbps, Fast-Mode Plus 1 Mbps und High-Speed 3,4 Mbps. Viele GPIOs sind als `PAxx_I2C_UART` oder `PBxx_I2C_UART` gemultiplext; bestätigen Sie den endgültigen Mux-Plan vor dem Schaltplan-Freeze.
 
-UART4_TXD an Pin 6 und UART4_RXD an Pin 7 bilden die Standard-UART für Logausgabe und unterstützen Programm-Download sowie Debugging. PA16 und PA17 können als DBG_UART gemultiplext werden; verwenden Sie diese Pins für Download oder Debugging, sind Serienwiderstände von 100 Ω erforderlich.
+UART4_TXD an Pin 6 und UART4_RXD an Pin 7 bilden die Standard-UART für Logausgabe und unterstützen Programm-Download sowie Debugging. PA16 und PA17 können als DBG_UART gemultiplext werden; werden diese Pins für Download oder Debugging verwendet, sind Serienwiderstände von 100 Ω erforderlich.
 
 #### 5.4.4 USB, SPI, SDIO und I2S { #544-usb-spi-sdio-and-i2s }
 
@@ -302,11 +302,11 @@ Für Designs mit externer Antenne beschreibt das Datenblatt einen Steckverbinder
 | :--- | :--- |
 | Stromversorgung | 4,7-µF-Kondensatoren befinden sich nahe an den Pins von VDD_3V3, VDD_1V8 und VDDIO. |
 | Masse | Modul-Massepins sind mit einem niederohmigen Massesystem mit Stitching nahe den High-Speed- und RF-Pfaden verbunden. |
-| Antenne | Der Antennenfreihaltebereich weist kein Eindringen von Kupfer, Leiterbahnen, Bauteilen, Schrauben, Abschirmungen, Akkumetall oder Gehäusemetall auf. |
+| Antenne | In den Antennenfreihaltebereich ragen weder Kupfer, Leiterbahnen, Bauteile, Schrauben, Abschirmungen noch Akku- oder Gehäusemetall hinein. |
 | Display | LCD-RGB-/SPI-Leitungen sind kurz, impedanzbewusst und weisen die erforderlichen Serienwiderstände auf. |
 | USB | USB-DP/DM sind als angepasstes Differenzpaar geroutet, mit ESD nahe am Steckverbinder. |
 | Analoges Audio | MIC_BIAS, MIC_ADC_IN und DAC-Ausgänge meiden Schaltregler, LCD-Takte und RF-Speisebereiche. |
-| Debug | SWD- und UART-Download-/Debug-Zugang ist bei Prototypen und Produktions-Fixtures erreichbar. |
+| Debug | SWD- und UART-Download-/Debug-Zugang ist bei Prototypen und Fertigungsprüfvorrichtungen erreichbar. |
 
 </div>
 

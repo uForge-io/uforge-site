@@ -137,7 +137,7 @@ Der offizielle Architekturleitfaden beschreibt Bluetooth PAN über Bluetooth im 
 
 Daraus ergeben sich vier Fehlerbereiche, die unabhängig voneinander diagnostiziert werden müssen: lokale Hardware und Audio, Bluetooth-Kopplung und PAN, Erreichbarkeit des Internets und des Cloud-Dienstes sowie Anwendungs- und Dienstkonfiguration. Eine erfolgreiche BLE-Kopplung allein belegt weder den Internetzugang des Boards noch die Aktivierung des Sprachdienstes.
 
-## Phase 1 — Die unveränderte Referenzbasis etablieren { #stage-1-establish-the-untouched-reference-baseline }
+## Phase 1 — Die unveränderte Referenzbasis einrichten { #stage-1-establish-the-untouched-reference-baseline }
 
 1. Richten Sie die Hardware gemäß der offiziellen Anleitung für das jeweilige Board ein. Beim DevKit-LCD gehören dazu die vorgesehene AMOLED-/FPC-Anordnung, ein Lautsprecher an `SPK`, `KEY1` zum Aktivieren und Starten eines Dialogs sowie langes Drücken von `KEY2` zum Ausschalten.
 2. Flashen Sie die unterstützte vorgefertigte Firmware nach dem offiziellen Xiaozhi-Verfahren. Die Schnellstartanleitung empfiehlt das grafische Flash-Tool. Zum Zeitpunkt der Anleitung wird das Flashen über das Terminal für Firmware ab Version 1.4.0 nicht unterstützt.

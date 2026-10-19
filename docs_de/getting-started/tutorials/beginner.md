@@ -9,9 +9,9 @@ tags:
 
 Diese Tutorials knüpfen direkt an [Erste Schritte](../index.md) an. Sie sollten die SiFli-SDK-Toolchain bereits installiert und `hello_world` mindestens einmal geflasht haben sowie wissen, wie Sie die serielle Konsole öffnen. Jedes Tutorial ist bewusst kompakt gehalten: ein Konzept, ein Peripheriegerät und ein klares Erfolgskriterium.
 
-Die Beispiele setzen ein Board der Klasse SF32LB52-DevKit-LCD voraus, etwa `sf32lb52-lcd_n16r8`. Wenn Sie ein anderes Board verwenden, ersetzen Sie den Board-Namen im Build-Befehl und prüfen Sie Pin-Namen, Peripherieinstanzen und Speicherlayout anhand der Support-Dateien dieses Boards.
+Die Beispiele setzen ein Board der Klasse SF32LB52-DevKit-LCD voraus, etwa `sf32lb52-lcd_n16r8`. Wenn Sie ein anderes Board verwenden, ersetzen Sie den Boardnamen im Build-Befehl und prüfen Sie Pin-Namen, Peripherieinstanzen und Speicherlayout anhand der Support-Dateien dieses Boards.
 
-Nutzen Sie diese Reihe, um verlässliche Arbeitsweisen zu entwickeln: Prüfen Sie jeweils ein Verhalten auf der konkreten Platine, legen Sie ein klares Erfolgskriterium fest und bewahren Sie eine nachweislich funktionierende Ausgangskonfiguration, bevor Sie zum nächsten Peripheriegerät übergehen. Die Übungen richten sich an Entwickler, die neu mit dem SF32 SDK arbeiten, auch wenn sie eingebettetes C bereits beherrschen.
+Nutzen Sie diese Reihe, um verlässliche Arbeitsweisen zu entwickeln: Prüfen Sie jeweils ein Verhalten auf dem konkreten Board, legen Sie ein klares Erfolgskriterium fest und bewahren Sie eine nachweislich funktionierende Ausgangskonfiguration, bevor Sie zum nächsten Peripheriegerät übergehen. Die Übungen richten sich an Entwickler, die neu mit dem SF32-SDK arbeiten, auch wenn sie eingebettetes C bereits beherrschen.
 
 ## Bevor Sie beginnen { #before-you-start }
 
@@ -32,7 +32,7 @@ Die C-Beispiele sind Ausschnitte und keine vollständigen Quelldateien. Ergänze
 
 | Element | Prüfung |
 |:-----|:------|
-| Board-Name | Entspricht einer der unterstützten Board-Konfigurationen. |
+| Boardname | Entspricht einer der unterstützten Board-Konfigurationen. |
 | Serieller Port | Lässt sich problemlos öffnen und zeigt Boot-Ausgaben. |
 | Flash-Tool | Sie können das Board wiederholt programmieren, ohne die Kabelverbindung zu ändern. |
 | Schaltplan oder Board-Dateien | Verfügbar, bevor GPIO-, ADC-, PWM- oder RTC-Ressourcen ausgewählt werden. |
@@ -72,13 +72,13 @@ int main(void)
 
 1. Kopieren Sie das am besten passende GPIO-Beispiel in Ihr Projektverzeichnis oder bearbeiten Sie es zum Lernen direkt.
 2. Ermitteln Sie den LED-Pin anhand des Schaltplans oder der Board-Support-Dateien. Erraten Sie weder Port noch Pinnummer.
-3. Bauen und flashen Sie mit demselben Board-Namen, der für `hello_world` verwendet wurde.
+3. Bauen und flashen Sie mit demselben Boardnamen, der für `hello_world` verwendet wurde.
 4. Prüfen Sie, ob die LED wie erwartet blinkt.
 5. Ändern Sie die Verzögerung auf 100 ms, bauen Sie erneut und prüfen Sie, ob sich die sichtbare Blinkrate ändert.
 
 **Erfolgskriterien:** Die LED wechselt wiederholt zwischen ein und aus, die serielle Konsole zeigt weiterhin normale Boot-Ausgaben und eine geänderte Verzögerung verändert die Blinkrate.
 
-**Falls es nicht funktioniert:** Prüfen Sie die aktive Polarität, eine mögliche Transistoransteuerung der LED, eine etwaige anderweitige Belegung des Pins und ob der gewählte Board-Name zur verwendeten Hardware passt.
+**Falls es nicht funktioniert:** Prüfen Sie die aktive Polarität, eine mögliche Transistoransteuerung der LED, eine etwaige anderweitige Belegung des Pins und ob der gewählte Boardname zur verwendeten Hardware passt.
 
 **Was Sie gelernt haben:** die PIN-Device-Abstraktion, boardspezifische Pin-Definitionen und den grundlegenden Ablauf aus Bearbeiten, Bauen, Flashen und Prüfen.
 
@@ -249,7 +249,7 @@ Nach Abschluss der sechs kurzen Tutorials kombinieren Sie sie zu einem kleinen P
 
 ## Checkliste: Erste Peripheriegeräte in Betrieb nehmen { #beginner-bring-up-checklist }
 
-- [ ] Board-Name, serieller Port und Flash-Ablauf wurden erfolgreich geprüft.
+- [ ] Boardname, serieller Port und Flash-Ablauf wurden erfolgreich geprüft.
 - [ ] GPIO-Ausgang funktioniert an einer echten LED oder einem gemessenen Pin.
 - [ ] GPIO-Eingang funktioniert mit geprüfter Polarität und Entprellung.
 - [ ] Die FinSH-Shell ist nutzbar, und `list_thread` / `list_device` funktionieren.

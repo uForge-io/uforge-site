@@ -354,7 +354,7 @@ FINSH_FUNCTION_EXPORT_ALIAS(cmd_bmpt, __cmd_bmpt, Test driver bmp280);
 #endif //DRV_BMP280_TEST
 ```
 
-Antes de aceitar uma leitura, confirme o endereço do dispositivo, leia um registrador de identificação ou calibração conhecido e compare a medição com a faixa esperada. Este comando serve apenas como auxílio básico para a validação inicial, não como código CLI pronto para produção: valide os argumentos de cada subcomando, confira os valores de retorno das chamadas ao dispositivo e às APIs e acrescente verificações de limites antes de integrá-lo a um produto.
+Antes de aceitar uma leitura, confirme o endereço do dispositivo, leia um registrador de identificação ou calibração conhecido e compare a medição com a faixa esperada. Este comando serve apenas como auxílio básico de bring-up, não como código CLI pronto para produção: valide os argumentos de cada subcomando, confira os valores de retorno das chamadas ao dispositivo e às APIs e acrescente verificações de limites antes de integrá-lo a um produto.
 
 ## Páginas relacionadas { #related-pages }
 

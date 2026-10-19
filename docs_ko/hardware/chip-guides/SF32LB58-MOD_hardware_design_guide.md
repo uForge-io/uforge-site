@@ -12,14 +12,14 @@ tags:
 
 ## 1. 개요
 
-**SF32LB58-MOD**는 SiFli의 SF32LB586VDD36 칩을 기반으로 한 범용 저전력 Bluetooth MCU 모듈입니다. 이 칩은 최대 240 MHz로 동작하는 트리플 코어 Arm Cortex-M33 STAR-MC1 프로세서를 통합합니다. 모듈에는 48 MHz 크리스털과 선택 사항인 32.768 kHz 크리스털이 포함됩니다. SKU에 따라 HPI-PSRAM, QSPI-NOR/NAND 플래시, eMMC 스토리지도 포함됩니다. 표면 실장형 모듈이며 핀은 138개, 크기는 24 × 24 × 3.1 mm입니다.
+**SF32LB58-MOD**는 SiFli의 SF32LB586VDD36 칩을 기반으로 한 범용 저전력 Bluetooth MCU 모듈입니다. 칩에는 최대 240 MHz로 동작하는 3코어 Arm Cortex-M33 STAR-MC1 프로세서가 통합되어 있습니다. 모듈에는 48 MHz 크리스털과 선택 사항인 32.768 kHz 크리스털이 포함되며, SKU에 따라 HPI-PSRAM, QSPI-NOR/NAND 플래시 또는 eMMC 스토리지가 탑재됩니다. 표면 실장형 모듈로, 핀 138개와 24 × 24 × 3.1 mm 크기를 갖습니다.
 
-이 가이드는 모듈 수준의 하드웨어 통합을 다룹니다. 핀 정의, 주변 장치 인터페이스, 전기적 특성, 전원 공급 요구 사항, 레퍼런스 회로도, 회로 설계 체크리스트, 기구 치수와 PCB 풋프린트, 제품 취급 요구 사항이 포함됩니다. SiFli 데이터시트 **DS5802-SF32LB58-MOD V0.1**을 기반으로 합니다.
+이 가이드는 모듈 수준의 하드웨어 통합을 다루며, 핀 정의, 주변 장치 인터페이스, 전기적 특성, 전원 요구 사항, 레퍼런스 회로도, 회로 설계 체크리스트, 기구 치수와 PCB 풋프린트, 제품 취급 요구 사항을 설명합니다. 기술 내용은 SiFli 데이터시트 **DS5802-SF32LB58-MOD V0.1**을 기반으로 합니다.
 
-기반이 되는 칩 아키텍처(코어, 그래픽, 메모리 서브시스템, 주변 장치에 대한 더 자세한 내용)는 [SF32LB58x](../../sf32-products/chips/SF32LB58x.md)와 [SF32LB58x 하드웨어 설계 가이드](../chip-guides/SF32LB58x_hardware_design_guide.md)를 참조하십시오.
+칩의 코어, 그래픽, 메모리 서브시스템, 주변 장치에 대한 자세한 내용은 [SF32LB58x](../../sf32-products/chips/SF32LB58x.md)와 [SF32LB58x 하드웨어 설계 가이드](../chip-guides/SF32LB58x_hardware_design_guide.md)를 참조하십시오.
 
 !!! note "출처와 그림 처리"
-    이 가이드는 모듈 고유의 기술 데이터에 대해 **DS5802-SF32LB58-MOD V0.1**을 따릅니다. 데이터시트의 핀 배치, 회로도, 기구 도면 중 일부는 래스터 이미지이므로 여기에서 다시 그리지 않고 참조만 합니다. 아래의 그림 및 표 번호는 이 사이트의 가이드 자체 번호 체계를 따르며, 재현하지 않은 다이어그램의 캡션에는 공식 데이터시트의 해당 그림 번호를 표기합니다.
+    모듈 고유의 기술 데이터는 **DS5802-SF32LB58-MOD V0.1**을 기준으로 합니다. 데이터시트의 핀 배치도, 회로도, 기구 도면 중 일부는 래스터 이미지이므로 이 가이드에서 다시 그리지 않고 공식 데이터시트를 참조하도록 했습니다. 그림과 표 번호는 이 사이트 가이드의 번호 체계를 따릅니다. 재현하지 않은 다이어그램의 캡션에는 공식 데이터시트의 해당 그림 번호를 표기합니다.
 
 ## 2. 빠른 설계 요약
 
@@ -31,9 +31,9 @@ tags:
 
 | 모듈 코드 | 플래시 | PSRAM | 표준 플래시 | 온도 | 크기(mm) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB58-MOD-N16R32N1 | 16MB QSPI-NOR | 16+16MB HPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 24 × 24 × 3.1 |
-| SF32LB58-MOD-A128R32N1 | 128MB QSPI-NAND | 16+16MB HPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 24 × 24 × 3.1 |
-| SF32LB58-MOD-E4R32N1 | 4GB eMMC | 16+16MB HPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 24 × 24 × 3.1 |
+| SF32LB58-MOD-N16R32N1 | 16 MB QSPI-NOR | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 24 × 24 × 3.1 |
+| SF32LB58-MOD-A128R32N1 | 128 MB QSPI-NAND | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 24 × 24 × 3.1 |
+| SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 24 × 24 × 3.1 |
 
 </div>
 
@@ -45,23 +45,23 @@ tags:
 
 | 항목 | 사양 |
 | :--- | :--- |
-| 애플리케이션 코어(HCPU/ACPU) | Arm Cortex-M33 STAR-MC1 2개, 최대 240MHz |
-| 저전력 코어(LCPU) | Arm Cortex-M33 STAR-MC1, 최대 96MHz |
-| SRAM | 2176KB(HCPU) + 512KB(ACPU) + 1056KB 리텐션 SRAM(LCPU) |
+| 애플리케이션 코어(HCPU/ACPU) | Arm Cortex-M33 STAR-MC1 2개, 최대 240 MHz |
+| 저전력 코어(LCPU) | Arm Cortex-M33 STAR-MC1, 최대 96 MHz |
+| SRAM | 2176 KB(HCPU) + 512 KB(ACPU) + 1056 KB 리텐션 SRAM(LCPU) |
 | 무선 | 듀얼 모드 Bluetooth 5.3, 4.2/4.1/4.0과 하위 호환, BLE 및 Classic Bluetooth 지원 |
 | 그래픽 | ePicasso 2.0 + Vivante GCNanoUltraV, 최대 1024×1024, eZip 2.0, 하드웨어 JPEG 코덱 |
 | 오디오 | 24비트 오디오 DAC 2개, 24비트 오디오 Sigma-Delta ADC 2개 |
 | 스토리지 | MPI 5개(패키지 내장 + 외부), SD/SDIO/eMMC 2개 |
-| 패키지 | 138핀, 24 × 24 × 3.1mm |
-| 전원 공급 | VDD_3V3(2.97~3.6V), VDD_1V8(1.7~1.95V), VDDIOA/VDDIOA2/VDDIOB(1.7~3.6V) |
+| 패키지 | 138핀, 24 × 24 × 3.1 mm |
+| 전원 공급 | VDD_3V3(2.97~3.6 V), VDD_1V8(1.7~1.95 V), VDDIOA/VDDIOA2/VDDIOB(1.7~3.6 V) |
 | 안테나 | 부품 번호에 따라 스탬프 홀 RF 급전 또는 IPEX 호환 커넥터를 통한 외부 안테나 |
-| 동작 온도 | -40~85°C |
+| 동작 온도 | -40~85 °C |
 
 </div>
 
 ## 3. 기능 블록 다이어그램
 
-이 모듈은 SF32LB586VDD36 칩, 48MHz 크리스털, 선택 사항인 32.768kHz 크리스털을 통합하며, SKU에 따라 패키지 내장 HPI-PSRAM, QSPI-NOR/NAND 플래시, eMMC와 함께 RF 매칭 회로 및 안테나 급전부를 포함합니다.
+이 모듈은 SF32LB586VDD36 칩, 48 MHz 크리스털, 선택 사항인 32.768 kHz 크리스털을 통합하며, SKU에 따라 패키지 내장 HPI-PSRAM, QSPI-NOR/NAND 플래시, eMMC와 함께 RF 매칭 회로 및 안테나 급전부를 포함합니다.
 
 !!! info "그림 3-1: 기능 블록 다이어그램"
     이 다이어그램은 공식 데이터시트의 그림 2-1을 참조하십시오. 이 가이드에는 재현하지 않았습니다.
@@ -70,14 +70,14 @@ tags:
 
 ### 4.1 핀 배치도
 
-이 모듈은 외곽을 따라 138개의 핀을 노출합니다.
+모듈 외곽에는 138개의 핀이 배치되어 있습니다.
 
 !!! info "그림 4-1: 핀 배치도, 상면도"
     이 다이어그램은 공식 데이터시트의 그림 3-1을 참조하십시오. 이 가이드에는 재현하지 않았습니다.
 
 ### 4.2 핀 정의 표
 
-이 모듈은 총 138개의 핀을 가지며, 아래 표에 설명되어 있습니다.
+아래 표에 모듈의 138개 핀 정의를 정리했습니다.
 
 <div align="center"><em>표 4.2-1: 핀 정의 표</em></div>
 
@@ -85,7 +85,7 @@ tags:
 
 | 이름 | 번호 | 유형 | 기본 MUX | 기본 I/O | 기능 |
 | :--- | :-: | :-: | :--- | :-: | :--- |
-| VDDIOB | 1 | P | 1.8/3.3V | P | PB 인터페이스 IO 전원 입력 |
+| VDDIOB | 1 | P | 1.8/3.3 V | P | PB 인터페이스 IO 전원 입력 |
 | PB36 | 2 | I/O/T | USART4_RXD | I | GPIO_B36, USART4_RXD, GPTIM3_CH1, #GPADC_CH4 |
 | PB37 | 3 | I/O/T | USART4_TXD | O | GPIO_B37, USART4_TXD, GPTIM3_CH2, #GPADC_CH5 |
 | PB54 | 4 | I/O/T | GPIO_B54 | I | GPIO_B54, #WKUP_PIN0 |
@@ -97,10 +97,10 @@ tags:
 | PA79 | 10 | I/O/T | GPIO_A79 | I/O | GPIO_A79, SD2_DIO2 |
 | BOOT_MODE | 11 | I | BOOT_MODE | I | 1: 다운로드 모드, 0: 사용자 모드 |
 | RSTN | 12 | I | RSTN | I | 1: 사용자 모드, 0: 리셋 모드 |
-| VDD_1V8 | 13 | P | 1.8V | P | 메인 MCU 및 패키지 내장 메모리 전원 입력 |
+| VDD_1V8 | 13 | P | 1.8 V | P | 메인 MCU 및 패키지 내장 메모리 전원 입력 |
 | GND | 14 | P | 그라운드 | P | 그라운드 |
-| VDDIOA | 15 | P | 1.8/3.3V | P | PA 인터페이스 IO 전원 입력(PA00~PA11 제외) |
-| VDD_3V3 | 16 | P | 3.3V | P | MCU 아날로그 전원 입력 |
+| VDDIOA | 15 | P | 1.8/3.3 V | P | PA 인터페이스 IO 전원 입력(PA00~PA11 제외) |
+| VDD_3V3 | 16 | P | 3.3 V | P | MCU 아날로그 전원 입력 |
 | PA13 | 17 | I/O/T | GPIO_A13 | O | GPIO_A13, GPTIM1_CH2, ATIM1_BKIN, LCDC1_DPI_DE |
 | PA15 | 18 | I/O/T | GPIO_A15 | O | GPIO_A15, GPTIM1_CH3, ATIM1_BKIN2, LCDC1_DPI_VSYNC |
 | PA14 | 19 | I/O/T | GPIO_A14 | O | GPIO_A14, I2S1_LRCK, LCDC1_DPI_HSYNC |
@@ -129,7 +129,7 @@ tags:
 | PA24 | 42 | I/O/T | GPIO_A24 | O | GPIO_A24, LCDC1_8080_RSTB, LCDC1_SPI_RSTB, LCDC1_DPI_R2 |
 | PA23 | 43 | I/O/T | GPIO_A23 | O | GPIO_A23, PDM1_CLK, I2S1_BCK, USART2_CTS, I2C2_SDA, LCDC1_DPI_R1 |
 | PA22 | 44 | I/O/T | GPIO_A22 | O | GPIO_A22, PDM2_DATA, GPTIM1_ETR, ATIM2_CH1, LCDC1_DPI_R0, LCDC1_JDI_VST |
-| VDDIOA2 | 45 | P | 1.8/3.3V | P | PA00~PA11 IO 전원 입력 |
+| VDDIOA2 | 45 | P | 1.8/3.3 V | P | PA00~PA11 IO 전원 입력 |
 | GND | 46 | P | 그라운드 | P | 그라운드 |
 | DSI_D0N | 47 | O | DSI_D0N | O | MIPI DSI 데이터 레인 0, 네거티브 |
 | DSI_D0P | 48 | O | DSI_D0P | P | MIPI DSI 데이터 레인 0, 포지티브 |
@@ -228,7 +228,7 @@ tags:
 
 ### 4.3 물리 핀 설명
 
-데이터시트의 물리 핀 설명 그림은 핀을 기능군별로 묶어 — SDIO, SPI, I2C, UART, GPTIM, LCD 인터페이스(DPI/8080/SPI/JDI/DSI), GPADC, MPI, 아날로그 오디오, 부트 모드, 전원 공급, BT 안테나, CAN/USB, SWD/디버그 UART — SF32LB586VDD36 다이 외곽선 위에 겹쳐 보여 줍니다. 호스트 PCB에서 신호 그룹을 배치할 때 위의 핀 정의 표와 함께 사용하십시오.
+데이터시트의 물리 핀 설명 그림은 SDIO, SPI, I2C, UART, GPTIM, LCD 인터페이스(DPI/8080/SPI/JDI/DSI), GPADC, MPI, 아날로그 오디오, 부트 모드, 전원, BT 안테나, CAN/USB, SWD/디버그 UART 등 기능별로 핀을 구분해 SF32LB586VDD36 다이 외곽선에 겹쳐 표시합니다. 호스트 PCB에서 신호 그룹을 배치할 때는 이 그림을 핀 정의 표와 함께 참조하십시오.
 
 !!! info "그림 4-2: 물리 핀 설명"
     이 다이어그램은 공식 데이터시트의 그림 3-2를 참조하십시오. 이 가이드에는 재현하지 않았습니다.
@@ -239,33 +239,33 @@ tags:
 
 위 표에서 `PAxx_I2C_UART` 또는 `PBxx_I2C_UART`로 표시된 핀은 I2C 또는 UART 중 하나로 구성할 수 있습니다. 칩은 총 최대 7개의 I2C 인터페이스와 6개의 UART 인터페이스를 지원합니다.
 
-**UART** — 전이중, 최대 6Mbps 보레이트, 구성 가능한 데이터 형식, 하드웨어 흐름 제어(CTS/RTS), DMA 멀티 패킷 TX/RX를 지원합니다. UART1~3은 HPSYS에, UART4~6은 LPSYS에 있습니다.
+**UART** — 전이중, 최대 6 Mbps 보레이트, 구성 가능한 데이터 형식, 하드웨어 흐름 제어(CTS/RTS), DMA 멀티 패킷 TX/RX를 지원합니다. UART1~3은 HPSYS에, UART4~6은 LPSYS에 있습니다.
 
-**I2C** — 마스터 및 슬레이브 역할, 8바이트 FIFO, DMA, 표준(100kbps), 패스트(400kbps), 패스트 모드 플러스(1Mbps), 하이 스피드(3.4Mbps) 모드, 7비트/10비트 마스터 주소 지정, 클럭 스트레칭, 구성 가능한 디지털 디글리치 필터링을 지원합니다. I2C1~4는 HPSYS에, I2C5~7은 LPSYS에 있습니다.
+**I2C** — 마스터 및 슬레이브 역할, 8바이트 FIFO, DMA, 표준(100 kbps), 패스트(400 kbps), 패스트 모드 플러스(1 Mbps), 하이 스피드(3.4 Mbps) 모드, 7비트/10비트 마스터 주소 지정, 클럭 스트레칭, 구성 가능한 디지털 디글리치 필터링을 지원합니다. I2C1~4는 HPSYS에, I2C5~7은 LPSYS에 있습니다.
 
-**SPI** — SSP/SPI(전이중, 마스터 또는 슬레이브) 및 Microwire(반이중, 마스터 전용) 형식, 4~32비트 데이터 폭, 구성 가능한 클럭 극성/위상, 구성 가능한 칩 셀렉트 극성, 32비트 × 16엔트리 FIFO, DMA를 지원합니다. SPI1/2는 HPSYS에 있으며(최대 48MHz), SPI3/4는 LPSYS에 있습니다(최대 24MHz).
+**SPI** — SSP/SPI(전이중, 마스터 또는 슬레이브) 및 Microwire(반이중, 마스터 전용) 형식, 4~32비트 데이터 폭, 구성 가능한 클럭 극성/위상, 구성 가능한 칩 셀렉트 극성, 32비트 × 16엔트리 FIFO, DMA를 지원합니다. SPI1/2는 HPSYS에 있으며(최대 48 MHz), SPI3/4는 LPSYS에 있습니다(최대 24 MHz).
 
-**USB2.0 HS** — 고속 Host/Device 포트 1개, USB2.0 준수, 구성 가능한 엔드포인트, 서스펜드/재개, 세션 요청 및 호스트 협상 프로토콜 지원, 고속 및 풀 스피드 모드를 지원합니다.
+**USB2.0 HS** — USB 2.0 규격을 준수하는 고속 Host/Device 포트 1개를 지원합니다. 엔드포인트를 구성할 수 있으며, 서스펜드/재개, 세션 요청, 호스트 협상 프로토콜, High-Speed 및 Full-Speed 모드를 지원합니다.
 
 **MPI (Memory Peripheral Interface)** — SPI NOR 플래시(1/2/4선, DTR 모드)와 SPI NAND 플래시(1/2/4선)를 지원하며, 레지스터 모드와 메모리 맵 모드 접근 사이를 하드웨어가 자동으로 전환합니다. 이 모듈의 MPI4 인터페이스에 외부 SPI NOR/NAND 플래시를 연결할 수 있습니다.
 
-**SD/SDIO/eMMC** — SD 3.0 및 eMMC 4.5.1을 준수하며, 체인 DMA와 1KB FIFO를 갖춘 호스트 컨트롤러로 동작합니다. SDSC/SDHC/SDXC/SDHS 카드, UHS-1(SDR12/25/50/104/DDR50), 1선/4선/8선 SDR 모드, 4선/8선 DDR 모드를 지원합니다.
+**SD/SDIO/eMMC** — SD 3.0 및 eMMC 4.5.1을 준수하며, 체인 DMA와 1 KB FIFO를 갖춘 호스트 컨트롤러로 동작합니다. SDSC/SDHC/SDXC/SDHS 카드, UHS-1(SDR12/25/50/104/DDR50), 1선/4선/8선 SDR 모드, 4선/8선 DDR 모드를 지원합니다.
 
-**I2S** — 마스터 전용, 전이중, 레프트 저스티파이드/라이트 저스티파이드/표준 형식, 8비트 및 16비트 모노/스테레오, 최대 24비트 PCM 폭을 지원합니다.
+**I2S** — 마스터 전용 전이중 인터페이스로, Left-justified/Right-justified/표준 형식, 8비트 및 16비트 모노/스테레오, 최대 24비트 PCM 폭을 지원합니다.
 
 **LCD 인터페이스** — DBI 직렬 SPI 모드(3선/4선, 듀얼/쿼드 데이터 라인)와 병렬 8080 모드(8/16/24비트 버스 폭)를 지원합니다. 모드에 따라 RGB332/RGB444/RGB565/RGB666/RGB888 색상 형식을 지원합니다. 전용 MIPI DSI 레인 세트(클럭 + 데이터 2레인)도 47~52번 핀에서 제공됩니다.
 
 ### 5.2 아날로그 신호 처리
 
-**12비트 GPADC** — SAR ADC, 최대 샘플링 속도 4MS/s, 0~3.3V 싱글 엔디드 / ±2.1V 차동 입력 범위, 싱글 엔디드 채널 8개(또는 차동 쌍 4개), 단일/연속 측정 모드, 측정당 구성 가능한 타임 슬롯 4개, 소프트웨어/하드웨어 트리거, DMA를 지원합니다.
+**12비트 GPADC** — SAR ADC, 최대 샘플링 속도 4 MS/s, 0~3.3 V 싱글 엔디드 / ±2.1 V 차동 입력 범위, 싱글 엔디드 채널 8개(또는 차동 쌍 4개), 단일/연속 측정 모드, 측정당 구성 가능한 타임 슬롯 4개, 소프트웨어/하드웨어 트리거, DMA를 지원합니다.
 
-**온도 센서** — 분해능 0.2°C, 범위 -40°C~125°C, 정확도 ±3°C, 폴링 또는 인터럽트 방식 읽기를 지원합니다.
+**온도 센서** — 분해능 0.2 °C, 범위 -40~125 °C, 정확도 ±3 °C, 폴링 또는 인터럽트 방식 읽기를 지원합니다.
 
-**오디오 DAC** — 통합 24비트 채널 2개, 샘플링 속도 8kHz~48kHz, 차동 출력.
+**오디오 DAC** — 통합 24비트 채널 2개, 샘플링 속도 8 kHz~48 kHz, 차동 출력을 지원합니다.
 
-**오디오 PLL** — 48MHz/2^18 분해능의 Fractional-N 클럭 생성, 48MHz, 32.768kHz, 44.1kHz 파생 샘플링 속도를 지원합니다.
+**오디오 PLL** — 48 MHz/2^18 분해능의 Fractional-N 클럭 생성, 48 MHz, 32.768 kHz, 44.1 kHz 파생 샘플링 속도를 지원합니다.
 
-**오디오 ADC** — 통합 24비트 채널 2개, 샘플링 속도 8kHz~48kHz, 채널별 독립 게인 제어.
+**오디오 ADC** — 통합 24비트 채널 2개, 샘플링 속도 8 kHz~48 kHz, 채널별 독립 게인 제어를 지원합니다.
 
 ## 6. 전기적 특성
 
@@ -277,8 +277,8 @@ tags:
 
 | 기호 | 파라미터 | 최소 | 최대 | 단위 |
 | :--- | :--- | :-: | :-: | :-: |
-| VDD_3V3 | 3.3V 전원 입력 | -0.3 | 3.6 | V |
-| VDD_1V8 | 1.8V 전원 입력 | -0.3 | 1.95 | V |
+| VDD_3V3 | 3.3 V 전원 입력 | -0.3 | 3.6 | V |
+| VDD_1V8 | 1.8 V 전원 입력 | -0.3 | 1.95 | V |
 | VDDIO | I/O 전원 입력 | -0.3 | 3.6 | V |
 | Tstore | 보관 온도 | -40 | 125 | °C |
 
@@ -292,8 +292,8 @@ tags:
 
 | 기호 | 파라미터 | 최소 | 전형 | 최대 | 단위 |
 | :--- | :--- | :-: | :-: | :-: | :-: |
-| VDD_3V3 | 3.3V 전원 입력 | 2.97 | 3.3 | 3.6 | V |
-| VDD_1V8 | 1.8V 전원 입력 | 1.7 | 1.8 | 1.95 | V |
+| VDD_3V3 | 3.3 V 전원 입력 | 2.97 | 3.3 | 3.6 | V |
+| VDD_1V8 | 1.8 V 전원 입력 | 1.7 | 1.8 | 1.95 | V |
 | VDDIO | I/O 전원 입력 | 1.7 | - | 3.6 | V |
 | TA | 동작 온도 | -40 | - | 85 | °C |
 
@@ -301,7 +301,7 @@ tags:
 
 ### 6.3 DC 전기적 특성
 
-<div align="center"><em>표 6.3-1: DC 전기적 특성(3.3V, 25°C)</em></div>
+<div align="center"><em>표 6.3-1: DC 전기적 특성(3.3 V, 25 °C)</em></div>
 
 <div align="center" markdown>
 
@@ -318,7 +318,7 @@ tags:
 
 </div>
 
-<div align="center"><em>표 6.3-2: DC 전기적 특성(1.8V, 25°C)</em></div>
+<div align="center"><em>표 6.3-2: DC 전기적 특성(1.8 V, 25 °C)</em></div>
 
 <div align="center" markdown>
 
@@ -334,59 +334,59 @@ tags:
 
 ### 6.4 소비 전력
 
-<div align="center"><em>표 6.4-1: BLE 전류(0dBm TX 전력)</em></div>
+<div align="center"><em>표 6.4-1: BLE 전류(0 dBm TX 전력)</em></div>
 
 <div align="center" markdown>
 
-| 기호 | 조건 | @1.8V | @3.8V | 단위 |
+| 기호 | 조건 | @1.8 V | @3.8 V | 단위 |
 | :--- | :--- | :-: | :-: | :-: |
-| I∆TX | TX 전력 = 0dBm | 4.19 | 2.21 | mA |
+| I∆TX | TX 전력 = 0 dBm | 4.19 | 2.21 | mA |
 | I∆RX | — | 4.03 | 2.12 | mA |
 
 </div>
 
-<div align="center"><em>표 6.4-2: BLE/Classic BT 평균 전류(3.8V 전원)</em></div>
+<div align="center"><em>표 6.4-2: BLE/Classic BT 평균 전류(3.8 V 전원)</em></div>
 
 <div align="center" markdown>
 
-| 모드 | 간격 | @0dBm | @10dBm | 단위 |
+| 모드 | 간격 | @0 dBm | @10 dBm | 단위 |
 | :--- | :-: | :-: | :-: | :-: |
-| BT Sniff(attempt=1) | 50ms | 146.4 | 178.6 | µA |
-| BT Sniff(attempt=1) | 1s | 7.3 | 8.9 | µA |
-| BLE ADV | 50ms | 166.9 | 251.8 | µA |
-| BLE ADV | 1s | 8.3 | 12.6 | µA |
-| BLE 연결 | 50ms | 128.8 | 148.4 | µA |
-| BLE 연결 | 1s | 6.4 | 7.4 | µA |
+| BT Sniff(attempt=1) | 50 ms | 146.4 | 178.6 | µA |
+| BT Sniff(attempt=1) | 1 s | 7.3 | 8.9 | µA |
+| BLE ADV | 50 ms | 166.9 | 251.8 | µA |
+| BLE ADV | 1 s | 8.3 | 12.6 | µA |
+| BLE 연결 | 50 ms | 128.8 | 148.4 | µA |
+| BLE 연결 | 1 s | 6.4 | 7.4 | µA |
 | Standby | — | 4.2 | — | µA |
 
 </div>
 
-<div align="center"><em>표 6.4-3: 프로세서 전력(HPSYS/LPSYS, 3.8V 전원)</em></div>
+<div align="center"><em>표 6.4-3: 프로세서 전력(HPSYS/LPSYS, 3.8 V 전원)</em></div>
 
 <div align="center" markdown>
 
 | 기호 | 조건 | 전류(mA) | 증가분(µA/MHz) |
 | :--- | :--- | :-: | :-: |
-| ICoreMark | HPSYS @240MHz | 10.34 | 31.3 |
-| ICoreMark | LPSYS @48MHz | 0.89 | 27.6 |
-| IWhileLoop | HPSYS @240MHz | 7.98 | 21.3 |
-| IWhileLoop | LPSYS @48MHz | 0.67 | 18.7 |
+| ICoreMark | HPSYS @240 MHz | 10.34 | 31.3 |
+| ICoreMark | LPSYS @48 MHz | 0.89 | 27.6 |
+| IWhileLoop | HPSYS @240 MHz | 7.98 | 21.3 |
+| IWhileLoop | LPSYS @48 MHz | 0.67 | 18.7 |
 
 </div>
 
 ### 6.5 듀얼 모드 Bluetooth RF 성능
 
-Bluetooth 5.3을 지원하며 4.2/4.1/4.0과 하위 호환되고 BLE와 Classic Bluetooth를 포함합니다. 동작 채널 중심 주파수는 2402~2480MHz입니다.
+Bluetooth 5.3을 지원하며 4.2/4.1/4.0과 하위 호환되고 BLE와 Classic Bluetooth를 포함합니다. 동작 채널 중심 주파수는 2402~2480 MHz입니다.
 
-**BLE 송신기(1Mbps)**: 최대 전력 19dBm, 전력 제어 범위 -20~19dBm.
+**BLE 송신기(1 Mbps)**: 최대 전력 19 dBm, 전력 제어 범위 -20~19 dBm.
 
-**BLE 수신기**: 전형 감도는 -100dBm(1Mbps), -97dBm(2Mbps), -104.5dBm(LR S2/500kbps), -107.5dBm(LR S8/125kbps)이며, 37바이트 패킷으로 dirty-off 조건에서 PER 30.8%로 측정했습니다.
+**BLE 수신기**: 전형 감도는 -100 dBm(1 Mbps), -97 dBm(2 Mbps), -104.5 dBm(LR S2/500kbps), -107.5 dBm(LR S8/125kbps)이며, 37바이트 패킷으로 dirty-off 조건에서 PER 30.8%로 측정했습니다.
 
-**Classic BT(Basic Data Rate)**: 최대 송신 전력 19dBm, 수신 감도 -96.3dBm(dirty off) / -94dBm(dirty on) @0.1% BER.
+**Classic BT(Basic Data Rate)**: 최대 송신 전력 19 dBm, 수신 감도 -96.3 dBm(dirty off) / -94 dBm(dirty on) @0.1% BER.
 
-**Classic BT(Enhanced Data Rate)**: 최대 송신 전력 13dBm, π/4-DQPSK 수신 감도 -95.5dBm, 8DPSK 수신 감도 -88.5dBm.
+**Classic BT(Enhanced Data Rate)**: 최대 송신 전력 13 dBm, π/4-DQPSK 수신 감도 -95.5 dBm, 8DPSK 수신 감도 -88.5 dBm.
 
-BLE 1Mbps/2Mbps/LR TX/RX 성능과 Classic BT BR/EDR TX/RX 성능의 전체 최소/전형/최대 표는 공식 데이터시트의 §5.5에 있습니다.
+BLE 1 Mbps/2 Mbps/LR TX/RX 성능과 Classic BT BR/EDR TX/RX 성능의 전체 최소/전형/최대 표는 공식 데이터시트의 §5.5에 있습니다.
 
 ## 7. 모듈 전원 공급
 
@@ -423,9 +423,9 @@ BLE 1Mbps/2Mbps/LR TX/RX 성능과 Classic BT BR/EDR TX/RX 성능의 전체 최�
 
 | # | 점검 항목 |
 | :-: | :--- |
-| 1 | VDD_3V3 입력 전압 범위는 2.97V~3.6V여야 하며, 4.7µF 커패시터를 모듈 핀 가까이에 배치하십시오. |
-| 2 | VDD_1V8 입력 전압 범위는 1.7V~1.95V여야 하며, 4.7µF 커패시터를 모듈 핀 가까이에 배치하십시오. |
-| 3 | VDDIOA, VDDIOA2, VDDIOB 입력 전압 범위는 1.7V~3.6V여야 하며, 모듈 핀 가까이에 커패시터를 배치하십시오. |
+| 1 | VDD_3V3 입력 전압 범위는 2.97~3.6 V여야 하며, 4.7 µF 커패시터를 모듈 핀 가까이에 배치하십시오. |
+| 2 | VDD_1V8 입력 전압 범위는 1.7~1.95 V여야 하며, 4.7 µF 커패시터를 모듈 핀 가까이에 배치하십시오. |
+| 3 | VDDIOA, VDDIOA2, VDDIOB 입력 전압 범위는 1.7~3.6 V여야 하며, 모듈 핀 가까이에 커패시터를 배치하십시오. |
 
 </div>
 
@@ -436,7 +436,7 @@ BLE 1Mbps/2Mbps/LR TX/RX 성능과 Classic BT BR/EDR TX/RX 성능의 전체 최�
 
 ### 10.1 모듈 치수
 
-이 모듈의 크기는 24 × 24 × 3.1mm입니다.
+이 모듈의 크기는 24 × 24 × 3.1 mm입니다.
 
 !!! info "그림 10-1: 모듈 치수"
     이 다이어그램은 공식 데이터시트의 그림 8-1을 참조하십시오. 이 가이드에는 재현하지 않았습니다.
@@ -455,17 +455,17 @@ BLE 1Mbps/2Mbps/LR TX/RX 성능과 Classic BT BR/EDR TX/RX 성능의 전체 최�
 
 ### 10.4 PCB 설계 시 모듈 배치
 
-모듈 안테나 영역에는 부품, 구리, 트레이스, 섀시 금속, 기타 도전성 구조물이 RF 금지 구역과 겹치지 않도록 하십시오. 안테나 클리어런스와 검증의 기준으로는 공식 모듈 데이터시트와 최종 제품 케이스를 사용하십시오.
+모듈의 RF 금지 구역에 부품, 구리, 트레이스, 섀시 금속 등 도전성 구조물이 침범하지 않도록 하십시오. 안테나 클리어런스와 검증 기준은 공식 모듈 데이터시트와 최종 제품 케이스를 따르십시오.
 
 - 가능하면 안테나 영역을 호스트 보드 가장자리 밖으로 연장하고, 급전점을 보드 가장자리에 가깝게 두십시오.
-- 안테나를 보드 가장자리 밖으로 연장할 수 없다면, 넉넉한 금지 구역(구리 폴리곤, 트레이스, 부품 없음)을 확보하고 가능하면 안테나 아래의 호스트 보드 소재를 잘라 내십시오.
+- 안테나를 보드 가장자리 밖으로 연장할 수 없다면, 넉넉한 금지 구역(구리 채움, 트레이스, 부품 없음)을 확보하고 가능하면 안테나 아래의 호스트 보드 소재를 잘라 내십시오.
 - 완제품 설계에서는 케이스가 안테나에 미치는 영향을 평가하고, 완성된 제품에서 최종 통신 거리 테스트를 포함한 RF 검증을 수행하십시오.
 
 ## 11. 제품 취급
 
 ### 11.1 보관 조건
 
-- 제품은 수분 차단 백(MBB)에 밀봉하여 <40°C / 90%RH, 비응축 조건에서 보관하십시오.
+- 제품은 수분 차단 백(MBB)에 밀봉하여 <40 °C / 90%RH, 비응축 조건에서 보관하십시오.
 - 진공 포장을 개봉한 후에는 모듈의 수분 민감도 등급(MSL)에 지정된 플로어 라이프 이내에 사용하십시오. 그렇지 않으면 2차 리플로 전에 베이킹해야 합니다.
 
 ### 11.2 정전기 방전(ESD)

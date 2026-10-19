@@ -381,7 +381,7 @@ Les sources divergent : le [guide d'application matérielle OpenSiFli, de priori
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
 | 1 | La connexion SPI est correcte : <span class="flag-red">le SDO du MCU se connecte au SDI du périphérique, et le SDI du MCU se connecte au SDO du périphérique</span> | Toutes les variantes | Optionnel |
-| 2 | Les exigences de timing du périphérique SPI sont confirmées et prises en charge | Toutes les variantes | Optionnel |
+| 2 | Les exigences de minutage du périphérique SPI sont confirmées et prises en charge | Toutes les variantes | Optionnel |
 | 3 | Le niveau logique d'E/S du périphérique correspond à celui de la puce principale | Toutes les variantes | Optionnel |
 
 </div>

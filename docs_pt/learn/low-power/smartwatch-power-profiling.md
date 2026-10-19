@@ -9,7 +9,7 @@ tags:
 
 # Análise de consumo de um smartwatch { #power-profiling-a-smartwatch }
 
-A análise de consumo transforma o uso diário esperado em uma estimativa de autonomia e, sobretudo, em uma lista das cargas que mais vale a pena otimizar. Este artigo usa a [planilha de dados de consumo de um smartwatch, em inglês](assets/smartwatch-power-profile-data.xlsx), como exemplo prático. Você verá como converter o comportamento do usuário em mAh por dia, identificar as cargas que dominam o orçamento de consumo e transformar o modelo em um plano de medição.
+A análise de consumo transforma o uso diário esperado em uma estimativa de autonomia e, sobretudo, em uma lista das cargas que mais vale a pena otimizar. Este artigo usa a [planilha de dados de consumo de um smartwatch, em inglês](assets/smartwatch-power-profile-data.xlsx), como exemplo prático. Você verá como converter o comportamento do usuário em mAh por dia, identificar as cargas que dominam o orçamento de energia e transformar o modelo em um plano de medição.
 
 !!! warning "Um modelo, não uma especificação de dispositivo"
     As correntes e as hipóteses de uso deste exemplo pertencem ao modelo fornecido. Não são dados de caracterização de um dispositivo SF32, display, bateria ou projeto de relógio específico. Substitua essas hipóteses por medições do seu hardware antes de usar o resultado para divulgar a autonomia de um produto.
@@ -139,7 +139,7 @@ Use a eficiência medida do regulador na corrente de carga prevista. A eficiênc
 
 A coluna “Power-Conversion Efficiency (%)” da planilha é calculada como `load voltage / battery voltage`. A fórmula de carga divide por esse valor e pela tensão da bateria, cancelando os termos de tensão. Assim, o consumo diário resulta apenas da corrente da carga multiplicada pelo tempo: a corrente da bateria é considerada igual à corrente da carga, em vez de se modelar uma conversão de potência ideal. Isso se aproxima de um regulador linear sem corrente quiescente; não é um modelo geral para reguladores chaveados.
 
-Por exemplo, uma carga de 1 mA a 3,3 V alimentada por uma bateria de 3,87 V através de um conversor ideal exigiria cerca de 0,853 mA da bateria, mas a planilha contabiliza 1 mA. Em um conversor real, o resultado depende da eficiência e da corrente quiescente. Portanto, essa hipótese de conversão, por si só, não permite dizer se a estimativa de autonomia é otimista ou conservadora. A classificação continua útil para uma primeira análise das correntes e dos tempos assumidos, mas não constitui um orçamento final de consumo da bateria. Para um produto, substitua o fator auxiliar pela eficiência medida de cada linha de alimentação e faixa de carga. Inclua a corrente quiescente sem contá-la duas vezes se já estiver incorporada à medição, além das perdas nos circuitos de proteção da bateria e no caminho de alimentação do carregador.
+Por exemplo, uma carga de 1 mA a 3,3 V alimentada por uma bateria de 3,87 V através de um conversor ideal exigiria cerca de 0,853 mA da bateria, mas a planilha contabiliza 1 mA. Em um conversor real, o resultado depende da eficiência e da corrente quiescente. Portanto, essa hipótese de conversão, por si só, não permite dizer se a estimativa de autonomia é otimista ou conservadora. A classificação continua útil para uma primeira análise das correntes e dos tempos assumidos, mas não constitui um orçamento de energia final. Para um orçamento de energia de produção, substitua o fator auxiliar pela eficiência medida de cada linha de alimentação e faixa de carga. Inclua a corrente quiescente sem contá-la duas vezes se já estiver incorporada à medição, além das perdas nos circuitos de proteção da bateria e no caminho de alimentação do carregador.
 
 ## Calcular o consumo diário a partir do uso do produto { #calculate-daily-consumption-from-product-usage }
 
@@ -249,7 +249,7 @@ pie showData
 
 A última fatia permanece, intencionalmente, como `Other / unallocated` (outras cargas / não discriminadas). A planilha não fornece valores independentes no lado da bateria para Bluetooth, acelerômetro ou giroscópio. Desativar o cenário de chamadas Bluetooth não significa que o Bluetooth não consome energia: a sincronização com o aplicativo também pode usar o rádio, mas a planilha não discrimina esse consumo. Da mesma forma, o consumo dos sensores pode estar em `Other`, mas os dados fornecidos não permitem separá-lo em acelerômetro e giroscópio.
 
-Para obter um gráfico com cinco categorias — MCU, display, motor de vibração, Bluetooth e uma categoria conjunta para acelerômetro e giroscópio —, acrescente linhas para os estados ocioso e de transferência do Bluetooth, os modos e ciclos de trabalho do acelerômetro e os modos e ciclos de trabalho do giroscópio. Meça cada carga na entrada da bateria. Se a medição for feita apenas em uma linha de alimentação, converta o consumo para mAh no lado da bateria usando a fórmula anterior, a eficiência medida do regulador e as tensões correspondentes. Substitua então a fatia `Other / unallocated`, em vez de acrescentar uma segunda fatia de sensores ou Bluetooth que sobreponha o consumo já contabilizado.
+Para obter um gráfico com cinco categorias — MCU, display, motor de vibração, Bluetooth e uma categoria conjunta para acelerômetro e giroscópio —, acrescente linhas para os estados ocioso e de transferência do Bluetooth, os modos e ciclos de trabalho do acelerômetro e os modos e ciclos de trabalho do giroscópio. Meça cada linha na entrada da bateria ou aplique a eficiência medida do regulador antes de somá-la ao total de mAh no lado da bateria. Em seguida, substitua a fatia `Other / unallocated`, em vez de acrescentar uma segunda fatia de sensores ou Bluetooth que sobreponha o consumo já contabilizado.
 
 ### Separar o consumo de referência do MCU, o trabalho por cenário e as cargas dos sensores { #separate-standby-mcu-active-mcu-and-sensors }
 
@@ -306,7 +306,7 @@ Comece pela maior contribuição modelada e valide a ordem por medição. Neste 
 
 1. **Política do display:** meça a curva de corrente completa do gesto de erguer o pulso para ativar a tela. Reduza falsos acionamentos, tempo de tela ligada, brilho, redesenhos de tela inteira e animações desnecessárias antes de buscar reduções de poucos microampères no MCU.
 2. **Política de notificações:** agrupe notificações não urgentes quando a experiência do produto permitir. Verifique se todo evento precisa acionar tanto o display quanto a vibração.
-3. **Standby conectado:** confirme que o MCU atinge o estado de suspensão previsto após cada evento. Revise timers periódicos, laços de polling, callbacks do Bluetooth e solicitações de estado ao gerenciamento de energia.
+3. **Standby conectado:** confirme que o MCU atinge o estado de suspensão previsto após cada evento. Revise temporizadores periódicos, a consulta periódica (polling), callbacks do Bluetooth e votos de gerenciamento de energia (PM).
 4. **Padrões de vibração:** ajuste amplitude e duração com testes de percepção. Um padrão mais curto ou suave pode reduzir a energia sem prejudicar a utilidade dos alertas.
 5. **Sensoriamento prolongado:** analise monitoramento do sono e registro de exercício como cenários completos, incluindo ciclo de trabalho dos sensores, processamento, acessos à memória e atividade de rádio.
 
@@ -334,7 +334,7 @@ O modelo ganha utilidade quando é continuamente ajustado às medições. Para c
 ## Manter o modelo confiável { #keep-the-profile-honest }
 
 - Considere cenários desabilitados como não orçados, não como funções sem consumo. A planilha atribui carga zero aos cenários de NFC, chamadas Bluetooth e AOD.
-- Separe cenários de funções visíveis ao usuário e tarefas de fundo. Isso deixa claras as decisões de compromisso nas revisões do produto.
+- Separe cenários de funções visíveis ao usuário e tarefas de fundo. Isso deixa claros os trade-offs do produto nas revisões.
 - Sempre que possível, meça na entrada da bateria. Medições por linha de alimentação também são úteis, mas precisam considerar perdas do regulador e corrente quiescente antes de virarem números de autonomia.
 - Altere uma hipótese por vez e compare mAh por dia, não apenas a corrente instantânea.
 - Refaça o perfil quando mudar a política do display, uma configuração do Bluetooth, a frequência de medição dos sensores, a política de gerenciamento de energia ou uma função importante do firmware.
@@ -342,7 +342,7 @@ O modelo ganha utilidade quando é continuamente ajustado às medições. Para c
 ## Principais conclusões { #key-takeaways }
 
 - A autonomia é estimada dividindo-se a capacidade útil da bateria pelo consumo diário. Com 232,5 mAh disponíveis e 17,68 mAh/dia nos cenários habilitados, este modelo projeta 13,15 dias.
-- Nesta configuração de referência, o display domina o orçamento de consumo. O acionamento da tela ao erguer o pulso e as notificações representam, juntos, cerca de metade do consumo diário.
+- Nesta configuração de referência, o display domina o orçamento de energia. O acionamento da tela ao erguer o pulso e as notificações representam, juntos, cerca de metade do consumo diário.
 - A classificação dos cenários indica o que medir e otimizar primeiro; é mais útil que um único valor de corrente média.
 - Use eficiência real de conversão e corrente quiescente antes de tratar uma previsão da planilha como uma declaração de autonomia de produto.
 - Repita o ciclo: modele um uso realista, meça os cenários dominantes, atualize as hipóteses e então otimize.

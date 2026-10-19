@@ -2,17 +2,17 @@
 icon: lucide/code
 description: "OpenSiFli의 sifli-rs(sifli-hal, sifli-pac)를 통한 SF32 커뮤니티 Rust 지원 평가: 현재 성숙도, 적합한 시나리오와 적합하지 않은 시나리오, 위험 체크리스트."
 tags:
-    - Develop
+    - 개발
     - Rust
 ---
 
 # Rust { #rust }
 
-OpenSiFli의 Rust 작업은 [OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs)에 있으며, HAL, PAC, flash-table 크레이트, 예제, 플래싱 및 디버깅 관련 노트가 포함되어 있습니다.
+OpenSiFli의 Rust 프로젝트 [OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs)에는 HAL, PAC, 플래시 테이블 크레이트, 예제, 플래싱 및 디버깅 관련 안내가 포함되어 있습니다.
 
-메인테이너는 이 프로젝트를 진행 중인 작업이며 양산 사용에는 아직 준비되지 않았다고 설명합니다. 팀이 하드웨어에 가깝게 작업할 수 있고 수정 사항을 업스트림에 기여할 준비도 되어 있는 경우(두 조건을 모두 충족하는 경우)가 아니라면, SF32의 Rust는 탐색용 경로로 취급하십시오.
+프로젝트 유지관리자는 아직 개발 중이며 양산에 사용할 준비가 되지 않았다고 설명합니다. 하드웨어 저수준까지 다룰 수 있고 수정 사항을 업스트림에 기여할 준비도 된 팀이 아니라면, SF32에서 Rust는 탐색용 경로로만 취급하십시오.
 
-초기 툴체인 설정, 수정하지 않은 Blinky 빌드, 플래시 러너 구성은 [Rust 시작하기](../../../getting-started/rust/getting-started-rust.md)를 참조하십시오. 이 페이지는 현재 지원 수준을 평가하고 그 기준 구성을 넘어 Rust를 진행할지 결정하는 데 사용하십시오.
+초기 툴체인 설정, 수정하지 않은 Blinky 빌드, 플래싱 도구 구성은 [Rust 시작하기](../../../getting-started/rust/getting-started-rust.md)를 참조하십시오. 이 페이지에서는 현재 지원 수준을 평가하고, 기준 구성을 넘어 Rust 적용을 진행할지 판단합니다.
 
 ## OpenSiFli에서 언급한 크레이트 { #crates-mentioned-by-opensifli }
 
@@ -24,7 +24,7 @@ OpenSiFli의 Rust 작업은 [OpenSiFli/sifli-rs](https://github.com/OpenSiFli/si
 |:------|:--------|
 | `sifli-hal` | 하드웨어 추상화 계층. |
 | `sifli-pac` | 주변 장치 액세스 크레이트. |
-| `sifli-flash-table` | 플래시 table 지원. |
+| `sifli-flash-table` | 플래시 테이블 지원. |
 
 </div>
 
@@ -33,8 +33,8 @@ OpenSiFli의 Rust 작업은 [OpenSiFli/sifli-rs](https://github.com/OpenSiFli/si
 다음을 원한다면 Rust가 적합할 수 있습니다.
 
 - 임베디드 Rust를 실험하려는 경우.
-- 저수준 펌웨어 코드에서 강한 타입 지정을 활용하려는 경우.
-- `embedded-hal` 스타일의 향후 드라이버를 향해 개발하려는 경우.
+- 저수준 펌웨어 코드에서 강한 타입 안정성을 활용하려는 경우.
+- `embedded-hal` 스타일의 드라이버를 개발할 기반을 마련하려는 경우.
 - SF32 Rust 생태계에 기여하려는 경우.
 
 현재 양산 펌웨어에는 SiFli-SDK를 사용하십시오.
@@ -43,7 +43,7 @@ OpenSiFli의 Rust 작업은 [OpenSiFli/sifli-rs](https://github.com/OpenSiFli/si
 
 제품 포팅을 시작하기 전에 타깃 보드에서 첫 실행 기준 구성이 동작하는지 확인하십시오. 그런 다음 필요한 각 주변 장치, 플래시 레이아웃, 디버그 경로, 런타임 기능을 각각 독립적으로 검증하십시오. 모든 결과에 대해 업스트림 커밋, Rust 타깃, Cargo 구성, 보드 리비전, 복구 절차를 기록하십시오.
 
-이 저장소가 `sifli-hal`, `sifli-pac`, flash-table 도구, Embassy 스타일의 비동기 예제를 사용한다는 것은, 애플리케이션의 성공 여부가 크레이트의 컴파일 여부만이 아니라 이 구성 요소들이 함께 동작하는 방식에 달려 있다는 의미입니다. 부족한 부분을 조사할 때는 재현 사례를 가능한 한 작게 유지하십시오.
+이 저장소는 `sifli-hal`, `sifli-pac`, 플래시 테이블 도구, Embassy 스타일의 비동기 예제를 사용합니다. 따라서 애플리케이션의 성공 여부는 크레이트가 컴파일되는지만이 아니라 이 구성 요소들이 함께 동작하는 방식에 달려 있습니다. 지원이 부족한 부분을 조사할 때는 재현 사례를 가능한 한 작게 유지하십시오.
 
 ## 위험 체크리스트 { #risk-checklist }
 

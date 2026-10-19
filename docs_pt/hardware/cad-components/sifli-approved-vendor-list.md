@@ -383,8 +383,8 @@ Este checklist é intencionalmente mais rigorosa do que “a peça aparece na AV
 ## Checklist de fornecimento { #sourcing-checklist }
 
 - [ ] Confira o número de peça e o sufixo de revisão na versão atual da AVL para download: versões da planilha, inclusive esta página, ficam desatualizadas à medida que novos lotes são qualificados.
-- [ ] Para memórias Flash, confirme que o ID do fabricante/JEDEC esperado pelo código de inicialização corresponde à peça exata encomendada, não apenas à família. Algumas famílias compartilham o nome comercial, mas retornam bytes de ID diferentes.
-- [ ] Para NAND, SD-NAND e qualquer componente que armazene um sistema de arquivos, verifique em hardware real o suporte de inicialização e da ferramenta de gravação, o fluxo de atualização OTA e o comportamento de FatFS/FlashDB/LittleFS. Uma peça que responde corretamente durante a inicialização não está automaticamente validada para OTA.
+- [ ] Para memórias Flash, confirme que o ID do fabricante/JEDEC esperado pelo código de bring-up corresponde à peça exata encomendada, não apenas à família. Algumas famílias compartilham o nome comercial, mas retornam bytes de ID diferentes.
+- [ ] Para NAND, SD-NAND e qualquer componente que armazene um sistema de arquivos, verifique em hardware real o suporte de inicialização e da ferramenta de gravação, o fluxo de atualização OTA e o comportamento de FatFS/FlashDB/LittleFS. Uma peça que responde corretamente durante o bring-up não está automaticamente validada para OTA.
 - [ ] Valide CBANK_SEL e o desvio de frequência TX Ch39 indicado na sua placa. A planilha não especifica o layout de referência nem a configuração completa de medição; confirme o modo e as condições de teste antes de comparar resultados.
 - [ ] Meça na sua placa as correntes em repouso, no modo deep-power-down e durante a leitura ativa. A AVL não documenta completamente a origem e as condições de cada valor; verifique o datasheet e as condições de medição.
 - [ ] Não se limite às especificações elétricas: confirme também se o encapsulamento e o footprint correspondem à biblioteca de PCB e à capacidade de montagem.

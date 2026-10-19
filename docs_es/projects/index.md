@@ -59,7 +59,7 @@ Este grupo incluye proyectos basados directamente en Zephyr o en una capa deriva
 
 ## Contenido de cada proyecto { #what-every-project-includes }
 
-Cada proyecto de μForge debe documentar el resultado esperado, el lector al que se dirige, las versiones compatibles de hardware y software, los requisitos previos, el repositorio fuente, los pasos de compilación organizados por hitos, los criterios de validación, las mediciones y el traspaso al diseño del producto. Un proyecto es un punto de partida para el trabajo de ingeniería, no sustituye la validación para producción del hardware final, la integración con servicios, la seguridad, la privacidad ni los requisitos normativos.
+Cada proyecto de μForge debería documentar el resultado esperado, el lector al que se dirige, las versiones compatibles de hardware y software, los requisitos previos, el repositorio fuente, los pasos de compilación organizados por hitos, los criterios de validación, las mediciones y el traspaso al diseño del producto. Un proyecto es un punto de partida para el trabajo de ingeniería, no sustituye la validación para producción del hardware final, la integración con servicios, la seguridad, la privacidad ni los requisitos normativos.
 
 !!! note "Contenido generado automáticamente"
-    Esta página se redactó sin un documento fuente existente. Verifique las afirmaciones técnicas en la documentación oficial de SiFli antes de basarse en ellas.
+    Esta página se compiló y redactó sin un documento fuente existente. Verifique las afirmaciones técnicas en la documentación oficial de SiFli antes de basarse en ellas.

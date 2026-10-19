@@ -24,10 +24,10 @@ tags:
 [SF32LB58x Datasheet]: https://downloads.sifli.com/docs/Datasheet/sf32lb58/DS5801-SF32LB58x-Datasheet%20V1p8p6.pdf
 [SF32LB58x User Manual]: https://downloads.sifli.com/docs/user%20manual/SF32LB58x/UM5801-SF32LB58x-User%20mannual%20V0p4p6.pdf
 [SF32LB58x Hardware Application Note]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md
-[SF32LB58x Schematic & PCB Checklist workbook]: https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx
-[SiFli Approved Vendor List (AVL)]: ../cad-components/sifli-approved-vendor-list.md
-[Buy Samples]: https://sifli.taobao.com/
-[Buy Dev Kits]: https://sifli.taobao.com/
+[SF32LB58x 회로도 및 PCB 체크리스트 엑셀 파일]: https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx
+[SiFli 승인 업체 목록(AVL)]: ../cad-components/sifli-approved-vendor-list.md
+[샘플 구매]: https://sifli.taobao.com/
+[개발 키트 구매]: https://sifli.taobao.com/
 
 <div class="grid cards" markdown>
 
@@ -35,10 +35,10 @@ tags:
 - :fontawesome-solid-file-pdf: __[SF32LB58x Datasheet]__
 - :fontawesome-solid-file-pdf: __[SF32LB58x User Manual]__
 - :fontawesome-solid-file-lines: __[SF32LB58x Hardware Application Note]__
-- :fontawesome-solid-file-excel: __[SF32LB58x Schematic & PCB Checklist workbook]__
-- :fontawesome-solid-file-excel: __[SiFli Approved Vendor List (AVL)]__
-- :fontawesome-solid-cart-shopping: __[Buy Samples]__
-- :fontawesome-solid-cart-shopping: __[Buy Dev Kits]__
+- :fontawesome-solid-file-excel: __[SF32LB58x 회로도 및 PCB 체크리스트 엑셀 파일]__
+- :fontawesome-solid-file-excel: __[SiFli 승인 업체 목록(AVL)]__
+- :fontawesome-solid-cart-shopping: __[샘플 구매]__
+- :fontawesome-solid-cart-shopping: __[개발 키트 구매]__
 
 </div>
 
@@ -52,7 +52,7 @@ tags:
 
 | 기능 | 설명 |
 |:---|:---|
-| 코어 아키텍처 | 이기종 트리플 코어 아키텍처: 최대 240 MHz의 애플리케이션용 Arm Cortex-M33 STAR-MC1 코어 2개와 최대 96 MHz의 저전력 Arm Cortex-M33 STAR-MC1 코어 1개 |
+| 코어 아키텍처 | 이기종 3코어 아키텍처: 최대 240 MHz의 애플리케이션용 Arm Cortex-M33 STAR-MC1 코어 2개와 최대 96 MHz의 저전력 Arm Cortex-M33 STAR-MC1 코어 1개 |
 | Bluetooth | 통합 저전력 듀얼 모드 Bluetooth 5.3 트랜시버 |
 | 그래픽 | ePicasso 2.0 2D/2.5D 그래픽 가속 및 Vivante GCNanoUltraV 벡터 그래픽 |
 | 디스플레이 인터페이스 | MIPI-DSI, SPI/QSPI, MCU8080, DPI, 병렬/직렬 JDI |
@@ -65,7 +65,7 @@ tags:
 
 ### 3.2. 변형(Variants) { #32-variants }
 
-회로도를 동결하기 전에 최신 데이터시트와 AVL을 기준으로 SF32LB58x의 정확한 주문 코드와 코패키지 메모리 조합을 확인하십시오. 이 제품군은 BGA256, HDI 전용 플랫폼으로 취급하십시오. SiP 메모리는 모델마다 다릅니다. 이 제품군은 MPI3 또는 MPI4를 통한 외부 NOR 또는 SPI NAND 플래시를 지원합니다. SiFli EVB에서는 외부 SPI NAND에 MPI4가 기본 인터페이스이며, SD1은 eMMC 또는 SD NAND에, SD2는 SD 카드 또는 Wi-Fi 디바이스에 사용됩니다. 설계를 확정하기 전에 선택한 부품의 핀 할당과 대상 보드의 배선을 확인하십시오.
+회로도를 동결하기 전에 최신 데이터시트와 AVL을 기준으로 SF32LB58x의 정확한 주문 코드와 코패키지 메모리 조합을 확인하십시오. 이 제품군은 BGA256 패키지, HDI 전용 플랫폼으로 간주하십시오. SiP 메모리는 모델마다 다릅니다. 이 제품군은 MPI3 또는 MPI4를 통한 외부 NOR 또는 SPI NAND 플래시를 지원합니다. SiFli EVB에서는 외부 SPI NAND에 MPI4가 기본 인터페이스이며, SD1은 eMMC 또는 SD NAND에, SD2는 SD 카드 또는 Wi-Fi 디바이스에 사용됩니다. 설계를 확정하기 전에 선택한 부품의 핀 할당과 대상 보드의 배선을 확인하십시오.
 
 ### 3.3. 패키지 { #33-packages }
 <div align="center"><em>표 3.3-1: 패키지</em></div>
@@ -141,7 +141,7 @@ SF32LB58x는 고급 그래픽, 대용량 메모리, 멀티미디어, 엣지 AI �
 
 ### 4.3. 이 가이드의 사용 방법 { #43-how-to-use-this-guide }
 
-이 가이드는 보드 검토 순서에 따라 사용하십시오. 먼저 패키지와 SiP 메모리 구성을 확인하고, HDI 스택업과 PMIC 전략을 확정한 다음, 부트 스토리지와 디스플레이 배선을 검토하고, 이어서 클럭, RF, USB, 오디오, 디버그, 양산 테스트 접근 수단을 검증합니다. 5절은 회로도 기준 구성, 6절은 PCB 구현 기준 구성, 7절은 릴리스 체크리스트입니다.
+이 가이드는 보드 검토 순서에 따라 사용하십시오. 먼저 패키지와 SiP 메모리 구성을 확인하고, HDI 스택업과 PMIC 전략을 확정한 다음, 부트 스토리지와 디스플레이 배선을 검토하고, 이어서 클럭, RF, USB, 오디오, 디버그, 양산 테스트 접근 수단을 검증하십시오. 5절은 회로도 설계 기준, 6절은 PCB 구현 기준, 7절은 릴리스 체크리스트입니다.
 
 ### 4.4. 검토 증빙 패키지 { #44-review-evidence-pack }
 
@@ -149,15 +149,15 @@ SF32LB58x는 고급 그래픽, 대용량 메모리, 멀티미디어, 엣지 AI �
 
 ### 4.5. 체크리스트 사용 방법 { #using-the-checklists }
 
-이 가이드는 두 단계의 체크리스트를 포함합니다. 5.2.1.7절과 5.7.3절 곳곳에 포함된 짧은 체크리스트는 위험도가 가장 높은 항목을 제공하여 빠르게 엔지니어링 자체 점검을 할 수 있게 합니다. [회로도 체크리스트](SF32LB58x_schematic_checklist.md)(5.8절)와 [PCB 레이아웃 체크리스트](SF32LB58x_pcb_layout_checklist.md)(6.18절)는 SiFli의 전체 항목별 *SF32LB58x Schematic & PCB Checklist*(V1.0, 2026-01-21)를 그대로 재현합니다.
+이 가이드에는 두 수준의 체크리스트가 있습니다. 5.2.1.7절과 5.7.3절에 포함된 간단한 체크리스트는 위험도가 높은 항목을 빠르게 자체 점검하는 데 사용합니다. [회로도 체크리스트](SF32LB58x_schematic_checklist.md)(5.8절)와 [PCB 레이아웃 체크리스트](SF32LB58x_pcb_layout_checklist.md)(6.18절)는 SiFli의 전체 항목별 *SF32LB58x Schematic & PCB Checklist*(V1.0, 2026-01-21)를 그대로 재현합니다.
 
-각 점검 항목은 필수(릴리스 전에 반드시 통과) 또는 선택(해당 기능을 사용하는 경우 권장)입니다. 색상 텍스트와 <span class="flag-yellow">노란색 배경</span> 텍스트는 원본 워크북의 검토 강조 표시를 보존한 것입니다. 워크북은 각 강조 표시의 이유를 밝히지 않으므로, 이 표시는 추가 검토 플래그로 취급하고 같은 표의 강조되지 않은 항목을 대체하는 것으로 취급하지 마십시오.
+각 점검 항목은 필수(릴리스 전에 반드시 통과) 또는 선택(해당 기능을 사용하는 경우 권장)입니다. 색상으로 표시된 텍스트와 <span class="flag-yellow">노란색 배경</span>으로 표시된 텍스트는 원본 워크북의 검토 강조 표시를 보존한 것입니다. 워크북은 각 강조 표시의 이유를 밝히지 않으므로, 이 표시는 추가 검토 플래그로 취급하고 같은 표의 강조되지 않은 항목을 대체하는 것으로 보지 마십시오.
 
 원본 체크리스트 워크북은 non-AVL BUCK 인덕터에 Isat ≥ 450 mA를 규정하지만, 공식 하드웨어 애플리케이션 노트는 L = 4.7 µH, DCR ≤ 0.4 Ω에 Isat ≥ 500 mA를 규정합니다. 체크리스트는 워크북의 값을 유지합니다. SiFli가 이 불일치를 명확히 하기 전까지는, non-AVL 부품을 선택할 때 Isat 500 mA 이상으로 정격된 인덕터를 사용하십시오.
 
-회로도 검토 중 PCB 레이아웃을 시작하기 전에 [회로도 체크리스트](SF32LB58x_schematic_checklist.md)를 실행하십시오. 레이아웃 검토 중 Gerber를 릴리스하기 전에 [PCB 레이아웃 체크리스트](SF32LB58x_pcb_layout_checklist.md)를 실행하십시오. 실제로는 각 단계를 보통 두 번 수행합니다. 먼저 설계 엔지니어가 수행하고, 설계 동결 또는 제조 릴리스 전에 독립 검토자가 수행합니다.
+회로도 검토 단계에서, PCB 레이아웃을 시작하기 전에 [회로도 체크리스트](SF32LB58x_schematic_checklist.md)를 수행하십시오. 레이아웃 검토 단계에서, Gerber를 릴리스하기 전에 [PCB 레이아웃 체크리스트](SF32LB58x_pcb_layout_checklist.md)를 수행하십시오. 실제로는 각 단계를 보통 두 번 수행합니다. 먼저 설계 엔지니어가 수행하고, 설계 동결 또는 제조 릴리스 전에 독립 검토자가 수행합니다.
 
-최상의 결과를 얻으려면 체크리스트를 읽는 목록이 아니라 승인 기록으로 취급하십시오.
+최상의 결과를 얻으려면 체크리스트를 읽는 목록이 아니라 서명 확인(sign-off) 기록으로 취급하십시오.
 
 1. 먼저 대상 부품 번호와 코패키지 메모리 구성을 정확히 확인합니다.
 2. 표를 수동적으로 읽지 말고, 검토 중에 모든 항목을 통과 / 실패 / 해당 없음으로 표시합니다.

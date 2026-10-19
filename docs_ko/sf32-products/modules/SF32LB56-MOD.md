@@ -10,11 +10,11 @@ tags:
 
 ## 개요 { #overview }
 
-SF32LB56-MOD는 SF32LB56xV 플랫폼을 기반으로 하는 SiFli의 범용 저전력 Bluetooth MCU 모듈 제품군입니다. 표준 구성은 4 MB + 8 MB 코패키지 OPI-PSRAM과 1 MB QSPI-NOR을 갖춘 SF32LB566VCB36을 사용합니다. 이 모듈은 듀얼 코어 MCU 처리, BLE Audio를 지원하는 Bluetooth 5.3, 그래픽 가속, 오디오 인터페이스, SKU에 따라 달라지는 플래시 변형(variant), 통합 RF 경로를 소형 폼 팩터에 결합합니다.
+SF32LB56-MOD는 SF32LB56xV 플랫폼을 기반으로 하는 SiFli의 범용 저전력 Bluetooth MCU 모듈 제품군입니다. 표준 구성은 4 MB + 8 MB 코패키지 OPI-PSRAM과 1 MB QSPI-NOR을 갖춘 SF32LB566VCB36을 사용합니다. 이 모듈은 듀얼 코어 MCU 처리, BLE Audio를 지원하는 Bluetooth 5.3, 그래픽 가속, 오디오 인터페이스, SKU별 플래시 구성, 통합 RF 경로를 소형 폼 팩터에 결합합니다.
 
 이 모듈은 RF 경로, 크리스털, 고속 메모리를 통합하며, 온모듈 PCB 안테나 또는 IPEX 호환 커넥터로 연결하는 외부 안테나를 지원합니다. 완성된 제품에서 RF 성능을 검증하고, 선택한 안테나 구성에 맞춰 캐리어 보드를 설계하십시오. 모듈의 인터페이스와 메모리 구성은 디스플레이, 오디오, 센싱, 로컬 처리 요구 사항이 있는 제품을 지원합니다.
 
-이 제품군은 여러 메모리 구성으로 제공됩니다. 모든 변형의 크기는 18.0 × 32.9 × 3.1 mm이며 -40~85 °C 동작이 보장됩니다. DS5602 V0.3을 기반으로 하는 [SF32LB56-MOD 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB56-MOD_hardware_design_guide.md)에서 안테나와 레이아웃에 관한 추가 세부 정보를 확인할 수 있습니다. SiFli 모듈 모델 가이드는 메모리 구성을 나열하지만 안테나 옵션을 SKU와 대응시키지는 않습니다. 캐리어 보드 레이아웃을 확정하기 전에 선택한 모듈의 안테나 구성을 SiFli에 확인하십시오.
+이 제품군은 여러 메모리 구성으로 제공됩니다. 모든 변형의 크기는 18.0 × 32.9 × 3.1 mm이며 동작 온도 범위는 -40~85 °C입니다. DS5602 V0.3을 기반으로 하는 [SF32LB56-MOD 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB56-MOD_hardware_design_guide.md)에서 안테나와 레이아웃에 관한 추가 정보를 확인할 수 있습니다. SiFli 모듈 모델 가이드는 메모리 구성을 나열하지만 안테나 옵션을 SKU별로 구분하지는 않습니다. 캐리어 보드 레이아웃을 확정하기 전에 선택한 모듈의 안테나 구성을 SiFli에 확인하십시오.
 
 !!! info
     아래의 연산, 그래픽, 오디오 기능은 모듈에 통합된 SF32LB56xV 플랫폼을 설명한 것이며, 외부에서 실제로 사용할 수 있는지는 모듈 핀 배치와 핀 멀티플렉싱에 따라 달라집니다. 칩 제품군의 아키텍처와 전체 주변 장치 구성은 [SF32LB56x](../chips/SF32LB56x.md)를 참고하십시오. 이 페이지는 모듈 통합, SKU에 따른 메모리, 전원 레일, 제품 적합성에 초점을 맞춥니다.
@@ -30,7 +30,7 @@ SiFli는 SF32LB56-MOD의 애플리케이션 분야로 다음을 제시합니다.
 - 범용: 저전력 센서 허브와 Bluetooth Mesh
 - AIoT 사례: 음성 명령 인식, 스마트 홈 디바이스, 스마트 키, 스마트 컨트롤 패널
 
-설계에 다음 기능 중 하나 이상이 필요하다면 SF32LB56-MOD를 검토하십시오.
+설계에 다음 기능 중 하나 이상이 필요하면 SF32LB56-MOD를 검토하십시오.
 
 - RF 경로, 안테나 선택지, 크리스털, 고속 메모리의 모듈 수준 통합
 - 나열된 모듈 SKU 전반에 걸친 메모리 구성 선택
@@ -48,12 +48,12 @@ SiFli는 SF32LB56-MOD의 애플리케이션 분야로 다음을 제시합니다.
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Module Datasheet]__
-- :fontawesome-solid-microchip: __[Chip Introduction]__
-- :fontawesome-solid-file-lines: __[Hardware Design Guide]__
-- :fontawesome-solid-file-lines: __[SF32LB56x Hardware Design Guide]__
-- :fontawesome-solid-cart-shopping: __[Buy Samples]__
-- :fontawesome-solid-cart-shopping: __[Buy Dev Kits]__
+- :fontawesome-solid-file-pdf: __[모듈 데이터시트][Module Datasheet]__
+- :fontawesome-solid-microchip: __[칩 소개][Chip Introduction]__
+- :fontawesome-solid-file-lines: __[하드웨어 설계 가이드][Hardware Design Guide]__
+- :fontawesome-solid-file-lines: __[SF32LB56x 하드웨어 설계 가이드][SF32LB56x Hardware Design Guide]__
+- :fontawesome-solid-cart-shopping: __[샘플 구매][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[개발 키트 구매][Buy Dev Kits]__
 
 </div>
 

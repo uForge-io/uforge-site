@@ -14,19 +14,19 @@ Dieser Artikel erklärt, wie sich die **tatsächliche Leistungsaufnahme eines Ge
 
 Die Abschnitte zu Classic Bluetooth und Dual-Mode gelten nur für Geräte und Firmware-Konfigurationen mit BR/EDR-Unterstützung. Für ein reines BLE-Produkt gilt dieselbe Messmethode; der Testplan beschränkt sich dann auf BLE.
 
-Der [Online Power Profiler for Bluetooth LE](https://devzone.nordicsemi.com/power/w/opp/2/online-power-profiler-for-bluetooth-le) von Nordic ist eine nützliche konzeptionelle Referenz für BLE. Laut Nordic basiert das Tool auf Messungen und liefert Erwartungswerte; es misst nicht ein bestimmtes Gerät. Die veröffentlichten Genauigkeitsangaben gelten nur für Nordic-Referenzhardware und dürfen nicht auf SF32 übertragen werden. Classic Bluetooth und Dual-Mode-Produkte werden ebenfalls nicht modelliert. Ein Modell hilft bei der Auswahl relevanter Tests; die Leistungsaufnahme des Zielgeräts muss am Gerät selbst gemessen werden.
+Der [Online Power Profiler for Bluetooth LE](https://devzone.nordicsemi.com/power/w/opp/2/online-power-profiler-for-bluetooth-le) von Nordic ist eine nützliche konzeptionelle Referenz für BLE. Laut Nordic basiert das Tool auf Messungen und liefert Erwartungswerte; es misst nicht ein bestimmtes Gerät. Die veröffentlichten Genauigkeitsangaben gelten nur für Nordic-Referenzhardware und dürfen nicht auf SF32 übertragen werden. Classic Bluetooth und Dual-Mode-Produkte werden ebenfalls nicht modelliert. Ein Modell hilft bei der Auswahl relevanter Tests; das Produktergebnis ermitteln Sie durch eine Strommessung am Zielgerät.
 
 ## Festlegen, was gemessen wird { #define-what-you-are-measuring }
 
 „Bluetooth-Leistungsaufnahme“ kann sehr Unterschiedliches bedeuten. Eine reine Funkmessung kann bei der Optimierung eines Verbindungsparameters helfen. Sie zeigt jedoch nicht, wie viel Strom das vollständige Produkt im Betrieb aufnimmt, wenn zusätzlich Controller, Anwendungsprozessor, Sensoren, Display, Speicher und Stromversorgung beteiligt sind.
 
-<div align="center"><em>Tabelle: Messpunkte für die Bluetooth-Leistungsaufnahme</em></div>
+<div align="center"><em>Tabelle: Messgrenzen für die Bluetooth-Leistungsaufnahme</em></div>
 
 <div align="center" markdown>
 
-| Messpunkt | Enthaltene Komponenten | Geeignet für | Einschränkung |
+| Messgrenze | Enthaltene Komponenten | Geeignet für | Einschränkung |
 |:---------|:-----------------|:---------------|:-----------|
-| Bluetooth-Subsystem oder ausgewählte Versorgungsschiene | Funk/Controller und der ausgewählte Versorgungspfad | Ursachen eines erhöhten Funk- oder Controller-Verbrauchs eingrenzen | Entspricht nicht dem gesamten Akkuverbrauch des Geräts |
+| Bluetooth-Subsystem oder ausgewählte Versorgungsschiene | Funk/Controller und der ausgewählte Versorgungspfad | Eine Funk- oder Controller-Regression eingrenzen | Entspricht nicht dem gesamten Akkuverbrauch des Geräts |
 | MCU-Versorgungseingang | MCU, Controller und von dieser Schiene versorgte On-Chip-Peripheriegeräte | Vergleich von Firmware-Zuständen auf einem kontrollierten Entwicklungsboard | Schließt externe Komponenten auf anderen Schienen und Reglerverluste aus |
 | Akku oder Haupteingang des Produkts | Regler, MCU, externer Speicher, Sensoren, Display und andere versorgte Lasten | Modellierung der Akkulaufzeit und Produktabnahme | Erfordert die Kontrolle aller angeschlossenen Geräte und Versorgungspfade |
 
@@ -36,7 +36,7 @@ Messen Sie zur Bewertung der Akkulaufzeit möglichst am Akkueingang oder am Haup
 
 ## Einen wiederholbaren Test einrichten { #set-up-a-repeatable-test }
 
-Messgerät und Prüfling müssen denselben, eindeutig dokumentierten Messpunkt verwenden. Das Power Profiler Kit II (PPK II) von Nordic eignet sich bei passenden Spannungs- und Strombereichen als praktisches Werkzeug zur Versorgung und Strommessung. Eine vergleichbare Source-Measure-Unit oder ein Stromanalysator ist ebenfalls geeignet. Entscheidend ist ein sauberer Messaufbau, nicht die Marke des Instruments.
+Messgerät und Prüfling müssen dieselbe, eindeutig dokumentierte Messgrenze verwenden. Das Power Profiler Kit II (PPK II) von Nordic eignet sich bei passenden Spannungs- und Strombereichen als praktisches Werkzeug zur Versorgung und Strommessung. Eine vergleichbare Source-Measure-Unit oder ein Stromanalysator ist ebenfalls geeignet. Entscheidend ist ein sauberer Messaufbau, nicht die Marke des Instruments.
 
 Im [Source-Meter-Modus](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/measure_current_source_meter.html) des PPK II versorgt das Messgerät den Prüfling (DUT); im [Ampere-Meter-Modus](https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/measure_current_ampere_meter.html) erfolgt die Versorgung aus einer externen Quelle über das Messgerät. Wählen Sie den Modus passend zum vorgesehenen Versorgungspfad. Eine eingestellte Versorgungsspannung ist keine aufgezeichnete Spannungskurve am Gerät: Überwachen Sie die Spannung am Messpunkt, besonders wenn Spannungseinbrüche oder Änderungen der Akkuspannung die Energie beeinflussen.
 
@@ -47,18 +47,18 @@ Prüfen Sie vor dem Anschließen des DUT die Betriebsgrenzen des PPK II. Im Sour
 ```mermaid
 flowchart LR
     A["Konfigurierte Quelle oder Akku-Emulator"] --> B["Strommessinstrument"]
-    B --> C["Definierter Messpunkt an der Produktversorgung"]
+    B --> C["Definierte Messgrenze an der Produktversorgung"]
     C --> D["SF32-Gerät, Funk und aktivierte Peripheriegeräte"]
-    E["Spannungsmessung am selben Messpunkt"] -. "synchron zum Strom aufzeichnen" .-> C
+    E["Spannungsmessung an derselben Messgrenze"] -. "synchron zum Strom aufzeichnen" .-> C
     F["Isolierte Debug- oder Trace-Schnittstelle"] -. "nur Zustandsmarker" .-> D
 ```
 
 Vor jedem Durchlauf:
 
 1. Trennen Sie USB-Strom, einen Debugger oder andere Versorgungen, die das Instrument umgehen oder Last hinzufügen können. Behalten Sie nur die vom Szenario benötigten Schnittstellen.
-2. Legen Sie die dokumentierte Versorgungsspannung am definierten Messpunkt an. Protokollieren Sie jede versorgte Schiene, jeden Jumper, jedes Modul und jedes externe Gerät.
+2. Legen Sie die dokumentierte Versorgungsspannung an der gewählten Messgrenze an. Protokollieren Sie jede versorgte Schiene, jeden Jumper, jedes Modul und jedes externe Gerät.
 3. Verwenden Sie den Produkt-Firmware-Build und dessen vorgesehene PM-Konfiguration. Deaktivieren Sie umfangreiches Diagnose-Logging für die abschließenden Messungen, sofern es nicht Teil der Serienkonfiguration ist.
-4. Bereiten Sie für jeden Vergleich dasselbe Telefon, Zubehör, dieselbe Testanwendung, Distanz, Antennenausrichtung und RF-Umgebung vor.
+4. Bereiten Sie für jeden Vergleich dasselbe Telefon, dasselbe Zubehör, dieselbe Testanwendung, dieselbe Distanz, dieselbe Antennenausrichtung und dieselbe RF-Umgebung vor.
 5. Erfassen Sie ein ausreichend langes Fenster mit vielen wiederholten Bluetooth-Ereignissen, nicht nur einen einzelnen, zufällig erfassten Impuls.
 
 ## Die Leistungsphasen eines BLE-Advertising-Ereignisses verstehen { #read-a-ble-advertising-event-as-a-set-of-power-components }
@@ -71,7 +71,7 @@ Die vollständige dargestellte Reihenfolge lautet: Vorverarbeitung → Quarzhoch
 
 ![BLE-Advertising-Ereignisstufen](assets/ble-advertising-event-stages-de.svg)
 
-Die Abbildung zeigt ein scannbares oder verbindbares Legacy-Advertising-Ereignis auf den drei Primärkanälen 37, 38 und 39; eine Interaktion nach einer empfangenen Anfrage ist nicht dargestellt. Die Kanalbeschriftungen dienen der Veranschaulichung: Die Bluetooth-Core-Spezifikation erlaubt die Nutzung aktivierter Primärkanalindizes in beliebiger Reihenfolge; die konfigurierte Kanalkarte bestimmt, welche Indizes verwendet werden. Auf jedem verwendeten Index wird höchstens eine Advertising-PDU gesendet, üblicherweise eine pro Index. Die drei Sendungen sind Kopien der Advertising-Daten auf unterschiedlichen Kanälen, keine durch Bestätigungen gesteuerten Wiederholungsversuche. Bei scannbaren oder verbindbaren Ereignissen hört die Link Layer auf dem jeweiligen Primärkanal auf zulässige Anfragen; nicht scannbare und nicht verbindbare Ereignisse öffnen kein Empfangsfenster für Anfragen. Erweitertes Advertising, eine andere Kanalkarte oder eine tatsächlich empfangene Anfrage können eine andere Messkurve ergeben. Prüfen Sie das konfigurierte Verhalten anhand der [Bluetooth-Core-6.2-Link-Layer-Spezifikation](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/low-energy-controller/link-layer-specification.html), der [Einführung der Bluetooth SIG](https://www.bluetooth.com/bluetooth-le-primer/) und der Messkurve des Geräts.
+Die Abbildung zeigt ein scannbares oder verbindbares Legacy-Advertising-Ereignis auf den drei Primärkanälen 37, 38 und 39; eine Interaktion nach einer empfangenen Anfrage ist nicht dargestellt. Die Kanalbeschriftungen dienen der Veranschaulichung: Die Bluetooth-Core-Spezifikation erlaubt die Nutzung aktivierter Primärkanalindizes in beliebiger Reihenfolge; die konfigurierte Kanalzuordnung bestimmt, welche Indizes verwendet werden. Auf jedem verwendeten Index wird höchstens eine Advertising-PDU gesendet, üblicherweise eine pro Index. Die drei Sendungen sind Kopien der Advertising-Daten auf unterschiedlichen Kanälen, keine durch Bestätigungen gesteuerten Wiederholungsversuche. Bei scannbaren oder verbindbaren Ereignissen hört die Link Layer auf dem jeweiligen Primärkanal auf zulässige Anfragen; nicht scannbare und nicht verbindbare Ereignisse öffnen kein Empfangsfenster für Anfragen. Siehe die [Bluetooth-Core-6.2-Link-Layer-Spezifikation](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/low-energy-controller/link-layer-specification.html) und die [Einführung der Bluetooth SIG](https://www.bluetooth.com/bluetooth-le-primer/). Erweitertes Advertising, eine andere Kanalzuordnung oder eine empfangene Anfrage können eine andere Messkurve ergeben; prüfen Sie das konfigurierte Verhalten am Zielgerät.
 
 <div align="center"><em>Tabelle: Stromverlauf eines BLE-Advertising-Ereignisses nach Phasen</em></div>
 
@@ -92,7 +92,7 @@ Die Abbildung zeigt ein scannbares oder verbindbares Legacy-Advertising-Ereignis
 
 Verwenden Sie die Phasenbezeichnungen auf einem SF32-Gerät als Hinweise für Trace-Marker, nicht als Nordic-spezifische Funkzustände oder angenommene Zeit- und Stromwerte. Ob die Zielkonfiguration Empfangsaktivität umfasst, hängt vom eingestellten Advertising-Verhalten ab und muss anhand der Messkurve geprüft werden.
 
-Die Energie eines vollständigen Ereignisses ergibt sich aus dem Zeitintegral des Produkts aus momentaner Spannung und Strom:
+Die Energie eines vollständigen Ereignisses ist die spannungsgewichtete Fläche unter der Messkurve:
 
 ```text
 E_event = sum(V_stage x I_stage x t_stage)
@@ -113,7 +113,7 @@ Classic Bluetooth hat ein anderes Protokoll-Timing, es gilt jedoch dieselbe Mess
 
 ## Einen modusspezifischen Messplan erstellen { #build-a-mode-specific-measurement-plan }
 
-Behandeln Sie „Bluetooth aktiviert“ nicht als einen einzigen Betriebszustand. BLE und Classic Bluetooth verwenden unterschiedliche Verbindungs- und Energiesparverfahren. Ein Dual-Mode-Produkt kann Funksubsystem, Controller-Ressourcen, Takte, Speicher und oft Anwendungsarbeit gemeinsam nutzen. Beginnen Sie mit den kleinsten wiederholbaren Szenarien und messen Sie anschließend das kombinierte Verhalten, das im Endprodukt tatsächlich auftritt.
+Behandeln Sie „Bluetooth aktiviert“ nicht als einen einzigen Betriebszustand. BLE und Classic Bluetooth verwenden unterschiedliche Verbindungs- und Energiesparverfahren. Ein Dual-Mode-Produkt kann sich Funkzeit, Controller-Ressourcen, Takte, Speicher und Anwendungsarbeit gemeinsam nutzen. Beginnen Sie mit den kleinsten wiederholbaren Szenarien und messen Sie anschließend das kombinierte Verhalten, das im Endprodukt tatsächlich auftritt.
 
 <div align="center"><em>Tabelle: Abdeckung von Bluetooth-Szenarien</em></div>
 
@@ -141,7 +141,7 @@ Beginnen Sie mit BLE allein. So erhalten Sie eine BLE-Referenzmessung, ohne dass
 
 | Szenario | Versuchsaufbau | Was zu berechnen ist | Typische Ursache eines irreführenden Ergebnisses |
 |:---------|:------|:------------------|:-------------------------------------|
-| Advertising | Nicht verbundenes Gerät mit dokumentiertem Advertising-Typ und dokumentierter Kanalauswahl | Durchschnittsstrom und Energie pro Advertising-Intervall | Scan-Aktivität des Telefons, Debug-Verkehr oder ein Advertising-Intervall, das nie verlängert wird |
+| Advertising | Nicht verbundenes Gerät mit dokumentiertem Advertising-Typ und dokumentierter Kanalzuordnung | Durchschnittsstrom und Energie pro Advertising-Intervall | Scan-Aktivität des Telefons, Debug-Verkehr oder ein Advertising-Intervall, das nie verlängert wird |
 | Verbundener Leerlauf | Verbundenes Gerät ohne Anwendungsübertragung; Pairing, Bonding und Verschlüsselung dokumentieren | Durchschnittsstrom über viele Verbindungsintervalle | Anwendungs-CPU wacht bei jedem Verbindungsereignis auf; Timer oder Benachrichtigungen bleiben aktiv |
 | Nutzerinteraktion | Ein repräsentativer GATT-Befehl, eine Sensordatenübertragung oder eine durch die Benutzeroberfläche ausgelöste Aktion | Energie pro abgeschlossener Aktion und zusätzliche Energie über den Leerlauf hinaus | Nur den Funk messen, während Host-, Display- oder Sensorarbeit ignoriert wird |
 | Burst-Übertragung oder OTA | Eine definierte Nutzlast mit definierter Abschlussbedingung | Energie pro Byte oder pro abgeschlossener Übertragung, plus Gesamtdauer | Eine Spitzenrate verwenden, als repräsentiere sie die gesamte Übertragung |
@@ -168,7 +168,7 @@ Messen Sie bei einem Dual-Mode-Produkt Classic Bluetooth separat, bevor Sie BLE 
 
 </div>
 
-Protokollieren Sie die Classic-Bluetooth-Rolle, die Gegenstelle, die Scan- oder Sniff-Richtlinie, TX-Leistung, Profil, Nutzdaten oder Sitzungsdauer, Auslöser, Endbedingung und tatsächliche Nutzungshäufigkeit. Bei Audioprofilen muss der Messumfang den tatsächlich vom Produkt genutzten Audiopfad einschließen.
+Protokollieren Sie die Classic-Bluetooth-Rolle, die Gegenstelle, die Scan- oder Sniff-Richtlinie, TX-Leistung, Profil, Nutzdaten oder Sitzungsdauer, Auslöser, Endbedingung und tatsächliche Nutzungshäufigkeit. Bei Audioprofilen muss die Messgrenze den tatsächlich vom Produkt genutzten Audiopfad einschließen.
 
 ## Dual-Mode-Verhalten als eigenes Szenario messen { #measure-dual-mode-behavior-as-its-own-scenario }
 
@@ -188,7 +188,7 @@ flowchart LR
 
 Erst wenn die BLE- und Classic-Bluetooth-Referenzmessungen vorliegen, sollten Sie das Dual-Mode-Verhalten des Produkts erfassen. Messen Sie zum Beispiel für ein Produkt, das eine BLE-Verbindung verfügbar hält, während es Classic-Bluetooth-Audio streamt, alle folgenden Punkte an derselben Hardware und mit derselben Gegenstelle:
 
-1. Die vorgesehene BLE-Verbindung im Leerlauf, ohne Classic Bluetooth.
+1. Die BLE-Richtlinie für den verbundenen Leerlauf für sich allein.
 2. Den Classic-Bluetooth-Stream oder das Datenprofil für sich allein.
 3. Den tatsächlichen kombinierten stationären Zustand, einschließlich des vorgesehenen BLE-Verkehrs.
 4. Die Übergänge in und aus dem kombinierten Zustand sowie Fehlerbehandlung und Wiederverbindungsverhalten.
@@ -218,7 +218,7 @@ Verwenden Sie einen GPIO-Trace-Punkt, einen Ereignismarker mit geringem Zusatzau
 | Abwechselnde BLE- und Classic-Bluetooth-Funkimpulse | Ein Dual-Mode-Zeitplan oder verwandte Hostarbeit | Welche Verbindung jeden Bereich verursacht hat, ob Arbeit gemeinsam genutzt wird und ob einer der Modi den Schlaf verzögert oder Wiederholungsaktivität erhöht |
 | Hoher Strom bleibt nach dem erwarteten Ereignis bestehen | Eine PM-Beschränkung, ein Peripheriegerät oder eine externe Schnittstelle bleibt aktiv | PM-Zustandsanforderungen, Timer, Takte, Pin-Zustände, Display-/Sensorversorgung und Fehlerpfade |
 | Vereinzelte, länger anhaltende Stromspitzen | Wiederholungen, Scannen, Wiederverbindungen, Datenverkehr der Gegenstelle oder Nutzeraktivität | RF-Bedingungen, Verhalten der Gegenstelle, Backoff-/Wiederholungsrichtlinie und Testskript |
-| Grundlinie ändert sich nach dem Anschließen eines Moduls oder Kabels | Der erfasste elektrische Messumfang hat sich geändert | Rückspeisungspfade, UART-Adapter, externe Pull-Widerstände, Modulversorgung und Versorgungsführung |
+| Grundlinie ändert sich nach dem Anschließen eines Moduls oder Kabels | Die elektrische Messgrenze hat sich geändert | Rückspeisungspfade, UART-Adapter, externe Pull-Widerstände, Modulversorgung und Versorgungsführung |
 
 </div>
 
@@ -231,7 +231,7 @@ E_scenario = integral(V(t) x I(t) dt)
 P_average = E_scenario / T_scenario
 ```
 
-Bleibt die Spannung am Messpunkt konstant, kann für Vergleiche auch der Durchschnittsstrom herangezogen werden. Erfassen Sie die Spannung trotzdem weiter, insbesondere beim Wechsel zwischen einer geregelten Schiene und dem Akkueingang.
+Bleibt die Spannung an der Messgrenze konstant, kann für Vergleiche auch der Durchschnittsstrom herangezogen werden. Erfassen Sie die Spannung trotzdem weiter, insbesondere beim Wechsel zwischen einer geregelten Schiene und dem Akkueingang.
 
 Für ein wiederholtes Produktszenario:
 
@@ -255,7 +255,7 @@ flowchart LR
     B --> C["Messkurvenabschnitte markieren und zuordnen"]
     C --> D["Energie pro abgeschlossenem Szenario berechnen"]
     D --> E["Auf reale tägliche Nutzung skalieren"]
-    E --> F["Mit dem Leistungsbudget vergleichen"]
+    E --> F["Mit dem Energiebudget vergleichen"]
     F --> G["Den größten Verbrauchstreiber optimieren"]
     G --> A
 ```
@@ -268,7 +268,7 @@ flowchart LR
 |:--------------------------------|:-------------------|
 | Der Durchschnittsstrom ist höher als erwartet | Tritt das Gerät in den angeforderten PM-Zustand ein? Halten Timer, Logging oder Peripherietakte es wach? |
 | Ereignisenergie ist höher als erwartet | Haben Host, Display, Sensor, Speicher oder der Wiederholungspfad zusätzliche Arbeit geleistet? Erzwingt die RF-Qualität Wiederholungen oder höhere TX-Leistung? |
-| Der Leerlaufverbrauch von BLE oder Classic Bluetooth bestimmt den Energiebedarf | Sind BLE-Verbindungsparameter, Classic-Bluetooth-Scan-/Sniff-Richtlinie, Benachrichtigungstakt und Anwendungs-Weckvorgänge für den Produktzustand angemessen? |
+| Der Leerlaufverbrauch von BLE oder Classic Bluetooth dominiert die Akkulaufzeit | Sind BLE-Verbindungsparameter, Classic-Bluetooth-Scan-/Sniff-Richtlinie, Benachrichtigungstakt und Anwendungs-Weckvorgänge für den Produktzustand angemessen? |
 | Dual-Mode-Ergebnis weicht von der Summe der Einzelmodus-Tests ab | Welche Funkzeiträume, Controller-Arbeit, gemeinsam genutzte Takte, Anwendungs-Callbacks, Audio-/Datenpfade oder PM-Beschränkungen überlappen sich oder verhindern den Schlaf? |
 | Energie für Wiederverbindungen dominiert | Verwendet das Produkt begrenztes Wiederholungs-/Backoff-Verhalten und eine realistische Geräteerkennungsstrategie? |
 | Entwicklungsboard und Endprodukt stimmen nicht überein | Welche externen Schienen, Reglerverluste, Module, Antennen-/Gehäuseeffekte und Schnittstellen-Pull-Widerstände unterscheiden sich? |
@@ -297,11 +297,11 @@ Verwenden Sie SiFli-SDK-Beispiele, um einen Bluetooth-Zustand wiederholbar zu ma
 
 ## Checkliste für die Release-Prüfung { #release-review-checklist }
 
-- [ ] Messpunkt und Versorgungsspannung sind dokumentiert.
+- [ ] Messgrenze und Versorgungsspannung sind dokumentiert.
 - [ ] Strom und Spannung wurden für jedes für die Freigabe relevante Szenario aufgezeichnet.
 - [ ] USB, Debugger, UART-Adapter und externe Modulversorgungen wurden kontrolliert oder explizit einbezogen.
 - [ ] Die Messkurven sind Firmware-Ereignissen, angeforderten PM-Zuständen und tatsächlich erreichten Zuständen zugeordnet.
-- [ ] BLE-Advertising-/Verbunden-Leerlauf- und Classic-Bluetooth-Scan-/Sniff-Verhalten wurden gegebenenfalls gemessen.
+- [ ] BLE-Advertising und verbundener BLE-Leerlauf sowie Classic-Bluetooth-Scan und -Sniff wurden gegebenenfalls gemessen.
 - [ ] Für jedes im Serienprodukt eingesetzte Classic-Bluetooth-Daten- oder Audioprofil ist eine konkrete Arbeitslast definiert und gemessen.
 - [ ] Dual-Mode-Szenarien wurden als kombinierte Produktzustände gemessen, statt durch Addition von Einzelmodus-Ergebnissen geschätzt.
 - [ ] Repräsentatives Übertragungs-, Trenn- und Wiederverbindungsverhalten wurde gegebenenfalls gemessen.
@@ -312,6 +312,6 @@ Verwenden Sie SiFli-SDK-Beispiele, um einen Bluetooth-Zustand wiederholbar zu ma
 
 - [Bluetooth-Übersicht](overview.md) für BLE, Classic Bluetooth, Profile, Sicherheit und Systemkoexistenz.
 - [Bluetooth-SDK-Beispiele](bluetooth-sdk-examples.md) für die Auswahl von Classic-Bluetooth-, BLE- und LE-Audio-Projekten.
-- [Energiesparendes Design im Überblick](../low-power/overview.md) für PM-Design und das vollständige Produkt-Leistungsbudget.
+- [Energiesparendes Design im Überblick](../low-power/overview.md) für PM-Design und das vollständige Energiebudget des Produkts.
 - [Energieverbrauch messen und validieren](../low-power/measurement-and-validation.md) für den Validierungsworkflow von der Komponente bis zum Produkt.
 - [Stromverbrauchsanalyse einer Smartwatch](../low-power/smartwatch-power-profiling.md) für ein Beispiel zur täglichen Energiebilanz.

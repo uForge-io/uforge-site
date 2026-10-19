@@ -324,7 +324,7 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
-#### 进入 DUT 测试模式 { #enter-dut-test-mode }
+#### 进入被测设备（DUT）测试模式 { #enter-dut-test-mode }
 
 <div align="center"><em>表：进入 DUT 测试模式</em></div>
 
@@ -335,7 +335,7 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 命令 | `AT+DUT\r` |
 | 响应 | 成功：`\r\nOK\r\n`；查询形式（`AT+DUT?\r`）：`\r\nERROR\r\n` |
 | 参数 | 无 |
-| 备注 | 置位 BR/EDR 经典蓝牙 DUT 使能位并回复 `OK`，随后等待测试仪表通过空口发送 `LMP_test_control` 触发信令测试。AT 串口（USART1）保持可用。进入 DUT 模式后不可逆，只能通过复位退出。 |
+| 备注 | 置位 BR/EDR 经典蓝牙 DUT 使能位并回复 `OK`，随后等待综测仪通过空口发送 `LMP_test_control` 触发信令测试。AT 串口（USART1）保持可用。进入 DUT 模式后不可逆，只能通过复位退出。 |
 
 </div>
 

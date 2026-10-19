@@ -223,7 +223,7 @@ Siga o guia na ordem em que as decisões de hardware normalmente são consolidad
 
 Antes de começar o esquemático, defina o código exato do componente a ser comprado. A família SF32LB52x possui dois grupos de projeto: `SF32LB520/3/5/7`, alimentado por bateria, e `52B/D/E/G/J`, com alimentação externa regulada. Use a Seção 3.2 para selecionar o grupo; as Seções 5.1 e 5.2 para revisar o sistema mínimo e a alimentação; as Seções 5.6.1 e 5.7.1 para verificar o armazenamento de boot e o acesso de depuração; as Seções 5 e 6 para revisar o esquemático e a PCB; os Apêndices A–E para comparar as figuras de referência originais; e a Seção 7 como checklist de liberação.
 
-Ao reutilizar um esquemático antigo do SF32LB52x, revise primeiro os pinos de alimentação, a alimentação da memória SiP, a linha de alimentação do armazenamento de boot, os pinos DBG_UART/SWD, a carga dos cristais, o footprint da rede de casamento de RF e os pontos de teste de produção. Esses itens são fontes frequentes de problemas de inicialização difíceis de perceber durante a revisão.
+Ao reutilizar um esquemático antigo do SF32LB52x, revise primeiro os pinos de alimentação, a alimentação da memória SiP, a linha de alimentação do armazenamento de boot, os pinos DBG_UART/SWD, a carga dos cristais, o footprint da rede de casamento de RF e os pontos de teste de produção. Esses itens são fontes frequentes de problemas de bring-up difíceis de perceber durante a revisão.
 
 ### 4.4. Pacote de evidências para revisão { #44-review-evidence-pack }
 

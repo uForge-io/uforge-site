@@ -32,7 +32,7 @@ Esta página organiza por tarefa de engenharia os exemplos de [Bluetooth clássi
 
 </div>
 
-## Valide o exemplo antes de adaptá-lo { #bring-up-an-example-as-evidence }
+## Faça o bring-up de um exemplo como evidência { #bring-up-an-example-as-evidence }
 
 Antes de alterar o projeto, registre a versão exata do SDK, o nome da placa, a configuração, o dispositivo ou aplicativo remoto, os parâmetros de rádio e o log esperado. Em seguida, siga esta sequência:
 

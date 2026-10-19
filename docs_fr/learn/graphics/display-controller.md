@@ -11,7 +11,7 @@ tags:
 
 Le **contrôleur d'affichage** (LCDC) transmet au panneau les pixels déjà préparés via l'interface sélectionnée. Sur les composants et dans les configurations compatibles, il décompresse également le framebuffer TurboPixel pendant la sortie. LCDC permet un mélange alpha limité de ses couches de sortie sur un fond uni. La documentation décrit les couches 0 et 1, mais SF32LB52x ne prend pas en charge la couche 1. Cette fonction ne remplace ni le rendu général de l'interface ni la composition avec ePicasso. Le décodage des ressources eZip reste une opération distincte.
 
-Source primaire : [documentation LCDC HAL de SiFli](https://github.com/OpenSiFli/SiFli-SDK/blob/121aa105565ee6bcbab6a15c1cb3b5571f5cc8e5/docs/source/zh_CN/hal/lcdc.md).
+Référence principale : [documentation LCDC HAL de SiFli](https://github.com/OpenSiFli/SiFli-SDK/blob/121aa105565ee6bcbab6a15c1cb3b5571f5cc8e5/docs/source/zh_CN/hal/lcdc.md).
 
 Le lien ci-dessus est figé sur un commit précis de SiFli-SDK. Il décrit le comportement du HAL dans cette révision, sans établir que chaque interface, couche ou fonction est disponible sur tous les composants et boîtiers SF32 ni dans les autres versions du SDK. Vérifiez la combinaison exacte composant, boîtier et version du SDK utilisée par le projet.
 
@@ -21,9 +21,9 @@ Consultez cette page pour choisir l'interface du panneau, définir le transfert 
 
 ## Choisir l'interface d'affichage { #select-the-display-interface }
 
-EPD et Memory-in-Pixel désignent des technologies de panneau ou des modes de mise à jour des pixels, pas des bus interchangeables. Un module EPD peut utiliser SPI pour se connecter à un contrôleur externe ; un mode de commande directe EPD par LCDC est également documenté pour le SF32LB57x. JDI propose des modes d'interface série et parallèle avec des signaux différents. Vérifiez l'interface électrique et les exigences d'entretien du panneau, pas seulement sa catégorie.
+EPD et Memory-in-Pixel désignent des technologies de panneau ou des modes de mise à jour des pixels, pas des bus interchangeables. Un module EPD peut utiliser SPI pour se connecter à un contrôleur externe ; un mode de commande directe EPD par LCDC est également documenté pour le SF32LB57x. JDI propose des modes d'interface série et parallèle avec des signaux différents. Vérifiez l'interface électrique et les exigences de maintenance du panneau, pas seulement sa catégorie.
 
-Le choix du panneau influe sur la bande passante, la stratégie de tampon, le nombre de broches, la consommation, la complexité d'initialisation et les risques liés au circuit imprimé. Vérifiez les interfaces effectivement disponibles sur la référence et le boîtier choisis.
+Le choix du panneau influe sur la bande passante, la stratégie de tampon, le nombre de broches, la consommation, la complexité d'initialisation et les risques liés à la PCB. Vérifiez les interfaces effectivement disponibles sur la référence et le boîtier choisis.
 
 <div align="center"><em>Options d'interface et de technologie de panneau</em></div>
 
@@ -37,7 +37,7 @@ Le choix du panneau influe sur la bande passante, la stratégie de tampon, le no
 | **RGB / DPI** | Écrans de grande taille ou à fréquence de rafraîchissement élevée | Flux continu de pixels, bande passante et nombre de broches plus importants, exigences de synchronisation plus strictes. |
 | **MIPI DSI** | Panneaux AMOLED haute densité ou avancés | Bande passante élevée avec peu de broches, mais initialisation et intégrité de signal plus complexes. |
 | **Technologie de panneau EPD** | Papier électronique et écrans à très faible fréquence de rafraîchissement | L'interface côté hôte dépend du module et du contrôleur. Une image fixe peut être maintenue avec une consommation réduite du panneau ; les mises à jour restent lentes et nécessitent une gestion spécifique de la forme d'onde et de l'alimentation. |
-| **JDI (série ou parallèle)** | Panneaux réflectifs basse consommation | Les modes JDI utilisent des signaux différents ; vérifiez l'interface électrique et les exigences d'entretien du panneau choisi. |
+| **JDI (série ou parallèle)** | Panneaux réflectifs basse consommation | Les modes JDI utilisent des signaux différents ; vérifiez l'interface électrique et les exigences de maintenance du panneau choisi. |
 | **Technologie de panneau Memory-in-Pixel** | Écrans réflectifs basse consommation, y compris pour les interfaces toujours actives ou lisibles en plein soleil | La mémoire des pixels est intégrée au panneau ; son mode de rafraîchissement diffère de celui des écrans TFT/AMOLED. Consultez la fiche technique du panneau. |
 
 </div>
@@ -46,7 +46,7 @@ Par exemple, un petit panneau SPI/QSPI se prête aux mises à jour partielles, t
 
 ## Matrice des interfaces par famille et variante { #per-device-interface-matrix }
 
-Le tableau ci-dessous aide à choisir une famille ; il ne définit pas l'affectation des broches. Il récapitule les interfaces d'affichage documentées pour chaque famille ou variante de silicium SF32. Un tiret indique que la documentation consultée ne mentionne pas cette interface pour la ligne concernée ; cela n'exclut ni un contrôleur externe piloté par GPIO ni une implémentation propre à la carte. Avant de finaliser le schéma, vérifiez la référence exacte, le boîtier, le multiplexage des broches, la version du SDK et le pilote du panneau.
+Le tableau ci-dessous aide à choisir une famille ; il ne définit pas l'affectation des broches. Il récapitule les interfaces d'affichage documentées pour chaque famille ou variante de silicium SF32. Un tiret indique que la documentation ne mentionne pas cette interface pour la ligne concernée ; cela n'exclut ni un contrôleur externe piloté par GPIO ni une implémentation propre à la carte. Avant de finaliser le schéma, vérifiez la référence exacte, le boîtier, le multiplexage des broches, la version du SDK et le pilote du panneau.
 
 <div align="center"><em>Matrice d'interfaces d'affichage SF32</em></div>
 
@@ -54,7 +54,7 @@ Le tableau ci-dessous aide à choisir une famille ; il ne définit pas l'affecta
 
 | Famille / Variante SF32 | Interfaces LCD/panneau documentées | Contrainte de boîtier ou de variante | Orientation de sélection pratique |
 |:---|:---|:---|:---|
-| **SF32LB52x** | SPI 3/4 fils, Dual-SPI, Quad-SPI, MCU/8080 (MIPI DBI), JDI série/parallèle ; EPD via contrôleur SPI ; le guide matériel des SF32LB52B/D/E/G/J documente aussi une interface de signaux EPD parallèle 8 bits | Les modèles 52x répertoriés utilisent le boîtier QFN68L. Le guide matériel des SF32LB52B/D/E/G/J répertorie les signaux et la commande du PMIC TPS, mais cela n'établit pas la prise en charge du mode EPD direct du LCDC. Vérifiez le pilote et la variante exacte. | Convient aux conceptions compactes SPI/QSPI, 8080 et JDI ; pour un EPD parallèle, vérifiez l'implémentation GPIO, les contraintes temporelles et la commande d'alimentation TPS de la variante choisie. |
+| **SF32LB52x** | SPI 3/4 fils, Dual-SPI, Quad-SPI, MCU/8080 (MIPI DBI), JDI série/parallèle ; EPD raccordé en SPI ; le guide matériel des SF32LB52B/D/E/G/J documente aussi une interface de signaux EPD parallèle 8 bits | Les modèles 52x répertoriés utilisent le boîtier QFN68L. Le guide matériel des SF32LB52B/D/E/G/J répertorie les signaux et la commande du PMIC TPS, mais cela n'établit pas la prise en charge du mode EPD direct du LCDC. Vérifiez le pilote et la variante exacte. | Convient aux conceptions compactes SPI/QSPI, 8080 et JDI ; pour un EPD parallèle, vérifiez l'implémentation GPIO, les contraintes temporelles et la commande d'alimentation TPS de la variante choisie. |
 | **SF32LB55x** | SPI 3/4 fils, Dual-SPI, Quad-SPI, MCU/8080, DPI/RGB, JDI série/parallèle, MIPI DSI en mode commande | L'interface MIPI DSI documentée à 2 voies est disponible sur les boîtiers BGA145/169 ; JDI et le double affichage MIPI DSI + SPI/DSPI ne sont documentés que pour 557VD3A6. Le mode commande requiert un contrôleur de panneau avec SRAM/GRAM interne. | Appareils portables et autres appareils connectés dotés d'un écran, avec un boîtier BGA compatible et un panneau MIPI en mode commande. |
 | **SF32LB56xU** | SPI 3/4 fils, Dual-SPI, Quad-SPI, JDI série | Les variantes U répertoriées utilisent le boîtier QFN68L ; vérifiez la référence exacte et le multiplexage des broches. | Convient aux panneaux série compacts lorsque la bande passante QSPI et la réduction du nombre de broches sont prioritaires. |
 | **SF32LB56xV** | SPI 3/4 fils, Dual-SPI, Quad-SPI, DBI 8080, DPI/RGB, JDI série/parallèle | Les variantes V répertoriées utilisent le boîtier WBBGA175 (BGA175 dans le guide des modèles) ; vérifiez les broches requises et le routage pour la référence exacte. | Convient aux résolutions et fréquences de rafraîchissement élevées, ou aux conceptions nécessitant 8080, DPI/RGB ou JDI parallèle. |
@@ -65,7 +65,7 @@ Le tableau ci-dessous aide à choisir une famille ; il ne définit pas l'affecta
 
 Pour **SF32LB56x**, ne considérez pas les variantes U et V comme interchangeables. Pour **SF32LB55x** et **SF32LB58x**, n'intégrez pas le MIPI DSI au schéma avant d'avoir confirmé le boîtier exact, les broches DSI disponibles et les exigences de voies et de mode du panneau. SF32LB55x ne prend en charge que le mode commande : il ne convient donc pas à un panneau sans RAM fonctionnant en mode vidéo. Une conception EPD doit aussi tenir compte des contraintes temporelles, de la forme d'onde et de l'alimentation propres au panneau ; la seule interface ne suffit pas à définir la conception.
 
-Le guide des modèles de puces SiFli répertorie DPI/RGB parmi les interfaces de la famille SF32LB55x, mais son tableau par référence ne confirme pas DPI pour les références listées. Il s'agit donc d'une indication au niveau de la famille seulement : avant de s'appuyer sur DPI, vérifiez sa prise en charge et la disponibilité des broches pour la référence exacte. La distinction U/V de SF32LB56x suit les guides d'application matériels distincts, et non le tableau HAL commun à la famille.
+Le guide des modèles de puces SiFli répertorie DPI/RGB parmi les interfaces de la famille SF32LB55x, mais son tableau par référence n'attribue pas DPI aux références listées. Il s'agit donc d'une indication au niveau de la famille seulement : avant de s'appuyer sur DPI, vérifiez sa prise en charge et la disponibilité des broches pour la référence exacte. La distinction U/V de SF32LB56x suit les guides d'application matériels distincts, et non le tableau HAL commun à la famille.
 
 Les deux guides matériels SF32LB52x ne concordent pas sur JDI : leur aperçu mentionne le JDI série, tandis que les sections détaillées donnent des affectations de signaux parallèles. La matrice reprend donc les deux indications documentées, sans garantir la disponibilité des broches pour une référence précise. Avant de figer la conception, vérifiez le multiplexage LCDC, le SDK/pilote et les signaux du panneau pour la variante exacte.
 
@@ -83,7 +83,7 @@ Le framework d'interface utilisateur produit les pixels modifiés ; le pilote d'
 - Un contrôleur scannant un framebuffer consomme les données de pixel depuis la mémoire selon le séquencement de l'affichage.
 - Un chemin compatible avec TurboPixel lit le bitmap final compressé et le décompresse au niveau du contrôleur d'affichage.
 
-Dans LVGL, le callback de transfert vers l'écran (flush) marque la frontière entre le rendu et la sortie. Il doit tenir compte de la région à mettre à jour, lancer la bonne opération DMA ou contrôleur et signaler la fin seulement lorsque le framework peut réutiliser le tampon de dessin sans risque. Gardez explicites les règles de nettoyage (clean) et d'invalidation (invalidate) du cache lorsque le CPU et le matériel partagent des tampons.
+Dans LVGL, le callback de transfert vers l'écran (flush) marque la frontière entre le rendu et la sortie. Il devrait tenir compte de la région à mettre à jour, lancer la bonne opération DMA ou contrôleur et signaler la fin seulement lorsque le framework peut réutiliser le tampon de dessin sans risque. Gardez explicites les règles de nettoyage (clean) et d'invalidation (invalidate) du cache lorsque le CPU et le matériel partagent des tampons.
 
 La réutilisation d'un tampon dépend du transfert effectué. Pour un transfert vers la mémoire du panneau, ne libérez le tampon de dessin qu'une fois sa lecture matérielle terminée. En balayage continu, une interruption de trame ne suffit pas à libérer le framebuffer actif : attendez la confirmation du changement de tampon et la fin des lectures de l'ancien tampon par le contrôleur. La fin du transfert et le rafraîchissement visible sont deux événements distincts. Utilisez le signal TE ou la temporisation de trame du panneau lorsque cela est nécessaire pour éviter le tearing.
 
@@ -127,7 +127,7 @@ Validez d'abord les aplats et les motifs avec une configuration minimale de l'in
 
 ## Isoler les défaillances du chemin d'affichage { #isolate-display-path-failures }
 
-Traitez chaque étape comme une frontière indépendante. Modifier simultanément les commandes du panneau, le code LVGL, l'emplacement des tampons et les réglages DMA rend les problèmes plus difficiles à reproduire et à diagnostiquer.
+Traitez chaque étape comme une frontière indépendante. Modifier simultanément les commandes du panneau, le code LVGL, l'emplacement des tampons et les réglages DMA rend les problèmes plus difficiles à reproduire.
 
 <div align="center"><em>Matrice de diagnostic du chemin d'affichage</em></div>
 

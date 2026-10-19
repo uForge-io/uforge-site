@@ -24,7 +24,7 @@ Use este fluxo como um processo iterativo de revisão, não como uma transição
 | Esquemático e layout | Guia de projeto de hardware do chip ou módulo | Implementação revisada de alimentação, clock, reset, RF, armazenamento, display e interfaces. |
 | BOM | Lista de fornecedores aprovados (AVL) e datasheets dos componentes | Alternativas qualificadas ou validadas especificamente para cada item crítico. |
 | Revisão do projeto | Checklist de projeto de hardware | Decisão documentada para cada item aplicável da lista e cada exceção. |
-| Bring-up | Referências de placas de desenvolvimento, exemplos do SDK e testes com medições | Resultados reproduzíveis de inicialização, gravação, periféricos, comunicação sem fio, consumo de energia e recuperação. |
+| Bring-up | Referências de placas de desenvolvimento, exemplos do SDK e testes com medições | Resultados reproduzíveis de boot, gravação, periféricos, comunicação sem fio, consumo de energia e recuperação. |
 | Liberação do CAD para produção | Bibliotecas EDA oficiais e desenhos do encapsulamento | Símbolo, footprint, pinagem, padrão de pads e arquivos de fabricação verificados. |
 
 </div>
@@ -33,7 +33,7 @@ Use este fluxo como um processo iterativo de revisão, não como uma transição
 
 Use estas referências como ponto de partida para cada etapa da implementação:
 
-- **[Guias de projeto de hardware](index.md#find-a-guide)** fornecem orientações específicas para cada chip sobre esquemático, layout, alimentação, interfaces e inicialização. Para módulos, incluem orientações de integração na placa portadora. Quando disponível, use o checklist correspondente; no caso de um módulo, consulte primeiro sua apresentação para confirmar se ele atende à arquitetura do produto.
+- **[Guias de projeto de hardware](index.md#find-a-guide)** fornecem orientações específicas para cada chip sobre esquemático, layout, alimentação, interfaces e bring-up. Para módulos, incluem orientações de integração na placa portadora. Quando disponível, use o checklist correspondente; no caso de um módulo, consulte primeiro sua apresentação para confirmar se ele atende à arquitetura do produto.
 - **[Módulos M2](m2-modules/interface-standards-overview.md)** apresentam as regras de nomenclatura M2 da μForge e uma proposta de definição de interface em nível de pino. Essa definição ainda é uma proposta; valide-a antes de assumir um compromisso de produção.
 - **[CAD e componentes](cad-components/components-and-cad-libraries.md)** incluem a [AVL da SiFli](cad-components/sifli-approved-vendor-list.md) e as [bibliotecas EDA oficiais](cad-components/eda-tool-libraries.md). Nenhum desses recursos substitui a verificação final do componente exato, do desenho do encapsulamento e do guia de projeto selecionado.
 

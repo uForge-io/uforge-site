@@ -30,7 +30,7 @@ Le guide des modèles de puces de SiFli précise que le SF32LB55x a été défin
 - Accessoires connectés riches en capteurs
 - Produits IHM graphiques compacts
 - Stylets intelligents et accessoires de saisie au stylet
-- Terminaux portables et télécommandes de poche
+- Terminaux portables et contrôleurs portatifs
 
 Choisissez le SF32LB55x lorsque la conception exige une ou plusieurs de ces capacités :
 
@@ -91,7 +91,7 @@ Choisissez le SF32LB55x lorsque la conception exige une ou plusieurs de ces capa
 
 - Moteur graphique 2,5D ePicasso avec rotation, mise à l'échelle, effet miroir et fusion alpha matériels
 - eZip décompresse les graphismes sans perte et peut être chaîné avec ePicasso
-- La couche de transformation d'ePicasso prend en charge des résolutions jusqu'à 640 × 640 ; les couches génériques et la sortie d'affichage prennent en charge jusqu'à 1024 × 1024, avec une cadence d'affichage pouvant atteindre 60 i/s
+- La couche de transformation d'ePicasso prend en charge des résolutions jusqu'à 640 × 640 ; les couches génériques et la sortie d'affichage prennent en charge jusqu'à 1024 × 1024, avec une cadence d'affichage pouvant atteindre 60 ips
 - Le contrôleur LCD prend en charge les interfaces 8080, SPI, Dual-SPI, Quad-SPI, DPI et MIPI DSI, ainsi que les écrans réflectifs JDI sur les variantes compatibles ; vérifiez la disponibilité pour le modèle choisi
 - La compression de tampon d'image TurboPixel permet au contrôleur LCD de lire des données d'image compressées et de les décompresser pour l'affichage, réduisant ainsi la mémoire requise pour le tampon d'image et les besoins en bande passante de lecture
 - Deux contrôleurs LCD ; les interfaces d'affichage permanent (always-on) et la capacité double écran dépendent du modèle et du boîtier choisis
@@ -151,9 +151,9 @@ Choisissez le SF32LB55x lorsque la conception exige une ou plusieurs de ces capa
 
 ## Variantes de la famille { #family-variants }
 
-Les composants SF32LB55x sont proposés en boîtiers QFN et BGA. Choisissez le boîtier dès le début du projet, car le nombre de GPIO, la mémoire intégrée, les interfaces d'affichage disponibles et les contraintes de fabrication du circuit imprimé varient sensiblement selon le boîtier.
+Les composants SF32LB55x sont proposés en boîtiers QFN et BGA. Choisissez le boîtier dès le début du projet, car le nombre de GPIO, la mémoire intégrée, les interfaces d'affichage disponibles et le procédé de fabrication du PCB varient sensiblement selon le boîtier.
 
-Le choix du boîtier n'est pas ici une simple décision d'implantation. Le [guide des modèles de puces][Guide des modèles de puces SiFli] de SiFli précise que, selon le boîtier, la famille 55x prend en charge la totalité ou seulement une partie des interfaces d'affichage. Il faut donc arrêter ce choix avant de finaliser les options d'affichage et de mémoire ainsi que le budget de broches. Les composants d'un même boîtier sont compatibles broche à broche ; confirmez la configuration mémoire exacte et les besoins d'affichage avant de choisir un composant de remplacement compatible.
+Le choix du boîtier n'est pas ici une simple décision de placement et de routage. Le [guide des modèles de puces][Guide des modèles de puces SiFli] de SiFli précise que, selon le boîtier, la famille 55x prend en charge la totalité ou seulement une partie des interfaces d'affichage. Il faut donc arrêter ce choix avant de finaliser les options d'affichage et de mémoire ainsi que le budget de broches. Les composants d'un même boîtier sont compatibles broche à broche ; confirmez la configuration mémoire exacte et les besoins d'affichage avant de choisir un composant de remplacement compatible.
 
 <div align="center"><em>Options d'E/S par boîtier du SF32LB55x</em></div>
 
@@ -191,14 +191,14 @@ Suivez cette séquence pour transformer une présélection SF32LB55x en concepti
 
 1. **Valider le parcours de développement du firmware.** Commencez par le [guide de prise en main du SDK SiFli](../../getting-started/sifli/getting-started-sifli-sdk.md), puis utilisez le [flux de travail du SDK SiFli](../../develop/platforms/sifli-sdk/overview.md) et les [exemples](../../develop/examples/index.md) pour valider le comportement requis de l'affichage, du Bluetooth et de la basse consommation.
 2. **Planifier le matériel d'évaluation.** μForge ne répertorie actuellement aucun module ni carte de développement spécifique au SF32LB55. Utilisez le [sélecteur de produits SF32](../product-selector.md) pour choisir la plateforme d'évaluation disponible la plus proche, puis vérifiez la couverture du boîtier et des interfaces avant de transposer les résultats à une conception 55x.
-3. **Concevoir et relire le matériel.** Avant de valider le schéma ou l'implantation, utilisez le [guide de conception matérielle](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) de μForge, y compris ses listes de contrôle du [schéma](../../hardware/chip-guides/SF32LB55x_schematic_checklist.md) et de l'implantation du circuit imprimé.
+3. **Concevoir et relire le matériel.** Avant de publier le schéma ou le placement-routage, utilisez le [guide de conception matérielle](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) de μForge, y compris ses listes de contrôle du [schéma](../../hardware/chip-guides/SF32LB55x_schematic_checklist.md) et du placement et du routage du PCB.
 4. **Vérifier la source faisant autorité.** Confirmez la référence commandable et le boîtier exacts à l'aide de la [fiche technique][Fiche technique], du [manuel utilisateur][Manuel utilisateur], du [guide de conception d'origine][Guide de conception d'origine (wiki.sifli.com)] et de la [source de la note d'application matérielle][Note d'application matérielle (source GitHub)] de SiFli.
 
 ## Produits associés { #related-products }
 
 ### Kits de développement { #development-kits }
 
-Utilisez la note d'application matérielle officielle, les schémas de référence et la liste de contrôle comme point de départ pour le choix du boîtier, la définition de l'arbre d'alimentation, le choix de l'interface d'affichage, la planification de la mémoire, l'implantation RF et la planification des tests de production.
+Utilisez la note d'application matérielle officielle, les schémas de référence et la liste de contrôle comme point de départ pour le choix du boîtier, la définition de l'arbre d'alimentation, le choix de l'interface d'affichage, la planification de la mémoire, le placement et le routage RF et la planification des tests de production.
 
 ### Produits de référence { #reference-products }
 

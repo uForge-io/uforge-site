@@ -56,7 +56,7 @@ Am Ende eines Leitfadens für die ersten Schritte sollten Sie:
 - Das Beispiel auf das Board geflasht haben.
 - Die serielle Konsole geöffnet haben.
 - Vorhersehbare Ausgaben gesehen haben, wie ein Boot-Protokoll, `hello_world`, einen Shell-Prompt oder ein REPL-Banner.
-- Den Board-Namen, den seriellen Port und den funktionierenden Flash-Befehl notiert haben.
+- Den Boardnamen, den seriellen Port und den funktionierenden Flash-Befehl notiert haben.
 
 Halten Sie diese Angaben in Ihren Projektnotizen fest. Wenn Sie Beispiele ändern, können Sie damit am schnellsten zu einer funktionierenden Ausgangskonfiguration zurückkehren.
 

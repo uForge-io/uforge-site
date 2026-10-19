@@ -10,7 +10,7 @@ tags:
 
 ## 아키텍처와 처리 { #architecture-and-processing }
 
-* **MCU** — **Microcontroller Unit(마이크로컨트롤러 유닛).** CPU 코어, 메모리, 프로그래밍 가능한 입출력 주변 장치를 하나로 통합한 집적 회로로, 범용 운영 체제가 아니라 전용의 저오버헤드 펌웨어를 실행하도록 최적화되어 있습니다.
+* **MCU** — **Microcontroller Unit(마이크로컨트롤러 유닛).** CPU 코어, 메모리, 프로그래밍 가능한 입출력 주변 장치를 하나로 통합한 집적 회로로, 범용 운영 체제 대신 전용 펌웨어를 낮은 오버헤드로 실행하도록 최적화되어 있습니다.
 * **SoC** — **System on Chip(시스템 온 칩).** 컴퓨터 시스템에 필요한 모든 전자 회로와 구성 요소를 하나의 기판에 통합한 집적 회로입니다. 이 사이트에서는 SF32 제품을 MCU로 분류합니다. 완전한 애플리케이션 프로세서 OS 환경이 아니라 마이크로컨트롤러급 펌웨어를 대상으로 하기 때문입니다.
 * **Arm Cortex-M33** — SF32의 애플리케이션 코어와 Bluetooth 코어가 기반으로 하는 32비트 Armv8-M mainline 프로세서 아키텍처입니다. Armv8-M mainline은 이전의 Cortex-M3/M4 코어와 달리 선택 사항인 TrustZone 보안 확장(신뢰 코드/데이터와 비신뢰 코드/데이터를 하드웨어 수준에서 격리)을 지원합니다. 다만 TrustZone은 실리콘 구현마다 정하는 구성 선택 사항이며 모든 Cortex-M33에 보장되는 기능이 아닙니다. 현재의 SF32LB52x부터 SF32LB58x까지의 제품에는 TrustZone이 구성되어 있지 않습니다. 자세한 내용은 아래의 STAR-MC1과 [SF32LB52x 칩 페이지](../sf32-products/chips/SF32LB52x.md)를 참조하십시오.
 * **STAR-MC1** — Arm China의 구성 가능한 Armv8-M Mainline 임베디드 CPU IP로, 호환되는 SF32 디바이스에서 Cortex-M33급 애플리케이션 프로세서로 사용됩니다. CU, SP, SE 구성은 캐시, TCM, XIPU, TrustZone 기능이 서로 다르며, SF32 제품이 제공하는 기능 집합은 디바이스마다 다릅니다. SiFli 문서에서는 문맥에 따라 "Arm Cortex-M33 STAR-MC1" 또는 "Arm Cortex-M33"이라고 표기할 수 있습니다. [STAR-MC1 아키텍처 페이지](../learn/architecture/star-mc1.md)를 참조하십시오.
@@ -18,7 +18,7 @@ tags:
 * **DSP** — **Digital Signal Processor / digital signal processing(디지털 신호 프로세서 / 디지털 신호 처리).** Cortex-M33 코어에 내장된 확장 기능으로, 오디오나 센서 퓨전처럼 연산량이 많은 워크로드에 사용됩니다.
 * **MPU** — **Memory Protection Unit(메모리 보호 유닛).** 코드가 접근할 수 있는 메모리 영역을 제한하는 하드웨어로, 결함 격리와 보안에 사용됩니다.
 * **HAL** — **Hardware Abstraction Layer(하드웨어 추상화 계층).** 정확한 칩 변형(variant)과 무관하게 일관된 API로 주변 장치를 제공하는 SDK 계층입니다.
-* **AI / ML 가속기** — 소형 신경망 모델 추론처럼 인공지능이나 머신러닝 워크로드를 가속하는 하드웨어입니다. 지원 여부는 디바이스마다 다르므로, 제품 선택기와 대상 데이터시트로 선택한 제품을 확인하십시오.
+* **AI / ML 가속기** — 소형 신경망 모델 추론처럼 인공지능이나 머신러닝 워크로드를 가속하는 하드웨어입니다. 지원 여부는 디바이스마다 다르므로, 제품 선택기에서 후보를 고른 뒤 해당 부품의 데이터시트에서 확인하십시오.
 
 ## 무선 연결 { #wireless-connectivity }
 
@@ -34,7 +34,7 @@ tags:
 
 ## 그래픽과 디스플레이 { #graphics-and-display }
 
-* **ePicasso** — SF32 제품군용으로 SiFli가 자체 개발한 2D/2.5D 그래픽 가속 엔진으로, 이미지 복사, 블렌딩, 스케일링, 회전, 레이어 합성 같은 픽셀 연산을 애플리케이션 CPU로부터 넘겨받아 처리합니다. [ePicasso 아키텍처 페이지](../learn/graphics/epicasso-gpu.md)를 참조하십시오.
+* **ePicasso** — SF32 제품군용으로 SiFli가 자체 개발한 2D/2.5D 그래픽 가속 엔진으로, 이미지 복사, 블렌딩, 스케일링, 회전, 레이어 합성 같은 픽셀 연산을 처리해 애플리케이션 CPU의 부담을 덜어 줍니다. [ePicasso 아키텍처 페이지](../learn/graphics/epicasso-gpu.md)를 참조하십시오.
 * **eZip** — SiFli의 무손실 그래픽 및 범용 압축 형식으로, 지원되는 SF32 디바이스에서 하드웨어 디코딩을 제공합니다. 그래픽의 경우 SiFli는 압축률이 PNG보다 약간 높다고 설명하며, 범용 데이터의 경우 압축률은 원본에 따라 달라집니다. 압축된 에셋은 디코딩 전에 버스를 통해 전송되므로 eZip은 PSRAM과 NOR 플래시의 외부 메모리 대역폭을 줄일 수 있습니다.
 * **TurboPixel** — 지원되는 SF32 제품에서 쓰는 고정 압축률 손실 방식의 최종 프레임버퍼 형식입니다. extDMA가 렌더링된 비트맵을 TurboPixel로 압축하고 디스플레이 컨트롤러가 이를 해제하여 PSRAM 대역폭과 PSRAM 용량을 줄입니다. [TurboPixel 프레임버퍼 압축 페이지](../learn/graphics/turbopixel.md)를 참조하십시오.
 * **LVGL** — **Light and Versatile Graphics Library.** 대부분의 SF32 제품이 애플리케이션 수준 UI에 사용하는 오픈소스 임베디드 UI 프레임워크로, ePicasso로 가속되는 렌더링 위에서 동작합니다.
@@ -83,7 +83,7 @@ tags:
 ## 하드웨어와 제조 { #hardware-and-manufacturing }
 
 * **QFN** — **Quad Flat No-lead package(쿼드 플랫 노리드 패키지).** SF32 제품이 제공되는 칩 패키지 유형으로, 핀 수와 본체 크기로 표기합니다(예: QFN68).
-* **BGA** — **Ball Grid Array package(볼 그리드 어레이 패키지).** 디바이스 아래에 솔더 볼이 배열된 패키지로, 작은 풋프린트와 더 많은 핀 수를 구현할 수 있지만 BGA를 지원하는 PCB 탈출 배선과 조립이 필요합니다.
+* **BGA** — **Ball Grid Array package(볼 그리드 어레이 패키지).** 디바이스 아래에 솔더 볼이 배열된 패키지로, 작은 풋프린트와 더 많은 핀 수를 구현할 수 있지만 BGA 팬아웃을 위한 PCB 배선과 이에 맞는 조립 공정이 필요합니다.
 * **BOM** — **Bill of Materials(자재 명세서).** 인쇄 회로 기판 어셈블리(PCBA)를 제조하는 데 필요한 부품, 수동 소자, 기구 하드웨어를 항목별로 정리한 공식 목록입니다. SiFli가 권장하는 부품과 모듈을 선호하는 주된 이유는 BOM 복잡도를 줄일 수 있기 때문입니다.
 * **EDA** — **Electronic Design Automation(전자 설계 자동화).** 회로도 작성, SPICE 시뮬레이션, PCB 레이아웃 소프트웨어 범주입니다. SF32 전용 풋프린트/심볼은 [EDA 도구 라이브러리 페이지](../hardware/cad-components/eda-tool-libraries.md)를 참조하십시오.
 * **AVL** — **Approved Vendor List(승인 업체 목록).** SF32 하드웨어 설계의 전기적 허용 오차에 맞춰 검증한, SiFli의 인증된 세컨드 소스 부품 목록입니다(크리스털, 레귤레이터, 플래시 등). [승인 업체 목록 페이지](../hardware/cad-components/sifli-approved-vendor-list.md)를 참조하십시오.
@@ -95,4 +95,4 @@ tags:
 * **SiFli-SDK** — SF32 제품용 SiFli의 주요 펌웨어 개발 키트로, 대부분의 양산 펌웨어가 기반으로 하는 레퍼런스/벤더 SDK입니다.
 * **SiFli CodeKit** — SiFli-SDK 개발을 위한 VS Code 확장으로, 원시 명령줄 툴체인 없이도 프로젝트 생성, 구성, 빌드, 플래시, 모니터 워크플로를 안내합니다.
 * **RTOS** — **Real-Time Operating System(실시간 운영 체제).** SiFli-SDK 자체의 RTOS 통합을 통해서든 Zephyr를 통해서든 SF32 펌웨어가 일반적으로 실행되는 OS 부류(결정적 스케줄링, 낮은 오버헤드)입니다.
-* **sftool** — SF32 보드용 SiFli의 명령줄 플래싱/복구 유틸리티로, 부팅에 실패하는 보드의 브릭 복구를 포함합니다.
+* **sftool** — SF32 보드용 SiFli 명령줄 플래싱/복구 유틸리티로, 부팅에 실패한 보드를 복구하는 기능도 제공합니다.

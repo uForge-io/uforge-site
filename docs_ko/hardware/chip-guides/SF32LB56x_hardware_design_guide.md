@@ -31,13 +31,13 @@ hide:
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-lines: __[SF32LB56xU Hardware Application Note]__
-- :fontawesome-solid-file-lines: __[SF32LB56xV Hardware Application Note]__
-- :fontawesome-brands-github: __[SF32LB56xU Hardware Application Source]__
-- :fontawesome-brands-github: __[SF32LB56xV Hardware Application Source]__
-- :fontawesome-solid-file-excel: __[SiFli Approved Vendor List (AVL)]__
-- :fontawesome-solid-cart-shopping: __[Buy Samples]__
-- :fontawesome-solid-cart-shopping: __[Buy Dev Kits]__
+- :fontawesome-solid-file-lines: __[SF32LB56xU 하드웨어 애플리케이션 노트][SF32LB56xU Hardware Application Note]__
+- :fontawesome-solid-file-lines: __[SF32LB56xV 하드웨어 애플리케이션 노트][SF32LB56xV Hardware Application Note]__
+- :fontawesome-brands-github: __[SF32LB56xU 하드웨어 애플리케이션 소스][SF32LB56xU Hardware Application Source]__
+- :fontawesome-brands-github: __[SF32LB56xV 하드웨어 애플리케이션 소스][SF32LB56xV Hardware Application Source]__
+- :fontawesome-solid-file-excel: __[SiFli 승인 업체 목록 (AVL)][SiFli Approved Vendor List (AVL)]__
+- :fontawesome-solid-cart-shopping: __[샘플 구매][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[개발 키트 구매][Buy Dev Kits]__
 
 </div>
 
@@ -45,7 +45,7 @@ hide:
 
 ### 3.1. 아키텍처 { #31-architecture }
 
-SF32LB56x는 BLE 전용 센서 노드보다 풍부한 디스플레이 및 HMI 제품을 대상으로 합니다. 공식 U 및 V 하드웨어 애플리케이션 노트는 동일한 엔지니어링 주제를 공유합니다. PMIC 기반 전원 분배, 48 MHz 및 32.768 kHz 크리스털, RF 설계, 디스플레이 인터페이스 선택, 스토리지 인터페이스 선택, 오디오, PBR 핀, 센서, UART/I2C/GPTIM 계획, 디버그/플래싱, 양산 크리스털 캘리브레이션입니다.
+SF32LB56x는 BLE만 사용하는 센서 노드보다 디스플레이와 HMI 요구 수준이 높은 제품을 대상으로 합니다. 공식 U 및 V 하드웨어 애플리케이션 노트에서 다루는 주요 설계 주제는 PMIC 기반 전원 분배, 48 MHz 및 32.768 kHz 크리스털, RF 설계, 디스플레이 및 스토리지 인터페이스 선택, 오디오, PBR 핀, 센서, UART/I2C/GPTIM 핀 계획, 디버그와 플래싱, 양산 단계의 크리스털 캘리브레이션입니다.
 
 ### 3.2. 변형과 패키지 { #32-variants-and-packages }
 
@@ -62,11 +62,11 @@ SF32LB56x는 BLE 전용 센서 노드보다 풍부한 디스플레이 및 HMI �
 
 U 변형은 QFN68L 패키지를 사용합니다. V 변형은 WBBGA175 패키지를 사용하며, 팬아웃, 비아, HDI 공정을 더 신중하게 계획해야 합니다.
 
-![Figure 3.2-1: SF32LB56xU QFN68L Pin Distribution](../../sf32-products/chips/assets/56x/sf32lb56xU-ballmap.png){ width="100%" loading="lazy" }
+![그림 3.2-1: SF32LB56xU QFN68L 핀 배치](../../sf32-products/chips/assets/56x/sf32lb56xU-ballmap.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>그림 3.2-1: SF32LB56xU QFN68L 핀 배치</em></div>
 
-![Figure 3.2-2: SF32LB56xV WBBGA175 Pin Distribution](../../sf32-products/chips/assets/56x/sf32lb56xV-ballmap.png){ width="100%" loading="lazy" }
+![그림 3.2-2: SF32LB56xV WBBGA175 핀 배치](../../sf32-products/chips/assets/56x/sf32lb56xV-ballmap.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>그림 3.2-2: SF32LB56xV WBBGA175 핀 배치</em></div>
 
@@ -81,11 +81,11 @@ U 변형은 QFN68L 패키지를 사용합니다. V 변형은 WBBGA175 패키지�
 
 ### 3.4. 대표 애플리케이션 { #34-typical-applications }
 
-![Figure 3.4-1: SF32LB56xU Smart Watch Application Block Diagram](../../sf32-products/chips/assets/56x/sf32lb56xU-watch-app-diagram.png){ width="100%" loading="lazy" }
+![그림 3.4-1: SF32LB56xU 스마트워치 애플리케이션 블록 다이어그램](../../sf32-products/chips/assets/56x/sf32lb56xU-watch-app-diagram.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>그림 3.4-1: SF32LB56xU 스마트워치 애플리케이션 블록 다이어그램</em></div>
 
-![Figure 3.4-2: SF32LB56xV Smart Watch Application Block Diagram](../../sf32-products/chips/assets/56x/sf32lb56xV-watch-app-diagram.png){ width="100%" loading="lazy" }
+![그림 3.4-2: SF32LB56xV 스마트워치 애플리케이션 블록 다이어그램](../../sf32-products/chips/assets/56x/sf32lb56xV-watch-app-diagram.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>그림 3.4-2: SF32LB56xV 스마트워치 애플리케이션 블록 다이어그램</em></div>
 
@@ -102,10 +102,10 @@ SF32LB56x는 Bluetooth, 오디오, 센서, 외부 메모리, 풍부한 UI 기능
 | 주제 | SF32LB56xU | SF32LB56xV |
 |:---|:---|:---|
 | 패키지 | QFN68L, 7x7x0.75 mm, 0.35 mm 피치 | WBBGA175, 6.5x6.1x0.94 mm, 0.4 mm 피치 |
-| 디스플레이 | SPI/QSPI와 JDI가 주로 문서화된 인터페이스 | SPI/QSPI, MCU8080, DPI, JDI가 문서화됨 |
+| 디스플레이 | 문서에서 주로 안내하는 인터페이스는 SPI/QSPI와 JDI | 문서에서 안내하는 인터페이스는 SPI/QSPI, MCU8080, DPI, JDI |
 | PCB 공정 | 소형 QFN 라우팅과 팬아웃 | BGA/HDI 계획, 블라인드/베리드 비아 검토, 더 엄격한 팬아웃 관리 |
 | 전원 | 프로세서 레일과 SF30147C PMIC 분배 | 프로세서 레일과 SF30147C PMIC 분배, V 고유의 부하 할당 포함 |
-| 스토리지 | 문서화된 SF32LB56xU 스토리지 핀을 통한 외부 메모리 설계 | 문서화된 SF32LB56xV 스토리지 핀을 통한 외부 메모리 설계 |
+| 스토리지 | SF32LB56xU의 문서화된 스토리지 핀을 사용하는 외부 메모리 설계 | SF32LB56xV의 문서화된 스토리지 핀을 사용하는 외부 메모리 설계 |
 
 </div>
 
@@ -130,10 +130,10 @@ EVT 전에 U/V 원본 문서 버전, 데이터시트/사용자 매뉴얼 버전,
 
 [회로도 체크리스트](SF32LB56x_schematic_checklist.md)는 PCB 레이아웃을 시작하기 전, 회로도 검토 중에 실행하십시오. PCB 레이아웃 체크리스트(6.3절)는 Gerber를 릴리스하기 전, 레이아웃 검토 중에 실행하십시오. 실무에서는 각 단계를 보통 두 번 수행합니다. 먼저 설계 엔지니어가 수행하고, 설계 동결 또는 제조 릴리스 전에 독립된 검토자가 다시 수행합니다.
 
-최상의 결과를 얻으려면 체크리스트를 읽기용 목록이 아닌 승인 기록으로 취급하십시오.
+체크리스트를 효과적으로 활용하려면 단순히 읽고 넘기는 목록이 아니라 설계 승인 기록으로 사용하십시오.
 
 1. 먼저 대상 부품 번호와 패키지를 정확히 확인합니다.
-2. 표를 수동적으로 읽지 말고, 검토하면서 모든 항목을 통과/실패/해당 없음으로 표시합니다.
+2. 각 항목을 확인하면서 통과/실패/해당 없음으로 표시합니다.
 3. 디스플레이, 스토리지, 웨이크업, 저전력 항목은 해당하는 하드웨어 설계 가이드 절과 교차 확인합니다.
 4. 패키지별 가정, 특히 56xU와 56xV, QFN과 WBBGA, DSI와 SPI 디스플레이, SD2/MPI3 스토리지 사용 여부를 검토 노트에 기록합니다.
 

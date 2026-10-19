@@ -25,7 +25,7 @@ O valor não está em executar qualquer sketch Arduboy sem alterações, mas em 
 - O port precisa adaptar as premissas de display, botões, áudio, temporização e armazenamento que eram implícitas no hardware original.
 - Qualquer sketch que controle diretamente registradores AVR, pinos específicos da Arduboy, transações de display, temporizadores ou o layout da EEPROM exige adaptação deliberada e evidências próprias de regressão.
 
-Essas são expectativas de engenharia, não alegações de compatibilidade medidas. Confirme-as no repositório atual da OpenSiFli e registre o resultado exato para a placa e o commit selecionados.
+Essas são expectativas de engenharia, não afirmações de compatibilidade confirmadas por medição. Confirme-as no repositório atual da OpenSiFli e registre o resultado exato para a placa e o commit selecionados.
 
 ## Resultado, escopo e critérios de entrada { #outcome-scope-and-entry-criteria }
 Esta página define etapas para transformar a referência da OpenSiFli em um jogo ou demonstração interativa reproduzível no SF32. Ela **não** afirma que o port oferece todos os recursos da Arduboy2, executa todos os jogos Arduboy, funciona em qualquer placa SF32 ou garante temporização de display e áudio com qualidade de produção. Também não concede direitos de licenciamento para jogos, fontes, gráficos ou outros recursos copiados de repositórios de terceiros.
@@ -38,7 +38,7 @@ Antes de começar, tenha à disposição:
 
 - Uma placa SF32LB52 que use a variante ArduinoCore-Zephyr `sf32lb52_devkit_lcd_sf32lb525uc6`, além dos periféricos externos descritos abaixo. O README informa que display, botões, EEPROM externa e áudio foram testados em hardware SF32LB52; também documenta o caminho de um LED RGB, mas não relata um resultado de teste para ele. O README não fixa a revisão física da placa nem identifica o modelo exato do módulo OLED.
 - Uma instalação Arduino funcional e o pacote de placas OpenSiFli correspondente. O nome da variante define a base de software e o mapa de pinos, mas não comprova que todas as unidades SF32LB52-DevKit-LCD correspondam à fiação externa do projeto; confira o esquemático da placa física antes de conectar periféricos.
-- O commit exato do Arduboy2-SiFli, a versão do núcleo/pacote Arduino, o sistema operacional do host e a ferramenta de gravação.
+- O commit exato do Arduboy2-SiFli, a versão do core/pacote Arduino, o sistema operacional do host e a ferramenta de gravação.
 - Uma conexão USB de dados e meios para capturar o log serial e observar display, botões e saída de áudio.
 - Permissão para usar e redistribuir todos os jogos, imagens, fontes e sons incluídos na adaptação derivada.
 
@@ -101,9 +101,9 @@ O repositório Arduboy2-SiFli não fornece o mapa de pinos da placa em um arquiv
 | Elemento da base | Fonte de seleção | Não presuma que |
 |:-----------------|:---------------|:--------------|
 | Placa-alvo | A variante ArduinoCore-Zephyr `sf32lb52_devkit_lcd_sf32lb525uc6` indicada pelo README do Arduboy2-SiFli e, em seguida, o esquemático da placa física. | A variante de software comprova a compatibilidade de todas as revisões físicas e conjuntos de periféricos. |
-| Núcleo Arduino | Pacote OpenSiFli e revisão documentados para o alvo. | O pacote mais recente pode substituir a revisão usada pelo repositório. |
+| Core do Arduino | Pacote OpenSiFli e revisão documentados para o alvo. | O pacote mais recente pode substituir a revisão usada pelo repositório. |
 | Display e entradas | Definições de pinos/configuração do repositório e esquemático da placa física. | A geometria de display, polaridade dos botões ou nomes de pinos originais da Arduboy coincidem com os da placa SF32. |
-| Áudio | Caminho de saída compatível documentado pelo repositório e configuração específica da placa. | Uma API de tons comprova temporização do alto-falante, volume e alimentação prontos para produção. |
+| Áudio | Caminho de saída compatível documentado pelo repositório e configuração específica da placa. | Uma API de tons comprova que temporização do alto-falante, volume e comportamento de consumo estão prontos para produção. |
 | Gravação e recuperação | Fluxo Arduino ou `sftool` documentado para a placa selecionada. | Uma gravação bem-sucedida em um host comprova um caminho recuperável de atualização em campo. |
 
 </div>
@@ -120,7 +120,7 @@ Use as etapas como pontos de decisão, não como uma lista de recursos.
 | Etapa | Decisão que ajuda a tomar | Resultado necessário |
 |:------|:---------------------|:----------------|
 | 1. Referência sem alterações | O port documentado compila, grava e executa na base selecionada? | Sketch funcional, registro do commit/pacote, log de gravação e comportamento observado. |
-| 2. Validação dos periféricos | Tela, entradas, áudio, reset e temporização comportam-se de forma previsível na placa real? | Registro de testes dos periféricos, falhas e recuperação. |
+| 2. Validação dos periféricos | Display, entradas, áudio, reset e temporização comportam-se de forma previsível na placa real? | Registro de testes dos periféricos, falhas e recuperação. |
 | 3. Base reproduzível do código-fonte | Outro engenheiro consegue reconstruir a mesma imagem a partir de um checkout limpo? | Artefato de compilação limpa, registro do ambiente e resultado repetido. |
 | 4. Adaptação controlada do jogo | É possível introduzir uma alteração delimitada no jogo ou na interface sem quebrar o port? | Alteração revisada, registro de recursos/licenças e resultado da regressão. |
 | 5. Revisão de prontidão do produto | A referência é sólida o bastante para justificar hardware próprio ou maior investimento em software? | Registro de riscos com responsáveis, evidências, mitigação e decisão de prosseguir, adiar ou parar. |
@@ -133,9 +133,9 @@ Use as etapas como pontos de decisão, não como uma lista de recursos.
 ```mermaid
 flowchart LR
     G["Sketch do jogo\natualização, entrada, desenho, recursos"] --> A["Arduboy2-SiFli\ncamada de compatibilidade"]
-    A --> C["Núcleo Arduino\npacote da placa e runtime"]
+    A --> C["Core Arduino\npacote da placa e runtime"]
     C --> S["SiFli-SDK / SF32\nGPIO, display, temporizadores, armazenamento, áudio"]
-    S --> H["Placa SF32 selecionada\ntela, botões, alto-falante, USB"]
+    S --> H["Placa SF32 selecionada\ndisplay, botões, alto-falante, USB"]
     A --> R["Testes de referência\nlog serial e inspeção visual"]
 ```
 
@@ -145,7 +145,7 @@ Este é um modelo de decisão, não uma afirmação de que o repositório usa ex
 - **Display:** a camada de compatibilidade deve mapear o buffer e a geometria do jogo para o controlador de display, formato de pixel, orientação e método de atualização selecionados.
 - **Entradas:** nomes e polaridade dos botões, debounce, pressionamentos simultâneos e comportamento de despertar/reset devem ser conferidos com as conexões da placa.
 - **Áudio:** geração de tons, uso do temporizador, conexão do alto-falante, volume e silenciamento devem ser considerados específicos da placa até serem verificados.
-- **Recursos e armazenamento:** fontes, sprites, dados de som, layout da flash e uso de RAM devem ser medidos após a linkagem do jogo selecionado.
+- **Recursos e armazenamento:** fontes, sprites, dados de som, layout da flash e uso de RAM devem ser medidos após a link-edição do jogo selecionado.
 - **Recuperação:** mantenha um caminho de gravação e recuperação conhecido como funcional antes de experimentar alterações de temporização, memória ou baixo consumo.
 
 As principais áreas de falha são compatibilidade da aplicação/API, configuração do display, conexões das entradas, comportamento de áudio/temporizadores, memória e posicionamento de recursos, além de gravação/recuperação. Uma falha em uma dessas áreas não deve ser resumida a “o port não funciona”.
@@ -155,7 +155,7 @@ As principais áreas de falha são compatibilidade da aplicação/API, configura
 **Objetivo:** comprovar que a base documentada pelo repositório funciona antes de alterar a biblioteca ou o jogo.
 
 1. Leia as instruções do repositório, registre a branch padrão ou versão e examine os exemplos, a configuração da placa, as dependências e os arquivos de licença.
-2. Instale exatamente o núcleo/pacote Arduino e as ferramentas exigidas pelo repositório. Registre o sistema operacional do host e as versões das ferramentas.
+2. Instale exatamente o core/pacote Arduino e as ferramentas exigidas pelo repositório. Registre o sistema operacional do host e as versões das ferramentas.
 3. Compile e grave o menor exemplo documentado ou sketch de teste.
 4. Capture a saída serial e registre o que aparece no display, quais botões respondem e se o exemplo usa áudio.
 

@@ -21,7 +21,7 @@ SF32 器件支持多种软件开发路径。目前，SiFli-SDK 和 CodeKit 是�
 
 | 路径 | 当前状态 | 从这里开始 |
 |:-----|:---------|:-----------|
-| **SiFli-SDK** | 思澈科技（SiFli）官方的 SF32 参考开发路径，涵盖 RT-Thread、蓝牙（Bluetooth）、图形、音频、低功耗和开发板启动与调试。 | [SiFli-SDK](sifli/getting-started-sifli-sdk.md) |
+| **SiFli-SDK** | 思澈科技（SiFli）官方的 SF32 参考开发路径，涵盖 RT-Thread、蓝牙（Bluetooth）、图形、音频、低功耗和开发板启动调试。 | [SiFli-SDK](sifli/getting-started-sifli-sdk.md) |
 | **SiFli CodeKit** | 思澈科技（SiFli）官方 VS Code 工作流，用于 SDK 配置、创建工程、构建、烧录和串口监视。 | [SiFli CodeKit](sifli/getting-started-sifli-codekit.md) |
 | **Zephyr** | 从 Zephyr v4.3.0 起，Zephyr 上游持续维护对 `sf32lb52_devkit_lcd` 的支持。 | [Zephyr 上游版本](zephyr/getting-started-zephyr-upstream.md) |
 | **Arduino** | OpenSiFli 已为 SF32LB52 DevKit LCD 提供 ArduinoCore-zephyr 测试版软件包。 | [Arduino](arduino/getting-started-arduino.md) |

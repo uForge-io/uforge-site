@@ -11,7 +11,7 @@ tags:
 
 ## ¿Qué es Arduboy2-SiFli? { #what-is-arduboy2-sifli }
 
-[OpenSiFli/Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) es una adaptación de la [biblioteca Arduboy2](https://github.com/MLXXXp/Arduboy2) realizada por OpenSiFli para su entorno de desarrollo. Arduboy2 ofrece un modelo de aplicación para dispositivos de juego pequeños: bucle de fotogramas, búfer de pantalla, botones, sprites, texto y control de sonido opcional. Por ello, esta adaptación sirve como experimento de compatibilidad: permite comprobar cuánto de un juego estilo Arduboy puede conservarse al trasladar a SF32 la placa, la pantalla, la entrada, el audio y el proceso de compilación.
+[OpenSiFli/Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) es una adaptación de la [biblioteca Arduboy2](https://github.com/MLXXXp/Arduboy2) realizada por OpenSiFli para el entorno de desarrollo de SiFli. Arduboy2 ofrece un modelo de aplicación para dispositivos de juego pequeños: bucle de fotogramas, búfer de pantalla, botones, sprites, texto y control de sonido opcional. Por ello, esta adaptación sirve como experimento de compatibilidad: permite comprobar cuánto de un juego estilo Arduboy puede conservarse al trasladar a SF32 la placa, la pantalla, la entrada, el audio y el proceso de compilación.
 
 El repositorio es una referencia de software, no una consola terminada ni un diseño de hardware para producción. Utilice el README, el árbol de fuentes, los ejemplos, el historial de incidencias y los archivos de licencia como autoridad sobre la placa objetivo exacta, la API admitida, las instrucciones de compilación y las condiciones de redistribución. Esta página organiza las decisiones de ingeniería en torno a esa referencia, pero no sustituye sus instrucciones ejecutables.
 
@@ -37,7 +37,7 @@ Esta página define una ruta por etapas desde la referencia de OpenSiFli hasta u
 
 Antes de empezar, tenga a mano lo siguiente:
 
-- Una placa SF32LB52 que use la variante ArduinoCore-Zephyr `sf32lb52_devkit_lcd_sf32lb525uc6`, además de los periféricos externos descritos abajo. El README indica que las rutas de pantalla, botones, EEPROM externa y audio se han probado en hardware SF32LB52; también describe cómo conectar un LED RGB externo, pero no indica que se haya probado. Tampoco fija una revisión física de la placa ni identifica el modelo exacto del módulo OLED.
+- Una placa SF32LB52 que use la variante ArduinoCore-Zephyr `sf32lb52_devkit_lcd_sf32lb525uc6`, además de los periféricos externos descritos abajo. El README indica que las rutas de pantalla, botones, EEPROM externa y audio se han probado en hardware SF32LB52; también documenta una ruta para un LED RGB, pero no indica ningún resultado de prueba. Tampoco fija una revisión física de la placa ni identifica el modelo exacto del módulo OLED.
 - Una instalación de Arduino conocida como funcional y el paquete de placas OpenSiFli correspondiente. El nombre de la variante define una base de software y un mapa de pines, pero no demuestra que todas las unidades SF32LB52-DevKit-LCD coincidan con el cableado externo del proyecto; compruebe el esquemático de la placa concreta antes de conectar periféricos.
 - El commit exacto de Arduboy2-SiFli, la versión del core o paquete Arduino, el sistema operativo del host y la herramienta de carga.
 - Una conexión USB de datos y un medio para capturar el registro serie y observar la pantalla, los botones y la salida de audio.
@@ -85,7 +85,7 @@ Antes de empezar, tenga a mano lo siguiente:
 | Paquete o servicio | Versión o revisión necesaria | Función | Estado | Dónde obtenerlo | Compatibilidad y notas de actualización |
 |:-------------------|:----------------------------|:--------|:-------|:----------------|:----------------------------------------|
 | OpenSiFli/Arduboy2-SiFli | Fije y registre un commit; este artículo no congela una revisión | Capa de compatibilidad SF32 y ejemplos | Obligatorio | [Repositorio](https://github.com/OpenSiFli/Arduboy2-SiFli) | Vuelva a comprobar el destino de placa, las dependencias y la API admitida en el commit elegido |
-| OpenSiFli/ArduinoCore-zephyr y paquete de placa | Hay que determinar y registrar el commit/versión compatible a partir de la adaptación | Entorno Arduino, definición de placa, compilador e integración de carga | Obligatorio | [Repositorio](https://github.com/OpenSiFli/ArduinoCore-zephyr) | No sustituya el núcleo ni el paquete de placa por otro más reciente sin compilar desde cero y repetir las pruebas de periféricos |
+| OpenSiFli/ArduinoCore-zephyr y paquete de placa | Hay que determinar y registrar el commit/versión compatible a partir de la adaptación | Entorno de ejecución Arduino, definición de placa, compilador e integración de carga | Obligatorio | [Repositorio](https://github.com/OpenSiFli/ArduinoCore-zephyr) | No sustituya el core Arduino ni el paquete de placa por otro más reciente sin compilar desde cero y repetir las pruebas de periféricos |
 | Sketch de prueba y recursos del juego | Un ejemplo del repositorio o un sketch con licencia independiente; registre las revisiones y licencias de los recursos | Prueba de la API y de la ruta seleccionadas del producto | Elegir uno | [Ejemplos de Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Este artículo no concede derechos para redistribuir juegos, fuentes, imágenes o sonidos de terceros |
 
 </div>
@@ -225,7 +225,7 @@ No pase de una demostración de la adaptación a hardware personalizado o prueba
 
 - ¿Qué placa SF32, pantalla, botones, altavoz y fuente de alimentación exactos están admitidos y cuáles siguen siendo hipótesis?
 - ¿Qué frecuencia de fotogramas, latencia de entrada, comportamiento de audio, tiempo de inicio y perfil de corriente se midieron en la configuración de producto prevista?
-- ¿Cuánta Flash y RAM consumen el juego, recursos, fuentes y entorno de ejecución, incluidos los casos de contenido más exigentes?
+- ¿Cuánta Flash y RAM consumen el juego, recursos, fuentes y entorno de ejecución, incluido el contenido del peor caso?
 - ¿Qué ocurre tras un reinicio, caída de tensión, pérdida de alimentación durante el guardado, recursos dañados, carga fallida o actualización incompleta?
 - ¿Qué partes de la adaptación mantienen el equipo del producto, OpenSiFli, SiFli o la comunidad original de Arduboy2?
 - ¿Son compatibles las licencias de todos los juegos, fuentes, imágenes, sonidos y bibliotecas con el modelo de distribución previsto?
@@ -239,6 +239,7 @@ Traslade a la sección [Hardware](../hardware/index.md) el dispositivo SF32 sele
 La referencia ha cumplido su función de desarrollo de producto cuando otro ingeniero puede reconstruir la adaptación, reproducir los resultados de periféricos, explicar cada ajuste específico de placa y revisar la evidencia antes de aprobar una placa personalizada o ampliar la biblioteca de juegos.
 
 ## Fuentes de referencia { #authoritative-sources }
+
 - [OpenSiFli/Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli)
 - [MLXXXp/Arduboy2](https://github.com/MLXXXp/Arduboy2)
 - [OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr)

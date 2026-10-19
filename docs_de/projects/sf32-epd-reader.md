@@ -124,7 +124,7 @@ flowchart LR
     FS["Integriertes Flash-Dateisystem"] --> EL["EPUB-Liste / ZIP / XML / XHTML"]
     SD["TF-Karte: EPUB, Schriften, settings.cfg"] --> EL
     SD --> FM["FreeType-Schriftverwaltung"]
-    EL --> LO["Seiteneinteilung und Lesestatus"]
+    EL --> LO["Seitenumbruch und Lesestatus"]
     FM --> LO
     IM["PNG-/JPEG-Decodierung"] --> LO
     BTN["Tasten"] --> UI["UI-Zustandsautomat"]
@@ -184,7 +184,7 @@ Die wichtigsten Fehlerbereiche sind Archiv-/XHTML-Parsing der Inhalte, Schriftda
 1. Vollaktualisierungsintervalle von 5, 10, 20 und „every time“ (bei jeder Aktualisierung; `0`) prüfen und Geisterbilder, Blinken, Aktualisierungszeit sowie Seitenkonsistenz dokumentieren.
 2. Waveform, VCOM und Timing des Zielpanels über den erwarteten Temperaturbereich validieren. Keine Werte aus einer anderen Panelkonfiguration übernehmen.
 3. Vom Nutzer wählbare Timeouts von 5/10/30 Minuten, 1 Stunde und „never“ (nie) prüfen. Zusätzlich die unabhängige Standardeinstellung testen, die nach fünf Stunden ohne Interaktion in der Hauptschleife die Abschaltseite öffnet.
-4. Akku-Prozentanzeige und Ladesymbol in der Statusleiste prüfen, einschließlich des Ausblendens des Ladesymbols bei 98 %. Strom bei Seiteneinteilung, Teil- und Vollaktualisierung, Leerlauf, Aufwecken/Schlafen der TF-Karte, niedrigem Akkustand, Laden und Herunterfahren messen.
+4. Akku-Prozentanzeige und Ladesymbol in der Statusleiste prüfen, einschließlich des Ausblendens des Ladesymbols bei 98 %. Strom bei Seitenumbruch, Teil- und Vollaktualisierung, Leerlauf, Aufwecken/Schlafen der TF-Karte, niedrigem Akkustand, Laden und Herunterfahren messen.
 
 **Aufzubewahrende Nachweise:** Panel-/Waveform-Version, Temperatur, Seitenbilder, Aktualisierungsstatistiken, Stromverläufe, Akkuzustände sowie Ergebnisse zu Aufwecken und Herunterfahren.
 

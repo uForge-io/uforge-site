@@ -1,6 +1,6 @@
 ---
 icon: lucide/monitor
-description: "Como o controlador de display SF32 transfere pixels preparados ao painel, incluindo a seleção da interface, os caminhos de flush, a atualização parcial e a inicialização do painel."
+description: "Como o controlador de display SF32 transfere pixels preparados ao painel, incluindo a seleção da interface, os caminhos de flush, a atualização parcial e o bring-up do painel."
 tags:
   - Gráficos
 ---
@@ -42,7 +42,7 @@ A escolha do painel afeta a largura de banda, a estratégia de buffers, o uso de
 
 </div>
 
-Por exemplo, um painel SPI/QSPI pequeno pode favorecer atualizações parciais, enquanto um painel RGB/DPI exige um orçamento de largura de banda para a leitura contínua do display (scanout). Não escolha a interface apenas pelo throughput teórico: considere o formato de pixel, a resolução, o comportamento de atualização, a GRAM do painel e os demais usuários de PSRAM.
+Por exemplo, um painel SPI/QSPI pequeno pode favorecer atualizações parciais, enquanto um painel RGB/DPI exige um orçamento de largura de banda para a leitura contínua do display (scanout). Não escolha a interface apenas pela vazão teórica: considere o formato de pixel, a resolução, o comportamento de atualização, a GRAM do painel e os demais usuários de PSRAM.
 
 ## Matriz de interfaces por dispositivo { #per-device-interface-matrix }
 
@@ -111,9 +111,9 @@ A maioria das UIs embarcadas não precisa redesenhar a tela inteira a cada quadr
 
 A atualização da tela inteira é adequada para telas com muitas animações, transições ou painéis que naturalmente fazem a varredura a partir de um framebuffer completo. A escolha depende da largura de banda da interface de display, do comportamento do painel e do orçamento de memória, não apenas da configuração do framework de UI.
 
-## Sequência de inicialização do painel { #panel-bring-up-sequence }
+## Sequência de bring-up do painel { #panel-bring-up-sequence }
 
-Inicialize o painel por etapas antes de depurar widgets ou o comportamento da aplicação:
+Faça o bring-up do painel por etapas antes de depurar widgets ou o comportamento da aplicação:
 
 1. Verifique as linhas de alimentação, a temporização do reset, os pinos de retroiluminação e habilitação e o consumo básico de corrente.
 2. Envie a sequência de inicialização do fabricante do painel exatamente como foi fornecida.
@@ -123,7 +123,7 @@ Inicialize o painel por etapas antes de depurar widgets ou o comportamento da ap
 6. Habilite atualização parcial, DMA, TurboPixel e aceleração gráfica, um recurso por vez.
 7. Teste os caminhos de suspensão, display desligado, retomada e reinicialização.
 
-Primeiro valide cores sólidas e padrões com uma configuração mínima da interface prevista. Depois de adicionar DMA, compactação ou aceleração, repita os testes por cada caminho novo antes de testar a UI completa do LVGL.
+Primeiro valide cores sólidas e padrões com uma configuração mínima da interface prevista. Depois de adicionar DMA, compactação ou aceleração, repita os testes em cada caminho novo antes de testar a UI completa do LVGL.
 
 ## Isole falhas no caminho de display { #isolate-display-path-failures }
 
@@ -139,7 +139,7 @@ Trate cada etapa como um limite independente. Isso evita alterar ao mesmo tempo 
 | Preenchimentos sólidos funcionam, mas as cores estão erradas | Formato de pixel entre o renderizador e o painel | Exiba barras de teste vermelhas, verdes, azuis, pretas e brancas. | Ordem RGB/BGR, ordem de bytes, configuração de profundidade de cor ou conversão de formato. |
 | A imagem fica deslocada, cortada ou apresenta tearing | Endereçamento e sincronização | Desenhe uma grade e, em seguida, teste repetidamente uma região fixa de atualização. | Coordenadas da janela, stride, temporização do painel, reutilização de buffer ou sincronização incompleta de DMA. |
 | A UI estática funciona, mas a animação engasga | Limites de renderização, transferência e memória | Meça separadamente o tempo de renderização e o tempo até a conclusão do flush. | Área redesenhada excessiva, contenção de PSRAM, interface lenta ou estratégia de buffers inadequada. |
-| Artefatos aparecem somente após suspensão/retomada | Transição de estado de energia | Repita o teste de preenchimento/grade após cada caminho compatível de desligamento e retomada do display. | Estado do painel perdido, reset/inicialização omitidos, sequência dos trilhos ou estado obsoleto de cache/buffer. |
+| Artefatos aparecem somente após suspensão/retomada | Transição de estado de energia | Repita o teste de preenchimento/grade após cada caminho compatível de desligamento e retomada do display. | Estado do painel perdido, reset/inicialização omitidos, sequenciamento das linhas de alimentação ou estado obsoleto de cache/buffer. |
 | Um recurso falha somente quando habilitado | Caminho opcional específico | Habilite DMA, atualização parcial, ePicasso ou TurboPixel, um por vez. | Configuração incompatível, regra de alinhamento/cache ou erro de integração do driver. |
 
 </div>
@@ -177,7 +177,7 @@ Antes de considerar completo o caminho de display, registre as escolhas que outr
 - Tempo de renderização e de transferência medidos, tráfego de PSRAM de pico/médio quando relevante e corrente para estados representativos da UI.
 - Resultados dos testes de suspensão, display desligado, retomada e recuperação, incluindo o comportamento após uma transferência com falha ou interrompida.
 
-Esse registro transforma uma inicialização pontual do display em uma integração de produto reproduzível. Valide-o novamente sempre que houver mudança no painel, SDK, organização da memória, formato de pixel ou driver de display.
+Esse registro transforma um resultado pontual de bring-up do display em uma integração de produto reproduzível. Valide-o novamente sempre que houver mudança no painel, SDK, organização da memória, formato de pixel ou driver de display.
 
 ## Principais conclusões { #key-takeaways }
 

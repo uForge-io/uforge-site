@@ -49,17 +49,17 @@ Chaque tableau couvre un bloc fonctionnel du schéma. La colonne « S'applique �
 | 7 | Mesure de la tension de batterie : la puce achemine déjà VBAT (ou VBATS) vers un canal GPADC interne ; ne pas relier aussi VBAT à une broche GPADC | Toutes les variantes | Obligatoire |
 | 8 | <span class="flag-red">La tension d'alimentation des broches VCC et VBAT est de 3,2 V–4,7 V</span> | 520/3/5/7 uniquement | Obligatoire |
 | 9 | Les connexions BUCK_LX et BUCK_FB sont correctes | Toutes les variantes | Obligatoire |
-| 10 | Prévoyez un point de test ou un condensateur de filtrage facilement accessible pour mesurer la tension de sortie VDD_VOUT1 | Toutes les variantes | Obligatoire |
-| 11 | Prévoyez un point de test ou un condensateur de filtrage facilement accessible pour mesurer la tension de sortie VDD_VOUT2 | Toutes les variantes | Obligatoire |
-| 12 | Prévoyez un point de test ou un condensateur de filtrage facilement accessible pour mesurer la tension de sortie VDD_RET | Toutes les variantes | Obligatoire |
-| 13 | Prévoyez un point de test ou un condensateur de filtrage facilement accessible pour mesurer la tension de sortie VDD_RTC | Toutes les variantes | Obligatoire |
+| 10 | La sortie VDD_VOUT1 dispose d'un point de test, ou d'un condensateur de filtrage permettant de mesurer facilement la tension | Toutes les variantes | Obligatoire |
+| 11 | La sortie VDD_VOUT2 dispose d'un point de test, ou d'un condensateur de filtrage permettant de mesurer facilement la tension | Toutes les variantes | Obligatoire |
+| 12 | La sortie VDD_RET dispose d'un point de test, ou d'un condensateur de filtrage permettant de mesurer facilement la tension | Toutes les variantes | Obligatoire |
+| 13 | La sortie VDD_RTC dispose d'un point de test, ou d'un condensateur de filtrage permettant de mesurer facilement la tension | Toutes les variantes | Obligatoire |
 | 14 | AVDD_BRF est alimenté via VSYS | 520/3/5/7 uniquement | Obligatoire |
 | 15 | AVDD33_AUD est alimenté via LDO2 | 520/3/5/7 uniquement | Obligatoire |
 | 16 | VSYS est une alimentation à usage interne du MCU — ne pas l'utiliser pour alimenter d'autres périphériques | 520/3/5/7 uniquement | Obligatoire |
 | 17 | LDO2_OUT est recommandé pour alimenter la mémoire, les capteurs et les périphériques similaires ; un interrupteur de charge peut être ajouté pour commander leur alimentation | 520/3/5/7 uniquement | Obligatoire |
-| 18 | <span class="flag-red">La somme des courants de crête de tous les périphériques alimentés par LDO2 est au plus de 150 mA</span> | 520/3/5/7 uniquement | Obligatoire |
+| 18 | <span class="flag-red">La somme des courants de crête de tous les périphériques alimentés par LDO2 ne dépasse pas 150 mA</span> | 520/3/5/7 uniquement | Obligatoire |
 | 19 | LDO3_OUT est recommandé pour alimenter le moteur de vibration | 520/3/5/7 uniquement | Obligatoire |
-| 20 | <span class="flag-red">La somme des courants de crête de tous les périphériques alimentés par LDO3 est au plus de 150 mA</span> | 520/3/5/7 uniquement | Obligatoire |
+| 20 | <span class="flag-red">La somme des courants de crête de tous les périphériques alimentés par LDO3 ne dépasse pas 150 mA</span> | 520/3/5/7 uniquement | Obligatoire |
 | 21 | L'écran LCD nécessite une alimentation LDO dédiée à faible courant de repos (Iq) | Toutes les variantes | Obligatoire |
 | 22 | Il est recommandé d'alimenter la LED du capteur de fréquence cardiaque depuis VBAT | Toutes les variantes | Obligatoire |
 | 23 | L'entrée de charge nécessite un circuit OVP | Toutes les variantes | Obligatoire |
@@ -77,7 +77,7 @@ Chaque tableau couvre un bloc fonctionnel du schéma. La colonne « S'applique �
     Le point 5 de la source indique 5,15–5,55 V pour le choix d'un OVLO réglable, tandis que le point 1 reprend la vérification VBUS de 4,6–5,5 V du classeur. Ne pas interpréter 5,55 V comme une tension continue admissible sur VBUS. La [section consacrée au système d'alimentation](SF32LB52x_schematic_design.md#52-power-system) explique les différences entre les sources et cite une autre plage de sélection OVP tirée de la note d'application. Avant d'accepter la conception, confirmer auprès de SiFli les seuils et les limites de fonctionnement du composant choisi.
 
 !!! note "Source et portée des valeurs de VBUS"
-    Electrical Specification-A3 indique une plage d'alimentation VBUS de 4,5–5,5 V. La note d'application des variantes sur batterie donne 4,6–5,5 V dans son tableau d'alimentation et exige au moins 4,6 V à la broche VBUS pendant le courant de charge maximal. Ces valeurs relèvent de contextes différents ; tenez compte de la tolérance de l'alimentation et de la chute de tension lors de la vérification de la tension minimale au niveau de la puce.
+    La spécification électrique A3 (Electrical Specification-A3) indique une plage d'alimentation VBUS de 4,5–5,5 V. La note d'application des variantes sur batterie donne 4,6–5,5 V dans son tableau d'alimentation et exige au moins 4,6 V à la broche VBUS pendant le courant de charge maximal. Ces valeurs relèvent de contextes différents ; tenez compte de la tolérance de l'alimentation et de la chute de tension lors de la vérification de la tension minimale au niveau de la puce.
 
 ### 5.8.3. Condensateurs et inductances d'alimentation { #583-power-supply-capacitors-and-inductors }
 
@@ -107,7 +107,7 @@ Chaque tableau couvre un bloc fonctionnel du schéma. La colonne « S'applique �
 | 18 | Condensateur AUD_VREF = 1 µF | Toutes les variantes | Obligatoire |
 | 19 | <span class="flag-red flag-yellow">Condensateur VSYS = 4,7 µF</span> | <span class="flag-red flag-yellow">520/3/5/7 uniquement</span> | Obligatoire |
 | 20 | Condensateur GPADC VREFP = 4,7 µF | Toutes les variantes | Obligatoire |
-| 21 | La référence de l'inductance BUCK figure dans la [liste de fournisseurs approuvés SF32][SiFli Approved Vendor List] (AVL) | Toutes les variantes | Obligatoire |
+| 21 | La référence de l'inductance BUCK figure dans la [liste des fournisseurs approuvés SiFli (SiFli Approved Vendor List)][SiFli Approved Vendor List] (AVL) | Toutes les variantes | Obligatoire |
 | 22 | Si l'inductance BUCK ne figure pas dans l'AVL, elle doit respecter L = 4,7 µH, DCR ≤0,4 Ω et Isat ≥450 mA | Toutes les variantes | Obligatoire |
 | 23 | <span class="flag-red">En présence d'un GPS ou d'autres périphériques sensibles aux interférences, prévoir sur BUCK_LX une empreinte pour un condensateur de dérivation vers la masse ; sa valeur sera déterminée à partir des résultats des essais</span> | <span class="flag-red">Toutes les variantes</span> | Obligatoire |
 | 24 | <span class="flag-red">Le courant de repos du DCDC sélectionné est enregistré et répond aux exigences du projet</span> | <span class="flag-red">Toutes les variantes</span> | Obligatoire |
@@ -157,10 +157,10 @@ Chaque tableau couvre un bloc fonctionnel du schéma. La colonne « S'applique �
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | Indiquez sur le schéma une impédance caractéristique de 50 Ω en asymétrique pour le signal ANT | Toutes les variantes | Obligatoire |
-| 2 | Prévoyez un réseau d'adaptation en π sur le signal ANT : un condensateur parallèle NC (non monté) et un condensateur série de 15 pF | Toutes les variantes | Obligatoire |
-| 3 | Si un filtrage des émissions parasites est nécessaire, prévoir un réseau d'adaptation en π comprenant une inductance série de 2,7 nH et un condensateur parallèle de 2 pF | Toutes les variantes | Optionnel |
-| 4 | <span class="flag-red">Si une commande externe du PA/LNA est nécessaire, relier PA00 à RX_EN et PA01 à TX_EN</span> | Toutes les variantes | Optionnel |
+| 1 | Le signal ANT est annoté de l'exigence d'impédance caractéristique de 50 Ω en asymétrique | Toutes les variantes | Obligatoire |
+| 2 | Un réseau d'adaptation en π est réservé sur le signal ANT : un condensateur parallèle NC (non monté) et un condensateur série de 15 pF | Toutes les variantes | Obligatoire |
+| 3 | Si un filtrage des émissions parasites est nécessaire, un réseau d'adaptation en π est réservé, avec une inductance série de 2,7 nH et un condensateur parallèle de 2 pF | Toutes les variantes | Optionnel |
+| 4 | <span class="flag-red">Si une commande externe du PA/LNA est nécessaire, PA00 est relié à RX_EN et PA01 à TX_EN</span> | Toutes les variantes | Optionnel |
 
 </div>
 
@@ -206,14 +206,14 @@ Chaque tableau couvre un bloc fonctionnel du schéma. La colonne « S'applique �
 | 6 | Si le courant à l'arrêt est un critère important, <span class="flag-red">commander l'alimentation de la mémoire Flash externe par PA11</span>, niveau haut pour la mise sous tension, niveau bas pour la coupure | 520/3/5/7 uniquement | Obligatoire |
 | 7 | Si le courant à l'arrêt est un critère important, <span class="flag-red">commander l'alimentation de la mémoire Flash externe par PA21</span>, niveau haut pour la mise sous tension, niveau bas pour la coupure | <span class="flag-red">52B/D/E/G/J</span> | Obligatoire |
 | 8 | Si le courant à l'arrêt est un critère important, <span class="flag-red">commander l'alimentation de VDD_SIP par PA21</span>, niveau haut pour la mise sous tension, niveau bas pour la coupure | <span class="flag-red">52B/D/E/G/J</span> | Obligatoire |
-| 9 | <span class="flag-red">Lorsque MPI pilote une flash NOR de 32 MB ou plus, l'alimentation de la flash doit être commutable via PA21 afin de pouvoir être coupée</span> | <span class="flag-red">52B/D/E/G/J</span> | Obligatoire |
+| 9 | <span class="flag-red">Lorsque MPI pilote une Flash NOR de 32 MB ou plus, l'alimentation de la Flash doit être commutable via PA21 afin de pouvoir être coupée</span> | <span class="flag-red">52B/D/E/G/J</span> | Obligatoire |
 | 10 | Si SD1 se connecte à un composant SD NAND, les connexions de signaux sont correctes | Toutes les variantes | Obligatoire |
 | 11 | <span class="flag-red">Les lignes CLK et données de la Flash ont des résistances série de 33 Ω</span> | <span class="flag-red">Toutes les variantes</span> | Obligatoire |
 | 12 | <span class="flag-red">Avec deux mémoires Flash NOR externes, CLK/D0–D3 sont partagés. PA12 sert de CS pour la première mémoire et PA26 pour la seconde. PA26 dispose d'un pull-up interne et convient donc à un CS actif à l'état bas : à la réinitialisation, son niveau par défaut est haut (mémoire désélectionnée).</span> | <span class="flag-red">Toutes les variantes</span> | Obligatoire |
 | 13 | <span class="flag-red">Lorsque deux Flash NOR externes sont utilisées, la première doit être de 16 MB ; la seconde peut être de 8 MB ou 16 MB</span> | <span class="flag-red">Toutes les variantes</span> | Obligatoire |
 | 14 | Le niveau logique E/S du composant périphérique correspond à celui de la puce principale | Toutes les variantes | Obligatoire |
-| 15 | <span class="flag-red">La référence NOR Flash choisie figure parmi les composants qualifiés dans le guide de sélection des composants clés ; sinon, la ROM risque de ne pas la reconnaître et le système de ne pas démarrer</span> | <span class="flag-red">Toutes les variantes</span> | Obligatoire |
-| 16 | <span class="flag-red">La référence SPI/SD NAND Flash choisie figure parmi les composants qualifiés dans le guide de sélection des composants clés ; sinon, la ROM risque de ne pas la reconnaître et le système de ne pas démarrer</span> | <span class="flag-red">Toutes les variantes</span> | Obligatoire |
+| 15 | <span class="flag-red">La référence de Flash NOR choisie figure parmi les composants qualifiés dans le guide de sélection des composants clés ; sinon, la ROM risque de ne pas la reconnaître et le système de ne pas démarrer</span> | <span class="flag-red">Toutes les variantes</span> | Obligatoire |
+| 16 | <span class="flag-red">La référence de Flash SPI/SD NAND choisie figure parmi les composants qualifiés dans le guide de sélection des composants clés ; sinon, la ROM risque de ne pas la reconnaître et le système de ne pas démarrer</span> | <span class="flag-red">Toutes les variantes</span> | Obligatoire |
 
 </div>
 
@@ -225,17 +225,17 @@ Chaque tableau couvre un bloc fonctionnel du schéma. La colonne « S'applique �
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | Pour un écran QSPI, vérifier le câblage des signaux | Toutes les variantes | Obligatoire |
-| 2 | Pour un écran à interface 8080, vérifier le câblage des signaux | Toutes les variantes | Obligatoire |
-| 3 | Pour un écran JDI, vérifier le câblage des signaux | Toutes les variantes | Obligatoire |
-| 4 | Vérifiez le câblage de l'interface QSPI de l'écran LCD ; <span class="flag-red">les lignes CLK et données doivent comporter des résistances série de 100 Ω</span> | Toutes les variantes | Obligatoire |
+| 1 | Avec un écran QSPI, les connexions de signaux sont correctes | Toutes les variantes | Obligatoire |
+| 2 | Avec un écran à interface 8080, les connexions de signaux sont correctes | Toutes les variantes | Obligatoire |
+| 3 | Avec un écran JDI, les connexions de signaux sont correctes | Toutes les variantes | Obligatoire |
+| 4 | Les connexions des signaux QSPI du LCD sont correctes ; <span class="flag-red">les lignes CLK et données comportent des résistances série de 100 Ω</span> | Toutes les variantes | Obligatoire |
 | 5 | La connexion LCD RSTB est correcte (PA0 recommandé) | Toutes les variantes | Obligatoire |
 | 6 | La connexion LCDC TE est correcte (se connecte au signal TE ou Fmark du panneau) | Toutes les variantes | Obligatoire |
-| 7 | Les signaux TP suivent l'allocation de broches recommandée (référez-vous au fichier de configuration I/O de l'EVB) | Toutes les variantes | Obligatoire |
-| 8 | Confirmez la prise en charge requise de l'affichage permanent (Always-on Display) | Toutes les variantes | Obligatoire |
+| 7 | Les signaux TP suivent l'allocation de broches recommandée (voir le fichier de configuration des E/S de l'EVB) | Toutes les variantes | Obligatoire |
+| 8 | L'exigence de prise en charge de l'affichage permanent (Always-on Display) est confirmée | Toutes les variantes | Obligatoire |
 | 9 | Un LDO à faible Iq alimente l'afficheur ; <span class="flag-red">PA30 est recommandé pour contrôler l'activation du LDO</span> | Toutes les variantes | Obligatoire |
-| 10 | Confirmez si l'alimentation du panneau tactile (TP) et de l'écran LCD doit être commandée ensemble ou séparément | Toutes les variantes | Obligatoire |
-| 11 | Si l'écran LCD intègre un capteur de luminosité, prévoir également son alimentation | Toutes les variantes | Obligatoire |
+| 10 | L'exigence d'indépendance de l'alimentation du panneau tactile (TP) et de l'écran LCD (commande commune ou séparée) est confirmée | Toutes les variantes | Obligatoire |
+| 11 | Si l'écran LCD intègre un capteur de luminosité, l'alimentation de ce capteur est également prévue | Toutes les variantes | Obligatoire |
 | 12 | Commande du rétroéclairage LCD TFT : s'il s'allume au niveau haut et s'éteint au niveau bas (actif à l'état haut), utiliser un GPIO avec pull-down (PD) ; s'il s'allume au niveau bas et s'éteint au niveau haut (actif à l'état bas), utiliser un GPIO avec pull-up (PU) | Toutes les variantes | Obligatoire |
 | 13 | <span class="flag-red">LCD SPI : mode 3 fils — CS vers PA03, CLK vers PA04, DATA vers PA05 ; mode 4 fils — CS vers PA03, CLK vers PA04, DATA vers PA05, DC vers PA06</span> | Toutes les variantes | Obligatoire |
 | 14 | Pour un afficheur Sharp Memory/JDI relié à l'interface JDI du MCU, connecter VCOM et VB à MCU-PA24, VA à MCU-PA25, R0/G0/B0 à MCU-R1/G1/B1, R1/G1/B1 à MCU-R2/G2/B2, GSP à MCU-VST, BSP à MCU-HST, GCK à MCU-VCK, BCK à MCU-HCK, GEN à MCU-ENB et INTB à MCU-XRST | Toutes les variantes | Obligatoire |
@@ -251,7 +251,7 @@ Chaque tableau couvre un bloc fonctionnel du schéma. La colonne « S'applique �
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | Reliez l'entrée GPADC à une broche compatible <span class="flag-red">(PA28–PA34 ; 7 GPIO peuvent être configurés en entrées GPADC)</span> | Toutes les variantes | Optionnel |
+| 1 | L'entrée GPADC est reliée à la broche correspondante <span class="flag-red">(PA28–PA34 ; 7 GPIO peuvent être configurés en entrées GPADC)</span> | Toutes les variantes | Optionnel |
 | 2 | La tension entrant dans le GPADC reste dans la plage 0–3,3 V | Toutes les variantes | Optionnel |
 | 3 | Pour toute entrée à pont diviseur résistif mesurée par le GPADC, utiliser des résistances de pont diviseur à tolérance de 1 % ; <span class="flag-red">chaque canal GPADC dispose d'un condensateur de filtrage de 100 nF placé près de la broche de la puce</span> | Toutes les variantes | Obligatoire |
 
@@ -280,7 +280,7 @@ Chaque tableau couvre un bloc fonctionnel du schéma. La colonne « S'applique �
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | Prévoyez les protections EOS, ESD et OVP nécessaires sur l'interface de charge | Toutes les variantes | Obligatoire |
+| 1 | L'interface de charge dispose d'une protection EOS, ESD et OVP | Toutes les variantes | Obligatoire |
 | 2 | L'interface batterie dispose d'un composant ESD | Toutes les variantes | Obligatoire |
 | 3 | L'interface antenne dispose d'un composant ESD | Toutes les variantes | Obligatoire |
 | 4 | Les interfaces d'alimentation LCD et TP disposent de composants ESD | Toutes les variantes | Obligatoire |
@@ -297,7 +297,7 @@ Chaque tableau couvre un bloc fonctionnel du schéma. La colonne « S'applique �
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | Prévoyez des pull-up I2C de valeur adaptée ; pour un fonctionnement à 400 kHz, des résistances de 2,2 kΩ sont recommandées. Alimentez les pull-up depuis le domaine de tension du périphérique et coupez leur alimentation en même temps que celle du périphérique | Toutes les variantes | Obligatoire |
+| 1 | L'I2C dispose de pull-up de valeur adaptée ; pour un fonctionnement à 400 kHz, des résistances de 2,2 kΩ sont recommandées. Les pull-up sont alimentés depuis le domaine de tension du périphérique, et leur alimentation est coupée en même temps que celle du périphérique | Toutes les variantes | Obligatoire |
 | 2 | Le signal d'interruption I2C prend en charge le réveil matériel lorsque requis | Toutes les variantes | Obligatoire |
 | 3 | Les périphériques I2C, tels que les accéléromètres, les capteurs de fréquence cardiaque et les capteurs géomagnétiques, permettent de lire toutes les données en une seule transaction (burst) | Toutes les variantes | Obligatoire |
 | 4 | Les périphériques partageant un même bus I2C ont des adresses distinctes | Toutes les variantes | Obligatoire |
@@ -331,7 +331,7 @@ Chaque tableau couvre un bloc fonctionnel du schéma. La colonne « S'applique �
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | Vérifiez le croisement des signaux SPI : SDO côté MCU vers SDI du périphérique, et SDI côté MCU vers SDO du périphérique | Toutes les variantes | Optionnel |
+| 1 | La connexion SPI est correcte : SDO côté MCU vers SDI du périphérique, et SDI côté MCU vers SDO du périphérique | Toutes les variantes | Optionnel |
 | 2 | Les contraintes temporelles du périphérique SPI sont respectées | Toutes les variantes | Optionnel |
 | 3 | Le niveau logique E/S du composant périphérique correspond à celui de la puce principale | Toutes les variantes | Optionnel |
 
@@ -345,8 +345,8 @@ Chaque tableau couvre un bloc fonctionnel du schéma. La colonne « S'applique �
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | PA18/PA19 (multiplexées en DBG_UART) constituent l'interface de téléchargement et de débogage ; prévoir des points de test et <span class="flag-red">une résistance série de 100 Ω</span> | Toutes les variantes | Obligatoire |
-| 2 | Croisez les signaux UART : RXD du MCU vers TXD du périphérique, et TXD du MCU vers RXD du périphérique | Toutes les variantes | Obligatoire |
+| 1 | PA18/PA19 (multiplexées en DBG_UART) constituent l'interface de téléchargement et de débogage ; des points de test sont réservés, <span class="flag-red">avec une résistance série de 100 Ω</span> | Toutes les variantes | Obligatoire |
+| 2 | Lors de la connexion à un périphérique, RXD du MCU est relié à TXD du périphérique, et TXD du MCU à RXD du périphérique | Toutes les variantes | Obligatoire |
 | 3 | Si PA35/PA36 sont multiplexées en UART vers un périphérique, celui-ci doit être hors tension à la réinitialisation du MCU, ou le logiciel doit maintenir ces broches à l'état bas | Toutes les variantes | Obligatoire |
 | 4 | Le niveau logique E/S du composant périphérique correspond à celui de la puce principale | Toutes les variantes | Obligatoire |
 
@@ -373,9 +373,9 @@ Chaque tableau couvre un bloc fonctionnel du schéma. La colonne « S'applique �
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | Vérifiez le câblage de l'interface USB | Toutes les variantes | Optionnel |
+| 1 | La connexion de l'interface USB est correcte | Toutes les variantes | Optionnel |
 | 2 | L'interface USB dispose d'une protection ESD | Toutes les variantes | Optionnel |
-| 3 | Si l'USB reste activé en fonctionnement normal (hors veille), l'hôte peut détecter le branchement et le débranchement. Pour permettre cette détection lorsque le MCU est en veille, prévoir un pont diviseur sur VBUS qui applique à la broche de réveil du MCU une tension compatible avec son niveau d'E/S. Il est recommandé d'utiliser aussi cette broche pour détecter le branchement du chargeur | Toutes les variantes | Optionnel |
+| 3 | Si l'USB reste activé en fonctionnement normal (hors veille), l'hôte peut détecter le branchement et le débranchement. Pour permettre cette détection lorsque le MCU est en veille, un pont diviseur sur VBUS est ajouté, qui applique à la broche de réveil du MCU une tension compatible avec son niveau d'E/S. Il est recommandé d'utiliser aussi cette broche pour détecter le branchement du chargeur | Toutes les variantes | Optionnel |
 
 </div>
 
@@ -387,13 +387,13 @@ Chaque tableau couvre un bloc fonctionnel du schéma. La colonne « S'applique �
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | Les LDO et DCDC utilisent une entrée d'activation active à l'état haut. Si la sortie est désactivée par défaut, prévoir une résistance de pull-down entre EN et la masse, de 1 MΩ à 5,1 MΩ, dimensionnée selon les exigences de consommation du projet | Toutes les variantes | Obligatoire |
-| 2 | Pour la commutation d'alimentation par MOSFET, utiliser une combinaison PMOS+NMOS. Le niveau haut commande la mise sous tension et le niveau bas la coupure ; la broche de commande est reliée à la masse par une résistance pull-down de 1 MΩ | Toutes les variantes | Obligatoire |
+| 1 | Les LDO et DCDC utilisent une entrée d'activation active à l'état haut. Si la sortie est désactivée par défaut, une résistance de pull-down de 1 MΩ à 5,1 MΩ est ajoutée entre EN et la masse, dimensionnée selon les exigences de consommation du projet | Toutes les variantes | Obligatoire |
+| 2 | La commutation d'alimentation par MOSFET utilise une combinaison PMOS+NMOS. Le niveau haut commande la mise sous tension et le niveau bas la coupure ; la broche de commande est reliée à la masse par une résistance pull-down de 1 MΩ | Toutes les variantes | Obligatoire |
 | 3 | L'interrupteur d'alimentation de la flash externe est contrôlé par PA11 | 520/3/5/7 uniquement | Obligatoire |
 | 4 | <span class="flag-red">PA21 commande à la fois l'interrupteur d'alimentation de la Flash externe et celui de VDD_SIP</span> | <span class="flag-red">52A/D</span>[^52a-note] | Non précisé dans la source[^52a-category-note] |
 | 5 | Lorsqu'il alimente les pull-up des GPIO, VSYS reste toujours actif ; vérifier que cette contrainte respecte les exigences de consommation du projet | 520/3/5/7 uniquement | Obligatoire |
 | 6 | Si LDO2 ou LDO3 alimente les pull-up des GPIO, vérifier que la coupure de ce LDO reste compatible avec les exigences de conception | 520/3/5/7 uniquement | Obligatoire |
-| 7 | Faites commuter l'alimentation des pull-up I2C en même temps que l'alimentation E/S du périphérique afin d'éviter les courants de fuite | Toutes les variantes | Obligatoire |
+| 7 | L'alimentation des pull-up I2C commute en même temps que l'alimentation E/S du périphérique afin d'éviter les courants de fuite | Toutes les variantes | Obligatoire |
 | 8 | PA09 : le mettre à l'état haut à l'allumage de l'écran et le maintenir à l'état bas en veille | Révision silicium A2 ou antérieure | Obligatoire |
 | 9 | Le courant de repos requis en mode Deep Sleep (veille profonde) est défini et consigné | Toutes les variantes | Obligatoire |
 | 10 | <span class="flag-red">La somme des courants de repos de tous les périphériques sélectionnés en mode Deep Sleep est enregistrée et répond aux exigences du projet</span> | <span class="flag-red">Toutes les variantes</span> | Obligatoire |
@@ -416,7 +416,7 @@ Chaque tableau couvre un bloc fonctionnel du schéma. La colonne « S'applique �
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | Prévoyez des points de test pour VBAT, GND, PA18 (DBG_UART_RXD), PA19 (DBG_UART_TXD), VSYS et PA34, ainsi que pour les autres signaux nécessaires au téléchargement et au débogage | Toutes les variantes | Obligatoire |
+| 1 | Des points de test de téléchargement/débogage du programme sont réservés pour VBAT, GND, PA18 (DBG_UART_RXD), PA19 (DBG_UART_TXD), VSYS et PA34, ainsi que pour des points de test similaires | Toutes les variantes | Obligatoire |
 
 </div>
 

@@ -17,7 +17,7 @@ hide:
 
 # Cree la próxima generación<br>de dispositivos embebidos { #build-the-next-generationof-embedded-devices }
 
-***μForge.io*** es una plataforma de desarrollo de código abierto para soluciones innovadoras de semiconductores. Su oferta comienza con la familia SF32 de SiFli, compuesta por microcontroladores de consumo ultrabajo. Reúne en un solo lugar los recursos de toda la cadena: chips, módulos y placas de desarrollo, además de SDK, documentación y diseños de referencia preparados para producción. Así, los desarrolladores pueden llevar productos embebidos conectados, inteligentes y energéticamente eficientes desde la idea hasta la producción, con más rapidez y menos obstáculos de integración.
+***μForge.io*** es una plataforma de desarrollo de código abierto para soluciones innovadoras de semiconductores. Su oferta comienza con la familia SF32 de SiFli, compuesta por microcontroladores de consumo ultrabajo. Reúne en un solo lugar los recursos de toda la cadena: chips, módulos y placas de desarrollo, además de SDK, documentación y diseños de referencia preparados para producción. Así, los desarrolladores pueden llevar productos embebidos conectados, inteligentes y energéticamente eficientes desde la idea hasta la producción, con más rapidez y menos fricción.
 
 <div class="uf-hero-actions" markdown>
 
@@ -75,8 +75,8 @@ hide:
 <a class="uf-spotlight-item uf-spotlight-item--examples" href="projects/index.md" data-radius="230">
   <span class="uf-spotlight-item__art uf-spotlight-item__art--examples" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">Proyectos</span>
-  <span class="uf-spotlight-item__title">Relojes inteligentes y HMI</span>
-  <span class="uf-spotlight-item__copy">Ejemplos de aplicaciones de calidad profesional.</span>
+  <span class="uf-spotlight-item__title">Relojes y HMI</span>
+  <span class="uf-spotlight-item__copy">Ejemplos de aplicaciones de calidad de producción.</span>
 </a>
 
 </div>
@@ -84,7 +84,7 @@ hide:
 
 <div class="grid cards uf-quicklinks" markdown>
 
-- :fontawesome-solid-microchip:{ .uf-ql-icon .uf-purple } **Plataforma de hardware**
+- :fontawesome-solid-microchip:{ .uf-ql-icon .uf-purple } **Hardware**
 
     Microcontroladores, módulos, placas de desarrollo y diseños de referencia orientados a producción.
 
@@ -104,7 +104,7 @@ hide:
 
 - :fontawesome-solid-rocket:{ .uf-ql-icon .uf-pink } **Ejemplos**
 
-    Ejemplos de aplicaciones de calidad profesional para casos de uso embebidos habituales.
+    Ejemplos de aplicaciones de calidad de producción para casos de uso embebidos habituales.
 
     [Ver ejemplos :material-arrow-right:](develop/examples/index.md){ .uf-link-pink }
 
@@ -144,7 +144,7 @@ hide:
 
 ---
 
-## Microcontroladores SF32 disponibles [^1] { #supported-sf32-mcus .uf-center-heading }
+## Microcontroladores SF32 compatibles [^1] { #supported-sf32-mcus .uf-center-heading }
 
 <div class="grid cards uf-mcu-grid" markdown>
 

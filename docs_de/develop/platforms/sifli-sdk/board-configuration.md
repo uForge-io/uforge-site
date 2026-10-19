@@ -12,7 +12,7 @@ Die Board-Konfiguration ordnet die Firmware der realen Hardware zu. Dazu gehöre
 
 In SiFli-SDK ist `--board=<board_name>` der wichtigste Build-Parameter. Er bestimmt, welches Board-Support-Paket das Beispiel verwendet.
 
-Bei Dual-Core-Boards wird standardmäßig die HCPU-Konfiguration gewählt, wenn kein Core-Suffix angegeben ist. Für einen LCPU-Build hängen Sie `_lcpu` an den Board-Namen an; mit `_hcpu` wählen Sie HCPU ausdrücklich aus. Prüfen Sie, ob das Beispiel den gewählten Core unterstützt.
+Bei Dual-Core-Boards wird standardmäßig die HCPU-Konfiguration gewählt, wenn kein Core-Suffix angegeben ist. Für einen LCPU-Build hängen Sie `_lcpu` an den Boardnamen an; mit `_hcpu` wählen Sie HCPU ausdrücklich aus. Prüfen Sie, ob das Beispiel den gewählten Core unterstützt.
 
 ## Was die Board-Auswahl beeinflussen kann { #what-the-board-name-controls }
 
@@ -30,8 +30,8 @@ Das gewählte Board kann Folgendes beeinflussen:
 
 ## Praktische Regeln { #practical-rules }
 
-- Den Board-Namen nicht aus dem Marketingnamen erraten.
-- Keinen Board-Namen aus Zephyr oder Arduino in SiFli-SDK übernehmen.
+- Den Boardnamen nicht aus dem Marketingnamen erraten.
+- Keinen Boardnamen aus Zephyr oder Arduino in SiFli-SDK übernehmen.
 - Beim Auswählen von GPIO-, ADC-, PWM-, I2C-, SPI- oder Display-Ressourcen den Schaltplan des Boards oder die Seite des Entwicklungsboards heranziehen.
 - Mit dem nächstliegenden SDK-Beispiel für dasselbe Board beginnen.
 - Nach einem Board-Wechsel sauber neu bauen.
@@ -50,9 +50,9 @@ Das gewählte Board kann Folgendes beeinflussen:
 
 Beginnen Sie erst mit dem Anwendungs-Debugging, wenn die Board-Konfiguration der tatsächlich verwendeten Hardware entspricht.
 
-## Beispiel für einen SDK-Board-Namen { #sdk-board-name-example }
+## Beispiel für einen SDK-Boardnamen { #sdk-board-name-example }
 
-<div align="center"><em>Tabelle: SDK-Board-Name des SF32LB52-DevKit-LCD_N16R8</em></div>
+<div align="center"><em>Tabelle: SDK-Boardname des SF32LB52-DevKit-LCD_N16R8</em></div>
 
 <div align="center" markdown>
 

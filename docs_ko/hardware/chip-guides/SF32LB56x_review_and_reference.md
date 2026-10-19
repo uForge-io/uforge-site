@@ -30,10 +30,10 @@ hide:
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-lines: __[SF32LB56xU Hardware Application Note]__
-- :fontawesome-solid-file-lines: __[SF32LB56xV Hardware Application Note]__
-- :fontawesome-solid-file-excel: __[SiFli Approved Vendor List (AVL)]__
-- :fontawesome-brands-wikipedia-w: __[SiFli Chip Hardware Design Guide Index (Wiki)]__
+- :fontawesome-solid-file-lines: __[SF32LB56xU 하드웨어 애플리케이션 노트][SF32LB56xU Hardware Application Note]__
+- :fontawesome-solid-file-lines: __[SF32LB56xV 하드웨어 애플리케이션 노트][SF32LB56xV Hardware Application Note]__
+- :fontawesome-solid-file-excel: __[SiFli 승인 업체 목록 (AVL)][SiFli Approved Vendor List (AVL)]__
+- :fontawesome-brands-wikipedia-w: __[SiFli 칩 하드웨어 설계 가이드 색인 (위키)][SiFli Chip Hardware Design Guide Index (Wiki)]__
 
 </div>
 
@@ -48,7 +48,7 @@ hide:
 
 ### 9.1. 부록 A. 일반적인 SF32LB56x 제품 { #appendix-a-a-typical-sf32lb56x-product }
 
-일반적인 SF32LB56x 제품은 MCU, PMIC, 디스플레이 및 터치 컨트롤러, 부트 스토리지, 선택 사항인 외부 메모리, 센서, 진동 모터, 오디오 입출력, Bluetooth 안테나, 크리스털, 디버그 접근 수단, 양산 테스트 접근 수단을 포함합니다. U 패키지는 소형 QFN 구현에 유리하고, V 패키지는 BGA/HDI 레이아웃 계획을 통해 더 풍부한 인터페이스를 사용할 수 있게 합니다.
+일반적인 SF32LB56x 제품에는 MCU, PMIC, 디스플레이 및 터치 컨트롤러, 부트 스토리지, 선택형 외부 메모리, 센서, 진동 모터, 오디오 입출력, Bluetooth 안테나, 크리스털, 디버그 접속부, 양산 테스트 접속부가 포함됩니다. U 패키지는 소형 QFN 구현에 적합하며, V 패키지는 BGA/HDI 레이아웃을 계획해 더 다양한 인터페이스를 구현할 수 있습니다.
 
 ## 10. 개정 이력 { #10-revision-history }
 

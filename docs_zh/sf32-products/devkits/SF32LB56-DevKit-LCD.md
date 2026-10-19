@@ -30,7 +30,7 @@ SF32LB56-DevKit-LCD 是一块面向显示应用的开发板，可选配 SF32LB56
 | N16R12N1 配置 | SF32LB56-DevKit-LCD-N16R12N1 / SF32LB56-MOD-N16R12N1 | 16 MB QSPI-NOR、4 + 8 MB OPI-PSRAM 和 1 MB QSPI-NOR；用于基于模组的评估和载板规划。 |
 | A128R12N1 配置 | SF32LB56-DevKit-LCD-A128R12N1 / SF32LB56-MOD-A128R12N1 | 128 MB QSPI-NAND、4 + 8 MB OPI-PSRAM 和 1 MB QSPI-NOR；用于基于模组的评估和载板规划。 |
 | 板卡尺寸与温度 | 65 mm × 38 mm；型号指南标注的工作温度为 -40 °C 至 85 °C | 机构设计和环境条件评估。 |
-| 显示 | 24 位 MIPI-DPI RGB 信号通过 40 针、0.5 mm 间距 FPC 连接器引出，采用正点原子线序；40 针（2 × 20）排针引出 SPI/DSPI/QSPI 和 8 位 MCU/8080 信号 | 面板点亮验证和显示驱动开发。 |
+| 显示 | 24 位 MIPI-DPI RGB 信号通过 40 针、0.5 mm 间距 FPC 连接器引出，采用正点原子线序；40 针（2 × 20）排针引出 SPI/DSPI/QSPI 和 8 位 MCU/8080 信号 | 面板启动调试和显示驱动开发。 |
 | 触摸 | 支持 I2C 触摸屏 | 交互式显示原型。 |
 | 音频 | 1 路模拟 MEMS 麦克风输入和 1 路板载 Class-D 功放；型号指南标注扬声器输出最高 3 W / 4 Ω | 录音和本地播放测试；请核对扬声器负载及板卡版本。 |
 | 存储 | 通过 SDIO 的 MicroSD 卡槽 | 媒体、日志、文件系统和资源测试。 |
@@ -65,7 +65,7 @@ SF32LB56-DevKit-LCD 是一块面向显示应用的开发板，可选配 SF32LB56
 
 1. 将兼容的 24 位 MIPI-DPI 显示屏连接到 40 针 FPC 接口，并使用支持数据传输的 USB 线连接用于 USB 转 UART 的 Type-C 接口。
 2. 按照[入门指南](../../getting-started/index.md)建立已知可用的构建、烧录和串口日志基线。
-3. 在调试 UI 框架前，先点亮纯色显示图案；参阅[图形概览](../../learn/graphics/overview.md)。
+3. 在调试 UI 框架前，先启动调试纯色显示图案；参阅[图形概览](../../learn/graphics/overview.md)。
 4. 每次只增加触摸、存储、音频或无线中的一个子系统，再测试系统共存表现和功耗情况。
 5. 在开始自定义设计前，审阅[SF32LB56-MOD](../modules/SF32LB56-MOD.md)和[面向量产的设计](../../hardware/design-for-production.md)。
 

@@ -27,7 +27,7 @@ tags:
 - [ ] USB DP/DN을 차동 임피던스 90 Ω의 차동 쌍으로 라우팅했습니다.
 - [ ] SDIO 신호를 함께 라우팅했으며, 전체 길이는 ≤50 mm, 그룹 내 길이 차이는 ≤6 mm이고 그라운드 차폐가 적용되어 있습니다.
 - [ ] DBG_UART/SWD 멀티플렉싱 핀과 양산 테스트 포인트를 확보했습니다.
-- [ ] 주요 부품 번호를 최신 [SiFli 승인 업체 목록][SiFli Approved Vendor List (AVL)]과 대조해 확인했습니다.
+- [ ] 주요 부품 번호를 최신 [SiFli 승인 업체 목록 (AVL)][SiFli Approved Vendor List (AVL)]과 대조해 확인했습니다.
 
 ## 8. 관련 문서 및 참고 자료 { #8-related-documents-and-references }
 
@@ -42,14 +42,14 @@ tags:
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[SF32LB52x Datasheet (Official PDF)]__
-- :fontawesome-solid-file-pdf: __[SF32LB52x User Manual (Official PDF)]__
-- :fontawesome-solid-file-zipper: __[SF32LB52 Hardware Reference Design Package]__
-- :fontawesome-brands-github: __[SF32LB520/3/5/7 Hardware Application Note (Source)]__
-- :fontawesome-brands-github: __[52B/D/E/G/J Hardware Application Note (Source)]__
-- :fontawesome-solid-file-excel: __[Local SiFli Approved Vendor List]__
-- :fontawesome-solid-file-excel: __[SiFli SF32LB52 Schematic & PCB Checklist (XLSX)]__
-- :fontawesome-brands-wikipedia-w: __[SiFli Chip Hardware Design Guide Index (Wiki)]__
+- :fontawesome-solid-file-pdf: __[SF32LB52x 데이터시트 (공식 PDF)][SF32LB52x Datasheet (Official PDF)]__
+- :fontawesome-solid-file-pdf: __[SF32LB52x 사용자 매뉴얼 (공식 PDF)][SF32LB52x User Manual (Official PDF)]__
+- :fontawesome-solid-file-zipper: __[SF32LB52 하드웨어 레퍼런스 디자인 패키지][SF32LB52 Hardware Reference Design Package]__
+- :fontawesome-brands-github: __[SF32LB520/3/5/7 하드웨어 애플리케이션 노트 (원본)][SF32LB520/3/5/7 Hardware Application Note (Source)]__
+- :fontawesome-brands-github: __[52B/D/E/G/J 하드웨어 애플리케이션 노트 (원본)][52B/D/E/G/J Hardware Application Note (Source)]__
+- :fontawesome-solid-file-excel: __[SiFli 승인 업체 목록 (사이트 내)][Local SiFli Approved Vendor List]__
+- :fontawesome-solid-file-excel: __[SiFli SF32LB52 회로도 및 PCB 체크리스트 (XLSX)][SiFli SF32LB52 Schematic & PCB Checklist (XLSX)]__
+- :fontawesome-brands-wikipedia-w: __[SiFli 칩 하드웨어 설계 가이드 색인 (위키)][SiFli Chip Hardware Design Guide Index (Wiki)]__
 
 </div>
 

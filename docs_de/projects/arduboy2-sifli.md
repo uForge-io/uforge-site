@@ -29,11 +29,11 @@ Dies sind technische Erwartungen, keine gemessenen Kompatibilitätsaussagen. Bes
 
 ## Ergebnis, Umfang und Eintrittskriterien { #outcome-scope-and-entry-criteria }
 
-Diese Seite definiert einen gestuften Weg von der OpenSiFli-Referenz zu einem reproduzierbaren SF32-Spiel oder interaktiven Demo. Sie behauptet **nicht**, dass die Portierung jede Arduboy2-Funktion, jedes Arduboy-Spiel, jedes SF32-Board oder serientaugliches Display- und Audio-Timing unterstützt. Sie begründet auch keine Lizenzrechte an Spielen, Schriften, Grafiken oder anderen Ressourcen, die aus Repositorys Dritter übernommen wurden.
+Diese Seite definiert einen gestuften Weg von der OpenSiFli-Referenz zu einem reproduzierbaren SF32-Spiel oder einer interaktiven Demo. Sie behauptet **nicht**, dass die Portierung jede Arduboy2-Funktion, jedes Arduboy-Spiel, jedes SF32-Board oder serientaugliches Display- und Audio-Timing unterstützt. Sie begründet auch keine Lizenzrechte an Spielen, Schriften, Grafiken oder anderen Ressourcen, die aus Repositorys Dritter übernommen wurden.
 
 **Ergebnis:** ein versionierter Arduboy2-SiFli-Build, der ein Beispiel aus dem Repository oder einen kleinen Testsketch ausführt, den gewählten Pfad für Display/Eingabe/Audio demonstriert und die Nachweise festhält, die nötig sind, um zu entscheiden, ob ein größeres Spiel oder eine Produktanpassung gerechtfertigt ist.
 
-**Zielgruppe:** Firmware-, Hardware- und Produktingenieure, die Arduino-Werkzeuge nutzen, C/C++-Code prüfen, ein SF32-Board flashen, serielle Ausgaben lesen und einfache Messungen an Display, Eingabe und Leistung durchführen können.
+**Zielgruppe:** Firmware-, Hardware- und Produktingenieure, die Arduino-Werkzeuge nutzen, C/C++-Code prüfen, ein SF32-Board flashen, serielle Ausgaben lesen und einfache Messungen an Display, Eingabe und Leistungsaufnahme durchführen können.
 
 Halten Sie vor dem Start Folgendes bereit:
 
@@ -52,7 +52,7 @@ Halten Sie vor dem Start Folgendes bereit:
 | Quelle | Ein erfasster Commit von OpenSiFli/Arduboy2-SiFli und die Revisionen seiner Abhängigkeiten. | Sauberer Checkout und reproduzierbares Build-Protokoll. |
 | Board | SF32LB52 und ArduinoCore-Zephyr-Variante `sf32lb52_devkit_lcd_sf32lb525uc6` mit den unten aufgeführten externen Peripheriegeräten. | Erfassen Sie physische Board-Revision, Verdrahtung, Stromquelle und erfolgreichen Upload; das Repository legt weder eine Board-Revision noch ein OLED-Modell fest. |
 | Toolchain | Arduino IDE oder CLI, OpenSiFli-Board-Paket und der dokumentierte Upload-Pfad. | Paketversionen, Board-Auswahl, Compiler-Ausgabe, Upload-Log und serielles Log. |
-| Referenzverhalten | Ein Upstream-Beispiel oder minimaler Sketch, der die Portierung ausübt. | Display-Aktualisierung, Eingabereaktion und unterstütztes Audioverhalten sind beobachtet und wiederholbar. |
+| Referenzverhalten | Ein Upstream-Beispiel oder minimaler Sketch, der die Portierung beansprucht. | Display-Aktualisierung, Eingabereaktion und unterstütztes Audioverhalten sind beobachtet und wiederholbar. |
 | Produktänderung | Eine begrenzte Spiel- oder UI-Anpassung. | Der Referenztest besteht nach der Änderung weiterhin, Ressourcen- und Lizenznachweise bleiben erhalten. |
 
 </div>
@@ -69,10 +69,10 @@ Halten Sie vor dem Start Folgendes bereit:
 |:----------|:-----------------------|:-----|:-------|:----------------|:-------------------------------------|
 | SF32LB52-Entwicklungsboard | ArduinoCore-Zephyr-Variante `sf32lb52_devkit_lcd_sf32lb525uc6`; das Repository legt keine physische Board-Revision fest | Führt die Portierung aus und stellt die zugeordneten MCU-Pins bereit | Erforderlich | [Quelle von Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli); [Variante in ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) | Dies bezeichnet die Software-Board-Variante und Pin-Zuordnung, keine validierte physische Bestückung; vergleichen Sie vor der Verdrahtung die tatsächliche Board-Revision und den Schaltplan |
 | Monochromes OLED | 128 × 64 Pixel, über SPI1 angeschlossen; das Repository nennt weder das genaue Modul noch den Controller | Zeigt den Spiel-Framebuffer an | Erforderlich | [Quelle von Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Das OLED ist externe Peripherie; prüfen Sie vor der Verwendung Controller, Spannung, Steckverbinder, Ausrichtung und Timing anhand von Modul und Board |
-| Sechs Spieltasten | Arduboy-kompatible Eingänge; Active-Low mit Pull-ups, gemäß der Pin-Zuordnung im Repository | Liest Richtungs- und A/B-Tasten | Erforderlich | [Quelle von Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Die Tasten sind extern; prüfen Sie die zugeordneten Arduino-IOs am physischen Board und halten Sie Verdrahtung und Entprellverhalten fest |
+| Sechs Spieltasten | Arduboy-kompatible Eingänge; low-aktiv mit Pull-ups, gemäß der Pin-Zuordnung im Repository | Liest Richtungs- und A/B-Tasten | Erforderlich | [Quelle von Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Die Tasten sind extern; prüfen Sie die zugeordneten Arduino-IOs am physischen Board und halten Sie Verdrahtung und Entprellverhalten fest |
 | Externes EEPROM | AT24C02 oder AT24C32 über I2C1 an Adresse `0x50` | Unterstützt Bibliotheksfunktionen mit EEPROM | Optional; nur für Funktionen mit EEPROM erforderlich | [Quelle von Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Bestätigen Sie das gewählte Gerät, die Spannung, Pull-ups und Busverdrahtung; das Repository legt keine bestückte EEPROM-Variante fest |
 | Audioausgang und RGB-Anzeige | Die vom Repository unterstützten Audio-Backends nutzen die zugeordneten Lautsprecherausgänge; eine externe RGB-LED mit gemeinsamer Kathode wird per Software-PWM angesteuert | Optionale Tonausgabe und Farbanzeige | Optional; für den getesteten Sketch auswählen | [Quelle von Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Die Quelle legt keine vollständige Stückliste für Lautsprecher/LED fest; prüfen Sie externe Schaltung, Pin-Zuordnung, Strom und Audioverhalten |
-| Host und USB-Datenverbindung | Vom gewählten Arduino-Toolchain unterstützter Host; datenfähiges Kabel und Zugriff auf das serielle Log | Build, Upload und Beobachtung der Referenz | Erforderlich | [ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) | Halten Sie Host-Betriebssystem, Kabel/Port, Paketversionen und Wiederherstellungsmethode fest; ein reines Ladekabel genügt nicht |
+| Host und USB-Datenverbindung | Von der gewählten Arduino-Toolchain unterstützter Host; datenfähiges Kabel und Zugriff auf das serielle Log | Build, Upload und Beobachtung der Referenz | Erforderlich | [ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) | Halten Sie Host-Betriebssystem, Kabel/Port, Paketversionen und Wiederherstellungsmethode fest; ein reines Ladekabel genügt nicht |
 
 </div>
 
@@ -86,7 +86,7 @@ Halten Sie vor dem Start Folgendes bereit:
 |:-------------------|:-----------------------------|:-----|:-------|:----------------|:-------------------------------|
 | OpenSiFli/Arduboy2-SiFli | Genau einen Commit festlegen und erfassen; dieser Artikel friert keine Revision ein | SF32-Kompatibilitätsschicht und Beispiele | Erforderlich | [Repository](https://github.com/OpenSiFli/Arduboy2-SiFli) | Prüfen Sie Board-Target, Abhängigkeiten und unterstützte API beim gewählten Commit erneut |
 | OpenSiFli/ArduinoCore-zephyr und Board-Paket | Der genaue kompatible Commit bzw. die Paketversion muss aus der Portierung ermittelt und erfasst werden | Arduino-Laufzeit, Board-Definition, Compiler und Upload-Integration | Erforderlich | [Repository](https://github.com/OpenSiFli/ArduinoCore-zephyr) | Ersetzen Sie den Core oder das Board-Paket nicht durch eine neuere Version oder ein anderes Paket, ohne einen sauberen Build und eine Peripherie-Regression |
-| Testsketch und Spielressourcen | Ein Beispiel aus dem Repository oder ein separat lizenzierter Testsketch; Ressourcen-Revisionen und Lizenzen erfassen | Übt die gewählte API und den Produktpfad aus | Eines wählen | [Beispiele von Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Der Artikel gewährt keine Rechte zur Weitergabe von Spielen, Schriften, Bildern oder Klängen Dritter |
+| Testsketch und Spielressourcen | Ein Beispiel aus dem Repository oder ein separat lizenzierter Testsketch; Ressourcen-Revisionen und Lizenzen erfassen | Beansprucht die gewählte API und den Produktpfad | Eines wählen | [Beispiele von Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Der Artikel gewährt keine Rechte zur Weitergabe von Spielen, Schriften, Bildern oder Klängen Dritter |
 
 </div>
 
@@ -114,7 +114,7 @@ Das Repository benennt eine Software-Board-Variante und eine Pin-Zuordnung der P
 
 ## Projektphasen und Entscheidungspunkte { #delivery-map }
 
-Verwenden Sie die Stufen als Entscheidungstore und nicht als Funktions-Checkliste.
+Verwenden Sie die Phasen als Kontrollpunkte und nicht als Funktions-Checkliste.
 
 <div align="center"><em>Tabelle: Projektphasen und Entscheidungspunkte</em></div>
 

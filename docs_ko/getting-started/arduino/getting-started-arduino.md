@@ -31,7 +31,7 @@ OpenSiFli에는 Zephyr 기반의 SF32용 베타 Arduino 코어가 있습니다: 
 
 ## 보드 패키지 설치 { #install-the-board-package }
 
-**Arduino IDE > Settings**를 열고 **Additional Boards Manager URLs**에 다음 URL을 추가합니다.
+**Arduino IDE > Settings**를 열고 **Additional Boards Manager URLs**에 다음 URL을 추가하십시오.
 
 ```text
 https://github.com/OpenSiFli/ArduinoCore-zephyr/releases/latest/download/package_sifli_index.json
@@ -43,16 +43,16 @@ https://github.com/OpenSiFli/ArduinoCore-zephyr/releases/latest/download/package
 https://downloads.sifli.com/github_assets/OpenSiFli/ArduinoCore-zephyr/releases/latest/download/package_sifli_index_cn.json
 ```
 
-그런 다음 **Boards Manager**를 열고 **SiFli Serial Boards**를 검색하여 `sifli:sf32lb52` 플랫폼을 설치합니다.
+그런 다음 **Boards Manager**를 열고 **SiFli Serial Boards**를 검색한 뒤 `sifli:sf32lb52` 플랫폼을 설치하십시오.
 
-Arduino CLI를 사용하는 경우는 다음과 같습니다.
+Arduino CLI에서는 다음 명령을 실행하십시오.
 
 ```bash
 arduino-cli core install sifli:sf32lb52 \
   --additional-urls https://github.com/OpenSiFli/ArduinoCore-zephyr/releases/latest/download/package_sifli_index.json
 ```
 
-중국 미러를 사용하는 경우는 다음과 같습니다.
+중국 미러를 사용하려면 다음 명령을 실행하십시오.
 
 ```bash
 arduino-cli core install sifli:sf32lb52 \
@@ -61,7 +61,7 @@ arduino-cli core install sifli:sf32lb52 \
 
 ## 보드 선택 { #select-the-board }
 
-Arduino IDE에서 다음을 선택합니다.
+Arduino IDE에서 다음 항목을 선택하십시오.
 
 ```text
 SiFli SF32LB52 DevKit LCD
@@ -77,7 +77,7 @@ OpenSiFli 보드 정의는 이 Arduino 보드를 Zephyr 타깃 `sf32lb52_devkit_
 
 ## 빌드 설정 선택 { #choose-build-options }
 
-이 코어는 두 가지 중요한 메뉴를 제공합니다.
+이 코어에는 중요한 메뉴가 두 가지 있습니다.
 
 <div align="center"><em>빌드 설정</em></div>
 
@@ -102,7 +102,7 @@ OpenSiFli 문서에 따르면 처음 사용할 때는 보드가 시리얼 다운
 
 ## 시리얼 스모크 테스트 업로드 { #upload-a-serial-smoke-test }
 
-시리얼 출력부터 시작합니다. LED 극성에 의존하지 않고 업로드, 리셋, 런타임 시작, 콘솔 라우팅을 확인할 수 있습니다.
+먼저 시리얼 출력을 확인하십시오. LED 극성에 의존하지 않고 업로드, 리셋, 런타임 시작, 콘솔 라우팅을 검증할 수 있습니다.
 
 ```cpp
 void setup() {
@@ -115,7 +115,7 @@ void loop() {
 }
 ```
 
-Arduino IDE에서 업로드하거나 Arduino CLI를 사용합니다.
+Arduino IDE에서 업로드하거나 Arduino CLI 명령을 사용하십시오.
 
 ```bash
 arduino-cli compile \
@@ -130,7 +130,7 @@ arduino-cli upload \
 
 `/dev/cu.usbserial-XXXX`를 사용 중인 보드의 시리얼 포트로 바꾸십시오. Windows에서는 해당하는 `COM` 포트를, Linux에서는 해당하는 `/dev/ttyUSB*` 또는 `/dev/ttyACM*` 포트를 사용하십시오.
 
-Serial Monitor를 `115200` 보레이트로 엽니다. **Standard** 빌드 모드에서는 스케치가 초당 한 줄씩 출력해야 합니다. **Debug** 빌드 모드에서는 Zephyr 셸을 열고 다음을 실행합니다.
+Serial Monitor를 `115200` 보레이트로 여십시오. **Standard** 빌드 모드에서는 스케치가 초당 한 줄씩 출력해야 합니다. **Debug** 빌드 모드에서는 Zephyr 셸을 열고 다음 명령을 실행하십시오.
 
 ```text
 sketch

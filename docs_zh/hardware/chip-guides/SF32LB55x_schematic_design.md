@@ -70,28 +70,28 @@ QFN68L 封装的 SF32LB551 没有 VDD2、BUCK2_VSW、BUCK2_VOUT、LDOVCC2_VOUT �
 
 | 电源管脚 | 电容 | 说明 |
 | :--- | :--- | :--- |
-| VDD1 VDD2 | 0.1 μF + 10 μF | VDD1 和 VDD2 短接，至少放置 10 μF 和 0.1 μF 两个电容并靠近管脚 |
-| BUCK1_VSW BUCK1_VOUT | 0.1 μF + 4.7 μF | 至少放置 4.7 μF 和 0.1 μF 两个电容并靠近管脚 |
-| BUCK2_VSW BUCK2_VOUT | 0.1 μF + 4.7 μF | 至少放置 4.7 μF 和 0.1 μF 两个电容并靠近管脚 |
-| LDOVCC2_VOUT | 0.1 μF + 4.7 μF | BUCK2 配置为 BUCK 模式时该脚悬空；BUCK2 配置为 LDO 模式时 BUCK2_VSW 悬空，LDOVCC2_VOUT 与 BUCK2_VOUT 短接，并在管脚附近放置 4.7 μF 和 0.1 μF 电容 |
-| LDO_VOUT1 | 4.7 μF | 至少放置一个 4.7 μF 电容并靠近管脚 |
-| LDO_VOUT2 | 4.7 μF | 至少放置一个 4.7 μF 电容并靠近管脚 |
-| VDD_RET | 0.47 μF | 至少放置一个 0.47 μF 电容并靠近管脚 |
-| VDD_RTC | 1 μF | 至少放置一个 1 μF 电容并靠近管脚 |
-| VDD_SIP | 1 μF | 至少放置一个 1 μF 电容并靠近管脚 |
-| SDMADC_VREF | 4.7 μF | 至少放置一个 4.7 μF 电容并靠近管脚 |
-| AVDD_DSI | 0.1 μF + 10 μF | 至少放置 10 μF 和 0.1 μF 两个电容并靠近管脚 |
-| AVDD33 | 4.7 μF | 至少放置一个 4.7 μF 电容并靠近管脚 |
-| AVDD_BRF | 1 μF | 至少放置一个 1 μF 电容并靠近管脚 |
-| VDDIOA VDDIOB | 2 × 0.1 μF + 2 × 1 μF | 每个管脚附近至少放置 1 μF 和 0.1 μF 两个电容 |
+| VDD1 VDD2 | 0.1 µF + 10 µF | VDD1 和 VDD2 短接，至少放置 10 µF 和 0.1 µF 两个电容并靠近管脚 |
+| BUCK1_VSW BUCK1_VOUT | 0.1 µF + 4.7 µF | 至少放置 4.7 µF 和 0.1 µF 两个电容并靠近管脚 |
+| BUCK2_VSW BUCK2_VOUT | 0.1 µF + 4.7 µF | 至少放置 4.7 µF 和 0.1 µF 两个电容并靠近管脚 |
+| LDOVCC2_VOUT | 0.1 µF + 4.7 µF | BUCK2 配置为 BUCK 模式时该脚悬空；BUCK2 配置为 LDO 模式时 BUCK2_VSW 悬空，LDOVCC2_VOUT 与 BUCK2_VOUT 短接，并至少放置 4.7 µF 和 0.1 µF 两个电容并靠近管脚 |
+| LDO_VOUT1 | 4.7 µF | 至少放置一个 4.7 µF 电容并靠近管脚 |
+| LDO_VOUT2 | 4.7 µF | 至少放置一个 4.7 µF 电容并靠近管脚 |
+| VDD_RET | 0.47 µF | 至少放置一个 0.47 µF 电容并靠近管脚 |
+| VDD_RTC | 1 µF | 至少放置一个 1 µF 电容并靠近管脚 |
+| VDD_SIP | 1 µF | 至少放置一个 1 µF 电容并靠近管脚 |
+| SDMADC_VREF | 4.7 µF | 至少放置一个 4.7 µF 电容并靠近管脚 |
+| AVDD_DSI | 0.1 µF + 10 µF | 至少放置 10 µF 和 0.1 µF 两个电容并靠近管脚 |
+| AVDD33 | 4.7 µF | 至少放置一个 4.7 µF 电容并靠近管脚 |
+| AVDD_BRF | 1 µF | 至少放置一个 1 µF 电容并靠近管脚 |
+| VDDIOA VDDIOB | 2 × 0.1 µF + 2 × 1 µF | 每个管脚附近至少放置 1 µF 和 0.1 µF 两个电容 |
 
 </div>
 
-必要电容应靠近对应管脚放置，BUCK 电流回路应紧凑。布局前必须确认 BUCK/LDO 工作模式，并在实测硬件上检查复位电路和 POR/BOR 时序。
+必要电容应靠近对应管脚放置，BUCK 电流回路应紧凑。布局前应确认 BUCK/LDO 工作模式，并应在实际硬件上检查复位电路和 POR/BOR 时序。
 
-资料存在不一致：[思澈科技（SiFli）硬件应用说明](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)表 3-3 和 [V1.0 原理图检查表](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)第 9 项均为 VDD_RTC 指定 1 µF；但[该指南参考原理图中的 C0313](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png)标注为 0.1 µF。现有资料没有说明两种取值各自的适用条件。设计发布前应向思澈科技（SiFli）确认具体器件的要求，不要自行推断。
+资料存在不一致：[思澈科技（SiFli）中文硬件应用说明](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)表 3-3 和 [V1.0 原理图检查表](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)第 9 项均为 VDD_RTC 指定 1 µF；但[该指南参考原理图中的 C0313](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png)标注为 0.1 µF。现有资料没有说明两种取值各自的适用条件。设计发布前应向思澈科技（SiFli）确认具体器件的要求，不要自行推断。
 
-VDD1 和 VDD2 必须同时上电；SF32LB551 没有 VDD2。RSTN 应上拉至 VDD1 的输入电压域，并接 0.1 μF 电容至地。参考图中上拉电源标为 1.8 V/3.3 V，并采用 10 kΩ 电阻；实际应选择与设计所用 VDD1 电压域相对应的电平。图 5.1-1 标出了 1.50 V 的 POR 电平、2.5 V 至 1.5 V 可配置的 BOR 范围，以及 RSTN 的 0.7 V 标记。图 5.1-3 的实测波形中，从电源上升到复位释放约为 700 μs；这只是该示例的测量结果，不能作为所有设计的复位延时保证值。
+VDD1 和 VDD2 必须同时上电；SF32LB551 没有 VDD2。RSTN 应上拉至 VDD1 的输入电压域，并接 0.1 µF 电容至地。参考图中上拉电源标为 1.8 V/3.3 V，并采用 10 kΩ 电阻；实际应选择与设计所用 VDD1 电压域相对应的电平。图 5.1-1 标出了 1.50 V 的 POR 电平、2.5 V 至 1.5 V 可配置的 BOR 范围，以及 RSTN 的 0.7 V 标记。图 5.1-3 的实测波形中，从电源上升到复位释放约为 700 µs；这只是该示例的测量结果，不能作为所有设计的复位延时保证值。
 
 ![图 5.1-1：上下电时序](../../sf32-products/chips/assets/55x/SF32LB55x-POR-BOR.png){ width="100%" loading="lazy" }
 
@@ -101,9 +101,9 @@ VDD1 和 VDD2 必须同时上电；SF32LB551 没有 VDD2。RSTN 应上拉至 VDD
 
 <div align="center"><em>图 5.1-2：复位电路</em></div>
 
-![图 5.1-3: 实测上电与复位波形](../../sf32-products/chips/assets/55x/SF32LB55x-RST-Test.png){ width="100%" loading="lazy" }
+![图 5.1-3：实测上电与复位波形](../../sf32-products/chips/assets/55x/SF32LB55x-RST-Test.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 5.1-3: 实测上电与复位波形</em></div>
+<div align="center"><em>图 5.1-3：实测上电与复位波形</em></div>
 
 ![图 5.1-4：BGA DC-DC 参考电路](../../sf32-products/chips/assets/55x/SF32LB55x-BUCK-BGA-SCH.png){ width="100%" loading="lazy" }
 
@@ -113,7 +113,7 @@ VDD1 和 VDD2 必须同时上电；SF32LB551 没有 VDD2。RSTN 应上拉至 VDD
 
 <div align="center"><em>图 5.1-5：QFN DC-DC 参考电路</em></div>
 
-按照思澈科技（SiFli）硬件应用说明，BUCK 电感应选用 4.7 μH，直流电阻 DCR ≤ 0.4 Ω，饱和电流 Isat ≥ 450 mA。
+按照思澈科技（SiFli）硬件应用说明，BUCK 电感应选用 4.7 µH，直流电阻 DCR ≤ 0.4 Ω，饱和电流 Isat ≥ 450 mA。
 
 ### 5.2. 启动模式 { #52-boot-mode }
 
@@ -155,9 +155,9 @@ RF 走线应保持连续参考地，匹配电路尽量靠近芯片端放置，AV
 
 RF 参考电路在 ANT 路径中串联 C0323（15 pF/50 V），两处对地支路 C0318 和 C0319 不装配（NF）。这些数值仅供示例参考，不能直接作为所有天线的匹配参数。
 
-![图 5.4-1: RF 匹配参考电路](../../sf32-products/chips/assets/55x/SF32LB55x-RF-SCH.png){ width="100%" loading="lazy" }
+![图 5.4-1：RF 匹配参考电路](../../sf32-products/chips/assets/55x/SF32LB55x-RF-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 5.4-1: RF 匹配参考电路</em></div>
+<div align="center"><em>图 5.4-1：RF 匹配参考电路</em></div>
 
 ### 5.5. 存储接口 { #55-storage-interfaces }
 
@@ -165,17 +165,17 @@ SF32LB55x 支持 OPI PSRAM、QSPI NOR/NAND Flash 与 PSRAM，以及 SDIO eMMC �
 
 BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5-3 分别对应 BGA145 配置及 BGA169 的两颗存储器，不表示同一封装具有三路 OPI 接口。QSPI 表分别对应 QSPI2、QSPI3 和 QSPI4；SDIO 表对应 SDIO1 的 4 位/8 位模式，以及 SDIO2 的 4 位模式。
 
-外接 QSPI PSRAM 推荐使用 QSPI2。若通过 HCPU GPIO 控制外接 OPI/QSPI PSRAM 供电，必须选用 HCPU 的 PU 类型管脚，高电平开启、低电平关闭。若对内部 Flash 的 VDD_SIP 供电进行开关控制，必须使用 PA58，同样采用高电平开启、低电平关闭。应请思澈科技（SiFli）FAE 评估 LCPU 加速度与心率算法所需的 Flash 空间，再决定是否增加 QSPI4 外接 NOR Flash。
+外接 QSPI PSRAM 推荐使用 QSPI2。若通过 HCPU GPIO 控制外接 OPI/QSPI PSRAM 供电，使用 HCPU 的 PU 类型管脚，高电平开启、低电平关闭。若对内部 Flash 的 VDD_SIP 供电进行开关控制，使用 PA58，同样采用高电平开启、低电平关闭。应请思澈科技（SiFli）FAE 评估 LCPU 加速度与心率算法所需的 Flash 空间，再决定是否增加 QSPI4 外接 NOR Flash。
 
 源文档 OPI 表中的方向标注不一致。[BGA145 参考原理图](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png)、[BGA169 器件 1 参考原理图](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png)和[BGA169 器件 2 参考原理图](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png)显示，MCU 的 PA37/PA20 和 PA07/PA08 分别驱动外接 PSRAM 的 CS# 和 CLK。因此，下表统一以 MCU 为方向参照：CS#、CLK 均为 MCU 输出、PSRAM 输入。原理图未明确标出 DQS/DM 的固定方向；请依据所选 PSRAM 的数据手册确认其功能和方向。
 
-图中每颗 PSRAM 使用 1.8 V 电源、3 颗 0.1 μF 电容及 1 颗 1 μF/6.3 V 电容。RESET# 及 NC/CLK# 等悬空连接仅对应图示存储器型号，应核对所选器件的数据手册，不能一概照搬。
+图中每颗 PSRAM 使用 1.8 V 电源、3 颗 0.1 µF 电容及 1 颗 1 µF/6.3 V 电容。RESET# 及 NC/CLK# 等悬空连接仅对应图示存储器型号，应核对所选器件的数据手册，不能一概照搬。
 
-![图 5.5-1: BGA145 OPI PSRAM 参考电路](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png){ width="100%" loading="lazy" }
+![图 5.5-1：BGA145 OPI PSRAM 参考电路](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 5.5-1: BGA145 OPI PSRAM 参考电路</em></div>
+<div align="center"><em>图 5.5-1：BGA145 OPI PSRAM 参考电路</em></div>
 
-<div align="center"><em>表 5.5-1: BGA145 OPI PSRAM</em></div>
+<div align="center"><em>表 5.5-1：BGA145 OPI PSRAM</em></div>
 
 <div align="center" markdown>
 
@@ -195,11 +195,11 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 </div>
 
-![图 5.5-2: BGA169 OPI PSRAM 存储器 1 参考电路](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png){ width="100%" loading="lazy" }
+![图 5.5-2：BGA169 OPI PSRAM 存储器 1 参考电路](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 5.5-2: BGA169 OPI PSRAM 存储器 1 参考电路</em></div>
+<div align="center"><em>图 5.5-2：BGA169 OPI PSRAM 存储器 1 参考电路</em></div>
 
-<div align="center"><em>表 5.5-2: BGA169 OPI PSRAM 存储器 1</em></div>
+<div align="center"><em>表 5.5-2：BGA169 OPI PSRAM 存储器 1</em></div>
 
 <div align="center" markdown>
 
@@ -219,11 +219,11 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 </div>
 
-![图 5.5-3: BGA169 OPI PSRAM 存储器 2 参考电路](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png){ width="100%" loading="lazy" }
+![图 5.5-3：BGA169 OPI PSRAM 存储器 2 参考电路](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 5.5-3: BGA169 OPI PSRAM 存储器 2 参考电路</em></div>
+<div align="center"><em>图 5.5-3：BGA169 OPI PSRAM 存储器 2 参考电路</em></div>
 
-<div align="center"><em>表 5.5-3: BGA169 OPI PSRAM 存储器 2</em></div>
+<div align="center"><em>表 5.5-3：BGA169 OPI PSRAM 存储器 2</em></div>
 
 <div align="center" markdown>
 
@@ -243,7 +243,7 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 </div>
 
-<div align="center"><em>表 5.5-4: QSPI2 NOR/NAND Flash 或 PSRAM</em></div>
+<div align="center"><em>表 5.5-4：QSPI2 NOR/NAND Flash 或 PSRAM</em></div>
 
 <div align="center" markdown>
 
@@ -258,7 +258,7 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 </div>
 
-<div align="center"><em>表 5.5-5: QSPI3 NOR/NAND Flash 或 PSRAM</em></div>
+<div align="center"><em>表 5.5-5：QSPI3 NOR/NAND Flash 或 PSRAM</em></div>
 
 <div align="center" markdown>
 
@@ -273,7 +273,7 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 </div>
 
-<div align="center"><em>表 5.5-6: QSPI4 NOR/NAND Flash 或 PSRAM</em></div>
+<div align="center"><em>表 5.5-6：QSPI4 NOR/NAND Flash 或 PSRAM</em></div>
 
 <div align="center" markdown>
 
@@ -288,7 +288,7 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 </div>
 
-<div align="center"><em>表 5.5-7: SDIO1 4 位 eMMC/Micro SD</em></div>
+<div align="center"><em>表 5.5-7：SDIO1 4 位 eMMC/Micro SD</em></div>
 
 <div align="center" markdown>
 
@@ -303,7 +303,7 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 </div>
 
-<div align="center"><em>表 5.5-8: SDIO1 8 位 eMMC</em></div>
+<div align="center"><em>表 5.5-8：SDIO1 8 位 eMMC</em></div>
 
 <div align="center" markdown>
 
@@ -322,7 +322,7 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 </div>
 
-<div align="center"><em>表 5.5-9: SDIO2 4 位 eMMC/Micro SD</em></div>
+<div align="center"><em>表 5.5-9：SDIO2 4 位 eMMC/Micro SD</em></div>
 
 <div align="center" markdown>
 
@@ -481,19 +481,19 @@ BL_PWM 应选择具备 GPTIM1_CHx 功能的 GPIO，并配置合适的上拉或�
 
 唤醒、模拟、调试和量产访问需要结合整机结构与夹具设计一起规划。唤醒管脚需要明确默认电平和 ESD 防护；GPADC 分压应兼顾稳定时间和漏电；调试/下载接口在 EVT 和量产阶段都应可访问。
 
-SF32LB55x 提供 4 路 HCPU 唤醒源（WKUP_A0–WKUP_A3）和 6 路 LCPU 唤醒源（WKUP_B0–WKUP_B5），各自只能唤醒对应 CPU。休眠（Hibernate）模式下，仅 LCPU 的 6 路唤醒源支持唤醒开机。这 10 路输入均不能悬空，应按实际功能配置外部上拉或下拉电阻，避免睡眠时漏电。
+SF32LB55x 提供 4 路 HCPU 唤醒源（WKUP_A0–WKUP_A3）和 6 路 LCPU 唤醒源（WKUP_B0–WKUP_B5），各自唤醒对应的 CPU。休眠（Hibernate）模式下，仅 LCPU 的 6 路唤醒源支持唤醒开机。这 10 路输入均不能悬空，应按实际功能配置外部上拉或下拉电阻，避免睡眠时漏电。
 
 参考电路中，KEY1 连接 PB48，并通过 10 kΩ 电阻上拉至 VDD_1V8，同时配置了 ESD 保护和电容。KEY2 电路包含 10 kΩ 上拉、ESD 保护，以及可通过跳线选择连接至 PA08、PA77 或 PA78 的方案；其中 C0004 标注为 NF（不贴装）。这些管脚是参考电路示例，并不都具备唤醒功能：PA08 未列入表 5.7-1。应从该表中选择实际支持的唤醒输入，并确保每路输入在空闲时都有确定电平。
 
-![图 5.7-1: 唤醒按键参考电路](../../sf32-products/chips/assets/55x/SF32LB55x-KEY-SCH.png){ width="100%" loading="lazy" }
+![图 5.7-1：唤醒按键参考电路](../../sf32-products/chips/assets/55x/SF32LB55x-KEY-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 5.7-1: 唤醒按键参考电路</em></div>
+<div align="center"><em>图 5.7-1：唤醒按键参考电路</em></div>
 
 马达 PWM 应选用具备 GPTIM1_CHx 功能的 GPIO，并选择合适的 PU/PD 管脚状态，防止冷启动时误启动马达。参考电路采用 GPIO17（PA44）、低侧晶体管和 1 MΩ 栅极下拉电阻；马达使用 3 V 电源，MCU 使用独立的 3.3 V 电源。
 
-![图 5.7-2: 马达驱动参考电路](../../sf32-products/chips/assets/55x/SF32LB55x-VIB-SCH.png){ width="100%" loading="lazy" }
+![图 5.7-2：马达驱动参考电路](../../sf32-products/chips/assets/55x/SF32LB55x-VIB-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 5.7-2: 马达驱动参考电路</em></div>
+<div align="center"><em>图 5.7-2：马达驱动参考电路</em></div>
 
 <div align="center"><em>表 5.7-1：唤醒中断源</em></div>
 
@@ -514,19 +514,19 @@ SF32LB55x 提供 4 路 HCPU 唤醒源（WKUP_A0–WKUP_A3）和 6 路 LCPU 唤�
 
 </div>
 
-思澈科技（SiFli）硬件应用说明将 GPADC 描述为 5 路、10 位，输入范围为 0–0.9 V。按保守设计处理时，仅当 VIN 低于 0.9 V 时才可直接接入；更高电压应先分压，确保 VADC 低于 0.9 V。电池电压测量可参考源文档约 5:1 的 R1:R2 比例和 MΩ 级电阻；分压静态电流越小，建立时间通常越长。示例在 VADC 与地之间接入 0.1 μF 电容。按 `VADC = VIN × R2 / (R1 + R2)` 核对最高电池电压及电阻容差；表 5.7-2 的静态电流是在 VIN = 4.2 V 下给出的，不能直接用于所有电池工况。
+思澈科技（SiFli）硬件应用说明将 GPADC 描述为 5 路、10 位，输入范围为 0–0.9 V。按保守设计处理时，仅当 VIN 低于 0.9 V 时才可直接接入；更高电压应先分压，确保 VADC 低于 0.9 V。电池电压测量可参考源文档约 5:1 的 R1:R2 比例和 MΩ 级电阻；分压静态电流越小，稳定时间越长。示例在 VADC 与地之间接入 0.1 µF 电容。按 `VADC = VIN × R2 / (R1 + R2)` 核对最高电池电压及电阻容差；表 5.7-2 的静态电流是在 VIN = 4.2 V 下给出的，不能直接用于所有电池工况。
 
-资料存在差异：按资料优先级更高的 [OpenSiFli 硬件应用指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)，GPADC 为 5 通道、10 位，输入范围为 0–0.9 V。本 V1.0 [原理图检查表](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)第 2 项规定最大输入电压为 1.0 V，但未说明通道数。与此不同，[SF32LB55x 规格书 V1.7.2 第 3.2.1 节](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)规定支持 8 路单端输入或 4 对差分输入，单端范围为 0–1.1 V，差分范围为 −0.7–0.7 V；其引脚表列出 GPADC_CH0–CH7。当前 [SDK ADC 指南](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html)同样列出 8 个通道（0–7）和 1.1 V 最大采样电压。思澈科技（SiFli）尚未解释通道数和电压限值的差异。因此，本文暂按优先级更高的硬件应用指南，以 5 通道和 0–0.9 V 作为设计依据，等待思澈科技（SiFli）书面澄清。VADC 应低于 0.9 V；不要把 1.0 V 或 1.1 V 视为已批准的设计上限，并向思澈科技（SiFli）确认所选器件和封装的可用通道。
+资料存在差异：按资料优先级更高的 [OpenSiFli 硬件应用指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)，GPADC 为 5 通道、10 位，输入范围为 0–0.9 V。[V1.0 原理图检查表](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)第 2 项规定最大输入电压为 1.0 V，但未说明通道数。与此不同，[SF32LB55x 数据手册 V1.7.2 第 3.2.1 节](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)规定支持 8 路单端输入或 4 对差分输入，单端范围为 0–1.1 V，差分范围为 −0.7–0.7 V；其引脚表列出 GPADC_CH0–CH7。当前 [SDK ADC 指南](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html)同样列出 8 个通道（0–7）和 1.1 V 最大采样电压。思澈科技（SiFli）尚未解释通道数和电压限值的差异。因此，本文暂按优先级更高的硬件应用指南，以 5 通道和 0–0.9 V 作为设计依据，等待思澈科技（SiFli）书面澄清。VADC 应低于 0.9 V；不要把 1.0 V 或 1.1 V 视为已批准的设计上限，并向思澈科技（SiFli）确认所选器件和封装的可用通道。
 
-![图 5.7-3: GPADC 输入与分压参考电路](../../sf32-products/chips/assets/55x/SF32LB55x-GPADC-SCH.png){ width="100%" loading="lazy" }
+![图 5.7-3：GPADC 输入与分压参考电路](../../sf32-products/chips/assets/55x/SF32LB55x-GPADC-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 5.7-3: GPADC 输入与分压参考电路</em></div>
+<div align="center"><em>图 5.7-3：GPADC 输入与分压参考电路</em></div>
 
 <div align="center"><em>表 5.7-2：GPADC 分压示例</em></div>
 
 <div align="center" markdown>
 
-| 电阻组合 | R1 (kΩ) ±1% | R2 (kΩ) ±1% | 电压整定时间（ms） | Iq (µA)（VIN = 4.2 V） |
+| 电阻组合 | R1 (kΩ) ±1% | R2 (kΩ) ±1% | 电压稳定时间（ms） | Iq (µA)（VIN = 4.2 V） |
 | :--- | :--- | :--- | :--- | :--- |
 | 1 | 1000 | 220 | 138 | 3.44 |
 | 2 | 2000 | 430 | 250 | 1.73 |
@@ -536,9 +536,9 @@ SF32LB55x 提供 4 路 HCPU 唤醒源（WKUP_A0–WKUP_A3）和 6 路 LCPU 唤�
 
 </div>
 
-心率和加速度传感器的 I2C/SPI、控制及中断唤醒接口必须接到 LCPU。供电应选用低 Iq 的 DC-DC、LDO 或负载开关，以便按需开关传感器电源。
+心率和加速度传感器的 I2C/SPI、控制及中断唤醒接口应通过 LCPU 连接。供电应选用低 Iq 的 DC-DC、LDO 或负载开关，以便按需开关传感器电源。
 
-外接蓝牙（Bluetooth）音频模块通过 HCPU 的 UART1 通信。接口电平必须匹配，否则需增加电平转换器；关闭模块电源时，应同步关闭转换器电源，避免漏电。如果 SF32LB55x 进入待机（Standby）后音频模块仍需供电，且电源使能为低电平有效，必须使用 LCPU 中默认 PD 的 GPIO。
+外接蓝牙（Bluetooth）音频模块通过 HCPU 的 UART1 通信。应匹配接口电平，或增加电平转换器；关闭模块电源时，应同步关闭转换器电源，避免漏电。如果 SF32LB55x 进入待机（Standby）后音频模块仍需供电，且电源使能为低电平有效，使用 LCPU 中默认 PD 的 GPIO。
 
 <div align="center"><em>表 5.7-3：调试与烧录接口</em></div>
 
@@ -565,6 +565,6 @@ UART RXD 不能悬空，固件初始化时应启用内部上拉。UART3 是默�
 
 源图将 VDD_1V8 接至连接器第 1 脚（VTref）；SWDIO 和 SWCLK 各经一颗 22 Ω 串联电阻，分别接至第 7 脚和第 9 脚。标准 [J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector) 也将第 1 脚用作 [VTref](https://kb.segger.com/VTref)，即目标电压参考输入，而非探针电源输出。连接标准线缆前，应确认连接器方向及其与 1.8 V 电平的兼容性。
 
-![图 5.7-4: 源文档 SWD 连接器：需核对转接线](../../sf32-products/chips/assets/55x/SF32LB55x-SWD-SCH.png){ width="100%" loading="lazy" }
+![图 5.7-4：源文档 SWD 连接器：需核对转接线](../../sf32-products/chips/assets/55x/SF32LB55x-SWD-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 5.7-4: 源文档 SWD 连接器：需核对转接线</em></div>
+<div align="center"><em>图 5.7-4：源文档 SWD 连接器：需核对转接线</em></div>

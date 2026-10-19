@@ -10,7 +10,7 @@ tags:
 
 ## 概览 { #overview }
 
-SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产品。与入门级蓝牙（Bluetooth）MCU 相比，这类产品通常需要更强的显示能力、更大的内存容量和更多封装选择。
+SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产品，这类产品需要比入门级蓝牙（Bluetooth）MCU 更强的显示能力、更充裕的内存余量和更多的封装选择。
 
 它采用 big.LITTLE 双核架构，由两个 Arm Cortex-M33 STAR-MC1[^1] 处理器组成：高性能应用核最高运行频率为 240 MHz，超低功耗核最高运行频率为 48 MHz。这样，应用核可处理负载较重的 UI，低功耗核则负责传感器处理、待机控制以及需要持续运行的 BLE 任务。
 
@@ -22,7 +22,7 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 
 ## 应用场景 { #applications }
 
-**SF32LB55x 适用于**以 BLE 为核心、但又需要更强图形能力、更大工作内存或更灵活封装方案的产品，包括：
+**SF32LB55x 适用于**以 BLE 为核心、但又需要更强 UI 能力、更大工作内存或更灵活封装方案的产品，包括：
 
 - 智能手表和运动手环
 - 健康监测类可穿戴设备
@@ -38,7 +38,7 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 - MIPI DSI 命令模式显示支持
 - 面向 LVGL、图形资源、传感器或 TinyML 的更大 SRAM
 - 用户可编程的低功耗处理器
-- 比 SF32LB52x 更多的 GPIO 或更密集的 BGA 封装
+- 比 SF32LB52x 更多的 GPIO 或更密集的封装选项
 - NOR、NAND、eMMC、QSPI-PSRAM 或 OPI-PSRAM 的外部存储灵活性
 
 ## 开发资源 { #development-resources }
@@ -94,7 +94,7 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 - ePicasso 变换层分辨率最高为 640 × 640；通用图层和显示输出最高支持 1024 × 1024，显示输出最高可达 60 fps
 - LCD 控制器支持 8080、SPI、Dual-SPI、Quad-SPI、DPI、MIPI DSI 和 JDI 反射式显示接口；具体接口取决于型号，选型时应逐项确认
 - TurboPixel 帧缓冲压缩可让 LCD 控制器直接读取压缩帧数据并在显示时解压，从而减少帧缓冲占用和读取带宽需求
-- 双 LCD 控制器；常亮显示接口和双屏能力取决于所选型号与封装
+- 双 LCD 控制器；常开显示（always-on display）接口和双屏能力取决于所选型号与封装
 - 面向 TinyML 的神经网络矩阵加速器，最高 1.92 GOPS、5.73 TOPS/W
 
 ### 无线连接 { #wireless-connectivity }
@@ -114,7 +114,7 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 ### 外设与 I/O { #peripherals-and-ios }
 
 - 全系列最多提供 5 路 UART、6 路 I2C 和 4 路 SPI；各型号的数量不同，见下表
-- I2S 和 PDM 接口数量因型号而异，见下表。每路 PDM 接口最多可连接 2 个数字麦克风，因此接口数量不等于麦克风数量；还需核对所选型号的引脚配置。
+- I2S 和 PDM 接口数量因型号而异，见下表。每路 PDM 接口最多可连接 2 个数字麦克风，因此接口数量不等于麦克风数量；还需核对所选型号的引脚可用性。
 
 <div align="center"><em>已公布的型号级外设与 ADC 数量（SS6600A8 未注明）</em></div>
 
@@ -129,7 +129,7 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 
 </div>
 
-**SS6600A8 的来源说明：**当前[思澈科技（SiFli）芯片型号指南][思澈科技（SiFli）芯片型号指南]列出了该型号的封装、合封存储、GPIO 和显示接口，但没有给出其 UART、I2C、SPI、I2S、PDM 或 Sigma-Delta ADC 的型号级数量。[DS5501 V1.7.2 数据手册][数据手册]表 0-1 也没有单独列出 SS6600A8。因此，表中将这些数量标为“未注明”；不能仅因它与 SF32LB551U4O5 同为 QFN68L 封装，就直接套用后者的数据。分配管脚前，请向思澈科技（SiFli）确认具体配置。
+**SS6600A8 的来源说明：**当前[思澈科技（SiFli）芯片型号指南][思澈科技（SiFli）芯片型号指南]列出了该型号的封装、合封存储、GPIO 和显示接口，但没有给出其 UART、I2C、SPI、I2S、PDM 或 Sigma-Delta ADC 的型号级数量。[DS5501 V1.7.2 数据手册][数据手册]表 0-1 也没有单独列出 SS6600A8。因此，表中将这些数量标为“未注明”；不能仅因它与 SF32LB551U4O5 同为 QFN68L 封装，就直接套用后者的数据。分配引脚前，请向思澈科技（SiFli）确认具体配置。
 
 - 1 路 USB 2.0 FS 主机/设备接口
 - 1 路 10 位 GPADC（SAR ADC）：数据手册列出最多 8 路单端输入或 4 对差分输入，单端输入范围为 0–1.1 V
@@ -143,7 +143,7 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 ### 电源与封装 { #power-supply-and-package }
 
 - 供电范围因型号而异：SS6600A8 为 2.97 V 至 3.63 V；551U4O5 和表列 BGA 型号为 1.71 V 至 3.63 V
-- 工作温度因型号而异：资料列出的 QFN 型号为 −20 °C 至 +70 °C；表列 BGA 型号为 −40 °C 至 +85 °C
+- 工作温度因型号而异：资料列出的 QFN 型号为 -20 °C 至 +70 °C；表列 BGA 型号为 -40 °C 至 +85 °C
 - 集成两路高效 BUCK 与低功耗 LDO 的电源管理
 - RTC 唤醒下睡眠电流：600 nA
 - 引脚唤醒下睡眠电流：280 nA
@@ -153,7 +153,7 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 
 SF32LB55x 提供 QFN 与 BGA 封装。由于 GPIO 数量、合封存储、显示接口选择和 PCB 工艺要求都会随封装而变化，应尽早锁定封装方案。
 
-对 55x 而言，封装选择不只是 PCB 成本问题。思澈科技（SiFli）的[芯片型号指南][思澈科技（SiFli）芯片型号指南]明确指出，不同封装支持的显示接口组合并不相同，因此应先确定封装，再敲定显示方案、合封存储和引脚分配。同一封装内的型号引脚兼容（pin-to-pin）；选用替代料时，仍须确认合封存储配置和显示需求。
+对 55x 而言，封装选择在这里不只是布局层面的决定。思澈科技（SiFli）的[芯片型号指南][思澈科技（SiFli）芯片型号指南]明确指出，不同封装支持的显示接口组合并不相同，因此应先确定封装，再敲定显示方案、合封存储和引脚分配。同一封装内的型号引脚兼容（pin-to-pin）；选用替代料时，仍须确认合封存储配置和显示需求。
 
 <div align="center"><em>SF32LB55x 按封装划分的 I/O 选项</em></div>
 
@@ -175,11 +175,11 @@ SF32LB55x 提供 QFN 与 BGA 封装。由于 GPIO 数量、合封存储、显示
 
 | 料号 | 封装 | 合封存储 | 型号指南列出的显示接口 | 选型要点 |
 | :--- | :--- | :--- | :--- | :--- |
-| SS6600A8 | QFN68L | 两颗 4 MB QSPI NOR 器件配置为单颗 8 MB OSPI NOR；不含合封 PSRAM | QSPI、8080 | 49 路 GPIO；2.97 V 至 3.63 V；−20 °C 至 +70 °C；紧凑型无合封 PSRAM 方案 |
-| SF32LB551U4O5 | QFN68L | 4 MB QSPI NOR 启动 Flash + 4 MB OPI-PSRAM | QSPI、8080 | 49 路 GPIO；1.71 V 至 3.63 V；−20 °C 至 +70 °C；紧凑型合封 PSRAM 方案 |
-| SF32LB555V4O6 | BGA145 | 4 MB QSPI NOR 启动 Flash + 4 MB OPI-PSRAM | MIPI DSI 命令模式、QSPI、8080 | 95 路 GPIO；−40 °C 至 +85 °C；适合需要 4 MB PSRAM 的均衡型 BGA145 显示产品 |
-| SF32LB555V436 | BGA145 | 4 MB QSPI NOR 启动 Flash + 8 MB OPI-PSRAM | MIPI DSI 命令模式、QSPI、8080 | 95 路 GPIO；−40 °C 至 +85 °C；适合需要 SF32LB555V4O6 两倍合封 PSRAM 容量的 BGA145 设计 |
-| SF32LB557VD3A6 | BGA169 | 1 MB QSPI NOR 启动 Flash + 16 MB OPI-PSRAM + 2 MB QPI-PSRAM | MIPI DSI 命令模式、QSPI、8080、JDI/Sharp MIP | 113 路 GPIO；−40 °C 至 +85 °C；支持 MIPI DSI 与 SPI/DSPI 双屏异显 |
+| SS6600A8 | QFN68L | 两颗 4 MB QSPI NOR 器件配置为单颗 8 MB OSPI NOR；不含合封 PSRAM | QSPI、8080 | 49 路 GPIO；2.97 V 至 3.63 V；-20 °C 至 +70 °C；紧凑型无合封 PSRAM 方案 |
+| SF32LB551U4O5 | QFN68L | 4 MB QSPI NOR 启动 Flash + 4 MB OPI-PSRAM | QSPI、8080 | 49 路 GPIO；1.71 V 至 3.63 V；-20 °C 至 +70 °C；紧凑型合封 PSRAM 方案 |
+| SF32LB555V4O6 | BGA145 | 4 MB QSPI NOR 启动 Flash + 4 MB OPI-PSRAM | MIPI DSI 命令模式、QSPI、8080 | 95 路 GPIO；-40 °C 至 +85 °C；适合需要 4 MB PSRAM 的均衡型 BGA145 显示产品 |
+| SF32LB555V436 | BGA145 | 4 MB QSPI NOR 启动 Flash + 8 MB OPI-PSRAM | MIPI DSI 命令模式、QSPI、8080 | 95 路 GPIO；-40 °C 至 +85 °C；适合需要 SF32LB555V4O6 两倍合封 PSRAM 容量的 BGA145 设计 |
+| SF32LB557VD3A6 | BGA169 | 1 MB QSPI NOR 启动 Flash + 16 MB OPI-PSRAM + 2 MB QPI-PSRAM | MIPI DSI 命令模式、QSPI、8080、JDI/Sharp MIP | 113 路 GPIO；-40 °C 至 +85 °C；支持 MIPI DSI 与 SPI/DSPI 双屏异显 |
 
 </div>
 
@@ -196,7 +196,7 @@ SF32LB55x 提供 QFN 与 BGA 封装。由于 GPIO 数量、合封存储、显示
 
 ## 相关产品 { #related-products }
 
-### 开发板 { #development-kits }
+### 开发套件 { #development-kits }
 
 建议以官方硬件应用说明、参考原理图和核对表作为封装选择、电源树定义、显示接口规划、存储选型、RF 布局以及量产测试规划的起点。
 

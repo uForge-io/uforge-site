@@ -54,7 +54,7 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système m�
 | Stockage | 5x MPI (en boîtier + externe), 2x SD/SDIO/eMMC |
 | Boîtier | 138 broches, 24 × 24 × 3,1 mm |
 | Alimentation | VDD_3V3 (2,97–3,6 V), VDD_1V8 (1,7–1,95 V), VDDIOA/VDDIOA2/VDDIOB (1,7–3,6 V) |
-| Antenne | Antenne externe via le point d'alimentation RF sur pastille « stamp-hole » ou un connecteur compatible IPEX, selon la référence |
+| Antenne | Antenne externe via un accès RF à demi-trous métallisés (stamp-hole) ou un connecteur compatible IPEX, selon la référence |
 | Température de fonctionnement | -40 à 85 °C |
 
 </div>
@@ -241,7 +241,7 @@ Toute broche marquée `PAxx_I2C_UART` ou `PBxx_I2C_UART` dans le tableau ci-dess
 
 **UART** — Duplex intégral, débit jusqu'à 6 Mbps, format de données configurable, contrôle de flux matériel (CTS/RTS), TX/RX multi-paquets par DMA. UART1–3 sont sur le HPSYS ; UART4–6 sont sur le LPSYS.
 
-**I2C** — Fonctionne en maître et en esclave, avec une FIFO de 8 octets et la prise en charge du DMA ; modes standard (100 kbps), rapide (400 kbps), rapide plus (1 Mbps) et haute vitesse (3,4 Mbps) ; adressage 7 bits/10 bits en mode maître ; étirement d'horloge (clock stretching) et filtre numérique anti-rebond configurable. I2C1–4 sont sur le HPSYS ; I2C5–7 sont sur le LPSYS.
+**I2C** — Fonctionne en maître et en esclave, avec une FIFO de 8 octets et la prise en charge du DMA ; modes standard (100 kbps), rapide (400 kbps), Fast-mode Plus (1 Mbps) et haute vitesse (3,4 Mbps) ; adressage 7 bits/10 bits en mode maître ; étirement d'horloge (clock stretching) et filtrage numérique configurable des impulsions parasites (glitchs). I2C1–4 sont sur le HPSYS ; I2C5–7 sont sur le LPSYS.
 
 **SPI** — Prend en charge les formats SSP/SPI (duplex intégral, maître ou esclave) et Microwire (semi-duplex, maître uniquement), largeur de données de 4 à 32 bits, polarité/phase d'horloge configurables, polarité de sélection de puce configurable, FIFO de 32 bits × 16 entrées, prise en charge DMA. SPI1/2 sont sur le HPSYS (48 MHz max) ; SPI3/4 sont sur le LPSYS (24 MHz max).
 
@@ -259,11 +259,11 @@ Toute broche marquée `PAxx_I2C_UART` ou `PBxx_I2C_UART` dans le tableau ci-dess
 
 **GPADC 12 bits** — ADC à approximations successives, taux d'échantillonnage max 4 MS/s, plage d'entrée 0–3,3 V en mode asymétrique / ±2,1 V en mode différentiel, 8 voies asymétriques (ou 4 paires différentielles), modes de mesure unique/continue, 4 créneaux temporels configurables par mesure, déclenchement logiciel/matériel, prise en charge DMA.
 
-**Capteur de température** — résolution de 0,2 °C, plage -40 °C à 125 °C, précision ±3 °C, lecture par scrutation ou interruption.
+**Capteur de température** — Résolution de 0,2 °C, plage -40 °C à 125 °C, précision ±3 °C, lecture par scrutation ou interruption.
 
 **DAC audio** — 2 voies intégrées 24 bits, taux d'échantillonnage 8 kHz–48 kHz, sortie différentielle.
 
-**PLL audio** — génération d'horloge fractionnaire-N avec une résolution de 48 MHz/2^18, prenant en charge les taux d'échantillonnage dérivés 48 MHz, 32,768 kHz et 44,1 kHz.
+**PLL audio** — Génération d'horloge fractionnaire-N avec une résolution de 48 MHz/2^18, prenant en charge les taux d'échantillonnage dérivés 48 MHz, 32,768 kHz et 44,1 kHz.
 
 **ADC audio** — 2 voies intégrées 24 bits, taux d'échantillonnage 8 kHz–48 kHz, contrôle de gain indépendant par voie.
 
@@ -413,7 +413,7 @@ La fiche technique fournit également un tableau d'affectation de broches recomm
 !!! info "Figure 8-2 : Affectation de broches recommandée pour la carte de référence"
     Voir la Figure 7-9 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
 
-Utilisez ces éléments comme point de départ pour un schéma de production et adaptez la sélection des broches au mélange de périphériques spécifique de votre produit.
+Utilisez ces éléments comme point de départ pour un schéma de production et adaptez la sélection des broches aux périphériques spécifiques de votre produit.
 
 ## 9. Liste de contrôle de conception du schéma { #9-schematic-design-checklist }
 
@@ -448,7 +448,7 @@ Le module mesure 24 × 24 × 3,1 mm.
 
 ### 10.3 Connecteur d'antenne externe { #103-external-antenna-connector }
 
-Pour les références prenant en charge une antenne externe, le module peut utiliser un point d'alimentation RF de type « stamp-hole » ou un connecteur compatible IPEX, selon la référence produit.
+Pour les références prenant en charge une antenne externe, le module peut utiliser un accès RF à demi-trous métallisés (stamp-hole) ou un connecteur compatible IPEX, selon la référence produit.
 
 !!! info "Figure 10-3 : Dimensions du connecteur d'antenne externe"
     Voir la Figure 8-3 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.

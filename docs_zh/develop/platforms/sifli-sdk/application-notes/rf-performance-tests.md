@@ -45,7 +45,7 @@ SDK 将蓝牙（Bluetooth）射频验证分为信令、非信令和单项射频�
 下列拓扑图取自思澈科技（SiFli）的 SF32LB52x 射频测试指南，展示了 PC、被测设备（DUT）、综测仪以及 UART/HCI/RF 连接之间的差异；其他系列的默认串口和管脚仍应以对应系列的资料为准。
 
 ![BT 信令测试拓扑](../../../../assets/develop/app-notes/rf/bt_signaling_test.png){ loading="lazy" }
-<div align="center"><em>图：思澈科技（SiFli）指南中的 SF32LB52x 示例——BT 信令：PC 配置仪器，DUT 与综测仪通过 RF 建立链路。</em></div>
+<div align="center"><em>图：思澈科技（SiFli）指南中的 SF32LB52x 示例——BT 信令：PC 配置综测仪，DUT 与综测仪通过 RF 建立链路。</em></div>
 
 ![BT 非信令测试拓扑](../../../../assets/develop/app-notes/rf/non_signaling_test.png){ loading="lazy" }
 <div align="center"><em>图：思澈科技（SiFli）指南中的 SF32LB52x 示例——BT 非信令：PC 通过串口/HCI 直接控制 DUT 的 RF 状态。</em></div>

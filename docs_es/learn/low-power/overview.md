@@ -16,7 +16,7 @@ La documentación del SDK de SiFli describe middleware de **PM (Power Management
 
 Use esta guía para traducir un objetivo de autonomía en decisiones de hardware y firmware respaldadas por mediciones. Está dirigida a quienes deben equilibrar el reposo conectado, la pantalla, el audio, los sensores, la IA y la respuesta del producto. El ahorro de energía no se resuelve con una sola llamada a una API de suspensión.
 
-## Defina primero el presupuesto energético del producto { #define-the-products-power-budget-first }
+## Defina primero el presupuesto de energía del producto { #define-the-products-power-budget-first }
 
 Antes de implementar la gestión de energía, determine qué autonomía debe ofrecer el producto:
 
@@ -26,7 +26,7 @@ Antes de implementar la gestión de energía, determine qué autonomía debe ofr
 - ¿Qué subsistemas deben permanecer siempre activos —por ejemplo, un enlace Bluetooth, una pantalla siempre encendida o un activador por voz— y cuáles pueden funcionar solo ante eventos?
 - Comportamiento de carga y número de ciclos previstos, si son relevantes para la estrategia energética del producto.
 
-Estos objetivos deben guiar desde el principio decisiones de arquitectura como la selección del chip y del tipo de pantalla, y determinar si funciones como la escucha continua para activar por voz o una pantalla siempre encendida caben en el presupuesto energético.
+Se recomienda que estos objetivos guíen desde el principio decisiones de arquitectura como la selección del chip y del tipo de pantalla, y determinen si funciones como la escucha continua para activar por voz o una pantalla siempre encendida caben en el presupuesto de energía.
 
 ## Modos de funcionamiento y gestión de PM { #power-modes-and-the-pm-framework }
 
@@ -45,7 +45,7 @@ Las siguientes son categorías conceptuales del estado del sistema, no una lista
 
 </div>
 
-La carga de trabajo hace que el sistema pase de un estado a otro. Una fuente de activación configurada despierta la CPU o el subsistema; la secuencia de reactivación y restauración de relojes depende del dispositivo. Al terminar, los controladores o las tareas responsables deben retirar las solicitudes de PM que impiden la suspensión, para que la política configurada pueda elegir un estado de bajo consumo admisible. El diagrama siguiente es ilustrativo: muestra transiciones relativas, no valores de corriente ni tiempos específicos de un dispositivo.
+La carga de trabajo hace que el sistema pase de un estado a otro. Una fuente de activación configurada despierta la CPU o el subsistema; la secuencia de reactivación y restauración de relojes depende del dispositivo. Al terminar, se recomienda que los controladores o las tareas responsables liberen las solicitudes de PM que impiden la suspensión, para que la política configurada pueda elegir un estado de bajo consumo admisible. El diagrama siguiente es ilustrativo: muestra transiciones relativas, no valores de corriente ni tiempos específicos de un dispositivo.
 
 <div align="center">
 <img src="assets/power-mode-transition-es.svg" alt="Traza ilustrativa de corriente relativa con Deep Sleep, reactivación, actividad, inactividad y retorno al bajo consumo" width="960">
@@ -54,7 +54,7 @@ La carga de trabajo hace que el sistema pase de un estado a otro. Una fuente de 
 
 La selección del modo de bajo consumo y el bloqueo de la suspensión son mecanismos distintos. La [referencia del middleware PM para SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/middleware/pm.html) y la [guía de bajo consumo para SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/low_power.html) de SiFli documentan que `rt_pm_request(PM_SLEEP_MODE_IDLE)` bloquea la entrada en LIGHT, DEEP y STANDBY hasta que se llama al `rt_pm_release(PM_SLEEP_MODE_IDLE)` correspondiente; la solicitud no selecciona un modo más profundo.
 
-Para implementarlo, consulte la guía oficial de bajo consumo de la familia concreta: [SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html), [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/low_power.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/low_power.html) o [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/low_power.html). Los modos disponibles, las condiciones de entrada, las fuentes de activación y el estado que se conserva dependen de la familia, la placa y la configuración del SDK. La [guía de bajo consumo de SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html) incluye un ejemplo de configuración de los pines de activación Hibernate que menciona expresamente 58x/56x/52x/57x; la referencia común de [HAL PMU del SDK](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/pmu.html) indica que `HAL_PMU_EnablePinWakeup()` usa índices del 0 al 13 para SF32LB57x. Estas fuentes solo respaldan esa configuración de pines; no demuestran que la disponibilidad de los modos RT-Thread de 52x, los umbrales de la política PM ni el comportamiento de retención de 52x también se apliquen a 57x. Confirme esos puntos en la documentación del SDK y del dispositivo concretos. En general, una política configurada solo puede seleccionar un estado admisible más profundo si el intervalo de inactividad y las demás condiciones de entrada lo permiten. Una solicitud que no se libere puede mantener el sistema en un estado más superficial del previsto.
+Para implementarlo, consulte la guía oficial de bajo consumo de la familia concreta: [SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html), [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/low_power.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/low_power.html) o [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/low_power.html). Los modos disponibles, las condiciones de entrada, las fuentes de activación y el estado que se conserva dependen de la familia, la placa y la configuración del SDK. La [guía de bajo consumo de SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html) incluye un ejemplo de configuración de los pines de activación Hibernate que menciona expresamente 58x/56x/52x/57x; la referencia común de [HAL PMU del SDK](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/pmu.html) indica que `HAL_PMU_EnablePinWakeup()` usa índices del 0 al 13 para SF32LB57x. Estas fuentes solo respaldan esa configuración de pines; no demuestran que la disponibilidad de los modos RT-Thread de 52x, los umbrales de la política PM ni el comportamiento de retención de 52x también se apliquen a 57x. Confirme esos puntos en la documentación del SDK y del dispositivo concretos. En general, una política configurada solo puede seleccionar un estado admisible más profundo si el intervalo de inactividad y las demás condiciones de entrada lo permiten. Una solicitud que no se libere puede mantener el sistema en un estado menos profundo del previsto.
 
 ## Qué consume energía en un producto SF32 { #what-drains-power-on-an-sf32-product }
 
@@ -67,7 +67,7 @@ Cada subsistema tiene un perfil de consumo distinto:
 | Subsistema | Principal factor de consumo | Guía |
 |:----------|:--------------------|:------|
 | **CPU** | Tiempo de ejecución activo, no solo la velocidad de reloj | Esta guía |
-| **Radio Bluetooth** | Intervalo de publicidad, intervalo de conexión, latencia del esclavo (Slave Latency), potencia de transmisión | [Resumen de Bluetooth](../bluetooth/overview.md#advertising-and-connection-parameters) |
+| **Radio Bluetooth** | Intervalo de anuncio, intervalo de conexión, latencia del esclavo (Slave Latency), potencia de transmisión | [Resumen de Bluetooth](../bluetooth/overview.md#advertising-and-connection-parameters) |
 | **Pantalla** | Frecuencia de actualización, actualización completa o parcial, retroiluminación | [Controlador de pantalla: refresco parcial y regiones modificadas](../graphics/display-controller.md#partial-refresh-and-dirty-regions) |
 | **Códec de audio/DMA** | Duración de la sesión, frecuencia de muestreo y si el códec permanece encendido entre sesiones | [Descripción general del audio](../audio/overview.md#power-considerations-for-audio) |
 | **Inferencia de IA** | Frecuencia de inferencia y tamaño de la ventana, no solo el tamaño del modelo | [Resumen de IA](../ai/overview.md#power-aware-inference-scheduling) |
@@ -84,7 +84,7 @@ Las mayores mejoras suelen venir de la arquitectura del firmware, no de trucos d
 
 - **Prefiera interrupciones y eventos a la consulta periódica (polling).** Un bucle de sondeo mantiene activa la CPU aunque no haya trabajo que realizar.
 - **Agrupe el trabajo.** Si la latencia lo permite, acumule muestras de sensores, eventos Bluetooth o bloques de audio y procéselos juntos, en lugar de reactivar el sistema para cada uno.
-- **Libere pronto las solicitudes de PM que impiden el reposo.** Si un controlador o una tarea mantiene una solicitud que bloquea la entrada en un estado de menor consumo, debe liberar la solicitud correspondiente cuando ya no necesite impedirla. Si queda activa, el sistema puede permanecer en un estado menos profundo de lo previsto.
+- **Libere pronto las solicitudes de PM que impiden el reposo.** Si un controlador o una tarea mantiene una solicitud que bloquea la entrada en un estado de menor consumo, se recomienda liberar la solicitud correspondiente en cuanto deje de ser necesaria. Si queda activa, el sistema puede permanecer en un estado menos profundo de lo previsto.
 - **Diseñe los flujos de la interfaz y del audio para responder a eventos**, no para ejecutarse por consultas periódicas, siempre que el framework lo permita.
 - **Revise los temporizadores.** Un temporizador periódico programa trabajo futuro y puede reactivar el sistema o reducir el intervalo de inactividad disponible para la política de PM. Por ello, varios temporizadores aparentemente inofensivos pueden reducir el tiempo en estados de bajo consumo más profundos.
 
@@ -94,12 +94,12 @@ Antes de estimar la autonomía del producto, elija un ejemplo del SDK que permit
 
 ## Optimice el consumo de Bluetooth { #bluetooth-power-tuning }
 
-Los parámetros de conexión y de publicidad son las principales herramientas para reducir el consumo de Bluetooth (consulte la tabla completa en el [resumen de Bluetooth](../bluetooth/overview.md#advertising-and-connection-parameters)):
+Los parámetros de conexión y de anuncio son las principales herramientas para reducir el consumo de Bluetooth (consulte la tabla completa en el [resumen de Bluetooth](../bluetooth/overview.md#advertising-and-connection-parameters)):
 
 - En enlaces que suelen estar inactivos, aumente el intervalo de conexión y la latencia del esclavo (Slave Latency).
 - Reduzca la potencia de transmisión al nivel mínimo que aún proporcione el alcance necesario.
 - Cuando el producto espere reconexiones y ya no necesite facilitar su descubrimiento inicial, reduzca la frecuencia de los anuncios.
-- Cuando el SDK elegido ejecute los eventos del controlador Bluetooth en un procesador independiente, la CPU de aplicación puede dormir entre eventos de conexión si ninguna tarea, fuente de activación o mensaje entre procesadores requiere que despierte. Reactivarla con cada callback de Bluetooth reduce esa ventaja; compruebe la asignación de núcleos y tareas del dispositivo de destino.
+- Cuando el SDK elegido ejecute los eventos del controlador Bluetooth en un procesador independiente, la CPU de aplicación puede dormir entre eventos de conexión si ninguna tarea, fuente de activación o mensaje entre procesadores requiere que despierte. Reactivarla con cada callback de Bluetooth puede reducir esa ventaja; compruebe la asignación de núcleos y tareas del dispositivo de destino.
 
 Para medir por escenarios el consumo real con solo Bluetooth clásico, solo BLE y ambos funcionando en modo dual, consulte [Medición y análisis del consumo energético de Bluetooth](../bluetooth/bluetooth-low-power-profiling.md).
 
@@ -110,7 +110,7 @@ En los dispositivos vestibles y de mano, la pantalla y la retroiluminación suel
 - Cuando el panel y la interfaz lo permitan, actualice solo las regiones modificadas en lugar de redibujar toda la pantalla (consulte [Controlador de pantalla: refresco parcial y regiones modificadas](../graphics/display-controller.md#partial-refresh-and-dirty-regions)).
 - Durante la inactividad, reduzca el brillo de la pantalla o apague la retroiluminación cuando corresponda. Detenga también las animaciones cuando la pantalla esté atenuada o cubierta.
 - Para productos con pantalla siempre encendida, compare paneles como EPD, JDI/memory-in-pixel, AMOLED y TFT según la energía medida en ese modo y la experiencia de uso requerida. Elija el panel y la estrategia de funcionamiento que se ajusten al presupuesto, en lugar de mantener continuamente el modo activo habitual.
-- Incluya la pantalla siempre encendida como una partida independiente del presupuesto energético: cambia de forma sustancial qué significa que el producto esté inactivo.
+- Incluya la pantalla siempre encendida como una partida independiente del presupuesto de energía: cambia de forma sustancial qué significa que el producto esté inactivo.
 
 ## Reduzca el consumo de IA y sensores { #ai-and-sensor-power-tuning }
 
@@ -128,7 +128,7 @@ La memoria desde la que se ejecuta el código influye tanto en el rendimiento co
 
 Más allá de la propia CPU:
 
-- La PSRAM y la Flash externas tienen consumos propios en los modos activo y de espera. Consulte en sus hojas de datos el consumo durante el acceso y los requisitos de retención, sobre todo si los búferes grandes deben conservar su contenido durante la suspensión.
+- La PSRAM y la Flash externas tienen consumos propios en los modos activo y Standby. Consulte en sus hojas de datos el consumo durante el acceso y los requisitos de retención, sobre todo si los búferes grandes deben conservar su contenido durante la suspensión.
 - La fuente de reloj —cristal u oscilador interno— y los dominios de PLL y reloj que deban permanecer activos afectan tanto a la latencia de reactivación como al consumo en suspensión.
 - Reducir la frecuencia de la CPU puede ayudar durante las fases menos exigentes. Compruebe, sin embargo, que el mayor tiempo de actividad no anule el ahorro. Mida la energía consumida, no solo la corriente instantánea.
 
@@ -145,11 +145,11 @@ La estrategia del firmware está limitada por las posibilidades del hardware:
 
 Encender la pantalla al levantar la muñeca es un caso de uso habitual en dispositivos vestibles, pero su implementación depende del sensor, la placa y el SDK. El [ejemplo de SiFli para activar la pantalla al levantar la muñeca en SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/raise_wrist/README.html) está dirigido a la placa `sf32lb52-lchspi-ulp` y utiliza un LSM6DSL (acelerómetro/giroscopio); toma muestras de aceleración cada 200 ms para reconocer los gestos de levantar y bajar la muñeca. El dispositivo entra en suspensión tras 10 segundos de inactividad y se reactiva para encender la pantalla cuando detecta que se levanta la muñeca. Es una implementación específica de una placa y no demuestra que otros dispositivos usen una interrupción del sensor o tengan el mismo comportamiento de PM. Si el sensor objetivo admite interrupciones de movimiento o umbral, el firmware puede configurarlas como fuente de activación para evitar consultas continuas desde la CPU de aplicación. De lo contrario, incluya el muestreo del sensor y las activaciones de CPU en el presupuesto de energía. Verifique el sensor, la placa, las fuentes de activación y la configuración de PM del objetivo concreto.
 
-## Plantilla de presupuesto energético { #power-budget-worksheet }
+## Plantilla de presupuesto de energía { #power-budget-worksheet }
 
 Cuantifique el objetivo del producto antes de optimizar el firmware. Una tabla sencilla suele ser suficiente:
 
-<div align="center"><em>Tabla: Plantilla de presupuesto energético</em></div>
+<div align="center"><em>Tabla: Plantilla de presupuesto de energía</em></div>
 
 <div align="center" markdown>
 
@@ -187,7 +187,7 @@ Un perfil es una estimación, no una medición. El [Online Power Profiler for Bl
 Para cada escenario, capture las suposiciones que influyen significativamente en la energía:
 
 - ¿Qué subsistemas están encendidos y en qué modo de bajo consumo entra realmente la MCU?
-- ¿Qué corriente se mide en la entrada de batería y en cada línea de alimentación regulada?
+- ¿Qué corriente se mide en la entrada de batería o en cada raíl regulado?
 - ¿Cuánto dura cada actividad y con qué frecuencia se produce en un día típico?
 - ¿Qué picos de corriente son previsibles y cuáles indican actividad inesperada o una transición a suspensión que no se produjo?
 
@@ -203,15 +203,15 @@ Un diseño de bajo consumo fiable debe asignar claramente quién gestiona cada f
 
 | Elemento | Pregunta de revisión | Posible fallo |
 |:-----|:----------------|:-------------|
-| Responsable de solicitudes/bloqueos de PM | ¿Qué controlador o tarea puede impedir la entrada en un estado más profundo? | Una solicitud no retirada puede mantener el sistema en un estado más superficial. |
-| Condición para retirar la solicitud | ¿Qué evento o ruta de error garantiza que se retire la solicitud correspondiente? | Una solicitud que permanece activa puede impedir una suspensión más profunda y aumentar el consumo. |
+| Responsable de solicitudes/bloqueos de PM | ¿Qué controlador o tarea puede impedir la entrada en un estado más profundo? | Una solicitud no liberada puede mantener el sistema en un estado menos profundo. |
+| Condición para liberar la solicitud | ¿Qué evento o ruta de error garantiza que se libere la solicitud correspondiente? | Una solicitud que permanece activa puede impedir una suspensión más profunda y aumentar el consumo. |
 | Fuente de activación | ¿Qué interrupción, temporizador, evento BLE o sensor admitido y configurado en el dispositivo puede reactivar la CPU? | Las reactivaciones periódicas inesperadas dominan la corriente en reposo. |
 | Dependencia de reloj | ¿Qué dominio de reloj debe seguir activo? | Un periférico impide silenciosamente una suspensión más profunda. |
 | Retención necesaria | ¿Qué datos o estado deben conservarse durante la suspensión? | Conservar de más desperdicia corriente; conservar de menos altera el comportamiento de activación. |
 
 </div>
 
-Durante la depuración, registre la política PM configurada, las solicitudes activas que inhiben modos más profundos y el último modo de bajo consumo indicado por el SDK o sus registros. Si el sistema alcanza un estado más superficial de lo esperado, estos datos suelen ser más reveladores que una lectura aislada de corriente.
+Durante la depuración, registre la política PM configurada, las solicitudes activas que inhiben modos más profundos y el último modo de bajo consumo indicado por el SDK o sus registros. Si el sistema alcanza un estado menos profundo de lo esperado, estos datos suelen ser más reveladores que una lectura aislada de corriente.
 
 ## Cómo medir el consumo en la práctica { #measuring-power-in-practice }
 
@@ -252,7 +252,7 @@ Registre la versión del firmware, la revisión de la placa, la tensión de la b
 
 | Síntoma | Posible causa que se debe revisar |
 |:--------|:----------------------|
-| El dispositivo nunca entra en Deep Sleep | Un controlador o una tarea no retira una solicitud de PM. Compruebe si faltan llamadas para liberarla. |
+| El dispositivo nunca entra en Deep Sleep | Un controlador o una tarea no libera una solicitud de PM. Compruebe si faltan llamadas para liberarla. |
 | Consumo alto con una conexión Bluetooth aparentemente inactiva | No se configuró la latencia del esclavo o la aplicación se reactiva en cada evento de conexión. |
 | Los picos de consumo coinciden con la actividad de la pantalla | Se redibuja la pantalla completa en vez de actualizar solo las zonas modificadas, o la retroiluminación queda al máximo. |
 | El consumo aumenta tras actualizar el firmware | Se añadió un temporizador, un bucle de sondeo o un periférico siempre activo sin revisar su impacto energético. |
@@ -275,18 +275,18 @@ Registre la versión del firmware, la revisión de la placa, la tensión de la b
 
 - [ ] Defina la autonomía objetivo, el ciclo de actividad y las fuentes de activación necesarias.
 - [ ] Determine qué subsistemas deben permanecer siempre activos y cuáles pueden funcionar solo ante eventos.
-- [ ] Compruebe que cada controlador y tarea retira su solicitud de PM en cuanto termina el trabajo.
-- [ ] Ajuste los parámetros de publicidad y conexión Bluetooth al uso real del producto.
+- [ ] Compruebe que cada controlador y tarea libera su solicitud de PM en cuanto termina el trabajo.
+- [ ] Ajuste los parámetros de anuncio y conexión Bluetooth al uso real del producto.
 - [ ] Compruebe que la pantalla usa actualización parcial cuando es compatible y que la retroiluminación responde al comportamiento previsto.
 - [ ] Revise los temporizadores periódicos y elimine o combine los innecesarios.
 - [ ] Prepare la medición de corriente y valide por separado los estados activo, inactivo y de suspensión.
-- [ ] Pruebe la carga combinada del peor caso (Bluetooth, pantalla y, si corresponde, audio e IA) y confirme que respeta el presupuesto energético.
+- [ ] Pruebe la carga combinada del peor caso (Bluetooth, pantalla y, si corresponde, audio e IA) y confirme que respeta el presupuesto de energía.
 - [ ] Vuelva a validar el consumo tras cada cambio importante del firmware, no solo al final del proyecto.
 
 ## Conclusiones clave { #key-takeaways }
 
 - El consumo es una propiedad del sistema: las decisiones sobre Bluetooth, pantalla, audio, IA y memoria determinan en conjunto cuánto y con qué frecuencia puede suspenderse el dispositivo.
-- La política PM configurada selecciona entre los estados de bajo consumo admisibles; una solicitud no retirada que inhiba modos más profundos puede dejar el sistema en un estado más superficial del previsto.
+- La política PM configurada selecciona entre los estados de bajo consumo admisibles; una solicitud no liberada que inhiba modos más profundos puede dejar el sistema en un estado menos profundo del previsto.
 - El diseño basado en eventos e interrupciones suele consumir menos que la consulta periódica cuando la energía es importante.
 - En un dispositivo conectado, los parámetros de conexión Bluetooth y la estrategia de actualización de la pantalla suelen ser las dos principales palancas de ahorro.
 - Mida el consumo real con cargas combinadas y representativas, sobre el hardware definitivo y dentro de su carcasa final. Las mediciones de banco y las de subsistemas aislados pueden infravalorar el consumo del producto completo.

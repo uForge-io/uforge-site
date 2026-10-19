@@ -79,7 +79,7 @@ lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
 1. Initialisez le pilote d'affichage et vérifiez les aplats de couleur avant de déboguer les widgets LVGL.
 2. Créez une étiquette et un bouton.
 3. Configurez la fonction de rappel du bouton pour modifier le texte de l'étiquette.
-4. Ajoutez une petite animation et observez l'utilisation du CPU ou le timing des images via les outils shell.
+4. Ajoutez une petite animation et observez l'utilisation du CPU ou le minutage des images via les outils shell.
 5. Avant d'augmenter la charge graphique, lisez dans la [Vue d'ensemble des graphismes](../../learn/graphics/overview.md) les sections sur la stratégie de tampon, le rafraîchissement partiel et ePicasso.
 
 **Critères de réussite :** l'écran s'initialise de façon fiable après une réinitialisation ; une entrée tactile ou par bouton, si elle est disponible et configurée, modifie l'état de l'interface ; et une animation simple ne bloque ni le shell ni Bluetooth.

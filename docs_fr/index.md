@@ -55,7 +55,7 @@ hide:
   <span class="uf-spotlight-item__art uf-spotlight-item__art--board" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">Matériel</span>
   <span class="uf-spotlight-item__title">Modules et cartes de développement</span>
-  <span class="uf-spotlight-item__copy">Du matériel validé pour accélérer le passage de la conception à la production.</span>
+  <span class="uf-spotlight-item__copy">Du matériel testé pour accélérer le passage de la conception à la production.</span>
 </a>
 
 <a class="uf-spotlight-item uf-spotlight-item--sdk" href="develop/index.md" data-radius="245">
@@ -75,8 +75,8 @@ hide:
 <a class="uf-spotlight-item uf-spotlight-item--examples" href="projects/index.md" data-radius="230">
   <span class="uf-spotlight-item__art uf-spotlight-item__art--examples" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">Projets</span>
-  <span class="uf-spotlight-item__title">Montres connectées et HMI</span>
-  <span class="uf-spotlight-item__copy">Exemples d'applications conçus pour un usage en production.</span>
+  <span class="uf-spotlight-item__title">Montres et HMI</span>
+  <span class="uf-spotlight-item__copy">Exemples d'applications de qualité production.</span>
 </a>
 
 </div>
@@ -86,7 +86,7 @@ hide:
 
 - :fontawesome-solid-microchip:{ .uf-ql-icon .uf-purple } **Matériel**
 
-    Microcontrôleurs, modules, cartes de développement et designs de référence prêts pour la production.
+    Microcontrôleurs, modules, cartes de développement et conceptions de référence prêtes pour la production.
 
     [Voir le matériel :material-arrow-right:](sf32-products/family/SF32_family.md){ .uf-link-purple }
 
@@ -100,11 +100,11 @@ hide:
 
     Guides d'architecture et de sous-systèmes pour les graphiques, le Bluetooth, l'IA, l'audio et les systèmes à basse consommation.
 
-    [Voir les ressources :material-arrow-right:](learn/index.md){ .uf-link-blue }
+    [Explorer la section Apprendre :material-arrow-right:](learn/index.md){ .uf-link-blue }
 
 - :fontawesome-solid-rocket:{ .uf-ql-icon .uf-pink } **Exemples**
 
-    Exemples d'applications pour les usages embarqués courants, conçus en vue d'un déploiement en production.
+    Exemples d'applications pour les usages embarqués courants, de qualité production.
 
     [Parcourir les exemples :material-arrow-right:](develop/examples/index.md){ .uf-link-pink }
 
@@ -182,7 +182,7 @@ hide:
 
 - <span class="uf-mcu-chip">SF32LB56</span>
 
-    <span class="uf-mcu-headtext">**SF32LB56x**{ .uf-mcu-title } <span class="uf-mcu-sub">MCU optimisé pour le graphisme</span></span>
+    <span class="uf-mcu-headtext">**SF32LB56x**{ .uf-mcu-title } <span class="uf-mcu-sub">MCU optimisé pour les graphiques</span></span>
 
     ---
 
@@ -205,7 +205,7 @@ hide:
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Architecture à trois cœurs : HCPU, ACPU et LCPU
     - :fontawesome-solid-circle:{ .uf-dot-blue } Affichage MIPI jusqu'à 1280 x 720
-    - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2,5D + graphisme vectoriel, ePicasso 2.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2,5D + graphiques vectoriels, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 et décodage JPEG/MJPEG
     - :fontawesome-solid-circle:{ .uf-dot-blue } Codec audio, 2 x AMIC, 4 x DMIC
     - :fontawesome-solid-circle:{ .uf-dot-blue } 3,7 Mo de SRAM, jusqu'à 64 Mo de PSRAM

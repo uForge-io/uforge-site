@@ -159,7 +159,7 @@ flowchart LR
 
 Die wichtigsten Fehlerbereiche sind Dateisystem/ROM, Mapper/Emulator, PSRAM/Speicher, Display/Frame-Timing, AW9523-Eingabe, Audio, Spielstand sowie Stromversorgung/Reset. Bei einem schwarzen Bildschirm ist zunächst zu unterscheiden, ob das ROM nicht gefunden wurde, die Bilddatei nicht dekodiert werden konnte, der Mapper nicht unterstützt wird, die Framebuffer-Zuweisung fehlgeschlagen ist oder der LCD-Pfad nicht funktioniert. Melden Sie dies nicht pauschal als Emulatorfehler.
 
-## Phase 1 — Die unveränderte Spielbasis etablieren { #stage-1-establish-the-untouched-game-baseline }
+## Phase 1 — Die unveränderte Spielbasis einrichten { #stage-1-establish-the-untouched-game-baseline }
 
 **Ziel:** Mit einem rechtmäßig nutzbaren Test-ROM den vollständigen Pfad von der Build-Eingabe bis zum laufenden Spiel prüfen.
 

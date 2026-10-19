@@ -26,7 +26,7 @@ Viele eingebettete Produkte müssen intelligent reagieren, ohne fortlaufend Rohd
 - Bessere Privatsphäre, da rohe biometrische, Audio- oder Bewegungsdaten lokal bleiben können.
 - Geringerer Funkverkehr, da nur Ereignisse oder Zusammenfassungen übertragen werden müssen.
 - Besseres Offline-Verhalten, da Kernfunktionen ohne Netzwerkzugang funktionieren können.
-- Eine geringere durchschnittliche Leistungsaufnahme ist nur dann möglich, wenn die vollständige Funktion bei gleicher Genauigkeit und Erkennungsabdeckung über denselben Nutzungszeitraum weniger Energie benötigt. Berücksichtigen Sie dabei auch den Aufwand für die Auslagerung.
+- Geringere durchschnittliche Leistungsaufnahme, aber nur, wenn die vollständige Funktion bei gleicher Genauigkeit und Erkennungsabdeckung über denselben Nutzungszeitraum weniger Energie benötigt, einschließlich des Auslagerungsaufwands.
 
 Für tragbare Geräte und AIoT-Produkte sind diese Vorteile konkret: Eine Uhr kann Gesten klassifizieren, Aktivitätszustände erkennen, Gesundheitssignale überwachen, einfache Sprachtrigger erkennen oder Sensordaten verarbeiten, während Display, Bluetooth und Anwendungsprozessor reaktionsfähig bleiben.
 
@@ -73,7 +73,7 @@ KI-Beschleuniger sind nützlich, weil viele Anwendungen neuronaler Netze dieselb
 
 Dies sind Beispiele für Berechnungen neuronaler Netze, keine Liste der von SF32 NNACC unterstützten Operationen. Der [NNACC-Leitfaden des SiFli SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/docs/source/en/hal/nnacc.md) dokumentiert die NNACC-Beschleunigung für drei CMSIS-NN-q7-Faltungsfunktionen, darunter kanalweise Faltung (Depthwise Convolution), und gibt an, dass die NNACC-beschleunigte CMSIS-NN-Implementierung achtmal schneller ist als die ARM-DSP-Implementierung in CMSIS-NN. Der Leitfaden nennt für diesen Wert keine Testbedingungen; behandeln Sie ihn als Herstellerangabe und nicht als Garantie für eine geringere Latenz oder Energieaufnahme des Gesamtmodells. Prüfen Sie jeden Modelloperator und sein Zahlenformat auf Kompatibilität mit der gewählten Implementierung. Matrixmultiplikation, Aktivierung und Pooling sind nicht automatisch jeweils eigenständig beschleunigt. Das SDK bietet außerdem HAL-APIs zur direkten Steuerung des Beschleunigers; gehen Sie jedoch nicht davon aus, dass eine dieser Schnittstellen einen vollständigen Modellkonverter oder eine Laufzeitumgebung für den Rechengraphen bereitstellt. Firmware oder eine separate Inferenz-Laufzeitumgebung muss die Schichten orchestrieren und Puffer verwalten. Für einen CPU-Fallback ist zudem eine Implementierung der nicht unterstützten Operationen erforderlich.
 
-SF32-Geräte haben begrenzte Speicher- und Bandbreitenressourcen. Beginnen Sie daher mit einem kompakten eingebetteten Modell. Prüfen Sie die NNACC-Verfügbarkeit und die Operatorunterstützung für die genaue Teilenummer und messen Sie anschließend Speicherbedarf, Latenz und Energieverbrauch der gesamten Verarbeitungskette. Leiten Sie die Unterstützung nicht allein aus dem Familiennamen ab.
+SF32-Geräte haben begrenzte Speicher- und Bandbreitenressourcen. Beginnen Sie daher mit einem kompakten eingebetteten Modell. Prüfen Sie die NNACC-Verfügbarkeit und die Operatorunterstützung für das genaue Bauteil und messen Sie anschließend Speicherbedarf, Latenz und Energieverbrauch der gesamten Verarbeitungskette. Leiten Sie die Unterstützung nicht allein aus dem Familiennamen ab.
 
 Typische KI-Anwendungen sind:
 
@@ -107,7 +107,7 @@ Der Beschleuniger ersetzt die CPU nicht und führt nicht jedes beliebige Modell 
 
 ## Einordnung nach Gerätefamilie { #device-family-positioning }
 
-Wählen Sie das Gerät anhand der Operatoren, des Speicherbudgets und der gesamten Produktlast, nicht anhand einer pauschalen Leistungsrangfolge der Familien. Der SDK-v2.5.1-Leitfaden dokumentiert jeweils einen NNACC im HCPU-Subsystem von SF32LB55x und SF32LB56x sowie jeweils einen im HCPU- und LCPU-Subsystem von SF32LB58x. Diese Ressourcen helfen bei der Auswahl, garantieren aber weder eine schnellere Ausführung des gesamten Modells noch weniger Energieverbrauch. Prüfen Sie Verfügbarkeit, zugänglichen Speicher und Softwareunterstützung für die konkrete Teilenummer und Konfiguration.
+Wählen Sie das Gerät anhand der Operatoren, des Speicherbudgets und der gesamten Produktlast, nicht anhand einer pauschalen Leistungsrangfolge der Familien. Der SDK-v2.5.1-Leitfaden dokumentiert jeweils einen NNACC im HCPU-Subsystem von SF32LB55x und SF32LB56x sowie jeweils einen im HCPU- und LCPU-Subsystem von SF32LB58x. Diese Ressourcen helfen bei der Auswahl, garantieren aber weder eine schnellere Ausführung des gesamten Modells noch weniger Energieverbrauch. Prüfen Sie Verfügbarkeit, zugänglichen Speicher und Softwareunterstützung für das konkrete Bauteil und die Konfiguration.
 
 <div align="center"><em>Tabelle: Einordnung nach Gerätefamilie</em></div>
 
@@ -115,11 +115,11 @@ Wählen Sie das Gerät anhand der Operatoren, des Speicherbudgets und der gesamt
 
 | Gerätefamilie | KI-Positionierung |
 |:--------------|:---------------|
-| **SF32LB52x** | Ein Kandidat für kostenoptimierte Bluetooth-, Audio- und einfache HMI-Produkte; eine schlanke CPU-Implementierung als Referenz verwenden, sofern keine konkrete Beschleunigung verifiziert ist. |
+| **SF32LB52x** | Ein Kandidat für kostenoptimierte Bluetooth-, Audio- und einfache HMI-Produkte; verwenden Sie eine schlanke CPU-Implementierung als Referenz, sofern keine konkrete Beschleunigung verifiziert ist. |
 | **SF32LB55x** | Geeignet für tragbare BLE-Geräte und sensorreiche Produkte; passend für stromsparende Sensorik und kompakte Algorithmen. |
-| **SF32LB56x** | Ein Kandidat für umfangreichere UI, vernetzte HMI sowie Sensor- oder Multimedia-Verarbeitung; gewählte Konfiguration und Operatorunterstützung des HCPU-NNACC prüfen. |
-| **SF32LB57x** | Der zitierte Leitfaden belegt die NNACC-Verfügbarkeit für diese Familie nicht; prüfen Sie vor der Auswahl für KI die genaue Teilenummer sowie Operator-, Laufzeit- und Speicherunterstützung von SDK und Platine. |
-| **SF32LB58x** | Ein Kandidat für kombinierte KI-, Grafik- und Audiolasten, wenn Speicher und HCPU/LCPU-Ressourcen der gewählten Teilenummer die Produktanforderungen erfüllen; Operatoren, Integrationsaufwand und gemessenen Energiebedarf prüfen. |
+| **SF32LB56x** | Ein Kandidat für umfangreichere UI, vernetzte HMI sowie Sensor- oder Multimedia-Verarbeitung; prüfen Sie die gewählte Konfiguration und die Operatorunterstützung des HCPU-NNACC. |
+| **SF32LB57x** | Der zitierte Leitfaden belegt die NNACC-Verfügbarkeit für diese Familie nicht; prüfen Sie vor der Auswahl für KI das genaue Bauteil sowie Operator-, Laufzeit- und Speicherunterstützung von SDK und Platine. |
+| **SF32LB58x** | Ein Kandidat für kombinierte KI-, Grafik- und Audiolasten, wenn Speicher und HCPU/LCPU-Ressourcen des gewählten Bauteils die Produktanforderungen erfüllen; prüfen Sie Operatoren, Integrationsaufwand und gemessenen Energiebedarf. |
 
 </div>
 
@@ -195,7 +195,7 @@ Bündeln Sie Abtastwerte und verwenden Sie Interrupts, soweit Erkennungsabdeckun
 
 ### Kamera- und Bildeingang { #camera-and-image-input }
 
-Der Kameraeingang hängt von Chip, Gehäuse, Entwicklungsboard und Erfassungstreiber ab. Der [GC032A-Sensortreiber im SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/customer/peripherals/camera/gc032a/drv_gc032a.c) konfiguriert einen 8-Bit-DVP- oder Zwei-Bit-SPI-Sensorausgang. Das belegt nicht, dass beide Erfassungspfade auf jedem SF32-Gerät funktionieren. Prüfen Sie vor der Kameraauswahl Pins, Erfassung über Peripherie oder PTM, Sensortiming und Treiber. Bildverarbeitung benötigt häufig größere Framebuffer und mehr Bandbreite als Audio- oder Bewegungsverarbeitung; vergleichen Sie aber die tatsächlichen Auflösungen und Raten.
+Der Kameraeingang hängt von Chip, Gehäuse, Platine und Erfassungstreiber ab. Der [GC032A-Sensortreiber im SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/customer/peripherals/camera/gc032a/drv_gc032a.c) konfiguriert einen 8-Bit-DVP- oder Zwei-Bit-SPI-Sensorausgang. Das belegt nicht, dass beide Erfassungspfade auf jedem SF32-Gerät funktionieren. Prüfen Sie vor der Kameraauswahl Pins, Erfassung über Peripherie oder PTM, Sensortiming und Treiber. Bildverarbeitung benötigt häufig größere Framebuffer und mehr Bandbreite als Audio- oder Bewegungsverarbeitung; vergleichen Sie aber die tatsächlichen Auflösungen und Raten.
 
 Erwägen Sie kleinere Frames, Bildbereiche, niedrigere Bildraten oder ein für eingebettete Systeme ausgelegtes Modell. Zuschneiden in der Firmware nach der Erfassung verkleinert den Modelleingang, nicht zwingend den Kameradatenverkehr oder den Erfassungspuffer. Dafür können sensorinternes Zuschneiden oder eine geringere Datenerfassung nötig sein.
 
@@ -203,13 +203,13 @@ Erwägen Sie kleinere Frames, Bildbereiche, niedrigere Bildraten oder ein für e
 
 KI-Aufgaben sollten mit Blick auf den Rest des Systems geplant werden. Ein tragbares Produkt muss möglicherweise Bluetooth verbunden halten, das Display aktualisieren, Audio erfassen, Sensoren auslesen und Inferenz ausführen, ohne Energie- oder Latenzziele zu überschreiten.
 
-Zu einer guten Zeitplanung gehören:
+Beachten Sie bei der Zeitplanung Folgendes:
 
 - Wählen Sie periodische oder ereignisgesteuerte Inferenz passend zur nötigen Erkennungsabdeckung, zum Risiko übersehener Ereignisse und zu den Latenzanforderungen.
 - Vermeiden Sie Polling-Schleifen, wenn Interrupts oder Ereignisse die Verarbeitung auslösen können.
 - Bündeln Sie Sensorabtastwerte, sofern die Latenzanforderungen dies erlauben.
 - Begrenzen Sie die Verzögerung vom Eingang bis zur Entscheidung und erhalten Sie zugleich das für zuverlässige Erkennung nötige Eingabefenster.
-- Koordinieren Sie KI-Anwendungen mit Display- und Bluetooth-Aktivität.
+- Stimmen Sie die KI-Verarbeitung auf Display- und Bluetooth-Aktivität ab.
 - Versetzen Sie CPU und Beschleuniger erst nach bestätigtem Abschluss, Pufferübergabe und Freigabe der nötigen Energiemanagement-Sperren in zulässige Energiesparzustände. Lassen Sie erforderliche Sensorerfassung und ausstehende Arbeiten weiterlaufen.
 
 Ermitteln Sie die Energie der vollständigen Funktion, indem Sie die gemessene Versorgungsleistung (Versorgungsspannung × Strom) über die Zeit integrieren; die Inferenzlatenz allein reicht dafür nicht. Berücksichtigen Sie Sensorerfassung, Vorverarbeitung, Kopien, Beschleunigerbetrieb, CPU-Fallback, Nachverarbeitung und Leerlaufzeiten. Schnellere Ausführung kann aktive Energie sparen, ohne einen früheren Schlafzustand zu ermöglichen; der Nutzen hängt von den übrigen Systemlasten ab. Vergleichen Sie gleichwertige Erkennungsabdeckung und Genauigkeit, bevor Sie die Inferenzhäufigkeit reduzieren.
@@ -226,9 +226,9 @@ Bei eingebetteter KI müssen Genauigkeit, Latenz und Energiebedarf gegeneinander
 
 | Ziel | Typische Auswirkungen auf die Auslegung |
 |:-----|:------------------------|
-| Höhere Genauigkeit | Kann größere Modelle, zusätzliche Merkmale oder längere Eingabefenster erfordern; tatsächlichen Genauigkeitsgewinn und Speicherbedarf prüfen. |
-| Geringere Latenz | Erfassungs-, Warte- und Rechenverzögerungen reduzieren. Kürzere Fenster können die Genauigkeit beeinträchtigen; höhere Inferenzraten können mehr Energie benötigen. |
-| Geringerer Energieverbrauch | Kompakte Modelle und effiziente Speicherzuordnung nutzen. Inferenzhäufigkeit nur reduzieren, wenn die Erkennungsabdeckung dies erlaubt; Erfassung und Schlafstrategie prüfen. |
+| Höhere Genauigkeit | Kann größere Modelle, zusätzliche Merkmale oder längere Eingabefenster erfordern; prüfen Sie den tatsächlichen Genauigkeitsgewinn und den Speicherbedarf. |
+| Geringere Latenz | Reduzieren Sie Erfassungs-, Warte- und Rechenverzögerungen. Kürzere Fenster können die Genauigkeit beeinträchtigen; höhere Inferenzraten können mehr Energie benötigen. |
+| Geringerer Energieverbrauch | Nutzen Sie kompakte Modelle und eine effiziente Speicherzuordnung. Reduzieren Sie die Inferenzhäufigkeit nur, wenn die Erkennungsabdeckung dies erlaubt, und prüfen Sie Erfassung und Schlafstrategie. |
 
 </div>
 
@@ -268,6 +268,6 @@ SF32-KI-Beschleunigung kommt für kompakte lokale Inferenz in vernetzten, batter
 
 - NNACC kann unterstützte Operationen übernehmen und die CPU-Auslastung senken; Latenz- und Energievorteile müssen für die vollständige Funktion geprüft werden.
 - Er ist Teil einer vollständigen Verarbeitungskette, die auch Sensoren, Audio- oder Kameraeingang, Vorverarbeitung, Speichertransfers, Nachverarbeitung und Anwendungslogik umfasst.
-- SDK v2.5.1 dokumentiert NNACC-Ressourcen für SF32LB55x, SF32LB56x und SF32LB58x, belegt die Verfügbarkeit für SF32LB52x oder SF32LB57x jedoch nicht. Prüfen Sie Teilenummer und Produktlast, statt aus dem Familiennamen auf Unterstützung oder deren Fehlen zu schließen.
+- SDK v2.5.1 dokumentiert NNACC-Ressourcen für SF32LB55x, SF32LB56x und SF32LB58x, belegt die Verfügbarkeit für SF32LB52x oder SF32LB57x jedoch nicht. Prüfen Sie das genaue Bauteil und die Produktlast, statt aus dem Familiennamen auf Unterstützung oder deren Fehlen zu schließen.
 - Die tatsächliche Leistung hängt von Modellgröße, Quantisierung, unterstützten Operatoren, Speicherzuordnung, Cache-Verhalten, DMA und Laufzeitunterstützung des SDK ab.
 - Lokale Inferenz ist sinnvoll, wenn sie Reaktions-, Offline-, Datenschutz- oder Funkverkehrsziele des Produkts erfüllt. Die Beschleunigerhardware allein garantiert diese Vorteile nicht.

@@ -98,7 +98,7 @@ Chaque tableau ci-dessous couvre un bloc fonctionnel du schéma. Déterminez l'a
 | 19 | Condensateur AVDD18_DSI&gt;=4,7 µF | Obligatoire |
 | 20 | Condensateur MIC_BIAS=1 µF | Obligatoire |
 | 21 | Condensateur GPADC VREFP = 4,7 µF | Obligatoire |
-| 22 | <span class="flag-red">PVDD1, PVDD2, AVDD_BRF et l'alimentation de tirage haut de RSTN doivent être identiques</span> | Obligatoire |
+| 22 | <span class="flag-red">PVDD1, PVDD2, AVDD_BRF et l'alimentation de la résistance de rappel (pull-up) de RSTN doivent être identiques</span> | Obligatoire |
 | 23 | Les inductances BUCK1 et BUCK2 sont des références recommandées par SiFli | Obligatoire |
 | 24 | Si l'inductance BUCK n'est pas une référence recommandée par SiFli, elle respecte L = 4,7 µH, DCR ≤ 0,4 Ω et Isat ≥ 450 mA | Obligatoire |
 | 25 | <span class="flag-red">Lorsque PVDD1 et PVDD2 sont alimentées à 1,8 V depuis VBAT, utilisez un convertisseur DCDC pour générer le 1,8 V ; n'utilisez pas de LDO</span> | Obligatoire |
@@ -133,7 +133,7 @@ Chaque tableau ci-dessous couvre un bloc fonctionnel du schéma. Déterminez l'a
 
 | N° | Point de contrôle | Catégorie |
 |:---|:---|:---|
-| 1 | RSTN est tiré au niveau haut vers la même alimentation que PVDD1 | Obligatoire |
+| 1 | RSTN est relié à la même alimentation que PVDD1 par une résistance de rappel (pull-up) | Obligatoire |
 | 2 | RSTN réserve un condensateur de 0,1 µF vers la masse | Obligatoire |
 | 3 | RSTN dispose d'une protection ESD | Obligatoire |
 
@@ -160,7 +160,7 @@ Chaque tableau ci-dessous couvre un bloc fonctionnel du schéma. Déterminez l'a
 
 | N° | Point de contrôle | Catégorie |
 |:---|:---|:---|
-| 1 | MODE dispose d'un tirage bas interne ; réservez un tirage haut de 10 kΩ vers VDDIOA et pilotez MODE à l'état haut pendant le téléchargement du programme | Obligatoire |
+| 1 | MODE dispose d'une résistance de rappel à la masse (pull-down) interne ; réservez une résistance de rappel à l'alimentation (pull-up) de 10 kΩ vers VDDIOA et pilotez MODE à l'état haut pendant le téléchargement du programme | Obligatoire |
 | 2 | <span class="flag-red">Le signal MODE dispose d'un point de test réservé et doit être amené au gabarit de programmation de production</span> | Obligatoire |
 
 </div>
@@ -222,7 +222,7 @@ Chaque tableau ci-dessous couvre un bloc fonctionnel du schéma. Déterminez l'a
 | 2 | VDDIOSC est toujours alimentée | Obligatoire |
 | 3 | Les alimentations VDDIOSA et VDDIOSB sont activées par PBR0 | Obligatoire |
 | 4 | MPI3 ou MPI4 peuvent être utilisés pour une Flash NOR ou une Flash SPI NAND externe | Obligatoire |
-| 5 | La broche HOLD# de la Flash SPI NAND est tirée au niveau haut vers l'alimentation de la Flash SPI NAND via une résistance de 10 kΩ | Obligatoire |
+| 5 | La broche HOLD# de la Flash SPI NAND est reliée à l'alimentation de la Flash SPI NAND par une résistance de rappel (pull-up) de 10 kΩ | Obligatoire |
 | 6 | Si la production doit programmer une Flash externe sur MPI3 ou MPI4, l'outil de téléchargement pilote PA43 au niveau haut pour activer l'alimentation MPI3 | Obligatoire |
 | 7 | Si la production doit programmer l'eMMC ou la SD NAND sur SDIO1, l'outil de téléchargement active l'alimentation correspondante | Obligatoire |
 | 8 | <span class="flag-red">Les commutateurs de tension contrôlés par PBR0/PA43 sont actifs à l'état haut pour l'activation et à l'état bas pour la désactivation. En Hibernate, PBR0 contrôle la commutation d'alimentation VDDIOSA/VDDIOSB, VDDIOSC reste toujours alimentée, et PA43 contrôle la commutation d'alimentation de la Flash externe</span> | Obligatoire |
@@ -247,13 +247,13 @@ Chaque tableau ci-dessous couvre un bloc fonctionnel du schéma. Déterminez l'a
 | WP# | PA01 (SD1_D2) | Signal de protection en écriture (IO2) |
 | SI | PA05 (SD1_D0) | Données en sortie de la puce (IO0) |
 | SCLK | PA09 (SD1_CLK) | Horloge série |
-| HOLD# | PA06 (SD1_D3) | Ligne IO3 ; tirée au niveau haut vers VDD18_MPI4 via une résistance de 10 kΩ |
+| HOLD# | PA06 (SD1_D3) | Ligne IO3 ; reliée à VDD18_MPI4 par une résistance de rappel (pull-up) de 10 kΩ |
 
 </div>
 
-Dans le schéma de référence de l'EVB, VCC de la SPI NAND Flash est reliée à VDD18_MPI4 ; cette alimentation comporte également des condensateurs de 0,1 µF et de 1 µF (6,3 V). Ces brochages et valeurs de composants correspondent uniquement à la référence EVB. Avant de les appliquer, vérifiez-les avec le boîtier du circuit intégré sélectionné, la fiche technique de la Flash et la configuration du multiplexage des broches de la carte cible.
+Dans le schéma de référence de l'EVB, VCC de la Flash SPI NAND est reliée à VDD18_MPI4 ; cette alimentation comporte également des condensateurs de 0,1 µF et de 1 µF (6,3 V). Ces brochages et valeurs de composants correspondent uniquement à la référence EVB. Avant de les appliquer, vérifiez-les avec le boîtier du circuit intégré sélectionné, la fiche technique de la Flash et la configuration du multiplexage des broches de la carte cible.
 
-L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre au niveau d'E/S du périphérique. SiFli recommande une interface à 1,8 V pour la SPI NAND Flash et l'eMMC. Les composants SD NAND ne prennent en charge que 3,3 V ; VDDIOA2 doit donc être réglée à 3,3 V avec une SD NAND.
+L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre au niveau d'E/S du périphérique. SiFli recommande une interface à 1,8 V pour la Flash SPI NAND et l'eMMC. Les composants SD NAND ne prennent en charge que 3,3 V ; VDDIOA2 doit donc être réglée à 3,3 V avec une SD NAND.
 
 ### 5.8.12. Affichage { #5812-display }
 
@@ -290,7 +290,7 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
 | 2 | La plage d'entrée GPADC est correcte ; la tension d'entrée maximale ne doit pas dépasser AVDD33_ANA | Optionnel |
 | 3 | Recommandation de diviseur de tension de batterie : résistance 470 kΩ 1 % côté alimentation, résistance 1 MΩ 1 % vers la masse, et condensateur de filtrage 100 nF | Obligatoire |
 | 4 | <span class="flag-red">Pour chaque signal de diviseur résistif mesuré par le GPADC, utilisez des résistances de diviseur à tolérance de 1 % ; chaque voie GPADC doit avoir un condensateur de filtrage de 100 nF placé près de la broche de la puce</span> | Obligatoire |
-| 5 | <span class="flag-red">L'ADC peut détecter plusieurs boutons et économiser des broches ; par exemple, lorsque PB32 est utilisé comme bouton ADC, n'utilisez pas la batterie comme alimentation de tirage haut</span> | Obligatoire |
+| 5 | <span class="flag-red">L'ADC peut détecter plusieurs boutons et économiser des broches ; par exemple, lorsque PB32 est utilisé comme bouton ADC, n'utilisez pas la batterie comme alimentation de rappel (pull-up)</span> | Obligatoire |
 
 </div>
 
@@ -317,8 +317,8 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
 | N° | Point de contrôle | Catégorie |
 |:---|:---|:---|
 | 1 | Confirmez avec le client si le bouton nécessite une capacité de réveil | Obligatoire |
-| 2 | La connexion d'un bouton ordinaire est correcte (tirage haut présent, valeur de résistance correcte, domaine de tension de tirage haut correct) | Obligatoire |
-| 3 | <span class="flag-red">Le bouton d'alimentation doit être connecté à PB54 et actif à l'état haut. Un appui maintenu pendant 10 secondes doit réinitialiser le système ; une résistance de tirage bas de 10 kΩ doit être présente sur la carte principale</span> | Obligatoire |
+| 2 | La connexion d'un bouton ordinaire est correcte (résistance de rappel (pull-up) présente, valeur correcte, domaine de tension du rappel correct) | Obligatoire |
+| 3 | <span class="flag-red">Le bouton d'alimentation doit être connecté à PB54, actif à l'état haut, avec réinitialisation par appui long de 10 secondes ; la résistance de rappel à la masse (pull-down) de 10 kΩ doit être présente sur la carte principale</span> | Obligatoire |
 | 4 | Tous les signaux de bouton disposent d'une protection ESD | Obligatoire |
 
 </div>
@@ -350,7 +350,7 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
 | N° | Point de contrôle | Catégorie |
 |:---|:---|:---|
 | 1 | L'affectation des bus I2C tient compte du partitionnement HCPU/LCPU et de la nécessité éventuelle de faire fonctionner le périphérique en mode basse consommation | Obligatoire |
-| 2 | L'I2C dispose de tirages haut avec la valeur de résistance correcte ; si un fonctionnement à 400 kHz est requis, des tirages haut de 2,2 kΩ sont recommandés. Utilisez le domaine de tension côté périphérique et coupez l'alimentation de tirage haut lorsque le périphérique est hors tension | Obligatoire |
+| 2 | L'I2C dispose de résistances de rappel (pull-up) de valeur correcte ; si un fonctionnement à 400 kHz est requis, des résistances de rappel de 2,2 kΩ sont recommandées. Utilisez le domaine de tension côté périphérique et coupez l'alimentation de rappel lorsque le périphérique est hors tension | Obligatoire |
 | 3 | Le signal d'interruption I2C prend en charge le réveil matériel lorsque nécessaire | Obligatoire |
 | 4 | Si plusieurs composants partagent un même bus I2C, leurs adresses sont distinguées | Obligatoire |
 
@@ -403,7 +403,7 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
 | N° | Point de contrôle | Catégorie |
 |:---|:---|:---|
 | 1 | La connexion SPI est correcte ; SDO et SDI sont correctement croisés entre le MCU et le périphérique | Optionnel |
-| 2 | Les exigences de timing du périphérique SPI sont confirmées et prises en charge | Optionnel |
+| 2 | Les exigences de minutage du périphérique SPI sont confirmées et prises en charge | Optionnel |
 | 3 | Le niveau logique E/S du composant périphérique correspond à celui de la puce principale | Optionnel |
 
 </div>
@@ -502,11 +502,11 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
 
 | N° | Point de contrôle | Catégorie |
 |:---|:---|:---|
-| 1 | Pour toutes les broches d'activation MOSFET, LDO, et DCDC utilisées pour la commutation d'alimentation, réservez un tirage bas de 1 MΩ vers la masse lorsque la broche d'activation est active à l'état haut | Obligatoire |
-| 2 | Le courant de référence en mode Hibernate est consigné | Obligatoire |
-| 3 | <span class="flag-red">La somme des courants de référence des périphériques sélectionnés en mode Hibernate est consignée et répond aux exigences du projet</span> | Obligatoire |
-| 4 | Le courant de référence en mode Standby est consigné | Obligatoire |
-| 5 | <span class="flag-red">La somme des courants de référence des périphériques sélectionnés en mode Standby est consignée et répond aux exigences du projet</span> | Obligatoire |
+| 1 | Pour toutes les broches d'activation MOSFET, LDO, et DCDC utilisées pour la commutation d'alimentation, réservez une résistance de rappel à la masse (pull-down) de 1 MΩ lorsque la broche d'activation est active à l'état haut | Obligatoire |
+| 2 | L'exigence de courant de base en mode Hibernate est consignée | Obligatoire |
+| 3 | <span class="flag-red">La somme des courants de base des périphériques sélectionnés en mode Hibernate est consignée et répond aux exigences du projet</span> | Obligatoire |
+| 4 | L'exigence de courant de base en mode Standby est consignée | Obligatoire |
+| 5 | <span class="flag-red">La somme des courants de base des périphériques sélectionnés en mode Standby est consignée et répond aux exigences du projet</span> | Obligatoire |
 
 </div>
 
@@ -519,7 +519,7 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
 | N° | Point de contrôle | Catégorie |
 |:---|:---|:---|
 | 1 | Prévoyez des points de test pour le téléchargement SWD sur VBAT, GND, SWDIO, SDCLK, MODE, RSTN, VDDIOA et VDDIOB | Obligatoire |
-| 2 | Si une carte de téléchargement hors ligne est nécessaire pour programmer le firmware, prévoir des points de test sur VBAT, GND, UART4_TXD, UART4_RXD, MODE, RSTN et VDDIOA | Optionnel |
+| 2 | Si une carte de téléchargement hors ligne est nécessaire pour programmer le firmware, prévoyez des points de test sur VBAT, GND, UART4_TXD, UART4_RXD, MODE, RSTN et VDDIOA | Optionnel |
 | 3 | Si une calibration du quartz est requise, réservez un point de test de calibration du quartz ; PB45 est recommandé | Optionnel |
 
 </div>

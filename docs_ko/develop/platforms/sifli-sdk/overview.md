@@ -2,7 +2,7 @@
 icon: lucide/package
 description: "SF32 개발의 레퍼런스 경로인 SiFli-SDK를 다룹니다. 핵심 scons 빌드와 sdk.py menuconfig 워크플로, 보드 이름, 프로젝트 구조, 양산 준비 점검 질문을 설명합니다."
 tags:
-    - Develop
+    - 개발
     - SiFli-SDK
 ---
 
@@ -11,7 +11,7 @@ tags:
 SiFli-SDK는 SF32 펌웨어 개발을 위한 SiFli 공식 SDK입니다. RT-Thread 기반 개발 환경을 제공하며, 지원되는 타깃에서는 No-OS 예제도 제공합니다. 또한 Bluetooth, 그래픽, 오디오, 전력 관리, 스토리지, 양산 워크플로 등의 영역에 대해 SiFli가 관리하는 보드 지원과 미들웨어를 포함합니다. 제공 여부는 칩, 보드, SDK 릴리스에 따라 다릅니다.
 
 !!! info "SiFli-Solution"
-    SiFli-Solution은 별도의 SiFli 소프트웨어 패키지이며 이 페이지의 범위에 포함되지 않습니다. 이 페이지와 연결된 Develop 자료는 SiFli-SDK만 다룹니다. SiFli-Solution의 범위, 지원 디바이스, 이용 요건은 공식 [SiFli Solution Documentation](https://docs.sifli.com/projects/solution/index.html)을 참조하고 SiFli에 직접 문의하십시오.
+    SiFli-Solution은 별도의 SiFli 소프트웨어 패키지이며 이 페이지의 범위에 포함되지 않습니다. 이 페이지와 연결된 개발 관련 자료는 SiFli-SDK만 다룹니다. SiFli-Solution의 범위, 지원 디바이스, 이용 요건은 공식 [SiFli Solution Documentation](https://docs.sifli.com/projects/solution/index.html)을 참조하고 SiFli에 직접 문의하십시오.
 
 처음 설치하고 `hello_world`를 실행하려면 [SiFli-SDK 시작하기](../../../getting-started/sifli/getting-started-sifli-sdk.md) 페이지를 참조하십시오. 이 페이지는 툴체인이 이미 동작하는 상태에서 SDK를 어떻게 이해하고 활용할지 설명합니다.
 
@@ -33,15 +33,15 @@ SiFli-SDK는 SF32 펌웨어 개발을 위한 SiFli 공식 SDK입니다. RT-Threa
 
 ## 개발 모델 { #development-model }
 
-[SiFli-SDK 시작하기](../../../getting-started/sifli/getting-started-sifli-sdk.md) 페이지에서 툴체인과 `hello_world` 기준 구성을 마련합니다. 그 이후에는 SDK 리비전, 선택한 보드, 예제/프로젝트 디렉터리, 구성, 해당 빌드/플래싱 산출물을 재현 가능한 빌드 기록으로 함께 보관하십시오. 보드 이름에 코어 접미사가 없는 경우 HCPU 출력은 일반적으로 `build_<board_name>_hcpu/`를 따릅니다. 예를 들어 `sf32lb52-lcd_n16r8`은 `build_sf32lb52-lcd_n16r8_hcpu/`를 생성합니다. 디렉터리 이름을 직접 조합하지 말고, 확정된 보드/코어 타깃에 대해 실제로 생성된 디렉터리를 사용하십시오.
+[SiFli-SDK 시작하기](../../../getting-started/sifli/getting-started-sifli-sdk.md) 페이지에서 툴체인과 `hello_world` 기준 구성을 마련합니다. 이후에는 SDK 리비전, 선택한 보드, 예제/프로젝트 디렉터리, 구성, 해당 빌드 및 다운로드 산출물을 재현 가능한 빌드 기록과 함께 보관하십시오. 보드 이름에 코어 접미사가 없으면 HCPU 출력은 일반적으로 `build_<board_name>_hcpu/` 형식입니다. 예를 들어 `sf32lb52-lcd_n16r8`을 지정하면 `build_sf32lb52-lcd_n16r8_hcpu/`가 생성됩니다. 디렉터리 이름을 직접 조합하지 말고 실제 빌드에서 선택된 보드와 코어에 대해 생성된 디렉터리를 사용하십시오.
 
-반복 가능한 개발을 위해 SDK 브랜치를 고정하고, 보드 이름을 기록하고, 로컬 보드 변경 사항을 벤더 파일과 분리하여 관리하고, 구성 변경은 검토하기 쉬운 작은 단계로 진행하십시오. 빌드, 플래싱, 모니터링의 상세 워크플로는 [빌드, 플래시, 모니터](build-flash-monitor.md)에 있습니다.
+재현 가능한 개발을 위해 SDK 브랜치를 고정하고 보드 이름을 기록하십시오. 로컬 보드 변경 사항은 벤더 파일과 분리해 관리하고, 구성 변경은 검토하기 쉬운 작은 단계로 진행하십시오. 빌드, 펌웨어 기록, 모니터링의 상세 절차는 [빌드, 플래싱, 모니터링](build-flash-monitor.md)을 참조하십시오.
 
 ## 보드 이름 { #board-names }
 
-SiFli-SDK 보드 이름은 SDK 고유의 이름이며 Zephyr 보드 이름, Arduino FQBN, 마케팅용 보드 이름과 일치하지 않을 수 있습니다. 보드 이름은 항상 SDK 지원 보드 목록이나 예제 문서에서 그대로 복사하십시오.
+SiFli-SDK 보드 이름은 SDK 전용 명칭이며 Zephyr 보드 이름, Arduino FQBN, 제품 마케팅 이름과 다를 수 있습니다. 보드 이름은 SDK 지원 보드 목록이나 예제 문서에서 그대로 복사하십시오.
 
-SF32LB52 DevKit LCD 보드의 경우, 퀵 스타트 예제에서 흔히 사용하는 SDK 보드 이름은 다음과 같습니다.
+SF32LB52 DevKit LCD 보드에서 빠른 시작 예제가 사용하는 대표적인 SDK 보드 이름은 다음과 같습니다.
 
 ```text
 sf32lb52-lcd_n16r8
@@ -61,7 +61,7 @@ example/<domain>/<example_name>/<rtos_or_mode>/project
 example/get-started/hello_world/rtt/project
 ```
 
-제품 펌웨어를 빌드할 때는 가장 가까운 동작 확인된 SDK 예제에서 시작하여 한 번에 하나의 서브시스템만 변경하십시오. 그러면 보드 구성, 미들웨어 의존성, 파티션 가정, 드라이버 설정이 그대로 유지됩니다.
+제품 펌웨어를 빌드할 때는 요구 사항과 가장 비슷하고 동작이 확인된 SDK 예제에서 시작하십시오. 한 번에 하나의 서브시스템만 변경하면 보드 구성, 미들웨어 의존성, 파티션 관련 전제, 드라이버 설정을 추적하기 쉽습니다.
 
 ## 구성 { #configuration }
 
@@ -81,22 +81,22 @@ sdk.py menuconfig --board=<board_name>
 
 ## 양산 준비 점검 질문 { #production-readiness-questions }
 
-제품 브랜치에 SiFli-SDK를 확정하기 전에 다음 질문에 답하십시오.
+제품 브랜치에서 SiFli-SDK를 채택하기 전에 다음 질문에 답하십시오.
 
 - 제품용으로 고정하는 SDK 릴리스 브랜치는 무엇입니까?
-- 보드 지원 파일 중 제품 측이 소유하는 것과 벤더가 소유하는 것은 각각 무엇입니까?
+- 어떤 보드 지원 파일을 제품에서 관리하고, 어떤 파일을 벤더에서 관리합니까?
 - 핵심 기능을 입증하는 예제는 무엇입니까?
 - 양산과 OTA에 사용하는 파티션 테이블은 무엇입니까?
-- 공장 플래싱에 승인된 도구는 무엇입니까?
+- 양산 공정의 플래싱에 승인된 도구는 무엇입니까?
 - 릴리스 빌드에서 활성화하는 로그는 무엇입니까?
 - 실험실용으로 보관하는 복구 이미지는 무엇입니까?
 
-## 다음에 볼 실용 페이지 { #practical-next-pages }
+## 다음 단계 { #practical-next-pages }
 
-- [빌드, 플래시, 모니터](build-flash-monitor.md)
+- [빌드, 플래싱, 모니터링](build-flash-monitor.md)
 - [보드 설정](board-configuration.md)
 - [컴포넌트와 `sf-pkg`](components.md)
-- [예제](../../examples/index.md) — 서브시스템을 적용하기 전에 동작이 확인된 가장 가까운 기준 구성을 선택하십시오.
+- [예제](../../examples/index.md) — 서브시스템을 변경하기 전에 요구 사항과 가장 비슷하고 동작이 확인된 기준 구성을 선택하십시오.
 - [CodeKit](../../tools/codekit.md) — 필요할 때 VS Code 워크플로를 사용하되, SDK 보드 이름과 빌드 기록은 프로젝트의 나머지 부분과 일관되게 유지하십시오.
 - [SDK 애플리케이션 노트](sdk-application-notes.md)
 - [파티션 테이블](../../firmware-topics/partition-tables.md)

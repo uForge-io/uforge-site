@@ -34,7 +34,7 @@ SF32LB52-DevKit-Nanoは、コンパクトなプロトタイプ開発や組み込
 
 </div>
 
-N4は、コンパクトな制御、Bluetooth、シンプルなUIアプリケーションに適しています。N16R16は16 MB OPI-PSRAMと16 MB QSPI-NOR、A128R16は16 MB OPI-PSRAMと128 MB QSPI-NANDを搭載します。どちらも、大きなディスプレイアセット、外部ファイルシステム、またはPSRAM上のフレームバッファや作業領域を必要とする用途に適しています。
+N4は、コンパクトな制御、Bluetooth、シンプルなUIアプリケーションに適しています。N16R16は16 MB OPI-PSRAMと16 MB QSPI-NOR、A128R16は16 MB OPI-PSRAMと128 MB QSPI-NANDを搭載します。どちらも、大きなディスプレイアセット、外部ファイルシステム、またはPSRAM上のフレームバッファーや作業領域を必要とする用途に適しています。
 
 **出典間の不一致（選定前に要確認）：** SiFliの[詳細なNano開発ボードガイド](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html)では、16 MB OPI-PSRAM + 16 MB NORの構成を`R16N16 V1.0.0`と記載しています。一方、[現行の開発ボード型番ガイド](https://wiki.sifli.com/en/board/devkit_guide.html)では同じメモリー構成を`N16R16`とし、16 MB OPI-PSRAM + 128 MB QSPI-NANDの`A128R16`も個別に掲載しています。詳細ガイドにはA128R16の具体的な説明はありません。A128R16については型番ガイドの記載を参照し、N16R16の他のボード仕様を流用しないでください。ファームウェアやメモリー構成を決める前に、基板のマーキングと現行の回路図/BOMを確認してください。
 

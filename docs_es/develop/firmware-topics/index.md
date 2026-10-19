@@ -22,7 +22,7 @@ Consulte estas páginas antes de cambiar la estructura del firmware, el comporta
 |:-----|:----------------|
 | [Tablas de particiones](partition-tables.md) | Definen la distribución del firmware, el sistema de archivos, OTA y el almacenamiento. |
 | [OTA y DFU](ota-dfu.md) | Son necesarios para las actualizaciones en campo y los planes de recuperación. |
-| [USB y CherryUSB](usb-cherryusb.md) | Describe las capacidades USB de dispositivo y host que una simple casilla de una ficha técnica no revela. |
+| [USB y CherryUSB](usb-cherryusb.md) | Describe las capacidades USB de dispositivo y host que una simple casilla de una hoja de datos no revela. |
 | [Gestión de energía](power-management.md) | Convierte una demostración funcional en un producto preparado para funcionar con batería. |
 | [Registros y análisis de fallos](logging-crash-analysis.md) | Permite diagnosticar los fallos. |
 

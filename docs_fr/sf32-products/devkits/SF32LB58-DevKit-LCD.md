@@ -44,7 +44,7 @@ Utilisez la carte pour valider ensemble l'écran, le stockage, l'audio, l'USB et
 
 | Version de la carte | Base | Remarques |
 | :--- | :--- | :--- |
-| V1.0.1 | SF32LB58-MOD-N16R32N1-V1.0.1 et SF32LB58-MOD-A128R32N1-V1.0.1 | Version actuelle ; ajoute la détection de branchement USB sur PB24 ; passe le PTC à 2 A / 6 V pour prendre en charge la sortie audio double maximale ; supprime l'étage de conversion de niveau de la LED RVB car son timing est inadapté ; remplace le convertisseur DC/DC pour réduire l'ondulation de sortie ; supprime la résistance de rappel (pull-up) de USB DP pour corriger le problème d'interruption en mode périphérique USB |
+| V1.0.1 | SF32LB58-MOD-N16R32N1-V1.0.1 et SF32LB58-MOD-A128R32N1-V1.0.1 | Version actuelle ; ajoute la détection de branchement USB sur PB24 ; passe le PTC à 2 A / 6 V pour prendre en charge la sortie audio double maximale ; supprime l'étage de conversion de niveau de la LED RVB car son minutage est inadapté ; remplace le convertisseur DC/DC pour réduire l'ondulation de sortie ; supprime la résistance de rappel (pull-up) de USB DP pour corriger le problème d'interruption en mode périphérique USB |
 | V1.0.0 | SF32LB58-MOD-N16R32N1-V1.0.0 avec SF32LB587VEE56 | Première version publique de la carte |
 
 </div>

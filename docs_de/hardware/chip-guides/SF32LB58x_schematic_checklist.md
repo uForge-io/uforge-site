@@ -160,8 +160,8 @@ Die folgenden Tabellen sind nach funktionalen Schaltungsblöcken gegliedert. Ma�
 
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
-| 1 | MODE hat einen internen Pull-down; einen 10-kΩ-Pull-up zu VDDIOA reservieren und MODE während des Programm-Downloads auf High treiben | Erforderlich |
-| 2 | <span class="flag-red">Das MODE-Signal hat einen reservierten Testpunkt und muss auf die Produktionsprogrammier-Fixture herausgeführt werden</span> | Erforderlich |
+| 1 | MODE hat einen internen Pull-down; einen 10-kΩ-Pull-up zu VDDIOA reservieren und MODE während des Firmware-Downloads auf High treiben | Erforderlich |
+| 2 | <span class="flag-red">Das MODE-Signal hat einen reservierten Testpunkt und muss zur Programmiervorrichtung der Produktion herausgeführt werden</span> | Erforderlich |
 
 </div>
 
@@ -236,13 +236,13 @@ Die folgenden Tabellen sind nach funktionalen Schaltungsblöcken gegliedert. Ma�
 
 </div>
 
-<div align="center"><em>Tabelle 5.8.11-2: Referenzanschlüsse der SPI-NAND-Flash über MPI4 auf der SiFli-EVB</em></div>
+<div align="center"><em>Tabelle 5.8.11-2: Referenzanschlüsse des SPI-NAND-Flash über MPI4 auf der SiFli-EVB</em></div>
 
 <div align="center" markdown>
 
 | SPI-NAND-Signal | SF32LB58x-Pin | Referenzhinweis |
 |:---|:---|:---|
-| CS# | PA10 (SD1_CMD) | Chip-Select, Low-aktiv |
+| CS# | PA10 (SD1_CMD) | Chip-Select, low-aktiv |
 | SO | PA04 (SD1_D1) | Dateneingang zum Chip (IO1) |
 | WP# | PA01 (SD1_D2) | Schreibschutzsignal (IO2) |
 | SI | PA05 (SD1_D0) | Datenausgang des Chips (IO0) |
@@ -251,7 +251,7 @@ Die folgenden Tabellen sind nach funktionalen Schaltungsblöcken gegliedert. Ma�
 
 </div>
 
-Im EVB-Referenzschaltplan ist VCC der SPI-NAND-Flash an VDD18_MPI4 angeschlossen; an dieser Versorgung sind außerdem Kondensatoren mit 0,1 µF und 1 µF (6,3 V) vorgesehen. Diese Pinzuordnungen und Bauteilwerte gelten nur für die EVB-Referenz. Vor der Übernahme sind sie anhand des ausgewählten Chip-Gehäuses, des Flash-Datenblatts und der Pinmux-Konfiguration der Zielplatine zu prüfen.
+Im EVB-Referenzschaltplan ist VCC des SPI-NAND-Flash an VDD18_MPI4 angeschlossen; an dieser Versorgung sind außerdem Kondensatoren mit 0,1 µF und 1 µF (6,3 V) vorgesehen. Diese Pinzuordnungen und Bauteilwerte gelten nur für die EVB-Referenz. Vor der Übernahme sind sie anhand des ausgewählten Chip-Gehäuses, des Flash-Datenblatts und der Pinmux-Konfiguration der Zielplatine zu prüfen.
 
 Die I/O-Versorgung VDDIOA2 für SD1 unterstützt 1,8 V oder 3,3 V und muss zum I/O-Pegel des Peripheriegeräts passen. SiFli empfiehlt eine 1,8-V-Schnittstelle für SPI-NAND-Flash und eMMC. SD-NAND-Bausteine unterstützen nur 3,3 V; bei Verwendung von SD NAND muss VDDIOA2 daher auf 3,3 V gesetzt werden.
 
@@ -368,7 +368,7 @@ Die I/O-Versorgung VDDIOA2 für SD1 unterstützt 1,8 V oder 3,3 V und muss zum I
 | 2 | <span class="flag-red">I2S2 unterstützt Eingang und Ausgang nur im Master-Modus und kann mit externen Codec-DAC-/ADC-Geräten verbunden werden</span> | Optional |
 | 3 | <span class="flag-red">I2S3 unterstützt Ein- und Ausgabe nur im Master-Modus. Die Schnittstelle eignet sich für Energiesparanwendungen, bei denen die HCPU schläft und die LCPU Audio über I2S3 empfängt oder verarbeitet</span> | Optional |
 | 4 | I2S-Signalverbindungen sind korrekt | Optional |
-| 5 | <span class="flag-red">Die digitale MIC-Verbindung der I2S1-Schnittstelle ist korrekt</span> | Optional |
+| 5 | <span class="flag-red">Die Verbindung des digitalen Mikrofons an der I2S1-Schnittstelle ist korrekt</span> | Optional |
 | 6 | Der I/O-Logikpegel des Peripheriegeräts entspricht dem des Hauptchips | Optional |
 
 </div>
@@ -381,12 +381,12 @@ Die I/O-Versorgung VDDIOA2 für SD1 unterstützt 1,8 V oder 3,3 V und muss zum I
 
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
-| 1 | PDM-Dual-Mic-Verbindung ist korrekt | Optional |
-| 2 | PDM-MIC wird aus einer digitalen Versorgung gespeist | Optional |
+| 1 | Die Verbindung der beiden PDM-Mikrofone ist korrekt | Optional |
+| 2 | PDM-Mikrofon wird aus einer digitalen Versorgung gespeist | Optional |
 | 3 | Der I/O-Logikpegel des Peripheriegeräts entspricht dem des Hauptchips | Optional |
-| 4 | Analoge Dual-Mic-Verbindung ist korrekt | Optional |
-| 5 | Analoges MIC wird von MIC_BIAS-Ausgang versorgt | Optional |
-| 6 | Beide Audio-ADC-Eingänge müssen jeweils mindestens einen 2,2-µF-DC-Blockkondensator enthalten | Optional |
+| 4 | Die Verbindung der beiden analogen Mikrofone ist korrekt | Optional |
+| 5 | Analoges Mikrofon wird vom MIC_BIAS-Ausgang versorgt | Optional |
+| 6 | Beide Audio-ADC-Eingänge müssen jeweils mindestens einen 2,2-µF-DC-Sperrkondensator enthalten | Optional |
 | 7 | DAC-Ausgangspfade P und N haben jeweils einen 1-kΩ-Serienwiderstand, mit einem 1,5-nF-Kondensator dazwischen | Optional |
 | 8 | AW8155 ist der empfohlene Audioverstärker; bei Verwendung dieses Bauteils die Softwareeinstellung „Mode 4 / Class AB mode“ (Modus 4 / Class-AB-Betrieb) wählen | Optional |
 | 9 | <span class="flag-red">Bei Rückführung des Audio-PA-Ausgangs zum MCU-ADC einen Teiler und RC-Filter oder zusätzliche digitale Filterung hinzufügen; die geteilte Spannung muss innerhalb des ADC-Eingangsbereichs bleiben, und die RC-Filter-Grenzfrequenz sollte 20 kHz betragen</span> | Optional |
@@ -453,7 +453,7 @@ Die I/O-Versorgung VDDIOA2 für SD1 unterstützt 1,8 V oder 3,3 V und muss zum I
 |:---|:---|:---|
 | 1 | SWD-Signalverbindungen sind korrekt | Erforderlich |
 | 2 | Der J-Link-Steckverbinder oder die Testpunkte reservieren korrekt die I/O-Stromversorgungsreferenz | Erforderlich |
-| 3 | <span class="flag-yellow">Während des Programm-Downloads müssen PVDD, VDDIO, VDDSC und ähnliche Schienen versorgt sein, AVDD18_DSI (CAU2-Versorgung) muss ebenfalls versorgt sein</span> | Erforderlich |
+| 3 | <span class="flag-yellow">Während des Firmware-Downloads müssen PVDD, VDDIO, VDDSC und ähnliche Schienen versorgt sein, AVDD18_DSI (CAU2-Versorgung) muss ebenfalls versorgt sein</span> | Erforderlich |
 
 </div>
 
@@ -467,7 +467,7 @@ Die I/O-Versorgung VDDIOA2 für SD1 unterstützt 1,8 V oder 3,3 V und muss zum I
 |:---|:---|:---|
 | 1 | USB-Schnittstellenverbindung ist korrekt | Optional |
 | 2 | Die USB-Schnittstelle hat ESD-Schutz | Optional |
-| 3 | Solange USB aktiviert ist, kann der PC oder das angeschlossene Gerät im normalen Betrieb das Ein- und Ausstecken erkennen. Soll dies auch im Schlafmodus der MCU möglich sein, ist ein Spannungsteiler an VBUS vorzusehen. Dessen Ausgang muss einen zur I/O-Spannung passenden High-Pegel liefern und mit einem Weck-Pin der MCU verbunden werden. Verwenden Sie dafür möglichst denselben Weck-Pin wie zur Erkennung des Ladegeräteanschlusses | Optional |
+| 3 | Solange USB aktiviert ist, kann der PC oder das angeschlossene Gerät im normalen Betrieb das Ein- und Ausstecken erkennen. Soll dies auch im Schlafmodus der MCU möglich sein, ist ein Spannungsteiler an VBUS vorzusehen. Dessen Ausgang muss einen zur I/O-Spannung passenden High-Pegel liefern und mit einem Weck-Pin der MCU verbunden werden. Empfohlen wird, denselben Weck-Pin wie für die Erkennung des Ladegeräteanschlusses mitzuverwenden | Optional |
 
 </div>
 

@@ -23,7 +23,7 @@ Le projet est utile pour étudier le balayage de la bande Bluetooth, le traiteme
 
 Le SF32LB52 associe le Bluetooth 5.3 bimode, un MCU bicœur et des capacités d'affichage ; le projet utilise SiFli-SDK et LVGL pour garder sur l'appareil l'échantillonnage des fréquences, le lissage, la mise en mémoire tampon de l'historique et la mise à jour de l'écran. Cette référence constitue ainsi une expérience précoce utile pour un panneau de visualisation RF, un indicateur d'interférences de terrain ou une interface de diagnostic de production.
 
-Le dépôt ne précise ni procédure d'étalonnage, ni budget d'incertitude, ni conditions de mesure traçables. Les résultats doivent donc être revalidés pour le silicium exact, la révision du SDK et du firmware, la carte, l'antenne, le boîtier, le bruit de la carte et le timing. Transposer la méthode à une autre carte SF32LB52 ou à un circuit imprimé de produit exige une nouvelle validation ; une compilation réussie n'établit pas l'équivalence des mesures.
+Le dépôt ne précise ni procédure d'étalonnage, ni budget d'incertitude, ni conditions de mesure traçables. Les résultats doivent donc être revalidés pour le silicium exact, la révision du SDK et du firmware, la carte, l'antenne, le boîtier, le bruit de la carte et le minutage. Transposer la méthode à une autre carte SF32LB52 ou à un circuit imprimé de produit exige une nouvelle validation ; une compilation réussie n'établit pas l'équivalence des mesures.
 
 ## Résultat, portée et critères d'entrée { #outcome-scope-and-entry-criteria }
 

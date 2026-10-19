@@ -459,7 +459,7 @@ Behandeln Sie diese Adressen als das Standardlayout der SiFli-Anleitung, nicht a
 
 ## Einen NOR-Flash-Baustein portieren { #7-port-a-nor-flash-part }
 
-Verschiedene Platinen können unterschiedliche NOR-Flash-Bausteine verwenden. Gleichen Sie den Baustein sowohl anhand seiner Hardwarespezifikation als auch anhand seiner Befehle ab.
+Verschiedene Boards können unterschiedliche NOR-Flash-Bausteine verwenden. Gleichen Sie den Baustein sowohl anhand seiner Hardwarespezifikation als auch anhand seiner Befehle ab.
 
 ### Hardwareanforderungen { #hardware-requirements }
 

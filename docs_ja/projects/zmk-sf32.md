@@ -14,7 +14,7 @@ tags:
 
 [ZMK Firmware](https://zmk.dev/)はZephyr上に構築されたMITライセンスのキーボードファームウェアです。上流のZMKは、有線・無線・左右に分かれたキーボードで広く使われているアプリケーションモデルを提供します。機能には、マトリクススキャン、キーマップとレイヤー、キー動作、USBおよびBluetooth HID、永続設定、拡張可能なボード／シールド定義があります。
 
-[OpenSiFli/zmk](https://github.com/OpenSiFli/zmk)は、OpenSiFliが保守するZMKの下流フォークです。確認したフォークには、次の追加要素があります。
+[OpenSiFli/zmk](https://github.com/OpenSiFli/zmk)は、OpenSiFliのZMK下流フォークです。確認したフォークには、次の追加要素があります。
 
 - `sf32lb52_devkit_lcd/sf32lb525uc6/zmk`ボードバリアント
 - ZMKアプリケーションツリー内のSF32LB52 SoC統合
@@ -73,8 +73,8 @@ SF32ポートでは、Zephyrのデバイスツリー、Kconfig、`west`、キー
 | 部品 | 必要な仕様 | 役割 | 区分 | 入手先 | 互換性・置き換え時の注意 |
 |:-----|:-----------|:-----|:-----|:-------|:-------------------------|
 | SF32LB52-DevKit-LCDボード2台 | ターゲット`sf32lb52_devkit_lcd/sf32lb525uc6/zmk`。各ボードのリビジョンを記録 | 文書に記載された分割キーボード構成のセントラル側とペリフェラル側 | 分割キーボード試験に必須 | [μForgeボード資料](../sf32-products/devkits/SF32LB52-DevKit-LCD.md)；[確認済みコミットのOpenSiFliボードバリアント](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/sifli/sf32lb52_devkit_lcd) | セントラル側とペリフェラル側ではイメージの役割/設定が異なる。両ボードを個別に復旧できるようにする |
-| Urchin分割キーボードの試験治具と配線 | `urchin_sf32lb52_left`と`urchin_sf32lb52_right`のoverlayに従った38キーのマトリクス | キーマトリクス、左右間通信、各側の役割を検証 | 分割構成の総合検証に必須 | [確認済みコミットのUrchin shield](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/shields/urchin_sf32lb52) | overlayは配線の参照情報であり、別のPCBや任意のshieldとの互換性を保証しない |
-| USB/BLEホストとデータケーブル | central側用USBホスト、Bluetooth HIDホスト、peripheral側の独立した電源および書き込み/復旧手段 | ホスト接続、入力検証、ログ、復旧 | 必須 | [OpenSiFli ZMKフォーク](https://github.com/OpenSiFli/zmk) | ホストOS、BLEボンド状態、ケーブル/ポート、各側の復旧接続を記録する |
+| Urchin分割キーボードの試験治具と配線 | `urchin_sf32lb52_left`と`urchin_sf32lb52_right`のオーバーレイに従った38キーのマトリクス | キーマトリクス、左右間通信、各側の役割を検証 | 分割構成の総合検証に必須 | [確認済みコミットのUrchinシールド](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/shields/urchin_sf32lb52) | オーバーレイは配線の参照情報であり、別のPCBや任意のシールドとの互換性を保証しない |
+| USB/BLEホストとデータケーブル | セントラル側用USBホスト、Bluetooth HIDホスト、ペリフェラル側の独立した電源および書き込み/復旧手段 | ホスト接続、入力検証、ログ、復旧 | 必須 | [OpenSiFli ZMKフォーク](https://github.com/OpenSiFli/zmk) | ホストOS、BLEボンド状態、ケーブル/ポート、各側の復旧接続を記録する |
 
 </div>
 
@@ -87,9 +87,9 @@ SF32ポートでは、Zephyrのデバイスツリー、Kconfig、`west`、キー
 | パッケージまたはサービス | 必要なバージョンまたはリビジョン | 役割 | 区分 | 入手先 | 互換性・更新時の注意 |
 |:-------------------------|:---------------------------------|:-----|:-----|:-------|:---------------------|
 | OpenSiFli/zmk | 確認済みコミット[`fd4d5843065f`](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e) | SF32ポート、ZMKアプリケーション、Urchin設定 | 必須 | [確認済みコミットのリポジトリー](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e) | SF32向けのタグ付きZMKリリースではない。移植と検証なしに上流版へ置き換えない |
-| west manifestの依存関係 | 固定したフォークコミットの`app/west.yml`で解決される正確なリビジョン | Zephyr、`hal_sifli`、CherryUSBなどのモジュール | 必須 | [固定コミットのwest manifest](https://github.com/OpenSiFli/zmk/blob/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/west.yml) | `west list`を実行して結果を保存する。依存関係を個別に更新しない |
-| `west`/Zephyrツールとビルドツールチェーン | 固定manifestと互換性のあるバージョン。インストール済みバージョンとホストOSを記録 | 左右のイメージを設定、ビルド | 必須 | [ZMKドキュメント](https://zmk.dev/docs)；[Zephyrドキュメント](https://docs.zephyrproject.org/) | クリーンな作業領域で両イメージを再ビルドし、ビルドディレクトリーとハッシュを分けて保存する |
-| ZMK Studioホスト | 選択した設定でStudioを有効にする場合、対応するホスト/アプリのバージョン | オプションの設定/keymap経路 | 任意 | [ZMK Studioドキュメント](https://zmk.dev/docs/features/studio) | 確認済み設定では左/central側でStudioを有効にする。製品利用前に認可とロールバックを検証する |
+| westマニフェストの依存関係 | 固定したフォークコミットの`app/west.yml`で解決される正確なリビジョン | Zephyr、`hal_sifli`、CherryUSBなどのモジュール | 必須 | [固定コミットのwestマニフェスト](https://github.com/OpenSiFli/zmk/blob/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/west.yml) | `west list`を実行して結果を保存する。依存関係を個別に更新しない |
+| `west`/Zephyrツールとビルドツールチェーン | 固定マニフェストと互換性のあるバージョン。インストール済みバージョンとホストOSを記録 | 左右のイメージの設定、ビルド、生成 | 必須 | [ZMKドキュメント](https://zmk.dev/docs)；[Zephyrドキュメント](https://docs.zephyrproject.org/) | クリーンな作業領域で両イメージを再ビルドし、ビルドディレクトリーとハッシュを分けて保存する |
+| ZMK Studioホスト | 選択した設定でStudioを有効にする場合、対応するホスト/アプリのバージョン | オプションの設定/キーマップ経路 | 任意 | [ZMK Studioドキュメント](https://zmk.dev/docs/features/studio) | 確認済み設定では左/セントラル側でStudioを有効にする。製品利用前に認可とロールバックを検証する |
 
 </div>
 
@@ -195,8 +195,8 @@ flowchart LR
 
 | 試験 | 方法 | 合格の証跡 |
 |:-----|:-----|:-----------|
-| マトリクス網羅性 | 全ポジション、複数キー同時押し、各レイヤー、両側の直接入力を試す | 欠落、重複、押しっぱなし、左右の役割取り違えがなく、押下／解放の順序を記録している |
-| 分割リンク断 | アイドル時とタイピング中に右側の電源を切るか、通信範囲外へ移動する | 左側のキーとホスト接続が定義どおり動作し、右側が再書き込みや古いキー状態を残さず再接続する |
+| マトリクス網羅性 | 全ポジション、複数キー同時押し、各レイヤー、両方の直接入力を試す | 欠落、重複、押しっぱなし、左右の役割取り違えがなく、押下／解放の順序を記録している |
+| 分割リンク断 | アイドル時とタイピング中に右側の電源を切るか、通信範囲外へ移動する | 左側のキーとホスト接続が定義どおり動作し、右側が再書き込みなしで再接続し、古いキー状態も残らない |
 | USB中断 | 入力またはStudio使用中に左側のUSBデータ接続を抜き差しする | HIDとStudioがそれぞれ復旧し、修飾キーが押されたままにならず、設定も破損しない |
 | ホストBLE切断 | ホストのBluetoothを無効化し、プロファイル切り替えと再接続を試す | 接続先／プロファイル状態を確認でき、再接続と明示的なボンド消去の手順が記録されている |
 | 設定の永続化 | 元に戻せる設定を変更し、左右両方を電源再投入してから基準状態へ戻す | 想定するNVS状態が保持され、破損または不要な状態を消去するリセット／復旧手段が文書化されている |
@@ -220,7 +220,7 @@ flowchart LR
 
 ## 段階4 — キーボードの境界を1つずつ変更する { #stage-4-adapt-one-keyboard-boundary-at-a-time }
 
-**目標：** 既知正常なポートと左右独立の復旧手段を保ちながら、製品向けの変更を1つ加えます。
+**目標：** 動作確認済みのポートと左右独立の復旧手段を保ちながら、製品向けの変更を1つ加えます。
 
 <div align="center"><em>表: SF32向けZMKの段階的な変更順序</em></div>
 

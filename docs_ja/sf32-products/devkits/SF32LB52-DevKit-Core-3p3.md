@@ -36,7 +36,7 @@ SF32LB52-DevKit-Core-3p3は、SF32LB52xチップを直接評価するための�
 
 </div>
 
-小型のBluetooth機器、制御用途、シンプルなHMIにはNORのみのバリアントが適しています。大きなグラフィックスアセット、フレームバッファ、ファイルシステム、アプリケーション用ストレージが必要な場合は、PSRAM + 外部NORのバリアントを選択してください。
+小型のBluetooth機器、制御用途、シンプルなHMIにはNORのみのバリアントが適しています。大きなグラフィックスアセット、フレームバッファー、ファイルシステム、アプリケーション用ストレージが必要な場合は、PSRAM + 外部NORのバリアントを選択してください。
 
 **出典の記載差異（選定前に基板表示を確認）：** SiFliの[Core-3p3詳細ガイド](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Core-3p3.html)ではSF32LB52JUD6構成を現行の`R16N16 V1.0.0`と呼ぶ一方、[開発ボード型番ガイド](https://wiki.sifli.com/en/board/devkit_guide.html)では同じJUD6 / 16 MB PSRAM / 16 MB NOR構成を`N16R16`と記載しています。詳細ガイドの版情報にはEUB6のパッケージ内蔵PSRAMが8 MBとありますが、同ガイドの特性一覧と構成表は4 MBです。SiFliの[SF32LB52概要](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52/SF32LB52-Overview-B3.md)もEUB6を4 MBとしているため、本記事では4 MBを採用しています。ボード型番を確定する際は、実物の表示と対応する回路図/BOMを確認してください。
 

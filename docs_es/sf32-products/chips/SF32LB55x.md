@@ -25,7 +25,7 @@ La guía de modelos de chips de SiFli indica que SF32LB55x se definió antes que
 **SF32LB55x se recomienda para** productos centrados en BLE que necesitan una interfaz de usuario más avanzada, más memoria de trabajo o mayor flexibilidad de encapsulado que las MCU de entrada para dispositivos vestibles. Algunos ejemplos:
 
 - Relojes inteligentes y pulseras de actividad
-- Dispositivos portátiles de supervisión de la salud
+- Dispositivos vestibles de supervisión de la salud
 - Cerraduras inteligentes y controladores de hogar inteligente
 - Accesorios conectados con numerosos sensores
 - Productos HMI gráficos compactos
@@ -38,8 +38,8 @@ Elija SF32LB55x si el diseño requiere una o varias de estas capacidades:
 - Pantallas MIPI DSI en modo comando
 - Más SRAM para LVGL, recursos gráficos, adquisición de sensores o cargas de trabajo TinyML
 - Un procesador de bajo consumo programable por el usuario
-- Más GPIO u opciones de encapsulado con mayor densidad de E/S que SF32LB52x
-- Compatibilidad con memorias externas NOR, NAND, eMMC, QSPI-PSRAM y OPI-PSRAM
+- Más GPIO u opciones de encapsulado más densas que SF32LB52x
+- Flexibilidad de memoria externa: NOR, NAND, eMMC, QSPI-PSRAM u OPI-PSRAM
 
 ## Recursos de desarrollo { #development-resources }
 
@@ -83,7 +83,7 @@ Elija SF32LB55x si el diseño requiere una o varias de estas capacidades:
 - Procesador Arm Cortex-M33 STAR-MC1 de consumo ultrabajo, hasta 48 MHz
 - Hasta 360 DMIPS / 965 EEMBC CoreMark en el procesador de aplicación
 - Hasta 72 DMIPS / 193 EEMBC CoreMark en el procesador de bajo consumo
-- 1 088 KB de SRAM de aplicación, incluidas 64 KB de SRAM de retención
+- 1 088 KB de SRAM de aplicación, incluidos 64 KB de SRAM de retención
 - 224 KB de SRAM de bajo consumo, toda ella de retención
 - Interfaces de memoria externa para NOR, NAND, eMMC, QSPI-PSRAM y OPI-PSRAM
 
@@ -163,7 +163,7 @@ En este caso, elegir el encapsulado no es solo una decisión de diseño de la pl
 | :--- | :--- | :--- | :--- |
 | QFN68L | 28 / 21 | 49 | Dispositivo vestible compacto o sensor BLE, con menores costes de fabricación de la PCB |
 | BGA145 | 55 / 40 | 95 | Diseño con pantalla, memoria y sensores, y mayor margen para el trazado de pistas |
-| BGA169 | 71 / 42 | 113 | Diseño SF32LB55x con más E/S y la mayor variedad de memoria integrada e interfaces de pantalla |
+| BGA169 | 71 / 42 | 113 | Diseños SF32LB55x con la mayor cantidad de E/S y la mayor variedad de memoria integrada e interfaces de pantalla |
 
 </div>
 
@@ -183,8 +183,7 @@ Los modelos actuales representativos que figuran en la guía de modelos de chips
 
 </div>
 
-Para SF32LB557VD3A6, la guía de modelos vigente de SiFli y la tabla 0-1 de la hoja de datos DS5501 V1.7.2 indican 71 GPIO de HCPU + 42 de LCPU, es decir, 113 en total. En cambio, el resumen de características y el resumen de encapsulados de esa misma hoja de datos, así como la ficha de producto PB0001 V1.3, indican 119 GPIO para BGA169 (71 de HCPU + 48 de LCPU). Por tanto, las fuentes oficiales discrepan, incluso dentro de la propia hoja de datos DS5501. Este artículo sigue la fila específica del modelo y la guía vigente (113). Antes de asignar pines o cerrar el diseño, compruebe las GPIO disponibles en el mapa de bolas del encapsulado y confirme con SiFli el componente realmente comercializado. Verifique también la alimentación y el rango de temperatura de la variante, el código completo y la memoria integrada en la [hoja de datos DS5501 V1.7.2][Hoja de datos], la [ficha de producto PB0001 V1.3][Ficha de producto] y la [guía de modelos de chips de SiFli][Guía de modelos de chips de SiFli]. Los encapsulados BGA145 y BGA169 miden 7 × 7 × 0,94 mm y tienen un paso de 0,5 mm.
-
+Para SF32LB557VD3A6, la guía de modelos vigente de SiFli y la tabla 0-1 de la hoja de datos DS5501 V1.7.2 indican 71 GPIO de HCPU + 42 de LCPU, es decir, 113 en total. En cambio, el resumen de características y el resumen de encapsulados de esa misma hoja de datos, así como la ficha de producto PB0001 V1.3, indican 119 GPIO para BGA169 (71 de HCPU + 48 de LCPU). Por tanto, las fuentes oficiales discrepan, incluso dentro de la propia hoja de datos DS5501. Este artículo sigue la fila específica del modelo y la guía vigente (113). Antes de asignar pines o cerrar el diseño, compruebe las GPIO disponibles en la disposición de bolas del encapsulado elegido y confirme con SiFli la referencia de pedido exacta. Verifique también la alimentación y el rango de temperatura de la variante, el código completo y la memoria integrada en la [hoja de datos DS5501 V1.7.2][Hoja de datos], la [ficha de producto PB0001 V1.3][Ficha de producto] y la [guía de modelos de chips de SiFli][Guía de modelos de chips de SiFli]. Los encapsulados BGA145 y BGA169 miden 7 × 7 × 0,94 mm y tienen un paso de 0,5 mm.
 
 ## Ruta de integración { #integration-path }
 
@@ -203,7 +202,7 @@ Use la nota de aplicación de hardware oficial, los esquemáticos de referencia 
 
 ### Productos de referencia { #reference-products }
 
-Entre los productos finales habituales basados en SF32LB55x se encuentran los relojes inteligentes, las pulseras de actividad, los dispositivos portátiles de supervisión de la salud, las cerraduras inteligentes, los accesorios conectados, los controladores para el hogar inteligente y las HMI gráficas compactas.
+Entre los productos finales habituales basados en SF32LB55x se encuentran los relojes inteligentes, las pulseras de actividad, los dispositivos vestibles de supervisión de la salud, las cerraduras inteligentes, los accesorios conectados, los controladores para el hogar inteligente y las HMI gráficas compactas.
 
 !!! note "Contenido autogenerado"
     Esta página se ha redactado sin un documento fuente específico. Verifique las afirmaciones técnicas en la documentación oficial de SiFli antes de basarse en ellas.

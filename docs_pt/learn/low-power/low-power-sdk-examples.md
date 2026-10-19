@@ -91,7 +91,7 @@ As estimativas de autonomia do exemplo original dependem das condições documen
 
 Para ver um exemplo completo do ciclo entre modelagem e medição, consulte [Análise de consumo de um smartwatch](smartwatch-power-profiling.md).
 
-## Use um exemplo de PM para validar o produto { #adapt-a-pm-example-into-product-evidence }
+## Adapte um exemplo de PM para obter evidências do produto { #adapt-a-pm-example-into-product-evidence }
 
 <div align="center"><em>Tabela: verificações para adaptar exemplos de PM ao produto</em></div>
 
@@ -102,7 +102,7 @@ Para ver um exemplo completo do ciclo entre modelagem e medição, consulte [An�
 | Estabelecer a referência original | Placa, conexão de alimentação, jumpers, revisão do SDK, configuração e comportamento esperado | Separa o comportamento do exemplo de origem das alterações posteriores no produto |
 | Definir um cenário | Estado de PM identificado, componentes ativos, fonte de despertar, duração e condição de término | Evita obter um valor de corrente média sem significado de engenharia |
 | Medir corrente e tensão | Marcadores na medição, corrente, tensão, potência e energia | Permite comparar resultados entre linhas de alimentação e revisões de firmware |
-| Adicionar o hardware do produto | Componentes externos, estados dos pinos, linhas de alimentação e sensores atualizados | Revela fugas e consumo de periféricos ausentes na placa de desenvolvimento |
+| Adicionar o hardware do produto | Componentes externos, estados dos pinos, linhas de alimentação e sensores atualizados | Revela correntes de fuga e consumo de periféricos ausentes na placa de desenvolvimento |
 | Conciliar o modelo de energia | Frequência e duração dos cenários, além da energia medida | Permite ajustar a estimativa de consumo diário para que se aproxime do comportamento medido do produto |
 
 </div>

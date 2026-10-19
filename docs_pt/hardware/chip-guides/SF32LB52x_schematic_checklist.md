@@ -16,7 +16,7 @@ tags:
 
 ## 5.8. Checklist do esquemático { #58-schematic-checklist }
 
-Cada tabela cobre um bloco funcional do esquemático. A coluna “Aplicável a” indica os modelos ou as revisões de silício específicos quando o item não se aplica a todas as variantes.
+Cada tabela cobre um bloco funcional do esquemático. A coluna “Aplicável a” restringe um item a uma variante de alimentação ou revisão de silício específica do SF32LB52x quando o escopo geral “Todas as variantes” não se aplica.
 
 “Obrigatório” significa que o item deve ser verificado quando aplicável; não exige instalar todos os periféricos listados. Os itens condicionais só se aplicam quando o circuito ou a função correspondente está presente. Mantenha as categorias Obrigatório/Opcional da fonte e diferencie recomendações de limites obrigatórios.
 
@@ -41,11 +41,11 @@ Cada tabela cobre um bloco funcional do esquemático. A coluna “Aplicável a�
 | Nº | Ponto de verificação | Aplicável a | Categoria |
 |:---|:---|:---|:---|
 | 1 | A tensão de alimentação de VBUS está na faixa de <span class="flag-red">4,6 V–5,5 V</span> | Apenas 520/3/5/7 | Obrigatório |
-| 2 | Se o produto precisa acender a tela assim que o carregador é conectado, o carregador interno não é recomendado; prefira um CI carregador externo com gerenciamento do caminho de alimentação | Apenas 520/3/5/7 | Obrigatório |
-| 3 | O carregador interno só pode ser usado se for aceitável esperar a bateria atingir 3,6 V antes de o software ligar a tela | Apenas 520/3/5/7 | Obrigatório |
+| 2 | Se o produto precisa acender o display assim que o carregador é conectado, o carregador interno não é recomendado; prefira um CI carregador externo com gerenciamento do caminho de alimentação | Apenas 520/3/5/7 | Obrigatório |
+| 3 | O carregador interno só pode ser usado se for aceitável esperar a bateria atingir 3,6 V antes de o software ligar o display | Apenas 520/3/5/7 | Obrigatório |
 | 4 | Recomenda-se um dispositivo OVP com saída LDO integrada, como LP5305AQVF: saída de 4,7–5,4 V, capacidade de carga ≥0,5 A e corrente de atuação da proteção contra sobrecorrente ≥0,7 A | Apenas 520/3/5/7 | Obrigatório |
-| 5 | Se o dispositivo OVP tiver OVLO ajustável, os resistores do divisor têm tolerância de 1% e o erro de V_OVLO_TH é inferior a 3%; tanto o mínimo quanto o máximo de V_OVP devem ficar dentro da faixa de 5,15–5,55 V. A fonte identifica 5,15 V como a tensão máxima de entrada do carregador e 5,55 V como o limite superior de entrada do carregador do 52x; consulte a nota sobre a divergência após a tabela | Apenas 520/3/5/7 | Obrigatório |
-| 6 | Se o carregador interno não for usado, VBUS pode ficar desconectado e seu capacitor pode ser omitido; nesse caso, VBAT deixa de funcionar como saída e deve ter um capacitor externo de 1 uF | Apenas 520/3/5/7 | Obrigatório |
+| 5 | Se o dispositivo OVP tiver OVLO ajustável, use resistores de divisor com tolerância de 1% e mantenha o erro de V_OVLO_TH abaixo de 3%; tanto o mínimo quanto o máximo de V_OVP devem ficar dentro da faixa de 5,15–5,55 V. A fonte identifica 5,15 V como a tensão máxima de entrada do carregador e 5,55 V como o limite superior de entrada do carregador do 52x; consulte a nota sobre a divergência após a tabela | Apenas 520/3/5/7 | Obrigatório |
+| 6 | Se o carregador interno não for usado, VBUS pode ficar desconectado e seu capacitor pode ser omitido; nesse caso, VBAT deixa de funcionar como saída e deve ter um capacitor externo de 1 µF | Apenas 520/3/5/7 | Obrigatório |
 | 7 | Medição da tensão da bateria: um canal interno do GPADC já está conectado a VBAT ou VBATS; não conecte VBAT também a um pino GPADC externo | Todas as variantes | Obrigatório |
 | 8 | <span class="flag-red">A tensão de alimentação dos pinos VCC e VBAT está na faixa de 3,2 V–4,7 V</span> | Apenas 520/3/5/7 | Obrigatório |
 | 9 | As conexões de BUCK_LX e BUCK_FB estão corretas | Todas as variantes | Obrigatório |
@@ -74,7 +74,7 @@ Cada tabela cobre um bloco funcional do esquemático. A coluna “Aplicável a�
 </div>
 
 !!! important "Limiares OVP não são limites de operação de VBUS"
-    O item 5 da fonte indica 5,15–5,55 V para selecionar um OVLO ajustável, enquanto o item 1 limita a alimentação VBUS do chip a 4,6–5,5 V. Não interprete 5,55 V como uma tensão contínua permitida em VBUS. A [seção do sistema de alimentação](SF32LB52x_schematic_design.md#52-power-system) explica as diferenças entre as fontes e cita outra faixa de seleção OVP da nota de aplicação. Antes de aprovar o projeto, confirme com a SiFli os limiares e os limites de operação do componente escolhido.
+    O item 5 da fonte indica 5,15–5,55 V para selecionar um OVLO ajustável, enquanto o item 1 reproduz a verificação de VBUS da planilha, de 4,6–5,5 V. Não interprete 5,55 V como uma tensão contínua permitida em VBUS. A [seção do sistema de alimentação](SF32LB52x_schematic_design.md#52-power-system) explica as diferenças entre as fontes e cita outra faixa de seleção OVP da nota de aplicação. Antes de aprovar o projeto, confirme com a SiFli os limiares e os limites de operação do componente escolhido.
 
 !!! note "Origem e aplicação dos valores de VBUS"
     A seção Electrical Specification-A3 indica uma faixa de alimentação VBUS de 4,5–5,5 V. A nota de aplicação das variantes alimentadas por bateria indica 4,6–5,5 V em sua tabela de alimentação e exige pelo menos 4,6 V no pino VBUS durante a corrente máxima de carga. Esses valores têm contextos diferentes; considere a tolerância da alimentação e a queda de tensão ao verificar a tensão mínima no chip.
@@ -87,28 +87,28 @@ Cada tabela cobre um bloco funcional do esquemático. A coluna “Aplicável a�
 
 | Nº | Ponto de verificação | Aplicável a | Categoria |
 |:---|:---|:---|:---|
-| 1 | Capacitor de VBUS ≥10 uF | Apenas 520/3/5/7 | Obrigatório |
-| 2 | Capacitor de VBAT ≥4,7 uF | Apenas 520/3/5/7 | Obrigatório |
-| 3 | No SF32LB523/5/7, o pino 24 é VCC; capacitor externo ≥10 uF | 523/5/7 | Obrigatório |
-| 4 | Nas variantes 523/5/7/B/D/E/G/J, <span class="flag-red">o pino 23 é VDD_SIP; capacitor externo ≥2,2 uF</span> | 523/5/7/B/D/E/G/J | Obrigatório |
+| 1 | Capacitor de VBUS ≥10 µF | Apenas 520/3/5/7 | Obrigatório |
+| 2 | Capacitor de VBAT ≥4,7 µF | Apenas 520/3/5/7 | Obrigatório |
+| 3 | No SF32LB523/5/7, o pino 24 é VCC; capacitor externo ≥10 µF | 523/5/7 | Obrigatório |
+| 4 | Nas variantes 523/5/7/B/D/E/G/J, <span class="flag-red">o pino 23 é VDD_SIP; capacitor externo ≥2,2 µF</span> | 523/5/7/B/D/E/G/J | Obrigatório |
 | 5 | No SF32LB520, o pino 24 é o GPIO PA21 | 520/SS6500 | Obrigatório |
-| 6 | No SF32LB520, o pino 23 é VCC; capacitor externo ≥10 uF | 520/SS6500 | Obrigatório |
-| 7 | Capacitor de BUCK_FB = 4,7 uF | Todas as variantes | Obrigatório |
-| 8 | Capacitor de VDD_VOUT1 = 4,7 uF | Todas as variantes | Obrigatório |
-| 9 | Capacitor de VDD_VOUT2 = 4,7 uF | Todas as variantes | Obrigatório |
-| 10 | Capacitor de VDD_RET = 0,47 uF | Todas as variantes | Obrigatório |
-| 11 | Capacitor de VDD_RTC = 1 uF | Todas as variantes | Obrigatório |
-| 12 | <span class="flag-red">Capacitância total de VDD33_VOUT1 ≤9,6 uF</span> | <span class="flag-red">Apenas 520/3/5/7</span> | Obrigatório |
-| 13 | <span class="flag-red">Capacitância total de VDD33_VOUT2 ≤9,6 uF</span> | <span class="flag-red">Apenas 520/3/5/7</span> | Obrigatório |
-| 14 | <span class="flag-red">Capacitância total de VSYS ≤9,6 uF</span> | <span class="flag-red">Apenas 520/3/5/7</span> | Obrigatório |
-| 15 | Capacitor de MIC_BIAS = 1 uF | Todas as variantes | Obrigatório |
-| 16 | <span class="flag-red">Capacitor de AVDD_BRF = 4,7 uF</span> | <span class="flag-red">Todas as variantes</span> | Obrigatório |
-| 17 | <span class="flag-red">Capacitor de AVDD33_AUD = 2,2 uF</span> | <span class="flag-red">Todas as variantes</span> | Obrigatório |
-| 18 | Capacitor de AUD_VREF = 1 uF | Todas as variantes | Obrigatório |
-| 19 | <span class="flag-red flag-yellow">Capacitor de VSYS = 4,7 uF</span> | <span class="flag-red flag-yellow">Apenas 520/3/5/7</span> | Obrigatório |
-| 20 | Capacitor de VREFP do GPADC = 4,7 uF | Todas as variantes | Obrigatório |
+| 6 | No SF32LB520, o pino 23 é VCC; capacitor externo ≥10 µF | 520/SS6500 | Obrigatório |
+| 7 | Capacitor de BUCK_FB = 4,7 µF | Todas as variantes | Obrigatório |
+| 8 | Capacitor de VDD_VOUT1 = 4,7 µF | Todas as variantes | Obrigatório |
+| 9 | Capacitor de VDD_VOUT2 = 4,7 µF | Todas as variantes | Obrigatório |
+| 10 | Capacitor de VDD_RET = 0,47 µF | Todas as variantes | Obrigatório |
+| 11 | Capacitor de VDD_RTC = 1 µF | Todas as variantes | Obrigatório |
+| 12 | <span class="flag-red">Capacitância total de VDD33_VOUT1 ≤9,6 µF</span> | <span class="flag-red">Apenas 520/3/5/7</span> | Obrigatório |
+| 13 | <span class="flag-red">Capacitância total de VDD33_VOUT2 ≤9,6 µF</span> | <span class="flag-red">Apenas 520/3/5/7</span> | Obrigatório |
+| 14 | <span class="flag-red">Capacitância total de VSYS ≤9,6 µF</span> | <span class="flag-red">Apenas 520/3/5/7</span> | Obrigatório |
+| 15 | Capacitor de MIC_BIAS = 1 µF | Todas as variantes | Obrigatório |
+| 16 | <span class="flag-red">Capacitor de AVDD_BRF = 4,7 µF</span> | <span class="flag-red">Todas as variantes</span> | Obrigatório |
+| 17 | <span class="flag-red">Capacitor de AVDD33_AUD = 2,2 µF</span> | <span class="flag-red">Todas as variantes</span> | Obrigatório |
+| 18 | Capacitor de AUD_VREF = 1 µF | Todas as variantes | Obrigatório |
+| 19 | <span class="flag-red flag-yellow">Capacitor de VSYS = 4,7 µF</span> | <span class="flag-red flag-yellow">Apenas 520/3/5/7</span> | Obrigatório |
+| 20 | Capacitor de VREFP do GPADC = 4,7 µF | Todas as variantes | Obrigatório |
 | 21 | O indutor do BUCK consta na [lista de fornecedores aprovados da SiFli][SiFli Approved Vendor List] (AVL) | Todas as variantes | Obrigatório |
-| 22 | Se o indutor do BUCK não constar na AVL, atende a L = 4,7 uH, DCR ≤0,4 Ω e Isat ≥450 mA | Todas as variantes | Obrigatório |
+| 22 | Se o indutor do BUCK não constar na AVL, atende a L = 4,7 µH, DCR ≤0,4 Ω e Isat ≥450 mA | Todas as variantes | Obrigatório |
 | 23 | <span class="flag-red">Se houver GPS ou outros periféricos sensíveis a interferências, reserve um footprint para um capacitor entre BUCK_LX e terra; determine o valor por meio de testes</span> | <span class="flag-red">Todas as variantes</span> | Obrigatório |
 | 24 | <span class="flag-red">A corrente quiescente do conversor DCDC escolhido está registrada e atende aos requisitos do projeto</span> | <span class="flag-red">Todas as variantes</span> | Obrigatório |
 | 25 | <span class="flag-red">A corrente quiescente do LDO escolhido está registrada e atende aos requisitos do projeto</span> | <span class="flag-red">Todas as variantes</span> | Obrigatório |
@@ -142,10 +142,10 @@ Cada tabela cobre um bloco funcional do esquemático. A coluna “Aplicável a�
 
 | Nº | Ponto de verificação | Aplicável a | Categoria |
 |:---|:---|:---|:---|
-| 1 | Se houver memória externa <span class="flag-purple">Flash SPI NOR, PA13 e PA17 não precisam de pull-up</span> | Todas as variantes | Obrigatório |
+| 1 | Se houver Flash <span class="flag-purple">SPI NOR externa, PA13 e PA17 não precisam de pull-up</span> | Todas as variantes | Obrigatório |
 | 2 | Se houver <span class="flag-red">Flash SPI NAND</span> externa, PA13 não precisa de pull-up; <span class="flag-red">PA17 precisa de um pull-up de 7,5 kΩ</span> para VDD da Flash | Todas as variantes | Obrigatório |
 | 3 | Se houver <span class="flag-blue">Flash SD NAND</span> externa, PA17 não precisa de pull-up; <span class="flag-blue">PA13 precisa de um pull-up de 7,5 kΩ</span> para VDD da Flash | Todas as variantes | Obrigatório |
-| 4 | Se houver memória externa <span class="flag-green">eMMC, PA13 e PA17 precisam de pull-ups de 7,5 kΩ</span> para VCCQ da eMMC | <span class="flag-red">52D/E/G/J</span> | Obrigatório |
+| 4 | Se houver <span class="flag-green">eMMC externa, PA13 e PA17 precisam de pull-ups de 7,5 kΩ</span> para VCCQ da eMMC | <span class="flag-red">52D/E/G/J</span> | Obrigatório |
 
 </div>
 
@@ -236,9 +236,9 @@ Cada tabela cobre um bloco funcional do esquemático. A coluna “Aplicável a�
 | 9 | O display é alimentado por um LDO de baixa corrente quiescente; <span class="flag-red">recomenda-se PA30 para controlar o enable do LDO</span> | Todas as variantes | Obrigatório |
 | 10 | Foi definido se TP e LCD precisam de controle de alimentação independente ou compartilhado | Todas as variantes | Obrigatório |
 | 11 | Se o LCD integrar um sensor de luz, esse sensor também recebe alimentação | Todas as variantes | Obrigatório |
-| 12 | Para o backlight de um LCD TFT, use um GPIO com pull-down (PD) se o controle for ativo em nível alto e um GPIO com pull-up (PU) se for ativo em nível baixo | Todas as variantes | Obrigatório |
+| 12 | Para a retroiluminação de um LCD TFT, use um GPIO com pull-down (PD) se o controle for ativo em nível alto e um GPIO com pull-up (PU) se for ativo em nível baixo | Todas as variantes | Obrigatório |
 | 13 | <span class="flag-red">LCD SPI: modo de 3 fios — CS em PA03, CLK em PA04 e DATA em PA05; modo de 4 fios — CS em PA03, CLK em PA04, DATA em PA05 e DC em PA06</span> | Todas as variantes | Obrigatório |
-| 14 | O display Sharp Memory/JDI conectado à interface JDI do MCU deve ter: VCOM e VB em PA24; VA em PA25; R0/G0/B0 do display em R1/G1/B1 do MCU; R1/G1/B1 do display em R2/G2/B2 do MCU; GSP em VST; BSP em HST; GCK em VCK; BCK em HCK; GEN em ENB; INTB em XRST | Todas as variantes | Obrigatório |
+| 14 | Display Sharp Memory/JDI na interface JDI do MCU: VCOM e VB ligam-se a PA24 do MCU; VA, a PA25 do MCU; R0/G0/B0 do display, a R1/G1/B1 do MCU; R1/G1/B1 do display, a R2/G2/B2 do MCU; GSP, a VST; BSP, a HST; GCK, a VCK; BCK, a HCK; GEN, a ENB; INTB, a XRST | Todas as variantes | Obrigatório |
 | 15 | O nível lógico de I/O do periférico corresponde ao do MCU | Todas as variantes | Obrigatório |
 
 </div>
@@ -316,7 +316,7 @@ Cada tabela cobre um bloco funcional do esquemático. A coluna “Aplicável a�
 | 2 | O microfone MEMS é alimentado por MIC_BIAS | Todas as variantes | Opcional |
 | 3 | As conexões do microfone ECM analógico single-ended estão corretas | Todas as variantes | Opcional |
 | 4 | O microfone ECM analógico single-ended é alimentado por MIC_BIAS | Todas as variantes | Opcional |
-| 5 | Todas as entradas do ADC de áudio têm capacitor de bloqueio DC de pelo menos 2,2 uF | Todas as variantes | Opcional |
+| 5 | Todas as entradas do ADC de áudio têm capacitor de bloqueio DC de pelo menos 2,2 µF | Todas as variantes | Opcional |
 | 6 | As saídas DACP e DACN do DAC de áudio têm, cada uma, um resistor de 1 kΩ em série próximo ao chip; há um capacitor de 1,5 nF entre DACP e DACN | Todas as variantes | Opcional |
 | 7 | <span class="flag-red">Recomenda-se AW8155B como amplificador de potência de áudio, configurado por software em modo Classe A/B; outros componentes precisam de validação por testes</span> | Todas as variantes | Opcional |
 | 8 | <span class="flag-red">Se o caminho integrado do ADC de áudio analógico não for usado, recomenda-se conectar ADCP ao terra por um resistor de 0 Ω</span> | Todas as variantes | Opcional |
@@ -360,7 +360,7 @@ Cada tabela cobre um bloco funcional do esquemático. A coluna “Aplicável a�
 
 | Nº | Ponto de verificação | Aplicável a | Categoria |
 |:---|:---|:---|:---|
-| 1 | Recomenda-se PA1 para controlar o backlight do LCD | Todas as variantes | Opcional |
+| 1 | Recomenda-se PA1 para controlar a retroiluminação do LCD | Todas as variantes | Opcional |
 | 2 | O PWM do motor de vibração usa PA20 | Todas as variantes | Obrigatório |
 
 </div>
@@ -394,11 +394,11 @@ Cada tabela cobre um bloco funcional do esquemático. A coluna “Aplicável a�
 | 5 | Se VSYS alimentar pull-ups de GPIO, sua alimentação permanece ligada; foi confirmado que isso atende aos requisitos de consumo | Apenas 520/3/5/7 | Obrigatório |
 | 6 | Se LDO2 ou LDO3 alimentar pull-ups de GPIO, foram verificados os requisitos do projeto nas situações em que esses LDOs são desligados | Apenas 520/3/5/7 | Obrigatório |
 | 7 | A alimentação dos pull-ups de I2C é chaveada junto com a alimentação de I/O do periférico, para evitar corrente de fuga | Todas as variantes | Obrigatório |
-| 8 | Uso de PA09: nível alto para habilitar a tela quando ligada e nível baixo durante a suspensão | Revisão A2 do silício e anteriores | Obrigatório |
-| 9 | O requisito de corrente de repouso em Deep Sleep foi definido e registrado | Todas as variantes | Obrigatório |
-| 10 | <span class="flag-red">A soma das correntes de repouso de todos os periféricos selecionados em Deep Sleep está registrada e atende aos requisitos do projeto</span> | <span class="flag-red">Todas as variantes</span> | Obrigatório |
-| 11 | O requisito de corrente de repouso em Standby foi definido e registrado | Todas as variantes | Obrigatório |
-| 12 | <span class="flag-red">A soma das correntes de repouso de todos os periféricos selecionados em Standby está registrada e atende aos requisitos do projeto</span> | <span class="flag-red">Todas as variantes</span> | Obrigatório |
+| 8 | Uso de PA09: nível alto para habilitar quando o display é ligado e nível baixo durante a suspensão | Revisão A2 do silício e anteriores | Obrigatório |
+| 9 | O requisito de corrente de base em Deep Sleep foi definido e registrado | Todas as variantes | Obrigatório |
+| 10 | <span class="flag-red">A soma das correntes de base de todos os periféricos selecionados em Deep Sleep está registrada e atende aos requisitos do projeto</span> | <span class="flag-red">Todas as variantes</span> | Obrigatório |
+| 11 | O requisito de corrente de base em Standby foi definido e registrado | Todas as variantes | Obrigatório |
+| 12 | <span class="flag-red">A soma das correntes de base de todos os periféricos selecionados em Standby está registrada e atende aos requisitos do projeto</span> | <span class="flag-red">Todas as variantes</span> | Obrigatório |
 
 [^52a-note]: A planilha de origem indica “52A/52D”. As variantes descritas no [guia de projeto de hardware do SF32LB52x][SF32LB52x Hardware Design Guide - Dev] são SF32LB52B/D/E/G/J; a indicação “52A” da planilha não identifica uma dessas variantes. Confirme o modelo exato e seu datasheet antes de aplicar este item; não substitua automaticamente “52A” por outro modelo.
 [^52a-category-note]: A planilha de origem deixa a categoria desta linha em branco. A indicação “Não especificado na fonte” preserva essa omissão, sem classificar o item como obrigatório ou opcional. Confirme a aplicabilidade e o critério de aprovação para o componente escolhido.

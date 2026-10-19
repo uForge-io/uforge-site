@@ -46,7 +46,7 @@ Die Downstream-Board-Dokumentation beschreibt das Modul SF32LB52x-MOD-N16R8 mit 
 
 Das Board-Target, das Devicetree, die Kconfig-Konfiguration, Overlays und die Downstream-HAL-Revision bilden eine gemeinsame Kompatibilitätsgrenze. Fixieren Sie die Downstream-Revision in jedem Projekt und halten Sie Anwendungs-Overlays und Konfigurationsfragmente zusammen mit der Anwendung unter Versionskontrolle.
 
-Übernehmen Sie keinen Board-Namen, keine Pin-Zuordnung und keine Runner-Einstellung aus einem Arduino- oder SiFli-SDK-Projekt in Zephyr. Die drei Pfade verwenden unterschiedliche Konfigurationsmodelle, selbst wenn sie auf demselben physischen Board laufen.
+Übernehmen Sie keinen Boardnamen, keine Pin-Zuordnung und keine Runner-Einstellung aus einem Arduino- oder SiFli-SDK-Projekt in Zephyr. Die drei Pfade verwenden unterschiedliche Konfigurationsmodelle, selbst wenn sie auf demselben physischen Board laufen.
 
 ## Hinweise zur Board-Hardware { #board-hardware-notes }
 

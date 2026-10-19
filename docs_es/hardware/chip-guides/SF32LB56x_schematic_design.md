@@ -11,9 +11,9 @@ hide:
 # Guía de diseño de hardware de SF32LB56x — Diseño del esquemático { #sf32lb56x-hardware-design-guide-schematic-design-guidelines }
 
 !!! note "Parte de la guía de diseño de hardware de SF32LB56x"
-    Esta página cubre la sección 5, «Directrices para el diseño del esquemático». Consulte primero la [descripción general de la guía de diseño de hardware de SF32LB56x](SF32LB56x_hardware_design_guide.md) para elegir el dispositivo y conocer el flujo de diseño completo. Después, continúe con la [lista de comprobación del esquemático](SF32LB56x_schematic_checklist.md) o vaya directamente a las [Directrices de diseño de PCB](SF32LB56x_pcb_layout.md).
+    Esta página cubre la sección 5, «Directrices de diseño del esquemático». Consulte primero la [descripción general de la guía de diseño de hardware de SF32LB56x](SF32LB56x_hardware_design_guide.md) para elegir el dispositivo y conocer el flujo de diseño completo. Después, continúe con la [lista de comprobación del esquemático](SF32LB56x_schematic_checklist.md) o vaya directamente a las [Directrices de diseño de PCB](SF32LB56x_pcb_layout.md).
 
-## 5. Guía de diseño del esquemático { #5-schematic-design-guidelines }
+## 5. Directrices de diseño del esquemático { #5-schematic-design-guidelines }
 
 ### 5.1. Sistema de alimentación { #51-power-system }
 
@@ -198,15 +198,15 @@ Revise conjuntamente los raíles de alimentación del procesador, los condensado
 
 <div align="center"><em>Figura 5.1-8: Circuito de referencia de carga de SF32LB56xV</em></div>
 
-Sin gestión de ruta de alimentación, el sistema se conecta directamente a VBAT junto con la batería. Es una solución de menor coste, pero los circuitos posteriores no pueden desconectarse por completo de la batería: aumenta la corriente de fuga y no se alcanza el objetivo de bajo consumo de Shipping Mode. Cuando la batería está sobredescargada, la corriente de precarga del cargador debe superar la suma de la carga del sistema y la corriente de fuga (i1+i2 en el diagrama). Con el sistema en funcionamiento, la corriente de carga constante también debe superar i1+i2; de lo contrario, la carga del sistema consume parte de la corriente de carga y es posible que la batería no se cargue por completo. Un cargador con gestión de ruta separa la alimentación del sistema por VSYS de la carga de la batería por VBAT, admite Shipping Mode y puede alimentar el sistema desde VSYS aunque la batería esté sobredescargada.
+Sin gestión de ruta de alimentación, el sistema se conecta directamente a VBAT junto con la batería. Es una solución de menor coste, pero los circuitos posteriores no pueden desconectarse por completo de la batería: aumenta la corriente de fuga y no se alcanza el objetivo de bajo consumo de Shipping Mode. Cuando la batería está sobredescargada, la corriente de carga de mantenimiento del cargador debe superar la suma de la carga del sistema y la corriente de fuga (i1+i2 en el diagrama). Con el sistema en funcionamiento, la corriente de carga constante también debe superar i1+i2; de lo contrario, la carga del sistema consume parte de la corriente de carga y es posible que la batería no se cargue por completo. Un cargador con gestión de ruta separa la alimentación del sistema por VSYS de la carga de la batería por VBAT, admite Shipping Mode y puede alimentar el sistema desde VSYS aunque la batería esté sobredescargada.
 
 La variante U ofrece tres topologías de alimentación para elegir según la tensión de E/S de los periféricos y el objetivo de consumo del sistema. En las tres, AVDD33_ANA y AVDD33_AUD se alimentan a 3,3 V. La topología de menor consumo alimenta PVDD y VDDIO1–VDDIO4 a 1,8 V y utiliza periféricos con E/S de 1,8 V. La topología intermedia mantiene PVDD y VDDIO1 a 1,8 V, y alimenta VDDIO2–VDDIO4 y las E/S de los periféricos a 3,3 V. La de mayor consumo mantiene únicamente a 1,8 V VDDIO1, que alimenta la PSRAM integrada; PVDD, VDDIO2–VDDIO4 y las E/S de los periféricos usan 3,3 V. Utilice interruptores de carga para gestionar dinámicamente la alimentación de los módulos externos y manténgalos apagados por defecto cuando no se utilicen. Para los módulos que deban permanecer encendidos, elija componentes con baja corriente de reposo. El nivel predeterminado de hardware de la GPIO de control debe coincidir con la polaridad de habilitación del interruptor para mantenerlo apagado al arrancar. SiFli recomienda una resistencia pull-up o pull-down de 1 MΩ en la entrada de habilitación.
 
-La PMU de la variante U completa el reset de encendido cuando PVDD alcanza 1,5 V. Si PVDD cae, se genera un reset por brownout al alcanzar el umbral BOR configurado, ajustable entre 1,5 V y 2,5 V.
+La PMU de la variante U completa el reinicio de encendido cuando PVDD alcanza 1,5 V. Si PVDD cae, se genera un reinicio por brownout al alcanzar el umbral BOR configurado, ajustable entre 1,5 V y 2,5 V.
 
 ### 5.2. Modos de funcionamiento y fuentes de activación { #52-operating-modes-and-wake-sources }
 
-Revise conjuntamente el modo de funcionamiento, la fuente de activación, la alimentación de las resistencias pull-up y las decisiones sobre corriente de fuga. Utilice pines con capacidad de activación para botones, panel táctil, interrupciones de sensores, eventos del cargador y otras señales de reactivación de bajo consumo.
+Revise conjuntamente el modo de funcionamiento, la fuente de activación, la alimentación de las resistencias pull-up y las decisiones sobre corriente de fuga. Utilice pines con capacidad de activación para botones, panel táctil, interrupciones de sensores, eventos del cargador y otras señales de activación de bajo consumo.
 
 <div align="center"><em>Tabla 5.2-1: Modos de funcionamiento de SF32LB56xU</em></div>
 
@@ -318,7 +318,7 @@ Coloque los cristales de 48 MHz y 32,768 kHz cerca del chip, reserve espacio par
 
 En los diseños con SF32LB56xU y SF32LB56xV, enrute la señal RF mediante una pista de impedancia controlada de 50 Ω. Si la antena elegida ya está adaptada, normalmente no se necesitan más componentes RF, pero conviene reservar espacio para una red de adaptación en π que permita filtrar emisiones no deseadas y ajustar la antena durante la puesta a punto final.
 
-Coloque la red de adaptación RF cerca del chip, no de la antena. Sitúe el filtro AVDD_BRF junto al pin del chip y conecte directamente a tierra principal los terminales de tierra de los condensadores. Siempre que sea posible, enrute RF por la capa superficial; evite las vías y los ángulos agudos, añada vías de blindaje a tierra a ambos lados de la pista RF y mantenga fuera de esta zona las señales DC-DC, VBAT, cristal, reloj de alta velocidad, I2C, SPI, SDIO, I2S y UART.
+Coloque la red de adaptación RF cerca del chip, no de la antena. Sitúe el filtro AVDD_BRF junto al pin del chip y conecte directamente a tierra principal los terminales de tierra de los condensadores. Siempre que sea posible, enrute RF por la capa superficial; evite las vías y los ángulos agudos, añada vías de blindaje a tierra con espaciado reducido (densas) a ambos lados de la pista RF y mantenga fuera de esta zona las señales DC-DC, VBAT, cristal, reloj de alta velocidad, I2C, SPI, SDIO, I2S y UART.
 
 ### 5.5. Interfaces de pantalla, táctil y retroiluminación { #55-display-touch-and-backlight-interfaces }
 
@@ -519,7 +519,7 @@ La elección de la interfaz de pantalla debe hacerse al seleccionar el encapsula
 
 ### 5.6. Almacenamiento, sensores, audio y conectividad { #56-storage-sensors-audio-and-connectivity }
 
-No asigne por separado los buses de almacenamiento y pantalla: ambos utilizan grupos de GPIO importantes y pueden condicionar el apilado de capas de la PCB. Antes de cerrar el esquemático, confirme el tipo de almacenamiento de arranque, las resistencias pull-up, el dominio de tensión, el funcionamiento de los interruptores de alimentación y el acceso desde los útiles de prueba.
+No asigne por separado los buses de almacenamiento y pantalla: ambos utilizan grupos de GPIO importantes y pueden condicionar el apilado de capas de la PCB. Antes de cerrar el esquemático, confirme el tipo de almacenamiento de arranque, las resistencias pull-up, el dominio de tensión, el funcionamiento de los interruptores de alimentación y el acceso desde el utillaje de prueba.
 
 <div align="center"><em>Tabla 5.6-1: Interfaz Flash QSPI de SF32LB56xU</em></div>
 
@@ -651,7 +651,7 @@ Adapte la alimentación de E/S del almacenamiento al nivel lógico de la memoria
 
 Para un micrófono analógico diferencial externo, coloque condensadores de bloqueo de CC de al menos 2,2 µF en las entradas ADC y alimente el micrófono desde MIC_BIAS. El circuito de referencia de micrófono MEMS U conecta MIC_BIAS mediante 1 kΩ y añade un condensador de bypass de 4,7 µF; la salida del micrófono también muestra un condensador de acoplamiento de 0,01 µF. El circuito de referencia de PA analógico U usa condensadores de acoplamiento de entrada de 33 nF y sitúa el filtro paso bajo diferencial cerca del chip. Enrute las salidas DAC analógicas como un par diferencial protegido por masa; mantenga la capacitancia parásita por debajo de 10 pF y la longitud por debajo de 2 cm. La variante V también ofrece I2S; su amplificador I2S de referencia se configura mediante I2C3. Coloque los condensadores de alimentación y referencia de audio cerca de sus pines y aleje el audio analógico de los convertidores conmutados y las señales digitales de alta velocidad.
 
-Ambas variantes ofrecen PWM para motores de vibración. El motor puede alimentarse directamente desde VBAT si su corriente de arranque no desestabiliza el sistema. Además, si se define `BSP_PM_FREQ_SCALING` como `1`, el escalado de frecuencia de la HCPU también modifica la frecuencia PWM en los pines PA. En ese caso, use un pin PB. PB32 es una entrada de alimentación/reset activa en nivel alto; una pulsación de al menos 10 s activa el reset. El circuito U de referencia conecta la tecla mediante 1 kΩ desde VDDIOB y añade un pull-down de 10 kΩ y un condensador de 0,1 µF a GND. El circuito V de referencia usa una resistencia serie de 1 kΩ desde VDD_1V8 y un pull-down de 10 kΩ. Los demás botones y encoders rotatorios requieren pull-ups; si un encoder mecánico no vuelve al estado apagado tras girarlo, la alimentación del pull-up debe poder desconectarse durante Standby para evitar fugas.
+Ambas variantes ofrecen PWM para motores de vibración. El motor puede alimentarse directamente desde VBAT si su corriente de arranque no desestabiliza el sistema. Además, si se define `BSP_PM_FREQ_SCALING` como `1`, el escalado de frecuencia de la HCPU también modifica la frecuencia PWM en los pines PA. En ese caso, use un pin PB. PB32 es una entrada de alimentación/reinicio activa en nivel alto; una pulsación de al menos 10 s activa el reinicio. El circuito U de referencia conecta la tecla mediante 1 kΩ desde VDDIOB y añade un pull-down de 10 kΩ y un condensador de 0,1 µF a GND. El circuito V de referencia usa una resistencia serie de 1 kΩ desde VDD_1V8 y un pull-down de 10 kΩ. Los demás botones y encoders rotatorios requieren pull-ups; si un encoder mecánico no vuelve al estado apagado tras girarlo, la alimentación del pull-up debe poder desconectarse durante Standby para evitar fugas.
 
 La variante U dispone de PBR0–PBR2 y la V de PBR0–PBR3. Durante el arranque, PBR0 pasa de nivel bajo a alto y puede controlar un interruptor de carga externo; los demás pines PBR arrancan en nivel bajo. Los pines PBR pueden funcionar como salidas en Standby y Hibernate y transportar LPTIM; todos salvo PBR0 pueden emitir un reloj de 32 kHz. También se pueden configurar como entradas de activación, pero la MCU no recibe una interrupción de esa entrada después de despertarse. Priorice los pines PB de la LCPU para I2C, SPI, control y señales de interrupción/activación de sensores. La alimentación de los sensores puede conmutarse según sea necesario desde una salida LVSW o LDO del SF30147C.
 
@@ -659,9 +659,9 @@ Todos los pines PA de U/V pueden multiplexarse como UART, I2C o GPTIM. En U, las
 
 ### 5.7. Fabricación { #57-manufacturing }
 
-Reserve acceso para depuración y grabación, modo de grabación de producción, calibración del cristal, puntos de medición de alimentación, pruebas RF y supervisión del control del PMIC. Compruebe que el útil pueda alimentar la placa, forzar el modo de arranque/descarga, comunicarse con el chip y recopilar datos de calibración.
+Reserve acceso para depuración y grabación, modo de grabación de producción, calibración del cristal, puntos de medición de alimentación, pruebas RF y supervisión del control del PMIC. Compruebe que el utillaje pueda alimentar la placa, forzar el modo de arranque/descarga, comunicarse con el chip y recopilar datos de calibración.
 
-Como mínimo, reserve puntos de prueba de producción para VBAT, GND, VDDIO2 en la variante U (VDDIOB en la V), Mode, SWDIO, SWCLK, UART4_RXD, UART4_TXD y uno de los pines PB20/PB21/PB25. Al conectar J-Link, configure la alimentación del depurador como entrada externa para que la placa objetivo lo alimente. Asegúrese de que el útil de descarga de producción y calibración del cristal pueda acceder a estos puntos.
+Como mínimo, reserve puntos de prueba de producción para VBAT, GND, VDDIO2 en la variante U (VDDIOB en la V), Mode, SWDIO, SWCLK, UART4_RXD, UART4_TXD y uno de los pines PB20/PB21/PB25. Al conectar J-Link, configure la alimentación del depurador como entrada externa para que la placa objetivo lo alimente. Asegúrese de que el utillaje de descarga de producción y calibración del cristal pueda acceder a estos puntos.
 
 <div align="center"><em>Tabla 5.7-1: Interfaz de depuración y grabación de SF32LB56xU</em></div>
 

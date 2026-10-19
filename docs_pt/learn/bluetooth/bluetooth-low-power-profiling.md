@@ -10,7 +10,7 @@ tags:
 
 # Medição e análise do consumo de energia em Bluetooth { #bluetooth-low-power-profiling }
 
-Este artigo explica como medir o **consumo real do dispositivo durante a operação Bluetooth**: Bluetooth Low Energy (BLE), Bluetooth clássico (BR/EDR) e o uso combinado dos dois em um produto de modo dual. Para cada cenário, defina com clareza o limite elétrico da medição, registre a corrente e a tensão e colete dados de firmware suficientes para explicar os trechos importantes da curva.
+Este artigo explica como medir o **consumo real do dispositivo durante a operação Bluetooth**: Bluetooth Low Energy (BLE), Bluetooth clássico (BR/EDR) e o uso combinado dos dois em um produto de modo dual. Para cada cenário, defina com clareza o limite elétrico da medição, registre a corrente e a tensão e colete dados de firmware suficientes para explicar os trechos importantes do traçado.
 
 Use as seções sobre Bluetooth clássico e modo dual somente para dispositivos e configurações de firmware que ofereçam suporte a BR/EDR. Um produto somente BLE deve seguir o mesmo método, mas limitar o plano de cenários ao BLE.
 
@@ -105,15 +105,15 @@ Q_event = sum(I_stage x t_stage)
 I_average = (Q_event + I_idle x (T_cycle - t_event)) / T_cycle
 ```
 
-`Q_event` inclui a carga de todas as etapas do evento completo, inclusive os períodos internos de standby; `t_event` é a duração total do evento. `I_idle` é a corrente medida entre eventos completos, não a `I_standby` interna do evento. `T_cycle` é o intervalo medido entre o início de um evento e o seguinte, incluindo o atraso de advertising e os efeitos do escalonamento. Se os intervalos variarem, integre um traçado longo e representativo em vez de tratar o intervalo configurado como um período exato.
+`Q_event` inclui a carga de todas as etapas do evento completo, inclusive os períodos internos de standby; `t_event` é a duração total do evento. `I_idle` é a corrente medida entre eventos completos, não a `I_standby` interna do evento. `T_cycle` é o intervalo medido entre o início de um evento e o seguinte, incluindo o atraso de anúncio e os efeitos do escalonamento. Se os intervalos variarem, integre um traçado longo e representativo em vez de tratar o intervalo configurado como um período exato.
 
 Com tensão constante, dobrar a corrente medida ou a duração de uma etapa dobra sua energia. Pulsos curtos de TX, RX e inicialização podem dominar a energia do evento; com intervalos longos, o repouso entre eventos pode dominar a corrente média. Marque as etapas com GPIOs ou eventos de firmware de baixo impacto e meça na entrada de alimentação do produto completo antes de escolher o que otimizar.
 
-O Bluetooth clássico tem uma temporização de protocolo diferente, mas aplica-se a mesma disciplina de medição. A especificação Bluetooth Core define Inquiry Scan e Page Scan como procedimentos de varredura distintos e Sniff como um modo ACL conectado que reduz as oportunidades de escuta do periférico aos pontos de ancoragem Sniff programados; o tráfego do dispositivo remoto pode prolongar a atividade além de um ponto de ancoragem. Esses são comportamentos de temporização, não estimativas de corrente. Meça no dispositivo-alvo a política de varredura configurada, os parâmetros Sniff e a atividade real do dispositivo remoto e da aplicação. Consulte a [especificação BR/EDR Baseband](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/br-edr-controller/baseband-specification.html) e o [HCI Scan Enable](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/host-controller-interface/host-controller-interface-functional-specification.html).
+O Bluetooth clássico tem uma temporização de protocolo diferente, mas aplica-se a mesma disciplina de medição. A especificação Bluetooth Core define Inquiry Scan e Page Scan como procedimentos de scan distintos e Sniff como um modo ACL conectado que reduz as oportunidades de escuta do periférico aos pontos de ancoragem Sniff programados; o tráfego do dispositivo remoto pode prolongar a atividade além de um ponto de ancoragem. Esses são comportamentos de temporização, não estimativas de corrente. Meça no dispositivo-alvo a política de Scan configurada, os parâmetros Sniff e a atividade real do dispositivo remoto e da aplicação. Consulte a [especificação BR/EDR Baseband](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/br-edr-controller/baseband-specification.html) e o [HCI Scan Enable](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/host-controller-interface/host-controller-interface-functional-specification.html).
 
 ## Planeje as medições por modo Bluetooth { #build-a-mode-specific-measurement-plan }
 
-Não trate “Bluetooth habilitado” como um único estado operacional. BLE e Bluetooth clássico usam procedimentos diferentes de conexão e baixo consumo; em um produto de modo dual, os dois podem compartilhar o subsistema de rádio, recursos do controlador, clocks, memória e, muitas vezes, tarefas da aplicação. Comece pelos menores cenários reproduzíveis e depois meça o comportamento combinado exato do produto.
+Não trate “Bluetooth habilitado” como um único estado operacional. BLE e Bluetooth clássico usam procedimentos diferentes de conexão e baixo consumo; em um produto de modo dual, os dois podem compartilhar tempo de rádio, recursos do controlador, clocks, memória e tarefas da aplicação. Comece pelos menores cenários reproduzíveis e depois meça o comportamento combinado exato do produto.
 
 <div align="center"><em>Tabela: cobertura de cenários Bluetooth</em></div>
 
@@ -122,7 +122,7 @@ Não trate “Bluetooth habilitado” como um único estado operacional. BLE e B
 | Capacidade de rádio | Cenário | O que definir antes da medição | Resultado a registrar |
 |:--------------------|:--------|:-------------------------------|:----------------------|
 | BLE | Anúncio, conexão ociosa, transferência da aplicação e reconexão | Papel, intervalo, potência de TX, carga útil, dispositivo remoto e condições de início/fim | Corrente média, energia por evento e energia por ação concluída |
-| Bluetooth clássico (BR/EDR) | Varredura | Se inquiry scan, page scan ou ambos estão habilitados; política de detectabilidade/conectabilidade | Corrente média e energia em uma janela de varredura representativa |
+| Bluetooth clássico (BR/EDR) | Scan | Se inquiry scan, page scan ou ambos estão habilitados; política de detectabilidade/conectabilidade | Corrente média e energia em uma janela de Scan representativa |
 | Bluetooth clássico (BR/EDR) | Modo Sniff conectado | Parâmetros Sniff, dispositivo remoto, estado do enlace e atividade da aplicação em segundo plano | Corrente média e energia em vários intervalos Sniff |
 | Bluetooth clássico (BR/EDR) | Carga ativa de perfil | Perfil e papel, por exemplo, transferência SPP/PAN ou áudio A2DP/HFP; carga útil ou duração da sessão de áudio | Energia por transferência ou sessão concluída, mais potência média sustentada |
 | Modo dual | BLE e Bluetooth clássico no mesmo cenário do produto | Enlaces e modos envolvidos, seus parâmetros, carga em primeiro plano e comportamento de transição/reconexão | Potência média combinada medida e energia por cenário completo do produto |
@@ -133,7 +133,7 @@ O exemplo de [teste de consumo BLE/BT](https://docs.sifli.com/projects/sdk/lates
 
 ## Meça o BLE como modo de rádio independente { #profile-ble-as-a-standalone-radio-mode }
 
-Comece medindo apenas o BLE. Assim, você estabelece uma referência sem que o tráfego de perfis do Bluetooth clássico ou o escalonamento entre modos interfiram na leitura da forma de onda.
+Comece medindo apenas o BLE. Assim, você estabelece uma referência sem que o tráfego de perfis do Bluetooth clássico ou o escalonamento entre modos interfiram na leitura do traçado.
 
 <div align="center"><em>Tabela: cenários de BLE independente</em></div>
 
@@ -161,7 +161,7 @@ Em um produto de modo dual, meça o Bluetooth clássico separadamente antes de i
 
 | Cenário | Configuração | O que calcular | Causa comum de resultado enganoso |
 |:---------|:-------------|:--------------|:---------------------------------|
-| Scan | Política de inquiry scan, page scan ou ambas, prevista para o produto, está ativa | Corrente média e energia em uma janela de varredura representativa | Manter uma política de varredura mais agressiva que a usada no produto final |
+| Scan | Política de inquiry scan, page scan ou ambas, prevista para o produto, está ativa | Corrente média e energia em uma janela de Scan representativa | Manter uma política de Scan mais agressiva que a usada no produto final |
 | Modo Sniff conectado | Um enlace Bluetooth clássico conectado entra na configuração Sniff prevista | Corrente média em vários intervalos Sniff | Medir um enlace que continua ativo sem que isso fique evidente por causa do tráfego do dispositivo remoto ou da aplicação |
 | Carga ativa de perfil | Transferência SPP/PAN, fluxo A2DP, chamada HFP ou outra carga de perfil definida para o produto | Energia por transferência ou sessão concluída, além da potência média sustentada | Medir o rádio sem incluir codec, amplificador, display, memória ou trabalho do host exigido pelo perfil |
 | Desconexão e reconexão | O dispositivo Bluetooth clássico remoto sai do alcance, retorna e reconecta | Energia e tempo para recuperar a conexão | Novas tentativas sem limite ou política de descoberta que permanece ativa indefinidamente |
@@ -204,7 +204,7 @@ Para encontrar o consumo real do dispositivo, é essencial atribuir cada mudanç
 - Quando o firmware solicita um estado de PM e quando o dispositivo realmente entra nele.
 - Quando começa uma reconexão, nova tentativa ou recuperação de erro.
 
-Use um ponto de rastreamento GPIO, um marcador de evento de baixo impacto ou um roteiro de teste reproduzível. Um log serial pode ajudar durante a inicialização, mas também pode alterar o consumo de corrente. Trate a instrumentação final dos logs como uma variável de teste controlada, não como um canal de observação sem custo.
+Use um ponto de rastreamento GPIO, um marcador de evento de baixo impacto ou um roteiro de teste reproduzível. Um log serial pode ajudar durante o bring-up, mas também pode alterar o consumo de corrente. Trate a instrumentação final dos logs como uma variável de teste controlada, não como um canal de observação sem custo.
 
 <div align="center"><em>Tabela: interpretação de um traçado de consumo Bluetooth</em></div>
 
@@ -270,7 +270,7 @@ flowchart LR
 | Energia por evento maior que o esperado | O host, o display, o sensor, a memória ou o caminho de novas tentativas executou trabalho extra? A qualidade de RF provoca novas tentativas ou potência TX maior? |
 | BLE ou Bluetooth clássico ocioso domina a duração da bateria | Os parâmetros de conexão BLE, a política Scan/Sniff do Bluetooth clássico, a cadência das notificações e os despertares da aplicação são adequados ao estado do produto? |
 | Resultado do modo dual difere da soma dos testes de modo único | Quais períodos de rádio, tarefas do controlador, clocks compartilhados, callbacks da aplicação, caminhos de áudio/dados ou restrições de PM se sobrepõem ou impedem o sono? |
-| Energia de reconexão domina | O produto limita as tentativas e usa uma política realista de espera e descoberta? |
+| Energia de reconexão domina | O produto usa um comportamento limitado de novas tentativas e backoff (espera progressiva entre tentativas) e uma política de descoberta realista? |
 | A placa e o produto final divergem | Quais linhas de alimentação externas, perdas dos reguladores, módulos, efeitos da antena/gabinete e pulls de interface são diferentes? |
 
 </div>
@@ -286,7 +286,7 @@ Use os exemplos do SiFli-SDK para tornar reproduzível um estado Bluetooth antes
 | Alvo da medição | Referência oficial inicial | O que medir depois no produto |
 |:----------------|:---------------------------|:-----------------------------|
 | Consumo de anúncio e conexão BLE | [Teste de consumo de anúncios e conexões BLE](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/ble/README.html) | Política de anúncio do produto, parâmetros de conexão, callbacks, comportamento do dispositivo remoto e antena |
-| Scan e Sniff do Bluetooth clássico | [Teste de consumo BLE/BT](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) | Política de varredura do produto, parâmetros Sniff, comportamento do dispositivo remoto e estado real do enlace ocioso |
+| Scan e Sniff do Bluetooth clássico | [Teste de consumo BLE/BT](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) | Política de Scan do produto, parâmetros Sniff, comportamento do dispositivo remoto e estado real do enlace ocioso |
 | Carga de perfil Bluetooth clássico | [Exemplos do SDK Bluetooth](bluetooth-sdk-examples.md) | Transferência real SPP/PAN ou sessão A2DP/HFP, incluindo o trabalho necessário do host, áudio, memória e componentes externos |
 | Comportamento do produto em modo dual | [Teste de consumo BLE/BT](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) e o exemplo de perfil mais próximo do produto | Comportamento BLE e Bluetooth clássico exatamente como ocorre no produto, simultâneo ou alternado, incluindo transições, processamento compartilhado e política de PM |
 | Serviço GATT conectado | [Periférico BLE](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/ble/peripheral/README.html) | Características reais, cadência das notificações, segurança e interação com o telefone |

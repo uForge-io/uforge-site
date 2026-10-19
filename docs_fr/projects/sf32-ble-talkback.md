@@ -58,7 +58,7 @@ Ce parcours réunit BLE, audio, écran, touches, surveillance de la batterie et 
 | Haut-parleur | Un haut-parleur externe de 3 W/4 Ω ou 2 W/8 Ω par carte, raccordé via le connecteur GH-1.25 mm | Restitue la voix reçue | Obligatoire | Souvent inclus dans le kit de la carte ; vérifier le contenu auprès de la [référence de carte](../sf32-products/devkits/SF32LB52-DevKit-ULP.md) avant achat | Ne raccordez pas de charge dépassant les limites de l'amplificateur Class-D et du connecteur intégrés |
 | Câbles USB de données et hôte | Un câble USB-C de données par carte ; un hôte capable d'exécuter les outils SiFli-SDK | Alimentation, flashage via UART et journalisation | Obligatoire | Câble USB-C de données standard ; outils disponibles via [SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) | Un câble de charge seul ne permet pas de flasher le firmware ; consigner les ports et l'environnement hôte |
 | Batterie lithium monocellule | Compatible avec le connecteur, la polarité et le circuit de charge de la carte | Mobilité, validation de la veille/du réveil et du niveau de batterie | Obligatoire pour la validation produit ; optionnelle pour un essai fonctionnel sur banc | Le dépôt Talkback ne publie pas de canal d'approvisionnement distinct ; vérifier l'interface dans la [référence de carte](../sf32-products/devkits/SF32LB52-DevKit-ULP.md) avant approvisionnement | Vérifier polarité, plage de tension, capacité et protection avant branchement ; l'apparence du connecteur ne garantit pas la compatibilité |
-| Microphone, touches, LED RGB et écran intégrés | Composants d'origine de la carte de développement | Capte la voix et affiche rôle, appairage, émission, réception et veille | Intégrés | Fournis avec la carte ; pas de source distincte | Le remplacement de l'audio ou de l'IHM exige des tests de non-régression du gain, du timing, des codes de touche et de la correspondance des états |
+| Microphone, touches, LED RGB et écran intégrés | Composants d'origine de la carte de développement | Capte la voix et affiche rôle, appairage, émission, réception et veille | Intégrés | Fournis avec la carte ; pas de source distincte | Le remplacement de l'audio ou de l'IHM exige des tests de non-régression du gain, du minutage, des codes de touche et de la correspondance des états |
 
 </div>
 
@@ -80,7 +80,7 @@ Ce parcours réunit BLE, audio, écran, touches, surveillance de la batterie et 
 
 ## Choisir une configuration de référence prise en charge { #choose-a-supported-baseline }
 
-Commencez avec deux cartes `SF32LB52-DevKit-ULP` de même révision. Verrouillez le dépôt de démonstration sur `6fa55ac`, sélectionnez et consignez un commit SiFli-SDK concret conforme à `^2.4`, et conservez la résolution Conan de `talk_back/1.2@sifli`. Ne modifiez ni les paramètres audio, ni la logique des rôles, ni le timing basse consommation lors de la première reproduction.
+Commencez avec deux cartes `SF32LB52-DevKit-ULP` de même révision. Verrouillez le dépôt de démonstration sur `6fa55ac`, sélectionnez et consignez un commit SiFli-SDK concret conforme à `^2.4`, et conservez la résolution Conan de `talk_back/1.2@sifli`. Ne modifiez ni les paramètres audio, ni la logique des rôles, ni le minutage basse consommation lors de la première reproduction.
 
 Depuis la racine du dépôt, accédez au chemin qui existe réellement :
 
@@ -164,9 +164,9 @@ Les principaux domaines de panne sont la recherche BLE et la création de salle,
 
 **Objectif :** vérifier qu'un utilisateur peut créer et utiliser une salle minimale sans intervention du débogueur.
 
-1. En attente (appareil actif), appuyez brièvement sur KEY2 pour passer un appareil en Master (LED bleue fixe) ; laissez l'autre en Slave (LED rouge fixe).
+1. En Standby, appuyez brièvement sur KEY2 pour passer un appareil en Master (LED bleue fixe) ; laissez l'autre en Slave (LED rouge fixe).
 2. Maintenez KEY2 sur les deux appareils : le Master crée une salle et le Slave la recherche. La tentative d'association expire au bout de 30 secondes.
-3. En attente, maintenez KEY2 sur le Master pour démarrer. En mode conversation, maintenez KEY2 pour parler et relâchez-la pour arrêter.
+3. En attente, maintenez KEY2 sur le Master pour démarrer. En état de conversation, maintenez KEY2 pour parler et relâchez-la pour arrêter.
 4. Vérifiez que la LED est verte fixe pendant l'émission et orange fixe pendant la réception, et que la voix reste intelligible dans les deux sens.
 
 **Éléments à conserver :** rôles, chronologie des opérations, états des LED, journaux UART, échantillons audio bidirectionnels et résultats des nouvelles tentatives.
@@ -177,10 +177,10 @@ Les principaux domaines de panne sont la recherche BLE et la création de salle,
 
 **Objectif :** vérifier que les chemins de récupération et limites de capacité amont ne laissent pas l'utilisateur dans un état bloqué.
 
-1. En mode conversation, relâchez KEY2 avant d'appuyer brièvement sur KEY1 pour quitter ; un appareil ne peut pas quitter la salle pendant qu'il transmet.
-2. Un Slave ayant déjà rejoint une salle avec succès peut se reconnecter par appui bref sur KEY1 en attente (appareil actif). Le Master ne dispose pas d'un mécanisme équivalent.
+1. En état de conversation, relâchez KEY2 avant d'appuyer brièvement sur KEY1 pour quitter ; un appareil ne peut pas quitter la salle pendant qu'il transmet.
+2. Un Slave ayant déjà rejoint une salle avec succès peut se reconnecter par appui bref sur KEY1 en Standby. Le Master ne dispose pas d'un mécanisme équivalent.
 3. Testez le fonctionnement hors de portée, l'expiration de la tentative d'association, la perte du Master et le redémarrage après coupure d'alimentation.
-4. Si le mode multiparti est requis, augmentez le nombre de participants jusqu'à la cible et vérifiez les limites annoncées de huit appareils et trois locuteurs simultanés.
+4. Si le fonctionnement à plusieurs appareils est requis, augmentez le nombre de participants jusqu'à la cible et vérifiez les limites annoncées de huit appareils et trois locuteurs simultanés.
 
 **Éléments à conserver :** état initial, déclencheur, action et durée de récupération, journaux et appartenance finale à la salle pour chaque panne.
 

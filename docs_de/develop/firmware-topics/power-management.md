@@ -25,7 +25,7 @@ Optimieren Sie den Stromverbrauch nicht anhand einzelner Codeausschnitte. Messen
 - SDK-Beispiele zum Energiemanagement.
 - Profiling der CPU-Auslastung.
 - Zustandsprüfung über die RT-Thread-Shell.
-- Strommessung auf der Platine.
+- Strommessung auf Boardebene.
 
 ## Hinweise zur Messung { #measurement-notes }
 

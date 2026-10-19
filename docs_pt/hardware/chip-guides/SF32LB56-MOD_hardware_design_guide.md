@@ -14,10 +14,10 @@ hide:
 
 **SF32LB56-MOD** é uma família de módulos MCU Bluetooth de baixo consumo e uso geral da SiFli, baseada na série SF32LB56xV.
 
-Este guia usa a **especificação técnica DS5602-SF32LB56-MOD V0.3** como referência e reúne as informações específicas do módulo necessárias para projetar o esquemático, planejar o layout da PCB, validar o hardware e preparar a produção. O conteúdo inclui as variantes de memória, a interface de 89 pinos, três trilhos de alimentação, interfaces de display/áudio/armazenamento, o posicionamento da antena, requisitos de manuseio e o checklist do esquemático.
+Este guia usa o **datasheet DS5602-SF32LB56-MOD V0.3** como referência e reúne as informações específicas do módulo necessárias para projetar o esquemático, planejar o layout da PCB, validar o hardware e preparar a produção. O conteúdo inclui as variantes de memória, a interface de 89 pinos, três trilhos de alimentação, interfaces de display/áudio/armazenamento, o posicionamento da antena, requisitos de manuseio e o checklist do esquemático.
 
 !!! note "Fonte e recomendações"
-    Salvo indicação explícita de que se trata de orientação de integração ou recomendação de projeto, os valores técnicos abaixo seguem a **especificação técnica DS5602-SF32LB56-MOD V0.3**.
+    Salvo indicação explícita de que se trata de orientação de integração ou recomendação de projeto, os valores técnicos abaixo seguem o **datasheet DS5602-SF32LB56-MOD V0.3**.
 
 ## 2. Visão geral do dispositivo { #2-device-overview }
 
@@ -82,8 +82,8 @@ Entre as aplicações típicas estão smartwatches avançados, pulseiras intelig
 | Conflito com Flash interna | PA06–PA11 são conectados por padrão à Flash interna do módulo e não ficam disponíveis para uso externo. |
 | Conflito SDIO/MPI3 | SDIO e MPI3 compartilham recursos de E/S e não podem ser usados simultaneamente. |
 | Fontes de despertar | PA50, PA51, PB32 e PB35 podem receber interrupções enquanto o MCU está em suspensão. |
-| PWRKEY | PB32 aciona o reset quando PWRKEY permanece em nível alto por 10 s; use um resistor pull-down de 10 kΩ. |
-| Antena | Mantenha a área da antena da PCB livre de cobre, trilhas, componentes e metal; se a antena não ultrapassar a borda da placa, reserve uma área livre de pelo menos 15 mm. |
+| PWRKEY | PB32 aciona o reset quando PWRKEY permanece em nível alto por 10 s; exige um resistor pull-down de 10 kΩ. |
+| Antena | Mantenha a área da antena da PCB livre de cobre, trilhas, componentes e metal; se a antena não puder ultrapassar a borda da placa, reserve uma área livre de pelo menos 15 mm. |
 | Fabricação | MSL 3; use o módulo em até 168 horas após abrir a embalagem, a 25 ± 5 °C e 60% RH, ou seque-o em estufa antes de reutilizá-lo. |
 
 </div>
@@ -106,7 +106,7 @@ Entre as aplicações típicas estão smartwatches avançados, pulseiras intelig
 
 </div>
 
-### 3.3 Topologia de alimentação { #33-power-tree }
+### 3.3 Árvore de alimentação { #33-power-tree }
 
 VDD_3V3 alimenta PVDD, AVDD33_ANA, AVDD33_AUD, AVDD_BRF, VDDIOA2 e a Flash interna do módulo. A SiFli recomenda um LDO para esse trilho. VDD_1V8 alimenta a memória integrada ao MCU, e VDDIO alimenta as portas de E/S VDDIOA/VDDIOB do MCU.
 
@@ -194,13 +194,13 @@ A plataforma do módulo usa um oscilador a cristal de 48 MHz e oferece oscilador
 | Faixa de frequência Bluetooth | 2402–2480 MHz |
 | Potência máxima de transmissão BLE | 19 dBm |
 | Faixa de controle de potência RF BLE | -20 a 19 dBm |
-| Sensibilidade BLE 1 Mbps | -100 dBm dirty off, -99,3 dBm dirty on |
-| Sensibilidade BLE 2 Mbps | -97 dBm dirty off, -96,5 dBm dirty on |
+| Sensibilidade BLE 1 Mbps | -100 dBm com dirty TX desligado (dirty off), -99,3 dBm com dirty TX ligado (dirty on) |
+| Sensibilidade BLE 2 Mbps | -97 dBm com dirty TX desligado (dirty off), -96,5 dBm com dirty TX ligado (dirty on) |
 | Potência máxima de transmissão BR | 19 dBm |
 | Potência máxima de transmissão EDR | 13 dBm |
-| Sensibilidade BR | -96,3 dBm dirty off, -94 dBm dirty on |
-| Sensibilidade EDR2 | -95,5 dBm dirty off, -95 dBm dirty on |
-| Sensibilidade EDR3 | -88,5 dBm dirty off, -87 dBm dirty on |
+| Sensibilidade BR | -96,3 dBm com dirty TX desligado (dirty off), -94 dBm com dirty TX ligado (dirty on) |
+| Sensibilidade EDR2 | -95,5 dBm com dirty TX desligado (dirty off), -95 dBm com dirty TX ligado (dirty on) |
+| Sensibilidade EDR3 | -88,5 dBm com dirty TX desligado (dirty off), -87 dBm com dirty TX ligado (dirty on) |
 
 </div>
 
@@ -221,7 +221,7 @@ Adicione resistores em série de 33–100 Ω às linhas de sinal RGB do LCD. Man
 
 O módulo disponibiliza saídas analógicas do DAC de áudio, MIC_BIAS, MIC_ADC_IN, I2S e pinos compatíveis com PDM. O DAC de áudio é uma saída de 24 bits que aceita taxas de amostragem de 8 kHz a 48 kHz, com SNR e faixa dinâmica de 109 dB. O ADC de áudio é uma entrada Sigma-Delta de 24 bits que aceita taxas de amostragem de 8 kHz a 48 kHz, com SNR e faixa dinâmica de 99 dB.
 
-Afaste as trilhas de áudio analógico dos nós de comutação ruidosos, dos clocks do LCD e das linhas de alimentação da antena. Posicione os filtros de MIC_BIAS e MIC_ADC_IN perto do circuito do microfone conectado.
+Afaste as trilhas de áudio analógico dos nós de comutação ruidosos, dos clocks do LCD e das estruturas de feed da antena (ponto e linha de alimentação de RF). Posicione os filtros de MIC_BIAS e MIC_ADC_IN perto do circuito do microfone conectado.
 
 #### 5.3.3 Botões { #533-buttons }
 
@@ -243,7 +243,7 @@ O GPADC oferece conversão de 12 bits, taxa de amostragem de até 4 MS/s, faixa 
 
 #### 5.4.3 UART/I2C { #543-uarti2c }
 
-A UART aceita operação full-duplex de até 6 Mbps. O I2C oferece os modos Standard de 100kbps, Fast de 400kbps, Fast-mode Plus de 1 Mbps e High-speed de 3.4 Mbps. Muitos GPIOs são multiplexados como `PAxx_I2C_UART` ou `PBxx_I2C_UART`; confirme o plano final de multiplexação antes de congelar o esquemático.
+A UART aceita operação full-duplex de até 6 Mbps. O I2C oferece os modos Standard de 100 kbps, Fast de 400 kbps, Fast-mode Plus de 1 Mbps e High-speed de 3,4 Mbps. Muitos GPIOs são multiplexados como `PAxx_I2C_UART` ou `PBxx_I2C_UART`; confirme o plano final de multiplexação antes de congelar o esquemático.
 
 UART4_TXD no pino 6 e UART4_RXD no pino 7 formam a porta serial padrão de console e permitem download e depuração do programa. PA16 e PA17 podem ser multiplexados como DBG_UART e requerem resistores em série de 100 Ω quando usados para download e depuração.
 
@@ -255,11 +255,11 @@ USB2.0 FS aceita os modos Host/Device e inclui PHY integrado. O SPI aceita os fo
 
 #### 5.5.1 Depuração { #551-debug }
 
-SWDIO no pino 79 e SWCLK no pino 80 são os pinos SWD de depuração e download. Mantenha o acesso ao SWD em protótipos iniciais e dispositivos de produção. Disponibilize também a interface padrão de download/depuração UART4, a menos que o produto tenha outro método de programação aprovado.
+SWDIO no pino 79 e SWCLK no pino 80 são os pinos SWD de depuração e download. Mantenha o acesso ao SWD em protótipos iniciais e gabaritos de produção. Disponibilize também a interface padrão de download/depuração UART4, a menos que o produto tenha outro método de programação aprovado.
 
 #### 5.5.2 Produção { #552-production }
 
-Reserve pontos de acesso em produção para alimentação, terra, modo de inicialização, reset/PWRKEY, SWD, download UART e qualquer interface de calibração na placa ou teste de RF. O software de teste final deve cobrir inicialização, Flash, display, painel de toque, áudio, USB, sensores, comunicação RF, comportamento de sono/despertar e consumo de corrente.
+Reserve pontos de acesso em produção para alimentação, terra, modo de inicialização, reset/PWRKEY, SWD, download UART e qualquer interface de calibração na placa ou teste de RF. O software de teste final deve cobrir inicialização, Flash, display, painel de toque, áudio, USB, sensores, comunicação RF, comportamento de suspensão/despertar e consumo de corrente.
 
 ## 6. Layout da PCB { #6-pcb-layout }
 
@@ -305,8 +305,8 @@ Para projetos com antena externa, o datasheet descreve um conector de antena ext
 | Antena | A área de exclusão da antena está livre de cobre, trilhas, componentes, parafusos, blindagens, metal da bateria e metal do gabinete. |
 | Display | As linhas LCD RGB/SPI são curtas, consideram a impedância e incluem os resistores em série exigidos. |
 | USB | USB DP/DM são roteados como par diferencial casado, com proteção ESD próxima ao conector. |
-| Áudio analógico | MIC_BIAS, MIC_ADC_IN e as saídas DAC estão afastados dos reguladores chaveados, clocks do LCD e áreas de alimentação da antena. |
-| Depuração | O acesso a SWD e ao download/depuração UART está disponível nos protótipos e dispositivos de produção. |
+| Áudio analógico | MIC_BIAS, MIC_ADC_IN e as saídas DAC estão afastados dos reguladores chaveados, clocks do LCD e regiões de feed de RF da antena. |
+| Depuração | O acesso a SWD e ao download/depuração UART está disponível nos protótipos e gabaritos de produção. |
 
 </div>
 
@@ -379,7 +379,7 @@ A alimentação de E/S é VDD. VOH e VOL são medidos com uma carga de alta impe
 | BLE Connection | intervalo de 50 ms | 172,8 µA |
 | BLE Connection | intervalo de 1 s | 11,5 µA |
 | Scan | Inquiry Scan ou Page Scan | 36,8 µA |
-| Ambas as varreduras | Inquiry Scan e Page Scan | 64,0 µA |
+| Ambos os Scans | Inquiry Scan e Page Scan | 64,0 µA |
 | Standby | - | 4,6 µA |
 
 </div>
@@ -415,7 +415,7 @@ A alimentação de E/S é VDD. VOH e VOL são medidos com uma carga de alta impe
 | 4 | O nível da interface de E/S do módulo é 3,3 V nos pinos especificados; os níveis dos periféricos conectados devem ser compatíveis. |
 | 5 | Se o módulo estiver equipado com Flash interna, PA06, PA07, PA08, PA09, PA10 e PA11 não podem ser usados externamente. |
 | 6 | SDIO e MPI3 compartilham recursos de E/S e não podem ser usados simultaneamente. |
-| 7 | PA50, PA51, PB32 e PB35 podem receber interrupções enquanto o MCU está em sono. |
+| 7 | PA50, PA51, PB32 e PB35 podem receber interrupções enquanto o MCU está em suspensão. |
 | 8 | PB32 aciona o reset quando PWRKEY permanece em nível alto por 10 s; adicione um pull-down de 10 kΩ. |
 | 9 | Os pinos identificados como GPADC_CHx aceitam entrada analógica de 0–3,3 V. |
 | 10 | Os pinos identificados como GPTIM aceitam saída PWM. |
@@ -454,8 +454,8 @@ A alimentação de E/S é VDD. VOH e VOL são medidos com uma carga de alta impe
 
 | Tipo | Item |
 | :--- | :--- |
-| Datasheet do módulo | [Especificação técnica DS5602-SF32LB56-MOD V0.3](https://downloads.sifli.com/user%20manual/DS5602-SF32LB56-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p3.pdf) |
-| Especificação do chip | Especificação técnica do chip SF32LB56x |
+| Datasheet do módulo | [Datasheet DS5602-SF32LB56-MOD V0.3](https://downloads.sifli.com/user%20manual/DS5602-SF32LB56-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p3.pdf) |
+| Datasheet do chip | Datasheet do chip SF32LB56x |
 | Guia da placa de desenvolvimento | Manual do usuário do SF32LB56-DevKit-LCD |
 | Família de chips | Série SF32LB56xV |
 | Módulo | SF32LB56-MOD |
@@ -487,7 +487,7 @@ A DS5602 V0.3 contém a tabela completa de definição dos 89 pinos e a vista su
 | Pinos 67–72 PA06–PA11 | Conectados por padrão à Flash interna; indisponíveis externamente. |
 | Pino 79 PB13 | SWDIO para depuração/download. |
 | Pino 80 PB15 | SWCLK para depuração/download. |
-| PA50, PA51, PB32, PB35 | Pinos capazes de gerar interrupção e despertar durante o sono. |
+| PA50, PA51, PB32, PB35 | Pinos capazes de gerar interrupção e despertar durante a suspensão. |
 | PA00–PA11 | Nível da interface fixo em 3,3 V, independente de VDDIO. |
 
 </div>

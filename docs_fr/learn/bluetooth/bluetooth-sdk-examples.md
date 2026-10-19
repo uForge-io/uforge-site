@@ -32,12 +32,12 @@ Cette page classe par tâche d'ingénierie les exemples de [Bluetooth classique]
 
 </div>
 
-## Faire fonctionner un exemple pour établir une base de validation { #bring-up-an-example-as-evidence }
+## Mise en service d'un exemple pour établir des preuves { #bring-up-an-example-as-evidence }
 
 Avant de modifier le projet, consignez la version exacte du SDK, le nom de la carte, la configuration, l'appareil pair ou l'application, les paramètres radio et les journaux attendus. Suivez ensuite ces étapes :
 
 1. Compilez et flashez l'exemple sans modification avec le nom exact de la carte et les instructions indiqués pour la version correspondante du SDK. Si le lien entre la documentation et la révision du SDK, ou la prise en charge de la carte, n'est pas établi, considérez la compatibilité comme non vérifiée avant toute adaptation.
-2. Vérifiez le comportement radio principal : découverte, connexion, transfert, diffusion ou réception, selon le cas.
+2. Démontrez le comportement radio principal : découverte, connexion, transfert, diffusion ou réception, selon le cas.
 3. Répétez le test après une réinitialisation, une déconnexion, une reconnexion et un cycle complet d'arrêt et de remise sous tension.
 4. Ajoutez une seule exigence produit à la fois : service, parcours utilisateur, chemin audio ou politique de consommation.
 5. Retestez le système sous la charge combinée du produit, avec l'écran, les capteurs, le stockage, l'audio et, le cas échéant, les transitions basse consommation.

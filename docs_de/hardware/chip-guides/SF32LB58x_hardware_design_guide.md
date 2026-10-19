@@ -57,7 +57,7 @@ Dieses Dokument setzt Grundkenntnisse in der Entwicklung eingebetteter Hardware,
 | Grafik | ePicasso 2.0 2D/2,5D-Grafikbeschleunigung und Vivante GCNanoUltraV Vektorgrafik |
 | Display-Schnittstellen | MIPI-DSI, SPI/QSPI, MCU8080, DPI, parallel/seriell JDI |
 | Speicher | Je nach Modell im Gehäuse integrierter NOR-Flash und/oder PSRAM; externer NOR- oder SPI-NAND-Flash über MPI3 oder MPI4; SDIO-Schnittstellen SD1 und SD2 |
-| Audio | 3 I2S-Schnittstellen, 2 PDM-Schnittstellen, differentieller analoger Audio-Ein-/Ausgang; unterstützt externe analoge Audio-Leistungsverstärker und I2S-Audioverstärker |
+| Audio | 3 I2S-Schnittstellen, 2 PDM-Schnittstellen, differenzieller analoger Audio-Ein-/Ausgang; unterstützt externe analoge Audio-Leistungsverstärker und I2S-Audioverstärker |
 | Weck-Interrupts | Alle GPIOs können den Chip aus Light Sleep und Deep Sleep aufwecken. Standby/Hibernate unterstützt 16 Weck-Interruptquellen: 6 auf PA und 10 auf PB |
 | PBR-Schnittstelle | Sechs PBR-Pins. PBR0 wechselt beim Einschalten von 0 auf 1 und kann ausgewählte externe Lastschalter (LSW) steuern; PBR1-PBR5 sind standardmäßig Low. PBR0-PBR5 können LPTIM oder einen 32-kHz-Takt ausgeben und bleiben auch in Standby/Hibernate als Ausgänge nutzbar. PBR0-PBR3 lassen sich als Weckeingänge konfigurieren, lösen jedoch keinen Interrupt aus, solange die MCU aktiv ist. |
 
@@ -65,7 +65,7 @@ Dieses Dokument setzt Grundkenntnisse in der Entwicklung eingebetteter Hardware,
 
 ### 3.2. Varianten { #32-variants }
 
-Bestätigen Sie vor der Schaltplanfreigabe die genaue Bestellnummer des SF32LB58x und die SiP-Speicherkonfiguration anhand des aktuellen Datenblatts und der AVL. Die Familie verwendet das BGA256-Gehäuse und erfordert eine HDI-Leiterplatte; der SiP-Speicher hängt vom Modell ab. Externer NOR- oder SPI-NAND-Flash kann über MPI3 oder MPI4 angebunden werden. Auf dem SiFli-EVB wird MPI4 für den externen SPI-NAND-Flash verwendet; SD1 ist für eMMC oder SD-NAND-Flash vorgesehen, SD2 für eine SD-Karte oder ein Wi-Fi-Gerät. Prüfen Sie vor dem Design-Freeze außerdem die Pinbelegung der gewählten Variante und das Routing der Zielplatine.
+Bestätigen Sie vor der Schaltplanfreigabe die genaue Bestellnummer des SF32LB58x und die SiP-Speicherkonfiguration anhand des aktuellen Datenblatts und der AVL. Die Familie verwendet das BGA256-Gehäuse und erfordert eine HDI-Leiterplatte; der SiP-Speicher hängt vom Modell ab. Externer NOR- oder SPI-NAND-Flash kann über MPI3 oder MPI4 angebunden werden. Auf dem SiFli-EVB wird MPI4 für den externen SPI-NAND-Flash verwendet; SD1 ist für eMMC oder SD-NAND-Flash vorgesehen, SD2 für eine SD-Karte oder ein Wi-Fi-Gerät. Prüfen Sie vor dem Abschluss des Designs die Pinbelegung des gewählten Bauteils und das Routing der Ziel-Leiterplatte.
 
 ### 3.3. Gehäuse { #33-packages }
 <div align="center"><em>Tabelle 3.3-1: Gehäuse</em></div>
@@ -114,9 +114,9 @@ Der SF32LB58x eignet sich für vernetzte Produkte, die fortschrittliche Grafik, 
 | BUCK-Induktivität | 4,7 µH, DCR ≤ 0,4 Ω, Isat ≥ 500 mA |
 | Takt | 48-MHz-Hauptquarz + 32,768-kHz-RTC-Quarz |
 | RF | Leiterbahn mit 50-Ω-kontrollierter Impedanz, reserviertes π-Anpassnetzwerk |
-| Display | MIPI-DSI (2 Daten-Lanes), SPI mit 3/4 Leitungen, Quad-SPI, MCU8080, DPI und paralleles/serielles JDI; Pinbelegung für beide LCDCs: LCDC1 (PA) / LCDC2 (PB) |
+| Display | MIPI-DSI (2 Lanes), SPI mit 3/4 Leitungen, Quad-SPI, MCU8080, DPI und paralleles/serielles JDI; Pinbelegung für beide LCDCs: LCDC1 (PA) / LCDC2 (PB) |
 | Speicher | Externer NOR- oder SPI-NAND-Flash über MPI3 oder MPI4. Das SiFli-EVB nutzt MPI4 für SPI NAND, SD1 für eMMC oder SD NAND und SD2 für SD-Karte oder Wi-Fi-Gerät |
-| Audio | 3 I2S-Schnittstellen (nur Master), 2 PDM-Schnittstellen, differentieller analoger Audio-Ein-/Ausgang |
+| Audio | 3 I2S-Schnittstellen (nur Master), 2 PDM-Schnittstellen, differenzieller analoger Audio-Ein-/Ausgang |
 | Debugging | 1 SWD-Schnittstelle + 6 auswählbare UART-Debug-Ausgänge |
 | USB | USB 2.0 HS, Host- und Gerätebetrieb |
 
@@ -141,7 +141,7 @@ Der SF32LB58x eignet sich für vernetzte Produkte, die fortschrittliche Grafik, 
 
 ### 4.3. Verwendung dieses Leitfadens { #43-how-to-use-this-guide }
 
-Verwenden Sie diesen Leitfaden in der Reihenfolge einer Platinenprüfung: Bestätigen Sie zunächst Gehäuse und SiP-Speicherkonfiguration und legen Sie dann HDI-Lagenaufbau und PMIC-Konzept fest. Prüfen Sie anschließend Boot-Speicher und Display-Signalführung sowie Takte, RF, USB, Audio, Debugging und Zugang zu Produktionstests. Abschnitt 5 dient als Grundlage für den Schaltplan, Abschnitt 6 für das Leiterplattenlayout und Abschnitt 7 als Freigabe-Checkliste.
+Verwenden Sie diesen Leitfaden in der Reihenfolge eines Leiterplatten-Reviews: Bestätigen Sie zunächst Gehäuse und SiP-Speicherkonfiguration und legen Sie dann HDI-Lagenaufbau und PMIC-Konzept fest. Prüfen Sie anschließend Boot-Speicher und Display-Signalführung sowie Takte, RF, USB, Audio, Debugging und Zugang zu Produktionstests. Abschnitt 5 dient als Grundlage für den Schaltplan, Abschnitt 6 für das Leiterplattenlayout und Abschnitt 7 als Freigabe-Checkliste.
 
 ### 4.4. Review-Nachweispaket { #44-review-evidence-pack }
 

@@ -23,10 +23,10 @@ Arduino, Zephyr 또는 MicroPython을 사용할 계획이더라도 이 가이드
 **소프트웨어**
 
 - [git](https://git-scm.com/)
-- [`uv`](https://docs.astral.sh/uv/getting-started/installation/)로 부트스트랩하는 C/C++ 툴체인(SiFli-SDK의 설치 프로그램이 컴파일러, 디버거, Python 환경을 가져옵니다)
+- [`uv`](https://docs.astral.sh/uv/getting-started/installation/)를 기반으로 설치하는 C/C++ 툴체인(SiFli-SDK 설치 프로그램이 컴파일러, 디버거, Python 환경을 준비합니다)
 - [SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) 저장소 자체
 
-**공식 레퍼런스**
+**공식 문서**
 
 - [SiFli-SDK 설치 가이드](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/install/index.html)
 - [SiFli-SDK 지원 보드](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)
@@ -42,20 +42,20 @@ Arduino, Zephyr 또는 MicroPython을 사용할 계획이더라도 이 가이드
 
 === "macOS / Linux"
 
-    SiFli-SDK 스크립트의 기반인 패키지/환경 관리자 `uv`를 설치합니다.
+    SiFli-SDK 스크립트의 기반인 패키지 및 환경 관리자 `uv`를 설치하십시오.
 
     ```bash
     curl -LsSf https://astral.sh/uv/install.sh | sh
     ```
 
-    SDK를 클론합니다.
+    SDK를 클론하십시오.
 
     ```bash
     mkdir -p ~/OpenSiFli && cd ~/OpenSiFli
     git clone --recursive -b v2.5.1 https://github.com/OpenSiFli/SiFli-SDK
     ```
 
-    설치 프로그램을 실행한 다음 SDK 환경을 셸에 로드합니다.
+    설치 프로그램을 실행한 다음 SDK 환경을 셸에 불러오십시오.
 
     ```bash
     cd SiFli-SDK
@@ -65,13 +65,13 @@ Arduino, Zephyr 또는 MicroPython을 사용할 계획이더라도 이 가이드
 
 === "Windows"
 
-    `uv`를 설치합니다(PowerShell).
+    PowerShell에서 `uv`를 설치하십시오.
 
     ```powershell
     powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
     ```
 
-    SDK를 클론합니다.
+    SDK를 클론하십시오.
 
     ```powershell
     mkdir C:\OpenSiFli
@@ -79,7 +79,7 @@ Arduino, Zephyr 또는 MicroPython을 사용할 계획이더라도 이 가이드
     git clone --recursive -b v2.5.1 https://github.com/OpenSiFli/SiFli-SDK
     ```
 
-    설치 프로그램을 실행한 다음 SDK 환경을 로드합니다.
+    설치 프로그램을 실행한 다음 SDK 환경을 불러오십시오.
 
     ```powershell
     cd SiFli-SDK
@@ -91,7 +91,7 @@ Arduino, Zephyr 또는 MicroPython을 사용할 계획이더라도 이 가이드
     GitHub의 "Download ZIP" 옵션에는 필요한 서브모듈이 포함되지 않습니다. `git clone --recursive`를 사용하십시오. 서브모듈 없이 이미 클론했다면 SDK 루트에서 `git submodule update --init --recursive`를 실행하십시오.
 
 !!! note "중국 본토에서 작업하십니까?"
-    설치하기 전에 셸에서 `SIFLI_SDK_MIRROR_CHINA`를 `1`로 설정하십시오. macOS/Linux에서는 `export SIFLI_SDK_MIRROR_CHINA=1`을, PowerShell에서는 `$env:SIFLI_SDK_MIRROR_CHINA = "1"`을 사용합니다. GitHub 대신 [Gitee 미러](https://gitee.com/SiFli/sifli-sdk)에서 클론할 수도 있습니다. 자세한 내용은 [설치 가이드](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/install/index.html)를 참조하십시오.
+    설치하기 전에 셸에서 `SIFLI_SDK_MIRROR_CHINA`를 `1`로 설정하십시오. macOS/Linux에서는 `export SIFLI_SDK_MIRROR_CHINA=1`을, PowerShell에서는 `$env:SIFLI_SDK_MIRROR_CHINA = "1"`을 실행하십시오. GitHub 대신 [Gitee 미러](https://gitee.com/SiFli/sifli-sdk)에서 클론할 수도 있습니다. 자세한 내용은 [설치 가이드](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/install/index.html)를 참조하십시오.
 
 `install.sh` / `install.ps1`은 일치하는 컴파일러, 디버거, Python 의존성을 다운로드합니다. SDK 버전이 바뀌면 다시 실행하십시오. `export.sh` / `export.ps1`은 현재 터미널에서 해당 환경을 활성화합니다. 빌드하려고 새 터미널을 열 때마다 실행하십시오. Windows에서는 PowerShell에서 `.ps1` 스크립트를 실행하십시오.
 
@@ -118,21 +118,21 @@ Arduino, Zephyr 또는 MicroPython을 사용할 계획이더라도 이 가이드
 
 ## "Hello World" 예제 빌드 { #build-the-hello-world-example }
 
-환경을 로드한 상태에서 사용 중인 보드용 RT-Thread `hello_world` 예제를 빌드합니다.
+환경을 불러온 상태에서 사용 중인 보드용 RT-Thread `hello_world` 예제를 빌드하십시오.
 
 ```bash
 cd example/get-started/hello_world/rtt/project
 scons --board=sf32lb52-lcd_n16r8 -j8
 ```
 
-`sf32lb52-lcd_n16r8`을 사용 중인 보드 이름으로 바꾸십시오. 사용 가능한 이름은 [지원 보드 목록](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)을 참조하십시오. `-j8`은 8개의 병렬 작업으로 빌드하며, 사용 중인 컴퓨터에 맞게 조정하십시오. 이 명령은 코어 접미사를 생략했으므로 HCPU를 빌드하고 바이너리를 `build_sf32lb52-lcd_n16r8_hcpu/`에 기록합니다. `_lcpu` 타깃을 지정하면 출력 디렉터리는 `_lcpu` 접미사를 사용합니다.
+`sf32lb52-lcd_n16r8`을 사용 중인 보드 이름으로 바꾸십시오. 사용 가능한 이름은 [지원 보드 목록](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)을 참조하십시오. `-j8`은 8개의 병렬 작업으로 빌드합니다. 사용 중인 컴퓨터에 맞게 작업 수를 조정하십시오. 코어 접미사를 생략하면 HCPU를 빌드하고 바이너리를 `build_sf32lb52-lcd_n16r8_hcpu/`에 기록합니다. `_lcpu` 타깃을 지정하면 출력 디렉터리에 `_lcpu` 접미사가 붙습니다.
 
 !!! tip "사용자 지정 설정이 필요하십니까?"
-    프로젝트 디렉터리에서 `sdk.py menuconfig --board=<board_name>`을 실행하면 대화형 구성 메뉴가 열립니다. ++esc++를 두 번 누른 다음 메시지가 표시되면 구성을 저장하도록 선택합니다.
+    프로젝트 디렉터리에서 `sdk.py menuconfig --board=<board_name>`을 실행해 대화형 구성 메뉴를 여십시오. ++esc++를 두 번 누른 다음 메시지가 표시되면 구성을 저장하십시오.
 
 ## 보드 플래싱 { #flash-the-board }
 
-보드를 USB로 연결한 상태에서 빌드로 생성된 플래싱 스크립트를 실행합니다.
+보드를 USB로 연결한 상태에서 빌드가 생성한 플래싱 스크립트를 실행하십시오.
 
 === "macOS / Linux"
 
@@ -140,7 +140,7 @@ scons --board=sf32lb52-lcd_n16r8 -j8
     ./build_sf32lb52-lcd_n16r8_hcpu/uart_download.sh
     ```
 
-    메시지가 표시되면 운영 체제에 나타나는 시리얼 디바이스 경로를 입력합니다. macOS에서는 `/dev/tty.*`가 아니라 `/dev/cu.*` 디바이스(예: `/dev/cu.usbserial-12345678`)를 사용하고, Linux에서는 `/dev/ttyUSB0` 같은 해당 디바이스 경로를 사용합니다.
+    메시지가 표시되면 운영 체제에 나타나는 시리얼 디바이스 경로를 입력하십시오. macOS에서는 `/dev/tty.*`가 아니라 `/dev/cu.*` 디바이스(예: `/dev/cu.usbserial-12345678`)를 사용하고, Linux에서는 `/dev/ttyUSB0` 같은 해당 디바이스 경로를 지정하십시오.
 
 === "Windows"
 
@@ -148,14 +148,14 @@ scons --board=sf32lb52-lcd_n16r8 -j8
     build_sf32lb52-lcd_n16r8_hcpu\uart_download.bat
     ```
 
-    `please input serial port number` 메시지가 표시되면 COM 포트의 번호만 입력하고(예: `COM19`는 `19`) Enter를 누릅니다.
+    `please input serial port number` 메시지가 표시되면 COM 포트 번호만 입력하고(예: `COM19`라면 `19`) Enter를 누르십시오.
 
 !!! tip
     플래싱 도구가 UART 다운로드 모드로 진입하지 않으면 전송을 시작하기 직전에 보드를 리셋하십시오. 문제가 계속되면 보드별 플래싱 안내를 따르십시오.
 
 ## 실행 확인 { #see-it-run }
 
-플래싱이 완료되면 보드를 리셋하거나 자동으로 리셋되도록 합니다. 보드의 기본 보레이트로 시리얼 터미널을 엽니다. UART로 부팅 출력과 `hello_world` 예제 출력이 표시되어야 합니다.
+플래싱이 완료되면 보드를 직접 리셋하거나 자동 리셋이 끝날 때까지 기다리십시오. 보드의 기본 보레이트로 시리얼 터미널을 여십시오. UART로 부팅 출력과 `hello_world` 예제 출력이 표시되어야 합니다.
 
 ## 성공 확인 { #success-check }
 
@@ -175,4 +175,4 @@ scons --board=sf32lb52-lcd_n16r8 -j8
 
 ## 동작하는 기준 구성 기록 { #what-sifli-should-add }
 
-반복 가능한 설정을 위해 SDK 태그 또는 브랜치, 정확한 `scons --board` 타깃, 호스트 운영 체제, 시리얼 포트, 사용 중인 보드에서 동작한 플래싱 절차를 기록하십시오. SDK를 업데이트하거나 보드를 바꿀 때는 공식 [지원 보드 목록](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)과 [릴리스 목록](https://github.com/OpenSiFli/SiFli-SDK/releases)을 다시 확인하십시오.
+설정을 재현할 수 있도록 SDK 태그 또는 브랜치, 정확한 `scons --board` 타깃, 호스트 운영 체제, 시리얼 포트, 해당 보드에서 동작한 플래싱 절차를 기록하십시오. SDK를 업데이트하거나 보드를 바꿀 때는 공식 [지원 보드 목록](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)과 [릴리스 목록](https://github.com/OpenSiFli/SiFli-SDK/releases)을 다시 확인하십시오.

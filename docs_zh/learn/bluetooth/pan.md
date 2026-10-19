@@ -194,7 +194,7 @@ README 还将蓝牙地址分配列为排查项，可用 `nvds get_mac` 查看地
 
 - [ ] 确认硬件支持经典蓝牙，并在具体 SDK 和目标板上验证 PAN 协议栈与配置。参考示例列出了 SF32LB52x/56x/58x；SF32LB57x 需单独验证。SF32LB55x 仅支持 BLE。
 - [ ] 判断 PAN 依赖手机联网这一特性是否符合产品的连接模式，还是产品其实需要专用 Wi-Fi 射频。
-- [ ] 在目标开发板上搭建 `example/bt/pan`，并确认手机端网络共享设置（iOS/iPadOS Personal Hotspot 或 Android 蓝牙网络共享）。
+- [ ] 在目标开发板上启动调试 `example/bt/pan`，并确认手机端网络共享设置（iOS/iPadOS Personal Hotspot 或 Android 蓝牙网络共享）。
 - [ ] 端到端验证一次真实的 PAN 连接及至少一次网络操作（例如示例中的 `weather` 命令）。
 - [ ] 验证每个预期手机型号、OS 构建、地区/运营商套餐和网络共享设置路径；不得以笼统的“支持 iOS/Android”作为出货声明。
 - [ ] 在依赖网络功能之前，确认设备蓝牙 MAC 的 OUI 有效。

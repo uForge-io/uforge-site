@@ -32,7 +32,7 @@ Cela ne signifie pas que tous les jeux NES sont entièrement compatibles. La pri
 
 **Résultat attendu :** produire une image reproductible à partir du commit PocketPi figé dans la spécification logicielle, démarrer au moins une ROM de test dont l'utilisation est autorisée, valider l'écran, les entrées, l'audio, la pause, la sauvegarde et le chargement d'état, la sortie et la récupération, puis réaliser une adaptation de portée limitée.
 
-Cette page ne garantit pas la prise en charge de tous les mappers NES, du timing PAL/NTSC, de la chaîne audio utilisée par chaque jeu, des formats de sauvegarde ou des ROM tierces. Elle n'accorde aucun droit de copie ou de distribution des contenus de jeu. Dans la révision figée, le dépôt ne contient pas de fichier de licence à sa racine ; avant d'intégrer le code à un produit ou de distribuer des binaires, il faut établir les licences de PocketPi, de Nofrendo et de chaque composant tiers intégré.
+Cette page ne garantit pas la prise en charge de tous les mappers NES, du minutage PAL/NTSC, de la chaîne audio utilisée par chaque jeu, des formats de sauvegarde ou des ROM tierces. Elle n'accorde aucun droit de copie ou de distribution des contenus de jeu. Dans la révision figée, le dépôt ne contient pas de fichier de licence à sa racine ; avant d'intégrer le code à un produit ou de distribuer des binaires, il faut établir les licences de PocketPi, de Nofrendo et de chaque composant tiers intégré.
 
 Avant de commencer, préparez :
 
@@ -157,7 +157,7 @@ flowchart LR
     D --> N
 ```
 
-Les principaux domaines de panne sont le système de fichiers/ROM, le mapper/émulateur, la PSRAM/mémoire, l'écran et le timing des images, les entrées AW9523, l'audio, les sauvegardes et l'alimentation/reset. Face à un écran noir, déterminez d'abord si la ROM n'a pas été détectée, si la jaquette n'a pas été décodée, si le mapper n'est pas pris en charge, si l'allocation du framebuffer a échoué ou si la voie LCD est en panne ; ne signalez pas simplement une « panne de l'émulateur ».
+Les principaux domaines de panne sont le système de fichiers/ROM, le mapper/émulateur, la PSRAM/mémoire, l'écran et le minutage des images, les entrées AW9523, l'audio, les sauvegardes et l'alimentation/reset. Face à un écran noir, déterminez d'abord si la ROM n'a pas été détectée, si la jaquette n'a pas été décodée, si le mapper n'est pas pris en charge, si l'allocation du framebuffer a échoué ou si la voie LCD est en panne ; ne signalez pas simplement une « panne de l'émulateur ».
 
 ## Étape 1 — Établir la référence de jeu intacte { #stage-1-establish-the-untouched-game-baseline }
 
@@ -218,7 +218,7 @@ Les principaux domaines de panne sont le système de fichiers/ROM, le mapper/ém
 | Contenu | Ajouter une ROM dont l'utilisation est autorisée et, en option, sa jaquette | Détection, mapper, démarrage, image/audio, entrées, sauvegarde et licence |
 | Interface de la liste | Modifier police, jaquette, tri ou message de liste vide | Mémoire, défilement, image par défaut, noms de fichiers longs et JPG endommagé |
 | Entrées | Modifier un mappage AW9523 ou la disposition physique | Toutes les touches, entrées simultanées, menu, panne I²C et démarrage |
-| Écran | Modifier l'orientation, le LCD ou la stratégie de framebuffer | Géométrie 320 × 240, timing d'image, déchirure, mémoire et récupération à la sortie |
+| Écran | Modifier l'orientation, le LCD ou la stratégie de framebuffer | Géométrie 320 × 240, minutage d'image, déchirure, mémoire et récupération à la sortie |
 | Audio | Modifier le volume, le réglage Audio Shift ou le matériel de sortie | Voie 32 kHz, distorsion, sous-alimentation du tampon audio, concurrence écran/stockage et sourdine |
 | Stockage | Modifier le répertoire de la carte TF ou la politique des fichiers d'état | Limites du branchement à chaud, corruption, coupure, support plein et solution de repli |
 

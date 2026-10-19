@@ -23,11 +23,11 @@ La mise en œuvre USB implique le firmware, les descripteurs, les systèmes d'ex
 
 ## Flux de travail pratique { #practical-workflow }
 
-1. Vérifier que la carte dispose du connecteur USB et du chemin d'alimentation requis.
-2. Partir de l'exemple USB du SDK le plus proche du cas d'usage.
-3. Tester l'énumération sous Windows, macOS et Linux.
-4. Vérifier la suspension et la reprise, ainsi que le comportement après reconnexion du câble.
-5. Consigner le VID/PID, les descripteurs et les exigences des pilotes hôtes.
+1. Vérifiez que la carte dispose du connecteur USB et du chemin d'alimentation requis.
+2. Partez de l'exemple USB du SDK le plus proche du cas d'usage.
+3. Testez l'énumération sous Windows, macOS et Linux.
+4. Vérifiez la suspension et la reprise, ainsi que le comportement après reconnexion du câble.
+5. Consignez le VID/PID, les descripteurs et les exigences des pilotes hôtes.
 
 ## Ce qu'il faut tester { #what-to-test }
 

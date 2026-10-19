@@ -69,7 +69,7 @@ STAR-MC1은 SoC가 구현하고 소프트웨어가 효과적으로 활용하는 
 
 </div>
 
-\* 이 참고값은 Arm의 [Cortex-M comparison table, Version 2020](https://developer.arm.com/-/media/Arm%20Developer%20Community/PDF/Cortex-A%20R%20M%20datasheets/Arm%20Cortex-M%20Comparison%20Table_v3.pdf?revision=077cd073-b4ff-4193-8a26-5e854aa6e431)에서 가져온 것입니다. 현재 기준의 범용 점수나 완성된 SoC의 직접적인 순위가 아닙니다. 컴파일러, 메모리 시스템, 캐시 설정, 벤치마크 구성이 결과에 영향을 줍니다.
+\* 이 참고값은 Arm의 [Cortex-M 비교표, 2020년판](https://developer.arm.com/-/media/Arm%20Developer%20Community/PDF/Cortex-A%20R%20M%20datasheets/Arm%20Cortex-M%20Comparison%20Table_v3.pdf?revision=077cd073-b4ff-4193-8a26-5e854aa6e431)에서 가져온 것입니다. 현재 기준의 범용 점수나 완성된 SoC의 직접적인 순위가 아닙니다. 컴파일러, 메모리 시스템, 캐시 설정, 벤치마크 구성이 결과에 영향을 줍니다.
 
 † STAR-MC1은 CM33과 호환되므로 여기서는 CM33의 참고값을 사용합니다. 이는 비교 기준값이며 Arm이 발표했거나 측정한 STAR-MC1 결과가 아닙니다.
 
@@ -77,7 +77,7 @@ STAR-MC1은 SoC가 구현하고 소프트웨어가 효과적으로 활용하는 
 
 파이프라인 및 버스 행은 각 IP의 주 실행 파이프라인과 시스템 메모리 인터페이스를 요약한 것입니다. CM33과 STAR-MC1은 C-AHB/S-AHB 버스 구성을 공유합니다. 캐시와 그 밖의 선택적 메모리 기능은 이 버스 인터페이스와 별개이며, 제공 여부는 SoC 구성과 구현에 따라 달라집니다. 이는 완성된 모든 SoC에서 활성화된 인터페이스를 설명하는 것이 아닙니다. 디버그, 트레이스, 코프로세서 및 기타 선택적 포트는 나열하지 않았습니다.
 
-프로세서 IP 참고 자료: Arm [CM3 datasheet](https://documentation-service.arm.com/static/62053c120ca305732a3a5c14), [CM4 documentation](https://support.arm.com/compute-ip/cortex-m4), [CM33 Technical Reference Manual](https://documentation-service.arm.com/static/66be1ce8882fec713ef49954), [CM55 datasheet](https://documentation-service.arm.com/static/6205407494e7af28dd7c9cb5), [CM7 datasheet](https://developer.arm.com/-/media/Arm%20Developer%20Community/PDF/Processor%20Datasheets/Arm-Cortex-M7-Processor-Datasheet.pdf), [STAR-MC1 Technical Reference Manual](https://www.armchina.com/webarm/arm/common/download/profile/resource/file/Documents/Application-Notes/Technical-Reference-Manual/Star_Technical_Reference_Manual_00903001_0100_00_en.pdf)
+프로세서 IP 참고 자료: Arm [CM3 데이터시트](https://documentation-service.arm.com/static/62053c120ca305732a3a5c14), [CM4 문서](https://support.arm.com/compute-ip/cortex-m4), [CM33 기술 참조 매뉴얼](https://documentation-service.arm.com/static/66be1ce8882fec713ef49954), [CM55 데이터시트](https://documentation-service.arm.com/static/6205407494e7af28dd7c9cb5), [CM7 데이터시트](https://developer.arm.com/-/media/Arm%20Developer%20Community/PDF/Processor%20Datasheets/Arm-Cortex-M7-Processor-Datasheet.pdf), [STAR-MC1 기술 참조 매뉴얼](https://www.armchina.com/webarm/arm/common/download/profile/resource/file/Documents/Application-Notes/Technical-Reference-Manual/Star_Technical_Reference_Manual_00903001_0100_00_en.pdf)
 
 ## 아키텍처 개선 사항 { #architectural-enhancements }
 
@@ -98,7 +98,7 @@ STAR-MC1은 Cortex-M33을 대체하는 것이 아니라 그 위에 구축되었�
 
 ### Armv8-M 커스텀 데이터패스 확장 { #armv8-m-custom-datapath-extension }
 
-IP 수준에서 Arm은 CDE 명령 인코딩을 정의하고, SoC 설계자는 커스텀 연산과 데이터패스를 정의합니다. CM33은 선택적 정수 CDE를 지원하며, 부동소수점 CDE는 FPU와 구성에 따라 다릅니다. STAR-MC1 TRM은 GPR CDE 및 FPCDE 모듈을 설명하지만, 이러한 IP 수준의 설명만으로는 특정 SF32 디바이스나 SDK에서 CDE를 사용할 수 있다고 확정할 수 없습니다. SiFli SDK [v2.5.1 릴리스 노트](https://github.com/OpenSiFli/SiFli-SDK/releases/tag/v2.5.1)에는 SF32LB57x에서 CDE가 실수로 활성화되던 문제의 수정이 기록되어 있으므로, 의존하기 전에 정확한 대상과 SDK에서 지원 여부를 확인하십시오. CM55는 r0가 아니라 r1부터 선택적 CDE를 제공합니다. CP0~CP7은 코프로세서 또는 CDE에 할당되는 인코딩 공간이며, 커스텀 명령 8개나 추가 가속기 8개를 의미하지 않습니다. 코어 리비전, 구현된 모듈, 컴파일러/SDK 지원을 확인하십시오. [CM33 datasheet](https://www.arm.com/-/media/Arm%20Developer%20Community/PDF/Processor%20Datasheets/Arm-Cortex-M33-Processor-Datasheet.pdf), [CM55 CDE revision notes](https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/armv8_2d00_m-based-processor-software-development-hints-and-tips), STAR-MC1 TRM의 B7/B8장을 참고하십시오.
+IP 수준에서 Arm은 CDE 명령 인코딩을 정의하고, SoC 설계자는 커스텀 연산과 데이터패스를 정의합니다. CM33은 선택적 정수 CDE를 지원하며, 부동소수점 CDE는 FPU와 구성에 따라 다릅니다. STAR-MC1 TRM은 GPR CDE 및 FPCDE 모듈을 설명하지만, 이러한 IP 수준의 설명만으로는 특정 SF32 디바이스나 SDK에서 CDE를 사용할 수 있다고 확정할 수 없습니다. SiFli SDK [v2.5.1 릴리스 노트](https://github.com/OpenSiFli/SiFli-SDK/releases/tag/v2.5.1)에는 SF32LB57x에서 CDE가 실수로 활성화되던 문제의 수정이 기록되어 있으므로, 의존하기 전에 정확한 대상과 SDK에서 지원 여부를 확인하십시오. CM55는 r0가 아니라 r1부터 선택적 CDE를 제공합니다. CP0~CP7은 코프로세서 또는 CDE에 할당되는 인코딩 공간이며, 커스텀 명령 8개나 추가 가속기 8개를 의미하지 않습니다. 코어 리비전, 구현된 모듈, 컴파일러/SDK 지원을 확인하십시오. [CM33 데이터시트](https://www.arm.com/-/media/Arm%20Developer%20Community/PDF/Processor%20Datasheets/Arm-Cortex-M33-Processor-Datasheet.pdf), [CM55 CDE 리비전 참고 자료](https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/armv8_2d00_m-based-processor-software-development-hints-and-tips), STAR-MC1 TRM의 B7/B8장을 참고하십시오.
 
 이는 다음과 같은 워크로드에 유용할 수 있습니다.
 
@@ -183,4 +183,4 @@ STAR-MC1 기반 디바이스는 MCU 수준의 전력 및 집적도 제약을 유
 
 함께 보기: STAR-MC1이 SF32LB5x 칩 라인업 전반에서 어떤 위치인지는 [SF32 제품군](../../sf32-products/family/SF32_family.md)을 참고하십시오.
 
-주요 참고 자료: [Arm China STAR-MC1 Technical Reference Manual](https://www.armchina.com/webarm/arm/common/download/profile/resource/file/Documents/Application-Notes/Technical-Reference-Manual/Star_Technical_Reference_Manual_00903001_0100_00_en.pdf)
+주요 참고 자료: [Arm China STAR-MC1 기술 참조 매뉴얼](https://www.armchina.com/webarm/arm/common/download/profile/resource/file/Documents/Application-Notes/Technical-Reference-Manual/Star_Technical_Reference_Manual_00903001_0100_00_en.pdf)

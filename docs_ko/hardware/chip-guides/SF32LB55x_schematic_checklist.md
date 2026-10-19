@@ -64,7 +64,7 @@ tags:
 
 </div>
 
-원본 모호성: 원래 V1.0 워크북의 19번 항목과 20번 항목은 동일하며, 둘 다 SS6600A8의 VDDIOA에 3.3 V를 지정합니다. [하드웨어 애플리케이션 가이드](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB55x-HW-Application.md)는 VDDIOA를 PA I/O 전원, VDDIOB를 PB I/O 전원으로 설명하지만, 20번 항목이 VDDIOB를 가리키려는 의도였는지는 확인해 주지 않습니다. 위 체크리스트는 워크북을 그대로 유지합니다. 20번 항목을 설계 승인 기준으로 사용하기 전에 SiFli에 의도한 레일을 확인하십시오.
+원본 워크북의 모호한 항목: V1.0 워크북의 19번과 20번 항목은 동일하며, 둘 다 SS6600A8의 VDDIOA에 3.3 V를 지정합니다. [하드웨어 애플리케이션 가이드](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB55x-HW-Application.md)는 VDDIOA를 PA I/O 전원으로, VDDIOB를 PB I/O 전원으로 설명하지만 20번 항목이 실제로 VDDIOB를 가리키는지는 확인해 주지 않습니다. 이 체크리스트는 워크북의 표기를 그대로 유지합니다. 20번 항목을 설계 승인 기준으로 사용하기 전에 SiFli에 적용할 전원 레일을 확인하십시오.
 
 ### 5.8.3. 전원 커패시터 및 인덕터 { #583-power-supply-capacitors-and-inductors }
 
@@ -99,7 +99,7 @@ tags:
 
 </div>
 
-원본 불일치: [SiFli 중국어 하드웨어 애플리케이션 가이드](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)의 표 3-3과 [V1.0 회로도 체크리스트](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)의 9번 항목은 VDD_RTC에 1 µF을 지정하지만, [레퍼런스 회로도의 C0313](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png)은 0.1 µF으로 표기되어 있습니다. 두 값이 각각 언제 적용되는지는 자료에 설명되어 있지 않습니다. 설계를 릴리스하기 전에 해당 디바이스에 필요한 값을 SiFli에 확인하십시오. 가정으로 불일치를 해소해서는 안 됩니다.
+원본 자료 간 불일치: [SiFli 중국어 하드웨어 애플리케이션 가이드](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)의 표 3-3과 [V1.0 회로도 체크리스트](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)의 9번 항목은 VDD_RTC에 1 µF을 지정합니다. 반면 [레퍼런스 회로도의 C0313](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png)은 0.1 µF으로 표기합니다. 자료에는 각 값의 적용 조건이 설명되어 있지 않습니다. 설계를 릴리스하기 전에 해당 디바이스에 필요한 값을 SiFli에 확인하십시오. 추정으로 이 불일치를 해소해서는 안 됩니다.
 
 ### 5.8.4. 클럭 { #584-clock }
 
@@ -275,7 +275,11 @@ tags:
 
 </div>
 
-원본 불일치: 우선순위가 더 높은 [OpenSiFli 하드웨어 애플리케이션 가이드](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)는 입력 범위 0~0.9 V의 5채널 10비트 GPADC를 설명합니다. 링크된 [V1.0 원본 체크리스트 워크북](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)의 2번 항목은 최대 1.0 V를 지정하지만 채널 수는 지정하지 않습니다. 반면 [SF32LB55x 데이터시트 V1.7.2의 3.2.1절](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)은 싱글 엔디드 입력 8개 또는 차동 쌍 4개를 지정하며, 싱글 엔디드 범위는 0~1.1 V, 차동 범위는 −0.7~0.7 V이고 핀 표에는 GPADC_CH0~CH7이 나열되어 있습니다. 현재 [SDK ADC 가이드](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html)도 8개 채널(0~7)을 매핑하며 최대 샘플링 전압으로 1.1 V를 나열합니다. SiFli는 이처럼 상충하는 채널 수와 전압 한계를 설명한 적이 없습니다. 체크리스트 표는 2번 항목에서 워크북의 1.0 V 값을 유지하지만, SiFli가 서면으로 명확히 밝히기 전까지는 우선순위가 더 높은 하드웨어 애플리케이션의 0~0.9 V 범위에 맞춰 설계하고 VADC를 0.9 V 이하로 유지하십시오. 워크북의 1.0 V나 데이터시트/SDK의 1.1 V를 승인된 설계 한계로 취급하지 말고, 선택한 디바이스와 패키지에서 사용할 수 있는 채널을 확인하십시오.
+원본 간 불일치: 우선순위가 가장 높은 [OpenSiFli 하드웨어 애플리케이션 가이드](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)는 입력 범위가 0~0.9 V인 5채널 10비트 GPADC를 설명합니다. 링크된 [V1.0 원본 체크리스트 워크북](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)의 2번 항목은 최대 입력 전압을 1.0 V로 지정하지만 채널 수는 밝히지 않습니다.
+
+반면 [SF32LB55x 데이터시트 V1.7.2의 3.2.1절](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)은 싱글 엔디드 입력 8개 또는 차동 쌍 4개를 지정합니다. 이때 싱글 엔디드 입력 범위는 0~1.1 V, 차동 입력 범위는 −0.7~0.7 V이며, 핀 표에는 GPADC_CH0~CH7이 나열되어 있습니다. 현재 [SDK ADC 가이드](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html)도 8개 채널(0~7)을 매핑하고 최대 샘플링 전압을 1.1 V로 안내합니다.
+
+SiFli는 채널 수와 전압 한계가 서로 다른 이유를 설명하지 않았습니다. 체크리스트 표에는 워크북에 따라 2번 항목의 1.0 V를 유지합니다. 다만 SiFli의 서면 확인을 받기 전까지는 우선순위가 더 높은 하드웨어 애플리케이션 가이드의 0~0.9 V 범위에 맞춰 설계하고, VADC를 0.9 V 이하로 유지하십시오. 워크북의 1.0 V나 데이터시트/SDK의 1.1 V를 승인된 설계 한계로 간주하지 마십시오. 선택한 디바이스와 패키지에서 사용할 수 있는 채널도 확인하십시오.
 
 ### 5.8.14. SDMADC { #5814-sdmadc }
 
@@ -461,7 +465,7 @@ tags:
 | 1 | QFN GPIO27과 BGA PA01은 입력으로 사용하지 않기를 권장합니다. 내부 20 kΩ 풀다운 때문에 풀업 저항이 크면 High 레벨 전압이 낮아지고 풀업 저항이 작으면 누설이 과도해질 수 있기 때문입니다 | 모든 변형 | 필수 |
 | 2 | QFN GPIO27 또는 BGA PA01을 출력으로 사용하는 경우, I/O가 구동되지 않을 때 제어 대상 회로가 기본적으로 비활성 상태가 되는지 확인합니다. 1.8 V High 레벨을 구동하면 약 90 uA의 누설이 발생하므로 대전류 동작 시나리오에 사용하는 것이 좋습니다 | 모든 변형 | 필수 |
 | 3 | PA01과 PA03을 GPIO로 사용하는 경우 슬립 중에 두 IO의 레벨을 일치시키거나, 최소 하나의 핀을 풀업과 풀다운이 없는 high-impedance 상태로 둡니다 | 모든 변형 | 필수 |
-| 4 | PA77, PA78, PA79, PA80과 PB43~PB48은 웨이크업이 가능한 10개 핀입니다. Hibernate 전원 차단 상태에서는 high impedance이며 내부 PU/PD가 비활성화됩니다. 고정 레벨을 달리 보장할 수 없는 경우 외부 풀업 또는 풀다운을 추가합니다 | 모든 변형 | 필수 |
+| 4 | PA77, PA78, PA79, PA80과 PB43-PB48은 웨이크업이 가능한 10개 핀입니다. Hibernate 전원 차단 상태에서는 high impedance이며 내부 PU/PD가 비활성화됩니다. 고정 레벨을 달리 보장할 수 없는 경우 외부 풀업 또는 풀다운을 추가합니다 | 모든 변형 | 필수 |
 | 5 | PB 웨이크업 핀을 파형 출력에 사용하는 경우 Hibernate를 사용하지 않더라도 외부 풀업 또는 풀다운을 확보해 둡니다 | 모든 변형 | 필수 |
 | 6 | 모든 MOSFET, LDO, DCDC 활성화 핀은 기본 풀업 또는 풀다운 저항으로 Hibernate에서도 필요한 켜짐/꺼짐 상태가 유지되도록 합니다 | 모든 변형 | 필수 |
 | 7 | High로 구동하여 부하를 제어하는 GPIO 신호는 기능에 영향을 주지 않는 경우 누설을 줄이기 위해 1 MΩ 풀다운을 사용합니다 | 모든 변형 | 필수 |
@@ -471,7 +475,7 @@ tags:
 | 11 | <span class="flag-red">Hibernate 모드에서 선택한 주변 장치의 기준 전류 합계가 기록되어 있으며 프로젝트 요구 사항을 충족합니다</span> | 모든 변형 | 필수 |
 | 12 | Standby 모드 기준 전류 요구 사항이 기록되어 있습니다 | 모든 변형 | 필수 |
 | 13 | <span class="flag-red">Standby 모드에서 선택한 주변 장치의 기준 전류 합계가 기록되어 있으며 프로젝트 요구 사항을 충족합니다</span> | 모든 변형 | 필수 |
-| 14 | 출력으로 사용하는 PB43~PB48 웨이크 핀은 Standby에서 내부 풀이 비활성화되므로 외부 풀업 또는 풀다운을 확보해 둡니다 | 모든 변형 | 필수 |
+| 14 | 출력으로 사용하는 PB43-PB48 웨이크 핀은 Standby에서 내부 풀이 비활성화되므로 외부 풀업 또는 풀다운을 확보해 둡니다 | 모든 변형 | 필수 |
 
 </div>
 

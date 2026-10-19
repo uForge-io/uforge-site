@@ -84,7 +84,7 @@ Halten Sie vor dem Start bereit:
 
 ## Unterstützte Referenzkonfiguration auswählen { #choose-a-supported-baseline }
 
-Verwenden Sie den festgelegten Projekt-Commit [`670cf20`](https://github.com/SiFliSparks/RadiationMonitor/commit/670cf20b931e82b7ff1cd14fa6727e460c4f677a) und nicht den beweglichen Branch `main`. Das README des Projekts nennt `build_sf32lb52-lchspi-ulp_hcpu` als Ausgabeverzeichnis; die Liste der unterstützten Boards von SiFli nennt `sf32lb52-lchspi-ulp` für Huangshan Pi / LCHSPI-ULP. Das legt den Board-Namen im SDK fest, nicht den genauen Projektbefehl oder die getestete Board-Bestückung. Das README gibt weder eine Board-Revision noch einen vollständigen SCons-Befehl an; bestätigen Sie daher die Build-Konfiguration des Projekts bei der ersten Reproduktion, statt anzunehmen, dass jedes SF32LB52x-Board unterstützt wird.
+Verwenden Sie den festgelegten Projekt-Commit [`670cf20`](https://github.com/SiFliSparks/RadiationMonitor/commit/670cf20b931e82b7ff1cd14fa6727e460c4f677a) und nicht den beweglichen Branch `main`. Das README des Projekts nennt `build_sf32lb52-lchspi-ulp_hcpu` als Ausgabeverzeichnis; die Liste der unterstützten Boards von SiFli nennt `sf32lb52-lchspi-ulp` für Huangshan Pi / LCHSPI-ULP. Das legt den Boardnamen im SDK fest, nicht den genauen Projektbefehl oder die getestete Board-Bestückung. Das README gibt weder eine Board-Revision noch einen vollständigen SCons-Befehl an; bestätigen Sie daher die Build-Konfiguration des Projekts bei der ersten Reproduktion, statt anzunehmen, dass jedes SF32LB52x-Board unterstützt wird.
 
 <div align="center"><em>Tabelle: Auswahl der Basis für den Radiation Monitor</em></div>
 

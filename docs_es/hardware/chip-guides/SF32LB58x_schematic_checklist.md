@@ -102,13 +102,13 @@ Cada tabla corresponde a un bloque funcional del esquemático. Determine cuándo
 | 23 | Las referencias de los inductores BUCK1 y BUCK2 son las recomendadas por SiFli | Obligatorio |
 | 24 | Si la referencia del inductor BUCK no es una de las recomendadas por SiFli, cumple L = 4,7 µH, DCR ≤ 0,4 Ω e Isat ≥ 450 mA | Obligatorio |
 | 25 | <span class="flag-red">Si PVDD1 y PVDD2 reciben 1,8 V desde VBAT, use un convertidor DCDC para generar 1,8 V; no use un LDO</span> | Obligatorio |
-| 26 | <span class="flag-red">Registre la corriente quiescente del DCDC seleccionado y confirme que cumple los requisitos del proyecto</span> | Obligatorio |
-| 27 | <span class="flag-red">Registre la corriente quiescente del LDO seleccionado y confirme que cumple los requisitos del proyecto</span> | Obligatorio |
+| 26 | <span class="flag-red">Registre la corriente de reposo del DCDC seleccionado y confirme que cumple los requisitos del proyecto</span> | Obligatorio |
+| 27 | <span class="flag-red">Registre la corriente de reposo del LDO seleccionado y confirme que cumple los requisitos del proyecto</span> | Obligatorio |
 
 </div>
 
 !!! note "Discrepancia en la corriente de saturación del inductor BUCK"
-    El punto 24 de la lista de comprobación de condensadores e inductores de alimentación del libro especifica Isat ≥ 450 mA para un inductor que no figure en la AVL. La nota de aplicación de hardware de OpenSiFli especifica Isat ≥ 500 mA para un inductor BUCK con L = 4,7 µH y DCR ≤ 0,4 Ω. La tabla conserva el valor de 450 mA del libro; la [guía de selección de inductores BUCK del diseño esquemático](SF32LB58x_schematic_design.md#5114-buck-inductor-selection) aplica 500 mA. Hasta que SiFli aclare la discrepancia, utilice un inductor con Isat de al menos 500 mA.
+    El punto 24 de la lista de comprobación de condensadores e inductores de alimentación de la hoja de cálculo especifica Isat ≥ 450 mA para un inductor que no figure en la AVL. La nota de aplicación de hardware de OpenSiFli especifica Isat ≥ 500 mA para un inductor BUCK con L = 4,7 µH y DCR ≤ 0,4 Ω. La tabla conserva el valor de 450 mA de la hoja de cálculo; la [guía de selección de inductores BUCK del diseño esquemático](SF32LB58x_schematic_design.md#5114-buck-inductor-selection) aplica 500 mA. Hasta que SiFli aclare la discrepancia, utilice un inductor con Isat de al menos 500 mA.
 
 ### 5.8.4. Reloj { #584-clock }
 
@@ -173,7 +173,7 @@ Cada tabla corresponde a un bloque funcional del esquemático. Determine cuándo
 
 | N.º | Punto de comprobación | Categoría |
 |:---|:---|:---|
-| 1 | Anote en la señal ANT el requisito de impedancia característica single-ended de 50 Ω | Obligatorio |
+| 1 | Anote en la señal ANT el requisito de impedancia característica asimétrica (single-ended) de 50 Ω | Obligatorio |
 | 2 | Reserve una red de adaptación tipo pi en ANT: un condensador paralelo NC (sin montar) y un condensador en serie de 15 pF | Obligatorio |
 | 3 | Si se requiere filtrado de emisiones espurias, reserve una red de adaptación tipo pi con un inductor en serie de 2,7 nH y un condensador paralelo de 2 pF | Opcional |
 | 4 | Si un PA RF externo requiere que la MCU controle RXEN y TXEN, use exclusivamente PB39 para PA RXEN y PB40 para PA TXEN | Opcional |
@@ -318,7 +318,7 @@ La alimentación de E/S de SD1, VDDIOA2, admite 1,8 V o 3,3 V y debe ajustarse a
 |:---|:---|:---|
 | 1 | Confirme con el cliente si el botón requiere capacidad de activación | Obligatorio |
 | 2 | La conexión de los botones normales es correcta (pull-up presente, valor de resistencia correcto y dominio de tensión del pull-up adecuado) | Obligatorio |
-| 3 | <span class="flag-red">El botón de encendido debe usar PB54 y ser activo en alto. Una pulsación de 10 segundos provoca el reinicio; la resistencia pull-down de 10 kΩ debe estar en la placa principal</span> | Obligatorio |
+| 3 | <span class="flag-red">El botón de encendido debe usar PB54 y ser activo en alto. Una pulsación larga de 10 segundos provoca el reinicio; la resistencia pull-down de 10 kΩ debe estar en la placa principal</span> | Obligatorio |
 | 4 | Todas las señales de los botones tienen protección ESD | Obligatorio |
 
 </div>
@@ -389,7 +389,7 @@ La alimentación de E/S de SD1, VDDIOA2, admite 1,8 V o 3,3 V y debe ajustarse a
 | 6 | Cada una de las dos entradas ADC de audio debe incluir un condensador de bloqueo de CC de al menos 2,2 µF | Opcional |
 | 7 | Cada ruta P y N de salida DAC tiene una resistencia en serie de 1 kΩ y un condensador de 1,5 nF entre ambas | Opcional |
 | 8 | AW8155 es el amplificador de audio recomendado; si se utiliza, configúrelo por software en el modo 4 / Clase AB | Opcional |
-| 9 | <span class="flag-red">Si la salida PA de audio se realimenta a la entrada ADC de la MCU, añada un divisor y un filtro RC o filtrado digital adicional. La tensión dividida debe permanecer dentro del rango de entrada del ADC y la frecuencia de corte del filtro RC debe ser de 20 kHz</span> | Opcional |
+| 9 | <span class="flag-red">Si la salida PA de audio se realimenta a la entrada ADC de la MCU, añada un divisor y un filtro RC o filtrado digital adicional. La tensión dividida debe permanecer dentro del rango de entrada del ADC y se recomienda que la frecuencia de corte del filtro RC sea de 20 kHz</span> | Opcional |
 | 10 | <span class="flag-red">Si no se utiliza la ruta ADC de audio analógico integrada en el chip, se recomienda conectar cada señal —ADC1P, ADC1N, ADC2P y ADC2N— a tierra mediante su propia resistencia en serie de 0 Ω</span> | Opcional |
 
 </div>
@@ -467,7 +467,7 @@ La alimentación de E/S de SD1, VDDIOA2, admite 1,8 V o 3,3 V y debe ajustarse a
 |:---|:---|:---|
 | 1 | La conexión de la interfaz USB es correcta | Opcional |
 | 2 | La interfaz USB tiene protección ESD | Opcional |
-| 3 | Durante el funcionamiento normal, mientras USB permanezca habilitado, el lado del PC/dispositivo puede detectar la conexión y desconexión.<br>Si se deben detectar conexiones y desconexiones mientras la MCU está en suspensión, añada un divisor resistivo en VBUS; su salida debe ser un nivel alto que coincida con la tensión de E/S y conectarse a un pin de activación de la MCU. Se recomienda compartir el pin de activación de detección de conexión del cargador | Opcional |
+| 3 | Durante el funcionamiento normal sin suspensión, mientras USB permanezca habilitado, el lado del PC/dispositivo puede detectar la conexión y desconexión.<br>Si se deben detectar conexiones y desconexiones mientras la MCU está en suspensión, añada un divisor resistivo en VBUS; su salida debe ser un nivel alto que coincida con la tensión de E/S y conectarse a un pin de activación de la MCU. Se recomienda compartir el pin de activación de detección de conexión del cargador | Opcional |
 
 </div>
 
@@ -490,7 +490,7 @@ La alimentación de E/S de SD1, VDDIOA2, admite 1,8 V o 3,3 V y debe ajustarse a
 </div>
 
 !!! note "Alcance de la fuente y verificación técnica"
-    El punto 4 de la lista PBR de la [hoja de cálculo original](https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) menciona SF32LB567. Sin embargo, la hoja no confirma que los puntos 4 y 5 de la lista PBR sean recomendaciones para SF32LB58x; consulte a SiFli antes de aplicarlos.
+    El punto 4 de la lista PBR de la [hoja de cálculo fuente de la lista de comprobación](https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) menciona SF32LB567. Sin embargo, la hoja no confirma que los puntos 4 y 5 de la lista PBR sean recomendaciones para SF32LB58x; consulte a SiFli antes de aplicarlos.
 
     El punto 6 de la lista de comprobación de almacenamiento de la hoja de cálculo indica que, durante la grabación en producción, se debe poner PA43 a nivel alto para habilitar la «alimentación de MPI3». En cambio, la [nota oficial de aplicación de hardware de SF32LB58x](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md) describe PA43 como el control de alimentación de la Flash externa y especifica que debe ponerse a nivel alto para alimentarla. La fila de la lista conserva el texto de la hoja. Antes de cerrar el procedimiento de grabación en producción, confirme con SiFli qué línea de alimentación y qué interfaces controla realmente PA43.
 

@@ -10,7 +10,7 @@ tags:
 
 El **procesador Bluetooth** es el subsistema dedicado al control inalámbrico de los dispositivos SF32LB. Se encarga de las funciones Bluetooth sujetas a estrictos requisitos de temporización, como la planificación de radio, el control del enlace, el mantenimiento de conexiones en modo de bajo consumo y la coordinación con el procesador de aplicaciones principal.
 
-Esta arquitectura resulta útil en productos conectados alimentados por batería. En lugar de activar la CPU de aplicación para cada evento inalámbrico, los dispositivos SF32 usan una arquitectura multinúcleo heterogénea: el procesador de aplicaciones gestiona la lógica del producto y las funciones orientadas al usuario, mientras que un procesador Bluetooth de bajo consumo o un procesador siempre activo mantiene el enlace inalámbrico.
+Esta arquitectura resulta útil en productos conectados alimentados por batería. En lugar de activar la CPU de aplicaciones para cada evento inalámbrico, los dispositivos SF32 usan una arquitectura multinúcleo heterogénea: el procesador de aplicaciones gestiona la lógica del producto y las funciones orientadas al usuario, mientras que un procesador Bluetooth de bajo consumo o un procesador siempre activo mantiene el enlace inalámbrico.
 
 El alcance de las tareas de aplicación que puede ejecutar el procesador de bajo consumo varía entre familias. Consulte la comparación siguiente y confirme en el SDK la asignación de tareas de la referencia concreta.
 
@@ -18,11 +18,11 @@ Consulte esta página para saber dónde se ejecutan las tareas de temporización
 
 ## Por qué importa un procesador Bluetooth dedicado { #why-a-dedicated-bluetooth-processor-matters }
 
-Bluetooth no es solo un protocolo de software que se ejecuta ocasionalmente en segundo plano. Un dispositivo conectado debe cumplir requisitos estrictos de temporización de radio para los anuncios BLE, el escaneo, los eventos de conexión, el intercambio de paquetes, el transporte de audio, el cifrado y la coexistencia con otras actividades del sistema.
+Bluetooth no es solo un protocolo de software que se ejecuta ocasionalmente en segundo plano. Un dispositivo conectado debe cumplir requisitos estrictos de temporización de radio para los anuncios (advertising), el escaneo, los eventos de conexión, el intercambio de paquetes, el transporte de audio, el cifrado y la coexistencia con otras actividades del sistema.
 
 Al separar esas funciones inalámbricas sensibles a la temporización de la carga de trabajo principal de la aplicación, un subsistema Bluetooth dedicado ofrece varias ventajas prácticas:
 
-- Menor consumo medio mientras se mantiene una conexión activa.
+- Menor consumo medio durante la espera conectada.
 - Temporización de radio más fiable cuando la interfaz de usuario, los gráficos, el audio o la IA someten el sistema a una carga elevada.
 - El controlador puede atender eventos de radio sin activar la CPU de aplicación en cada evento.
 - Una separación más clara entre el firmware de aplicación y el firmware de control de protocolo.
@@ -30,7 +30,7 @@ Al separar esas funciones inalámbricas sensibles a la temporización de la carg
 
 En productos vestibles y portátiles, esta separación resulta especialmente útil. El dispositivo puede permanecer conectado en un estado de bajo consumo la mayor parte del tiempo y activarse solo ante una interacción del usuario, un evento de sensor, una actualización de pantalla, actividad de audio o una sincronización con el teléfono.
 
-Son posibilidades de diseño, no cifras garantizadas de consumo o reactivación. La ubicación de la pila de protocolos del host, las interrupciones, la puesta en marcha del reloj, la política de reposo y el tráfico de la aplicación determinan el resultado medido. Mida la corriente y el tiempo de respuesta con el firmware y la carga previstos.
+Son posibilidades de diseño, no cifras garantizadas de consumo o reactivación. La ubicación del host, las interrupciones, la puesta en marcha del reloj, la política de reposo y el tráfico de la aplicación determinan el resultado medido. Mida la corriente y el tiempo de respuesta con el firmware y la carga previstos.
 
 ## Posición en el sistema SF32 { #position-in-the-sf32-system }
 
@@ -59,7 +59,7 @@ Procesador Bluetooth / firmware del controlador
 Radio Bluetooth y etapa frontal de RF
 ```
 
-La división exacta entre el firmware del host, el controlador y la aplicación depende del SDK, de la configuración de la pila y de los requisitos del producto. En cualquier caso, el procesador de aplicaciones no es la única CPU que participa en el funcionamiento de Bluetooth: el subsistema Bluetooth tiene su propio contexto de ejecución y está diseñado para ofrecer un comportamiento inalámbrico determinista con un consumo eficiente.
+La división exacta entre el firmware del host, el controlador y la aplicación depende del SDK, de la configuración de la pila y de los requisitos del producto. En cualquier caso, el procesador de aplicaciones no debe tratarse como la única CPU que participa en el funcionamiento de Bluetooth: el subsistema Bluetooth tiene su propio contexto de ejecución y está diseñado para ofrecer un comportamiento inalámbrico determinista y eficiente en consumo.
 
 ## Diferencias entre familias de dispositivos { #device-family-differences }
 
@@ -103,7 +103,7 @@ Según el modelo de la familia, los dispositivos SF32 pueden admitir solo **Blue
 BLE está optimizado para el intercambio de datos de bajo consumo. Se usa comúnmente para:
 
 - Pulseras de fitness y relojes inteligentes.
-- Sensores de salud y dispositivos portátiles.
+- Sensores de salud y dispositivos vestibles.
 - Notificaciones de teléfono y aplicaciones complementarias.
 - Sincronización de sensores.
 - Balizas y dispositivos de localización.
@@ -148,7 +148,7 @@ El subsistema Bluetooth resulta especialmente útil cuando el procesador de apli
 
 Este modelo mantiene la CPU principal fuera del estado activo el mayor tiempo posible. El procesador Bluetooth y la radio se activan para atender los eventos de conexión programados y, una vez completadas las tareas de protocolo necesarias, permiten que el sistema vuelva a un estado de menor consumo.
 
-El consumo real depende del intervalo de conexión, la potencia de transmisión, el comportamiento de los anuncios BLE, el modo de suspensión, la configuración del cristal, el diseño de RF, la política del firmware y la frecuencia con que se activa el procesador de aplicaciones.
+El consumo real depende del intervalo de conexión, la potencia de transmisión, el comportamiento de los anuncios (advertising), el modo de suspensión, la configuración del cristal, el diseño de RF, la política del firmware y la frecuencia con que se activa el procesador de aplicaciones.
 
 ## Límites entre host, controlador y aplicación { #host-controller-and-application-boundaries }
 
@@ -173,7 +173,7 @@ Para quien desarrolla aplicaciones, lo importante es que Bluetooth abarca más d
 
 El procesador de aplicaciones suele controlar el comportamiento del producto:
 
-- Iniciar y detener los anuncios BLE.
+- Iniciar y detener los anuncios (advertising).
 - Crear o aceptar conexiones.
 - Gestionar servicios y características GATT.
 - Gestionar el emparejamiento, la vinculación y las políticas de seguridad.
@@ -183,7 +183,7 @@ El procesador de aplicaciones suele controlar el comportamiento del producto:
 
 El procesador Bluetooth se ocupa de las funciones de bajo nivel necesarias para mantener la conexión. La comunicación entre ambos suele quedar abstraída mediante las API del SDK, eventos, colas o mecanismos de comunicación entre procesadores.
 
-Un buen diseño de la aplicación evita activar la CPU principal para tareas innecesarias. Agrupe eventos cuando sea posible, elija parámetros de conexión adecuados y evite consultar el estado de forma repetitiva si dispone de funciones de retorno basadas en eventos (callbacks).
+Un buen diseño de la aplicación evita activar la CPU principal para tareas innecesarias. Agrupe eventos cuando sea posible, elija parámetros de conexión adecuados y evite el sondeo (polling) de la aplicación a alta frecuencia si dispone de funciones de retorno basadas en eventos (callbacks).
 
 ## Consideraciones de RF y reloj { #rf-and-clock-considerations }
 
@@ -250,6 +250,6 @@ Un diseño robusto suele combinar el procesador Bluetooth con parámetros de con
 - SF32LB52x dedica la LCPU al controlador Bluetooth. SF32LB55x, SF32LB56x y SF32LB58x admiten en la LCPU tareas de aplicación definidas por el SDK en configuraciones documentadas. SF32LB57x usa la LCPU para Bluetooth y tareas sensibles al consumo, pero verifique en el SDK y la placa de destino que se admite cada tarea de usuario prevista.
 - Una LCPU programable admite tareas de aplicación dentro de los límites del SDK; el acceso al código del controlador y su personalización deben confirmarse por separado. Use actualizaciones del fabricante y valide los cambios.
 - BLE está optimizado para productos conectados de bajo consumo; el Bluetooth de modo dual añade casos de uso del Bluetooth clásico, como el audio y la compatibilidad con perfiles heredados.
-- El procesador Bluetooth permite que la CPU de aplicaciones principal permanezca en reposo mientras continúan las conexiones, los anuncios BLE y los eventos de radio programados.
+- El procesador Bluetooth permite que la CPU de aplicaciones principal permanezca en reposo mientras continúan las conexiones, los anuncios (advertising) y los eventos de radio programados.
 - El rendimiento de Bluetooth depende tanto de la arquitectura del firmware como del hardware: diseño de RF, relojes, alimentación, adaptación de la antena y calibración.
 - Trate Bluetooth como un subsistema con límites entre host y controlador, comunicación entre procesadores, decisiones de gestión energética y recursos compartidos.

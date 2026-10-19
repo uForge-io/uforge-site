@@ -18,11 +18,11 @@ SiFli의 공식 제품 브리프와 데이터시트는 SF32LB56x를 디스플레
 
 SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군은 패키지마다 지원하는 디스플레이 인터페이스 조합이 다르므로, 정확한 부품 번호와 패키지 선택은 PCB 후반 단계의 세부 사항이 아니라 최우선 아키텍처 선택으로 다루어야 합니다.
 
-[^1]: STAR-MC1은 Arm China의 구성 가능한 Armv8-M Mainline 임베디드 CPU IP입니다. 호환되는 SF32 디바이스에서 SiFli는 이를 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서로 문서화합니다. Cortex-M33급 소프트웨어 모델 덕분에 기존 Cortex-M33 펌웨어, 미들웨어, RTOS 포트, 툴을 이어서 사용하기 쉬우며, 디바이스별 일반적인 통합 작업은 필요합니다. CU, SP, SE 구성은 주로 캐시, TCM, XIPU, TrustZone 기능에서 차이가 나며, Arm Custom Instructions/CDE와 코프로세서 인터페이스는 선택 기능이므로 해당 SF32 부품에서 지원되는지 반드시 확인해야 합니다. SiFli 문서는 문맥에 따라 ***Arm Cortex-M33 STAR-MC1*** 또는 ***Arm Cortex-M33***이라는 표기를 사용할 수 있습니다.
+[^1]: STAR-MC1은 Arm China의 구성 가능한 Armv8-M Mainline 임베디드 CPU IP입니다. 호환되는 SF32 디바이스에서 SiFli는 이를 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서로 문서화합니다. Cortex-M33급 소프트웨어 모델은 기존 Cortex-M33용 펌웨어, 미들웨어, RTOS 포트, 개발 도구를 활용하는 데 도움이 됩니다. 다만 실제 디바이스에 맞춘 통합 작업은 여전히 필요합니다. CU, SP, SE 구성은 주로 캐시, TCM, XIPU, TrustZone 기능에서 차이가 나며, Arm Custom Instructions/CDE와 코프로세서 인터페이스는 선택 기능이므로 해당 SF32 부품에서 지원되는지 반드시 확인해야 합니다. SiFli 문서는 문맥에 따라 ***Arm Cortex-M33 STAR-MC1*** 또는 ***Arm Cortex-M33***이라는 표기를 사용할 수 있습니다.
 
 ## 애플리케이션
 
-**SF32LB56x는 다음과 같이** 더 나은 디스플레이, 오디오, 스토리지, 로컬 처리 능력이 필요한 듀얼 모드 Bluetooth 제품에 **권장됩니다.**
+**SF32LB56x는** 더 높은 수준의 디스플레이, 오디오, 스토리지, 로컬 처리 능력이 필요한 듀얼 모드 Bluetooth 제품에 **권장되며**, 대표적인 예는 다음과 같습니다.
 
 - 스마트워치 및 스마트 밴드
 - 그래픽 웨어러블 제품
@@ -37,7 +37,7 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 
 - BLE Audio를 지원하는 듀얼 모드 Bluetooth 5.3
 - 통합 HiFi 오디오 ADC 및 DAC
-- 더 부하가 큰 디스플레이 및 그래픽 워크로드
+- 더 높은 처리 부하를 요구하는 디스플레이 및 그래픽 작업
 - DPI/RGB 디스플레이 인터페이스 지원
 - SDIO를 통한 외부 Wi-Fi, SD/SDIO 또는 eMMC를 통한 외부 스토리지
 - WBBGA175 옵션을 통한 더 많은 GPIO
@@ -62,20 +62,20 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Product Brief]__
-- :fontawesome-solid-file-pdf: __[Datasheet]__
-- :fontawesome-solid-file-pdf: __[User Manual]__
-- :fontawesome-solid-file-lines: __[Hardware Design Guide (U, wiki.sifli.com)]__
-- :fontawesome-solid-file-lines: __[Hardware Design Guide (V, wiki.sifli.com)]__
-- :fontawesome-brands-github: __[Hardware Application Source (U)]__
-- :fontawesome-brands-github: __[Hardware Application Source (V)]__
-- :fontawesome-solid-file-lines: __[Hardware Design Guide (μForge)]__
-- :fontawesome-solid-book: __[SDK Documentation]__
-- :fontawesome-solid-book-open: __[API Reference]__
-- :fontawesome-solid-list-check: __[Hardware Design Checklist Source]__
+- :fontawesome-solid-file-pdf: __[제품 개요서][Product Brief]__
+- :fontawesome-solid-file-pdf: __[데이터시트][Datasheet]__
+- :fontawesome-solid-file-pdf: __[사용자 설명서][User Manual]__
+- :fontawesome-solid-file-lines: __[하드웨어 설계 가이드(U, wiki.sifli.com)][Hardware Design Guide (U, wiki.sifli.com)]__
+- :fontawesome-solid-file-lines: __[하드웨어 설계 가이드(V, wiki.sifli.com)][Hardware Design Guide (V, wiki.sifli.com)]__
+- :fontawesome-brands-github: __[하드웨어 애플리케이션 소스(U)][Hardware Application Source (U)]__
+- :fontawesome-brands-github: __[하드웨어 애플리케이션 소스(V)][Hardware Application Source (V)]__
+- :fontawesome-solid-file-lines: __[하드웨어 설계 가이드(μForge)][Hardware Design Guide (μForge)]__
+- :fontawesome-solid-book: __[SDK 문서][SDK Documentation]__
+- :fontawesome-solid-book-open: __[API 레퍼런스][API Reference]__
+- :fontawesome-solid-list-check: __[하드웨어 설계 체크리스트 원본][Hardware Design Checklist Source]__
 - :fontawesome-solid-sim-card: __[SF32LB56-MOD]__
-- :fontawesome-solid-cart-shopping: __[Buy Samples]__
-- :fontawesome-solid-cart-shopping: __[Buy Dev Kits]__
+- :fontawesome-solid-cart-shopping: __[샘플 구매][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[개발 키트 구매][Buy Dev Kits]__
 
 </div>
 
@@ -102,7 +102,7 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 - 최대 1024 × 1024의 그래픽 엔진 워크로드
 - 네이티브 eZip-A 애니메이션을 지원하는 eZip 2.0 무손실 그래픽 압축 해제
 - 지원되는 변형(variant) 전반에서 LCD 컨트롤러는 8080, SPI, Dual-SPI, Quad-SPI, DPI/RGB, JDI 인터페이스를 지원하며, 사용 가능 여부는 정확한 패키지와 주문 코드에 따라 달라짐
-- TurboPixel: extDMA 고정 비율 손실 최종 프레임버퍼 압축과 디스플레이 컨트롤러 압축 해제로 PSRAM 대역폭과 용량을 줄임
+- TurboPixel: extDMA가 최종 프레임버퍼에 고정 비율 손실 압축을 적용하고 디스플레이 컨트롤러가 이를 해제해 필요한 PSRAM 대역폭과 용량을 줄임
 - TinyML 워크로드용 신경망 행렬 가속기, 최대 1.92 GOPS 및 10 TOPS/W 이상
 
 ### 오디오 및 무선 연결
@@ -139,7 +139,7 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 ### 전원 공급 및 패키지
 
 - 전원 공급 범위: 1.71 V~3.63 V
-- 동작 온도: -40 °C~+85 °C
+- 동작 온도: -40~+85 °C
 - 통합 고효율 buck 및 저전력 LDO
 - RTC 웨이크업 시 슬립 전류: 600 nA
 - 핀 웨이크업 시 슬립 전류: 300 nA
@@ -149,7 +149,7 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 
 SF32LB56x는 소형 QFN68L 부품부터 I/O가 더 많은 WBBGA175 부품까지 걸쳐 있으며, 내장 메모리 옵션도 서로 다릅니다. 디스플레이 인터페이스 지원, GPIO 여유, 스토리지 용량, PCB 공정, 모듈 마이그레이션 옵션이 제품군 내에서 크게 다르므로 정확한 주문 코드를 일찍 선택하십시오.
 
-나열된 변형의 문서화된 공급 범위는 1.71 V~3.63 V이고 동작 온도 범위는 -40 °C~+85 °C입니다. GPIO 전원 도메인은 1.71 V~3.45 V를 지원하며, 패키지 내부 메모리 I/O 레일에는 별도의 한계가 있습니다. 인터페이스 레벨을 설정하기 전에 해당하는 U 또는 V 변형의 하드웨어 가이드를 확인하십시오.
+나열된 변형의 문서화된 공급 범위는 1.71 V~3.63 V이고 동작 온도 범위는 -40~+85 °C입니다. GPIO 전원 도메인은 1.71 V~3.45 V를 지원하며, 패키지 내부 메모리 I/O 레일에는 별도의 한계가 있습니다. 인터페이스 레벨을 설정하기 전에 해당하는 U 또는 V 변형의 하드웨어 가이드를 확인하십시오.
 
 **`SF32LB566VCB36` 문서 불일치:** [SiFli 칩 모델 가이드](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)에는 코패키지 QSPI-NOR이 1 MB로 나열되어 있지만, 이전 [DS5601 V1.9.2 데이터시트](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-Datasheet%20V1p9p2.pdf)의 주문 정보에는 4 Mb(0.5 MB)로 나열되어 있습니다. SiFli의 현재 [제품 인덱스](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/docs/product-index.rst)는 DS5601 V1.9.3으로 연결되지만, 그 주문 정보는 이번 검토에서 확인할 수 없었으므로 이전의 불일치가 그대로 남아 있다고도, 수정되었다고도 가정하지 마십시오. 이 표는 칩 모델 가이드를 따릅니다. BOM을 확정하기 전에 V1.9.3의 항목을 확인하거나, SiFli에 정확한 주문 코드와 실제 출하되는 메모리 구성을 확인하십시오.
 
@@ -159,12 +159,12 @@ SF32LB56x는 소형 QFN68L 부품부터 I/O가 더 많은 WBBGA175 부품까지 
 
 | 예시 부품 | 패키지 | HCPU / LCPU GPIO | 내장 메모리 | 디스플레이 인터페이스 | 적합한 설계 유형 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB560UNN26 | QFN68L | 24 / 20 | 512 KB QSPI-NOR 플래시 | QSPI | 메모리 사용량이 가장 적고 PCB 브레이크아웃이 가장 단순해야 하는 입문용 56 시리즈 웨어러블, e-paper, 소형 HMI 설계 |
+| SF32LB560UNN26 | QFN68L | 24 / 20 | 512 KB QSPI-NOR 플래시 | QSPI | 메모리 요구량이 가장 적고 PCB 팬아웃이 가장 단순해야 하는 56 시리즈 입문형 웨어러블, e-paper, 소형 HMI 설계 |
 | SF32LB561UBN26 | QFN68L | 24 / 20 | 4 MB OPI-PSRAM + 512 KB QSPI-NOR 플래시 | QSPI | 기본 560 등급보다 큰 프레임버퍼 여유가 필요한 소형 그래픽 설계 |
 | SF32LB563UCN26 | QFN68L | 24 / 20 | 8 MB OPI-PSRAM + 512 KB QSPI-NOR 플래시 | QSPI | 더 저렴한 QFN 경로를 유지하면서 더 높은 해상도의 소형 UI가 필요한 설계 |
 | SF32LB56WUND26 | QFN68L | 24 / 20 | 16 MB OPI-PSRAM + 512 KB QSPI-NOR 플래시 | QSPI | BGA로 넘어가지 않고도 더 큰 로컬 에셋이 필요한 메모리 중심 소형 제품 |
 | SF32LB566VCB36 | WBBGA175 | 79 / 41 | 8 MB + 4 MB OPI-PSRAM + 1 MB QSPI-NOR 플래시 | DPI / QSPI / 8080 / JDI | 더 풍부한 디스플레이 옵션, 더 많은 I/O, SF32LB56-MOD에 사용된 것과 동일한 실리콘이 필요한 풀 기능 웨어러블 및 HMI 설계 |
-| SF32LB567VND36 | WBBGA175 | 79 / 41 | 16 MB OPI-PSRAM + 1 MB QSPI-NOR 플래시 | DPI / QSPI / 8080 / JDI | 모듈의 표준 칩 선택을 사용하지 않고, 더 큰 단일 풀 PSRAM과 고급 디스플레이 라우팅을 우선하는 고I/O 설계 |
+| SF32LB567VND36 | WBBGA175 | 79 / 41 | 16 MB OPI-PSRAM + 1 MB QSPI-NOR 플래시 | DPI / QSPI / 8080 / JDI | 모듈의 표준 칩 선택을 사용하지 않고, 더 큰 PSRAM을 단일 메모리 풀로 활용하고 고급 디스플레이 라우팅을 우선하는 고I/O 설계 |
 
 </div>
 

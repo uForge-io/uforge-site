@@ -14,7 +14,7 @@ tags:
 
 이 문서의 Classic Bluetooth 및 듀얼 모드 부분은 BR/EDR을 지원하는 디바이스와 펌웨어 구성에만 적용하십시오. BLE 전용 제품에도 같은 방법을 사용하는 것이 좋지만, 시나리오 계획은 BLE까지만 다룹니다.
 
-Nordic의 [Online Power Profiler for Bluetooth LE](https://devzone.nordicsemi.com/power/w/opp/2/online-power-profiler-for-bluetooth-le)는 BLE의 개념을 파악하는 데 유용한 레퍼런스입니다. Nordic은 이 도구를 측정에서 도출한 모델로서 기대값을 산출하는 것이지, 특정 디바이스를 측정한 결과가 아니라고 설명합니다. 공개된 정확도 경험은 Nordic 레퍼런스 부품에만 해당하므로 SF32에 적용해서는 안 됩니다. 또한 Classic Bluetooth나 듀얼 모드 제품은 모델링하지 않습니다. 모델은 무엇을 테스트할지 정하는 데 사용하고, 제품의 결과는 타깃 디바이스의 전류 측정으로 확정하십시오.
+Nordic의 [Online Power Profiler for Bluetooth LE](https://devzone.nordicsemi.com/power/w/opp/2/online-power-profiler-for-bluetooth-le)는 BLE의 개념을 파악하는 데 유용한 레퍼런스입니다. Nordic은 이 도구가 측정에서 도출한 모델로 기대값을 산출할 뿐, 특정 디바이스를 직접 측정하는 것은 아니라고 설명합니다. Nordic이 공개한 정확도 관련 정보는 Nordic 레퍼런스 부품에만 적용되므로 SF32에는 적용해서는 안 됩니다. 또한 Classic Bluetooth나 듀얼 모드 제품은 모델링하지 않습니다. 모델은 테스트 대상을 정하는 데 활용하고, 제품의 실제 결과는 타깃 디바이스의 전류를 측정해 확정하십시오.
 
 ## 측정 대상 정의 { #define-what-you-are-measuring }
 
@@ -32,7 +32,7 @@ Nordic의 [Online Power Profiler for Bluetooth LE](https://devzone.nordicsemi.co
 
 </div>
 
-제품의 배터리 수명을 주장하려면 가능한 한 배터리 또는 제품 주 입력 경계에서 측정하십시오. 전류와 함께 전압도 기록해야 결과를 전원 조건과 분리된 전류값이 아니라 전력과 에너지로 표현할 수 있습니다.
+제품의 배터리 수명을 사양으로 제시하려면 가능한 한 배터리 또는 제품 주 입력 경계에서 측정하십시오. 전류와 함께 전압도 기록해야 결과를 전원 조건과 분리된 전류값이 아니라 전력과 에너지로 표현할 수 있습니다.
 
 ## 반복 가능한 테스트 구성 { #set-up-a-repeatable-test }
 
@@ -63,15 +63,15 @@ flowchart LR
 
 ## BLE 광고 이벤트의 전력 단계 이해 { #read-a-ble-advertising-event-as-a-set-of-power-components }
 
-일반적인 BLE 광고(advertising) 이벤트는 라디오 펄스 하나로 끝나지 않습니다. 짧은 전원 인가 및 준비 단계로 시작하여, 고주파 크리스털 오실레이터의 기동과 안정화가 이어집니다. 전원과 클럭이 준비되면 디바이스는 예약된 라디오 시작 시점까지 standby 상태에 들어갑니다. 여기에 제시한 scannable 또는 connectable 예시에서는 라디오를 시작하고, 기본 광고 채널(primary advertising channel)에서 송신한 뒤, 같은 채널에서 수신 윈도우를 엽니다. 처음 두 번의 수신 윈도우 이후에는 다음 채널에서 송신하기 전에 standby로 돌아가며, 마지막 수신 윈도우 이후에는 후처리를 수행합니다. non-connectable, non-scannable 이벤트는 요청을 수신하지 않습니다. 실제 단계는 구성한 광고 유형과 채널 맵에 따라 달라집니다.
+일반적인 BLE 광고(advertising) 이벤트는 라디오 펄스 하나로 끝나지 않습니다. 짧은 전원 인가 및 준비 단계로 시작하여, 고주파 크리스털 오실레이터의 기동과 안정화가 이어집니다. 전원과 클럭이 준비되면 디바이스는 예약된 라디오 시작 시점까지 Standby 상태에 들어갑니다. 여기에 제시한 스캔 가능(scannable) 또는 연결 가능(connectable) 광고의 예시에서는 라디오를 시작하고, 기본 광고 채널(primary advertising channel)에서 송신한 뒤, 같은 채널에서 수신 윈도우를 엽니다. 처음 두 번의 수신 윈도우 이후에는 다음 채널에서 송신하기 전에 Standby로 돌아가며, 마지막 수신 윈도우 이후에는 후처리를 수행합니다. 연결 불가·스캔 불가(non-connectable, non-scannable) 이벤트는 요청을 수신하지 않습니다. 실제 단계는 구성한 광고 유형과 채널 맵에 따라 달라집니다.
 
-도식에 그려진 전체 시퀀스는 Pre-processing → Crystal ramp-up → Standby → Start radio → Radio TX → Radio switch → Radio RX → Standby → Radio TX → Radio switch → Radio RX → Standby → Radio TX → Radio switch → Radio RX → Post-processing입니다. Start radio는 한 번만 발생하며, 채널 38과 39의 송신은 이전 채널의 RX 윈도우 이후 standby 구간을 거쳐 시작됩니다. 이 시퀀스는 Nordic의 [일반적인 BLE 광고 이벤트 도해](https://devzone.nordicsemi.com/power/w/opp/2/online-power-profiler-for-bluetooth-le)에 나온 단계를 따릅니다. 이는 일반적인 BLE 이벤트 단계이며 Nordic 고유의 라디오 상태가 아니고, 이 재작성본은 다른 상태를 추가하지 않습니다. 전류 수준과 시간 비율은 설명을 위한 것이며 SF32 측정값이 아닙니다. 타깃 디바이스에서 직접 측정하십시오.
+그림에 표시된 전체 시퀀스는 Pre-processing → Crystal ramp-up → Standby → Start radio → Radio TX → Radio switch → Radio RX → Standby → Radio TX → Radio switch → Radio RX → Standby → Radio TX → Radio switch → Radio RX → Post-processing입니다. Start radio는 한 번만 발생하며, 채널 38과 39의 송신은 이전 채널의 RX 윈도우 이후 Standby 구간을 거쳐 시작됩니다. 이 시퀀스는 Nordic의 [일반적인 BLE 광고 이벤트 도해](https://devzone.nordicsemi.com/power/w/opp/2/online-power-profiler-for-bluetooth-le)에 나온 단계를 따릅니다. 이는 일반적인 BLE 이벤트 단계이며 Nordic 고유의 라디오 상태가 아니고, 이 설명은 다른 상태를 추가하지 않습니다. 전류 수준과 시간 비율은 설명을 위한 것이며 SF32 측정값이 아닙니다. 타깃 디바이스에서 직접 측정하십시오.
 
 <div align="center"><em>그림: BLE 광고 이벤트 단계</em></div>
 
 ![BLE 광고 이벤트 단계](assets/ble-advertising-event-stages.svg)
 
-이 도해는 세 개의 기본 채널을 모두 사용하는 레거시 scannable 또는 connectable 광고 이벤트를 나타내며, 요청/응답 교환은 표시하지 않습니다. 37, 38, 39라는 표기는 설명을 위한 것입니다. Bluetooth Core Specification은 사용하는 기본 채널 인덱스를 임의의 순서로 허용하며, 어떤 인덱스를 쓸지는 구성한 채널 맵이 결정합니다. 이벤트는 보통 사용하는 인덱스마다 광고 PDU를 하나씩, 인덱스당 최대 하나만 전송합니다. 세 번의 송신은 서로 다른 채널에서 광고 데이터의 사본을 전달하는 것이며, 확인 응답에 따른 재시도가 아닙니다. scannable 또는 connectable 광고에서는 Link Layer가 허용된 요청을 같은 기본 채널에서 수신 대기하며, non-connectable, non-scannable 이벤트는 요청을 수신하지 않습니다. [Bluetooth Core 6.2 Link Layer 사양](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/low-energy-controller/link-layer-specification.html)과 [Bluetooth SIG 입문서](https://www.bluetooth.com/bluetooth-le-primer/)를 참조하십시오. 확장 광고, 다른 채널 맵, 또는 수신한 요청에 따라 트레이스가 달라질 수 있으므로 타깃 디바이스에서 구성한 동작을 확인하십시오.
+이 도해는 세 개의 기본 채널을 모두 사용하는 레거시 스캔 가능 또는 연결 가능(scannable 또는 connectable) 광고 이벤트를 나타내며, 요청/응답 교환은 표시하지 않습니다. 37, 38, 39라는 표기는 설명을 위한 것입니다. Bluetooth Core Specification은 사용하는 기본 채널 인덱스를 임의의 순서로 허용하며, 어떤 인덱스를 쓸지는 구성한 채널 맵이 결정합니다. 이벤트는 보통 사용하는 인덱스마다 광고 PDU를 하나씩, 인덱스당 최대 하나만 전송합니다. 세 번의 송신은 서로 다른 채널에서 광고 데이터의 사본을 전달하는 것이며, 확인 응답에 따른 재시도가 아닙니다. 스캔 가능 또는 연결 가능 광고에서는 Link Layer가 허용된 요청을 같은 기본 채널에서 수신 대기하며, 연결 불가·스캔 불가 이벤트는 요청을 수신하지 않습니다. [Bluetooth Core 6.2 Link Layer 사양](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/low-energy-controller/link-layer-specification.html)과 [Bluetooth SIG 입문서](https://www.bluetooth.com/bluetooth-le-primer/)를 참조하십시오. 확장 광고, 다른 채널 맵, 또는 수신한 요청에 따라 트레이스가 달라질 수 있으므로 타깃 디바이스에서 구성한 동작을 확인하십시오.
 
 <div align="center"><em>표: BLE 광고 이벤트 전력 트레이스의 단계</em></div>
 
@@ -81,7 +81,7 @@ flowchart LR
 |:------|:----------------------------|:---------------|
 | Pre-processing | 비교적 큰 전류를 소비할 수 있는 짧은 전원 인가 단계, 그리고 CPU/컨트롤러 준비, 페이로드 처리, DMA, 메모리 접근, 주변 장치 설정 | `I_pre`와 `t_pre`; 필요한 웨이크 및 전원 인가 작업을 파악하고, 피할 수 있는 작업은 제거하거나 일괄 처리 |
 | Crystal ramp-up | 고주파 클럭의 기동과 안정화 | `I_xtal`과 `t_xtal`; 클럭 정책과 웨이크 시퀀스가 필요 이상으로 길지 않은지 확인 |
-| Standby | 전원과 클럭이 준비된 뒤 선택한 저전력 상태, 리텐션 로직, 저주파 타이밍, 활성화된 웨이크 소스 | `I_standby`와 라디오 시작 전의 초기 대기, 그리고 RX 이후 채널 간 standby 구간; 이 이벤트 내 전류를 완전한 이벤트 사이의 슬립 전류와 같다고 보지 말 것 |
+| Standby | 전원과 클럭이 준비된 뒤 선택한 저전력 상태, 리텐션 로직, 저주파 타이밍, 활성화된 웨이크 소스 | `I_standby`와 라디오 시작 전의 초기 대기, 그리고 RX 이후 채널 간 Standby 구간; 이 이벤트 내 전류를 완전한 이벤트 사이의 슬립 전류와 같다고 보지 말 것 |
 | Start radio | 첫 송신 전의 라디오/컨트롤러 준비와 필요한 RF 전원 경로 | `I_start`와 `t_start`; 불필요한 준비 작업이나 반복되는 기동 작업을 파악 |
 | Radio TX | 라디오 송신 경로, 컨트롤러 작업, 채널 37, 38, 39에서의 광고 패킷 송신 | 모든 패킷에 대한 `I_tx`와 `t_tx`; TX 전력, 패킷 길이, 활성화된 채널이 패킷과 이벤트의 에너지를 결정 |
 | Radio switch | 라디오의 송신-수신 전환과 컨트롤러 상태 전이 | `I_switch`와 `t_switch`; 전환을 무시할 수 있는 시간으로 취급하지 말고 모든 전환을 계수 |
@@ -105,7 +105,7 @@ Q_event = sum(I_stage x t_stage)
 I_average = (Q_event + I_idle x (T_cycle - t_event)) / T_cycle
 ```
 
-여기서 `Q_event`는 이벤트 내부의 standby 구간을 포함하여 완전한 이벤트의 모든 단계를 포함하고, `t_event`는 해당 이벤트의 전체 지속 시간입니다. `I_idle`은 완전한 이벤트 사이에서 측정한 전류이며, 이벤트 내 `I_standby`가 아닙니다. `T_cycle`은 광고 지연과 스케줄링 영향을 포함하여 측정한 시작 간 간격입니다. 간격이 가변적인 경우에는 구성한 광고 간격이 정확한 주기 길이라고 가정하지 말고, 대표성 있는 긴 트레이스를 적분하십시오.
+여기서 `Q_event`는 이벤트 내부의 Standby 구간을 포함하여 완전한 이벤트의 모든 단계를 포함하고, `t_event`는 해당 이벤트의 전체 지속 시간입니다. `I_idle`은 완전한 이벤트 사이에서 측정한 전류이며, 이벤트 내 `I_standby`가 아닙니다. `T_cycle`은 광고 지연과 스케줄링 영향을 포함하여 측정한 시작 간 간격입니다. 간격이 가변적인 경우에는 구성한 광고 간격이 정확한 주기 길이라고 가정하지 말고, 대표성 있는 긴 트레이스를 적분하십시오.
 
 전압이 고정된 상태에서 어떤 단계의 측정 전류 또는 지속 시간이 두 배가 되면 그 에너지도 두 배가 됩니다. 짧은 TX, RX, 기동 버스트가 이벤트 에너지를 지배할 수 있으며, 간격이 길면 이벤트 사이의 유휴 소비가 평균 전류를 지배할 수 있습니다. GPIO나 오버헤드가 낮은 펌웨어 이벤트로 단계를 표시하고, 최적화 대상을 정하기 전에 완제품의 전원 입력에서 측정하십시오.
 
@@ -133,7 +133,7 @@ SiFli의 [BLE/BT 소비 전력 테스트](https://docs.sifli.com/projects/sdk/la
 
 ## 독립 라디오 모드로서의 BLE 프로파일링 { #profile-ble-as-a-standalone-radio-mode }
 
-BLE만으로 시작하십시오. 그러면 Classic Bluetooth 프로파일 트래픽이나 모드 간 스케줄링이 트레이스를 가리지 않는 BLE 기준선을 확립할 수 있습니다.
+BLE만으로 시작하십시오. 그러면 Classic Bluetooth 프로파일 트래픽이나 모드 간 스케줄링이 트레이스를 가리지 않는 BLE 기준선을 세울 수 있습니다.
 
 <div align="center"><em>표: 독립 BLE 시나리오 세트</em></div>
 
@@ -197,7 +197,7 @@ flowchart LR
 
 ## 트레이스와 펌웨어 동작의 대응 { #correlate-the-trace-with-firmware-behavior }
 
-실제 디바이스 소비를 찾는 핵심은 귀속(attribution)입니다. 제품 작업의 시작과 끝을 표시하거나 로그로 남겨, 트레이스가 전류가 변한 이유에 답하도록 하십시오.
+실제 디바이스 소비를 찾는 핵심은 전류 변화를 제품 동작에 대응시켜 원인을 추적하는 것입니다. 제품 작업의 시작과 끝을 표시하거나 로그로 남겨, 트레이스가 전류가 변한 이유에 답하도록 하십시오.
 
 - 애플리케이션이 시작한 전송 또는 알림 버스트의 전후.
 - 디스플레이, 센서, 플래시, 오디오 경로 또는 기타 외부 부품이 활성화되거나 비활성화될 때.
@@ -243,7 +243,7 @@ E_day = sum(E_scenario x events_per_day) + E_mode_idle + E_other_states
 
 시나리오 에너지에는 해당 시나리오를 완료하는 데 필요한 디바이스 작업 전체가 포함되어야 합니다. 예를 들어 휴대폰 알림에는 연결 이벤트, 호스트 처리, 센서 또는 플래시 접근, 디스플레이 갱신, 슬립 복귀가 포함될 수 있습니다. RF 펄스만 측정하면 디바이스의 에너지를 과소평가하게 되고, 트레이스 마커 없이 제품 전체를 측정하면 원인을 개선할 수 없게 됩니다.
 
-## 모델과 디바이스의 정합 { #reconcile-the-model-with-the-device }
+## 모델과 디바이스 대조 { #reconcile-the-model-with-the-device }
 
 첫 번째 모델은 기여도가 큰 요인의 순위를 매기는 데 사용하고, 이후 실제 측정으로 갱신하십시오. 추정치와 트레이스의 차이는 가치가 있습니다. 누락된 이벤트, 잘못된 지속 시간, 예기치 않은 웨이크업, 포함하지 않은 외부 부하를 가리키기 때문입니다.
 
@@ -260,7 +260,7 @@ flowchart LR
     G --> A
 ```
 
-<div align="center"><em>표: 정합 질문</em></div>
+<div align="center"><em>표: 모델과 측정값 대조 질문</em></div>
 
 <div align="center" markdown>
 
@@ -305,7 +305,7 @@ flowchart LR
 - [ ] 출하하는 각 Classic Bluetooth 데이터 또는 오디오 프로파일에 대해 정의되고 측정된 워크로드가 있습니다.
 - [ ] 듀얼 모드 시나리오를 단일 모드 결과의 합으로 추정하지 않고 결합된 제품 상태로 측정했습니다.
 - [ ] 해당하는 경우 대표적인 전송, 연결 해제, 재연결 동작을 측정했습니다.
-- [ ] 시나리오 에너지를 현실적인 일일 빈도로 환산하여 배터리 예산과 정합시켰습니다.
+- [ ] 시나리오 에너지를 현실적인 일일 빈도로 환산하여 배터리 예산과 대조했습니다.
 - [ ] 가장 큰 에너지 요인에 담당자가 지정되어 있고 최적화 또는 인수 결정이 내려져 있습니다.
 
 ## 관련 리소스 { #related-resources }

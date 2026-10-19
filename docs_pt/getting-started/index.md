@@ -21,7 +21,7 @@ Para conhecer o fluxo de desenvolvimento de referência e o escopo atual de cada
 
 | Caminho | Status atual | Comece aqui |
 |:-----|:---------------|:-----------|
-| **SiFli-SDK** | Caminho oficial da SiFli para desenvolvimento de referência em SF32, com RT-Thread, Bluetooth, gráficos, áudio, baixo consumo e preparação inicial das placas. | [SiFli-SDK](sifli/getting-started-sifli-sdk.md) |
+| **SiFli-SDK** | Caminho oficial da SiFli para desenvolvimento de referência em SF32, com RT-Thread, Bluetooth, gráficos, áudio, baixo consumo e bring-up de placas. | [SiFli-SDK](sifli/getting-started-sifli-sdk.md) |
 | **SiFli CodeKit** | Fluxo oficial da SiFli para VS Code: configurar o SDK, criar projetos, compilar, gravar o firmware e usar o monitor serial. | [SiFli CodeKit](sifli/getting-started-sifli-codekit.md) |
 | **Zephyr** | Desde o Zephyr v4.3.0, o projeto principal do Zephyr mantém suporte à `sf32lb52_devkit_lcd`. | [Zephyr upstream](zephyr/getting-started-zephyr-upstream.md) |
 | **Arduino** | O OpenSiFli oferece uma versão beta do pacote ArduinoCore-zephyr para a SF32LB52 DevKit LCD. | [Arduino](arduino/getting-started-arduino.md) |

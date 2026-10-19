@@ -2,13 +2,13 @@
 icon: lucide/table-properties
 description: "SiFli-SDK 파티션 테이블로 SF32 메모리 레이아웃을 기술하는 방법입니다. 레거시 JSON v1/v2 형식과 권장 YAML v3 형식, 오버레이, 생성 파일, 검증을 비교합니다."
 tags:
-    - Develop
-    - Partitions
+    - 개발
+    - 파티션
 ---
 
 # 파티션 테이블 { #partition-tables }
 
-SiFli-SDK의 `partition_table` 빌드 도구는 보드의 파티션 기술 파일을 읽어 애플리케이션이 사용하는 파티션 매크로를 제공하는 `ptab.h`를 생성합니다. 파티션 테이블은 NOR 플래시, NAND 플래시, eMMC, SD 카드, PSRAM, 온칩 SRAM을 포함하여 관련된 모든 메모리의 주소 레이아웃을 기술합니다.
+SiFli-SDK의 `partition_table` 빌드 도구는 보드의 파티션 정의 파일을 읽어 애플리케이션이 사용하는 파티션 매크로를 담은 `ptab.h`를 생성합니다. 파티션 테이블은 NOR 플래시, NAND 플래시, eMMC, SD 카드, PSRAM, 온칩 SRAM 등 관련 메모리의 주소 배치를 기술합니다.
 
 각 보드에는 기본 레이아웃이 있으며, 해당 보드용으로 빌드되는 모든 애플리케이션이 이를 따릅니다. 프로젝트가 자체 파티션 테이블 구성을 제공하여 보드 기본값을 대체할 수도 있습니다.
 
@@ -58,7 +58,7 @@ v1은 `ptab.json`의 JSON 배열을 사용합니다. 전용 버전 필드는 없
 
 | 필드 | 용도 |
 | --- | --- |
-| `ftab` | 플래시 Table 항목을 기술합니다. |
+| `ftab` | Flash Table 항목을 기술합니다. |
 | `img` | 생성되는 프로그래밍 스크립트에서 사용할, 파티션 안의 이미지 이름을 지정합니다. 프로젝트가 여러 바이너리를 출력하는 경우 `proj_name:binary_name`을 사용합니다. |
 | `exec` | 공유 링크 스크립트가 코드 주소를 선택할 수 있도록 실행 프로그램의 이름을 지정합니다. |
 | `custom` | 생성되는 `ptab.h`에 정수 값을 갖는 커스텀 매크로를 추가합니다. |
@@ -113,13 +113,13 @@ v3는 `ptab.yaml`을 사용하며 권장 형식입니다. 레거시 `tags` 모�
 
 | 타입 | 서브타입 또는 용도 | 의미 |
 | --- | --- | --- |
-| `ftab` | — | 플래시 Table 파티션. |
+| `ftab` | — | Flash Table 파티션. |
 | `bootloader` | — | 부트로더 파티션. |
-| `app` | `factory` | 공장 출하 메인 애플리케이션. `CODE_START_ADDR`와 `CODE_SIZE`를 생성합니다. |
+| `app` | `factory` | 공장 출하 시 기본 애플리케이션. `CODE_START_ADDR`와 `CODE_SIZE`를 생성합니다. |
 | `app` | `dfu` | 독립 DFU 애플리케이션. |
 | `app` | `ex` | 리소스 파티션. 빌드가 툴체인별 리소스 이미지 출력을 생성합니다. |
 | `data` | `flashdb_kv` | FlashDB KV 데이터베이스. `KVDB_*` 매크로를 생성하며 `FAL_PART_TABLE`에 포함됩니다. |
-| `data` | `filesystem`, `littlefs`, `fat`, 또는 `fatfs` | 레퍼런스는 `filesystem`이 `FS_REGION_*` 매크로를 생성하고 `FAL_PART_TABLE`에 포함된다고 명시합니다. 다른 부분에서는 `littlefs`, `fat`, `fatfs`도 매크로를 생성하는 서브타입으로 나열하면서 현재는 아무 효과가 없다고 설명하므로, 이 세 서브타입의 동작은 타깃 SDK 릴리스에서 확인하십시오. 같은 매크로 절에서는 서브타입 이름으로 `flashdb`를 사용하지만 서브타입 표와 FAL 규칙에서는 `flashdb_kv`를 사용합니다. 타깃 SDK를 확인하지 않고 이 이름들이 별칭이라고 가정하지 마십시오. |
+| `data` | `filesystem`, `littlefs`, `fat`, 또는 `fatfs` | 레퍼런스는 `filesystem`이 `FS_REGION_*` 매크로를 생성하고 `FAL_PART_TABLE`에 포함된다고 명시합니다. 다른 부분에서는 `littlefs`, `fat`, `fatfs`도 매크로를 생성하는 서브타입으로 나열하지만 현재 빌드 동작에는 영향이 없다고 설명합니다. 따라서 이 세 서브타입의 실제 동작은 타깃 SDK 릴리스에서 확인하십시오. 같은 매크로 절에서는 서브타입 이름으로 `flashdb`를 사용하지만 서브타입 표와 FAL 규칙에서는 `flashdb_kv`를 사용합니다. 타깃 SDK를 확인하지 않고 이 이름들이 별칭이라고 가정하지 마십시오. |
 | `data` | `ram`, `calibration`, `raw`, 또는 `int_res` | RAM, 캘리브레이션, 애플리케이션이 관리하는 원시 데이터, 또는 ELF에 링크되어 섹션 이름으로 분할되는 내부 리소스 데이터. |
 
 </div>
@@ -161,7 +161,7 @@ partitions:
 | 출력 | 용도 |
 | --- | --- |
 | `ptab.h` | 파티션 매크로를 담은 생성된 C 헤더. |
-| `ftab.bin` | 부트로더가 사용하는 바이너리 플래시 Table. v3에서는 `ftab` 서브프로젝트 없이 Python이 직접 생성합니다. |
+| `ftab.bin` | 부트로더가 사용하는 바이너리 Flash Table. v3에서는 `ftab` 서브프로젝트 없이 Python이 직접 생성합니다. |
 | `link_copy.lds` / `link_copy.sct` | 생성된 GCC 또는 Keil 링크 스크립트 사본. v3는 Jinja2 템플릿을 사용합니다. |
 | `ptab.effective.yaml` | 오버레이가 활성화된 경우, 오버레이 처리 후의 최종 v3 테이블. |
 
@@ -181,7 +181,7 @@ sdk.py ptab-export --board=<board-name> --output /tmp/ptab.effective.yaml
 sdk.py ptab-export --strict
 ```
 
-## 생성된 플래시 Table 확인 { #inspect-the-generated-flash-table }
+## 생성된 Flash Table 확인 { #inspect-the-generated-flash-table }
 
 빌드 후 `ftab.bin`은 빌드 디렉터리에 배치됩니다. SDK 환경을 초기화한 다음, 현재 프로젝트 아래에서 처음 발견되는 `build_*/ftab.bin`을 확인하십시오.
 

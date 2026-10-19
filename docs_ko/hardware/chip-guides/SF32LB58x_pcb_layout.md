@@ -11,7 +11,7 @@ tags:
 # SF32LB58x 하드웨어 설계 가이드 — PCB 레이아웃 가이드라인 { #sf32lb58x-hardware-design-guide-pcb-layout-guidelines }
 
 !!! note "SF32LB58x 하드웨어 설계 가이드의 일부"
-    이 페이지는 6절, PCB 레이아웃 가이드라인을 다룹니다. [회로도 설계 가이드라인](SF32LB58x_schematic_design.md)으로 돌아가거나, [PCB 레이아웃 체크리스트](SF32LB58x_pcb_layout_checklist.md)로 계속 진행하거나, [설계 검토 체크리스트 및 참고 자료](SF32LB58x_review_and_reference.md)로 바로 이동하십시오.
+    이 페이지는 6절, PCB 레이아웃 가이드라인을 다룹니다. [회로도 설계 가이드라인](SF32LB58x_schematic_design.md)으로 돌아가거나, [PCB 레이아웃 체크리스트](SF32LB58x_pcb_layout_checklist.md)를 확인하거나, [설계 검토 체크리스트 및 참고 자료](SF32LB58x_review_and_reference.md)로 이동하십시오.
 
 ## 6. PCB 레이아웃 가이드라인 { #6-pcb-layout-guidelines }
 

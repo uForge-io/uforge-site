@@ -22,7 +22,7 @@ SiFli-SDK 전원 관리 예제는 범용 전류 사양이 아니라 측정 및 �
 | 엔지니어링 목표 | 시작 예제 | 확립에 도움이 되는 내용 | 제품에서 다시 확인할 사항 |
 |:-----------------|:-----------|:------------------------|:-------------------------|
 | 기본 PM 상태 진입과 웨이크업 동작 확인 | [PM 예제](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/classical/README.html) | SDK의 기본 전원 관리 구성과 슬립/웨이크업 흐름 | 실제 웨이크업 소스, 클럭 의존성, 유지되는 상태, 모든 드라이버의 PM 요청 |
-| 저전력 상태에서 GPIO 동작 특성 파악 | [GPIO 소비 전력 테스트](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/gpio/README.html) | 주기적인 타이머 웨이크업, GPIO 액세스, 웨이크업·슬립·I/O 동작의 차이 | 외부 풀, 전원이 꺼진 주변 장치, 핀 먹스, 전압 레일, 의도하지 않은 누설 경로 |
+| 저전력 상태에서 GPIO 동작 특성 파악 | [GPIO 소비 전력 테스트](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/gpio/README.html) | 주기적인 타이머 웨이크업, GPIO 접근, 웨이크업·슬립·I/O 동작의 차이 | 외부 풀, 전원이 꺼진 주변 장치, 핀 멀티플렉싱 설정, 전압 레일, 의도하지 않은 누설 경로 |
 | 연산 작업과 셧다운 동작 분리 | [프로세서 소비 전력 테스트](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/coremark/README.html) | CPU 벤치마크/루프 워크로드, 셧다운, RTC 웨이크업, 핀 웨이크업 | 코어 주파수, 워크로드, 웨이크업 핀 극성, 보드별 웨이크업 매핑, 공급 전압 |
 | Bluetooth 시나리오 측정 | [BLE 브로드캐스트 및 연결 소비 전력 테스트](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/ble/README.html) 또는 [BLE/BT 소비 전력 테스트](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) | 측정 시나리오로서의 광고, 연결, Bluetooth 동작 | RF 조건, TX 전력, 간격, 상대 기기 동작, 안테나, 애플리케이션 콜백 |
 | 화면 꺼짐 정책과 상시 표시 AMOLED 정책 비교 | [AMOLED 소비 전력 테스트](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/AMOLED/README.html) | 디스플레이 리프레시, 화면 꺼짐 슬립, 상시 화면 표시와의 비교 | 실제 패널, 밝기, 리프레시 정책, 디스플레이 전원 레일, 사용자 듀티 사이클 |

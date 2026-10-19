@@ -26,7 +26,7 @@ Bluetooth 오디오(A2DP, LE Audio)는 관련되지만 별개의 주제이며 [B
 - 로컬 오디오와 병행하여 Bluetooth 오디오(Classic 또는 LE Audio)도 필요한가?
 - 음성 트리거 또는 상시 청취 동작이 필요한가, 그리고 그 전력 예산은 얼마인가?
 - 스피커/라인 출력의 구동 요구 사항은 무엇인가, 아니면 출력을 외부 앰프/코덱으로 보내는가?
-- 지연 시간 허용 범위 - 음성 통화와 실시간 모니터링은 알림음보다 훨씬 엄격합니다.
+- 지연 시간 허용 범위: 음성 통화와 실시간 모니터링은 알림음보다 훨씬 엄격합니다.
 
 이러한 답에 따라 인터페이스(I2S 대 PDM 대 ADC/DAC), 코덱 구성, 파이프라인에서 깨어 있어야 하는 범위가 결정됩니다.
 
@@ -68,8 +68,8 @@ AMIC와 DMIC는 마이크 유형을 나타내고, PDM과 I2S는 디지털 인터
 
 | 마이크 / 버스 | 일반적인 용도 | 참고 사항 |
 |:----------|:------------|:------|
-| **AMIC (아날로그 마이크 입력)** | 범용 마이크 캡처 | 오디오 ADC를 사용하며, 마이크 바이어스, 게인, 입력 범위, 보드 노이즈 제어를 확인해야 합니다. |
-| **DMIC (디지털 마이크)** | 음성 캡처, 멀티 마이크 어레이 | 실제 PDM 또는 I2S 버스를 선택합니다. 디지털 신호라고 해서 전원 노이즈, 클럭, 레이아웃 요구 사항이 없어지지는 않습니다. |
+| **AMIC(아날로그 마이크 입력)** | 범용 마이크 캡처 | 오디오 ADC를 사용하며, 마이크 바이어스, 게인, 입력 범위, 보드 노이즈 제어를 확인해야 합니다. |
+| **DMIC(디지털 마이크)** | 음성 캡처, 멀티 마이크 어레이 | 실제 PDM 또는 I2S 버스를 선택합니다. 디지털 신호라고 해서 전원 노이즈, 클럭, 레이아웃 요구 사항이 없어지지는 않습니다. |
 | **I2S** | 외부 코덱 또는 앰프와의 PCM 스트리밍 | 온칩 AUDCODEC 경로 대신 외부 오디오 코덱/앰프를 사용할 때 흔히 쓰입니다. |
 | **PDM** | 디지털 마이크 입력 | 많은 DMIC 부품의 기본 인터페이스이며, 온칩 PDM-to-PCM 변환과 함께 사용됩니다. |
 
@@ -89,7 +89,7 @@ AMIC와 DMIC는 마이크 유형을 나타내고, PDM과 I2S는 디지털 인터
 
 <div align="center" markdown>
 
-| 디바이스 제품군 | 내장 오디오 ADC/DAC | PDM 인터페이스 (최대 마이크 수) | I2S 인터페이스 | 적용 방향 |
+| 디바이스 제품군 | 내장 오디오 ADC/DAC | PDM 인터페이스(최대 마이크 수) | I2S 인터페이스 | 적용 방향 |
 |:---|:---|:---|:---|:---|
 | **SF32LB52x** | ADC 1개 + DAC 1개 | 1 (2) | 1 | 비용 최적화된 Bluetooth 오디오 액세서리, 음성 지원 소형 HMI. |
 | **SF32LB55x** | 없음; 아날로그 오디오에는 외부 오디오 코덱을 사용합니다. | SF32LB551/555: 1 (2); SF32LB557: 2 (4) | SF32LB551/555: 1; SF32LB557: 2 | 오디오가 부차적인 BLE 웨어러블 및 센서 중심 제품. |
@@ -99,9 +99,9 @@ AMIC와 DMIC는 마이크 유형을 나타내고, PDM과 I2S는 디지털 인터
 
 </div>
 
-디바이스를 선택하기 전에 정확한 모델, 패키지 핀 배치, 핀 먹스, 동시 경로를 확인하십시오. PDM 인터페이스 하나는 호환되는 마이크 2개를 지원할 수 있으며, ADC 채널, 마이크 채널, 디지털 인터페이스 인스턴스는 서로 다른 리소스입니다. I2S 기능은 인스턴스에 따라 다릅니다. SF32LB58x에서 I2S1은 수신(RX)만 지원하고, I2S2와 I2S3은 수신과 송신(RX/TX)을 모두 지원합니다. 또한 I2S2 수신에는 클럭 소스로서 TX 측을 활성화해야 합니다. 인스턴스별 세부 사항은 [SiFli I2S HAL 가이드](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/hal/i2s.html)를, 더 넓은 선택 요소는 [SF32 제품군](../../sf32-products/family/SF32_family.md)를 참조하십시오.
+디바이스를 선택하기 전에 정확한 모델, 패키지 핀 배치, 핀 먹스, 동시 경로를 확인하십시오. PDM 인터페이스 하나는 호환되는 마이크 2개를 지원할 수 있으며, ADC 채널, 마이크 채널, 디지털 인터페이스 인스턴스는 서로 다른 리소스입니다. I2S 기능은 인스턴스에 따라 다릅니다. SF32LB58x에서 I2S1은 수신(RX)만 지원하고, I2S2와 I2S3은 수신과 송신(RX/TX)을 모두 지원합니다. 또한 I2S2 수신에는 클럭 소스로서 TX 측을 활성화해야 합니다. 인스턴스별 세부 사항은 [SiFli I2S HAL 가이드](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/hal/i2s.html)를, 더 넓은 선택 요소는 [SF32 제품군](../../sf32-products/family/SF32_family.md)을 참조하십시오.
 
-출처 참고 자료: [DS5201](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5.pdf), [DS5501, Table 0-1](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-Datasheet%20V1p7p2.pdf), [DS5601](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-Datasheet%20V1p9p2.pdf), [DS5801](https://downloads.sifli.com/user%20manual/DS5801-SF32LB58x-Datasheet%20V1p8p3.pdf), [SF32LB57x AUDCODEC 레지스터 (ADC_CH0/1, DAC_CH0)](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/cmsis/sf32lb57x/audcodec.h), [SF32LB57x PDM/I2S 인스턴스](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/cmsis/sf32lb57x/register.h), [SiFli SDK v2.5.1 릴리스 노트 (57x 4마이크 PDM 구성)](https://github.com/OpenSiFli/SiFli-SDK/releases/tag/v2.5.1), [SiFli SDK PDM 예제 (57x 보드, PDM1, 스테레오 채널)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/rt_device/pdm/README.html).
+출처 참고 자료: [DS5201](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5.pdf), [DS5501, 표 0-1](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-Datasheet%20V1p7p2.pdf), [DS5601](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-Datasheet%20V1p9p2.pdf), [DS5801](https://downloads.sifli.com/user%20manual/DS5801-SF32LB58x-Datasheet%20V1p8p3.pdf), [SF32LB57x AUDCODEC 레지스터 (ADC_CH0/1, DAC_CH0)](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/cmsis/sf32lb57x/audcodec.h), [SF32LB57x PDM/I2S 인스턴스](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/cmsis/sf32lb57x/register.h), [SiFli SDK v2.5.1 릴리스 노트 (57x 4마이크 PDM 구성)](https://github.com/OpenSiFli/SiFli-SDK/releases/tag/v2.5.1), [SiFli SDK PDM 예제 (57x 보드, PDM1, 스테레오 채널)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/rt_device/pdm/README.html).
 
 ## 오디오 세션 템플릿 { #audio-session-templates }
 
@@ -203,7 +203,7 @@ RF와 아날로그 오디오가 모두 있는 제품은 Bluetooth 활성, 디스
 - 사용하지 않는 오디오 경로는 부품과 드라이버에서 요구하는 순서에 따라 세션 사이에 중지하십시오. 앰프 뮤트/셧다운, 클럭, 전원, GPIO 상태를 확인하여 팝 노이즈, 역전원 공급, 인터페이스 누설을 방지하십시오.
 - 상시 청취 음성 트리거의 경우 필요한 캡처 경로를 활성 상태로 유지하고 지원되는 가장 저전력의 처리 전략을 선택하십시오. 트리거가 의존하는 경로를 종료하면 안 됩니다. 트리거 모델은 경량으로 유지하십시오. [AI 개요](../ai/overview.md#audio-and-voice)를 참조하십시오.
 - 지연 시간과 버퍼 데드라인 이내에서 처리를 일괄 수행하십시오. DMA가 샘플 전송을 담당하지만 완료된 블록은 여전히 제때 처리해야 하며, CPU 웨이크업을 줄이다가 오버런이나 언더런이 발생해서는 안 됩니다.
-- 오디오 타이밍을 Bluetooth 및 디스플레이 동작과 조율하십시오. [저전력 설계 개요](../low-power/overview.md)와 [Bluetooth 개요: 공존](../bluetooth/overview.md#coexistence-with-other-workloads)를 참조하십시오.
+- 오디오 타이밍을 Bluetooth 및 디스플레이 동작과 조율하십시오. [저전력 설계 개요](../low-power/overview.md)와 [Bluetooth 개요: 공존](../bluetooth/overview.md#coexistence-with-other-workloads)을 참조하십시오.
 
 ## 오디오 검증 매트릭스 { #audio-validation-matrix }
 
@@ -237,7 +237,7 @@ RF와 아날로그 오디오가 모두 있는 제품은 Bluetooth 활성, 디스
 | 클릭, 팝, 글리치 | 버퍼 언더런, 버퍼 개수/크기 부족, DMA 설정 오류. |
 | 지속적인 노이즈 또는 험 | 아날로그 프런트엔드/보드 레이아웃, AMIC 그라운드, 전원 레일 노이즈. |
 | 사용 사례에 비해 지연 시간이 너무 높음 | 버퍼 크기 과다, 불필요한 포맷 변환, DMA 시작 전 스케줄링 지연. |
-| Bluetooth/디스플레이 동작 시 오디오 끊김 | 공존 및 메모리 대역폭 경합 - [공존](../bluetooth/overview.md#coexistence-with-other-workloads)를 참조하십시오. |
+| Bluetooth/디스플레이 동작 시 오디오 끊김 | 공존 및 메모리 대역폭 경합 - [공존](../bluetooth/overview.md#coexistence-with-other-workloads)을 참조하십시오. |
 | 디코딩된 오디오가 이상하게 들림 (음높이/속도) | 소스, 디코더, AUDCODEC 구성 간 샘플레이트 불일치. |
 | 유휴 재생 상태에서 전력이 높음 | 세션 사이에 코덱/DMA가 활성 상태로 남아 있음, 이벤트 기반 세션 종료 대신 불필요한 폴링 사용. |
 

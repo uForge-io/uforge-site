@@ -60,7 +60,7 @@ As notas de aplicação são organizadas por tarefa de integração, não pela o
 | Analógico e sensores | [Amostragem com GPADC](platforms/sifli-sdk/application-notes/adc-sampling.md) · [Integrar e ler sensores](platforms/sifli-sdk/application-notes/sensor-integration.md) |
 | Armazenamento e recursos gráficos | [Uso de Flash externa](platforms/sifli-sdk/application-notes/external-flash.md) · [Comprimir recursos gráficos com EZIP](platforms/sifli-sdk/application-notes/ezip-image-assets.md) |
 | Confiabilidade, energia e depuração | [Configurar o watchdog](platforms/sifli-sdk/application-notes/watchdog.md) · [Configurar e medir o baixo consumo](platforms/sifli-sdk/application-notes/low-power-measurement.md) · [Capturar logs e analisar falhas](platforms/sifli-sdk/application-notes/crash-analysis.md) |
-| Validação de RF e Bluetooth | [Executar testes de RF com o SiFli SDK](platforms/sifli-sdk/application-notes/rf-performance-tests.md) · [Executar testes de sinalização Bluetooth](platforms/sifli-sdk/application-notes/bluetooth-signalling-tests.md) · [Executar testes individuais de RF para Bluetooth](platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests.md) |
+| Validação de RF e Bluetooth | [Executar testes de RF com o SiFli-SDK](platforms/sifli-sdk/application-notes/rf-performance-tests.md) · [Executar testes de sinalização Bluetooth](platforms/sifli-sdk/application-notes/bluetooth-signalling-tests.md) · [Executar testes individuais de RF para Bluetooth](platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests.md) |
 
 </div>
 
@@ -92,7 +92,7 @@ O grupo [Experimental / comunidade](platforms/zephyr/overview.md) é destinado a
 | Caminho | Considere quando | Entenda como |
 |:-----|:-----------------|:------------|
 | [Zephyr](platforms/zephyr/overview.md) | Você precisa das APIs do Zephyr, de devicetree, Kconfig ou de trabalho downstream com placas. | Um caminho de avaliação downstream, específico para cada placa. |
-| [Arduino](platforms/arduino/overview.md) | Você precisa de sketches ou de um protótipo rápido de periférico em uma placa compatível. | Um caminho beta limitado às placas indicadas. |
+| [Arduino](platforms/arduino/overview.md) | Você precisa de sketches ou de um protótipo rápido de periférico em uma placa compatível. | Um caminho beta limitado à placa compatível. |
 | [MicroPython](platforms/micropython/status.md) | Você está avaliando o suporte futuro a scripts. | Uma página de status até existir um port público e reproduzível. |
 | [Rust](platforms/rust/overview.md) | Você pode avaliar o trabalho de HAL/PAC e contribuir com correções upstream. | Um caminho da comunidade ainda em desenvolvimento. |
 
@@ -108,6 +108,6 @@ Antes de considerar um caminho de firmware pronto para ser incorporado ao produt
 - Qual SDK, pacote, branch ou commit gerou o firmware?
 - Quais comandos de compilação, gravação, monitoramento e recuperação completa funcionam?
 - Qual exemplo ou teste comprova cada periférico e subsistema necessário do produto?
-- Qual layout de partições, comportamento de atualização, meta de consumo de energia e procedimento para decodificar o relatório de falha foram validados?
+- Qual layout de partições, comportamento de atualização, meta de consumo de energia e caminho de decodificação de falhas foram validados?
 
 Se faltar alguma resposta, o trabalho ainda pode ser um protótipo útil, mas não constitui uma base de firmware reproduzível para o produto.

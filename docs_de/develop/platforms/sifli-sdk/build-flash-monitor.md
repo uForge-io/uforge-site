@@ -74,7 +74,7 @@ Verwenden Sie ein serielles Terminal mit den Einstellungen des Boards und Beispi
 
 Halten Sie fest:
 
-- Board-Name.
+- Boardname.
 - Serieller Port.
 - Baudrate.
 - Build-Befehl.
@@ -100,7 +100,7 @@ Halten Sie fest:
 
 ## Mit einem passenden Beispiel beginnen { #start-from-a-matching-example }
 
-Bevor Sie ein Projekt anlegen oder grundlegend ändern, wählen Sie das [SDK-Beispiel](../../examples/index.md), das am besten zum Board und zum kritischen Subsystem passt. Bauen, flashen und überwachen Sie zunächst dieses Beispiel im unveränderten Zustand. Halten Sie anschließend für das angepasste Projekt Board-Name, SDK-Release, Befehle und erwartete Ausgabe fest.
+Bevor Sie ein Projekt anlegen oder grundlegend ändern, wählen Sie das [SDK-Beispiel](../../examples/index.md), das am besten zum Board und zum kritischen Subsystem passt. Bauen, flashen und überwachen Sie zunächst dieses Beispiel im unveränderten Zustand. Halten Sie anschließend für das angepasste Projekt Boardname, SDK-Release, Befehle und erwartete Ausgabe fest.
 
 Wenn Sie [CodeKit](../../tools/codekit.md) verwenden, bewahren Sie dieselben Nachweise auf und prüfen Sie, ob sich die Aktionen im Editor auch mit den SDK-Befehlen reproduzieren lassen.
 
@@ -113,7 +113,7 @@ Wenn Sie [CodeKit](../../tools/codekit.md) verwenden, bewahren Sie dieselben Nac
 | Symptom | Prüfung |
 |:--------|:------|
 | Build-Tool nicht gefunden | `export.sh` / `export.ps1` im aktuellen Terminal erneut ausführen. |
-| Board-Name unbekannt | Die SDK-Dokumentation zu den unterstützten Boards prüfen. |
+| Boardname unbekannt | Die SDK-Dokumentation zu den unterstützten Boards prüfen. |
 | Download-Skript kann den Port nicht öffnen | Serielle Terminals schließen und USB-UART-Kabel sowie Anschluss prüfen. |
 | Flashen startet nicht | Die dokumentierte Download-Sequenz des Boards befolgen. Bei `sf32lb52-lcd_n16r8` nach Auswahl des seriellen Ports das Board neu starten und innerhalb von 2 Sekunden die Eingabetaste drücken, um den Download zu starten. Für andere Boards gilt deren jeweilige Anleitung. Zusätzlich Stromversorgung, ausgewählten Port und UART-Verbindung prüfen. |
 | Serielle Ausgabe ist unlesbar | Baudrate prüfen und die Daten-UART verwenden, kein reines Ladekabel. |
@@ -125,7 +125,7 @@ Wenn Sie [CodeKit](../../tools/codekit.md) verwenden, bewahren Sie dieselben Nac
 Dokumentieren Sie bei der Übergabe eines Projekts an einen anderen Entwickler:
 
 - SDK-Branch oder -Commit.
-- Board-Name.
+- Boardname.
 - Einrichtungs- und Installationshinweise.
 - Build-Befehl.
 - Flash-Befehl.

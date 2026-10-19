@@ -36,7 +36,7 @@ Ces réponses orientent le choix de l'appareil, les exemples du SDK à prendre c
 
 ### Bluetooth Low Energy (BLE) { #bluetooth-low-energy-ble }
 
-Le BLE convient à la plupart des appareils portables connectés et des capteurs : le trafic est intermittent et déclenché par des événements, la consommation moyenne est faible et les systèmes mobiles le prennent largement en charge. Les bracelets d'activité, les capteurs de santé, les balises et les liaisons de configuration ou de commande vers une application compagnon sont généralement conçus autour du BLE.
+Le BLE est le choix par défaut pour la plupart des appareils portables connectés et des capteurs : le trafic est intermittent et déclenché par des événements, la consommation moyenne est faible et les systèmes mobiles le prennent largement en charge. Les bracelets d'activité, les capteurs de santé, les balises et les liaisons de configuration ou de commande vers une application compagnon sont généralement conçus autour du BLE.
 
 ### Bluetooth classique et bimode { #classic-bluetooth-and-dual-mode }
 
@@ -57,14 +57,14 @@ Choisissez l'appareil en fonction des fonctions de connectivité requises par le
 | Appareil portable ou capteur BLE uniquement | SF32LB55x |
 | Solution Bluetooth bimode à coût maîtrisé (accessoire audio, module) | SF32LB52x |
 | Bluetooth bimode avec affichage et interface utilisateur avancés | SF32LB56x |
-| Bluetooth bimode avec deux cœurs applicatifs pour le graphisme et l'audio local | SF32LB57x |
-| Produit haut de gamme nécessitant Bluetooth + graphisme + IA + grande capacité de mémoire | SF32LB58x |
+| Bluetooth bimode avec deux cœurs applicatifs pour les graphiques et l'audio local | SF32LB57x |
+| Produit haut de gamme nécessitant Bluetooth + graphiques + IA + grande capacité de mémoire | SF32LB58x |
 | Le cœur basse consommation dédié au contrôleur Bluetooth suffit | SF32LB52x |
 | Le cœur basse consommation doit aussi exécuter des tâches toujours actives supplémentaires, programmables par l'utilisateur | SF32LB55x / SF32LB56x / SF32LB58x |
 
 </div>
 
-Si le produit nécessite aussi un écran, davantage de mémoire ou des fonctions d'IA, vérifiez ces besoins dans les pages [Vue d'ensemble Graphisme](../graphics/overview.md) et [Accélérateur IA](../ai/accelerator.md).
+Si le produit nécessite aussi un écran, davantage de mémoire ou des fonctions d'IA, vérifiez ces besoins dans les pages [Vue d'ensemble des graphiques](../graphics/overview.md) et [Accélérateur IA](../ai/accelerator.md).
 
 ## Services GATT et le framework Sibles { #gatt-services-and-the-sibles-framework }
 
@@ -95,13 +95,13 @@ Réutilisez l'enregistrement, la gestion des événements et les contrôles de s
 
 Pour les produits Bluetooth bimode, le SDK fournit des implémentations d'exemple de profils pour :
 
-- **SPP** — données série bidirectionnelles simples, utile pour les applications compagnons héritées ou non-GATT.
+- **SPP** — données série bidirectionnelles simples, utiles pour les applications compagnons héritées ou non-GATT.
 - **A2DP** (puits et source) — diffusion audio Bluetooth.
 - **AVRCP** — contrôle de lecture (lecture/pause/piste/volume) en complément d'une liaison A2DP.
 - **HFP** — appels mains libres, avec les rôles HF (appareil mains libres) et AG (passerelle audio). L'[exemple HFP](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/bt/hfp/README.html) documenté implémente HF ; vérifiez séparément la prise en charge d'AG dans la configuration du SDK choisie.
 - **PAN** — réseau via Bluetooth, incluant un exemple de livraison OTA basé sur PAN.
 
-Les profils audio et les profils Bluetooth classiques ont souvent des contraintes de temporisation et de débit plus strictes que les liaisons BLE simples. Prévoyez suffisamment de temps pour tester la coexistence (voir [Coexistence](#coexistence-with-other-workloads) ci-dessous).
+Les profils audio et les profils hérités ont souvent des contraintes de temporisation et de débit plus strictes que les liaisons BLE simples. Prévoyez suffisamment de temps pour tester la coexistence (voir [Coexistence](#coexistence-with-other-workloads) ci-dessous).
 
 ## Audio Bluetooth et LE Audio { #bluetooth-audio-and-le-audio }
 
@@ -110,7 +110,7 @@ Deux chemins distincts existent selon l'approche audio :
 - **Audio Bluetooth classique** — A2DP pour la diffusion, AVRCP pour la commande de lecture, HFP pour les appels. Cette technologie éprouvée est largement compatible avec les téléphones et casques existants.
 - **LE Audio** — le [Basic Audio Profile (BAP)](https://www.bluetooth.com/specifications/specs/basic-audio-profile-1-0-2/) définit les procédures de gestion des flux LE Audio en unicast comme en broadcast. Le SDK comprend des exemples de sources et de récepteurs de diffusion, ainsi qu'un exemple combinant une source de diffusion LE Audio et le Bluetooth classique pour les produits qui doivent prendre en charge les deux technologies pendant une période de transition.
 
-Les deux chemins exigent une temporisation stable, des tampons et un transfert fiable des échantillons audio, généralement par DMA. Évaluez SF32LB52x/56x/58x selon les rôles audio Bluetooth et les configurations du SDK nécessaires au produit. SF32LB55x ne prend en charge que BLE et ne fournit pas d'audio Bluetooth classique ; cela ne signifie pas qu'il est dépourvu de fonctions audio locales. Pour DMA et les tampons, consultez la [Vue d'ensemble de l'audio](../audio/overview.md) et le [Processeur Bluetooth](processor.md#bluetooth-audio-and-le-audio).
+Les deux chemins exigent une temporisation stable, des tampons et un transfert fiable des échantillons audio, généralement par DMA. Choisissez SF32LB52x/56x/58x lorsque leurs rôles audio Bluetooth pris en charge et leurs configurations du SDK répondent aux besoins du produit. SF32LB55x ne prend en charge que BLE et ne peut pas fournir d'audio Bluetooth classique ; cela ne signifie pas qu'il est dépourvu de fonctions audio locales. Pour le DMA et les tampons, consultez la [Vue d'ensemble de l'audio](../audio/overview.md) et le [Processeur Bluetooth](processor.md#bluetooth-audio-and-le-audio).
 
 ## Modèle d'implémentation pour les services Sibles { #implementation-pattern-for-sibles-services }
 
@@ -218,7 +218,7 @@ Pour une analyse à l'échelle du système, consultez [Coexistence avec d'autres
 Le firmware Bluetooth doit être validé avec autant de rigueur que le matériel RF :
 
 - Testez plusieurs marques de téléphones, versions de système d'exploitation et scénarios de reconnexion, pas uniquement le téléphone utilisé pour le développement.
-- Vérifiez le comportement après des bonds obsolètes, un « oublier l'appareil » côté téléphone, une réinitialisation d'usine côté appareil et une OTA.
+- Vérifiez le comportement après des informations de bonding obsolètes, un « oublier l'appareil » côté téléphone, une réinitialisation d'usine côté appareil et une OTA.
 - Validez la portée et la stabilité des paquets dans le boîtier final avec la batterie, l'écran, le chargeur et les positions portées ou tenues par l'utilisateur.
 - Gardez disponibles les modes de test RF, l'accès à la calibration et les journaux pour la production et le support de certification.
 - Pour les produits prenant en charge de nombreux profils, prévoyez du temps pour les essais de qualification et de profil. Le bon fonctionnement d'une application de démonstration ne garantit pas l'interopérabilité.
@@ -232,11 +232,11 @@ Le firmware Bluetooth doit être validé avec autant de rigueur que le matériel
 | Symptôme | Zone probable à vérifier |
 |:--------|:----------------------|
 | Découverte lente ou peu fiable | Intervalle et type d'annonces BLE, implantation RF, adaptation de l'antenne. |
-| Déconnexions fréquentes malgré une bonne qualité RF | Supervision timeout trop court, intervalle de connexion inadapté ou interférences liées à la coexistence. |
+| Déconnexions fréquentes malgré une bonne qualité RF | Délai de supervision trop court, intervalle de connexion inadapté ou interférences liées à la coexistence. |
 | Consommation élevée malgré une connexion « au repos » | Latence du périphérique non configurée, réveils trop fréquents du processeur applicatif ou trafic GATT superflu. |
 | Artefacts ou coupures audio | Épuisement du tampon DMA (underrun), concurrence avec le trafic écran/PSRAM ou problèmes de temporisation et de configuration propres au transport (BR/EDR pour l'audio classique ; CIS/BIS pour LE Audio). |
-| L'appairage échoue par intermittence | Problèmes de stockage de bonding, capacité d'E/S non concordante, bond obsolète d'un côté. |
-| Bonne portée au banc, mais médiocre dans le boîtier | Désaccord de l'antenne causé par le boîtier, la batterie ou le PCB ; réglage de la puissance TX ou réseau d'adaptation RF. |
+| L'appairage échoue par intermittence | Problèmes de stockage de bonding, capacité d'E/S non concordante, informations de bonding obsolètes d'un côté. |
+| Bonne portée au banc, mais médiocre dans le boîtier | Désaccord de l'antenne causé par le boîtier, la batterie ou la PCB ; réglage de la puissance TX ou réseau d'adaptation RF. |
 
 </div>
 
@@ -247,7 +247,7 @@ Le firmware Bluetooth doit être validé avec autant de rigueur que le matériel
 - Laisser la latence du périphérique à 0 pour une liaison qui reste inactive la majeure partie du temps.
 - Ignorer les tests de coexistence jusqu'à l'intégration tardive, quand écran/audio/Bluetooth sont combinés pour la première fois.
 - Traiter l'appairage et le bonding comme des éléments secondaires, au lieu de concevoir leur parcours utilisateur.
-- Reporter la validation RF (antenne, réseau d'adaptation, précision du quartz) jusqu'aux dernières révisions du PCB.
+- Reporter la validation RF (antenne, réseau d'adaptation, précision du quartz) jusqu'aux dernières révisions de la PCB.
 - Supposer qu'un réglage purement firmware peut compenser une mauvaise disposition RF.
 
 ## Liste de contrôle de mise en service { #bring-up-checklist }
@@ -268,7 +268,7 @@ Le firmware Bluetooth doit être validé avec autant de rigueur que le matériel
 - Partez des services GATT et des exemples de profils Bluetooth classiques du SDK (HRPC, DISS, CTS, HID, ANCS/AMS, SPP, A2DP, AVRCP, HFP, PAN) plutôt que de construire à partir de zéro.
 - L'intervalle de connexion, la latence du périphérique, le délai de supervision et la puissance TX sont les principaux leviers pour équilibrer latence, débit et consommation.
 - Pour l'audio Bluetooth, vérifiez le rôle Classic ou LE Audio requis sur le composant et la configuration du SDK choisis, puis concevez et testez les tampons et la coexistence. Une affirmation portant sur toute la famille ne remplace pas cette vérification.
-- Le Bluetooth est une préoccupation au niveau système : la disposition RF, les horloges, l'UX d'appairage et la coexistence avec le graphisme, l'audio et les capteurs comptent autant que le code GATT lui-même.
+- Le Bluetooth est une préoccupation au niveau système : la disposition RF, les horloges, l'UX d'appairage et la coexistence avec les graphiques, l'audio et les capteurs comptent autant que le code GATT lui-même.
 
 Pour un aperçu des projets actuels du SDK en Bluetooth classique, BLE et LE Audio, consultez [Exemples du SDK Bluetooth](bluetooth-sdk-examples.md).
 

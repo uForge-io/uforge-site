@@ -45,7 +45,7 @@ Evalúe los componentes de la BOM en tres etapas, en lugar de elegir un número 
 | Flash NOR | 44 | Capacidad, riel de tensión, reloj SDR/DTR, ID indicado y corriente en espera/Deep Power-Down |
 | Flash SPI-NAND | 18 | Capacidad, modo ECC, geometría de páginas/bloques, Golden Block y corrientes en espera/lectura/programación |
 | Flash SD-NAND | 5 | Compatibilidad con SD 2.0, operación a 50 MHz, corriente en espera y rango de temperatura de funcionamiento |
-| Controladores LCD | 1 | Una referencia incluida; confirme temporización del panel, soporte del controlador y modo de interfaz antes del lanzamiento |
+| Controladores LCD | 1 | Una referencia incluida; confirme temporización del panel, soporte del controlador y modo de interfaz antes de la liberación |
 | Controladores de panel táctil | 0 | Sin entradas en V0.3; confirme por separado la cualificación y el soporte del controlador |
 
 </div>
@@ -378,7 +378,7 @@ Antes de cerrar el esquemático o la BOM, contraste cada componente AVL seleccio
 - [ ] Los tiempos de borrado, programación y lectura de Flash se han probado en el rango previsto de tensión y temperatura del producto.
 - [ ] Se ha identificado al menos un candidato de segunda fuente para cada componente crítico de la BOM, como cristales, inductores, Flash y paneles de pantalla.
 
-Esta lista establece un nivel de exigencia superior a «el componente aparece en la AVL». La AVL reduce el abanico de opciones, pero el lanzamiento del producto sigue requiriendo evidencias de validación en la placa.
+Esta lista establece un nivel de exigencia superior a «el componente aparece en la AVL». La AVL reduce el abanico de opciones, pero la liberación del producto sigue requiriendo evidencias de validación en la placa.
 
 ## Lista de comprobación de abastecimiento { #sourcing-checklist }
 

@@ -1,7 +1,7 @@
 ---
 icon: lucide/home
 title: "SF32 嵌入式开发平台"
-description: "SF32 超低功耗微控制器的开源文档，涵盖模组、开发板、SDK 工作流程，以及可直接用于量产的硬件设计指南。"
+description: "SF32 超低功耗微控制器的开源文档，涵盖模组、开发板、SDK 工作流程，以及量产就绪的硬件设计指南。"
 image: assets/home/sf32-chip-hero.png
 hide:
   - navigation
@@ -17,7 +17,7 @@ hide:
 
 # 打造下一代<br>嵌入式设备 { #build-the-next-generationof-embedded-devices }
 
-***μForge.io*** 是面向创新半导体解决方案的开源开发平台，首发聚焦思澈科技（SiFli）的 SF32 系列超低功耗微控制器。平台汇集芯片、模组、开发板、SDK、文档和量产级参考设计等全栈资源，帮助开发者减少集成阻力，更快地将互联、智能、高能效的嵌入式产品从构想推进到量产。
+***μForge.io*** 是面向创新半导体解决方案的开源开发平台，首发聚焦思澈科技（SiFli）的 SF32 系列超低功耗微控制器。平台汇集芯片、模组、开发板、SDK、文档和量产就绪的参考设计等全栈资源，帮助开发者减少集成阻力，更快地将互联、智能、高能效的嵌入式产品从构想推进到量产。
 
 <div class="uf-hero-actions" markdown>
 
@@ -33,7 +33,7 @@ hide:
 &nbsp;&nbsp;&nbsp;
 :fontawesome-solid-users: 活跃社区
 &nbsp;&nbsp;&nbsp;
-:fontawesome-solid-shield-halved: 生产就绪
+:fontawesome-solid-shield-halved: 量产就绪
 &nbsp;&nbsp;&nbsp;
 :fontawesome-solid-rotate: 持续更新
 
@@ -55,7 +55,7 @@ hide:
   <span class="uf-spotlight-item__art uf-spotlight-item__art--board" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">硬件</span>
   <span class="uf-spotlight-item__title">模组与开发板</span>
-  <span class="uf-spotlight-item__copy">经过验证的硬件，助力加快从设计走向量产。</span>
+  <span class="uf-spotlight-item__copy">经过测试的硬件，助力加快从设计走向量产。</span>
 </a>
 
 <a class="uf-spotlight-item uf-spotlight-item--sdk" href="develop/index.md" data-radius="245">
@@ -76,7 +76,7 @@ hide:
   <span class="uf-spotlight-item__art uf-spotlight-item__art--examples" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">项目</span>
   <span class="uf-spotlight-item__title">智能手表、HMI</span>
-  <span class="uf-spotlight-item__copy">符合量产级质量要求的应用示例。</span>
+  <span class="uf-spotlight-item__copy">量产品质的应用示例。</span>
 </a>
 
 </div>
@@ -86,7 +86,7 @@ hide:
 
 - :fontawesome-solid-microchip:{ .uf-ql-icon .uf-purple } **硬件**
 
-    微控制器、模组、开发板，以及可直接用于量产的参考设计。
+    微控制器、模组、开发板，以及量产就绪的参考设计。
 
     [查看硬件 :material-arrow-right:](sf32-products/family/SF32_family.md){ .uf-link-purple }
 
@@ -104,7 +104,7 @@ hide:
 
 - :fontawesome-solid-rocket:{ .uf-ql-icon .uf-pink } **示例**
 
-    面向常见嵌入式应用场景、可作为产品开发起点的示例应用。
+    面向常见嵌入式应用场景的量产品质示例应用。
 
     [浏览示例 :material-arrow-right:](develop/examples/index.md){ .uf-link-pink }
 
@@ -130,7 +130,7 @@ hide:
 
 - :fontawesome-solid-volume-high:{ .uf-icon-pink } **音频子系统**
 
-    音频能力因系列和型号而异；受支持的器件提供模拟音频、I²S、PDM 接口以及硬件加速的数字音频处理能力。
+    音频能力因系列和型号而异；受支持的器件提供模拟音频、I²S、PDM 接口以及硬件辅助的数字音频处理能力。
 
 - :fontawesome-solid-brain:{ .uf-icon-amber } **AI 加速**
 
@@ -215,7 +215,7 @@ hide:
 
 </div>
 
-[^1]: 参见 [SF32 系列产品概述](sf32-products/family/SF32_family.md)。
+[^1]: 参见 [SF32 系列产品概述](sf32-products/family/SF32_family.md)，了解所有器件的详细对比。
 <!--
 ---
 

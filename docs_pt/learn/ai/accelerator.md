@@ -10,7 +10,7 @@ tags:
 
 O **acelerador de IA**, chamado NNACC no SDK, executa em hardware operações de redes neurais compatíveis em determinados dispositivos SF32. Ele permite **IA de borda**, com inferência local sem depender de serviços na nuvem. A eventual redução da latência, da ocupação da CPU ou do consumo de energia depende do modelo, do posicionamento na memória, da implementação do software e da carga completa do produto.
 
-Wearables, dispositivos de monitoramento da saúde, displays inteligentes, acessórios de voz, sistemas de fusão de sensores e produtos AIoT compactos são aplicações possíveis. Esses equipamentos alimentados por bateria costumam combinar Bluetooth, gráficos, áudio, sensoriamento e interação com o usuário. Transferir operações compatíveis para o hardware pode liberar tempo de CPU para outras tarefas, mas a resposta e a economia de energia precisam ser medidas.
+Dispositivos vestíveis, dispositivos de monitoramento da saúde, displays inteligentes, acessórios de voz, sistemas de fusão de sensores e produtos AIoT compactos são aplicações possíveis. Esses equipamentos alimentados por bateria costumam combinar Bluetooth, gráficos, áudio, sensoriamento e interação com o usuário. Transferir operações compatíveis para o hardware pode liberar tempo de CPU para outras tarefas, mas a resposta e a economia de energia precisam ser medidas.
 
 Os recursos de IA disponíveis dependem do dispositivo SF32 específico e do suporte do SDK. Antes de definir a arquitetura do modelo ou o planejamento de memória, consulte o datasheet, o manual de referência e a documentação do SDK do chip escolhido.
 
@@ -28,7 +28,7 @@ Muitos produtos embarcados precisam oferecer recursos inteligentes sem transmiti
 - Melhor funcionamento offline, porque os recursos principais podem operar sem acesso à rede.
 - A potência média só pode ser menor se a função completa consumir menos energia durante o mesmo intervalo de uso, com precisão e cobertura de detecção equivalentes. Inclua também a sobrecarga de transferir o processamento para o acelerador.
 
-Para wearables e dispositivos AIoT, esses benefícios são concretos. Um relógio pode classificar gestos, detectar níveis de atividade, monitorar sinais de saúde, reconhecer comandos simples por voz ou processar dados de sensores sem comprometer a resposta do display, do Bluetooth e do processador de aplicação.
+Para dispositivos vestíveis e AIoT, esses benefícios são concretos. Um relógio pode classificar gestos, detectar níveis de atividade, monitorar sinais de saúde, reconhecer comandos simples por voz ou processar dados de sensores sem comprometer a resposta do display, do Bluetooth e do processador de aplicação.
 
 Esses benefícios têm condições. O processamento local só reduz o tráfego sem fio se o produto deixar de enviar dados brutos. A privacidade ainda exige armazenamento adequado, controles de acesso e proteção dos dados transmitidos. Os casos abaixo são possibilidades de projeto, não uma afirmação de que o SDK forneça todos os modelos.
 
@@ -65,7 +65,7 @@ Post-processing
 Application, UI, Bluetooth, or Storage
 ```
 
-O acelerador é apenas uma etapa da pipeline completa de IA. Produtos reais ainda precisam capturar e armazenar dados em buffers, fazer pré-processamento, agendar inferências, executar o pós-processamento e aplicar a lógica de decisão da aplicação. Em geral, o melhor desempenho vem de projetar toda a pipeline considerando a hierarquia de memória e os aceleradores disponíveis, em vez de tratar a inferência como uma chamada de função isolada.
+O acelerador é apenas uma etapa da pipeline completa de IA. Produtos reais ainda precisam capturar e armazenar dados em buffers, fazer pré-processamento, escalonar inferências, executar o pós-processamento e aplicar a lógica de decisão da aplicação. Em geral, o melhor desempenho vem de projetar toda a pipeline considerando a hierarquia de memória e os aceleradores disponíveis, em vez de tratar a inferência como uma chamada de função isolada.
 
 ## O que o acelerador de IA faz { #what-the-ai-accelerator-does }
 
@@ -80,7 +80,7 @@ Entre as cargas de trabalho comuns de IA estão:
 - Detecção de palavras-chave ou de eventos simples de voz.
 - Reconhecimento de gestos com base em dados do acelerômetro e do giroscópio.
 - Classificação de atividades e detecção de estados de movimento.
-- Fusão de sensores em wearables e dispositivos de saúde.
+- Fusão de sensores em dispositivos vestíveis e de saúde.
 - Análise de sinais biométricos, conforme o suporte dos sensores e algoritmos.
 - Classificação simples de imagens ou baseada em câmera, em dispositivos com entrada de câmera.
 - Detecção de anomalias e filtragem local de eventos.
@@ -95,7 +95,7 @@ Uma forma útil de entender a arquitetura é pensar que a CPU controla o fluxo d
 
 | Componente | Papel típico |
 |:----------|:-------------|
-| **CPU de aplicação** | Executa a lógica da aplicação, agenda inferências, gerencia buffers e cuida da interface do usuário, do Bluetooth, do armazenamento e das políticas do sistema. |
+| **CPU de aplicação** | Executa a lógica da aplicação, escalona inferências, gerencia buffers e cuida da interface do usuário, do Bluetooth, do armazenamento e das políticas do sistema. |
 | **Processador de baixo consumo** | Pode executar tarefas de sensoriamento contínuo ou em segundo plano nos dispositivos em que é programável pelo usuário. |
 | **Acelerador de IA** | Executa operações compatíveis com NNACC; compare o tempo de CPU e a energia da pipeline completa com a implementação de referência em software. |
 | **DMA / sistema de memória** | Fornece acesso à memória e transferências configuradas; nem toda entrada ou saída do NNACC exige uma cópia DMA separada. |
@@ -103,7 +103,7 @@ Uma forma útil de entender a arquitetura é pensar que a CPU controla o fluxo d
 
 </div>
 
-O acelerador não substitui a CPU nem executa sozinho qualquer modelo. O firmware continua preparando entradas, configurando operações compatíveis, aguardando a conclusão, processando resultados e controlando a aplicação. Uma operação não compatível só pode rodar na CPU se o runtime ou a aplicação fornecer essa implementação; caso contrário, a implantação pode falhar. A presença do hardware não garante uma alternativa automática na CPU.
+O acelerador não substitui a CPU nem executa sozinho qualquer modelo. O firmware continua preparando entradas, configurando operações compatíveis, aguardando a conclusão, processando resultados e controlando a aplicação. Uma operação não compatível só pode rodar na CPU se o runtime ou a aplicação fornecer essa implementação; caso contrário, a implantação pode falhar. A presença do hardware não garante fallback automático para a CPU.
 
 ## Posicionamento das famílias de dispositivos { #device-family-positioning }
 
@@ -116,7 +116,7 @@ Escolha o dispositivo pelos operadores, pelo orçamento de memória e pela carga
 | Família de dispositivos | Perfil para IA |
 |:--------------|:---------------|
 | **SF32LB52x** | Considere para Bluetooth, áudio e HMI básica com custo otimizado; use uma implementação leve na CPU como referência, salvo quando houver aceleração específica verificada. |
-| **SF32LB55x** | Adequado a wearables BLE e produtos com muitos sensores; indicado para sensoriamento de baixo consumo e algoritmos compactos. |
+| **SF32LB55x** | Adequado a dispositivos vestíveis BLE e produtos com muitos sensores; indicado para sensoriamento de baixo consumo e algoritmos compactos. |
 | **SF32LB56x** | Considere para UI mais completas, HMI conectada e pipelines de sensores ou multimídia; confira a configuração escolhida e os operadores do NNACC da HCPU. |
 | **SF32LB57x** | O guia citado não estabelece a disponibilidade de NNACC nessa família; verifique o componente, a placa e o suporte do SDK a operadores, runtime e memória antes de escolhê-lo para IA. |
 | **SF32LB58x** | Considere para cargas que combinam IA, gráficos e áudio quando a memória e os recursos HCPU/LCPU do número de peça escolhido atenderem aos requisitos do produto; verifique operadores, custos de integração e energia medida. |
@@ -199,11 +199,11 @@ A entrada de câmera depende do chip, encapsulamento, placa e driver de captura 
 
 Considere quadros menores, regiões de interesse, taxas de quadros menores ou um modelo voltado a sistemas embarcados. Recortar no firmware após a captura reduz a entrada do modelo, mas não necessariamente o tráfego da câmera ou o buffer de captura; para reduzir esses custos, pode ser necessário recortar no sensor ou adquirir menos dados.
 
-## Agendamento e gerenciamento de energia { #scheduling-and-power-management }
+## Escalonamento e gerenciamento de energia { #scheduling-and-power-management }
 
-As tarefas de IA devem ser agendadas considerando o restante do sistema. Um produto vestível pode precisar manter a conexão Bluetooth, atualizar o display, capturar áudio, ler sensores e executar inferências sem ultrapassar as metas de consumo de energia ou latência.
+As tarefas de IA devem ser escalonadas considerando o restante do sistema. Um produto vestível pode precisar manter a conexão Bluetooth, atualizar o display, capturar áudio, ler sensores e executar inferências sem ultrapassar as metas de consumo de energia ou latência.
 
-Boas práticas de agendamento:
+Boas práticas de escalonamento:
 
 - Escolha inferência periódica ou acionada por eventos conforme a cobertura de detecção, o risco de perder eventos e os requisitos de latência.
 - Evite loops de polling quando interrupções ou eventos puderem acionar o processamento.
@@ -212,7 +212,7 @@ Boas práticas de agendamento:
 - Coordene as cargas de trabalho de IA com a atividade do display e do Bluetooth.
 - Retorne a CPU e o acelerador aos estados de baixo consumo permitidos após confirmar a conclusão, transferir os buffers e liberar os bloqueios de gerenciamento de energia; mantenha ativos o sensoriamento necessário e outros trabalhos pendentes.
 
-Meça a energia do recurso completo integrando, ao longo do tempo, a potência de alimentação medida (tensão de alimentação × corrente); não considere apenas a latência de inferência. Inclua aquisição, pré-processamento, cópias, aceleração, execução alternativa na CPU, pós-processamento e intervalos ociosos. Executar mais rápido pode reduzir a energia ativa sem antecipar o repouso; a economia depende das demais cargas do sistema. Compare cobertura de detecção e precisão equivalentes antes de reduzir a frequência de inferência.
+Meça a energia do recurso completo integrando, ao longo do tempo, a potência de alimentação medida (tensão de alimentação × corrente); não considere apenas a latência de inferência. Inclua aquisição, pré-processamento, cópias, aceleração, fallback para a CPU, pós-processamento e intervalos ociosos. Executar mais rápido pode reduzir a energia ativa sem antecipar o repouso; a economia depende das demais cargas do sistema. Compare cobertura de detecção e precisão equivalentes antes de reduzir a frequência de inferência.
 
 No SDK v2.5.1, a chamada de início bloqueante da HAL espera a conclusão por polling, sem um timeout explícito próprio. O modo por interrupção exige um handler IRQ funcional e notificação de conclusão. Confira os erros de início, limite a espera na aplicação e defina a recuperação antes de reutilizar buffers ou liberar bloqueios de gerenciamento de energia.
 
@@ -258,7 +258,7 @@ Considere a aceleração de IA do SF32 para inferência local compacta em produt
 - Reconhecimento de gestos em relógios, pulseiras e dispositivos portáteis.
 - Classificação de atividades em produtos de fitness e saúde.
 - Detecção de eventos de voz ou palavras-chave em acessórios de áudio.
-- Algoritmos de fusão de sensores em wearables.
+- Algoritmos de fusão de sensores em dispositivos vestíveis.
 - Análise de sinais biométricos quando houver suporte dos sensores e do software.
 - Detecção local de anomalias em dispositivos inteligentes.
 - Classificação simples de imagens ou eventos acionados pela câmera em dispositivos com entrada de câmera.

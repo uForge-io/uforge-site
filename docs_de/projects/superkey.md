@@ -54,7 +54,7 @@ Halten Sie vor dem Start Folgendes bereit:
 |:-----|:---------------|:------------------------------------|
 | Hardware | Offenes Hardwaredesign `sf32-keyboard` und Boardziel `sf32lb52-superkey` | Revision von Platine und Bestückung, LCDs und Eingabegeräte, Stromversorgung sowie Nachweis der USB-Verbindung |
 | Firmware | SuperKey-Repository, SiFli-SDK-Submodul, RT-Thread, LVGL v9 und CherryUSB | Firmware-Commit, SDK-Commit, Build-Protokoll, Image und Programmierprotokoll |
-| Begleitprogramm | SuperKeyHub mit kompatiblem Firmwareprotokoll | Anwendungsversion, Betriebssystem, Anschluss, API-Konfiguration und Verbindungsprotokoll |
+| Begleitprogramm | SuperKeyHub mit kompatiblem Firmwareprotokoll | Anwendungsversion, Betriebssystem, Port, API-Konfiguration und Verbindungsprotokoll |
 | Kernfunktionen | HID, CDC, drei Displays, Encoder, Tasten, Sensor und Energiemodi | Nachweise zu Kaltstart, Datenaktualisierung, Eingaben, Verbindungsabbruch und Wiederherstellung aus dem Schlafmodus |
 | Anpassung | Jeweils nur eine Änderung an UI, Taste, LED oder Datenfeld | Geprüfte Änderung, Rollback-Image und vollständiges Regressionsergebnis |
 
@@ -154,17 +154,17 @@ flowchart LR
 
 Ordnen Sie Fehler fünf Bereichen zu: Gerätehardware/Display, HID-Eingabe, CDC-/UART-Datenkanal, Begleitprogramm/Systemberechtigungen und externe Datendienste. Eine leere Wetteranzeige ist nicht automatisch ein Firmwarefehler; Ursache können API-Key, API-Host, Stadtkonfiguration oder Datenübertragung sein.
 
-## Phase 1 — Die unveränderte Referenzbasis etablieren { #stage-1-establish-the-untouched-reference-baseline }
+## Phase 1 — Die unveränderte Referenzbasis einrichten { #stage-1-establish-the-untouched-reference-baseline }
 
 **Ziel:** Den vollständigen Referenzpfad nachweisen, bevor der Code geändert wird.
 
 1. Prüfen Sie anhand der Upstream-Montageunterlagen die Ausrichtung der LCD-Kabel sowie Schalter, Encoder, Gehäuse und USB-Buchse; dokumentieren Sie Platinen- und Firmwarerevision.
 2. Installieren Sie die passende SuperKeyHub-Version. Prüfen Sie zunächst die Geräte-Enumeration und anschließend HID und CDC getrennt.
-3. Konfigurieren Sie Wetterzugangsdaten, Anschluss und seriellen Betrieb mit 1 Mbit/s. Dokumentieren Sie das Verhalten ohne Begleitprogramm; verbinden Sie es anschließend und aktivieren Sie die Datenübertragung.
+3. Konfigurieren Sie Wetterzugangsdaten, Port und seriellen Betrieb mit 1 Mbit/s. Dokumentieren Sie das Verhalten ohne Begleitprogramm; verbinden Sie es anschließend und aktivieren Sie die Datenübertragung.
 4. Prüfen Sie die Navigation auf drei Displays, Tastenbelegung, Mediensteuerung, Encoder, Daten vom Sensor SHT30, LED-Effekte und einen vollständigen Telemetrie-Aktualisierungszyklus.
 5. Führen Sie einen Kaltstart durch und wiederholen Sie den Test. Sichern Sie UI-Fotos, Protokolle des Begleitprogramms und Geräts sowie das Ergebnis der Versionsabfrage.
 
-**Aufzubewahrende Nachweise:** Hardwarerevision, Firmware-Tag/Commit, SDK-Commit, Version des Begleitprogramms, Betriebssystem, Anschluss- und API-Konfiguration, USB-Enumeration, Protokolle, Displayzustände und Eingabeprotokoll.
+**Aufzubewahrende Nachweise:** Hardwarerevision, Firmware-Tag/Commit, SDK-Commit, Version des Begleitprogramms, Betriebssystem, Port- und API-Konfiguration, USB-Enumeration, Protokolle, Displayzustände und Eingabeprotokoll.
 
 **Abnahmekriterium für Kontrollpunkt 1:** Bei zwei Kaltstarts funktionieren HID-Eingabe, CDC-Datenaktualisierung und Interaktion mit allen drei Displays. Jeder Fehlerbereich lässt sich anhand von Protokollen oder beobachtbarem Zustand unterscheiden.
 
@@ -179,7 +179,7 @@ Ordnen Sie Fehler fünf Bereichen zu: Gerätehardware/Display, HID-Eingabe, CDC-
 | Test | Vorgehen | Nachweis für bestanden |
 |:-----|:-------|:--------------|
 | Begleitprogramm nicht gestartet | SuperKeyHub schließen und Gerät neu starten | Lokale UI und HID funktionieren weiterhin; vom Begleitprogramm abhängige Werte sind erkennbar veraltet oder nicht verfügbar |
-| CDC-Verbindung verloren | Während der Datenübertragung USB trennen/wiederverbinden oder Anschluss wechseln | Gerät hängt sich nicht auf; Versionsabfrage und Datenübertragung funktionieren nach der Wiederverbindung wieder |
+| CDC-Verbindung verloren | Während der Datenübertragung USB trennen/wiederverbinden oder den Port wechseln | Gerät hängt sich nicht auf; Versionsabfrage und Datenübertragung funktionieren nach der Wiederverbindung wieder |
 | Host wechselt in den Schlafmodus | `power_mode sleep/normal` aktivieren und einen Schlaf-/Aufwachzyklus des Hosts ausführen | LCDs, LEDs, Hintergrundbeleuchtung und Sensoren stoppen und starten wie vorgesehen; spätere Daten werden erneut aktualisiert |
 | Versionskonflikt | In einer kontrollierten Umgebung ein inkompatibles Paar aus Begleitprogramm und Firmware testen | Das Paar weist den Betrieb zurück oder zeigt einen diagnostizierbaren Fehler, statt ein inkompatibles Update anzuwenden |
 | API-Fehler | Ungültige Wetterkonfiguration verwenden oder Netzwerkverbindung trennen | Wetterfehler beeinträchtigen weder HID noch CDC noch die lokale UI noch die Wiederherstellung |

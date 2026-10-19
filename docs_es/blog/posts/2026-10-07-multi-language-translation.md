@@ -11,9 +11,9 @@ Los ingenieros de sistemas embebidos leen la documentación en el idioma en el q
 
 Nada de esto habría sido viable sin las herramientas LLM, y estamos agradecidos por ellas. Pero no fue una sola ejecución: hicieron falta muchas iteraciones, por dos motivos. El primero es el límite del plan de uso: un trabajo largo de traducción solía alcanzar su límite antes de terminar las páginas y había que esperar a que se restableciera el límite o continuar en otra herramienta. Los múltiples reinicios gratuitos de ChatGPT ayudaron muchísimo, y damos las gracias por ello. El segundo es que traducir así es lento e ineficiente: las páginas técnicas son largas y están llenas de tablas, código, nombres de pines y enlaces cruzados, de modo que cada pasada producía algo que había que revisar, corregir y volver a ejecutar.
 
-### Mantener la coherencia { #keeping-translations-consistent }
+### Mantener la coherencia de las traducciones { #keeping-translations-consistent }
 
-Para que las iteraciones convergieran, mantenemos un glosario de términos que deben quedar sin traducir (referencias de pieza, unidades, nombres de protocolos) o usar una traducción aprobada, además de una lista de comprobación de QA que cubre la integridad técnica, la corrección de enlaces y anclas, y la seguridad del Markdown y del código. Cada idioma conserva la misma estructura de páginas que el original en inglés y las compilaciones se verifican en modo estricto, de modo que un enlace roto o una página ausente falla de forma visible en lugar de publicarse en silencio.
+Para que las iteraciones converjan, mantenemos un glosario de términos que deben quedar sin traducir (referencias de pieza, unidades, nombres de protocolos) o usar una traducción aprobada, además de una lista de comprobación de QA que cubre la integridad técnica, la corrección de enlaces y anclas, y la seguridad del Markdown y del código. Cada idioma conserva la misma estructura de páginas que el original en inglés y las compilaciones se verifican en modo estricto, de modo que un enlace roto o una página ausente falla de forma visible en lugar de publicarse en silencio.
 
 ### Una advertencia y una petición { #caveat-and-request }
 

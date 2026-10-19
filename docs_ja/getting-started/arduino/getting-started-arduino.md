@@ -10,7 +10,7 @@ tags:
 
 OpenSiFliには、Zephyrをベースにした、SF32向けのベータ版Arduinoコアがあります: [OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr)。これは`sifli:sf32lb52` Arduinoパッケージを公開しており、Boards Managerには**SiFli Serial Boards**として表示され、現在は**SiFli SF32LB52 DevKit LCD**ボードを対象としています。
 
-スケッチの試作、周辺機能の簡単な確認、デモ、初期プロトタイプには、このArduinoコアが適しています。本番向けファームウェア、Bluetoothスタックの調整、グラフィックス負荷の高いアプリケーション、低消費電力化、カスタムボードの初期動作確認には、[SiFli-SDK](../sifli/getting-started-sifli-sdk.md)を使用してください。
+スケッチの試作、周辺機能の簡単な確認、デモ、初期プロトタイプには、このArduinoコアが適しています。本番向けファームウェア、Bluetoothスタックの調整、グラフィックス負荷の高いアプリケーション、低消費電力化、カスタムボードの立ち上げには、[SiFli-SDK](../sifli/getting-started-sifli-sdk.md)を使用してください。
 
 !!! warning "ベータ版のコア"
     OpenSiFliはこのArduinoコアを**BETA**とし、テスト用途に限って使用するよう案内しています。機能、API、ローダーの動作、パッケージ内容、リリースの仕組みは変更される可能性があります。本番用途向けとして扱わないでください。
@@ -172,4 +172,4 @@ void loop() {
 
 ## 現在の対応範囲 { #what-sifli-team-should-finish }
 
-現在公開されているパッケージの対象はSF32LB52 DevKit LCDで、テスト用のベータ版です。別のボードを試す場合やAPIを利用する場合は、使用するパッケージの正確なバージョンについて、[upstreamリポジトリ](https://github.com/OpenSiFli/ArduinoCore-zephyr)とリリースノートを確認してください。ZephyrまたはSiFli-SDKでのサポートは、このArduinoパッケージでのサポートを意味するものではありません。
+現在公開されているパッケージの対象はSF32LB52 DevKit LCDで、テスト用のベータ版です。別のボードを試す場合やAPIを利用する場合は、使用するパッケージの正確なバージョンについて、[upstreamリポジトリー](https://github.com/OpenSiFli/ArduinoCore-zephyr)とリリースノートを確認してください。ZephyrまたはSiFli-SDKでのサポートは、このArduinoパッケージでのサポートを意味するものではありません。

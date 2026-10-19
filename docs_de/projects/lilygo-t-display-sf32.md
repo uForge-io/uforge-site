@@ -23,15 +23,15 @@ Die Funktionsmatrix des Repositorys unterscheidet das eigenständige T-SF32-Disp
 
 ## Warum eine Umsetzung auf SF32-Basis? { #why-the-sf32-implementation }
 
-T-Display-SF32 vereint Grafik-, Bluetooth-, Audio- und Energiesparfunktionen des SF32LB52x mit externen Display-, Touch-, Bewegungs-, Speicher- und LoRa-Bausteinen auf einem Board. LilyGO stellt außerdem Boardkonfiguration, dedizierte Gerätetreiber, Beispiele und einen separaten [LilyGO-SDK-Fork](https://github.com/Xinyuan-LilyGO/SlFli-SDK-Lilygo) bereit, der laut Dokumentation auf SiFli-SDK 2.4.0 basiert. Das kann die anfängliche Inbetriebnahme gegenüber einem unveränderten generischen SDK-Ziel verkürzen.
+T-Display-SF32 vereint Grafik-, Bluetooth-, Audio- und Energiesparfunktionen des SF32LB52x mit externen Display-, Touch-, Bewegungs-, Speicher- und LoRa-Bausteinen auf einem Board. LilyGO stellt außerdem Board-Konfiguration, dedizierte Gerätetreiber, Beispiele und einen separaten [LilyGO-SDK-Fork](https://github.com/Xinyuan-LilyGO/SlFli-SDK-Lilygo) bereit, der laut Dokumentation auf SiFli-SDK 2.4.0 basiert. Das kann die anfängliche Inbetriebnahme gegenüber einem unveränderten generischen SDK-Ziel verkürzen.
 
-Der Preis dafür liegt in der Zuständigkeit. Boardunterstützung, Treiberänderungen, Hardware-Revisionen, mitgelieferte Firmware und das Verhältnis zwischen LilyGOs SDK-Fork und dem SiFli-SDK-Upstream werden außerhalb von SiFli kontrolliert. Ein reproduzierbares Projekt muss daher beide Repositories auf Commits fixieren, ein funktionsfähiges Werks- bzw. Wiederherstellungsimage aufbewahren und jede Migration auf ein neueres Upstream-SDK als ausdrückliche technische Änderung testen.
+Der Preis dafür liegt in der Zuständigkeit. Board-Unterstützung, Treiberänderungen, Hardware-Revisionen, mitgelieferte Firmware und das Verhältnis zwischen LilyGOs SDK-Fork und dem SiFli-SDK-Upstream werden außerhalb von SiFli kontrolliert. Ein reproduzierbares Projekt muss daher beide Repositories auf Commits fixieren, ein funktionsfähiges Werks- bzw. Wiederherstellungsimage aufbewahren und jede Migration auf ein neueres Upstream-SDK als ausdrückliche technische Änderung testen.
 
 ## Ergebnis, Umfang und Eintrittskriterien { #outcome-scope-and-entry-criteria }
 
 **Ergebnis:** eine versionsfixierte T-Display-SF32-Basis herstellen, Display/Touch, ausgewählte Peripherie, Stromverhalten und Wiederherstellung prüfen, einen Build aus dem Quellcode reproduzieren und anschließend eine klar begrenzte Anwendungsänderung mit Regressionsnachweisen umsetzen, die sich für eine Produktbewertung eignen.
 
-Diese Seite belegt weder, dass jede Peripherie auf jeder Boardvariante bestückt ist, noch dass die Herstellerfirmware serienreif ist, noch dass der Stromverbrauchsbericht für andere Revisionen oder Arbeitslasten gilt, noch dass LoRa-Betrieb in jeder Region zulässig ist. Sie überträgt auch keine SiFli-Unterstützung auf LilyGO-spezifische Hardware oder Treiber.
+Diese Seite belegt weder, dass jede Peripherie auf jeder Board-Variante bestückt ist, noch dass die Herstellerfirmware serienreif ist, noch dass der Stromverbrauchsbericht für andere Revisionen oder Arbeitslasten gilt, noch dass LoRa-Betrieb in jeder Region zulässig ist. Sie überträgt auch keine SiFli-Unterstützung auf LilyGO-spezifische Hardware oder Treiber.
 
 Vor dem Start benötigen Sie:
 
@@ -67,10 +67,10 @@ Vor dem Start benötigen Sie:
 
 | Komponente | Erforderliche Spezifikation | Aufgabe | Status | Bezugsquelle | Hinweise zu Kompatibilität und Ersatz |
 |:-----------|:----------------------------|:--------|:-------|:-------------|:--------------------------------------|
-| T-Display-SF32-Board | SF32LB52x; die dokumentierte Konfiguration umfasst ein 2,16-Zoll-CO5300-AMOLED, CST9220-Touch, 16 MB Flash, 8 MB PSRAM, BHI260AP-IMU, SX1262-LoRa, microSD, ein integriertes Mikrofon und einen Lautsprecherverstärker mit 3,5-mm-Audioanschluss sowie drei Benutzertasten | Integrierte Referenz für Rechenleistung, Anzeige, Sensorik, Funk, Speicher und Audio | Erforderlich | [LilyGO-Repository](https://github.com/Xinyuan-LilyGO/T-Display-SF32); [Hardwaredateien](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | Exakte Boardrevision und bestückte Bauteile dokumentieren; nicht davon ausgehen, dass jede Variante gleich bestückt ist |
+| T-Display-SF32-Board | SF32LB52x; die dokumentierte Konfiguration umfasst ein 2,16-Zoll-CO5300-AMOLED, CST9220-Touch, 16 MB Flash, 8 MB PSRAM, BHI260AP-IMU, SX1262-LoRa, microSD, ein integriertes Mikrofon und einen Lautsprecherverstärker mit 3,5-mm-Audioanschluss sowie drei Benutzertasten | Integrierte Referenz für Rechenleistung, Anzeige, Sensorik, Funk, Speicher und Audio | Erforderlich | [LilyGO-Repository](https://github.com/Xinyuan-LilyGO/T-Display-SF32); [Hardwaredateien](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | Exakte Board-Revision und bestückte Bauteile dokumentieren; nicht davon ausgehen, dass jede Variante gleich bestückt ist |
 | T-SF32-Keyboard-Erweiterung | Optionale Erweiterung mit ESP32-C6-WLAN, L76K-GPS, TCA8418/AW21009/XL9555-Tastatursubsystem, BME280, Infrarotsender und AW86224-Vibrationsmotor | Ergänzt die genannten Funk-, Positions-, Tastatur-, Umweltsensor-, IR- und Haptikfunktionen | Optional; nur für diese Funktionen erforderlich | [LilyGO-Repository](https://github.com/Xinyuan-LilyGO/T-Display-SF32); [Hardwaredateien](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | Diese Bauteile sind nicht auf dem eigenständigen T-SF32-Display-Board bestückt. WLAN und GPS teilen UART2; die gemeinsame Konfiguration der Erweiterung muss geprüft werden |
 | USB-Type-C-Datenverbindung und kontrollierte Stromversorgung | Datenfähiges Kabel; strombegrenztes Netzteil oder geschützter Akku mit überwachter Spannung | Flashen, Logs und sichere Prüfung der Stromversorgung | Erforderlich | [LilyGO-Repository](https://github.com/Xinyuan-LilyGO/T-Display-SF32) | D+/D- von Type-C sind mit der CH343P-USB-UART-Brücke verbunden. Der Anschluss dient zum UART-Flashen und für Logs, nicht als native USB-Geräte-/Hostverbindung des SF32. Zusätzlich die boardspezifische Startbedingung von mehr als 3,5 V beachten |
-| Schnittstellenspezifisches Testzubehör | microSD-Karte, Audiolast/Kopfhörer oder ein LoRa-Gegenstellenmodul im zulässigen Frequenzband, jeweils nur für den getesteten Pfad | Optionale Boardschnittstellen prüfen | Optional; je Test auswählen | [Beispiele](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/examples) | Vor dem Anschließen Stecker, Spannung, Region und Revision anhand der Boarddateien prüfen |
+| Schnittstellenspezifisches Testzubehör | microSD-Karte, Audiolast/Kopfhörer oder ein LoRa-Gegenstellenmodul im zulässigen Frequenzband, jeweils nur für den getesteten Pfad | Optionale Board-Schnittstellen prüfen | Optional; je Test auswählen | [Beispiele](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/examples) | Vor dem Anschließen Stecker, Spannung, Region und Revision anhand der Board-Dateien prüfen |
 
 </div>
 
@@ -82,8 +82,8 @@ Vor dem Start benötigen Sie:
 
 | Paket oder Dienst | Erforderliche Version oder Revision | Aufgabe | Status | Bezugsquelle | Hinweise zu Kompatibilität und Aktualisierung |
 |:------------------|:------------------------------------|:--------|:-------|:-------------|:---------------------------------------------|
-| T-Display-SF32-Firmware/Quellcode | Einen Repository-Commit festlegen und dokumentieren; upstream nennt keine universelle getaggte Basisversion | Boardbeispiele, Konfiguration und Firmware | Erforderlich | [Repository](https://github.com/Xinyuan-LilyGO/T-Display-SF32) | Werksimage sichern und Boardrevision sowie Commit gemeinsam dokumentieren |
-| LilyGO-Fork des SiFli-SDK | Einen Commit des Forks festlegen, der laut Dokumentation auf SiFli-SDK 2.4.0 basiert | Boardunterstützung, Treiber, Build- und Flash-Umgebung | Erforderlich | [LilyGO-SDK-Fork](https://github.com/Xinyuan-LilyGO/SlFli-SDK-Lilygo) | Die Angabe „basiert auf 2.4.0“ nennt keine exakte Forkrevision; nicht stillschweigend durch das upstream SDK ersetzen |
+| T-Display-SF32-Firmware/Quellcode | Einen Repository-Commit festlegen und dokumentieren; upstream nennt keine universelle getaggte Basisversion | Board-Beispiele, Konfiguration und Firmware | Erforderlich | [Repository](https://github.com/Xinyuan-LilyGO/T-Display-SF32) | Werksimage sichern und Board-Revision sowie Commit gemeinsam dokumentieren |
+| LilyGO-Fork des SiFli-SDK | Einen Commit des Forks festlegen, der laut Dokumentation auf SiFli-SDK 2.4.0 basiert | Board-Unterstützung, Treiber, Build- und Flash-Umgebung | Erforderlich | [LilyGO-SDK-Fork](https://github.com/Xinyuan-LilyGO/SlFli-SDK-Lilygo) | Die Angabe „basiert auf 2.4.0“ nennt keine exakte Forkrevision; nicht stillschweigend durch das upstream SDK ersetzen |
 | SCons und Flashwerkzeuge auf dem Host | Vom gewählten Fork bereitgestellte Versionen; Host-Betriebssystem und aufgelöste Versionen dokumentieren | Ziel `t-display-sf32_hcpu` bauen und flashen | Erforderlich | [LilyGO-SDK-Fork](https://github.com/Xinyuan-LilyGO/SlFli-SDK-Lilygo) | Der dokumentierte erste Buildpfad verwendet Windows/PowerShell; andere Hosts separat qualifizieren |
 | Werksfirmware V1.2 | Image passend zur Board-/Repositoryrevision | Referenz für unverändertes Verhalten und Wiederherstellung | Optional, aber vor Änderungen sichern | [Verzeichnis der Werksfirmware](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/firmware/T-SF32-Factory-V1.2) | Der Verzeichnisname allein belegt nicht die Kompatibilität zwischen Image und Board; vor dem Flashen prüfen |
 
@@ -91,7 +91,7 @@ Vor dem Start benötigen Sie:
 
 ## Unterstützte Referenzkonfiguration auswählen { #choose-a-supported-baseline }
 
-Das Upstream-Repository verwendet derzeit den Branch `master` und weist kein getaggtes Release als allgemeingültige Softwarebasis aus. Dokumentieren Sie den genauen Commit statt „latest“ zu notieren. Das Repository enthält das Verzeichnis `firmware/T-SF32-Factory-V1.2`; dessen Name ersetzt jedoch nicht die Dokumentation der passenden Board-Revision, des Repository-Commits und des Flash-Verfahrens.
+Das Upstream-Repository verwendet derzeit den Branch `master` und weist kein getaggtes Release als allgemeingültige Softwarebasis aus. Dokumentieren Sie den genauen Commit, statt „latest“ zu notieren. Das Repository enthält das Verzeichnis `firmware/T-SF32-Factory-V1.2`; dessen Name ersetzt jedoch nicht die Dokumentation der passenden Board-Revision, des Repository-Commits und des Flash-Verfahrens.
 
 <div align="center"><em>Tabelle: Auswahl der T-Display-SF32-Basis</em></div>
 
@@ -102,8 +102,8 @@ Das Upstream-Repository verwendet derzeit den Branch `master` und weist kein get
 | Board | Ein fotografiertes T-Display-SF32-Gerät mit dokumentierter Revision | Pinbelegung und bestückte Peripherie nicht ungeprüft von einer anderen Revision oder einer Tastaturvariante übernehmen |
 | Werkszustand | Mitgeliefertes Verzeichnis Factory V1.2 oder unveränderter `menu_app`-Build, je nach Gerät | Herkunft und Kompatibilität vor dem Flashen prüfen; Originalimage aufbewahren |
 | Quellcode | Fixierter Commit des T-Display-SF32-Repositories | Das Repository entwickelt sich unabhängig vom SiFli-SDK weiter |
-| SDK | Fixierter Commit des LilyGO-SDK-Forks, laut Dokumentation abgeleitet von SiFli-SDK 2.4.0 | Nicht stillschweigend durch eine andere SDK-Revision ersetzen; Boardtreiber und Konfiguration können abweichen |
-| Buildziel | `t-display-sf32_hcpu` | LilyGO-Boardziel, kein generisches SF32LB52x-Ziel |
+| SDK | Fixierter Commit des LilyGO-SDK-Forks, laut Dokumentation abgeleitet von SiFli-SDK 2.4.0 | Nicht stillschweigend durch eine andere SDK-Revision ersetzen; Board-Treiber und Konfiguration können abweichen |
+| Buildziel | `t-display-sf32_hcpu` | LilyGO-Board-Ziel, kein generisches SF32LB52x-Ziel |
 | Versorgungseingang | LilyGOs genannte Startbedingung von mehr als 3,5 V beachten und in eigener Firmware Spannungserkennung sowie Abschaltung bei niedrigem Akkustand implementieren | Als zu prüfende Herstelleranforderung behandeln, nicht als Ersatz für Chipdatenblatt, Akku-Grenzwerte oder gemessenes Brownout-Verhalten |
 
 </div>
@@ -116,7 +116,7 @@ scons --board=t-display-sf32_hcpu -j8
 build_t-display-sf32_hcpu\uart_download.bat
 ```
 
-Dokumentieren Sie die tatsächlichen Repository- und SDK-Commits, die eingerichtete SDK-Umgebung, das vollständige Build-Protokoll, erzeugte Images sowie Flash- und Bootprotokoll. Die Zahl paralleler Jobs darf variieren, Buildziel und Quellrevisionen nicht.
+Dokumentieren Sie die tatsächlichen Repository- und SDK-Commits, das Ergebnis des Umgebungsexports, das vollständige Build-Protokoll, erzeugte Images sowie Flash- und Bootprotokoll. Die Zahl paralleler Jobs darf variieren, Buildziel und Quellrevisionen nicht.
 
 ## Projektphasen und Entscheidungspunkte { #delivery-map }
 
@@ -150,14 +150,14 @@ flowchart LR
     O["SiFli-Geräte- und SDK-Quellen"] -. "Referenz der Plattformbasis" .-> S
 ```
 
-Betrachten Sie Fehler als getrennte Bereiche: Stromversorgung/Laden des Boards, Start und Flashen, Display/Touch, jede ausgewählte Peripherie, LilyGO-Boardunterstützung und das zugrunde liegende SDK. Ein fehlgeschlagenes Displaybeispiel kann etwa auf Stromversorgung, Board-Revision, Panel-/Touchkonfiguration, Anwendung oder eine Unvereinbarkeit von SDK und Treiber zurückgehen. „Das SDK ist ausgefallen“ ist keine ausreichende Diagnose.
+Betrachten Sie Fehler als getrennte Bereiche: Stromversorgung/Laden des Boards, Start und Flashen, Display/Touch, jede ausgewählte Peripherie, LilyGO-Board-Unterstützung und das zugrunde liegende SDK. Ein fehlgeschlagenes Displaybeispiel kann etwa auf Stromversorgung, Board-Revision, Panel-/Touchkonfiguration, Anwendung oder eine Unvereinbarkeit von SDK und Treiber zurückgehen. „Das SDK ist fehlgeschlagen“ ist keine ausreichende Diagnose.
 
-## Phase 1 — Die unveränderte Hersteller-Basis etablieren { #stage-1-establish-the-untouched-vendor-baseline }
+## Phase 1 — Die unveränderte Herstellerbasis einrichten { #stage-1-establish-the-untouched-vendor-baseline }
 
 **Ziel:** vor jeder Quellcodeänderung nachweisen, wie sich das gelieferte Board und die Herstellerbasis tatsächlich verhalten.
 
 1. Fotografieren Sie beide Platinenseiten und dokumentieren Sie Kennzeichnungen, bestückte Peripherie, Display-/Touchbauteile, Speicher, Schalter, Anschlüsse und Repository-Commit.
-2. Stromquelle und Polarität prüfen. LilyGO weist darauf hin, dass zum Start mehr als 3,5 V erforderlich sind. Verwenden Sie eine überwachte Stromquelle und keinen tiefentladenen Akku als Testmethode.
+2. Prüfen Sie Stromquelle und Polarität. LilyGO weist darauf hin, dass zum Start mehr als 3,5 V erforderlich sind. Verwenden Sie eine überwachte Stromquelle und keinen tiefentladenen Akku als Testmethode.
 3. Flashen Sie nur eine nachweislich zum Board passende Basis oder führen Sie zunächst die vorhandene Firmware aus, sofern ihre Herkunft bekannt ist. Sichern Sie das Originalimage nach Möglichkeit.
 4. Testen Sie das Menü auf dem Gerät oder unveränderte Beispiele für Display/Touch und jede für das Produkt ausgewählte Peripherie. Dokumentieren Sie nicht verfügbare oder nicht bestückte Funktionen, statt sie als Fehler zu werten.
 5. Starten Sie zweimal kalt und sichern Sie Bootprotokolle, UI-Fotos, Touch-/Eingabeergebnisse sowie einen Stromverlauf für eine klar definierte Leerlauf-/Aktivitätslast.
@@ -192,12 +192,12 @@ Betrachten Sie Fehler als getrennte Bereiche: Stromversorgung/Laden des Boards, 
 
 **Ziel:** einem zweiten Entwickler ermöglichen, dieselbe Basis aus sauberen, versionsfixierten Quellen zu bauen und zu flashen.
 
-1. Fixierte Commits des Board-Repositories und des LilyGO-SDK-Forks auschecken; die angegebene Upstream-SDK-Basis des Forks dokumentieren.
-2. Die dokumentierte PowerShell-Umgebung einrichten und `t-display-sf32_hcpu` aus einem sauberen Verzeichnis bauen.
-3. Nachweise zu Umgebung, Abhängigkeiten, Konfiguration, Speicher/Partitionen, Image, Flashvorgang und seriellen Protokollen sichern.
-4. Auf einem anderen Rechner oder nach Löschen sämtlicher Build-Ausgaben wiederholen und anschließend die vollständige Regression aus Phase 2 durchführen.
+1. Checken Sie fixierte Commits des Board-Repositories und des LilyGO-SDK-Forks aus und dokumentieren Sie die angegebene Upstream-SDK-Basis des Forks.
+2. Richten Sie die dokumentierte PowerShell-Umgebung ein und bauen Sie `t-display-sf32_hcpu` aus einem sauberen Verzeichnis.
+3. Sichern Sie Nachweise zu Umgebung, Abhängigkeiten, Konfiguration, Speicher/Partitionen, Image, Flashvorgang und seriellen Protokollen.
+4. Wiederholen Sie den Vorgang auf einem anderen Rechner oder nach Löschen sämtlicher Build-Ausgaben und führen Sie anschließend die vollständige Regression aus Phase 2 durch.
 
-**Abnahmekriterium für Kontrollpunkt 3:** Um eine Firmware zu erzeugen, die Phase 2 besteht, sind weder veraltete Images noch nicht versionierte Boarddateien noch undokumentierte SDK-Ersetzungen erforderlich.
+**Abnahmekriterium für Kontrollpunkt 3:** Um eine Firmware zu erzeugen, die Phase 2 besteht, sind weder veraltete Images noch nicht versionierte Board-Dateien noch undokumentierte SDK-Ersetzungen erforderlich.
 
 ## Phase 4 — Jeweils einen Produktpfad anpassen { #stage-4-adapt-one-product-path-at-a-time }
 
@@ -214,7 +214,7 @@ Betrachten Sie Fehler als getrennte Bereiche: Stromversorgung/Laden des Boards, 
 | Speicher/Audio | Eine Dateioperation oder ein Wiedergabepfad | Fehlende Medien, fehlerhafte Daten, Lautstärke-/Ausgangsgrenzen, Stromunterbrechung und Dateisystemwiederherstellung |
 | LoRa | Ein begrenzter Paketaustausch in einem zulässigen Frequenzband | Konfigurationsprotokoll, Timeout, Wiederholungen, Strom, Koexistenz und regulatorische Prüfung |
 | Stromversorgung | Eine Änderung an Schlaf-/Aufweckverhalten oder Stromschienensteuerung | Alle Weckquellen, Display-/Peripheriezustand, Niedrigakkuabschaltung, Laden und wiederholte Zyklen |
-| SDK-Migration | Ein Update-Kandidat für den LilyGO-Fork oder das Upstream-SDK | Diff der Boardkonfiguration, sauberer Build, Regression jeder Peripherie, Strommessungen und Rollback |
+| SDK-Migration | Ein Update-Kandidat für den LilyGO-Fork oder das Upstream-SDK | Diff der Board-Konfiguration, sauberer Build, Regression jeder Peripherie, Strommessungen und Rollback |
 
 </div>
 
@@ -224,7 +224,7 @@ Betrachten Sie Fehler als getrennte Bereiche: Stromversorgung/Laden des Boards, 
 
 Vor einem Feldversuch oder einer eigenen Leiterplatte sind folgende Fragen zu beantworten:
 
-- Wer verantwortet Boarddateien, LilyGO-SDK-Fork, Treiberkorrekturen, Sicherheitsupdates und die Migration auf spätere SiFli-SDK-Versionen?
+- Wer verantwortet Board-Dateien, LilyGO-SDK-Fork, Treiberkorrekturen, Sicherheitsupdates und die Migration auf spätere SiFli-SDK-Versionen?
 - Welche Board-Revisionen und bestückten Peripheriebausteine gehören zur Produktbasis, und wie werden eingehende Geräte identifiziert und geprüft?
 - Wie hoch sind die gemessenen Ströme im Aktiv-, Leerlauf-, Schlaf-, Start- und Abschaltzustand bei vorgesehener Displayhelligkeit, Funk-Tastverhältnis, Speicher- und Sensorkonfiguration?
 - Wie werden Akkuschutz, Laden, Temperaturverhalten, Gehäuse, Anschlusszugang und Wiederherstellung im ausgeschalteten Zustand verifiziert?

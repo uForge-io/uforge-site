@@ -13,7 +13,7 @@ Nada disso seria viável sem as ferramentas baseadas em modelos de linguagem, e 
 
 ### Mantendo as traduções consistentes { #keeping-translations-consistent }
 
-Para que as iterações convergissem, mantemos um glossário com os termos que devem permanecer sem tradução (códigos de peças, unidades, nomes de protocolos) ou usar uma tradução aprovada, além de um checklist de qualidade que cobre a completude técnica, a correção de links e âncoras e a integridade do Markdown e do código. Cada idioma mantém a mesma estrutura de páginas do original em inglês. Os builds são validados em modo estrito: links quebrados ou páginas ausentes fazem a compilação falhar antes da publicação.
+Para que as iterações convirjam, mantemos um glossário com os termos que devem permanecer sem tradução (códigos de peças, unidades, nomes de protocolos) ou usar uma tradução aprovada, além de um checklist de qualidade que cobre a completude técnica, a correção de links e âncoras e a integridade do Markdown e do código. Cada idioma mantém a mesma estrutura de páginas do original em inglês. Os builds são validados em modo estrito: links quebrados ou páginas ausentes fazem a compilação falhar antes da publicação.
 
 ### Um aviso e um pedido { #caveat-and-request }
 

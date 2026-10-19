@@ -79,7 +79,7 @@ SF32LB52-DevKit-ULP 也被称为 **立创黄山派**、**LCKFB-HSPI-SF32LB52-ULP
 - 验证由按键、传感器、触摸或固件定时器驱动的唤醒流程
 - 将真实产品级功耗行为与更简单 DevKit 的早期估算进行对比
 
-如果你需要一块偏显示验证的通用评估板，请使用 [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md)。如果需要紧凑型贴装模组原型方案，请使用 [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md)。如果在早期台式调试阶段需要尽可能直接的引脚访问，请使用 [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md)。
+如果你需要一块偏显示验证的通用评估板，请使用 [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md)。如果需要紧凑型贴装模组原型方案，请使用 [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md)。如果在早期台架启动调试阶段需要尽可能直接的引脚访问，请使用 [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md)。
 
 ## 硬件配置 { #hardware-configuration }
 

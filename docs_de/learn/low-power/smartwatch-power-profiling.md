@@ -15,11 +15,11 @@ Die Stromverbrauchsanalyse macht aus der erwarteten täglichen Nutzung eine Sch�
     Die Ströme und Nutzungsannahmen in diesem Beispiel gehören zum bereitgestellten Modell. Sie sind keine Charakterisierungsdaten für ein bestimmtes SF32-Gerät, Display, einen Akku oder ein Uhrendesign. Ersetzen Sie sie durch Messwerte Ihrer Hardware, bevor Sie das Ergebnis für eine Aussage zur Akkulaufzeit eines Produkts verwenden.
     Die Arbeitsmappe enthält kein Messprotokoll und kennzeichnet daher keinen Eingabewert als Hardware-Messung. Das Ergebnis von 13,15 Tagen ist eine Modellschätzung und keine beobachtete Laufzeit.
 
-Nutzen Sie diese Seite zusammen mit der [Low-Power-Übersicht](overview.md) für Architektur und Firmware-Hinweise und mit [Leistungsmessung und Validierung](measurement-and-validation.md) für den Messablauf, der das Modell validiert.
+Nutzen Sie diese Seite zusammen mit der [Low-Power-Übersicht](overview.md) für Architektur und Firmware-Hinweise und mit [Energieverbrauch messen und validieren](measurement-and-validation.md) für den Messablauf, der das Modell validiert.
 
 ## Überblick über das Smartwatch-System { #smartwatch-system-overview }
 
-Legen Sie zunächst die Modellgrenze fest. Diese Arbeitsmappe bildet eine akkubetriebene Smartwatch mit MCU, AMOLED-Display, Vibrationsmotor und einem nicht zugeordneten Lastbereich `Other` ab. Sie nennt weder Panelgröße, Auflösung, Helligkeitseinstellung, Funkarchitektur noch einzelne Sensoren. Betrachten Sie die unten genannten Display-Ströme als Eingaben der Arbeitsmappe und nicht als gemessene Arbeitspunkte oder Spezifikationen eines bestimmten Panels. Betrachten Sie `Other` als Modellgrenze und nicht als ein einzelnes physisches Bauteil.
+Legen Sie zunächst die Modellgrenze fest. Diese Arbeitsmappe bildet eine akkubetriebene Smartwatch mit MCU, AMOLED-Display, Vibrationsmotor und einem nicht zugeordneten Lastbereich „Sonstiges“ ab. Sie nennt weder Panelgröße, Auflösung, Helligkeitseinstellung, Funkarchitektur noch einzelne Sensoren. Betrachten Sie die unten genannten Display-Ströme als Eingaben der Arbeitsmappe und nicht als gemessene Arbeitspunkte oder Spezifikationen eines bestimmten Panels. Betrachten Sie „Sonstiges“ als Modellgrenze und nicht als ein einzelnes physisches Bauteil.
 
 <div align="center"><em>Tabelle: Smartwatch-System und Modelleingaben</em></div>
 
@@ -27,7 +27,7 @@ Legen Sie zunächst die Modellgrenze fest. Diese Arbeitsmappe bildet eine akkube
 
 | Posten | Wert in der Arbeitsmappe | Warum er wichtig ist |
 |:-----|----------------------:|:---------------|
-| Stromaufnahme des AMOLED-Displays im Normalbetrieb | 15 mA | Wird für Benachrichtigungen, Hinweise auf eingehende Anrufe und die Funktion „Aktivieren beim Anheben“ verwendet. |
+| Stromaufnahme des AMOLED-Displays im Normalbetrieb | 15 mA | Wird für Benachrichtigungen, Hinweise auf eingehende Anrufe und die Raise-to-Wake-Funktion verwendet. |
 | Stromaufnahme des AMOLED-Displays im AOD-Modus | 2 mA | Im Modell definiert, aber das zugehörige AOD-Szenario ist in dieser Basis deaktiviert. |
 | Nennkapazität des Akkus | 250 mAh | Die Ausgangskapazität vor dem Abschlag des Modells. |
 | Kapazitätsabschlag durch Akkualterung | 7 % | Verringert die verfügbare Kapazität auf 232,5 mAh. |
@@ -57,10 +57,10 @@ Ein Szenario bildet ein vollständiges Nutzer- oder Systemereignis ab, nicht nur
 | Hinweis auf eingehenden Anruf | Display | 3,3 V | 15 mA | 85,27 % | 0,4167 mAh | 2,36 % |
 | Hinweis auf eingehenden Anruf | Vibrationsmotor | 3,3 V | 11,25 mA | 85,27 % | 0,3125 mAh | 1,77 % |
 | Hinweis auf eingehenden Anruf | Sonstiges | 3,87 V | 0,04 mA | 100,00 % | 0,0011 mAh | 0,01 % |
-| Aktivieren beim Anheben | MCU | 3,3 V | 2,607 mA | 85,27 % | 0,7242 mAh | 4,10 % |
-| Aktivieren beim Anheben | Display | 3,3 V | 15 mA | 85,27 % | 4,1667 mAh | 23,56 % |
-| Aktivieren beim Anheben | Vibrationsmotor | 3,3 V | 0 mA | 85,27 % | 0 mAh | 0,00 % |
-| Aktivieren beim Anheben | Sonstiges | 3,87 V | 0,04 mA | 100,00 % | 0,0111 mAh | 0,06 % |
+| Raise-to-Wake | MCU | 3,3 V | 2,607 mA | 85,27 % | 0,7242 mAh | 4,10 % |
+| Raise-to-Wake | Display | 3,3 V | 15 mA | 85,27 % | 4,1667 mAh | 23,56 % |
+| Raise-to-Wake | Vibrationsmotor | 3,3 V | 0 mA | 85,27 % | 0 mAh | 0,00 % |
+| Raise-to-Wake | Sonstiges | 3,87 V | 0,04 mA | 100,00 % | 0,0111 mAh | 0,06 % |
 | Automatische Herzfrequenzmessung | MCU | 3,3 V | 0,207 mA | 85,27 % | 0,1656 mAh | 0,94 % |
 | Automatische Herzfrequenzmessung | Display | 3,3 V | 0 mA | 85,27 % | 0 mAh | 0,00 % |
 | Automatische Herzfrequenzmessung | Vibrationsmotor | 3,3 V | 0,08 mA | 85,27 % | 0,0640 mAh | 0,36 % |
@@ -89,10 +89,10 @@ Ein Szenario bildet ein vollständiges Nutzer- oder Systemereignis ab, nicht nur
 | NFC-Kartentransaktion | Display | 3,3 V | 15 mA | 85,27 % | 0 mAh | 0,00 % |
 | NFC-Kartentransaktion | Vibrationsmotor | 3,3 V | 11,25 mA | 85,27 % | 0 mAh | 0,00 % |
 | NFC-Kartentransaktion | Sonstiges | 3,87 V | 0,04 mA | 100,00 % | 0 mAh | 0,00 % |
-| Bluetooth-Anruf | MCU | 3,3 V | 10 mA | 85,27 % | 0 mAh | 0,00 % |
-| Bluetooth-Anruf | Display | 3,3 V | 15 mA | 85,27 % | 0 mAh | 0,00 % |
-| Bluetooth-Anruf | Vibrationsmotor | 3,3 V | 11,25 mA | 85,27 % | 0 mAh | 0,00 % |
-| Bluetooth-Anruf | Sonstiges | 3,87 V | 0,04 mA | 100,00 % | 0 mAh | 0,00 % |
+| Bluetooth-Telefonie | MCU | 3,3 V | 10 mA | 85,27 % | 0 mAh | 0,00 % |
+| Bluetooth-Telefonie | Display | 3,3 V | 15 mA | 85,27 % | 0 mAh | 0,00 % |
+| Bluetooth-Telefonie | Vibrationsmotor | 3,3 V | 11,25 mA | 85,27 % | 0 mAh | 0,00 % |
+| Bluetooth-Telefonie | Sonstiges | 3,87 V | 0,04 mA | 100,00 % | 0 mAh | 0,00 % |
 | AOD, MCU-Aktualisierung einmal pro Minute | MCU | 3,3 V | 2,5 mA | 85,27 % | 0 mAh | 0,00 % |
 | AOD, MCU-Aktualisierung einmal pro Minute | Display | 3,3 V | 0 mA | 85,27 % | 0 mAh | 0,00 % |
 | AOD, MCU-Aktualisierung einmal pro Minute | Vibrationsmotor | 3,3 V | 0 mA | 85,27 % | 0 mAh | 0,00 % |
@@ -143,7 +143,7 @@ Beispielsweise zieht eine 1-mA-Last bei 3,3 V aus einem Akku mit 3,87 V über ei
 
 ## Den Tagesverbrauch aus der Produktnutzung berechnen { #calculate-daily-consumption-from-product-usage }
 
-Dasselbe Szenario kann je nach Produktnutzung vernachlässigbar oder dominant sein. Für die Beispielrechnung bildet die Arbeitsmappe einen repräsentativen Tagesablauf ab: Basis-Standby, Benachrichtigungen, Hinweise auf eingehende Anrufe, Aktivieren beim Anheben, Herzfrequenz- und SpO2-Messungen, Trainingsaufzeichnung, Wecker, Schlafüberwachung und App-Synchronisierung. NFC, Bluetooth-Telefonie und beide AOD-Szenarien sind auf null gesetzt und daher nicht im Ergebnis von 13,15 Tagen enthalten.
+Dasselbe Szenario kann je nach Produktnutzung vernachlässigbar oder dominant sein. Für die Beispielrechnung bildet die Arbeitsmappe einen repräsentativen Tagesablauf ab: Basis-Standby, Benachrichtigungen, Hinweise auf eingehende Anrufe, Raise-to-Wake, Herzfrequenz- und SpO2-Messungen, Trainingsaufzeichnung, Wecker, Schlafüberwachung und App-Synchronisierung. NFC, Bluetooth-Telefonie und beide AOD-Szenarien sind auf null gesetzt und daher nicht im Ergebnis von 13,15 Tagen enthalten.
 
 <div align="center"><em>Tabelle: Tagesnutzungsprofil des Produkts und Beiträge</em></div>
 
@@ -154,7 +154,7 @@ Dasselbe Szenario kann je nach Produktnutzung vernachlässigbar oder dominant se
 | Basis-Standby | 1 | Verbleibende Sekunden des Tages (`=G7`) | 52 425,7 s | 11,69 % | Aktiviert |
 | Nachrichtenbenachrichtigung | 100 | 5 s | 500 s | 22,62 % | Aktiviert |
 | Hinweis auf eingehenden Anruf | 10 | 10 s | 100 s | 4,52 % | Aktiviert |
-| Aktivieren beim Anheben | 200 | 5 s | 1 000 s | 27,72 % | Aktiviert |
+| Raise-to-Wake | 200 | 5 s | 1 000 s | 27,72 % | Aktiviert |
 | Automatische Herzfrequenzmessung | 48 | 60 s | 2 880 s | 1,48 % | Aktiviert |
 | Manuelle SpO2-Messung | 2 | 40 s | 80 s | 2,22 % | Aktiviert |
 | Trainingsaufzeichnung | 1 | `3600 / 7` s | 514,3 s | 12,35 % | Aktiviert; eine Stunde pro Woche, auf den Tag gemittelt |
@@ -162,7 +162,7 @@ Dasselbe Szenario kann je nach Produktnutzung vernachlässigbar oder dominant se
 | Schlafüberwachung | 1 | `8 x 3600` s | 28 800 s | 13,03 % | Aktiviert |
 | Synchronisierung der App-Daten | 20 | 0,5 s | 10 s | 0,45 % | Aktiviert |
 | NFC-Kartentransaktion | 0 | 5 s | 0 s | 0,00 % | Deaktiviert |
-| Bluetooth-Anruf | 0 | `2 x 60` s | 0 s | 0,00 % | Deaktiviert |
+| Bluetooth-Telefonie | 0 | `2 x 60` s | 0 s | 0,00 % | Deaktiviert |
 | AOD, MCU-Aktualisierung einmal pro Minute | 0 | 0,05 s | 0 s | 0,00 % | Deaktiviert |
 | AOD, Display ein | 0 | `(24 - 8) x 3600` s | 0 s | 0,00 % | Deaktiviert |
 
@@ -191,7 +191,7 @@ Die Szenario-Rangfolge des Modells ist aussagekräftiger als die endgültige Akk
 
 | Szenario | Tägliche Ladung | Anteil an der täglichen Ladung | Angenommenes Tagesverhalten |
 |:---------|------------:|----------------------:|:-----------------------|
-| Aktivieren beim Anheben | 4,90 mAh | 27,72 % | 200 Ereignisse, je 5 s. |
+| Raise-to-Wake | 4,90 mAh | 27,72 % | 200 Ereignisse, je 5 s. |
 | Nachrichtenbenachrichtigung | 4,00 mAh | 22,62 % | 100 Benachrichtigungen, je 5 s. |
 | Schlafüberwachung | 2,30 mAh | 13,03 % | 8 h. |
 | Trainingsaufzeichnung | 2,18 mAh | 12,35 % | 1 h pro Woche, auf den Tag gemittelt. |
@@ -209,7 +209,7 @@ Die Szenario-Rangfolge des Modells ist aussagekräftiger als die endgültige Akk
 ```mermaid
 pie showData
     title Tägliche Ladung (mAh/Tag) je aktiviertem Szenario
-    "Aktivieren beim Anheben" : 4.9020
+    "Raise-to-Wake" : 4.9020
     "Benachrichtigungen" : 3.9996
     "Schlafüberwachung" : 2.3040
     "Training" : 2.1839
@@ -247,9 +247,9 @@ pie showData
     "Sonstiges / nicht zugeordnet (1,29 mAh/Tag)" : 1.2866
 ```
 
-Das Diagramm weist das letzte Segment bewusst als `Other / unallocated` aus. Die Arbeitsmappe liefert keine unabhängigen Werte auf der Akkuseite für Bluetooth, Beschleunigungssensor oder Gyroskop. Dass das Szenario für Bluetooth-Anrufe deaktiviert ist, belegt nicht, dass Bluetooth keinen Energiebedarf hat: Das Szenario zur App-Synchronisierung kann ebenfalls den Funkpfad nutzen; die Arbeitsmappe weist diesen Anteil jedoch nicht separat aus. Ebenso kann der Sensorverbrauch in `Other` enthalten sein. Anhand der bereitgestellten Daten lässt er sich aber nicht separat dem Beschleunigungssensor oder Gyroskop zuordnen.
+Das Diagramm weist das letzte Segment bewusst als „Sonstiges / nicht zugeordnet“ aus. Die Arbeitsmappe liefert keine unabhängigen Werte auf der Akkuseite für Bluetooth, Beschleunigungssensor oder Gyroskop. Dass das Szenario für Bluetooth-Telefonie deaktiviert ist, belegt nicht, dass Bluetooth keinen Energiebedarf hat: Das Szenario zur App-Synchronisierung kann ebenfalls den Funkpfad nutzen; die Arbeitsmappe weist diesen Anteil jedoch nicht separat aus. Ebenso kann der Sensorverbrauch in „Sonstiges“ enthalten sein. Anhand der bereitgestellten Daten lässt er sich aber nicht separat dem Beschleunigungssensor oder Gyroskop zuordnen.
 
-Um daraus ein Diagramm mit fünf Kategorien zu machen — MCU, Display, Vibrationsmotor, Bluetooth und eine kombinierte Kategorie für Beschleunigungssensor/Gyroskop —, ergänzen Sie getrennte Zeilen für Bluetooth-Leerlauf und -Übertragung, für Modi und Tastverhältnisse des Beschleunigungssensors sowie für Modi und Tastverhältnisse des Gyroskops. Messen Sie jede Zeile am Akkueingang oder wenden Sie den gemessenen Reglerwirkungsgrad an, bevor Sie sie zur Summe in mAh auf der Akkuseite addieren. Ersetzen Sie dann das Segment `Other / unallocated`, statt ein zweites, überlappendes Sensor- oder Bluetooth-Segment hinzuzufügen.
+Um daraus ein Diagramm mit fünf Kategorien zu machen — MCU, Display, Vibrationsmotor, Bluetooth und eine kombinierte Kategorie für Beschleunigungssensor/Gyroskop —, ergänzen Sie getrennte Zeilen für Bluetooth-Leerlauf und -Übertragung, für Modi und Tastverhältnisse des Beschleunigungssensors sowie für Modi und Tastverhältnisse des Gyroskops. Messen Sie jede Zeile am Akkueingang oder wenden Sie den gemessenen Reglerwirkungsgrad an, bevor Sie sie zur Summe in mAh auf der Akkuseite addieren. Ersetzen Sie dann das Segment „Sonstiges / nicht zugeordnet“, statt ein zweites, überlappendes Sensor- oder Bluetooth-Segment hinzuzufügen.
 
 ### Basisverbrauch der MCU, szenariobezogene MCU-Arbeit und Sensorlasten trennen { #separate-standby-mcu-active-mcu-and-sensors }
 
@@ -262,7 +262,7 @@ Die Arbeitsmappe weist einen eigenen Bereich `MCU` aus, isoliert das Grafik-Rend
 | MCU-Aktivitätsgruppe | Tägliche Ladung | Anteil an der gesamten täglichen Ladung | Anteil an der MCU-Ladung | Interpretation |
 |:-------------------|------------:|----------------------------:|--------------------:|:---------------|
 | Basis-Standby | 1,49 mAh | 8,40 % | 32,18 % | 0,102 mA für die verbleibenden 14,56 h des Modells. Dies ist eine Annahme für den MCU-Bereich auf Systemebene und kein verifizierter Leckstrom des nackten Dies. |
-| Interaktion mit eingeschaltetem Display | 1,30 mAh | 7,36 % | 28,19 % | Szenarien Nachricht, eingehender Anruf, Aktivieren beim Anheben, SpO2, Training, Wecker und App-Synchronisierung. Enthält Ereignisbehandlung ebenso wie etwaige Grafikarbeit. |
+| Interaktion mit eingeschaltetem Display | 1,30 mAh | 7,36 % | 28,19 % | Szenarien Nachricht, eingehender Anruf, Raise-to-Wake, SpO2, Training, Wecker und App-Synchronisierung. Enthält Ereignisbehandlung ebenso wie etwaige Grafikarbeit. |
 | Schlafüberwachung | 1,66 mAh | 9,41 % | 36,04 % | 0,208 mA über 8 h; der größte einzelne MCU-Eintrag im Modell. |
 | Automatische Herzfrequenzmessung | 0,17 mAh | 0,94 % | 3,59 % | Geplante Sensorik und die zugehörige MCU-Arbeit. |
 | **MCU gesamt** | **4,62 mAh** | **26,11 %** | **100 %** | Alle ausdrücklichen MCU-Einträge der Arbeitsmappe. |
@@ -304,9 +304,9 @@ Die Arbeitsmappe enthält keine eigene Sensorkategorie. Der Bereich `Other` ist 
 
 Arbeiten Sie vom größten modellierten Beitrag abwärts und validieren Sie die Reihenfolge dann durch Messungen. In diesem Modell ist folgende Abfolge sinnvoll:
 
-1. **Display-Richtlinie:** Messen Sie den vollständigen Verlauf beim Aktivieren durch Anheben. Verringern Sie Fehlauslösungen der Gestenerkennung, Display-Einschaltdauer, Helligkeit, Vollbild-Neuzeichnungen und unnötige Animationen, bevor Sie sich mit kleinsten MCU-Strömen befassen.
+1. **Display-Richtlinie:** Messen Sie den vollständigen Raise-to-Wake-Verlauf. Verringern Sie Fehlauslösungen der Gestenerkennung, Display-Einschaltdauer, Helligkeit, Vollbild-Neuzeichnungen und unnötige Animationen, bevor Sie sich mit kleinsten MCU-Strömen befassen.
 2. **Benachrichtigungsrichtlinie:** Fassen Sie nicht dringende Benachrichtigungen zusammen, soweit das Produkterlebnis es erlaubt. Prüfen Sie, ob jedes Ereignis sowohl Display als auch haptisches Feedback braucht.
-3. **Verbundener Standby:** Bestätigen Sie, dass die MCU nach jedem Ereignis den vorgesehenen Schlafzustand erreicht. Prüfen Sie periodische Timer, Polling-Schleifen, Bluetooth-Callbacks und Anforderungen des Energiemanagements.
+3. **Vernetzter Standby:** Bestätigen Sie, dass die MCU nach jedem Ereignis den vorgesehenen Schlafzustand erreicht. Prüfen Sie periodische Timer, Polling-Schleifen, Bluetooth-Callbacks und Anforderungen des Energiemanagements.
 4. **Haptische Muster:** Stimmen Sie Amplitude und Dauer anhand von Wahrnehmungstests ab. Ein kürzeres oder sanfteres Muster kann Energie sparen, ohne Hinweise schlechter nutzbar zu machen.
 5. **Langlaufende Sensorik:** Messen Sie Schlafüberwachung und Trainingsaufzeichnung als vollständige Nutzungsszenarien, einschließlich Sensor-Tastverhältnis, Verarbeitung, Speicherverkehr und Funkverhalten.
 
@@ -323,7 +323,7 @@ Das Modell wird nützlich, wenn es laufend an Messungen kalibriert wird. Erfasse
 | Szenario | Was zu messen ist | Welche Werte ins Modell übernommen werden |
 |:---------------|:----------------|:---------------------------------|
 | Standby bei ausgeschaltetem Display | Durchschnittsstrom und unerwartete Aufwachvorgänge über eine lange Aufzeichnung | Basisstrom von MCU, Sensoren, PMIC und sonstigen Hintergrundlasten. |
-| Aktivieren beim Anheben | Gestenerkennung, Aufwachlatenz, Display-Strom und Einschaltdauer des Bildschirms | Tatsächliche Ereignisanzahl, Display-Dauer und UI-Kosten. |
+| Raise-to-Wake | Gestenerkennung, Aufwachlatenz, Display-Strom und Einschaltdauer des Bildschirms | Tatsächliche Ereignisanzahl, Display-Dauer und UI-Kosten. |
 | Benachrichtigung | Aktivität von MCU, Display, Haptik und Bluetooth bei einem Hinweis | Energie pro Benachrichtigung und die korrekte Tagesanzahl. |
 | Schlafüberwachung | Eine vollständige Aufzeichnung über Nacht oder ein repräsentatives wiederholbares Fenster | Sensor-Tastverhältnis und Kosten der periodischen Verarbeitung. |
 | Trainingsaufzeichnung | Aktivität von Sensor, Display, Speicher und Funk über die vorgesehene Sitzung | Energie pro Sitzung und realistische wöchentliche Häufigkeit. |
@@ -342,7 +342,7 @@ Das Modell wird nützlich, wenn es laufend an Messungen kalibriert wird. Erfasse
 ## Wichtigste Erkenntnisse { #key-takeaways }
 
 - Die Akkulaufzeit ist die effektive Akkukapazität geteilt durch die tägliche Ladungsaufnahme; dieses Modell projiziert 13,15 Tage aus 232,5 mAh nutzbarer Kapazität und 17,68 mAh/Tag aktivierter Last.
-- In der bereitgestellten Basis dominiert das Display-Verhalten das Budget. Aktivieren beim Anheben und Nachrichtenbenachrichtigungen machen allein etwa die Hälfte der täglichen Ladung aus.
+- In der bereitgestellten Basis dominiert das Display-Verhalten das Budget. Raise-to-Wake und Nachrichtenbenachrichtigungen machen allein etwa die Hälfte der täglichen Ladung aus.
 - Die Szenario-Rangfolge zeigt, wo zuerst gemessen und optimiert werden sollte; sie ist nützlicher als eine einzelne Durchschnittsstromzahl.
 - Verwenden Sie den tatsächlichen Wandlerwirkungsgrad und Ruhestrom, bevor Sie eine Prognose der Arbeitsmappe als Aussage zur Akkulaufzeit des Produkts behandeln.
 - Wiederholen Sie den Kreislauf: realistisches Verhalten modellieren, die dominanten Szenen messen, die Annahmen aktualisieren und dann optimieren.

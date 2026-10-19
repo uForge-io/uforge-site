@@ -10,7 +10,7 @@ tags:
 
 OpenSiFli 提供基于 Zephyr 的 SF32 BETA 版 Arduino Core：[OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr)。它发布 `sifli:sf32lb52` Arduino 软件包，在 Boards Manager 中显示为 **SiFli Serial Boards**；当前目标开发板为 **SiFli SF32LB52 DevKit LCD**。
 
-这套 Arduino Core 适合编写和验证 Arduino 程序（sketch）、快速检查外设、制作演示及开发早期原型。若要开发量产固件、调优蓝牙（Bluetooth）协议栈、实现图形密集型应用、优化功耗或调试自定义开发板，请使用 [SiFli-SDK](../sifli/getting-started-sifli-sdk.md)。
+这套 Arduino Core 适合编写和验证 Arduino 程序（sketch）、快速检查外设、制作演示及开发早期原型。若要开发量产固件、调优蓝牙（Bluetooth）协议栈、实现图形密集型应用、优化功耗或启动调试自定义开发板，请使用 [SiFli-SDK](../sifli/getting-started-sifli-sdk.md)。
 
 !!! warning "测试版核心"
     OpenSiFli 将这个 Arduino Core 标记为 **BETA**，并明确说明目前仅供测试。功能、API、加载器（loader）行为、软件包内容和发布机制都可能变化，不要将其视为已达到量产就绪状态。

@@ -12,7 +12,7 @@ tags:
 
 ## ¿Qué es ZMK en SF32? { #what-is-zmk-on-sf32 }
 
-[ZMK Firmware](https://zmk.dev/) es un firmware de teclado con licencia MIT basado en Zephyr. El proyecto principal de ZMK proporciona el modelo de aplicación utilizado por muchos teclados cableados, inalámbricos y divididos en dos mitades: escaneo de matrices, mapas de teclas y capas, comportamientos de tecla, HID por USB y Bluetooth, ajustes persistentes y definiciones ampliables de placas y extensiones para Zephyr (shields).
+[ZMK Firmware](https://zmk.dev/) es un firmware de teclado con licencia MIT basado en Zephyr. El proyecto principal de ZMK proporciona el modelo de aplicación utilizado por muchos teclados cableados, inalámbricos y divididos en dos mitades: escaneo de matrices, mapas de teclas y capas, comportamientos de tecla, HID por USB y Bluetooth, ajustes persistentes y definiciones ampliables de placas y shields.
 
 [OpenSiFli/zmk](https://github.com/OpenSiFli/zmk) es un repositorio derivado (fork) de ZMK mantenido por OpenSiFli. La versión revisada añade:
 
@@ -39,13 +39,13 @@ Esta página no afirma que exista paridad completa de funciones con el proyecto 
 
 Antes de empezar, tenga preparado lo siguiente:
 
-- Dos placas SF32LB52-DevKit-LCD compatibles con la variante `sf32lb525uc6/zmk` del repositorio derivado.
-- Un montaje de prueba para teclado dividido de 38 teclas, cableado exactamente según los overlays `urchin_sf32lb52_left` y `urchin_sf32lb52_right`, o un shield de prueba más pequeño y documentado para las primeras comprobaciones de la adaptación.
-- Un host con un entorno `west` de Zephyr/ZMK funcional y espacio suficiente para los módulos fijados en el repositorio derivado.
-- Conexiones de grabación, consola serie y recuperación verificadas para cada mitad antes de probar la comunicación entre ellas.
-- Un cable USB de datos para la mitad izquierda/central y un método independiente para alimentar y recuperar la mitad derecha/periférica.
-- Un host Bluetooth, un host compatible con ZMK Studio si se incluye Studio en el alcance y una forma de medir la corriente de cada mitad.
-- Un registro del commit del repositorio derivado, las revisiones del manifiesto, los identificadores de placa y shield, los registros de compilación y grabación, los resultados de las pruebas de teclas, las claves de vinculación Bluetooth, el estado de los ajustes y las medidas de corriente.
+- dos placas SF32LB52-DevKit-LCD compatibles con la variante `sf32lb525uc6/zmk` del repositorio derivado;
+- un montaje de prueba para teclado dividido de 38 teclas, cableado exactamente según los overlays `urchin_sf32lb52_left` y `urchin_sf32lb52_right`, o un shield de prueba más pequeño y documentado para las primeras comprobaciones de la adaptación;
+- un host con un entorno `west` de Zephyr/ZMK funcional y espacio suficiente para los módulos fijados en el repositorio derivado;
+- conexiones de grabación, consola serie y recuperación verificadas para cada mitad antes de probar la comunicación entre ellas;
+- un cable USB de datos para la mitad izquierda/central y un método independiente para alimentar y recuperar la mitad derecha/periférica;
+- un host Bluetooth, un host compatible con ZMK Studio si se incluye Studio en el alcance y una forma de medir la corriente de cada mitad;
+- un registro del commit del repositorio derivado, las revisiones del manifiesto, los identificadores de placa y shield, los registros de compilación y grabación, los resultados de las pruebas de teclas, las vinculaciones (bonds) Bluetooth, el estado de los ajustes y las medidas de corriente.
 
 <div align="center"><em>Tabla: Condiciones del proyecto ZMK en SF32</em></div>
 
@@ -56,7 +56,7 @@ Antes de empezar, tenga preparado lo siguiente:
 | Repositorio derivado | OpenSiFli/zmk en un commit fijado | Commit del repositorio, relación con el proyecto principal, revisiones del manifiesto y registro de diferencias locales |
 | Placa | `sf32lb52_devkit_lcd/sf32lb525uc6/zmk` | Revisión exacta de la placa, método de grabación/recuperación y registro de consola |
 | Configuración de referencia en dos mitades | Central `urchin_sf32lb52_left` y periférico `urchin_sf32lb52_right` | Cableado, correspondencia entre imagen y mitad, prueba completa de la matriz y resultado del enlace entre mitades |
-| Conexión con el host | USB/CherryUSB y BLE HID desde la mitad central | Evidencias de enumeración, emparejamiento y vinculación persistente, reconexión, perfil y recuperación de fallos |
+| Conexión con el host | USB/CherryUSB y BLE HID desde la mitad central | Evidencias de enumeración, emparejamiento y vinculación (bond), reconexión, perfil y recuperación de fallos |
 | Configuración | Mapa de teclas de tres capas, ajustes NVS y ZMK Studio en la izquierda | Resultado tecla por tecla, prueba de persistencia, autorización de Studio y registro de reversión |
 | Adaptación | Un cambio cada vez en el mapa, la matriz, el transporte, la alimentación o las dependencias | Cambio revisado, imágenes originales y resultados completos de regresión |
 
@@ -73,8 +73,8 @@ Antes de empezar, tenga preparado lo siguiente:
 | Componente | Especificación necesaria | Función | Estado | Dónde obtenerlo | Compatibilidad y notas sobre sustituciones |
 |:-----------|:-------------------------|:--------|:-------|:----------------|:-------------------------------------------|
 | Dos placas SF32LB52-DevKit-LCD | Destino `sf32lb52_devkit_lcd/sf32lb525uc6/zmk`; registre la revisión de cada placa | Mitades central y periférica de la configuración documentada del teclado dividido | Obligatorio para probar el teclado en dos mitades | [Referencia de placa en μForge](../sf32-products/devkits/SF32LB52-DevKit-LCD.md); [variante de placa OpenSiFli en el commit revisado](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/sifli/sf32lb52_devkit_lcd) | Las imágenes central y periférica tienen funciones y configuraciones distintas; conserve una vía de recuperación independiente para cada placa |
-| Montaje de prueba del teclado Urchin dividido e interconexiones | Matriz de 38 teclas conectada según los overlays `urchin_sf32lb52_left` y `urchin_sf32lb52_right` | Compruebe la matriz, la comunicación entre mitades y las funciones de cada lado | Obligatorio para validar por completo el teclado dividido | [Shield Urchin del commit revisado](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/shields/urchin_sf32lb52) | Los overlays son una referencia de cableado, no garantizan compatibilidad con otra PCB o con cualquier shield |
-| Host USB/BLE y cables de datos | Host USB para la mitad central; host Bluetooth HID; alimentación y acceso independiente de descarga/recuperación para la mitad periférica | Conexión al host, pruebas de entrada, registros y recuperación | Obligatorio | [Repositorio derivado de ZMK de OpenSiFli](https://github.com/OpenSiFli/zmk) | Registre el SO del host, estado de vínculo BLE, cable/puerto y conexión de recuperación de cada mitad |
+| Montaje de prueba del teclado Urchin dividido e interconexiones | Matriz de 38 teclas conectada según los overlays `urchin_sf32lb52_left` y `urchin_sf32lb52_right` | Permite probar la matriz de teclas, la comunicación entre mitades y el comportamiento de cada función | Obligatorio para validar por completo el teclado dividido | [Shield Urchin del commit revisado](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/shields/urchin_sf32lb52) | Los overlays son una referencia de cableado, no garantizan compatibilidad con otra PCB o con cualquier shield |
+| Host USB/BLE y cables de datos | Host USB para la mitad central; host Bluetooth HID; alimentación y acceso independiente de descarga/recuperación para la mitad periférica | Conexión al host, pruebas de entrada, registros y recuperación | Obligatorio | [Repositorio derivado de ZMK de OpenSiFli](https://github.com/OpenSiFli/zmk) | Registre el SO del host, estado de las vinculaciones (bonds) BLE, cable/puerto y conexión de recuperación de cada mitad |
 
 </div>
 
@@ -94,6 +94,7 @@ Antes de empezar, tenga preparado lo siguiente:
 </div>
 
 ## Elegir una configuración de referencia admitida { #choose-a-supported-baseline }
+
 La configuración de referencia revisada de OpenSiFli corresponde al commit `fd4d5843065f` del 27-05-2026. Incluye la actualización del shield Urchin y de la configuración de la placa disponible en ese commit, pero no es una versión etiquetada de ZMK para SF32. Fije este commit para la reproducción inicial o registre y revise expresamente cualquier commit posterior.
 
 <div align="center"><em>Tabla: Selección de la configuración de referencia de ZMK en SF32</em></div>
@@ -102,7 +103,7 @@ La configuración de referencia revisada de OpenSiFli corresponde al commit `fd4
 
 | Elemento de referencia | Punto de partida recomendado | Limitación importante |
 |:-----------------------|:-----------------------------|:----------------------|
-| Bifurcación de ZMK | OpenSiFli/zmk `fd4d5843065f` | No la sustituya por zmkfirmware/zmk; el proyecto principal no incluye esta adaptación para SF32 |
+| Repositorio derivado de ZMK | OpenSiFli/zmk `fd4d5843065f` | No la sustituya por zmkfirmware/zmk; el proyecto principal no incluye esta adaptación para SF32 |
 | Destino de placa | `sf32lb52_devkit_lcd/sf32lb525uc6/zmk` | Es una variante específica de ZMK para SF32LB52-DevKit-LCD |
 | Shield similar al producto | `urchin_sf32lb52_left` y `urchin_sf32lb52_right` | Los overlays definen mapas GPIO y funciones diferentes; las imágenes no son intercambiables |
 | Shields de diagnóstico | `sf32lb52_test`, `sf32lb52_split_test_left/right` y `sf32lb52_zmkstudio_test` | Son referencias para desarrollar la adaptación, no promesas de compatibilidad con un producto |
@@ -162,13 +163,13 @@ flowchart LR
     L -->|"HID USB\nCherryUSB"| H["Ordenador host"]
     L -->|"HID Bluetooth"| H
     H <-->|"ZMK Studio\nsolo en la imagen de firmware del lado izquierdo"| L
-    NL["Ajustes NVS\nclaves de vinculación y configuración"] --> L
+    NL["Ajustes NVS\nvinculaciones (bonds) y configuración"] --> L
     NR["Ajustes NVS\nestado persistente"] --> R
     M["Manifiesto west de OpenSiFli\nZephyr + HAL + CherryUSB personalizados"] --> L
     M --> R
 ```
 
-Separe los fallos por ámbito: matriz y cableado físico, enlace de derecha a izquierda entre mitades, USB de la mitad izquierda, Bluetooth del host, claves de vinculación y ajustes almacenados, ZMK Studio, grabación y recuperación de la placa y conjunto de dependencias fijadas. Si una tecla no llega al host, el fallo puede producirse antes del escaneo, durante la comunicación entre mitades, en el mapa de teclas central o en el destino HID elegido. Diagnostique la ruta en ese orden.
+Separe los fallos por ámbito: matriz y cableado físico, enlace de derecha a izquierda entre mitades, USB de la mitad izquierda, Bluetooth del host, vinculaciones (bonds) y ajustes almacenados, ZMK Studio, grabación y recuperación de la placa y conjunto de dependencias fijadas. Si una tecla no llega al host, el fallo puede producirse antes del escaneo, durante la comunicación entre mitades, en el mapa de teclas central o en el endpoint HID elegido. Diagnostique la ruta en ese orden.
 
 ## Etapa 1 — Reproducir la configuración de referencia sin modificarla { #stage-1-establish-the-untouched-port-baseline }
 
@@ -180,9 +181,9 @@ Separe los fallos por ámbito: matriz y cableado físico, enlace de derecha a iz
 4. Establezca el enlace BLE entre las dos mitades y compruebe las 38 posiciones con las capas `default`, `lower` y `raise`. Pruebe expresamente la selección y eliminación del perfil Bluetooth y las combinaciones de desbloqueo de Studio para evitar que se activen accidentalmente durante las pruebas de escritura.
 5. Valide HID USB y ZMK Studio en la mitad izquierda y, a continuación, HID Bluetooth en el host elegido. Repita las pruebas después de un arranque en frío.
 
-**Evidencias que se deben conservar:** registro de placas y cableado, revisiones del repositorio derivado y del manifiesto, configuraciones generadas, hashes de las imágenes, registros de grabación y arranque, matriz completa de posiciones, resultados por capa, destino HID seleccionado y versiones del host/Studio.
+**Evidencias que se deben conservar:** registro de placas y cableado, revisiones del repositorio derivado y del manifiesto, configuraciones generadas, hashes de las imágenes, registros de grabación y arranque, matriz completa de posiciones, resultados por capa, endpoint HID seleccionado y versiones del host/Studio.
 
-**Criterio de salida del punto de control 1:** dos arranques en frío reproducen las 38 posiciones, las tres capas, el enlace de derecha a izquierda entre mitades y al menos un destino HID del host; ambas mitades se pueden recuperar de manera independiente.
+**Criterio de salida del punto de control 1:** dos arranques en frío reproducen las 38 posiciones, las tres capas, el enlace de derecha a izquierda entre mitades y al menos un endpoint HID del host; ambas mitades se pueden recuperar de manera independiente.
 
 ## Etapa 2 — Validar entrada, transporte, ajustes y recuperación { #stage-2-validate-input-transport-settings-and-recovery }
 
@@ -194,17 +195,17 @@ Separe los fallos por ámbito: matriz y cableado físico, enlace de derecha a iz
 
 | Prueba | Método | Evidencia de aprobación |
 |:-------|:-------|:------------------------|
-| Cobertura de matriz | Pruebe todas las posiciones, combinaciones de rollover, cada capa y las dos entradas directas | No hay teclas perdidas, duplicadas, atascadas ni intercambiadas de lado; se registra el orden de pulsación/liberación |
-| Pérdida del enlace entre mitades | Apague la mitad derecha o aléjela del alcance durante el reposo y mientras se escribe | Las teclas de la izquierda y la conexión con el host siguen un comportamiento definido; la mitad derecha se reconecta sin volver a grabarla ni dejar teclas atascadas |
+| Cobertura de matriz | Pruebe todas las posiciones, combinaciones de rollover, cada capa y las dos entradas directas | No hay teclas perdidas, duplicadas, atascadas ni con funciones intercambiadas; se registra el orden de pulsación/liberación |
+| Pérdida del enlace entre mitades | Apague la mitad derecha o aléjela del alcance durante el reposo y mientras se escribe | Las teclas de la izquierda y la conexión con el host siguen un comportamiento definido; la mitad derecha se reconecta sin volver a grabarla ni dejar teclas con estado obsoleto |
 | Interrupción de USB | Desconecte y vuelva a conectar la ruta de datos USB izquierda mientras se escribe o se usa Studio | HID y Studio se recuperan de forma independiente; no queda ningún modificador atascado ni se corrompen los ajustes |
-| Pérdida de BLE con el host | Desactive Bluetooth en el host, cambie de perfil y vuelva a conectar | El estado del destino HID y del perfil es visible; la reconexión y el borrado deliberado de las claves de vinculación siguen un procedimiento registrado |
+| Pérdida de BLE con el host | Desactive Bluetooth en el host, cambie de perfil y vuelva a conectar | El estado del endpoint HID y del perfil es visible; la reconexión y el borrado deliberado de las vinculaciones siguen un procedimiento registrado |
 | Persistencia de ajustes | Cambie un ajuste reversible, apague y encienda ambas mitades y luego restaure la referencia | Se conserva el estado NVS esperado; una ruta documentada de restablecimiento/recuperación elimina los estados dañados o no deseados |
 | Límites de ZMK Studio | Intente un cambio autorizado, desconecte a mitad de sesión en una configuración recuperable y restaure el estado | Solo la imagen central expone Studio; los cambios no válidos o incompletos no dejan el teclado inutilizable |
-| Ciclo de alimentación | Repita ciclos de alimentación de cada mitad por separado y de ambas a la vez, registrando la corriente y la reactivación | Las funciones, el enlace entre mitades, el destino HID y el estado de liberación de teclas se recuperan de forma predecible |
+| Ciclo de alimentación | Repita ciclos de alimentación de cada mitad por separado y de ambas a la vez, registrando la corriente y la reactivación | Las funciones, el enlace entre mitades, el endpoint HID y el estado de liberación de teclas se recuperan de forma predecible |
 
 </div>
 
-**Criterio de salida del punto de control 2:** cada fallo aplicable tiene un resultado repetible de detección y recuperación; ninguna prueba deja un estado HID atascado; y los ajustes o las claves de vinculación pueden volver a la referencia registrada sin sustituir archivos sin seguimiento.
+**Criterio de salida del punto de control 2:** cada fallo aplicable tiene un resultado repetible de detección y recuperación; ninguna prueba deja un estado HID atascado; y los ajustes o las vinculaciones pueden volver a la referencia registrada sin sustituir archivos sin seguimiento.
 
 ## Etapa 3 — Crear una configuración de referencia reproducible desde el código fuente { #stage-3-build-a-reproducible-source-baseline }
 
@@ -227,10 +228,10 @@ Separe los fallos por ámbito: matriz y cableado físico, enlace de derecha a iz
 
 | Tipo de cambio | Primer cambio recomendado | Regresión requerida |
 |:---------------|:-------------------------|:--------------------|
-| Mapa de teclas | Una asociación de tecla, una capa, un comportamiento hold-tap o una combinación | Todas las posiciones y capas, orden de pulsación/liberación, rollover, pérdida del enlace entre mitades y ambos destinos HID del host |
+| Mapa de teclas | Una asociación de tecla, una capa, un comportamiento hold-tap o una combinación | Todas las posiciones y capas, orden de pulsación/liberación, rollover, pérdida del enlace entre mitades y ambos endpoints HID del host |
 | Matriz/PCB | Cambiar una fila, columna, entrada directa o dirección de diodo | Revisión eléctrica, devicetree generado, matriz completa, cortocircuitos y teclas fantasma (ghosting), reactivación y recuperación |
 | Studio | Un parámetro editable o una opción visible del diseño | Autorización, cambios válidos/no válidos, persistencia, desconexión, restauración y compatibilidad de versiones |
-| Transporte | Un destino USB/BLE o un cambio en la política de comunicación entre mitades | Enumeración, emparejamiento, claves de vinculación, cambio de perfil, reconexión entre mitades, prevención de teclas atascadas y corriente |
+| Transporte | Un endpoint USB/BLE o un cambio en la política de comunicación entre mitades | Enumeración, emparejamiento, vinculaciones, cambio de perfil, reconexión entre mitades, prevención de teclas atascadas y corriente |
 | Gestión de energía | Un ajuste de reposo, reactivación, escaneo o radio | Corriente activa, inactiva y en reposo de cada mitad, latencia, todas las fuentes de reactivación, reconexión entre mitades y persistencia de ajustes |
 | Migración de dependencias | Actualizar ZMK, Zephyr, HAL o CherryUSB | Diferencia del manifiesto, compilaciones limpias, diferencias de configuración generada, todas las pruebas de Etapa 2, corriente y reversión |
 
@@ -244,8 +245,8 @@ Antes de diseñar una PCB de teclado personalizada o un prototipo con batería, 
 
 - ¿Quién mantiene el repositorio derivado de ZMK de OpenSiFli, la rama personalizada de Zephyr, la revisión de SiFli HAL, la adaptación de CherryUSB y las futuras actualizaciones de seguridad o compatibilidad?
 - ¿Qué funciones del proyecto principal de ZMK se han probado realmente en SF32 y cuáles solo están presentes en el árbol heredado?
-- ¿Cómo se controlarán durante fabricación y mantenimiento la identidad de las imágenes izquierda/derecha, la revisión de la placa, el mapa de teclas, la configuración, las claves de vinculación y el estado de restablecimiento de fábrica?
-- ¿Cuáles son las corrientes medidas activa, en reposo con conexión, desconectada y en suspensión de cada mitad, incluidos el intervalo de escaneo, la reconexión y la protección de la batería?
+- ¿Cómo se controlarán durante fabricación y mantenimiento la identidad de las imágenes izquierda/derecha, la revisión de la placa, el mapa de teclas, la configuración, las vinculaciones y el estado de restablecimiento de fábrica?
+- ¿Cuáles son las corrientes medidas activa, en reposo con conexión, desconectada y en suspensión de cada mitad, incluidas la frecuencia de escaneo, la reconexión y la protección de la batería?
 - ¿Qué hosts, sistemas operativos, controladores USB, pilas Bluetooth, rutas de activación, casos de rollover y condiciones de interferencia se han probado?
 - ¿Se puede recuperar el producto sin abrirlo ni desecharlo si falla una actualización de dependencias, un cambio de Studio, una escritura de ajustes o una actualización en campo?
 - ¿Son aptos para la distribución prevista las licencias de ZMK/Zephyr, los archivos de PCB y carcasa, el contenido del mapa de teclas, los logotipos, las fuentes y cualquier configuración incluida?
@@ -257,6 +258,7 @@ Antes de diseñar una PCB de teclado personalizada o un prototipo con batería, 
 Traslade el número de pieza SF32 y la memoria exactos, las funciones de ambas mitades y el transporte, el mapa de filas/columnas/entradas directas, la dirección de los diodos, la conexión USB, las hipótesis de antena y carcasa, la política NVS/ajustes, las interfaces de grabación y recuperación, el presupuesto de consumo de cada mitad, los útiles de prueba, la identificación de las imágenes y el manifiesto fijado. Continúe con [SF32LB52-DevKit-LCD](../sf32-products/devkits/SF32LB52-DevKit-LCD.md), los [límites de la plataforma Zephyr](../develop/platforms/zephyr/overview.md), [Arquitectura Bluetooth](../learn/bluetooth/overview.md), la [guía de diseño de hardware de SF32LB52x](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) y [Diseño para producción](../hardware/design-for-production.md).
 
 ## Fuentes de referencia { #authoritative-sources }
+
 - [Repositorio derivado SF32 de OpenSiFli/zmk](https://github.com/OpenSiFli/zmk)
 - [Commit revisado de OpenSiFli/zmk](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e)
 - [Variante de placa ZMK para SF32LB52 en el commit revisado](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/sifli/sf32lb52_devkit_lcd)

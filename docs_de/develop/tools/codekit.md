@@ -33,7 +33,7 @@ Verwenden Sie den Kommandozeilen-SDK-Ablauf, wenn Sie CI-Skripte schreiben, Tool
 CodeKit stellt eine Oberfläche für den SDK-Workflow bereit, ersetzt das SDK jedoch nicht. Dieselben zugrunde liegenden Konzepte bleiben relevant:
 
 - SDK-Wurzelverzeichnis.
-- Board-Name.
+- Boardname.
 - Projektverzeichnis.
 - Build-Ausgabe.
 - Flash-/Download-Pfad.

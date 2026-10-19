@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB58-DevKit-LCD: MIPI DSI, RGB, QSPI 패널 브링업을 위한 SF32LB58x 개발 보드로, 오디오, SDIO, CAN, 확장 인터페이스를 갖추고 있습니다."
+description: "SF32LB58-DevKit-LCD: MIPI DSI, RGB, QSPI 디스플레이 브링업(초기 구동 및 검증)을 위한 SF32LB58x 개발 보드로, 오디오, SDIO, CAN, 확장 인터페이스를 갖추고 있습니다."
 tags:
     - 하드웨어
     - 개발 보드
@@ -12,17 +12,17 @@ tags:
 
 SF32LB58-DevKit-LCD는 SF32LB58-MOD 모듈 제품군을 기반으로 한 개발 보드입니다. DSI, DPI/RGB 또는 QSPI 디스플레이를 사용하는 제품을 지원하며, 고해상도 UI, 오디오, 스토리지, USB, 주변 장치 통합을 검증하기 위한 실용적인 플랫폼을 제공합니다.
 
-이 보드는 SF32LB58x 모듈, 여러 디스플레이 커넥터, 아날로그 마이크 입력, 스테레오 스피커 출력, MicroSD, 듀얼 USB Type-C 포트, 대형 코어 및 저전력 코어용 확장 헤더, CAN과 SDIO Wi-Fi 확장 같은 액세서리 인터페이스를 하나로 모았습니다.
+이 보드는 SF32LB58x 모듈을 중심으로 여러 디스플레이 커넥터, 아날로그 마이크 입력, 스테레오 스피커 출력, MicroSD, USB Type-C 포트 2개, 대형 코어 및 저전력 코어용 확장 헤더, CAN과 SDIO Wi-Fi 확장 인터페이스를 갖췄습니다.
 
 커스텀 설계를 확정하기 전에 이 보드로 디스플레이, 스토리지, 오디오, USB, 외부 주변 장치를 함께 검증하십시오.
 
-![SF32LB58-DevKit-LCD front view](assets/sf32lb58x/58KIT-T-Look.png){ loading="lazy" }
+![SF32LB58-DevKit-LCD 전면](assets/sf32lb58x/58KIT-T-Look.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — 전면</em></div>
 
-![SF32LB58-DevKit-LCD back view](assets/sf32lb58x/58KIT-B-Look.png){ loading="lazy" }
+![SF32LB58-DevKit-LCD 후면](assets/sf32lb58x/58KIT-B-Look.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — 후면</em></div>
 
-![SF32LB58-DevKit-LCD block diagram](assets/sf32lb58x/SF32LB58x_DevKit-LCD_Block_Diagram.png){ loading="lazy" }
+![SF32LB58-DevKit-LCD 블록 다이어그램](assets/sf32lb58x/SF32LB58x_DevKit-LCD_Block_Diagram.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — 블록 다이어그램</em></div>
 
 ## 보드 및 모듈 버전 참고 { #board-and-module-version-notes }
@@ -69,7 +69,7 @@ V1.0.0에 대한 SiFli 소스는 일관되지 않습니다. 모듈 버전 섹션
 
 ## 이 보드를 사용하는 경우 { #when-to-use-this-board }
 
-프로젝트에 최소한의 브레이크아웃 보드가 아니라 현실적인 고급 디스플레이 및 주변 장치 검증 플랫폼이 필요하다면 SF32LB58-DevKit-LCD를 선택하십시오.
+프로젝트에 최소한의 브레이크아웃 보드가 아니라 실제 제품에 가까운 고급 디스플레이 및 주변 장치 검증 환경이 필요하다면 SF32LB58-DevKit-LCD를 선택하십시오.
 
 - MIPI DSI, RGB888 또는 QSPI 디스플레이 패널 브링업
 - 터치, 오디오, 스토리지, USB를 함께 검증
@@ -129,7 +129,7 @@ V1.0.0에 대한 SiFli 소스는 일관되지 않습니다. 모듈 버전 섹션
 3. SiFli의 플래싱 도구를 열고 올바른 COM 포트를 선택하십시오.
 4. 다운로드 모드와 일반 실행 모드 중 원하는 모드에 따라 Mode 점퍼를 장착하거나 제거하십시오.
 5. 보드에 전원을 켜고 대상 펌웨어를 기록하거나 실행하십시오.
-6. 디스플레이 브링업 후 터치, 오디오, 스토리지와 제품에 필요한 확장 주변 장치를 검증하십시오.
+6. 디스플레이 초기 구동을 확인한 뒤 터치, 오디오, 스토리지와 제품에 필요한 확장 주변 장치를 검증하십시오.
 
 데이터 전송이 가능한 USB 케이블을 사용하십시오. 일부 Type-C 케이블은 전원만 공급하며 UART 또는 USB 데이터 경로를 노출하지 않습니다.
 
@@ -139,7 +139,7 @@ SF32LB58-DevKit-LCD는 USB Type-C로 전원을 공급받습니다.
 
 - 온보드 USB Type-C 커넥터 두 개 모두 보드에 전원을 공급할 수 있습니다
 - 펌웨어 플래싱과 UART 로깅에는 USB-UART Type-C 포트를 사용하십시오
-- 네이티브 USB 기능을 검증할 때는 USB 2.0 HS Type-C 포트를 별도로 계획하십시오
+- 네이티브 USB 기능 검증에는 USB 2.0 HS Type-C 포트를 별도로 사용하십시오
 
 ## 플래싱 및 디버그 { #download-and-debug }
 
@@ -150,13 +150,13 @@ SF32LB58-DevKit-LCD는 USB Type-C로 전원을 공급받습니다.
 
 이 보드는 J-Link / SWD 디버그도 지원합니다.
 
-![SF32LB58-DevKit-LCD J-Link wiring reference](assets/sf32lb58x/58KIT-JLINK-CONN2.png){ loading="lazy" }
+![SF32LB58-DevKit-LCD J-Link 연결 참고도](assets/sf32lb58x/58KIT-JLINK-CONN2.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — J-Link 배선 참고도</em></div>
 
-![J-Link adapter reference](assets/sf32lb58x/58KIT-JLINK-Adapter.png){ loading="lazy" }
+![J-Link 어댑터 참고도](assets/sf32lb58x/58KIT-JLINK-Adapter.png){ loading="lazy" }
 <div align="center"><em>J-Link 어댑터 참고도</em></div>
 
-![SWD adapter reference](assets/sf32lb58x/swd-adaptor.png){ loading="lazy" }
+![SWD 어댑터 참고도](assets/sf32lb58x/swd-adaptor.png){ loading="lazy" }
 <div align="center"><em>SWD 어댑터 참고도</em></div>
 
 ## SDK 빌드 타깃 { #sdk-build-targets }
@@ -211,13 +211,13 @@ SiFli 소스의 지원 디스플레이 지침은 다음과 같습니다.
 !!! warning "MIPI DSI 레인 수"
     이 보드의 30핀 커넥터 핀 배치는 D0–D3을 표기하지만, 보드 가이드와 SDK는 최대 2개의 데이터 레인으로 동작하는 것으로 문서화합니다. 커넥터 표기만으로 4레인 지원을 추정하지 마십시오. 사용 전에 해당 패널과 보드 리비전의 레인 배선을 확인하십시오.
 
-![MIPI display wiring reference](assets/sf32lb58x/58KIT-MIPI-J0202.png){ loading="lazy" }
+![MIPI 디스플레이 연결 참고도](assets/sf32lb58x/58KIT-MIPI-J0202.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — MIPI 디스플레이 배선 참고도</em></div>
 
-![LCDC1 QSPI display wiring reference](assets/sf32lb58x/58KIT-LCDC1-QSPI-CONN2.png){ loading="lazy" }
+![LCDC1 QSPI 디스플레이 연결 참고도](assets/sf32lb58x/58KIT-LCDC1-QSPI-CONN2.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — LCDC1 QSPI 디스플레이 배선</em></div>
 
-![LCDC2 QSPI display wiring reference](assets/sf32lb58x/58KIT-LCDC2-QSPI-CONN1.png){ loading="lazy" }
+![LCDC2 QSPI 디스플레이 연결 참고도](assets/sf32lb58x/58KIT-LCDC2-QSPI-CONN1.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — LCDC2 QSPI 디스플레이 배선</em></div>
 
 ## 오디오 { #audio }
@@ -231,28 +231,28 @@ SiFli 소스의 지원 디스플레이 지침은 다음과 같습니다.
 
 SiFli의 [상세 보드 가이드](https://wiki.sifli.com/en/board/sf32lb58x/SF32LB58-DevKit-LCD.html)는 스테레오 아날로그 출력의 정격을 최대 2.8 W/4 Ω으로 제시하는 반면, [개발 보드 모델 가이드](https://wiki.sifli.com/en/board/devkit_guide.html)는 두 스피커 출력에 대해 3 W/4 Ω을 나열합니다. 이 정격이 채널당인지 합산인지는 어느 소스도 밝히지 않습니다. 스피커를 선택하기 전에 정확한 보드 리비전, 회로도, 앰프 전원/부하 조건을 확인하십시오. 어느 수치도 채널당 보장 출력으로 취급하지 마십시오.
 
-![Audio wiring reference](assets/sf32lb58x/58KIT-AUDIO-CONN2.png){ loading="lazy" }
+![오디오 연결 참고도](assets/sf32lb58x/58KIT-AUDIO-CONN2.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — 오디오 배선 참고도</em></div>
 
 ## CAN 및 SDIO Wi-Fi 확장 { #can-and-sdio-wi-fi-expansion }
 
 SF32LB58 모듈에는 CAN 컨트롤러가 포함되어 있으며, 이 보드는 외부 트랜시버와 함께 사용할 수 있도록 해당 인터페이스를 노출합니다.
 
-![CAN wiring reference](assets/sf32lb58x/58KIT-CAN-CONN1.png){ loading="lazy" }
+![CAN 연결 참고도](assets/sf32lb58x/58KIT-CAN-CONN1.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — CAN 배선 참고도</em></div>
 
-![Reference CAN transceiver board](assets/sf32lb58x/SN65HVD230-CAN-Board.png){ loading="lazy" }
+![CAN 트랜시버 보드 참고 이미지](assets/sf32lb58x/SN65HVD230-CAN-Board.png){ loading="lazy" }
 <div align="center"><em>참고용 CAN 트랜시버 보드</em></div>
 
 이 보드는 헤더 인터페이스를 통한 SDIO Wi-Fi 확장도 지원합니다.
 
-![Reference SDIO Wi-Fi module](assets/sf32lb58x/ATK-RTL8189-SDIO-WIFI-LOOK.png){ loading="lazy" }
+![SDIO Wi-Fi 모듈 참고 이미지](assets/sf32lb58x/ATK-RTL8189-SDIO-WIFI-LOOK.png){ loading="lazy" }
 <div align="center"><em>참고용 SDIO Wi-Fi 모듈</em></div>
 
-![SDIO Wi-Fi wiring reference](assets/sf32lb58x/58KIT-SDIO-WIFI-CONN1.png){ loading="lazy" }
+![SDIO Wi-Fi 연결 참고도](assets/sf32lb58x/58KIT-SDIO-WIFI-CONN1.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — SDIO Wi-Fi 배선 참고도</em></div>
 
-![Reference SDIO Wi-Fi schematic](assets/sf32lb58x/ATK-RTL8189-SDIO-WIFI-SCH.png){ loading="lazy" }
+![SDIO Wi-Fi 회로도 참고 이미지](assets/sf32lb58x/ATK-RTL8189-SDIO-WIFI-SCH.png){ loading="lazy" }
 <div align="center"><em>참고용 SDIO Wi-Fi 회로도</em></div>
 
 ## 관련 문서 { #related-documents }
@@ -267,12 +267,12 @@ SF32LB58 모듈에는 CAN 컨트롤러가 포함되어 있으며, 이 보드는 
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-microchip: __[SF32LB58x Chip Introduction]__
-- :fontawesome-solid-file-pdf: __[SF32LB58x User Manual]__
+- :fontawesome-solid-microchip: __[SF32LB58x 칩 소개][SF32LB58x Chip Introduction]__
+- :fontawesome-solid-file-pdf: __[SF32LB58x 사용자 설명서][SF32LB58x User Manual]__
 - :fontawesome-solid-cubes: __[SF32LB58-MOD]__
-- :fontawesome-solid-download: __[SF32LB58-MOD Design Package]__
-- :fontawesome-solid-download: __[SF32LB58-DevKit-LCD Design Package]__
-- :fontawesome-solid-download: __[SF32LB58-DevKit-LCD LCEDA Project]__
-- :fontawesome-solid-cart-shopping: __[Buy Samples]__
+- :fontawesome-solid-download: __[SF32LB58-MOD 설계 패키지][SF32LB58-MOD Design Package]__
+- :fontawesome-solid-download: __[SF32LB58-DevKit-LCD 설계 패키지][SF32LB58-DevKit-LCD Design Package]__
+- :fontawesome-solid-download: __[SF32LB58-DevKit-LCD LCEDA 프로젝트][SF32LB58-DevKit-LCD LCEDA Project]__
+- :fontawesome-solid-cart-shopping: __[샘플 구매][Buy Samples]__
 
 </div>

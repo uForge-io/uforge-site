@@ -27,12 +27,12 @@ Pour chaque compilation du firmware, consignez les éléments suivants :
 
 ## Flux d'analyse des plantages { #crash-analysis-flow }
 
-1. Reproduire le problème sur une carte dont la configuration de référence a été validée en fonctionnement.
-2. Capturer le journal complet depuis la réinitialisation.
-3. Conserver le binaire exact et les fichiers de symboles correspondants.
-4. Décoder les assertions ou les vidages à l'aide des outils SiFli.
-5. Vérifier la taille des piles d'exécution, déterminer qui est responsable de chaque zone mémoire, examiner les tampons DMA et les opérations de maintenance du cache.
-6. Isoler le problème à partir de l'exemple du SDK qui s'en rapproche le plus.
+1. Reproduisez le problème sur une carte dont la configuration de référence a été validée en fonctionnement.
+2. Capturez le journal complet depuis la réinitialisation.
+3. Conservez le binaire exact et les fichiers de symboles correspondants.
+4. Décodez les assertions ou les vidages à l'aide des outils SiFli.
+5. Vérifiez la taille des piles d'exécution, déterminez qui est responsable de chaque zone mémoire, examinez les tampons DMA et les opérations de maintenance du cache.
+6. Isolez le problème à partir de l'exemple du SDK qui s'en rapproche le plus.
 
 ## Niveaux de journalisation { #log-levels }
 

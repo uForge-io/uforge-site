@@ -2,7 +2,7 @@
 icon: lucide/terminal-square
 description: "SF32의 MicroPython 현황: 아직 공식 포트가 확인되지 않았으며, 지원 경로가 되기 위해 갖추어야 할 승인 기준을 설명합니다."
 tags:
-    - Develop
+    - 개발
     - MicroPython
 ---
 
@@ -45,7 +45,7 @@ while True:
 
 그런 다음 핀 이름이 문서화된 후에 GPIO를 테스트하십시오.
 
-## 최소 승인 기준 { #minimum-acceptance-criteria }
+## 최소 수용 기준 { #minimum-acceptance-criteria }
 
 다음이 모두 갖추어지면 MicroPython을 "현황"에서 "시작하기"로 옮길 수 있습니다.
 

@@ -18,12 +18,12 @@ tags:
 
 | Grupo | Tópicos |
 |:---|:---|
-| Sistema de alimentação | Trilhos do PMU, demais alimentações, capacitores, POR/BOR/reset e indutor BUCK. |
+| Sistema de alimentação | Trilhos da PMU, demais alimentações, capacitores, POR/BOR/reset e indutor BUCK. |
 | Modo de boot | Domínio de tensão do pino Mode, resistor de polarização, download, recuperação e acesso na produção. |
 | Geração de clock | Cristais de 48 MHz e 32,768 kHz e revisão dos capacitores de ajuste. |
 | RF | Casamento de RF, caminho de antena de 50 Ω, filtragem de AVDD_BRF e área de exclusão de RF. |
 | Interfaces de memória | OPI PSRAM, QSPI NOR/NAND/PSRAM e SDIO eMMC/Micro SD. |
-| Tela e toque | MIPI DSI, SPI/QSPI, MCU8080, JDI, interrupção de toque, reset, retroiluminação e alimentação do painel. |
+| Display e toque | MIPI DSI, SPI/QSPI, MCU8080, JDI, interrupção de toque, reset, retroiluminação e alimentação do painel. |
 | Despertar, GPADC e produção | Fontes e botões de despertar, PWM do motor, divisores GPADC, sensores, áudio Bluetooth, DBG-UART, SWD, gravação em produção e calibração dos cristais. |
 
 </div>
@@ -32,11 +32,11 @@ tags:
 
 O SF32LB551 em QFN68L não tem os pinos VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_VOUT nem AVDD_DSI. Consulte as tabelas de alimentação e capacitores apenas para os pinos presentes no encapsulamento escolhido. Os encapsulamentos BGA oferecem duas saídas BUCK; BUCK2 pode operar em modo BUCK ou LDO, mas recomenda-se o modo BUCK. QFN68L oferece uma saída BUCK.
 
-<div align="center"><em>Tabela 5.1-1: Pinos de alimentação do PMU</em></div>
+<div align="center"><em>Tabela 5.1-1: Pinos de alimentação da PMU</em></div>
 
 <div align="center" markdown>
 
-| Pinos de alimentação do PMU | Tensão mínima (V) | Tensão típica (V) | Tensão máxima (V) | Corrente máxima (mA) | Descrição detalhada |
+| Pinos de alimentação da PMU | Tensão mínima (V) | Tensão típica (V) | Tensão máxima (V) | Corrente máxima (mA) | Descrição detalhada |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | VDD1 | 1,71 | 1,8 | 3,6 | 50 | Entrada de alimentação VDD1 |
 | VDD2 | 1,71 | 1,8 | 3,6 | 50 | Entrada de alimentação VDD2 |
@@ -87,7 +87,7 @@ O SF32LB551 em QFN68L não tem os pinos VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_VOU
 
 </div>
 
-Coloque os capacitores necessários perto dos respectivos pinos, mantenha compactos os laços de corrente do BUCK e confirme o modo BUCK/LDO antes do layout. Verifique o circuito de reset e os tempos de POR/BOR no hardware real.
+Coloque os capacitores necessários perto dos respectivos pinos, mantenha compactos os laços de corrente do BUCK e confirme o modo BUCK/LDO antes do layout. O circuito de reset e os tempos de POR/BOR devem ser verificados no hardware real.
 
 As fontes divergem: a tabela 3-3 do [guia de aplicação de hardware em chinês da SiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) e o item 9 do [checklist de esquemático V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) especificam 1 µF para VDD_RTC, enquanto [C0313 no esquemático de referência do guia](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png) está marcado como 0,1 µF. As fontes não explicam quando cada valor se aplica. Confirme com a SiFli o valor exigido para o dispositivo específico antes de liberar o projeto; não resolva a divergência por suposição.
 
@@ -128,7 +128,7 @@ Conforme a nota de aplicação de hardware da SiFli, selecione um indutor BUCK d
 
 </div>
 
-Mode em nível alto seleciona o download após a energização; em nível baixo, inicia o programa do usuário. Garanta que a bancada de produção possa definir o estado de boot e que o gabinete ou as restrições de teste não impeçam o acesso aos pinos envolvidos.
+Mode em nível alto seleciona o download após a energização; em nível baixo, inicia o programa do usuário. Garanta que os gabaritos de teste de produção possam forçar o estado de boot necessário e que o gabinete do produto ou as limitações de acesso para teste não bloqueiem os pinos relacionados ao boot.
 
 O pino Mode compartilha o domínio de tensão de VDDIOA. Use um resistor externo de 10 kΩ para conectá-lo à alimentação correspondente ou ao GND e manter o nível estável; não o deixe flutuante nem sujeito a comutações involuntárias. As placas de produção devem ter um ponto de teste Mode para gravação do firmware e calibração do cristal; não precisam de jumper. Nas placas de teste, reserve um jumper para recuperar uma aplicação travada por meio da inicialização no modo de download.
 
@@ -140,8 +140,8 @@ O pino Mode compartilha o domínio de tensão de VDDIOA. Use um resistor externo
 
 | Cristal | Requisitos do cristal | Descrição detalhada |
 | :--- | :--- | :--- |
-| 48 MHz | 7 pF ≦ CL ≦ 12 pF (valor recomendado: 8,8 pF), △F/F0 ≦ ±10 ppm, ESR ≦ 30 Ω (valor recomendado: 22 Ω) | O consumo do oscilador depende de CL e ESR. Dentro dos limites especificados, valores menores de CL e ESR reduzem o consumo. Reserve posições para capacitores de ajuste em paralelo junto ao cristal. Quando CL < 12 pF, não é necessário montar esses capacitores. |
-| 32,768 kHz | CL ≦ 12,5 pF (valor recomendado: 7 pF), △F/F0 ≦ ±20 ppm, ESR ≦ 80 kΩ (valor recomendado: 38 kΩ) | O consumo depende de CL e ESR. Dentro dos limites especificados, prefira valores menores de CL e ESR para reduzir o consumo. Reserve posições para capacitores de ajuste em paralelo junto ao cristal. Quando CL < 12,5 pF, não é necessário montar esses capacitores. |
+| 48 MHz | 7 pF ≦ CL ≦ 12 pF (valor recomendado: 8,8 pF), △F/F0 ≦ ±10 ppm, ESR ≦ 30 Ω (valor recomendado: 22 Ω) | O consumo do oscilador depende de CL e ESR: quanto menores, menor o consumo. Para o melhor desempenho de consumo, recomenda-se usar componentes com CL e ESR relativamente baixos dentro da faixa exigida. Reserve posições para capacitores de ajuste em paralelo junto ao cristal. Quando CL < 12 pF, não é necessário montar esses capacitores. |
+| 32,768 kHz | CL ≦ 12,5 pF (valor recomendado: 7 pF), △F/F0 ≦ ±20 ppm, ESR ≦ 80 kΩ (valor recomendado: 38 kΩ) | O consumo depende de CL e ESR: quanto menores, menor o consumo. Para o melhor desempenho de consumo, recomenda-se usar componentes com CL e ESR relativamente baixos dentro da faixa exigida. Reserve posições para capacitores de ajuste em paralelo junto ao cristal. Quando CL < 12,5 pF, não é necessário montar esses capacitores. |
 
 </div>
 
@@ -161,11 +161,11 @@ O circuito RF de referência coloca C0323 (15 pF/50 V) em série com ANT e deixa
 
 ### 5.5. Interfaces de memória e armazenamento { #55-storage-interfaces }
 
-O SF32LB55x oferece OPI PSRAM, NOR/NAND Flash e PSRAM por QSPI, além de eMMC ou Micro SD por SDIO. O encapsulamento determina os pinos e interfaces disponíveis. Escolha as memórias antes de finalizar a atribuição dos pinos e revisar o empilhamento da PCB.
+O SF32LB55x oferece OPI PSRAM, NOR/NAND Flash e PSRAM por QSPI, além de eMMC ou Micro SD por SDIO. A escolha do encapsulamento afeta os pinos e as interfaces disponíveis; por isso, a seleção das memórias deve ser concluída antes de fixar a atribuição dos pinos e de revisar o empilhamento da PCB.
 
 BGA145 oferece um canal de OPI PSRAM externa; BGA169 oferece dois. As tabelas 5.5-1 a 5.5-3 descrevem a configuração BGA145 e as duas memórias BGA169, não três canais em um mesmo encapsulamento. As tabelas QSPI correspondem a QSPI2, QSPI3 e QSPI4. As tabelas SDIO abrangem SDIO1 nos modos de 4/8 bits e SDIO2 no modo de 4 bits.
 
-Prefira QSPI2 para PSRAM QSPI externa. Se um GPIO do HCPU controlar a alimentação de uma PSRAM OPI/QSPI externa, use um pino HCPU do tipo PU, com nível alto para ligar e baixo para desligar. Para chavear VDD_SIP da Flash interna, use PA58 com a mesma polaridade. Peça ao FAE da SiFli uma avaliação do espaço Flash para os algoritmos de acelerômetro e frequência cardíaca do LCPU antes de decidir se adiciona NOR Flash em QSPI4.
+Prefira QSPI2 para PSRAM QSPI externa. Se um GPIO do HCPU controlar a alimentação de uma PSRAM OPI/QSPI externa, use um pino HCPU do tipo PU, com nível alto para ligar e baixo para desligar. Para comutar a alimentação VDD_SIP da Flash interna, use PA58 com a mesma polaridade. Peça ao FAE da SiFli uma avaliação do espaço Flash para os algoritmos de acelerômetro e frequência cardíaca do LCPU antes de decidir se adiciona NOR Flash em QSPI4.
 
 As tabelas originais usam indicações de direção inconsistentes. No [esquemático de referência BGA145](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA145-PSRAM-SCH.png), nos [esquemáticos de referência BGA169 para a memória 1](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-1-SCH.png) e [para a memória 2](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-PSRAM-2-SCH.png), os pinos PA37/PA20 e PA07/PA08 do MCU, respectivamente, controlam CS# e CLK da PSRAM externa. Por isso, as tabelas abaixo descrevem CS# e CLK pelo ponto de vista do MCU: saída do MCU e entrada da PSRAM. Os esquemáticos não definem uma direção fixa para DQS/DM; consulte a função e a direção no datasheet da PSRAM selecionada.
 
@@ -296,10 +296,10 @@ Cada PSRAM ilustrada usa 1,8 V, três capacitores de 0,1 µF e um de 1 µF/6,3 V
 | :--- | :--- | :--- | :--- |
 | CLK | GPIO10 | PA34 | Entrada de clock |
 | CMD | GPIO9 | PA36 | Entrada de comando |
-| DATA0 | GPIO8 | PA28 | Dado 0 |
-| DATA1 | GPIO7 | PA29 | Dado 1 |
-| DATA2 | GPIO6 | PA30 | Dado 2 |
-| DATA3 | GPIO5 | PA31 | Dado 3 |
+| DATA0 | GPIO8 | PA28 | Bit de dados 0 |
+| DATA1 | GPIO7 | PA29 | Bit de dados 1 |
+| DATA2 | GPIO6 | PA30 | Bit de dados 2 |
+| DATA3 | GPIO5 | PA31 | Bit de dados 3 |
 
 </div>
 
@@ -311,14 +311,14 @@ Cada PSRAM ilustrada usa 1,8 V, três capacitores de 0,1 µF e um de 1 µF/6,3 V
 | :--- | :--- | :--- | :--- |
 | CLK | GPIO10 | PA34 | Entrada de clock |
 | CMD | GPIO9 | PA36 | Entrada de comando |
-| DATA0 | GPIO8 | PA28 | Dado 0 |
-| DATA1 | GPIO7 | PA29 | Dado 1 |
-| DATA2 | GPIO6 | PA30 | Dado 2 |
-| DATA3 | GPIO5 | PA31 | Dado 3 |
-| DATA4 | GPIO15 | PA47 | Dado 4 |
-| DATA5 | GPIO14 | PA49 | Dado 5 |
-| DATA6 | GPIO13 | PA51 | Dado 6 |
-| DATA7 | GPIO12 | PA55 | Dado 7 |
+| DATA0 | GPIO8 | PA28 | Bit de dados 0 |
+| DATA1 | GPIO7 | PA29 | Bit de dados 1 |
+| DATA2 | GPIO6 | PA30 | Bit de dados 2 |
+| DATA3 | GPIO5 | PA31 | Bit de dados 3 |
+| DATA4 | GPIO15 | PA47 | Bit de dados 4 |
+| DATA5 | GPIO14 | PA49 | Bit de dados 5 |
+| DATA6 | GPIO13 | PA51 | Bit de dados 6 |
+| DATA7 | GPIO12 | PA55 | Bit de dados 7 |
 
 </div>
 
@@ -330,10 +330,10 @@ Cada PSRAM ilustrada usa 1,8 V, três capacitores de 0,1 µF e um de 1 µF/6,3 V
 | :--- | :--- | :--- | :--- |
 | CLK | GPIO17 | PA44 | Entrada de clock |
 | CMD | GPIO16 | PA45 | Entrada de comando |
-| DATA0 | GPIO15 | PA47 | Dado 0 |
-| DATA1 | GPIO14 | PA49 | Dado 1 |
-| DATA2 | GPIO13 | PA51 | Dado 2 |
-| DATA3 | GPIO12 | PA55 | Dado 3 |
+| DATA0 | GPIO15 | PA47 | Bit de dados 0 |
+| DATA1 | GPIO14 | PA49 | Bit de dados 1 |
+| DATA2 | GPIO13 | PA51 | Bit de dados 2 |
+| DATA3 | GPIO12 | PA55 | Bit de dados 3 |
 
 </div>
 
@@ -357,8 +357,8 @@ As interfaces JDI paralela e serial podem usar os grupos de sinais multiplexados
 | D1P | DSI_D1P | Linha de dados MIPI 1+ |
 | D1N | DSI_D1N | Linha de dados MIPI 1- |
 | - | AVDD18_DSI | Entrada de alimentação MIPI |
-| - | DSI_REXT | Conecte um resistor externo de 10 kΩ à terra |
-| - | AVSS_DSI | Terra |
+| - | DSI_REXT | Conecte um resistor externo de 10 kΩ ao GND |
+| - | AVSS_DSI | GND |
 | TE | PA77 | Sinal TE de sincronização dos quadros do MCU |
 | RESET | PB17 | Sinal de reset do painel de display |
 
@@ -378,8 +378,8 @@ Notas de atribuição dos pinos do display:
 | :--- | :--- | :--- | :--- |
 | CSX | GPIO22 | PB33 | Sinal de habilitação |
 | WRX_SCL | GPIO23 | PB32 | Sinal de clock |
-| DCX | GPIO20 | PB36 | Sinal de dados/comando no modo SPI de 4 fios; dado 1 no modo Quad-SPI |
-| SDI_RDX | GPIO21 | PB35 | Sinal de entrada de dados no modo SPI de 3/4 fios; dado 0 no modo Quad-SPI |
+| DCX | GPIO20 | PB36 | Sinal de dados/comando no modo SPI de 4 fios; bit de dados 1 no modo Quad-SPI |
+| SDI_RDX | GPIO21 | PB35 | Sinal de entrada de dados no modo SPI de 3/4 fios; bit de dados 0 no modo Quad-SPI |
 | SDO | GPIO21 | PB35 | Sinal de saída de dados no modo SPI de 3/4 fios; conecte-o ao SDI_RDX |
 | D[0] | GPIO19 | PB37 | Bit de dados 2 no modo Quad-SPI |
 | D[1] | GPIO18 | PB07 | Bit de dados 3 no modo Quad-SPI |
@@ -479,7 +479,7 @@ Para BL_PWM, use um GPIO com a função GPTIM1_CHx e configure um estado adequad
 
 ### 5.7. Interfaces de despertar, GPADC e produção { #57-wake-gpadc-and-manufacturing-interfaces }
 
-Planeje as conexões de despertar, analógicas e de depuração, bem como o acesso à produção, considerando o gabinete e o gabarito de teste. Os pinos de despertar precisam de níveis de repouso definidos e proteção ESD; os divisores do GPADC devem equilibrar o tempo de acomodação e a corrente de fuga; e o acesso para depuração e gravação deve permanecer disponível nas etapas EVT e de produção.
+Planeje as conexões de despertar, analógicas e de depuração, bem como o acesso à produção, considerando o gabinete e o gabarito de teste. Os pinos de despertar precisam de níveis de repouso definidos e proteção ESD; os divisores do GPADC devem equilibrar o tempo de estabilização e a corrente de fuga; e o acesso para depuração e gravação deve permanecer disponível nas etapas EVT e de produção.
 
 O SF32LB55x oferece quatro fontes de despertar do HCPU (WKUP_A0–WKUP_A3) e seis do LCPU (WKUP_B0–WKUP_B5). Cada fonte desperta a CPU correspondente; apenas as seis fontes do LCPU permitem despertar o sistema a partir de Hibernate. Nenhuma das dez entradas pode ficar flutuante: adicione pull-up ou pull-down externo conforme a função para evitar corrente de fuga durante o repouso.
 
@@ -514,7 +514,7 @@ Use um GPIO com GPTIM1_CHx para o PWM do motor. Selecione o comportamento PU/PD 
 
 </div>
 
-O guia de aplicação de hardware da SiFli descreve um GPADC de cinco canais e 10 bits, com faixa de entrada de 0–0,9 V. Em um projeto conservador, conecte VIN diretamente somente se estiver abaixo de 0,9 V; para tensões maiores, use um divisor que mantenha VADC abaixo de 0,9 V. Para medir a bateria, a fonte sugere uma relação R1:R2 próxima de 5:1 e resistores na faixa de MΩ: reduzir a corrente aumenta o tempo de acomodação. O circuito acrescenta um capacitor de 0,1 µF entre VADC e GND. Use `VADC = VIN × R2 / (R1 + R2)` e confira a tensão máxima da bateria e as tolerâncias; as correntes da tabela 5.7-2 se referem a VIN = 4,2 V, não a todas as condições de bateria.
+O guia de aplicação de hardware da SiFli descreve um GPADC de cinco canais e 10 bits, com faixa de entrada de 0–0,9 V. Em um projeto conservador, conecte VIN diretamente somente se estiver abaixo de 0,9 V; para tensões maiores, use um divisor que mantenha VADC abaixo de 0,9 V. Para medir a bateria, a fonte sugere uma relação R1:R2 próxima de 5:1 e resistores na faixa de MΩ: reduzir a corrente aumenta o tempo de estabilização. O circuito acrescenta um capacitor de 0,1 µF entre VADC e GND. Use `VADC = VIN × R2 / (R1 + R2)` e confira a tensão máxima da bateria e as tolerâncias; as correntes da tabela 5.7-2 se referem a VIN = 4,2 V, não a todas as condições de bateria.
 
 Discrepância entre fontes: o [guia de aplicação de hardware OpenSiFli, de maior prioridade](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md) descreve um GPADC de 10 bits e cinco canais, com faixa de entrada de 0–0,9 V. O item 2 do [checklist de esquemático V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) define o máximo de 1,0 V, mas não informa o número de canais. O [datasheet SF32LB55x V1.7.2, seção 3.2.1](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf) especifica oito entradas não diferenciais (single-ended) ou quatro pares diferenciais, com faixas de 0–1,1 V e −0,7 a 0,7 V, respectivamente; a tabela de pinos lista GPADC_CH0–CH7. O [guia ADC atual do SDK](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html) também mapeia oito canais (0–7) e informa 1,1 V como tensão máxima de amostragem. A SiFli não explicou as diferenças no número de canais nem nos limites de tensão. Até obter esclarecimento por escrito, este guia mantém como base de projeto o critério da fonte de maior prioridade: cinco canais e faixa de entrada de 0–0,9 V. Mantenha VADC abaixo de 0,9 V; não trate 1,0 V ou 1,1 V como limites de projeto aprovados e confirme com a SiFli quais canais estão disponíveis para o número de peça e o encapsulamento escolhidos.
 
@@ -561,9 +561,9 @@ O áudio Bluetooth externo usa UART1 do HCPU. Compatibilize os níveis lógicos 
 
 </div>
 
-Não deixe UART RXD flutuante; habilite o pull-up interno na inicialização do firmware. UART3 é a porta de registro padrão. A SiFli oferece um gravador autônomo para gravação em produção e calibração dos cristais. Reserve ao menos VBAT, GND, VDDIOA, VDDIOB, RSTN, Mode, SWDIO, SWCLK, RXD1, TXD1, RXD3 e TXD3 como pontos de teste. O subconjunto de produção é VBAT, GND, boot_mode, VDDIOB, RXD3 e TXD3. VBAT e boot_mode são nomes usados no gabarito de teste da fonte; identifique a alimentação real da placa e a conexão Mode antes de ligar os cabos.
+Não deixe UART RXD flutuante; habilite o pull-up interno na inicialização do firmware. UART3 é a porta de registro padrão. A SiFli oferece um gravador autônomo para gravação em produção e calibração dos cristais. Reserve ao menos VBAT, GND, VDDIOA, VDDIOB, RSTN, Mode, SWDIO, SWCLK, RXD1, TXD1, RXD3 e TXD3 como pontos de teste. O subconjunto do gabarito de teste de produção é VBAT, GND, boot_mode, VDDIOB, RXD3 e TXD3. VBAT e boot_mode são nomes usados no gabarito de teste da fonte; identifique a alimentação real da placa e a conexão Mode antes de conectar os cabos.
 
-O desenho original conecta VDD_1V8 ao pino 1 (VTref). SWDIO e SWCLK são conectados aos pinos 7 e 9, respectivamente, cada um por um resistor em série de 22 Ω. O [J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector) padrão também usa o pino 1 para [VTref](https://kb.segger.com/VTref), a entrada de referência da tensão-alvo, e não uma saída de alimentação da sonda de depuração. Verifique a orientação do conector e a compatibilidade com 1,8 V antes de conectar um cabo padrão.
+O desenho original conecta VDD_1V8 ao pino 1 (VTref), SWDIO ao pino 7 e SWCLK ao pino 9, por resistores em série de 22 Ω. O [J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector) padrão também usa o pino 1 para [VTref](https://kb.segger.com/VTref), a entrada de referência da tensão-alvo, e não uma saída de alimentação da sonda de depuração. Verifique a orientação do conector e a compatibilidade com 1,8 V antes de conectar um cabo padrão.
 
 ![Figura 5.7-4: Conector SWD original: verificar o adaptador](../../sf32-products/chips/assets/55x/SF32LB55x-SWD-SCH.png){ width="100%" loading="lazy" }
 

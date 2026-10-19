@@ -9,21 +9,21 @@ tags:
 
 # 개발 개요 { #develop }
 
-개발 섹션은 동작하는 SF32 보드를 유지보수 가능한 제품 펌웨어로 발전시킵니다. 첫 `hello_world` 실행에 성공한 뒤에 이 섹션을 사용하여 보드 구성을 선택하고, 반복 가능하게 빌드하고 플래시하고, 가장 가까운 예제를 적용하고, 제품 기능을 통합하고, 오류를 진단하고, 업데이트와 복구를 계획하십시오.
+개발 섹션에서는 동작하는 SF32 보드에서 유지보수 가능한 제품 펌웨어를 만드는 과정을 다룹니다. 첫 `hello_world` 실행에 성공한 뒤 보드 구성을 선택하고, 빌드와 플래싱을 재현 가능하게 수행하고, 가장 가까운 예제를 적용하고, 제품 기능을 통합하고, 오류를 진단하고, 업데이트와 복구를 계획할 때 활용하십시오.
 
-첫 보드 실행에는 [시작하기](../getting-started/index.md)를, 디바이스와 개발 보드를 선택하려면 [SF32 제품](../sf32-products/index.md)을, 회로도와 양산 하드웨어에는 [하드웨어](../hardware/index.md)를, 아키텍처 배경 지식에는 [학습](../learn/index.md)을 사용하십시오. 엔지니어링 워크플로와 작업별 구현 지침이 필요할 때 이 섹션을 사용하십시오.
+첫 보드 실행은 [시작하기](../getting-started/index.md)를, 디바이스와 개발 보드 선택은 [SF32 제품](../sf32-products/index.md)을, 회로도와 양산 하드웨어는 [하드웨어](../hardware/index.md)를, 아키텍처 배경은 [학습](../learn/index.md)을 참조하십시오. 엔지니어링 워크플로와 작업별 구현 지침이 필요할 때 이 섹션을 활용하십시오.
 
 !!! info "SiFli-Solution"
-    SiFli-Solution은 별도의 SiFli 소프트웨어 패키지이며 μForge.io는 현재 이를 문서화하지 않습니다. 여기서의 안내는 SiFli-SDK와 아래에 나열한 커뮤니티 경로로 한정됩니다. 제품에 더 완전한 디스플레이 디바이스 솔루션이 필요하다면 공식 [SiFli Solution 문서](https://docs.sifli.com/projects/solution/index.html)를 참조하고 SiFli와 직접 협의하십시오. 이 경로를 사용하는 복잡한 제품은 SiFli의 깊고 직접적인 관여가 필요할 수 있습니다.
+    SiFli-Solution은 별도의 SiFli 소프트웨어 패키지이며 μForge.io는 현재 이를 문서화하지 않습니다. 여기서의 안내는 SiFli-SDK와 아래에 나열한 커뮤니티 경로로 한정됩니다. 제품에 더 완성도 높은 디스플레이 솔루션이 필요하다면 공식 [SiFli Solution 문서](https://docs.sifli.com/projects/solution/index.html)를 참조하고 SiFli와 직접 협의하십시오. 이 경로를 사용하는 복잡한 제품에는 SiFli의 직접적인 심층 지원이 필요할 수 있습니다.
 
 ## SiFli-SDK 기준 구성 확립 { #establish-a-sifli-sdk-baseline }
 
-[SiFli-SDK](platforms/sifli-sdk/overview.md)는 RT-Thread 기반의 SiFli 공식 소프트웨어 패키지이자 SF32 펌웨어의 레퍼런스 개발 경로입니다. 다른 생태계를 평가해야 할 뚜렷한 이유가 없다면 여기서 시작하십시오. 보드 지원, Bluetooth, 그래픽, 오디오, 스토리지, 전원 관리, 양산 작업에 걸쳐 문서화된 기준 구성 중 가장 폭넓습니다.
+[SiFli-SDK](platforms/sifli-sdk/overview.md)는 RT-Thread 기반의 SiFli 공식 소프트웨어 패키지이자 SF32 펌웨어의 레퍼런스 개발 경로입니다. 다른 생태계를 평가해야 할 분명한 이유가 없다면 여기서 시작하십시오. 보드 지원, Bluetooth, 그래픽, 오디오, 스토리지, 전원 관리, 양산 작업을 폭넓게 다루는 문서화된 기준 구성입니다.
 
 제품 기능을 만들기 전에, 재현 가능한 기준 구성 하나를 확립하고 기록하십시오.
 
 1. [보드 설정](platforms/sifli-sdk/board-configuration.md)에서 정확한 SDK 보드 구성을 선택합니다.
-2. [빌드, 플래시, 모니터](platforms/sifli-sdk/build-flash-monitor.md) 루프를 성공적으로 실행합니다.
+2. [빌드, 플래시, 모니터](platforms/sifli-sdk/build-flash-monitor.md)에 설명된 흐름을 성공적으로 실행합니다.
 3. SDK 릴리스 또는 커밋, 보드 이름, 빌드 명령, 플래시 명령, 시리얼 설정, 부팅 로그를 저장합니다.
 4. 가장 가까운 [예제](examples/index.md)에서 시작합니다. 특히 제품에서 가장 어려운 서브시스템을 이미 다루는 예제가 좋습니다.
 
@@ -57,10 +57,10 @@ tags:
 
 | 엔지니어링 영역 | 애플리케이션 노트 시작점 |
 |:-----------------|:--------------------------------|
-| 아날로그와 센서 | [GPADC로 샘플링하기](platforms/sifli-sdk/application-notes/adc-sampling.md) · [센서 통합 및 읽기](platforms/sifli-sdk/application-notes/sensor-integration.md) |
-| 스토리지와 그래픽 에셋 | [외부 플래시 사용](platforms/sifli-sdk/application-notes/external-flash.md) · [EZIP으로 그래픽 에셋 압축하기](platforms/sifli-sdk/application-notes/ezip-image-assets.md) |
+| 아날로그와 센서 | [GPADC로 샘플링](platforms/sifli-sdk/application-notes/adc-sampling.md) · [센서 통합 및 읽기](platforms/sifli-sdk/application-notes/sensor-integration.md) |
+| 스토리지와 그래픽 에셋 | [외부 플래시 사용](platforms/sifli-sdk/application-notes/external-flash.md) · [EZIP으로 그래픽 에셋 압축](platforms/sifli-sdk/application-notes/ezip-image-assets.md) |
 | 신뢰성, 전원, 디버깅 | [워치독 설정](platforms/sifli-sdk/application-notes/watchdog.md) · [저전력 구성 및 측정](platforms/sifli-sdk/application-notes/low-power-measurement.md) · [로그 캡처와 크래시 분석](platforms/sifli-sdk/application-notes/crash-analysis.md) |
-| RF 및 Bluetooth 검증 | [SiFli SDK RF 테스트 실행](platforms/sifli-sdk/application-notes/rf-performance-tests.md) · [Bluetooth 시그널링 테스트 실행하기](platforms/sifli-sdk/application-notes/bluetooth-signalling-tests.md) · [Bluetooth 단일 항목 RF 테스트 실행하기](platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests.md) |
+| RF 및 Bluetooth 검증 | [SiFli-SDK RF 테스트 실행](platforms/sifli-sdk/application-notes/rf-performance-tests.md) · [Bluetooth 시그널링 테스트 실행](platforms/sifli-sdk/application-notes/bluetooth-signalling-tests.md) · [Bluetooth 개별 RF 테스트 실행](platforms/sifli-sdk/application-notes/bluetooth-single-tone-tests.md) |
 
 </div>
 

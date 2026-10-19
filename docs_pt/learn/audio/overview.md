@@ -54,7 +54,7 @@ flowchart TB
 
 O **AUDCODEC** faz a conversão analógico-digital e digital-analógica. O **AUDPRC** executa mixagem, ganho e conversão de taxa de amostragem nos caminhos compatíveis. Os microfones PDM usam o bloco PDM para gerar PCM; não passam pelo ADC analógico. I2S conecta dispositivos de áudio digital externos. Uma interface PDM pode conectar até dois microfones compatíveis pela seleção de canal esquerdo/direito; duas interfaces permitem até quatro, conforme os pinos disponíveis e o suporte do driver.
 
-O **Audio Server** é um software que gerencia fluxos e sessões, não um conversor físico entre o microfone e o alto-falante. A aplicação normalmente usa suas APIs e os drivers correspondentes; testes diretos do driver ou da HAL são úteis na inicialização da placa. Selecione primeiro os caminhos reais de captura e reprodução, depois verifique clocks, formatos de amostra, requisições DMA e os requisitos de acionamento da saída. Não presuma que o DAC integrado consiga acionar o alto-falante escolhido sem amplificador externo.
+O **Audio Server** é um software que gerencia fluxos e sessões, não um conversor físico entre o microfone e o alto-falante. A aplicação normalmente usa suas APIs e os drivers correspondentes; testes diretos do driver ou da HAL são úteis durante o bring-up. Selecione primeiro os caminhos reais de captura e reprodução, depois verifique clocks, formatos de amostra, requisições DMA e os requisitos de acionamento da saída. Não presuma que o DAC integrado consiga acionar o alto-falante escolhido sem amplificador externo.
 
 Esses caminhos estão descritos no [guia do driver AUDPRC/AUDCODEC](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/drivers/audprc_audcodec.html) e no [guia HAL de PDM](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/hal/pdm.html).
 
@@ -190,7 +190,7 @@ O firmware não consegue compensar totalmente um projeto analógico deficiente. 
 | Trilhos de alimentação | Filtre as alimentações do codec e do microfone conforme o projeto de referência e o datasheet do microfone. |
 | Caminho do alto-falante/amplificador | Verifique carga, ganho, comportamento térmico, supressão de estalos e comportamento do pino de desligamento. |
 | Clocks I2S/PDM | Confirme a margem de temporização, o comprimento das trilhas e a qualidade do clock nas taxas de amostragem selecionadas. |
-| Acesso para teste | Preveja uma forma prática de injetar e capturar áudio durante a inicialização da placa e os testes de produção. |
+| Acesso para teste | Preveja uma forma prática de injetar e capturar áudio durante o bring-up e os testes de produção. |
 
 </div>
 
@@ -253,7 +253,7 @@ Mantenha um arquivo WAV/PCM de referência validado e uma amostra de áudio vali
 - Manter caminhos não utilizados ativos entre sessões, ou desligar a captura necessária para escuta contínua.
 - Escolher um formato comprimido antes de confirmar que o custo de decodificação cabe nos orçamentos de energia e CPU.
 
-## Checklist de inicialização da placa { #bring-up-checklist }
+## Checklist de bring-up { #bring-up-checklist }
 
 - [ ] Confirme, para o dispositivo e a placa escolhidos, os tipos e canais de microfone, as instâncias PDM/I2S, os pinos acessíveis e os caminhos simultâneos suportados.
 - [ ] Defina a taxa de amostragem, a largura armazenada de cada amostra, a organização dos canais e os tamanhos dos buffers de captura e reprodução.

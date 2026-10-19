@@ -22,7 +22,7 @@ Use un diseño de referencia para responder: **«¿Con qué base técnica reutil
 
 | Elemento | Diseño de referencia | Proyecto |
 |:---------|:--------------------|:---------|
-| Función principal | Una base técnica reutilizable. | Un recorrido específico del producto para la integración y las decisiones de lanzamiento. |
+| Función principal | Una base técnica reutilizable. | Un recorrido específico del producto para la integración y las decisiones de liberación. |
 | Evidencias principales | Base de hardware/software, archivos de diseño o su disponibilidad, resultados de puesta en marcha y límites de reutilización. | Decisiones de producto, dependencias, etapas de adaptación, puntos de control de validación y evidencias de lanzamiento. |
 | Expectativa de reutilización | El lector puede adoptar y adaptar la base para varios productos. | El lector sigue el resultado de un producto concreto y después realiza cambios controlados específicos de ese producto. |
 | Relación | Incluye enlaces a los proyectos que la adoptan. | Cuando corresponda, enlaza al diseño de referencia del que parte. |

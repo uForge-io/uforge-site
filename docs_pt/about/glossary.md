@@ -88,7 +88,7 @@ Este glossário reúne siglas e termos usados na documentação da μForge.io: t
 * **BOM** — **Bill of Materials (lista de materiais).** Relação formal e detalhada de componentes, passivos e peças mecânicas necessários para fabricar uma placa de circuito impresso montada (PCBA). Reduzir a complexidade da BOM é um dos motivos importantes para preferir componentes e módulos recomendados pela SiFli.
 * **EDA** — **Electronic Design Automation (automação de projeto eletrônico).** Categoria de software para captura de esquemáticos, simulação SPICE e layout de PCB. Consulte a [página de bibliotecas de ferramentas EDA](../hardware/cad-components/eda-tool-libraries.md) para footprints e símbolos específicos do SF32.
 * **AVL** — **Approved Vendor List (lista de fornecedores aprovados).** Lista da SiFli de componentes qualificados de segunda fonte (cristais, reguladores, Flash etc.), verificados em relação às tolerâncias elétricas dos projetos de hardware SF32. Consulte a [página da lista de fornecedores aprovados](../hardware/cad-components/sifli-approved-vendor-list.md).
-* **EVB** — **Evaluation Board (placa de avaliação).** Placa de referência ou desenvolvimento SF32 fornecida pela SiFli para colocar o projeto em funcionamento e validá-lo antes de haver hardware personalizado.
+* **EVB** — **Evaluation Board (placa de avaliação).** Placa de referência ou desenvolvimento SF32 fornecida pela SiFli para fazer o bring-up e validar os projetos antes de haver hardware personalizado.
 * **FAE** — **Field Application Engineer (engenheiro de aplicações de campo).** Contato de suporte técnico da SiFli para dúvidas de projeto de hardware que vão além do que a documentação pública cobre.
 
 ## Software e ferramentas { #software-and-tools }

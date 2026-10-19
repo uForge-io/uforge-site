@@ -8,7 +8,7 @@ tags:
 
 # Arduino { #arduino }
 
-OpenSiFli propose un cœur Arduino bêta pour SF32 basé sur Zephyr : [OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr). Le projet publie le paquet Arduino `sifli:sf32lb52`, qui apparaît dans le Boards Manager sous le nom **SiFli Serial Boards** et prend actuellement en charge la carte **SiFli SF32LB52 DevKit LCD**.
+OpenSiFli propose un cœur Arduino bêta pour SF32 basé sur Zephyr : [OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr). Le projet publie le paquet Arduino `sifli:sf32lb52`, qui apparaît dans le Boards Manager (gestionnaire de cartes) sous le nom **SiFli Serial Boards** et prend actuellement en charge la carte **SiFli SF32LB52 DevKit LCD**.
 
 Ce cœur convient aux essais de sketches, aux vérifications rapides de périphériques, aux démonstrations et aux premiers prototypes. Pour un firmware destiné à la production, le réglage fin de la pile Bluetooth, les applications exigeantes en graphismes, l'optimisation de la consommation ou la mise en service d'une carte personnalisée, utilisez [SiFli-SDK](../sifli/getting-started-sifli-sdk.md).
 

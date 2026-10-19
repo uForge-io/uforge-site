@@ -17,7 +17,7 @@ hide:
 
 # Crie a próxima geração<br>de dispositivos embarcados { #build-the-next-generationof-embedded-devices }
 
-***μForge.io*** é uma plataforma de desenvolvimento de código aberto para soluções inovadoras de semicondutores, começando pela família SF32 de microcontroladores de ultrabaixo consumo da SiFli. De chips e módulos a placas de desenvolvimento, SDKs, documentação e projetos de referência prontos para produção, ***μForge.io*** reúne esse conjunto de recursos em um só lugar e ajuda desenvolvedores a levar produtos embarcados conectados, inteligentes e eficientes em energia da ideia à produção com mais rapidez e menos atrito.
+***μForge.io*** é uma plataforma de desenvolvimento de código aberto para soluções inovadoras de semicondutores, começando pela família SF32 de microcontroladores de ultrabaixo consumo da SiFli. De chips e módulos a placas de desenvolvimento, SDKs, documentação e projetos de referência prontos para produção, ***μForge.io*** reúne esse conjunto de recursos em um só lugar e ajuda desenvolvedores a levar produtos embarcados conectados, inteligentes e eficientes em energia da ideia à produção com mais rapidez e menos complicações.
 
 <div class="uf-hero-actions" markdown>
 
@@ -53,9 +53,9 @@ hide:
 
 <a class="uf-spotlight-item uf-spotlight-item--board" href="sf32-products/index.md" data-radius="250">
   <span class="uf-spotlight-item__art uf-spotlight-item__art--board" aria-hidden="true"></span>
-  <span class="uf-spotlight-item__eyebrow">Componentes</span>
+  <span class="uf-spotlight-item__eyebrow">Hardware</span>
   <span class="uf-spotlight-item__title">Módulos e placas de desenvolvimento</span>
-  <span class="uf-spotlight-item__copy">Componentes validados para acelerar o caminho do projeto à produção.</span>
+  <span class="uf-spotlight-item__copy">Hardware testado para acelerar o caminho do projeto à produção.</span>
 </a>
 
 <a class="uf-spotlight-item uf-spotlight-item--sdk" href="develop/index.md" data-radius="245">
@@ -84,11 +84,11 @@ hide:
 
 <div class="grid cards uf-quicklinks" markdown>
 
-- :fontawesome-solid-microchip:{ .uf-ql-icon .uf-purple } **Componentes**
+- :fontawesome-solid-microchip:{ .uf-ql-icon .uf-purple } **Hardware**
 
     Microcontroladores, módulos, placas de desenvolvimento e projetos de referência prontos para produção.
 
-    [Ver componentes :material-arrow-right:](sf32-products/family/SF32_family.md){ .uf-link-purple }
+    [Ver hardware :material-arrow-right:](sf32-products/family/SF32_family.md){ .uf-link-purple }
 
 - :fontawesome-solid-code:{ .uf-ql-icon .uf-green } **SDK e ferramentas**
 
@@ -156,7 +156,7 @@ hide:
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Núcleo de aplicação Cortex-M33 STAR-MC1 + núcleo dedicado ao controlador Bluetooth
     - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 5.3 de modo dual
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 2.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2.5D, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Descompressão por hardware eZip 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Codec de áudio, 1 x AMIC, 2 x DMIC
     - :fontawesome-solid-circle:{ .uf-dot-blue } 576 KB de SRAM, até 16 MB de PSRAM
@@ -172,7 +172,7 @@ hide:
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Dois núcleos Cortex-M33 STAR-MC1
     - :fontawesome-solid-circle:{ .uf-dot-blue } Transceptor Bluetooth 5.2 de baixo consumo
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 1.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2.5D, ePicasso 1.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Descompressão por hardware eZip 1.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Acelerador de IA
     - :fontawesome-solid-circle:{ .uf-dot-blue } 1,4 MB de SRAM, até 18 MB de PSRAM

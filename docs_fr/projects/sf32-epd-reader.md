@@ -143,9 +143,9 @@ Les principaux domaines de panne sont l'analyse de l'archive et du XHTML, les fi
 
 **Objectif :** vérifier que la carte, la dalle, le contrôleur tactile et le code source décrivent une même combinaison prise en charge.
 
-1. Relever les références de la carte V1.1, le composant SF32, le modèle de dalle, le contrôleur tactile, l'orientation de la nappe flexible et la source d'alimentation.
-2. Épingler le commit principal et le sous-module SDK, puis conserver l'état complet des sous-modules.
-3. Compiler et flasher depuis un environnement propre ; calculer l'empreinte de chaque image et script de flashage générés.
+1. Relevez les références de la carte V1.1, le composant SF32, le modèle de dalle, le contrôleur tactile, l'orientation de la nappe flexible et la source d'alimentation.
+2. Épinglez le commit principal et le sous-module SDK, puis conservez l'état complet des sous-modules.
+3. Compilez et flashez depuis un environnement propre ; calculez l'empreinte de chaque image et script de flashage générés.
 
 **Preuves à conserver :** photos de l'assemblage, références des composants, état Git, configuration, journaux de compilation/flashage, empreintes des images et journal de démarrage.
 
@@ -155,10 +155,10 @@ Les principaux domaines de panne sont l'analyse de l'archive et du XHTML, les fi
 
 **Objectif :** valider le parcours utilisateur principal avant toute modification.
 
-1. Rechercher séparément les fichiers EPUB dans le stockage intégré et sur la carte TF ; le firmware donne la priorité à cette dernière.
-2. Suivre Accueil → Bibliothèque → Table des matières → Lecture, en vérifiant quatre livres par page, six entrées de sommaire par page et le fonctionnement « sélectionner, puis confirmer » avec les touches/le tactile.
-3. Vérifier le changement de page gauche/droite, le volet ouvert par balayage vers le haut, les sauts `-5/-1/+1/+5`, le retour au sommaire/à la bibliothèque et l'accès aux réglages de lecture.
-4. Tester le chinois, l'anglais, les images PNG/JPEG et la navigation entre chapitres ; consigner les structures de contenu non prises en charge ou mal formées.
+1. Recherchez séparément les fichiers EPUB dans le stockage intégré et sur la carte TF ; le firmware donne la priorité à cette dernière.
+2. Suivez Accueil → Bibliothèque → Table des matières → Lecture, en vérifiant quatre livres par page, six entrées de sommaire par page et le fonctionnement « sélectionner, puis confirmer » avec les touches/le tactile.
+3. Vérifiez le changement de page gauche/droite, le volet ouvert par balayage vers le haut, les sauts `-5/-1/+1/+5`, le retour au sommaire/à la bibliothèque et l'accès aux réglages de lecture.
+4. Testez le chinois, l'anglais, les images PNG/JPEG et la navigation entre chapitres ; consignez les structures de contenu non prises en charge ou mal formées.
 
 **Preuves à conserver :** source et empreintes des EPUB de test, photos des pages, chronologie des interactions, journaux, marge mémoire et classification des erreurs.
 
@@ -168,10 +168,10 @@ Les principaux domaines de panne sont l'analyse de l'archive et du XHTML, les fi
 
 **Objectif :** garantir que les contenus et réglages réels ne peuvent pas laisser l'utilisateur dans un état irrécupérable après des événements de stockage.
 
-1. Placer les fichiers `.ttf`/`.otf` dans `/fonts` sur la carte TF ; vérifier la détection et la sélection de jusqu'à 64 polices externes, ainsi que le recours à une solution de remplacement lorsqu'une police devient indisponible.
-2. Tester les tailles de police de 24 à 48 px, la graisse, l'interligne de 1,0× à 2,0×, les marges de 5 à 20 px et la persistance après redémarrage via `/settings.cfg`.
-3. À des moments sûrs sans écriture en cours, tester l'absence de carte, son retrait et sa réinsertion, des réglages corrompus et des polices indisponibles. Ne pas retirer la carte à chaud d'une manière qui corromprait intentionnellement le système de fichiers.
-4. Vérifier la limite actuelle : pendant l'exécution, « Continuer la lecture » conserve l'index du dernier livre ouvert et son chapitre ; ne pas présenter cette fonction comme une synchronisation complète de la progression après redémarrage.
+1. Placez les fichiers `.ttf`/`.otf` dans `/fonts` sur la carte TF ; vérifiez la détection et la sélection de jusqu'à 64 polices externes, ainsi que le recours à une solution de remplacement lorsqu'une police devient indisponible.
+2. Testez les tailles de police de 24 à 48 px, la graisse, l'interligne de 1,0× à 2,0×, les marges de 5 à 20 px et la persistance après redémarrage via `/settings.cfg`.
+3. À des moments sûrs sans écriture en cours, testez l'absence de carte, son retrait et sa réinsertion, des réglages corrompus et des polices indisponibles. Ne retirez pas la carte à chaud d'une manière qui corromprait intentionnellement le système de fichiers.
+4. Vérifiez la limite actuelle : pendant l'exécution, « Continuer la lecture » conserve l'index du dernier livre ouvert et son chapitre ; ne présentez pas cette fonction comme une synchronisation complète de la progression après redémarrage.
 
 **Preuves à conserver :** spécification et format de la carte, manifeste des ressources, fichier de réglages, résultats des redémarrages, journaux d'erreur et actions de récupération.
 
@@ -181,10 +181,10 @@ Les principaux domaines de panne sont l'analyse de l'archive et du XHTML, les fi
 
 **Objectif :** déterminer si le pilote de dalle et la politique basse consommation conviennent à l'expérience de lecture visée.
 
-1. Valider les périodes de rafraîchissement complet de 5, 10 et 20, ainsi que le rafraîchissement complet à chaque fois (`0`) ; noter les images rémanentes, le clignotement, la durée et la cohérence des pages.
-2. Valider forme d'onde, VCOM et timing de la dalle cible sur la plage de température prévue. Ne pas reprendre les valeurs d'une autre configuration de dalle.
-3. Valider les délais sélectionnables de 5/10/30 minutes, 1 heure et « jamais », ainsi que la politique par défaut indépendante qui affiche la page d'arrêt après cinq heures sans interaction dans la boucle principale.
-4. Vérifier le pourcentage de batterie et l'icône d'éclair de charge dans la barre d'état, y compris la disparition de l'icône à 98 %. Mesurer le courant pendant la pagination, les rafraîchissements partiel et complet, le repos, le réveil/la veille de la carte TF, la batterie faible, la charge et l'arrêt.
+1. Validez les périodes de rafraîchissement complet de 5, 10 et 20, ainsi que le rafraîchissement complet à chaque fois (`0`) ; notez les images rémanentes, le clignotement, la durée et la cohérence des pages.
+2. Validez forme d'onde, VCOM et minutage de la dalle cible sur la plage de température prévue. Ne reprenez pas les valeurs d'une autre configuration de dalle.
+3. Validez les délais sélectionnables de 5/10/30 minutes, 1 heure et « jamais », ainsi que la politique par défaut indépendante qui affiche la page d'arrêt après cinq heures sans interaction dans la boucle principale.
+4. Vérifiez le pourcentage de batterie et l'icône d'éclair de charge dans la barre d'état, y compris la disparition de l'icône à 98 %. Mesurez le courant pendant la pagination, les rafraîchissements partiel et complet, le repos, le réveil/la veille de la carte TF, la batterie faible, la charge et l'arrêt.
 
 **Preuves à conserver :** versions de la dalle et des formes d'onde, température, images des pages, statistiques de rafraîchissement, traces de courant, état de la batterie et résultats du réveil/de l'arrêt.
 
@@ -194,7 +194,7 @@ Les principaux domaines de panne sont l'analyse de l'archive et du XHTML, les fi
 
 **Objectif :** démontrer que l'équipe peut adapter un élément précis sans dégrader la référence.
 
-Les changements appropriés incluent l'ajout d'une police sous licence, l'ajustement d'une page, une correction limitée de compatibilité EPUB ou un pilote distinct pour une nouvelle dalle. L'intégration d'une nouvelle dalle doit couvrir Kconfig, résolution/DPI, tactile, bus, forme d'onde, plages de température, LUT, timing et VCOM, tout en conservant la cible d'origine pour les tests de régression.
+Les changements appropriés incluent l'ajout d'une police sous licence, l'ajustement d'une page, une correction limitée de compatibilité EPUB ou un pilote distinct pour une nouvelle dalle. L'intégration d'une nouvelle dalle doit couvrir Kconfig, résolution/DPI, tactile, bus, forme d'onde, plages de température, LUT, minutage et VCOM, tout en conservant la cible d'origine pour les tests de régression.
 
 La revue produit doit répondre au minimum aux questions suivantes :
 

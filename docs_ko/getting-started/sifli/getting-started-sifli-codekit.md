@@ -9,11 +9,11 @@ tags:
 
 # SiFli CodeKit { #sifli-codekit }
 
-SiFli CodeKit은 SiFli-SDK 개발을 위한 VS Code 확장입니다. SDK 도구 설치, 보드 선택, 예제 빌드, 펌웨어 플래싱, 시리얼 콘솔 열기를 안내형 동작으로 제공합니다.
+SiFli CodeKit은 SiFli-SDK 개발을 위한 VS Code 확장입니다. SDK 도구 설치, 보드 선택, 예제 빌드, 펌웨어 플래싱, 시리얼 콘솔 열기까지 단계별로 안내합니다.
 
 IDE 워크플로를 선호한다면 이 경로를 사용하십시오. 버튼 뒤에서 실행되는 명령을 이해하려면 [수동 SiFli-SDK 가이드](getting-started-sifli-sdk.md)를 사용하십시오.
 
-이 문서는 첫 실행 가이드입니다. `hello_world`가 동작한 후에는 CodeKit의 일상적인 역할, 재현성 기대 수준, 장애 경계를 다룬 정식 참조 문서인 [CodeKit 도구 레퍼런스](../../develop/tools/codekit.md)를 참조하십시오.
+이 문서는 첫 실행 가이드입니다. `hello_world`가 동작한 후에는 CodeKit의 일상적인 역할, 재현성 기준, 장애 범위를 다루는 [CodeKit 도구 안내](../../develop/tools/codekit.md)를 참고하십시오.
 
 ## 준비 사항 { #what-youll-need }
 
@@ -29,7 +29,7 @@ IDE 워크플로를 선호한다면 이 경로를 사용하십시오. 버튼 뒤
 - SiFli CodeKit 확장.
 - CodeKit이 SiFli-SDK를 클론하거나 가져오라고 요청하는 경우 Git.
 
-**공식 레퍼런스**
+**공식 문서**
 
 - [SiFli CodeKit 설치 가이드](https://docs.sifli.com/projects/codekit/get-started/install.html)
 
@@ -48,11 +48,11 @@ SDK 관리를 열려면 VS Code 사이드바에서 SiFli 아이콘을 클릭하�
 
 ## SiFli-SDK 설치 또는 선택 { #install-or-select-sifli-sdk }
 
-CodeKit의 설정 흐름을 사용하여 SiFli-SDK를 설치하거나, 이미 클론한 SDK 사본을 지정하십시오. 대부분의 사용자는 **Release/Tag**를 선택하십시오. 버전이 지정되어 테스트를 거친 기준 구성입니다. 더 새로운 수정이나 기능이 필요하고 안정성이 다소 낮아도 괜찮다면 **Branch**를 선택하십시오. 공식 가이드는 `release/vX.Y`를 불안정한 `main` 브랜치를 사용하지 않고도 해당 릴리스 라인의 최신 수정과 기능을 받는 방법으로 설명합니다. 다만 그 내용은 시간이 지나면서 바뀔 수 있습니다.
+CodeKit의 설정 흐름으로 SiFli-SDK를 설치하거나, 이미 클론한 SDK 사본을 지정하십시오. 대부분의 경우 **Release/Tag**를 선택하십시오. 버전이 고정되고 테스트를 거친 기준 구성입니다. 더 새로운 수정이나 기능이 필요하고 안정성이 다소 낮아질 수 있음을 감수할 수 있다면 **Branch**를 선택하십시오. 공식 가이드에 따르면 `release/vX.Y` 브랜치를 사용하면 안정성이 더 낮은 `main` 브랜치로 전환하지 않고도 해당 릴리스 라인의 최신 수정과 기능을 받을 수 있습니다. 다만 브랜치 내용은 시간이 지나면서 바뀔 수 있습니다.
 
 중국 본토에서 작업하는 경우, 공식 가이드는 SDK 소스로 Gitee를, 툴체인 다운로드에는 SiFli 국내 미러를 사용하도록 권장합니다.
 
-CodeKit이 SDK 위치를 요청하면 공백이 없는 짧은 경로를 선택하십시오. 예를 들면 다음과 같습니다.
+CodeKit이 SDK 위치를 요청하면 공백이 없는 짧은 경로를 지정하십시오. 예를 들면 다음과 같습니다.
 
 === "macOS / Linux"
 
@@ -66,7 +66,7 @@ CodeKit이 SDK 위치를 요청하면 공백이 없는 짧은 경로를 선택�
     C:\OpenSiFli\SiFli-SDK
     ```
 
-CodeKit은 SDK 자체의 설치 프로그램과 환경 스크립트를 사용합니다. 그 결과는 수동 설정과 같아야 합니다. 컴파일러, Python 환경, 빌드 도구, 플래시 도구가 함께 준비됩니다.
+CodeKit은 SDK 자체의 설치 프로그램과 환경 스크립트를 사용합니다. 이를 통해 컴파일러, Python 환경, 빌드 도구, 플래시 도구를 수동 설정과 동일하게 준비할 수 있습니다.
 
 ## 예제 열기 { #open-an-example }
 
@@ -76,7 +76,7 @@ SDK의 `hello_world` 예제에서 시작하십시오.
 example/get-started/hello_world/rtt/project
 ```
 
-해당 프로젝트 폴더를 VS Code에서 여십시오. CodeKit이 프로젝트 가져오기 마법사를 제공하면 `hello_world` 프로젝트를 선택하고 SDK 루트를 감지하도록 하십시오.
+해당 프로젝트 폴더를 VS Code에서 여십시오. CodeKit이 프로젝트 가져오기 마법사를 제공하면 `hello_world` 프로젝트를 선택한 뒤 SDK 루트를 자동으로 감지하도록 하십시오.
 
 ## 보드 선택 { #select-the-board }
 
@@ -96,13 +96,13 @@ CodeKit의 **Build** 동작을 실행하십시오. 빌드가 성공하면 다음
 build_sf32lb52-lcd_n16r8_hcpu
 ```
 
-빌드가 즉시 실패하면 CodeKit이 SiFli-SDK가 설치된 위치를 알고 있는지, SDK 환경 설치가 완료되었는지 확인하십시오.
+빌드가 즉시 실패하면 CodeKit에 SiFli-SDK 설치 위치가 지정되어 있는지, SDK 환경 설치가 완료되었는지 확인하십시오.
 
 ## 플래싱 { #flash }
 
 USB-to-UART 포트를 통해 보드를 연결한 다음 CodeKit의 **Flash** 또는 **Download** 동작을 실행하십시오.
 
-시리얼 포트를 묻는 메시지가 표시되면 다음과 같이 선택하십시오.
+시리얼 포트를 묻는 메시지가 표시되면 운영 체제에 맞는 항목을 선택하십시오.
 
 - Windows에서는 해당하는 `COM` 포트를 선택하십시오.
 - macOS에서는 `/dev/tty.*`가 아니라 `/dev/cu.*` 디바이스를 선택하십시오.
@@ -114,7 +114,7 @@ USB-to-UART 포트를 통해 보드를 연결한 다음 CodeKit의 **Flash** 또
 
 CodeKit의 시리얼 모니터, VS Code의 시리얼 도구 또는 다른 터미널 프로그램을 사용하십시오. 리셋 후 콘솔에 읽을 수 있는 부팅 출력과 `hello_world` 예제 출력이 표시되어야 합니다.
 
-읽을 수 있는 부팅 로그가 보이면 보드와 시리얼 설정이 올바른 것입니다. 출력이 깨지면 다른 시리얼 도구를 닫고 예제에서 사용하는 보레이트를 확인하십시오.
+읽을 수 있는 부팅 로그가 보이면 보드와 시리얼 설정이 올바릅니다. 출력이 깨지면 다른 시리얼 도구를 닫고 예제에서 사용하는 보레이트를 확인하십시오.
 
 ## 성공 확인 { #success-check }
 
@@ -149,4 +149,4 @@ CodeKit의 시리얼 모니터, VS Code의 시리얼 도구 또는 다른 터미
 
 ## 설정을 재현 가능하게 유지 { #what-sifli-should-add }
 
-CodeKit과 SDK 버전, 선택한 릴리스 태그 또는 브랜치, 정확한 보드 타깃을 기록하십시오. 메뉴나 명령 레이블이 이 페이지와 다르면 설치된 버전의 레퍼런스로 최신 [공식 설치 가이드](https://docs.sifli.com/projects/codekit/get-started/install.html)와 SDK의 [지원 보드 목록](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)을 사용하십시오.
+CodeKit과 SDK 버전, 선택한 릴리스 태그 또는 브랜치, 정확한 보드 타깃을 기록하십시오. 메뉴나 명령 레이블이 이 페이지와 다르면 설치된 버전의 기준 문서로 최신 [공식 설치 가이드](https://docs.sifli.com/projects/codekit/get-started/install.html)와 SDK의 [지원 보드 목록](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)을 참조하십시오.

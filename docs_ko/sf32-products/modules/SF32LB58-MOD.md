@@ -12,14 +12,14 @@ tags:
 
 SF32LB58-MOD는 SiFli의 SF32LB586VDD36을 기반으로 하는 저전력 Bluetooth MCU 모듈입니다. 표준 구성에는 16 + 16 MB HPI-PSRAM과 1 MB QSPI-NOR이 포함됩니다. 24 × 24 × 3.1 mm 크기의 이 모듈은 트리플 코어 플랫폼, RF 경로, 크리스털, 메모리 옵션을 디스플레이, 오디오, 스토리지, 제어용 외부 인터페이스와 결합합니다.
 
-이 모듈은 BGA256 디바이스, RF 경로, 크리스털, 고속 메모리를 모듈 안에 통합하여, 제품 캐리어 보드에서 필요한 관련 라우팅을 줄여 줍니다. 완성된 제품에는 여전히 RF 검증과 해당 규제 승인이 필요합니다. 캐리어 보드 설계를 확정하기 전에 선택한 SKU의 안테나 옵션과 메모리 구성을 확인하십시오.
+이 모듈은 BGA256 디바이스, RF 경로, 크리스털, 고속 메모리를 모듈에 통합해 제품 캐리어 보드의 관련 라우팅을 줄여 줍니다. 완제품에는 RF 검증과 관련 제품 인증이 필요합니다. 캐리어 보드 설계를 확정하기 전에 선택한 SKU의 안테나 옵션과 메모리 구성을 확인하십시오.
 
 선택한 모듈 SKU에 따라, 이 플랫폼은 HPI-PSRAM을 QSPI-NOR, QSPI-NAND 또는 eMMC 스토리지와 조합할 수 있습니다. 모듈의 인터페이스는 MCU급 플랫폼을 유지하면서 디스플레이, 오디오, 스토리지, 연결 기능이 필요한 제품을 지원합니다.
 
-DS5802 V0.1에는 온모듈 PCB 안테나와 외부 안테나 구성이 기재되어 있습니다. 외부 안테나는 캐슬레이션 패드 또는 1세대 외부 안테나 커넥터로 연결할 수 있으며, 이 커넥터는 Hirose U.FL, I-PEX MHFI, Amphenol AMC 커넥터와 호환됩니다. 데이터시트는 이러한 옵션을 개별 SKU와 대응시키지 않으므로, 캐리어 보드 레이아웃을 확정하기 전에 선택한 모듈의 안테나 구현을 SiFli에 확인하십시오.
+DS5802 V0.1에는 모듈 탑재 PCB 안테나와 외부 안테나 구성이 기재되어 있습니다. 외부 안테나는 캐슬레이션 패드 또는 1세대 외부 안테나 커넥터를 통해 연결할 수 있습니다. 이 커넥터는 Hirose U.FL, I-PEX MHFI, Amphenol AMC 커넥터와 호환됩니다. 데이터시트는 안테나 옵션을 개별 SKU와 대응시키지 않으므로, 캐리어 보드 레이아웃을 확정하기 전에 선택한 모듈의 안테나 구성을 SiFli에 확인하십시오.
 
 !!! info
-    기반 칩 제품군, 아키텍처, 주변 장치 구성은 [SF32LB58x](../chips/SF32LB58x.md)를 참고하십시오. 이 페이지는 모듈별 통합, 메모리 변형(variant), 전원 레일, 제품 적합성 결정에 초점을 맞춥니다.
+    기반 칩 제품군, 아키텍처, 주변 장치 구성은 [SF32LB58x](../chips/SF32LB58x.md)를 참고하십시오. 이 페이지에서는 모듈별 통합, 메모리 구성, 전원 레일, 제품 적합성을 다룹니다.
 
 ## 애플리케이션 { #applications }
 
@@ -32,10 +32,10 @@ SiFli는 SF32LB58-MOD의 애플리케이션 분야로 다음을 제시합니다.
 - 범용: 저전력 센서 허브와 Bluetooth Mesh
 - AIoT 사례: 음성 명령 인식, 스마트 홈 디바이스, 스마트 키, 스마트 컨트롤 패널
 
-설계에 다음 기능 중 하나 이상이 필요하다면 SF32LB58-MOD를 검토하십시오.
+설계에 다음 기능 중 하나 이상이 필요하면 SF32LB58-MOD를 검토하십시오.
 
 - BGA256 디바이스, RF 경로, 크리스털, 고속 메모리의 모듈 수준 통합
-- 온모듈 PCB 안테나, 또는 캐슬레이션 패드나 Hirose U.FL, I-PEX MHFI, Amphenol AMC 커넥터와 호환되는 커넥터로 연결하는 외부 안테나. SKU 구성을 확인하십시오.
+- 모듈 탑재 PCB 안테나 또는 캐슬레이션 패드나 Hirose U.FL, I-PEX MHFI, Amphenol AMC 호환 커넥터로 연결하는 외부 안테나. SKU 구성을 확인하십시오.
 - QSPI-NOR, QSPI-NAND, eMMC 구성에 걸친 메모리 선택
 - 디스플레이, 오디오, 스토리지, 제어를 위한 외부 인터페이스
 
@@ -49,11 +49,11 @@ SiFli는 SF32LB58-MOD의 애플리케이션 분야로 다음을 제시합니다.
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Module Datasheet]__
-- :fontawesome-solid-microchip: __[Chip Introduction]__
-- :fontawesome-solid-file-lines: __[Hardware Design Guide]__
-- :fontawesome-solid-cart-shopping: __[Buy Samples]__
-- :fontawesome-solid-cart-shopping: __[Buy Dev Kits]__
+- :fontawesome-solid-file-pdf: __[모듈 데이터시트][Module Datasheet]__
+- :fontawesome-solid-microchip: __[칩 소개][Chip Introduction]__
+- :fontawesome-solid-file-lines: __[하드웨어 설계 가이드][Hardware Design Guide]__
+- :fontawesome-solid-cart-shopping: __[샘플 구매][Buy Samples]__
+- :fontawesome-solid-cart-shopping: __[개발 키트 구매][Buy Dev Kits]__
 
 </div>
 
@@ -132,7 +132,7 @@ SiFli는 SF32LB58-MOD의 애플리케이션 분야로 다음을 제시합니다.
 
 ### 개발 키트 { #development-kits }
 
-[SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) 보드는 모듈을 사용하는 커스텀 캐리어 설계로 넘어가기 전에 펌웨어 검증, 디스플레이 브링업, 오디오/스토리지 경로 점검을 시작하기에 실용적인 출발점입니다.
+[SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) 보드는 모듈 기반 커스텀 캐리어 설계에 앞서 펌웨어를 검증하고 디스플레이를 초기 구동하며 오디오·스토리지 경로를 점검하기에 적합한 출발점입니다.
 
 ### 레퍼런스 제품 { #reference-products }
 

@@ -1,7 +1,7 @@
 ---
 icon: lucide/chart-no-axes-combined
 title: "Medición y análisis del consumo energético de Bluetooth"
-description: "Método práctico para medir el consumo de BLE, Bluetooth clásico y el modo dual en un dispositivo SF32, relacionar las trazas con el firmware y convertir los resultados en un presupuesto energético diario."
+description: "Método práctico para medir el consumo de BLE, Bluetooth clásico y el modo dual en un dispositivo SF32, relacionar las trazas con el firmware y convertir los resultados en un presupuesto de energía diario."
 tags:
   - Bluetooth
   - Bajo consumo
@@ -10,9 +10,9 @@ tags:
 
 # Medición y análisis del consumo energético de Bluetooth { #bluetooth-low-power-profiling }
 
-Este artículo explica cómo medir el **consumo real del dispositivo durante el funcionamiento Bluetooth**: Bluetooth Low Energy (BLE), Bluetooth clásico (BR/EDR) y el uso combinado de ambos en un producto de modo dual. Para cada escenario, delimite el circuito que se va a medir, registre la corriente y la tensión y recopile suficientes datos del firmware para explicar los tramos importantes de la traza.
+Este artículo explica cómo medir el **consumo real del dispositivo durante el funcionamiento Bluetooth**: Bluetooth Low Energy (BLE), Bluetooth clásico (BR/EDR) y el uso combinado de ambos en un producto de modo dual. Para cada escenario, defina el límite de medición eléctrica, registre la corriente y la tensión y recopile suficientes datos del firmware para explicar los tramos importantes de la traza.
 
-Use las secciones sobre Bluetooth clásico y modo dual solo con dispositivos y configuraciones de firmware compatibles con BR/EDR. En un producto exclusivamente BLE se aplica el mismo método, pero el plan de pruebas se limita a BLE.
+Use las secciones sobre Bluetooth clásico y modo dual solo con dispositivos y configuraciones de firmware compatibles con BR/EDR. En un producto exclusivamente BLE se recomienda aplicar igualmente el mismo método, pero el plan de pruebas se limita a BLE.
 
 El [Online Power Profiler for Bluetooth LE](https://devzone.nordicsemi.com/power/w/opp/2/online-power-profiler-for-bluetooth-le) de Nordic es una referencia conceptual útil para BLE. Nordic lo describe como un modelo basado en mediciones que estima valores esperados; no mide un dispositivo concreto. Las cifras de precisión publicadas solo corresponden a plataformas de referencia de Nordic y no deben extrapolarse a SF32. La herramienta tampoco modela Bluetooth clásico ni productos de modo dual. Use modelos para decidir qué medir y mida el dispositivo objetivo para determinar el consumo real del producto.
 
@@ -63,34 +63,34 @@ Antes de cada ejecución:
 
 ## Analice las fases de consumo de un evento de anuncio BLE { #read-a-ble-advertising-event-as-a-set-of-power-components }
 
-Un evento típico de publicidad BLE no consiste en un único pulso de radio. Comienza con una breve fase de encendido y preparación, seguida de la puesta en marcha y estabilización del oscilador de cristal de alta frecuencia. Cuando la alimentación y los relojes están listos, el dispositivo permanece en espera hasta la hora programada para iniciar la radio. En el ejemplo escaneable o conectable que se muestra aquí, inicia la radio, transmite por uno de los canales primarios de publicidad y abre una ventana de recepción en ese mismo canal. Después de las dos primeras ventanas de recepción, vuelve al estado de espera antes de transmitir por el canal siguiente; tras la última ventana, realiza el posprocesamiento. Un evento no conectable y no escaneable no escucha solicitudes. Las etapas reales dependen del tipo de publicidad configurado y del mapa de canales utilizado.
+Un evento típico de anuncio BLE no consiste en un único pulso de radio. Comienza con una breve fase de encendido y preparación, seguida de la puesta en marcha y estabilización del oscilador de cristal de alta frecuencia. Cuando la alimentación y los relojes están listos, el dispositivo permanece en Standby hasta la hora programada para iniciar la radio. En el ejemplo escaneable o conectable que se muestra aquí, inicia la radio, transmite por uno de los canales primarios de anuncio y abre una ventana de recepción en ese mismo canal. Después de las dos primeras ventanas de recepción, vuelve a Standby antes de transmitir por el canal siguiente; tras la última ventana, realiza el posprocesamiento. Un evento no conectable y no escaneable no escucha solicitudes. Las etapas reales dependen del tipo de anuncio configurado y del mapa de canales utilizado.
 
-La secuencia completa representada es: Preprocesamiento → Arranque del cristal → En espera → Inicio de radio → Transmisión (TX) → Cambio TX/RX → Recepción (RX) → En espera → Transmisión (TX) → Cambio TX/RX → Recepción (RX) → En espera → Transmisión (TX) → Cambio TX/RX → Recepción (RX) → Posprocesamiento. La radio se inicia una sola vez; las transmisiones por los canales 38 y 39 comienzan después del periodo de espera posterior a la ventana RX del canal anterior. La secuencia toma como referencia las etapas del [ejemplo ilustrativo de Nordic sobre un evento típico de publicidad BLE](https://devzone.nordicsemi.com/power/w/opp/2/online-power-profiler-for-bluetooth-le). Son fases genéricas de un evento BLE, no estados de radio propios de Nordic, y este redibujo no añade otros estados. Los niveles de corriente y las proporciones temporales son ilustrativos, no mediciones de SF32. Mídalos en el dispositivo objetivo.
+La secuencia completa representada es: Preprocesamiento → Arranque del cristal → Standby → Inicio de radio → Transmisión (TX) → Cambio TX/RX → Recepción (RX) → Standby → Transmisión (TX) → Cambio TX/RX → Recepción (RX) → Standby → Transmisión (TX) → Cambio TX/RX → Recepción (RX) → Posprocesamiento. La radio se inicia una sola vez; las transmisiones por los canales 38 y 39 comienzan después del periodo de Standby posterior a la ventana RX del canal anterior. La secuencia toma como referencia las etapas del [ejemplo ilustrativo de Nordic sobre un evento típico de anuncio BLE](https://devzone.nordicsemi.com/power/w/opp/2/online-power-profiler-for-bluetooth-le). Son fases genéricas de un evento BLE, no estados de radio propios de Nordic, y este redibujo no añade otros estados. Los niveles de corriente y las proporciones temporales son ilustrativos, no mediciones de SF32. Mídalos en el dispositivo objetivo.
 
-<div align="center"><em>Figura: Etapas de un evento de publicidad BLE</em></div>
+<div align="center"><em>Figura: Etapas de un evento de anuncio BLE</em></div>
 
-![Etapas del evento de publicidad BLE](assets/ble-advertising-event-stages-es.svg)
+![Etapas del evento de anuncio BLE](assets/ble-advertising-event-stages-es.svg)
 
-La ilustración representa un evento de publicidad heredada, escaneable o conectable, que usa los tres canales primarios, 37, 38 y 39; no muestra la interacción posterior a una solicitud recibida. Las etiquetas de canal son ilustrativas: la especificación Bluetooth Core permite usar los índices de canal primario habilitados en cualquier orden, mientras que el mapa configurado determina cuáles se utilizan. Un evento suele enviar una PDU de publicidad en cada índice utilizado, y como máximo una por índice. Las tres transmisiones son copias de los datos de publicidad en distintos canales, no reintentos sujetos a confirmación. En los eventos escaneables o conectables, la capa de enlace escucha solicitudes permitidas en el mismo canal primario; los eventos no escaneables y no conectables no escuchan solicitudes. Consulte la [especificación de la capa de enlace de Bluetooth Core 6.2](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/low-energy-controller/link-layer-specification.html) y la [introducción de Bluetooth SIG](https://www.bluetooth.com/bluetooth-le-primer/). La publicidad extendida, otro mapa de canales o la recepción de una solicitud pueden producir una traza distinta; verifique el comportamiento configurado en el dispositivo objetivo.
+La ilustración representa un evento de anuncio heredado, escaneable o conectable, que usa los tres canales primarios, 37, 38 y 39; no muestra la interacción posterior a una solicitud recibida. Las etiquetas de canal son ilustrativas: la especificación Bluetooth Core permite usar los índices de canal primario habilitados en cualquier orden, mientras que el mapa configurado determina cuáles se utilizan. Un evento suele enviar una PDU de anuncio en cada índice utilizado, y como máximo una por índice. Las tres transmisiones son copias de los datos de anuncio en distintos canales, no reintentos sujetos a confirmación. En los eventos escaneables o conectables, la capa de enlace escucha solicitudes permitidas en el mismo canal primario; los eventos no escaneables y no conectables no escuchan solicitudes. Consulte la [especificación de la capa de enlace de Bluetooth Core 6.2](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/low-energy-controller/link-layer-specification.html) y la [introducción de Bluetooth SIG](https://www.bluetooth.com/bluetooth-le-primer/). Los anuncios extendidos, otro mapa de canales o la recepción de una solicitud pueden producir una traza distinta; verifique el comportamiento configurado en el dispositivo objetivo.
 
-<div align="center"><em>Tabla: Etapas de consumo en un evento de publicidad BLE</em></div>
+<div align="center"><em>Tabla: Etapas de consumo en un evento de anuncio BLE</em></div>
 
 <div align="center" markdown>
 
 | Etapa | Principales actividades y fuentes de consumo | Qué medir y verificar |
 |:------|:----------------------------|:---------------|
-| Preprocesamiento (Pre-processing) | Breve fase de encendido, que puede implicar una corriente relativamente alta, además de la preparación de la CPU y del controlador, la gestión de la carga útil, DMA, el acceso a memoria y la configuración de periféricos | `I_pre` y `t_pre`; identifique las tareas necesarias para despertar y encender el sistema, y elimine o agrupe las que puedan evitarse |
-| Arranque del cristal de alta frecuencia (Crystal ramp-up) | Inicio y estabilización del reloj de alta frecuencia | `I_xtal` y `t_xtal`; compruebe que la política de reloj y la secuencia de activación no duren más de lo necesario |
-| Espera (Standby) | Estado de bajo consumo elegido cuando la alimentación y los relojes ya están listos, junto con la lógica de retención, la temporización de baja frecuencia y las fuentes de activación habilitadas | Mida `I_standby`, la espera inicial antes del arranque de radio y las esperas entre canales posteriores a RX; no equipare esta corriente interna con la corriente de reposo entre eventos completos |
-| Inicio de radio (Start radio) | Preparación de la radio y del controlador, y ruta de alimentación de RF necesaria antes de la primera transmisión | `I_start` y `t_start`; detecte preparativos innecesarios o tareas de inicio repetidas |
-| TX de radio (Radio TX) | Ruta de transmisión, trabajo del controlador y envío de paquetes de publicidad por los canales 37, 38 y 39 | Mida `I_tx` y `t_tx` de cada paquete; la potencia TX, la longitud del paquete y los canales habilitados determinan la energía de los paquetes y del evento |
-| Cambio de radio (Radio switch) | Conmutación de transmisión a recepción y transición de estado del controlador | `I_switch` y `t_switch`; contabilice cada transición, no la trate como tiempo sin coste |
-| RX de radio, si se habilita (Radio RX) | Ruta de recepción y trabajo del controlador mientras espera una solicitud de escaneo o conexión | `I_rx` y `t_rx`; inclúyalo solo si el tipo de publicidad y su configuración abren ventanas de recepción |
-| Posprocesamiento (Post-processing) | Callbacks del protocolo, trabajo de CPU, acceso a memoria y periféricos, y respuesta de la aplicación antes de volver al estado de bajo consumo | `I_post` y `t_post`; compruebe que los relojes, las restricciones de PM y los componentes externos se desactiven a tiempo |
+| Preprocesamiento | Breve fase de encendido, que puede implicar una corriente relativamente alta, además de la preparación de la CPU y del controlador, la gestión de la carga útil, DMA, el acceso a memoria y la configuración de periféricos | `I_pre` y `t_pre`; identifique las tareas necesarias para despertar y encender el sistema, y elimine o agrupe las que puedan evitarse |
+| Arranque del cristal de alta frecuencia | Inicio y estabilización del reloj de alta frecuencia | `I_xtal` y `t_xtal`; compruebe que la política de reloj y la secuencia de activación no duren más de lo necesario |
+| Standby | Estado de bajo consumo elegido cuando la alimentación y los relojes ya están listos, junto con la lógica de retención, la temporización de baja frecuencia y las fuentes de activación habilitadas | Mida `I_standby`, la espera inicial en Standby antes del arranque de radio y los periodos de Standby entre canales posteriores a RX; no equipare esta corriente interna con la corriente de reposo entre eventos completos |
+| Inicio de radio | Preparación de la radio y del controlador, y ruta de alimentación de RF necesaria antes de la primera transmisión | `I_start` y `t_start`; detecte preparativos innecesarios o tareas de inicio repetidas |
+| TX de radio | Ruta de transmisión, trabajo del controlador y envío de paquetes de anuncio por los canales 37, 38 y 39 | Mida `I_tx` y `t_tx` de cada paquete; la potencia TX, la longitud del paquete y los canales habilitados determinan la energía de los paquetes y del evento |
+| Cambio de radio | Conmutación de transmisión a recepción y transición de estado del controlador | `I_switch` y `t_switch`; contabilice cada transición, no la trate como tiempo sin coste |
+| RX de radio, si se habilita | Ruta de recepción y trabajo del controlador mientras espera una solicitud de escaneo o conexión | `I_rx` y `t_rx`; inclúyalo solo si el tipo de anuncio y su configuración abren ventanas de recepción |
+| Posprocesamiento | Callbacks del protocolo, trabajo de CPU, acceso a memoria y periféricos, y respuesta de la aplicación antes de volver al estado de bajo consumo | `I_post` y `t_post`; compruebe que los relojes, las restricciones de PM y los componentes externos se desactiven a tiempo |
 
 </div>
 
-En un dispositivo SF32, use estos nombres de etapa para orientar los marcadores de la traza; no los interprete como estados de radio propios de Nordic ni como valores de corriente o duración predeterminados. Solo habrá recepción si el tipo y la configuración de publicidad abren ventanas de escucha; confírmelo en la traza del dispositivo objetivo.
+En un dispositivo SF32, use estos nombres de etapa para orientar los marcadores de la traza; no los interprete como estados de radio propios de Nordic ni como valores de corriente o duración predeterminados. Solo habrá recepción si el tipo y la configuración de anuncio abren ventanas de escucha; confírmelo en la traza del dispositivo objetivo.
 
 La energía de un evento completo es la integral temporal de la potencia instantánea, es decir, del producto de la tensión por la corriente:
 
@@ -98,23 +98,22 @@ La energía de un evento completo es la integral temporal de la potencia instant
 E_event = sum(V_stage x I_stage x t_stage)
 ```
 
-Con una tensión de alimentación constante, el consumo medio de una configuración periódica de publicidad puede aproximarse así:
+Con una tensión de alimentación constante, el consumo medio de una configuración periódica de anuncio puede aproximarse así:
 
 ```text
 Q_event = sum(I_stage x t_stage)
 I_average = (Q_event + I_idle x (T_cycle - t_event)) / T_cycle
 ```
 
-`Q_event` incluye la carga de todas las etapas del evento completo, también sus periodos internos de espera; `t_event` es la duración total del evento. `I_idle` es la corriente medida entre eventos completos, no la `I_standby` interna del evento. `T_cycle` es el intervalo medido entre el inicio de un evento y el siguiente, incluidos el retardo de publicidad y los efectos de la planificación. Si los intervalos varían, integre una traza larga y representativa en lugar de tomar el intervalo configurado como un periodo exacto.
+`Q_event` incluye la carga de todas las etapas del evento completo, también sus periodos internos de Standby; `t_event` es la duración total del evento. `I_idle` es la corriente medida entre eventos completos, no la `I_standby` interna del evento. `T_cycle` es el intervalo medido entre el inicio de un evento y el siguiente, incluidos el retardo de anuncio y los efectos de la planificación. Si los intervalos varían, integre una traza larga y representativa en lugar de tomar el intervalo configurado como un periodo exacto.
 
 A tensión constante, duplicar la corriente medida o la duración de una etapa duplica su energía. Las ráfagas breves de TX, RX e inicio pueden dominar la energía del evento; con intervalos largos, el reposo entre eventos puede dominar la corriente media. Marque las etapas mediante GPIO o eventos de firmware de baja sobrecarga y mida en la entrada de alimentación del producto completo antes de elegir qué optimizar.
 
-Bluetooth clásico tiene una temporización de protocolo diferente, pero se aplica la misma disciplina de medición. La especificación Bluetooth Core define Inquiry Scan y Page Scan como procedimientos de escaneo distintos, y Sniff como un modo ACL con conexión que reduce las ranuras de escucha del lado Peripheral a las oportunidades Sniff programadas; el tráfico del dispositivo remoto puede prolongar la actividad más allá del anclaje. Son comportamientos de temporización, no estimaciones de corriente. Mida en el dispositivo objetivo la política de escaneo configurada, los parámetros Sniff y la actividad real del dispositivo remoto y de la aplicación. Consulte la [BR/EDR Baseband Specification](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/br-edr-controller/baseband-specification.html) y [HCI Scan Enable](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/host-controller-interface/host-controller-interface-functional-specification.html).
-
+Bluetooth clásico tiene una temporización de protocolo diferente, pero se aplica la misma disciplina de medición. La especificación Bluetooth Core define Inquiry Scan y Page Scan como procedimientos de escaneo distintos, y Sniff como un modo ACL con conexión que reduce las ranuras de escucha del lado Peripheral a las oportunidades Sniff programadas; el tráfico del dispositivo remoto puede prolongar la actividad más allá del intervalo de anclaje (anchor interval). Son comportamientos de temporización, no estimaciones de corriente. Mida en el dispositivo objetivo la política de escaneo configurada, los parámetros Sniff y la actividad real del dispositivo remoto y de la aplicación. Consulte la [BR/EDR Baseband Specification](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/br-edr-controller/baseband-specification.html) y [HCI Scan Enable](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/host-controller-interface/host-controller-interface-functional-specification.html).
 
 ## Prepare un plan de medición para cada modo { #build-a-mode-specific-measurement-plan }
 
-No trate «Bluetooth activado» como un único estado de funcionamiento. BLE y Bluetooth clásico emplean distintos procedimientos de conexión y bajo consumo. En un producto de modo dual, ambos modos pueden compartir el subsistema de radio, los recursos del controlador, los relojes, la memoria y, a menudo, el trabajo de la aplicación. Empiece con los escenarios reproducibles más sencillos y mida después el funcionamiento combinado que se usará en el producto.
+No trate «Bluetooth activado» como un único estado de funcionamiento. BLE y Bluetooth clásico emplean distintos procedimientos de conexión y bajo consumo. En un producto de modo dual, ambos modos pueden compartir el tiempo de radio, los recursos del controlador, los relojes, la memoria y el trabajo de la aplicación. Empiece con los escenarios reproducibles más sencillos y mida después el funcionamiento combinado que se usará en el producto.
 
 <div align="center"><em>Tabla: Escenarios Bluetooth que deben medirse</em></div>
 
@@ -122,15 +121,15 @@ No trate «Bluetooth activado» como un único estado de funcionamiento. BLE y B
 
 | Capacidad de radio | Escenario | Qué definir antes de medir | Resultado a conservar |
 |:-----------------|:---------|:--------------------------------|:-----------------|
-| BLE | Publicidad, conexión inactiva, transferencia de datos y reconexión | Rol, intervalo, potencia TX, carga útil, dispositivo remoto y condiciones de inicio y fin | Corriente media, energía por evento y energía por acción completada |
+| BLE | Anuncios, conexión inactiva, transferencia de datos y reconexión | Rol, intervalo, potencia TX, carga útil, dispositivo remoto y condiciones de inicio y fin | Corriente media, energía por evento y energía por acción completada |
 | Bluetooth clásico (BR/EDR) | Escaneo | Si están habilitados Inquiry Scan, Page Scan o ambos; política de visibilidad y conexión | Corriente media y energía durante un periodo de escaneo representativo |
 | Bluetooth clásico (BR/EDR) | Modo Sniff con conexión activa | Parámetros Sniff, dispositivo remoto, estado del enlace y actividad de la aplicación en segundo plano | Corriente media y energía a lo largo de varios intervalos Sniff |
 | Bluetooth clásico (BR/EDR) | Perfil con tráfico activo | Perfil y rol, por ejemplo, datos SPP/PAN o audio A2DP/HFP; duración de la transferencia o de la sesión de audio | Energía por transferencia o sesión completada y potencia media sostenida |
-| Modo dual | BLE y Bluetooth clásico en uso conjunto | Enlaces activos, parámetros, carga de trabajo en primer plano y comportamiento durante transiciones y reconexiones | Potencia media combinada y energía del escenario completo del producto, medidas en el equipo |
+| Modo dual | BLE y Bluetooth clásico en uso conjunto | Enlaces activos, parámetros, carga de trabajo en primer plano y comportamiento durante transiciones y reconexiones | Potencia media combinada y energía del escenario completo del producto |
 
 </div>
 
-La [prueba de consumo BLE/BT](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) de SiFli es una referencia útil: cubre la publicidad y los modos de conexión BLE, además de los modos Scan y Sniff de Bluetooth clásico. El resultado obtenido en una placa no es una especificación del producto. Use la placa compatible, el pin de activación, la consola y la configuración de PM documentados para repetir la prueba; después reproduzca en el hardware objetivo el rol, el dispositivo remoto, el tráfico y la política de energía del producto.
+La [prueba de consumo BLE/BT](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) de SiFli es una referencia útil: cubre los anuncios y los modos de conexión BLE, además de los modos Scan y Sniff de Bluetooth clásico. El resultado obtenido en una placa no es una especificación del producto. Use la placa compatible, el pin de activación, la consola y la configuración de PM documentados para repetir la prueba; después reproduzca en el hardware objetivo el rol, el dispositivo remoto, el tráfico y la política de energía del producto.
 
 ## Mida BLE como modo de radio independiente { #profile-ble-as-a-standalone-radio-mode }
 
@@ -142,15 +141,15 @@ Empiece midiendo solo BLE. Así establecerá una referencia sin que el tráfico 
 
 | Escenario | Configuración | Qué calcular | Causa típica de un resultado engañoso |
 |:---------|:------|:------------------|:-------------------------------------|
-| Publicidad | Dispositivo no conectado que emite publicidad con un tipo y una configuración de canales documentados | Corriente media y energía por intervalo de publicidad | El comportamiento de escaneo del teléfono, el tráfico de depuración o una política que no reduce gradualmente la frecuencia de publicidad |
+| Anuncio | Dispositivo no conectado que emite anuncios con un tipo y una configuración de canales documentados | Corriente media y energía por intervalo de anuncio | El comportamiento de escaneo del teléfono, el tráfico de depuración o una política que no reduce gradualmente la frecuencia de anuncio |
 | Conectado en reposo | Dispositivo conectado, sin transferencia de la aplicación; registre si se usan emparejamiento, vinculación persistente y cifrado | Corriente media a lo largo de varios intervalos de conexión | La CPU de aplicación se activa en cada evento de conexión, o siguen activos temporizadores y notificaciones |
 | Interacción del usuario | Un comando GATT representativo, una transferencia de datos del sensor o una acción iniciada desde la interfaz | Energía por acción completada y consumo adicional frente al estado inactivo | Medir solo la radio y omitir el trabajo del host, la pantalla o el sensor |
 | Transferencia en ráfaga u OTA | Carga útil definida y condición de finalización especificada | Energía por byte o por transferencia completada, y duración total | Tomar la tasa máxima como representativa de toda la transferencia |
-| Desconexión y reconexión | El dispositivo remoto BLE sale del alcance, vuelve y se reconecta | Energía y tiempo necesarios para recuperar la conexión | Reintentos ilimitados o una política de publicidad agresiva que no se reduce con el tiempo |
+| Desconexión y reconexión | El dispositivo remoto BLE sale del alcance, vuelve y se reconecta | Energía y tiempo necesarios para recuperar la conexión | Reintentos ilimitados o una política de anuncio agresiva que no se reduce con el tiempo |
 
 </div>
 
-Registre el rol BLE, el dispositivo remoto, los parámetros de conexión o publicidad, la potencia TX, la carga útil, el desencadenante y la condición de fin, así como la frecuencia de uso real. Sin estos datos, no se pueden comparar trazas de distintas versiones del firmware.
+Registre el rol BLE, el dispositivo remoto, los parámetros de conexión o de anuncio, la potencia TX, la carga útil, el desencadenante y la condición de fin, así como la frecuencia de uso real. Sin estos datos, no se pueden comparar trazas de distintas versiones del firmware.
 
 ## Mida Bluetooth clásico como modo de radio independiente { #profile-classic-bluetooth-as-a-standalone-radio-mode }
 
@@ -169,7 +168,7 @@ En un producto de modo dual, mida Bluetooth clásico por separado antes de añad
 
 </div>
 
-Registre el rol de Bluetooth clásico, el dispositivo remoto, la política Scan o Sniff, la potencia TX, el perfil, la carga útil o duración de la sesión, el desencadenante y la condición de fin, y la frecuencia de uso real. En los perfiles de audio, incluya en la medición toda la ruta de audio que utiliza el producto.
+Registre el rol de Bluetooth clásico, el dispositivo remoto, la política Scan o Sniff, la potencia TX, el perfil, la carga útil o duración de la sesión, el desencadenante y la condición de fin, y la frecuencia de uso real. En los perfiles de audio, el límite de medición debe incluir la ruta de audio que utiliza realmente el producto.
 
 ## Mida el modo dual como un escenario independiente { #measure-dual-mode-behavior-as-its-own-scenario }
 
@@ -213,7 +212,7 @@ Use un marcador GPIO para la traza, un marcador de evento de bajo impacto o un s
 
 | Observación de traza | Significado probable | Verificar en firmware o hardware |
 |:------------------|:---------------|:-------------------------------|
-| Pulsos breves y regulares sobre un consumo de referencia bajo | Eventos programados de publicidad o conexión BLE, o actividad Scan/Sniff de Bluetooth clásico | Modo, intervalo, política Scan/Sniff, rol de radio y estado real de bajo consumo entre eventos |
+| Pulsos breves y regulares sobre un consumo de referencia bajo | Eventos programados de anuncio o conexión BLE, o actividad Scan/Sniff de Bluetooth clásico | Modo, intervalo, política Scan/Sniff, rol de radio y estado real de bajo consumo entre eventos |
 | Una ráfaga más grande inmediatamente después de cada evento de radio | Callback del host, procesamiento de protocolo o trabajo de aplicación | Qué callback se ejecuta, si los datos son útiles y si el trabajo se puede agrupar |
 | Actividad continua o muy frecuente durante una sesión de Bluetooth clásico | Tráfico activo de un perfil, a menudo con procesamiento adicional del host, audio o datos | Perfil, ruta de códec o datos, tráfico del dispositivo remoto, relojes de audio, componentes externos y duración de la sesión medida |
 | Ráfagas BLE y Bluetooth clásico intercaladas | Planificación del modo dual o trabajo asociado del host | Qué enlace provoca cada tramo, qué trabajo comparten y si alguno de los modos retrasa la entrada en bajo consumo o aumenta los reintentos |
@@ -256,7 +255,7 @@ flowchart LR
     B --> C["Marcar los tramos de la traza e identificar sus causas"]
     C --> D["Calcular la energía de cada escenario completado"]
     D --> E["Extrapolar según el uso diario real"]
-    E --> F["Comparar con el presupuesto energético"]
+    E --> F["Comparar con el presupuesto de energía"]
     F --> G["Optimizar el principal factor de consumo"]
     G --> A
 ```
@@ -286,7 +285,7 @@ Use los ejemplos de SiFli-SDK para obtener un estado Bluetooth reproducible ante
 
 | Qué medir | Ejemplo oficial de referencia | Qué validar después en el producto |
 |:-------------------|:------------------------|:----------------------------|
-| Publicidad y conexión BLE | [Prueba de consumo de publicidad y conexión BLE](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/ble/README.html) | Política de publicidad del producto, parámetros de conexión, callbacks, comportamiento del dispositivo remoto y antena |
+| Anuncios y conexión BLE | [Prueba de consumo de anuncios y conexión BLE](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/ble/README.html) | Política de anuncio del producto, parámetros de conexión, callbacks, comportamiento del dispositivo remoto y antena |
 | Scan y Sniff de Bluetooth clásico | [Prueba de consumo BLE/BT](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) | Política Scan del producto, ajustes Sniff, comportamiento del dispositivo remoto y estado real del enlace inactivo |
 | Tráfico de perfiles Bluetooth clásico | [Ejemplos Bluetooth del SDK](bluetooth-sdk-examples.md) | Transferencia SPP/PAN o sesión A2DP/HFP real, incluido el trabajo necesario del host, el audio, la memoria y los componentes externos |
 | Funcionamiento del producto en modo dual | [Prueba de consumo BLE/BT](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) y el ejemplo de perfil más cercano al producto | Comportamiento exacto de BLE y Bluetooth clásico, concurrente o alternado, incluidas las transiciones, el procesamiento compartido y la política de PM del producto |
@@ -299,14 +298,14 @@ Use los ejemplos de SiFli-SDK para obtener un estado Bluetooth reproducible ante
 ## Lista de comprobación antes de liberar el producto { #release-review-checklist }
 
 - [ ] El punto de medida y la tensión de alimentación están documentados.
-- [ ] Se registraron la corriente y la tensión para cada escenario relevante para el lanzamiento.
+- [ ] Se registraron la corriente y la tensión para cada escenario relevante para la liberación.
 - [ ] Se controlaron o incluyeron explícitamente las fuentes USB, del depurador, de los adaptadores UART y de los módulos externos.
 - [ ] Las trazas están correlacionadas con los eventos de firmware, las solicitudes de estado de PM y los estados a los que entra realmente el dispositivo.
-- [ ] Se han medido la publicidad y el reposo con conexión BLE, y los modos Scan/Sniff de Bluetooth clásico, según corresponda.
+- [ ] Se han medido los anuncios y el reposo con conexión BLE, y los modos Scan/Sniff de Bluetooth clásico, según corresponda.
 - [ ] Cada perfil de datos o audio Bluetooth clásico de producción tiene una carga de trabajo definida y medida.
 - [ ] Los escenarios de modo dual se han medido con ambos modos en funcionamiento, en lugar de estimarse sumando sus resultados por separado.
 - [ ] Se ha medido el comportamiento representativo de transferencia, desconexión y reconexión donde corresponda.
-- [ ] La energía de cada escenario se ha convertido a consumo diario con una frecuencia de uso realista y se ha contrastado con el presupuesto energético de la batería.
+- [ ] La energía de cada escenario se ha convertido a consumo diario con una frecuencia de uso realista y se ha contrastado con el presupuesto de energía de la batería.
 - [ ] El principal factor de consumo tiene un responsable y una decisión documentada: optimizarlo o aceptarlo.
 
 ## Recursos relacionados { #related-resources }

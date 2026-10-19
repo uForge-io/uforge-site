@@ -4,7 +4,7 @@ description: "Una ruta de ingeniería de producto para la plataforma T-Display-S
 tags:
     - Proyectos
     - Pantalla
-    - Dispositivos ponibles
+    - Dispositivos vestibles
     - Terceros
 ---
 
@@ -36,7 +36,7 @@ Esta página no demuestra que todas las variantes de la placa incluyan todos los
 Antes de empezar, tenga preparado lo siguiente:
 
 - La placa T-Display-SF32 exacta y su revisión de hardware, junto con su esquemático o mapa de pines.
-- Una fuente de laboratorio con limitación de corriente o una batería protegida cuyo voltaje y estado puedan supervisarse.
+- Una fuente de laboratorio con limitación de corriente o una batería protegida cuya tensión y estado puedan supervisarse.
 - Un cable USB de datos que funcione, la conexión Type-C documentada para grabar y una imagen de recuperación guardada.
 - Los commits fijados del repositorio T-Display-SF32 y del fork del SDK de LilyGO.
 - El entorno Windows/PowerShell que documenta el fork del SDK de LilyGO para la primera compilación reproducible; otros entornos de desarrollo deben validarse por separado.
@@ -90,6 +90,7 @@ Antes de empezar, tenga preparado lo siguiente:
 </div>
 
 ## Elegir una configuración de referencia admitida { #choose-a-supported-baseline }
+
 El repositorio de referencia utiliza actualmente la rama `master` y no presenta una versión etiquetada como configuración de software universal. Registre el commit exacto en lugar de indicar solo «la última versión». El repositorio contiene el directorio `firmware/T-SF32-Factory-V1.2`, pero su nombre no sustituye al registro de la revisión de la placa, el commit correspondiente y el procedimiento de grabación.
 
 <div align="center"><em>Tabla: Selección de la configuración de referencia de T-Display-SF32</em></div>
@@ -103,7 +104,7 @@ El repositorio de referencia utiliza actualmente la rama `master` y no presenta 
 | Código fuente | Commit fijado de T-Display-SF32 | El repositorio evoluciona de forma independiente de SiFli-SDK |
 | SDK | Commit fijado del fork del SDK de LilyGO, descrito como derivado de SiFli-SDK 2.4.0 | No lo sustituya silenciosamente por otra versión del SDK; los controladores y la configuración de la placa pueden ser diferentes |
 | Destino de compilación | `t-display-sf32_hcpu` | Es un destino de placa de LilyGO, no un destino genérico para SF32LB52x |
-| Alimentación | Siga la condición de arranque por encima de 3,5 V indicada por LilyGO e implemente en el firmware personalizado la detección de voltaje y el apagado por batería baja | Trátela como un requisito de la placa del proveedor que debe verificarse, no como sustituto de la hoja de datos del chip, los límites de la batería ni del comportamiento medido ante una subtensión (brownout) |
+| Alimentación | Siga la condición de arranque por encima de 3,5 V indicada por LilyGO e implemente en el firmware personalizado la detección de tensión y el apagado por batería baja | Trátela como un requisito de la placa del proveedor que debe verificarse, no como sustituto de la hoja de datos del chip, los límites de la batería ni del comportamiento medido ante una subtensión (brownout) |
 
 </div>
 
@@ -175,7 +176,7 @@ Analice los fallos por ámbitos: alimentación y carga de la placa, arranque y g
 
 | Prueba | Método | Evidencia de aprobación |
 |:-------|:-------|:------------------------|
-| Margen de arranque | Barra una fuente de laboratorio con limitación de corriente alrededor del rango de funcionamiento previsto sin superar los límites documentados | Se miden los umbrales y el comportamiento de arranque/apagado; no se ocultan reinicios repetidos ni estados indefinidos |
+| Margen de arranque | Realice un barrido de la tensión de una fuente de laboratorio con limitación de corriente alrededor del rango de funcionamiento previsto sin superar los límites documentados | Se miden los umbrales y el comportamiento de arranque/apagado; no se ocultan reinicios repetidos ni estados indefinidos |
 | Política de batería baja | Use una fuente controlada para probar los umbrales de aviso y apagado | El firmware personalizado avisa y se apaga antes del límite de descarga segura de la batería seleccionada |
 | Carga con la placa apagada | Tras apagarla con el firmware de fábrica, conecte la alimentación USB y utilice el procedimiento de activación con el botón documentado | El estado de carga y la activación solo con el botón coinciden con la nota del proveedor; no se trata erróneamente la mera conexión USB como ruta de arranque |
 | Interrupción de pantalla/táctil | Reinicie o apague y encienda durante la actividad de la interfaz y repita las pruebas táctiles en bordes y esquinas | La pantalla y el táctil vuelven a un estado conocido sin corrupción persistente ni entradas falsas |
@@ -238,6 +239,7 @@ Antes de comprometerse con una prueba de campo o una PCB propia, responda a esta
 Traslade el número de pieza SF32 exacto y los dispositivos de memoria, los tiempos de pantalla y táctil, los periféricos montados y sus buses, la estructura de alimentación, la política del cargador y la batería, la estrategia de antena/RF, la conexión de arranque y grabación, el plan de particiones, los puntos de acceso para pruebas de producción, quién mantiene el fork de software y la ruta de recuperación demostrada. Continúe con la [ruta de integración de SF32LB52x](../sf32-products/chips/SF32LB52x.md#integration-path), la [guía de diseño de hardware de SF32LB52x](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md), [Compilar, grabar y supervisar con SiFli-SDK](../develop/platforms/sifli-sdk/build-flash-monitor.md) y [Diseño para producción](../hardware/design-for-production.md).
 
 ## Fuentes de referencia { #authoritative-sources }
+
 - [Repositorio Xinyuan-LilyGO/T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32)
 - [README en chino de T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32/blob/master/readme_cn.md)
 - [Ejemplos de T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/examples)

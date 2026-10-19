@@ -11,23 +11,23 @@ tags:
 
 Dieser Bereich zeigt, wie Sie aus einem funktionierenden SF32-Board wartbare Produkt-Firmware entwickeln. Nutzen Sie ihn nach dem ersten erfolgreichen `hello_world`, um die passende Board-Konfiguration auszuwählen, Build und Flashen reproduzierbar durchzuführen, ein geeignetes Beispiel anzupassen, Produktfunktionen zu integrieren, Fehler zu diagnostizieren und Updates sowie Wiederherstellungswege zu planen.
 
-Nutzen Sie [Erste Schritte](../getting-started/index.md) für die erste erfolgreiche Inbetriebnahme eines Entwicklungsboards, [SF32-Produkte](../sf32-products/index.md) zur Auswahl von Chip und Entwicklungsboard, [Hardware](../hardware/index.md) für Schaltpläne und die Hardwareauslegung für die Serie sowie [Lernen](../learn/index.md) für architektonische Grundlagen. In diesem Abschnitt finden Sie den technischen Arbeitsablauf und konkrete Umsetzungshinweise für einzelne Aufgaben.
+Nutzen Sie [Erste Schritte](../getting-started/index.md) für die erste erfolgreiche Inbetriebnahme eines Entwicklungsboards, [SF32-Produkte](../sf32-products/index.md) zur Auswahl von Chip und Entwicklungsboard, [Hardware](../hardware/index.md) für Schaltpläne und Serienhardware sowie [Lernen](../learn/index.md) für Hintergrundwissen zur Architektur. In diesem Abschnitt finden Sie den technischen Arbeitsablauf und konkrete Umsetzungshinweise für einzelne Aufgaben.
 
 !!! info "SiFli-Solution"
     SiFli-Solution ist ein separates Softwarepaket von SiFli, das μForge.io derzeit nicht dokumentiert. Die Hinweise hier beschränken sich auf SiFli-SDK und die unten aufgeführten Community-Pfade. Benötigt Ihr Produkt eine umfassendere Lösung für Displaygeräte, lesen Sie die offizielle [Dokumentation zu SiFli Solution](https://docs.sifli.com/projects/solution/index.html) und wenden Sie sich direkt an SiFli. Bei einem komplexen Produkt kann dieser Entwicklungsweg eine enge, direkte Zusammenarbeit mit SiFli erfordern.
 
 ## Eine SiFli-SDK-Referenzkonfiguration einrichten { #establish-a-sifli-sdk-baseline }
 
-[SiFli-SDK](platforms/sifli-sdk/overview.md) ist SiFlis offizielles, auf RT-Thread basierendes Softwarepaket und der Referenzpfad für die SF32-Firmwareentwicklung. Beginnen Sie damit, sofern kein konkreter Grund für die Evaluierung eines anderen Ökosystems spricht: Für Board-Unterstützung, Bluetooth, Grafik, Audio, Speicher, Energiemanagement und Produktionsabläufe bietet es die umfassendste dokumentierte Grundlage.
+[SiFli-SDK](platforms/sifli-sdk/overview.md) ist SiFlis offizielles, auf RT-Thread basierendes Softwarepaket und der Referenzpfad für die SF32-Firmwareentwicklung. Beginnen Sie damit, sofern kein konkreter Grund für die Evaluierung eines anderen Ökosystems spricht: Für Board-Unterstützung, Bluetooth, Grafik, Audio, Speicher, Energiemanagement und Produktionsabläufe bietet es die umfassendste dokumentierte Referenzkonfiguration.
 
-Bevor Sie Produktfunktionen entwickeln, richten Sie eine reproduzierbare Ausgangskonfiguration ein und dokumentieren Sie sie:
+Bevor Sie Produktfunktionen entwickeln, richten Sie eine reproduzierbare Referenzkonfiguration ein und dokumentieren Sie sie:
 
 1. Wählen Sie unter [Board-Konfiguration](platforms/sifli-sdk/board-configuration.md) die exakt passende SDK-Board-Konfiguration.
 2. Führen Sie den Ablauf [Bauen, Flashen und Überwachen der seriellen Ausgabe](platforms/sifli-sdk/build-flash-monitor.md) erfolgreich aus.
-3. Dokumentieren Sie SDK-Version oder Commit, Board-Namen, Build- und Flash-Befehle, serielle Einstellungen und ein Startprotokoll.
+3. Dokumentieren Sie SDK-Version oder Commit, Boardnamen, Build- und Flash-Befehle, serielle Einstellungen und ein Startprotokoll.
 4. Beginnen Sie mit dem nächstliegenden [Beispiel](examples/index.md), idealerweise mit einem Beispiel, das bereits das anspruchsvollste Subsystem des Produkts nutzt.
 
-Diese Dokumentation dient als Referenz für spätere Änderungen an der Anwendung, Board-Portierungen, fehlgeschlagene Tests und die Wiederherstellung im Feld.
+Die so festgehaltenen Angaben sind der Bezugspunkt für spätere Änderungen an der Anwendung, Board-Portierungen, fehlgeschlagene Tests und die Wiederherstellung im Feld.
 
 ## Anleitung nach Aufgabe finden { #find-guidance-by-task }
 
@@ -37,7 +37,7 @@ Diese Dokumentation dient als Referenz für spätere Änderungen an der Anwendun
 
 | Aufgabe | Hier beginnen | Danach verwenden |
 |:----------------|:-----------|:---------|
-| Firmware bauen und flashen; serielle Ausgabe prüfen | [Bauen, Flashen und Überwachen der seriellen Ausgabe](platforms/sifli-sdk/build-flash-monitor.md) | [Werkzeuge](tools/index.md) für skriptgesteuertes Flashen, Tracing und Absturzdiagnose. |
+| Firmware bauen und flashen; serielle Ausgabe prüfen | [Bauen, Flashen und Überwachen der seriellen Ausgabe](platforms/sifli-sdk/build-flash-monitor.md) | [Werkzeuge](tools/index.md) für skriptgesteuertes Flashen, Trace und Absturzdiagnose. |
 | Firmware an ein Entwicklungsboard, Modul oder eine eigene Hardware anpassen | [Board-Konfiguration](platforms/sifli-sdk/board-configuration.md) | Der passende Hardware-Leitfaden und das nächstliegende boardspezifische Beispiel. |
 | Einen Treiber oder eine Middleware-Schicht in mehreren Projekten wiederverwenden | [Komponenten und `sf_pkg`](platforms/sifli-sdk/components.md) | Ein minimales Beispiel und eine dokumentierte Grenze der Konfigurierbarkeit. |
 | Eine konkrete Peripherie oder ein Subsystem implementieren | [SDK-Anwendungshinweise](platforms/sifli-sdk/sdk-application-notes.md) | Der verlinkte offizielle SDK-Leitfaden mit den genauen APIs, Konfigurationssymbolen und Befehlen. |
@@ -75,8 +75,8 @@ Die Anwendungshinweise sind nach Integrationsaufgabe statt nach der Reihenfolge 
 | [SiFli-SDK](platforms/sifli-sdk/overview.md) | Den unterstützten Referenzablauf einrichten: Konfiguration, Build, Flashen, wiederverwendbare Komponenten und Diagnose. |
 | [SDK-Anwendungshinweise](platforms/sifli-sdk/sdk-application-notes.md) | Das SDK für eine konkrete Aufgabe nutzen, etwa ADC, Sensoren, externen Flash, Energiesparfunktionen, Diagnose sowie RF- und Bluetooth-Tests. |
 | [Beispiele](examples/index.md) | Eine funktionierende Implementierung für das konkrete Board und das anspruchsvollste Produkt-Subsystem auswählen und anpassen. |
-| [Werkzeuge](tools/index.md) | Werkzeuge für Download, Überwachung, Ablaufverfolgung, Absturzdiagnose, Ressourcenaufbereitung und Fertigung auswählen. |
-| [Firmware-Themen](firmware-topics/index.md) | Produktübergreifende Entscheidungen zu Partitionen, OTA/DFU, USB, Energiemanagement und Diagnosebelegen treffen. |
+| [Werkzeuge](tools/index.md) | Werkzeuge für Download, Überwachung, Trace, Absturzdiagnose, Ressourcenaufbereitung und Fertigung auswählen. |
+| [Firmware-Themen](firmware-topics/index.md) | Querschnittliche Produktentscheidungen zu Partitionen, OTA/DFU, USB, Energiemanagement und Diagnosebelegen treffen. |
 | [Experimentell / Community](platforms/zephyr/overview.md) | Zephyr, Arduino, MicroPython oder Rust im Rahmen des auf jeder Seite beschriebenen Umfangs und Reifegrads evaluieren. |
 
 </div>
@@ -91,7 +91,7 @@ Die Gruppe [Experimentell / Community](platforms/zephyr/overview.md) richtet sic
 
 | Pfad | In Betracht ziehen, wenn | Einzuordnen als |
 |:-----|:-----------------|:------------|
-| [Zephyr](platforms/zephyr/overview.md) | Sie Zephyr-APIs, Devicetree, Kconfig oder Anpassungen für ein nachgelagertes Board benötigen. | Ein nachgelagerter, boardspezifischer Evaluierungspfad. |
+| [Zephyr](platforms/zephyr/overview.md) | Sie Zephyr-APIs, Devicetree, Kconfig oder Board-Anpassungen in einem abgeleiteten (Downstream-)Projekt benötigen. | Ein abgeleiteter (Downstream-), boardspezifischer Evaluierungspfad. |
 | [Arduino](platforms/arduino/overview.md) | Sie Sketches oder einen schnellen Peripherie-Prototyp auf einem unterstützten Board benötigen. | Ein Beta-Pfad, der auf bestimmte Boards begrenzt ist. |
 | [MicroPython](platforms/micropython/status.md) | Sie zukünftige Skripting-Unterstützung bewerten. | Eine Statusseite, bis ein reproduzierbarer öffentlicher Port existiert. |
 | [Rust](platforms/rust/overview.md) | Sie HAL-/PAC-Arbeiten bewerten und Korrekturen zum Upstream-Projekt beitragen können. | Ein Community-Projekt in Entwicklung. |
@@ -110,4 +110,4 @@ Bevor Sie einen Firmware-Pfad als produktreif einstufen, stellen Sie sicher, das
 - Welches Beispiel oder welcher Test belegt die Funktion jedes benötigten Peripheriegeräts und Produkt-Subsystems?
 - Welches Partitionslayout, welches Update-Verhalten, welches Stromverbrauchsziel und welches Vorgehen zur Dekodierung von Absturzprotokollen wurden validiert?
 
-Fehlt eine Antwort, kann die Arbeit weiterhin ein nützlicher Prototyp sein; eine reproduzierbare Produktbasis ist sie dann jedoch noch nicht.
+Fehlt eine Antwort, kann die Arbeit weiterhin ein nützlicher Prototyp sein; eine wiederholbare Produkt-Referenzkonfiguration ist sie dann jedoch noch nicht.

@@ -23,11 +23,11 @@ Réalisez à partir du schéma un PCB PTH à 4 couches fabricable, tout en prot�
 
 **Séquence de revue PCB**
 
-1. Vérifier l'empreinte du boîtier, ainsi que le pochoir de pâte à braser et le motif de pastilles.
-2. Confirmer l'empilement, la largeur/espacement des pistes, le perçage, et les règles d'impédance avec le fournisseur de PCB.
-3. Placer la puce, les quartz, le chemin RF, le DC/DC, le chargeur, les connecteurs d'affichage/stockage, et les composants audio.
-4. Vérifier le fanout et le routage des signaux sensibles avant de terminer les pistes GPIO moins prioritaires.
-5. Enregistrer des captures d'écran documentant le placement et le routage RF, des quartz, de l'USB, du SDIO, de l'audio, du DC/DC, du chargeur et des rails d'alimentation.
+1. Vérifiez l'empreinte du boîtier, ainsi que le pochoir de pâte à braser et le motif de pastilles.
+2. Confirmez l'empilement, la largeur/espacement des pistes, le perçage, et les règles d'impédance avec le fournisseur de PCB.
+3. Placez la puce, les quartz, le chemin RF, le DC/DC, le chargeur, les connecteurs d'affichage/stockage, et les composants audio.
+4. Vérifiez le fanout et le routage des signaux sensibles avant de terminer les pistes GPIO moins prioritaires.
+5. Enregistrez des captures d'écran documentant le placement et le routage RF, des quartz, de l'USB, du SDIO, de l'audio, du DC/DC, du chargeur et des rails d'alimentation.
 
 ### 6.1. Conception de l'empreinte PCB { #61-pcb-footprint-design }
 

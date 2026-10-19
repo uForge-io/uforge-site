@@ -2,7 +2,7 @@
 icon: lucide/layers
 description: "SF32LB52 DevKit LCD를 위한 OpenSiFli의 다운스트림 Zephyr 지원을 다룹니다. 보드 식별 정보, 구성 경계, 드라이버 범위, 통합 위험을 설명합니다."
 tags:
-    - Develop
+    - 개발
     - Zephyr
 ---
 
@@ -12,7 +12,7 @@ OpenSiFli는 [OpenSiFli/zephyr-downstream](https://github.com/OpenSiFli/zephyr-d
 
 Zephyr API, devicetree, Kconfig, 이식성 있는 RTOS 구조가 필요하거나 ArduinoCore-zephyr로 이어지는 경로가 필요하면 Zephyr를 사용하십시오. 현재 가장 완전한 벤더 기능 범위가 필요하면 SiFli-SDK를 사용하십시오.
 
-워크스페이스 설정, 첫 `hello_world` 빌드, 플래싱, 콘솔 확인은 [Zephyr 다운스트림 시작하기](../../../getting-started/zephyr/getting-started-zephyr-upstream.md)을 참조하십시오. 이 페이지는 해당 기준 구성이 동작하는 상태에서 다운스트림 플랫폼을 다룹니다.
+워크스페이스 설정, 첫 `hello_world` 빌드, 플래싱, 콘솔 확인은 [Zephyr 다운스트림 시작하기](../../../getting-started/zephyr/getting-started-zephyr-upstream.md)를 참조하십시오. 이 페이지는 해당 기준 구성이 동작하는 상태에서 다운스트림 플랫폼을 다룹니다.
 
 주요 참고 자료:
 
@@ -35,12 +35,12 @@ Zephyr API, devicetree, Kconfig, 이식성 있는 RTOS 구조가 필요하거나
 | 플래시 러너 | `sftool` |
 | 러너 인자 | `--chip=SF32LB52` |
 | 콘솔 | `usart1` |
-| 콘솔 속도 | `1000000` baud |
-| 디스플레이 chosen 노드 | `co5300` |
+| 콘솔 속도 | 보레이트 `1000000` |
+| 선택된 디스플레이 노드 | `co5300` |
 
 </div>
 
-다운스트림 보드 문서는 8 MB OPI-PSRAM, 128 Mb QSPI-NOR, 48 MHz 및 32.768 kHz 크리스털, 디스플레이 인터페이스, 오디오, USB, microSD 하드웨어를 갖춘 SF32LB52x-MOD-N16R8 모듈을 설명합니다.
+다운스트림 보드 문서에는 8 MB OPI-PSRAM, 128 Mb QSPI-NOR, 48 MHz 및 32.768 kHz 크리스털, 디스플레이 인터페이스, 오디오, USB, microSD 하드웨어가 탑재된 SF32LB52x-MOD-N16R8 모듈이 나옵니다.
 
 ## 구성 경계 { #configuration-boundaries }
 
@@ -64,7 +64,7 @@ Arduino나 SiFli-SDK 프로젝트의 보드 이름, 핀 매핑, 러너 설정을
 
 ## 다운스트림 트리에 있는 드라이버 영역 { #driver-areas-present-in-the-downstream-tree }
 
-다운스트림 트리에는 다음을 포함한 영역에 대해 SF32LB 관련 드라이버, 바인딩 또는 보드별 샘플 구성이 들어 있습니다.
+다운스트림 트리에는 다음 영역을 위한 SF32LB 관련 드라이버, 바인딩 또는 보드별 샘플 구성이 포함되어 있습니다.
 
 - GPIO, pinctrl, UART, I2C, SPI, ADC, PWM, RTC, 워치독.
 - 플래시, 메모리 컨트롤러, OPI PSRAM, QSPI NOR.
@@ -83,6 +83,6 @@ Arduino나 SiFli-SDK 프로젝트의 보드 이름, 핀 매핑, 러너 설정을
 - 업스트림 Zephyr가 아닌 OpenSiFli 다운스트림을 사용하고 있습니까?
 - HAL 리비전이 고정되어 있습니까?
 - `west flash`가 예상한 `sftool` 러너를 사용합니까?
-- 콘솔이 `1000000` baud로 구성되어 있습니까?
+- 콘솔이 보레이트 `1000000`으로 구성되어 있습니까?
 - 샘플에 필요한 오버레이가 포함되어 있습니까?
 - 해당 드라이버는 테스트로 지원이 확인되었습니까, 아니면 트리에 존재하기만 합니까?

@@ -28,7 +28,7 @@ SiFli-SDKの電源管理サンプルは、測定や統合の基準となるも�
 | AMOLEDの画面オフと常時表示ポリシーを比較する | [AMOLED消費電力測定 (AMOLED Power Consumption Test)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/AMOLED/README.html) | ディスプレイ更新、画面オフ時のスリープ、常時表示の比較 | 実際のパネル、輝度、更新ポリシー、ディスプレイ電源、実際の使用時間の割合 |
 | JDIディスプレイ経路を測定する | [JDI消費電力測定 (JDI Power Consumption Test)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/jdi/README.html) | 資料に記載されたJDI構成におけるディスプレイ固有の低消費電力動作 | パネルの型番、更新領域、コントローラー設定、電源レール、更新頻度 |
 | 低消費電力のグラフィカルUIを統合する | [GUI_PM低消費電力サンプルガイド (GUI_PM Low-Power Example Guide)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/gui_pm/README.html) | UIの動作、ディスプレイ状態、電源管理ポリシーの相互作用 | 製品における画面表示のライフサイクル、アニメーション、タッチ/コントローラーのウェイクアップ要因、差分更新領域の方針 |
-| 画面更新ワークロードを評価する | [画面リフレッシュ時の消費電力測定サンプル (Power Consumption Test Example — Screen Refresh Scenario)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/lcd_refresh/README.html) | 製品ワークロードにおけるディスプレイ更新部分 | 解像度、ピクセル形式、更新領域、インターフェース速度、バッファ方式、コンテンツ更新頻度 |
+| 画面更新ワークロードを評価する | [画面リフレッシュ時の消費電力測定サンプル (Power Consumption Test Example — Screen Refresh Scenario)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/lcd_refresh/README.html) | 製品ワークロードにおけるディスプレイ更新部分 | 解像度、ピクセル形式、更新領域、インターフェース速度、バッファー方式、コンテンツ更新頻度 |
 | センサー起点のウェアラブル操作を構成する | [手首を上げて画面を点灯する (Raise Wrist to Light Up Screen)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/raise_wrist/README.html) | センサー起点のウェイクアップ、画面点灯中の処理、スリープ復帰 | センサーの選定、ジェスチャー判定アルゴリズム、サンプリング間隔、画面タイムアウト、バッテリーモデル、実測した1日の使用状況 |
 
 </div>

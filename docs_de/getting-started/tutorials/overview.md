@@ -19,12 +19,12 @@ Verwenden Sie ein Entwicklungsboard für SF32 mit funktionierender USB-Datenverb
 
 <div align="center" markdown>
 
-| Element | Mindestvoraussetzung für den Start |
+| Element | Mindestprüfung der Einsatzbereitschaft |
 |:-----|:------------------------|
 | Toolchain | SiFli-SDK kann ein bekanntes, funktionierendes Beispiel für Ihr Board bauen. |
 | Flash-Ablauf | Sie können das Board wiederholt programmieren, ohne die Einrichtung zu ändern. |
-| Serielle Konsole | Sie können Boot-Protokolle sehen und auf den FinSH-`msh>`-Prompt zugreifen. |
-| Board-Informationen | Halten Sie den Schaltplan oder die Support-Dateien des Boards bereit, bevor Sie Pins oder Peripheriegeräte zuweisen. |
+| Serielle Konsole | Sie können Boot-Logs sehen und auf den FinSH-`msh>`-Prompt zugreifen. |
+| Board-Informationen | Halten Sie den Schaltplan oder die Support-Dateien des Boards bereit, bevor Sie Pins oder Peripherie zuweisen. |
 | Messwerkzeuge | Verwenden Sie bei Bedarf ein Multimeter oder einen Logikanalysator; für Energiesparmessungen benötigen Sie einen geeigneten Strommessaufbau. |
 
 </div>
@@ -47,7 +47,7 @@ Die Reihenfolge ist bewusst gewählt. Beginnen Sie nicht mit einem Display, BLE-
 
 ## So verwenden Sie jedes Tutorial { #how-to-use-each-tutorial }
 
-Jede Übung nennt ein passendes SDK-Beispiel, ein Ziel, ein Erfolgskriterium und mögliche Prüfungen bei Fehlern. Beginnen Sie mit dem genannten Beispiel statt mit einem leeren Projekt, ändern Sie jeweils nur ein Verhalten und sichern Sie einen nachweislich funktionierenden Build, bevor Sie Funktionen kombinieren. Notieren Sie Board-Revision, SDK-Version, Board-Namen und beobachtete Ergebnisse für Konfigurationen, die Sie wiederverwenden möchten.
+Jede Übung nennt ein passendes SDK-Beispiel, ein Ziel, ein Erfolgskriterium und mögliche Prüfungen bei Fehlern. Beginnen Sie mit dem genannten Beispiel statt mit einem leeren Projekt, ändern Sie jeweils nur ein Verhalten und sichern Sie einen nachweislich funktionierenden Build, bevor Sie Funktionen kombinieren. Notieren Sie Board-Revision, SDK-Version, Boardnamen und beobachtete Ergebnisse für Konfigurationen, die Sie wiederverwenden möchten.
 
 Die Tutorials ersetzen absichtlich nicht das Referenzmaterial:
 

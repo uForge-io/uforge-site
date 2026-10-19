@@ -31,7 +31,7 @@ hide:
 
 ## 8. 관련 문서 및 참고 자료 { #8-related-documents-and-references }
 
-전기적 한계, 패키지 데이터, 핀 멀티플렉싱, 소프트웨어 구성, 부품 인증을 확인할 때는 최신 공식 문서를 사용하십시오.
+전기적 한계, 패키지 정보, 핀 멀티플렉싱, 소프트웨어 구성, 부품 인증을 확인할 때는 최신 공식 문서를 사용하십시오.
 
 <div class="grid cards" markdown>
 
@@ -39,23 +39,23 @@ hide:
 - :fontawesome-solid-file-pdf: __[SF32LB58x Datasheet]__
 - :fontawesome-solid-file-pdf: __[SF32LB58x User Manual]__
 - :fontawesome-solid-file-lines: __[SF32LB58x Hardware Application Note]__
-- :fontawesome-solid-file-excel: __[SiFli Approved Vendor List (AVL)]__
-- :fontawesome-brands-wikipedia-w: __[SiFli Chip Hardware Design Guide Index (Wiki)]__
+- :fontawesome-solid-file-excel: __[SF32 승인 업체 목록]__
+- :fontawesome-brands-wikipedia-w: __[SiFli 칩 하드웨어 설계 가이드 목차(Wiki)]__
 
 </div>
 
-[회로도 체크리스트](SF32LB58x_schematic_checklist.md)(5.8절)와 [PCB 레이아웃 체크리스트](SF32LB58x_pcb_layout_checklist.md)(6.18절)는 *SF32LB58x Schematic & PCB Checklist* 워크북(V1.0, 2026-01-21)의 해당 회로도 및 PCB 항목을 재현하며, 각 항목이 점검 대상으로 삼는 설계 지침과 함께 제공합니다.
+[회로도 체크리스트](SF32LB58x_schematic_checklist.md)(5.8절)와 [PCB 레이아웃 체크리스트](SF32LB58x_pcb_layout_checklist.md)(6.18절)는 *SF32LB58x Schematic & PCB Checklist* 워크북(V1.0, 2026-01-21)의 해당 회로도 및 PCB 점검 항목을 반영하고, 각 항목의 판단 기준이 되는 설계 지침도 함께 제공합니다.
 
 [SF32LB58x Product Brief]: https://downloads.sifli.com/silicon/PB0058-SF32LB58x-Product%20Brief%20V0p7.pdf
 [SF32LB58x Datasheet]: https://downloads.sifli.com/user%20manual/DS5801-SF32LB58x-Datasheet%20V1p8p3.pdf
 [SF32LB58x User Manual]: https://downloads.sifli.com/docs/user%20manual/SF32LB58x/UM5801%E2%80%90SF32LB58x%E2%80%90EN.pdf
 [SF32LB58x Hardware Application Note]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md
-[SiFli Approved Vendor List (AVL)]: ../cad-components/sifli-approved-vendor-list.md
-[SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/hardware/index.html
+[SF32 승인 업체 목록]: ../cad-components/sifli-approved-vendor-list.md
+[SiFli 칩 하드웨어 설계 가이드 목차(Wiki)]: https://wiki.sifli.com/hardware/index.html
 
 ## 9. 부록 { #9-appendices }
 
-부록은 애플리케이션 및 레퍼런스 디자인 맥락을 모아 놓은 것입니다. 5절과 6절의 주요 회로도 및 PCB 규칙을 적용한 뒤 검토 보조 자료로 사용하십시오.
+부록에는 제품 적용 사례와 레퍼런스 디자인 관련 정보가 담겨 있습니다. 5절과 6절의 주요 회로도 및 PCB 설계 규칙을 적용한 뒤 설계 검토에 참고하십시오.
 
 <div align="center"><em>표 9-1: 부록 색인</em></div>
 
@@ -63,7 +63,7 @@ hide:
 
 | 필요 사항 | 시작 위치 |
 |:---|:---|
-| 기능이 풍부한 웨어러블 디바이스 또는 스마트 단말의 애플리케이션 맥락 | 부록 A: 일반적인 스마트 웨어러블 또는 스마트 단말 |
+| 기능이 다양한 웨어러블 디바이스 또는 스마트 단말의 적용 사례 | 부록 A: 일반적인 스마트 웨어러블 또는 스마트 단말 |
 | 회로도 스크린샷과 회로 수준 예시 | 5절 및 SF32LB58x 하드웨어 애플리케이션 노트 |
 | BGA, HDI, RF, DSI, USB, SDIO, 오디오, 전원의 PCB 레이아웃 스크린샷 | 6절 및 SF32LB58x 하드웨어 애플리케이션 노트 |
 

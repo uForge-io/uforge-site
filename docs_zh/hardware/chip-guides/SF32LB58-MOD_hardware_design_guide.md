@@ -2,7 +2,7 @@
 icon: lucide/book-check
 hide:
     - navigation
-description: "SF32LB58-MOD 硬件设计指南：低功耗蓝牙（Bluetooth）MCU 模组的电源、接口及 PCB 集成设计指导。"
+description: "SF32LB58-MOD 硬件设计指南：蓝牙（Bluetooth）MCU 模组的电源、接口及 PCB 集成设计指导。"
 tags:
     - 硬件
     - 模组
@@ -12,7 +12,7 @@ tags:
 
 ## 1. 概述 { #1-overview }
 
-**SF32LB58-MOD** 是一款通用型低功耗蓝牙（Bluetooth）MCU 模组，采用思澈科技（SiFli）SF32LB586VDD36 芯片，搭载三核 Arm Cortex-M33 STAR-MC1 处理器，最高工作频率为 240 MHz。模组内置 48 MHz 晶振，并可选配 32.768 kHz 晶振；不同型号还可配置 HPI-PSRAM、QSPI-NOR/NAND Flash 或 eMMC 存储。该表面贴装模组共有 138 个管脚，尺寸为 24 × 24 × 3.1 mm。
+**SF32LB58-MOD** 是一款通用型、低功耗的蓝牙（Bluetooth）MCU 模组，采用思澈科技（SiFli）SF32LB586VDD36 芯片，搭载三核 Arm Cortex-M33 STAR-MC1 处理器，最高工作频率为 240 MHz。模组内置 48 MHz 晶振，并可选配 32.768 kHz 晶振；不同型号还可配置 HPI-PSRAM、QSPI-NOR/NAND Flash 或 eMMC 存储。该表面贴装模组共有 138 个管脚，尺寸为 24 × 24 × 3.1 mm。
 
 本指南涵盖模组级硬件集成的各个方面：管脚定义、外设接口、电气特性、供电要求、参考原理图、原理图设计检查清单、模组尺寸和 PCB 封装图形，以及产品处理要求。内容基于思澈科技（SiFli）技术规格书 **DS5802-SF32LB58-MOD V0.1**。
 
@@ -31,9 +31,9 @@ tags:
 
 | 模组代码 | Flash 容量 | PSRAM 容量 | 标准 Flash 容量 | 环境温度 | 模组尺寸（mm） |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB58-MOD-N16R32N1 | 16 MB QSPI-NOR | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40∼85°C | 24 × 24 × 3.1 |
-| SF32LB58-MOD-A128R32N1 | 128 MB QSPI-NAND | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40∼85°C | 24 × 24 × 3.1 |
-| SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40∼85°C | 24 × 24 × 3.1 |
+| SF32LB58-MOD-N16R32N1 | 16 MB QSPI-NOR | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85°C | 24 × 24 × 3.1 |
+| SF32LB58-MOD-A128R32N1 | 128 MB QSPI-NAND | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85°C | 24 × 24 × 3.1 |
+| SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85°C | 24 × 24 × 3.1 |
 
 </div>
 
@@ -83,11 +83,11 @@ tags:
 
 <div align="center" markdown>
 
-| 名称 | 序号 | 类型 | 默认 MUX | 默认类型 | 功能 |
+| 名称 | 序号 | 类型 | 默认 MUX | 默认 I/O | 功能 |
 | :--- | :-: | :-: | :--- | :-: | :--- |
 | VDDIOB | 1 | P | 1.8/3.3 V | P | PB 接口 IO 电源输入 |
 | PB36 | 2 | I/O/T | USART4_RXD | I | GPIO_B36, USART4_RXD, GPTIM3_CH1, #GPADC_CH4 |
-| PB37 | 3 | I/O/T | USART4_TXD | O | GPIO_B37, USART4_TXD, GPTIM3_CH2,#GPADC_CH5 |
+| PB37 | 3 | I/O/T | USART4_TXD | O | GPIO_B37, USART4_TXD, GPTIM3_CH2, #GPADC_CH5 |
 | PB54 | 4 | I/O/T | GPIO_B54 | I | GPIO_B54, #WKUP_PIN0 |
 | PA75 | 5 | I/O/T | GPIO_A75 | I/O | GPIO_A75, SD2_DIO1, SPI2_DI |
 | PA76 | 6 | I/O/T | GPIO_A76 | I/O | GPIO_A76, SD2_DIO0, SPI2_DO |
@@ -97,14 +97,14 @@ tags:
 | PA79 | 10 | I/O/T | GPIO_A79 | I/O | GPIO_A79, SD2_DIO2 |
 | BOOT_MODE | 11 | I | BOOT_MODE | I | 1：下载模式；0：用户模式 |
 | RSTN | 12 | I | RSTN | I | 1：用户模式；0：复位模式 |
-| VDD_1V8 | 13 | P | 1.8 V | P | MCU 主电源、合封存储器等电源输入 |
+| VDD_1V8 | 13 | P | 1.8 V | P | MCU 主电源与合封存储器电源输入 |
 | GND | 14 | P | 接地 | P | 接地 |
 | VDDIOA | 15 | P | 1.8/3.3 V | P | PA 接口 IO 电源输入，除 PA00~PA11 |
-| VDD_3V3 | 16 | P | 3.3 V | P | MCU 模拟等电源输入 |
+| VDD_3V3 | 16 | P | 3.3 V | P | MCU 模拟电源输入 |
 | PA13 | 17 | I/O/T | GPIO_A13 | O | GPIO_A13, GPTIM1_CH2, ATIM1_BKIN, LCDC1_DPI_DE |
 | PA15 | 18 | I/O/T | GPIO_A15 | O | GPIO_A15, GPTIM1_CH3, ATIM1_BKIN2, LCDC1_DPI_VSYNC |
-| PA14 | 19 | I/O/T | GPIO_A14 | O | GPIO_A14, I2S1_LRCK,LCDC1_DPI_HSYNC |
-| PA12 | 20 | I/O/T | GPIO_A12 | O | GPIO_A12, GPTIM1_CH1, ATIM1_CH4,LCDC1_DPI_CLK |
+| PA14 | 19 | I/O/T | GPIO_A14 | O | GPIO_A14, I2S1_LRCK, LCDC1_DPI_HSYNC |
+| PA12 | 20 | I/O/T | GPIO_A12 | O | GPIO_A12, GPTIM1_CH1, ATIM1_CH4, LCDC1_DPI_CLK |
 | PA67 | 21 | I/O/T | GPIO_A67 | O | GPIO_A67, #WKUP_PIN9, GPTIM2_CH3, ATIM1_CH1N, LCDC1_DPI_B7, LCDC1_JDI_B2 |
 | PA65 | 22 | I/O/T | GPIO_A65 | O | GPIO_A65, #WKUP_PIN7, GPTIM2_CH2, ATIM1_CH1, LCDC1_DPI_B6, LCDC1_JDI_B1 |
 | PA63 | 23 | I/O/T | GPIO_A63 | O | GPIO_A63, I2C2_SDA, USART1_CTS, #GPCOMP_N, LCDC1_DPI_B5 |
@@ -228,7 +228,7 @@ tags:
 
 ### 4.3 实物管脚描述 { #43-physical-pin-description }
 
-技术规格书图 3-2 按功能分组展示了 SDIO、SPI、I2C、UART、GPTIM、LCD 接口（DPI/8080/SPI/JDI/DSI）、GPADC、MPI、模拟音频、启动模式、电源、蓝牙天线、CAN/USB 以及 SWD/调试 UART 等信号在 SF32LB586VDD36 芯片轮廓上的分布。规划主板信号分组和走线时，应结合上方的管脚定义表一并确认。
+技术规格书图 3-2 按功能分组展示了 SDIO、SPI、I2C、UART、GPTIM、LCD 接口（DPI/8080/SPI/JDI/DSI）、GPADC、MPI、模拟音频、启动模式、电源、蓝牙天线、CAN/USB 以及 SWD/调试 UART 等信号在 SF32LB586VDD36 晶粒轮廓上的分布。规划主板信号分组和走线时，应结合上方的管脚定义表一并确认。
 
 !!! info "图 4-2：实物管脚描述图"
     完整图示请参见官方技术规格书图3-2（本指南未复现该图）。
@@ -241,7 +241,7 @@ tags:
 
 **UART** — 全双工，波特率高达 6 Mbps，可配置数据格式，支持硬件流控（CTS/RTS）与 DMA 多包收发。UART1、UART2、UART3 位于 HPSYS；UART4、UART5、UART6 位于 LPSYS。
 
-**I2C** — 支持 Master 和 Slave 角色，内置 8 字节 FIFO，支持 DMA 批量读写。支持标准模式（100 kbps）、快速模式（400 kbps）、快速模式+（1 Mbps）和高速模式（3.4 Mbps）；Master 支持 7/10 比特寻址，并支持时钟延展及可配置的数字防抖动滤波。I2C1~4 位于 HPSYS；I2C5~7 位于 LPSYS。
+**I2C** — 支持 Master 和 Slave 角色，内置 8 字节 FIFO，支持 DMA。支持标准模式（100 kbps）、快速模式（400 kbps）、快速模式+（1 Mbps）和高速模式（3.4 Mbps）；Master 支持 7/10 比特寻址，并支持时钟延展及可配置的数字防抖动滤波。I2C1~4 位于 HPSYS；I2C5~7 位于 LPSYS。
 
 **SPI** — 支持 SSP/SPI（全双工，Master 或 Slave）和 Microwire（半双工，仅 Master）两种格式，支持 4~32 位数据宽度，时钟极性/相位可配，片选极性可配，FIFO 深度 32Bits×16Entry，收发均支持 DMA。SPI1、SPI2 位于 HPSYS（最大时钟 48 MHz）；SPI3、SPI4 位于 LPSYS（最大时钟 24 MHz）。
 
@@ -249,11 +249,11 @@ tags:
 
 **MPI 接口** — 支持 SPI NOR Flash（1/2/4 线，支持 DTR 模式）和 SPI NAND Flash（1/2/4 线），支持寄存器模式和地址映射模式，硬件自动切换。模组上 MPI4 接口可接外部 SPI NOR Flash 或 SPI NAND Flash。
 
-**SD/SDIO/eMMC** — 支持 SD 协议 3.0 以及 eMMC 标准 4.5.1，作为 HOST 控制器，内置链式 DMA 控制以及 1K 字节 FIFO。支持 SDSC/SDHC/SDXC/SDHS 卡，支持 UHS-1（SDR12/25/50/104/DDR50）、单线、4 线和 8 线模式，以及 4 线和 8 线 DDR 模式。
+**SD/SDIO/eMMC** — 支持 SD 协议 3.0 以及 eMMC 标准 4.5.1，作为 HOST 控制器，内置链式 DMA 控制以及 1K 字节 FIFO。支持 SDSC/SDHC/SDXC/SDHS 卡，支持 UHS-1（SDR12/25/50/104/DDR50）、单线、4 线和 8 线 SDR 模式，以及 4 线和 8 线 DDR 模式。
 
 **I2S** — 仅支持 Master 模式，全双工，支持左对齐/右对齐/标准格式，支持 8-bit 和 16-bit 单声道/立体声，PCM 位宽最高 24-bit。
 
-**LCD 接口** — 支持 DBI 串行 SPI 模式（3 线/4 线，支持双线/四线数据线）和并行 8080 模式（8/16/24-bit 总线位宽），支持 RGB332/RGB444/RGB565/RGB666/RGB888 等色彩格式。管脚 47~52 还提供一组独立的 MIPI DSI 通道（1 组时钟 + 2 组数据）。
+**LCD 接口** — 支持 DBI 串行 SPI 模式（3 线/4 线，支持双线/四线数据线）和并行 8080 模式（8/16/24-bit 总线位宽），支持 RGB332/RGB444/RGB565/RGB666/RGB888 色彩格式。管脚 47~52 还提供一组独立的 MIPI DSI 通道（1 组时钟 + 2 组数据）。
 
 ### 5.2 模拟信号处理 { #52-analog-signal-processing }
 
@@ -261,11 +261,11 @@ tags:
 
 **温度传感器** — 分辨率 0.2°C，范围 -40°C~125°C，精度 ±3°C，支持轮询或中断读数。
 
-**音频 DAC** — 集成两路 24-bit DAC，采样率 8KHz~48KHz，支持差分输出。
+**音频 DAC** — 集成两路 24-bit DAC，采样率 8 kHz~48 kHz，支持差分输出。
 
-**音频 PLL** — 支持小数分频，精度 48 MHz/2^18，满足 48 MHz、32.768 kHz、44.1 kHz 等采样率需求。
+**音频 PLL** — 支持小数分频，精度 48 MHz/2^18，支持 48 MHz、32.768 kHz 和 44.1 kHz 的衍生采样率。
 
-**音频 ADC** — 集成两路 24-bit ADC，采样率 8KHz~48KHz，每路独立增益调节。
+**音频 ADC** — 集成两路 24-bit ADC，采样率 8 kHz~48 kHz，每路独立增益调节。
 
 ## 6. 电气特性 { #6-electrical-characteristics }
 
@@ -394,7 +394,7 @@ tags:
 
 - **VDD_3V3** 给 MCU 芯片的 AVDD33_ANA、AVDD33_AUD、AVDD_USB 和模组内部 eMMC VDD（如有配置）供电，推荐使用 LDO 供电。
 - **VDD_1V8** 给 MCU 芯片的 PVDD1、PVDD2、AVDD_BRF、AVDD18_DSI 和合封存储器供电。
-- **VDDIOA** 给 MCU 的 VDDIOA、模组内部 eMMC VIO（如有配置）和外部 FLASH 供电。
+- **VDDIOA** 给 MCU 的 VDDIOA、模组内部 eMMC VIO（如有配置）和外部 Flash 供电。
 - **VDDIOA2** 给 MCU 的 VDDIOA2 供电（覆盖 PA00~PA11）。
 - **VDDIOB** 给 MCU 的 VDDIOB 供电。
 
@@ -408,7 +408,7 @@ tags:
 !!! info "图 8-1：开发板参考原理图"
     完整图示请参见官方技术规格书图7-2至图7-8（本指南未复现该图）。
 
-技术规格书还提供了该开发板的推荐管脚分配表，其中包含针对 LCD_DPI_24、LCD_DSI、LCD_QSPI、LCD_8080 等显示方案的树莓派风格接口映射。
+技术规格书还提供了该开发板的推荐管脚分配表，其中包含针对 LCD_DPI_24、LCD_DSI、LCD_QSPI 和 LCD_8080 显示方案的树莓派风格接口映射。
 
 !!! info "图 8-2：开发板推荐管脚分配"
     完整图示请参见官方技术规格书图7-9（本指南未复现该图）。
@@ -459,7 +459,7 @@ tags:
 
 - 尽可能将天线区域伸出板边，馈点靠近板边位置。
 - 如果天线无法伸出板边，请给 PCB 天线预留足够大的净空区域（不得铺铜、走线或摆放元件），并尽可能切割掉天线下方区域的底板材料。
-- 涉及整机设计时，应考虑外壳对天线的影响并进行 RF 验证；仍需在最终整机上测试通信距离等指标，以确认射频性能。
+- 涉及整机设计时，应评估外壳对天线的影响并进行 RF 验证，包括在最终整机上进行通信距离测试。
 
 ## 11. 产品处理 { #11-product-handling }
 

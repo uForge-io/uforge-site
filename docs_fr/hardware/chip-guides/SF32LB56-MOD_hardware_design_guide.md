@@ -82,7 +82,7 @@ Les applications typiques incluent les montres intelligentes haut de gamme, les 
 | Conflit avec la Flash interne | PA06–PA11 sont connectées par défaut à la Flash interne du module et sont indisponibles en externe. |
 | Conflit SDIO/MPI3 | SDIO et MPI3 partagent des ressources d'E/S et ne peuvent pas être utilisés simultanément. |
 | Sources de réveil | PA50, PA51, PB32 et PB35 peuvent recevoir des interruptions pendant la veille du MCU. |
-| PWRKEY | PB32 déclenche une réinitialisation après un appui de 10 s à l'état haut ; une résistance de pull-down de 10 kΩ est requise. |
+| PWRKEY | PB32 prend en charge la réinitialisation par appui long de 10 s, actif à l'état haut, et nécessite une résistance de rappel à la masse de 10 kΩ. |
 | Antenne | Gardez la zone d'antenne PCB exempte de cuivre, de pistes, de composants et de métal ; utilisez un dégagement d'au moins 15 mm si l'antenne ne peut pas dépasser du bord de la carte. |
 | Fabrication | MSL 3 ; après ouverture, utilisez le module dans les 168 heures à 25 ± 5 °C / 60 % HR ; au-delà, séchez-le au four avant réutilisation. |
 
@@ -99,7 +99,7 @@ Les applications typiques incluent les montres intelligentes haut de gamme, les 
 | VDD_3V3 | Condensateur de 4,7 µF | Placez-le près de la broche d'alimentation du module. |
 | VDD_1V8 | Condensateur de 4,7 µF | Placez-le près de la broche d'alimentation du module. |
 | VDDIO | Condensateur de 4,7 µF | Placez-le près de la broche d'alimentation du module. |
-| PB32/PWRKEY | Pull-down de 10 kΩ | Obligatoire pour une réinitialisation après un appui de 10 s à l'état haut. |
+| PB32/PWRKEY | Résistance de rappel à la masse de 10 kΩ | Obligatoire pour la réinitialisation par appui long, actif à l'état haut. |
 | Signaux RGB du LCD | Résistances en série de 33–100 Ω | Ajoutez-les sur les lignes de signal RGB. |
 | UART de débogage PA16/PA17 | Résistances en série de 100 Ω | Requises sur l'interface UART multiplexée de téléchargement et de débogage. |
 | Écran tactile / connecteurs utilisateur | Protection ESD | Réservez des composants ESD sur les interfaces exposées telles que le TP. |
@@ -108,7 +108,7 @@ Les applications typiques incluent les montres intelligentes haut de gamme, les 
 
 ### 3.3 Arbre d'alimentation { #33-power-tree }
 
-VDD_3V3 alimente le PVDD du MCU, AVDD33_ANA, AVDD33_AUD, AVDD_BRF, VDDIOA2 et la Flash interne du module. SiFli recommande d'utiliser un LDO pour ce rail. VDD_1V8 alimente la mémoire co-packagée du MCU. VDDIO alimente les ports d'E/S VDDIOA/VDDIOB du MCU.
+VDD_3V3 alimente le PVDD du MCU, AVDD33_ANA, AVDD33_AUD, AVDD_BRF, VDDIOA2 et la Flash interne du module. SiFli recommande d'utiliser un LDO pour ce rail. VDD_1V8 alimente la mémoire intégrée dans le même boîtier que le MCU. VDDIO alimente les ports d'E/S VDDIOA/VDDIOB du MCU.
 
 !!! info "Figure 3.3-1 : Schéma d'alimentation du SF32LB56-MOD"
     Voir la figure 7-1 du DS5602 V0.3.
@@ -129,8 +129,8 @@ Le schéma-bloc du module montre le MCU SF32LB56xV, les ressources mémoire, le 
 3. Définissez l'architecture d'alimentation pour VDD_3V3, VDD_1V8 et VDDIO, et confirmez la montée en tension simultanée.
 4. Affectez les broches d'affichage, de stockage, d'USB, d'audio, de capteurs, de réveil, de débogage et de test de production.
 5. Résolvez les conflits de ressources partagées, en particulier SDIO contre MPI3 et les broches Flash PA06–PA11 utilisées en interne.
-6. Ajoutez le découplage, l'ESD, le pull-down PWRKEY et les résistances en série pour le LCD et l'UART de débogage.
-7. Placez le module avec le dégagement et la zone interdite d'antenne requis.
+6. Ajoutez le découplage, l'ESD, la résistance de rappel à la masse de PWRKEY et les résistances en série pour le LCD et l'UART de débogage.
+7. Placez le module avec le dégagement et la zone d'exclusion d'antenne requis.
 8. Passez en revue le schéma et le PCB par rapport à la liste de contrôle de la section 7 avant la validation finale.
 
 ### 4.2 Séquence de revue { #42-review-sequence }
@@ -146,7 +146,7 @@ Utilisez une séquence de revue par étapes : revue du schéma, revue du multipl
 | Jalon | Preuves requises |
 | :--- | :--- |
 | Gel du schéma | Variante sélectionnée, conflits de broches résolus, rails d'alimentation vérifiés, liste de contrôle complète. |
-| Gel de l'implantation | Zone interdite d'antenne vérifiée, découplage d'alimentation placé, interfaces haute vitesse revues. |
+| Gel de l'implantation | Zone d'exclusion d'antenne vérifiée, découplage d'alimentation placé, interfaces haute vitesse revues. |
 | Mise en service EVT | Rails, mode de démarrage, UART/SWD, Flash, affichage, USB, audio et RF : essais fonctionnels initiaux réussis. |
 | DVT | Portée RF, courant, thermique, veille/réveil, stratégie ESD et impact du boîtier validés. |
 | Publication pour production | Programmation, pastilles de test, règles d'inspection, gestion MSL/refusion et registres de révision complets. |
@@ -175,7 +175,7 @@ VDD_3V3, VDD_1V8 et VDDIO doivent monter en tension simultanément. Placez un co
 
 #### 5.1.2 Modes de fonctionnement { #512-operating-modes }
 
-BOOT_MODE sélectionne le mode de démarrage : état haut pour le téléchargement et état bas pour le mode utilisateur. Assurez-vous que le niveau logique de BOOT_MODE reste défini lors de la réinitialisation et de la programmation en production. PB32/PWRKEY déclenche une réinitialisation après un appui de 10 s à l'état haut ; une résistance de pull-down de 10 kΩ est requise.
+BOOT_MODE sélectionne le mode de démarrage : état haut pour le téléchargement et état bas pour le mode utilisateur. Assurez-vous que le niveau logique de BOOT_MODE reste défini lors de la réinitialisation et de la programmation en production. PB32/PWRKEY prend en charge la réinitialisation par appui long de 10 s, actif à l'état haut, et nécessite une résistance de rappel à la masse de 10 kΩ.
 
 ### 5.2 Cadencement et RF { #52-timing-and-rf }
 
@@ -225,7 +225,7 @@ Routez l'audio analogique à l'écart des nœuds de commutation bruyants, des ho
 
 #### 5.3.3 Boutons { #533-buttons }
 
-PB32 est l'entrée PWRKEY et déclenche une réinitialisation après un appui de 10 s à l'état haut. Ajoutez la résistance de pull-down de 10 kΩ requise et assurez-vous que le circuit du bouton ne peut pas rester flottant pendant le transport, le mode Deep Sleep ou les séquences d'alimentation.
+PB32 est l'entrée PWRKEY et prend en charge la réinitialisation par appui long de 10 s, actif à l'état haut. Ajoutez la résistance de rappel à la masse de 10 kΩ requise et assurez-vous que le circuit du bouton ne peut pas rester flottant pendant le transport, le mode Deep Sleep ou les séquences d'alimentation.
 
 #### 5.3.4 Moteur et charges PWM { #534-motor-and-pwm-loads }
 
@@ -259,13 +259,13 @@ SWDIO sur la broche 79 et SWCLK sur la broche 80 sont les broches de débogage/t
 
 #### 5.5.2 Production { #552-production }
 
-Réservez l'accès de production pour l'alimentation, la masse, le mode de démarrage, le reset/PWRKEY, le SWD, le téléchargement UART, et toute interface d'étalonnage ou de test RF au niveau de la carte. Le logiciel de test final doit couvrir le démarrage, la Flash, l'affichage, le tactile, l'audio, l'USB, les capteurs, la communication RF, le comportement de veille/réveil et la consommation de courant.
+Réservez l'accès de production pour l'alimentation, la masse, le mode de démarrage, la réinitialisation/PWRKEY, le SWD, le téléchargement UART, et toute interface d'étalonnage ou de test RF au niveau de la carte. Le logiciel de test final doit couvrir le démarrage, la Flash, l'affichage, le tactile, l'audio, l'USB, les capteurs, la communication RF, le comportement de veille/réveil et la consommation de courant.
 
 ## 6. Implantation et routage du PCB { #6-pcb-layout }
 
 ### 6.1 Mécanique et empreinte { #61-mechanical-and-footprint }
 
-Le module mesure 18,0 × 32,9 × 3,1 mm. Utilisez l'empreinte PCB recommandée dans la fiche technique et vérifiez avec le fabricant du PCB l'empreinte des pastilles, le débord du masque de soudure, les ouvertures du pochoir de pâte, les zones d'exclusion et le contour d'encombrement du composant (courtyard).
+Le module mesure 18,0 × 32,9 × 3,1 mm. Utilisez l'empreinte PCB recommandée dans la fiche technique et vérifiez avec l'assembleur du PCB l'empreinte des pastilles, le débord du masque de soudure, les ouvertures du pochoir de pâte, les zones d'exclusion et le contour d'encombrement du composant (courtyard).
 
 !!! info "Figure 6.1-1 : Dimensions du module SF32LB56-MOD"
     Voir la figure 8-1 du DS5602 V0.3.
@@ -302,7 +302,7 @@ Pour les conceptions à antenne externe, la fiche technique décrit un connecteu
 | :--- | :--- |
 | Alimentation | Les condensateurs de 4,7 µF sont près des broches VDD_3V3, VDD_1V8 et VDDIO. |
 | Masse | Les broches de masse du module se connectent à un système de masse basse impédance avec des vias de raccordement à la masse près des chemins haute vitesse et RF. |
-| Antenne | La zone interdite d'antenne ne comporte aucune intrusion de cuivre, de pistes, de composants, de vis, de blindage, de métal de batterie ou de métal de boîtier. |
+| Antenne | La zone d'exclusion d'antenne ne comporte aucune intrusion de cuivre, de pistes, de composants, de vis, de blindage, de métal de batterie ou de métal de boîtier. |
 | Affichage | Les lignes RGB/SPI du LCD sont courtes, routées en tenant compte de l'impédance et équipées des résistances en série requises. |
 | USB | Les lignes USB DP/DM sont routées comme une paire différentielle adaptée avec une protection ESD près du connecteur. |
 | Audio analogique | MIC_BIAS, MIC_ADC_IN et les sorties DAC évitent les régulateurs à commutation, les horloges du LCD et les zones d'alimentation RF. |
@@ -355,10 +355,10 @@ Pour les conceptions à antenne externe, la fiche technique décrit un connecteu
 | VOL | Tension de sortie basse, charge à haute impédance | VSS | - | 0,2×VDD | V |
 | IOH | Courant d'attaque de sortie haut | 24 | 30 | 38 | mA |
 | IOL | Courant d'attaque de sortie bas | 24 | 30 | 38 | mA |
-| RPU | Pull-up interne | 7 | 10 | 20 | kΩ |
-| RPD | Pull-down interne | 7 | 10 | 20 | kΩ |
-| VIH_nRST | Tension de relâchement du reset | 0,7×VDD | - | VDD | V |
-| VIL_nRST | Tension d'activation du reset | VSS | - | 0,3×VDD | V |
+| RPU | Résistance de rappel interne à l'alimentation (pull-up) | 7 | 10 | 20 | kΩ |
+| RPD | Résistance de rappel interne à la masse (pull-down) | 7 | 10 | 20 | kΩ |
+| VIH_nRST | Tension de levée de la réinitialisation | 0,7×VDD | - | VDD | V |
+| VIL_nRST | Tension d'activation de la réinitialisation | VSS | - | 0,3×VDD | V |
 
 </div>
 
@@ -412,11 +412,11 @@ VDD est l'alimentation des E/S. VOH et VOL sont mesurées sous charge à haute i
 | 1 | La plage d'entrée VDD_3V3 est de 2,97–3,6 V ; placez un condensateur de 4,7 µF près de la broche du module. |
 | 2 | La plage d'entrée VDD_1V8 est de 1,7–1,95 V ; placez un condensateur de 4,7 µF près de la broche du module. |
 | 3 | La plage d'entrée VDDIO est de 1,7–3,6 V ; placez un condensateur de 4,7 µF près de la broche du module. |
-| 4 | Lorsque la spécification fixe une interface E/S du module à 3,3 V, vérifiez la compatibilité avec les niveaux des périphériques connectés. |
+| 4 | Le niveau de l'interface E/S du module est de 3,3 V lorsque la spécification l'indique ; les niveaux des périphériques connectés doivent être compatibles. |
 | 5 | Si le module comporte une Flash interne, PA06, PA07, PA08, PA09, PA10 et PA11 ne peuvent pas être utilisées en externe. |
 | 6 | SDIO et MPI3 partagent des ressources d'E/S et ne peuvent pas être utilisés simultanément. |
 | 7 | PA50, PA51, PB32 et PB35 peuvent recevoir des interruptions pendant la veille du MCU. |
-| 8 | PB32 déclenche une réinitialisation après un appui de 10 s à l'état haut ; une résistance de pull-down de 10 kΩ est requise. |
+| 8 | PB32 prend en charge la réinitialisation par appui long de 10 s, actif à l'état haut ; ajoutez une résistance de rappel à la masse de 10 kΩ. |
 | 9 | Les broches marquées GPADC_CHx prennent en charge une entrée analogique de 0–3,3 V. |
 | 10 | Les broches marquées GPTIM prennent en charge la sortie PWM. |
 | 11 | Les interfaces telles que le TP nécessitent des composants de protection ESD. |

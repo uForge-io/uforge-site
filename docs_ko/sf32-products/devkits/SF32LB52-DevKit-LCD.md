@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-LCD: 터치, 오디오, 스토리지, 배터리를 지원하며 SPI, QSPI, MCU/8080 디스플레이 제품을 빠르게 브링업할 수 있는 디스플레이 중심 SF32LB52x 개발 보드입니다."
+description: "SF32LB52-DevKit-LCD: 터치, 오디오, 스토리지를 지원하고 배터리 구동도 평가할 수 있는 SF32LB52x 디스플레이 중심 개발 보드입니다. SPI, QSPI, MCU/8080 디스플레이 제품의 초기 구동과 검증에 적합합니다."
 tags:
     - 하드웨어
     - 개발 보드
@@ -10,17 +10,17 @@ tags:
 
 ## 개요 { #overview }
 
-SF32LB52-DevKit-LCD는 SF32LB52x 제품군을 위한 디스플레이 중심 개발 보드입니다. SF32LB52x 모듈을 기반으로 하며, SPI, DSPI, QSPI 또는 MCU/8080 디스플레이 인터페이스를 사용하는 제품을 빠르게 개발하기 위한 보드입니다.
+SF32LB52-DevKit-LCD는 SF32LB52x 제품군을 위한 디스플레이 중심 개발 보드입니다. SF32LB52x 모듈을 기반으로 하며, SPI, DSPI, QSPI 또는 MCU/8080 디스플레이 인터페이스를 사용하는 제품을 빠르게 개발할 수 있습니다.
 
-이 보드는 MCU 모듈, 디스플레이 커넥터, 터치 인터페이스, 아날로그 마이크 입력, 아날로그 오디오 출력, USB-C, USB-UART 디버그, TF 카드 스토리지, 배터리 지원을 하나의 평가 플랫폼에 결합합니다. 스마트워치형 HMI, 소형 대시보드, 디스플레이 주변 장치 등 개발 초기부터 화면이 필요한 SF32LB52x 애플리케이션의 실용적인 출발점입니다.
+이 보드는 MCU 모듈, 디스플레이 커넥터, 터치 인터페이스, 아날로그 마이크 입력, 아날로그 오디오 출력, USB-C, USB-UART 디버그, TF 카드 스토리지, 배터리 지원을 하나의 평가 플랫폼에 결합합니다. 스마트워치형 HMI, 소형 대시보드, 디스플레이 주변 장치처럼 개발 초기부터 화면이 필요한 SF32LB52x 애플리케이션을 시작하기에 적합합니다.
 
-![SF32LB52-DevKit-LCD front view](assets/sf32lb52x/SF32LB52x-DevKit-LCD_Front_Look.png){ loading="lazy" }
+![SF32LB52-DevKit-LCD 전면](assets/sf32lb52x/SF32LB52x-DevKit-LCD_Front_Look.png){ loading="lazy" }
 <div align="center"><em>SF32LB52-DevKit-LCD — 전면</em></div>
 
-![SF32LB52-DevKit-LCD back view](assets/sf32lb52x/SF32LB52x_DevKit-LCD_Back_Look.png){ loading="lazy" }
+![SF32LB52-DevKit-LCD 후면](assets/sf32lb52x/SF32LB52x_DevKit-LCD_Back_Look.png){ loading="lazy" }
 <div align="center"><em>SF32LB52-DevKit-LCD — 후면</em></div>
 
-![SF32LB52-DevKit-LCD block diagram](assets/sf32lb52x/SF32LB52x_DevKit-LCD_Block_Diagram.png){ loading="lazy" }
+![SF32LB52-DevKit-LCD 블록 다이어그램](assets/sf32lb52x/SF32LB52x_DevKit-LCD_Block_Diagram.png){ loading="lazy" }
 <div align="center"><em>SF32LB52-DevKit-LCD — 블록 다이어그램</em></div>
 
 ## 보드 주요 특징 { #board-highlights }
@@ -38,16 +38,16 @@ SF32LB52-DevKit-LCD는 SF32LB52x 제품군을 위한 디스플레이 중심 개�
 
 ## 이 보드를 사용하는 경우 { #when-to-use-this-board }
 
-프로젝트에 최소한의 브레이크아웃 보드가 아니라 완성된 디스플레이 플랫폼이 필요하다면 SF32LB52-DevKit-LCD를 선택하십시오.
+프로젝트에 최소한의 브레이크아웃 보드가 아니라 바로 활용할 수 있는 디스플레이 플랫폼이 필요하다면 SF32LB52-DevKit-LCD를 선택하십시오.
 
-- QSPI, SPI, DSPI 또는 MCU/8080 LCD 패널 브링업
+- QSPI, SPI, DSPI 또는 MCU/8080 LCD 패널 초기 구동 및 검증
 - 터치 패널 통합 검증
 - SF32LB52x에서 LVGL 또는 사용자 정의 UI 애플리케이션 테스트
 - 마이크 입력과 스피커 출력 평가
 - TF 카드 스토리지 프로토타이핑
 - 사용자 정의 PCB를 확정하기 전에 모듈 후보 비교
 
-가장자리가 캐슬레이션 형태인 더 작은 보드가 필요하면 [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md)를 사용하십시오. 핀 브레이크아웃을 최대로 확보하고 신호에 직접 접근해야 하면 [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md)를 사용하십시오.
+캐슬레이션 패드가 있는 더 작은 보드가 필요하면 [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md)를 사용하십시오. 핀을 최대한 많이 브레이크아웃하여 신호에 직접 접근해야 하면 [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md)를 사용하십시오.
 
 ## 하드웨어 구성 { #hardware-configuration }
 
@@ -57,21 +57,21 @@ SF32LB52-DevKit-LCD는 SF32LB52x 제품군을 위한 디스플레이 중심 개�
 
 | 영역 | 구성 |
 | :--- | :--- |
-| SF32LB52-DevKit-LCD-1-N16R8 | SF32LB52-MOD-1-N16R8 / SF32LB525UC6, 16MB QSPI-NOR + 8MB OPI-PSRAM |
-| SF32LB52-DevKit-LCD-1-A128R16 | SF32LB52-MOD-1-A128R16 / SF32LB527UD6, 128MB QSPI-NAND + 16MB OPI-PSRAM |
-| 클럭 | 모듈에 48MHz 메인 크리스털과 32.768kHz RTC 크리스털 탑재 |
-| RF | 온보드 안테나 또는 0-ohm 저항으로 선택하는 IPEX 커넥터 |
+| SF32LB52-DevKit-LCD-1-N16R8 | SF32LB52-MOD-1-N16R8 / SF32LB525UC6, 16 MB QSPI-NOR + 8 MB OPI-PSRAM |
+| SF32LB52-DevKit-LCD-1-A128R16 | SF32LB52-MOD-1-A128R16 / SF32LB527UD6, 128 MB QSPI-NAND + 16 MB OPI-PSRAM |
+| 클럭 | 모듈에 48 MHz 메인 크리스털과 32.768 kHz RTC 크리스털 탑재 |
+| RF | 온보드 안테나와 0 Ω 저항으로 선택하는 IPEX 커넥터 |
 | 디스플레이 | QSPI/SPI/DSPI 및 8비트 MCU/8080 |
 | 터치 | I2C 터치 인터페이스 |
 | 오디오 | MEMS 마이크 입력 및 Class-D 스피커 앰프 |
 | 스토리지 | SPI 기반 MicroSD 카드 슬롯 |
-| USB | USB-UART Type-C 및 USB2.0 FS Type-C |
+| USB | USB-UART Type-C 및 USB 2.0 FS Type-C |
 | 배터리 | 단일 셀 Li-ion/Li-poly 배터리 커넥터 |
-| 충전기 | ETA9640P 리니어 충전기, 기본 충전 전류 450mA |
+| 충전기 | ETA9640P 리니어 충전기, 기본 충전 전류 450 mA |
 
 </div>
 
-위의 보드 코드와 메모리 구성은 SiFli의 [개발 보드 모델 가이드](https://wiki.sifli.com/en/board/devkit_guide.html)를 따릅니다. 보드를 설계 기준 구성으로 사용하기 전에 보드 마킹 및 이에 대응하는 설계 패키지와 리비전을 대조하여 확인하십시오.
+위의 보드 코드와 메모리 구성은 SiFli의 [개발 보드 모델 가이드](https://wiki.sifli.com/en/board/devkit_guide.html)를 따릅니다. 보드를 설계 기준 구성으로 사용하기 전에 보드 마킹을 확인하고, 해당 리비전의 설계 패키지와 대조하십시오.
 
 A128R16의 플래시 라벨은 공식 출처마다 다릅니다. [OpenSiFli 모듈 모델 가이드](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md)는 이 모듈을 128 MB SPI-NAND로 식별하지만, 보드 모델 가이드는 대응하는 DevKit SKU를 128 MB QSPI-NAND로 나열합니다. 이것이 실제 실장된 부품의 차이인지 인터페이스 표기의 차이인지는 출처에 설명되어 있지 않습니다. 이 구성에 의존하기 전에 해당 보드 리비전의 회로도/BOM에서 플래시 부품과 버스 모드를 확인하십시오.
 
@@ -91,10 +91,10 @@ A128R16의 플래시 라벨은 공식 출처마다 다릅니다. [OpenSiFli 모�
 
 생산용 캐리어 보드나 픽스처를 설계하기 위해 핀 맵을 사용하기 전에 실크스크린과 설계 패키지에서 정확한 보드 리비전을 확인하십시오.
 
-![SF32LB52-DevKit-LCD front annotated view](assets/sf32lb52x/52KIT-LCD-T-Notes.png){ loading="lazy" }
+![SF32LB52-DevKit-LCD 전면 주석 보기](assets/sf32lb52x/52KIT-LCD-T-Notes.png){ loading="lazy" }
 <div align="center"><em>SF32LB52-DevKit-LCD — 전면 주석 뷰</em></div>
 
-![SF32LB52-DevKit-LCD back annotated view](assets/sf32lb52x/52KIT-LCD-B-Notes.png){ loading="lazy" }
+![SF32LB52-DevKit-LCD 후면 주석 보기](assets/sf32lb52x/52KIT-LCD-B-Notes.png){ loading="lazy" }
 <div align="center"><em>SF32LB52-DevKit-LCD — 후면 주석 뷰</em></div>
 
 ## 시작하기 { #getting-started }
@@ -110,7 +110,7 @@ A128R16의 플래시 라벨은 공식 출처마다 다릅니다. [OpenSiFli 모�
 
 - 스피커
 - TF 카드
-- 단일 셀 Li-ion/Li-poly 배터리(일반적으로 450mAh~500mAh)
+- 단일 셀 Li-ion/Li-poly 배터리(일반적으로 450 mAh~500 mAh)
 - UART 디버그와 네이티브 USB 테스트를 동시에 해야 할 때 필요한 두 번째 USB 케이블
 
 ### 기본 설정 { #basic-setup }
@@ -120,9 +120,9 @@ A128R16의 플래시 라벨은 공식 출처마다 다릅니다. [OpenSiFli 모�
 3. SifliTrace 또는 SiFli 펌웨어 플래싱 툴을 엽니다.
 4. 감지된 시리얼 포트를 선택합니다.
 5. 보드에 전원을 공급하고 대상 펌웨어를 기록하거나 실행합니다.
-6. 디스플레이가 켜지면 애플리케이션에서 요구하는 대로 터치, 그래픽, 스토리지, 오디오 기능을 확인합니다.
+6. 화면이 켜지면 애플리케이션 요구 사항에 따라 터치, 그래픽, 스토리지, 오디오 기능을 확인합니다.
 
-데이터 전송이 가능한 실제 USB 케이블을 사용하십시오. 충전 전용 케이블은 보드에 전원을 공급할 수는 있지만 시리얼 또는 USB 데이터 인터페이스를 노출하지 않습니다.
+데이터 전송이 가능한 USB 케이블을 사용하십시오. 충전 전용 케이블은 보드에 전원만 공급할 뿐 시리얼이나 USB 데이터 인터페이스에는 연결되지 않습니다.
 
 ## 전원 { #power }
 
@@ -133,7 +133,7 @@ SF32LB52-DevKit-LCD에는 두 가지 주요 방식으로 전원을 공급할 수
 
 펌웨어 플래싱과 일반 디버깅에는 USB-UART Type-C 포트를 사용하십시오. 배터리 전원은 케이블 없이 디스플레이, 오디오, 저전력 동작을 테스트할 때 유용합니다.
 
-이 보드에는 ETA9640P 리니어 충전기가 통합되어 있습니다. 지원되는 최대 충전 전류는 1A이며 기본 정전류 설정은 450mA입니다. 단일 셀 Li-ion 또는 Li-poly 배터리를 사용하고, 배터리를 연결하기 전에 보드 실크스크린에서 커넥터 극성을 확인하십시오.
+이 보드에는 ETA9640P 리니어 충전기가 통합되어 있습니다. 지원되는 최대 충전 전류는 1 A이며 기본 정전류 설정은 450 mA입니다. 단일 셀 Li-ion 또는 Li-poly 배터리를 사용하고, 배터리를 연결하기 전에 보드 실크스크린에서 커넥터 극성을 확인하십시오.
 
 ## 플래싱 및 디버그 { #download-and-debug }
 
@@ -144,12 +144,12 @@ USB-UART 포트는 기본 펌웨어 플래싱 및 로그 인터페이스입니�
 
 일부 SF32LB52x 보드는 리셋에 USB-UART의 RTS 신호를 사용합니다. 시리얼 포트를 처음 열 때 보드가 예기치 않게 리셋되면 호스트의 시리얼 포트 설정에서 모뎀 또는 하드웨어 흐름 제어를 비활성화하십시오.
 
-![Disable modem flow control in serial-port advanced settings](assets/sf32lb52x/Modem.png){ loading="lazy" }
+![시리얼 포트 고급 설정에서 모뎀 흐름 제어 비활성화](assets/sf32lb52x/Modem.png){ loading="lazy" }
 <div align="center"><em>시리얼 포트 설정에서 모뎀 흐름 제어 비활성화</em></div>
 
 ## LCD 및 터치 인터페이스 { #lcd-and-touch-interface }
 
-이 보드는 0.5mm 피치의 22핀 FPC 커넥터를 통해 QSPI LCD 패널을 지원합니다. 이 커넥터는 수직형 플립 락 방식입니다. 패널의 핀 순서가 다르면 연결하기 전에 어댑터 보드를 사용하십시오.
+이 보드는 0.5 mm 피치의 22핀 FPC 커넥터를 통해 QSPI LCD 패널을 지원합니다. 이 커넥터는 수직형 플립 락 방식입니다. 패널의 핀 순서가 다르면 연결하기 전에 어댑터 보드를 사용하십시오.
 
 지원되는 LCD 및 터치 기능은 다음과 같습니다.
 
@@ -185,7 +185,7 @@ USB-UART 포트는 기본 펌웨어 플래싱 및 로그 인터페이스입니�
 | 14 | PA05 | MCU8080 RD / QSPI D0 / SPI SDI |
 | 15 | PA03 | MCU8080 CS / QSPI CS / SPI CS |
 | 16 | PA06 | MCU8080 DC / QSPI D1 / SPI DC |
-| 17 | VDD_3V3 | 3.3V 출력 |
+| 17 | VDD_3V3 | 3.3 V 출력 |
 | 18 | PA31 | 터치 인터럽트 |
 | 19 | PA33 | 터치 I2C SDA |
 | 20 | PA30 | 터치 I2C SCL |
@@ -198,7 +198,7 @@ USB-UART 포트는 기본 펌웨어 플래싱 및 로그 인터페이스입니�
 
 ## 주요 모듈 핀 할당 { #key-module-pin-assignments }
 
-![SF32LB52-DevKit-LCD 40-pin header definition](assets/sf32lb52x/SF32LB52x_DevKit-40p-define.png){ loading="lazy" }
+![SF32LB52-DevKit-LCD 40핀 헤더 핀 정의](assets/sf32lb52x/SF32LB52x_DevKit-40p-define.png){ loading="lazy" }
 <div align="center"><em>40핀 헤더 정의</em></div>
 
 <div align="center"><em>주요 모듈 핀 할당</em></div>
@@ -231,11 +231,11 @@ USB-UART 포트는 기본 펌웨어 플래싱 및 로그 인터페이스입니�
 
 ## 모듈 호환성 노트 { #module-compatibility-notes }
 
-- SF32LB52-MOD-1은 17번 핀을 3.3V 출력으로 사용하며, 이 출력은 기본적으로 비활성화되어 있어 소프트웨어에서 활성화해야 합니다.
-- SF32LB52-MOD-A/B는 17번 핀을 3.3V 전원 입력으로 사용합니다.
-- SF32LB52-MOD-1은 27번 핀을 3.2V~4.7V VBAT 입력으로 사용합니다.
-- SF32LB52-MOD-A/B는 27번 핀을 3.3V 전원 입력으로 사용합니다.
-- SF32LB52-MOD-1에서 VBAT 전원 켜짐 임계값은 3.58V이고 전원 꺼짐 임계값은 3.48V입니다. 배터리가 아닌 전원으로 테스트할 때는 VBAT에 3.8V를 권장합니다.
+- SF32LB52-MOD-1은 17번 핀을 3.3 V 출력으로 사용하며, 이 출력은 기본적으로 비활성화되어 있어 소프트웨어에서 활성화해야 합니다.
+- SF32LB52-MOD-A/B는 17번 핀을 3.3 V 전원 입력으로 사용합니다.
+- SF32LB52-MOD-1은 27번 핀을 3.2 V~4.7 V VBAT 입력으로 사용합니다.
+- SF32LB52-MOD-A/B는 27번 핀을 3.3 V 전원 입력으로 사용합니다.
+- SF32LB52-MOD-1에서 VBAT 전원 켜짐 임계값은 3.58 V이고 전원 꺼짐 임계값은 3.48 V입니다. 배터리가 아닌 전원으로 테스트할 때는 VBAT에 3.8 V를 권장합니다.
 - 모듈 62번 핀의 PA21은 SF32LB52-MOD-A/B에서만 사용할 수 있습니다. SF32LB52-MOD-1에서는 연결되어 있지 않습니다.
 - 모듈 62번~68번 핀은 기본적으로 내부에서 NOR 플래시에 연결되어 있을 수 있습니다. SDIO를 외부에서 사용하려면 해당 핀에 내부 플래시가 없는 모듈 변형을 선택하십시오.
 
@@ -245,7 +245,7 @@ USB-UART 포트는 기본 펌웨어 플래싱 및 로그 인터페이스입니�
 
 - 아날로그 오디오 입력을 검증하려면 온보드 마이크 경로를 사용하십시오.
 - 오디오 출력을 테스트하려면 스피커 커넥터를 사용하십시오.
-- 원본 보드 노트에 따르면 외부 스피커 경로는 4ohm 부하에서 최대 3W를 지원합니다.
+- 원본 보드 노트에 따르면 외부 스피커 경로는 4 Ω 부하에서 최대 3 W를 지원합니다.
 
 ## 스토리지 { #storage }
 
@@ -272,11 +272,11 @@ SiFli SDK는 `scons --board=<board_name>`과 함께 다음의 정확한 보드 �
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-microchip: __[SF32LB52x Chip Introduction]__
-- :fontawesome-solid-file-lines: __[SF32LB52x Hardware Design Guide]__
-- :fontawesome-solid-cubes: __[SF32LB52-MOD-1]__
-- :fontawesome-brands-github: __[Original SiFli Wiki Article]__
-- :fontawesome-solid-download: __[Design Package]__
-- :fontawesome-solid-cart-shopping: __[Buy Samples]__
+- :fontawesome-solid-microchip: __[SF32LB52x 칩 소개][SF32LB52x Chip Introduction]__
+- :fontawesome-solid-file-lines: __[SF32LB52x 하드웨어 설계 가이드][SF32LB52x Hardware Design Guide]__
+- :fontawesome-solid-cubes: __[SF32LB52-MOD-1][SF32LB52-MOD-1]__
+- :fontawesome-brands-github: __[SiFli 위키 원문][Original SiFli Wiki Article]__
+- :fontawesome-solid-download: __[설계 패키지][Design Package]__
+- :fontawesome-solid-cart-shopping: __[샘플 구매][Buy Samples]__
 
 </div>

@@ -15,13 +15,13 @@ tags:
 
 ## 5. Directrices de diseño de esquemáticos { #5-schematic-design-guidelines }
 
-Este capítulo sigue el flujo de diseño del esquemático a lo largo de tres páginas. Primero complete la revisión del sistema mínimo; después, revise en esta página la alimentación y la generación de reloj, en la siguiente la RF y las interfaces de usuario, y en la última el almacenamiento, el acceso para fabricación y las decisiones que dependen de la PCB. Para cada bloque, confirme el objetivo de diseño y las variantes aplicables antes de comprobar los requisitos del circuito, la asignación de pines, los errores frecuentes y los criterios de aprobación.
+Este capítulo sigue el flujo de diseño del esquemático a lo largo de tres páginas. Primero complete la revisión del sistema mínimo; después, revise en esta página la alimentación y la generación de reloj, en la siguiente la RF y las interfaces de usuario, y en la última el almacenamiento, el acceso para fabricación y las decisiones que dependen de la PCB. Para cada bloque, confirme el objetivo de diseño y las variantes aplicables antes de comprobar los requisitos del circuito, la asignación de pines, los errores frecuentes y los elementos de las listas de liberación.
 
 <div align="center"><em>Tabla 5-1: Navegación del capítulo de esquemáticos</em></div>
 
 <div align="center" markdown>
 
-| Bloque | Decisión principal | Evidencias para aprobar el diseño |
+| Bloque | Decisión principal | Evidencias de liberación |
 |:---|:---|:---|
 | Diseño del sistema mínimo | Variante y encapsulado exactos, almacenamiento de arranque, pines de configuración, acceso de depuración/descarga y ruta mínima de puesta en marcha | Revisión del sistema mínimo, tabla de configuración, puntos de prueba de depuración y plan de arranque y recuperación |
 | Sistema de alimentación | Árbol de alimentación por variante, ruta del cargador, BUCK, LDO, alimentación del almacenamiento de arranque, modos de funcionamiento y fuentes de activación | Revisión del árbol de alimentación, componentes de la AVL, ajustes del cargador/OVP y plan de bajo consumo y activación |
@@ -35,7 +35,7 @@ Este capítulo sigue el flujo de diseño del esquemático a lo largo de tres pá
 
 ### 5.1. Diseño del sistema mínimo { #51-minimum-system-design }
 
-El diseño del sistema mínimo es la primera etapa de revisión que debe superar el esquemático de una placa SF32LB52x. Abarca las decisiones que deben ser correctas antes de añadir los periféricos del producto: variante y encapsulado exactos, árbol de alimentación, medio de arranque, resistencias de configuración, control de alimentación del almacenamiento, acceso de depuración/descarga, fuentes de reloj y comportamiento de activación. A menudo se pueden admitir cambios tardíos en el cableado de la pantalla o los sensores; en cambio, una configuración incorrecta de los pines de arranque del almacenamiento, la falta de acceso de depuración, una alimentación inestable o una hipótesis errónea sobre los estados de alimentación pueden impedir el funcionamiento normal de la placa.
+El diseño del sistema mínimo es el primer criterio de liberación del diseño que debe superar el esquemático de una placa SF32LB52x. Abarca las decisiones que deben ser correctas antes de añadir los periféricos del producto: variante y encapsulado exactos, árbol de alimentación, medio de arranque, resistencias de configuración, control de alimentación del almacenamiento, acceso de depuración/descarga, fuentes de reloj y comportamiento de activación. Una placa suele tolerar cambios tardíos en el cableado de la pantalla o los sensores; en cambio, normalmente no tolera una configuración incorrecta de los pines de arranque del almacenamiento, la falta de acceso de depuración, una alimentación inestable ni una hipótesis incompatible sobre los estados de alimentación.
 
 Siga esta secuencia durante la primera revisión del esquemático:
 
@@ -43,12 +43,12 @@ Siga esta secuencia durante la primera revisión del esquemático:
 2. Elija la ruta de alimentación adecuada: `SF32LB520/3/5/7` para productos con batería recargable o `52B/D/E/G/J` para productos alimentados por una fuente regulada externa.
 3. Defina las decisiones de alimentación de la sección 5.2: `VBUS`/`VBAT`/`VCC` o `PVDD`/`VDDIOA`/`VDD_SIP`, BUCK, desacoplamiento de los LDO internos, líneas de alimentación de RF/audio y todos los interruptores de carga de bajo consumo.
 4. Seleccione el medio de arranque e implemente las opciones de resistencias pull de configuración en `PA13`/`PA17` según la tabla de arranque de la sección 5.6.1.
-5. Confirme el pin de control de los interruptores de alimentación del almacenamiento de arranque antes de cerrar el diseño. Las notas de aplicación y la guía del esquemático indican `PA21`, pero la lista de comprobación oficial indica `PA11` para la Flash externa en las variantes con batería.
+5. Confirme el pin de control del interruptor de alimentación del almacenamiento de arranque frente a la discrepancia entre fuentes antes del trazado de la PCB. Las notas de aplicación y la guía del esquemático indican `PA21`, pero la lista de comprobación oficial indica `PA11` para la Flash externa en las variantes con batería.
 6. Reserve `PA18`/`PA19`, tierra y una referencia de alimentación válida para el acceso DBG_UART/SWD antes de cerrar el diseño de la carcasa y del útil de producción.
 7. Seleccione los cristales de 48 MHz y 32,768 kHz indicados en la sección 5.3.1 y tenga presentes sus restricciones de ubicación durante la revisión del esquemático.
 8. Asigne los pines de activación, el comportamiento del botón de encendido, los eventos del cargador y los estados de apagado del almacenamiento/sensores antes de cerrar la política de bajo consumo del firmware.
 
-Al terminar este punto de control, el esquemático debe permitir encender la placa, arrancar desde el medio seleccionado, disponer de una ruta de recuperación, calibrar el reloj y entrar en el estado de bajo consumo previsto sin depender de periféricos opcionales del producto.
+Al superar este criterio de liberación, el esquemático debe permitir encender la placa, arrancar desde el medio seleccionado, disponer de una ruta de recuperación, calibrar el reloj y entrar en el estado de bajo consumo previsto sin depender de periféricos opcionales del producto.
 
 ### 5.2. Sistema de alimentación { #52-power-system }
 
@@ -76,28 +76,28 @@ Diseñe un árbol de alimentación estable y con baja corriente de fuga que admi
 
     | Pin | Mín. (V) | Típ. (V) | Máx. (V) | Corriente máx. (mA) | Descripción |
     |:---|:---|:---|:---|:---|:---|
-    | VBUS | 4.5 | 5.0 | 5.5 | 500 | Entrada de alimentación VBUS; consulte la nota de discrepancia de fuentes |
-    | VBAT | 3.2 | - | 4.7 | 500 | Salida de alimentación VBAT |
-    | VCC | 3.2 | - | 4.7 | 500 | Entrada de alimentación del sistema (1) |
-    | VSYS | - | 3.3 | - | 500 | Salida de alimentación VSYS (2) |
-    | BUCK_LX | - | 1.25 | - | 50 | Salida BUCK; se conecta al inductor |
-    | BUCK_FB | - | 1.25 | - | 50 | Entrada de realimentación BUCK/alimentación interna; se conecta al otro extremo del inductor y a un condensador externo |
-    | VDD_VOUT1 | - | 1.1 | - | 50 | LDO interno, condensador externo; no alimenta periféricos |
-    | VDD_VOUT2 | - | 0.9 | - | 20 | LDO interno, condensador externo; no alimenta periféricos |
-    | VDD_RET | - | 0.9 | - | 1 | LDO interno, condensador externo; no alimenta periféricos |
-    | VDD_RTC | - | 1.1 | - | 1 | LDO interno, condensador externo; no alimenta periféricos |
-    | VDD18_VOUT | - | 1.8 | - | 30 | Alimentación SIP (3), interna; no alimenta periféricos. Se puede alimentar externamente al deshabilitar el LDO |
-    | VDD33_VOUT1 | - | 3.3 | - | 150 | Salida 1 del LDO de 3,3 V (4); está desactivada de forma predeterminada y requiere configuración por software |
-    | VDD33_VOUT2 | - | 3.3 | - | 150 | Salida 2 del LDO de 3,3 V; está desactivada de forma predeterminada y requiere configuración por software |
-    | AVDD33_AUD | 2.97 | 3.3 | 3.63 | 50 | Entrada de alimentación de audio de 3,3 V |
-    | AVDD_BRF | 2.97 | 3.3 | 3.63 | 100 | Entrada de alimentación de RF |
-    | MIC_BIAS | 1.4 | - | 2.8 | - | Salida de alimentación del micrófono |
+    | VBUS | 4,5 | 5,0 | 5,5 | 500 | Entrada de alimentación VBUS; consulte la nota de discrepancia de fuentes |
+    | VBAT | 3,2 | - | 4,7 | 500 | Salida de alimentación VBAT |
+    | VCC | 3,2 | - | 4,7 | 500 | Entrada de alimentación del sistema (1) |
+    | VSYS | - | 3,3 | - | 500 | Salida de alimentación VSYS (2) |
+    | BUCK_LX | - | 1,25 | - | 50 | Salida BUCK; se conecta al inductor |
+    | BUCK_FB | - | 1,25 | - | 50 | Entrada de realimentación BUCK/alimentación interna; se conecta al otro extremo del inductor y a un condensador externo |
+    | VDD_VOUT1 | - | 1,1 | - | 50 | LDO interno, condensador externo; no alimenta periféricos |
+    | VDD_VOUT2 | - | 0,9 | - | 20 | LDO interno, condensador externo; no alimenta periféricos |
+    | VDD_RET | - | 0,9 | - | 1 | LDO interno, condensador externo; no alimenta periféricos |
+    | VDD_RTC | - | 1,1 | - | 1 | LDO interno, condensador externo; no alimenta periféricos |
+    | VDD18_VOUT | - | 1,8 | - | 30 | Alimentación SIP (3), interna; no alimenta periféricos. Se puede alimentar externamente al deshabilitar el LDO |
+    | VDD33_VOUT1 | - | 3,3 | - | 150 | Salida 1 del LDO de 3,3 V (4); está desactivada de forma predeterminada y requiere configuración por software |
+    | VDD33_VOUT2 | - | 3,3 | - | 150 | Salida 2 del LDO de 3,3 V; está desactivada de forma predeterminada y requiere configuración por software |
+    | AVDD33_AUD | 2,97 | 3,3 | 3,63 | 50 | Entrada de alimentación de audio de 3,3 V |
+    | AVDD_BRF | 2,97 | 3,3 | 3,63 | 100 | Entrada de alimentación de RF |
+    | MIC_BIAS | 1,4 | - | 2,8 | - | Salida de alimentación del micrófono |
 
     </div>
 
     (1) Con batería de litio en la entrada VCC, el umbral predeterminado de batería baja del software es 3,48 V. Con una fuente de tensión constante, el rango admitido es de 3,6 a 4,7 V; se recomiendan 3,8 V.
     (2) VSYS alimenta AVDD_BRF.
-    (3) VDD18_VOUT: SF32LB520U36 requiere una fuente externa de 3,3 V; SF32LB523/5/7Ux6 utiliza el LDO interno y no necesita alimentación externa. Configure por software el LDO VDD18 interno según el modelo del chip y no lo habilite cuando la alimentación sea externa.
+    (3) VDD18_VOUT: SF32LB520U36 requiere una fuente externa de 3,3 V; SF32LB523/5/7Ux6 utilizan el LDO interno y no necesitan alimentación externa. Configure por software el LDO VDD18 interno según el modelo del chip y no lo habilite cuando la alimentación sea externa.
     (4) VDD33_VOUT1: en SF32LB520U36 solo alimenta VDD18_VOUT, la memoria Flash externa y AVDD33_AUD; en SF32LB523/5/7Ux6 solo alimenta la memoria Flash externa y AVDD33_AUD.
 
 === "52B/D/E/G/J (alimentación externa regulada)"
@@ -108,26 +108,26 @@ Diseñe un árbol de alimentación estable y con baja corriente de fuga que admi
 
     | Pin | Mín. (V) | Típ. (V) | Máx. (V) | Corriente máx. (mA) | Descripción |
     |:---|:---|:---|:---|:---|:---|
-    | PVDD | 2.97 | 3.3 | 3.63 | 150 | Entrada de alimentación del sistema PVDD, condensador de 10 µF |
-    | BUCK_LX | - | 1.25 | - | 50 | Salida BUCK; se conecta a un inductor de 4,7 µH |
-    | BUCK_FB | - | 1.25 | - | 50 | Entrada de realimentación BUCK/alimentación interna; se conecta al otro extremo del inductor y a un condensador de 4,7 µF |
-    | VDD_VOUT1 | - | 1.1 | - | 50 | LDO interno, condensador de 4,7 µF; no alimenta periféricos |
-    | VDD_VOUT2 | - | 0.9 | - | 20 | LDO interno, condensador de 4,7 µF; no alimenta periféricos |
-    | VDD_RET | - | 0.9 | - | 1 | LDO interno, condensador de 0,47 µF; no alimenta periféricos |
-    | VDD_RTC | - | 1.1 | - | 1 | LDO interno, condensador de 1 µF; no alimenta periféricos |
-    | VDDIOA | 1.71 | 1.8/3.3 | 3.63 | - | Entrada de alimentación de GPIO, condensador de 1 µF |
-    | AVDD33 | 2.97 | 3.3 | 3.63 | 100 | Entrada de alimentación analógica de 3,3 V, condensador de 4,7 µF |
-    | AVDD33_AUD | 2.97 | 3.3 | 3.63 | 50 | Entrada de alimentación de audio de 3,3 V, condensador de 2,2 µF |
-    | VDD_SIP | 1.71 | 1.8/3.3 | 3.63 | 30 | LDO interno o fuente externa (1), condensador de 1 µF |
-    | AVDD_BRF | 2.97 | 3.3 | 3.63 | 100 | Entrada de alimentación analógica, condensador de 4,7 µF |
-    | MIC_BIAS | 1.4 | - | 2.8 | - | Salida de alimentación del micrófono, condensador de 1 µF |
+    | PVDD | 2,97 | 3,3 | 3,63 | 150 | Entrada de alimentación del sistema PVDD, condensador de 10 µF |
+    | BUCK_LX | - | 1,25 | - | 50 | Salida BUCK; se conecta a un inductor de 4,7 µH |
+    | BUCK_FB | - | 1,25 | - | 50 | Entrada de realimentación BUCK/alimentación interna; se conecta al otro extremo del inductor y a un condensador de 4,7 µF |
+    | VDD_VOUT1 | - | 1,1 | - | 50 | LDO interno, condensador de 4,7 µF; no alimenta periféricos |
+    | VDD_VOUT2 | - | 0,9 | - | 20 | LDO interno, condensador de 4,7 µF; no alimenta periféricos |
+    | VDD_RET | - | 0,9 | - | 1 | LDO interno, condensador de 0,47 µF; no alimenta periféricos |
+    | VDD_RTC | - | 1,1 | - | 1 | LDO interno, condensador de 1 µF; no alimenta periféricos |
+    | VDDIOA | 1,71 | 1,8/3,3 | 3,63 | - | Entrada de alimentación de GPIO, condensador de 1 µF |
+    | AVDD33 | 2,97 | 3,3 | 3,63 | 100 | Entrada de alimentación analógica de 3,3 V, condensador de 4,7 µF |
+    | AVDD33_AUD | 2,97 | 3,3 | 3,63 | 50 | Entrada de alimentación de audio de 3,3 V, condensador de 2,2 µF |
+    | VDD_SIP | 1,71 | 1,8/3,3 | 3,63 | 30 | LDO interno o fuente externa (1), condensador de 1 µF |
+    | AVDD_BRF | 2,97 | 3,3 | 3,63 | 100 | Entrada de alimentación analógica, condensador de 4,7 µF |
+    | MIC_BIAS | 1,4 | - | 2,8 | - | Salida de alimentación del micrófono, condensador de 1 µF |
 
     </div>
 
-    (1) VDD_SIP: SF32LB52BU36 requiere una fuente externa de 1,8 V o 3,3 V; SF32LB52BU56 requiere una fuente externa de 3,3 V; SF32LB52DUB6 requiere una fuente externa de 1,8 V; SF32LB52E/G/JUx6 se alimenta directamente desde el LDO interno y no necesita una fuente externa.
+    (1) VDD_SIP: SF32LB52BU36 requiere una fuente externa de 1,8 V o 3,3 V; SF32LB52BU56 requiere una fuente externa de 3,3 V; SF32LB52DUB6 requiere una fuente externa de 1,8 V; SF32LB52E/G/JUx6 se alimentan directamente desde el LDO interno y no necesitan una fuente externa.
 
     !!! important "Nota sobre el modo Hibernate"
-        Al entrar el sistema en modo Hibernate, apague VDD_SIP; de lo contrario, puede producirse una corriente de fuga a través de las E/S de la memoria integrada en el mismo encapsulado. Use el pin dedicado PA21 para controlar el interruptor de alimentación de VDD_SIP.
+        Cuando el sistema entre en modo Hibernate, debe apagarse VDD_SIP; de lo contrario, existe riesgo de corriente de fuga a través de las E/S de la memoria integrada en el mismo encapsulado. Use el pin dedicado PA21 para controlar el interruptor de alimentación de VDD_SIP.
 
 ##### 5.2.1.2. Selección del inductor BUCK { #5212-buck-inductor-selection }
 
@@ -229,7 +229,7 @@ Ambos grupos de diseño utilizan la misma especificación de inductor.
 ##### 5.2.1.5. Lista de comprobación del diseño de alimentación { #5215-power-design-checklist }
 
 - [ ] Se ha seleccionado la variante de alimentación correspondiente al modelo exacto del chip: por batería o con alimentación externa regulada.
-- [ ] El inductor BUCK cumple 4,7 uH ±20 %, DCR ≤0,4 Ω e Isat ≥450 mA.
+- [ ] El inductor BUCK cumple 4,7 µH ±20 %, DCR ≤0,4 Ω e Isat ≥450 mA.
 - [ ] Todos los condensadores de desacoplamiento de los LDO internos están colocados según los requisitos.
 - [ ] La alimentación de la pantalla LCD está aislada y no procede directamente del LDO interno.
 - [ ] Las líneas de alimentación de audio y RF están filtradas correctamente.
@@ -246,7 +246,7 @@ Ambos grupos de diseño utilizan la misma especificación de inductor.
 
 - Mida `VCC`/`PVDD`, la salida BUCK, las líneas de alimentación de RF/audio y la alimentación del almacenamiento antes de que el firmware habilite los periféricos.
 - En diseños con batería, compruebe la conexión del cargador, la precarga, la carga a corriente constante y el comportamiento de recarga.
-- Mida la corriente en espera y en Hibernate con apagados los interruptores de carga de la pantalla, los sensores, el almacenamiento y el motor.
+- Mida la corriente en espera y en Hibernate con los interruptores de carga de la pantalla, los sensores, el almacenamiento y el motor apagados.
 
 #### 5.2.2. Modos de funcionamiento y fuentes de activación { #522-operating-modes-and-wake-sources }
 
@@ -270,8 +270,8 @@ Seleccione las fuentes de activación y los estados predeterminados de los inter
 | Modo | CPU | Periféricos | SRAM | E/S | LPTIM | Fuente de activación | Tiempo de activación |
 |:---|:---|:---|:---|:---|:---|:---|:---|
 | Active | En ejecución | En ejecución | Accesible | Puede cambiar de estado | En ejecución | - | - |
-| Sleep | Detenida | En ejecución | Accesible | Puede cambiar de estado | En ejecución | Cualquier interrupción | <0,5 us |
-| DeepSleep | Detenida | Detenidos | Inaccesible, totalmente retenida | Nivel mantenido | En ejecución | RTC, E/S de activación, GPIO, LPTIM, Bluetooth | 250 us |
+| Sleep | Detenida | En ejecución | Accesible | Puede cambiar de estado | En ejecución | Cualquier interrupción | <0,5 µs |
+| DeepSleep | Detenida | Detenidos | Inaccesible, totalmente retenida | Nivel mantenido | En ejecución | RTC, E/S de activación, GPIO, LPTIM, Bluetooth | 250 µs |
 | Standby | Reiniciada | Reiniciados | Inaccesible, totalmente retenida | Nivel mantenido | En ejecución | RTC, E/S de activación, LPTIM, Bluetooth | 1 ms |
 | Hibernate | Reiniciada | Reiniciados | Inaccesible, no retenida | High-Z | Reiniciado | RTC, E/S de activación | >2 ms |
 
@@ -340,18 +340,18 @@ Cristales recomendados:
 
 | Número de pieza | Fabricante | Parámetros |
 |:---|:---|:---|
-| E1SB48E001G00E | Hosonic | F0=48 MHz, ΔF/F0=-6~8 ppm, CL=8.8 pF, ESR≤22 Ω, TOPR=-30~85°C, encapsulado métrico 2016 |
-| SX20Y048000B31T-8.8 | TKD | F0=48 MHz, ΔF/F0=-10~10 ppm, CL=8.8 pF, ESR≤40 Ω, TOPR=-20~75°C, encapsulado métrico 2016 |
-| ETST00327000LE | Hosonic | F0=32.768 kHz, ΔF/F0=-20~20 ppm, CL=7 pF, ESR≤70 kΩ, TOPR=-40~85°C, encapsulado métrico 3215 |
-| SF32K32768D71T01 | TKD | F0=32.768 kHz, ΔF/F0=-20~20 ppm, CL=7 pF, ESR≤70 kΩ, TOPR=-40~85°C, encapsulado métrico 3215 |
+| E1SB48E001G00E | Hosonic | F0=48 MHz, ΔF/F0=-6~8 ppm, CL=8,8 pF, ESR≤22 Ω, TOPR=-30~85°C, encapsulado métrico 2016 |
+| SX20Y048000B31T-8.8 | TKD | F0=48 MHz, ΔF/F0=-10~10 ppm, CL=8,8 pF, ESR≤40 Ω, TOPR=-20~75°C, encapsulado métrico 2016 |
+| ETST00327000LE | Hosonic | F0=32,768 kHz, ΔF/F0=-20~20 ppm, CL=7 pF, ESR≤70 kΩ, TOPR=-40~85°C, encapsulado métrico 3215 |
+| SF32K32768D71T01 | TKD | F0=32,768 kHz, ΔF/F0=-20~20 ppm, CL=7 pF, ESR≤70 kΩ, TOPR=-40~85°C, encapsulado métrico 3215 |
 
 </div>
 
 !!! note "Notas adicionales"
-    El TKD SX20Y048000B31T-8.8 tiene un ESR algo más alto, lo que aumenta ligeramente el consumo estático. Además, la nota de aplicación de esquemáticos de SiFli recomienda eliminar al menos el cobre GND de la segunda capa bajo el cristal de 48 MHz para reducir la capacitancia de carga parásita. Sin embargo, la guía de diseño de PCB prohíbe los vaciados de plano o recortes de cobre bajo la zona del cristal en las capas adyacentes. Las indicaciones se contradicen; consulte [Trazado de la interfaz de reloj](SF32LB52x_pcb_layout.md#65-clock-interface-routing). Confirme con SiFli el tratamiento de capas previsto antes de cerrar el diseño de PCB.
+    El TKD SX20Y048000B31T-8.8 tiene un ESR algo más alto, lo que aumenta ligeramente el consumo estático. Además, la nota de aplicación de esquemáticos de SiFli recomienda eliminar al menos el cobre GND de la segunda capa bajo el cristal de 48 MHz para reducir la capacitancia de carga parásita. Sin embargo, la guía de diseño de PCB prohíbe los vaciados de plano o recortes de cobre bajo la zona del cristal en las capas adyacentes. Las indicaciones se contradicen; consulte [Trazado de la interfaz de reloj](SF32LB52x_pcb_layout.md#65-clock-interface-routing). Confirme con SiFli el tratamiento de capas previsto antes de liberar el diseño de PCB.
 
 !!! important "Excepción de ESR del cristal en la fuente"
-    La fuente incluye el TKD SX20Y048000B31T-8.8 con ESR ≤ 40 Ω, aunque el requisito general para 48 MHz es ESR ≤ 30 Ω. Debe verificarse la homologación de ese componente concreto; no significa que cualquier cristal de 40 Ω sea válido. Antes de liberar el diseño, confirme su aprobación en la AVL vigente y valide el arranque, la calibración de frecuencia y la corriente del oscilador.
+    La fuente incluye el TKD SX20Y048000B31T-8.8 con ESR ≤ 40 Ω, aunque el requisito general para 48 MHz es ESR ≤ 30 Ω. Trátelo como una cuestión de homologación específica de ese componente, no como permiso para usar cualquier cristal de 40 Ω. Antes de liberar el diseño, confirme su aprobación en la AVL vigente y valide el arranque, la calibración de frecuencia y la corriente del oscilador.
 
 !!! important "La recomendación del cristal de 32,768 kHz difiere dentro de la fuente"
     La tabla de parámetros de 32,768 kHz de la fuente recomienda CL = 7 pF y ESR = 38 kΩ, mientras que el texto recomienda CL ≤ 9 pF y ESR ≤ 40 kΩ. Ambas indicaciones aparecen en la fuente; confirme con SiFli el objetivo aplicable y la homologación AVL del cristal elegido antes de liberar el diseño.

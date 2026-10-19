@@ -57,7 +57,7 @@ So lassen sich Fehler in Hardware, Board-Support, Middleware und Anwendung vonei
 | Symptom | Erste Prüfungen |
 |:--------|:-------------|
 | HardFault oder Assert | Stackgröße, Nullzeiger, DMA-Puffer und Cache-Wartung. |
-| Peripheriegerät reagiert nicht | Pin-Mux, Takt, Versorgungsschiene, Board-Name, Treiberaktivierung. |
+| Peripheriegerät reagiert nicht | Pin-Mux, Takt, Versorgungsschiene, Boardname, Treiberaktivierung. |
 | Bluetooth instabil | RF-Takt, Antennenpfad, Bluetooth-Stack-Konfiguration, Verbindungsparameter. |
 | Bildfehler auf dem Display | Panel-Timing, Pufferformat und Cache-/DMA-Synchronisation. |
 | Zufälliger Neustart | Watchdog, Versorgungsschiene, Brownout und Stack-Überlauf. |
@@ -72,7 +72,7 @@ Geben Sie in einem Absturzbericht Folgendes an:
 - Chipvariante.
 - SDK-Branch oder -Commit.
 - Exaktes Beispiel oder Projekt.
-- Build-Befehl und Board-Name.
+- Build-Befehl und Boardname.
 - Flash-Befehl.
 - Serielles Startprotokoll ab dem Reset.
 - Absturz-Dump oder Assert-Ausgabe.

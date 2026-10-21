@@ -32,40 +32,39 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install zensical
-      # Eight language builds (Zensical builds one UI language per run). English
-      # is the site root; each other language is built to site_<lang>/ and then
-      # nested under site/<lang>/ so the header language menu, hreflang tags and
-      # first-visit redirect (which all target /<lang>/<same page>) resolve.
+      # Nine language builds (Zensical builds one UI language per run). Each language is
+      # built to site/<lang>/; English is then the site root and the other eight are
+      # nested under it (tools/assemble-publish.sh logic, inlined here) in publish/, so the header
+      # language menu, hreflang tags and first-visit redirect (which all target
+      # /<lang>/<same page>) resolve.
       # --strict on every build: a broken link or missing page in ANY language
       # fails the deploy rather than shipping a half-working site.
       - name: Build all languages
         run: |
-          languages="zh ja es de fr pt ru ko"
-          zensical build --clean --strict --config-file zensical.toml
-          for lang in $languages; do
-            zensical build --clean --strict --config-file "zensical.${lang}.toml"
+          for lang in en zh ja es de fr pt ru ko; do
+            bash .github/scripts/zensical.sh build "${lang}" --clean --strict
           done
-      - name: Nest localized sites under the English site
+      - name: Assemble the site (English at the root, other languages nested)
         run: |
+          rm -rf publish
+          cp -R site/en publish
           for lang in zh ja es de fr pt ru ko; do
-            rm -rf "site/${lang}"
-            cp -R "site_${lang}" "site/${lang}"
+            rm -rf "publish/${lang}"
+            cp -R "site/${lang}" "publish/${lang}"
+            test -f "publish/${lang}/index.html"
           done
-          for lang in zh ja es de fr pt ru ko; do
-            test -f "site/${lang}/index.html"
-          done
-      # Stamp last-modified dates (docs/lastmod.json, generated in the source repo)
+      # Stamp last-modified dates (.github/data/lastmod.json, generated in the source repo)
       # into JSON-LD, article:modified_time, a visible "Last updated" line and
-      # every sitemap <url>. Runs on the nested site so all nine languages are covered.
+      # every sitemap <url>. Runs on the assembled site so all nine languages are covered.
       - name: Stamp last-modified dates
-        run: python3 .github/scripts/inject-lastmod.py site
+        run: python3 .github/scripts/inject-lastmod.py publish --map .github/data/lastmod.json
       # Share one copy of every image/PDF/XLSX: delete the byte-identical copies
-      # inside site/<lang>/ and point that language's pages at the root copy.
+      # inside publish/<lang>/ and point that language's pages at the root copy.
       # Fails the deploy if any rewritten reference no longer resolves.
       - name: Share assets across languages
-        run: python3 .github/scripts/dedupe-site-assets.py site zh ja es de fr pt ru ko
+        run: python3 .github/scripts/dedupe-site-assets.py publish zh ja es de fr pt ru ko
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: site
+          path: publish
       - uses: actions/deploy-pages@v5
         id: deployment

@@ -1,0 +1,1 @@
+../../_shared/javascripts/product-selector.js

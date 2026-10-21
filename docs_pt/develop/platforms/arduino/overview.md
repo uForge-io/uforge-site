@@ -1,6 +1,6 @@
 ---
 icon: lucide/infinity
-description: "Adequação do ArduinoCore-zephyr para a SF32LB52 DevKit LCD: identificação da placa, escolhas de loader e modos de compilação, limites de integração e caminhos para encaminhar problemas."
+description: "ArduinoCore-zephyr na SF32LB52 DevKit LCD: adequação da plataforma, identificação da placa, loader e modos de compilação, limites de integração e escalonamento."
 tags:
     - Desenvolvimento
     - Arduino

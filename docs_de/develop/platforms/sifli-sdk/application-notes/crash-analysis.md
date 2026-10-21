@@ -1,7 +1,7 @@
 ---
 icon: lucide/file-search-2
 title: "Protokolle erfassen und Abstürze analysieren"
-description: "Zusammengehörige Logs und Speicherabbilder erfassen, den Ausführungskontext eines Absturzes wiederherstellen und Assertions oder Hard Faults mit SiFli-SDK-Tools analysieren."
+description: "Zusammengehörige Logs und Speicherabbilder erfassen, den Absturzkontext wiederherstellen und Assertions oder Hard Faults mit SiFli-SDK-Tools analysieren."
 tags: [Entwicklung, SiFli-SDK, Anwendungshinweise, Debugging]
 ---
 

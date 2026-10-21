@@ -1,6 +1,6 @@
 ---
 icon: lucide/library
-description: "Bibliotecas oficiais da SiFli de símbolos esquemáticos e footprints de PCB para chips e módulos SF32 — JLCEDA/LCEDA Pro, PADS, OrCAD e KiCad — com links para download e um checklist."
+description: "Bibliotecas oficiais da SiFli de símbolos esquemáticos e footprints de PCB para SF32 em JLCEDA/LCEDA Pro, PADS, OrCAD e KiCad, com links e checklist de revisão."
 tags:
     - Hardware
     - EDA

@@ -1,6 +1,6 @@
 ---
 icon: lucide/card-sim
-description: "SF32LB58-MOD: módulo Bluetooth de baixo consumo baseado no MCU SF32LB586VDD36; configuração padrão com 16 + 16 MB de HPI-PSRAM e 1 MB de QSPI-NOR, além de variantes NOR, NAND ou eMMC."
+description: "SF32LB58-MOD: módulo Bluetooth de baixo consumo com SF32LB586VDD36, 16 + 16 MB de HPI-PSRAM, 1 MB de QSPI-NOR e variantes de armazenamento NOR, NAND ou eMMC."
 tags:
   - Hardware
   - Módulo

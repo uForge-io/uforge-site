@@ -1,6 +1,6 @@
 ---
 icon: lucide/memory-stick
-description: "La PSRAM dans les systèmes embarqués : comment la RAM pseudo-statique étend la SRAM, en quoi elle diffère de la DRAM, de la RRAM et de la MRAM, et comment répartir les données dans la hiérarchie mémoire SF32."
+description: "La PSRAM en embarqué : comment la RAM pseudo-statique étend la SRAM, ses différences avec DRAM, RRAM et MRAM, et le placement des données dans la hiérarchie mémoire SF32."
 tags:
     - Architecture
     - Mémoire

@@ -13,7 +13,7 @@ OpenSiFli 提供基于 Zephyr 的 SF32 BETA 版 Arduino Core：[OpenSiFli/Arduin
 这套 Arduino Core 适合编写和验证 Arduino 程序（sketch）、快速检查外设、制作演示及开发早期原型。若要开发量产固件、调优蓝牙（Bluetooth）协议栈、实现图形密集型应用、优化功耗或启动调试自定义开发板，请使用 [SiFli-SDK](../sifli/getting-started-sifli-sdk.md)。
 
 !!! warning "测试版核心"
-    OpenSiFli 将这个 Arduino Core 标记为 **BETA**，并明确说明目前仅供测试。功能、API、加载器（loader）行为、软件包内容和发布机制都可能变化，不要将其视为已达到量产就绪状态。
+    OpenSiFli 将这个 Arduino Core 标记为 **BETA**，并明确说明目前仅供测试。功能、API、加载器（loader）行为、软件包内容和发布机制都可能变化，不要将其视为可用于量产。
 
 ## 你需要准备什么 { #what-youll-need }
 
@@ -130,7 +130,7 @@ arduino-cli upload \
 
 把 `/dev/cu.usbserial-XXXX` 替换成你的开发板串口。在 Windows 上使用对应的 `COM` 口；在 Linux 上使用对应的 `/dev/ttyUSB*` 或 `/dev/ttyACM*`。
 
-把串口监视器设置为 `115200` 波特率。在 **Standard** 构建模式下，示例程序应每秒输出一行。在 **Debug** 构建模式下，先进入 Zephyr shell，然后运行：
+把串口监视器设置为 `115200` 波特率。在 **Standard** 构建模式下，程序应每秒输出一行。在 **Debug** 构建模式下，打开 Zephyr Shell 并运行：
 
 ```text
 sketch

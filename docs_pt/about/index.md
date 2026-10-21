@@ -1,6 +1,6 @@
 ---
 icon: lucide/info
-description: "A μForge.io reúne documentação sobre toda a família de microcontroladores SF32 de ultrabaixo consumo, abrangendo seleção de componentes, projeto de hardware e fluxos de trabalho com o SDK."
+description: "A μForge.io documenta a família de microcontroladores SF32 de ultrabaixo consumo de ponta a ponta: seleção de chips, projeto de hardware e fluxos de trabalho com o SDK."
 ---
 
 # Sobre a plataforma μForge.io { #about-forgeio }

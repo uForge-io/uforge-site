@@ -1,6 +1,6 @@
 ---
 icon: lucide/upload-cloud
-description: "Use el middleware DFU v2 de SiFli-SDK para actualizar el firmware por USB-CDC, BLE y Bluetooth PAN, con los pares de ejemplos documentados para la aplicación y el cargador."
+description: "Use el middleware DFU v2 de SiFli-SDK para actualizar el firmware por USB-CDC, BLE y Bluetooth PAN, con los pares de ejemplos de aplicación y cargador."
 tags:
     - Desarrollo
     - OTA

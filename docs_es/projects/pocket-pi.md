@@ -1,6 +1,6 @@
 ---
 icon: lucide/gamepad-2
-description: "Una ruta de ingeniería reproducible para Pocket Pi: validar emulación NES, pantalla 320 × 240, entradas AW9523, audio, sistemas de archivos de ROM y recuperación de estados guardados en SF32LB52."
+description: "Ruta de ingeniería reproducible de Pocket Pi: validar emulación NES, pantalla 320 × 240, entrada AW9523, audio, sistemas de archivos de ROM y estados guardados."
 tags:
     - Proyectos
     - Videojuegos

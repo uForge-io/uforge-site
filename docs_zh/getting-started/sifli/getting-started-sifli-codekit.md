@@ -41,7 +41,7 @@ SiFli CodeKit 是面向 SiFli-SDK 开发的 VS Code 扩展，提供安装 SDK �
 4. 安装该扩展。
 5. 如果提示，重新加载 VS Code。
 
-如需打开 SDK 管理，请点击 VS Code 侧边栏中的思澈科技（SiFli）图标，再选择 **SDK Manager（SDK 管理）**。也可以打开 **View > Command Palette（查看 > 命令面板）**（默认快捷键 `F1`），运行 **Manage SiFli SDK installation（管理 SiFli SDK 安装）**。具体菜单名称可能随扩展版本变化；请以上方链接的官方安装指南为准。
+如需打开 SDK 管理，请点击 VS Code 侧边栏中的思澈科技（SiFli）图标，再选择 **SDK Manager**。也可以打开 **View > Command Palette**（默认快捷键 `F1`），运行 **Manage SiFli SDK installation**。具体菜单名称可能随扩展版本变化；请以上方链接的官方安装指南为准。
 
 !!! tip
     如果一时找不到所需操作，可先打开 Command Palette，搜索 `SiFli`。
@@ -149,4 +149,4 @@ build_sf32lb52-lcd_n16r8_hcpu
 
 ## 让配置可复现 { #what-sifli-should-add }
 
-请记录 CodeKit 和 SDK 版本、选择的发布 tag 或分支，以及准确的开发板 target。如果菜单或命令名称与本文不同，请查看当前[官方安装指南](https://docs.sifli.com/projects/codekit/get-started/install.html)，并通过 SDK 的[支持开发板列表](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)核对 target。
+请记录 CodeKit 和 SDK 版本、选择的发布 tag 或分支，以及准确的开发板 target。如果菜单或命令名称与本文不同，请以当前[官方安装指南](https://docs.sifli.com/projects/codekit/get-started/install.html)和 SDK 的[支持开发板列表](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)为准，并核对与你所安装版本对应的内容。

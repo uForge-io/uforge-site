@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "Diretrizes de projeto do esquemático do MCU SF32LB56x: alimentação, modos de operação e fontes de despertar, geração de clock, RF, interfaces de display/toque/retroiluminação, armazenamento/sensores/áudio/conectividade e produção."
+description: "Diretrizes de esquemático do SF32LB56x: alimentação, modos e fontes de despertar, clocks, RF, display/toque/retroiluminação, áudio, armazenamento e produção."
 tags:
     - Hardware
     - Chip

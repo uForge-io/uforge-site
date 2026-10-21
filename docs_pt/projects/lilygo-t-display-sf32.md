@@ -1,6 +1,6 @@
 ---
 icon: lucide/watch
-description: "Um roteiro de engenharia de produto para a plataforma T-Display-SF32 de terceiros da LilyGO: estabelecer a base do fornecedor, validar o display, os periféricos, a alimentação e a recuperação, reproduzir a compilação do SiFli-SDK e fazer adaptações controladas."
+description: "Roteiro de engenharia para a T-Display-SF32 da LilyGO: base do fornecedor, validação de display, periféricos, alimentação e recuperação, e adaptação do build SiFli-SDK."
 tags:
     - Projetos
     - Display

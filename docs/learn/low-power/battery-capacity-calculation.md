@@ -1,7 +1,7 @@
 ---
 icon: lucide/battery-charging
 title: "Battery State-of-Charge Estimation"
-description: "Estimate battery percentage on SF32 products from battery voltage using the SiFli-SDK battery calculator, matched charge/discharge curves, charger-state detection, and multi-stage filtering."
+description: "Estimate SF32 battery percentage from voltage using the SiFli-SDK calculator: discharge curves, charger-state detection, and multi-stage filtering."
 tags:
   - Low Power
   - Battery

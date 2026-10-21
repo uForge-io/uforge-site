@@ -1,6 +1,6 @@
 ---
 icon: lucide/keyboard
-description: "An engineering path for the SF32LB52-based SuperKey with three displays, USB HID/CDC, and a desktop companion: reproduce, validate communications and recovery, adapt deliberately, and hand off to product design."
+description: "Engineering path for the SF32LB52-based SuperKey (three displays, USB HID/CDC, desktop companion): reproduce, validate, adapt, and hand off to product design."
 tags:
     - Projects
     - USB

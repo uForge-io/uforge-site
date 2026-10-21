@@ -1,7 +1,7 @@
 ---
 icon: lucide/bluetooth-connected
 title: "Exemples du SDK Bluetooth"
-description: "Choisissez l'exemple du SiFli-SDK adapté aux services BLE, aux profils Bluetooth classiques, à l'intégration avec un téléphone, à l'OTA, au transfert de données ou à la diffusion LE Audio."
+description: "Choisir l'exemple Bluetooth SiFli-SDK adapté : services BLE, profils Bluetooth classique, intégration téléphone, OTA, transfert de données ou diffusion LE Audio."
 tags:
   - Bluetooth
   - Exemples

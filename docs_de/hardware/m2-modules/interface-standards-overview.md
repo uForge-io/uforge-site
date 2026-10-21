@@ -1,6 +1,6 @@
 ---
 icon: lucide/cable
-description: "Die μForge-M2-Modulschnittstellenkonventionen: Verwenden Sie die Benennungsregeln für eine stabile Terminologie und validieren Sie den Entwurf der Schnittstellendefinition auf Pin-Ebene, bevor Sie die Trägerplatine festlegen."
+description: "M2-Schnittstellenkonventionen von μForge: Benennungsregeln für stabile Terminologie nutzen und die Pin-Definition als Entwurf vor der Trägerplatine validieren."
 tags:
     - Hardware
     - Modul

@@ -45,6 +45,7 @@ tags:
 </div>
 
 ## 硬件与软件规格 { #hardware-and-software-specifications }
+
 ### 硬件规格 { #hardware-specification }
 
 <div align="center"><em>表：硬件规格</em></div>
@@ -53,7 +54,7 @@ tags:
 
 | 组件 | 所需规格 | 作用 | 状态 | 获取方式 | 兼容性与替代说明 |
 |:-----|:---------|:-----|:-----|:---------|:-----------------|
-| SF32LB52-DevKit-ULP / LCKFB-HSPI-SF32LB52-ULP | `sf32lb52-lchspi-ulp` 目标；至少 2 台，最多 8 台 | 运行 Talkback、提供 BLE、麦克风、显示、按键、RGB LED、电源和音频路径 | 必需 | [μForge 板卡资料](../sf32-products/devkits/SF32LB52-DevKit-ULP.md)；[立创开发板页面](https://lckfb.com/project/detail/lckfb-hspi-sf32lb52-ulp?param=baseInfo)；[思澈科技（SiFli）样片/套件商店](https://sifli.taobao.com/) | 所有证据必须记录硬件版本；未经验证的 SF32LB52 板卡不能视为等价替代 |
+| SF32LB52-DevKit-ULP / LCKFB-HSPI-SF32LB52-ULP | `sf32lb52-lchspi-ulp` 目标；至少 2 台，最多 8 台 | 运行 Talkback、提供 BLE、麦克风、显示、按键、RGB LED、电源和音频路径 | 必需 | [μForge 板卡资料](../sf32-products/devkits/SF32LB52-DevKit-ULP.md)；[立创开发板页面](https://lckfb.com/project/detail/lckfb-hspi-sf32lb52-ulp?param=baseInfo)；[思澈科技（SiFli）样片/套件商店](https://sifli.taobao.com/) | 每块板的硬件版本都要记录；未经验证的 SF32LB52 板卡不能视为等价替代 |
 | 扬声器 | 每台板卡使用 3 W/4 Ω 或 2 W/8 Ω 外接扬声器，接入 GH-1.25 mm 接口 | 播放接收语音 | 必需 | 开发板套件通常包含；购买前按[板卡资料](../sf32-products/devkits/SF32LB52-DevKit-ULP.md)核对套件内容 | 不得接入超出板载 Class-D 功放和连接器能力的负载 |
 | USB 数据线与主机 | 每台板卡一条可传输数据的 USB-C 线；主机可运行 SiFli-SDK 工具 | 供电、串口下载与日志 | 必需 | 标准 USB-C 数据线；工具入口见[SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) | 只支持充电的线缆无法完成下载；记录串口号和主机环境 |
 | 单节锂电池 | 与板卡连接器、极性和充电路径匹配 | 移动使用、睡眠/唤醒和电量验证 | 产品验证必需；台架功能验证可选 | 供应渠道未由 Talkback 仓库单独发布；按[板卡资料](../sf32-products/devkits/SF32LB52-DevKit-ULP.md)核对接口后采购 | 接入前必须确认极性、电压范围、容量和保护电路；不得根据插头外观推断兼容性 |
@@ -71,13 +72,14 @@ tags:
 |:-------------|:---------------|:-----|:-----|:---------|:-----------------|
 | OpenSiFli `sifli-sdk-demo/talkback` | 本文审核提交 [`6fa55ac`](https://github.com/OpenSiFli/sifli-sdk-demo/commit/6fa55ac65b51fca5eac6660a7e481a30e07388ee) | 应用、板级配置和构建入口 | 必需 | [Talkback 源码目录](https://github.com/OpenSiFli/sifli-sdk-demo/tree/main/talkback) | 上游 `main` 会移动；建立证据前固定提交。当前真实路径是 `talkback/project`，README 中的 `example/ble/talkback/project` 是过期路径 |
 | SiFli-SDK | `conanfile.py` 声明兼容 `^2.4`；项目未固定具体 SDK 提交 | RT-Thread、BLE、音频、电源、构建和下载基础 | 必需 | [OpenSiFli/SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) | 团队必须选定一个满足 `^2.4` 的具体提交并记录；不得用移动的 `main` 代替基线版本 |
-| `talk_back/1.2@sifli` | `1.2` | BLE Talkback 网络/音频组件 | 必需 | 由项目的 [Conan 清单](https://github.com/OpenSiFli/sifli-sdk-demo/blob/6fa55ac65b51fca5eac6660a7e481a30e07388ee/talkback/project/conanfile.py)解析 | 上游未在该页面公开独立源码、包校验值、获取服务器和完整许可说明；缓存包和解析记录必须归档，并在产品评审中关闭此风险 |
+| `talk_back/1.2@sifli` | `1.2` | BLE Talkback 网络/音频组件 | 必需 | 由项目的 [Conan 清单](https://github.com/OpenSiFli/sifli-sdk-demo/blob/6fa55ac65b51fca5eac6660a7e481a30e07388ee/talkback/project/conanfile.py)解析 | 上游未在该页面公开独立源码、包校验值、包服务器和完整许可说明；请归档该包和解析记录，并在产品使用前关闭此风险 |
 | Opus 与 WebRTC AECM/AGC 配置 | 由固定应用提交、SDK 提交和 Conan 依赖共同确定 | 语音编码、回声处理和增益控制 | 必需 | [项目配置](https://github.com/OpenSiFli/sifli-sdk-demo/blob/6fa55ac65b51fca5eac6660a7e481a30e07388ee/talkback/project/proj.conf)及固定 SDK 依赖 | 不得只记录功能宏；还要保存实际解析到的库版本和许可材料 |
 | SCons、编译器与 UART 下载工具 | 使用所选 SiFli-SDK 对应版本 | 配置、构建和下载镜像 | 必需 | 随[所选 SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK)环境提供 | 记录主机系统、工具链版本、构建命令和生成脚本校验值 |
 
 </div>
 
 ## 选择受支持的基线 { #choose-a-supported-baseline }
+
 从两台相同版本的 `SF32LB52-DevKit-ULP` 开始。先将仓库固定到 `6fa55ac`，再选定并记录一个满足 `^2.4` 的 SiFli-SDK 提交，保存 Conan 解析出的 `talk_back/1.2@sifli` 包信息。不要在第一次复现时修改音频参数、角色逻辑或低功耗计时。
 
 在仓库根目录进入实际存在的项目路径：
@@ -152,7 +154,7 @@ flowchart LR
 
 1. 固定应用提交和具体 SDK 提交，保存依赖解析输出。
 2. 在干净目录中为 `sf32lb52-lchspi-ulp` 构建并下载两台设备。
-3. 确认设备待机默认为 Slave/红灯，并核对按键、屏幕、电量和扬声器路径。
+3. 确认每台设备启动后默认为 Slave、LED 红色常亮，再核对按键、屏幕、电量和扬声器路径。
 
 **保留证据：** 完整版本清单、构建/下载日志、固件校验值、两块板的硬件版本和启动记录。
 
@@ -163,7 +165,7 @@ flowchart LR
 **目标：** 证明用户能够无调试介入地建立和使用最小房间。
 
 1. 待机时短按 KEY2，将一台设为 Master（蓝色常亮），另一台保持 Slave（红色常亮）。
-2. 两台设备长按 KEY2：Master 建房、Slave 扫描；配对窗口为 30 秒。
+2. 两台设备长按 KEY2：Master 建房、Slave 扫描；配对 30 秒后超时。
 3. 等待状态下由 Master 长按 KEY2 确认开始；通话状态下分别按住 KEY2 发言并松开停止。
 4. 核对发送时绿色常亮、接收时橙色常亮，并验证两个方向的可懂语音。
 
@@ -190,12 +192,12 @@ flowchart LR
 
 1. 在安静、近端双讲、背景噪声和不同扬声器音量下记录可懂度、削波、回声和 PTT 首尾截断。
 2. 在目标距离、遮挡和 2.4 GHz 干扰条件下记录连接、丢音和恢复行为。
-3. 验证 60 秒无输入进入睡眠、角色复位为 Slave、任意按键唤醒、长按电源键关机/开机，以及低于 20% 时的 LED 提示。
+3. 验证 60 秒无输入进入睡眠、角色复位为 Slave、任意按键唤醒、长按电源键关机/开机，以及电量低于 20% 时的 LED 提示。
 4. 测量待机、发言、接收、睡眠和唤醒电流；不要把开发板测量直接当作量产产品续航。
 
 **保留证据：** 测试环境、板卡/天线姿态、音频文件、距离和干扰条件、电流轨迹、电池参数和恢复结果。
 
-**关口 4 退出条件：** 产品团队已为目标环境定义并验证声学、RF、功耗和唤醒阈值，所有未达标项都有负责人和处置决定。
+**关口 4 退出条件：** 产品团队已为目标环境定义声学、RF、功耗和唤醒阈值并全部达标，每个未达标项都有负责人和处置决定。
 
 ## 阶段 5 — 产品就绪度评审 { #stage-5-product-readiness-review }
 
@@ -212,10 +214,9 @@ flowchart LR
 
 ## 产品设计阶段交接 { #handoff-to-product-design }
 
-交接包应包含：固定源码/SDK/依赖、角色与状态机、容量和恢复矩阵、音频/RF/功耗测量、天线与声学假设、电池和充电边界、安全/隐私模型、许可材料、生产测试需求和恢复方案。使用 [SF32LB52x 集成路径](../sf32-products/chips/SF32LB52x.md#integration-path)选择芯片、模块、开发板、硬件设计指南和检查清单，并将验证过的行为映射到定制原理图和布局，而不是照搬开发板结论。
+交接包应包含：固定源码/SDK/依赖、角色与状态机、容量和恢复矩阵、音频/RF/功耗测量、天线与声学假设、电池和充电边界、安全/隐私模型、许可材料、生产测试需求和恢复方案。使用 [SF32LB52x 集成路径](../sf32-products/chips/SF32LB52x.md#integration-path)选择芯片、模块、开发板、硬件设计指南和检查清单，将验证过的行为落实到定制原理图和布局中，并重新核对，而不是默认开发板结果可以原样沿用。
 
 ## 权威来源 { #authoritative-sources }
-- [思澈科技（SiFli）SF32LB52-DevKit-ULP 中文 Wiki 源文件](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-DevKit-ULP.md)
 
 - [OpenSiFli Talkback 目录](https://github.com/OpenSiFli/sifli-sdk-demo/tree/main/talkback)
 - [本文审核的应用提交 `6fa55ac`](https://github.com/OpenSiFli/sifli-sdk-demo/commit/6fa55ac65b51fca5eac6660a7e481a30e07388ee)
@@ -223,4 +224,5 @@ flowchart LR
 - [Talkback Conan 清单](https://github.com/OpenSiFli/sifli-sdk-demo/blob/6fa55ac65b51fca5eac6660a7e481a30e07388ee/talkback/project/conanfile.py)
 - [Talkback 项目配置](https://github.com/OpenSiFli/sifli-sdk-demo/blob/6fa55ac65b51fca5eac6660a7e481a30e07388ee/talkback/project/proj.conf)
 - [OpenSiFli/SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK)
-- [SF32LB52-DevKit-ULP 官方 Wiki 源文件](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-ULP.md)
+- [SF32LB52-DevKit-ULP 官方 Wiki 源文件（英文）](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-ULP.md)
+- [思澈科技（SiFli）SF32LB52-DevKit-ULP 中文 Wiki 源文件](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-DevKit-ULP.md)

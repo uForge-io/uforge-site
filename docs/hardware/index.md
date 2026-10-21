@@ -39,7 +39,7 @@ Choose the chip or module at the center of your design, then open the matching i
 | SF32LB52x | [Guide](chip-guides/SF32LB52x_hardware_design_guide.md) | [Checklist](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | Designing an SF32LB52x chip-down board. |
 | SF32LB55x | [Guide](chip-guides/SF32LB55x_hardware_design_guide.md) | [Checklist](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | Designing an SF32LB55x chip-down board. |
 | SF32LB56x | [Guide](chip-guides/SF32LB56x_hardware_design_guide.md) | [Checklist](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | Designing an SF32LB56x chip-down board. |
-| SF32LB57x | Guide | Schematic / PCB layout | Designing an SF32LB57x chip-down board. |
+| SF32LB57x | [Guide](chip-guides/SF32LB57x_hardware_design_guide.md) | [Schematic](chip-guides/SF32LB57x_schematic_checklist.md) / [PCB layout](chip-guides/SF32LB57x_pcb_layout_checklist.md) | Designing an SF32LB57x chip-down board. |
 | SF32LB58x | [Guide](chip-guides/SF32LB58x_hardware_design_guide.md) | [Checklist](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | Designing an SF32LB58x chip-down board. |
 
 </div>

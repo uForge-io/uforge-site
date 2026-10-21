@@ -2,7 +2,7 @@
 icon: lucide/clipboard-check
 hide:
     - navigation
-description: "Liste de contrôle de revue de conception, documents et références connexes, annexes de schéma/PCB/mécanique/alimentation de référence, et historique des révisions pour le guide de conception matérielle SF32LB52x."
+description: "Liste de revue de conception, documents connexes, annexes de référence (schéma, PCB, mécanique, alimentation) et historique du guide matériel SF32LB52x."
 tags:
     - Matériel
     - Puce

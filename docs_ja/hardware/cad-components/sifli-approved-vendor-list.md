@@ -395,5 +395,5 @@ V0.3にはタッチコントローラーの掲載がありません。これは�
 ## 関連ページ { #related-pages }
 
 - [SF32LB52xハードウェア設計ガイド](../chip-guides/SF32LB52x_hardware_design_guide.md) — このリストの部品を複数参照している回路図・レイアウト設計の指針です。
-- SF32LB57xハードウェア設計ガイド
+- [SF32LB57xハードウェア設計ガイド](../chip-guides/SF32LB57x_hardware_design_guide.md)
 - [SF32ファミリー](../../sf32-products/family/SF32_family.md)

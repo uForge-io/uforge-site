@@ -1,6 +1,6 @@
 ---
 icon: lucide/activity
-description: "Un afficheur du niveau de signal dans la bande Bluetooth basé sur SF32LB52 : reproduire Radiation Monitor, vérifier son balayage à 79 points, le lissage du RSSI et la relecture de l'historique, puis définir les limites d'étalonnage et de revue produit."
+description: "Afficheur de signal en bande Bluetooth sur SF32LB52 : reproduire Radiation Monitor, vérifier balayage à 79 points, lissage RSSI, historique et limites d'étalonnage."
 tags:
     - Projets
     - Bluetooth

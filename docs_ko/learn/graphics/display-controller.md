@@ -58,7 +58,7 @@ EPD와 Memory-in-Pixel은 패널 기술 또는 업데이트 동작을 설명하�
 | **SF32LB55x** | 3선/4선 SPI, Dual-SPI, Quad-SPI, MCU/8080, DPI/RGB, 직렬/병렬 JDI, MIPI DSI 커맨드 모드 | 문서화된 2레인 MIPI DSI 인터페이스는 BGA145/169 패키지에서 사용할 수 있으며, JDI와 MIPI DSI + SPI/DSPI 듀얼 디스플레이 동작은 557VD3A6에만 나열되어 있습니다. 커맨드 모드에는 내부 SRAM/GRAM이 있는 패널 컨트롤러가 필요합니다. | 호환되는 BGA 패키지와 MIPI 커맨드 모드 패널을 사용하는 웨어러블 및 연결형 디스플레이 제품 |
 | **SF32LB56xU** | 3선/4선 SPI, Dual-SPI, Quad-SPI, 직렬 JDI | 나열된 U 변형은 QFN68L을 사용합니다. 정확한 오더 코드와 핀 멀티플렉싱 설정을 확인하십시오. | QSPI 대역폭과 적은 핀 수가 우선인 소형 직렬 패널 설계 |
 | **SF32LB56xV** | 3선/4선 SPI, Dual-SPI, Quad-SPI, DBI 8080, DPI/RGB, 직렬/병렬 JDI | 나열된 V 변형은 WBBGA175(칩 모델 가이드에서는 BGA175)를 사용합니다. 정확한 오더 코드에 필요한 핀과 보드 배선을 확인하십시오. | 8080, DPI/RGB 또는 병렬 JDI가 필요한 고해상도 또는 고리프레시 설계 |
-| **SF32LB57x** | 3선/4선 SPI, Dual-SPI, Quad-SPI, 8비트/16비트 8080/DBI, DPI/RGB, JDI, 직접 EPD | 패키지 옵션에는 QFN68L, QFN80L, BGA112가 있습니다. 정확한 오더 코드, 노출된 핀, 선택한 패널 드라이버 경로를 확인하십시오. | 병렬, 직렬, JDI, EPD 등 폭넓은 디스플레이 요구가 있는 그래픽 중심 설계 |
+| **SF32LB57x** | 3선/4선 SPI, Dual-SPI, Quad-SPI, 8비트/16비트 8080/DBI, DPI/RGB, JDI, 직접 EPD | 패키지 옵션에는 QFN68, QFN80, BGA112가 있습니다. 정확한 오더 코드, 노출된 핀, 선택한 패널 드라이버 경로를 확인하십시오. | 병렬, 직렬, JDI, EPD 등 폭넓은 디스플레이 요구가 있는 그래픽 중심 설계 |
 | **SF32LB58x** | 3선/4선 SPI, Dual-SPI, Quad-SPI, MCU/8080, DPI/RGB, 직렬/병렬 JDI, 2레인 MIPI DSI 커맨드 및 비디오 모드 | 나열된 오더 코드는 BGA256을 사용합니다. 커맨드 모드는 내부 SRAM/GRAM이 있는 패널 컨트롤러를 사용하며, 비디오 모드는 RAM이 없는 패널 컨트롤러도 지원합니다. 모델 가이드에는 듀얼 디스플레이용 MIPI DSI + SPI/DSPI/QSPI도 나열되어 있습니다. 해당 설계의 LCD 컨트롤러와 핀 멀티플렉싱 설정을 확인하십시오. | 듀얼 디스플레이 구성과, 컨트롤러 RAM이 있거나 없는 MIPI DSI 패널을 포함한 고해상도 및 대역폭 요구가 큰 UI 설계 |
 
 </div>

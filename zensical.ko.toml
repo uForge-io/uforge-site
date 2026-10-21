@@ -33,6 +33,7 @@ nav = [
       "sf32-products/chips/SF32LB52x.md",
       "sf32-products/chips/SF32LB55x.md",
       "sf32-products/chips/SF32LB56x.md",
+      "sf32-products/chips/SF32LB57x.md",
       "sf32-products/chips/SF32LB58x.md"
     ]},
     { "모듈" = [
@@ -144,6 +145,20 @@ nav = [
         { "회로도 체크리스트" = "hardware/chip-guides/SF32LB56x_schematic_checklist.md" },
         { "PCB 레이아웃 가이드라인" = "hardware/chip-guides/SF32LB56x_pcb_layout.md" },
         { "설계 검토 체크리스트 및 참고 자료" = "hardware/chip-guides/SF32LB56x_review_and_reference.md" }
+      ]},
+      { "SF32LB57x" = [
+        { "개요" = "hardware/chip-guides/SF32LB57x_hardware_design_guide.md" },
+        { "회로도 설계 가이드라인" = [
+          { "최소 시스템 및 전원" = "hardware/chip-guides/SF32LB57x_schematic_system_power.md" },
+          { "클럭, RF 및 사용자 인터페이스" = "hardware/chip-guides/SF32LB57x_schematic_clock_rf_interfaces.md" },
+          { "스토리지 및 제조" = "hardware/chip-guides/SF32LB57x_schematic_storage_mfg.md" },
+          { "회로도 체크리스트" = "hardware/chip-guides/SF32LB57x_schematic_checklist.md" }
+        ]},
+        { "PCB 레이아웃 가이드라인" = [
+          { "설계 가이드라인" = "hardware/chip-guides/SF32LB57x_pcb_layout.md" },
+          { "PCB 레이아웃 체크리스트" = "hardware/chip-guides/SF32LB57x_pcb_layout_checklist.md" }
+        ]},
+        { "설계 검토 체크리스트 및 참고 자료" = "hardware/chip-guides/SF32LB57x_review_and_reference.md" }
       ]},
       { "SF32LB58x" = [
         { "개요" = "hardware/chip-guides/SF32LB58x_hardware_design_guide.md" },

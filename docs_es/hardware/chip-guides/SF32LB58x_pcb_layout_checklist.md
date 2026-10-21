@@ -2,7 +2,7 @@
 icon: lucide/list-checks
 hide:
     - navigation
-description: "Lista de comprobación punto por punto para revisar el diseño de PCB de la MCU SF32LB58x: encapsulado, alimentación, reloj, RF, audio, señales de alta velocidad y apilado de capas."
+description: "Lista de comprobación punto por punto del diseño de PCB de la MCU SF32LB58x: encapsulado, alimentación, reloj, RF, audio, señales de alta velocidad y apilado de capas."
 tags:
     - Hardware
     - Chip

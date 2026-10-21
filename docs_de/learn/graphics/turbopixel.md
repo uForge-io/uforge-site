@@ -1,6 +1,6 @@
 ---
 icon: lucide/minimize-2
-description: "Wie TurboPixel verlustbehaftete Framebuffer-Kompression mit festem Verhältnis nutzt, um Framebuffer-Speicherbedarf und Display-Lesezugriffe auf unterstützten SF32-Geräten zu reduzieren."
+description: "Wie TurboPixels verlustbehaftete Framebuffer-Kompression mit festem Verhältnis Speicherbedarf und Display-Lesezugriffe auf unterstützten SF32-Geräten senkt."
 tags:
   - Grafik
 ---

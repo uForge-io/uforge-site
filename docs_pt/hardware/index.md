@@ -39,7 +39,7 @@ Escolha o chip ou módulo principal do projeto e consulte o material de implemen
 | SF32LB52x | [Guia](chip-guides/SF32LB52x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | Projetar uma placa chip-down com o SF32LB52x. |
 | SF32LB55x | [Guia](chip-guides/SF32LB55x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | Projetar uma placa chip-down com o SF32LB55x. |
 | SF32LB56x | [Guia](chip-guides/SF32LB56x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | Projetar uma placa chip-down com o SF32LB56x. |
-| SF32LB57x | Guia | Esquemático / Layout da PCB | Projetar uma placa chip-down com o SF32LB57x. |
+| SF32LB57x | [Guia](chip-guides/SF32LB57x_hardware_design_guide.md) | [Esquemático](chip-guides/SF32LB57x_schematic_checklist.md) / [Layout da PCB](chip-guides/SF32LB57x_pcb_layout_checklist.md) | Projetar uma placa chip-down com o SF32LB57x. |
 | SF32LB58x | [Guia](chip-guides/SF32LB58x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | Projetar uma placa chip-down com o SF32LB58x. |
 
 </div>

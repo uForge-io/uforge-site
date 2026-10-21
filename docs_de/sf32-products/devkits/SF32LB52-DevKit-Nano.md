@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-Nano: kompaktes SF32LB52x-Entwicklungsboard mit Lötrandkontakten für produktnahe Prototypen, die Inbetriebnahme kleiner Displays und die Evaluierung zum Auflöten."
+description: "SF32LB52-DevKit-Nano: kompaktes SF32LB52x-Entwicklungsboard mit Lötrandkontakten für produktnahe Prototypen, kleine Displays und Evaluierung zum Auflöten."
 tags:
     - Hardware
     - Entwicklungsboard

@@ -16,12 +16,12 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 
 选型时，可以先按思澈科技（SiFli）芯片型号指南列出的主要型号，区分两类供电方案：
 
-- **SF32LB520/3/5/7**：锂离子电池供电变体，集成充电路径
+- **SF32LB520/3/5/7**：锂离子电池供电型号，集成充电路径
 - **52B/D/E/G/J**：外部稳压供电型号，其中 52B/E/G/J 面向 3.3 V 系统，**52D** 面向特殊 1.8 V 超低功耗系统
 
 这几组型号不能在板级上直接互换。电池供电组与外部供电组之间并不引脚兼容；即使封装布局相近，1.8 V 的 52D 与 3.3 V 的 52B/E/G/J 也因供电条件不同而不能直接替换。
 
-[^1]: STAR-MC1 是安谋科技（Arm China）的可配置 Armv8-M Mainline 嵌入式 CPU IP。思澈科技（SiFli）在兼容的 SF32 器件中，将其标注为 Arm Cortex-M33 STAR-MC1 应用处理器。其 Cortex-M33 级软件模型有助于沿用既有 Cortex-M33 固件、中间件、RTOS 移植和工具链，但仍需完成器件专用的常规集成工作。CU、SP 和 SE 配置主要在缓存、TCM、XIPU 和 TrustZone 能力上有所不同；Arm 自定义指令/CDE 和协处理器接口属于可选能力，具体功能以目标 SF32 料号为准。思澈科技（SiFli）文档会依上下文使用 ***Arm Cortex-M33 STAR-MC1*** 或 ***Arm Cortex-M33***。
+[^1]: STAR-MC1 是安谋科技（Arm China）的可配置 Armv8-M Mainline 嵌入式 CPU IP。思澈科技（SiFli）在兼容的 SF32 器件中，将其标注为 Arm Cortex-M33 STAR-MC1 应用处理器。其 Cortex-M33 级软件模型有助于沿用既有 Cortex-M33 固件、中间件、RTOS 移植和工具链，但仍需完成器件专用的常规集成工作。CU、SP 和 SE 配置主要在缓存、TCM、XIPU 和 TrustZone 能力上有所不同；Arm 自定义指令/CDE 和协处理器接口属于可选能力，须针对具体 SF32 料号核实。思澈科技（SiFli）文档会依上下文使用 ***Arm Cortex-M33 STAR-MC1*** 或 ***Arm Cortex-M33***。
 
 ## 应用场景 { #applications }
 
@@ -116,7 +116,7 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 - 1 路 12 位通用 ADC
 - 温度传感器
 - RTC 与看门狗定时器
-- 依据具体家族提供 44 或 45 路 GPIO
+- 按型号系列提供 44 或 45 路 GPIO
 
 ### 电源 { #power-supply }
 
@@ -124,19 +124,19 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 
 - **外部稳压供电 3.3 V 组：52B/E/G/J** —— 面向 3.3 V 稳压外部供电系统，组内型号彼此引脚兼容。
 
-- **外部稳压供电 1.8 V 组：SF32LB52D** —— 面向特殊超低功耗 1.8 V 系统，不能与 3.3 V 组直接混用。
+- **外部稳压供电 1.8 V 组：SF32LB52D** —— 面向特殊超低功耗 1.8 V 系统，与 3.3 V 型号在电气上不能互换。
 
-电池供电组与外部稳压供电组在芯片实现上相互独立，因此**不可引脚兼容**。
+电池供电组与外部稳压供电组是相互独立的芯片配置，两个供电系列之间**不引脚兼容**。
 
 ## 系列型号 { #family-variants }
 
 对于思澈科技（SiFli）芯片型号指南列出的主要型号，可按以下方式选型：
 
-- **SF32LB520/3/5/7**：锂电池直供组，组内引脚兼容（pin-to-pin）
-- **52B/E/G/J**：3.3 V 外部稳压供电组，组内引脚兼容（pin-to-pin）
-- **SF32LB52D**：特殊 1.8 V 外部稳压供电型号
+- **SF32LB520/3/5/7**：锂离子电池供电组，组内引脚兼容
+- **52B/E/G/J**：标准 3.3 V 外部供电组，组内引脚兼容
+- **SF32LB52D**：面向超低功耗场景的特殊 1.8 V 外部供电型号
 
-若希望在不同供电组之间寻找最接近的合封存储对应关系，可参考：
+若需在不同存储规格之间迁移，最接近的对应关系如下：
 
 - 520 ↔ 52B
 - 523 ↔ 52E，52D 为其 1.8 V 对应型号
@@ -160,16 +160,35 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 
 </div>
 
-本表依据思澈科技（SiFli）的[芯片型号指南](https://wiki.sifli.com/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)整理的是主要型号，并非完整的订购型号目录。当前链接的外部供电版数据手册还列有 **SF32LB52HUD6**（1.8 V、QFN68L、128 Mb PSRAM）；硬件设计指南中也使用了 `52AUx6` 和 `52D/F/HUx6` 等后缀写法。现有资料中的型号信息尚未统一，无法整理出一份完整且一致的对照表。设计定型前，任何此类 SKU 的订购状态、供电限制、合封存储接口和 I/O 规格都应以对应的最新版数据手册为准。
+本表依据思澈科技（SiFli）的[芯片型号指南](https://wiki.sifli.com/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)列出主要型号，并非完整的订购型号目录。当前链接的外部供电版数据手册还列有 **SF32LB52HUD6**（1.8 V、QFN68L、128 Mb PSRAM）；硬件设计指南中也使用了 `52AUx6` 和 `52D/F/HUx6` 等后缀写法。现有资料没有给出一份统一一致的型号表。设计定型前，任何此类 SKU 的订购状态、供电限制、合封存储接口和 I/O 规格都应以对应的最新版数据手册为准。
 
 ## 集成路径 { #integration-path }
 
-使用以下顺序将 SF32LB52x 的初步选型推进为已验证的设计：
+按以下步骤，把 SF32LB52x 的候选清单推进为经过验证的设计：
 
 1. **验证固件路径。** 从 [SiFli-SDK 快速开始](../../getting-started/sifli/getting-started-sifli-sdk.md)开始，再通过 [SiFli-SDK 工作流](../../develop/platforms/sifli-sdk/overview.md)和[示例](../../develop/examples/index.md)验证所需外设和蓝牙行为。
 2. **选择集成载体。** 如果产品适合使用已集成 RF 的模组，请评估 [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md)；否则选择最接近的 [SF32LB52 开发板](../devkits/SF32LB52-DevKit-LCD.md)，用于早期固件和外设验证。
 3. **进行硬件设计与评审。** 在发布原理图或布局前，使用本地[硬件设计指南](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)，包括其[原理图核对表](../../hardware/chip-guides/SF32LB52x_schematic_checklist.md)和 [PCB 布局核对表](../../hardware/chip-guides/SF32LB52x_pcb_layout_checklist.md)。确认正确的供电系列基线：520/3/5/7、52B/E/G/J 或 52D。
 4. **核对权威来源。** 针对准确的可订购型号和封装，核对适用的[数据手册](#development-resources)，以及思澈科技（SiFli）的 [520/3/5/7 硬件设计指南]或 [52B/D/E/G/J 硬件设计指南]。
+
+<!-- uf-faq:start -->
+## 常见问题 { #frequently-asked-questions }
+
+**SF32LB52x 的主要规格是什么？**
+SF32LB52x 由应用 CPU（Cortex-M33 @240 MHz）与低功耗内核（Cortex-M33 @24/48 MHz，专用蓝牙控制器）组成，内置 576 KB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 2.0 Lite。封装：QFN68（7 × 7 mm）。USB 2.0 FS。以上为系列级参数，具体以所选型号的数据手册为准。
+
+**SF32LB52x 支持哪些显示接口？**
+SPI / DSPI / QSPI / 8080 / EPD / JDI。具体支持情况因型号和封装而异。
+
+**SF32LB52x 的封装内存储器有多大？**
+按型号不同，封装内 PSRAM 最多 16 MB，封装内 NOR Flash 最多 4 MB。
+
+**SF32LB52x 需要什么供电电压？**
+按变体不同为 3.2–4.7 V (520/3/5/7), 2.97–3.63 V (52B/E/G/J), 1.8 V (52D)，请以数据手册确认具体范围。
+
+**如何开始基于 SF32LB52x 的硬件设计？**
+请先阅读 [SF32LB52x 硬件设计指南](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求，并在投板前使用原理图与布局检查清单。
+<!-- uf-faq:end -->
 
 ## 相关产品 { #related-products }
 
@@ -179,14 +198,11 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 
 ### 开发套件 { #development-kits }
 
-- [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md) 是面向 SF32LB52 模组生态的主力显示开发板，支持 QSPI 和 MCU/8080 LCD 连接。
+- [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md) 是 SF32LB52 模组生态中以显示为主的主要启动调试板，支持 QSPI 和 MCU/8080 LCD 连接。
 - [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) 是面向 52B/52J 类外部供电设计的紧凑型核心板，适合快速完成固件、GPIO 与低功耗启动调试。
-- [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) 是 52 系列中尺寸最小的开发板，更接近体积受限产品的开发形态。
+- [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) 是 52 系列中尺寸最小的开发板，适合目标产品对尺寸有限制的场景。
 - [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) 更偏向低功耗与电池应用评估，适合做紧凑型方案实验。
 
 ### 参考产品 { #reference-products }
 
 典型 SF32LB52 终端包括入门级智能手表、运动手环、蓝牙配件、紧凑型图形控制器、电子货架标签、智能徽章、便携式标签打印机，以及成本敏感的电动自行车 / 电动滑板车显示设备。
-
-!!! note "自动生成内容"
-    本页是在没有现成专用源文档的情况下编写的。依赖其中的技术结论前，请先对照思澈科技（SiFli）的官方文档核实。

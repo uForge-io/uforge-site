@@ -92,9 +92,9 @@ tags:
 | 路径 | 适用情况 | 应视为 |
 |:-----|:---------|:-------|
 | [Zephyr](platforms/zephyr/overview.md) | 需要 Zephyr API、设备树（devicetree）、Kconfig，或进行下游开发板适配工作。 | 面向特定开发板的下游评估路径。 |
-| [Arduino](platforms/arduino/overview.md) | 需要在其支持的开发板上编写 Sketch 或快速完成外设原型。 | BETA 阶段、开发板范围受限的路径。 |
+| [Arduino](platforms/arduino/overview.md) | 需要在其支持的开发板上编写 Sketch 或快速完成外设原型。 | Beta 阶段、开发板范围受限的路径。 |
 | [MicroPython](platforms/micropython/status.md) | 正在评估未来的脚本支持。 | 在出现可复现的公开移植版本前的状态页。 |
-| [Rust](platforms/rust/overview.md) | 能够评估 HAL/PAC 工作并向上游贡献修复。 | 社区进行中的开发路径。 |
+| [Rust](platforms/rust/overview.md) | 能够评估 HAL/PAC 工作并向上游贡献修复。 | 社区仍在推进中的路径。 |
 
 </div>
 

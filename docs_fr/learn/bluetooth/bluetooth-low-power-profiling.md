@@ -1,7 +1,7 @@
 ---
 icon: lucide/chart-no-axes-combined
 title: "Mesurer et analyser la consommation Bluetooth"
-description: "Méthode pratique pour mesurer le courant et l'énergie consommés par le BLE, le Bluetooth classique et leur fonctionnement combiné sur un appareil SF32, puis établir un budget énergétique quotidien à partir des traces et du comportement du firmware."
+description: "Mesurer la consommation du BLE, du Bluetooth classique et du mode bimode sur un appareil SF32, relier la trace au firmware et établir un budget énergétique quotidien."
 tags:
   - Bluetooth
   - Basse consommation

@@ -155,7 +155,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1 애플리케이션 코어 + 전용 Bluetooth 컨트롤러 코어
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 모드 Bluetooth 5.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 모드 Bluetooth 6.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 하드웨어 압축 해제
     - :fontawesome-solid-circle:{ .uf-dot-blue } 오디오 코덱, 1 x AMIC, 2 x DMIC
@@ -163,6 +163,58 @@ hide:
     - :fontawesome-solid-circle:{ .uf-dot-blue } QFN68 패키지, 최대 45개 GPIO, 선택 사양으로 선형 충전기 내장
 
     [시리즈 보기 :material-arrow-right:](sf32-products/chips/SF32LB52x.md){ .uf-link-blue }
+
+- <span class="uf-mcu-chip">SF32LB56</span>
+
+    <span class="uf-mcu-headtext">**SF32LB56x**{ .uf-mcu-title } <span class="uf-mcu-sub">그래픽 최적화 MCU</span></span>
+
+    ---
+
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 코어 Cortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 모드 Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 최대 1024 x 600 RGB 디스플레이
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 2.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 하드웨어 압축 해제
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 오디오 코덱, 1 x AMIC, 4 x DMIC
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 960 KB SRAM, 최대 16 MB PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } QFN68, BGA175 패키지로 제공되며, 최대 44 / 120개 GPIO
+
+    [시리즈 보기 :material-arrow-right:](sf32-products/chips/SF32LB56x.md){ .uf-link-blue }
+
+- <span class="uf-mcu-chip">SF32LB57</span>
+
+    <span class="uf-mcu-headtext">**SF32LB57x**{ .uf-mcu-title } <span class="uf-mcu-sub">멀티미디어 AIoT MCU</span></span>
+
+    ---
+
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 트리플 코어 Cortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 모드 Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 최대 1024 x 600 RGB 디스플레이
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 3.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 3.0 및 JPEG/MJPEG 디코딩
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 최대 2 MP DCMI 카메라 입력
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 오디오 코덱, 2 x AMIC, 4 x DMIC
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 592 KB SRAM, 최대 48 MB PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } QFN68, QFN80, BGA112 패키지로 제공되며, 최대 46 / 47 / 58개 GPIO. 일부 BGA112 변형은 MPI3 또는 정적 출력용 핀 6개를 추가로 제공합니다
+
+    [시리즈 보기 :material-arrow-right:](sf32-products/chips/SF32LB57x.md){ .uf-link-blue }
+
+- <span class="uf-mcu-chip">SF32LB58</span>
+
+    <span class="uf-mcu-headtext">**SF32LB58x**{ .uf-mcu-title } <span class="uf-mcu-sub">플래그십 AIoT 플랫폼 MCU</span></span>
+
+    ---
+
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 트리플 코어 Cortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 모드 Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 최대 1280 x 720 MIPI 디스플레이
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU + 벡터 그래픽, ePicasso 2.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 및 JPEG/MJPEG 디코딩
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 오디오 코덱, 2 x AMIC, 4 x DMIC
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 3.7 MB SRAM, 최대 64 MB PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } BGA256 패키지로 제공되며, 최대 154개 GPIO
+
+    [시리즈 보기 :material-arrow-right:](sf32-products/chips/SF32LB58x.md){ .uf-link-blue }
 
 - <span class="uf-mcu-chip">SF32LB55</span>
 
@@ -179,39 +231,6 @@ hide:
     - :fontawesome-solid-circle:{ .uf-dot-blue } QFN68, BGA145, BGA169 패키지로 제공되며, 최대 49 / 95 / 119개 GPIO
 
     [시리즈 보기 :material-arrow-right:](sf32-products/chips/SF32LB55x.md){ .uf-link-blue }
-
-- <span class="uf-mcu-chip">SF32LB56</span>
-
-    <span class="uf-mcu-headtext">**SF32LB56x**{ .uf-mcu-title } <span class="uf-mcu-sub">그래픽 최적화 MCU</span></span>
-
-    ---
-
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 코어 Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 저전력 Bluetooth 5.3
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 최대 1024 x 600 RGB 디스플레이
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 2.0
-    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 하드웨어 압축 해제
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 오디오 코덱, 1 x AMIC, 4 x DMIC
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 960 KB SRAM, 최대 16 MB PSRAM
-    - :fontawesome-solid-circle:{ .uf-dot-blue } QFN68, BGA175 패키지로 제공되며, 최대 44 / 120개 GPIO
-
-    [시리즈 보기 :material-arrow-right:](sf32-products/chips/SF32LB56x.md){ .uf-link-blue }
-
-- <span class="uf-mcu-chip">SF32LB58</span>
-
-    <span class="uf-mcu-headtext">**SF32LB58x**{ .uf-mcu-title } <span class="uf-mcu-sub">플래그십 AIoT 플랫폼 MCU</span></span>
-
-    ---
-
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 트라이 코어 아키텍처: HCPU, ACPU, LCPU
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 최대 1280 x 720 MIPI 디스플레이
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU + 벡터 그래픽, ePicasso 2.0
-    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 및 JPEG/MJPEG 디코딩
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 오디오 코덱, 2 x AMIC, 4 x DMIC
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 3.7 MB SRAM, 최대 64 MB PSRAM
-    - :fontawesome-solid-circle:{ .uf-dot-blue } BGA256 패키지로 제공되며, 최대 154개 GPIO
-
-    [시리즈 보기 :material-arrow-right:](sf32-products/chips/SF32LB58x.md){ .uf-link-blue }
 
 </div>
 

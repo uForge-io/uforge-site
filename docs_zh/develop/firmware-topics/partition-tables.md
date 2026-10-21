@@ -65,7 +65,7 @@ v1 在 `ptab.json` 中使用 JSON 数组。它没有专用版本字段，但可�
 
 </div>
 
-PSRAM 存在 CBUS 和 SBUS 两套地址空间。应将 `exec` 写在 CBUS 分区中，确保代码采用执行地址；当通过 SBUS 地址搬运代码时，应将 `ftab` 的 `xip` 地址写在 SBUS 分区中。
+文档区分了 PSRAM 的 CBUS 和 SBUS 地址空间。应将 `exec` 写在 CBUS 分区中，确保代码采用执行地址；当通过 SBUS 地址搬运代码时，应将 `ftab` 的 `xip` 地址写在 SBUS 分区中。
 
 ## v2：带名称和类型的 JSON 分区 { #v2-named-and-typed-json-partitions }
 
@@ -88,7 +88,7 @@ v2 同样使用 `ptab.json`，但头元素必须声明 `"version": "2"`。存储
 
 ## v3：YAML 分区和 Overlay { #v3-yaml-partitions-and-overlays }
 
-v3 使用 `ptab.yaml`，也是推荐格式。它以显式的 `type` 和 `subtype` 取代传统 `tags` 模型，通过逻辑 `region` 名称使分区与物理拓扑解耦，并在构建过程中生成 `ptab.h`、`ftab.bin` 和链接脚本片段。v3 还支持项目级叠加配置（overlay）。
+v3 使用 `ptab.yaml`，也是推荐格式。它以显式的 `type` 和 `subtype` 取代传统 `tags` 模型，通过逻辑 `region` 名称使分区与物理拓扑解耦，并在构建过程中生成 `ptab.h`、`ftab.bin` 和链接脚本片段。
 
 <div align="center"><em>表：v3 顶层字段和分区字段</em></div>
 <div align="center" markdown>
@@ -128,7 +128,7 @@ v3 自动生成的 `FAL_PART_TABLE` 仅包含 `data/flashdb_kv`、`data/filesyst
 
 `ptab.h` 会为每个分区生成 `<NAME>_START_ADDR`、`<NAME>_SIZE` 和 `<NAME>_OFFSET` 宏，其中 `<NAME>` 是分区名称的大写形式。如果 SDK 能识别该 region 的存储类型，还会生成 `<NAME>_MEM_TYPE`。对于 `app/factory` 分区，若配置了 `exec`，`CODE_START_ADDR` 使用其中指定的地址；否则使用该分区的 CBUS 地址。
 
-当代码不能 XiP 执行时，例如应用存放在 NAND Flash 而需搬运到 PSRAM 执行，应使用 `exec: {region, offset}`。未定义 `exec` 时，生成的代码起始地址使用分区存储地址的 CBUS 地址。`attrs` 可向 `ptab.h` 添加自定义宏。
+当代码不能 XiP 执行时，例如应用存放在 NAND Flash 而需搬运到 PSRAM 执行，应使用 `exec: {region, offset}`。未定义 `exec` 时，生成的代码起始地址使用该分区在 CBUS 上的存储地址。`attrs` 可向 `ptab.h` 添加自定义宏。
 
 ### 默认分区与项目叠加配置 { #defaults-and-project-overlays }
 
@@ -151,7 +151,7 @@ partitions:
     size: 64KB
 ```
 
-开发板级叠加配置的优先级高于芯片级叠加配置。叠加配置只能修改分区：不能修改 `memory`、`chip` 或 `version`，也不能删除分区。它只适用于开发板级 v3 `ptab.yaml`，不能与完整的项目级 `ptab.yaml` 或 `ptab.json` 同时使用。如果开发板仍使用 v1/v2 的 `ptab.json`，且构建系统没有选中完整的 `ptab.yaml`，叠加配置会被忽略并输出警告，构建继续沿用原有的分区表流程；此时不会生成 `ptab.effective.yaml`。叠加配置实际生效时，构建才会输出最终的 `ptab.effective.yaml` 供检查。
+开发板级叠加配置的优先级高于芯片级叠加配置。叠加配置只能修改分区：不能修改 `memory`、`chip` 或 `version`，也不能删除分区。它只适用于开发板级 v3 `ptab.yaml`，不能与完整的项目级 `ptab.yaml` 或 `ptab.json` 同时使用。如果开发板仍使用 v1/v2 的 `ptab.json`，且构建系统没有选中完整的 `ptab.yaml`，叠加配置会被忽略并输出警告，构建继续沿用原有的分区表流程；此时不会生成 `ptab.effective.yaml`。叠加配置生效时，构建会输出最终的 `ptab.effective.yaml` 供检查。
 
 ## 构建产物与验证 { #generated-files-and-validation }
 
@@ -160,7 +160,7 @@ partitions:
 
 | 产物 | 用途 |
 | --- | --- |
-| `ptab.h` | 包含分区宏定义的生成 C 头文件。 |
+| `ptab.h` | 生成的 C 头文件，包含分区宏定义。 |
 | `ftab.bin` | 由引导加载程序使用的二进制 Flash Table。v3 由 Python 直接生成，不再需要 `ftab` 子工程。 |
 | `link_copy.lds` / `link_copy.sct` | 生成的 GCC 或 Keil 链接器脚本副本。v3 使用 Jinja2 模板。 |
 | `ptab.effective.yaml` | 叠加配置生效时，经过处理的最终 v3 分区表。 |
@@ -201,7 +201,7 @@ sdk.py ftab-dump --path build_<board_name>/ftab.bin --format json
 
 ## 产品评审 { #product-review }
 
-- [ ] 项目有意识地使用开发板分区表或显式的项目配置。
+- [ ] 项目使用开发板分区表还是显式的项目配置，应是有意为之。
 - [ ] 所选 v1、v2 或 v3 语法与构建系统实际找到的文件一致。
 - [ ] 镜像存储地址和执行地址正确，尤其是非 XiP 存储与 PSRAM。
 - [ ] 应用、备份、DFU、文件系统、校准数据和应用管理数据分区容量充足且互不重叠。

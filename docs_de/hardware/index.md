@@ -1,7 +1,7 @@
 ---
 icon: lucide/cpu
 title: Hardware
-description: Verwenden Sie eine passende SF32-Referenzkonfiguration oder setzen Sie das ausgewählte Gerät auf einer eigenen Platine um und bereiten Sie das Design für die Fertigung vor.
+description: "Eine SF32-Referenzkonfiguration wiederverwenden oder das gewählte Bauteil umsetzen und das Design anschließend für die Fertigung vorbereiten."
 ---
 
 # Hardware { #hardware }
@@ -39,7 +39,7 @@ Wählen Sie den Chip oder das Modul aus, auf dem Ihr Design basiert, und öffnen
 | SF32LB52x | [Leitfaden](chip-guides/SF32LB52x_hardware_design_guide.md) | [Checkliste](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | Sie eine Leiterplatte für den direkt bestückten SF32LB52x entwickeln. |
 | SF32LB55x | [Leitfaden](chip-guides/SF32LB55x_hardware_design_guide.md) | [Checkliste](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | Sie eine Leiterplatte für den direkt bestückten SF32LB55x entwickeln. |
 | SF32LB56x | [Leitfaden](chip-guides/SF32LB56x_hardware_design_guide.md) | [Checkliste](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | Sie eine Leiterplatte für den direkt bestückten SF32LB56x entwickeln. |
-| SF32LB57x | Leitfaden | Schaltplan / PCB-Layout | Sie eine Leiterplatte für den direkt bestückten SF32LB57x entwickeln. |
+| SF32LB57x | [Leitfaden](chip-guides/SF32LB57x_hardware_design_guide.md) | [Schaltplan](chip-guides/SF32LB57x_schematic_checklist.md) / [PCB-Layout](chip-guides/SF32LB57x_pcb_layout_checklist.md) | Sie eine Leiterplatte für den direkt bestückten SF32LB57x entwickeln. |
 | SF32LB58x | [Leitfaden](chip-guides/SF32LB58x_hardware_design_guide.md) | [Checkliste](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | Sie eine Leiterplatte für den direkt bestückten SF32LB58x entwickeln. |
 
 </div>

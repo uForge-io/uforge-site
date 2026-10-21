@@ -1,6 +1,6 @@
 ---
 icon: lucide/activity
-description: "Visor de intensidad de señal de la banda Bluetooth basado en SF32LB52: reproducir Radiation Monitor, verificar el barrido de 79 puntos, el suavizado RSSI y la reproducción del historial, y definir los límites de calibración y de revisión de producto."
+description: "Visor de señal de la banda Bluetooth con SF32LB52: reproducir Radiation Monitor, verificar el barrido de 79 puntos, el suavizado RSSI y el historial, y definir la calibración."
 tags:
     - Proyectos
     - Bluetooth

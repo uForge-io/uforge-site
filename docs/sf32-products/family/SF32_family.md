@@ -129,12 +129,12 @@ The values below summarize family-level capabilities, not guaranteed capabilitie
 | I²S Audio Interfaces | 1x | 1–2x* | 1x | 2x | 3x |
 | USB | 2.0 FS | 2.0 FS | 2.0 FS | 2.0 FS | 2.0 HS |
 | CAN | n/a | n/a | 1x | 2x | 2x |
-| In-Package PSRAM | Up to 16 MB | Up to 16 MB + 2 MB | Up to 16 MB | Up to 32 MB | Up to 32 MB + 32 MB |
+| In-Package PSRAM | Up to 16 MB | Up to 16 MB + 2 MB | Up to 16 MB | Up to 48 MB | Up to 32 MB + 32 MB |
 | In-Package NOR Flash | Up to 4 MB | Up to 8 MB | Up to 1 MB | Up to 32 MB | Up to 8 MB |
 | # of GPIOs | 44 / 45 | 49 / 95 / 113* | 44 / 120 | 46 / 47 / 58; up to 6 additional BGA112 I/Os* | 154 |
 | Package Options | QFN68 | QFN68 / BGA145 / BGA169 | QFN68 / BGA175 | QFN68 / QFN80 / BGA112 | BGA256 |
 | Package Footprint (L × W) | 7 × 7 mm | 7 × 7 mm | QFN: 7 × 7 mm<br>BGA: 6.5 × 6.1 mm | QFN68: 7 × 7 mm<br> QFN80: 8 × 8 mm<br>BGA: 5.4 × 4.4 mm | 8.5 × 6.5 mm |
-| Power Supply | 3.2–4.7 V (520/3/5/7)<br>2.97–3.63 V (52B/E/G/J)<br>1.8 V (52D) | 1.71–3.63 V | 1.71–3.63 V | 3.2–4.7 V<br>2.97–3.63 V | 1.71–3.63 V |
+| Power Supply | 3.2–4.7 V (520/3/5/7)<br>2.97–3.63 V (52B/E/G/J)<br>1.8 V (52D) | 1.71–3.63 V | 1.71–3.63 V | 3.0–4.7 V<br>2.97–3.63 V | 1.71–3.63 V |
 
 </div>
 
@@ -142,7 +142,7 @@ The values below summarize family-level capabilities, not guaranteed capabilitie
 
 **SF32LB55x in-package NOR note:** The 8 MB family maximum includes the separately documented SS6600A8 configuration: two 4 MB QSPI-NOR devices configured as one 8 MB OSPI-NOR device. The SF32-prefixed order codes listed for SF32LB55x have up to 4 MB of in-package NOR Flash; verify the exact model.
 
-**SF32LB57x BGA112 note:** This note applies only to BGA112. SF32LB57x has internal MPI1, MPI2, and MPI3; their positions in a part number are explained in the [SF32 naming convention](SF32_namingrule.md). Under any of these co-packaged-memory configurations, the MPI2 and MPI3 pins are unavailable for external access, leaving a fixed 58 GPIOs: (1) one PSRAM each on internal MPI1 and MPI2; (2) one 256 Mb PSRAM on internal MPI2; or (3) one NOR Flash on internal MPI3. `SF32LB57GVD776` is case (3): the second `7` in its trailing `776` code indicates an internal device on MPI3, so only 58 GPIOs are available. In other BGA112 configurations, the six additional package I/Os may be used for MPI3 or as GP static outputs configured through pull-up or pull-down; they are not unrestricted GPIOs. For example, the `58 + 6` notation for `SF32LB57ZVN7N6` means 58 usable GPIOs plus six pins available for MPI3 or static outputs. QFN68 and QFN80 are outside this BGA112 constraint; they provide only their stated GPIO counts, with no additional MPI3 or static-output option. See the SF32LB57x product page and its datasheet for the exact SKU.
+**SF32LB57x BGA112 note:** This note applies only to BGA112. SF32LB57x has internal MPI1, MPI2, and MPI3; their positions in a part number are explained in the [SF32 naming convention](SF32_namingrule.md). Under any of these co-packaged-memory configurations, the MPI2 and MPI3 pins are unavailable for external access, leaving a fixed 58 GPIOs: (1) one PSRAM each on internal MPI1 and MPI2; (2) one 256 Mb PSRAM on internal MPI2; or (3) one NOR Flash on internal MPI3. `SF32LB57GVD776` is case (3): the second `7` in its trailing `776` code indicates an internal device on MPI3, so only 58 GPIOs are available. In other BGA112 configurations, the six additional package I/Os may be used for MPI3 or as GP static outputs configured through pull-up or pull-down; they are not unrestricted GPIOs. For example, the `58 + 6` notation for `SF32LB57ZVN7N6` means 58 usable GPIOs plus six pins available for MPI3 or static outputs. QFN68 and QFN80 are outside this BGA112 constraint; they provide only their stated GPIO counts, with no additional MPI3 or static-output option. See the [SF32LB57x product page](../chips/SF32LB57x.md) and its datasheet for the exact SKU.
 
 **SF32LB58x GPIO-count clarification:** The [DS5801 V1.8.3 datasheet](https://downloads.sifli.com/user%20manual/DS5801-SF32LB58x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p8p3.pdf) and SiFli's family comparison specify 154 GPIOs in total (HPSYS: 94; LPSYS: 60). The separate [Chip Model Guide](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) lists HCPU: 94 and LCPU: 66, which sums to 160 and conflicts with the datasheet total. This comparison follows the datasheet; verify usable pins against the exact SKU's package pin table before assigning them.
 
@@ -180,6 +180,23 @@ When selecting a device, consider the following key requirements:
 The SF32 platform provides a shared software and SDK foundation. However, processor configuration, peripherals, memory maps, packages, and pin assignments can differ. Porting may require adapting startup code, drivers, linker or partition settings, pin multiplexing, and SDK configuration, followed by validation on the target hardware.
 
 Evaluate software reuse and migration effort alongside performance, memory, display, and connectivity requirements. Do not assume that devices in the same family are pin-compatible or that firmware will run unchanged.
+
+## Frequently Asked Questions
+
+**Which SF32 chip suits a low-cost Bluetooth smartwatch or fitness band?**
+SF32LB52x is the entry-level choice: dual-mode Bluetooth (BT Classic + BLE), integrated audio ADC/DAC and Li-ion charging, up to 45 GPIOs, and a 7 × 7 mm QFN68 package.
+
+**Which SF32 chips support Classic Bluetooth, not just BLE?**
+SF32LB52x, SF32LB56x, SF32LB57x and SF32LB58x support BT Classic + BLE. SF32LB55x is BLE only.
+
+**Which SF32 chips support MIPI DSI displays?**
+SF32LB55x and SF32LB58x list MIPI display support. SF32LB52x, 56x and 57x use SPI, QSPI, 8080, JDI/EPD and (56x/57x) RGB interfaces instead.
+
+**Which SF32 chips offer camera input or CAN?**
+SF32LB57x adds DCMI camera input. CAN is available on SF32LB56x (1×) and on SF32LB57x and SF32LB58x (2×).
+
+**Are SF32 family members pin-compatible?**
+No. They share an SDK foundation, but cores, peripherals, memory maps, packages and pin assignments differ, so porting needs driver, pin-mux and configuration changes and must be validated on the target device.
 
 ## Reference Links
 

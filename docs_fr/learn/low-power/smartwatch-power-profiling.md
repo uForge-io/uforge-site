@@ -1,7 +1,7 @@
 ---
 icon: lucide/chart-no-axes-combined
 title: "Profilage de la consommation d'une montre connectée"
-description: "Construire et valider un modèle d'autonomie de montre connectée à partir de scénarios d'usage quotidiens, puis utiliser le résultat pour prioriser les optimisations de basse consommation."
+description: "Construire et valider un modèle d'autonomie de montre connectée à partir de scénarios d'usage quotidiens, puis prioriser les optimisations basse consommation."
 tags:
   - Basse consommation
   - Objets portables

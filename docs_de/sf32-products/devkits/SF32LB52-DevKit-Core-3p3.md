@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-Core-3p3: kompaktes SF32LB52x-Evaluierungsboard mit per Jumper wählbarer MCU-Versorgung (1,8 V oder 3,3 V) und direktem Zugriff auf GPIO, Display, Audio, USB und Versorgungsschienen."
+description: "SF32LB52-DevKit-Core-3p3: kompaktes SF32LB52x-Evaluierungsboard mit per Jumper wählbarer 1,8-V-/3,3-V-MCU-Versorgung und direktem GPIO-, Display-, Audio- und USB-Zugriff."
 tags:
     - Hardware
     - Entwicklungsboard

@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "Comment le nom de carte --board de SiFli-SDK associe le firmware au matériel SF32 : disposition Flash/PSRAM, multiplexage des broches, chemins d'affichage et audio, et vérifications de mise en service de la carte."
+description: "Comment l'option --board de SiFli-SDK relie le firmware au matériel SF32 : disposition Flash/PSRAM, multiplexage, chemins affichage et audio, checklist de mise en service."
 tags:
     - Développement
     - SiFli-SDK

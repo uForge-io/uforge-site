@@ -43,7 +43,7 @@ SF32 移植展示了如何在 SF32LB52 上运行 ZMK 键盘模型，同时保留
 - 严格按照 `urchin_sf32lb52_left` 和 `urchin_sf32lb52_right` overlay 接线的 38 键分体测试夹具，或用于初期移植检查且已有记录的小型测试扩展板配置；
 - 已配置 Zephyr/ZMK `west` 环境、并有足够空间获取该仓库固定版本模块的主机；
 - 在测试分体行为前，已经分别验证两侧的下载、串口控制台和恢复连接；
-- 左侧/中央端使用的 USB 数据线，以及可独立供电和恢复右侧/外设端的方法；
+- 左侧/中央端使用的 USB 数据线，以及可独立为右侧/外设端供电并恢复它的方法；
 - 蓝牙主机；若测试 Studio，还需支持 ZMK Studio 的主机；同时应具备分侧测量电流的条件；
 - 用于记录派生仓库 commit、清单版本、开发板/扩展板标识、构建与下载日志、按键结果、绑定、设置状态和电流测量的测试记录。
 
@@ -72,7 +72,7 @@ SF32 移植展示了如何在 SF32LB52 上运行 ZMK 键盘模型，同时保留
 
 | 器件或设备 | 必要规格 | 用途 | 状态 | 获取方式或来源 | 兼容性与替换说明 |
 |:-----------|:---------|:-----|:-----|:---------------|:-----------------|
-| 两块 SF32LB52-DevKit-LCD 开发板 | 开发板目标为 `sf32lb52_devkit_lcd/sf32lb525uc6/zmk`；记录两块板卡各自的修订版 | 作为文档所述分体键盘基线的中央端（central）与外设端（peripheral） | 完整分体测试必需 | [μForge 开发板说明](../sf32-products/devkits/SF32LB52-DevKit-LCD.md)；[经审查提交版本中的 OpenSiFli 开发板变体](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/sifli/sf32lb52_devkit_lcd) | 中央端与外设端镜像的角色及配置不同；须为两块板分别保留恢复方式 |
+| 两块 SF32LB52-DevKit-LCD 开发板 | 开发板目标为 `sf32lb52_devkit_lcd/sf32lb525uc6/zmk`；记录两块板卡各自的修订版 | 作为文档所述分体键盘基线的中央端（central）与外设端（peripheral） | 分体测试必需 | [μForge 开发板说明](../sf32-products/devkits/SF32LB52-DevKit-LCD.md)；[经审查提交版本中的 OpenSiFli 开发板变体](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/sifli/sf32lb52_devkit_lcd) | 中央端与外设端镜像的角色及配置不同；须为两块板分别保留恢复方式 |
 | Urchin 分体键盘测试夹具及互连 | 38 键矩阵，按 `urchin_sf32lb52_left` 和 `urchin_sf32lb52_right` overlay 接线 | 验证按键矩阵、分体传输和两侧角色 | 完整分体验证必需 | [经审查提交版本中的 Urchin 扩展板配置](https://github.com/OpenSiFli/zmk/tree/fd4d5843065f65ed5ed6198dc2e5d0520330bf8e/app/boards/shields/urchin_sf32lb52) | overlay 是接线依据，并不保证适用于其他 PCB 或任意 ZMK 扩展板配置 |
 | USB/BLE 主机和数据线 | 中央端需要 USB 主机及线缆；还需要蓝牙 HID 主机；外设端须能独立供电和下载恢复 | 主机连接、输入验证、日志和恢复 | 必需 | [OpenSiFli ZMK 派生仓库](https://github.com/OpenSiFli/zmk) | 记录主机操作系统、BLE 配对状态、线缆/端口，以及两侧各自的恢复连接 |
 
@@ -244,10 +244,10 @@ flowchart LR
 进入定制键盘 PCB 或电池原型设计前，应回答：
 
 - OpenSiFli ZMK 派生仓库、自定义 Zephyr 分支、SiFli HAL 版本、CherryUSB 适配，以及后续安全或兼容更新分别由谁负责？
-- 哪些上游 ZMK 功能已经在 SF32 上实际验证？哪些只是继承代码树中存在？
+- 哪些上游 ZMK 功能已在 SF32 上实际运行过？哪些只是存在于继承来的代码树中？
 - 量产和售后如何管理左右镜像标识、板卡版本、键位映射、配置、绑定和恢复出厂状态？
 - 两侧在活动、连接空闲、断连和睡眠状态下的实测电流分别是多少（包括扫描速率、重连行为和电池保护）？
-- 已覆盖哪些主机、操作系统、USB 控制器、蓝牙协议栈、唤醒路径、多键输入情况和干扰环境？
+- 测试过哪些主机、操作系统、USB 控制器、蓝牙协议栈、唤醒路径、多键输入情况和干扰环境？
 - 依赖更新、Studio 改动、设置写入或现场升级失败后，能否在不拆机或报废产品的情况下恢复？
 - ZMK/Zephyr 许可证、PCB 和外壳文件、键位映射内容、Logo、字体和所有随附配置是否允许预期分发？
 

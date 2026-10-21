@@ -36,7 +36,7 @@ tags:
 | EDA 工具 | 文件 | 格式 | 内容 | 分发方式 |
 |:---|:---|:---|:---|:---|
 | JLCEDA / LCEDA Pro | `ProPrj_sifli-iclib_2026-04-20.epro2` | LCEDA Pro 项目压缩包 | 原理图符号和 PCB 封装 | 直接下载 |
-| PADS | `PADS-SIFLI-IC.ZIP` | Mentor/Siemens PADS 库压缩包 | 原理图符号和 PCB 封装图形（PADS 中称为 Decal） | 直接下载 |
+| PADS | `PADS-SIFLI-IC.ZIP` | Mentor/Siemens PADS 库压缩包 | 原理图符号和 PCB 封装（decal） | 直接下载 |
 | OrCAD | `OrCAD-SIFLI-IC.OLB` | Cadence OrCAD Capture 库 | 原理图符号 | 直接下载 |
 | KiCad | 发布版本 ZIP 压缩包，或含 `metadata.json` 的包元数据 | KiCad 符号、封装和 3D 模型库 | 原理图符号、PCB 封装和 3D 模型 | [GitHub 仓库](https://github.com/OpenSiFli/kicad-libraries)，提供带版本号的发布版本 |
 
@@ -62,16 +62,16 @@ JLCEDA / LCEDA Pro 和 PADS 以压缩包形式提供；OrCAD 提供的是独立�
 
 </div>
 
-上表依据 2026-10-05 核对的仓库 README 整理，并不表示已逐引脚审核每个发布包。芯片组的通配符写法也不能证明每个完整订购料号均受支持；请在实际安装的库文件中核对所选原理图符号、PCB 封装及器件封装类型。
+上表依据 2026-10-05 核对的仓库 README 整理，并不表示已逐引脚审核每个发布包。带通配符的芯片组也不能证明每个完整订购料号均受支持；请在实际安装的库文件中核对所选原理图符号、PCB 封装及器件封装类型。
 
 !!! note "README 中料号通配符的含义"
-    OpenSiFli KiCad 库的 README 将芯片行写作 `SF32LB52XUx` 和 `SF32LB52xUx`。在思澈科技（SiFli）的命名中，大写 `X` 是外部稳压供电型号的通配符，小写 `x` 是电池供电型号的通配符。本页将它们展开为 μForge 文档中统一使用的 SF32LB52B/D/E/G/J 和 SF32LB520/3/5/7。
+    OpenSiFli KiCad 库的 README 将芯片行写作 `SF32LB52XUx` 和 `SF32LB52xUx`。在思澈科技（SiFli）的命名中，大写 `X` 是字母编号的外部稳压供电型号的通配符，小写 `x` 是数字编号的电池供电型号的通配符。本页将它们展开为 μForge 文档中统一使用的 SF32LB52B/D/E/G/J 和 SF32LB520/3/5/7。
 
 [OpenSiFli/kicad-libraries](https://github.com/OpenSiFli/kicad-libraries) 仓库的 README 说明，暂不支持从 Package and Content Manager 在线目录自动安装。README 给出的手动安装方法是下载发布版本 ZIP，并在包管理器中选择 **Install from file...**。`1.0.0` 发布页还说明，可以将 ZIP 解压到 KiCad 库目录，或在包管理器中通过 `metadata.json` 安装。请以所用版本随附的说明为准；README 将安装后的符号库和 PCB 封装库标识为 `PCM_SiFli`。
 
 ## 核查清单 { #review-checklist }
 
-- [ ] 在原理图发布前，先将库中的料号和封装后缀与 BOM 对齐。
+- [ ] 在原理图发布前，先将库中的料号和封装后缀与 BOM 核对一致。
 - [ ] 对照芯片数据手册和器件专用硬件设计指南，交叉核对符号引脚名称和引脚编号。
 - [ ] 对照官方封装图，检查 PCB 封装的焊盘尺寸、间距、器件占位边界（courtyard）、裸露焊盘处理方式和装配间隙。
 - [ ] 3D 模型只能作为摆放和机械配合参考，不应作为制造或装配尺寸依据。

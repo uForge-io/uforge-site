@@ -8,9 +8,9 @@ tags:
 
 ## 简介 { #introduction }
 
-**STAR-MC1** 是 Arm China 设计的 **Armv8-M Mainline** CPU IP；Cortex-M33 也基于这一架构配置。因此二者具有熟悉的 Armv8-M 软件模型，但这并不保证 Cortex-M33 固件可以不经修改直接复用。可选架构扩展、内核配置、SoC 外设、启动与链接配置以及 SDK 支持都可能不同。应将面向 Cortex-M33 的软件作为移植起点，并在目标器件和 SDK 上验证。
+**STAR-MC1** 是 Arm China 设计的 **Armv8-M Mainline** CPU IP，Cortex-M33 采用的也是这一架构规范。它因而提供熟悉的 Armv8-M 软件模型，但并不保证 Cortex-M33 固件可以不经修改直接复用。可选架构扩展、内核配置、SoC 外设、启动与链接配置以及 SDK 支持都可能不同。应将面向 Cortex-M33 的软件作为移植起点，并在目标器件和 SDK 上验证。
 
-在采用 STAR-MC1 的 SF32 器件上，思澈科技（SiFli）的资料可能根据语境和描述粒度，将应用 CPU 标为 **Arm Cortex-M33**、**Cortex-M33 STAR-MC1** 或 **STAR-MC1**。这些名称对应不同层级的描述，不能据此判断可选内核功能或具体 SoC 配置；选型时应以目标器件资料为准。
+在采用 STAR-MC1 的 SF32 器件上，思澈科技（SiFli）的资料可能根据语境和描述粒度，将应用 CPU 标为 **Arm Cortex-M33**、**Cortex-M33 STAR-MC1** 或 **STAR-MC1**。这些名称本身并不能确认可选内核功能或确切的 SoC 配置；选型时应以目标器件资料为准。
 
 如果你熟悉 Arm Cortex-M 系列，并需要从软件、性能或选型角度正确理解 STAR-MC1，请阅读本文。它说明哪些部分仍然熟悉、哪些能力会随 SoC 实现而变化，以及为什么不应把 STAR-MC1 简单视为 Cortex-M7 的直接替代品。
 
@@ -28,7 +28,7 @@ tags:
 |:-------------|:---------------------------|:---------|:---------|
 | Cortex-M4 | 裸机和 RTOS 开发、中断、DMA，以及外设驱动开发。 | STAR-MC1 使用更新的 Armv8-M 软件模型，并可提供更丰富的内存与加速选项。 | Cortex-M4 二进制、Armv7E-M 假设或相同的调试/安全特性可直接沿用。 |
 | Cortex-M33 | Armv8-M 的编程、异常和工具链模型。 | SoC 实现可为依赖 Flash/PSRAM、UI、音频或网络连接的工作负载提供更充足的内存系统资源。 | 每个 STAR-MC1 器件都启用了缓存、TCM、DSP、FPU、CDE 或 TrustZone。 |
-| Cortex-M7 | 需要管理代码和数据的存储位置、缓存行为、DMA 一致性和实时延迟（latency）。 | STAR-MC1 保持 MCU 级 Armv8-M 基础，面向灵活、注重功耗的 IoT 设计。 | 它是 Cortex-M7 的直接替代，或具有相同的吞吐量、内存系统和软件生态。 |
+| Cortex-M7 | 需要管理内存布局、缓存行为、DMA 一致性和实时延迟（latency）。 | STAR-MC1 保持 MCU 级 Armv8-M 基础，面向灵活、注重功耗的 IoT 设计。 | 它是 Cortex-M7 的直接替代，或具有相同的吞吐量、内存系统和软件生态。 |
 
 </div>
 
@@ -100,7 +100,7 @@ I-cache 和 D-cache 是否可用以及如何配置，取决于 SoC 实现。只�
 
 在处理器 IP 层面，Arm 定义 CDE 指令编码，SoC 设计者定义自定义运算和数据通路。CM33 可选支持整数 CDE；浮点 CDE 取决于 FPU 和具体配置。STAR-MC1 技术参考手册记载了 GPR CDE 和 FPCDE 模块，但这只能说明 IP 层面的能力，不能据此认定某个 SF32 器件或 SDK 已提供可用的 CDE。思澈科技（SiFli）的 SiFli-SDK [v2.5.1 发布说明](https://github.com/OpenSiFli/SiFli-SDK/releases/tag/v2.5.1)记录了修复 SF32LB57x 上 CDE 被误启用的问题；实际使用前，应确认目标器件和 SDK 的支持情况。CM55 从 r1 开始可选支持 CDE，r0 不支持。CP0–CP7 是分配给协处理器或 CDE 的编码空间，并不代表有八条自定义指令或八个额外加速器。使用前应核对内核版本、已实现模块，以及编译器和 SDK 的支持。详情见 [CM33 数据手册](https://www.arm.com/-/media/Arm%20Developer%20Community/PDF/Processor%20Datasheets/Arm-Cortex-M33-Processor-Datasheet.pdf)、[CM55 CDE 版本说明](https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/armv8_2d00_m-based-processor-software-development-hints-and-tips)和 STAR-MC1 技术参考手册 B7、B8 章。
 
-它可用于如下工作负载：
+CDE 可用于如下工作负载：
 
 - 数字信号处理。
 - 密码学。
@@ -159,7 +159,7 @@ STAR-MC1 并非为了替代 Cortex-M7 的所有应用场景。如果应用需要
 
 ## 适合的应用类型 { #good-application-fits }
 
-对于需要改善存储器访问或加速特定运算，同时又受 MCU 级功耗和集成条件约束的产品，可以考虑采用 STAR-MC1 的器件。如果存储器延迟比小规模 CoreMark/DMIPS 测试的分数更影响应用体验，就尤其值得评估。选型应依据具体 SoC 的功能配置和实测负载表现，而不是假定它一定优于所有传统 Cortex-M33 器件。
+对于需要存储器系统或特定应用加速，同时又受 MCU 级功耗和集成条件约束的产品，可以考虑采用 STAR-MC1 的器件。当存储器延迟比紧凑的 CoreMark/DMIPS 分数更重要时，尤其值得评估。选型应依据具体 SoC 的功能配置和实测负载表现，而不是假定它一定优于所有传统 Cortex-M33 器件。
 
 典型例子包括：
 

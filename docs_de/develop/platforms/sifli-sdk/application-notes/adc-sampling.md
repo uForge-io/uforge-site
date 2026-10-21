@@ -1,7 +1,7 @@
 ---
 icon: lucide/chart-no-axes-column
 title: "Messwerte mit GPADC erfassen"
-description: "Den ADC für allgemeine Messaufgaben (GPADC) auf SF32LB52x, SF32LB55x, SF32LB56x, SF32LB57x und SF32LB58x verwenden: elektrische Grenzwerte, Pad-Zuordnung, Gerätezugriff und Kalibrierung."
+description: "Den Allzweck-ADC (GPADC) auf SF32LB52x, 55x, 56x, 57x und 58x nutzen: elektrische Grenzwerte, Pad-Zuordnung, Gerätezugriff und Kalibrierung."
 tags: [Entwicklung, SiFli-SDK, Anwendungshinweise, ADC]
 ---
 
@@ -263,6 +263,6 @@ Beim Anschluss des SF32LB56x-Log-UART an einen externen PC muss der Referenzpege
 - [SF32LB57x ADC-Anwendungs- und Konfigurationsleitfaden](https://docs.sifli.com/projects/sdk/latest/sf32lb57x/app_note/adc.html)
 - [SF32LB58x ADC-Anwendungs- und Konfigurationsleitfaden](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/adc.html)
 - [SF32LB52x ADC-HAL-API-Referenz](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/adc.html) — Definition der Standard-Kalibrierbereiche.
-- SF32LB57x Hardware-Design-Leitfaden — Speicher & Fertigung — GPADC-Kanal- und Pad-Zuordnung.
-- SF32LB57x Hardware-Design-Leitfaden — Minimalsystem & Stromversorgung — Analogversorgung/Referenzbeschaltung und batteriespezifische Grenzwerte nach Versorgungsausführung.
+- [SF32LB57x Hardware-Design-Leitfaden — Speicher & Fertigung](../../../../hardware/chip-guides/SF32LB57x_schematic_storage_mfg.md) — GPADC-Kanal- und Pad-Zuordnung.
+- [SF32LB57x Hardware-Design-Leitfaden — Minimalsystem & Stromversorgung](../../../../hardware/chip-guides/SF32LB57x_schematic_system_power.md) — Analogversorgung/Referenzbeschaltung und batteriespezifische Grenzwerte nach Versorgungsausführung.
 - [OpenSiFli-ADC-FAQ](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/faq/mcu/adc.md) — SF32LB55x-Werkskalibrierbereiche und Prüfung nach Start, Standby und Aufwachen sowie Hinweise zum Pegel des SF32LB56x-Log-UART.

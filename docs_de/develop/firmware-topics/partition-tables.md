@@ -1,6 +1,6 @@
 ---
 icon: lucide/table-properties
-description: "Verwendung von SiFli-SDK-Partitionstabellen zur Beschreibung von SF32-Speicherlayouts. Vergleich der veralteten JSON-Formate v1/v2 mit dem empfohlenen YAML-Format v3, Overlays, generierten Dateien und Validierung."
+description: "SF32-Speicherlayouts mit SiFli-SDK-Partitionstabellen beschreiben: Legacy-JSON v1/v2, empfohlenes YAML v3, Overlays, generierte Dateien und Validierung."
 tags:
     - Entwicklung
     - Partitionen

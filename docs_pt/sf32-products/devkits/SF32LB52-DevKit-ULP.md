@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-ULP: placa SF32LB52x para prototipagem de dispositivos vestíveis, com AMOLED, toque, sensores, áudio, carregamento de bateria e medição de corrente para avaliação do consumo do sistema."
+description: "SF32LB52-DevKit-ULP: placa SF32LB52x para wearables, com AMOLED, toque, sensores, áudio, carga de bateria e medição de corrente para avaliação de baixo consumo."
 tags:
     - Hardware
     - Placa de desenvolvimento

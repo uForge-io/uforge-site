@@ -1,6 +1,6 @@
 ---
 icon: lucide/watch
-description: "Una ruta de ingeniería de producto para la plataforma T-Display-SF32 de terceros de LilyGO: fijar la configuración de referencia del proveedor, validar la pantalla, los periféricos, el comportamiento de alimentación y la recuperación, reproducir la compilación de SiFli-SDK y adaptar el sistema de forma controlada."
+description: "Ruta de ingeniería para el T-Display-SF32 de LilyGO: fijar la referencia del proveedor, validar pantalla, periféricos, energía y recuperación, y adaptar la compilación."
 tags:
     - Proyectos
     - Pantalla

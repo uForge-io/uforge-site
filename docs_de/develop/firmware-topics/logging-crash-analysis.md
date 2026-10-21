@@ -1,6 +1,6 @@
 ---
 icon: lucide/file-warning
-description: "Protokollierung und Absturzanalyse für SF32-Firmware planen, damit sich Fehler im Feld diagnostizieren lassen: mit Mindestdaten, Ablauf der Absturzanalyse und Empfehlungen zur Protokollierung je Phase."
+description: "Protokollierung und Absturzanalyse für SF32-Firmware planen, damit Feldfehler diagnostizierbar sind: Mindestdaten, Ablauf der Absturzanalyse und Log-Level je Phase."
 tags:
     - Entwicklung
     - Protokollierung

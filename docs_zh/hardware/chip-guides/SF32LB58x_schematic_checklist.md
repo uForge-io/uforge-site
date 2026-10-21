@@ -59,8 +59,8 @@ hide:
 | 19 | 当 SF30147C 提供电源时，TWI 控制接口必须使用 MCU 的 PB 管脚，且这些管脚必须是 PD 管脚 | 必检 |
 | 20 | 充电电路需要具备电源路径管理（power-path management）能力，以便在电池电压过低时，系统可由充电器 5 V 输入供电 | 必检 |
 | 21 | 当 SF30147C 提供电源时，使用芯片专用 TWI 控制接口 | 必检 |
-| 22 | 当 SF30147C 提供电源时，由 EN 控制的电源轨必须使用 PVDD 或 AVDD 作为 EN 的供电域；不要直接由 MCU GPIO 控制 EN。或者将 EN 接地，并通过寄存器控制对应电源轨输出 | 必检 |
-| 23 |  当 SF30147C 提供电源时，<span class="flag-red">BUCK 与 LDO1</span> 只能分别通过 EN_BUCK 与 EN_LDO1 使能信号控制，不支持内部寄存器控制  | 必检 |
+| 22 | 当 SF30147C 提供电源时，由 EN 控制的电源轨必须使用 PVDD 或 AVDD 作为 EN 的供电域；不要由 MCU GPIO 控制 EN；或者将 EN 接地，并通过寄存器控制对应电源轨输出 | 必检 |
+| 23 | 当 SF30147C 提供电源时，<span class="flag-red">BUCK 与 LDO1</span> 只能分别通过 EN_BUCK 与 EN_LDO1 使能信号控制，不支持内部寄存器控制 | 必检 |
 | 24 | 58x 的 PVDD 与 VDDIOB 供电必须一致。若 PVDD 低于 VDDIOB，例如 VDDIOB = 3.3 V 而 PVDD = 1.8 V，则 VDDIOB 在待机（Standby）和休眠（Hibernate）下约有 15 μA 漏电 | 必检 |
 | 25 | 在 58x 上，B4 脚为 VDD_EXT1，B5 脚为 VDD_EXT2；设计中可不连接 | 必检 |
 
@@ -274,7 +274,7 @@ SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设�
 | 9 | <span class="flag-red">SPI LCD：3 线模式下，CS 接 PA44 或 PB08，CLK 接 PA46 或 PB10，DATA 接 PA50 或 PB09；<br>4 线模式下，CS 接 PA44 或 PB08，CLK 接 PA46 或 PB10，DATA 接 PA50 或 PB09，DC 接 PA48 或 PB03</span> | 必检 |
 | 10 | 确认 LCD 是否必须支持 AOD；若需要，则 QSPI 面板必须连接到 HCPU，而 JDI 面板可连接到 LCPU | 必检 |
 | 11 | 外设器件的 I/O 逻辑电平与主芯片匹配 | 必检 |
-| 12 | 对于 DSI LCD，应连接 DSI 数据与时钟信号。DSI 视频模式面板类似 RGB 面板，没有 TE 信号；DSI 命令模式面板带 TE 信号，且 DSI17801 需要 TE。建议同时预留 TE 与 RST，最终使用方式取决于所选 LCD | 必检 |
+| 12 | 对于 DSI LCD，应连接 DSI 数据与时钟信号。DSI 视频模式面板类似 RGB 面板，没有 TE 信号；DSI 命令模式面板带 TE 信号，且 DSI17801 需要 TE。建议同时使用 TE 与 RST，最终使用方式取决于所选 LCD | 必检 |
 
 </div>
 
@@ -303,7 +303,7 @@ SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设�
 | 序号 | 检查项 | 类别 |
 |:---|:---|:---|
 | 1 | SDMADC 输入连接到对应管脚 | 可选 |
-| 2 | SDMADC 输入范围正确；建议最大输入电压不超过 AVDD33_ANA | 可选 |
+| 2 | SDMADC 输入范围正确；最大输入电压不应超过 AVDD33_ANA | 可选 |
 | 3 | SDMADC_VREF 与 SDMADC_VSS_VREF 连接正确 | 必检 |
 
 </div>
@@ -387,7 +387,7 @@ SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设�
 | 4 | 模拟双麦连接正确 | 可选 |
 | 5 | 模拟麦克风由 MIC_BIAS 输出供电 | 可选 |
 | 6 | 两路音频 ADC 输入都必须各自带至少 2.2 μF 隔直电容 | 可选 |
-| 7 | DAC 输出 P 路与 N 路各有一个 1 kΩ 串联电阻，并在两者之间并联一个 1.5 nF 电容 | 可选 |
+| 7 | DAC 输出 P 路与 N 路各有一个 1 kΩ 串联电阻，两者之间接一个 1.5 nF 电容 | 可选 |
 | 8 | 推荐使用 AW8155 作为音频功放；使用推荐器件时，在软件中配置为 Mode 4 / Class AB 模式 | 可选 |
 | 9 | <span class="flag-red">将音频 PA 输出反馈到 MCU ADC 时，需增加分压与 RC 滤波，或增加数字滤波；分压后的电压必须保持在 ADC 输入范围内，RC 滤波截止频率应为 20 kHz</span> | 可选 |
 | 10 | <span class="flag-red">若不使用芯片集成的模拟音频 ADC 通路，建议 ADC1P/ADC1N 与 ADC2P/ADC2N 各通过一个 0 Ω 串联电阻接地</span> | 可选 |
@@ -490,7 +490,7 @@ SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设�
 </div>
 
 !!! note "来源适用范围与技术核实"
-    [来源核对表工作簿](https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)中，PBR 核对表第 4 项明确提到 SF32LB567，但工作簿并未说明 PBR 核对表第 4、5 项也适用于 SF32LB58x；采用前请向思澈科技（SiFli）确认。
+    [来源核对表工作簿](https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)中，PBR 核对表第 4 项明确提到 SF32LB567，但工作簿并未将 PBR 核对表第 4、5 项确立为 SF32LB58x 的推荐做法；采用前请向思澈科技（SiFli）确认。
 
     工作簿“存储”核对表第 6 项写明，量产烧录时将 PA43 拉高以使能“MPI3 电源”。但[思澈科技（SiFli）官方 SF32LB58x 硬件应用说明](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md)将 PA43 描述为外部 Flash 电源控制脚，并要求拉高 PA43 以接通外部 Flash 电源。核对表条目仍保留工作簿中的原文。量产下载方案定版前，请向思澈科技（SiFli）确认该管脚实际控制的电源轨及接口适用范围。
 

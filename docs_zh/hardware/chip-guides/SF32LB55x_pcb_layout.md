@@ -39,7 +39,7 @@ tags:
 
 </div>
 
-原图标注成品板厚为 0.7 mm ±10%（含电镀层和阻焊层）。其中 PTH 叠层图将 L1/L4 铜箔+电镀厚度标为 0.048 mil（0.001219 mm），L2/L3 铜箔厚度标为 0.07 mil（0.001778 mm）。这些数值与常见 PCB 铜厚表达存在明显差异；此处按原图照录，不应直接作为制造要求，须向思澈科技（SiFli）和 PCB 厂书面确认。
+原图标注成品板厚为 0.7 mm ±10%（含电镀层和阻焊层）。该图将 L1/L4 铜箔+电镀厚度标为 0.048 mil（0.001219 mm），L2/L3 铜箔厚度标为 0.07 mil（0.001778 mm）。这些数值与常见 PCB 铜厚表达存在明显差异；此处按原图照录，不应直接作为制造要求，须向思澈科技（SiFli）和 PCB 厂书面确认。
 
 <div align="center"><em>表 6.1-2：六层 HDI 参考叠层</em></div>
 
@@ -71,7 +71,7 @@ tags:
 - BGA145/BGA169：焊球直径 0.25 mm、间距 0.5 mm；参考焊盘图给出的阻焊开窗为 0.33 mm，钢网开口为 0.25 mm。
 - QFN68L：周边焊盘为 0.2 × 0.55 mm、间距 0.35 mm；参考图给出的阻焊开窗为 0.3 × 0.65 mm，钢网开口为 0.2 × 0.55 mm。中心裸露焊盘标称尺寸为 5.49 mm × 5.49 mm，范围为 5.39–5.59 mm。
 
-发布封装前，应核对封装图以及装配厂对钢网和阻焊的要求。
+发布焊盘封装前，应核对封装图以及装配厂对钢网和阻焊的要求。
 
 ### 6.2. 通用 PCB 规则 { #62-general-pcb-rules }
 
@@ -105,19 +105,19 @@ tags:
 
 </div>
 
-原图的同网络间距矩阵仅在部分单元格标出 0 mm，空白单元格未定义；不得据此推断未标注组合也可采用 0 mm。以上均为思澈科技（SiFli）参考图中的默认规则，不等同于所选 PCB 厂的制造能力或量产设计规则，投板前应逐项确认。
+原图的同网络间距矩阵仅在部分单元格标出 0 mm，空白单元格未定义；不得据此推断未标注组合也可采用 0 mm。布局发布前，请逐项向 PCB 厂确认。
 
 #### 6.2.2. 电源与接地布局 { #622-power-and-ground-layout }
 
-- DC-DC 电感和电容应靠近对应管脚。BUCK_VSW 走线应短且宽，尽量缩小回路面积；输出电容的地端通过多个过孔连接地平面；BUCK_VOUT 反馈走线宽度必须大于 0.25 mm。电感下方不铺表层铜，也不穿过无关走线；相邻层应为完整地平面。
+- DC-DC 电感和电容应靠近对应管脚。BUCK_VSW 走线应短且宽，尽量缩小回路面积；输出电容的地端通过多个过孔连接地平面；BUCK_VOUT 反馈走线应宽于 0.25 mm。电感下方不铺表层铜，也不穿过无关走线；相邻层应为完整地平面。
 - PVDD_PMU1（管脚 67）的电容应靠近管脚，走线宽度至少为 0.3 mm。LDO/IO 电容应靠近对应管脚；走线宽度按负载电流确定，对纹波或稳定性敏感的电源应采用短而宽的走线。
-- QFN 裸露焊盘应通过多个过孔直接连接主地，RF 和 PMU 区域尤其如此。BGA145 和 BGA169 的 RF 接地焊球为 C12、C13、D12、E13，应按 [BGA145 焊球图](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA145-Ballmap.svg)、[BGA169 器件 1 焊球图](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg)和 [BGA169 器件 2 焊球图](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-2-Ballmap.svg)连接主地。D2、B3 仅在 BGA169 中是 PMU 接地焊球；在 BGA145 中，D2 为 PA79，B3 为 BUCK2_VOUT。不要用表层铜将不同接地焊球相互桥接。
+- QFN 裸露焊盘应通过多个过孔直接连接主地，RF 和 PMU 区域尤其如此。BGA145 和 BGA169 的 RF 接地焊球 C12、C13、D12 和 E13 应连接主地，参见 [BGA145 焊球图](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA145-Ballmap.svg)、[BGA169 器件 1 焊球图](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg)和 [BGA169 器件 2 焊球图](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA169-2-Ballmap.svg)。D2、B3 仅在 BGA169 中是 PMU 接地焊球；在 BGA145 中，D2 为 PA79，B3 为 BUCK2_VOUT。不要用表层铜将不同接地焊球相互桥接。
 
-**原图核对说明：** 源资料正文将 RF 接地焊球列为 C13、E13、D12、E13，其中 E13 重复；[RF 接地图](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-RF-VSS-PCB.png)则将 AVSS_TRF 标为 C13、AVSS_RRF 标为 E13、AVSS_BB 标为 C12、AVSS_VCO 标为 D12。上文坐标按图中标注整理；布线前仍应按所选封装的焊球图核对。
+**原图核对说明：** 源资料正文列出的 RF 接地焊球中 E13 重复出现；[RF 接地图](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-RF-VSS-PCB.png)则将 AVSS_TRF 标为 C13、AVSS_RRF 标为 E13、AVSS_BB 标为 C12、AVSS_VCO 标为 D12。上文坐标按图中标注整理；布线前仍应按所选封装的焊球图核对。
 
 #### 6.2.3. EMI、ESD 与保护 { #623-emi-esd-and-protection }
 
-条件允许时，将时钟和噪声较大的电源走线布置在内层。ESD 器件应靠近连接器，使信号进入板内前先经过保护器件，避免形成支线；接地路径应短、宽，并通过过孔直接连接地平面。USB 充电测试点应位于 TVS 的连接器侧。电池输入 TVS 应位于连接器与板端负载之间，使到芯片的路径先经过 TVS，并保持其接地连接短。
+条件允许时，将时钟和噪声较大的电源走线布置在内层。ESD 器件应靠近连接器，使信号进入板内前先经过保护器件，避免形成支线；接地路径应短、宽，并通过过孔直接连接地平面。USB 充电测试点应位于 TVS 的连接器侧。电池输入 TVS 应位于连接器与板端负载之间，使到芯片的路径先经过 TVS，其接地连接应短。
 
 ### 6.3. 接口走线 { #63-interface-routing }
 
@@ -133,11 +133,11 @@ tags:
 
 RF 匹配网络应靠近芯片，而非天线。AVDD_BRF 电容应靠近管脚，地端直接连接主地。RF 走线应位于顶层且不换层，并按 50 Ω 阻抗控制。源资料正文建议线宽大于 10 mil，而检查表将 ≥10 mil 列为必检项；应区分建议值与检查表下限，并结合所选叠层的 50 Ω 阻抗计算确定最终线宽。两侧采用三维地屏蔽和地过孔，避免尖角。DC-DC、VBAT、时钟及高速 I2C/SPI/SDIO/I2S/UART 走线应远离 RF 区域。
 
-MIPI_DSI 应按 100 Ω 差分阻抗布线，数据差分对与时钟差分对应进行长度匹配。OPI PSRAM 和 LCDC SPI/QSPI 总线应控制组内长度。时钟和 I2C 走线可用地线护绕，并避免与无关信号长距离平行。
+MIPI_DSI 应按 100 Ω 差分阻抗布线，数据差分对与时钟差分对应进行长度匹配。OPI PSRAM 和 LCDC SPI/QSPI 总线应做长度匹配。时钟和 I2C 走线可用地线护绕，并避免与无关信号长距离平行。
 
 #### 6.3.3. 模拟信号走线 { #633-analog-routing }
 
-GPADC 走线应在三维方向进行地屏蔽，并远离易受噪声影响的电池电压及温度检测路径。还应结合所需稳定时间检查分压器阻抗和漏电流。
+GPADC 走线应在三维方向进行地屏蔽，并远离噪声较大的电池电压及温度检测路径。还应结合所需建立时间检查分压器阻抗和漏电流。
 
 ### 6.4. PCB 布局核对表 { #64-pcb-layout-checklist }
 
@@ -188,7 +188,7 @@ GPADC 走线应在三维方向进行地屏蔽，并远离易受噪声影响的�
 | 3 | BUCK1 电感靠近芯片放置 | 全部型号 | 必检 |
 | 4 | BUCK1 电容尽量靠近芯片引脚放置 | 全部型号 | 必检 |
 | 5 | BUCK2 电感靠近芯片放置 | 仅 555 | 必检 |
-| 6 | AVDD_DSI 上的 0.1 μF 电容靠近引脚放置 | 仅 555 | 必检 |
+| 6 | AVDD_DSI 上的 0.1 µF 电容靠近管脚放置 | 仅 555 | 必检 |
 | 7 | LDO_VOUT1 电容靠近引脚放置 | 全部型号 | 必检 |
 | 8 | LDO_VOUT2 电容靠近引脚放置 | 全部型号 | 必检 |
 | 9 | VDD_RET 电容靠近引脚放置 | 全部型号 | 必检 |
@@ -217,7 +217,7 @@ GPADC 走线应在三维方向进行地屏蔽，并远离易受噪声影响的�
 
 </div>
 
-**源资料说明：** 源资料正文要求在晶体区域下方的顶层及相邻层禁布铜；检查表则列出 4 层板的顶层，并注明必要时还需避让第 2、3 层。[48 MHz 走线模型](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-48M-M-PCB.png)和 [32.768 kHz 走线模型](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-32K-M-PCB.png)均画出了 XI/XO 走线下方的 L2 接地层。源资料未说明禁布区是否仅指晶体封装正下方，还是也覆盖走线区域，也未说明这些层要求如何对应。投板前请向思澈科技（SiFli）确认具体禁布层，不要自行推断。
+**源资料说明：** 源资料正文要求在晶体区域下方的顶层及相邻层禁布铜；检查表则列出 4 层板的顶层，并注明必要时还需避让第 2、3 层。[48 MHz 走线模型](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-48M-M-PCB.png)和 [32.768 kHz 走线模型](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-32K-M-PCB.png)均画出了 XI/XO 走线下方的 L2 接地层。源资料未说明禁布区是否仅限晶体封装正下方，还是也覆盖走线下方，也未说明这些层要求如何对应。投板前请向思澈科技（SiFli）确认具体禁布层，不要自行推断。
 
 #### 6.4.5. 按键 { #645-buttons }
 
@@ -242,7 +242,7 @@ GPADC 走线应在三维方向进行地屏蔽，并远离易受噪声影响的�
 | 1 | RF 走线满足单端 50 Ω 特性阻抗要求 | 全部型号 | 必检 |
 | 2 | RF 走线宽度 ≥ 10 mil | 全部型号 | 必检 |
 | 3 | RF 走线两侧各预留宽度至少 60 mil 的 GND 铜皮，并通过足够的地过孔连接至主地 | 全部型号 | 必检 |
-| 4 | 预留的 Pi 型天线匹配网络靠近芯片侧放置 | 全部型号 | 必检 |
+| 4 | 在靠近芯片处预留 Pi 型天线匹配网络 | 全部型号 | 必检 |
 | 5 | RF 信号下方为连续 GND 平面 | 全部型号 | 必检 |
 | 6 | RF 信号下方不得有高速数字信号穿越 | 全部型号 | 必检 |
 | 7 | RF 信号下方不得有高 di/dt 电源走线穿越 | 全部型号 | 必检 |
@@ -272,10 +272,10 @@ GPADC 走线应在三维方向进行地屏蔽，并远离易受噪声影响的�
 
 | 序号 | 检查项 | 适用型号 | 类别 |
 |:---|:---|:---|:---|
-| 1 | GPADC 信号不存在高速变化信号并行走线，或已采取适当保护 | 全部型号 | 必检 |
+| 1 | 不得让快速切换的信号与 GPADC 信号并行走线，除非已采取适当保护 | 全部型号 | 必检 |
 | 2 | 电池电压分压电阻靠近芯片输入引脚放置 | 全部型号 | 必检 |
 | 3 | 电池电压检测信号必须从电池连接器处引出，并采用包地处理 | 全部型号 | 必检 |
-| 4 | SDMADC 信号不存在高速变化信号并行走线，或已采取适当保护 | 仅 555 | 可选 |
+| 4 | 不得让快速切换的信号与 SDMADC 信号并行走线，除非已采取适当保护 | 仅 555 | 可选 |
 
 </div>
 

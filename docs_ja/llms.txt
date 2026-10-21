@@ -53,6 +53,15 @@
 - [SF32LB56xハードウェア設計ガイド — 回路図チェックリスト](https://uForge.io/ja/hardware/chip-guides/SF32LB56x_schematic_checklist/): SF32LB56x MCUの電源、クロック、RF、ストレージ、ディスプレイ、製造に関する回路図レビュー用チェックリスト。
 - [SF32LB56xハードウェア設計ガイド — PCBレイアウトガイドライン](https://uForge.io/ja/hardware/chip-guides/SF32LB56x_pcb_layout/): SF32LB56x MCUのPCBレイアウトガイドです。フットプリント、基板積層、重要信号の配線、項目別のPCBレイアウトチェックリストを説明します。
 - [SF32LB56xハードウェア設計ガイド — 設計レビュー用チェックリストと参考資料](https://uForge.io/ja/hardware/chip-guides/SF32LB56x_review_and_reference/): SF32LB56xハードウェア設計ガイドの設計レビュー用チェックリスト、関連資料、参考文献、付録、改訂履歴。
+- [SF32LB57x](https://uForge.io/ja/sf32-products/chips/SF32LB57x/): SF32LB57x：デュアルモードBluetooth、240 MHzコア2個、ePicasso 3.0、eZip 3.0、小型QFN/BGAを備えた超低消費電力マルチコアAIoT MCUファミリー。
+- [SF32LB57xハードウェア設計ガイド](https://uForge.io/ja/hardware/chip-guides/SF32LB57x_hardware_design_guide/): SF32LB57x MCUのハードウェア設計ガイド。最小システム、電源、クロック、RF、ディスプレイ、カメラ、ストレージ、PCBレイアウトの指針を解説します。
+- [SF32LB57xハードウェア設計ガイド — 最小システムと電源](https://uForge.io/ja/hardware/chip-guides/SF32LB57x_schematic_system_power/): SF32LB57xの最小システム設計と電源システムに関する回路図設計指針。パッケージと電源ファミリーの適合、ブートストラップ、電源ツリー、充電／OVP、BUCK、低消費電力レール、動作モードを扱います。
+- [SF32LB57xハードウェア設計ガイド — クロック、RF、ユーザーインターフェース](https://uForge.io/ja/hardware/chip-guides/SF32LB57x_schematic_clock_rf_interfaces/): SF32LB57x MCUの回路図設計ガイド。48 MHz/32.768 kHz水晶振動子、RF整合とアンテナ経路、ディスプレイ、タッチ／バックライト、オーディオ、カメラ、ボタン、モーターを扱います。
+- [SF32LB57xハードウェア設計ガイド — ストレージと製造](https://uForge.io/ja/hardware/chip-guides/SF32LB57x_schematic_storage_mfg/): SF32LB57x MCUのストレージ、接続、製造に関する回路図設計指針です。ブートメディア、GPIO、UART／I2C／SPI／SDIO／USB／CAN／GPADC、量産書き込み、校正、治具アクセスを扱います。
+- [SF32LB57xハードウェア設計ガイド — 回路図チェックリスト](https://uForge.io/ja/hardware/chip-guides/SF32LB57x_schematic_checklist/): SF32LB57x MCUの回路図を項目ごとに確認するチェックリストです。パッケージ、電源、消費電力、クロック、ストレージ、RF、ディスプレイ、オーディオ、カメラ、ボタン、各種インターフェース、製造工程を確認します。
+- [SF32LB57xハードウェア設計ガイド — PCBレイアウト指針](https://uForge.io/ja/hardware/chip-guides/SF32LB57x_pcb_layout/): SF32LB57x MCUのPCBレイアウト指針。基板積層、重要な設計制約、電源／水晶／RF／アナログ／オーディオ／高速信号の配線、EMI／ESD／EOS対策、参考図を解説します。
+- [SF32LB57xハードウェア設計ガイド — PCBレイアウトチェックリスト](https://uForge.io/ja/hardware/chip-guides/SF32LB57x_pcb_layout_checklist/): SF32LB57x MCUのPCBレイアウトを項目ごとに確認するチェックリストです。パッケージ、電源配線、クロック、RF、ディスプレイ、オーディオ、GPADCの確認事項をまとめています。
+- [SF32LB57xハードウェア設計ガイド — 設計レビューのチェックリストと参考資料](https://uForge.io/ja/hardware/chip-guides/SF32LB57x_review_and_reference/): SF32LB57xハードウェア設計ガイド向けの顧客設計セルフチェック、関連資料、参考資料、付録、改訂履歴です。
 - [SF32LB58x](https://uForge.io/ja/sf32-products/chips/SF32LB58x/): SF32LB58x: グラフィックス、ディスプレイ、メモリー、周辺機能の要件が高いコネクテッド製品向けの、フラッグシップクラスのAIoT MCUファミリー。
 - [SF32LB58xハードウェア設計ガイド](https://uForge.io/ja/hardware/chip-guides/SF32LB58x_hardware_design_guide/): SF32LB58x MCUのハードウェア設計ガイドです。電源アーキテクチャ、クロックとRF、ディスプレイ、ストレージ、オーディオ、PCBレイアウトを扱います。
 - [SF32LB58xハードウェア設計ガイド — 回路図設計ガイドライン](https://uForge.io/ja/hardware/chip-guides/SF32LB58x_schematic_design/): SF32LB58x MCUの回路図設計ガイド。電源、クロック生成、RF、ユーザーインターフェース、ストレージと接続、製造を扱います。
@@ -89,7 +98,6 @@
 
 ## 開発
 
-- [開発の概要](https://uForge.io/ja/develop/): SiFli-SDKを使ってSF32製品を開発するための実務ガイドです。日々の開発フロー、アプリケーションノート、サンプル、ツール、ファームウェアのトピック、コミュニティの選択肢を案内します。
 - [開発の概要](https://uForge.io/ja/develop/): SiFli-SDKを使ってSF32製品を開発するための実務ガイドです。日々の開発フロー、アプリケーションノート、サンプル、ツール、ファームウェアのトピック、コミュニティの選択肢を案内します。
 - [SiFli-SDK](https://uForge.io/ja/develop/platforms/sifli-sdk/overview/): SF32ファームウェア開発の標準となるSiFli-SDKを紹介します。sconsによるビルドとsdk.py menuconfigの基本的な使い方、ボード名、プロジェクト構成、量産準備に関する確認事項を説明します。
 - [ビルド、書き込み、シリアル出力の確認](https://uForge.io/ja/develop/platforms/sifli-sdk/build-flash-monitor/): SiFli-SDKの日常的な開発手順：環境を有効化し、sconsでビルドし、UARTダウンロードスクリプトまたはsftoolで書き込み、シリアル出力を確認します。
@@ -139,7 +147,7 @@
 - [Bluetooth PAN](https://uForge.io/ja/learn/bluetooth/pan/): SF32のBluetooth PAN：BNEPによる転送、NAP/GN/PANUの役割、スマートフォンのテザリングを使う際の判断基準、SiFli-SDKの設定とOTAの検証。
 - [Bluetooth SDKサンプル](https://uForge.io/ja/learn/bluetooth/bluetooth-sdk-examples/): BLEサービス、Classic Bluetoothプロファイル、スマートフォン統合、OTA、データ転送、LE Audioブロードキャストに適したSiFli-SDK Bluetoothのサンプルを選ぶ。
 - [Bluetoothの消費電力を測定・分析する](https://uForge.io/ja/learn/bluetooth/bluetooth-low-power-profiling/): SF32デバイスでBLE、Classic Bluetooth、デュアルモード動作時の消費電力を測定し、電流トレースをファームウェアの動作と対応付けて、日常使用時のエネルギー予算に反映する方法を解説します。
-- [ATコマンドセット](https://uForge.io/ja/learn/bluetooth/at-command-reference/): SF32LB57デュアルモードBluetoothモジュール（SIFLI_AT）のATコマンドリファレンスです。コマンド形式、システムとデバイス、アドレスと識別情報、動作モードと可視性、ペアリングとセキュリティ、シリアルポートとイベント、接続管理、データ転送、カスタムGATTコマンド、非同期イベント（URC）、PDU形式コマンドを網羅します。
+- [ATコマンドセット](https://uForge.io/ja/learn/bluetooth/at-command-reference/): SF32LB57デュアルモードBluetoothモジュール（SIFLI_AT）のATコマンドリファレンス。フレーム形式、ペアリング、接続、データ転送、GATT、URC、PDUコマンド。
 - [AI概要](https://uForge.io/ja/learn/ai/overview/): SF32上でオンデバイスAIを実装するための概要。デバイス選定、NNACC HALの利用、メモリー使用量の見積もり、電力予算に合わせた推論スケジューリングを扱います。
 - [AIアクセラレーター](https://uForge.io/ja/learn/ai/accelerator/): SF32 NNACCの対応演算子、CPU・ランタイムの役割、メモリー制約、組み込みAIのレイテンシとエネルギー評価。
 - [オーディオ概要](https://uForge.io/ja/learn/audio/overview/): SF32のローカルオーディオサブシステムの概要: コーデックとDMAパス、インターフェース選定、バッファリング戦略、Audio Serverミドルウェア、電力トレードオフ。
@@ -192,3 +200,4 @@
 - 各チップ／モジュールファミリーは同じ構成です。イントロダクションページ（デバイス概要、バリアント、パッケージ、用途）とハードウェア設計ガイド（回路図ガイダンス、PCB レイアウト、製造チェックリスト）があり、一部のチップには独立したハードウェア設計チェックリストページもあります。
 - サイトは 9 言語で公開されています。英語（基準、サイトのルート）と、機械支援翻訳の中国語（/zh/）、日本語（/ja/）、スペイン語（/es/）、ドイツ語（/de/）、フランス語（/fr/）、ポルトガル語（/pt/）、ロシア語（/ru/）、韓国語（/ko/）です。翻訳ページは、言語プレフィックスの下で英語ページと同じパスを持ちます。
 - 正式な電気的仕様、ピンマッピング、部品の適格性については、各ガイドから SiFli のデータシート、ユーザーマニュアル、SiFli 承認ベンダーリスト（AVL）へリンクしています。
+- A full-text bundle of the key pages (getting started, SF32 chips, modules, dev boards, SDK basics, and learning overviews) is at https://uForge.io/llms-full.txt, with a localized copy at https://uForge.io/<lang>/llms-full.txt; fetch it when one request should cover the whole platform.

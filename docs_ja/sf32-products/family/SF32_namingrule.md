@@ -56,7 +56,7 @@ tags:
 
 ### SF32LB57x固有のメモリーコード { #sf32lb57x-memory-codes }
 
-SF32LB57xハードウェア設計ガイドの型番規則図では、パッケージコードの後にMPI1、MPI2、MPI3の順で3つのメモリー位置コードが並び、その後に温度グレードが続きます。各MPI位置で使用されるファミリー固有コードは次のとおりです。
+SF32LB57xハードウェア設計ガイドの[型番規則図](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md#33-packages)では、パッケージコードの後にMPI1、MPI2、MPI3の順で3つのメモリー位置コードが並び、その後に温度グレードが続きます。各MPI位置で使用されるファミリー固有コードは次のとおりです。
 
 <div align="center"><em>表: SF32LB57xのMPI位置別メモリーコード</em></div>
 

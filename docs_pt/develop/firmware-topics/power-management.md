@@ -1,6 +1,6 @@
 ---
 icon: lucide/battery-charging
-description: "Meça e ajuste o consumo de energia do SF32 considerando a configuração dos clocks, os modos de suspensão, o display, os intervalos de conexão Bluetooth e a atividade dos sensores para transformar um protótipo em um produto pronto para operar com bateria."
+description: "Meça e ajuste o consumo do SF32: clocks, modos de suspensão, display, intervalos de conexão Bluetooth e sensores, para levar o protótipo a um produto com bateria."
 tags:
     - Desenvolvimento
     - Energia

@@ -1,6 +1,6 @@
 ---
 icon: lucide/keyboard
-description: "Ein technischer Ablauf zur Bewertung der ZMK-Portierung von OpenSiFli auf SF32LB52: die Basis der geteilten Urchin-Tastatur reproduzieren, USB, BLE, Einstellungen und Wiederherstellung validieren und anschließend Tastenbelegung oder Hardware gezielt anpassen."
+description: "Entwicklungspfad für OpenSiFlis ZMK-Portierung auf SF32LB52: Urchin-Split-Tastatur reproduzieren, USB, BLE und Wiederherstellung prüfen, dann Keymap oder Hardware anpassen."
 tags:
     - Projekte
     - Zephyr

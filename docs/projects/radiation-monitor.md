@@ -1,6 +1,6 @@
 ---
 icon: lucide/activity
-description: "An SF32LB52-based Bluetooth-band signal viewer: reproduce Radiation Monitor, verify its 79-point scan, RSSI smoothing, and history playback, then define calibration and product-review boundaries."
+description: "SF32LB52 Bluetooth-band signal viewer: reproduce Radiation Monitor, verify its 79-point scan, RSSI smoothing, and history, then define calibration boundaries."
 tags:
     - Projects
     - Bluetooth

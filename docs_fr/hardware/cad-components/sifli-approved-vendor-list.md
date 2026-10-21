@@ -1,6 +1,6 @@
 ---
 icon: lucide/component
-description: "La liste de fournisseurs approuvés de SiFli pour les conceptions SF32 : quartz qualifiés, inductances de convertisseurs abaisseurs, mémoires Flash NOR/NAND et SD-NAND, et pilotes LCD, avec les critères de sélection et les vérifications de nomenclature."
+description: "Liste de fournisseurs approuvés SiFli pour SF32 : quartz, inductances, Flash NOR/NAND et pilotes LCD qualifiés, avec critères de sélection et revue de nomenclature."
 tags:
     - Matériel
     - Fournisseur
@@ -395,5 +395,5 @@ Cette liste de contrôle applique volontairement des critères plus stricts que 
 ## Pages associées { #related-pages }
 
 - [Guide de conception matérielle SF32LB52x](../chip-guides/SF32LB52x_hardware_design_guide.md) — conseils de schéma et de routage faisant référence directement à plusieurs composants de cette liste.
-- Guide de conception matérielle SF32LB57x
+- [Guide de conception matérielle SF32LB57x](../chip-guides/SF32LB57x_hardware_design_guide.md)
 - [Famille SF32](../../sf32-products/family/SF32_family.md)

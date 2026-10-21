@@ -33,6 +33,7 @@ nav = [
       "sf32-products/chips/SF32LB52x.md",
       "sf32-products/chips/SF32LB55x.md",
       "sf32-products/chips/SF32LB56x.md",
+      "sf32-products/chips/SF32LB57x.md",
       "sf32-products/chips/SF32LB58x.md"
     ]},
     { "Módulos" = [
@@ -144,6 +145,20 @@ nav = [
         { "Lista de verificação do esquemático" = "hardware/chip-guides/SF32LB56x_schematic_checklist.md" },
         { "Diretrizes de layout da PCB" = "hardware/chip-guides/SF32LB56x_pcb_layout.md" },
         { "Lista de revisão de projeto e referências" = "hardware/chip-guides/SF32LB56x_review_and_reference.md" }
+      ]},
+      { "SF32LB57x" = [
+        { "Visão geral" = "hardware/chip-guides/SF32LB57x_hardware_design_guide.md" },
+        { "Diretrizes de projeto do esquemático" = [
+          { "Sistema mínimo e alimentação" = "hardware/chip-guides/SF32LB57x_schematic_system_power.md" },
+          { "Clock, RF e interfaces de usuário" = "hardware/chip-guides/SF32LB57x_schematic_clock_rf_interfaces.md" },
+          { "Armazenamento e fabricação" = "hardware/chip-guides/SF32LB57x_schematic_storage_mfg.md" },
+          { "Lista de verificação do esquemático" = "hardware/chip-guides/SF32LB57x_schematic_checklist.md" }
+        ]},
+        { "Diretrizes de layout da PCB" = [
+          { "Diretrizes de projeto" = "hardware/chip-guides/SF32LB57x_pcb_layout.md" },
+          { "Lista de verificação do layout da PCB" = "hardware/chip-guides/SF32LB57x_pcb_layout_checklist.md" }
+        ]},
+        { "Lista de revisão de projeto e referências" = "hardware/chip-guides/SF32LB57x_review_and_reference.md" }
       ]},
       { "SF32LB58x" = [
         { "Visão geral" = "hardware/chip-guides/SF32LB58x_hardware_design_guide.md" },

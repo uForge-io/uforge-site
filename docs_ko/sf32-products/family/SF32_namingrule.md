@@ -56,7 +56,7 @@ tags:
 
 ### SF32LB57x 전용 메모리 코드 { #sf32lb57x-memory-codes }
 
-하드웨어 설계 가이드의 SF32LB57x 파트 넘버 그림에는 패키지 코드 뒤에 MPI1, MPI2, MPI3 순서로 메모리 위치 코드 3개가 표시되고, 그 뒤에 온도 등급 코드가 이어집니다. 각 MPI 위치의 제품군별 코드는 다음과 같습니다.
+[하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md#33-packages)의 SF32LB57x 파트 넘버 그림에는 패키지 코드 뒤에 MPI1, MPI2, MPI3 순서로 메모리 위치 코드 3개가 표시되고, 그 뒤에 온도 등급 코드가 이어집니다. 각 MPI 위치의 제품군별 코드는 다음과 같습니다.
 
 <div align="center"><em>표: MPI 위치별 SF32LB57x 메모리 코드</em></div>
 

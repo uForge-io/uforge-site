@@ -63,7 +63,7 @@ N4 变体适合紧凑型控制、蓝牙（Bluetooth）和简单 UI 应用。N16R
 - 对比仅含 NOR Flash 的配置，以及搭配 PSRAM 的 QSPI-NOR、QSPI-NAND 配置
 - 在小尺寸板型中启动调试 LCD、音频、传感器和 USB 功能
 
-如果需要更方便的台式接线和更宽裕的信号引出，使用 [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md)。如果需要带充电器、TF 卡、麦克风和扬声器功放的显示型开发板，请使用 [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md)。
+如果需要更方便的台式接线和更宽的信号引出，请使用 [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md)。如果需要带充电器、TF 卡、麦克风和扬声器功放的显示型开发板，请使用 [SF32LB52-DevKit-LCD](SF32LB52-DevKit-LCD.md)。
 
 ## 供电 { #power }
 
@@ -163,7 +163,7 @@ Nano 开发板引出了两组板边引脚。第一组主要承载音频、SPI1�
 
 ## LCD 接口 { #lcd-interface }
 
-开发板通过 16 针 FPC 连接器支持 QSPI LCD 面板。原始开发板说明提到，可通过 22 针转 16 针 FPC 线缆连接 Huangshan Pi 1.85 英寸 AMOLED 屏幕。
+开发板通过 16 针 FPC 信号组支持 QSPI LCD 面板。原始开发板说明提到，可通过 22 针转 16 针 FPC 线缆连接 Huangshan Pi 1.85 英寸 AMOLED 屏幕。
 
 ![22 针转 16 针 FPC 适配线](assets/sf32lb52x/22p-to-16p.png){ loading="lazy" }
 <div align="center"><em>22 针转 16 针 FPC 适配线</em></div>
@@ -226,7 +226,7 @@ Nano 开发板引出了模拟麦克风输入、麦克风偏置和差分模拟音
 - `sf32lb52-nano_n16r16`
 - `sf32lb52-nano_a128r16`
 
-这些名称是 SDK 构建目标标识，不一定等同于开发板或模组上的产品型号。思澈科技（SiFli）的[开发板支持索引](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)与 SDK 主分支[`build_config_gcc.yaml`](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml)列出的目标可能不同；请按当前使用的 SDK 版本核实。
+这些名称是 SDK 构建目标标识，不一定等同于开发板或模组上的产品型号。思澈科技（SiFli）的[开发板支持索引](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)与 SDK 的 [`build_config_gcc.yaml`](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml)列出的目标集合可能不同；请按当前使用的 SDK 版本核实。
 
 ## 相关文档 { #related-documents }
 

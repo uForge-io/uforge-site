@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-Nano : carte de développement SF32LB52x compacte à demi-trous métallisés pour des prototypes proches du produit, la mise en service de petits affichages et l'évaluation par brasage."
+description: "SF32LB52-DevKit-Nano : carte SF32LB52x compacte à demi-trous métallisés pour prototypes proches du produit, petits affichages et évaluation par brasage."
 tags:
     - Matériel
     - Carte de développement

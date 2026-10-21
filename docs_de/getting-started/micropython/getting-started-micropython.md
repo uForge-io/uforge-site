@@ -1,6 +1,6 @@
 ---
 icon: lucide/braces
-description: "Für SF32 gibt es noch keinen verifizierten Einstieg mit MicroPython. Nutzen Sie SiFli-SDK für eine reproduzierbare Erstinbetriebnahme und verfolgen Sie den Stand auf der MicroPython-Statusseite."
+description: "Für SF32 gibt es noch keinen verifizierten MicroPython-Einstieg: Nutzen Sie SiFli-SDK für reproduzierbare Inbetriebnahme und beobachten Sie die MicroPython-Statusseite."
 tags:
     - Erste Schritte
     - MicroPython

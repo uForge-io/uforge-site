@@ -1,6 +1,6 @@
 ---
 icon: lucide/wrench
-description: "Mapa de herramientas para desarrollar con SF32: sftool, scripts UART del SDK, acciones CodeKit y herramientas de análisis, recursos gráficos y producción, organizadas por uso."
+description: "Mapa de herramientas para SF32: sftool, scripts UART del SDK, acciones de CodeKit, análisis de fallos y trazas, y herramientas de recursos y producción por uso."
 tags:
     - Desarrollo
     - Herramientas

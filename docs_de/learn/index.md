@@ -1,7 +1,7 @@
 ---
 icon: lucide/lightbulb
 title: "Lernübersicht"
-description: "Finden Sie die benötigten Informationen zur SF32-Architektur und zu den Subsystemen: Grafik, Bluetooth, KI, Audio, Low Power und die zugrunde liegende Prozessorarchitektur."
+description: "Orientierung zu SF32-Architektur und Subsystemen: Grafik, Bluetooth, KI, Audio, Low Power und die zugrunde liegende Prozessorarchitektur."
 tags:
     - Lernen
 ---

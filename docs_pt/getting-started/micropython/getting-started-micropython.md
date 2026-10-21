@@ -1,6 +1,6 @@
 ---
 icon: lucide/braces
-description: "Ainda não há um procedimento validado para começar a usar MicroPython no SF32. Use o SiFli-SDK para uma primeira execução reproduzível e consulte a página de status do MicroPython para acompanhar o suporte."
+description: "MicroPython ainda não é um início validado no SF32: use o SiFli-SDK para uma primeira execução reproduzível e acompanhe a página de status do MicroPython."
 tags:
     - Primeiros passos
     - MicroPython

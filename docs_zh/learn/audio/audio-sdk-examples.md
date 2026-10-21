@@ -28,7 +28,7 @@ SiFli-SDK 的音频示例适合用于验证完整音频链路，但不能直接�
 | 从 SD 卡播放音乐 | [MP3 本地播放器](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/mp3_sd_player/README.html) | 播放 SD 卡 `music` 目录中的 MP3 或 WAV，并通过 Shell 控制音量 | 当前仅列出 `sf32lb52-lchspi-ulp`；需要 SPI1、FAT/MSD、扬声器；长按检测还需要外接电池。 |
 | 录制、无损压缩、解码并播放音频 | [FLAC 示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/flac/README.html) | PCM 录音，以及 FLAC 编码、解码和播放 | 官方列出 `sf32lb52-lcd`、`sf32lb56-lcd` 和 `sf32lb58-lcd` 系列；需要 FAT、`libFLAC` 和音频组件。 |
 | 录制、压缩、解码并播放语音内容 | [Opus 示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/opus/README.html) | 16 kHz 麦克风采集、Opus 编解码和扬声器播放 | 当前仅列出 `eh-lb525`；需要 FAT 和音频组件。栈配置应遵循下文所述的该示例专用建议。 |
-| 混合多路本地音频 | [三路音频混音播放器（官方中文页面）](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/example/multimedia/audio/mixer/README.html) | 分别解码三个本地文件、按需重采样并混音输出 | 当前页面列出的已验证目标为 `sf32lb52-lcd_n16r8` 和 `sf32lb56-lcd_n16r12n1`；文件系统镜像和样例文件应按示例配置使用。 |
+| 混合多路本地音频 | [三路音频混音播放器（官方中文页面）](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/example/multimedia/audio/mixer/README.html) | 分别解码三个本地文件、按需重采样并混音输出 | 当前页面列出 `sf32lb52-lcd_n16r8` 和 `sf32lb56-lcd_n16r12n1`；文件系统镜像和样例文件应按示例配置使用。 |
 
 </div>
 
@@ -95,7 +95,7 @@ SiFli-SDK 官方 README 建议根据编码模式设置 `OPUS_STACK_SIZE`：若 `
 
 经审阅的混音示例将三路单声道采样值求和后除以三，而不是以满增益直接相加。文档中的示例约运行 50 秒后结束。这种增益策略和有限的演示时长，不应直接当作产品的混音要求。
 
-当产品需要让提示音、音效和音乐同时存在时，它是合适的基线。它并不包含完整的音频策略：仍需明确流优先级、音量控制、削波处理、内存预算，以及某一路文件或解码器不能按时提供数据时的行为。运行时边界请参阅 [Audio Server 与缓冲](audio-server-buffering.md)。
+它适合作为提示音、音效和音乐同时播放场景的基线，此时产品必须决定哪些声音可以叠加。但它不是现成的音频策略，仍需明确流优先级、音量控制、削波处理、内存预算，以及某一路文件或解码器不能按时提供数据时的行为。运行时边界请参阅 [Audio Server 与缓冲](audio-server-buffering.md)。
 
 ## 改造示例时保留验证依据 { #adapt-an-example-without-losing-its-evidence }
 

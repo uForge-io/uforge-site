@@ -2,7 +2,7 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Schematic design guidelines for the SF32LB55x MCU: power system, boot mode, clock generation, RF, storage interfaces, display and touch interfaces, and wake/GPADC/manufacturing interfaces."
+description: "Schematic design guidelines for the SF32LB55x MCU: power, boot mode, clocks, RF, storage, display and touch, wake, GPADC, and manufacturing interfaces."
 tags:
     - Hardware
     - Chip

@@ -1,6 +1,6 @@
 ---
 icon: lucide/card-sim
-description: "SF32LB56-MOD : famille polyvalente de modules MCU Bluetooth 5.3 basse consommation basée sur SF32LB56xV, avec 4 MB + 8 MB de mémoire OPI-PSRAM intégrée au boîtier et des variantes Flash selon le SKU."
+description: "SF32LB56-MOD : modules MCU Bluetooth 5.3 basse consommation polyvalents basés sur SF32LB56xV, avec 4 + 8 MB d'OPI-PSRAM dans le boîtier et variantes Flash selon le SKU."
 tags:
   - Matériel
   - Module

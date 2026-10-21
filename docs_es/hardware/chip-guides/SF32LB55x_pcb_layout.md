@@ -2,7 +2,7 @@
 icon: lucide/layers
 hide:
     - navigation
-description: "Pautas de diseño de PCB para la MCU SF32LB55x: huella, apilado de capas, reglas generales de PCB, trazado de interfaces y lista de comprobación detallada del diseño de PCB."
+description: "Pautas de PCB para la MCU SF32LB55x: huella, apilado de capas, reglas generales, trazado de interfaces y lista de comprobación detallada del diseño de PCB."
 tags:
     - Hardware
     - Chip

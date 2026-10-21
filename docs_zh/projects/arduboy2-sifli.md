@@ -29,7 +29,7 @@ Arduboy 风格的应用可以一次性验证多项嵌入式产品决策：可预
 
 ## 成果、范围与进入条件 { #outcome-scope-and-entry-criteria }
 
-本文定义一条从 OpenSiFli 参考实现出发，得到一个可复现的 SF32 游戏或交互式演示的分阶段路径。本文**不**声称移植支持所有 Arduboy2 功能、所有 Arduboy 游戏、所有 SF32 开发板，也不声称显示和音频时序已经达到量产品质。本文也不为从第三方仓库复制的游戏、字体、图像或其他资源建立许可证权利。
+本文定义一条从 OpenSiFli 参考实现出发，得到一个可复现的 SF32 游戏或交互式演示的分阶段路径。本文**不**声称移植支持所有 Arduboy2 功能、所有 Arduboy 游戏、所有 SF32 开发板，也不声称显示和音频时序已经达到量产品质。本文也不意味着你对从第三方仓库复制的游戏、字体、图像或其他资源拥有使用许可。
 
 **成果：**得到一个受源代码管理的 Arduboy2-SiFli 构建：能在开发板上运行仓库示例或小型测试 Sketch，展示选定的显示 / 输入 / 音频路径，并保留判断是否值得投入更大游戏或产品适配所需的证据。
 
@@ -41,7 +41,7 @@ Arduboy 风格的应用可以一次性验证多项嵌入式产品决策：可预
 - 已验证可用的 Arduino 环境和匹配的 OpenSiFli 开发板软件包。上述变体名称只确定软件目标和引脚映射，并不能证明所有 SF32LB52-DevKit-LCD 实物版本都符合项目的外接接线要求；连接外设前应核对实际开发板原理图。
 - Arduboy2-SiFli 的准确提交版本、Arduino 核心 / 软件包版本、主机操作系统和烧录工具。
 - USB 数据连接，以及记录串口日志、观察显示、按键和音频输出的方法。
-- 对下游适配中包含的每个游戏、图像、字体和声音资源进行使用和再分发的许可。
+- 对下游适配中包含的每个游戏、图像、字体和声音资源，拥有使用和再分发的许可。
 
 <div align="center"><em>表：项目约定</em></div>
 
@@ -58,6 +58,7 @@ Arduboy 风格的应用可以一次性验证多项嵌入式产品决策：可预
 </div>
 
 ## 硬件与软件规格 { #hardware-and-software-specifications }
+
 ### 硬件规格 { #hardware-specification }
 
 <div align="center"><em>表：Arduboy2-SiFli 硬件规格</em></div>
@@ -71,7 +72,7 @@ Arduboy 风格的应用可以一次性验证多项嵌入式产品决策：可预
 | 六个游戏按键 | 兼容 Arduboy 的输入；低电平有效并启用上拉，具体引脚映射见仓库 | 读取方向键及 A/B 键输入 | 必需 | [Arduboy2-SiFli 源码](https://github.com/OpenSiFli/Arduboy2-SiFli) | 按键需外接；请对照实体开发板核实 Arduino IO 映射，并记录接线和消抖行为 |
 | 外接 EEPROM | AT24C02 或 AT24C32，通过 I2C1 连接，地址为 `0x50` | 支持使用 EEPROM 的库功能 | 可选；仅使用 EEPROM 功能时必需 | [Arduboy2-SiFli 源码](https://github.com/OpenSiFli/Arduboy2-SiFli) | 请确认所选器件、电压、上拉电阻和总线接线；仓库未指定已装配的 EEPROM 组合 |
 | 音频输出和 RGB 指示灯 | 仓库支持的音频后端使用映射的扬声器输出；外接共阴 RGB LED 由软件 PWM 驱动 | 提供可选音效和颜色指示 | 可选；按待测 Sketch 选择 | [Arduboy2-SiFli 源码](https://github.com/OpenSiFli/Arduboy2-SiFli) | 源码未给出完整的扬声器 / LED 物料清单；请验证外部电路、引脚映射、电流和音频表现 |
-| 主机与 USB 数据连接 | 使用所选 Arduino 工具链支持的主机；准备支持数据传输的线缆并能够读取串口日志 | 构建、下载并观察参考程序 | 必需 | [ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) | 记录主机操作系统、线缆与端口、软件包版本和恢复方式；仅支持充电的线缆不适用 |
+| 主机与 USB 数据连接 | 使用所选 Arduino 工具链支持的主机；准备支持数据传输的线缆并能够读取串口日志 | 构建、烧录并观察参考程序 | 必需 | [ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) | 记录主机操作系统、线缆与端口、软件包版本和恢复方式；仅支持充电的线缆不适用 |
 
 </div>
 
@@ -84,12 +85,13 @@ Arduboy 风格的应用可以一次性验证多项嵌入式产品决策：可预
 | 软件包或服务 | 所需版本或修订版 | 用途 | 状态 | 获取方式或来源 | 兼容性与更新说明 |
 |:-------------|:-----------------|:-----|:-----|:---------------|:-----------------|
 | OpenSiFli/Arduboy2-SiFli | 固定并记录一个提交版本；本文未锁定具体修订版 | SF32 兼容层和示例 | 必需 | [代码仓库](https://github.com/OpenSiFli/Arduboy2-SiFli) | 根据选定提交重新核对开发板目标、依赖项和受支持的 API |
-| OpenSiFli/ArduinoCore-zephyr 与开发板软件包 | 从移植项目中确认兼容的提交版本和软件包版本，并记录下来 | Arduino 运行时、开发板定义、编译器及下载集成 | 必需 | [代码仓库](https://github.com/OpenSiFli/ArduinoCore-zephyr) | 未经干净构建和外设回归验证，不要替换为更新的核心或其他开发板软件包 |
-| 测试 Sketch与游戏资源 | 选择一个仓库示例或单独取得许可的测试 Sketch；记录资源版本和许可 | 验证所选 API 和产品功能链路 | 二选一 | [Arduboy2-SiFli 示例](https://github.com/OpenSiFli/Arduboy2-SiFli) | 本文不授予再分发第三方游戏、字体、图像或音效的权利 |
+| OpenSiFli/ArduinoCore-zephyr 与开发板软件包 | 从移植项目中确认兼容的提交版本和软件包版本，并记录下来 | Arduino 运行时、开发板定义、编译器及烧录集成 | 必需 | [代码仓库](https://github.com/OpenSiFli/ArduinoCore-zephyr) | 未经干净构建和外设回归验证，不要替换为更新的核心或其他开发板软件包 |
+| 测试 Sketch 与游戏资源 | 选择一个仓库示例或单独取得许可的测试 Sketch；记录资源版本和许可 | 验证所选 API 和产品功能链路 | 二选一 | [Arduboy2-SiFli 示例](https://github.com/OpenSiFli/Arduboy2-SiFli) | 本文不授予再分发第三方游戏、字体、图像或音效的权利 |
 
 </div>
 
 ## 选择受支持的基线 { #choose-a-supported-baseline }
+
 从 OpenSiFli 仓库明确列出的开发板和软件组合开始，不要因为某块开发板看起来相似，就从产品目录中自行选择。开发板软件包、显示接线、按键映射、烧录方法和库的假设共同构成基线。
 
 Arduboy2-SiFli 仓库没有单独的开发板引脚映射文件；具体映射表发布在 README 的 [SiFli I/O mapping 表](https://github.com/OpenSiFli/Arduboy2-SiFli#sifli-io-mapping) 中。库内部的逻辑引脚定义见 [`pins_sifli.h`](https://github.com/OpenSiFli/Arduboy2-SiFli/blob/master/src/platforms/sifli/pins_sifli.h)，开发板侧的引脚路由则由 ArduinoCore-Zephyr 中对应的[设备树叠加文件（devicetree overlay）](https://github.com/OpenSiFli/ArduinoCore-zephyr/blob/main/variants/sf32lb52_devkit_lcd_sf32lb525uc6/sf32lb52_devkit_lcd_sf32lb525uc6.overlay)定义。这些资料描述的是软件基线，并不代表某个实体装配已通过验证；接线前仍须核对实际开发板版本及其原理图。
@@ -124,7 +126,7 @@ Arduboy2-SiFli 仓库没有单独的开发板引脚映射文件；具体映射�
 | 2. 外设验证 | 显示、输入、音频、复位和时序是否在真实开发板上表现可预测？ | 包含故障和恢复行为的外设测试记录。 |
 | 3. 可复现的源码基线 | 另一名工程师能否从干净检出构建出相同镜像？ | 干净构建产物、环境记录和重复结果。 |
 | 4. 受控的游戏适配 | 引入一项有边界的游戏或 UI 改动后，移植是否仍然正常？ | 经过评审的改动、资源 / 许可证记录和回归结果。 |
-| 5. 产品就绪评审 | 是否有足够强的参考实现，可以投入自定义硬件或更大规模的软件工作？ | 包含责任人、证据、缓解措施和继续 / 延期 / 停止决定的风险记录。 |
+| 5. 产品就绪评审 | 这份参考实现是否足够扎实，值得投入定制硬件或更大规模的软件工作？ | 包含责任人、证据、缓解措施和继续 / 延期 / 停止决定的风险记录。 |
 
 </div>
 
@@ -147,7 +149,7 @@ flowchart LR
 - **显示：**兼容层必须将游戏缓冲区和几何参数映射到所选显示控制器、像素格式、方向和刷新路径。
 - **输入：**必须针对开发板接线检查按键名称、电平、消抖、同时按键以及唤醒 / 复位行为。
 - **音频：**在验证之前，应将音调生成、定时器占用、扬声器连接、音量和静音行为视为开发板专用问题。
-- **资源和存储：**必须在链接所选游戏后测量字体、精灵、声音数据、Flash布局和 RAM 使用量。
+- **资源和存储：**必须在链接所选游戏后测量字体、精灵、声音数据、Flash 布局和 RAM 使用量。
 - **恢复：**在尝试时序、内存或低功耗改动前，保留已知可用的烧录和恢复路径。
 
 主要故障域包括应用 / API 兼容性、显示配置、输入接线、音频 / 定时器行为、内存与资源布局，以及烧录 / 恢复。某一故障域出错时，不应笼统地报告为“移植不可用”。
@@ -159,7 +161,7 @@ flowchart LR
 1. 阅读仓库说明，记录默认分支或发布版本，并检查示例、开发板配置、依赖和许可证文件。
 2. 安装仓库要求的准确 Arduino 核心 / 软件包和工具。记录主机操作系统和工具版本。
 3. 构建并烧录文档中最小的示例或测试 Sketch。
-4. 捕获串口输出，记录显示内容、响应按键，以及示例是否使用音频。
+4. 捕获串口输出，并记录显示内容、哪些按键有响应，以及示例是否使用音频。
 
 **应保留的证据：**仓库提交版本、依赖 / 软件包版本、开发板版本、接线或原理图依据、构建输出、烧录日志、串口日志和简短功能记录。
 
@@ -219,24 +221,25 @@ flowchart LR
 
 ## 阶段 5——产品就绪评审 { #stage-5-product-readiness-review }
 
-在从移植演示进入自定义硬件或现场试用前，团队必须回答：
+在从移植演示进入定制硬件或现场试用前，团队必须回答：
 
 - 哪一块 SF32 开发板、显示、按键、扬声器和供电是受支持的，哪些仍只是工程假设？
 - 在目标产品基线上测得的帧率、输入延迟、音频行为、启动时间和电流特征是什么？
-- 游戏、资源、字体和运行时合计消耗多少Flash和 RAM，最坏内容规模下又是多少？
+- 游戏、资源、字体和运行时合计消耗多少Flash 和 RAM，最坏内容规模下又是多少？
 - 复位、欠压、保存过程中断电、资源损坏、烧录失败或升级中断后会发生什么？
 - 移植中哪些部分由产品团队、OpenSiFli、思澈科技（SiFli）或原始 Arduboy2 社区维护？
-- 每个游戏、字体、图像、声音和库的许可证是否适合预期的发布模式？
+- 每个游戏、字体、图像、声音和库的许可证是否与预期的分发方式兼容？
 
-**关口 5 退出条件：**剩余风险已经指定责任人并有证据支持；每一项都有缓解措施、明确延期或停止决定。
+**关口 5 退出条件：**剩余风险已经指定责任人并有证据支持；每一项都有缓解措施、明确的延期决定或停止决定。
 
 ## 产品设计阶段交接 { #handoff-to-product-design }
 
-将选定的 SF32 器件、显示和输入架构、音频 / 定时器方案、Flash和资源布局、功耗测量、恢复方法以及量产测试假设带入[硬件](../hardware/index.md)栏目。如果游戏的显示、内存、封装、功耗或连接能力要求改变了器件候选范围，请使用 [SF32 产品选型工具](../sf32-products/product-selector.md)。软件基线应从[Arduino 入门指南](../getting-started/arduino/getting-started-arduino.md)开始，再阅读 [Arduino 平台概览](../develop/platforms/arduino/overview.md)。
+将选定的 SF32 器件、显示和输入架构、音频 / 定时器方案、Flash 和资源布局、功耗测量、恢复方法以及量产测试假设带入[硬件](../hardware/index.md)栏目。如果游戏的显示、内存、封装、功耗或连接能力要求改变了器件候选范围，请使用 [SF32 产品选型工具](../sf32-products/product-selector.md)。软件基线应从[Arduino 入门指南](../getting-started/arduino/getting-started-arduino.md)开始，再阅读 [Arduino 平台概览](../develop/platforms/arduino/overview.md)。
 
-当另一名工程师能够重建移植、重复外设结果、解释每一项开发板专用适配，并在批准自定义开发板或扩展游戏库前审查相关证据时，该参考实现才完成了产品开发层面的使命。
+当另一名工程师能够重建移植、重复外设结果、解释每一项开发板专用适配，并在批准定制开发板或扩展游戏库前审查相关证据时，该参考实现才完成了产品开发层面的使命。
 
 ## 权威来源 { #authoritative-sources }
+
 - [OpenSiFli/Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli)
 - [MLXXXp/Arduboy2](https://github.com/MLXXXp/Arduboy2)
 - [OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr)

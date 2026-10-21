@@ -1,6 +1,6 @@
 ---
 icon: lucide/keyboard
-description: "Entwicklungsablauf für SuperKey auf SF32LB52-Basis mit drei Displays, USB HID/CDC und Desktop-Begleitprogramm: reproduzieren, Kommunikation und Wiederherstellung validieren, gezielt anpassen und an das Produktdesign übergeben."
+description: "Entwicklungspfad für SuperKey auf SF32LB52 (drei Displays, USB HID/CDC, Desktop-Begleiter): reproduzieren, validieren, anpassen und ans Produktdesign übergeben."
 tags:
     - Projekte
     - USB

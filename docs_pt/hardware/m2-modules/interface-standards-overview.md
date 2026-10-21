@@ -1,6 +1,6 @@
 ---
 icon: lucide/cable
-description: "Conheça as convenções de interface dos módulos M2 da μForge: use as regras de nomenclatura para manter a terminologia estável e valide a proposta de definição em nível de pino antes de fechar o projeto da placa portadora."
+description: "Convenções de interface dos módulos M2 da μForge: use as regras de nomenclatura para terminologia estável e valide a definição de pinos antes de fechar a placa portadora."
 tags:
     - Hardware
     - Módulos

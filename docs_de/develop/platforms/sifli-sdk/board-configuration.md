@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "Wie der SiFli-SDK-Parameter --board die Firmware dem konkreten SF32-Board zuordnet: Flash-/PSRAM-Belegung, Pin-Multiplexing, Display- und Audiopfade sowie eine Checkliste zur Inbetriebnahme."
+description: "Wie der SiFli-SDK-Parameter --board die Firmware dem SF32-Board zuordnet: Flash-/PSRAM-Layout, Pin-Multiplexing, Display- und Audiopfade und Inbetriebnahme-Checkliste."
 tags:
     - Entwicklung
     - SiFli-SDK

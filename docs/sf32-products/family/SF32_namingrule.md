@@ -56,7 +56,7 @@ Treat `ZxYx6` as a family-level pattern, not a fixed-width parsing template. The
 
 ### SF32LB57x-Specific Memory Codes { #sf32lb57x-memory-codes }
 
-The SF32LB57x part-numbering figure in the hardware design guide shows three memory-position codes after the package code, in MPI1, MPI2, and MPI3 order; the temperature-grade code follows them. The family-specific codes for each MPI position are:
+The SF32LB57x part-numbering figure in the [hardware design guide](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md#33-packages) shows three memory-position codes after the package code, in MPI1, MPI2, and MPI3 order; the temperature-grade code follows them. The family-specific codes for each MPI position are:
 
 <div align="center"><em>Table: SF32LB57x Memory Codes by MPI Position</em></div>
 

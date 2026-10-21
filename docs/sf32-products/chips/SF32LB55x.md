@@ -1,6 +1,6 @@
 ---
 icon: lucide/microchip
-description: "SF32LB55x: mainstream ultra-low-power MCU family for wearable and HMI products needing richer graphics, more SRAM, and a wider choice of packages than entry-level Bluetooth MCUs."
+description: "SF32LB55x: mainstream ultra-low-power MCU family for wearable and HMI products that need richer graphics, more SRAM, and more package choices."
 tags:
     - Hardware
     - Chip
@@ -194,6 +194,25 @@ Use this sequence to turn an SF32LB55x shortlist into a validated design:
 3. **Design and review the hardware.** Before releasing the schematic or layout, use the μForge [hardware design guide](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md), including its [schematic](../../hardware/chip-guides/SF32LB55x_schematic_checklist.md) and PCB-layout checklists.
 4. **Verify the authoritative source.** Confirm the exact orderable part and package against the SiFli [datasheet][Datasheet], [user manual][User Manual], [original design guide][Original Design Guide (wiki.sifli.com)], and [hardware application note source][Hardware Application Note (GitHub source)].
 
+<!-- uf-faq:start -->
+## Frequently Asked Questions
+
+**What are the key specifications of SF32LB55x?**
+SF32LB55x pairs an application CPU (Cortex-M33 @240 MHz) with a low-power core (Cortex-M33 @48 MHz, a user-programmable core), 1,312 KB of internal SRAM and Bluetooth Low Energy (BLE) only. Graphics: ePicasso 1.0. Package: QFN68 / BGA145 / BGA169 (7 × 7 mm (QFN68)). USB 2.0 FS. Family-level values; verify the exact part number's datasheet.
+
+**Which display interfaces does SF32LB55x support?**
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. Availability varies by part number and package.
+
+**How much in-package memory does SF32LB55x offer?**
+Up to 16 MB + 2 MB of in-package PSRAM and up to 8 MB of in-package NOR Flash, depending on the part number.
+
+**What supply voltage does SF32LB55x need?**
+1.71–3.63 V, depending on the variant. Confirm the exact range in the datasheet.
+
+**Where do I start a hardware design with SF32LB55x?**
+Start with the [SF32LB55x hardware design guide](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) for schematic, power, clock/RF and PCB layout guidance, then use the schematic and layout checklists before releasing the board.
+<!-- uf-faq:end -->
+
 ## Related Products
 
 ### Development Kits
@@ -203,6 +222,3 @@ Use the official hardware application note, reference schematics, and checklist 
 ### Reference Products
 
 Typical SF32LB55x end products include smartwatches, fitness bands, health-monitoring wearables, smart locks, connected accessories, smart-home controllers, and compact graphical HMIs.
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

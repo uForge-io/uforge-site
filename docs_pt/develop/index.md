@@ -1,7 +1,7 @@
 ---
 icon: lucide/code-2
 title: "Visão geral do desenvolvimento"
-description: "Um guia orientado a tarefas para desenvolver produtos SF32 com o SiFli-SDK: fluxo de trabalho diário, notas de aplicação, exemplos, ferramentas, tópicos de firmware e alternativas da comunidade."
+description: "Guia orientado a tarefas para desenvolver produtos SF32 com o SiFli-SDK: fluxo diário, notas de aplicação, exemplos, ferramentas, tópicos de firmware e comunidade."
 tags:
     - Desenvolvimento
     - Software

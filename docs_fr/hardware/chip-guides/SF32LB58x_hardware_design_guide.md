@@ -2,7 +2,7 @@
 icon: lucide/book-check
 hide:
     - navigation
-description: "Guide de conception matérielle pour le MCU SF32LB58x : architecture d'alimentation, conception d'horloge et RF, affichage, stockage, audio, et recommandations de placement et de routage du PCB."
+description: "Guide de conception matérielle du MCU SF32LB58x : architecture d'alimentation, horloge et RF, affichage, stockage, audio et recommandations de routage PCB."
 tags:
     - Matériel
     - Puce

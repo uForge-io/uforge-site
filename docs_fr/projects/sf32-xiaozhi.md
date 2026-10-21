@@ -1,6 +1,6 @@
 ---
 icon: lucide/message-circle-more
-description: "Parcours complet de développement de l'assistant vocal open source Xiaozhi sur SF32LB52 : mise en service de la carte, provisionnement Bluetooth PAN, interaction vocale dans le cloud, personnalisation, OTA, validation et transfert à la production."
+description: "Parcours produit de l'assistant vocal Xiaozhi sur SF32LB52 : mise en service, Bluetooth PAN, voix cloud, personnalisation, OTA, validation et transfert à la production."
 tags:
     - Projets
     - IA

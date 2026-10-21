@@ -129,12 +129,12 @@ Les valeurs ci-dessous résument les capacités au niveau de la famille, et non 
 | Interfaces audio I²S | 1x | 1–2x* | 1x | 2x | 3x |
 | USB | 2.0 FS | 2.0 FS | 2.0 FS | 2.0 FS | 2.0 HS |
 | CAN | n/d | n/d | 1x | 2x | 2x |
-| PSRAM intégrée au boîtier | Jusqu'à 16 MB | Jusqu'à 16 MB + 2 MB | Jusqu'à 16 MB | Jusqu'à 32 MB | Jusqu'à 32 MB + 32 MB |
+| PSRAM intégrée au boîtier | Jusqu'à 16 MB | Jusqu'à 16 MB + 2 MB | Jusqu'à 16 MB | Jusqu'à 48 MB | Jusqu'à 32 MB + 32 MB |
 | Flash NOR intégrée au boîtier | Jusqu'à 4 MB | Jusqu'à 8 MB | Jusqu'à 1 MB | Jusqu'à 32 MB | Jusqu'à 8 MB |
 | Nombre de GPIO | 44 / 45 | 49 / 95 / 113* | 44 / 120 | 46 / 47 / 58 ; jusqu'à 6 E/S BGA112 supplémentaires* | 154 |
 | Options de boîtier | QFN68 | QFN68 / BGA145 / BGA169 | QFN68 / BGA175 | QFN68 / QFN80 / BGA112 | BGA256 |
 | Empreinte du boîtier (L × l) | 7 × 7 mm | 7 × 7 mm | QFN : 7 × 7 mm<br>BGA : 6,5 × 6,1 mm | QFN68 : 7 × 7 mm<br>QFN80 : 8 × 8 mm<br>BGA : 5,4 × 4,4 mm | 8,5 × 6,5 mm |
-| Alimentation | 3,2–4,7 V (520/3/5/7)<br>2,97–3,63 V (52B/E/G/J)<br>1,8 V (52D) | 1,71–3,63 V | 1,71–3,63 V | 3,2–4,7 V<br>2,97–3,63 V | 1,71–3,63 V |
+| Alimentation | 3,2–4,7 V (520/3/5/7)<br>2,97–3,63 V (52B/E/G/J)<br>1,8 V (52D) | 1,71–3,63 V | 1,71–3,63 V | 3,0–4,7 V<br>2,97–3,63 V | 1,71–3,63 V |
 
 </div>
 
@@ -142,7 +142,7 @@ Les valeurs ci-dessous résument les capacités au niveau de la famille, et non 
 
 **Note sur la flash NOR intégrée du SF32LB55x :** le maximum de 8 MB de la famille inclut la configuration SS6600A8 documentée séparément : deux composants NOR QSPI de 4 MB configurés comme un seul NOR OSPI de 8 MB. Les codes de commande à préfixe SF32 listés pour le SF32LB55x disposent d'un maximum de 4 MB de flash NOR intégrée au boîtier ; vérifiez le modèle exact.
 
-**Note sur le BGA112 du SF32LB57x :** cette note ne s'applique qu'au BGA112. Le SF32LB57x possède des interfaces internes MPI1, MPI2 et MPI3 ; leurs positions dans une référence sont expliquées dans la [convention de nommage SF32](SF32_namingrule.md). Dans chacune de ces configurations de mémoire intégrée au boîtier, les broches de MPI2 et MPI3 ne sont pas accessibles de l'extérieur, ce qui laisse un nombre fixe de 58 GPIO : (1) une PSRAM sur chacune des interfaces internes MPI1 et MPI2 ; (2) une PSRAM de 256 Mb sur l'interface interne MPI2 ; ou (3) une flash NOR sur l'interface interne MPI3. Le `SF32LB57GVD776` correspond au cas (3) : le second `7` de son code final `776` indique un composant interne sur MPI3, de sorte que seuls 58 GPIO sont disponibles. Dans les autres configurations BGA112, les six E/S supplémentaires du boîtier peuvent servir à MPI3 ou de sorties statiques GP configurées par résistance de rappel haut ou bas (pull-up/pull-down) ; ce ne sont pas des GPIO sans restriction. Par exemple, la notation `58 + 6` du `SF32LB57ZVN7N6` signifie 58 GPIO utilisables plus six broches disponibles pour MPI3 ou des sorties statiques. Les boîtiers QFN68 et QFN80 échappent à cette contrainte du BGA112 ; ils n'offrent que leur nombre de GPIO indiqué, sans option MPI3 ou de sortie statique supplémentaire. Pour la référence exacte, voir la page produit du SF32LB57x et sa fiche technique.
+**Note sur le BGA112 du SF32LB57x :** cette note ne s'applique qu'au BGA112. Le SF32LB57x possède des interfaces internes MPI1, MPI2 et MPI3 ; leurs positions dans une référence sont expliquées dans la [convention de nommage SF32](SF32_namingrule.md). Dans chacune de ces configurations de mémoire intégrée au boîtier, les broches de MPI2 et MPI3 ne sont pas accessibles de l'extérieur, ce qui laisse un nombre fixe de 58 GPIO : (1) une PSRAM sur chacune des interfaces internes MPI1 et MPI2 ; (2) une PSRAM de 256 Mb sur l'interface interne MPI2 ; ou (3) une flash NOR sur l'interface interne MPI3. Le `SF32LB57GVD776` correspond au cas (3) : le second `7` de son code final `776` indique un composant interne sur MPI3, de sorte que seuls 58 GPIO sont disponibles. Dans les autres configurations BGA112, les six E/S supplémentaires du boîtier peuvent servir à MPI3 ou de sorties statiques GP configurées par résistance de rappel haut ou bas (pull-up/pull-down) ; ce ne sont pas des GPIO sans restriction. Par exemple, la notation `58 + 6` du `SF32LB57ZVN7N6` signifie 58 GPIO utilisables plus six broches disponibles pour MPI3 ou des sorties statiques. Les boîtiers QFN68 et QFN80 échappent à cette contrainte du BGA112 ; ils n'offrent que leur nombre de GPIO indiqué, sans option MPI3 ou de sortie statique supplémentaire. Pour la référence exacte, voir la [page produit du SF32LB57x](../chips/SF32LB57x.md) et sa fiche technique.
 
 **Précision sur le nombre de GPIO du SF32LB58x :** la [fiche technique DS5801 V1.8.3](https://downloads.sifli.com/user%20manual/DS5801-SF32LB58x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p8p3.pdf) et la comparaison de famille de SiFli indiquent 154 GPIO au total (HPSYS : 94 ; LPSYS : 60). Le [guide des modèles de puces](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) distinct indique HCPU : 94 et LCPU : 66, soit 160, ce qui contredit le total de la fiche technique. Cette comparaison suit la fiche technique ; vérifiez les broches utilisables dans le tableau des broches du boîtier de la référence exacte avant de les affecter.
 
@@ -180,6 +180,23 @@ Pour choisir un composant, tenez compte des exigences clés suivantes :
 La plateforme SF32 fournit une base logicielle et de SDK commune. Toutefois, la configuration des processeurs, les périphériques, les cartes mémoire, les boîtiers et les affectations de broches peuvent différer. Un portage peut nécessiter d'adapter le code de démarrage, les pilotes, les réglages de l'éditeur de liens ou des partitions, le multiplexage des broches et la configuration du SDK, puis une validation sur le matériel cible.
 
 Évaluez la réutilisation logicielle et l'effort de migration en même temps que les exigences de performances, de mémoire, d'affichage et de connectivité. Ne supposez pas que des composants d'une même famille sont compatibles broche à broche ni que le firmware fonctionnera sans modification.
+
+## Questions fréquentes { #frequently-asked-questions }
+
+**Quel SF32 convient à une montre connectée ou un bracelet Bluetooth à bas coût ?**
+Le SF32LB52x est le choix d'entrée de gamme : Bluetooth bimode (BT classique + BLE), ADC/DAC audio et charge Li-ion intégrés, jusqu'à 45 GPIO et boîtier QFN68 de 7 × 7 mm.
+
+**Quels SF32 prennent en charge le Bluetooth classique et pas seulement le BLE ?**
+Les SF32LB52x, SF32LB56x, SF32LB57x et SF32LB58x prennent en charge BT classique + BLE. Le SF32LB55x est limité au BLE.
+
+**Quels SF32 prennent en charge les écrans MIPI DSI ?**
+Les SF32LB55x et SF32LB58x prennent en charge les écrans MIPI. Les SF32LB52x, 56x et 57x utilisent SPI, QSPI, 8080 et JDI/EPD, et les 56x/57x aussi le RGB.
+
+**Quels SF32 offrent une entrée caméra ou le CAN ?**
+Le SF32LB57x ajoute l'entrée caméra DCMI. Le CAN est disponible sur le SF32LB56x (1×) et sur les SF32LB57x et SF32LB58x (2×).
+
+**Les membres de la famille SF32 sont-ils compatibles broche à broche ?**
+Non. Ils partagent une base SDK, mais cœurs, périphériques, cartes mémoire, boîtiers et brochages diffèrent ; le portage demande d'adapter pilotes, multiplexage des broches et configuration, puis de valider sur le composant cible.
 
 ## Liens de référence { #reference-links }
 

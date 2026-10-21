@@ -1,6 +1,6 @@
 ---
 icon: lucide/library
-description: "Les bibliothèques officielles de symboles de schéma et d'empreintes PCB de SiFli pour les puces et modules SF32 — JLCEDA/LCEDA Pro, PADS, OrCAD et KiCad — avec liens de téléchargement et liste de contrôle."
+description: "Bibliothèques officielles SiFli de symboles de schéma et d'empreintes PCB pour SF32 : JLCEDA/LCEDA Pro, PADS, OrCAD et KiCad, avec liens et liste de contrôle."
 tags:
     - Matériel
     - EDA

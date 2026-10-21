@@ -1,6 +1,6 @@
 ---
 icon: lucide/layers
-description: "Présentation de la prise en charge downstream de Zephyr par OpenSiFli pour la SF32LB52 DevKit LCD : identification de la carte, limites de configuration, couverture des pilotes et risques d'intégration."
+description: "Prise en charge Zephyr downstream d'OpenSiFli pour SF32LB52 DevKit LCD : identité de carte, limites de configuration, couverture des pilotes et risques d'intégration."
 tags:
     - Développement
     - Zephyr

@@ -1,7 +1,7 @@
 ---
 icon: lucide/chart-no-axes-column
 title: "Muestreo con GPADC"
-description: "Uso del ADC de propósito general (GPADC) en SF32LB52x, SF32LB55x, SF32LB56x, SF32LB57x y SF32LB58x: límites eléctricos, asignación de pads, acceso al dispositivo y calibración."
+description: "Use el ADC de propósito general (GPADC) en SF32LB52x, 55x, 56x, 57x y 58x: límites eléctricos, asignación de pads, acceso al dispositivo y calibración."
 tags: [Desarrollo, SiFli-SDK, Notas de aplicación, ADC]
 ---
 
@@ -263,6 +263,6 @@ Al conectar el UART de registro del SF32LB56x a un PC externo, asegúrese de que
 - [Guía de uso y configuración del ADC de SF32LB57x](https://docs.sifli.com/projects/sdk/latest/sf32lb57x/app_note/adc.html)
 - [Guía de uso y configuración del ADC de SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/adc.html)
 - [Referencia de la API HAL ADC de SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/adc.html): definiciones del rango de calibración predeterminado.
-- Guía de diseño de hardware SF32LB57x — almacenamiento y fabricación: asignación de canales GPADC y pads.
-- Guía de diseño de hardware SF32LB57x — sistema mínimo y alimentación: conexiones de alimentación/referencia analógicas y límites de detección de batería por variante.
+- [Guía de diseño de hardware SF32LB57x — almacenamiento y fabricación](../../../../hardware/chip-guides/SF32LB57x_schematic_storage_mfg.md): asignación de canales GPADC y pads.
+- [Guía de diseño de hardware SF32LB57x — sistema mínimo y alimentación](../../../../hardware/chip-guides/SF32LB57x_schematic_system_power.md): conexiones de alimentación/referencia analógicas y límites de detección de batería por variante.
 - [FAQ de ADC de OpenSiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/faq/mcu/adc.md): rangos de calibración de fábrica y comprobaciones tras arranque, standby y reactivación del SF32LB55x, además de recomendaciones sobre el nivel del UART de registro del SF32LB56x.

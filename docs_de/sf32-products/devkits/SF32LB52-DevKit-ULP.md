@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-ULP: wearable-orientiertes SF32LB52x-Entwicklungsboard mit AMOLED, Touch, Sensoren, Audio, Akkuladung und Strommessung für die Bewertung des Energiesparverhaltens auf Systemebene."
+description: "SF32LB52-DevKit-ULP: wearable-orientiertes SF32LB52x-Board mit AMOLED, Touch, Sensoren, Audio, Akkuladung und Strommessung zur Low-Power-Evaluierung."
 tags:
     - Hardware
     - Entwicklungsboard

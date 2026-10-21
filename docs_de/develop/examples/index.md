@@ -1,6 +1,6 @@
 ---
 icon: lucide/list-tree
-description: "Wie Sie ein SiFli-SDK- oder Zephyr-Beispiel nach Board, Framework und anspruchsvollster Peripherie auswählen und anpassen, statt SF32-Firmware von Grund auf neu zu erstellen."
+description: "So wählen und passen Sie ein SiFli-SDK- oder Zephyr-Beispiel nach Board, Framework und schwierigster Peripherie an, statt SF32-Firmware neu zu schreiben."
 tags:
     - Entwicklung
     - Beispiele

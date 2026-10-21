@@ -2,7 +2,7 @@
 icon: lucide/list-checks
 hide:
     - navigation
-description: "Liste de contrôle de revue d'implantation du PCB point par point pour le MCU SF32LB58x, couvrant les vérifications de boîtier, d'alimentation, d'horloge, de RF, d'audio, de signaux haute vitesse et d'empilement."
+description: "Liste de revue d'implantation PCB point par point du MCU SF32LB58x : boîtier, alimentation, horloge, RF, audio, signaux haute vitesse et empilement."
 tags:
     - Matériel
     - Puce

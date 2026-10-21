@@ -2,7 +2,7 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Diretrizes de projeto de esquemático para armazenamento, conectividade e acesso à fabricação no MCU SF32LB52x: armazenamento de boot, sensores, depuração/download e gravação em produção."
+description: "Diretrizes de esquemático do SF32LB52x para armazenamento, conectividade e fabricação: boot, sensores, interface de depuração/download e gravação em produção."
 tags:
     - Hardware
     - Microcontroladores

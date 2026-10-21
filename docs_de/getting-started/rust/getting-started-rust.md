@@ -1,6 +1,6 @@
 ---
 icon: lucide/code
-description: "Erste Evaluierung von OpenSiFli sifli-rs auf SF32LB52: Rust-Target installieren, das unveränderte Blinky-Beispiel bauen, sftool konfigurieren und einen SDK-Wiederherstellungspfad beibehalten."
+description: "Erste Evaluierung von OpenSiFli sifli-rs auf SF32LB52: Rust-Target installieren, unverändertes Blinky bauen, sftool konfigurieren und SDK-Wiederherstellungspfad behalten."
 tags:
     - Erste Schritte
     - Rust

@@ -1,6 +1,6 @@
 ---
 icon: lucide/gamepad-2
-description: "Um roteiro de engenharia reproduzível para avaliar o port Arduboy2 da OpenSiFli, validar o loop do jogo e os periféricos e decidir se um produto de jogos com SF32 está pronto para avançar no desenvolvimento."
+description: "Roteiro reproduzível para avaliar o port Arduboy2 da OpenSiFli, validar o loop do jogo e os periféricos e decidir se um produto SF32 está pronto para o projeto."
 tags:
     - Projetos
     - Arduino

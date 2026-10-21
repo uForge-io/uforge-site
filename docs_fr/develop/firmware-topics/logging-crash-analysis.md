@@ -1,6 +1,6 @@
 ---
 icon: lucide/file-warning
-description: "Planifier la journalisation et l'analyse des plantages du firmware SF32 afin de diagnostiquer les défaillances sur le terrain : données minimales, démarche d'analyse et niveaux de journalisation selon les phases."
+description: "Concevoir la journalisation et l'analyse des plantages du firmware SF32 pour diagnostiquer les défaillances terrain : données minimales, démarche et niveaux de log par phase."
 tags:
     - Développement
     - Journalisation

@@ -1,6 +1,6 @@
 ---
 icon: lucide/clipboard-check
-description: "Point d'entrée de la conception pour la production du matériel SF32 : guides de conception pour puces et modules, listes de contrôle, définitions d'interface, composants approuvés et bibliothèques EDA."
+description: "Point d'entrée de la conception pour la production SF32 : guides puces et modules, listes de contrôle, définitions d'interface, composants approuvés et bibliothèques EDA."
 tags:
     - Matériel
     - Production

@@ -290,3 +290,5 @@ Record firmware version, board revision, battery/supply voltage, temperature, an
 - Event-driven, interrupt-based design beats polling almost everywhere power matters.
 - Bluetooth connection parameters and display refresh strategy are usually the two biggest levers on a connected wearable product.
 - Measure real energy under realistic combined workloads, on real hardware in the final enclosure. Bench measurements and isolated-subsystem measurements can under-represent real product power.
+
+To estimate the remaining battery percentage from voltage, see [Battery State-of-Charge Estimation](battery-capacity-calculation.md).

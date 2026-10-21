@@ -1,6 +1,6 @@
 ---
 icon: lucide/microchip
-description: "SF32LB52x: kostenoptimierte MCU-Familie mit zwei Arm-Cortex-M33-Kernen für Wearables und kompakte AIoT-Produkte. Umfasst akkubetriebene SF32LB520/3/5/7 und extern versorgte Varianten 52B/D/E/G/J."
+description: "SF32LB52x: kostenoptimierte Dual-Core-Arm-Cortex-M33-AIoT-MCU-Familie für Wearables und kompakte AIoT-Produkte, mit Akku- und extern versorgten Varianten."
 tags:
     - Hardware
     - Chip
@@ -171,6 +171,25 @@ Mit diesen Schritten überführen Sie eine Vorauswahl für SF32LB52x in ein vali
 3. **Hardware entwerfen und prüfen.** Nutzen Sie den hier bereitgestellten [Hardware-Design-Leitfaden](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) und die zugehörigen Checklisten für [Schaltplan](../../hardware/chip-guides/SF32LB52x_schematic_checklist.md) und [PCB-Layout](../../hardware/chip-guides/SF32LB52x_pcb_layout_checklist.md), bevor Sie Schaltplan oder Layout freigeben. Bestätigen Sie die passende Versorgungsfamilie: 520/3/5/7, 52B/E/G/J oder 52D.
 4. **Maßgebliche Quelle prüfen.** Prüfen Sie das zutreffende [Datenblatt](#development-resources) und den SiFli-[Hardware-Design-Leitfaden für 520/3/5/7] bzw. den [Hardware-Design-Leitfaden für 52B/D/E/G/J] anhand des genauen bestellbaren Bauteils und Gehäuses.
 
+<!-- uf-faq:start -->
+## Häufig gestellte Fragen { #frequently-asked-questions }
+
+**Was sind die wichtigsten Spezifikationen des SF32LB52x?**
+Der SF32LB52x kombiniert eine Anwendungs-CPU (Cortex-M33 @240 MHz) mit einem Low-Power-Kern (Cortex-M33 @24/48 MHz, mit einem dedizierten Bluetooth-Controller), 576 KB internem SRAM und Dual-Mode-Bluetooth (BT Classic + BLE). Grafik: ePicasso 2.0 Lite. Gehäuse: QFN68 (7 × 7 mm). USB 2.0 FS. Werte auf Familienebene; prüfen Sie das Datenblatt der genauen Typnummer.
+
+**Welche Display-Schnittstellen unterstützt der SF32LB52x?**
+SPI / DSPI / QSPI / 8080 / EPD / JDI. Die Verfügbarkeit hängt von Typnummer und Gehäuse ab.
+
+**Wie viel Speicher im Gehäuse bietet der SF32LB52x?**
+Bis zu 16 MB PSRAM und bis zu 4 MB NOR-Flash im Gehäuse, abhängig von der Typnummer.
+
+**Welche Versorgungsspannung benötigt der SF32LB52x?**
+3.2–4.7 V (520/3/5/7), 2.97–3.63 V (52B/E/G/J), 1.8 V (52D), je nach Variante. Den genauen Bereich bestätigt das Datenblatt.
+
+**Wo beginne ich ein Hardware-Design mit dem SF32LB52x?**
+Beginnen Sie mit dem [Hardware-Design-Leitfaden für den SF32LB52x](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) zu Schaltplan, Stromversorgung, Takt/RF und PCB-Layout und nutzen Sie vor der Freigabe die Checklisten für Schaltplan und Layout.
+<!-- uf-faq:end -->
+
 ## Verwandte Produkte { #related-products }
 
 ### Modul { #module }
@@ -187,6 +206,3 @@ Mit diesen Schritten überführen Sie eine Vorauswahl für SF32LB52x in ein vali
 ### Referenzprodukte { #reference-products }
 
 Typische SF32LB52-Designs umfassen Smartwatches im Einstiegssegment, Fitnessarmbänder, Bluetooth-Zubehör, kompakte grafische Bedienelemente, elektronische Regaletiketten, Smart Badges, tragbare Etikettendrucker sowie kostensensible Displays für E-Bikes oder E-Scooter.
-
-!!! note "Automatisch generierter Inhalt"
-    Diese Seite wurde ohne vorhandenes Quelldokument zusammengestellt bzw. entworfen. Prüfen Sie technische Aussagen anhand der offiziellen SiFli-Dokumentation, bevor Sie sich darauf verlassen.

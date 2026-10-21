@@ -2,7 +2,7 @@
 icon: lucide/book-check
 hide:
     - navigation
-description: "Guide de conception matérielle pour le microcontrôleur SF32LB52x : présentation du composant, démarche de conception et liens vers les pages consacrées au schéma, à l'implantation et au routage du PCB, aux revues et aux listes de contrôle."
+description: "Guide de conception matérielle du MCU SF32LB52x : présentation, démarche de conception et liens vers les pages schéma, routage PCB, revue et listes de contrôle."
 tags:
     - Matériel
     - Puce

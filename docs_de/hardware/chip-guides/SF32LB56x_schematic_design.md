@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "Schaltplanrichtlinien für den SF32LB56x-MCU: Stromversorgungssystem, Betriebsmodi und Weckquellen, Takterzeugung, RF, Display-/Touch-/Hintergrundbeleuchtungs-Schnittstellen, Speicher/Sensoren/Audio/Konnektivität sowie Fertigung."
+description: "Schaltplanrichtlinien für den SF32LB56x-MCU: Stromversorgung, Betriebsmodi und Weckquellen, Takte, RF, Display/Touch/Backlight, Audio, Speicher und Fertigung."
 tags:
     - Hardware
     - Chip

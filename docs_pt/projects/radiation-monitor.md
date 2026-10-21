@@ -1,6 +1,6 @@
 ---
 icon: lucide/activity
-description: "Visualizador portátil da intensidade do sinal na banda Bluetooth, baseado no SF32LB52: reproduza o Radiation Monitor, valide a varredura de 79 pontos, a suavização do RSSI e a consulta ao histórico, e defina os limites de calibração e avaliação do produto."
+description: "Visualizador de sinal na banda Bluetooth no SF32LB52: reproduza o Radiation Monitor, valide varredura de 79 pontos, suavização de RSSI, histórico e limites de calibração."
 tags:
     - Projetos
     - Bluetooth

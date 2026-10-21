@@ -1,7 +1,7 @@
 ---
 icon: lucide/chart-no-axes-column
 title: "Amostragem com GPADC"
-description: "Veja como usar o ADC de uso geral (GPADC) nas famílias SF32LB52x, SF32LB55x, SF32LB56x, SF32LB57x e SF32LB58x: limites elétricos, mapeamento de PADs, acesso ao dispositivo e calibração."
+description: "Use o ADC de uso geral (GPADC) em SF32LB52x, 55x, 56x, 57x e 58x: limites elétricos, mapeamento de pads, acesso ao dispositivo e calibração."
 tags: [Desenvolvimento, SiFli-SDK, Notas de aplicação, ADC]
 ---
 
@@ -263,6 +263,6 @@ Ao conectar o log UART do SF32LB56x a um PC externo, confira se o nível de refe
 - [Guia de uso e configuração do ADC do SF32LB57x](https://docs.sifli.com/projects/sdk/latest/sf32lb57x/app_note/adc.html)
 - [Guia de uso e configuração do ADC do SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/adc.html)
 - [Referência da API HAL do ADC do SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/adc.html) — definições da faixa de calibração padrão.
-- Guia de projeto de hardware do SF32LB57x — armazenamento e fabricação — atribuição de canais e PADs do GPADC.
-- Guia de Projeto de Hardware do SF32LB57x — Sistema Mínimo e Alimentação — conexões de alimentação analógica e referência, além dos limites de medição da bateria específicos de cada variante.
+- [Guia de projeto de hardware do SF32LB57x — armazenamento e fabricação](../../../../hardware/chip-guides/SF32LB57x_schematic_storage_mfg.md) — atribuição de canais e PADs do GPADC.
+- [Guia de Projeto de Hardware do SF32LB57x — Sistema Mínimo e Alimentação](../../../../hardware/chip-guides/SF32LB57x_schematic_system_power.md) — conexões de alimentação analógica e referência, além dos limites de medição da bateria específicos de cada variante.
 - [FAQ de ADC do OpenSiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/faq/mcu/adc.md) — faixas de calibração de fábrica e validação do SF32LB55x após inicialização, standby e despertar, além de recomendações sobre o nível do log UART do SF32LB56x.

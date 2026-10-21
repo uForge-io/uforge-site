@@ -8,10 +8,10 @@ tags:
     - 芯片
 ---
 
-# SF32LB52x 硬件设计指南 — 存储与量产 { #sf32lb52x-hardware-design-guide-storage-manufacturing }
+# SF32LB52x 硬件设计指南 — 存储与制造 { #sf32lb52x-hardware-design-guide-storage-manufacturing }
 
 !!! note "SF32LB52x 硬件设计指南的一部分"
-    本页介绍原理图设计指导的第 5.6-5.7 节：存储与连接、量产。返回[RF 与用户接口](SF32LB52x_schematic_rf_interfaces.md)，或参见[原理图核对表](SF32LB52x_schematic_checklist.md)进行逐项核对。
+    本页介绍原理图设计指导的第 5.6-5.7 节：存储与连接、制造。返回[RF 与用户接口](SF32LB52x_schematic_rf_interfaces.md)，或参见[原理图核对表](SF32LB52x_schematic_checklist.md)进行逐项核对。
 
 ### 5.6. 存储与连接 { #56-storage-and-connectivity }
 
@@ -62,7 +62,7 @@ tags:
 </div>
 
 !!! note "eMMC 电源域（仅外部稳压供电型号）"
-    eMMC 有 VCC 和 VCCQ 两个电源域。方案 1：两个电源域一起开关，关断电流更低，但 eMMC 从低功耗睡眠状态恢复更慢，CPU 平均功耗更高。方案 2：只开关 VCC，VCCQ 保持常供；关断电流高于方案 1，但 eMMC 恢复更快，CPU 平均功耗更低。
+    eMMC 有 VCC 和 VCCQ 两个电源域。方案 1：两个电源域一起开关，关断电流更低，但 eMMC 睡眠恢复更慢，CPU 平均功耗更高。方案 2：只开关 VCC，VCCQ 保持常供；关断电流高于方案 1，但 eMMC 睡眠恢复更快，CPU 平均功耗更低。
 
 !!! important "存储接口的上拉电阻"
     外部稳压供电型号的应用说明规定：NOR Flash 无需外部上拉；SPI NAND 的 PA17（Hold#）需要上拉；SD NAND 的 PA13（D3）和 PA15（CMD）需要上拉；eMMC 的 PA17（D1）、PA13（D3）和 PA15（CMD）需要上拉。推荐阻值为 7.5 kΩ。电池供电型号的应用说明只提到 PA13/PA17 启动配置电阻焊盘，未说明是否也需要 PA15/CMD 上拉。未经确认，不要把外部稳压供电型号的 PA15 要求套用到电池型号；应向思澈科技（SiFli）核实具体型号和启动介质所需的上拉配置。
@@ -149,7 +149,7 @@ tags:
 - 缺少 Bootstrap 电阻，或按错误启动介质贴装。
 - 未连接有源资料确认的启动存储电源开关控制信号。
 - 将 eMMC 误认为所有型号都可用。
-- 大容量 NOR Flash 常供电，导致重启后 4 字节地址模式影响 ROM 识别。
+- 大容量 NOR Flash 一直保持供电，导致重启后仍处于 4 字节地址模式，影响 ROM 识别。
 
 **存储核对表**
 
@@ -217,7 +217,7 @@ SF32LB52x 支持 GPTIM 功能映射到任意 PA 管脚。
 - [ ] GPTIM 管脚未与背光、马达、调试或存储需求冲突。
 - [ ] 启动调试计划包含 PWM 频率、占空比范围和管脚极性检查。
 
-### 5.7. 量产 { #57-manufacturing }
+### 5.7. 制造 { #57-manufacturing }
 
 #### 5.7.1. 调试与下载接口 { #571-debug-and-download-interface }
 

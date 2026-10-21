@@ -1,6 +1,6 @@
 ---
 icon: lucide/list
-description: "SF32LB57 듀얼 모드 Bluetooth AT 명령 모듈(SIFLI_AT)의 전체 AT 명령 레퍼런스입니다. 명령 프레임 구조, 시스템 및 디바이스, 주소 및 식별 정보, 동작 모드 및 가시성, 페어링 및 보안, 시리얼 포트 및 이벤트, 연결 관리, 데이터 전송, 커스텀 GATT 명령과 함께 비요청 이벤트(URC) 및 PDU 형식 명령을 다룹니다."
+description: "SF32LB57 듀얼 모드 Bluetooth 모듈(SIFLI_AT)의 AT 명령 레퍼런스: 프레임, 페어링, 연결, 데이터 전송, GATT, URC, PDU 명령."
 tags:
   - Bluetooth
 ---

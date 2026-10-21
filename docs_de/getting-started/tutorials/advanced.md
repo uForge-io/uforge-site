@@ -1,6 +1,6 @@
 ---
 icon: lucide/rocket
-description: "SF32-Tutorials zur Produktvalidierung: gemessene Optimierung des Stromverbrauchs, wiederherstellbares BLE-OTA, Inbetriebnahme individueller Displays, Absturz- und Coredump-Analyse, Bluetooth mit mehreren Verbindungen und eigene Treiber."
+description: "SF32-Tutorials zur Produktvalidierung: gemessene Stromoptimierung, wiederherstellbares BLE-OTA, Display-Inbetriebnahme, Absturzanalyse, Multi-Verbindungs-BT und Treiber."
 tags:
     - Tutorials
 ---

@@ -2,7 +2,7 @@
 icon: lucide/list-checks
 hide:
     - navigation
-description: "Liste de contrôle de revue de schéma point par point pour le microcontrôleur SF32LB55x, couvrant les vérifications d'alimentation, d'horloge, de RF, de stockage, d'affichage et de fabrication."
+description: "Liste de revue de schéma point par point du MCU SF32LB55x : vérifications d'alimentation, d'horloge, de RF, de stockage, d'affichage et de fabrication."
 tags:
     - Matériel
     - Puce

@@ -1,6 +1,6 @@
 ---
 icon: lucide/microchip
-description: "SF32LB55x: MCU-Familie der Mittelklasse mit sehr niedrigem Energieverbrauch für Wearables und HMI-Produkte, die umfangreichere Displayfunktionen, mehr SRAM und eine größere Gehäuseauswahl als einfache Bluetooth-MCUs benötigen."
+description: "SF32LB55x: Mainstream-MCU-Familie mit sehr niedrigem Energieverbrauch für Wearables und HMI-Produkte mit mehr Grafik, mehr SRAM und größerer Gehäuseauswahl."
 tags:
     - Hardware
     - Chip
@@ -194,6 +194,25 @@ Mit dieser Abfolge wird aus einer SF32LB55x-Vorauswahl ein validiertes Design:
 3. **Hardware entwerfen und prüfen.** Nutzen Sie vor der Freigabe von Schaltplan und Layout den [Hardware-Design-Leitfaden](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) von μForge sowie die zugehörigen Checklisten für [Schaltplan](../../hardware/chip-guides/SF32LB55x_schematic_checklist.md) und PCB-Layout.
 4. **Maßgebliche Quellen prüfen.** Bestätigen Sie die genaue bestellbare Teilenummer und das Gehäuse anhand des SiFli-[Datenblatts][Datasheet], des [Benutzerhandbuchs][User Manual], des [originalen Designleitfadens][Original Design Guide (wiki.sifli.com)] und der [Quelle des Hardware-Anwendungshinweises][Hardware Application Note (GitHub source)].
 
+<!-- uf-faq:start -->
+## Häufig gestellte Fragen { #frequently-asked-questions }
+
+**Was sind die wichtigsten Spezifikationen des SF32LB55x?**
+Der SF32LB55x kombiniert eine Anwendungs-CPU (Cortex-M33 @240 MHz) mit einem Low-Power-Kern (Cortex-M33 @48 MHz, mit einem vom Anwender programmierbaren Kern), 1,312 KB internem SRAM und nur Bluetooth Low Energy (BLE). Grafik: ePicasso 1.0. Gehäuse: QFN68 / BGA145 / BGA169 (7 × 7 mm (QFN68)). USB 2.0 FS. Werte auf Familienebene; prüfen Sie das Datenblatt der genauen Typnummer.
+
+**Welche Display-Schnittstellen unterstützt der SF32LB55x?**
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. Die Verfügbarkeit hängt von Typnummer und Gehäuse ab.
+
+**Wie viel Speicher im Gehäuse bietet der SF32LB55x?**
+Bis zu 16 MB + 2 MB PSRAM und bis zu 8 MB NOR-Flash im Gehäuse, abhängig von der Typnummer.
+
+**Welche Versorgungsspannung benötigt der SF32LB55x?**
+1.71–3.63 V, je nach Variante. Den genauen Bereich bestätigt das Datenblatt.
+
+**Wo beginne ich ein Hardware-Design mit dem SF32LB55x?**
+Beginnen Sie mit dem [Hardware-Design-Leitfaden für den SF32LB55x](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) zu Schaltplan, Stromversorgung, Takt/RF und PCB-Layout und nutzen Sie vor der Freigabe die Checklisten für Schaltplan und Layout.
+<!-- uf-faq:end -->
+
 ## Verwandte Produkte { #related-products }
 
 ### Entwicklungsboards { #development-kits }
@@ -203,6 +222,3 @@ Verwenden Sie den offiziellen Hardware-Anwendungshinweis, die Referenzschaltplä
 ### Referenzprodukte { #reference-products }
 
 Typische SF32LB55x-Endprodukte sind Smartwatches, Fitnessarmbänder, Wearables zur Gesundheitsüberwachung, smarte Schlösser, vernetztes Zubehör, Smart-Home-Steuerungen und kompakte grafische HMIs.
-
-!!! note "Automatisch generierter Inhalt"
-    Diese Seite wurde ohne vorhandenes Quelldokument zusammengestellt bzw. entworfen. Prüfen Sie technische Aussagen anhand der offiziellen SiFli-Dokumentation, bevor Sie sich darauf verlassen.

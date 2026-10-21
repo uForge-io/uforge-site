@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "Directives de conception du schéma pour le microcontrôleur SF32LB56x : système d'alimentation, modes de fonctionnement et sources de réveil, génération d'horloge, RF, interfaces d'affichage/tactile/rétroéclairage, stockage/capteurs/audio/connectivité, et fabrication."
+description: "Directives de schéma du MCU SF32LB56x : alimentation, modes et sources de réveil, horloges, RF, affichage/tactile/rétroéclairage, audio, stockage et fabrication."
 tags:
     - Matériel
     - Puce

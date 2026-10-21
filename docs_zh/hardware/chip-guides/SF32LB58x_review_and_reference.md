@@ -50,7 +50,7 @@ hide:
 
 </div>
 
-第 5.8 节的[原理图核对表](SF32LB58x_schematic_checklist.md)和第 6.18 节的[PCB 布局核对表](SF32LB58x_pcb_layout_checklist.md)合起来，逐项复现了思澈科技（SiFli）官方工作簿 *SF32LB58x Schematic & PCB Checklist*（V1.0，2026-01-21）中适用的原理图与 PCB 检查项，并分别配套相应的设计指导。
+第 5.8 节的[原理图核对表](SF32LB58x_schematic_checklist.md)和第 6.18 节的[PCB 布局核对表](SF32LB58x_pcb_layout_checklist.md)合起来，逐项复现了思澈科技（SiFli）官方工作簿 *SF32LB58x Schematic & PCB Checklist*（V1.0，2026-01-21）中适用的原理图与 PCB 检查项，同时附有这些检查项所对照的设计指导。
 
 ## 9. 附录 { #9-appendices }
 

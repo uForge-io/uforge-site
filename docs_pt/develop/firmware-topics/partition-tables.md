@@ -1,6 +1,6 @@
 ---
 icon: lucide/table-properties
-description: "Use as tabelas de partições do SiFli-SDK para descrever os layouts de memória SF32. Compare os formatos JSON v1/v2 com o formato YAML v3 recomendado, incluindo overlays, arquivos gerados e validação."
+description: "Descreva layouts de memória SF32 com tabelas de partições do SiFli-SDK: JSON v1/v2 legado, YAML v3 recomendado, overlays, arquivos gerados e validação."
 tags:
     - Desenvolvimento
     - Partições

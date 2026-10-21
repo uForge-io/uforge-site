@@ -1,7 +1,7 @@
 ---
 icon: lucide/audio-lines
 title: "Effectuer des tests RF individuels pour Bluetooth"
-description: "Utiliser SiFli_RfTool pour commander les tests RF en BLE ou en Bluetooth classique, une opération à la fois, lors de la mise au point d'une carte et des essais préalables à la conformité."
+description: "Piloter la RF BLE ou Bluetooth classique avec SiFli_RfTool, une opération à la fois, pour la mise au point de carte et les essais de pré-conformité."
 tags: [Développement, SiFli-SDK, Notes d'application, Bluetooth]
 ---
 

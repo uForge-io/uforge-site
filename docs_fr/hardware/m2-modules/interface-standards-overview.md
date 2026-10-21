@@ -1,6 +1,6 @@
 ---
 icon: lucide/cable
-description: "Comprenez les conventions d'interface de module M2 de μForge : utilisez les règles de nommage pour une terminologie stable et validez le projet de définition au niveau des broches avant de figer la carte porteuse."
+description: "Conventions d'interface M2 de μForge : appliquer les règles de nommage pour une terminologie stable et valider la définition des broches avant la carte porteuse."
 tags:
     - Matériel
     - Module

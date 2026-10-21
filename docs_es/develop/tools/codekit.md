@@ -1,6 +1,6 @@
 ---
 icon: lucide/app-window
-description: "Cómo encaja la extensión SiFli CodeKit para VS Code en el desarrollo con SiFli-SDK: configuración de proyectos, compilación, grabación de firmware, supervisión y resolución de problemas."
+description: "Cómo encaja la extensión SiFli CodeKit de VS Code en SiFli-SDK: configuración de proyectos, compilación, grabación, supervisión y resolución de problemas."
 tags:
     - Desarrollo
     - CodeKit

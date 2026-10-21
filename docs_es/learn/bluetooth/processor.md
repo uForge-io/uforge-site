@@ -1,6 +1,6 @@
 ---
 icon: lucide/radio-tower
-description: "Cómo el procesador Bluetooth dedicado de SF32 evita que la CPU de aplicaciones tenga que encargarse de la temporización de radio y del control del enlace, lo que permite crear productos conectados de bajo consumo."
+description: "Cómo el procesador Bluetooth dedicado de SF32 libera a la CPU de aplicaciones de la temporización de radio y el control del enlace en productos conectados de bajo consumo."
 tags:
   - Bluetooth
 ---

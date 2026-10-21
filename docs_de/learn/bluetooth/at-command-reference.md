@@ -1,6 +1,6 @@
 ---
 icon: lucide/list
-description: "Vollständige AT-Befehlsreferenz für das SF32LB57-Bluetooth-Modul mit Dual-Mode-Betrieb (SIFLI_AT): Befehlsrahmen, System und Gerät, Adresse und Identität, Betriebsmodi und Sichtbarkeit, Kopplung und Sicherheit, serielle Schnittstelle und Ereignisse, Verbindungsverwaltung, Datenübertragung, benutzerdefinierte GATT-Befehle, unaufgeforderte Ereignisse (URCs) und PDU-Befehle."
+description: "AT-Befehlsreferenz für das Dual-Mode-Bluetooth-Modul SF32LB57 (SIFLI_AT): Framing, Kopplung, Verbindungen, Datenübertragung, GATT, URCs und PDU-Befehle."
 tags:
   - Bluetooth
 ---

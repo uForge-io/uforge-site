@@ -1,6 +1,6 @@
 ---
 icon: lucide/bug
-description: "Diagnostiquer le firmware SF32 avec sftool, AssertDump, SiFli_Trace et le shell RT-Thread, selon une séquence reproductible et une liste des éléments à fournir pour signaler un plantage."
+description: "Déboguer le firmware SF32 avec sftool, AssertDump, SiFli_Trace et le shell RT-Thread, avec un ordre de reproduction répétable et une liste pour signaler un plantage."
 tags:
     - Développement
     - Débogage

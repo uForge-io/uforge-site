@@ -159,6 +159,25 @@ Use this sequence to turn an SF32LB58x shortlist into a validated design:
 3. **Design and review the hardware.** Use the local [hardware design guide](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md) — including its [schematic](../../hardware/chip-guides/SF32LB58x_schematic_checklist.md) and [PCB layout](../../hardware/chip-guides/SF32LB58x_pcb_layout_checklist.md) checklists — before releasing the schematic or layout. Validate the BGA256 HDI and memory-routing assumptions early.
 4. **Verify the authoritative source.** Confirm the exact orderable part and package against the SiFli [datasheet], [user manual], [Original Design Guide (wiki.sifli.com)], and [Hardware Application Note (GitHub source)].
 
+<!-- uf-faq:start -->
+## Frequently Asked Questions
+
+**What are the key specifications of SF32LB58x?**
+SF32LB58x pairs an application CPU (2× Cortex-M33 @240 MHz) with a low-power core (Cortex-M33 @48/96 MHz, a user-programmable core), 3.7 MB of internal SRAM and dual-mode Bluetooth (BT Classic + BLE). Graphics: ePicasso 2.0 + Vivante GCNanoUltraV (vector). Package: BGA256 (8.5 × 6.5 mm). USB 2.0 HS. Family-level values; verify the exact part number's datasheet.
+
+**Which display interfaces does SF32LB58x support?**
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. Availability varies by part number and package.
+
+**How much in-package memory does SF32LB58x offer?**
+Up to 32 MB + 32 MB of in-package PSRAM and up to 8 MB of in-package NOR Flash, depending on the part number.
+
+**What supply voltage does SF32LB58x need?**
+1.71–3.63 V, depending on the variant. Confirm the exact range in the datasheet.
+
+**Where do I start a hardware design with SF32LB58x?**
+Start with the [SF32LB58x hardware design guide](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md) for schematic, power, clock/RF and PCB layout guidance, then use the schematic and layout checklists before releasing the board.
+<!-- uf-faq:end -->
+
 ## Related Products
 
 ### Module
@@ -172,6 +191,3 @@ Use this sequence to turn an SF32LB58x shortlist into a validated design:
 ### Reference Products
 
 Typical SF32LB58x end products include premium watch platforms, high-resolution wearable HMIs, smart dashboards, portable connected terminals, and devices that combine Bluetooth, display, audio, storage, and local AI workloads.
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

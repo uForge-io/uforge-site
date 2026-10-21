@@ -9,7 +9,7 @@ tags:
 
 # 低功耗 SDK 示例 { #low-power-sdk-examples }
 
-SiFli-SDK 的电源管理示例可作为测量与集成验证的起点，但不代表所有产品都能达到的电流指标。每个示例都基于特定芯片系列、开发板、供电路径、已启用外设、固件配置和工作负载。先用示例在目标硬件上复现明确的状态或场景，再在相同条件下测量产品自身的电流和电压。
+SiFli-SDK 的电源管理示例是测量和集成的基线，而不是通用的电流规格。每个示例都基于特定芯片系列、开发板、供电路径、已启用外设、固件配置和工作负载。先用示例在目标硬件上复现明确的状态或场景，再在相同条件下测量产品自身的电流和电压。
 
 本文按照工程问题整理 [SiFli-SDK PM 示例索引](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/pm/index.html) 中的项目。开发板支持范围、供电连接、跳帽、SDK 设置、命令和预期行为，应以各示例官方页面为准。
 
@@ -35,7 +35,7 @@ SiFli-SDK 的电源管理示例可作为测量与集成验证的起点，但不�
 
 ### 核对开发板范围 { #verify-the-board-scope }
 
-下面分别列出示例官方说明页明确列出的开发板，以及当前 SiFli-SDK GCC 构建配置中的目标。构建矩阵包含某个目标，只表示项目配置了该构建目标，并不表示已在该开发板上测得文中功耗数据。下方配置链接对应当前 `main` 分支；如果你使用的是其他 SDK 版本，选择 `scons --board` 目标时应以该版本检出的 `build_config_gcc.yaml` 为准。复现功耗结果时，应遵循示例给出的硬件连接；不能仅凭文档 URL 中的芯片系列推断整个系列均受支持。各示例的官方指南链接见上表。
+下面分别列出示例官方说明页明确列出的开发板，以及当前 SiFli-SDK GCC 构建配置中的目标。构建矩阵包含某个目标，只表示项目配置了该构建目标，并不表示已在该开发板上测得文中功耗数据。下方配置链接对应当前 `main` 分支；如果你使用的是其他 SDK 版本，选择 `scons --board` 目标时应以该版本检出的 `build_config_gcc.yaml` 为准。复现功耗结果时，应遵循示例给出的硬件连接；不能仅凭文档 URL 中的芯片系列推断整个系列均受支持。
 
 - **PM 示例**（[SDK 源码](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/classical)）：指南列出 `sf32lb56-devkit-lcd_n16r12n1`、`eh-lb551`、`sf32lb52-lcd_n16r8` 和 `sf32lb58-lcd_n16r64n4`。当前 GCC 配置中的 PM 项目使用 `sf32lb56-lcd_n16r12n1`（标识不同于指南中的 `sf32lb56-devkit-lcd_n16r12n1`）以及 `eh-lb551`、`sf32lb52-lcd_n16r8`、`sf32lb58-lcd_n16r64n4`，并额外包含 `sf32lb52-core_n16r16`。不要未经核实就把不同名称视为同一目标。
 - **GPIO 功耗测试**（[SDK 源码](https://github.com/OpenSiFli/SiFli-SDK/tree/main/example/pm/gpio)）：指南和当前 GCC 构建配置均列出 `sf32lb52-core_n16r16`。
@@ -72,11 +72,11 @@ SiFli-SDK 的电源管理示例可作为测量与集成验证的起点，但不�
 
 ## 蓝牙和显示场景 { #bluetooth-and-display-scenarios }
 
-应使用专用的 [BLE 广播与连接](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/ble/README.html)、[BLE/BT](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) 项目，先建立可重复的蓝牙无线场景，再在应用中优化连接参数。最终产品仍必须在自身的广播或连接设置、对端设备、射频环境、天线和回调行为下重新测量。若应用在每个无线事件中都唤醒主 CPU，即使链路层结果很好，实际产品的功耗也可能明显变差。
+应使用专用的 [BLE 广播与连接](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/ble/README.html)、[BLE/BT](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/bt/README.html) 项目，先建立可重复的蓝牙无线场景，再在应用中优化连接参数。最终产品仍必须在自身的广播或连接设置、对端设备、射频环境、天线和回调行为下重新测量。若应用在每个无线事件中都唤醒主 CPU，即使链路层结果原本良好，也可能因此失去参考价值。
 
 显示相关示例用于分别验证以下设计选择：
 
-- **AMOLED 功耗测试**对比灭屏睡眠与常亮屏策略。该例程中的模式切换和续航估算仅适用于文档所述的开发板、面板、亮度、刷新时序和使用模型，不能直接套用到所有 AMOLED 产品。
+- **AMOLED 功耗测试**对比灭屏睡眠与常亮屏策略。源示例中的模式切换和续航数据仅适用于文档所述的开发板、面板、亮度、刷新时序和使用模型，不能直接套用到所有 AMOLED 产品。
 - [JDI 功耗测试](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/jdi/README.html)为 JDI 显示路径提供了对应的平台专用基线。
 - [GUI_PM 低功耗示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/gui_pm/README.html)将 UI 生命周期决策与 PM 行为联系起来。
 - [屏幕刷新场景](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/pm/lcd_refresh/README.html)专注于显示更新本身的负载。
@@ -87,9 +87,9 @@ SiFli-SDK 的电源管理示例可作为测量与集成验证的起点，但不�
 
 **抬腕亮屏**项目特别有价值，因为它将传感器采样、手势识别、显示唤醒、有限的交互时长和再次睡眠组合在一个场景中。它验证的是一个产品场景，而不是孤立功耗状态。
 
-SiFli-SDK 示例中的续航估算依赖文档中给出的电池容量、每日抬腕次数、亮屏时长、传感器、采样间隔、开发板和实测电流。改造时应保留其计算结构：测量亮屏状态，测量灭屏状态，说明每日事件次数，并计算组合后的每日能耗。随后必须用产品自身的数值更新模型，而不能直接沿用示例中的数值。
+上游示例中的续航估算依赖文档中给出的电池容量、每日抬腕次数、亮屏时长、传感器、采样间隔、开发板和实测电流。改造时应保留其计算结构：测量亮屏状态，测量灭屏状态，说明每日事件次数，并计算组合后的每日能耗。随后用产品自身的数值更新模型，而不是沿用示例中的数值。
 
-需要查看完整的建模和测量闭环时，请参阅[智能手表功耗建模与分析](smartwatch-power-profiling.md)。
+需要查看完整的建模和测量闭环时，请参阅[智能手表功耗分析](smartwatch-power-profiling.md)。
 
 ## 用 PM 示例形成产品验证记录 { #adapt-a-pm-example-into-product-evidence }
 
@@ -109,8 +109,8 @@ SiFli-SDK 示例中的续航估算依赖文档中给出的电池容量、每日�
 
 ## 相关资源 { #related-resources }
 
-- [低功耗概览](overview.md)：了解 PM 管理职责、功耗模式、系统级设计和功耗建模概念。
+- [低功耗概览](overview.md)：了解 PM 职责归属、功耗模式、系统级设计和功耗分析概念。
 - [功耗测量与验证](measurement-and-validation.md)：了解器件、场景和产品功耗模型的验证流程。
-- [智能手表功耗建模与分析](smartwatch-power-profiling.md)：查看每日使用功耗模型示例。
+- [智能手表功耗分析](smartwatch-power-profiling.md)：查看每日使用功耗模型示例。
 - [示例](../../develop/examples/index.md)：查看跨领域的 SDK 示例目录。
 - [SiFli-SDK PM 示例索引](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/pm/index.html)：查看当前官方项目和具体配置方式。

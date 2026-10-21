@@ -57,9 +57,9 @@ tags:
 ### 5.2. 电源系统 {#51-power-system}
 
 #### 5.2.1. 电源设计 {#511-power-supply}
-SF32LB58x 系列内置 PMU，提供 2 路 BUCK 输出和 3 路 LDO 输出。BUCK 输出需要外接电感和电容，并连接至芯片内部对应的电源输入；LDO 输出则需要外接电容。智能手表设计可搭配思澈科技（SiFli）的 PMIC SF30147C，为 SF32LB58x 及其外围器件供电。
+SF32LB58x 系列内置 PMU，提供 2 路 BUCK 输出和 3 路 LDO 输出。BUCK 输出需要外接电感和电容，并连接至芯片内部对应的电源输入；LDO 输出则需要外接电容。手表类设计可搭配思澈科技（SiFli）的 PMIC SF30147C，为 SF32LB58x 及其外围器件供电。
 
-##### 5.2.1.1. 思澈科技（SiFli） PMIC 芯片电源分配 {#5111-sifli-pmic-power-distribution}
+##### 5.2.1.1. 思澈科技（SiFli）PMIC 芯片电源分配 {#5111-sifli-pmic-power-distribution}
 
 SF30147C 面向超低功耗可穿戴产品，是一款高集成度、高效率的电源管理芯片。它集成 4 路 LDO，各路均支持较宽的输入、输出电压范围，最大负载电流为 100 mA。芯片还集成 7 路低漏电、低导通电阻的负载开关：其中 2 路为高压开关，可直接由电池电压为外设供电（例如音频功放）；另 5 路为低压开关，用于为 1.8 V 外设供电。SF32LB58x 通过两个 GPIO 模拟 TWI 信号，控制 SF30147C。
 
@@ -72,13 +72,13 @@ SF30147C 面向超低功耗可穿戴产品，是一款高集成度、高效率�
 | VBUCK | 1.8 | 1.8 | 500 | SF32LB58x 的 PVDD1、PVDD2、VDDIOA、VDDIOA2、VDDIOB、AVDD_BRF、AVDD18_DSI 等 1.8 V 电源 |
 | LVSW1 | 1.8 | 1.8 | 100 | I2S Class-K PA 逻辑供电 |
 | LVSW2 | 1.8 | 1.8 | 100 | G-sensor 1.8 V 供电 |
-| LVSW3 | 1.8 | 1.8 | 150 | 心率 1.8 V 供电 |
+| LVSW3 | 1.8 | 1.8 | 150 | 心率传感器 1.8 V 供电 |
 | LVSW4 | 1.8 | 1.8 | 150 | LCD 1.8 V 供电 |
 | LVSW5 | 1.8 | 1.8 | 150 | EMMC CORE 供电 |
 | LDO1 | 2.8 | 3.3 | 100 | SF32LB58x 的 AVDD33_USB、AVDD33_ANA、AVDD33_AUD、AVDDIOA2 等 3.3 V 电源 |
 | LDO2 | 2.8 | 3.3 | 100 | EMMC 或 SD NAND 供电 |
 | LDO3 | 2.8 | 3.3 | 100 | LCD 3.3 V 供电 |
-| LDO4 | 2.8 | 3.3 | 100 | 心率 3.3 V 供电 |
+| LDO4 | 2.8 | 3.3 | 100 | 心率传感器 3.3 V 供电 |
 | HVSW1 | 2.8 | 5 | 150 | 模拟 Class-K PA 供电 |
 | HVSW2 | 2.8 | 5 | 150 | GPS 供电 |
 
@@ -113,7 +113,7 @@ SF32LB58x 系列芯片其他需要外部供电的电源规格如下表所示。
 
 <div align="center" markdown>
 
-| 其它电源管脚 | 最小电压 (V) | 典型电压 (V) | 最大电压 (V) | 最大电流 (mA) | 详细描述 |
+| 其他电源管脚 | 最小电压 (V) | 典型电压 (V) | 最大电压 (V) | 最大电流 (mA) | 详细描述 |
 |:---|:---|:---|:---|:---|:---|
 | AVDD_BRF | 1.71 | 1.8 | 3.3 | 1 | 射频电源输入 |
 | AVDD18_DSI | 1.71 | 1.8 | 2.5 | 20 | MIPI DSI 电源输入；不使用时应悬空（保持未连接） |
@@ -239,7 +239,7 @@ SF32LB58x 系列的所有 GPIO 均可配置为轻度睡眠（Light Sleep）和�
 
 </div>
 
-!!! note "唤醒源数量需向原厂确认"
+!!! note "唤醒源数量需向思澈科技（SiFli）确认"
     原资料称共有 16 个可唤醒中断源，其中 PA 有 6 个、PB 有 10 个；但表格列出 PB 引脚 6 个、PA 引脚 6 个，以及 PBR 引脚 4 个。原资料未说明 PBR 是否计入 PB 的数量。依据 PA/PB 数量进行设计前，请向思澈科技（SiFli）确认统计口径。
 
 ### 5.3. 时钟生成 {#52-clock-generation}
@@ -376,13 +376,13 @@ SF32LB58x 系列芯片支持 DPI 接口来连接 LCD 显示屏。
 |:---|:---|:---|
 | CLK | PA12 | 时钟信号 |
 | DE | PA13 | 数据有效信号 |
-| HSYNC | PA14 | 行同步信号 |
+| HSYNC | PA14 | 水平同步信号 |
 | VSYNC | PA15 | 垂直同步信号 |
 | SD | PA18 | 显示屏关断控制 |
 | CM | PA19 | 在普通色彩模式和减色色彩模式之间切换 |
-| R0-R7 | PA22/PA23/PA24/PA25/PA26/PA27/PA43/PA44 | 像素信号（红色 R0-R7） |
-| G0-G7 | PA45/PA46/PA47/PA48/PA50/PA53/PA54/PA55 | 像素信号（绿色 G0-G7） |
-| B0-B7 | PA56/PA57/PA58/PA61/PA62/PA63/PA65/PA67 | 像素信号（蓝色 B0-B7） |
+| R0-R7 | PA22/PA23/PA24/PA25/PA26/PA27/PA43/PA44 | 像素数据（红色 R0-R7） |
+| G0-G7 | PA45/PA46/PA47/PA48/PA50/PA53/PA54/PA55 | 像素数据（绿色 G0-G7） |
+| B0-B7 | PA56/PA57/PA58/PA61/PA62/PA63/PA65/PA67 | 像素数据（蓝色 B0-B7） |
 
 </div>
 
@@ -593,7 +593,7 @@ SF32LB58x 系列支持通过 MPI3 或 MPI4 接口连接外置 NOR Flash 和 SPI 
 
 ##### 5.6.2.1. QSPI NAND Flash 接口 {#5521-qspi-nand-flash-interface}
 
-SF32LB58x EVB 默认通过 MPI4 接口连接外置 SPI NAND Flash，信号连接如下表所示。
+SF32LB58x EVB 参考板默认通过 MPI4 接口连接外置 SPI NAND Flash。
 
 ![图 5.6-1：SPI NAND Flash 连接参考电路](../../sf32-products/chips/assets/58x/sf32lb58x-SPINAND-SCH.png){ width="100%" loading="lazy" }
 

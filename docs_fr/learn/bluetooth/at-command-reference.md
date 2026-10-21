@@ -1,6 +1,6 @@
 ---
 icon: lucide/list
-description: "Référence complète des commandes AT du module Bluetooth bimode SF32LB57 (SIFLI_AT) pour le BLE et le Bluetooth classique (BR/EDR) : format des commandes et trames, système et appareil, adresses et identité, modes de fonctionnement et visibilité, appairage et sécurité, port série et événements, gestion des connexions, transfert de données, commandes GATT personnalisées, événements non sollicités (URC) et commandes PDU."
+description: "Référence des commandes AT du module Bluetooth bimode SF32LB57 (SIFLI_AT) : trames, appairage, connexions, transfert de données, GATT, URC et commandes PDU."
 tags:
   - Bluetooth
 ---

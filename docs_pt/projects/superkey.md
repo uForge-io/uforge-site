@@ -1,6 +1,6 @@
 ---
 icon: lucide/keyboard
-description: "Roteiro de engenharia do SuperKey baseado no SF32LB52, com três displays, USB HID/CDC e aplicativo complementar para computador: reproduza, valide comunicação e recuperação, adapte de forma controlada e encaminhe o projeto para o desenvolvimento do produto."
+description: "Roteiro de engenharia do SuperKey no SF32LB52 (três displays, USB HID/CDC, app para computador): reproduzir, validar, adaptar e encaminhar ao projeto do produto."
 tags:
     - Projetos
     - USB

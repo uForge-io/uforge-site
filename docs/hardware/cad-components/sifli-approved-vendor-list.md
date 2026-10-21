@@ -1,6 +1,6 @@
 ---
 icon: lucide/component
-description: "SiFli's Approved Vendor List for SF32 designs: qualified crystals, buck inductors, NOR/NAND and SD-NAND Flash, and LCD drivers, with selection requirements and a BOM review checklist."
+description: "SiFli's Approved Vendor List for SF32 designs: qualified crystals, inductors, NOR/NAND Flash, and LCD drivers, with selection requirements and a BOM review checklist."
 tags:
     - Hardware
     - Vendor
@@ -395,5 +395,5 @@ This checklist is intentionally stricter than "the part appears in the AVL." The
 ## Related Pages { #related-pages }
 
 - [SF32LB52x Hardware Design Guide](../chip-guides/SF32LB52x_hardware_design_guide.md) — schematic and layout guidance that references several parts on this list directly.
-- SF32LB57x Hardware Design Guide
+- [SF32LB57x Hardware Design Guide](../chip-guides/SF32LB57x_hardware_design_guide.md)
 - [SF32 Family Overview](../../sf32-products/family/SF32_family.md)

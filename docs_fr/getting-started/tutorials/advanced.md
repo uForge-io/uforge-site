@@ -1,6 +1,6 @@
 ---
 icon: lucide/rocket
-description: "Tutoriels SF32 de validation produit : optimisation mesurée de la consommation, OTA BLE avec récupération après interruption, intégration d'afficheurs personnalisés, analyse de plantages et de coredumps, Bluetooth multi-connexion et pilotes dédiés."
+description: "Tutoriels SF32 de validation produit : consommation mesurée, OTA BLE avec reprise, afficheurs personnalisés, analyse de plantages, Bluetooth multi-connexion et pilotes."
 tags:
     - Tutoriels
 ---

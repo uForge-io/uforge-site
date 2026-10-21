@@ -1,6 +1,6 @@
 ---
 icon: lucide/keyboard
-description: "Guía de ingeniería para SuperKey, un teclado macro multifunción con tres pantallas, USB HID/CDC y aplicación de escritorio, basado en SF32LB52: reproducir, validar comunicación y recuperación, adaptar de forma controlada y traspasar al diseño de producto."
+description: "Ruta de ingeniería de SuperKey con SF32LB52 (tres pantallas, USB HID/CDC, app de escritorio): reproducir, validar, adaptar y traspasar al diseño de producto."
 tags:
     - Proyectos
     - USB

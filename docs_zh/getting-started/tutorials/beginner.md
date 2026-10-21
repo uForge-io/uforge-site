@@ -7,7 +7,7 @@ tags:
 
 # 外设入门 { #beginner-tutorials }
 
-这些教程承接自[入门指南](../index.md)。开始前，你应已安装 SiFli-SDK 工具链，至少成功烧录过一次 `hello_world`，并知道如何打开串口终端。每篇教程都围绕一个概念和一个外设展开，篇幅精简但内容完整，并设有明确的成功标准。
+这些教程承接自[入门指南](../index.md)。开始前，你应已安装 SiFli-SDK 工具链，至少成功烧录过一次 `hello_world`，并知道如何打开串口终端。每篇教程都刻意保持精简：一个概念、一个外设、一个明确的成功条件。
 
 这些示例默认使用 SF32LB52-DevKit-LCD 这一类开发板，例如 `sf32lb52-lcd_n16r8`。如使用其他开发板，请在构建命令中替换开发板名称，并根据该板的支持文件确认引脚名称、外设实例和存储布局。
 
@@ -48,7 +48,7 @@ scons --board=<board_name> -j8
 
 **起点示例：** `example/hal/gpio` 或 `example/rt_device/gpio`
 
-SF32 的 RT-Thread SDK 可通过 RT-Thread 标准的 **PIN device** API 操作 GPIO。最简单的闪灯循环如下：
+SF32 基于 RT-Thread 的 SDK 通过 RT-Thread 标准的 **PIN device** API 操作 GPIO。最简单的闪灯循环如下：
 
 ```c
 #include <rtthread.h>
@@ -131,7 +131,7 @@ rt_pin_irq_enable(BUTTON_PIN, PIN_IRQ_ENABLE);
 
 **起点示例：** `example/system/finsh`
 
-RT-Thread 的 **FinSH** Shell 通过同一个 UART 提供交互式 `msh>` 提示符，这个 UART 通常也承载启动日志。建议尽早养成以下习惯：
+RT-Thread 的 **FinSH** Shell 通过启动日志所用的同一个 UART 提供交互式 `msh>` 提示符。建议尽早养成以下习惯：
 
 - 使用 `rt_kprintf()` 输出轻量级调试日志，而不是直接向 UART 写数据。
 - 使用内置 Shell 命令，例如 `list_thread`、`list_device` 以及内存和状态类命令，快速观察运行中的系统。
@@ -145,7 +145,7 @@ RT-Thread 的 **FinSH** Shell 通过同一个 UART 提供交互式 `msh>` 提示
 
 **成功标准：** 你能通过 Shell 查看线程和设备，并将自己的日志输出与实际物理事件对应起来。
 
-**如果没有成功：** 检查串口波特率、端口选择、shell 组件是否启用，以及是否有其他工具占用了串口。
+**如果没有成功：** 检查串口波特率、端口选择、Shell 组件是否启用，以及是否有其他工具占用了串口。
 
 **你学到的内容：** 如何在不接入调试器的情况下观察运行系统，以及如何通过简单有效的日志输出减少对固件问题的盲目猜测。
 
@@ -169,7 +169,7 @@ rt_uint32_t voltage_0p1mV = rt_adc_read(adc, channel);
 2. 确认输入电压范围，以及是否有分压或模拟前端电路。
 3. 找到已注册的 ADC 设备，启用通道并读取数值。
 4. 按照对应驱动的说明换算。对于当前 SF32LB52 示例，将返回值除以 10 即可得到 mV；不要再按原始 ADC 计数套用参考电压和分辨率公式。如果板上有外部分压电路，计算分压前的电压时还需计入分压比。
-5. 通过教程 3 里的 shell 打印结果。
+5. 通过教程 3 里的 Shell 打印结果。
 6. 缓慢改变输入，并确认读数平滑变化。
 
 **成功标准：** 读数按预期方向变化，并在应用驱动说明中的换算系数和板级分压比后，对应合理的输入电压。

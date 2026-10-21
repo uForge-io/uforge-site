@@ -1,6 +1,6 @@
 ---
 icon: lucide/trending-up
-description: "Tutoriels SF32 sur l'intégration de sous-systèmes : capteurs I2C, écran LVGL de base, service périphérique BLE, lecture audio locale, stockage sur système de fichiers et tests de coexistence."
+description: "Tutoriels SF32 sur les sous-systèmes connectés : capteurs I2C, écran LVGL de base, service périphérique BLE, audio local, système de fichiers et tests de coexistence."
 tags:
     - Tutoriels
 ---

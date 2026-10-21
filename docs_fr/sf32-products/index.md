@@ -1,7 +1,7 @@
 ---
 icon: lucide/cpu
 title: "Produits SF32"
-description: "Explorez le matériel SF32, planifiez un produit, choisissez une puce, un module ou une carte de développement, réutilisez des conceptions de référence et préparez la conception pour la production."
+description: "Explorer le matériel SF32, planifier un produit, choisir puce, module ou carte de développement, réutiliser une conception de référence et préparer la production."
 tags:
     - Matériel
     - Présentation

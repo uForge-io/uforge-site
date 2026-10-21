@@ -2,7 +2,7 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Storage, connectivity, and manufacturing-access schematic design guidelines for the SF32LB52x MCU: boot storage, sensors, debug/download interface, and production flashing."
+description: "Schematic guidelines for SF32LB52x storage, connectivity, and manufacturing access: boot storage, sensors, debug/download interface, and production flashing."
 tags:
     - Hardware
     - Chip

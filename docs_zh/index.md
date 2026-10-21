@@ -17,7 +17,7 @@ hide:
 
 # 打造下一代<br>嵌入式设备 { #build-the-next-generationof-embedded-devices }
 
-***μForge.io*** 是面向创新半导体解决方案的开源开发平台，首发聚焦思澈科技（SiFli）的 SF32 系列超低功耗微控制器。平台汇集芯片、模组、开发板、SDK、文档和量产就绪的参考设计等全栈资源，帮助开发者减少集成阻力，更快地将互联、智能、高能效的嵌入式产品从构想推进到量产。
+***μForge.io*** 是面向创新半导体解决方案的开源开发平台，首发聚焦思澈科技（SiFli）的 SF32 系列超低功耗微控制器。平台汇集芯片、模组、开发板、SDK、文档和量产就绪的参考设计等全栈资源，帮助开发者降低开发难度，更快地将互联、智能、高能效的嵌入式产品从构想推进到量产。
 
 <div class="uf-hero-actions" markdown>
 
@@ -48,7 +48,7 @@ hide:
   <span class="uf-spotlight-item__art uf-spotlight-item__art--silicon" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">芯片</span>
   <span class="uf-spotlight-item__title">SF32 系列</span>
-  <span class="uf-spotlight-item__copy">适用于超低功耗、互联与智能化应用的嵌入式产品。</span>
+  <span class="uf-spotlight-item__copy">面向超低功耗、互联和智能的嵌入式产品。</span>
 </a>
 
 <a class="uf-spotlight-item uf-spotlight-item--board" href="sf32-products/index.md" data-radius="250">
@@ -155,7 +155,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1 应用核心 + 专用蓝牙控制核心
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 双模蓝牙 5.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 双模蓝牙 6.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU，ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 硬件解压缩
     - :fontawesome-solid-circle:{ .uf-dot-blue } 音频编解码器，1 路 AMIC，2 路 DMIC
@@ -163,6 +163,58 @@ hide:
     - :fontawesome-solid-circle:{ .uf-dot-blue } QFN68 封装，最多 45 个 GPIO，可选集成线性充电器
 
     [查看系列 :material-arrow-right:](sf32-products/chips/SF32LB52x.md){ .uf-link-blue }
+
+- <span class="uf-mcu-chip">SF32LB56</span>
+
+    <span class="uf-mcu-headtext">**SF32LB56x**{ .uf-mcu-title } <span class="uf-mcu-sub">图形优化 MCU</span></span>
+
+    ---
+
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 双核 Cortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 双模蓝牙 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 最高 1024 × 600 RGB 显示
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU，ePicasso 2.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 硬件解压缩
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 音频编解码器，1 路 AMIC，4 路 DMIC
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 960 KB SRAM，最高 16 MB PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 提供 QFN68、BGA175 封装，最多 44 / 120 个 GPIO
+
+    [查看系列 :material-arrow-right:](sf32-products/chips/SF32LB56x.md){ .uf-link-blue }
+
+- <span class="uf-mcu-chip">SF32LB57</span>
+
+    <span class="uf-mcu-headtext">**SF32LB57x**{ .uf-mcu-title } <span class="uf-mcu-sub">多媒体 AIoT MCU</span></span>
+
+    ---
+
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 三核 Cortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 双模蓝牙 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 最高 1024 × 600 RGB 显示
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU，ePicasso 3.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 3.0 及 JPEG/MJPEG 解码
+    - :fontawesome-solid-circle:{ .uf-dot-blue } DCMI 摄像头输入，最高 200 万像素
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 音频编解码器，2 路 AMIC，4 路 DMIC
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 592 KB SRAM，最高 48 MB PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 提供 QFN68、QFN80、BGA112 封装，最多 46 / 47 / 58 个 GPIO；部分 BGA112 型号另有 6 个引脚可用于 MPI3 或静态输出
+
+    [查看系列 :material-arrow-right:](sf32-products/chips/SF32LB57x.md){ .uf-link-blue }
+
+- <span class="uf-mcu-chip">SF32LB58</span>
+
+    <span class="uf-mcu-headtext">**SF32LB58x**{ .uf-mcu-title } <span class="uf-mcu-sub">旗舰级 AIoT 平台 MCU</span></span>
+
+    ---
+
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 三核 Cortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 双模蓝牙 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 最高 1280 × 720 MIPI 显示
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU + 矢量图形，ePicasso 2.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 及 JPEG/MJPEG 解码
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 音频编解码器，2 路 AMIC，4 路 DMIC
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 3.7 MB SRAM，最高 64 MB PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 提供 BGA256 封装，最多 154 个 GPIO
+
+    [查看系列 :material-arrow-right:](sf32-products/chips/SF32LB58x.md){ .uf-link-blue }
 
 - <span class="uf-mcu-chip">SF32LB55</span>
 
@@ -180,42 +232,10 @@ hide:
 
     [查看系列 :material-arrow-right:](sf32-products/chips/SF32LB55x.md){ .uf-link-blue }
 
-- <span class="uf-mcu-chip">SF32LB56</span>
-
-    <span class="uf-mcu-headtext">**SF32LB56x**{ .uf-mcu-title } <span class="uf-mcu-sub">图形优化 MCU</span></span>
-
-    ---
-
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 双核 Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 低功耗蓝牙 5.3
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 最高 1024 × 600 RGB 显示
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU，ePicasso 2.0
-    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 硬件解压缩
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 音频编解码器，1 路 AMIC，4 路 DMIC
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 960 KB SRAM，最高 16 MB PSRAM
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 提供 QFN68、BGA175 封装，最多 44 / 120 个 GPIO
-
-    [查看系列 :material-arrow-right:](sf32-products/chips/SF32LB56x.md){ .uf-link-blue }
-
-- <span class="uf-mcu-chip">SF32LB58</span>
-
-    <span class="uf-mcu-headtext">**SF32LB58x**{ .uf-mcu-title } <span class="uf-mcu-sub">旗舰级 AIoT 平台 MCU</span></span>
-
-    ---
-
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 三核架构：HCPU、ACPU 和 LCPU
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 最高 1280 × 720 MIPI 显示
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU + 矢量图形，ePicasso 2.0
-    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 及 JPEG/MJPEG 解码
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 音频编解码器，2 路 AMIC，4 路 DMIC
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 3.7 MB SRAM，最高 64 MB PSRAM
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 提供 BGA256 封装，最多 154 个 GPIO
-
-    [查看系列 :material-arrow-right:](sf32-products/chips/SF32LB58x.md){ .uf-link-blue }
-
 </div>
 
 [^1]: 参见 [SF32 系列产品概述](sf32-products/family/SF32_family.md)，了解所有器件的详细对比。
+
 <!--
 ---
 
@@ -261,7 +281,7 @@ hide:
 
     **运行与交付**
 
-    运行并优化产品，然后将其交付使用。
+    运行、优化并部署你的产品。
 
 </div>
 

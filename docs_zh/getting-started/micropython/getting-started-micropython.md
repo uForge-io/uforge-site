@@ -8,7 +8,7 @@ tags:
 
 # MicroPython { #micropython }
 
-MicroPython 目前还没有经过验证的 SF32 入门流程。在已查阅的思澈科技（SiFli）和 OpenSiFli 资料中，尚未找到面向特定开发板的官方固件镜像、烧录流程或 REPL 配置。
+MicroPython 目前还没有经过验证的 SF32 入门流程。在已查阅的思澈科技（SiFli）和 OpenSiFli 资料中，均未记载面向特定开发板的官方固件镜像、烧录流程或 REPL 配置。
 
 请先按 [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) 流程确认开发板和连接线，识别串口并完成固件烧录，建立可复现的基线环境。不要照搬通用 MicroPython 安装说明，也不要使用为其他 MCU 或开发板准备的镜像。
 

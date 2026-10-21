@@ -33,6 +33,7 @@ nav = [
       "sf32-products/chips/SF32LB52x.md",
       "sf32-products/chips/SF32LB55x.md",
       "sf32-products/chips/SF32LB56x.md",
+      "sf32-products/chips/SF32LB57x.md",
       "sf32-products/chips/SF32LB58x.md"
     ]},
     { "Модули" = [
@@ -144,6 +145,20 @@ nav = [
         { "Чек-лист схемы" = "hardware/chip-guides/SF32LB56x_schematic_checklist.md" },
         { "Рекомендации по разводке PCB" = "hardware/chip-guides/SF32LB56x_pcb_layout.md" },
         { "Чек-лист проверки проекта и справочные материалы" = "hardware/chip-guides/SF32LB56x_review_and_reference.md" }
+      ]},
+      { "SF32LB57x" = [
+        { "Обзор" = "hardware/chip-guides/SF32LB57x_hardware_design_guide.md" },
+        { "Рекомендации по разработке схемы" = [
+          { "Минимальная система и питание" = "hardware/chip-guides/SF32LB57x_schematic_system_power.md" },
+          { "Тактирование, RF и пользовательские интерфейсы" = "hardware/chip-guides/SF32LB57x_schematic_clock_rf_interfaces.md" },
+          { "Хранение данных и производство" = "hardware/chip-guides/SF32LB57x_schematic_storage_mfg.md" },
+          { "Чек-лист схемы" = "hardware/chip-guides/SF32LB57x_schematic_checklist.md" }
+        ]},
+        { "Рекомендации по разводке PCB" = [
+          { "Рекомендации по проектированию" = "hardware/chip-guides/SF32LB57x_pcb_layout.md" },
+          { "Чек-лист разводки PCB" = "hardware/chip-guides/SF32LB57x_pcb_layout_checklist.md" }
+        ]},
+        { "Чек-лист проверки проекта и справочные материалы" = "hardware/chip-guides/SF32LB57x_review_and_reference.md" }
       ]},
       { "SF32LB58x" = [
         { "Обзор" = "hardware/chip-guides/SF32LB58x_hardware_design_guide.md" },

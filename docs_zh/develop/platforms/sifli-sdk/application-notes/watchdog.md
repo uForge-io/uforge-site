@@ -64,7 +64,7 @@ rt_hw_watchdog_pet();
 
 ## 验证流程 { #validation-sequence }
 
-1. 记录芯片系列、SDK 版本、超时时间、喂狗责任线程和睡眠模式。
+1. 记录芯片系列、SDK 版本、超时时间、喂狗负责方和睡眠模式。
 2. 验证正常工作负载能够到达预期的喂狗位置。
 3. 有意停止喂狗，确认复位范围和启动行为符合预期。
 4. 在所有支持的睡眠模式下重复测试，尤其要覆盖 `Standby` 和 `Hibernate`。
@@ -77,4 +77,4 @@ rt_hw_watchdog_pet();
 - [SF32LB52x HAL WDT 指南（英文）](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/hal/wdt.html)
 - [SF32LB55x HAL WDT 指南（中文，含 56x/58x 差异说明）](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/hal/wdt.html)
 
-以下系列专属看门狗应用笔记路径目前尚未核实：`sf32lb55x/app_note/watchdog.html`、`sf32lb56x/app_note/watchdog.html` 和 `sf32lb58x/app_note/watchdog.html`。搜索和直接访问均未能确认这些路径对应页面的状态；这并不能证明页面不存在或会返回 404。
+以下系列专属看门狗应用笔记路径目前尚未核实：`sf32lb55x/app_note/watchdog.html`、`sf32lb56x/app_note/watchdog.html` 和 `sf32lb58x/app_note/watchdog.html`。搜索和直接打开的结果均无定论，不能据此认定这些路径会返回 404。

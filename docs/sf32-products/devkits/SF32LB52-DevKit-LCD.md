@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-LCD: display-focused SF32LB52x development board for rapid bring-up of SPI, QSPI, and MCU/8080 display products with touch, audio, storage, and battery support."
+description: "SF32LB52-DevKit-LCD: display-focused SF32LB52x board for fast bring-up of SPI, QSPI, and MCU/8080 displays with touch, audio, storage, and battery support."
 tags:
     - Hardware
     - Development board

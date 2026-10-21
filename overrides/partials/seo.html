@@ -4,17 +4,24 @@
 {% set page_title = page.meta.title if page.meta and page.meta.title else (page.title | striptags if page.title else config.site_name) %}
 {% set page_description = page.meta.description if page.meta and page.meta.description else config.site_description %}
 {% set page_url = page.canonical_url if page.canonical_url else (site_url ~ (page.url | default("", true))) %}
-{% set page_image = page.meta.image if page.meta and page.meta.image else "assets/uforge-logo.svg" %}
+{% set has_custom_image = page.meta and page.meta.image %}
+{% set page_image = page.meta.image if has_custom_image else "assets/uforge-og.png" %}
 {# Shared assets (logo, images) live once at the site root; localized builds are
    nested under /<lang>/ and tools/dedupe-site-assets.py deletes their copies,
    so absolute asset URLs must use the root URL, not the per-language site_url. #}
 {% set root_url = site_url | replace("/zh/", "/") | replace("/ja/", "/") | replace("/es/", "/") | replace("/de/", "/") | replace("/fr/", "/") | replace("/pt/", "/") | replace("/ru/", "/") | replace("/ko/", "/") %}
+{% set og_sections = ["sf32-products", "getting-started", "hardware", "develop", "learn", "projects", "blog", "about"] %}
+{% set page_section = page.url | default("", true) | split("/") | first %}
+{% if not has_custom_image and page_section in og_sections %}{% set page_image = "assets/og/" ~ (config.theme.language | default("en", true)) ~ "-" ~ page_section ~ ".png" %}{% endif %}
 {% set absolute_image = page_image if "http" in page_image else (root_url ~ page_image) %}
 {% set is_home = page.url == "" %}
 {% set src_path = page.file.src_path if page.file and page.file.src_path else "" %}
 {% set is_hardware_guide = "hardware_design_guide" in src_path or "hardware_design_guide" in page_url %}
 {% set is_checklist = "hardware_design_checklist" in src_path or "hardware_design_checklist" in page_url %}
 {% set is_internal = "about/others/" in src_path or "/about/others/" in page_url %}
+{% set blog_path = src_path if src_path else (page.url | default("", true)) %}
+{% set blog_file = (blog_path | trim("/") | split("/") | last) if "blog/posts/" in blog_path else "" %}
+{% set is_blog_post = blog_file != "" and blog_file[:2] == "20" and blog_file[4:5] == "-" %}
 {% set content_language = config.theme.language | default("en", true) %}
 {% set home_labels = {"en": "Home", "zh": "首页", "ja": "ホーム", "es": "Inicio", "de": "Startseite", "fr": "Accueil", "pt": "Início", "ru": "Главная", "ko": "홈"} %}
 {% set home_label = home_labels[content_language] | default("Home", true) %}
@@ -29,7 +36,9 @@
 {% set og_locales = {"en": "en_US", "zh": "zh_CN", "ja": "ja_JP", "es": "es_ES", "de": "de_DE", "fr": "fr_FR", "pt": "pt_BR", "ru": "ru_RU", "ko": "ko_KR"} %}
 <meta property="og:locale" content="{{ og_locales[content_language] | default('en_US', true) }}">
 <meta property="og:image" content="{{ absolute_image }}">
-<meta name="twitter:card" content="summary_large_image">
+{% if not has_custom_image %}<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+{% endif %}<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ page_title }} - {{ config.site_name }}">
 {% if page_description %}
 <meta name="twitter:description" content="{{ page_description }}">
@@ -73,21 +82,33 @@
           "position": 1,
           "name": {{ home_label | tojson }},
           "item": "{{ site_url }}"
-        },
+        }{% set ns = namespace(pos=1) %}{% for anc in (page.ancestors | default([], true) | reverse | list) %}{% set first = (anc.children | first) if anc.children else none %}{% if first and first.children %}{% set first = first.children | first %}{% endif %}{% set anc_url = anc.url or (first.url if first else "") %}{% if anc_url and anc_url != page.url %}{% set ns.pos = ns.pos + 1 %},
         {
           "@type": "ListItem",
-          "position": 2,
-          "name": "{{ page_title }}",
+          "position": {{ ns.pos }},
+          "name": {{ (anc.title | striptags) | tojson }},
+          "item": "{{ site_url }}{{ anc_url }}"
+        }{% endif %}{% endfor %}{% set ns.pos = ns.pos + 1 %},
+        {
+          "@type": "ListItem",
+          "position": {{ ns.pos }},
+          "name": {{ page_title | tojson }},
           "item": "{{ page_url }}"
         }
       ]
     },
     {
-      "@type": "{{ 'TechArticle' if is_hardware_guide or is_checklist else 'Article' }}",
+      "@type": "{{ 'BlogPosting' if is_blog_post else ('TechArticle' if is_hardware_guide or is_checklist else 'Article') }}",
       "inLanguage": {{ content_language | tojson }},
       "@id": "{{ page_url }}#article",
-      "headline": "{{ page_title }}",
-      "description": "{{ page_description }}",
+      "mainEntityOfPage": "{{ page_url }}",{% if is_blog_post %}
+      "datePublished": "{{ blog_file[:10] }}",
+      "author": { "@id": "{{ site_url }}#organization" },{% endif %}
+      "breadcrumb": {
+        "@id": "{{ page_url }}#breadcrumbs"
+      },
+      "headline": {{ page_title | tojson }},
+      "description": {{ page_description | tojson }},
       "url": "{{ page_url }}",
       "image": "{{ absolute_image }}",
       "publisher": {

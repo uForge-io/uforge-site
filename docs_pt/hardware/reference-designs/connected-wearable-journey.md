@@ -1,6 +1,6 @@
 ---
 icon: lucide/waypoints
-description: "Um roteiro prático de projeto de referência SF32, da validação com a placa de desenvolvimento SF32LB52 ao planejamento de hardware e firmware personalizados para um dispositivo vestível conectado."
+description: "Roteiro prático de projeto de referência SF32, da validação na placa SF32LB52 ao plano de lançamento de hardware e firmware de um wearable conectado personalizado."
 tags:
     - Hardware
     - Projeto de referência

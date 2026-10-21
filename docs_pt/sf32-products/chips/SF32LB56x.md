@@ -1,6 +1,6 @@
 ---
 icon: lucide/microchip
-description: "SF32LB56x: família avançada de MCUs Bluetooth de modo duplo e consumo ultrabaixo para produtos que precisam de displays mais avançados, áudio integrado, memória externa e maior capacidade de processamento em tarefas sempre ativas."
+description: "SF32LB56x: família avançada de MCUs Bluetooth dual-mode de consumo ultrabaixo para displays mais ricos, áudio integrado, memória externa e processamento always-on."
 tags:
     - Hardware
     - Chip
@@ -177,6 +177,25 @@ Siga esta sequência para transformar uma lista preliminar de componentes SF32LB
 3. **Projete e revise o hardware.** Antes de liberar o esquemático ou o layout, consulte o [guia local de projeto de hardware](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md), incluindo os checklists de [esquemático](../../hardware/chip-guides/SF32LB56x_schematic_checklist.md) e de layout da PCB. Mantenha o encapsulamento U/V e a interface de display alinhados ao componente escolhido.
 4. **Confirme as fontes oficiais.** Verifique o código exato do componente e o encapsulamento no [datasheet], no [manual do usuário][User Manual], no guia de projeto de hardware aplicável para [U][Hardware Design Guide (U, wiki.sifli.com)] ou [V][Hardware Design Guide (V, wiki.sifli.com)] e na respectiva [fonte da aplicação de hardware (U)][Hardware Application Source (U)] ou [fonte da aplicação de hardware (V)][Hardware Application Source (V)].
 
+<!-- uf-faq:start -->
+## Perguntas frequentes { #frequently-asked-questions }
+
+**Quais são as principais especificações do SF32LB56x?**
+O SF32LB56x combina uma CPU de aplicação (Cortex-M33 @240 MHz) com um núcleo de baixo consumo (Cortex-M33 @48/96 MHz, com um núcleo programável pelo usuário), 960 KB de SRAM interna e Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 2.0. Encapsulamento: QFN68 / BGA175 (7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)). USB 2.0 FS. Valores da família; confira o datasheet do código exato.
+
+**Quais interfaces de display o SF32LB56x suporta?**
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. A disponibilidade varia conforme o código e o encapsulamento.
+
+**Quanta memória no encapsulamento o SF32LB56x oferece?**
+Até 16 MB de PSRAM e até 1 MB de Flash NOR no encapsulamento, conforme o código.
+
+**Qual tensão de alimentação o SF32LB56x precisa?**
+1.71–3.63 V, conforme a variante. Confirme a faixa exata no datasheet.
+
+**Por onde começar um projeto de hardware com o SF32LB56x?**
+Comece pelo [guia de projeto de hardware do SF32LB56x](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) para esquemático, alimentação, clock/RF e layout de PCB, e use os checklists de esquemático e layout antes de liberar a placa.
+<!-- uf-faq:end -->
+
 ## Produtos relacionados { #related-products }
 
 ### Módulo { #module }
@@ -190,6 +209,3 @@ O [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) é um ponto de partid
 ### Produtos de referência { #reference-products }
 
 Entre os produtos finais típicos com SF32LB56x estão smartwatches avançados, painéis HMI conectados, dispositivos de saúde, terminais portáteis industriais, instrumentos portáteis e displays avançados para e-bikes e e-scooters.
-
-!!! note "Conteúdo gerado automaticamente"
-    Esta página foi elaborada sem um documento-fonte preexistente. Verifique as afirmações técnicas na documentação oficial da SiFli antes de confiar nelas.

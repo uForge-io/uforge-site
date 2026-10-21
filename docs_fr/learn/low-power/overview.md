@@ -1,7 +1,7 @@
 ---
 icon: lucide/battery
 title: "Vue d'ensemble de la conception basse consommation"
-description: "Principes pratiques de conception basse consommation pour SF32 : modes de fonctionnement, gestion de l'énergie et effets du Bluetooth, de l'affichage, de l'audio et de l'IA sur l'autonomie."
+description: "Conception basse consommation SF32 : modes de fonctionnement, middleware PM, ce qui vide une batterie, et effets du Bluetooth, des graphismes, de l'audio et de l'IA."
 tags:
   - Basse consommation
 ---
@@ -290,3 +290,5 @@ Consignez la version du firmware, la révision de la carte, la tension de la bat
 - Les architectures fondées sur les événements et les interruptions consomment généralement moins que les interrogations périodiques.
 - Sur un produit connecté, les paramètres de connexion Bluetooth et la stratégie de rafraîchissement de l'écran sont souvent deux leviers majeurs d'économie.
 - Mesurez l'énergie consommée avec des charges combinées représentatives, sur le matériel réel et dans le boîtier final. Les mesures au banc et celles de sous-systèmes isolés peuvent sous-estimer la consommation du produit complet.
+
+Pour estimer le pourcentage de batterie restant à partir de la tension, consultez [Estimation du niveau de charge de la batterie](battery-capacity-calculation.md).

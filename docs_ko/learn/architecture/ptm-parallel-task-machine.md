@@ -60,7 +60,7 @@ PTM executes deterministic peripheral sequences
 
 ## 핵심 기능 { #core-capabilities }
 
-SF32LB57x 하드웨어 설계 가이드에는 **16개 채널을 갖춘 PTM 블록 1개**가 나와 있으며, 핀 멀티플렉싱 표에는 PTM1_CH0부터 PTM1_CH15까지가 명시되어 있습니다. SDK 정의와 함께 보면, 문서화된 기능은 다음과 같습니다.
+[SF32LB57x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md)에는 **16개 채널을 갖춘 PTM 블록 1개**가 나와 있으며, 핀 멀티플렉싱 표에는 PTM1_CH0부터 PTM1_CH15까지가 명시되어 있습니다. SDK 정의와 함께 보면, 문서화된 기능은 다음과 같습니다.
 
 - 독립적으로 제어되는 PTM 실행 리소스
 - 간결한 커스텀 명령어 세트

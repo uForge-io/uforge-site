@@ -1,6 +1,6 @@
 ---
 icon: lucide/code
-description: "Bewertung der Community-Rust-Unterstützung für SF32 über OpenSiFli/sifli-rs (sifli-hal, sifli-pac): aktueller Reifegrad, geeignete und ungeeignete Einsatzszenarien sowie eine Risiko-Checkliste."
+description: "Community-Rust-Unterstützung für SF32 über OpenSiFlis sifli-rs (sifli-hal, sifli-pac) bewerten: Reifegrad, passende und unpassende Szenarien und Risiko-Checkliste."
 tags:
     - Entwicklung
     - Rust

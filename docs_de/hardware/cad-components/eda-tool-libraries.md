@@ -1,6 +1,6 @@
 ---
 icon: lucide/library
-description: "Offizielle Schaltplansymbol- und PCB-Footprint-Bibliotheken von SiFli für SF32-Chips und -Module — JLCEDA/LCEDA Pro, PADS, OrCAD und KiCad — mit Download-Links und Prüfliste."
+description: "Offizielle SiFli-Bibliotheken mit Schaltplansymbolen und PCB-Footprints für SF32 in JLCEDA/LCEDA Pro, PADS, OrCAD und KiCad, mit Download-Links und Prüfliste."
 tags:
     - Hardware
     - EDA

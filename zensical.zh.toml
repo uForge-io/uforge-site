@@ -40,6 +40,7 @@ nav = [
       "sf32-products/chips/SF32LB52x.md",
       "sf32-products/chips/SF32LB55x.md",
       "sf32-products/chips/SF32LB56x.md",
+      "sf32-products/chips/SF32LB57x.md",
       "sf32-products/chips/SF32LB58x.md"
     ]},
     { "模组" = [
@@ -151,6 +152,20 @@ nav = [
         { "原理图核对表" = "hardware/chip-guides/SF32LB56x_schematic_checklist.md" },
         { "PCB 布局指导" = "hardware/chip-guides/SF32LB56x_pcb_layout.md" },
         { "设计评审检查表与参考资料" = "hardware/chip-guides/SF32LB56x_review_and_reference.md" }
+      ]},
+      { "SF32LB57x" = [
+        { "概览" = "hardware/chip-guides/SF32LB57x_hardware_design_guide.md" },
+        { "原理图设计指导" = [
+          { "最小系统与电源" = "hardware/chip-guides/SF32LB57x_schematic_system_power.md" },
+          { "时钟、RF 与用户接口" = "hardware/chip-guides/SF32LB57x_schematic_clock_rf_interfaces.md" },
+          { "存储与制造" = "hardware/chip-guides/SF32LB57x_schematic_storage_mfg.md" },
+          { "原理图核对表" = "hardware/chip-guides/SF32LB57x_schematic_checklist.md" }
+        ]},
+        { "PCB 布局指导" = [
+          { "设计指导" = "hardware/chip-guides/SF32LB57x_pcb_layout.md" },
+          { "PCB 布局核对表" = "hardware/chip-guides/SF32LB57x_pcb_layout_checklist.md" }
+        ]},
+        { "设计评审检查表与参考资料" = "hardware/chip-guides/SF32LB57x_review_and_reference.md" }
       ]},
       { "SF32LB58x" = [
         { "概览" = "hardware/chip-guides/SF32LB58x_hardware_design_guide.md" },

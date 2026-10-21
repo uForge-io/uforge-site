@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-Nano: placa de desenvolvimento SF32LB52x compacta, com furos semicirculares metalizados nas bordas, para protótipos próximos ao produto final, bring-up de pequenos displays e avaliação com a placa soldada."
+description: "SF32LB52-DevKit-Nano: placa SF32LB52x compacta com furos metalizados nas bordas para protótipos próximos ao produto, pequenos displays e avaliação soldada."
 tags:
     - Hardware
     - Placa de desenvolvimento

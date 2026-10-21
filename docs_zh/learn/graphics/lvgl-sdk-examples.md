@@ -28,7 +28,7 @@ SiFli-SDK 的 LVGL 示例适合用来验证显示与 UI 链路，但不能直接
 | 评估 UI 设计工作流 | **[gui_guider](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_tools_example/NXP_GUI_guider/README.html)**、**[SquareLine](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_tools_example/Square_Line/README.html)** 或 **[EEZ Studio](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_tools_example/eez_studio/README.html)** 示例 | 如何将生成的 UI 代码集成到 SDK 工程 | 生成代码可正常构建，且其 LVGL 版本与工程一致 |
 | 原型验证特定 UI 行为 | **[Basechart](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_basechart/README.html)**、**[Baselabel](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_baselabel/README.html)**、**[Follow](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_follow/README.html)**、**[Imgarray](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_imgarray/README.html)**、**[Imgbar](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_imgbar/README.html)**、**[Mulroller](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_mulroller/README.html)**、**[Multanim](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_multanim/README.html)**、**[Multlist](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_multlist/README.html)**、**[Multroller](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_multroller/README.html)**、**[Multslider](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_multslider/README.html)**、**[Sector](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_sector/README.html)**、**[Select](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_select/README.html)** 或 **[Timeline](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_timeline/README.html)** | 某一种交互、控件、排列或动画模式 | 产品需要由多个元素组成的完整界面，而不只是单个显示元素 |
 | 验证资源、动画或媒体 | **[动态 eZip 加载 v8](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/ezip/README.html)** / **[v9](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/ezip_v9/README.html)**、**[Lottie](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_lottie/README.html)**、**[本地视频播放](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_media/README.html)** 或 **[流媒体播放](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/streaming_media/README.html)** | 丰富内容所需的存储、解码、渲染和刷新链路 | 已在目标硬件上测量资源大小、内存布局、更新速率和功耗，并确认符合产品要求 |
-| 构建具有完整交互流程的 UI | **[电子罗盘](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/compass/README.html)**、**[游戏索引](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/games/index.html)**（[扫雷示例 README](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/lvgl/games/minesweeper/README.html)）或 **[手表界面 v8](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/watch/README.html)** / **[v9](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/watch_v9/README.html)** | 多功能显示工作负载下的屏幕流程、交互和视觉节奏 | 可开始用产品数据、生命周期行为和性能约束替换示例内容 |
+| 构建可辨认的端到端 UI | **[电子罗盘](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/compass/README.html)**、**[游戏索引](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/games/index.html)**（[扫雷示例 README](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/lvgl/games/minesweeper/README.html)）或 **[手表界面 v8](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/watch/README.html)** / **[v9](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/watch_v9/README.html)** | 屏幕流程、交互以及多功能显示负载 | 可开始用产品数据、生命周期行为和性能约束替换示例内容 |
 
 </div>
 
@@ -69,7 +69,7 @@ SiFli-SDK 的 LVGL 示例适合用来验证显示与 UI 链路，但不能直接
 
 将生成代码导入产品前，应核对生成代码的版本、屏幕分辨率、色深、资源路径和回调函数的管理职责。
 
-gui_guider 和 EEZ Studio 的源示例都明确使用 LVGL v8。SquareLine 还要求启用生成代码所用的默认主题。生成的子目录必须纳入构建，可选的 eZip 资源转换也应按官方步骤配置；仅复制文件并不足以完成集成。
+gui_guider 和 EEZ Studio 的源示例都明确使用 LVGL v8。SquareLine 还要求启用生成代码所用的默认主题。生成的子目录必须纳入构建，文档记载的可选 eZip 资源转换步骤也应照做；仅复制文件并不足以完成集成。
 
 生成代码可以加快 UI 构建，但不能取代显示驱动、缓冲策略、输入驱动、功耗策略或集成测试。应将生成文件与手写的应用逻辑分开，避免再次导出时无意覆盖产品修改。
 
@@ -78,7 +78,7 @@ gui_guider 和 EEZ Studio 的源示例都明确使用 LVGL v8。SquareLine 还�
 这些 LVGL v8 示例适合用来验证特定的 UI 行为，但覆盖范围并不相同。Multlist 是基于应用框架的完整演示，不是单个控件的最小测试。
 
 - **Basechart** 绘制数据序列；**Baselabel** 将数据源绑定到定时刷新的文本。
-- **Follow** 演示受重力方向驱动的图标菜单；**Select** 演示选中状态；**Sector** 将数值映射为图片可见扇形的角度。
+- **Follow** 演示受重力驱动的图标菜单；**Select** 演示选中状态；**Sector** 将数值映射为图片可见扇形的角度。
 - **Imgarray** 用图片字形拼出数值；**Imgbar** 通过裁切前景图片显示进度。
 - **Mulroller** 是可通过回调深度定制的滚轮选择器；**Multroller** 是更简单的文字选项滚轮。
 - **Multlist** 涵盖列表、翻页、转场、资源缓存和页面生命周期；**Multslider** 在滑块手柄上显示数值或短标签。
@@ -94,9 +94,9 @@ gui_guider 和 EEZ Studio 的源示例都明确使用 LVGL v8。SquareLine 还�
 
 对于 GIF/APNG 动画资源，思澈科技（SiFli）还提供了 [AGIF/APNG + LVGL v8](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/agif/lvgl/README.html) 和 [AGIF/APNG + LVGL v9](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/agif/lvgl_v9/README.html) 示例，归在 **多媒体 > AGIF** 分类下。两个 README 都列出 `eh-lb525`；当前 [GCC 构建矩阵](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml) 也将两个工程路径注册在 `devkit_lcd_boards` 下。矩阵注册表示构建目标，不代表该组中的每块开发板都已完成运行验证。将其作为产品基线前，请核实具体目标板和 SDK 版本。
 
-动态 eZip 示例可比较文件路径访问与预加载到 SRAM 或 PSRAM 两种方式。预加载会增加内存占用，但可减少反复读取文件。资源格式必须对应 LVGL v8/v9；官方 v9 路径需要 `A:/` 这类盘符前缀，v8 则不要求该前缀。应核对实际存储后端和盘符配置。v9 README 明确列出以下开发板：`sf32lb52-lcd_n16r8`、`sf32lb52-lcd_a128r16`、`sf32lb52-lchspi-ulp`、`sf32lb52-core_e8r16`、`sf32lb56-lcd_a128r12n1`、`sf32lb56-lcd_n16r12n1`、`sf32lb58-lcd_n16r32n1_dsi`、`sf32lb58-lcd_a128r32n1_qspi` 和 `sf32lb58-lcd_n16r32n1_qspi`。这份清单仅适用于 v9 README，不应直接套用到 v8，也不能据此推断其他开发板受支持。eZip 文档要求仅对 SF32LB57 使用 `-winsize 2048` 转换选项。
+动态 eZip 示例可比较文件路径访问与预加载到 SRAM 或 PSRAM 两种方式。预加载会增加内存占用，但可减少反复读取文件。资源格式必须对应 LVGL v8/v9；文档记载的 v9 路径需要 `A:/` 这类盘符前缀，v8 则不要求该前缀。应核对实际存储后端和盘符配置。v9 README 明确列出以下开发板：`sf32lb52-lcd_n16r8`、`sf32lb52-lcd_a128r16`、`sf32lb52-lchspi-ulp`、`sf32lb52-core_e8r16`、`sf32lb56-lcd_a128r12n1`、`sf32lb56-lcd_n16r12n1`、`sf32lb58-lcd_n16r32n1_dsi`、`sf32lb58-lcd_a128r32n1_qspi` 和 `sf32lb58-lcd_n16r32n1_qspi`。这份清单仅适用于 v9 README，不应直接套用到 v8，也不能据此推断其他开发板受支持。eZip 文档要求仅对 SF32LB57 使用 `-winsize 2048` 转换选项。
 
-[Lottie](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_lottie/README.html)、[本地视频播放](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_media/README.html)和[流媒体播放](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/streaming_media/README.html)验证的是不同的内容处理链路，不能简单按名称判断哪一种负载更重。Lottie README 标注该示例**未经验证**，列出的目标包括 `eh-lb563` 和 SF32LB52x/SF32LB56x 系列；当前 GCC 构建矩阵则将其工程条目注释掉了。因此，README 中的目标清单并不代表这些目标已经通过验证。本地视频 README 明确列出 `eh-lb523` 和 `sf32lb52-lcd_n16r8`，但也包含更宽泛的通用构建说明；当前 GCC 构建矩阵将其工程条目注释掉了。不要据此推断其他目标受支持，使用前应核对具体 SDK 版本。本地视频示例播放 `disk/video_example.mp4` 中的 H.264 视频；如果 TF 卡成功挂载，则优先读取卡根目录下的 `video_example.mp4`。流媒体 README 只列出 `sf32lb52-lchspi-ulp`，并通过手机的蓝牙 PAN 网络共享访问网络、使用 FFmpeg；它不是通过 BLE 传输视频的示例。
+[Lottie](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_lottie/README.html)、[本地视频播放](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/lvgl_v8_media/README.html)和[流媒体播放](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/multimedia/lvgl/streaming_media/README.html)验证的是不同的内容处理链路，不能简单按名称判断哪一种负载更重。Lottie README 标注该示例**未经验证**，列出的目标包括 `eh-lb563` 和 SF32LB52x/SF32LB56x 系列；当前 GCC 构建矩阵则将其工程条目注释掉了。应将该目标清单视为未经验证的文档说明，而不是已验证的目标集合。本地视频 README 明确列出 `eh-lb523` 和 `sf32lb52-lcd_n16r8`，但也包含更宽泛的通用构建说明；当前 GCC 构建矩阵将其工程条目注释掉了。在将上述任一说法用于其他目标之前，应核对具体 SDK 版本。本地视频示例播放 `disk/video_example.mp4` 中的 H.264 视频；如果 TF 卡成功挂载，则优先读取卡根目录下的 `video_example.mp4`。流媒体 README 只列出 `sf32lb52-lchspi-ulp`，并通过手机的蓝牙 PAN 网络共享访问网络、使用 FFmpeg；它不是通过 BLE 传输视频的示例。
 
 应按系统级负载评估这些示例。在蓝牙、传感器和产品实际使用的显示接口同时工作时，测量资源或流媒体的存储需求、解码时间、帧更新频率、PSRAM/SRAM 占用、显示带宽和电流。实际开销取决于内容复杂度、分辨率、解码器配置和缓冲策略。
 
@@ -112,7 +112,7 @@ gui_guider 和 EEZ Studio 的源示例都明确使用 LVGL v8。SquareLine 还�
 
 电子罗盘和手表界面示例将显示功能与应用逻辑结合在一起，适合用来研究页面组织、输入与动画时序，以及较复杂显示负载的影响。游戏索引链接到扫雷示例；其 README 列出 `eh-lb563` 和 SF32LB52x/SF32LB56x 系列，但未列出 58x。若要在 58x 上使用，应先核对当前 SDK 源码中的支持情况。
 
-官方罗盘示例在 `sf32lb52-lchspi-ulp` 上通过 I2C 读取 MMC56x3 三轴磁力计。用于产品时，应核对驱动、接线并按实际传感器和整机要求完成校准；能显示方位角，并不代表方向测量已经准确。
+文档记载的罗盘基线示例在 `sf32lb52-lchspi-ulp` 上通过 I2C 读取 MMC56x3 三轴磁力计。用于产品时，应核对驱动、接线并按实际传感器和整机要求完成校准；能显示方位角，并不代表方向测量已经准确。
 
 游戏和手表界面示例适合用来设计页面流程，但产品仍需明确数据管理职责、低功耗行为、屏幕唤醒策略、通知机制和故障恢复。
 

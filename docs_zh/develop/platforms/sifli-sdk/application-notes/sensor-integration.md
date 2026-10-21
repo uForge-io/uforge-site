@@ -23,7 +23,7 @@ tags: [开发, SiFli-SDK, 应用笔记, 传感器]
 - 结合硬件设计确认所选总线已经使能，并已布线到对应的封装引脚。
 - 检查传感器与 SF32 器件的电压范围和频率范围是否匹配。
 - 确定总线名、设备地址、片选（如适用）、供电控制、复位和中断管脚。
-- 与应用开发者确认驱动需要提供的数据操作和控制操作。
+- 与应用负责人确认驱动需要提供的数据操作和控制操作。
 
 ## 准备驱动和构建配置 { #2-prepare-the-driver-and-build-configuration }
 
@@ -84,7 +84,7 @@ menuconfig SENSOR_USING_6D
 - `ACC_USING_LSM6DSL` 使能 LSM6DSL 驱动。
 - `LSM6DSL_USING_I2C` 选择 I2C（`1`）或 SPI（`0`）。如果传感器只支持一种接口，可以省略该符号。
 - `LSM6DSL_BUS_NAME` 定义总线设备名，RT-Thread 传感器驱动会据此查找对应总线。
-- `LSM6DSL_INT_GPIO_BIT` 和 `LSM6DSL_INT2_GPIO_BIT` 定义硬件分配的中断管脚。
+- `LSM6DSL_INT_GPIO_BIT` 和 `LSM6DSL_INT2_GPIO_BIT` 在开发板分配了中断引脚时，用于指定这些引脚。
 - `LSM_USING_AWT`、`LSM_USING_PEDO` 和 `LSM6DSL_USE_FIFO` 表示设备相关功能，只有在所选驱动支持时才应定义。
 
 本示例遵循 SF32LB52x 指南。其他系列的指南或 SDK 分支可能采用不同的选项和菜单路径；套用示例前，请先核对目标分支中的实际配置符号。
@@ -186,7 +186,7 @@ int lsm6dsl_gpio_int_enable(void)
 
 ## 注册 RT-Thread 传感器设备 { #4-register-the-rt-thread-sensor-device }
 
-在新设备目录中添加 `sensor_xxx.c`，通过 RT-Thread 传感器框架注册该设备。这样，上层应用就可以使用统一的传感器设备接口，而不必直接调用特定总线的寄存器函数。
+在新设备目录中添加 `sensor_xxx.c`，通过 RT-Thread 传感器框架注册该设备。这样，应用代码可以直接使用传感器设备，而不必调用与总线相关的寄存器读写函数。
 
 注册分为两部分：
 

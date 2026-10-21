@@ -1,7 +1,7 @@
 ---
 icon: lucide/chart-no-axes-combined
 title: "Bluetooth-Leistungsaufnahme messen und analysieren"
-description: "Praxisleitfaden zur Messung von BLE, Classic Bluetooth und Dual-Mode-Betrieb auf einem SF32-Gerät, zur Zuordnung der Messkurve zum Firmwareverhalten und zur Berechnung des täglichen Energiebedarfs."
+description: "Leistung von BLE, Classic und Dual-Mode-Bluetooth auf einem SF32-Gerät messen, die Messkurve dem Firmwareverhalten zuordnen und ein Tagesenergiebudget aufstellen."
 tags:
   - Bluetooth
   - Energiesparen

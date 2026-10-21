@@ -7,7 +7,7 @@ tags:
 
 # 子系统集成 { #intermediate-tutorials }
 
-这些教程默认你已熟悉[基础外设](beginner.md)中的内容：GPIO、命令行 Shell、ADC 和 PWM 基础，以及 `rt_device_find()` 这一设备驱动访问模式。本阶段从单一外设走向中间件和组合工作流，包括 I2C 传感器、图形 UI、BLE 服务、音频播放、持久化存储和有意识的共存测试。
+这些教程默认你已熟悉[基础外设](beginner.md)中的内容：GPIO、命令行 Shell、ADC 和 PWM 基础，以及 `rt_device_find()` 这一设备驱动访问模式。本阶段从单一外设走向中间件和组合工作流，包括 I2C 传感器、图形 UI、BLE 服务、音频播放、持久化存储和简单的共存测试。
 
 目标不只是让每个子系统“单独跑通一次”。更重要的是理解 SF32 固件通常如何搭建：从与目标功能最相关的 SDK 示例起步，先验证硬件路径，再接入 RT-Thread 设备层或中间件层，最后与产品中的其他部分联调。
 
@@ -51,7 +51,7 @@ rt_i2c_transfer(bus, msgs, 2);
 
 1. 从传感器数据手册确认 I2C 地址、寄存器映射、供电电压，以及所需上拉电阻。
 2. 确认开发板实际使用的是哪个 `i2cX` 总线和哪些引脚。
-3. 从 I2C EEPROM 或主机示例改起，与传感器通信。如果传感器提供设备 ID 寄存器，先读取该寄存器；否则，从预期行为明确的寄存器开始。
+3. 改写 I2C EEPROM 示例或 I2C 主机示例，使其与传感器通信。如果传感器提供设备 ID 寄存器，先读取该寄存器；否则，从预期行为明确的寄存器开始。
 4. 解码一个真实测量值，并通过 Shell 打印出来。
 5. 如果传感器带有中断或 data-ready 引脚，可将其连接到 GPIO，并采用基础外设教程练习 2 中的中断处理方式。
 6. 如果条件允许，把固定轮询改成事件驱动读取。
@@ -82,7 +82,7 @@ lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
 4. 加一个简单动画，并通过 Shell 工具观察 CPU 使用率或帧时序。
 5. 在继续扩展前，先阅读[图形概览](../../learn/graphics/overview.md)中关于缓冲策略、局部刷新和 ePicasso 的章节。
 
-**成功标准：** 屏幕在复位后能稳定初始化；在触摸或按键输入可用且已完成配置时，输入能改变 UI 状态；简单动画也不会影响 Shell 或蓝牙（Bluetooth）相关任务的运行。
+**成功标准：** 屏幕在复位后能稳定初始化；在触摸或按键输入可用且已完成配置时，输入能改变 UI 状态；简单动画也不会挤占 Shell 或蓝牙（Bluetooth）活动的运行时间。
 
 **排查思路：** 把“面板问题”和“LVGL 问题”分开看。如果纯色填充都失败，先检查供电、复位、初始化时序、像素格式和字节序，再考虑 LVGL 代码。
 
@@ -176,7 +176,7 @@ close(fd);
 3. 用尽量少的改动把它们合在一起。
 4. 让它们同时工作，例如 I2C 读取时发 BLE 通知、音频播放时跑 UI 动画、传感器更新时写存储。
 5. 观察 CPU 使用率、日志、内存，以及用户可见行为。
-6. 对照[蓝牙概览](../../learn/bluetooth/overview.md#coexistence-with-other-workloads)、[图形概览](../../learn/graphics/overview.md#graphics-validation-matrix)和[低功耗概览](../../learn/low-power/overview.md#what-drains-power-on-an-sf32-product)，判断这些现象是否合理。
+6. 对照[蓝牙概览](../../learn/bluetooth/overview.md#coexistence-with-other-workloads)、[图形概览](../../learn/graphics/overview.md#graphics-validation-matrix)和[低功耗概览](../../learn/low-power/overview.md#what-drains-power-on-an-sf32-product)，与观察到的现象做比较。
 
 **成功标准：** 两个子系统在同时活动时都能持续工作，而且测试停止后空闲电流能回到预期水平。
 

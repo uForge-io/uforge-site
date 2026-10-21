@@ -1,6 +1,6 @@
 ---
 icon: lucide/plug
-description: "Benennungsregeln für μForges M2-Modulschnittstelle und ihre M2xM-/M2xA-/M2xN-/M2xH-/M2xP-Erweiterungsspezifikationen, einschließlich Deklarationsbeispielen und Designprinzipien."
+description: "Benennungsregeln für die M2-Modulschnittstelle von μForge und ihre Erweiterungen M2xM/M2xA/M2xN/M2xH/M2xP, mit Deklarationsbeispielen und Designprinzipien."
 tags:
   - Hardware
   - Modul

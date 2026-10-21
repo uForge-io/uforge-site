@@ -7,7 +7,7 @@ tags: [开发, SiFli-SDK, 应用笔记, ADC]
 
 # 使用 GPADC 采样 { #sample-with-gpadc }
 
-本页整合 SF32LB52x、SF32LB55x、SF32LB56x、SF32LB57x 和 SF32LB58x 的 ADC 指南。软件使用流程基本相同，但输入限制、PAD 分配和校准点因系列而异。配置硬件或固件前，请先确认目标系列。
+本页整合 SF32LB52x、SF32LB55x、SF32LB56x、SF32LB57x 和 SF32LB58x 的 ADC 指南。软件使用流程基本相同，但输入限制、PAD 分配和校准点因系列而异。配置硬件或固件前，请先在各表中确认目标系列。
 
 GPADC 是思澈科技（SiFli）的通用模数转换器，用于测量传感器输出、电池电压等模拟信号。它不同于 SF32LB52x、SF32LB56x、SF32LB57x 和 SF32LB58x 提供的音频 ADC，也不同于 SF32LB55x 和 SF32LB58x 提供的 Sigma-Delta ADC。本页只介绍 GPADC；其他转换器请参阅对应系列的专用文档。
 
@@ -151,7 +151,7 @@ if (dev) {
 
 ## ADC 校准与电压换算 { #adc-calibration-and-voltage-conversion }
 
-ADC 值与输入电压呈线性关系：
+指南将 ADC 值到电压的换算建模为线性关系：
 
 <div align="center"><em>V<sub>real</sub> = (Value<sub>adc</sub> − Offset) × Ratio</em></div>
 
@@ -229,7 +229,7 @@ int sifli_adc_calibration(uint32_t value1, uint32_t value2,
 
 ### 验证启动和唤醒后的校准结果 { #validate-calibration-after-startup-and-wake }
 
-调试 SF32LB55x 电池电压时，OpenSiFli ADC FAQ 提醒：上电或从睡眠唤醒后的约 300 ms 内，读数可能不准确。这是 RC 充放电造成的，波形通常约 350 ms 后才稳定。实际应用中应增加采样延时，或丢弃起始阶段不稳定的读数。用万用表或示波器测量分压节点时，还要考虑仪器输入阻抗造成的影响；FAQ 指出这可能带来约 30 mV 的压降。
+调试 SF32LB55x 电池电压时，OpenSiFli ADC FAQ 提醒：上电或唤醒后的约 300 ms 内，读数可能不准确。这是 RC 充放电造成的，波形通常约 350 ms 后才稳定。实际应用中应增加采样延时，或丢弃起始阶段不稳定的读数。用万用表或示波器测量分压节点时，还要考虑仪器输入阻抗造成的影响；FAQ 指出这可能带来约 30 mV 的压降。
 
 ![SF32LB55x 电池采样启动稳定波形](../../../../assets/develop/adc/adc005.png){ loading="lazy" }
 <div align="center"><em>图：SF32LB55x 启动波形，显示约 350 ms 的稳定时间。</em></div>
@@ -263,6 +263,6 @@ int sifli_adc_calibration(uint32_t value1, uint32_t value2,
 - [SF32LB57x ADC 使用与配置指南](https://docs.sifli.com/projects/sdk/latest/sf32lb57x/app_note/adc.html)
 - [SF32LB58x ADC 使用与配置指南](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/adc.html)
 - [SF32LB52x ADC HAL API 参考](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/adc.html)——默认校准范围定义。
-- SF32LB57x 硬件设计指南——存储与制造——GPADC 通道与 PAD 分配。
-- SF32LB57x 硬件设计指南——最小系统与电源——模拟电源/参考电压连接及不同供电型号的电池检测限制。
+- [SF32LB57x 硬件设计指南——存储与制造](../../../../hardware/chip-guides/SF32LB57x_schematic_storage_mfg.md)——GPADC 通道与 PAD 分配。
+- [SF32LB57x 硬件设计指南——最小系统与电源](../../../../hardware/chip-guides/SF32LB57x_schematic_system_power.md)——模拟电源/参考电压连接及不同供电型号的电池检测限制。
 - [OpenSiFli ADC FAQ](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/faq/mcu/adc.md)——SF32LB55x 出厂校准范围及启动、待机和唤醒验证，以及 SF32LB56x 日志 UART 电平说明。

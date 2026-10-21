@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "Cómo vincular el valor --board de SiFli-SDK con el hardware SF32 real: distribución de Flash/PSRAM, multiplexación de pines, rutas de pantalla y audio, y lista de comprobación de puesta en marcha."
+description: "Cómo el nombre --board de SiFli-SDK vincula el firmware con el hardware SF32: disposición Flash/PSRAM, multiplexación de pines, pantalla y audio, y puesta en marcha."
 tags:
     - Desarrollo
     - SiFli-SDK

@@ -155,7 +155,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1アプリケーションコア + 専用Bluetoothコントローラーコア
-    - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルモードBluetooth 5.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルモードBluetooth 6.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU、ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0ハードウェア伸長処理
     - :fontawesome-solid-circle:{ .uf-dot-blue } オーディオコーデック、AMIC × 1、DMIC × 2
@@ -163,6 +163,58 @@ hide:
     - :fontawesome-solid-circle:{ .uf-dot-blue } QFN68パッケージ、GPIO最大45本、リニアチャージャー内蔵品も選択可能
 
     [シリーズを見る :material-arrow-right:](sf32-products/chips/SF32LB52x.md){ .uf-link-blue }
+
+- <span class="uf-mcu-chip">SF32LB56</span>
+
+    <span class="uf-mcu-headtext">**SF32LB56x**{ .uf-mcu-title } <span class="uf-mcu-sub">グラフィックス最適化MCU</span></span>
+
+    ---
+
+    - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルコアCortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルモードBluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 最大1024 × 600のRGBディスプレイ
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU、ePicasso 2.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0ハードウェア伸長処理
+    - :fontawesome-solid-circle:{ .uf-dot-blue } オーディオコーデック、AMIC × 1、DMIC × 4
+    - :fontawesome-solid-circle:{ .uf-dot-blue } SRAM 960 KB、PSRAM最大16 MB
+    - :fontawesome-solid-circle:{ .uf-dot-blue } QFN68、BGA175パッケージ、GPIO最大44 / 120本
+
+    [シリーズを見る :material-arrow-right:](sf32-products/chips/SF32LB56x.md){ .uf-link-blue }
+
+- <span class="uf-mcu-chip">SF32LB57</span>
+
+    <span class="uf-mcu-headtext">**SF32LB57x**{ .uf-mcu-title } <span class="uf-mcu-sub">マルチメディアAIoT MCU</span></span>
+
+    ---
+
+    - :fontawesome-solid-circle:{ .uf-dot-blue } トリプルコアCortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルモードBluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 最大1024 × 600のRGBディスプレイ
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU、ePicasso 3.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 3.0、JPEG / MJPEGデコーダー
+    - :fontawesome-solid-circle:{ .uf-dot-blue } DCMIカメラ入力、最大2 MP
+    - :fontawesome-solid-circle:{ .uf-dot-blue } オーディオコーデック、AMIC × 2、DMIC × 4
+    - :fontawesome-solid-circle:{ .uf-dot-blue } SRAM 592 KB、PSRAM最大48 MB
+    - :fontawesome-solid-circle:{ .uf-dot-blue } QFN68、QFN80、BGA112パッケージ、GPIO最大46 / 47 / 58本。一部のBGA112では追加の6ピンをMPI3または静的出力に使用できます
+
+    [シリーズを見る :material-arrow-right:](sf32-products/chips/SF32LB57x.md){ .uf-link-blue }
+
+- <span class="uf-mcu-chip">SF32LB58</span>
+
+    <span class="uf-mcu-headtext">**SF32LB58x**{ .uf-mcu-title } <span class="uf-mcu-sub">フラッグシップAIoTプラットフォームMCU</span></span>
+
+    ---
+
+    - :fontawesome-solid-circle:{ .uf-dot-blue } トリプルコアCortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルモードBluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 最大1280 × 720のMIPIディスプレイ
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPUとベクターグラフィックス、ePicasso 2.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0、JPEG / MJPEGデコーダー
+    - :fontawesome-solid-circle:{ .uf-dot-blue } オーディオコーデック、AMIC × 2、DMIC × 4
+    - :fontawesome-solid-circle:{ .uf-dot-blue } SRAM 3.7 MB、PSRAM最大64 MB
+    - :fontawesome-solid-circle:{ .uf-dot-blue } BGA256パッケージ、GPIO最大154本
+
+    [シリーズを見る :material-arrow-right:](sf32-products/chips/SF32LB58x.md){ .uf-link-blue }
 
 - <span class="uf-mcu-chip">SF32LB55</span>
 
@@ -179,39 +231,6 @@ hide:
     - :fontawesome-solid-circle:{ .uf-dot-blue } QFN68、BGA145、BGA169パッケージ、GPIO最大49 / 95 / 119本
 
     [シリーズを見る :material-arrow-right:](sf32-products/chips/SF32LB55x.md){ .uf-link-blue }
-
-- <span class="uf-mcu-chip">SF32LB56</span>
-
-    <span class="uf-mcu-headtext">**SF32LB56x**{ .uf-mcu-title } <span class="uf-mcu-sub">グラフィックス最適化MCU</span></span>
-
-    ---
-
-    - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルコアCortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 低消費電力Bluetooth 5.3
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 最大1024 × 600のRGBディスプレイ
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU、ePicasso 2.0
-    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0ハードウェア伸長処理
-    - :fontawesome-solid-circle:{ .uf-dot-blue } オーディオコーデック、AMIC × 1、DMIC × 4
-    - :fontawesome-solid-circle:{ .uf-dot-blue } SRAM 960 KB、PSRAM最大16 MB
-    - :fontawesome-solid-circle:{ .uf-dot-blue } QFN68、BGA175パッケージ、GPIO最大44 / 120本
-
-    [シリーズを見る :material-arrow-right:](sf32-products/chips/SF32LB56x.md){ .uf-link-blue }
-
-- <span class="uf-mcu-chip">SF32LB58</span>
-
-    <span class="uf-mcu-headtext">**SF32LB58x**{ .uf-mcu-title } <span class="uf-mcu-sub">フラッグシップAIoTプラットフォームMCU</span></span>
-
-    ---
-
-    - :fontawesome-solid-circle:{ .uf-dot-blue } トライコア構成：HCPU、ACPU、LCPU
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 最大1280 × 720のMIPIディスプレイ
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPUとベクターグラフィックス、ePicasso 2.0
-    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0、JPEG / MJPEGデコーダー
-    - :fontawesome-solid-circle:{ .uf-dot-blue } オーディオコーデック、AMIC × 2、DMIC × 4
-    - :fontawesome-solid-circle:{ .uf-dot-blue } SRAM 3.7 MB、PSRAM最大64 MB
-    - :fontawesome-solid-circle:{ .uf-dot-blue } BGA256パッケージ、GPIO最大154本
-
-    [シリーズを見る :material-arrow-right:](sf32-products/chips/SF32LB58x.md){ .uf-link-blue }
 
 </div>
 

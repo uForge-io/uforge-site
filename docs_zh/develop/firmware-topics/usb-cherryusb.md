@@ -10,7 +10,7 @@ tags:
 
 对于具备受支持 USB 硬件的 SF32 器件和开发板，SiFli-SDK 文档及示例展示了 CherryUSB 集成。请针对具体芯片、开发板和 SDK 版本确认支持的 USB 角色与类，并将 USB 作为完整软件栈设计和验证，而非仅视为硬件功能。
 
-USB 开发涉及固件、描述符、主机操作系统、供电与功耗表现以及生产工具。设备仅在开发者笔记本上成功枚举过一次，并不意味着 USB 功能已经具备量产条件。
+USB 开发涉及固件、描述符、主机操作系统、供电与功耗表现以及生产工具。设备在开发者笔记本上枚举成功一次，并不算完成。
 
 ## 应用场景 { #use-cases }
 
@@ -19,7 +19,7 @@ USB 开发涉及固件、描述符、主机操作系统、供电与功耗表现�
 - MSC 存储。
 - USB Audio 麦克风/扬声器。
 - MTP。
-- 在 SDK 和开发板支持的前提下，以 USB Host 连接使用 CDC、HID、MSC、UVC 或 UAC 类的外设。
+- USB Host：连接 CDC、HID、MSC、UVC 和 UAC 类外设（以 SDK 和开发板支持为前提）。
 
 ## 实用流程 { #practical-workflow }
 
@@ -37,7 +37,7 @@ USB 开发涉及固件、描述符、主机操作系统、供电与功耗表现�
 - 传输过程中断开线缆。
 - Windows、macOS 和 Linux 枚举。
 - 启用多个类别（Class）时的复合设备行为。
-- 在用户文档中说明，仅供电、不含数据线芯的 USB 线缆不支持数据通信。
+- 告知用户：仅供电、不含数据线芯的 USB 线缆不支持数据通信。
 
 ## 描述符检查表 { #descriptor-checklist }
 
@@ -49,7 +49,7 @@ USB 开发涉及固件、描述符、主机操作系统、供电与功耗表现�
 
 ## SDK 示例 { #sdk-examples }
 
-[SiFli-SDK 官方 CherryUSB 示例索引](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/index.html)将 USB Device 和 USB Host 示例分开组织。你应先按产品需要确定 USB 角色和设备类别，再从相应示例入手；其描述符、电源和主机兼容性检查也应落实到产品设计中。
+[SiFli-SDK 官方 CherryUSB 示例索引](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/index.html)将 USB Device 和 USB Host 示例分开组织。先按产品需要确定 USB 角色和设备类别，再从相应示例入手；其描述符、电源和主机兼容性检查也应落实到产品实现中。
 
 <div align="center"><em>表：适用于 SF32LB58x 的 SiFli-SDK CherryUSB 示例</em></div>
 <div align="center" markdown>

@@ -19,7 +19,7 @@ tags:
 | 分组 | 主题 |
 |:---|:---|
 | 电源系统 | PMU 电源、其他电源、电容、POR/BOR/复位、BUCK 电感。 |
-| 启动模式 | Mode 管脚电压域、上下拉电阻、下载与恢复、量产测试接口。 |
+| 启动模式 | Mode 管脚电压域、上下拉电阻、下载与恢复、量产访问。 |
 | 时钟生成 | 48 MHz 晶体、32.768 kHz 晶体和匹配电容评审。 |
 | RF | RF 匹配、50 Ω 天线路径、AVDD_BRF 滤波和 RF 禁布区。 |
 | 存储接口 | OPI PSRAM、QSPI NOR/NAND/PSRAM、SDIO eMMC/Micro SD。 |
@@ -516,7 +516,7 @@ SF32LB55x 提供 4 路 HCPU 唤醒源（WKUP_A0–WKUP_A3）和 6 路 LCPU 唤�
 
 思澈科技（SiFli）硬件应用说明将 GPADC 描述为 5 路、10 位，输入范围为 0–0.9 V。按保守设计处理时，仅当 VIN 低于 0.9 V 时才可直接接入；更高电压应先分压，确保 VADC 低于 0.9 V。电池电压测量可参考源文档约 5:1 的 R1:R2 比例和 MΩ 级电阻；分压静态电流越小，稳定时间越长。示例在 VADC 与地之间接入 0.1 µF 电容。按 `VADC = VIN × R2 / (R1 + R2)` 核对最高电池电压及电阻容差；表 5.7-2 的静态电流是在 VIN = 4.2 V 下给出的，不能直接用于所有电池工况。
 
-资料存在差异：按资料优先级更高的 [OpenSiFli 硬件应用指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)，GPADC 为 5 通道、10 位，输入范围为 0–0.9 V。[V1.0 原理图检查表](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)第 2 项规定最大输入电压为 1.0 V，但未说明通道数。与此不同，[SF32LB55x 数据手册 V1.7.2 第 3.2.1 节](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)规定支持 8 路单端输入或 4 对差分输入，单端范围为 0–1.1 V，差分范围为 −0.7–0.7 V；其引脚表列出 GPADC_CH0–CH7。当前 [SDK ADC 指南](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html)同样列出 8 个通道（0–7）和 1.1 V 最大采样电压。思澈科技（SiFli）尚未解释通道数和电压限值的差异。因此，本文暂按优先级更高的硬件应用指南，以 5 通道和 0–0.9 V 作为设计依据，等待思澈科技（SiFli）书面澄清。VADC 应低于 0.9 V；不要把 1.0 V 或 1.1 V 视为已批准的设计上限，并向思澈科技（SiFli）确认所选器件和封装的可用通道。
+资料存在差异：按资料优先级更高的 [OpenSiFli 硬件应用指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)，GPADC 为 5 通道、10 位，输入范围为 0–0.9 V。[V1.0 原理图检查表](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)第 2 项规定最大输入电压为 1.0 V，但未说明通道数。与此不同，[SF32LB55x 数据手册 V1.7.2 第 3.2.1 节](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)规定支持 8 路单端输入或 4 对差分输入，单端范围为 0–1.1 V，差分范围为 −0.7 V 至 0.7 V；其引脚表列出 GPADC_CH0–CH7。当前 [SDK ADC 指南](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html)同样列出 8 个通道（0–7）和 1.1 V 最大采样电压。思澈科技（SiFli）尚未解释通道数和电压限值的差异。因此，本文暂按优先级更高的硬件应用指南，以 5 通道和 0–0.9 V 作为设计依据，等待思澈科技（SiFli）书面澄清。VADC 应低于 0.9 V；不要把 1.0 V 或 1.1 V 视为已批准的设计上限，并向思澈科技（SiFli）确认所选器件和封装的可用通道。
 
 ![图 5.7-3：GPADC 输入与分压参考电路](../../sf32-products/chips/assets/55x/SF32LB55x-GPADC-SCH.png){ width="100%" loading="lazy" }
 

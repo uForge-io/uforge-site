@@ -1,7 +1,7 @@
 ---
 icon: lucide/battery-charging
 title: "Schätzung des Akkuladezustands"
-description: "Schätzen Sie den Ladezustand von SF32-Produkten anhand der Akkuspannung mit dem SiFli-SDK-Akkurechner, passenden Lade- und Entladekurven, Ladegerätestatus und mehrstufiger Filterung."
+description: "SF32-Akkustand aus der Spannung mit dem SiFli-SDK-Rechner schätzen: Entladekurven, Erkennung des Ladezustands des Laders und mehrstufige Filterung."
 tags:
   - Energiesparen
   - Akku

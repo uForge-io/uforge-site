@@ -1,6 +1,6 @@
 ---
 icon: lucide/library
-description: "SiFli's official schematic-symbol and PCB-footprint libraries for SF32 chips and modules — JLCEDA/LCEDA Pro, PADS, OrCAD, and KiCad — with download links and a review checklist."
+description: "SiFli's official SF32 schematic-symbol and PCB-footprint libraries for JLCEDA/LCEDA Pro, PADS, OrCAD, and KiCad, with download links and a review checklist."
 tags:
     - Hardware
     - EDA

@@ -1,6 +1,6 @@
 ---
 icon: lucide/workflow
-description: "PTM (Parallel Task Machine), documented for SF32LB57x: a programmable peripheral task engine for timing-sensitive IO sequences and custom protocols that can offload work from the Cortex-M33."
+description: "PTM (Parallel Task Machine) on SF32LB57x: a programmable peripheral task engine that offloads timing-sensitive IO sequences and custom protocols from the Cortex-M33."
 tags:
     - Architecture
     - PTM
@@ -60,7 +60,7 @@ This lets the system retain standard peripherals for standard jobs while providi
 
 ## Core Capabilities { #core-capabilities }
 
-The SF32LB57x hardware design guide lists **one PTM block with 16 channels**, and its pin-multiplexing table names PTM1_CH0 through PTM1_CH15. Together with the SDK definitions, the documented capabilities include:
+The [SF32LB57x hardware design guide](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md) lists **one PTM block with 16 channels**, and its pin-multiplexing table names PTM1_CH0 through PTM1_CH15. Together with the SDK definitions, the documented capabilities include:
 
 - independently controlled PTM execution resources;
 - a compact custom instruction set;

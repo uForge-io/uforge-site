@@ -8,7 +8,7 @@ tags:
 
 # Rust { #rust }
 
-[OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs) 为思澈科技（SiFli） MCU 提供 Rust HAL、PAC 和 Flash 表相关支持。维护者明确将该项目标记为开发中，尚不适合量产使用。因此，本指南仅用于建立**评估基线**，不构成量产固件工作流。
+[OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs) 为思澈科技（SiFli）MCU 提供 Rust HAL、PAC 和 Flash 表相关支持。维护者明确将该项目标记为开发中，尚不适合量产使用。因此，本指南仅用于建立**评估基线**，不构成量产固件工作流。
 
 开始前，请先在同一块开发板上完成 [SiFli-SDK 快速开始](../sifli/getting-started-sifli-sdk.md)。这样一来，若 Rust 实验无法烧录或调试，仍可使用已验证的串口和恢复路径。
 
@@ -17,7 +17,7 @@ tags:
 - 一块 SF32LB52 DevKit LCD，以及一根连接到 USB-to-UART 的 USB Type-C 数据线。
 - 具备 Rust、嵌入式开发和命令行的基础知识。
 - `git`，以及通过 [rustup](https://rustup.rs/) 安装的当前 Rust 工具链。
-- 当前的 [sifli-rs 快速开始](https://github.com/OpenSiFli/sifli-rs/blob/main/docs/get_started.md) 和[烧录与调试指南](https://github.com/OpenSiFli/sifli-rs/blob/main/docs/flash_and_debug.md)。
+- 当前的 [sifli-rs 快速开始](https://github.com/OpenSiFli/sifli-rs/blob/main/docs/get_started.md)和[烧录与调试指南](https://github.com/OpenSiFli/sifli-rs/blob/main/docs/flash_and_debug.md)。
 
 !!! warning "探索性路径"
     本指南不能证明某个芯片、外设、开发板配置或应用栈已达到量产可用状态。在投入移植工作前，请查看仓库中目标芯片和外设的支持状态信息。
@@ -38,7 +38,7 @@ git clone https://github.com/OpenSiFli/sifli-rs.git
 cd sifli-rs/examples/sf32lb52x
 ```
 
-示例目录包含 Cargo 目标配置、内存布局、构建脚本和示例二进制文件。不要在未经审查的情况下将这些文件复制到产品中；其中包含必须结合目标硬件核对的开发板和 Flash 假设。
+示例目录包含 Cargo 目标配置、内存布局、构建脚本和示例二进制文件。不要原封不动地将这些文件复制到产品中；其中包含必须结合目标硬件核对的开发板和 Flash 假设。
 
 ## 配置烧录执行器（runner） { #configure-the-flash-runner }
 

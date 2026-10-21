@@ -1,7 +1,7 @@
 ---
 icon: lucide/bluetooth
 title: "Обзор Bluetooth"
-description: "Как проектировать Bluetooth-подключение устройств SF32: BLE или двухрежимный Bluetooth, сервисы GATT, параметры соединения, безопасность, LE Audio и совместная работа подсистем."
+description: "Bluetooth в SF32: BLE или двухрежимный, проектирование сервисов GATT, параметры соединения, сопряжение и безопасность, LE Audio и сосуществование."
 tags:
   - Bluetooth
 ---

@@ -159,6 +159,25 @@ Mit dieser Abfolge machen Sie aus einer SF32LB58x-Vorauswahl ein validiertes Des
 3. **Hardware entwerfen und prüfen.** Nutzen Sie den lokalen [Hardware-Design-Leitfaden](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md) — einschließlich seiner Checklisten für [Schaltplan](../../hardware/chip-guides/SF32LB58x_schematic_checklist.md) und [PCB-Layout](../../hardware/chip-guides/SF32LB58x_pcb_layout_checklist.md) —, bevor Sie Schaltplan oder Layout freigeben. Validieren Sie die Annahmen zu BGA256-HDI und Speicher-Routing frühzeitig.
 4. **Maßgebliche Quelle prüfen.** Bestätigen Sie das genaue bestellbare Bauteil und Gehäuse anhand von SiFli-[Datenblatt][Datasheet], [Benutzerhandbuch][User Manual], [Originaler Designleitfaden (wiki.sifli.com)][Original Design Guide (wiki.sifli.com)] und [Hardware-Anwendungshinweis (GitHub-Quelle)][Hardware Application Note (GitHub source)].
 
+<!-- uf-faq:start -->
+## Häufig gestellte Fragen { #frequently-asked-questions }
+
+**Was sind die wichtigsten Spezifikationen des SF32LB58x?**
+Der SF32LB58x kombiniert eine Anwendungs-CPU (2× Cortex-M33 @240 MHz) mit einem Low-Power-Kern (Cortex-M33 @48/96 MHz, mit einem vom Anwender programmierbaren Kern), 3.7 MB internem SRAM und Dual-Mode-Bluetooth (BT Classic + BLE). Grafik: ePicasso 2.0 + Vivante GCNanoUltraV (vector). Gehäuse: BGA256 (8.5 × 6.5 mm). USB 2.0 HS. Werte auf Familienebene; prüfen Sie das Datenblatt der genauen Typnummer.
+
+**Welche Display-Schnittstellen unterstützt der SF32LB58x?**
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. Die Verfügbarkeit hängt von Typnummer und Gehäuse ab.
+
+**Wie viel Speicher im Gehäuse bietet der SF32LB58x?**
+Bis zu 32 MB + 32 MB PSRAM und bis zu 8 MB NOR-Flash im Gehäuse, abhängig von der Typnummer.
+
+**Welche Versorgungsspannung benötigt der SF32LB58x?**
+1.71–3.63 V, je nach Variante. Den genauen Bereich bestätigt das Datenblatt.
+
+**Wo beginne ich ein Hardware-Design mit dem SF32LB58x?**
+Beginnen Sie mit dem [Hardware-Design-Leitfaden für den SF32LB58x](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md) zu Schaltplan, Stromversorgung, Takt/RF und PCB-Layout und nutzen Sie vor der Freigabe die Checklisten für Schaltplan und Layout.
+<!-- uf-faq:end -->
+
 ## Verwandte Produkte { #related-products }
 
 ### Modul { #module }
@@ -172,6 +191,3 @@ Mit dieser Abfolge machen Sie aus einer SF32LB58x-Vorauswahl ein validiertes Des
 ### Referenzprodukte { #reference-products }
 
 Typische SF32LB58x-Endprodukte sind hochwertige Uhrenplattformen, hochauflösende Wearable-HMIs, smarte Dashboards, tragbare vernetzte Terminals sowie Geräte, die Bluetooth, Display, Audio, Speicher und lokale KI-Lasten kombinieren.
-
-!!! note "Automatisch generierter Inhalt"
-    Diese Seite wurde ohne vorhandenes Quelldokument zusammengestellt bzw. entworfen. Prüfen Sie technische Aussagen anhand der offiziellen SiFli-Dokumentation, bevor Sie sich darauf verlassen.

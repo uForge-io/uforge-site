@@ -72,7 +72,7 @@ SF32 器件支持多种软件开发路径。目前，SiFli-SDK 和 CodeKit 是�
 
 确定采用某条软件开发路径前，先核实对应开发板和软件版本的资料是否说明了以下信息：
 
-- 按开发板列出的 SiFli-SDK、CodeKit、Zephyr、Arduino 和 MicroPython 支持状态及成熟度。
+- 公开的、按开发板列出的 SiFli-SDK、CodeKit、Zephyr、Arduino 和 MicroPython 支持状态及成熟度。
 - 每条受支持的软件路径所使用的准确开发板标识。
 - 适用于 Windows、macOS 和 Linux 的烧录或下载说明。
 - 每个首个示例的预期串口输出。

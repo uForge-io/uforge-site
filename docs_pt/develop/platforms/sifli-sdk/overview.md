@@ -1,6 +1,6 @@
 ---
 icon: lucide/package
-description: "SiFli-SDK como caminho de referência para desenvolver com SF32: compilação com scons e configuração com sdk.py menuconfig, nomes de placas, estrutura de projetos e prontidão para produção."
+description: "SiFli-SDK como caminho de referência para o SF32: compilação com scons e menuconfig, nomes de placas, estrutura de projetos e prontidão para produção."
 tags:
     - Desenvolvimento
     - SiFli-SDK

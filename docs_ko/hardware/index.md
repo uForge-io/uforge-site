@@ -39,7 +39,7 @@ SF32 디바이스를 선택하고 개발 보드의 기준 구성을 검증한 �
 | SF32LB52x | [가이드](chip-guides/SF32LB52x_hardware_design_guide.md) | [체크리스트](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | SF32LB52x 칩을 직접 탑재한 보드를 설계하는 경우. |
 | SF32LB55x | [가이드](chip-guides/SF32LB55x_hardware_design_guide.md) | [체크리스트](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | SF32LB55x 칩을 직접 탑재한 보드를 설계하는 경우. |
 | SF32LB56x | [가이드](chip-guides/SF32LB56x_hardware_design_guide.md) | [체크리스트](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | SF32LB56x 칩을 직접 탑재한 보드를 설계하는 경우. |
-| SF32LB57x | 가이드 | 회로도 / PCB 레이아웃 | SF32LB57x 칩을 직접 탑재한 보드를 설계하는 경우. |
+| SF32LB57x | [가이드](chip-guides/SF32LB57x_hardware_design_guide.md) | [회로도](chip-guides/SF32LB57x_schematic_checklist.md) / [PCB 레이아웃](chip-guides/SF32LB57x_pcb_layout_checklist.md) | SF32LB57x 칩을 직접 탑재한 보드를 설계하는 경우. |
 | SF32LB58x | [가이드](chip-guides/SF32LB58x_hardware_design_guide.md) | [체크리스트](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | SF32LB58x 칩을 직접 탑재한 보드를 설계하는 경우. |
 
 </div>

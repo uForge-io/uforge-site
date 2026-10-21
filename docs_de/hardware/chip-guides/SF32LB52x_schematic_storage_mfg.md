@@ -2,7 +2,7 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Schaltplanrichtlinien für Speicher, Konnektivität und Fertigungszugang der SF32LB52x-MCU: Boot-Speicher, Sensoren, Debug-/Download-Schnittstelle und Produktionsprogrammierung."
+description: "Schaltplanrichtlinien für Speicher, Anbindung und Fertigung des SF32LB52x: Boot-Speicher, Sensoren, Debug-/Download-Schnittstelle und Produktionsprogrammierung."
 tags:
     - Hardware
     - Chip

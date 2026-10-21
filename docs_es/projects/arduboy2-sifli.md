@@ -1,6 +1,6 @@
 ---
 icon: lucide/gamepad-2
-description: "Proceso de ingeniería reproducible para evaluar la adaptación de Arduboy2 de OpenSiFli, validar los límites del bucle de juego y los periféricos, y decidir si un producto de juegos basado en SF32 está listo para avanzar en el diseño."
+description: "Ruta reproducible para evaluar el port de Arduboy2 de OpenSiFli, validar el bucle de juego y los periféricos, y decidir si un producto de juegos SF32 está listo."
 tags:
     - Proyectos
     - Arduino

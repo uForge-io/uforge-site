@@ -1,6 +1,6 @@
 .venv/
 site/
-site_*/
+publish/
 .cache/
 .DS_Store
 Makefile

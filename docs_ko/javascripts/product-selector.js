@@ -1,1 +1,0 @@
-../../docs/javascripts/product-selector.js

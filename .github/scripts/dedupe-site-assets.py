@@ -2,8 +2,8 @@
 """Share one copy of every binary asset across the nested language sites.
 
 Zensical copies each docs tree's static files into its own build, so after
-nesting, site/<lang>/ repeats every image that site/ already has. This script
-deletes each byte-identical binary file under site/<lang>/ and rewrites the
+nesting, publish/<lang>/ repeats every image that publish/ already has. This script
+deletes each byte-identical binary file under publish/<lang>/ and rewrites the
 relative references in that language's HTML/CSS/XML so they resolve to the
 single copy in the site root. Files that differ from the root copy (or have no
 root counterpart) are left alone. A final pass verifies that every relative

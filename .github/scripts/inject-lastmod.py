@@ -6,9 +6,9 @@ For each page: JSON-LD Article/TechArticle/BlogPosting gets dateModified, a
 "Last updated: YYYY-MM-DD" line (localized) is appended to the article body.
 Each sitemap <url> gets <lastmod>.
 
-Usage: inject-lastmod.py <site_dir> [--prefix zh/] [--map docs/lastmod.json]
+Usage: inject-lastmod.py <site_dir> [--prefix zh/] [--map tools/data/lastmod.json]
   site root of the published site: no prefix; a per-language build dir
-  (site_zh): --prefix zh/ ; language is inferred from the prefix.
+  (site/zh): --prefix zh/ ; language is inferred from the prefix.
 """
 import argparse, json, os, re, sys
 
@@ -68,7 +68,7 @@ def patch_sitemap(path, prefix, m):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("site"); ap.add_argument("--prefix", default="")
-    ap.add_argument("--map", default="docs/lastmod.json", help="path relative to the current directory (run from the repo root)")
+    ap.add_argument("--map", default="tools/data/lastmod.json", help="path relative to the current directory (run from the repo root)")
     a = ap.parse_args()
     m = json.load(open(a.map, encoding="utf-8"))
     h = 0

@@ -1,6 +1,6 @@
 ---
 icon: lucide/clipboard-check
-description: "Punto de partida para diseñar hardware SF32 para producción: guías de diseño de chips y módulos, listas de comprobación, definiciones de interfaz, componentes aprobados y bibliotecas EDA."
+description: "Punto de partida para diseñar hardware SF32 para producción: guías de chips y módulos, listas de comprobación, interfaces, componentes aprobados y bibliotecas EDA."
 tags:
     - Hardware
     - Producción

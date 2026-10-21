@@ -2,7 +2,7 @@
 icon: lucide/layers
 hide:
     - navigation
-description: "Recommandations d'implantation et de routage PCB pour le MCU SF32LB52x : empreinte, empilement, fanout, routage horloge/RF/audio/USB/SDIO, routage DC-DC et alimentation, EMI/ESD, et autres considérations de disposition."
+description: "Recommandations d'implantation PCB du MCU SF32LB52x : empreinte, empilement, fanout, routage horloge/RF/audio/USB/SDIO, DC-DC et alimentation, EMI/ESD."
 tags:
     - Matériel
     - Puce

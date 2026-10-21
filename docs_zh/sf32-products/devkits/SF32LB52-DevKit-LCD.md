@@ -21,7 +21,7 @@ SF32LB52-DevKit-LCD 是一块面向显示应用的 SF32LB52x 家族开发板。�
 <div align="center"><em>SF32LB52-DevKit-LCD — 背面图</em></div>
 
 ![SF32LB52-DevKit-LCD 功能框图](assets/sf32lb52x/SF32LB52x_DevKit-LCD_Block_Diagram.png){ loading="lazy" }
-<div align="center"><em>SF32LB52-DevKit-LCD — 方框图</em></div>
+<div align="center"><em>SF32LB52-DevKit-LCD — 功能框图</em></div>
 
 ## 开发板亮点 { #board-highlights }
 
@@ -47,7 +47,7 @@ SF32LB52-DevKit-LCD 是一块面向显示应用的 SF32LB52x 家族开发板。�
 - 原型验证 TF 卡存储
 - 在最终确定自定义 PCB 前比较不同模组选项
 
-如果需要更小、带半孔边缘的板卡，请使用 [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md)。如果需要尽可能大的引脚引出和最直接的信号访问，请使用 [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md)。
+如果需要更小、带半孔边缘的板卡，请使用 [SF32LB52-DevKit-Nano](SF32LB52-DevKit-Nano.md)。如果需要最多的引脚引出和直接的信号访问，请使用 [SF32LB52-DevKit-Core-3p3](SF32LB52-DevKit-Core-3p3.md)。
 
 ## 硬件配置 { #hardware-configuration }
 
@@ -131,18 +131,18 @@ SF32LB52-DevKit-LCD 主要支持两种供电方式：
 - 来自任一 USB 接口的 USB Type-C 供电
 - 通过板载电池连接器进行电池供电
 
-对于固件下载和常规调试，请使用 USB-to-UART Type-C 端口。使用电池供电时，可在不连接 USB 的情况下测试显示、音频和低功耗表现。
+对于固件下载和常规调试，请使用 USB 转 UART Type-C 端口。使用电池供电时，可在不连接 USB 的情况下测试显示、音频和低功耗表现。
 
 开发板集成了 ETA9640P 线性充电器。其最大支持充电电流为 1 A，默认恒流设置为 450 mA。请使用单节锂离子或锂聚合物电池，并在连接电池前根据开发板丝印确认极性。
 
 ## 下载与调试 { #download-and-debug }
 
-USB-to-UART 端口是主要的固件下载和日志接口。
+USB 转 UART 端口是主要的固件下载和日志接口。
 
 - **下载模式**：在下载工具中启用 BOOT 选项，然后给开发板上电或复位。
 - **调试 / 日志模式**：禁用 BOOT 选项，然后上电或复位开发板，进入正常串口日志模式。
 
-部分 SF32LB52x 开发板使用 USB 转 UART 芯片的 RTS 信号控制复位。如果首次打开串口时开发板意外复位，请在主机串口设置中关闭调制解调器控制或硬件流控。
+部分 SF32LB52x 开发板使用 USB 转 UART 的 RTS 信号控制复位。如果首次打开串口时开发板意外复位，请在主机串口设置中关闭调制解调器控制或硬件流控。
 
 ![在串口高级设置中关闭调制解调器控制](assets/sf32lb52x/Modem.png){ loading="lazy" }
 <div align="center"><em>在串口高级设置中关闭调制解调器控制</em></div>
@@ -214,13 +214,13 @@ USB-to-UART 端口是主要的固件下载和日志接口。
 | PA05 | RD / QSPI D0 | LCD 数据 |
 | PA04 | WR / QSPI CLK | LCD 时钟 |
 | PA03 | CS / QSPI CS | LCD 片选 |
-| PA02 | TE / QSPI TE | LCD TE 信号 |
+| PA02 | TE / QSPI TE | LCD 防撕裂同步（TE）信号 |
 | PA01 | BL_PWM | 背光控制 |
 | PA00 | RSTB | LCD 复位 |
 | PA33 / PA30 | I2C SDA / SCL | 触摸面板 |
-| PA31 / PA09 | 触摸 INT / RST | 触摸面板中断 / 复位 |
+| PA31 / PA09 | 触摸 INT / RST | 触摸面板 |
 | PA24, PA25, PA28, PA29 | SPI1 | TF 卡接口 |
-| PA26 | 卡检测 / LED | 复用功能 |
+| PA26 | 卡检测 / LED | 共用功能 |
 | PA20 / PA27 | UART RX/TX | 用户 UART |
 | PA18 / PA19 | 调试 UART RX/TX | 下载与软件调试 |
 | PA10 | AU_PA_EN | 音频功放使能 |
@@ -245,7 +245,7 @@ USB-to-UART 端口是主要的固件下载和日志接口。
 
 - 使用板载麦克风链路验证模拟音频输入。
 - 使用扬声器连接器进行音频输出测试。
-- 根据原始开发板说明，外部扬声器路径支持最高 3 W / 4 Ω。
+- 根据原始开发板说明，外部扬声器路径在 4 Ω 负载下最高支持 3 W。
 
 ## 存储 { #storage }
 
@@ -259,7 +259,7 @@ MicroSD 卡座通过 SPI 连接，适合在转向自定义板之前验证文件�
 - `sf32lb52-lcd_n16r8`
 - `sf32lb52-lcd_a128r16`
 
-这些名称是 SDK 构建目标标识，不一定等同于开发板或模组上的产品型号。思澈科技（SiFli）的[开发板支持索引](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)与 SDK 主分支[`build_config_gcc.yaml`](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml)列出的目标可能不同；请按当前使用的 SDK 版本核实。
+这些名称是 SDK 构建目标标识，不一定等同于开发板或模组上的产品型号。思澈科技（SiFli）的[开发板支持索引](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)与 SDK 的 [`build_config_gcc.yaml`](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml)列出的目标集合可能不同；请按当前使用的 SDK 版本核实。
 
 ## 相关文档 { #related-documents }
 

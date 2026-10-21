@@ -1,6 +1,6 @@
 ---
 icon: lucide/book-open-text
-description: "以 OpenSiFli EPD Reader 和 SF32-OED-EPD 为基线，复现并验证低功耗 EPUB 墨水屏阅读器。"
+description: "在 SF32-OED-EPD 硬件上复现并验证 OpenSiFli EPD Reader 的产品开发路径。"
 tags:
     - 项目
     - EPUB
@@ -12,7 +12,7 @@ tags:
 
 ## 什么是 EPD Reader？ { #what-is-epd-reader }
 
-[OpenSiFli EPD Reader](https://github.com/OpenSiFli/EPD_Reader) 是将 [atomic14/diy-esp32-epub-reader](https://github.com/atomic14/diy-esp32-epub-reader) 适配到思澈科技（SiFli）`SF32-OED-EPD` 系列硬件的开源 EPUB 阅读器。它以 SF32LB52x 为处理核心，从内置文件系统或 TF 卡读取 EPUB，通过 ZIP/XML/XHTML 解析、FreeType 字体和图像解码链路排版内容，再使用全刷/局刷波形驱动电子纸面板。
+[OpenSiFli EPD Reader](https://github.com/OpenSiFli/EPD_Reader) 是将 [atomic14/diy-esp32-epub-reader](https://github.com/atomic14/diy-esp32-epub-reader) 适配到思澈科技（SiFli）`SF32-OED-EPD` 系列硬件。它以 SF32LB52x 为处理核心，从内置文件系统或 TF 卡读取 EPUB，通过 ZIP/XML/XHTML 解析、FreeType 字体和图像解码链路排版内容，再使用全刷/局刷波形驱动电子纸面板。
 
 当前应用提供书库、目录、阅读、阅读设置、功能设置、欢迎/熄屏、低电量、充电和关机页面；支持按键与触控、中文/英文、动态 TTF/OTF 字体、字号/字重/行距/边距设置，以及把阅读设置保存到 TF 卡。为节省资源，内置中文字体默认未启用独立粗体/斜体字形；使用字重选项时必须以目标字体的实际显示结果为准。它适合作为低刷新率阅读终端的完整参考，而不是通用 EPUB 标准符合性或量产电子书方案的证明。
 
@@ -22,7 +22,7 @@ tags:
 
 思澈科技（SiFli）的板卡指南链接了样品销售页面，但没有证明所售板卡、面板和触控硬件与项目 V1.1 软件基线相符，也没有明确完整的基准硬件组合或面板单独采购渠道。此外，上游没有给出 EPUB 覆盖率、面板工作温区、产品寿命或各模式电流指标。因此，本文将硬件版本、面板/触控组合和软件提交视为必须固定的工程基线；其他电子纸模块不能直接替代。
 
-**来源基线核对：** 思澈科技（SiFli）的 [SF32LB52-OED-6'-EPD 使用指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-OED-6%27-EPD.md)介绍的是 6 英寸 OPM060DA 面板，分辨率为 758 × 1024。指南中的功能框图还显示了板级接口：8-bit 8080 EPD、I2C 触控、SPI1 TF 卡、模拟麦克风/音频功放、USB 转 UART，以及电池/充电电源路径。固定的 EPD Reader V1.1 配置则选择分辨率为 1032 × 758 的 YZC085 V1.05，Wiki 板卡照片标注的是 V1.2。因此，现有资料不能证明 OPM060DA 与 YZC085 可互换，也不能证明 V1.1 随附的是 Wiki 中的面板。实施前应核对板卡和面板丝印，并按实际组合选择软件目标、波形和 VCOM 参数。
+**来源基线核对：** 思澈科技（SiFli）的 [SF32LB52-OED-6'-EPD 使用指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-OED-6%27-EPD.md)介绍的是 6 英寸 OPM060DA 面板，分辨率为 758 × 1024。指南中的功能框图还显示了板级接口：8-bit 8080 EPD、I²C 触控、SPI1 TF 卡、模拟麦克风/音频功放、USB 转 UART，以及电池/充电电源路径。固定的 EPD Reader V1.1 配置则选择分辨率为 1032 × 758 的 YZC085 V1.05，Wiki 板卡照片标注的是 V1.2。因此，现有资料不能证明 OPM060DA 与 YZC085 可互换，也不能证明 V1.1 随附的是 Wiki 中的面板。实施前应核对板卡和面板丝印，并按实际组合选择软件目标、波形和 VCOM 参数。
 
 **供电要求：** 思澈科技（SiFli）的开发板指南要求板卡运行时必须连接电池；USB-C 的 VBUS 仅用于充电，不能单独为板卡供电。指南要求使用 1000–1500 mAh 电池，并推荐带 MX1.25 连接器的 1500 mAh 单节锂聚合物电池。该指南中的板卡照片标有 V1.2，而本项目基线目标为 V1.1，因此选电池前应核实具体板卡的供电连接器、极性和充电限制。
 
@@ -48,6 +48,7 @@ tags:
 </div>
 
 ## 硬件与软件规格 { #hardware-and-software-specifications }
+
 ### 硬件规格 { #hardware-specification }
 
 <div align="center"><em>表：硬件规格</em></div>
@@ -74,7 +75,7 @@ tags:
 | 软件包或服务 | 所需版本或修订 | 作用 | 状态 | 获取方式 | 兼容性与更新说明 |
 |:-------------|:---------------|:-----|:-----|:---------|:-----------------|
 | OpenSiFli EPD Reader | 本文审核提交 [`7d72223`](https://github.com/OpenSiFli/EPD_Reader/commit/7d72223c513d0a77eb251a3acb0f18cadb8d4d89)；必须递归取得子模块 | 顶层项目、应用、板级配置、波形和 SDK 固定点 | 必需 | [OpenSiFli/EPD_Reader](https://github.com/OpenSiFli/EPD_Reader) | 使用 `git clone --recursive` 或初始化子模块；会持续变动的 `main` 分支仅用于查找新版本 |
-| `epdiy-epub` 应用 | 随 `7d72223` 固定 | EPUB 发现/解析、页面状态机、字体、渲染、输入和功耗策略 | 必需 | [固定应用目录](https://github.com/OpenSiFli/EPD_Reader/tree/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub) | 应用基于 atomic14 项目适配；主应用许可证为 MIT，第三方库按各自许可证评审 |
+| `epdiy-epub` 应用 | 随 `7d72223` 固定 | EPUB 发现/解析、页面状态机、字体、渲染、输入和功耗策略 | 必需 | [固定应用目录](https://github.com/OpenSiFli/EPD_Reader/tree/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub) | 应用基于 atomic14 项目适配；主应用许可证为 MIT，第三方库保留各自的许可证 |
 | SiFli-SDK 子模块 | [`8a1eb8a`](https://github.com/OpenSiFli/SiFli-SDK/commit/8a1eb8a34be02c1df8529c9e8f0e69172bf9ef36) | RT-Thread、BSP、文件系统、蓝牙、网络、PM、构建和下载 | 必需 | [仓库子模块](https://github.com/OpenSiFli/EPD_Reader/tree/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/SiFli-SDK) | 这是上游固定的可复现 SDK；更新时必须重跑显示、存储、输入和功耗回归 |
 | EPUB/渲染依赖 | 随应用提交固定：EPDIY、tinyxml2、miniz 2.2.0、PNGdec、TJpgDec、FreeType 与内置字体 | 解包、XML/XHTML、PNG/JPEG、字体和 EPD 渲染 | 必需 | [固定 `lib/` 目录](https://github.com/OpenSiFli/EPD_Reader/tree/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/lib)和[`font/` 目录](https://github.com/OpenSiFli/EPD_Reader/tree/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/font) | 分别核对许可证和字体 NOTICE；不得假设主项目 MIT 覆盖全部第三方代码和字体 |
 | SCons、编译器与 UART 下载工具 | 使用固定 SDK 提交对应环境 | menuconfig、构建、文件系统/波形镜像和下载 | 必需 | 随[固定 SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK/commit/8a1eb8a34be02c1df8529c9e8f0e69172bf9ef36)提供 | 保存构建环境、命令、生成镜像和下载日志 |
@@ -83,7 +84,8 @@ tags:
 </div>
 
 ## 选择受支持的基线 { #choose-a-supported-baseline }
-第一次复现采用 `SF32-OED-EPD V1.1 + YZC085 V1.05 + FT5446U`，因为上游 README 为 `sf32-oed-epd_v11` 给出了明确构建/下载路径，且 Kconfig 将该组合设为 V1.1 默认值。固定顶层提交 `7d72223` 和 SDK 子模块 `8a1eb8a`，不要在首轮同时更换板卡、面板、触控或波形。
+
+第一次复现采用 `SF32-OED-EPD V1.1 + YZC085 V1.05 + FT5446U`，因为上游文档为 `sf32-oed-epd_v11` 给出了明确的构建/下载路径，且 Kconfig 将该组合设为 V1.1 默认值。固定顶层提交 `7d72223` 和 SDK 子模块 `8a1eb8a`，不要在首轮同时更换板卡、面板、触控或波形。
 
 ```bash
 git clone --recursive https://github.com/OpenSiFli/EPD_Reader.git
@@ -147,7 +149,7 @@ flowchart LR
 
 **保留证据：** 实物照片、部件标识、Git 状态、配置、构建/下载日志、镜像校验值和启动日志。
 
-**关口 1 退出条件：** 实物与 `sf32-oed-epd_v11` 默认组合一致，固定输入能稳定生成并启动同一镜像。
+**关口 1 退出条件：** 实物与 `sf32-oed-epd_v11` 默认组合一致，固定输入可重复生成并启动同一镜像。
 
 ## 阶段 2 — 验证未修改的阅读流程 { #stage-2-validate-the-untouched-reading-flow }
 
@@ -169,7 +171,7 @@ flowchart LR
 1. 将 `.ttf`/`.otf` 放入 TF 卡 `/fonts`，验证最多 64 个外部字体的发现、选择和缺失字体回退。
 2. 逐项验证字号 24–48 px、字重、1.0×–2.0× 行距、5–20 px 边距，以及 `/settings.cfg` 重启持久化。
 3. 在非写入关键时刻测试无卡、拔卡、重新插卡、损坏设置和不可用字体；不得以破坏文件系统的方式进行热拔插。
-4. 验证“继续阅读”只保存本次运行中最近成功进入的书籍索引和章节这一当前边界，不将其描述为完整跨重启阅读进度同步。
+4. 验证当前边界：“继续阅读”只在本次运行期间保留最近打开的书籍索引和章节；不要将其描述为跨重启的完整阅读进度同步。
 
 **保留证据：** 卡片规格/格式、资产清单、设置文件、重启结果、错误日志和恢复步骤。
 
@@ -186,7 +188,7 @@ flowchart LR
 
 **保留证据：** 面板/波形版本、温度、页面图像、刷新统计、电流轨迹、电池条件和唤醒/关机结果。
 
-**关口 4 退出条件：** 显示质量、刷新延迟（latency）、温区、功耗和恢复阈值均已定义并达到；不合格项具有明确处置。
+**关口 4 退出条件：** 显示质量、刷新延迟（latency）、温区、功耗和恢复阈值均已定义并达标，每个未达标项都有明确处置。
 
 ## 阶段 5 — 进行受控适配并评审产品就绪度 { #stage-5-make-a-controlled-adaptation-and-review-readiness }
 
@@ -212,6 +214,7 @@ flowchart LR
 交接包应包含板卡/面板/触控版本、固定代码和 SDK、内存/分区、文件系统、字体/内容资产、波形/VCOM/时序、全刷/局刷策略、输入映射、电池曲线、功耗测量、异常恢复、许可证清单和生产测试计划。使用 [SF32LB52x 集成路径](../sf32-products/chips/SF32LB52x.md#integration-path)选择芯片、模块、开发板、硬件设计指南和检查清单，并以已验证的功能边界为依据重新设计定制硬件。
 
 ## 权威来源 { #authoritative-sources }
+
 - [OpenSiFli/EPD_Reader](https://github.com/OpenSiFli/EPD_Reader)
 - [本文审核的项目提交 `7d72223`](https://github.com/OpenSiFli/EPD_Reader/commit/7d72223c513d0a77eb251a3acb0f18cadb8d4d89)
 - [EPD Reader 官方中文 README](https://github.com/OpenSiFli/EPD_Reader/blob/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/README.md)
@@ -220,5 +223,5 @@ flowchart LR
 - [EPD Reader V1.1 板级配置](https://github.com/OpenSiFli/EPD_Reader/tree/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/sf32-oed-epd_v11)
 - [EPD Reader 主应用 MIT 许可证](https://github.com/OpenSiFli/EPD_Reader/blob/7d72223c513d0a77eb251a3acb0f18cadb8d4d89/epdiy-epub/LICENSE)
 - [atomic14/diy-esp32-epub-reader](https://github.com/atomic14/diy-esp32-epub-reader)
-- [思澈科技（SiFli） SF32LB52x 构建与下载说明](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/build.html)
+- [思澈科技（SiFli）SF32LB52x 构建与下载说明](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/build.html)
 - [思澈科技（SiFli）SF32LB52-OED-6'-EPD 中文硬件指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-OED-6%27-EPD.md)

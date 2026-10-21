@@ -1,6 +1,6 @@
 ---
 icon: lucide/gamepad-2
-description: "Un parcours d'ingénierie reproductible pour évaluer le portage Arduboy2 d'OpenSiFli, valider la frontière entre boucle de jeu et périphériques, et décider si un produit SF32 orienté jeu est prêt pour un travail de conception approfondi."
+description: "Parcours reproductible pour évaluer le portage Arduboy2 d'OpenSiFli, valider boucle de jeu et périphériques, et décider si un produit SF32 est prêt pour la conception."
 tags:
     - Projets
     - Arduino

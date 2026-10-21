@@ -1,6 +1,6 @@
 ---
 icon: lucide/component
-description: "Lista de componentes aprobados por SiFli para diseños SF32: cristales, inductores reductores, Flash NOR/NAND y SD-NAND, y controladores LCD; incluye requisitos de selección y una lista de comprobación de revisión de la BOM."
+description: "Lista de proveedores aprobados (AVL) de SiFli para SF32: cristales, inductores, Flash NOR/NAND y controladores LCD, con requisitos de selección y revisión de la BOM."
 tags:
     - Hardware
     - Componentes
@@ -395,5 +395,5 @@ Esta lista establece un nivel de exigencia superior a «el componente aparece en
 ## Páginas relacionadas { #related-pages }
 
 - [Guía de diseño de hardware del SF32LB52x](../chip-guides/SF32LB52x_hardware_design_guide.md): recomendaciones de esquemático y diseño que hacen referencia directa a varios componentes de esta lista.
-- Guía de diseño de hardware del SF32LB57x
+- [Guía de diseño de hardware del SF32LB57x](../chip-guides/SF32LB57x_hardware_design_guide.md)
 - [Descripción general de la familia SF32](../../sf32-products/family/SF32_family.md)

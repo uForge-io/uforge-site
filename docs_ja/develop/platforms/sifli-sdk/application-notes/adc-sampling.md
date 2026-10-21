@@ -263,6 +263,6 @@ SF32LB56xのログUARTを外部PCに接続する場合、シリアルアダプ�
 - [SF32LB57x ADC使用・設定ガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb57x/app_note/adc.html)
 - [SF32LB58x ADC使用・設定ガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/adc.html)
 - [SF32LB52x ADC HAL APIリファレンス](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/adc.html)：既定の校正レンジ。
-- SF32LB57xハードウェア設計ガイド — ストレージと製造：GPADCチャンネルおよびPAD割り当て。
-- SF32LB57xハードウェア設計ガイド — 最小システムと電源：アナログ電源／基準電圧接続および電源バリエーション別の電池検出制限。
+- [SF32LB57xハードウェア設計ガイド — ストレージと製造](../../../../hardware/chip-guides/SF32LB57x_schematic_storage_mfg.md)：GPADCチャンネルおよびPAD割り当て。
+- [SF32LB57xハードウェア設計ガイド — 最小システムと電源](../../../../hardware/chip-guides/SF32LB57x_schematic_system_power.md)：アナログ電源／基準電圧接続および電源バリエーション別の電池検出制限。
 - [OpenSiFliのADC FAQ](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/faq/mcu/adc.md)：SF32LB55xの工場キャリブレーション範囲、起動／スタンバイ／復帰後の検証、およびSF32LB56xのログUART電圧に関する注意事項。

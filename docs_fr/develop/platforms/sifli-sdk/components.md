@@ -1,6 +1,6 @@
 ---
 icon: lucide/boxes
-description: "Transformer du code d'exemple SiFli-SDK en composants réutilisables et paquets `sf-pkg` : critères de qualité, éléments à documenter et pièges courants lors de la création de paquets."
+description: "Transformer le code d'exemple SiFli-SDK en composants réutilisables et paquets `sf-pkg` : critères de qualité, documentation attendue et pièges courants."
 tags:
     - Développement
     - SiFli-SDK

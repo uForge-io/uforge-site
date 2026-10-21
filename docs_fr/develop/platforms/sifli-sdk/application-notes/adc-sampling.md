@@ -1,7 +1,7 @@
 ---
 icon: lucide/chart-no-axes-column
 title: "Échantillonnage avec le GPADC"
-description: "Utiliser l'ADC à usage général (GPADC) sur SF32LB52x, SF32LB55x, SF32LB56x, SF32LB57x et SF32LB58x : limites électriques, cartographie des broches, accès au périphérique et étalonnage."
+description: "Utiliser l'ADC généraliste (GPADC) sur SF32LB52x, 55x, 56x, 57x et 58x : limites électriques, correspondance des broches, accès au périphérique et étalonnage."
 tags: [Développement, SiFli-SDK, Notes d'application, ADC]
 ---
 
@@ -263,6 +263,6 @@ Lors du raccordement de l'UART de journalisation du SF32LB56x à un PC externe, 
 - [Guide d'utilisation et de configuration de l'ADC SF32LB57x](https://docs.sifli.com/projects/sdk/latest/sf32lb57x/app_note/adc.html)
 - [Guide d'utilisation et de configuration de l'ADC SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/adc.html)
 - [Référence de l'API HAL ADC SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/adc.html) — définitions de la plage d'étalonnage par défaut.
-- Guide de conception matérielle SF32LB57x — Stockage et fabrication — affectation des canaux et pads GPADC.
-- Guide de conception matérielle SF32LB57x — Système minimal et alimentation — connexions analogiques d'alimentation/référence et limites de détection batterie par variante.
+- [Guide de conception matérielle SF32LB57x — Stockage et fabrication](../../../../hardware/chip-guides/SF32LB57x_schematic_storage_mfg.md) — affectation des canaux et pads GPADC.
+- [Guide de conception matérielle SF32LB57x — Système minimal et alimentation](../../../../hardware/chip-guides/SF32LB57x_schematic_system_power.md) — connexions analogiques d'alimentation/référence et limites de détection batterie par variante.
 - [FAQ ADC OpenSiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/faq/mcu/adc.md) — plages d'étalonnage d'usine et validation SF32LB55x au démarrage, en veille et après réveil, ainsi que recommandations sur le niveau de l'UART de journalisation SF32LB56x.

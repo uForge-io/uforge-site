@@ -2,7 +2,7 @@
 icon: lucide/layers
 hide:
     - navigation
-description: "Directives d'implantation et de routage du PCB du microcontrôleur SF32LB55x : empreinte, empilage des couches, règles générales, routage des interfaces et liste de contrôle détaillée."
+description: "Directives d'implantation PCB du MCU SF32LB55x : empreinte, empilement, règles générales, routage des interfaces et liste de contrôle détaillée."
 tags:
     - Matériel
     - Puce

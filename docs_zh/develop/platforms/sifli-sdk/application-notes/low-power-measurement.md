@@ -7,7 +7,7 @@ tags: [开发, SiFli-SDK, 应用笔记, 低功耗]
 
 # 配置并测量低功耗 { #configure-and-measure-low-power }
 
-思澈科技（SiFli）的低功耗指南涵盖多种 SF32 架构。SF32LB52x、SF32LB55x 和 SF32LB56x 采用双核架构：HPSYS 中的 HCPU 最高运行频率为 240 MHz，适合高性能任务；LPSYS 中的 LCPU 最高运行频率为 48 MHz，适合蓝牙（Bluetooth）和传感器任务。SF32LB57x 和 SF32LB58x 在 HCPU/LCPU 架构上增加了 ACPU；SF32LB58x 的低功耗 LCPU 最高运行频率为 96 MHz。各系列的核数、时钟上限和低功耗行为并不相同，应以目标芯片对应的 SDK 指南为准。
+SiFli SDK 的低功耗指南涵盖多种 SF32 架构。SF32LB52x、SF32LB55x 和 SF32LB56x 采用双核架构：HPSYS 中的 HCPU 最高运行频率为 240 MHz，适合高性能任务；LPSYS 中的 LCPU 最高运行频率为 48 MHz，适合蓝牙（Bluetooth）和传感器任务。SF32LB57x 和 SF32LB58x 在 HCPU/LCPU 架构上增加了 ACPU；SF32LB58x 的低功耗 LCPU 最高运行频率为 96 MHz。各系列的核数、时钟上限和低功耗行为并不相同，应以目标芯片对应的 SDK 指南为准。
 
 ## 配置电源管理框架 { #configure-the-power-management-framework }
 
@@ -17,7 +17,7 @@ tags: [开发, SiFli-SDK, 应用笔记, 低功耗]
 sdk.py menuconfig
 ```
 
-下表列出 SF32LB52x 源指南中的 menuconfig 配置。不同系列或 SDK 版本的低功耗模式名称及配置项可能不同，应用到其他型号前请以目标系列文档为准。
+以下 menuconfig 设置来自 SF32LB52x 源指南。不同系列或 SDK 版本的低功耗模式名称及配置项可能不同，应用前请对照目标系列的文档核实。
 
 <div align="center" markdown>
 
@@ -25,20 +25,20 @@ sdk.py menuconfig
 
 | menuconfig 路径 | 符号 | 作用 |
 |---|---|---|
-| `Sifli middleware → Enable Low power support` | `BSP_USING_PM` | 启用思澈科技（SiFli）电源管理模块。 |
+| `Sifli middleware → Enable Low power support` | `BSP_USING_PM` | 启用 SiFli 电源管理模块。 |
 | `RTOS → RT-Thread Components → Device Drivers → Using Power Management device drivers → Select PM Mode → Enable Deep Mode` | `PM_DEEP_ENABLE` | 启用深度睡眠（Deep Sleep）支持。 |
 | `Sifli middleware → Enable Low power support → Enable PM Debug` | `BSP_PM_DEBUG` | 输出电源管理切换日志；正式测量功耗时应关闭。 |
 </div>
 
 生成的 `rtconfig.h` 通常会包含 `RT_USING_PM`、`BSP_USING_PM` 以及所选模式的宏。可以从 `example/pm/classical` 例程开始。要关闭功能，只需按相同路径取消配置。
 
-以下截图展示了思澈科技（SiFli）指南中的 SF32LB52x 示例，可用于确认两个关键菜单位置；实际工程应以目标系列 SDK 的菜单为准。
+下面的截图来自 SF32LB52x 源指南，用于确认两个关键菜单位置；实际工程应以目标系列 SDK 的菜单为准。
 
 ![SF32LB52x menuconfig 中的低功耗支持选项](../../../../assets/develop/app-notes/low-power/enable_pm.png){ loading="lazy" }
-<div align="center"><em>图：思澈科技（SiFli）指南中的 SF32LB52x 示例——启用 `BSP_USING_PM`：Sifli middleware → Enable Low power support。</em></div>
+<div align="center"><em>图：SF32LB52x 源示例——在 Sifli middleware → Enable Low power support 下启用 `BSP_USING_PM`。</em></div>
 
 ![SF32LB52x menuconfig 中的 Deep Mode 选项](../../../../assets/develop/app-notes/low-power/deep.png){ loading="lazy" }
-<div align="center"><em>图：思澈科技（SiFli）指南中的 SF32LB52x 示例——启用 `PM_DEEP_ENABLE`：RTOS → RT-Thread Components → Device Drivers。</em></div>
+<div align="center"><em>图：SF32LB52x 源示例——在 RTOS → RT-Thread Components → Device Drivers 下启用 `PM_DEEP_ENABLE`。</em></div>
 
 ## 选择唤醒源 { #select-a-wake-source }
 
@@ -136,14 +136,14 @@ rt_kprintf("CR:0x%x, WER:0x%x\n", hwp_pmuc->CR, hwp_pmuc->WER);
 | 日志 | 含义 |
 |---|---|
 | `gui_suspend` / `gui_resume` | 熄屏/亮屏切换。 |
-| `[pm]S: mode,gtime` | 进入睡眠；`gtime` 以 32,768 Hz 时钟的计数周期（tick）为单位。 |
+| `[pm]S: mode,gtime` | 进入睡眠；`gtime` 以 32,768 Hz 时钟节拍（tick）为单位。 |
 | `[pm]W: gtime` | 从睡眠唤醒。 |
 | `[pm]WSR:0x...` | 唤醒原因；按对应系列用户手册解码位含义。 |
 </div>
 
 如果没有进入预期的睡眠状态，检查 `list_thread`、`pm_dump` 和 `list_timer`。IDLE 线程必须获得调度；不得有代码仍持有 `rt_pm_request(PM_SLEEP_MODE_IDLE)` 请求；下一个 OS 定时器的到期时间必须超过策略门限（通常 HCPU 为 100 ms、LCPU 为 10 ms）；唤醒条件须处于非激活状态，IPC 队列也必须清空。若周期性延时短于门限，系统可能一直无法进入睡眠。
 
-思澈科技（SiFli）的指南还用流程图展示了“熄屏 → IDLE → 满足条件后进入睡眠”以及“按键唤醒 LPSYS、LCPU 通过 Mailbox 将事件发送给 HCPU、系统自动唤醒 HPSYS”的路径。这些流程图适合用来核对日志顺序；图中的文字和流程以 SF32LB52x 为例，不能据此推断其他系列的 WSR 位定义。
+原指南还用流程图展示了“熄屏 → IDLE → 满足条件后进入睡眠”以及“按键唤醒 LPSYS、LCPU 通过 Mailbox 将事件发送给 HCPU、系统自动唤醒 HPSYS”的路径。这些流程图适合用来核对日志顺序；图中的文字和流程以 SF32LB52x 为例，不能据此推断其他系列的 WSR 位定义。
 
 ![SF32LB52x 低功耗调试开关](../../../../assets/develop/app-notes/low-power/low_power11.png){ loading="lazy" }
 <div align="center"><em>图：SF32LB52x 低功耗调试开关（`BSP_PM_DEBUG`）。</em></div>

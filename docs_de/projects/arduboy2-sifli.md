@@ -1,6 +1,6 @@
 ---
 icon: lucide/gamepad-2
-description: "Ein reproduzierbarer technischer Ablauf zur Bewertung der Arduboy2-Portierung von OpenSiFli: Spielschleife und Peripherie validieren und entscheiden, ob ein spieleorientiertes SF32-Produkt für die nächste Designphase bereit ist."
+description: "Reproduzierbarer Weg zur Bewertung der Arduboy2-Portierung von OpenSiFli: Spielschleife und Peripherie validieren und entscheiden, ob ein SF32-Spieleprodukt designreif ist."
 tags:
     - Projekte
     - Arduino

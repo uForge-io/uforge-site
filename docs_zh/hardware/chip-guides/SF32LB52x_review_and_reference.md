@@ -16,8 +16,8 @@ tags:
 ## 7. 设计评审检查表 { #7-design-review-checklist }
 
 - [ ] 最小系统评审已完成：具体型号、封装、电源树、启动介质、启动配置管脚、调试/下载接口、时钟和唤醒策略均已记录
-- [ ] 已确认具体芯片型号和供电分组，未混用两个分组的电源原理图
-- [ ] 芯片电源管脚（VBUS/VBAT/VCC，或 PVDD/VDDIOA/VDD_SIP）处于数据手册规定的电压范围内
+- [ ] 已确认具体芯片型号和供电型号，未混用两种供电型号的电源原理图
+- [ ] 处理器电源管脚（VBUS/VBAT/VCC，或 PVDD/VDDIOA/VDD_SIP）处于数据手册规定的电压范围内
 - [ ] BUCK 电感满足 4.7 μH ±20%、DCR ≤0.4 Ω、Isat ≥450 mA
 - [ ] 电池供电型号：充电路径、OVP 器件电压范围和集成 LDO 输出电容已验证
 - [ ] 48 MHz 和 32.768 kHz 晶体满足推荐规格，布局和禁布区满足要求
@@ -68,7 +68,7 @@ tags:
 思澈科技（SiFli）原始应用说明包含以下原理图、PCB 布局、机械和电源参考图。本附录保留这些原始参考图，供设计评审核对；实际设计仍应以第 5 节和第 6 节为主要依据。
 
 !!! note "如何使用这些图片"
-    这些图片来自源应用说明中的参考电路和布局示例。最终实现仍需结合正文规则、表格、数据手册、参考手册、最新参考设计包和 AVL，按具体器件和产品形态进行确认。
+    这些图片来自源应用说明中的参考电路和布局示例。最终实现仍需结合正文规则、表格、数据手册、参考手册、最新参考设计包和 AVL，按具体器件和产品进行确认。
 
 <div align="center"><em>表 9-1：附录索引</em></div>
 
@@ -86,7 +86,7 @@ tags:
 
 ### 9.1. 附录 A. 典型智能手表应用 { #appendix-a-a-typical-smart-watch-application }
 
-典型 SF32LB52x 智能手表设计包含 MCU、显示屏、触摸控制器、存储器、传感器、振动马达、音频输入/输出、蓝牙（Bluetooth）天线、时钟源、电源管理，以及调试接口和量产测试接口。电池供电设计还需要包含充电管理。
+典型 SF32LB52x 智能手表设计包含 MCU、显示屏、触摸控制器、存储器、传感器、振动马达、音频输入/输出、蓝牙（Bluetooth）天线、时钟源、电源管理，以及调试接口和量产测试接口。电池供电设计另含充电管理。
 图 9.1-1 和图 9.1-2 展示了 QSPI 显示屏、SPI 加速度计/陀螺仪、I2C 心率模组、模拟麦克风与 DAC 至功放的音频路径、PWM 驱动的振动马达、48 MHz 时钟、蓝牙 RF 路径，以及 SWD/UART 接口。图中的存储示例列出 QSPI NAND、SD NAND 和 NOR Flash，并不是完整的启动介质清单。两张图都画有外部充电器和 Buck/LDO 电源路径；实际电源架构应按第 5.2 节选择，不能把框图当作必须照搬的电路。
 
 
@@ -110,9 +110,9 @@ tags:
 
 <div align="center"><em>图 9.2-2：RF 原理图参考</em></div>
 
-![图 9.2-3：RF 布线原理图参考](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-RF-2.png){ loading="lazy" }
+![图 9.2-3：RF 原理图走线参考](../../sf32-products/chips/assets/52xB/sf32lb52X-B-SCH-RF-2.png){ loading="lazy" }
 
-<div align="center"><em>图 9.2-3：RF 布线原理图参考</em></div>
+<div align="center"><em>图 9.2-3：RF 原理图走线参考</em></div>
 
 **存储和启动**
 
@@ -142,9 +142,9 @@ tags:
 
 <div align="center"><em>图 9.2-9：电源键参考</em></div>
 
-![图 9.2-10：旋钮按键参考](../../sf32-products/chips/assets/52xB/sf32lb52X-B-XNKEY.png){ loading="lazy" }
+![图 9.2-10：旋转编码器按键参考](../../sf32-products/chips/assets/52xB/sf32lb52X-B-XNKEY.png){ loading="lazy" }
 
-<div align="center"><em>图 9.2-10：旋钮按键参考</em></div>
+<div align="center"><em>图 9.2-10：旋转编码器按键参考</em></div>
 
 ![图 9.2-11：模拟 MEMS 麦克风参考](../../sf32-products/chips/assets/52xB/sf32lb52X-B-MEMS-MIC.png){ loading="lazy" }
 
@@ -306,7 +306,7 @@ tags:
 
 **SF32LB520/3/5/7（电池供电）**
 
-下图展示了带或不带电源路径管理（PPM）的两种外部充电电路，以及片内充电电路。
+下图展示了带或不带电源路径管理（PPM）的两种外部充电电路，以及集成充电器电路。
 
 ![图 9.5-1：不带 PPM 的外部充电电路](../../sf32-products/chips/assets/52xA/sf32lb52x-CHG-NPPM.png){ loading="lazy" }
 

@@ -1,7 +1,7 @@
 ---
 icon: lucide/bluetooth
 title: "Vue d'ensemble Bluetooth"
-description: "Vue d'ensemble du Bluetooth sur SF32 : BLE ou Bluetooth bimode, conception de services GATT, réglage des paramètres de connexion, appairage et sécurité, LE Audio et coexistence."
+description: "Bluetooth sur SF32 : BLE ou bimode, conception de services GATT, réglage des paramètres de connexion, appairage et sécurité, LE Audio et coexistence."
 tags:
   - Bluetooth
 ---

@@ -1,6 +1,6 @@
 ---
 icon: lucide/list
-description: "Referência completa dos comandos AT do módulo Bluetooth de modo dual SF32LB57 (SIFLI_AT): enquadramento, sistema e dispositivo, endereço e identidade, modos de operação e visibilidade, pareamento e segurança, porta serial e eventos, conexões, transferência de dados e GATT personalizado, além de eventos não solicitados (URCs) e comandos PDU."
+description: "Referência de comandos AT do módulo Bluetooth dual-mode SF32LB57 (SIFLI_AT): enquadramento, pareamento, conexões, transferência de dados, GATT, URCs e comandos PDU."
 tags:
   - Bluetooth
 ---

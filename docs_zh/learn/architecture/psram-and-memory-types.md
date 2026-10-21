@@ -9,7 +9,7 @@ tags:
 
 # PSRAM 与嵌入式系统中的其他存储器对比 { #psram-vs-other-embedded-memory-types }
 
-在许多嵌入式产品中，PSRAM（**伪静态 RAM（Pseudo-Static RAM）**）可在片上 SRAM 容量不足时补充工作内存，适合存放内部 SRAM 容纳不下的活动数据，例如帧缓冲区、大型图形资源、音频缓冲区、模型数据和应用工作集。对于可穿戴设备等低功耗产品，在部分设计中，采用 PSRAM 的方案系统级功耗可能低于采用独立 DRAM 子系统的方案；实际结果取决于存储器件、控制器、电源状态和工作负载。PSRAM 仍是易失性工作内存，不能替代 Flash，也不一定适合存放对延迟（latency）要求严格的数据。
+PSRAM（**伪静态 RAM**，pseudo-static RAM）是许多嵌入式产品中介于稀缺的片上 SRAM 与非易失性存储之间的实用容量层。帧缓冲区、大型图形资源、音频缓冲区、模型数据，或内部 SRAM 容纳不下的应用工作集，都可以放在其中。对于可穿戴设备等部分低功耗产品，PSRAM 在系统级功耗上可能比独立 DRAM 子系统更合适；实际结果取决于存储器件、控制器、电源状态和工作负载。PSRAM 仍是易失性工作内存，不能替代 Flash，也不一定适合存放对延迟（latency）要求严格的数据。
 
 本页介绍如何在 SRAM、PSRAM 和持久化存储之间分配数据。选定具体 SKU 后，请查阅 [SF32 系列](../../sf32-products/family/SF32_family.md)以及对应芯片、模组或开发板的文档，确认其实际搭载的存储器。
 
@@ -58,7 +58,7 @@ PSRAM 通常面向与传统独立 DRAM 不同的工作点：在中等容量和�
 
 ## 各类存储器在系统中的位置 { #where-each-memory-fits-in-a-system }
 
-应根据数据需要保留多久，以及访问时序是否严格来安排：
+可以从数据的生命周期和访问的紧迫程度入手：
 
 1. 将**对中断敏感、频繁访问且对延迟要求严格**的代码和数据放在内部 SRAM，或文档明确支持的其他低延迟存储器中。
 2. 如果增加容量带来的收益值得付出额外的延迟和带宽开销，可将**运行时使用的大型数据工作集**放在 PSRAM 中。
@@ -104,7 +104,7 @@ PSRAM 容量并不意味着带宽无限。在支持的 SF32 配置中，主机�
 
 </div>
 
-数据线列只计算有效载荷信号，不包括时钟、片选或其他控制引脚。这里的时钟频率是思澈科技（SiFli）文档中的配置示例，不代表整个系列的上限。[SF32LB52-DevKit-LCD 开发板指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-LCD.md)列出了 144 MHz OPI-PSRAM 和 72 MHz、STR 模式的 QSPI-NOR；[SF32LB58-DevKit-LCD 开发板指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb58x/SF32LB58-DevKit-LCD.md)列出了 144 MHz HPI-PSRAM，以及外部 Flash 工作在 72 MHz 的开发板型号。QSPI/DTR 行采用相同的 72 MHz 时钟，仅用于单独展示双倍数据速率传输的影响。双通道行假设两个通道可以并发使用，展示的是聚合总线宽度，并不保证单一 CPU 数据流可获得双倍的有效速率。这些数值是**总线有效载荷上限**，不是实测的应用吞吐量。命令/地址周期、虚周期（dummy cycle）、刷新、读写切换、控制器限制、缓存未命中、DMA 仲裁、PCB 信号完整性和并发使用方都会降低可用速率。有效配置取决于所选芯片、封装、存储器件和 SDK 配置。
+数据线列只计算有效载荷信号，不包括时钟、片选或其他控制引脚。这些时钟频率是文档中记载的示例，不是整个系列的上限。[SF32LB52-DevKit-LCD 开发板指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-LCD.md)列出了 144 MHz OPI-PSRAM 和 72 MHz、STR 模式的 QSPI-NOR；[SF32LB58-DevKit-LCD 开发板指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb58x/SF32LB58-DevKit-LCD.md)列出了 144 MHz HPI-PSRAM，以及外部 Flash 工作在 72 MHz 的开发板型号。QSPI/DTR 行采用相同的 72 MHz 时钟，仅用于单独展示双倍数据速率传输的影响。双通道行假设两个通道可以并发使用，展示的是聚合总线宽度，并不保证单一 CPU 数据流可获得双倍的有效速率。这些数值是**总线有效载荷上限**，不是实测的应用吞吐量。命令/地址周期、虚周期（dummy cycle）、刷新、读写切换、控制器限制、缓存未命中、DMA 仲裁、PCB 信号完整性和并发使用方都会降低可用速率。有效配置取决于所选芯片、封装、存储器件和 SDK 配置。
 
 思澈科技（SiFli）的[芯片型号指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md)列出了以下双通道配置示例：**SF32LB566VCB36** 的 MPI1 上有 8 MB OPI-PSRAM，MPI2 上有 4 MB；**SF32LB586VDD36** 的两个接口各有 16 MB HPI-PSRAM；**SF32LB587VEE56** 的两个接口各有 32 MB HPI-PSRAM。这些具体型号用于说明存储拓扑，并不保证单个使用方能达到表中的双通道聚合有效载荷速率。进行带宽关键型设计前，应核对完整订购型号和 SDK 内存映射；同一系列的其他封装或 SKU 可能采用不同的存储拓扑。
 
@@ -130,9 +130,9 @@ DMA 缓冲区的起始地址和分配大小应按缓存行对齐，且不能与�
 
 ### 启动时将代码复制到 PSRAM 并执行（非 XIP） { #boot-copy-and-execute-in-place-from-psram }
 
-思澈科技（SiFli）针对 SF32LB52x 和 SF32LB58x 发布的启动流程文档，均说明了将外部 NAND Flash 中的应用程序复制到 PSRAM 中执行的配置；两份文档也都列出了通过 SDIO 使用外置 SD Flash 的启动配置。思澈科技（SiFli）将这种方式称为**非 XIP**：XIP 是从 NOR Flash 的映射地址直接执行代码，存储地址与执行地址相同；非 XIP 则将代码从 Flash 复制到 RAM 执行，存储地址与执行地址不同。详见 [SF32LB52x 启动流程文档](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_development/startup_flow.html)和 [SF32LB58x 启动流程文档（中文）](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_development/startup_flow.html)。这些是有文档依据的特定配置，并不意味着所有 SKU 或开发板都支持。请核对目标器件支持的启动介质、内存映射、链接脚本/分区配置及 SDK。将选定代码放在 PSRAM 中执行可减少较大可执行段对片内 SRAM 的占用，但不能保证执行速度更快；应结合实际缓存设置、PSRAM 争用和代表性工作负载进行测量。
+思澈科技（SiFli）针对 SF32LB52x 和 SF32LB58x 发布的启动流程文档，均说明了将外部 NAND Flash 中的应用程序复制到 PSRAM 中执行的配置；两份文档也都列出了通过 SDIO 使用外置 SD Flash 的启动配置。思澈科技（SiFli）将这种方式称为**非 XIP**：XIP 是从 NOR Flash 的映射地址直接执行代码，存储地址与执行地址相同；非 XIP 则将代码从 Flash 复制到 RAM 执行，存储地址与执行地址不同。详见 [SF32LB52x 启动流程文档](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_development/startup_flow.html)和 [SF32LB58x 启动流程文档（中文）](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_development/startup_flow.html)。这些是有文档依据的特定配置，并不意味着所有 SKU 或开发板都支持。请核对目标器件支持的启动介质、内存映射、链接脚本/分区配置及 SDK。将选定代码放在 PSRAM 中执行可把紧缺的片内 SRAM 留给其他用途，但不能保证执行速度更快；应结合实际缓存设置、PSRAM 争用和代表性工作负载进行测量。
 
-在具有代表性的思澈科技（SiFli）配置中，72 MHz QSPI/STR NOR 的原始有效载荷上限为 36 MB/s；144 MHz OPI/DDR 和 HPI/DDR PSRAM 的上限分别为 288 MB/s 和 576 MB/s；双通道变体的聚合上限则分别为 576 MB/s 和 1,152 MB/s。这些数值是接口有效载荷上限，不是应用性能结果。在配置受支持的前提下，更高的 PSRAM 接口带宽可能改善取指带宽，但不能仅凭这些上限断定从 PSRAM 执行一定更快。实际结果取决于存储器件延迟、代码局部性、缓存配置、PSRAM 争用，以及应用受 CPU、缓存还是带宽限制。请测量启动时间、缓存未命中行为和代表性工作负载，不要根据原始总线速率比推断应用性能提升。
+在具有代表性的思澈科技（SiFli）配置中，72 MHz QSPI/STR NOR 的原始有效载荷上限为 36 MB/s；144 MHz OPI/DDR 和 HPI/DDR PSRAM 的上限分别为 288 MB/s 和 576 MB/s；双通道变体的聚合上限则分别为 576 MB/s 和 1,152 MB/s。这些数值是接口有效载荷上限，不是应用性能结果。在受支持的配置中，PSRAM 更高的接口上限可能比 QSPI NOR 提供更多取指带宽，但不能仅凭此断定从 PSRAM 执行一定更快。实际结果取决于存储器件延迟、代码局部性、缓存配置、PSRAM 争用，以及应用受 CPU、缓存还是带宽限制。请测量启动时间、缓存未命中行为和代表性工作负载，不要根据原始总线速率比推断应用性能提升。
 
 对于大量使用 PSRAM 的设计，请在目标硬件上验证：
 
@@ -178,14 +178,14 @@ Half-Sleep 是**器件特定的电源模式**，不是所有 PSRAM 都具备的�
 
 - 只有在所有 CPU、DMA、显示、音频、无线和存储使用方均已停止访问 PSRAM 区域后，才能进入 Half-Sleep。进入过程中或睡眠期间的事务可能损坏传输，或意外唤醒器件。
 - 将退出视为需要调度的唤醒代价。固件必须在代码、DMA 或外设控制器再次访问 PSRAM 前预留规定的退出时间。
-- 应让 PSRAM 供电以及所选器件要求的信号保持在数据保持规格范围内。Half-Sleep 只有在满足已公开供电条件时才保留数据；它不能替代非易失性存储器。
+- 应让 PSRAM 供电以及所选器件要求的信号保持在数据保持规格范围内。Half-Sleep 只有在满足文档规定的供电条件时才保留数据；它不能替代非易失性存储器。
 - 测量完整系统状态，而不仅是 PSRAM 电流。如果 CPU、显示、接口时钟或其他子系统仍保持活动，节省的功耗可能被抵消。
 
 空闲间隔很短时，进入和退出模式的能耗可能超过节省的能耗。暂停时间较长时，用 Half-Sleep 保留帧缓冲区、已解码资源或模型缓冲区，可以避免重新加载或重建数据的开销。应在目标开发板上测量活动、Half-Sleep 和唤醒能耗，确定空闲时间至少多长才有净节能收益。
 
 ## SF32 设计中的 PSRAM { #psram-in-sf32-designs }
 
-SF32 的存储器配置取决于具体型号、封装和模组。思澈科技（SiFli）的 SF32LB5x 模组文档列出了 OPI-PSRAM 与 HPI-PSRAM 配置，容量和拓扑随模组型号而变化。有些配置将 PSRAM 与 MCU 合封，有些产品则引出外部存储器接口。不能仅凭 SF32 系列名称或外部存储器接口，就认为某个型号已经配有 PSRAM。
+SF32 的存储器配置取决于具体型号、封装和模组。思澈科技（SiFli）的 SF32LB5x 模组文档列出了 OPI-PSRAM 与 HPI-PSRAM 配置，容量和拓扑随模组型号而变化。有些配置采用合封 PSRAM，有些产品则引出外部存储器接口。不能仅凭 SF32 系列名称或外部存储器接口，就认为某个型号已经配有 PSRAM。
 
 请查阅具体型号的产品页面和硬件设计指南，确认容量、接口、封装限制、布线要求，以及外设同时工作时的限制。PSRAM 的典型用途包括：
 

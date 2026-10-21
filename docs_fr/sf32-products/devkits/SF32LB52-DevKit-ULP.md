@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-ULP : carte de développement SF32LB52x orientée objets portables, avec AMOLED, tactile, capteurs, audio, charge de batterie et mesure de consommation pour évaluer l'économie d'énergie au niveau système."
+description: "SF32LB52-DevKit-ULP : carte SF32LB52x orientée objets portables, avec AMOLED, tactile, capteurs, audio, charge batterie et mesure de courant pour la basse consommation."
 tags:
     - Matériel
     - Carte de développement

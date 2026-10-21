@@ -1,6 +1,6 @@
 ---
 icon: lucide/code
-description: "Evalúe el soporte comunitario de Rust para SF32 mediante sifli-rs de OpenSiFli (sifli-hal y sifli-pac): madurez actual, escenarios adecuados y no adecuados, y lista de riesgos."
+description: "Evalúe el soporte comunitario de Rust para SF32 con sifli-rs de OpenSiFli (sifli-hal, sifli-pac): madurez actual, casos adecuados y no adecuados, y lista de riesgos."
 tags:
     - Desarrollo
     - Rust

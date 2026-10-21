@@ -2,7 +2,7 @@
 icon: lucide/layers
 hide:
     - navigation
-description: "Recommandations de conception du PCB du MCU SF32LB58x : empreinte du boîtier, empilement des couches, fanout et routage des signaux d'horloge, RF, audio, USB, SDIO et DSI, ainsi que des alimentations."
+description: "Recommandations d'implantation PCB du MCU SF32LB58x : empreinte du boîtier, empilement, fanout et routage horloge, RF, audio, USB, SDIO, DSI et alimentations."
 tags:
     - Matériel
     - Puce

@@ -1,6 +1,6 @@
 ---
 icon: lucide/route
-description: "Leitfaden zur SF32-Produktplanung: Chip und Integrationsform auswählen, Software und Produktrisiken auf einem Board validieren und das Design für die Fertigung vorbereiten."
+description: "Durchgängige SF32-Produktplanung: Chip und Integrationsgrad wählen, Software auf einem Board validieren, dann das Design für die Fertigung vorbereiten."
 tags:
     - Hardware
     - Produktplanung

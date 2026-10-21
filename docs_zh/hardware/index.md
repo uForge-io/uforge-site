@@ -39,7 +39,7 @@ description: 复用 SF32 参考设计，或基于选定器件开展设计，并�
 | SF32LB52x | [设计指南](chip-guides/SF32LB52x_hardware_design_guide.md) | [检查清单](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | 直接使用 SF32LB52x 芯片设计电路板，不使用模组。 |
 | SF32LB55x | [设计指南](chip-guides/SF32LB55x_hardware_design_guide.md) | [检查清单](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | 直接使用 SF32LB55x 芯片设计电路板，不使用模组。 |
 | SF32LB56x | [设计指南](chip-guides/SF32LB56x_hardware_design_guide.md) | [检查清单](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | 直接使用 SF32LB56x 芯片设计电路板，不使用模组。 |
-| SF32LB57x | 设计指南 | 原理图 / PCB 布局 | 直接使用 SF32LB57x 芯片设计电路板，不使用模组。 |
+| SF32LB57x | [设计指南](chip-guides/SF32LB57x_hardware_design_guide.md) | [原理图](chip-guides/SF32LB57x_schematic_checklist.md) / [PCB 布局](chip-guides/SF32LB57x_pcb_layout_checklist.md) | 直接使用 SF32LB57x 芯片设计电路板，不使用模组。 |
 | SF32LB58x | [设计指南](chip-guides/SF32LB58x_hardware_design_guide.md) | [检查清单](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | 直接使用 SF32LB58x 芯片设计电路板，不使用模组。 |
 
 </div>

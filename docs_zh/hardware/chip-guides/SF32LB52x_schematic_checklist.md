@@ -12,7 +12,7 @@ tags:
 # SF32LB52x 硬件设计指南 — 原理图核对表 { #sf32lb52x-hardware-design-guide-schematic-checklist }
 
 !!! note "SF32LB52x 硬件设计指南的一部分"
-    本页为第 5.8 节原理图核对表。原理图设计说明分为三页，第一部分[最小系统、电源与时钟](SF32LB52x_schematic_design.md)介绍基础电路及其设计要求。
+    本页为第 5.8 节原理图核对表。返回[最小系统、电源与时钟](SF32LB52x_schematic_design.md)，即三页原理图设计指导中的第一页。
 
 ## 5.8. 原理图核对表 { #58-schematic-checklist }
 
@@ -74,10 +74,10 @@ tags:
 </div>
 
 !!! important "OVP 阈值不等于 VBUS 工作电压限值"
-    源检查表第 5 项的 5.15–5.55 V 是可调 OVLO 器件的选型范围；第 1 项列出 VBUS 4.6–5.5 V。不得将 5.55 V 解释为 VBUS 的连续工作电压。[电源系统说明](SF32LB52x_schematic_design.md#52-power-system)列出了源资料差异和应用说明中的另一组 OVP 选型值。验收设计前，应向思澈科技（SiFli）确认所选器件的阈值和供电限制。
+    源检查表第 5 项给出的 5.15–5.55 V 是可调 OVLO 器件的选型范围，而第 1 项照录了工作簿中 4.6–5.5 V 的 VBUS 检查值。不得将 5.55 V 解释为 VBUS 的连续工作电压。[电源系统说明](SF32LB52x_schematic_design.md#52-power-system)列出了源资料差异和应用说明中的另一组 OVP 选型值。验收设计前，应向思澈科技（SiFli）确认所选器件的阈值和供电限制。
 
 !!! note "VBUS 数值的来源与适用范围"
-    《Electrical Specification-A3》给出的芯片 VBUS 供电范围为 4.5–5.5 V。电池型号应用说明的供电表给出 4.6–5.5 V，并要求最大充电电流下芯片 VBUS 管脚电压不低于 4.6 V。这些数值的适用场景不同；核对芯片管脚的最低电压时，还应计入电源容差和供电路径压降。
+    《Electrical Specification-A3》给出的 VBUS 供电范围为 4.5–5.5 V。电池型号应用说明的供电表给出 4.6–5.5 V，并要求最大充电电流下芯片 VBUS 管脚电压不低于 4.6 V。这些数值的适用场景不同；核对芯片管脚的最低电压时，还应计入电源容差和供电路径压降。
 
 ### 5.8.3. 电源电容与电感 { #583-power-supply-capacitors-and-inductors }
 
@@ -212,8 +212,8 @@ tags:
 | 12 | <span class="flag-red">使用两颗外部 NOR Flash 时，CLK/D0–D3 共用；Flash 1 的 CS 使用 PA12，Flash 2 的 CS 使用 PA26。该管脚带内部上拉，适合作为低有效 CS，复位时默认高电平（未选中）</span> | <span class="flag-red">全部型号</span> | 必检 |
 | 13 | <span class="flag-red">使用两颗外部 NOR Flash 时，第一颗必须为 16 MB；第二颗可为 8 MB 或 16 MB</span> | <span class="flag-red">全部型号</span> | 必检 |
 | 14 | 外设器件的 I/O 逻辑电平与主芯片匹配 | 全部型号 | 必检 |
-| 15 | <span class="flag-red">所选 NOR Flash 型号符合关键器件选型指南中的要求；否则 ROM 可能无法识别，导致系统无法启动</span> | <span class="flag-red">全部型号</span> | 必检 |
-| 16 | <span class="flag-red">所选 SPI/SD NAND Flash 型号符合关键器件选型指南中的要求；否则 ROM 可能无法识别，导致系统无法启动</span> | <span class="flag-red">全部型号</span> | 必检 |
+| 15 | <span class="flag-red">所选 NOR Flash 型号在关键器件选型指南中列为已验证型号；否则 ROM 可能无法识别，导致系统无法启动</span> | <span class="flag-red">全部型号</span> | 必检 |
+| 16 | <span class="flag-red">所选 SPI/SD NAND Flash 型号在关键器件选型指南中列为已验证型号；否则 ROM 可能无法识别，导致系统无法启动</span> | <span class="flag-red">全部型号</span> | 必检 |
 
 </div>
 
@@ -404,7 +404,7 @@ tags:
 [^52a-category-note]: 源电子表格未填写该项的检查类别，因此保留为“来源未注明”，不自行归为“必检”或“可选”。请结合所选器件确认适用范围及验收要求。
 
 !!! important "启动存储电源控制管脚存在源资料差异"
-    本表保留检查表工作簿中电池供电型号外部 Flash 使用 PA11 的原始记录。按本项目的资料优先级，优先级更高的 OpenSiFli 应用说明和原理图设计指南指定 PA21 控制启动存储电源开关；因此应以 PA21 作为有源资料支持的设计依据，不要仅依据优先级较低的工作簿改用 PA11。工作簿未说明 PA11 是另一个板级使能信号还是管脚定义冲突；发布前应向思澈科技（SiFli）确认具体网络和型号。
+    本表保留检查表工作簿中 SF32LB520/3/5/7 外部 Flash 开关使用 PA11 的原始记录。按本项目的资料优先级，优先级更高的 OpenSiFli 应用说明和原理图设计指南指定 PA21 控制启动存储电源开关；因此应以 PA21 作为有源资料支持的设计依据，不要仅依据优先级较低的工作簿改用 PA11。工作簿未说明 PA11 是另一个板级使能信号还是管脚定义冲突；发布前应向思澈科技（SiFli）确认具体网络和型号。
 
 </div>
 

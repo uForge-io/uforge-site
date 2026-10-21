@@ -1,6 +1,6 @@
 ---
 icon: lucide/message-circle-more
-description: "Um roteiro completo para desenvolver produtos com o assistente de voz Xiaozhi de código aberto no SF32LB52: bring-up da placa, provisionamento por Bluetooth PAN, interação de voz na nuvem, personalização, OTA, validação e transferência para produção."
+description: "Roteiro de produto do assistente de voz Xiaozhi no SF32LB52: bring-up da placa, Bluetooth PAN, voz na nuvem, personalização, OTA, validação e transferência para produção."
 tags:
     - Projetos
     - IA

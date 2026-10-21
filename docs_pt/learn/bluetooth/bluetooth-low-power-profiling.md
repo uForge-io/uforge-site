@@ -1,7 +1,7 @@
 ---
 icon: lucide/chart-no-axes-combined
 title: "Medição e análise do consumo de energia em Bluetooth"
-description: "Método prático para medir o consumo de BLE, Bluetooth clássico e Bluetooth de modo dual em um dispositivo SF32, relacionar os resultados ao comportamento do firmware e calcular o orçamento diário de energia."
+description: "Meça o consumo de BLE, Bluetooth clássico e dual-mode em um SF32, relacione a medição ao firmware e calcule o orçamento diário de energia."
 tags:
   - Bluetooth
   - Baixo consumo

@@ -1,6 +1,6 @@
 ---
 icon: lucide/microchip
-description: "SF32LB56x: advanced ultra-low-power dual-mode Bluetooth MCU family for products that need richer displays, integrated audio, external memory, and stronger always-on processing."
+description: "SF32LB56x: advanced ultra-low-power dual-mode Bluetooth MCU family for richer displays, integrated audio, external memory, and stronger always-on processing."
 tags:
     - Hardware
     - Chip
@@ -177,6 +177,25 @@ Use this sequence to turn an SF32LB56x shortlist into a validated design:
 3. **Design and review the hardware.** Use the local [hardware design guide](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) — including its [schematic](../../hardware/chip-guides/SF32LB56x_schematic_checklist.md) and PCB layout checklists — before releasing the schematic or layout. Keep the U/V package and display-interface choice aligned with the selected part.
 4. **Verify the authoritative source.** Confirm the exact orderable part and package against the SiFli [datasheet][Datasheet], [user manual][User Manual], applicable [U hardware design guide][Hardware Design Guide (U, wiki.sifli.com)] or [V hardware design guide][Hardware Design Guide (V, wiki.sifli.com)], and the corresponding [U hardware application source][Hardware Application Source (U)] or [V hardware application source][Hardware Application Source (V)].
 
+<!-- uf-faq:start -->
+## Frequently Asked Questions
+
+**What are the key specifications of SF32LB56x?**
+SF32LB56x pairs an application CPU (Cortex-M33 @240 MHz) with a low-power core (Cortex-M33 @48/96 MHz, a user-programmable core), 960 KB of internal SRAM and dual-mode Bluetooth (BT Classic + BLE). Graphics: ePicasso 2.0. Package: QFN68 / BGA175 (7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)). USB 2.0 FS. Family-level values; verify the exact part number's datasheet.
+
+**Which display interfaces does SF32LB56x support?**
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. Availability varies by part number and package.
+
+**How much in-package memory does SF32LB56x offer?**
+Up to 16 MB of in-package PSRAM and up to 1 MB of in-package NOR Flash, depending on the part number.
+
+**What supply voltage does SF32LB56x need?**
+1.71–3.63 V, depending on the variant. Confirm the exact range in the datasheet.
+
+**Where do I start a hardware design with SF32LB56x?**
+Start with the [SF32LB56x hardware design guide](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) for schematic, power, clock/RF and PCB layout guidance, then use the schematic and layout checklists before releasing the board.
+<!-- uf-faq:end -->
+
 ## Related Products
 
 ### Module
@@ -190,6 +209,3 @@ Use this sequence to turn an SF32LB56x shortlist into a validated design:
 ### Reference Products
 
 Typical SF32LB56x end products include advanced smartwatches, connected HMI panels, healthcare devices, industrial handhelds, portable instruments, and richer eBike or eScooter displays.
-
-!!! note "Auto-generated content"
-    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

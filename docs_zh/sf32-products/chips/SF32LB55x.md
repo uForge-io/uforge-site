@@ -36,7 +36,7 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 
 - BLE 5.2 连接与极低接收电流
 - MIPI DSI 命令模式显示支持
-- 面向 LVGL、图形资源、传感器或 TinyML 的更大 SRAM
+- 面向 LVGL、图形资源、传感处理或 TinyML 负载的更大 SRAM
 - 用户可编程的低功耗处理器
 - 比 SF32LB52x 更多的 GPIO 或更密集的封装选项
 - NOR、NAND、eMMC、QSPI-PSRAM 或 OPI-PSRAM 的外部存储灵活性
@@ -144,7 +144,7 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 
 - 供电范围因型号而异：SS6600A8 为 2.97 V 至 3.63 V；551U4O5 和表列 BGA 型号为 1.71 V 至 3.63 V
 - 工作温度因型号而异：资料列出的 QFN 型号为 -20 °C 至 +70 °C；表列 BGA 型号为 -40 °C 至 +85 °C
-- 集成两路高效 BUCK 与低功耗 LDO 的电源管理
+- 集成电源管理，含两路高效降压（buck）稳压器和低功耗 LDO
 - RTC 唤醒下睡眠电流：600 nA
 - 引脚唤醒下睡眠电流：280 nA
 - 封装选项：QFN68L、BGA145、BGA169
@@ -194,6 +194,25 @@ SF32LB55x 提供 QFN 与 BGA 封装。由于 GPIO 数量、合封存储、显示
 3. **进行硬件设计与评审。** 在发布原理图或布局前，请参考 μForge 的[硬件设计指南](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md)，以及其中的[原理图核对表](../../hardware/chip-guides/SF32LB55x_schematic_checklist.md)和 PCB 布局核对表。
 4. **核对权威来源。** 针对准确的可订购型号和封装，核对思澈科技（SiFli）的[数据手册][数据手册]、[用户手册][用户手册]、[原始硬件设计指南][原始设计指南（wiki.sifli.com）]和[硬件应用说明源文件][硬件应用说明（GitHub 源文件）]。
 
+<!-- uf-faq:start -->
+## 常见问题 { #frequently-asked-questions }
+
+**SF32LB55x 的主要规格是什么？**
+SF32LB55x 由应用 CPU（Cortex-M33 @240 MHz）与低功耗内核（Cortex-M33 @48 MHz，用户可编程内核）组成，内置 1,312 KB SRAM，支持仅支持低功耗蓝牙（BLE）。图形：ePicasso 1.0。封装：QFN68 / BGA145 / BGA169（7 × 7 mm (QFN68)）。USB 2.0 FS。以上为系列级参数，具体以所选型号的数据手册为准。
+
+**SF32LB55x 支持哪些显示接口？**
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI。具体支持情况因型号和封装而异。
+
+**SF32LB55x 的封装内存储器有多大？**
+按型号不同，封装内 PSRAM 最多 16 MB + 2 MB，封装内 NOR Flash 最多 8 MB。
+
+**SF32LB55x 需要什么供电电压？**
+按变体不同为 1.71–3.63 V，请以数据手册确认具体范围。
+
+**如何开始基于 SF32LB55x 的硬件设计？**
+请先阅读 [SF32LB55x 硬件设计指南](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求，并在投板前使用原理图与布局检查清单。
+<!-- uf-faq:end -->
+
 ## 相关产品 { #related-products }
 
 ### 开发套件 { #development-kits }
@@ -203,6 +222,3 @@ SF32LB55x 提供 QFN 与 BGA 封装。由于 GPIO 数量、合封存储、显示
 ### 参考产品 { #reference-products }
 
 典型终端产品包括智能手表、运动手环、健康监测可穿戴设备、智能门锁、联网配件、智能家居控制器，以及紧凑型图形化 HMI。
-
-!!! note "自动生成内容"
-    本页是在没有现成专用源文档的情况下编写的。依赖其中的技术结论前，请先对照思澈科技（SiFli）的官方文档核实。

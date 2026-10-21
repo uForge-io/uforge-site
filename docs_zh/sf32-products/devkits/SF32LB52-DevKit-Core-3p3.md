@@ -10,9 +10,9 @@ tags:
 
 ## 概览 { #overview }
 
-SF32LB52-DevKit-Core-3p3 是一款用于直接评估 SF32LB52x 芯片的紧凑型开发板，可通过板上跳线选择为 MCU 提供 1.8 V 或 3.3 V 电源。MCU 的主要信号通过板边排针引出；板边采用金属化半孔，排针可免焊插接使用。开发板适合需要直接访问 GPIO、串行总线、显示信号、音频、ADC、PWM 和各路电源轨的工程师。
+SF32LB52-DevKit-Core-3p3 是一款用于直接评估 SF32LB52x 芯片的紧凑型开发板，可通过板上跳线为 MCU 选择 1.8 V 或 3.3 V 供电。MCU 的主要信号通过板边排针引出；板边采用金属化半孔，排针可免焊插接使用。开发板适合需要直接访问 GPIO、串行总线、显示信号、音频、ADC、PWM 和各路电源轨的工程师。
 
-板卡尺寸为 30.88 mm × 68 mm，适合紧凑型台架原型验证，同时提供一套适用于 SF32LB52x 硬件与固件启动调试的实用接口。
+板卡尺寸为 30.88 mm × 68 mm，尺寸小巧，适合台架原型验证，同时为 SF32LB52x 硬件与固件的启动调试提供实用接口。
 
 ![SF32LB52-DevKit-Core-3p3 正面图](assets/sf32lb52x/Core-3p3_Front_look.png){ width="50%" loading="lazy" }
 <div align="center"><em>SF32LB52-DevKit-Core-3p3 — 正面图</em></div>
@@ -38,7 +38,7 @@ SF32LB52-DevKit-Core-3p3 是一款用于直接评估 SF32LB52x 芯片的紧凑�
 
 对于紧凑型蓝牙（Bluetooth）产品、控制类产品和简单 HMI 应用，建议使用仅带 NOR 的变体。若应用需要更大的图形资源、帧缓冲、文件系统或应用存储空间，则建议使用带 PSRAM 和外部 NOR 的变体。
 
-**来源记载存在差异，选型前请核对板卡标识：** 思澈科技（SiFli）的[Core-3p3 详细开发板指南](https://wiki.sifli.com/board/sf32lb52x/SF32LB52-DevKit-Core-3p3.html)将 SF32LB52JUD6 配置称为 `R16N16 V1.0.0`（当前版本），而[开发板型号指南](https://wiki.sifli.com/board/devkit_guide.html)将同一 JUD6、16 MB PSRAM、16 MB NOR 配置列为 `N16R16`。详细指南的版本信息行写 EUB6 合封 8 MB PSRAM，但其特性列表和板型表均写 4 MB；思澈科技（SiFli）的[SF32LB52 系列芯片概述](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB52/SF32LB52-Overview-B3.md)也注明 EUB6 合封 4 MB，因此本文采用 4 MB。需要确认具体板卡后缀时，请核对实物丝印及对应原理图/BOM。
+**来源记载存在差异，选型前请核对板卡标识：** 思澈科技（SiFli）的[Core-3p3 详细开发板指南](https://wiki.sifli.com/board/sf32lb52x/SF32LB52-DevKit-Core-3p3.html)将 SF32LB52JUD6 配置称为 `R16N16 V1.0.0`（当前版本），而[开发板型号指南](https://wiki.sifli.com/board/devkit_guide.html)将同一 JUD6、16 MB PSRAM、16 MB NOR 配置列为 `N16R16`。详细指南的版本信息行写 EUB6 合封 8 MB PSRAM，但其特性列表和变体表均写 4 MB；思澈科技（SiFli）的[SF32LB52 系列芯片概述](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB52/SF32LB52-Overview-B3.md)也注明 EUB6 为 4 MB，因此本文采用 4 MB。需要确认具体板卡后缀时，请核对实物丝印及对应原理图/BOM。
 
 ## 开发板亮点 { #board-highlights }
 
@@ -77,11 +77,11 @@ SF32LB52-DevKit-Core-3p3 是一款用于直接评估 SF32LB52x 芯片的紧凑�
 - USB 未连接时，通过板边排针的 5 V 和 GND 引脚输入电源
 - USB 未连接时，通过板边排针的 3.3 V 和 GND 引脚输入电源（可使用外部台式电源）
 
-板上另有一个跳线用于选择 MCU 的供电电压（1.8 V 或 3.3 V）。该设置与板边排针上的 1.8 V、3.3 V 电源引脚不同。调整跳线或为外部电路供电前，请根据对应板卡版本核对引脚图和原理图。
+板上另有一个跳线用于选择 MCU 的供电电压（1.8 V 或 3.3 V）。该设置与板边排针上的 1.8 V、3.3 V 电源引脚相互独立。调整跳线或为外部电路供电前，请根据对应板卡版本核对引脚图和原理图。
 
 测量单路电源轨电流时，请在板上相应测量点将电流表串接到待测电源轨中。
 
-当连接 USB Type-C 时，开发板还可通过指定排针输出 3.3 V、1.8 V 和 5 V。连接外部电路前，请先确认所需的电源方向。
+当连接 USB Type-C 时，开发板还可通过部分排针输出 3.3 V、1.8 V 和 5 V。连接外部电路前，请先确认所需的电源方向。
 
 开发板带有电源开关。CH340N 的 RTS# 信号可控制开发板的使能状态，使主机工具能够在下载或调试时复位 MCU。
 
@@ -141,13 +141,13 @@ SF32LB52-DevKit-Core-3p3 是一款用于直接评估 SF32LB52x 芯片的紧凑�
 
 </div>
 
-思澈科技（SiFli）的中文开发板指南称，1.85 英寸 AMOLED 模组可通过 16 针 FPC 排线直接连接；英文指南则写为 FPC-22p，配图文件名也为 `FPC-22P`。开发板上的连接器本身是 16 针。两份资料未能解释这一差异；连接前请对照显示模组核实排线针数和针脚定义。
+思澈科技（SiFli）的中文开发板指南称，1.85 英寸 AMOLED 模组可通过 16 针 FPC 排线直接连接；英文指南则写为 FPC-22p，配图文件名也为 `FPC-22P`。开发板上的连接器本身是 16 针。两份资料均未消除这一矛盾；连接前请对照显示模组核实排线针数和针脚定义。
 
 ## 排针信号摘要 { #header-signal-summary }
 
 开发板引出了两组 24 针板边排针。第一侧主要覆盖通用 GPIO、SPI2、USB、GPADC 和电源；第二侧主要覆盖 LCD、触摸、调试 UART、音频和电源。
 
-![SF32LB52-DevKit-Core-3p3 管脚定义](assets/sf32lb52x/SF32LB52-DevKit-Core-3p3-T-pinout.svg){ loading="lazy" }
+![SF32LB52-DevKit-Core-3p3 引脚图](assets/sf32lb52x/SF32LB52-DevKit-Core-3p3-T-pinout.svg){ loading="lazy" }
 <div align="center"><em>SF32LB52-DevKit-Core-3p3 引脚图</em></div>
 
 ### 通用 I/O 排针 { #general-io-header }
@@ -205,20 +205,20 @@ SF32LB52-DevKit-Core-3p3 是一款用于直接评估 SF32LB52x 芯片的紧凑�
 
 </div>
 
-在将这些引脚用于 SDIO 或其他扩展功能之前，请先确认它们是否已被已安装的 Flash 占用。
+在将这些引脚用于 SDIO 或其他扩展功能之前，请先确认它们是否已被板上贴装的 Flash 占用。
 
 ## 音频扩展 { #audio-expansion }
 
-开发板引出了模拟麦克风偏置和输入，以及差分 DAC 输出。麦克风和用于驱动扬声器的 Class-AB/D 功放均需外接；请根据目标音频路径选择并验证这些器件。
+开发板引出了模拟麦克风偏置和输入，以及差分 DAC 输出。麦克风和用于驱动扬声器的 Class-AB/D 功放均需外接；请根据目标音频路径选择这些器件。
 
 ## SDK 构建目标 { #sdk-build-targets }
 
-使用 SiFli-SDK 编译时，可通过 `scons --board=<board_name>` 指定以下精确的板级目标名：
+使用 SiFli-SDK 编译时，可通过 `scons --board=<board_name>` 指定以下板级目标名（须与名称完全一致）：
 
 - `sf32lb52-core_n4`
 - `sf32lb52-core_n16r16`
 
-这些名称是 SDK 构建目标标识，不一定等同于开发板或模组上的产品型号。思澈科技（SiFli）的[开发板支持索引](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)与 SDK 主分支[`build_config_gcc.yaml`](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml)列出的目标可能不同；请按当前使用的 SDK 版本核实。
+这些名称是 SDK 构建目标标识，不一定等同于开发板或模组上的产品型号。思澈科技（SiFli）的[开发板支持索引](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/supported_boards/index.html)与 SDK 的 [`build_config_gcc.yaml`](https://github.com/OpenSiFli/SiFli-SDK/blob/main/build_config_gcc.yaml)列出的目标可能不同；请按当前使用的 SDK 版本核实。
 
 ## 相关文档 { #related-documents }
 

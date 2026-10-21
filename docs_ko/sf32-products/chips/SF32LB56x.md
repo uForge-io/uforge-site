@@ -177,6 +177,25 @@ SF32LB56x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 3. **하드웨어 설계 및 검토.** 회로도 또는 레이아웃을 릴리스하기 전에 로컬 [SF32LB56x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md)와 그 [회로도](../../hardware/chip-guides/SF32LB56x_schematic_checklist.md) 및 PCB 레이아웃 체크리스트를 사용하십시오. U/V 패키지와 디스플레이 인터페이스 선택은 선택한 부품에 맞추십시오.
 4. **주요 정보 출처 확인.** 실제 주문할 부품과 패키지를 SiFli [데이터시트][Datasheet], [사용자 매뉴얼][User Manual], 해당하는 [U 하드웨어 설계 가이드][Hardware Design Guide (U, wiki.sifli.com)] 또는 [V 하드웨어 설계 가이드][Hardware Design Guide (V, wiki.sifli.com)], 그리고 대응하는 [U 하드웨어 애플리케이션 소스][Hardware Application Source (U)] 또는 [V 하드웨어 애플리케이션 소스][Hardware Application Source (V)]와 대조하여 확인하십시오.
 
+<!-- uf-faq:start -->
+## 자주 묻는 질문 { #frequently-asked-questions }
+
+**SF32LB56x의 주요 사양은 무엇인가요?**
+SF32LB56x는 애플리케이션 CPU(Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @48/96 MHz, 사용자 프로그래밍 가능 코어), 내장 SRAM 960 KB, 듀얼 모드 Bluetooth(클래식 + BLE)를 갖췄습니다. 그래픽: ePicasso 2.0. 패키지: QFN68 / BGA175(7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)). USB 2.0 FS. 제품군 수준의 값이므로 정확한 부품 번호의 데이터시트를 확인하세요.
+
+**SF32LB56x는 어떤 디스플레이 인터페이스를 지원하나요?**
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. 지원 여부는 부품 번호와 패키지에 따라 다릅니다.
+
+**SF32LB56x는 패키지 내 메모리를 얼마나 제공하나요?**
+부품 번호에 따라 패키지 내 PSRAM 최대 16 MB, 패키지 내 NOR Flash 최대 1 MB를 제공합니다.
+
+**SF32LB56x에는 어떤 공급 전압이 필요한가요?**
+변형에 따라 1.71–3.63 V. 정확한 범위는 데이터시트에서 확인하세요.
+
+**SF32LB56x로 하드웨어 설계를 시작하려면 어떻게 하나요?**
+먼저 [SF32LB56x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하세요.
+<!-- uf-faq:end -->
+
 ## 관련 제품
 
 ### 모듈
@@ -190,6 +209,3 @@ SF32LB56x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 ### 레퍼런스 제품
 
 일반적인 SF32LB56x 최종 제품으로는 고급 스마트워치, 연결형 HMI 패널, 헬스케어 디바이스, 산업용 핸드헬드, 휴대용 계측기, 더 풍부한 eBike 또는 eScooter 디스플레이가 있습니다.
-
-!!! note "자동 생성 콘텐츠"
-    이 페이지는 기존 원본 문서 없이 정리하여 작성되었습니다. 기술적 내용을 사용하기 전에 SiFli 공식 문서와 대조하여 확인하십시오.

@@ -1,6 +1,6 @@
 ---
 icon: lucide/microchip
-description: "SF32LB56x: fortschrittliche Ultra-Low-Power-Dual-Mode-Bluetooth-MCU-Familie für Produkte mit anspruchsvolleren Displays, integriertem Audio, externem Speicher und leistungsfähigerer Always-on-Verarbeitung."
+description: "SF32LB56x: fortschrittliche Ultra-Low-Power-Dual-Mode-Bluetooth-MCU-Familie für anspruchsvollere Displays, integriertes Audio, externen Speicher und Always-on-Verarbeitung."
 tags:
     - Hardware
     - Chip
@@ -177,6 +177,25 @@ Mit dieser Abfolge machen Sie aus einer SF32LB56x-Vorauswahl ein validiertes Des
 3. **Hardware entwerfen und prüfen.** Nutzen Sie den lokalen [Hardware-Design-Leitfaden](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) — einschließlich seiner Checklisten für [Schaltplan](../../hardware/chip-guides/SF32LB56x_schematic_checklist.md) und PCB-Layout —, bevor Sie Schaltplan oder Layout freigeben. Halten Sie die Wahl von U/V-Gehäuse und Display-Schnittstelle konsistent mit dem gewählten Bauteil.
 4. **Maßgebliche Quelle prüfen.** Bestätigen Sie das genaue bestellbare Bauteil und Gehäuse anhand von SiFli-[Datenblatt][Datasheet], [Benutzerhandbuch][User Manual], dem zutreffenden [U-Hardware-Design-Leitfaden][Hardware Design Guide (U, wiki.sifli.com)] bzw. [V-Hardware-Design-Leitfaden][Hardware Design Guide (V, wiki.sifli.com)] und der entsprechenden [Quelle des U-Hardware-Anwendungshinweises][Hardware Application Source (U)] bzw. [Quelle des V-Hardware-Anwendungshinweises][Hardware Application Source (V)].
 
+<!-- uf-faq:start -->
+## Häufig gestellte Fragen { #frequently-asked-questions }
+
+**Was sind die wichtigsten Spezifikationen des SF32LB56x?**
+Der SF32LB56x kombiniert eine Anwendungs-CPU (Cortex-M33 @240 MHz) mit einem Low-Power-Kern (Cortex-M33 @48/96 MHz, mit einem vom Anwender programmierbaren Kern), 960 KB internem SRAM und Dual-Mode-Bluetooth (BT Classic + BLE). Grafik: ePicasso 2.0. Gehäuse: QFN68 / BGA175 (7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)). USB 2.0 FS. Werte auf Familienebene; prüfen Sie das Datenblatt der genauen Typnummer.
+
+**Welche Display-Schnittstellen unterstützt der SF32LB56x?**
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. Die Verfügbarkeit hängt von Typnummer und Gehäuse ab.
+
+**Wie viel Speicher im Gehäuse bietet der SF32LB56x?**
+Bis zu 16 MB PSRAM und bis zu 1 MB NOR-Flash im Gehäuse, abhängig von der Typnummer.
+
+**Welche Versorgungsspannung benötigt der SF32LB56x?**
+1.71–3.63 V, je nach Variante. Den genauen Bereich bestätigt das Datenblatt.
+
+**Wo beginne ich ein Hardware-Design mit dem SF32LB56x?**
+Beginnen Sie mit dem [Hardware-Design-Leitfaden für den SF32LB56x](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) zu Schaltplan, Stromversorgung, Takt/RF und PCB-Layout und nutzen Sie vor der Freigabe die Checklisten für Schaltplan und Layout.
+<!-- uf-faq:end -->
+
 ## Verwandte Produkte { #related-products }
 
 ### Modul { #module }
@@ -190,6 +209,3 @@ Mit dieser Abfolge machen Sie aus einer SF32LB56x-Vorauswahl ein validiertes Des
 ### Referenzprodukte { #reference-products }
 
 Typische SF32LB56x-Endprodukte sind fortschrittliche Smartwatches, vernetzte HMI-Panels, Gesundheitsgeräte, industrielle Handgeräte, tragbare Messinstrumente sowie anspruchsvollere Displays für E-Bikes oder E-Scooter.
-
-!!! note "Automatisch generierter Inhalt"
-    Diese Seite wurde ohne vorhandenes Quelldokument zusammengestellt bzw. entworfen. Prüfen Sie technische Aussagen anhand der offiziellen SiFli-Dokumentation, bevor Sie sich darauf verlassen.

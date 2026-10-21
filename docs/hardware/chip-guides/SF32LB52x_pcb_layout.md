@@ -2,7 +2,7 @@
 icon: lucide/layers
 hide:
     - navigation
-description: "PCB layout guidelines for the SF32LB52x MCU: footprint, stack-up, fanout, clock/RF/audio/USB/SDIO routing, DC-DC and power routing, EMI/ESD, and other layout considerations."
+description: "PCB layout guidelines for the SF32LB52x MCU: footprint, stack-up, fanout, clock/RF/audio/USB/SDIO routing, DC-DC and power routing, and EMI/ESD."
 tags:
     - Hardware
     - Chip

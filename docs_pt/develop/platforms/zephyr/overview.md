@@ -1,6 +1,6 @@
 ---
 icon: lucide/layers
-description: "Visão geral do suporte downstream do OpenSiFli para Zephyr no SF32LB52 DevKit LCD: identificação da placa, limites de configuração, cobertura de drivers e riscos de integração."
+description: "Suporte Zephyr downstream da OpenSiFli para a SF32LB52 DevKit LCD: identificação da placa, limites de configuração, cobertura de drivers e riscos de integração."
 tags:
     - Desenvolvimento
     - Zephyr

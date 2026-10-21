@@ -1,6 +1,6 @@
 ---
 icon: lucide/message-circle-more
-description: "Ruta completa de desarrollo de producto para el asistente de voz Xiaozhi de código abierto en SF32LB52: puesta en marcha de la placa, configuración de Bluetooth PAN, interacción de voz en la nube, personalización, OTA, validación y traspaso a producción."
+description: "Ruta de producto del asistente de voz Xiaozhi en SF32LB52: placa, Bluetooth PAN, voz en la nube, personalización, OTA, validación y traspaso a producción."
 tags:
     - Proyectos
     - IA

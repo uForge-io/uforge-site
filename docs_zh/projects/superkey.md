@@ -14,7 +14,7 @@ tags:
 
 [SiFliSparks/SuperKey](https://github.com/SiFliSparks/SuperKey) 是一套基于 SF32LB52 的带屏多功能宏键盘参考实现。其开源固件运行于 RT-Thread 和 LVGL v9，驱动三块 128 × 128 GC9107 LCD、三颗 RGB LED、四个物理按键、旋转编码器和 SHT30 温湿度传感器，并以 USB HID/CDC 复合设备连接电脑。
 
-SuperKey 的价值不只在于“多几个快捷键”。这套可运行的参考实现集成了以下功能：
+SuperKey 不只是一个快捷键小键盘。这套可运行的参考实现把以下产品路径集成在了一起：
 
 - 通过 USB HID 输出键盘和媒体控制事件；
 - 通过 USB CDC 或 1 Mbps UART 接收电脑性能监控、天气、配置和电源状态数据；
@@ -29,7 +29,7 @@ SuperKey 的价值不只在于“多几个快捷键”。这套可运行的参�
 
 SuperKey 同时需要图形界面、多个显示器、USB 复合设备、按键和编码器输入、传感器、RGB 灯效、文件系统以及可选音频。SF32LB52 将这些实时任务保留在 MCU 侧，让设备即使没有运行上位机，也能启动界面并提供基本 HID 功能；上位机则负责电脑性能监控和网络数据采集等更适合桌面操作系统完成的工作。
 
-这种分工很适合桌面控制器、工作流键盘、状态面板和小型 HMI，但也带来明确代价：高级数据显示依赖上位机、驱动和外部 API，固件与上位机版本必须配套，USB 断连、电脑睡眠和配置损坏都需要单独验证。
+这种分工很适合桌面控制器、工作流键盘、状态面板和小型 HMI，但也带来明确的依赖关系：高级数据显示需要上位机、驱动和外部 API；固件与上位机版本必须保持兼容；USB 断连、电脑睡眠和配置损坏都需要独立的恢复测试。
 
 ## 成果、范围与进入条件 { #outcome-scope-and-entry-criteria }
 
@@ -53,7 +53,7 @@ SuperKey 同时需要图形界面、多个显示器、USB 复合设备、按键�
 | 范围 | 已知基线 | 进入适配前必须保留的证据 |
 |:-----|:---------|:-------------------------|
 | 硬件 | `sf32-keyboard` 开源硬件与 `sf32lb52-superkey` 板级目标 | PCB/装配版本、LCD 和输入器件、供电与 USB 连接记录 |
-| 固件 | SuperKey 仓库、SiFli-SDK 子模组、RT-Thread、LVGL v9、CherryUSB | 固件 commit、SDK commit、构建日志、镜像和下载日志 |
+| 固件 | SuperKey 仓库、SiFli-SDK 子模块、RT-Thread、LVGL v9、CherryUSB | 固件 commit、SDK commit、构建日志、镜像和下载日志 |
 | 上位机 | SuperKeyHub 与匹配的固件协议 | 上位机版本、操作系统、端口、API 配置和连接日志 |
 | 核心行为 | HID、CDC、三联屏、编码器、按键、传感器和电源模式 | 冷启动、数据刷新、输入、断连与睡眠恢复记录 |
 | 定制 | 一次只修改一种 UI、按键、灯效或数据字段 | 评审后的改动、回滚镜像和完整回归结果 |
@@ -70,7 +70,7 @@ SuperKey 同时需要图形界面、多个显示器、USB 复合设备、按键�
 | 器件或设备 | 必要规格 | 用途 | 状态 | 获取方式或来源 | 兼容性与替换说明 |
 |:-----------|:---------|:-----|:-----|:---------------|:-----------------|
 | SuperKey 开源硬件组件 | SF32LB52 目标配置，包含项目所述的三块 128 × 128 GC9107 LCD、三个 RGB LED、四个按键、旋转编码器、SHT30 和 USB 连接 | 宏键盘控制、显示、输入、传感和 USB HID/CDC | 必需 | [开放的 `sf32-keyboard` 设计](https://oshwhub.com/sifli/sf32-keyboard)；[SuperKey 代码仓库](https://github.com/SiFliSparks/SuperKey) | 设计文件不等于可购买的组装板规格；须记录 PCB 和装配版本 |
-| 主机电脑与 USB 数据连接 | Windows 10/11 是主要文档化的完整路径；使用 USB 数据连接 | 运行 SuperKeyHub、提供 HID/CDC 主机并支持下载和恢复 | 必需 | [SuperKey 文档](https://sparks.sifli.com/projects/superkey/) | SuperKeyHub 仓库声明支持 Windows/macOS；应按所选主机验证 CDC、DFU、下载和恢复流程 |
+| 主机电脑与 USB 数据连接 | Windows 10/11 是文档记载的主要路径；支持数据传输的 USB 连接 | 运行 SuperKeyHub、提供 HID/CDC 主机并支持下载和恢复 | 必需 | [SuperKey 文档](https://sparks.sifli.com/projects/superkey/) | SuperKeyHub 仓库声明支持 Windows/macOS；应按所选主机验证 CDC、DFU、下载和恢复流程 |
 | QWeather 账户/API 配置 | API Key、API Host 和城市配置 | 可选的天气显示功能 | 可选 | [QWeather](https://www.qweather.com/) | 不要将凭证提交到源码仓库；确认服务条款和可用性 |
 
 </div>
@@ -101,7 +101,7 @@ SuperKey 同时需要图形界面、多个显示器、USB 复合设备、按键�
 | 固件 | SuperKey v1.4.2，或经团队验证的 commit | 固件与上位机协议必须配套 |
 | 上位机 | 经与固件 v1.4.2 验证的 SuperKeyHub 发布版或 commit | 引用的发布材料未确认固定配对；应在所选主机上验证 CDC 数据、配置和 DFU |
 | 构建目标 | `sf32lb52-superkey`，板目录由 `app/boards` 提供 | 不是通用 SF32LB52 开发板目标 |
-| 通信 | 优先验证 USB HID + CDC；如使用外置串口，再验证 1 Mbps UART | “USB 已枚举”不等于 HID 与 CDC 两个接口都可用 |
+| 通信 | 优先验证 USB HID + CDC；如使用 1 Mbps UART，再单独验证 | “USB 已枚举”不等于 HID 与 CDC 两个接口都可用 |
 | 升级 | 上位机触发的 CDC DFU，并保留有线烧录/恢复路径 | 未完成中断、版本不匹配和恢复测试前，不应视为现场固件升级方案 |
 
 </div>
@@ -117,7 +117,7 @@ cd ../app/project
 scons --board=sf32lb52-superkey --board_search_path="../boards" -j8
 ```
 
-Windows 应使用 SiFli-SDK 对应的 PowerShell 安装和环境脚本。并行度可以调整，但板名、板搜索路径和子模组版本必须进入构建记录。
+Windows 应使用 SiFli-SDK 对应的 PowerShell 安装和环境脚本。并行度可以调整，但板名、板搜索路径和子模块版本必须进入构建记录。
 
 ## 项目阶段与决策要点 { #delivery-map }
 
@@ -127,7 +127,7 @@ Windows 应使用 SiFli-SDK 对应的 PowerShell 安装和环境脚本。并行�
 
 | 阶段 | 所支持的决定 | 必须输出 |
 |:-----|:-------------|:---------|
-| 1. 未修改基线 | 开源硬件、固件和上位机能否按记录协同工作？ | 版本锁定且已验证可正常工作的配置与测试记录 |
+| 1. 未修改基线 | 开源硬件、固件和上位机能否按记录协同工作？ | 一次版本锁定的已验证正常会话 |
 | 2. 通信与恢复 | USB、串口、睡眠、断连和配置故障是否可诊断并恢复？ | 故障注入与恢复记录 |
 | 3. 源码构建复现 | 团队能否从干净检出重建相同镜像？ | 构建环境、镜像、烧录记录和复现结果 |
 | 4. 可控适配 | 能否修改一项产品行为而不破坏原基线？ | 受控改动、回滚路径和回归证据 |
@@ -158,7 +158,7 @@ flowchart LR
 
 1. 按上游装配说明核对 LCD 排线方向、按键开关、编码器、外壳和 USB 接口，记录 PCB 与固件版本。
 2. 安装匹配的 SuperKeyHub，先验证设备枚举，再分别验证 HID 和 CDC 接口。
-3. 配置天气 API、端口和 1 Mbps 波特率；记录未运行上位机时的设备行为，再连接并启动数据下发。
+3. 配置天气凭证、端口和 1 Mbps 串口；记录未运行上位机时的设备行为，再连接并启动数据下发。
 4. 验证三屏页面切换、按键映射、媒体控制、编码器、SHT30 数据、灯效和一个完整的数据刷新周期。
 5. 冷启动并重复一次，保存界面照片、上位机日志、设备日志和版本查询结果。
 
@@ -176,7 +176,7 @@ flowchart LR
 
 | 测试 | 方法 | 通过证据 |
 |:-----|:-----|:---------|
-| 上位机缺失 | 关闭 SuperKeyHub 后重启设备 | 本地 UI 和 HID 仍可用；依赖上位机的数据保持为可识别的未更新状态 |
+| 上位机缺失 | 关闭 SuperKeyHub 后重启设备 | 本地 UI 和 HID 仍可用；依赖上位机的数据明确显示为过期或不可用 |
 | CDC 断连 | 数据下发时拔插 USB 或切换端口 | 设备不死机；重新连接后版本查询和数据下发恢复 |
 | 电脑睡眠 | 启用 `power_mode sleep/normal`，执行一次主机睡眠与唤醒 | LCD、LED、背光和传感器按预期关闭/恢复，后续数据可继续刷新 |
 | 版本不匹配 | 使用受控环境验证错误的上位机/固件组合 | 明确拒绝或显示可诊断错误，不执行不兼容升级 |
@@ -222,10 +222,10 @@ flowchart LR
 
 进入定制硬件或小批量试制前，团队必须回答：
 
-- 产品是否继续依赖 SuperKeyHub、系统管理员权限和第三方天气服务？这些依赖由谁维护？
+- 产品是否继续依赖 SuperKeyHub、系统管理员权限和第三方天气服务？这些依赖由谁负责？
 - 固件、上位机和通信协议如何版本化，错误组合如何阻止？
-- 目标电脑、USB 集线器、线缆、睡眠策略和安全软件组合是否经过覆盖测试？
-- 三屏刷新、USB 数据、灯效、传感器和可选音频同时运行时的内存、温升和电流是多少？
+- 目标电脑、USB 集线器、线缆、睡眠策略和安全软件组合分别测试过哪些？
+- 三屏刷新、USB 数据、灯效、传感器和可选音频同时运行时的内存占用、温度和电流是多少？
 - 配置、按键映射和升级状态在断电或存储损坏后如何恢复？
 - 开源 PCB、外壳、字体、图标、音乐和第三方 API 的许可是否符合产品分发方式？
 
@@ -233,7 +233,7 @@ flowchart LR
 
 ## 产品设计阶段交接 { #handoff-to-product-design }
 
-交接资料应包含 SF32 型号与存储需求、USB HID/CDC 描述符、三屏与背光连接、输入和传感器接口、电源/睡眠策略、文件系统与升级分区、上位机协议、生产测试点以及已验证恢复路径。芯片和硬件选择可从 [SF32LB52x](../sf32-products/chips/SF32LB52x.md) 与 [SF32LB52x 硬件设计指南](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)继续；构建和下载流程参见 [SiFli-SDK 构建、烧录与监视](../develop/platforms/sifli-sdk/build-flash-monitor.md)，量产评审参见[面向量产的设计](../hardware/design-for-production.md)。
+交接资料应包含 SF32 与存储器选型、USB HID/CDC 描述符、三屏与背光连接、输入和传感器接口、电源/睡眠策略、文件系统与升级分区、上位机协议、生产测试点以及已验证恢复路径。芯片和硬件选择可从 [SF32LB52x](../sf32-products/chips/SF32LB52x.md) 与 [SF32LB52x 硬件设计指南](../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)继续；构建和下载流程参见 [SiFli-SDK 构建、烧录与监视](../develop/platforms/sifli-sdk/build-flash-monitor.md)，量产评审参见[面向量产的设计](../hardware/design-for-production.md)。
 
 ## 权威来源 { #authoritative-sources }
 - [SiFliSparks/SuperKey 固件仓库](https://github.com/SiFliSparks/SuperKey)

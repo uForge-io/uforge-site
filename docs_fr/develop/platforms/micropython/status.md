@@ -1,6 +1,6 @@
 ---
 icon: lucide/terminal-square
-description: "État actuel de MicroPython sur SF32 : aucun portage officiel trouvé pour l'instant, ainsi que les conditions à remplir avant d'en faire une voie de développement prise en charge."
+description: "État de MicroPython sur SF32 : aucun portage officiel pour l'instant, et les critères d'acceptation à réunir avant d'en faire une voie de développement prise en charge."
 tags:
     - Développement
     - MicroPython

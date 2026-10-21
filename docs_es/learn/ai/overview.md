@@ -1,7 +1,7 @@
 ---
 icon: lucide/brain-circuit
 title: "Resumen de IA"
-description: "Guía práctica para ejecutar IA en dispositivos SF32: selección del dispositivo, uso del HAL NNACC, dimensionamiento de memoria y planificación de inferencias dentro del presupuesto energético."
+description: "Guía para ejecutar IA en dispositivos SF32: elección del dispositivo, HAL NNACC, dimensionamiento de memoria y planificación de inferencias según el presupuesto energético."
 tags:
   - IA
 ---

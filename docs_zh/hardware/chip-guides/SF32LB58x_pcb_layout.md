@@ -17,7 +17,7 @@ tags:
 
 ### 6.1. PCB 封装设计 { #61-package-footprint-design }
 
-SF32LB58x 系列采用 BGA256 封装，尺寸为 8.5 mm × 6.5 mm × 0.94 mm，焊球间距为 0.4 mm，标称焊球直径为 0.25 mm。完整的封装规格数据请参阅官方数据手册。
+SF32LB58x 系列采用 BGA256 封装，尺寸为 8.5 mm × 6.5 mm × 0.94 mm，焊球间距为 0.4 mm，标称焊球直径为 0.25 mm。完整的封装验证数据请参阅官方数据手册。
 
 !!! warning "源文件中的封装高度不一致"
     思澈科技（SiFli）指南正文给出的封装高度为 0.94 mm，而 BGA256 封装图中 A 尺寸的标称值为 0.91 mm，范围为 0.84–1.04 mm。两处源资料给出的数值不一致。如果封装高度会影响机械间隙或外壳配合，不要自行选定其中一个数值；请向思澈科技（SiFli）确认，并以确认后的封装规格为准。
@@ -95,9 +95,9 @@ BGA 前两排焊球从表层扇出，其余焊球通过过孔扇出至内层。
 
 晶体应放置在屏蔽罩内，距 PCB 板边应大于 1 mm，并尽量远离 PA、充电电路和 PMU 等发热器件；建议间距大于 5 mm，以免热影响造成晶体频率偏移。晶体禁布区与其他金属或器件之间的间距应大于 0.25 mm。
 
-48 MHz 晶体应在表层布线，线长控制在 3–10 mm，线宽为 0.075 mm，并进行完整的立体包地处理。走线应远离 VBAT、DC/DC 及高速信号线；晶体覆盖区域对应的顶层和相邻层均应避免布置其他走线。
+48 MHz 晶体应在表层布线，线长控制在 3–10 mm，线宽为 0.075 mm，并进行完整的立体包地处理。走线应远离 VBAT、DC/DC 及高速信号线；晶体区域下方的顶层和相邻层均不得布置其他走线。
 
-32.768 kHz 晶体应在表层布线，线长不超过 10 mm，线宽为 0.075 mm；32K_XI 与 32K_XO 的平行走线间距应至少为 0.15 mm，并进行完整的立体包地处理。晶体覆盖区域对应的顶层和相邻层均应避免布置其他走线。
+32.768 kHz 晶体应在表层布线，线长不超过 10 mm，线宽为 0.075 mm；32K_XI 与 32K_XO 的平行走线间距应至少为 0.15 mm，并进行完整的立体包地处理。晶体区域下方的顶层和相邻层均不得布置其他走线。
 
 !!! warning "晶体禁布层数请向思澈科技（SiFli）确认"
     布局指南要求在晶体区域的表层及其下方相邻层设置禁布区；核对表工作簿则要求四层 PCB 的第 1、2、3 层均设置铜箔禁布区。两份源资料对是否包含第 3 层的要求不同。不要自行推定最终的第 3 层要求，请向思澈科技（SiFli）确认。
@@ -136,13 +136,13 @@ BGA 前两排焊球从表层扇出，其余焊球通过过孔扇出至内层。
 
 射频走线应尽可能布在表层，以减少过孔和换层对射频性能的影响；线宽建议大于 10 mil，并进行完整的立体包地处理。走线应避免锐角和直角，并在两侧增加屏蔽地孔；阻抗应控制为 50 Ω。DC-DC、VBAT 以及晶振、高频时钟和 I2C/SPI/SDIO/I2S/UART 等高速数字信号不得进入射频走线区域。AVSS_RRF、AVSS_TRF、AVSS_TRF2、AVSS_VCO 和 AVSS_BB 是射频电路的接地管脚，必须可靠接地；应在这些焊盘上直接设置盲孔并连接至主地。
 
-![图 6.6-1：π 型网络以及电源电路原理图](../../sf32-products/chips/assets/58x/sf32lb58x-%CF%80-SCH.png){ width="100%" loading="lazy" }
+![图 6.6-1：π 型网络与电源电路原理图](../../sf32-products/chips/assets/58x/sf32lb58x-%CF%80-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 6.6-1：π 型网络以及电源电路原理图</em></div>
+<div align="center"><em>图 6.6-1：π 型网络与电源电路原理图</em></div>
 
-![图 6.6-2：π 型网络以及电源 PCB 布局](../../sf32-products/chips/assets/58x/sf32lb58x-%CF%80-PCB.png){ width="100%" loading="lazy" }
+![图 6.6-2：π 型网络与电源电路 PCB 布局](../../sf32-products/chips/assets/58x/sf32lb58x-%CF%80-PCB.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 6.6-2：π 型网络以及电源 PCB 布局</em></div>
+<div align="center"><em>图 6.6-2：π 型网络与电源电路 PCB 布局</em></div>
 
 ![图 6.6-3：RF 信号电路原理图](../../sf32-products/chips/assets/58x/sf32lb58x-RF-R-SCH.png){ width="100%" loading="lazy" }
 
@@ -152,13 +152,13 @@ BGA 前两排焊球从表层扇出，其余焊球通过过孔扇出至内层。
 
 <div align="center"><em>图 6.6-4：RF 信号 PCB 走线</em></div>
 
-![图 6.6-5：射频电路接地信号原理图](../../sf32-products/chips/assets/58x/sf32lb58x-RF-VSS-SCH.png){ width="100%" loading="lazy" }
+![图 6.6-5：RF 电路接地信号原理图](../../sf32-products/chips/assets/58x/sf32lb58x-RF-VSS-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 6.6-5：射频电路接地信号原理图</em></div>
+<div align="center"><em>图 6.6-5：RF 电路接地信号原理图</em></div>
 
-![图 6.6-6：射频电路接地信号 PCB 图](../../sf32-products/chips/assets/58x/sf32lb58x-RF-VSS-PCB.png){ width="100%" loading="lazy" }
+![图 6.6-6：RF 电路接地信号 PCB 图](../../sf32-products/chips/assets/58x/sf32lb58x-RF-VSS-PCB.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 6.6-6：射频电路接地信号 PCB 图</em></div>
+<div align="center"><em>图 6.6-6：RF 电路接地信号 PCB 图</em></div>
 
 ### 6.7. 音频接口走线 { #67-audio-interface-routing }
 
@@ -232,7 +232,7 @@ SF32LB58x 提供 SDIO1 和 SDIO2 两个 SDIO 接口。每个接口的所有信�
 AVDD18_DSI 去耦电容和 DSI_REXT 校准电阻应分别靠近对应管脚放置。DSI 信号应按差分对布线，并将差分阻抗控制为 100 Ω；时钟与数据应进行等长控制：单个差分对内的线长差应 ≤0.5 mm，不同差分对之间的线长差应 ≤2 mm。每对差分线都应进行立体包地处理。
 
 !!! warning "源资料中的 DSI 差分对间限值不一致"
-    布局指南规定差分对间的线长差应 ≤2 mm（差分对内应 ≤0.5 mm）；PCB 布局核对表工作簿则要求 DSI 数据差分对与时钟差分对的长度差在 200 mil（5.08 mm）以内。两份源资料的差分对间限值不一致。请区分差分对内限值，并在定版前向思澈科技（SiFli）确认适用的差分对间限值。
+    布局指南规定差分对间的线长差应 ≤2 mm（差分对内应 ≤0.5 mm）；PCB 布局核对表工作簿则要求 DSI 数据差分对与时钟差分对的长度差在 200 mil（5.08 mm）以内。两份源资料的差分对间限值不一致。请把差分对内限值单独列出，并在定版前向思澈科技（SiFli）确认适用的差分对间限值。
 
 ![图 6.10-1：DSI 信号电路图](../../sf32-products/chips/assets/58x/sf32lb58x-DSIM-SCH.png){ width="100%" loading="lazy" }
 
@@ -256,7 +256,7 @@ DC-DC 电路的功率电感和去耦电容必须靠近芯片管脚放置。BUCK_
 
 ### 6.12. 电源供电走线 { #612-power-supply-routing }
 
-PVDD1 和 PVDD2 是芯片内置 PMU 模块的电源输入引脚。对应电容必须靠近引脚放置，走线应尽量加宽，且不得小于 0.5 mm。PVSS1 和 PVSS2 是 PMU 模块的接地引脚，必须通过过孔连接至主地；不得悬空，以免影响 PMU 的整体性能。
+PVDD1 和 PVDD2 是芯片内置 PMU 模块的电源输入引脚。去耦电容必须靠近引脚放置，走线应尽量加宽，且不得小于 0.5 mm。PVSS1 和 PVSS2 是 PMU 模块的接地引脚，必须通过过孔连接至主地；不得悬空，以免影响 PMU 的整体性能。
 
 ![图 6.12-1：DC-DC 电路图](../../sf32-products/chips/assets/58x/sf32lb58x-DCDC-R-SCH.png){ width="100%" loading="lazy" }
 
@@ -284,17 +284,17 @@ GPADC 管脚的信号网络应进行完整的立体包地处理，并远离其�
 
 时钟输入/输出管脚的信号网络（例如 32 kHz 输出）也应进行完整的立体包地处理，并远离其他干扰源。
 
-![图 6.14-2：32K 时钟输出电路图](../../sf32-products/chips/assets/58x/sf32lb58x-32K-R-SCH.png){ width="100%" loading="lazy" }
+![图 6.14-2：32 kHz 时钟输出电路图](../../sf32-products/chips/assets/58x/sf32lb58x-32K-R-SCH.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 6.14-2：32K 时钟输出电路图</em></div>
+<div align="center"><em>图 6.14-2：32 kHz 时钟输出电路图</em></div>
 
 ### 6.15. 芯片地走线 { #615-chip-ground-routing }
 
 SF32LB58x 芯片中心区域下方的地网络应通过走线保持完整连通，形成足够完整的地平面，并通过盲孔或埋孔连接至主地平面。
 
-![图 6.15-1：芯片下 TOP 层地信号](../../sf32-products/chips/assets/58x/sf32lb58x-VSS-1-PCB.png){ width="100%" loading="lazy" }
+![图 6.15-1：芯片下顶层地信号](../../sf32-products/chips/assets/58x/sf32lb58x-VSS-1-PCB.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 6.15-1：芯片下 TOP 层地信号</em></div>
+<div align="center"><em>图 6.15-1：芯片下顶层地信号</em></div>
 
 ![图 6.15-2：芯片下第二层地信号](../../sf32-products/chips/assets/58x/sf32lb58x-VSS-2-PCB.png){ width="100%" loading="lazy" }
 
@@ -329,9 +329,9 @@ USB 充电线路的测试点应设在 TVS 二极管之前。电池座的 TVS 二
 
 为避免阻焊层覆盖焊盘并影响焊接可靠性，BGA 焊盘内的过孔应位于对应焊球的中心，避免偏心布置。为提高制造良率，请参考官方数据手册中的 BGA 焊球连接示意图。
 
-![图 6.17-3：BGA 打孔示意图](../../sf32-products/chips/assets/58x/sf32lb58x-BGA-VIA-PCB.png){ width="100%" loading="lazy" }
+![图 6.17-3：BGA 过孔位置参考](../../sf32-products/chips/assets/58x/sf32lb58x-BGA-VIA-PCB.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 6.17-3：BGA 打孔示意图</em></div>
+<div align="center"><em>图 6.17-3：BGA 过孔位置参考</em></div>
 
 ![图 6.17-4：BGA 焊球连接参考图一](../../sf32-products/chips/assets/58x/sf32lb58x-BGA-R1-PCB.png){ width="100%" loading="lazy" }
 

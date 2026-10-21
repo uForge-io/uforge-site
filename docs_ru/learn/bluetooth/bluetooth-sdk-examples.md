@@ -1,7 +1,7 @@
 ---
 icon: lucide/bluetooth-connected
 title: "Примеры Bluetooth SDK"
-description: "Выберите подходящий пример Bluetooth из SiFli-SDK для сервисов BLE, профилей классического Bluetooth, интеграции с телефоном, OTA, передачи данных или широковещательной передачи LE Audio."
+description: "Выбор примера Bluetooth из SiFli-SDK: сервисы BLE, профили классического Bluetooth, интеграция с телефоном, OTA, передача данных, вещание LE Audio."
 tags:
   - Bluetooth
   - Примеры

@@ -1,6 +1,6 @@
 ---
 icon: lucide/microchip
-description: "SF32LB55x: familia de MCU de gama media y consumo ultrabajo para dispositivos vestibles y productos HMI que necesitan mejores prestaciones gráficas, más SRAM y más opciones de encapsulado que las MCU Bluetooth de gama básica."
+description: "SF32LB55x: familia de MCU de consumo ultrabajo para wearables y productos HMI que necesitan más gráficos, más SRAM y más opciones de encapsulado."
 tags:
     - Hardware
     - Chip
@@ -194,6 +194,25 @@ Siga estos pasos para pasar de una preselección de SF32LB55x a un diseño valid
 3. **Diseñe y revise el hardware.** Antes de liberar el esquemático o el diseño de la placa, consulte la [guía de diseño de hardware de μForge](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) y sus listas de comprobación del [esquemático](../../hardware/chip-guides/SF32LB55x_schematic_checklist.md) y del diseño de PCB.
 4. **Verifique la fuente de referencia.** Compruebe el código de pedido y el encapsulado exactos en la [hoja de datos][Hoja de datos], el [manual de usuario][Manual de usuario], la [guía de diseño original][Guía original de diseño (wiki.sifli.com)] y la [fuente de la nota de aplicación de hardware][Nota de aplicación de hardware (fuente en GitHub)].
 
+<!-- uf-faq:start -->
+## Preguntas frecuentes { #frequently-asked-questions }
+
+**¿Cuáles son las especificaciones principales del SF32LB55x?**
+El SF32LB55x combina una CPU de aplicación (Cortex-M33 @240 MHz) con un núcleo de bajo consumo (Cortex-M33 @48 MHz, un núcleo programable por el usuario), 1,312 KB de SRAM interna y solo Bluetooth Low Energy (BLE). Gráficos: ePicasso 1.0. Encapsulado: QFN68 / BGA145 / BGA169 (7 × 7 mm (QFN68)). USB 2.0 FS. Valores de la familia; verifique la hoja de datos del número de pieza exacto.
+
+**¿Qué interfaces de pantalla admite el SF32LB55x?**
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. La disponibilidad varía según el número de pieza y el encapsulado.
+
+**¿Cuánta memoria en el encapsulado ofrece el SF32LB55x?**
+Hasta 16 MB + 2 MB de PSRAM y hasta 8 MB de Flash NOR en el encapsulado, según el número de pieza.
+
+**¿Qué tensión de alimentación necesita el SF32LB55x?**
+1.71–3.63 V, según la variante. Confirme el rango exacto en la hoja de datos.
+
+**¿Por dónde empezar un diseño de hardware con el SF32LB55x?**
+Empiece con la [guía de diseño de hardware del SF32LB55x](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) para esquemático, alimentación, reloj/RF y diseño de PCB, y use después las listas de verificación de esquemático y layout antes de liberar la placa.
+<!-- uf-faq:end -->
+
 ## Productos relacionados { #related-products }
 
 ### Placas de desarrollo { #development-kits }
@@ -203,6 +222,3 @@ Use la nota de aplicación de hardware oficial, los esquemáticos de referencia 
 ### Productos de referencia { #reference-products }
 
 Entre los productos finales habituales basados en SF32LB55x se encuentran los relojes inteligentes, las pulseras de actividad, los dispositivos vestibles de supervisión de la salud, las cerraduras inteligentes, los accesorios conectados, los controladores para el hogar inteligente y las HMI gráficas compactas.
-
-!!! note "Contenido autogenerado"
-    Esta página se ha redactado sin un documento fuente específico. Verifique las afirmaciones técnicas en la documentación oficial de SiFli antes de basarse en ellas.

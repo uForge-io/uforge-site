@@ -1,6 +1,6 @@
 ---
 icon: lucide/audio-lines
-description: "Orientações práticas sobre o Audio Server e a bufferização por DMA no SF32, com foco em reprodução e gravação sem falhas e na coexistência com Bluetooth e processamento gráfico."
+description: "Orientações práticas sobre Audio Server e bufferização por DMA no SF32 para reprodução e gravação sem falhas e coexistência com Bluetooth e gráficos."
 tags:
     - Áudio
 ---

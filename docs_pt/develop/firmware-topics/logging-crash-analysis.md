@@ -1,6 +1,6 @@
 ---
 icon: lucide/file-warning
-description: "Planeje a captura de logs e a análise de falhas no firmware SF32 para diagnosticar problemas em campo, incluindo os dados mínimos, o fluxo de análise e os níveis de log por etapa."
+description: "Planeje logs e análise de falhas no firmware SF32 para diagnosticar problemas em campo: dados mínimos, fluxo de análise de falhas e níveis de log por etapa."
 tags:
     - Desenvolvimento
     - Logs

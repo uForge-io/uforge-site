@@ -12,9 +12,9 @@ hide:
 
 ## 1. 引言 { #1-introduction }
 
-**SF32LB56-MOD** 是思澈科技（SiFli）基于 SF32LB56xV 系列芯片推出的通用低功耗 MCU 模组系列，面向蓝牙（Bluetooth）产品应用。
+**SF32LB56-MOD** 是思澈科技（SiFli）基于 SF32LB56xV 系列芯片推出的通用低功耗蓝牙（Bluetooth）MCU 模组系列。
 
-本指南以 **DS5602-SF32LB56-MOD 技术规格书 V0.3** 为依据，梳理原理图设计、PCB 布局、硬件验证和量产准备所需的模组专属信息。内容包括存储型号、89 个接口管脚、三路电源、显示/音频/存储接口、天线摆放要求、存储、搬运与装配要求，以及原理图核对表。
+本指南以 **DS5602-SF32LB56-MOD 技术规格书 V0.3** 为依据，梳理原理图设计、PCB 布局、硬件验证和量产准备所需的模组专属信息。内容包括存储型号、89 个接口管脚、三路电源、显示/音频/存储接口、天线摆放要求、搬运要求，以及原理图核对表。
 
 !!! note "来源与设计建议"
     除特别标注为集成指导或设计建议的内容外，本文所有技术参数均来自 **DS5602-SF32LB56-MOD 技术规格书 V0.3**。
@@ -210,7 +210,7 @@ BOOT_MODE 控制启动行为：高电平为下载模式，低电平为用户模�
 
 #### 5.3.1 显示 { #531-display }
 
-LCD 控制器支持 DBI 串行 SPI、Dual-SPI、Quad-SPI、8080、DPI/RGB 和 JDI。官方推荐管脚分配图给出了 LCD_DPI_24、LCD_DPI_8、LCD_QSPI、LCD_8080、E-Paper 和 Raspberry Pi 风格接口的管脚映射。
+LCD 控制器支持 DBI 串行 SPI、Dual-SPI、Quad-SPI、8080、DPI/RGB 和 JDI。规格书中的推荐管脚分配图给出了 LCD_DPI_24、LCD_DPI_8、LCD_QSPI、LCD_8080、E-Paper 和 Raspberry Pi 风格接口的管脚映射。
 
 LCD RGB 信号线需要串 33–100 Ω 电阻。RGB、SPI 显示和触摸接口走线应短而一致，TP 等外部接口需要预留 ESD 防护。
 
@@ -229,7 +229,7 @@ PB32 是 PWRKEY 输入，支持高有效 10 s 长按复位。设计中必须增�
 
 #### 5.3.4 马达和 PWM 负载 { #534-motor-and-pwm-loads }
 
-官方管脚分配图中标注 GPTIM 的管脚支持 PWM 输出。马达、背光、蜂鸣器和其他负载应使用外部驱动，不应由模组 GPIO 直接驱动电感或大电流负载。
+规格书推荐管脚分配图中标注 GPTIM 的管脚支持 PWM 输出。马达、背光、蜂鸣器和其他负载应使用外部驱动，不应由模组 GPIO 直接驱动电感或大电流负载。
 
 ### 5.4 存储与连接 { #54-storage-and-connectivity }
 
@@ -243,7 +243,7 @@ GPADC 支持 12-bit 转换、最高 4 MS/s、0–3.3 V 单端输入、-2.1 V 至
 
 #### 5.4.3 UART/I2C { #543-uarti2c }
 
-UART 支持全双工，最高 6 Mbps。I2C 支持 100 kbps、400 kbps、1 Mbps 和 3.4 Mbps 模式。许多 GPIO 可复用为 `PAxx_I2C_UART` 或 `PBxx_I2C_UART`，请在原理图冻结前确认最终复用方案。
+UART 支持全双工，最高 6 Mbps。I2C 支持标准模式 100 kbps、快速模式 400 kbps、快速增强模式 1 Mbps 和高速模式 3.4 Mbps。许多 GPIO 可复用为 `PAxx_I2C_UART` 或 `PBxx_I2C_UART`，请在原理图冻结前确认最终复用方案。
 
 管脚 6 UART4_TXD 和管脚 7 UART4_RXD 是默认打印串口，并支持程序下载和调试。PA16、PA17 可复用为 DBG_UART，用作程序下载和调试时需要串 100 Ω 电阻。
 
@@ -265,7 +265,7 @@ USB2.0 FS 支持 Host/Device 并集成 PHY。SPI 支持 SSP/SPI 与 Microwire，
 
 ### 6.1 机械尺寸与 PCB 封装图 { #61-mechanical-and-footprint }
 
-模组尺寸为 18.0 × 32.9 × 3.1 mm。PCB 应使用规格书推荐的封装，并与贴片厂确认焊盘图形、阻焊扩展、钢网开口、禁布区和器件占位边界（courtyard）。
+模组尺寸为 18.0 × 32.9 × 3.1 mm。PCB 应使用规格书推荐的封装，并与贴片厂确认焊盘图形、阻焊扩展、钢网开口、禁布区和装配用器件占位边界（courtyard）。
 
 !!! info "图 6.1-1：SF32LB56-MOD 模组尺寸图"
     见 DS5602 V0.3 图 8-1。
@@ -287,7 +287,7 @@ USB2.0 FS 支持 Host/Device 并集成 PHY。SPI 支持 SSP/SPI 与 Microwire，
 
 ### 6.3 外部天线连接器 { #63-external-antenna-connector }
 
-外部天线方案可使用与 Hirose U.FL 系列、I-PEX MHF I、Amphenol AMC 兼容的第一代外部天线连接器。
+外部天线方案中，规格书描述了一种与 Hirose U.FL 系列、I-PEX MHF I、Amphenol AMC 兼容的第一代外部天线连接器。
 
 !!! info "图 6.3-1：外部天线连接器尺寸图"
     见 DS5602 V0.3 图 8-3。

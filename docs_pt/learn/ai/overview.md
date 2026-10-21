@@ -1,7 +1,7 @@
 ---
 icon: lucide/brain-circuit
 title: "Visão geral de IA"
-description: "Como desenvolver IA embarcada em dispositivos SF32: seleção do dispositivo, uso do HAL NNACC, planejamento da memória e agendamento de inferências dentro do orçamento de energia."
+description: "Como desenvolver IA embarcada no SF32: escolha do dispositivo, uso do HAL NNACC, planejamento de memória e agendamento de inferências dentro do orçamento de energia."
 tags:
   - IA
 ---

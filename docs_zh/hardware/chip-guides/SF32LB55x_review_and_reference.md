@@ -26,10 +26,6 @@ tags:
 
 检查电气限制、封装数据、管脚复用、软件配置、器件适用性验证和制造约束时，应以最新官方资料为准。
 
-[SF32LB55x 硬件应用说明]: https://wiki.sifli.com/en/hardware/SF32LB55x-HW-Application.html
-[思澈科技（SiFli）合格供应商名录（AVL）]: ../cad-components/sifli-approved-vendor-list.md
-[思澈科技（SiFli）芯片硬件设计指南索引（Wiki）]: https://wiki.sifli.com/hardware/index.html
-
 <div class="grid cards" markdown>
 
 - :fontawesome-solid-file-lines: __[SF32LB55x 硬件应用说明]__
@@ -38,7 +34,11 @@ tags:
 
 </div>
 
-第 5.8 节的[原理图核对表](SF32LB55x_schematic_checklist.md)和第 6.4 节[PCB 布局指导](SF32LB55x_pcb_layout.md)中的检查项，逐项对应思澈科技（SiFli）官方 *SF32LB55x Schematic & PCB Checklist*（V1.0，2026-01-21），并分别与相应的设计指导配套使用。
+[原理图核对表](SF32LB55x_schematic_checklist.md)（第 5.8 节）和 [PCB 布局指导](SF32LB55x_pcb_layout.md)第 6.4 节中的检查项，逐项对应思澈科技（SiFli）官方 *SF32LB55x Schematic & PCB Checklist*（V1.0，2026-01-21），并分别与相应的设计指导配套使用。
+
+[SF32LB55x 硬件应用说明]: https://wiki.sifli.com/en/hardware/SF32LB55x-HW-Application.html
+[思澈科技（SiFli）合格供应商名录（AVL）]: ../cad-components/sifli-approved-vendor-list.md
+[思澈科技（SiFli）芯片硬件设计指南索引（Wiki）]: https://wiki.sifli.com/hardware/index.html
 
 ## 9. 附录 { #9-appendices }
 
@@ -48,14 +48,14 @@ tags:
 
 ### 9.2. 设计问答 { #91-design-qa }
 
-1. **为什么 Mode = 1 启动时，部分 GPIO 的默认状态与数据手册不同？** 下载模式会改变连接外部 Flash 的 QSPI2 和 QSPI3 相关 GPIO 状态。
+1. **为什么 Mode = 1 启动时，部分 GPIO 的默认状态与规格不同？** 下载模式会改变连接外部 Flash 的 QSPI2 和 QSPI3 相关 GPIO 状态。
 2. **为什么贴片马达会在程序下载过程中异常振动？** 可能是马达电源或 PWM 控制信号意外打开。若高电平会启动马达，使用默认上拉（PU）的 GPIO 可能导致其上电振动；思澈科技（SiFli）建议使用默认下拉（PD）的 GPIO17 或 GPIO39 输出 PWM。
 3. **为什么焊接电池时可能导致芯片死机，如何避免？** 烙铁接地不良可能引入浪涌。可在电池接口增加浪涌和静电保护，并确保烙铁可靠接地。
 4. **为什么唤醒按键不能从休眠（Hibernate）模式唤醒 MCU？** 休眠模式下只能使用 LCPU 侧 GPIO43–GPIO48 这 6 路唤醒；不能使用 HCPU 侧 GPIO0–GPIO3。
 5. **低功耗调试时，为什么 G-Sensor 或心率传感器功耗偏高或功能异常？** 传感器程序运行在 LCPU 上，因此 I2C、SPI、控制和中断信号都必须使用 LCPU 接口。若信号接到 HCPU 接口，可能导致功耗偏高或功能异常。
-6. **所有传感器信号都接到 LCPU 接口后，为什么功耗仍然偏高？** 关闭传感器电源后，如果 I2C、中断等接口的上拉电源仍开启，信号线上仍可能漏电。关闭传感器电源时，也应关闭这些接口的上拉电源。
+6. **所有传感器信号都接到 LCPU 接口后，为什么功耗仍然偏高？** 仅关闭传感器电源是不够的，如果 I2C、中断等信号的上拉电源仍开启，也要同时关闭这些上拉电源。
 7. **为什么 GPIO26 和 GPIO27 都用作输出控制时，睡眠功耗偏高？** 进入睡眠时，应使两路 GPIO 电平一致，或至少将其中一路设为无上下拉的高阻态。
-8. **SS6600 的休眠电流偏高，应如何排查？** 应使 HCPU 的 GPIO0–GPIO3 和 LCPU 的 GPIO43–GPIO48 共 10 路唤醒输入保持稳定的高电平或低电平。若 10 路唤醒输入均使用上拉，上拉电源应使用常供电的 3.3 V。
+8. **SS6600 的休眠电流偏高，应如何排查？** 应使 HCPU 的 GPIO0–GPIO3 和 LCPU 的 GPIO43–GPIO48 共 10 路唤醒输入保持稳定的高电平或低电平。若 10 路唤醒输入均使用上拉，上拉电源应使用常开的 3.3 V 电源。
 9. **电源器件的静态电流能否解释低功耗模式下功耗偏高？** 可以。静态电流（Iq）较大的 BUCK、LDO 或负载开关都会增加功耗；思澈科技（SiFli）建议选用 Iq 低于 1 µA 的器件。
 10. **静电测试后屏幕花屏，如何避免？** 应在触摸屏的 VDD、SCL、SDA、RESET、INT 信号，以及 LCD 电源和 RESET 信号上增加 ESD 器件。
 11. **熄屏显示功能异常，如何避免？** 熄屏显示主要用于功耗低于 TFT 的 AMOLED 屏。LCD_EN、LCD_RST 等控制信号建议使用 PB GPIO。若使用 PA GPIO 控制高电平使能，必须选择默认上拉（PU）的 GPIO；用 PA 侧默认下拉（PD）的 GPIO 控制时，唤醒后可能出现持续超过 10 ms 的异常熄屏。
@@ -74,13 +74,13 @@ tags:
 
 | 版本 | 日期 | 说明 |
 |:---|:---|:---|
-| 0.1 | 2026-07 | 基于思澈科技（SiFli）官方 Wiki 硬件应用说明发布 SF32LB55x 硬件设计指南初版。 |
+| 0.1 | 2026-07 | SF32LB55x 硬件设计指南初版，基于思澈科技（SiFli）官方 Wiki 硬件应用说明生成。 |
 
 </div>
 
 ### 10.1. 核对表修订历史 { #101-checklist-revision-history }
 
-[原理图核对表](SF32LB55x_schematic_checklist.md)以及 [PCB 布局指导](SF32LB55x_pcb_layout.md) 第 6.4 节中的逐项核对内容独立于设计指南进行版本管理，版本编号沿用思澈科技（SiFli）官方 *SF32LB55x Schematic & PCB Checklist* 电子表格。
+[原理图核对表](SF32LB55x_schematic_checklist.md)以及 [PCB 布局指导](SF32LB55x_pcb_layout.md)第 6.4 节中的逐项核对内容独立于设计指南进行版本管理，版本编号沿用思澈科技（SiFli）官方 *SF32LB55x Schematic & PCB Checklist* 电子表格。
 
 <div align="center"><em>表 10.1-1：核对表修订历史</em></div>
 

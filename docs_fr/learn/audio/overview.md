@@ -1,7 +1,7 @@
 ---
 icon: lucide/volume-2
 title: "Vue d'ensemble de l'audio"
-description: "Vue d'ensemble du sous-système audio local du SF32 : chemin codec et DMA, choix d'interface, stratégie de mise en tampon, middleware Audio Server, et compromis de consommation."
+description: "Sous-système audio local du SF32 : chemin codec et DMA, choix d'interface, stratégie de mise en tampon, middleware Audio Server et compromis de consommation."
 tags:
   - Audio
 ---

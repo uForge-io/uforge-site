@@ -1,6 +1,6 @@
 ---
 icon: lucide/microchip
-description: "SF32LB52x: família de MCUs AIoT Arm Cortex-M33 de dois núcleos, otimizada para custo, voltada a produtos vestíveis e dispositivos AIoT compactos, com variantes SF32LB520/3/5/7 alimentadas por bateria e variantes 52B/D/E/G/J com alimentação externa."
+description: "SF32LB52x: família de MCUs AIoT Arm Cortex-M33 de dois núcleos e custo otimizado para wearables e produtos AIoT compactos, com variantes a bateria e com alimentação externa."
 tags:
     - Hardware
     - Chip
@@ -172,6 +172,25 @@ Siga esta sequência para transformar uma seleção preliminar de SF32LB52x em u
 3. **Projete e revise o hardware.** Antes de liberar o esquemático ou o layout, consulte o [guia de projeto de hardware](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) e os checklists de [esquemático](../../hardware/chip-guides/SF32LB52x_schematic_checklist.md) e [layout da PCB](../../hardware/chip-guides/SF32LB52x_pcb_layout_checklist.md). Confirme a família de alimentação correta: 520/3/5/7, 52B/E/G/J ou 52D.
 4. **Confirme as fontes oficiais.** Consulte o [datasheet](#development-resources) aplicável e o guia de projeto de hardware da SiFli para [520/3/5/7][Hardware Design Guide (520/3/5/7)] ou [52B/D/E/G/J][Hardware Design Guide (52B/D/E/G/J)], de acordo com o código exato do componente e o encapsulamento.
 
+<!-- uf-faq:start -->
+## Perguntas frequentes { #frequently-asked-questions }
+
+**Quais são as principais especificações do SF32LB52x?**
+O SF32LB52x combina uma CPU de aplicação (Cortex-M33 @240 MHz) com um núcleo de baixo consumo (Cortex-M33 @24/48 MHz, com um controlador Bluetooth dedicado), 576 KB de SRAM interna e Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 2.0 Lite. Encapsulamento: QFN68 (7 × 7 mm). USB 2.0 FS. Valores da família; confira o datasheet do código exato.
+
+**Quais interfaces de display o SF32LB52x suporta?**
+SPI / DSPI / QSPI / 8080 / EPD / JDI. A disponibilidade varia conforme o código e o encapsulamento.
+
+**Quanta memória no encapsulamento o SF32LB52x oferece?**
+Até 16 MB de PSRAM e até 4 MB de Flash NOR no encapsulamento, conforme o código.
+
+**Qual tensão de alimentação o SF32LB52x precisa?**
+3.2–4.7 V (520/3/5/7), 2.97–3.63 V (52B/E/G/J), 1.8 V (52D), conforme a variante. Confirme a faixa exata no datasheet.
+
+**Por onde começar um projeto de hardware com o SF32LB52x?**
+Comece pelo [guia de projeto de hardware do SF32LB52x](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) para esquemático, alimentação, clock/RF e layout de PCB, e use os checklists de esquemático e layout antes de liberar a placa.
+<!-- uf-faq:end -->
+
 ## Produtos relacionados { #related-products }
 
 ### Módulo { #module }
@@ -188,6 +207,3 @@ Siga esta sequência para transformar uma seleção preliminar de SF32LB52x em u
 ### Produtos de referência { #reference-products }
 
 Produtos típicos com SF32LB52 incluem smartwatches e pulseiras fitness de entrada, acessórios Bluetooth, controles gráficos compactos, etiquetas eletrônicas de prateleira, crachás inteligentes, impressoras portáteis de etiquetas e displays para e-bikes ou e-scooters com foco em custo.
-
-!!! note "Conteúdo gerado automaticamente"
-    Esta página foi elaborada sem um documento-fonte preexistente. Verifique as afirmações técnicas na documentação oficial da SiFli antes de confiar nelas.

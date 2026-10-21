@@ -1,6 +1,6 @@
 ---
 icon: lucide/component
-description: "Lista de fornecedores aprovados pela SiFli para projetos SF32: cristais, indutores buck, memórias Flash NOR/NAND e SD-NAND e controladores LCD, com requisitos de seleção e checklists para revisar a BOM."
+description: "Lista de fornecedores aprovados da SiFli para SF32: cristais, indutores, Flash NOR/NAND e controladores LCD qualificados, com critérios de seleção e revisão da BOM."
 tags:
     - Hardware
     - Fornecedores
@@ -395,5 +395,5 @@ Este checklist é intencionalmente mais rigorosa do que “a peça aparece na AV
 ## Páginas relacionadas { #related-pages }
 
 - [Guia de projeto de hardware do SF32LB52x](../chip-guides/SF32LB52x_hardware_design_guide.md) — orientações de esquemático e layout que fazem referência direta a vários componentes desta lista.
-- Guia de projeto de hardware do SF32LB57x
+- [Guia de projeto de hardware do SF32LB57x](../chip-guides/SF32LB57x_hardware_design_guide.md)
 - [Família SF32](../../sf32-products/family/SF32_family.md)

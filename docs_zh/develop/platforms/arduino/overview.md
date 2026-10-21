@@ -8,7 +8,7 @@ tags:
 
 # Arduino { #arduino }
 
-[OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) 是面向 SF32 的 Zephyr Arduino Core。它适合在 **SiFli SF32LB52 DevKit LCD** 上编写 Sketch、开展外设实验、制作演示和验证早期原型。
+[OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) 是面向 SF32 的 Zephyr Arduino Core。它适合在 **SiFli SF32LB52 DevKit LCD** 上编写 sketch、开展外设实验、制作演示和验证早期原型。
 
 !!! warning "测试版核心"
     OpenSiFli 将此 Core 标记为 **BETA**。功能、API、软件包内容、loader 行为和发布版本均可能变化。将此路径用于产品前，请对照项目 README 和 Releases 确认当前行为。
@@ -35,7 +35,7 @@ tags:
 
 ## 开发板标识 { #board-identity }
 
-当前公开软件包面向 SF32LB52 DevKit LCD。请在项目记录和问题报告中保存以下值；它们决定 Sketch 的构建、加载和开发板映射方式。
+当前公开软件包面向 SF32LB52 DevKit LCD。请在项目记录和问题报告中保存以下值；它们决定 sketch 的构建、加载和开发板映射方式。
 
 <div align="center"><em>表：Arduino 开发板标识</em></div>
 
@@ -54,7 +54,7 @@ tags:
 
 </div>
 
-名称相近的思澈科技（SiFli）或 Zephyr 开发板标识不能与此 FQBN 混用。所选开发板标识会决定构建和上传参数。
+名称相近的思澈科技（SiFli）或 Zephyr 开发板标识，不能与此 FQBN 互换使用。所选开发板决定构建和上传参数。
 
 ## 构建与 Loader 模型 { #build-and-loader-model }
 
@@ -67,21 +67,21 @@ ArduinoCore-zephyr 将面向 sketch 的 Arduino API、Zephyr 加载器（loader�
 | 选项 | 行为 | 工程含义 |
 |:-----|:-----|:---------|
 | `Standard` 构建模式 | 加载后启动 sketch。 | 用于正常运行 sketch。 |
-| `Debug` 构建模式 | Zephyr shell 会等待 `sketch`。 | 仅在调试流程需要 shell 时使用。 |
-| `Dynamic` 链接模式 | 将 sketch 打包为标准的加载器运行流程。 | 运行时和内存预算中需要计入加载器。 |
+| `Debug` 构建模式 | Zephyr shell 停留等待 `sketch` 命令。 | 仅在调试流程需要 shell 时使用。 |
+| `Dynamic` 链接模式 | 将 sketch 打包，走常规的基于加载器的流程。 | 运行时和内存预算中需要计入加载器。 |
 | `Static` 链接模式 | 使用静态链接镜像。 | 用于排查加载器问题，或在充分了解其权衡后使用。 |
 
 </div>
 
-建议从 **Standard** 和 **Dynamic** 开始。在 Debug 模式下，上传后的 Sketch 要等到你在 Zephyr Shell 中运行 `sketch` 才会启动；这常导致误以为上传成功却没有应用行为。
+建议从 **Standard** 和 **Dynamic** 开始。在 Debug 模式下，上传后的 sketch 要等到在 Zephyr shell 中运行 `sketch` 才会启动；这是“上传看似成功、应用却毫无动作”的常见原因。
 
-加载器是独立的开发板产物。Burn Bootloader 通常只用于首次使用、更新或恢复，而不是每次上传 sketch 的步骤。请一并记录 Arduino 软件包版本和所有加载器更新；版本或配置前提不一致会使后续问题难以定位。
+加载器是独立的开发板产物。Burn Bootloader 通常只用于首次使用、更新或恢复，而不是每次上传 sketch 的步骤。请将 Arduino 软件包版本与加载器的任何更新一并记录；前提假设不一致，后续很难定位问题。
 
 ## 集成边界 { #integration-boundaries }
 
-应将 Arduino Core 视为集成层，而不是底层 Zephyr 平台的替代品。Sketch 可能需要 loader 尚未导出或启用的 Zephyr 符号或子系统，常见现象包括 Zephyr 符号未定义、子系统缺失，以及动态加载和 Shell 带来的内存压力。
+应将 Arduino Core 视为集成层，而不是底层 Zephyr 平台的替代品。sketch 可能需要 loader 尚未导出或启用的 Zephyr 符号或子系统，常见现象包括 Zephyr 符号未定义、子系统缺失，以及动态加载和 shell 带来的内存压力。
 
-在向产品原型加入库或功能前，应明确：
+在向产品原型加入库或功能前，应逐项明确：
 
 - 软件包版本、FQBN、构建模式和链接模式。
 - 目标开发板修订版及其串口下载/恢复流程。
@@ -93,7 +93,7 @@ ArduinoCore-zephyr 将面向 sketch 的 Arduino API、Zephyr 加载器（loader�
 
 ## 定位与升级 { #diagnose-and-escalate }
 
-若开发板未被识别、无法烧录或无法运行 Blink，请先完成快速开始中的基线检查。当该基线已成功后，可按下表划分问题边界，以缩短定位时间。
+若开发板未被识别、无法烧录或无法运行 Blink，请先完成快速开始中的基线检查。该基线跑通后，可按下表划分问题边界，缩短调试时间。
 
 <div align="center"><em>表：Arduino 问题归属</em></div>
 
@@ -109,7 +109,7 @@ ArduinoCore-zephyr 将面向 sketch 的 Arduino API、Zephyr 加载器（loader�
 
 </div>
 
-提交问题时，请提供软件包版本、IDE 或 CLI 版本、操作系统、FQBN、build mode、link mode、开发板修订版、完整上传输出和串口日志。
+提交问题时，请提供软件包版本、IDE 或 CLI 版本、操作系统、FQBN、构建模式、链接模式、开发板修订版、完整上传输出和串口日志。
 
 ## 相关页面 { #related-pages }
 

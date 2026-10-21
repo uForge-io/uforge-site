@@ -2,7 +2,7 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Guía de diseño esquemático del almacenamiento, la conectividad y el acceso de fabricación de la MCU SF32LB52x: almacenamiento de arranque, sensores, interfaz de depuración/descarga y grabación de producción."
+description: "Guía de esquemático de la MCU SF32LB52x para almacenamiento, conectividad y fabricación: arranque, sensores, interfaz de depuración/descarga y grabación de producción."
 tags:
     - Hardware
     - Chip

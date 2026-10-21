@@ -1,6 +1,6 @@
 ---
 icon: lucide/keyboard
-description: "Un parcours d'ingénierie pour le portage ZMK d'OpenSiFli sur SF32LB52 : reproduire la base du clavier scindé Urchin, valider l'USB, le BLE, les paramètres et la récupération, puis adapter délibérément la disposition des touches ou le matériel."
+description: "Parcours d'ingénierie du portage ZMK d'OpenSiFli sur SF32LB52 : reproduire le clavier scindé Urchin, valider USB, BLE et récupération, puis adapter keymap ou matériel."
 tags:
     - Projets
     - Zephyr

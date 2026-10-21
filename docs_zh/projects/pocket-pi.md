@@ -17,14 +17,14 @@ tags:
 
 [SiFliSparks/PocketPi](https://github.com/SiFliSparks/PocketPi) 是一个面向 SF32LB52 的掌上游戏机与模拟器参考工程。在固定提交版本中，项目集成了 Nofrendo NES 模拟器、LVGL 游戏列表、320 × 240 ST7789 8080 显示路径、音频输出、存档/读档、内置文件系统和 TF 卡 ROM 目录，并以黄山派 / `sf32lb52-lchspi-ulp` 作为公开构建基线。
 
-它适合用来验证本地图形、输入、音频、外部存储、PSRAM 内存管理和模拟器负载如何在一个 SF32LB52 系统中协同工作。项目仓库不附带商业游戏 ROM；用户必须自行准备有权使用的 `.nes`/`.NES` 文件。公开源码也不是完整的量产掌机设计，不能替代电池安全、音频、EMC、热、许可证和内容分发评审。
+它适合用来验证本地图形、输入、音频、外部存储、PSRAM 分配和模拟器负载如何在一个 SF32LB52 系统中协同工作。项目仓库不附带商业游戏 ROM；用户必须自行准备有权使用的 `.nes`/`.NES` 文件。公开源码也不是完整的量产掌机设计，不能替代电池安全、音频、EMC、散热、许可证和内容分发评审。
 
 ![Pocket Pi 游戏运行画面](https://raw.githubusercontent.com/SiFliSparks/PocketPi/main/assets/game_running.jpg)
 <div align="center"><em>Pocket Pi 在 SF32LB52 平台上运行 NES 游戏</em></div>
 
 ## 为什么选择 SF32 实现？ { #why-the-sf32-implementation }
 
-NES 模拟把多个嵌入式系统边界集中到一个直观的工作负载中：CPU 仿真、PPU 图形、音频采样、低延迟（latency）输入、文件读取、帧缓冲和存档都必须协同工作。基于 SF32LB52 的系统具备这一工作负载所需的显示、音频、外部存储和 PSRAM 资源；黄山派还可作为电池供电的评估平台。
+NES 模拟把多个嵌入式系统边界集中到一个直观的工作负载中：CPU 模拟、PPU 图形、音频采样、低延迟（latency）输入、文件读取、帧缓冲和存档都必须协同工作。基于 SF32LB52 的系统具备这一工作负载所需的显示、音频、外部存储和 PSRAM 资源；黄山派还可作为电池供电的评估平台。
 
 这并不意味着所有 NES 游戏都完全兼容。ROM 映射器（mapper）的支持情况、帧率、音频、存档行为、内存峰值和输入延迟都可能因游戏而异；每增加一个 ROM 或 mapper，都需要单独评估兼容性并确认版权。
 
@@ -41,7 +41,7 @@ NES 模拟把多个嵌入式系统边界集中到一个直观的工作负载中�
 - SiFli-SDK、SCons、串口下载和日志环境；
 - 一个自行编写、公共领域或已获得授权的 `.nes` 测试 ROM；
 - 若使用内置文件系统，把 ROM 放入仓库 `disk/`；若使用 TF 卡，则放入固件配置的 ROM 目录。固定提交版本的运行时扫描路径为 `/sdcard/roms/nes`，请对照该版本源码确认 TF 卡的挂载路径；
-- 可观察帧率、音频、按键、内存和电流的测试方法。
+- 可观察帧表现、音频、输入、内存和电流的测试方法。
 
 <div align="center"><em>表：Pocket Pi 固定版本基线与适配前所需证据</em></div>
 
@@ -50,7 +50,7 @@ NES 模拟把多个嵌入式系统边界集中到一个直观的工作负载中�
 | 范围 | 固定版本源码基线 | 进入适配前必须保留的证据 |
 |:-----|:-------------|:-------------------------|
 | 板卡 | `sf32lb52-lchspi-ulp` | 板卡、扩展器、显示、音频、存储和供电版本 |
-| 内容 | 固定提交版本仅扫描 `.nes` 与 `.NES`；同名 `.jpg` 可作为封面 | ROM 来源/许可、文件哈希、ROM 映射器（mapper）和封面来源 |
+| 内容 | 固定提交版本仅扫描 `.nes` 与 `.NES`；同名 `.jpg` 可作为封面 | ROM 来源/许可、文件哈希、mapper 和封面来源 |
 | 存储 | 构建时把 `disk/` 生成到 `fs_root`；运行时也扫描 `/sdcard/roms/nes` | 文件系统镜像、TF 卡格式、目录与错误恢复记录 |
 | 输入 | 固定提交版本通过 AW9523 I2C 扩展器读取 A/B、方向、Start、Select、Menu、L/R 等按键 | 原理图/引脚定义、全按键矩阵和同时按键结果 |
 | 模拟器 | Nofrendo NES 内核、显示、32 kHz 音频路径与状态保存/读取 | 游戏兼容性、帧/音频、存档、内存和复位证据 |
@@ -58,6 +58,7 @@ NES 模拟把多个嵌入式系统边界集中到一个直观的工作负载中�
 </div>
 
 ## 硬件与软件规格 { #hardware-and-software-specifications }
+
 ### 硬件规格 { #hardware-specification }
 
 <div align="center"><em>表：Pocket Pi 硬件规格</em></div>
@@ -73,7 +74,7 @@ NES 模拟把多个嵌入式系统边界集中到一个直观的工作负载中�
 </div>
 
 !!! warning "黄山派尚不能视为外设即插即用的匹配基线"
-    思澈科技（SiFli）的[黄山派指南](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-%E9%BB%84%E5%B1%B1%E6%B4%BE.html)记录的是 1.85 英寸、390 × 450、Quad-SPI 接口的 AMOLED 屏，并列出了板上的功能键和电源键。固定版本的 PocketPi 源码则要求 320 × 240 ST7789 8080 显示路径和 AW9523 I2C 输入。官方板卡指南没有说明其所述板卡套件包含这些匹配外设。应先核对实际屏幕、转接板和输入硬件；或者移植相应软件路径并重新完成显示/输入回归测试，然后再将该板卡目标视为可直接使用的基线。
+    思澈科技（SiFli）的[黄山派指南](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-%E9%BB%84%E5%B1%B1%E6%B4%BE.html)记录的是 1.85 英寸、390 × 450、Quad-SPI 接口的 AMOLED 屏，并列出了板上的功能键和电源键。固定版本的 PocketPi 源码则要求 320 × 240 ST7789 8080 显示路径和 AW9523 I2C 输入。官方板卡指南并未表明其所述配置包含这些匹配外设。应先核对实际屏幕、转接板和输入硬件；或者移植相应软件路径并重新完成显示/输入回归测试，然后再将该板卡目标视为可直接使用的基线。
 
 ### 软件规格 { #software-specification }
 
@@ -92,6 +93,7 @@ NES 模拟把多个嵌入式系统边界集中到一个直观的工作负载中�
 </div>
 
 ## 选择受支持的基线 { #choose-a-supported-baseline }
+
 使用软件规格中固定的 PocketPi 版本，不要直接构建当前 `main` 分支指向的提交：
 
 ```bash
@@ -113,7 +115,7 @@ scons --board=sf32lb52-lchspi-ulp -j8
 | ROM | 从一个小型、已获使用授权且 mapper 已知的 `.nes` 或 `.NES` ROM 开始 | 固定版本的扫描器只接受 `.nes` 和 `.NES`；“显示在列表中”不等于模拟兼容 |
 | 封面图 | 可选的同目录、同文件名 `.jpg` | 解码失败应回退默认封面，而不是阻止游戏列表 |
 | 显示 | 固定版本的 UI 为 320 × 240，源码设置 270° 旋转 | 另一块 LCD 或方向需要完整显示与输入回归 |
-| 输入 | 以固定版本 `input.c` 和 `input.h` 中的 AW9523 映射为准 | README 中直接 GPIO、9 键和 Select 组合键段落与固定版本源码不符 |
+| 输入 | 以固定版本 `input.c` 和 `input.h` 中的 AW9523 映射为准 | README 中关于直接 GPIO、9 键和 Select 组合键的段落已过时 |
 | 存档 | 使用暂停菜单执行 Save State / Load State | 断电一致性、槽位格式和跨版本兼容尚需验证 |
 
 </div>
@@ -151,17 +153,17 @@ flowchart LR
     N --> V["320 × 240 ST7789 显示"]
     N --> A["32 kHz 音频路径"]
     N <--> S["Save State / Load State"]
-    D["SiFli-SDK、板级配置\nPSRAM、Flash、TF 卡、电池"] --> L
+    D["SiFli-SDK 与板级支持\nPSRAM、Flash、TF 卡、电池"] --> L
     D --> N
 ```
 
-主要故障域包括文件系统与 ROM、mapper/模拟器、PSRAM 与内存、显示与帧时序、AW9523 输入、音频、存档以及电池/复位。出现黑屏时，应先区分“ROM 没被扫描到”“封面图解码失败”“mapper 不支持”“帧缓冲分配失败”和“LCD 路径错误”，而不是统一归为模拟器故障。
+主要故障域包括文件系统与 ROM、mapper/模拟器、PSRAM 与内存、显示与帧时序、AW9523 输入、音频、存档以及电源/复位。出现黑屏时，应先区分“ROM 没被扫描到”“封面图解码失败”“mapper 不支持”“帧缓冲分配失败”和“LCD 路径错误”，而不是统一归为模拟器故障。
 
 ## 阶段 1 — 建立未经修改的游戏基线 { #stage-1-establish-the-untouched-game-baseline }
 
 **目标：**用一份有权使用的测试 ROM 验证从构建输入到游戏运行的完整路径。
 
-1. 锁定 PocketPi commit、SiFli-SDK 版本、板卡和外设版本。
+1. 锁定 PocketPi 与 SiFli-SDK 的 commit，以及板卡和外设版本。
 2. 将有权使用的 `.nes` ROM 放入 `disk/`；如提供封面，使用同名 `.jpg`。保存 ROM 哈希、来源和 mapper 信息。
 3. 执行干净构建，确认 `fs_root` 被生成并加入下载产物。
 4. 下载后冷启动，确认游戏出现在列表中、封面或默认图片可见，并能进入游戏。
@@ -190,7 +192,7 @@ flowchart LR
 
 </div>
 
-**关口 2 退出条件：**选定 ROM 的输入、显示、音频、暂停、存档、退出和复位都有记录，失败可定位到具体故障域。
+**关口 2 退出条件：**选定 ROM 的输入、显示、音频、暂停、存档、读档、退出和复位都有记录，失败可定位到具体故障域。
 
 ## 阶段 3 — 建立可复现源码与内容基线 { #stage-3-build-a-reproducible-source-and-content-baseline }
 
@@ -198,7 +200,7 @@ flowchart LR
 
 1. 保存 PocketPi、SiFli-SDK 和任何第三方内核的版本记录。
 2. 为 `disk/` 建立清单，记录每个 ROM/封面的文件名、哈希、来源和许可；不要把无权分发的 ROM 提交到仓库。
-3. 从空构建目录运行 SCons，保存 `fs_root`、固件、分区/内存输出、下载脚本和哈希。
+3. 从空输出目录构建，保存 `fs_root`、固件、分区/内存输出、下载脚本和哈希。
 4. 在第二台电脑或干净目录中重建并执行阶段 2 核心测试。
 
 **关口 3 退出条件：**源码与内容清单足以重现哈希一致或差异已有说明的镜像，且没有依赖未记录的本地文件。
@@ -242,6 +244,7 @@ flowchart LR
 交接资料应包含 SF32/模组选择、PSRAM 与 Flash 峰值、显示和帧缓冲、AW9523 输入矩阵、音频放大器与扬声器、TF 卡和内置文件系统、存档格式、电池/充电、恢复下载口、ROM/mapper 兼容矩阵以及完整许可证清单。可从 [SF32LB52x](../sf32-products/chips/SF32LB52x.md)、[SF32LB52-DevKit-ULP](../sf32-products/devkits/SF32LB52-DevKit-ULP.md)、[SiFli-SDK 构建、烧录与监视](../develop/platforms/sifli-sdk/build-flash-monitor.md)和[面向量产的设计](../hardware/design-for-production.md)继续。
 
 ## 权威来源 { #authoritative-sources }
+
 - [SiFliSparks/PocketPi](https://github.com/SiFliSparks/PocketPi)
 - [锁定的参考 commit `7d9fac2`](https://github.com/SiFliSparks/PocketPi/commit/7d9fac2cb577d6c9b66a99521aebf3c9de0ae163)
 - [立创·黄山派 SF32LB52-ULP 开发板](https://lckfb.com/project/detail/lckfb-hspi-sf32lb52-ulp?param=baseInfo)

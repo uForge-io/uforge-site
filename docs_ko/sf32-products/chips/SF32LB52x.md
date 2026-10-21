@@ -171,6 +171,25 @@ SF32LB52x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 3. **하드웨어 설계 및 검토.** 회로도 또는 레이아웃을 릴리스하기 전에 로컬 [하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)와 그 [회로도](../../hardware/chip-guides/SF32LB52x_schematic_checklist.md) 및 [PCB 레이아웃](../../hardware/chip-guides/SF32LB52x_pcb_layout_checklist.md) 체크리스트를 사용하십시오. 전원 제품군의 기준 구성이 520/3/5/7, 52B/E/G/J, 52D 중 무엇인지 올바르게 확인하십시오.
 4. **주요 정보 출처 확인.** 해당 [데이터시트](#development-resources)와 SiFli [hardware design guide for 520/3/5/7] 또는 [hardware design guide for 52B/D/E/G/J]를 실제 주문할 부품 및 패키지와 대조하여 확인하십시오.
 
+<!-- uf-faq:start -->
+## 자주 묻는 질문 { #frequently-asked-questions }
+
+**SF32LB52x의 주요 사양은 무엇인가요?**
+SF32LB52x는 애플리케이션 CPU(Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @24/48 MHz, 전용 Bluetooth 컨트롤러), 내장 SRAM 576 KB, 듀얼 모드 Bluetooth(클래식 + BLE)를 갖췄습니다. 그래픽: ePicasso 2.0 Lite. 패키지: QFN68(7 × 7 mm). USB 2.0 FS. 제품군 수준의 값이므로 정확한 부품 번호의 데이터시트를 확인하세요.
+
+**SF32LB52x는 어떤 디스플레이 인터페이스를 지원하나요?**
+SPI / DSPI / QSPI / 8080 / EPD / JDI. 지원 여부는 부품 번호와 패키지에 따라 다릅니다.
+
+**SF32LB52x는 패키지 내 메모리를 얼마나 제공하나요?**
+부품 번호에 따라 패키지 내 PSRAM 최대 16 MB, 패키지 내 NOR Flash 최대 4 MB를 제공합니다.
+
+**SF32LB52x에는 어떤 공급 전압이 필요한가요?**
+변형에 따라 3.2–4.7 V (520/3/5/7), 2.97–3.63 V (52B/E/G/J), 1.8 V (52D). 정확한 범위는 데이터시트에서 확인하세요.
+
+**SF32LB52x로 하드웨어 설계를 시작하려면 어떻게 하나요?**
+먼저 [SF32LB52x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하세요.
+<!-- uf-faq:end -->
+
 ## 관련 제품
 
 ### 모듈
@@ -187,6 +206,3 @@ SF32LB52x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 ### 레퍼런스 제품
 
 일반적인 SF32LB52 설계로는 보급형 스마트워치, 피트니스 밴드, Bluetooth 액세서리, 소형 그래픽 컨트롤, 전자 가격표, 스마트 배지, 휴대용 라벨 프린터, 비용에 민감한 eBike 또는 eScooter 디스플레이가 있습니다.
-
-!!! note "자동 생성 콘텐츠"
-    이 페이지는 기존 원본 문서 없이 정리하여 작성되었습니다. 기술적 내용을 사용하기 전에 SiFli 공식 문서와 대조하여 확인하십시오.

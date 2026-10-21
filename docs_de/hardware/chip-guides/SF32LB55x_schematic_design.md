@@ -2,7 +2,7 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Richtlinien für den Schaltplanentwurf des SF32LB55x-MCU: Stromversorgungssystem, Boot-Modus, Takterzeugung, RF, Speicherschnittstellen, Display- und Touch-Schnittstellen sowie Weck-/GPADC-/Fertigungsschnittstellen."
+description: "Schaltplanrichtlinien für den SF32LB55x-MCU: Stromversorgung, Boot-Modus, Takte, RF, Speicher, Display und Touch, Wake-up, GPADC und Fertigungsschnittstellen."
 tags:
     - Hardware
     - Chip

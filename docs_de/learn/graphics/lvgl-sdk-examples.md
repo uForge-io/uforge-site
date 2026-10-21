@@ -1,7 +1,7 @@
 ---
 icon: lucide/layout-dashboard
 title: "LVGL-SDK-Beispiele"
-description: "Wählen Sie das richtige SiFli-SDK-LVGL-Beispiel für die Inbetriebnahme von Displays und UI, Widgets, Design-Tools, komprimierte Assets, Animation, Medien und Wearable-Oberflächen."
+description: "Das passende SiFli-SDK-LVGL-Beispiel wählen: UI-Inbetriebnahme, Widgets, Design-Tools, komprimierte Assets, Animation, Medien und Wearable-Oberflächen."
 tags:
   - Grafik
   - LVGL

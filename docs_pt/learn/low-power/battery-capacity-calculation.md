@@ -1,7 +1,7 @@
 ---
 icon: lucide/battery-charging
 title: "Estimativa do estado de carga da bateria"
-description: "Estime o estado de carga da bateria em produtos SF32 a partir da tensão medida, usando a calculadora do SiFli-SDK, curvas específicas de carga e descarga, detecção do carregador e filtragem em várias etapas."
+description: "Estime a carga da bateria SF32 pela tensão com a calculadora do SiFli-SDK: curvas de descarga, detecção do estado do carregador e filtragem em várias etapas."
 tags:
   - Baixo consumo
   - Bateria

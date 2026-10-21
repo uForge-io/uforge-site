@@ -290,3 +290,5 @@ Registre la versión del firmware, la revisión de la placa, la tensión de la b
 - El diseño basado en eventos e interrupciones suele consumir menos que la consulta periódica cuando la energía es importante.
 - En un dispositivo conectado, los parámetros de conexión Bluetooth y la estrategia de actualización de la pantalla suelen ser las dos principales palancas de ahorro.
 - Mida el consumo real con cargas combinadas y representativas, sobre el hardware definitivo y dentro de su carcasa final. Las mediciones de banco y las de subsistemas aislados pueden infravalorar el consumo del producto completo.
+
+Para estimar el porcentaje de batería restante a partir de la tensión, consulte [Estimación del nivel de carga de la batería](battery-capacity-calculation.md).

@@ -1,7 +1,7 @@
 ---
 icon: lucide/home
 title: "Платформа разработки встраиваемых систем SF32"
-description: "Документация с открытым исходным кодом по микроконтроллерам SF32 со сверхнизким энергопотреблением, модулям, отладочным платам, работе с SDK и руководствам по проектированию оборудования для серийного производства."
+description: "Открытая документация по микроконтроллерам SF32 со сверхнизким энергопотреблением, модулям, отладочным платам, работе с SDK и руководствам по проектированию для производства."
 image: assets/home/sf32-chip-hero.png
 hide:
   - navigation
@@ -155,7 +155,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Прикладное ядро Cortex-M33 STAR-MC1 + выделенное ядро Bluetooth-контроллера
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Двухрежимный Bluetooth 5.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Двухрежимный Bluetooth 6.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Аппаратная декомпрессия eZip 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Аудиокодек, 1 x AMIC, 2 x DMIC
@@ -163,6 +163,58 @@ hide:
     - :fontawesome-solid-circle:{ .uf-dot-blue } Корпус QFN68, до 45 GPIO; доступны варианты со встроенным линейным зарядным устройством
 
     [Серия SF32LB52x :material-arrow-right:](sf32-products/chips/SF32LB52x.md){ .uf-link-blue }
+
+- <span class="uf-mcu-chip">SF32LB56</span>
+
+    <span class="uf-mcu-headtext">**SF32LB56x**{ .uf-mcu-title } <span class="uf-mcu-sub">MCU для графических приложений</span></span>
+
+    ---
+
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Двухъядерный Cortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Двухрежимный Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Дисплей RGB с разрешением до 1024 x 600
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 2.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Аппаратная декомпрессия eZip 2.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Аудиокодек, 1 x AMIC, 4 x DMIC
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 960 KB SRAM, до 16 MB PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Корпуса QFN68 и BGA175, до 44 / 120 GPIO
+
+    [Серия SF32LB56x :material-arrow-right:](sf32-products/chips/SF32LB56x.md){ .uf-link-blue }
+
+- <span class="uf-mcu-chip">SF32LB57</span>
+
+    <span class="uf-mcu-headtext">**SF32LB57x**{ .uf-mcu-title } <span class="uf-mcu-sub">Мультимедийный MCU для AIoT</span></span>
+
+    ---
+
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Трёхъядерный Cortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Двухрежимный Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Дисплей RGB с разрешением до 1024 x 600
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 3.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 3.0 и декодирование JPEG/MJPEG
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Вход камеры DCMI до 2 Мпикс
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Аудиокодек, 2 x AMIC, 4 x DMIC
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 592 KB SRAM, до 48 MB PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Корпуса QFN68, QFN80 и BGA112, до 46 / 47 / 58 GPIO; в некоторых вариантах BGA112 дополнительно доступны шесть выводов для MPI3 или статических выходов
+
+    [Серия SF32LB57x :material-arrow-right:](sf32-products/chips/SF32LB57x.md){ .uf-link-blue }
+
+- <span class="uf-mcu-chip">SF32LB58</span>
+
+    <span class="uf-mcu-headtext">**SF32LB58x**{ .uf-mcu-title } <span class="uf-mcu-sub">Флагманский MCU для платформ AIoT</span></span>
+
+    ---
+
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Трёхъядерный Cortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Двухрежимный Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Дисплей MIPI с разрешением до 1280 x 720
+    - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2.5D и векторная графика, ePicasso 2.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 и декодирование JPEG/MJPEG
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Аудиокодек, 2 x AMIC, 4 x DMIC
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 3,7 MB SRAM, до 64 MB PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Корпус BGA256, до 154 GPIO
+
+    [Серия SF32LB58x :material-arrow-right:](sf32-products/chips/SF32LB58x.md){ .uf-link-blue }
 
 - <span class="uf-mcu-chip">SF32LB55</span>
 
@@ -179,39 +231,6 @@ hide:
     - :fontawesome-solid-circle:{ .uf-dot-blue } Корпуса QFN68, BGA145 и BGA169, до 49 / 95 / 119 GPIO
 
     [Серия SF32LB55x :material-arrow-right:](sf32-products/chips/SF32LB55x.md){ .uf-link-blue }
-
-- <span class="uf-mcu-chip">SF32LB56</span>
-
-    <span class="uf-mcu-headtext">**SF32LB56x**{ .uf-mcu-title } <span class="uf-mcu-sub">MCU для графических приложений</span></span>
-
-    ---
-
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Двухъядерный Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Энергоэффективный Bluetooth 5.3
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Дисплей RGB с разрешением до 1024 x 600
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 2.0
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Аппаратная декомпрессия eZip 2.0
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Аудиокодек, 1 x AMIC, 4 x DMIC
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 960 KB SRAM, до 16 MB PSRAM
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Корпуса QFN68 и BGA175, до 44 / 120 GPIO
-
-    [Серия SF32LB56x :material-arrow-right:](sf32-products/chips/SF32LB56x.md){ .uf-link-blue }
-
-- <span class="uf-mcu-chip">SF32LB58</span>
-
-    <span class="uf-mcu-headtext">**SF32LB58x**{ .uf-mcu-title } <span class="uf-mcu-sub">Флагманский MCU для платформ AIoT</span></span>
-
-    ---
-
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Трёхъядерная архитектура: HCPU, ACPU и LCPU
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Дисплей MIPI с разрешением до 1280 x 720
-    - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2.5D и векторная графика, ePicasso 2.0
-    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 и декодирование JPEG/MJPEG
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Аудиокодек, 2 x AMIC, 4 x DMIC
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 3,7 MB SRAM, до 64 MB PSRAM
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Корпус BGA256, до 154 GPIO
-
-    [Серия SF32LB58x :material-arrow-right:](sf32-products/chips/SF32LB58x.md){ .uf-link-blue }
 
 </div>
 

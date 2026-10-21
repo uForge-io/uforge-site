@@ -1,7 +1,7 @@
 ---
 icon: lucide/cpu
 title: "SF32-Produkte"
-description: "SF32-Hardware kennenlernen, ein Produkt planen, Chip, Modul oder Entwicklungsboard auswählen, Referenzdesigns nutzen und das Hardwaredesign für die Produktion vorbereiten."
+description: "SF32-Hardware erkunden, Produkt planen, Chip, Modul oder Entwicklungsboard wählen, Referenzdesign wiederverwenden und das Design für die Produktion vorbereiten."
 tags:
     - Hardware
     - Übersicht

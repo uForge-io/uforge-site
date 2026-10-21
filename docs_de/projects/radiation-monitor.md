@@ -1,6 +1,6 @@
 ---
 icon: lucide/activity
-description: "Eine tragbare, auf SF32LB52 basierende Signalstärkeanzeige für das Bluetooth-Band: den Radiation Monitor nachbauen, seinen 79-Punkte-Scan, die RSSI-Glättung und die Verlaufswiedergabe prüfen und anschließend Grenzen für Kalibrierung und Produktbewertung festlegen."
+description: "Signalanzeige für das Bluetooth-Band auf SF32LB52: Radiation Monitor nachbauen, 79-Punkte-Scan, RSSI-Glättung und Verlauf prüfen, Kalibriergrenzen festlegen."
 tags:
     - Projekte
     - Bluetooth

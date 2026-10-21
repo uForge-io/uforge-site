@@ -1,6 +1,6 @@
 ---
 icon: lucide/microchip
-description: "SF32LB56x：面向显示、音频和存储需求更高的连接型产品，提供双模蓝牙、超低功耗运行与更强的常开处理能力。"
+description: "SF32LB56x：先进的超低功耗双模蓝牙 MCU 系列，面向需要更丰富显示、集成音频、外部存储和更强常开处理能力的产品。"
 tags:
     - 硬件
     - 芯片
@@ -10,11 +10,11 @@ tags:
 
 ## 概览 { #overview }
 
-SF32LB56x 系列是高集成度超低功耗 AIoT 微控制器，面向需要双模蓝牙（Bluetooth）、更强图形能力、集成音频、外部存储，以及比 SF32LB 系列低阶型号更灵活的显示和存储接口的产品。
+SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模蓝牙（Bluetooth）、更强图形能力、集成音频、外部存储，以及比 SF32LB 系列低阶型号更灵活的显示和存储接口的产品。
 
 它采用 big.LITTLE 双核架构，由一个最高 240 MHz 的高性能 Arm Cortex-M33 STAR-MC1[^1] 应用处理器和一个最高 96 MHz 的超低功耗 Arm Cortex-M33 STAR-MC1 处理器组成。主核心可处理图形界面、显示、存储和产品逻辑；低功耗核心则以更低的能耗预算承担常开传感任务、待机管理和蓝牙控制。
 
-根据思澈科技（SiFli）官方产品简介和数据手册，SF32LB56x 将双模蓝牙 5.3（含 BLE Audio）、ePicasso 2.0 图形引擎、集成音频 ADC/DAC 功能模块、面向 TinyML 的加速器、封装内 Flash 选项，以及更丰富的显示与外部存储接口整合在同一平台上。对于无线、音频或显示需求已经超出 SF32LB55x、但仍希望维持 MCU 级功耗与集成度的设计，SF32LB56x 是合适的选择。
+思澈科技（SiFli）官方产品简介和数据手册将 SF32LB56x 定位为集成度更高的选择，适用于显示和音频功能丰富的联网设备。该系列新增了支持 BLE Audio 的双模蓝牙 5.3、ePicasso 2.0 图形引擎、集成音频 ADC/DAC 通路、面向 TinyML 的加速器和封装内 Flash 选项，并支持更广泛的外部存储和显示接口。实际应用中，对于无线、音频或显示需求已经超出 SF32LB55x、但仍希望维持 MCU 级功耗与集成度的设计，SF32LB56x 是合适的选择。
 
 思澈科技（SiFli）的芯片型号指南还提示了 56x 家族的一个关键选型点：不同封装支持的显示接口组合并不完全相同，因此准确料号和封装选择应被视为前期架构决策，而不是后期 PCB 细节。
 
@@ -33,13 +33,13 @@ SF32LB56x 系列是高集成度超低功耗 AIoT 微控制器，面向需要双�
 - 低功耗传感器中枢
 - 高规格电动自行车和电动滑板车显示设备
 
-当设计具备以下一项或多项需求时，通常应优先考虑 SF32LB56x：
+若设计需要以下一项或多项能力，可选用 SF32LB56x：
 
 - 双模蓝牙 5.3 与 BLE Audio
 - 集成 HiFi 音频 ADC 与 DAC
 - 更复杂的显示任务与更高的图形处理负载
 - DPI/RGB 显示接口支持
-- 通过 SDIO 连接外部 Wi‑Fi；通过 SD/SDIO 或 eMMC 扩展外部存储
+- 通过 SDIO 连接外部 Wi-Fi；通过 SD/SDIO 或 eMMC 扩展外部存储
 - 通过 WBBGA175 获取更高 GPIO 数量
 - 同时承载 TinyML、音频与图形界面的更高并发余量
 
@@ -111,8 +111,8 @@ SF32LB56x 系列是高集成度超低功耗 AIoT 微控制器，面向需要双�
 - 灵敏度：BLE 1 Mbps 为 -100 dBm，BR 为 -96.3 dBm，EDR2 为 -95.5 dBm，EDR3 为 -88.5 dBm
 - 最大发射功率：BR/BLE 为 19 dBm，EDR2/EDR3 为 13 dBm
 - BR 接收峰值电流：3.3 V 下 2.2 mA
-- 1 个 HiFi 24 位音频 DAC 功能模块，信噪比 108 dB
-- 1 个 HiFi 24 位音频 ADC 功能模块，信噪比 99 dB
+- 1 个 HiFi 24 位音频 DAC，信噪比 108 dB
+- 1 个 HiFi 24 位音频 ADC，信噪比 99 dB
 - 2 路 PDM 接口和 1 路 I2S 接口
 
 ### 安全 { #security }
@@ -139,8 +139,8 @@ SF32LB56x 系列是高集成度超低功耗 AIoT 微控制器，面向需要双�
 ### 电源与封装 { #power-supply-and-package }
 
 - 供电范围：1.71 V 至 3.63 V
-- 工作温度：−40 °C 至 +85 °C
-- 集成高效率 BUCK 与低功耗 LDO
+- 工作温度：-40 °C 至 +85 °C
+- 集成高效降压（buck）稳压器与低功耗 LDO
 - RTC 唤醒下睡眠电流：600 nA
 - 引脚唤醒下睡眠电流：300 nA
 - 封装选项：QFN68L 与 WBBGA175
@@ -149,7 +149,7 @@ SF32LB56x 系列是高集成度超低功耗 AIoT 微控制器，面向需要双�
 
 SF32LB56x 同时覆盖紧凑型 QFN68L 与高 I/O 的 WBBGA175 料号，并提供不同的合封存储组合。应在项目早期就确定具体料号，因为显示接口支持、GPIO 余量、存储容量、PCB 工艺与模组迁移空间在家族内部差异明显。
 
-表列型号的资料供电范围为 1.71 V 至 3.63 V，工作温度范围为 −40 °C 至 +85 °C。GPIO 供电域支持 1.71 V 至 3.45 V；封装内存储器 I/O 电源轨有独立限制。设定接口电平前，请查阅对应 U 或 V 型号的硬件应用说明。
+表列型号的资料供电范围为 1.71 V 至 3.63 V，工作温度范围为 -40 °C 至 +85 °C。GPIO 供电域支持 1.71 V 至 3.45 V；封装内存储器 I/O 电源轨有独立限制。设定接口电平前，请查阅对应 U 或 V 型号的硬件设计指南。
 
 **`SF32LB566VCB36` 的资料差异：**[思澈科技（SiFli）芯片型号指南](https://wiki.sifli.com/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)将其合封 QSPI-NOR 列为 1 MB；较早版本的 [DS5601 V1.9.2 数据手册](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p9p2.pdf)则在订购信息中列为 4 Mb（0.5 MB）。思澈科技（SiFli）当前的[产品资料索引](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/docs/product-index.rst)已链接到 DS5601 V1.9.3，但本次未能核实该版本的订购信息，因此不能据此判断旧版差异是否仍然存在或已经修正。本表按芯片型号指南列示。定版 BOM 前，请核对 V1.9.3 的对应条目，或向思澈科技（SiFli）确认准确料号及实际供货的存储配置。
 
@@ -163,7 +163,7 @@ SF32LB56x 同时覆盖紧凑型 QFN68L 与高 I/O 的 WBBGA175 料号，并提�
 | SF32LB561UBN26 | QFN68L | 24 / 20 | 4 MB OPI-PSRAM + 512 KB QSPI-NOR Flash | QSPI | 适合需要比 560 档更大帧缓冲或图形资源空间的紧凑型图形界面设计 |
 | SF32LB563UCN26 | QFN68L | 24 / 20 | 8 MB OPI-PSRAM + 512 KB QSPI-NOR Flash | QSPI | 适合更高分辨率的紧凑型 UI 设计，同时仍希望保留较低成本的 QFN 路线 |
 | SF32LB56WUND26 | QFN68L | 24 / 20 | 16 MB OPI-PSRAM + 512 KB QSPI-NOR Flash | QSPI | 适合需要更大本地图形与资源空间、但暂不切换到 BGA 的紧凑型高内存产品 |
-| SF32LB566VCB36 | WBBGA175 | 79 / 41 | OPI-PSRAM 8 MB + 4 MB，QSPI-NOR Flash 1 MB | DPI / QSPI / 8080 / JDI | 适合需要更丰富显示接口、更高 I/O 与完整图形能力的可穿戴和 HMI 设计，也是 SF32LB56-MOD 采用的芯片 |
+| SF32LB566VCB36 | WBBGA175 | 79 / 41 | 8 MB + 4 MB OPI-PSRAM + 1 MB QSPI-NOR Flash | DPI / QSPI / 8080 / JDI | 适合需要更丰富显示接口和更高 I/O 的可穿戴和 HMI 设计，也是 SF32LB56-MOD 所用的同一芯片 |
 | SF32LB567VND36 | WBBGA175 | 79 / 41 | 16 MB OPI-PSRAM + 1 MB QSPI-NOR Flash | DPI / QSPI / 8080 / JDI | 适合需要更大单一 PSRAM 区域与更复杂显示布线的高 I/O 设计，但不是 56 模组的标准芯片选择 |
 
 </div>
@@ -175,7 +175,26 @@ SF32LB56x 同时覆盖紧凑型 QFN68L 与高 I/O 的 WBBGA175 料号，并提�
 1. **验证固件路径。** 从 [SiFli-SDK 快速开始](../../getting-started/sifli/getting-started-sifli-sdk.md)开始，再通过 [SiFli-SDK 工作流](../../develop/platforms/sifli-sdk/overview.md)和[示例](../../develop/examples/index.md)验证目标显示、音频、蓝牙和存储路径。
 2. **选择集成载体。** 使用 [SF32LB56-MOD](../modules/SF32LB56-MOD.md) 可降低 RF 和高速内存集成工作；使用 [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) 可完成板级验证。
 3. **进行硬件设计与评审。** 在发布原理图或布局前，使用本地[硬件设计指南](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md)，包括其[原理图核对表](../../hardware/chip-guides/SF32LB56x_schematic_checklist.md)和 PCB 布局核对表。U/V 封装和显示接口选择必须与所选器件保持一致。
-4. **核对权威来源。** 针对准确的可订购型号和封装，核对思澈科技（SiFli）的[数据手册][数据手册]、[用户手册][用户手册]、适用的 [U 封装硬件设计指南][硬件设计指南（U，wiki.sifli.com）]或 [V 封装硬件设计指南][硬件设计指南（V，wiki.sifli.com）]，以及相应的[U 封装硬件应用源文件][硬件应用说明源文件（U）]或 [V 封装硬件应用源文件][硬件应用说明源文件（V）]。
+4. **核对权威来源。** 针对准确的可订购型号和封装，核对思澈科技（SiFli）的[数据手册][数据手册]、[用户手册][用户手册]、适用的 [U 型号硬件设计指南][硬件设计指南（U，wiki.sifli.com）]或 [V 型号硬件设计指南][硬件设计指南（V，wiki.sifli.com）]，以及相应的 [U 型号硬件应用说明源文件][硬件应用说明源文件（U）]或 [V 型号硬件应用说明源文件][硬件应用说明源文件（V）]。
+
+<!-- uf-faq:start -->
+## 常见问题 { #frequently-asked-questions }
+
+**SF32LB56x 的主要规格是什么？**
+SF32LB56x 由应用 CPU（Cortex-M33 @240 MHz）与低功耗内核（Cortex-M33 @48/96 MHz，用户可编程内核）组成，内置 960 KB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 2.0。封装：QFN68 / BGA175（7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)）。USB 2.0 FS。以上为系列级参数，具体以所选型号的数据手册为准。
+
+**SF32LB56x 支持哪些显示接口？**
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB。具体支持情况因型号和封装而异。
+
+**SF32LB56x 的封装内存储器有多大？**
+按型号不同，封装内 PSRAM 最多 16 MB，封装内 NOR Flash 最多 1 MB。
+
+**SF32LB56x 需要什么供电电压？**
+按变体不同为 1.71–3.63 V，请以数据手册确认具体范围。
+
+**如何开始基于 SF32LB56x 的硬件设计？**
+请先阅读 [SF32LB56x 硬件设计指南](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求，并在投板前使用原理图与布局检查清单。
+<!-- uf-faq:end -->
 
 ## 相关产品 { #related-products }
 
@@ -185,11 +204,8 @@ SF32LB56x 同时覆盖紧凑型 QFN68L 与高 I/O 的 WBBGA175 料号，并提�
 
 ### 开发板 { #development-kits }
 
-[SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) 开发板适合作为固件启动调试、显示验证、音频与存储测试、RF 检查以及功耗剖析的起点，尤其适合在投入芯片级或模组级硬件开发前先完成软件与系统验证。
+[SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) 开发板适合作为固件启动调试、显示验证、音频与存储测试、RF 检查以及功耗分析的起点，尤其适合在投入芯片级或模组级硬件开发前先完成软件与系统验证。
 
 ### 参考产品 { #reference-products }
 
 典型终端产品包括高级智能手表、联网 HMI 面板、医疗与健康设备、工业手持终端、便携式仪器，以及图形能力更强的电动自行车 / 电动滑板车显示设备。
-
-!!! note "自动生成内容"
-    本页是在没有现成专用源文档的情况下编写的。依赖其中的技术结论前，请先对照思澈科技（SiFli）的官方文档核实。

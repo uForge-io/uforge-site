@@ -2,7 +2,7 @@
 icon: lucide/clipboard-check
 hide:
     - navigation
-description: "Design review checklist, related documents and references, reference schematic/PCB/mechanical/power appendices, and revision history for the SF32LB52x hardware design guide."
+description: "Design review checklist, related documents, reference appendices (schematic, PCB, mechanical, power), and revision history for the SF32LB52x hardware design guide."
 tags:
     - Hardware
     - Chip

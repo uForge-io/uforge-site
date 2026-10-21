@@ -39,7 +39,7 @@ Choisissez la puce ou le module au cœur de votre conception et consultez le gui
 | SF32LB52x | [Guide](chip-guides/SF32LB52x_hardware_design_guide.md) | [Liste de contrôle](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | Vous concevez une carte SF32LB52x en chip-down. |
 | SF32LB55x | [Guide](chip-guides/SF32LB55x_hardware_design_guide.md) | [Liste de contrôle](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | Vous concevez une carte SF32LB55x en chip-down. |
 | SF32LB56x | [Guide](chip-guides/SF32LB56x_hardware_design_guide.md) | [Liste de contrôle](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | Vous concevez une carte SF32LB56x en chip-down. |
-| SF32LB57x | Guide | Schéma / Routage PCB | Vous concevez une carte SF32LB57x en chip-down. |
+| SF32LB57x | [Guide](chip-guides/SF32LB57x_hardware_design_guide.md) | [Schéma](chip-guides/SF32LB57x_schematic_checklist.md) / [Routage PCB](chip-guides/SF32LB57x_pcb_layout_checklist.md) | Vous concevez une carte SF32LB57x en chip-down. |
 | SF32LB58x | [Guide](chip-guides/SF32LB58x_hardware_design_guide.md) | [Liste de contrôle](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | Vous concevez une carte SF32LB58x en chip-down. |
 
 </div>

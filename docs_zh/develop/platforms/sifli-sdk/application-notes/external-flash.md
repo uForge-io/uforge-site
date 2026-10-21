@@ -37,7 +37,7 @@ tags: [开发, SiFli-SDK, 应用笔记, Flash]
 
 Flash 驱动分为两层：HAL 层负责访问硬件寄存器和执行基础逻辑；DRV 层提供 Flash 读写、擦除、初始化和控制功能，以及供设备和文件系统使用的接口。
 
-控制器支持单线和四线 Flash 操作，内部可以使用 DMA 加速，支持页编程、页读取以及不同大小的扇区/块擦除。NOR Flash 还可以通过 AHB 内存接口直接读取；基本擦除单位取决于具体 Flash 器件。
+控制器支持单线和四线 Flash 操作、DMA 加速、页编程、页读取，以及扇区/块擦除。NOR Flash 还可以通过 AHB 内存接口直接读取。基本擦除单位取决于具体的 Flash 器件。
 
 ## 配置 QSPI 或 MPI { #2-configure-qspi-or-mpi }
 
@@ -202,7 +202,7 @@ SF32LB56x 的 MPI 配置基本与 SF32LB58x 一致，但不存在 MPI4。
 | MPI4 | `0x68000000` | `0x9FFFFFFF` | 896 × 1024 × 1024 字节 | EVB 容量 64 MB |
 </div>
 
-如果需要让 NAND Flash 使用超过 64 MB 的空间，指南建议将其挂载到 MPI4，并使用从 `0x68000000` 开始的地址。
+对于大于 64 MB 的 NAND Flash，指南建议将其挂载到 MPI4，并使用从 `0x68000000` 开始的地址。
 
 ```c
 #define QSPI1_MEM_BASE   (0x10000000)
@@ -463,12 +463,12 @@ rt_err_t rt_mtd_nand_register_device(const char* name, struct rt_mtd_nand_device
 
 ### 硬件要求 { #hardware-requirements }
 
-请检查：
+需要检查：
 
 - 供电电压：3.3 V 或 1.8 V；
 - 器件是否支持单线、双线和四线 SPI；
 - 各种线数模式下支持的最高频率；
-- 硬件设计所需的其他规格。原指南指出，工作温度和擦写速度不属于此阶段软件移植所要求的匹配条件。
+- 硬件设计所需的其他细节。原指南指出，工作温度和擦写速度不是此阶段软件移植所要求匹配的项目。
 
 ### 操作命令 { #operation-commands }
 
@@ -600,7 +600,7 @@ SDK 中的 `tools/flash/jlink_drv` 是思澈科技（SiFli）提供的静态 J-L
 
 ## 官方来源 { #official-source }
 
-- [Flash 使用指南 — SiFli-SDK 编程指南](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/flash_usage.html)
+- [Flash使用指南 — SiFli SDK 编程指南](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/flash_usage.html)
 - [SF32LB52x Flash 使用指南](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/flash_usage.html)
 - [SF32LB55x Flash 使用指南](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/flash_usage.html)
 - [SF32LB58x Flash 使用指南](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/flash_usage.html)

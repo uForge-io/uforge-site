@@ -13,7 +13,7 @@ tags:
 
 ## 5.8. 原理图核对表 { #58-schematic-checklist }
 
-以下各表分别对应一个原理图功能模块。若表中存在“适用型号”列，则仅对该列所列型号应用对应检查项。
+以下各表分别对应一个原理图功能模块。若表中存在“适用型号”列，则每个检查项仅适用于该列所列型号。
 
 红色文字和黄色底色用于保留源工作簿中的审阅强调。工作簿未说明各处高亮的具体原因，因此应将其视为额外的审阅提示，不改变检查项的“必检/可选”类别。
 
@@ -74,24 +74,24 @@ tags:
 
 | 序号 | 检查项 | 适用型号 | 类别 |
 |:---|:---|:---|:---|
-| 1 | VDD1 大电容至少为 10 μF | 全部型号 | 必检 |
-| 2 | VDD2 电容至少为 10 μF | 仅 555/557 | 必检 |
-| 3 | BUCK1_VOUT 电容为 4.7 μF | 全部型号 | 必检 |
-| 4 | BUCK2_VOUT 电容为 4.7 μF | 仅 555/557 | 必检 |
-| 5 | <span class="flag-red">AVDD_DSI 电容至少为 10 μF</span> | 仅 555/557 | 必检 |
-| 6 | LDO_VOUT1 电容为 4.7 μF | 全部型号 | 必检 |
-| 7 | LDO_VOUT2 电容为 4.7 μF | 全部型号 | 必检 |
-| 8 | VDD_RET 电容 = 0.47 μF | 全部型号 | 必检 |
-| 9 | VDD_RTC 电容 = 1 μF | 全部型号 | 必检 |
-| 10 | VDD_SIP 电容至少为 1 μF | 全部型号 | 必检 |
-| 11 | AVDD33 电容至少为 1 μF | 全部型号 | 必检 |
-| 12 | AVDD_BRF 电容至少为 1 μF | 全部型号 | 必检 |
-| 13 | VDDIOA 电容至少为 1 μF | 全部型号 | 必检 |
-| 14 | VDDIOB 电容至少为 1 μF | 全部型号 | 必检 |
+| 1 | VDD1 大电容至少为 10 uF | 全部型号 | 必检 |
+| 2 | VDD2 电容至少为 10 uF | 仅 555/557 | 必检 |
+| 3 | BUCK1_VOUT 电容为 4.7 uF | 全部型号 | 必检 |
+| 4 | BUCK2_VOUT 电容为 4.7 uF | 仅 555/557 | 必检 |
+| 5 | <span class="flag-red">AVDD_DSI 电容至少为 10 uF</span> | 仅 555/557 | 必检 |
+| 6 | LDO_VOUT1 电容为 4.7 uF | 全部型号 | 必检 |
+| 7 | LDO_VOUT2 电容为 4.7 uF | 全部型号 | 必检 |
+| 8 | VDD_RET 电容 = 0.47 uF | 全部型号 | 必检 |
+| 9 | VDD_RTC 电容 = 1 uF | 全部型号 | 必检 |
+| 10 | VDD_SIP 电容至少为 1 uF | 全部型号 | 必检 |
+| 11 | AVDD33 电容至少为 1 uF | 全部型号 | 必检 |
+| 12 | AVDD_BRF 电容至少为 1 uF | 全部型号 | 必检 |
+| 13 | VDDIOA 电容至少为 1 uF | 全部型号 | 必检 |
+| 14 | VDDIOB 电容至少为 1 uF | 全部型号 | 必检 |
 | 15 | VDD1、VDD2（仅 555）、AVDD_BRF 与 RESET 上拉电源必须相同 | 全部型号 | 必检 |
 | 16 | BUCK1 电感为思澈科技（SiFli）推荐料号 | 仅 551/555/557 | 必检 |
 | 17 | BUCK2 电感为思澈科技（SiFli）推荐料号 | 仅 555/557 | 必检 |
-| 18 | 若 BUCK 电感不是思澈科技（SiFli）推荐料号，则需满足 L = 4.7 μH、DCR ≤ 0.4 Ω、Isat ≥ 450 mA | 全部型号 | 必检 |
+| 18 | 若 BUCK 电感不是思澈科技（SiFli）推荐料号，则需满足 L = 4.7 uH、DCR ≤ 0.4 Ω、Isat ≥ 450 mA | 全部型号 | 必检 |
 | 19 | 若存在 GPS 或其他易受干扰外设，则需在 BUCK_LX 预留对地并联电容焊盘；取值依据实际测试结果确定 | 全部型号 | 必检 |
 | 20 | <span class="flag-red">当将 VBAT 转换为 1.8 V 给 VDD1 与 VDD2（仅 555）供电时，应使用 DCDC，不要使用 LDO</span> | 仅 551/555/557 | 必检 |
 | 21 | <span class="flag-red">已记录所选 DCDC 的静态电流，且满足项目要求</span> | 全部型号 | 必检 |
@@ -99,7 +99,7 @@ tags:
 
 </div>
 
-资料存在差异：思澈科技（SiFli）《[硬件应用说明](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)》表 3-3 和[原理图检查表 V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)第 9 项均规定 VDD_RTC 使用 1 µF 电容，但[参考原理图中的 C0313](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png)标注为 0.1 µF。资料未说明两种取值分别适用于什么情况。定版前请向思澈科技（SiFli）确认具体器件所需的电容值，不要自行推断。
+资料存在差异：思澈科技（SiFli）中文《[硬件应用说明](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)》表 3-3 和[原理图检查表 V1.0](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)第 9 项均规定 VDD_RTC 使用 1 µF 电容，但[参考原理图中的 C0313](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-LDOIO-SCH.png)标注为 0.1 µF。资料未说明两种取值分别适用于什么情况。定版前请向思澈科技（SiFli）确认具体器件所需的电容值，不要自行推断。
 
 ### 5.8.4. 时钟 { #584-clock }
 
@@ -126,7 +126,7 @@ tags:
 | 序号 | 检查项 | 适用型号 | 类别 |
 |:---|:---|:---|:---|
 | 1 | RSTN 上拉到与 VDD1 相同的电源 | 全部型号 | 必检 |
-| 2 | RSTN 预留 0.1 μF 对地电容 | 全部型号 | 必检 |
+| 2 | RSTN 预留 0.1 uF 对地电容 | 全部型号 | 必检 |
 | 3 | RSTN 具备 ESD 保护 | 全部型号 | 必检 |
 
 </div>
@@ -224,14 +224,14 @@ tags:
 | 9 | <span class="flag-red">若 QSPI3 电源开关控制不是 PA41，则需与软件确认替代 IO</span> | 仅 555/557 | 可选 |
 | 10 | 若 QSPI3 外部 Flash 需要在量产中烧录，则其电源开关必须由 PA58 控制 | 仅 555/557 | 必检 |
 | 11 | OPI PSRAM 电源开关控制为 PA70；<span class="flag-red">PSRAM 默认上电，若使用高电平开启开关，应利用默认内部上拉</span> | 仅 555/557 | 可选 |
-| 12 | <span class="flag-red">OPI PSRAM 型号受支持，并符合关键器件选型指南中的要求</span> | 仅 555/557 | 可选 |
+| 12 | <span class="flag-red">OPI PSRAM 为受支持型号，且在关键器件选型指南中列为已验证</span> | 仅 555/557 | 可选 |
 | 13 | OPI PSRAM 信号连接正确 | 仅 555/557 | 可选 |
 | 14 | QSPI2 信号连接正确 | 全部型号 | 可选 |
 | 15 | QSPI3 信号连接正确 | 全部型号 | 可选 |
 | 16 | <span class="flag-yellow">使用 SF32LB555 或 <span class="flag-red">SF32LB557 时，需确认心率算法所需的存储空间；若 LCPU 空间不足，则在 QSPI4 增加外部 1 MB Flash</span></span> | 仅 555/557 | 必检 |
 | 17 | 外设器件的 I/O 逻辑电平与主芯片匹配 | 全部型号 | 必检 |
-| 18 | <span class="flag-red">NOR Flash 型号符合关键器件选型指南中的要求</span> | 全部型号 | 必检 |
-| 19 | <span class="flag-red">NAND Flash 型号符合关键器件选型指南中的要求</span> | 全部型号 | 必检 |
+| 18 | <span class="flag-red">NOR Flash 型号在关键器件选型指南中列为已验证</span> | 全部型号 | 必检 |
+| 19 | <span class="flag-red">NAND Flash 型号在关键器件选型指南中列为已验证</span> | 全部型号 | 必检 |
 
 </div>
 
@@ -255,8 +255,8 @@ tags:
 | 10 | <span class="flag-red">SPI LCD：3 线模式下，CS 接 GPIO22 或 PA31 或 PB33，CLK 接 GPIO23 或 PA20 或 PB32，DATA 接 GPIO21 或 PA34 或 PB35；<br>4 线模式下，CS 接 GPIO22 或 PA31 或 PB33，CLK 接 GPIO23 或 PA20 或 PB32，DATA 接 GPIO21 或 PA34 或 PB35，DC 接 GPIO20 或 PA36 或 PB36</span> | 全部型号 | 必检 |
 | 11 | TP 信号遵循推荐引脚分配（参考 EVB I/O 配置文件） | 全部型号 | 必检 |
 | 12 | 外设器件的 I/O 逻辑电平与主芯片匹配 | 全部型号 | 必检 |
-| 13 | 若需支持熄屏显示，LCD QSPI 接口应连接到 MCU 的 PA 管脚；LCD_EN、LCD_RST 等控制信号建议使用 PB GPIO | <span class="flag-red">仅 551/SS6600A8</span> | 必检 |
-| 14 | 若需支持熄屏显示，LCD QSPI 接口应连接到 MCU 的 PA 管脚，也可使用 LCD MIPI 接口连接 MCU；LCD_EN、LCD_RST 等控制信号建议使用 PB GPIO | 仅 555/557 | 必检 |
+| 13 | 若需支持熄屏（常亮）显示，LCD QSPI 接口应连接到 MCU 的 PA 管脚；LCD_EN、LCD_RST 等控制信号建议使用 PB GPIO | <span class="flag-red">仅 551/SS6600A8</span> | 必检 |
+| 14 | 若需支持熄屏（常亮）显示，LCD QSPI 接口应连接到 MCU 的 PA 管脚，也可使用 LCD MIPI 接口连接 MCU；LCD_EN、LCD_RST 等控制信号建议使用 PB GPIO | 仅 555/557 | 必检 |
 
 </div>
 
@@ -275,7 +275,7 @@ tags:
 
 </div>
 
-资料存在差异：按资料优先级更高的 [OpenSiFli 硬件应用指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)，GPADC 为 5 通道、10 位，输入范围为 0–0.9 V。本 V1.0 [源检查表工作簿](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)第 2 项规定最大输入电压为 1.0 V，但未说明通道数。与此不同，[SF32LB55x 规格书 V1.7.2 第 3.2.1 节](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)规定支持 8 路单端输入或 4 对差分输入，单端范围为 0–1.1 V，差分范围为 −0.7–0.7 V；其引脚表列出 GPADC_CH0–CH7。当前 [SDK ADC 指南](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html)同样列出 8 个通道（0–7）和 1.1 V 最大采样电压。思澈科技（SiFli）尚未解释通道数和电压限值的差异。因此，核对表第 2 项保留工作簿中的 1.0 V 原值；在获得思澈科技（SiFli）书面澄清前，实际设计应遵循优先级更高的硬件应用指南，将 VADC 控制在 0–0.9 V 范围内。不要将工作簿中的 1.0 V 或规格书和 SDK 中的 1.1 V 视为已批准的设计上限，并向思澈科技（SiFli）确认所选器件和封装的可用通道。
+资料存在差异：按资料优先级更高的 [OpenSiFli 硬件应用指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB55x-HW-Application.md)，GPADC 为 5 通道、10 位，输入范围为 0–0.9 V。本 V1.0 [源检查表工作簿](https://downloads.sifli.com/hardware/files/documentation/SF32LB55x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)第 2 项规定最大输入电压为 1.0 V，但未说明通道数。与此不同，[SF32LB55x 规格书 V1.7.2 第 3.2.1 节](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)规定支持 8 路单端输入或 4 对差分输入，单端范围为 0–1.1 V，差分范围为 −0.7–0.7 V；其管脚表列出 GPADC_CH0–CH7。当前 [SDK ADC 指南](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/adc.html)同样列出 8 个通道（0–7）和 1.1 V 最大采样电压。思澈科技（SiFli）尚未解释通道数和电压限值的差异。核对表第 2 项仍保留工作簿中的 1.0 V 原值；但在获得思澈科技（SiFli）书面澄清前，实际设计应遵循优先级更高的硬件应用指南的 0–0.9 V 范围，使 VADC 不超过 0.9 V。不要将工作簿中的 1.0 V 或规格书和 SDK 中的 1.1 V 视为已批准的设计上限。另请确认所选器件和封装的可用通道。
 
 ### 5.8.14. SDMADC { #5814-sdmadc }
 
@@ -366,7 +366,7 @@ tags:
 | 序号 | 检查项 | 适用型号 | 类别 |
 |:---|:---|:---|:---|
 | 1 | PDM 连接正确 | 仅 555/557 | 可选 |
-| 2 | PDM 接口的双数字麦克风连接正确 | 仅 555/557 | 可选 |
+| 2 | PDM 双麦克风连接正确 | 仅 555/557 | 可选 |
 | 3 | 麦克风料号规格已确认，且受芯片支持 | 仅 555/557 | 可选 |
 | 4 | 外设器件的 I/O 逻辑电平与主芯片匹配 | 仅 555/557 | 可选 |
 
@@ -403,7 +403,7 @@ tags:
 | 7 | 未使用的 USART 测试点已预留，作为备用 | 全部型号 | 可选 |
 | 8 | <span class="flag-red">若 UART1 连接器件，则已预留测试点</span> | 全部型号 | 必检 |
 | 9 | <span class="flag-red">若 UART 连接 UART-to-USB 芯片，则 RX 与 TX 必须可断开</span> | 全部型号 | 必检 |
-| 10 | <span class="flag-red">推荐连接外设的 UART 使用 HCPU 接口，以避免 HCPU 软件占用 LCPU 的 UART 接口</span> | 全部型号 | 必检 |
+| 10 | <span class="flag-red">推荐连接外设的 UART 使用 HCPU 接口，以避免 HCPU 软件使用 LCPU 的 UART 接口</span> | 全部型号 | 必检 |
 
 </div>
 
@@ -458,10 +458,10 @@ tags:
 
 | 序号 | 检查项 | 适用型号 | 类别 |
 |:---|:---|:---|:---|
-| 1 | 不推荐将 QFN GPIO27 和 BGA PA01 用作输入，因为内部 20 kΩ 下拉会在外部上拉较大时造成高电平偏低，或在外部上拉较小时造成过大漏电 | 全部型号 | 必检 |
-| 2 | 若 QFN GPIO27 或 BGA PA01 用作输出，需确认当 I/O 未驱动时，被控电路默认处于不使能状态。更适合用于大电流工作场景，因为输出 1.8 V 高电平会引入约 90 μA 漏电 | 全部型号 | 必检 |
+| 1 | 不推荐将 QFN GPIO27 和 BGA PA01 用作输入，因为内部 20 kΩ 下拉在外部上拉电阻较大时会使高电平偏低，在外部上拉电阻较小时会造成过大漏电 | 全部型号 | 必检 |
+| 2 | 若 QFN GPIO27 或 BGA PA01 用作输出，需确认当 I/O 未驱动时，被控电路默认处于不使能状态。优先用于大电流工作场景，因为输出 1.8 V 高电平会引入约 90 uA 漏电 | 全部型号 | 必检 |
 | 3 | 若 PA01 与 PA03 用作 GPIO，则睡眠期间两路 IO 电平需保持一致，或至少让其中一路处于高阻态且不上拉不下拉 | 全部型号 | 必检 |
-| 4 | PA77、PA78、PA79、PA80 以及 PB43-PB48 共 10 个可唤醒引脚。在休眠（Hibernate）断电状态下，它们为高阻态，内部 PU/PD 失效；若无法通过其他方式保证固定电平，则需增加外部上拉或下拉 | 全部型号 | 必检 |
+| 4 | PA77、PA78、PA79、PA80 以及 PB43-PB48 共 10 个可唤醒管脚。在休眠（Hibernate）断电状态下，它们为高阻态，内部 PU/PD 被禁用；若无法通过其他方式保证固定电平，则需增加外部上拉或下拉 | 全部型号 | 必检 |
 | 5 | 若 PB 唤醒引脚用于波形输出，即使不使用休眠（Hibernate），也需预留外部上拉或下拉 | 全部型号 | 必检 |
 | 6 | 对所有 MOSFET、LDO 与 DCDC 的使能引脚，需确保在休眠（Hibernate）状态下，借助默认上拉或下拉电阻仍能维持所需开/关状态 | 全部型号 | 必检 |
 | 7 | 对于通过输出高电平控制负载的 GPIO 信号，在不影响功能时使用 1 MΩ 下拉以降低漏电 | 全部型号 | 必检 |
@@ -471,7 +471,7 @@ tags:
 | 11 | <span class="flag-red">已记录休眠（Hibernate）模式下所选外设的底电流总和，且满足项目要求</span> | 全部型号 | 必检 |
 | 12 | 已记录待机（Standby）模式的底电流要求 | 全部型号 | 必检 |
 | 13 | <span class="flag-red">已记录待机（Standby）模式下所选外设的底电流总和，且满足项目要求</span> | 全部型号 | 必检 |
-| 14 | 对于作为输出使用的 PB43-PB48 唤醒引脚，需预留外部上拉或下拉，因为其在待机（Standby）模式下内部上下拉失效 | 全部型号 | 必检 |
+| 14 | 对于作为输出使用的 PB43-PB48 唤醒管脚，需预留外部上拉或下拉，因为待机（Standby）模式下内部上下拉被禁用 | 全部型号 | 必检 |
 
 </div>
 

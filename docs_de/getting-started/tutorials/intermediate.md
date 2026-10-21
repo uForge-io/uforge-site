@@ -1,6 +1,6 @@
 ---
 icon: lucide/trending-up
-description: "SF32-Tutorials zur Integration mehrerer Subsysteme: Sensoren am I2C-Bus, ein einfacher LVGL-Bildschirm, ein BLE-Peripheriedienst, lokale Audiowiedergabe, Dateisystemspeicher und Koexistenztests."
+description: "SF32-Tutorials zu vernetzten Subsystemen: I2C-Sensoren, einfacher LVGL-Bildschirm, BLE-Peripheriedienst, lokale Audiowiedergabe, Dateisystem und Koexistenztests."
 tags:
     - Tutorials
 ---

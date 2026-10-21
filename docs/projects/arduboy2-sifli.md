@@ -1,6 +1,6 @@
 ---
 icon: lucide/gamepad-2
-description: "A reproducible engineering path for evaluating OpenSiFli's Arduboy2 port, validating the game-loop and peripheral boundary, and deciding whether an SF32 game-oriented product is ready for deeper design work."
+description: "A reproducible path to evaluate OpenSiFli's Arduboy2 port, validate the game loop and peripherals, and decide if an SF32 game product is ready for deeper design."
 tags:
     - Projects
     - Arduino

@@ -1,6 +1,6 @@
 ---
 icon: lucide/microchip
-description: "SF32LB56x : famille avancée de MCU Bluetooth bimode à très basse consommation pour les produits qui exigent des écrans plus riches, de l'audio intégré, de la mémoire externe et un traitement permanent plus puissant."
+description: "SF32LB56x : famille avancée de MCU Bluetooth bimode à très basse consommation pour écrans plus riches, audio intégré, mémoire externe et traitement permanent plus puissant."
 tags:
     - Matériel
     - Puce
@@ -177,6 +177,25 @@ Suivez cette séquence pour transformer une présélection SF32LB56x en concepti
 3. **Concevoir et relire le matériel.** Utilisez le [guide de conception matérielle](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) local — y compris ses listes de contrôle du [schéma](../../hardware/chip-guides/SF32LB56x_schematic_checklist.md) et de l'implantation du circuit imprimé — avant de valider le schéma ou l'implantation. Maintenez le choix du boîtier U/V et de l'interface d'affichage cohérent avec le composant retenu.
 4. **Vérifier la source faisant autorité.** Confirmez la référence commandable et le boîtier exacts à l'aide de la [fiche technique][Fiche technique], du [manuel utilisateur][Manuel utilisateur], du [guide de conception matérielle U][Guide de conception matérielle (U, wiki.sifli.com)] ou [V][Guide de conception matérielle (V, wiki.sifli.com)] applicable, et de la [source d'application matérielle U][Source de l'application matérielle (U)] ou [V][Source de l'application matérielle (V)] correspondante de SiFli.
 
+<!-- uf-faq:start -->
+## Questions fréquentes { #frequently-asked-questions }
+
+**Quelles sont les principales caractéristiques du SF32LB56x ?**
+Le SF32LB56x associe un CPU applicatif (Cortex-M33 @240 MHz) à un cœur basse consommation (Cortex-M33 @48/96 MHz, avec un cœur programmable par l'utilisateur), 960 KB de SRAM interne et Bluetooth bimode (BT classique + BLE). Graphismes : ePicasso 2.0. Boîtier : QFN68 / BGA175 (7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)). USB 2.0 FS. Valeurs au niveau de la famille ; vérifiez la fiche technique de la référence exacte.
+
+**Quelles interfaces d'affichage le SF32LB56x prend-il en charge ?**
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. La disponibilité varie selon la référence et le boîtier.
+
+**Quelle mémoire dans le boîtier le SF32LB56x propose-t-il ?**
+Jusqu'à 16 MB de PSRAM et jusqu'à 1 MB de Flash NOR dans le boîtier, selon la référence.
+
+**Quelle tension d'alimentation faut-il pour le SF32LB56x ?**
+1.71–3.63 V, selon la variante. Confirmez la plage exacte dans la fiche technique.
+
+**Par où commencer une conception matérielle avec le SF32LB56x ?**
+Commencez par le [guide de conception matérielle du SF32LB56x](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) (schéma, alimentation, horloge/RF, routage PCB), puis utilisez les listes de contrôle de schéma et d'implantation avant de figer la carte.
+<!-- uf-faq:end -->
+
 ## Produits associés { #related-products }
 
 ### Module { #module }
@@ -190,6 +209,3 @@ Le [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) est un point de dép
 ### Produits de référence { #reference-products }
 
 Les produits finaux SF32LB56x typiques comprennent les montres connectées avancées, les panneaux IHM connectés, les appareils de santé, les terminaux portables industriels, les instruments portatifs et des afficheurs plus riches pour vélos ou trottinettes électriques.
-
-!!! note "Contenu généré automatiquement"
-    Cette page a été compilée/rédigée sans document source existant. Vérifiez les affirmations techniques dans la documentation officielle de SiFli avant de vous y fier.

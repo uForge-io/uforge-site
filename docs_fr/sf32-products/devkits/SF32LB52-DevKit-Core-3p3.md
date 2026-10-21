@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-Core-3p3 : carte d'évaluation SF32LB52x compacte avec alimentation de la MCU sélectionnable par cavalier (1,8 V ou 3,3 V) et accès direct aux GPIO, à l'affichage, à l'audio, à l'USB et aux rails d'alimentation."
+description: "SF32LB52-DevKit-Core-3p3 : carte d'évaluation SF32LB52x compacte, alimentation MCU 1,8 V ou 3,3 V par cavalier, accès direct aux GPIO, affichage, audio et USB."
 tags:
     - Matériel
     - Carte de développement

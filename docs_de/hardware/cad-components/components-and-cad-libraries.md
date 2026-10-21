@@ -1,6 +1,6 @@
 ---
 icon: lucide/boxes
-description: "Beginnen Sie ein SF32-Produktionsdesign mit qualifizierten Bauteilen und offiziellen CAD-Daten und prüfen Sie anschließend Stückliste und Layout in der richtigen Reihenfolge."
+description: "Starten Sie ein SF32-Produktionsdesign mit qualifizierten Bauteilen und offiziellen CAD-Daten und prüfen Sie danach Stückliste und Layout in der richtigen Reihenfolge."
 tags:
     - Hardware
     - Produktion

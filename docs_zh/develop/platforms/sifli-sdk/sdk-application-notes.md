@@ -1,7 +1,7 @@
 ---
 icon: lucide/notebook-tabs
 title: "SDK 应用笔记"
-description: "按工程任务组织的 SiFli-SDK 使用指南阅读路径，帮助 SF32 开发者更快找到可验证的资料。"
+description: "面向 SF32 开发、按工程任务组织并链接到源资料的 SiFli-SDK 使用指南阅读路径。"
 tags:
     - 开发
     - SiFli-SDK
@@ -12,7 +12,7 @@ tags:
 
 本页按工程任务整理 SiFli-SDK 使用指南，帮助你快速找到对应的操作说明，并了解项目中应保留哪些验证记录。
 
-这些文章侧重实践与集成，不能替代 SDK 手册。使用具体配置、API、示例或测试流程前，请先在官方 [SiFli-SDK 使用指南](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/index.html)中选择目标芯片系列和 SDK 版本。
+这些文章为理解和集成各个主题提供实用指导，不能替代 SDK 手册。使用具体配置、API、示例或测试流程前，请先在官方 [SiFli SDK 使用指南](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/index.html)中选择目标芯片系列和 SDK 版本。
 
 ## 按任务阅读 { #read-by-task }
 
@@ -27,11 +27,11 @@ tags:
 | [使用外部 Flash](application-notes/external-flash.md) | 在 Flash 中存储数据、资源或文件系统。 | Flash 使用指南 |
 | [配置看门狗](application-notes/watchdog.md) | 验证看门狗恢复路径。 | 看门狗使用指南 |
 | [使用 EZIP 压缩图形资源](application-notes/ezip-image-assets.md) | 转换并集成 EZIP 图像资源。 | EZIP 图像转换工具使用指南 |
-| [配置并测量低功耗](application-notes/low-power-measurement.md) | 配置目标低功耗状态并对比测量结果。 | 低功耗开发指南 |
+| [配置并测量低功耗](application-notes/low-power-measurement.md) | 配置功耗状态并对比测量结果。 | 低功耗开发指南 |
 | [捕获日志并分析崩溃](application-notes/crash-analysis.md) | 保留相互对应的日志、崩溃现场信息和符号文件。 | 崩溃分析指南；调试与日志 |
-| [运行 SiFli-SDK 射频测试](application-notes/rf-performance-tests.md) | 选择信令、非信令或单项射频验证路径。 | SiFli SDK 射频测试指南 |
-| [执行蓝牙（Bluetooth）信令测试](application-notes/bluetooth-signalling-tests.md) | 执行基于协议的蓝牙验证。 | 蓝牙信令测试指南 |
-| [运行蓝牙单项射频测试](application-notes/bluetooth-single-tone-tests.md) | 按官方流程逐项执行蓝牙射频测试。 | 蓝牙单项射频测试指南 |
+| [运行 SiFli SDK 射频测试](application-notes/rf-performance-tests.md) | 选择信令、非信令或单项射频验证路径。 | SiFli SDK 射频测试指南 |
+| [运行蓝牙（Bluetooth）信令测试](application-notes/bluetooth-signalling-tests.md) | 执行基于协议的蓝牙验证。 | 蓝牙信令测试指南 |
+| [运行蓝牙单项射频测试](application-notes/bluetooth-single-tone-tests.md) | 按所选项目的蓝牙单项射频测试流程操作。 | 蓝牙单项射频测试指南 |
 
 </div>
 
@@ -42,4 +42,4 @@ tags:
 3. 查看文中链接的 SDK 资料，核对具体路径、配置符号、命令、API 和工具版本。
 4. 将已验证的开发板、SDK 版本、配置文件、测试设备和实测结果作为项目验证证据留存。
 
-跨平台的架构决策请查阅[固件主题](../../firmware-topics/index.md)；需要在 SDK 与社区路径之间比较可用示例时，请查阅[示例](../../examples/index.md)。
+跨平台的架构决策请查阅[固件主题](../../firmware-topics/index.md)；需要了解 SDK 与社区路径下受支持的示例基线时，请查阅[示例](../../examples/index.md)。

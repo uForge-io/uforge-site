@@ -1,6 +1,6 @@
 ---
 icon: lucide/package
-description: "SiFli-SDK as the reference SF32 development path: core scons build and sdk.py menuconfig workflows, board naming, project structure, and production-readiness questions."
+description: "SiFli-SDK as the reference SF32 development path: scons build and menuconfig workflows, board naming, project structure, and production readiness."
 tags:
     - Develop
     - SiFli-SDK

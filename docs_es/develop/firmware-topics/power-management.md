@@ -1,6 +1,6 @@
 ---
 icon: lucide/battery-charging
-description: "Mida y ajuste el consumo de SF32 según la configuración de reloj, los modos de suspensión, la pantalla, los intervalos de conexión Bluetooth y los sensores para convertir un prototipo en un producto preparado para funcionar con batería."
+description: "Mida y ajuste el consumo de SF32 según relojes, modos de suspensión, pantalla, intervalos Bluetooth y sensores para convertir un prototipo en un producto con batería."
 tags:
     - Desarrollo
     - Energía

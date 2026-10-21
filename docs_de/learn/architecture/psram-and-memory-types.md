@@ -1,6 +1,6 @@
 ---
 icon: lucide/memory-stick
-description: "PSRAM in eingebetteten Systemen: wie Pseudo-Static-RAM SRAM erweitert, wie es sich von DRAM, RRAM und MRAM unterscheidet und wie Daten über die SF32-Speicherhierarchie verteilt werden."
+description: "PSRAM in Embedded-Systemen: wie Pseudo-Static-RAM SRAM erweitert, wie es sich von DRAM, RRAM und MRAM unterscheidet und wie Daten in der SF32-Speicherhierarchie liegen."
 tags:
     - Architektur
     - Speicher

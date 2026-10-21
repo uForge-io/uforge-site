@@ -395,5 +395,5 @@ V0.3에는 터치 컨트롤러 항목이 없습니다. 이것이 이후 리비�
 ## 관련 페이지 { #related-pages }
 
 - [SF32LB52x 하드웨어 설계 가이드](../chip-guides/SF32LB52x_hardware_design_guide.md) — 이 목록의 여러 부품을 직접 참조하는 회로도 및 레이아웃 가이드입니다.
-- SF32LB57x 하드웨어 설계 가이드
+- [SF32LB57x 하드웨어 설계 가이드](../chip-guides/SF32LB57x_hardware_design_guide.md)
 - [SF32 제품군](../../sf32-products/family/SF32_family.md)

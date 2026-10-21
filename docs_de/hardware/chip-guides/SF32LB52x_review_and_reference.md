@@ -2,7 +2,7 @@
 icon: lucide/clipboard-check
 hide:
     - navigation
-description: "Design-Review-Checkliste, verwandte Dokumente und Referenzen, Referenzanhänge zu Schaltplänen, PCB, Mechanik und Stromversorgung und Versionshistorie für den SF32LB52x Hardware-Design-Leitfaden."
+description: "Design-Review-Checkliste, verwandte Dokumente, Referenzanhänge (Schaltplan, PCB, Mechanik, Versorgung) und Versionshistorie des SF32LB52x-Hardware-Design-Leitfadens."
 tags:
     - Hardware
     - Chip

@@ -1,6 +1,6 @@
 ---
 icon: lucide/braces
-description: "Aucune procédure de prise en main de MicroPython pour SF32 n'a encore été validée. Utilisez SiFli-SDK pour un premier démarrage reproductible et consultez la page d'état de MicroPython pour suivre l'avancement."
+description: "MicroPython n'est pas encore une prise en main SF32 validée : utilisez SiFli-SDK pour un premier démarrage reproductible et suivez la page d'état MicroPython."
 tags:
     - Prise en main
     - MicroPython

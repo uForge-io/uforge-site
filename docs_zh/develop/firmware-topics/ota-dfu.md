@@ -44,7 +44,7 @@ USB CDC 和 BLE 使用推送式传输，配置项 `DFU_V2_USE_CDC_TRANSPORT` 与
 
 <div align="center" markdown>
 
-| 通道 | 文档定义的升级路径 | 典型用途 |
+| 通道 | 文档记载的升级路径 | 典型用途 |
 | --- | --- | --- |
 | USB-CDC | PC 通过 USB 虚拟串口升级设备。 | 量产、实验室和有线维护流程。 |
 | BLE | BLE 外设应用接收升级包。 | 通过手机 App 升级已连接的产品。 |
@@ -81,7 +81,7 @@ scons --board=<board-name> -j8
 | --- | --- | --- |
 | USB-CDC | [`cdc/app`](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/dfu_v2/cdc/app/README.html) | [`cdc/loader`](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/dfu_v2/cdc/loader/README.html) |
 | BLE | [`ble/app`](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/dfu_v2/ble/app/README.html) | [`ble/loader`](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/dfu_v2/ble/loader/README.html) |
-| Bluetooth PAN | [`bt_pan/app`](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/dfu_v2/bt_pan/app/README.html) | [`bt_pan/loader`](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/dfu_v2/bt_pan/loader/README.html) |
+| 蓝牙 PAN | [`bt_pan/app`](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/dfu_v2/bt_pan/app/README.html) | [`bt_pan/loader`](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/dfu_v2/bt_pan/loader/README.html) |
 
 </div>
 

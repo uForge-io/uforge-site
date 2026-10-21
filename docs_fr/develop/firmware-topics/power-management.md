@@ -1,6 +1,6 @@
 ---
 icon: lucide/battery-charging
-description: "Mesurer et optimiser la consommation du SF32 liée à la configuration des horloges, aux modes de veille, à l'affichage, aux intervalles de connexion Bluetooth et aux capteurs pour faire d'un prototype un produit portable conçu pour fonctionner sur batterie."
+description: "Mesurer et optimiser la consommation SF32 : horloges, veille, affichage, intervalles de connexion Bluetooth et capteurs, pour passer du prototype au produit sur batterie."
 tags:
     - Développement
     - Énergie

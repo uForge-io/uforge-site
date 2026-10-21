@@ -1,6 +1,6 @@
 ---
 icon: lucide/waypoints
-description: "Ein praktischer SF32-Referenzpfad von der Validierung auf dem SF32LB52-Entwicklungsboard bis zum Freigabeplan für die individuelle Hardware und Firmware eines vernetzten Wearables."
+description: "Praktischer SF32-Referenzpfad von der Validierung auf dem SF32LB52-Entwicklungsboard bis zum Freigabeplan für Hardware und Firmware eines vernetzten Wearables."
 tags:
     - Hardware
     - Referenzdesign

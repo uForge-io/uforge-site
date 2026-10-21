@@ -33,6 +33,7 @@ nav = [
       "sf32-products/chips/SF32LB52x.md",
       "sf32-products/chips/SF32LB55x.md",
       "sf32-products/chips/SF32LB56x.md",
+      "sf32-products/chips/SF32LB57x.md",
       "sf32-products/chips/SF32LB58x.md"
     ]},
     { "モジュール" = [
@@ -144,6 +145,20 @@ nav = [
         { "回路図チェックリスト" = "hardware/chip-guides/SF32LB56x_schematic_checklist.md" },
         { "PCB レイアウトガイドライン" = "hardware/chip-guides/SF32LB56x_pcb_layout.md" },
         { "設計レビュー・チェックリストと参考資料" = "hardware/chip-guides/SF32LB56x_review_and_reference.md" }
+      ]},
+      { "SF32LB57x" = [
+        { "概要" = "hardware/chip-guides/SF32LB57x_hardware_design_guide.md" },
+        { "回路図設計ガイドライン" = [
+          { "最小システム・電源" = "hardware/chip-guides/SF32LB57x_schematic_system_power.md" },
+          { "クロック・RF・ユーザーインターフェース" = "hardware/chip-guides/SF32LB57x_schematic_clock_rf_interfaces.md" },
+          { "ストレージ・製造" = "hardware/chip-guides/SF32LB57x_schematic_storage_mfg.md" },
+          { "回路図チェックリスト" = "hardware/chip-guides/SF32LB57x_schematic_checklist.md" }
+        ]},
+        { "PCB レイアウトガイドライン" = [
+          { "設計ガイドライン" = "hardware/chip-guides/SF32LB57x_pcb_layout.md" },
+          { "PCB レイアウトチェックリスト" = "hardware/chip-guides/SF32LB57x_pcb_layout_checklist.md" }
+        ]},
+        { "設計レビュー・チェックリストと参考資料" = "hardware/chip-guides/SF32LB57x_review_and_reference.md" }
       ]},
       { "SF32LB58x" = [
         { "概要" = "hardware/chip-guides/SF32LB58x_hardware_design_guide.md" },

@@ -1,6 +1,6 @@
 ---
 icon: lucide/keyboard
-description: "Parcours d'ingénierie pour SuperKey, basé sur le SF32LB52 avec trois écrans, USB HID/CDC et application compagnon : reproduire, valider les communications et la récupération, adapter avec méthode et transférer vers la conception produit."
+description: "Parcours d'ingénierie pour SuperKey sur SF32LB52 (trois écrans, USB HID/CDC, application compagnon) : reproduire, valider, adapter et transférer à la conception produit."
 tags:
     - Projets
     - USB

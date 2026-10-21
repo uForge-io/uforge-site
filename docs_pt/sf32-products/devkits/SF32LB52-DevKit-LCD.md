@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-LCD: placa de desenvolvimento SF32LB52x voltada a displays, para o bring-up rápido de produtos com displays SPI, QSPI e MCU/8080, com toque, áudio, armazenamento e suporte a bateria."
+description: "SF32LB52-DevKit-LCD: placa SF32LB52x voltada a displays para bring-up rápido de displays SPI, QSPI e MCU/8080, com toque, áudio, armazenamento e bateria."
 tags:
     - Hardware
     - Placa de desenvolvimento

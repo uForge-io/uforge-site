@@ -2,7 +2,7 @@
 icon: lucide/book-check
 hide:
     - navigation
-description: "Guide de conception matérielle pour le microcontrôleur SF32LB55x : alimentation, circuits d'horloge, adaptation RF, interfaces de stockage et d'affichage, et conseils d'implantation et de routage PCB."
+description: "Guide de conception matérielle du MCU SF32LB55x : alimentation, circuits d'horloge, adaptation RF, interfaces de stockage et d'affichage, et conseils de routage PCB."
 tags:
     - Matériel
     - Puce

@@ -267,6 +267,6 @@ SF32LB56x 로그 UART를 외부 PC에 연결할 때는 시리얼 어댑터의 �
 - [SF32LB57x ADC Usage and Configuration Guide](https://docs.sifli.com/projects/sdk/latest/sf32lb57x/app_note/adc.html)
 - [SF32LB58x ADC Usage and Configuration Guide](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/adc.html)
 - [SF32LB52x ADC HAL API Reference](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/adc.html) — 기본 캘리브레이션 범위 정의.
-- SF32LB57x 하드웨어 설계 가이드 — 스토리지 및 양산 — GPADC 채널 및 패드 할당.
-- SF32LB57x 하드웨어 설계 가이드 — 최소 시스템 및 전원 — 아날로그 전원/레퍼런스 연결 및 변형별 배터리 감지 한계.
+- [SF32LB57x 하드웨어 설계 가이드 — 스토리지 및 양산](../../../../hardware/chip-guides/SF32LB57x_schematic_storage_mfg.md) — GPADC 채널 및 패드 할당.
+- [SF32LB57x 하드웨어 설계 가이드 — 최소 시스템 및 전원](../../../../hardware/chip-guides/SF32LB57x_schematic_system_power.md) — 아날로그 전원/레퍼런스 연결 및 변형별 배터리 감지 한계.
 - [OpenSiFli ADC FAQ](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/faq/mcu/adc.md) — SF32LB55x 공장 캘리브레이션 범위, 시작/Standby/웨이크 검증, SF32LB56x 로그 UART 레벨 안내.

@@ -1,6 +1,6 @@
 ---
 icon: lucide/list
-description: "SF32LB57デュアルモードBluetoothモジュール（SIFLI_AT）のATコマンドリファレンスです。コマンド形式、システムとデバイス、アドレスと識別情報、動作モードと可視性、ペアリングとセキュリティ、シリアルポートとイベント、接続管理、データ転送、カスタムGATTコマンド、非同期イベント（URC）、PDU形式コマンドを網羅します。"
+description: "SF32LB57デュアルモードBluetoothモジュール（SIFLI_AT）のATコマンドリファレンス。フレーム形式、ペアリング、接続、データ転送、GATT、URC、PDUコマンド。"
 tags:
   - Bluetooth
 ---

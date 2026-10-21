@@ -1,6 +1,6 @@
 ---
 icon: lucide/boxes
-description: "SiFli-SDK-Beispielcode in wiederverwendbare Komponenten und `sf-pkg`-Pakete überführen: Qualitätsmaßstab, Dokumentationsinhalte und typische Stolperfallen beim Paketieren."
+description: "SiFli-SDK-Beispielcode in wiederverwendbare Komponenten und `sf-pkg`-Pakete überführen: Qualitätsmaßstab, Dokumentationsinhalte und typische Stolperfallen."
 tags:
     - Entwicklung
     - SiFli-SDK

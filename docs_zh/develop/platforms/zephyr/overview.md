@@ -8,7 +8,7 @@ tags:
 
 # Zephyr { #zephyr }
 
-OpenSiFli 正在 [OpenSiFli/zephyr-downstream](https://github.com/OpenSiFli/zephyr-downstream) 和 [OpenSiFli/zephyr-hal_sifli-downstream](https://github.com/OpenSiFli/zephyr-hal_sifli-downstream) 中持续推进 Zephyr 支持。下游代码树包含 `sf32lb52_devkit_lcd` 开发板、思澈科技（SiFli） HAL 集成、SF32LB52 设备树（devicetree）文件、驱动、测试和示例 overlay 配置。
+OpenSiFli 正在 [OpenSiFli/zephyr-downstream](https://github.com/OpenSiFli/zephyr-downstream) 和 [OpenSiFli/zephyr-hal_sifli-downstream](https://github.com/OpenSiFli/zephyr-hal_sifli-downstream) 中持续推进 Zephyr 支持。下游代码树包含 `sf32lb52_devkit_lcd` 开发板、思澈科技（SiFli）HAL 集成、SF32LB52 设备树（devicetree）文件、驱动、测试和示例 overlay 配置。
 
 如果你希望使用 Zephyr API、设备树（devicetree）、Kconfig 和可移植的 RTOS 架构，或希望采用可与 ArduinoCore-zephyr 衔接的开发路径，可以选择 Zephyr。若当前优先考虑更完整的厂商功能支持，应选择 SiFli-SDK。
 

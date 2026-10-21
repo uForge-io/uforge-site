@@ -1,6 +1,6 @@
 ---
 icon: lucide/watch
-description: "Produktentwicklungspfad für LilyGOs Drittanbieterplattform T-Display-SF32: Herstellerbasis festlegen, Display, Peripherie, Stromverhalten und Wiederherstellung prüfen, den SiFli-SDK-Build reproduzieren und gezielt anpassen."
+description: "Entwicklungspfad für LilyGOs T-Display-SF32: Herstellerbasis festlegen, Display, Peripherie, Strom und Wiederherstellung prüfen, dann den SiFli-SDK-Build anpassen."
 tags:
     - Projekte
     - Display

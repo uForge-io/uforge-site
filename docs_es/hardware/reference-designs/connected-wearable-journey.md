@@ -1,6 +1,6 @@
 ---
 icon: lucide/waypoints
-description: "Recorrido práctico de diseño de referencia con SF32: desde validar una placa de desarrollo SF32LB52 hasta planificar la liberación del hardware y firmware personalizados de un wearable conectado."
+description: "Recorrido práctico de diseño de referencia SF32: de validar la placa SF32LB52 a planificar el hardware y firmware personalizados de un wearable conectado."
 tags:
     - Hardware
     - Diseño de referencia

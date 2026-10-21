@@ -1,6 +1,6 @@
 ---
 icon: lucide/cable
-description: "Understand μForge M2 module-interface conventions: use the naming rules for stable terminology and treat the pin-level interface definition as a draft to validate before carrier-board commitment."
+description: "μForge M2 module-interface conventions: use the naming rules for stable terminology, and validate the draft pin-level definition before committing a carrier board."
 tags:
     - Hardware
     - Module

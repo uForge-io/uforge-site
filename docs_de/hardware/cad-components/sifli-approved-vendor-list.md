@@ -1,6 +1,6 @@
 ---
 icon: lucide/component
-description: "SiFlis freigegebene Lieferantenliste für SF32-Designs: qualifizierte Quarze, Buck-Induktivitäten, NOR-/NAND- und SD-NAND-Flash sowie LCD-Treiber, mit Auswahlkriterien und einer Stücklisten-Prüfcheckliste."
+description: "SiFlis Approved Vendor List für SF32-Designs: qualifizierte Quarze, Induktivitäten, NOR-/NAND-Flash und LCD-Treiber, mit Auswahlkriterien und Stücklisten-Prüfliste."
 tags:
     - Hardware
     - Lieferanten
@@ -395,5 +395,5 @@ Diese Checkliste ist bewusst strenger als „das Bauteil steht in der AVL“. Di
 ## Verwandte Seiten { #related-pages }
 
 - [SF32LB52x Hardware-Design-Leitfaden](../chip-guides/SF32LB52x_hardware_design_guide.md) — Schaltplan- und Layoutanleitung, die mehrere Bauteile dieser Liste direkt referenziert.
-- SF32LB57x Hardware-Design-Leitfaden
+- [SF32LB57x Hardware-Design-Leitfaden](../chip-guides/SF32LB57x_hardware_design_guide.md)
 - [SF32-Familie](../../sf32-products/family/SF32_family.md)

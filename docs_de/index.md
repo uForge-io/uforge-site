@@ -1,7 +1,7 @@
 ---
 icon: lucide/home
 title: "SF32-Plattform für Embedded-Entwicklung"
-description: "Open-Source-Dokumentation zu SF32-Mikrocontrollern mit extrem niedrigem Energieverbrauch, Modulen, Entwicklungsboards, SDK-Workflows und produktionsreifen Hardware-Design-Leitfäden."
+description: "Open-Source-Dokumentation zu SF32-Mikrocontrollern mit extrem niedrigem Energieverbrauch, Modulen, Entwicklungsboards, SDK-Workflows und produktionsreifen Leitfäden."
 image: assets/home/sf32-chip-hero.png
 hide:
   - navigation
@@ -155,7 +155,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33-STAR-MC1-Anwendungskern + dedizierter Bluetooth-Steuerkern
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 5.3 im Dual-Mode
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-Mode-Bluetooth 6.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2,5D GPU, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 Hardware-Dekompression
     - :fontawesome-solid-circle:{ .uf-dot-blue } Audio-Codec, 1 x AMIC, 2 x DMIC
@@ -163,6 +163,58 @@ hide:
     - :fontawesome-solid-circle:{ .uf-dot-blue } QFN68-Gehäuse, mit bis zu 45 GPIOs und optionalem integriertem Linearladeregler
 
     [Serie ansehen :material-arrow-right:](sf32-products/chips/SF32LB52x.md){ .uf-link-blue }
+
+- <span class="uf-mcu-chip">SF32LB56</span>
+
+    <span class="uf-mcu-headtext">**SF32LB56x**{ .uf-mcu-title } <span class="uf-mcu-sub">Grafikoptimierter Mikrocontroller</span></span>
+
+    ---
+
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Zweikerniger Cortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-Mode-Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } RGB-Display bis 1024 x 600
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2,5D GPU, ePicasso 2.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 Hardware-Dekompression
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Audio-Codec, 1 x AMIC, 4 x DMIC
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 960 KB SRAM, bis zu 16 MB PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Verfügbar in QFN68- und BGA175-Gehäusen mit bis zu 44 / 120 GPIOs
+
+    [Serie ansehen :material-arrow-right:](sf32-products/chips/SF32LB56x.md){ .uf-link-blue }
+
+- <span class="uf-mcu-chip">SF32LB57</span>
+
+    <span class="uf-mcu-headtext">**SF32LB57x**{ .uf-mcu-title } <span class="uf-mcu-sub">Multimedia-MCU für AIoT-Geräte</span></span>
+
+    ---
+
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Dreikerniger Cortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-Mode-Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } RGB-Display bis 1024 x 600
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2,5D GPU, ePicasso 3.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 3.0 und JPEG/MJPEG-Dekodierung
+    - :fontawesome-solid-circle:{ .uf-dot-blue } DCMI-Kameraeingang bis 2 MP
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Audio-Codec, 2 x AMIC, 4 x DMIC
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 592 KB SRAM, bis zu 48 MB PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Verfügbar in QFN68-, QFN80- und BGA112-Gehäusen mit bis zu 46 / 47 / 58 GPIOs; einige BGA112-Varianten bieten zusätzlich sechs Pins für MPI3 oder statische Ausgänge
+
+    [Serie ansehen :material-arrow-right:](sf32-products/chips/SF32LB57x.md){ .uf-link-blue }
+
+- <span class="uf-mcu-chip">SF32LB58</span>
+
+    <span class="uf-mcu-headtext">**SF32LB58x**{ .uf-mcu-title } <span class="uf-mcu-sub">Flaggschiff-MCU für AIoT-Plattformen</span></span>
+
+    ---
+
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Dreikerniger Cortex-M33 STAR-MC1
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-Mode-Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } MIPI-Display bis 1280 x 720
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2,5D GPU + Vektorgrafik, ePicasso 2.0
+    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 und JPEG/MJPEG-Dekodierung
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Audio-Codec, 2 x AMIC, 4 x DMIC
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 3,7 MB SRAM, bis zu 64 MB PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Verfügbar im BGA256-Gehäuse, bis zu 154 GPIOs
+
+    [Serie ansehen :material-arrow-right:](sf32-products/chips/SF32LB58x.md){ .uf-link-blue }
 
 - <span class="uf-mcu-chip">SF32LB55</span>
 
@@ -179,39 +231,6 @@ hide:
     - :fontawesome-solid-circle:{ .uf-dot-blue } Verfügbar in QFN68-, BGA145- und BGA169-Gehäusen mit bis zu 49 / 95 / 119 GPIOs
 
     [Serie ansehen :material-arrow-right:](sf32-products/chips/SF32LB55x.md){ .uf-link-blue }
-
-- <span class="uf-mcu-chip">SF32LB56</span>
-
-    <span class="uf-mcu-headtext">**SF32LB56x**{ .uf-mcu-title } <span class="uf-mcu-sub">Grafikoptimierter Mikrocontroller</span></span>
-
-    ---
-
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Zweikerniger Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 5.3 mit niedrigem Energiebedarf
-    - :fontawesome-solid-circle:{ .uf-dot-blue } RGB-Display bis 1024 x 600
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2,5D GPU, ePicasso 2.0
-    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 Hardware-Dekompression
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Audio-Codec, 1 x AMIC, 4 x DMIC
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 960 KB SRAM, bis zu 16 MB PSRAM
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Verfügbar in QFN68- und BGA175-Gehäusen mit bis zu 44 / 120 GPIOs
-
-    [Serie ansehen :material-arrow-right:](sf32-products/chips/SF32LB56x.md){ .uf-link-blue }
-
-- <span class="uf-mcu-chip">SF32LB58</span>
-
-    <span class="uf-mcu-headtext">**SF32LB58x**{ .uf-mcu-title } <span class="uf-mcu-sub">Flaggschiff-MCU für AIoT-Plattformen</span></span>
-
-    ---
-
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Tri-Core-Architektur: HCPU, ACPU und LCPU
-    - :fontawesome-solid-circle:{ .uf-dot-blue } MIPI-Display bis 1280 x 720
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2,5D GPU + Vektorgrafik, ePicasso 2.0
-    - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 und JPEG/MJPEG-Dekodierung
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Audio-Codec, 2 x AMIC, 4 x DMIC
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 3,7 MB SRAM, bis zu 64 MB PSRAM
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Verfügbar im BGA256-Gehäuse, bis zu 154 GPIOs
-
-    [Serie ansehen :material-arrow-right:](sf32-products/chips/SF32LB58x.md){ .uf-link-blue }
 
 </div>
 

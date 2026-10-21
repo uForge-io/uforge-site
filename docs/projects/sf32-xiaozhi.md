@@ -1,6 +1,6 @@
 ---
 icon: lucide/message-circle-more
-description: "A complete product-development path for the open-source Xiaozhi voice assistant on SF32LB52: board bring-up, Bluetooth PAN provisioning, cloud voice interaction, customization, OTA, validation, and production handoff."
+description: "Product path for the Xiaozhi voice assistant on SF32LB52: board bring-up, Bluetooth PAN, cloud voice, customization, OTA, validation, and production handoff."
 tags:
     - Projects
     - AI

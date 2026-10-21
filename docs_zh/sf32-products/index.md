@@ -33,7 +33,7 @@ SF32 产品栏目帮助你从产品构想走到可实施的 SF32 设计。你可
 
 当供电架构、封装、显示、音频、内存、GPIO、连接能力或专用硬件会决定选型时，请使用[SF32 产品选型工具](product-selector.md)。它用于建立候选清单；确切料号、封装、电气限制和板级布线要求仍必须根据相关的思澈科技（SiFli）文档确认。
 
-选定方向后，继续进入[参考设计](../hardware/reference-designs/reference-designs.md)和[量产设计路径](../hardware/design-for-production.md)。这些内容将器件选型与参考硬件、设计指导、CAD 库、BOM 决策、评审检查清单以及板级启动调试记录衔接起来。
+选定方向后，继续进入[参考设计](../hardware/reference-designs/reference-designs.md)和[量产设计路径](../hardware/design-for-production.md)。这些内容将器件选型与参考硬件、设计指导、CAD 库、BOM 决策、评审检查清单以及启动调试记录衔接起来。
 
 ## 直接浏览硬件 { #browse-hardware-directly }
 

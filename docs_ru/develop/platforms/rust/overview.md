@@ -1,6 +1,6 @@
 ---
 icon: lucide/code
-description: "Оцените поддержку Rust сообществом для SF32 на основе проекта OpenSiFli sifli-rs (sifli-hal, sifli-pac): текущую зрелость, подходящие и неподходящие сценарии, а также контрольный список рисков."
+description: "Оценка поддержки Rust для SF32 через sifli-rs от OpenSiFli (sifli-hal, sifli-pac): зрелость, подходящие и неподходящие сценарии, контрольный список рисков."
 tags:
     - Разработка
     - Rust

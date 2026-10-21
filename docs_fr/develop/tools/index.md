@@ -1,6 +1,6 @@
 ---
 icon: lucide/wrench
-description: "Carte des outils pour le développement SF32 : sftool, scripts de téléchargement UART du SDK, actions CodeKit, outils de plantage/trace et outillage de ressources/production selon le cas d'usage."
+description: "Carte des outils de développement SF32 : sftool, scripts de téléchargement UART du SDK, actions CodeKit, outils de plantage/trace et outillage production, par cas d'usage."
 tags:
     - Développement
     - Outils

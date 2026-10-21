@@ -1,6 +1,6 @@
 ---
 icon: lucide/radio-tower
-description: "Wie der dedizierte Bluetooth-Prozessor von SF32 der Anwendungs-CPU die Funkzeitplanung und Verbindungssteuerung abnimmt und so vernetzte, batteriebetriebene Produkte mit geringem Energieverbrauch ermöglicht."
+description: "Wie der dedizierte SF32-Bluetooth-Prozessor der Anwendungs-CPU Funkzeitplanung und Verbindungssteuerung abnimmt und so stromsparende, dauerhaft vernetzte Produkte erlaubt."
 tags:
   - Bluetooth
 ---

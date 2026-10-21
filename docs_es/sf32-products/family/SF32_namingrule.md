@@ -1,6 +1,6 @@
 ---
 icon: lucide/tags
-description: "Cómo interpretar el número de pieza SF32LB5xyZxYx6: gama del producto, variante de PSRAM, encapsulado, capacidad de Flash y PSRAM integrada y rango de temperatura, con ejemplos."
+description: "Cómo interpretar el número de pieza SF32LB5xyZxYx6: gama, variante de PSRAM, encapsulado, capacidad de Flash/PSRAM integrada y rango de temperatura, con ejemplos."
 tags:
   - Hardware
   - Chip
@@ -56,7 +56,7 @@ tags:
 
 ### Códigos de memoria específicos de SF32LB57x { #sf32lb57x-memory-codes }
 
-El diagrama de numeración de piezas de la guía de diseño de hardware de SF32LB57x muestra tres códigos de posición de memoria después del código de encapsulado, en el orden MPI1, MPI2 y MPI3; a continuación aparece el código de grado de temperatura. Los códigos específicos de esta familia para cada posición MPI son:
+El diagrama de numeración de piezas de la [guía de diseño de hardware de SF32LB57x](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md#33-packages) muestra tres códigos de posición de memoria después del código de encapsulado, en el orden MPI1, MPI2 y MPI3; a continuación aparece el código de grado de temperatura. Los códigos específicos de esta familia para cada posición MPI son:
 
 <div align="center"><em>Tabla: códigos de memoria por posición MPI de SF32LB57x</em></div>
 

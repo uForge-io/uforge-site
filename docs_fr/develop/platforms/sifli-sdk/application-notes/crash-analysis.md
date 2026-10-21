@@ -1,7 +1,7 @@
 ---
 icon: lucide/file-search-2
 title: "Capturer les journaux et analyser les plantages"
-description: "Capturer les journaux et les données mémoire associées, restaurer le contexte d'exécution au moment d'un plantage et analyser les assertions ou hard faults avec les outils SiFli-SDK."
+description: "Capturer journaux et mémoire correspondants, restaurer le contexte d'un plantage et analyser assertions ou hard faults avec les outils SiFli-SDK."
 tags: [Développement, SiFli-SDK, Notes d'application, Débogage]
 ---
 

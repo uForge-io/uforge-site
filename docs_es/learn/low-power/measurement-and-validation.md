@@ -1,6 +1,6 @@
 ---
 icon: lucide/gauge
-description: "Flujo de trabajo para medir y validar, desde los componentes hasta el producto, la corriente, la tensión, la energía y la precisión del modelo de autonomía de diseños SF32."
+description: "Flujo de trabajo, de componente a producto, para medir corriente, tensión, energía y precisión del modelo de autonomía en diseños SF32."
 tags:
   - Bajo consumo
   - Validación

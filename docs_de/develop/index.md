@@ -1,7 +1,7 @@
 ---
 icon: lucide/code-2
 title: "Entwicklungsübersicht"
-description: "Eine aufgabenorientierte Übersicht für die Entwicklung von SF32-Produkten mit SiFli-SDK: täglicher Arbeitsablauf, Anwendungshinweise, Beispiele, Werkzeuge, Firmware-Themen und Community-Pfade."
+description: "Aufgabenorientierte Übersicht zur Entwicklung von SF32-Produkten mit SiFli-SDK: Arbeitsablauf, Anwendungshinweise, Beispiele, Werkzeuge, Firmware-Themen und Community."
 tags:
     - Entwicklung
     - Software

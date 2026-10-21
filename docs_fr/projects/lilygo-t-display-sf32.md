@@ -1,6 +1,6 @@
 ---
 icon: lucide/watch
-description: "Parcours de développement pour la plateforme tierce T-Display-SF32 de LilyGO : établir la référence fournisseur, valider l'affichage, les périphériques, l'alimentation et la récupération, reproduire la compilation SiFli-SDK et adapter le produit avec méthode."
+description: "Parcours d'ingénierie pour la T-Display-SF32 de LilyGO : référence fournisseur, validation affichage, périphériques, alimentation et récupération, puis adaptation SiFli-SDK."
 tags:
     - Projets
     - Affichage

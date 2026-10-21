@@ -1,6 +1,6 @@
 ---
 icon: lucide/rocket
-description: "Product-validation SF32 tutorials: measured low-power tuning, recoverable BLE OTA, custom display bring-up, crash/coredump analysis, multi-connection Bluetooth, and custom drivers."
+description: "Product-validation SF32 tutorials: measured low-power tuning, recoverable BLE OTA, custom display bring-up, crash analysis, multi-connection Bluetooth, and drivers."
 tags:
     - Tutorials
 ---

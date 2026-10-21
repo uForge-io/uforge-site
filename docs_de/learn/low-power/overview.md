@@ -290,3 +290,5 @@ Dokumentieren Sie Firmware-Version, Board-Revision, Akku- oder Versorgungsspannu
 - Ereignis- und interruptgesteuerte Abläufe sind beim Energiesparen fast immer besser als regelmäßiges Polling.
 - Bei vernetzten Wearables sind Bluetooth-Verbindungsparameter und Displayaktualisierung meist zwei der wirksamsten Stellschrauben.
 - Messen Sie den Energiebedarf mit realistischen kombinierten Lasten auf echter Hardware im endgültigen Gehäuse. Messungen auf dem Labortisch und Messungen einzelner Subsysteme bilden den Verbrauch im fertigen Produkt oft nicht ausreichend ab.
+
+Wie sich der Akkustand aus der Spannung abschätzen lässt, beschreibt [Schätzung des Akkuladezustands](battery-capacity-calculation.md).

@@ -54,6 +54,11 @@ jobs:
           for lang in zh ja es de fr pt ru ko; do
             test -f "site/${lang}/index.html"
           done
+      # Stamp last-modified dates (docs/lastmod.json, generated in the source repo)
+      # into JSON-LD, article:modified_time, a visible "Last updated" line and
+      # every sitemap <url>. Runs on the nested site so all nine languages are covered.
+      - name: Stamp last-modified dates
+        run: python3 .github/scripts/inject-lastmod.py site
       # Share one copy of every image/PDF/XLSX: delete the byte-identical copies
       # inside site/<lang>/ and point that language's pages at the root copy.
       # Fails the deploy if any rewritten reference no longer resolves.

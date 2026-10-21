@@ -10,9 +10,9 @@ tags:
 
 ## 概览 { #overview }
 
-SF32LB52-MOD-1 是面向 SF32LB52x 平台的低功耗 MCU 模组，支持蓝牙（Bluetooth）5.3。标准型号 N16R8 采用 SF32LB525UC6。模组尺寸为 27.9 × 18.0 × 3.1 mm，集成双核 Arm Cortex-M33 STAR-MC1 平台、RF 电路和 48 MHz 晶振。天线形式因料号而异：可采用模组板载 PCB 天线，也可通过 IPEX 接口连接外置天线。
+SF32LB52-MOD-1 是基于 SF32LB52x 平台的低功耗 MCU 模组系列，支持蓝牙（Bluetooth）5.3。标准型号 N16R8 采用 SF32LB525UC6。模组尺寸为 27.9 × 18.0 × 3.1 mm，集成双核 Arm Cortex-M33 STAR-MC1 平台、RF 电路和 48 MHz 晶振。天线形式因料号而异：可采用模组板载 PCB 天线，也可通过 IPEX 接口连接外置天线。
 
-DS5203 V0.3 说明模组采用板载 PCB 天线，也说明另有型号支持通过 IPEX 外接天线；但规格书未将天线方案与已列出的存储 SKU 一一对应。确定载板布局前，应向思澈科技（SiFli）确认所选模组的天线配置。整机仍需进行 RF 性能验证，并满足适用的法规审批要求。模组接口可用于实现紧凑型联网产品所需的蓝牙、图形和音频功能。
+DS5203 V0.3 说明模组采用板载 PCB 天线，也说明另有型号支持通过 IPEX 外接天线；但规格书未将天线方案与已列出的存储 SKU 一一对应。确定载板布局前，应向思澈科技（SiFli）确认所选模组的天线配置。整机仍需进行 RF 性能验证，并满足适用的整机认证要求。模组接口可用于实现紧凑型联网产品所需的蓝牙、图形和音频功能。
 
 根据具体料号，模组所采用的芯片还可能合封 OPI-PSRAM。模组引出了 GPIO、SPI、LCD、MPI、UART、I2C、PWM、SDIO 和 USB 2.0 FS 等接口，并提供模拟音频通路。
 
@@ -92,7 +92,7 @@ DS5203 V0.3 说明模组采用板载 PCB 天线，也说明另有型号支持通
 - 1 路 PDM 接口
 - 模组接口对外提供模拟音频输入 / 输出能力
 
-1 路 PDM 接口最多可连接两颗数字麦克风，因此 PDM 接口数量不等于麦克风数量。实际连接方式取决于引脚复用和载板布线。对于该模组，若选配的 32.768 kHz 晶体已贴装，PA22/PA23 将无法从模组外部访问；硬件设计指南中还列出了另一组可复用为 PDM 的引脚。
+1 路 PDM 接口最多可连接两颗数字麦克风，因此 PDM 接口数量不等于麦克风数量。实际连接方式取决于引脚复用和载板布线。对于该模组，若选配的 32.768 kHz 晶体已贴装，PA22/PA23 将无法从模组外部访问；硬件设计指南中给出了另一种 PDM 引脚映射。
 
 ### 存储接口 { #storage-interfaces }
 
@@ -141,7 +141,7 @@ A128R16 的 Flash 标注在官方资料中存在差异：[OpenSiFli 模组型号
 
 ### 开发板 { #development-kits }
 
-[SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md)、[SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md)、[SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) 和 [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) 都适合作为固件验证与功能评估的起点，然后再转入基于模组的载板设计。
+[SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md)、[SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md)、[SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) 和 [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) 都适合作为固件验证的起点，之后再转入基于模组的载板设计。
 
 ### 参考产品 { #reference-products }
 

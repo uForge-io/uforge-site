@@ -1,7 +1,7 @@
 ---
 icon: lucide/battery-charging
 title: "Estimation du niveau de charge de la batterie"
-description: "Estimez le niveau de charge des produits SF32 à partir de la tension mesurée avec le calculateur du SiFli-SDK, des courbes de charge et de décharge adaptées, la détection du chargeur et un filtrage à plusieurs niveaux."
+description: "Estimer le niveau de batterie SF32 depuis la tension avec le calculateur SiFli-SDK : courbes de décharge, détection de l'état du chargeur et filtrage multi-étage."
 tags:
   - Basse consommation
   - Batterie

@@ -1,6 +1,6 @@
 ---
 icon: lucide/audio-lines
-description: "Guía práctica sobre Audio Server y la gestión de búferes DMA en SF32 para evitar cortes en reproducción y grabación y convivir con Bluetooth y las tareas de procesamiento gráfico."
+description: "Guía práctica de Audio Server y búferes DMA en SF32 para reproducir y grabar sin cortes y convivir con Bluetooth y gráficos."
 tags:
     - Audio
 ---

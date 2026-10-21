@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-LCD : carte de développement SF32LB52x orientée affichage pour la mise en service rapide de produits à écran SPI, QSPI et MCU/8080, avec tactile, audio, stockage et prise en charge de batterie."
+description: "SF32LB52-DevKit-LCD : carte SF32LB52x orientée affichage pour la mise en service rapide d'écrans SPI, QSPI et MCU/8080, avec tactile, audio, stockage et batterie."
 tags:
     - Matériel
     - Carte de développement

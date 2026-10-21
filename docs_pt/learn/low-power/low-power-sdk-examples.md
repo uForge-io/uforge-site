@@ -1,7 +1,7 @@
 ---
 icon: lucide/battery-charging
 title: "Exemplos de baixo consumo do SDK"
-description: "Escolha o exemplo de gerenciamento de energia do SiFli-SDK adequado para modos de suspensão, fontes de despertar, GPIO, CPU, Bluetooth, displays, interface e cenários de dispositivos vestíveis."
+description: "Escolha o exemplo de gerenciamento de energia do SiFli-SDK: suspensão, fontes de despertar, GPIO, CPU, Bluetooth, displays, UI e cenários de wearables."
 tags:
   - Baixo consumo
   - Exemplos

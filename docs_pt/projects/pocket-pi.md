@@ -1,6 +1,6 @@
 ---
 icon: lucide/gamepad-2
-description: "Um fluxo de engenharia reproduzível para o Pocket Pi: valide a emulação NES, o display 320 × 240, os controles AW9523, o áudio, os sistemas de arquivos com ROMs e a recuperação de estados salvos no SF32LB52."
+description: "Roteiro de engenharia reproduzível do Pocket Pi: emulação NES, display 320 × 240, controles AW9523, áudio, sistemas de arquivos de ROMs e estados salvos no SF32LB52."
 tags:
     - Projetos
     - Jogos

@@ -1,6 +1,6 @@
 ---
 icon: lucide/card-sim
-description: "SF32LB56-MOD: universelle Bluetooth-5.3-MCU-Modulfamilie mit niedrigem Energiebedarf auf Basis der SF32LB56xV, mit 4 MB + 8 MB OPI-PSRAM im SiP und SKU-abhängigen Flash-Varianten."
+description: "SF32LB56-MOD: Allzweck-Bluetooth-5.3-MCU-Modulfamilie auf Basis der SF32LB56xV mit 4 MB + 8 MB OPI-PSRAM im Gehäuse und SKU-abhängigen Flash-Varianten."
 tags:
   - Hardware
   - Modul

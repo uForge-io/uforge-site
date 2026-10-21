@@ -2,7 +2,7 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Guía de diseño esquemático para la MCU SF32LB55x: sistema de alimentación, modo de arranque, generación de reloj, RF, interfaces de almacenamiento, interfaces de pantalla y táctil, y conexiones de activación, GPADC y fabricación."
+description: "Guía de esquemático de la MCU SF32LB55x: alimentación, modo de arranque, relojes, RF, almacenamiento, pantalla y táctil, activación, GPADC e interfaces de fabricación."
 tags:
     - Hardware
     - Chip

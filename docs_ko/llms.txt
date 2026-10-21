@@ -53,6 +53,15 @@
 - [SF32LB56x 하드웨어 설계 가이드 — 회로도 체크리스트](https://uForge.io/ko/hardware/chip-guides/SF32LB56x_schematic_checklist/): SF32LB56x MCU의 전원, 클럭, RF, 스토리지, 디스플레이, 제조 점검을 다루는 항목별 회로도 검토 체크리스트입니다.
 - [SF32LB56x 하드웨어 설계 가이드 — PCB 레이아웃 가이드라인](https://uForge.io/ko/hardware/chip-guides/SF32LB56x_pcb_layout/): SF32LB56x MCU의 PCB 레이아웃 가이드라인: 풋프린트, 스택업, 핵심 라우팅, 항목별 PCB 레이아웃 체크리스트입니다.
 - [SF32LB56x 하드웨어 설계 가이드 — 설계 검토 체크리스트 및 참고 자료](https://uForge.io/ko/hardware/chip-guides/SF32LB56x_review_and_reference/): SF32LB56x 하드웨어 설계 가이드의 설계 검토 체크리스트, 관련 문서와 참고 자료, 부록, 개정 이력입니다.
+- [SF32LB57x](https://uForge.io/ko/sf32-products/chips/SF32LB57x/): SF32LB57x: 듀얼 모드 Bluetooth, 240 MHz 코어 2개, ePicasso 3.0 그래픽, eZip 3.0, 소형 QFN/BGA 패키지를 갖춘 초저전력 멀티코어 AIoT MCU 제품군.
+- [SF32LB57x 하드웨어 설계 가이드](https://uForge.io/ko/hardware/chip-guides/SF32LB57x_hardware_design_guide/): SF32LB57x MCU 하드웨어 설계 가이드: 최소 시스템 설계, 전원, 클럭, RF, 디스플레이, 카메라, 스토리지, PCB 레이아웃 지침.
+- [SF32LB57x 하드웨어 설계 가이드 — 최소 시스템 및 전원](https://uForge.io/ko/hardware/chip-guides/SF32LB57x_schematic_system_power/): SF32LB57x MCU 회로 설계 가이드라인: 최소 시스템 설계와 전원 시스템. 패키지/전원 계열 일치, 부트 스트랩, 전원 트리, 충전/OVP, BUCK, 저전력 레일, 동작 모드를 다룹니다.
+- [SF32LB57x 하드웨어 설계 가이드 — 클럭, RF 및 사용자 인터페이스](https://uForge.io/ko/hardware/chip-guides/SF32LB57x_schematic_clock_rf_interfaces/): SF32LB57x MCU의 회로 설계 가이드라인: 클럭 생성, RF, 사용자 인터페이스. 48 MHz/32.768 kHz 크리스털, RF 매칭과 안테나 경로, 디스플레이, 터치/백라이트, 오디오, 카메라, 버튼, 모터를 다룹니다.
+- [SF32LB57x 하드웨어 설계 가이드 — 스토리지 및 양산](https://uForge.io/ko/hardware/chip-guides/SF32LB57x_schematic_storage_mfg/): SF32LB57x MCU의 회로도 설계 가이드라인 중 스토리지 및 연결과 양산 부분으로, 부트 매체, GPIO, UART/I2C/SPI/SDIO/USB/CAN/GPADC, 양산 프로그래밍, 캘리브레이션, 픽스처 접근을 다룹니다.
+- [SF32LB57x 하드웨어 설계 가이드 — 회로도 체크리스트](https://uForge.io/ko/hardware/chip-guides/SF32LB57x_schematic_checklist/): 패키지, 전원, 소비 전력, 클럭, 스토리지, RF, 디스플레이, 오디오, 카메라, 버튼, 범용 인터페이스, 제조 점검을 다루는 SF32LB57x MCU용 항목별 회로도 검토 체크리스트입니다.
+- [SF32LB57x 하드웨어 설계 가이드 — PCB 레이아웃 가이드라인](https://uForge.io/ko/hardware/chip-guides/SF32LB57x_pcb_layout/): SF32LB57x MCU의 PCB 레이아웃 가이드라인: 스택업, 핵심 PCB 제약, 전원/크리스털/RF/아날로그/오디오/고속 라우팅, EMI/ESD/EOS, 참고 그림입니다.
+- [SF32LB57x 하드웨어 설계 가이드 — PCB 레이아웃 체크리스트](https://uForge.io/ko/hardware/chip-guides/SF32LB57x_pcb_layout_checklist/): SF32LB57x MCU의 항목별 PCB 레이아웃 검토 체크리스트: 패키지, 전원 라우팅, 클럭 레이아웃, RF 레이아웃, 디스플레이 라우팅, 오디오 라우팅, GPADC 라우팅 점검 항목을 다룹니다.
+- [SF32LB57x 하드웨어 설계 가이드 — 설계 검토 체크리스트 및 참고 자료](https://uForge.io/ko/hardware/chip-guides/SF32LB57x_review_and_reference/): SF32LB57x 하드웨어 설계 가이드의 고객 설계 자체 점검, 관련 문서와 참고 자료, 부록, 개정 이력입니다.
 - [SF32LB58x](https://uForge.io/ko/sf32-products/chips/SF32LB58x/): SF32LB58x: 고급 그래픽, 디스플레이, 메모리, 주변 장치가 필요한 연결형 제품을 위한 플래그십 AIoT MCU 제품군.
 - [SF32LB58x 하드웨어 설계 가이드](https://uForge.io/ko/hardware/chip-guides/SF32LB58x_hardware_design_guide/): SF32LB58x MCU의 하드웨어 설계 가이드: 전원 아키텍처, 클럭 및 RF 설계, 디스플레이, 스토리지, 오디오, PCB 레이아웃 가이드라인입니다.
 - [SF32LB58x 하드웨어 설계 가이드 — 회로 설계 가이드라인](https://uForge.io/ko/hardware/chip-guides/SF32LB58x_schematic_design/): SF32LB58x MCU 회로 설계 가이드라인: 전원 시스템, 클럭 생성, RF, 사용자 인터페이스, 스토리지와 연결, 양산.
@@ -89,7 +98,6 @@
 
 ## 개발
 
-- [개발 개요](https://uForge.io/ko/develop/): SiFli-SDK로 SF32 제품을 개발하기 위한 작업 중심 안내서: 일상 워크플로, 애플리케이션 노트, 예제, 도구, 펌웨어 주제, 커뮤니티 경로.
 - [개발 개요](https://uForge.io/ko/develop/): SiFli-SDK로 SF32 제품을 개발하기 위한 작업 중심 안내서: 일상 워크플로, 애플리케이션 노트, 예제, 도구, 펌웨어 주제, 커뮤니티 경로.
 - [SiFli-SDK](https://uForge.io/ko/develop/platforms/sifli-sdk/overview/): SF32 개발의 레퍼런스 경로인 SiFli-SDK를 다룹니다. 핵심 scons 빌드와 sdk.py menuconfig 워크플로, 보드 이름, 프로젝트 구조, 양산 준비 점검 질문을 설명합니다.
 - [빌드, 플래싱, 모니터링](https://uForge.io/ko/develop/platforms/sifli-sdk/build-flash-monitor/): SiFli-SDK의 일상적인 개발 흐름을 설명합니다. 환경을 활성화하고 scons로 빌드한 뒤 UART 또는 sftool로 펌웨어를 기록하고 시리얼 출력을 확인합니다.
@@ -139,7 +147,7 @@
 - [Bluetooth PAN](https://uForge.io/ko/learn/bluetooth/pan/): SF32의 Bluetooth PAN: BNEP 전송, NAP/GN/PANU 역할, 휴대폰 테더링의 장단점, SiFli-SDK 설정, OTA 검증.
 - [Bluetooth SDK 예제](https://uForge.io/ko/learn/bluetooth/bluetooth-sdk-examples/): BLE 서비스, Classic Bluetooth 프로파일, 휴대폰 연동, OTA, 데이터 전송, LE Audio 브로드캐스트에 적합한 SiFli-SDK Bluetooth 예제를 선택하는 방법입니다.
 - [Bluetooth 저전력 프로파일링](https://uForge.io/ko/learn/bluetooth/bluetooth-low-power-profiling/): SF32 디바이스에서 BLE, Classic Bluetooth, 듀얼 모드 Bluetooth의 소비 전력을 측정하고, 트레이스를 펌웨어 동작과 대응시켜 일상 사용 기준의 에너지 예산으로 정리하는 실용적인 방법입니다.
-- [AT 명령 세트](https://uForge.io/ko/learn/bluetooth/at-command-reference/): SF32LB57 듀얼 모드 Bluetooth AT 명령 모듈(SIFLI_AT)의 전체 AT 명령 레퍼런스입니다. 명령 프레임 구조, 시스템 및 디바이스, 주소 및 식별 정보, 동작 모드 및 가시성, 페어링 및 보안, 시리얼 포트 및 이벤트, 연결 관리, 데이터 전송, 커스텀 GATT 명령과 함께 비요청 이벤트(URC) 및 PDU 형식 명령을 다룹니다.
+- [AT 명령 세트](https://uForge.io/ko/learn/bluetooth/at-command-reference/): SF32LB57 듀얼 모드 Bluetooth 모듈(SIFLI_AT)의 AT 명령 레퍼런스: 프레임, 페어링, 연결, 데이터 전송, GATT, URC, PDU 명령.
 - [AI 개요](https://uForge.io/ko/learn/ai/overview/): SF32에서 온디바이스 AI를 구축하는 방법을 개괄합니다. 디바이스 선택, NNACC HAL 사용, 메모리 예산 수립, 전력 예산 내 추론 스케줄링을 다룹니다.
 - [AI 가속기](https://uForge.io/ko/learn/ai/accelerator/): SF32 NNACC 연산자 지원, CPU/런타임 역할, 메모리 제약, 임베디드 AI의 지연 시간과 에너지를 평가하는 방법을 설명합니다.
 - [오디오 개요](https://uForge.io/ko/learn/audio/overview/): SF32의 로컬 오디오 서브시스템 개요: 코덱과 DMA 경로, 인터페이스 선택, 버퍼링 전략, Audio Server 미들웨어, 전력 트레이드오프를 다룹니다.
@@ -192,3 +200,4 @@
 - 각 칩/모듈 제품군은 동일한 구조를 따릅니다. 소개 페이지(디바이스 개요, 변형, 패키지, 응용)와 하드웨어 설계 가이드(회로도 지침, PCB 레이아웃, 제조 체크리스트)가 있으며, 일부 칩에는 별도의 하드웨어 설계 체크리스트 페이지도 있습니다.
 - 사이트는 9개 언어로 게시됩니다. 영어(기준, 사이트 루트)와 기계 지원 번역인 중국어(/zh/), 일본어(/ja/), 스페인어(/es/), 독일어(/de/), 프랑스어(/fr/), 포르투갈어(/pt/), 러시아어(/ru/), 한국어(/ko/)입니다. 번역된 각 페이지는 언어 접두사 아래에서 영어 페이지와 동일한 경로를 가집니다.
 - 공식 전기적 사양, 핀 매핑, 부품 적격성은 SiFli의 데이터시트, 사용자 매뉴얼, SiFli 승인 공급업체 목록(AVL)을 링크하여 안내합니다.
+- A full-text bundle of the key pages (getting started, SF32 chips, modules, dev boards, SDK basics, and learning overviews) is at https://uForge.io/llms-full.txt, with a localized copy at https://uForge.io/<lang>/llms-full.txt; fetch it when one request should cover the whole platform.

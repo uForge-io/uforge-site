@@ -1,6 +1,6 @@
 ---
 icon: lucide/terminal-square
-description: "Situação atual do MicroPython no SF32: ainda não foi encontrado um port oficial. A página também apresenta os critérios que precisariam ser atendidos antes de oferecê-lo como um caminho compatível."
+description: "Situação do MicroPython no SF32: ainda sem port oficial, e os critérios de aceitação necessários antes de oferecê-lo como caminho de desenvolvimento compatível."
 tags:
     - Desenvolvimento
     - MicroPython

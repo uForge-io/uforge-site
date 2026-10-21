@@ -1,6 +1,6 @@
 ---
 icon: lucide/microchip
-description: "SF32LB55x : famille de MCU grand public à très basse consommation pour objets portables et produits IHM nécessitant davantage de graphismes, de SRAM et de choix de boîtiers que les MCU Bluetooth d'entrée de gamme."
+description: "SF32LB55x : famille de MCU grand public à très basse consommation pour objets portables et IHM exigeant plus de graphismes, de SRAM et de choix de boîtiers."
 tags:
     - Matériel
     - Puce
@@ -194,6 +194,25 @@ Suivez cette séquence pour transformer une présélection SF32LB55x en concepti
 3. **Concevoir et relire le matériel.** Avant de publier le schéma ou le placement-routage, utilisez le [guide de conception matérielle](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) de μForge, y compris ses listes de contrôle du [schéma](../../hardware/chip-guides/SF32LB55x_schematic_checklist.md) et du placement et du routage du PCB.
 4. **Vérifier la source faisant autorité.** Confirmez la référence commandable et le boîtier exacts à l'aide de la [fiche technique][Fiche technique], du [manuel utilisateur][Manuel utilisateur], du [guide de conception d'origine][Guide de conception d'origine (wiki.sifli.com)] et de la [source de la note d'application matérielle][Note d'application matérielle (source GitHub)] de SiFli.
 
+<!-- uf-faq:start -->
+## Questions fréquentes { #frequently-asked-questions }
+
+**Quelles sont les principales caractéristiques du SF32LB55x ?**
+Le SF32LB55x associe un CPU applicatif (Cortex-M33 @240 MHz) à un cœur basse consommation (Cortex-M33 @48 MHz, avec un cœur programmable par l'utilisateur), 1,312 KB de SRAM interne et Bluetooth Low Energy (BLE) uniquement. Graphismes : ePicasso 1.0. Boîtier : QFN68 / BGA145 / BGA169 (7 × 7 mm (QFN68)). USB 2.0 FS. Valeurs au niveau de la famille ; vérifiez la fiche technique de la référence exacte.
+
+**Quelles interfaces d'affichage le SF32LB55x prend-il en charge ?**
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. La disponibilité varie selon la référence et le boîtier.
+
+**Quelle mémoire dans le boîtier le SF32LB55x propose-t-il ?**
+Jusqu'à 16 MB + 2 MB de PSRAM et jusqu'à 8 MB de Flash NOR dans le boîtier, selon la référence.
+
+**Quelle tension d'alimentation faut-il pour le SF32LB55x ?**
+1.71–3.63 V, selon la variante. Confirmez la plage exacte dans la fiche technique.
+
+**Par où commencer une conception matérielle avec le SF32LB55x ?**
+Commencez par le [guide de conception matérielle du SF32LB55x](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) (schéma, alimentation, horloge/RF, routage PCB), puis utilisez les listes de contrôle de schéma et d'implantation avant de figer la carte.
+<!-- uf-faq:end -->
+
 ## Produits associés { #related-products }
 
 ### Kits de développement { #development-kits }
@@ -203,6 +222,3 @@ Utilisez la note d'application matérielle officielle, les schémas de référen
 ### Produits de référence { #reference-products }
 
 Les produits finaux SF32LB55x typiques comprennent les montres connectées, les bracelets d'activité, les objets portables de suivi de la santé, les serrures connectées, les accessoires connectés, les contrôleurs domotiques et les IHM graphiques compactes.
-
-!!! note "Contenu généré automatiquement"
-    Cette page a été compilée/rédigée sans document source existant. Vérifiez les affirmations techniques dans la documentation officielle de SiFli avant de vous y fier.

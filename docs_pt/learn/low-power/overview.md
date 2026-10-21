@@ -290,3 +290,5 @@ Registre versão do firmware, revisão da placa, tensão da bateria/fonte, tempe
 - Em quase todas as situações em que energia importa, o projeto por eventos e interrupções é melhor que polling.
 - Os parâmetros de conexão Bluetooth e a atualização do display costumam ser os dois maiores ajustes em um produto vestível conectado.
 - Meça energia real com cargas combinadas e realistas no hardware dentro do gabinete final. Medições de bancada ou de subsistemas isolados podem subestimar o consumo do produto real.
+
+Para estimar a porcentagem restante da bateria a partir da tensão, consulte [Estimativa do estado de carga da bateria](battery-capacity-calculation.md).

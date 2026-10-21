@@ -1,6 +1,6 @@
 ---
 icon: lucide/list-tree
-description: "Comment choisir et adapter un exemple SiFli-SDK ou Zephyr selon la carte, le framework et le périphérique le plus exigeant, plutôt que de construire un firmware SF32 depuis zéro."
+description: "Choisir et adapter un exemple SiFli-SDK ou Zephyr selon la carte, le framework et le périphérique le plus exigeant, plutôt que d'écrire un firmware SF32 de zéro."
 tags:
     - Développement
     - Exemples

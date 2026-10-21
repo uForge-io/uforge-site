@@ -1,6 +1,6 @@
 ---
 icon: lucide/battery-charging
-description: "Stromverbrauch des SF32 bei Taktkonfiguration, Schlafmodi, Displaybetrieb, Bluetooth-Verbindungsintervallen und Sensoraktivität messen und optimieren, damit aus einem Prototyp ein für den Akkubetrieb ausgelegtes Produkt wird."
+description: "SF32-Stromverbrauch bei Takt, Schlafmodi, Display, Bluetooth-Verbindungsintervallen und Sensoren messen und optimieren, bis aus dem Prototyp ein Akkuprodukt wird."
 tags:
     - Entwicklung
     - Energiemanagement

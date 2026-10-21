@@ -1,6 +1,6 @@
 ---
 icon: lucide/tags
-description: "Wie eine SF32LB5xyZxYx6-Teilenummer decodiert wird: Produktstufe, PSRAM-Variante, Gehäusetyp, integrierte Flash-/PSRAM-Kapazität und Temperaturklasse, mit durchgerechneten Beispielen."
+description: "So lesen Sie eine SF32LB5xyZxYx6-Teilenummer: Produktstufe, PSRAM-Variante, Gehäuse, integrierte Flash-/PSRAM-Kapazität und Temperaturklasse, mit Beispielen."
 tags:
   - Hardware
   - Chip
@@ -56,7 +56,7 @@ tags:
 
 ### SF32LB57x-spezifische Speichercodes { #sf32lb57x-memory-codes }
 
-Die Teilenummerngrafik im SF32LB57x-Hardware-Design-Leitfaden zeigt nach dem Gehäusecode drei Speicherpositionscodes in der Reihenfolge MPI1, MPI2 und MPI3; danach folgt der Temperaturcode. Für jede MPI-Position gelten bei SF32LB57x folgende Codes:
+Die Teilenummerngrafik im [SF32LB57x-Hardware-Design-Leitfaden](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md#33-packages) zeigt nach dem Gehäusecode drei Speicherpositionscodes in der Reihenfolge MPI1, MPI2 und MPI3; danach folgt der Temperaturcode. Für jede MPI-Position gelten bei SF32LB57x folgende Codes:
 
 <div align="center"><em>Tabelle: SF32LB57x-Speichercodes nach MPI-Position</em></div>
 

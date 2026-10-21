@@ -1,6 +1,6 @@
 ---
 icon: lucide/file-warning
-description: "Diseñe los procesos de registro y análisis de fallos del firmware SF32 para poder diagnosticar problemas en campo. Incluye los datos mínimos de registro, el flujo de informes de fallos y los niveles de registro por etapa."
+description: "Diseñe el registro y el análisis de fallos del firmware SF32 para diagnosticar problemas en campo: datos mínimos, flujo de informes y niveles de registro por etapa."
 tags:
     - Desarrollo
     - Registros

@@ -1,6 +1,6 @@
 ---
 icon: lucide/message-circle-more
-description: "Vollständiger Produktentwicklungspfad für den Open-Source-Sprachassistenten Xiaozhi auf SF32LB52: Board-Inbetriebnahme, Bluetooth-PAN-Einrichtung, Cloud-Sprachinteraktion, Anpassung, OTA, Validierung und Übergabe an die Produktion."
+description: "Produktpfad für den Sprachassistenten Xiaozhi auf SF32LB52: Board-Inbetriebnahme, Bluetooth-PAN, Cloud-Sprache, Anpassung, OTA, Validierung und Produktionsübergabe."
 tags:
     - Projekte
     - KI

@@ -263,6 +263,6 @@ When connecting the SF32LB56x log UART to an external PC, make sure the serial a
 - [SF32LB57x ADC Usage and Configuration Guide](https://docs.sifli.com/projects/sdk/latest/sf32lb57x/app_note/adc.html)
 - [SF32LB58x ADC Usage and Configuration Guide](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/adc.html)
 - [SF32LB52x ADC HAL API Reference](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/adc.html) — default calibration-range definitions.
-- SF32LB57x Hardware Design Guide — Storage & Manufacturing — GPADC channel and pad assignment.
-- SF32LB57x Hardware Design Guide — Minimum System & Power — analog supply/reference connections and variant-specific battery-sense limits.
+- [SF32LB57x Hardware Design Guide — Storage & Manufacturing](../../../../hardware/chip-guides/SF32LB57x_schematic_storage_mfg.md) — GPADC channel and pad assignment.
+- [SF32LB57x Hardware Design Guide — Minimum System & Power](../../../../hardware/chip-guides/SF32LB57x_schematic_system_power.md) — analog supply/reference connections and variant-specific battery-sense limits.
 - [OpenSiFli ADC FAQ](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/faq/mcu/adc.md) — SF32LB55x factory calibration ranges, startup/standby/wake validation, and SF32LB56x log-UART level guidance.

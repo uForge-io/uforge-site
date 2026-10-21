@@ -8,7 +8,7 @@ tags:
 
 # SiFli-SDK { #sifli-sdk }
 
-本指南从一块刚拆箱的 SF32 开发板开始，使用面向 SF32 器件的官方 RT-Thread SDK **SiFli-SDK**，通过 UART 跑通 `hello_world` 示例。
+本指南从一块刚拆箱的 SF32 开发板开始，使用面向 SF32 器件的、基于 RT-Thread 的官方 SDK **SiFli-SDK**，通过 UART 跑通 `hello_world` 示例。
 
 即使计划使用 Arduino、Zephyr 或 MicroPython，也建议先完整走一遍本指南。这样可以在引入其他框架前，先确认开发板、数据线、串口、烧录流程和基础工具链都能正常工作。
 
@@ -17,7 +17,7 @@ tags:
 **硬件**
 
 - 一块 SF32 开发板，例如 [SF32LB52-DevKit-LCD](../../sf32-products/devkits/SF32LB52-DevKit-LCD.md)，或通过[SF32 系列](../../sf32-products/family/SF32_family.md)确定的其他开发板。
-- 一根连接到开发板 USB-to-UART 端口的 USB Type-C **数据线**，不能使用仅支持充电的线，也不要接到承担其他功能的 USB 端口。
+- 一根连接到开发板 USB-to-UART 端口的 USB Type-C **数据线**，不能使用仅支持充电的线，也不要接到另一个 USB 功能端口。
 - 一台运行 Windows、macOS 或 Linux 的电脑。
 
 **软件**
@@ -91,7 +91,7 @@ tags:
     GitHub 的 “Download ZIP” 不包含所需子模块。请使用 `git clone --recursive`。如果已克隆 SDK 但未获取子模块，请在 SDK 根目录运行 `git submodule update --init --recursive`。
 
 !!! note "在中国大陆环境下工作？"
-    安装前，请在当前 Shell 中将 `SIFLI_SDK_MIRROR_CHINA` 设为 `1`：macOS/Linux 使用 `export SIFLI_SDK_MIRROR_CHINA=1`，PowerShell 使用 `$env:SIFLI_SDK_MIRROR_CHINA = "1"`。也可以从 [Gitee 镜像](https://gitee.com/SiFli/sifli-sdk) 克隆，而不是从 GitHub 克隆。详情请参阅[安装指南](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/install/index.html)。
+    安装前，请在当前 Shell 中将 `SIFLI_SDK_MIRROR_CHINA` 设为 `1`：macOS/Linux 使用 `export SIFLI_SDK_MIRROR_CHINA=1`，PowerShell 使用 `$env:SIFLI_SDK_MIRROR_CHINA = "1"`。也可以从 [Gitee 镜像](https://gitee.com/SiFli/sifli-sdk)克隆，而不是从 GitHub 克隆。详情请参阅[安装指南](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/install/index.html)。
 
 `install.sh` / `install.ps1` 会下载匹配版本的编译器、调试器和 Python 依赖。SDK 版本变化后，建议重新运行。`export.sh` / `export.ps1` 会在当前终端激活该环境；每次新开终端构建前，都需要重新执行。Windows 上请在 PowerShell 中运行 `.ps1` 脚本。
 
@@ -168,10 +168,10 @@ scons --board=sf32lb52-lcd_n16r8 -j8
 
 ## 接下来可以做什么 { #where-to-go-next }
 
-- **挑选芯片：** 在 [SF32 系列概览](../../sf32-products/family/SF32_family.md) 中比较 LB52、LB55、LB56 和 LB58 系列。
+- **挑选芯片：** 在 [SF32 系列概览](../../sf32-products/family/SF32_family.md)中比较 LB52、LB55、LB56 和 LB58 系列。
 - **探索更多示例：** 除了 `hello_world`，SDK 还自带 BLE、经典蓝牙（Bluetooth）、LVGL 图形、音频和低功耗示例。
 - **尝试其他框架：** 接下来可继续看 [Arduino](../arduino/getting-started-arduino.md)、[Zephyr](../zephyr/getting-started-zephyr-upstream.md) 或 [MicroPython](../micropython/getting-started-micropython.md)。
-- **遇到问题：** 可以先查 [思澈科技（SiFli） FAQ](https://wiki.sifli.com/en/faq/index.html) 中关于工具链、J-Link 和调试的常见问题。
+- **遇到问题：** 可以先查 [SiFli FAQ](https://wiki.sifli.com/en/faq/index.html) 中关于工具链、J-Link 和调试的常见问题。
 
 ## 让配置可复现 { #what-sifli-should-add }
 

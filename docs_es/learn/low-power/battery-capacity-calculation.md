@@ -1,7 +1,7 @@
 ---
 icon: lucide/battery-charging
 title: "Estimación del nivel de carga de la batería"
-description: "Estime el nivel de carga de los productos SF32 a partir de la tensión medida con la calculadora del SiFli-SDK, curvas de carga y descarga, detección del cargador y filtrado multinivel."
+description: "Estime el porcentaje de batería de productos SF32 a partir de la tensión con la calculadora de SiFli-SDK: curvas de descarga, detección de carga y filtrado multinivel."
 tags:
   - Bajo consumo
   - Batería

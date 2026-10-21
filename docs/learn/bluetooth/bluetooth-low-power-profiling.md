@@ -1,7 +1,7 @@
 ---
 icon: lucide/chart-no-axes-combined
 title: "Bluetooth Low-Power Profiling"
-description: "A practical method to measure BLE, Classic Bluetooth, and dual-mode Bluetooth power consumption on an SF32 device, attribute the trace to firmware behavior, and turn the result into a daily-use energy budget."
+description: "Measure BLE, Classic, and dual-mode Bluetooth power on an SF32 device, tie the trace to firmware behavior, and build a daily-use energy budget."
 tags:
   - Bluetooth
   - Low Power

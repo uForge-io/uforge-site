@@ -1,6 +1,6 @@
 ---
 icon: lucide/keyboard
-description: "An engineering path for OpenSiFli's ZMK port on SF32LB52: reproduce the Urchin split-keyboard baseline, validate USB, BLE, settings, and recovery, then adapt the keymap or hardware deliberately."
+description: "Engineering path for OpenSiFli's ZMK port on SF32LB52: reproduce the Urchin split-keyboard baseline, validate USB, BLE, and recovery, then adapt the keymap or hardware."
 tags:
     - Projects
     - Zephyr

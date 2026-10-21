@@ -1,6 +1,6 @@
 ---
 icon: lucide/trending-up
-description: "Tutoriales de subsistemas conectados de SF32: sensores I2C, una pantalla básica con LVGL, un servicio periférico BLE, reproducción de audio local, almacenamiento en sistema de archivos y pruebas de coexistencia."
+description: "Tutoriales de subsistemas conectados SF32: sensores I2C, pantalla LVGL básica, servicio BLE periférico, audio local, sistema de archivos y pruebas de coexistencia."
 tags:
     - Tutoriales
 ---

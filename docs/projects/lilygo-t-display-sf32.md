@@ -1,6 +1,6 @@
 ---
 icon: lucide/watch
-description: "A product-engineering path for LilyGO's third-party T-Display-SF32 platform: establish the vendor baseline, validate its display, peripherals, power behavior, and recovery, reproduce the SiFli-SDK build, and adapt it deliberately."
+description: "Product-engineering path for LilyGO's T-Display-SF32: establish the vendor baseline, validate display, peripherals, power, and recovery, then adapt the SiFli-SDK build."
 tags:
     - Projects
     - Display

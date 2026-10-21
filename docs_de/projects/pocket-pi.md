@@ -1,6 +1,6 @@
 ---
 icon: lucide/gamepad-2
-description: "Reproduzierbarer Entwicklungsablauf für Pocket Pi: NES-Emulation, 320 × 240 Display, AW9523-Eingabe, Audio, ROM-Dateisysteme und Wiederherstellung von Spielständen auf SF32LB52 validieren."
+description: "Reproduzierbarer Pocket-Pi-Entwicklungspfad: NES-Emulation, 320×240-Display, AW9523-Eingabe, Audio, ROM-Dateisysteme und Spielstand-Wiederherstellung auf SF32LB52 validieren."
 tags:
     - Projekte
     - Spiele

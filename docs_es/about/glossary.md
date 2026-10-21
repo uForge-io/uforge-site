@@ -1,6 +1,6 @@
 ---
 icon: lucide/book-a
-description: "Glosario de referencia rápida de términos y siglas de sistemas embebidos, inalámbricos, gráficos y específicos de SiFli utilizados en la documentación de μForge.io para SF32."
+description: "Glosario de referencia rápida de términos y siglas de sistemas embebidos, inalámbricos, gráficos y de SiFli usados en la documentación SF32 de μForge.io."
 tags:
     - Acerca de
 ---

@@ -17,7 +17,7 @@ SDK 的 `debug_logging` 与 `crash_analysis` 指南互为补充：日志用于�
 
 | 芯片系列 | 调试与日志行为 |
 |---|---|
-| SF32LB52x、SF32LB56x、SF32LB58x | 官方指南涵盖 UART 现场采集、`SifliUsartServer`/`AssertDumpUart` 以及通过 J-Link/Trace32 恢复现场的方法。应根据目标所处的低功耗状态，选择仍可用的传输方式。 |
+| SF32LB52x、SF32LB56x、SF32LB58x | 官方指南介绍了 UART 采集、`SifliUsartServer`/`AssertDumpUart` 以及通过 J-Link/Trace32 恢复现场的方法。应根据所选的睡眠状态，使用此时仍然可用的传输方式。 |
 | SF32LB55x | 可使用 `$SDK_ROOT/tools/segger/jlink_hcpu_a0.bat` 和 `jlink_lcpu_a0.bat` 在 HCPU/LCPU 间切换 SWD。LCPU ROM 控制台为 UART3、波特率 1,000,000；HCPU 可使用 UART1/2 或 SWD。由于 SWD 使用 PB IO，连接期间应保持 LPSYS 处于活动状态（Active）或轻度睡眠（Light Sleep）。 |
 
 </div>
@@ -26,7 +26,7 @@ LPSYS 从待机（Standby）唤醒后，SWD 会切回 HCPU。J-Link 复位不会
 
 ## 采集实时或事后崩溃现场 { #capture-a-live-or-post-mortem-package }
 
-当前 SDK 可使用 `sdk.py` 通过 UART 或 J-Link 捕获：
+对于当前版本的 SDK，可使用 `sdk.py` 通过 UART 或 J-Link 采集：
 
 !!! note "示例适用范围"
     下面的命令以 SF32LB52/LB525 为例。保留命令结构，但必须根据目标系列和 SDK 版本替换芯片/型号、核、传输方式和 ELF。
@@ -99,7 +99,7 @@ Ozone 可加载 HCPU/LCPU ELF，以及 `$SDK_ROOT/tools/svd_external` 中适用�
 
 ## 检查总线和内存故障 { #instrument-bus-and-memory-failures }
 
-SDK 的总线监控功能（bus monitor）可以捕获导致总线错误（bus fault）的访问。参考指南中的示例，使用 `dbg_busmon_reg_callback` 注册回调，再用 `dbg_busmon_read` 和 `dbg_busmon_write` 检查相关地址范围。将总线监控与堆跟踪和完整现场结合使用；没有符号和内存上下文的寄存器转储通常不足以定位问题。
+SDK 的总线监控功能（bus monitor）可以捕获导致总线错误（bus fault）的访问。参考指南中的示例，使用 `dbg_busmon_reg_callback` 注册回调，再用 `dbg_busmon_read` 和 `dbg_busmon_write` 检查相关地址范围。将总线监控与堆跟踪和崩溃现场包结合使用；没有符号和内存上下文的寄存器转储通常不足以定位问题。
 
 ![Trace32 堆调用栈示例](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_heap_callstack.png){ loading="lazy" }
 <div align="center"><em>图：SF32LB52x 指南示例——堆调用栈与内存窗口。</em></div>

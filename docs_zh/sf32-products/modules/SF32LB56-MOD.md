@@ -10,9 +10,9 @@ tags:
 
 ## 概览 { #overview }
 
-SF32LB56-MOD 是思澈科技（SiFli）基于 SF32LB56xV 平台推出的通用低功耗蓝牙（Bluetooth）MCU 模组系列。标准配置采用 SF32LB566VCB36，并合封 4 MB + 8 MB OPI-PSRAM，另配 1 MB QSPI-NOR。模组集成双核 MCU、支持 BLE Audio 的 Bluetooth 5.3、图形加速和音频接口，并提供按 SKU 区分的 Flash 配置；RF 链路也集成在模组中，便于产品设计。
+SF32LB56-MOD 是思澈科技（SiFli）基于 SF32LB56xV 平台推出的通用低功耗蓝牙（Bluetooth）MCU 模组系列。标准配置采用 SF32LB566VCB36，并合封 4 MB + 8 MB OPI-PSRAM，另配 1 MB QSPI-NOR。模组集成双核 MCU、支持 BLE Audio 的蓝牙 5.3、图形加速和音频接口，提供按 SKU 区分的 Flash 配置，并在紧凑的尺寸内集成了 RF 链路。
 
-模组集成 RF 链路、晶振和高速存储，并提供两种天线方案：板载 PCB 天线，或通过 IPEX 兼容连接器连接外置天线。整机仍需进行 RF 验证，载板布局也应适配所选方案。模组提供的接口和存储配置可用于满足显示、音频、传感及本地处理需求。
+模组集成 RF 链路、晶振和高速存储，并提供两种天线方案：板载 PCB 天线，或通过 IPEX 兼容连接器连接外置天线。请在整机中验证 RF 性能，并围绕所选天线方案设计载板。模组提供的接口和存储配置可用于满足显示、音频、传感及本地处理需求。
 
 该系列提供多种存储配置，所有型号的尺寸均为 18.0 × 32.9 × 3.1 mm，工作温度范围为 -40 °C 至 +85 °C。[SF32LB56-MOD 硬件设计指南](../../hardware/chip-guides/SF32LB56-MOD_hardware_design_guide.md)以 DS5602 V0.3 为依据，提供了天线与布局方面的详细信息。思澈科技（SiFli）的模组型号指南列出了存储配置，但未说明各 SKU 对应哪种天线方案。确定载板布局前，应向思澈科技（SiFli）确认所选模组的天线配置。
 

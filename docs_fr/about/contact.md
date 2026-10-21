@@ -1,6 +1,6 @@
 ---
 icon: lucide/mail
-description: "Formulaire de contact de μForge.io pour les demandes commerciales, l'assistance technique, les partenariats, la presse et les retours sur la documentation de la famille de MCU SF32."
+description: "Formulaire de contact de μForge.io : demandes commerciales, assistance technique, partenariats, presse et retours sur la documentation de la famille de MCU SF32."
 ---
 
 # Nous contacter { #contact-us }

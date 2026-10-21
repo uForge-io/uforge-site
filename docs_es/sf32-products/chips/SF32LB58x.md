@@ -159,6 +159,25 @@ Siga estos pasos para convertir una selección preliminar de SF32LB58x en un dis
 3. **Diseñe y revise el hardware.** Antes de liberar el esquemático o el diseño de la placa, consulte la [guía de diseño de hardware](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md) y sus listas de comprobación de [esquemático](../../hardware/chip-guides/SF32LB58x_schematic_checklist.md) y [diseño de PCB](../../hardware/chip-guides/SF32LB58x_pcb_layout_checklist.md). Valide cuanto antes los supuestos de HDI para BGA256 y de enrutamiento de memoria.
 4. **Verifique la fuente de referencia.** Confirme el número de pieza y el encapsulado disponibles para pedido en la [hoja de datos][Hoja de datos], el [manual de usuario][Manual de usuario], la [guía de diseño original][Guía original de diseño (wiki.sifli.com)] y la [fuente de la nota de aplicación de hardware][Nota de aplicación de hardware (fuente en GitHub)] de SiFli.
 
+<!-- uf-faq:start -->
+## Preguntas frecuentes { #frequently-asked-questions }
+
+**¿Cuáles son las especificaciones principales del SF32LB58x?**
+El SF32LB58x combina una CPU de aplicación (2× Cortex-M33 @240 MHz) con un núcleo de bajo consumo (Cortex-M33 @48/96 MHz, un núcleo programable por el usuario), 3.7 MB de SRAM interna y Bluetooth dual (BT clásico + BLE). Gráficos: ePicasso 2.0 + Vivante GCNanoUltraV (vector). Encapsulado: BGA256 (8.5 × 6.5 mm). USB 2.0 HS. Valores de la familia; verifique la hoja de datos del número de pieza exacto.
+
+**¿Qué interfaces de pantalla admite el SF32LB58x?**
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. La disponibilidad varía según el número de pieza y el encapsulado.
+
+**¿Cuánta memoria en el encapsulado ofrece el SF32LB58x?**
+Hasta 32 MB + 32 MB de PSRAM y hasta 8 MB de Flash NOR en el encapsulado, según el número de pieza.
+
+**¿Qué tensión de alimentación necesita el SF32LB58x?**
+1.71–3.63 V, según la variante. Confirme el rango exacto en la hoja de datos.
+
+**¿Por dónde empezar un diseño de hardware con el SF32LB58x?**
+Empiece con la [guía de diseño de hardware del SF32LB58x](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md) para esquemático, alimentación, reloj/RF y diseño de PCB, y use después las listas de verificación de esquemático y layout antes de liberar la placa.
+<!-- uf-faq:end -->
+
 ## Productos relacionados { #related-products }
 
 ### Módulo { #module }
@@ -172,6 +191,3 @@ Siga estos pasos para convertir una selección preliminar de SF32LB58x en un dis
 ### Productos de referencia { #reference-products }
 
 Entre los productos finales que pueden utilizar SF32LB58x se encuentran los relojes inteligentes de gama alta, las interfaces HMI portátiles de alta resolución, los paneles inteligentes y los terminales conectados portátiles, así como dispositivos que integran Bluetooth, pantalla, audio, almacenamiento y procesamiento local de IA.
-
-!!! note "Contenido autogenerado"
-    Esta página se ha redactado sin un documento fuente específico. Verifique las afirmaciones técnicas en la documentación oficial de SiFli antes de basarse en ellas.

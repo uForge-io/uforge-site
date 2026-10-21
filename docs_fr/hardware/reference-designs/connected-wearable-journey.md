@@ -1,6 +1,6 @@
 ---
 icon: lucide/waypoints
-description: "Un parcours pratique de conception de référence SF32, de la validation sur carte de développement SF32LB52 jusqu'à un plan de mise en production du matériel et du firmware d'un objet connecté portable personnalisé."
+description: "Parcours de conception de référence SF32, de la validation sur carte SF32LB52 à un plan de mise en production matériel et firmware d'un objet connecté portable."
 tags:
     - Matériel
     - Conception de référence

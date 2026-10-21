@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-Core-3p3: placa compacta de avaliação do SF32LB52x, com alimentação do MCU selecionável por jumper entre 1,8 V e 3,3 V e acesso direto a GPIO, display, áudio, USB e linhas de alimentação."
+description: "SF32LB52-DevKit-Core-3p3: placa compacta de avaliação do SF32LB52x, alimentação do MCU de 1,8 V ou 3,3 V por jumper e acesso direto a GPIO, display, áudio e USB."
 tags:
     - Hardware
     - Placa de desenvolvimento

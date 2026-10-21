@@ -1,6 +1,6 @@
 ---
 icon: lucide/clipboard-check
-description: "SF32 量产硬件设计入口：芯片和模组设计指南、检查清单、接口定义、经验证的元器件与 EDA 库。"
+description: "SF32 量产硬件设计入口：芯片和模组设计指南、检查清单、接口定义、认可元器件与 EDA 库。"
 tags:
     - 硬件
     - 量产
@@ -8,11 +8,11 @@ tags:
 
 # 面向量产的设计 { #design-for-production }
 
-选定芯片或模组后，你可以通过本页查找发布原理图、PCB 布局、BOM 或生产资料前需要核查的设计参考。这些资料有助于降低首次启动调试和产品验证的风险，包括对应器件的硬件设计指南、检查清单、模组接口定义、认可元器件和 EDA 库。
+选定芯片或模组之后、发布原理图、PCB 布局、BOM 或生产资料之前，请按本页查阅相关参考。这些实现参考有助于降低首次启动调试和产品验证的风险，包括对应器件的硬件设计指南、检查清单、模组接口定义、认可元器件和 EDA 库。
 
 ## 推荐的量产设计顺序 { #recommended-production-sequence }
 
-以下流程需要反复评审，不是一次性交接。制作样板前应核对原理图符号和 PCB 封装；完成设计评审并验证量产方案对应的硬件后，才能发布量产用 CAD 文件和生产资料。电路板、固件或 BOM 发生变化时，应重新核查受影响的项目。
+请把以下流程当作反复评审的顺序，而不是一次性交接。制作样板前应核对原理图符号和 PCB 封装；完成设计评审并验证量产方案对应的硬件后，才能发布量产用 CAD 文件和生产资料。电路板、固件或 BOM 发生变化时，应重新核查受影响的项目。
 
 <div align="center"><em>表：量产设计顺序</em></div>
 
@@ -35,8 +35,8 @@ tags:
 
 - **[硬件设计指南](index.md#find-a-guide)**为芯片提供器件专用的原理图、布局、电源、接口和启动调试指引，并为模组提供载板集成指引。适用时请同时使用对应的检查清单，模组请先阅读模组介绍以确认其符合产品架构。
 - **[M2 模组](m2-modules/interface-standards-overview.md)**包括 μForge M2 命名规则和引脚级接口定义草案。该接口定义仍为提案，确定量产方案前必须完成验证。
-- **[CAD 与元器件](cad-components/components-and-cad-libraries.md)**包括思澈科技（SiFli）的 [AVL](cad-components/sifli-approved-vendor-list.md) 和[官方 EDA 库](cad-components/eda-tool-libraries.md)。两者都不能替代针对具体器件型号、封装尺寸图和所选设计指南的最终核实。
+- **[CAD 与元器件](cad-components/components-and-cad-libraries.md)**包括思澈科技（SiFli）的 [AVL](cad-components/sifli-approved-vendor-list.md) 和[官方 EDA 库](cad-components/eda-tool-libraries.md)。两者都不能替代针对具体器件型号、封装图和所选设计指南的最终核实。
 
 ## 量产参考资料不能代替验证 { #a-production-reference-is-not-a-substitute-for-validation }
 
-设计指南和经验证的元器件清单能够降低风险，但不能证明成品已经通过验证。请验证最终 PCB 版本、固件镜像、外壳、电池、显示屏、存储器件、RF 表现、工作环境和生产测试流程。对于任何偏离设计指南或检查清单的内容，应作为明确的工程决策记录，而非未记录的例外。
+设计指南和经验证的元器件清单能够降低风险，但不能证明成品已经通过验证。请验证最终 PCB 版本、固件镜像、外壳、电池、显示屏、存储器件、RF 性能、工作环境和生产测试流程。对于任何偏离设计指南或检查清单的内容，应作为明确的工程决策记录，而非未记录的例外。

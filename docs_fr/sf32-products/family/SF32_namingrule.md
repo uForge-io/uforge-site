@@ -1,6 +1,6 @@
 ---
 icon: lucide/tags
-description: "Comment décoder une référence SF32LB5xyZxYx6 : niveau de produit, variante PSRAM, type de boîtier, capacité Flash/PSRAM intégrée et classe de température, avec des exemples détaillés."
+description: "Décoder une référence SF32LB5xyZxYx6 : niveau de produit, variante PSRAM, type de boîtier, capacité Flash/PSRAM intégrée et classe de température, avec exemples."
 tags:
   - Matériel
   - Puce
@@ -57,7 +57,7 @@ tags:
 
 ### Codes mémoire propres au SF32LB57x { #sf32lb57x-memory-codes }
 
-Le schéma de numérotation du guide de conception matérielle SF32LB57x montre trois codes de position mémoire après le code du boîtier, dans l'ordre MPI1, MPI2 et MPI3 ; le code de température vient ensuite. Les codes propres à cette famille pour chaque position MPI sont les suivants :
+Le schéma de numérotation du [guide de conception matérielle SF32LB57x](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md#33-packages) montre trois codes de position mémoire après le code du boîtier, dans l'ordre MPI1, MPI2 et MPI3 ; le code de température vient ensuite. Les codes propres à cette famille pour chaque position MPI sont les suivants :
 
 <div align="center"><em>Tableau : codes mémoire SF32LB57x par position MPI</em></div>
 

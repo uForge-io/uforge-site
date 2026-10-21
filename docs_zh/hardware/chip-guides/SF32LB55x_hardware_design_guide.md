@@ -32,6 +32,7 @@ SF32LB55x 沿用早期的型号后缀规则。确认接口是否可用、封装�
 [思澈科技（SiFli）合格供应商名录（AVL）]: ../cad-components/sifli-approved-vendor-list.md
 [购买样品]: https://sifli.taobao.com/
 [购买开发板]: https://sifli.taobao.com/
+
 <div class="grid cards" markdown>
 
 - :fontawesome-solid-file-lines: __[SF32LB55x 硬件应用说明]__
@@ -51,9 +52,9 @@ SF32LB55x 沿用早期的型号后缀规则。确认接口是否可用、封装�
 
 ### 3.1. 架构 { #31-architecture }
 
-SF32LB55x 面向超低功耗 AIoT 产品，在人机交互所需的计算性能与长时间待机、睡眠时的低功耗之间实现平衡，并集成低功耗蓝牙（Bluetooth）5.2 收发机、电源管理及存储和显示接口。硬件设计需统筹封装选型、PMU 电源轨、启动模式、两路晶体电路、RF 匹配、外接存储、MIPI/SPI/MCU8080/JDI 显示方案、GPADC 与传感器连接、外接蓝牙音频、调试与烧录接口，以及量产校准。
+SF32LB55x 面向低功耗 AIoT 产品，这类产品既要快速响应用户操作，又要保持较低的待机和睡眠功耗。芯片集成低功耗蓝牙（Bluetooth）5.2 收发机、电源管理，以及存储和显示接口。硬件设计需统筹封装选型、PMU 电源轨、启动模式、两路晶体电路、RF 匹配、外接存储、MIPI/SPI/MCU8080/JDI 显示方案、GPADC 与传感器连接、外接蓝牙音频、调试与烧录接口，以及量产校准。
 
-存储连接包括多路 QSPI、独立 OPI-PSRAM 接口及 SD/eMMC 支持。合封 NOR Flash 和 PSRAM 的配置随具体料号而异。存储和显示接口也与封装有关：BGA145 支持一路外接 OPI-PSRAM，BGA169 支持两路；双数据通道 MIPI DSI 接口适用于 BGA145 和 BGA169，不适用于 QFN68L。分配外接器件之前，应核对完整料号对应的管脚图和合封存储配置。
+存储连接包括多路 QSPI、独立 OPI-PSRAM 接口及 SD/eMMC 支持。合封 NOR Flash 和 PSRAM 的配置随具体料号而异。存储和显示接口也与封装有关：BGA145 支持一路外接 OPI-PSRAM，BGA169 支持两路；双通道 MIPI DSI 接口适用于 BGA145 和 BGA169，不适用于 QFN68L。分配外接器件之前，应核对完整料号对应的管脚图和合封存储配置。
 
 ### 3.2. 型号与封装 { #32-variants-and-packages }
 
@@ -93,7 +94,7 @@ SF32LB55x 提供 QFN68L、BGA145 和 BGA169 三种封装。应尽早确定封装
 ### 3.3. 主要硬件特性 { #33-major-hardware-features }
 
 - QFN68L、BGA145 和 BGA169 封装选项。
-- 48 MHz 主晶体和 32.768 kHz RTC 晶体设计要求。
+- 48 MHz 和 32.768 kHz 双晶体设计要求。
 - 低功耗蓝牙 5.2 收发机、RF 匹配和天线布局要求。
 - OPI PSRAM、QSPI NOR/NAND Flash 和 PSRAM、SDIO eMMC 或 Micro SD 接口；合封存储配置因具体料号而异。
 - MIPI DSI、SPI/QSPI、MCU8080 和 JDI 显示选项。
@@ -117,9 +118,9 @@ SF32LB55x 提供 QFN68L、BGA145 和 BGA169 三种封装。应尽早确定封装
 | 封装 | 管脚规划和 PCB 叠层前先确定 QFN68L 或 BGA 封装。 |
 | 电源 | 评审 PMU 电源、其他电源脚、必要电容、POR/BOR/复位和 BUCK 模式。 |
 | 时钟 | 48 MHz 和 32.768 kHz 晶体必须满足 CL、频率误差（ppm）和 ESR 要求。 |
-| RF | 匹配网络靠近芯片，天线走线保持 50 Ω 阻抗，并避免干扰。 |
+| RF | 匹配网络靠近芯片，天线路径保持 50 Ω 阻抗且干净。 |
 | 存储 | 分别规划易失性 OPI/QSPI PSRAM，以及用于启动和持久存储的 QSPI Flash、SDIO eMMC/Micro SD；核对封装和启动模式支持。 |
-| 显示 | 尽早确定 MIPI DSI、SPI/QSPI、MCU8080 或 JDI，避免后期管脚和布局返工。 |
+| 显示 | 尽早选定 MIPI DSI、SPI/QSPI、MCU8080 或 JDI，因为不同方案的管脚组和布局要求不同。 |
 | 量产 | 为 DBG-UART、SWD、启动模式、电源以及 RF/晶体校准预留访问接口。 |
 
 </div>
@@ -131,7 +132,7 @@ SF32LB55x 提供 QFN68L、BGA145 和 BGA169 三种封装。应尽早确定封装
 3. 选择晶体、RF 匹配拓扑和天线布局约束。
 4. 分配存储、显示、唤醒、传感器、音频、调试和量产测试管脚。
 5. 锁定 PCB 叠层、扇出、阻抗、ESD、RF 和高速接口约束。
-6. 在原理图冻结、布局发布和 EVT 前执行第 7 节检查表。
+6. 在原理图冻结、布局发布和 EVT 前执行第 7 节核对表。
 
 ### 4.3. 评审资料 { #43-review-evidence-pack }
 
@@ -143,7 +144,7 @@ EVT 前应归档数据手册/用户手册版本、封装图、原理图 PDF、PC
 
 每个检查项都标明其适用的变体分组，以及是“必检”（发布前必须通过）还是“可选”（使用相关功能时建议执行）。带颜色的文字以及带有<span class="flag-yellow">黄色背景</span>的文字，均保留了源电子表格中的审查强调标记；源文件未说明每处高亮的原因，因此这些标记应视为额外的重点审查提示，而不是替代表中未高亮的其他检查项。
 
-在开始 PCB 布局前，使用[原理图核对表](SF32LB55x_schematic_checklist.md)完成原理图评审；在发布 Gerber 文件前，使用 PCB 布局核对表（第 6.4 节）完成布局评审。每项评审通常分两轮进行：先由设计工程师自查，再由独立评审人在设计冻结或投产前复审。
+在开始 PCB 布局前，使用[原理图核对表](SF32LB55x_schematic_checklist.md)完成原理图评审；在发布 Gerber 文件前，使用 PCB 布局核对表（第 6.4 节）完成布局评审。每项评审通常分两轮进行：先由设计工程师自查，再由独立评审人在设计冻结或量产放行前复审。
 
 为了让核对表真正发挥签核记录的作用，而非仅供浏览，建议按以下方式使用：
 
@@ -189,6 +190,6 @@ EVT 前应归档数据手册/用户手册版本、封装图、原理图 PDF、PC
 - :fontawesome-solid-bolt: __[原理图设计指导](SF32LB55x_schematic_design.md)__ — 电源系统、启动模式、时钟生成、RF、存储接口、显示与触摸接口，以及唤醒/GPADC/制造接口
 - :fontawesome-solid-list-check: __[原理图核对表](SF32LB55x_schematic_checklist.md)__ — 逐项原理图评审核对表（第 5.8 节）
 - :fontawesome-solid-microchip: __[PCB 布局指导](SF32LB55x_pcb_layout.md)__ — 封装、叠层、通用 PCB 规则、接口走线，以及逐项 PCB 布局核对表
-- :fontawesome-solid-book-open: __[设计评审检查表与参考资料](SF32LB55x_review_and_reference.md)__ — 发布检查表、相关文档、附录，以及修订历史
+- :fontawesome-solid-book-open: __[设计评审核对表与参考资料](SF32LB55x_review_and_reference.md)__ — 发布核对表、相关文档、附录，以及修订历史
 
 </div>

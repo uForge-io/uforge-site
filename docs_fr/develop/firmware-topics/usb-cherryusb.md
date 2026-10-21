@@ -1,6 +1,6 @@
 ---
 icon: lucide/usb
-description: "Utilisation du matériel USB SF32 avec CherryUSB : cas d'usage CDC, HID, MSC, audio et MTP, liste de contrôle des descripteurs et tests d'énumération sur plusieurs systèmes d'exploitation."
+description: "Utiliser le matériel USB SF32 avec CherryUSB : cas d'usage CDC, HID, MSC, audio et MTP, liste de contrôle des descripteurs et tests d'énumération multi-OS."
 tags:
     - Développement
     - USB

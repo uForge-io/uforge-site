@@ -1,6 +1,6 @@
 ---
 icon: lucide/keyboard
-description: "Guía de ingeniería para la adaptación de ZMK de OpenSiFli en SF32LB52: reproducir la configuración de referencia del teclado dividido Urchin, validar USB, BLE, ajustes y recuperación, y después adaptar el mapa de teclas o el hardware de forma controlada."
+description: "Ruta de ingeniería del port de ZMK de OpenSiFli en SF32LB52: reproducir el teclado dividido Urchin, validar USB, BLE y recuperación, y adaptar el keymap o el hardware."
 tags:
     - Proyectos
     - Zephyr

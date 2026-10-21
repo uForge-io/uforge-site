@@ -1,6 +1,6 @@
 ---
 icon: lucide/braces
-description: "Aún no hay una guía de inicio de MicroPython verificada para SF32. Utilice SiFli-SDK para una primera puesta en marcha reproducible y consulte la página de estado de MicroPython para seguir su avance."
+description: "MicroPython aún no es una ruta de inicio verificada para SF32: use SiFli-SDK para una primera puesta en marcha reproducible y siga la página de estado de MicroPython."
 tags:
     - Primeros pasos
     - MicroPython

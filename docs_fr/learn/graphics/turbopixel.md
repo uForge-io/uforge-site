@@ -1,6 +1,6 @@
 ---
 icon: lucide/minimize-2
-description: "Comment TurboPixel utilise la compression de framebuffer avec perte à rapport fixe pour réduire le stockage du framebuffer et le trafic de lecture d'affichage sur les appareils SF32 pris en charge."
+description: "Comment la compression de framebuffer avec perte à rapport fixe de TurboPixel réduit le stockage et le trafic de lecture d'affichage sur les appareils SF32 pris en charge."
 tags:
   - Graphismes
 ---

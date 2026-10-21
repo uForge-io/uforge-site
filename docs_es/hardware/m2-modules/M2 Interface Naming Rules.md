@@ -1,6 +1,6 @@
 ---
 icon: lucide/plug
-description: "Reglas de nomenclatura para la interfaz de módulos M2 de μForge y sus especificaciones de extensión M2xM/M2xA/M2xN/M2xH/M2xP, con ejemplos de declaración y principios de diseño."
+description: "Reglas de nomenclatura de la interfaz de módulos M2 de μForge y sus extensiones M2xM/M2xA/M2xN/M2xH/M2xP, con ejemplos de declaración y principios de diseño."
 tags:
   - Hardware
   - Módulos

@@ -1,6 +1,6 @@
 ---
 icon: lucide/app-window
-description: "Anleitung zur ersten Verwendung von SiFli CodeKit in VS Code: Erweiterung installieren, SF32-Board wählen, hello_world bauen und flashen sowie die serielle Konsole öffnen."
+description: "Erster Einsatz von SiFli CodeKit in VS Code: Erweiterung installieren, SF32-Board wählen, hello_world bauen und flashen und die serielle Konsole öffnen."
 tags:
     - Erste Schritte
     - SiFli CodeKit

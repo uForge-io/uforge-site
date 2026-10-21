@@ -2,7 +2,7 @@
 icon: lucide/circuit-board
 hide:
     - navigation
-description: "Directives de conception du schéma pour le microcontrôleur SF32LB55x : système d'alimentation, mode de démarrage, génération d'horloge, RF, interfaces de stockage, interfaces d'affichage et tactiles, et interfaces de réveil/GPADC/fabrication."
+description: "Directives de schéma du MCU SF32LB55x : alimentation, mode de démarrage, horloges, RF, stockage, affichage et tactile, réveil, GPADC et interfaces de fabrication."
 tags:
     - Matériel
     - Puce

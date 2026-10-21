@@ -2,7 +2,7 @@
 icon: lucide/clipboard-check
 hide:
     - navigation
-description: "Lista de comprobación de revisión del diseño, documentos y referencias relacionados, apéndices de esquemáticos/PCB/mecánica/alimentación e historial de revisiones de la guía de diseño de hardware SF32LB52x."
+description: "Lista de revisión del diseño, documentos relacionados, apéndices de referencia (esquemático, PCB, mecánica, alimentación) e historial de revisiones de la guía SF32LB52x."
 tags:
     - Hardware
     - Chip

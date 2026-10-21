@@ -1,6 +1,6 @@
 ---
 icon: lucide/minimize-2
-description: "Como o TurboPixel usa compressão com perdas e taxa de compressão fixa no framebuffer para reduzir o armazenamento do framebuffer e o tráfego de leitura do display nos dispositivos SF32 compatíveis."
+description: "Como a compressão de framebuffer com perdas e taxa fixa do TurboPixel reduz armazenamento e tráfego de leitura do display em dispositivos SF32 compatíveis."
 tags:
   - Gráficos
 ---

@@ -9,9 +9,9 @@ tags:
 
 # 蓝牙 SDK 示例 { #bluetooth-sdk-examples }
 
-SiFli-SDK 的蓝牙（Bluetooth）示例针对特定蓝牙应用规范（Profile）、设备角色或无线通信流程提供验证起点，并非可直接用于产品的固件。应先选择能够验证产品最关键、最难满足的技术要求的项目，在目标开发板上跑通未修改的示例，再逐项加入产品需求。
+SiFli-SDK 的蓝牙（Bluetooth）示例针对特定蓝牙应用规范（Profile）、设备角色或无线通信流程提供验证起点，并非可直接用于产品的固件。应先选择覆盖产品最严苛技术要求的项目，在目标开发板上跑通未修改的示例，再逐项加入产品需求。
 
-本文按工程任务整理 SF32LB58x 文档栏目中的[经典蓝牙](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/bt/index.html)、[BLE](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/ble/index.html)和 [LE Audio 广播](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/zbt/index.html)示例。URL 中的 `sf32lb58x` 表示文档归属，并不承诺每个例程都支持所有 SF32LB58x 开发板或其他 SF32 系列；`latest` 也是滚动版本。针对计划使用的 SDK 版本或提交，应查阅对应项目的“支持的平台”（Supported Platforms）一节，并严格采用其中列出的开发板名称和构建方式。如果没有明确资料能对应到目标开发板和 SDK 版本/提交，应将兼容性标记为“未确认”，不要根据 URL、相邻例程或名称相似的开发板推断。即使页面标注“全平台”，产品开发前仍应在实际 SDK 版本和板级配置下构建验证。项目页面还应作为 `menuconfig` 设置、测试设备和限制条件的依据。
+本文按工程任务整理 SF32LB58x 文档栏目中的[经典蓝牙](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/bt/index.html)、[BLE](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/ble/index.html)和 [LE Audio 广播](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/zbt/index.html)示例。URL 中的 `sf32lb58x` 表示文档归属，并不承诺每个示例都支持所有 SF32LB58x 开发板或其他 SF32 系列；`latest` 也是滚动版本。针对计划使用的 SDK 版本或提交，应查阅对应项目的“支持的平台”（Supported Platforms）一节，并严格采用其中列出的开发板名称和构建方式。如果没有明确资料能对应到目标开发板和 SDK 版本/提交，应将兼容性标记为“未确认”，不要根据 URL、相邻示例或名称相似的开发板推断。即使页面标注“全平台”，产品开发前仍应在实际 SDK 版本和板级配置下构建验证。项目页面还应作为 `menuconfig` 设置、测试设备和限制条件的依据。
 
 ## 从合适的蓝牙路径开始 { #start-with-the-right-bluetooth-path }
 
@@ -89,7 +89,7 @@ BLE 示例适用于配套应用连接、可互操作的 GATT 服务、信标、�
 
 `sf32lb58x` 文档路径本身不能证明目标开发板受支持；应针对实际 SDK 版本和开发板查阅项目的“支持的平台”（Supported Platforms）一节。经典蓝牙与 BAP 广播桥接示例的 README 标题写的是发送端，路径和概述却描述接收端；[本次核查的 SDK 实现](https://github.com/OpenSiFli/SiFli-SDK/blob/121aa105565ee6bcbab6a15c1cb3b5571f5cc8e5/example/zbt/bap_broadcast_src_with_classic_bt/src/main.c)处理经典蓝牙 A2DP，并启动 BAP 广播发送端。这个结论仅适用于链接中的固定提交，不能直接推及 `latest` 文档所覆盖的其他 SDK 版本。构建前，应针对实际使用的 SDK 版本或提交核对 README、源代码和板级配置；不能依据复制过来的接收端描述判断角色或开发板支持情况。
 
-`zbt` 项目提供基于 LE Audio [基础音频应用规范（Basic Audio Profile，BAP）](https://www.bluetooth.com/specifications/specs/basic-audio-profile-1-0-2/)的广播源（Source）和广播接收端（Sink）示例。应将发送端和接收端作为一组进行系统测试：广播配置、音频源、接收端、时钟和射频条件都会影响实际结果。
+`zbt` 项目提供基于 LE Audio [基础音频应用规范（Basic Audio Profile，BAP）](https://www.bluetooth.com/specifications/specs/basic-audio-profile-1-0-2/)的广播发送端（Source）和广播接收端（Sink）示例。应将发送端和接收端作为一组进行系统测试：广播配置、音频源、接收端、时钟和射频条件都会影响实际结果。
 
 <div align="center"><em>表：LE Audio 广播 SDK 示例</em></div>
 
@@ -99,7 +99,7 @@ BLE 示例适用于配套应用连接、可互操作的 GATT 服务、信标、�
 |:---------|:---------|:-----------------|
 | 接收广播音频流 | [BAP 广播接收端](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/zbt/bap_broadcast_sink/README.html) | 接收端行为、输出音频通路和测试广播配置 |
 | 发送广播音频流 | [BAP 广播发送端](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/zbt/bap_broadcast_src/README.html) | 发送端音频处理链路、广播配置和已验证的接收端 |
-| 桥接经典蓝牙与 LE Audio 广播 | [经典蓝牙与 BAP 广播发送端](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/zbt/bap_broadcast_src_with_classic_bt/README.html) | 经典蓝牙与 LE Audio 两侧的音频处理链路、交接边界，以及组合场景下的时序和资源裕量 |
+| 桥接经典蓝牙与 LE Audio 广播 | [经典蓝牙与 BAP 广播发送端](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/zbt/bap_broadcast_src_with_classic_bt/README.html) | 经典蓝牙与 LE Audio 两个音频域、它们之间的交接边界，以及组合场景下的时序和资源裕量 |
 
 </div>
 
@@ -109,7 +109,7 @@ BLE 示例适用于配套应用连接、可互操作的 GATT 服务、信标、�
 
 <div align="center" markdown>
 
-| 边界 | 保留例程已有的验证依据 | 为产品重新验证的内容 |
+| 边界 | 保留示例已有的验证依据 | 为产品重新验证的内容 |
 |:-----|:-------------------|:---------------------|
 | 射频行为 | 支持的开发板，以及示例定义的角色或 Profile | 天线、外壳、距离、射频共存、对端设备和法规符合性测试计划 |
 | 连接策略 | 基础广播、扫描或连接流程 | 产品延迟、功耗目标、重连策略和状态转换 |

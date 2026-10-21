@@ -2,7 +2,7 @@
 icon: lucide/book-check
 hide:
     - navigation
-description: "Guía de diseño de hardware de la MCU SF32LB52x: descripción del dispositivo, flujo de diseño y enlaces a las páginas de esquemático, diseño de PCB, revisión y listas de comprobación."
+description: "Guía de diseño de hardware de la MCU SF32LB52x: descripción del dispositivo, flujo de diseño y enlaces a esquemático, PCB, revisión y listas de comprobación."
 tags:
     - Hardware
     - Chip

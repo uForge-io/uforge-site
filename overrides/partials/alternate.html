@@ -30,20 +30,55 @@
 {% endif %}
 {% if not offline and (config.extra.alternate | length) > 1 %}
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  /* The header persists across instant (XHR) navigation, so the server-rendered
+     hrefs describe only the first page loaded. Recompute them from the live
+     location on every navigation signal, and again just before any activation
+     (click, middle-click, context menu, keyboard focus, hover). */
+  (function () {
     var prefixes = { en: "", zh: "/zh", ja: "/ja", es: "/es", de: "/de", fr: "/fr", pt: "/pt", ru: "/ru", ko: "/ko" };
-    document.querySelectorAll(".uf-lang-switch[data-uf-language-target]").forEach(function (link) {
-      link.addEventListener("click", function () {
-        var pagePath = window.location.pathname.replace(/^\/(?:zh|ja|es|de|fr|pt|ru|ko)(?=\/|$)/, "") || "/";
-        var targetPath = (prefixes[link.dataset.ufLanguageTarget] || "") + pagePath;
-        link.href = targetPath + window.location.search + window.location.hash;
-        try {
-          localStorage.setItem("uf-lang-manual-preference", link.dataset.ufLanguageTarget);
-        } catch (e) {
-          // The link remains usable when storage is unavailable.
-        }
+    var localeRoot = /^\/(?:zh|ja|es|de|fr|pt|ru|ko)(?=\/|$)/;
+
+    function refresh() {
+      var pagePath = window.location.pathname.replace(localeRoot, "") || "/";
+      document.querySelectorAll(".uf-lang-switch[data-uf-language-target]").forEach(function (link) {
+        var target = (prefixes[link.dataset.ufLanguageTarget] || "") + pagePath;
+        link.setAttribute("href", target + window.location.search + window.location.hash);
       });
-    });
-  });
+    }
+
+    function remember(event) {
+      var link = event.target.closest && event.target.closest(".uf-lang-switch[data-uf-language-target]");
+      if (!link) return;
+      refresh();
+      try {
+        localStorage.setItem("uf-lang-manual-preference", link.dataset.ufLanguageTarget);
+      } catch (e) {
+        // The link remains usable when storage is unavailable.
+      }
+    }
+
+    function init() {
+      refresh();
+      // Instant navigation (Zensical/Material publishes document$ after each swap).
+      if (window.document$ && typeof window.document$.subscribe === "function") {
+        window.document$.subscribe(refresh);
+      }
+      window.addEventListener("popstate", refresh);
+      window.addEventListener("hashchange", refresh);
+      ["pointerdown", "mouseover", "focusin", "contextmenu"].forEach(function (name) {
+        document.addEventListener(name, function (event) {
+          if (event.target.closest && event.target.closest(".uf-lang-switch")) refresh();
+        }, true);
+      });
+      document.addEventListener("click", remember, true);
+      document.addEventListener("auxclick", remember, true);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  })();
 </script>
 {% endif %}

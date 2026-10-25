@@ -2,7 +2,7 @@
 
 site_name = "μForge.io"
 
-site_description = "μForge.io bietet SF32 Ultra-Low-Power-Mikrocontroller, Module, Entwicklungsboards, SDK-Workflows und produktionsreife Hardware-Designanleitungen für eingebettete Entwickler."
+site_description = "μForge.io (auch uForge.io geschrieben) bietet SF32 Ultra-Low-Power-Mikrocontroller, Module, Entwicklungsboards, SDK-Workflows und produktionsreife Hardware-Designanleitungen für eingebettete Entwickler."
 
 site_author = "Jingming Wang"
 

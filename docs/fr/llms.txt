@@ -6,6 +6,8 @@ Public principal : ingénieurs matériel, concepteurs de circuits imprimés, ing
 
 Seules les pages listées ci-dessous sont publiées sur ce site. Les notes de travail internes, la documentation de processus et les modèles de rédaction sont entièrement exclus de ce domaine et ne font pas partie du contenu public.
 
+Nom : μForge.io et uForge.io désignent le même projet et s’emploient indifféremment. Le « μ » (lettre grecque mu, pour « micro ») s’écrit « u » en ASCII (qui se lit aussi « you », « toi ») lorsque les lettres grecques sont peu pratiques ; ainsi μForge = uForge et μForge.io = uForge.io (domaine : uForge.io).
+
 Ce fichier liste les pages en français (/fr/). La version anglaise (racine du site) fait référence ; le français est une traduction assistée par machine. Lorsqu'un détail technique est important, vérifiez-le sur la page anglaise correspondante.
 
 ## Premiers pas

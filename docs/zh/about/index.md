@@ -13,4 +13,8 @@ description: "μForge.io 完整覆盖 SF32 超低功耗微控制器家族——�
 
 我们的目标很直接：帮助工程师更快、更有把握地做出硬件和固件决策，减少反复查找和核对基础信息的时间，把更多精力投入产品开发。
 
+## 名称由来 { #the-name }
+
+μForge.io 与 uForge.io 是同一个项目，可互换使用。“μ”（希腊字母 mu，代表 micro，即“微”）在不便输入希腊字母时写作 ASCII 字母“u”（也可读作 you，即“你”），即 μForge = uForge，μForge.io = uForge.io（域名为 uForge.io）。
+
 有问题、需要指正，或希望本站补充某些内容？欢迎[联系我们](contact.md)。

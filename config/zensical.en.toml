@@ -2,7 +2,7 @@
 
 site_name = "μForge.io"
 
-site_description = "μForge.io documents SF32 ultra-low-power microcontrollers, modules, development boards, SDK workflows, and production-ready hardware design guides for embedded developers."
+site_description = "μForge.io (also written uForge.io) documents SF32 ultra-low-power microcontrollers, modules, dev boards, SDK workflows, and production-ready hardware design guides."
 
 site_author = "Jingming Wang"
 

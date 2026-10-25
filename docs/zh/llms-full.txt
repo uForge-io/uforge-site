@@ -2,6 +2,8 @@
 
 > μForge.io 全文合集：SF32 文档关键页面的合并文本，供 AI 助手一次读取。英文版（站点根路径）为权威参考。索引见 llms.txt。
 
+名称：μForge.io 与 uForge.io 是同一个项目，可互换使用。“μ”（希腊字母 mu，代表 micro，即“微”）在不便输入希腊字母时写作 ASCII 字母“u”（也可读作 you，即“你”），即 μForge = uForge，μForge.io = uForge.io（域名为 uForge.io）。
+
 ---
 
 Source: https://uForge.io/zh/develop/

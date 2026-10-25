@@ -2,7 +2,7 @@
 
 site_name = "μForge.io"
 
-site_description = "μForge.io 提供 SF32 超低功耗微控制器、模组、开发板、SDK 工作流程以及可直接用于量产的硬件设计指南的中文文档。"
+site_description = "μForge.io（亦写作 uForge.io）提供 SF32 超低功耗微控制器、模组、开发板、SDK 工作流程以及可直接用于量产的硬件设计指南的中文文档。"
 
 site_author = "Jingming Wang"
 

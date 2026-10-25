@@ -2,7 +2,7 @@
 
 site_name = "μForge.io"
 
-site_description = "μForge.io는 임베디드 개발자를 위해 SF32 초저전력 마이크로컨트롤러, 모듈, 개발 보드, SDK 워크플로, 양산 대응 하드웨어 설계 가이드를 제공합니다."
+site_description = "μForge.io(uForge.io로도 표기)는 임베디드 개발자를 위해 SF32 초저전력 마이크로컨트롤러, 모듈, 개발 보드, SDK 워크플로, 양산 대응 하드웨어 설계 가이드를 제공합니다."
 
 site_author = "Jingming Wang"
 

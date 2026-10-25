@@ -2,6 +2,8 @@
 
 > Pacote de texto completo da μForge.io: páginas principais da documentação SF32 reunidas para assistentes de IA. A referência é a versão em inglês. Índice: llms.txt.
 
+Nome: μForge.io e uForge.io são o mesmo projeto e são usados de forma intercambiável. O «μ» (letra grega mu, de «micro») é escrito como o «u» ASCII (também lido como «you», «você») quando letras gregas são pouco práticas; assim, μForge = uForge e μForge.io = uForge.io (domínio: uForge.io).
+
 ---
 
 Source: https://uForge.io/pt/develop/

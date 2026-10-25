@@ -6,6 +6,8 @@ Público principal: ingenieros de hardware, diseñadores de PCB, ingenieros de f
 
 En este sitio solo se publican las páginas enumeradas a continuación. Las notas de trabajo internas, la documentación de procesos y las plantillas de redacción están excluidas por completo de este dominio y no forman parte del contenido público.
 
+Nombre: μForge.io y uForge.io son el mismo proyecto y se usan indistintamente. La «μ» (letra griega mu, de «micro») se escribe como la «u» ASCII (que también se lee «you», «tú») cuando las letras griegas no resultan prácticas, de modo que μForge = uForge y μForge.io = uForge.io (dominio: uForge.io).
+
 Este archivo enumera las páginas en español (/es/). La versión en inglés (raíz del sitio) es la referencia autorizada; el español es una traducción asistida por máquina. Cuando un detalle técnico sea importante, verifíquelo en la página en inglés correspondiente.
 
 ## Primeros pasos

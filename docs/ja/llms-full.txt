@@ -2,6 +2,8 @@
 
 > μForge.io 全文バンドル：SF32 ドキュメントの主要ページを結合したもので、AI アシスタントが一度に読み込めます。正式な基準は英語版です。索引は llms.txt を参照してください。
 
+名称：μForge.io と uForge.io は同一のプロジェクトで、相互に置き換えて使われます。「μ」（ギリシャ文字のミュー、micro＝マイクロ）はギリシャ文字を入力しにくい場面で ASCII の「u」（you＝あなた、とも読む）と書かれ、μForge = uForge、μForge.io = uForge.io（ドメインは uForge.io）です。
+
 ---
 
 Source: https://uForge.io/ja/develop/

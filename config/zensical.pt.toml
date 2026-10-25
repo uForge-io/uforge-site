@@ -2,7 +2,7 @@
 
 site_name = "μForge.io"
 
-site_description = "A μForge.io reúne microcontroladores SF32 de baixíssimo consumo, módulos, placas de desenvolvimento, fluxos de trabalho com SDK e guias de projeto de hardware prontos para produção, voltados a desenvolvedores de sistemas embarcados."
+site_description = "A μForge.io (também escrita uForge.io) reúne microcontroladores SF32 de baixíssimo consumo, módulos, placas de desenvolvimento, fluxos com SDK e guias de projeto de hardware prontos para produção."
 
 site_author = "Jingming Wang"
 

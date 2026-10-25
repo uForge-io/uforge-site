@@ -2,6 +2,8 @@
 
 > μForge.io full-text bundle: key pages of the SF32 documentation concatenated for AI assistants. Reference: English at https://uForge.io/. Index: llms.txt.
 
+Name: μForge.io and uForge.io are the same project and are used interchangeably. The “μ” (Greek mu, for “micro”) is written as the ASCII “u” (also read as “you”) wherever Greek letters are inconvenient, so μForge = uForge and μForge.io = uForge.io (domain: uForge.io).
+
 ---
 
 Source: https://uForge.io/develop/

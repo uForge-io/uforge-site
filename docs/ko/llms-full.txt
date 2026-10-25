@@ -2,6 +2,8 @@
 
 > μForge.io 전문 번들: AI 어시스턴트가 한 번에 읽을 수 있도록 SF32 문서의 핵심 페이지를 합쳤습니다. 기준은 영어 버전입니다. 색인은 llms.txt를 참고하세요.
 
+이름: μForge.io와 uForge.io는 같은 프로젝트이며 서로 바꿔 쓸 수 있습니다. 그리스 문자를 쓰기 어려운 곳에서는 “μ”(그리스 문자 뮤, micro의 약자)를 ASCII “u”(you로도 읽음)로 적으므로 μForge = uForge, μForge.io = uForge.io입니다(도메인: uForge.io).
+
 ---
 
 Source: https://uForge.io/ko/develop/

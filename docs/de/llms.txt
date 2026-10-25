@@ -6,6 +6,8 @@ Zielgruppe: Hardware-Ingenieure, PCB-Designer, Firmware-/Software-Ingenieure und
 
 Auf dieser Website werden nur die unten aufgeführten Seiten veröffentlicht. Interne Arbeitsnotizen, Prozessdokumentation und Vorlagen für die Erstellung sind von dieser Domain vollständig ausgeschlossen und nicht Teil des öffentlichen Inhalts.
 
+Name: μForge.io und uForge.io sind dasselbe Projekt und werden austauschbar verwendet. Das „μ“ (griechisches My, für „micro“) wird dort, wo griechische Buchstaben unpraktisch sind, als ASCII-„u“ geschrieben (auch als „you“ lesbar); es gilt also μForge = uForge und μForge.io = uForge.io (Domain: uForge.io).
+
 Diese Datei listet die deutschen Seiten (/de/) auf. Die englische Version (Wurzel der Website) ist die maßgebliche Referenz; Deutsch ist eine maschinengestützte Übersetzung. Wenn ein technisches Detail wichtig ist, prüfen Sie es anhand der entsprechenden englischen Seite.
 
 ## Erste Schritte

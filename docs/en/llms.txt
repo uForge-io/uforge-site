@@ -6,6 +6,8 @@ Primary audience: hardware engineers, PCB designers, firmware/software engineers
 
 Only the pages listed below are published on this site. Internal working notes, process documentation, and authoring templates are excluded from this domain entirely and are not part of the public content set.
 
+Name: μForge.io and uForge.io are the same project and are used interchangeably. The “μ” (Greek mu, for “micro”) is written as the ASCII “u” (also read as “you”) wherever Greek letters are inconvenient, so μForge = uForge and μForge.io = uForge.io (domain: uForge.io).
+
 ## Getting Started
 
 - [Getting Started Overview](https://uForge.io/getting-started/): Comparison of SF32 software paths — SiFli-SDK, CodeKit, Zephyr, Arduino, and MicroPython — and which are production-ready today.

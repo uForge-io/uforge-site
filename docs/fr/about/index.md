@@ -13,4 +13,8 @@ Nous avons choisi SF32 pour deux raisons. La famille propose plusieurs configura
 
 Notre objectif est simple : aider les ingénieurs à prendre plus rapidement des décisions sur le matériel et le firmware, avec davantage de confiance. Ils passent ainsi moins de temps à retrouver les informations de base et davantage à développer leurs produits.
 
+## À propos du nom { #the-name }
+
+μForge.io et uForge.io désignent le même projet et s’emploient indifféremment. Le « μ » (lettre grecque mu, pour « micro ») s’écrit « u » en ASCII (qui se lit aussi « you », « toi ») lorsque les lettres grecques sont peu pratiques ; ainsi μForge = uForge et μForge.io = uForge.io (domaine : uForge.io).
+
 Une question, une correction, ou quelque chose que vous auriez aimé voir couvert sur ce site ? [Contactez-nous](contact.md).

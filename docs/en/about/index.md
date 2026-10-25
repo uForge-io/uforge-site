@@ -13,4 +13,8 @@ We picked SF32 for two reasons. It spans several core configurations and integra
 
 Our goal is simple: help engineers make hardware and firmware decisions faster and with more confidence, so less time goes into re-deriving basics and more goes into building.
 
+## The name { #the-name }
+
+μForge.io and uForge.io are the same project and are used interchangeably. The “μ” (Greek mu, for “micro”) is written as the ASCII “u” (also read as “you”) wherever Greek letters are inconvenient, so μForge = uForge and μForge.io = uForge.io (domain: uForge.io).
+
 Have a question, a correction, or something you wish this site covered? [Contact us](contact.md).

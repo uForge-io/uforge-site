@@ -13,4 +13,8 @@ Für SF32 haben wir uns aus zwei Gründen entschieden. Die Familie bietet versch
 
 Unser Ziel ist einfach: Ingenieure sollen Hardware- und Firmware-Entscheidungen schneller und fundierter treffen können. So müssen sie weniger Zeit aufwenden, um Grundlagen immer wieder neu zu recherchieren, und können mehr Zeit in die Produktentwicklung investieren.
 
+## Zum Namen { #the-name }
+
+μForge.io und uForge.io sind dasselbe Projekt und werden austauschbar verwendet. Das „μ“ (griechisches My, für „micro“) wird dort, wo griechische Buchstaben unpraktisch sind, als ASCII-„u“ geschrieben (auch als „you“ lesbar); es gilt also μForge = uForge und μForge.io = uForge.io (Domain: uForge.io).
+
 Haben Sie eine Frage, eine Korrektur oder etwas, das diese Website Ihrer Meinung nach abdecken sollte? [Kontaktieren Sie uns](contact.md).

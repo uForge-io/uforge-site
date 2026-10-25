@@ -2,6 +2,8 @@
 
 > Volltext-Bündel von μForge.io: zentrale Seiten der SF32-Dokumentation für KI-Assistenten zusammengefasst. Referenz ist die englische Fassung. Index: llms.txt.
 
+Name: μForge.io und uForge.io sind dasselbe Projekt und werden austauschbar verwendet. Das „μ“ (griechisches My, für „micro“) wird dort, wo griechische Buchstaben unpraktisch sind, als ASCII-„u“ geschrieben (auch als „you“ lesbar); es gilt also μForge = uForge und μForge.io = uForge.io (Domain: uForge.io).
+
 ---
 
 Source: https://uForge.io/de/develop/

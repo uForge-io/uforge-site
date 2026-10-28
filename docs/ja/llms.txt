@@ -188,6 +188,7 @@
 ## ブログ
 
 - [ブログ](https://uForge.io/ja/blog/): μForge.ioブログ：製品の更新情報やリリース情報、SF32ドキュメントの技術解説を掲載します。
+- [10月：SF32LB57xのご紹介 [2026-10-28]](https://uForge.io/ja/blog/posts/2026-10-28-october-sf32lb57x-release/): SF32LB57xを掲載しました。アプリケーションCPUの演算性能はSF32LB56xの約2倍、ePicasso 3.0グラフィックス、そして競争力のあるコスト構造を備えています。
 - [多言語翻訳を、一歩ずつ反復して [2026-10-07]](https://uForge.io/ja/blog/posts/2026-10-07-multi-language-translation/): μForge.ioに7言語の翻訳を追加。LLMツールを使い、何度も反復して仕上げました。
 - [8月：情報の拡充から確信へ [2026-08-24]](https://uForge.io/ja/blog/posts/2026-08-24-august-progress/): μForge.ioの8月：製品選定の改善、再利用できるプロジェクト、実践的な学習コンテンツ、サポートへの直接の問い合わせ窓口。
 - [最初のブログ記事 [2026-07-31]](https://uForge.io/ja/blog/posts/2026-07-31-the-first-blog/): μForge.io最初のブログ記事: 私たちのミッション、この1か月で構築してきたもの、そしてSF32ドキュメントの今後の展望。

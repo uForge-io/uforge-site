@@ -188,6 +188,7 @@
 ## 博客
 
 - [博客](https://uForge.io/zh/blog/): μForge.io 博客：产品动态、版本说明，以及 SF32 文档相关的技术深度文章。
+- [十月：SF32LB57x 来了 [2026-10-28]](https://uForge.io/zh/blog/posts/2026-10-28-october-sf32lb57x-release/): SF32LB57x 现已上线：应用 CPU 算力约为 SF32LB56x 的两倍，搭载 ePicasso 3.0 图形加速，成本结构极具竞争力。
 - [多语言翻译，一轮一轮迭代而成 [2026-10-07]](https://uForge.io/zh/blog/posts/2026-10-07-multi-language-translation/): μForge.io 新增七种语言的翻译，借助 LLM 工具经多轮迭代完成。
 - [八月：资料更全，选型更有把握 [2026-08-24]](https://uForge.io/zh/blog/posts/2026-08-24-august-progress/): μForge.io 8 月进展：更清晰的产品选型、可复用项目、实用学习内容，以及直接的支持入口。
 - [博客首篇文章 [2026-07-31]](https://uForge.io/zh/blog/posts/2026-07-31-the-first-blog/): μForge.io 博客首篇文章：我们的目标、过去一个月完成的工作，以及 SF32 文档接下来的计划。

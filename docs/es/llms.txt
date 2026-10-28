@@ -188,6 +188,7 @@ Este archivo enumera las páginas en español (/es/). La versión en inglés (ra
 ## Blog
 
 - [Blog](https://uForge.io/es/blog/): El blog de μForge.io reúne novedades de producto, notas de versión y análisis técnicos en profundidad sobre la documentación de SF32.
+- [Octubre: presentamos SF32LB57x [2026-10-28]](https://uForge.io/es/blog/posts/2026-10-28-october-sf32lb57x-release/): SF32LB57x ya está documentado: cerca del doble de potencia de CPU de aplicación que SF32LB56x, gráficos ePicasso 3.0 y una estructura de costes competitiva.
 - [Traducción multilingüe, una iteración tras otra [2026-10-07]](https://uForge.io/es/blog/posts/2026-10-07-multi-language-translation/): μForge.io suma traducciones a siete idiomas, creadas con herramientas LLM tras muchas iteraciones.
 - [Agosto: de la cobertura a la confianza [2026-08-24]](https://uForge.io/es/blog/posts/2026-08-24-august-progress/): Agosto en μForge.io: una selección de productos más clara, proyectos reutilizables, aprendizaje práctico y acceso directo al soporte.
 - [La primera entrada del blog [2026-07-31]](https://uForge.io/es/blog/posts/2026-07-31-the-first-blog/): La primera entrada del blog de μForge.io: nuestro propósito, lo que hemos construido durante el último mes y los próximos pasos para la documentación de SF32.

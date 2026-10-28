@@ -251,6 +251,7 @@ nav = [
   { "博客" = [
     "blog/index.md",
     { "文章" = [
+      "blog/posts/2026-10-28-october-sf32lb57x-release.md",
       "blog/posts/2026-10-07-multi-language-translation.md",
       "blog/posts/2026-08-24-august-progress.md",
       "blog/posts/2026-07-31-the-first-blog.md"

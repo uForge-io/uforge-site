@@ -187,6 +187,7 @@ Name: μForge.io and uForge.io are the same project and are used interchangeably
 ## Blog
 
 - [Blog](https://uForge.io/blog/): Announcements, project history, and deep dives on μForge.io's progress.
+- [October: Introducing SF32LB57x](https://uForge.io/blog/posts/2026-10-28-october-sf32lb57x-release/): SF32LB57x is now documented: about twice the application CPU compute of SF32LB56x, ePicasso 3.0 graphics, and a competitive cost structure.
 - [Multi-Language Translation, One Iteration at a Time](https://uForge.io/blog/posts/2026-10-07-multi-language-translation/): μForge.io now has translations in seven more languages, built with LLM tools over many iterations.
 - [August: Product Selection, Practical Learning, and Reproducible Projects](https://uForge.io/blog/posts/2026-08-24-august-progress/): August at μForge.io: product selection, practical Learn content, reproducible projects, and a site reorganized around how engineers work.
 - [The First μForge.io Blog Post](https://uForge.io/blog/posts/2026-07-31-the-first-blog/): The first μForge.io blog post: our mission, what we've built over the past month, and what's coming next for SF32 documentation.

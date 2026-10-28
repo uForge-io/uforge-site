@@ -188,6 +188,7 @@
 ## 블로그
 
 - [블로그](https://uForge.io/ko/blog/): μForge.io 블로그: SF32 문서의 제품 업데이트, 릴리스 노트, 기술 심층 분석입니다.
+- [10월: SF32LB57x를 소개합니다 [2026-10-28]](https://uForge.io/ko/blog/posts/2026-10-28-october-sf32lb57x-release/): SF32LB57x를 문서화했습니다. SF32LB56x의 약 2배에 이르는 애플리케이션 CPU 성능, ePicasso 3.0 그래픽, 경쟁력 있는 비용 구조를 갖췄습니다.
 - [다국어 번역, 한 번에 한 단계씩 [2026-10-07]](https://uForge.io/ko/blog/posts/2026-10-07-multi-language-translation/): μForge.io가 이제 일곱 개 언어를 더 지원합니다. LLM 도구로 많은 반복을 거쳐 만들었습니다.
 - [8월: 커버리지에서 신뢰로 [2026-08-24]](https://uForge.io/ko/blog/posts/2026-08-24-august-progress/): μForge.io의 8월: 더 명확해진 제품 선택, 재사용 가능한 프로젝트, 실용적인 학습, 지원으로 이어지는 직접 경로입니다.
 - [첫 번째 블로그 글 [2026-07-31]](https://uForge.io/ko/blog/posts/2026-07-31-the-first-blog/): μForge.io의 첫 번째 블로그 글: 우리의 미션, 지난 한 달 동안 구축한 내용, SF32 문서의 다음 계획입니다.

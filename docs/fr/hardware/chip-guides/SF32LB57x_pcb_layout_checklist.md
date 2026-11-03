@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle SF32LB57x — Liste de contrôle de la conception du PCB"
 icon: lucide/list-checks
 hide:
     - navigation
@@ -54,8 +55,7 @@ La plupart des règles de routage ci-dessous s'appliquent à toutes les variante
 !!! warning "Conflits non résolus sur les rails d'alimentation dans la source"
     - **Désignations de la liste :** Le point 44 de la table d'autocontrôle originale 4-2-1-1, applicable aux variantes sur batterie, exige `VCC` >= 12 mil. Les points 45 et 46 exigent chacun au moins 10 mil pour `VDD33_VOUT1` et `VDD33_VOUT2`, respectivement, mais le titre du point 46 répète `VDD33_VOUT1` alors que son détail indique `VDD33_VOUT2`. Le point 47, applicable aux variantes 3,3 V, porte le titre `PVDD`, mais son détail exige `VCC` >= 12 mil. Cette page reprend les valeurs et détails indiqués sans résoudre les incohérences de la source.
     - **Largeur des pistes :** La section 3.2.1 du guide PCB original exige au moins 0,4 mm (environ 15,7 mil) pour `VCC` et `PVDD` ; les points 44 (variantes sur batterie) et 47 (variantes 3,3 V) de la table 4-2-1-1 exigent `VCC` >= 12 mil. La source n'explique pas comment concilier ces exigences selon la variante ni si, pour le point 47, le titre `PVDD` ou le détail `VCC` prévaut. Ne déduisez pas de valeur corrigée et ne choisissez pas une référence comme exigence définitive sans confirmation.
-    - **Noms des sorties :** La section 3.2.1 du guide PCB original utilise `VDD_VOUT1` / `VDD_VOUT2`, tandis que les points 45/46 de la table d'autocontrôle 4-2-1-1 utilisent `VDD33_VOUT1` / `VDD33_VOUT2`. La source ne précise pas si ces noms sont des alias ou des réseaux distincts.
-    Avant de figer la conception, faites confirmer par SiFli les désignations prévues, les rails cibles, les variantes d'alimentation concernées et les largeurs de piste. Sans cette confirmation, n'affectez pas les désignations contradictoires de la liste à des réseaux, ne considérez pas les variantes de noms de sortie comme équivalentes et ne choisissez pas entre 12 mil et 0,4 mm.
+    Avant de figer la conception, faites confirmer par SiFli les désignations prévues, les rails concernés, les variantes d'alimentation applicables et les largeurs de piste. Sans cette confirmation, n'affectez pas les désignations contradictoires de la liste à des réseaux et ne choisissez pas entre 12 mil et 0,4 mm.
 
 ### 6.10.3. Implantation et routage du circuit d'horloge { #6103-clock-layout }
 

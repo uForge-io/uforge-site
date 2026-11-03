@@ -1,4 +1,5 @@
 ---
+title: "Guia de projeto de hardware do SF32LB55x — checklist de revisão e referências"
 icon: lucide/clipboard-check
 hide:
     - navigation

@@ -1,5 +1,6 @@
 ---
 icon: lucide/infinity
+title: "Arduino 平台概览"
 description: "面向 SF32LB52 DevKit LCD 的 ArduinoCore-zephyr：平台适用性、开发板标识、loader 与构建模式取舍、集成限制和问题定位路径。"
 tags:
     - 开发

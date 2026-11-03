@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52x 硬件设计指南 — 设计评审检查表与参考资料"
 icon: lucide/clipboard-check
 hide:
     - navigation

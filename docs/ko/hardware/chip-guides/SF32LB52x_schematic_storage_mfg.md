@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52x 하드웨어 설계 가이드 — 스토리지 및 양산"
 icon: lucide/circuit-board
 hide:
     - navigation

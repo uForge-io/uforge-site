@@ -47,6 +47,8 @@ The specified 48 MHz crystal load-capacitance range is 7 pF to 12 pF, with about
 
 #### 5.3.2. 32.768 kHz RTC Crystal { #532-32768-khz-rtc-crystal }
 
+The V2 minimum-system figures explicitly allow the 32.768 kHz crystal to be omitted in favor of the internal RC oscillator. Evaluate RTC accuracy, Bluetooth, and low-power requirements before omitting it, and select the matching low-frequency clock source in firmware.
+
 Recommended parameters:
 
 <div align="center"><em>Table 5.3-2: 32.768 kHz RTC Crystal Recommended Parameters</em></div>
@@ -158,7 +160,6 @@ SF32LB57x LCDC supports multiple display interface types depending on the exact 
 | SPI / QSPI | Small TFT/AMOLED and wearable displays | Low pin count, limited bandwidth, good for partial refresh. |
 | 8080 MCU | Parallel display panels | Higher bandwidth than serial interfaces but uses more pins. |
 | RGB / DPI | Medium and high-resolution panels | Continuous pixel stream, strict bandwidth and timing requirements. |
-| MIPI DSI | High-density AMOLED | High bandwidth with low pin count, but more complex initialization and signal integrity. |
 | EPD | E-paper | Low refresh rate, requires VCOM, PMIC, and waveform planning. |
 | JDI | Memory-in-Pixel low-power displays | Good for always-on and sunlight-readable products. |
 
@@ -183,9 +184,11 @@ Common display notes and examples:
 | 8080 MCU | Use the same high-speed pin-group rule as RGB/DPI for fast designs; verify bus width, timing, and drive strength against the panel. |
 | EPD | Use the same high-speed pin-group rule as RGB/DPI when the EPD bus runs above 30 MHz; also review VCOM and PMIC control pins. |
 | JDI | Follow the LCDC JDI signal mapping table and prefer an SDK-adapted panel configuration where available. |
-| MIPI DSI | Use the fixed DSI signal assignment from the selected part and reference design; verify lane routing and panel initialization with the software team. |
 
 </div>
+
+!!! note "Display-driver interfaces are not MCU-native interfaces"
+    This section treats SPI/QSPI, RGB/DPI, 8080, EPD, and JDI as direct MCU display interfaces. Some driver ICs below also support MIPI-DSI; that does not establish a native SF32LB57x DSI host or fixed DSI pins. Select an interface supported by both devices and check the exact part and reference design.
 
 <div align="center"><em>Table 5.5-3: LCD Driver Examples</em></div>
 
@@ -374,6 +377,8 @@ The following tables give the exact signal-to-pin mapping for each display inter
 | `GOOD` | `GOOD` | Any GPIO | EPD PMIC power-good output. |
 
 </div>
+
+The source’s 8-bit EPD column also lists `D8`, yielding nine data signals (`D0`–`D8`) for a nominally 8-bit interface. This is an unresolved source-table inconsistency, not an additional supported data bit. Confirm the actual bus width and wiring with SiFli and the selected panel before using that row.
 
 <div align="center"><em>Table 5.5-9: Parallel JDI Display Signal Connections</em></div>
 

@@ -1,5 +1,6 @@
 ---
 icon: lucide/terminal
+title: "SiFli-SDK 시작하기"
 description: "포장을 뜯은 SF32 보드에서 SiFli-SDK로 UART를 통해 hello_world를 실행하기까지의 안내입니다. 툴체인 설치, scons 빌드, UART를 통한 플래싱을 다룹니다."
 tags:
     - 시작하기

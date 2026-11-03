@@ -19,7 +19,7 @@ Esta seção apresenta as convenções usadas para descrever as interfaces dos m
 
 | Documento | Status e finalidade | Quando usar |
 |:---------|:-------------------|:------------|
-| [Regras de nomenclatura da interface M2](M2%20Interface%20Naming%20Rules.md) | Convenção para nomear famílias e perfis de interface M2. | Para nomear um módulo, conector, placa portadora ou perfil de interface na documentação e nos arquivos de projeto. |
+| [Regras de nomenclatura da interface M2](M2-interface-naming-rules.md) | Convenção para nomear famílias e perfis de interface M2. | Para nomear um módulo, conector, placa portadora ou perfil de interface na documentação e nos arquivos de projeto. |
 | [Definição da interface M2](M2-interface-definition.md) | Rascunho da definição em nível de pino e proposta de atribuição de sinais. | Para avaliar uma proposta de interface M2 para a placa portadora ou revisar o compartilhamento de sinais antes de escolher o conector. |
 
 </div>
@@ -40,7 +40,7 @@ A definição em nível de pino não garante que todos os módulos da μForge ou
 ## Fluxo de decisão para a placa portadora { #carrier-board-decision-path }
 
 1. Escolha o módulo e leia a página de apresentação e o respectivo guia de projeto de hardware.
-2. Use as [Regras de nomenclatura da interface M2](M2%20Interface%20Naming%20Rules.md) para definir sem ambiguidade o perfil pretendido.
+2. Use as [Regras de nomenclatura da interface M2](M2-interface-naming-rules.md) para definir sem ambiguidade o perfil pretendido.
 3. Use a [Definição da interface M2](M2-interface-definition.md) para identificar sinais candidatos e conflitos de compartilhamento.
 4. Confirme cada contato utilizado na documentação específica do módulo e nas fontes originais aplicáveis da SiFli.
 5. Antes de iniciar o layout, registre na revisão do esquemático as versões dos documentos, as revisões do módulo e da placa portadora, as exceções confirmadas e os pontos pendentes.

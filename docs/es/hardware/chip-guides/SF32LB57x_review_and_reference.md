@@ -1,4 +1,5 @@
 ---
+title: "Guía de diseño de hardware SF32LB57x — Lista de comprobación de la revisión del diseño y referencias"
 icon: lucide/clipboard-check
 hide:
     - navigation
@@ -90,6 +91,8 @@ Antes de congelar el diseño, cumpla estos criterios de liberación:
 
 ## 8. Documentos y referencias relacionados { #8-related-documents-and-references }
 
+[Fuente china revisada](https://github.com/OpenSiFli/SiFli-Wiki/blob/5f70d425f9d8fe47fbad73e370abdee8b9555e90/source/zh_CN/hardware/SF32LB57x-HW-Application.md) (2026-10-23, `5f70d425`).
+
 Consulte los documentos oficiales más recientes para verificar límites eléctricos, datos del encapsulado, multiplexación de pines, configuración de software, cualificación de componentes y restricciones de fabricación.
 
 <div class="grid cards" markdown>
@@ -132,12 +135,13 @@ Un producto basado en SF32LB57x puede incluir la MCU, la red de alimentación, c
 
 | Versión | Fecha | Notas |
 |:--------|:-----|:------|
+| 0.6 | 2026-11-03 | Comprobado con la fuente china de OpenSiFli actualizada el 2026-10-23: se actualizaron los esquemas mínimos V2, las tablas de alimentación y los límites de VDDIOA/Flash; se verificaron las señales de la matriz LCDC y se aclararon las condiciones de arranque; se distinguieron las interfaces de los controladores de pantalla de las interfaces nativas de la MCU y se actualizaron las notas sobre discrepancias. |
 | 0.5 | 2026-08 | Se recuperó el nivel de detalle completo de la nota de aplicación oficial. Se añadieron las cuatro tablas de referencia de pines de alimentación por encapsulado/familia de alimentación, la tabla del puerto de depuración predeterminado, el esquemático del circuito de RF, las tablas completas de señales de pantalla (SPI/QSPI, RGB, configuración del modo RGB, MCU8080, EPD, JDI paralelo/serie, táctil/retroiluminación), las figuras de referencia del micrófono analógico, el micrófono PDM y el amplificador de potencia de audio, la tabla completa de señales de cámara específica del chip, las tablas IO MUX y de matriz, la tabla de sub-MUX de la matriz LCDC, la tabla de pines USB, la tabla ampliada de GPADC por pin y los circuitos de referencia del botón de encendido y del botón GPADC. Las tablas oficiales de autocomprobación del diseño se separaron en nuevas páginas complementarias: [Lista de comprobación del esquemático](SF32LB57x_schematic_checklist.md) y [Lista de comprobación del diseño de PCB](SF32LB57x_pcb_layout_checklist.md), sin omitir ningún punto de comprobación. |
 | 0.4 | 2026-08 | Se contrastaron los datos con la nota oficial de aplicación de hardware SF32LB57x: se corrigió a 3,0 V (no 3,2 V) el mínimo de la tabla de pines `VCC`/`VBAT`; se añadió el umbral de apagado por hardware de 2,7 V; se corrigió a 30 mA el límite de corriente de arranque suave de `VDD33_VOUT1`; se corrigieron las opciones de capacitancia de carga del cristal de 32,768 kHz (7 pF u 11,5 pF; el valor predeterminado del chip es 11,5 pF); se especificaron el circuito de la tecla de alimentación/reinicio `PA34` y el diseño de la tecla con divisor resistivo GPADC; se añadieron el rango de entrada GPADC de 0 V a 3,3 V y el condensador de filtro de 100 nF; se añadieron los valores de los condensadores de `BUCK_FB`/`VDDIOA`/`VBATS`/`AVDD33_ANA`; se añadieron restricciones sobre la longitud total y la diferencia de longitud entre señales del bus MPI, además de las distancias de colocación del cristal; y se incorporó la asignación del apilado de 4 capas. |
 | 0.3 | 2026-07 | Se reorganizaron las directrices de diseño del esquemático para que el sistema mínimo, la alimentación, la generación de reloj, RF, las interfaces de usuario, el almacenamiento y la conectividad, y la fabricación fueran secciones independientes del mismo nivel. |
 | 0.2 | 2026-07 | Se añadieron el paquete de evidencias, instrucciones de puesta en marcha, validación de bajo consumo, validación RF/pantalla/audio/cámara y una referencia rápida de las restricciones críticas de PCB. |
 | 0.1 | 2026-07 | Primera versión de la guía de diseño de hardware SF32LB57x, basada en la nota oficial de aplicación de hardware. |
-| 0.0.1 | 2026-06 | Revisión 0.0.1 de la fuente: primera edición de la nota de aplicación de hardware SF32LB57x, con versión independiente de esta guía. |
+| 0.0.1 | 2026-10 | Revisión 0.0.1 de la fuente: primera edición de la nota de aplicación de hardware SF32LB57x, con versión independiente de esta guía. |
 
 </div>
 

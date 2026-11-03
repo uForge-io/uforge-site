@@ -1,4 +1,5 @@
 ---
+title: "Guía de diseño de hardware SF32LB57x — Directrices de diseño de PCB"
 icon: lucide/layers
 hide:
     - navigation
@@ -101,9 +102,8 @@ Las figuras de reglas PTH y HDI también muestran valores de fabricación de ref
 - En las variantes alimentadas a 3,3 V, use trazado en estrella para las líneas analógicas, RF e IO principales.
 
 !!! warning "Conflictos de alimentación sin resolver en la fuente"
-    - **Ancho de pista y etiqueta de la línea:** El apartado 3.2.1 de la guía PCB original exige al menos 0,4 mm (unos 15,7 mil) para `VCC` y `PVDD`. El elemento 44 de la tabla de autocomprobación 4-2-1-1, aplicable a variantes con alimentación por batería, exige al menos 12 mil para `VCC`; el elemento 47, aplicable a variantes de 3,3 V, lleva el título `PVDD`, pero su detalle de comprobación exige al menos 12 mil para `VCC`. La fuente no concilia estos anchos ni aclara si el título o el detalle del elemento 47 identifica la línea prevista. No infiera un valor corregido ni aplique una entrada a ambas variantes de alimentación: confirme con SiFli la línea, el alcance y el ancho aplicables antes de cerrar el diseño.
-    - **Nombres de salida:** El apartado 3.2.1 de la guía PCB original usa `VDD_VOUT1` / `VDD_VOUT2`, mientras que los elementos 45/46 de la tabla de autocomprobación 4-2-1-1 y la tabla de resumen de la sección 6.2 de esta página usan `VDD33_VOUT1` / `VDD33_VOUT2`. El título del elemento 46 repite `VDD33_VOUT1`, pero su detalle indica `VDD33_VOUT2`. La fuente no aclara si los nombres son alias o redes distintas.
-    Sin la confirmación de SiFli, no elija un ancho de pista, no asigne el elemento 47 a una línea ni trate como equivalentes las variantes de los nombres de salida al cerrar el diseño.
+    - **Ancho de pista y etiqueta de la línea:** El apartado 3.2.1 de la guía original de diseño de PCB exige al menos 0,4 mm (unos 15,7 mil) para `VCC` y `PVDD`. El elemento 44 de la tabla de autocomprobación 4-2-1-1, aplicable a las variantes alimentadas por batería, exige al menos 12 mil para `VCC`; el elemento 47, aplicable a las variantes de 3,3 V, lleva el título `PVDD`, pero el detalle de comprobación exige al menos 12 mil para `VCC`. La fuente no concilia estos anchos ni aclara si el título o el detalle del elemento 47 identifica la línea prevista. No infiera un valor corregido ni aplique una entrada a ambas variantes de alimentación: confirme con SiFli la línea, el alcance y el ancho aplicables antes de cerrar el diseño.
+    Sin la confirmación de SiFli, no elija un ancho de pista ni asigne el elemento 47 a una línea antes de cerrar el diseño.
 
 ### 6.4. Trazado del cristal { #64-crystal-layout }
 

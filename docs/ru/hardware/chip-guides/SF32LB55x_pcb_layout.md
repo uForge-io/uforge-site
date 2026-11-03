@@ -1,4 +1,5 @@
 ---
+title: "Руководство по аппаратной разработке SF32LB55x — рекомендации по разводке PCB"
 icon: lucide/layers
 hide:
     - navigation
@@ -8,7 +9,7 @@ tags:
     - Микросхемы
 ---
 
-# Руководство по проектированию аппаратуры SF32LB55x — рекомендации по разводке PCB { #sf32lb55x-hardware-design-guide-pcb-layout-guidelines }
+# Руководство по аппаратной разработке SF32LB55x — рекомендации по разводке PCB { #sf32lb55x-hardware-design-guide-pcb-layout-guidelines }
 
 ## 6. Рекомендации по разводке PCB { #6-pcb-layout-guidelines }
 

@@ -89,9 +89,11 @@ Choose SF32LB55x when the design needs one or more of these capabilities:
 
 ### Graphics, Display, and AI
 
+Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix).
+
 - ePicasso 2.5D graphics engine with hardware rotation, scaling, mirroring, and alpha blending
 - eZip losslessly decompresses graphics and can be chained with ePicasso
-- The ePicasso transform layer supports resolutions up to 640 × 640; generic layers and display output support up to 1024 × 1024, and display output reaches up to 60 fps
+- The ePicasso transform layer supports resolutions up to 640 × 640, and the canvas supports up to 1024 × 1024. The actual display resolution is limited to 512 × 512; the canvas size is not the display-output limit. Display output supports up to 60 fps, depending on the panel, interface and workload.
 - LCD controller supports 8080, SPI, Dual-SPI, Quad-SPI, DPI, MIPI DSI, and JDI reflective-display interfaces on supported variants; verify availability for the selected model
 - TurboPixel framebuffer compression lets the LCD controller read compressed frame data and decompress it for display, reducing framebuffer storage and read-bandwidth requirements
 - Dual LCD controllers; always-on-display interfaces and dual-display capability depend on the selected model and package
@@ -198,16 +200,19 @@ Use this sequence to turn an SF32LB55x shortlist into a validated design:
 ## Frequently Asked Questions
 
 **What are the key specifications of SF32LB55x?**
-SF32LB55x pairs an application CPU (Cortex-M33 @240 MHz) with a low-power core (Cortex-M33 @48 MHz, a user-programmable core), 1,312 KB of internal SRAM and Bluetooth Low Energy (BLE) only. Graphics: ePicasso 1.0. Package: QFN68 / BGA145 / BGA169 (7 × 7 mm (QFN68)). USB 2.0 FS. Family-level values; verify the exact part number's datasheet.
+SF32LB55x pairs an application CPU (Cortex-M33 @240 MHz) with a low-power core (Cortex-M33 @48 MHz, a user-programmable core), 1,312 KB of internal SRAM and Bluetooth Low Energy (BLE) only. Graphics: ePicasso 1.0. Package: QFN68 / BGA145 / BGA169 (7 × 7 mm (QFN68)). USB 2.0 FS.
 
 **Which display interfaces does SF32LB55x support?**
-SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. Availability varies by part number and package.
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+
+**What is the maximum display resolution of SF32LB55x?**
+Up to 512 × 512 with RGB888 color, through MIPI-DSI, with display drivers that have built-in RAM only. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
 **How much in-package memory does SF32LB55x offer?**
-Up to 16 MB + 2 MB of in-package PSRAM and up to 8 MB of in-package NOR Flash, depending on the part number.
+Up to 16 MB + 2 MB of in-package PSRAM and up to 8 MB of in-package NOR Flash.
 
 **What supply voltage does SF32LB55x need?**
-1.71–3.63 V, depending on the variant. Confirm the exact range in the datasheet.
+1.71–3.63 V.
 
 **Where do I start a hardware design with SF32LB55x?**
 Start with the [SF32LB55x hardware design guide](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) for schematic, power, clock/RF and PCB layout guidance, then use the schematic and layout checklists before releasing the board.

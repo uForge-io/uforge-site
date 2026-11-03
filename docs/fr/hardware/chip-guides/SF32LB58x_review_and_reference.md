@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle du SF32LB58x — Liste de contrôle pour la revue de conception et références"
 icon: lucide/clipboard-check
 description: "Liste de contrôle de revue de conception, documents et références associés, annexes, et historique des révisions pour le guide de conception matérielle du SF32LB58x."
 tags:

@@ -1,4 +1,5 @@
 ---
+title: "Guia de projeto de hardware do SF32LB56x — diretrizes para o esquemático"
 icon: lucide/circuit-board
 description: "Diretrizes de esquemático do SF32LB56x: alimentação, modos e fontes de despertar, clocks, RF, display/toque/retroiluminação, áudio, armazenamento e produção."
 tags:

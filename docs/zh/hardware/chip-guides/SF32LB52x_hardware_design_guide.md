@@ -1,8 +1,9 @@
 ---
+title: "SF32LB52x - 硬件设计指南"
 icon: lucide/book-check
 hide:
     - navigation
-description: "SF32LB52x 硬件设计指南：电源架构、时钟与 RF 设计、显示与存储接口及 PCB 布局指导。"
+description: "SF32LB52x MCU 硬件设计指南：器件概览、设计流程，以及原理图、PCB 布局、评审和检查清单各页面的入口。"
 tags:
     - 硬件
     - 芯片

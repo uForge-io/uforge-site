@@ -1,4 +1,5 @@
 ---
+title: "SF32LB55x Hardware Design Guide — Design Review Checklist and References"
 icon: lucide/clipboard-check
 hide:
     - navigation

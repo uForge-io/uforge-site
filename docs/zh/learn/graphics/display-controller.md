@@ -52,14 +52,14 @@ EPD 和 Memory-in-Pixel 表示面板技术或像素更新方式，并非可互�
 
 <div align="center" markdown>
 
-| SF32 系列/版本 | 资料列出的 LCD/面板接口 | 封装或版本约束 | 实际选型方向 |
-|:---|:---|:---|:---|
-| **SF32LB52x** | 三线/四线 SPI、Dual-SPI、Quad-SPI、MCU/8080（MIPI DBI）、串行/并行 JDI；通过 SPI 连接的 EPD；52B/D/E/G/J 硬件指南还列有 8 位并行 EPD 信号接口 | 型号指南所列 52x 型号均采用 QFN68L。52B/D/E/G/J 硬件指南列出了信号分配和 TPS 电源管理芯片控制方式，但这并不能证明支持 LCDC EPD 直驱模式。请按具体型号核实驱动支持。 | 适合紧凑型 SPI/QSPI、8080 和 JDI 设计；并行 EPD 设计需核实所选型号对应的 GPIO、时序以及 TPS 电源控制实现。 |
-| **SF32LB55x** | 三线/四线 SPI、Dual-SPI、Quad-SPI、MCU/8080、DPI/RGB、串行/并行 JDI、MIPI DSI 命令模式 | 资料列出的 2-lane MIPI DSI 接口适用于 BGA145/169 封装；JDI 和 MIPI DSI + SPI/DSPI 双屏异显仅列于 557VD3A6。命令模式要求面板控制器具有内部 SRAM/GRAM。 | 适用于可穿戴设备及其他配备显示屏的联网产品，且需采用兼容的 BGA 封装和 MIPI 命令模式面板。 |
-| **SF32LB56xU** | 三线/四线 SPI、Dual-SPI、Quad-SPI、串行 JDI | 型号指南所列 U 版本采用 QFN68L；请核对具体料号和引脚复用。 | 适合以 QSPI 带宽和较少引脚为重点的紧凑型串行面板设计。 |
-| **SF32LB56xV** | 三线/四线 SPI、Dual-SPI、Quad-SPI、DBI 8080、DPI/RGB、串行/并行 JDI | 型号指南列出的 V 版本采用 WBBGA175（BGA175）；请按具体料号核实所需引脚及板级布线。 | 适合需要 8080、DPI/RGB 或并行 JDI 的高分辨率或高刷新率设计。 |
-| **SF32LB57x** | 三线/四线 SPI、Dual-SPI、Quad-SPI、8/16 位 8080/DBI、DPI/RGB、JDI 和 LCDC 直驱 EPD | 封装包括 QFN68、QFN80 和 BGA112 等选项；请确认具体料号、封装引脚及面板驱动路径。 | 适合图形交互较复杂、需要并行或串行显示接口，或需要 JDI、EPD 的产品。 |
-| **SF32LB58x** | 三线/四线 SPI、Dual-SPI、Quad-SPI、MCU/8080、DPI/RGB、串行/并行 JDI、2-lane MIPI DSI 命令和视频模式 | 型号指南所列料号均采用 BGA256。命令模式使用带内部 SRAM/GRAM 的面板控制器；视频模式也支持无 RAM 面板控制器。型号指南还列出了通过 MIPI DSI + SPI/DSPI/QSPI 实现双屏异显。具体设计仍需核实 LCD 控制器和引脚复用。 | 适合高分辨率和带宽需求高的 UI 设计，包括双屏配置，以及带或不带控制器 RAM 的 MIPI DSI 面板。 |
+| SF32 系列/版本 | 资料列出的 LCD/面板接口 | 最大分辨率 | 封装或版本约束 | 实际选型方向 |
+|:---|:---|:---|:---|:---|
+| **SF32LB52x** | 三线/四线 SPI、Dual-SPI、Quad-SPI、MCU/8080（MIPI DBI）、串行/并行 JDI；通过 SPI 连接的 EPD；52B/D/E/G/J 硬件指南还列有 8 位并行 EPD 信号接口 | 512 × 512，RGB888；取决于显示屏是否提供支持 DTR 的 QSPI 接口 | 型号指南所列 52x 型号均采用 QFN68L。52B/D/E/G/J 硬件指南列出了信号分配和 TPS 电源管理芯片控制方式，但这并不能证明支持 LCDC EPD 直驱模式。请按具体型号核实驱动支持。 | 适合紧凑型 SPI/QSPI、8080 和 JDI 设计；并行 EPD 设计需核实所选型号对应的 GPIO、时序以及 TPS 电源控制实现。 |
+| **SF32LB55x** | 三线/四线 SPI、Dual-SPI、Quad-SPI、MCU/8080、DPI/RGB、串行/并行 JDI、MIPI DSI 命令模式 | 512 × 512，RGB888；通过 MIPI DSI，仅支持带 RAM 的显示驱动 | 资料列出的 2-lane MIPI DSI 接口适用于 BGA145/169 封装；JDI 和 MIPI DSI + SPI/DSPI 双屏异显仅列于 557VD3A6。命令模式要求面板控制器具有内部 SRAM/GRAM。 | 适用于可穿戴设备及其他配备显示屏的联网产品，且需采用兼容的 BGA 封装和 MIPI 命令模式面板。 |
+| **SF32LB56xU** | 三线/四线 SPI、Dual-SPI、Quad-SPI、串行 JDI | 512 × 512，RGB888；通过 QSPI | 型号指南所列 U 版本采用 QFN68L；请核对具体料号和引脚复用。 | 适合以 QSPI 带宽和较少引脚为重点的紧凑型串行面板设计。 |
+| **SF32LB56xV** | 三线/四线 SPI、Dual-SPI、Quad-SPI、DBI 8080、DPI/RGB、串行/并行 JDI | 1024 × 600，RGB888；通过 DPI/RGB | 型号指南列出的 V 版本采用 WBBGA175（BGA175）；请按具体料号核实所需引脚及板级布线。 | 适合需要 8080、DPI/RGB 或并行 JDI 的高分辨率或高刷新率设计。 |
+| **SF32LB57x** | 三线/四线 SPI、Dual-SPI、Quad-SPI、8/16 位 8080/DBI、DPI/RGB、JDI 和 LCDC 直驱 EPD | 1024 × 600，RGB888；通过 DPI/RGB | 封装包括 QFN68、QFN80 和 BGA112 等选项；请确认具体料号、封装引脚及面板驱动路径。 | 适合图形交互较复杂、需要并行或串行显示接口，或需要 JDI、EPD 的产品。 |
+| **SF32LB58x** | 三线/四线 SPI、Dual-SPI、Quad-SPI、MCU/8080、DPI/RGB、串行/并行 JDI、2-lane MIPI DSI 命令和视频模式 | RGB565 下 1280 × 800，或 RGB888 下 1280 × 720；通过 MIPI DSI | 型号指南所列料号均采用 BGA256。命令模式使用带内部 SRAM/GRAM 的面板控制器；视频模式也支持无 RAM 面板控制器。型号指南还列出了通过 MIPI DSI + SPI/DSPI/QSPI 实现双屏异显。具体设计仍需核实 LCD 控制器和引脚复用。 | 适合高分辨率和带宽需求高的 UI 设计，包括双屏配置，以及带或不带控制器 RAM 的 MIPI DSI 面板。 |
 
 </div>
 

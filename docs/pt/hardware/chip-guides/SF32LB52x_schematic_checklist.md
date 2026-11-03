@@ -1,4 +1,5 @@
 ---
+title: "Guia de projeto de hardware do SF32LB52x — checklist do esquemático"
 icon: lucide/list-checks
 description: "Checklist de revisão do esquemático do SF32LB52x: encapsulamento, alimentação, clock, RF, armazenamento, display e preparação para fabricação."
 hide:

@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58x 硬件设计指南 — 原理图核对表"
 icon: lucide/list-checks
 description: "SF32LB58x MCU 的逐项原理图评审核对表，覆盖电源、时钟、RF、存储、显示与制造检查项。"
 tags:

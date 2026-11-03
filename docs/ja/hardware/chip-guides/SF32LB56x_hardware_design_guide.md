@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x - ハードウェア設計ガイド"
 icon: lucide/book-check
 description: "SF32LB56x MCUのハードウェア設計ガイドです。電源システム、クロック生成、RF、ディスプレイ、オーディオ、PCBレイアウトについて説明します。"
 tags:

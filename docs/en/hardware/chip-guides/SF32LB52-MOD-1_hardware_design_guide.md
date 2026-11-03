@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52-MOD-1 - Hardware Design Guide"
 icon: lucide/book-check
 hide:
     - navigation
@@ -12,7 +13,7 @@ tags:
 
 ## 1. Overview
 
-**SF32LB52-MOD-1** is a certified, general-purpose low-power Bluetooth MCU module built on SiFli's SF32LB525UC6 chip (Arm Cortex-M33 STAR-MC1 dual-core, up to 240MHz). It integrates a 48MHz crystal, an optional 32.768kHz crystal, and an optional in-package 64Mb OPI-PSRAM die into a single 27.9 × 18.0 × 3.1mm surface-mount package with 68 pins.
+**SF32LB52-MOD-1** is a general-purpose low-power Bluetooth MCU module built on SiFli's SF32LB525UC6 chip (Arm Cortex-M33 STAR-MC1 dual-core, up to 240MHz). It integrates a 48MHz crystal, an optional 32.768kHz crystal, and an optional in-package 64Mb OPI-PSRAM die into a single 27.9 × 18.0 × 3.1mm surface-mount package with 68 pins.
 
 This guide covers module-level hardware integration: pin definitions, peripheral interfaces, electrical characteristics, power-supply requirements, reference schematics, a schematic design checklist, mechanical dimensions and PCB footprint, and product handling requirements. It is based on SiFli datasheet **DS5203-SF32LB52-MOD-1 V0.3**.
 
@@ -20,6 +21,9 @@ For the underlying chip architecture (cores, graphics, memory subsystem, and per
 
 !!! note "Source and figure handling"
     This guide follows **DS5203-SF32LB52-MOD-1 V0.3** for module-specific technical data. Some pinout, schematic, and mechanical drawings in the datasheet are raster images and are referenced rather than redrawn here. Figure and table numbers below follow this site's guide-local numbering; captions for non-reproduced diagrams cite the corresponding figure number in the official datasheet.
+
+!!! note "Regulatory marking scope"
+    The supplied labels for SF32LB52-MOD-1-N16R8 and SF32LB52-MOD-1-A128R16 show FCC, IC, CMIIT ID and HVIN identifiers and a CE mark. See the [module marking summary](../../sf32-products/modules/SF32LB52-MOD-1.md#regulatory-markings). Confirm approval documents and antenna/integration conditions for the exact revision; do not assume other variants or the finished product are covered.
 
 ## 2. Quick Design Summary
 
@@ -34,6 +38,9 @@ For the underlying chip architecture (cores, graphics, memory subsystem, and per
 | SF32LB52-MOD-1-N16R8 | 16MB QSPI-NOR | 8MB OPI-PSRAM | -40~85°C | 27.9 × 18.0 × 3.1 |
 
 </div>
+
+!!! note "Customization"
+    For other module configurations or customization requests, [contact μForge.io](../../about/contact.md).
 
 ### 2.2 Key Specifications
 

@@ -89,9 +89,11 @@ Choisissez le SF32LB55x lorsque la conception exige une ou plusieurs de ces capa
 
 ### Graphismes, affichage et IA { #graphics-display-and-ai }
 
+Pour connaître la résolution maximale et les interfaces d'affichage prises en charge par chaque famille et variante, consultez la [Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix).
+
 - Moteur graphique 2,5D ePicasso avec rotation, mise à l'échelle, effet miroir et fusion alpha matériels
 - eZip décompresse les graphismes sans perte et peut être chaîné avec ePicasso
-- La couche de transformation d'ePicasso prend en charge des résolutions jusqu'à 640 × 640 ; les couches génériques et la sortie d'affichage prennent en charge jusqu'à 1024 × 1024, avec une cadence d'affichage pouvant atteindre 60 ips
+- Le calque de transformation d'ePicasso prend en charge jusqu'à 640 × 640, et le canevas jusqu'à 1024 × 1024. La résolution réelle de l'écran est limitée à 512 × 512 ; la taille du canevas ne correspond pas à la résolution maximale en sortie. La sortie prend en charge jusqu'à 60 ips, selon la dalle, l'interface et la charge.
 - Le contrôleur LCD prend en charge les interfaces 8080, SPI, Dual-SPI, Quad-SPI, DPI et MIPI DSI, ainsi que les écrans réflectifs JDI sur les variantes compatibles ; vérifiez la disponibilité pour le modèle choisi
 - La compression de tampon d'image TurboPixel permet au contrôleur LCD de lire des données d'image compressées et de les décompresser pour l'affichage, réduisant ainsi la mémoire requise pour le tampon d'image et les besoins en bande passante de lecture
 - Deux contrôleurs LCD ; les interfaces d'affichage permanent (always-on) et la capacité double écran dépendent du modèle et du boîtier choisis
@@ -198,16 +200,19 @@ Suivez cette séquence pour transformer une présélection SF32LB55x en concepti
 ## Questions fréquentes { #frequently-asked-questions }
 
 **Quelles sont les principales caractéristiques du SF32LB55x ?**
-Le SF32LB55x associe un CPU applicatif (Cortex-M33 @240 MHz) à un cœur basse consommation (Cortex-M33 @48 MHz, avec un cœur programmable par l'utilisateur), 1,312 KB de SRAM interne et Bluetooth Low Energy (BLE) uniquement. Graphismes : ePicasso 1.0. Boîtier : QFN68 / BGA145 / BGA169 (7 × 7 mm (QFN68)). USB 2.0 FS. Valeurs au niveau de la famille ; vérifiez la fiche technique de la référence exacte.
+Le SF32LB55x associe un CPU applicatif (Cortex-M33 @240 MHz) à un cœur basse consommation (Cortex-M33 @48 MHz, programmable par l'utilisateur). Il intègre 1 312 KB de SRAM interne et prend en charge le Bluetooth Low Energy (BLE) uniquement. Graphismes : ePicasso 1.0. Boîtier : QFN68 / BGA145 / BGA169 (7 × 7 mm (QFN68)). USB 2.0 FS.
 
 **Quelles interfaces d'affichage le SF32LB55x prend-il en charge ?**
-SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. La disponibilité varie selon la référence et le boîtier.
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
-**Quelle mémoire dans le boîtier le SF32LB55x propose-t-il ?**
-Jusqu'à 16 MB + 2 MB de PSRAM et jusqu'à 8 MB de Flash NOR dans le boîtier, selon la référence.
+**Quelle est la résolution d'affichage maximale du SF32LB55x ?**
+La résolution maximale est de 512 × 512 en couleur RGB888, via MIPI-DSI, uniquement avec des pilotes d'affichage à RAM intégrée. ([Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+
+**Quelle capacité de mémoire intégrée au boîtier offre le SF32LB55x ?**
+Jusqu'à 16 MB + 2 MB de PSRAM et jusqu'à 8 MB de Flash NOR dans le boîtier.
 
 **Quelle tension d'alimentation faut-il pour le SF32LB55x ?**
-1.71–3.63 V, selon la variante. Confirmez la plage exacte dans la fiche technique.
+1,71–3,63 V.
 
 **Par où commencer une conception matérielle avec le SF32LB55x ?**
 Commencez par le [guide de conception matérielle du SF32LB55x](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) (schéma, alimentation, horloge/RF, routage PCB), puis utilisez les listes de contrôle de schéma et d'implantation avant de figer la carte.

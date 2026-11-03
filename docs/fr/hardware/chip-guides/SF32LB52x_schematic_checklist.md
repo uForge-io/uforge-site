@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle SF32LB52x — Liste de contrôle du schéma"
 icon: lucide/list-checks
 description: "Liste de contrôle du schéma SF32LB52x : boîtier, alimentation, horloge, RF, stockage, affichage et préparation à la fabrication."
 hide:

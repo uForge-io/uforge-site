@@ -1,4 +1,5 @@
 ---
+title: "SF32LB57x - Hardware Design Guide"
 icon: lucide/book-check
 hide:
     - navigation

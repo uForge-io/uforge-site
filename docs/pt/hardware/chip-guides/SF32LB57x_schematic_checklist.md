@@ -1,4 +1,5 @@
 ---
+title: "Guia de projeto de hardware do SF32LB57x — checklist do esquemático"
 icon: lucide/list-checks
 hide:
     - navigation

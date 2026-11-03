@@ -15,6 +15,7 @@ tags:
 !!! note "Note de syntaxe"
     * Le ***x*** minuscule désigne un chiffre.
     * Le ***Y*** ou ***Z*** majuscule désigne un caractère alphabétique.
+    * Pour le SF32LB57x, le caractère de sous-série (**y**) est un chiffre pour les composants alimentés par batterie et une lettre pour ceux alimentés en 3,3 V.
 
 ### Préfixe : *SF32LB5xy* { #prefix-sf32lb5xy }
 
@@ -24,14 +25,14 @@ tags:
 - **5** — Famille de processeur
     - **5** : composants basés sur un processeur Arm Cortex-M33 STAR-MC1 de 32 bits, ou sur un processeur RISC-V de performances comparables
 - **x** — Niveau de produit
-    - **8 / 7** : configurations avec deux processeurs applicatifs et un processeur basse consommation ; le positionnement varie selon la famille.
-    - **6 / 5** : milieu de gamme (un processeur applicatif et un processeur basse consommation)
-    - **2** : optimisé pour réduire les coûts (un processeur applicatif et un contrôleur Bluetooth basse consommation dédié)
+    - **8** : haut de gamme (***deux*** processeurs applicatifs et un processeur basse consommation)
+    - **7** : milieu de gamme (***deux*** processeurs applicatifs et un contrôleur Bluetooth basse consommation ***dédié***)
+    - **6 / 5** : milieu de gamme (***un*** processeur applicatif et ***un*** processeur basse consommation)
+    - **2** : optimisé pour réduire les coûts (***un*** processeur applicatif et un contrôleur Bluetooth basse consommation ***dédié***)
 - **y** — Variante du composant
     - Sa valeur reflète généralement la capacité de PSRAM intégrée au boîtier ; la correspondance exacte dépend de la sous-famille du produit.
 
 ### Suffixe : *ZxYx6* { #suffix-zxyx6 }
-
 - **Z** — Type de boîtier
     - **U** : QFN68
     - **V** : BGA
@@ -46,41 +47,14 @@ tags:
 
 | Champ | Type | Options | Description |
 | :--- | :--- | :--- | :--- |
-| **x** | Numérique | **1** à **6** | Correspondance générique des capacités de Flash QSPI-NOR :<br>• **1** : 2 Mb<br>• **2** : 4 Mb<br>• **3** : 8 Mb<br>• **4** : 16 Mb<br>• **5** : 32 Mb<br>• **6** : 64 Mb<br>SF32LB57x utilise aussi les codes **7** et **8** ; voir sa correspondance spécifique ci-dessous. |
-| **Y** | Alphabétique | **A** à **E** | Capacité et interface de PSRAM intégrée :<br>• **A** : 16 Mb QPI-PSRAM<br>• **B** : 32 Mb OPI-PSRAM<br>• **C** : 64 Mb OPI-PSRAM<br>• **D** : 128 Mb OPI/HPI-PSRAM<br>• **E** : 256 Mb HPI-PSRAM |
+| **x** | Alphanumérique | **N**, **1** à **8** | Correspondance générique des capacités de Flash QSPI-NOR :<br>• **N** : Aucune mémoire intégrée au boîtier<br>• **1** : 2 Mb<br>• **2** : 4 Mb<br>• **3** : 8 Mb<br>• **4** : 16 Mb<br>• **5** : 32 Mb<br>• **6** : 64 Mb<br>• **7** : 128 Mb<br>• **8** : 256 Mb |
+| **Y** | Alphabétique | **N**, **A** à **E** | Capacité et interface de la PSRAM intégrée :<br>• **N** : Aucune mémoire intégrée au boîtier<br>• **A** : 16 Mb QPI-PSRAM<br>• **B** : 32 Mb OPI-PSRAM<br>• **C** : 64 Mb OPI-PSRAM<br>• **D** : 128 Mb OPI/HPI-PSRAM<br>• **E** : 256 Mb HPI-PSRAM |
 
 </div>
 
 - **6** — Classe de température de fonctionnement
     - **5** : −20 °C à +70 °C (plage commerciale)
     - **6** : −40 °C à +85 °C (plage industrielle)
-
-### Codes mémoire propres au SF32LB57x { #sf32lb57x-memory-codes }
-
-Le schéma de numérotation du [guide de conception matérielle SF32LB57x](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md#33-packages) montre trois codes de position mémoire après le code du boîtier, dans l'ordre MPI1, MPI2 et MPI3 ; le code de température vient ensuite. Les codes propres à cette famille pour chaque position MPI sont les suivants :
-
-<div align="center"><em>Tableau : codes mémoire SF32LB57x par position MPI</em></div>
-
-<div align="center" markdown>
-
-| Code | Signification à la position MPI correspondante du SF32LB57x |
-|:-----|:------------------------------------------------------------|
-| `N` | Aucune mémoire intégrée au boîtier |
-| `B` | PSRAM de 32 Mb |
-| `C` | PSRAM de 64 Mb |
-| `D` | PSRAM de 128 Mb |
-| `E` | PSRAM de 256 Mb |
-| `2` | NOR Flash de 4 Mb |
-| `3` | NOR Flash de 8 Mb |
-| `4` | NOR Flash de 16 Mb |
-| `5` | NOR Flash de 32 Mb |
-| `6` | NOR Flash de 64 Mb |
-| `7` | NOR Flash de 128 Mb |
-| `8` | NOR Flash de 256 Mb |
-
-</div>
-
-Cette correspondance est propre au SF32LB57x. Vérifiez le code complet dans le tableau exact des variantes ; toutes les combinaisons possibles ne correspondent pas nécessairement à une référence disponible à la commande.
 
 ### Exemples de références { #part-number-examples }
 
@@ -110,6 +84,10 @@ Le tableau des variantes SF32LB57x indique que cette référence est en BGA112. 
 
 Le tableau des variantes SF32LB57x indique également que cette référence est en BGA112. Ses codes de position mémoire sont `N/7/N` : aucune mémoire intégrée au boîtier sur MPI1, une NOR Flash de 128 Mb sur MPI2 et aucune mémoire intégrée au boîtier sur MPI3. Le `6` final indique la classe de température industrielle. La présentation de la famille explique pourquoi la notation `58 + 6` ne signifie pas 64 GPIO librement affectables.
 
+#### Exemple 5 : SF32LB573UB7N6 { #example-5-sf32lb573ub7n6 }
+
+Un composant SF32LB57x alimenté par batterie : sous-série `3` (alimentation par batterie, PSRAM de 32 Mb), boîtier `U` (QFN68), MPI1 `B` (PSRAM de 32 Mb), MPI2 `7` (NOR Flash de 128 Mb), MPI3 `N` (aucune mémoire intégrée) et classe de température `6` (industrielle, −40 à 85 °C).
+
 ### Exceptions de suffixe héritées de la série 55x { #legacy-55x-suffix-exceptions }
 
 La famille SF32LB55x ayant été définie avant la convention de nommage actuelle, certaines références conservent un ancien format de suffixe. Les trois références suivantes ne peuvent pas être entièrement décodées selon le format `SF32LB5xyZxYx6` présenté ci-dessus : `SF32LB551U4O5`, `SF32LB555V4O6` et `SF32LB555V436`. Pour connaître leur boîtier et leur configuration mémoire, consultez le tableau des variantes 55x et la fiche technique de la référence exacte ; ne déduisez pas les champs à partir du format générique. `SF32LB557VD3A6` suit la convention actuelle et ne constitue pas une exception héritée.
@@ -127,7 +105,7 @@ La famille SF32LB55x ayant été définie avant la convention de nommage actuell
 
 - **SF32LB5x** — Famille de MCU du module
     - **SF32**, **LB** et **5** suivent les mêmes significations de série, de gamme de produits et de famille de processeur que la convention de nommage des puces ci-dessus.
-    - **x** identifie le niveau de produit : **8 / 7** correspond à deux processeurs applicatifs et un processeur basse consommation ; le positionnement varie selon la famille. **6 / 5** désigne le milieu de gamme et **2** une configuration optimisée en coût.
+    - **x** identifie le niveau de produit : **8 / 7** correspond à ***deux*** processeurs applicatifs ; le positionnement varie selon la famille. **6 / 5** désigne le milieu de gamme, tandis que **2** correspond à une configuration optimisée en coût.
 - **MOD** — Produit module SiFli.
 - **y** — Sous-type de module, lorsque la famille en définit un
     - **1** : alimentation directe par batterie Li-ion pour les composants SF32LB520/3/5/7. La plage d'alimentation de la puce est de 3,2 à 4,7 V ; la configuration standard utilise le SF32LB525UC6 avec 8 MB d'OPI-PSRAM.
@@ -144,7 +122,7 @@ Le module `-A` n'est pas équipé d'une Flash NOR externe. Il peut être relié 
 
 | Champ | Code de type de stockage | Capacité, configuration et suffixe |
 | :--- | :--- | :--- |
-| `Aaaa`<br>Flash variable | `N` : Flash QSPI-NOR<br>`A` : Flash NAND (interface selon la famille du module)<br>`D` : Flash SD-NAND<br>`E` : eMMC | `N16` : Flash QSPI-NOR 16 MB<br>`A128` : SPI-NAND 128 MB sur SF32LB52-MOD-1 ; QSPI-NAND 128 MB sur SF32LB56-MOD et SF32LB58-MOD<br>`D128` : SD-NAND 128 MB sur SF32LB56-MOD<br>`E4` : eMMC 4 GB sur SF32LB58-MOD |
+| `Aaaa`<br>Flash variable | `N` : Flash QSPI-NOR<br>`A` : Flash SPI-NAND (QSPI-NAND)<br>`D` : Flash SD-NAND<br>`E` : eMMC | `N16` : Flash QSPI-NOR 16 MB<br>`A128` : Flash SPI-NAND (QSPI-NAND) 128 MB<br>`D128` : Flash SD-NAND 128 MB sur SF32LB56-MOD<br>`E4` : eMMC 4 GB sur SF32LB58-MOD |
 | `Bbbb`<br>PSRAM | `R` : PSRAM | `R4` : OPI-PSRAM 4 MB<br>`R8` : OPI-PSRAM 8 MB<br>`R12` : OPI-PSRAM 4 MB + 8 MB<br>`R16` : OPI/HPI-PSRAM 16 MB<br>`R32` : HPI-PSRAM 16 MB + 16 MB<br>`R64` : HPI-PSRAM 32 MB + 32 MB |
 | `Cccc`<br>Flash standard | `N` : Flash QSPI-NOR | `N1` : Flash QSPI-NOR 1 MB<br>`N4` : Flash QSPI-NOR 4 MB |
 

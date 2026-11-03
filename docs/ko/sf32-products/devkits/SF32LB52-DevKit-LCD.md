@@ -73,8 +73,6 @@ SF32LB52-DevKit-LCD는 SF32LB52x 제품군을 위한 디스플레이 중심 개�
 
 위의 보드 코드와 메모리 구성은 SiFli의 [개발 보드 모델 가이드](https://wiki.sifli.com/en/board/devkit_guide.html)를 따릅니다. 보드를 설계 기준 구성으로 사용하기 전에 보드 마킹을 확인하고, 해당 리비전의 설계 패키지와 대조하십시오.
 
-A128R16의 플래시 라벨은 공식 출처마다 다릅니다. [OpenSiFli 모듈 모델 가이드](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md)는 이 모듈을 128 MB SPI-NAND로 식별하지만, 보드 모델 가이드는 대응하는 DevKit SKU를 128 MB QSPI-NAND로 나열합니다. 이것이 실제 실장된 부품의 차이인지 인터페이스 표기의 차이인지는 출처에 설명되어 있지 않습니다. 이 구성에 의존하기 전에 해당 보드 리비전의 회로도/BOM에서 플래시 부품과 버스 모드를 확인하십시오.
-
 ## 버전 노트 { #version-notes }
 
 <div align="center"><em>보드 버전 이력</em></div>

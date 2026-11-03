@@ -1,4 +1,5 @@
 ---
+title: "SF32LB55x — checklist do esquemático"
 icon: lucide/list-checks
 hide:
     - navigation

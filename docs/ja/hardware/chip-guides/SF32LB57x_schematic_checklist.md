@@ -1,4 +1,5 @@
 ---
+title: "SF32LB57xハードウェア設計ガイド — 回路図チェックリスト"
 icon: lucide/list-checks
 hide:
     - navigation

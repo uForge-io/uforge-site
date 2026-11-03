@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58x Hardware-Design-Leitfaden — Design-Review-Checkliste und Referenzen"
 icon: lucide/clipboard-check
 description: "Checkliste für das Design-Review, zugehörige Dokumente und Referenzen, Anhänge und Revisionshistorie zum SF32LB58x-Hardware-Design-Leitfaden."
 tags:

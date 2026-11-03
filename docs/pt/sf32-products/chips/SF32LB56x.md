@@ -96,6 +96,8 @@ Considere a SF32LB56x quando o projeto precisar de um ou mais destes recursos:
 
 ### Gráficos, display e IA { #graphics-display-and-ai }
 
+Resolução máxima e interfaces de painel: consulte [Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix).
+
 - Aceleração gráfica 2D/2.5D ePicasso 2.0
 - Mesclagem alfa em 4 camadas, mais uma camada de fundo
 - Rotação, redimensionamento, espelhamento e conversão de formatos comuns acelerados por hardware
@@ -181,16 +183,19 @@ Siga esta sequência para transformar uma lista preliminar de componentes SF32LB
 ## Perguntas frequentes { #frequently-asked-questions }
 
 **Quais são as principais especificações do SF32LB56x?**
-O SF32LB56x combina uma CPU de aplicação (Cortex-M33 @240 MHz) com um núcleo de baixo consumo (Cortex-M33 @48/96 MHz, com um núcleo programável pelo usuário), 960 KB de SRAM interna e Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 2.0. Encapsulamento: QFN68 / BGA175 (7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)). USB 2.0 FS. Valores da família; confira o datasheet do código exato.
+O SF32LB56x combina uma CPU de aplicação (Cortex-M33 @240 MHz) com um núcleo de baixo consumo (Cortex-M33 @48/96 MHz, programável pelo usuário). Integra 960 KB de SRAM interna e oferece Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 2.0. Encapsulamento: QFN68 / BGA175 (7 × 7 mm (QFN), 6,5 × 6,1 mm (BGA)). USB 2.0 FS.
 
 **Quais interfaces de display o SF32LB56x suporta?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. A disponibilidade varia conforme o código e o encapsulamento.
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+
+**Qual é a resolução máxima de display do SF32LB56x?**
+Até 1024 × 600 com cor RGB888, pela interface DPI/RGB no encapsulamento BGA. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
 **Quanta memória no encapsulamento o SF32LB56x oferece?**
-Até 16 MB de PSRAM e até 1 MB de Flash NOR no encapsulamento, conforme o código.
+Até 16 MB de PSRAM e até 1 MB de Flash NOR no encapsulamento.
 
 **Qual tensão de alimentação o SF32LB56x precisa?**
-1.71–3.63 V, conforme a variante. Confirme a faixa exata no datasheet.
+1,71–3,63 V.
 
 **Por onde começar um projeto de hardware com o SF32LB56x?**
 Comece pelo [guia de projeto de hardware do SF32LB56x](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) para esquemático, alimentação, clock/RF e layout de PCB, e use os checklists de esquemático e layout antes de liberar a placa.

@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x — guia de projeto de hardware"
 icon: lucide/book-check
 description: "Guia de projeto de hardware do microcontrolador SF32LB56x: alimentação, geração de clock, RF, display, áudio e layout da PCB."
 tags:

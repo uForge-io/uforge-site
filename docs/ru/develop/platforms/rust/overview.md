@@ -1,5 +1,6 @@
 ---
 icon: lucide/code
+title: "Обзор платформы Rust"
 description: "Оценка поддержки Rust для SF32 через sifli-rs от OpenSiFli (sifli-hal, sifli-pac): зрелость, подходящие и неподходящие сценарии, контрольный список рисков."
 tags:
     - Разработка

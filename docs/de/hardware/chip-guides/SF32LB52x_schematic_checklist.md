@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52x Hardware-Design-Leitfaden — Schaltplan-Checkliste"
 icon: lucide/list-checks
 description: "Schaltplan-Checkliste für den SF32LB52x: Gehäuse, Stromversorgung, Takt, RF, Speicher, Display und Fertigung."
 hide:

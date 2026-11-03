@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle SF32LB56x — Directives de conception du schéma"
 icon: lucide/circuit-board
 description: "Directives de schéma du MCU SF32LB56x : alimentation, modes et sources de réveil, horloges, RF, affichage/tactile/rétroéclairage, audio, stockage et fabrication."
 tags:

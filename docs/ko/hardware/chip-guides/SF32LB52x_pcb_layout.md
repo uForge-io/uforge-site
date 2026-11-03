@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52x 하드웨어 설계 가이드 — PCB 레이아웃 가이드라인"
 icon: lucide/layers
 hide:
     - navigation

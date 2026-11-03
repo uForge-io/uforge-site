@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x Hardware-Design-Leitfaden — Schaltplan-Checkliste"
 icon: lucide/list-checks
 description: "Punktweise Schaltplan-Prüfcheckliste für den SF32LB56x-MCU, mit Prüfungen zu Stromversorgung, Takt, RF, Speicher, Display und Fertigung."
 tags:

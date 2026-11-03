@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x Hardware Design Guide — PCB Layout Guidelines"
 icon: lucide/layers
 description: "PCB layout guidelines for the SF32LB56x MCU: footprint, stack-up, critical routing, and the item-by-item PCB layout checklist."
 tags:

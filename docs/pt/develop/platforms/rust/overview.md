@@ -1,5 +1,6 @@
 ---
 icon: lucide/code
+title: "Visão geral da plataforma Rust"
 description: "Avalie o suporte comunitário a Rust no SF32 via sifli-rs da OpenSiFli (sifli-hal, sifli-pac): maturidade, cenários adequados e inadequados e lista de riscos."
 tags:
     - Desenvolvimento

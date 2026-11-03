@@ -73,8 +73,6 @@ SF32LB52-DevKit-LCD 是一块面向显示应用的 SF32LB52x 家族开发板。�
 
 上表中的开发板型号和存储配置依据思澈科技（SiFli）的[开发板型号指南](https://wiki.sifli.com/board/devkit_guide.html)整理。将开发板作为设计基线前，请对照板卡丝印和对应的设计资料确认版本。
 
-A128R16 的 Flash 标注在官方资料中存在差异：[OpenSiFli 模组型号指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md)将模组列为 128 MB SPI-NAND，而开发板型号指南将对应开发板 SKU 列为 128 MB QSPI-NAND。资料未说明差异是指实装器件还是接口表述。依赖此配置前，请按具体板卡版本核对原理图/BOM 中的 Flash 器件和总线模式。
-
 ## 版本说明 { #version-notes }
 
 <div align="center"><em>开发板版本历史</em></div>

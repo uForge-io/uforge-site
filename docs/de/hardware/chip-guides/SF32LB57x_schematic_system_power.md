@@ -50,28 +50,31 @@ Fehler bei der Inbetriebnahme gehen meist auf das Minimalsystem, die Stromversor
 
 SF32LB57x besitzt mehrere Minimalsystem-Schaltplanvarianten. Verwenden Sie diejenige, die sowohl zum Gehäuse als auch zur Stromversorgungsfamilie passt; mischen Sie keine akkubetriebenen und 3,3-V-Versorgungsvarianten.
 
-![Abbildung 5.1-1: QFN68L Minimalsystem, akkubetrieben](../../sf32-products/chips/assets/57x/SF32LB57-UH-MHS-SCH.svg){ width="100%" loading="lazy" }
+!!! warning "Auch V2-Schaltpläne müssen bauteilspezifisch geprüft werden"
+    Die V2-Abbildungen behalten SiFlis Originalbeschriftungen bei, darunter die Sensorversorgung aus `VDD33_VOUT1`, zusätzliche Domänen an `VSYS` und eine feste Verbindung von `VDDIOA` mit 3,3 V. Das stimmt nicht vollständig mit der Lasten-Checkliste oder der wählbaren I/O-Spannung überein. Übernehmen Sie diese Beispiele nicht als universelle Versorgungsschaltung. Prüfen Sie jede Verbindung anhand von Abschnitt 5.2, der genauen Bestellnummer und der tatsächlichen Last.
+
+![Abbildung 5.1-1: QFN68L Minimalsystem, akkubetrieben](../../sf32-products/chips/assets/57x/SF32LB57-UH-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Abbildung 5.1-1: QFN68L Minimalsystem, akkubetrieben</em></div>
 
-![Abbildung 5.1-2: QFN68L Minimalsystem, 3,3-V-Versorgung](../../sf32-products/chips/assets/57x/SF32LB57-UL-MHS-SCH.svg){ width="100%" loading="lazy" }
+![Abbildung 5.1-2: QFN68L Minimalsystem, 3,3-V-Versorgung](../../sf32-products/chips/assets/57x/SF32LB57-UL-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Abbildung 5.1-2: QFN68L Minimalsystem, 3,3-V-Versorgung</em></div>
 
-![Abbildung 5.1-3: QFN80L Minimalsystem, akkubetrieben](../../sf32-products/chips/assets/57x/SF32LB57-YH-MHS-SCH.svg){ width="100%" loading="lazy" }
+![Abbildung 5.1-3: QFN80L Minimalsystem, akkubetrieben](../../sf32-products/chips/assets/57x/SF32LB57-YH-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Abbildung 5.1-3: QFN80L Minimalsystem, akkubetrieben</em></div>
 
-![Abbildung 5.1-4: QFN80L Minimalsystem, 3,3-V-Versorgung](../../sf32-products/chips/assets/57x/SF32LB57-YL-MHS-SCH.svg){ width="100%" loading="lazy" }
+![Abbildung 5.1-4: QFN80L Minimalsystem, 3,3-V-Versorgung](../../sf32-products/chips/assets/57x/SF32LB57-YL-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Abbildung 5.1-4: QFN80L Minimalsystem, 3,3-V-Versorgung</em></div>
 
 <!-- BGA-ONLY -->
-![Abbildung 5.1-5: BGA112 Minimalsystem, akkubetrieben](../../sf32-products/chips/assets/57x/SF32LB57-VH-MHS-SCH.svg){ width="100%" loading="lazy" }
+![Abbildung 5.1-5: BGA112 Minimalsystem, akkubetrieben](../../sf32-products/chips/assets/57x/SF32LB57-VH-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Abbildung 5.1-5: BGA112 Minimalsystem, akkubetrieben</em></div>
 
-![Abbildung 5.1-6: BGA112 Minimalsystem, 3,3-V-Versorgung](../../sf32-products/chips/assets/57x/SF32LB57-VL-MHS-SCH.svg){ width="100%" loading="lazy" }
+![Abbildung 5.1-6: BGA112 Minimalsystem, 3,3-V-Versorgung](../../sf32-products/chips/assets/57x/SF32LB57-VL-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Abbildung 5.1-6: BGA112 Minimalsystem, 3,3-V-Versorgung</em></div>
 <!-- /BGA-ONLY -->
@@ -185,7 +188,7 @@ Wesentliche Anforderungen:
 
 #### 5.2.3. 3,3-V-Versorgungsvarianten { #523-33-v-supply-variants }
 
-3,3-V-Varianten nutzen typischerweise eine externe 3,3-V-Schiene für `PVDD`, `AVDD33`, `AVDD_BRF`, `AVDD33_AUD`, `VDDIOA` und verwandte Domänen.
+Varianten mit 3,3-V-Versorgung verwenden externe 3,3 V für `PVDD`, `AVDD33`, `AVDD_BRF`, `AVDD33_AUD` und weitere Domänen. Wählen Sie für `VDDIOA` anhand der genauen Bestellnummer 1,8 V oder 3,3 V.
 
 Wesentliche Anforderungen:
 
@@ -268,8 +271,8 @@ OVP-Hinweise:
 - Für eine OVP mit geregeltem Ausgang nennt SiFli SGM4064YDE8G und LP5305AQVF. Der Anwendungstext gibt 4,5–5,4 V an, die Checkliste 4,7–5,4 V. Bis zur Klärung verwenden Sie den engeren Bereich von 4,7–5,4 V bei einer Belastbarkeit von mindestens 0,5 A und einer OCP-Schwelle von mindestens 0,7 A.
 - Führen Sie den Ladeeingang vor dem Chip über einen TVS-/OVP-Schutz.
 
-!!! warning "Abweichung der Bereichsangaben in der Quelle"
-    Die Versorgungspin-Tabelle und die Checkliste geben für `VBUS` 4,6–5,5 V an, während der OVP-Auswahltext 4,5–5,5 V nennt. Bis SiFli die Abweichung klärt, legen Sie 4,6 V als minimale Betriebseingangsspannung zugrunde.
+!!! warning "Abweichender VBUS-Bereich"
+    Die aktuellen Gehäusetabellen und der OVP-Text nennen 4,5–5,5 V für `VBUS`; die Checkliste verlangt weiterhin 4,6–5,5 V. Bis zur Klärung durch SiFli mit der strengeren Untergrenze von 4,6 V auslegen.
 
 #### 5.2.7. Versorgungsstrategie für Energiesparzustände { #527-low-power-supply-strategy }
 
@@ -342,12 +345,12 @@ Die Versorgungsanforderungen des SF32LB57x unterscheiden sich je nach Gehäuse u
 
 | Design-Element | Akkubetriebene Varianten | 3,3-V-Versorgungsvarianten |
 |:------------|:-------------------------|:----------------------|
-| Haupt-Versorgungseingang | Pin-Tabelle und Checkliste geben für `VBUS` 4,6–5,5 V an. Der `VBAT`-Bereich beträgt 3,45–4,7 V; die Checkliste nennt Akkus mit einer Nennspannung von 4,2 V bis 4,45 V. Der Betriebsbereich von `VCC` liegt bei 3,45–4,7 V; die Hardware-Einschaltschwelle beträgt 3,45 V, die Hardware-Abschaltschwelle 2,7 V. Der standardmäßige Software-Schwellenwert für niedrigen Akkustand beträgt 3,48 V. Verwenden Sie bei einem Konstantspannungs-Labornetzteil 3,6–4,7 V; empfohlen werden 3,8 V. | `PVDD`/`PVDD_PMU` 2,97–3,63 V; `VBATS` dient ausschließlich der Akkuspannungsmessung. |
-| Analog- und RF-Versorgungen | `AVDD_BRF` wird von `VSYS` versorgt; `AVDD33_AUD` wird von `VDD33_VOUT1` versorgt. | `AVDD33`/`AVDD33_ANA`, `AVDD_BRF`, `AVDD33_AUD` und `VDDIOA` werden extern mit 3,3 V versorgt und sollten sternförmig geroutet werden. |
+| Haupt-Versorgungseingang | Gehäusetabellen: `VBUS` 4,5–5,5 V, `VBAT`/`VCC` 3,0–4,7 V. Checkliste: `VBUS` 4,6–5,5 V, `VCC` 3,45–4,7 V, Ein-/Abschaltschwelle 3,45 V/2,7 V. Die Tabellenfußnoten nennen 3,5 V ±10 % zum Einschalten. Konstantspannung: 3,6–4,7 V, vorzugsweise 3,8 V; Software-Unterspannungsschwelle 3,48 V. Unterschiede klären, nicht den Betriebsbereich erweitern. | `PVDD`/`PVDD_PMU` 2,97–3,63 V; `VBATS` dient ausschließlich der Akkuspannungsmessung. |
+| Analog- und RF-Versorgungen | `AVDD_BRF` wird von `VSYS` versorgt; `AVDD33_AUD` wird von `VDD33_VOUT1` versorgt. | Externe 3,3 V sternförmig an `AVDD33` / `AVDD33_ANA`, `AVDD_BRF` und `AVDD33_AUD` führen; `VDDIOA` je nach Bestellnummer mit 1,8 V oder 3,3 V versorgen. |
 | Interne LDO-Ausgänge | `VDD_VOUT1`, `VDD_VOUT2`, `VDD_RET`, `VDD_RTC` und `VDD18_VOUT` sind interne Versorgungen und sollten keine gewöhnlichen externen Peripheriegeräte versorgen. | Gleich; `VDD18_VOUT` ist nur für den internen oder im Gehäuse integrierten PSRAM vorgesehen, nicht als Versorgung externer 1,8-V-Peripheriegeräte. |
 | `VDD33_VOUT1` | 3,3 V, 150 mA nach dem Hochfahren, standardmäßig aktiviert; der Softstart-Laststrom darf 30 mA nicht überschreiten, sonst kann der LDO nicht starten. Die Stromversorgungs-Checkliste erlaubt nur im Gehäuse integriertes Flash, externes NOR-/NAND-Flash und `AVDD33_AUD` und untersagt andere Peripherie. | Nicht anwendbar. |
 | `VDD33_VOUT2` | 3,3 V, 150 mA, standardmäßig deaktiviert und per Software aktivierbar; Laststrom darf während des Softstarts 30 mA nicht überschreiten. Laut SiFli-Checkliste kann die Software diese Softstart-Strombegrenzung deaktivieren. Prüfen Sie in diesem Fall, ob der Einschaltstrom der Peripherie mit den empfohlenen Versorgungsbedingungen vereinbar ist. | Nicht anwendbar. |
-| `VDDIOSB`/`VDDIOSA` | QFN80L<!-- BGA-ONLY --> führt `VDDIOSB` heraus; dessen Spannung richtet sich nach dem integrierten MPI-Baustein: 1,8 V für PSRAM oder 3,3 V für NOR-Flash. BGA112<!-- /BGA-ONLY --> führt zusätzlich `VDDIOSA` heraus, das fest mit 1,8 V von `VDD18_VOUT` versorgt wird. Die Spannung von `VDDIOSB` richtet sich nach dem integrierten Baustein (1,8 V für PSRAM, 3,3 V für NOR-Flash). Die genaue bestellbare Teilenummer prüfen. | Gleich; anhand der genauen bestellbaren Teilenummer prüfen. |
+| `VDDIOSB` / `VDDIOSA` | Die QFN80L-Batterietabelle führt `VDD33_VOUT1`, nicht `VDDIOSB` auf.<!-- BGA-ONLY --> BGA112 bietet `VDDIOSA` (1,8 V aus `VDD18_VOUT`) und `VDDIOSB` (bei PSRAM im Gehäuse 1,8 V aus `VDD18_VOUT`, bei NOR-Flash 3,3 V aus `VDD33_VOUT1`).<!-- /BGA-ONLY --> | Bei QFN80L<!-- BGA-ONLY --> und BGA112<!-- /BGA-ONLY --> erhält `VDDIOSB` für PSRAM im Gehäuse 1,8 V aus `VDD18_VOUT`, für NOR-Flash externe 3,3 V.<!-- BGA-ONLY --> Bei BGA112 wird `VDDIOSA` an `VDD18_VOUT` angeschlossen.<!-- /BGA-ONLY --> |
 
 </div>
 
@@ -471,22 +474,25 @@ Erfassen Sie für jede Messung Firmware-Version, Versorgungsspannung, Akkusimula
 
 Verwenden Sie diese Tabellen für die pinweise Schaltplanprüfung. Jede Tabelle listet für eine Kombination aus Gehäuse und Stromversorgungsfamilie die minimale, typische und maximale Spannung sowie den maximalen Strom jedes Versorgungspins auf. Wählen Sie die Tabelle, die zur genauen bestellbaren Teilenummer passt; mischen Sie keine Zeilen aus unterschiedlichen Gehäusen oder Stromversorgungsfamilien.
 
+!!! warning "Geltungsbereich von Versorgungstabellen und Checkliste"
+    Die folgenden Werte stammen aus den aktuellen gehäusespezifischen Versorgungstabellen von SiFli. Dort beträgt die Mindestspannung für `VBUS` 4,5 V und für `VBAT`/`VCC` 3,0 V. Die Checkliste verlangt dagegen 4,6–5,5 V an `VBUS` und 3,45–4,7 V an `VCC`, mit 3,45 V Einschalt- und 2,7 V Abschaltschwelle. Die Tabellenfußnoten nennen eine abweichende Einschaltspannung von 3,5 V ±10 %. Für `VSYS` steht als typischer Wert 3,3 V, in derselben Zeile jedoch eine Beschreibung als 3,0 V. Die 3,3 V bei `BUCK_LX` bezeichnen einen Schaltknoten, keinen geregelten Gleichspannungsausgang. Klären Sie diese Unterschiede für die genaue Bestellnummer vor der Freigabe; 3,0 V als Tabellenminimum garantieren keinen Start.
+
 <div align="center"><em>Tabelle 5.2-11: Versorgungspin-Referenz QFN68L, akkubetriebene Variante</em></div>
 
 <div align="center" markdown>
 
 | Versorgungspin | Min. (V) | Typ. (V) | Max. (V) | Max. Strom (mA) | Beschreibung |
 |:---|:---|:---|:---|:---|:---|
-| `VBUS` | 4,6 | 5,0 | 5,5 | 400 | VBUS-Versorgungseingang; versorgt das interne Lademodul. |
-| `VBAT` | 3,45 | - | 4,7 | 400 | Akkuanschluss; ein interner GPADC-Kanal misst an diesem Pin ebenfalls die Akkuspannung. |
-| `VSYS` | - | 3,0 | - | 150 | Interner 3,0-V-Versorgungsausgang; externen Kondensator gegen Masse hinzufügen. Versorgt `AVDD_BRF`. |
-| `BUCK_LX` | - | 1,25 | - | 50 | BUCK-Induktivitäts-Schaltknoten; ein Ende der Induktivität anschließen. |
+| `VBUS` | 4,5 | 5,0 | 5,5 | 400 | VBUS-Versorgungseingang; versorgt das interne Lademodul. |
+| `VBAT` | 3,0 | - | 4,7 | 400 | Akkuanschluss; ein interner GPADC-Kanal misst an diesem Pin ebenfalls die Akkuspannung. |
+| `VSYS` | - | 3,3 | - | 150 | Interner 3,0-V-Versorgungsausgang; externen Kondensator gegen Masse hinzufügen. Versorgt `AVDD_BRF`. |
+| `BUCK_LX` | - | 3,3 | - | 50 | BUCK-Induktivitäts-Schaltknoten; ein Ende der Induktivität anschließen. |
 | `BUCK_FB` | - | 1,25 | - | 50 | BUCK-Feedback; das andere Ende der Induktivität und einen Kondensator gegen Masse anschließen. |
 | `VDD_VOUT1` | - | 1,1 | - | 50 | Interner LDO-Ausgang; externen Kondensator hinzufügen. Nur interne Versorgung — keine externen Peripheriegeräte versorgen. |
 | `VDD_VOUT2` | - | 0,9 | - | 20 | Interner LDO-Ausgang; externen Kondensator hinzufügen. Nur interne Versorgung — keine externen Peripheriegeräte versorgen. |
 | `VDD_RET` | - | 0,9 | - | 1 | Interner LDO-Ausgang; externen Kondensator hinzufügen. Nur interne Versorgung — keine externen Peripheriegeräte versorgen. |
 | `VDD_RTC` | - | 1,1 | - | 1 | Interner LDO-Ausgang; externen Kondensator hinzufügen. Nur interne Versorgung — keine externen Peripheriegeräte versorgen. |
-| `VCC` | 3,45 | - | 4,7 | 400 | System-Versorgungseingang; mit dem Akku verbinden. Die Hardware-Einschaltschwelle beträgt 3,45 V, die Hardware-Abschaltschwelle 2,7 V. Der standardmäßige Software-Schwellenwert für niedrigen Akkustand beträgt 3,48 V. Für eine konstante Versorgung am Labornetzteil 3,6 V bis 4,7 V verwenden; 3,8 V werden empfohlen. |
+| `VCC` | 3,0 | - | 4,7 | 200 | Systemversorgungseingang; an den Akku anschließen. Die Tabellenfußnoten nennen 3,5 V ±10 % zum Einschalten und 3,48 V als standardmäßige Software-Unterspannungsschwelle. Bei Konstantspannungsversorgung 3,6–4,7 V verwenden, vorzugsweise 3,8 V; Abweichungen zur Checkliste siehe Warnhinweis. |
 | `VDD18_VOUT` | - | 1,8 | - | 30 | 1,8-V-LDO-Ausgang; nur interne Versorgung, Kondensator gegen Masse hinzufügen, keine externen Peripheriegeräte versorgen. |
 | `VDD33_VOUT1` | - | 3,3 | - | 150 | 3,3-V-LDO-Ausgang 1; Kondensator gegen Masse hinzufügen. 150 mA Lastfähigkeit nach dem Hochfahren; standardmäßig aktiviert. Der Softstart-Laststrom darf 30 mA nicht überschreiten, sonst kann der LDO nicht starten. Versorgt im Gehäuse integriertes und externes Flash sowie `AVDD33_AUD`. |
 | `VDD33_VOUT2` | - | 3,3 | - | 150 | 3,3-V-LDO-Ausgang 2; standardmäßig deaktiviert, benötigt Softwarekonfiguration zur Aktivierung. 150 mA Lastfähigkeit nach dem Hochfahren; Softstart-Laststrom darf 30 mA nicht überschreiten. Versorgt den Motor oder das LCD-Panel. |
@@ -494,7 +500,7 @@ Verwenden Sie diese Tabellen für die pinweise Schaltplanprüfung. Jede Tabelle 
 | `AVDD_BRF` | 2,97 | 3,3 | 3,63 | 100 | RF-Versorgungseingang; mit `VSYS` verbinden. |
 | `AUD_VREF` | - | - | - | - | Audio-Referenzspannungseingang; nur Kondensator gegen Masse hinzufügen, nicht extern ansteuern. |
 | `AVDD33_AUD` | 2,97 | 3,3 | 3,63 | 50 | Audio-Versorgungseingang; mit `VDD33_VOUT1` verbinden. |
-| `MIC_BIAS` | 1,4 | - | 2,8 | - | Mikrofon-Bias-Ausgang; mit der Mikrofonversorgung verbinden. |
+| `MIC_BIAS` | 1,4 | - | 2,8 | 2 | Mikrofon-Bias-Ausgang; mit der Mikrofonversorgung verbinden. |
 
 </div>
 
@@ -504,10 +510,10 @@ Verwenden Sie diese Tabellen für die pinweise Schaltplanprüfung. Jede Tabelle 
 
 | Versorgungspin | Min. (V) | Typ. (V) | Max. (V) | Max. Strom (mA) | Beschreibung |
 |:---|:---|:---|:---|:---|:---|
-| `VDDIOA` | 2,97 | 3,3 | 3,63 | 100 | GPIO-Versorgungseingang; diese Referenztabelle zeigt die 3,3-V-Konfiguration. Die I/O-Spannung anhand der genauen bestellbaren Teilenummer prüfen. |
+| `VDDIOA` | 1,62 | 1,8 / 3,3 | 3,63 | 100 | GPIO-Versorgungseingang; gemäß genauer Bestellnummer an 1,8 V oder 3,3 V anschließen. |
 | `VBATS` | 0 | - | 4,7 | 1 | Akkuspannungs-Messeingang; ein interner GPADC-Kanal misst an diesem Pin die Akkuspannung. |
-| `PVDD` | 2,97 | 3,3 | 3,63 | 400 | PMU-Versorgungseingang; mit einer externen 3,3-V-Versorgung verbinden. |
-| `BUCK_LX` | - | 1,25 | - | 50 | BUCK-Induktivitäts-Schaltknoten; ein Ende der Induktivität anschließen. |
+| `PVDD` | 2,97 | 3,3 | 3,63 | 200 | PMU-Versorgungseingang; mit einer externen 3,3-V-Versorgung verbinden. |
+| `BUCK_LX` | - | 3,3 | - | 50 | BUCK-Induktivitäts-Schaltknoten; ein Ende der Induktivität anschließen. |
 | `BUCK_FB` | - | 1,25 | - | 50 | BUCK-Feedback; das andere Ende der Induktivität und einen Kondensator gegen Masse anschließen. |
 | `VDD_VOUT1` | - | 1,1 | - | 50 | Interner LDO-Ausgang; nur interne Versorgung, keine externen Peripheriegeräte versorgen. |
 | `VDD_VOUT2` | - | 0,9 | - | 20 | Interner LDO-Ausgang; nur interne Versorgung, keine externen Peripheriegeräte versorgen. |
@@ -519,15 +525,15 @@ Verwenden Sie diese Tabellen für die pinweise Schaltplanprüfung. Jede Tabelle 
 | `AVDD_BRF` | 2,97 | 3,3 | 3,63 | 100 | RF-Versorgungseingang; mit einer externen 3,3-V-Versorgung verbinden. |
 | `AUD_VREF` | - | - | - | - | Audio-Referenzspannungseingang; nur Kondensator gegen Masse hinzufügen, nicht extern ansteuern. |
 | `AVDD33_AUD` | 2,97 | 3,3 | 3,63 | 50 | Audio-Versorgungseingang; mit einer externen 3,3-V-Versorgung verbinden. |
-| `MIC_BIAS` | 1,4 | - | 2,8 | - | Mikrofon-Bias-Ausgang; mit der Mikrofonversorgung verbinden. |
+| `MIC_BIAS` | 1,4 | - | 2,8 | 2 | Mikrofon-Bias-Ausgang; mit der Mikrofonversorgung verbinden. |
 
 </div>
 
-!!! warning "VDDIOA-Konfiguration des SF32LB57ZUN3N6"
-    `SF32LB57ZUN3N6` unterstützt an `VDDIOA` 1,8 V oder 3,3 V. Der Bereich von 2,97 V bis 3,63 V aus der allgemeinen QFN68L-Tabelle für 3,3-V-Versorgung gilt nicht für den 1,8-V-Betrieb. Prüfen Sie vor der Auswahl der 1,8-V-Versorgung die elektrischen Grenzwerte der genauen Teilenummer.
+!!! note "VDDIOA-Spannung und Flash-Takt"
+    `SF32LB57ZUN3N6` unterstützt 1,8 V oder 3,3 V an `VDDIOA`; die geltenden Grenzen sind anhand der Bestellnummer zu prüfen. Für QFN68L-Varianten mit 3,3-V-Versorgung schreibt SiFli bei 1,8 V an `VDDIOA` einen internen Flash-Lese-/Schreibtakt unter 80 MHz vor. Bei 3,3 V kann die Standardeinstellung 104 MHz verwendet werden.
 
 !!! note
-    `PVDD`, `AVDD33`, `AVDD_BRF`, `AVDD33_AUD` und `VDDIOA` sind alle mit derselben externen 3,3-V-Schiene verbunden. Verwenden Sie sternförmiges Routing: Führen Sie die Leitung jedes Pins unabhängig von der Quelle heraus, statt ein gemeinsames vorgelagertes Leitungssegment zu teilen.
+    Versorgen Sie `PVDD`, `AVDD33`, `AVDD_BRF` und `AVDD33_AUD` mit externen 3,3 V über unabhängige sternförmige Zweige. Wählen Sie für `VDDIOA` je nach genauer Bestellnummer 1,8 V oder 3,3 V; eine 3,3-V-Hauptversorgung erfordert keine 3,3-V-I/O-Versorgung.
 
 <div align="center"><em>Tabelle 5.2-13: Versorgungspin-Referenz QFN80L, akkubetriebene Variante</em></div>
 
@@ -535,29 +541,27 @@ Verwenden Sie diese Tabellen für die pinweise Schaltplanprüfung. Jede Tabelle 
 
 | Versorgungspin | Min. (V) | Typ. (V) | Max. (V) | Max. Strom (mA) | Beschreibung |
 |:---|:---|:---|:---|:---|:---|
-| `VDDIOA` | 2,97 | 3,3 | 3,63 | 100 | GPIO-Versorgungseingang; mit einer externen 3,3-V-Versorgung verbinden. |
+| `VDDIOA` | 1,62 | 1,8 / 3,3 | 3,63 | 100 | GPIO-Versorgungseingang; gemäß genauer Bestellnummer an 1,8 V oder 3,3 V anschließen. |
 | `VBATS` | 0 | - | 4,7 | 1 | Akkuspannungs-Messeingang; ein interner GPADC-Kanal misst an diesem Pin die Akkuspannung. |
-| `VSYS` | - | 3,0 | - | 150 | Interner 3,0-V-Versorgungsausgang; externen Kondensator gegen Masse hinzufügen. Versorgt `AVDD_BRF`. |
-| `BUCK_LX` | - | 1,25 | - | 50 | BUCK-Induktivitäts-Schaltknoten; ein Ende der Induktivität anschließen. |
+| `VSYS` | - | 3,3 | - | 150 | Interner 3,0-V-Versorgungsausgang; externen Kondensator gegen Masse hinzufügen. Versorgt `AVDD_BRF`. |
+| `BUCK_LX` | - | 3,3 | - | 50 | BUCK-Induktivitäts-Schaltknoten; ein Ende der Induktivität anschließen. |
 | `BUCK_FB` | - | 1,25 | - | 50 | BUCK-Feedback; das andere Ende der Induktivität und einen Kondensator gegen Masse anschließen. |
 | `VDD_VOUT1` | - | 1,1 | - | 50 | Interner LDO-Ausgang; nur interne Versorgung, keine externen Peripheriegeräte versorgen. |
 | `VDD_VOUT2` | - | 0,9 | - | 20 | Interner LDO-Ausgang; nur interne Versorgung, keine externen Peripheriegeräte versorgen. |
 | `VDD_RET` | - | 0,9 | - | 1 | Interner LDO-Ausgang; nur interne Versorgung, keine externen Peripheriegeräte versorgen. |
 | `VDD_RTC` | - | 1,1 | - | 1 | Interner LDO-Ausgang; nur interne Versorgung, keine externen Peripheriegeräte versorgen. |
 | `AVDD33` | 2,97 | 3,3 | 3,63 | 20 | Analogversorgungseingang; mit einer externen 3,3-V-Versorgung verbinden. |
-| `VCC` | 3,45 | - | 4,7 | 400 | System-Versorgungseingang; mit dem Akku verbinden. Die Hardware-Einschaltschwelle beträgt 3,45 V, die Hardware-Abschaltschwelle 2,7 V. Der standardmäßige Software-Schwellenwert für niedrigen Akkustand beträgt 3,48 V. Für eine konstante Versorgung am Labornetzteil 3,6 V bis 4,7 V verwenden; 3,8 V werden empfohlen. |
+| `VCC` | 3,0 | - | 4,7 | 200 | Systemversorgungseingang; an den Akku anschließen. Die Tabellenfußnoten nennen 3,5 V ±10 % zum Einschalten und 3,48 V als standardmäßige Software-Unterspannungsschwelle. Bei Konstantspannungsversorgung 3,6–4,7 V verwenden, vorzugsweise 3,8 V; Abweichungen zur Checkliste siehe Warnhinweis. |
 | `VDD18_VOUT` | - | 1,8 | - | 30 | 1,8-V-LDO-Ausgang; nur interne Versorgung, keine externen Peripheriegeräte versorgen. |
-| `VDDIOSB` | - | 1,8 / 3,3 | - | 30 | SIP-SB-I/O-Versorgungseingang; die Spannung hängt von der genauen Teilenummer ab. Bei auf MPI2 oder MPI3 integriertem PSRAM diesen Pin mit `VDD18_VOUT` (1,8 V) verbinden; bei integriertem NOR-Flash diesen Pin extern mit 3,3 V versorgen. |
+| `VDD33_VOUT1` | - | 3,3 | - | 150 | 3,3-V-LDO-Ausgang 1; Kondensator gegen Masse hinzufügen. 150 mA Lastfähigkeit nach dem Hochfahren; standardmäßig aktiviert. Der Softstart-Laststrom darf 30 mA nicht überschreiten, sonst kann der LDO nicht starten. Versorgt im Gehäuse integriertes und externes Flash sowie `AVDD33_AUD`. |
 | `GPADC_VREF` | - | - | - | - | GPADC-Referenzeingang; nur Kondensator gegen Masse hinzufügen, nicht extern ansteuern. |
 | `AVDD_BRF` | 2,97 | 3,3 | 3,63 | 100 | RF-Versorgungseingang; mit `VSYS` verbinden. |
 | `AUD_VREF` | - | - | - | - | Audio-Referenzspannungseingang; nur Kondensator gegen Masse hinzufügen, nicht extern ansteuern. |
 | `AVDD33_AUD` | 2,97 | 3,3 | 3,63 | 50 | Audio-Versorgungseingang; mit `VDD33_VOUT1` verbinden. |
-| `MIC_BIAS` | 1,4 | - | 2,8 | - | Mikrofon-Bias-Ausgang; mit der Mikrofonversorgung verbinden. |
+| `MIC_BIAS` | 1,4 | - | 2,8 | 2 | Mikrofon-Bias-Ausgang; mit der Mikrofonversorgung verbinden. |
 
 </div>
 
-!!! warning "Widerspruch in der QFN80L-Versorgungstabelle der Quelle"
-    Die Pinbelegungsabbildung für das akkubetriebene QFN80L im Überblick kennzeichnet einen Pin als `VDD33_VOUT1`, während die QFN80L-Akkuversorgungstabelle von SiFli `VDDIOSB` aufführt und die Zuordnung der beiden Bezeichnungen nicht erklärt. Außerdem führt diese Tabelle `VDD33_VOUT1` und `VDD33_VOUT2` nicht auf. Das allgemeine Versorgungsdiagramm zeigt jedoch beide Schienen, und dieselbe Gehäusetabelle nennt `AVDD33_AUD`, das von `VDD33_VOUT1` versorgt wird. Die Quelle klärt nicht, ob diese Ausgänge bei diesem Gehäuse extern zugänglich sind. Prüfen Sie vor der Zuweisung dieser Schienen oder Pins das Pinout der konkreten Teilenummer und den offiziellen Referenzschaltplan.
 
 <div align="center"><em>Tabelle 5.2-14: Versorgungspin-Referenz QFN80L, 3,3-V-Versorgungsvariante</em></div>
 
@@ -565,28 +569,28 @@ Verwenden Sie diese Tabellen für die pinweise Schaltplanprüfung. Jede Tabelle 
 
 | Versorgungspin | Min. (V) | Typ. (V) | Max. (V) | Max. Strom (mA) | Beschreibung |
 |:---|:---|:---|:---|:---|:---|
-| `VDDIOA` | 2,97 | 3,3 | 3,63 | 100 | GPIO-Versorgungseingang; mit einer externen 3,3-V-Versorgung verbinden. |
+| `VDDIOA` | 1,62 | 3,3 | 3,63 | 100 | GPIO-Versorgungseingang; gemäß genauer Bestellnummer an 1,8 V oder 3,3 V anschließen. |
 | `VBATS` | 0 | - | 4,7 | 1 | Akkuspannungs-Messeingang; ein interner GPADC-Kanal misst an diesem Pin die Akkuspannung. |
-| `BUCK_LX` | - | 1,25 | - | 50 | BUCK-Induktivitäts-Schaltknoten; ein Ende der Induktivität anschließen. |
+| `BUCK_LX` | - | 3,3 | - | 50 | BUCK-Induktivitäts-Schaltknoten; ein Ende der Induktivität anschließen. |
 | `BUCK_FB` | - | 1,25 | - | 50 | BUCK-Feedback; das andere Ende der Induktivität und einen Kondensator gegen Masse anschließen. |
 | `VDD_VOUT1` | - | 1,1 | - | 50 | Interner LDO-Ausgang; nur interne Versorgung, keine externen Peripheriegeräte versorgen. |
 | `VDD_VOUT2` | - | 0,9 | - | 20 | Interner LDO-Ausgang; nur interne Versorgung, keine externen Peripheriegeräte versorgen. |
 | `VDD_RET` | - | 0,9 | - | 1 | Interner LDO-Ausgang; nur interne Versorgung, keine externen Peripheriegeräte versorgen. |
 | `VDD_RTC` | - | 1,1 | - | 1 | Interner LDO-Ausgang; nur interne Versorgung, keine externen Peripheriegeräte versorgen. |
 | `AVDD33` | 2,97 | 3,3 | 3,63 | 20 | Analogversorgungseingang; mit einer externen 3,3-V-Versorgung verbinden. |
-| `PVDD` | 2,97 | 3,3 | 3,63 | 400 | PMU-Versorgungseingang; mit einer externen 3,3-V-Versorgung verbinden. |
+| `PVDD` | 2,97 | 3,3 | 3,63 | 200 | PMU-Versorgungseingang; mit einer externen 3,3-V-Versorgung verbinden. |
 | `VDD18_VOUT` | - | 1,8 | - | 30 | 1,8-V-LDO-Ausgang; nur interne Versorgung, keine externen Peripheriegeräte versorgen. |
 | `VDDIOSB` | - | 1,8 / 3,3 | - | 30 | SIP-SB-IO-Versorgungseingang; die Spannung hängt von der genauen Teilenummer ab. Ist PSRAM auf MPI2/MPI3 im Gehäuse integriert, diesen Pin mit `VDD18_VOUT` (1,8 V) verbinden. Ist NOR-Flash integriert, den Pin extern mit 3,3 V versorgen. |
 | `GPADC_VREF` | - | - | - | - | GPADC-Referenzeingang; nur Kondensator gegen Masse hinzufügen, nicht extern ansteuern. |
 | `AVDD_BRF` | 2,97 | 3,3 | 3,63 | 100 | RF-Versorgungseingang; mit einer externen 3,3-V-Versorgung verbinden. |
 | `AUD_VREF` | - | - | - | - | Audio-Referenzspannungseingang; nur Kondensator gegen Masse hinzufügen, nicht extern ansteuern. |
 | `AVDD33_AUD` | 2,97 | 3,3 | 3,63 | 50 | Audio-Versorgungseingang; mit einer externen 3,3-V-Versorgung verbinden. |
-| `MIC_BIAS` | 1,4 | - | 2,8 | - | Mikrofon-Bias-Ausgang; mit der Mikrofonversorgung verbinden. |
+| `MIC_BIAS` | 1,4 | - | 2,8 | 2 | Mikrofon-Bias-Ausgang; mit der Mikrofonversorgung verbinden. |
 
 </div>
 
 !!! note
-    `PVDD`, `AVDD33`, `AVDD_BRF`, `AVDD33_AUD` und `VDDIOA` sind alle mit derselben externen 3,3-V-Schiene verbunden. Verwenden Sie sternförmiges Routing: Führen Sie die Leitung jedes Pins unabhängig von der Quelle heraus, statt ein gemeinsames vorgelagertes Leitungssegment zu teilen.
+    Versorgen Sie `PVDD`, `AVDD33`, `AVDD_BRF` und `AVDD33_AUD` mit externen 3,3 V über unabhängige sternförmige Zweige. Wählen Sie für `VDDIOA` je nach genauer Bestellnummer 1,8 V oder 3,3 V; eine 3,3-V-Hauptversorgung erfordert keine 3,3-V-I/O-Versorgung.
 
 <!-- BGA-ONLY -->
 <div align="center"><em>Tabelle 5.2-15: Versorgungspin-Referenz für die akkubetriebene BGA112-Variante</em></div>
@@ -595,22 +599,22 @@ Verwenden Sie diese Tabellen für die pinweise Schaltplanprüfung. Jede Tabelle 
 
 | Versorgungspin | Min. (V) | Typ. (V) | Max. (V) | Max. Strom (mA) | Beschreibung |
 |:---|:---|:---|:---|:---|:---|
-| `VBUS` | 4,6 | 5,0 | 5,5 | 400 | VBUS-Versorgungseingang; versorgt das interne Lademodul. |
-| `VBAT` | 3,45 | - | 4,7 | 400 | Akkuanschluss; ein interner GPADC-Kanal misst an diesem Pin ebenfalls die Akkuspannung. |
-| `VSYS` | - | 3,0 | - | 150 | Interner 3,0-V-Versorgungsausgang; externen Kondensator gegen Masse hinzufügen. Versorgt `AVDD_BRF`. |
-| `BUCK_LX` | - | 1,25 | - | 50 | BUCK-Induktivitäts-Schaltknoten; ein Ende der Induktivität anschließen. |
+| `VBUS` | 4,5 | 5,0 | 5,5 | 400 | VBUS-Versorgungseingang; versorgt das interne Lademodul. |
+| `VBAT` | 3,0 | - | 4,7 | 400 | Akkuanschluss; ein interner GPADC-Kanal misst an diesem Pin ebenfalls die Akkuspannung. |
+| `VSYS` | - | 3,3 | - | 150 | Interner 3,0-V-Versorgungsausgang; externen Kondensator gegen Masse hinzufügen. Versorgt `AVDD_BRF`. |
+| `BUCK_LX` | - | 3,3 | - | 50 | BUCK-Induktivitäts-Schaltknoten; ein Ende der Induktivität anschließen. |
 | `BUCK_FB` | - | 1,25 | - | 50 | BUCK-Feedback; das andere Ende der Induktivität und einen Kondensator gegen Masse anschließen. |
 | `VDD_VOUT1` | - | 1,1 | - | 50 | Interner LDO-Ausgang; externen Kondensator hinzufügen. Nur interne Versorgung. |
 | `VDD_VOUT2` | - | 0,9 | - | 20 | Interner LDO-Ausgang; externen Kondensator hinzufügen. Nur interne Versorgung. |
 | `VDD_RET` | - | 0,9 | - | 1 | Interner LDO-Ausgang; externen Kondensator hinzufügen. Nur interne Versorgung. |
 | `VDD_RTC` | - | 1,1 | - | 1 | Interner LDO-Ausgang; externen Kondensator hinzufügen. Nur interne Versorgung. |
-| `VCC` | 3,45 | - | 4,7 | 400 | System-Versorgungseingang; mit dem Akku verbinden. Der standardmäßige Software-Schwellenwert für niedrigen Akkustand beträgt 3,48 V. Für eine konstante Versorgung am Labornetzteil 3,6–4,7 V verwenden; 3,8 V werden empfohlen. |
+| `VCC` | 3,0 | - | 4,7 | 200 | Systemversorgungseingang; an den Akku anschließen. Die Tabellenfußnoten nennen 3,5 V ±10 % zum Einschalten und 3,48 V als standardmäßige Software-Unterspannungsschwelle. Bei Konstantspannungsversorgung 3,6–4,7 V verwenden, vorzugsweise 3,8 V; Abweichungen zur Checkliste siehe Warnhinweis. |
 | `VDD18_VOUT` | - | 1,8 | - | 30 | 1,8-V-LDO-Ausgang; nur interne Versorgung, Kondensator gegen Masse hinzufügen. |
 | `VDD33_VOUT1` | - | 3,3 | - | 150 | 3,3-V-LDO-Ausgang 1; standardmäßig aktiviert. Softstart-Last auf 30 mA begrenzen; nach dem Hochfahren sind bis zu 150 mA möglich. |
 | `VDD33_VOUT2` | - | 3,3 | - | 150 | 3,3-V-LDO-Ausgang 2; standardmäßig deaktiviert und per Software aktivierbar. Softstart-Last auf 30 mA begrenzen; nach dem Hochfahren sind bis zu 150 mA möglich. |
 | `PVSS_PMU` | - | - | - | - | PMU-Versorgungsmasse. |
 | `AVSS_PMU` | - | - | - | - | PMU-Analogmasse. |
-| `VDDIOA` | 2,97 | 1,8 / 3,3 | 3,63 | 100 | GPIO-Versorgungseingang; je nach genauer Teilenummer mit 1,8 V oder 3,3 V verbinden. |
+| `VDDIOA` | 1,62 | 1,8 / 3,3 | 3,63 | 100 | GPIO-Versorgungseingang; gemäß genauer Bestellnummer an 1,8 V oder 3,3 V anschließen. |
 | `VDDIOSA` | - | 1,8 | - | 30 | IO-Versorgungseingang für den gehäuseintegrierten Speicher; mit `VDD18_VOUT` verbinden. |
 | `VDDIOSB` | - | 1,8 / 3,3 | - | 30 | I/O-Versorgungseingang für den gehäuseintegrierten Speicher; die Spannung hängt von der genauen Teilenummer ab. Bei integriertem PSRAM mit `VDD18_VOUT` (1,8 V) verbinden; bei integriertem NOR-Flash mit `VDD33_VOUT1` (3,3 V) verbinden. |
 | `AVDD33_ANA` | 2,97 | 3,3 | 3,63 | 20 | Analogversorgungseingang; mit 3,3 V verbinden. |
@@ -623,7 +627,7 @@ Verwenden Sie diese Tabellen für die pinweise Schaltplanprüfung. Jede Tabelle 
 | `AUD_VREF_GND` | - | - | - | - | Audiomasse. |
 | `AVDD33_AUD` | 2,97 | 3,3 | 3,63 | 50 | Audio-Versorgungseingang; mit `VDD33_VOUT1` verbinden. |
 | `AVSS33_AUD` | - | - | - | - | Audiomasse. |
-| `MIC_BIAS` | 1,4 | - | 2,8 | - | Mikrofon-Bias-Ausgang; mit der Mikrofonversorgung verbinden. |
+| `MIC_BIAS` | 1,4 | - | 2,8 | 2 | Mikrofon-Bias-Ausgang; mit der Mikrofonversorgung verbinden. |
 
 </div>
 
@@ -634,17 +638,17 @@ Verwenden Sie diese Tabellen für die pinweise Schaltplanprüfung. Jede Tabelle 
 | Versorgungspin | Min. (V) | Typ. (V) | Max. (V) | Max. Strom (mA) | Beschreibung |
 |:---|:---|:---|:---|:---|:---|
 | `VBATS` | 0 | - | 4,7 | 1 | Eingang zur Akkuspannungsmessung; ein interner GPADC-Kanal misst hier die Akkuspannung. |
-| `BUCK_LX` | - | 1,25 | - | 50 | BUCK-Induktivitäts-Schaltknoten; ein Ende der Induktivität anschließen. |
+| `BUCK_LX` | - | 3,3 | - | 50 | BUCK-Induktivitäts-Schaltknoten; ein Ende der Induktivität anschließen. |
 | `BUCK_FB` | - | 1,25 | - | 50 | BUCK-Feedback; das andere Ende der Induktivität und einen Kondensator gegen Masse anschließen. |
 | `VDD_VOUT1` | - | 1,1 | - | 50 | Interner LDO-Ausgang; externen Kondensator hinzufügen. Nur interne Versorgung. |
 | `VDD_VOUT2` | - | 0,9 | - | 20 | Interner LDO-Ausgang; externen Kondensator hinzufügen. Nur interne Versorgung. |
 | `VDD_RET` | - | 0,9 | - | 1 | Interner LDO-Ausgang; externen Kondensator hinzufügen. Nur interne Versorgung. |
 | `VDD_RTC` | - | 1,1 | - | 1 | Interner LDO-Ausgang; externen Kondensator hinzufügen. Nur interne Versorgung. |
-| `PVDD_PMU` | 2,97 | 3,3 | 3,63 | 400 | PMU-Versorgungseingang; mit einer externen 3,3-V-Versorgung verbinden. |
+| `PVDD_PMU` | 2,97 | 3,3 | 3,63 | 200 | PMU-Versorgungseingang; mit einer externen 3,3-V-Versorgung verbinden. |
 | `VDD18_VOUT` | - | 1,8 | - | 30 | 1,8-V-LDO-Ausgang; nur interne Versorgung, Kondensator gegen Masse hinzufügen. |
 | `PVSS_PMU` | - | - | - | - | PMU-Versorgungsmasse. |
 | `AVSS_PMU` | - | - | - | - | PMU-Analogmasse. |
-| `VDDIOA` | 2,97 | 1,8 / 3,3 | 3,63 | 100 | GPIO-Versorgungseingang; je nach genauer Teilenummer mit 1,8 V oder 3,3 V verbinden. |
+| `VDDIOA` | 1,62 | 1,8 / 3,3 | 3,63 | 100 | GPIO-Versorgungseingang; gemäß genauer Bestellnummer an 1,8 V oder 3,3 V anschließen. |
 | `VDDIOSA` | - | 1,8 | - | 30 | IO-Versorgungseingang für den gehäuseintegrierten Speicher; mit `VDD18_VOUT` verbinden. |
 | `VDDIOSB` | - | 1,8 / 3,3 | - | 30 | I/O-Versorgungseingang für den gehäuseintegrierten Speicher; die Spannung hängt von der genauen Teilenummer ab. Bei integriertem PSRAM mit `VDD18_VOUT` (1,8 V) verbinden; bei integriertem NOR-Flash diesen Pin extern mit 3,3 V versorgen. |
 | `AVDD33_ANA` | 2,97 | 3,3 | 3,63 | 20 | Analogversorgungseingang; mit 3,3 V verbinden. |
@@ -657,12 +661,10 @@ Verwenden Sie diese Tabellen für die pinweise Schaltplanprüfung. Jede Tabelle 
 | `AUD_VREF_GND` | - | - | - | - | Audiomasse. |
 | `AVDD33_AUD` | 2,97 | 3,3 | 3,63 | 50 | Audio-Versorgungseingang; mit einer externen 3,3-V-Versorgung verbinden. |
 | `AVSS33_AUD` | - | - | - | - | Audiomasse. |
-| `MIC_BIAS` | 1,4 | - | 2,8 | - | Mikrofon-Bias-Ausgang; mit der Mikrofonversorgung verbinden. |
+| `MIC_BIAS` | 1,4 | - | 2,8 | 2 | Mikrofon-Bias-Ausgang; mit der Mikrofonversorgung verbinden. |
 
 </div>
 
-!!! warning "VDDIOA-Spannungsbereich bei BGA112"
-    Die Quelltabelle von SiFli nennt für `VDDIOA` eine Mindestspannung von 2,97 V, einen typischen Wert von 1,8 V / 3,3 V und eine Höchstspannung von 3,63 V. Die 1,8-V-Option passt nicht zur angegebenen Mindestspannung. Prüfen Sie die elektrischen Daten für die genaue bestellbare Teilenummer; wenden Sie die Grenzen 2,97–3,63 V nicht ohne Bestätigung auf eine 1,8-V-Konfiguration an.
 
 <!-- /BGA-ONLY -->
 

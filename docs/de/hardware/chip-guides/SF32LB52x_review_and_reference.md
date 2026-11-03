@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52x Hardware-Design-Leitfaden — Design-Review-Checkliste und Referenzen"
 icon: lucide/clipboard-check
 hide:
     - navigation

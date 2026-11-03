@@ -1,4 +1,5 @@
 ---
+title: "Guía de diseño de hardware SF32LB57x — Lista de comprobación del diseño de PCB"
 icon: lucide/list-checks
 hide:
     - navigation
@@ -53,9 +54,8 @@ La mayoría de las reglas de diseño siguientes se aplican a todas las variantes
 
 !!! warning "Conflictos de alimentación sin resolver en la fuente"
     - **Etiquetas de la lista:** El elemento 44 de la tabla original de autocomprobación 4-2-1-1 (variantes con alimentación por batería) exige `VCC` ≥ 12 mil. Los elementos 45 y 46 exigen al menos 10 mil para `VDD33_VOUT1` y `VDD33_VOUT2`, respectivamente, pero el título del elemento 46 repite `VDD33_VOUT1` mientras que el detalle indica `VDD33_VOUT2`. El elemento 47 (variantes de 3,3 V) titula `PVDD`, pero su detalle exige `VCC` ≥ 12 mil. Esta página transcribe los valores y detalles indicados sin resolver las discrepancias de la fuente.
-    - **Ancho de pista:** El apartado 3.2.1 de la guía PCB original exige al menos 0,4 mm (unos 15,7 mil) para `VCC` y `PVDD`; los elementos 44 (variantes con alimentación por batería) y 47 (variantes de 3,3 V) de la tabla 4-2-1-1 exigen `VCC` ≥ 12 mil. La fuente no explica cómo conciliar estos requisitos según la variante ni si para el elemento 47 debe prevalecer el título `PVDD` o el detalle `VCC`. No infiera un valor corregido ni elija una referencia como requisito definitivo sin confirmarlo con SiFli.
-    - **Nombres de salida:** El apartado 3.2.1 de la guía PCB original usa `VDD_VOUT1` / `VDD_VOUT2`, mientras que los elementos 45/46 de la tabla de autocomprobación 4-2-1-1 usan `VDD33_VOUT1` / `VDD33_VOUT2`. La fuente no aclara si los nombres son alias o redes distintas.
-    Antes de cerrar el diseño, obtenga la confirmación de SiFli sobre las etiquetas previstas, los raíles de destino, las variantes de alimentación a las que se aplica cada requisito y los anchos de pista. Sin esa confirmación, no asigne las etiquetas contradictorias a redes concretas, no trate los nombres como equivalentes ni elija entre 12 mil y 0,4 mm.
+    - **Ancho de pista:** El apartado 3.2.1 de la guía original de diseño de PCB exige al menos 0,4 mm (unos 15,7 mil) para `VCC` y `PVDD`; los elementos 44 (variantes alimentadas por batería) y 47 (variantes de 3,3 V) de la tabla 4-2-1-1 exigen `VCC` ≥ 12 mil. La fuente no explica cómo conciliar estos requisitos según la variante ni si para el elemento 47 debe prevalecer el título `PVDD` o el detalle `VCC`. No infiera un valor corregido ni tome ninguna de las referencias como requisito definitivo sin confirmarlo con SiFli.
+    Antes de cerrar el diseño, confirme con SiFli las etiquetas previstas, los raíles de destino, las variantes de alimentación a las que se aplica cada requisito y los anchos de pista. Hasta obtener esa confirmación, no asigne las etiquetas contradictorias a redes concretas ni elija entre 12 mil y 0,4 mm.
 
 ### 6.10.3. Diseño de reloj { #6103-clock-layout }
 

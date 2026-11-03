@@ -1,4 +1,5 @@
 ---
+title: "SF32LB57x - ハードウェア設計ガイド"
 icon: lucide/book-check
 hide:
     - navigation

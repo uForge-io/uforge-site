@@ -77,6 +77,8 @@ Choose SF32LB58x when the design needs one or more of these capabilities:
 
 ### Graphics, Display, and AI
 
+Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix).
+
 - ePicasso 2.0 2D/2.5D graphics accelerator
 - Vivante GCNanoUltraV vector graphics engine
 - eZip 2.0 lossless graphics-decompression accelerator
@@ -126,7 +128,7 @@ Choose SF32LB58x when the design needs one or more of these capabilities:
 
 ## Family Variants
 
-The current SiFli Chip Model Guide lists six SF32LB58x order codes, all in BGA256, with the co-packaged memory configurations shown below. Confirm the exact order code against the current datasheet and approved vendor list (AVL), because configurations and availability can change.
+The current SiFli Chip Model Guide lists three SF32LB58x order codes, all in BGA256, with the co-packaged memory configurations shown below. Confirm the exact order code against the current datasheet and approved vendor list (AVL), because configurations and availability can change.
 
 <div align="center"><em>SF32LB58x Order Codes and Co-Packaged Memory</em></div>
 
@@ -134,10 +136,7 @@ The current SiFli Chip Model Guide lists six SF32LB58x order codes, all in BGA25
 
 | Part Number | Package | Co-Packaged Memory |
 | :--- | :--- | :--- |
-| SF32LB580VNN36 | BGA256 | 1 MB boot NOR Flash; no memory co-packaged on MPI1 or MPI2 |
-| SF32LB581VCN36 | BGA256 | 1 MB boot NOR Flash + 8 MB OPI-PSRAM on MPI1 |
 | SF32LB583VCC36 | BGA256 | 1 MB boot NOR Flash + 2 × 8 MB OPI-PSRAM on MPI1 and MPI2 |
-| SF32LB585V5E56 | BGA256 | 4 MB boot NOR Flash + 4 MB NOR Flash on MPI1 + 32 MB HPI-PSRAM on MPI2 |
 | SF32LB586VDD36 | BGA256 | 1 MB boot NOR Flash + 2 × 16 MB HPI-PSRAM on MPI1 and MPI2 |
 | SF32LB587VEE56 | BGA256 | 4 MB boot NOR Flash + 2 × 32 MB HPI-PSRAM on MPI1 and MPI2 |
 
@@ -163,16 +162,19 @@ Use this sequence to turn an SF32LB58x shortlist into a validated design:
 ## Frequently Asked Questions
 
 **What are the key specifications of SF32LB58x?**
-SF32LB58x pairs an application CPU (2× Cortex-M33 @240 MHz) with a low-power core (Cortex-M33 @48/96 MHz, a user-programmable core), 3.7 MB of internal SRAM and dual-mode Bluetooth (BT Classic + BLE). Graphics: ePicasso 2.0 + Vivante GCNanoUltraV (vector). Package: BGA256 (8.5 × 6.5 mm). USB 2.0 HS. Family-level values; verify the exact part number's datasheet.
+SF32LB58x pairs an application CPU (2× Cortex-M33 @240 MHz) with a low-power core (Cortex-M33 @48/96 MHz, a user-programmable core), 3.7 MB of internal SRAM and dual-mode Bluetooth (BT Classic + BLE). Graphics: ePicasso 2.0 + Vivante GCNanoUltraV (vector). Package: BGA256 (8.5 × 6.5 mm). USB 2.0 HS.
 
 **Which display interfaces does SF32LB58x support?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. Availability varies by part number and package.
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+
+**What is the maximum display resolution of SF32LB58x?**
+Up to 1280 × 800 with RGB565 color, or up to 1280 × 720 with RGB888 color, through MIPI-DSI. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
 **How much in-package memory does SF32LB58x offer?**
-Up to 32 MB + 32 MB of in-package PSRAM and up to 8 MB of in-package NOR Flash, depending on the part number.
+Up to 32 MB + 32 MB of in-package PSRAM and up to 8 MB of in-package NOR Flash.
 
 **What supply voltage does SF32LB58x need?**
-1.71–3.63 V, depending on the variant. Confirm the exact range in the datasheet.
+1.71–3.63 V.
 
 **Where do I start a hardware design with SF32LB58x?**
 Start with the [SF32LB58x hardware design guide](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md) for schematic, power, clock/RF and PCB layout guidance, then use the schematic and layout checklists before releasing the board.

@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58x Hardware Design Guide — PCB Layout Checklist"
 icon: lucide/list-checks
 hide:
     - navigation

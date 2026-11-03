@@ -1,4 +1,5 @@
 ---
+title: "SF32LB57x Hardware Design Guide — PCB Layout Checklist"
 icon: lucide/list-checks
 hide:
     - navigation
@@ -54,8 +55,7 @@ Most layout rules below apply to all SF32LB57x variants; the Applies To column n
 !!! warning "Unresolved conflicts in the source power-routing guidance"
     - **Checklist labels:** Original self-check Table 4-2-1-1 item 44 (battery-powered variants) specifies `VCC` at at least 12 mil. Items 45 and 46 each specify at least 10 mil for `VDD33_VOUT1` and `VDD33_VOUT2`, respectively, but item 46's title repeats `VDD33_VOUT1` while its check detail names `VDD33_VOUT2`. Item 47 (3.3 V-powered variants) is titled `PVDD`, while its check detail specifies `VCC` at at least 12 mil. This page transcribes the listed values and details without resolving either source-label mismatch.
     - **Trace width:** Original PCB guide Section 3.2.1 specifies at least 0.4 mm (about 15.7 mil) for both `VCC` and `PVDD`. This differs from the 12 mil `VCC` requirements in self-check Table 4-2-1-1 items 44 (battery-powered variants) and 47 (3.3 V-powered variants); item 47 also conflicts between its `PVDD` title and `VCC` check detail. The source does not explain how these references should be reconciled across supply variants. Do not infer a corrected value or apply either entry as controlling without confirmation.
-    - **Output names:** Original PCB guide Section 3.2.1 uses `VDD_VOUT1` / `VDD_VOUT2`; self-check Table 4-2-1-1, items 45/46, uses `VDD33_VOUT1` / `VDD33_VOUT2`. The source does not say whether these names are aliases or different nets.
-    Before finalizing the design, obtain SiFli confirmation of the intended labels, target rails, applicable supply-variant scope, and trace widths. Do not assign the conflicting checklist labels to nets, treat the output-name variants as equivalent, or choose between 12 mil and 0.4 mm without that confirmation.
+    Before finalizing the design, obtain SiFli confirmation of the intended labels, target rails, applicable supply-variant scope, and trace widths. Do not assign the conflicting checklist labels to nets, or choose between 12 mil and 0.4 mm without that confirmation.
 
 ### 6.10.3. Clock Layout { #6103-clock-layout }
 

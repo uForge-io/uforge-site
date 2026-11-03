@@ -1,5 +1,6 @@
 ---
 icon: lucide/package
+title: "SiFli-SDK 플랫폼 개요"
 description: "SF32 개발의 레퍼런스 경로인 SiFli-SDK를 다룹니다. 핵심 scons 빌드와 sdk.py menuconfig 워크플로, 보드 이름, 프로젝트 구조, 양산 준비 점검 질문을 설명합니다."
 tags:
     - 개발

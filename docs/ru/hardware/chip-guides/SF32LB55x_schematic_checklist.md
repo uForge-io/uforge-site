@@ -1,4 +1,5 @@
 ---
+title: "Руководство по аппаратной разработке SF32LB55x — контрольный список схемы"
 icon: lucide/list-checks
 hide:
     - navigation
@@ -9,7 +10,7 @@ tags:
     - Checklist
 ---
 
-# SF32LB55x — Контрольный список для схемы { #sf32lb55x-hardware-design-guide-schematic-checklist }
+# Руководство по аппаратной разработке SF32LB55x — контрольный список схемы { #sf32lb55x-hardware-design-guide-schematic-checklist }
 
 ## 5.8. Контрольный список для схемы { #58-schematic-checklist }
 

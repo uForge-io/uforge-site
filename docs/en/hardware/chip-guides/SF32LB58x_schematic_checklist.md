@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58x Hardware Design Guide — Schematic Checklist"
 icon: lucide/list-checks
 description: "Item-by-item schematic review checklist for the SF32LB58x MCU, covering power, clock, RF, storage, display, and manufacturing checks."
 tags:

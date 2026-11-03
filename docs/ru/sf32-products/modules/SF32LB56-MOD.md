@@ -61,6 +61,61 @@ SiFli указывает для SF32LB56-MOD следующие области �
 
 ## Возможности и характеристики { #features-and-specifications }
 
+### Регуляторная маркировка { #regulatory-markings }
+
+Предоставленные макеты этикеток SiFli для **SF32LB56-MOD-N16R12N1** и **SF32LB56-MOD-A128R12N1** содержат следующие идентификаторы и знак CE.
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 780px; margin: 1rem auto;">
+<figure style="margin: 0;">
+<a href="assets/SF32LB56-MOD/N16R12N1-label.jpg"><img src="assets/SF32LB56-MOD/N16R12N1-label.jpg" alt="SF32LB56-MOD-N16R12N1" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB56-MOD-N16R12N1</figcaption>
+</figure>
+<figure style="margin: 0;">
+<a href="assets/SF32LB56-MOD/A128R12N1-label.jpg"><img src="assets/SF32LB56-MOD/A128R12N1-label.jpg" alt="SF32LB56-MOD-A128R12N1" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB56-MOD-A128R12N1</figcaption>
+</figure>
+</div>
+
+<div align="center" markdown>
+
+*Маркировка на предоставленных этикетках SF32LB56-MOD*
+
+| Поле | Напечатанное значение |
+| --- | --- |
+| Варианты на этикетках | `SF32LB56-MOD-N16R12N1`, `SF32LB56-MOD-A128R12N1` |
+| FCC | `2BVUV-SF32LB56` |
+| IC | `35666-SF32LB56` |
+| CMIIT ID | `25J3260UM187` |
+| HVIN | `SF32LB56` |
+| Знак CE | Присутствует на обеих этикетках |
+
+</div>
+
+Эти сведения перенесены с предоставленных этикеток; они не являются независимой проверкой сертификационных записей или декларации соответствия. Уточните у SiFli документы об одобрении, условия применения антенны и инструкции по интеграции для конкретной ревизии модуля. Не распространяйте эти обозначения на другие варианты без подтверждающих документов. Маркировка модуля не подтверждает соответствие конечного изделия требованиям.
+
+### Интерфейсы хранения данных и варианты модуля { #storage-interfaces-and-module-variants }
+
+<span id="memory-and-module-variants"></span>
+
+<div align="center"><em>Варианты модуля SF32LB56-MOD</em></div>
+
+<div align="center" markdown>
+
+| Код модуля | Накопитель (по SKU) | PSRAM | Стандартная флеш-память | Температура | Размеры |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| SF32LB56-MOD-N16R12N1 | 16 MB QSPI-NOR | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40…+85 °C | 18,0 × 32,9 × 3,1 mm |
+| SF32LB56-MOD-A128R12N1 | 128 MB QSPI-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40…+85 °C | 18,0 × 32,9 × 3,1 mm |
+| SF32LB56-MOD-D128R12N1 | 128 MB SD-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40…+85 °C | 18,0 × 32,9 × 3,1 mm |
+
+</div>
+
+!!! note "Заказные конфигурации"
+    Чтобы обсудить другие конфигурации модуля или индивидуальные требования, [свяжитесь с μForge.io](../../about/contact.md).
+
+В [руководстве SiFli по моделям модулей](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) перечислены эти три конфигурации и указано, что другие варианты можно изготовить по индивидуальному заказу. Перед выбором уточните у SiFli актуальную доступность SKU и конфигурацию памяти.
+
+SiFli указывает стандартную конфигурацию SF32LB566VCB36 с 4 MB + 8 MB OPI-PSRAM и 1 MB QSPI-NOR; по памяти она соответствует N16R12N1. В руководстве по моделям не указан номер микросхемы для A128R12N1 и D128R12N1. Уточните у SiFli точный номер для этих SKU.
+
 ### Вычисления и память { #compute-and-memory }
 
 - HCPU: Arm Cortex-M33 STAR-MC1, частота до 240 MHz, производительность до 370 DMIPS / 984 EEMBC CoreMark
@@ -95,24 +150,6 @@ SiFli указывает для SF32LB56-MOD следующие области �
 - Преобразование частоты дискретизации аудио и аппаратное ускорение эквалайзера (EQ)
 
 К каждому интерфейсу PDM можно подключить до двух цифровых микрофонов, поэтому оба интерфейса вместе поддерживают до четырёх микрофонов. Количество интерфейсов PDM не равно количеству микрофонов; фактическая схема подключения зависит от мультиплексирования выводов и разводки платы.
-
-### Память и варианты модуля { #memory-and-module-variants }
-
-<div align="center"><em>Конфигурации памяти SF32LB56-MOD</em></div>
-
-<div align="center" markdown>
-
-| Код модуля | Флеш-память по SKU | PSRAM | Стандартная флеш-память | Температура | Размеры |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB56-MOD-N16R12N1 | 16 MB QSPI-NOR | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40…+85 °C | 18,0 × 32,9 × 3,1 mm |
-| SF32LB56-MOD-A128R12N1 | 128 MB QSPI-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40…+85 °C | 18,0 × 32,9 × 3,1 mm |
-| SF32LB56-MOD-D128R12N1 | 128 MB SD-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40…+85 °C | 18,0 × 32,9 × 3,1 mm |
-
-</div>
-
-В [руководстве SiFli по моделям модулей](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) перечислены эти три конфигурации и указано, что другие варианты можно изготовить по индивидуальному заказу. Перед выбором уточните у SiFli актуальную доступность SKU и конфигурацию памяти.
-
-SiFli указывает стандартную конфигурацию SF32LB566VCB36 с 4 MB + 8 MB OPI-PSRAM и 1 MB QSPI-NOR; по памяти она соответствует N16R12N1. В руководстве по моделям не указан номер микросхемы для A128R12N1 и D128R12N1. Уточните у SiFli точный номер для этих SKU.
 
 ### Питание и ввод-вывод { #power-and-io }
 

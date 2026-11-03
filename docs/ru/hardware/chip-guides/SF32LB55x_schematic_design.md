@@ -1,4 +1,5 @@
 ---
+title: "Руководство по аппаратной разработке SF32LB55x — рекомендации по проектированию схемы"
 icon: lucide/circuit-board
 hide:
     - navigation
@@ -8,7 +9,7 @@ tags:
     - Микросхема
 ---
 
-# Руководство по проектированию аппаратуры SF32LB55x — разработка принципиальной схемы { #sf32lb55x-hardware-design-guide-schematic-design-guidelines }
+# Руководство по аппаратной разработке SF32LB55x — рекомендации по проектированию схемы { #sf32lb55x-hardware-design-guide-schematic-design-guidelines }
 
 ## 5. Рекомендации по разработке принципиальной схемы { #5-schematic-design-guidelines }
 

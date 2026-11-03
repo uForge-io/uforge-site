@@ -1,4 +1,5 @@
 ---
+title: "Guía de diseño de hardware SF32LB56x — Directrices de diseño de PCB"
 icon: lucide/layers
 description: "Directrices de diseño de PCB para la MCU SF32LB56x: huella, apilado de capas, trazado crítico y lista de comprobación punto por punto."
 tags:

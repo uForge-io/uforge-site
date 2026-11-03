@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle SF32LB52x — Recommandations d'implantation et de routage PCB"
 icon: lucide/layers
 hide:
     - navigation

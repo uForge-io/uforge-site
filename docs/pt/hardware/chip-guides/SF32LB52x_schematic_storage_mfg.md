@@ -1,4 +1,5 @@
 ---
+title: "Guia de projeto de hardware do SF32LB52x — armazenamento e fabricação"
 icon: lucide/circuit-board
 hide:
     - navigation

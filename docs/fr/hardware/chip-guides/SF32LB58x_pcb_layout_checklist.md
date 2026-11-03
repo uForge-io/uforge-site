@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle du SF32LB58x — Liste de contrôle d'implantation du PCB"
 icon: lucide/list-checks
 hide:
     - navigation

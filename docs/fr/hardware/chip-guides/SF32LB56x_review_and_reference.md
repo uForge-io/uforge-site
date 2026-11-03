@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle SF32LB56x — Liste de contrôle de la revue de conception et des références"
 icon: lucide/clipboard-check
 description: "Liste de contrôle de la revue de conception, documents et références connexes, annexes et historique des révisions du guide de conception matérielle SF32LB56x."
 tags:

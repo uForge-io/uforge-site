@@ -1,4 +1,5 @@
 ---
+title: "SF32LB57x Hardware-Design-Leitfaden — PCB-Layout-Checkliste"
 icon: lucide/list-checks
 hide:
     - navigation
@@ -54,8 +55,7 @@ Die meisten der folgenden Layoutregeln gelten für alle Varianten der SF32LB57x-
 !!! warning "Ungeklärte Konflikte bei Versorgungsnetzen in der Quelle"
     - **Bezeichnungen in der Checkliste:** Punkt 44 der originalen Selbstprüftabelle 4-2-1-1 gilt für akkubetriebene Varianten und verlangt `VCC` >= 12 mil. Die Punkte 45 und 46 verlangen jeweils mindestens 10 mil für `VDD33_VOUT1` beziehungsweise `VDD33_VOUT2`; der Titel von Punkt 46 wiederholt jedoch `VDD33_VOUT1`, während das Prüfdetail `VDD33_VOUT2` nennt. Punkt 47 gilt für 3,3-V-Varianten und trägt den Titel `PVDD`, nennt im Prüfdetail aber `VCC` >= 12 mil. Diese Tabelle übernimmt die aufgeführten Angaben, ohne die Quellenwidersprüche aufzulösen.
     - **Leiterbahnbreite:** Abschnitt 3.2.1 des originalen PCB-Leitfadens verlangt für `VCC` und `PVDD` jeweils mindestens 0,4 mm (ca. 15,7 mil); die Punkte 44 (akkubetriebene Varianten) und 47 (3,3-V-Varianten) der Selbstprüftabelle 4-2-1-1 verlangen `VCC` >= 12 mil. Die Quelle erklärt nicht, wie diese Anforderungen je nach Versorgungsvariante abzugleichen sind oder ob bei Punkt 47 der Titel `PVDD` oder das Prüfdetail `VCC` maßgeblich ist. Keinen korrigierten Wert ableiten und keinen der beiden Einträge ohne Bestätigung als verbindlich anwenden.
-    - **Ausgangsbezeichnungen:** Abschnitt 3.2.1 des originalen PCB-Leitfadens verwendet `VDD_VOUT1` / `VDD_VOUT2`, während die Punkte 45/46 der Selbstprüftabelle 4-2-1-1 `VDD33_VOUT1` / `VDD33_VOUT2` nennen. Die Quelle erklärt nicht, ob die Bezeichnungen Aliasnamen oder unterschiedliche Netze sind.
-    Vor der Designfreigabe von SiFli die beabsichtigten Bezeichnungen, Ziel-Versorgungsschienen, den Geltungsbereich der Versorgungsvarianten und die Leiterbahnbreiten bestätigen lassen. Ohne diese Bestätigung die widersprüchlichen Checklisten-Bezeichnungen keinen Netzen zuordnen, die Varianten der Ausgangsnamen nicht als gleichwertig behandeln und nicht zwischen 12 mil und 0,4 mm wählen.
+    Vor der Designfreigabe von SiFli die beabsichtigten Bezeichnungen, Ziel-Versorgungsschienen, den Geltungsbereich der Versorgungsvarianten und die Leiterbahnbreiten bestätigen lassen. Ohne diese Bestätigung die widersprüchlichen Checklisten-Bezeichnungen keinen Netzen zuordnen und nicht zwischen 12 mil und 0,4 mm wählen.
 
 ### 6.10.3. Takt-Layout { #6103-clock-layout }
 

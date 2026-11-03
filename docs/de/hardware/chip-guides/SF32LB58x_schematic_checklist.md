@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58x Hardware-Design-Leitfaden — Schaltplan-Checkliste"
 icon: lucide/list-checks
 description: "Checkliste zur systematischen Prüfung des SF32LB58x-Schaltplans mit Prüfpunkten zu Stromversorgung, Takt, RF, Speicher, Display und Fertigung."
 tags:

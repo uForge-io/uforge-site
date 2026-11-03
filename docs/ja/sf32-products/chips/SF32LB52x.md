@@ -82,6 +82,8 @@ SF32LB52xは、エントリークラスのスマートウェアラブル機器�
 
 ### グラフィックスとオーディオ { #graphics-and-audio }
 
+最大解像度とパネルインターフェースは[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
+
 - ePicasso 2.0 2D/2.5Dグラフィックスアクセラレーター
 - ロスレスグラフィックス圧縮向けのeZip 2.0ハードウェアデコーダー
 - SPI/DSPI/QSPI（電子ペーパー用SPIを含む）と8080 8-bitに対応する専用LCDコントローラー
@@ -174,20 +176,23 @@ SiFliのチップ型番ガイドに掲載されている主要品種は、次の
 <!-- uf-faq:start -->
 ## よくある質問 { #frequently-asked-questions }
 
-**SF32LB52x の主な仕様は？**
-SF32LB52x は、アプリケーションCPU（Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33 @24/48 MHz、専用Bluetoothコントローラー）、内蔵SRAM 576 KB、デュアルモードBluetooth（クラシック + BLE）を備えます。グラフィックス：ePicasso 2.0 Lite。パッケージ：QFN68（7 × 7 mm）。USB 2.0 FS。ファミリー全体の値であり、個別の型番はデータシートで確認してください。
+**SF32LB52xの主な仕様は？**
+SF32LB52xはアプリケーションCPU（Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33 @24/48 MHz、専用Bluetoothコントローラー）を備えています。内蔵SRAMは576 KBで、Bluetoothはデュアルモード（Classic Bluetooth + BLE）です。グラフィックスはePicasso 2.0 Lite、パッケージはQFN68（7 × 7 mm）、USBは2.0 FSです。
 
-**SF32LB52x が対応するディスプレイインターフェースは？**
-SPI / DSPI / QSPI / 8080 / EPD / JDI。対応状況は型番とパッケージによって異なります。
+**SF32LB52xが対応するディスプレイインターフェースは？**
+SPI / DSPI / QSPI / 8080 / EPD / JDIに対応しています。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
 
-**SF32LB52x のパッケージ内メモリ容量は？**
-型番により、パッケージ内PSRAMは最大 16 MB、パッケージ内NOR Flashは最大 4 MB です。
+**SF32LB52xがサポートする最大ディスプレイ解像度は？**
+RGB888カラーで最大512 × 512です（DTR対応のQSPIディスプレイインターフェースが前提）。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
 
-**SF32LB52x の電源電圧は？**
-バリアントにより 3.2–4.7 V (520/3/5/7), 2.97–3.63 V (52B/E/G/J), 1.8 V (52D)。正確な範囲はデータシートで確認してください。
+**SF32LB52xのパッケージ内メモリー容量は？**
+パッケージ内PSRAMは最大 16 MB、パッケージ内NOR Flashは最大 4 MB です。
 
-**SF32LB52x でハードウェア設計を始めるには？**
-まず [SF32LB52x ハードウェア設計ガイド](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) で回路図、電源、クロック/RF、PCBレイアウトの指針を確認し、基板リリース前に回路図とレイアウトのチェックリストを使用してください。
+**SF32LB52xの電源電圧は？**
+520/3/5/7は3.2～4.7 V、52B/E/G/Jは2.97～3.63 V、52Dは1.8 Vです。
+
+**SF32LB52xでハードウェア設計を始めるには？**
+まず[SF32LB52xハードウェア設計ガイド](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)で回路図、電源、クロック/RF、PCBレイアウトの指針を確認し、基板リリース前に回路図とレイアウトのチェックリストを使用してください。
 <!-- uf-faq:end -->
 
 ## 関連製品 { #related-products }

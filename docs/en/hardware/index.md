@@ -62,7 +62,7 @@ Choose the chip or module at the center of your design, then open the matching i
 
 1. **Reuse a reference baseline when it fits.** Reproduce its stated board and software baseline before adapting it; otherwise, begin directly with the selected device guide.
 2. **Implement and review.** Use the matching guide before schematic capture, then apply its checklist during schematic and layout review. Validate the intended software and peripheral path on the closest [development board](../sf32-products/index.md) before freezing hardware. Development-board tests do not replace power, pin-function and RF validation on the final board.
-3. **Use M2 materials when the carrier is intended to follow the M2 proposal.** Apply the [M2 naming rules](m2-modules/M2%20Interface%20Naming%20Rules.md) and confirm the [interface definition](m2-modules/M2-interface-definition.md) against the exact module before committing to the interface; the pin-level definition remains a draft.
+3. **Use M2 materials when the carrier is intended to follow the M2 proposal.** Apply the [M2 naming rules](m2-modules/M2-interface-naming-rules.md) and confirm the [interface definition](m2-modules/M2-interface-definition.md) against the exact module before committing to the interface; the pin-level definition remains a draft.
 4. **Verify CAD and component choices.** Use [CAD & Components](cad-components/components-and-cad-libraries.md) to cross-check the symbol, footprint, package drawing, AVL, and critical component assumptions for the exact part.
 5. **Close the release gate.** Move to [Design for Production](design-for-production.md) with the design evidence, approved deviations, remaining risks, and manufacturing-test assumptions.
 

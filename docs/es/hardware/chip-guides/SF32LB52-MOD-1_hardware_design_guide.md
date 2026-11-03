@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52-MOD-1 - Guía de diseño de hardware"
 icon: lucide/book-check
 hide:
     - navigation
@@ -12,7 +13,7 @@ tags:
 
 ## 1. Descripción general { #1-overview }
 
-**SF32LB52-MOD-1** es un módulo MCU Bluetooth certificado, de uso general y bajo consumo, basado en el chip SF32LB525UC6 de SiFli (Arm Cortex-M33 STAR-MC1 de doble núcleo, hasta 240 MHz). Integra un cristal de 48 MHz, un cristal opcional de 32,768 kHz y un chip OPI-PSRAM opcional de 64 Mb en un único encapsulado de montaje superficial de 68 pines y 27,9 × 18,0 × 3,1 mm.
+**SF32LB52-MOD-1** es un módulo MCU Bluetooth de uso general y bajo consumo, basado en el chip SF32LB525UC6 de SiFli (Arm Cortex-M33 STAR-MC1 de doble núcleo, hasta 240 MHz). Integra un cristal de 48 MHz, un cristal opcional de 32,768 kHz y un chip OPI-PSRAM opcional de 64 Mb en un único encapsulado de montaje superficial de 68 pines y 27,9 × 18,0 × 3,1 mm.
 
 Esta guía cubre la integración de hardware a nivel de módulo: definición de pines, interfaces periféricas, características eléctricas, requisitos de alimentación, esquemáticos de referencia, lista de comprobación del esquemático, dimensiones mecánicas y huella de PCB, y requisitos de manipulación del producto. Se basa en la hoja de datos de SiFli **DS5203-SF32LB52-MOD-1 V0.3**.
 
@@ -20,6 +21,9 @@ Para conocer en más detalle la arquitectura del chip (núcleos, gráficos, subs
 
 !!! note "Fuentes y tratamiento de las figuras"
     Los datos técnicos específicos del módulo siguen **DS5203-SF32LB52-MOD-1 V0.3**. Algunos dibujos de asignación de pines, esquemáticos y detalles mecánicos de la hoja de datos son imágenes ráster; aquí se indican como referencia en vez de redibujarlos. La numeración de figuras y tablas sigue la numeración propia de esta guía; los pies de las figuras no reproducidas indican el número correspondiente en la hoja de datos oficial.
+
+!!! note "Alcance del marcado reglamentario"
+    Las etiquetas suministradas para SF32LB52-MOD-1-N16R8 y SF32LB52-MOD-1-A128R16 muestran los identificadores FCC, IC, CMIIT ID y HVIN, además del marcado CE. Consulte el [resumen de marcados](../../sf32-products/modules/SF32LB52-MOD-1.md#regulatory-markings). Confirme los documentos de aprobación y las condiciones de antena e integración para la revisión exacta; no suponga que estos marcados cubren otras variantes o el producto final.
 
 ## 2. Resumen de diseño { #2-quick-design-summary }
 
@@ -34,6 +38,9 @@ Para conocer en más detalle la arquitectura del chip (núcleos, gráficos, subs
 | SF32LB52-MOD-1-N16R8 | 16 MB QSPI-NOR | 8 MB OPI-PSRAM | -40 a 85 °C | 27,9 × 18,0 × 3,1 mm |
 
 </div>
+
+!!! note "Personalización"
+    Para consultar otras configuraciones del módulo o solicitar una personalización, [contacte con μForge.io](../../about/contact.md).
 
 ### 2.2 Especificaciones principales { #22-key-specifications }
 

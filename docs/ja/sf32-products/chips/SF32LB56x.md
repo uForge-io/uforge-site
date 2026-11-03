@@ -96,6 +96,8 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 
 ### グラフィックス、ディスプレイ、AI { #graphics-display-and-ai }
 
+最大解像度とパネルインターフェースは[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
+
 - ePicasso 2.0 2D/2.5Dグラフィックスアクセラレーション
 - 4レイヤーのアルファブレンディングと1つの背景レイヤー
 - ハードウェアによる回転、スケーリング、ミラーリング、一般的なフォーマット変換
@@ -180,20 +182,23 @@ SF32LB56xの候補リストを検証済みの設計へと進めるには、以�
 <!-- uf-faq:start -->
 ## よくある質問 { #frequently-asked-questions }
 
-**SF32LB56x の主な仕様は？**
-SF32LB56x は、アプリケーションCPU（Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33 @48/96 MHz、ユーザープログラム可能なコア）、内蔵SRAM 960 KB、デュアルモードBluetooth（クラシック + BLE）を備えます。グラフィックス：ePicasso 2.0。パッケージ：QFN68 / BGA175（7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)）。USB 2.0 FS。ファミリー全体の値であり、個別の型番はデータシートで確認してください。
+**SF32LB56xの主な仕様は？**
+SF32LB56xはアプリケーションCPU（Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33 @48/96 MHz、ユーザーによるプログラミングが可能）を備えています。内蔵SRAMは960 KBで、Bluetoothはデュアルモード（Classic Bluetooth + BLE）です。グラフィックスはePicasso 2.0、パッケージはQFN68 / BGA175（7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)）、USBは2.0 FSです。
 
-**SF32LB56x が対応するディスプレイインターフェースは？**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB。対応状況は型番とパッケージによって異なります。
+**SF32LB56xが対応するディスプレイインターフェースは？**
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGBに対応しています。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
 
-**SF32LB56x のパッケージ内メモリ容量は？**
-型番により、パッケージ内PSRAMは最大 16 MB、パッケージ内NOR Flashは最大 1 MB です。
+**SF32LB56xがサポートする最大ディスプレイ解像度は？**
+RGB888カラーで最大1024 × 600です（BGAパッケージのDPI/RGBインターフェース経由）。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
 
-**SF32LB56x の電源電圧は？**
-バリアントにより 1.71–3.63 V。正確な範囲はデータシートで確認してください。
+**SF32LB56xのパッケージ内メモリー容量は？**
+パッケージ内PSRAMは最大 16 MB、パッケージ内NOR Flashは最大 1 MB です。
 
-**SF32LB56x でハードウェア設計を始めるには？**
-まず [SF32LB56x ハードウェア設計ガイド](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) で回路図、電源、クロック/RF、PCBレイアウトの指針を確認し、基板リリース前に回路図とレイアウトのチェックリストを使用してください。
+**SF32LB56xの電源電圧は？**
+1.71～3.63 Vです。
+
+**SF32LB56xでハードウェア設計を始めるには？**
+まず[SF32LB56xハードウェア設計ガイド](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md)で回路図、電源、クロック/RF、PCBレイアウトの指針を確認し、基板リリース前に回路図とレイアウトのチェックリストを使用してください。
 <!-- uf-faq:end -->
 
 ## 関連製品 { #related-products }

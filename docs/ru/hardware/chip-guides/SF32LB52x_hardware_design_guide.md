@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52x - Руководство по аппаратной разработке"
 icon: lucide/book-check
 hide:
     - navigation
@@ -8,7 +9,7 @@ tags:
     - Микроконтроллер
 ---
 
-# Руководство по проектированию аппаратуры SF32LB52x { #sf32lb52x-hardware-design-guide }
+# Руководство по аппаратной разработке SF32LB52x { #sf32lb52x-hardware-design-guide }
 
 ## 1. Введение { #1-introduction }
 

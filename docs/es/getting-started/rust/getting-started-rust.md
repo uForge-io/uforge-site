@@ -1,5 +1,6 @@
 ---
 icon: lucide/code
+title: "Primeros pasos con Rust"
 description: "Primera evaluación de sifli-rs de OpenSiFli en SF32LB52: instale el target de Rust, compile Blinky sin modificar, configure sftool y conserve una ruta de recuperación."
 tags:
     - Primeros pasos

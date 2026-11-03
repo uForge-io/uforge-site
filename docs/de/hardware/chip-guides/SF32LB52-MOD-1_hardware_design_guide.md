@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52-MOD-1 - Hardware-Design-Leitfaden"
 icon: lucide/book-check
 hide:
     - navigation
@@ -12,7 +13,7 @@ tags:
 
 ## 1. Übersicht { #1-overview }
 
-**SF32LB52-MOD-1** ist ein zertifiziertes Universalmodul für stromsparende Bluetooth-Anwendungen. Es basiert auf dem SiFli-Chip SF32LB525UC6 mit zwei Arm-Cortex-M33-STAR-MC1-Kernen und einer Taktfrequenz von bis zu 240 MHz. Im 68-poligen SMD-Modulgehäuse (27,9 × 18,0 × 3,1 mm) sind ein 48-MHz-Quarz, optional ein 32,768-kHz-Quarz und optional ein 64-Mb-OPI-PSRAM-Die im Gehäuse integriert.
+**SF32LB52-MOD-1** ist ein Universalmodul für stromsparende Bluetooth-Anwendungen. Es basiert auf dem SiFli-Chip SF32LB525UC6 mit zwei Arm-Cortex-M33-STAR-MC1-Kernen und einer Taktfrequenz von bis zu 240 MHz. Im 68-poligen SMD-Modulgehäuse (27,9 × 18,0 × 3,1 mm) sind ein 48-MHz-Quarz, optional ein 32,768-kHz-Quarz und optional ein 64-Mb-OPI-PSRAM-Die im Gehäuse integriert.
 
 Dieser Leitfaden beschreibt die Hardware-Integration auf Modulebene. Er enthält Pinbelegungen, Peripherieschnittstellen, elektrische Kenndaten, Anforderungen an die Stromversorgung, Referenzschaltpläne, eine Checkliste für den Schaltplanentwurf, mechanische Abmessungen und das empfohlene PCB-Footprint sowie Hinweise zur Handhabung. Grundlage ist das SiFli-Datenblatt **DS5203-SF32LB52-MOD-1 V0.3**.
 
@@ -20,6 +21,9 @@ Weitere Einzelheiten zur Chiparchitektur, zu den Kernen, zur Grafik, zum Speiche
 
 !!! note "Quellen und Abbildungen"
     Die modulspezifischen technischen Angaben in diesem Leitfaden basieren auf **DS5203-SF32LB52-MOD-1 V0.3**. Pinbelegungs-, Schaltplan- und mechanische Zeichnungen aus dem Datenblatt liegen teilweise nur als Rasterbilder vor; deshalb verweisen wir auf sie, statt sie neu zu zeichnen. Abbildungs- und Tabellennummern folgen der Nummerierung dieses Leitfadens. Bei nicht übernommenen Abbildungen ist zusätzlich die Nummer der entsprechenden Abbildung im offiziellen Datenblatt angegeben.
+
+!!! note "Geltungsbereich der Kennzeichnung"
+    Die bereitgestellten Etiketten für SF32LB52-MOD-1-N16R8 und SF32LB52-MOD-1-A128R16 zeigen FCC-, IC-, CMIIT-ID- und HVIN-Kennungen sowie CE. Siehe [Kennzeichnungsübersicht](../../sf32-products/modules/SF32LB52-MOD-1.md#regulatory-markings). Prüfen Sie Unterlagen und Antennen-/Integrationsbedingungen der genauen Revision; andere Varianten und das Endprodukt sind nicht automatisch abgedeckt.
 
 ## 2. Kurzübersicht des Designs { #2-quick-design-summary }
 
@@ -34,6 +38,9 @@ Weitere Einzelheiten zur Chiparchitektur, zu den Kernen, zur Grafik, zum Speiche
 | SF32LB52-MOD-1-N16R8 | 16 MB QSPI-NOR | 8 MB OPI-PSRAM | -40 bis 85 °C | 27,9 × 18,0 × 3,1 |
 
 </div>
+
+!!! note "Individuelle Anpassungen"
+    Für andere Modulkonfigurationen oder individuelle Anpassungen [wenden Sie sich an μForge.io](../../about/contact.md).
 
 ### 2.2 Wichtige Spezifikationen { #22-key-specifications }
 

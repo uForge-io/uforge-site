@@ -1,5 +1,6 @@
 ---
 icon: lucide/code
+title: "Rust 시작하기"
 description: "SF32LB52에서 OpenSiFli sifli-rs를 처음 평가하는 안내입니다. Rust 타깃 설치, 수정하지 않은 Blinky 예제 빌드, sftool 구성, SDK 복구 경로 유지를 다룹니다."
 tags:
     - 시작하기

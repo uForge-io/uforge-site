@@ -1,5 +1,6 @@
 ---
 icon: lucide/code
+title: "Rustプラットフォーム概要"
 description: "OpenSiFliのsifli-rs (sifli-hal、sifli-pac) を通じたSF32向けコミュニティRustサポートを評価します。成熟度、適した／不向きな用途、リスク確認項目を説明します。"
 tags:
     - 開発

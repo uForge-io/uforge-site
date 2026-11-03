@@ -61,6 +61,57 @@ SiFliがSF32LB58-MODの用途として挙げている分野は次のとおりで
 
 ## 機能と仕様 { #features-and-specifications }
 
+### 規制関連の表示 { #regulatory-markings }
+
+SiFliから提供された**SF32LB58-MOD-N16R32N1**と**SF32LB58-MOD-A128R32N1**のラベル図案には、次の識別番号とCEマークが記載されています。
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 780px; margin: 1rem auto;">
+<figure style="margin: 0;">
+<a href="assets/SF32LB58-MOD/N16R32N1-label.png"><img src="assets/SF32LB58-MOD/N16R32N1-label.png" alt="SF32LB58-MOD-N16R32N1" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB58-MOD-N16R32N1</figcaption>
+</figure>
+<figure style="margin: 0;">
+<a href="assets/SF32LB58-MOD/A128R32N1-label.png"><img src="assets/SF32LB58-MOD/A128R32N1-label.png" alt="SF32LB58-MOD-A128R32N1" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB58-MOD-A128R32N1</figcaption>
+</figure>
+</div>
+
+<div align="center" markdown>
+
+*提供されたSF32LB58-MODラベルの表記*
+
+| 項目 | 印字内容 |
+| --- | --- |
+| ラベルの品種 | `SF32LB58-MOD-N16R32N1`, `SF32LB58-MOD-A128R32N1` |
+| FCC | `2BVUV-SF32LB58` |
+| IC | `35666-SF32LB58` |
+| CMIIT ID | `26J3260U7517(M)` |
+| HVIN | `SF32LB58` |
+| CEマーク | 両方のラベルに表示 |
+
+</div>
+
+上記は提供されたラベルの表記を転記したものであり、認証記録や適合宣言を独立に検証したものではありません。対象モジュールのリビジョンに適用される認証資料、アンテナ条件、組み込み要件をSiFliに確認してください。裏付け資料なしに、SF32LB58-MOD-E4R32N1や他の品種へ適用しないでください。モジュールの表示だけで最終製品の適合性が保証されるわけではありません。
+
+### ストレージインターフェースとモジュールバリアント { #storage-interfaces-and-module-variants }
+
+<div align="center"><em>SF32LB58-MODモジュールバリアント</em></div>
+
+<div align="center" markdown>
+
+| モジュールコード | 選択可能なストレージ | PSRAM | 標準Flash | 動作温度 | 寸法 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| SF32LB58-MOD-N16R32N1 | 16 MB QSPI-NOR | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C～+85 °C | 24 × 24 × 3.1 mm |
+| SF32LB58-MOD-A128R32N1 | 128 MB QSPI-NAND | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C～+85 °C | 24 × 24 × 3.1 mm |
+| SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C～+85 °C | 24 × 24 × 3.1 mm |
+
+</div>
+
+!!! note "供給状況とカスタマイズ"
+    **メモリーチップの供給不足により、SF32LB58-MOD-E4R32N1は現在入手できません。** その他のモジュール構成にも対応可能です。カスタマイズのご要望は、[μForge.ioへのお問い合わせ](../../about/contact.md)からお寄せください。
+
+SiFliの[モジュール型番ガイド](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)には上記の型番が掲載され、必要に応じてeMMCをモジュール内部に実装でき、その他の構成もカスタマイズ可能と記載されています。必要な記憶媒体と容量に基づいてSKUを選択し、現在の供給状況とメモリー構成をSiFliに確認してください。採用を確定する前に、対象のSDKとファームウェアが選択したデバイスおよび起動・ストレージ経路に対応していることも確認してください。
+
 ### 演算とメモリー { #compute-and-memory }
 
 - Arm Cortex-M33 STAR-MC1アプリケーションコア × 2、最大240 MHz
@@ -95,22 +146,6 @@ SiFliがSF32LB58-MODの用途として挙げている分野は次のとおりで
 - モジュールインターフェースからアナログオーディオを入出力可能
 
 SiFliの [SF32LB58xハードウェア設計ガイド](https://wiki.sifli.com/en/hardware/SF32LB58x-HW-Application.html)には、PDMマイク入力が2系統（PDM1、PDM2）と記載されています。1系統のPDMインターフェースでは左右チャンネルを使って2個のマイクを接続できます。SiFliの [PDM SDKサンプル](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html)では、1系統の左右チャンネルを使った2マイク録音と、PDM1/PDM2を使った4マイク録音の両方が示されています。ただし、対応プラットフォーム一覧にSF32LB58-MODは含まれていません。本モジュールでは、対象SDKが対応するマイク数・チャンネル構成を確認し、ピン多重化とキャリア基板の配線も検証してください。PDMインターフェース数だけを根拠に、4マイク構成に対応すると判断しないでください。
-
-### ストレージインターフェースとモジュールバリアント { #storage-interfaces-and-module-variants }
-
-<div align="center"><em>SF32LB58-MODモジュールバリアント</em></div>
-
-<div align="center" markdown>
-
-| モジュールコード | 選択可能なストレージ | PSRAM | 標準Flash | 動作温度 | 寸法 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB58-MOD-N16R32N1 | 16 MB QSPI-NOR | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C～+85 °C | 24 × 24 × 3.1 mm |
-| SF32LB58-MOD-A128R32N1 | 128 MB QSPI-NAND | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C～+85 °C | 24 × 24 × 3.1 mm |
-| SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C～+85 °C | 24 × 24 × 3.1 mm |
-
-</div>
-
-SiFliの[モジュール型番ガイド](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)には上記の型番が掲載され、必要に応じてeMMCをモジュール内部に実装でき、その他の構成もカスタマイズ可能と記載されています。必要な記憶媒体と容量に基づいてSKUを選択し、現在の提供状況とメモリー構成をSiFliに確認してください。採用を確定する前に、対象のSDKとファームウェアが選択したデバイスおよび起動・ストレージ経路に対応していることも確認してください。
 
 ### 電源、パッケージ、I/O { #power-package-and-io }
 

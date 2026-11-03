@@ -8,6 +8,8 @@ Only the pages listed below are published on this site. Internal working notes, 
 
 Name: μForge.io and uForge.io are the same project and are used interchangeably. The “μ” (Greek mu, for “micro”) is written as the ASCII “u” (also read as “you”) wherever Greek letters are inconvenient, so μForge = uForge and μForge.io = uForge.io (domain: uForge.io).
 
+Languages: English (the reference, at the site root) plus machine-assisted translations in Chinese (/zh/), Japanese (/ja/), Spanish (/es/), German (/de/), French (/fr/), Portuguese (/pt/), Russian (/ru/) and Korean (/ko/). A translated page has the same path as its English page under its language prefix; the language indexes are at https://uForge.io/<lang>/llms.txt.
+
 ## Getting Started
 
 - [Getting Started Overview](https://uForge.io/getting-started/): Comparison of SF32 software paths — SiFli-SDK, CodeKit, Zephyr, Arduino, and MicroPython — and which are production-ready today.
@@ -23,6 +25,7 @@ Name: μForge.io and uForge.io are the same project and are used interchangeably
 - [SF32 Products](https://uForge.io/sf32-products/): Start here to explore SF32 hardware, plan a product, choose a chip, module, or development board, reuse a reference design, and prepare a production design.
 - [Hardware](https://uForge.io/hardware/): Reuse an SF32 reference baseline or implement a selected device, then prepare the design for production.
 - [Plan a Product](https://uForge.io/sf32-products/family/product-planning/): End-to-end path from requirements and device selection through board validation and production design.
+- [SF32 FAQ](https://uForge.io/sf32-products/family/faq/): Short answers to common SF32 selection questions, starting with whether to design around a chip or a module.
 - [Reference Designs](https://uForge.io/hardware/reference-designs/reference-designs/): Reference-design journeys for μForge — compare reproducible hardware and software validation paths, then follow the one closest to your product.
 - [Connected Wearable Reference-Design Journey](https://uForge.io/hardware/reference-designs/connected-wearable-journey/): A practical SF32 reference-design journey from SF32LB52 development-board validation to a custom connected wearable hardware and firmware release plan.
 - [SF32 Product Selector](https://uForge.io/sf32-products/product-selector/): Select an SF32 chip or module by product constraints, integration level, and software-validation path.
@@ -73,7 +76,7 @@ Name: μForge.io and uForge.io are the same project and are used interchangeably
 ## Hardware — Modules
 
 - [Module Interface Standards](https://uForge.io/hardware/m2-modules/interface-standards-overview/): μForge M2 module-interface conventions — use the naming rules for stable terminology and treat the pin-level interface definition as a draft to validate before carrier-board commitment.
-- [M2 Interface Naming Rules](<https://uForge.io/hardware/m2-modules/M2 Interface Naming Rules/>): The mandatory base module interface identifier implemented by every μForge module; electrical/mechanical pinout is still in development.
+- [M2 Interface Naming Rules](https://uForge.io/hardware/m2-modules/M2-interface-naming-rules/): The mandatory base module interface identifier implemented by every μForge module; electrical/mechanical pinout is still in development.
 - [M2 Interface Definition](https://uForge.io/hardware/m2-modules/M2-interface-definition/): Draft M2 interface definition — connector, pinout, and electrical limits — a working proposal, not yet a released standard.
 - [SF32LB52-MOD-1 Introduction](https://uForge.io/sf32-products/modules/SF32LB52-MOD-1/): Certified Bluetooth 6.3 MCU module built on SF32LB525UC6, reducing RF certification and layout risk for wearable products.
 - [SF32LB52-MOD-1 Hardware Design Guide](https://uForge.io/hardware/chip-guides/SF32LB52-MOD-1_hardware_design_guide/): Power, interfaces, and PCB integration guidance for the SF32LB52-MOD-1 module.
@@ -89,6 +92,7 @@ Name: μForge.io and uForge.io are the same project and are used interchangeably
 - [SF32LB52-DevKit-Nano](https://uForge.io/sf32-products/devkits/SF32LB52-DevKit-Nano/): Smallest SF32LB52-based development board, for size-constrained product prototyping.
 - [SF32LB52-DevKit-ULP](https://uForge.io/sf32-products/devkits/SF32LB52-DevKit-ULP/): Ultra-low-power-focused SF32LB52-based development board for battery-life evaluation.
 - [SF32LB56-DevKit-LCD](https://uForge.io/sf32-products/devkits/SF32LB56-DevKit-LCD/): SF32LB56-DevKit-LCD development board — an SF32LB56xV module-based display, audio, storage, and peripheral-development platform.
+- [SF32LB57-DevKit-LCD](https://uForge.io/sf32-products/devkits/SF32LB57-DevKit-LCD/): SF32LB57-DevKit-LCD: module-based evaluation board for RGB displays, DVP cameras, dual PDM microphones, speaker output, SDIO Wi-Fi and USB.
 - [SF32LB58-DevKit-LCD](https://uForge.io/sf32-products/devkits/SF32LB58-DevKit-LCD/): SF32LB58-based development board with LCD for flagship-tier evaluation and firmware bring-up.
 
 ## Hardware — Other Resources

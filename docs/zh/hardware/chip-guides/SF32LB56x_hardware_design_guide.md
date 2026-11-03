@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x - 硬件设计指南"
 icon: lucide/book-check
 description: "SF32LB56x 硬件设计指南：电源系统、时钟生成、RF 设计、显示、音频及 PCB 布局指导。"
 tags:

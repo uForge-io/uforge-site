@@ -1,4 +1,5 @@
 ---
+title: "SF32LB55x 하드웨어 설계 가이드 — 설계 검토 체크리스트 및 참고 자료"
 icon: lucide/clipboard-check
 hide:
     - navigation

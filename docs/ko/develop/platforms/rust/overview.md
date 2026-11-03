@@ -1,5 +1,6 @@
 ---
 icon: lucide/code
+title: "Rust 플랫폼 개요"
 description: "OpenSiFli의 sifli-rs(sifli-hal, sifli-pac)를 통한 SF32 커뮤니티 Rust 지원 평가: 현재 성숙도, 적합한 시나리오와 적합하지 않은 시나리오, 위험 체크리스트."
 tags:
     - 개발

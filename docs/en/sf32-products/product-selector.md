@@ -19,7 +19,7 @@ Use the interactive selector for a first pass. It lists chips and modules only, 
 !!! info "Terminology and audio-interface counts"
     See the [glossary](../about/glossary.md) for abbreviations and interface definitions. One PDM interface can connect up to two digital microphones, so the PDM-interface count is not the microphone count. The number of usable microphone inputs and their pin routing depend on the device; check the exact part's documentation.
 
-Filters are conjunctive: a result must satisfy every active criterion. Integration level, package, supply, and display are single-choice controls. PSRAM and GPIO values represent the application's requirement, so candidates must meet or exceed them. Here, “maximum needed” means the application's maximum requirement, not an upper limit on the part. Target resolution, SDIO, and each audio-interface count are also minimum thresholds. Feature checkboxes add required capabilities (external Wi-Fi over SDIO, a DCMI camera interface, an AI/ML accelerator, FreeIO, or PTM). The SDIO-count filter is distinct from the external-Wi-Fi checkbox.
+A result must match every active filter. PSRAM and GPIO ranges match each part's own capacity. Resolution ranges list every part whose maximum resolution is above the range's lower bound. SDIO and audio counts must match exactly. Checkboxes add required capabilities; the SDIO count is separate from the external Wi-Fi checkbox.
 
 <div id="uf-product-selector"></div>
 
@@ -43,11 +43,11 @@ Select the supply arrangement and package early. The selector distinguishes a di
 
 ### Memory and GPIO Headroom { #memory-and-gpio-headroom }
 
-Use PSRAM and GPIO filters as minimum thresholds, then inspect the selected tier's memory organization and pin allocation. PSRAM capacity affects graphics buffers, audio buffering, ML models, and application working space, but total capacity alone does not guarantee one contiguous memory pool. GPIO headroom should include production test, debug, interrupts, future sensors, and board-control signals, not just the interfaces in the first prototype.
+Use the PSRAM and GPIO filters to narrow the list, then inspect the selected tier's memory organization and pin allocation. PSRAM capacity affects graphics buffers, audio buffering, ML models, and application working space, but total capacity alone does not guarantee one contiguous memory pool. GPIO headroom should include production test, debug, interrupts, future sensors, and board-control signals, not just the interfaces in the first prototype.
 
 ### Display and Graphics { #display-and-graphics }
 
-Filter by the display interface that your panel actually requires, then use the target-resolution setting as a first capacity check. Its width-by-height presets are total-pixel thresholds, not checks of exact aspect ratio or panel timing. Treat the displayed resolution values as catalog screening figures, not guaranteed panel modes or authoritative maxima for every SKU; verify the exact part and panel requirements in SiFli documentation. The selector uses RGB, the common board-design shorthand, for the parallel display interface; its formal name is DPI (Display Pixel Interface). The listed interfaces are not a complete pin-multiplexing inventory. Confirm the exact interface mode, memory budget, pin routing, panel power sequence, and software-driver path in the target part's documentation.
+Filter by the display interface that your panel actually requires, then use the target-resolution setting as a first capacity check. Its width-by-height presets are total-pixel thresholds, not checks of exact aspect ratio or panel timing. Treat the displayed resolution values as catalog screening figures, not guaranteed panel modes or authoritative maxima for every SKU; verify the exact part and panel requirements in SiFli documentation. The selector uses RGB, the common board-design shorthand, for the parallel display interface; its formal name is DPI (Display Pixel Interface). The listed interfaces are not a complete pin-multiplexing inventory. Confirm the exact interface mode, memory budget, pin routing, panel power sequence, and software-driver path in the target part's documentation. For each family's maximum resolution and interface, see the [Per-Device Interface Matrix](../learn/graphics/display-controller.md#per-device-interface-matrix).
 
 ### Audio Interfaces { #audio-interfaces }
 

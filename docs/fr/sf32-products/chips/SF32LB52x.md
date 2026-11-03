@@ -82,6 +82,8 @@ Ces groupes ne sont pas interchangeables au niveau de la carte. Les familles sur
 
 ### Graphismes et audio { #graphics-and-audio }
 
+Pour connaître la résolution maximale et les interfaces d'affichage prises en charge par chaque famille et variante, consultez la [Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix).
+
 - Accélérateur graphique 2D/2,5D ePicasso 2.0
 - Décodeur matériel eZip 2.0 pour la compression graphique sans perte
 - Contrôleur LCD dédié prenant en charge SPI/DSPI/QSPI, y compris le SPI pour papier électronique, ainsi que 8080-8 bits
@@ -175,16 +177,19 @@ Suivez cette séquence pour transformer une présélection SF32LB52x en concepti
 ## Questions fréquentes { #frequently-asked-questions }
 
 **Quelles sont les principales caractéristiques du SF32LB52x ?**
-Le SF32LB52x associe un CPU applicatif (Cortex-M33 @240 MHz) à un cœur basse consommation (Cortex-M33 @24/48 MHz, avec un contrôleur Bluetooth dédié), 576 KB de SRAM interne et Bluetooth bimode (BT classique + BLE). Graphismes : ePicasso 2.0 Lite. Boîtier : QFN68 (7 × 7 mm). USB 2.0 FS. Valeurs au niveau de la famille ; vérifiez la fiche technique de la référence exacte.
+Le SF32LB52x associe un CPU applicatif (Cortex-M33 @240 MHz) à un cœur basse consommation (Cortex-M33 @24/48 MHz, contrôleur Bluetooth dédié). Il intègre 576 KB de SRAM interne et prend en charge le Bluetooth bimode (BT classique + BLE). Graphismes : ePicasso 2.0 Lite. Boîtier : QFN68 (7 × 7 mm). USB 2.0 FS.
 
 **Quelles interfaces d'affichage le SF32LB52x prend-il en charge ?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI. La disponibilité varie selon la référence et le boîtier.
+SPI / DSPI / QSPI / 8080 / EPD / JDI. ([Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
-**Quelle mémoire dans le boîtier le SF32LB52x propose-t-il ?**
-Jusqu'à 16 MB de PSRAM et jusqu'à 4 MB de Flash NOR dans le boîtier, selon la référence.
+**Quelle est la résolution d'affichage maximale du SF32LB52x ?**
+La résolution maximale est de 512 × 512 en couleur RGB888, avec une interface d'affichage QSPI prenant en charge DTR. ([Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+
+**Quelle capacité de mémoire intégrée au boîtier offre le SF32LB52x ?**
+Jusqu'à 16 MB de PSRAM et jusqu'à 4 MB de Flash NOR dans le boîtier.
 
 **Quelle tension d'alimentation faut-il pour le SF32LB52x ?**
-3.2–4.7 V (520/3/5/7), 2.97–3.63 V (52B/E/G/J), 1.8 V (52D), selon la variante. Confirmez la plage exacte dans la fiche technique.
+3,2–4,7 V (520/3/5/7), 2,97–3,63 V (52B/E/G/J), 1,8 V (52D).
 
 **Par où commencer une conception matérielle avec le SF32LB52x ?**
 Commencez par le [guide de conception matérielle du SF32LB52x](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) (schéma, alimentation, horloge/RF, routage PCB), puis utilisez les listes de contrôle de schéma et d'implantation avant de figer la carte.

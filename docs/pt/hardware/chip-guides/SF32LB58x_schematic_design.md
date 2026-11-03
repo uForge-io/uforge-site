@@ -1,4 +1,5 @@
 ---
+title: "Guia de projeto de hardware do SF32LB58x — diretrizes para o esquemático"
 icon: lucide/circuit-board
 hide:
     - navigation

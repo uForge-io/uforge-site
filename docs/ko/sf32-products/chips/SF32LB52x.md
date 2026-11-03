@@ -82,6 +82,8 @@ SF32LB52x는 SiFli의 비용 효율적인 MCU 제품군입니다. 디스플레�
 
 ### 그래픽 및 오디오
 
+최대 해상도와 패널 인터페이스는 [디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)에서 확인하십시오.
+
 - ePicasso 2.0 2D/2.5D 그래픽 가속기
 - 무손실 그래픽 압축용 eZip 2.0 하드웨어 디코더
 - SPI/DSPI/QSPI(e-paper SPI 포함)와 8080-8bit를 지원하는 전용 LCD 컨트롤러
@@ -174,20 +176,23 @@ SF32LB52x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 <!-- uf-faq:start -->
 ## 자주 묻는 질문 { #frequently-asked-questions }
 
-**SF32LB52x의 주요 사양은 무엇인가요?**
-SF32LB52x는 애플리케이션 CPU(Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @24/48 MHz, 전용 Bluetooth 컨트롤러), 내장 SRAM 576 KB, 듀얼 모드 Bluetooth(클래식 + BLE)를 갖췄습니다. 그래픽: ePicasso 2.0 Lite. 패키지: QFN68(7 × 7 mm). USB 2.0 FS. 제품군 수준의 값이므로 정확한 부품 번호의 데이터시트를 확인하세요.
+**SF32LB52x의 주요 사양은 무엇입니까?**
+SF32LB52x는 애플리케이션 CPU(Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @24/48 MHz, 전용 Bluetooth 컨트롤러)를 갖추고 있으며, 내장 SRAM은 576 KB입니다. Bluetooth 모드는 듀얼 모드(Classic Bluetooth + BLE)입니다. 그래픽: ePicasso 2.0 Lite. 패키지는 QFN68이며, 크기는 7 × 7 mm입니다. USB는 2.0 FS를 지원합니다.
 
-**SF32LB52x는 어떤 디스플레이 인터페이스를 지원하나요?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI. 지원 여부는 부품 번호와 패키지에 따라 다릅니다.
+**SF32LB52x는 어떤 디스플레이 인터페이스를 지원합니까?**
+지원하는 인터페이스는 SPI / DSPI / QSPI / 8080 / EPD / JDI입니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
-**SF32LB52x는 패키지 내 메모리를 얼마나 제공하나요?**
-부품 번호에 따라 패키지 내 PSRAM 최대 16 MB, 패키지 내 NOR Flash 최대 4 MB를 제공합니다.
+**SF32LB52x가 지원하는 최대 디스플레이 해상도는 얼마입니까?**
+RGB888 색상에서 최대 512 × 512 해상도를 지원합니다. DTR을 지원하는 QSPI 디스플레이 인터페이스가 필요합니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
-**SF32LB52x에는 어떤 공급 전압이 필요한가요?**
-변형에 따라 3.2–4.7 V (520/3/5/7), 2.97–3.63 V (52B/E/G/J), 1.8 V (52D). 정확한 범위는 데이터시트에서 확인하세요.
+**SF32LB52x는 패키지 내 메모리를 얼마나 제공합니까?**
+패키지 내 PSRAM은 최대 16 MB, NOR 플래시는 최대 4 MB를 제공합니다.
 
-**SF32LB52x로 하드웨어 설계를 시작하려면 어떻게 하나요?**
-먼저 [SF32LB52x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하세요.
+**SF32LB52x에는 어떤 공급 전압이 필요합니까?**
+공급 전압은 3.2–4.7 V (520/3/5/7), 2.97–3.63 V (52B/E/G/J), 1.8 V (52D)입니다.
+
+**SF32LB52x로 하드웨어 설계를 시작하려면 어떻게 해야 합니까?**
+먼저 [SF32LB52x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하십시오.
 <!-- uf-faq:end -->
 
 ## 관련 제품

@@ -1,4 +1,5 @@
 ---
+title: "Руководство по аппаратной разработке SF32LB55x — контрольный список проверки проекта и справочные материалы"
 icon: lucide/clipboard-check
 hide:
     - navigation
@@ -8,7 +9,7 @@ tags:
     - Микросхема
 ---
 
-# Руководство по проектированию аппаратуры SF32LB55x — контрольный список проверки проекта и справочные материалы { #sf32lb55x-hardware-design-guide-design-review-checklist-and-references }
+# Руководство по аппаратной разработке SF32LB55x — контрольный список проверки проекта и справочные материалы { #sf32lb55x-hardware-design-guide-design-review-checklist-and-references }
 
 ## 7. Контрольный список проверки проекта { #7-design-review-checklist }
 

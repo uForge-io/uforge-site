@@ -22,7 +22,7 @@ hide:
 <div class="uf-hero-actions" markdown>
 
 [Начало работы :material-arrow-right:](getting-started/index.md){ .md-button .md-button--primary }
-[Продукты SF32 :material-file-document-outline:](sf32-products/family/SF32_family.md){ .md-button }
+[Подбор SF32 :material-file-document-outline:](sf32-products/product-selector.md){ .md-button }
 [GitHub :fontawesome-brands-github:](https://github.com/uforge-io){ .md-button }
 
 </div>
@@ -126,7 +126,7 @@ hide:
 
 - :fontawesome-solid-cube:{ .uf-icon-purple } **Графическое ускорение**
 
-    GPU 2D / 2.5D, контроллеры LCD и поддержка LVGL позволяют создавать насыщенные и плавные графические интерфейсы. В семействе доступны интерфейсы MIPI, RGB, QSPI, 8080, JDI и EPD; максимальное разрешение достигает 1280 × 720.
+    GPU 2D / 2.5D, контроллеры LCD и поддержка LVGL позволяют создавать насыщенные и плавные графические интерфейсы. В семействе доступны интерфейсы MIPI, RGB, QSPI, 8080, JDI и EPD; максимальное разрешение достигает 1280 × 800.
 
 - :fontawesome-solid-volume-high:{ .uf-icon-pink } **Аудиоподсистема**
 
@@ -207,7 +207,7 @@ hide:
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Трёхъядерный Cortex-M33 STAR-MC1
     - :fontawesome-solid-circle:{ .uf-dot-blue } Двухрежимный Bluetooth 6.3
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Дисплей MIPI с разрешением до 1280 x 720
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Дисплей MIPI с разрешением до 1280 x 800
     - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2.5D и векторная графика, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 и декодирование JPEG/MJPEG
     - :fontawesome-solid-circle:{ .uf-dot-blue } Аудиокодек, 2 x AMIC, 4 x DMIC

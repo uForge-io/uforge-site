@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x 硬件设计指南 — 设计评审检查表与参考资料"
 icon: lucide/clipboard-check
 description: "SF32LB56x 硬件设计指南的设计评审检查表、相关文档与参考资料、附录，以及修订历史。"
 tags:

@@ -1,5 +1,6 @@
 ---
 icon: lucide/infinity
+title: "Visão geral da plataforma Arduino"
 description: "ArduinoCore-zephyr na SF32LB52 DevKit LCD: adequação da plataforma, identificação da placa, loader e modos de compilação, limites de integração e escalonamento."
 tags:
     - Desenvolvimento

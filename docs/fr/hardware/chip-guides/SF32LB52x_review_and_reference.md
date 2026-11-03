@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle SF32LB52x — Liste de contrôle de revue de conception et références"
 icon: lucide/clipboard-check
 hide:
     - navigation

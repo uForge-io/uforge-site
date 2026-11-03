@@ -1,4 +1,5 @@
 ---
+title: "Guia de projeto de hardware do SF32LB52x — layout de PCB"
 icon: lucide/layers
 hide:
     - navigation

@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56-MOD - ハードウェア設計ガイド"
 icon: lucide/book-check
 description: "SF32LB56-MOD Bluetooth MCUモジュールのハードウェア設計ガイド。電源、インターフェース、PCB実装の要点を説明します。"
 tags:
@@ -19,6 +20,9 @@ hide:
 !!! note "出典と設計上の推奨事項"
     特に統合設計上の指針または設計推奨事項と明記した箇所を除き、以下の技術値は**DS5602-SF32LB56-MOD技術仕様書V0.3**に基づいています。
 
+!!! note "規制表示の適用範囲"
+    提供されたSF32LB56-MOD-N16R12N1とSF32LB56-MOD-A128R12N1のラベルには、FCC、IC、CMIIT ID、HVINの識別番号とCEマークが記載されています。[モジュール表示のまとめ](../../sf32-products/modules/SF32LB56-MOD.md#regulatory-markings)を参照してください。該当するモジュール改版の承認文書、アンテナ条件、組み込み条件を確認してください。他の品種や完成品まで認証対象とみなさないでください。
+
 ## 2. デバイス概要 { #2-device-overview }
 
 ### 2.1 アーキテクチャ { #21-architecture }
@@ -26,6 +30,9 @@ hide:
 SF32LB56-MODは、SF32LB56xVシリーズのデュアルコアMCUプラットフォームを採用しています。HCPUはアプリケーションとグラフィックス処理を担い、LCPUは低消費電力の常時動作タスクを担います。HCPUは最大240 MHzで動作するArm Cortex-M33 STAR-MC1コア、LCPUは最大96 MHzで動作する同型のコアです。両コアともFPUとMPUをサポートします。
 
 モジュールはBluetooth 5.3による無線通信に対応し、ディスプレイアクセラレーション、オーディオ入出力、外部メモリーインターフェース、USB 2.0 FS、SD/SDIO/eMMC、I2S、UART、I2C、SPI、PWM、GPADC、およびデバッグ／ダウンロード用インターフェースを備えています。
+
+!!! note "カスタマイズ"
+    その他のモジュール構成やカスタマイズについては、[μForge.ioへのお問い合わせ](../../about/contact.md)をご利用ください。
 
 ### 2.2 バリエーション { #22-variants }
 

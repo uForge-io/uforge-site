@@ -61,6 +61,57 @@ SiFli는 SF32LB58-MOD의 애플리케이션 분야로 다음을 제시합니다.
 
 ## 기능 및 사양 { #features-and-specifications }
 
+### 규제 관련 표기 { #regulatory-markings }
+
+제공된 SiFli **SF32LB58-MOD-N16R32N1** 및 **SF32LB58-MOD-A128R32N1** 라벨 도안에는 아래 식별번호와 CE 마크가 있습니다.
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 780px; margin: 1rem auto;">
+<figure style="margin: 0;">
+<a href="assets/SF32LB58-MOD/N16R32N1-label.png"><img src="assets/SF32LB58-MOD/N16R32N1-label.png" alt="SF32LB58-MOD-N16R32N1" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB58-MOD-N16R32N1</figcaption>
+</figure>
+<figure style="margin: 0;">
+<a href="assets/SF32LB58-MOD/A128R32N1-label.png"><img src="assets/SF32LB58-MOD/A128R32N1-label.png" alt="SF32LB58-MOD-A128R32N1" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB58-MOD-A128R32N1</figcaption>
+</figure>
+</div>
+
+<div align="center" markdown>
+
+*제공된 SF32LB58-MOD 라벨의 표시*
+
+| 항목 | 인쇄 내용 |
+| --- | --- |
+| 라벨 모델 | `SF32LB58-MOD-N16R32N1`, `SF32LB58-MOD-A128R32N1` |
+| FCC | `2BVUV-SF32LB58` |
+| IC | `35666-SF32LB58` |
+| CMIIT ID | `26J3260U7517(M)` |
+| HVIN | `SF32LB58` |
+| CE 마크 | 두 라벨 모두 표시 |
+
+</div>
+
+위 내용은 제공된 라벨을 옮긴 것이며 인증 기록이나 적합성 선언을 독립적으로 검증한 결과가 아닙니다. 정확한 모듈 리비전의 승인 문서, 안테나 조건 및 통합 지침을 SiFli에 확인하십시오. 증빙 없이 SF32LB58-MOD-E4R32N1 또는 다른 모델에 적용하지 마십시오. 모듈 표시는 최종 제품의 적합성을 입증하지 않습니다.
+
+### 스토리지 인터페이스 및 모듈 변형 { #storage-interfaces-and-module-variants }
+
+<div align="center"><em>SF32LB58-MOD 모듈 변형</em></div>
+
+<div align="center" markdown>
+
+| 모듈 코드 | 선택 가능한 스토리지 | PSRAM | 표준 플래시 | 온도 | 크기 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| SF32LB58-MOD-N16R32N1 | 16 MB QSPI-NOR | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 24 × 24 × 3.1 mm |
+| SF32LB58-MOD-A128R32N1 | 128 MB QSPI-NAND | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 24 × 24 × 3.1 mm |
+| SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 24 × 24 × 3.1 mm |
+
+</div>
+
+!!! note "공급 현황 및 맞춤 구성"
+    **최근 메모리 칩 공급 부족으로 SF32LB58-MOD-E4R32N1은 더 이상 공급되지 않습니다.** 다른 모듈 구성도 가능합니다. 맞춤 구성이 필요하면 [μForge.io에 문의하십시오](../../about/contact.md).
+
+[SiFli 모듈 모델 가이드](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)는 이 변형들을 나열하며, eMMC가 내부 디바이스로 포함될 수 있다고 설명하고, 그 밖의 구성은 맞춤 제작할 수 있다고 명시합니다. 필요한 스토리지 매체와 용량에 따라 SKU를 선택한 다음, 공급 가능 여부와 메모리 구성을 SiFli에 확인하십시오. 또한 선택한 디바이스와 부팅/스토리지 경로를 대상 SDK와 펌웨어가 지원하는지 확인하십시오.
+
 ### 연산 및 메모리 { #compute-and-memory }
 
 - 최대 240 MHz의 Arm Cortex-M33 STAR-MC1 애플리케이션 코어 2개
@@ -95,22 +146,6 @@ SiFli는 SF32LB58-MOD의 애플리케이션 분야로 다음을 제시합니다.
 - 모듈 인터페이스로 노출되는 아날로그 오디오 입출력 지원
 
 [SF32LB58x 하드웨어 설계 가이드](https://wiki.sifli.com/en/hardware/SF32LB58x-HW-Application.html)에는 PDM 마이크 입력이 2개(PDM1, PDM2) 나열되어 있습니다. PDM 인터페이스 하나는 마이크 채널 2개를 전달할 수 있습니다. SiFli의 [PDM SDK 예제](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html)는 인터페이스 하나의 좌/우 채널로 마이크 2개를 캡처하는 방식, 또는 PDM1과 PDM2에 걸쳐 마이크 4개를 캡처하는 방식을 보여 줍니다. 그러나 이 예제는 SF32LB58-MOD를 지원 플랫폼으로 나열하지 않습니다. 이 모듈에서는 대상 SDK에서 의도한 마이크/채널 구성을 확인하고 핀 멀티플렉싱과 캐리어 보드 라우팅을 점검하십시오. 인터페이스가 2개라는 사실만으로 마이크 4개 지원을 추론해서는 안 됩니다.
-
-### 스토리지 인터페이스 및 모듈 변형 { #storage-interfaces-and-module-variants }
-
-<div align="center"><em>SF32LB58-MOD 모듈 변형</em></div>
-
-<div align="center" markdown>
-
-| 모듈 코드 | 선택 가능한 스토리지 | PSRAM | 표준 플래시 | 온도 | 크기 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB58-MOD-N16R32N1 | 16 MB QSPI-NOR | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 24 × 24 × 3.1 mm |
-| SF32LB58-MOD-A128R32N1 | 128 MB QSPI-NAND | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 24 × 24 × 3.1 mm |
-| SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 24 × 24 × 3.1 mm |
-
-</div>
-
-[SiFli 모듈 모델 가이드](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)는 이 변형들을 나열하며, eMMC가 내부 디바이스로 포함될 수 있다고 설명하고, 그 밖의 구성은 맞춤 제작할 수 있다고 명시합니다. 필요한 스토리지 매체와 용량에 따라 SKU를 선택한 다음, 공급 가능 여부와 메모리 구성을 SiFli에 확인하십시오. 또한 선택한 디바이스와 부팅/스토리지 경로를 대상 SDK와 펌웨어가 지원하는지 확인하십시오.
 
 ### 전원, 패키지 및 I/O { #power-package-and-io }
 

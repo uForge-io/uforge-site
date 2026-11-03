@@ -110,7 +110,7 @@ tags:
 
 <div align="center"><em>SF32マイクロコントローラー比較</em></div>
 
-以下はシリーズ全体の概要であり、すべてのSKUが表中の機能を備えるとは限りません。インターフェースの対応状況やリソース数は型番、パッケージ、構成によって異なることがあるため、選定する型番のデータシートを確認してください。
+以下はシリーズ全体の概要であり、すべてのSKUが表中の機能を備えるとは限りません。インターフェースの対応状況やリソース数は型番、パッケージ、構成によって異なることがあるため、選定する型番のデータシートを確認してください。各ファミリーの最大ディスプレイ解像度とパネルインターフェースは[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
 
 <div align="center" markdown>
 
@@ -123,6 +123,7 @@ tags:
 | Bluetooth | BT Classic + BLE | BLE | BT Classic + BLE | BT Classic + BLE | BT Classic + BLE |
 | グラフィックスアクセラレーター | 2.5D<br>ePicasso 2.0 Lite | 2.5D<br>ePicasso 1.0 | 2.5D<br>ePicasso 2.0 | 2.5D<br>ePicasso 3.0 + eZip 3.0 | 2.5D + ベクターグラフィックス<br>ePicasso 2.0 + Vivante GCNanoUltraV |
 | ディスプレイ対応 | SPI / DSPI / QSPI / 8080 / EPD / JDI | SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI |
+| 最大ディスプレイ解像度 | 512 × 512、RGB888 | 512 × 512、RGB888 | BGA：1024 × 600、RGB888<br>QFN：512 × 512、RGB888 | 1024 × 600、RGB888 | 1280 × 800、RGB565<br>1280 × 720、RGB888 |
 | オーディオADC | 1x | なし | 1x | 2x | 2x |
 | オーディオDAC | 1x | なし | 1x | 1x | 2x |
 | PDMオーディオインターフェース | 1x | 1～2x* | 2x | 2x | 2x |

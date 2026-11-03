@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56xハードウェア設計ガイド — 設計レビュー用チェックリストと参考資料"
 icon: lucide/clipboard-check
 description: "SF32LB56xハードウェア設計ガイドの設計レビュー用チェックリスト、関連資料、参考文献、付録、改訂履歴。"
 tags:

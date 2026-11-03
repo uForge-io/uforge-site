@@ -77,7 +77,7 @@ tags:
 * **SDIO** — **Secure Digital Input Output.** 문서화된 SF32 설계에서 외부 Wi-Fi 디바이스를 연결하는 데 사용하는 호스트 인터페이스입니다.
 * **DCMI** — **Digital Camera Module Interface.** 호환되는 이미지 센서를 연결하기 위한 병렬 카메라 인터페이스입니다.
 * **FreeIO** — 지원되는 신호를 디바이스의 문서화된 제약 안에서 적절한 GPIO에 매핑할 수 있게 하는 SiFli의 유연한 GPIO 할당 기능입니다.
-* **PTM** — **Peripheral Task Machine.** 지원되는 디바이스에서 주변 장치 작업을 결정적으로 처리하는 SiFli 하드웨어 기능입니다.
+* **PTM** — **Parallel Task Machine.** 지원되는 디바이스에서 주변 장치 작업을 결정적으로 처리하는 SiFli 하드웨어 기능입니다.
 * **RTC** — **Real-Time Clock(실시간 클럭).** 메인 애플리케이션 클럭 도메인과 무관하게 계속 동작하거나 시스템을 깨울 수 있는 시간 측정용 주변 장치입니다.
 
 ## 하드웨어와 제조 { #hardware-and-manufacturing }

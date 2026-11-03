@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58x - Guía de diseño de hardware"
 icon: lucide/book-check
 hide:
     - navigation

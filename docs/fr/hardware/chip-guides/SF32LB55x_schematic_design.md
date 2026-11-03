@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle SF32LB55x — Directives de conception du schéma"
 icon: lucide/circuit-board
 hide:
     - navigation

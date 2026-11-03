@@ -77,7 +77,7 @@ Quick reference for acronyms and terms used across the μForge.io site — both 
 * **SDIO** — **Secure Digital Input Output.** A host interface used by documented SF32 designs to connect an external Wi-Fi device.
 * **DCMI** — **Digital Camera Module Interface.** A parallel camera interface for connecting a compatible image sensor.
 * **FreeIO** — SiFli's flexible GPIO-assignment capability, which allows supported signals to be mapped to suitable GPIOs within the device's documented constraints.
-* **PTM** — **Peripheral Task Machine.** A SiFli hardware feature for deterministic peripheral-task handling on supported devices.
+* **PTM** — **Parallel Task Machine.** A SiFli hardware feature for deterministic peripheral-task handling on supported devices.
 * **RTC** — **Real-Time Clock.** A timekeeping peripheral that can keep running (or wake the system) independent of the main application clock domains.
 
 ## Hardware and Manufacturing { #hardware-and-manufacturing }

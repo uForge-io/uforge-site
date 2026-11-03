@@ -1,5 +1,6 @@
 ---
 icon: lucide/package
+title: "SiFli-SDK-Plattform im Überblick"
 description: "SiFli-SDK als Referenzpfad für die SF32-Entwicklung: Builds mit scons und Konfiguration mit sdk.py menuconfig, Boardnamen, Projektstruktur und Fragen zur Produktreife."
 tags:
     - Entwicklung

@@ -1,5 +1,6 @@
 ---
 icon: lucide/terminal
+title: "Erste Schritte mit SiFli-SDK"
 description: "Starten Sie hello_world per UART auf einem SF32-Board mit SiFli-SDK: Installieren Sie die Toolchain, bauen Sie mit scons und übertragen Sie die Firmware per UART."
 tags:
     - Erste Schritte

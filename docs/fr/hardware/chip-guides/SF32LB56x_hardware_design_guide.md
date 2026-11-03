@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x - Guide de conception matérielle"
 icon: lucide/book-check
 description: "Guide de conception matérielle pour le microcontrôleur SF32LB56x : alimentation, génération d'horloge, conception RF, affichage, audio, implantation et routage du PCB."
 tags:

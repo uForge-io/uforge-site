@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58x 硬件设计指南 — PCB 布局指导"
 icon: lucide/layers
 hide:
     - navigation

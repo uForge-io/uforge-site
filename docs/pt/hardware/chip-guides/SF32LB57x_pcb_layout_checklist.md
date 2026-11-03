@@ -1,4 +1,5 @@
 ---
+title: "Guia de projeto de hardware do SF32LB57x — checklist do layout de PCB"
 icon: lucide/list-checks
 hide:
     - navigation
@@ -54,8 +55,7 @@ A maioria das regras de layout a seguir se aplica a todas as variantes SF32LB57x
 !!! warning "Conflitos não resolvidos sobre as linhas de alimentação na fonte"
     - **Rótulos da lista:** O item 44 da tabela original de autoverificação 4-2-1-1, aplicável às variantes alimentadas por bateria, exige `VCC` >= 12 mil. Os itens 45 e 46 exigem pelo menos 10 mil para `VDD33_VOUT1` e `VDD33_VOUT2`, respectivamente, mas o título do item 46 repete `VDD33_VOUT1`, enquanto o detalhe indica `VDD33_VOUT2`. O item 47, aplicável às variantes de 3,3 V, tem o título `PVDD`, mas seu detalhe exige `VCC` >= 12 mil. Esta página transcreve os valores e detalhes listados sem resolver nenhuma das divergências de rótulo da fonte.
     - **Largura das trilhas:** A seção 3.2.1 do guia original de PCB exige pelo menos 0,4 mm (cerca de 15,7 mil) para `VCC` e `PVDD`; os itens 44 (variantes alimentadas por bateria) e 47 (variantes de 3,3 V) da tabela 4-2-1-1 exigem `VCC` >= 12 mil. A fonte não explica como conciliar esses requisitos entre as variantes nem se, no item 47, deve prevalecer o título `PVDD` ou o detalhe `VCC`. Não infira um valor corrigido nem aplique nenhuma das entradas como requisito definitivo sem confirmação.
-    - **Nomes das saídas:** A seção 3.2.1 do guia PCB original usa `VDD_VOUT1` / `VDD_VOUT2`, enquanto os itens 45/46 da tabela de autoverificação 4-2-1-1 usam `VDD33_VOUT1` / `VDD33_VOUT2`. A fonte não informa se os nomes são nomes alternativos da mesma rede ou redes distintas.
-    Antes de fechar o projeto, obtenha da SiFli a confirmação dos rótulos pretendidos, das redes de destino, do escopo das variantes de alimentação aplicáveis e das larguras de trilha. Sem essa confirmação, não associe os rótulos conflitantes da lista a redes, não trate as variantes de nome das saídas como equivalentes nem escolha entre 12 mil e 0,4 mm.
+    Antes de fechar o projeto, obtenha da SiFli a confirmação dos rótulos pretendidos, das redes de destino, do escopo das variantes de alimentação aplicáveis e das larguras de trilha. Sem essa confirmação, não associe os rótulos conflitantes da lista a redes, nem escolha entre 12 mil e 0,4 mm.
 
 ### 6.10.3. Layout do clock { #6103-clock-layout }
 

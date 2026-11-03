@@ -1,5 +1,6 @@
 ---
 icon: lucide/package
+title: "SiFli-SDK 平台概览"
 description: "SiFli-SDK 作为 SF32 的参考开发路径：核心 scons 构建与 sdk.py menuconfig 工作流、开发板命名、项目结构，以及量产前的评估要点。"
 tags:
     - 开发

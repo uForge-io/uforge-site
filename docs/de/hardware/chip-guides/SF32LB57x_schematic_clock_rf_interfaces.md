@@ -47,6 +47,8 @@ Der spezifizierte Lastkapazitätsbereich des 48-MHz-Quarzes beträgt 7 bis 12 pF
 
 #### 5.3.2. 32,768-kHz-RTC-Quarz { #532-32768-khz-rtc-crystal }
 
+Die V2-Minimalschaltungen erlauben ausdrücklich, den 32,768-kHz-Quarz wegzulassen und den internen RC-Oszillator zu verwenden. Prüfen Sie vorher RTC-Genauigkeit, Bluetooth- und Energiesparanforderungen und wählen Sie die passende Niederfrequenz-Taktquelle in der Firmware.
+
 Empfohlene Parameter:
 
 <div align="center"><em>Tabelle 5.3-2: Empfohlene Parameter des 32,768-kHz-RTC-Quarzes</em></div>
@@ -158,7 +160,6 @@ Der SF32LB57x-LCDC unterstützt je nach genauem Gerät mehrere Display-Schnittst
 | SPI / QSPI | Kleine TFT-/AMOLED- und Wearable-Displays | Geringe Pinzahl, begrenzte Bandbreite, gut für Teil-Refresh. |
 | 8080 MCU | Parallele Display-Panels | Höhere Bandbreite als serielle Schnittstellen, benötigt aber mehr Pins. |
 | RGB / DPI | Mittel- und hochauflösende Panels | Kontinuierlicher Pixelstrom, strenge Bandbreiten- und Timing-Anforderungen. |
-| MIPI DSI | AMOLED-Displays mit hoher Pixeldichte | Hohe Bandbreite bei geringer Pinzahl, aber komplexere Initialisierung und Signalintegrität. |
 | EPD | E-Paper | Niedrige Refresh-Rate, erfordert VCOM, PMIC und Waveform-Planung. |
 | JDI | Memory-in-Pixel-Displays mit niedrigem Stromverbrauch | Gut für Always-on- und sonnenlichttaugliche Produkte. |
 
@@ -183,9 +184,11 @@ Allgemeine Display-Hinweise und Beispiele:
 | 8080 MCU | Wenden Sie bei schnellen Designs dieselben Regeln für Hochgeschwindigkeits-Pin-Gruppen wie bei RGB/DPI an. Prüfen Sie Busbreite, Timing und Treiberstärke anhand der Panelanforderungen. |
 | EPD | Wenden Sie dieselben Regeln für Hochgeschwindigkeits-Pin-Gruppen wie bei RGB/DPI an, wenn der EPD-Bus über 30 MHz läuft. Prüfen Sie zusätzlich VCOM- und PMIC-Steuerpins. |
 | JDI | Folgen Sie der LCDC-JDI-Signalzuordnungstabelle und bevorzugen Sie, sofern verfügbar, eine SDK-angepasste Panel-Konfiguration. |
-| MIPI DSI | Verwenden Sie die feste DSI-Signalzuweisung des gewählten Geräts und Referenzdesigns. Prüfen Sie Lane-Routing und Panel-Initialisierung gemeinsam mit dem Softwareteam. |
 
 </div>
+
+!!! note "Displaytreiber-Schnittstellen sind keine nativen MCU-Schnittstellen"
+    Dieser Abschnitt behandelt SPI/QSPI, RGB/DPI, 8080, EPD und JDI als direkte MCU-Display-Schnittstellen. Einige der folgenden Treiber-ICs unterstützen auch MIPI-DSI. Daraus folgt weder ein nativer SF32LB57x-DSI-Host noch eine feste DSI-Pinbelegung. Wählen Sie eine Schnittstelle, die sowohl der SF32LB57x als auch der Treiber-IC unterstützen, und prüfen Sie Bestellnummer und Referenzdesign.
 
 <div align="center"><em>Tabelle 5.5-3: Beispiele für LCD-Controller</em></div>
 
@@ -374,6 +377,8 @@ Die folgenden Tabellen zeigen die genaue Zuordnung der Signale zu den Pins für 
 | `GOOD` | `GOOD` | Beliebiger GPIO | EPD-PMIC Power-Good-Ausgang. |
 
 </div>
+
+Die 8-Bit-EPD-Spalte der Quelle enthält auch `D8` und nennt damit neun Datensignale (`D0`–`D8`) für eine nominelle 8-Bit-Schnittstelle. Dies ist eine ungeklärte Tabellenabweichung, kein zusätzlich unterstütztes Datenbit. Klären Sie tatsächliche Busbreite und Verdrahtung mit SiFli und dem Panelhersteller, bevor Sie diese Zeile verwenden.
 
 <div align="center"><em>Tabelle 5.5-9: Parallele JDI-Display-Signalverbindungen</em></div>
 

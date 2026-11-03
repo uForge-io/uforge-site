@@ -1,4 +1,5 @@
 ---
+title: "SF32LB57x 硬件设计指南 — 存储与制造"
 icon: lucide/circuit-board
 hide:
     - navigation
@@ -63,6 +64,9 @@ SF32LB57x 支持外接 SPI NOR Flash、SPI NAND Flash、SD NAND Flash 和 eMMC�
 | `HOLD#` / `SD2_D1` | `PA17` | `PA17` |
 
 </div>
+
+!!! warning "SDIO 控制器编号存在来源差异"
+    思澈科技（SiFli）的存储接线表将 `PA12`–`PA17` 上的信号标为 `SD2_*`，而同一指南的 IO MUX 表将这些管脚的 Function 2 标为 `SD1_*`。上表保留接线表原标注；物理管脚对应关系相同，但不得据此直接选择 SDIO2 或固件实例。配置控制器前须核对具体型号的用户手册、SDK 管脚配置与参考设计。
 
 #### 5.6.3. 启动与电源控制 { #563-boot-and-power-control }
 
@@ -404,11 +408,11 @@ SF32LB57x 支持灵活的引脚复用，但下列信号应尽早固定：
 
 | `PA00` / Boot 寄存器 | `PA01` | 上位机 BOOT 开关 | 启动分支与可用接口 |
 |:-----------------------|:-------|:-------------------|:--------------------|
-| L | H | 任意 | 常规启动；`PA19` 不输出启动日志；`PA18` / `PA19` 切换为 SWD，`PA43` / `PA44` 上的 SWD 功能禁用。 |
-| L | L | 关闭 | 常规启动；`PA19` 输出启动日志；`PA18` / `PA19` 为 DBG-UART，`PA43` / `PA44` 为 SWD。 |
-| L | L | 开启 | 启动模式；支持 DBG-UART、SWD、UART 和 USB 烧录。 |
-| PA00 或 Boot 寄存器 = 1 | L | 任意 | 启动模式；支持 DBG-UART、SWD、UART 和 USB 烧录。 |
-| PA00 或 Boot 寄存器 = 1 | H | 任意 | 启动模式；`PA19` 不输出启动日志；支持 SWD/USB 烧录，且 `PA18` / `PA19` 切换为 SWD。 |
+| `PA00 = L`，`BOOT REG = L` | H | 任意 | 常规启动；`PA19` 不输出启动日志；`PA18` / `PA19` 切换为 SWD，`PA43` / `PA44` 上的 SWD 功能禁用。 |
+| `PA00 = L`，`BOOT REG = L` | L | 关闭 | 常规启动；`PA19` 输出启动日志；`PA18` / `PA19` 为 DBG-UART，`PA43` / `PA44` 为 SWD。 |
+| `PA00 = L`，`BOOT REG = L` | L | 开启 | 启动模式；支持 DBG-UART、SWD、UART 和 USB 烧录。`PA19` 输出启动日志；`PA18` / `PA19` 仍为 DBG-UART，`PA43` / `PA44` 仍为 SWD。 |
+| PA00 或 Boot 寄存器 = 1 | L | 任意 | 启动模式；支持 DBG-UART、SWD、UART 和 USB 烧录。`PA19` 输出启动日志；`PA18` / `PA19` 仍为 DBG-UART，`PA43` / `PA44` 仍为 SWD。 |
+| PA00 或 Boot 寄存器 = 1 | H | 任意 | 启动模式；`PA19` 不输出启动日志；支持 SWD/USB 烧录，且 `PA18` / `PA19` 切换为 SWD；`PA43` / `PA44` 上的 SWD 功能禁用。 |
 
 </div>
 

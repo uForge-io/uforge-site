@@ -82,6 +82,8 @@ These groups are not interchangeable at the board level. The battery-powered and
 
 ### Graphics and Audio
 
+Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix).
+
 - ePicasso 2.0 2D/2.5D graphics accelerator
 - eZip 2.0 hardware decoder for lossless graphics compression
 - Dedicated LCD controller supporting SPI/DSPI/QSPI, including e-paper SPI, plus 8080-8bit
@@ -175,16 +177,19 @@ Use this sequence to turn an SF32LB52x shortlist into a validated design:
 ## Frequently Asked Questions
 
 **What are the key specifications of SF32LB52x?**
-SF32LB52x pairs an application CPU (Cortex-M33 @240 MHz) with a low-power core (Cortex-M33 @24/48 MHz, a dedicated Bluetooth controller), 576 KB of internal SRAM and dual-mode Bluetooth (BT Classic + BLE). Graphics: ePicasso 2.0 Lite. Package: QFN68 (7 × 7 mm). USB 2.0 FS. Family-level values; verify the exact part number's datasheet.
+SF32LB52x pairs an application CPU (Cortex-M33 @240 MHz) with a low-power core (Cortex-M33 @24/48 MHz, a dedicated Bluetooth controller), 576 KB of internal SRAM and dual-mode Bluetooth (BT Classic + BLE). Graphics: ePicasso 2.0 Lite. Package: QFN68 (7 × 7 mm). USB 2.0 FS.
 
 **Which display interfaces does SF32LB52x support?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI. Availability varies by part number and package.
+SPI / DSPI / QSPI / 8080 / EPD / JDI. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+
+**What is the maximum display resolution of SF32LB52x?**
+Up to 512 × 512 with RGB888 color, depending on a QSPI display interface with DTR support. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
 **How much in-package memory does SF32LB52x offer?**
-Up to 16 MB of in-package PSRAM and up to 4 MB of in-package NOR Flash, depending on the part number.
+Up to 16 MB of in-package PSRAM and up to 4 MB of in-package NOR Flash.
 
 **What supply voltage does SF32LB52x need?**
-3.2–4.7 V (520/3/5/7), 2.97–3.63 V (52B/E/G/J), 1.8 V (52D), depending on the variant. Confirm the exact range in the datasheet.
+3.2–4.7 V (520/3/5/7), 2.97–3.63 V (52B/E/G/J), 1.8 V (52D).
 
 **Where do I start a hardware design with SF32LB52x?**
 Start with the [SF32LB52x hardware design guide](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) for schematic, power, clock/RF and PCB layout guidance, then use the schematic and layout checklists before releasing the board.

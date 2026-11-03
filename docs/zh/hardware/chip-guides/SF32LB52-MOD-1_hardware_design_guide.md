@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52-MOD-1 - 硬件设计指南"
 icon: lucide/book-check
 hide:
     - navigation
@@ -12,7 +13,7 @@ tags:
 
 ## 1. 概述 { #1-overview }
 
-**SF32LB52-MOD-1** 是一款经认证的通用低功耗蓝牙（Bluetooth）MCU 模组，采用思澈科技（SiFli）的 SF32LB525UC6 芯片（双核 Arm Cortex-M33 STAR-MC1，最高主频 240 MHz）。模组采用 68 引脚表面贴装封装，尺寸为 27.9 × 18.0 × 3.1 mm；集成 48 MHz 晶体，并可选配 32.768 kHz 晶体和合封的 64 Mb OPI-PSRAM 晶粒。
+**SF32LB52-MOD-1** 是一款通用低功耗蓝牙（Bluetooth）MCU 模组，采用思澈科技（SiFli）的 SF32LB525UC6 芯片（双核 Arm Cortex-M33 STAR-MC1，最高主频 240 MHz）。模组采用 68 引脚表面贴装封装，尺寸为 27.9 × 18.0 × 3.1 mm；集成 48 MHz 晶体，并可选配 32.768 kHz 晶体和合封的 64 Mb OPI-PSRAM 晶粒。
 
 本指南介绍模组硬件集成所需的引脚定义、外设接口、电气特性、供电要求、参考原理图、原理图设计检查清单、模组尺寸与 PCB 封装图形，以及产品处理要求。内容基于思澈科技（SiFli）数据手册 **DS5203-SF32LB52-MOD-1 V0.3**。
 
@@ -20,6 +21,9 @@ tags:
 
 !!! note "来源与图片处理"
     本指南的模组专属技术数据以 **DS5203-SF32LB52-MOD-1 V0.3** 为准。数据手册中的部分引脚布局图、原理图和机械尺寸图为位图，本指南采用引用而非重绘方式处理。下文图表编号使用本站指南的独立编号；对于未复现的图片，标题中同时标注其在官方数据手册中的对应图号，便于对照查阅。
+
+!!! note "合规标识适用范围"
+    所提供的 SF32LB52-MOD-1-N16R8 和 SF32LB52-MOD-1-A128R16 标签上标有 FCC、IC、CMIIT ID 和 HVIN 编号，以及 CE 标志，详见[模组标识汇总](../../sf32-products/modules/SF32LB52-MOD-1.md#regulatory-markings)。请针对具体版本核实批准文件以及天线和集成条件；不要据此推定其他型号或最终产品也在覆盖范围内。
 
 ## 2. 快速设计概览 { #2-quick-design-summary }
 
@@ -34,6 +38,9 @@ tags:
 | SF32LB52-MOD-1-N16R8 | 16 MB QSPI-NOR | 8 MB OPI-PSRAM | -40∼85°C | 27.9×18.0×3.1 |
 
 </div>
+
+!!! note "定制需求"
+    如需其他模组配置或有定制需求，请[联系 μForge.io](../../about/contact.md)。
 
 ### 2.2 关键规格 { #22-key-specifications }
 

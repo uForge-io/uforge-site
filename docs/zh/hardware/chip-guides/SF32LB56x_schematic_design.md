@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x 硬件设计指南 — 原理图设计指导"
 icon: lucide/circuit-board
 description: "SF32LB56x MCU 的原理图设计指导：电源系统、工作模式与唤醒源、时钟生成、RF、显示/触摸/背光接口，以及存储、传感器、音频、连接与制造。"
 tags:

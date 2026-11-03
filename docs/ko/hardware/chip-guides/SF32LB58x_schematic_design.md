@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58x 하드웨어 설계 가이드 — 회로 설계 가이드라인"
 icon: lucide/circuit-board
 hide:
     - navigation

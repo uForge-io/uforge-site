@@ -19,7 +19,7 @@ Cette section présente les conventions utilisées pour décrire les interfaces 
 
 | Document | État et objectif | À utiliser quand |
 |:---------|:-------------------|:------------|
-| [Règles de nommage de l'interface M2](M2%20Interface%20Naming%20Rules.md) | Convention de nommage pour les familles et profils d'interface M2. | Pour nommer un module, un connecteur, une carte porteuse ou un profil d'interface dans la documentation et les fichiers de conception. |
+| [Règles de nommage de l'interface M2](M2-interface-naming-rules.md) | Convention de nommage pour les familles et profils d'interface M2. | Pour nommer un module, un connecteur, une carte porteuse ou un profil d'interface dans la documentation et les fichiers de conception. |
 | [Définition de l'interface M2](M2-interface-definition.md) | Projet de définition du brochage et proposition d'affectation des signaux. | Vous évaluez une proposition d'interface M2 pour une carte porteuse ou vérifiez le partage des signaux avant de choisir le connecteur. |
 
 </div>
@@ -40,7 +40,7 @@ La proposition de brochage ne garantit pas que tous les modules μForge ou boît
 ## Parcours de décision pour la carte porteuse { #carrier-board-decision-path }
 
 1. Choisissez le module et lisez sa présentation ainsi que son guide de conception matérielle.
-2. Utilisez les [règles de nommage de l'interface M2](M2%20Interface%20Naming%20Rules.md) pour rendre le profil visé sans ambiguïté.
+2. Utilisez les [règles de nommage de l'interface M2](M2-interface-naming-rules.md) pour rendre le profil visé sans ambiguïté.
 3. Utilisez la [définition de l'interface M2](M2-interface-definition.md) pour identifier les signaux candidats et les conflits de partage.
 4. Confirmez chaque contact utilisé dans la documentation spécifique au module et dans la documentation source SiFli applicable.
 5. Avant le début du routage, consignez dans la revue du schéma les versions des documents, les révisions du module et de la carte porteuse, les exceptions confirmées et les points non résolus.

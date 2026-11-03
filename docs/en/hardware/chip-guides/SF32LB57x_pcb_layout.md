@@ -1,4 +1,5 @@
 ---
+title: "SF32LB57x Hardware Design Guide — PCB Layout Guidelines"
 icon: lucide/layers
 hide:
     - navigation
@@ -102,8 +103,7 @@ The PTH and HDI design-rule figures also show example fabrication values: minimu
 
 !!! warning "Unresolved power-rail conflicts in the source"
     - **Trace width and rail label:** Original PCB guide Section 3.2.1 specifies at least 0.4 mm (about 15.7 mil) for both `VCC` and `PVDD`. Self-check Table 4-2-1-1 item 44, scoped to battery-powered variants, specifies at least 12 mil for `VCC`; item 47, scoped to 3.3 V-powered variants, is titled `PVDD` but its check detail specifies `VCC` at at least 12 mil. The source does not reconcile these widths or explain whether item 47's title or check detail identifies the intended rail. Do not infer a corrected value or apply one entry across both supply variants; obtain SiFli confirmation of the applicable rail, scope, and width before finalizing.
-    - **Output names:** Original PCB guide Section 3.2.1 lists `VDD_VOUT1` / `VDD_VOUT2`; self-check Table 4-2-1-1, items 45/46, and this page's Section 6.2 quick-reference table use `VDD33_VOUT1` / `VDD33_VOUT2`. The source does not say whether these names are aliases or different nets. Item 46's title repeats `VDD33_VOUT1`, while its check detail names `VDD33_VOUT2`.
-    Without SiFli confirmation, do not choose a trace width, assign item 47 to a rail, or treat the output-name variants as equivalent when finalizing the design.
+    Without SiFli confirmation, do not choose a trace width, or assign item 47 to a rail when finalizing the design.
 
 ### 6.4. Crystal Layout
 

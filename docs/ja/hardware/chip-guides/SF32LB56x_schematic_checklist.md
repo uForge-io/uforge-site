@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56xハードウェア設計ガイド — 回路図チェックリスト"
 icon: lucide/list-checks
 description: "SF32LB56x MCUの電源、クロック、RF、ストレージ、ディスプレイ、製造に関する回路図レビュー用チェックリスト。"
 tags:

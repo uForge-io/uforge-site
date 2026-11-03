@@ -110,7 +110,7 @@ Die Serie **LB** (Low-Power Bluetooth) ist die erste SF32-Produktlinie. Weitere 
 
 <div align="center"><em>Vergleich der SF32-Mikrocontroller</em></div>
 
-Die folgenden Werte geben einen Überblick über die Fähigkeiten der Produktfamilien. Sie sind keine Garantie dafür, dass jede SKU alle aufgeführten Merkmale bietet. Verfügbare Schnittstellen und Ressourcen können je nach Teilenummer, Gehäuse und Konfiguration variieren; prüfen Sie daher das Datenblatt des gewählten Bauteils.
+Die folgenden Werte geben einen Überblick über die Fähigkeiten der Produktfamilien. Sie sind keine Garantie dafür, dass jede SKU alle aufgeführten Merkmale bietet. Verfügbare Schnittstellen und Ressourcen können je nach Teilenummer, Gehäuse und Konfiguration variieren; prüfen Sie daher das Datenblatt des gewählten Bauteils. Die maximale Display-Auflösung und die Panel-Schnittstellen der einzelnen Familien finden Sie in der [Schnittstellenmatrix pro Gerät](../../learn/graphics/display-controller.md#per-device-interface-matrix).
 
 <div align="center" markdown>
 
@@ -123,6 +123,7 @@ Die folgenden Werte geben einen Überblick über die Fähigkeiten der Produktfam
 | Bluetooth | BT Classic + BLE | BLE | BT Classic + BLE | BT Classic + BLE | BT Classic + BLE |
 | Grafikbeschleuniger | 2.5D<br>ePicasso 2.0 Lite | 2.5D<br>ePicasso 1.0 | 2.5D<br>ePicasso 2.0 | 2.5D<br>ePicasso 3.0 + eZip 3.0 | 2.5D + Vektorgrafik<br>ePicasso 2.0 + Vivante GCNanoUltraV |
 | Display-Unterstützung | SPI / DSPI / QSPI / 8080 / EPD / JDI | SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI |
+| Maximale Display-Auflösung | 512 × 512, RGB888 | 512 × 512, RGB888 | BGA: 1024 × 600, RGB888<br>QFN: 512 × 512, RGB888 | 1024 × 600, RGB888 | 1280 × 800, RGB565<br>1280 × 720, RGB888 |
 | Audio-ADC | 1x | n. v. | 1x | 2x | 2x |
 | Audio-DAC | 1x | n. v. | 1x | 1x | 2x |
 | PDM-Audio-Schnittstellen | 1x | 1–2x* | 2x | 2x | 2x |

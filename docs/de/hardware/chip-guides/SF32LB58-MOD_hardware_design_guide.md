@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58-MOD - Hardware-Design-Leitfaden"
 icon: lucide/book-check
 hide:
     - navigation
@@ -21,6 +22,9 @@ Für die zugrunde liegende Chip-Architektur (Kerne, Grafik, Speicherarchitektur 
 !!! note "Umgang mit Quelle und Abbildungen"
     Dieser Leitfaden folgt **DS5802-SF32LB58-MOD V0.1** für modulspezifische technische Daten. Einige Pinbelegungs-, Schaltplan- und mechanische Zeichnungen im Datenblatt sind Rasterbilder und werden hier referenziert statt neu gezeichnet. Abbildungs- und Tabellennummern unten folgen der auf dieser Website üblichen leitfadeninternen Nummerierung; Bildunterschriften für nicht reproduzierte Diagramme verweisen auf die entsprechende Abbildungsnummer im offiziellen Datenblatt.
 
+!!! note "Geltungsbereich der Kennzeichnung"
+    Die bereitgestellten Etiketten für SF32LB58-MOD-N16R32N1 und SF32LB58-MOD-A128R32N1 zeigen FCC-, IC-, CMIIT-ID- und HVIN-Kennungen sowie CE. Siehe [Kennzeichnungsübersicht](../../sf32-products/modules/SF32LB58-MOD.md#regulatory-markings). Prüfen Sie Unterlagen und Antennen-/Integrationsbedingungen der genauen Revision; andere Varianten und das Endprodukt sind nicht automatisch abgedeckt.
+
 ## 2. Kurzübersicht des Designs { #2-quick-design-summary }
 
 ### 2.1 Modulvarianten { #21-module-variants }
@@ -36,6 +40,9 @@ Für die zugrunde liegende Chip-Architektur (Kerne, Grafik, Speicherarchitektur 
 | SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 bis 85 °C | 24 × 24 × 3,1 |
 
 </div>
+
+!!! note "Verfügbarkeit und Anpassungen"
+    **SF32LB58-MOD-E4R32N1 ist aufgrund der jüngsten Lieferengpässe bei Speicherchips nicht mehr verfügbar.** Andere Modulkonfigurationen sind ebenfalls möglich. Für individuelle Anpassungen [wenden Sie sich an μForge.io](../../about/contact.md).
 
 ### 2.2 Wichtige Spezifikationen { #22-key-specifications }
 

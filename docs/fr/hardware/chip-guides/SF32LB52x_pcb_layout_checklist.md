@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle SF32LB52x — Liste de contrôle d'implantation et de routage PCB"
 icon: lucide/list-checks
 hide:
     - navigation

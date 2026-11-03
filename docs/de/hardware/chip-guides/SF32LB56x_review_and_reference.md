@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x Hardware-Design-Leitfaden — Design-Review-Checkliste und Referenzen"
 icon: lucide/clipboard-check
 description: "Checkliste zur Designprüfung, verwandte Dokumente und Referenzen, Anhänge und Versionshistorie für den SF32LB56x Hardware-Design-Leitfaden."
 tags:

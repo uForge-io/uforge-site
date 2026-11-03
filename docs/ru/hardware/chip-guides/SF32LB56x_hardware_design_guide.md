@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x - Руководство по аппаратной разработке"
 icon: lucide/book-check
 description: "Руководство по проектированию аппаратуры SF32LB56x: питание, генерация тактовых сигналов, RF, дисплей, аудио и рекомендации по разводке PCB."
 tags:
@@ -8,7 +9,7 @@ hide:
     - navigation
 ---
 
-# Руководство по проектированию аппаратуры SF32LB56x { #sf32lb56x-hardware-design-guide }
+# Руководство по аппаратной разработке SF32LB56x { #sf32lb56x-hardware-design-guide }
 
 ## 1. Введение { #1-introduction }
 

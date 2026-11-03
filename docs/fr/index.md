@@ -22,7 +22,7 @@ hide:
 <div class="uf-hero-actions" markdown>
 
 [Premiers pas :material-arrow-right:](getting-started/index.md){ .md-button .md-button--primary }
-[Produits SF32 :material-file-document-outline:](sf32-products/family/SF32_family.md){ .md-button }
+[Sélecteur de produits SF32 :material-file-document-outline:](sf32-products/product-selector.md){ .md-button }
 [GitHub :fontawesome-brands-github:](https://github.com/uforge-io){ .md-button }
 
 </div>
@@ -126,7 +126,7 @@ hide:
 
 - :fontawesome-solid-cube:{ .uf-icon-purple } **Accélération graphique**
 
-    GPU 2D / 2,5D, contrôleurs LCD et prise en charge de LVGL pour des interfaces graphiques riches et fluides. À l'échelle de la famille, les interfaces prises en charge comprennent MIPI, RGB, QSPI, 8080, JDI et EPD, avec des résolutions allant jusqu'à 1280 × 720.
+    GPU 2D / 2,5D, contrôleurs LCD et prise en charge de LVGL pour des interfaces graphiques riches et fluides. À l'échelle de la famille, les interfaces prises en charge comprennent MIPI, RGB, QSPI, 8080, JDI et EPD, avec des résolutions allant jusqu'à 1280 × 800.
 
 - :fontawesome-solid-volume-high:{ .uf-icon-pink } **Sous-système audio**
 
@@ -207,7 +207,7 @@ hide:
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1 tricœur
     - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 6.3 bimode
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Affichage MIPI jusqu'à 1280 x 720
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Affichage MIPI jusqu'à 1280 x 800
     - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2,5D + graphiques vectoriels, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 et décodage JPEG/MJPEG
     - :fontawesome-solid-circle:{ .uf-dot-blue } Codec audio, 2 x AMIC, 4 x DMIC

@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle SF32LB57x — Liste de contrôle de revue de conception et références"
 icon: lucide/clipboard-check
 hide:
     - navigation
@@ -90,6 +91,8 @@ Avant le gel de conception, vérifiez que les critères d'approbation suivants s
 
 ## 8. Documents et références associés { #8-related-documents-and-references }
 
+[Source chinoise vérifiée](https://github.com/OpenSiFli/SiFli-Wiki/blob/5f70d425f9d8fe47fbad73e370abdee8b9555e90/source/zh_CN/hardware/SF32LB57x-HW-Application.md) (2026-10-23, `5f70d425`).
+
 Consultez les documents officiels les plus récents pour vérifier les limites électriques, les données du boîtier, le multiplexage des broches, la configuration logicielle, la qualification des composants et les contraintes de fabrication.
 
 <div class="grid cards" markdown>
@@ -132,12 +135,13 @@ Un produit basé sur le SF32LB57x peut comprendre la MCU, le réseau d'alimentat
 
 | Version | Date | Remarques |
 |:--------|:-----|:------|
+| 0.6 | 2026-11-03 | Vérification à partir de la source chinoise OpenSiFli mise à jour le 2026-10-23 : schémas de système minimal V2, tableaux d'alimentation et limites VDDIOA/Flash actualisés ; signaux LCDC vérifiés et conditions de démarrage clarifiées ; distinction entre interfaces des pilotes d'écran et interfaces natives du MCU ; notes sur les écarts actualisées. |
 | 0.5 | 2026-08 | Le niveau de détail complet de la note d'application officielle a été rétabli. Ont été ajoutés : quatre tableaux de référence des broches d'alimentation, répartis par boîtier et famille d'alimentation ; le tableau du port de débogage par défaut ; le schéma RF ; les tableaux complets des signaux d'affichage (SPI/QSPI, RGB, configuration du mode RGB, MCU8080, EPD, JDI parallèle/série, tactile/rétroéclairage) ; les schémas de référence du microphone analogique, du microphone PDM et de l'amplificateur audio ; le tableau complet des signaux de caméra propres à la puce ; les tableaux IO MUX et matriciel ; le sous-tableau de multiplexage de la matrice LCDC ; le tableau des broches USB ; le tableau GPADC détaillé par broche ; ainsi que le schéma de référence des touches d'alimentation et GPADC. Les tableaux officiels d'auto-vérification ont été répartis entre les nouvelles pages [liste de contrôle du schéma](SF32LB57x_schematic_checklist.md) et [liste de contrôle de la conception de la PCB](SF32LB57x_pcb_layout_checklist.md), sans omettre aucun point de contrôle. |
 | 0.4 | 2026-08 | Les données ont été vérifiées par rapport à la note d'application matérielle officielle du SF32LB57x. Le minimum du tableau des broches `VCC`/`VBAT` a été corrigé à 3,0 V (au lieu de 3,2 V) et le seuil d'arrêt matériel de 2,7 V a été ajouté. La limite de courant de démarrage progressif de `VDD33_VOUT1` a été corrigée à 30 mA ; les capacités de charge possibles du quartz de 32,768 kHz ont été précisées (7 pF ou 11,5 pF ; la puce utilise 11,5 pF par défaut). Le circuit de la touche d'alimentation/réinitialisation `PA34` et la conception d'une touche GPADC à diviseur résistif ont été décrits. Ont également été ajoutés la plage d'entrée GPADC de 0 V à 3,3 V, le condensateur de filtrage de 100 nF, les valeurs des condensateurs `BUCK_FB`/`VDDIOA`/`VBATS`/`AVDD33_ANA`, les contraintes PCB de longueur totale et d'écart de longueur entre signaux du bus MPI, les espacements de placement du quartz et l'affectation des couches pour un empilement à 4 couches. |
 | 0.3 | 2026-07 | Restructuration des directives de schéma afin que la conception du système minimal, le système d'alimentation, la génération d'horloge, la RF, les interfaces utilisateur, le stockage et la connectivité, ainsi que la fabrication constituent des sections distinctes de même niveau. |
 | 0.2 | 2026-07 | Ajout du dossier de preuves, des directives de mise en service, de la validation basse consommation, de la validation RF/affichage/audio/caméra, et de la référence rapide des contraintes PCB critiques. |
 | 0.1 | 2026-07 | Publication initiale du guide de conception matérielle SF32LB57x basée sur la note d'application matérielle officielle. |
-| 0.0.1 | 2026-06 | Révision 0.0.1 de la source : première édition de la note d'application matérielle SF32LB57x, versionnée séparément de ce guide. |
+| 0.0.1 | 2026-10 | Révision 0.0.1 de la source : première édition de la note d'application matérielle SF32LB57x, versionnée séparément de ce guide. |
 
 </div>
 

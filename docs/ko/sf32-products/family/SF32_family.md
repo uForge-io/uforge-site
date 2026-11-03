@@ -110,7 +110,7 @@ tags:
 
 <div align="center"><em>SF32 마이크로컨트롤러 비교</em></div>
 
-아래 값은 제품군 수준의 기능을 요약한 것으로, 모든 SKU에서 보장되는 것은 아닙니다. 인터페이스 지원 여부와 리소스 개수는 정확한 파트 넘버, 패키지 또는 구성에 따라 달라질 수 있으므로 선택한 부품의 데이터시트를 확인하십시오.
+아래 값은 제품군 수준의 기능을 요약한 것으로, 모든 SKU에서 보장되는 것은 아닙니다. 인터페이스 지원 여부와 리소스 개수는 정확한 부품 번호, 패키지 또는 구성에 따라 달라질 수 있으므로 선택한 부품의 데이터시트를 확인하십시오. 제품군별 최대 디스플레이 해상도와 패널 인터페이스는 [디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)에서 확인하십시오.
 
 <div align="center" markdown>
 
@@ -123,6 +123,7 @@ tags:
 | Bluetooth | BT Classic + BLE | BLE | BT Classic + BLE | BT Classic + BLE | BT Classic + BLE |
 | 그래픽 가속기 | 2.5D<br>ePicasso 2.0 Lite | 2.5D<br>ePicasso 1.0 | 2.5D<br>ePicasso 2.0 | 2.5D<br>ePicasso 3.0 + eZip 3.0 | 2.5D + 벡터 그래픽<br>ePicasso 2.0 + Vivante GCNanoUltraV |
 | 디스플레이 지원 | SPI / DSPI / QSPI / 8080 / EPD / JDI | SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI |
+| 최대 디스플레이 해상도 | 512 × 512, RGB888 | 512 × 512, RGB888 | BGA: 1024 × 600, RGB888<br>QFN: 512 × 512, RGB888 | 1024 × 600, RGB888 | 1280 × 800, RGB565<br>1280 × 720, RGB888 |
 | 오디오 ADC | 1개 | 해당 없음 | 1개 | 2개 | 2개 |
 | 오디오 DAC | 1개 | 해당 없음 | 1개 | 1개 | 2개 |
 | PDM 오디오 인터페이스 | 1개 | 1~2개* | 2개 | 2개 | 2개 |

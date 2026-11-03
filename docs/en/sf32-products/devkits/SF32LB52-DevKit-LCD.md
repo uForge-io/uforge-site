@@ -73,8 +73,6 @@ For a smaller board with castellated edges, use [SF32LB52-DevKit-Nano](SF32LB52-
 
 The board codes and memory configurations above follow SiFli's [development-board model guide](https://wiki.sifli.com/en/board/devkit_guide.html). Before using a board as a design baseline, check its revision against the board marking and the matching design package.
 
-The A128R16 Flash labels differ across the official sources: the [OpenSiFli module-model guide](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) identifies the module as 128 MB SPI-NAND, while the board-model guide lists the corresponding DevKit SKU as 128 MB QSPI-NAND. The sources do not explain whether this reflects the fitted part or interface wording. Confirm the Flash part and bus mode against the schematic/BOM for the exact board revision before relying on this configuration.
-
 ## Version Notes { #version-notes }
 
 <div align="center"><em>Board Version History</em></div>

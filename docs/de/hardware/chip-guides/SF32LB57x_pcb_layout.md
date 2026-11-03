@@ -1,4 +1,5 @@
 ---
+title: "SF32LB57x Hardware-Design-Leitfaden — PCB-Layout-Richtlinien"
 icon: lucide/layers
 hide:
     - navigation
@@ -102,8 +103,7 @@ Die PTH- und HDI-Designregelabbildungen zeigen auch beispielhafte Fertigungswert
 
 !!! warning "Ungeklärte Konflikte bei Versorgungsnetzen in der Quelle"
     - **Leiterbahnbreite und Netzbezeichnung:** Abschnitt 3.2.1 des originalen PCB-Leitfadens verlangt für `VCC` und `PVDD` jeweils mindestens 0,4 mm (ca. 15,7 mil). Punkt 44 der Selbstprüftabelle 4-2-1-1 gilt für akkubetriebene Varianten und verlangt für `VCC` mindestens 12 mil; Punkt 47 gilt für 3,3-V-Varianten, trägt den Titel `PVDD`, nennt im Prüfdetail jedoch `VCC` mit mindestens 12 mil. Die Quelle gleicht diese Breitenangaben nicht ab und erklärt nicht, ob bei Punkt 47 der Titel oder das Prüfdetail das Zielnetz bezeichnet. Keinen korrigierten Wert ableiten und keinen Eintrag pauschal auf beide Versorgungsvarianten übertragen; vor der Freigabe mit SiFli Zielnetz, Anwendungsbereich und Breite bestätigen.
-    - **Ausgangsbezeichnungen:** Abschnitt 3.2.1 des originalen PCB-Leitfadens verwendet `VDD_VOUT1` / `VDD_VOUT2`, während die Punkte 45/46 der Selbstprüftabelle 4-2-1-1 und die Kurzreferenztabelle in Abschnitt 6.2 dieser Seite `VDD33_VOUT1` / `VDD33_VOUT2` verwenden. Die Quelle erklärt nicht, ob die Bezeichnungen Aliasnamen oder unterschiedliche Netze sind. Der Titel von Punkt 46 wiederholt `VDD33_VOUT1`, im Prüfdetail steht jedoch `VDD33_VOUT2`.
-    Ohne Bestätigung durch SiFli beim Finalisieren des Designs weder eine Leiterbahnbreite wählen noch Punkt 47 einem Netz zuordnen noch die Varianten der Ausgangsnamen als gleichwertig behandeln.
+    Ohne Bestätigung durch SiFli beim Finalisieren des Designs weder eine Leiterbahnbreite wählen noch Punkt 47 einem Netz zuordnen.
 
 ### 6.4. Quarz-Layout { #64-crystal-layout }
 

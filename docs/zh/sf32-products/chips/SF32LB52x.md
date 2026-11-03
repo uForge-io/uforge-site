@@ -82,6 +82,8 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 
 ### 图形与音频 { #graphics-and-audio }
 
+各型号支持的最高分辨率和面板接口，见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
+
 - ePicasso 2.0 2D/2.5D 图形加速器
 - eZip 2.0 无损图形解压硬件加速器
 - 专用 LCD 控制器，支持 SPI/DSPI/QSPI（含墨水屏 SPI）以及 8080-8 bit
@@ -175,19 +177,22 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 ## 常见问题 { #frequently-asked-questions }
 
 **SF32LB52x 的主要规格是什么？**
-SF32LB52x 由应用 CPU（Cortex-M33 @240 MHz）与低功耗内核（Cortex-M33 @24/48 MHz，专用蓝牙控制器）组成，内置 576 KB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 2.0 Lite。封装：QFN68（7 × 7 mm）。USB 2.0 FS。以上为系列级参数，具体以所选型号的数据手册为准。
+SF32LB52x 配备应用 CPU（Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33 @24/48 MHz，专用蓝牙控制器）和 576 KB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 2.0 Lite。封装：QFN68（7 × 7 mm）。USB 2.0 FS。
 
 **SF32LB52x 支持哪些显示接口？**
-SPI / DSPI / QSPI / 8080 / EPD / JDI。具体支持情况因型号和封装而异。
+SPI / DSPI / QSPI / 8080 / EPD / JDI。各接口适用型号见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
+
+**SF32LB52x 支持的最大显示分辨率是多少？**
+最高支持 512 × 512、RGB888；需搭配支持 DTR 的 QSPI 显示接口。详见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
 
 **SF32LB52x 的封装内存储器有多大？**
-按型号不同，封装内 PSRAM 最多 16 MB，封装内 NOR Flash 最多 4 MB。
+封装内 PSRAM 最多 16 MB，封装内 NOR Flash 最多 4 MB。
 
 **SF32LB52x 需要什么供电电压？**
-按变体不同为 3.2–4.7 V (520/3/5/7), 2.97–3.63 V (52B/E/G/J), 1.8 V (52D)，请以数据手册确认具体范围。
+3.2–4.7 V （520/3/5/7），2.97–3.63 V （52B/E/G/J），1.8 V （52D）。
 
 **如何开始基于 SF32LB52x 的硬件设计？**
-请先阅读 [SF32LB52x 硬件设计指南](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求，并在投板前使用原理图与布局检查清单。
+请先阅读 [SF32LB52x 硬件设计指南](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求；投板前再使用原理图与布局检查清单。
 <!-- uf-faq:end -->
 
 ## 相关产品 { #related-products }

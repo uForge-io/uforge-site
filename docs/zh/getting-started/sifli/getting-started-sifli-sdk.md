@@ -1,5 +1,6 @@
 ---
 icon: lucide/terminal
+title: "SiFli-SDK 入门"
 description: "从开箱的 SF32 开发板开始，通过 SiFli-SDK 安装工具链、使用 scons 构建，并经 UART 烧录和运行 hello_world。"
 tags:
     - 快速开始

@@ -1,4 +1,5 @@
 ---
+title: "SF32LB55x — guia de projeto de hardware"
 icon: lucide/book-check
 hide:
     - navigation

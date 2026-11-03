@@ -22,7 +22,7 @@ hide:
 <div class="uf-hero-actions" markdown>
 
 [快速开始 :material-arrow-right:](getting-started/index.md){ .md-button .md-button--primary }
-[SF32 产品 :material-file-document-outline:](sf32-products/family/SF32_family.md){ .md-button }
+[SF32 选型工具 :material-file-document-outline:](sf32-products/product-selector.md){ .md-button }
 [GitHub :fontawesome-brands-github:](https://github.com/uforge-io){ .md-button }
 
 </div>
@@ -126,7 +126,7 @@ hide:
 
 - :fontawesome-solid-cube:{ .uf-icon-purple } **图形加速**
 
-    2D / 2.5D GPU、LCD 控制器与 LVGL 支持流畅、丰富的图形界面。整个系列支持的接口包括 MIPI、RGB、QSPI、8080、JDI 和 EPD，分辨率最高可达 1280 × 720。
+    2D / 2.5D GPU、LCD 控制器与 LVGL 支持流畅、丰富的图形界面。整个系列支持的接口包括 MIPI、RGB、QSPI、8080、JDI 和 EPD，分辨率最高可达 1280 × 800。
 
 - :fontawesome-solid-volume-high:{ .uf-icon-pink } **音频子系统**
 
@@ -207,7 +207,7 @@ hide:
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } 三核 Cortex-M33 STAR-MC1
     - :fontawesome-solid-circle:{ .uf-dot-blue } 双模蓝牙 6.3
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 最高 1280 × 720 MIPI 显示
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 最高 1280 × 800 MIPI 显示
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU + 矢量图形，ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 及 JPEG/MJPEG 解码
     - :fontawesome-solid-circle:{ .uf-dot-blue } 音频编解码器，2 路 AMIC，4 路 DMIC

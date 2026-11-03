@@ -1,5 +1,6 @@
 ---
 icon: lucide/terminal
+title: "SiFli-SDKをはじめる"
 description: "開封したばかりのSF32ボードで、SiFli-SDKの環境を構築し、sconsでビルドして、UART経由でhello_worldを実行するまでを説明します。"
 tags:
     - はじめに

@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x 硬件设计指南 — PCB 布局指导"
 icon: lucide/layers
 description: "SF32LB56x MCU 的 PCB 布局指导：封装与叠层、关键走线，以及逐项 PCB 布局核对表。"
 tags:

@@ -1,4 +1,5 @@
 ---
+title: "Guía de diseño de hardware SF32LB52x — Lista de comprobación para la revisión del diseño y referencias"
 icon: lucide/clipboard-check
 hide:
     - navigation

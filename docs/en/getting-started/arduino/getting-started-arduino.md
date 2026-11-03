@@ -1,5 +1,6 @@
 ---
 icon: lucide/puzzle
+title: "Getting Started with Arduino"
 description: "Step-by-step first run of OpenSiFli's beta ArduinoCore-zephyr on the SF32LB52 DevKit LCD: install the board package, upload a serial test, and Blink."
 tags:
     - Getting started

@@ -1,4 +1,5 @@
 ---
+title: "SF32LB55x - 하드웨어 설계 가이드"
 icon: lucide/book-check
 hide:
     - navigation

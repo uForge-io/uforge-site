@@ -1,4 +1,5 @@
 ---
+title: "Руководство по аппаратной разработке SF32LB58x — рекомендации по разводке PCB"
 icon: lucide/layers
 hide:
     - navigation

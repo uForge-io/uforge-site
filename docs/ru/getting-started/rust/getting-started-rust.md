@@ -1,5 +1,6 @@
 ---
 icon: lucide/code
+title: "Начало работы с Rust"
 description: "Первая оценка sifli-rs от OpenSiFli на SF32LB52: установка цели Rust, сборка неизменённого Blinky, настройка sftool и сохранение пути восстановления через SDK."
 tags:
     - Начало работы

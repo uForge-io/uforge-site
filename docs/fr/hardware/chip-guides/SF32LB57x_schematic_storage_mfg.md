@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle SF32LB57x — Stockage et fabrication"
 icon: lucide/circuit-board
 hide:
     - navigation
@@ -63,6 +64,10 @@ Avant de figer le schéma, confirmez :
 | `HOLD#` / `SD2_D1` | `PA17` | `PA17` |
 
 </div>
+
+!!! warning "Numérotation des signaux SDIO incohérente dans la source"
+    Le tableau de câblage mémoire de SiFli nomme `SD2_*` les signaux associés à `PA12`–`PA17`, tandis que le tableau IO MUX indique `SD1_*` pour la fonction 2 sur ces broches. Le tableau ci-dessus conserve les noms du câblage. Les broches physiques correspondent, mais ces noms ne permettent pas à eux seuls de choisir SDIO2 ou une instance dans le firmware. Vérifiez le manuel utilisateur, la configuration des broches du SDK et le schéma de référence du composant exact.
+
 
 #### 5.6.3. Contrôle du démarrage et de l'alimentation { #563-boot-and-power-control }
 
@@ -404,11 +409,11 @@ Les broches de débogage et de téléchargement par défaut doivent rester acces
 
 | `PA00` / Registre de démarrage | `PA01` | Commutateur de démarrage hôte | Branche de démarrage et interfaces disponibles |
 |:-----------------------|:-------|:-----------------|:------------|
-| L | H | Quelconque | Démarrage normal ; `PA19` ne produit pas de journaux de démarrage ; `PA18` / `PA19` basculent vers SWD et le SWD de `PA43` / `PA44` est désactivé. |
-| L | L | Désactivé | Démarrage normal ; `PA19` produit des journaux de démarrage ; `PA18` / `PA19` sont DBG-UART et `PA43` / `PA44` sont SWD. |
-| L | L | Activé | Mode de démarrage ; la programmation DBG-UART, SWD, UART, et USB est prise en charge. |
-| PA00 ou registre de démarrage = 1 | L | Quelconque | Mode de démarrage ; la programmation DBG-UART, SWD, UART, et USB est prise en charge. |
-| PA00 ou registre de démarrage = 1 | H | Quelconque | Mode de démarrage ; `PA19` ne produit pas de journaux de démarrage ; la programmation SWD/USB est prise en charge, et `PA18` / `PA19` basculent vers SWD. |
+| `PA00 = L`, `BOOT REG = L` | H | Quelconque | Démarrage normal ; `PA19` n'émet pas les journaux de démarrage ; `PA18` / `PA19` passent à la fonction SWD et le SWD de `PA43` / `PA44` est désactivé. |
+| `PA00 = L`, `BOOT REG = L` | L | Désactivé | Démarrage normal ; `PA19` émet les journaux de démarrage ; `PA18` / `PA19` assurent le DBG-UART et `PA43` / `PA44` le SWD. |
+| `PA00 = L`, `BOOT REG = L` | L | Activé | Mode de démarrage ; la programmation par DBG-UART, SWD, UART et USB est prise en charge. `PA19` émet les journaux de démarrage ; `PA18` / `PA19` restent affectées au DBG-UART et `PA43` / `PA44` au SWD. |
+| PA00 ou registre de démarrage = 1 | L | Quelconque | Mode de démarrage ; la programmation par DBG-UART, SWD, UART et USB est prise en charge. `PA19` émet les journaux de démarrage ; `PA18` / `PA19` restent affectées au DBG-UART et `PA43` / `PA44` au SWD. |
+| PA00 ou registre de démarrage = 1 | H | Quelconque | Mode de démarrage ; la programmation par SWD/USB est prise en charge. `PA19` n'émet pas les journaux de démarrage ; `PA18` / `PA19` passent à la fonction SWD et le SWD de `PA43` / `PA44` est désactivé. |
 
 </div>
 

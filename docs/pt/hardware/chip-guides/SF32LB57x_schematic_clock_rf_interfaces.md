@@ -47,6 +47,8 @@ A faixa especificada de capacitância de carga do cristal de 48 MHz é de 7 pF a
 
 #### 5.3.2. Cristal RTC de 32,768 kHz { #532-32768-khz-rtc-crystal }
 
+As figuras V2 permitem omitir o cristal de 32,768 kHz e usar o oscilador RC interno. Antes de dispensar o cristal, avalie os requisitos de precisão do RTC, do Bluetooth e de baixo consumo; no firmware, selecione a fonte de clock de baixa frequência correspondente.
+
 Parâmetros recomendados:
 
 <div align="center"><em>Tabela 5.3-2: Parâmetros recomendados para o cristal RTC de 32,768 kHz</em></div>
@@ -158,7 +160,6 @@ O LCDC do SF32LB57x aceita vários tipos de interface de display, dependendo do 
 | SPI / QSPI | Displays TFT/AMOLED compactos e displays para dispositivos vestíveis | Usa poucos pinos, mas tem largura de banda limitada; é adequado para atualização parcial. |
 | 8080 MCU | Painéis com interface paralela | Oferece mais largura de banda que interfaces seriais, mas utiliza mais pinos. |
 | RGB / DPI | Painéis de resolução média ou alta | Fluxo contínuo de pixels, com requisitos rigorosos de largura de banda e temporização. |
-| MIPI DSI | AMOLED de alta densidade | Oferece alta largura de banda com poucos pinos, mas exige mais atenção à inicialização e à integridade de sinal. |
 | EPD | Papel eletrônico | Tem baixa frequência de atualização e exige planejamento de VCOM, PMIC e formas de onda. |
 | JDI | Displays de baixo consumo com Memory-in-Pixel | Adequado a produtos com display sempre ativo e legível sob luz solar. |
 
@@ -183,9 +184,11 @@ Observações e exemplos comuns de display:
 | 8080 MCU | Em projetos de alta velocidade, aplique a mesma regra de seleção de grupos de pinos usada para RGB/DPI; confira a largura do barramento, a temporização e a capacidade de acionamento com base no painel. |
 | EPD | Se o barramento EPD operar acima de 30 MHz, aplique a mesma regra de seleção de grupos de pinos usada para RGB/DPI; avalie também VCOM e os pinos de controle do PMIC. |
 | JDI | Siga a tabela de mapeamento dos sinais JDI do LCDC e prefira uma configuração de painel adaptada ao SDK, quando disponível. |
-| MIPI DSI | Use a atribuição fixa dos sinais DSI definida para o componente selecionado e o projeto de referência; confirme com a equipe de software o roteamento das lanes e a inicialização do painel. |
 
 </div>
+
+!!! note "As interfaces do controlador de tela não são interfaces nativas do MCU"
+    Esta seção considera SPI/QSPI, RGB/DPI, 8080, EPD e JDI como interfaces diretas do MCU. Alguns controladores abaixo também suportam MIPI-DSI; isso não comprova um host DSI nativo ou pinos DSI fixos no SF32LB57x. Selecione uma interface suportada por ambos os dispositivos e confirme a referência exata e o projeto de referência.
 
 <div align="center"><em>Tabela 5.5-3: Exemplos de controladores LCD</em></div>
 
@@ -374,6 +377,8 @@ As tabelas a seguir mostram o mapeamento exato entre sinais e pinos para cada ti
 | `GOOD` | `GOOD` | Qualquer GPIO | Saída de indicação de alimentação correta do PMIC do EPD. |
 
 </div>
+
+A coluna EPD de 8 bits da fonte também inclui `D8`, totalizando nove sinais (`D0`–`D8`) para uma interface nominal de 8 bits. Trata-se de uma inconsistência ainda não esclarecida, não de um bit adicional suportado. Confirme a largura real do barramento e as conexões com a SiFli e o fabricante da tela antes de usar essa linha.
 
 <div align="center"><em>Tabela 5.5-9: Conexões dos sinais do display JDI paralelo</em></div>
 

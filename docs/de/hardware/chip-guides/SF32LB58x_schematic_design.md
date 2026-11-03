@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58x-Hardware-Design-Leitfaden — Schaltplanrichtlinien"
 icon: lucide/circuit-board
 hide:
     - navigation

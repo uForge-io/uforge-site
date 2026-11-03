@@ -22,7 +22,7 @@ hide:
 <div class="uf-hero-actions" markdown>
 
 [開発を始める :material-arrow-right:](getting-started/index.md){ .md-button .md-button--primary }
-[SF32製品 :material-file-document-outline:](sf32-products/family/SF32_family.md){ .md-button }
+[SF32選定ツール :material-file-document-outline:](sf32-products/product-selector.md){ .md-button }
 [GitHub :fontawesome-brands-github:](https://github.com/uforge-io){ .md-button }
 
 </div>
@@ -126,7 +126,7 @@ hide:
 
 - :fontawesome-solid-cube:{ .uf-icon-purple } **グラフィックスアクセラレーション**
 
-    2D / 2.5D GPU、LCDコントローラー、LVGLにより、豊かで滑らかなグラフィカルインターフェースを実現します。ファミリー全体ではMIPI、RGB、QSPI、8080、JDI、EPDなどに対応し、解像度は最大1280 × 720です。
+    2D / 2.5D GPU、LCDコントローラー、LVGLにより、豊かで滑らかなグラフィカルインターフェースを実現します。ファミリー全体ではMIPI、RGB、QSPI、8080、JDI、EPDなどに対応し、解像度は最大1280 × 800です。
 
 - :fontawesome-solid-volume-high:{ .uf-icon-pink } **オーディオサブシステム**
 
@@ -207,7 +207,7 @@ hide:
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } トリプルコアCortex-M33 STAR-MC1
     - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルモードBluetooth 6.3
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 最大1280 × 720のMIPIディスプレイ
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 最大1280 × 800のMIPIディスプレイ
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPUとベクターグラフィックス、ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0、JPEG / MJPEGデコーダー
     - :fontawesome-solid-circle:{ .uf-dot-blue } オーディオコーデック、AMIC × 2、DMIC × 4

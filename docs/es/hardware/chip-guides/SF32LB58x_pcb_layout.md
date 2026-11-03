@@ -1,4 +1,5 @@
 ---
+title: "Guía de diseño de hardware SF32LB58x — Pautas de diseño de PCB"
 icon: lucide/layers
 hide:
     - navigation

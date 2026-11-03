@@ -1,5 +1,6 @@
 ---
 icon: lucide/terminal
+title: "Premiers pas avec SiFli-SDK"
 description: "Exécutez hello_world sur une carte SF32 par UART avec SiFli-SDK : installez la chaîne d'outils, compilez avec scons et flashez le firmware par UART."
 tags:
     - Prise en main

@@ -82,6 +82,8 @@ Diese Gruppen sind auf Board-Ebene nicht austauschbar. Akkubetriebene und extern
 
 ### Grafik und Audio { #graphics-and-audio }
 
+Maximale Auflösung und Panel-Schnittstellen: siehe [Schnittstellenmatrix pro Gerät](../../learn/graphics/display-controller.md#per-device-interface-matrix).
+
 - ePicasso-2.0-2D/2.5D-Grafikbeschleuniger
 - eZip-2.0-Hardware-Decoder für verlustfreie Grafikkompression
 - Dedizierter LCD-Controller mit Unterstützung für SPI/DSPI/QSPI, einschließlich E-Paper-SPI, sowie 8080-8bit
@@ -175,16 +177,19 @@ Mit diesen Schritten überführen Sie eine Vorauswahl für SF32LB52x in ein vali
 ## Häufig gestellte Fragen { #frequently-asked-questions }
 
 **Was sind die wichtigsten Spezifikationen des SF32LB52x?**
-Der SF32LB52x kombiniert eine Anwendungs-CPU (Cortex-M33 @240 MHz) mit einem Low-Power-Kern (Cortex-M33 @24/48 MHz, mit einem dedizierten Bluetooth-Controller), 576 KB internem SRAM und Dual-Mode-Bluetooth (BT Classic + BLE). Grafik: ePicasso 2.0 Lite. Gehäuse: QFN68 (7 × 7 mm). USB 2.0 FS. Werte auf Familienebene; prüfen Sie das Datenblatt der genauen Typnummer.
+Der SF32LB52x kombiniert eine Anwendungs-CPU (Cortex-M33 @240 MHz) mit einem Low-Power-Kern (Cortex-M33 @24/48 MHz; dedizierter Bluetooth-Controller). Hinzu kommen 576 KB internes SRAM und Dual-Mode-Bluetooth (BT Classic + BLE). Grafik: ePicasso 2.0 Lite. Gehäuse: QFN68 (7 × 7 mm). USB 2.0 FS.
 
 **Welche Display-Schnittstellen unterstützt der SF32LB52x?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI. Die Verfügbarkeit hängt von Typnummer und Gehäuse ab.
+SPI / DSPI / QSPI / 8080 / EPD / JDI. ([Schnittstellenmatrix pro Gerät](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+
+**Welche maximale Display-Auflösung unterstützt der SF32LB52x?**
+Bis zu 512 × 512 in RGB888 über eine QSPI-Displayschnittstelle mit DTR-Unterstützung. ([Schnittstellenmatrix pro Gerät](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
 **Wie viel Speicher im Gehäuse bietet der SF32LB52x?**
-Bis zu 16 MB PSRAM und bis zu 4 MB NOR-Flash im Gehäuse, abhängig von der Typnummer.
+Bis zu 16 MB PSRAM und bis zu 4 MB NOR-Flash im Gehäuse.
 
 **Welche Versorgungsspannung benötigt der SF32LB52x?**
-3.2–4.7 V (520/3/5/7), 2.97–3.63 V (52B/E/G/J), 1.8 V (52D), je nach Variante. Den genauen Bereich bestätigt das Datenblatt.
+3,2–4,7 V (520/3/5/7), 2,97–3,63 V (52B/E/G/J), 1,8 V (52D).
 
 **Wo beginne ich ein Hardware-Design mit dem SF32LB52x?**
 Beginnen Sie mit dem [Hardware-Design-Leitfaden für den SF32LB52x](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) zu Schaltplan, Stromversorgung, Takt/RF und PCB-Layout und nutzen Sie vor der Freigabe die Checklisten für Schaltplan und Layout.

@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x Hardware Design Guide — Schematic Design Guidelines"
 icon: lucide/circuit-board
 description: "Schematic design guidelines for the SF32LB56x MCU: power, operating modes and wake sources, clocks, RF, display/touch/backlight, audio, storage, and manufacturing."
 tags:

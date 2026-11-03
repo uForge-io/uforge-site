@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58x Hardware Design Guide — Schematic Design Guidelines"
 icon: lucide/circuit-board
 hide:
     - navigation

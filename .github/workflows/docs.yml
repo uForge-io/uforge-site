@@ -28,6 +28,8 @@ jobs:
     steps:
       - uses: actions/configure-pages@v6
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 2   # the IndexNow step diffs the deployed commit against its parent
       - uses: actions/setup-python@v6
         with:
           python-version: 3.x
@@ -63,8 +65,17 @@ jobs:
       # Fails the deploy if any rewritten reference no longer resolves.
       - name: Share assets across languages
         run: python3 .github/scripts/dedupe-site-assets.py publish zh ja es de fr pt ru ko
+      # Pages whose URL changed keep a tiny redirect stub at the old address
+      # (.github/data/redirects.json); GitHub Pages cannot redirect server-side.
+      - name: Write redirect stubs for moved pages
+        run: python3 .github/scripts/make-redirects.py publish --map .github/data/redirects.json
       - uses: actions/upload-pages-artifact@v5
         with:
           path: publish
       - uses: actions/deploy-pages@v5
         id: deployment
+      # Tell Bing/Yandex/Naver (IndexNow) about the pages this deploy changed. Google
+      # reads the sitemaps instead. Never fails the deploy.
+      - name: Notify IndexNow
+        continue-on-error: true
+        run: python3 .github/scripts/indexnow.py publish --config .github/data/indexnow.json

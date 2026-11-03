@@ -1,4 +1,5 @@
 ---
+title: "SF32LB57x Hardware-Design-Leitfaden — Schaltplan-Checkliste"
 icon: lucide/list-checks
 hide:
     - navigation

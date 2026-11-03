@@ -61,6 +61,64 @@ DS5203 V0.3にはモジュール上のPCBアンテナが記載されており、
 
 ## 機能と仕様 { #features-and-specifications }
 
+### 規制関連の表示 { #regulatory-markings }
+
+SiFliから提供された**SF32LB52-MOD-1-N16R8**と**SF32LB52-MOD-1-A128R16**のラベル図案には、次の識別番号とCEマークが記載されています。
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 780px; margin: 1rem auto;">
+<figure style="margin: 0;">
+<a href="assets/SF32LB52-MOD-1/N16R8-label.png"><img src="assets/SF32LB52-MOD-1/N16R8-label.png" alt="SF32LB52-MOD-1-N16R8" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB52-MOD-1-N16R8</figcaption>
+</figure>
+<figure style="margin: 0;">
+<a href="assets/SF32LB52-MOD-1/A128R16-label.jpg"><img src="assets/SF32LB52-MOD-1/A128R16-label.jpg" alt="SF32LB52-MOD-1-A128R16" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB52-MOD-1-A128R16</figcaption>
+</figure>
+</div>
+
+<div align="center" markdown>
+
+*提供されたSF32LB52-MOD-1ラベルの表記*
+
+| 項目 | 印字内容 |
+| --- | --- |
+| ラベルの品種 | `SF32LB52-MOD-1-N16R8`, `SF32LB52-MOD-1-A128R16` |
+| FCC | `2BVUV-SF32LB52` |
+| IC | `35666-SF32LB52` |
+| CMIIT ID | `25J3260UC963(M)` |
+| HVIN | `SF32LB52` |
+| CEマーク | 両方のラベルに表示 |
+
+</div>
+
+上記は提供されたラベルの表記を転記したものであり、認証記録や適合宣言を独立に検証したものではありません。対象モジュールのリビジョンに適用される認証資料、アンテナ条件、組み込み要件をSiFliに確認してください。裏付け資料なしに、これらの表示を他の品種にも適用しないでください。モジュールの表示だけで最終製品の適合性が保証されるわけではありません。
+
+### ストレージインターフェースとモジュールバリアント { #storage-interfaces-and-module-variants }
+
+<span id="storage-interfaces"></span>
+
+- モジュールSKUに応じて選べる、チップのパッケージ内OPI-PSRAM
+- 外付けSPI NORまたはSPI NAND用MPI (QSPI) × 1
+- SD 3.0、SDIO 3.0、eMMC対応SD/SDIO × 1
+
+<span id="module-variants"></span>
+
+<div align="center"><em>SF32LB52-MOD-1モジュールバリアント</em></div>
+
+<div align="center" markdown>
+
+| モジュールコード | チップ | 選択可能なストレージ | PSRAM | 動作温度 | 寸法 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| SF32LB52-MOD-1-N16R8 | SF32LB525UC6 | 16 MB QSPI-NOR | 8 MB OPI-PSRAM | −40 °C～+85 °C | 27.9 × 18.0 × 3.1 mm |
+| SF32LB52-MOD-1-A128R16 | SF32LB527UD6 | 128 MB SPI-NAND | 16 MB OPI-PSRAM | −40 °C～+85 °C | 27.9 × 18.0 × 3.1 mm |
+
+</div>
+
+!!! note "カスタマイズ"
+    その他のモジュール構成やカスタマイズについては、[μForge.ioへのお問い合わせ](../../about/contact.md)をご利用ください。
+
+SiFliの[モジュール型番ガイド](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md)と電子ペーパー向けアプリケーションガイドにはA128R16も記載されていますが、このページにリンクしたDS5203 V0.3仕様書にはN16R8しか掲載されていません。A128R16を選定する前に、現行の供給状況とメモリー構成をSiFliに確認してください。
+
 ### 演算とメモリー { #compute-and-memory }
 
 - Arm Cortex-M33 STAR-MC1アプリケーションコア (HCPU): 最大240 MHz、最大370 DMIPS / 984 EEMBC CoreMark
@@ -94,12 +152,6 @@ DS5203 V0.3にはモジュール上のPCBアンテナが記載されており、
 
 1つのPDMインターフェースには最大2個のデジタルマイクを接続できます。PDMのインターフェース数と接続できるマイク数は同じではありません。実際の接続はピンの多重化とキャリア基板の配線に依存します。このモジュールでは、オプションの32.768 kHz水晶振動子を実装するとPA22/PA23をモジュール外部から使用できません。ハードウェア設計ガイドには、別のPDMピン配置も記載されています。
 
-### ストレージインターフェース { #storage-interfaces }
-
-- モジュールSKUに応じて選べる、チップのパッケージ内OPI-PSRAM
-- 外付けSPI NORまたはSPI NAND用MPI (QSPI) × 1
-- SD 3.0、SDIO 3.0、eMMC対応SD/SDIO × 1
-
 ### セキュリティ { #security }
 
 - AES、HASH、CRCハードウェアアクセラレーター
@@ -115,23 +167,6 @@ DS5203 V0.3にはモジュール上のPCBアンテナが記載されており、
 - VBATS：電池電圧検出およびADC測定用入力（0～4.7 V）。測定対象の電圧を直接入力し、外付けの抵抗分圧回路は使用しないでください。
 - VDD33_VOUT2：外部ペリフェラルに給電できる、モジュール内蔵3.3 V LDO出力。初期状態は無効で、ソフトウェアによる有効化が必要です。最大出力電流は150 mA、電源レールの総容量は7.4 µF以下です。
 - 68ピンのモジュールインターフェース。信号ピンはGPIO、SPI、LCD、MPI、UART、I2C、PWM、SDIO、USB 2.0 FS、デジタル/アナログオーディオなどの機能に多重化できます
-
-## モジュールバリアント { #module-variants }
-
-<div align="center"><em>SF32LB52-MOD-1モジュールバリアント</em></div>
-
-<div align="center" markdown>
-
-| モジュールコード | チップ | Flash | PSRAM | 動作温度 | 寸法 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB52-MOD-1-N16R8 | SF32LB525UC6 | 16 MB QSPI-NOR | 8 MB OPI-PSRAM | −40 °C～+85 °C | 27.9 × 18.0 × 3.1 mm |
-| SF32LB52-MOD-1-A128R16 | SF32LB527UD6 | 128 MB SPI-NAND | 16 MB OPI-PSRAM | −40 °C～+85 °C | 27.9 × 18.0 × 3.1 mm |
-
-</div>
-
-SiFliの[モジュール型番ガイド](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md)と電子ペーパー向けアプリケーションガイドにはA128R16も記載されていますが、このページにリンクしたDS5203 V0.3仕様書にはN16R8しか掲載されていません。A128R16を選定する前に、現行の供給状況とメモリー構成をSiFliに確認してください。
-
-A128R16のFlash表記は公式資料間で異なります。[OpenSiFliのモジュール型番ガイド](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md)では128 MB SPI-NANDとされる一方、SiFliの[開発ボード型番ガイド](https://wiki.sifli.com/board/devkit_guide.html)では対応するDevKit SKUが128 MB QSPI-NANDとされています。資料には、実装部品の違いなのかインターフェース表記の違いなのか説明がありません。開発ボードの構成をモジュールの設計基準として使う前に、対象ボードのリビジョンに対応する回路図/BOMでFlash部品とバスモードを確認してください。
 
 ## 関連製品 { #related-products }
 

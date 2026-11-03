@@ -96,6 +96,8 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 
 ### 图形、显示与 AI { #graphics-display-and-ai }
 
+各型号支持的最高分辨率和面板接口，见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
+
 - ePicasso 2.0 2D/2.5D 图形加速
 - 支持 4 层 Alpha 混合加 1 层背景
 - 支持硬件旋转、缩放、镜像与常见格式转换
@@ -181,19 +183,22 @@ SF32LB56x 同时覆盖紧凑型 QFN68L 与高 I/O 的 WBBGA175 料号，并提�
 ## 常见问题 { #frequently-asked-questions }
 
 **SF32LB56x 的主要规格是什么？**
-SF32LB56x 由应用 CPU（Cortex-M33 @240 MHz）与低功耗内核（Cortex-M33 @48/96 MHz，用户可编程内核）组成，内置 960 KB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 2.0。封装：QFN68 / BGA175（7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)）。USB 2.0 FS。以上为系列级参数，具体以所选型号的数据手册为准。
+SF32LB56x 配备应用 CPU（Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33 @48/96 MHz，用户可编程内核）和 960 KB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 2.0。封装：QFN68 / BGA175（7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)）。USB 2.0 FS。
 
 **SF32LB56x 支持哪些显示接口？**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB。具体支持情况因型号和封装而异。
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB。各接口适用型号见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
+
+**SF32LB56x 支持的最大显示分辨率是多少？**
+通过 BGA 封装提供的 DPI/RGB 接口，最高支持 1024 × 600、RGB888。详见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
 
 **SF32LB56x 的封装内存储器有多大？**
-按型号不同，封装内 PSRAM 最多 16 MB，封装内 NOR Flash 最多 1 MB。
+封装内 PSRAM 最多 16 MB，封装内 NOR Flash 最多 1 MB。
 
 **SF32LB56x 需要什么供电电压？**
-按变体不同为 1.71–3.63 V，请以数据手册确认具体范围。
+1.71–3.63 V。
 
 **如何开始基于 SF32LB56x 的硬件设计？**
-请先阅读 [SF32LB56x 硬件设计指南](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求，并在投板前使用原理图与布局检查清单。
+请先阅读 [SF32LB56x 硬件设计指南](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求；投板前再使用原理图与布局检查清单。
 <!-- uf-faq:end -->
 
 ## 相关产品 { #related-products }

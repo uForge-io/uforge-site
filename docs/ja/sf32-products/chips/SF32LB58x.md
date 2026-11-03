@@ -77,6 +77,8 @@ SiFliの資料によると、SF32LB58xは3,744 KBのオンチップSRAMを搭載
 
 ### グラフィックス・ディスプレイ・AI { #graphics-display-and-ai }
 
+最大解像度とパネルインターフェースは[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
+
 - ePicasso 2.0 2D/2.5Dグラフィックスアクセラレーター
 - Vivante GCNanoUltraVベクターグラフィックスエンジン
 - eZip 2.0ロスレスグラフィックス展開アクセラレーター
@@ -126,7 +128,7 @@ SiFliの資料によると、SF32LB58xは3,744 KBのオンチップSRAMを搭載
 
 ## 製品バリエーション { #family-variants }
 
-SiFliの現行チップ型番ガイドには、BGA256のSF32LB58xが6品番掲載されており、パッケージ内蔵メモリーの構成を以下に示します。FlashとPSRAMの組み合わせや供給状況は変わる場合があるため、正確な注文型番は最新のデータシートと承認ベンダーリスト（AVL）で確認してください。
+SiFliの現行チップ型番ガイドには、BGA256のSF32LB58xが3品番掲載されており、パッケージ内蔵メモリーの構成を以下に示します。FlashとPSRAMの組み合わせや供給状況は変わる場合があるため、正確な注文型番は最新のデータシートと承認ベンダーリスト（AVL）で確認してください。
 
 <div align="center"><em>SF32LB58xの品番とパッケージ内蔵メモリー</em></div>
 
@@ -134,10 +136,7 @@ SiFliの現行チップ型番ガイドには、BGA256のSF32LB58xが6品番掲�
 
 | 品番 | パッケージ | パッケージ内蔵メモリー |
 | :--- | :--- | :--- |
-| SF32LB580VNN36 | BGA256 | 起動用NOR Flash 1 MB。MPI1、MPI2にはメモリーを内蔵しません |
-| SF32LB581VCN36 | BGA256 | 起動用NOR Flash 1 MB + MPI1のOPI-PSRAM 8 MB |
 | SF32LB583VCC36 | BGA256 | 起動用NOR Flash 1 MB + MPI1、MPI2に各OPI-PSRAM 8 MB |
-| SF32LB585V5E56 | BGA256 | 起動用NOR Flash 4 MB + MPI1のNOR Flash 4 MB + MPI2のHPI-PSRAM 32 MB |
 | SF32LB586VDD36 | BGA256 | 起動用NOR Flash 1 MB + MPI1、MPI2に各HPI-PSRAM 16 MB |
 | SF32LB587VEE56 | BGA256 | 起動用NOR Flash 4 MB + MPI1、MPI2に各HPI-PSRAM 32 MB |
 
@@ -162,20 +161,23 @@ SF32LB58xの候補リストを検証済みの設計へと進めるには、以�
 <!-- uf-faq:start -->
 ## よくある質問 { #frequently-asked-questions }
 
-**SF32LB58x の主な仕様は？**
-SF32LB58x は、アプリケーションCPU（2× Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33 @48/96 MHz、ユーザープログラム可能なコア）、内蔵SRAM 3.7 MB、デュアルモードBluetooth（クラシック + BLE）を備えます。グラフィックス：ePicasso 2.0 + Vivante GCNanoUltraV (vector)。パッケージ：BGA256（8.5 × 6.5 mm）。USB 2.0 HS。ファミリー全体の値であり、個別の型番はデータシートで確認してください。
+**SF32LB58xの主な仕様は？**
+SF32LB58xはアプリケーションCPU（2× Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33 @48/96 MHz、ユーザーによるプログラミングが可能）を備えています。内蔵SRAMは3.7 MBで、Bluetoothはデュアルモード（Classic Bluetooth + BLE）です。グラフィックスはePicasso 2.0 + Vivante GCNanoUltraV (vector)、パッケージはBGA256（8.5 × 6.5 mm）、USBは2.0 HSです。
 
-**SF32LB58x が対応するディスプレイインターフェースは？**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI。対応状況は型番とパッケージによって異なります。
+**SF32LB58xが対応するディスプレイインターフェースは？**
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPIに対応しています。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
 
-**SF32LB58x のパッケージ内メモリ容量は？**
-型番により、パッケージ内PSRAMは最大 32 MB + 32 MB、パッケージ内NOR Flashは最大 8 MB です。
+**SF32LB58xがサポートする最大ディスプレイ解像度は？**
+RGB565カラーでは最大1280 × 800、RGB888カラーでは最大1280 × 720です（MIPI-DSI経由）。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
 
-**SF32LB58x の電源電圧は？**
-バリアントにより 1.71–3.63 V。正確な範囲はデータシートで確認してください。
+**SF32LB58xのパッケージ内メモリー容量は？**
+パッケージ内PSRAMは最大 32 MB + 32 MB、パッケージ内NOR Flashは最大 8 MB です。
 
-**SF32LB58x でハードウェア設計を始めるには？**
-まず [SF32LB58x ハードウェア設計ガイド](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md) で回路図、電源、クロック/RF、PCBレイアウトの指針を確認し、基板リリース前に回路図とレイアウトのチェックリストを使用してください。
+**SF32LB58xの電源電圧は？**
+1.71～3.63 Vです。
+
+**SF32LB58xでハードウェア設計を始めるには？**
+まず[SF32LB58xハードウェア設計ガイド](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md)で回路図、電源、クロック/RF、PCBレイアウトの指針を確認し、基板リリース前に回路図とレイアウトのチェックリストを使用してください。
 <!-- uf-faq:end -->
 
 ## 関連製品 { #related-products }

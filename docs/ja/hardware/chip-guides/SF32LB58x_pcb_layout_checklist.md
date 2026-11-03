@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58xハードウェア設計ガイド — PCBレイアウトチェックリスト"
 icon: lucide/list-checks
 hide:
     - navigation

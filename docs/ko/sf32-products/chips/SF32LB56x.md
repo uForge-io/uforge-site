@@ -96,6 +96,8 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 
 ### 그래픽, 디스플레이, AI
 
+최대 해상도와 패널 인터페이스는 [디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)에서 확인하십시오.
+
 - ePicasso 2.0 2D/2.5D 그래픽 가속
 - 4레이어 알파 블렌딩과 배경 레이어 1개
 - 하드웨어 회전, 스케일링, 미러링, 일반 포맷 변환
@@ -180,20 +182,23 @@ SF32LB56x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 <!-- uf-faq:start -->
 ## 자주 묻는 질문 { #frequently-asked-questions }
 
-**SF32LB56x의 주요 사양은 무엇인가요?**
-SF32LB56x는 애플리케이션 CPU(Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @48/96 MHz, 사용자 프로그래밍 가능 코어), 내장 SRAM 960 KB, 듀얼 모드 Bluetooth(클래식 + BLE)를 갖췄습니다. 그래픽: ePicasso 2.0. 패키지: QFN68 / BGA175(7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)). USB 2.0 FS. 제품군 수준의 값이므로 정확한 부품 번호의 데이터시트를 확인하세요.
+**SF32LB56x의 주요 사양은 무엇입니까?**
+SF32LB56x는 애플리케이션 CPU(Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @48/96 MHz, 사용자 프로그래밍 가능)를 갖추고 있으며, 내장 SRAM은 960 KB입니다. Bluetooth 모드는 듀얼 모드(Classic Bluetooth + BLE)입니다. 그래픽: ePicasso 2.0. 패키지는 QFN68 / BGA175이며, 크기는 7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)입니다. USB는 2.0 FS를 지원합니다.
 
-**SF32LB56x는 어떤 디스플레이 인터페이스를 지원하나요?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. 지원 여부는 부품 번호와 패키지에 따라 다릅니다.
+**SF32LB56x는 어떤 디스플레이 인터페이스를 지원합니까?**
+지원하는 인터페이스는 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB입니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
-**SF32LB56x는 패키지 내 메모리를 얼마나 제공하나요?**
-부품 번호에 따라 패키지 내 PSRAM 최대 16 MB, 패키지 내 NOR Flash 최대 1 MB를 제공합니다.
+**SF32LB56x가 지원하는 최대 디스플레이 해상도는 얼마입니까?**
+RGB888 색상에서 최대 1024 × 600 해상도를 지원합니다. BGA 패키지의 DPI/RGB 인터페이스를 사용합니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
-**SF32LB56x에는 어떤 공급 전압이 필요한가요?**
-변형에 따라 1.71–3.63 V. 정확한 범위는 데이터시트에서 확인하세요.
+**SF32LB56x는 패키지 내 메모리를 얼마나 제공합니까?**
+패키지 내 PSRAM은 최대 16 MB, NOR 플래시는 최대 1 MB를 제공합니다.
 
-**SF32LB56x로 하드웨어 설계를 시작하려면 어떻게 하나요?**
-먼저 [SF32LB56x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하세요.
+**SF32LB56x에는 어떤 공급 전압이 필요합니까?**
+공급 전압은 1.71–3.63 V입니다.
+
+**SF32LB56x로 하드웨어 설계를 시작하려면 어떻게 해야 합니까?**
+먼저 [SF32LB56x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하십시오.
 <!-- uf-faq:end -->
 
 ## 관련 제품

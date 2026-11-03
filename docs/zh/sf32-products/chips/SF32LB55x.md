@@ -89,9 +89,11 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 
 ### 图形、显示与 AI { #graphics-display-and-ai }
 
+各型号支持的最高分辨率和面板接口，见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
+
 - ePicasso 2.5D 图形引擎，支持硬件旋转、缩放、镜像与 Alpha 混合
 - eZip 可对图形进行无损解压，并可与 ePicasso 串联使用
-- ePicasso 变换层分辨率最高为 640 × 640；通用图层和显示输出最高支持 1024 × 1024，显示输出最高可达 60 fps
+- ePicasso 变换层支持的最高分辨率为 640 × 640，画布最大为 1024 × 1024；实际显示分辨率上限为 512 × 512，不能把画布尺寸当作显示输出上限。显示输出最高可达 60 fps，具体表现取决于面板、接口和负载。
 - LCD 控制器支持 8080、SPI、Dual-SPI、Quad-SPI、DPI、MIPI DSI 和 JDI 反射式显示接口；具体接口取决于型号，选型时应逐项确认
 - TurboPixel 帧缓冲压缩可让 LCD 控制器直接读取压缩帧数据并在显示时解压，从而减少帧缓冲占用和读取带宽需求
 - 双 LCD 控制器；常开显示（always-on display）接口和双屏能力取决于所选型号与封装
@@ -198,19 +200,22 @@ SF32LB55x 提供 QFN 与 BGA 封装。由于 GPIO 数量、合封存储、显示
 ## 常见问题 { #frequently-asked-questions }
 
 **SF32LB55x 的主要规格是什么？**
-SF32LB55x 由应用 CPU（Cortex-M33 @240 MHz）与低功耗内核（Cortex-M33 @48 MHz，用户可编程内核）组成，内置 1,312 KB SRAM，支持仅支持低功耗蓝牙（BLE）。图形：ePicasso 1.0。封装：QFN68 / BGA145 / BGA169（7 × 7 mm (QFN68)）。USB 2.0 FS。以上为系列级参数，具体以所选型号的数据手册为准。
+SF32LB55x 配备应用 CPU（Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33 @48 MHz，用户可编程内核）和 1,312 KB SRAM，仅支持低功耗蓝牙（BLE）。图形：ePicasso 1.0。封装：QFN68 / BGA145 / BGA169（7 × 7 mm (QFN68)）。USB 2.0 FS。
 
 **SF32LB55x 支持哪些显示接口？**
-SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI。具体支持情况因型号和封装而异。
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI。各接口适用型号见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
+
+**SF32LB55x 支持的最大显示分辨率是多少？**
+通过 MIPI-DSI 接口，最高支持 512 × 512、RGB888；仅适用于带内置 RAM 的显示驱动。详见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
 
 **SF32LB55x 的封装内存储器有多大？**
-按型号不同，封装内 PSRAM 最多 16 MB + 2 MB，封装内 NOR Flash 最多 8 MB。
+封装内 PSRAM 最多 16 MB + 2 MB，封装内 NOR Flash 最多 8 MB。
 
 **SF32LB55x 需要什么供电电压？**
-按变体不同为 1.71–3.63 V，请以数据手册确认具体范围。
+1.71–3.63 V。
 
 **如何开始基于 SF32LB55x 的硬件设计？**
-请先阅读 [SF32LB55x 硬件设计指南](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求，并在投板前使用原理图与布局检查清单。
+请先阅读 [SF32LB55x 硬件设计指南](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求；投板前再使用原理图与布局检查清单。
 <!-- uf-faq:end -->
 
 ## 相关产品 { #related-products }

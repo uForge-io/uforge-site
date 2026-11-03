@@ -61,6 +61,61 @@ SF32LB56-MOD 是思澈科技（SiFli）基于 SF32LB56xV 平台推出的通用�
 
 ## 特性与规格 { #features-and-specifications }
 
+### 合规标识 { #regulatory-markings }
+
+思澈科技（SiFli）提供的 **SF32LB56-MOD-N16R12N1** 和 **SF32LB56-MOD-A128R12N1** 标签图稿列出以下编号及 CE 标志。
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 780px; margin: 1rem auto;">
+<figure style="margin: 0;">
+<a href="assets/SF32LB56-MOD/N16R12N1-label.jpg"><img src="assets/SF32LB56-MOD/N16R12N1-label.jpg" alt="SF32LB56-MOD-N16R12N1" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB56-MOD-N16R12N1</figcaption>
+</figure>
+<figure style="margin: 0;">
+<a href="assets/SF32LB56-MOD/A128R12N1-label.jpg"><img src="assets/SF32LB56-MOD/A128R12N1-label.jpg" alt="SF32LB56-MOD-A128R12N1" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB56-MOD-A128R12N1</figcaption>
+</figure>
+</div>
+
+<div align="center" markdown>
+
+*SF32LB56-MOD 标签上的标识*
+
+| 项目 | 标签印字 |
+| --- | --- |
+| 标签型号 | `SF32LB56-MOD-N16R12N1`、`SF32LB56-MOD-A128R12N1` |
+| FCC | `2BVUV-SF32LB56` |
+| IC | `35666-SF32LB56` |
+| CMIIT ID | `25J3260UM187` |
+| HVIN | `SF32LB56` |
+| CE 标志 | 两张标签均有 |
+
+</div>
+
+上表内容按所提供的标签转录，未对认证记录或符合性声明作独立核验。请向思澈科技（SiFli）核实适用于具体模组版本的批准文件、天线条件和集成要求。没有相应文件支持时，不要将这些标识用于其他型号。模组标签上的标识不代表最终产品已符合相关法规要求。
+
+### 存储接口与模组型号 { #storage-interfaces-and-module-variants }
+
+<span id="memory-and-module-variants"></span>
+
+<div align="center"><em>SF32LB56-MOD 模组型号</em></div>
+
+<div align="center" markdown>
+
+| 模组料号 | 可选存储配置 | PSRAM | 标准 Flash | 温度 | 尺寸 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| SF32LB56-MOD-N16R12N1 | 16 MB QSPI-NOR | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40 °C 至 +85 °C | 18.0 × 32.9 × 3.1 mm |
+| SF32LB56-MOD-A128R12N1 | 128 MB QSPI-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40 °C 至 +85 °C | 18.0 × 32.9 × 3.1 mm |
+| SF32LB56-MOD-D128R12N1 | 128 MB SD-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40 °C 至 +85 °C | 18.0 × 32.9 × 3.1 mm |
+
+</div>
+
+!!! note "定制需求"
+    如需其他模组配置或有定制需求，请[联系 μForge.io](../../about/contact.md)。
+
+思澈科技（SiFli）的[《模组型号指南》](https://wiki.sifli.com/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)列出上述三种配置，并说明还可定制其他配置。选型前，请向思澈科技（SiFli）确认当前可供货的 SKU 及其存储配置。
+
+思澈科技（SiFli）将搭配 4 MB + 8 MB OPI-PSRAM 和 1 MB QSPI-NOR 的 SF32LB566VCB36 列为标准配置，其存储组合与 N16R12N1 相符。型号指南没有分别列出 A128R12N1 和 D128R12N1 对应的芯片完整料号；选用这两个 SKU 前，请向思澈科技（SiFli）确认准确的芯片料号。
+
 ### 计算与存储 { #compute-and-memory }
 
 - HCPU：Arm Cortex-M33 STAR-MC1，最高 240 MHz，最高 370 DMIPS / 984 EEMBC CoreMark
@@ -95,24 +150,6 @@ SF32LB56-MOD 是思澈科技（SiFli）基于 SF32LB56xV 平台推出的通用�
 - 提供音频采样率转换与 EQ 加速
 
 每路 PDM 接口最多可连接两颗数字麦克风，两路接口合计最多支持四颗。PDM 接口数量不等于麦克风数量；实际连接还受引脚复用和载板布线限制。
-
-### 存储配置与模组型号 { #memory-and-module-variants }
-
-<div align="center"><em>SF32LB56-MOD 存储配置</em></div>
-
-<div align="center" markdown>
-
-| 模组料号 | SKU 对应 Flash | PSRAM | 标准 Flash | 温度 | 尺寸 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB56-MOD-N16R12N1 | 16 MB QSPI-NOR | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40 °C 至 +85 °C | 18.0 × 32.9 × 3.1 mm |
-| SF32LB56-MOD-A128R12N1 | 128 MB QSPI-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40 °C 至 +85 °C | 18.0 × 32.9 × 3.1 mm |
-| SF32LB56-MOD-D128R12N1 | 128 MB SD-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40 °C 至 +85 °C | 18.0 × 32.9 × 3.1 mm |
-
-</div>
-
-思澈科技（SiFli）的[《模组型号指南》](https://wiki.sifli.com/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)列出了上述三种配置，并说明还可按需定制其他型号。选型前，请向思澈科技（SiFli）确认当前可供货的 SKU 及其存储配置。
-
-思澈科技（SiFli）将 SF32LB566VCB36 搭配 4 MB + 8 MB OPI-PSRAM 和 1 MB QSPI-NOR 的方案列为标准配置，其存储组合与 N16R12N1 对应。型号指南未分别标明 A128R12N1 和 D128R12N1 对应的芯片完整料号；选用这两个 SKU 前，请向思澈科技（SiFli）确认所用芯片的准确料号。
 
 ### 电源与 I/O { #power-and-io }
 

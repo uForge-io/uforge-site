@@ -77,7 +77,7 @@ tags:
 * **SDIO** —— **Secure Digital Input Output，安全数字输入/输出接口。** 已记录的 SF32 设计使用该主机接口连接外部 Wi-Fi 器件。
 * **DCMI** —— **Digital Camera Module Interface，数字摄像头模组接口。** 用于连接兼容图像传感器的并行摄像头接口。
 * **FreeIO** —— 思澈科技（SiFli）的灵活 GPIO 分配能力，可在器件已记录的约束范围内将支持的信号映射到合适的 GPIO。
-* **PTM** —— **Peripheral Task Machine，外设任务机。** 思澈科技（SiFli）在部分器件中提供的硬件能力，用于确定性处理外设任务。
+* **PTM** —— **Parallel Task Machine，并行任务机。** 思澈科技（SiFli）在部分器件中提供的硬件能力，用于确定性处理外设任务。
 * **RTC** —— **Real-Time Clock，实时时钟。** 可独立于主应用时钟域持续运行（或唤醒系统）的计时外设。
 
 ## 硬件与制造 { #hardware-and-manufacturing }

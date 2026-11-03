@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52x 하드웨어 설계 가이드 — 회로도 체크리스트"
 icon: lucide/list-checks
 description: "패키지, 전원, 클럭, RF, 스토리지, 디스플레이, 제조 점검을 포함하는 SF32LB52x MCU의 항목별 회로도 검토 체크리스트입니다."
 hide:

@@ -61,6 +61,61 @@ SiFli는 SF32LB56-MOD의 애플리케이션 분야로 다음을 제시합니다.
 
 ## 기능 및 사양 { #features-and-specifications }
 
+### 규제 관련 표기 { #regulatory-markings }
+
+제공된 SiFli **SF32LB56-MOD-N16R12N1** 및 **SF32LB56-MOD-A128R12N1** 라벨 도안에는 아래 식별번호와 CE 마크가 있습니다.
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 780px; margin: 1rem auto;">
+<figure style="margin: 0;">
+<a href="assets/SF32LB56-MOD/N16R12N1-label.jpg"><img src="assets/SF32LB56-MOD/N16R12N1-label.jpg" alt="SF32LB56-MOD-N16R12N1" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB56-MOD-N16R12N1</figcaption>
+</figure>
+<figure style="margin: 0;">
+<a href="assets/SF32LB56-MOD/A128R12N1-label.jpg"><img src="assets/SF32LB56-MOD/A128R12N1-label.jpg" alt="SF32LB56-MOD-A128R12N1" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB56-MOD-A128R12N1</figcaption>
+</figure>
+</div>
+
+<div align="center" markdown>
+
+*제공된 SF32LB56-MOD 라벨의 표시*
+
+| 항목 | 인쇄 내용 |
+| --- | --- |
+| 라벨 모델 | `SF32LB56-MOD-N16R12N1`, `SF32LB56-MOD-A128R12N1` |
+| FCC | `2BVUV-SF32LB56` |
+| IC | `35666-SF32LB56` |
+| CMIIT ID | `25J3260UM187` |
+| HVIN | `SF32LB56` |
+| CE 마크 | 두 라벨 모두 표시 |
+
+</div>
+
+위 내용은 제공된 라벨의 표기를 옮긴 것으로, 인증 기록이나 적합성 선언을 독립적으로 검증한 결과가 아닙니다. 해당 모듈 리비전에 적용되는 승인 문서, 안테나 조건 및 통합 지침은 SiFli에 확인하십시오. 근거 문서 없이 이 표시를 다른 모델에도 적용하지 마십시오. 모듈의 표시만으로 최종 제품의 규정 준수가 입증되지는 않습니다.
+
+### 스토리지 인터페이스 및 모듈 변형 { #storage-interfaces-and-module-variants }
+
+<span id="memory-and-module-variants"></span>
+
+<div align="center"><em>SF32LB56-MOD 모듈 변형</em></div>
+
+<div align="center" markdown>
+
+| 모듈 코드 | 선택 가능한 스토리지 | PSRAM | 표준 플래시 | 온도 | 크기 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| SF32LB56-MOD-N16R12N1 | 16 MB QSPI-NOR | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 18.0 × 32.9 × 3.1 mm |
+| SF32LB56-MOD-A128R12N1 | 128 MB QSPI-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 18.0 × 32.9 × 3.1 mm |
+| SF32LB56-MOD-D128R12N1 | 128 MB SD-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 18.0 × 32.9 × 3.1 mm |
+
+</div>
+
+!!! note "맞춤 구성"
+    다른 모듈 구성이나 맞춤 구성이 필요하면 [μForge.io에 문의하십시오](../../about/contact.md).
+
+[SiFli 모듈 모델 가이드](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)는 이 세 가지 구성을 나열하며 그 밖의 구성은 맞춤 제작할 수 있다고 명시합니다. 현재 SKU 공급 가능 여부와 메모리 구성은 SiFli에 확인하십시오.
+
+SiFli는 4 MB + 8 MB OPI-PSRAM과 1 MB QSPI-NOR을 갖춘 SF32LB566VCB36을 표준 구성으로 제시하며, 이는 N16R12N1 메모리 구성과 일치합니다. 모델 가이드는 A128R12N1과 D128R12N1에 대해 칩 파트 넘버를 개별적으로 지정하지 않으므로, 두 SKU의 정확한 칩 파트 넘버는 SiFli에 확인하십시오.
+
 ### 연산 및 메모리 { #compute-and-memory }
 
 - HCPU: 최대 240 MHz, 최대 370 DMIPS / 984 EEMBC CoreMark의 Arm Cortex-M33 STAR-MC1
@@ -95,24 +150,6 @@ SiFli는 SF32LB56-MOD의 애플리케이션 분야로 다음을 제시합니다.
 - 오디오 샘플 레이트 변환 및 EQ 가속
 
 각 PDM 인터페이스에는 디지털 마이크를 최대 2개까지 연결할 수 있으므로, 두 인터페이스로 총 최대 4개의 마이크를 지원할 수 있습니다. PDM 인터페이스의 개수가 마이크의 개수는 아닙니다. 실제 연결 가능 여부는 핀 멀티플렉싱과 보드 라우팅에 따라 달라집니다.
-
-### 메모리 및 모듈 변형 { #memory-and-module-variants }
-
-<div align="center"><em>SF32LB56-MOD 메모리 구성</em></div>
-
-<div align="center" markdown>
-
-| 모듈 코드 | SKU별 플래시 | PSRAM | 표준 플래시 | 온도 | 크기 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB56-MOD-N16R12N1 | 16 MB QSPI-NOR | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 18.0 × 32.9 × 3.1 mm |
-| SF32LB56-MOD-A128R12N1 | 128 MB QSPI-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 18.0 × 32.9 × 3.1 mm |
-| SF32LB56-MOD-D128R12N1 | 128 MB SD-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 18.0 × 32.9 × 3.1 mm |
-
-</div>
-
-[SiFli 모듈 모델 가이드](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)는 이 세 가지 구성을 나열하며 그 밖의 구성은 맞춤 제작할 수 있다고 명시합니다. 현재 SKU 공급 가능 여부와 메모리 구성은 SiFli에 확인하십시오.
-
-SiFli는 4 MB + 8 MB OPI-PSRAM과 1 MB QSPI-NOR을 갖춘 SF32LB566VCB36을 표준 구성으로 제시하며, 이는 N16R12N1 메모리 구성과 일치합니다. 모델 가이드는 A128R12N1과 D128R12N1에 대해 칩 파트 넘버를 개별적으로 지정하지 않으므로, 두 SKU의 정확한 칩 파트 넘버는 SiFli에 확인하십시오.
 
 ### 전원 및 I/O { #power-and-io }
 

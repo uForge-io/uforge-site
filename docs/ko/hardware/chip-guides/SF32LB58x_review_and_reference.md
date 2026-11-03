@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58x 하드웨어 설계 가이드 — 설계 검토 체크리스트 및 참고 자료"
 icon: lucide/clipboard-check
 description: "SF32LB58x 하드웨어 설계 가이드의 설계 검토 체크리스트, 관련 문서와 참고 자료, 부록, 개정 이력입니다."
 tags:

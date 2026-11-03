@@ -1,4 +1,5 @@
 ---
+title: "SF32LB55x Hardware-Design-Leitfaden — Richtlinien für den Schaltplanentwurf"
 icon: lucide/circuit-board
 hide:
     - navigation

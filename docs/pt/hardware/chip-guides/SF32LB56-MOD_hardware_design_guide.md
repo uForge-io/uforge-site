@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56-MOD — guia de projeto de hardware"
 icon: lucide/book-check
 description: "Guia de projeto de hardware do módulo MCU Bluetooth SF32LB56-MOD: alimentação, interfaces e integração à PCB."
 tags:
@@ -19,6 +20,9 @@ Este guia usa o **datasheet DS5602-SF32LB56-MOD V0.3** como referência e reúne
 !!! note "Fonte e recomendações"
     Salvo indicação explícita de que se trata de orientação de integração ou recomendação de projeto, os valores técnicos abaixo seguem o **datasheet DS5602-SF32LB56-MOD V0.3**.
 
+!!! note "Escopo das marcações regulatórias"
+    As etiquetas fornecidas para SF32LB56-MOD-N16R12N1 e SF32LB56-MOD-A128R12N1 exibem identificadores FCC, IC, CMIIT ID e HVIN, além da marcação CE. Consulte o [resumo das marcações](../../sf32-products/modules/SF32LB56-MOD.md#regulatory-markings). Confirme os documentos de aprovação e as condições de antena e integração aplicáveis à revisão exata; não presuma que as marcações cubram outras variantes ou o produto final.
+
 ## 2. Visão geral do dispositivo { #2-device-overview }
 
 ### 2.1 Arquitetura { #21-architecture }
@@ -26,6 +30,9 @@ Este guia usa o **datasheet DS5602-SF32LB56-MOD V0.3** como referência e reúne
 O SF32LB56-MOD usa uma plataforma de MCU com dois núcleos da série SF32LB56xV. O HCPU processa aplicações e gráficos, enquanto o LCPU executa tarefas sempre ativas com baixo consumo. O HCPU é um núcleo Arm Cortex-M33 STAR-MC1 de até 240 MHz; o LCPU é do mesmo tipo, de até 96 MHz. Ambos oferecem suporte a FPU e MPU.
 
 O módulo oferece conectividade Bluetooth 5.3, aceleração gráfica, entrada e saída de áudio, interfaces de memória externa, USB 2.0 FS, SD/SDIO/eMMC, I2S, UART, I2C, SPI, PWM, GPADC e acesso para depuração e download de programas.
+
+!!! note "Personalização"
+    Para consultar outras configurações do módulo ou solicitar uma personalização, [entre em contato com a μForge.io](../../about/contact.md).
 
 ### 2.2 Variantes { #22-variants }
 

@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56-MOD - 硬件设计指南"
 icon: lucide/book-check
 description: "SF32LB56-MOD 硬件设计指南：蓝牙 MCU 模组的电源、接口及 PCB 集成设计指导。"
 tags:
@@ -19,6 +20,9 @@ hide:
 !!! note "来源与设计建议"
     除特别标注为集成指导或设计建议的内容外，本文所有技术参数均来自 **DS5602-SF32LB56-MOD 技术规格书 V0.3**。
 
+!!! note "合规标识适用范围"
+    所提供的 SF32LB56-MOD-N16R12N1 和 SF32LB56-MOD-A128R12N1 标签上标有 FCC、IC、CMIIT ID 和 HVIN 编号，以及 CE 标志，详见[模组标识汇总](../../sf32-products/modules/SF32LB56-MOD.md#regulatory-markings)。请针对具体版本核实批准文件以及天线和集成条件；不要据此推定其他型号或最终产品也在覆盖范围内。
+
 ## 2. 器件概览 { #2-device-overview }
 
 ### 2.1 架构 { #21-architecture }
@@ -26,6 +30,9 @@ hide:
 SF32LB56-MOD 基于 SF32LB56xV 系列双核 MCU 平台：HCPU 负责应用和图形处理，LCPU 负责低功耗常开任务。HCPU 为最高运行频率 240 MHz 的 Arm Cortex-M33 STAR-MC1 内核，LCPU 为最高 96 MHz 的同类型内核。两个内核均支持 FPU 和 MPU。
 
 模组支持 Bluetooth 5.3 无线连接，并提供显示加速、音频输入/输出、外部存储接口、USB 2.0 FS、SD/SDIO/eMMC、I2S、UART、I2C、SPI、PWM、GPADC 以及调试/下载接口。
+
+!!! note "定制需求"
+    如需其他模组配置或有定制需求，请[联系 μForge.io](../../about/contact.md)。
 
 ### 2.2 型号 { #22-variants }
 

@@ -1,4 +1,5 @@
 ---
+title: "SF32LB55xハードウェア設計ガイド — PCBレイアウト指針"
 icon: lucide/layers
 hide:
     - navigation

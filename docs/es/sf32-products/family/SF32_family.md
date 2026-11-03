@@ -110,7 +110,7 @@ La serie **LB** (Low-Power Bluetooth) es la primera línea de productos SF32. Es
 
 <div align="center"><em>Comparación de microcontroladores SF32</em></div>
 
-La tabla resume capacidades de cada familia; no garantiza que todos los SKU incluyan todos los recursos indicados. Las interfaces y sus cantidades pueden variar según el número de pieza, el encapsulado o la configuración; compruebe la hoja de datos de la referencia elegida.
+La tabla resume capacidades de cada familia; no garantiza que todos los SKU incluyan todos los recursos indicados. Las interfaces y sus cantidades pueden variar según el número de pieza, el encapsulado o la configuración; compruebe la hoja de datos de la referencia elegida. Resolución máxima de pantalla e interfaces de panel por familia: consulte [Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix).
 
 <div align="center" markdown>
 
@@ -123,6 +123,7 @@ La tabla resume capacidades de cada familia; no garantiza que todos los SKU incl
 | Bluetooth | BT Classic + BLE | BLE | BT Classic + BLE | BT Classic + BLE | BT Classic + BLE |
 | Acelerador gráfico | 2.5D<br>ePicasso 2.0 Lite | 2.5D<br>ePicasso 1.0 | 2.5D<br>ePicasso 2.0 | 2.5D<br>ePicasso 3.0 + eZip 3.0 | 2.5D + gráficos vectoriales<br>ePicasso 2.0 + Vivante GCNanoUltraV |
 | Compatibilidad de pantalla | SPI / DSPI / QSPI / 8080 / EPD / JDI | SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI |
+| Resolución máxima de pantalla | 512 × 512, RGB888 | 512 × 512, RGB888 | BGA: 1024 × 600, RGB888<br>QFN: 512 × 512, RGB888 | 1024 × 600, RGB888 | 1280 × 800, RGB565<br>1280 × 720, RGB888 |
 | ADC de audio | 1x | No disponible | 1x | 2x | 2x |
 | DAC de audio | 1x | No disponible | 1x | 1x | 2x |
 | Interfaces de audio PDM | 1x | 1–2x* | 2x | 2x | 2x |

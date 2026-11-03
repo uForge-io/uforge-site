@@ -110,7 +110,7 @@ The **LB** (Low-Power Bluetooth) series is the first SF32 product line. Addition
 
 <div align="center"><em>SF32 Microcontroller Comparison</em></div>
 
-The values below summarize family-level capabilities, not guaranteed capabilities of every SKU. Interface availability and resource counts can vary by exact part number, package, or configuration; verify the selected part's datasheet.
+The values below summarize family-level capabilities, not guaranteed capabilities of every SKU. Interface availability and resource counts can vary by exact part number, package, or configuration; verify the selected part's datasheet. Maximum display resolution and panel interfaces per family: see the [Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix).
 
 <div align="center" markdown>
 
@@ -123,6 +123,7 @@ The values below summarize family-level capabilities, not guaranteed capabilitie
 | Bluetooth | BT Classic + BLE | BLE | BT Classic + BLE | BT Classic + BLE | BT Classic + BLE |
 | Graphics Accelerator | 2.5D<br>ePicasso 2.0 Lite | 2.5D<br>ePicasso 1.0 | 2.5D<br>ePicasso 2.0 | 2.5D<br>ePicasso 3.0 + eZip 3.0 | 2.5D + Vector Graphics<br>ePicasso 2.0 + Vivante GCNanoUltraV |
 | Display Support | SPI / DSPI / QSPI / 8080 / EPD / JDI | SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI |
+| Max Display Resolution | 512 × 512, RGB888 | 512 × 512, RGB888 | BGA: 1024 × 600, RGB888<br>QFN: 512 × 512, RGB888 | 1024 × 600, RGB888 | 1280 × 800, RGB565<br>1280 × 720, RGB888 |
 | Audio ADC | 1x | n/a | 1x | 2x | 2x |
 | Audio DAC | 1x | n/a | 1x | 1x | 2x |
 | PDM Audio Interfaces | 1x | 1–2x* | 2x | 2x | 2x |

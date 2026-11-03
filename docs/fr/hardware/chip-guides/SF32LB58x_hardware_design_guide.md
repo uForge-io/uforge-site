@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58x - Guide de conception matérielle"
 icon: lucide/book-check
 hide:
     - navigation

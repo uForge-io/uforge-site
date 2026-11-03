@@ -47,6 +47,8 @@ La plage spécifiée de capacité de charge du quartz de 48 MHz est de 7 à 12 p
 
 #### 5.3.2. Quartz RTC de 32,768 kHz { #532-32768-khz-rtc-crystal }
 
+Les figures V2 autorisent explicitement l'omission du quartz de 32,768 kHz au profit de l'oscillateur RC interne. Évaluez les besoins de précision du RTC, de Bluetooth et de fonctionnement basse consommation avant de l'omettre, puis sélectionnez dans le firmware la source d'horloge basse fréquence correspondante.
+
 Paramètres recommandés :
 
 <div align="center"><em>Tableau 5.3-2 : Paramètres recommandés du quartz RTC de 32,768 kHz</em></div>
@@ -158,7 +160,6 @@ Le LCDC du SF32LB57x prend en charge plusieurs types d'interface d'affichage sel
 | SPI / QSPI | Petits écrans TFT/AMOLED et affichages portables | Faible nombre de broches, bande passante limitée, adapté au rafraîchissement partiel. |
 | MCU 8080 | Panneaux d'affichage parallèles | Bande passante plus élevée que les interfaces série mais utilise plus de broches. |
 | RGB / DPI | Panneaux de résolution moyenne ou élevée | Flux de pixels continu, avec des exigences strictes en matière de bande passante et de synchronisation. |
-| MIPI DSI | AMOLED haute densité | Bande passante élevée avec peu de broches, mais initialisation et intégrité du signal plus complexes. |
 | EPD | Papier électronique | Faible taux de rafraîchissement, nécessite VCOM, PMIC et planification de forme d'onde. |
 | JDI | Affichages basse consommation Memory-in-Pixel | Adapté aux produits toujours actifs et lisibles en plein soleil. |
 
@@ -183,9 +184,11 @@ Remarques et exemples courants sur l'affichage :
 | MCU 8080 | Pour les conceptions rapides, appliquez les mêmes règles de sélection des groupes de broches que pour RGB/DPI ; vérifiez la largeur du bus, la synchronisation et la force de pilotage par rapport aux exigences de l'écran. |
 | EPD | Lorsque le bus EPD dépasse 30 MHz, appliquez les mêmes règles de sélection des groupes de broches que pour RGB/DPI ; vérifiez également les broches de commande VCOM et PMIC. |
 | JDI | Suivez la table de mappage de signal LCDC JDI et préférez une configuration de panneau adaptée au SDK lorsque disponible. |
-| MIPI DSI | Utilisez l'affectation fixe des signaux DSI définie pour le composant et la conception de référence ; vérifiez avec l'équipe logicielle le routage des voies et l'initialisation de l'écran. |
 
 </div>
+
+!!! note "Les interfaces des pilotes d'écran ne sont pas natives au MCU"
+    Cette section considère SPI/QSPI, RGB/DPI, 8080, EPD et JDI comme des interfaces d'affichage directement reliées au MCU. Certains circuits pilotes ci-dessous prennent aussi en charge MIPI-DSI ; cela ne signifie pas que le SF32LB57x dispose d'un hôte DSI natif ou de broches DSI fixes. Choisissez une interface prise en charge par les deux composants et vérifiez la référence exacte ainsi que le schéma de référence.
 
 <div align="center"><em>Tableau 5.5-3 : Exemples de contrôleurs LCD</em></div>
 
@@ -374,6 +377,8 @@ Les tables suivantes donnent le mappage exact signal-broche pour chaque type d'i
 | `GOOD` | `GOOD` | GPIO quelconque | Sortie de bon fonctionnement (power-good) du PMIC EPD. |
 
 </div>
+
+La colonne EPD 8 bits de la source contient aussi `D8`, soit neuf signaux (`D0`–`D8`) pour une interface annoncée à 8 bits. Il s'agit d'une incohérence non résolue du tableau, et non d'un bit supplémentaire pris en charge. Confirmez auprès de SiFli et du fabricant de la dalle la largeur réelle du bus et le câblage avant d'utiliser cette ligne.
 
 <div align="center"><em>Tableau 5.5-9 : Connexions de signal d'affichage JDI parallèle</em></div>
 

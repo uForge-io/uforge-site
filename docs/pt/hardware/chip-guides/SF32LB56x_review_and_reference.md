@@ -1,4 +1,5 @@
 ---
+title: "Guia de projeto de hardware do SF32LB56x — checklist de revisão e referências"
 icon: lucide/clipboard-check
 description: "Checklist de revisão do projeto, documentos e referências, apêndices e histórico de revisões do guia de projeto de hardware SF32LB56x."
 tags:

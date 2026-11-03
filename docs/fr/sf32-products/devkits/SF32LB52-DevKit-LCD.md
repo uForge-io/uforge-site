@@ -73,8 +73,6 @@ Pour une carte plus petite à demi-trous métallisés, utilisez la [SF32LB52-Dev
 
 Les codes de cartes et les configurations mémoire ci-dessus suivent le [guide des modèles de cartes de développement](https://wiki.sifli.com/en/board/devkit_guide.html) de SiFli. Avant d'utiliser une carte comme base de conception, vérifiez sa révision par rapport au marquage de la carte et au paquet de conception correspondant.
 
-Les désignations de mémoire Flash de la variante A128R16 diffèrent selon les sources officielles : le [guide OpenSiFli des modèles de modules](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) désigne le module comme équipé de 128 Mo de SPI-NAND, tandis que le guide des modèles de cartes indique 128 Mo de QSPI-NAND pour la référence DevKit correspondante. Les sources n'expliquent pas si cette différence concerne le composant monté ou seulement la désignation de l'interface. Avant de vous appuyer sur cette configuration, confirmez le composant de mémoire Flash et le mode de bus dans le schéma et la nomenclature de la révision exacte de la carte.
-
 ## Notes de version { #version-notes }
 
 <div align="center"><em>Historique des versions de la carte</em></div>

@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x - 하드웨어 설계 가이드"
 icon: lucide/book-check
 description: "SF32LB56x MCU의 하드웨어 설계 가이드: 전원 시스템, 클럭 생성, RF 설계, 디스플레이, 오디오, PCB 레이아웃 지침입니다."
 tags:

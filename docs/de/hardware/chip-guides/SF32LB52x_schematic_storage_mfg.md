@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52x Hardware-Design-Leitfaden — Speicher und Fertigung"
 icon: lucide/circuit-board
 hide:
     - navigation

@@ -1,5 +1,6 @@
 ---
 icon: lucide/infinity
+title: "Arduinoプラットフォーム概要"
 description: "SF32LB52 DevKit LCD向けArduinoCore-zephyrの適合性、ボード情報、ローダーとビルドモード、統合上の制約、問題の切り分け方法を説明します。"
 tags:
     - 開発

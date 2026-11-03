@@ -1,4 +1,5 @@
 ---
+title: "SF32LB57x Hardware-Design-Leitfaden — Speicher und Fertigung"
 icon: lucide/circuit-board
 hide:
     - navigation
@@ -63,6 +64,10 @@ Prüfen Sie vor der Freigabe des Schaltplans:
 | `HOLD#` / `SD2_D1` | `PA17` | `PA17` |
 
 </div>
+
+!!! warning "Abweichende SDIO-Controller-Nummerierung in der Quelle"
+    SiFlis Speichertabelle bezeichnet die Signale an `PA12`–`PA17` als `SD2_*`, die IO-MUX-Tabelle dagegen Function 2 derselben Pins als `SD1_*`. Die obige Tabelle übernimmt die Bezeichnungen aus der Speichertabelle. Die physische Pinzuordnung stimmt überein; wählen Sie SDIO2 oder die Firmware-Instanz jedoch nicht allein anhand dieser Namen. Prüfen Sie Benutzerhandbuch, SDK-Pinkonfiguration und Referenzdesign der genauen Bestellnummer.
+
 
 #### 5.6.3. Boot- und Versorgungssteuerung { #563-boot-and-power-control }
 
@@ -404,11 +409,11 @@ Halten Sie die Standard-Debug-/Download-Pins für die Produktionsvorrichtung zug
 
 | `PA00` / Boot-Register | `PA01` | Host-Boot-Schalter | Boot-Zweig und verfügbare Schnittstellen |
 |:-----------------------|:-------|:-----------------|:------------|
-| L | H | Beliebig | Normaler Boot; `PA19` gibt keine Boot-Logs aus; `PA18`/`PA19` wechseln zu SWD, und `PA43`/`PA44` SWD ist deaktiviert. |
-| L | L | Aus | Normaler Boot; `PA19` gibt Boot-Logs aus; `PA18`/`PA19` sind DBG-UART, und `PA43`/`PA44` sind SWD. |
-| L | L | Ein | Boot-Modus; DBG-UART-, SWD-, UART- und USB-Programmierung werden unterstützt. |
-| PA00 oder Boot-Register = 1 | L | Beliebig | Boot-Modus; DBG-UART-, SWD-, UART- und USB-Programmierung werden unterstützt. |
-| PA00 oder Boot-Register = 1 | H | Beliebig | Boot-Modus; `PA19` gibt keine Boot-Logs aus; SWD/USB-Programmierung wird unterstützt, und `PA18`/`PA19` wechseln zu SWD. |
+| `PA00 = L`, `BOOT REG = L` | H | Beliebig | Normaler Boot; `PA19` gibt keine Boot-Logs aus; `PA18`/`PA19` wechseln zu SWD, und `PA43`/`PA44` SWD ist deaktiviert. |
+| `PA00 = L`, `BOOT REG = L` | L | Aus | Normaler Boot; `PA19` gibt Boot-Logs aus; `PA18`/`PA19` sind DBG-UART, und `PA43`/`PA44` sind SWD. |
+| `PA00 = L`, `BOOT REG = L` | L | Ein | Boot-Modus; DBG-UART-, SWD-, UART- und USB-Programmierung werden unterstützt. `PA19` gibt Boot-Logs aus; `PA18` / `PA19` bleiben DBG-UART und `PA43` / `PA44` SWD. |
+| PA00 oder Boot-Register = 1 | L | Beliebig | Boot-Modus; DBG-UART-, SWD-, UART- und USB-Programmierung werden unterstützt. `PA19` gibt Boot-Logs aus; `PA18` / `PA19` bleiben DBG-UART und `PA43` / `PA44` SWD. |
+| PA00 oder Boot-Register = 1 | H | Beliebig | Boot-Modus; `PA19` gibt keine Boot-Logs aus; SWD/USB-Programmierung wird unterstützt, und `PA18`/`PA19` wechseln zu SWD. SWD an `PA43` / `PA44` ist deaktiviert. |
 
 </div>
 

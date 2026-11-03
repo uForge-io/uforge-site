@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle SF32LB55x — Liste de contrôle du schéma"
 icon: lucide/list-checks
 hide:
     - navigation

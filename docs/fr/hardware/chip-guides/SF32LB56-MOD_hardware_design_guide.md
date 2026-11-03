@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56-MOD - Guide de conception matérielle"
 icon: lucide/book-check
 description: "Guide de conception matérielle pour le module MCU Bluetooth SF32LB56-MOD : alimentation, interfaces et conseils d'intégration PCB."
 tags:
@@ -19,6 +20,9 @@ Ce guide s'appuie sur la **spécification technique DS5602-SF32LB56-MOD V0.3** e
 !!! note "Source et recommandations"
     Les valeurs techniques ci-dessous suivent la **spécification technique DS5602-SF32LB56-MOD V0.3**, sauf mention explicite d'un conseil d'intégration ou d'une recommandation de conception.
 
+!!! note "Portée du marquage réglementaire"
+    Les étiquettes fournies pour SF32LB56-MOD-N16R12N1 et SF32LB56-MOD-A128R12N1 portent les identifiants FCC, IC, CMIIT ID et HVIN, ainsi que le marquage CE. Consultez le [résumé des marquages](../../sf32-products/modules/SF32LB56-MOD.md#regulatory-markings). Vérifiez les documents d'homologation et les conditions d'antenne et d'intégration applicables à la révision exacte ; ne présumez pas que les autres variantes ou le produit final sont couverts.
+
 ## 2. Présentation du composant { #2-device-overview }
 
 ### 2.1 Architecture { #21-architecture }
@@ -26,6 +30,9 @@ Ce guide s'appuie sur la **spécification technique DS5602-SF32LB56-MOD V0.3** e
 Le SF32LB56-MOD repose sur une plateforme MCU double cœur de la série SF32LB56xV. Le HCPU traite les applications et les graphiques, tandis que le LCPU exécute les tâches permanentes basse consommation. Le HCPU est un cœur Arm Cortex-M33 STAR-MC1 pouvant fonctionner jusqu'à 240 MHz ; le LCPU est du même type et peut fonctionner jusqu'à 96 MHz. Les deux cœurs prennent en charge FPU et MPU.
 
 Le module prend en charge la connectivité Bluetooth 5.3 et fournit l'accélération d'affichage, l'entrée/sortie audio, des interfaces de mémoire externe, USB 2.0 FS, SD/SDIO/eMMC, I2S, UART, I2C, SPI, PWM, GPADC ainsi que l'accès au débogage et au téléchargement.
+
+!!! note "Personnalisation"
+    Pour d'autres configurations du module ou toute demande de personnalisation, [contactez μForge.io](../../about/contact.md).
 
 ### 2.2 Variantes { #22-variants }
 

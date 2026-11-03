@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56-MOD - 하드웨어 설계 가이드"
 icon: lucide/book-check
 description: "SF32LB56-MOD Bluetooth MCU 모듈의 하드웨어 설계 가이드: 전원, 인터페이스, PCB 통합 지침입니다."
 tags:
@@ -19,6 +20,9 @@ hide:
 !!! note "출처와 권장 사항"
     아래의 기술 수치는 통합 지침 또는 설계 권장 사항으로 명시한 경우를 제외하고 모두 **DS5602-SF32LB56-MOD Technical Specification V0.3**을 따릅니다.
 
+!!! note "규제 관련 표기 범위"
+    제공된 SF32LB56-MOD-N16R12N1 및 SF32LB56-MOD-A128R12N1 라벨에는 FCC, IC, CMIIT ID, HVIN 식별번호와 CE 마크가 있습니다. [모듈의 규제 관련 표기 요약](../../sf32-products/modules/SF32LB56-MOD.md#regulatory-markings)을 참조하십시오. 정확한 리비전의 승인 문서와 안테나/통합 조건을 확인하고 다른 모델이나 최종 제품까지 적용된다고 가정하지 마십시오.
+
 ## 2. 디바이스 개요
 
 ### 2.1 아키텍처
@@ -26,6 +30,9 @@ hide:
 SF32LB56-MOD는 SF32LB56xV 시리즈의 듀얼 코어 MCU 플랫폼을 사용합니다. HCPU는 애플리케이션 및 그래픽 워크로드를 처리하고, LCPU는 저전력 상시 동작 작업을 실행합니다. HCPU는 최대 240 MHz로 동작하는 Arm Cortex-M33 STAR-MC1 코어이고, LCPU는 최대 96 MHz로 동작하는 동일한 유형의 코어입니다. 둘 다 FPU와 MPU를 지원합니다.
 
 이 모듈은 Bluetooth 5.3 연결을 지원하며, 디스플레이 가속, 오디오 I/O, 외부 메모리 인터페이스, USB 2.0 FS, SD/SDIO/eMMC, I2S, UART, I2C, SPI, PWM, GPADC, 디버그/플래싱 접근 수단을 제공합니다.
+
+!!! note "맞춤 구성"
+    다른 모듈 구성이나 맞춤 구성이 필요하면 [μForge.io에 문의하십시오](../../about/contact.md).
 
 ### 2.2 변형
 

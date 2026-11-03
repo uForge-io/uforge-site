@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle SF32LB52x — Stockage et fabrication"
 icon: lucide/circuit-board
 hide:
     - navigation

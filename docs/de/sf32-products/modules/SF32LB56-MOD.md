@@ -61,6 +61,61 @@ Ziehen Sie SF32LB56-MOD in Betracht, wenn das Design eine oder mehrere der folge
 
 ## Merkmale und technische Daten { #features-and-specifications }
 
+### Regulatorische Kennzeichnungen { #regulatory-markings }
+
+Die bereitgestellten SiFli-Etikettendesigns für **SF32LB56-MOD-N16R12N1** und **SF32LB56-MOD-A128R12N1** zeigen folgende Kennungen und die CE-Kennzeichnung.
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 780px; margin: 1rem auto;">
+<figure style="margin: 0;">
+<a href="assets/SF32LB56-MOD/N16R12N1-label.jpg"><img src="assets/SF32LB56-MOD/N16R12N1-label.jpg" alt="SF32LB56-MOD-N16R12N1" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB56-MOD-N16R12N1</figcaption>
+</figure>
+<figure style="margin: 0;">
+<a href="assets/SF32LB56-MOD/A128R12N1-label.jpg"><img src="assets/SF32LB56-MOD/A128R12N1-label.jpg" alt="SF32LB56-MOD-A128R12N1" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB56-MOD-A128R12N1</figcaption>
+</figure>
+</div>
+
+<div align="center" markdown>
+
+*Kennzeichnungen der bereitgestellten SF32LB56-MOD-Etiketten*
+
+| Feld | Aufdruck |
+| --- | --- |
+| Gekennzeichnete Varianten | `SF32LB56-MOD-N16R12N1`, `SF32LB56-MOD-A128R12N1` |
+| FCC | `2BVUV-SF32LB56` |
+| IC | `35666-SF32LB56` |
+| CMIIT ID | `25J3260UM187` |
+| HVIN | `SF32LB56` |
+| CE-Kennzeichnung | Auf beiden Etiketten vorhanden |
+
+</div>
+
+Die Angaben wurden von den Etiketten übernommen; eine unabhängige Prüfung anhand von Zulassungsunterlagen oder einer Konformitätserklärung ist nicht erfolgt. Lassen Sie sich von SiFli die Zulassungsunterlagen, Antennenbedingungen und Integrationsanweisungen für die genaue Modulrevision bestätigen. Übertragen Sie diese Kennzeichnungen ohne entsprechende Nachweise nicht auf andere Varianten. Modulkennzeichnungen belegen nicht die Konformität des Endprodukts.
+
+### Speicherschnittstellen und Modulvarianten { #storage-interfaces-and-module-variants }
+
+<span id="memory-and-module-variants"></span>
+
+<div align="center"><em>Modulvarianten des SF32LB56-MOD</em></div>
+
+<div align="center" markdown>
+
+| Modulcode | Wählbarer Speicher | PSRAM | Standard-Flash | Temperatur | Abmessungen |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| SF32LB56-MOD-N16R12N1 | 16 MB QSPI-NOR | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40 °C bis +85 °C | 18,0 × 32,9 × 3,1 mm |
+| SF32LB56-MOD-A128R12N1 | 128 MB QSPI-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40 °C bis +85 °C | 18,0 × 32,9 × 3,1 mm |
+| SF32LB56-MOD-D128R12N1 | 128 MB SD-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40 °C bis +85 °C | 18,0 × 32,9 × 3,1 mm |
+
+</div>
+
+!!! note "Individuelle Anpassungen"
+    Für andere Modulkonfigurationen oder individuelle Anpassungen [wenden Sie sich an μForge.io](../../about/contact.md).
+
+Die [Modellübersicht für SiFli-Module](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) führt diese drei Konfigurationen auf und weist darauf hin, dass weitere Varianten angepasst werden können. Klären Sie mit SiFli, welche SKUs derzeit verfügbar sind und welche Speicherkonfiguration sie haben.
+
+SiFli führt SF32LB566VCB36 mit 4 MB + 8 MB OPI-PSRAM und 1 MB QSPI-NOR als Standardkonfiguration auf; diese Speicherausstattung entspricht N16R12N1. Die Modellübersicht ordnet A128R12N1 und D128R12N1 keine eigene Chip-Teilenummer zu. Lassen Sie sich die genaue Chip-Teilenummer für diese SKUs von SiFli bestätigen.
+
 ### Rechenleistung und Speicher { #compute-and-memory }
 
 - HCPU: Arm Cortex-M33 STAR-MC1 mit bis zu 240 MHz, bis zu 370 DMIPS / 984 EEMBC CoreMark
@@ -80,8 +135,8 @@ Ziehen Sie SF32LB56-MOD in Betracht, wenn das Design eine oder mehrere der folge
 ### Grafik und Display { #graphics-and-display }
 
 - 2D/2.5D-Grafik-Engine ePicasso 2.0
-- Hardwarebeschleunigte Rotation, Skalierung, Spiegelung und Alpha-Blending
-- Grafik-Workloads bis 1024 × 1024
+- Hardwarebeschleunigte Drehung, Skalierung, Spiegelung und Alpha-Blending
+- Grafikverarbeitung bis 1024 × 1024
 - Verlustfreie Grafikdekompression mit eZip 2.0 und Unterstützung für eZip-A-Animationen
 - LCD-Unterstützung für 8080, SPI, Dual-SPI, Quad-SPI, DPI/RGB und JDI
 - TurboPixel: extDMA komprimiert den finalen Framebuffer verlustbehaftet mit festem Kompressionsverhältnis; der Display-Controller dekomprimiert ihn. Dadurch sinken sowohl die für den jeweiligen Workload benötigte PSRAM-Bandbreite als auch der benötigte Framebuffer-Speicher.
@@ -95,24 +150,6 @@ Ziehen Sie SF32LB56-MOD in Betracht, wenn das Design eine oder mehrere der folge
 - Audio-Abtastratenkonvertierung und EQ-Beschleunigung
 
 Jede PDM-Schnittstelle kann bis zu zwei digitale Mikrofone anbinden; beide Schnittstellen unterstützen zusammen also bis zu vier Mikrofone. Die Anzahl der PDM-Schnittstellen entspricht nicht der Mikrofonanzahl. Die tatsächliche Nutzung hängt von der Pin-Multiplexierung und dem Trägerboard-Layout ab.
-
-### Speicher- und Modulvarianten { #memory-and-module-variants }
-
-<div align="center"><em>Speicherkonfigurationen des SF32LB56-MOD</em></div>
-
-<div align="center" markdown>
-
-| Modulcode | Flash je SKU | PSRAM | Standard-Flash | Temperatur | Abmessungen |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB56-MOD-N16R12N1 | 16 MB QSPI-NOR | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40 °C bis +85 °C | 18,0 × 32,9 × 3,1 mm |
-| SF32LB56-MOD-A128R12N1 | 128 MB QSPI-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40 °C bis +85 °C | 18,0 × 32,9 × 3,1 mm |
-| SF32LB56-MOD-D128R12N1 | 128 MB SD-NAND | 4 + 8 MB OPI-PSRAM | 1 MB QSPI-NOR | −40 °C bis +85 °C | 18,0 × 32,9 × 3,1 mm |
-
-</div>
-
-Die [Modellübersicht für SiFli-Module](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) führt diese drei Konfigurationen auf und weist darauf hin, dass weitere Varianten angepasst werden können. Klären Sie mit SiFli, welche SKUs derzeit verfügbar sind und welche Speicherkonfiguration sie haben.
-
-SiFli führt SF32LB566VCB36 mit 4 MB + 8 MB OPI-PSRAM und 1 MB QSPI-NOR als Standardkonfiguration auf; diese Speicherausstattung entspricht N16R12N1. Die Modellübersicht ordnet A128R12N1 und D128R12N1 keine eigene Chip-Teilenummer zu. Lassen Sie sich die genaue Chip-Teilenummer für diese SKUs von SiFli bestätigen.
 
 ### Stromversorgung und I/O { #power-and-io }
 

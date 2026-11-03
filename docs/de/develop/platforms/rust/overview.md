@@ -1,5 +1,6 @@
 ---
 icon: lucide/code
+title: "Rust-Plattform im Überblick"
 description: "Community-Rust-Unterstützung für SF32 über OpenSiFlis sifli-rs (sifli-hal, sifli-pac) bewerten: Reifegrad, passende und unpassende Szenarien und Risiko-Checkliste."
 tags:
     - Entwicklung

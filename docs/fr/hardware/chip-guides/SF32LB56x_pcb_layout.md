@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle SF32LB56x — Implantation et routage du PCB"
 icon: lucide/layers
 description: "Directives d'implantation et de routage du PCB SF32LB56x : empreintes, empilage, routage critique et liste de contrôle détaillée."
 tags:

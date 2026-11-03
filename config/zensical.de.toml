@@ -28,6 +28,7 @@ nav = [
       "sf32-products/family/product-planning.md"
     ]},
     { "SF32 Produktauswahl" = "sf32-products/product-selector.md" },
+    { "SF32-FAQ" = "sf32-products/family/faq.md" },
     { "Mikrocontroller" = [
       "sf32-products/chips/SF32LB52x.md",
       "sf32-products/chips/SF32LB55x.md",
@@ -46,6 +47,7 @@ nav = [
       "sf32-products/devkits/SF32LB52-DevKit-Nano.md",
       "sf32-products/devkits/SF32LB52-DevKit-ULP.md",
       "sf32-products/devkits/SF32LB56-DevKit-LCD.md",
+      "sf32-products/devkits/SF32LB57-DevKit-LCD.md",
       "sf32-products/devkits/SF32LB58-DevKit-LCD.md"
     ]}
   ]},
@@ -173,7 +175,7 @@ nav = [
     ]},
     { "M2 Module" = [
       "hardware/m2-modules/interface-standards-overview.md",
-      "hardware/m2-modules/M2 Interface Naming Rules.md",
+      "hardware/m2-modules/M2-interface-naming-rules.md",
       "hardware/m2-modules/M2-interface-definition.md"
     ]},
     { "CAD und Komponenten" = [

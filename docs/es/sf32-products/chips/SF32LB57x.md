@@ -10,62 +10,40 @@ tags:
 
 ## Visión general { #overview }
 
-La serie SF32LB57x es una familia mejorada de microcontroladores AIoT altamente integrada y de consumo ultrabajo, pensada para dispositivos vestibles, dispositivos inteligentes portátiles, productos de hogar conectado y pantallas compactas. Está dirigida a diseños cuyas necesidades de gráficos, audio Bluetooth, entrada de cámara, almacenamiento externo y funcionamiento siempre activo superan lo que una MCU Bluetooth básica puede gestionar con holgura, pero que no requieren asumir los compromisos de consumo, coste e integración propios de una plataforma con procesador de aplicaciones.
+La serie SF32LB57x es una familia mejorada de microcontroladores AIoT de consumo ultrabajo, dirigida a dispositivos vestibles, productos inteligentes portátiles, equipos para el hogar conectado y pantallas compactas. Está pensada para diseños que necesitan más capacidad gráfica, audio Bluetooth, entrada de cámara, almacenamiento externo y funcionamiento siempre activo de lo que ofrece una MCU Bluetooth básica, sin asumir los compromisos de consumo, coste e integración de una plataforma con procesador de aplicaciones. Como oferta de SiFli para 2026, SF32LB57x evoluciona respecto a SF32LB52x y SF32LB56x sin dejar de buscar un coste competitivo. Ofrece más potencia de CPU, mejor rendimiento gráfico, más GPIO en encapsulados QFN económicos y fáciles de manejar, y combinaciones más flexibles de memoria integrada en el encapsulado. En gráficos, admite resoluciones de hasta 1024 × 600 con color RGB888 (24 bits).
 
-SF32LB57x emplea una arquitectura de tres núcleos Arm Cortex-M33 STAR-MC1[^1]: dos núcleos de alto rendimiento de hasta 240 MHz y un núcleo de bajo consumo de hasta 24 MHz. La [guía de uso de ACPU de SiFli](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/acpu.html) identifica los tres núcleos como HCPU, ACPU y LCPU: ACPU procesa audio y gráficos, mientras que LCPU se ocupa de tareas de bajo consumo, como BLE y el procesamiento de datos de sensores. Los dos núcleos de alto rendimiento suman 1968 CoreMark / 740 DMIPS. Esta distribución ofrece margen suficiente para la interfaz de usuario, las aplicaciones y las tareas multimedia, y permite que Bluetooth, el concentrador de sensores y otras funciones siempre activas sigan una ruta de menor consumo.
+Emplea una arquitectura de tres núcleos Arm Cortex-M33 STAR-MC1[^1]: dos núcleos de alto rendimiento (HCPU y ACPU) de hasta 240 MHz, con un rendimiento conjunto de 1968 CoreMark / 740 DMIPS, y un núcleo LCPU de bajo consumo a 24 MHz. Según la [guía de uso de ACPU de SiFli](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/acpu.html), ACPU procesa audio y gráficos, mientras que LCPU se encarga de tareas BLE y de procesar datos de sensores con un consumo menor. La plataforma incorpora 592 KB de SRAM de retención, gráficos ePicasso 3.0, descompresión eZip 3.0, controladores LCD y de cámara DCMI, Bluetooth de modo dual, ADC/DAC de audio, interfaces para memoria SiP y externa, aceleración de seguridad y asignación flexible de pines mediante FreeIO. Su elemento diferenciador es PTM (Parallel Task Machine), un procesador paralelo compacto que descarga de las CPU principales las secuencias periféricas sensibles a ciclos, los protocolos de E/S personalizados, la adquisición de sensores, la temporización tipo PWM y la gestión de eventos.
 
-La plataforma reúne 592 KB de SRAM de retención en chip, aceleración gráfica 2D/2.5D ePicasso 3.0, motor de descompresión por hardware eZip 3.0, controlador LCD dedicado, controlador de cámara DCMI, Bluetooth de modo dual, recursos de audio ADC/DAC de alta fidelidad, interfaces para memoria SiP y externa, aceleradores de seguridad y asignación flexible de GPIO mediante FreeIO. Un elemento diferenciador clave de la serie 57x es PTM (Parallel Task Machine), un procesador paralelo compacto que descarga de las CPU principales las secuencias periféricas sensibles a ciclos, los protocolos E/S personalizados, la adquisición de sensores, la temporización tipo PWM y la coordinación por eventos.
-
-Al planificar el hardware, defina pronto la combinación de alimentación y encapsulado. SF32LB57x se ofrece en QFN68, QFN80 y BGA112. Según la familia de la pieza, está preparado para alimentación por batería o para una fuente externa regulada de 3,3 V. La elección afecta a la arquitectura de alimentación, el número de GPIO disponibles, el fanout del encapsulado, el enrutamiento de pantalla y almacenamiento, el acceso de depuración y la estrategia de puesta en marcha. Determine la referencia exacta antes de reutilizar esquemáticos o iniciar el diseño de la PCB.
+Determine la referencia exacta antes de reutilizar esquemáticos o iniciar el diseño de la PCB. SF32LB57x se ofrece en QFN68, QFN80 y BGA112; según la familia de la pieza, hay variantes alimentadas por batería y otras por una fuente externa regulada de 3,3 V. Esta elección determina la arquitectura de alimentación, el número de GPIO, el fanout del encapsulado, el enrutamiento de pantalla y almacenamiento, el acceso de depuración y la estrategia de puesta en marcha.
 
 [^1]: STAR-MC1 es una IP configurable de CPU embebida Armv8-M Mainline de Arm China. En los dispositivos SF32 compatibles, SiFli lo documenta como un procesador de aplicación Arm Cortex-M33 STAR-MC1. Su modelo de software de clase Cortex-M33 ayuda a que el firmware, middleware, adaptaciones de RTOS y herramientas Cortex-M33 existentes se puedan reutilizar, sujeto al trabajo normal de integración específico del dispositivo. Sus configuraciones CU, SP y SE varían principalmente en capacidad de caché, TCM, XIPU y TrustZone; las instrucciones personalizadas de Arm/CDE y la interfaz de coprocesador son capacidades opcionales que deben verificarse para el componente SF32 exacto. La documentación de SiFli puede usar ***Arm Cortex-M33 STAR-MC1*** o ***Arm Cortex-M33*** según el contexto.
 
 [^2]: **Solo aplicable a BGA112.** SF32LB57x integra MPI1, MPI2 y MPI3. La [convención de nomenclatura de SF32](../family/SF32_namingrule.md) indica la posición de la memoria integrada asociada a cada interfaz. En cualquiera de estas dos configuraciones de memoria SiP, los pines MPI2 y MPI3 no son accesibles desde el exterior del encapsulado, por lo que solo quedan 58 GPIO: (1) una PSRAM integrada en MPI2, ya sea sola o junto con otra PSRAM en MPI1; o (2) una Flash NOR integrada en MPI3. `SF32LB57GVD776` corresponde al caso (2): el segundo `7` identifica el componente interno conectado a MPI3, por lo que solo dispone de 58 GPIO. En las demás configuraciones, las seis E/S BGA112 asociadas a MPI3 pueden utilizarse para MPI3 o configurarse como salidas estáticas de propósito general (GP) mediante pull-up o pull-down; no son GPIO asignables sin restricciones. Por tanto, `58 + 6` en `SF32LB57ZVN7N6` significa 58 GPIO utilizables más seis E/S para MPI3 o salidas estáticas, no 64 GPIO asignables libremente. Esta limitación no afecta a QFN68 ni QFN80: estos encapsulados ofrecen únicamente su número nominal de GPIO, sin pines adicionales para MPI3 o salidas estáticas.
 
-[^3]: Las dimensiones y el grosor del encapsulado siguen las tablas de pedidos y los planos de encapsulado de las hojas de datos de SF32LB57x de SiFli (DS5701 y DS5702, V0.2.1): QFN68 (7 × 7 mm, planos de 0,9 mm o 1,1 mm), QFN80 (8 × 8 mm, planos de 0,9 mm o 1,1 mm) y BGA112 (5,4 × 4,4 mm, 0,98 mm). Entre las referencias listadas, solo SF32LB573UB776 usa el QFN68 de 1,1 mm; las tablas de pedidos no incluyen SF32LB57ZVN7N6, por lo que su grosor BGA112 se toma del único plano BGA112. La guía de diseño de hardware de SiFli indica además una opción BGA112 de 1,03 mm que las hojas de datos no muestran. El diagrama de nomenclatura específico de SF32LB57x asigna U a QFN68, Y a QFN80 y V a BGA112; no suponga que la correspondencia Y se aplica a otras familias SF32. Confirme con SiFli el grosor y el plano del encapsulado de la referencia exacta.
+[^3]: Las dimensiones y el grosor del encapsulado siguen las tablas de pedidos y los planos de encapsulado de las hojas de datos de SF32LB57x de SiFli (DS5701 y DS5702): QFN68 (7 × 7 mm, planos de 0,9 mm o 1,1 mm), QFN80 (8 × 8 mm, planos de 0,9 mm o 1,1 mm) y BGA112 (5,4 × 4,4 mm, 0,98 mm). Las referencias con tres dies de memoria (una PSRAM más QSPI-NOR de dos dies) usan la opción de encapsulado más gruesa: 1,1 mm para QFN68 y 1,03 mm para BGA112, según la guía de aplicación de hardware de SiFli. Las tablas de pedidos de las hojas de datos no incluyen SF32LB57ZVN7N6, por lo que su grosor BGA112 se toma del único plano BGA112 de las hojas de datos (0,98 mm). El diagrama de nomenclatura específico de SF32LB57x asigna U a QFN68, Y a QFN80 y V a BGA112; no suponga que la correspondencia Y se aplica a otras familias SF32. Confirme con SiFli el grosor y el plano del encapsulado de la referencia exacta.
 
 [^4]: Para la serie alimentada por batería, la hoja de datos SF32LB57x de SiFli (DS5701) especifica VBAT y VCC de 3,0 a 4,7 V, con una tensión de encendido de 3,5 V ±10 %. La guía de diseño de hardware de SiFli indica una entrada más estrecha, de 3,45 a 4,7 V (QFN68, tabla 2-1-1; QFN80, tabla 2-1-3; BGA112, tabla 2-1-5); los dos documentos difieren, por lo que debe confirmar en la hoja de datos de la referencia exacta qué pin de entrada y límites corresponden.
 [^5]: La fila de tensión de E/S resume los dominios admitidos; no significa que cada pin pueda usar indistintamente ambas tensiones. VDDIOA, cuando tiene alimentación separada, alimenta las GPIO. VDDIOSB, cuando está presente, es el raíl de E/S de la memoria SiP; la guía de SiFli especifica 1,8 V para PSRAM integrada y 3,3 V para Flash NOR. Para la serie QFN68 de 3,3 V, la tabla 2-1-2 especifica únicamente 3,3 V para VDDIOA. Verifique cada pin y dominio en la guía del encapsulado y en la hoja de datos de la referencia exacta.
+[^6]: Dos dies: son dispositivos de memoria independientes, conectados a interfaces MPI distintas y accesibles por separado.
 
 ## Aplicaciones { #applications }
 
 **SF32LB57x es una opción sólida para** productos conectados compactos que necesitan gráficos, audio Bluetooth, entrada de cámara, almacenamiento externo o supervisión continua de sensores en una plataforma basada en una MCU de bajo consumo, por ejemplo:
 
-- Relojes y pulseras inteligentes
-- Dispositivos HMI inteligentes
-- Dispositivos inteligentes con pantalla de papel electrónico
-- Electrodomésticos conectados pequeños y medianos
-- Productos portátiles de grabación y audio
-- Dispositivos médicos vestibles y equipos de actividad física
-- Equipos industriales de visualización, detección, supervisión e instrumentación
+- Relojes inteligentes, pulseras de actividad física y dispositivos médicos vestibles
+- Dispositivos HMI inteligentes, terminales con pantalla y paneles de control
+- Dispositivos inteligentes con papel electrónico y marcos de fotos electrónicos
+- Electrodomésticos conectados pequeños y medianos y cerraduras inteligentes
+- Dispositivos portátiles de grabación y audio, además de walkie-talkies e intercomunicadores Bluetooth
 - Dispositivos vestibles o de mano con cámara
-- Terminales compactos y paneles de control con pantalla
-- Controladores de consola central del automóvil, llaves inalámbricas y mandos remotos vestibles para vehículos
-- Cerraduras inteligentes
-- Productos de walkie-talkie e intercomunicador Bluetooth
-- Marcos de fotos electrónicos
+- Equipos industriales de visualización, detección, supervisión e instrumentación
+- Controladores de consola central del automóvil, llaves inalámbricas y mandos remotos para vehículos
 - Redes de malla Bluetooth y concentradores de sensores de bajo consumo
 
-Es especialmente adecuada cuando el diseño requiere una o varias de estas funciones:
-
-- Dos núcleos de alto rendimiento a 240 MHz más un núcleo de eficiencia a 24 MHz para trabajo de UI/aplicación y tareas de fondo de bajo consumo
-- Aceleración gráfica ePicasso 3.0 con rotación, escalado, proyección, reflejo y mezcla alfa en tiempo real
-- Descompresión eZip 3.0 para imágenes y animaciones eZip/eZip-A, JPEG y MJPEG, reduciendo la carga de decodificación en la CPU
-- Interfaces LCD a través de 8080, SPI/Dual-SPI/Quad-SPI, DPI/RGB, JDI y EPD de 8/16 bits
-- Entrada de cámara DCMI a través de DVP o SPI/Dual-SPI/Quad-SPI
-- Bluetooth 6.3 de modo dual (BR/EDR y BLE), incluyendo BLE Audio y LE Long Range
-- Recursos de ADC/DAC de audio de 24 bits de alta fidelidad para reproducción, grabación y llamadas Bluetooth
-- Opciones de almacenamiento SiP OPI-PSRAM / QSPI-NOR más QSPI-NOR/NAND externo, QPI-PSRAM, SD, SDIO o eMMC
-- Ejecución de tareas periféricas en PTM para obtener temporización de E/S determinista, responder rápido a eventos y automatizar sensores o interfaces con poca carga para la CPU
-
-La cifra de Bluetooth 6.3 procede de las hojas de datos de SF32LB57x (V0.2.1); las fichas de producto v0.4 aún muestran una revisión anterior. Confirme las funciones opcionales en la documentación SiFli vigente del número de pieza exacto que se vaya a pedir.
+Consulte [Características y especificaciones](#features-and-specs) para conocer las capacidades de gráficos, cámara, audio, almacenamiento y PTM en las que se basan estos usos. La cifra de Bluetooth 6.3 procede de las hojas de datos de SF32LB57x; las fichas de producto aún muestran una revisión anterior. Confirme las funciones opcionales en la documentación SiFli vigente del número de pieza exacto que se vaya a pedir.
 
 ## Recursos de desarrollo { #development-resources }
 
-[Ficha de producto]: https://downloads.sifli.com/silicon/PB0057-SF32LB57x-Product%20Brief.pdf
-[Hoja de datos]: https://downloads.sifli.com/user%20manual/DS5701-SF32LB57x-Datasheet.pdf
-[Manual de usuario]: https://downloads.sifli.com/docs/user%20manual/SF32LB57x/UM5701-SF32LB57x-EN.pdf
-[Guía original de diseño (wiki.sifli.com)]: https://wiki.sifli.com/en/hardware/SF32LB57x-HW-Application.html
 [Guía de diseño de hardware (μForge.io)]: ../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md
 [Lista de proveedores aprobados de SiFli]: ../../hardware/cad-components/sifli-approved-vendor-list.md
 [Comprar muestras]: https://sifli.taobao.com/
@@ -73,10 +51,11 @@ La cifra de Bluetooth 6.3 procede de las hojas de datos de SF32LB57x (V0.2.1); l
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Ficha de producto]__
-- :fontawesome-solid-file-pdf: __[Hoja de datos]__
-- :fontawesome-solid-file-pdf: __[Manual de usuario]__
-- :fontawesome-solid-file-lines: __[Guía original de diseño (wiki.sifli.com)]__
+- :fontawesome-solid-file-pdf: __Ficha de producto ([batería](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/PB5701-SF32LB57x-Product%20Brief%20v0.4.pdf), [3,3 V](https://downloads.sifli.com/docs/Datasheet/%E5%B8%B8%E4%BE%9B%E7%94%B5/PB5702-SF32LB57X-Product%20Brief%20v0p4.pdf))__
+- :fontawesome-solid-file-pdf: __Hoja de datos ([batería / ZH](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/DS5701-SF32LB57x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf), [3,3 V / ZH](https://downloads.sifli.com/docs/Datasheet/%E5%B8%B8%E4%BE%9B%E7%94%B5/DS5702-SF32LB57X-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf))__
+- :fontawesome-solid-file-pdf: __[Manual de usuario (ZH)](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/UM5701-SF32LB57x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p1.pdf)__
+- :fontawesome-solid-file-lines: __[Guía original de diseño (wiki.sifli.com, ZH)](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html)__
+- :fontawesome-solid-file-lines: __[Guía de la placa de desarrollo (wiki.sifli.com, ZH)](https://wiki.sifli.com/board/sf32lb57x/SF32LB57-DevKit-LCD.html)__
 - :fontawesome-solid-file-lines: __[Guía de diseño de hardware (μForge.io)]__
 - :fontawesome-solid-file-excel: __[Lista de proveedores aprobados de SiFli]__
 - :fontawesome-solid-cart-shopping: __[Comprar muestras]__
@@ -90,96 +69,69 @@ La cifra de Bluetooth 6.3 procede de las hojas de datos de SF32LB57x (V0.2.1); l
 
 ### Cómputo y memoria { #compute-and-memory }
 
-- Sistema de alto rendimiento con dos núcleos Arm Cortex-M33 STAR-MC1, de hasta 240 MHz
-- Sistema de bajo consumo con un núcleo de eficiencia Arm Cortex-M33 STAR-MC1, de hasta 24 MHz
-- Rendimiento conjunto de los dos núcleos de alto rendimiento: 1968 CoreMark / 740 DMIPS
-- Cachés HCPU: instrucciones de 32 KB y 2 vías, y datos de 16 KB y 4 vías
-- Recursos de caché de instrucciones y datos de ACPU para XIP y aceleración de aplicaciones
-- 512 KB de SRAM de retención HPSYS y 80 KB de SRAM de retención LPSYS: 592 KB de SRAM en chip en total
-- D-TCM de 128 KB sin ciclos de espera, compartido con el espacio de direcciones de la SRAM HPSYS
-- Compatibilidad con FPU de precisión simple y MPU
-- GPDMA con modo de lista enlazada
+- Dos núcleos de alto rendimiento Arm Cortex-M33 STAR-MC1 de hasta 240 MHz, con FPU y MPU (1968 CoreMark / 740 DMIPS en conjunto)
+- Núcleo de bajo consumo Arm Cortex-M33 STAR-MC1 a 24 MHz
+- Caché de instrucciones de 32 KB + caché de datos de 16 KB (HCPU)
+- 592 KB de SRAM de retención (512 KB HPSYS + 80 KB LPSYS), incluidos 128 KB de D-TCM sin ciclos de espera
+- Memoria integrada en el encapsulado según la variante, hasta 48 MB de PSRAM y 32 MB de Flash NOR
 
 ### Máquina de tareas paralelas PTM { #ptm-peripheral-task-machine }
 
-- PTM de cuatro núcleos para tareas periféricas personalizadas que se benefician de la ejecución temporizada por hardware, sin intervención continua de la CPU
-- Conjunto compacto de instrucciones para leer y escribir en buses y E/S, operar con datos, realizar saltos condicionales, esperar eventos y aplicar retardos fijos
-- Control temporal ciclo a ciclo al ejecutar desde la TCM PTM, adecuado para secuencias de E/S deterministas
-- Cada núcleo PTM admite hasta 16 canales de E/S y FIFO/DMA para interfaces de comunicación personalizadas
-- Los núcleos PTM acceden a la memoria del bus AHB y a los registros periféricos, pueden interrumpir la CPU y coordinarse mediante eventos internos
-- Adecuada para protocolos de interfaz y PWM personalizados, operaciones agrupadas de memoria y datos, planificación de varios módulos y adquisición automática de sensores
+- PTM de cuatro núcleos para tareas periféricas personalizadas, con ejecución temporizada por hardware en lugar de atención continua de la CPU
+- Temporización a nivel de ciclo para secuencias de E/S deterministas
+- Hasta 16 canales de E/S por núcleo, compatibles con FIFO/DMA
+- Acceso a la memoria AHB y a los registros de periféricos, interrupciones de la CPU y eventos entre núcleos
 
 ### Conectividad inalámbrica { #wireless-connectivity }
 
-- Radio Bluetooth de modo dual
-- Soporte de BLE Audio y LE Long Range
-- Sensibilidad de recepción: −100 dBm en BLE a 1 Mbps, −107,5 dBm en BLE a 125 kbps, −96 dBm en BR y −95 dBm en EDR2
-- Potencia de transmisión máxima: 13 dBm para EDR2/EDR3 y 17 dBm para BR/BLE
-- Corriente pico en recepción BR: puede bajar hasta 2,0 mA a 3,8 V
+- Bluetooth 6.3 de modo dual (Bluetooth Classic y BLE), con BLE Audio y LE Long Range
+- Potencia de transmisión máxima:
+    - 17 dBm para BLE/BR
+    - 13 dBm para EDR2 y EDR3
+- Sensibilidad: −100 dBm en BLE a 1 Mbps
 
 ### Gráficos, pantalla y cámara { #graphics-display-and-camera }
 
-- Motor gráfico 2D/2.5D ePicasso 3.0
-- Aceleración por hardware de rotación, escalado, proyección, reflejo, mezcla alfa y composición multicapa
-- Resolución gráfica máxima: 2048 × 2048
-- Formatos RGB incluyendo RGB888, RGB565, aRGB8888 y aRGB8565
-- Formatos adicionales incluyendo L8/L4, G8/G4/G2, A8/A4/A2 y YUV
-- Motor eZip 3.0 para descomprimir sin pérdidas imágenes y animaciones eZip/eZip-A
-- Descompresión de imágenes JPEG y animaciones MJPEG
-- eZip y ePicasso pueden funcionar conjuntamente sin un framebuffer intermedio
-- Controlador LCD dedicado compatible con 8080, SPI/Dual-SPI/Quad-SPI, DPI/RGB, JDI y EPD de 8/16 bits
-- El subsistema de pantalla admite usos de pantalla siempre activa y bajo consumo
-- Controlador de cámara DCMI compatible con interfaces DVP y SPI/Dual-SPI/Quad-SPI
+Resolución máxima e interfaces de panel: consulte [Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix).
+
+- Acelerador gráfico 2D/2.5D ePicasso 3.0, de hasta 2048 × 2048
+- Decodificador de hardware eZip 3.0 para eZip/eZip-A sin pérdidas, además de JPEG y MJPEG
+- Controlador LCD dedicado compatible con 8080, SPI/DSPI/QSPI, DPI/RGB, JDI y EPD de 8/16 bits
+- Controlador de cámara DCMI compatible con DVP y SPI/DSPI/QSPI
 
 ### Audio y analógico { #audio-and-analog }
 
-- 1 DAC de audio de 24 bits y alta fidelidad, con SNR de 109 dB
-- 2 ADC de audio de 24 bits y alta fidelidad, con SNR de 97 dB
-- Frecuencias de muestreo de audio de 8 a 96 kHz, incluidas las habituales en telefonía y música
-- LDO Micbias con salida de 1,4 a 2,8 V y corriente de salida de hasta 2 mA
-- Admite reproducción y grabación de audio, llamadas Bluetooth y reproducción MP3 con auriculares conectados
-- 1 ADC SAR de propósito general, de 12 bits y 12 canales
-- 1 sensor de temperatura integrado en el chip
+- 1 DAC de audio de 24 bits, con una relación señal/ruido (SNR) de 109 dB
+- 2 ADC de audio de 24 bits, con una relación señal/ruido (SNR) de 97 dB
+- 1 ADC de propósito general de 12 bits (12 canales)
+- Sensor de temperatura
 
 ### Almacenamiento y seguridad { #storage-and-security }
 
-- OPI-PSRAM SiP compatible hasta 156 MHz
-- Flash NOR SiP compatible hasta 104 MHz
-- 3 interfaces MPI (QSPI) para NOR, NAND y QPI-PSRAM, con ejecución XIP en memoria mapeada
-- 2 interfaces SD/SDIO compatibles con SD 3.0, SDIO 3.0 y eMMC
-- Descifrado de Flash sobre la marcha
-- Aceleradores AES, HASH y CRC
-- Generador de números aleatorios verdaderos (TRNG)
-- Arquitectura de seguridad eShield
+- 3 MPI (QSPI) para NOR, NAND y QPI-PSRAM, con XIP
+- 2 SD 3.0/SDIO 3.0/eMMC
+- Aceleradores de hardware AES/HASH/CRC
+- TRNG
+- Descifrado de Flash sobre la marcha y arquitectura de seguridad eShield
 - PSA Certified Level 1
 
 ### Periféricos y E/S { #peripherals-and-ios }
 
-- Hasta 58 GPIO, según el encapsulado y la referencia comercial
-- Asignación flexible de GPIO mediante FreeIO
-- 3× UART
-- 4× I2C
-- 2× SPI
-- 2× I2S
-- 2 interfaces PDM (hasta dos micrófonos digitales por interfaz)
-- 1× USB 2.0 Full-Speed
-- 2× CAN
-- Integración de eventos PTM para secuencias periféricas activadas por eventos y coordinación multinúcleo
-- 2× GPTIM de 16 bits
-- 4× BTIM de 32 bits
-- 2× ATIM de 32 bits
-- 2× LPTIM de 24 bits
-- 1× PWM
-- 1× RTC
-- 2× WDT de 24 bits y 1× WDT independiente
+- 3x UART
+- 4x I2C
+- 2x SPI
+- 2x I2S
+- 2 interfaces PDM (hasta dos micrófonos digitales cada una)
+- 1 USB 2.0 FS
+- 2x CAN
+- RTC, watchdog y temporizadores de propósito general (GPTIM, BTIM, ATIM, LPTIM) con PWM
+- Hasta 58 GPIO según el encapsulado y la referencia, con asignación flexible FreeIO
 
 ### Gestión de alimentación { #power-management }
 
-- Convertidor reductor Buck de alta eficiencia y LDO de bajo consumo integrados
-- Dos salidas externas de alimentación de 3,3 V, de hasta 150 mA cada una
+- Convertidor reductor Buck y LDO de bajo consumo integrados; dos salidas externas de 3,3 V, de hasta 150 mA cada una
 - Corriente en modo Hibernate: 2,8 µA a 3,8 V (configuración con batería) o 1 µA a 3,3 V (configuración con alimentación externa)
-- Cargador lineal configurable de batería de ion-litio (corriente de carga de hasta 400 mA) integrado en la variante alimentada por batería
-- Tensión de carga completa: de 4,2 a 4,45 V
+- Cargador de ion-litio de hasta 400 mA (de 4,2 a 4,45 V) en la configuración con batería
 - Rango de entrada de batería/sistema[^4]: de 3,0 a 4,7 V
 - Rango de VBUS: de 4,5 a 5,5 V
 - Temperatura de funcionamiento: de −40 a +85 °C
@@ -188,7 +140,7 @@ La cifra de Bluetooth 6.3 procede de las hojas de datos de SF32LB57x (V0.2.1); l
 
 La familia SF32LB57x incluye variantes para alimentación por batería y variantes que requieren una fuente externa regulada de 3,3 V. Elija la referencia exacta antes de la captura del esquemático, ya que los planos del encapsulado, los pines de alimentación, las GPIO disponibles, la memoria integrada y las restricciones de la placa varían según la versión.
 
-Las referencias siguientes proceden de las tablas de pedidos de las hojas de datos de SF32LB57x de SiFli (DS5701 y DS5702, V0.2.1, ambas en borrador preliminar), salvo `SF32LB57ZVN7N6`, que esas tablas no incluyen. Confirme en la documentación vigente de SiFli para la referencia exacta el código de pedido, la memoria integrada en el encapsulado, los límites eléctricos y el plano del encapsulado antes de integrar el diseño.
+Las referencias siguientes proceden de las tablas de pedidos de las hojas de datos de SF32LB57x de SiFli (DS5701 y DS5702, ambas en borrador preliminar), salvo `SF32LB57ZVN7N6`, que esas tablas no incluyen. Confirme en la documentación vigente de SiFli para la referencia exacta el código de pedido, la memoria integrada en el encapsulado, los límites eléctricos y el plano del encapsulado antes de integrar el diseño.
 
 Para una primera selección, tenga en cuenta estos grupos:
 
@@ -206,10 +158,11 @@ La hoja de datos de la serie alimentada por batería (DS5701) también incluye u
 |:-|-:|-:|-:|-:|-:|-:|
 | Encapsulado | QFN68 | QFN68 | QFN68 | QFN68 | QFN68 | QFN68 |
 | Dimensiones en planta[^3] | 7 × 7 mm | 7 × 7 mm | 7 × 7 mm | 7 × 7 mm | 7 × 7 mm | 7 × 7 mm |
-| Grosor[^3] | 0,9 mm | 0,9 mm | 1,1 mm | 0,9 mm | 0,9 mm | 0,9 mm |
+| Grosor[^3] | 0,9 mm | 1,1 mm | 1,1 mm | 0,9 mm | 0,9 mm | 0,9 mm |
 | Paso | 0,35 mm | 0,35 mm | 0,35 mm | 0,35 mm | 0,35 mm | 0,35 mm |
 | GPIO | 46 | 46 | 46 | 46 | 46 | 47 |
-| Memoria integrada en el encapsulado | 4 MB de OPI-PSRAM + 16 MB de QSPI-NOR | 4 MB de OPI-PSRAM + 16 MB + 8 MB de QSPI-NOR (dos dies) | 4 MB de OPI-PSRAM + 2 × 16 MB de QSPI-NOR (dos dies) | 8 MB de OPI-PSRAM, sin QSPI-NOR | 16 MB de OPI-PSRAM, sin QSPI-NOR | Sin PSRAM; solo 1 MB de QSPI-NOR |
+| PSRAM integrada en el encapsulado | 4 MB de OPI-PSRAM | 4 MB de OPI-PSRAM | 4 MB de OPI-PSRAM | 8 MB de OPI-PSRAM | 16 MB de OPI-PSRAM | Ninguna |
+| Flash NOR integrada en el encapsulado | 16 MB de QSPI-NOR | 16 MB + 8 MB de QSPI-NOR (dos dies)[^6] | 2 × 16 MB de QSPI-NOR (dos dies)[^6] | Ninguna | Ninguna | 1 MB de QSPI-NOR |
 | Alimentación[^4] | 3,0–4,7 V | 3,0–4,7 V | 3,0–4,7 V | 3,0–4,7 V | 3,0–4,7 V | **3,3 V** |
 | Tensión de E/S[^5] | 3,3 V | 3,3 V | 3,3 V | 3,3 V | 3,3 V | 3,3 V / 1,8 V |
 | Temperatura de funcionamiento | −40 a 85 °C | −40 a 85 °C | −40 a 85 °C | −40 a 85 °C | −40 a 85 °C | −40 a 85 °C |
@@ -224,10 +177,11 @@ La hoja de datos de la serie alimentada por batería (DS5701) también incluye u
 |:-|-:|-:|-:|-:|
 | Encapsulado | QFN80 | QFN80 | BGA112 | BGA112 |
 | Dimensiones en planta[^3] | 8 × 8 mm | 8 × 8 mm | 5,4 × 4,4 mm | 5,4 × 4,4 mm |
-| Grosor[^3] | 0,9 mm | 0,9 mm | 0,98 mm | 0,98 mm |
+| Grosor[^3] | 0,9 mm | 0,9 mm | 0,98 mm | 1,03 mm |
 | Paso | 0,35 mm | 0,35 mm | 0,4 mm | 0,4 mm |
 | GPIO | 58 | 58 | 58 + 6 (MPI3 o salidas estáticas)[^2] | 58[^2] |
-| Memoria integrada en el encapsulado | 8 MB (2 × 4 MB, dos dies) de OPI-PSRAM, sin QSPI-NOR | 16 MB de OPI-PSRAM + 16 MB de QSPI-NOR | Sin PSRAM + 16 MB de QSPI-NOR | 16 MB de OPI-PSRAM + 32 MB (2 × 16 MB, dos dies) de QSPI-NOR |
+| PSRAM integrada en el encapsulado | 8 MB (2 × 4 MB, dos dies) de OPI-PSRAM[^6] | 16 MB de OPI-PSRAM | Ninguna | 16 MB de OPI-PSRAM |
+| Flash NOR integrada en el encapsulado | Ninguna | 16 MB de QSPI-NOR | 16 MB de QSPI-NOR | 32 MB (2 × 16 MB, dos dies) de QSPI-NOR[^6] |
 | Alimentación | **3,3 V** | **3,3 V** | **3,3 V** | **3,3 V** |
 | Tensión de E/S[^5] | 3,3 V / 1,8 V | 3,3 V / 1,8 V | 3,3 V / 1,8 V | 3,3 V / 1,8 V |
 | Temperatura de funcionamiento | −40 a 85 °C | −40 a 85 °C | −40 a 85 °C | −40 a 85 °C |
@@ -241,7 +195,7 @@ En SF32LB57x, el encapsulado no se elige únicamente por el coste de la PCB. Tam
 Siga estos pasos para convertir una preselección de SF32LB57x en un diseño validado:
 
 1. **Valide la ruta de firmware.** Empiece con la [guía de inicio del SiFli SDK](../../getting-started/sifli/getting-started-sifli-sdk.md). Después, use el [flujo de trabajo del SDK](../../develop/platforms/sifli-sdk/overview.md) y los [ejemplos](../../develop/examples/index.md) para probar las funciones de gráficos, audio, cámara, Bluetooth y almacenamiento que necesita el producto.
-2. **Planifique el hardware de evaluación.** μForge aún no ofrece un módulo ni una placa de desarrollo específicos para SF32LB57. Consulte el [selector de productos SF32](../product-selector.md) para encontrar la opción de evaluación más próxima. Antes de extrapolar los resultados a un diseño 57x, compruebe que coincidan el encapsulado, la alimentación, la memoria y las interfaces.
+2. **Planifique el hardware de evaluación.** Use [SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md) para evaluar la pantalla, la cámara, el audio y la conectividad. Antes de tomarla como referencia para un producto 57x, confirme la configuración de memoria del módulo, la revisión de la placa y la configuración de los pines compartidos.
 3. **Diseñe y revise el hardware.** Antes de liberar el esquemático o el diseño de la placa, siga la [guía de diseño de hardware](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md), incluida la [autoevaluación del diseño del cliente](../../hardware/chip-guides/SF32LB57x_review_and_reference.md#7-customer-design-self-check), y el proceso de revisión de [diseño para producción](../../hardware/design-for-production.md). Por ahora no hay una lista de comprobación de μForge específica para esta familia.
 4. **Verifique la fuente de referencia.** Verifique la referencia comercial y el encapsulado exactos en la [hoja de datos][Hoja de datos], el [manual de usuario][Manual de usuario] y la [guía original de diseño][Guía original de diseño (wiki.sifli.com)] de SiFli. Para seleccionar componentes críticos de la lista de materiales, consulte también la [lista de proveedores aprobados de SiFli][Lista de proveedores aprobados de SiFli].
 
@@ -249,16 +203,19 @@ Siga estos pasos para convertir una preselección de SF32LB57x en un diseño val
 ## Preguntas frecuentes { #frequently-asked-questions }
 
 **¿Cuáles son las especificaciones principales del SF32LB57x?**
-El SF32LB57x combina una CPU de aplicación (2× Cortex-M33 @240 MHz) con un núcleo de bajo consumo (Cortex-M33 @24 MHz, un controlador Bluetooth dedicado), 592 KB de SRAM interna y Bluetooth dual (BT clásico + BLE). Gráficos: ePicasso 3.0 + eZip 3.0. Encapsulado: QFN68 / QFN80 / BGA112 (7 × 7 mm (QFN68), 8 × 8 mm (QFN80), 5.4 × 4.4 mm (BGA112)). USB 2.0 FS. Valores de la familia; verifique la hoja de datos del número de pieza exacto.
+El SF32LB57x combina una CPU de aplicación (2× Cortex-M33 @240 MHz) con un núcleo de bajo consumo (Cortex-M33 @24 MHz, un controlador Bluetooth dedicado), 592 KB de SRAM interna y Bluetooth dual (BT clásico + BLE). Gráficos: ePicasso 3.0 + eZip 3.0. Encapsulado: QFN68 / QFN80 / BGA112 (7 × 7 mm (QFN68), 8 × 8 mm (QFN80), 5,4 × 4,4 mm (BGA112)). USB 2.0 FS.
 
 **¿Qué interfaces de pantalla admite el SF32LB57x?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. La disponibilidad varía según el número de pieza y el encapsulado.
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+
+**¿Cuál es la resolución de pantalla máxima del SF32LB57x?**
+Hasta 1024 × 600 con color RGB888, mediante la interfaz DPI/RGB. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
 **¿Cuánta memoria en el encapsulado ofrece el SF32LB57x?**
-Hasta 48 MB de PSRAM y hasta 32 MB de Flash NOR en el encapsulado, según el número de pieza.
+Hasta 48 MB de PSRAM y hasta 32 MB de Flash NOR en el encapsulado.
 
 **¿Qué tensión de alimentación necesita el SF32LB57x?**
-3.0–4.7 V or 2.97–3.63 V, según la variante. Confirme el rango exacto en la hoja de datos.
+3,0–4,7 V o 2,97–3,63 V.
 
 **¿Por dónde empezar un diseño de hardware con el SF32LB57x?**
 Empiece con la [guía de diseño de hardware del SF32LB57x](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md) para esquemático, alimentación, reloj/RF y diseño de PCB, y use después las listas de verificación de esquemático y layout antes de liberar la placa.
@@ -271,6 +228,8 @@ Empiece con la [guía de diseño de hardware del SF32LB57x](../../hardware/chip-
 Use como referencia la [guía de diseño de hardware de μForge.io](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md), la nota de aplicación de hardware oficial, la hoja de datos y la lista de proveedores aprobados. Antes de liberar el esquemático o la PCB, confirme la arquitectura de alimentación, el fanout del encapsulado y el plan de pantalla, almacenamiento, audio, cámara, RF, depuración y descarga.
 
 ### Placas de desarrollo { #development-kits }
+
+[SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md) es la placa de evaluación para pantallas RGB, cámaras DVP, dos micrófonos PDM, salida de altavoz, Wi-Fi SDIO y USB. Se basa en la placa núcleo SF32LB57, que hace las veces de módulo 57 hasta que este disponga de la certificación de RF completa y esté disponible comercialmente.
 
 Para planificar la alimentación, los relojes, la RF, la pantalla, el almacenamiento, el audio, la cámara y los accesos de producción, consulte los esquemáticos de referencia oficiales, la guía del sistema mínimo y el material de listas de comprobación.
 

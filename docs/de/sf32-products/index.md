@@ -29,7 +29,7 @@ Der Bereich SF32-Produkte begleitet Sie von der Produktidee bis zu einem umsetzb
 ## Inhalte dieses Bereichs { #what-this-section-covers }
 Die [SF32-Familienübersicht](family/SF32_family.md) zeigt die verfügbaren Produktfamilien und die grundlegenden Unterschiede ihres Funktionsumfangs. Sobald Familie und Gehäuse eingegrenzt sind, helfen die [Benennungsregeln](family/SF32_namingrule.md), die vollständige Teilenummer zu entschlüsseln.
 
-Nutzen Sie die [SF32-Produktauswahl](product-selector.md), wenn Anforderungen an Stromversorgung, Gehäuse, Display, Audio, Speicher, GPIO, Konnektivität oder spezielle Hardware die Auswahl bestimmen. Sie dient zur Vorauswahl. Die genaue Teilenummer, das Gehäuse, die elektrischen Grenzwerte und das Routing auf Platinenebene müssen weiterhin anhand der passenden SiFli-Dokumentation geprüft werden.
+Nutzen Sie die [SF32-Produktauswahl](product-selector.md), wenn Anforderungen an Stromversorgung, Gehäuse, Display, Audio, Speicher, GPIO, Konnektivität oder spezielle Hardware die Auswahl bestimmen. Sie dient zur Vorauswahl. Die genaue Teilenummer, das Gehäuse, die elektrischen Grenzwerte und das Routing auf Platinenebene müssen weiterhin anhand der passenden SiFli-Dokumentation geprüft werden. Häufige Fragen zur Auswahl, Bestellung und Anpassung von SF32-Bauteilen beantwortet die [SF32-FAQ](family/faq.md).
 
 Sobald die Richtung feststeht, führen die [Referenzdesigns](../hardware/reference-designs/reference-designs.md) und der [Weg zur Produktion](../hardware/design-for-production.md) weiter. Sie verbinden die Geräteauswahl mit Referenzhardware, Designhinweisen, CAD-Bibliotheken, BOM-Entscheidungen, Checklisten für Designreviews und Inbetriebnahme-Nachweisen.
 

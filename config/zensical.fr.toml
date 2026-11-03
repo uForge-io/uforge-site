@@ -28,6 +28,7 @@ nav = [
       "sf32-products/family/product-planning.md"
     ]},
     { "Sélecteur de produits SF32" = "sf32-products/product-selector.md" },
+    { "FAQ SF32" = "sf32-products/family/faq.md" },
     { "Microcontrôleurs" = [
       "sf32-products/chips/SF32LB52x.md",
       "sf32-products/chips/SF32LB55x.md",
@@ -46,6 +47,7 @@ nav = [
       "sf32-products/devkits/SF32LB52-DevKit-Nano.md",
       "sf32-products/devkits/SF32LB52-DevKit-ULP.md",
       "sf32-products/devkits/SF32LB56-DevKit-LCD.md",
+      "sf32-products/devkits/SF32LB57-DevKit-LCD.md",
       "sf32-products/devkits/SF32LB58-DevKit-LCD.md"
     ]}
   ]},
@@ -173,7 +175,7 @@ nav = [
     ]},
     { "Modules M2" = [
       "hardware/m2-modules/interface-standards-overview.md",
-      "hardware/m2-modules/M2 Interface Naming Rules.md",
+      "hardware/m2-modules/M2-interface-naming-rules.md",
       "hardware/m2-modules/M2-interface-definition.md"
     ]},
     { "CAO et composants" = [

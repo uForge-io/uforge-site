@@ -61,6 +61,58 @@ DS5802 V0.1 列出了模组板载 PCB 天线和外接天线方案。外接天线
 
 ## 特性与规格 { #features-and-specifications }
 
+### 合规标识 { #regulatory-markings }
+
+思澈科技（SiFli）提供的 **SF32LB58-MOD-N16R32N1** 和 **SF32LB58-MOD-A128R32N1** 标签图稿列出以下编号及 CE 标志。
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 780px; margin: 1rem auto;">
+<figure style="margin: 0;">
+<a href="assets/SF32LB58-MOD/N16R32N1-label.png"><img src="assets/SF32LB58-MOD/N16R32N1-label.png" alt="SF32LB58-MOD-N16R32N1" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB58-MOD-N16R32N1</figcaption>
+</figure>
+<figure style="margin: 0;">
+<a href="assets/SF32LB58-MOD/A128R32N1-label.png"><img src="assets/SF32LB58-MOD/A128R32N1-label.png" alt="SF32LB58-MOD-A128R32N1" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB58-MOD-A128R32N1</figcaption>
+</figure>
+</div>
+
+<div align="center" markdown>
+
+*SF32LB58-MOD 标签上的标识*
+
+| 项目 | 标签印字 |
+| --- | --- |
+| 标签型号 | `SF32LB58-MOD-N16R32N1`、`SF32LB58-MOD-A128R32N1` |
+| FCC | `2BVUV-SF32LB58` |
+| IC | `35666-SF32LB58` |
+| CMIIT ID | `26J3260U7517(M)` |
+| HVIN | `SF32LB58` |
+| CE 标志 | 两张标签均有 |
+
+</div>
+
+上表内容按所提供的标签转录，未对认证记录或符合性声明作独立核验。请向思澈科技（SiFli）核实适用于具体模组版本的批准文件、天线条件和集成要求。没有相应文件支持时，不要将这些标识用于 SF32LB58-MOD-E4R32N1 或其他型号。模组标签上的标识不代表最终产品已符合相关法规要求。
+
+### 存储接口与模组型号 { #storage-interfaces-and-module-variants }
+
+<div align="center"><em>SF32LB58-MOD 模组型号</em></div>
+
+<div align="center" markdown>
+
+| 模组料号 | 可选存储配置 | PSRAM | 标准 Flash | 温度 | 尺寸 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| SF32LB58-MOD-N16R32N1 | 16 MB QSPI-NOR | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C 至 +85 °C | 24 × 24 × 3.1 mm |
+| SF32LB58-MOD-A128R32N1 | 128 MB QSPI-NAND | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C 至 +85 °C | 24 × 24 × 3.1 mm |
+| SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C 至 +85 °C | 24 × 24 × 3.1 mm |
+
+</div>
+
+!!! note "供货与定制"
+    **受近期存储芯片供应短缺影响，SF32LB58-MOD-E4R32N1 已无法供货。** 模组也可采用其他配置。如有定制需求，请[联系 μForge.io](../../about/contact.md)。
+
+
+思澈科技（SiFli）的[《模组型号指南》](https://wiki.sifli.com/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)列出了上述型号，并说明可在模组内贴装 eMMC，也可定制其他配置。请按所需的存储介质和容量选择 SKU，并向思澈科技（SiFli）确认当前供货状态及存储配置。设计定型前，还应确认目标 SDK 和固件支持相应器件及其启动/存储路径。
+
 ### 计算与存储 { #compute-and-memory }
 
 - 2 个 Arm Cortex-M33 STAR-MC1 应用核心，最高 240 MHz
@@ -95,23 +147,6 @@ DS5802 V0.1 列出了模组板载 PCB 天线和外接天线方案。外接天线
 - 模组接口对外提供模拟音频输入 / 输出能力
 
 思澈科技（SiFli）的 [SF32LB58x 硬件设计指南](https://wiki.sifli.com/hardware/SF32LB58x-HW-Application.html)列出两路 PDM 麦克风输入（PDM1、PDM2）。PDM 接口数不等于麦克风数：思澈科技（SiFli）的 [PDM SDK 示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html)演示了单路 PDM 通过左右声道接入两颗麦克风，以及使用 PDM1 和 PDM2 接入四颗麦克风。不过，该示例的支持平台列表不包含 SF32LB58-MOD，因此不能据此确认本模组支持四麦克风配置。实际设计时，请核对目标 SDK 支持的麦克风及声道配置、引脚复用和载板布线；不要仅凭两路 PDM 接口推断本模组支持四颗麦克风。
-
-### 存储接口与模组型号 { #storage-interfaces-and-module-variants }
-
-<div align="center"><em>SF32LB58-MOD 模组型号</em></div>
-
-<div align="center" markdown>
-
-| 模组料号 | 可选存储配置 | PSRAM | 标准 Flash | 温度 | 尺寸 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB58-MOD-N16R32N1 | 16 MB QSPI-NOR | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C 至 +85 °C | 24 × 24 × 3.1 mm |
-| SF32LB58-MOD-A128R32N1 | 128 MB QSPI-NAND | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C 至 +85 °C | 24 × 24 × 3.1 mm |
-| SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C 至 +85 °C | 24 × 24 × 3.1 mm |
-
-</div>
-
-
-思澈科技（SiFli）的[《模组型号指南》](https://wiki.sifli.com/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)列出了上述型号，并说明可按需在模组内贴装 eMMC，也可定制其他配置。请根据所需的存储介质和容量选择 SKU，并向思澈科技（SiFli）确认当前可供货的型号及存储配置；定型前还应确认目标 SDK 和固件支持相应器件及启动/存储路径。
 
 ### 电源、封装与 I/O { #power-package-and-io }
 

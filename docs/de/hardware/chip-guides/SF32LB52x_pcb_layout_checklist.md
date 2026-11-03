@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52x Hardware-Design-Leitfaden — PCB-Layout-Checkliste"
 icon: lucide/list-checks
 hide:
     - navigation

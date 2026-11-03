@@ -1,5 +1,6 @@
 ---
 icon: lucide/puzzle
+title: "Primeros pasos con Arduino"
 description: "Primera puesta en marcha paso a paso del ArduinoCore-zephyr en beta de OpenSiFli en el SF32LB52 DevKit LCD: instale el paquete de placa, suba una prueba serie y Blink."
 tags:
     - Primeros pasos

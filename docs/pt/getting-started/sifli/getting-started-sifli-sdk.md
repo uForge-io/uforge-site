@@ -1,5 +1,6 @@
 ---
 icon: lucide/terminal
+title: "Primeiros passos com SiFli-SDK"
 description: "Da placa SF32 recém-desembalada ao primeiro hello_world via UART com SiFli-SDK: instale a cadeia de ferramentas, compile com scons e grave o firmware pela UART."
 tags:
     - Primeiros passos

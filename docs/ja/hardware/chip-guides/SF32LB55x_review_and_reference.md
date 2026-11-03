@@ -1,4 +1,5 @@
 ---
+title: "SF32LB55xハードウェア設計ガイド — 設計レビュー用チェックリストと参考資料"
 icon: lucide/clipboard-check
 hide:
     - navigation

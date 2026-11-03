@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58-MOD - 硬件设计指南"
 icon: lucide/book-check
 hide:
     - navigation
@@ -21,6 +22,9 @@ tags:
 !!! note "来源与图片处理"
     本指南的模组专属技术数据以 **DS5802-SF32LB58-MOD V0.1** 为准。技术规格书中的部分管脚布局图、原理图和机械尺寸图为位图，本指南采用引用而非重绘的方式处理。下文图表编号沿用本站指南的内部编号；对于未复现的图，说明文字中标注其在官方技术规格书中的对应图号。
 
+!!! note "合规标识适用范围"
+    所提供的 SF32LB58-MOD-N16R32N1 和 SF32LB58-MOD-A128R32N1 标签上标有 FCC、IC、CMIIT ID 和 HVIN 编号，以及 CE 标志，详见[模组标识汇总](../../sf32-products/modules/SF32LB58-MOD.md#regulatory-markings)。请针对具体版本核实批准文件以及天线和集成条件；不要据此推定其他型号或最终产品也在覆盖范围内。
+
 ## 2. 快速设计概览 { #2-quick-design-summary }
 
 ### 2.1 模组型号 { #21-module-variants }
@@ -36,6 +40,9 @@ tags:
 | SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85°C | 24 × 24 × 3.1 |
 
 </div>
+
+!!! note "供货与定制"
+    **受近期存储芯片供应短缺影响，SF32LB58-MOD-E4R32N1 现已无法供货。** 模组也可采用其他配置。如需定制，请[联系 μForge.io](../../about/contact.md)。
 
 ### 2.2 关键规格 { #22-key-specifications }
 

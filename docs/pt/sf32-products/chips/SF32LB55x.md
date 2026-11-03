@@ -89,9 +89,11 @@ Considere o SF32LB55x quando o projeto precisar de um ou mais dos seguintes recu
 
 ### Gráficos, display e IA { #graphics-display-and-ai }
 
+Resolução máxima e interfaces de painel: consulte [Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix).
+
 - Mecanismo gráfico ePicasso 2.5D com rotação, redimensionamento, espelhamento e mesclagem alfa acelerados por hardware
 - O eZip descomprime gráficos sem perdas e pode ser encadeado ao ePicasso
-- A camada de transformação do ePicasso oferece resolução de até 640 × 640; as camadas genéricas e a saída de display chegam a 1024 × 1024, e a saída de display alcança taxa de quadros de até 60 fps
+- A camada de transformação do ePicasso suporta até 640 × 640, e o canvas, até 1024 × 1024. A resolução real do display é limitada a 512 × 512; o tamanho do canvas não define o limite da saída de display. A saída oferece até 60 fps, conforme o painel, a interface e a carga.
 - O controlador LCD oferece suporte a 8080, SPI, Dual-SPI, Quad-SPI, DPI, MIPI DSI e interfaces JDI para displays refletivos nas variantes compatíveis; confirme a disponibilidade no modelo escolhido
 - A compressão de framebuffer TurboPixel permite que o controlador LCD leia os quadros comprimidos e os descomprima para exibição, reduzindo o espaço ocupado pelo framebuffer e a largura de banda de leitura necessária
 - Dois controladores LCD; as interfaces para display sempre ativo e o uso de dois displays dependem do modelo e do encapsulamento
@@ -199,16 +201,19 @@ Siga esta sequência para passar de uma pré-seleção de componentes SF32LB55x 
 ## Perguntas frequentes { #frequently-asked-questions }
 
 **Quais são as principais especificações do SF32LB55x?**
-O SF32LB55x combina uma CPU de aplicação (Cortex-M33 @240 MHz) com um núcleo de baixo consumo (Cortex-M33 @48 MHz, com um núcleo programável pelo usuário), 1,312 KB de SRAM interna e apenas Bluetooth Low Energy (BLE). Gráficos: ePicasso 1.0. Encapsulamento: QFN68 / BGA145 / BGA169 (7 × 7 mm (QFN68)). USB 2.0 FS. Valores da família; confira o datasheet do código exato.
+O SF32LB55x combina uma CPU de aplicação (Cortex-M33 @240 MHz) com um núcleo de baixo consumo (Cortex-M33 @48 MHz, programável pelo usuário). Integra 1.312 KB de SRAM interna e oferece apenas Bluetooth Low Energy (BLE). Gráficos: ePicasso 1.0. Encapsulamento: QFN68 / BGA145 / BGA169 (7 × 7 mm (QFN68)). USB 2.0 FS.
 
 **Quais interfaces de display o SF32LB55x suporta?**
-SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. A disponibilidade varia conforme o código e o encapsulamento.
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+
+**Qual é a resolução máxima de display do SF32LB55x?**
+Até 512 × 512 com cor RGB888, via MIPI-DSI, apenas com drivers de display com RAM integrada. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
 **Quanta memória no encapsulamento o SF32LB55x oferece?**
-Até 16 MB + 2 MB de PSRAM e até 8 MB de Flash NOR no encapsulamento, conforme o código.
+Até 16 MB + 2 MB de PSRAM e até 8 MB de Flash NOR no encapsulamento.
 
 **Qual tensão de alimentação o SF32LB55x precisa?**
-1.71–3.63 V, conforme a variante. Confirme a faixa exata no datasheet.
+1,71–3,63 V.
 
 **Por onde começar um projeto de hardware com o SF32LB55x?**
 Comece pelo [guia de projeto de hardware do SF32LB55x](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) para esquemático, alimentação, clock/RF e layout de PCB, e use os checklists de esquemático e layout antes de liberar a placa.

@@ -77,6 +77,8 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 
 ### 图形、显示与 AI { #graphics-display-and-ai }
 
+各型号支持的最高分辨率和面板接口，见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
+
 - ePicasso 2.0 2D/2.5D 图形加速器
 - Vivante GCNanoUltraV 矢量图形引擎
 - eZip 2.0 无损图形解压缩加速器
@@ -126,7 +128,7 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 
 ## 系列型号 { #family-variants }
 
-思澈科技（SiFli）当前芯片型号指南列出了 6 种 SF32LB58x 订购型号，均采用 BGA256 封装，合封存储配置如下表所示。存储组合及供货状态可能变化；确认具体订购型号时，请以当前数据手册和合格供应商名录（AVL）为准。
+思澈科技（SiFli）当前芯片型号指南列出了 3 种 SF32LB58x 订购型号，均采用 BGA256 封装，合封存储配置如下表所示。存储组合及供货状态可能变化；确认具体订购型号时，请以当前数据手册和合格供应商名录（AVL）为准。
 
 <div align="center"><em>SF32LB58x 订购型号与合封存储配置</em></div>
 
@@ -134,10 +136,7 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 
 | 料号 | 封装 | 合封存储 |
 | :--- | :--- | :--- |
-| SF32LB580VNN36 | BGA256 | 1 MB 启动 NOR Flash；MPI1 和 MPI2 均未合封存储 |
-| SF32LB581VCN36 | BGA256 | 1 MB 启动 NOR Flash + MPI1 上的 8 MB OPI-PSRAM |
 | SF32LB583VCC36 | BGA256 | 1 MB 启动 NOR Flash + MPI1、MPI2 各 8 MB OPI-PSRAM |
-| SF32LB585V5E56 | BGA256 | 4 MB 启动 NOR Flash + MPI1 上的 4 MB NOR Flash + MPI2 上的 32 MB HPI-PSRAM |
 | SF32LB586VDD36 | BGA256 | 1 MB 启动 NOR Flash + MPI1、MPI2 各 16 MB HPI-PSRAM |
 | SF32LB587VEE56 | BGA256 | 4 MB 启动 NOR Flash + MPI1、MPI2 各 32 MB HPI-PSRAM |
 
@@ -163,19 +162,22 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 ## 常见问题 { #frequently-asked-questions }
 
 **SF32LB58x 的主要规格是什么？**
-SF32LB58x 由应用 CPU（2× Cortex-M33 @240 MHz）与低功耗内核（Cortex-M33 @48/96 MHz，用户可编程内核）组成，内置 3.7 MB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 2.0 + Vivante GCNanoUltraV (vector)。封装：BGA256（8.5 × 6.5 mm）。USB 2.0 HS。以上为系列级参数，具体以所选型号的数据手册为准。
+SF32LB58x 配备应用 CPU（2× Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33 @48/96 MHz，用户可编程内核）和 3.7 MB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 2.0 + Vivante GCNanoUltraV（矢量）。封装：BGA256（8.5 × 6.5 mm）。USB 2.0 HS。
 
 **SF32LB58x 支持哪些显示接口？**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI。具体支持情况因型号和封装而异。
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI。各接口适用型号见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
+
+**SF32LB58x 支持的最大显示分辨率是多少？**
+通过 MIPI-DSI 接口，RGB565 最高支持 1280 × 800，RGB888 最高支持 1280 × 720。详见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
 
 **SF32LB58x 的封装内存储器有多大？**
-按型号不同，封装内 PSRAM 最多 32 MB + 32 MB，封装内 NOR Flash 最多 8 MB。
+封装内 PSRAM 最多 32 MB + 32 MB，封装内 NOR Flash 最多 8 MB。
 
 **SF32LB58x 需要什么供电电压？**
-按变体不同为 1.71–3.63 V，请以数据手册确认具体范围。
+1.71–3.63 V。
 
 **如何开始基于 SF32LB58x 的硬件设计？**
-请先阅读 [SF32LB58x 硬件设计指南](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求，并在投板前使用原理图与布局检查清单。
+请先阅读 [SF32LB58x 硬件设计指南](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求；投板前再使用原理图与布局检查清单。
 <!-- uf-faq:end -->
 
 ## 相关产品 { #related-products }

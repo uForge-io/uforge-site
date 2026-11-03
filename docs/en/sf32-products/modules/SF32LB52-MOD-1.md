@@ -61,6 +61,64 @@ Consider SF32LB52-MOD-1 when the product needs one or more of these capabilities
 
 ## Features and Specifications
 
+### Regulatory Markings { #regulatory-markings }
+
+The supplied SiFli label artwork for **SF32LB52-MOD-1-N16R8** and **SF32LB52-MOD-1-A128R16** shows the following identifiers and CE mark.
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 780px; margin: 1rem auto;">
+<figure style="margin: 0;">
+<a href="assets/SF32LB52-MOD-1/N16R8-label.png"><img src="assets/SF32LB52-MOD-1/N16R8-label.png" alt="SF32LB52-MOD-1-N16R8" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB52-MOD-1-N16R8</figcaption>
+</figure>
+<figure style="margin: 0;">
+<a href="assets/SF32LB52-MOD-1/A128R16-label.jpg"><img src="assets/SF32LB52-MOD-1/A128R16-label.jpg" alt="SF32LB52-MOD-1-A128R16" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB52-MOD-1-A128R16</figcaption>
+</figure>
+</div>
+
+<div align="center" markdown>
+
+*Markings on the Supplied SF32LB52-MOD-1 Labels*
+
+| Field | Printed value |
+| --- | --- |
+| Label variants | `SF32LB52-MOD-1-N16R8`, `SF32LB52-MOD-1-A128R16` |
+| FCC | `2BVUV-SF32LB52` |
+| IC | `35666-SF32LB52` |
+| CMIIT ID | `25J3260UC963(M)` |
+| HVIN | `SF32LB52` |
+| CE mark | Present on both labels |
+
+</div>
+
+These entries transcribe the supplied labels; they are not an independent check of certification records or a declaration of conformity. Confirm the applicable approval documents, antenna conditions and integration instructions for the exact module revision with SiFli. Do not extend these markings to other variants without supporting documents. Module markings do not establish compliance of the finished product.
+
+### Storage Interfaces and Module Variants { #storage-interfaces-and-module-variants }
+
+<span id="storage-interfaces"></span>
+
+- Optional in-package OPI-PSRAM, depending on module SKU
+- 1 × MPI (QSPI) for external SPI NOR or SPI NAND
+- 1 × SD/SDIO supporting SD3.0, SDIO3.0, and eMMC
+
+<span id="module-variants"></span>
+
+<div align="center"><em>SF32LB52-MOD-1 Module Variants</em></div>
+
+<div align="center" markdown>
+
+| Module Code | Chip | Selectable Storage | PSRAM | Temperature | Dimensions |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| SF32LB52-MOD-1-N16R8 | SF32LB525UC6 | 16 MB QSPI-NOR | 8 MB OPI-PSRAM | -40 to 85 °C | 27.9 × 18.0 × 3.1 mm |
+| SF32LB52-MOD-1-A128R16 | SF32LB527UD6 | 128 MB SPI-NAND | 16 MB OPI-PSRAM | -40 to 85 °C | 27.9 × 18.0 × 3.1 mm |
+
+</div>
+
+!!! note "Customization"
+    For other module configurations or customization requests, [contact μForge.io](../../about/contact.md).
+
+The [SiFli module-model guide](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) and EPD application guide also list A128R16, but the linked DS5203 V0.3 datasheet lists only N16R8. Confirm current availability and memory configuration with SiFli before selecting A128R16.
+
 ### Compute and Memory
 
 - Arm Cortex-M33 STAR-MC1 application core (HCPU), up to 240 MHz, up to 370 DMIPS / 984 EEMBC CoreMark
@@ -94,12 +152,6 @@ Consider SF32LB52-MOD-1 when the product needs one or more of these capabilities
 
 The PDM interface can connect up to two digital microphones; the number of PDM interfaces is not the microphone count. Actual connectivity depends on pin multiplexing and board routing. On this module, PA22/PA23 are unavailable externally when the optional 32.768 kHz crystal is populated; the hardware guide documents an alternate PDM pin mapping.
 
-### Storage Interfaces
-
-- Optional in-package OPI-PSRAM, depending on module SKU
-- 1 × MPI (QSPI) for external SPI NOR or SPI NAND
-- 1 × SD/SDIO supporting SD3.0, SDIO3.0, and eMMC
-
 ### Security
 
 - AES, HASH, and CRC hardware accelerators
@@ -115,23 +167,6 @@ The PDM interface can connect up to two digital microphones; the number of PDM i
 - VBATS: 0–4.7 V battery-sense input that can also be used for ADC measurement. Connect the voltage to be measured directly; do not use an external resistor divider.
 - VDD33_VOUT2: on-module 3.3 V LDO output for external peripherals. It is off by default and must be enabled in software; maximum output current is 150 mA, and total capacitance on the rail must not exceed 7.4 µF.
 - 68-pin module interface; signal pins expose multiplexed functions including GPIO, SPI, LCD, MPI, UART, I2C, PWM, SDIO, USB 2.0 FS, and digital and analog audio
-
-## Module Variants
-
-<div align="center"><em>SF32LB52-MOD-1 Module Variants</em></div>
-
-<div align="center" markdown>
-
-| Module Code | Chip | Flash | PSRAM | Temperature | Dimensions |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB52-MOD-1-N16R8 | SF32LB525UC6 | 16 MB QSPI-NOR | 8 MB OPI-PSRAM | -40 to 85 °C | 27.9 × 18.0 × 3.1 mm |
-| SF32LB52-MOD-1-A128R16 | SF32LB527UD6 | 128 MB SPI-NAND | 16 MB OPI-PSRAM | -40 to 85 °C | 27.9 × 18.0 × 3.1 mm |
-
-</div>
-
-The [SiFli module-model guide](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) and EPD application guide also list A128R16, but the linked DS5203 V0.3 datasheet lists only N16R8. Confirm current availability and memory configuration with SiFli before selecting A128R16.
-
-The A128R16 Flash labels differ across the official sources: the [OpenSiFli module-model guide](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) identifies 128 MB SPI-NAND, while SiFli's [board-model guide](https://wiki.sifli.com/board/devkit_guide.html) lists 128 MB QSPI-NAND for the corresponding DevKit SKU. The sources do not explain whether this reflects the fitted part or interface wording. Confirm the Flash part and bus mode against the schematic/BOM for the exact board revision before using the board configuration as a module baseline.
 
 ## Related Products
 

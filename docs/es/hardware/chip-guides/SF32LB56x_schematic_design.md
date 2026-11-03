@@ -1,4 +1,5 @@
 ---
+title: "Guía de diseño de hardware de SF32LB56x — Diseño del esquemático"
 icon: lucide/circuit-board
 description: "Guía de esquemático de la MCU SF32LB56x: alimentación, modos y fuentes de activación, relojes, RF, pantalla/táctil/retroiluminación, audio, almacenamiento y fabricación."
 tags:

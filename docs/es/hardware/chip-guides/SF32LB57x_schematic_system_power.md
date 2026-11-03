@@ -50,28 +50,31 @@ Los fallos durante la puesta en marcha suelen deberse al sistema mínimo, la fam
 
 SF32LB57x dispone de varias versiones del esquemático del sistema mínimo. Utilice la que corresponda tanto al encapsulado como a la familia de alimentación; no mezcle las versiones alimentadas por batería con las de alimentación de 3,3 V.
 
-![Figura 5.1-1: Sistema mínimo QFN68L alimentado por batería](../../sf32-products/chips/assets/57x/SF32LB57-UH-MHS-SCH.svg){ width="100%" loading="lazy" }
+!!! warning "Los esquemas V2 requieren revisión para cada referencia"
+    Las figuras V2 conservan las anotaciones de SiFli, incluidos ejemplos que alimentan sensores desde `VDD33_VOUT1`, conectan `VSYS` a dominios adicionales o fijan `VDDIOA` a 3,3 V. No coinciden plenamente con la lista de cargas permitidas ni con la tensión de E/S seleccionable, por lo que no deben tomarse como configuraciones de alimentación universales. Revise cada conexión según la sección 5.2, la referencia exacta y las cargas reales.
+
+![Figura 5.1-1: Sistema mínimo QFN68L alimentado por batería](../../sf32-products/chips/assets/57x/SF32LB57-UH-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 5.1-1: Sistema mínimo QFN68L alimentado por batería</em></div>
 
-![Figura 5.1-2: Sistema mínimo QFN68L con alimentación de 3,3 V](../../sf32-products/chips/assets/57x/SF32LB57-UL-MHS-SCH.svg){ width="100%" loading="lazy" }
+![Figura 5.1-2: Sistema mínimo QFN68L con alimentación de 3,3 V](../../sf32-products/chips/assets/57x/SF32LB57-UL-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 5.1-2: Sistema mínimo QFN68L con alimentación de 3,3 V</em></div>
 
-![Figura 5.1-3: Sistema mínimo QFN80L alimentado por batería](../../sf32-products/chips/assets/57x/SF32LB57-YH-MHS-SCH.svg){ width="100%" loading="lazy" }
+![Figura 5.1-3: Sistema mínimo QFN80L alimentado por batería](../../sf32-products/chips/assets/57x/SF32LB57-YH-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 5.1-3: Sistema mínimo QFN80L alimentado por batería</em></div>
 
-![Figura 5.1-4: Sistema mínimo QFN80L con alimentación de 3,3 V](../../sf32-products/chips/assets/57x/SF32LB57-YL-MHS-SCH.svg){ width="100%" loading="lazy" }
+![Figura 5.1-4: Sistema mínimo QFN80L con alimentación de 3,3 V](../../sf32-products/chips/assets/57x/SF32LB57-YL-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 5.1-4: Sistema mínimo QFN80L con alimentación de 3,3 V</em></div>
 
 <!-- BGA-ONLY -->
-![Figura 5.1-5: Sistema mínimo BGA112 alimentado por batería](../../sf32-products/chips/assets/57x/SF32LB57-VH-MHS-SCH.svg){ width="100%" loading="lazy" }
+![Figura 5.1-5: Sistema mínimo BGA112 alimentado por batería](../../sf32-products/chips/assets/57x/SF32LB57-VH-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 5.1-5: Sistema mínimo BGA112 alimentado por batería</em></div>
 
-![Figura 5.1-6: Sistema mínimo BGA112 con alimentación de 3,3 V](../../sf32-products/chips/assets/57x/SF32LB57-VL-MHS-SCH.svg){ width="100%" loading="lazy" }
+![Figura 5.1-6: Sistema mínimo BGA112 con alimentación de 3,3 V](../../sf32-products/chips/assets/57x/SF32LB57-VL-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 5.1-6: Sistema mínimo BGA112 con alimentación de 3,3 V</em></div>
 <!-- /BGA-ONLY -->
@@ -185,7 +188,7 @@ Requisitos principales:
 
 #### 5.2.3. Variantes con alimentación de 3,3 V { #523-33-v-supply-variants }
 
-Las variantes de 3,3 V suelen utilizar un raíl externo de 3,3 V para `PVDD`, `AVDD33`, `AVDD_BRF`, `AVDD33_AUD`, `VDDIOA` y dominios relacionados.
+Las variantes con alimentación de 3,3 V utilizan 3,3 V externos para `PVDD`, `AVDD33`, `AVDD_BRF`, `AVDD33_AUD` y dominios relacionados. Seleccione 1,8 V o 3,3 V para `VDDIOA` según la referencia exacta.
 
 Requisitos principales:
 
@@ -268,8 +271,8 @@ Recomendaciones de OVP:
 - Para una OVP con salida regulada, SiFli cita los modelos SGM4064YDE8G y LP5305AQVF. El texto de aplicación especifica 4,5–5,4 V, mientras que la lista de comprobación indica 4,7–5,4 V. Hasta que se aclare, use el intervalo más estrecho de 4,7–5,4 V, con una capacidad de carga de al menos 0,5 A y un umbral de sobrecorriente de al menos 0,7 A.
 - Antes de llegar al chip, haga pasar la entrada del cargador por la protección TVS/OVP.
 
-!!! warning "Discrepancia en el rango de entrada"
-    La tabla de pines de alimentación y la lista de comprobación especifican un rango de entrada `VBUS` de 4,6–5,5 V, mientras que el texto de selección de OVP indica 4,5–5,5 V. Hasta que SiFli aclare la diferencia, diseñe con 4,6 V como tensión mínima de entrada de funcionamiento.
+!!! warning "Diferencia en el rango de VBUS"
+    Las tablas actuales por encapsulado y el texto de OVP indican 4,5–5,5 V para `VBUS`; la lista de comprobación sigue exigiendo 4,6–5,5 V. Hasta que SiFli lo confirme, diseñe con el mínimo más restrictivo de 4,6 V.
 
 #### 5.2.7. Estrategia de alimentación de bajo consumo { #527-low-power-supply-strategy }
 
@@ -342,12 +345,12 @@ Los requisitos de alimentación de SF32LB57x varían según el encapsulado y la 
 
 | Elemento de diseño | Variantes alimentadas por batería | Variantes con alimentación de 3,3 V |
 |:------------|:-------------------------|:----------------------|
-| Entrada de alimentación principal | La tabla de pines y la lista de comprobación especifican `VBUS` de 4,6 a 5,5 V. El rango de `VBAT` es de 3,45 a 4,7 V; la lista de comprobación especifica baterías con tensión nominal de 4,2 a 4,45 V. El rango de funcionamiento de `VCC` es de 3,45 a 4,7 V, con un umbral de arranque por hardware de 3,45 V y uno de apagado de 2,7 V. El umbral de batería baja predeterminado por software es 3,48 V; para una fuente de banco de tensión constante, use de 3,6 a 4,7 V; se recomienda 3,8 V. | `PVDD` / `PVDD_PMU`: de 2,97 a 3,63 V; `VBATS` se utiliza únicamente para detectar la tensión de la batería. |
-| Alimentaciones analógicas y RF | `AVDD_BRF` se alimenta desde `VSYS`; `AVDD33_AUD`, desde `VDD33_VOUT1`. | `AVDD33` / `AVDD33_ANA`, `AVDD_BRF`, `AVDD33_AUD` y `VDDIOA` reciben alimentación externa de 3,3 V y deben conectarse en estrella. |
+| Entrada de alimentación principal | Tablas por encapsulado: `VBUS` 4,5–5,5 V, `VBAT`/`VCC` 3,0–4,7 V. Lista de comprobación: `VBUS` 4,6–5,5 V, `VCC` 3,45–4,7 V, encendido/apagado 3,45 V/2,7 V. Las notas indican 3,5 V ±10% para el encendido. Use 3,6–4,7 V con fuente constante, preferiblemente 3,8 V; el umbral de batería baja por software es 3,48 V. Confirme las diferencias sin ampliar el rango de funcionamiento. | `PVDD` / `PVDD_PMU`: de 2,97 a 3,63 V; `VBATS` se utiliza únicamente para detectar la tensión de la batería. |
+| Alimentaciones analógicas y RF | `AVDD_BRF` se alimenta desde `VSYS`; `AVDD33_AUD`, desde `VDD33_VOUT1`. | Distribuya 3,3 V externos en estrella a `AVDD33` / `AVDD33_ANA`, `AVDD_BRF` y `AVDD33_AUD`; elija 1,8 V o 3,3 V para `VDDIOA` según la referencia. |
 | Salidas de LDO internos | `VDD_VOUT1`, `VDD_VOUT2`, `VDD_RET`, `VDD_RTC` y `VDD18_VOUT` son alimentaciones internas; no deben alimentar periféricos externos comunes. | Igual; `VDD18_VOUT` solo se usa para la alimentación interna relacionada con la PSRAM integrada en el encapsulado, no para periféricos externos de 1,8 V. |
 | `VDD33_VOUT1` | 3,3 V y 150 mA tras el arranque; está habilitado por defecto. La corriente de carga durante el arranque suave no debe superar 30 mA, o el LDO podría no arrancar. La lista de comprobación de alimentación solo permite Flash NOR/NAND integrada en el encapsulado o externa y `AVDD33_AUD`, y prohíbe otros periféricos. | No aplicable. |
 | `VDD33_VOUT2` | 3,3 V y 150 mA; está deshabilitado por defecto y se habilita mediante software. La corriente de carga durante el arranque suave no debe superar 30 mA. La lista de comprobación de origen indica que el software puede desactivar este límite de corriente de arranque; si se desactiva, compruebe que la corriente de irrupción del periférico sea compatible con las condiciones de alimentación recomendadas. | No aplicable. |
-| `VDDIOSB` / `VDDIOSA` | QFN80L<!-- BGA-ONLY --> expone `VDDIOSB`, cuya tensión depende del dispositivo MPI integrado: 1,8 V para PSRAM o 3,3 V para Flash NOR. BGA112<!-- /BGA-ONLY --> también expone `VDDIOSA`, fijado a 1,8 V desde `VDD18_VOUT`; la tensión de `VDDIOSB` depende del dispositivo integrado (1,8 V para PSRAM o 3,3 V para Flash NOR). Confirme el número de pieza exacto. | Igual; confirme el número de pieza exacto que se va a pedir. |
+| `VDDIOSB` / `VDDIOSA` | La tabla QFN80L a batería expone `VDD33_VOUT1`, no `VDDIOSB`.<!-- BGA-ONLY --> BGA112 expone `VDDIOSA` (1,8 V desde `VDD18_VOUT`) y `VDDIOSB` (1,8 V desde `VDD18_VOUT` para PSRAM integrada, o 3,3 V desde `VDD33_VOUT1` para NOR Flash integrada).<!-- /BGA-ONLY --> | En QFN80L<!-- BGA-ONLY --> y BGA112<!-- /BGA-ONLY -->, alimente `VDDIOSB` desde `VDD18_VOUT` a 1,8 V para PSRAM integrada, o desde 3,3 V externos para NOR Flash.<!-- BGA-ONLY --> `VDDIOSA` de BGA112 se conecta a `VDD18_VOUT`.<!-- /BGA-ONLY --> |
 
 </div>
 
@@ -471,22 +474,25 @@ En cada medición, registre la versión del firmware, la tensión de alimentaci�
 
 Utilice estas tablas para revisar el esquemático pin por pin. Cada una indica las tensiones mínima, típica y máxima, así como la corriente máxima de cada pin de alimentación para una combinación concreta de encapsulado y familia de alimentación. Seleccione la tabla correspondiente al número de pieza exacto que se va a pedir; no mezcle filas de distintos encapsulados o familias de alimentación.
 
+!!! warning "Alcance de las tablas de alimentación y la lista de comprobación"
+    Los valores siguientes proceden de las tablas actuales de SiFli por encapsulado. Indican un mínimo de 4,5 V para `VBUS` y de 3,0 V para `VBAT`/`VCC`; la lista de comprobación exige 4,6–5,5 V en `VBUS` y 3,45–4,7 V en `VCC`, con umbrales de encendido de 3,45 V y apagado de 2,7 V. Las notas de las tablas indican otro valor de encendido: 3,5 V ±10%. `VSYS` figura con 3,3 V típicos, pero la descripción de la misma fila dice 3,0 V. Los 3,3 V de `BUCK_LX` corresponden a un nodo de conmutación, no a una salida de CC regulada. Aclare estas diferencias para la referencia exacta antes de aprobar el diseño; el mínimo tabulado de 3,0 V no garantiza el arranque.
+
 <div align="center"><em>Tabla 5.2-11: Referencia de pines de alimentación de la variante QFN68L con batería</em></div>
 
 <div align="center" markdown>
 
 | Pin de alimentación | Mín. (V) | Típ. (V) | Máx. (V) | Corriente máx. (mA) | Descripción |
 |:---|:---|:---|:---|:---|:---|
-| `VBUS` | 4,6 | 5,0 | 5,5 | 400 | Entrada de alimentación VBUS; suministra energía al módulo de carga integrado. |
-| `VBAT` | 3,45 | - | 4,7 | 400 | Conexión de batería; un canal GPADC interno también mide la tensión de batería en este pin. |
-| `VSYS` | - | 3,0 | - | 150 | Salida de alimentación interna de 3,0 V; añada un condensador externo a tierra. Alimenta `AVDD_BRF`. |
-| `BUCK_LX` | - | 1,25 | - | 50 | Nodo de conmutación del inductor BUCK; conecte aquí un extremo del inductor. |
+| `VBUS` | 4,5 | 5,0 | 5,5 | 400 | Entrada de alimentación VBUS; suministra energía al módulo de carga integrado. |
+| `VBAT` | 3,0 | - | 4,7 | 400 | Conexión de batería; un canal GPADC interno también mide la tensión de batería en este pin. |
+| `VSYS` | - | 3,3 | - | 150 | Salida de alimentación interna de 3,0 V; añada un condensador externo a tierra. Alimenta `AVDD_BRF`. |
+| `BUCK_LX` | - | 3,3 | - | 50 | Nodo de conmutación del inductor BUCK; conecte aquí un extremo del inductor. |
 | `BUCK_FB` | - | 1,25 | - | 50 | Realimentación BUCK; conecte aquí el otro extremo del inductor y un condensador a tierra. |
 | `VDD_VOUT1` | - | 1,1 | - | 50 | Salida del LDO interno; añada un condensador externo. Solo para alimentación interna: no alimente periféricos externos. |
 | `VDD_VOUT2` | - | 0,9 | - | 20 | Salida del LDO interno; añada un condensador externo. Solo para alimentación interna: no alimente periféricos externos. |
 | `VDD_RET` | - | 0,9 | - | 1 | Salida del LDO interno; añada un condensador externo. Solo para alimentación interna: no alimente periféricos externos. |
 | `VDD_RTC` | - | 1,1 | - | 1 | Salida del LDO interno; añada un condensador externo. Solo para alimentación interna: no alimente periféricos externos. |
-| `VCC` | 3,45 | - | 4,7 | 400 | Entrada de alimentación del sistema; conéctela a la batería. El umbral de arranque por hardware es 3,45 V y el umbral de apagado por hardware es 2,7 V. El umbral predeterminado de batería baja por software es 3,48 V. Para una fuente de banco de tensión constante, utilice de 3,6 V a 4,7 V; se recomienda 3,8 V. |
+| `VCC` | 3,0 | - | 4,7 | 200 | Entrada de alimentación del sistema, conectada a la batería. Las notas indican 3,5 V ±10% para el encendido y un umbral de batería baja por software de 3,48 V. Use 3,6–4,7 V con una fuente constante, preferiblemente 3,8 V; consulte la advertencia sobre las diferencias con la lista de comprobación. |
 | `VDD18_VOUT` | - | 1,8 | - | 30 | Salida LDO de 1,8 V; solo para alimentación interna. Añada un condensador a tierra y no alimente periféricos externos. |
 | `VDD33_VOUT1` | - | 3,3 | - | 150 | Salida 1 del LDO de 3,3 V; añada un condensador a tierra. Admite 150 mA tras el arranque y está habilitada por defecto. La carga durante el arranque suave no debe superar 30 mA, o el LDO podría no arrancar. Alimenta Flash integrada/externa y `AVDD33_AUD`. |
 | `VDD33_VOUT2` | - | 3,3 | - | 150 | Salida 2 del LDO de 3,3 V; está deshabilitada por defecto y requiere configuración de software. Admite 150 mA tras el arranque; la carga durante el arranque suave no debe superar 30 mA. Alimenta el motor o el panel LCD. |
@@ -494,7 +500,7 @@ Utilice estas tablas para revisar el esquemático pin por pin. Cada una indica l
 | `AVDD_BRF` | 2,97 | 3,3 | 3,63 | 100 | Entrada de alimentación RF; conéctela a `VSYS`. |
 | `AUD_VREF` | - | - | - | - | Entrada de referencia de audio; conecte solo un condensador a tierra y no aplique tensión externa. |
 | `AVDD33_AUD` | 2,97 | 3,3 | 3,63 | 50 | Entrada de alimentación de audio; conéctela a `VDD33_VOUT1`. |
-| `MIC_BIAS` | 1,4 | - | 2,8 | - | Salida de polarización del micrófono; conéctela a su alimentación. |
+| `MIC_BIAS` | 1,4 | - | 2,8 | 2 | Salida de polarización del micrófono; conéctela a su alimentación. |
 
 </div>
 
@@ -504,10 +510,10 @@ Utilice estas tablas para revisar el esquemático pin por pin. Cada una indica l
 
 | Pin de alimentación | Mín. (V) | Típ. (V) | Máx. (V) | Corriente máx. (mA) | Descripción |
 |:---|:---|:---|:---|:---|:---|
-| `VDDIOA` | 2,97 | 3,3 | 3,63 | 100 | Entrada de alimentación GPIO; esta tabla de referencia muestra la configuración de 3,3 V. Confirme la tensión de E/S para el número de pieza exacto. |
+| `VDDIOA` | 1,62 | 1,8 / 3,3 | 3,63 | 100 | Entrada de alimentación GPIO; conecte a 1,8 V o 3,3 V según la referencia exacta. |
 | `VBATS` | 0 | - | 4,7 | 1 | Entrada de medición de tensión de batería; un canal GPADC interno mide aquí dicha tensión. |
-| `PVDD` | 2,97 | 3,3 | 3,63 | 400 | Entrada de alimentación PMU; conéctela a una fuente externa de 3,3 V. |
-| `BUCK_LX` | - | 1,25 | - | 50 | Nodo de conmutación del inductor BUCK; conecte aquí un extremo del inductor. |
+| `PVDD` | 2,97 | 3,3 | 3,63 | 200 | Entrada de alimentación PMU; conéctela a una fuente externa de 3,3 V. |
+| `BUCK_LX` | - | 3,3 | - | 50 | Nodo de conmutación del inductor BUCK; conecte aquí un extremo del inductor. |
 | `BUCK_FB` | - | 1,25 | - | 50 | Realimentación BUCK; conecte aquí el otro extremo del inductor y un condensador a tierra. |
 | `VDD_VOUT1` | - | 1,1 | - | 50 | Salida del LDO interno; solo para alimentación interna, no alimente periféricos externos. |
 | `VDD_VOUT2` | - | 0,9 | - | 20 | Salida del LDO interno; solo para alimentación interna, no alimente periféricos externos. |
@@ -519,15 +525,15 @@ Utilice estas tablas para revisar el esquemático pin por pin. Cada una indica l
 | `AVDD_BRF` | 2,97 | 3,3 | 3,63 | 100 | Entrada de alimentación RF; conéctela a una fuente externa de 3,3 V. |
 | `AUD_VREF` | - | - | - | - | Entrada de referencia de audio; conecte solo un condensador a tierra y no aplique tensión externa. |
 | `AVDD33_AUD` | 2,97 | 3,3 | 3,63 | 50 | Entrada de alimentación de audio; conéctela a una fuente externa de 3,3 V. |
-| `MIC_BIAS` | 1,4 | - | 2,8 | - | Salida de polarización del micrófono; conéctela a su alimentación. |
+| `MIC_BIAS` | 1,4 | - | 2,8 | 2 | Salida de polarización del micrófono; conéctela a su alimentación. |
 
 </div>
 
-!!! warning "Configuración de VDDIOA para SF32LB57ZUN3N6"
-    `SF32LB57ZUN3N6` admite 1,8 V o 3,3 V en `VDDIOA`. El intervalo de 2,97 V a 3,63 V de la tabla genérica QFN68L con alimentación de 3,3 V no se aplica al funcionamiento a 1,8 V; consulte los límites eléctricos de la pieza exacta antes de seleccionar la alimentación de 1,8 V.
+!!! note "Tensión VDDIOA y reloj de Flash"
+    `SF32LB57ZUN3N6` admite 1,8 V o 3,3 V en `VDDIOA`; confirme los límites de la referencia. Para las variantes QFN68L con alimentación de 3,3 V, SiFli exige que el reloj de lectura/escritura de la Flash interna sea inferior a 80 MHz con `VDDIOA` a 1,8 V; a 3,3 V puede utilizarse el valor predeterminado de 104 MHz.
 
 !!! note
-    `PVDD`, `AVDD33`, `AVDD_BRF`, `AVDD33_AUD` y `VDDIOA` se conectan al mismo raíl externo de 3,3 V. Utilice una distribución en estrella: lleve la pista de cada pin por separado desde la fuente, sin compartir un tramo común aguas arriba.
+    Alimente `PVDD`, `AVDD33`, `AVDD_BRF` y `AVDD33_AUD` desde 3,3 V externos con ramas independientes en estrella. Seleccione 1,8 V o 3,3 V para `VDDIOA` según la referencia exacta; una alimentación principal de 3,3 V no obliga a usar E/S de 3,3 V.
 
 <div align="center"><em>Tabla 5.2-13: Referencia de pines de alimentación de la variante QFN80L con batería</em></div>
 
@@ -535,29 +541,27 @@ Utilice estas tablas para revisar el esquemático pin por pin. Cada una indica l
 
 | Pin de alimentación | Mín. (V) | Típ. (V) | Máx. (V) | Corriente máx. (mA) | Descripción |
 |:---|:---|:---|:---|:---|:---|
-| `VDDIOA` | 2,97 | 3,3 | 3,63 | 100 | Entrada de alimentación GPIO; conéctela a una fuente externa de 3,3 V. |
+| `VDDIOA` | 1,62 | 1,8 / 3,3 | 3,63 | 100 | Entrada de alimentación GPIO; conecte a 1,8 V o 3,3 V según la referencia exacta. |
 | `VBATS` | 0 | - | 4,7 | 1 | Entrada de medición de tensión de batería; un canal GPADC interno mide aquí dicha tensión. |
-| `VSYS` | - | 3,0 | - | 150 | Salida interna de alimentación de 3,0 V; añada un condensador externo a tierra. Alimenta `AVDD_BRF`. |
-| `BUCK_LX` | - | 1,25 | - | 50 | Nodo de conmutación del inductor BUCK; conecte aquí un extremo del inductor. |
+| `VSYS` | - | 3,3 | - | 150 | Salida interna de alimentación de 3,0 V; añada un condensador externo a tierra. Alimenta `AVDD_BRF`. |
+| `BUCK_LX` | - | 3,3 | - | 50 | Nodo de conmutación del inductor BUCK; conecte aquí un extremo del inductor. |
 | `BUCK_FB` | - | 1,25 | - | 50 | Realimentación BUCK; conecte aquí el otro extremo del inductor y un condensador a tierra. |
 | `VDD_VOUT1` | - | 1,1 | - | 50 | Salida del LDO interno; solo para alimentación interna, no alimente periféricos externos. |
 | `VDD_VOUT2` | - | 0,9 | - | 20 | Salida del LDO interno; solo para alimentación interna, no alimente periféricos externos. |
 | `VDD_RET` | - | 0,9 | - | 1 | Salida del LDO interno; solo para alimentación interna, no alimente periféricos externos. |
 | `VDD_RTC` | - | 1,1 | - | 1 | Salida del LDO interno; solo para alimentación interna, no alimente periféricos externos. |
 | `AVDD33` | 2,97 | 3,3 | 3,63 | 20 | Entrada de alimentación analógica; conéctela a una fuente externa de 3,3 V. |
-| `VCC` | 3,45 | - | 4,7 | 400 | Entrada de alimentación del sistema; conéctela a la batería. El umbral de arranque por hardware es 3,45 V y el umbral de apagado por hardware es 2,7 V. El umbral predeterminado de batería baja por software es 3,48 V. Para una fuente de banco de tensión constante, utilice de 3,6 V a 4,7 V; se recomienda 3,8 V. |
+| `VCC` | 3,0 | - | 4,7 | 200 | Entrada de alimentación del sistema, conectada a la batería. Las notas indican 3,5 V ±10% para el encendido y un umbral de batería baja por software de 3,48 V. Use 3,6–4,7 V con una fuente constante, preferiblemente 3,8 V; consulte la advertencia sobre las diferencias con la lista de comprobación. |
 | `VDD18_VOUT` | - | 1,8 | - | 30 | Salida LDO de 1,8 V; solo para alimentación interna, no alimente periféricos externos. |
-| `VDDIOSB` | - | 1,8 / 3,3 | - | 30 | Entrada de alimentación IO SB del SIP; la tensión depende del número de pieza exacto. Si se integra PSRAM en MPI2 o MPI3, conecte este pin a `VDD18_VOUT` de 1,8 V; si se integra Flash NOR, suminístrele 3,3 V externos. |
+| `VDD33_VOUT1` | - | 3,3 | - | 150 | Salida 1 del LDO de 3,3 V; añada un condensador a tierra. Admite 150 mA tras el arranque y está habilitada por defecto. La carga durante el arranque suave no debe superar 30 mA, o el LDO podría no arrancar. Alimenta Flash integrada/externa y `AVDD33_AUD`. |
 | `GPADC_VREF` | - | - | - | - | Entrada de referencia GPADC; conecte solo un condensador a tierra y no aplique tensión externa. |
 | `AVDD_BRF` | 2,97 | 3,3 | 3,63 | 100 | Entrada de alimentación RF; conéctela a `VSYS`. |
 | `AUD_VREF` | - | - | - | - | Entrada de referencia de audio; conecte solo un condensador a tierra y no aplique tensión externa. |
 | `AVDD33_AUD` | 2,97 | 3,3 | 3,63 | 50 | Entrada de alimentación de audio; conéctela a `VDD33_VOUT1`. |
-| `MIC_BIAS` | 1,4 | - | 2,8 | - | Salida de polarización del micrófono; conéctela a su alimentación. |
+| `MIC_BIAS` | 1,4 | - | 2,8 | 2 | Salida de polarización del micrófono; conéctela a su alimentación. |
 
 </div>
 
-!!! warning "Inconsistencia de la tabla de alimentación QFN80L en la fuente"
-    El diagrama de pines QFN80L para la variante alimentada por batería, incluido en la página de descripción general, etiqueta un pin como `VDD33_VOUT1`, mientras que la tabla de alimentación QFN80L de SiFli incluye `VDDIOSB` y no explica la correspondencia entre ambas etiquetas. Además, esa tabla no incluye `VDD33_VOUT1` ni `VDD33_VOUT2`, aunque el diagrama general de alimentación muestra ambos raíles y la misma tabla indica que `AVDD33_AUD` se alimenta desde `VDD33_VOUT1`. La fuente no aclara si estas salidas son accesibles externamente en este encapsulado. Antes de asignar cualquiera de esos raíles o pines, compruebe el pinout del número de pieza concreto y el esquemático de referencia oficial.
 
 <div align="center"><em>Tabla 5.2-14: Referencia de pines de alimentación de la variante QFN80L de 3,3 V</em></div>
 
@@ -565,28 +569,28 @@ Utilice estas tablas para revisar el esquemático pin por pin. Cada una indica l
 
 | Pin de alimentación | Mín. (V) | Típ. (V) | Máx. (V) | Corriente máx. (mA) | Descripción |
 |:---|:---|:---|:---|:---|:---|
-| `VDDIOA` | 2,97 | 3,3 | 3,63 | 100 | Entrada de alimentación GPIO; conéctela a una fuente externa de 3,3 V. |
+| `VDDIOA` | 1,62 | 3,3 | 3,63 | 100 | Entrada de alimentación GPIO; conecte a 1,8 V o 3,3 V según la referencia exacta. |
 | `VBATS` | 0 | - | 4,7 | 1 | Entrada de medición de tensión de batería; un canal GPADC interno mide aquí dicha tensión. |
-| `BUCK_LX` | - | 1,25 | - | 50 | Nodo de conmutación del inductor BUCK; conecte aquí un extremo del inductor. |
+| `BUCK_LX` | - | 3,3 | - | 50 | Nodo de conmutación del inductor BUCK; conecte aquí un extremo del inductor. |
 | `BUCK_FB` | - | 1,25 | - | 50 | Realimentación BUCK; conecte aquí el otro extremo del inductor y un condensador a tierra. |
 | `VDD_VOUT1` | - | 1,1 | - | 50 | Salida del LDO interno; solo para alimentación interna, no alimente periféricos externos. |
 | `VDD_VOUT2` | - | 0,9 | - | 20 | Salida del LDO interno; solo para alimentación interna, no alimente periféricos externos. |
 | `VDD_RET` | - | 0,9 | - | 1 | Salida del LDO interno; solo para alimentación interna, no alimente periféricos externos. |
 | `VDD_RTC` | - | 1,1 | - | 1 | Salida del LDO interno; solo para alimentación interna, no alimente periféricos externos. |
 | `AVDD33` | 2,97 | 3,3 | 3,63 | 20 | Entrada de alimentación analógica; conéctela a una fuente externa de 3,3 V. |
-| `PVDD` | 2,97 | 3,3 | 3,63 | 400 | Entrada de alimentación PMU; conéctela a una fuente externa de 3,3 V. |
+| `PVDD` | 2,97 | 3,3 | 3,63 | 200 | Entrada de alimentación PMU; conéctela a una fuente externa de 3,3 V. |
 | `VDD18_VOUT` | - | 1,8 | - | 30 | Salida LDO de 1,8 V; solo para alimentación interna, no alimente periféricos externos. |
 | `VDDIOSB` | - | 1,8 / 3,3 | - | 30 | Entrada de alimentación IO SB del SIP; la tensión depende del número de pieza exacto. Si MPI2/MPI3 integra PSRAM, conéctela a `VDD18_VOUT` de 1,8 V; si integra Flash NOR, suministre 3,3 V externos a este pin. |
 | `GPADC_VREF` | - | - | - | - | Entrada de referencia GPADC; conecte solo un condensador a tierra y no aplique tensión externa. |
 | `AVDD_BRF` | 2,97 | 3,3 | 3,63 | 100 | Entrada de alimentación RF; conéctela a una fuente externa de 3,3 V. |
 | `AUD_VREF` | - | - | - | - | Entrada de referencia de audio; conecte solo un condensador a tierra y no aplique tensión externa. |
 | `AVDD33_AUD` | 2,97 | 3,3 | 3,63 | 50 | Entrada de alimentación de audio; conéctela a una fuente externa de 3,3 V. |
-| `MIC_BIAS` | 1,4 | - | 2,8 | - | Salida de polarización del micrófono; conéctela a su alimentación. |
+| `MIC_BIAS` | 1,4 | - | 2,8 | 2 | Salida de polarización del micrófono; conéctela a su alimentación. |
 
 </div>
 
 !!! note
-    `PVDD`, `AVDD33`, `AVDD_BRF`, `AVDD33_AUD` y `VDDIOA` se conectan al mismo raíl externo de 3,3 V. Utilice una distribución en estrella: lleve la pista de cada pin por separado desde la fuente, sin compartir un tramo común aguas arriba.
+    Alimente `PVDD`, `AVDD33`, `AVDD_BRF` y `AVDD33_AUD` desde 3,3 V externos con ramas independientes en estrella. Seleccione 1,8 V o 3,3 V para `VDDIOA` según la referencia exacta; una alimentación principal de 3,3 V no obliga a usar E/S de 3,3 V.
 
 <!-- BGA-ONLY -->
 <div align="center"><em>Tabla 5.2-15: Referencia de pines de alimentación de la variante BGA112 con batería</em></div>
@@ -595,22 +599,22 @@ Utilice estas tablas para revisar el esquemático pin por pin. Cada una indica l
 
 | Pin de alimentación | Mín. (V) | Típ. (V) | Máx. (V) | Corriente máx. (mA) | Descripción |
 |:---|:---|:---|:---|:---|:---|
-| `VBUS` | 4,6 | 5,0 | 5,5 | 400 | Entrada de alimentación VBUS; suministra energía al módulo de carga integrado. |
-| `VBAT` | 3,45 | - | 4,7 | 400 | Conexión de batería; un canal GPADC interno también mide la tensión de batería en este pin. |
-| `VSYS` | - | 3,0 | - | 150 | Salida de alimentación interna de 3,0 V; añada un condensador externo a tierra. Alimenta `AVDD_BRF`. |
-| `BUCK_LX` | - | 1,25 | - | 50 | Nodo de conmutación del inductor BUCK; conecte aquí un extremo del inductor. |
+| `VBUS` | 4,5 | 5,0 | 5,5 | 400 | Entrada de alimentación VBUS; suministra energía al módulo de carga integrado. |
+| `VBAT` | 3,0 | - | 4,7 | 400 | Conexión de batería; un canal GPADC interno también mide la tensión de batería en este pin. |
+| `VSYS` | - | 3,3 | - | 150 | Salida de alimentación interna de 3,0 V; añada un condensador externo a tierra. Alimenta `AVDD_BRF`. |
+| `BUCK_LX` | - | 3,3 | - | 50 | Nodo de conmutación del inductor BUCK; conecte aquí un extremo del inductor. |
 | `BUCK_FB` | - | 1,25 | - | 50 | Realimentación BUCK; conecte aquí el otro extremo del inductor y un condensador a tierra. |
 | `VDD_VOUT1` | - | 1,1 | - | 50 | Salida del LDO interno; añada un condensador externo. Solo para alimentación interna. |
 | `VDD_VOUT2` | - | 0,9 | - | 20 | Salida del LDO interno; añada un condensador externo. Solo para alimentación interna. |
 | `VDD_RET` | - | 0,9 | - | 1 | Salida del LDO interno; añada un condensador externo. Solo para alimentación interna. |
 | `VDD_RTC` | - | 1,1 | - | 1 | Salida del LDO interno; añada un condensador externo. Solo para alimentación interna. |
-| `VCC` | 3,45 | - | 4,7 | 400 | Entrada de alimentación del sistema; conéctela a la batería. El umbral predeterminado de batería baja por software es 3,48 V. Para una fuente de banco de tensión constante, utilice de 3,6 V a 4,7 V; se recomienda 3,8 V. |
+| `VCC` | 3,0 | - | 4,7 | 200 | Entrada de alimentación del sistema, conectada a la batería. Las notas indican 3,5 V ±10% para el encendido y un umbral de batería baja por software de 3,48 V. Use 3,6–4,7 V con una fuente constante, preferiblemente 3,8 V; consulte la advertencia sobre las diferencias con la lista de comprobación. |
 | `VDD18_VOUT` | - | 1,8 | - | 30 | Salida LDO de 1,8 V; solo para alimentación interna. Añada un condensador a tierra. |
 | `VDD33_VOUT1` | - | 3,3 | - | 150 | Salida 1 del LDO de 3,3 V; habilitada por defecto. Limite la carga durante el arranque suave a 30 mA; tras el arranque admite hasta 150 mA. |
 | `VDD33_VOUT2` | - | 3,3 | - | 150 | Salida 2 del LDO de 3,3 V; deshabilitada por defecto y habilitada mediante software. Limite la carga durante el arranque suave a 30 mA; tras el arranque admite hasta 150 mA. |
 | `PVSS_PMU` | - | - | - | - | Tierra de alimentación de la PMU. |
 | `AVSS_PMU` | - | - | - | - | Tierra analógica de la PMU. |
-| `VDDIOA` | 2,97 | 1,8 / 3,3 | 3,63 | 100 | Entrada de alimentación GPIO; use 1,8 V o 3,3 V según el número de pieza exacto. |
+| `VDDIOA` | 1,62 | 1,8 / 3,3 | 3,63 | 100 | Entrada de alimentación GPIO; conecte a 1,8 V o 3,3 V según la referencia exacta. |
 | `VDDIOSA` | - | 1,8 | - | 30 | Entrada de alimentación IO de la memoria integrada en el encapsulado; conéctela a `VDD18_VOUT`. |
 | `VDDIOSB` | - | 1,8 / 3,3 | - | 30 | Entrada de alimentación de E/S de la memoria integrada en el encapsulado; la tensión depende del número de pieza exacto. Para PSRAM integrada, conéctela a `VDD18_VOUT` (1,8 V); para Flash NOR integrada, conéctela a `VDD33_VOUT1` (3,3 V). |
 | `AVDD33_ANA` | 2,97 | 3,3 | 3,63 | 20 | Entrada de alimentación analógica; conéctela a 3,3 V. |
@@ -623,7 +627,7 @@ Utilice estas tablas para revisar el esquemático pin por pin. Cada una indica l
 | `AUD_VREF_GND` | - | - | - | - | Tierra de audio. |
 | `AVDD33_AUD` | 2,97 | 3,3 | 3,63 | 50 | Entrada de alimentación de audio; conéctela a `VDD33_VOUT1`. |
 | `AVSS33_AUD` | - | - | - | - | Tierra de audio. |
-| `MIC_BIAS` | 1,4 | - | 2,8 | - | Salida de polarización del micrófono; conéctela a su alimentación. |
+| `MIC_BIAS` | 1,4 | - | 2,8 | 2 | Salida de polarización del micrófono; conéctela a su alimentación. |
 
 </div>
 
@@ -634,17 +638,17 @@ Utilice estas tablas para revisar el esquemático pin por pin. Cada una indica l
 | Pin de alimentación | Mín. (V) | Típ. (V) | Máx. (V) | Corriente máx. (mA) | Descripción |
 |:---|:---|:---|:---|:---|:---|
 | `VBATS` | 0 | - | 4,7 | 1 | Entrada de medición de tensión de batería; un canal GPADC interno mide aquí dicha tensión. |
-| `BUCK_LX` | - | 1,25 | - | 50 | Nodo de conmutación del inductor BUCK; conecte aquí un extremo del inductor. |
+| `BUCK_LX` | - | 3,3 | - | 50 | Nodo de conmutación del inductor BUCK; conecte aquí un extremo del inductor. |
 | `BUCK_FB` | - | 1,25 | - | 50 | Realimentación BUCK; conecte aquí el otro extremo del inductor y un condensador a tierra. |
 | `VDD_VOUT1` | - | 1,1 | - | 50 | Salida del LDO interno; añada un condensador externo. Solo para alimentación interna. |
 | `VDD_VOUT2` | - | 0,9 | - | 20 | Salida del LDO interno; añada un condensador externo. Solo para alimentación interna. |
 | `VDD_RET` | - | 0,9 | - | 1 | Salida del LDO interno; añada un condensador externo. Solo para alimentación interna. |
 | `VDD_RTC` | - | 1,1 | - | 1 | Salida del LDO interno; añada un condensador externo. Solo para alimentación interna. |
-| `PVDD_PMU` | 2,97 | 3,3 | 3,63 | 400 | Entrada de alimentación PMU; conéctela a una fuente externa de 3,3 V. |
+| `PVDD_PMU` | 2,97 | 3,3 | 3,63 | 200 | Entrada de alimentación PMU; conéctela a una fuente externa de 3,3 V. |
 | `VDD18_VOUT` | - | 1,8 | - | 30 | Salida LDO de 1,8 V; solo para alimentación interna. Añada un condensador a tierra. |
 | `PVSS_PMU` | - | - | - | - | Tierra de alimentación de la PMU. |
 | `AVSS_PMU` | - | - | - | - | Tierra analógica de la PMU. |
-| `VDDIOA` | 2,97 | 1,8 / 3,3 | 3,63 | 100 | Entrada de alimentación GPIO; use 1,8 V o 3,3 V según el número de pieza exacto. |
+| `VDDIOA` | 1,62 | 1,8 / 3,3 | 3,63 | 100 | Entrada de alimentación GPIO; conecte a 1,8 V o 3,3 V según la referencia exacta. |
 | `VDDIOSA` | - | 1,8 | - | 30 | Entrada de alimentación IO de la memoria integrada en el encapsulado; conéctela a `VDD18_VOUT`. |
 | `VDDIOSB` | - | 1,8 / 3,3 | - | 30 | Entrada de alimentación de E/S de la memoria integrada en el encapsulado; la tensión depende del número de pieza exacto. Para PSRAM integrada, conéctela a `VDD18_VOUT` (1,8 V); para Flash NOR integrada, suminístrele 3,3 V externos. |
 | `AVDD33_ANA` | 2,97 | 3,3 | 3,63 | 20 | Entrada de alimentación analógica; conéctela a 3,3 V. |
@@ -657,12 +661,10 @@ Utilice estas tablas para revisar el esquemático pin por pin. Cada una indica l
 | `AUD_VREF_GND` | - | - | - | - | Tierra de audio. |
 | `AVDD33_AUD` | 2,97 | 3,3 | 3,63 | 50 | Entrada de alimentación de audio; conéctela a una fuente externa de 3,3 V. |
 | `AVSS33_AUD` | - | - | - | - | Tierra de audio. |
-| `MIC_BIAS` | 1,4 | - | 2,8 | - | Salida de polarización del micrófono; conéctela a su alimentación. |
+| `MIC_BIAS` | 1,4 | - | 2,8 | 2 | Salida de polarización del micrófono; conéctela a su alimentación. |
 
 </div>
 
-!!! warning "Rango de tensión de VDDIOA en BGA112"
-    La tabla original de SiFli indica para `VDDIOA` un mínimo de 2,97 V, un valor típico de 1,8 V / 3,3 V y un máximo de 3,63 V. La opción de 1,8 V no concuerda con el mínimo indicado. Confirme la especificación eléctrica del número de pieza exacto y no aplique los límites de 2,97–3,63 V a una configuración de 1,8 V sin confirmación.
 
 <!-- /BGA-ONLY -->
 

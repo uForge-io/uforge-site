@@ -73,8 +73,6 @@ SF32LB52-DevKit-LCDは、SF32LB52xファミリー向けの、ディスプレイ�
 
 上記の型番とメモリー構成は、SiFliの[開発ボード型番ガイド](https://wiki.sifli.com/en/board/devkit_guide.html)に基づいています。ボードを設計の基準として使う前に、基板の表示と対応する設計データ一式でリビジョンを確認してください。
 
-A128R16のFlash表記は公式資料間で異なります。[OpenSiFliのモジュール型番ガイド](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md)ではモジュールが128 MB SPI-NANDとされる一方、開発ボード型番ガイドでは対応するDevKit SKUが128 MB QSPI-NANDとされています。資料には、実装部品の違いなのかインターフェース表記の違いなのか説明がありません。この構成を前提にする前に、対象ボードのリビジョンに対応する回路図/BOMでFlash部品とバスモードを確認してください。
-
 ## バージョンに関する注記 { #version-notes }
 
 <div align="center"><em>ボードバージョン履歴</em></div>

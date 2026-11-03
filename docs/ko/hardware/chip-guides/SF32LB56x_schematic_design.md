@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x 하드웨어 설계 가이드 — 회로 설계 가이드라인"
 icon: lucide/circuit-board
 description: "SF32LB56x MCU 회로 설계 가이드라인: 전원 시스템, 동작 모드와 웨이크업 소스, 클럭 생성, RF, 디스플레이/터치/백라이트 인터페이스, 스토리지/센서/오디오/연결, 양산."
 tags:

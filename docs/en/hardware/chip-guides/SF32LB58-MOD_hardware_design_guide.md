@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58-MOD - Hardware Design Guide"
 icon: lucide/book-check
 hide:
     - navigation
@@ -21,6 +22,9 @@ For the underlying chip architecture (cores, graphics, memory subsystem, and per
 !!! note "Source and figure handling"
     This guide follows **DS5802-SF32LB58-MOD V0.1** for module-specific technical data. Some pinout, schematic, and mechanical drawings in the datasheet are raster images and are referenced rather than redrawn here. Figure and table numbers below follow this site's guide-local numbering; captions for non-reproduced diagrams cite the corresponding figure number in the official datasheet.
 
+!!! note "Regulatory marking scope"
+    The supplied labels for SF32LB58-MOD-N16R32N1 and SF32LB58-MOD-A128R32N1 show FCC, IC, CMIIT ID and HVIN identifiers and a CE mark. See the [module marking summary](../../sf32-products/modules/SF32LB58-MOD.md#regulatory-markings). Confirm approval documents and antenna/integration conditions for the exact revision; do not assume other variants or the finished product are covered.
+
 ## 2. Quick Design Summary
 
 ### 2.1 Module Variants
@@ -36,6 +40,9 @@ For the underlying chip architecture (cores, graphics, memory subsystem, and per
 | SF32LB58-MOD-E4R32N1 | 4GB eMMC | 16+16MB HPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 24 × 24 × 3.1 |
 
 </div>
+
+!!! note "Availability and Customization"
+    **SF32LB58-MOD-E4R32N1 is no longer available due to recent memory-chip supply shortages.** Other module configurations are possible. For customization requests, [contact μForge.io](../../about/contact.md).
 
 ### 2.2 Key Specifications
 

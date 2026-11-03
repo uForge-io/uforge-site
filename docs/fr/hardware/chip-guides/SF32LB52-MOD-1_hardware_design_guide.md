@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52-MOD-1 - Guide de conception matérielle"
 icon: lucide/book-check
 hide:
     - navigation
@@ -12,7 +13,7 @@ tags:
 
 ## 1. Aperçu { #1-overview }
 
-**SF32LB52-MOD-1** est un module Bluetooth à microcontrôleur basse consommation certifié et polyvalent, construit autour de la puce SF32LB525UC6 de SiFli (Arm Cortex-M33 STAR-MC1 double cœur, jusqu'à 240 MHz). Il intègre un quartz de 48 MHz, un quartz optionnel de 32,768 kHz et, en option, une puce nue OPI-PSRAM de 64 Mb dans le même boîtier monté en surface, qui comporte 68 broches et mesure 27,9 × 18,0 × 3,1 mm.
+**SF32LB52-MOD-1** est un module Bluetooth polyvalent à microcontrôleur basse consommation, basé sur la puce SF32LB525UC6 de SiFli (Arm Cortex-M33 STAR-MC1 double cœur, jusqu'à 240 MHz). Il intègre un quartz de 48 MHz, un quartz optionnel de 32,768 kHz et, en option, une puce nue OPI-PSRAM de 64 Mb dans un boîtier monté en surface de 68 broches, mesurant 27,9 × 18,0 × 3,1 mm.
 
 Ce guide traite de l'intégration matérielle du module : définition des broches, interfaces périphériques, caractéristiques électriques, exigences d'alimentation, schémas de référence, liste de contrôle du schéma, dimensions mécaniques, empreinte PCB et précautions de manipulation. Il s'appuie sur la fiche technique SiFli **DS5203-SF32LB52-MOD-1 V0.3**.
 
@@ -20,6 +21,9 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphiques, sous-système m
 
 !!! note "Gestion des sources et figures"
     Ce guide suit la fiche technique **DS5203-SF32LB52-MOD-1 V0.3** pour les données techniques spécifiques au module. Certains schémas de brochage, de circuit et de dimensions mécaniques de la fiche technique sont des images matricielles et sont référencés plutôt que redessinés ici. Les numéros de figure et de tableau ci-dessous suivent la numérotation locale de ce guide sur le site ; les légendes des schémas non reproduits citent le numéro de figure correspondant dans la fiche technique officielle.
+
+!!! note "Portée du marquage réglementaire"
+    Les étiquettes fournies pour SF32LB52-MOD-1-N16R8 et SF32LB52-MOD-1-A128R16 portent les identifiants FCC, IC, CMIIT ID et HVIN, ainsi que le marquage CE. Consultez le [résumé des marquages](../../sf32-products/modules/SF32LB52-MOD-1.md#regulatory-markings). Vérifiez les documents d'homologation et les conditions d'antenne et d'intégration applicables à la révision exacte ; ne présumez pas que les autres variantes ou le produit final sont couverts.
 
 ## 2. Résumé rapide de la conception { #2-quick-design-summary }
 
@@ -34,6 +38,9 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphiques, sous-système m
 | SF32LB52-MOD-1-N16R8 | QSPI-NOR 16 Mo | OPI-PSRAM 8 Mo | -40 à 85 °C | 27,9 × 18,0 × 3,1 |
 
 </div>
+
+!!! note "Personnalisation"
+    Pour d'autres configurations du module ou toute demande de personnalisation, [contactez μForge.io](../../about/contact.md).
 
 ### 2.2 Spécifications clés { #22-key-specifications }
 

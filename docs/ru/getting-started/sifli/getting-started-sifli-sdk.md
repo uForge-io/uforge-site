@@ -1,5 +1,6 @@
 ---
 icon: lucide/terminal
+title: "Начало работы с SiFli-SDK"
 description: "Первый запуск платы SF32: установка SiFli-SDK и инструментов, сборка примера hello_world и загрузка прошивки по UART."
 tags:
     - Начало работы

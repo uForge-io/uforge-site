@@ -1,5 +1,6 @@
 ---
 icon: lucide/code
+title: "Rust 入门"
 description: "在 SF32LB52 上首次评估 OpenSiFli sifli-rs：安装 Rust 编译目标、构建未修改的 Blinky 示例、配置 sftool，并保留 SDK 恢复路径。"
 tags:
     - 快速开始

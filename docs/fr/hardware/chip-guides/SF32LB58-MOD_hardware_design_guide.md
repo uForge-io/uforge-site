@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58-MOD - Guide de conception matérielle"
 icon: lucide/book-check
 hide:
     - navigation
@@ -21,6 +22,9 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système m�
 !!! note "Source et gestion des figures"
     Ce guide suit **DS5802-SF32LB58-MOD V0.1** pour les données techniques spécifiques au module. Certains schémas de brochage, schémas électriques et dessins mécaniques de la fiche technique sont des images matricielles et sont référencés plutôt que redessinés ici. Les numéros de figure et de tableau ci-dessous suivent la numérotation locale de ce guide sur le site ; les légendes des schémas non reproduits citent le numéro de figure correspondant dans la fiche technique officielle.
 
+!!! note "Portée du marquage réglementaire"
+    Les étiquettes fournies pour SF32LB58-MOD-N16R32N1 et SF32LB58-MOD-A128R32N1 portent les identifiants FCC, IC, CMIIT ID et HVIN, ainsi que le marquage CE. Consultez le [résumé des marquages](../../sf32-products/modules/SF32LB58-MOD.md#regulatory-markings). Vérifiez les documents d'homologation et les conditions d'antenne et d'intégration applicables à la révision exacte ; ne présumez pas que les autres variantes ou le produit final sont couverts.
+
 ## 2. Résumé de conception rapide { #2-quick-design-summary }
 
 ### 2.1 Variantes du module { #21-module-variants }
@@ -36,6 +40,9 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système m�
 | SF32LB58-MOD-E4R32N1 | 4 Go eMMC | 16+16 Mo HPI-PSRAM | 1 Mo QSPI-NOR | -40~85 °C | 24 × 24 × 3,1 |
 
 </div>
+
+!!! note "Disponibilité et personnalisation"
+    **SF32LB58-MOD-E4R32N1 n'est plus disponible en raison de pénuries récentes de puces mémoire.** D'autres configurations du module sont possibles. Pour toute demande de personnalisation, [contactez μForge.io](../../about/contact.md).
 
 ### 2.2 Spécifications clés { #22-key-specifications }
 

@@ -61,6 +61,57 @@ Ziehen Sie SF32LB58-MOD in Betracht, wenn das Design eine oder mehrere der folge
 
 ## Merkmale und technische Daten { #features-and-specifications }
 
+### Regulatorische Kennzeichnungen { #regulatory-markings }
+
+Die bereitgestellten SiFli-Etikettendesigns für **SF32LB58-MOD-N16R32N1** und **SF32LB58-MOD-A128R32N1** zeigen folgende Kennungen und die CE-Kennzeichnung.
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 780px; margin: 1rem auto;">
+<figure style="margin: 0;">
+<a href="assets/SF32LB58-MOD/N16R32N1-label.png"><img src="assets/SF32LB58-MOD/N16R32N1-label.png" alt="SF32LB58-MOD-N16R32N1" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB58-MOD-N16R32N1</figcaption>
+</figure>
+<figure style="margin: 0;">
+<a href="assets/SF32LB58-MOD/A128R32N1-label.png"><img src="assets/SF32LB58-MOD/A128R32N1-label.png" alt="SF32LB58-MOD-A128R32N1" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB58-MOD-A128R32N1</figcaption>
+</figure>
+</div>
+
+<div align="center" markdown>
+
+*Kennzeichnungen der bereitgestellten SF32LB58-MOD-Etiketten*
+
+| Feld | Aufdruck |
+| --- | --- |
+| Gekennzeichnete Varianten | `SF32LB58-MOD-N16R32N1`, `SF32LB58-MOD-A128R32N1` |
+| FCC | `2BVUV-SF32LB58` |
+| IC | `35666-SF32LB58` |
+| CMIIT ID | `26J3260U7517(M)` |
+| HVIN | `SF32LB58` |
+| CE-Kennzeichnung | Auf beiden Etiketten vorhanden |
+
+</div>
+
+Die Angaben wurden von den Etiketten übernommen; eine unabhängige Prüfung anhand von Zulassungsunterlagen oder einer Konformitätserklärung ist nicht erfolgt. Lassen Sie sich von SiFli die Zulassungsunterlagen, Antennenbedingungen und Integrationsanweisungen für die genaue Modulrevision bestätigen. Übertragen Sie diese Kennzeichnungen ohne entsprechende Nachweise nicht auf SF32LB58-MOD-E4R32N1 oder andere Varianten. Modulkennzeichnungen belegen nicht die Konformität des Endprodukts.
+
+### Speicherschnittstellen und Modulvarianten { #storage-interfaces-and-module-variants }
+
+<div align="center"><em>Modulvarianten des SF32LB58-MOD</em></div>
+
+<div align="center" markdown>
+
+| Modulcode | Wählbarer Speicher | PSRAM | Standard-Flash | Temperatur | Abmessungen |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| SF32LB58-MOD-N16R32N1 | 16 MB QSPI-NOR | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C bis +85 °C | 24 × 24 × 3,1 mm |
+| SF32LB58-MOD-A128R32N1 | 128 MB QSPI-NAND | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C bis +85 °C | 24 × 24 × 3,1 mm |
+| SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C bis +85 °C | 24 × 24 × 3,1 mm |
+
+</div>
+
+!!! note "Verfügbarkeit und Anpassungen"
+    **SF32LB58-MOD-E4R32N1 ist aufgrund der jüngsten Lieferengpässe bei Speicherchips nicht mehr verfügbar.** Andere Modulkonfigurationen sind ebenfalls möglich. Für individuelle Anpassungen [wenden Sie sich an μForge.io](../../about/contact.md).
+
+Die [Modellübersicht für SiFli-Module](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) führt diese Varianten auf, nennt eMMC als mögliche interne Bestückung und weist darauf hin, dass weitere Konfigurationen angepasst werden können. Wählen Sie die SKU passend zum Speichermedium und zur Kapazität und klären Sie mit SiFli die aktuelle Verfügbarkeit und Speicherkonfiguration. Prüfen Sie außerdem, ob das Ziel-SDK und die Firmware das gewählte Gerät sowie den Boot- und Speicherpfad unterstützen.
+
 ### Rechenleistung und Speicher { #compute-and-memory }
 
 - 2 Arm-Cortex-M33-STAR-MC1-Anwendungskerne mit bis zu 240 MHz
@@ -95,22 +146,6 @@ Ziehen Sie SF32LB58-MOD in Betracht, wenn das Design eine oder mehrere der folge
 - Analoge Audioein- und -ausgabe über die Modulschnittstelle
 
 Der [SF32LB58x-Hardwareleitfaden](https://wiki.sifli.com/en/hardware/SF32LB58x-HW-Application.html) von SiFli führt zwei PDM-Mikrofoneingänge (PDM1 und PDM2) auf. Eine PDM-Schnittstelle kann zwei Mikrofonkanäle übertragen: Das [PDM-SDK-Beispiel von SiFli](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html) zeigt die Aufnahme mit zwei Mikrofonen über den linken und rechten Kanal einer Schnittstelle sowie mit vier Mikrofonen über PDM1 und PDM2. SF32LB58-MOD ist jedoch nicht in der Liste der vom Beispiel unterstützten Plattformen aufgeführt. Prüfen Sie für dieses Modul die vom Ziel-SDK unterstützte Mikrofon- und Kanalkonfiguration sowie Pin-Multiplexierung und Trägerboard-Layout. Leiten Sie die Unterstützung für vier Mikrofone nicht allein aus der Zahl der PDM-Schnittstellen ab.
-
-### Speicherschnittstellen und Modulvarianten { #storage-interfaces-and-module-variants }
-
-<div align="center"><em>Modulvarianten des SF32LB58-MOD</em></div>
-
-<div align="center" markdown>
-
-| Modulcode | Wählbarer Speicher | PSRAM | Standard-Flash | Temperatur | Abmessungen |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB58-MOD-N16R32N1 | 16 MB QSPI-NOR | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C bis +85 °C | 24 × 24 × 3,1 mm |
-| SF32LB58-MOD-A128R32N1 | 128 MB QSPI-NAND | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C bis +85 °C | 24 × 24 × 3,1 mm |
-| SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | −40 °C bis +85 °C | 24 × 24 × 3,1 mm |
-
-</div>
-
-Die [Modellübersicht für SiFli-Module](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) führt diese Varianten auf, nennt eMMC als mögliche interne Bestückung und weist darauf hin, dass weitere Konfigurationen angepasst werden können. Wählen Sie die SKU passend zum Speichermedium und zur Kapazität und klären Sie mit SiFli die aktuelle Verfügbarkeit und Speicherkonfiguration. Prüfen Sie außerdem, ob das Ziel-SDK und die Firmware das gewählte Gerät sowie den Boot- und Speicherpfad unterstützen.
 
 ### Stromversorgung, Gehäuse und I/O { #power-package-and-io }
 

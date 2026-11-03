@@ -73,8 +73,6 @@ Para una placa más pequeña con semiorificios metalizados en los bordes, use [S
 
 Los códigos y las configuraciones de memoria anteriores siguen la [guía de modelos de placas de desarrollo de SiFli](https://wiki.sifli.com/en/board/devkit_guide.html). Antes de diseñar, confirme la revisión en la serigrafía y en el paquete de diseño.
 
-Las fuentes oficiales usan denominaciones distintas para la memoria Flash de A128R16: la [guía de modelos de módulos de OpenSiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) identifica el módulo como SPI-NAND de 128 MB, mientras que la guía de modelos de placas indica QSPI-NAND de 128 MB para la SKU DevKit correspondiente. Las fuentes no aclaran si la diferencia se refiere al componente instalado o a la denominación de la interfaz. Antes de basarse en esta configuración, confirme el componente Flash y el modo de bus en el esquemático y la BOM de la revisión exacta de la placa.
-
 ## Notas de versión { #version-notes }
 
 <div align="center"><em>Historial de versiones de la placa</em></div>

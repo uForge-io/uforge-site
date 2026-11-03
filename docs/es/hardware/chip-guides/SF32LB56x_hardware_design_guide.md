@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x - Guía de diseño de hardware"
 icon: lucide/book-check
 description: "Guía de diseño de hardware para la MCU SF32LB56x: sistema de alimentación, generación de reloj, diseño RF, pantalla, audio y diseño de PCB."
 tags:

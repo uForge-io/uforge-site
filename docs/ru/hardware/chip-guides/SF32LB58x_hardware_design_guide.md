@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58x - Руководство по аппаратной разработке"
 icon: lucide/book-check
 hide:
     - navigation

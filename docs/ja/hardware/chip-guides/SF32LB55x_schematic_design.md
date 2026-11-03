@@ -1,4 +1,5 @@
 ---
+title: "SF32LB55xハードウェア設計ガイド — 回路図設計指針"
 icon: lucide/circuit-board
 hide:
     - navigation

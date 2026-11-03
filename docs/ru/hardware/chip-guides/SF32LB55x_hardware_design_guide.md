@@ -1,4 +1,5 @@
 ---
+title: "SF32LB55x - Руководство по аппаратной разработке"
 icon: lucide/book-check
 hide:
     - navigation
@@ -8,7 +9,7 @@ tags:
     - Микросхема
 ---
 
-# Руководство по проектированию аппаратуры SF32LB55x { #sf32lb55x-hardware-design-guide }
+# Руководство по аппаратной разработке SF32LB55x { #sf32lb55x-hardware-design-guide }
 
 ## 1. Введение { #1-introduction }
 

@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58x 硬件设计指南 — 原理图设计"
 icon: lucide/circuit-board
 hide:
     - navigation

@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58x 硬件设计指南 — PCB 布局核对表"
 icon: lucide/list-checks
 hide:
     - navigation

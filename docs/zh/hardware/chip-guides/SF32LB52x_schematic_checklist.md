@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52x 硬件设计指南 — 原理图核对表"
 icon: lucide/list-checks
 description: "SF32LB52x 原理图逐项核对表，涵盖封装、供电、时钟、射频、存储、显示及生产测试。"
 hide:

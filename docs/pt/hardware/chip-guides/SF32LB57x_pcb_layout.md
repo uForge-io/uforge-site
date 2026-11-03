@@ -1,4 +1,5 @@
 ---
+title: "Guia de projeto de hardware do SF32LB57x — diretrizes de layout de PCB"
 icon: lucide/layers
 hide:
     - navigation
@@ -102,8 +103,7 @@ As figuras de regras PTH e HDI também apresentam valores de fabricação de ref
 
 !!! warning "Conflitos não resolvidos sobre as linhas de alimentação na fonte"
     - **Largura das trilhas e identificação da linha de alimentação:** A seção 3.2.1 do guia original de PCB exige pelo menos 0,4 mm (cerca de 15,7 mil) para `VCC` e `PVDD`. O item 44 da tabela de autoverificação 4-2-1-1, aplicável às variantes alimentadas por bateria, exige pelo menos 12 mil para `VCC`; o item 47, aplicável às variantes de 3,3 V, tem o título `PVDD`, mas seu detalhe de verificação exige pelo menos 12 mil para `VCC`. A fonte não concilia essas larguras nem esclarece se o título ou o detalhe do item 47 identifica a linha de alimentação pretendida. Não infira um valor corrigido nem aplique uma entrada às duas variantes de alimentação; antes de fechar o projeto, confirme com a SiFli a linha de alimentação, o escopo e a largura aplicáveis.
-    - **Nomes das saídas:** A seção 3.2.1 do guia PCB original usa `VDD_VOUT1` / `VDD_VOUT2`, enquanto os itens 45/46 da tabela de autoverificação 4-2-1-1 e a tabela de referência rápida da seção 6.2 desta página usam `VDD33_VOUT1` / `VDD33_VOUT2`. O título do item 46 repete `VDD33_VOUT1`, mas o detalhe de verificação indica `VDD33_VOUT2`. A fonte não informa se os nomes são aliases ou redes distintas.
-    Sem a confirmação da SiFli, ao fechar o projeto não escolha uma largura, não atribua o item 47 a uma linha de alimentação e não trate as variantes de nome das saídas como equivalentes.
+    Sem a confirmação da SiFli, ao fechar o projeto não escolha uma largura, nem atribua o item 47 a uma linha de alimentação.
 
 ### 6.4. Layout dos cristais { #64-crystal-layout }
 

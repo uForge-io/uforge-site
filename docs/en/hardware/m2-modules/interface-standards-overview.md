@@ -19,7 +19,7 @@ This section introduces the conventions used to describe μForge module interfac
 
 | Document | Status and purpose | Use it when |
 |:---------|:-------------------|:------------|
-| [M2 Interface Naming Rules](M2%20Interface%20Naming%20Rules.md) | Naming convention for M2 interface families and profiles. | Naming a module, connector, carrier board, or interface profile in documentation and design files. |
+| [M2 Interface Naming Rules](M2-interface-naming-rules.md) | Naming convention for M2 interface families and profiles. | Naming a module, connector, carrier board, or interface profile in documentation and design files. |
 | [M2 Interface Definition](M2-interface-definition.md) | Draft pin-level definition and signal-allocation proposal. | Exploring a proposed M2 carrier interface or reviewing signal sharing before committing to a connector. |
 
 </div>
@@ -40,7 +40,7 @@ The pin-level definition is not a promise that every μForge module or SF32 pack
 ## Carrier-Board Decision Path { #carrier-board-decision-path }
 
 1. Pick the module and read its introduction and hardware design guide.
-2. Use the [M2 Interface Naming Rules](M2%20Interface%20Naming%20Rules.md) to make the intended profile unambiguous.
+2. Use the [M2 Interface Naming Rules](M2-interface-naming-rules.md) to make the intended profile unambiguous.
 3. Use the [M2 Interface Definition](M2-interface-definition.md) to identify candidate signals and sharing conflicts.
 4. Confirm every used contact in the module-specific documentation and the applicable SiFli source documentation.
 5. Record the document versions, module and carrier-board revisions, confirmed exceptions, and unresolved items in the schematic review before layout starts.

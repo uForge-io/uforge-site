@@ -77,6 +77,8 @@ Choisissez le SF32LB58x lorsque la conception exige une ou plusieurs de ces capa
 
 ### Graphismes, affichage et IA { #graphics-display-and-ai }
 
+Pour connaître la résolution maximale et les interfaces d'affichage prises en charge par chaque famille et variante, consultez la [Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix).
+
 - Accélérateur graphique 2D/2,5D ePicasso 2.0
 - Moteur graphique vectoriel Vivante GCNanoUltraV
 - Accélérateur de décompression graphique sans perte eZip 2.0
@@ -126,7 +128,7 @@ Choisissez le SF32LB58x lorsque la conception exige une ou plusieurs de ces capa
 
 ## Variantes de la famille { #family-variants }
 
-Le guide des modèles de puces SiFli actuel liste six codes de commande SF32LB58x, tous en BGA256, avec les configurations de mémoire intégrée au boîtier indiquées ci-dessous. Confirmez le code de commande exact dans la fiche technique à jour et la liste des fournisseurs agréés (AVL), car les configurations et la disponibilité peuvent changer.
+Le guide SiFli des modèles de puces répertorie actuellement trois codes de commande SF32LB58x, tous en BGA256, avec les configurations de mémoire intégrée au boîtier indiquées ci-dessous. Confirmez le code de commande exact dans la fiche technique à jour et la liste des fournisseurs agréés (AVL), car les configurations et leur disponibilité peuvent évoluer.
 
 <div align="center"><em>Codes de commande du SF32LB58x et mémoire intégrée au boîtier</em></div>
 
@@ -134,10 +136,7 @@ Le guide des modèles de puces SiFli actuel liste six codes de commande SF32LB58
 
 | Référence | Boîtier | Mémoire intégrée au boîtier |
 | :--- | :--- | :--- |
-| SF32LB580VNN36 | BGA256 | 1 Mo de flash NOR de démarrage ; aucune mémoire intégrée sur MPI1 ou MPI2 |
-| SF32LB581VCN36 | BGA256 | 1 Mo de flash NOR de démarrage + 8 Mo de PSRAM OPI sur MPI1 |
 | SF32LB583VCC36 | BGA256 | 1 Mo de flash NOR de démarrage + 2 × 8 Mo de PSRAM OPI sur MPI1 et MPI2 |
-| SF32LB585V5E56 | BGA256 | 4 Mo de flash NOR de démarrage + 4 Mo de flash NOR sur MPI1 + 32 Mo de PSRAM HPI sur MPI2 |
 | SF32LB586VDD36 | BGA256 | 1 Mo de flash NOR de démarrage + 2 × 16 Mo de PSRAM HPI sur MPI1 et MPI2 |
 | SF32LB587VEE56 | BGA256 | 4 Mo de flash NOR de démarrage + 2 × 32 Mo de PSRAM HPI sur MPI1 et MPI2 |
 
@@ -163,16 +162,19 @@ Suivez cette séquence pour transformer une présélection SF32LB58x en concepti
 ## Questions fréquentes { #frequently-asked-questions }
 
 **Quelles sont les principales caractéristiques du SF32LB58x ?**
-Le SF32LB58x associe un CPU applicatif (2× Cortex-M33 @240 MHz) à un cœur basse consommation (Cortex-M33 @48/96 MHz, avec un cœur programmable par l'utilisateur), 3.7 MB de SRAM interne et Bluetooth bimode (BT classique + BLE). Graphismes : ePicasso 2.0 + Vivante GCNanoUltraV (vector). Boîtier : BGA256 (8.5 × 6.5 mm). USB 2.0 HS. Valeurs au niveau de la famille ; vérifiez la fiche technique de la référence exacte.
+Le SF32LB58x associe un CPU applicatif (2× Cortex-M33 @240 MHz) à un cœur basse consommation (Cortex-M33 @48/96 MHz, programmable par l'utilisateur). Il intègre 3,7 MB de SRAM interne et prend en charge le Bluetooth bimode (BT classique + BLE). Graphismes : ePicasso 2.0 + Vivante GCNanoUltraV (vector). Boîtier : BGA256 (8,5 × 6,5 mm). USB 2.0 HS.
 
 **Quelles interfaces d'affichage le SF32LB58x prend-il en charge ?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. La disponibilité varie selon la référence et le boîtier.
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. ([Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
-**Quelle mémoire dans le boîtier le SF32LB58x propose-t-il ?**
-Jusqu'à 32 MB + 32 MB de PSRAM et jusqu'à 8 MB de Flash NOR dans le boîtier, selon la référence.
+**Quelle est la résolution d'affichage maximale du SF32LB58x ?**
+La résolution maximale est de 1280 × 800 en couleur RGB565 ou de 1280 × 720 en couleur RGB888, via MIPI-DSI. ([Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+
+**Quelle capacité de mémoire intégrée au boîtier offre le SF32LB58x ?**
+Jusqu'à 32 MB + 32 MB de PSRAM et jusqu'à 8 MB de Flash NOR dans le boîtier.
 
 **Quelle tension d'alimentation faut-il pour le SF32LB58x ?**
-1.71–3.63 V, selon la variante. Confirmez la plage exacte dans la fiche technique.
+1,71–3,63 V.
 
 **Par où commencer une conception matérielle avec le SF32LB58x ?**
 Commencez par le [guide de conception matérielle du SF32LB58x](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md) (schéma, alimentation, horloge/RF, routage PCB), puis utilisez les listes de contrôle de schéma et d'implantation avant de figer la carte.

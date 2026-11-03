@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x Hardware-Design-Leitfaden — Schaltplanrichtlinien"
 icon: lucide/circuit-board
 description: "Schaltplanrichtlinien für den SF32LB56x-MCU: Stromversorgung, Betriebsmodi und Weckquellen, Takte, RF, Display/Touch/Backlight, Audio, Speicher und Fertigung."
 tags:

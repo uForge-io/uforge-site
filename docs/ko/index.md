@@ -22,7 +22,7 @@ hide:
 <div class="uf-hero-actions" markdown>
 
 [시작하기 :material-arrow-right:](getting-started/index.md){ .md-button .md-button--primary }
-[SF32 제품 :material-file-document-outline:](sf32-products/family/SF32_family.md){ .md-button }
+[SF32 선택기 :material-file-document-outline:](sf32-products/product-selector.md){ .md-button }
 [GitHub :fontawesome-brands-github:](https://github.com/uforge-io){ .md-button }
 
 </div>
@@ -126,7 +126,7 @@ hide:
 
 - :fontawesome-solid-cube:{ .uf-icon-purple } **그래픽 가속**
 
-    2D / 2.5D GPU, LCD 컨트롤러, LVGL 지원으로 풍부하고 부드러운 그래픽 인터페이스를 구현할 수 있습니다. 제품군 전체에서 지원하는 인터페이스는 MIPI, RGB, QSPI, 8080, JDI, EPD이며, 해상도는 최대 1280 × 720입니다.
+    2D / 2.5D GPU, LCD 컨트롤러, LVGL 지원으로 풍부하고 부드러운 그래픽 인터페이스를 구현할 수 있습니다. 제품군 전체에서 지원하는 인터페이스는 MIPI, RGB, QSPI, 8080, JDI, EPD이며, 해상도는 최대 1280 × 800입니다.
 
 - :fontawesome-solid-volume-high:{ .uf-icon-pink } **오디오 서브시스템**
 
@@ -207,7 +207,7 @@ hide:
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } 트리플 코어 Cortex-M33 STAR-MC1
     - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 모드 Bluetooth 6.3
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 최대 1280 x 720 MIPI 디스플레이
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 최대 1280 x 800 MIPI 디스플레이
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU + 벡터 그래픽, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 및 JPEG/MJPEG 디코딩
     - :fontawesome-solid-circle:{ .uf-dot-blue } 오디오 코덱, 2 x AMIC, 4 x DMIC

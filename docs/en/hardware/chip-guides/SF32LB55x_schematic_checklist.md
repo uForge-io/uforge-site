@@ -1,4 +1,5 @@
 ---
+title: "SF32LB55x Hardware Design Guide — Schematic Checklist"
 icon: lucide/list-checks
 hide:
     - navigation

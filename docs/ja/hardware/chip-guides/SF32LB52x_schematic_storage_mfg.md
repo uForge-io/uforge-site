@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52xハードウェア設計ガイド — ストレージと製造"
 icon: lucide/circuit-board
 hide:
     - navigation

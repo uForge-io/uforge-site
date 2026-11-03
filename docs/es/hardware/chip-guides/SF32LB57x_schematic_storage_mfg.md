@@ -1,4 +1,5 @@
 ---
+title: "Guía de diseño de hardware de SF32LB57x — Almacenamiento y fabricación"
 icon: lucide/circuit-board
 hide:
     - navigation
@@ -63,6 +64,10 @@ Antes de cerrar el esquemático, confirme lo siguiente:
 | `HOLD#` / `SD2_D1` | `PA17` | `PA17` |
 
 </div>
+
+!!! warning "La numeración del controlador SDIO difiere dentro de la fuente"
+    La tabla de almacenamiento de SiFli denomina `SD2_*` a las señales de `PA12`–`PA17`, pero su tabla IO MUX asigna `SD1_*` a Function 2 de esos pines. La tabla anterior conserva los nombres usados en el cableado. La asignación física coincide, pero no seleccione SDIO2 ni una instancia de firmware basándose solo en esos nombres. Verifique el manual de usuario, la configuración de pines del SDK y el diseño de referencia del componente exacto.
+
 
 #### 5.6.3. Arranque y control de alimentación { #563-boot-and-power-control }
 
@@ -404,11 +409,11 @@ Mantenga accesibles para el utillaje de producción los pines predeterminados de
 
 | `PA00` / registro de arranque | `PA01` | Interruptor de arranque del host | Rama de arranque e interfaces disponibles |
 |:-----------------------|:-------|:-----------------|:------------------------------------------|
-| L | H | Cualquiera | Arranque normal; `PA19` no emite registros de arranque; `PA18`/`PA19` pasan a SWD y SWD en `PA43`/`PA44` queda deshabilitado. |
-| L | L | Desactivado | Arranque normal; `PA19` emite registros de arranque; `PA18`/`PA19` son DBG-UART y `PA43`/`PA44` son SWD. |
-| L | L | Activado | Modo de arranque; admite grabación mediante DBG-UART, SWD, UART y USB. |
-| `PA00` o registro de arranque = 1 | L | Cualquiera | Modo de arranque; admite grabación mediante DBG-UART, SWD, UART y USB. |
-| `PA00` o registro de arranque = 1 | H | Cualquiera | Modo de arranque; `PA19` no emite registros de arranque; admite grabación SWD/USB y `PA18`/`PA19` pasan a SWD. |
+| `PA00 = L`, `BOOT REG = L` | H | Cualquiera | Arranque normal; `PA19` no emite registros de arranque; `PA18`/`PA19` pasan a SWD y SWD en `PA43`/`PA44` queda deshabilitado. |
+| `PA00 = L`, `BOOT REG = L` | L | Desactivado | Arranque normal; `PA19` emite registros de arranque; `PA18`/`PA19` son DBG-UART y `PA43`/`PA44` son SWD. |
+| `PA00 = L`, `BOOT REG = L` | L | Activado | Modo de arranque; admite grabación mediante DBG-UART, SWD, UART y USB. `PA19` emite registros de arranque; `PA18` / `PA19` siguen como DBG-UART y `PA43` / `PA44` como SWD. |
+| `PA00` o registro de arranque = 1 | L | Cualquiera | Modo de arranque; admite grabación mediante DBG-UART, SWD, UART y USB. `PA19` emite registros de arranque; `PA18` / `PA19` siguen como DBG-UART y `PA43` / `PA44` como SWD. |
+| `PA00` o registro de arranque = 1 | H | Cualquiera | Modo de arranque; `PA19` no emite registros de arranque; admite grabación SWD/USB y `PA18`/`PA19` pasan a SWD. SWD en `PA43` / `PA44` queda deshabilitado. |
 
 </div>
 

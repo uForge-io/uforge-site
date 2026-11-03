@@ -1,4 +1,5 @@
 ---
+title: "SF32LB58-MOD — guia de projeto de hardware"
 icon: lucide/book-check
 hide:
     - navigation
@@ -21,6 +22,9 @@ Para obter mais detalhes sobre a arquitetura do chip subjacente (núcleos, gráf
 !!! note "Fonte e tratamento das figuras"
     Os dados técnicos específicos do módulo seguem **DS5802-SF32LB58-MOD V0.1**. Alguns diagramas de pinos, esquemáticos e desenhos mecânicos do datasheet são imagens rasterizadas; este guia os referencia em vez de redesenhá-los. A numeração de figuras e tabelas segue a numeração local deste guia no site; as legendas dos diagramas não reproduzidos indicam o número correspondente no datasheet oficial.
 
+!!! note "Escopo das marcações regulatórias"
+    As etiquetas fornecidas para SF32LB58-MOD-N16R32N1 e SF32LB58-MOD-A128R32N1 exibem identificadores FCC, IC, CMIIT ID e HVIN, além da marcação CE. Consulte o [resumo das marcações](../../sf32-products/modules/SF32LB58-MOD.md#regulatory-markings). Confirme os documentos de aprovação e as condições de antena e integração aplicáveis à revisão exata; não presuma que as marcações cubram outras variantes ou o produto final.
+
 ## 2. Resumo do projeto { #2-quick-design-summary }
 
 ### 2.1 Variantes do módulo { #21-module-variants }
@@ -36,6 +40,9 @@ Para obter mais detalhes sobre a arquitetura do chip subjacente (núcleos, gráf
 | SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16 + 16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40 a 85 °C | 24 × 24 × 3,1 |
 
 </div>
+
+!!! note "Disponibilidade e personalização"
+    **O SF32LB58-MOD-E4R32N1 não está mais disponível devido à recente escassez de chips de memória.** Outras configurações do módulo também são possíveis. Para solicitar uma configuração personalizada, [entre em contato com a μForge.io](../../about/contact.md).
 
 ### 2.2 Especificações principais { #22-key-specifications }
 

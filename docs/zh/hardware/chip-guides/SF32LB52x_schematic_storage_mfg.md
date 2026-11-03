@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52x 硬件设计指南 — 存储与制造"
 icon: lucide/circuit-board
 hide:
     - navigation

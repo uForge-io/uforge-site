@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x 하드웨어 설계 가이드 — PCB 레이아웃 가이드라인"
 icon: lucide/layers
 description: "SF32LB56x MCU의 PCB 레이아웃 가이드라인: 풋프린트, 스택업, 핵심 라우팅, 항목별 PCB 레이아웃 체크리스트입니다."
 tags:

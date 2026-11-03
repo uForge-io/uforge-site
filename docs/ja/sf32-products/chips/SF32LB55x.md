@@ -89,9 +89,11 @@ SiFliのチップ型番ガイドによると、SF32LB55xは後発の52/56/58フ�
 
 ### グラフィックス、ディスプレイ、AI { #graphics-display-and-ai }
 
+最大解像度とパネルインターフェースは[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
+
 - ハードウェアによる回転、スケーリング、ミラーリング、アルファブレンディングに対応したePicasso 2.5Dグラフィックスエンジン
 - eZipによる可逆グラフィックス展開に対応し、ePicassoと連携して使用できます
-- ePicassoの変換レイヤーは最大640 × 640、汎用レイヤーとディスプレイ出力は最大1024 × 1024に対応し、表示出力は最大60 fps
+- ePicassoの変換レイヤーは最大640 × 640、キャンバスは最大1024 × 1024に対応します。実際の表示解像度の上限は512 × 512であり、キャンバスサイズは表示出力の上限ではありません。表示出力は最大60 fpsに対応しますが、パネル、インターフェース、負荷によって異なります。
 - LCDコントローラーは8080、SPI、Dual-SPI、Quad-SPI、DPI、MIPI DSI、JDI反射型ディスプレイに対応（インターフェースの有無は品種によるため、選定した型番で確認してください）
 - TurboPixelのフレームバッファー圧縮では、LCDコントローラーが圧縮フレームを読み込み、表示時に展開します。フレームバッファーの使用量と読み出し帯域を抑えられます
 - LCDコントローラーを2基搭載。常時表示用インターフェースとデュアルディスプレイ機能は、型番とパッケージによって異なります
@@ -197,20 +199,23 @@ SF32LB557VD3A6について、SiFliの現行チップ型番ガイドとDS5501 V1.
 <!-- uf-faq:start -->
 ## よくある質問 { #frequently-asked-questions }
 
-**SF32LB55x の主な仕様は？**
-SF32LB55x は、アプリケーションCPU（Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33 @48 MHz、ユーザープログラム可能なコア）、内蔵SRAM 1,312 KB、Bluetooth Low Energy（BLE）のみを備えます。グラフィックス：ePicasso 1.0。パッケージ：QFN68 / BGA145 / BGA169（7 × 7 mm (QFN68)）。USB 2.0 FS。ファミリー全体の値であり、個別の型番はデータシートで確認してください。
+**SF32LB55xの主な仕様は？**
+SF32LB55xはアプリケーションCPU（Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33 @48 MHz、ユーザーによるプログラミングが可能）を備えています。内蔵SRAMは1,312 KBで、BluetoothはBLEのみです。グラフィックスはePicasso 1.0、パッケージはQFN68 / BGA145 / BGA169（7 × 7 mm (QFN68)）、USBは2.0 FSです。
 
-**SF32LB55x が対応するディスプレイインターフェースは？**
-SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI。対応状況は型番とパッケージによって異なります。
+**SF32LB55xが対応するディスプレイインターフェースは？**
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPIに対応しています。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
 
-**SF32LB55x のパッケージ内メモリ容量は？**
-型番により、パッケージ内PSRAMは最大 16 MB + 2 MB、パッケージ内NOR Flashは最大 8 MB です。
+**SF32LB55xがサポートする最大ディスプレイ解像度は？**
+RGB888カラーで最大512 × 512です（MIPI-DSI経由、RAM内蔵のディスプレイドライバーのみ対応）。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
 
-**SF32LB55x の電源電圧は？**
-バリアントにより 1.71–3.63 V。正確な範囲はデータシートで確認してください。
+**SF32LB55xのパッケージ内メモリー容量は？**
+パッケージ内PSRAMは最大 16 MB + 2 MB、パッケージ内NOR Flashは最大 8 MB です。
 
-**SF32LB55x でハードウェア設計を始めるには？**
-まず [SF32LB55x ハードウェア設計ガイド](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) で回路図、電源、クロック/RF、PCBレイアウトの指針を確認し、基板リリース前に回路図とレイアウトのチェックリストを使用してください。
+**SF32LB55xの電源電圧は？**
+1.71～3.63 Vです。
+
+**SF32LB55xでハードウェア設計を始めるには？**
+まず[SF32LB55xハードウェア設計ガイド](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md)で回路図、電源、クロック/RF、PCBレイアウトの指針を確認し、基板リリース前に回路図とレイアウトのチェックリストを使用してください。
 <!-- uf-faq:end -->
 
 ## 関連製品 { #related-products }

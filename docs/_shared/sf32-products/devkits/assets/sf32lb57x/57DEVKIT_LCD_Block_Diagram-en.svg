@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2240" height="1260" viewBox="0 0 2240 1260" role="img" aria-labelledby="title description">
+  <title id="title">SF32LB57-DevKit-LCD Block Diagram</title>
+  <desc id="description">English translation of SiFli's original board block diagram. The source's functional connections are retained, including the TF data-width and WS2812B-control discrepancies explained in the article. Consult the matching schematic for wiring.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10 Z" fill="#475569"/></marker>
+    <marker id="blue-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10 Z" fill="#2b6cb0"/></marker>
+    <marker id="green-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10 Z" fill="#2f855a"/></marker>
+    <marker id="orange-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10 Z" fill="#dd6b20"/></marker>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #1f2937; letter-spacing: 0; }
+      .title { font-size: 34px; font-weight: 700; }
+      .heading { font-size: 23px; font-weight: 700; text-anchor: middle; }
+      .body { font-size: 18px; text-anchor: middle; fill: #475569; }
+      .link-label { font-size: 17px; text-anchor: middle; fill: #475569; }
+      .pin-label { font-size: 16px; text-anchor: middle; fill: #64748b; }
+      .module-line { font-size: 21px; }
+      .detail { font-size: 19px; fill: #475569; }
+      .box { fill: #f7fafc; stroke: #475569; stroke-width: 2; }
+      .wire { fill: none; stroke: #475569; stroke-width: 2; }
+      .power-wire { fill: none; stroke: #dd6b20; stroke-width: 2.5; }
+    </style>
+  </defs>
+  <rect width="2240" height="1260" fill="#ffffff"/>
+  <text class="title" x="1120" y="52" text-anchor="middle">SF32LB57-DevKit-LCD Block Diagram</text>
+
+  <!-- Functional connections follow the original SiFli diagram. -->
+  <path class="wire" d="M820 205 H540" marker-end="url(#arrow)"/>
+  <text class="link-label" x="680" y="183">DPI-RGB888 (output)</text>
+  <text class="pin-label" x="680" y="231">PA24-PA54</text>
+  <path class="wire" d="M540 355 H820" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text class="link-label" x="680" y="333">DCMI DVP (bidirectional)</text>
+  <text class="pin-label" x="680" y="381">PA24-PA54 (via jumpers)</text>
+  <path class="wire" d="M540 510 H820" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text class="link-label" x="680" y="488">SDIO (bidirectional)</text>
+  <text class="pin-label" x="680" y="536">PA08-PA17 (partly shared)</text>
+  <path class="wire" d="M540 680 H820" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text class="link-label" x="680" y="654">GPIO / I2C / SPI / UART / SWD</text>
+  <text class="pin-label" x="680" y="706">Bidirectional</text>
+  <path class="wire" d="M540 865 H820" marker-end="url(#arrow)"/>
+  <text class="link-label" x="680" y="843">RF / antenna switch (output)</text>
+  <path class="wire" d="M1440 210 H1720" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text class="link-label" x="1580" y="184">UART / USB 2.0 FS</text>
+  <text class="pin-label" x="1580" y="236">PA00/PA01 · PA35/PA36</text>
+  <text class="pin-label" x="1580" y="258">Bidirectional</text>
+  <path class="wire" d="M1440 430 H1720" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text class="link-label" x="1580" y="402">DAC → amplifier / PDM → mics</text>
+  <path class="wire" d="M1440 650 H1720" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text class="link-label" x="1580" y="626">I2C (bidirectional)</text>
+  <path class="wire" d="M1720 865 H1440" marker-end="url(#arrow)"/>
+  <text class="link-label" x="1580" y="841">GPADC / RSTN (input)</text>
+
+  <!-- Left-side peripherals. -->
+  <rect class="box" x="40" y="120" width="500" height="145" rx="8"/>
+  <text class="heading" x="290" y="153">LCD FPC1 (40P, 0.5 mm, DPI-RGB888)</text>
+  <text class="body" x="290" y="184">R0-R7 / G0-G7 / B0-B7 / CLK / HSYNC / VSYNC / DE</text>
+  <text class="body" x="290" y="212">BL_PWM (PA11) / CTP_RST / LCD_RST / touch I2C</text>
+  <text class="body" x="290" y="240">FPC-05FB-40PH20 · ALIENTEK 40-pin order</text>
+
+  <rect class="box" x="40" y="290" width="500" height="145" rx="8"/>
+  <text class="heading" x="290" y="323">Camera FPC4 (24P, 0.5 mm, DCMI DVP)</text>
+  <text class="body" x="290" y="354">GC032A / OV2640 / OV5640 / OV3660</text>
+  <text class="body" x="290" y="382">VSYNC / HSYNC / PCLK / D0-D7 / MCLK</text>
+  <text class="body" x="290" y="410">Separate LDOs: DVDD_1V5 / DVDD_2V8 / AVDD_2V8</text>
+
+  <rect class="box" x="40" y="460" width="500" height="125" rx="8"/>
+  <text class="heading" x="290" y="495">TF Card Socket J6 (MicroSD)</text>
+  <text class="body" x="290" y="529">SDIO: CLK / CMD / D0-D3 / TF_DET</text>
+  <text class="body" x="290" y="560">Separate bus from Wi-Fi SDIO</text>
+
+  <rect class="box" x="40" y="610" width="500" height="155" rx="8"/>
+  <text class="heading" x="290" y="646">40-Pin Header J3 (Raspberry Pi Compatible)</text>
+  <text class="body" x="290" y="681">GPIO / I2C / SPI / UART / SWD breakout</text>
+  <text class="body" x="290" y="711">Compatible 3V3 / 5V / GND positions</text>
+  <text class="body" x="290" y="741">SWD: PA43 (SWCLK) / PA44 (SWDIO)</text>
+
+  <rect x="40" y="800" width="500" height="125" rx="8" fill="#fffaf0" stroke="#dd6b20" stroke-width="2"/>
+  <text class="heading" x="290" y="839" style="fill: #9c4221;">IPEX-1 Antenna Connector ANT</text>
+  <text class="body" x="290" y="875">Wi-Fi / Bluetooth antenna · 2.4G RF switching</text>
+  <text class="body" x="290" y="903">IOEX_2.4G_RFSW</text>
+
+  <!-- Core module. -->
+  <rect x="820" y="120" width="620" height="880" rx="12" fill="#eaf3ff" stroke="#2b6cb0" stroke-width="2.5"/>
+  <path d="M832 120 H1428 Q1440 120 1440 132 V222 H820 V132 Q820 120 832 120 Z" fill="#2b6cb0"/>
+  <text class="heading" x="1130" y="155" style="fill: #ffffff; font-size: 28px;">SF32LB57-MOD-WD Module (U5)</text>
+  <text x="1130" y="185" text-anchor="middle" font-size="19" style="fill: #ffffff;">SF32LB57X · dual Arm Cortex-M33 STAR-MC1</text>
+  <text x="1130" y="210" text-anchor="middle" font-size="19" style="fill: #ffffff;">@ 240 MHz</text>
+  <g class="module-line">
+    <text x="850" y="266">• On-chip SRAM / QSPI boot Flash / OPI-PSRAM</text>
+    <text x="850" y="307">• ePicasso 3.0: 2D/2.5D graphics (up to 2048 × 2048)</text>
+    <text x="850" y="348">• DPI-RGB parallel display interface (RGB888)</text>
+    <text x="850" y="389">• DCMI DVP camera interface</text>
+    <text x="850" y="430">• USB 2.0 FS (PA35 / PA36)</text>
+    <text x="850" y="471">• SDIO ×2 (separate Wi-Fi / TF-card buses)</text>
+    <text x="850" y="512">• I2C ×2 / PDM / GPADC / SPI / UART</text>
+    <text x="850" y="553">• 24-bit hi-fi DAC → NS4150B amplifier</text>
+    <text x="850" y="594">• On-module Wi-Fi / BT combo (AIC8800D40LS-N)</text>
+    <text x="850" y="635">• 48 MHz + 40 MHz crystals</text>
+  </g>
+  <line x1="850" y1="664" x2="1410" y2="664" stroke="#cbd5e1" stroke-width="1.5"/>
+  <g class="detail">
+    <text x="850" y="704">Debug/download: SWD (PA43 SWCLK / PA44 SWDIO)</text>
+    <text x="850" y="746">UART download: CH343P (USB1), auto reset / BOOT</text>
+    <text x="850" y="788">Buttons: 3 GPADC dividers (PA34) + reset S4</text>
+    <text x="850" y="830">Package: castellated pads (SF32LB57X QFN80)</text>
+    <text x="850" y="872">IO expansion: AW9523B (U11), I2C, 16 IOs</text>
+    <text x="850" y="914">User LEDs (LED1-LED3) + WS2812B (U1)</text>
+    <text x="850" y="956">Antenna: IPEX-1 (ANT) → module Wi-Fi / BT</text>
+  </g>
+
+  <!-- Right-side peripherals. -->
+  <rect class="box" x="1720" y="120" width="480" height="195" rx="8"/>
+  <text class="heading" x="1960" y="155">USB Type-C ×2</text>
+  <text class="body" x="1960" y="191">USB1 → CH343P (U3) USB-to-UART</text>
+  <text class="body" x="1960" y="220">Download / debug → PA00 / PA01 (BOOT config)</text>
+  <text class="body" x="1960" y="249">USB2 → USB 2.0 FS device (PA35 / PA36)</text>
+  <text class="body" x="1960" y="283">Both connectors accept 5 V VBUS power</text>
+
+  <rect class="box" x="1720" y="340" width="480" height="180" rx="8"/>
+  <text class="heading" x="1960" y="374">Audio</text>
+  <text class="body" x="1960" y="408">NS4150B Class-D amplifier (U8) → speaker J7</text>
+  <text class="body" x="1960" y="437">DAC1P / DAC1N · AU_PA_EN enable</text>
+  <text class="body" x="1960" y="466">Dual PDM microphones MIC1 / MIC2</text>
+  <text class="body" x="1960" y="495">PDM_CLK (PA56) / PDM_DAT (PA55) · PDM_3V3</text>
+
+  <rect class="box" x="1720" y="545" width="480" height="205" rx="8"/>
+  <text class="heading" x="1960" y="580">AW9523B IO Expander (U11)</text>
+  <text class="body" x="1960" y="615">I2C (PA22 SCL / PA23 SDA) · 16 controllable IOs</text>
+  <text class="body" x="1960" y="646">Drives user LEDs LED1-LED3 / WS2812B (U1)</text>
+  <text class="body" x="1960" y="677">LCD_RST / CTP_RST / WF_PWREN / DVP_PDN</text>
+  <text class="body" x="1960" y="708">PDM_PWREN / AU_PA_EN / TF_DET / USB_DET</text>
+
+  <rect class="box" x="1720" y="790" width="480" height="145" rx="8"/>
+  <text class="heading" x="1960" y="826">Buttons</text>
+  <text class="body" x="1960" y="862">S1-S3: 3 GPADC divider buttons (shared PA34)</text>
+  <text class="body" x="1960" y="896">S4: hardware reset KEY-RSTN (active low)</text>
+
+  <!-- USB power input and two independent buck rails. -->
+  <text x="40" y="1070" font-size="24" font-weight="700">Power Architecture (USB Type-C, 5 V Input)</text>
+  <path class="power-wire" d="M860 1135 H920" marker-end="url(#orange-arrow)"/>
+  <path class="power-wire" d="M720 1190 V1220 H1390 V1190" marker-end="url(#orange-arrow)"/>
+  <path d="M1060 1080 V1000" fill="none" stroke="#2b6cb0" stroke-width="2.5" marker-end="url(#blue-arrow)"/>
+  <path d="M1390 1080 V1000" fill="none" stroke="#2f855a" stroke-width="2.5" marker-end="url(#green-arrow)"/>
+  <rect x="580" y="1080" width="280" height="110" rx="8" fill="#fffaf0" stroke="#dd6b20" stroke-width="2"/>
+  <text class="heading" x="720" y="1119" style="fill: #9c4221;">USB 5 V</text>
+  <text class="body" x="720" y="1154">VBUS (both connectors)</text>
+  <rect x="920" y="1080" width="280" height="110" rx="8" fill="#ebf8ff" stroke="#2b6cb0" stroke-width="2"/>
+  <text class="heading" x="1060" y="1119" style="fill: #2b6cb0;">U4 ETA3425D2G</text>
+  <text class="body" x="1060" y="1154">→ VDD_3V3 (main board rail)</text>
+  <rect x="1240" y="1080" width="300" height="110" rx="8" fill="#f0fff4" stroke="#2f855a" stroke-width="2"/>
+  <text class="heading" x="1390" y="1115" style="fill: #276749;">U7 ETA3425D2G</text>
+  <text class="body" x="1390" y="1145">→ WF_3V3 (Wi-Fi rail)</text>
+  <text class="body" x="1390" y="1174">Enable: IOEX_WF_PWREN</text>
+  <g class="body" text-anchor="start">
+    <rect x="1630" y="1124" width="18" height="18" fill="#dd6b20"/>
+    <text x="1690" y="1140">USB 5 V</text>
+    <rect x="1785" y="1124" width="18" height="18" fill="#2b6cb0"/>
+    <text x="1875" y="1140">VDD_3V3</text>
+    <rect x="1995" y="1124" width="18" height="18" fill="#2f855a"/>
+    <text x="2075" y="1140">WF_3V3</text>
+  </g>
+</svg>

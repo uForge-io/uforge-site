@@ -110,7 +110,7 @@ La série **LB** (Low-Power Bluetooth) est la première gamme de produits SF32. 
 
 <div align="center"><em>Comparaison des microcontrôleurs SF32</em></div>
 
-Les valeurs ci-dessous résument les capacités au niveau de la famille, et non des capacités garanties pour chaque référence. La disponibilité des interfaces et les nombres de ressources peuvent varier selon la référence exacte, le boîtier ou la configuration ; vérifiez la fiche technique du composant retenu.
+Les valeurs ci-dessous résument les capacités de chaque famille ; elles ne sont pas garanties pour toutes les références. La disponibilité des interfaces et le nombre de ressources peuvent varier selon la référence exacte, le boîtier ou la configuration. Vérifiez la fiche technique du composant retenu. Pour connaître la résolution d'affichage maximale et les interfaces de panneau documentées par famille, consultez la [Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix).
 
 <div align="center" markdown>
 
@@ -123,6 +123,7 @@ Les valeurs ci-dessous résument les capacités au niveau de la famille, et non 
 | Bluetooth | BT Classic + BLE | BLE | BT Classic + BLE | BT Classic + BLE | BT Classic + BLE |
 | Accélérateur graphique | 2.5D<br>ePicasso 2.0 Lite | 2.5D<br>ePicasso 1.0 | 2.5D<br>ePicasso 2.0 | 2.5D<br>ePicasso 3.0 + eZip 3.0 | 2.5D + graphismes vectoriels<br>ePicasso 2.0 + Vivante GCNanoUltraV |
 | Prise en charge de l'affichage | SPI / DSPI / QSPI / 8080 / EPD / JDI | SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI |
+| Résolution d'affichage maximale | 512 × 512, RGB888 | 512 × 512, RGB888 | BGA : 1024 × 600, RGB888<br>QFN : 512 × 512, RGB888 | 1024 × 600, RGB888 | 1280 × 800, RGB565<br>1280 × 720, RGB888 |
 | ADC audio | 1x | n/d | 1x | 2x | 2x |
 | DAC audio | 1x | n/d | 1x | 1x | 2x |
 | Interfaces audio PDM | 1x | 1–2x* | 2x | 2x | 2x |

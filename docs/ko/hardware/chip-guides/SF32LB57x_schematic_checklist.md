@@ -1,4 +1,5 @@
 ---
+title: "SF32LB57x 하드웨어 설계 가이드 — 회로도 체크리스트"
 icon: lucide/list-checks
 hide:
     - navigation

@@ -73,8 +73,6 @@ Für ein kleineres Board mit Lötrandkontakten verwenden Sie das [SF32LB52-DevKi
 
 Die Board-Codes und Speicherkonfigurationen oben folgen dem [Modellleitfaden für Entwicklungsboards](https://wiki.sifli.com/en/board/devkit_guide.html) von SiFli. Prüfen Sie die Revision anhand der Board-Kennzeichnung und des passenden Designpakets, bevor Sie das Board als Ausgangspunkt für ein eigenes Design verwenden.
 
-Die Flash-Bezeichnungen für A128R16 unterscheiden sich zwischen den offiziellen Quellen: Der [OpenSiFli-Leitfaden zu Modulmodellen](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) nennt das Modul 128 MB SPI-NAND, während der Leitfaden zu Boardmodellen die entsprechende DevKit-SKU als 128 MB QSPI-NAND aufführt. Die Quellen erläutern nicht, ob dies das bestückte Bauteil oder nur die Bezeichnung der Schnittstelle betrifft. Bestätigen Sie Flash-Bauteil und Busmodus anhand von Schaltplan und Stückliste der genauen Board-Revision, bevor Sie sich auf diese Konfiguration verlassen.
-
 ## Versionshinweise { #version-notes }
 
 <div align="center"><em>Versionshistorie des Boards</em></div>

@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle du SF32LB58x — Conception et routage du PCB"
 icon: lucide/layers
 hide:
     - navigation

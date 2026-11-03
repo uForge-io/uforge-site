@@ -19,7 +19,7 @@ Dieser Abschnitt stellt die Konventionen zur Beschreibung von μForge-Modulschni
 
 | Dokument | Status und Zweck | Verwendung |
 |:---------|:-------------------|:------------|
-| [Benennungsregeln für die μForge-M2-Schnittstelle](M2%20Interface%20Naming%20Rules.md) | Benennungskonvention für M2-Schnittstellenfamilien und -profile. | Zum Benennen eines Moduls, Steckverbinders, einer Trägerplatine oder eines Schnittstellenprofils in Dokumentation und Designdateien. |
+| [Benennungsregeln für die μForge-M2-Schnittstelle](M2-interface-naming-rules.md) | Benennungskonvention für M2-Schnittstellenfamilien und -profile. | Zum Benennen eines Moduls, Steckverbinders, einer Trägerplatine oder eines Schnittstellenprofils in Dokumentation und Designdateien. |
 | [M2-Schnittstellendefinition](M2-interface-definition.md) | Entwurf der Definition auf Pin-Ebene und Vorschlag zur Signalzuordnung. | Beim Prüfen einer vorgeschlagenen M2-Trägerplatinen-Schnittstelle und möglicher Konflikte bei der Signalnutzung, bevor der Steckverbinder festgelegt wird. |
 
 </div>
@@ -40,7 +40,7 @@ Die Definition auf Pin-Ebene ist keine Zusage, dass jedes μForge-Modul oder SF3
 ## Entscheidungspfad für die Trägerplatine { #carrier-board-decision-path }
 
 1. Wählen Sie das Modul aus und lesen Sie seine Einführung und seinen Hardware-Design-Leitfaden.
-2. Verwenden Sie die [Benennungsregeln für die μForge-M2-Schnittstelle](M2%20Interface%20Naming%20Rules.md), um das beabsichtigte Profil eindeutig zu beschreiben.
+2. Verwenden Sie die [Benennungsregeln für die μForge-M2-Schnittstelle](M2-interface-naming-rules.md), um das beabsichtigte Profil eindeutig zu beschreiben.
 3. Verwenden Sie die [M2-Schnittstellendefinition](M2-interface-definition.md), um Kandidatensignale und Konflikte bei der gemeinsamen Nutzung zu identifizieren.
 4. Bestätigen Sie jeden verwendeten Kontakt in der modulspezifischen Dokumentation und der jeweils zutreffenden SiFli-Quelldokumentation.
 5. Halten Sie vor Beginn des Layouts die Dokumentversionen, die Revisionen von Modul und Trägerplatine, bestätigte Ausnahmen und offene Fragen in der Schaltplanprüfung fest.

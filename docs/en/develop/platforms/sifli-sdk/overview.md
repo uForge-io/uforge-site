@@ -1,5 +1,6 @@
 ---
 icon: lucide/package
+title: "SiFli-SDK Platform Overview"
 description: "SiFli-SDK as the reference SF32 development path: scons build and menuconfig workflows, board naming, project structure, and production readiness."
 tags:
     - Develop

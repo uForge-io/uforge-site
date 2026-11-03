@@ -1,5 +1,6 @@
 ---
 icon: lucide/code
+title: "Rustをはじめる"
 description: "SF32LB52上でOpenSiFliのsifli-rsを初めて評価する手順: Rustターゲットのインストール、未改変のBlinkyサンプルのビルド、sftoolの設定、SDK復旧パスの確保。"
 tags:
     - はじめに

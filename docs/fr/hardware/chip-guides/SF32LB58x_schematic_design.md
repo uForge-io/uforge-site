@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle du SF32LB58x — Directives de conception de schéma"
 icon: lucide/circuit-board
 hide:
     - navigation

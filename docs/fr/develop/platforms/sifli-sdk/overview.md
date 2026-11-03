@@ -1,5 +1,6 @@
 ---
 icon: lucide/package
+title: "Présentation de la plateforme SiFli-SDK"
 description: "SiFli-SDK, voie de référence du développement SF32 : build scons et menuconfig, noms de carte, structure de projet et préparation à la production."
 tags:
     - Développement

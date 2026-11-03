@@ -1,5 +1,6 @@
 ---
 icon: lucide/package
+title: "Обзор платформы SiFli-SDK"
 description: "SiFli-SDK как основной путь разработки для SF32: сборка через scons и настройка через sdk.py menuconfig, имена плат, структура проектов и вопросы готовности к производству."
 tags:
     - Разработка

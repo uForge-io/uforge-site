@@ -31,7 +31,7 @@ The SF32 Products section helps you move from a product idea to an implementable
 
 Start with the [SF32 Family Overview](family/SF32_family.md) when you need to understand the available families and the broad capability differences between them. The [naming rules](family/SF32_namingrule.md) help decode a complete part number once you have narrowed the family and package.
 
-Use the [SF32 Product Selector](product-selector.md) when requirements such as power architecture, package, display, audio, memory, GPIO, connectivity, or specialist hardware determine the choice. It establishes a shortlist; the exact part number, package, electrical limits, and board-level routing must still be confirmed against the relevant SiFli documentation.
+Use the [SF32 Product Selector](product-selector.md) when requirements such as power architecture, package, display, audio, memory, GPIO, connectivity, or specialist hardware determine the choice. It establishes a shortlist; the exact part number, package, electrical limits, and board-level routing must still be confirmed against the relevant SiFli documentation. Common questions about choosing, ordering and customizing SF32 parts are answered in the [SF32 FAQ](family/faq.md).
 
 Once a direction is selected, continue through the [reference designs](../hardware/reference-designs/reference-designs.md) and [production path](../hardware/design-for-production.md). This is where the site connects a device choice to reference hardware, design guidance, CAD libraries, BOM decisions, review checklists, and bring-up evidence.
 

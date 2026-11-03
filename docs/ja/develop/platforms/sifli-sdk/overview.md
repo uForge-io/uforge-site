@@ -1,5 +1,6 @@
 ---
 icon: lucide/package
+title: "SiFli-SDKプラットフォーム概要"
 description: "SF32ファームウェア開発の標準となるSiFli-SDKを紹介します。sconsによるビルドとsdk.py menuconfigの基本的な使い方、ボード名、プロジェクト構成、量産準備に関する確認事項を説明します。"
 tags:
     - 開発

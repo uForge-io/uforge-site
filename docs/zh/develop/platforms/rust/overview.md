@@ -1,5 +1,6 @@
 ---
 icon: lucide/code
+title: "Rust 平台概览"
 description: "评估 OpenSiFli 社区维护的 sifli-rs（sifli-hal、sifli-pac）对 SF32 的 Rust 支持：当前成熟度、适用与不适用场景及风险核对清单。"
 tags:
     - 开发

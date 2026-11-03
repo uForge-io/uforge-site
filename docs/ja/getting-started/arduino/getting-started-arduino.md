@@ -1,5 +1,6 @@
 ---
 icon: lucide/puzzle
+title: "Arduinoをはじめる"
 description: "SF32LB52 DevKit LCD上でOpenSiFliのベータ版ArduinoCore-zephyrを初めて実行する手順: ボードパッケージのインストール、シリアルテストのアップロード、Blinkの実行。"
 tags:
     - はじめに

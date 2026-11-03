@@ -1,5 +1,6 @@
 ---
 icon: lucide/code
+title: "Getting Started with Rust"
 description: "First evaluation of OpenSiFli sifli-rs on SF32LB52: install the Rust target, build the unmodified Blinky example, configure sftool, and retain an SDK recovery path."
 tags:
     - Getting started

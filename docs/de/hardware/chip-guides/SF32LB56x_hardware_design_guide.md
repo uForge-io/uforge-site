@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56x - Hardware-Design-Leitfaden"
 icon: lucide/book-check
 description: "Hardware-Design-Leitfaden für den SF32LB56x-MCU: Stromversorgungssystem, Takterzeugung, RF-Design, Display, Audio und PCB-Layout-Hinweise."
 tags:

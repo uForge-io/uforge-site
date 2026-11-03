@@ -1,4 +1,5 @@
 ---
+title: "SF32LB56xハードウェア設計ガイド — PCBレイアウト指針"
 icon: lucide/layers
 description: "SF32LB56x MCUのPCBレイアウトガイドです。フットプリント、基板積層、重要信号の配線、項目別のPCBレイアウトチェックリストを説明します。"
 tags:

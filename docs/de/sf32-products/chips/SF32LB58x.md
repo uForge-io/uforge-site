@@ -77,6 +77,8 @@ Wählen Sie SF32LB58x, wenn das Design eine oder mehrere dieser Fähigkeiten ben
 
 ### Grafik, Display und KI { #graphics-display-and-ai }
 
+Maximale Auflösung und Panel-Schnittstellen: siehe [Schnittstellenmatrix pro Gerät](../../learn/graphics/display-controller.md#per-device-interface-matrix).
+
 - 2D/2.5D-Grafikbeschleuniger ePicasso 2.0
 - Vektorgrafik-Engine Vivante GCNanoUltraV
 - Beschleuniger eZip 2.0 für die verlustfreie Dekompression von Grafiken
@@ -126,7 +128,7 @@ Wählen Sie SF32LB58x, wenn das Design eine oder mehrere dieser Fähigkeiten ben
 
 ## Familienvarianten { #family-variants }
 
-Der aktuelle SiFli-Chip-Modellleitfaden führt sechs SF32LB58x-Bestellcodes auf, alle im BGA256, mit den unten gezeigten Speicherkonfigurationen im Gehäuse. Bestätigen Sie den genauen Bestellcode anhand des aktuellen Datenblatts und der Approved Vendor List (AVL), da sich Konfigurationen und Verfügbarkeit ändern können.
+Der aktuelle SiFli-Chip-Modellleitfaden führt drei SF32LB58x-Bestellcodes auf, alle im BGA256, mit den unten gezeigten Speicherkonfigurationen im Gehäuse. Bestätigen Sie den genauen Bestellcode anhand des aktuellen Datenblatts und der Approved Vendor List (AVL), da sich Konfigurationen und Verfügbarkeit ändern können.
 
 <div align="center"><em>SF32LB58x-Bestellcodes und Speicher im Gehäuse</em></div>
 
@@ -134,10 +136,7 @@ Der aktuelle SiFli-Chip-Modellleitfaden führt sechs SF32LB58x-Bestellcodes auf,
 
 | Teilenummer | Gehäuse | Speicher im Gehäuse |
 | :--- | :--- | :--- |
-| SF32LB580VNN36 | BGA256 | 1 MB Boot-NOR-Flash; kein Speicher im Gehäuse an MPI1 oder MPI2 |
-| SF32LB581VCN36 | BGA256 | 1 MB Boot-NOR-Flash + 8 MB OPI-PSRAM an MPI1 |
 | SF32LB583VCC36 | BGA256 | 1 MB Boot-NOR-Flash + 2 × 8 MB OPI-PSRAM an MPI1 und MPI2 |
-| SF32LB585V5E56 | BGA256 | 4 MB Boot-NOR-Flash + 4 MB NOR-Flash an MPI1 + 32 MB HPI-PSRAM an MPI2 |
 | SF32LB586VDD36 | BGA256 | 1 MB Boot-NOR-Flash + 2 × 16 MB HPI-PSRAM an MPI1 und MPI2 |
 | SF32LB587VEE56 | BGA256 | 4 MB Boot-NOR-Flash + 2 × 32 MB HPI-PSRAM an MPI1 und MPI2 |
 
@@ -163,16 +162,19 @@ Mit dieser Abfolge machen Sie aus einer SF32LB58x-Vorauswahl ein validiertes Des
 ## Häufig gestellte Fragen { #frequently-asked-questions }
 
 **Was sind die wichtigsten Spezifikationen des SF32LB58x?**
-Der SF32LB58x kombiniert eine Anwendungs-CPU (2× Cortex-M33 @240 MHz) mit einem Low-Power-Kern (Cortex-M33 @48/96 MHz, mit einem vom Anwender programmierbaren Kern), 3.7 MB internem SRAM und Dual-Mode-Bluetooth (BT Classic + BLE). Grafik: ePicasso 2.0 + Vivante GCNanoUltraV (vector). Gehäuse: BGA256 (8.5 × 6.5 mm). USB 2.0 HS. Werte auf Familienebene; prüfen Sie das Datenblatt der genauen Typnummer.
+Der SF32LB58x kombiniert eine Anwendungs-CPU (2× Cortex-M33 @240 MHz) mit einem Low-Power-Kern (Cortex-M33 @48/96 MHz; vom Anwender programmierbar). Hinzu kommen 3,7 MB internes SRAM und Dual-Mode-Bluetooth (BT Classic + BLE). Grafik: ePicasso 2.0 + Vivante GCNanoUltraV (Vektorgrafik). Gehäuse: BGA256 (8,5 × 6,5 mm). USB 2.0 HS.
 
 **Welche Display-Schnittstellen unterstützt der SF32LB58x?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. Die Verfügbarkeit hängt von Typnummer und Gehäuse ab.
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. ([Schnittstellenmatrix pro Gerät](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+
+**Welche maximale Display-Auflösung unterstützt der SF32LB58x?**
+Bis zu 1280 × 800 bei RGB565 oder bis zu 1280 × 720 bei RGB888 über MIPI-DSI. ([Schnittstellenmatrix pro Gerät](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
 **Wie viel Speicher im Gehäuse bietet der SF32LB58x?**
-Bis zu 32 MB + 32 MB PSRAM und bis zu 8 MB NOR-Flash im Gehäuse, abhängig von der Typnummer.
+Bis zu 32 MB + 32 MB PSRAM und bis zu 8 MB NOR-Flash im Gehäuse.
 
 **Welche Versorgungsspannung benötigt der SF32LB58x?**
-1.71–3.63 V, je nach Variante. Den genauen Bereich bestätigt das Datenblatt.
+1,71–3,63 V.
 
 **Wo beginne ich ein Hardware-Design mit dem SF32LB58x?**
 Beginnen Sie mit dem [Hardware-Design-Leitfaden für den SF32LB58x](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md) zu Schaltplan, Stromversorgung, Takt/RF und PCB-Layout und nutzen Sie vor der Freigabe die Checklisten für Schaltplan und Layout.

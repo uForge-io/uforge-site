@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52x 하드웨어 설계 가이드 — PCB 레이아웃 체크리스트"
 icon: lucide/list-checks
 hide:
     - navigation

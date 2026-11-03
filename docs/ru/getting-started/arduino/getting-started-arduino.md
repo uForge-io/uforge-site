@@ -1,5 +1,6 @@
 ---
 icon: lucide/puzzle
+title: "Начало работы с Arduino"
 description: "Пошаговый первый запуск бета-версии ArduinoCore-zephyr от OpenSiFli на SF32LB52 DevKit LCD: установка пакета платы, проверка вывода в последовательный порт и запуск Blink."
 tags:
     - Начало работы

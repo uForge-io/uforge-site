@@ -1,4 +1,5 @@
 ---
+title: "SF32LB57x 硬件设计指南 — 原理图核对表"
 icon: lucide/list-checks
 hide:
     - navigation

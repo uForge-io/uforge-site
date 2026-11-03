@@ -1,4 +1,5 @@
 ---
+title: "Guía de diseño de hardware SF32LB55x — Lista de comprobación del esquemático"
 icon: lucide/list-checks
 hide:
     - navigation

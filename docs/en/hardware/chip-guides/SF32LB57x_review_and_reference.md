@@ -1,4 +1,5 @@
 ---
+title: "SF32LB57x Hardware Design Guide — Design Review Checklist and References"
 icon: lucide/clipboard-check
 hide:
     - navigation
@@ -90,6 +91,8 @@ Before design freeze, use these release criteria:
 
 ## 8. Related Documents and References { #8-related-documents-and-references }
 
+[Reviewed Chinese source](https://github.com/OpenSiFli/SiFli-Wiki/blob/5f70d425f9d8fe47fbad73e370abdee8b9555e90/source/zh_CN/hardware/SF32LB57x-HW-Application.md) (2026-10-23, `5f70d425`).
+
 Use the latest official documents to verify electrical limits, package data, pin multiplexing, software configuration, component qualification, and manufacturing constraints.
 
 <div class="grid cards" markdown>
@@ -132,12 +135,13 @@ A typical SF32LB57x product may include the MCU, power tree, 48 MHz and 32.768 k
 
 | Version | Date | Notes |
 |:--------|:-----|:------|
+| 0.6 | 2026-11-03 | Checked against the OpenSiFli Chinese source updated 2026-10-23: refreshed V2 minimum-system schematics, power tables and VDDIOA/Flash limits; verified LCDC matrix signals and clarified boot conditions; distinguished panel-driver interfaces from native MCU interfaces; refreshed source-discrepancy notes. |
 | 0.5 | 2026-08 | Restored full fidelity to the official application note: added the four per-package/power-family power-pin reference tables, the default debug-port table, the RF schematic figure, the complete display signal tables (SPI/QSPI, RGB, RGB mode configuration, MCU8080, EPD, parallel/serial JDI, touch/backlight), the analog-MIC/PDM-MIC/audio-PA reference figures, the full chip-specific camera signal table, the IO MUX table, the matrix table, the LCDC matrix sub-MUX table, the USB pin table, the expanded per-pin GPADC table, and the power-key/GPADC-key reference figure. Split the official design self-check tables into new companion [Schematic Checklist](SF32LB57x_schematic_checklist.md) and [PCB Layout Checklist](SF32LB57x_pcb_layout_checklist.md) pages so no check item is dropped. |
 | 0.4 | 2026-08 | Reconciled facts against the official SF32LB57x hardware application note: corrected the `VCC`/`VBAT` pin-table minimum (3.0 V, not 3.2 V), added the 2.7 V hardware shutdown threshold, corrected the `VDD33_VOUT1` soft-start current limit to 30 mA, corrected the 32.768 kHz crystal load-capacitance options (7 pF or 11.5 pF, chip defaults to 11.5 pF), specified the `PA34` power/reset key circuit and GPADC resistor-divider key design, added the GPADC 0 V-3.3 V input range and 100 nF filter capacitor, added `BUCK_FB`/`VDDIOA`/`VBATS`/`AVDD33_ANA` capacitor values, added MPI bus length/skew and crystal placement-spacing PCB constraints, and added the 4-layer stack-up assignment. |
 | 0.3 | 2026-07 | Restructured schematic guidance so Minimum System Design, Power System, Clock Generation, RF, User Interfaces, Storage and Connectivity, and Manufacturing are separate peer sections. |
 | 0.2 | 2026-07 | Added evidence pack, bring-up guidance, low-power validation, RF/display/audio/camera validation, and PCB critical-constraint quick reference. |
 | 0.1 | 2026-07 | Initial SF32LB57x hardware design guide release based on the official hardware application note. |
-| 0.0.1 | 2026-06 | Upstream source revision 0.0.1: initial SF32LB57x hardware application note; versioned separately from this guide. |
+| 0.0.1 | 2026-10 | Upstream source revision 0.0.1: initial SF32LB57x hardware application note; versioned separately from this guide. |
 
 </div>
 

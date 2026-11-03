@@ -1,5 +1,6 @@
 ---
 icon: lucide/puzzle
+title: "Premiers pas avec Arduino"
 description: "Première prise en main pas à pas du cœur ArduinoCore-zephyr bêta d'OpenSiFli sur le SF32LB52 DevKit LCD : installer le paquet de cartes, téléverser un test série et Blink."
 tags:
     - Prise en main

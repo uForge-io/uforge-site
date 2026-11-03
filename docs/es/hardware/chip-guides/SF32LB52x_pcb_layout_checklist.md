@@ -1,4 +1,5 @@
 ---
+title: "Guía de diseño de hardware SF32LB52x — Lista de comprobación del diseño de PCB"
 icon: lucide/list-checks
 hide:
     - navigation

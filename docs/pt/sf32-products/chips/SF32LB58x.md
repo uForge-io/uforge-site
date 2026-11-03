@@ -77,6 +77,8 @@ Escolha SF32LB58x quando o projeto exigir uma ou mais destas capacidades:
 
 ### Gráficos, display e IA { #graphics-display-and-ai }
 
+Resolução máxima e interfaces de painel: consulte [Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix).
+
 - Acelerador gráfico 2D/2.5D ePicasso 2.0
 - Mecanismo gráfico vetorial Vivante GCNanoUltraV
 - Acelerador eZip 2.0 para descompressão de gráficos sem perda
@@ -126,7 +128,7 @@ Escolha SF32LB58x quando o projeto exigir uma ou mais destas capacidades:
 
 ## Variantes da família { #family-variants }
 
-O guia atual de modelos de chips da SiFli lista seis códigos de pedido SF32LB58x, todos em BGA256, com as configurações de memória integrada ao encapsulamento mostradas abaixo. Confirme o código exato no datasheet vigente e na lista de fornecedores aprovados (AVL), pois as configurações e a disponibilidade podem mudar.
+O guia atual de modelos de chips da SiFli lista três códigos de pedido SF32LB58x, todos em BGA256, com as configurações de memória integrada ao encapsulamento mostradas abaixo. Confirme o código exato no datasheet vigente e na lista de fornecedores aprovados (AVL), pois as configurações e a disponibilidade podem mudar.
 
 <div align="center"><em>Códigos de pedido SF32LB58x e memória integrada ao encapsulamento</em></div>
 
@@ -134,10 +136,7 @@ O guia atual de modelos de chips da SiFli lista seis códigos de pedido SF32LB58
 
 | Código de pedido | Encapsulamento | Memória integrada ao encapsulamento |
 | :--- | :--- | :--- |
-| SF32LB580VNN36 | BGA256 | Flash NOR de inicialização de 1 MB; sem memória integrada ao encapsulamento em MPI1 ou MPI2 |
-| SF32LB581VCN36 | BGA256 | Flash NOR de inicialização de 1 MB + OPI-PSRAM de 8 MB em MPI1 |
 | SF32LB583VCC36 | BGA256 | Flash NOR de inicialização de 1 MB + 2 × OPI-PSRAM de 8 MB em MPI1 e MPI2 |
-| SF32LB585V5E56 | BGA256 | Flash NOR de inicialização de 4 MB + Flash NOR de 4 MB em MPI1 + HPI-PSRAM de 32 MB em MPI2 |
 | SF32LB586VDD36 | BGA256 | Flash NOR de inicialização de 1 MB + 2 × HPI-PSRAM de 16 MB em MPI1 e MPI2 |
 | SF32LB587VEE56 | BGA256 | Flash NOR de inicialização de 4 MB + 2 × HPI-PSRAM de 32 MB em MPI1 e MPI2 |
 
@@ -163,16 +162,19 @@ Siga esta sequência para transformar uma seleção inicial de SF32LB58x em um p
 ## Perguntas frequentes { #frequently-asked-questions }
 
 **Quais são as principais especificações do SF32LB58x?**
-O SF32LB58x combina uma CPU de aplicação (2× Cortex-M33 @240 MHz) com um núcleo de baixo consumo (Cortex-M33 @48/96 MHz, com um núcleo programável pelo usuário), 3.7 MB de SRAM interna e Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 2.0 + Vivante GCNanoUltraV (vector). Encapsulamento: BGA256 (8.5 × 6.5 mm). USB 2.0 HS. Valores da família; confira o datasheet do código exato.
+O SF32LB58x combina uma CPU de aplicação (2× Cortex-M33 @240 MHz) com um núcleo de baixo consumo (Cortex-M33 @48/96 MHz, programável pelo usuário). Integra 3,7 MB de SRAM interna e oferece Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 2.0 + Vivante GCNanoUltraV (vetorial). Encapsulamento: BGA256 (8,5 × 6,5 mm). USB 2.0 HS.
 
 **Quais interfaces de display o SF32LB58x suporta?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. A disponibilidade varia conforme o código e o encapsulamento.
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+
+**Qual é a resolução máxima de display do SF32LB58x?**
+Até 1280 × 800 com cor RGB565, ou até 1280 × 720 com cor RGB888, via MIPI-DSI. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
 **Quanta memória no encapsulamento o SF32LB58x oferece?**
-Até 32 MB + 32 MB de PSRAM e até 8 MB de Flash NOR no encapsulamento, conforme o código.
+Até 32 MB + 32 MB de PSRAM e até 8 MB de Flash NOR no encapsulamento.
 
 **Qual tensão de alimentação o SF32LB58x precisa?**
-1.71–3.63 V, conforme a variante. Confirme a faixa exata no datasheet.
+1,71–3,63 V.
 
 **Por onde começar um projeto de hardware com o SF32LB58x?**
 Comece pelo [guia de projeto de hardware do SF32LB58x](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md) para esquemático, alimentação, clock/RF e layout de PCB, e use os checklists de esquemático e layout antes de liberar a placa.

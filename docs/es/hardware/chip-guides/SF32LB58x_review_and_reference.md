@@ -1,4 +1,5 @@
 ---
+title: "Guía de diseño de hardware SF32LB58x: lista de comprobación para la revisión de diseño y referencias"
 icon: lucide/clipboard-check
 description: "Lista de comprobación de revisión del diseño, documentos y referencias relacionados, apéndices e historial de revisiones de la guía de diseño de hardware SF32LB58x."
 tags:

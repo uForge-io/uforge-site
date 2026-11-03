@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle SF32LB57x — Recommandations de placement et de routage PCB"
 icon: lucide/layers
 hide:
     - navigation
@@ -102,8 +103,7 @@ Les figures de règles PTH et HDI donnent également des exemples de fabrication
 
 !!! warning "Conflits non résolus sur les rails d'alimentation dans la source"
     - **Largeur des pistes et désignation du rail :** La section 3.2.1 du guide PCB original exige au moins 0,4 mm (environ 15,7 mil) pour `VCC` et `PVDD`. Le point 44 de la table d'autocontrôle 4-2-1-1, applicable aux variantes sur batterie, exige au moins 12 mil pour `VCC` ; le point 47, applicable aux variantes 3,3 V, porte le titre `PVDD`, mais son détail de contrôle exige au moins 12 mil pour `VCC`. La source ne concilie pas ces largeurs et ne précise pas si le titre ou le détail du point 47 désigne le rail visé. Ne déduisez pas de valeur corrigée et n'appliquez pas une entrée aux deux variantes d'alimentation ; faites confirmer par SiFli le rail, le périmètre et la largeur applicables avant de figer la conception.
-    - **Noms des sorties :** La section 3.2.1 du guide PCB original utilise `VDD_VOUT1` / `VDD_VOUT2`, tandis que les points 45/46 de la table d'autocontrôle 4-2-1-1 et le tableau de référence rapide de la section 6.2 de cette page utilisent `VDD33_VOUT1` / `VDD33_VOUT2`. Le titre du point 46 répète `VDD33_VOUT1`, alors que son détail indique `VDD33_VOUT2`. La source ne précise pas si ces noms sont des alias ou des réseaux distincts.
-    Sans confirmation de SiFli, ne choisissez pas une largeur de piste, n'affectez pas le point 47 à un rail et ne traitez pas les variantes de nom des sorties comme équivalentes lors de la finalisation de la conception.
+    Sans confirmation de SiFli, ne choisissez pas de largeur de piste et n'affectez pas le point 47 à un rail avant de finaliser la conception.
 
 ### 6.4. Placement et routage du quartz { #64-crystal-layout }
 

@@ -1,4 +1,5 @@
 ---
+title: "SF32LB55x Hardware Design Guide — PCB Layout Guidelines"
 icon: lucide/layers
 hide:
     - navigation

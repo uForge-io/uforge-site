@@ -1,4 +1,5 @@
 ---
+title: "SF32LB57x Hardware-Design-Leitfaden — Design-Review-Checkliste und Referenzen"
 icon: lucide/clipboard-check
 hide:
     - navigation
@@ -90,6 +91,8 @@ Prüfen Sie vor der Designfreigabe, ob die folgenden Kriterien für die Freigabe
 
 ## 8. Verwandte Dokumente und Referenzen { #8-related-documents-and-references }
 
+[Mit der chinesischen Originalquelle abgeglichen](https://github.com/OpenSiFli/SiFli-Wiki/blob/5f70d425f9d8fe47fbad73e370abdee8b9555e90/source/zh_CN/hardware/SF32LB57x-HW-Application.md) (2026-10-23, `5f70d425`).
+
 Prüfen Sie elektrische Grenzwerte, Gehäusedaten, Pin-Multiplexing, Softwarekonfiguration, Bauteilqualifizierung und Fertigungsanforderungen anhand der jeweils neuesten offiziellen Dokumente.
 
 <div class="grid cards" markdown>
@@ -132,12 +135,13 @@ Ein typisches SF32LB57x-Produkt kann den Mikrocontroller, die Stromversorgungsst
 
 | Version | Datum | Anmerkungen |
 |:--------|:-----|:------|
+| 0.6 | 2026-11-03 | Mit der am 2026-10-23 aktualisierten chinesischen OpenSiFli-Quelle abgeglichen: V2-Minimalschaltungen, Versorgungstabellen und VDDIOA/Flash-Grenzen aktualisiert; LCDC-Matrixsignale geprüft und Startbedingungen präzisiert; Displaytreiber- und native MCU-Schnittstellen getrennt; Quellenabweichungen aktualisiert. |
 | 0.5 | 2026-08 | Der vollständige Detailumfang des offiziellen Anwendungshinweises wurde wieder aufgenommen. Ergänzt wurden vier nach Gehäuse und Stromversorgungsfamilie gegliederte Referenztabellen zu Versorgungspins, die Tabelle des Standard-Debug-Ports, die RF-Schaltplanabbildung, die vollständigen Display-Signaltabellen (SPI/QSPI, RGB, RGB-Moduskonfiguration, MCU8080, EPD, paralleles/serielles JDI, Touch/Hintergrundbeleuchtung), Referenzabbildungen für analoges Mikrofon, PDM-Mikrofon und Audio-Leistungsverstärker, die vollständige chipspezifische Kamerasignaltabelle, Tabellen für IO MUX und Matrix, die LCDC-Matrix-Sub-MUX-Tabelle, die USB-Pin-Tabelle, die erweiterte, nach Pins aufgeschlüsselte GPADC-Tabelle sowie die Referenzabbildung für die Ein/Aus-Taste und die GPADC-Taste. Die offiziellen Tabellen zur Selbstprüfung des Designs wurden auf die ergänzenden Seiten [Schaltplan-Checkliste](SF32LB57x_schematic_checklist.md) und [PCB-Layout-Checkliste](SF32LB57x_pcb_layout_checklist.md) verteilt, damit kein Prüfpunkt entfällt. |
 | 0.4 | 2026-08 | Die Angaben wurden mit dem offiziellen SF32LB57x-Hardware-Anwendungshinweis abgeglichen: Der Mindestwert in der `VCC`/`VBAT`-Pin-Tabelle wurde auf 3,0 V statt 3,2 V korrigiert; die Hardware-Abschaltschwelle von 2,7 V wurde ergänzt; die Softstart-Strombegrenzung von `VDD33_VOUT1` wurde auf 30 mA korrigiert; die Lastkapazitätsoptionen des 32,768-kHz-Quarzes wurden auf 7 pF oder 11,5 pF berichtigt (Standardwert des Chips: 11,5 pF). Außerdem wurden die Schaltung der `PA34`-Taste für Ein/Aus und Reset sowie das GPADC-Tastendesign mit Spannungsteiler beschrieben, der GPADC-Eingangsbereich von 0 V bis 3,3 V und der 100-nF-Filterkondensator ergänzt, die Kondensatorwerte für `BUCK_FB`/`VDDIOA`/`VBATS`/`AVDD33_ANA` aufgenommen, PCB-Vorgaben zur MPI-Gesamtlänge und zu Längenabweichungen innerhalb der Signalgruppe sowie zu Abständen bei der Quarzplatzierung ergänzt und die Lagenbelegung für den 4-Lagen-Aufbau ergänzt. |
 | 0.3 | 2026-07 | Die Schaltplananleitung so umstrukturiert, dass Minimalsystemdesign, Stromversorgungssystem, Takterzeugung, RF, Benutzerschnittstellen, Speicher und Konnektivität sowie Fertigung gleichrangige Abschnitte bilden. |
 | 0.2 | 2026-07 | Nachweispaket, Anleitung zur Inbetriebnahme, Validierung des Energiesparbetriebs, RF-/Display-/Audio-/Kamera-Validierung sowie Kurzübersicht wichtiger PCB-Vorgaben hinzugefügt. |
 | 0.1 | 2026-07 | Erstveröffentlichung des SF32LB57x-Hardware-Design-Leitfadens auf Basis des offiziellen Hardware-Anwendungshinweises. |
-| 0.0.1 | 2026-06 | Quellrevision 0.0.1: Erstfassung des SF32LB57x-Hardware-Anwendungshinweises; getrennt von diesem Leitfaden versioniert. |
+| 0.0.1 | 2026-10 | Quellrevision 0.0.1: Erstfassung des SF32LB57x-Hardware-Anwendungshinweises; getrennt von diesem Leitfaden versioniert. |
 
 </div>
 

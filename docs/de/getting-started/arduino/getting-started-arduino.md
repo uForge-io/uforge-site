@@ -1,5 +1,6 @@
 ---
 icon: lucide/puzzle
+title: "Erste Schritte mit Arduino"
 description: "Erste Schritte mit dem Beta-ArduinoCore-zephyr von OpenSiFli auf dem SF32LB52 DevKit LCD: Board-Paket installieren, seriellen Test hochladen und Blink ausführen."
 tags:
     - Erste Schritte

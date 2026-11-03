@@ -1,4 +1,5 @@
 ---
+title: "Guide de conception matérielle SF32LB56x — Liste de contrôle du schéma"
 icon: lucide/list-checks
 description: "Liste de revue de schéma point par point du MCU SF32LB56x : vérifications d'alimentation, d'horloge, de RF, de stockage, d'affichage et de fabrication."
 tags:

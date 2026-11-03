@@ -61,6 +61,64 @@ DS5203 V0.3 说明模组采用板载 PCB 天线，也说明另有型号支持通
 
 ## 特性与规格 { #features-and-specifications }
 
+### 合规标识 { #regulatory-markings }
+
+思澈科技（SiFli）提供的 **SF32LB52-MOD-1-N16R8** 和 **SF32LB52-MOD-1-A128R16** 标签图稿列出以下编号及 CE 标志。
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 780px; margin: 1rem auto;">
+<figure style="margin: 0;">
+<a href="assets/SF32LB52-MOD-1/N16R8-label.png"><img src="assets/SF32LB52-MOD-1/N16R8-label.png" alt="SF32LB52-MOD-1-N16R8" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB52-MOD-1-N16R8</figcaption>
+</figure>
+<figure style="margin: 0;">
+<a href="assets/SF32LB52-MOD-1/A128R16-label.jpg"><img src="assets/SF32LB52-MOD-1/A128R16-label.jpg" alt="SF32LB52-MOD-1-A128R16" loading="lazy" style="display: block; width: 100%; height: auto;"></a>
+<figcaption>SF32LB52-MOD-1-A128R16</figcaption>
+</figure>
+</div>
+
+<div align="center" markdown>
+
+*SF32LB52-MOD-1 标签上的标识*
+
+| 项目 | 标签印字 |
+| --- | --- |
+| 标签型号 | `SF32LB52-MOD-1-N16R8`、`SF32LB52-MOD-1-A128R16` |
+| FCC | `2BVUV-SF32LB52` |
+| IC | `35666-SF32LB52` |
+| CMIIT ID | `25J3260UC963(M)` |
+| HVIN | `SF32LB52` |
+| CE 标志 | 两张标签均有 |
+
+</div>
+
+上表内容按所提供的标签转录，未对认证记录或符合性声明作独立核验。请向思澈科技（SiFli）核实适用于具体模组版本的批准文件、天线条件和集成要求。没有相应文件支持时，不要将这些标识用于其他型号。模组标签上的标识不代表最终产品已符合相关法规要求。
+
+### 存储接口与模组型号 { #storage-interfaces-and-module-variants }
+
+<span id="storage-interfaces"></span>
+
+- 部分 SKU 所采用的芯片提供合封 OPI-PSRAM
+- 1 路 MPI（QSPI），用于连接外部 SPI NOR 或 SPI NAND Flash
+- 1 路 SD/SDIO，支持 SD 3.0、SDIO 3.0 与 eMMC
+
+<span id="module-variants"></span>
+
+<div align="center"><em>SF32LB52-MOD-1 模组型号</em></div>
+
+<div align="center" markdown>
+
+| 模组料号 | 芯片 | 可选存储配置 | PSRAM | 温度 | 尺寸 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| SF32LB52-MOD-1-N16R8 | SF32LB525UC6 | 16 MB QSPI-NOR | 8 MB OPI-PSRAM | −40 °C 至 +85 °C | 27.9 × 18.0 × 3.1 mm |
+| SF32LB52-MOD-1-A128R16 | SF32LB527UD6 | 128 MB SPI-NAND | 16 MB OPI-PSRAM | −40 °C 至 +85 °C | 27.9 × 18.0 × 3.1 mm |
+
+</div>
+
+!!! note "定制需求"
+    如需其他模组配置或有定制需求，请[联系 μForge.io](../../about/contact.md)。
+
+思澈科技（SiFli）的[模组型号指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md)和电子纸应用指南也列出了 A128R16，但本页链接的 DS5203 V0.3 技术规格书只列出 N16R8。选择 A128R16 前，请向思澈科技（SiFli）确认当前供货状态和存储配置。
+
 ### 计算与存储 { #compute-and-memory }
 
 - Arm Cortex-M33 STAR-MC1 应用核心（HCPU），最高 240 MHz，最高 370 DMIPS / 984 EEMBC CoreMark
@@ -94,12 +152,6 @@ DS5203 V0.3 说明模组采用板载 PCB 天线，也说明另有型号支持通
 
 1 路 PDM 接口最多可连接两颗数字麦克风，因此 PDM 接口数量不等于麦克风数量。实际连接方式取决于引脚复用和载板布线。对于该模组，若选配的 32.768 kHz 晶体已贴装，PA22/PA23 将无法从模组外部访问；硬件设计指南中给出了另一种 PDM 引脚映射。
 
-### 存储接口 { #storage-interfaces }
-
-- 部分 SKU 所采用的芯片提供合封 OPI-PSRAM
-- 1 路 MPI（QSPI），用于连接外部 SPI NOR 或 SPI NAND Flash
-- 1 路 SD/SDIO，支持 SD 3.0、SDIO 3.0 与 eMMC
-
 ### 安全 { #security }
 
 - AES、HASH 与 CRC 硬件加速器
@@ -115,23 +167,6 @@ DS5203 V0.3 说明模组采用板载 PCB 天线，也说明另有型号支持通
 - VBATS：电池电压检测/ADC 输入，范围为 0–4.7 V。待测电压应直接接入 VBATS，不要使用外部分压电阻。
 - VDD33_VOUT2：模组内 3.3 V LDO 输出，可为外设供电；默认无输出，需经软件配置后启用。最大输出电流为 150 mA，电源轨总电容不得超过 7.4 µF。
 - 68 引脚模组接口；信号引脚可复用为 GPIO、SPI、LCD、MPI、UART、I2C、PWM、SDIO、USB 2.0 FS 以及数字和模拟音频功能
-
-## 模组型号 { #module-variants }
-
-<div align="center"><em>SF32LB52-MOD-1 模组型号</em></div>
-
-<div align="center" markdown>
-
-| 模组料号 | 芯片 | Flash | PSRAM | 温度 | 尺寸 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB52-MOD-1-N16R8 | SF32LB525UC6 | 16 MB QSPI-NOR | 8 MB OPI-PSRAM | −40 °C 至 +85 °C | 27.9 × 18.0 × 3.1 mm |
-| SF32LB52-MOD-1-A128R16 | SF32LB527UD6 | 128 MB SPI-NAND | 16 MB OPI-PSRAM | −40 °C 至 +85 °C | 27.9 × 18.0 × 3.1 mm |
-
-</div>
-
-思澈科技（SiFli）的[模组型号指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md)和电子纸应用指南也列出了 A128R16，但本页链接的 DS5203 V0.3 技术规格书仅列出 N16R8。选择 A128R16 前，请向思澈科技（SiFli）确认当前供货状态及存储配置。
-
-A128R16 的 Flash 标注在官方资料中存在差异：[OpenSiFli 模组型号指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md)将其列为 128 MB SPI-NAND，而思澈科技（SiFli）的[开发板型号指南](https://wiki.sifli.com/board/devkit_guide.html)将对应开发板 SKU 列为 128 MB QSPI-NAND。资料未说明差异是指实装器件还是接口表述。将开发板配置作为模组设计依据前，请按具体板卡版本核对原理图/BOM 中的 Flash 器件和总线模式。
 
 ## 相关产品 { #related-products }
 

@@ -109,7 +109,7 @@ SF32 旨在填补传统微控制器与应用处理器之间的空档。该系列
 
 <div align="center"><em>SF32 微控制器对比</em></div>
 
-下表汇总的是系列级能力，并不表示每个 SKU 均具备表中所有资源。接口支持和资源数量可能因具体型号、封装或配置而异；选型时请核对目标型号的数据手册。
+下表汇总的是系列级能力，并不表示每个 SKU 均具备表中所有资源。接口支持和资源数量可能因具体型号、封装或配置而异；选型时请核对目标型号的数据手册。各系列的最大显示分辨率和面板接口，请参见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
 
 <div align="center" markdown>
 
@@ -122,6 +122,7 @@ SF32 旨在填补传统微控制器与应用处理器之间的空档。该系列
 | 蓝牙 | 经典蓝牙（BT Classic）+ BLE | BLE | 经典蓝牙（BT Classic）+ BLE | 经典蓝牙（BT Classic）+ BLE | 经典蓝牙（BT Classic）+ BLE |
 | 图形加速器 | 2.5D<br>ePicasso 2.0 Lite | 2.5D<br>ePicasso 1.0 | 2.5D<br>ePicasso 2.0 | 2.5D<br>ePicasso 3.0 + eZip 3.0 | 2.5D + 矢量图形<br>ePicasso 2.0 + Vivante GCNanoUltraV |
 | 显示支持 | SPI / DSPI / QSPI / 8080 / EPD / JDI | SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI |
+| 最大显示分辨率 | 512 × 512，RGB888 | 512 × 512，RGB888 | BGA：1024 × 600，RGB888<br>QFN：512 × 512，RGB888 | 1024 × 600，RGB888 | 1280 × 800，RGB565<br>1280 × 720，RGB888 |
 | 音频 ADC | 1× | 无 | 1× | 2× | 2× |
 | 音频 DAC | 1× | 无 | 1× | 1× | 2× |
 | PDM 音频接口 | 1× | 1–2×* | 2× | 2× | 2× |

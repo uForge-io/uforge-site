@@ -77,6 +77,8 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 
 ### 그래픽, 디스플레이, AI
 
+최대 해상도와 패널 인터페이스는 [디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)에서 확인하십시오.
+
 - ePicasso 2.0 2D/2.5D 그래픽 가속기
 - Vivante GCNanoUltraV 벡터 그래픽 엔진
 - eZip 2.0 무손실 그래픽 압축 해제 가속기
@@ -126,7 +128,7 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 
 ## 제품군 변형
 
-현재 SiFli 칩 모델 가이드에는 SF32LB58x 주문 코드 6개가 나열되어 있으며, 모두 BGA256이고 코패키지 메모리 구성은 아래와 같습니다. 구성과 공급 가능 여부는 바뀔 수 있으므로 정확한 주문 코드를 현재 데이터시트 및 승인 업체 목록(AVL)과 대조하여 확인하십시오.
+현재 SiFli 칩 모델 가이드에는 SF32LB58x 주문 코드 3개가 나열되어 있으며, 모두 BGA256이고 코패키지 메모리 구성은 아래와 같습니다. 구성과 공급 가능 여부는 바뀔 수 있으므로 정확한 주문 코드를 현재 데이터시트 및 승인 업체 목록(AVL)과 대조하여 확인하십시오.
 
 <div align="center"><em>SF32LB58x 주문 코드와 코패키지 메모리</em></div>
 
@@ -134,10 +136,7 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 
 | 부품 번호 | 패키지 | 코패키지 메모리 |
 | :--- | :--- | :--- |
-| SF32LB580VNN36 | BGA256 | 1 MB 부트 NOR 플래시, MPI1 또는 MPI2에는 코패키지 메모리 없음 |
-| SF32LB581VCN36 | BGA256 | 1 MB 부트 NOR 플래시 + MPI1의 8 MB OPI-PSRAM |
 | SF32LB583VCC36 | BGA256 | 1 MB 부트 NOR 플래시 + MPI1과 MPI2의 2 × 8 MB OPI-PSRAM |
-| SF32LB585V5E56 | BGA256 | 4 MB 부트 NOR 플래시 + MPI1의 4 MB NOR 플래시 + MPI2의 32 MB HPI-PSRAM |
 | SF32LB586VDD36 | BGA256 | 1 MB 부트 NOR 플래시 + MPI1과 MPI2의 2 × 16 MB HPI-PSRAM |
 | SF32LB587VEE56 | BGA256 | 4 MB 부트 NOR 플래시 + MPI1과 MPI2의 2 × 32 MB HPI-PSRAM |
 
@@ -162,20 +161,23 @@ SF32LB58x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 <!-- uf-faq:start -->
 ## 자주 묻는 질문 { #frequently-asked-questions }
 
-**SF32LB58x의 주요 사양은 무엇인가요?**
-SF32LB58x는 애플리케이션 CPU(2× Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @48/96 MHz, 사용자 프로그래밍 가능 코어), 내장 SRAM 3.7 MB, 듀얼 모드 Bluetooth(클래식 + BLE)를 갖췄습니다. 그래픽: ePicasso 2.0 + Vivante GCNanoUltraV (vector). 패키지: BGA256(8.5 × 6.5 mm). USB 2.0 HS. 제품군 수준의 값이므로 정확한 부품 번호의 데이터시트를 확인하세요.
+**SF32LB58x의 주요 사양은 무엇입니까?**
+SF32LB58x는 애플리케이션 CPU(2× Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @48/96 MHz, 사용자 프로그래밍 가능)를 갖추고 있으며, 내장 SRAM은 3.7 MB입니다. Bluetooth 모드는 듀얼 모드(Classic Bluetooth + BLE)입니다. 그래픽: ePicasso 2.0 + Vivante GCNanoUltraV (벡터 그래픽). 패키지는 BGA256이며, 크기는 8.5 × 6.5 mm입니다. USB는 2.0 HS를 지원합니다.
 
-**SF32LB58x는 어떤 디스플레이 인터페이스를 지원하나요?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. 지원 여부는 부품 번호와 패키지에 따라 다릅니다.
+**SF32LB58x는 어떤 디스플레이 인터페이스를 지원합니까?**
+지원하는 인터페이스는 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI입니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
-**SF32LB58x는 패키지 내 메모리를 얼마나 제공하나요?**
-부품 번호에 따라 패키지 내 PSRAM 최대 32 MB + 32 MB, 패키지 내 NOR Flash 최대 8 MB를 제공합니다.
+**SF32LB58x가 지원하는 최대 디스플레이 해상도는 얼마입니까?**
+RGB565 색상에서는 최대 1280 × 800, RGB888 색상에서는 최대 1280 × 720 해상도를 지원합니다. MIPI-DSI를 사용합니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
-**SF32LB58x에는 어떤 공급 전압이 필요한가요?**
-변형에 따라 1.71–3.63 V. 정확한 범위는 데이터시트에서 확인하세요.
+**SF32LB58x는 패키지 내 메모리를 얼마나 제공합니까?**
+패키지 내 PSRAM은 최대 32 MB + 32 MB, NOR 플래시는 최대 8 MB를 제공합니다.
 
-**SF32LB58x로 하드웨어 설계를 시작하려면 어떻게 하나요?**
-먼저 [SF32LB58x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하세요.
+**SF32LB58x에는 어떤 공급 전압이 필요합니까?**
+공급 전압은 1.71–3.63 V입니다.
+
+**SF32LB58x로 하드웨어 설계를 시작하려면 어떻게 해야 합니까?**
+먼저 [SF32LB58x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하십시오.
 <!-- uf-faq:end -->
 
 ## 관련 제품

@@ -1,4 +1,5 @@
 ---
+title: "Guia de projeto de hardware do SF32LB56x — checklist do esquemático"
 icon: lucide/list-checks
 description: "Checklist detalhado para revisar o esquemático do MCU SF32LB56x, cobrindo alimentação, clock, RF, armazenamento, display e produção."
 tags:

@@ -1,5 +1,6 @@
 ---
 icon: lucide/puzzle
+title: "Arduino 入门"
 description: "在 SF32LB52 DevKit LCD 上首次运行 OpenSiFli 的测试版 ArduinoCore-zephyr：安装开发板包、上传串口测试程序，并运行 Blink。"
 tags:
     - 快速开始

@@ -50,28 +50,31 @@ Bring-up failures most often trace back to the minimum system, power family, boo
 
 SF32LB57x has multiple minimum-system schematic variants. Use the one that matches both package and power family; do not mix battery-powered and 3.3 V supply variants.
 
-![Figure 5.1-1: QFN68L Battery-Powered Minimum System](../../sf32-products/chips/assets/57x/SF32LB57-UH-MHS-SCH.svg){ width="100%" loading="lazy" }
+!!! warning "V2 reference schematics still require part-specific review"
+    The V2 figures retain SiFli’s original annotations, including examples that supply sensors from `VDD33_VOUT1`, connect `VSYS` to additional domains, or tie `VDDIOA` to 3.3 V. These do not fully agree with the retained load checklist or selectable I/O voltage and must not be copied as universal power arrangements. Review each connection against Section 5.2, the exact orderable part, and the actual loads.
+
+![Figure 5.1-1: QFN68L Battery-Powered Minimum System](../../sf32-products/chips/assets/57x/SF32LB57-UH-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 5.1-1: QFN68L Battery-Powered Minimum System</em></div>
 
-![Figure 5.1-2: QFN68L 3.3 V Supply Minimum System](../../sf32-products/chips/assets/57x/SF32LB57-UL-MHS-SCH.svg){ width="100%" loading="lazy" }
+![Figure 5.1-2: QFN68L 3.3 V Supply Minimum System](../../sf32-products/chips/assets/57x/SF32LB57-UL-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 5.1-2: QFN68L 3.3 V Supply Minimum System</em></div>
 
-![Figure 5.1-3: QFN80L Battery-Powered Minimum System](../../sf32-products/chips/assets/57x/SF32LB57-YH-MHS-SCH.svg){ width="100%" loading="lazy" }
+![Figure 5.1-3: QFN80L Battery-Powered Minimum System](../../sf32-products/chips/assets/57x/SF32LB57-YH-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 5.1-3: QFN80L Battery-Powered Minimum System</em></div>
 
-![Figure 5.1-4: QFN80L 3.3 V Supply Minimum System](../../sf32-products/chips/assets/57x/SF32LB57-YL-MHS-SCH.svg){ width="100%" loading="lazy" }
+![Figure 5.1-4: QFN80L 3.3 V Supply Minimum System](../../sf32-products/chips/assets/57x/SF32LB57-YL-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 5.1-4: QFN80L 3.3 V Supply Minimum System</em></div>
 
 <!-- BGA-ONLY -->
-![Figure 5.1-5: BGA112 Battery-Powered Minimum System](../../sf32-products/chips/assets/57x/SF32LB57-VH-MHS-SCH.svg){ width="100%" loading="lazy" }
+![Figure 5.1-5: BGA112 Battery-Powered Minimum System](../../sf32-products/chips/assets/57x/SF32LB57-VH-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 5.1-5: BGA112 Battery-Powered Minimum System</em></div>
 
-![Figure 5.1-6: BGA112 3.3 V Supply Minimum System](../../sf32-products/chips/assets/57x/SF32LB57-VL-MHS-SCH.svg){ width="100%" loading="lazy" }
+![Figure 5.1-6: BGA112 3.3 V Supply Minimum System](../../sf32-products/chips/assets/57x/SF32LB57-VL-MHS-SCH-V2.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 5.1-6: BGA112 3.3 V Supply Minimum System</em></div>
 <!-- /BGA-ONLY -->
@@ -185,7 +188,7 @@ Key requirements:
 
 #### 5.2.3. 3.3 V Supply Variants
 
-3.3 V variants typically use an external 3.3 V rail for `PVDD`, `AVDD33`, `AVDD_BRF`, `AVDD33_AUD`, `VDDIOA`, and related domains.
+3.3 V supply variants use external 3.3 V for `PVDD`, `AVDD33`, `AVDD_BRF`, `AVDD33_AUD`, and related domains. Select 1.8 V or 3.3 V for `VDDIOA` according to the exact orderable part.
 
 Key requirements:
 
@@ -268,8 +271,8 @@ OVP guidance:
 - For regulated-output OVP, SiFli lists SGM4064YDE8G and LP5305AQVF. The application text specifies 4.5–5.4 V, while its checklist specifies 4.7–5.4 V. Until clarified, use the narrower 4.7–5.4 V range, with load capability of at least 0.5 A and an overcurrent threshold of at least 0.7 A.
 - Route the charger input through TVS/OVP protection before it reaches the chip.
 
-!!! warning "Source range discrepancy"
-    The power-pin table and checklist specify a `VBUS` input range of 4.6–5.5 V, while the OVP-selection text says 4.5–5.5 V. Until SiFli clarifies the difference, design for 4.6 V as the minimum operating input.
+!!! warning "VBUS range discrepancy"
+    The current package power tables and OVP text specify 4.5–5.5 V for `VBUS`; the checklist still requires 4.6–5.5 V. Until SiFli confirms the applicable limit, design to the stricter 4.6 V minimum.
 
 #### 5.2.7. Low-Power Supply Strategy
 
@@ -342,12 +345,12 @@ The SF32LB57x power requirements differ by package and power family. The must-ch
 
 | Design Item | Battery-Powered Variants | 3.3 V Supply Variants |
 |:------------|:-------------------------|:----------------------|
-| Main power input | The pin table and checklist specify `VBUS` at 4.6–5.5 V. The `VBAT` pin range is 3.45–4.7 V; the checklist specifies 4.2–4.45 V rated batteries. `VCC` operating range is 3.45–4.7 V, with a 3.45 V hardware boot threshold and 2.7 V hardware shutdown threshold. The default software low-battery threshold is 3.48 V; for a constant bench supply, use 3.6–4.7 V, with 3.8 V recommended. | `PVDD` / `PVDD_PMU` is 2.97–3.63 V; `VBATS` is only for battery-voltage sensing. |
-| Analog and RF supplies | `AVDD_BRF` is supplied by `VSYS`; `AVDD33_AUD` is supplied by `VDD33_VOUT1`. | `AVDD33` / `AVDD33_ANA`, `AVDD_BRF`, `AVDD33_AUD`, and `VDDIOA` are supplied by external 3.3 V and should use star routing. |
+| Main power input | Package tables: `VBUS` 4.5–5.5 V, `VBAT`/`VCC` 3.0–4.7 V. Checklist: `VBUS` 4.6–5.5 V, `VCC` 3.45–4.7 V, power-on/shutdown 3.45 V/2.7 V. Power-table footnotes instead give 3.5 V ±10% for power-on. Use 3.6–4.7 V for a constant supply, preferably 3.8 V; the software low-battery threshold is 3.48 V. Confirm the discrepancies rather than widening the operating range. | `PVDD` / `PVDD_PMU` is 2.97–3.63 V; `VBATS` is only for battery-voltage sensing. |
+| Analog and RF supplies | `AVDD_BRF` is supplied by `VSYS`; `AVDD33_AUD` is supplied by `VDD33_VOUT1`. | Star-route external 3.3 V to `AVDD33` / `AVDD33_ANA`, `AVDD_BRF`, and `AVDD33_AUD`; select 1.8 V or 3.3 V for `VDDIOA` according to the exact part. |
 | Internal LDO outputs | `VDD_VOUT1`, `VDD_VOUT2`, `VDD_RET`, `VDD_RTC`, and `VDD18_VOUT` are internal supplies and should not power ordinary external peripherals. | Same; `VDD18_VOUT` is only for internal/package-integrated PSRAM-related supply, not external 1.8 V peripherals. |
 | `VDD33_VOUT1` | 3.3 V, 150 mA after startup, enabled by default; soft-start load current must not exceed 30 mA, or the LDO can fail to start. The power checklist permits only co-packaged/external NOR/NAND Flash and `AVDD33_AUD`, and prohibits other peripherals. | Not applicable. |
 | `VDD33_VOUT2` | 3.3 V, 150 mA, disabled by default and enabled by software; load current must not exceed 30 mA during soft start. The source checklist says software can disable this soft-start current limit; if it is disabled, verify that the peripheral's inrush current is compatible with the recommended supply conditions. | Not applicable. |
-| `VDDIOSB` / `VDDIOSA` | QFN80L<!-- BGA-ONLY --> exposes `VDDIOSB`, whose voltage follows the co-packaged MPI device: 1.8 V for PSRAM or 3.3 V for NOR Flash. BGA112<!-- /BGA-ONLY --> also exposes `VDDIOSA`, fixed at 1.8 V from `VDD18_VOUT`; its `VDDIOSB` follows the co-packaged device (1.8 V for PSRAM or 3.3 V for NOR Flash). Confirm the exact orderable part number. | Same; confirm against the exact orderable part number. |
+| `VDDIOSB` / `VDDIOSA` | The QFN80L battery table exposes `VDD33_VOUT1`, not `VDDIOSB`.<!-- BGA-ONLY --> BGA112 exposes `VDDIOSA` (1.8 V from `VDD18_VOUT`) and `VDDIOSB` (1.8 V from `VDD18_VOUT` for co-packaged PSRAM, or 3.3 V from `VDD33_VOUT1` for co-packaged NOR Flash).<!-- /BGA-ONLY --> | On QFN80L<!-- BGA-ONLY --> and BGA112<!-- /BGA-ONLY -->, supply `VDDIOSB` from `VDD18_VOUT` at 1.8 V for co-packaged PSRAM, or externally at 3.3 V for NOR Flash.<!-- BGA-ONLY --> BGA112 `VDDIOSA` connects to `VDD18_VOUT`.<!-- /BGA-ONLY --> |
 
 </div>
 
@@ -471,22 +474,25 @@ Record firmware version, supply voltage, battery-simulator setting, peripheral c
 
 Use these tables for pin-by-pin schematic review. Each table lists every power pin's minimum, typical, and maximum voltage and maximum current for one package and power-family combination. Select the table that matches the exact orderable part number; do not mix rows from different packages or power families.
 
+!!! warning "Scope of the power tables and checklist"
+    The values below follow SiFli's current package power tables. They list 4.5 V minimum for `VBUS` and 3.0 V for `VBAT`/`VCC`; the checklist instead requires 4.6–5.5 V on `VBUS` and 3.45–4.7 V on `VCC`, with 3.45 V power-on and 2.7 V shutdown thresholds. The power-table footnotes give a different power-on voltage of 3.5 V ±10%. `VSYS` is tabulated at 3.3 V but described in the same row as 3.0 V. The 3.3 V entry for `BUCK_LX` is the source label for a switching node, not a regulated DC output. Resolve these differences for the exact orderable part before sign-off; a 3.0 V table minimum is not a guaranteed startup voltage.
+
 <div align="center"><em>Table 5.2-11: QFN68L Battery-Powered Variant Power Pin Reference</em></div>
 
 <div align="center" markdown>
 
 | Power Pin | Min (V) | Typ (V) | Max (V) | Max Current (mA) | Description |
 |:---|:---|:---|:---|:---|:---|
-| `VBUS` | 4.6 | 5.0 | 5.5 | 400 | VBUS power input; supplies the internal charging module. |
-| `VBAT` | 3.45 | - | 4.7 | 400 | Battery connection; an internal GPADC channel also senses battery voltage on this pin. |
-| `VSYS` | - | 3.0 | - | 150 | Internal 3.0 V supply output; add an external capacitor to ground. Supplies `AVDD_BRF`. |
-| `BUCK_LX` | - | 1.25 | - | 50 | BUCK inductor switching node; connect one end of the inductor. |
+| `VBUS` | 4.5 | 5.0 | 5.5 | 400 | VBUS power input; supplies the internal charging module. |
+| `VBAT` | 3.0 | - | 4.7 | 400 | Battery connection; an internal GPADC channel also senses battery voltage on this pin. |
+| `VSYS` | - | 3.3 | - | 150 | Internal 3.0 V supply output; add an external capacitor to ground. Supplies `AVDD_BRF`. |
+| `BUCK_LX` | - | 3.3 | - | 50 | BUCK inductor switching node; connect one end of the inductor. |
 | `BUCK_FB` | - | 1.25 | - | 50 | BUCK feedback; connect the other end of the inductor and a capacitor to ground. |
 | `VDD_VOUT1` | - | 1.1 | - | 50 | Internal LDO output; add an external capacitor. Internal supply only — do not power external peripherals. |
 | `VDD_VOUT2` | - | 0.9 | - | 20 | Internal LDO output; add an external capacitor. Internal supply only — do not power external peripherals. |
 | `VDD_RET` | - | 0.9 | - | 1 | Internal LDO output; add an external capacitor. Internal supply only — do not power external peripherals. |
 | `VDD_RTC` | - | 1.1 | - | 1 | Internal LDO output; add an external capacitor. Internal supply only — do not power external peripherals. |
-| `VCC` | 3.45 | - | 4.7 | 400 | System power input; connect to the battery. Hardware boot threshold is 3.45 V and hardware shutdown threshold is 2.7 V; the default software low-battery threshold is 3.48 V. For a constant-voltage bench supply, use 3.6 V to 4.7 V, with 3.8 V recommended. |
+| `VCC` | 3.0 | - | 4.7 | 200 | System power input; connect to the battery. Table footnotes give 3.5 V ±10% for power-on and a default software low-battery threshold of 3.48 V. Use 3.6–4.7 V for a constant supply, preferably 3.8 V; see this section’s warning for checklist differences. |
 | `VDD18_VOUT` | - | 1.8 | - | 30 | 1.8 V LDO output; internal supply only, add a capacitor to ground, do not power external peripherals. |
 | `VDD33_VOUT1` | - | 3.3 | - | 150 | 3.3 V LDO output 1; add a capacitor to ground. 150 mA load capability after startup; enabled by default. Soft-start load current must not exceed 30 mA or the LDO can fail to start. Powers packaged/external Flash and `AVDD33_AUD`. |
 | `VDD33_VOUT2` | - | 3.3 | - | 150 | 3.3 V LDO output 2; disabled by default, requires software configuration to enable. 150 mA load capability after startup; soft-start load current must not exceed 30 mA. Powers the motor or LCD panel. |
@@ -494,7 +500,7 @@ Use these tables for pin-by-pin schematic review. Each table lists every power p
 | `AVDD_BRF` | 2.97 | 3.3 | 3.63 | 100 | RF supply input; connect to `VSYS`. |
 | `AUD_VREF` | - | - | - | - | Audio reference voltage input; add a capacitor to ground only, do not drive externally. |
 | `AVDD33_AUD` | 2.97 | 3.3 | 3.63 | 50 | Audio supply input; connect to `VDD33_VOUT1`. |
-| `MIC_BIAS` | 1.4 | - | 2.8 | - | Microphone bias output; connect to the microphone supply. |
+| `MIC_BIAS` | 1.4 | - | 2.8 | 2 | Microphone bias output; connect to the microphone supply. |
 
 </div>
 
@@ -504,10 +510,10 @@ Use these tables for pin-by-pin schematic review. Each table lists every power p
 
 | Power Pin | Min (V) | Typ (V) | Max (V) | Max Current (mA) | Description |
 |:---|:---|:---|:---|:---|:---|
-| `VDDIOA` | 2.97 | 3.3 | 3.63 | 100 | GPIO supply input; this reference table shows the 3.3 V configuration. Confirm the I/O voltage for the exact orderable part. |
+| `VDDIOA` | 1.62 | 1.8 / 3.3 | 3.63 | 100 | GPIO supply input; connect to 1.8 V or 3.3 V as specified for the exact orderable part. |
 | `VBATS` | 0 | - | 4.7 | 1 | Battery-voltage sensing input; an internal GPADC channel senses battery voltage on this pin. |
-| `PVDD` | 2.97 | 3.3 | 3.63 | 400 | PMU supply input; connect to an external 3.3 V supply. |
-| `BUCK_LX` | - | 1.25 | - | 50 | BUCK inductor switching node; connect one end of the inductor. |
+| `PVDD` | 2.97 | 3.3 | 3.63 | 200 | PMU supply input; connect to an external 3.3 V supply. |
+| `BUCK_LX` | - | 3.3 | - | 50 | BUCK inductor switching node; connect one end of the inductor. |
 | `BUCK_FB` | - | 1.25 | - | 50 | BUCK feedback; connect the other end of the inductor and a capacitor to ground. |
 | `VDD_VOUT1` | - | 1.1 | - | 50 | Internal LDO output; internal supply only, do not power external peripherals. |
 | `VDD_VOUT2` | - | 0.9 | - | 20 | Internal LDO output; internal supply only, do not power external peripherals. |
@@ -519,15 +525,15 @@ Use these tables for pin-by-pin schematic review. Each table lists every power p
 | `AVDD_BRF` | 2.97 | 3.3 | 3.63 | 100 | RF supply input; connect to an external 3.3 V supply. |
 | `AUD_VREF` | - | - | - | - | Audio reference voltage input; add a capacitor to ground only, do not drive externally. |
 | `AVDD33_AUD` | 2.97 | 3.3 | 3.63 | 50 | Audio supply input; connect to an external 3.3 V supply. |
-| `MIC_BIAS` | 1.4 | - | 2.8 | - | Microphone bias output; connect to the microphone supply. |
+| `MIC_BIAS` | 1.4 | - | 2.8 | 2 | Microphone bias output; connect to the microphone supply. |
 
 </div>
 
-!!! warning "VDDIOA configuration for SF32LB57ZUN3N6"
-    `SF32LB57ZUN3N6` supports either 1.8 V or 3.3 V on `VDDIOA`. The 2.97 V to 3.63 V range in the generic QFN68L 3.3 V supply table does not apply to 1.8 V operation; use the electrical limits for the exact orderable part when selecting the 1.8 V rail.
+!!! note "VDDIOA voltage and Flash clock"
+    `SF32LB57ZUN3N6` supports 1.8 V or 3.3 V on `VDDIOA`; confirm the applicable limits for the orderable part. SiFli additionally specifies that, for QFN68L 3.3 V supply variants, the internal Flash read/write clock must be below 80 MHz at 1.8 V `VDDIOA`; at 3.3 V, the default 104 MHz setting may be used.
 
 !!! note
-    `PVDD`, `AVDD33`, `AVDD_BRF`, `AVDD33_AUD`, and `VDDIOA` all connect to the same external 3.3 V rail. Use star routing — bring each pin's trace out independently from the source rather than sharing a common upstream trace segment.
+    Supply `PVDD`, `AVDD33`, `AVDD_BRF`, and `AVDD33_AUD` from external 3.3 V using independent star-routed branches. Select 1.8 V or 3.3 V for `VDDIOA` according to the exact orderable part; a 3.3 V main supply does not require 3.3 V I/O.
 
 <div align="center"><em>Table 5.2-13: QFN80L Battery-Powered Variant Power Pin Reference</em></div>
 
@@ -535,29 +541,27 @@ Use these tables for pin-by-pin schematic review. Each table lists every power p
 
 | Power Pin | Min (V) | Typ (V) | Max (V) | Max Current (mA) | Description |
 |:---|:---|:---|:---|:---|:---|
-| `VDDIOA` | 2.97 | 3.3 | 3.63 | 100 | GPIO supply input; connect to an external 3.3 V supply. |
+| `VDDIOA` | 1.62 | 1.8 / 3.3 | 3.63 | 100 | GPIO supply input; connect to 1.8 V or 3.3 V as specified for the exact orderable part. |
 | `VBATS` | 0 | - | 4.7 | 1 | Battery-voltage sensing input; an internal GPADC channel senses battery voltage on this pin. |
-| `VSYS` | - | 3.0 | - | 150 | Internal 3.0 V supply output; add an external capacitor to ground. Supplies `AVDD_BRF`. |
-| `BUCK_LX` | - | 1.25 | - | 50 | BUCK inductor switching node; connect one end of the inductor. |
+| `VSYS` | - | 3.3 | - | 150 | Internal 3.0 V supply output; add an external capacitor to ground. Supplies `AVDD_BRF`. |
+| `BUCK_LX` | - | 3.3 | - | 50 | BUCK inductor switching node; connect one end of the inductor. |
 | `BUCK_FB` | - | 1.25 | - | 50 | BUCK feedback; connect the other end of the inductor and a capacitor to ground. |
 | `VDD_VOUT1` | - | 1.1 | - | 50 | Internal LDO output; internal supply only, do not power external peripherals. |
 | `VDD_VOUT2` | - | 0.9 | - | 20 | Internal LDO output; internal supply only, do not power external peripherals. |
 | `VDD_RET` | - | 0.9 | - | 1 | Internal LDO output; internal supply only, do not power external peripherals. |
 | `VDD_RTC` | - | 1.1 | - | 1 | Internal LDO output; internal supply only, do not power external peripherals. |
 | `AVDD33` | 2.97 | 3.3 | 3.63 | 20 | Analog supply input; connect to an external 3.3 V supply. |
-| `VCC` | 3.45 | - | 4.7 | 400 | System power input; connect to the battery. Hardware boot threshold is 3.45 V and hardware shutdown threshold is 2.7 V; the default software low-battery threshold is 3.48 V. For a constant-voltage bench supply, use 3.6 V to 4.7 V, with 3.8 V recommended. |
+| `VCC` | 3.0 | - | 4.7 | 200 | System power input; connect to the battery. Table footnotes give 3.5 V ±10% for power-on and a default software low-battery threshold of 3.48 V. Use 3.6–4.7 V for a constant supply, preferably 3.8 V; see this section’s warning for checklist differences. |
 | `VDD18_VOUT` | - | 1.8 | - | 30 | 1.8 V LDO output; internal supply only, do not power external peripherals. |
-| `VDDIOSB` | - | 1.8 / 3.3 | - | 30 | SIP SB I/O supply input; voltage depends on the exact part number. For PSRAM co-packaged on MPI2 or MPI3, connect to `VDD18_VOUT` (1.8 V); for co-packaged NOR Flash, supply this pin externally at 3.3 V. |
+| `VDD33_VOUT1` | - | 3.3 | - | 150 | 3.3 V LDO output 1; add a capacitor to ground. 150 mA load capability after startup; enabled by default. Soft-start load current must not exceed 30 mA or the LDO can fail to start. Powers packaged/external Flash and `AVDD33_AUD`. |
 | `GPADC_VREF` | - | - | - | - | GPADC reference input; add a capacitor to ground only, do not drive externally. |
 | `AVDD_BRF` | 2.97 | 3.3 | 3.63 | 100 | RF supply input; connect to `VSYS`. |
 | `AUD_VREF` | - | - | - | - | Audio reference voltage input; add a capacitor to ground only, do not drive externally. |
 | `AVDD33_AUD` | 2.97 | 3.3 | 3.63 | 50 | Audio supply input; connect to `VDD33_VOUT1`. |
-| `MIC_BIAS` | 1.4 | - | 2.8 | - | Microphone bias output; connect to the microphone supply. |
+| `MIC_BIAS` | 1.4 | - | 2.8 | 2 | Microphone bias output; connect to the microphone supply. |
 
 </div>
 
-!!! warning "QFN80L power-table inconsistency in the source"
-    The QFN80L battery-powered pinout figure in the overview labels a pin `VDD33_VOUT1`, while SiFli's QFN80L battery-supply table lists `VDDIOSB` and does not reconcile the two labels. That table also omits `VDD33_VOUT1` and `VDD33_VOUT2`, although the general power-architecture diagram shows both rails and the same package table says `AVDD33_AUD` is supplied by `VDD33_VOUT1`. The source does not clarify whether these outputs are externally accessible on this package. Verify the exact part's pinout and official reference schematic before assigning either rail.
 
 <div align="center"><em>Table 5.2-14: QFN80L 3.3 V Supply Variant Power Pin Reference</em></div>
 
@@ -565,28 +569,28 @@ Use these tables for pin-by-pin schematic review. Each table lists every power p
 
 | Power Pin | Min (V) | Typ (V) | Max (V) | Max Current (mA) | Description |
 |:---|:---|:---|:---|:---|:---|
-| `VDDIOA` | 2.97 | 3.3 | 3.63 | 100 | GPIO supply input; connect to an external 3.3 V supply. |
+| `VDDIOA` | 1.62 | 3.3 | 3.63 | 100 | GPIO supply input; connect to 1.8 V or 3.3 V as specified for the exact orderable part. |
 | `VBATS` | 0 | - | 4.7 | 1 | Battery-voltage sensing input; an internal GPADC channel senses battery voltage on this pin. |
-| `BUCK_LX` | - | 1.25 | - | 50 | BUCK inductor switching node; connect one end of the inductor. |
+| `BUCK_LX` | - | 3.3 | - | 50 | BUCK inductor switching node; connect one end of the inductor. |
 | `BUCK_FB` | - | 1.25 | - | 50 | BUCK feedback; connect the other end of the inductor and a capacitor to ground. |
 | `VDD_VOUT1` | - | 1.1 | - | 50 | Internal LDO output; internal supply only, do not power external peripherals. |
 | `VDD_VOUT2` | - | 0.9 | - | 20 | Internal LDO output; internal supply only, do not power external peripherals. |
 | `VDD_RET` | - | 0.9 | - | 1 | Internal LDO output; internal supply only, do not power external peripherals. |
 | `VDD_RTC` | - | 1.1 | - | 1 | Internal LDO output; internal supply only, do not power external peripherals. |
 | `AVDD33` | 2.97 | 3.3 | 3.63 | 20 | Analog supply input; connect to an external 3.3 V supply. |
-| `PVDD` | 2.97 | 3.3 | 3.63 | 400 | PMU supply input; connect to an external 3.3 V supply. |
+| `PVDD` | 2.97 | 3.3 | 3.63 | 200 | PMU supply input; connect to an external 3.3 V supply. |
 | `VDD18_VOUT` | - | 1.8 | - | 30 | 1.8 V LDO output; internal supply only, do not power external peripherals. |
 | `VDDIOSB` | - | 1.8 / 3.3 | - | 30 | SIP SB IO supply input; voltage depends on the exact part number. If MPI2/MPI3 is packaged with PSRAM, connect to the 1.8 V `VDD18_VOUT`; if packaged with NOR Flash, supply this pin externally with 3.3 V. |
 | `GPADC_VREF` | - | - | - | - | GPADC reference input; add a capacitor to ground only, do not drive externally. |
 | `AVDD_BRF` | 2.97 | 3.3 | 3.63 | 100 | RF supply input; connect to an external 3.3 V supply. |
 | `AUD_VREF` | - | - | - | - | Audio reference voltage input; add a capacitor to ground only, do not drive externally. |
 | `AVDD33_AUD` | 2.97 | 3.3 | 3.63 | 50 | Audio supply input; connect to an external 3.3 V supply. |
-| `MIC_BIAS` | 1.4 | - | 2.8 | - | Microphone bias output; connect to the microphone supply. |
+| `MIC_BIAS` | 1.4 | - | 2.8 | 2 | Microphone bias output; connect to the microphone supply. |
 
 </div>
 
 !!! note
-    `PVDD`, `AVDD33`, `AVDD_BRF`, `AVDD33_AUD`, and `VDDIOA` all connect to the same external 3.3 V rail. Use star routing — bring each pin's trace out independently from the source rather than sharing a common upstream trace segment.
+    Supply `PVDD`, `AVDD33`, `AVDD_BRF`, and `AVDD33_AUD` from external 3.3 V using independent star-routed branches. Select 1.8 V or 3.3 V for `VDDIOA` according to the exact orderable part; a 3.3 V main supply does not require 3.3 V I/O.
 
 <!-- BGA-ONLY -->
 <div align="center"><em>Table 5.2-15: BGA112 Battery-Powered Variant Power Pin Reference</em></div>
@@ -595,22 +599,22 @@ Use these tables for pin-by-pin schematic review. Each table lists every power p
 
 | Power Pin | Min (V) | Typ (V) | Max (V) | Max Current (mA) | Description |
 |:---|:---|:---|:---|:---|:---|
-| `VBUS` | 4.6 | 5.0 | 5.5 | 400 | VBUS power input; supplies the internal charging module. |
-| `VBAT` | 3.45 | - | 4.7 | 400 | Battery connection; an internal GPADC channel also senses battery voltage on this pin. |
-| `VSYS` | - | 3.0 | - | 150 | Internal 3.0 V supply output; add an external capacitor to ground. Supplies `AVDD_BRF`. |
-| `BUCK_LX` | - | 1.25 | - | 50 | BUCK inductor switching node; connect one end of the inductor. |
+| `VBUS` | 4.5 | 5.0 | 5.5 | 400 | VBUS power input; supplies the internal charging module. |
+| `VBAT` | 3.0 | - | 4.7 | 400 | Battery connection; an internal GPADC channel also senses battery voltage on this pin. |
+| `VSYS` | - | 3.3 | - | 150 | Internal 3.0 V supply output; add an external capacitor to ground. Supplies `AVDD_BRF`. |
+| `BUCK_LX` | - | 3.3 | - | 50 | BUCK inductor switching node; connect one end of the inductor. |
 | `BUCK_FB` | - | 1.25 | - | 50 | BUCK output feedback; connect the other end of the inductor and a capacitor to ground. |
 | `VDD_VOUT1` | - | 1.1 | - | 50 | Internal LDO output; add an external capacitor; internal supply only. |
 | `VDD_VOUT2` | - | 0.9 | - | 20 | Internal LDO output; add an external capacitor; internal supply only. |
 | `VDD_RET` | - | 0.9 | - | 1 | Internal LDO output; add an external capacitor; internal supply only. |
 | `VDD_RTC` | - | 1.1 | - | 1 | Internal LDO output; add an external capacitor; internal supply only. |
-| `VCC` | 3.45 | - | 4.7 | 400 | System power input; connect to the battery. The default software low-battery threshold is 3.48 V; for a constant-voltage supply, use 3.6–4.7 V, with 3.8 V recommended. |
+| `VCC` | 3.0 | - | 4.7 | 200 | System power input; connect to the battery. Table footnotes give 3.5 V ±10% for power-on and a default software low-battery threshold of 3.48 V. Use 3.6–4.7 V for a constant supply, preferably 3.8 V; see this section’s warning for checklist differences. |
 | `VDD18_VOUT` | - | 1.8 | - | 30 | 1.8 V LDO output; internal supply only; add a capacitor to ground. |
 | `VDD33_VOUT1` | - | 3.3 | - | 150 | 3.3 V LDO output 1; enabled by default. Limit soft-start load to 30 mA; load capability after startup is 150 mA. |
 | `VDD33_VOUT2` | - | 3.3 | - | 150 | 3.3 V LDO output 2; disabled by default and enabled by software. Limit soft-start load to 30 mA; load capability after startup is 150 mA. |
 | `PVSS_PMU` | - | - | - | - | PMU power ground. |
 | `AVSS_PMU` | - | - | - | - | PMU analog ground. |
-| `VDDIOA` | 2.97 | 1.8 / 3.3 | 3.63 | 100 | GPIO supply input; connect to 1.8 V or 3.3 V as defined by the exact part number. |
+| `VDDIOA` | 1.62 | 1.8 / 3.3 | 3.63 | 100 | GPIO supply input; connect to 1.8 V or 3.3 V as specified for the exact orderable part. |
 | `VDDIOSA` | - | 1.8 | - | 30 | Co-packaged-memory interface IO supply input; connect to `VDD18_VOUT`. |
 | `VDDIOSB` | - | 1.8 / 3.3 | - | 30 | Co-packaged-memory interface I/O supply input; voltage depends on the exact part number. For co-packaged PSRAM, connect to `VDD18_VOUT` (1.8 V); for co-packaged NOR Flash, connect to `VDD33_VOUT1` (3.3 V). |
 | `AVDD33_ANA` | 2.97 | 3.3 | 3.63 | 20 | Analog supply input; connect to 3.3 V. |
@@ -623,7 +627,7 @@ Use these tables for pin-by-pin schematic review. Each table lists every power p
 | `AUD_VREF_GND` | - | - | - | - | Audio ground. |
 | `AVDD33_AUD` | 2.97 | 3.3 | 3.63 | 50 | Audio supply input; connect to `VDD33_VOUT1`. |
 | `AVSS33_AUD` | - | - | - | - | Audio ground. |
-| `MIC_BIAS` | 1.4 | - | 2.8 | - | Microphone-bias output; connect to the microphone supply. |
+| `MIC_BIAS` | 1.4 | - | 2.8 | 2 | Microphone-bias output; connect to the microphone supply. |
 
 </div>
 
@@ -634,17 +638,17 @@ Use these tables for pin-by-pin schematic review. Each table lists every power p
 | Power Pin | Min (V) | Typ (V) | Max (V) | Max Current (mA) | Description |
 |:---|:---|:---|:---|:---|:---|
 | `VBATS` | 0 | - | 4.7 | 1 | Battery-voltage sensing input; an internal GPADC channel senses battery voltage on this pin. |
-| `BUCK_LX` | - | 1.25 | - | 50 | BUCK inductor switching node; connect one end of the inductor. |
+| `BUCK_LX` | - | 3.3 | - | 50 | BUCK inductor switching node; connect one end of the inductor. |
 | `BUCK_FB` | - | 1.25 | - | 50 | BUCK output feedback; connect the other end of the inductor and a capacitor to ground. |
 | `VDD_VOUT1` | - | 1.1 | - | 50 | Internal LDO output; add an external capacitor; internal supply only. |
 | `VDD_VOUT2` | - | 0.9 | - | 20 | Internal LDO output; add an external capacitor; internal supply only. |
 | `VDD_RET` | - | 0.9 | - | 1 | Internal LDO output; add an external capacitor; internal supply only. |
 | `VDD_RTC` | - | 1.1 | - | 1 | Internal LDO output; add an external capacitor; internal supply only. |
-| `PVDD_PMU` | 2.97 | 3.3 | 3.63 | 400 | PMU supply input; connect to an external 3.3 V supply. |
+| `PVDD_PMU` | 2.97 | 3.3 | 3.63 | 200 | PMU supply input; connect to an external 3.3 V supply. |
 | `VDD18_VOUT` | - | 1.8 | - | 30 | 1.8 V LDO output; internal supply only; add a capacitor to ground. |
 | `PVSS_PMU` | - | - | - | - | PMU power ground. |
 | `AVSS_PMU` | - | - | - | - | PMU analog ground. |
-| `VDDIOA` | 2.97 | 1.8 / 3.3 | 3.63 | 100 | GPIO supply input; connect to 1.8 V or 3.3 V as defined by the exact part number. |
+| `VDDIOA` | 1.62 | 1.8 / 3.3 | 3.63 | 100 | GPIO supply input; connect to 1.8 V or 3.3 V as specified for the exact orderable part. |
 | `VDDIOSA` | - | 1.8 | - | 30 | Co-packaged-memory interface IO supply input; connect to `VDD18_VOUT`. |
 | `VDDIOSB` | - | 1.8 / 3.3 | - | 30 | Co-packaged-memory interface I/O supply input; voltage depends on the exact part number. For co-packaged PSRAM, connect to `VDD18_VOUT` (1.8 V); for co-packaged NOR Flash, supply this pin externally at 3.3 V. |
 | `AVDD33_ANA` | 2.97 | 3.3 | 3.63 | 20 | Analog supply input; connect to 3.3 V. |
@@ -657,12 +661,10 @@ Use these tables for pin-by-pin schematic review. Each table lists every power p
 | `AUD_VREF_GND` | - | - | - | - | Audio ground. |
 | `AVDD33_AUD` | 2.97 | 3.3 | 3.63 | 50 | Audio supply input; connect to an external 3.3 V supply. |
 | `AVSS33_AUD` | - | - | - | - | Audio ground. |
-| `MIC_BIAS` | 1.4 | - | 2.8 | - | Microphone-bias output; connect to the microphone supply. |
+| `MIC_BIAS` | 1.4 | - | 2.8 | 2 | Microphone-bias output; connect to the microphone supply. |
 
 </div>
 
-!!! warning "BGA112 VDDIOA voltage range"
-    SiFli's source table lists `VDDIOA` with a 2.97 V minimum, 1.8 V / 3.3 V typical value, and 3.63 V maximum. The 1.8 V option does not align with the listed minimum. Confirm the electrical specification for the exact orderable part; do not apply the 2.97–3.63 V limits to a 1.8 V configuration without confirmation.
 
 <!-- /BGA-ONLY -->
 

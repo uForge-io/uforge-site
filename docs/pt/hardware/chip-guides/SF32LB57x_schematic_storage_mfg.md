@@ -1,4 +1,5 @@
 ---
+title: "Guia de projeto de hardware do SF32LB57x — armazenamento e fabricação"
 icon: lucide/circuit-board
 hide:
     - navigation
@@ -63,6 +64,10 @@ Antes de finalizar o esquemático, confirme:
 | `HOLD#` / `SD2_D1` | `PA17` | `PA17` |
 
 </div>
+
+!!! warning "Numeração SDIO divergente na fonte"
+    A tabela de conexões de memória da SiFli identifica os sinais de `PA12`–`PA17` como `SD2_*`, enquanto a tabela de IO MUX indica `SD1_*` para a Function 2 nesses pinos. A tabela acima mantém os nomes usados na tabela de conexões. Embora os pinos físicos coincidam, esses nomes não bastam para selecionar SDIO2 ou uma instância no firmware. Confirme o manual, a configuração de pinos do SDK e o projeto de referência do componente exato.
+
 
 #### 5.6.3. Controle de boot e alimentação { #563-boot-and-power-control }
 
@@ -404,11 +409,11 @@ Mantenha os pinos padrão de depuração e download acessíveis ao gabarito de p
 
 | `PA00` / registro de boot | `PA01` | Chave de boot do host | Ramificação de boot e interfaces disponíveis |
 |:-----------------------|:-------|:-----------------|:------------|
-| L | H | Qualquer | Boot normal; `PA19` não emite logs de boot; `PA18`/`PA19` passam para SWD e o SWD em `PA43`/`PA44` é desabilitado. |
-| L | L | Desligada | Boot normal; `PA19` emite logs de boot; `PA18`/`PA19` são DBG-UART e `PA43`/`PA44` são SWD. |
-| L | L | Ligada | Modo de boot; são aceitos DBG-UART, SWD, UART e gravação via USB. |
-| PA00 ou registro de boot = 1 | L | Qualquer | Modo de boot; são aceitos DBG-UART, SWD, UART e gravação via USB. |
-| PA00 ou registro de boot = 1 | H | Qualquer | Modo de boot; `PA19` não emite logs de boot; são aceitos SWD e gravação via USB, e `PA18`/`PA19` passam para SWD. |
+| `PA00 = L`, `BOOT REG = L` | H | Qualquer | Boot normal; `PA19` não emite logs de boot; `PA18`/`PA19` passam para SWD e o SWD em `PA43`/`PA44` é desabilitado. |
+| `PA00 = L`, `BOOT REG = L` | L | Desligada | Boot normal; `PA19` emite logs de boot; `PA18`/`PA19` são DBG-UART e `PA43`/`PA44` são SWD. |
+| `PA00 = L`, `BOOT REG = L` | L | Ligada | Modo de boot; são aceitos DBG-UART, SWD, UART e gravação via USB. `PA19` emite logs de boot; `PA18` / `PA19` mantêm DBG-UART e `PA43` / `PA44` mantêm SWD. |
+| PA00 ou registro de boot = 1 | L | Qualquer | Modo de boot; são aceitos DBG-UART, SWD, UART e gravação via USB. `PA19` emite logs de boot; `PA18` / `PA19` mantêm DBG-UART e `PA43` / `PA44` mantêm SWD. |
+| PA00 ou registro de boot = 1 | H | Qualquer | Modo de boot; `PA19` não emite logs de boot; são aceitos SWD e gravação via USB, e `PA18`/`PA19` passam para SWD. O SWD em `PA43` / `PA44` fica desabilitado. |
 
 </div>
 

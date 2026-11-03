@@ -1,4 +1,5 @@
 ---
+title: "SF32LB52x - Hardware-Design-Leitfaden"
 icon: lucide/book-check
 hide:
     - navigation

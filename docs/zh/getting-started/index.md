@@ -1,7 +1,7 @@
 ---
 icon: lucide/rocket
 title: "入门指南概览"
-description: "为你的第一块 SF32 开发板选择软件路径——SiFli-SDK、CodeKit、Zephyr、Arduino、Rust 或 MicroPython，附各路径现状与所需硬件。"
+description: "为 SF32 选择软件开发起点——SiFli-SDK、CodeKit、Zephyr、Arduino、Rust 或 MicroPython，了解各自现状与所需硬件。"
 tags:
     - 快速开始
     - SF32
@@ -9,7 +9,7 @@ tags:
 
 # 入门指南概览 { #getting-started }
 
-SF32 器件支持多种软件开发路径。目前，SiFli-SDK 和 CodeKit 是官方的首次上手路径。从 Zephyr v4.3.0 开始，SF32LB52 DevKit LCD 已纳入 Zephyr 上游持续维护的支持范围。OpenSiFli 提供 ArduinoCore-zephyr 测试版软件包，并在开发 SF32LB52 的 Rust 支持。MicroPython 仍需提供官方固件镜像和面向特定开发板的操作说明，才能形成经过验证的入门教程。
+SF32 器件支持多种软件开发路径。SiFli-SDK 是思澈科技（SiFli）的官方参考软件栈；CodeKit 是用于安装 SDK、创建工程、构建、烧录和串口监视的官方 VS Code 工作流。从 Zephyr v4.3.0 开始，SF32LB52 DevKit LCD 已纳入 Zephyr 上游持续维护的支持范围。OpenSiFli 提供 ArduinoCore-zephyr 测试版软件包，并在开发 SF32LB52 的 Rust 支持。MicroPython 仍需提供官方固件镜像和面向特定开发板的操作说明，才能形成经过验证的入门教程。
 
 需要了解参考开发流程和各开发路径的当前范围时，请参阅[开发概览](../develop/index.md)。下方表格仅用于选择起点；各平台页面才是其支持开发板及限制条件的权威参考。
 
@@ -19,7 +19,7 @@ SF32 器件支持多种软件开发路径。目前，SiFli-SDK 和 CodeKit 是�
 
 <div align="center" markdown>
 
-| 路径 | 当前状态 | 从这里开始 |
+| 选项 | 当前状态 | 从这里开始 |
 |:-----|:---------|:-----------|
 | **SiFli-SDK** | 思澈科技（SiFli）官方的 SF32 参考开发路径，涵盖 RT-Thread、蓝牙（Bluetooth）、图形、音频、低功耗和开发板启动调试。 | [SiFli-SDK](sifli/getting-started-sifli-sdk.md) |
 | **SiFli CodeKit** | 思澈科技（SiFli）官方 VS Code 工作流，用于 SDK 配置、创建工程、构建、烧录和串口监视。 | [SiFli CodeKit](sifli/getting-started-sifli-codekit.md) |

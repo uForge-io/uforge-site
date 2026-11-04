@@ -18,6 +18,7 @@ Utilisez la console série pour collecter :
 - Les messages de l'application.
 - La sortie du shell RT-Thread, s'il est activé dans le projet.
 - Les messages d'erreur.
+- Les sorties d'assertion ou de plantage, avec le fichier et la ligne signalés, le PC du premier défaut et les données de pile, si disponibles.
 - Le comportement lors du téléchargement et de la réinitialisation.
 
 Conservez les journaux avec la révision de la carte, la branche SDK, les commandes de compilation et de flashage, ainsi que les paramètres série.
@@ -40,10 +41,10 @@ Cette démarche évite de confondre les problèmes matériels, ceux de la prise 
 
 | Outil | Usage |
 |:-----|:----|
-| `sftool` | Outil CLI série pour lire, écrire ou effacer la Flash et réinitialiser les puces prises en charge ; les options dépendent de la puce et du stockage. |
-| `SiFli_Trace` | Capturer et consulter les journaux de la carte selon la procédure prise en charge par la cible. |
-| `UsartServer` | Outil compagnon requis pour le débogage par UART via le Debug IP intégré, selon la procédure documentée pour SF32LB52X et SF32LB56X ; ne généralisez pas cette exigence aux autres cibles. |
-| `AssertDump` et outils de vidage | À utiliser uniquement s'ils sont fournis pour la puce et la version du SDK ; suivez la procédure de capture et d'analyse correspondante. |
+| [`sftool`](https://github.com/OpenSiFli/sftool) | Outil CLI série pour lire, écrire ou effacer la Flash et réinitialiser les puces prises en charge ; les options dépendent de la puce et du stockage. |
+| [`SiFli_Trace`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/tools/SifliTrace/SifliTrace_UM.html) | Capturer et consulter les journaux de la carte selon la procédure prise en charge par la cible. |
+| [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/tools/UsartServer/UsartServer_UM.html) | Outil compagnon pour le débogage UART via le Debug IP intégré. Le [guide v2.5.1](https://docs.sifli.com/projects/sdk/v2.5.1/sf32lb52x/tools/UsartServer/UsartServer_UM.html) cite SF32LB52X et SF32LB56X ; un guide anglais plus récent mentionne aussi `SF322LB57`. Vérifiez la prise en charge de la puce et du SDK exacts au lieu de la supposer pour toutes les cibles. |
+| [`AssertDump`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/tools/AssertDump/AssertDump_UM.html) et [outils d'analyse de plantage](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/app_note/crash_analysis.html) | À utiliser uniquement s'ils sont fournis pour la puce et la version du SDK ; suivez la procédure de capture et d'analyse correspondante. |
 | Shell RT-Thread | Inspection à l'exécution et commandes uniquement si la configuration du projet active le shell. |
 
 </div>
@@ -61,8 +62,11 @@ Cette démarche évite de confondre les problèmes matériels, ceux de la prise 
 | Bluetooth instable | Horloge RF, chemin d'antenne, configuration de la pile Bluetooth, paramètres de connexion. |
 | Artefacts d'affichage | Temporisation de la dalle, format du tampon, synchronisation cache/DMA. |
 | Réinitialisation aléatoire | Watchdog, rail d'alimentation, chute de tension (brownout), débordement de pile. |
+| Journaux HCPU/LCPU absents | Vérifiez l'affectation UART, `ulog`, le pinmux et le démarrage du LCPU. |
 
 </div>
+
+Dans les exemples LB551 cités, le HCPU utilise UART1 et le LCPU UART3 sur PB45/PB46. Vérifiez que le HCPU n'utilise pas également UART3, contrôlez dans `pinmux.c` le chevauchement de multiplexage QSPI3/UART1 et confirmez que le LCPU a démarré ; certains exemples exigent `lcpu on` ou `lcpu_power_on()`.
 
 ## Liste de contrôle du rapport de plantage { #crash-report-checklist }
 
@@ -77,3 +81,10 @@ Lors du signalement d'un plantage, incluez :
 - Le journal série de démarrage à partir de la réinitialisation.
 - Le vidage de plantage ou la sortie d'assertion.
 - Si le problème se reproduit sur un exemple SDK non modifié.
+
+## Sources officielles { #official-sources }
+
+- [SiFli-SDK : Débogage et journaux](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/app_note/debug_logging.html)
+- [SiFli-SDK : Guide d'analyse des plantages](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/app_note/crash_analysis.html)
+- [OpenSiFli SiFli-Wiki : débogage des journaux (chinois)](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/faq/debug/log.md)
+- [OpenSiFli SiFli-Wiki : restaurer un plantage à partir d'un dump mémoire (chinois)](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/faq/debug/dump.md)

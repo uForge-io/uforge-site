@@ -97,9 +97,7 @@ Use **Dynamic** no fluxo com o loader do Zephyr. Use **Static** quando precisar 
 
 ## Coloque a placa no modo de download serial { #put-the-board-in-serial-download-mode }
 
-Segundo a documentação do OpenSiFli, na primeira utilização a placa precisa estar no modo de download serial. Siga a sequência de boot/reset do SF32LB52 DevKit LCD e, em seguida, faça a gravação pelo Arduino IDE ou CLI.
-
-A ferramenta de gravação é `sftool`.
+Segundo a OpenSiFli, na primeira utilização a placa precisa estar no modo de download serial. No SF32LB52 DevKit LCD, habilite a opção **BOOT** na ferramenta de download e, em seguida, ligue ou reinicie a placa; consulte as [instruções de gravação e depuração da placa](../../sf32-products/devkits/SF32LB52-DevKit-LCD.md#download-and-debug). Depois que o modo de download estiver ativo, grave pelo Arduino IDE ou CLI usando `sftool`.
 
 ## Grave um teste serial básico { #upload-a-serial-smoke-test }
 

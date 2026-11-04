@@ -51,7 +51,9 @@ La mise en œuvre USB implique le firmware, les descripteurs, les systèmes d'ex
 
 L'[index officiel des exemples CherryUSB de SiFli-SDK](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/index.html) sépare les exemples USB-périphérique et USB-hôte. Commencez par celui qui correspond au rôle et à la classe USB visés, puis appliquez à l'implémentation du produit les vérifications des descripteurs, de l'alimentation et de la compatibilité avec l'hôte.
 
-<div align="center"><em>Tableau : Exemples CherryUSB de SiFli-SDK pour SF32LB58x</em></div>
+Les exemples ne prennent pas tous en charge les mêmes cartes. Avant d'en réutiliser un, consultez la section « Supported Platforms » de sa page et vérifiez que votre carte cible y figure.
+
+<div align="center"><em>Tableau : Exemples CherryUSB de SiFli-SDK répertoriés dans la documentation SF32LB58x</em></div>
 <div align="center" markdown>
 
 | Rôle USB | Exemple | Point de départ |

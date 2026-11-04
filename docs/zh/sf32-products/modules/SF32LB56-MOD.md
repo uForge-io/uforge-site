@@ -120,8 +120,8 @@ SF32LB56-MOD 是思澈科技（SiFli）基于 SF32LB56xV 平台推出的通用�
 
 - HCPU：Arm Cortex-M33 STAR-MC1，最高 240 MHz，最高 370 DMIPS / 984 EEMBC CoreMark
 - LCPU：Arm Cortex-M33 STAR-MC1，最高 96 MHz，最高 148 DMIPS / 394 EEMBC CoreMark
-- HCPU 内存系统：32 KB 指令缓存、16 KB 数据缓存和 800 KB SRAM，其中包含 128 KB 保留 SRAM
-- LCPU 内存系统：16 KB 指令缓存、8 KB 数据缓存和 160 KB 保留 SRAM
+- HCPU 内存系统：32 KB 指令缓存、16 KB 数据缓存和 800 KB SRAM，其中包含 128 KB 保持型 SRAM
+- LCPU 内存系统：16 KB 指令缓存、8 KB 数据缓存和 160 KB 保持型 SRAM
 - 两个核心均带单精度 FPU 与 MPU
 - 提供神经网络矩阵加速器和信号处理加速器，适合更丰富的本地计算负载
 
@@ -145,11 +145,11 @@ SF32LB56-MOD 是思澈科技（SiFli）基于 SF32LB56xV 平台推出的通用�
 
 - 1 路 24 位音频 DAC
 - 1 路 24 位 Sigma-Delta 音频 ADC
-- 2 路 PDM 接口（PDM1/PDM2），每路支持左、右声道
+- 2 路 PDM 接口（PDM1/PDM2）；DS5602 V0.3 列出 2 路数字麦克风输入
 - 1 路 I2S 接口
 - 提供音频采样率转换与 EQ 加速
 
-每路 PDM 接口最多可连接两颗数字麦克风，两路接口合计最多支持四颗。PDM 接口数量不等于麦克风数量；实际连接还受引脚复用和载板布线限制。
+推荐管脚分配图列出了以下选项：PDM1_DATA 为 PA20 或 PA64，PDM1_CLK 为 PA24 或 PA69，PDM2_DATA 为 PA25 或 PA71，PDM2_CLK 为 PA26 或 PA73。这些是可选的管脚复用方案，不代表载板的实际布线。DS5602 V0.3 未能证明支持通道共享或四麦克风配置。设计多麦克风系统前，请确认支持的工作模式和载板实际布线。
 
 ### 电源与 I/O { #power-and-io }
 

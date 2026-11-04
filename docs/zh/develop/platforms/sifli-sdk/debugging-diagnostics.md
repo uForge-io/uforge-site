@@ -18,6 +18,7 @@ SF32 调试应从串口日志入手。根据芯片、SDK 版本和工程配置�
 - 应用输出
 - RT-Thread Shell 输出（如工程已启用）
 - 异常信息
+- assert/崩溃输出（如有，应保留日志中的文件/行号、故障 PC 和堆栈信息）
 - 下载与复位行为
 
 保存日志时，应一并记录开发板硬件版本、SDK 分支、构建命令、烧录命令和串口设置。
@@ -40,10 +41,10 @@ SF32 调试应从串口日志入手。根据芯片、SDK 版本和工程配置�
 
 | 工具 | 用途 |
 |:-----|:-----|
-| `sftool` | 串口命令行工具，可对受支持的芯片和存储执行 Flash 读写、擦除及复位操作；具体选项取决于芯片和存储类型。 |
-| `SiFli_Trace` | 按目标平台支持的流程采集并查看开发板日志。 |
-| `UsartServer` | SF32LB52X 和 SF32LB56X 通过 UART 调试内置 Debug IP 时所需的配套工具；不要假定其他目标也适用。 |
-| `AssertDump` 和崩溃转储工具 | 仅在对应芯片和 SDK 版本提供时使用，并遵循该版本的采集与分析流程。 |
+| [`sftool`](https://github.com/OpenSiFli/sftool) | 串口命令行工具，可对受支持的芯片和存储执行 Flash 读写、擦除及复位操作；具体选项取决于芯片和存储类型。 |
+| [`SiFli_Trace`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/tools/SifliTrace/SifliTrace_UM.html) | 按目标平台支持的流程采集并查看开发板日志。 |
+| [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/tools/UsartServer/UsartServer_UM.html) | 通过 UART 调试内置 Debug IP 时使用的配套工具。[v2.5.1 指南](https://docs.sifli.com/projects/sdk/v2.5.1/sf32lb52x/tools/UsartServer/UsartServer_UM.html)列出 SF32LB52X 和 SF32LB56X；较新的英文指南还提到 `SF322LB57`。请按目标芯片和 SDK 版本确认支持情况。 |
+| [`AssertDump`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/tools/AssertDump/AssertDump_UM.html) 和[崩溃分析指南](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/app_note/crash_analysis.html) | 仅在对应芯片和 SDK 版本提供时使用，并遵循该版本的采集与分析流程。 |
 | RT-Thread Shell | 仅当工程配置启用了 Shell 时，才可用于运行时检查和执行命令。 |
 
 </div>
@@ -61,8 +62,11 @@ SF32 调试应从串口日志入手。根据芯片、SDK 版本和工程配置�
 | 蓝牙（Bluetooth）不稳定 | RF 时钟、天线路径、蓝牙协议栈配置、连接参数。 |
 | 显示异常 | 面板时序、缓冲格式、缓存/DMA 同步。 |
 | 随机复位 | 看门狗（watchdog）、电源轨、欠压（brownout）、栈溢出。 |
+| HCPU/LCPU 无日志 | 检查 UART 分配、`ulog`、pinmux 和 LCPU 启动状态。 |
 
 </div>
+
+在 SiFli Wiki 提到的 LB551 示例中，HCPU 使用 UART1，LCPU 使用 PB45/PB46 上的 UART3。请确认 HCPU 未同时占用 UART3，在 `pinmux.c` 中检查 QSPI3 与 UART1 复用脚冲突，并确认 LCPU 已启动；部分示例需发送 `lcpu on` 或调用 `lcpu_power_on()`。
 
 ## 崩溃报告检查清单 { #crash-report-checklist }
 
@@ -77,3 +81,10 @@ SF32 调试应从串口日志入手。根据芯片、SDK 版本和工程配置�
 - 从复位开始的串口启动日志
 - 崩溃转储或 assert 输出
 - 该问题是否能在未经修改的 SDK 示例上复现
+
+## 官方资料 { #official-sources }
+
+- [SiFli-SDK：调试与日志指南](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/app_note/debug_logging.html)
+- [SiFli-SDK：崩溃分析指南](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/app_note/crash_analysis.html)
+- [OpenSiFli SiFli-Wiki：日志调试（中文）](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/faq/debug/log.md)
+- [OpenSiFli SiFli-Wiki：Dump 内存恢复死机现场（中文）](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/faq/debug/dump.md)

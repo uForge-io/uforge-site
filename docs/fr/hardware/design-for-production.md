@@ -8,7 +8,7 @@ tags:
 
 # Conception pour la production { #design-for-production }
 
-Utilisez ce parcours après avoir sélectionné une puce ou un module et avant d'approuver le schéma, de figer le routage du PCB, la BOM ou le dossier de fabrication. Il rassemble les références de mise en œuvre qui réduisent les risques lors de la première mise en service et de la qualification : guides de conception matérielle propres au composant, listes de contrôle, définitions d'interface des modules, composants approuvés et bibliothèques EDA.
+Utilisez ce parcours après avoir sélectionné une puce ou un module et avant d'approuver le schéma, de figer le routage du PCB, la BOM ou le dossier de fabrication. Il rassemble les références de mise en œuvre qui réduisent les risques lors de la première mise en service et de la qualification du produit : guides de conception matérielle propres au composant, listes de contrôle, définitions d'interface des modules, composants approuvés et bibliothèques EDA.
 
 ## Séquence de conception pour la production recommandée { #recommended-production-sequence }
 
@@ -20,12 +20,12 @@ Utilisez cette séquence comme un cycle de revue, et non comme un transfert uniq
 
 | Étape | Référence à utiliser | Preuves à conserver |
 |:------|:----|:-------------------|
-| Architecture | Présentation du produit et exigences d'interface | Composant, boîtier, mémoire, affichage, audio, stockage et hypothèses d'alimentation retenus. |
-| Schéma et routage | Guide de conception matérielle de la puce ou du module | Mise en œuvre vérifiée de l'alimentation, de l'horloge, du reset, du RF, du stockage, de l'affichage et des interfaces. |
-| BOM | Liste de fournisseurs approuvés (AVL) et fiches techniques des composants | Alternatives qualifiées ou validées spécifiquement pour chaque composant critique. |
-| Revue de conception | Liste de contrôle de conception matérielle | Traitement consigné pour chaque point applicable de la liste et chaque exception. |
-| Mise en service | Documentation des cartes de développement, exemples SDK et mesures | Résultats reproductibles pour le démarrage, la programmation, les périphériques, la communication sans fil, la consommation et la récupération. |
-| Mise à disposition des fichiers CAO pour la production | Bibliothèques EDA officielles et plans de boîtier | Symbole, empreinte, brochage, disposition des pastilles et données de fabrication vérifiés. |
+| Architecture | Présentation du produit et exigences d'interface | Consignez le composant et son boîtier, ainsi que les hypothèses relatives à la mémoire, à l'affichage, à l'audio, au stockage et à l'alimentation. |
+| Schéma et routage | Guide de conception matérielle de la puce ou du module | Conservez la mise en œuvre vérifiée de l'alimentation, de l'horloge, du reset, du RF, du stockage, de l'affichage et des interfaces. |
+| BOM | Liste de fournisseurs approuvés (AVL) et fiches techniques des composants | Pour chaque composant critique, consignez les éléments attestant que la solution de remplacement est qualifiée ou a fait l'objet d'une validation ciblée. |
+| Revue de conception | Liste de contrôle de conception matérielle | Consignez le traitement de chaque point applicable de la liste et de chaque exception. |
+| Mise en service | Documentation des cartes de développement, exemples SDK et mesures | Conservez des résultats reproductibles pour le démarrage, la programmation, le fonctionnement des périphériques, les communications sans fil, la consommation et la récupération. |
+| Mise à disposition des fichiers CAO pour la production | Bibliothèques EDA officielles et plans de boîtier | Conservez les comptes rendus de vérification du symbole, de l'empreinte, du brochage, de la disposition des pastilles et des données de fabrication. |
 
 </div>
 

@@ -139,9 +139,9 @@ Les notes d'application OpenSiFli et le guide de conception du schéma, qui ont 
 
     - Le modèle avec Flash intégrée dans le boîtier (SF32LB52BU36) : ajoutez un interrupteur d'alimentation sur VDD_SIP.
     - Pour les modèles avec PSRAM intégrée dans le boîtier (SF32LB52DUB6/EUB6/GUC6/JUD6), l'interrupteur de VDD_SIP est optionnel si PVDD = 3,3 V et si VDD_SIP utilise le LDO interne ; il est obligatoire si PVDD = 1,8 V.
-    - L'alimentation du stockage externe est indépendante de VDD_SIP — ajoutez un interrupteur d'alimentation séparé
-    - Voir la section 5.6.1.1 pour les compromis de domaine d'alimentation VCC/VCCQ de l'eMMC
-    - La note d'application indique **PA21** pour les interrupteurs d'alimentation du stockage liés au démarrage ; la divergence entre les sources concernant la Flash externe des variantes alimentées par batterie est signalée plus haut
+    - L'alimentation du stockage externe est indépendante de VDD_SIP — ajoutez un interrupteur d'alimentation séparé.
+    - Voir la section 5.6.1.1 pour les compromis de domaine d'alimentation VCC/VCCQ de l'eMMC.
+    - La note d'application indique **PA21** pour les interrupteurs d'alimentation du stockage liés au démarrage ; la divergence entre les sources concernant la Flash externe des variantes alimentées par batterie est signalée plus haut.
     - Les mémoires Flash NOR de 32 Mo ou plus connectées via MPI (Memory Peripheral Interface, interface de périphériques mémoire utilisée avec les mémoires SPI-NOR/SPI-NAND) doivent pouvoir être mises hors tension par PA21. Elles quittent ainsi le mode d'adressage sur 4 octets au redémarrage de la MCU ou à l'entrée en Hibernate ; sinon, la ROM ne reconnaîtra pas la Flash. Les Flash NOR de 16 Mo ou moins peuvent rester alimentées en permanence.
     - Le circuit de référence prévoit des emplacements pour les résistances de pull-up de PA13 et PA17. Montez-les selon le type de mémoire ; la valeur recommandée est 7,5 kΩ.
 
@@ -185,7 +185,7 @@ Le SF32LB52x peut se connecter à des capteurs de fréquence cardiaque, des acc�
 **Résumé rapide**
 
 - Les fonctions UART et I2C peuvent être affectées à n'importe quelle broche PA.
-- Le choix des broches doit néanmoins tenir compte des contraintes de démarrage, de réveil, de débogage, de test de production, et de routage de la carte.
+- Le choix des broches doit néanmoins tenir compte des contraintes de démarrage, de réveil, de débogage, de test de production et de routage de la carte.
 
 **Objectif de conception**
 
@@ -195,9 +195,9 @@ Le SF32LB52x permet d'affecter les fonctions UART et I2C à n'importe quelle bro
 
 **Liste de contrôle UART/I2C**
 
-- [ ] Les résistances de pull-up, les domaines de tension, et la capacité de bus sont corrects pour chaque bus I2C.
-- [ ] Les broches UART nécessaires pour les logs, le téléchargement, ou les modules externes sont accessibles.
-- [ ] Le multiplexage des broches n'entre pas en conflit avec les fonctions de bootstrap, de réveil, d'affichage, de stockage, ou de débogage.
+- [ ] Les résistances de pull-up, les domaines de tension et la capacité de bus sont corrects pour chaque bus I2C.
+- [ ] Les broches UART nécessaires pour les logs, le téléchargement ou les modules externes sont accessibles.
+- [ ] Le multiplexage des broches n'entre pas en conflit avec les fonctions de bootstrap, de réveil, d'affichage, de stockage ou de débogage.
 
 #### 5.6.4. Affectation des broches GPTIM { #564-gptim-pin-assignment }
 
@@ -215,8 +215,8 @@ Le SF32LB52x permet d'affecter les fonctions GPTIM à n'importe quelle broche PA
 **Liste de contrôle GPTIM**
 
 - [ ] Les canaux du temporisateur nécessaires au PWM, à la capture ou aux boucles de régulation sont indiqués dans le tableau d'affectation des broches.
-- [ ] Les broches GPTIM n'entrent pas en conflit avec les exigences de rétroéclairage, de moteur, de débogage, ou de stockage.
-- [ ] Le plan de mise en service inclut la vérification de la fréquence PWM, de la plage de rapport cyclique, et de la polarité des broches.
+- [ ] Les broches GPTIM n'entrent pas en conflit avec les exigences de rétroéclairage, de moteur, de débogage ou de stockage.
+- [ ] Le plan de mise en service inclut la vérification de la fréquence PWM, de la plage de rapport cyclique et de la polarité des broches.
 
 ### 5.7. Fabrication { #57-manufacturing }
 
@@ -248,8 +248,8 @@ Pour le débogage pas à pas et la sortie des journaux via DBG_UART, consultez l
 
 **Liste de contrôle du débogage**
 
-- [ ] `PA18`/`PA19`, la masse, et la référence d'alimentation requise sont exposées sur des pastilles de test ou des broches de connecteur.
-- [ ] L'accès de débogage reste disponible après l'assemblage du boîtier, de la batterie, et de l'afficheur.
+- [ ] `PA18`/`PA19`, la masse et la référence d'alimentation requise sont exposées sur des pastilles de test ou des broches de connecteur.
+- [ ] L'accès de débogage reste disponible après l'assemblage du boîtier, de la batterie et de l'afficheur.
 - [ ] Le niveau de tension UART est de 3,3 V, compatible avec l'adaptateur ou le montage sélectionné.
 - [ ] Le chemin de récupération est documenté pour une carte incapable de démarrer le firmware applicatif.
 
@@ -257,21 +257,21 @@ Pour le débogage pas à pas et la sortie des journaux via DBG_UART, consultez l
 
 **Résumé rapide**
 
-- La programmation de production et le calibrage du quartz nécessitent une alimentation stable, un accès DBG_UART, PA01, et les points de test d'alimentation/masse requis.
+- La programmation de production et le calibrage du quartz nécessitent une alimentation stable, un accès DBG_UART, PA01 et les points de test d'alimentation/masse requis.
 - L'accès pour le montage de test doit être conçu avant que le contour mécanique de la PCB et le boîtier ne soient figés.
 
 **Objectif de conception**
 
-Rendre chaque carte de production programmable, calibrable, et récupérable sans soudure manuelle ni démontage du produit.
+Rendre chaque carte de production programmable, calibrable et récupérable sans soudure manuelle ni démontage du produit.
 
 SiFli fournit un programmateur autonome pour écrire le firmware en production et calibrer le quartz. Prévoyez au minimum les points de test PVDD/VBAT, GND, AVDD33, DBG_UART_RXD, DBG_UART_TXD et PA01. La procédure détaillée figure dans le guide d'utilisation du programmateur autonome (« Offline Downloader User Guide »), inclus dans le dossier de développement.
 
 **Liste de contrôle de production**
 
-- [ ] Les points de test PVDD/VBAT, GND, AVDD33, DBG_UART_RXD, DBG_UART_TXD, et PA01 sont réservés.
+- [ ] Les points de test PVDD/VBAT, GND, AVDD33, DBG_UART_RXD, DBG_UART_TXD et PA01 sont réservés.
 - [ ] Les pastilles de test sont accessibles par le montage prévu après l'assemblage mécanique.
 - [ ] La procédure de calibrage du quartz et les limites d'acceptation sont définies avec l'équipe de fabrication.
-- [ ] Les enregistrements de programmation, de calibrage, et de test fonctionnel peuvent être rattachés à la révision de carte.
+- [ ] Les enregistrements de programmation, de calibrage et de test fonctionnel peuvent être rattachés à la révision de carte.
 
 #### 5.7.3. Listes de contrôle de schéma et de dessin PCB { #573-schematic-and-pcb-drawing-checklists }
 
@@ -281,7 +281,7 @@ Utilisez la [liste de contrôle officielle du schéma et de la PCB][SiFli SF32LB
 
 **Liste de contrôle de mise en production**
 
-- [ ] La liste de contrôle du schéma, la liste de contrôle PCB, la vérification AVL, le rapport DRC, et le rapport d'impédance sont complets.
-- [ ] Les captures d'écran de preuve sont archivées pour l'alimentation, l'horloge, la RF, l'affichage, le stockage, l'audio, l'USB, le SDIO, le DC/DC, et l'accès de test de production.
+- [ ] La liste de contrôle du schéma, la liste de contrôle PCB, la vérification AVL, le rapport DRC et le rapport d'impédance sont complets.
+- [ ] Les captures d'écran de preuve sont archivées pour l'alimentation, l'horloge, la RF, l'affichage, le stockage, l'audio, l'USB, le SDIO, le DC/DC et l'accès de test de production.
 - [ ] Les hypothèses propres à chaque variante sont consignées dans les notes de revue.
 - [ ] Chaque risque matériel non résolu est confié à un responsable avant la mise en production.

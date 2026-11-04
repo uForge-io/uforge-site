@@ -39,30 +39,30 @@ Une chaîne simplifiée de traitement de l'IA en périphérie sur SF32 se prése
 <div align="center"><em>Schéma : Étapes de traitement et inférence pilotée par le firmware</em></div>
 
 ```text
-Capteurs / Audio / Caméra
+Sensors / Audio / Camera
         │
         ▼
-Prétraitement
-  - filtrage
-  - découpage en trames
-  - normalisation
-  - extraction des caractéristiques
+Pre-processing
+  - filtering
+  - framing
+  - normalization
+  - feature extraction
         │
         ▼
-Firmware / runtime d'inférence
-  - orchestration du graphe du modèle
-  - opérations prises en charge par NNACC
-  - autres opérations sur le CPU, si elles sont implémentées
+Firmware / Inference Runtime
+  - model graph orchestration
+  - supported operations on NNACC
+  - other operations on CPU, if implemented
         │
         ▼
-Post-traitement
-  - seuillage
-  - lissage
-  - détection d'événements
-  - décisions applicatives
+Post-processing
+  - thresholding
+  - smoothing
+  - event detection
+  - application decisions
         │
         ▼
-Application, UI, Bluetooth ou stockage
+Application, UI, Bluetooth, or Storage
 ```
 
 L'accélérateur n'est qu'un élément de la chaîne complète de traitement de l'IA. Un produit doit aussi assurer l'acquisition et la mise en tampon des données, le prétraitement, la planification de l'inférence, le post-traitement et la prise de décision applicative. Les meilleurs résultats s'obtiennent généralement en concevant toute la chaîne autour de la hiérarchie mémoire et des accélérateurs disponibles, plutôt qu'en considérant l'inférence comme un simple appel de fonction isolé.
@@ -116,7 +116,7 @@ Choisissez le composant selon les opérateurs, le budget mémoire et la charge d
 | Famille de composants | Positionnement IA |
 |:--------------|:---------------|
 | **SF32LB52x** | À envisager pour Bluetooth, audio et HMI simple à coût optimisé ; utiliser une implémentation CPU légère comme référence, sauf accélération spécifique vérifiée. |
-| **SF32LB55x** | Adapté aux appareils BLE portables et aux produits riches en capteurs ; utile pour la détection à basse consommation et les algorithmes compacts. |
+| **SF32LB55x** | Le guide du SDK indique un NNACC dans le HCPU ; vérifiez la prise en charge des opérateurs pour la configuration retenue. Adapté aux appareils BLE portables et aux produits riches en capteurs, notamment pour la détection basse consommation et les algorithmes compacts. |
 | **SF32LB56x** | À envisager pour une UI plus riche, une HMI connectée et des chaînes de capteurs ou multimédia ; vérifier la configuration choisie et les opérateurs du NNACC HCPU. |
 | **SF32LB57x** | Le guide cité ne confirme pas la disponibilité du NNACC pour cette famille ; vérifiez la référence, la carte et le support SDK des opérateurs, du runtime et de la mémoire avant de la choisir pour l'IA. |
 | **SF32LB58x** | À envisager pour des traitements combinant IA, graphiques et audio lorsque la mémoire et les ressources HCPU/LCPU de la référence choisie répondent aux besoins du produit ; vérifier les opérateurs, les coûts d'intégration et l'énergie mesurée. |
@@ -253,16 +253,13 @@ Un produit d'IA embarquée réussi combine généralement un modèle compact, un
 
 ## Cas d'usage typiques { #typical-use-cases }
 
-Envisagez l'accélération IA du SF32 pour l'inférence locale compacte dans des produits connectés sur batterie lorsque les opérateurs pris en charge et le budget système mesuré conviennent :
+Envisagez l'accélération IA du SF32 pour l'inférence locale compacte dans des produits connectés sur batterie lorsque les opérateurs pris en charge et le budget système mesuré conviennent. Les scénarios produit associent les tâches d'inférence présentées ci-dessus aux besoins de l'application :
 
-- La reconnaissance de gestes sur montres, bracelets et appareils portatifs.
-- La classification d'activité pour les produits de suivi sportif et de santé.
-- La détection d'événements vocaux ou de mots-clés pour les accessoires audio.
-- Les algorithmes de fusion de capteurs pour les appareils portables.
-- L'analyse de signaux biométriques, si les capteurs et le logiciel la prennent en charge.
-- La détection locale d'anomalies pour les appareils intelligents.
-- La classification simple d'images ou les événements déclenchés par la caméra, sur les composants dotés d'une entrée caméra.
-- Une interface homme-machine (HMI) qui s'adapte au contexte d'utilisation.
+- Les appareils portables peuvent combiner reconnaissance de gestes, classification d'activité et fusion de capteurs ; l'analyse biométrique dépend de la prise en charge des capteurs et du logiciel.
+- Les accessoires audio peuvent détecter des événements vocaux ou des mots-clés.
+- Les appareils intelligents peuvent détecter localement des anomalies et filtrer des événements.
+- Les produits équipés d'une caméra peuvent classifier simplement des images ou réagir à des événements déclenchés par la caméra si la chaîne de capture le permet.
+- Une HMI peut adapter son comportement au contexte de l'utilisateur.
 
 ## Points clés à retenir { #key-takeaways }
 

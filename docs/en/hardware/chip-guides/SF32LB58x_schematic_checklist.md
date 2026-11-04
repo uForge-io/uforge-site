@@ -19,6 +19,8 @@ hide:
 
 Each table below covers one schematic functional block. Use the condition stated in each item to determine when it applies. Review Required items whenever their stated conditions are met; review Optional items when the corresponding feature or design choice is used.
 
+This page reflects the linked SiFli workbook, version V1.0 dated 2026-01-21; it does not assert that this is the latest online revision.
+
 ### 5.8.1. Package { #581-package }
 
 <div align="center"><em>Table 5.8.1-1: Package Checklist</em></div>
@@ -484,7 +486,7 @@ For SD1, the VDDIOA2 I/O supply supports 1.8 V or 3.3 V and must match the perip
 | 2 | PBR0-PBR5 can be used as outputs in both Standby and Hibernate | Optional |
 | 3 | PBR0-PBR5 can output LPTIM signals | Optional |
 | 4 | <span class="flag-red">For SF32LB567, LPTIM3 is recommended: LPTIM3_OUT and LPTIM3_OUT_BAR output 21-25 kHz signals from PBR pins with different duty cycles and opposite polarity</span> | Optional |
-| 5 | <span class="flag-red">The 21-25 kHz opposite-polarity signals with different duty cycles may also be output from HCPU ATIM; select suitable ATIMx_CHx and ATIMx_CHxN signals together with Pin_Config and consider the impact of HCPU frequency reduction</span> | Optional |
+| 5 | <span class="flag-red">The 21-25 kHz opposite-polarity signals with different duty cycles may also be output from HCPU ATIM; select suitable ATIMx_CHx and ATMx_CHxN signals together with Pin_Config and consider the impact of HCPU frequency reduction</span> | Optional |
 | 6 | PBR0-PBR5 can output a 32 kHz clock signal | Optional |
 | 7 | <span class="flag-red">PBR0-PBR3 can be configured as wake-up inputs, but after MCU wake-up PBR0-PBRx cannot receive interrupt signals and can only detect 0/1 levels; use with caution</span> | Optional |
 
@@ -494,6 +496,8 @@ For SD1, the VDDIOA2 I/O supply supports 1.8 V or 3.3 V and must match the perip
     PBR checklist item 4 in the [source checklist workbook](https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) names SF32LB567. The workbook does not establish PBR checklist items 4 and 5 as recommendations for SF32LB58x; confirm their applicability with SiFli before adopting them.
 
     Storage checklist item 6 in the workbook says PA43 is driven high to enable "MPI3 power." The [official SF32LB58x hardware application note](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md), however, describes PA43 as the external-Flash power-control pin and says to drive it high to power the external Flash. The checklist row retains the workbook's wording. Confirm the intended power rail and interface scope with SiFli before finalizing production programming.
+
+    The workbook spells the complementary output `ATMx_CHxN`. This source spelling is retained; verify the exact signal names against the selected part's `Pin_Config` before use.
 
 ### 5.8.26. Power Consumption { #5826-power-consumption }
 

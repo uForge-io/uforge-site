@@ -1,6 +1,6 @@
 ---
 icon: lucide/terminal
-description: "Der tägliche Entwicklungsablauf mit dem SiFli-SDK: Umgebung aktivieren, mit scons bauen, per UART-Download oder sftool flashen und die serielle Ausgabe überwachen."
+description: "SiFli-SDK im Alltag: Umgebung aktivieren, mit scons bauen, per erzeugtem UART-Download-Skript oder sftool flashen und die serielle Ausgabe überwachen."
 tags:
     - Entwicklung
     - SiFli-SDK

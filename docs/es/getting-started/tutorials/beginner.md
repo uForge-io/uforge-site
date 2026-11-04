@@ -11,7 +11,7 @@ Estos tutoriales continúan justo después de [Primeros pasos](../index.md). Deb
 
 Los ejemplos asumen una placa de la clase SF32LB52-DevKit-LCD, como `sf32lb52-lcd_n16r8`. Si utiliza otra placa, sustituya el nombre de placa en el comando de compilación y confirme los nombres de pines, las instancias de periférico y la disposición de almacenamiento a partir de los archivos de soporte de esa placa.
 
-Utilice esta serie para adquirir hábitos de trabajo fiables: verifique un comportamiento en la placa, defina un criterio de éxito claro y conserve una configuración funcional de referencia antes de pasar al siguiente periférico. Está pensada para quienes empiezan con el SDK de SF32, aunque ya tengan experiencia con C para sistemas embebidos.
+Utilice esta serie para adquirir hábitos de trabajo fiables: verifique un comportamiento en la placa y conserve una configuración funcional de referencia antes de pasar al siguiente periférico. Está pensada para quienes empiezan con el SDK de SF32, aunque ya tengan experiencia con C para sistemas embebidos.
 
 ## Antes de empezar { #before-you-start }
 
@@ -131,7 +131,7 @@ rt_pin_irq_enable(BUTTON_PIN, PIN_IRQ_ENABLE);
 
 **Empiece con:** `example/system/finsh`
 
-El shell **FinSH** de RT-Thread le ofrece un prompt interactivo `msh>` sobre el mismo UART usada para los registros de arranque. Desarrolle estos hábitos desde el principio:
+El shell **FinSH** de RT-Thread le ofrece un prompt interactivo `msh>` a través del mismo puerto UART que se usa para los registros de arranque. Desarrolle estos hábitos desde el principio:
 
 - Utilice `rt_kprintf()` para un registro de depuración ligero en lugar de escrituras UART directas.
 - Utilice comandos de shell integrados como `list_thread`, `list_device` y comandos de memoria/estado para inspeccionar el sistema en ejecución.
@@ -157,7 +157,7 @@ El shell **FinSH** de RT-Thread le ofrece un prompt interactivo `msh>` sobre el 
 
 **Empiece con:** `example/rt_device/adc/channel`
 
-Para este ejemplo RT-Thread, habilite `BSP_USING_ADC`, `BSP_USING_ADC1` y `RT_USING_ADC`; de lo contrario, el SDK no registrará `bat1`. En SF32LB52, el canal 7 está conectado internamente a VBAT, por lo que no es una entrada genérica para sensores externos. Seleccione un canal ADC y un pinmux compatibles con el chip y la placa concretos. En el ejemplo documentado para SF32LB52, el canal 0 utiliza PA28. En el ejemplo actual del SDK de SiFli, `rt_adc_read()` devuelve un valor de tensión escalado en unidades de 0,1 mV, no cuentas ADC sin convertir; compruebe la unidad y la conversión para el chip y la versión del controlador concretos que utilice.
+Para este ejemplo RT-Thread, habilite `BSP_USING_ADC`, `BSP_USING_ADC1` y `RT_USING_ADC`; de lo contrario, el SDK no registrará `bat1`. En SF32LB52, el canal 7 está conectado internamente a VBAT, por lo que no es una entrada genérica para sensores externos. Seleccione un canal ADC y un pinmux compatibles con el chip y la placa concretos. En el ejemplo documentado para SF32LB52, el canal 0 utiliza PA28. En el ejemplo actual del SDK de SiFli, `rt_adc_read()` aplica un promedio predeterminado de 22 muestras y devuelve un valor de tensión escalado en unidades de 0,1 mV, no cuentas ADC sin convertir; compruebe el promedio, la unidad y la conversión para el chip y la versión del controlador concretos que utilice.
 
 ```c
 rt_adc_device_t adc = (rt_adc_device_t)rt_device_find("bat1");

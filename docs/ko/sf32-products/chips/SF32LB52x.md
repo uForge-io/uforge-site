@@ -8,11 +8,13 @@ tags:
 
 # SF32LB52x
 
-## 개요
+## 개요 { #overview }
 
 SF32LB52x는 SiFli의 비용 효율적인 MCU 제품군입니다. 디스플레이, 오디오, 스토리지, 무선 기능을 통합해야 하는 보급형 스마트 웨어러블, 소형 그래픽 HMI, Bluetooth 주변 장치 등 공간 제약이 있는 AIoT 제품을 대상으로 합니다.
 
-플랫폼 수준에서 이 제품군은 240 MHz Arm Cortex-M33 STAR-MC1[^1] 애플리케이션 코어와 전용 24 MHz 저전력 Bluetooth 컨트롤러 코어를 결합합니다. 이를 통해 반응성이 좋은 UI와 애플리케이션 스택을 실행하면서도 Bluetooth 연결과 상시 동작(always-on) 워크로드를 분리할 수 있습니다.
+플랫폼 수준에서 이 제품군은 240 MHz Arm Cortex-M33 STAR-MC1[^1] 애플리케이션 코어와 전용 저전력 Bluetooth 컨트롤러 코어를 결합하며, 데이터시트에는 LCPU 최대 주파수가 24 MHz로 기재되어 있습니다. 이를 통해 반응성이 좋은 UI와 애플리케이션 스택을 실행하면서도 Bluetooth 연결과 상시 동작(always-on) 워크로드를 분리할 수 있습니다.
+
+**LCPU 주파수 참고:** SiFli의 [DS5201 V2.5.3 데이터시트(중국어)](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p5p3.pdf)는 LCPU 최대 주파수를 24 MHz로 제시합니다. 반면 현재 [SF32LB52x 저전력 측정 보고서](https://docs.sifli.com/projects/rpt5202_sf32lb52x-low-power-measurement-report/latest/en/brief_introduction.html)와 [SDK 저전력 가이드](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html)는 48 MHz로 제시하지만, 차이를 설명할 SKU, 동작 모드 또는 구성 조건은 명시하지 않습니다. 이 페이지의 비교에는 데이터시트 값을 사용합니다. `24/48 MHz`를 선택 가능한 범위나 제품 변형별 차이로 해석하지 말고, 정확한 디바이스와 SDK에서 허용되는 LCPU 주파수를 SiFli에 확인하십시오.
 
 제품 기획 관점에서, SiFli 칩 모델 가이드의 주요 변형(variant)은 전원 방식에 따라 두 그룹으로 나뉩니다.
 
@@ -177,7 +179,9 @@ SF32LB52x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 ## 자주 묻는 질문 { #frequently-asked-questions }
 
 **SF32LB52x의 주요 사양은 무엇입니까?**
-SF32LB52x는 애플리케이션 CPU(Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @24/48 MHz, 전용 Bluetooth 컨트롤러)를 갖추고 있으며, 내장 SRAM은 576 KB입니다. Bluetooth 모드는 듀얼 모드(Classic Bluetooth + BLE)입니다. 그래픽: ePicasso 2.0 Lite. 패키지는 QFN68이며, 크기는 7 × 7 mm입니다. USB는 2.0 FS를 지원합니다.
+SF32LB52x는 애플리케이션 CPU(Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33, 최대 24 MHz, 전용 Bluetooth 컨트롤러)를 갖추고 있으며, 내장 SRAM은 576 KB입니다. Bluetooth 모드는 듀얼 모드(Classic Bluetooth + BLE)입니다. 그래픽: ePicasso 2.0 Lite. 패키지는 QFN68이며, 크기는 7 × 7 mm입니다. USB는 2.0 FS를 지원합니다.
+
+이 LCPU 클럭은 데이터시트에 따른 값이며, 24/48 MHz 동작 범위가 확인되었다는 뜻은 아닙니다. [출처 간 차이](#overview)를 참조하고 정확한 디바이스와 SDK에서 허용되는 클럭을 SiFli에 확인하십시오.
 
 **SF32LB52x는 어떤 디스플레이 인터페이스를 지원합니까?**
 지원하는 인터페이스는 SPI / DSPI / QSPI / 8080 / EPD / JDI입니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -211,3 +215,6 @@ RGB888 색상에서 최대 512 × 512 해상도를 지원합니다. DTR을 지�
 ### 레퍼런스 제품
 
 일반적인 SF32LB52 설계로는 보급형 스마트워치, 피트니스 밴드, Bluetooth 액세서리, 소형 그래픽 컨트롤, 전자 가격표, 스마트 배지, 휴대용 라벨 프린터, 비용에 민감한 eBike 또는 eScooter 디스플레이가 있습니다.
+
+!!! note "자동 생성 콘텐츠"
+    이 페이지는 기존 원본 문서 없이 작성되었습니다. 사용하기 전에 기술적 주장을 SiFli의 공식 문서와 대조하여 확인하십시오.

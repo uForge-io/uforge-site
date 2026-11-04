@@ -97,9 +97,7 @@ OpenSiFli 的开发板定义会把这个 Arduino 开发板映射到 Zephyr 目�
 
 ## 让开发板进入串口下载模式 { #put-the-board-in-serial-download-mode }
 
-根据 OpenSiFli 文档，首次使用前需要让开发板进入串口下载模式。请按 SF32LB52 DevKit LCD 对应的 Boot/Reset 操作顺序执行，再从 Arduino IDE 或 CLI 发起上传。
-
-上传工具是 `sftool`。
+OpenSiFli 说明，首次使用时需将开发板置于串口下载模式。对于 SF32LB52 DevKit LCD，请在下载工具中启用 **BOOT** 选项，然后给开发板上电或复位；具体操作参见开发板的[下载与调试说明](../../sf32-products/devkits/SF32LB52-DevKit-LCD.md#download-and-debug)。进入下载模式后，可从 Arduino IDE 或 CLI 使用 `sftool` 上传。
 
 ## 上传串口冒烟测试 { #upload-a-serial-smoke-test }
 

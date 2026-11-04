@@ -19,6 +19,8 @@ hide:
 
 Chaque tableau ci-dessous couvre un bloc fonctionnel du schéma. Déterminez l'applicabilité à partir des conditions indiquées dans chaque point : vérifiez les points obligatoires lorsque ces conditions sont réunies, et les points optionnels lorsque la fonction ou l'option de conception correspondante est utilisée.
 
+Cette page reprend le classeur SiFli lié, version V1.0 datée du 2026-01-21 ; elle ne prétend pas qu'il s'agit de la dernière révision en ligne.
+
 ### 5.8.1. Boîtier { #581-package }
 
 <div align="center"><em>Tableau 5.8.1-1 : Liste de contrôle du boîtier</em></div>
@@ -484,7 +486,7 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
 | 2 | PBR0-PBR5 peuvent être utilisés comme sorties à la fois en Standby et en Hibernate | Optionnel |
 | 3 | PBR0-PBR5 peuvent générer des signaux LPTIM | Optionnel |
 | 4 | <span class="flag-red">Pour le SF32LB567, LPTIM3 est recommandé : LPTIM3_OUT et LPTIM3_OUT_BAR génèrent depuis les broches PBR des signaux de 21-25 kHz, de rapports cycliques différents et de polarités opposées</span> | Optionnel |
-| 5 | <span class="flag-red">Les signaux 21-25 kHz de polarité opposée avec des rapports cycliques différents peuvent également être générés depuis l'ATIM du HCPU ; sélectionnez les signaux ATIMx_CHx et ATIMx_CHxN adaptés avec Pin_Config et tenez compte de l'impact de la réduction de fréquence du HCPU</span> | Optionnel |
+| 5 | <span class="flag-red">Les signaux 21-25 kHz de polarité opposée avec des rapports cycliques différents peuvent également être générés depuis l'ATIM du HCPU ; sélectionnez les signaux ATIMx_CHx et ATMx_CHxN adaptés avec Pin_Config et tenez compte de l'impact de la réduction de fréquence du HCPU</span> | Optionnel |
 | 6 | PBR0-PBR5 peuvent générer un signal d'horloge 32 kHz | Optionnel |
 | 7 | <span class="flag-red">PBR0-PBR3 peuvent être configurées comme entrées de réveil, mais après le réveil du MCU, PBR0-PBRx ne peuvent pas recevoir de signaux d'interruption et ne peuvent détecter que des niveaux 0/1 ; à utiliser avec prudence</span> | Optionnel |
 
@@ -494,6 +496,8 @@ L'alimentation d'E/S VDDIOA2 de SD1 accepte 1,8 V ou 3,3 V et doit correspondre 
     Le point 4 de la liste PBR du [classeur de contrôle d'origine](https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) mentionne SF32LB567. Toutefois, le classeur ne confirme pas que les points 4 et 5 de la liste PBR sont des recommandations pour le SF32LB58x ; vérifiez leur applicabilité auprès de SiFli avant de les adopter.
 
     Le point 6 de la liste de contrôle du stockage du classeur indique que PA43 doit être mis à l'état haut pendant la programmation en production afin d'activer « l'alimentation MPI3 ». En revanche, la [note d'application matérielle officielle du SF32LB58x](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md) décrit PA43 comme la commande d'alimentation de la Flash externe et indique qu'il faut le mettre à l'état haut pour alimenter cette Flash. La ligne de la liste conserve le texte du classeur. Avant de figer la procédure de programmation en production, confirmez auprès de SiFli le rail d'alimentation et les interfaces réellement commandés par PA43.
+
+    Le classeur écrit la sortie complémentaire `ATMx_CHxN`. Cette graphie de la source est conservée ; vérifiez les noms exacts des signaux dans le `Pin_Config` du composant sélectionné avant utilisation.
 
 ### 5.8.26. Consommation électrique { #5826-power-consumption }
 

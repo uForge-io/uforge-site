@@ -13,7 +13,7 @@ tags:
 # SF32LB57x Hardware-Design-Leitfaden — Schaltplan-Checkliste { #sf32lb57x-hardware-design-guide-schematic-checklist }
 
 !!! note "Teil des SF32LB57x Hardware-Design-Leitfadens"
-    Diese Seite behandelt Abschnitt 5.8 mit den einzelnen Prüfpunkten für den Schaltplan, übernommen aus SiFlis offiziellen Tabellen zur Design-Selbstprüfung. Zurück zu [Minimalsystem und Stromversorgung](SF32LB57x_schematic_system_power.md), der ersten der drei Seiten mit Schaltplanrichtlinien.
+    Diese Seite enthält die Schaltplan-Prüfpunkte aus den Abschnitten 4.1–4.8 des offiziellen SF32LB57x-Hardwareanwendungsleitfadens von SiFli. Die zugehörigen Prüfpunkte für PCB-Layout und Leiterbahnführung stehen in der [PCB-Layout-Checkliste](SF32LB57x_pcb_layout_checklist.md). Das [offizielle OpenSiFli-Quell-Markdown](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/SF32LB57x-HW-Application.md) enthält die vollständigen Selbstprüftabellen; die Abdeckung der Prüfpunkte, ihr Geltungsbereich und die angegebenen Werte wurden in beiden Checklisten damit abgeglichen. Die nachfolgend beschriebenen Widersprüche bestehen bereits in der Quelle und sind weiterhin ungeklärt. Die Checklisten-Tabellen im Markdown enthalten keine arbeitsmappen-spezifischen Prüfmarkierungen; Excel-Zellfarben wurden daher nicht separat geprüft. Klären Sie die Widersprüche für die genaue bestellbare Teilenummer vor der Designfreigabe mit SiFli. Zurück zu [Minimalsystem und Stromversorgung](SF32LB57x_schematic_system_power.md), der ersten der drei Seiten mit Schaltplanrichtlinien.
 
 ## 5.8. Schaltplan-Checkliste { #58-schematic-checklist }
 

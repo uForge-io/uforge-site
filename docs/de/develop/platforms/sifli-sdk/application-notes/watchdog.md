@@ -14,7 +14,7 @@ Die SiFli-SDK-Dokumentation behandelt Watchdogs auf zwei Ebenen: die über die H
 <em>Tabelle: Dokumentiertes Watchdog-Verhalten nach Familie</em>
 
 | Familie | Watchdog-Verhalten laut HAL | In der HAL-Anleitung angegebener Takt |
-|---|---|
+|---|---|---|
 | SF32LB52x | Die HAL-Anleitung beschreibt eigene Watchdogs für HCPU und LCPU, die einen Interrupt auslösen oder ihr jeweiliges Subsystem zurücksetzen können. Zusätzlich gibt es einen systemweiten IWDT, der den gesamten Chip zurücksetzt. | Die Zählerbeschreibung basiert auf einem 32K-Takt; eine separate 52x-Taktauswahl wird in der Anleitung nicht genannt. |
 | SF32LB55x | HCPU-WDT1 und LCPU-WDT2 können Interrupts auslösen; ein Hardware-Reset ist jeweils auf das zugehörige Subsystem beschränkt. Der System-IWDT löst keinen Interrupt aus, kann aber den gesamten Chip zurücksetzen. | Wahlweise RC10K oder 32K LXT. |
 | SF32LB56x / SF32LB58x | Laut HAL-Anleitung können WDT1/WDT2 zusätzlich den gesamten Chip zurücksetzen. | RC10K; der Takt stammt nicht mehr aus dem 32K-Takt der Low-Power-Domäne. |
@@ -22,7 +22,7 @@ Die SiFli-SDK-Dokumentation behandelt Watchdogs auf zwei Ebenen: die über die H
 </div>
 
 !!! warning "Geltungsbereich des RT-Thread-Watchdog-Leitfadens"
-    Der [Watchdog Usage Guide](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/watchdog.html) ist unter dem Pfad `sf32lb52x` veröffentlicht, nennt im Text jedoch ausdrücklich SF32LB55X. Der unten beschriebene Standard-Timeout von 30 Sekunden, das Füttern aus dem IDLE-Thread, das Verhalten im Schlafmodus und die Anwendungs-Resetfolge gelten für die dort beschriebene 55x-Konfiguration. Sie sind keine allgemeine Zusicherung für alle Familien. Prüfen Sie diese Punkte anhand der Quelle und der generierten Konfiguration der Zielfamilie.
+    Der [Watchdog Usage Guide](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/watchdog.html) ist unter dem Pfad `sf32lb52x` veröffentlicht, nennt im Text jedoch ausdrücklich SF32LB55X. Der unten beschriebene Standard-Timeout von 30 Sekunden, das Füttern aus dem IDLE-Thread, das Verhalten im Schlafmodus und das Resetverhalten gelten für die dort beschriebene 55x-Konfiguration. Sie sind keine allgemeine Zusicherung für alle Familien. Prüfen Sie diese Punkte anhand der Quelle und der generierten Konfiguration der Zielfamilie.
 
 ## Den Watchdog aktivieren und konfigurieren { #enable-and-configure-the-watchdog }
 
@@ -62,6 +62,8 @@ Fügen Sie keine bedingungslose Watchdog-Schleife hinzu, die einen Scheduler-Sti
 - HCPU verwendet den System-Watchdog. Ein Timeout startet den gesamten Chip neu.
 - LCPU verwendet den LCPU-Subsystem-Watchdog. Ein Timeout erzeugt zunächst einen Interrupt; der Interrupt-Handler löst dann einen Software-Neustart des gesamten Chips aus.
 
+Der SiFli-Wiki-Hinweis zum Watchdog ergänzt den Ablauf für `Standby`: Der Watchdog-Hardwareblock wird nicht abgeschaltet. Der RT-Thread-Treiber stoppt den WDT; beim Aufwecken initialisiert der Resume-Pfad ihn erneut und startet damit den Zähler neu. „Deaktiviert“ bezeichnet hier also einen softwareseitigen Stopp, nicht die Stromabschaltung des Watchdog-Blocks.
+
 ## Validierungsablauf { #validation-sequence }
 
 1. Halten Sie Chipfamilie, SDK-Revision, Timeout, die für das Füttern des Watchdogs zuständige Komponente und den Schlafmodus fest.
@@ -76,5 +78,6 @@ Fügen Sie keine bedingungslose Watchdog-Schleife hinzu, die einen Scheduler-Sti
 - [Watchdog Usage Guide (chinesisch; derselbe SF32LB52x-Pfad, Text nennt SF32LB55X)](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/watchdog.html)
 - [SF32LB52x-HAL-WDT-Anleitung (englisch)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/hal/wdt.html)
 - [SF32LB55x-HAL-WDT-Anleitung (chinesisch; mit Vergleichshinweisen zu 56x/58x)](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/hal/wdt.html)
+- [OpenSiFli SiFli-Wiki: Hinweise zum Watchdog (chinesisch)](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/faq/mcu/wdt.md)
 
 Die folgenden familienbezogenen Watchdog-Anwendungshinweise konnten nicht verifiziert werden: `sf32lb55x/app_note/watchdog.html`, `sf32lb56x/app_note/watchdog.html` und `sf32lb58x/app_note/watchdog.html`. Suchergebnisse und direkte Aufrufversuche waren nicht eindeutig; daraus lässt sich nicht ableiten, dass diese Pfade einen 404-Fehler liefern.

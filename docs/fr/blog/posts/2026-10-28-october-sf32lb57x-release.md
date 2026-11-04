@@ -1,6 +1,6 @@
 ---
 icon: lucide/rss
-description: "SF32LB57x est désormais documenté : environ deux fois la puissance CPU applicative de SF32LB56x, graphismes ePicasso 3.0 et une structure de coûts compétitive."
+description: "SF32LB57x documenté : ses cœurs applicatifs offrent environ deux fois les performances de ceux du SF32LB56x, avec ePicasso 3.0 et une structure de coûts compétitive."
 ---
 
 # Octobre : présentation de SF32LB57x [2026-10-28] { #october-sf32lb57x-2026-10-28 }
@@ -13,7 +13,7 @@ SF32LB52x et SF32LB56x associent chacun un cœur applicatif Cortex-M33 à 240 MH
 
 ### Plus de capacités graphiques { #more-graphics-capability }
 
-Les graphismes passent à ePicasso 3.0 avec décompression matérielle eZip 3.0, contre ePicasso 2.0 Lite sur SF32LB52x et ePicasso 2.0 sur SF32LB56x. ePicasso 3.0 accélère en temps réel la rotation, la mise à l'échelle, la projection, la symétrie et le mélange alpha, et eZip 3.0 décompresse les ressources eZip, JPEG et MJPEG sans décodage gourmand en CPU. Autour des cœurs, la famille ajoute une entrée caméra DCMI, jusqu'à 48 Mo de PSRAM et 32 Mo de NOR Flash intégrés au boîtier sur certaines références, deux ADC audio, deux interfaces CAN et PTM, une machine de tâches parallèles qui prend en charge les tâches de périphériques sensibles au timing.
+Les graphismes passent à ePicasso 3.0 avec décompression matérielle eZip 3.0, contre ePicasso 2.0 Lite sur SF32LB52x et ePicasso 2.0 sur SF32LB56x. ePicasso 3.0 accélère en temps réel la rotation, la mise à l'échelle, la projection, l'effet miroir et le mélange alpha, et eZip 3.0 décompresse les ressources eZip, JPEG et MJPEG sans décodage gourmand en CPU. Autour des cœurs, la famille ajoute une entrée caméra DCMI, jusqu'à 48 Mo de PSRAM et 32 Mo de NOR Flash intégrés au boîtier sur certaines références, deux ADC audio, deux interfaces CAN et PTM, une machine de tâches parallèles qui décharge les CPU des tâches périphériques soumises à des contraintes temporelles.
 
 ### Une structure de coûts compétitive { #competitive-cost-structure }
 
@@ -21,7 +21,7 @@ Ce saut ne fait pas passer SF32LB57x dans une autre catégorie de coût. À notr
 
 ### Documentation et par où commencer { #documentation-and-where-to-start }
 
-La [page de la puce SF32LB57x](../../sf32-products/chips/SF32LB57x.md) donne la présentation complète et les références figurent dans le [sélecteur de produits](../../sf32-products/product-selector.md). Le [guide de conception matérielle](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md) suit la même structure schéma, routage PCB, liste de contrôle et revue que les autres familles. Choisissez la référence commandable exacte avant de réutiliser un schéma, car le boîtier et la base d'alimentation déterminent des détails comme le nombre de GPIO utilisables, et confirmez les valeurs finales dans les fiches techniques de SiFli.
+La [page de la puce SF32LB57x](../../sf32-products/chips/SF32LB57x.md) donne la présentation complète et les références figurent dans le [sélecteur de produits](../../sf32-products/product-selector.md). Le [guide de conception matérielle](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md) suit la même structure — schéma, routage PCB, liste de contrôle et revue — que les autres familles. Choisissez la référence commandable exacte avant de réutiliser un schéma, car le boîtier et la configuration d'alimentation déterminent des détails comme le nombre de GPIO utilisables. Confirmez les valeurs finales dans les fiches techniques de SiFli.
 
 ### Aussi ce mois-ci { #also-this-month }
 

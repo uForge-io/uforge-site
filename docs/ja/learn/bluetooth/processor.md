@@ -39,24 +39,24 @@ Bluetoothは、必要なときだけバックグラウンドで動く単純な�
 <div align="center"><em>図: SF32の無線アーキテクチャ（簡略図）</em></div>
 
 ```text
-アプリケーションプロセッサー
-  - 製品ファームウェア
-  - UIとグラフィックス
-  - オーディオアプリケーションの制御
-  - ユーザー向けサービス
+Application Processor
+  - product firmware
+  - UI and graphics
+  - audio application logic
+  - user services
         │
         ▼
-Bluetoothホスト／システムサービス
+Bluetooth Host / System Services
         │
         ▼
-Bluetoothプロセッサー／コントローラーファームウェア
-  - リンク層のタイミング制御
-  - 無線スケジューリング
-  - 低消費電力時の接続イベント
-  - コントローラー側のプロトコル処理
+Bluetooth Processor / Controller Firmware
+  - link-layer timing
+  - radio scheduling
+  - low-power connection events
+  - controller-side protocol work
         │
         ▼
-Bluetooth無線部とRFフロントエンド
+Bluetooth Radio and RF Front End
 ```
 
 ホスト、コントローラー、アプリケーションファームウェアの分担は、SDK、スタック構成、製品要件によって異なります。ただし、メインのアプリケーションプロセッサーを、Bluetooth処理に関わる唯一のCPUとして扱うべきではありません。Bluetoothサブシステムは独自の実行環境を持ち、無線動作の決定性を保ちながら電力効率を高めるよう設計されています。
@@ -154,7 +154,7 @@ Bluetoothサブシステムの利点が最も生きるのは、無線リンク�
 
 Bluetoothソフトウェアはしばしば2つの主要なレイヤーとして説明されます。
 
-<div align="center"><em>表: ホスト、コントローラー、アプリケーションの境界</em></div>
+<div align="center"><em>表: ホストとコントローラーの主な責務</em></div>
 
 <div align="center" markdown>
 

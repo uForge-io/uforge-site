@@ -21,7 +21,7 @@ Je nach Modul-SKU kann im Gehäuse des verwendeten Chips OPI-PSRAM integriert se
 
 ## Anwendungen { #applications }
 
-**SF32LB52-MOD-1 eignet sich für Produkte, die Bluetooth, Grafik und Audio benötigen und zugleich das RF- und Layout-Risiko reduzieren sollen.** Dazu zählen:
+**SF32LB52-MOD-1 wird für Produkte empfohlen, die Bluetooth, Grafik und Audio benötigen und zugleich das RF- und Layout-Risiko reduzieren sollen.** Dazu zählen:
 
 - Smartwatches, Fitnessarmbänder und tragbare Medizinprodukte
 - Bluetooth-Sensor-Hubs und vernetztes Zubehör

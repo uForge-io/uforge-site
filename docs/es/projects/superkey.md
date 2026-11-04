@@ -179,7 +179,7 @@ Clasifique los fallos en cinco dominios: hardware/pantalla del dispositivo, entr
 |:-------|:-------|:------------------------|
 | Aplicación complementaria ausente | Cierre SuperKeyHub y reinicie el dispositivo | La interfaz local y HID siguen funcionando; los valores que dependen de la aplicación aparecen claramente como obsoletos o no disponibles |
 | Pérdida de CDC | Desconecte y vuelva a conectar USB o cambie de puerto mientras se envían datos | El dispositivo no se bloquea; la consulta de versión y el envío de datos se recuperan al reconectar |
-| Suspensión del host | Active `power_mode sleep/normal` y ejecute un ciclo de suspensión/reactivación del host | LCD, LED, retroiluminación y sensores se detienen/reanudan según lo previsto, y los datos vuelven a actualizarse |
+| Suspensión del host | Active en SuperKeyHub el seguimiento de la suspensión del sistema y ejecute un ciclo de suspensión/reactivación del host | LCD, LED, retroiluminación y sensores se detienen/reanudan según lo previsto, y los datos vuelven a actualizarse |
 | Versiones incompatibles | En una configuración controlada, pruebe una combinación incompatible de aplicación y firmware | Se rechaza la combinación o se muestra un error diagnosticable, sin aplicar una actualización incompatible |
 | Fallo de API | Use una configuración meteorológica no válida o desconecte la red | El fallo meteorológico no afecta HID, CDC, la interfaz local ni la recuperación |
 | Interrupción de DFU | Interrumpa una actualización en una unidad de prueba recuperable | La ruta cableada de grabación conservada restaura la imagen conocida |

@@ -77,7 +77,7 @@ UバリアントはQFN68Lパッケージ、VバリアントはWBBGA175パッケ�
 - 48 MHzおよび32.768 kHzの水晶振動子の要件と推奨モデル。
 - BluetoothのRF設計とアンテナ整合の要件。
 - UではSPI/QSPIおよびJDIディスプレイ、VではSPI/QSPI、MCU8080、DPI、JDIディスプレイ。
-- SDIO/eMMC/SD NAND形式のインターフェースを含む、外部メモリーとブートストレージの選択肢。
+- 外部メモリーおよびブートストレージの選択肢として、SDIO、eMMC、SD NANDを扱います。
 - ボタン、振動モーター、オーディオインターフェース、PBRピン、センサー、UART/I2C、GPTIM、デバッグ／書き込み、校正。
 
 ### 3.4. 主な用途 { #34-typical-applications }
@@ -166,7 +166,7 @@ EVTの前に、U/Vの参照資料の版、データシート／ユーザーマ�
 
 [SiFli チップ向けハードウェア設計ガイド一覧 (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## ハードウェア設計ガイドの続き { #continue-the-design-guide }
+### 4.5. ハードウェア設計ガイドの続き { #continue-the-design-guide }
 
 完全版ガイドは、設計プロセスの各段階を扱う以下のページで構成されています。このページから各ページに移動できます。
 

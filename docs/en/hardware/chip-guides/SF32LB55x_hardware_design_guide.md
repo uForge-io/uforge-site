@@ -66,35 +66,40 @@ Storage connectivity includes multiple QSPI interfaces, an independent OPI-PSRAM
 | Package Name | Size | Pin Pitch | Ball Diameter |
 | :--- | :--- | :--- | :--- |
 | QFN68L | 7x7x0.75 mm | 0.35 mm | - |
+| BGA125 | 7x7x0.94 mm | 0.5 mm | 0.25 mm |
 | BGA145 | 7x7x0.94 mm | 0.5 mm | 0.25 mm |
 | BGA169 | 7x7x0.94 mm | 0.5 mm | 0.25 mm |
 
 </div>
 
-SF32LB55x supports QFN68L, BGA145, and BGA169 packages. Select the package early because memory interfaces, fanout, PCB process requirements, and available GPIO differ by package.
+SF32LB55x supports QFN68L, BGA125, BGA145, and BGA169 packages. Select the package early because memory interfaces, fanout, PCB process requirements, and available GPIO differ by package.
 
 ![Figure 3.2-1: QFN68L Pin Distribution](../../sf32-products/chips/assets/55x/SF32LB55x-QFN68-Leadmap.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 3.2-1: QFN68L Pin Distribution</em></div>
 
-![Figure 3.2-2: BGA145 Pin Distribution](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-Ballmap.svg){ width="100%" loading="lazy" }
+![Figure 3.2-2: BGA125 Ball Map](../../sf32-products/chips/assets/55x/SF32LB55x-BGA125-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figure 3.2-2: BGA145 Pin Distribution</em></div>
+<div align="center"><em>Figure 3.2-2: BGA125 Ball Map</em></div>
+
+![Figure 3.2-3: BGA145 Pin Distribution](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-Ballmap.svg){ width="100%" loading="lazy" }
+
+<div align="center"><em>Figure 3.2-3: BGA145 Pin Distribution</em></div>
 
 !!! warning "Legacy BGA169 pin maps"
     SiFli identifies SF32LB557V8N6 as end-of-life (EOL). Its ball map is retained below for existing-design review, not as a recommendation for a new design. SF32LB557VD3A6 uses a different BGA169 ball map: D11, E9, K12, L11, L13, and M13 are NC. Check the exact part's map; identical package dimensions do not imply pin compatibility.
 
-![Figure 3.2-3: BGA169 SF32LB557V8N6 Pin Distribution](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg){ width="100%" loading="lazy" }
+![Figure 3.2-4: BGA169 SF32LB557V8N6 Pin Distribution](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figure 3.2-3: BGA169 SF32LB557V8N6 Pin Distribution</em></div>
+<div align="center"><em>Figure 3.2-4: BGA169 SF32LB557V8N6 Pin Distribution</em></div>
 
-![Figure 3.2-4: BGA169 SF32LB557VD3A6 Pin Distribution](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-2-Ballmap.svg){ width="100%" loading="lazy" }
+![Figure 3.2-5: BGA169 SF32LB557VD3A6 Pin Distribution](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-2-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figure 3.2-4: BGA169 SF32LB557VD3A6 Pin Distribution</em></div>
+<div align="center"><em>Figure 3.2-5: BGA169 SF32LB557VD3A6 Pin Distribution</em></div>
 
 ### 3.3. Major Hardware Features { #33-major-hardware-features }
 
-- QFN68L, BGA145, and BGA169 package options.
+- QFN68L, BGA125, BGA145, and BGA169 package options.
 - Dual 48 MHz and 32.768 kHz crystal design requirements.
 - Low-power Bluetooth 5.2 transceiver, RF matching, and antenna layout requirements.
 - OPI PSRAM, QSPI NOR/NAND Flash and PSRAM, SDIO eMMC or Micro SD interfaces; co-packaged memory varies by exact part number.

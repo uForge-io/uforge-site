@@ -49,7 +49,7 @@ hide:
 
 ### 9.1. 부록 A. 일반적인 SF32LB56x 제품 { #appendix-a-a-typical-sf32lb56x-product }
 
-일반적인 SF32LB56x 제품에는 MCU, PMIC, 디스플레이 및 터치 컨트롤러, 부트 스토리지, 선택형 외부 메모리, 센서, 진동 모터, 오디오 입출력, Bluetooth 안테나, 크리스털, 디버그 접속부, 양산 테스트 접속부가 포함됩니다. U 패키지는 소형 QFN 구현에 적합하며, V 패키지는 BGA/HDI 레이아웃을 계획해 더 다양한 인터페이스를 구현할 수 있습니다.
+U 및 V 패키지 애플리케이션 다이어그램은 구성 예시이며 필수 부품 목록이 아닙니다. 두 다이어그램 모두 MCU와 충전기, Buck/LDO 전원, LCD 경로, 외부 플래시 옵션(QSPI NAND, SD NAND 또는 NOR 플래시), SPI 모션 센서와 I2C 심박 센서를 보여 줍니다. 아날로그 마이크 입력과 오디오 PA를 통한 스피커 출력, PWM 진동 모터, Bluetooth/RF 안테나, 48 MHz 및 32.768 kHz 크리스털, SWD/UART 접속도 포함됩니다. 터치 및 백라이트 회로는 [회로도 설계 지침](SF32LB56x_schematic_design.md)에서 별도로 다룹니다. V 다이어그램에는 SDIO eMMC와 Wi-Fi, UART GPS 및 NFC, SPI LTE 모듈도 표시됩니다. 실제 설계에 필요한 주변 장치, 인터페이스 라우팅, 패키지 지원을 확인하십시오.
 
 ## 10. 개정 이력 { #10-revision-history }
 

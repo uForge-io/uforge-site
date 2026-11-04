@@ -49,7 +49,7 @@ O PANU pode localizar dispositivos próximos por inquiry e identificar o serviç
 
 </div>
 
-Em produtos que já precisam de Bluetooth de modo dual para áudio, serviços GATT ou perfis clássicos, PAN costuma ser a forma de menor custo incremental para adicionar acesso à internet sem um segundo subsistema de rádio — desde que o caso de uso aceite depender de um telefone próximo com o compartilhamento de internet ativado.
+Em produtos que já precisam de Bluetooth de modo dual para áudio, serviços GATT ou perfis clássicos, PAN costuma ser uma forma de baixo custo incremental para adicionar acesso à internet sem um segundo subsistema de rádio — desde que o caso de uso aceite depender de um telefone próximo com o compartilhamento de internet ativado.
 
 ## Transporte de dados no iOS: retransmissão por BLE, Bluetooth clássico e PAN { #ios-data-transport-ble-relay-classic-bluetooth-and-pan }
 

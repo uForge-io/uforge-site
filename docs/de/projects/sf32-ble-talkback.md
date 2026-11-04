@@ -22,7 +22,7 @@ Dieser Pfad vereint BLE, Audio, Display, Tasten, Akkuüberwachung und Energiespa
 
 „Bis zu acht Geräte und drei gleichzeitige Sprecher“ beschreibt eine Grenze der Upstream-Implementierung und ist keine Produkteigenschaft, die für jede Entfernung, Störung, Paketverlustrate und jedes Gleichzeitigkeitsmuster validiert wurde. Die Upstream-Unterlagen spezifizieren außerdem weder die Authentifizierung von Räumen noch die Verschlüsselungsrichtlinie der Verbindung noch eine Garantie für Sprachvertraulichkeit noch den regulatorischen Funkstatus noch die vollständigen Lizenzbedingungen der Binärkomponente `talk_back`. Jeder dieser Punkte muss separat für das Produkt geprüft werden.
 
-**Hinweis zur Boardquelle:** Die chinesische SiFli-Wiki-Seite zum ULP-Board ist ausdrücklich als noch nicht verfügbar gekennzeichnet. Sie nennt nur den Einsatz für stromsparende Sensor- und Wearable-Anwendungen, 3- oder 6-Achsen-Sensoren sowie reservierte Messpunkte für den Energiesparbetrieb. Eine vollständige Boardspezifikation ist das nicht. Prüfen Sie Peripherie anhand der konkreten Boardrevision und des Schaltplans; die nachfolgend beschriebenen Talkback-Funktionen beruhen auf dem fixierten Anwendungscode.
+**Hinweis zur Boardquelle:** Die chinesische SiFli-Wiki-Seite zum ULP-Board ist ausdrücklich als noch nicht verfügbar gekennzeichnet. Sie nennt nur den Einsatz für stromsparende Sensor- und Wearable-Anwendungen, 3- oder 6-Achsen-Sensoren sowie reservierte Messpunkte für den Energiesparbetrieb. Eine vollständige Boardspezifikation ist das nicht; eine für dieses Beispiel validierte Hardwarerevision nennt sie ebenfalls nicht. Prüfen Sie Peripherie anhand der konkreten Boardrevision und des Schaltplans; die nachfolgend beschriebenen Talkback-Funktionen beruhen auf dem fixierten Anwendungscode.
 
 ## Ergebnis, Umfang und Eintrittskriterien { #outcome-scope-and-entry-criteria }
 
@@ -146,7 +146,7 @@ flowchart LR
     BP["Akku / USB-Stromversorgung"] --> B
 ```
 
-Die wichtigsten Fehlerbereiche sind BLE-Scan und Raumerstellung, Synchronisierung des Raumzustands, Planung gleichzeitiger Sprecher, Opus-/Akustikpfad, Tastenereignisse, niedriger Akkustand und Schlafmodus, Wiederherstellung per Einschalttaste sowie nicht veröffentlichte Details zur Komponente und Lizenzierung. Prüfen Sie zuerst Rolle und Zustand und unterscheiden Sie anschließend Funk-, Audio- und lokale Stromversorgungsfehler.
+Das Diagramm zeigt den Audiopfad vom Master zum Slave; die Gegenrichtung wird in Phase 2 separat geprüft. Die wichtigsten Fehlerbereiche sind BLE-Scan und Raumerstellung, Synchronisierung des Raumzustands, Planung gleichzeitiger Sprecher, Opus-/Akustikpfad, Tastenereignisse, niedriger Akkustand und Schlafmodus, Wiederherstellung per Einschalttaste sowie nicht veröffentlichte Details zur Komponente und Lizenzierung. Prüfen Sie zuerst Rolle und Zustand und unterscheiden Sie anschließend Funk-, Audio- und lokale Stromversorgungsfehler.
 
 ## Phase 1 — Die unveränderte Quellbasis einrichten { #stage-1-establish-the-untouched-source-baseline }
 

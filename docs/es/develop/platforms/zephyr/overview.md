@@ -72,7 +72,7 @@ El árbol downstream contiene drivers, bindings o configuraciones de ejemplo esp
 - Configuración de Bluetooth HCI mailbox y BAP broadcast sink.
 - Códec de audio, DMA, CRC, criptografía, entropía, OTP/eFuse, reguladores, reset y sensor de temperatura.
 
-Que algo esté presente en el árbol no significa que todos los escenarios de producto estén listos para producción. Valide la combinación exacta de ejemplo y driver en la placa de destino.
+Que un elemento esté presente en el árbol no significa que el driver esté habilitado para el objetivo de placa ni que todos los escenarios de producto estén listos para producción. Valide en la placa de destino la combinación exacta de ejemplo, driver y configuración de placa.
 
 ## Secuencia de integración { #integration-sequence }
 

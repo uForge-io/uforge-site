@@ -15,6 +15,8 @@ tags:
 !!! note "Parte do guia de projeto de hardware do SF32LB52x"
     Esta página apresenta a seção 5.8, com os pontos de verificação do esquemático. Volte a [Sistema mínimo, alimentação e clock](SF32LB52x_schematic_design.md), a primeira das três páginas de orientações para o projeto do esquemático.
 
+A versão da lista da SiFli consultada para esta página é *SF32LB52 Schematic&PCB Checklist*, V1.0 (2026-01-21). Não foi verificado se ela corresponde a uma versão online posterior.
+
 ## 5.8. Checklist do esquemático { #58-schematic-checklist }
 
 Cada tabela cobre um bloco funcional do esquemático. A coluna “Aplicável a” restringe um item a uma variante de alimentação ou revisão de silício específica do SF32LB52x quando o escopo geral “Todas as variantes” não se aplica.
@@ -29,7 +31,7 @@ Cada tabela cobre um bloco funcional do esquemático. A coluna “Aplicável a�
 
 | Nº | Ponto de verificação | Aplicável a | Categoria |
 |:---|:---|:---|:---|
-| 1 | O encapsulamento do componente escolhido está correto, incluindo os nomes e números dos pinos | Todas as variantes | Obrigatório |
+| 1 | O encapsulamento, os nomes dos pinos e a numeração dos pinos correspondem ao componente selecionado | Todas as variantes | Obrigatório |
 
 </div>
 

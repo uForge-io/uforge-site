@@ -15,10 +15,10 @@ hide:
 
 **SF32LB56-MOD** est une famille polyvalente de modules MCU Bluetooth basse consommation de SiFli, basée sur la série SF32LB56xV.
 
-Ce guide s'appuie sur la **spécification technique DS5602-SF32LB56-MOD V0.3** et rassemble les informations propres au module nécessaires à la conception du schéma, à l'implantation et au routage du PCB, à la validation et à la préparation de la production. Il couvre les variantes de mémoire, l'interface à 89 broches, les trois rails d'alimentation, les interfaces d'affichage, audio et stockage, le placement de l'antenne, les exigences de manipulation et la liste de contrôle du schéma.
+Ce guide rassemble les informations propres au module nécessaires à la conception du schéma, à l'implantation et au routage du PCB, à la validation et à la préparation de la production. Il suit la **spécification technique DS5602-SF32LB56-MOD V0.3** et couvre les variantes de mémoire, l'interface à 89 broches, les trois rails d'alimentation, les interfaces d'affichage, audio et stockage, le placement de l'antenne, les exigences de manipulation et la liste de contrôle du schéma.
 
 !!! note "Source et recommandations"
-    Les valeurs techniques ci-dessous suivent la **spécification technique DS5602-SF32LB56-MOD V0.3**, sauf mention explicite d'un conseil d'intégration ou d'une recommandation de conception.
+    Les valeurs techniques et affectations de broches suivent DS5602 V0.3. Les ambiguïtés électriques ou de fabrication que la spécification laisse sans réponse sont conservées dans les sections concernées, avec les vérifications requises avant l'approbation de la conception. Les conseils et recommandations d'intégration sont distingués des exigences de la source.
 
 !!! note "Portée du marquage réglementaire"
     Les étiquettes fournies pour SF32LB56-MOD-N16R12N1 et SF32LB56-MOD-A128R12N1 portent les identifiants FCC, IC, CMIIT ID et HVIN, ainsi que le marquage CE. Consultez le [résumé des marquages](../../sf32-products/modules/SF32LB56-MOD.md#regulatory-markings). Vérifiez les documents d'homologation et les conditions d'antenne et d'intégration applicables à la révision exacte ; ne présumez pas que les autres variantes ou le produit final sont couverts.
@@ -59,7 +59,7 @@ Le module prend en charge la connectivité Bluetooth 5.3 et fournit l'accéléra
 | CPU | HCPU jusqu'à 240 MHz, LCPU jusqu'à 96 MHz, tous deux Arm Cortex-M33 STAR-MC1 |
 | Sans fil | Bluetooth 5.3 double mode avec prise en charge BLE Audio |
 | Graphisme | ePicasso 2.0, eZip 2.0, TurboPixel, LCD 8080/SPI/Dual-SPI/Quad-SPI/DPI/RGB/JDI |
-| Audio | DAC 24 bits, ADC Sigma-Delta 24 bits, 2 interfaces PDM (PDM1/PDM2), chacune pouvant connecter deux microphones via les canaux gauche et droit (quatre au total au maximum), 1 interface I2S |
+| Audio | DAC 24 bits, ADC Sigma-Delta 24 bits, deux interfaces PDM (PDM1/PDM2) ; DS5602 V0.3 indique deux entrées de microphone numérique ; une interface I2S |
 | IA/DSP | Accélérateur matriciel jusqu'à 1,92 GOPS, FFT, FIR, CORDIC |
 | Stockage | Options de Flash/PSRAM du module, MPI3, prise en charge SD/SDIO/eMMC |
 | Sécurité | AES, HASH, CRC, TRNG, démarrage sécurisé, eFuse 1024 bits, certifié PSA niveau 1 |
@@ -228,6 +228,8 @@ Ajoutez des résistances en série de 33–100 Ω sur les lignes de signal RGB d
 
 Le module expose des sorties DAC audio analogiques, MIC_BIAS, MIC_ADC_IN, I2S, et des broches compatibles PDM. Le DAC audio est un chemin de sortie 24 bits prenant en charge des fréquences d'échantillonnage de 8 kHz à 48 kHz avec un SNR et une plage dynamique de 109 dB. L'ADC audio est un chemin d'entrée Sigma-Delta 24 bits prenant en charge des fréquences d'échantillonnage de 8 kHz à 48 kHz avec un SNR et une plage dynamique de 99 dB.
 
+DS5602 V0.3 indique deux entrées de microphone numérique et deux interfaces PDM (PDM1/PDM2). La figure d'affectation recommandée associe PDM1_DATA à PA20 ou PA64, PDM1_CLK à PA24 ou PA69, PDM2_DATA à PA25 ou PA71 et PDM2_CLK à PA26 ou PA73. Ce sont des options alternatives de multiplexage des broches, pas la confirmation du routage de la carte porteuse. Le nombre d'entrées et d'interfaces ne détermine ni le nombre maximal de microphones physiques ni la prise en charge du partage des canaux. Avant de concevoir un système à plusieurs microphones, vérifiez le mode pris en charge et le routage réel de la carte.
+
 Routez l'audio analogique à l'écart des nœuds de commutation bruyants, des horloges du LCD et de la ligne d'alimentation de l'antenne. Placez les filtres MIC_BIAS et MIC_ADC_IN près du circuit du microphone.
 
 #### 5.3.3 Boutons { #533-buttons }
@@ -321,6 +323,8 @@ Pour les conceptions à antenne externe, la fiche technique décrit un connecteu
 
 ### 7.1 Caractéristiques électriques { #71-electrical-characteristics }
 
+Les valeurs électriques de cette section suivent DS5602 V0.3. Les valeurs maximales absolues sont des limites de contrainte : les dépasser peut endommager définitivement le dispositif ; le fonctionnement hors des conditions recommandées n'est pas garanti, et une exposition prolongée peut affecter sa fiabilité.
+
 <div align="center"><em>Tableau 7.1-1 : Valeurs maximales absolues</em></div>
 
 <div align="center" markdown>
@@ -380,10 +384,19 @@ VDD est l'alimentation des E/S. VOH et VOL sont mesurées sous charge à haute i
 | Mode | Condition | Courant typique |
 | :--- | :--- | :-: |
 | BT Sniff | Intervalle 50 ms | 196,0 µA |
+| BT Sniff | Intervalle 100 ms | 100,1 µA |
+| BT Sniff | Intervalle 200 ms | 52,2 µA |
+| BT Sniff | Intervalle 500 ms | 23,4 µA |
 | BT Sniff | Intervalle 1 s | 13,8 µA |
 | BLE ADV | Intervalle 50 ms | 228,7 µA |
+| BLE ADV | Intervalle 100 ms | 116,6 µA |
+| BLE ADV | Intervalle 200 ms | 60,5 µA |
+| BLE ADV | Intervalle 500 ms | 26,9 µA |
 | BLE ADV | Intervalle 1 s | 15,7 µA |
 | Connexion BLE | Intervalle 50 ms | 172,8 µA |
+| Connexion BLE | Intervalle 100 ms | 87,9 µA |
+| Connexion BLE | Intervalle 200 ms | 45,5 µA |
+| Connexion BLE | Intervalle 500 ms | 20,0 µA |
 | Connexion BLE | Intervalle 1 s | 11,5 µA |
 | Scan | Inquiry Scan ou Page Scan | 36,8 µA |
 | Double scan | Inquiry Scan et Page Scan | 64,0 µA |
@@ -391,19 +404,21 @@ VDD est l'alimentation des E/S. VOH et VOL sont mesurées sous charge à haute i
 
 </div>
 
+La mesure BT Sniff a été effectuée avec un iPhone 8 Plus et attempt=1. Scan et Both Scan reçoivent pendant 28,82 ms et 57,64 ms respectivement toutes les 1,28 s ; l'alimentation est PVDD + VDD_3V3. Ces valeurs suivent DS5602 V0.3.
+
 <div align="center"><em>Tableau 7.2-2 : Courant du processeur</em></div>
 
 <div align="center" markdown>
 
-| Charge de travail | Domaine | Fréquence | Courant | Efficacité |
+| Charge de travail | Domaine | Fréquence | Courant | Incrément de courant |
 | :--- | :--- | :-: | :-: | :-: |
 | CoreMark | HPSYS | 240 MHz | 9,38 mA | 30,92 µA/MHz |
 | CoreMark | HPSYS | 192 MHz | 7,90 mA | 30,92 µA/MHz |
-| CoreMark | HPSYS | 48 MHz | 0,92 mA | 30,92 µA/MHz |
+| CoreMark | LPSYS | 48 MHz | 0,92 mA | 15,13 µA/MHz |
 | CoreMark | LPSYS | 24 MHz | 0,55 mA | 15,13 µA/MHz |
 | WhileLoop | HPSYS | 240 MHz | 7,54 mA | 25,75 µA/MHz |
 | WhileLoop | HPSYS | 192 MHz | 6,30 mA | 25,75 µA/MHz |
-| WhileLoop | HPSYS | 48 MHz | 0,70 mA | 25,75 µA/MHz |
+| WhileLoop | LPSYS | 48 MHz | 0,70 mA | 10,63 µA/MHz |
 | WhileLoop | LPSYS | 24 MHz | 0,44 mA | 10,63 µA/MHz |
 
 </div>
@@ -419,7 +434,7 @@ VDD est l'alimentation des E/S. VOH et VOL sont mesurées sous charge à haute i
 | 1 | La plage d'entrée VDD_3V3 est de 2,97–3,6 V ; placez un condensateur de 4,7 µF près de la broche du module. |
 | 2 | La plage d'entrée VDD_1V8 est de 1,7–1,95 V ; placez un condensateur de 4,7 µF près de la broche du module. |
 | 3 | La plage d'entrée VDDIO est de 1,7–3,6 V ; placez un condensateur de 4,7 µF près de la broche du module. |
-| 4 | Le niveau de l'interface E/S du module est de 3,3 V lorsque la spécification l'indique ; les niveaux des périphériques connectés doivent être compatibles. |
+| 4 | Le niveau de l'interface E/S du module est de 3,3 V ; les niveaux des périphériques connectés doivent être compatibles. |
 | 5 | Si le module comporte une Flash interne, PA06, PA07, PA08, PA09, PA10 et PA11 ne peuvent pas être utilisées en externe. |
 | 6 | SDIO et MPI3 partagent des ressources d'E/S et ne peuvent pas être utilisés simultanément. |
 | 7 | PA50, PA51, PB32 et PB35 peuvent recevoir des interruptions pendant la veille du MCU. |
@@ -431,6 +446,8 @@ VDD est l'alimentation des E/S. VOH et VOL sont mesurées sous charge à haute i
 | 13 | PA16 et PA17 multiplexées en DBG_UART sont des broches de téléchargement/débogage du programme et nécessitent des résistances en série de 100 Ω. |
 
 </div>
+
+DS5602 V0.3 donne une plage de fonctionnement VDDIO de 1,7 à 3,6 V et indique que PA00–PA11 restent fixées à 3,3 V indépendamment de VDDIO ; pourtant, le point 4 de la liste affirme de façon générale que le niveau de l'interface E/S du module est de 3,3 V. La spécification ne précise pas si cette affirmation concerne toutes les broches E/S. Ne présumez pas d'une compatibilité universelle avec 3,3 V ; confirmez auprès de SiFli le domaine électrique de chaque broche et périphérique retenu.
 
 ### 7.4 Stockage, manutention et assemblage { #74-storage-handling-and-assembly }
 
@@ -451,7 +468,7 @@ VDD est l'alimentation des E/S. VOH et VOL sont mesurées sous charge à haute i
 </div>
 
 !!! info "Figure 7.4-1 : Profil de température de refusion"
-    Voir la figure 9-1 du DS5602 V0.3.
+    La figure 9-1 de DS5602 V0.3 spécifie : une rampe de 25 à 150 °C en 60–90 s à 1–3 °C/s ; un préchauffage de 150 à 200 °C pendant 60–120 s ; 60–90 s au-dessus de 217 °C ; un pic de 235–250 °C ; puis un refroidissement du pic à 180 °C à raison de -1 à -5 °C/s. La soudure indiquée est SAC305. La légende inférieure donne un intervalle au pic de 30–70 s, tandis que le graphique indique séparément un temps de soudage >30 s. La spécification ne concilie pas ces mentions. Ne les confondez pas et confirmez le profil de production.
 
 ## 8. Documents connexes { #8-related-documents }
 
@@ -474,7 +491,7 @@ VDD est l'alimentation des E/S. VOH et VOL sont mesurées sous charge à haute i
 
 ### 9.1. Annexe A. Référence de planification des broches { #appendix-a-pin-planning-reference }
 
-Le DS5602 V0.3 fournit le tableau complet de définition des 89 broches ainsi que leur brochage en vue de dessus. Le tableau ci-dessous met en évidence les broches et groupes de signaux qui influent le plus souvent sur les risques du schéma, l'accès au démarrage et au débogage, ou la planification des ressources partagées.
+DS5602 V0.3 contient le tableau de définition des 89 broches et le brochage en vue de dessus. Le tableau ci-dessous met en évidence les broches et groupes de signaux qui influent le plus souvent sur les risques du schéma, l'accès au démarrage et au débogage, ou la planification des ressources partagées. Vérifiez le brochage complet dans la fiche de la révision exacte du module.
 
 <div align="center"><em>Tableau 9.1-1 : Groupes de broches et de signaux critiques</em></div>
 
@@ -488,7 +505,7 @@ Le DS5602 V0.3 fournit le tableau complet de définition des 89 broches ainsi qu
 | Broche 26 VDD_3V3 | Rail 3,3 V, plage de fonctionnement 2,97–3,6 V. |
 | Broche 27 VDD_1V8 | Rail 1,8 V, plage de fonctionnement 1,7–1,95 V. |
 | Broche 29 VDDIO | Rail E/S, plage de fonctionnement 1,7–3,6 V. |
-| Broches 43/44 | Sorties DAC différentielles AU_DACP / AU_DACN. |
+| Broches 43/44 | Sorties DAC différentielles AU_DAC1P_OUT / AU_DAC1N_OUT. |
 | Broche 46 MIC_BIAS | Sortie de polarisation du microphone. |
 | Broche 47 MIC_ADC_IN | Entrée ADC analogique du microphone. |
 | Broches 67–72 PA06–PA11 | Connectées par défaut à la Flash interne ; indisponibles en externe. |
@@ -509,7 +526,7 @@ Le DS5602 V0.3 fournit le tableau complet de définition des 89 broches ainsi qu
 
 | Version | Date | Notes |
 | :--- | :--- | :--- |
-| 0.1 | 2026-07 | Guide de conception matérielle initial du module SF32LB56-MOD basé sur le DS5602-SF32LB56-MOD V0.3. |
+| 0.1 | 2026-07 | Première édition du guide, fondée sur DS5602 V0.3. |
 
 </div>
 

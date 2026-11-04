@@ -42,7 +42,7 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système m�
 </div>
 
 !!! note "Disponibilité et personnalisation"
-    **SF32LB58-MOD-E4R32N1 n'est plus disponible en raison de pénuries récentes de puces mémoire.** D'autres configurations du module sont possibles. Pour toute demande de personnalisation, [contactez μForge.io](../../about/contact.md).
+    **SF32LB58-MOD-E4R32N1 est actuellement indisponible en raison d'une pénurie de puces mémoire.** D'autres configurations du module sont possibles. Pour toute demande de personnalisation, [contactez μForge.io](../../about/contact.md).
 
 ### 2.2 Spécifications clés { #22-key-specifications }
 
@@ -61,7 +61,7 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système m�
 | Stockage | 5x MPI (en boîtier + externe), 2x SD/SDIO/eMMC |
 | Boîtier | 138 broches, 24 × 24 × 3,1 mm |
 | Alimentation | VDD_3V3 (2,97–3,6 V), VDD_1V8 (1,7–1,95 V), VDDIOA/VDDIOA2/VDDIOB (1,7–3,6 V) |
-| Antenne | Antenne externe via un accès RF à demi-trous métallisés (stamp-hole) ou un connecteur compatible IPEX, selon la référence |
+| Antenne | Antenne montée sur PCB ou antenne externe via le connecteur indiqué dans la fiche technique ; confirmez l'option pour la référence exacte du module |
 | Température de fonctionnement | -40 à 85 °C |
 
 </div>
@@ -77,7 +77,7 @@ Le module intègre la puce SF32LB586VDD36, un quartz 48 MHz, un quartz optionnel
 
 ### 4.1 Schéma de brochage { #41-pinout-diagram }
 
-Le module expose 138 broches sur son pourtour.
+La vue de dessus montre 138 contacts numérotés : 72 positions castellées en périphérie, 60 pastilles internes et 6 pastilles centrales ; la numérotation va de 1 à 138.
 
 !!! info "Figure 4-1 : Schéma de brochage, vue de dessus"
     Voir la Figure 3-1 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
@@ -233,6 +233,9 @@ Le module compte 138 broches au total, décrites dans le tableau ci-dessous.
 !!! note
     La broche 2 (USART_RXD) et la broche 3 (USART_TXD) constituent le port par défaut pour le journal, le débogage du programme et le téléchargement du programme.
 
+!!! note
+    Dans la ligne de la broche 10, la fiche technique V0.1 indique `GPIO_A38` comme MUX par défaut de PA79, mais `GPIO_A79` comme fonction. Ce tableau utilise `GPIO_A79` conformément au nom de la broche et à sa fonction ; confirmez le MUX de PA79 auprès de SiFli avant de finaliser l'affectation des broches.
+
 ### 4.3 Description physique des broches { #43-physical-pin-description }
 
 La figure de description physique des broches de la fiche technique regroupe les broches par famille fonctionnelle — SDIO, SPI, I2C, UART, GPTIM, interface LCD (DPI/8080/SPI/JDI/DSI), GPADC, MPI, audio analogique, mode de démarrage, alimentation, antenne BT, CAN/USB, et SWD/UART de débogage — superposée au contour de la puce SF32LB586VDD36. Utilisez-la avec le tableau de définition des broches ci-dessus lors du placement des groupes de signaux sur le PCB hôte.
@@ -277,6 +280,8 @@ Toute broche marquée `PAxx_I2C_UART` ou `PBxx_I2C_UART` dans le tableau ci-dess
 ## 6. Caractéristiques électriques { #6-electrical-characteristics }
 
 ### 6.1 Valeurs limites absolues { #61-absolute-maximum-ratings }
+
+Le dépassement d'une valeur limite absolue peut endommager définitivement le module. Ces valeurs ne garantissent pas un fonctionnement normal au-delà des conditions de fonctionnement recommandées ; une exposition prolongée peut affecter la fiabilité.
 
 <div align="center"><em>Tableau 6.1-1 : Valeurs limites absolues</em></div>
 
@@ -375,11 +380,13 @@ Les tableaux complets (incluant le courant de fuite d'entrée, les seuils de ré
 | Symbole | Condition | Courant (mA) | Incrément (µA/MHz) |
 | :--- | :--- | :-: | :-: |
 | ICoreMark | HPSYS @240 MHz | 10,34 | 31,3 |
-| ICoreMark | LPSYS @48 MHz | 0,89 | 27,6 |
+| ICoreMark | LPSYS @48 MHz | 0,89 | 14,5 |
 | IWhileLoop | HPSYS @240 MHz | 7,98 | 21,3 |
-| IWhileLoop | LPSYS @48 MHz | 0,67 | 18,7 |
+| IWhileLoop | LPSYS @48 MHz | 0,67 | 9,8 |
 
 </div>
+
+Ces tableaux présentent certains points de fonctionnement. La fiche technique fournit d'autres intervalles radio et états de balayage au §5.4.2, ainsi que d'autres fréquences de processeur au §5.4.3. Les valeurs à 3,8 V sont calculées à partir des mesures sur les rails 1,8 V et 3,3 V avec un rendement de conversion de 90 % : `I3.8V = I1.8V × 1.8 / (0.90 × 3.8) + I3.3V`. Il s'agit de valeurs de courant équivalentes à l'entrée du système, et non de mesures directes avec 3,8 V appliqués à une broche d'alimentation du module.
 
 ### 6.5 Performances RF Bluetooth bimode { #65-dual-mode-bluetooth-rf-performance }
 
@@ -432,18 +439,28 @@ Utilisez ces éléments comme point de départ pour un schéma de production et 
 | :-: | :--- |
 | 1 | La plage de tension d'entrée VDD_3V3 doit être de 2,97 V–3,6 V ; placez un condensateur de 4,7 µF près de la broche du module. |
 | 2 | La plage de tension d'entrée VDD_1V8 doit être de 1,7 V–1,95 V ; placez un condensateur de 4,7 µF près de la broche du module. |
-| 3 | La plage de tension d'entrée VDDIOA, VDDIOA2 et VDDIOB doit être de 1,7 V–3,6 V ; placez des condensateurs près des broches du module. |
+| 3 | La plage de tension d'entrée de VDDIOA, VDDIOA2 et VDDIOB doit être de 1,7 V–3,6 V ; placez un condensateur de 4,7 µF près de chaque broche du module. |
+| 4 | Le niveau d'interface E/S du module est de 3,3 V ; les périphériques connectés doivent également utiliser un niveau E/S de 3,3 V. |
+| 5 | En mode veille du MCU, les broches PA65, PA67, PB54, PB56, PB57, PB58 et PB59 peuvent recevoir des interruptions, selon la fiche technique. |
+| 6 | PB54 prend en charge la réinitialisation par appui long de 10 s, active à l'état haut ; ajoutez une résistance de rappel à la masse de 10 kΩ. |
+| 7 | Les E/S marquées GPADC_CHx dans la Figure 7-9 acceptent des entrées analogiques de 0 à 3,3 V. |
+| 8 | Les E/S marquées GPTIM dans la Figure 7-9 prennent en charge la sortie PWM. |
+| 9 | Prévoyez des dispositifs de protection ESD pour l'interface TP et les interfaces similaires. |
+| 10 | Ajoutez des résistances série de 33 à 100 Ω sur les lignes de signal RGB de l'écran LCD. |
+| 11 | La fonction DBG_UART multiplexée sur PB36 et PB37 sert au téléchargement du programme et au débogage ; ajoutez des résistances série de 100 Ω et prévoyez des points de test. |
+| 12 | PA31 et PA32 sont utilisés pour le HCPU Trace ; prévoyez des points de test. |
+| 13 | Prévoyez un point de test pour BOOT_MODE. |
 
 </div>
 
 !!! note
-    Ce guide ne reprend que les trois points ci-dessus. Consultez la liste complète du §7.3 de la [fiche technique officielle (PDF)](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) avant de finaliser un schéma de production.
+    La fiche technique V0.1 indique une plage de fonctionnement VDDIO de 1,7 à 3,6 V au §5.2, mais le point 4 de la liste du §7.3 spécifie un niveau d'interface E/S de 3,3 V. Avant de connecter des périphériques, confirmez auprès de SiFli la tension d'interface applicable à la révision exacte du module ; la fiche technique ne concilie pas ces deux indications. Vérifiez toute révision plus récente de la [fiche technique officielle (PDF)](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) avant de finaliser un schéma de production.
 
 ## 10. Dimensions du module et empreinte du PCB { #10-module-dimensions-and-pcb-footprint }
 
 ### 10.1 Dimensions du module { #101-module-dimensions }
 
-Le module mesure 24 × 24 × 3,1 mm.
+Le module mesure 24 × 24 × 3,1 mm ; le PCB du module a une épaisseur de 0,8 mm. Le pas des contacts castellés du pourtour est de 1,1 mm.
 
 !!! info "Figure 10-1 : Dimensions du module"
     Voir la Figure 8-1 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
@@ -453,9 +470,13 @@ Le module mesure 24 × 24 × 3,1 mm.
 !!! info "Figure 10-2 : Empreinte du PCB recommandée"
     Voir la Figure 8-2 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
 
+L'empreinte recommandée comporte 72 pastilles externes de 1,8 × 0,8 mm, 60 pastilles internes de 0,7 × 1,0 mm et 6 pastilles centrales de 1,3 × 1,3 mm. Les dimensions sont en millimètres ; le dessin de la fiche technique fait autorité pour la géométrie complète.
+
 ### 10.3 Connecteur d'antenne externe { #103-external-antenna-connector }
 
-Pour les références prenant en charge une antenne externe, le module peut utiliser un accès RF à demi-trous métallisés (stamp-hole) ou un connecteur compatible IPEX, selon la référence produit.
+La fiche technique décrit une antenne montée sur PCB ou un connecteur d'antenne externe de première génération. Elle indique une compatibilité avec la série Hirose U.FL, les connecteurs I-PEX MHFI et les connecteurs Amphenol AMC. Confirmez la configuration d'antenne pour la référence exacte du module.
+
+Les dimensions du connecteur indiquées sur le dessin sont en millimètres.
 
 !!! info "Figure 10-3 : Dimensions du connecteur d'antenne externe"
     Voir la Figure 8-3 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
@@ -473,18 +494,20 @@ Réservez la zone d'antenne du module de sorte qu'aucun composant, cuivre, piste
 ### 11.1 Conditions de stockage { #111-storage-conditions }
 
 - Stockez les produits scellés dans un sachet barrière anti-humidité (MBB) à < 40 °C / 90 % HR, sans condensation.
-- Après ouverture du sachet sous vide, utilisez le module dans la fenêtre de durée de vie hors sachet spécifiée pour son niveau de sensibilité à l'humidité (MSL) ; sinon, il doit être passé à l'étuve avant un second passage au four de refusion.
+- Le niveau de sensibilité à l'humidité du module est MSL 3. Après ouverture du sachet sous vide, utilisez le module dans les 168 heures, dans des conditions de 25 ± 5 °C et 60 % HR ; sinon, faites-le sécher en étuve avant son retour en production. Cela ne modifie pas la recommandation d'un seul passage en refusion.
 
 ### 11.2 Décharge électrostatique (ESD) { #112-electrostatic-discharge-esd }
 
-Suivez les précautions standard de manipulation ESD de SiFli pour les modules lors de l'assemblage et des tests.
+La fiche technique indique une tenue ESD de ±2000 V HBM et ±500 V CDM. Lors de l'assemblage et des tests, suivez les précautions standard de manipulation ESD de SiFli pour les modules.
 
 ### 11.3 Profil de refusion { #113-reflow-profile }
 
 Il est recommandé de ne faire passer le module qu'une seule fois au four de refusion.
 
+Le profil V0.1 prévoit une rampe de 25 à 150 °C en 60–90 s à 1–3 °C/s ; un préchauffage de 150 à 200 °C pendant 60–120 s ; 60–90 s au-dessus de 217 °C, avec un pic de 235–250 °C ; puis un refroidissement du pic à 180 °C à raison de -1 à -5 °C/s. La figure indique une soudure SAC305. Sa légende inférieure donne un intervalle au pic de 30–70 s, tandis que le graphique porte séparément la mention 焊接时间 >30 s (temps de soudage >30 s). Ce sont deux indications distinctes que la fiche technique ne concilie pas ; ne fusionnez pas les intervalles et confirmez le profil de production.
+
 !!! info "Figure 11-1 : Profil de température de refusion recommandé"
-    Voir la Figure 9-1 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
+    Voir la Figure 9-1 de la fiche technique officielle ; les valeurs du profil et l'écart entre les libellés sont résumés ci-dessus.
 
 ### 11.4 Vibrations ultrasoniques { #114-ultrasonic-vibration }
 

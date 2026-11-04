@@ -21,7 +21,7 @@ tags:
 
 This reference documents the external AT command interface for version V1.2.1 of the SF32LB57 dual-mode Bluetooth module (SIFLI_AT). Commands and response strings are shown in monospace; `\r` denotes a carriage return (0x0D) and `\n` denotes a line feed (0x0A). AT commands are transmitted as ASCII text, while binary fields in PDU frames use little-endian byte order.
 
-This is the complete AT interface specification referenced by the Bluetooth AT Command Module page.
+The Bluetooth AT Command Module page links to this V1.2.1 reference. It does not establish command support for other firmware versions; check the module's firmware version before using these commands.
 
 <div align="center"><em>Table: Revision History</em></div>
 
@@ -66,6 +66,9 @@ The SF32LB57 dual-mode Bluetooth module provides the host with a UART-based AT c
 ### Syntax Definition
 
 AT commands are transmitted as ASCII text, terminated by a carriage return `\r` (0x0D). The command prefix is `AT+` (AT-format commands) or `AT>` (PDU-format commands). On SF32LB57, the AT port is USART1, using 8N1 framing with no hardware flow control, at a default baud rate of 460800 bps. A single AT frame is limited to 512 bytes.
+
+!!! warning "Confirm the PDU frame-length limit"
+    The source specifies a 512-byte AT-frame limit but also allows a PDU body of up to 508 bytes. With the illustrated 8-byte command framing, that would occupy 516 bytes on the UART. The source does not explain how framing bytes count toward the receive-buffer limit. Confirm the maximum accepted PDU frame against the target firmware before sizing host buffers or using the maximum body length; do not substitute a guessed limit for either source value.
 
 ### AT-Format Commands
 
@@ -138,7 +141,7 @@ The commands below are grouped by capability, in the same categories used by the
 | Item | Content |
 |:-----|:--------|
 | Command | `AT+GFWVER?\r` |
-| Response | Success: `\r\n+GFWVER:SIFLI_AT_<version>_<build date>\r\n\r\nOK\r\n`; any set form: `\r\nERROR\r\n` |
+| Response | Success: `\r\n+GFWVER:SIFLI_AT_<version>_<build date>\r\n\r\nOK\r\n`; set form: `\r\nERROR\r\n` |
 | Parameters | None |
 | Notes | Query only. The return value always begins with `SIFLI_AT_`, followed by the version number and build date. |
 
@@ -673,7 +676,7 @@ The commands below are grouped by capability, in the same categories used by the
 | Command | `AT+BAUD?\r` |
 | Response | `\r\n+BAUD:<baud_rate>\r\n\r\nOK\r\n` |
 | Parameters | `baud_rate`: the currently configured baud rate, in bps. |
-| Notes | After setting the baud rate the device resets; the new baud rate takes effect after the reset. |
+| Notes | None |
 
 </div>
 
@@ -688,7 +691,7 @@ The commands below are grouped by capability, in the same categories used by the
 | Command | `AT+BAUD=<baud_rate>\r` |
 | Response | Success: `\r\nOK\r\n`; failure: `\r\nERROR\r\n` |
 | Parameters | `baud_rate`: serial baud rate, in bps. Supported values: 38400, 57600, 115200, 230400, 460800, 921600, 1000000. Default 460800. |
-| Notes | Setting updates the configuration. |
+| Notes | Setting the baud rate updates the configuration and resets the device; the new rate takes effect after the reset. |
 
 </div>
 

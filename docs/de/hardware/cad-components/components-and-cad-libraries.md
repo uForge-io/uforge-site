@@ -9,7 +9,7 @@ tags:
 
 # Komponenten und CAD-Bibliotheken { #components-and-cad-libraries }
 
-Verwenden Sie diese Seite, wenn ein ausgewählter SF32-Chip oder ein SF32-Modul nach der Architekturentscheidung in eine verbindliche Stückliste und ein PCB-Design überführt wird. Die beiden folgenden Ressourcen erfüllen unterschiedliche Aufgaben: Die **freigegebene Lieferantenliste (AVL)** hilft bei der Auswahl von Komponenten, deren Eignung SiFli bestätigt hat. Die **EDA-Tool-Bibliotheken** stellen Symbole, Footprints und Referenzprojektdaten als Grundlage für die korrekte Umsetzung der gewählten Hardware bereit.
+Verwenden Sie diese Seite, wenn ein ausgewählter SF32-Chip oder ein SF32-Modul nach der Architekturentscheidung in eine verbindliche Stückliste und ein PCB-Design überführt wird. Die beiden folgenden Ressourcen erfüllen unterschiedliche Aufgaben: Die **freigegebene Lieferantenliste (AVL)** hilft bei der Auswahl von Komponenten, deren Eignung SiFli bestätigt hat. Die **EDA-Tool-Bibliotheken** stellen offizielle Schaltplansymbole und PCB-Footprints als Ausgangspunkt für die Umsetzung der gewählten Hardware bereit.
 
 Keine der beiden Ressourcen ersetzt den gerätespezifischen Hardware-Design-Leitfaden, die Gehäusezeichnung oder die abschließende Validierung auf der für die Serienfertigung vorgesehenen Leiterplatte.
 
@@ -22,7 +22,7 @@ Keine der beiden Ressourcen ersetzt den gerätespezifischen Hardware-Design-Leit
 | Ressource | Verwendung | Kein Ersatz für |
 |:---------|:-----------|:----------------------------------|
 | [Freigegebene Lieferantenliste für SF32](sifli-approved-vendor-list.md) | Vorauswahl qualifizierter Quarze, Induktivitäten, Flash-Speicher und anderer unterstützter Komponenten; Prüfung elektrischer Anforderungen und Firmware-Identifikationsbeschränkungen. | Endgültige Bauteilfreigabe, Lieferkettenqualifizierung oder elektrische Validierung auf Produktebene. |
-| [EDA-Tool-Bibliotheken](eda-tool-libraries.md) | Schaltplansymbole, PCB-Footprints, Gehäusezeichnungen und Referenzdesign-Daten als Ausgangspunkt in den unterstützten EDA-Tools. | Verifizierung der genauen Bestellnummer, der Padstack-Definitionen, des Fertigungsprozesses oder der aktuellen Gerätedokumentation. |
+| [EDA-Tool-Bibliotheken](eda-tool-libraries.md) | Offizielle Schaltplansymbole und PCB-Footprints als Ausgangsdaten in den unterstützten EDA-Tools. | Verifizierung der genauen Bestellnummer, der Padstack-Definitionen, des Fertigungsprozesses oder der aktuellen Gerätedokumentation. |
 
 </div>
 

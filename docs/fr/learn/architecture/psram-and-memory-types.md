@@ -70,9 +70,9 @@ Une disposition embarquée courante est donc :
 <div align="center"><em>Schéma : répartition type de la mémoire dans un système embarqué</em></div>
 
 ```text
-Image du firmware, ressources et paramètres à conserver -> Stockage non volatil
-Grands tampons actifs et framebuffers        -> PSRAM
-Piles fréquemment utilisées, état de contrôle et données DMA -> SRAM interne
+Persistent firmware image, assets, settings -> Non-volatile storage
+Active large buffers and framebuffers -> PSRAM
+Hot stacks, control state, DMA data  -> Internal SRAM
 ```
 
 Il s'agit d'une politique de placement, pas d'une règle que chaque tampon doit suivre. Une petite image fréquemment réutilisée peut être mieux placée en SRAM ; un grand modèle peut rester en Flash ou en PSRAM ; un système d'affichage peut avoir besoin de PSRAM simplement parce qu'un framebuffer complet ne tiendra pas en interne.
@@ -107,6 +107,8 @@ Les lignes DTR/DDR ci-dessous supposent deux transferts par cycle ; les lignes �
 La colonne des lignes de données compte les signaux de charge utile, pas l'horloge, la sélection de puce ou les autres broches de contrôle. Ces fréquences sont des exemples documentés, pas des limites applicables à toute la famille. Le [guide de la SF32LB52-DevKit-LCD](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-LCD.md) indique une PSRAM OPI à 144 MHz et une QSPI-NOR à 72 MHz en mode STR ; le [guide de la SF32LB58-DevKit-LCD](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb58x/SF32LB58-DevKit-LCD.md) indique une PSRAM HPI à 144 MHz ainsi que des variantes de carte avec une Flash externe à 72 MHz. La ligne QSPI/DTR utilise une horloge de 72 MHz uniquement pour isoler l'effet du transfert à double débit de données. Les lignes à deux canaux supposent que les deux canaux peuvent être utilisés simultanément ; elles montrent la largeur de bus agrégée sans garantir qu'un flux de données du CPU obtienne deux fois le débit effectif. Il s'agit de **plafonds de charge utile du bus**, pas d'un débit applicatif mesuré. Les cycles de commande/adresse, les cycles d'attente (dummy cycles), le rafraîchissement, les changements de sens lecture/écriture, les limites du contrôleur, les défauts de cache, l'arbitrage DMA, l'intégrité du signal sur la PCB et les accès concurrents réduisent le débit utilisable. La puce, le boîtier, le composant mémoire et la configuration SDK choisis déterminent ce qui est valide.
 
 Le [guide des références de puces SiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) donne plusieurs exemples de configurations à deux canaux : **SF32LB566VCB36** intègre 8 Mo de PSRAM OPI sur MPI1 et 4 Mo sur MPI2 ; **SF32LB586VDD36** intègre 16 Mo de PSRAM HPI sur chaque interface ; **SF32LB587VEE56** en intègre 32 Mo sur chacune. Ces références illustrent la topologie mémoire ; elles ne garantissent pas qu'un client unique atteigne le débit utile agrégé du tableau. Avant de dimensionner une conception exigeante en bande passante, vérifiez la référence complète et la carte mémoire du SDK ; un autre boîtier ou SKU de la même famille peut avoir une organisation différente.
+
+Le guide SF32LB52 précise que les fréquences d'interface qui y sont indiquées peuvent changer dans la version officielle.
 
 ### Pourquoi deux canaux mémoire comptent { #why-two-memory-channels-matter }
 

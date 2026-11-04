@@ -31,7 +31,7 @@ tags:
 
 ### 5.1. 電源系統 { #51-power-system }
 
-QFN68LのSF32LB551には、VDD2、BUCK2_VSW、BUCK2_VOUT、LDOVCC2_VOUT、AVDD_DSIの各ピンがありません。電源とコンデンサーの表は、選択したパッケージに存在するピンにのみ適用してください。BGAパッケージはBUCK出力を2系統備え、BUCK2はBUCKまたはLDOモードで動作します。BUCKモードを推奨します。QFN68LのBUCK出力は1系統です。
+QFN68LのSF32LB551には、VDD2、BUCK2_VSW、BUCK2_VOUT、LDOVCC2_VOUT、AVDD_DSIの各ピンがありません。BGA125パッケージのSF32LB553にもAVDD_DSIピンはありません。電源とコンデンサーの表は、選択したパッケージに存在するピンにのみ適用してください。BGAパッケージはBUCK出力を2系統備え、BUCK2はBUCKまたはLDOモードで動作します。BUCKモードを推奨します。QFN68LのBUCK出力は1系統です。
 
 <div align="center"><em>表 5.1-1: PMU電源ピン</em></div>
 
@@ -248,7 +248,7 @@ BGA145の外付けOPI PSRAMは1チャネル、BGA169は2チャネルです。表
 
 <div align="center" markdown>
 
-| インターフェース信号 | QFN68 | BGA145/169 | 詳細説明 |
+| インターフェース信号 | QFN68 | BGA125/145/169 | 詳細説明 |
 |:----------|:------|:-----------|:-----|
 | CS# | GPIO9 | PA61 | チップセレクト、アクティブLow |
 | SO | GPIO7 | PA65 | データ入力（データ入出力1） |
@@ -263,7 +263,7 @@ BGA145の外付けOPI PSRAMは1チャネル、BGA169は2チャネルです。表
 
 <div align="center" markdown>
 
-| インターフェース信号 | QFN68 | BGA145/169 | 詳細説明 |
+| インターフェース信号 | QFN68 | BGA125/145/169 | 詳細説明 |
 |:----------|:------|:-----------|:-----|
 | CS# | GPIO16 | PA45 | チップセレクト、アクティブLow |
 | SO | GPIO14 | PA49 | データ入力（データ入出力1） |
@@ -278,7 +278,7 @@ BGA145の外付けOPI PSRAMは1チャネル、BGA169は2チャネルです。表
 
 <div align="center" markdown>
 
-| インターフェース信号 | QFN68 | BGA145/169 | 詳細説明 |
+| インターフェース信号 | QFN68/BGA125 | BGA145/169 | 詳細説明 |
 |:----------|:------|:-----------|:-----|
 | CS# | - | PB33 | チップセレクト、アクティブLow |
 | SO | - | PB36 | データ入力（データ入出力1） |
@@ -293,14 +293,14 @@ BGA145の外付けOPI PSRAMは1チャネル、BGA169は2チャネルです。表
 
 <div align="center" markdown>
 
-| インターフェース信号 | QFN68 | BGA145/169 | 詳細説明 |
-|:----------|:------|:-----------|:-----|
-| CLK | GPIO10 | PA34 | クロック入力 |
-| CMD | GPIO9 | PA36 | コマンド入力 |
-| DATA0 | GPIO8 | PA28 | データ0 |
-| DATA1 | GPIO7 | PA29 | データ1 |
-| DATA2 | GPIO6 | PA30 | データ2 |
-| DATA3 | GPIO5 | PA31 | データ3 |
+| インターフェース信号 | QFN68 | BGA125 | BGA145/169 | 詳細説明 |
+|:----------|:------|:------|:-----------|:-----|
+| CLK | GPIO10 | PA60 | PA34 | クロック入力 |
+| CMD | GPIO9 | PA61 | PA36 | コマンド入力 |
+| DATA0 | GPIO8 | PA63 | PA28 | データ0 |
+| DATA1 | GPIO7 | PA65 | PA29 | データ1 |
+| DATA2 | GPIO6 | PA66 | PA30 | データ2 |
+| DATA3 | GPIO5 | PA68 | PA31 | データ3 |
 
 </div>
 
@@ -308,18 +308,18 @@ BGA145の外付けOPI PSRAMは1チャネル、BGA169は2チャネルです。表
 
 <div align="center" markdown>
 
-| インターフェース信号 | QFN68 | BGA145/169 | 詳細説明 |
-|:----------|:------|:-----------|:-----|
-| CLK | GPIO10 | PA34 | クロック入力 |
-| CMD | GPIO9 | PA36 | コマンド入力 |
-| DATA0 | GPIO8 | PA28 | データ0 |
-| DATA1 | GPIO7 | PA29 | データ1 |
-| DATA2 | GPIO6 | PA30 | データ2 |
-| DATA3 | GPIO5 | PA31 | データ3 |
-| DATA4 | GPIO15 | PA47 | データ4 |
-| DATA5 | GPIO14 | PA49 | データ5 |
-| DATA6 | GPIO13 | PA51 | データ6 |
-| DATA7 | GPIO12 | PA55 | データ7 |
+| インターフェース信号 | QFN68 | BGA125 | BGA145/169 | 詳細説明 |
+|:----------|:------|:------|:-----------|:-----|
+| CLK | GPIO10 | - | PA34 | クロック入力 |
+| CMD | GPIO9 | - | PA36 | コマンド入力 |
+| DATA0 | GPIO8 | - | PA28 | データ0 |
+| DATA1 | GPIO7 | - | PA29 | データ1 |
+| DATA2 | GPIO6 | - | PA30 | データ2 |
+| DATA3 | GPIO5 | - | PA31 | データ3 |
+| DATA4 | GPIO15 | - | PA47 | データ4 |
+| DATA5 | GPIO14 | - | PA49 | データ5 |
+| DATA6 | GPIO13 | - | PA51 | データ6 |
+| DATA7 | GPIO12 | - | PA55 | データ7 |
 
 </div>
 
@@ -327,7 +327,7 @@ BGA145の外付けOPI PSRAMは1チャネル、BGA169は2チャネルです。表
 
 <div align="center" markdown>
 
-| インターフェース信号 | QFN68 | BGA145/169 | 詳細説明 |
+| インターフェース信号 | QFN68 | BGA125/145/169 | 詳細説明 |
 |:----------|:------|:-----------|:-----|
 | CLK | GPIO17 | PA44 | クロック入力 |
 | CMD | GPIO16 | PA45 | コマンド入力 |
@@ -375,17 +375,17 @@ BGA145の外付けOPI PSRAMは1チャネル、BGA169は2チャネルです。表
 
 <div align="center" markdown>
 
-| SPI信号 | QFN68 GPIO | BGA145/169ピン | 詳細説明 |
-|:--------|:------|:-----------|:-----|
-| CSX | GPIO22 | PB33 | イネーブル信号 |
-| WRX_SCL | GPIO23 | PB32 | クロック信号 |
-| DCX | GPIO20 | PB36 | 4-wire SPIモードではデータ／コマンド信号、Quad-SPIモードではデータ1 |
-| SDI_RDX | GPIO21 | PB35 | 3／4-wire SPIモードではデータ入力信号、Quad-SPIモードではデータ0 |
-| SDO | GPIO21 | PB35 | 3／4-wire SPIモードのデータ出力信号。SDI_RDXと短絡します |
-| D[0] | GPIO19 | PB37 | Quad-SPIモードのデータ2 |
-| D[1] | GPIO18 | PB07 | Quad-SPIモードのデータ3 |
-| RESET | GPIO2 | PB17 | ディスプレイパネルのリセット信号 |
-| TE | GPIO3 | PB77 | MCUフレーム同期用ティアリングエフェクト信号 |
+| SPI信号 | QFN68 GPIO | BGA125ピン | BGA145/169ピン | 詳細説明 |
+|:--------|:------|:------|:-----------|:-----|
+| CSX | GPIO22 | PA31 | PB33 | イネーブル信号 |
+| WRX_SCL | GPIO23 | PA20 | PB32 | クロック信号 |
+| DCX | GPIO20 | PA36 | PB36 | 4-wire SPIモードではデータ／コマンド信号、Quad-SPIモードではデータ1 |
+| SDI_RDX | GPIO21 | PA34 | PB35 | 3／4-wire SPIモードではデータ入力信号、Quad-SPIモードではデータ0 |
+| SDO | GPIO21 | PA34 | PB35 | 3／4-wire SPIモードのデータ出力信号。SDI_RDXと短絡します |
+| D[0] | GPIO19 | PA38 | PB37 | Quad-SPIモードのデータ2 |
+| D[1] | GPIO18 | PA42 | PB07 | Quad-SPIモードのデータ3 |
+| RESET | GPIO2 | PA78 | PB17 | ディスプレイパネルのリセット信号 |
+| TE | GPIO3 | PA77 | PB77 | MCUフレーム同期用ティアリングエフェクト信号 |
 
 </div>
 
@@ -398,22 +398,22 @@ BGA145の外付けOPI PSRAMは1チャネル、BGA169は2チャネルです。表
 
 <div align="center" markdown>
 
-| MCU8080信号 | QFN68 GPIO | BGA145/169ピン | 詳細説明 |
-|:------------|:------|:-----------|:-----|
-| CSX | GPIO22 | - | チップセレクト |
-| WRX | GPIO23 | - | データ書き込み用ライトストローブ信号 |
-| DCX | GPIO20 | - | ディスプレイデータ／コマンド選択 |
-| RDX | GPIO21 | - | 表示コントローラーから読み出す際のストローブ信号 |
-| D[0] | GPIO19 | - | データ0 |
-| D[1] | GPIO18 | - | データ1 |
-| D[2] | GPIO17 | - | データ2 |
-| D[3] | GPIO16 | - | データ3 |
-| D[4] | GPIO15 | - | データ4 |
-| D[5] | GPIO14 | - | データ5 |
-| D[6] | GPIO13 | - | データ6 |
-| D[7] | GPIO12 | - | データ7 |
-| RESET | GPIO2 | - | リセット |
-| TE | GPIO3 | - | MCUフレーム同期用ティアリングエフェクト信号 |
+| MCU8080信号 | QFN68 GPIO | BGA125ピン | BGA145/169ピン | 詳細説明 |
+|:------------|:------|:------|:-----------|:-----|
+| CSX | GPIO22 | PA31 | - | チップセレクト |
+| WRX | GPIO23 | PA20 | - | データ書き込み用ライトストローブ信号 |
+| DCX | GPIO20 | PA36 | - | ディスプレイデータ／コマンド選択 |
+| RDX | GPIO21 | PA34 | - | 表示コントローラーから読み出す際のストローブ信号 |
+| D[0] | GPIO19 | PA38 | - | データ0 |
+| D[1] | GPIO18 | PA42 | - | データ1 |
+| D[2] | GPIO17 | PA44 | - | データ2 |
+| D[3] | GPIO16 | PA45 | - | データ3 |
+| D[4] | GPIO15 | PA47 | - | データ4 |
+| D[5] | GPIO14 | PA49 | - | データ5 |
+| D[6] | GPIO13 | PA51 | - | データ6 |
+| D[7] | GPIO12 | PA55 | - | データ7 |
+| RESET | GPIO2 | PA78 | - | リセット |
+| TE | GPIO3 | PA77 | - | MCUフレーム同期用ティアリングエフェクト信号 |
 
 </div>
 
@@ -465,14 +465,14 @@ SiFliの[ハードウェアアプリケーションガイド](https://github.com
 
 <div align="center" markdown>
 
-| タッチ／バックライト信号 | QFN68 GPIO | BGA145ピン | BGA169ピン | 詳細説明 |
-|:-------------------------|:------|:-------|:-------|:-----|
-| 割り込み | GPIO1 | PA79 | PA79 | タッチ状態の割り込み信号（ウェイク対応） |
-| I2C1_SCL | GPIO25 | PA10 | PA10 | タッチパネルのI2Cクロック信号 |
-| I2C1_SDA | GPIO24 | PA14 | PA14 | タッチパネルのI2Cデータ信号 |
-| BL_PWM | GPIO0 | - | - | バックライトPWM制御信号 |
-| リセット | GPIO16 | PA00 | PA00 | タッチリセット信号 |
-| 電源イネーブル | GPIO26 | PA06 | PA03 | タッチパネル電源のイネーブル信号 |
+| タッチ／バックライト信号 | QFN68 GPIO | BGA125ピン | BGA145ピン | BGA169ピン | 詳細説明 |
+|:-------------------------|:------|:-------|:-------|:-------|:-----|
+| 割り込み | GPIO1 | PA79 | PA79 | PA79 | タッチ状態の割り込み信号（ウェイク対応） |
+| I2C1_SCL | GPIO25 | PA10 | PA10 | PA10 | タッチパネルのI2Cクロック信号 |
+| I2C1_SDA | GPIO24 | PA14 | PA14 | PA14 | タッチパネルのI2Cデータ信号 |
+| BL_PWM | GPIO0 | PA80 | - | - | バックライトPWM制御信号 |
+| リセット | GPIO16 | PA00 | PA00 | PA00 | タッチリセット信号 |
+| 電源イネーブル | GPIO26 | PA06 | PA06 | PA03 | タッチパネル電源のイネーブル信号 |
 
 </div>
 
@@ -500,7 +500,7 @@ SF32LB55xはHCPUのウェイクアップ要因4系統（WKUP_A0～WKUP_A3）とL
 
 <div align="center" markdown>
 
-| 割り込みソース | QFN68 | BGA145/169 | 詳細説明 |
+| 割り込みソース | QFN68 | BGA125/145/169 | 詳細説明 |
 |:---------------|:------|:-----------|:-----|
 | WKUP_A0 | GPIO3 | PA77 | HCPU割り込み信号0 |
 | WKUP_A1 | GPIO2 | PA78 | HCPU割り込み信号1 |
@@ -545,7 +545,7 @@ SiFliのハードウェアアプリケーションガイドでは、GPADCは5チ
 
 <div align="center" markdown>
 
-| UART信号 | QFN68 | BGA145/169 | 詳細説明 |
+| UART信号 | QFN68 | BGA125/145/169 | 詳細説明 |
 |:---------|:------|:-----------|:-----|
 | TXD1 | GPIO13 | PA19 | UART1 RXD信号 |
 | RXD1 | GPIO14 | PA17 | UART1 TXD信号 |
@@ -564,7 +564,7 @@ SiFliのハードウェアアプリケーションガイドでは、GPADCは5チ
 
 UART RXDをフローティングにせず、ファームウェア初期化時に内部プルアップを有効にします。UART3はデフォルトのログポートです。SiFliは量産書き込みと水晶校正用のオフライン書き込み器を提供しています。VBAT、GND、VDDIOA、VDDIOB、RSTN、Mode、SWDIO、SWCLK、RXD1、TXD1、RXD3、TXD3のテストポイントを最低限設けます。量産治具で必要なサブセットはVBAT、GND、boot_mode、VDDIOB、RXD3、TXD3です。VBATとboot_modeは原資料の治具信号名なので、配線前に実際の基板電源とMode接続へ対応付けてください。
 
-原図では、VDD_1V8をコネクターの1番ピン（VTref）に接続し、SWDIOとSWCLKをそれぞれ22 Ωの直列抵抗を介して7番ピンと9番ピンに接続しています。標準の[J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector)でも1番ピンは[VTref](https://kb.segger.com/VTref)、つまりターゲット電圧の基準入力であり、プローブの電源出力ではありません。標準ケーブルを接続する前に、コネクターの向きと1.8 Vへの対応を確認してください。
+SiFliの原資料は、デバッグツールの電源を外部インターフェース入力に切り替えてSF32LB55xボードからJ-Linkへ給電するよう指示していますが、この指示と標準20ピン配線図との関係は明確ではありません。SEGGERは1番ピンを[VTref](https://kb.segger.com/VTref)、ターゲット電圧の基準入力として定義しており、プローブの電源入力ではありません。この機能に対応するモデルでは、19番ピンがターゲットへ給電する5 V出力です。原図にはVDD_1V8から1番ピンへの接続と、SWDIO／SWCLKから7番／9番ピンへの22 Ω直列抵抗が示されていますが、プローブへの給電経路は示されていません。配線前に、使用するプローブ、ケーブル、ターゲットの電源方向を確認し、VTrefを電源入力として扱わないでください。標準[J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector)ケーブルを接続する前に、コネクターの向きと1.8 Vへの対応も確認してください。
 
 ![図 5.7-4: 原資料のSWDコネクター：変換配線を確認](../../sf32-products/chips/assets/55x/SF32LB55x-SWD-SCH.png){ width="100%" loading="lazy" }
 

@@ -53,6 +53,7 @@ SF32LB52-DevKit-Core-3p3 是一款用于直接评估 SF32LB52x 芯片的紧凑�
 - 提供 16 针、0.5 mm 间距 FPC 显示连接器；显示接口支持 SPI、DSPI、Quad-SPI 及 DDR 模式 QSPI
 - 提供 I2C 触摸面板信号
 - 提供模拟麦克风和差分音频输出引脚
+- 支持 PDM 数字麦克风输入
 - 1 个用户 LED
 - 电源键和功能键
 - 提供单路电源轨电流测量点；思澈科技（SiFli）还列出单 MCU、最小系统和整板功耗测试
@@ -84,6 +85,8 @@ SF32LB52-DevKit-Core-3p3 是一款用于直接评估 SF32LB52x 芯片的紧凑�
 当连接 USB Type-C 时，开发板还可通过部分排针输出 3.3 V、1.8 V 和 5 V。连接外部电路前，请先确认所需的电源方向。
 
 开发板带有电源开关。CH340N 的 RTS# 信号可控制开发板的使能状态，使主机工具能够在下载或调试时复位 MCU。
+
+USB Type-C 供电时，板载 LDO 将 VBUS 的 5 V 转换为 3.3 V。
 
 ## 下载与调试 { #download-and-debug }
 
@@ -168,6 +171,39 @@ SF32LB52-DevKit-Core-3p3 是一款用于直接评估 SF32LB52x 芯片的紧凑�
 
 </div>
 
+<div align="center"><em>表：J1 排针详细管脚功能与上下拉</em></div>
+
+<div align="center" markdown>
+
+| 管脚 | 管脚名称 | 复位默认功能及复用功能 | 上下拉 |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | 接地 |  |
+| 2 | PA_44 | **PA44**、UART、I2C、GPTIM、WKUP20 | PD |
+| 3 | PA_43 | **PA43**、UART、I2C、GPTIM、WKUP19 | PD |
+| 4 | PA_42 | **PA42**、UART、I2C、GPTIM、WKUP18 | PU |
+| 5 | PA_41 | **PA41**、UART、I2C、GPTIM、WKUP17 | PU |
+| 6 | PA_40 | **PA40**、UART、I2C、GPTIM、SPI2_CS、WKUP16 | PU |
+| 7 | PA_39 | **PA39**、UART、I2C、GPTIM、SPI2_CLK、WKUP15 | PU |
+| 8 | PA_38 | **PA38**、UART、I2C、GPTIM、SPI2_DI、WKUP14 | PD |
+| 9 | PA_37 | **PA37**、UART、I2C、GPTIM、SPI2_DIO、WKUP13 | PD |
+| 10 | PA_36 | **PA36**、UART、I2C、GPTIM、USB_DM、WKUP12 | PD |
+| 11 | PA_35 | **PA35**、UART、I2C、GPTIM、USB_DP、WKUP11 | PD |
+| 12 | PA_31 | **PA31**、UART、I2C、GPTIM、GPADC3 | PD |
+| 13 | PA_30 | **PA30**、UART、I2C、GPTIM、I2S1_LRCK、GPADC2 | PD |
+| 14 | PA_29 | **PA29**、UART、I2C、GPTIM、SPI1_CS、I2S1_BCK、GPADC1 | PD |
+| 15 | PA_28 | **PA28**、UART、I2C、GPTIM、SPI1_CLK、I2S1_SDI、GPADC0 | PD |
+| 16 | GND | 接地 |  |
+| 17 | 3.3V | USB Type-C 未连接时可作 3.3 V 输入；连接时可作 3.3 V 输出 |  |
+| 18 | PA_27 | **PA27**、UART、I2C、GPTIM、WKUP3 | PU |
+| 19 | PA_26 | **PA26**、UART、I2C、GPTIM、WKUP2 | PU |
+| 20 | PA_25 | **PA25**、UART、I2C、GPTIM、SPI1_DI、I2S1_SDO、WKUP1 | PD |
+| 21 | PA_24 | **PA24**、UART、I2C、GPTIM、SPI1_DIO、I2S1_MCLK、WKUP0 | PD |
+| 22 | PA_34 | **PA34**、UART、I2C、GPTIM、GPADC6、WKUP10 | PD |
+| 23 | PA_33 | **PA33**、UART、I2C、GPTIM、GPADC5 | PD |
+| 24 | PA_32 | **PA32**、UART、I2C、GPTIM、GPADC4 | PD |
+
+</div>
+
 ### LCD、音频与调试排针 { #lcd-audio-and-debug-header }
 
 <div align="center"><em>LCD、音频与调试排针引脚分配</em></div>
@@ -186,9 +222,44 @@ SF32LB52-DevKit-Core-3p3 是一款用于直接评估 SF32LB52x 芯片的紧凑�
 
 </div>
 
+<div align="center"><em>表：J2 排针详细管脚功能与上下拉</em></div>
+
+<div align="center" markdown>
+
+| 管脚 | 管脚名称 | 复位默认功能及复用功能 | 上下拉 |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | 接地 |  |
+| 2 | PA_00 | **PA00**、UART、I2C、GPTIM、LCD_RST | PD |
+| 3 | PA_01 | **PA01**、UART、I2C、GPTIM、BL_PWM | PD |
+| 4 | PA_02 | **PA02**、UART、I2C、GPTIM、LCD_TE、I2S1_MCLK | PD |
+| 5 | PA_03 | **PA03**、UART、I2C、GPTIM、LCD_CS、I2S1_SDO | PU |
+| 6 | PA_04 | **PA04**、UART、I2C、GPTIM、LCD_CLK、I2S1_SDI | PD |
+| 7 | PA_05 | **PA05**、UART、I2C、GPTIM、LCD_D0、I2S1_BCK | PD |
+| 8 | PA_06 | **PA06**、UART、I2C、GPTIM、LCD_D1、I2S1_LRCK | PD |
+| 9 | PA_07 | **PA07**、UART、I2C、GPTIM、LCD_D2、PDM1_CLK | PD |
+| 10 | PA_08 | **PA08**、UART、I2C、GPTIM、LCD_D3、PDM1_DAT | PD |
+| 11 | PA_09 | **PA09**、UART、I2C、GPTIM、CTP_INT | PD |
+| 12 | MIC_ADC | MIC 输入信号 |  |
+| 13 | MIC_BIAS | MIC 偏置电压 |  |
+| 14 | DACP | 模拟音频输出信号 |  |
+| 15 | DACN | 模拟音频输出信号 |  |
+| 16 | GND | 接地 |  |
+| 17 | 1.8V | USB Type-C 未连接时可作 1.8 V 输入；连接时可作 1.8 V 输出 |  |
+| 18 | PA_10 | **PA10**、UART、I2C、GPTIM、CTP_RST | PD |
+| 19 | PA_11 | **PA11**、UART、I2C、GPTIM、CTP_SDA | PU |
+| 20 | PA_20 | **PA20**、UART、I2C、GPTIM、CTP_SCL | PD |
+| 21 | PA_21 | **PA21**、UART、I2C、GPTIM | PD |
+| 22 | PA_18 | **UART0_RXD**、调试与下载口、PA18、SWDIO、I2C、GPTIM | PU |
+| 23 | PA_19 | **UART0_TXD**、调试与下载口、PA19、SWCLK、I2C、GPTIM | 无 |
+| 24 | 5V | USB Type-C 未连接时可作 5 V 输入；连接时可作 5 V 输出 |  |
+
+</div>
+
 ## 外部 Flash 与 SDIO 引脚 { #external-flash-and-sdio-pins }
 
 部分变体带有外部 16 MB QSPI-NOR Flash。共用的存储 / SDIO 引脚组如下：
+
+原始开发板指南还列出以下外置 Flash 封装选项；具体板型是否焊接 Flash 请以对应 BOM 为准：SPI NOR Flash，WSON8-8x6mm 或 WSON8-6x5mm；SPI NAND Flash，WSON8-8x6mm；SD NAND Flash，WSON8-8x6mm。
 
 <div align="center"><em>外部 Flash 与 SDIO 引脚组</em></div>
 
@@ -210,6 +281,8 @@ SF32LB52-DevKit-Core-3p3 是一款用于直接评估 SF32LB52x 芯片的紧凑�
 ## 音频扩展 { #audio-expansion }
 
 开发板引出了模拟麦克风偏置和输入，以及差分 DAC 输出。麦克风和用于驱动扬声器的 Class-AB/D 功放均需外接；请根据目标音频路径选择这些器件。
+
+开发板还支持 PDM 数字麦克风输入：PA07 复用为 `PDM1_CLK`，PA08 复用为 `PDM1_DAT`。
 
 ## SDK 构建目标 { #sdk-build-targets }
 

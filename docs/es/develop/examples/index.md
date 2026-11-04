@@ -64,7 +64,7 @@ Siga este orden:
 2. Elija el framework correspondiente.
 3. Elija el periférico más complejo.
 4. Elija el middleware correspondiente.
-5. Tenga en cuenta las restricciones de alimentación o memoria.
+5. Compruebe que el ejemplo se ajuste a las restricciones de consumo y memoria del producto.
 
 Por ejemplo, un producto de audio Bluetooth debería partir de un ejemplo de audio/Bluetooth y no de un `hello_world` básico, aunque este último sea más fácil de entender.
 
@@ -78,7 +78,7 @@ Por ejemplo, un producto de audio Bluetooth debería partir de un ejemplo de aud
 
 Este flujo es más lento durante la primera hora y mucho más rápido después del primer fallo difícil.
 
-## Evidencias que conviene conservar { #evidence-to-keep }
+## Qué registrar { #evidence-to-keep }
 
 Para cada ejemplo que se convierta en la base del producto, registre:
 

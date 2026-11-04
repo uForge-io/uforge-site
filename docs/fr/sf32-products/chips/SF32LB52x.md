@@ -12,7 +12,9 @@ tags:
 
 SF32LB52x est la famille de MCU à coût optimisé de SiFli, destinée aux objets portables intelligents d'entrée de gamme, aux interfaces graphiques compactes, aux périphériques Bluetooth et aux autres produits AIoT à encombrement contraint qui exigent malgré tout un affichage, de l'audio, du stockage et une connectivité sans fil intégrés.
 
-Au niveau de la plateforme, la famille associe un cœur applicatif Arm Cortex-M33 STAR-MC1[^1] à 240 MHz et un cœur contrôleur Bluetooth basse consommation dédié à 24 MHz. La puce peut ainsi exécuter une interface réactive et une pile applicative tout en gardant séparées la connectivité Bluetooth et les tâches permanentes (always-on).
+Au niveau de la plateforme, la famille associe un cœur applicatif Arm Cortex-M33 STAR-MC1[^1] à 240 MHz et un cœur contrôleur Bluetooth basse consommation dédié, que la fiche technique donne pour une fréquence maximale de 24 MHz. La puce peut ainsi exécuter une interface réactive et une pile applicative tout en gardant séparées la connectivité Bluetooth et les tâches permanentes (always-on).
+
+**Note sur la fréquence du LCPU :** la [fiche technique DS5201 V2.5.3 (en chinois)](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p5p3.pdf) indique une fréquence maximale de 24 MHz pour le LCPU. Le [rapport actuel de mesures basse consommation du SF32LB52x](https://docs.sifli.com/projects/rpt5202_sf32lb52x-low-power-measurement-report/latest/en/brief_introduction.html) et le [guide basse consommation du SDK](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html) indiquent 48 MHz, sans préciser de SKU, de mode de fonctionnement ni de condition de configuration permettant d'expliquer l'écart. Cette page retient la valeur de la fiche technique pour la comparaison ; n'interprétez pas `24/48 MHz` comme une plage sélectionnable ni comme une différence entre variantes. Confirmez auprès de SiFli la fréquence LCPU autorisée pour le composant et le SDK visés.
 
 Pour la planification produit, les principales variantes du guide des modèles de puces de SiFli se répartissent en deux groupes selon l'alimentation :
 
@@ -177,7 +179,9 @@ Suivez cette séquence pour transformer une présélection SF32LB52x en concepti
 ## Questions fréquentes { #frequently-asked-questions }
 
 **Quelles sont les principales caractéristiques du SF32LB52x ?**
-Le SF32LB52x associe un CPU applicatif (Cortex-M33 @240 MHz) à un cœur basse consommation (Cortex-M33 @24/48 MHz, contrôleur Bluetooth dédié). Il intègre 576 KB de SRAM interne et prend en charge le Bluetooth bimode (BT classique + BLE). Graphismes : ePicasso 2.0 Lite. Boîtier : QFN68 (7 × 7 mm). USB 2.0 FS.
+Le SF32LB52x assure le traitement applicatif (Cortex-M33 @240 MHz) et dispose d'un cœur basse consommation (Cortex-M33, jusqu'à 24 MHz, contrôleur Bluetooth dédié). Il intègre 576 KB de SRAM interne et prend en charge le Bluetooth bimode (BT classique + BLE). Graphismes : ePicasso 2.0 Lite. Boîtier : QFN68 (7 × 7 mm). USB 2.0 FS.
+
+Cette fréquence du LCPU suit la fiche technique ; elle ne constitue pas une plage de fonctionnement de 24/48 MHz confirmée. Consultez la [divergence entre sources](#overview) et confirmez la référence et le SDK exacts auprès de SiFli.
 
 **Quelles interfaces d'affichage le SF32LB52x prend-il en charge ?**
 SPI / DSPI / QSPI / 8080 / EPD / JDI. ([Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -211,3 +215,6 @@ Le [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) associe le SF32LB525UC6, qui d
 ### Produits de référence { #reference-products }
 
 Les conceptions SF32LB52 typiques comprennent les montres connectées d'entrée de gamme, les bracelets d'activité, les accessoires Bluetooth, les commandes graphiques compactes, les étiquettes électroniques de rayon, les badges intelligents, les imprimantes d'étiquettes portables et les afficheurs économiques pour vélos ou trottinettes électriques.
+
+!!! note "Contenu généré automatiquement"
+    Cette page a été rédigée sans document source dédié. Avant de vous appuyer sur ses informations techniques, vérifiez-les dans la documentation officielle de SiFli.

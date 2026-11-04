@@ -8,11 +8,11 @@ tags:
     - Measurement
 ---
 
-# Radiation Monitor Portable Signal-Strength Detector { #radiation-monitor-portable-signal-strength-detector }
+# Radiation Monitor Portable Signal-Strength Viewer { #radiation-monitor-portable-signal-strength-detector }
 
 ## What Is Radiation Monitor? { #what-is-radiation-monitor }
 
-[SiFliSparks/RadiationMonitor](https://github.com/SiFliSparks/RadiationMonitor) is a portable Bluetooth-band signal-strength viewer built on SF32LB52 and SiFli-SDK. Its firmware steps through 79 frequency points from 2402 to 2480 MHz and renders the received-strength values as an LVGL bar chart. KEY2 starts or stops scanning and browses stored history.
+[SiFliSparks/RadiationMonitor](https://github.com/SiFliSparks/RadiationMonitor) is a portable Bluetooth-band signal-strength viewer built on SF32LB52 and SiFli-SDK. Its firmware steps through 79 frequency points from 2402 to 2480 MHz and renders received signal strength indicator (RSSI) values as an LVGL bar chart. KEY2 starts or stops scanning and browses stored history.
 
 The project is useful for studying its Bluetooth-band scan path, real-time data processing, frequency visualization, and one-button interaction. It is not a calibrated spectrum analyzer and does not identify the source of the received signal. Nearby 2.4 GHz transmissions and measurement conditions can affect the chart. Without calibration and a controlled comparison, its values are not suitable for regulatory, certification, or precision RF measurements.
 
@@ -46,7 +46,7 @@ Before starting, have:
 | Area | Pinned source baseline | Evidence required before adaptation |
 |:-----|:------------------------|:------------------------------------|
 | Frequency scan | 79 points from 2402 to 2480 MHz | Firmware commit, SDK/board revision, and complete scan log |
-| Processing | The upstream README's module description says to average the previous ten scans; its overview says 30 scans. It does not say whether the average is over linear power or dBm | Pinned source revision, averaging scale/depth, raw/smoothed results, and stable-source comparison |
+| Processing | The conflicting README counts and unspecified averaging scale are detailed in the warning below | Pinned source revision, averaging scale/depth, raw/smoothed results, and stable-source comparison |
 | History | Ten-record circular history | Stop, page, wrap, and restart record |
 | UI | LVGL bar chart with a nominal -110 to -20 dBm Y-axis | Screen capture and label-to-array mapping check |
 | Measurement boundary | No traceable calibration or uncertainty is supplied | Reference-instrument, fixture, and error record, or an explicit relative-trend-only label |
@@ -94,7 +94,7 @@ Use the pinned project commit [`670cf20`](https://github.com/SiFliSparks/Radiati
 |:--------|:----------------|:--------------|
 | Board | Start from the SiFli SCons board argument `sf32lb52-lchspi-ulp`; record the actual PCB and verify the project configuration | The README output directory `build_sf32lb52-lchspi-ulp_hcpu` proves every SF32LB52x antenna and display path is equivalent |
 | SDK | Record the SiFli-SDK commit that builds successfully | Do not assume the newest SDK preserves the project's Bluetooth-scan behavior |
-| Smoothing | Resolve the README's 30-scan versus previous-10-scan discrepancy against the pinned source; verify whether it averages linear power or dBm, and establish the depth | The module description says ten scans; the overview says 30, and neither specifies the averaging scale |
+| Smoothing | See the warning below; establish averaging scale and depth from the pinned source and verify on-device | The README descriptions do not establish the pinned code's behavior |
 | Timing | The README reports a 30 ms data-update interval; measure the full 79-point sweep time | 30 ms is a guaranteed full 79-point update period |
 | Licensing | Confirm the repository and incorporated-code licenses before reuse or distribution | Publicly visible source automatically grants product distribution rights |
 
@@ -161,7 +161,7 @@ The principal failure domains are RF input/antenna, scan behavior and calibratio
 
 | Test | Method | Pass evidence |
 |:-----|:-------|:--------------|
-| Smoothing algorithm and depth | Record raw values and `rssi_res` for one frequency; compare with the pinned source and resolve the README discrepancy | Averaging scale and depth match the exact source revision and are confirmed on-device |
+| Smoothing algorithm and depth | Record raw values and `rssi_res` for one frequency and compare them with the pinned source | Averaging scale and depth match the exact source revision and are confirmed on-device |
 | Start/stop | Short-press KEY2 during scanning, then resume | Stop retains history; resume continues without a hang |
 | History | While stopped, long-press KEY2 more than once | Up to ten records browse backward and wrap correctly |
 | Empty history | Stop or long-press before valid history accumulates | No out-of-bounds access or crash; UI remains in a recognizable no-data state |

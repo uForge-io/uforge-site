@@ -15,9 +15,11 @@ tags:
 !!! note "Part of the SF32LB52x Hardware Design Guide"
     This page covers Section 5.8, the item-by-item schematic checklist. Return to [Minimum System, Power & Clock](SF32LB52x_schematic_design.md), the first of the three Schematic Design Guidelines pages.
 
+The source checklist reviewed for this page is SiFli's *SF32LB52 Schematic&PCB Checklist*, V1.0 (2026-01-21). It has not been compared with a later online revision.
+
 ## 5.8. Schematic Checklist { #58-schematic-checklist }
 
-Each table below covers one functional block of the schematic. The Applies To column narrows a check point to a specific SF32LB52x power variant or silicon revision where the general "All variants" scope doesn't hold.
+Each table covers one functional block of the schematic. The Applies To column identifies a specific SF32LB52x power variant or silicon revision when a check does not apply to all variants.
 
 “Required” means the applicable check must be reviewed; it does not require fitting every peripheral listed. Review conditional checks only when the corresponding circuit or function is present. Keep the source’s Required/Optional categories and distinguish recommendations from mandatory limits.
 
@@ -29,7 +31,7 @@ Each table below covers one functional block of the schematic. The Applies To co
 
 | No. | Check Point | Applies To | Category |
 |:---|:---|:---|:---|
-| 1 | The package of the selected part number is correct, including pin names and pin numbers | All variants | Required |
+| 1 | The package, pin names, and pin numbers match the selected part number | All variants | Required |
 
 </div>
 

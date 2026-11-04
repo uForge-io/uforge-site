@@ -16,7 +16,7 @@ O módulo integra o componente BGA256, o circuito de RF, o cristal e a memória 
 
 Conforme o SKU escolhido, a plataforma pode combinar HPI-PSRAM com QSPI-NOR, QSPI-NAND ou eMMC. As interfaces do módulo atendem a produtos que precisam de recursos de display, áudio, armazenamento e conectividade, mantendo uma plataforma da classe MCU.
 
-O documento DS5802 V0.1 descreve uma antena PCB integrada ao módulo e opções para conectar uma antena externa. A antena externa pode ser conectada por pads castellados ou pelo conector externo de primeira geração, compatível com conectores Hirose U.FL, I-PEX MHFI e Amphenol AMC. O documento não informa qual configuração corresponde a cada SKU; confirme com a SiFli a implementação da antena do módulo escolhido antes de finalizar o layout da placa portadora.
+O documento DS5802 V0.1 descreve uma antena PCB integrada ao módulo e opções para conectar uma antena externa. A antena externa pode ser conectada pelo conector externo de primeira geração, compatível com conectores Hirose U.FL, I-PEX MHFI e Amphenol AMC. O documento não informa qual configuração corresponde a cada SKU; confirme com a SiFli a implementação da antena do módulo escolhido antes de finalizar o layout da placa portadora.
 
 !!! info
     Para conhecer a família de chips, sua arquitetura e seus periféricos, consulte [SF32LB58x](../chips/SF32LB58x.md). Esta página se concentra na integração do módulo, nas variantes de memória, nas linhas de alimentação e nos critérios de escolha do produto.
@@ -35,7 +35,7 @@ Segundo a SiFli, as áreas de aplicação do SF32LB58-MOD incluem:
 Considere o SF32LB58-MOD quando o projeto precisar de um ou mais destes recursos:
 
 - Componente BGA256, caminho de RF, cristal e memória de alta velocidade integrados ao módulo
-- Antena PCB integrada ou antena externa conectada por pads castellados ou por um conector compatível com Hirose U.FL, I-PEX MHFI e Amphenol AMC; confirme a configuração do SKU
+- Antena PCB integrada ou antena externa conectada por um conector compatível com Hirose U.FL, I-PEX MHFI ou Amphenol AMC; confirme a configuração do SKU
 - Opções de memória QSPI-NOR, QSPI-NAND ou eMMC conforme o SKU
 - Interfaces externas para display, áudio, armazenamento e controle
 
@@ -108,7 +108,7 @@ As informações acima reproduzem o conteúdo das etiquetas; não constituem uma
 </div>
 
 !!! note "Disponibilidade e personalização"
-    **O SF32LB58-MOD-E4R32N1 não está mais disponível devido à recente escassez de chips de memória.** Outras configurações do módulo também são possíveis. Para solicitar uma configuração personalizada, [entre em contato com a μForge.io](../../about/contact.md).
+    **O SF32LB58-MOD-E4R32N1 está indisponível no momento devido à escassez de chips de memória.** Outras configurações do módulo também são possíveis. Para solicitar uma configuração personalizada, [entre em contato com a μForge.io](../../about/contact.md).
 
 O [guia de modelos de módulos da SiFli](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) lista essas variantes, informa que a eMMC pode ser incluída como dispositivo interno e que outras configurações podem ser personalizadas. Escolha o SKU de acordo com o tipo de mídia e a capacidade necessários e confirme com a SiFli a disponibilidade atual e a configuração de memória. Verifique também se o SDK e o firmware de destino oferecem suporte ao dispositivo e ao caminho de inicialização e armazenamento escolhidos.
 
@@ -154,10 +154,14 @@ O [guia de hardware SF32LB58x](https://wiki.sifli.com/en/hardware/SF32LB58x-HW-A
 - VDD_3V3: 2,97–3,6 V
 - VDD_1V8: 1,7–1,95 V
 - VDDIOA / VDDIOA2 / VDDIOB: 1,7–3,6 V
+
 - VDD_3V3 alimenta AVDD33_ANA, AVDD33_AUD e AVDD_USB; se o módulo incluir eMMC, também alimenta sua entrada VDD. A SiFli recomenda um LDO para esta linha de alimentação.
 - VDD_1V8 alimenta PVDD1, PVDD2, AVDD_BRF e AVDD18_DSI, além da memória integrada ao encapsulamento.
 - VDDIOA alimenta as I/Os PA, exceto PA00–PA11, a Flash externa e o VIO do eMMC, quando instalado. VDDIOA2 alimenta PA00–PA11; VDDIOB alimenta as I/Os PB.
 - Interface de módulo com 138 pinos; os pinos multiplexados disponibilizam funções como GPIO, SPI, LCD, MPI, UART, I2C, PWM, SDIO, USB 2.0 HS e áudio
+
+!!! note "Tensão de I/O externa"
+    A DS5802 V0.1 especifica 1,7–3,6 V para VDDIOA, VDDIOA2 e VDDIOB, mas sua lista de verificação de hardware estabelece nível de interface de 3,3 V para as I/Os do módulo e os periféricos externos. O documento não esclarece essa diferença. Confirme com a SiFli a tensão permitida para a interface e a revisão do módulo escolhidas; não conclua, apenas pela faixa da linha de alimentação, que todas as I/Os externas toleram 3,6 V.
 
 ## Produtos relacionados { #related-products }
 

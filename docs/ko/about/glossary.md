@@ -11,7 +11,7 @@ tags:
 ## 아키텍처와 처리 { #architecture-and-processing }
 
 * **MCU** — **Microcontroller Unit(마이크로컨트롤러 유닛).** CPU 코어, 메모리, 프로그래밍 가능한 입출력 주변 장치를 하나로 통합한 집적 회로로, 범용 운영 체제 대신 전용 펌웨어를 낮은 오버헤드로 실행하도록 최적화되어 있습니다.
-* **SoC** — **System on Chip(시스템 온 칩).** 컴퓨터 시스템에 필요한 모든 전자 회로와 구성 요소를 하나의 기판에 통합한 집적 회로입니다. 이 사이트에서는 SF32 제품을 MCU로 분류합니다. 완전한 애플리케이션 프로세서 OS 환경이 아니라 마이크로컨트롤러급 펌웨어를 대상으로 하기 때문입니다.
+* **SoC** — **System on Chip(시스템 온 칩).** 컴퓨터 시스템에 필요한 전자 회로와 구성 요소를 하나의 칩에 통합한 집적 회로입니다. 이 사이트에서는 SF32 제품을 MCU로 분류합니다. 완전한 애플리케이션 프로세서 OS 환경이 아니라 마이크로컨트롤러급 펌웨어를 대상으로 하기 때문입니다.
 * **Arm Cortex-M33** — SF32의 애플리케이션 코어와 Bluetooth 코어가 기반으로 하는 32비트 Armv8-M mainline 프로세서 아키텍처입니다. Armv8-M mainline은 이전의 Cortex-M3/M4 코어와 달리 선택 사항인 TrustZone 보안 확장(신뢰 코드/데이터와 비신뢰 코드/데이터를 하드웨어 수준에서 격리)을 지원합니다. 다만 TrustZone은 실리콘 구현마다 정하는 구성 선택 사항이며 모든 Cortex-M33에 보장되는 기능이 아닙니다. 현재의 SF32LB52x부터 SF32LB58x까지의 제품에는 TrustZone이 구성되어 있지 않습니다. 자세한 내용은 아래의 STAR-MC1과 [SF32LB52x 칩 페이지](../sf32-products/chips/SF32LB52x.md)를 참조하십시오.
 * **STAR-MC1** — Arm China의 구성 가능한 Armv8-M Mainline 임베디드 CPU IP로, 호환되는 SF32 디바이스에서 Cortex-M33급 애플리케이션 프로세서로 사용됩니다. CU, SP, SE 구성은 캐시, TCM, XIPU, TrustZone 기능이 서로 다르며, SF32 제품이 제공하는 기능 집합은 디바이스마다 다릅니다. SiFli 문서에서는 문맥에 따라 "Arm Cortex-M33 STAR-MC1" 또는 "Arm Cortex-M33"이라고 표기할 수 있습니다. [STAR-MC1 아키텍처 페이지](../learn/architecture/star-mc1.md)를 참조하십시오.
 * **CDE** — **Custom Datapath Extension(커스텀 데이터패스 확장).** 선택된 연산을 가속하기 위한 Arm Custom Instruction 메커니즘입니다. Arm China의 STAR-MC1 자료는 CDE의 예로 CRC32를 듭니다. 실제 SF32에서의 사용 가능 여부와 소프트웨어 지원은 디바이스별로 확인해야 합니다.
@@ -36,7 +36,7 @@ tags:
 
 * **ePicasso** — SF32 제품군용으로 SiFli가 자체 개발한 2D/2.5D 그래픽 가속 엔진으로, 이미지 복사, 블렌딩, 스케일링, 회전, 레이어 합성 같은 픽셀 연산을 처리해 애플리케이션 CPU의 부담을 덜어 줍니다. [ePicasso 아키텍처 페이지](../learn/graphics/epicasso-gpu.md)를 참조하십시오.
 * **eZip** — SiFli의 무손실 그래픽 및 범용 압축 형식으로, 지원되는 SF32 디바이스에서 하드웨어 디코딩을 제공합니다. 그래픽의 경우 SiFli는 압축률이 PNG보다 약간 높다고 설명하며, 범용 데이터의 경우 압축률은 원본에 따라 달라집니다. 압축된 에셋은 디코딩 전에 버스를 통해 전송되므로 eZip은 PSRAM과 NOR 플래시의 외부 메모리 대역폭을 줄일 수 있습니다.
-* **TurboPixel** — 지원되는 SF32 제품에서 쓰는 고정 압축률 손실 방식의 최종 프레임버퍼 형식입니다. extDMA가 렌더링된 비트맵을 TurboPixel로 압축하고 디스플레이 컨트롤러가 이를 해제하여 PSRAM 대역폭과 PSRAM 용량을 줄입니다. [TurboPixel 프레임버퍼 압축 페이지](../learn/graphics/turbopixel.md)를 참조하십시오.
+* **TurboPixel** — 지원되는 SF32 제품에서 쓰는 고정 압축률 손실 방식의 최종 프레임버퍼 형식입니다. extDMA가 렌더링된 비트맵을 TurboPixel로 압축하고 디스플레이 컨트롤러가 이를 해제하여 프레임버퍼에 필요한 PSRAM 대역폭과 용량을 줄입니다. [TurboPixel 프레임버퍼 압축 페이지](../learn/graphics/turbopixel.md)를 참조하십시오.
 * **LVGL** — **Light and Versatile Graphics Library.** 대부분의 SF32 제품이 애플리케이션 수준 UI에 사용하는 오픈소스 임베디드 UI 프레임워크로, ePicasso로 가속되는 렌더링 위에서 동작합니다.
 * **HMI** — **Human-Machine Interface(휴먼-머신 인터페이스).** 설계 범주로서의 디바이스 내 사용자 인터페이스(화면, 터치, 버튼)를 가리키는 약칭입니다.
 * **RGB / DPI 디스플레이 인터페이스** — 픽셀 색상 성분을 호환되는 패널이나 디스플레이 컨트롤러에 직접 전달하는 병렬 디스플레이 인터페이스입니다. 정식 명칭은 **DPI(Display Pixel Interface)**이며, "RGB 인터페이스"는 보드 설계에서 흔히 쓰는 약칭입니다. 일반적으로 픽셀 클럭, 수평 및 수직 동기 신호, 여러 개의 병렬 색상 데이터 라인을 사용합니다. 직렬 디스플레이 인터페이스에 비해 DPI는 더 많은 GPIO를 사용하고 병렬 트레이스 라우팅에 더 세심한 주의가 필요하므로, 대상 패키지의 핀 예산과 패널 타이밍 요구 사항을 확인하십시오.
@@ -64,7 +64,7 @@ tags:
 * **SRAM** — **Static RAM(정적 RAM).** 애플리케이션 코드와 데이터를 실행하는 데 사용하는 빠른 온칩 작업 메모리입니다.
 * **PSRAM** — **Pseudo-Static RAM(의사 정적 RAM).** 온칩 SRAM의 한계를 넘어 그래픽 버퍼와 더 큰 애플리케이션을 지원하는 데 쓰이는 대용량 외부 메모리로, SF32 모듈에서는 System-in-Package 형태인 경우가 많습니다.
 * **NOR / NAND 플래시** — 펌웨어와 에셋 저장에 사용하는 두 가지 비휘발성 플래시 메모리입니다. NOR은 빠른 랜덤 읽기를 지원하며 직접 코드 실행(XiP, Execute-in-Place)에 흔히 사용됩니다. NAND/SD-NAND는 랜덤 액세스 속도를 희생하는 대신 훨씬 높은 집적도를 제공하여 이미지, 글꼴, 로그의 대용량 저장에 적합합니다.
-* **OPI / QPI / QSPI** — **Octal/Quad Peripheral (or Serial Peripheral) Interface.** 플래시 또는 PSRAM 인터페이스의 핀 수/대역폭 등급(Quad = 데이터 라인 4개, Octal = 8개)으로, 달성 가능한 메모리 대역폭에 영향을 줍니다.
+* **OPI / QPI / QSPI** — **Octal Peripheral Interface / Quad Peripheral Interface / Quad Serial Peripheral Interface.** 플래시 또는 PSRAM 인터페이스의 명칭으로, OPI는 데이터 라인 8개를, QPI와 QSPI는 각각 4개를 사용합니다. 인터페이스 폭은 구현 가능한 메모리 대역폭에 영향을 줍니다.
 * **eMMC** — **Embedded MultiMediaCard.** 저장 용량이 큰 SF32 설계에 사용되는 관리형 NAND 플래시 스토리지 인터페이스입니다.
 
 ## 주변 장치와 인터페이스 { #peripherals-and-interfaces }
@@ -82,7 +82,7 @@ tags:
 
 ## 하드웨어와 제조 { #hardware-and-manufacturing }
 
-* **QFN** — **Quad Flat No-lead package(쿼드 플랫 노리드 패키지).** SF32 제품이 제공되는 칩 패키지 유형으로, 핀 수와 본체 크기로 표기합니다(예: QFN68).
+* **QFN** — **Quad Flat No-lead package(쿼드 플랫 노리드 패키지).** 일부 SF32 제품에 사용되는 리드리스 패키지로, 핀 수와 본체 크기로 표기합니다(예: QFN68).
 * **BGA** — **Ball Grid Array package(볼 그리드 어레이 패키지).** 디바이스 아래에 솔더 볼이 배열된 패키지로, 작은 풋프린트와 더 많은 핀 수를 구현할 수 있지만 BGA 팬아웃을 위한 PCB 배선과 이에 맞는 조립 공정이 필요합니다.
 * **BOM** — **Bill of Materials(자재 명세서).** 인쇄 회로 기판 어셈블리(PCBA)를 제조하는 데 필요한 부품, 수동 소자, 기구 하드웨어를 항목별로 정리한 공식 목록입니다. SiFli가 권장하는 부품과 모듈을 선호하는 주된 이유는 BOM 복잡도를 줄일 수 있기 때문입니다.
 * **EDA** — **Electronic Design Automation(전자 설계 자동화).** 회로도 작성, SPICE 시뮬레이션, PCB 레이아웃 소프트웨어 범주입니다. SF32 전용 풋프린트/심볼은 [EDA 도구 라이브러리 페이지](../hardware/cad-components/eda-tool-libraries.md)를 참조하십시오.

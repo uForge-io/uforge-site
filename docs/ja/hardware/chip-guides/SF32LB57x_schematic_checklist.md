@@ -13,7 +13,7 @@ tags:
 # SF32LB57xハードウェア設計ガイド — 回路図チェックリスト { #sf32lb57x-hardware-design-guide-schematic-checklist }
 
 !!! note "SF32LB57xハードウェア設計ガイドの一部"
-    このページには、SiFli公式の設計セルフチェック表に基づき、第 5.8 節の項目別チェックリストを掲載しています。[最小システムと電源](SF32LB57x_schematic_system_power.md)に戻ると、回路図設計指針の最初のページを確認できます。
+    このページでは、SiFli公式SF32LB57xハードウェアアプリケーションガイド第4.1～4.8節のうち、回路図に関するチェック項目を掲載します。同じセルフチェック表のPCBレイアウト関連項目は[PCBレイアウトチェックリスト](SF32LB57x_pcb_layout_checklist.md)にあります。[OpenSiFli公式ソースMarkdown](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/SF32LB57x-HW-Application.md)にはセルフチェック表全体が含まれており、両チェックリストの項目網羅性、適用範囲、記載値を照合しました。以下に示す資料間の不一致は原資料内でも未解決です。Markdownのセルフチェック表にはワークブック固有のレビュー用ハイライトが記録されていないため、Excelセルの色は別途確認していません。設計承認前に、対象の注文型番についてSiFliへ不一致を確認してください。[最小システムと電源](SF32LB57x_schematic_system_power.md)に戻ると、回路図設計指針の最初のページを確認できます。
 
 ## 5.8. 回路図チェックリスト { #58-schematic-checklist }
 

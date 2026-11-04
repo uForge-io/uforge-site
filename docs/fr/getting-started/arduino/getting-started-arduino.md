@@ -97,9 +97,7 @@ Choisissez **Dynamic** pour utiliser le chargeur Zephyr. Choisissez **Static** s
 
 ## Mettre la carte en mode téléchargement série { #put-the-board-in-serial-download-mode }
 
-Pour la première utilisation, la carte doit être en mode téléchargement série, selon la documentation OpenSiFli. Suivez la séquence de démarrage/réinitialisation de la SF32LB52 DevKit LCD, puis téléversez depuis Arduino IDE ou CLI.
-
-L'outil de téléversement est `sftool`.
+OpenSiFli indique que, lors de la première utilisation, la carte doit être en mode de téléchargement série. Sur la SF32LB52 DevKit LCD, activez l'option **BOOT** dans l'outil de téléchargement, puis mettez la carte sous tension ou réinitialisez-la ; consultez les [instructions de téléchargement et de débogage de la carte](../../sf32-products/devkits/SF32LB52-DevKit-LCD.md#download-and-debug). Une fois le mode de téléchargement activé, téléversez depuis Arduino IDE ou CLI avec `sftool`.
 
 ## Téléverser un test série de base { #upload-a-serial-smoke-test }
 

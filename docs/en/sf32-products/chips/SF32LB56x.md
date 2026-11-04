@@ -41,7 +41,7 @@ Choose SF32LB56x when the design needs one or more of these capabilities:
 - DPI/RGB display-interface support
 - External Wi-Fi over SDIO; external storage over SD/SDIO or eMMC
 - Higher GPIO count through the WBBGA175 option
-- Better headroom for TinyML, audio, and UI concurrency
+- More headroom for concurrent TinyML, audio, and UI workloads
 
 ## Development Resources
 
@@ -183,10 +183,12 @@ Use this sequence to turn an SF32LB56x shortlist into a validated design:
 ## Frequently Asked Questions
 
 **What are the key specifications of SF32LB56x?**
-SF32LB56x pairs an application CPU (Cortex-M33 @240 MHz) with a low-power core (Cortex-M33 @48/96 MHz, a user-programmable core), 960 KB of internal SRAM and dual-mode Bluetooth (BT Classic + BLE). Graphics: ePicasso 2.0. Package: QFN68 / BGA175 (7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)). USB 2.0 FS.
+SF32LB56x provides application processing (Cortex-M33 @240 MHz), a low-power core (Cortex-M33, up to 96 MHz, a user-programmable core), 960 KB of internal SRAM and dual-mode Bluetooth (BT Classic + BLE). Graphics: ePicasso 2.0. Package: QFN68L / WBBGA175 (7 × 7 mm (QFN68L), 6.1 × 6.5 mm (WBBGA175)). USB 2.0 FS.
+
+The LCPU operating clock and application-task support depend on the exact device and supported SDK configuration; 96 MHz is a ceiling, not the default. The 960 KB SRAM comprises 800 KB HCPU SRAM (including 128 KB retention SRAM) and 160 KB LCPU retention SRAM, not one contiguous pool. Check the target SKU and SDK memory map.
 
 **Which display interfaces does SF32LB56x support?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix)) This is a family-wide list, not a guarantee for every order code or package; check the linked interface matrix.
 
 **What is the maximum display resolution of SF32LB56x?**
 Up to 1024 × 600 with RGB888 color, through the DPI/RGB interface on the BGA package. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix))

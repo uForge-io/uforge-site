@@ -283,7 +283,7 @@ Revise estos cuatro aspectos para cada interfaz periférica:
 1. La conexión eléctrica: cruce de señales, resistencias pull-up/pull-down, protección ESD y terminación.
 2. La compatibilidad entre dominios de tensión de E/S, incluido el riesgo de alimentación inversa cuando el periférico está apagado.
 3. Los estados predeterminados seguros durante el reinicio y la suspensión.
-4. Los conflictos con funciones multiplexadas de arranque, descarga, SWD, USB, activación o pantalla de alta velocidad.
+4. Los conflictos con funciones multiplexadas de arranque, descarga, SWD, USB, activación o pantalla de alta velocidad; confirme también si algún botón debe permitir el despertar por hardware de la MCU y complete la configuración correspondiente del circuito y del software.
 
 #### 5.6.9. UART { #569-uart }
 
@@ -291,7 +291,8 @@ Revise estos cuatro aspectos para cada interfaz periférica:
 - Conecte el RXD de la MCU al TXD del periférico y el TXD de la MCU al RXD del periférico.
 - Haga coincidir la tensión de E/S del periférico con el dominio de E/S de la MCU.
 - Revise el comportamiento durante el reinicio de los pines UART multiplexados con funciones USB, arranque, descarga o depuración.
-- `PA18` y `PA19` son los pines DBG-UART predeterminados. Para interfaces UART de prueba que se conectan y desconectan con frecuencia, la fuente recomienda `PA18`, `PA19`, `PA43` o `PA44`; este grupo GPIO admite hasta 5,5 V. En cables de prueba largos, añada una resistencia serie de 100 Ω para limitar el sobreimpulso.
+- Si la UART se multiplexa en `PA35` o `PA36`, durante el reinicio de la MCU mantenga apagado el periférico externo o configure por software el pin correspondiente a nivel bajo para evitar activaciones no deseadas.
+- `PA18` y `PA19` son los pines `DBG-UART` predeterminados. Para interfaces UART de prueba que se conectan y desconectan con frecuencia, la fuente recomienda `PA18`, `PA19`, `PA43` o `PA44`; este grupo GPIO admite hasta 5,5 V. En cables de prueba largos, añada una resistencia serie de 100 Ω para limitar el sobreimpulso.
 
 #### 5.6.10. I2C { #5610-i2c }
 
@@ -299,6 +300,8 @@ Revise estos cuatro aspectos para cada interfaz periférica:
 - SF32LB57x integra cuatro interfaces I2C, cada una con modos de host y dispositivo, y enrutables por matriz a cualquier GPIO.
 - La fuente recomienda 4,7 kΩ para el modo estándar (100 kHz), de 2,2 kΩ a 3,3 kΩ para el modo rápido (400 kHz) y de 1 kΩ a 2,2 kΩ para el modo rápido plus (1 MHz). Para 400 kHz, 2,2 kΩ es un punto de partida; ajústelo según la capacitancia del bus.
 - En un bus I2C compartido basta con un conjunto de pull-ups cerca del host; no añada un conjunto distinto en cada dispositivo. Alimente los pull-ups desde el raíl del periférico para que se desconecten con él y no causen fugas durante la suspensión.
+- Compruebe si la interrupción de un periférico I2C debe despertar la MCU; si es necesario, complete la configuración correspondiente del circuito y del software.
+- Los sensores I2C de aceleración, frecuencia cardíaca y campo magnético deben admitir una lectura continua en bloque de todos los registros en una sola operación.
 - Asegúrese de que cada dispositivo del mismo bus tenga una dirección única.
 
 #### 5.6.11. SPI { #5611-spi }
@@ -319,7 +322,7 @@ Revise estos cuatro aspectos para cada interfaz periférica:
 - Compruebe las resistencias pull-up, el control de alimentación y los dominios de tensión de SDIO/eMMC/SD NAND.
 - A 24 MHz, las resistencias pull-up internas de GPIO pueden bastar para CMD y Data0 a Data3; a partir de 48 MHz, añada resistencias pull-up externas de 10 kΩ en CMD y Data0 a Data3.
 - Añada resistencias serie de 27 a 33 Ω en las señales SDIO y reserve una huella sin montar para un condensador en derivación en la línea de reloj.
-- En un zócalo TF externo, conecte DET a 3,3 V mediante un pull-up de 10 kΩ y configure el pin de la MCU como entrada con pull-up interno. Añada protección ESD a las señales SDIO y a la alimentación.
+- En un zócalo TF externo, conecte `DET` a 3,3 V mediante un pull-up de 10 kΩ y configure el pin de la MCU como entrada con pull-up interno. Añada protección ESD a las señales SDIO y a la alimentación.
 
 #### 5.6.13. USB { #5613-usb }
 
@@ -336,8 +339,9 @@ Revise estos cuatro aspectos para cada interfaz periférica:
 
 - Enrute USB DP/DN como un par diferencial de 90 Ω.
 - USB DP/DM suele usar las funciones multiplexadas de `PA35`/`PA36`. Al habilitar USB, compruebe que los circuitos externos no fuercen niveles inseguros durante el reinicio.
-- Coloque la protección ESD cerca del conector y haga pasar las señales por ella antes de llegar al chip.
+- Proteja las líneas de datos USB, VBUS y otros pines críticos con dispositivos ESD. Colóquelos cerca del conector y enrute las señales a través de ellos antes de llegar al chip.
 - Evite derivaciones y mantenga el ajuste entre señales del par y la continuidad del plano de referencia de tierra.
+- Mientras la MCU no esté en suspensión, mantenga habilitado el USB para que el protocolo pueda detectar la conexión y desconexión del dispositivo.
 - Si se requiere activar el sistema al conectar USB durante la suspensión, conecte un divisor de VBUS a una GPIO compatible con la activación. Se recomienda compartir esa GPIO con la detección de inserción del cargador.
 - `PA35` está asignado de forma fija a `USB_DP` y `PA36` a `USB_DM`; estas funciones no se pueden reasignar. USB 2.0 FS admite hasta 12 Mbps.
 - Reserve resistencias serie de 22 o 33 Ω cerca del chip en DP/DM, además de huellas sin montar para condensadores en derivación que permitan ajustar la integridad de señal.
@@ -357,6 +361,7 @@ Revise estos cuatro aspectos para cada interfaz periférica:
 - Use resistencias del 1 % en las mediciones mediante divisor.
 - Coloque un condensador de filtrado de 100 nF (0,1 µF) cerca del pin del chip en cada entrada GPADC.
 - Mantenga las pistas GPADC alejadas de DC/DC, RF, USB, SDIO, relojes de pantalla y bucles de carga.
+- Mantenga también estas pistas alejadas de señales paralelas de alta velocidad y apantállelas con tierra para reducir el acoplamiento de ruido digital.
 
 <div align="center"><em>Tabla 5.6-8: Asignación de pines GPADC</em></div>
 

@@ -31,7 +31,7 @@ tags:
 
 ### 5.1. 전원 시스템 { #51-power-system }
 
-QFN68L 패키지의 SF32LB551에는 VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_VOUT, AVDD_DSI 핀이 없습니다. 전원 표와 커패시터 표는 선택한 패키지에 있는 핀에만 적용하십시오. BGA 패키지는 BUCK 출력을 두 개 제공하며, BUCK2는 BUCK 또는 LDO 동작을 지원하고 BUCK 모드를 권장합니다. QFN68L은 BUCK 출력을 하나 제공합니다.
+QFN68L 패키지의 SF32LB551에는 VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_VOUT, AVDD_DSI 핀이 없습니다. BGA125 패키지의 SF32LB553에도 AVDD_DSI 핀이 없습니다. 전원 표와 커패시터 표는 선택한 패키지에 있는 핀에만 적용하십시오. BGA 패키지는 BUCK 출력을 두 개 제공하며, BUCK2는 BUCK 또는 LDO 동작을 지원하고 BUCK 모드를 권장합니다. QFN68L은 BUCK 출력을 하나 제공합니다.
 
 <div align="center"><em>표 5.1-1: PMU 전원 핀</em></div>
 
@@ -248,7 +248,7 @@ BGA145에는 외부 OPI-PSRAM 채널이 하나 있고, BGA169에는 두 개 있�
 
 <div align="center" markdown>
 
-| 인터페이스 신호 | QFN68 | BGA145/169 | 상세 설명 |
+| 인터페이스 신호 | QFN68 | BGA125/145/169 | 상세 설명 |
 | :--- | :--- | :--- | :--- |
 | CS# | GPIO9 | PA61 | 칩 셀렉트, Low 활성 |
 | SO | GPIO7 | PA65 | 데이터 입력 (데이터 입출력 1) |
@@ -263,7 +263,7 @@ BGA145에는 외부 OPI-PSRAM 채널이 하나 있고, BGA169에는 두 개 있�
 
 <div align="center" markdown>
 
-| 인터페이스 신호 | QFN68 | BGA145/169 | 상세 설명 |
+| 인터페이스 신호 | QFN68 | BGA125/145/169 | 상세 설명 |
 | :--- | :--- | :--- | :--- |
 | CS# | GPIO16 | PA45 | 칩 셀렉트, Low 활성 |
 | SO | GPIO14 | PA49 | 데이터 입력 (데이터 입출력 1) |
@@ -278,7 +278,7 @@ BGA145에는 외부 OPI-PSRAM 채널이 하나 있고, BGA169에는 두 개 있�
 
 <div align="center" markdown>
 
-| 인터페이스 신호 | QFN68 | BGA145/169 | 상세 설명 |
+| 인터페이스 신호 | QFN68/BGA125 | BGA145/169 | 상세 설명 |
 | :--- | :--- | :--- | :--- |
 | CS# | - | PB33 | 칩 셀렉트, Low 활성 |
 | SO | - | PB36 | 데이터 입력 (데이터 입출력 1) |
@@ -293,14 +293,14 @@ BGA145에는 외부 OPI-PSRAM 채널이 하나 있고, BGA169에는 두 개 있�
 
 <div align="center" markdown>
 
-| 인터페이스 신호 | QFN68 | BGA145/169 | 상세 설명 |
-| :--- | :--- | :--- | :--- |
-| CLK | GPIO10 | PA34 | 클럭 입력 |
-| CMD | GPIO9 | PA36 | 명령 입력 |
-| DATA0 | GPIO8 | PA28 | 데이터 0 |
-| DATA1 | GPIO7 | PA29 | 데이터 1 |
-| DATA2 | GPIO6 | PA30 | 데이터 2 |
-| DATA3 | GPIO5 | PA31 | 데이터 3 |
+| 인터페이스 신호 | QFN68 | BGA125 | BGA145/169 | 상세 설명 |
+| :--- | :--- | :--- | :--- | :--- |
+| CLK | GPIO10 | PA60 | PA34 | 클럭 입력 |
+| CMD | GPIO9 | PA61 | PA36 | 명령 입력 |
+| DATA0 | GPIO8 | PA63 | PA28 | 데이터 0 |
+| DATA1 | GPIO7 | PA65 | PA29 | 데이터 1 |
+| DATA2 | GPIO6 | PA66 | PA30 | 데이터 2 |
+| DATA3 | GPIO5 | PA68 | PA31 | 데이터 3 |
 
 </div>
 
@@ -308,18 +308,18 @@ BGA145에는 외부 OPI-PSRAM 채널이 하나 있고, BGA169에는 두 개 있�
 
 <div align="center" markdown>
 
-| 인터페이스 신호 | QFN68 | BGA145/169 | 상세 설명 |
-| :--- | :--- | :--- | :--- |
-| CLK | GPIO10 | PA34 | 클럭 입력 |
-| CMD | GPIO9 | PA36 | 명령 입력 |
-| DATA0 | GPIO8 | PA28 | 데이터 0 |
-| DATA1 | GPIO7 | PA29 | 데이터 1 |
-| DATA2 | GPIO6 | PA30 | 데이터 2 |
-| DATA3 | GPIO5 | PA31 | 데이터 3 |
-| DATA4 | GPIO15 | PA47 | 데이터 4 |
-| DATA5 | GPIO14 | PA49 | 데이터 5 |
-| DATA6 | GPIO13 | PA51 | 데이터 6 |
-| DATA7 | GPIO12 | PA55 | 데이터 7 |
+| 인터페이스 신호 | QFN68 | BGA125 | BGA145/169 | 상세 설명 |
+| :--- | :--- | :--- | :--- | :--- |
+| CLK | GPIO10 | - | PA34 | 클럭 입력 |
+| CMD | GPIO9 | - | PA36 | 명령 입력 |
+| DATA0 | GPIO8 | - | PA28 | 데이터 0 |
+| DATA1 | GPIO7 | - | PA29 | 데이터 1 |
+| DATA2 | GPIO6 | - | PA30 | 데이터 2 |
+| DATA3 | GPIO5 | - | PA31 | 데이터 3 |
+| DATA4 | GPIO15 | - | PA47 | 데이터 4 |
+| DATA5 | GPIO14 | - | PA49 | 데이터 5 |
+| DATA6 | GPIO13 | - | PA51 | 데이터 6 |
+| DATA7 | GPIO12 | - | PA55 | 데이터 7 |
 
 </div>
 
@@ -327,7 +327,7 @@ BGA145에는 외부 OPI-PSRAM 채널이 하나 있고, BGA169에는 두 개 있�
 
 <div align="center" markdown>
 
-| 인터페이스 신호 | QFN68 | BGA145/169 | 상세 설명 |
+| 인터페이스 신호 | QFN68 | BGA125/145/169 | 상세 설명 |
 | :--- | :--- | :--- | :--- |
 | CLK | GPIO17 | PA44 | 클럭 입력 |
 | CMD | GPIO16 | PA45 | 명령 입력 |
@@ -375,17 +375,17 @@ BGA145에는 외부 OPI-PSRAM 채널이 하나 있고, BGA169에는 두 개 있�
 
 <div align="center" markdown>
 
-| SPI 신호 | QFN68 GPIO | BGA145/169 핀 | 상세 설명 |
-| :--- | :--- | :--- | :--- |
-| CSX | GPIO22 | PB33 | 인에이블 신호 |
-| WRX_SCL | GPIO23 | PB32 | 클럭 신호 |
-| DCX | GPIO20 | PB36 | 4선 SPI 모드에서는 데이터/명령 신호, Quad-SPI 모드에서는 데이터 1 |
-| SDI_RDX | GPIO21 | PB35 | 3/4선 SPI 모드에서는 데이터 입력 신호, Quad-SPI 모드에서는 데이터 0 |
-| SDO | GPIO21 | PB35 | 3/4선 SPI 모드에서는 데이터 출력 신호이며 SDI_RDX와 단락 |
-| D[0] | GPIO19 | PB37 | Quad-SPI 모드에서는 데이터 2 |
-| D[1] | GPIO18 | PB07 | Quad-SPI 모드에서는 데이터 3 |
-| RESET | GPIO2 | PB17 | 디스플레이 패널 리셋 신호 |
-| TE | GPIO3 | PB77 | MCU 프레임 신호에 대한 티어링 이펙트 |
+| SPI 신호 | QFN68 GPIO | BGA125 핀 | BGA145/169 핀 | 상세 설명 |
+| :--- | :--- | :--- | :--- | :--- |
+| CSX | GPIO22 | PA31 | PB33 | 인에이블 신호 |
+| WRX_SCL | GPIO23 | PA20 | PB32 | 클럭 신호 |
+| DCX | GPIO20 | PA36 | PB36 | 4선 SPI 모드에서는 데이터/명령 신호, Quad-SPI 모드에서는 데이터 1 |
+| SDI_RDX | GPIO21 | PA34 | PB35 | 3/4선 SPI 모드에서는 데이터 입력 신호, Quad-SPI 모드에서는 데이터 0 |
+| SDO | GPIO21 | PA34 | PB35 | 3/4선 SPI 모드에서는 데이터 출력 신호이며 SDI_RDX와 단락 |
+| D[0] | GPIO19 | PA38 | PB37 | Quad-SPI 모드에서는 데이터 2 |
+| D[1] | GPIO18 | PA42 | PB07 | Quad-SPI 모드에서는 데이터 3 |
+| RESET | GPIO2 | PA78 | PB17 | 디스플레이 패널 리셋 신호 |
+| TE | GPIO3 | PA77 | PB77 | MCU 프레임 신호에 대한 티어링 이펙트 |
 
 </div>
 
@@ -398,22 +398,22 @@ BGA145에는 외부 OPI-PSRAM 채널이 하나 있고, BGA169에는 두 개 있�
 
 <div align="center" markdown>
 
-| MCU8080 신호 | QFN68 GPIO | BGA145/169 핀 | 상세 설명 |
-| :--- | :--- | :--- | :--- |
-| CSX | GPIO22 | - | 칩 셀렉트 |
-| WRX | GPIO23 | - | 디스플레이로 데이터를 보내기 위한 쓰기 스트로브 |
-| DCX | GPIO20 | - | 디스플레이 데이터/명령 선택 |
-| RDX | GPIO21 | - | 디스플레이 읽기 트랜잭션을 위한 읽기 스트로브 |
-| D[0] | GPIO19 | - | 데이터 0 |
-| D[1] | GPIO18 | - | 데이터 1 |
-| D[2] | GPIO17 | - | 데이터 2 |
-| D[3] | GPIO16 | - | 데이터 3 |
-| D[4] | GPIO15 | - | 데이터 4 |
-| D[5] | GPIO14 | - | 데이터 5 |
-| D[6] | GPIO13 | - | 데이터 6 |
-| D[7] | GPIO12 | - | 데이터 7 |
-| RESET | GPIO2 | - | 리셋 |
-| TE | GPIO3 | - | MCU 프레임 신호에 대한 티어링 이펙트 |
+| MCU8080 신호 | QFN68 GPIO | BGA125 핀 | BGA145/169 핀 | 상세 설명 |
+| :--- | :--- | :--- | :--- | :--- |
+| CSX | GPIO22 | PA31 | - | 칩 셀렉트 |
+| WRX | GPIO23 | PA20 | - | 디스플레이로 데이터를 보내기 위한 쓰기 스트로브 |
+| DCX | GPIO20 | PA36 | - | 디스플레이 데이터/명령 선택 |
+| RDX | GPIO21 | PA34 | - | 디스플레이 읽기 트랜잭션을 위한 읽기 스트로브 |
+| D[0] | GPIO19 | PA38 | - | 데이터 0 |
+| D[1] | GPIO18 | PA42 | - | 데이터 1 |
+| D[2] | GPIO17 | PA44 | - | 데이터 2 |
+| D[3] | GPIO16 | PA45 | - | 데이터 3 |
+| D[4] | GPIO15 | PA47 | - | 데이터 4 |
+| D[5] | GPIO14 | PA49 | - | 데이터 5 |
+| D[6] | GPIO13 | PA51 | - | 데이터 6 |
+| D[7] | GPIO12 | PA55 | - | 데이터 7 |
+| RESET | GPIO2 | PA78 | - | 리셋 |
+| TE | GPIO3 | PA77 | - | MCU 프레임 신호에 대한 티어링 이펙트 |
 
 </div>
 
@@ -465,14 +465,14 @@ BGA145에는 외부 OPI-PSRAM 채널이 하나 있고, BGA169에는 두 개 있�
 
 <div align="center" markdown>
 
-| 터치스크린 및 백라이트 신호 | QFN68 GPIO | BGA145 핀 | BGA169 핀 | 상세 설명 |
-| :--- | :--- | :--- | :--- | :--- |
-| Interrupt | GPIO1 | PA79 | PA79 | 터치 상태 인터럽트 신호 (웨이크업 가능) |
-| I2C1_SCL | GPIO25 | PA10 | PA10 | 터치스크린 I2C 클럭 신호 |
-| I2C1_SDA | GPIO24 | PA14 | PA14 | 터치스크린 I2C 데이터 신호 |
-| BL_PWM | GPIO0 | - | - | 백라이트 PWM 제어 신호 |
-| Reset | GPIO16 | PA00 | PA00 | 터치 리셋 신호 |
-| Power Enable | GPIO26 | PA06 | PA03 | 터치스크린 전원 인에이블 신호 |
+| 터치스크린 및 백라이트 신호 | QFN68 GPIO | BGA125 핀 | BGA145 핀 | BGA169 핀 | 상세 설명 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Interrupt | GPIO1 | PA79 | PA79 | PA79 | 터치 상태 인터럽트 신호 (웨이크업 가능) |
+| I2C1_SCL | GPIO25 | PA10 | PA10 | PA10 | 터치스크린 I2C 클럭 신호 |
+| I2C1_SDA | GPIO24 | PA14 | PA14 | PA14 | 터치스크린 I2C 데이터 신호 |
+| BL_PWM | GPIO0 | PA80 | - | - | 백라이트 PWM 제어 신호 |
+| Reset | GPIO16 | PA00 | PA00 | PA00 | 터치 리셋 신호 |
+| Power Enable | GPIO26 | PA06 | PA06 | PA03 | 터치스크린 전원 인에이블 신호 |
 
 </div>
 
@@ -500,7 +500,7 @@ SF32LB55x는 HCPU 웨이크 소스 네 개(WKUP_A0–WKUP_A3)와 LCPU 웨이크 
 
 <div align="center" markdown>
 
-| 인터럽트 소스 | QFN68 | BGA145/169 | 상세 설명 |
+| 인터럽트 소스 | QFN68 | BGA125/145/169 | 상세 설명 |
 | :--- | :--- | :--- | :--- |
 | WKUP_A0 | GPIO3 | PA77 | HCPU 인터럽트 신호 0 |
 | WKUP_A1 | GPIO2 | PA78 | HCPU 인터럽트 신호 1 |
@@ -549,7 +549,7 @@ SiFli는 채널 수와 입력 전압 한계가 서로 다른 이유를 설명하
 
 <div align="center" markdown>
 
-| UART 신호 | QFN68 | BGA145/169 | 상세 설명 |
+| UART 신호 | QFN68 | BGA125/145/169 | 상세 설명 |
 | :--- | :--- | :--- | :--- |
 | TXD1 | GPIO13 | PA19 | UART1 RXD 신호 |
 | RXD1 | GPIO14 | PA17 | UART1 TXD 신호 |
@@ -568,7 +568,7 @@ SiFli는 채널 수와 입력 전압 한계가 서로 다른 이유를 설명하
 
 UART RXD를 플로팅 상태로 두지 말고, 펌웨어 초기화 중에 내부 풀업을 활성화하십시오. UART3이 기본 로그 포트입니다. SiFli는 양산 플래싱과 크리스털 캘리브레이션을 위한 오프라인 프로그래머를 제공합니다. 최소한 VBAT, GND, VDDIOA, VDDIOB, RSTN, Mode, SWDIO, SWCLK, RXD1, TXD1, RXD3, TXD3 테스트 포인트를 확보해 두십시오. 양산 픽스처에 필요한 부분 집합은 VBAT, GND, boot_mode, VDDIOB, RXD3, TXD3입니다. VBAT와 boot_mode는 원본의 픽스처 라벨이므로, 배선하기 전에 실제 보드의 전원 및 Mode 연결에 대응시키십시오.
 
-원본 도면은 VDD_1V8을 커넥터 1번 핀(VTref)에, SWDIO를 7번 핀에, SWCLK를 9번 핀에 각각 22 Ω 직렬 저항을 통해 연결합니다. 표준 [J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector)도 1번 핀을 [VTref](https://kb.segger.com/VTref), 즉 프로브 전원 출력이 아닌 타깃 전압 기준 입력으로 사용합니다. 표준 케이블을 연결하기 전에 헤더 방향과 1.8 V 호환성을 확인하십시오.
+SiFli 원본은 디버거의 전원을 외부 인터페이스 입력으로 설정해 SF32LB55x 보드가 J-Link에 전원을 공급하도록 안내하지만, 이 지침과 표준 20핀 배선의 관계는 명확하지 않습니다. SEGGER는 1번 핀을 [VTref](https://kb.segger.com/VTref), 즉 타깃 전압 기준 입력으로 정의하며 프로브 전원 입력으로 사용하지 않습니다. 해당 기능을 지원하는 모델에서 19번 핀은 프로브가 타깃에 공급하는 5 V 출력입니다. 원본 도면에는 VDD_1V8이 1번 핀에 연결되고 SWDIO/SWCLK가 22 Ω 직렬 저항을 거쳐 7/9번 핀에 연결된 것으로 표시되어 있지만, 프로브 전원 경로는 표시되어 있지 않습니다. 배선 전에 사용 중인 프로브, 케이블, 타깃의 전원 방향을 확인하고 VTref를 전원 입력으로 취급하지 마십시오. 표준 [J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector) 케이블을 연결하기 전에 헤더 방향과 1.8 V 호환성도 확인하십시오.
 
 ![그림 5.7-4: 원본 SWD 커넥터: 어댑터 배선 확인](../../sf32-products/chips/assets/55x/SF32LB55x-SWD-SCH.png){ width="100%" loading="lazy" }
 

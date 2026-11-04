@@ -39,7 +39,7 @@ Donde:
 
 | Especificación | Descripción |
 |:---------------|:------------|
-| **M2xM** | Multimedia: futuras capacidades de pantalla RGB, cámara DVP, micrófonos digitales y audio avanzado. |
+| **M2xM** | Multimedia: se prevé ofrecer en el futuro pantallas RGB, cámaras DVP, micrófonos digitales y audio avanzado. |
 | **M2xA** | Analógica: futuras capacidades de E/S analógica de precisión y adquisición de datos. |
 | **M2xN** | Redes: futuras capacidades de Ethernet, CAN y redes industriales. |
 | **M2xH** | Alta velocidad: futuras interfaces de gran ancho de banda. |
@@ -47,7 +47,11 @@ Donde:
 
 </div>
 
-Estas descripciones indican el alcance previsto de cada categoría, no requisitos eléctricos definitivos. La hoja de cálculo local de la propuesta contiene mapas de asignación de contactos para M2 y M2xM. El artículo de definición también resume M2xN y M2xA, pero no se encontraron mapas originales de asignación de contactos que permitan verificar esos resúmenes; deben considerarse no verificados. M2xH y M2xP son nombres reservados sin contactos asignados.
+Estas descripciones indican el alcance previsto de cada categoría, no requisitos eléctricos definitivos.
+**Estado de las fuentes:**
+- **M2 / M2xM:** El borrador enlazado indica que un libro de propuesta local contiene mapas de contactos, pero el archivo no está incluido en este repositorio ni enlazado aquí; considérelos solo propuestas.
+- **M2xN / M2xA:** El borrador resume estas extensiones, pero no se encontraron datos originales de mapas de contactos para verificar esos resúmenes; considérelos no verificados.
+- **M2xH / M2xP:** Nombres reservados sin contactos asignados.
 
 ## Declaración del módulo { #module-declaration }
 

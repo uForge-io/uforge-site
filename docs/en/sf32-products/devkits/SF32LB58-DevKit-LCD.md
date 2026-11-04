@@ -44,7 +44,7 @@ Use the board to validate display, storage, audio, USB, and external peripherals
 
 | Board Version | Basis | Notes |
 | :--- | :--- | :--- |
-| V1.0.1 | SF32LB58-MOD-N16R32N1-V1.0.1 and SF32LB58-MOD-A128R32N1-V1.0.1 | Current version; adds USB plug detection on PB24; changes the PTC to 2 A / 6 V to support maximum dual-audio output; removes the RGB LED level-shift stage because its timing is unsuitable; replaces the DC/DC converter to reduce output ripple; removes the USB DP pull-up resistor to fix the USB-device interrupt issue |
+| V1.0.1 | SF32LB58-MOD-N16R32N1-V1.0.1 and SF32LB58-MOD-A128R32N1-V1.0.1 | Current version; adds USB plug detection on PB24; changes the PTC to 2 A / 6 V to address insufficient supply current during maximum output on both audio channels; removes the RGB LED level-shift stage because its timing is unsuitable; replaces the DC/DC converter to reduce output ripple; removes the USB DP pull-up resistor to fix the USB-device interrupt issue |
 | V1.0.0 | SF32LB58-MOD-N16R32N1-V1.0.0 with SF32LB587VEE56 | Initial public board version |
 
 </div>
@@ -69,14 +69,14 @@ The SiFli source is inconsistent for V1.0.0: its module-version section identifi
 
 ## When to Use This Board { #when-to-use-this-board }
 
-Choose SF32LB58-DevKit-LCD when the project needs a realistic high-end display and peripheral validation platform rather than a minimal breakout board.
+Choose SF32LB58-DevKit-LCD when you need to validate high-resolution displays and peripheral integration, rather than only exposing a minimal set of signals.
 
 - Bring up MIPI DSI, RGB888, or QSPI display panels
 - Validate touch, audio, storage, and USB together
 - Test high-resolution UI behavior on the SF32LB58x platform
 - Evaluate CAN or SDIO Wi-Fi expansion
 - Compare NOR and NAND-backed module configurations
-- Validate firmware on a flagship-class board before custom PCB work
+- Validate firmware on this board before custom PCB work
 
 For module-level integration planning, also review [SF32LB58-MOD](../modules/SF32LB58-MOD.md). For chip-family architecture and display/memory capability, see [SF32LB58x](../chips/SF32LB58x.md).
 
@@ -105,6 +105,8 @@ For module-level integration planning, also review [SF32LB58-MOD](../modules/SF3
 
 </div>
 
+**USB-to-UART source discrepancy — verify the fitted bridge:** SiFli's model guide identifies a CH343K with two USB-to-UART debug channels. The board block diagram instead labels the bridge CH342K and shows UART1 and UART4, without mapping either channel to a Type-C connector. Verify the fitted part and channel routing against the schematic/BOM for the board revision.
+
 ## Getting Started { #getting-started }
 
 ### Required Hardware { #required-hardware }
@@ -113,6 +115,8 @@ For module-level integration planning, also review [SF32LB58-MOD](../modules/SF3
 - LCD module using MIPI DSI, RGB888, or QSPI, as appropriate
 - USB 2.0 data cable, Type-A to Type-C or equivalent
 - Host computer running Windows, Linux, or macOS
+
+For simultaneous UART debugging and USB testing, use two USB 2.0 data cables, one for each Type-C port.
 
 ### Optional Hardware { #optional-hardware }
 
@@ -126,9 +130,9 @@ For module-level integration planning, also review [SF32LB58-MOD](../modules/SF3
 
 1. Connect the target display panel to the correct LCD connector.
 2. Connect the USB-to-UART Type-C port to the host computer.
-3. Open SiFli's download tool and select the correct COM port.
+3. Open SifliTrace and select the correct COM port.
 4. Install or remove the Mode jumper depending on whether you want download mode or normal run mode.
-5. Power the board and download or run the target firmware.
+5. Power the board; in download mode, use Impeller to flash the target firmware, or let the application start in normal run mode.
 6. After display bring-up, validate touch, audio, storage, and any expansion peripherals required by the product.
 
 Use a real data-capable USB cable. Some Type-C cables provide power only and will not expose the UART or USB data path.
@@ -136,6 +140,8 @@ Use a real data-capable USB cable. Some Type-C cables provide power only and wil
 ## Power { #power }
 
 SF32LB58-DevKit-LCD is powered from USB Type-C.
+
+The block diagram shows 5 V routed to the DPI LCD, RGB LED, backlight driver, audio PA, and 40-pin headers. Check the schematic for rail and connector limits before adding loads.
 
 - Both on-board USB Type-C connectors can supply power to the board
 - For firmware download and UART logging, use the USB-to-UART Type-C port
@@ -145,10 +151,14 @@ SF32LB58-DevKit-LCD is powered from USB Type-C.
 
 The primary firmware download and serial-log interface is the USB-to-UART Type-C port.
 
+Use SiFli's Impeller firmware-flashing tool to select the target firmware before downloading it.
+
 - **Download mode**: install the Mode jumper, then power or reset the board
 - **Software debug/log mode**: remove the Mode jumper, then power or reset the board
 
 The board also supports J-Link / SWD debug.
+
+The wiring reference uses CONN2 pins 1 (3.3 V), 12 (SWD-DIO), 7 (SWD-CLK), and 9 (GND); connect these through the supplied adapter, oriented as shown.
 
 ![SF32LB58-DevKit-LCD J-Link wiring reference](assets/sf32lb58x/58KIT-JLINK-CONN2.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — J-Link Wiring Reference</em></div>
@@ -229,6 +239,8 @@ The board supports:
 - Two speaker outputs
 - One PDM signal path that is multiplexed with RGB signals and therefore unavailable while the RGB display path is active
 
+The audio wiring reference maps CONN2 pins 11 to MIC_BIAS, 13/15 to ADC1N/P, 16/18 to ADC2N/P, and 35–38 to SPK1/2 P/N.
+
 SiFli's [detailed board guide](https://wiki.sifli.com/en/board/sf32lb58x/SF32LB58-DevKit-LCD.html) rates stereo analog output at up to 2.8 W/4 Ω, while its [development-board model guide](https://wiki.sifli.com/en/board/devkit_guide.html) lists 3 W/4 Ω for the two speaker outputs. Neither source says whether the rating is per channel or combined. Verify the exact board revision, schematic, and amplifier supply/load conditions before selecting speakers; do not treat either figure as a guaranteed per-channel output.
 
 ![Audio wiring reference](assets/sf32lb58x/58KIT-AUDIO-CONN2.png){ loading="lazy" }
@@ -245,6 +257,8 @@ The underlying SF32LB58 module includes a CAN controller, and the board exposes 
 <div align="center"><em>Reference CAN Transceiver Board</em></div>
 
 The board also supports SDIO Wi-Fi expansion through the header interface.
+
+The wiring reference labels SDIO1_EN, SDIO1_CMD, SDIO1_D0–D3, SDIO1_CLK, and WAKE_HOST, along with 3.3 V and GND; confirm pin numbers against the connector diagram before wiring.
 
 ![Reference SDIO Wi-Fi module](assets/sf32lb58x/ATK-RTL8189-SDIO-WIFI-LOOK.png){ loading="lazy" }
 <div align="center"><em>Reference SDIO Wi-Fi Module</em></div>

@@ -16,7 +16,7 @@ The module integrates the BGA256 device, RF path, crystal, and high-speed memory
 
 Depending on the selected module SKU, the platform can combine HPI-PSRAM with QSPI-NOR, QSPI-NAND, or eMMC storage. The module's interfaces support products that need display, audio, storage, and connectivity capabilities while retaining an MCU-class platform.
 
-DS5802 V0.1 identifies an on-module PCB antenna and external-antenna configurations. An external antenna may connect through castellated pads or the first-generation external antenna connector, which is compatible with Hirose U.FL, I-PEX MHFI, and Amphenol AMC connectors. The datasheet does not map these options to individual SKUs, so confirm the antenna implementation of the selected module with SiFli before finalizing the carrier-board layout.
+DS5802 V0.1 identifies an on-module PCB antenna and external-antenna configurations. An external antenna may connect through the first-generation external antenna connector, which is compatible with Hirose U.FL, I-PEX MHFI, and Amphenol AMC connectors. The datasheet does not map these options to individual SKUs, so confirm the antenna implementation of the selected module with SiFli before finalizing the carrier-board layout.
 
 !!! info
     For the underlying chip family, architecture, and peripheral set, see [SF32LB58x](../chips/SF32LB58x.md). This page focuses on module-specific integration, memory variants, power rails, and product-fit decisions.
@@ -35,7 +35,7 @@ SiFli lists the following application areas for SF32LB58-MOD:
 Consider SF32LB58-MOD when the design needs one or more of these capabilities:
 
 - Module-level integration of the BGA256 device, RF path, crystal, and high-speed memory
-- On-module PCB antenna or external antenna routed through castellated pads or a connector compatible with Hirose U.FL, I-PEX MHFI, and Amphenol AMC connectors; confirm the SKU configuration
+- On-module PCB antenna or external antenna through a connector compatible with Hirose U.FL, I-PEX MHFI, or Amphenol AMC; confirm the SKU configuration
 - Memory choices spanning QSPI-NOR, QSPI-NAND, and eMMC configurations
 - External interfaces for display, audio, storage, and control
 
@@ -108,7 +108,7 @@ These entries transcribe the supplied labels; they are not an independent check 
 </div>
 
 !!! note "Availability and Customization"
-    **SF32LB58-MOD-E4R32N1 is no longer available due to recent memory-chip supply shortages.** Other module configurations are possible. For customization requests, [contact μForge.io](../../about/contact.md).
+    **SF32LB58-MOD-E4R32N1 is currently unavailable due to memory-chip supply shortages.** Other module configurations are possible. For customization requests, [contact μForge.io](../../about/contact.md).
 
 The [SiFli Module Model Guide](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) lists these variants, notes that eMMC may be included as an internal device, and states that other configurations can be customized. Select a SKU based on the required storage medium and capacity, then confirm availability and memory configuration with SiFli. Also verify that the selected device and boot/storage path are supported by the target SDK and firmware.
 
@@ -154,10 +154,14 @@ The [SF32LB58x hardware design guide](https://wiki.sifli.com/en/hardware/SF32LB5
 - VDD_3V3: 2.97–3.6 V
 - VDD_1V8: 1.7–1.95 V
 - VDDIOA / VDDIOA2 / VDDIOB: 1.7–3.6 V
+
 - VDD_3V3 supplies AVDD33_ANA, AVDD33_AUD, and AVDD_USB; when eMMC is fitted, it also supplies the eMMC VDD input. SiFli recommends an LDO for this rail.
 - VDD_1V8 supplies PVDD1, PVDD2, AVDD_BRF, and AVDD18_DSI, as well as the co-packaged memory.
 - VDDIOA supplies PA I/O except PA00–PA11, the external Flash, and eMMC VIO when eMMC is fitted. VDDIOA2 supplies PA00–PA11; VDDIOB supplies PB I/O.
 - 138-pin module interface; multiplexed pins expose functions including GPIO, SPI, LCD, MPI, UART, I2C, PWM, SDIO, USB 2.0 HS, and audio
+
+!!! note "External I/O Voltage"
+    DS5802 V0.1 lists VDDIOA, VDDIOA2, and VDDIOB as 1.7–3.6 V, but its hardware checklist specifies a 3.3 V interface level for module I/O and external peripherals. The document does not reconcile these statements. Confirm the allowed voltage for the selected interface and module revision with SiFli; do not infer that every external I/O is 3.6 V tolerant from the rail range alone.
 
 ## Related Products
 

@@ -19,6 +19,8 @@ hide:
 
 아래 각 표는 회로도의 기능 블록 하나를 다룹니다. 각 항목에 명시된 조건으로 적용 여부를 판단합니다. 필수 항목은 명시된 조건이 충족될 때마다 검토하고, 선택 항목은 해당 기능이나 설계 선택을 사용하는 경우에 검토합니다.
 
+이 페이지는 링크된 SiFli 워크북 V1.0(2026-01-21 기준)을 반영하며, 온라인 최신 개정판임을 주장하지 않습니다.
+
 ### 5.8.1. 패키지 { #581-package }
 
 <div align="center"><em>표 5.8.1-1: 패키지 체크리스트</em></div>
@@ -484,7 +486,7 @@ SD1의 경우 VDDIOA2 I/O 전원은 1.8 V 또는 3.3 V를 지원하며 주변 �
 | 2 | PBR0-PBR5는 Standby와 Hibernate 모두에서 출력으로 사용할 수 있습니다 | 선택 |
 | 3 | PBR0-PBR5는 LPTIM 신호를 출력할 수 있습니다 | 선택 |
 | 4 | <span class="flag-red">SF32LB567에서는 LPTIM3을 권장합니다. LPTIM3_OUT과 LPTIM3_OUT_BAR는 PBR 핀에서 듀티비가 서로 다르고 극성이 반대인 21~25 kHz 신호를 출력합니다</span> | 선택 |
-| 5 | <span class="flag-red">듀티비가 서로 다르고 극성이 반대인 21~25 kHz 신호는 HCPU ATIM에서도 출력할 수 있습니다. 적합한 ATIMx_CHx 및 ATIMx_CHxN 신호를 Pin_Config와 함께 선택하고 HCPU 주파수 저하의 영향을 고려하십시오</span> | 선택 |
+| 5 | <span class="flag-red">듀티비가 서로 다르고 극성이 반대인 21~25 kHz 신호는 HCPU ATIM에서도 출력할 수 있습니다. 적합한 ATIMx_CHx 및 ATMx_CHxN 신호를 Pin_Config와 함께 선택하고 HCPU 주파수 저하의 영향을 고려하십시오</span> | 선택 |
 | 6 | PBR0-PBR5는 32 kHz 클럭 신호를 출력할 수 있습니다 | 선택 |
 | 7 | <span class="flag-red">PBR0-PBR3은 웨이크업 입력으로 설정할 수 있지만, MCU 웨이크업 후에는 PBR0-PBRx가 인터럽트 신호를 수신할 수 없고 0/1 레벨만 검출할 수 있으므로 주의해서 사용하십시오</span> | 선택 |
 
@@ -494,6 +496,8 @@ SD1의 경우 VDDIOA2 I/O 전원은 1.8 V 또는 3.3 V를 지원하며 주변 �
     [출처 체크리스트 워크북](https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)의 PBR 체크리스트 4번 항목은 SF32LB567을 지정합니다. 워크북은 PBR 체크리스트 4번과 5번 항목을 SF32LB58x에 대한 권장 사항으로 규정하지 않습니다. 채택하기 전에 적용 가능 여부를 SiFli에 확인하십시오.
 
     워크북의 스토리지 체크리스트 6번 항목은 "MPI3 전원"을 활성화하기 위해 PA43을 high로 구동한다고 설명합니다. 그러나 [공식 SF32LB58x 하드웨어 애플리케이션 노트](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md)는 PA43을 외부 플래시 전원 제어 핀으로 설명하며, 외부 플래시에 전원을 공급하려면 high로 구동하라고 안내합니다. 체크리스트 행은 워크북의 표현을 그대로 유지합니다. 양산 프로그래밍을 확정하기 전에 의도된 전원 레일과 인터페이스 범위를 SiFli에 확인하십시오.
+
+    워크북은 상보 출력을 `ATMx_CHxN`으로 표기합니다. 출처의 표기를 그대로 유지했으며, 사용 전에 선택한 부품의 `Pin_Config`에서 정확한 신호명을 확인하십시오.
 
 ### 5.8.26. 소비 전력 { #5826-power-consumption }
 

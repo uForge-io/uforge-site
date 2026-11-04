@@ -12,6 +12,8 @@ tags:
 
 SF32LB55xシリーズは、エントリークラスのBluetooth MCUより高い表示性能、大きなメモリー容量、幅広いパッケージ選択肢を求めるBLE接続製品向けの、メインストリームの超低消費電力AIoT MCUファミリーです。
 
+選定時にまず区別すべきなのは、パッケージとパッケージ内蔵メモリーです。SS6600A8はQFN68Lで、パッケージ内蔵PSRAMを搭載せず、電源電圧範囲は2.97～3.63 Vです。一方、SF32LB551U4O5と本ページに掲載したBGA品種は1.71～3.63 Vです。
+
 本ファミリーは、2基のArm Cortex-M33 STAR-MC1[^1] プロセッサーによるbig.LITTLEデュアルコア構成を採用しています。一方は最大240 MHzで動作する高性能アプリケーションコア、もう一方は最大48 MHzの超低消費電力コアです。これにより、負荷の高いUI処理をアプリケーションコアで実行し、センサー処理、待機時制御、常時動作が必要なBLEタスクを低消費電力コアに任せられます。
 
 SiFliの公式製品ブリーフとデータシートによると、本ファミリーはBLE 5.2、ePicasso 2.5Dグラフィックスエンジン、2基のLCDコントローラー、TinyML向けニューラルネットワーク行列アクセラレーターを備えます。オンチップSRAMは合計1,312 KB（HCPU 1,088 KB + LCPU 224 KB）で、NOR、NAND、eMMC、PSRAMなどの外部メモリーにも対応します。SF32LB52xよりメモリーや表示機能に余裕が必要でありながら、上位の56/58クラスまでは必要としないウェアラブル、センサーを多用する製品、小型HMIに適した選択肢です。
@@ -200,10 +202,10 @@ SF32LB557VD3A6について、SiFliの現行チップ型番ガイドとDS5501 V1.
 ## よくある質問 { #frequently-asked-questions }
 
 **SF32LB55xの主な仕様は？**
-SF32LB55xはアプリケーションCPU（Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33 @48 MHz、ユーザーによるプログラミングが可能）を備えています。内蔵SRAMは1,312 KBで、BluetoothはBLEのみです。グラフィックスはePicasso 1.0、パッケージはQFN68 / BGA145 / BGA169（7 × 7 mm (QFN68)）、USBは2.0 FSです。
+SF32LB55xはアプリケーションCPU（Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33 @48 MHz、ユーザーによるプログラミングが可能）を備えています。内蔵SRAMは1,312 KBで、BluetoothはBLEのみです。グラフィックスはePicasso 1.0、パッケージはQFN68L / BGA145 / BGA169（7 × 7 mm (QFN68L)）、USBは2.0 FSです。
 
 **SF32LB55xが対応するディスプレイインターフェースは？**
-SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPIに対応しています。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPIに対応しています。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。これはファミリー全体の一覧であり、すべての型番やパッケージで全インターフェースを利用できる保証ではありません。リンク先のインターフェースマトリクスを確認してください。
 
 **SF32LB55xがサポートする最大ディスプレイ解像度は？**
 RGB888カラーで最大512 × 512です（MIPI-DSI経由、RAM内蔵のディスプレイドライバーのみ対応）。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
@@ -212,7 +214,7 @@ RGB888カラーで最大512 × 512です（MIPI-DSI経由、RAM内蔵のディ�
 パッケージ内PSRAMは最大 16 MB + 2 MB、パッケージ内NOR Flashは最大 8 MB です。
 
 **SF32LB55xの電源電圧は？**
-1.71～3.63 Vです。
+SS6600A8は2.97～3.63 V、本ページに記載のSF32LB551U4O5とBGA品種は1.71～3.63 Vです。電源ツリーを設計する前に、対象の型番を確定してください。
 
 **SF32LB55xでハードウェア設計を始めるには？**
 まず[SF32LB55xハードウェア設計ガイド](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md)で回路図、電源、クロック/RF、PCBレイアウトの指針を確認し、基板リリース前に回路図とレイアウトのチェックリストを使用してください。

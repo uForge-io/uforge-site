@@ -92,6 +92,8 @@ SF32 旨在填补传统微控制器与应用处理器之间的空档。该系列
     * 摄像头接口（DVP 和 SPI）
     * 传感器融合和生物识别算法
 
+    思澈科技（SiFli）的[SF32LB57x 硬件指南](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html)列出了集成式神经网络加速器，但 [SiFli-SDK v2.5.1 NNACC 指南](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/docs/source/en/hal/nnacc.md)并未确认 57x 的驱动或算子支持。若产品方案依赖该加速器，请先确认准确型号对应的软件支持路径。
+
     这些特性可在设备端实现低延迟（latency）AI 推理，同时尽量降低功耗和对云端的依赖。
 
 5. **高密度系统级封装（System-in-Package，SiP）存储**
@@ -109,7 +111,7 @@ SF32 旨在填补传统微控制器与应用处理器之间的空档。该系列
 
 <div align="center"><em>SF32 微控制器对比</em></div>
 
-下表汇总的是系列级能力，并不表示每个 SKU 均具备表中所有资源。接口支持和资源数量可能因具体型号、封装或配置而异；选型时请核对目标型号的数据手册。各系列的最大显示分辨率和面板接口，请参见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
+下表汇总的是系列级能力，并不表示每个 SKU 均具备表中所有资源。接口支持和资源数量可能因具体型号、封装或配置而异；选型时请核对目标型号的数据手册。表中的显示分辨率和面板接口数据采用当前[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
 
 <div align="center" markdown>
 
@@ -117,12 +119,12 @@ SF32 旨在填补传统微控制器与应用处理器之间的空档。该系列
 |----------|----------|----------|----------|----------|----------|
 | 定位 | 入门级 | 主流级（仅 BLE） | 进阶级 | 增强计算 | 旗舰级 |
 | 应用 CPU | Cortex-M33 @ 240 MHz | Cortex-M33 @ 240 MHz | Cortex-M33 @ 240 MHz | 2× Cortex-M33 @ 240 MHz | 2× Cortex-M33 @ 240 MHz |
-| 低功耗 CPU | Cortex-M33 @ 24/48 MHz，专用蓝牙控制器 | Cortex-M33 @ 48 MHz，用户可编程 | Cortex-M33 @ 48/96 MHz，用户可编程 | Cortex-M33 @ 24 MHz，专用蓝牙控制器 | Cortex-M33 @ 48/96 MHz，用户可编程 |
+| 低功耗 CPU | Cortex-M33 最高 24 MHz*，专用蓝牙控制器 | Cortex-M33 @ 48 MHz，用户可编程 | Cortex-M33，最高 96 MHz，用户可编程 | Cortex-M33 @ 24 MHz，专用蓝牙控制器 | Cortex-M33 @ 48/96 MHz，用户可编程 |
 | 片上 SRAM | 576 KB | 1312 KB | 960 KB | 592 KB | 3.7 MB |
 | 蓝牙 | 经典蓝牙（BT Classic）+ BLE | BLE | 经典蓝牙（BT Classic）+ BLE | 经典蓝牙（BT Classic）+ BLE | 经典蓝牙（BT Classic）+ BLE |
 | 图形加速器 | 2.5D<br>ePicasso 2.0 Lite | 2.5D<br>ePicasso 1.0 | 2.5D<br>ePicasso 2.0 | 2.5D<br>ePicasso 3.0 + eZip 3.0 | 2.5D + 矢量图形<br>ePicasso 2.0 + Vivante GCNanoUltraV |
 | 显示支持 | SPI / DSPI / QSPI / 8080 / EPD / JDI | SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI |
-| 最大显示分辨率 | 512 × 512，RGB888 | 512 × 512，RGB888 | BGA：1024 × 600，RGB888<br>QFN：512 × 512，RGB888 | 1024 × 600，RGB888 | 1280 × 800，RGB565<br>1280 × 720，RGB888 |
+| 显示分辨率（当前接口矩阵） | 512 × 512，RGB888 | 512 × 512，RGB888 | BGA：1024 × 600，RGB888<br>QFN：512 × 512，RGB888 | 1024 × 600，RGB888 | 1280 × 800，RGB565<br>1280 × 720，RGB888 |
 | 音频 ADC | 1× | 无 | 1× | 2× | 2× |
 | 音频 DAC | 1× | 无 | 1× | 1× | 2× |
 | PDM 音频接口 | 1× | 1–2×* | 2× | 2× | 2× |
@@ -134,15 +136,23 @@ SF32 旨在填补传统微控制器与应用处理器之间的空档。该系列
 | GPIO 数量 | 44 / 45 | 49 / 95 / 113* | 44 / 120 | 46 / 47 / 58；BGA112 另有最多 6 路 I/O* | 154 |
 | 封装选项 | QFN68 | QFN68 / BGA145 / BGA169 | QFN68 / BGA175 | QFN68 / QFN80 / BGA112 | BGA256 |
 | 封装外形尺寸（长 × 宽） | 7 × 7 mm | 7 × 7 mm | QFN：7 × 7 mm<br>BGA：6.5 × 6.1 mm | QFN68：7 × 7 mm<br>QFN80：8 × 8 mm<br>BGA：5.4 × 4.4 mm | 8.5 × 6.5 mm |
-| 供电范围 | 3.2–4.7 V (520/3/5/7)<br>2.97–3.63 V (52B/E/G/J)<br>1.8 V (52D) | 1.71–3.63 V | 1.71–3.63 V | 3.0–4.7 V<br>2.97–3.63 V | 1.71–3.63 V |
+| 供电范围 | 3.2–4.7 V (520/3/5/7)<br>2.97–3.63 V (52B/E/G/J)<br>1.8 V (52D) | 1.71–3.63 V | 1.71–3.63 V | 电池供电型号：3.0–4.7 V（数据手册）；硬件指南：3.45–4.7 V<br>外部稳压供电型号：2.97–3.63 V | 1.71–3.63 V |
 
 </div>
+
+**SF32LB52x LCPU 频率说明：**思澈科技（SiFli）的 [DS5201 V2.5.3 芯片技术规格书](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p5p3.pdf)将 LCPU 最高频率列为 24 MHz。当前 [SF32LB52x 低功耗场景测试报告](https://docs.sifli.com/projects/rpt5202_sf32lb52x-low-power-measurement-report/latest/zh_CN/brief_introduction.html)和 [SDK 低功耗开发指南](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/low_power.html)则列为 48 MHz，但均未说明能解释这一差异的具体 SKU、工作模式或配置条件。表格按数据手册列出；不要将 `24/48 MHz` 理解为可选范围或型号差异。请向思澈科技确认具体器件和 SDK 允许的 LCPU 频率。
+
+**SF32LB56x LCPU 与 SRAM 说明：**LCPU 的频率上限为 96 MHz；实际工作频率和应用任务支持情况取决于具体器件及受支持的 SDK 配置，不能将该上限视为默认频率。表中 960 KB SRAM 由 HCPU 的 800 KB SRAM（含 128 KB 保持型 SRAM）和 LCPU 的 160 KB 保持型 SRAM 组成。这些内存属于不同处理器的内存区域，不应视为一个连续内存池；请按具体 SKU 和 SDK 内存映射核算。详情请参阅 [SF32LB56x 产品页](../chips/SF32LB56x.md)。
+
+**SF32LB57x 供电范围说明：**表中的 3.0–4.7 V 来自[电池供电数据手册](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/DS5701-SF32LB57x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf)；同系列[硬件设计指南](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html)针对 QFN68、QFN80 和 BGA112 给出的输入范围为 3.45–4.7 V。两份资料存在差异。电池供电数据手册还规定上电电压为 3.5 V ±10%。请按具体型号的数据手册确认适用的输入引脚和限制。表中的 2.97–3.63 V 对应外部稳压供电型号。
+
+**SF32LB57x 显示分辨率说明：**思澈科技（SiFli）的[硬件设计指南](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html)给出的显示上限为 1024 × 1024。思澈科技（SiFli）的[LCD FAQ](https://docs.sifli.com/projects/solution/7.FAQ/lcd/index.html)将 1024 × 600 和 720 × 720 列为常见或已验证的 RGB/DPI 设计；当前 μForge 接口矩阵则列出 1024 × 600 RGB888。这些数据的证据类型不同，不能相互视为保证值。请针对具体型号和封装验证接口、面板时序、刷新率、引脚复用，以及帧缓冲区/PSRAM 带宽。
 
 **SF32LB55x 型号差异：**音频接口数量因具体型号而异：SF32LB551/553/555 各有 1 路 PDM 和 1 路 I²S；SF32LB557VD3A6 各有 2 路。[SF32LB55x 数据手册（V1.7.2）](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)的封装概览将 BGA169 列为 119 路 GPIO（71 路 HCPU + 48 路 LCPU），但同一份数据手册的产品系列详细表中，SF32LB557 为 71 路 HCPU + 42 路 LCPU，共 113 路。思澈科技（SiFli）当前的[芯片型号指南](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)对 SF32LB557VD3A6 也列出 71 + 42 = 113 路。思澈科技（SiFli）未说明数据手册内部这两处数据不一致的原因；本对比表采用具体型号对应的 113 路数据。分配引脚前，应核对具体 SKU 的数据手册和引脚表。每个 PDM 接口最多可连接 2 个数字麦克风，因此接口数量不等于麦克风数量。
 
 **SF32LB55x 合封 NOR 说明：**本表的 8 MB 系列上限包含思澈科技（SiFli）另行说明的 SS6600A8 配置：两颗 4 MB QSPI-NOR 配置为单颗 8 MB OSPI-NOR。SF32LB55x 中列出的 SF32 前缀订货型号合封 NOR Flash 容量最高为 4 MB；选型时请核对具体型号。
 
-**SF32LB57x BGA112 说明：**本说明仅适用于 BGA112。SF32LB57x 芯片内部包含 MPI1、MPI2 和 MPI3；它们在型号中的位置见 [SF32 命名规则](SF32_namingrule.md)。以下任一合封存储配置下，MPI2 和 MPI3 管脚均无法从封装外部访问，因此仅提供固定的 58 路 GPIO：(1) 内部 MPI1 和 MPI2 各合封一颗 PSRAM；(2) 内部 MPI2 合封一颗 256 Mb PSRAM；或 (3) 内部 MPI3 合封一颗 NOR Flash。`SF32LB57GVD776` 属于第 (3) 种情况：其末尾代码 `776` 中第二个 `7` 表示内部器件使用 MPI3，因此仅有 58 路 GPIO。其他 BGA112 合封配置下，额外的 6 路 I/O 可用于 MPI3，或通过上拉/下拉配置为 GP 静态输出；这些引脚不能视为可自由复用的 GPIO。例如，`SF32LB57ZVN7N6` 的 `58 + 6` 表示 58 路可用 GPIO，另有 6 路引脚可用于 MPI3 或作为静态输出。QFN68 和 QFN80 不受此 BGA112 限制影响：这两种封装仅提供标称 GPIO 路数，没有额外的 MPI3 或静态输出选项。具体 SKU 请参阅 [SF32LB57x 产品页](../chips/SF32LB57x.md)及其数据手册。
+**SF32LB57x BGA112 说明：**本说明仅适用于 BGA112。SF32LB57x 芯片内部包含 MPI1、MPI2 和 MPI3；它们在型号中的位置见 [SF32 命名规则](SF32_namingrule.md)。以下两种合封存储配置会导致 MPI2 和 MPI3 引脚无法从封装外部访问，因此可用 GPIO 固定为 58 路：（1）在 MPI2 上合封 PSRAM，单独使用或与 MPI1 上的 PSRAM 同时使用；（2）在 MPI3 上合封 NOR Flash。`SF32LB57GVD776` 属于第（2）种情况：其末尾代码 `776` 中第二个 `7` 表示内部器件使用 MPI3，因此仅有 58 路 GPIO。其他 BGA112 合封配置下，额外的 6 路 I/O 可用于 MPI3，或通过上拉/下拉配置为 GP 静态输出；这些引脚不能视为可自由复用的 GPIO。例如，`SF32LB57ZVN7N6` 的 `58 + 6` 表示 58 路可用 GPIO，另有 6 路引脚可用于 MPI3 或作为静态输出。QFN68 和 QFN80 不受此 BGA112 限制影响：这两种封装仅提供标称 GPIO 路数，没有额外的 MPI3 或静态输出选项。具体 SKU 请参阅 [SF32LB57x 产品页](../chips/SF32LB57x.md)及其数据手册。
 
 **SF32LB58x GPIO 数量说明：**[DS5801 V1.8.3 数据手册](https://downloads.sifli.com/user%20manual/DS5801-SF32LB58x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p8p3.pdf)和思澈科技（SiFli）的系列对比资料列出的 GPIO 总数为 154 路（HPSYS：94 路；LPSYS：60 路）。另一份[芯片型号指南](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)列出的 HCPU：94 路、LCPU：66 路，相加为 160 路，与数据手册的总数不一致。本文表格采用数据手册给出的总数；分配引脚前，请根据具体 SKU 的封装引脚表确认实际可用管脚。
 
@@ -170,7 +180,7 @@ SF32LB5xx 系列覆盖电池供电的互联设备，从成本优化型蓝牙产�
 | SF32LB52x  | • 双模蓝牙（BT/BLE）<br> • 集成音频 ADC 和 DAC<br> • 集成锂离子电池充电<br> • 最多 45 个 GPIO<br> • 显示分辨率最高可达 512 × 512<br> • 紧凑且具成本效益的方案<br> | • 入门级智能手表和健身手环<br> • 蓝牙模组和无线适配器<br> • 蓝牙音频配件<br> • 智能传感器和可穿戴设备<br> • 电子货架标签和智能工牌<br> • 便携式标签打印机<br> • 电动自行车和电动滑板车显示终端<br> • 基础的 LVGL HMI 设备 |
 | SF32LB55x  | • 低功耗蓝牙（Bluetooth Low Energy，BLE）<br> • MIPI DSI 命令模式显示屏<br> • 用于传感器处理算法的大容量 SRAM<br> • 超过 45 个 GPIO<br> • 扩展的低功耗处理能力 | • 健身手环和活动追踪器<br> • 运动和骑行电脑<br> • 传感器丰富的可穿戴设备<br> • 健康监测设备<br> • 电池供电 BLE 外设 |
 | SF32LB56x  | • 双模蓝牙（BT/BLE）<br> • RGB/DPI 显示接口<br> • 集成音频 ADC 和 DAC<br> • 显示分辨率最高可达 1024 × 600<br> • 通过 SDIO 连接外部 Wi-Fi<br> • 更高的 GPIO 容量 | • 具有高级用户界面的智能手表<br> • 互联 HMI 系统<br> • 医疗和健康护理设备<br> • 工业手持设备<br> • 便携式仪器<br> • 高级电动自行车和电动滑板车显示终端 |
-| SF32LB57x | • 支持 BLE Audio 和 LE Long Range 的双模蓝牙（BT/BLE）<br> • ePicasso 3.0/eZip 3.0 图形和 RGB 显示接口<br> • DCMI 摄像头输入和集成高保真音频 ADC/DAC<br> • 显示分辨率最高可达 1024 × 600<br> • PTM 任务卸载（offload），用于确定性 I/O 或自定义外设时序<br> • 最多 58 路通用 GPIO；在合封配置允许时，BGA112 另有最多 6 路 I/O，可用于 MPI3 或配置为上拉/下拉型 GP 静态输出<br> • SD/SDIO/eMMC 存储接口 | • 紧凑型高端智能手表<br> • 显示丰富的 HMI 和电子纸设备<br> • 支持摄像头的蓝牙产品<br> • 便携式音频和录音设备<br> • 智能家居控制面板 |
+| SF32LB57x | • 支持 BLE Audio 和 LE Long Range 的双模蓝牙（BT/BLE）<br> • ePicasso 3.0/eZip 3.0 图形和 RGB 显示接口<br> • DCMI 摄像头输入和集成高保真音频 ADC/DAC<br> • 当前接口矩阵列出 1024 × 600 RGB888 DPI/RGB；常见或已验证配置还包括 720 × 720<br> • PTM 任务卸载（offload），用于确定性 I/O 或自定义外设时序<br> • 最多 58 路通用 GPIO；在合封配置允许时，BGA112 另有最多 6 路 I/O，可用于 MPI3 或配置为上拉/下拉型 GP 静态输出<br> • SD/SDIO/eMMC 存储接口 | • 紧凑型高端智能手表<br> • 显示丰富的 HMI 和电子纸设备<br> • 支持摄像头的蓝牙产品<br> • 便携式音频和录音设备<br> • 智能家居控制面板 |
 | SF32LB58x  | • 双模蓝牙（BT/BLE）<br> • 包含矢量图形的高级图形渲染<br> • MIPI DSI 命令模式或视频模式显示屏<br> • 显示分辨率最高可达 1280 × 800<br> • 大容量存储配置<br> • GPIO 密度高、数量多<br> • 通过 SDIO 连接外部 Wi-Fi<br> • 边缘 AI 和机器学习工作负载 | • 高端智能手表<br> • 运动和户外可穿戴设备<br> • 高级骑行电脑<br> • 智能显示终端和互联仪表盘<br> • AI 增强型可穿戴设备<br> • 边缘 AI 和传感器融合系统 |
 
 </div>

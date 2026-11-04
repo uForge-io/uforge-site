@@ -39,19 +39,19 @@ PTMは、SF32LB57x SoCのI/O、イベント、FIFO/DMA、AHBバスに接続さ�
 <div align="center"><em>図: PTMタスクの実行フロー</em></div>
 
 ```text
-アプリケーション／ファームウェア
+Application / firmware
         │
         ▼
-CPUがPTMタスクを設定
+CPU configures PTM task
         │
         ▼
-PTMが決定論的なペリフェラル処理を実行
+PTM executes deterministic peripheral sequences
         │
-        ├── I/Oの読み書き
-        ├── FIFO／DMAによるデータ転送
-        ├── AHBメモリー／レジスターへのアクセス
-        ├── イベント待ち／固定時間の遅延
-        └── CPU割り込み／内部イベント通知
+        ├── IO read/write
+        ├── FIFO / DMA data movement
+        ├── AHB memory or register access
+        ├── Event wait / fixed delay
+        └── CPU interrupt or internal event notification
 ```
 
 PTMは小規模な独自命令列を実行し、ピンの制御にとどまらない処理ができます。I/Oの読み書きやイベント待ちに加え、FIFO/DMAを使ったデータ転送、AHBメモリーやペリフェラルレジスターへのアクセスも行えます。上位のファームウェアによる処理が必要になった段階でCPUに通知します。
@@ -184,13 +184,13 @@ PTM、RP2040 PIO、Nordic PPI/DPPIはいずれも、タイミングが重要な�
 <div align="center"><em>図: PPI、DPPI、PIO、PTMの実行経路</em></div>
 
 ```text
-PPI:  イベント端点 ──> PPIチャネル ──> タスク端点
+PPI:  Event endpoint ──> PPI channel ──> Task endpoint
 
-DPPI: イベントを発行するペリフェラル ──> DPPIチャネル ──> タスクを購読するペリフェラル
+DPPI: Publisher peripheral ──> DPPI channel ──> Subscriber peripheral task
 
-PIO: CPU／DMA ──> PIOステートマシン命令 ──> GPIOのタイミング制御とFIFO
+PIO: CPU/DMA ──> PIO state-machine instructions ──> GPIO timing and FIFOs
 
-PTM: CPUによる設定 ──> PTMタスク命令 ──> I/O＋イベント＋FIFO/DMA＋AHBアクセス
+PTM: CPU configuration ──> PTM task instructions ──> IO + events + FIFO/DMA + AHB access
 ```
 
 PPIとDPPIは命令を実行せずにイベントを伝達しますが、接続できるのは既存のイベントとタスクに限られ、新しいプロトコルロジックは定義できません。PIOはステートマシンでピンの動作を定義できますが、主な対象はGPIOとFIFOです。PTMはより幅広い処理を担い、I/Oのタイミング制御、イベント待ち、データ転送、レジスターアクセス、小規模なタスク間連携を一連の処理として実行できます。

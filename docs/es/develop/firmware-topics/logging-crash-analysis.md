@@ -31,7 +31,7 @@ Anote lo siguiente para cada compilación del firmware:
 2. Capture el registro completo desde el reinicio.
 3. Guarde el binario exacto y los archivos de símbolos.
 4. Decodifique la salida del assert o del volcado con las herramientas de SiFli.
-5. Revise los tamaños de pila, quién gestiona cada región de memoria, los búferes DMA y el mantenimiento de la caché.
+5. Revise los tamaños de pila, qué componente es propietario de cada región de memoria, los búferes DMA y el mantenimiento de la caché.
 6. Aísle el problema usando como referencia el ejemplo del SDK más parecido.
 
 ## Niveles de registro { #log-levels }
@@ -58,3 +58,6 @@ Anote lo siguiente para cada compilación del firmware:
 - Indicación de si el fallo también ocurre con un ejemplo del SDK sin modificar.
 - Periféricos conectados y fuente de alimentación.
 - Indicación de si el fallo persiste tras borrar toda la Flash y volver a grabarla.
+
+!!! note "Contenido autogenerado"
+    Esta página se recopiló y redactó sin un documento fuente específico. Verifique las afirmaciones técnicas con la documentación oficial de SiFli antes de basarse en ellas.

@@ -49,22 +49,39 @@ A typical SF32LB55x product includes the MCU, power tree, crystals, RF matching 
 
 ### 9.2. Design Q&A { #91-design-qa }
 
+
 1. **Why do some GPIO defaults differ from the specification when Mode = 1?** Download mode changes the states of GPIOs associated with external Flash on QSPI2 and QSPI3.
+
 2. **Why can a surface-mount motor vibrate unexpectedly during programming?** Its power-enable or PWM signal may be asserted unexpectedly. If a high level starts the motor, a GPIO with a default pull-up (PU) can power it on; SiFli recommends using default-pull-down (PD) GPIO17 or GPIO39 for PWM.
+
 3. **Why can soldering the battery cause the chip to hang, and how can this be prevented?** Poor grounding of the soldering iron can cause a surge. Add surge and ESD protection at the battery interface and ensure the iron is properly grounded.
+
 4. **Why does a wake button fail to wake the MCU from Hibernate?** Only the six LCPU wake inputs, GPIO43–GPIO48, can wake the MCU from Hibernate; the HCPU-side GPIO0–GPIO3 cannot.
+
 5. **Why can a G-sensor or heart-rate sensor draw too much power or malfunction during low-power debugging?** Its firmware runs on the LCPU, so its I2C, SPI, control, and interrupt signals must all use LCPU interfaces. Assigning any of them to an HCPU interface can increase power or cause malfunction.
+
 6. **Why can sensor power remain high even when all signals use LCPU interfaces?** Turning off the sensor rail alone is insufficient if the pull-up supply for its I2C or interrupt signals remains on. Disable those interface pull-up supplies as well.
+
 7. **Why can using both GPIO26 and GPIO27 as output controls increase sleep current?** Make their levels identical during sleep, or place at least one in high impedance with no pull-up or pull-down.
+
 8. **How should high Hibernate current on SS6600 be investigated?** Keep all ten wake inputs stable at a defined high or low level: HCPU GPIO0–GPIO3 and LCPU GPIO43–GPIO48. If all ten are pulled up, use an always-on 3.3 V supply for the pull-ups.
+
 9. **Can power-component quiescent current explain excessive low-power consumption?** Yes. BUCK converters, LDOs, and load switches with high quiescent current (Iq) increase consumption; SiFli recommends parts with Iq below 1 µA.
+
 10. **How can display artifacts during ESD testing be prevented?** Add ESD devices to the touch-panel VDD, SCL, SDA, RESET, and INT signals, as well as LCD power and RESET signals.
+
 11. **How can abnormal always-on-display behavior be avoided?** This function is mainly used with AMOLED panels, whose power is lower than TFT panels. PB GPIOs are recommended for LCD_EN, LCD_RST, and related controls. If a PA GPIO drives an active-high enable, it must have a default pull-up (PU); using a default-pull-down (PD) PA GPIO can leave the display abnormally blank for more than 10 ms after wake.
+
 12. **How can external Bluetooth audio power-control faults after wake be avoided when the module must stay powered during sleep?** Use an LCPU GPIO to control its power switch. For an active-low switch, select an LCPU GPIO with a default pull-down (PD).
+
 13. **How can charging be made reliable after battery over-discharge?** When battery voltage is too low, power-path management should let the charger input power the system after a charger is connected. Without power-path management, the selected charger IC must provide a trickle-charge current of at least 40 mA.
+
 14. **Why might charging not start after connecting a charger?** The charger-insertion detect signal must connect to one of the wake-capable LCPU GPIOs, GPIO43–GPIO48. Using another GPIO can prevent the charging sequence from starting correctly.
+
 15. **How can excessive current in download mode be avoided when MODE is high?** For high-current peripherals such as an audio PA with an active-high enable, use a default-pull-down (PD) GPIO for control, never a default-pull-up (PU) GPIO. Download mode may otherwise turn the peripheral on and disrupt programming.
+
 16. **Why can programming fail when MODE is high, and what is the workaround for a sensor interrupt on GPIO46?** In download mode GPIO46 defaults to UART3_RX, which can interfere with programming. Move the sensor interrupt to GPIO43, GPIO44, GPIO47, or GPIO48. If more LCPU wake inputs are needed, connect an off-board button to GPIO45 or GPIO46 through a 0 Ω resistor.
+
 17. **What should be done if the G-sensor and heart-rate algorithms exceed the available memory resources?** Check whether the memory allocated to the LCPU is sufficient. If it is not, add external NOR Flash on QSPI4.
 
 ## 10. Revision History { #10-revision-history }

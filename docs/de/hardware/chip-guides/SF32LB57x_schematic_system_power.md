@@ -208,7 +208,7 @@ Verwenden Sie diese Tabelle für die Schaltplan-Vorprüfung. Die endgültigen We
 
 | Schiene / Pin | Typischer externer Kondensator | Hauptverwendung | Design-Hinweise |
 |:-----------|:---------------------------|:---------|:-------------|
-| `VBUS` | >= 10 µF | USB-/Ladeeingang | Nur akkubetriebene Varianten; OVP-/ESD-/EOS-Schutz hinzufügen. |
+| `VBUS` | >= 10 µF | USB-/Ladeeingang | Nur bei Verwendung des integrierten Ladegeräts erforderlich; andernfalls kann `VBUS` offen bleiben und dieser Kondensator entfallen. Bei Verwendung von `VBUS` OVP-/ESD-/EOS-Schutz vorsehen. |
 | `VBAT` | >= 4,7 µF | Akkuanschluss und Akkuspannungsmessung | Akkupfad kurz und breit halten; paralleles Routing mit empfindlichen Leitungen vermeiden. |
 | `VCC` / `PVDD` | >= 10 µF | Haupt-PMU-/Systemeingang | Entkopplung nahe am Chip platzieren und Leitung für den Strom dimensionieren. |
 | `VSYS` | Etwa 2,2 µF | Interne oder spezifizierte analoge/RF-bezogene Versorgung | Nicht als allgemeine Peripherieversorgung verwenden; Gesamtlast und -kapazität kontrollieren. |

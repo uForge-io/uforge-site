@@ -82,7 +82,7 @@ Le guide extDMA cite les formats d'entrée RGB565, RGB888 et ARGB8888. Leur pris
 
 L'en-tête LCDC actuel d'OpenSiFli ne définit la macro de prise en charge des couches compressées que si `HAL_EXTDMA_MODULE_ENABLED` est activé ; la condition de famille exclut SF32LB52x et SF32LB57x. L'en-tête fixe une largeur maximale de 512 pixels pour SF32LB55x/SF32LB56x et de 1024 pixels pour SF32LB58x. Ce sont des limites d'intégration des couches compressées, pas des limites universelles de résolution de l'écran. Un commentaire du code précise également que le chemin LCPU n'est pas activé.
 
-Pour SF32LB55x, une réserve d'intégration s'impose. L'en-tête LCDC actuel d'OpenSiFli définit la macro des couches compressées lorsque `HAL_EXTDMA_MODULE_ENABLED` est activé, mais son commentaire précise que le chemin LCPU n'est pas activé. Le tableau LCDC publié avec le SDK indique que la décompression des couches compressées n'est pas prise en charge sur 55x, tandis que la fiche technique SF32LB55x décrit TurboPixel et la décompression par le contrôleur LCD. La présence d'une macro de compilation ne prouve pas que toute la chaîne d'affichage a été validée. Considérez le support sur 55x comme conditionnel et vérifiez la version du SDK, le cœur, la configuration de compilation et le matériel cible ; ne déduisez pas le fonctionnement à l'exécution de la seule présence de cette macro.
+Les sources disponibles divergent sur l'intégration du SF32LB55x. Le tableau LCDC publié avec le SDK indique que la décompression des couches compressées n'est pas prise en charge sur 55x, tandis que la fiche technique SF32LB55x décrit TurboPixel et la décompression par le contrôleur LCD. Ces sources ne démontrent pas que toute la chaîne d'affichage a été validée ; la macro de l'en-tête citée plus haut ne prouve pas le fonctionnement à l'exécution. Considérez le support sur 55x comme conditionnel et vérifiez la version exacte du SDK, le cœur, la configuration de compilation et le matériel cible.
 
 Distinguez la propriété des tampons entre le moteur de rendu, extDMA et le contrôleur d'affichage. Attendez la fin du rendu avant compression, la fin de la compression avant affichage et la fin de l'utilisation par l'affichage avant de réutiliser le tampon. En mémoire partagée avec cache, écrivez d'abord en mémoire (opération clean) les lignes de cache modifiées contenant les données source écrites par le CPU, avant que le matériel les lise. Préparez les lignes de cache de destination pour qu'aucune ligne modifiée ne puisse ensuite écraser le résultat matériel ; après la fin du traitement, invalidez les lignes obsolètes avant leur lecture par le CPU. Respectez les limites des lignes de cache et les données voisines. La fin de compression n'est pas la fin du transfert au panneau.
 
@@ -90,7 +90,7 @@ Les adresses source et destination et la longueur de transfert extDMA doivent ê
 
 ## Disponibilité au sein de la famille SF32 { #availability-in-the-sf32-family }
 
-TurboPixel est documenté pour les familles SF32 suivantes :
+Les éléments disponibles sur la prise en charge de TurboPixel dans les familles SF32 sont résumés ci-dessous :
 
 <div align="center"><em>Disponibilité documentée de TurboPixel</em></div>
 

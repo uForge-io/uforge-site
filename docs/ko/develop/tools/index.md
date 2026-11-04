@@ -20,11 +20,11 @@ SF32 개발에는 컴파일러 외에도 여러 도구가 필요합니다. 실�
 
 | 도구 | 용도 |
 |:-----|:----|
-| [`sftool`](https://github.com/OpenSiFli/sftool) | OpenSiFli의 Zephyr 및 Arduino 작업 흐름에서 사용하는 플랫폼 공통 SF32 펌웨어 기록 도구. |
+| [`sftool`](https://github.com/OpenSiFli/sftool) | 지원되는 SiFli SoC용 크로스 플랫폼 시리얼 CLI. 플래시 쓰기/읽기/삭제, 칩 리셋 등의 작업을 지원합니다. |
 | [SDK UART 다운로드 스크립트](../platforms/sifli-sdk/build-flash-monitor.md) | SiFli-SDK 빌드가 생성하는 초기 펌웨어 기록 스크립트. |
 | [CodeKit 기능](codekit.md) | VS Code에서 수행하는 설정, 빌드, 펌웨어 기록, 모니터링 작업. |
 | [`AssertDump`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/AssertDump/AssertDump_UM.html) | 이후 분석에 사용할 크래시 시점의 메모리 데이터 캡처. |
-| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | 칩의 Debug IP를 통한 트레이스/로그 캡처와 UART 기반 디버깅. |
+| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace`는 대상 보드 로그를 캡처하고, `UsartServer`는 칩 내장 Debug IP를 통한 UART 디버깅을 제공합니다. |
 | [`Impeller`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/Impeller/Impeller_UM.html) | 양산 라인의 펌웨어 프로그래밍, 캘리브레이션, PCBA 테스트. |
 | [eZip / 이미지 툴링](../../learn/graphics/ezip.md) | 압축 그래픽 파이프라인을 위한 에셋 변환. |
 | [RF/오디오/생산 도구](https://docs.sifli.com/projects/solution/6.tools/index.html) | 양산 캘리브레이션, 테스트, 튜닝 절차. |
@@ -33,12 +33,13 @@ SF32 개발에는 컴파일러 외에도 여러 도구가 필요합니다. 실�
 
 ## 플래싱 도구 { #flashing-tools }
 
-초기 브링업에는 방금 빌드한 결과물에서 생성된 SDK UART 스크립트를 사용하십시오. 다음 작업에는 `sftool`을 활용할 수 있습니다.
+초기 브링업에는 방금 빌드한 결과물에서 생성된 SDK UART 스크립트를 사용하십시오. 크로스 플랫폼 시리얼 CLI가 적합한 작업에는 `sftool`을 사용하십시오.
 
-- 여러 작업 흐름에서 공통으로 사용할 명령줄 펌웨어 기록 도구.
-- Zephyr `west flash` 통합.
-- ArduinoCore-zephyr 업로드 동작.
-- CI, 양산 공정, 회귀 테스트 자동화.
+- SDK 생성 다운로드 스크립트 외부에서 플래시를 직접 쓰거나 읽고 삭제하는 작업.
+- 지원되는 SiFli SoC와 호스트 플랫폼 전반에서 반복 가능한 명령줄 작업 흐름.
+- JSON 명령 파일 또는 CI, 양산, 회귀 테스트용 래퍼를 통한 자동화.
+
+`west flash` 또는 Arduino 업로더와 같은 특정 빌드/업로드 흐름과의 통합은 해당 프로젝트의 설정에 따라 달라집니다.
 
 팀에서 한 가지 방식으로 표준화할 때까지 프로젝트에 두 경로를 모두 문서화하십시오.
 

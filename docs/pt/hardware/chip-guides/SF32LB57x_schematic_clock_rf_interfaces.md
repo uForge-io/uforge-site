@@ -550,7 +550,7 @@ Diretrizes:
 
 - Confirme a largura da interface, o clock, os sinais de sincronização, as linhas de dados e o pinmux.
 - Permita que o MCU controle a alimentação, o reset, PWDN e o clock da câmera.
-- Agrupe as trilhas de dados e clock da câmera por comprimento e mantenha-as afastadas de RF e sinais analógicos.
+- Agrupe as trilhas de dados e clock da câmera e mantenha-as afastadas de RF e sinais analógicos.
 - Garanta uma referência de terra contínua para o roteamento de câmera em alta velocidade.
 - Adicione proteção ESD ao conector ou FPC da câmera quando necessário.
 
@@ -592,13 +592,13 @@ Para câmeras DVP de 10 bits, use conexão de 8 bits quando houver poucos GPIOs;
 
 #### 5.5.11. Botões e motor { #5511-buttons-and-motor }
 
-- O botão de ligar/reset deve usar `PA34` com nível ativo alto; o pino permanece em nível baixo por padrão e vai para nível alto quando pressionado. `PA34` aceita reset por hardware ao manter o botão pressionado por 10 segundos; o resistor pull-down de 10 kΩ deve ficar na placa principal.
+- `PA34` aceita reset por pressão prolongada e também pode ser usado como botão de ligar. A entrada de reset é ativa em nível alto: o pino permanece em nível baixo por padrão e vai para nível alto quando pressionado. Instale um resistor pull-down de 10 kΩ na placa principal.
 - Em projetos de botões GPADC com divisor resistivo, diferencie os botões pela tensão do divisor e coloque um capacitor de filtro de 0,1 µF para terra perto do pino, para melhorar a precisão da amostragem.
 - A escada resistiva ilustrada usa resistores de botão de 1,1 kΩ, 2,8 kΩ e 5,1 kΩ, além de um pull-down de 10 kΩ e um capacitor de filtro de 100 nF. Use esses valores como referência e valide os limiares do ADC considerando a tensão de alimentação e as tolerâncias dos resistores do projeto.
 - Adicione proteção ESD aos botões externos.
 
-![Figura 5.5-4: Circuito de referência para o botão de ligar e o botão GPADC](../../sf32-products/chips/assets/57x/SF32LB57x-PWKEY.png){ width="80%" loading="lazy" }
+![Figura 5.5-4: Circuito de referência para o botão GPADC](../../sf32-products/chips/assets/57x/SF32LB57x-PWKEY.png){ width="80%" loading="lazy" }
 
-<div align="center"><em>Figura 5.5-4: Circuito de referência para o botão de ligar e o botão GPADC</em></div>
+<div align="center"><em>Figura 5.5-4: Circuito de referência para o botão GPADC</em></div>
 
 Ao implementar o feedback háptico, use o circuito de referência do motor vibratório do SF32LB57x. Em produtos de baixo consumo, recomenda-se que a alimentação do motor seja comutável; o pino PWM/de controle não deve conflitar com os requisitos de boot, display, armazenamento ou depuração.

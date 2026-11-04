@@ -151,7 +151,7 @@ El impacto de un escenario depende del uso que se haga del producto. El libro de
 
 | Escenario | Veces al día | Duración de cada uso | Duración total diaria | Parte del consumo diario | Estado |
 |:---------|--------------------:|------------------------:|-----------------------:|----------------------:|:----------------|
-| Reposo de referencia | 1 | Segundos restantes del día (`=G7`) | 52 425,7 s | 11,69 % | Habilitado |
+| Reposo de referencia | 1 | Segundos restantes del día | 52 425,7 s | 11,69 % | Habilitado |
 | Notificación de mensaje | 100 | 5 s | 500 s | 22,62 % | Habilitado |
 | Alerta de llamada entrante | 10 | 10 s | 100 s | 4,52 % | Habilitado |
 | Activación al levantar la muñeca | 200 | 5 s | 1 000 s | 27,72 % | Habilitado |
@@ -169,6 +169,8 @@ El impacto de un escenario depende del uso que se haga del producto. El libro de
 </div>
 
 Las celdas de escenario vacías en la matriz original son intencionales. Después de cada escenario aparecen las filas de carga de la pantalla, el motor háptico y `Other`; estas heredan la frecuencia y duración diarias indicadas en la fila del escenario. Por eso cada escenario solo se nombra una vez.
+
+El cálculo de la duración diaria presupone que los escenarios habilitados ocupan intervalos independientes y sin solapamiento. El libro resta la duración de los escenarios incluidos a los segundos totales de un día de 24 horas y asigna el tiempo restante al reposo de referencia. Suma por separado las cargas completas de los componentes de cada escenario; no combina escenas simultáneas. Si coinciden eventos del producto, las cargas compartidas pueden contabilizarse más de una vez y el tiempo solapado puede restarse del reposo varias veces. Para modelar solapamientos reales, cree una escena combinada con las corrientes simultáneas de sus componentes o concilie las cargas compartidas y el tiempo de actividad contado una sola vez antes de sumar. El segundo escenario AOD no se incluye en este cálculo del reposo; en esta configuración, ambos escenarios AOD están a cero. Antes de habilitar cualquiera de ellos, compruebe que el cálculo del reposo tenga en cuenta todos los escenarios activos.
 
 <div align="center"><em>Tabla: resultado calculado para un día de uso</em></div>
 

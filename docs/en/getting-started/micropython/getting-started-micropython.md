@@ -10,7 +10,7 @@ tags:
 
 MicroPython is not yet a verified getting-started path for SF32. No official board-specific firmware image, flash procedure, or REPL configuration is currently documented in the checked SiFli and OpenSiFli sources.
 
-Use [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) to establish a reproducible board, cable, serial-port, and flash baseline. Do not follow generic MicroPython installation instructions or use an image intended for a different MCU or board.
+Use [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) to establish a reproducible baseline for the board, cable, serial port, and flashing workflow. Do not follow generic MicroPython installation instructions or use an image intended for a different MCU or board.
 
 The [MicroPython Status](../../develop/platforms/micropython/status.md) page tracks the exact public artifacts and acceptance criteria required before this page can become a tutorial.
 

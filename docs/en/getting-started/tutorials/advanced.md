@@ -50,7 +50,7 @@ Example paths and supported boards can vary by SDK release. Before building, che
 3. Trigger an OTA update and confirm the device boots the new image.
 4. On a test unit with a documented recovery path, exercise one interruption at a time, such as disconnecting during transfer or moving out of range. Do not cut power unless the board documentation and product recovery design explicitly make that test safe.
 5. Verify the behavior this product actually implements after an interrupted or rejected update, such as retry, resume, recovery mode, or rollback. Treat rollback as a requirement only when the boot and partition design implements it.
-6. Test OTA after stale bond, phone-side forget-device, and device reboot.
+6. Test OTA under three conditions: with stale bond data, after forgetting the device on the phone, and after a device reboot.
 7. If your product already uses PAN for data, evaluate the PAN OTA path as a separate design choice.
 
 **Success criteria:** a successful update boots the new image; an interrupted or rejected update follows the product's documented recovery policy; and the user can tell which state the device reached. Do not assume that every OTA design supports rollback.

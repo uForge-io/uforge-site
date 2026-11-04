@@ -39,24 +39,24 @@ tags:
 <div align="center"><em>图：SF32 无线架构简图</em></div>
 
 ```text
-应用处理器
-  - 产品固件
-  - UI 与图形
-  - 音频应用逻辑
-  - 用户服务
+Application Processor
+  - product firmware
+  - UI and graphics
+  - audio application logic
+  - user services
         │
         ▼
-蓝牙主机（Host）/ 系统服务
+Bluetooth Host / System Services
         │
         ▼
-蓝牙处理器 / 控制器固件
-  - 链路层时序
-  - 射频调度
-  - 低功耗连接事件
-  - 控制器侧协议处理
+Bluetooth Processor / Controller Firmware
+  - link-layer timing
+  - radio scheduling
+  - low-power connection events
+  - controller-side protocol work
         │
         ▼
-蓝牙射频与 RF 前端
+Bluetooth Radio and RF Front End
 ```
 
 主机（Host）、控制器（Controller）和应用固件之间的具体分工取决于 SDK、协议栈配置和产品需求。但在概念上，不能把主应用处理器视为参与蓝牙运行的唯一 CPU。蓝牙子系统拥有独立的执行上下文，设计目标是在保证无线行为确定性的同时降低功耗。
@@ -156,7 +156,7 @@ BLE 通信通常以间歇方式进行，并由事件触发，因此很适合由�
 
 蓝牙软件通常分为两个主要层次：
 
-<div align="center"><em>表：主机、控制器与应用的职责边界</em></div>
+<div align="center"><em>表：主机与控制器的职责边界</em></div>
 
 <div align="center" markdown>
 

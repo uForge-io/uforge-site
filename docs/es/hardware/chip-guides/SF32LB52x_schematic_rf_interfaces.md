@@ -297,7 +297,7 @@ Use el diseño de referencia como base para el circuito del botón del codificad
 
 <div align="center"><em>Figura 5.5-5: Circuito del botón de codificador rotatorio mecánico</em></div>
 
-Las señales A y B del codificador se conectan a PA35 y PA36 mediante resistencias de 0 Ω. Cada señal tiene una resistencia de pull-up de 200 kΩ a VDD33_LDO2_VOUT y protección ESD; C0703 y C0706 están marcados como NF (sin montar). Las etiquetas también indican funciones USB/UART multiplexadas, por lo que debe comprobar los conflictos de pines antes de adoptar esta asignación.
+Las señales A y B del codificador se conectan a PA35 y PA36 mediante resistencias de 0 Ω. Cada señal tiene una resistencia de pull-up de 200 kΩ a VDD33_LDO2_VOUT y protección ESD; C0703 y C0708 están marcados como NF (sin montar). Las etiquetas también indican funciones USB/UART multiplexadas, por lo que debe comprobar los conflictos de pines antes de adoptar esta asignación.
 
 **Errores frecuentes en el diseño de botones**
 

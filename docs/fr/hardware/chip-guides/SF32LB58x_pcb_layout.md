@@ -43,6 +43,8 @@ La série SF32LB58x utilise un boîtier BGA256 de 8,5 mm × 6,5 mm × 0,94 mm, a
 
 <div align="center"><em>Figure 6.1-5 : Informations sur les billes du substrat du boîtier</em></div>
 
+La coupe de la bille sur le substrat du boîtier indique également un diamètre de pastille de bille de 0,27 mm et une ouverture de bille de 0,23 mm. Pour les dimensions complètes de l'empreinte, les tolérances et les données de qualification, consultez le dessin officiel du boîtier.
+
 ### 6.2. Empilement PCB { #62-pcb-stack-up }
 
 La série SF32LB58x prend en charge le montage sur une ou deux faces. Le PCB doit être une carte HDI ; le PTH n'est pas pris en charge. L'empilement 6HDI-2 est recommandé. La structure de référence de la figure indique une épaisseur finale de carte de 0,8 mm ±10 % (environ 32 mil nominaux).
@@ -81,7 +83,7 @@ Reportez-vous à la figure de conception des vias enterrés (couches 2-5) dans l
 
 ### 6.4. Fanout des pistes { #64-trace-fanout }
 
-Les pistes des deux premières rangées de billes BGA sortent sur la couche supérieure ; celles des autres billes sont acheminées vers les couches internes au moyen de vias.
+Les pistes des deux premières rangées et colonnes de billes BGA sortent sur la couche supérieure ; celles des autres billes sont acheminées vers les couches internes au moyen de vias.
 
 ![Figure 6.4-1 : Exemple de fanout sur la couche supérieure](../../sf32-products/chips/assets/58x/sf32lb58x-FANOUT-T-PCB.png){ width="100%" loading="lazy" }
 
@@ -130,6 +132,8 @@ Routez les pistes du quartz de 32,768 kHz sur la couche supérieure. Leur longue
 
 <div align="center"><em>Figure 6.5-7 : Référence de routage du quartz 32,768 kHz</em></div>
 
+Le schéma de référence de la Figure 6.5-2 indique 8,8 pF pour le quartz de 48 MHz et marque C0307/C0308 comme NF (non montés). Ce sont des annotations du schéma de référence ; elles ne remplacent pas la vérification de la conformité du quartz retenu aux exigences de conception.
+
 ### 6.6. Routage de l'interface RF { #66-rf-interface-routing }
 
 Placez le circuit d'adaptation RF aussi près que possible de la puce, et non près de l'antenne. Placez le condensateur de découplage d'alimentation RF AVDD_BRF aussi près que possible de la broche de la puce ; les vias reliant sa pastille de masse débouchent directement sur le plan de masse principal.
@@ -160,6 +164,8 @@ Dans la mesure du possible, routez les pistes RF sur la couche supérieure afin 
 
 <div align="center"><em>Figure 6.6-6 : Plan de masse du circuit RF sur PCB</em></div>
 
+Le schéma de référence du réseau d'adaptation π indique une inductance série de 2,7 nH et deux condensateurs en dérivation de 2 pF. Ce sont des valeurs de référence ; déterminez l'adaptation finale par des essais avec l'antenne et le routage PCB réels.
+
 ### 6.7. Routage de l'interface audio { #67-audio-interface-routing }
 
 Placez le condensateur de découplage de l'alimentation audio AVDD33_AUD près de sa broche et reliez correctement sa pastille de masse à la masse principale. Faites de même pour le condensateur de découplage de MIC_BIAS, l'alimentation des microphones. Placez également le condensateur de découplage AUD_VREF près de sa broche.
@@ -168,8 +174,8 @@ AU_ADC1P/AU_ADC1N et AU_ADC2P/AU_ADC2N sont les deux paires d'entrées analogiqu
 
 AU_DAC1P/AU_DAC1N et AU_DAC2P/AU_DAC2N sont les deux paires de sorties analogiques. Placez les composants associés aussi près que possible des broches, puis routez chaque paire P/N en différentiel sur une longueur aussi courte que possible et inférieure à 2 mm. La capacité parasite des pistes reste inférieure à 10 pF et la largeur différentielle des pistes est de 0,075 mm. Appliquez un blindage 3D à chaque paire et éloignez-en les autres signaux susceptibles de générer des interférences importantes.
 
-!!! warning "Les sources divergent sur la longueur maximale des pistes DAC"
-    Le guide de routage fixe la longueur des pistes DAC à moins de 2 mm, tandis que le classeur de la liste de contrôle indique moins de 2 cm (20 mm). Ces limites diffèrent d'un facteur dix. Ne choisissez ni ne remplacez une limite sans confirmation de SiFli.
+!!! warning "Le guide SiFli donne des limites divergentes pour les pistes DAC"
+    Le guide matériel de SiFli donne des limites différentes pour les pistes DAC : la présentation de l'interface audio indique moins de 2 cm (20 mm), tandis que la section sur le routage PCB indique moins de 2 mm. Ces limites diffèrent d'un facteur dix. Ne choisissez ni ne remplacez une limite sans confirmation de SiFli.
 
 ![Figure 6.7-1 : Schéma d'alimentation audio](../../sf32-products/chips/assets/58x/sf32lb58x-AU-PWR-SCH.png){ width="100%" loading="lazy" }
 
@@ -195,6 +201,8 @@ AU_DAC1P/AU_DAC1N et AU_DAC2P/AU_DAC2N sont les deux paires de sorties analogiqu
 
 <div align="center"><em>Figure 6.7-6 : Implantation sur PCB de la sortie audio analogique</em></div>
 
+Le schéma de référence utilise C0327 (1 µF/6,3 V) sur MIC_BIAS, C0326 (4,7 µF/6,3 V) sur AVDD33_AUD et C0325 (1 µF/6,3 V) sur AUD_VREF. Il associe également ADC1P/N et ADC2P/N aux billes BGA G19/G18 et F19/F18, et DAC1P/N et DAC2P/N à J20/J21 et H21/H20, respectivement ; ce sont les désignations de billes du circuit de référence.
+
 ### 6.8. Routage de l'interface USB { #68-usb-interface-routing }
 
 Placez le condensateur de découplage AVDD33_USB et la résistance de calibration USB2_REXT près de leurs broches respectives. Acheminez les pistes USB à travers le composant de protection ESD avant qu'elles n'atteignent la puce, et reliez correctement la broche de masse du composant ESD à la masse principale. Routez USB DP/DN en paire différentielle avec une impédance différentielle contrôlée de 90 Ω et un blindage 3D.
@@ -215,6 +223,8 @@ Placez le condensateur de découplage AVDD33_USB et la résistance de calibratio
 
 <div align="center"><em>Figure 6.8-4 : Modèle de routage du signal USB</em></div>
 
+Le schéma de référence associe USB2_DP/USB2_DN à T6/R6 et AVDD33_USB/USB2_REXT à P5/T5 ; il indique C0317 = 1 µF/6,3 V et R0307 = 200 Ω ±1 %. Le schéma d'implantation signale comme incorrectes les dérivations placées avant le composant de protection ESD.
+
 ### 6.9. Routage de l'interface SDIO { #69-sdio-interface-routing }
 
 Le SF32LB58x dispose de deux interfaces SDIO : SDIO1 et SDIO2. Regroupez les signaux de chaque interface et évitez de les séparer. La longueur totale des pistes est ≤ 50 mm et l'écart de longueur entre les signaux d'un même groupe est ≤ 6 mm. Appliquez un blindage 3D à l'horloge SDIO et blindez également les signaux DATA et CMD.
@@ -226,6 +236,8 @@ Le SF32LB58x dispose de deux interfaces SDIO : SDIO1 et SDIO2. Regroupez les sig
 ![Figure 6.9-2 : Modèle de routage sur PCB de l'interface SDIO1](../../sf32-products/chips/assets/58x/sf32lb58x-SDIOM-PCB.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 6.9-2 : Modèle de routage sur PCB de l'interface SDIO1</em></div>
+
+La Figure 6.9-1 présente le circuit de référence et le brochage de SDIO1 ; ces affectations de broches ne s'appliquent pas à SDIO2.
 
 ### 6.10. Routage de l'interface DSI { #610-dsi-interface-routing }
 
@@ -242,6 +254,8 @@ Placez le condensateur de découplage AVDD18_DSI et la résistance d'étalonnage
 
 <div align="center"><em>Figure 6.10-2 : Routage sur PCB des signaux DSI</em></div>
 
+Le schéma de référence montre les voies de données différentielles DSI_D0 et DSI_D1 ainsi que la paire d'horloge différentielle. Il indique C0323 = 4,7 µF/6,3 V sur AVDD18_DSI et R0301 = 10 kΩ sur DSI_REXT.
+
 ### 6.11. Routage du circuit DC-DC { #611-dc-dc-circuit-routing }
 
 Placez l'inductance d'alimentation DC-DC et les condensateurs de découplage près des broches de la puce. Maintenez les pistes BUCK_LX aussi courtes et larges que possible pour minimiser l'inductance de boucle. Ajoutez des vias de masse supplémentaires aux broches de masse de tous les condensateurs de découplage de sortie DC-DC et reliez-les au plan de masse principal. La piste de rétroaction BUCK_FB ne doit pas être trop fine : sa largeur doit être supérieure à 0,25 mm. Aucune zone de cuivre ne doit être présente sur la couche supérieure sous l'inductance ; conservez un plan de masse de référence continu sur la couche adjacente et ne faites passer aucune autre piste dans la zone de l'inductance.
@@ -254,6 +268,8 @@ Placez l'inductance d'alimentation DC-DC et les condensateurs de découplage pr�
 
 <div align="center"><em>Figure 6.11-2 : Implantation sur PCB des composants clés du convertisseur DC-DC</em></div>
 
+Le circuit de référence utilise des inductances de 4,7 µH pour BUCK1 et BUCK2 et indique des condensateurs de 4,7 µF/10 V et de 0,1 µF sur chaque sortie.
+
 ### 6.12. Routage de l'alimentation { #612-power-supply-routing }
 
 PVDD1 et PVDD2 sont les entrées d'alimentation du module PMU intégré — placez leurs condensateurs de découplage près des broches et maintenez les pistes aussi larges que possible, jamais en dessous de 0,5 mm. PVSS1 et PVSS2 sont des broches de masse du module PMU qui doivent être connectées à la masse principale via des vias — évitez de les laisser flottantes, ce qui affecterait les performances globales de la PMU.
@@ -265,6 +281,8 @@ PVDD1 et PVDD2 sont les entrées d'alimentation du module PMU intégré — plac
 ![Figure 6.12-2 : Routage sur PCB du convertisseur DC-DC](../../sf32-products/chips/assets/58x/sf32lb58x-DCDC-R-PCB.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 6.12-2 : Routage sur PCB du convertisseur DC-DC</em></div>
+
+Le schéma de référence associe à chacune des entrées PVDD1 et PVDD2 des condensateurs de découplage de 10 µF/10 V et de 0,1 µF.
 
 ### 6.13. Routage des alimentations LDO et E/S { #613-ldo-and-io-power-input-routing }
 
@@ -287,6 +305,8 @@ Les réseaux de signaux de broches d'entrée/sortie d'horloge, tels que la sorti
 ![Figure 6.14-2 : Circuit de sortie d'horloge 32 kHz](../../sf32-products/chips/assets/58x/sf32lb58x-32K-R-SCH.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 6.14-2 : Circuit de sortie d'horloge 32 kHz</em></div>
+
+La figure des fonctions de broches montre GPADC_CH0–CH7 multiplexés sur PB32–PB39, en partage avec d'autres fonctions périphériques. Vérifiez dans la fiche technique les fonctions alternatives et les conflits possibles pour le composant visé.
 
 ### 6.15. Routage de la masse de la puce { #615-chip-ground-routing }
 
@@ -340,3 +360,5 @@ Pour éviter que le masque de soudure ne recouvre les pastilles et préserver la
 ![Figure 6.17-5 : Référence de connexion des billes BGA 2](../../sf32-products/chips/assets/58x/sf32lb58x-BGA-R2-PCB.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 6.17-5 : Référence de connexion des billes BGA 2</em></div>
+
+Les Figures 6.17-4 et 6.17-5 signalent comme défavorables les tracés diagonaux qui créent des pièges de gravure et les vias qui empiètent sur les pastilles des billes BGA. Respectez les espacements et suivez les exemples better/good pour préserver la fabricabilité.

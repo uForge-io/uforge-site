@@ -145,11 +145,11 @@ SiFli indique que le SF32LB566VCB36, doté de 4 MB + 8 MB d'OPI-PSRAM et de 1 MB
 
 - 1 DAC audio 24 bits
 - 1 ADC audio Sigma-Delta 24 bits
-- 2 interfaces PDM (PDM1/PDM2), chacune prenant en charge les canaux gauche et droit
+- 2 interfaces PDM (PDM1/PDM2) ; DS5602 V0.3 indique deux entrées de microphone numérique
 - 1 interface I2S
 - Conversion de fréquence d'échantillonnage audio et accélération EQ
 
-Chaque interface PDM peut prendre en charge jusqu'à deux microphones numériques, soit jusqu'à quatre au total pour les deux interfaces. Le nombre d'interfaces PDM ne correspond pas au nombre de microphones. La connectivité réelle dépend du multiplexage des broches et du routage de la carte porteuse.
+La figure d'affectation recommandée associe PDM1_DATA à PA20 ou PA64, PDM1_CLK à PA24 ou PA69, PDM2_DATA à PA25 ou PA71 et PDM2_CLK à PA26 ou PA73. Ce sont des options alternatives de multiplexage des broches, pas la confirmation du routage de la carte porteuse. DS5602 V0.3 ne confirme ni le partage des canaux ni une configuration à quatre microphones. Avant de concevoir un système à plusieurs microphones, vérifiez le mode pris en charge et le routage réel de la carte.
 
 ### Alimentation et E/S { #power-and-io }
 

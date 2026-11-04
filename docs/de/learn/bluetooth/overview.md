@@ -40,7 +40,7 @@ BLE ist für die meisten vernetzten Wearables und Sensoren die beste Ausgangswah
 
 ### Classic Bluetooth und Dual-Mode { #classic-bluetooth-and-dual-mode }
 
-Ergänzen Sie Classic Bluetooth, wenn das Produkt Audio-Streaming (A2DP/AVRCP), Freisprechen (HFP), serielle Datenverbindungen (SPP) oder die Kompatibilität mit vorhandenen Classic-Profilen benötigt. Dual-Mode-Designs stellen höhere Anforderungen an Funkplanung und Koexistenz als reine BLE-Designs. Genau diese Last soll der dedizierte Bluetooth-Prozessor vom übrigen System isolieren.
+Ergänzen Sie Classic Bluetooth, wenn das Produkt Audio-Streaming (A2DP/AVRCP), Freisprechen (HFP), serielle Datenverbindungen (SPP) oder die Kompatibilität mit vorhandenen Classic-Profilen benötigt. Dual-Mode-Designs stellen höhere Anforderungen an Funkplanung und Koexistenz als reine BLE-Designs. Der dedizierte Bluetooth-Prozessor übernimmt zeitkritische Link-Aufgaben getrennt vom Anwendungsprozessor; die Koexistenz muss dennoch unter der kombinierten Produktlast validiert werden.
 
 Nicht jedes Mitglied der SF32-Familie unterstützt Dual-Mode-Bluetooth. Prüfen Sie daher vor der Festlegung auf eine Teilenummer die Gerätetabelle im Artikel [Bluetooth-Prozessor](processor.md#device-family-differences).
 

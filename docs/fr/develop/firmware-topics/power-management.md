@@ -17,15 +17,15 @@ N'optimisez pas la consommation à partir d'extraits de code isolés. Mesurez de
 1. Mesurez l'exemple du SDK sans le modifier.
 2. Activez un seul sous-système à la fois.
 3. Lors des premières mesures, mesurez séparément l'affichage, le Bluetooth, l'audio, le stockage et l'activité des capteurs.
-4. Privilégiez le réveil par interruption à la scrutation.
+4. Utilisez un réveil piloté par interruption plutôt que la scrutation.
 5. Consignez le courant consommé pour chaque mode et chaque scénario produit.
 
 ## Points de départ utiles { #useful-starting-points }
 
-- Exemples de gestion de l'énergie du SDK.
-- Profilage de l'utilisation du CPU.
-- Inspection du shell RT-Thread.
-- Mesure du courant au niveau de la carte.
+- [Exemples de gestion de l'énergie du SDK](../../learn/low-power/low-power-sdk-examples.md).
+- [Profilage de l'utilisation du CPU](../../getting-started/tutorials/advanced.md).
+- [Inspection du shell RT-Thread](../platforms/sifli-sdk/debugging-diagnostics.md).
+- [Mesure du courant au niveau de la carte](../../learn/low-power/measurement-and-validation.md).
 
 ## Notes de mesure { #measurement-notes }
 

@@ -12,7 +12,9 @@ tags:
 
 SF32LB52x is SiFli's cost-optimized MCU family for entry-level smart wearables, compact graphical HMIs, Bluetooth peripherals, and other space-constrained AIoT products that still need integrated display, audio, storage, and wireless capability.
 
-At the platform level, the family combines a 240 MHz Arm Cortex-M33 STAR-MC1[^1] application core with a dedicated 24 MHz low-power Bluetooth controller core, enabling the chip to run a responsive UI and application stack while keeping Bluetooth connectivity and always-on workloads separate.
+At the platform level, the family combines a 240 MHz Arm Cortex-M33 STAR-MC1[^1] application core with a dedicated low-power Bluetooth controller core rated up to 24 MHz in the datasheet, enabling the chip to run a responsive UI and application stack while keeping Bluetooth connectivity and always-on workloads separate.
+
+**LCPU clock-frequency note:** SiFli's [DS5201 V2.5.3 datasheet (Chinese)](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p5p3.pdf) lists a 24 MHz maximum. The current [SF32LB52x low-power measurement report](https://docs.sifli.com/projects/rpt5202_sf32lb52x-low-power-measurement-report/latest/en/brief_introduction.html) and [SDK low-power guide](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html) state 48 MHz for LCPU, but neither gives a SKU, operating-mode, or configuration condition that reconciles the difference. This page uses the datasheet figure for comparison; do not read `24/48 MHz` as a selectable range or a variant split. Confirm the allowed LCPU frequency for the exact device and SDK with SiFli.
 
 For product planning, the key variants in SiFli's chip model guide fall into two supply-oriented groups:
 
@@ -177,7 +179,9 @@ Use this sequence to turn an SF32LB52x shortlist into a validated design:
 ## Frequently Asked Questions
 
 **What are the key specifications of SF32LB52x?**
-SF32LB52x pairs an application CPU (Cortex-M33 @240 MHz) with a low-power core (Cortex-M33 @24/48 MHz, a dedicated Bluetooth controller), 576 KB of internal SRAM and dual-mode Bluetooth (BT Classic + BLE). Graphics: ePicasso 2.0 Lite. Package: QFN68 (7 × 7 mm). USB 2.0 FS.
+SF32LB52x provides application processing (Cortex-M33 @240 MHz), a low-power core (Cortex-M33, up to 24 MHz, a dedicated Bluetooth controller), 576 KB of internal SRAM and dual-mode Bluetooth (BT Classic + BLE). Graphics: ePicasso 2.0 Lite. Package: QFN68 (7 × 7 mm). USB 2.0 FS.
+
+This LCPU clock follows the datasheet, not a reconciled 24/48 MHz operating range. See the [source discrepancy](#overview) and confirm the exact device and SDK with SiFli.
 
 **Which display interfaces does SF32LB52x support?**
 SPI / DSPI / QSPI / 8080 / EPD / JDI. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -211,3 +215,6 @@ Start with the [SF32LB52x hardware design guide](../../hardware/chip-guides/SF32
 ### Reference Products
 
 Typical SF32LB52 designs include entry-level smartwatches, fitness bands, Bluetooth accessories, compact graphical controls, electronic shelf labels, smart badges, portable label printers, and cost-sensitive eBike or eScooter displays.
+
+!!! note "Auto-generated content"
+    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

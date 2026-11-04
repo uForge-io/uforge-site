@@ -24,16 +24,16 @@ tags:
 - [ ] 48 MHz 和 32.768 kHz 晶体满足推荐规格，布局和禁布区满足要求
 - [ ] RF 走线阻抗为 50 Ω，且匹配网络靠近芯片放置
 - [ ] 存储启动配置（包括外部稳压供电型号的 eMMC 选项）与 Bootstrap 管脚设置一致
-- [ ] 已按具体型号核对存储电源开关控制管脚；发布前应解决官方核对表与应用说明中 PA11/PA21 的标注差异
+- [ ] 按具体型号核对存储电源开关控制管脚。V1.0 核对表将 520/3/5/7 的控制管脚列为 PA11，将 52B/D/E/G/J 列为 PA21；两份应用说明均将 PA21 指定为启动存储器电源控制管脚。发布前应向思澈科技（SiFli）确认 520/3/5/7 的管脚分配并解决这一差异。
 - [ ] USB DP/DN 按差分对走线，差分阻抗为 90 Ω
 - [ ] SDIO 信号成组走线，总长度 ≤50 mm，组内长度差 ≤6 mm，并做好包地处理
 - [ ] 已预留 DBG_UART/SWD 复用管脚和量产测试点
-- [ ] 关键元器件型号已按最新[思澈科技（SiFli）合格供应商名录（AVL）][思澈科技（SiFli）合格供应商名录（AVL）]核实
+- [ ] 关键元器件型号已按链接的[思澈科技（SiFli）合格供应商名录（AVL）][思澈科技（SiFli）合格供应商名录（AVL）]核实
 
 ## 8. 相关文档与参考资料 { #8-related-documents-and-references }
 
-[SF32LB52x 数据手册（官方 PDF）]: https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?
-[SF32LB52x 用户手册（官方 PDF）]: https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?
+[SF32LB52x 数据手册（官方 PDF，V2p4）]: https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?
+[SF32LB52x 用户手册（官方 PDF，V0p3）]: https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?
 [SF32LB52 硬件参考设计包]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83%E8%AE%BE%E8%AE%A1-20250619.zip?
 [SF32LB520/3/5/7 硬件应用说明（源文件）]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB520-3-5-7-HW-Application.md
 [52B/D/E/G/J 硬件应用说明（源文件）]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB52B-E-G-J-HW-Application.md
@@ -43,8 +43,8 @@ tags:
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[SF32LB52x 数据手册（官方 PDF）]__
-- :fontawesome-solid-file-pdf: __[SF32LB52x 用户手册（官方 PDF）]__
+- :fontawesome-solid-file-pdf: __[SF32LB52x 数据手册（官方 PDF，V2p4）]__
+- :fontawesome-solid-file-pdf: __[SF32LB52x 用户手册（官方 PDF，V0p3）]__
 - :fontawesome-solid-file-zipper: __[SF32LB52 硬件参考设计包]__
 - :fontawesome-brands-github: __[SF32LB520/3/5/7 硬件应用说明（源文件）]__
 - :fontawesome-brands-github: __[52B/D/E/G/J 硬件应用说明（源文件）]__
@@ -57,8 +57,8 @@ tags:
 其他参考资料：
 
 - [SF32LB52x 产品简介](https://downloads.sifli.com/user%20manual/PB5201-SF32LB52x-Product%20Brief.pdf)
-- [SF32LB52x 数据手册](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf)
-- [SF32LB52x 参考手册](https://downloads.sifli.com/user%20manual/UM5201-SF32LB52x-User%20Manual%20V0p8p4.pdf)
+- [SF32LB52x 数据手册（V2p5p3）](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf)
+- [SF32LB52x 参考手册（V0p8p4）](https://downloads.sifli.com/user%20manual/UM5201-SF32LB52x-User%20Manual%20V0p8p4.pdf)
 - [SF32LB520/3/5/7 硬件应用说明](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB520-3-5-7-HW-Application.md)
 - [52B/D/E/G/J 硬件应用说明](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB52B-E-G-J-HW-Application.md)
 
@@ -69,7 +69,7 @@ tags:
 思澈科技（SiFli）原始应用说明包含以下原理图、PCB 布局、机械和电源参考图。本附录保留这些原始参考图，供设计评审核对；实际设计仍应以第 5 节和第 6 节为主要依据。
 
 !!! note "如何使用这些图片"
-    这些图片来自源应用说明中的参考电路和布局示例。最终实现仍需结合正文规则、表格、数据手册、参考手册、最新参考设计包和 AVL，按具体器件和产品进行确认。
+    这些图片来自源应用说明中的参考电路和布局示例。最终实现仍需结合正文规则、表格、数据手册、参考手册、第 8 节列出的参考设计包及链接的 AVL，按具体器件和产品进行确认。
 
 <div align="center"><em>表 9-1：附录索引</em></div>
 

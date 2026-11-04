@@ -74,7 +74,7 @@ O ArduinoCore-zephyr combina uma API Arduino voltada a sketches com um loader Ze
 
 </div>
 
-Comece com **Standard** e **Dynamic**. No modo Debug, o sketch carregado só começa a executar depois que você chama `sketch` no shell do Zephyr. Esse é um motivo comum para um carregamento aparentemente bem-sucedido não resultar em atividade da aplicação.
+Comece com **Standard** e **Dynamic**. No modo Debug, o sketch carregado só começa a executar quando o comando `sketch` é executado no shell do Zephyr. Esse é um motivo comum para um carregamento aparentemente bem-sucedido não resultar em atividade da aplicação.
 
 O loader é um artefato separado, específico da placa. Burn Bootloader normalmente é uma operação de primeiro uso, atualização ou recuperação, não uma etapa necessária em todo carregamento de sketch. Registre juntos a versão do pacote Arduino e qualquer atualização do loader; premissas incompatíveis são difíceis de diagnosticar depois.
 

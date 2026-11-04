@@ -283,7 +283,7 @@ Revise quatro aspectos em cada interface periférica:
 1. A conectividade elétrica, incluindo inversão de sinais, resistores pull-up/pull-down, ESD e terminação.
 2. A compatibilidade entre domínios de tensão de IO, incluindo o risco de alimentação reversa quando o periférico estiver desligado.
 3. Os estados padrão seguros durante reset e suspensão.
-4. Conflitos com boot, download, SWD, USB, despertar ou funções multiplexadas de display de alta velocidade.
+4. Conflitos com boot, download, SWD, USB, despertar ou funções multiplexadas de display de alta velocidade; confirme também se algum botão precisa despertar o MCU por hardware e conclua a configuração necessária do circuito e do software.
 
 #### 5.6.9. UART { #569-uart }
 
@@ -291,6 +291,7 @@ Revise quatro aspectos em cada interface periférica:
 - Conecte RXD do MCU a TXD do periférico e TXD do MCU a RXD do periférico.
 - Compatibilize a tensão de IO do periférico com o domínio de IO do MCU.
 - Revise o comportamento dos pinos UART durante o reset quando eles forem multiplexados com funções de USB, boot, download ou depuração.
+- Se a UART for multiplexada em `PA35` ou `PA36`, durante o reset do MCU mantenha o periférico externo desligado ou configure o pino correspondente em nível baixo por software, para evitar atividade indesejada do periférico.
 - `PA18` e `PA19` são os pinos `DBG-UART` padrão. Para interfaces de teste UART conectadas e desconectadas com frequência, a SiFli recomenda `PA18`, `PA19`, `PA43` ou `PA44`; esse grupo de GPIOs suporta até 5,5 V. Em cabos de teste longos, adicione um resistor em série de 100 Ω para reduzir overshoot.
 
 #### 5.6.10. I2C { #5610-i2c }
@@ -299,6 +300,8 @@ Revise quatro aspectos em cada interface periférica:
 - O SF32LB57x tem quatro interfaces I2C, cada uma com modos host e dispositivo, roteáveis pela matriz para qualquer GPIO.
 - A fonte recomenda 4,7 kΩ no Standard-mode (100 kHz), 2,2 kΩ a 3,3 kΩ no Fast-mode (400 kHz) e 1 kΩ a 2,2 kΩ no Fast-mode Plus (1 MHz). Para 400 kHz, comece com 2,2 kΩ e ajuste conforme a capacitância do barramento.
 - Em um barramento I2C compartilhado, basta um conjunto de pull-ups perto do host; não instale um conjunto em cada dispositivo. Alimente os pull-ups pelo trilho de alimentação do periférico, para desligá-los junto com ele e evitar fuga durante o sono.
+- Verifique se uma interrupção do periférico I2C precisa despertar o MCU; em caso afirmativo, conclua a configuração correspondente do circuito e do software.
+- Sensores I2C de aceleração, frequência cardíaca e campo magnético devem permitir a leitura contínua em lote de todos os registros em uma única operação.
 - Garanta que cada dispositivo no mesmo barramento tenha um endereço exclusivo.
 
 #### 5.6.11. SPI { #5611-spi }
@@ -336,8 +339,9 @@ Revise quatro aspectos em cada interface periférica:
 
 - Roteie USB DP/DN como um par diferencial de 90 Ω.
 - USB DP/DM normalmente usam as funções multiplexadas de `PA35`/`PA36`. Com o USB habilitado, garanta que circuitos externos não imponham níveis inseguros durante o reset.
-- Coloque a proteção ESD perto do conector e faça os sinais passarem por ela antes de chegarem ao chip.
+- Proteja as linhas de dados USB, VBUS e outros pinos críticos com dispositivos ESD. Coloque-os perto do conector e passe os sinais por eles antes de chegarem ao chip.
 - Evite derivações e mantenha o casamento do par e a continuidade da referência de GND.
+- Enquanto o MCU não estiver em suspensão, mantenha o USB habilitado para que o protocolo detecte a conexão e a desconexão do dispositivo.
 - Se o sistema precisar despertar ao detectar a conexão USB durante a suspensão, adicione um divisor de VBUS a um GPIO capaz de despertar o sistema. Recomenda-se compartilhar esse GPIO com a detecção de inserção do carregador.
 - `PA35` é fixo como `USB_DP` e `PA36` como `USB_DM`; essas funções não podem ser remapeadas. USB 2.0 FS suporta até 12 Mbps.
 - Reserve posições para resistores em série de 22 Ω ou 33 Ω perto do chip nas linhas DP/DM e para capacitores em derivação não montados, usados no ajuste da integridade de sinal.
@@ -357,6 +361,7 @@ Revise quatro aspectos em cada interface periférica:
 - Use resistores de 1% em medições com divisor resistivo.
 - Coloque um capacitor de filtro de 100 nF (0,1 µF) perto do pino do chip em cada entrada GPADC.
 - Mantenha as trilhas GPADC afastadas de DC/DC, RF, USB, SDIO, clocks do display e circuitos de carga.
+- Mantenha também essas trilhas afastadas de sinais paralelos de alta velocidade e faça blindagem com GND na região roteada para reduzir o acoplamento de ruído digital.
 
 <div align="center"><em>Tabela 5.6-8: Atribuição dos pinos GPADC</em></div>
 

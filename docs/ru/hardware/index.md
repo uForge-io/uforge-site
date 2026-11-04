@@ -34,13 +34,13 @@ description: Используйте референсное решение SF32 �
 
 <div align="center" markdown style="max-width: 100%; overflow-x: auto;">
 
-| Выбранное семейство микросхем | Руководство по аппаратной разработке | Контрольный список | Начните отсюда, если |
+| Выбранное семейство микросхем | Руководство по аппаратной разработке | Контрольный список | Рекомендуемое применение |
 |:------------------------------|:-------------------------------------|:-------------------|:--------------------|
-| SF32LB52x | [Руководство](chip-guides/SF32LB52x_hardware_design_guide.md) | [Контрольный список](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | Разрабатываете плату по схеме chip-down на SF32LB52x. |
-| SF32LB55x | [Руководство](chip-guides/SF32LB55x_hardware_design_guide.md) | [Контрольный список](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | Разрабатываете плату по схеме chip-down на SF32LB55x. |
-| SF32LB56x | [Руководство](chip-guides/SF32LB56x_hardware_design_guide.md) | [Контрольный список](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | Разрабатываете плату по схеме chip-down на SF32LB56x. |
-| SF32LB57x | [Руководство](chip-guides/SF32LB57x_hardware_design_guide.md) | [Схема](chip-guides/SF32LB57x_schematic_checklist.md) / [Разводка PCB](chip-guides/SF32LB57x_pcb_layout_checklist.md) | Разрабатываете плату по схеме chip-down на SF32LB57x. |
-| SF32LB58x | [Руководство](chip-guides/SF32LB58x_hardware_design_guide.md) | [Контрольный список](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | Разрабатываете плату по схеме chip-down на SF32LB58x. |
+| SF32LB52x | [Руководство](chip-guides/SF32LB52x_hardware_design_guide.md) | [Контрольный список](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | Разработка платы chip-down на SF32LB52x. |
+| SF32LB55x | [Руководство](chip-guides/SF32LB55x_hardware_design_guide.md) | [Контрольный список](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | Разработка платы chip-down на SF32LB55x. |
+| SF32LB56x | [Руководство](chip-guides/SF32LB56x_hardware_design_guide.md) | [Контрольный список](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | Разработка платы chip-down на SF32LB56x. |
+| SF32LB57x | [Руководство](chip-guides/SF32LB57x_hardware_design_guide.md) | [Схема](chip-guides/SF32LB57x_schematic_checklist.md) / [Разводка PCB](chip-guides/SF32LB57x_pcb_layout_checklist.md) | Разработка платы chip-down на SF32LB57x. |
+| SF32LB58x | [Руководство](chip-guides/SF32LB58x_hardware_design_guide.md) | [Контрольный список](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | Разработка платы chip-down на SF32LB58x. |
 
 </div>
 

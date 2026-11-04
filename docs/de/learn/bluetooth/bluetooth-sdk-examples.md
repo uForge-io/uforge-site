@@ -32,7 +32,7 @@ Diese Seite ordnet die Beispiele für [Classic Bluetooth](https://docs.sifli.com
 
 </div>
 
-## Ein Beispiel als Nachweisgrundlage in Betrieb nehmen { #bring-up-an-example-as-evidence }
+## Ein Beispiel in Betrieb nehmen und die Ergebnisse dokumentieren { #bring-up-an-example-as-evidence }
 
 Protokollieren Sie vor Änderungen am Projekt die genaue SDK-Version, den Boardnamen, die Konfiguration, das Gegenstellengerät oder die App, die Funkeinstellungen und die erwarteten Logmeldungen. Gehen Sie anschließend wie folgt vor:
 

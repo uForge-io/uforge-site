@@ -39,7 +39,7 @@ Em que:
 
 | Especificação | Descrição |
 |:--------------|:----------|
-| **M2xM** | Multimídia: recursos futuros para tela RGB, câmera DVP, microfone digital e áudio avançado. |
+| **M2xM** | Multimídia: estão previstos para o futuro recursos de telas RGB, câmeras DVP, microfones digitais e áudio avançado. |
 | **M2xA** | Analógica: recursos futuros de E/S analógica de precisão e aquisição de dados. |
 | **M2xN** | Rede: recursos futuros para Ethernet, CAN e redes industriais. |
 | **M2xH** | Alta velocidade: interfaces futuras de grande largura de banda. |
@@ -47,7 +47,11 @@ Em que:
 
 </div>
 
-Estas descrições indicam o escopo previsto de cada categoria, não requisitos elétricos definitivos. A planilha local da proposta contém mapas de atribuição de contatos para M2 e M2xM. O artigo de definição também resume M2xN e M2xA, mas não foram encontrados dados originais de mapeamento de contatos que permitam verificar esses resumos; portanto, eles devem ser considerados não verificados. M2xH e M2xP são nomes reservados, sem contatos atribuídos.
+Estas descrições indicam o escopo previsto de cada categoria, não requisitos elétricos definitivos.
+**Status das fontes:**
+- **M2 / M2xM:** O rascunho vinculado informa que uma planilha local de proposta contém mapas de contatos, mas o arquivo não está incluído neste repositório nem vinculado aqui; esses mapas permanecem apenas propostas.
+- **M2xN / M2xA:** O rascunho resume essas extensões, mas não foram encontrados dados originais dos mapas de contatos para verificar os resumos; eles permanecem não verificados.
+- **M2xH / M2xP:** Nomes reservados, sem contatos atribuídos.
 
 ## Declaração do módulo { #module-declaration }
 

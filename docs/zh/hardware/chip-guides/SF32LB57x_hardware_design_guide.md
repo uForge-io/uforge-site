@@ -47,6 +47,8 @@ tags:
 
 SF32LB57x 系列常见外设资源包括：
 
+- 采用 Arm Cortex-M33 STAR-MC1 双大核加小核架构。
+- 集成 2D/2.5D 图形引擎、AI 神经网络加速器、双模 Bluetooth 6.0 和音频编解码器。
 - 最多 58 路 GPIO<!-- BGA-ONLY -->；部分 BGA112 型号可引出额外 6 路 I/O，用于 MPI3 或通过上拉/下拉配置为 GP 静态输出，具体用途见下文封装说明<!-- /BGA-ONLY -->。
 - 3 路 UART、4 路 I2C、2 路 SPI、2 路 CAN。
 - 2 路 GPTIM（各 4 通道）、2 路 LPTIM、2 路 ATIM（各支持 3 路差分或 4 路单端通道）、1 路 PWM（5 通道）、1 路 PTM（16 通道）。
@@ -62,6 +64,9 @@ SF32LB57x 系列常见外设资源包括：
 
 !!! note "显示接口范围"
     官方硬件应用说明在 SF32LB57x 的 LCDC 接口概览中列出 SPI/QSPI、24 位 DPI、16 位 8080、16 位 EPD，以及串行/并行 JDI。MIPI-DSI 出现在部分显示驱动 IC 的兼容接口列表中，而不在上述芯片直连接口列表中。不要据此认定芯片原生提供 MIPI-DSI 主机接口；选型前应向思澈科技（SiFli）确认具体显示控制器连接方案。
+
+!!! note "AI 加速器的软件支持"
+    SiFli 硬件应用说明将 AI 神经网络加速器列为 SF32LB57x 的集成功能。SiFli [SDK NNACC 指南](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/nnacc.html)列出 SF32LB55x、SF32LB56x 和 SF32LB58x，但未列出 SF32LB57x。因此，不能仅凭硬件功能说明认定 SF32LB57x 支持软件加速推理；依赖该能力前，请向 SiFli 确认具体型号及 SDK 版本的支持情况。
 
 ### 3.2. 型号 { #32-variants }
 

@@ -46,13 +46,13 @@ For example, a small SPI/QSPI panel can favor partial updates, while an RGB/DPI 
 
 ## Per-Device Interface Matrix { #per-device-interface-matrix }
 
-The matrix below is a family-selection aid, not a pin-assignment table. It reflects the documented display interfaces for the listed SF32 family or silicon variant. A dash means the interface is not documented for that row; it does not rule out a GPIO-driven external controller or a board-specific implementation. Always confirm the exact order code, package, pin mux, SDK release, and panel driver before committing a schematic.
+The matrix below is a family-selection aid, not a pin-assignment table. It reflects the documented display interfaces for the listed SF32 family or silicon variant. Resolution values are output-path references, not graphics-engine canvas dimensions or guaranteed panel modes. A dash means the interface is not documented for that row; it does not rule out a GPIO-driven external controller or a board-specific implementation. Always confirm the exact order code, package, pin mux, SDK release, and panel driver before committing a schematic.
 
 <div align="center"><em>SF32 Display-Interface Matrix</em></div>
 
 <div align="center" markdown>
 
-| SF32 Family / Variant | Documented LCD / Panel Interfaces | Maximum Resolution | Package or Variant Constraint | Practical Selection Direction |
+| SF32 Family / Variant | Documented LCD / Panel Interfaces | Display Resolution Reference | Package or Variant Constraint | Practical Selection Direction |
 |:---|:---|:---|:---|:---|
 | **SF32LB52x** | 3-/4-wire SPI, Dual-SPI, Quad-SPI, MCU/8080 (MIPI DBI), serial/parallel JDI; SPI-connected EPD; an 8-bit parallel EPD signal interface is also documented for SF32LB52B/D/E/G/J | 512 × 512, RGB888; depends on a QSPI display interface with DTR support | The listed 52x models use QFN68L. The hardware guide lists signal assignments and TPS PMIC control for 52B/D/E/G/J; this does not establish support for the LCDC direct-EPD mode. Verify the driver and exact variant. | Compact SPI/QSPI, 8080, and JDI designs; for parallel EPD, verify the GPIO/timing and TPS power-control implementation for the selected variant. |
 | **SF32LB55x** | 3-/4-wire SPI, Dual-SPI, Quad-SPI, MCU/8080, DPI/RGB, serial/parallel JDI, MIPI DSI command mode | 512 × 512, RGB888; through MIPI DSI, with RAM-equipped display drivers only | The documented 2-lane MIPI DSI interface is available on BGA145/169 packages; JDI and MIPI DSI + SPI/DSPI dual-display operation are listed only for 557VD3A6. Command mode requires a panel controller with internal SRAM/GRAM. | Wearable and connected-display products using a compatible BGA package and a MIPI command-mode panel. |
@@ -62,6 +62,10 @@ The matrix below is a family-selection aid, not a pin-assignment table. It refle
 | **SF32LB58x** | 3-/4-wire SPI, Dual-SPI, Quad-SPI, MCU/8080, DPI/RGB, serial/parallel JDI, 2-lane MIPI DSI command and video modes | 1280 × 800, RGB565, or 1280 × 720, RGB888; through MIPI DSI | The listed order codes use BGA256. Command mode uses a panel controller with internal SRAM/GRAM; video mode also supports RAM-less panel controllers. The model guide also lists MIPI DSI + SPI/DSPI/QSPI for dual displays. Confirm the LCD controller and pin mux for the exact design. | High-resolution and bandwidth-demanding UI designs, including dual-display configurations and MIPI DSI panels with or without controller RAM. |
 
 </div>
+
+For **SF32LB55x**, the ePicasso transform layer supports resolutions up to 640 × 640 and its canvas supports up to 1024 × 1024, while actual display output is limited to 512 × 512. The larger canvas is not a display-output limit; see the [SF32LB55x product page](../../sf32-products/chips/SF32LB55x.md) for this graphics/display distinction.
+
+For **SF32LB57x**, the cited sources report different kinds of resolution evidence: SiFli's [hardware design guide](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html) states a display ceiling of 1024 × 1024; its [LCD FAQ](https://docs.sifli.com/projects/solution/7.FAQ/lcd/index.html) lists 1024 × 600 and 720 × 720 among common or validated RGB/DPI designs; the current μForge matrix records 1024 × 600 RGB888 through DPI/RGB. These figures are not interchangeable guaranteed maxima or panel modes. Verify the exact part and package, interface, panel timing, refresh rate, pin mux, and framebuffer/PSRAM bandwidth.
 
 For **SF32LB56x**, do not treat the U and V entries as interchangeable. For **SF32LB55x** and **SF32LB58x**, do not reserve MIPI DSI in a schematic until the exact package, its DSI pins, and the panel's lane/mode requirements are all confirmed. In particular, SF32LB55x is command-mode only, so a RAM-less video-mode panel is not a valid match. EPD designs also require panel-specific timing, waveform, and power planning; an interface label alone is not a complete EPD design.
 

@@ -18,7 +18,7 @@ tags:
 
 ## 建立 SiFli-SDK 基线 { #establish-a-sifli-sdk-baseline }
 
-[SiFli-SDK](platforms/sifli-sdk/overview.md) 是思澈科技（SiFli）面向 SF32 固件的官方软件包，以 RT-Thread 为基础，也是参考开发路径。除非有明确理由评估其他生态，否则应从这里开始：它在开发板支持、蓝牙（Bluetooth）、图形、音频、存储、电源管理和量产开发方面的文档覆盖范围最广。
+[SiFli-SDK](platforms/sifli-sdk/overview.md) 是思澈科技（SiFli）面向 SF32 固件的官方软件包，以 RT-Thread 为基础，也是参考开发路径。除非有明确理由评估其他生态，否则应从这里开始：其文档涵盖开发板支持、蓝牙（Bluetooth）、图形、音频、存储、电源管理和量产开发。
 
 在开发产品功能前，先建立并记录一个可复现的基线：
 

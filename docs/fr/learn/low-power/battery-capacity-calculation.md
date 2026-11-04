@@ -12,7 +12,7 @@ tags:
 
 Le calculateur de batterie du SiFli-SDK estime le niveau de charge, en pourcentage, à partir de la tension mesurée. Il déduit ce niveau de la tension et ne mesure pas la charge électrique comme le ferait un compteur coulombique. La précision dépend donc de la courbe de la batterie et de la fiabilité des informations sur l'état du chargeur.
 
-Le middleware détecte l'état du chargeur, sélectionne la courbe de charge ou de décharge correspondante, puis estime le pourcentage par interpolation. Un filtre principal des variations brusques et un filtre facultatif par moyenne pondérée stabilisent également le résultat. Le guide publié ne précise pas entièrement l'ordre interne des filtres ; consultez l'implémentation de la révision du SDK utilisée par votre projet avant de supposer un ordre précis.
+Le middleware détecte l'état du chargeur, sélectionne la courbe de charge ou de décharge correspondante, puis estime le pourcentage par interpolation. Un filtre principal des variations brusques et un filtre optionnel par moyenne pondérée stabilisent également le résultat.
 
 ## Ce que fait le calculateur { #what-the-calculator-does }
 
@@ -126,7 +126,7 @@ uint8_t battery_calculator_get_percent(battery_calculator_t *calc,
 | --- | --- |
 | 1 | Configurez l'ADC de la carte, le type de chargeur, la broche de détection et sa polarité. |
 | 2 | Définissez dans `battery_table.c` des courbes de charge et de décharge validées. |
-| 3 | Initialiser `battery_calculator_t` avec `battery_calculator_config_t`. |
+| 3 | Initialisez `battery_calculator_t` avec `battery_calculator_config_t`. |
 | 4 | Mesurez la tension de la batterie par le chemin ADC configuré. |
 | 5 | Vérifiez que tension, tables et seuils emploient la même échelle avant de passer la tension à `battery_calculator_get_percent()`. |
 | 6 | Utilisez le résultat filtré dans l'interface utilisateur, la gestion du niveau de batterie faible et la télémétrie du produit. |

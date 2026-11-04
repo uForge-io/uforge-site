@@ -24,8 +24,8 @@ tags:
 **软件**
 
 - [git](https://git-scm.com/)
-- 通过 [`uv`](https://docs.astral.sh/uv/getting-started/installation/) 安装的 C/C++ 工具链（SiFli-SDK 安装脚本会为你获取编译器、调试器和 Python 环境）
-- [SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) 仓库本身
+- [`uv`](https://docs.astral.sh/uv/getting-started/installation/)；SiFli-SDK 安装脚本用它管理 Python 运行时和依赖项。
+- [SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) 仓库；其安装脚本会下载匹配的编译器和调试器。
 
 **官方参考资料**
 
@@ -111,6 +111,7 @@ tags:
 | SF32LB52-DevKit-Nano | `sf32lb52-nano_n4`<br>`sf32lb52-nano_n16r16`<br>`sf32lb52-nano_a128r16` |
 | 黄山派（SF32LB52-LCHSPI-ULP） | `sf32lb52-lchspi-ulp` |
 | SF32LB56-DevKit-LCD | `sf32lb56-lcd_a128r12n1`<br>`sf32lb56-lcd_n16r12n1` |
+| SF32LB57-DevKit-EPD_MB_V1.0 | `sf32lb57-epd_n16r16` |
 | SF32LB58-DevKit-LCD | `sf32lb58-lcd_a128r32n1_dsi`<br>`sf32lb58-lcd_a128r32n1_qspi`<br>`sf32lb58-lcd_n16r32n1_dpi`<br>`sf32lb58-lcd_n16r32n1_dsi`<br>`sf32lb58-lcd_n16r32n1_qspi`<br>`sf32lb58-lcd_n16r64n4` |
 
 </div>
@@ -169,7 +170,7 @@ scons --board=sf32lb52-lcd_n16r8 -j8
 
 ## 接下来可以做什么 { #where-to-go-next }
 
-- **挑选芯片：** 在 [SF32 系列概览](../../sf32-products/family/SF32_family.md)中比较 LB52、LB55、LB56 和 LB58 系列。
+- **挑选芯片：** 在 [SF32 系列概览](../../sf32-products/family/SF32_family.md)中比较 LB52、LB55、LB56、LB57 和 LB58 系列。
 - **探索更多示例：** 除了 `hello_world`，SDK 还自带 BLE、经典蓝牙（Bluetooth）、LVGL 图形、音频和低功耗示例。
 - **尝试其他框架：** 接下来可继续看 [Arduino](../arduino/getting-started-arduino.md)、[Zephyr](../zephyr/getting-started-zephyr-upstream.md) 或 [MicroPython](../micropython/getting-started-micropython.md)。
 - **遇到问题：** 可以先查 [SiFli FAQ](https://wiki.sifli.com/en/faq/index.html) 中关于工具链、J-Link 和调试的常见问题。

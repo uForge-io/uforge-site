@@ -47,6 +47,8 @@ struct rt_i2c_msg msgs[2] = { /* write register address, then read result */ };
 rt_i2c_transfer(bus, msgs, 2);
 ```
 
+这里的 `msgs` 仅为占位声明。调用 `rt_i2c_transfer()` 前，应按传感器和 I2C API 初始化两条消息，包括目标地址、读写标志、缓冲区和长度。
+
 代码中的 `i2c1` 仅为示例名称。请使用开发板实际注册的 I2C 设备名，并在使用总线前确认 `rt_device_find()` 调用成功。
 
 1. 从传感器数据手册确认 I2C 地址、寄存器映射、供电电压，以及所需上拉电阻。

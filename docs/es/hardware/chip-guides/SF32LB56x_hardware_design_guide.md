@@ -77,7 +77,7 @@ La variante U utiliza el encapsulado QFN68L. La variante V utiliza WBBGA175 y re
 - Requisitos para cristales de 48 MHz y 32,768 kHz, junto con modelos recomendados.
 - Requisitos de diseño RF Bluetooth y adaptación de antena.
 - Pantallas SPI/QSPI y JDI en U; pantallas SPI/QSPI, MCU8080, DPI y JDI en V.
-- Opciones de memoria externa y almacenamiento de arranque, incluidas interfaces de tipo SDIO/eMMC/SD NAND.
+- Opciones de memoria externa y almacenamiento de arranque que incluyen SDIO, eMMC y SD NAND.
 - Botones, motor de vibración, interfaz de audio, pines PBR, sensores, UART/I2C, GPTIM, depuración/grabación y calibración.
 
 ### 3.4. Aplicaciones habituales { #34-typical-applications }
@@ -166,7 +166,7 @@ Para sacarles el máximo partido, utilice las listas como registros de aprobaci�
 
 [Índice de guías de diseño de hardware para chips de SiFli (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## Continuar con la guía de diseño { #continue-the-design-guide }
+### 4.5. Continuar con la guía de diseño { #continue-the-design-guide }
 
 La guía completa continúa en las siguientes páginas, cada una dedicada a una fase del proceso de diseño.
 

@@ -208,7 +208,7 @@ Utilice esta tabla para la revisión preliminar del esquemático. Los valores de
 
 | Raíl / pin | Condensador externo típico | Uso principal | Notas de diseño |
 |:-----------|:---------------------------|:---------|:-------------|
-| `VBUS` | >= 10 uF | Entrada USB / cargador | Solo para variantes con batería; añada protección OVP/ESD/EOS. |
+| `VBUS` | >= 10 uF | Entrada USB / cargador | Solo se requiere cuando se usa el cargador integrado; si no se usa, `VBUS` puede quedar sin conectar y se puede omitir este condensador. Si se usa `VBUS`, añada protección OVP/ESD/EOS. |
 | `VBAT` | >= 4,7 uF | Conexión de batería y medición de su tensión | Mantenga la ruta de batería corta y ancha; evite trazarla en paralelo con señales sensibles. |
 | `VCC` / `PVDD` | >= 10 uF | Entrada principal de la PMU / sistema | Coloque el desacoplo cerca del chip y dimensione la pista para la corriente. |
 | `VSYS` | Aproximadamente 2,2 uF | Alimentación interna o analógica/RF especificada | No lo use para alimentar periféricos generales; controle la carga y la capacitancia totales. |

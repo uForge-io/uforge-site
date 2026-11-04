@@ -60,7 +60,7 @@ Los campos de bits de todos los formatos de píxel anteriores se almacenan en or
 
 ## Convertir recursos PNG { #2-convert-png-assets }
 
-Sustituya `png_filename.png` por el nombre del archivo de origen. El archivo generado se guarda en el directorio de la herramienta, salvo que el proceso de compilación cambie el directorio de trabajo.
+Sustituya `png_filename.png` por el nombre del archivo de origen. El archivo generado se guarda en el directorio de la herramienta.
 
 ### Binario PIXEL { #pixel-binary }
 

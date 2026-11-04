@@ -44,7 +44,7 @@ Utilisez la carte pour valider ensemble l'écran, le stockage, l'audio, l'USB et
 
 | Version de la carte | Base | Remarques |
 | :--- | :--- | :--- |
-| V1.0.1 | SF32LB58-MOD-N16R32N1-V1.0.1 et SF32LB58-MOD-A128R32N1-V1.0.1 | Version actuelle ; ajoute la détection de branchement USB sur PB24 ; passe le PTC à 2 A / 6 V pour prendre en charge la sortie audio double maximale ; supprime l'étage de conversion de niveau de la LED RVB car son minutage est inadapté ; remplace le convertisseur DC/DC pour réduire l'ondulation de sortie ; supprime la résistance de rappel (pull-up) de USB DP pour corriger le problème d'interruption en mode périphérique USB |
+| V1.0.1 | SF32LB58-MOD-N16R32N1-V1.0.1 et SF32LB58-MOD-A128R32N1-V1.0.1 | Version actuelle ; ajoute la détection de branchement USB sur PB24 ; passe le PTC à 2 A / 6 V pour corriger le courant d'alimentation insuffisant lorsque les deux canaux audio fonctionnent à puissance maximale ; supprime l'étage de conversion de niveau de la LED RVB car son minutage est inadapté ; remplace le convertisseur DC/DC pour réduire l'ondulation de sortie ; supprime la résistance de rappel (pull-up) de USB DP pour corriger le problème d'interruption en mode périphérique USB |
 | V1.0.0 | SF32LB58-MOD-N16R32N1-V1.0.0 avec SF32LB587VEE56 | Première version publique de la carte |
 
 </div>
@@ -69,14 +69,14 @@ La source SiFli est incohérente pour la V1.0.0 : sa section sur la version du m
 
 ## Quand utiliser cette carte { #when-to-use-this-board }
 
-Choisissez le SF32LB58-DevKit-LCD lorsque le projet nécessite une plateforme haut de gamme réaliste de validation de l'écran et des périphériques plutôt qu'une carte d'éclatement minimale.
+Choisissez le SF32LB58-DevKit-LCD pour valider des écrans haute résolution et l'intégration des périphériques, plutôt que pour exposer uniquement un jeu minimal de signaux.
 
 - Mettre en route des écrans MIPI DSI, RGB888 ou QSPI
 - Valider ensemble le tactile, l'audio, le stockage et l'USB
 - Tester le comportement d'une interface haute résolution sur la plateforme SF32LB58x
 - Évaluer l'extension CAN ou Wi-Fi SDIO
 - Comparer les configurations de module à base de NOR et de NAND
-- Valider le firmware sur une carte de classe phare avant de travailler sur un circuit imprimé sur mesure
+- Valider le firmware sur cette carte avant de concevoir un circuit imprimé sur mesure
 
 Pour la planification de l'intégration au niveau du module, consultez aussi [SF32LB58-MOD](../modules/SF32LB58-MOD.md). Pour l'architecture de la famille de puces et ses capacités en matière d'affichage et de mémoire, voir [SF32LB58x](../chips/SF32LB58x.md).
 
@@ -105,6 +105,8 @@ Pour la planification de l'intégration au niveau du module, consultez aussi [SF
 
 </div>
 
+**Divergence sur le pont USB-UART — vérifier le composant monté :** le guide des modèles de SiFli identifie un CH343K avec deux canaux de débogage USB-UART. Le schéma fonctionnel de la carte indique toutefois CH342K et montre UART1 et UART4, sans associer ces canaux à un connecteur Type-C. Vérifiez le composant monté et le câblage des canaux dans le schéma et la nomenclature de la révision correspondante.
+
 ## Prise en main { #getting-started }
 
 ### Matériel nécessaire { #required-hardware }
@@ -113,6 +115,8 @@ Pour la planification de l'intégration au niveau du module, consultez aussi [SF
 - Module LCD MIPI DSI, RGB888 ou QSPI, selon le cas
 - Câble de données USB 2.0, Type-A vers Type-C ou équivalent
 - Ordinateur hôte sous Windows, Linux ou macOS
+
+Pour déboguer par UART tout en testant l'USB, utilisez deux câbles USB 2.0 de données, un par connecteur Type-C.
 
 ### Matériel optionnel { #optional-hardware }
 
@@ -126,9 +130,9 @@ Pour la planification de l'intégration au niveau du module, consultez aussi [SF
 
 1. Branchez l'écran cible sur le bon connecteur LCD.
 2. Reliez le port USB Type-C USB-UART à l'ordinateur hôte.
-3. Ouvrez l'outil de téléchargement de SiFli et sélectionnez le bon port COM.
+3. Ouvrez SifliTrace et sélectionnez le bon port COM.
 4. Installez ou retirez le cavalier Mode selon que vous souhaitez le mode téléchargement ou le mode d'exécution normal.
-5. Alimentez la carte, puis téléchargez ou exécutez le firmware cible.
+5. Mettez la carte sous tension ; en mode téléchargement, utilisez Impeller pour flasher le firmware cible, ou laissez l'application démarrer en mode d'exécution normal.
 6. Après la mise en service de l'écran, validez le tactile, l'audio, le stockage et tous les périphériques d'extension requis par le produit.
 
 Utilisez un véritable câble USB capable de transmettre des données. Certains câbles Type-C n'assurent que l'alimentation et n'exposent ni l'UART ni le chemin de données USB.
@@ -136,6 +140,8 @@ Utilisez un véritable câble USB capable de transmettre des données. Certains 
 ## Alimentation { #power }
 
 Le SF32LB58-DevKit-LCD est alimenté par USB Type-C.
+
+Le schéma fonctionnel montre une alimentation 5 V pour l'écran DPI, la LED RVB, le pilote de rétroéclairage, l'amplificateur audio et les connecteurs à 40 broches. Avant d'ajouter des charges, vérifiez les limites des rails et des connecteurs dans le schéma.
 
 - Les deux connecteurs USB Type-C de la carte peuvent alimenter la carte
 - Pour le téléchargement du firmware et la journalisation UART, utilisez le port Type-C USB-UART
@@ -145,10 +151,14 @@ Le SF32LB58-DevKit-LCD est alimenté par USB Type-C.
 
 L'interface principale de téléchargement du firmware et de journaux série est le port Type-C USB-UART.
 
+Avant le téléchargement, sélectionnez le firmware cible dans l'outil de flashage Impeller de SiFli.
+
 - **Mode téléchargement** : installez le cavalier Mode, puis mettez la carte sous tension ou réinitialisez-la
 - **Mode débogage logiciel/journaux** : retirez le cavalier Mode, puis mettez la carte sous tension ou réinitialisez-la
 
 La carte prend aussi en charge le débogage J-Link / SWD.
+
+La référence de câblage utilise les broches CONN2 1 (3,3 V), 12 (SWD-DIO), 7 (SWD-CLK) et 9 (GND) ; raccordez-les via l'adaptateur fourni, orienté comme indiqué.
 
 ![Référence de câblage J-Link du SF32LB58-DevKit-LCD](assets/sf32lb58x/58KIT-JLINK-CONN2.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — référence de câblage J-Link</em></div>
@@ -229,6 +239,8 @@ La carte prend en charge :
 - Deux sorties haut-parleurs
 - Un chemin de signal PDM multiplexé avec les signaux RGB et donc indisponible lorsque le chemin d'affichage RGB est actif
 
+La référence de câblage audio associe CONN2-11 à MIC_BIAS, CONN2-13/15 à ADC1N/P, CONN2-16/18 à ADC2N/P et CONN2-35–38 à SPK1/2 P/N.
+
 Le [guide détaillé de la carte](https://wiki.sifli.com/en/board/sf32lb58x/SF32LB58-DevKit-LCD.html) de SiFli indique pour la sortie analogique stéréo jusqu'à 2,8 W/4 Ω, tandis que son [guide des modèles de cartes de développement](https://wiki.sifli.com/en/board/devkit_guide.html) indique 3 W/4 Ω pour les deux sorties haut-parleurs. Aucune source ne précise si la valeur s'entend par canal ou au total. Vérifiez la révision exacte de la carte, le schéma ainsi que les conditions d'alimentation et de charge de l'amplificateur avant de choisir des haut-parleurs ; ne considérez aucune de ces valeurs comme une puissance de sortie garantie par canal.
 
 ![Référence de câblage audio](assets/sf32lb58x/58KIT-AUDIO-CONN2.png){ loading="lazy" }
@@ -245,6 +257,8 @@ Le module SF32LB58 sous-jacent comprend un contrôleur CAN, et la carte expose l
 <div align="center"><em>Carte transceiver CAN de référence</em></div>
 
 La carte prend aussi en charge l'extension Wi-Fi SDIO via l'interface du connecteur.
+
+Le schéma de câblage indique SDIO1_EN, SDIO1_CMD, SDIO1_D0–D3, SDIO1_CLK et WAKE_HOST, ainsi que 3,3 V et GND ; vérifiez les numéros de broche sur le dessin du connecteur avant le câblage.
 
 ![Module Wi-Fi SDIO de référence](assets/sf32lb58x/ATK-RTL8189-SDIO-WIFI-LOOK.png){ loading="lazy" }
 <div align="center"><em>Module Wi-Fi SDIO de référence</em></div>

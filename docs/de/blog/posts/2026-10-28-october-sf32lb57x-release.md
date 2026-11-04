@@ -1,6 +1,6 @@
 ---
 icon: lucide/rss
-description: "SF32LB57x ist jetzt dokumentiert: etwa doppelte Anwendungs-CPU-Leistung gegenüber SF32LB56x, ePicasso-3.0-Grafik und eine wettbewerbsfähige Kostenstruktur."
+description: "SF32LB57x ist jetzt dokumentiert: etwa doppelte Rechenleistung der Anwendungskerne gegenüber SF32LB56x, ePicasso-3.0-Grafik und eine wettbewerbsfähige Kostenstruktur."
 ---
 
 # Oktober: SF32LB57x im Überblick [2026-10-28] { #october-sf32lb57x-2026-10-28 }
@@ -13,7 +13,7 @@ SF32LB52x und SF32LB56x kombinieren jeweils einen 240-MHz-Cortex-M33-Anwendungsk
 
 ### Mehr Grafikfähigkeit { #more-graphics-capability }
 
-Die Grafik steigt auf ePicasso 3.0 mit eZip-3.0-Hardware-Dekomprimierung auf, gegenüber ePicasso 2.0 Lite bei SF32LB52x und ePicasso 2.0 bei SF32LB56x. ePicasso 3.0 beschleunigt Drehen, Skalieren, Projizieren, Spiegeln und Alpha-Blending in Echtzeit, und eZip 3.0 dekomprimiert eZip-, JPEG- und MJPEG-Assets ohne CPU-lastige Dekodierung. Neben den Kernen bietet die Familie DCMI-Kameraeingang, bei ausgewählten Bauteilen bis zu 48 MB In-Package-PSRAM und 32 MB In-Package-NOR-Flash, zwei Audio-ADCs, zwei CAN-Schnittstellen sowie PTM, eine Parallel Task Machine, die zeitkritische Peripherieaufgaben auslagert.
+Die Grafik steigt auf ePicasso 3.0 mit eZip-3.0-Hardware-Dekomprimierung auf, gegenüber ePicasso 2.0 Lite bei SF32LB52x und ePicasso 2.0 bei SF32LB56x. ePicasso 3.0 beschleunigt Drehen, Skalieren, Projizieren, Spiegeln und Alpha-Blending in Echtzeit, und eZip 3.0 dekomprimiert eZip-, JPEG- und MJPEG-Assets ohne CPU-lastige Dekodierung. Neben den Kernen bietet die Familie DCMI-Kameraeingang, bei ausgewählten Bauteilen bis zu 48 MB PSRAM und 32 MB NOR-Flash im Gehäuse, zwei Audio-ADCs, zwei CAN-Schnittstellen sowie PTM, eine Parallel Task Machine, die zeitkritische Peripherieaufgaben auslagert.
 
 ### Eine wettbewerbsfähige Kostenstruktur { #competitive-cost-structure }
 

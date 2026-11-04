@@ -61,6 +61,7 @@ Verwenden Sie diese Namen als Synonyme für dieselbe Board-Familie, wenn Sie nac
 - MicroSD-Kartensteckplatz über SPI
 - Eine Funktionstaste und eine Power-/Reset-Taste
 - RGB-LED SK6812MINI-HS (Leitfaden V1.0.0 der SiFli Huangshan Pi; die Seite von LCKFB ohne Versionsangabe nennt WS2812B-2020)
+- Separate Betriebsanzeige-LED (in den Board-Annotationen von SiFli V1.0.0 ausgewiesen)
 - Treiberschaltung für Vibrationsmotor mit externen Lötpads für den Motor
 - 6-Achsen-IMU LSM6DS3TR-C
 - 3-Achsen-Magnetsensor MMC5603NJ
@@ -99,6 +100,7 @@ Für ein displayorientiertes allgemeines Evaluierungsboard verwenden Sie das [SF
 | Touch-Controller | FT6146-M00 |
 | Mikrofon | MEMS-Mikrofon auf dem Board |
 | Lautsprecherausgang | Class-D-Verstärker, externer GH-1.25mm-Lautsprecheranschluss |
+| Audio-Leistungsverstärker | NS4150B (in den Board-Annotationen von SiFli V1.0.0 ausgewiesen) |
 | Speicher | MicroSD-Karte über SPI |
 | Bewegungssensor | 6-Achsen-IMU LSM6DS3TR-C |
 | Magnetsensor | 3-Achsen-Magnetometer MMC5603NJ |
@@ -110,7 +112,7 @@ Für ein displayorientiertes allgemeines Evaluierungsboard verwenden Sie das [SF
 
 </div>
 
-**Revisionsabhängige Bauteilliste — vor dem Design prüfen:** Der [Huangshan-Pi-Leitfaden][Original SiFli Huangshan Pi Guide] von SiFli in der Version V1.0.0 nennt Lader SY6103, OVP SY5320 und RGB-LED SK6812MINI-HS. Das [LCKFB-Hardware-Wiki][LCKFB Hardware Wiki] ohne Versionsangabe führt stattdessen AW32001ECSR in der Funktionsliste und AW23001ECSR im Abschnitt zur Ladung sowie OVP LP5305AQVF und RGB-LED WS2812B-2020 auf. Die Quellen legen nicht fest, ob diese Unterschiede eine Hardware-Revision widerspiegeln oder auf veralteter Dokumentation beruhen. Verwenden Sie die Werte aus SiFli V1.0.0 nur für diese dokumentierte Referenz; prüfen Sie tatsächliche Board-Kennzeichnung, Schaltplan und Stückliste, bevor Sie sich auf bauteilspezifisches Verhalten verlassen.
+**Revisionsabhängige Bauteilliste — vor dem Design prüfen:** Der [Huangshan-Pi-Leitfaden][Original SiFli Huangshan Pi Guide] von SiFli in der Version V1.0.0 nennt Lader SY6103, OVP SY5320 und RGB-LED SK6812MINI-HS. Das [LCKFB-Hardware-Wiki][LCKFB Hardware Wiki] ohne Versionsangabe führt stattdessen AW32001ECSR in der Funktionsliste und AW23001ECSR im Abschnitt zur Ladung sowie OVP LP5305AQVF und RGB-LED WS2812B-2020 auf. Die Quellen legen nicht fest, ob diese Unterschiede eine Hardware-Revision widerspiegeln oder auf veralteter Dokumentation beruhen. Verwenden Sie die Werte aus SiFli V1.0.0 nur für diese dokumentierte Referenz; prüfen Sie tatsächliche Board-Kennzeichnung, Schaltplan und Stückliste, bevor Sie sich auf bauteilspezifisches Verhalten verlassen. Die Board-Annotationen von SiFli V1.0.0 kennzeichnen außerdem separate LDOs für Sensorversorgung, 3,3-V-Schiene und CH340N-Versorgung sowie einen VSYS-Lastschalter und TVS-Dioden. Prüfen Sie die genaue Verschaltung im Schaltplan der jeweiligen Revision.
 
 ## Lieferumfang { #package-contents }
 
@@ -135,6 +137,8 @@ Der Akkueingang ist für eine einzelne Li-Ion-Zelle mit einem GH1.25mm-Steckverb
 Wird das Board ohne Akku betrieben und VBAT aus einem Labornetzteil gespeist, beträgt der dokumentierte Eingangsbereich von VBAT 3,7 V bis 4,7 V; für Tests mit normaler Versorgungsspannung werden 3,8 V empfohlen. Die Schwellen des SF32LB52-MOD-1-N16R8 sind mit 3,58 V zum Einschalten und 3,48 V zum Ausschalten dokumentiert.
 
 Der Hardware-Leitfaden von LCKFB warnt, dass die Funktion der Taste für langes Drücken möglicherweise nicht funktioniert, wenn kein Akku angeschlossen ist. Prüfen Sie dieses Verhalten an der genauen Board-Revision und mit der vorgesehenen Versorgung.
+
+Der SiFli-Leitfaden V1.0.0 enthält zwei Angaben zur Akkukapazität: Die Liste der optionalen Hardware verlangt einen Akku mit mehr als 450 mAh, während der Abschnitt zur Akkuauswahl 450–500 mAh empfiehlt. Klären Sie, welche Angabe für die genaue Board-Revision und den gewählten Akku gilt.
 
 ## Jumper für die Strommessung { #power-measurement-jumpers }
 
@@ -168,8 +172,17 @@ Optionale Hardware:
 
 - Externer Lautsprecher
 - TF-Karte
-- Li-Ion-Akku mit 450 mAh oder mehr
+- Li-Ion-Akku mit mehr als 450 mAh
 - Zweites USB-Kabel, wenn UART-Debug und nativer USB-Test gleichzeitig benötigt werden
+
+### Board-Einrichtung und Startmodi
+
+Verbinden Sie den Host mit der USB-Type-C-UART-Buchse des Boards. Öffnen Sie anschließend SifliTrace und wählen Sie den richtigen COM-Port.
+
+1. **Firmware-Download:** BOOT im Download-Werkzeug aktivieren, dann das Board mit Spannung versorgen oder zurücksetzen.
+2. **Softwareentwicklung/serieller Log-Modus:** BOOT deaktivieren, dann das Board mit Spannung versorgen oder zurücksetzen.
+
+Der SiFli-Leitfaden beschreibt den Reset des Moduls, indem die RTS#-Leitung des CH340N auf dem Board zunächst auf Low und dann auf High gezogen wird. Bei Boards mit RTS-Reset kann das Öffnen des seriellen Ports einen unerwarteten Reset oder ein Abschalten auslösen. Deaktivieren Sie in diesem Fall die Modem-Flusssteuerung in den erweiterten Einstellungen des seriellen Ports auf dem Host.
 
 Verwenden Sie ein USB-Kabel, das Daten übertragen kann. Reine Ladekabel können das Board versorgen, stellen aber die serielle Datenschnittstelle nicht bereit.
 
@@ -242,6 +255,8 @@ Die 30-polige Leiste führt Versorgung, USB, Sensor-, displaynahe, Speicher-, Vi
 ## Display- und Touch-Schnittstelle { #display-and-touch-interface }
 
 Das Board nutzt einen AMOLED-Display-Pfad und führt einen 22-poligen QSPI-FPC-Signalsatz heraus. Die Tabelle von SiFli V1.0.0 kennzeichnet die Pins 5-10 als NC; die folgende Tabelle enthält alle 22 Positionen und benennt diese Pins ausdrücklich.
+
+Die Annotationen der Displayplatine unterscheiden einen 22-poligen FPC-Steckverbinder zum LCD-Modul von einem separaten 24-poligen Board-to-Board-Steckverbinder (B2B) zur Kernplatine. Prüfen Sie beide Schnittstellen anhand der genauen Revision der Baugruppe, bevor Sie sie montieren.
 
 <div align="center"><em>Signalbelegung des 22-poligen QSPI-FPC für Display und Touch</em></div>
 

@@ -51,7 +51,7 @@ Filter by the display interface that your panel actually requires, then use the 
 
 ### Audio Interfaces { #audio-interfaces }
 
-The selector has independent minimum-count filters for audio DACs, ADCs, PDM interfaces, and I2S interfaces. Each value is a lower bound, not a bundled audio profile. Then review resource sharing with other peripherals and the board-level analog design.
+The selector has independent exact-count filters for audio DACs, ADCs, PDM interfaces, and I2S interfaces. Each selected count must match exactly; the filters do not represent a bundled audio profile. Then review resource sharing with other peripherals and the board-level analog design.
 
 ### Connectivity and Specialist Hardware { #connectivity-and-specialist-hardware }
 

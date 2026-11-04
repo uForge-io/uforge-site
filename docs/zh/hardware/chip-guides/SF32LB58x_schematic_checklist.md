@@ -19,6 +19,8 @@ hide:
 
 以下各表分别对应一个原理图功能模块。请根据每项注明的条件判断其适用范围：满足相应条件时，必须核查“必检”项；只有采用对应功能或设计方案时，才需要核查“可选”项。
 
+本页依据所链接的 SiFli 工作簿 V1.0（日期：2026-01-21）编写；这不表示该版本是当前最新的在线版本。
+
 ### 5.8.1. 封装 { #581-package }
 
 <div align="center"><em>表 5.8.1-1：封装核对表</em></div>
@@ -484,7 +486,7 @@ SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设�
 | 2 | PBR0-PBR5 可在待机（Standby）和休眠（Hibernate）中作为输出使用 | 可选 |
 | 3 | PBR0-PBR5 可输出 LPTIM 信号 | 可选 |
 | 4 | <span class="flag-red">对于 SF32LB567，推荐使用 LPTIM3：LPTIM3_OUT 与 LPTIM3_OUT_BAR 可从 PBR 管脚输出 21-25 kHz、占空比不同且极性相反的信号</span> | 可选 |
-| 5 | <span class="flag-red">这些 21-25 kHz、极性相反且占空比不同的信号，也可由 HCPU 的 ATIM 输出；需结合 Pin_Config 选择合适的 ATIMx_CHx 与 ATIMx_CHxN 信号，并考虑 HCPU 降频的影响</span> | 可选 |
+| 5 | <span class="flag-red">这些 21-25 kHz、极性相反且占空比不同的信号，也可由 HCPU 的 ATIM 输出；需结合 Pin_Config 选择合适的 ATIMx_CHx 与 ATMx_CHxN 信号，并考虑 HCPU 降频的影响</span> | 可选 |
 | 6 | PBR0-PBR5 可输出 32 kHz 时钟信号 | 可选 |
 | 7 | <span class="flag-red">PBR0-PBR3 可配置为唤醒输入，但 MCU 唤醒后 PBR0-PBRx 不能接收中断信号，只能检测 0/1 电平，使用时需谨慎</span> | 可选 |
 
@@ -494,6 +496,8 @@ SD1 接口的 I/O 电源域为 VDDIOA2，支持 1.8 V 和 3.3 V，应按外设�
     [来源核对表工作簿](https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)中，PBR 核对表第 4 项明确提到 SF32LB567，但工作簿并未将 PBR 核对表第 4、5 项确立为 SF32LB58x 的推荐做法；采用前请向思澈科技（SiFli）确认。
 
     工作簿“存储”核对表第 6 项写明，量产烧录时将 PA43 拉高以使能“MPI3 电源”。但[思澈科技（SiFli）官方 SF32LB58x 硬件应用说明](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md)将 PA43 描述为外部 Flash 电源控制脚，并要求拉高 PA43 以接通外部 Flash 电源。核对表条目仍保留工作簿中的原文。量产下载方案定版前，请向思澈科技（SiFli）确认该管脚实际控制的电源轨及接口适用范围。
+
+    工作簿将互补输出拼写为 `ATMx_CHxN`。此处保留来源拼写；使用前请根据所选器件的 `Pin_Config` 核对准确的信号名称。
 
 ### 5.8.26. 功耗 { #5826-power-consumption }
 

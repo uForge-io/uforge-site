@@ -97,9 +97,16 @@ Pour connaître la résolution maximale et les interfaces d'affichage prises en 
 - Connectivité Wi-Fi externe via SDIO
 - 2x ADC audio intégrés
 - 2x DAC audio intégrés
-- 2 interfaces PDM, chacune pouvant gérer jusqu'à deux microphones numériques ; le nombre d'interfaces n'est pas le nombre de microphones, et les connexions utilisables dépendent aussi du multiplexage des broches et du routage de la carte
+- 2 interfaces PDM ; la note d'application matérielle de SiFli documente deux entrées de microphone PDM. Vérifiez les canaux utilisables selon le multiplexage des broches et le routage de la carte.
 - 3 interfaces I2S : I2S1 est en entrée seule ; I2S2 et I2S3 prennent en charge l'entrée et la sortie. Toutes fonctionnent en mode maître.
 - USB 2.0 High-Speed en modes hôte et périphérique
+
+### Sécurité { #security }
+
+- Accélérateurs matériels AES, HASH et CRC ; générateur de nombres aléatoires vrai (TRNG)
+- Démarrage sécurisé (Secure Boot) et eFuse de 1 024 bits pour stocker la racine de confiance (Root of Trust) et l'UID
+- Déchiffrement en temps réel du code externe via MPI1, MPI2, MPI3 et MPI5
+- La fiche produit SiFli mentionne PSA Certified Level 1 ; vérifiez le périmètre et le statut actuel du certificat pour le composant et le produit concernés.
 
 ### Intégration système { #system-integration }
 
@@ -128,19 +135,24 @@ Pour connaître la résolution maximale et les interfaces d'affichage prises en 
 
 ## Variantes de la famille { #family-variants }
 
-Le guide SiFli des modèles de puces répertorie actuellement trois codes de commande SF32LB58x, tous en BGA256, avec les configurations de mémoire intégrée au boîtier indiquées ci-dessous. Confirmez le code de commande exact dans la fiche technique à jour et la liste des fournisseurs agréés (AVL), car les configurations et leur disponibilité peuvent évoluer.
+Le guide SiFli des modèles de puces répertorie actuellement six codes de commande SF32LB58x, tous en BGA256. Le tableau distingue la SiP de démarrage sur MPI5 des mémoires sur MPI1 et MPI2 :
 
-<div align="center"><em>Codes de commande du SF32LB58x et mémoire intégrée au boîtier</em></div>
+<div align="center"><em>Codes de commande du SF32LB58x, mémoire SiP et limites communes</em></div>
 
 <div align="center" markdown>
 
-| Référence | Boîtier | Mémoire intégrée au boîtier |
-| :--- | :--- | :--- |
-| SF32LB583VCC36 | BGA256 | 1 Mo de flash NOR de démarrage + 2 × 8 Mo de PSRAM OPI sur MPI1 et MPI2 |
-| SF32LB586VDD36 | BGA256 | 1 Mo de flash NOR de démarrage + 2 × 16 Mo de PSRAM HPI sur MPI1 et MPI2 |
-| SF32LB587VEE56 | BGA256 | 4 Mo de flash NOR de démarrage + 2 × 32 Mo de PSRAM HPI sur MPI1 et MPI2 |
+| Code de commande | Boîtier | SiP de démarrage MPI5 | SiP MPI1 | SiP MPI2 |
+| :--- | :--- | :--- | :--- | :--- |
+| SF32LB580VNN36 | BGA256 | Flash NOR de 1 Mo | n/a | n/a |
+| SF32LB581VCN36 | BGA256 | Flash NOR de 1 Mo | PSRAM OPI de 8 Mo | n/a |
+| SF32LB583VCC36 | BGA256 | Flash NOR de 1 Mo | PSRAM OPI de 8 Mo | PSRAM OPI de 8 Mo |
+| SF32LB585V5E56 | BGA256 | Flash NOR de 4 Mo | Flash NOR de 4 Mo | PSRAM HPI de 32 Mo |
+| SF32LB586VDD36 | BGA256 | Flash NOR de 1 Mo | PSRAM HPI de 16 Mo | PSRAM HPI de 16 Mo |
+| SF32LB587VEE56 | BGA256 | Flash NOR de 4 Mo | PSRAM HPI de 32 Mo | PSRAM HPI de 32 Mo |
 
 </div>
+
+Pour les six références, le guide indique un boîtier de 6,5 × 8,5 × 0,94 mm au pas de 0,4 mm, une alimentation de 1,71 à 3,63 V, 94 GPIO HCPU + 66 GPIO LCPU et une plage de température de fonctionnement de −40 à 85 °C. Le guide des modèles ne donne pas les plages de tension d'E/S, définies par banque dans la fiche technique, et ne confirme pas la compatibilité broche à broche. Ne déduisez pas l'interchangeabilité du seul boîtier BGA256 commun ; avant le routage, vérifiez chaque alimentation d'E/S utilisée et le tableau des fonctions de broches de la référence exacte. Les configurations et leur disponibilité peuvent évoluer ; confirmez le code exact dans la fiche technique actuelle et la liste des fournisseurs agréés (AVL) avant l'achat.
 
 Lors du choix d'une variante, vérifiez d'abord ces points :
 
@@ -162,7 +174,7 @@ Suivez cette séquence pour transformer une présélection SF32LB58x en concepti
 ## Questions fréquentes { #frequently-asked-questions }
 
 **Quelles sont les principales caractéristiques du SF32LB58x ?**
-Le SF32LB58x associe un CPU applicatif (2× Cortex-M33 @240 MHz) à un cœur basse consommation (Cortex-M33 @48/96 MHz, programmable par l'utilisateur). Il intègre 3,7 MB de SRAM interne et prend en charge le Bluetooth bimode (BT classique + BLE). Graphismes : ePicasso 2.0 + Vivante GCNanoUltraV (vector). Boîtier : BGA256 (8,5 × 6,5 mm). USB 2.0 HS.
+Le SF32LB58x assure le traitement applicatif (2× Cortex-M33 @240 MHz) et dispose d'un cœur basse consommation (Cortex-M33 @48/96 MHz, programmable par l'utilisateur). Il intègre 3,7 MB de SRAM interne et prend en charge le Bluetooth bimode (BT classique + BLE). Graphismes : ePicasso 2.0 + Vivante GCNanoUltraV (graphismes vectoriels). Boîtier : BGA256 (8,5 × 6,5 mm). USB 2.0 HS.
 
 **Quelles interfaces d'affichage le SF32LB58x prend-il en charge ?**
 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. ([Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix))

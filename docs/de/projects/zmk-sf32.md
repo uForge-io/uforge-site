@@ -176,12 +176,12 @@ Behandeln Sie Fehler als getrennte Domänen: physische Matrix/Verdrahtung, die S
 **Ziel:** Die genaue OpenSiFli-Referenz nachweisen, bevor Tastenbelegung, Overlay oder Abhängigkeit geändert werden.
 
 1. Erfassen Sie beide Board-Revisionen und verdrahten Sie die beiden Aufbauten genau gemäß den linken und rechten Urchin-Overlays. Beschriften Sie Boards sowie USB-/Flash-Kabel nach Rolle.
-2. Bauen Sie beide Images beim festgelegten Commit, speichern Sie `west list` und prüfen Sie die erzeugte Konfiguration, um das erwartete Board, Shield, die Split-Rolle, BLE, CherryUSB, ZMK Studio und die NVS-Einstellungen zu bestätigen.
+2. Bauen Sie beide Images beim festgelegten Commit und speichern Sie `west list`. Prüfen Sie die erzeugte Konfiguration anhand der Baseline-Tabelle auf das erwartete Board, Shield, die Split-Rolle sowie BLE, CherryUSB, ZMK Studio und NVS.
 3. Flashen Sie jedes Image über seinen unabhängig verifizierten Wiederherstellungspfad. Erfassen Sie Kaltstart- und Konsolenverhalten, bevor Sie die Hälften oder den Host koppeln.
 4. Stellen Sie die BLE-Split-Verbindung her und verifizieren Sie dann alle 38 Positionen gegen die Ebenen `default`, `lower` und `raise`. Prüfen Sie Bluetooth-Profilauswahl/-Löschen und die Studio-Entsperr-Bindungen bewusst, damit sie bei den Tipptests nicht versehentlich ausgelöst werden.
 5. Validieren Sie USB-HID und ZMK Studio auf der linken Hälfte und dann Bluetooth-HID zum gewählten Host. Wiederholen Sie dies nach einem Kaltstart.
 
-**Aufzubewahrende Nachweise:** Aufzeichnungen zu Board und Verdrahtung, Revisionen von Fork und Manifest, erzeugte Konfigurationen, Image-Hashes, Flash- und Boot-Logs, vollständige Matrix der Tastenpositionen, Ebenenergebnisse, Endpunktauswahl sowie Host-/Studio-Versionen.
+**Aufzubewahrende Nachweise:** Ergänzen Sie die oben geführte Projektvertrags-Dokumentation um die erzeugten Konfigurationen, Image-Hashes, Flash-/Boot-Logs, die vollständige Tastenpositionsmatrix und Ebenenergebnisse, die ausgewählten Endpunkte sowie Host-/Studio-Versionen.
 
 **Abnahmekriterium für Kontrollpunkt 1:** Zwei Kaltstarts reproduzieren die vollständige 38-Positionen-Belegung, alle drei Ebenen, die Split-Verbindung von rechts nach links und mindestens einen gewählten Host-Endpunkt; beide Hälften bleiben unabhängig wiederherstellbar.
 

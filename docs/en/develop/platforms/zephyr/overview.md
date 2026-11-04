@@ -72,7 +72,7 @@ The downstream tree contains SF32LB-related drivers, bindings, or board-specific
 - Bluetooth HCI mailbox and BAP broadcast sink configuration.
 - Audio codec, DMA, CRC, crypto, entropy, OTP/eFuse, regulators, reset, and temperature sensor.
 
-Presence in the tree does not mean every product scenario is production-ready. Validate the exact sample and driver combination on the target board.
+Presence in the tree does not mean a driver is enabled for the board target or that every product scenario is production-ready. Validate the exact sample, driver, and board configuration on the target board.
 
 ## Integration Sequence { #integration-sequence }
 

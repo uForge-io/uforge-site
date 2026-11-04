@@ -53,6 +53,7 @@ Use the NOR-only variants for compact Bluetooth, control, and simple HMI work. U
 - 16-pin, 0.5 mm-pitch FPC display connector; display interfaces include SPI, DSPI, and Quad-SPI, with DDR-mode QSPI support
 - I2C touch-panel signals
 - Analog microphone and differential audio output pins
+- PDM digital microphone input
 - One user LED
 - Power key and function key
 - Test points for single-rail current measurement; SiFli also documents single-MCU, minimum-system, and whole-board power tests
@@ -84,6 +85,8 @@ For single-rail current measurements, place an ammeter in series with the rail u
 When USB Type-C is connected, the board can also provide 3.3 V, 1.8 V, and 5 V outputs through selected header pins. Confirm the required direction before connecting external circuits.
 
 The board includes a power switch. The CH340N RTS# signal can control board enable, allowing the host tool to reset the MCU during download or debug workflows.
+
+With USB Type-C power, the onboard LDO converts 5 V VBUS to 3.3 V.
 
 ## Download and Debug { #download-and-debug }
 
@@ -168,6 +171,39 @@ The board exposes two 24-pin edge headers. The first side focuses on general GPI
 
 </div>
 
+<div align="center"><em>Table: J1 Detailed Pin Functions and Reset Pulls</em></div>
+
+<div align="center" markdown>
+
+| Pin | Pin name | Reset default and multiplexed functions | Pull |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | Ground |  |
+| 2 | PA_44 | **PA44**, UART, I2C, GPTIM, WKUP20 | PD |
+| 3 | PA_43 | **PA43**, UART, I2C, GPTIM, WKUP19 | PD |
+| 4 | PA_42 | **PA42**, UART, I2C, GPTIM, WKUP18 | PU |
+| 5 | PA_41 | **PA41**, UART, I2C, GPTIM, WKUP17 | PU |
+| 6 | PA_40 | **PA40**, UART, I2C, GPTIM, SPI2_CS, WKUP16 | PU |
+| 7 | PA_39 | **PA39**, UART, I2C, GPTIM, SPI2_CLK, WKUP15 | PU |
+| 8 | PA_38 | **PA38**, UART, I2C, GPTIM, SPI2_DI, WKUP14 | PD |
+| 9 | PA_37 | **PA37**, UART, I2C, GPTIM, SPI2_DIO, WKUP13 | PD |
+| 10 | PA_36 | **PA36**, UART, I2C, GPTIM, USB_DM, WKUP12 | PD |
+| 11 | PA_35 | **PA35**, UART, I2C, GPTIM, USB_DP, WKUP11 | PD |
+| 12 | PA_31 | **PA31**, UART, I2C, GPTIM, GPADC3 | PD |
+| 13 | PA_30 | **PA30**, UART, I2C, GPTIM, I2S1_LRCK, GPADC2 | PD |
+| 14 | PA_29 | **PA29**, UART, I2C, GPTIM, SPI1_CS, I2S1_BCK, GPADC1 | PD |
+| 15 | PA_28 | **PA28**, UART, I2C, GPTIM, SPI1_CLK, I2S1_SDI, GPADC0 | PD |
+| 16 | GND | Ground |  |
+| 17 | 3.3V | 3.3 V power; input when USB Type-C is disconnected and output when it is connected |  |
+| 18 | PA_27 | **PA27**, UART, I2C, GPTIM, WKUP3 | PU |
+| 19 | PA_26 | **PA26**, UART, I2C, GPTIM, WKUP2 | PU |
+| 20 | PA_25 | **PA25**, UART, I2C, GPTIM, SPI1_DI, I2S1_SDO, WKUP1 | PD |
+| 21 | PA_24 | **PA24**, UART, I2C, GPTIM, SPI1_DIO, I2S1_MCLK, WKUP0 | PD |
+| 22 | PA_34 | **PA34**, UART, I2C, GPTIM, GPADC6, WKUP10 | PD |
+| 23 | PA_33 | **PA33**, UART, I2C, GPTIM, GPADC5 | PD |
+| 24 | PA_32 | **PA32**, UART, I2C, GPTIM, GPADC4 | PD |
+
+</div>
+
 ### LCD, Audio, and Debug Header { #lcd-audio-and-debug-header }
 
 <div align="center"><em>LCD, Audio, and Debug Header Pin Assignments</em></div>
@@ -186,9 +222,44 @@ The board exposes two 24-pin edge headers. The first side focuses on general GPI
 
 </div>
 
+<div align="center"><em>Table: J2 Detailed Pin Functions and Reset Pulls</em></div>
+
+<div align="center" markdown>
+
+| Pin | Pin name | Reset default and multiplexed functions | Pull |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | Ground |  |
+| 2 | PA_00 | **PA00**, UART, I2C, GPTIM, LCD_RST | PD |
+| 3 | PA_01 | **PA01**, UART, I2C, GPTIM, BL_PWM | PD |
+| 4 | PA_02 | **PA02**, UART, I2C, GPTIM, LCD_TE, I2S1_MCLK | PD |
+| 5 | PA_03 | **PA03**, UART, I2C, GPTIM, LCD_CS, I2S1_SDO | PU |
+| 6 | PA_04 | **PA04**, UART, I2C, GPTIM, LCD_CLK, I2S1_SDI | PD |
+| 7 | PA_05 | **PA05**, UART, I2C, GPTIM, LCD_D0, I2S1_BCK | PD |
+| 8 | PA_06 | **PA06**, UART, I2C, GPTIM, LCD_D1, I2S1_LRCK | PD |
+| 9 | PA_07 | **PA07**, UART, I2C, GPTIM, LCD_D2, PDM1_CLK | PD |
+| 10 | PA_08 | **PA08**, UART, I2C, GPTIM, LCD_D3, PDM1_DAT | PD |
+| 11 | PA_09 | **PA09**, UART, I2C, GPTIM, CTP_INT | PD |
+| 12 | MIC_ADC | MIC input signal |  |
+| 13 | MIC_BIAS | MIC bias voltage |  |
+| 14 | DACP | Analog audio output signal |  |
+| 15 | DACN | Analog audio output signal |  |
+| 16 | GND | Ground |  |
+| 17 | 1.8V | 1.8 V power; input when USB Type-C is disconnected and output when it is connected |  |
+| 18 | PA_10 | **PA10**, UART, I2C, GPTIM, CTP_RST | PD |
+| 19 | PA_11 | **PA11**, UART, I2C, GPTIM, CTP_SDA | PU |
+| 20 | PA_20 | **PA20**, UART, I2C, GPTIM, CTP_SCL | PD |
+| 21 | PA_21 | **PA21**, UART, I2C, GPTIM | PD |
+| 22 | PA_18 | **UART0_RXD**, debug and download port, PA18, SWDIO, I2C, GPTIM | PU |
+| 23 | PA_19 | **UART0_TXD**, debug and download port, PA19, SWCLK, I2C, GPTIM | None |
+| 24 | 5V | 5 V power; input when USB Type-C is disconnected and output when it is connected |  |
+
+</div>
+
 ## External Flash and SDIO Pins { #external-flash-and-sdio-pins }
 
 Some variants include an external 16 MB QSPI-NOR Flash. The shared storage/SDIO pin group is:
+
+The original board guide also lists these external Flash package options; actual population depends on the board variant and BOM: SPI NOR Flash in WSON8-8x6mm or WSON8-6x5mm, SPI NAND Flash in WSON8-8x6mm, and SD NAND Flash in WSON8-8x6mm.
 
 <div align="center"><em>External Flash and SDIO Pin Group</em></div>
 
@@ -210,6 +281,8 @@ Check whether these pins are already occupied by the mounted Flash before using 
 ## Audio Expansion { #audio-expansion }
 
 The board routes analog microphone bias/input and differential DAC output. The microphone and a Class-AB/D amplifier for driving a speaker are external; select them for the intended audio path.
+
+The board also supports PDM digital microphone input: PA07 multiplexes `PDM1_CLK`, and PA08 multiplexes `PDM1_DAT`.
 
 ## SDK Build Targets { #sdk-build-targets }
 

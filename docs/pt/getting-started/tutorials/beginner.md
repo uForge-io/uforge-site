@@ -11,7 +11,7 @@ Estes tutoriais dão sequência a [Primeiros passos](../index.md). Antes de come
 
 Os exemplos pressupõem uma placa da classe SF32LB52-DevKit-LCD, como a `sf32lb52-lcd_n16r8`. Se estiver usando outra placa, substitua o nome da placa no comando de compilação e confirme os nomes dos pinos, as instâncias dos periféricos e a configuração de armazenamento nos arquivos de suporte correspondentes.
 
-Use esta série para desenvolver hábitos de trabalho confiáveis: valide um comportamento na placa, defina um critério de sucesso claro e preserve a configuração funcional antes de passar ao próximo periférico. O conteúdo é prático de propósito para quem está começando com o SDK SF32, mesmo que já conheça C para sistemas embarcados.
+Use esta série para desenvolver hábitos de trabalho confiáveis: valide um comportamento na placa e preserve a configuração funcional antes de passar ao próximo periférico. O conteúdo é prático de propósito para quem está começando com o SDK SF32, mesmo que já conheça C para sistemas embarcados.
 
 ## Antes de começar { #before-you-start }
 
@@ -157,7 +157,7 @@ O shell **FinSH** do RT-Thread oferece um prompt interativo `msh>` pela mesma UA
 
 **Comece por:** `example/rt_device/adc/channel`
 
-Para este exemplo RT-Thread, habilite `BSP_USING_ADC`, `BSP_USING_ADC1` e `RT_USING_ADC`; caso contrário, o SDK não registrará `bat1`. No SF32LB52, o canal 7 é conectado internamente a VBAT e não serve como entrada genérica para um sensor externo. Escolha um canal ADC e configure o pinmux de acordo com o chip e a placa específicos. No exemplo documentado para SF32LB52, o canal 0 usa PA28. No exemplo atual do SDK SiFli, `rt_adc_read()` retorna um valor de tensão escalado em unidades de 0,1 mV, não contagens ADC brutas; confirme a unidade e a conversão para o chip específico e a versão do driver que você usa.
+Para este exemplo RT-Thread, habilite `BSP_USING_ADC`, `BSP_USING_ADC1` e `RT_USING_ADC`; caso contrário, o SDK não registrará `bat1`. No SF32LB52, o canal 7 é conectado internamente a VBAT e não serve como entrada genérica para um sensor externo. Escolha um canal ADC e configure o pinmux de acordo com o chip e a placa específicos. No exemplo documentado para SF32LB52, o canal 0 usa PA28. No exemplo atual do SDK SiFli, `rt_adc_read()` calcula por padrão a média de 22 amostras e retorna um valor de tensão escalado em unidades de 0,1 mV, não contagens ADC brutas; confirme a média, a unidade e a conversão para o chip específico e a versão do driver que você usa.
 
 ```c
 rt_adc_device_t adc = (rt_adc_device_t)rt_device_find("bat1");

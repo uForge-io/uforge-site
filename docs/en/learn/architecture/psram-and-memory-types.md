@@ -108,6 +108,8 @@ The data-line column counts payload signals, not clock, chip-select, or other co
 
 The SiFli [chip model guide](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) lists representative dual-channel configurations: **SF32LB566VCB36** has 8 MB OPI-PSRAM on MPI1 and 4 MB on MPI2; **SF32LB586VDD36** has 16 MB HPI-PSRAM on each interface; and **SF32LB587VEE56** has 32 MB HPI-PSRAM on each interface. These part-number examples describe memory topology, not a guarantee that both channels deliver the table's aggregate payload rate to one client. Confirm the exact orderable part and SDK memory map before sizing a bandwidth-critical design; another package or SKU in the same family can use a different arrangement.
 
+The SF32LB52 guide marks its listed interface frequencies as subject to change in the official release.
+
 ### Why Two Memory Channels Matter { #why-two-memory-channels-matter }
 
 The most valuable benefit of a dual-channel arrangement is not merely a larger aggregate number. When the selected SF32 memory map and display/controller configuration allow independent placement, one channel can be allocated to a bandwidth-critical client while the other serves the rest of the system.

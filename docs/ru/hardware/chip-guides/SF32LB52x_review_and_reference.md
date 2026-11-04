@@ -24,16 +24,16 @@ tags:
 - [ ] Кварцевые резонаторы 48 MHz и 32,768 kHz соответствуют рекомендованным характеристикам; соблюдены требования к разводке и запретным зонам
 - [ ] Волновое сопротивление RF-трассы составляет 50 Ω, согласующая цепь размещена рядом с чипом
 - [ ] Настройка загрузки из памяти, включая вариант eMMC при внешнем стабилизированном питании, соответствует состояниям выводов Bootstrap
-- [ ] Проверьте вывод управления переключателем питания памяти для конкретного варианта; до выпуска устраните расхождение PA11/PA21 между официальным контрольным списком и рекомендациями по применению
+- [ ] Проверьте вывод управления переключателем питания хранилища для конкретного варианта. В чек-листе V1.0 для 520/3/5/7 указан PA11, а для 52B/D/E/G/J — PA21; обе прикладные инструкции указывают PA21 для управления питанием загрузочного хранилища. До выпуска согласуйте с SiFli расхождение по 520/3/5/7.
 - [ ] USB DP/DN разведены как дифференциальная пара с дифференциальным волновым сопротивлением 90 Ω
 - [ ] Сигналы SDIO разведены вместе: общая длина ≤50 mm, разница длин внутри группы ≤6 mm; предусмотрено экранирование землёй
 - [ ] Предусмотрены мультиплексируемые выводы DBG_UART/SWD и производственные тестовые точки
-- [ ] Номера деталей ключевых компонентов сверены с актуальным [перечнем поставщиков, одобренных SiFli][SiFli Approved Vendor List (AVL)]
+- [ ] Номера деталей ключевых компонентов сверены с перечнем поставщиков, одобренных SiFli, по ссылке [SiFli Approved Vendor List (AVL)]
 
 ## 8. Документы и справочные материалы { #8-related-documents-and-references }
 
-[SF32LB52x Datasheet (Official PDF)]: https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?
-[SF32LB52x User Manual (Official PDF)]: https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?
+[specification-pdf]: https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?
+[user-manual-pdf]: https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?
 [SF32LB52 Hardware Reference Design Package]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83%E8%AE%BE%E8%AE%A1-20250619.zip?
 [SF32LB520/3/5/7 Hardware Application Note (Source)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB520-3-5-7-HW-Application.md
 [52B/D/E/G/J Hardware Application Note (Source)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52B-E-G-J-HW-Application.md
@@ -43,8 +43,8 @@ tags:
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Даташит SF32LB52x (официальный PDF)][SF32LB52x Datasheet (Official PDF)]__
-- :fontawesome-solid-file-pdf: __[Руководство пользователя SF32LB52x (официальный PDF)][SF32LB52x User Manual (Official PDF)]__
+- :fontawesome-solid-file-pdf: __[Даташит SF32LB52x (официальный PDF, V2p4)][specification-pdf]__
+- :fontawesome-solid-file-pdf: __[Руководство пользователя SF32LB52x (официальный PDF, V0p3)][user-manual-pdf]__
 - :fontawesome-solid-file-zipper: __[Пакет эталонного аппаратного проекта SF32LB52][SF32LB52 Hardware Reference Design Package]__
 - :fontawesome-brands-github: __[Рекомендации по аппаратному применению SF32LB520/3/5/7 (источник)][SF32LB520/3/5/7 Hardware Application Note (Source)]__
 - :fontawesome-brands-github: __[Рекомендации по аппаратному применению 52B/D/E/G/J (источник)][52B/D/E/G/J Hardware Application Note (Source)]__
@@ -57,8 +57,8 @@ tags:
 Дополнительные источники:
 
 - [Краткое описание SF32LB52x](https://downloads.sifli.com/user%20manual/PB5201-SF32LB52x-Product%20Brief.pdf)
-- [Даташит SF32LB52x](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf)
-- [Справочное руководство SF32LB52x](https://downloads.sifli.com/user%20manual/UM5201-SF32LB52x-User%20Manual%20V0p8p4.pdf)
+- [Даташит SF32LB52x (V2p5p3)](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf)
+- [Справочное руководство SF32LB52x (V0p8p4)](https://downloads.sifli.com/user%20manual/UM5201-SF32LB52x-User%20Manual%20V0p8p4.pdf)
 - [Рекомендации по аппаратному применению SF32LB520/3/5/7](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB520-3-5-7-HW-Application.md)
 - [Рекомендации по аппаратному применению 52B/D/E/G/J](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52B-E-G-J-HW-Application.md)
 
@@ -69,7 +69,7 @@ tags:
 В исходных рекомендациях SiFli приведены следующие эталонные схемы, примеры разводки PCB, механические чертежи и схемы питания. Приложения сохраняют эти иллюстрации для проверки проекта; основные рекомендации по проектированию остаются в разделах 5 и 6.
 
 !!! note "Как пользоваться иллюстрациями"
-    Рассматривайте иллюстрации как эталонные схемы и примеры разводки из исходных рекомендаций. Окончательную реализацию для выбранного устройства и изделия проверяйте по правилам, таблицам, даташиту, справочному руководству, актуальному пакету эталонного проекта и AVL.
+    Рассматривайте иллюстрации как эталонные схемы и примеры разводки из исходных рекомендаций. Окончательную реализацию для выбранного устройства и изделия проверяйте по правилам, таблицам, даташиту, справочному руководству, пакету эталонного проекта, указанному в разделе 8, и AVL по ссылке.
 
 <div align="center"><em>Таблица 9-1: Содержание приложений</em></div>
 

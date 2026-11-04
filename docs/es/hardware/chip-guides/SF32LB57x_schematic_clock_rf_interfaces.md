@@ -188,7 +188,7 @@ Consideraciones y ejemplos comunes de pantalla:
 </div>
 
 !!! note "Las interfaces del controlador de pantalla no son interfaces nativas de la MCU"
-    Esta sección considera SPI/QSPI, RGB/DPI, 8080, EPD y JDI como interfaces directas de la MCU. Algunos controladores de la tabla también admiten MIPI-DSI; eso no demuestra que SF32LB57x incorpore un host DSI o pines DSI fijos. Elija una interfaz admitida por ambos dispositivos y compruebe la referencia y el diseño de referencia.
+    Esta sección considera SPI/QSPI, RGB/DPI, 8080, EPD y JDI como interfaces directas de la MCU. Algunos controladores de la tabla también admiten MIPI-DSI; eso no demuestra que SF32LB57x incorpore un host DSI o pines DSI fijos. Elija una interfaz admitida por ambos dispositivos y compruebe el modelo exacto y el diseño de referencia.
 
 <div align="center"><em>Tabla 5.5-3: Ejemplos de controladores LCD</em></div>
 
@@ -550,7 +550,7 @@ Directrices:
 
 - Confirme el ancho de la interfaz, el reloj, las señales de sincronización, las líneas de datos y la configuración del multiplexor de pines.
 - Permita que la MCU controle la alimentación, el reinicio, PWDN y el reloj de la cámara.
-- Mantenga agrupadas las pistas de datos y de reloj de la cámara, con longitudes coherentes, y aléjelas de las señales RF y analógicas.
+- Agrupe las pistas de datos y de reloj de la cámara y aléjelas de las señales RF y analógicas.
 - Proporcione una referencia de tierra continua para las rutas de cámara de alta velocidad.
 - Añada protección ESD al conector de cámara o al FPC cuando sea necesario.
 
@@ -592,13 +592,13 @@ Para cámaras DVP de 10 bits, use un cableado de 8 bits si escasean las GPIO; co
 
 #### 5.5.11. Botones y motor { #5511-buttons-and-motor }
 
-- El botón de encendido/reinicio debe utilizar `PA34`, activo en nivel alto; el pin está normalmente a nivel bajo y pasa a nivel alto al pulsar el botón. `PA34` admite un reinicio por hardware al mantener el botón pulsado durante 10 segundos. La resistencia de pull-down de 10 kΩ debe colocarse en la placa principal.
+- `PA34` admite el reinicio por pulsación prolongada y también puede reutilizarse como botón de encendido. La entrada de reinicio es activa en nivel alto: permanece normalmente a nivel bajo y pasa a nivel alto al pulsar el botón. Coloque una resistencia de pull-down de 10 kΩ en la placa principal.
 - En diseños de botones GPADC con divisor resistivo, distinga los botones por la tensión del divisor y coloque cerca del pin un condensador de filtro de 0,1 µF a tierra para mejorar la precisión del muestreo.
 - La escalera de referencia muestra resistencias de botón de 1,1 kΩ, 2,8 kΩ y 5,1 kΩ, además de un pull-down de 10 kΩ y un condensador de filtro de 100 nF. Son valores del circuito de referencia; compruebe los umbrales ADC con la alimentación y las tolerancias de resistencia elegidas.
 - Añada protección ESD para los botones externos.
 
-![Figura 5.5-4: Circuito de referencia para el botón de encendido y el botón GPADC](../../sf32-products/chips/assets/57x/SF32LB57x-PWKEY.png){ width="80%" loading="lazy" }
+![Figura 5.5-4: Circuito de referencia para el botón GPADC](../../sf32-products/chips/assets/57x/SF32LB57x-PWKEY.png){ width="80%" loading="lazy" }
 
-<div align="center"><em>Figura 5.5-4: Circuito de referencia para el botón de encendido y el botón GPADC</em></div>
+<div align="center"><em>Figura 5.5-4: Circuito de referencia para el botón GPADC</em></div>
 
 Use el circuito de referencia del motor de vibración SF32LB57x para implementar la respuesta háptica. En productos de bajo consumo, se recomienda que la alimentación del motor pueda conmutarse y que el pin PWM/de control no entre en conflicto con los requisitos de arranque, pantalla, almacenamiento o depuración.

@@ -58,3 +58,6 @@ Erfassen Sie für jeden Firmware-Build:
 - Er gibt an, ob der Absturz auch bei einem unveränderten SDK-Beispiel auftritt.
 - Er listet angeschlossene Peripherie und Stromquelle auf.
 - Er gibt an, ob der Absturz auch nach vollständigem Löschen und erneuter Programmierung des Flashs auftritt.
+
+!!! note "Automatisch generierter Inhalt"
+    Diese Seite wurde ohne ein vorhandenes Quelldokument zusammengestellt und ausgearbeitet. Prüfen Sie technische Aussagen vor ihrer Verwendung anhand der offiziellen SiFli-Dokumentation.

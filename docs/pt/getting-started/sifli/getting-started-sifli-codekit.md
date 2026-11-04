@@ -122,7 +122,7 @@ Você pode prosseguir quando:
 
 - O CodeKit reconhecer a localização do SDK.
 - A placa selecionada corresponder ao seu hardware.
-- As ações de compilação e gravação forem concluídas.
+- As ações de compilação e gravação forem concluídas com sucesso.
 - O console serial exibir a saída de `hello_world` após a reinicialização.
 
 ## Solução de problemas { #troubleshooting }

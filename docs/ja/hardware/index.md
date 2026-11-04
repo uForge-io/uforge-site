@@ -34,13 +34,13 @@ SF32デバイスを選定し、開発ボードの基準構成を検証したら�
 
 <div align="center" markdown style="max-width: 100%; overflow-x: auto;">
 
-| 選定したチップファミリー | ハードウェア設計ガイド | チェックリスト | 参照する場面 |
+| 選定したチップファミリー | ハードウェア設計ガイド | チェックリスト | 主な用途 |
 |:-------------------------|:----------------------|:---------------|:-------------|
-| SF32LB52x | [ガイド](chip-guides/SF32LB52x_hardware_design_guide.md) | [チェックリスト](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | SF32LB52xを直接実装する基板を設計するとき。 |
-| SF32LB55x | [ガイド](chip-guides/SF32LB55x_hardware_design_guide.md) | [チェックリスト](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | SF32LB55xを直接実装する基板を設計するとき。 |
-| SF32LB56x | [ガイド](chip-guides/SF32LB56x_hardware_design_guide.md) | [チェックリスト](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | SF32LB56xを直接実装する基板を設計するとき。 |
-| SF32LB57x | [ガイド](chip-guides/SF32LB57x_hardware_design_guide.md) | [回路図](chip-guides/SF32LB57x_schematic_checklist.md) / [PCBレイアウト](chip-guides/SF32LB57x_pcb_layout_checklist.md) | SF32LB57xを直接実装する基板を設計するとき。 |
-| SF32LB58x | [ガイド](chip-guides/SF32LB58x_hardware_design_guide.md) | [チェックリスト](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | SF32LB58xを直接実装する基板を設計するとき。 |
+| SF32LB52x | [ガイド](chip-guides/SF32LB52x_hardware_design_guide.md) | [チェックリスト](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | SF32LB52xを直接実装する基板の設計。 |
+| SF32LB55x | [ガイド](chip-guides/SF32LB55x_hardware_design_guide.md) | [チェックリスト](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | SF32LB55xを直接実装する基板の設計。 |
+| SF32LB56x | [ガイド](chip-guides/SF32LB56x_hardware_design_guide.md) | [チェックリスト](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | SF32LB56xを直接実装する基板の設計。 |
+| SF32LB57x | [ガイド](chip-guides/SF32LB57x_hardware_design_guide.md) | [回路図](chip-guides/SF32LB57x_schematic_checklist.md) / [PCBレイアウト](chip-guides/SF32LB57x_pcb_layout_checklist.md) | SF32LB57xを直接実装する基板の設計。 |
+| SF32LB58x | [ガイド](chip-guides/SF32LB58x_hardware_design_guide.md) | [チェックリスト](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | SF32LB58xを直接実装する基板の設計。 |
 
 </div>
 

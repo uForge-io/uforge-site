@@ -97,9 +97,16 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 - 支持通过 SDIO 扩展外部 Wi-Fi
 - 2 路集成音频 ADC
 - 2 路集成音频 DAC
-- 2 路 PDM 接口，每路最多可连接 2 个数字麦克风；PDM 接口数量不等于麦克风数量，实际可接入数量还受引脚复用和 PCB 布线限制
+- 2 路 PDM 接口；思澈科技（SiFli）的硬件应用说明记载支持 2 路 PDM 麦克风输入。实际可用通道需结合引脚复用和 PCB 布线核实。
 - 3 路 I2S 接口：I2S1 仅支持输入，I2S2 和 I2S3 支持输入与输出；均仅工作于主机模式
 - USB 2.0 High-Speed，支持主机和设备模式
+
+### 安全 { #security }
+
+- AES、HASH 和 CRC 硬件加速器；真随机数发生器（TRNG）
+- 安全启动（Secure Boot）和用于存储信任根及唯一 ID（UID）的 1,024 位 eFuse
+- 支持通过 MPI1、MPI2、MPI3 和 MPI5 对片外代码实时解密
+- 思澈科技（SiFli）产品简介列出 PSA Certified Level 1；用于具体料号和产品前，请核实证书范围及当前状态。
 
 ### 系统集成 { #system-integration }
 
@@ -128,19 +135,24 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 
 ## 系列型号 { #family-variants }
 
-思澈科技（SiFli）当前芯片型号指南列出了 3 种 SF32LB58x 订购型号，均采用 BGA256 封装，合封存储配置如下表所示。存储组合及供货状态可能变化；确认具体订购型号时，请以当前数据手册和合格供应商名录（AVL）为准。
+思澈科技（SiFli）当前芯片型号指南列出了 6 种 SF32LB58x 订购型号，均采用 BGA256 封装。指南将启动 SiP（MPI5）与 MPI1、MPI2 上的存储器分别列出：
 
-<div align="center"><em>SF32LB58x 订购型号与合封存储配置</em></div>
+<div align="center"><em>SF32LB58x 订购型号、SiP 存储配置与共同限制</em></div>
 
 <div align="center" markdown>
 
-| 料号 | 封装 | 合封存储 |
-| :--- | :--- | :--- |
-| SF32LB583VCC36 | BGA256 | 1 MB 启动 NOR Flash + MPI1、MPI2 各 8 MB OPI-PSRAM |
-| SF32LB586VDD36 | BGA256 | 1 MB 启动 NOR Flash + MPI1、MPI2 各 16 MB HPI-PSRAM |
-| SF32LB587VEE56 | BGA256 | 4 MB 启动 NOR Flash + MPI1、MPI2 各 32 MB HPI-PSRAM |
+| 订购型号 | 封装 | MPI5 启动 SiP | MPI1 SiP | MPI2 SiP |
+| :--- | :--- | :--- | :--- | :--- |
+| SF32LB580VNN36 | BGA256 | 1 MB NOR Flash | n/a | n/a |
+| SF32LB581VCN36 | BGA256 | 1 MB NOR Flash | 8 MB OPI-PSRAM | n/a |
+| SF32LB583VCC36 | BGA256 | 1 MB NOR Flash | 8 MB OPI-PSRAM | 8 MB OPI-PSRAM |
+| SF32LB585V5E56 | BGA256 | 4 MB NOR Flash | 4 MB NOR Flash | 32 MB HPI-PSRAM |
+| SF32LB586VDD36 | BGA256 | 1 MB NOR Flash | 16 MB HPI-PSRAM | 16 MB HPI-PSRAM |
+| SF32LB587VEE56 | BGA256 | 4 MB NOR Flash | 32 MB HPI-PSRAM | 32 MB HPI-PSRAM |
 
 </div>
+
+指南对这 6 种型号均列出 6.5 × 8.5 × 0.94 mm 封装、0.4 mm 间距、1.71–3.63 V 供电范围、HCPU GPIO 94 路 + LCPU GPIO 66 路，以及 −40°C 至 85°C 工作温度。型号指南未列出 I/O 电压范围（数据手册按电源域分别规定），也未声明各型号支持引脚兼容。不要仅凭共用 BGA256 封装推断型号可互换；布板前请核实实际使用的各 I/O 电源域及准确料号的引脚功能表。配置和供货状态可能变化，采购前请以最新数据手册和合格供应商名录（AVL）为准。
 
 选择具体型号时，建议优先确认以下内容：
 

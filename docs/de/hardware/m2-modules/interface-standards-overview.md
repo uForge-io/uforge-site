@@ -26,7 +26,7 @@ Dieser Abschnitt stellt die Konventionen zur Beschreibung von μForge-Modulschni
 
 ## Benennung und elektrische Kompatibilität { #what-is-stable-and-what-must-be-verified }
 
-Verwenden Sie die Benennungsregeln einheitlich in Modulbeschreibungen, Schaltplänen, Stücklistenhinweisen und Produktdokumentation. Die Namen beschreiben das vorgesehene Schnittstellenprofil, keine endgültige elektrische oder mechanische Spezifikation. Weder ein Profilname noch eine passende Steckverbinderform belegt die Austauschbarkeit von Modul und Trägerplatine.
+Verwenden Sie die Benennungsregeln einheitlich in Modulbeschreibungen, Schaltplänen, Stücklistenhinweisen und Produktdokumentation. Die Namen beschreiben das vorgesehene Schnittstellenprofil, keine endgültige elektrische oder mechanische Spezifikation. Weder die Bezeichnung `M2` noch eine passende Steckverbinderform belegt die Konformität mit der PCI-SIG-Spezifikation M.2 E-Key oder die Austauschbarkeit von Modul und Trägerplatine.
 
 Die Definition auf Pin-Ebene ist keine Zusage, dass jedes μForge-Modul oder SF32-Gehäuse jedes zugewiesene Signal, jede Schnittstelle oder jede Kombination zur gleichzeitigen Nutzung unterstützt. Prüfen Sie vor einer Designfestlegung alle folgenden Punkte anhand des genau ausgewählten Moduls, Chips, Gehäuses und Hardware-Design-Leitfadens:
 

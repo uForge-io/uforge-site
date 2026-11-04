@@ -11,7 +11,7 @@ tags:
 
 这些示例默认使用 SF32LB52-DevKit-LCD 这一类开发板，例如 `sf32lb52-lcd_n16r8`。如使用其他开发板，请在构建命令中替换开发板名称，并根据该板的支持文件确认引脚名称、外设实例和存储布局。
 
-本系列帮助你建立可靠的工程习惯：验证一个板级行为，明确成功判据，并在进入下一个外设前保留可工作的基线。即使你已熟悉嵌入式 C，只是刚接触 SF32 SDK，也建议从这里开始。
+本系列帮助你建立可靠的工程习惯：一次验证一项板级行为，并在进入下一个外设前保留可工作的基线。即使你已熟悉嵌入式 C，只是刚接触 SF32 SDK，也建议从这里开始。
 
 ## 开始前 { #before-you-start }
 
@@ -157,7 +157,7 @@ RT-Thread 的 **FinSH** Shell 通过启动日志所用的同一个 UART 提供�
 
 **起点示例：** `example/rt_device/adc/channel`
 
-运行此 RT-Thread 示例前，需启用 `BSP_USING_ADC`、`BSP_USING_ADC1` 和 `RT_USING_ADC`；否则 SDK 不会注册 `bat1`。在 SF32LB52 上，通道 7 在芯片内部连接至 VBAT，不能作为通用的外部传感器输入。请根据具体芯片和开发板选择受支持的 ADC 通道并配置引脚复用。思澈科技（SiFli）文档中的 SF32LB52 示例使用通道 0，对应 PA28。当前 SiFli-SDK 示例中，`rt_adc_read()` 返回的是按 0.1 mV 缩放的电压值，不是原始 ADC 计数；使用其他芯片或驱动版本时，请核对对应说明中的单位和换算方式。
+运行此 RT-Thread 示例前，需启用 `BSP_USING_ADC`、`BSP_USING_ADC1` 和 `RT_USING_ADC`；否则 SDK 不会注册 `bat1`。在 SF32LB52 上，通道 7 在芯片内部连接至 VBAT，不能作为通用的外部传感器输入。请根据具体芯片和开发板选择受支持的 ADC 通道并配置引脚复用。思澈科技（SiFli）文档中的 SF32LB52 示例使用通道 0，对应 PA28。当前 SiFli-SDK 示例中，`rt_adc_read()` 默认会进行 22 次平均，并返回以 0.1 mV 为单位缩放的电压值，而非原始 ADC 计数；使用其他芯片或驱动版本时，请核对平均方式、单位和换算方法。
 
 ```c
 rt_adc_device_t adc = (rt_adc_device_t)rt_device_find("bat1");

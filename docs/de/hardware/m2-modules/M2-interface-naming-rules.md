@@ -39,7 +39,7 @@ Dabei gilt:
 
 | Spezifikation | Beschreibung |
 | --- | --- |
-| **M2xM** | Multimedia: geplant für RGB-Displays, DVP-Kameras, Digitalmikrofone und erweiterte Audiofunktionen. |
+| **M2xM** | Multimedia: Künftig sind RGB-Displays, DVP-Kameras, digitale Mikrofone und erweiterte Audiofunktionen vorgesehen. |
 | **M2xA** | Analog: geplant für präzise analoge Ein-/Ausgänge und Datenerfassung. |
 | **M2xN** | Netzwerk: geplant für Ethernet, CAN und industrielle Vernetzung. |
 | **M2xH** | High-Speed: geplant für Schnittstellen mit hoher Bandbreite. |
@@ -47,7 +47,11 @@ Dabei gilt:
 
 </div>
 
-Diese Beschreibungen geben den vorgesehenen Umfang der Kategorien an, keine abschließend festgelegten elektrischen Anforderungen. Die lokal verfügbare Vorschlagsarbeitsmappe enthält Kontaktbelegungen für M2 und M2xM. Der Artikel zur Schnittstellendefinition enthält außerdem Zusammenfassungen zu M2xN und M2xA. Es wurden jedoch keine Original-Kontaktbelegungen gefunden, anhand derer sich diese Zusammenfassungen prüfen ließen; sie sind daher ungeprüft. M2xH und M2xP sind reservierte Bezeichnungen ohne zugewiesene Kontakte.
+Diese Beschreibungen geben den vorgesehenen Umfang der Kategorien an, keine abschließend festgelegten elektrischen Anforderungen.
+**Quellenstatus:**
+- **M2 / M2xM:** Der verlinkte Entwurf verweist auf Kontaktbelegungen in einer lokalen Vorschlagsarbeitsmappe. Diese Datei ist jedoch nicht in diesem Repository enthalten und hier nicht verlinkt; die Belegungen sind daher nur Vorschläge.
+- **M2xN / M2xA:** Der Entwurf fasst diese Erweiterungen zusammen, aber es wurden keine Original-Kontaktbelegungen zur Prüfung der Zusammenfassungen gefunden; sie sind ungeprüft.
+- **M2xH / M2xP:** Reservierte Namen ohne zugewiesene Kontakte.
 
 ## Moduldeklaration { #module-declaration }
 

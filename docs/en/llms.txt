@@ -6,7 +6,7 @@ Primary audience: hardware engineers, PCB designers, firmware/software engineers
 
 Only the pages listed below are published on this site. Internal working notes, process documentation, and authoring templates are excluded from this domain entirely and are not part of the public content set.
 
-Name: μForge.io and uForge.io are the same project and are used interchangeably. The “μ” (Greek mu, for “micro”) is written as the ASCII “u” (also read as “you”) wherever Greek letters are inconvenient, so μForge = uForge and μForge.io = uForge.io (domain: uForge.io).
+Name: The project name is μForge.io, with the Greek letter μ (mu, for “micro”). The site uses the ASCII domain `uforge.io` in its web address.
 
 Languages: English (the reference, at the site root) plus machine-assisted translations in Chinese (/zh/), Japanese (/ja/), Spanish (/es/), German (/de/), French (/fr/), Portuguese (/pt/), Russian (/ru/) and Korean (/ko/). A translated page has the same path as its English page under its language prefix; the language indexes are at https://uForge.io/<lang>/llms.txt.
 
@@ -203,7 +203,7 @@ Languages: English (the reference, at the site root) plus machine-assisted trans
 ## Notes for AI agents and coding assistants
 
 - All hardware design guides use numbered sections, tables, and figures (e.g. "Table 5.1-1", "Figure 5.2-3") scoped per H3 subsection; treat these numbers as stable anchors when quoting specific values.
-- Each chip/module family follows the same structure: an Introduction page (device overview, variants, packages, applications) and a Hardware Design Guide (schematic guidance, PCB layout, manufacturing checklist); several chips also have a standalone Hardware Design Checklist page.
+- Each chip/module family has an introduction (device overview, variants, packages, applications) and a hardware design guide page set (schematic guidance, PCB layout, and manufacturing checks). Full schematic and PCB checklists are part of that guide's page tree; a short PCB checklist may appear at the end of its layout page.
 - The site is published in nine languages: English (the reference, at the site root) and machine-assisted translations in Chinese (/zh/), Japanese (/ja/), Spanish (/es/), German (/de/), French (/fr/), Portuguese (/pt/), Russian (/ru/), and Korean (/ko/). Every translated page has the same path as its English page under the language prefix. The URLs listed in this file are the English pages; localized indexes are at https://uForge.io/<lang>/llms.txt (e.g. https://uForge.io/de/llms.txt). When a technical detail matters, verify it against the English page.
 - For authoritative electrical specifications, pin mappings, and component qualification beyond what's summarized here, the guides link out to SiFli's datasheets, user manuals, and the SiFli Approved Vendor List.
 - A full-text bundle of the key pages (getting started, SF32 chips, modules, dev boards, SDK basics, and learning overviews) is at https://uForge.io/llms-full.txt, with a localized copy at https://uForge.io/<lang>/llms-full.txt; fetch it when one request should cover the whole platform.

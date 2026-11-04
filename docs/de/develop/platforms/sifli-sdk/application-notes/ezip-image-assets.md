@@ -63,7 +63,7 @@ Die Bitfelder aller oben aufgeführten Pixelformate werden in Little-Endian-Reih
 
 ## PNG-Assets konvertieren { #2-convert-png-assets }
 
-Ersetzen Sie `png_filename.png` durch den Namen der Quelldatei. Die erzeugte Datei wird im Tool-Verzeichnis abgelegt, sofern der umgebende Build das Arbeitsverzeichnis nicht ändert.
+Ersetzen Sie `png_filename.png` durch den Namen der Quelldatei. Die erzeugte Datei wird im Tool-Verzeichnis abgelegt.
 
 ### PIXEL-Binärdatei { #pixel-binary }
 

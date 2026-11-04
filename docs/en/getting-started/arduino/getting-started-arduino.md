@@ -97,9 +97,7 @@ Choose **Dynamic** for the Zephyr-loader workflow. Choose **Static** when you ne
 
 ## Put the Board in Serial Download Mode { #put-the-board-in-serial-download-mode }
 
-OpenSiFli documents that first use requires the board to be in serial download mode. Use the boot/reset sequence for the SF32LB52 DevKit LCD, then upload from Arduino IDE or CLI.
-
-The upload tool is `sftool`.
+OpenSiFli requires the board to be in serial download mode for first use. On the SF32LB52 DevKit LCD, enable **BOOT** in the download tool, then power or reset the board; see the board's [Download and Debug instructions](../../sf32-products/devkits/SF32LB52-DevKit-LCD.md#download-and-debug). Once the board is in download mode, upload from Arduino IDE or CLI with `sftool`.
 
 ## Upload a Serial Smoke Test { #upload-a-serial-smoke-test }
 

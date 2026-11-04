@@ -13,7 +13,7 @@ tags:
 # SF32LB57x Hardware Design Guide — Schematic Checklist { #sf32lb57x-hardware-design-guide-schematic-checklist }
 
 !!! note "Part of the SF32LB57x Hardware Design Guide"
-    This page covers Section 5.8, the item-by-item schematic checklist, transcribed from SiFli's official design self-check tables. Return to [Minimum System & Power](SF32LB57x_schematic_system_power.md), the first of the three Schematic Design Guidelines pages.
+    This page presents the schematic checks from Sections 4.1–4.8 of SiFli's official SF32LB57x hardware-application guide. PCB/layout checks from those same tables are in the [PCB Layout Checklist](SF32LB57x_pcb_layout_checklist.md). The [official OpenSiFli source Markdown](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/SF32LB57x-HW-Application.md) contains the complete self-check tables; row coverage, applicability, and stated values across both checklist pages were checked against it. The source conflicts described below remain unresolved. The checklist tables in the Markdown do not encode worksheet-only review highlighting, so Excel cell colors were not independently checked. Confirm the conflicts for the exact orderable part with SiFli before design sign-off. Return to [Minimum System & Power](SF32LB57x_schematic_system_power.md), the first of the three Schematic Design Guidelines pages.
 
 ## 5.8. Schematic Checklist { #58-schematic-checklist }
 

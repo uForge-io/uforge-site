@@ -19,7 +19,7 @@ SDK 将蓝牙（Bluetooth）射频验证分为信令、非信令和单项射频�
 | SF32LB57x 的测试工具支持范围 | [射频测试指南](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/rf_test_guide.html)列出了 SF32LB57x 的 UART 引脚，但 [SiFli_RfTool 使用手册](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/SiFli_RfTool/SiFli_RfTool_UM.html)的平台选择列表中没有 57x。这里只能据此确认引脚映射；使用前应核实目标 SDK 版本支持的测试路径。 |
 | 拓扑截图和 HCI 命令表 | 思澈科技（SiFli）SF32LB52x 射频测试指南中的示例；实现时应以目标系列的命令和引脚文档为准。 |
 | `CONFIG_BT_RF_TEST` 配置 | 适用于文档所述的非 55x 路径；SF32LB55x 的 `bt_rftest` 不使用该符号。 |
-| UART 引脚、数据包取值和命令语法 | 取决于目标系列和 SDK 版本；应检查工程配置并运行 `bt_rftest help`。 |
+| UART 引脚、数据包取值和命令行为 | 取决于目标系列和 SDK 版本；应检查工程配置及目标 SDK 的实现。 |
 
 </div>
 
@@ -33,16 +33,16 @@ SDK 将蓝牙（Bluetooth）射频验证分为信令、非信令和单项射频�
 
 | 模式 | 用途 | SDK 入口 | 控制路径 |
 |---|---|---|---|
-| BT 信令 | BQB/QDID 资格测试和符合协议的性能测试 | `bt_cm dut`、`gap_enb_dut_mode_req()` | 综测仪空口和 LMP 测试控制 |
+| BT 信令（BR/EDR） | BQB/QDID 资格测试和符合协议的性能测试 | `bt_cm dut`、`gap_enb_dut_mode_req()` | 综测仪空口和 LMP 测试控制 |
 | BT 非信令 | 研发射频调试和产线筛查 | `bt_rftest`、`bt_enter_no_signal_dut_mode()` | 本地厂商专用 HCI |
-| BLE 非信令（SIG DTM） | BLE 射频筛查和 SIG DTM 项目 | `bt_rftest bletx/blerx`、`ble_enter_dut_mode()` | 本地 HCI，或由 `bt_cm uart_dut` 透传的标准 HCI |
+| BLE 非信令（SIG DTM） | BLE 射频筛查和 SIG DTM 认证测试项 | `bt_rftest bletx/blerx`、`ble_enter_dut_mode()` | 本地 HCI，或由 `bt_cm uart_dut` 透传的标准 HCI |
 | 单项射频测试 | 板级射频调试和 FCC/CE 预测试 | `bt_cm uart_dut` + `SiFli_RfTool` | PC 工具逐项发送底层操作 |
 
 </div>
 
-信令测试建立真实蓝牙链路，是资格测试路径；非信令测试直接让射频保持在固定信道、功率和收发状态，是研发/产线常用路径；单项射频测试通过 PC 工具精确控制载波或调制，并配合频谱仪、功率计。BT 非信令测试和单项射频测试是思澈科技（SiFli）定义的厂商专用流程，不属于 BQB。
+对于 BR/EDR，信令测试会建立真实的蓝牙连接，是 BQB 射频认证路径。BLE BQB 射频测试使用 SIG DTM，本页将其归在 BLE 非信令测试中。BT 非信令和单项射频测试属于思澈科技（SiFli）的厂商专用流程，不属于 BQB。非信令测试会让射频在固定信道和设定功率下持续发射或接收，常用于研发和产线筛查。单项射频测试通过 PC 工具精确设置载波或调制，并使用频谱仪或功率计进行测量。
 
-下列拓扑图取自思澈科技（SiFli）的 SF32LB52x 射频测试指南，展示了 PC、被测设备（DUT）、综测仪以及 UART/HCI/RF 连接之间的差异；其他系列的默认串口和管脚仍应以对应系列的资料为准。
+下列拓扑图取自思澈科技（SiFli）的 SF32LB52x 射频测试指南，展示了 PC、被测设备（DUT）、综测仪以及 UART/HCI/RF 连接之间的差异；其他系列的默认 UART 和引脚映射请查阅对应系列的射频测试指南。
 
 ![BT 信令测试拓扑](../../../../assets/develop/app-notes/rf/bt_signaling_test.png){ loading="lazy" }
 <div align="center"><em>图：思澈科技（SiFli）指南中的 SF32LB52x 示例——BT 信令：PC 配置综测仪，DUT 与综测仪通过 RF 建立链路。</em></div>
@@ -50,7 +50,7 @@ SDK 将蓝牙（Bluetooth）射频验证分为信令、非信令和单项射频�
 ![BT 非信令测试拓扑](../../../../assets/develop/app-notes/rf/non_signaling_test.png){ loading="lazy" }
 <div align="center"><em>图：思澈科技（SiFli）指南中的 SF32LB52x 示例——BT 非信令：PC 通过串口/HCI 直接控制 DUT 的 RF 状态。</em></div>
 
-![BLE 信令测试拓扑](../../../../assets/develop/app-notes/rf/ble_signaling_test.png){ loading="lazy" }
+![BLE DTM 测试拓扑](../../../../assets/develop/app-notes/rf/ble_signaling_test.png){ loading="lazy" }
 <div align="center"><em>图：思澈科技（SiFli）指南中的 SF32LB52x 示例——BLE DTM：UART/HCI 控制通道和 RF 测量通道同时连接到综测仪。</em></div>
 
 ## 选择固件并配置工程 { #choose-firmware-and-configure-the-project }
@@ -67,10 +67,10 @@ CONFIG_BT_RF_TEST=y
 
 SF32LB55x 的 `bt_rftest` 路径不使用 `CONFIG_BT_RF_TEST`；`CONFIG_BT_FINSH` 只用于跟踪，不是测试命令的必选项。控制路径使用 SDK 自带 IPC UART 时，可按开发板配置 `CONFIG_IPC_USE_OWN_DEVICE=y` 和 `CONFIG_IPC_OWN_DEVICE_NAME="uart2"`。可参考 `example/bt/spp/` 与 `example/bt/HCI_over_uart/`。
 
-## BT 信令测试 { #bt-signaling-test }
+## BR/EDR 信令与 BLE DTM 设置 { #bt-signaling-test }
 
 1. 从 DUT 引出 `VBAT`、`GND` 以及 UART1 TX/RX。UART1 默认引脚因封装而异，始终以工程中的引脚配置为准。
-2. BLE 信令：将 UART1 接到 PC，发送 `bt_cm uart_dut`，确认收到 `04 0E 04 XX 03 0C 00`，再把 UART 切换到综测仪。
+2. BLE DTM：将 UART1 接到 PC，发送 `bt_cm uart_dut`，确认收到 `04 0E 04 XX 03 0C 00`，再把 UART 切换到综测仪。
 3. BT 信令：保持 DUT 唤醒，发送 `bt_cm dut`，确认 `Write scan enable success`，并将 RF 同轴线接到综测仪。
 4. 综测仪选择 Bluetooth Signaling。BLE 的 EUT Control 使用 USB 转 RS232、波特率 1,000,000；BT 选择 `None (EUT Control off)`，通过空口搜索 DUT。
 5. TX 使用 `Bluetooth 1 Multi Eval.`，RX 使用 `Bluetooth 1 RX Meas.`。经典蓝牙（Classic BT）使用 BER，BLE 使用 PER；逐步降低综测仪 TX 电平以确定灵敏度。
@@ -81,13 +81,15 @@ SF32LB55x 的 `bt_rftest` 路径不使用 `CONFIG_BT_RF_TEST`；`CONFIG_BT_FINSH
 
 ```text
 bt_rftest enter
-bt_rftest bttx <channel> <packet_type> <power> <length>
-bt_rftest btrx <channel> <packet_type> <power>
+bt_rftest bttx
+bt_rftest btrx
 bt_rftest btstop
 bt_rftest exit
 ```
 
-具体参数顺序和数据包取值随 SDK 版本变化，应以目标 SDK 中 `bt_rftest help` 的输出为准。RX 收包统计可用于评估接收情况；TX 命令显示的包数不代表接收端收到的数据包数。BLE DTM 可使用 `bt_rftest bletx`/`blerx`，或标准 HCI `LE_Transmitter_Test`、`LE_Receiver_Test v2`、`LE_Test_End`。BLE 信道为 0–39，PHY 为 1M/2M/Coded；经典蓝牙信道为 0–78。对于同时支持 BT 和 BLE 的双模芯片型号，两者共用射频硬件，应分开测试。
+文档所述 SDK 中，`bt_rftest bttx` 和 `bt_rftest btrx` 使用固定测试参数，不接受命令参数。若要修改参数，应检查目标版本 `middleware/bluetooth/service/common/bf0_bt_common.c` 中的 `bt_rftest()` 实现，并按需定义带参数的子命令。具体实现和可用取值可能随版本变化。
+
+RX 收包统计有助于评估接收情况，但 TX 发包计数不能反映 DUT 收到的数据包数。BLE DTM 可使用 `bt_rftest bletx`/`blerx`，或标准 HCI `LE_Transmitter_Test`、`LE_Receiver_Test v2`、`LE_Test_End`。BLE 信道为 0–39，PHY 为 1M/2M/Coded；经典蓝牙信道为 0–78。对于同时支持 BT 和 BLE 的双模芯片型号，两者共用射频硬件，应分开测试。
 
 ## 使用 SiFli_RfTool 进行单项射频测试 { #single-item-testing-with-sifli_rftool }
 
@@ -119,4 +121,4 @@ bt_rftest exit
 ![SF32LB52x HCI 射频测试命令表](../../../../assets/develop/app-notes/rf/hci_cmd.png){ loading="lazy" }
 <div align="center"><em>图：思澈科技（SiFli）指南中的 SF32LB52x 示例——HCI 命令、返回值和 RF 测试项对照表。</em></div>
 
-每次结果都记录芯片系列、SDK 版本、固件标识、UART 引脚、RF 路径、线缆损耗、仪器型号和配置、信道、PHY/数据包类型、功率设置、RX 计数、RSSI、BER/PER 以及板卡版本。详细的原始指南见：[SF32LB52x](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/rf_test_guide.html)、[SF32LB55x（其 UART 表也列出了 SF32LB57x）](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/rf_test_guide.html)、[SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/rf_test_guide.html) 和 [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/rf_test_guide.html)。
+每次测试都应记录芯片系列、SDK 修订版、固件标识、板卡修订版、UART 引脚、RF 路径和线缆损耗。还应记录仪器型号和配置、信道、PHY/数据包类型、功率设置、RX 计数、RSSI 和 BER/PER。详细指南请参阅：[SF32LB52x](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/rf_test_guide.html)、[SF32LB55x（其 UART 表也列出了 SF32LB57x）](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/rf_test_guide.html)、[SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/rf_test_guide.html) 和 [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/rf_test_guide.html)。

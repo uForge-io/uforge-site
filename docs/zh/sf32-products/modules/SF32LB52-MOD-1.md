@@ -21,7 +21,7 @@ DS5203 V0.3 说明模组采用板载 PCB 天线，也说明另有型号支持通
 
 ## 应用场景 { #applications }
 
-**SF32LB52-MOD-1 适用于**需要蓝牙、图形与音频能力，同时希望降低 RF 与布局风险的产品，包括：
+**SF32LB52-MOD-1 推荐用于**需要蓝牙、图形与音频能力，同时希望降低 RF 与布局风险的产品，包括：
 
 - 智能手表、运动手环和可穿戴医疗设备
 - 蓝牙传感器中枢与联网配件
@@ -123,8 +123,8 @@ DS5203 V0.3 说明模组采用板载 PCB 天线，也说明另有型号支持通
 
 - Arm Cortex-M33 STAR-MC1 应用核心（HCPU），最高 240 MHz，最高 370 DMIPS / 984 EEMBC CoreMark
 - 32 KB 指令缓存和 16 KB 数据缓存
-- 512 KB 保留 SRAM
-- 专用超低功耗 Arm Cortex-M33 STAR-MC1 核心（LCPU），最高 24 MHz，带 64 KB 保留 SRAM
+- 512 KB 保持型 SRAM（retention SRAM）
+- 专用超低功耗 Arm Cortex-M33 STAR-MC1 核心（LCPU），最高 24 MHz，带 64 KB 保持型 SRAM
 - 两个核心均带单精度 FPU 与 MPU
 - 部分模组 SKU 所采用的芯片提供合封 OPI-PSRAM
 

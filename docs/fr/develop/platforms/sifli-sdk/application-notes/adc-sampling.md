@@ -26,13 +26,13 @@ SF32LB52x possède un circuit dédié de mesure de batterie sur `GPADC_CH7` (`BA
 | Famille | Canaux GPADC | Résolution | Précision typique | Tension maximale sur une entrée GPADC normale |
 |:-------|:--------------|:-----------|:-----------------|:--------------------------------------------|
 | SF32LB55x | 8 | 10 bits | 3–4 mV | 1,1 V (X1) ; 3,3 V (X3) |
-| SF32LB52x | 8 | 12 bits | 1–2 mV | 3,3 V |
+| SF32LB52x | 8 | 12 bits | 1–2 mV | 1,1 V (A0) ; 3,3 V (RPO) |
 | SF32LB56x / 58x | 8 | 12 bits | 1–2 mV | 3,3 V |
 | SF32LB57x | 12 | 12 bits | 1–2 mV | 3,3 V |
 
 </div>
 
-Les tensions maximales indiquées ci-dessus s'appliquent aux entrées GPADC normales ; les canaux dédiés à la batterie ont leur propre circuit et leurs propres limites. L'exemple SF32LB55x utilise un diviseur de 1 MΩ / 220 kΩ avec un temps d'établissement RC de 157 ms. Le guide récapitulatif SF32LB56x indique 470 kΩ / 1000 kΩ et 200 ms pour SF32LB52x, SF32LB56x et SF32LB58x ; il ne formule pas cette recommandation pour SF32LB57x. Pour le 57x, suivez le circuit de détection de batterie et les limites documentés pour la référence exacte, sans extrapoler ces valeurs de résistance ni ce temps d'établissement. Ces recommandations concernent les réseaux diviseurs externes. En particulier, le canal dédié `GPADC_CH7` du SF32LB52x comporte déjà un diviseur interne. N'ajoutez pas de diviseur externe, sauf si le schéma de la carte cible le prévoit expressément. La tolérance des résistances influe sur la précision ; étalonnez séparément le diviseur externe en production lorsque la conception en utilise un.
+Les tensions maximales indiquées ci-dessus s'appliquent aux entrées GPADC normales ; les canaux dédiés à la batterie ont leur propre circuit et leurs propres limites. La limite d'entrée du SF32LB52x dépend de la révision du composant : le guide ADC dédié décrit une plage de mesure de 0 à 1,0 V, tandis que l'API HAL actuelle définit un maximum de 1,1 V pour A0 et de 3,3 V pour RPO. La FAQ OpenSiFli et le tableau ADC récapitulatif indiquent 3,3 V pour la famille sans distinguer ces variantes. Avant de connecter une entrée, vérifiez la révision exacte et la limite HAL du SDK cible ; ne considérez pas 3,3 V comme universel pour tous les 52x. Pour SF32LB55x, ne confondez pas non plus plage et révision : la FAQ OpenSiFli donne 1,1 V / 3,3 V pour X1 / X3, tandis que l'API HAL actuelle définit 1,1 V / 3,3 V comme maxima pour A0 / RPO. Les sources n'indiquent pas que ces deux paires de termes sont équivalentes. Vérifiez le SDK, la révision du composant et la plage à l'exécution avant d'appliquer une tension. L'exemple SF32LB55x utilise un diviseur de 1 MΩ / 220 kΩ avec un temps d'établissement RC de 157 ms. Le guide récapitulatif SF32LB56x indique 470 kΩ / 1000 kΩ et 200 ms pour SF32LB52x, SF32LB56x et SF32LB58x ; le tableau récapitulatif actuel du guide SF32LB58x inclut aussi SF32LB57x dans cette recommandation de diviseur externe. Cette recommandation concerne les réseaux diviseurs externes et ne remplace pas les limites propres au canal batterie dédié du SF32LB57x. Vérifiez le chemin réel sur la carte cible et ne l'appliquez pas directement au canal dédié `VBAT` / `VBATS`. En particulier, le canal dédié `GPADC_CH7` du SF32LB52x comporte déjà un diviseur interne. N'ajoutez pas de diviseur externe, sauf si le schéma de la carte cible le prévoit expressément. La tolérance des résistances influe sur la précision ; étalonnez séparément le diviseur externe en production lorsque la conception en utilise un.
 
 <div align="center"><em>Tableau : Chemins de détection de la tension de batterie par famille SF32</em></div>
 
@@ -166,7 +166,7 @@ L'implémentation source définit `ADC_RATIO_ACCURATE` à 1000, avec des valeurs
 
 ### Plages d'étalonnage SF32LB55x { #sf32lb55x-calibration-ranges }
 
-La FAQ OpenSiFli décrit plus en détail le processus d'étalonnage du SF32LB55x. Lors de l'exécution de `sifli_adc_init`, la configuration d'usine stockée en Flash et identifiée par `FACTORY_CFG_ID_ADC` fournit les mesures d'étalonnage enregistrées. `sifli_adc_calibration` en déduit l'`offset` et le `ratio` linéaires ; les échantillons suivants utilisent le calcul `sifli_adc_get_mv` correspondant à la plage sélectionnée.
+La FAQ OpenSiFli décrit plus en détail le processus d'étalonnage du SF32LB55x. Lors de l'exécution de `sifli_adc_init`, la configuration d'usine stockée en Flash et identifiée par `FACTORY_CFG_ID_ADC` fournit les mesures d'étalonnage enregistrées. `sifli_adc_calibration` en déduit l'`offset` et le `ratio` linéaires ; les échantillons suivants utilisent le calcul `sifli_adc_get_mv` correspondant à la plage sélectionnée. La FAQ cite aussi l'absence d'étalonnage du 55x comme cause possible de mesures inexactes ; vérifiez que l'initialisation du SDK cible lit et utilise les paramètres d'étalonnage d'usine.
 
 Deux plages d'étalonnage sont documentées :
 

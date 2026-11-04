@@ -93,6 +93,8 @@ tags:
     * 카메라 인터페이스(DVP 및 SPI)
     * 센서 퓨전 및 생체 인식 알고리즘
 
+    SiFli [SF32LB57x 하드웨어 설계 가이드](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html)에는 신경망 가속기가 통합된 것으로 기재되어 있습니다. 그러나 [SiFli-SDK v2.5.1 NNACC 가이드](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/docs/source/en/hal/nnacc.md)는 57x의 드라이버 또는 연산자 지원을 확인해 주지 않습니다. 이 가속기를 전제로 설계하기 전에 정확한 부품 번호의 소프트웨어 지원 경로를 확인하십시오.
+
     이러한 기능은 소비 전력과 클라우드 의존도를 최소화하면서 디바이스에서 지연 시간이 짧은 AI 추론을 가능하게 합니다.
 
 5. **고밀도 System-in-Package(SiP) 메모리**
@@ -110,7 +112,7 @@ tags:
 
 <div align="center"><em>SF32 마이크로컨트롤러 비교</em></div>
 
-아래 값은 제품군 수준의 기능을 요약한 것으로, 모든 SKU에서 보장되는 것은 아닙니다. 인터페이스 지원 여부와 리소스 개수는 정확한 부품 번호, 패키지 또는 구성에 따라 달라질 수 있으므로 선택한 부품의 데이터시트를 확인하십시오. 제품군별 최대 디스플레이 해상도와 패널 인터페이스는 [디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)에서 확인하십시오.
+아래 값은 제품군 수준의 기능을 요약한 것으로, 모든 SKU에서 보장되는 것은 아닙니다. 인터페이스 지원 여부와 리소스 개수는 정확한 부품 번호, 패키지 또는 구성에 따라 달라질 수 있으므로 선택한 부품의 데이터시트를 확인하십시오. 표의 디스플레이 해상도와 패널 인터페이스 값은 현재 [디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)를 따릅니다.
 
 <div align="center" markdown>
 
@@ -118,12 +120,12 @@ tags:
 |----------|----------|----------|----------|----------|----------|
 | 제품 포지션 | 엔트리급 | BLE 전용 주류형 | 고급형 | 컴퓨팅 성능 강화형 | 플래그십 |
 | 애플리케이션 CPU | Cortex-M33 @240 MHz | Cortex-M33 @240 MHz | Cortex-M33 @240 MHz | 2× Cortex-M33 @240 MHz | 2× Cortex-M33 @240 MHz |
-| 저전력 CPU | Cortex-M33 @24/48 MHz, 전용 Bluetooth 컨트롤러 | Cortex-M33 @48 MHz, 사용자 프로그래밍 가능 | Cortex-M33 @48/96 MHz, 사용자 프로그래밍 가능 | Cortex-M33 @24 MHz, 전용 Bluetooth 컨트롤러 | Cortex-M33 @48/96 MHz, 사용자 프로그래밍 가능 |
+| 저전력 CPU | Cortex-M33 최대 24 MHz*, 전용 Bluetooth 컨트롤러 | Cortex-M33 @48 MHz, 사용자 프로그래밍 가능 | Cortex-M33, 최대 96 MHz, 사용자 프로그래밍 가능 | Cortex-M33 @24 MHz, 전용 Bluetooth 컨트롤러 | Cortex-M33 @48/96 MHz, 사용자 프로그래밍 가능 |
 | 내부 SRAM | 576 KB | 1,312 KB | 960 KB | 592 KB | 3.7 MB |
 | Bluetooth | BT Classic + BLE | BLE | BT Classic + BLE | BT Classic + BLE | BT Classic + BLE |
 | 그래픽 가속기 | 2.5D<br>ePicasso 2.0 Lite | 2.5D<br>ePicasso 1.0 | 2.5D<br>ePicasso 2.0 | 2.5D<br>ePicasso 3.0 + eZip 3.0 | 2.5D + 벡터 그래픽<br>ePicasso 2.0 + Vivante GCNanoUltraV |
 | 디스플레이 지원 | SPI / DSPI / QSPI / 8080 / EPD / JDI | SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI |
-| 최대 디스플레이 해상도 | 512 × 512, RGB888 | 512 × 512, RGB888 | BGA: 1024 × 600, RGB888<br>QFN: 512 × 512, RGB888 | 1024 × 600, RGB888 | 1280 × 800, RGB565<br>1280 × 720, RGB888 |
+| 디스플레이 해상도(현재 인터페이스 매트릭스) | 512 × 512, RGB888 | 512 × 512, RGB888 | BGA: 1024 × 600, RGB888<br>QFN: 512 × 512, RGB888 | 1024 × 600, RGB888 | 1280 × 800, RGB565<br>1280 × 720, RGB888 |
 | 오디오 ADC | 1개 | 해당 없음 | 1개 | 2개 | 2개 |
 | 오디오 DAC | 1개 | 해당 없음 | 1개 | 1개 | 2개 |
 | PDM 오디오 인터페이스 | 1개 | 1~2개* | 2개 | 2개 | 2개 |
@@ -135,15 +137,23 @@ tags:
 | GPIO 수 | 44 / 45 | 49 / 95 / 113* | 44 / 120 | 46 / 47 / 58; BGA112는 최대 6개의 추가 I/O* | 154 |
 | 패키지 종류 | QFN68 | QFN68 / BGA145 / BGA169 | QFN68 / BGA175 | QFN68 / QFN80 / BGA112 | BGA256 |
 | 패키지 크기 (L × W) | 7 × 7 mm | 7 × 7 mm | QFN: 7 × 7 mm<br>BGA: 6.5 × 6.1 mm | QFN68: 7 × 7 mm<br> QFN80: 8 × 8 mm<br>BGA: 5.4 × 4.4 mm | 8.5 × 6.5 mm |
-| 전원 공급 전압 | 3.2–4.7 V (520/3/5/7)<br>2.97–3.63 V (52B/E/G/J)<br>1.8 V (52D) | 1.71–3.63 V | 1.71–3.63 V | 3.0–4.7 V<br>2.97–3.63 V | 1.71–3.63 V |
+| 전원 공급 전압 | 3.2–4.7 V (520/3/5/7)<br>2.97–3.63 V (52B/E/G/J)<br>1.8 V (52D) | 1.71–3.63 V | 1.71–3.63 V | 배터리 구동 부품: 3.0–4.7 V(데이터시트); 하드웨어 설계 가이드: 3.45–4.7 V<br>외부 레귤레이터 사용 부품: 2.97–3.63 V | 1.71–3.63 V |
 
 </div>
+
+**SF32LB52x LCPU 주파수 참고:** SiFli의 [DS5201 V2.5.3 데이터시트(중국어)](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p5p3.pdf)는 LCPU 최대 주파수를 24 MHz로 제시합니다. 현재 [SF32LB52x 저전력 측정 보고서](https://docs.sifli.com/projects/rpt5202_sf32lb52x-low-power-measurement-report/latest/en/brief_introduction.html)와 [SDK 저전력 가이드](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html)는 48 MHz로 제시하지만, 차이를 설명할 SKU, 동작 모드 또는 구성 조건은 명시하지 않습니다. 표는 데이터시트 값을 따르며, `24/48 MHz`를 선택 가능한 범위나 제품 변형별 차이로 해석해서는 안 됩니다. 정확한 디바이스와 SDK에서 허용되는 LCPU 주파수를 SiFli에 확인하십시오.
+
+**SF32LB56x LCPU 및 SRAM 참고:** LCPU 클럭 상한은 96 MHz이며, 실제 동작 클럭과 애플리케이션 작업 지원 여부는 정확한 디바이스와 지원되는 SDK 구성에 따라 달라집니다. 이 상한을 기본 클럭으로 간주하지 마십시오. 총 960 KB SRAM은 HCPU SRAM 800 KB(보존 SRAM 128 KB 포함)와 LCPU 보존 SRAM 160 KB로 구성됩니다. 이는 코어별 메모리 영역이며 하나의 연속된 메모리 공간이 아닙니다. 대상 SKU와 SDK 메모리 맵을 기준으로 메모리를 산정하십시오. 자세한 내용은 [SF32LB56x 제품 페이지](../chips/SF32LB56x.md)를 참조하십시오.
+
+**SF32LB57x 전원 범위 참고:** 표의 배터리 구동 부품 3.0–4.7 V 범위는 [배터리 구동 부품 데이터시트](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/DS5701-SF32LB57x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf)에 근거합니다. [하드웨어 설계 가이드](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html)는 QFN68, QFN80, BGA112에 대해 3.45–4.7 V를 기재하므로 두 출처의 범위가 일치하지 않습니다. 배터리 구동 부품 데이터시트에는 전원 인가 전압 3.5 V ±10%도 기재되어 있습니다. 정확한 부품 번호의 데이터시트에서 해당 입력 핀과 제한값을 확인하십시오. 표의 2.97–3.63 V는 외부 레귤레이터 사용 부품에 적용됩니다.
+
+**SF32LB57x 디스플레이 해상도 참고:** SiFli [하드웨어 설계 가이드](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html)에는 디스플레이 해상도 한계가 1024 × 1024로 기재되어 있습니다. SiFli [LCD FAQ](https://docs.sifli.com/projects/solution/7.FAQ/lcd/index.html)는 일반적이거나 검증된 RGB/DPI 설계의 예로 1024 × 600과 720 × 720을 들고 있으며, 현재 μForge 인터페이스 매트릭스에는 1024 × 600 RGB888이 기재되어 있습니다. 이는 서로 다른 근거 유형이며, 서로 대체할 수 있는 보장값이 아닙니다. 정확한 부품과 패키지, 인터페이스, 패널 타이밍, 주사율, 핀 멀티플렉싱, 프레임버퍼/PSRAM 대역폭을 확인하십시오.
 
 **SF32LB55x 변형 참고:** 오디오 인터페이스 개수는 주문 코드에 따라 달라집니다. SF32LB551/553/555 변형은 PDM과 I²S 인터페이스가 각각 1개이고, SF32LB557VD3A6은 각각 2개입니다. 최신 [SF32LB55x 데이터시트(V1.7.2)](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf)의 패키지 요약은 BGA169의 GPIO를 119개(HCPU 71개 + LCPU 48개)로 기재하지만, 같은 데이터시트의 상세 제품 시리즈 표는 SF32LB557에 대해 HCPU 71개 + LCPU 42개 = 113개로 기재합니다. 현재 [SiFli Chip Model Guide](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)도 SF32LB557VD3A6에 대해 71 + 42 = 113으로 기재합니다. SiFli는 데이터시트 내의 이 불일치를 설명하지 않으며, 이 비교는 부품별 GPIO 113개 수치를 사용합니다. 핀을 배정하기 전에 정확한 SKU를 해당 데이터시트와 핀 표에서 확인하십시오. 각 PDM 인터페이스에는 디지털 마이크를 최대 2개 연결할 수 있으며, 인터페이스 개수가 곧 마이크 개수는 아닙니다.
 
 **SF32LB55x 인패키지 NOR 참고:** 제품군 최대 8 MB에는 별도로 문서화된 SS6600A8 구성이 포함됩니다. 이는 4 MB QSPI-NOR 디바이스 2개를 하나의 8 MB OSPI-NOR 디바이스로 구성한 것입니다. SF32LB55x에 나열된 SF32 접두사 주문 코드는 최대 4 MB의 인패키지 NOR 플래시를 갖추고 있습니다. 정확한 모델을 확인하십시오.
 
-**SF32LB57x BGA112 참고:** 이 참고는 BGA112에만 적용됩니다. SF32LB57x에는 내부 MPI1, MPI2, MPI3가 있으며, 부품 번호에서 이들의 위치는 [SF32 명명 규칙](SF32_namingrule.md)에 설명되어 있습니다. 다음 코패키지 메모리 구성 중 어느 경우에든 MPI2 및 MPI3 핀은 외부에서 접근할 수 없어 GPIO는 58개로 고정됩니다. (1) 내부 MPI1과 MPI2에 각각 PSRAM 1개; (2) 내부 MPI2에 256 Mb PSRAM 1개; (3) 내부 MPI3에 NOR 플래시 1개. `SF32LB57GVD776`은 (3)에 해당합니다. 끝의 `776` 코드에서 두 번째 `7`은 MPI3에 내부 디바이스가 있음을 나타내므로 사용할 수 있는 GPIO는 58개뿐입니다. 다른 BGA112 구성에서는 패키지의 추가 I/O 6개를 MPI3 용도로 사용하거나 풀업 또는 풀다운으로 구성한 GP 정적 출력으로 사용할 수 있으며, 제한 없이 사용할 수 있는 GPIO는 아닙니다. 예를 들어 `SF32LB57ZVN7N6`의 `58 + 6` 표기는 사용 가능한 GPIO 58개와 MPI3 또는 정적 출력에 사용할 수 있는 핀 6개를 의미합니다. QFN68과 QFN80은 이 BGA112 제약의 대상이 아니며, 명시된 GPIO 수만 제공하고 추가 MPI3 또는 정적 출력 용도는 없습니다. 정확한 SKU는 [SF32LB57x 제품 페이지](../chips/SF32LB57x.md)와 해당 데이터시트를 참조하십시오.
+**SF32LB57x BGA112 참고:** 이 참고는 BGA112에만 적용됩니다. SF32LB57x에는 내부 MPI1, MPI2, MPI3가 있으며, 부품 번호에서 이들의 위치는 [SF32 명명 규칙](SF32_namingrule.md)에 설명되어 있습니다. 다음 두 SiP 메모리 구성 중 하나에서는 MPI2 및 MPI3 핀을 외부에서 사용할 수 없어 GPIO가 58개로 고정됩니다. (1) MPI2에 PSRAM이 있으며, 단독으로 사용하거나 MPI1의 PSRAM과 함께 사용합니다. 또는 (2) MPI3에 NOR 플래시가 있습니다. `SF32LB57GVD776`은 조건 (2)에 해당합니다. 끝의 `776` 코드에서 두 번째 `7`은 MPI3에 내부 디바이스가 있음을 나타내므로 사용할 수 있는 GPIO는 58개뿐입니다. 다른 BGA112 구성에서는 패키지의 추가 I/O 6개를 MPI3 용도로 사용하거나 풀업 또는 풀다운으로 구성한 GP 정적 출력으로 사용할 수 있으며, 제한 없이 사용할 수 있는 GPIO는 아닙니다. 예를 들어 `SF32LB57ZVN7N6`의 `58 + 6` 표기는 사용 가능한 GPIO 58개와 MPI3 또는 정적 출력에 사용할 수 있는 핀 6개를 의미합니다. QFN68과 QFN80은 이 BGA112 제약의 대상이 아니며, 명시된 GPIO 수만 제공하고 추가 MPI3 또는 정적 출력 용도는 없습니다. 정확한 SKU는 [SF32LB57x 제품 페이지](../chips/SF32LB57x.md)와 해당 데이터시트를 참조하십시오.
 
 **SF32LB58x GPIO 수 정정:** [DS5801 V1.8.3 데이터시트](https://downloads.sifli.com/user%20manual/DS5801-SF32LB58x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p8p3.pdf)와 SiFli의 제품군 비교는 총 GPIO를 154개(HPSYS: 94개, LPSYS: 60개)로 명시합니다. 별도의 [Chip Model Guide](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)는 HCPU: 94개, LCPU: 66개로 기재하는데, 합계가 160개로 데이터시트 총계와 충돌합니다. 이 비교는 데이터시트를 따릅니다. 핀을 배정하기 전에 정확한 SKU의 패키지 핀 표에서 사용 가능한 핀을 확인하십시오.
 
@@ -171,7 +181,7 @@ SF32LB5xx 제품군은 비용에 최적화된 Bluetooth 제품부터 고급 그�
 | SF32LB52x  | • 듀얼 모드 Bluetooth(BT/BLE)<br> • 통합 오디오 ADC 및 DAC<br> • 통합 Li-ion 배터리 충전<br> • 최대 45개 GPIO<br> • 최대 512 × 512 디스플레이 해상도<br> • 소형이며 비용 효율적인 솔루션<br> | • 보급형 스마트워치 및 피트니스 밴드<br> • Bluetooth 모듈 및 무선 어댑터<br> • Bluetooth 오디오 액세서리<br> • 스마트 센서 및 웨어러블 디바이스<br> • 전자 가격표 및 스마트 배지<br> • 휴대용 라벨 프린터<br> • eBike 및 eScooter 디스플레이<br> • 기본 LVGL 기반 HMI 디바이스 |
 | SF32LB55x  | • Bluetooth Low Energy(BLE)<br> • MIPI DSI 커맨드 모드 디스플레이<br>• 센서 처리 알고리즘을 위한 대용량 SRAM<br> • 45개를 초과하는 GPIO<br> • 확장된 저전력 처리 기능 | • 피트니스 밴드 및 활동 트래커<br> • 스포츠 및 사이클링 컴퓨터<br> • 센서가 풍부한 웨어러블 디바이스<br> • 건강 모니터링 디바이스<br> • 배터리 구동 BLE 주변 장치 |
 | SF32LB56x  | • 듀얼 모드 Bluetooth(BT/BLE)<br> • RGB/DPI 디스플레이 인터페이스<br> • 통합 오디오 ADC 및 DAC<br> • 최대 1024 × 600 디스플레이 해상도<br> • SDIO를 통한 외부 Wi-Fi 연결<br> • 늘어난 GPIO 용량 | •     고급 사용자 인터페이스를 갖춘 스마트워치<br> • 커넥티드 HMI 시스템<br> • 의료 및 헬스케어 기기<br> • 산업용 핸드헬드 기기<br> • 휴대용 계측기<br> • 고급 eBike 및 eScooter 디스플레이|
-| SF32LB57x | • 듀얼 모드 Bluetooth(BT/BLE), BLE Audio, LE Long Range<br> • RGB 디스플레이 인터페이스를 갖춘 ePicasso 3.0/eZip 3.0 그래픽<br> • DCMI 카메라 입력과 통합 고음질 오디오 ADC/DAC<br> • 최대 1024 × 600 디스플레이 해상도<br> • 결정적 I/O 또는 커스텀 주변 장치 타이밍을 위한 PTM 오프로드<br> • 최대 58개의 범용 GPIO; SiP 구성이 허용하는 경우 BGA112는 MPI3용 또는 풀업/풀다운으로 구성한 GP 정적 출력용 I/O도 최대 6개 추가 제공<br> • SD/SDIO/eMMC 스토리지 인터페이스 | • 소형 고급 스마트워치<br> • 디스플레이가 풍부한 HMI 및 e-paper 디바이스<br> • 카메라를 지원하는 Bluetooth 제품<br> • 휴대용 오디오 및 녹음 디바이스<br> • 스마트 홈 제어 패널 |
+| SF32LB57x | • 듀얼 모드 Bluetooth(BT/BLE), BLE Audio, LE Long Range<br> • RGB 디스플레이 인터페이스를 갖춘 ePicasso 3.0/eZip 3.0 그래픽<br> • DCMI 카메라 입력과 통합 고음질 오디오 ADC/DAC<br> • 현재 인터페이스 매트릭스 항목: DPI/RGB를 통한 1024 × 600 RGB888; 일반적이거나 검증된 구성에는 720 × 720도 포함<br> • 결정적 I/O 또는 커스텀 주변 장치 타이밍을 위한 PTM 오프로드<br> • 최대 58개의 범용 GPIO; SiP 구성이 허용하는 경우 BGA112는 MPI3용 또는 풀업/풀다운으로 구성한 GP 정적 출력용 I/O도 최대 6개 추가 제공<br> • SD/SDIO/eMMC 스토리지 인터페이스 | • 소형 고급 스마트워치<br> • 디스플레이가 풍부한 HMI 및 e-paper 디바이스<br> • 카메라를 지원하는 Bluetooth 제품<br> • 휴대용 오디오 및 녹음 디바이스<br> • 스마트 홈 제어 패널 |
 | SF32LB58x  | • 듀얼 모드 Bluetooth(BT/BLE)<br> • 벡터 그래픽을 포함한 고급 그래픽 렌더링<br> • MIPI DSI 커맨드 모드 또는 비디오 모드 디스플레이<br> • 최대 1280 × 800 디스플레이 해상도<br> • 대용량 메모리 구성<br> • 높은 GPIO 밀도와 개수<br> • SDIO를 통한 외부 Wi-Fi 연결<br> • 엣지 AI 및 머신러닝 워크로드 | • 프리미엄 스마트워치<br> • 스포츠 및 아웃도어 웨어러블 디바이스<br>• 고급 사이클링 컴퓨터<br> • 스마트 디스플레이 및 커넥티드 대시보드<br> • AI 지원 웨어러블 디바이스<br> • 엣지 AI 및 센서 퓨전 시스템|
 
 </div>

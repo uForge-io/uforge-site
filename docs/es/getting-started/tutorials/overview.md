@@ -7,7 +7,7 @@ tags:
 
 # Resumen de tutoriales { #tutorials-overview }
 
-Esta serie convierte una primera grabación exitosa en habilidades prácticas de desarrollo en SF32. Está organizada por alcance de ingeniería: primero comprobar un periférico, después combinar subsistemas y, por último, reunir la evidencia necesaria para un producto. Los tutoriales parten de ejemplos de SiFli-SDK, pero las buenas prácticas —verificar el hardware, conservar una configuración de referencia comprobada y medir los resultados— se aplican a cualquier entorno de software para SF32.
+Tras una primera grabación satisfactoria, esta serie desarrolla habilidades prácticas de SF32 por etapas: primero comprobar un periférico, después combinar subsistemas y, por último, reunir la evidencia necesaria para validar un producto. Los tutoriales parten de ejemplos de SiFli-SDK, pero las buenas prácticas —verificar el hardware, conservar una configuración de referencia comprobada y medir los resultados— se aplican a cualquier entorno de software para SF32.
 
 Los tutoriales son la segunda etapa de [Primeros pasos](../index.md). Complete antes sus criterios de éxito de la primera puesta en marcha. Si está eligiendo un chip, un módulo o una placa de desarrollo, empiece por la [Familia SF32](../../sf32-products/family/SF32_family.md) antes de iniciar la serie.
 

@@ -8,7 +8,7 @@ tags:
 
 # MicroPython 현황 { #micropython-status }
 
-확인한 SiFli 문서와 OpenSiFli 저장소에서는 공식 SF32 MicroPython 포트, 펌웨어 이미지, 보드별 플래싱 절차를 찾지 못했습니다.
+2026-11-04 현재, 확인한 SiFli 문서와 OpenSiFli 저장소에서는 공식 SF32 MicroPython 포트, 펌웨어 이미지, 보드별 플래싱 절차를 찾지 못했습니다.
 
 확인한 공개 출처는 [GitHub의 OpenSiFli](https://github.com/OpenSiFli/)와 [SiFli 문서 포털](https://docs.sifli.com/)입니다.
 
@@ -59,4 +59,7 @@ while True:
 
 ## 이것이 중요한 이유 { #why-this-matters }
 
-"MicroPython 이미지를 다운로드하라"는 모호한 안내는 실행에 옮길 수 없습니다. 사용자에게는 정확한 이미지, 보드 일치 정보, 플래시 도구, REPL 설정, 복구 경로가 필요합니다. 이것이 없으면 MicroPython 페이지는 도움이 되기는커녕 지원 부담만 만듭니다.
+"MicroPython 이미지를 다운로드하라"는 모호한 안내는 실행에 옮길 수 없습니다. 사용자에게는 정확한 이미지, 호환되는 보드, 플래시 도구, REPL 설정, 복구 경로가 필요합니다. 이것이 없으면 MicroPython 페이지는 도움이 되기는커녕 지원 부담만 만듭니다.
+
+!!! note "자동 생성 콘텐츠"
+    이 페이지는 기존 원본 문서 없이 작성되었습니다. 사용하기 전에 기술적 주장을 SiFli의 공식 문서와 대조하여 확인하십시오.

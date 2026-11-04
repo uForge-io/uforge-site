@@ -63,7 +63,7 @@ tags: [개발, SiFli-SDK, 애플리케이션 노트, EZIP]
 
 ## PNG 에셋 변환 { #2-convert-png-assets }
 
-`png_filename.png`를 원본 파일 이름으로 바꾸십시오. 빌드 과정에서 작업 디렉터리를 바꾸지 않는 한, 생성된 파일은 도구 디렉터리에 기록됩니다.
+`png_filename.png`를 원본 파일 이름으로 바꾸십시오. 생성된 파일은 도구 디렉터리에 기록됩니다.
 
 ### PIXEL 바이너리 { #pixel-binary }
 

@@ -11,7 +11,7 @@ tags:
 
 ## Descripción general { #overview }
 
-SF32LB57-DevKit-LCD es una placa de evaluación multimedia basada en **SF32LB57-MOD-WD** (al parecer, un módulo de SiFli; **WD** probablemente significa **Wi-Fi Dual-band** [Wi-Fi de doble banda], aunque esta interpretación del nombre no está confirmada oficialmente). Combina la MCU SF32LB57x con Wi-Fi por SDIO, Flash de arranque y conexiones para periféricos. Permite desarrollar HMI inteligentes, terminales con cámara, intercomunicadores y pantallas conectadas, y validar gráficos, captura, audio y conectividad antes de diseñar una placa portadora.
+SF32LB57-DevKit-LCD es una placa de evaluación multimedia basada en **SF32LB57-MOD-WD**. El nombre parece indicar que SiFli lo contempla como un producto de módulo. **WD** podría significar **Wi-Fi Dual-band** (Wi-Fi de doble banda), pero esta interpretación no está confirmada oficialmente. La placa combina la MCU SF32LB57x con Wi-Fi por SDIO, Flash de arranque y conexiones para periféricos. Permite desarrollar HMI inteligentes, terminales con cámara, intercomunicadores y pantallas conectadas, y validar gráficos, captura, audio y conectividad antes de diseñar una placa portadora.
 
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 900px; margin: 1rem auto;">
 <figure style="margin: 0;"><a href="assets/sf32lb57x/57DEVKIT_LCD_T_Look.png"><img src="assets/sf32lb57x/57DEVKIT_LCD_T_Look.png" alt="SF32LB57-DevKit-LCD — Vista frontal" loading="lazy" style="display: block; width: 100%; height: auto;"></a><figcaption>Vista frontal</figcaption></figure>
@@ -61,7 +61,7 @@ El diagrama original resume funciones, no es una referencia de cableado. Muestra
 <figure style="margin: 0;"><a href="assets/sf32lb57x/57DEVKIT-LCD-B-Notes.svg"><img src="assets/sf32lb57x/57DEVKIT-LCD-B-Notes.svg" alt="SF32LB57-DevKit-LCD — Componentes del reverso" loading="lazy" style="display: block; width: 100%; height: auto;"></a><figcaption>Componentes del reverso</figcaption></figure>
 </div>
 
-## Primera ejecución { #getting-started }
+## Puesta en marcha inicial { #getting-started }
 
 Para validar la pantalla, prepare la placa, un panel DPI-RGB compatible de 40 pines / 0,5 mm, un cable USB con capacidad de datos y un ordenador con Windows, Linux o macOS. Opcionalmente, puede usar una antena IPEX-1, una cámara DVP, una tarjeta MicroSD/TF, un altavoz de 8 Ω y J-Link o DAP-Link. Para obtener registros UART y probar simultáneamente el USB nativo, necesitará dos cables de datos.
 
@@ -72,20 +72,9 @@ Para validar la pantalla, prepare la placa, un panel DPI-RGB compatible de 40 pi
 
 Una placa con firmware de fábrica puede mostrar su interfaz inicial al encenderse, según el firmware y el panel. Una pantalla en negro no demuestra por sí sola un fallo de programación. Consulte [Primeros pasos con SiFli-SDK](../../getting-started/sifli/getting-started-sifli-sdk.md) para configurar las herramientas, el entorno y la programación.
 
-## Destinos de compilación del SDK { #sdk-build-targets }
+## Configuración del SDK { #sdk-build-targets }
 
-La configuración actual del SDK enumera los destinos siguientes. Son identificadores exactos, no una garantía de compatibilidad con todas las placas SF32LB57-MOD-WD. Compare memoria, pantalla, pines y revisión con su copia del SDK. La guía de la placa no relaciona las revisiones del módulo WD con estos nombres.
-
-- `sf32lb57-lcd_n16r16_dpi`
-- `sf32lb57-lcd_n16r8_dpi`
-- `sf32lb57-lcd_n16r16_qspi`
-
-Tras configurar el entorno del SDK, este ejemplo hello-world es válido **solo para hardware que coincida con la configuración N16R16 DPI**. Un hello-world por UART no valida los controladores de pantalla, cámara o Wi-Fi.
-
-```bash
-cd example/get-started/hello_world/rtt/project
-scons --board=sf32lb57-lcd_n16r16_dpi -j8
-```
+La guía de SiFli indica que se instale SiFli SDK y se seleccione el paquete de soporte de placa `SF32LB57-DevKit-LCD`. El archivo ascendente `build_config_gcc.yaml` enlazado actualmente no enumera ningún destino de compilación SF32LB57. Antes de compilar, confirme el paquete de soporte y el identificador exacto en la copia del SDK que vaya a utilizar; no sustituya el destino por el de otra placa. Un hello-world por UART solo verifica el arranque serie básico, no los controladores de pantalla, cámara o Wi-Fi.
 
 ## Alimentación y depuración { #power-and-debug }
 
@@ -159,7 +148,7 @@ S1–S3 comparten `PA_34` / `GPADC_CH6`, con tensiones nominales de tecla de 2,9
 ## Referencia de conectores { #connector-reference }
 
 !!! warning
-    Estas tablas transcriben las asignaciones de la fuente y no sustituyen al esquemático. El resumen del módulo está incompleto (`58~?`) y etiqueta por error `PA_00`/`PA_01` como USB_DP/USB_DM, lo que contradice la asignación explícita de USB nativo en `PA35`/`PA36`. Distinga el número de pad del módulo del GPIO de la MCU. No use las filas pendientes de aclaración para diseñar una PCB.
+    Estas tablas transcriben las asignaciones de la fuente y no sustituyen al esquemático. El resumen del módulo está incompleto (`58~?`) y presenta `PA_00`/`PA_01` como USB_DP/USB_DM, en conflicto con la asignación explícita de USB nativo en `PA35`/`PA36`. Algunas filas de la fuente agrupan rangos de pads del módulo, rangos de GPIO y funciones alternativas sin especificar la función de cada pad; esta página conserva esos grupos y no infiere asignaciones individuales. Distinga el número de pad del módulo del GPIO de la MCU. No use las filas pendientes de aclaración para diseñar una PCB.
 
 <div align="center"><em>Pads del módulo: entradas pendientes conservadas</em></div>
 

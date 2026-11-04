@@ -42,7 +42,7 @@ Für die zugrunde liegende Chip-Architektur (Kerne, Grafik, Speicherarchitektur 
 </div>
 
 !!! note "Verfügbarkeit und Anpassungen"
-    **SF32LB58-MOD-E4R32N1 ist aufgrund der jüngsten Lieferengpässe bei Speicherchips nicht mehr verfügbar.** Andere Modulkonfigurationen sind ebenfalls möglich. Für individuelle Anpassungen [wenden Sie sich an μForge.io](../../about/contact.md).
+    **SF32LB58-MOD-E4R32N1 ist derzeit aufgrund von Lieferengpässen bei Speicherchips nicht verfügbar.** Andere Modulkonfigurationen sind ebenfalls möglich. Für individuelle Anpassungen [wenden Sie sich an μForge.io](../../about/contact.md).
 
 ### 2.2 Wichtige Spezifikationen { #22-key-specifications }
 
@@ -61,7 +61,7 @@ Für die zugrunde liegende Chip-Architektur (Kerne, Grafik, Speicherarchitektur 
 | Speicher | 5× MPI (im Gehäuse integriert und extern), 2× SD/SDIO/eMMC |
 | Gehäuse | 138-polig, 24 × 24 × 3,1 mm |
 | Stromversorgung | VDD_3V3 (2,97–3,6 V), VDD_1V8 (1,7–1,95 V), VDDIOA/VDDIOA2/VDDIOB (1,7–3,6 V) |
-| Antenne | Externe Antenne je nach Teilenummer über metallisierte Halblöcher als RF-Anschluss oder über einen IPEX-kompatiblen Steckverbinder |
+| Antenne | PCB-montierte Antenne oder externe Antenne über den im Datenblatt gezeigten Anschluss; die Option für die genaue Modul-SKU bestätigen |
 | Betriebstemperatur | −40 bis 85 °C |
 
 </div>
@@ -77,7 +77,7 @@ Das Modul integriert den Chip SF32LB586VDD36, einen 48-MHz-Quarz, einen optional
 
 ### 4.1 Pinbelegungsdiagramm { #41-pinout-diagram }
 
-Das Modul führt 138 Pins entlang seines Umfangs heraus.
+Die Draufsicht zeigt 138 nummerierte Kontakte: 72 castellierte Randpositionen, 60 innere Pads und sechs mittige Pads; die Nummerierung reicht von 1 bis 138.
 
 !!! info "Abbildung 4-1: Pinbelegungsdiagramm, Draufsicht"
     Siehe Abbildung 3-1 im offiziellen Datenblatt für dieses Diagramm — in diesem Leitfaden nicht reproduziert.
@@ -231,6 +231,9 @@ Das Modul verfügt über insgesamt 138 Pins, die in der folgenden Tabelle beschr
 *Legende: P = Stromversorgung; I = Eingang; O = Ausgang; T = kann als hochohmig konfiguriert werden; AO = Audioausgang; AI = Audioeingang.*
 
 !!! note
+    In der Zeile zu Pin 10 nennt das Datenblatt V0.1 `GPIO_A38` als Standard-MUX für PA79, aber `GPIO_A79` als Funktion. Diese Tabelle verwendet entsprechend der Pin-/Funktionsbezeichnung `GPIO_A79`; bestätigen Sie den MUX von PA79 vor der endgültigen Pinzuweisung mit SiFli.
+
+!!! note
     Pin 2 (USART_RXD) und Pin 3 (USART_TXD) sind der Standard-Log-, Programm-Debug- und Programm-Download-Port.
 
 ### 4.3 Physische Pinbeschreibung { #43-physical-pin-description }
@@ -277,6 +280,8 @@ Jeder in der obigen Tabelle mit `PAxx_I2C_UART` oder `PBxx_I2C_UART` markierte P
 ## 6. Elektrische Eigenschaften { #6-electrical-characteristics }
 
 ### 6.1 Absolute Maximalwerte { #61-absolute-maximum-ratings }
+
+Das Überschreiten eines absoluten Maximalwerts kann das Modul dauerhaft beschädigen. Diese Werte bedeuten nicht, dass ein normaler Betrieb außerhalb der empfohlenen Betriebsbedingungen möglich ist; eine längere Belastung kann die Zuverlässigkeit beeinträchtigen.
 
 <div align="center"><em>Tabelle 6.1-1: Absolute Maximalwerte</em></div>
 
@@ -375,11 +380,13 @@ Vollständige Tabellen (einschließlich Eingangsleckstrom, Reset-Schwellenwerten
 | Symbol | Bedingung | Strom (mA) | Zuwachs (µA/MHz) |
 | :--- | :--- | :-: | :-: |
 | ICoreMark | HPSYS @240 MHz | 10,34 | 31,3 |
-| ICoreMark | LPSYS @48 MHz | 0,89 | 27,6 |
+| ICoreMark | LPSYS @48 MHz | 0,89 | 14,5 |
 | IWhileLoop | HPSYS @240 MHz | 7,98 | 21,3 |
-| IWhileLoop | LPSYS @48 MHz | 0,67 | 18,7 |
+| IWhileLoop | LPSYS @48 MHz | 0,67 | 9,8 |
 
 </div>
+
+Diese Tabellen zeigen ausgewählte Betriebspunkte. Das Datenblatt enthält in §5.4.2 weitere Funkintervalle und Scan-Zustände sowie in §5.4.3 zusätzliche Prozessorfrequenzen. Die mit 3,8 V gekennzeichneten Werte werden anhand von Messungen an den 1,8-V- und 3,3-V-Schienen bei einer angenommenen Wandlungseffizienz von 90 % berechnet: `I3.8V = I1.8V × 1.8 / (0.90 × 3.8) + I3.3V`. Es handelt sich um auf den Systemeingang bezogene äquivalente Stromwerte, nicht um direkte Messungen bei 3,8 V an einem Modul-Versorgungspin.
 
 ### 6.5 Dual-Mode-Bluetooth-RF-Leistung { #65-dual-mode-bluetooth-rf-performance }
 
@@ -432,18 +439,28 @@ Verwenden Sie diese als Ausgangspunkt für einen Produktionsschaltplan und passe
 | :-: | :--- |
 | 1 | Der Eingangsspannungsbereich von VDD_3V3 muss 2,97–3,6 V betragen; platzieren Sie einen 4,7-µF-Kondensator nahe am Modul-Pin. |
 | 2 | Der Eingangsspannungsbereich von VDD_1V8 muss 1,7–1,95 V betragen; platzieren Sie einen 4,7-µF-Kondensator nahe am Modul-Pin. |
-| 3 | Der Eingangsspannungsbereich von VDDIOA, VDDIOA2 und VDDIOB muss 1,7–3,6 V betragen; platzieren Sie Kondensatoren nahe an den Modul-Pins. |
+| 3 | Der Eingangsspannungsbereich von VDDIOA, VDDIOA2 und VDDIOB muss 1,7–3,6 V betragen; platzieren Sie nahe jedem Modul-Pin einen 4,7-µF-Kondensator. |
+| 4 | Der I/O-Schnittstellenpegel des Moduls beträgt 3,3 V; angeschlossene Peripheriegeräte müssen ebenfalls einen I/O-Pegel von 3,3 V verwenden. |
+| 5 | Im MCU-Schlafmodus können laut Datenblatt PA65, PA67, PB54, PB56, PB57, PB58 und PB59 Interrupts empfangen. |
+| 6 | PB54 unterstützt einen 10-s-Langdruck-Reset, aktiv bei High-Pegel; fügen Sie einen 10-kΩ-Pulldown-Widerstand hinzu. |
+| 7 | Die in Abbildung 7-9 mit GPADC_CHx markierten I/Os unterstützen analoge Eingänge von 0–3,3 V. |
+| 8 | Die in Abbildung 7-9 mit GPTIM markierten I/Os unterstützen PWM-Ausgabe. |
+| 9 | Für die TP-Schnittstelle und ähnliche Schnittstellen ESD-Schutzbauteile vorsehen. |
+| 10 | In die LCD-RGB-Signalleitungen Serienwiderstände von 33–100 Ω einfügen. |
+| 11 | Die auf PB36 und PB37 multiplexte DBG_UART-Funktion ist die Programmier-Download- und Debug-Schnittstelle; fügen Sie 100-Ω-Serienwiderstände ein und sehen Sie Testpunkte vor. |
+| 12 | PA31 und PA32 werden für HCPU Trace verwendet; sehen Sie Testpunkte vor. |
+| 13 | Einen Testpunkt für BOOT_MODE vorsehen. |
 
 </div>
 
 !!! note
-    Dieser Leitfaden enthält nur die drei oben aufgeführten Prüfpunkte. Lesen Sie vor der Freigabe des Produktionsschaltplans die vollständige Checkliste in §7.3 des [offiziellen Datenblatt-PDFs](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf).
+    Das Datenblatt V0.1 nennt in §5.2 einen empfohlenen VDDIO-Betriebsbereich von 1,7–3,6 V, während Prüfpunkt 4 in §7.3 einen I/O-Schnittstellenpegel von 3,3 V vorgibt. Klären Sie vor dem Anschluss von Peripheriegeräten mit SiFli, welcher Schnittstellenpegel für die genaue Modulrevision gilt; das Datenblatt löst diese beiden Aussagen nicht auf. Prüfen Sie vor der Freigabe des Produktionsschaltplans die neueste Version des [offiziellen Datenblatt-PDFs](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf).
 
 ## 10. Modulabmessungen und PCB-Footprint { #10-module-dimensions-and-pcb-footprint }
 
 ### 10.1 Modulabmessungen { #101-module-dimensions }
 
-Das Modul misst 24 × 24 × 3,1 mm.
+Das Modul misst 24 × 24 × 3,1 mm; die Modulplatine ist 0,8 mm dick. Der Rasterabstand der castellierten Randkontakte beträgt 1,1 mm.
 
 !!! info "Abbildung 10-1: Modulabmessungen"
     Siehe Abbildung 8-1 im offiziellen Datenblatt für dieses Diagramm — in diesem Leitfaden nicht reproduziert.
@@ -453,9 +470,13 @@ Das Modul misst 24 × 24 × 3,1 mm.
 !!! info "Abbildung 10-2: Empfohlener PCB-Footprint"
     Siehe Abbildung 8-2 im offiziellen Datenblatt für dieses Diagramm — in diesem Leitfaden nicht reproduziert.
 
+Der empfohlene Footprint umfasst 72 Außenpads mit 1,8 × 0,8 mm, 60 Innenpads mit 0,7 × 1,0 mm und sechs mittige Pads mit 1,3 × 1,3 mm. Alle Maße sind in Millimetern angegeben; für die vollständige Geometrie ist die Zeichnung im Datenblatt maßgeblich.
+
 ### 10.3 Externer Antennenanschluss { #103-external-antenna-connector }
 
-Für SKUs, die eine externe Antenne unterstützen, kann das Modul je nach Teilenummer metallisierte Halblöcher als RF-Anschluss oder einen IPEX-kompatiblen Steckverbinder verwenden.
+Das Datenblatt nennt eine PCB-montierte Antenne oder einen externen Antennenanschluss der ersten Generation. Als kompatibel werden die Hirose-U.FL-Serie, I-PEX-MHFI-Steckverbinder und Amphenol-AMC-Steckverbinder aufgeführt. Bestätigen Sie die Antennenkonfiguration für die genaue Modul-SKU.
+
+Die Maße in der Anschlusszeichnung sind in Millimetern angegeben.
 
 !!! info "Abbildung 10-3: Abmessungen des externen Antennenanschlusses"
     Siehe Abbildung 8-3 im offiziellen Datenblatt für dieses Diagramm — in diesem Leitfaden nicht reproduziert.
@@ -473,18 +494,20 @@ Halten Sie die RF-Freihaltezone des Moduls frei von Bauteilen, Kupferflächen, L
 ### 11.1 Lagerbedingungen { #111-storage-conditions }
 
 - Lagern Sie Produkte in einer versiegelten Feuchtigkeitsschutzverpackung (MBB) bei <40 °C und 90 % RH, nicht kondensierend.
-- Verwenden Sie das Modul nach dem Öffnen des Vakuumbeutels innerhalb des für seine Feuchtigkeitsempfindlichkeitsstufe (MSL) angegebenen Standzeitfensters; andernfalls muss es vor einem zweiten Reflow-Durchlauf getrocknet (gebacken) werden.
+- Die Feuchtigkeitsempfindlichkeitsstufe des Moduls ist MSL 3. Nach dem Öffnen des Vakuumbeutels muss das Modul innerhalb von 168 Stunden bei 25 ± 5 °C und 60 % RH verwendet werden; andernfalls muss es vor der Rückführung in die Produktion gebacken werden. Die Empfehlung von nur einem Reflow-Durchlauf bleibt davon unberührt.
 
 ### 11.2 Elektrostatische Entladung (ESD) { #112-electrostatic-discharge-esd }
 
-Befolgen Sie während Montage und Test SiFlis Standard-Vorsichtsmaßnahmen zur ESD-Handhabung von Modulen.
+Das Datenblatt nennt eine ESD-Festigkeit von ±2000 V HBM und ±500 V CDM. Befolgen Sie während Montage und Test SiFlis Standard-Vorsichtsmaßnahmen zur ESD-Handhabung von Modulen.
 
 ### 11.3 Reflow-Profil { #113-reflow-profile }
 
 Für das Modul wird empfohlen, den Reflow-Prozess nur einmal zu durchlaufen.
 
+Das V0.1-Profil sieht ein Aufheizen von 25 auf 150 °C in 60–90 s bei 1–3 °C/s vor; Vorheizen von 150 auf 200 °C für 60–120 s; 60–90 s oberhalb 217 °C bei einer Spitzentemperatur von 235–250 °C; anschließend Abkühlen vom Spitzenwert auf 180 °C mit -1 bis -5 °C/s. Als Lot ist SAC305 angegeben. Die Legende am unteren Rand nennt ein Zeitfenster am Spitzenwert von 30–70 s, während die Grafik separat „焊接时间 >30 s“ (Lötzeit >30 s) angibt. Das sind unterschiedliche Quellenangaben, deren Zusammenhang das Datenblatt nicht erklärt; führen Sie die Intervalle nicht zusammen, sondern bestätigen Sie das Produktionsprofil.
+
 !!! info "Abbildung 11-1: Empfohlenes Reflow-Temperaturprofil"
-    Siehe Abbildung 9-1 im offiziellen Datenblatt für dieses Diagramm — in diesem Leitfaden nicht reproduziert.
+    Siehe Abbildung 9-1 im offiziellen Datenblatt; Profilwerte und abweichende Quellenbeschriftungen sind oben zusammengefasst.
 
 ### 11.4 Ultraschallvibration { #114-ultrasonic-vibration }
 

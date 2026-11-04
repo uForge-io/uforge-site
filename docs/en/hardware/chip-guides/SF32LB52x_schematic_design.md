@@ -271,8 +271,8 @@ Select wake sources and external power-switch defaults so the product can enter 
 |:---|:---|:---|:---|:---|:---|:---|:---|
 | Active | Run | Run | Accessible | Can toggle | Run | - | - |
 | Sleep | Stop | Run | Accessible | Can toggle | Run | Any interrupt | <0.5 us |
-| DeepSleep | Stop | Stop | Inaccessible, fully retained | Level held | Run | RTC, wake-up IO, GPIO, LPTIM, Bluetooth | 250 us |
-| Standby | Reset | Reset | Inaccessible, fully retained | Level held | Run | RTC, wake-up IO, LPTIM, Bluetooth | 1 ms |
+| DeepSleep | Stop | Stop | Inaccessible; contents retained | Level held | Run | RTC, wake-up IO, GPIO, LPTIM, Bluetooth | 250 us |
+| Standby | Reset | Reset | Inaccessible; contents retained | Level held | Run | RTC, wake-up IO, LPTIM, Bluetooth | 1 ms |
 | Hibernate | Reset | Reset | Inaccessible, not retained | High-Z | Reset | RTC, wake-up IO | >2 ms |
 
 </div>
@@ -327,7 +327,7 @@ The chip requires two external clock sources: a 48 MHz main crystal and a 32.768
 
     | Crystal | Requirement | Notes |
     |:---|:---|:---|
-    | 48 MHz | 7 pF ≤ CL ≤ 12 pF (8.8 pF recommended), ΔF/F0 ≤ ±10 ppm, ESR ≤ 30 Ω (22 Ω recommended) | Lower CL and ESR reduce power consumption; matching capacitors are typically unnecessary when CL < 12 pF |
+    | 48 MHz | CL ≤ 12 pF (≤7 pF recommended), ΔF/F0 ≤ ±10 ppm, ESR ≤ 30 Ω (22 Ω recommended) | Lower CL and ESR reduce power consumption. Reserve a parallel matching capacitor; it need not be populated when CL < 9 pF. |
     | 32.768 kHz | CL ≤ 12.5 pF (7 pF recommended), ΔF/F0 ≤ ±20 ppm, ESR ≤ 80 kΩ (38 kΩ recommended) | Lower CL and ESR reduce power consumption; matching capacitors are typically unnecessary when CL < 12.5 pF |
 
     </div>
@@ -349,6 +349,9 @@ Recommended crystals:
 
 !!! note "Additional Notes"
     The TKD SX20Y048000B31T-8.8 has a somewhat higher ESR, which slightly increases static power consumption. SiFli's schematic application note also recommends removing at least the GND copper on the second layer beneath the 48 MHz crystal to reduce parasitic load capacitance. The PCB layout guide, however, prohibits plane voids or copper cutouts beneath the crystal on adjacent layers. These recommendations conflict; see [Clock Interface Routing](SF32LB52x_pcb_layout.md#65-clock-interface-routing). Confirm the intended layer treatment with SiFli before releasing the layout.
+
+!!! important "48 MHz CL recommendation differs from the listed parts"
+    The source gives a general 48 MHz recommendation of CL ≤ 7 pF, but its recommended-parts table lists two 48 MHz crystals at CL = 8.8 pF. It does not explain how these part values align with the general target. Confirm the intended CL limit and the exact part's qualification with SiFli before release.
 
 !!! important "Crystal ESR exception in the source"
     The source lists TKD SX20Y048000B31T-8.8 with ESR ≤ 40 Ω, although its general 48 MHz requirement is ESR ≤ 30 Ω. Treat this as a part-specific qualification question, not permission to use any 40 Ω crystal. Confirm the exact part's current AVL approval and validate startup, frequency calibration, and oscillator current before release.

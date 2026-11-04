@@ -104,7 +104,7 @@ Fan out all QFN package signals through the top layer.
 
 ### 6.5. Clock Interface Routing { #65-clock-interface-routing }
 
-Apply these clock-routing rules across both design groups:
+Apply these clock-routing rules to both the battery-powered and regular-powered variants:
 
 - Place crystals inside the shield can, more than 1 mm from the PCB edge, and as far as practical from heat-generating components (PA, charger, PMU circuits) — ideally more than 5 mm — to avoid affecting crystal frequency drift
 - Keep a clearance greater than 0.25 mm around the crystal, free of other metal or components
@@ -142,11 +142,11 @@ Apply these clock-routing rules across both design groups:
 Figures 6.5-3 and 6.5-6 show at least 0.15 mm between the parallel XI/XO traces for both crystals. Figure 6.5-2 uses a 48 MHz crystal with 8.8 pF load capacitance and marks the external load capacitors NF (not fitted); Figure 6.5-5 uses a 32.768 kHz, 7 pF crystal on PA22/PA23, which are also multiplexed with PDM_CLK/PDM_DATA.
 
 !!! important "Crystal ground treatment"
-    The battery-variant application note conflicts with itself on crystal-area copper: its clock section says to remove L2 ground directly beneath the crystal, while its PCB-routing section prohibits plane voids or copper cutouts on the top and adjacent layers and depicts continuous L2 ground. The separate PCB layout guide repeats the no-void instruction. Do not infer a universal L2 rule or resolve this by layer count; confirm the stack-up-specific treatment with SiFli before release. The specified crystal keep-out and component clearances remain separate checks.
+    The battery-variant application note conflicts with itself on copper beneath the crystal: its clock section explicitly says to remove at least the second-layer GND copper beneath the crystal. Later PCB-routing text calls for 禁空 (keep-out) treatment on the top and adjacent layers beneath the crystal and bars other traces from that area; the English version explicitly prohibits plane voids or copper cutouts. The separate PCB layout guide gives the same keep-out/no-routing instruction and its English version also explicitly prohibits plane voids or copper cutouts. Yet the routing models in both guides depict continuous L2 GND. Do not infer a universal L2 rule or decide by layer count; confirm the stack-up-specific treatment with SiFli before release. The specified crystal keep-out and component clearances remain separate checks.
 
 ### 6.6. RF Interface Routing { #66-rf-interface-routing }
 
-Apply these RF-routing rules across both design groups:
+Apply these RF-routing rules to both the battery-powered and regular-powered variants:
 
 - Place the RF matching circuit close to the chip side, not the antenna side
 - Place the AVDD_BRF filter capacitor close to the chip pin, with its ground pin vias connected directly to the main ground
@@ -173,7 +173,7 @@ The RF examples use a series 15 pF/50 V capacitor (C0333), leave C0318/C0319 NF,
 
 ### 6.7. Audio Interface Routing { #67-audio-interface-routing }
 
-Apply these audio-routing rules across both design groups:
+Apply these audio-routing rules to both the battery-powered and regular-powered variants:
 
 - Place the AVDD33_AUD, MIC_BIAS, and AUD_VREF filter capacitors close to their respective pins. Connect their ground terminals securely to the main ground.
 - Keep components for the ADCP analog input close to the chip pin, with short traces, full ground shielding, and away from other strong interference sources
@@ -305,7 +305,7 @@ Ground-shield GPADC input traces and keep them away from other potentially inter
 
 ### 6.13. EMI & ESD { #613-emi-esd }
 
-Apply these EMI and ESD rules across both design groups:
+Apply these EMI and ESD rules to both the battery-powered and regular-powered variants:
 
 - Keep long interference-generating clock and power traces outside the shield can off the top layer; route them on inner layers.
 - Place ESD protection devices close to the connector pins, routing signals through the ESD device before anything else

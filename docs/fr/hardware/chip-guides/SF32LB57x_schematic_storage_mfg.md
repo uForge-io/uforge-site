@@ -20,7 +20,7 @@ tags:
 
 Les choix de stockage et de démarrage doivent être examinés ensemble. Le support de démarrage détermine les résistances de configuration des broches de démarrage, l'état d'alimentation initial du stockage, l'affectation des bus et les moyens de récupération en production.
 
-Les variantes dotées d'une mémoire Flash SPI NOR intégrée au boîtier démarrent par défaut sur celle-ci. Les variantes sans cette mémoire doivent démarrer depuis un support externe. Le support externe est sélectionné par `PA13` (`Bootstrap[1]`) et `PA17` (`Bootstrap[0]`). Le schéma SiFli montre un cavalier et un emplacement de résistance de pull-up de 7,5 kΩ sur chaque signal, reliés à `VDD33_VOUT1`/`VDDIOA`.
+Les variantes dotées d'une mémoire Flash SPI NOR intégrée au boîtier démarrent par défaut sur celle-ci. Les variantes sans cette mémoire doivent démarrer depuis un support externe. Le support externe est sélectionné par `PA13` (`Bootstrap[1]`) et `PA17` (`Bootstrap[0]`). Le schéma SiFli montre un cavalier et un emplacement de résistance de pull-up de 7,5 kΩ sur chaque signal, reliés à `VDD33_VOUT1/VDDIOA`.
 
 <div align="center"><img src="../../sf32-products/chips/assets/57x/SF32LB57x-A-Bootstrap.png" width="80%" alt="Cavaliers de sélection du démarrage et pull-ups de PA13 et PA17" /></div>
 <div align="center"><em>Figure 5.6-1 : Circuit de sélection du support de démarrage par PA13 et PA17</em></div>
@@ -283,7 +283,7 @@ Examinez quatre éléments pour chaque interface de périphérique :
 1. Connexions électriques : croisement des signaux, résistances de pull-up et de pull-down, protection ESD et terminaison.
 2. Compatibilité du domaine de tension d'E/S, y compris le risque d'alimentation en retour (back-power) lorsque le périphérique est éteint.
 3. États par défaut sûrs de réinitialisation et de veille.
-4. Conflits avec les fonctions multiplexées de démarrage, téléchargement, SWD, USB, réveil, ou affichage haute vitesse.
+4. Conflits avec les fonctions multiplexées de démarrage, téléchargement, SWD, USB, réveil ou affichage haute vitesse ; vérifiez également si un bouton doit assurer le réveil matériel de la MCU, puis réalisez les configurations matérielle et logicielle requises.
 
 #### 5.6.9. UART { #569-uart }
 
@@ -291,7 +291,8 @@ Examinez quatre éléments pour chaque interface de périphérique :
 - Le RXD de la MCU se connecte au TXD du périphérique ; le TXD de la MCU se connecte au RXD du périphérique.
 - Faites correspondre la tension d'E/S du périphérique avec le domaine d'E/S de la MCU.
 - Examinez le comportement de l'état de réinitialisation pour les broches UART multiplexées avec les fonctions USB, démarrage, téléchargement, ou débogage.
-- PA18 et PA19 sont les broches DBG-UART par défaut. Pour les interfaces UART de test fréquemment branchées et débranchées, SiFli recommande PA18, PA19, PA43 ou PA44 ; ce groupe de GPIO est prévu pour 5,5 V. Pour les longs câbles de test, ajoutez une résistance série de 100 Ω afin de limiter les dépassements.
+- Si l'UART est multiplexée sur `PA35` ou `PA36`, maintenez le périphérique externe hors tension pendant la réinitialisation de la MCU ou configurez la broche correspondante à l'état bas par logiciel afin d'éviter toute activité intempestive du périphérique.
+- `PA18` et `PA19` sont les broches `DBG-UART` par défaut. Pour les interfaces UART de test fréquemment branchées et débranchées, SiFli recommande `PA18`, `PA19`, `PA43` ou `PA44` ; ce groupe de GPIO est prévu pour 5,5 V. Pour les longs câbles de test, ajoutez une résistance série de 100 Ω afin de limiter les dépassements.
 
 #### 5.6.10. I2C { #5610-i2c }
 
@@ -299,6 +300,8 @@ Examinez quatre éléments pour chaque interface de périphérique :
 - Le SF32LB57x intègre quatre interfaces I2C, chacune prenant en charge les modes hôte et périphérique et pouvant être routée par matrice vers tout GPIO.
 - SiFli recommande 4,7 kΩ pour le mode standard (100 kHz), 2,2 kΩ à 3,3 kΩ pour le mode rapide (400 kHz) et 1 kΩ à 2,2 kΩ pour le mode rapide plus (1 MHz). Pour 400 kHz, partez de 2,2 kΩ et ajustez selon la capacité du bus.
 - Pour un bus I2C partagé, un seul ensemble de résistances de pull-up près de l'hôte suffit ; n'en ajoutez pas un à chaque périphérique. Alimentez-les depuis le rail du périphérique afin qu'elles soient coupées avec celui-ci et ne provoquent pas de fuite en veille.
+- Vérifiez si une interruption d'un périphérique I2C doit réveiller la MCU ; le cas échéant, réalisez la configuration matérielle et logicielle correspondante.
+- Les capteurs I2C d'accélération, de fréquence cardiaque et de champ magnétique doivent permettre une lecture groupée continue de tous les registres en une seule opération.
 - Assurez-vous que chaque composant sur le même bus a une adresse unique.
 
 #### 5.6.11. SPI { #5611-spi }
@@ -336,8 +339,9 @@ Examinez quatre éléments pour chaque interface de périphérique :
 
 - Routez USB DP/DN comme une paire différentielle 90 ohms.
 - USB DP/DM utilisent couramment les fonctions multiplexées `PA35` / `PA36`. Lorsque l'USB est activé, assurez-vous que le circuit externe ne force pas de niveaux dangereux pendant la réinitialisation.
-- Placez l'ESD près du connecteur ; routez les signaux à travers l'ESD avant la puce.
+- Protégez les lignes de données USB, VBUS et les autres broches critiques avec des composants ESD. Placez-les près du connecteur et faites passer les signaux par ces composants avant la puce.
 - Évitez les stubs et maintenez l'appariement de la paire et la continuité de la masse de référence.
+- Lorsque la MCU n'est pas en veille, laissez l'USB activé afin que le protocole puisse détecter la connexion et la déconnexion du périphérique.
 - Si un réveil par insertion USB en mode veille est requis, ajoutez un diviseur résistif VBUS vers un GPIO capable de réveil. Il est recommandé de partager ce GPIO avec la détection d'insertion du chargeur.
 - `PA35` est fixé comme `USB_DP`, et `PA36` est fixé comme `USB_DM` ; ces fonctions ne peuvent pas être réaffectées. L'USB 2.0 FS prend en charge jusqu'à 12 Mbps.
 - Réservez des résistances série de 22 ohms ou 33 ohms près du côté puce sur DP/DM, ainsi que des empreintes de condensateur shunt non montées pour l'ajustement d'intégrité de signal.
@@ -357,6 +361,7 @@ Examinez quatre éléments pour chaque interface de périphérique :
 - Utilisez des résistances à 1 % pour la mesure par diviseur.
 - Placez un condensateur de filtrage de 100 nF (0,1 µF) près de la broche de la puce sur chaque entrée GPADC.
 - Gardez les pistes GPADC à l'écart du DC/DC, du RF, de l'USB, du SDIO, des horloges d'affichage, et des boucles de charge.
+- Éloignez également ces pistes des signaux parallèles à haute vitesse et prévoyez un blindage par la masse dans la zone de routage afin de réduire le couplage du bruit numérique.
 
 <div align="center"><em>Tableau 5.6-8 : Attribution des broches GPADC</em></div>
 
@@ -418,7 +423,7 @@ Les broches de débogage et de téléchargement par défaut doivent rester acces
 </div>
 
 !!! warning "Nom des points de test UART de débogage dans la source"
-    La section 2.10 énumère deux fois `DB_UART_RXD` (sans le G). Le tableau des broches de débogage et la liste de contrôle identifient `PA18` comme `DBG_UART_RXD` et `PA19` comme `DBG_UART_TXD`. Confirmez les noms de signaux d'après le banc de production avant la mise en production ; ne réservez pas RXD deux fois.
+    La section 2.10 énumère deux fois `DB_UART_RXD` (sans le `G`). Le tableau des broches de débogage et la liste de contrôle identifient `PA18` comme `DBG_UART_RXD` et `PA19` comme `DBG_UART_TXD`. Confirmez les noms de signaux d'après le banc de production avant la mise en production ; ne réservez pas RXD deux fois.
 
 <div align="center"><em>Tableau 5.7-3 : Listes de points de test de production dans la source</em></div>
 

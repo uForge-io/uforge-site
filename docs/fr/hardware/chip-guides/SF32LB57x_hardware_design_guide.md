@@ -47,6 +47,8 @@ Ce document suppose des connaissances de base en conception matérielle embarqu�
 
 Les ressources typiques du SF32LB57x comprennent :
 
+- Architecture STAR-MC1 Arm Cortex-M33 avec deux grands cœurs et un petit cœur.
+- Moteur graphique 2D/2.5D, accélérateur de réseau neuronal IA, Bluetooth 6.0 bimode et codec audio intégrés.
 - Jusqu'à 58 GPIO<!-- BGA-ONLY --> ; certaines variantes BGA112 disposent de six E/S supplémentaires, utilisables pour MPI3 ou configurables en sorties statiques GP par pull-up/pull-down ; voir la section « Boîtiers »<!-- /BGA-ONLY -->.
 - 3x UART, 4x I2C, 2x SPI, 2x CAN.
 - 2x GPTIM (4 canaux chacun), 2x LPTIM, 2x ATIM (3 canaux différentiels ou 4 canaux asymétriques (single-ended) chacun), 1x PWM (5 canaux), 1x PTM (16 canaux).
@@ -62,6 +64,9 @@ Les ressources typiques du SF32LB57x comprennent :
 
 !!! note "Portée des interfaces d'affichage"
     La note d'application matérielle répertorie SPI/QSPI, DPI 24 bits, 8080 16 bits, EPD 16 bits et JDI série/parallèle dans le résumé des interfaces LCDC du SF32LB57x. MIPI-DSI apparaît dans la liste de compatibilité de certains circuits intégrés pilotes d'affichage, mais pas dans ce résumé direct des interfaces LCDC. La mention d'un pilote de panneau ne confirme donc pas la présence d'une interface hôte MIPI-DSI native dans la puce. Avant de choisir une conception, faites confirmer par SiFli le chemin de connexion du contrôleur d'affichage concerné.
+
+!!! note "Prise en charge logicielle de l'accélérateur IA"
+    La note d'application matérielle de SiFli identifie un accélérateur de réseau neuronal IA intégré au SF32LB57x. Le [guide NNACC du SDK SiFli](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/nnacc.html) répertorie les SF32LB55x, SF32LB56x et SF32LB58x, mais pas le SF32LB57x. Cette caractéristique matérielle ne confirme donc pas à elle seule la prise en charge logicielle de l'inférence accélérée sur le SF32LB57x ; avant de vous y fier, confirmez auprès de SiFli la prise en charge du composant exact et de la version du SDK.
 
 ### 3.2. Variantes { #32-variants }
 

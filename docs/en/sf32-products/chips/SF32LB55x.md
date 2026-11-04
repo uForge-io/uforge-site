@@ -12,6 +12,8 @@ tags:
 
 The SF32LB55x series is a mainstream, ultra-low-power AIoT microcontroller family for BLE-connected products that need stronger display capabilities, more memory headroom, and a wider choice of packages than entry-level Bluetooth MCUs.
 
+For selection, the key split is package and co-packaged memory: SS6600A8 uses QFN68L with no co-packaged PSRAM and requires 2.97–3.63 V, while SF32LB551U4O5 and the BGA variants listed here use 1.71–3.63 V.
+
 Its big.LITTLE dual-core architecture pairs two Arm Cortex-M33 STAR-MC1[^1] processors: a high-performance application core running at up to 240 MHz and an ultra-low-power core running at up to 48 MHz. This lets a product keep demanding UI work on the application core while assigning sensor processing, standby control, and BLE tasks that must remain active to the low-power core.
 
 SiFli's official product brief and datasheet list BLE 5.2, the ePicasso 2.5D graphics engine, dual LCD controllers, a TinyML-oriented neural-network matrix accelerator, and 1,312 KB of on-chip SRAM (1,088 KB HCPU + 224 KB LCPU), along with support for external NOR, NAND, eMMC, and PSRAM. This makes SF32LB55x a practical choice for wearables, sensor-rich products, and compact HMI designs that need more resources than SF32LB52x but do not require a higher-tier 56/58-family device.
@@ -200,10 +202,10 @@ Use this sequence to turn an SF32LB55x shortlist into a validated design:
 ## Frequently Asked Questions
 
 **What are the key specifications of SF32LB55x?**
-SF32LB55x pairs an application CPU (Cortex-M33 @240 MHz) with a low-power core (Cortex-M33 @48 MHz, a user-programmable core), 1,312 KB of internal SRAM and Bluetooth Low Energy (BLE) only. Graphics: ePicasso 1.0. Package: QFN68 / BGA145 / BGA169 (7 × 7 mm (QFN68)). USB 2.0 FS.
+SF32LB55x provides application processing (Cortex-M33 @240 MHz), a low-power core (Cortex-M33 @48 MHz, a user-programmable core), 1,312 KB of internal SRAM and Bluetooth Low Energy (BLE) only. Graphics: ePicasso 1.0. Package: QFN68L / BGA145 / BGA169 (7 × 7 mm (QFN68L)). USB 2.0 FS.
 
 **Which display interfaces does SF32LB55x support?**
-SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix)) This is a family-wide list, not a guarantee for every order code or package; check the linked interface matrix.
 
 **What is the maximum display resolution of SF32LB55x?**
 Up to 512 × 512 with RGB888 color, through MIPI-DSI, with display drivers that have built-in RAM only. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -212,7 +214,7 @@ Up to 512 × 512 with RGB888 color, through MIPI-DSI, with display drivers that 
 Up to 16 MB + 2 MB of in-package PSRAM and up to 8 MB of in-package NOR Flash.
 
 **What supply voltage does SF32LB55x need?**
-1.71–3.63 V.
+SS6600A8 requires 2.97–3.63 V; SF32LB551U4O5 and the BGA variants listed on this page use 1.71–3.63 V. Select the exact part before designing the power tree.
 
 **Where do I start a hardware design with SF32LB55x?**
 Start with the [SF32LB55x hardware design guide](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) for schematic, power, clock/RF and PCB layout guidance, then use the schematic and layout checklists before releasing the board.

@@ -154,7 +154,7 @@ The actual power profile depends on connection interval, transmit power, adverti
 
 Bluetooth software is often described in two major layers:
 
-<div align="center"><em>Table: Host, Controller, and Application Boundaries</em></div>
+<div align="center"><em>Table: Host and Controller Responsibilities</em></div>
 
 <div align="center" markdown>
 

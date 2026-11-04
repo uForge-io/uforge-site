@@ -18,6 +18,7 @@ Use la consola serie para recopilar:
 - Mensajes de la aplicación.
 - Salida del shell de RT-Thread, si está habilitado en el proyecto.
 - Mensajes de fallo.
+- Salida de assert o del fallo, incluidos el archivo y la línea indicados, la PC del primer fallo y los datos de pila, cuando estén disponibles.
 - Comportamiento de la descarga y del reinicio.
 
 Guarde los registros junto con la revisión de la placa, la rama del SDK, el comando de compilación, el comando de grabación y la configuración serie.
@@ -40,10 +41,10 @@ Así se evita mezclar los fallos del hardware, el soporte de placa, el middlewar
 
 | Herramienta | Uso |
 |:------------|:----|
-| `sftool` | Herramienta de línea de comandos serie para leer, escribir o borrar Flash y restablecer los chips compatibles; las opciones dependen del chip y del almacenamiento. |
-| `SiFli_Trace` | Captura y consulta de los registros de la placa mediante el flujo compatible con el objetivo. |
-| `UsartServer` | Herramienta auxiliar necesaria para depurar por UART mediante el Debug IP integrado, según el procedimiento documentado para SF32LB52X y SF32LB56X; no presuponga que se aplica a todos los dispositivos. |
-| `AssertDump` y herramientas de volcados | Úselas solo si están disponibles para el chip y la versión del SDK; siga el procedimiento de captura y análisis documentado para esa versión. |
+| [`sftool`](https://github.com/OpenSiFli/sftool) | Herramienta de línea de comandos serie para leer, escribir o borrar Flash y restablecer los chips compatibles; las opciones dependen del chip y del almacenamiento. |
+| [`SiFli_Trace`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/tools/SifliTrace/SifliTrace_UM.html) | Captura y consulta de los registros de la placa mediante el flujo compatible con el objetivo. |
+| [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/tools/UsartServer/UsartServer_UM.html) | Herramienta auxiliar para depurar por UART mediante el Debug IP integrado. La [guía v2.5.1](https://docs.sifli.com/projects/sdk/v2.5.1/sf32lb52x/tools/UsartServer/UsartServer_UM.html) enumera SF32LB52X y SF32LB56X; una guía inglesa más reciente también menciona `SF322LB57`. Confirme la compatibilidad para el chip y el SDK exactos; no presuponga que todos los dispositivos están cubiertos. |
+| [`AssertDump`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/tools/AssertDump/AssertDump_UM.html) y [herramientas de análisis de fallos](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/app_note/crash_analysis.html) | Úselas solo si están disponibles para el chip y la versión del SDK; siga el procedimiento de captura y análisis documentado para esa versión. |
 | Shell de RT-Thread | Inspección y comandos en tiempo de ejecución solo si la configuración del proyecto habilita la shell. |
 
 </div>
@@ -61,8 +62,11 @@ Así se evita mezclar los fallos del hardware, el soporte de placa, el middlewar
 | Bluetooth inestable | Reloj RF, ruta de antena, configuración de la pila Bluetooth y parámetros de conexión. |
 | Artefactos gráficos en pantalla | Temporización del panel, formato del búfer, sincronización de caché/DMA. |
 | Reinicio aleatorio | Watchdog, raíl de alimentación, caída de tensión, desbordamiento de pila. |
+| Faltan registros de HCPU/LCPU | Compruebe la asignación UART, `ulog`, pinmux y el inicio de LCPU. |
 
 </div>
+
+En los ejemplos LB551 citados, HCPU usa UART1 y LCPU usa UART3 en PB45/PB46. Compruebe que HCPU no tenga asignado también UART3, revise en `pinmux.c` el solapamiento de multiplexación QSPI3/UART1 y confirme que LCPU se haya iniciado; algunos ejemplos requieren `lcpu on` o `lcpu_power_on()`.
 
 ## Lista de comprobación para informar de un fallo { #crash-report-checklist }
 
@@ -77,3 +81,10 @@ Al informar de un fallo, incluya:
 - Registro del puerto serie desde el reinicio.
 - Volcado del fallo o salida del assert.
 - Indicación de si el problema se reproduce en un ejemplo del SDK sin modificar.
+
+## Fuentes oficiales { #official-sources }
+
+- [SiFli-SDK: Depuración y registros](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/app_note/debug_logging.html)
+- [SiFli-SDK: Guía de análisis de fallos](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/app_note/crash_analysis.html)
+- [OpenSiFli SiFli-Wiki: Depuración de registros (chino)](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/faq/debug/log.md)
+- [OpenSiFli SiFli-Wiki: Recuperar un fallo mediante un volcado de memoria (chino)](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/faq/debug/dump.md)

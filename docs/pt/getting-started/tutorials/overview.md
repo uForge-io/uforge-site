@@ -7,7 +7,7 @@ tags:
 
 # Visão geral dos tutoriais { #tutorials-overview }
 
-Esta série transforma a primeira gravação de firmware bem-sucedida em habilidades práticas de desenvolvimento para SF32. A progressão acompanha o escopo da engenharia: primeiro, validar um periférico; depois, integrar subsistemas; por fim, reunir as evidências necessárias para um produto. Os tutoriais usam exemplos do SiFli-SDK como ponto de partida, mas as práticas de conferir o hardware, manter uma configuração de referência comprovadamente funcional e medir os resultados são úteis em qualquer ambiente de desenvolvimento de software para SF32.
+Após a primeira gravação de firmware bem-sucedida, esta série desenvolve habilidades práticas para SF32 por etapas: primeiro, validar um periférico; depois, integrar subsistemas; por fim, reunir as evidências necessárias para validar um produto. Os tutoriais usam exemplos do SiFli-SDK como ponto de partida, mas as práticas de conferir o hardware, manter uma configuração de referência comprovadamente funcional e medir os resultados são úteis em qualquer ambiente de desenvolvimento de software para SF32.
 
 Os tutoriais são a segunda etapa do guia [Primeiros passos](../index.md). Antes de começar, conclua os critérios de sucesso da primeira inicialização descritos nele. Se estiver escolhendo um chip, módulo ou placa de desenvolvimento, consulte primeiro a [família SF32](../../sf32-products/family/SF32_family.md).
 

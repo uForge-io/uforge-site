@@ -8,7 +8,7 @@ tags:
 
 # Design for Production { #design-for-production }
 
-Use this path after selecting a chip or module and before releasing a schematic, PCB layout, BOM, or manufacturing package. It brings together implementation references to help reduce first-pass bring-up and qualification risk: device-specific hardware design guides, checklists, module interface definitions, approved components, and EDA libraries.
+Use this workflow after selecting a chip or module and before releasing a schematic, PCB layout, BOM, or manufacturing package. It brings together implementation references to reduce risk during initial bring-up and product qualification: device-specific hardware design guides, checklists, module interface definitions, approved components, and EDA libraries.
 
 ## Recommended Production Sequence { #recommended-production-sequence }
 
@@ -20,12 +20,12 @@ Use this as an iterative review sequence, not a one-time handoff. Check symbols 
 
 | Stage | Use | Evidence to retain |
 |:------|:----|:-------------------|
-| Architecture | Product introduction and interface requirements | Chosen part, package, memory, display, audio, storage, and power assumptions. |
-| Schematic and layout | Chip or module hardware design guide | Reviewed power, clock, reset, RF, storage, display, and interface implementation. |
-| BOM | Approved Vendor List (AVL) and component datasheets | Qualified or deliberately validated alternates for each critical line item. |
-| Design review | Hardware design checklist | Recorded resolution for every applicable checklist item and exception. |
-| Bring-up | Development board references, SDK examples, and measured tests | Repeatable boot, programming, peripheral, wireless, power-consumption, and recovery results. |
-| Production CAD release | Official EDA libraries plus package drawings | Verified symbol, footprint, pinout, land pattern, and manufacturing outputs. |
+| Architecture | Product introduction and interface requirements | Record the selected component and package, plus assumptions for memory, display, audio, storage, and power. |
+| Schematic and layout | Chip or module hardware design guide | Retain the reviewed implementation for power, clock, reset, RF, storage, display, and interfaces. |
+| BOM | Approved Vendor List (AVL) and component datasheets | For each critical line item, retain evidence that its alternate is qualified or deliberately validated. |
+| Design review | Hardware design checklist | Document the disposition of every applicable checklist item and any exception. |
+| Bring-up | Development board references, SDK examples, and measured tests | Keep repeatable results for boot, programming, peripheral operation, wireless, power consumption, and recovery. |
+| Production CAD release | Official EDA libraries plus package drawings | Retain verification records for the symbol, footprint, pinout, land pattern, and manufacturing outputs. |
 
 </div>
 

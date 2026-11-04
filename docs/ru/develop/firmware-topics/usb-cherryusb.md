@@ -51,7 +51,9 @@ tags:
 
 [Официальный каталог примеров CherryUSB для SiFli-SDK](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/index.html) отдельно группирует примеры для USB Device и USB Host. Начните с примера, соответствующего роли USB и нужному классу, а проверки дескрипторов, питания и совместимости с хостом примените в реализации продукта.
 
-<div align="center"><em>Таблица: примеры CherryUSB из SiFli-SDK для SF32LB58x</em></div>
+Набор поддерживаемых плат различается для разных примеров. Перед повторным использованием проверьте раздел Supported Platforms на странице примера и убедитесь, что целевая плата указана в списке.
+
+<div align="center"><em>Таблица: примеры CherryUSB из документации SF32LB58x для SiFli-SDK</em></div>
 <div align="center" markdown>
 
 | Роль USB | Пример | Назначение |

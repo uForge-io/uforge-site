@@ -12,7 +12,7 @@ Este artigo adapta o [guia de integração de sensores](https://docs.sifli.com/p
 Os exemplos usam o sensor de seis eixos LSM6DSL (acelerômetro e giroscópio) e o sensor de temperatura e pressão barométrica BMP280. Os nomes de API e os identificadores reproduzem os exemplos do guia do SDK; confira o ramo de destino antes de copiá-los para um produto.
 
 !!! note "Escopo por família"
-    Este artigo reúne o fluxo de desenvolvimento de drivers para SF32LB52x, SF32LB55x, SF32LB56x e SF32LB58x. O código de LSM6DSL/BMP280 é um exemplo de código de driver de sensor; a instância do barramento, os números de GPIO, o roteamento das interrupções, os caminhos do Kconfig e os periféricos disponíveis dependem da família e da placa de destino.
+    Este artigo reúne o fluxo de desenvolvimento de drivers para SF32LB52x, SF32LB55x, SF32LB56x e SF32LB58x. O código de LSM6DSL/BMP280 é um exemplo de driver de sensor; a instância do barramento, os números de GPIO, o roteamento das interrupções, os caminhos do Kconfig e os periféricos disponíveis dependem da família e da placa de destino.
 
 ## Confirme o hardware e a interface do sensor { #1-confirm-the-hardware-and-sensor-interface }
 
@@ -86,6 +86,8 @@ A opção do grupo pode incluir vários modelos compatíveis, como LSM6DSL e SC7
 - `LSM6DSL_BUS_NAME` define o nome do dispositivo de barramento que o driver de sensores do RT-Thread localizará.
 - `LSM6DSL_INT_GPIO_BIT` e `LSM6DSL_INT2_GPIO_BIT` identificam os pinos de interrupção, caso a placa os disponibilize.
 - `LSM_USING_AWT`, `LSM_USING_PEDO` e `LSM6DSL_USE_FIFO` representam funções específicas do dispositivo; defina-os somente se o driver selecionado oferecer suporte a elas.
+
+O bloco mantém o valor padrão `0` do guia (SPI). Para seguir o exemplo de acesso I2C abaixo, defina `LSM6DSL_USING_I2C=1`; se escolher SPI, use o código de acesso SPI correspondente.
 
 Este exemplo segue o guia SF32LB52x. Guias de outras famílias ou ramos do SDK podem oferecer opções ou caminhos de menu diferentes; antes de aplicá-lo, confira os símbolos definidos no ramo de destino.
 

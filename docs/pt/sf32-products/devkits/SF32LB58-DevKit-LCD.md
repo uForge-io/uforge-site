@@ -44,7 +44,7 @@ Antes de desenvolver uma placa própria, é possível usar esta placa para valid
 
 | Versão da placa | Base | Observações |
 | :--- | :--- | :--- |
-| V1.0.1 | SF32LB58-MOD-N16R32N1-V1.0.1 e SF32LB58-MOD-A128R32N1-V1.0.1 | Versão atual; adiciona detecção de conexão USB em PB24; altera o PTC para 2 A / 6 V para suportar a potência máxima dos dois canais de áudio; remove a adaptação de nível do LED RGB, cuja temporização era inadequada; substitui o conversor CC-CC para reduzir a ondulação na saída; remove o resistor pull-up de USB DP para corrigir o problema de interrupção no modo periférico USB |
+| V1.0.1 | SF32LB58-MOD-N16R32N1-V1.0.1 e SF32LB58-MOD-A128R32N1-V1.0.1 | Versão atual; adiciona detecção de conexão USB em PB24; altera o PTC para 2 A / 6 V para corrigir a falta de corrente de alimentação quando os dois canais de áudio operam na potência máxima; remove a adaptação de nível do LED RGB, cuja temporização era inadequada; substitui o conversor CC-CC para reduzir a ondulação na saída; remove o resistor pull-up de USB DP para corrigir o problema de interrupção no modo periférico USB |
 | V1.0.0 | SF32LB58-MOD-N16R32N1-V1.0.0 com SF32LB587VEE56 | Versão pública inicial da placa |
 
 </div>
@@ -69,14 +69,14 @@ A fonte da SiFli apresenta uma divergência para a versão V1.0.0: a seção de 
 
 ## Quando usar esta placa { #when-to-use-this-board }
 
-Escolha a SF32LB58-DevKit-LCD quando o projeto precisar de uma plataforma representativa para validar displays avançados e periféricos, em vez de uma placa breakout mínima.
+Escolha a SF32LB58-DevKit-LCD quando precisar validar displays de alta resolução e a integração de periféricos, em vez de apenas expor um conjunto mínimo de sinais.
 
 - Fazer o bring-up de displays MIPI DSI, RGB888 ou QSPI
 - Validar em conjunto toque, áudio, armazenamento e USB
 - Testar interfaces de usuário de alta resolução na plataforma SF32LB58x
 - Avaliar a expansão CAN ou Wi-Fi via SDIO
 - Comparar variantes de módulo com NOR e NAND
-- Validar o firmware em uma placa de classe topo de linha antes de projetar uma PCB personalizada
+- Validar o firmware nesta placa antes de projetar uma PCB personalizada
 
 Para planejar a integração no nível do módulo, consulte também [SF32LB58-MOD](../modules/SF32LB58-MOD.md). Para conhecer a arquitetura da família de chips e os recursos de display e memória, consulte [SF32LB58x](../chips/SF32LB58x.md).
 
@@ -105,6 +105,8 @@ Para planejar a integração no nível do módulo, consulte também [SF32LB58-MO
 
 </div>
 
+**Divergência na identificação da ponte USB-UART — confirme o componente montado:** O guia de modelos da SiFli identifica um CH343K com dois canais de depuração USB-UART. Já o diagrama de blocos da placa identifica a ponte como CH342K e mostra UART1 e UART4, sem associar cada canal a um conector Type-C. Confira o componente instalado e a ligação dos canais no esquemático/BOM da revisão correspondente.
+
 ## Primeiros passos { #getting-started }
 
 ### Hardware necessário { #required-hardware }
@@ -113,6 +115,8 @@ Para planejar a integração no nível do módulo, consulte também [SF32LB58-MO
 - Módulo de display LCD com interface MIPI DSI, RGB888 ou QSPI, conforme a aplicação
 - Cabo de dados USB 2.0, Type-A para Type-C ou equivalente
 - Computador com Windows, Linux ou macOS
+
+Para depurar via UART e testar USB ao mesmo tempo, use dois cabos USB 2.0 de dados, um para cada conector Type-C.
 
 ### Hardware opcional { #optional-hardware }
 
@@ -126,9 +130,9 @@ Para planejar a integração no nível do módulo, consulte também [SF32LB58-MO
 
 1. Conecte o painel de display desejado ao conector LCD correspondente.
 2. Conecte a porta USB-UART Type-C ao computador.
-3. Abra a ferramenta de gravação da SiFli e selecione a porta COM correta.
+3. Abra o SifliTrace e selecione a porta COM correta.
 4. Instale ou remova o jumper Mode conforme queira usar o modo de gravação ou o modo de execução normal.
-5. Ligue a placa e grave ou execute o firmware desejado.
+5. Ligue a placa; no modo de gravação, use o Impeller para gravar o firmware desejado ou deixe o aplicativo iniciar no modo normal.
 6. Depois do bring-up do display, valide o toque, o áudio, o armazenamento e os periféricos de expansão necessários ao produto.
 
 Use um cabo USB que suporte transferência de dados. Alguns cabos Type-C fornecem apenas alimentação e não disponibilizam os caminhos de dados UART ou USB.
@@ -136,6 +140,8 @@ Use um cabo USB que suporte transferência de dados. Alguns cabos Type-C fornece
 ## Alimentação { #power }
 
 A SF32LB58-DevKit-LCD é alimentada por USB Type-C.
+
+O diagrama de blocos mostra alimentação de 5 V para o LCD DPI, o LED RGB, o driver da luz de fundo, o amplificador de áudio e os headers de 40 pinos. Antes de adicionar cargas, confira no esquemático os limites dos trilhos e conectores.
 
 - As duas portas USB Type-C da placa podem alimentá-la.
 - Para gravar o firmware e capturar logs UART, use a porta USB-UART Type-C.
@@ -145,10 +151,14 @@ A SF32LB58-DevKit-LCD é alimentada por USB Type-C.
 
 A principal interface para gravação de firmware e logs seriais é a porta USB-UART Type-C.
 
+Antes da gravação, selecione o firmware desejado na ferramenta de gravação Impeller da SiFli.
+
 - **Modo de gravação**: instale o jumper Mode e ligue ou reinicie a placa.
 - **Modo de depuração/log de software**: remova o jumper Mode e ligue ou reinicie a placa.
 
 A placa também oferece depuração J-Link / SWD.
+
+A referência de ligação usa os pinos CONN2 1 (3,3 V), 12 (SWD-DIO), 7 (SWD-CLK) e 9 (GND); conecte-os pelo adaptador fornecido, na orientação mostrada.
 
 ![Referência de ligação J-Link da SF32LB58-DevKit-LCD](assets/sf32lb58x/58KIT-JLINK-CONN2.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — referência de ligação J-Link</em></div>
@@ -229,6 +239,8 @@ A placa oferece:
 - Duas saídas para alto-falantes
 - Um caminho de sinal PDM multiplexado com os sinais RGB; portanto, ele não fica disponível enquanto a interface de display RGB estiver ativa
 
+A referência de ligação de áudio associa CONN2-11 a MIC_BIAS, CONN2-13/15 a ADC1N/P, CONN2-16/18 a ADC2N/P e CONN2-35–38 a SPK1/2 P/N.
+
 A [documentação detalhada da placa](https://wiki.sifli.com/en/board/sf32lb58x/SF32LB58-DevKit-LCD.html) da SiFli indica saída de áudio analógico estéreo de até 2,8 W/4 Ω, enquanto o [guia de modelos de placas de desenvolvimento](https://wiki.sifli.com/en/board/devkit_guide.html) informa 3 W/4 Ω para as duas saídas de alto-falante. Nenhuma das fontes esclarece se a potência se aplica a cada canal ou ao conjunto. Antes de escolher os alto-falantes, confira a revisão exata da placa, o esquemático e as condições de alimentação e carga do amplificador; não trate nenhum dos valores como potência garantida por canal.
 
 ![Referência de ligação de áudio](assets/sf32lb58x/58KIT-AUDIO-CONN2.png){ loading="lazy" }
@@ -245,6 +257,8 @@ O módulo SF32LB58 inclui um controlador CAN, e a placa disponibiliza a interfac
 <div align="center"><em>Placa de transceptor CAN de referência</em></div>
 
 A placa também oferece expansão Wi-Fi SDIO pelo conector de expansão.
+
+O esquema de ligação identifica SDIO1_EN, SDIO1_CMD, SDIO1_D0–D3, SDIO1_CLK e WAKE_HOST, além de 3,3 V e GND; confira os números dos pinos no diagrama do conector antes de fazer a ligação.
 
 ![Módulo Wi-Fi SDIO de referência](assets/sf32lb58x/ATK-RTL8189-SDIO-WIFI-LOOK.png){ loading="lazy" }
 <div align="center"><em>Módulo Wi-Fi SDIO de referência</em></div>

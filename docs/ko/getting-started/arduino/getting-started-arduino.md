@@ -97,9 +97,7 @@ Zephyr 로더 워크플로에는 **Dynamic**을 선택하십시오. 스케치를
 
 ## 보드를 시리얼 다운로드 모드로 전환 { #put-the-board-in-serial-download-mode }
 
-OpenSiFli 문서에 따르면 처음 사용할 때는 보드가 시리얼 다운로드 모드에 있어야 합니다. SF32LB52 DevKit LCD의 부트/리셋 시퀀스를 사용한 다음 Arduino IDE 또는 CLI에서 업로드하십시오.
-
-업로드 도구는 `sftool`입니다.
+OpenSiFli는 처음 사용할 때 보드를 시리얼 다운로드 모드로 전환해야 한다고 안내합니다. SF32LB52 DevKit LCD에서는 다운로드 도구의 **BOOT** 옵션을 활성화한 다음 보드에 전원을 넣거나 리셋하십시오. 자세한 내용은 보드의 [다운로드 및 디버그 안내](../../sf32-products/devkits/SF32LB52-DevKit-LCD.md#download-and-debug)를 참조하십시오. 다운로드 모드에 들어간 뒤 Arduino IDE 또는 CLI에서 `sftool`로 스케치를 업로드하십시오.
 
 ## 시리얼 스모크 테스트 업로드 { #upload-a-serial-smoke-test }
 

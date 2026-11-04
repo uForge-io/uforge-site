@@ -66,35 +66,40 @@ SF32LB55x 面向低功耗 AIoT 产品，这类产品既要快速响应用户操�
 | 封装名称 | 尺寸 | 管脚间距 | 焊球直径 |
 | :--- | :--- | :--- | :--- |
 | QFN68L | 7x7x0.75 mm | 0.35 mm | - |
+| BGA125 | 7x7x0.94 mm | 0.5 mm | 0.25 mm |
 | BGA145 | 7x7x0.94 mm | 0.5 mm | 0.25 mm |
 | BGA169 | 7x7x0.94 mm | 0.5 mm | 0.25 mm |
 
 </div>
 
-SF32LB55x 提供 QFN68L、BGA145 和 BGA169 三种封装。应尽早确定封装，因为不同封装在存储接口、扇出方式、PCB 工艺要求及可用 GPIO 数量方面存在差异。
+SF32LB55x 提供 QFN68L、BGA125、BGA145 和 BGA169 四种封装。应尽早确定封装，因为不同封装在存储接口、扇出方式、PCB 工艺要求及可用 GPIO 数量方面存在差异。
 
 ![图 3.2-1：QFN68L 管脚分布](../../sf32-products/chips/assets/55x/SF32LB55x-QFN68-Leadmap.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>图 3.2-1：QFN68L 管脚分布</em></div>
 
-![图 3.2-2：BGA145 管脚分布](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-Ballmap.svg){ width="100%" loading="lazy" }
+![图 3.2-2：BGA125 球位图](../../sf32-products/chips/assets/55x/SF32LB55x-BGA125-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 3.2-2：BGA145 管脚分布</em></div>
+<div align="center"><em>图 3.2-2：BGA125 球位图</em></div>
+
+![图 3.2-3：BGA145 管脚分布](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-Ballmap.svg){ width="100%" loading="lazy" }
+
+<div align="center"><em>图 3.2-3：BGA145 管脚分布</em></div>
 
 !!! warning "BGA169 历史型号管脚差异"
     思澈科技（SiFli）已将 SF32LB557V8N6 标为停产（EOL）。下方保留其管脚图供现有设计核对，不作为新设计的选型建议。SF32LB557VD3A6 的 BGA169 管脚图不同：D11、E9、K12、L11、L13 和 M13 为 NC。务必按完整料号核对管脚图；封装尺寸相同并不代表管脚兼容。
 
-![图 3.2-3：BGA169 SF32LB557V8N6 管脚分布](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg){ width="100%" loading="lazy" }
+![图 3.2-4：BGA169 SF32LB557V8N6 管脚分布](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 3.2-3：BGA169 SF32LB557V8N6 管脚分布</em></div>
+<div align="center"><em>图 3.2-4：BGA169 SF32LB557V8N6 管脚分布</em></div>
 
-![图 3.2-4：BGA169 SF32LB557VD3A6 管脚分布](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-2-Ballmap.svg){ width="100%" loading="lazy" }
+![图 3.2-5：BGA169 SF32LB557VD3A6 管脚分布](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-2-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 3.2-4：BGA169 SF32LB557VD3A6 管脚分布</em></div>
+<div align="center"><em>图 3.2-5：BGA169 SF32LB557VD3A6 管脚分布</em></div>
 
 ### 3.3. 主要硬件特性 { #33-major-hardware-features }
 
-- QFN68L、BGA145 和 BGA169 封装选项。
+- QFN68L、BGA125、BGA145 和 BGA169 封装选项。
 - 48 MHz 和 32.768 kHz 双晶体设计要求。
 - 低功耗蓝牙 5.2 收发机、RF 匹配和天线布局要求。
 - OPI PSRAM、QSPI NOR/NAND Flash 和 PSRAM、SDIO eMMC 或 Micro SD 接口；合封存储配置因具体料号而异。

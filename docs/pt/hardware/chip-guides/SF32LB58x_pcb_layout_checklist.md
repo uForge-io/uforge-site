@@ -19,6 +19,8 @@ tags:
 
 Cada tabela abaixo cobre uma área de revisão do layout da PCB. Quando não houver uma coluna "Aplicável a", o item se aplica a todos os projetos de PCB SF32LB58x abrangidos por esta lista.
 
+Este checklist se baseia na planilha da SiFli SF32LB58x Schematic&PCB checklist V1.0, datada de 2026-01-21.
+
 ### 6.18.1. Encapsulamento { #6181-package }
 
 <div align="center"><em>Tabela 6.18.1-1: Checklist do encapsulamento</em></div>
@@ -179,9 +181,9 @@ Cada tabela abaixo cobre uma área de revisão do layout da PCB. Quando não hou
 
 | Nº | Ponto de verificação | Categoria |
 |:---|:---|:---|
-| 1 | Evite rotear sinais de comutação rápida em paralelo com o sinal GPADC; se isso não puder ser evitado, use uma guarda de terra adequada | Obrigatório |
+| 1 | Não roteie sinais de comutação rápida em paralelo com o sinal GPADC | Obrigatório |
 | 2 | Os resistores do divisor de tensão da bateria estão próximos ao pino de entrada do chip | Obrigatório |
-| 3 | Evite rotear sinais de comutação rápida em paralelo com o sinal SDMADC; se isso não puder ser evitado, use uma guarda de terra adequada | Opcional |
+| 3 | Não roteie sinais de comutação rápida em paralelo com o sinal SDMADC | Opcional |
 
 </div>
 

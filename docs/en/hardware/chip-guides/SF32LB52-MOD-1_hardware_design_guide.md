@@ -106,7 +106,7 @@ The module has 68 pins in total, described in the table below.
 | PA33 | 15 | I/O/T | GPIO_A33 | I | GPIO_A33, PA33_I2C_UART, PA33_TIM, #GPADC_CH6 |
 | PA32 | 16 | I/O/T | GPIO_A32 | O | GPIO_A32, PA32_I2C_UART, PA32_TIM, #GPADC_CH5 |
 | VDD33_VOUT2 | 17 | P | VDD33_VOUT2 | P | 3.3V power output |
-| PA24 | 18 | I/O/T | GPIO_A24 | O | GPIO_A24, SPI1_DI, I2S1_MCLK, PA24_I2C_UART, PA24_TIM, #WKUP_PIN0 |
+| PA24 | 18 | I/O/T | GPIO_A24 | O | GPIO_A24, SPI1_DIO, I2S1_MCLK, PA24_I2C_UART, PA24_TIM, #WKUP_PIN0 |
 | PA25 | 19 | I/O/T | GPIO_A25 | O | GPIO_A25, SPI1_DI, I2S1_SDO, PA25_I2C_UART, PA25_TIM, #XTAL32K_EXT, #WKUP_PIN1 |
 | PA26 | 20 | I/O/T | GPIO_A26 | O | GPIO_A26, PA26_I2C_UART, PA26_TIM, #WKUP_PIN2 |
 | PA27 | 21 | I/O/T | GPIO_A27 | O | GPIO_A27, PA27_I2C_UART, PA27_TIM, #WKUP_PIN3 |
@@ -147,6 +147,9 @@ The module has 68 pins in total, described in the table below.
 | PA12 | 68 | I/O/T | GPIO_A12 | O | GPIO_A12, MPI2_CS, SD1_DIO2, PA12_I2C_UART, PA12_TIM |
 
 </div>
+
+!!! important "SiFli sources disagree on PA24's SPI1 function"
+    DS5203 V0.3 lists PA24 as `SPI1_DI`; the OpenSiFli DevKit-LCD pin table lists `SPI1_DIO`, while the EPD design guide uses PA24 as `SPI1_DO` for the TF-card CMD connection. This table follows OpenSiFli's `SPI1_DIO` designation. These labels do not establish the direction or mux for every SDK/module revision; verify the target SDK pin mux and exact module revision before assigning PA24. See the [DevKit-LCD pin table](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-DevKit-LCD.md) and [EPD display design guide](https://wiki.sifli.com/hardware/SF32LB52-MOD-1-EPD-HW-Application.html).
 
 *Legend: P = power; I = input; O = output; T = can be configured as high-impedance; AO = audio output; AI = audio input.*
 

@@ -1,6 +1,6 @@
 ---
 icon: lucide/terminal
-description: "The daily SiFli-SDK developer loop: activate the environment, build with scons, flash via UART download or sftool, and monitor serial output."
+description: "The daily SiFli-SDK developer loop: activate the environment, build with scons, flash with the generated UART download script or sftool, and monitor serial output."
 tags:
     - Develop
     - SiFli-SDK

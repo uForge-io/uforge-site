@@ -8,7 +8,7 @@ tags:
 
 # MicroPython 状态 { #micropython-status }
 
-在已检查的思澈科技（SiFli）文档和 OpenSiFli 仓库中，尚未找到官方 SF32 MicroPython 移植、固件镜像或面向具体开发板的烧录流程。
+截至 2026-11-04，在已检查的思澈科技（SiFli）文档和 OpenSiFli 仓库中，尚未找到官方 SF32 MicroPython 移植、固件镜像或面向具体开发板的烧录流程。
 
 已检查的公开来源为 [OpenSiFli 的公开 GitHub 仓库](https://github.com/OpenSiFli/)和[思澈科技（SiFli）文档站](https://docs.sifli.com/)。
 
@@ -59,4 +59,7 @@ while True:
 
 ## 为什么重要 { #why-this-matters }
 
-“下载一个 MicroPython 镜像”不是可执行的指导。用户需要准确的镜像、匹配的开发板、烧录工具、REPL 设置和恢复路径。缺少这些信息时，MicroPython 页面只会增加支持负担，无法真正帮助用户。
+“下载一个 MicroPython 镜像”不是可执行的指导。用户需要准确的镜像、兼容的开发板、烧录工具、REPL 设置和恢复路径。缺少这些信息时，MicroPython 页面只会增加支持负担，无法真正帮助用户。
+
+!!! note "自动生成内容"
+    本页在没有专门源文档的情况下编写。使用前，请对照思澈科技（SiFli）官方文档核实其中的技术信息。

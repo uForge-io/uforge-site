@@ -82,7 +82,7 @@ The extDMA guide lists RGB565, RGB888, and ARGB8888 inputs. Input support alone 
 
 The current OpenSiFli LCDC header defines the compressed-layer support macro only when `HAL_EXTDMA_MODULE_ENABLED` is enabled; its family guard excludes SF32LB52x and SF32LB57x. The header defines maximum compressed-layer widths of 512 pixels for SF32LB55x/SF32LB56x and 1024 pixels for SF32LB58x. These are compressed-layer integration limits, not universal panel-resolution limits. A source comment also notes that the LCPU path is not enabled.
 
-SF32LB55x needs an integration caveat. The current OpenSiFli LCDC header defines the compressed-layer macro when `HAL_EXTDMA_MODULE_ENABLED` is enabled, but its comment notes that the LCPU path is not enabled. The published SDK LCDC capability table marks compressed-layer decompression unsupported on 55x, while the SF32LB55x datasheet describes TurboPixel and LCD-controller decompression. A compile-time macro does not prove that the complete display path has been validated. Treat 55x support as conditional and verify the exact SDK revision, core, build configuration, and target hardware; do not infer runtime support from the macro alone.
+For SF32LB55x, the available sources differ on integration support. The published SDK LCDC capability table marks compressed-layer decompression unsupported on 55x, while the SF32LB55x datasheet describes TurboPixel and LCD-controller decompression. These sources do not establish a validated end-to-end display path; the header macro described above is not runtime evidence. Treat 55x support as conditional and verify the exact SDK revision, core, build configuration, and target hardware.
 
 Keep renderer, extDMA, and display-controller buffer ownership separate. Wait for rendering before compression, for compression before display use, and for display use to finish before reusing that buffer. With cacheable shared memory, clean CPU-written input before hardware reads, prepare destination cache lines so dirty data cannot overwrite hardware output, and invalidate after completion before CPU reads it. Respect cache-line boundaries and neighboring data. Compression completion is not panel-transfer completion.
 
@@ -90,7 +90,7 @@ The extDMA source address, destination address, and transfer length must be 4-by
 
 ## Availability in the SF32 Family { #availability-in-the-sf32-family }
 
-TurboPixel is documented for the following SF32 families:
+The current evidence for TurboPixel availability across SF32 families is summarized below:
 
 <div align="center"><em>Documented TurboPixel Availability</em></div>
 

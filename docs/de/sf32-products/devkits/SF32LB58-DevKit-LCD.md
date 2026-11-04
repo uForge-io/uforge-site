@@ -44,7 +44,7 @@ Nutzen Sie das Board, um Display, Speicher, Audio, USB und externe Peripherie ge
 
 | Board-Version | Grundlage | Hinweise |
 | :--- | :--- | :--- |
-| V1.0.1 | SF32LB58-MOD-N16R32N1-V1.0.1 und SF32LB58-MOD-A128R32N1-V1.0.1 | Aktuelle Version; ergänzt die USB-Steckererkennung an PB24; ändert die PTC-Auslegung auf 2 A / 6 V, um die maximale Audioausgabe über beide Kanäle zu unterstützen; entfernt die Pegelwandlerstufe der RGB-LED, da deren Timing ungeeignet ist; ersetzt den DC/DC-Wandler, um die Ausgangswelligkeit zu verringern; entfernt den Pull-up-Widerstand an USB DP, um das Interrupt-Problem im USB-Device-Betrieb zu beheben |
+| V1.0.1 | SF32LB58-MOD-N16R32N1-V1.0.1 und SF32LB58-MOD-A128R32N1-V1.0.1 | Aktuelle Version; ergänzt die USB-Steckererkennung an PB24; ändert die PTC-Auslegung auf 2 A / 6 V, um die unzureichende Versorgung bei maximaler Ausgabe über beide Audiokanäle zu beheben; entfernt die Pegelwandlerstufe der RGB-LED, da deren Timing ungeeignet ist; ersetzt den DC/DC-Wandler, um die Ausgangswelligkeit zu verringern; entfernt den Pull-up-Widerstand an USB DP, um das Interrupt-Problem im USB-Device-Betrieb zu beheben |
 | V1.0.0 | SF32LB58-MOD-N16R32N1-V1.0.0 mit SF32LB587VEE56 | Erste öffentliche Board-Version |
 
 </div>
@@ -69,14 +69,14 @@ Die Quelle von SiFli ist für V1.0.0 widersprüchlich: Der Abschnitt zur Modulve
 
 ## Wann dieses Board geeignet ist { #when-to-use-this-board }
 
-Wählen Sie das SF32LB58-DevKit-LCD, wenn das Projekt eine realistische High-End-Plattform zur Validierung von Display und Peripherie statt eines minimalen Breakout-Boards benötigt.
+Wählen Sie das SF32LB58-DevKit-LCD, wenn Sie hochauflösende Displays und die Peripherieintegration validieren möchten, statt lediglich ein Minimum an Signalen herauszuführen.
 
 - MIPI-DSI-, RGB888- oder QSPI-Displays in Betrieb nehmen
 - Touch, Audio, Speicher und USB gemeinsam validieren
 - Das Verhalten hochauflösender Benutzeroberflächen auf der SF32LB58x-Plattform testen
 - CAN- oder SDIO-WLAN-Erweiterung evaluieren
 - NOR- und NAND-basierte Modulkonfigurationen vergleichen
-- Firmware auf einem Board der Spitzenklasse validieren, bevor die Arbeit an einer eigenen Leiterplatte beginnt
+- Firmware auf diesem Board validieren, bevor Sie eine eigene Leiterplatte entwickeln
 
 Für die Integrationsplanung auf Modulebene lesen Sie zusätzlich [SF32LB58-MOD](../modules/SF32LB58-MOD.md). Zu Architektur sowie Display- und Speicherfähigkeiten der Chipfamilie siehe [SF32LB58x](../chips/SF32LB58x.md).
 
@@ -105,6 +105,8 @@ Für die Integrationsplanung auf Modulebene lesen Sie zusätzlich [SF32LB58-MOD]
 
 </div>
 
+**Abweichung bei der USB-zu-UART-Brücke — bestücktes Bauteil prüfen:** Der Modellleitfaden von SiFli nennt einen CH343K mit zwei USB-zu-UART-Debug-Kanälen. Im Blockdiagramm des Boards ist die Brücke dagegen als CH342K bezeichnet; außerdem sind UART1 und UART4 eingezeichnet, aber keinem Type-C-Anschluss zugeordnet. Prüfen Sie Bauteil und Kanalverdrahtung anhand von Schaltplan und Stückliste der jeweiligen Board-Revision.
+
 ## Erste Schritte { #getting-started }
 
 ### Erforderliche Hardware { #required-hardware }
@@ -113,6 +115,8 @@ Für die Integrationsplanung auf Modulebene lesen Sie zusätzlich [SF32LB58-MOD]
 - LCD-Modul mit MIPI DSI, RGB888 oder QSPI, je nach Anwendung
 - USB-2.0-Datenkabel, Typ A auf Typ C oder gleichwertig
 - Host-Rechner mit Windows, Linux oder macOS
+
+Wenn Sie gleichzeitig per UART debuggen und USB testen möchten, verwenden Sie zwei USB-2.0-Datenkabel, je eines pro Type-C-Anschluss.
 
 ### Optionale Hardware { #optional-hardware }
 
@@ -126,9 +130,9 @@ Für die Integrationsplanung auf Modulebene lesen Sie zusätzlich [SF32LB58-MOD]
 
 1. Schließen Sie das Ziel-Display an den passenden LCD-Steckverbinder an.
 2. Verbinden Sie den USB-zu-UART-Type-C-Anschluss mit dem Host-Rechner.
-3. Öffnen Sie das Download-Werkzeug von SiFli und wählen Sie den richtigen COM-Port.
+3. Öffnen Sie SifliTrace und wählen Sie den richtigen COM-Port.
 4. Setzen oder entfernen Sie den Mode-Jumper, je nachdem, ob Sie den Download-Modus oder den normalen Betriebsmodus wünschen.
-5. Versorgen Sie das Board und laden Sie die Ziel-Firmware herunter oder führen Sie sie aus.
+5. Schalten Sie das Board ein; flashen Sie die Ziel-Firmware im Download-Modus mit Impeller oder starten Sie die Anwendung im normalen Betriebsmodus.
 6. Validieren Sie nach der Display-Inbetriebnahme Touch, Audio, Speicher und alle für das Produkt benötigten Erweiterungsperipheriegeräte.
 
 Verwenden Sie ein USB-Kabel, das Daten übertragen kann. Manche Type-C-Kabel liefern nur Strom und stellen weder UART noch USB-Datenpfad bereit.
@@ -136,6 +140,8 @@ Verwenden Sie ein USB-Kabel, das Daten übertragen kann. Manche Type-C-Kabel lie
 ## Stromversorgung { #power }
 
 Das SF32LB58-DevKit-LCD wird über USB Type-C versorgt.
+
+Das Blockdiagramm zeigt eine 5-V-Versorgung für das DPI-LCD, die RGB-LED, den Hintergrundbeleuchtungstreiber, den Audio-PA und die 40-poligen Stiftleisten. Prüfen Sie vor dem Anschließen zusätzlicher Lasten die Grenzen der Versorgungsschienen und Steckverbinder im Schaltplan.
 
 - Beide USB-Type-C-Anschlüsse auf dem Board können das Board versorgen
 - Verwenden Sie für Firmware-Download und UART-Logging den USB-zu-UART-Type-C-Anschluss
@@ -145,10 +151,14 @@ Das SF32LB58-DevKit-LCD wird über USB Type-C versorgt.
 
 Die primäre Schnittstelle für Firmware-Download und serielle Logs ist der USB-zu-UART-Type-C-Anschluss.
 
+Wählen Sie die Ziel-Firmware vor dem Download im SiFli-Flash-Werkzeug Impeller aus.
+
 - **Download-Modus**: Mode-Jumper setzen, dann das Board einschalten oder zurücksetzen
 - **Software-Debug-/Log-Modus**: Mode-Jumper entfernen, dann das Board einschalten oder zurücksetzen
 
 Das Board unterstützt zudem J-Link- / SWD-Debug.
+
+Die Verdrahtungsreferenz verwendet CONN2-Pin 1 (3,3 V), Pin 12 (SWD-DIO), Pin 7 (SWD-CLK) und Pin 9 (GND). Schließen Sie diese über den mitgelieferten Adapter in der abgebildeten Ausrichtung an.
 
 ![Verdrahtungsreferenz für J-Link am SF32LB58-DevKit-LCD](assets/sf32lb58x/58KIT-JLINK-CONN2.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — J-Link-Verdrahtungsreferenz</em></div>
@@ -229,6 +239,8 @@ Das Board unterstützt:
 - Zwei Lautsprecherausgänge
 - Einen PDM-Signalpfad, der mit RGB-Signalen gemultiplext ist und daher bei aktivem RGB-Display-Pfad nicht verfügbar ist
 
+Die Audio-Verdrahtungsreferenz ordnet CONN2-Pin 11 MIC_BIAS, die Pins 13/15 ADC1N/P, 16/18 ADC2N/P und die Pins 35–38 SPK1/2 P/N zu.
+
 Der [detaillierte Board-Leitfaden](https://wiki.sifli.com/en/board/sf32lb58x/SF32LB58-DevKit-LCD.html) von SiFli gibt für den analogen Stereo-Ausgang bis zu 2,8 W/4 Ω an, während der [Modellleitfaden für Entwicklungsboards](https://wiki.sifli.com/en/board/devkit_guide.html) 3 W/4 Ω für die beiden Lautsprecherausgänge nennt. Keine der Quellen sagt, ob sich der Wert auf einen Kanal oder die Summe bezieht. Prüfen Sie genaue Board-Revision, Schaltplan sowie Versorgungs- und Lastbedingungen des Verstärkers, bevor Sie Lautsprecher auswählen; betrachten Sie keinen der Werte als garantierte Ausgangsleistung pro Kanal.
 
 ![Verdrahtungsreferenz für Audio](assets/sf32lb58x/58KIT-AUDIO-CONN2.png){ loading="lazy" }
@@ -245,6 +257,8 @@ Das zugrunde liegende SF32LB58-Modul enthält einen CAN-Controller, und das Boar
 <div align="center"><em>Referenz-CAN-Transceiver-Board</em></div>
 
 Das Board unterstützt außerdem die SDIO-WLAN-Erweiterung über die Schnittstelle der Stiftleiste.
+
+Die Verdrahtungsreferenz zeigt SDIO1_EN, SDIO1_CMD, SDIO1_D0–D3, SDIO1_CLK und WAKE_HOST sowie 3,3 V und GND. Prüfen Sie vor dem Verdrahten die Pinnummern in der Anschlusszeichnung.
 
 ![Referenz-SDIO-WLAN-Modul](assets/sf32lb58x/ATK-RTL8189-SDIO-WIFI-LOOK.png){ loading="lazy" }
 <div align="center"><em>Referenz-SDIO-WLAN-Modul</em></div>

@@ -66,35 +66,40 @@ SF32LB55xは、ユーザー操作への応答性と、長時間の待機・ス�
 | パッケージ名 | サイズ | ピンピッチ | ボール径 |
 | :--- | :--- | :--- | :--- |
 | QFN68L | 7x7x0.75 mm | 0.35 mm | - |
+| BGA125 | 7x7x0.94 mm | 0.5 mm | 0.25 mm |
 | BGA145 | 7x7x0.94 mm | 0.5 mm | 0.25 mm |
 | BGA169 | 7x7x0.94 mm | 0.5 mm | 0.25 mm |
 
 </div>
 
-SF32LB55xはQFN68L、BGA145、BGA169の各パッケージに対応しています。メモリーインターフェース、ファンアウト、PCB製造プロセスの要件、利用可能なGPIO数はパッケージによって異なるため、早い段階で選定してください。
+SF32LB55xはQFN68L、BGA125、BGA145、BGA169の各パッケージに対応しています。メモリーインターフェース、ファンアウト、PCB製造プロセスの要件、利用可能なGPIO数はパッケージによって異なるため、早い段階で選定してください。
 
 ![図 3.2-1: QFN68Lのピン配置](../../sf32-products/chips/assets/55x/SF32LB55x-QFN68-Leadmap.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>図 3.2-1: QFN68Lのピン配置</em></div>
 
-![図 3.2-2: BGA145のピン配置](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-Ballmap.svg){ width="100%" loading="lazy" }
+![図 3.2-2: BGA125のボール配置](../../sf32-products/chips/assets/55x/SF32LB55x-BGA125-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>図 3.2-2: BGA145のピン配置</em></div>
+<div align="center"><em>図 3.2-2: BGA125のボール配置</em></div>
+
+![図 3.2-3: BGA145のピン配置](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-Ballmap.svg){ width="100%" loading="lazy" }
+
+<div align="center"><em>図 3.2-3: BGA145のピン配置</em></div>
 
 !!! warning "従来のBGA169ピン配置"
     SiFliはSF32LB557V8N6を生産終了（EOL）としています。下図は既存設計の確認用に残しており、新規設計への採用を推奨するものではありません。SF32LB557VD3A6のBGA169ピン配置は異なり、D11、E9、K12、L11、L13、M13はNCです。発注型番に対応する配置を確認してください。パッケージ寸法が同じでもピン互換とは限りません。
 
-![図 3.2-3: BGA169 SF32LB557V8N6のピン配置](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg){ width="100%" loading="lazy" }
+![図 3.2-4: BGA169 SF32LB557V8N6のピン配置](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>図 3.2-3: BGA169 SF32LB557V8N6のピン配置</em></div>
+<div align="center"><em>図 3.2-4: BGA169 SF32LB557V8N6のピン配置</em></div>
 
-![図 3.2-4: BGA169 SF32LB557VD3A6のピン配置](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-2-Ballmap.svg){ width="100%" loading="lazy" }
+![図 3.2-5: BGA169 SF32LB557VD3A6のピン配置](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-2-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>図 3.2-4: BGA169 SF32LB557VD3A6のピン配置</em></div>
+<div align="center"><em>図 3.2-5: BGA169 SF32LB557VD3A6のピン配置</em></div>
 
 ### 3.3. 主なハードウェア機能 { #33-major-hardware-features }
 
-- QFN68L、BGA145、BGA169のパッケージオプション。
+- QFN68L、BGA125、BGA145、BGA169のパッケージオプション。
 - 48 MHzと32.768 kHzの水晶振動子を使う設計要件。
 - 低消費電力Bluetooth 5.2トランシーバー、RF整合、アンテナレイアウト要件。
 - OPI PSRAM、QSPI NOR/NAND FlashおよびPSRAM、SDIO eMMCまたはMicro SDのインターフェース。パッケージ内蔵メモリーの構成は正確な型番によって異なります。

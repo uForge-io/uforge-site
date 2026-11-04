@@ -19,6 +19,8 @@ tags:
 
 Each table below covers one PCB layout review area. If a table has no "Applies To" column, its checks apply to all SF32LB58x PCB designs covered by this checklist.
 
+This checklist is based on SiFli's SF32LB58x Schematic&PCB checklist V1.0, dated 2026-01-21.
+
 ### 6.18.1. Package { #6181-package }
 
 <div align="center"><em>Table 6.18.1-1: Package Checklist</em></div>
@@ -179,9 +181,9 @@ Each table below covers one PCB layout review area. If a table has no "Applies T
 
 | No. | Check Point | Category |
 |:---|:---|:---|
-| 1 | Avoid routing fast-switching signals in parallel with the GPADC signal; if that cannot be avoided, provide adequate ground guarding | Required |
+| 1 | Do not route fast-switching signals in parallel with the GPADC signal | Required |
 | 2 | Battery-voltage divider resistors are placed close to the chip input pin | Required |
-| 3 | Avoid routing fast-switching signals in parallel with the SDMADC signal; if that cannot be avoided, provide adequate ground guarding | Optional |
+| 3 | Do not route fast-switching signals in parallel with the SDMADC signal | Optional |
 
 </div>
 

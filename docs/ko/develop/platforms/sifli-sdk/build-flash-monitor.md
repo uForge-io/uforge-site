@@ -1,6 +1,6 @@
 ---
 icon: lucide/terminal
-description: "SiFli-SDK의 일상적인 개발 흐름을 설명합니다. 환경을 활성화하고 scons로 빌드한 뒤 UART 또는 sftool로 펌웨어를 기록하고 시리얼 출력을 확인합니다."
+description: "SiFli-SDK의 일상적인 개발 흐름을 설명합니다. 환경을 활성화하고 scons로 빌드한 뒤 생성된 UART 다운로드 스크립트 또는 sftool로 펌웨어를 기록하고 시리얼 출력을 확인합니다."
 tags:
     - 개발
     - SiFli-SDK

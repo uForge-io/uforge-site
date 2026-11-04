@@ -50,7 +50,7 @@ Beispielpfade und unterstützte Boards können je nach SDK-Version variieren. Pr
 3. Lösen Sie ein OTA-Update aus und prüfen Sie, ob das Gerät anschließend das neue Image startet.
 4. Testen Sie auf einem Gerät mit dokumentiertem Wiederherstellungsweg jeweils nur einen Unterbrechungsfall, etwa eine Trennung während der Übertragung oder das Verlassen der Funkreichweite. Unterbrechen Sie die Stromversorgung nur, wenn Board-Dokumentation und Wiederherstellungsdesign des Produkts den Test ausdrücklich als sicher ausweisen.
 5. Prüfen Sie, welches Verhalten das Produkt nach einem unterbrochenen oder abgelehnten Update tatsächlich implementiert, etwa Wiederholung, Fortsetzung, Wiederherstellungsmodus oder Rollback. Setzen Sie Rollback nur voraus, wenn es im Boot- und Partitionsdesign umgesetzt ist.
-6. Testen Sie OTA in drei Fällen: mit veralteten Bonding-Daten, nachdem Sie das Gerät auf dem Smartphone entfernt haben und nach einem Neustart des Geräts.
+6. Testen Sie OTA unter drei Bedingungen: mit veralteten Bonding-Daten, nachdem Sie die Gerätekopplung auf dem Smartphone gelöscht haben, und nach einem Neustart des Geräts.
 7. Falls Ihr Produkt bereits PAN für Daten verwendet, bewerten Sie den PAN-OTA-Pfad als separate Designentscheidung.
 
 **Erfolgskriterien:** Nach einem erfolgreichen OTA-Update startet das neue Image. Ein unterbrochenes oder abgelehntes Update folgt der dokumentierten Wiederherstellungsrichtlinie des Produkts; der Nutzer kann den Gerätestatus erkennen. Gehen Sie nicht davon aus, dass jedes OTA-Design Rollback unterstützt.

@@ -70,9 +70,9 @@ PSRAM 通常面向与传统独立 DRAM 不同的工作点：在中等容量和�
 <div align="center"><em>图：嵌入式系统中的典型内存布局</em></div>
 
 ```text
-需要长期保存的固件镜像、资源和设置 -> 非易失性存储器
-正在使用的大型缓冲区和帧缓冲区 -> PSRAM
-频繁访问的栈、控制状态和 DMA 数据 -> 内部 SRAM
+Persistent firmware image, assets, settings -> Non-volatile storage
+Active large buffers and framebuffers -> PSRAM
+Hot stacks, control state, DMA data  -> Internal SRAM
 ```
 
 这是安排数据存储位置的策略，并非每个缓冲区都必须遵循的固定规则。小型、频繁复用的图像可能更适合放在 SRAM；大型模型可能保留在 Flash 或 PSRAM；显示系统也可能因为完整帧缓冲区无法放入内部存储器而需要 PSRAM。
@@ -107,6 +107,8 @@ PSRAM 容量并不意味着带宽无限。在支持的 SF32 配置中，主机�
 数据线列只计算有效载荷信号，不包括时钟、片选或其他控制引脚。这些时钟频率是文档中记载的示例，不是整个系列的上限。[SF32LB52-DevKit-LCD 开发板指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-LCD.md)列出了 144 MHz OPI-PSRAM 和 72 MHz、STR 模式的 QSPI-NOR；[SF32LB58-DevKit-LCD 开发板指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb58x/SF32LB58-DevKit-LCD.md)列出了 144 MHz HPI-PSRAM，以及外部 Flash 工作在 72 MHz 的开发板型号。QSPI/DTR 行采用相同的 72 MHz 时钟，仅用于单独展示双倍数据速率传输的影响。双通道行假设两个通道可以并发使用，展示的是聚合总线宽度，并不保证单一 CPU 数据流可获得双倍的有效速率。这些数值是**总线有效载荷上限**，不是实测的应用吞吐量。命令/地址周期、虚周期（dummy cycle）、刷新、读写切换、控制器限制、缓存未命中、DMA 仲裁、PCB 信号完整性和并发使用方都会降低可用速率。有效配置取决于所选芯片、封装、存储器件和 SDK 配置。
 
 思澈科技（SiFli）的[芯片型号指南](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md)列出了以下双通道配置示例：**SF32LB566VCB36** 的 MPI1 上有 8 MB OPI-PSRAM，MPI2 上有 4 MB；**SF32LB586VDD36** 的两个接口各有 16 MB HPI-PSRAM；**SF32LB587VEE56** 的两个接口各有 32 MB HPI-PSRAM。这些具体型号用于说明存储拓扑，并不保证单个使用方能达到表中的双通道聚合有效载荷速率。进行带宽关键型设计前，应核对完整订购型号和 SDK 内存映射；同一系列的其他封装或 SKU 可能采用不同的存储拓扑。
+
+SiFli 在 SF32LB52 指南中注明，其中列出的接口频率可能会在正式发布时调整。
 
 ### 双通道存储器为何重要 { #why-two-memory-channels-matter }
 

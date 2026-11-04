@@ -51,7 +51,9 @@ Bei USB müssen Firmware, Deskriptoren, Host-Betriebssysteme, Energieverhalten u
 
 Der [offizielle SiFli-SDK-CherryUSB-Beispielindex](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/index.html) führt Beispiele für USB-Geräte und USB-Hosts getrennt auf. Beginnen Sie mit dem Beispiel, das zur vorgesehenen USB-Rolle und -Klasse passt, und übernehmen Sie dessen Prüfungen zu Deskriptoren, Stromversorgung und Host-Kompatibilität in die Produktimplementierung.
 
-<div align="center"><em>Tabelle: SiFli-SDK-CherryUSB-Beispiele für SF32LB58x</em></div>
+Die unterstützten Boards unterscheiden sich je nach Beispiel. Prüfen Sie vor der Übernahme den Abschnitt „Supported Platforms“ auf der jeweiligen Beispielseite und vergewissern Sie sich, dass Ihr Zielboard aufgeführt ist.
+
+<div align="center"><em>Tabelle: SiFli-SDK-CherryUSB-Beispiele in der SF32LB58x-Dokumentation</em></div>
 <div align="center" markdown>
 
 | USB-Rolle | Beispiel | Ausgangspunkt |

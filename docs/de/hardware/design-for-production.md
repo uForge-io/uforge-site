@@ -8,7 +8,7 @@ tags:
 
 # Design für die Produktion { #design-for-production }
 
-Nutzen Sie diesen Weg nach der Auswahl eines Chips oder Moduls und bevor Sie Schaltplan, PCB-Layout, Stückliste oder Fertigungsunterlagen freigeben. Er bündelt die Implementierungsreferenzen, die das Risiko bei der ersten Inbetriebnahme und der Qualifizierung verringern: gerätespezifische Hardware-Design-Leitfäden, Checklisten, Modulschnittstellendefinitionen, freigegebene Komponenten und EDA-Bibliotheken.
+Nutzen Sie diesen Ablauf nach der Auswahl eines Chips oder Moduls und bevor Sie Schaltplan, PCB-Layout, Stückliste oder Fertigungsunterlagen freigeben. Er bündelt Implementierungsreferenzen, die das Risiko bei der ersten Inbetriebnahme und der Qualifizierung des Produkts verringern: gerätespezifische Hardware-Design-Leitfäden, Checklisten, Modulschnittstellendefinitionen, freigegebene Komponenten und EDA-Bibliotheken.
 
 ## Empfohlener Produktionsablauf { #recommended-production-sequence }
 
@@ -20,12 +20,12 @@ Nutzen Sie diese Reihenfolge als wiederholten Prüfablauf, nicht als einmalige �
 
 | Phase | Verwendung | Aufzubewahrende Nachweise |
 |:------|:-----------|:-------------------------|
-| Architektur | Produktbeschreibung und Schnittstellenanforderungen | Ausgewähltes Gerät, Gehäuse, Arbeitsspeicher, Display, Audio, Massenspeicher und Annahmen zur Stromversorgung. |
-| Schaltplan und Layout | Chip- oder Modul-Hardware-Design-Leitfaden | Überprüfte Stromversorgung, Takt, Reset, RF, Speicher, Display und Schnittstellenimplementierung. |
-| Stückliste | Freigegebene Lieferantenliste (AVL) und Komponentendatenblätter | Qualifizierte oder gezielt validierte Alternativen für jedes kritische Bauteil. |
-| Designüberprüfung | Hardware-Designcheckliste | Dokumentierte Bewertung aller zutreffenden Checklistenpunkte und Ausnahmen. |
-| Inbetriebnahme | Entwicklungsboard-Referenzen, SDK-Beispiele und Messungen | Reproduzierbare Ergebnisse für Start, Programmierung, Peripherie, Funk, Leistungsaufnahme und Wiederherstellung. |
-| Produktions-CAD-Freigabe | Offizielle EDA-Bibliotheken plus Gehäusezeichnungen | Prüfergebnisse zu Symbol, Footprint, Pinbelegung, Pad-Layout und Fertigungsdaten. |
+| Architektur | Produktbeschreibung und Schnittstellenanforderungen | Dokumentieren Sie das ausgewählte Bauteil und Gehäuse sowie die Annahmen zu Speicher, Display, Audio, Massenspeicher und Stromversorgung. |
+| Schaltplan und Layout | Chip- oder Modul-Hardware-Design-Leitfaden | Halten Sie die geprüfte Umsetzung von Stromversorgung, Takt, Reset, RF, Speicher, Display und Schnittstellen fest. |
+| Stückliste | Freigegebene Lieferantenliste (AVL) und Komponentendatenblätter | Belegen Sie für jede kritische Position, dass die Alternative qualifiziert oder gezielt validiert wurde. |
+| Designüberprüfung | Hardware-Designcheckliste | Dokumentieren Sie die Bewertung jedes zutreffenden Checklistenpunkts und jeder Ausnahme. |
+| Inbetriebnahme | Entwicklungsboard-Referenzen, SDK-Beispiele und Messungen | Halten Sie reproduzierbare Ergebnisse zu Start, Programmierung, Peripheriebetrieb, Funk, Leistungsaufnahme und Wiederherstellung fest. |
+| Produktions-CAD-Freigabe | Offizielle EDA-Bibliotheken plus Gehäusezeichnungen | Bewahren Sie die Prüfnachweise für Symbol, Footprint, Pinbelegung, Pad-Layout und Fertigungsdaten auf. |
 
 </div>
 

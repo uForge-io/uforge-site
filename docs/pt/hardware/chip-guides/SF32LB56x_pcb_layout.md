@@ -32,10 +32,10 @@ Roteie RF como uma trilha single-ended de 50 Ω com impedância controlada, de p
 
 #### 6.2.3. Alimentação e GND { #623-power-and-ground }
 
-Coloque o indutor BUCK e os capacitores de filtro perto dos pinos do chip. Mantenha BUCK_LX curta e larga; BUCK_FB deve ter pelo menos 0,25 mm de largura. Não crie uma região de cobre na camada superior sob o indutor; mantenha um plano de GND contínuo na camada adjacente e não passe outras trilhas pela área do indutor. Conecte os GND dos capacitores de saída BUCK ao plano principal com várias vias. Coloque o capacitor PVDD perto do pino e roteie PVDD de forma curta e larga; conecte PVSS ao GND principal por vias. Coloque os capacitores de desacoplamento de LDO e I/O perto dos pinos correspondentes e dimensione as trilhas de alimentação conforme a corrente da carga.
+Coloque o indutor BUCK e os capacitores de filtro perto dos pinos do chip. Mantenha BUCK_LX curta e larga; a trilha BUCK_FB deve ter largura superior a 0,25 mm. Não crie uma região de cobre na camada superior sob o indutor; mantenha um plano de GND contínuo na camada adjacente e não passe outras trilhas pela área do indutor. Conecte os GND dos capacitores de saída BUCK ao plano principal com várias vias. Coloque o capacitor PVDD perto do pino e roteie PVDD de forma curta e larga; conecte PVSS ao GND principal por vias. Coloque os capacitores de desacoplamento de LDO e I/O perto dos pinos correspondentes e dimensione as trilhas de alimentação conforme a corrente da carga.
 
-!!! warning "Limites divergentes para a largura da trilha PVDD"
-    O guia de aplicação de hardware do SF32LB56xU/V especifica largura mínima de 0,5 mm para a trilha PVDD, enquanto o checklist de PCB correspondente especifica 8 mil. Como os valores divergem, confirme com a SiFli ou com o responsável pelo projeto da PCB qual requisito se aplica antes de congelar o layout.
+!!! warning "Limites divergentes para a largura das trilhas PVDD e BUCK_FB"
+    O guia de aplicação de hardware do SF32LB56xU/V especifica largura mínima de 0,5 mm para a trilha PVDD, enquanto o checklist de PCB correspondente especifica 8 mil. O guia também exige que BUCK_FB tenha largura superior a 0,25 mm, enquanto o checklist fixa pelo menos 8 mil para BUCK_LX e BUCK_FB. Confirme com a SiFli ou com o responsável pelo projeto da PCB quais valores se aplicam antes de congelar o layout.
 
 #### 6.2.4. Áudio e sinais analógicos { #624-audio-and-analog-signals }
 
@@ -47,7 +47,7 @@ Roteie USB D+/D− (PA17/PA18) como par diferencial de 90 Ω, protegido por GND.
 
 #### 6.2.6. EMI, ESD e pontos de teste { #626-emi-esd-and-test-points }
 
-Evite percursos longos na camada superficial, fora da blindagem, para sinais ruidosos de clock e alimentação; use camadas internas quando possível. Coloque dispositivos TVS/ESD perto do conector correspondente. Roteie cada sinal primeiro pelo dispositivo de proteção e conecte o pad de GND do dispositivo ao GND principal com trilhas curtas e largas e vias. Coloque o ponto de teste do cabo de carga USB antes da TVS; coloque a TVS do conector da bateria antes da plataforma da bateria, para que os cabos externos passem pela TVS antes de chegar ao chip. Conecte adequadamente a malha de GND sob o chip ao plano de GND principal usando vias cegas/enterradas.
+Evite percursos longos na camada superficial fora da blindagem; sinais ruidosos de clock e alimentação devem usar camadas internas, não a camada superficial. Coloque dispositivos TVS/ESD perto do conector correspondente. Roteie cada sinal primeiro pelo dispositivo de proteção e conecte o pad de GND do dispositivo ao GND principal com trilhas curtas e largas e vias. Coloque o ponto de teste do cabo de carga USB antes da TVS; coloque a TVS do conector da bateria antes da plataforma da bateria, para que os cabos externos passem pela TVS antes de chegar ao chip. Conecte adequadamente a malha de GND sob o chip ao plano de GND principal usando vias cegas/enterradas. Quando configurados como saídas de clock, PBR0–PBR2 da variante U e PBR0–PBR3 da variante V devem ter blindagem tridimensional de GND e ficar afastados de fontes de interferência, como saídas de 32 kHz.
 
 ### 6.3. Checklist do layout da PCB { #63-pcb-layout-checklist }
 
@@ -124,6 +124,8 @@ Cada tabela abaixo corresponde a uma área de revisão do layout da PCB. Quando 
 | 5 | No cristal de 32 kHz, o espaçamento entre as duas trilhas paralelas deve ser maior que 2× o espaçamento entre trilhas | Obrigatório |
 
 </div>
+
+O checklist de PCB de origem diz que o espaçamento do par de trilhas paralelas do cristal de 32 kHz deve superar 2× o espaçamento entre trilhas, mas não identifica uma dimensão de referência distinta. Confirme a interpretação com o responsável pelo checklist antes de aplicar este critério ao layout.
 
 #### 6.3.5. Botões { #635-buttons }
 

@@ -97,9 +97,7 @@ Wählen Sie **Dynamic** für den Workflow mit dem Zephyr-Loader. Wählen Sie **S
 
 ## Board in den seriellen Download-Modus versetzen { #put-the-board-in-serial-download-mode }
 
-Bei der ersten Nutzung muss sich das Board laut OpenSiFli-Dokumentation im seriellen Download-Modus befinden. Verwenden Sie die Boot-/Reset-Sequenz für das SF32LB52 DevKit LCD und laden Sie anschließend über die Arduino IDE oder CLI hoch.
-
-Das Upload-Tool ist `sftool`.
+OpenSiFli zufolge muss sich das Board bei der ersten Nutzung im seriellen Download-Modus befinden. Aktivieren Sie beim SF32LB52 DevKit LCD die Option **BOOT** im Download-Tool und schalten Sie das Board anschließend ein oder setzen Sie es zurück. Details finden Sie in den [Download- und Debug-Anweisungen für das Board](../../sf32-products/devkits/SF32LB52-DevKit-LCD.md#download-and-debug). Sobald der Download-Modus aktiv ist, laden Sie den Sketch über die Arduino IDE oder CLI mit `sftool` hoch.
 
 ## Seriellen Smoke-Test hochladen { #upload-a-serial-smoke-test }
 

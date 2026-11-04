@@ -97,9 +97,16 @@ SiFliの資料によると、SF32LB58xは3,744 KBのオンチップSRAMを搭載
 - SDIO経由の外部Wi-Fi接続
 - 統合オーディオADC × 2
 - 統合オーディオDAC × 2
-- PDMインターフェース × 2（各インターフェースにデジタルマイクを最大2台接続可能。インターフェース数とマイク数は同じではなく、実際の接続数はピン多重化と基板配線にも左右されます）
+- PDMインターフェース × 2。SiFliのハードウェアアプリケーションノートではPDMマイク入力を2系統としています。実際に使用できるチャンネルは、ピン多重化と基板配線を確認してください。
 - I2Sインターフェースは3系統。I2S1は入力専用、I2S2とI2S3は入出力に対応し、すべてマスターモードで動作
 - USB 2.0 High-Speedのホスト／デバイスモード
+
+### セキュリティ { #security }
+
+- AES、HASH、CRCのハードウェアアクセラレーターと真性乱数生成器（TRNG）
+- セキュアブート（Secure Boot）と、Root of TrustおよびUIDを格納する1,024ビットeFuse
+- MPI1、MPI2、MPI3、MPI5を介した外部コードのリアルタイム復号に対応
+- SiFliの製品概要にはPSA Certified Level 1と記載されています。対象品番と製品で扱う前に、認証の範囲と現在の状態を確認してください。
 
 ### システム統合 { #system-integration }
 
@@ -128,19 +135,24 @@ SiFliの資料によると、SF32LB58xは3,744 KBのオンチップSRAMを搭載
 
 ## 製品バリエーション { #family-variants }
 
-SiFliの現行チップ型番ガイドには、BGA256のSF32LB58xが3品番掲載されており、パッケージ内蔵メモリーの構成を以下に示します。FlashとPSRAMの組み合わせや供給状況は変わる場合があるため、正確な注文型番は最新のデータシートと承認ベンダーリスト（AVL）で確認してください。
+SiFliの現行チップ型番ガイドには、BGA256のSF32LB58x注文コードが6種類掲載されています。メモリー表では、MPI5上の起動用SiPと、MPI1およびMPI2上のメモリーを分けて示しています。
 
-<div align="center"><em>SF32LB58xの品番とパッケージ内蔵メモリー</em></div>
+<div align="center"><em>SF32LB58xの注文コード、SiPメモリー構成、共通仕様</em></div>
 
 <div align="center" markdown>
 
-| 品番 | パッケージ | パッケージ内蔵メモリー |
-| :--- | :--- | :--- |
-| SF32LB583VCC36 | BGA256 | 起動用NOR Flash 1 MB + MPI1、MPI2に各OPI-PSRAM 8 MB |
-| SF32LB586VDD36 | BGA256 | 起動用NOR Flash 1 MB + MPI1、MPI2に各HPI-PSRAM 16 MB |
-| SF32LB587VEE56 | BGA256 | 起動用NOR Flash 4 MB + MPI1、MPI2に各HPI-PSRAM 32 MB |
+| 注文コード | パッケージ | MPI5 起動用 SiP | MPI1 SiP | MPI2 SiP |
+| :--- | :--- | :--- | :--- | :--- |
+| SF32LB580VNN36 | BGA256 | NOR Flash 1 MB | n/a | n/a |
+| SF32LB581VCN36 | BGA256 | NOR Flash 1 MB | OPI-PSRAM 8 MB | n/a |
+| SF32LB583VCC36 | BGA256 | NOR Flash 1 MB | OPI-PSRAM 8 MB | OPI-PSRAM 8 MB |
+| SF32LB585V5E56 | BGA256 | NOR Flash 4 MB | NOR Flash 4 MB | HPI-PSRAM 32 MB |
+| SF32LB586VDD36 | BGA256 | NOR Flash 1 MB | HPI-PSRAM 16 MB | HPI-PSRAM 16 MB |
+| SF32LB587VEE56 | BGA256 | NOR Flash 4 MB | HPI-PSRAM 32 MB | HPI-PSRAM 32 MB |
 
 </div>
+
+ガイドでは6品番すべてについて、パッケージ寸法6.5 × 8.5 × 0.94 mm、0.4 mmピッチ、電源電圧1.71～3.63 V、HCPU GPIO 94本 + LCPU GPIO 66本、動作温度−40～85 °Cを示しています。型番ガイドにはI/O電圧範囲（データシートでは電源バンクごとに規定）やピン互換性は記載されていません。同じBGA256パッケージであることから互換性を推定せず、基板設計前に使用する各I/O電源と対象品番のピン機能表を確認してください。構成や供給状況は変わる可能性があるため、購入前に最新データシートと承認ベンダーリスト（AVL）も確認してください。
 
 製品バリエーションを選ぶ際は、まず次の点を確認してください。
 

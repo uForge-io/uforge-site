@@ -41,7 +41,7 @@ Wählen Sie SF32LB56x, wenn das Design eine oder mehrere dieser Fähigkeiten ben
 - Unterstützung der DPI/RGB-Display-Schnittstelle
 - Externes WLAN über SDIO; externer Speicher über SD/SDIO oder eMMC
 - Höhere GPIO-Anzahl über die Option WBBGA175
-- Mehr Spielraum für gleichzeitiges TinyML, Audio und UI
+- Mehr Reserven für den gleichzeitigen Betrieb von TinyML-, Audio- und UI-Workloads
 
 ## Entwicklungsressourcen { #development-resources }
 
@@ -183,10 +183,12 @@ Mit dieser Abfolge machen Sie aus einer SF32LB56x-Vorauswahl ein validiertes Des
 ## Häufig gestellte Fragen { #frequently-asked-questions }
 
 **Was sind die wichtigsten Spezifikationen des SF32LB56x?**
-Der SF32LB56x kombiniert eine Anwendungs-CPU (Cortex-M33 @240 MHz) mit einem Low-Power-Kern (Cortex-M33 @48/96 MHz; vom Anwender programmierbar). Hinzu kommen 960 KB internes SRAM und Dual-Mode-Bluetooth (BT Classic + BLE). Grafik: ePicasso 2.0. Gehäuse: QFN68 / BGA175 (7 × 7 mm (QFN), 6,5 × 6,1 mm (BGA)). USB 2.0 FS.
+Der SF32LB56x nutzt Cortex-M33 @240 MHz für Anwendungsaufgaben und verfügt über einen Low-Power-Kern (Cortex-M33, bis zu 96 MHz; vom Anwender programmierbar). Hinzu kommen 960 KB internes SRAM und Dual-Mode-Bluetooth (BT Classic + BLE). Grafik: ePicasso 2.0. Gehäuse: QFN68L / WBBGA175 (7 × 7 mm (QFN68L), 6,1 × 6,5 mm (WBBGA175)). USB 2.0 FS.
+
+Der LCPU-Takt und die Unterstützung von Anwendungsaufgaben hängen vom konkreten Gerät und der unterstützten SDK-Konfiguration ab; 96 MHz ist eine Obergrenze, kein Standardtakt. Die 960 KB SRAM bestehen aus 800 KB HCPU-SRAM (davon 128 KB Retention-SRAM) und 160 KB LCPU-Retention-SRAM, nicht aus einem zusammenhängenden Speicherbereich. Prüfen Sie Ziel-SKU und SDK-Speicherplan.
 
 **Welche Display-Schnittstellen unterstützt der SF32LB56x?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. ([Schnittstellenmatrix pro Gerät](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. ([Schnittstellenmatrix pro Gerät](../../learn/graphics/display-controller.md#per-device-interface-matrix)) Dies ist eine familienweite Liste, keine Zusicherung für jede Bestellnummer oder jedes Gehäuse; prüfen Sie die verlinkte Schnittstellenmatrix.
 
 **Welche maximale Display-Auflösung unterstützt der SF32LB56x?**
 Bis zu 1024 × 600 in RGB888 über die DPI/RGB-Schnittstelle im BGA-Gehäuse. ([Schnittstellenmatrix pro Gerät](../../learn/graphics/display-controller.md#per-device-interface-matrix))

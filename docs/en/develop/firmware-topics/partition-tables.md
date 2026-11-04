@@ -69,7 +69,7 @@ For PSRAM, the source distinguishes CBUS and SBUS address spaces. Put `exec` on 
 
 ## v2: Named and Typed JSON Partitions { #v2-named-and-typed-json-partitions }
 
-v2 also uses `ptab.json`, but its header must declare `"version": "2"`. The memory fields remain `mem`, `base`, and `regions`. A region keeps `offset` and `max_size`, and may use `tags` and `custom`; v2 additionally gives the region a `name`, a `type`, and, for an execution partition, an optional `core`.
+v2 also uses `ptab.json`, but its header must declare `"version": "2"`. The memory fields remain `mem`, `base`, and `regions`. A region keeps `offset` and `max_size`, and may use `tags` and `custom`; v2 additionally gives the region a `name`, a `type`, and, for an execution partition, an optional `core`. The v2 `type` field is a string list, so one partition can have multiple roles, such as both `app_img` and `app_exec`.
 
 <div align="center"><em>Table: v2 region fields and types</em></div>
 <div align="center" markdown>

@@ -8,7 +8,7 @@ tags:
 
 # Diseño para producción { #design-for-production }
 
-Use este proceso después de seleccionar un chip o módulo y antes de liberar un esquemático, un diseño de PCB, una BOM o un paquete de fabricación. Reúne las referencias de implementación que ayudan a reducir el riesgo durante la primera puesta en marcha y la cualificación: guías de diseño de hardware específicas del dispositivo, listas de comprobación, definiciones de interfaz de módulos, componentes aprobados y bibliotecas EDA.
+Use este proceso después de seleccionar un chip o módulo y antes de liberar un esquemático, un diseño de PCB, una BOM o un paquete de fabricación. Reúne referencias de implementación para reducir el riesgo durante la puesta en marcha inicial y la cualificación del producto: guías de diseño de hardware específicas del dispositivo, listas de comprobación, definiciones de interfaz de módulos, componentes aprobados y bibliotecas EDA.
 
 ## Secuencia de producción recomendada { #recommended-production-sequence }
 
@@ -20,12 +20,12 @@ Use esta secuencia como un ciclo de revisión, no como una entrega única. Compr
 
 | Etapa | Consulte | Evidencia que debe conservar |
 |:------|:---------|:-----------------------------|
-| Arquitectura | Introducción del producto y requisitos de interfaz | Pieza, encapsulado, memoria, pantalla, audio, almacenamiento y supuestos de alimentación elegidos. |
-| Esquemático y diseño de PCB | Guía de diseño de hardware del chip o módulo | Implementación revisada de alimentación, reloj, reinicio, RF, almacenamiento, pantalla e interfaces. |
-| BOM | Lista de proveedores aprobados (AVL) y hojas de datos de componentes | Alternativas cualificadas o validadas específicamente para cada componente crítico. |
-| Revisión de diseño | Lista de comprobación de diseño de hardware | Resolución documentada de cada punto aplicable y cada excepción. |
-| Puesta en marcha | Referencias de placas de desarrollo, ejemplos del SDK y pruebas con mediciones | Resultados reproducibles de arranque, grabación, periféricos, conectividad inalámbrica, consumo de energía y recuperación. |
-| Liberación de CAD para producción | Bibliotecas EDA oficiales y planos del encapsulado | Símbolo, huella, distribución de pines, patrón de pads y archivos de fabricación verificados. |
+| Arquitectura | Introducción del producto y requisitos de interfaz | Registre el componente y el encapsulado seleccionados, junto con las premisas sobre memoria, pantalla, audio, almacenamiento y alimentación. |
+| Esquemático y diseño de PCB | Guía de diseño de hardware del chip o módulo | Conserve la implementación revisada de alimentación, reloj, reinicio, RF, almacenamiento, pantalla e interfaces. |
+| BOM | Lista de proveedores aprobados (AVL) y hojas de datos de componentes | Para cada componente crítico, conserve evidencia de que la alternativa está cualificada o se ha validado de forma deliberada. |
+| Revisión de diseño | Lista de comprobación de diseño de hardware | Documente la resolución de cada punto aplicable de la lista y de cada excepción. |
+| Puesta en marcha | Referencias de placas de desarrollo, ejemplos del SDK y pruebas con mediciones | Conserve resultados reproducibles de arranque, grabación, funcionamiento de periféricos, comunicación inalámbrica, consumo y recuperación. |
+| Liberación de CAD para producción | Bibliotecas EDA oficiales y planos del encapsulado | Conserve los registros de verificación del símbolo, la huella, la distribución de pines, el patrón de pads y los archivos de fabricación. |
 
 </div>
 

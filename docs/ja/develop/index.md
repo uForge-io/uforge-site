@@ -18,7 +18,7 @@ tags:
 
 ## SiFli-SDKの基準構成を確立する { #establish-a-sifli-sdk-baseline }
 
-[SiFli-SDK](platforms/sifli-sdk/overview.md) は、RT-ThreadをベースにしたSiFli公式ソフトウェアパッケージであり、SF32ファームウェア開発の基準となる開発環境です。別の開発環境を評価する明確な理由がなければ、まずSiFli-SDKを使ってください。ボードサポート、Bluetooth、グラフィックス、オーディオ、ストレージ、電源管理、量産開発について、最も幅広い基準構成のドキュメントが整備されています。
+[SiFli-SDK](platforms/sifli-sdk/overview.md) は、RT-ThreadをベースにしたSiFli公式ソフトウェアパッケージであり、SF32ファームウェア開発の基準となる開発環境です。別のエコシステムを評価する明確な理由がなければ、まずSiFli-SDKを使ってください。ボードサポート、Bluetooth、グラフィックス、オーディオ、ストレージ、電源管理、量産開発に関するガイダンスが文書化されています。
 
 製品機能の開発に入る前に、再現可能な基準構成を確立して記録します。
 

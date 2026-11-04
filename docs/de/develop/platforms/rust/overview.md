@@ -13,6 +13,8 @@ OpenSiFli entwickelt Rust-Unterstützung in [OpenSiFli/sifli-rs](https://github.
 
 Die Maintainer beschreiben das Projekt als in Entwicklung und nicht für den Produktionseinsatz bereit. Betrachten Sie Rust auf SF32 als Erprobungspfad, es sei denn, Ihr Team kann hardwarenah arbeiten und ist bereit, Korrekturen upstream beizutragen.
 
+Stand 2026-11-04 weist der [Support-Status von `sifli-hal`](https://github.com/OpenSiFli/sifli-rs/blob/main/sifli-hal/README.md) `sf32lb52x` als einziges unterstütztes Target aus. Prüfen Sie vor der Portierungsplanung den Status des konkreten Chips in dieser Übersicht und in den Beispielen; leiten Sie die Unterstützung anderer SF32-Familien nicht allein aus Repository- oder Crate-Namen ab.
+
 Für die anfängliche Toolchain, den unveränderten Blinky-Build und die Flash-Runner-Einrichtung verwenden Sie [Erste Schritte mit Rust](../../../getting-started/rust/getting-started-rust.md). Diese Seite dient dazu, den Unterstützungsumfang zu bewerten und zu entscheiden, ob Rust über diese Baseline hinaus weiterverfolgt wird.
 
 ## Von OpenSiFli genannte Crates { #crates-mentioned-by-opensifli }

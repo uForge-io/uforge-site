@@ -208,7 +208,7 @@ Use esta tabela na revisão preliminar do esquemático. Confirme os valores fina
 
 | Trilho / pino | Capacitor externo típico | Uso principal | Observações de projeto |
 |:-----------|:---------------------------|:---------|:-------------|
-| `VBUS` | >= 10 µF | Entrada USB / carregador | Somente nas variantes alimentadas por bateria; inclua proteção OVP/ESD/EOS. |
+| `VBUS` | >= 10 µF | Entrada USB / carregador | Necessário apenas quando o carregador integrado é usado; caso contrário, `VBUS` pode ficar sem conexão e este capacitor pode ser omitido. Se `VBUS` for usado, inclua proteção OVP/ESD/EOS. |
 | `VBAT` | >= 4,7 µF | Conexão da bateria e medição de tensão | Mantenha o caminho da bateria curto e largo; evite roteá-lo em paralelo com sinais sensíveis. |
 | `VCC` / `PVDD` | >= 10 µF | Entrada principal do PMU / sistema | Posicione o desacoplamento perto do chip e dimensione a trilha para a corrente. |
 | `VSYS` | Cerca de 2,2 µF | Alimentação interna ou analógica/RF especificada | Não use como alimentação geral de periféricos; controle a carga e a capacitância totais. |
@@ -613,12 +613,12 @@ Use estas tabelas na revisão do esquemático pino a pino. Cada tabela apresenta
 | `VDD33_VOUT1` | - | 3,3 | - | 150 | Saída 1 do LDO de 3,3 V; habilitada por padrão. Limite a carga durante o soft-start a 30 mA; após a partida, suporta 150 mA. |
 | `VDD33_VOUT2` | - | 3,3 | - | 150 | Saída 2 do LDO de 3,3 V; desabilitada por padrão e habilitada por software. Limite a carga durante o soft-start a 30 mA; após a partida, suporta 150 mA. |
 | `PVSS_PMU` | - | - | - | - | Terra de alimentação do PMU. |
-| `AVSS_PMU` | - | - | - | - | Terra analógico do PMU. |
+| `AVSS_PMU` | - | - | - | - | Terra analógica do PMU. |
 | `VDDIOA` | 1,62 | 1,8 / 3,3 | 3,63 | 100 | Entrada de alimentação GPIO; conecte a 1,8 V ou 3,3 V conforme a referência exata. |
 | `VDDIOSA` | - | 1,8 | - | 30 | Entrada de alimentação de I/O da memória integrada; conecte a `VDD18_VOUT`. |
 | `VDDIOSB` | - | 1,8 / 3,3 | - | 30 | Entrada de alimentação de I/O da memória integrada; a tensão depende do número de peça exato. Para PSRAM co-encapsulada, conecte a `VDD18_VOUT` (1,8 V); para NOR Flash co-encapsulada, conecte a `VDD33_VOUT1` (3,3 V). |
 | `AVDD33_ANA` | 2,97 | 3,3 | 3,63 | 20 | Entrada de alimentação analógica; conecte a 3,3 V. |
-| `AVSS33_ANA` | - | - | - | - | Terra analógico. |
+| `AVSS33_ANA` | - | - | - | - | Terra analógica. |
 | `GPADC_VREFP` | - | - | - | - | Entrada positiva de referência GPADC; use somente capacitor, sem acionamento externo. |
 | `GPADC_VREFN` | - | - | - | - | Referência negativa GPADC; conecte ao terra. |
 | `AVDD_BRF` | 2,97 | 3,3 | 3,63 | 100 | Entrada de alimentação RF; conecte a `VSYS`. |
@@ -647,12 +647,12 @@ Use estas tabelas na revisão do esquemático pino a pino. Cada tabela apresenta
 | `PVDD_PMU` | 2,97 | 3,3 | 3,63 | 200 | Entrada de alimentação do PMU; conecte a uma fonte externa de 3,3 V. |
 | `VDD18_VOUT` | - | 1,8 | - | 30 | Saída LDO de 1,8 V; exclusiva para alimentação interna. Conecte um capacitor ao terra. |
 | `PVSS_PMU` | - | - | - | - | Terra de alimentação do PMU. |
-| `AVSS_PMU` | - | - | - | - | Terra analógico do PMU. |
+| `AVSS_PMU` | - | - | - | - | Terra analógica do PMU. |
 | `VDDIOA` | 1,62 | 1,8 / 3,3 | 3,63 | 100 | Entrada de alimentação GPIO; conecte a 1,8 V ou 3,3 V conforme a referência exata. |
 | `VDDIOSA` | - | 1,8 | - | 30 | Entrada de alimentação de I/O da memória integrada; conecte a `VDD18_VOUT`. |
 | `VDDIOSB` | - | 1,8 / 3,3 | - | 30 | Entrada de alimentação de I/O da memória integrada; a tensão depende do número de peça exato. Para PSRAM co-encapsulada, conecte a `VDD18_VOUT` (1,8 V); para NOR Flash co-encapsulada, alimente este pino externamente com 3,3 V. |
 | `AVDD33_ANA` | 2,97 | 3,3 | 3,63 | 20 | Entrada de alimentação analógica; conecte a 3,3 V. |
-| `AVSS33_ANA` | - | - | - | - | Terra analógico. |
+| `AVSS33_ANA` | - | - | - | - | Terra analógica. |
 | `GPADC_VREFP` | - | - | - | - | Entrada positiva de referência GPADC; use somente capacitor, sem acionamento externo. |
 | `GPADC_VREFN` | - | - | - | - | Referência negativa GPADC; conecte ao terra. |
 | `AVDD_BRF` | 2,97 | 3,3 | 3,63 | 100 | Entrada de alimentação RF; conecte a uma fonte externa de 3,3 V. |

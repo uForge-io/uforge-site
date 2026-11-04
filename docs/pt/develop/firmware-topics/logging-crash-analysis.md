@@ -58,3 +58,6 @@ Registre os seguintes dados em cada compilação do firmware:
 - A informação sobre se a falha também ocorre em um exemplo do SDK sem modificações.
 - A lista de periféricos conectados e a fonte de alimentação.
 - A informação sobre se a falha persiste após apagar toda a Flash e gravar o firmware novamente.
+
+!!! note "Conteúdo gerado automaticamente"
+    Esta página foi compilada e redigida sem um documento-fonte dedicado. Verifique as afirmações técnicas na documentação oficial da SiFli antes de confiar nelas.

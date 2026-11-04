@@ -3,7 +3,7 @@ icon: lucide/folder-kanban
 title: "프로젝트 개요"
 description: "선택한 하드웨어, 소프트웨어 기준 구성, 검증 증거, 양산 인계를 하나로 묶은 μForge의 엔드 투 엔드 프로젝트입니다."
 tags:
-    - Projects
+    - 프로젝트
 ---
 
 # 프로젝트 개요 { #projects-overview }
@@ -34,7 +34,7 @@ tags:
 |:--------|:--------|:-------------------------------|:---------|
 | [SF32 Xiaozhi 음성 어시스턴트](sf32-xiaozhi.md) | 오픈소스 Xiaozhi SF32 구현을 기반으로 한 음성 및 디스플레이 연동 어시스턴트. | 지원되는 SF32LB52 보드, Xiaozhi SF32 소스, Bluetooth PAN, Xiaozhi 클라우드 서비스. | AI 음성 상호작용 제품의 동작 흐름을 평가하고 하드웨어 또는 애플리케이션을 적용하는 경우. |
 | [SF32 BLE Talkback 인터컴](sf32-ble-talkback.md) | 역할 선택, Opus 음성, 슬레이브 재연결, 상태 표시, 저전력 동작을 갖춘 다중 디바이스 BLE 푸시 투 토크(PTT) 인터콤. | SF32LB52-DevKit-ULP 보드 2개 이상, 고정된 Talkback 소스, 고정된 SiFli-SDK 2.4 호환 리비전, `talk_back/1.2@sifli`. | 커스텀 하드웨어에 앞서 휴대용 그룹 인터콤 동작, 음향, RF 복구, 전력을 검증하는 경우. |
-| [SF32 E-Paper EPUB 리더](sf32-epd-reader.md) | 라이브러리/목차 흐름, 키 및 터치 입력, 동적 폰트, 전체/부분 새로고침, 스토리지, 저전력 상태를 갖춘 로컬 EPUB 리더. | SF32-OED-EPD V1.1, YZC085 V1.05 전자 종이, 고정된 EPD Reader 및 SDK 커밋, TF 스토리지, 검증된 콘텐츠/폰트. | 전자 종이 독서 단말기, EPUB/렌더링 한계, 패널 파형, 스토리지 복구, 전력 동작을 평가하는 경우. |
+| [SF32 E-Paper EPUB 리더](sf32-epd-reader.md) | 서재/목차 탐색, 키 및 터치 입력, 동적 폰트, 전체/부분 새로고침, 스토리지, 저전력 상태를 갖춘 로컬 EPUB 리더. | SF32-OED-EPD V1.1, YZC085 V1.05 전자 종이, 고정된 EPD Reader 및 SDK 커밋, TF 스토리지, 검증된 콘텐츠/폰트. | 전자 종이 독서 단말기, EPUB/렌더링 한계, 패널 파형, 스토리지 복구, 전력 동작을 평가하는 경우. |
 | [SuperKey 다기능 매크로 키보드](superkey.md) | 키, 엔코더, 센싱, 텔레메트리, 컴패니언 애플리케이션을 갖춘 3-디스플레이 USB HID/CDC 데스크톱 컨트롤러. | 오픈 sf32-keyboard 하드웨어, `sf32lb52-superkey` 펌웨어 타깃, SuperKeyHub. | 데스크톱 HMI, 매크로 키보드, 상태 패널 또는 호스트 연동 제어 장치를 평가하는 경우. |
 | [Radiation Monitor 휴대용 신호 세기 감지기](radiation-monitor.md) | 스무딩과 이력 재생을 갖춘 휴대용 79포인트 2.4 GHz 신호 세기 뷰어. | SF32LB52 RF 테스트 경로, LVGL 디스플레이, KEY2 제어, 제어된 RF 비교 환경. | 상대적인 간섭 추세를 살펴보고 교정된 RF 계측기 경로가 필요한지 판단하는 경우. |
 | [Pocket Pi SF32 휴대용 게임기](pocket-pi.md) | 게임 브라우저, 입력, 오디오, 세이브 스테이트, 내장/TF 카드 스토리지를 갖춘 로컬 NES 에뮬레이션 휴대용 게임기. | SF32LB52-DevKit-ULP 타깃, PocketPi/Nofrendo 소스, AW9523 컨트롤, 합법적으로 사용할 수 있는 NES 콘텐츠. | 커스텀 하드웨어에 앞서 게임 중심의 그래픽, 입력, 오디오, 스토리지, 전력 워크로드를 테스트하는 경우. |
@@ -53,7 +53,7 @@ tags:
 | 프로젝트 | 결과물 | 하드웨어 및 소프트웨어 기준 구성 | 적합한 용도 |
 |:--------|:--------|:-------------------------------|:---------|
 | [SF32LB52용 Arduboy2 포트](arduboy2-sifli.md) | SF32LB52에서 Arduboy2 스타일 게임이나 인터랙티브 데모를 평가하기 위한 재현 가능한 경로. | OpenSiFli Arduboy2-SiFli 소스, ArduinoCore-Zephyr 변형 `sf32lb52_devkit_lcd_sf32lb525uc6`, 문서화된 외부 디스플레이/입력/오디오 경로. | 로컬 게임 상호작용, 그래픽, 입력, 오디오와 이식 가능한 Arduino 지향 애플리케이션 계층의 한계를 테스트하는 경우. |
-| [SF32 기반 ZMK 키보드 펌웨어](zmk-sf32.md) | 매트릭스 스캔, 레이어, USB HID, BLE 스플릿/호스트 링크, 설정, ZMK Studio를 갖춘 재현 가능한 SF32LB52 스플릿 키보드 기준 구성. | OpenSiFli/zmk, SF32LB52-DevKit-LCD ZMK 보드 변형, 고정된 매니페스트 의존성을 가진 `urchin_sf32lb52_left/right` 쉴드. | 다운스트림 SF32 포트의 완성도를 측정하면서 ZMK 기반 무선 키보드, 매크로 패드 또는 커스텀 HID 제품을 평가하는 경우. |
+| [SF32 기반 ZMK 키보드 펌웨어](zmk-sf32.md) | 매트릭스 스캔, 레이어, USB HID, 좌우 키보드 절반 간 및 호스트 연결을 위한 BLE 링크, 설정, ZMK Studio를 갖춘 재현 가능한 SF32LB52 분할 키보드 기준 구성. | OpenSiFli/zmk, SF32LB52-DevKit-LCD ZMK 보드 변형, 고정된 매니페스트 의존성을 가진 `urchin_sf32lb52_left/right` 쉴드. | 다운스트림 SF32 포트의 완성도를 측정하면서 ZMK 기반 무선 키보드, 매크로 패드 또는 커스텀 HID 제품을 평가하는 경우. |
 
 </div>
 

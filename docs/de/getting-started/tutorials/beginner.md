@@ -11,7 +11,7 @@ Diese Tutorials knüpfen direkt an [Erste Schritte](../index.md) an. Sie sollten
 
 Die Beispiele setzen ein Board der Klasse SF32LB52-DevKit-LCD voraus, etwa `sf32lb52-lcd_n16r8`. Wenn Sie ein anderes Board verwenden, ersetzen Sie den Boardnamen im Build-Befehl und prüfen Sie Pin-Namen, Peripherieinstanzen und Speicherlayout anhand der Support-Dateien dieses Boards.
 
-Nutzen Sie diese Reihe, um verlässliche Arbeitsweisen zu entwickeln: Prüfen Sie jeweils ein Verhalten auf dem konkreten Board, legen Sie ein klares Erfolgskriterium fest und bewahren Sie eine nachweislich funktionierende Ausgangskonfiguration, bevor Sie zum nächsten Peripheriegerät übergehen. Die Übungen richten sich an Entwickler, die neu mit dem SF32-SDK arbeiten, auch wenn sie eingebettetes C bereits beherrschen.
+Nutzen Sie diese Reihe, um verlässliche Arbeitsweisen zu entwickeln: Prüfen Sie jeweils ein Verhalten auf dem konkreten Board und bewahren Sie eine nachweislich funktionierende Ausgangskonfiguration, bevor Sie zum nächsten Peripheriegerät übergehen. Die Übungen richten sich an Entwickler, die neu mit dem SF32-SDK arbeiten, auch wenn sie eingebettetes C bereits beherrschen.
 
 ## Bevor Sie beginnen { #before-you-start }
 
@@ -157,7 +157,7 @@ Die **FinSH**-Shell von RT-Thread stellt über denselben UART wie die Bootmeldun
 
 **Ausgangsbeispiel:** `example/rt_device/adc/channel`
 
-Aktivieren Sie für dieses RT-Thread-Beispiel `BSP_USING_ADC`, `BSP_USING_ADC1` und `RT_USING_ADC`; andernfalls registriert das SDK `bat1` nicht. Beim SF32LB52 ist Kanal 7 intern mit VBAT verbunden und daher kein allgemeiner externer Sensoreingang. Wählen Sie einen ADC-Kanal und Pin-Mux, die vom konkreten Chip und Board unterstützt werden. Im dokumentierten SF32LB52-Beispiel wird Kanal 0 mit PA28 verwendet. Im aktuellen SiFli-SDK-Beispiel liefert `rt_adc_read()` einen auf 0,1 mV skalierten Spannungswert und keine rohen ADC-Zählwerte. Prüfen Sie Einheit und Umrechnung in der Dokumentation der konkreten Chip- und Treiberversion.
+Aktivieren Sie für dieses RT-Thread-Beispiel `BSP_USING_ADC`, `BSP_USING_ADC1` und `RT_USING_ADC`; andernfalls registriert das SDK `bat1` nicht. Beim SF32LB52 ist Kanal 7 intern mit VBAT verbunden und daher kein allgemeiner externer Sensoreingang. Wählen Sie einen ADC-Kanal und Pin-Mux, die vom konkreten Chip und Board unterstützt werden. Im dokumentierten SF32LB52-Beispiel wird Kanal 0 mit PA28 verwendet. Im aktuellen SiFli-SDK-Beispiel bildet `rt_adc_read()` standardmäßig den Mittelwert aus 22 Messungen und liefert einen auf 0,1 mV skalierten Spannungswert statt roher ADC-Zählwerte. Prüfen Sie Mittelwertbildung, Einheit und Umrechnung in der Dokumentation der konkreten Chip- und Treiberversion.
 
 ```c
 rt_adc_device_t adc = (rt_adc_device_t)rt_device_find("bat1");

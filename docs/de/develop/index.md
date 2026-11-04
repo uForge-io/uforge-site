@@ -18,7 +18,7 @@ Nutzen Sie [Erste Schritte](../getting-started/index.md) für die erste erfolgre
 
 ## Eine SiFli-SDK-Referenzkonfiguration einrichten { #establish-a-sifli-sdk-baseline }
 
-[SiFli-SDK](platforms/sifli-sdk/overview.md) ist SiFlis offizielles, auf RT-Thread basierendes Softwarepaket und der Referenzpfad für die SF32-Firmwareentwicklung. Beginnen Sie damit, sofern kein konkreter Grund für die Evaluierung eines anderen Ökosystems spricht: Für Board-Unterstützung, Bluetooth, Grafik, Audio, Speicher, Energiemanagement und Produktionsabläufe bietet es die umfassendste dokumentierte Referenzkonfiguration.
+[SiFli-SDK](platforms/sifli-sdk/overview.md) ist SiFlis offizielles, auf RT-Thread basierendes Softwarepaket und der Referenzpfad für die SF32-Firmwareentwicklung. Beginnen Sie damit, sofern kein konkreter Grund für die Evaluierung eines anderen Ökosystems spricht: Die Dokumentation enthält Anleitungen zu Board-Unterstützung, Bluetooth, Grafik, Audio, Speicher, Energiemanagement und Produktionsabläufen.
 
 Bevor Sie Produktfunktionen entwickeln, richten Sie eine reproduzierbare Referenzkonfiguration ein und dokumentieren Sie sie:
 

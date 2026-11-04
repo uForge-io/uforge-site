@@ -297,7 +297,7 @@ Utilisez la conception de référence comme base pour le circuit du bouton d'enc
 
 <div align="center"><em>Figure 5.5-5 : Circuit du bouton d'encodeur rotatif mécanique</em></div>
 
-Les signaux A et B de l'encodeur sont reliés à PA35 et PA36 par des résistances de 0 Ω. Chaque signal possède une résistance de pull-up de 200 kΩ vers VDD33_LDO2_VOUT et une protection ESD ; C0703 et C0706 sont marqués NF (non montés). Les noms des signaux indiquent aussi des fonctions USB/UART multiplexées : vérifiez les conflits de broches avant de reprendre cette affectation.
+Les signaux A et B de l'encodeur sont reliés à PA35 et PA36 par des résistances de 0 Ω. Chaque signal possède une résistance de pull-up de 200 kΩ vers VDD33_LDO2_VOUT et une protection ESD ; C0703 et C0708 sont marqués NF (non montés). Les noms des signaux indiquent aussi des fonctions USB/UART multiplexées : vérifiez les conflits de broches avant de reprendre cette affectation.
 
 **Erreurs courantes - Boutons**
 

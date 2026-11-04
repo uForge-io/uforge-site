@@ -21,7 +21,7 @@ tags:
 
 Cette référence décrit l'interface externe de commandes AT du module Bluetooth bimode SF32LB57 (SIFLI_AT), version V1.2.1. Les commandes et les réponses sont présentées en police à chasse fixe ; `\r` représente un retour chariot (0x0D) et `\n` un saut de ligne (0x0A). Les commandes AT sont transmises en texte ASCII ; les champs binaires des trames PDU sont encodés en little-endian.
 
-Il s'agit de la spécification complète de l'interface AT référencée par la page Module Bluetooth à commandes AT.
+La page Module Bluetooth à commandes AT renvoie à cette référence V1.2.1. Cela ne confirme pas la prise en charge des mêmes commandes par d'autres versions du firmware ; vérifiez la version du firmware du module avant de les utiliser.
 
 <div align="center"><em>Tableau : Historique des révisions</em></div>
 
@@ -66,6 +66,9 @@ Le module Bluetooth bimode SF32LB57 fournit à l'hôte une interface de commande
 ### Définition de la syntaxe { #syntax-definition }
 
 Les commandes AT sont transmises en texte ASCII, terminées par un retour chariot `\r` (0x0D). Le préfixe de commande est `AT+` (commandes au format AT) ou `AT>` (commandes au format PDU). Sur SF32LB57, le port AT est USART1, utilisant un format 8N1 sans contrôle de flux matériel, à un débit par défaut de 460800 bps. Une trame AT unique est limitée à 512 octets.
+
+!!! warning "Confirmer la longueur maximale des trames PDU"
+    La source limite une trame AT à 512 octets, mais autorise aussi un corps PDU allant jusqu'à 508 octets. Avec les 8 octets de délimitation et d'en-tête de commande illustrés, cela représenterait 516 octets sur l'UART. La source n'explique pas comment ces octets sont comptabilisés dans la limite du tampon de réception. Confirmez la longueur maximale de trame PDU acceptée par le firmware cible avant de dimensionner les tampons de l'hôte ou d'utiliser la longueur de corps maximale ; ne remplacez aucune des valeurs de la source par une limite supposée.
 
 ### Commandes au format AT { #at-format-commands }
 
@@ -138,7 +141,7 @@ Les commandes ci-dessous sont regroupées par fonction selon les mêmes catégor
 | Élément | Contenu |
 |:-----|:--------|
 | Commande | `AT+GFWVER?\r` |
-| Réponse | Succès : `\r\n+GFWVER:SIFLI_AT_<version>_<build date>\r\n\r\nOK\r\n` ; toute tentative de réglage renvoie `\r\nERROR\r\n` |
+| Réponse | Succès : `\r\n+GFWVER:SIFLI_AT_<version>_<build date>\r\n\r\nOK\r\n` ; la forme de réglage renvoie `\r\nERROR\r\n` |
 | Paramètres | Aucun |
 | Remarques | Interrogation uniquement. La valeur de retour commence toujours par `SIFLI_AT_`, suivi du numéro de version et de la date de compilation. |
 
@@ -673,7 +676,7 @@ Les commandes ci-dessous sont regroupées par fonction selon les mêmes catégor
 | Commande | `AT+BAUD?\r` |
 | Réponse | `\r\n+BAUD:<baud_rate>\r\n\r\nOK\r\n` |
 | Paramètres | `baud_rate` : le débit actuellement configuré, en bps. |
-| Remarques | Après la définition du débit, l'appareil redémarre ; le nouveau débit prend effet après la réinitialisation. |
+| Remarques | Aucune |
 
 </div>
 
@@ -688,7 +691,7 @@ Les commandes ci-dessous sont regroupées par fonction selon les mêmes catégor
 | Commande | `AT+BAUD=<baud_rate>\r` |
 | Réponse | Succès : `\r\nOK\r\n` ; échec : `\r\nERROR\r\n` |
 | Paramètres | `baud_rate` : débit série, en bps. Valeurs prises en charge : 38400, 57600, 115200, 230400, 460800, 921600, 1000000. Par défaut 460800. |
-| Remarques | Le réglage met à jour la configuration. |
+| Remarques | La définition du débit met à jour la configuration et redémarre l'appareil ; le nouveau débit prend effet après le redémarrage. |
 
 </div>
 

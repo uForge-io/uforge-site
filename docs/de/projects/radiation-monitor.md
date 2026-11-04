@@ -12,7 +12,7 @@ tags:
 
 ## Was ist Radiation Monitor? { #what-is-radiation-monitor }
 
-[SiFliSparks/RadiationMonitor](https://github.com/SiFliSparks/RadiationMonitor) ist ein tragbarer Anzeiger für die Signalstärke im Bluetooth-Band auf Basis von SF32LB52 und SiFli-SDK. Seine Firmware durchläuft 79 Frequenzpunkte von 2402 bis 2480 MHz und stellt die empfangenen Stärkewerte als LVGL-Balkendiagramm dar. KEY2 startet oder stoppt den Scan und blättert im gespeicherten Verlauf.
+[SiFliSparks/RadiationMonitor](https://github.com/SiFliSparks/RadiationMonitor) ist ein tragbarer Anzeiger für die Signalstärke im Bluetooth-Band auf Basis von SF32LB52 und SiFli-SDK. Seine Firmware durchläuft 79 Frequenzpunkte von 2402 bis 2480 MHz und stellt die Werte des Indikators für die empfangene Signalstärke (RSSI) als LVGL-Balkendiagramm dar. KEY2 startet oder stoppt den Scan und blättert im gespeicherten Verlauf.
 
 Das Projekt eignet sich zum Studium seines Scan-Pfads im Bluetooth-Band, der Echtzeit-Datenverarbeitung, der Frequenzvisualisierung und der Ein-Tasten-Bedienung. Es ist kein kalibrierter Spektrumanalysator und identifiziert nicht die Quelle des empfangenen Signals. Übertragungen im 2,4-GHz-Band in der Nähe und die Messbedingungen können das Diagramm beeinflussen. Ohne Kalibrierung und einen kontrollierten Vergleich sind seine Werte für regulatorische, Zertifizierungs- oder Präzisions-RF-Messungen ungeeignet.
 
@@ -46,7 +46,7 @@ Halten Sie vor dem Start bereit:
 | Bereich | Festgelegte Quellbasis | Vor der Anpassung erforderliche Nachweise |
 |:-----|:------------------------|:------------------------------------|
 | Frequenz-Scan | 79 Punkte von 2402 bis 2480 MHz | Firmware-Commit, SDK-/Board-Revision und vollständiges Scan-Log |
-| Verarbeitung | Die Modulbeschreibung im Upstream-README sagt, die vorherigen zehn Scans zu mitteln; die Übersicht nennt 30 Scans. Es bleibt offen, ob über lineare Leistung oder dBm gemittelt wird | Festgelegte Quellrevision, Mittelungsweise und -tiefe, Roh- und geglättete Ergebnisse sowie Vergleich mit stabiler Quelle |
+| Verarbeitung | Siehe Warnhinweis unten zu den widersprüchlichen Angaben im README | Festgelegte Quellrevision, Mittelungsweise und -tiefe, Roh- und geglättete Ergebnisse sowie Vergleich mit stabiler Quelle |
 | Verlauf | Ringverlauf mit zehn Einträgen | Protokoll zu Stoppen, Blättern, Umlauf und Neustart |
 | UI | LVGL-Balkendiagramm mit nominaler Y-Achse von -110 bis -20 dBm | Bildschirmaufnahme und Prüfung der Zuordnung von Beschriftung zu Array |
 | Messgrenze | Keine rückführbare Kalibrierung und keine Unsicherheitsangabe vorhanden | Referenzgerät, Messaufbau und Fehlerprotokoll oder ausdrückliche Kennzeichnung „nur relativer Trend“ |
@@ -94,7 +94,7 @@ Verwenden Sie den festgelegten Projekt-Commit [`670cf20`](https://github.com/SiF
 |:--------|:----------------|:--------------|
 | Board | Beginnen Sie mit dem SCons-Board-Argument `sf32lb52-lchspi-ulp` von SiFli; erfassen Sie die tatsächliche Leiterplatte und prüfen Sie die Projektkonfiguration | Dass das README-Ausgabeverzeichnis `build_sf32lb52-lchspi-ulp_hcpu` belegt, jeder Antennen- und Display-Pfad eines SF32LB52x-Boards sei gleichwertig |
 | SDK | Erfassen Sie den SiFli-SDK-Commit, der erfolgreich baut | Nehmen Sie nicht an, dass das neueste SDK das Bluetooth-Scan-Verhalten des Projekts bewahrt |
-| Glättung | Klären Sie die Abweichung im README zwischen 30 Scans und den vorherigen 10 Scans anhand des festgelegten Quellstands; prüfen Sie, ob über lineare Leistung oder dBm gemittelt wird, und bestimmen Sie die Tiefe | Die Modulbeschreibung nennt zehn Scans, die Übersicht 30, und keine nennt die Mittelungsweise |
+| Glättung | Siehe Warnhinweis unten; Mittelungsweise und -tiefe anhand der festgelegten Quelle bestimmen und auf dem Gerät prüfen | Die README-Angaben belegen nicht das Verhalten des festgelegten Codes |
 | Timing | Das README nennt ein Datenaktualisierungsintervall von 30 ms; messen Sie die Zeit eines vollständigen 79-Punkte-Durchlaufs | Dass 30 ms eine garantierte Periode für die vollständige 79-Punkte-Aktualisierung sind |
 | Lizenzierung | Bestätigen Sie die Lizenzen des Repositorys und des eingebundenen Codes vor Wiederverwendung oder Weitergabe | Dass öffentlich sichtbarer Quellcode automatisch Rechte zur Produktverbreitung gewährt |
 
@@ -161,7 +161,7 @@ Die wesentlichen Fehlerdomänen sind RF-Eingang/Antenne, Scan-Verhalten und Kali
 
 | Test | Methode | Nachweis des Bestehens |
 |:-----|:-------|:--------------|
-| Glättungsalgorithmus und -tiefe | Rohwerte und `rssi_res` für eine Frequenz aufzeichnen; mit der festgelegten Quelle vergleichen und die Abweichung im README klären | Mittelungsskala und -tiefe entsprechen der genauen Quellrevision und sind auf dem Gerät bestätigt |
+| Glättungsalgorithmus und -tiefe | Rohwerte und `rssi_res` für eine Frequenz aufzeichnen und mit der festgelegten Quelle vergleichen | Mittelungsskala und -tiefe entsprechen der genauen Quellrevision und sind auf dem Gerät bestätigt |
 | Start/Stopp | KEY2 während des Scans kurz drücken, dann fortsetzen | Stopp erhält den Verlauf; Fortsetzen läuft ohne Hänger weiter |
 | Verlauf | Im gestoppten Zustand KEY2 mehrmals lang drücken | Bis zu zehn Einträge lassen sich rückwärts durchblättern und laufen korrekt um |
 | Leerer Verlauf | Stoppen oder lang drücken, bevor ein gültiger Verlauf vorliegt | Kein Zugriff außerhalb der Grenzen und kein Absturz; die Benutzeroberfläche zeigt klar erkennbar an, dass keine Daten vorliegen |

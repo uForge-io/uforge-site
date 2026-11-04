@@ -20,7 +20,7 @@ Lesen Sie diese Seiten, bevor Sie das Firmware-Layout, das Update-Verhalten oder
 
 | Thema | Warum es wichtig ist |
 |:------|:---------------|
-| [Partitionstabellen](partition-tables.md) | Legt das Layout für Firmware, Dateisystem, OTA und Speicher (Storage-Layout) fest. |
+| [Partitionstabellen](partition-tables.md) | Legt das Layout von Firmware, Dateisystem, OTA und Datenspeicher fest. |
 | [OTA und DFU](ota-dfu.md) | Grundlage für Updates im Feld und Wiederherstellungspläne. |
 | [USB und CherryUSB](usb-cherryusb.md) | Behandelt die USB-Funktionen als Gerät und als Host, die über eine bloße Datenblattangabe hinausgehen. |
 | [Energiemanagement](power-management.md) | Macht aus einer funktionierenden Demo ein für den Akkubetrieb ausgelegtes Produkt. |

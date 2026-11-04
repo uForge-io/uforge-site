@@ -69,14 +69,14 @@ SF32LB58-DevKit-LCD 是一块基于 SF32LB58-MOD 模组系列的开发板，适�
 
 ## 何时使用这块开发板 { #when-to-use-this-board }
 
-当项目需要验证高分辨率显示和丰富的外设链路，而非仅用于引出少量信号的简化板卡时，可选择 SF32LB58-DevKit-LCD。
+当项目需要验证高分辨率显示屏和外设集成，而不只是引出少量信号时，可选择 SF32LB58-DevKit-LCD。
 
 - 启动调试 MIPI DSI、RGB888 或 QSPI 屏幕
 - 联合验证触摸、音频、存储和 USB
 - 在 SF32LB58x 平台上验证高分辨率 UI 行为
 - 评估 CAN 或 SDIO Wi‑Fi 扩展
 - 对比 NOR 和 NAND 模组配置
-- 在旗舰级开发板上完成固件验证，再投入定制 PCB 设计
+- 在该开发板上完成固件验证，再进行定制 PCB 设计
 
 如果需要进一步评估模组级集成方案，请同时参考 [SF32LB58-MOD](../modules/SF32LB58-MOD.md)。如需了解芯片家族架构以及显示和存储能力，请参见 [SF32LB58x](../chips/SF32LB58x.md)。
 
@@ -105,6 +105,8 @@ SF32LB58-DevKit-LCD 是一块基于 SF32LB58-MOD 模组系列的开发板，适�
 
 </div>
 
+**USB 转 UART 芯片型号存在资料差异，请核对实装器件：**思澈科技（SiFli）的型号指南将桥接芯片标为 CH343K，并称其提供 2 路 USB 转 UART 调试通道；功能框图则标为 CH342K，并显示 UART1 和 UART4，但未说明各通道对应哪个 Type-C 接口。请根据具体版本的原理图/BOM 核实实装器件和通道连接。
+
 ## 开始使用 { #getting-started }
 
 ### 所需硬件 { #required-hardware }
@@ -113,6 +115,8 @@ SF32LB58-DevKit-LCD 是一块基于 SF32LB58-MOD 模组系列的开发板，适�
 - 对应的 MIPI DSI、RGB888 或 QSPI 屏幕模组
 - USB 2.0 数据线，Type-A 转 Type-C 或等效线缆
 - 运行 Windows、Linux 或 macOS 的主机电脑
+
+如需同时进行 UART 调试和 USB 测试，请准备两根 USB 2.0 数据线，分别连接两个 Type-C 接口。
 
 ### 可选硬件 { #optional-hardware }
 
@@ -126,9 +130,9 @@ SF32LB58-DevKit-LCD 是一块基于 SF32LB58-MOD 模组系列的开发板，适�
 
 1. 将目标显示模组连接到正确的 LCD 接口。
 2. 将 USB 转 UART Type-C 接口连接到主机电脑。
-3. 打开思澈科技（SiFli）下载工具并选择正确的 COM 口。
+3. 打开 SifliTrace 并选择正确的 COM 口。
 4. 根据需要安装或移除 Mode 跳线帽，以选择下载模式或运行模式。
-5. 给开发板上电，并下载或运行目标固件。
+5. 给开发板上电；在下载模式下使用 Impeller 烧录目标固件，或在正常运行模式下启动应用程序。
 6. 屏幕启动调试完成后，再根据项目需要验证触摸、音频、存储和扩展外设。
 
 请确保使用真正支持数据传输的 USB 线缆；部分 Type-C 线只能供电，无法提供 UART 或 USB 数据链路。
@@ -136,6 +140,8 @@ SF32LB58-DevKit-LCD 是一块基于 SF32LB58-MOD 模组系列的开发板，适�
 ## 供电 { #power }
 
 SF32LB58-DevKit-LCD 通过 USB Type-C 供电。
+
+功能框图显示，5 V 电源还接至 DPI LCD、RGB LED、背光驱动器、音频功放和 40 针排针。增加负载前，请根据原理图核对电源轨和连接器的限制。
 
 - 板上两个 USB Type-C 接口都可以给开发板供电
 - 固件下载与串口日志请使用 USB 转 UART Type-C 接口
@@ -145,10 +151,14 @@ SF32LB58-DevKit-LCD 通过 USB Type-C 供电。
 
 固件下载和串口日志的主要接口是 USB 转 UART Type-C 接口。
 
+下载前，请使用思澈科技（SiFli）的 Impeller 固件烧录工具选择目标固件。
+
 - **下载模式**：安装 Mode 跳线帽，然后上电或复位开发板
 - **软件调试 / 日志模式**：移除 Mode 跳线帽，然后上电或复位开发板
 
 开发板也支持 J-Link / SWD 调试。
+
+接线参考图使用 CONN2 的 1 脚（3.3 V）、12 脚（SWD-DIO）、7 脚（SWD-CLK）和 9 脚（GND）；请按图示方向将这些信号通过随板转接板连接。
 
 ![SF32LB58-DevKit-LCD J-Link 接线参考](assets/sf32lb58x/58KIT-JLINK-CONN2.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — J-Link 接线参考</em></div>
@@ -229,6 +239,8 @@ SiFli-SDK 构建配置中列出的 58 系列开发板目标名如下；构建时
 - 2 路扬声器输出
 - 1 路 PDM 信号，但当 RGB 显示路径工作时会与 RGB 信号复用，无法同时使用
 
+音频接线参考图将 CONN2 的 11 脚标为 MIC_BIAS、13/15 脚标为 ADC1N/P、16/18 脚标为 ADC2N/P，35–38 脚标为 SPK1/2 P/N。
+
 思澈科技（SiFli）的[开发板详细指南](https://wiki.sifli.com/en/board/sf32lb58x/SF32LB58-DevKit-LCD.html)将立体声模拟输出标为最高 2.8 W/4 Ω；[开发板型号指南](https://wiki.sifli.com/en/board/devkit_guide.html)则对双路扬声器输出列出 3 W/4 Ω。两份资料均未说明该数值是单路还是两路合计。选型前应结合具体板卡版本、原理图及功放供电和负载条件核实，不要将任一数值直接视为单路保证输出。
 
 ![音频连接参考](assets/sf32lb58x/58KIT-AUDIO-CONN2.png){ loading="lazy" }
@@ -245,6 +257,8 @@ SiFli-SDK 构建配置中列出的 58 系列开发板目标名如下；构建时
 <div align="center"><em>参考 CAN 收发器板</em></div>
 
 开发板也支持通过排针接口进行 SDIO Wi‑Fi 扩展。
+
+接线参考图标出了 SDIO1_EN、SDIO1_CMD、SDIO1_D0–D3、SDIO1_CLK 和 WAKE_HOST，以及 3.3 V 与 GND；接线前请对照连接器图核实引脚编号。
 
 ![SDIO Wi-Fi 模组参考图](assets/sf32lb58x/ATK-RTL8189-SDIO-WIFI-LOOK.png){ loading="lazy" }
 <div align="center"><em>参考 SDIO Wi‑Fi 模组</em></div>

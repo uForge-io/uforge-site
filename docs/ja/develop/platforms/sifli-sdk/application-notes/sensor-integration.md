@@ -87,6 +87,8 @@ menuconfig SENSOR_USING_6D
 - ボードで割り当てている場合、`LSM6DSL_INT_GPIO_BIT`と`LSM6DSL_INT2_GPIO_BIT`に割り込みピンを指定します。
 - `LSM_USING_AWT`、`LSM_USING_PEDO`、`LSM6DSL_USE_FIFO`はデバイス固有の機能です。選択したドライバーが対応する場合にのみ定義します。
 
+コードブロックはガイドのデフォルト値 `0`（SPI）を維持しています。後述のI2Cアクセス例を使う場合は `LSM6DSL_USING_I2C=1` とし、SPIを選択する場合は対応するSPIアクセスコードを使用してください。
+
 この例はSF32LB52xガイドに準拠しています。他のファミリーのガイドやSDKブランチでは、オプションやメニューのパスが異なる場合があります。例を適用する前に、対象ブランチで実際のシンボルを確認してください。
 
 ### バスを取得してレジスターアクセスを実装する { #find-the-bus-and-implement-register-access }

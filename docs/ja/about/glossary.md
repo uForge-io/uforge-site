@@ -36,7 +36,7 @@ tags:
 
 * **ePicasso** — SF32ファミリー向けにSiFliが独自開発した2D/2.5Dグラフィックスアクセラレーションエンジンです。画像のコピー、ブレンディング、拡大縮小、回転、レイヤー合成などのピクセル処理をアプリケーションCPUからオフロードします。[ePicasso 2D / 2.5Dグラフィックスエンジン](../learn/graphics/epicasso-gpu.md)を参照してください。
 * **eZip** — SiFli独自のロスレス画像・汎用圧縮形式です。対応するSF32デバイスでは、ハードウェアでデコードできます。画像ではPNGをわずかに上回る圧縮率が得られるとSiFliは説明しています。汎用データの圧縮率は元データによって異なります。圧縮データはデコード前にバスを通るため、eZipはPSRAMやNOR Flashなどの外部メモリーからの転送帯域を削減できます。
-* **TurboPixel** — 対応するSF32製品で使われる、固定圧縮率の非可逆フレームバッファー形式です。extDMAがレンダリング済みビットマップをTurboPixelに圧縮し、ディスプレイコントローラーが展開することで、PSRAMの帯域幅と容量を節約します。[TurboPixelフレームバッファー圧縮ページ](../learn/graphics/turbopixel.md)を参照してください。
+* **TurboPixel** — 対応するSF32製品で使われる、固定圧縮率の非可逆フレームバッファー形式です。extDMAがレンダリング済みビットマップをTurboPixelに圧縮し、ディスプレイコントローラーが展開することで、フレームバッファーに必要なPSRAMの帯域幅と容量を削減します。[TurboPixelフレームバッファー圧縮ページ](../learn/graphics/turbopixel.md)を参照してください。
 * **LVGL** — **Light and Versatile Graphics Library（軽量で多機能なグラフィックスライブラリー）。** 多くのSF32製品でアプリケーションのUIに使われる、オープンソースの組み込みUIフレームワークです。ePicassoによる描画アクセラレーションと組み合わせて動作します。
 * **HMI** — **Human-Machine Interface（ヒューマンマシンインターフェース）。** 画面、タッチ、ボタンなど、デバイス上のユーザーインターフェースを設計分野として指す略語です。
 * **RGB / DPIディスプレイインターフェース** — ピクセルの色情報を対応するパネルまたはディスプレイコントローラーへ直接送るパラレルインターフェースです。正式名称は**DPI（Display Pixel Interface）**で、「RGBインターフェース」は基板設計で一般的に使われる略称です。通常、ピクセルクロック、水平・垂直同期信号、複数のパラレル色情報線を使います。シリアル方式より多くのGPIOを使用し、パラレル配線にも注意が必要です。対象パッケージのピン数とパネルのタイミング要件を確認してください。
@@ -64,7 +64,7 @@ tags:
 * **SRAM** — **Static RAM（スタティックRAM）。** アプリケーションコードやデータの実行に使う、高速なオンチップ作業メモリーです。
 * **PSRAM** — **Pseudo-Static RAM（疑似スタティックRAM）。** オンチップSRAMを補う大容量の外部メモリーです。SF32モジュールではSystem-in-Packageとして搭載されることが多く、グラフィックスバッファーや大規模なアプリケーションに使われます。
 * **NOR / NAND Flash** — ファームウェアやアセットの保存に使われる2種類の不揮発性フラッシュメモリーです。NORはランダム読み出しが速く、XiP（Execute-in-Place、フラッシュ上での直接実行）によく使われます。NAND / SD-NANDはランダムアクセス速度と引き換えに高密度化でき、画像、フォント、ログなどの大容量データの保存に適しています。
-* **OPI / QPI / QSPI** — **Octal/Quad Peripheral（またはSerial Peripheral）Interface（8線／4線周辺機器インターフェース）。** フラッシュやPSRAMのインターフェースにおけるピン数と帯域幅の区分です。Quadはデータ線4本、Octalは8本を表し、実現可能なメモリー帯域幅に影響します。
+* **OPI / QPI / QSPI** — **Octal Peripheral Interface / Quad Peripheral Interface / Quad Serial Peripheral Interface。** フラッシュまたはPSRAMのインターフェース名です。OPIはデータ線8本、QPIとQSPIは4本を使用します。インターフェース幅は、実現可能なメモリー帯域幅に影響します。
 * **eMMC** — **Embedded MultiMediaCard。** 大容量ストレージを備えるSF32設計で使われる、NANDフラッシュを管理するストレージインターフェースです。
 
 ## 周辺機器とインターフェース { #peripherals-and-interfaces }
@@ -82,7 +82,7 @@ tags:
 
 ## ハードウェアと製造 { #hardware-and-manufacturing }
 
-* **QFN** — **Quad Flat No-lead package（クワッド・フラット・ノーリード・パッケージ）。** SF32製品で使われるチップパッケージの一種です。ピン数と外形寸法（例：QFN68）で表します。
+* **QFN** — **Quad Flat No-lead package（クワッド・フラット・ノーリード・パッケージ）。** 一部のSF32製品で使われるリードレスパッケージです。ピン数と外形寸法（例：QFN68）で表します。
 * **BGA** — **Ball Grid Array package（ボール・グリッド・アレイ・パッケージ）。** デバイス底面に半田ボールを配置するパッケージです。小型化と多ピン化に適しますが、BGA向けのPCB引き出し配線と実装工程が必要です。
 * **BOM** — **Bill of Materials（部品表）。** プリント基板アセンブリー（PCBA）の製造に必要な部品、受動部品、機構部品を項目別に記載した正式な一覧です。SiFli推奨の部品やモジュールを優先する大きな理由の一つは、BOMの複雑さを抑えられることです。
 * **EDA** — **Electronic Design Automation（電子設計自動化）。** 回路図入力、SPICEシミュレーション、PCBレイアウトを行うソフトウェアの総称です。SF32専用のフットプリントやシンボルについては、[SF32 EDAツールライブラリ](../hardware/cad-components/eda-tool-libraries.md)を参照してください。

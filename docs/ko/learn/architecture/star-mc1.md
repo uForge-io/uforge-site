@@ -57,7 +57,7 @@ STAR-MC1은 SoC가 구현하고 소프트웨어가 효과적으로 활용하는 
 | 주 시스템 버스 인터페이스 | 3 × AMBA AHB-Lite (Harvard) | 3 × AMBA AHB-Lite (Harvard) | 2 × AMBA 5 AHB5 인터페이스: C-AHB + S-AHB | 2 × AMBA 5 AHB5 인터페이스: C-AHB + S-AHB | 64비트 AMBA 5 AXI5. 32비트 AHB 주변 장치. TCM용 64비트 AHB 슬레이브 인터페이스 | 64비트 AMBA 4 AXI. 32비트 AHB 주변 장치. TCM용 32비트 AHB 슬레이브 인터페이스 |
 | TrustZone 지원 | 아니요 | 아니요 | 선택 사항. SoC에 따라 다름 | 선택 사항. SoC에 따라 다름 | 선택 사항. SoC에 따라 다름 | 아니요 |
 | DSP 명령 | 전용 DSP 확장 없음 | 기본 DSP 확장 | 선택적 DSP 확장 | 선택적 DSP 확장 | 기본 DSP 확장. 선택적 Helium (MVE) | 기본 DSP 확장 |
-| Arm Helium (MVE) | 지원하지 않음 | 지원하지 않음 | 지원하지 않음 | 지원하지 않음 | 선택 사항. 정수 또는 부동소수점 MVE, 구성에 따라 다름 | 지원하지 않음 |
+| Arm Helium (MVE) | 지원하지 않음 | 지원하지 않음 | 지원하지 않음 | 지원하지 않음 | 선택 사항. 정수 MVE-I만 포함하거나 FP16/FP32 부동소수점 MVE-F를 MVE-I와 함께 포함할 수 있으며, 구성은 FPU와 구현에 따라 다름 | 지원하지 않음 |
 | 부동소수점 유닛 | IP 자체 기능 없음 | 선택적 단정밀도 | 선택적 단정밀도 | 선택적 단정밀도 | 선택적 스칼라 FP16/FP32/FP64. 선택적 벡터 FP16/FP32 | 선택적 단정밀도/배정밀도 |
 | I-cache / D-cache | 프로세서 IP에 포함되지 않음. SoC 수준 캐시를 추가할 수 있음 | 프로세서 IP에 포함되지 않음. SoC 수준 캐시를 추가할 수 있음 | 프로세서 IP에 포함되지 않음. SoC 수준 캐시를 추가할 수 있음 | 프로세서 IP에서 선택 사항. 유무와 구성은 구현에 따라 다름 | 프로세서 IP에서 선택 사항. 유무와 구성은 구현에 따라 다름 | 프로세서 IP에서 선택 사항. 유무와 구성은 구현에 따라 다름 |
 | Arm Custom Instructions / CDE | IP 자체 기능 없음 | IP 자체 기능 없음 | Arm이 CDE 인코딩을 정의하며 커스텀 연산과 데이터패스는 SoC가 정의함. 선택적 정수 CDE, 부동소수점 CDE는 FPU/구성에 따라 다름 | STAR-MC1 TRM은 GPR CDE 및 FPCDE 모듈을 설명함. 구현된 연산과 제품에서의 제공 여부는 SoC 구성에 따라 다름 | Arm이 CDE 인코딩을 정의하며 커스텀 연산과 데이터패스는 SoC가 정의함. r1부터 선택 사항이며 r0에서는 사용할 수 없음 | IP 자체 기능 없음 |
@@ -79,6 +79,8 @@ STAR-MC1은 SoC가 구현하고 소프트웨어가 효과적으로 활용하는 
 
 프로세서 IP 참고 자료: Arm [CM3 데이터시트](https://documentation-service.arm.com/static/62053c120ca305732a3a5c14), [CM4 문서](https://support.arm.com/compute-ip/cortex-m4), [CM33 기술 참조 매뉴얼](https://documentation-service.arm.com/static/66be1ce8882fec713ef49954), [CM55 데이터시트](https://documentation-service.arm.com/static/6205407494e7af28dd7c9cb5), [CM7 데이터시트](https://developer.arm.com/-/media/Arm%20Developer%20Community/PDF/Processor%20Datasheets/Arm-Cortex-M7-Processor-Datasheet.pdf), [STAR-MC1 기술 참조 매뉴얼](https://www.armchina.com/webarm/arm/common/download/profile/resource/file/Documents/Application-Notes/Technical-Reference-Manual/Star_Technical_Reference_Manual_00903001_0100_00_en.pdf)
 
+Cortex-M55의 MVE 구성 세부 정보는 Arm의 [CM55 기술 참조 매뉴얼](https://documentation-service.arm.com/static/63190fc5ce77a54a32db3ac2)을 참고하십시오.
+
 ## 아키텍처 개선 사항 { #architectural-enhancements }
 
 STAR-MC1은 Cortex-M33을 대체하는 것이 아니라 그 위에 구축되었습니다. 가장 중요한 추가 사항은 코어가 메모리를 기다리는 시간을 줄이고 유용한 작업을 실행하는 시간을 늘려 주는 구현 수준의 개선입니다.
@@ -97,6 +99,8 @@ STAR-MC1은 Cortex-M33을 대체하는 것이 아니라 그 위에 구축되었�
 하드웨어가 일관성을 유지해 주지 않는 캐시 가능(cacheable) 버퍼의 경우, DMA, 디스플레이 컨트롤러, 오디오 인터페이스 또는 다른 버스 마스터와 메모리를 공유하는 드라이버는 SDK 또는 RTOS의 캐시 관리 규칙을 따라야 합니다. 주변 장치가 읽기 전에 CPU가 쓴 데이터를 clean하십시오. 수신 버퍼는 DMA가 쓰기 전에 준비하고, 전송이 완료된 뒤 CPU가 읽기 전에 오래된 캐시 라인을 invalidate하십시오. DMA가 버퍼를 소유하는 동안 CPU가 해당 버퍼에 접근해서는 안 됩니다. 캐시 라인 전체를 할당하고 관련 없는 데이터와 공유하지 않도록 하며, 플랫폼의 완료 확인과 메모리 배리어를 따르십시오. 캐시 불가(non-cacheable) 또는 하드웨어 일관성이 보장되는 버퍼도 해당 플랫폼의 동기화 규칙이 여전히 필요합니다. 버퍼 소유권과 dirty 라인 위험은 [PSRAM과 다른 임베디드 메모리 유형 비교](psram-and-memory-types.md#caches-and-external-memory-execution)를 참고하십시오.
 
 ### Armv8-M 커스텀 데이터패스 확장 { #armv8-m-custom-datapath-extension }
+
+CDE와 Arm Helium(MVE)는 서로 다른 확장입니다. CDE는 SoC가 구현하는 커스텀 연산의 명령 인코딩을 정의하며, MVE는 Armv8.1-M의 표준 벡터 확장입니다. STAR-MC1이 Armv8-M Mainline 기반이라는 사실만으로 MVE 지원을 추론할 수 없습니다.
 
 IP 수준에서 Arm은 CDE 명령 인코딩을 정의하고, SoC 설계자는 커스텀 연산과 데이터패스를 정의합니다. CM33은 선택적 정수 CDE를 지원하며, 부동소수점 CDE는 FPU와 구성에 따라 다릅니다. STAR-MC1 TRM은 GPR CDE 및 FPCDE 모듈을 설명하지만, 이러한 IP 수준의 설명만으로는 특정 SF32 디바이스나 SDK에서 CDE를 사용할 수 있다고 확정할 수 없습니다. SiFli SDK [v2.5.1 릴리스 노트](https://github.com/OpenSiFli/SiFli-SDK/releases/tag/v2.5.1)에는 SF32LB57x에서 CDE가 실수로 활성화되던 문제의 수정이 기록되어 있으므로, 의존하기 전에 정확한 대상과 SDK에서 지원 여부를 확인하십시오. CM55는 r0가 아니라 r1부터 선택적 CDE를 제공합니다. CP0~CP7은 코프로세서 또는 CDE에 할당되는 인코딩 공간이며, 커스텀 명령 8개나 추가 가속기 8개를 의미하지 않습니다. 코어 리비전, 구현된 모듈, 컴파일러/SDK 지원을 확인하십시오. [CM33 데이터시트](https://www.arm.com/-/media/Arm%20Developer%20Community/PDF/Processor%20Datasheets/Arm-Cortex-M33-Processor-Datasheet.pdf), [CM55 CDE 리비전 참고 자료](https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/armv8_2d00_m-based-processor-software-development-hints-and-tips), STAR-MC1 TRM의 B7/B8장을 참고하십시오.
 

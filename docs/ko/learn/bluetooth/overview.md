@@ -40,7 +40,7 @@ BLE는 대부분의 연결형 웨어러블과 센서에 적합한 기본 선택�
 
 ### Classic Bluetooth와 듀얼 모드 { #classic-bluetooth-and-dual-mode }
 
-제품에 오디오 스트리밍(A2DP/AVRCP), 핸즈프리 통화(HFP), 시리얼 방식 데이터 링크(SPP) 또는 기존 Classic 프로파일과의 호환성이 필요하다면 Classic Bluetooth를 추가하십시오. 듀얼 모드 설계는 BLE 전용 설계보다 라디오 스케줄링과 공존 측면에서 부담이 크며, 전용 Bluetooth 프로세서는 바로 이러한 워크로드를 시스템의 나머지 부분으로부터 분리하기 위해 만들어졌습니다.
+제품에 오디오 스트리밍(A2DP/AVRCP), 핸즈프리 통화(HFP), 시리얼 방식 데이터 링크(SPP) 또는 기존 Classic 프로파일과의 호환성이 필요하다면 Classic Bluetooth를 추가하십시오. 듀얼 모드 설계는 BLE 전용 설계보다 라디오 스케줄링과 공존 측면에서 요구 사항이 더 까다롭습니다. 전용 Bluetooth 프로세서는 애플리케이션 프로세서와 별도로 시간 제약이 엄격한 링크 작업을 처리하지만, 제품의 복합 부하에서 공존 성능을 검증해야 합니다.
 
 모든 SF32 제품군이 듀얼 모드 Bluetooth를 제공하는 것은 아닙니다. 부품 번호를 확정하기 전에 [Bluetooth 프로세서](processor.md#device-family-differences)의 디바이스 표를 확인하십시오.
 

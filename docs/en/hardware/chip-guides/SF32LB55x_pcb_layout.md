@@ -15,11 +15,13 @@ tags:
 
 ### 6.1. Footprint and Stack-Up { #61-footprint-and-stack-up }
 
-Use the package drawing, land-pattern requirements, and assembly capability of the selected QFN or BGA package. BGA packages require early confirmation of ball escape, via strategy, solder-mask rules, and fabrication limits.
+Check the package drawing and land-pattern requirements for the selected QFN or BGA against the assembly capabilities of the intended manufacturer. For BGA packages, confirm ball escape, via strategy, solder-mask rules, and fabrication limits early.
 
 #### 6.1.1. Stack-Up and Fabrication Reference { #611-stack-up-and-fabrication }
 
-SiFli recommends a conventional PTH process and a four-layer board for QFN68L and BGA145. For BGA169, the reference recommends one-step HDI with blind/buried vias. The illustrated four- and six-layer stack-ups have a finished thickness of 0.7 mm ±10%. These are reference constructions, not universal limits; confirm the selected package drawing, finished thickness, and process capability with the board fabricator.
+The SF32LB55x series supports component placement on one or both PCB sides.
+
+SiFli recommends a conventional PTH process and a four-layer board for QFN68L, BGA125, and BGA145. For BGA169, the reference recommends one-step HDI with blind/buried vias. The illustrated four- and six-layer stack-ups have a finished thickness of 0.7 mm ±10%. These are reference constructions, not universal limits; confirm the selected package drawing, finished thickness, and process capability with the board fabricator.
 
 <div align="center"><em>Table 6.1-1: Four-Layer PTH Reference Stack-Up</em></div>
 
@@ -67,9 +69,24 @@ The source figure specifies a finished board thickness of 0.7 mm ±10%, includin
 
 The source figure specifies a finished six-layer HDI board thickness of 0.7 mm ±10%, including plating and solder mask. The stack-up, dielectric parameters, and theoretical thickness are references; have the board fabricator verify them against the actual materials, copper weights, and impedance requirements.
 
-#### 6.1.2. Land-Pattern Dimensions { #612-land-pattern-dimensions }
+#### 6.1.2. Package and Land-Pattern Dimensions { #612-land-pattern-dimensions }
 
-- BGA145/BGA169: 0.25 mm ball diameter and 0.5 mm pitch; the reference land pattern shows a 0.33 mm solder-mask opening and a 0.25 mm paste opening.
+<div align="center"><em>Table 6.1-3: Nominal Package Outline and Pitch</em></div>
+
+<div align="center" markdown>
+
+| Package | Nominal body dimensions (L × W × H) | Ball/lead pitch |
+|:---|:---:|:---:|
+| BGA125 | 7 × 7 × 0.94 mm | 0.5 mm |
+| BGA145 | 7 × 7 × 0.94 mm | 0.5 mm |
+| BGA169 | 7 × 7 × 0.94 mm | 0.5 mm |
+| QFN68L | 7 × 7 × 0.75 mm | 0.35 mm |
+
+</div>
+
+These nominal dimensions are transcribed from the source package drawings; use the drawing for the exact selected package when checking tolerances.
+
+- BGA125/BGA145/BGA169: 0.25 mm ball diameter and 0.5 mm pitch; the reference land pattern shows a 0.33 mm solder-mask opening and a 0.25 mm paste opening.
 - QFN68L: perimeter pads are 0.2 × 0.55 mm on 0.35 mm pitch; the reference shows a 0.3 × 0.65 mm solder-mask opening and a 0.2 × 0.55 mm paste opening. The exposed pad is 5.49 mm square nominally, with a 5.39–5.59 mm range.
 
 Check the package drawing and assembly house's stencil and solder-mask rules before releasing the footprint.
@@ -78,7 +95,7 @@ Check the package drawing and assembly house's stencil and solder-mask rules bef
 
 - Keep BUCK loops short and wide, with return current close to the switching loop.
 - Keep RF, crystal, GPADC, and audio regions away from switching supplies, display clocks, motors, and chargers.
-- Route high-speed memory and display interfaces over continuous reference ground.
+- Route high-speed memory and display interfaces over a continuous ground-reference plane.
 - Place ESD protection close to connectors and route signals through the protection device first.
 - Provide enough test points for power, boot, debug, RF, and production calibration.
 
@@ -118,17 +135,17 @@ In each source figure's same-net matrix, only selected cells are marked 0 mm; bl
 
 #### 6.2.3. EMI, ESD, and Protection { #623-emi-esd-and-protection }
 
-Keep clocks and noisy power routes on inner layers where practical. Place ESD devices at the connector so each signal passes through the device before entering the board, without a branch stub; use a short, wide ground path with a direct via to the plane. For USB charging, place the test point on the connector side of the TVS. For the battery input, place the TVS between the connector and board load so the path to the chip passes the TVS first, and keep its ground connection short.
+Avoid long surface-layer routes outside the shielded area. Route clocks and noisy power signals on inner layers, not on the surface. Place ESD devices at the connector so each signal passes through the device before entering the board, without a branch stub; use a short, wide ground path with a direct via to the plane. For USB charging, place the test point on the connector side of the TVS. For the battery input, place the TVS between the connector and board load so the path to the chip passes the TVS first, and keep its ground connection short.
 
 ### 6.3. Interface Routing { #63-interface-routing }
 
-Clock traces should be short, shielded, and isolated from fast digital signals. RF should be controlled as a 50 ohm path with a compact matching network. Storage and display traces should be length-controlled according to their speed and routed as grouped buses. Audio and GPADC signals should be shielded and kept away from switching currents.
+Clock traces should be short, shielded, and isolated from fast digital signals. Route RF as a 50 Ω controlled-impedance trace and keep its matching network compact. Storage and display traces should be length-controlled according to their speed and routed as grouped buses. Audio and GPADC signals should be shielded and kept away from switching currents.
 
 #### 6.3.1. Crystal Placement and Routing { #631-crystal-placement-and-routing }
 
 - Place each crystal inside the shielded area, more than 1 mm from the board edge and more than 5 mm from heat sources such as the PA, charger, and PMU. Keep at least 0.25 mm clearance around the crystal.
 - Route the 48 MHz crystal traces on the top layer; keep them 3–10 mm long and 0.1 mm wide. Keep 48M_XI and 48M_XO at least 0.15 mm apart, as shown in the [source routing model](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-48M-M-PCB.png), and provide three-dimensional ground shielding. Keep the routes away from VBAT, DC-DC, and high-speed signals. The source prose calls for a copper keep-out on the top and adjacent layers beneath the crystal region and prohibits unrelated routing through that region.
-- Route the 32.768 kHz crystal traces on the top layer; keep them no longer than 10 mm and 0.1 mm wide. Keep XI and XO at least 0.15 mm apart and provide three-dimensional ground shielding. The source prose calls for a copper keep-out on the top and adjacent layers beneath the crystal region and prohibits unrelated routing through that region.
+- Route the 32.768 kHz crystal traces on the top layer; keep them no longer than 10 mm and 0.1 mm wide. Keep 32K_XI and 32K_XO at least 0.15 mm apart and provide three-dimensional ground shielding. The source prose calls for a copper keep-out on the top and adjacent layers beneath the crystal region and prohibits unrelated routing through that region.
 
 #### 6.3.2. RF and High-Speed Interfaces { #632-rf-and-high-speed-interfaces }
 
@@ -281,6 +298,8 @@ Each table below covers one PCB layout review area. When an Applies To column is
 </div>
 
 #### 6.4.9. Test Points { #649-test-points }
+
+At minimum, reserve test points for hardware design on VBAT, GND, VDDIOA, VDDIOB, RSTN, Mode, SWDIO, SWCLK, RXD1, TXD1, RXD3, and TXD3. Production testing requires test points on VBAT, GND, boot_mode, VDDIOB, RXD3, and TXD3.
 
 <div align="center"><em>Table 6.4-9: Test Points Checklist</em></div>
 

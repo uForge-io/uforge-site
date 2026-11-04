@@ -105,7 +105,7 @@ The family-specific values above are reference figures from the cited SDK guides
 
 ## Control clocks while awake { #control-clocks-while-awake }
 
-If the idle thread cannot enter a sleep state, WFI auto-frequency reduction can lower current. It is safe only when EPIC, EZIP, LCDC, USB, and SD are idle. If an application does not use the SDK's LVGL/device bookkeeping, bracket peripheral activity with `rt_pm_hw_device_start()` and `rt_pm_hw_device_stop()`. Configure the divider with `HAL_RCC_HCPU_SetDeepWFIDiv()`; audio workloads normally limit the reduced clock to 48 MHz, while other workloads can use 4 MHz. Set `HPSYS_RCC_DBGR_FORCE_HP` as required by the SDK guide.
+If the idle thread cannot enter a sleep state, WFI auto-frequency reduction can lower current. It is safe only when EPIC, EZIP, LCDC, USB, and SD are idle. The SDK-bundled LVGL implementation tracks EPIC/EZIP busy state, while the RT-Thread LCD Device driver tracks LCDC/USB/SD. If you do not use the bundled LVGL implementation, bracket EPIC/EZIP activity with `rt_pm_hw_device_start()` and `rt_pm_hw_device_stop()`. Configure the divider with `HAL_RCC_HCPU_SetDeepWFIDiv()`. WFI frequency targets vary by family: the SF32LB52x guide allows reduction only to 48 MHz while audio peripherals are active and to 4 MHz otherwise; it also requires setting `HPSYS_RCC_DBGR_FORCE_HP` to 1. SiFli's [power-management application note](https://docs.sifli.com/projects/solution/2.application-notes/power_manager/index.html) lists 1 MHz as the CPU idle frequency for SF32LB55x, SF32LB56x, and SF32LB58x. The cited sources do not establish a value for SF32LB57x; use the guide for the target SDK release.
 
 For active work, use `rt_pm_run_enter()`:
 

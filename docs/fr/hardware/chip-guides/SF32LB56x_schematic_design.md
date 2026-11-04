@@ -355,7 +355,7 @@ Le choix de l'interface d'affichage dépend du boîtier. La variante U documente
 | D0 | PA40 | PA40 | Donnée 2 en mode Quad-SPI |
 | D1 | PA41 | PA41 | Donnée 3 en mode Quad-SPI |
 | REST | PA05 | PB04 | Signal de réinitialisation du panneau d'affichage |
-| TE | PA33 | PA33 | Signal TE (Tearing Effect) de synchronisation avec les trames de la MCU |
+| TE | PA33 | PA33 | Signal TE (Tearing Effect) pour la synchronisation des trames avec le MCU |
 
 </div>
 
@@ -401,7 +401,7 @@ Le choix de l'interface d'affichage dépend du boîtier. La variante U documente
 | D[0] | PA40 | Donnée 2 en mode Quad-SPI |
 | D[1] | PA41 | Donnée 3 en mode Quad-SPI |
 | REST | PA43 | Signal de réinitialisation pour l'affichage |
-| TE | PA33 | Signal TE (Tearing Effect) de synchronisation avec les trames de la MCU |
+| TE | PA33 | Signal TE (Tearing Effect) pour la synchronisation des trames avec le MCU |
 
 </div>
 
@@ -414,7 +414,7 @@ Le choix de l'interface d'affichage dépend du boîtier. La variante U documente
 | CSX | PA36 | Sélection de puce |
 | WRX | PA37 | Signal de validation d'écriture pour écrire des données |
 | DCX | PA39 | Sélection données/commande d'affichage |
-| RDX | PA38 | Signal de strobe de lecture pour écrire des données |
+| RDX | PA38 | Signal de lecture (strobe RDX) ; voir l'avertissement ci-dessous. |
 | D[0] | PA40 | Donnée 0 |
 | D[1] | PA41 | Donnée 1 |
 | D[2] | PA28 | Donnée 2 |
@@ -424,9 +424,12 @@ Le choix de l'interface d'affichage dépend du boîtier. La variante U documente
 | D[6] | PA32 | Donnée 6 |
 | D[7] | PA34 | Donnée 7 |
 | REST | PA43 | Réinitialisation |
-| TE | PA33 | Signal TE (Tearing Effect) de synchronisation avec les trames de la MCU |
+| TE | PA33 | Signal TE (Tearing Effect) pour la synchronisation des trames avec le MCU |
 
 </div>
+
+!!! warning "Vérifier la description de RDX pour l'interface MCU8080 du SF32LB56xV"
+    Le tableau des broches SiFli décrit RDX comme un signal de lecture « pour écrire des données », tandis que la présentation SiFli de l'interface MCU/8080 indique que la commutation de RDX permet de lire des données. Ces descriptions sont contradictoires ; vérifiez le fonctionnement attendu dans la documentation du contrôleur d'écran utilisé avant d'affecter ce signal.
 
 <div align="center"><em>Tableau 5.5-7 : Interface d'affichage DPI du SF32LB56xV</em></div>
 

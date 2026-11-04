@@ -19,6 +19,8 @@ tags:
 
 Chaque tableau couvre un domaine de revue du PCB. En l'absence d'une colonne « S'applique à », les contrôles s'appliquent à toutes les conceptions PCB SF32LB58x couvertes par cette liste.
 
+Cette liste s'appuie sur le classeur SiFli « SF32LB58x Schematic&PCB checklist » V1.0, daté du 2026-01-21.
+
 ### 6.18.1. Boîtier { #6181-package }
 
 <div align="center"><em>Tableau 6.18.1-1 : Liste de contrôle du boîtier</em></div>
@@ -179,9 +181,9 @@ Chaque tableau couvre un domaine de revue du PCB. En l'absence d'une colonne « 
 
 | N° | Point de contrôle | Catégorie |
 |:---|:---|:---|
-| 1 | Évitez de router des signaux à commutation rapide en parallèle avec le signal GPADC ; si cela ne peut être évité, prévoyez une garde de masse adéquate | Obligatoire |
+| 1 | Ne routez pas de signaux à commutation rapide en parallèle avec le signal GPADC | Obligatoire |
 | 2 | Les résistances du diviseur de tension de batterie sont placées près de la broche d'entrée de la puce | Obligatoire |
-| 3 | Évitez de router des signaux à commutation rapide en parallèle avec le signal SDMADC ; si cela ne peut être évité, prévoyez une garde de masse adéquate | Optionnel |
+| 3 | Ne routez pas de signaux à commutation rapide en parallèle avec le signal SDMADC | Optionnel |
 
 </div>
 

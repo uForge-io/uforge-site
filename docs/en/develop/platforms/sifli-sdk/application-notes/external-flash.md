@@ -332,7 +332,7 @@ cleanup:
 
 ## Use Flash through RT-Thread MTD { #5-use-flash-through-rt-thread-mtd }
 
-RT-Thread provides MTD-NOR and MTD-NAND device drivers. When MTD and filesystem options are enabled in the configuration, the devices are registered during startup. Query a controller with `rt_device_find("flash1")`; the controller names are `flash1`, `flash2`, and `flash3` (and the corresponding device name for each enabled controller). A non-null result indicates successful registration.
+RT-Thread provides MTD-NOR and MTD-NAND device drivers. When MTD is correctly configured and enabled for a Flash controller, its device is registered during startup. Filesystem use also requires the corresponding filesystem configuration. Query a controller with `rt_device_find("flash1")`; the controller names are `flash1`, `flash2`, and `flash3` (and the corresponding device name for each enabled controller). A non-null result indicates successful registration.
 
 MTD is used by filesystems and USB storage. Application code normally finds the device and binds it; the MTD NOR layer encapsulates the read/write operations. If you register a device yourself, implement the operation table shown below.
 
@@ -551,7 +551,9 @@ typedef struct
 } FLASH_CMD_CFG_T;
 ```
 
-Here `cmd` is the command ID (`0x06` for write enable and `0x05` for read status in the source examples). `func_mode` selects read or write; `data_mode` selects no data, single-, dual-, or four-line data; `dummy_cycle` describes clocks between command and address/data; `ab_size` and `ab_mode` describe alternate bytes; `addr_size` and `addr_mode` describe the address length and line mode; and `cmd_mode` indicates whether the command itself is sent on one, two, or four lines.
+Here `cmd` is the command ID (`0x06` for write enable and `0x05` for read status in the source examples). `func_mode` selects read or write; `data_mode` selects no data, single-, dual-, or four-line data; `dummy_cycle` describes clocks between command and address/data; `ab_size` and `ab_mode` describe alternate bytes; `addr_size` encodes the address length as `n-1` bytes; `addr_mode` uses `0` for no address, `1` for single-line, `2` for dual-line, and `3` for four-line addressing. When `addr_mode` is `0`, there is no address and `addr_size` must also be `0`. The struct comment describes `cmd_mode` as the line mode used to send the command itself.
+
+The source gives a PUYA quad-read command `0xEB` as an example: its timing diagram places an 8-bit `MBYTE` after `ADDR` to determine `continue` mode. The source sets `ab_size` and `ab_mode` to `0/3`, explaining these as one byte (`n-1` encoding) and four-line mode. The source is internally inconsistent about `cmd_mode`: the struct comment maps `0/1/2/3` to no, single-, dual-, and four-line modes, while the following prose says a valid Flash command is always `1`. Check the target SDK definition and implementation before choosing a value; do not infer it from this explanation alone.
 
 ## Port a NAND Flash part { #8-port-a-nand-flash-part }
 

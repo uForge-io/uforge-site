@@ -48,6 +48,8 @@ sdk.py sf-pkg upload --name <package_name>/<version>@<username>
 
 具体流程可能因 SDK 版本而异。有关环境准备、认证和版本相关命令，请参阅思澈科技（SiFli）的[组件注册表依赖接入指南（中文）](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/sf_pkg/use.html)、[组件包创建与发布指南（英文）](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/sf_pkg/create.html)及[中文版](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/sf_pkg/create.html)。
 
+从 [SDK 文档首页](https://docs.sifli.com/)查找与目标芯片系列及本地 SDK 版本对应的软件包集成、创建文档。上面的系列专用链接只是示例，不代表支持范围。复制示例前，先核对该版本的命令和依赖要求。
+
 ## 组件的质量门槛 { #component-quality-bar }
 
 组件达到可共享的质量要求时，至少应满足：

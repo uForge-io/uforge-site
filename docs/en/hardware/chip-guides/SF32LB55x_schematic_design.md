@@ -31,7 +31,7 @@ tags:
 
 ### 5.1. Power System { #51-power-system }
 
-SF32LB551 in QFN68L has no VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_VOUT, or AVDD_DSI pins. Apply the supply and capacitor tables only to pins present on the selected package. BGA packages provide two BUCK outputs; BUCK2 supports BUCK or LDO operation, with BUCK mode recommended. QFN68L provides one BUCK output.
+SF32LB551 in QFN68L has no VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_VOUT, or AVDD_DSI pins. The SF32LB553 in BGA125 also has no AVDD_DSI pin. Apply the supply and capacitor tables only to pins present on the selected package. BGA packages provide two BUCK outputs; BUCK2 supports BUCK or LDO operation, with BUCK mode recommended. QFN68L provides one BUCK output.
 
 <div align="center"><em>Table 5.1-1: PMU Power Supply Pins</em></div>
 
@@ -248,7 +248,7 @@ Each illustrated PSRAM uses a 1.8 V supply, three 0.1 ÂµF capacitors and one 1 Â
 
 <div align="center" markdown>
 
-| Interface Signal | QFN68 | BGA145/169 | Detailed Description |
+| Interface Signal | QFN68 | BGA125/145/169 | Detailed Description |
 | :--- | :--- | :--- | :--- |
 | CS# | GPIO9 | PA61 | Chip select, active low |
 | SO | GPIO7 | PA65 | Data Input (Data Input Output 1) |
@@ -263,7 +263,7 @@ Each illustrated PSRAM uses a 1.8 V supply, three 0.1 ÂµF capacitors and one 1 Â
 
 <div align="center" markdown>
 
-| Interface Signal | QFN68 | BGA145/169 | Detailed Description |
+| Interface Signal | QFN68 | BGA125/145/169 | Detailed Description |
 | :--- | :--- | :--- | :--- |
 | CS# | GPIO16 | PA45 | Chip select, active low |
 | SO | GPIO14 | PA49 | Data Input (Data Input Output 1) |
@@ -278,7 +278,7 @@ Each illustrated PSRAM uses a 1.8 V supply, three 0.1 ÂµF capacitors and one 1 Â
 
 <div align="center" markdown>
 
-| Interface Signal | QFN68 | BGA145/169 | Detailed Description |
+| Interface Signal | QFN68/BGA125 | BGA145/169 | Detailed Description |
 | :--- | :--- | :--- | :--- |
 | CS# | - | PB33 | Chip select, active low |
 | SO | - | PB36 | Data Input (Data Input Output 1) |
@@ -293,14 +293,14 @@ Each illustrated PSRAM uses a 1.8 V supply, three 0.1 ÂµF capacitors and one 1 Â
 
 <div align="center" markdown>
 
-| Interface Signal | QFN68 | BGA145/169 | Detailed Description |
-| :--- | :--- | :--- | :--- |
-| CLK | GPIO10 | PA34 | Clock input |
-| CMD | GPIO9 | PA36 | Command input |
-| DATA0 | GPIO8 | PA28 | Data 0 |
-| DATA1 | GPIO7 | PA29 | Data 1 |
-| DATA2 | GPIO6 | PA30 | Data 2 |
-| DATA3 | GPIO5 | PA31 | Data 3 |
+| Interface Signal | QFN68 | BGA125 | BGA145/169 | Detailed Description |
+| :--- | :--- | :--- | :--- | :--- |
+| CLK | GPIO10 | PA60 | PA34 | Clock input |
+| CMD | GPIO9 | PA61 | PA36 | Command input |
+| DATA0 | GPIO8 | PA63 | PA28 | Data 0 |
+| DATA1 | GPIO7 | PA65 | PA29 | Data 1 |
+| DATA2 | GPIO6 | PA66 | PA30 | Data 2 |
+| DATA3 | GPIO5 | PA68 | PA31 | Data 3 |
 
 </div>
 
@@ -308,18 +308,18 @@ Each illustrated PSRAM uses a 1.8 V supply, three 0.1 ÂµF capacitors and one 1 Â
 
 <div align="center" markdown>
 
-| Interface Signal | QFN68 | BGA145/169 | Detailed Description |
-| :--- | :--- | :--- | :--- |
-| CLK | GPIO10 | PA34 | Clock input |
-| CMD | GPIO9 | PA36 | Command input |
-| DATA0 | GPIO8 | PA28 | Data 0 |
-| DATA1 | GPIO7 | PA29 | Data 1 |
-| DATA2 | GPIO6 | PA30 | Data 2 |
-| DATA3 | GPIO5 | PA31 | Data 3 |
-| DATA4 | GPIO15 | PA47 | Data 4 |
-| DATA5 | GPIO14 | PA49 | Data 5 |
-| DATA6 | GPIO13 | PA51 | Data 6 |
-| DATA7 | GPIO12 | PA55 | Data 7 |
+| Interface Signal | QFN68 | BGA125 | BGA145/169 | Detailed Description |
+| :--- | :--- | :--- | :--- | :--- |
+| CLK | GPIO10 | - | PA34 | Clock input |
+| CMD | GPIO9 | - | PA36 | Command input |
+| DATA0 | GPIO8 | - | PA28 | Data 0 |
+| DATA1 | GPIO7 | - | PA29 | Data 1 |
+| DATA2 | GPIO6 | - | PA30 | Data 2 |
+| DATA3 | GPIO5 | - | PA31 | Data 3 |
+| DATA4 | GPIO15 | - | PA47 | Data 4 |
+| DATA5 | GPIO14 | - | PA49 | Data 5 |
+| DATA6 | GPIO13 | - | PA51 | Data 6 |
+| DATA7 | GPIO12 | - | PA55 | Data 7 |
 
 </div>
 
@@ -327,7 +327,7 @@ Each illustrated PSRAM uses a 1.8 V supply, three 0.1 ÂµF capacitors and one 1 Â
 
 <div align="center" markdown>
 
-| Interface Signal | QFN68 | BGA145/169 | Detailed Description |
+| Interface Signal | QFN68 | BGA125/145/169 | Detailed Description |
 | :--- | :--- | :--- | :--- |
 | CLK | GPIO17 | PA44 | Clock input |
 | CMD | GPIO16 | PA45 | Command input |
@@ -375,17 +375,17 @@ Display pin-selection notes:
 
 <div align="center" markdown>
 
-| SPI Signal | QFN68 GPIO | BGA145/169 Pin | Detailed Description |
-| :--- | :--- | :--- | :--- |
-| CSX | GPIO22 | PB33 | Enable signal |
-| WRX_SCL | GPIO23 | PB32 | Clock signal |
-| DCX | GPIO20 | PB36 | Data/command signal in 4-wire SPI mode; data 1 in Quad-SPI mode |
-| SDI_RDX | GPIO21 | PB35 | Data input signal in 3/4-wire SPI mode; data 0 in Quad-SPI mode |
-| SDO | GPIO21 | PB35 | Data output signal in 3/4-wire SPI mode; short it together with SDI_RDX |
-| D[0] | GPIO19 | PB37 | Data 2 in Quad-SPI mode |
-| D[1] | GPIO18 | PB07 | Data 3 in Quad-SPI mode |
-| RESET | GPIO2 | PB17 | Reset signal for the display panel |
-| TE | GPIO3 | PB77 | Tearing effect to MCU frame signal |
+| SPI Signal | QFN68 GPIO | BGA125 Pin | BGA145/169 Pin | Detailed Description |
+| :--- | :--- | :--- | :--- | :--- |
+| CSX | GPIO22 | PA31 | PB33 | Enable signal |
+| WRX_SCL | GPIO23 | PA20 | PB32 | Clock signal |
+| DCX | GPIO20 | PA36 | PB36 | Data/command signal in 4-wire SPI mode; data 1 in Quad-SPI mode |
+| SDI_RDX | GPIO21 | PA34 | PB35 | Data input signal in 3/4-wire SPI mode; data 0 in Quad-SPI mode |
+| SDO | GPIO21 | PA34 | PB35 | Data output signal in 3/4-wire SPI mode; short it together with SDI_RDX |
+| D[0] | GPIO19 | PA38 | PB37 | Data 2 in Quad-SPI mode |
+| D[1] | GPIO18 | PA42 | PB07 | Data 3 in Quad-SPI mode |
+| RESET | GPIO2 | PA78 | PB17 | Reset signal for the display panel |
+| TE | GPIO3 | PA77 | PB77 | Tearing effect to MCU frame signal |
 
 </div>
 
@@ -398,22 +398,22 @@ Display pin-selection notes:
 
 <div align="center" markdown>
 
-| MCU8080 Signal | QFN68 GPIO | BGA145/169 Pin | Detailed Description |
-| :--- | :--- | :--- | :--- |
-| CSX | GPIO22 | - | Chip select |
-| WRX | GPIO23 | - | Write strobe for sending data to the display |
-| DCX | GPIO20 | - | Display data / command selection |
-| RDX | GPIO21 | - | Read strobe for display read transactions |
-| D[0] | GPIO19 | - | Data 0 |
-| D[1] | GPIO18 | - | Data 1 |
-| D[2] | GPIO17 | - | Data 2 |
-| D[3] | GPIO16 | - | Data 3 |
-| D[4] | GPIO15 | - | Data 4 |
-| D[5] | GPIO14 | - | Data 5 |
-| D[6] | GPIO13 | - | Data 6 |
-| D[7] | GPIO12 | - | Data 7 |
-| RESET | GPIO2 | - | Reset |
-| TE | GPIO3 | - | Tearing effect to MCU frame signal |
+| MCU8080 Signal | QFN68 GPIO | BGA125 Pin | BGA145/169 Pin | Detailed Description |
+| :--- | :--- | :--- | :--- | :--- |
+| CSX | GPIO22 | PA31 | - | Chip select |
+| WRX | GPIO23 | PA20 | - | Write strobe for sending data to the display |
+| DCX | GPIO20 | PA36 | - | Display data / command selection |
+| RDX | GPIO21 | PA34 | - | Read strobe for display read transactions |
+| D[0] | GPIO19 | PA38 | - | Data 0 |
+| D[1] | GPIO18 | PA42 | - | Data 1 |
+| D[2] | GPIO17 | PA44 | - | Data 2 |
+| D[3] | GPIO16 | PA45 | - | Data 3 |
+| D[4] | GPIO15 | PA47 | - | Data 4 |
+| D[5] | GPIO14 | PA49 | - | Data 5 |
+| D[6] | GPIO13 | PA51 | - | Data 6 |
+| D[7] | GPIO12 | PA55 | - | Data 7 |
+| RESET | GPIO2 | PA78 | - | Reset |
+| TE | GPIO3 | PA77 | - | Tearing effect to MCU frame signal |
 
 </div>
 
@@ -465,14 +465,14 @@ The [SiFli hardware application guide](https://github.com/OpenSiFli/SiFli-Wiki/b
 
 <div align="center" markdown>
 
-| Touchscreen and Backlight Signals | QFN68 GPIO | BGA145 Pin | BGA169 Pin | Detailed Description |
-| :--- | :--- | :--- | :--- | :--- |
-| Interrupt | GPIO1 | PA79 | PA79 | Touch status interrupt signal (wake-up capable) |
-| I2C1_SCL | GPIO25 | PA10 | PA10 | Touchscreen I2C Clock signal |
-| I2C1_SDA | GPIO24 | PA14 | PA14 | Touchscreen I2C data signal |
-| BL_PWM | GPIO0 | - | - | Backlight PWM control signal |
-| Reset | GPIO16 | PA00 | PA00 | Touch reset signal |
-| Power Enable | GPIO26 | PA06 | PA03 | Touchscreen Power Supply enable signal |
+| Touchscreen and Backlight Signals | QFN68 GPIO | BGA125 Pin | BGA145 Pin | BGA169 Pin | Detailed Description |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Interrupt | GPIO1 | PA79 | PA79 | PA79 | Touch status interrupt signal (wake-up capable) |
+| I2C1_SCL | GPIO25 | PA10 | PA10 | PA10 | Touchscreen I2C Clock signal |
+| I2C1_SDA | GPIO24 | PA14 | PA14 | PA14 | Touchscreen I2C data signal |
+| BL_PWM | GPIO0 | PA80 | - | - | Backlight PWM control signal |
+| Reset | GPIO16 | PA00 | PA00 | PA00 | Touch reset signal |
+| Power Enable | GPIO26 | PA06 | PA06 | PA03 | Touchscreen Power Supply enable signal |
 
 </div>
 
@@ -500,7 +500,7 @@ Use a GPIO with GPTIM1_CHx for motor PWM. Select the appropriate PU/PD pin behav
 
 <div align="center" markdown>
 
-| Interrupt Source | QFN68 | BGA145/169 | Detailed Description |
+| Interrupt Source | QFN68 | BGA125/145/169 | Detailed Description |
 | :--- | :--- | :--- | :--- |
 | WKUP_A0 | GPIO3 | PA77 | HCPU interrupt signal 0 |
 | WKUP_A1 | GPIO2 | PA78 | HCPU interrupt signal 1 |
@@ -545,7 +545,7 @@ External Bluetooth audio communicates through HCPU UART1. Match voltage levels o
 
 <div align="center" markdown>
 
-| UART Signal | QFN68 | BGA145/169 | Detailed Description |
+| UART Signal | QFN68 | BGA125/145/169 | Detailed Description |
 | :--- | :--- | :--- | :--- |
 | TXD1 | GPIO13 | PA19 | UART1 RXD signal |
 | RXD1 | GPIO14 | PA17 | UART1 TXD signal |
@@ -564,7 +564,7 @@ External Bluetooth audio communicates through HCPU UART1. Match voltage levels o
 
 Do not leave UART RXD floating; enable its internal pull-up during firmware initialization. UART3 is the default log port. SiFli provides an offline programmer for production flashing and crystal calibration. Reserve at least VBAT, GND, VDDIOA, VDDIOB, RSTN, Mode, SWDIO, SWCLK, RXD1, TXD1, RXD3 and TXD3 test points. The production fixture subset is VBAT, GND, boot_mode, VDDIOB, RXD3 and TXD3. VBAT and boot_mode are source fixture labels; map them to the actual board supply and Mode connection before wiring.
 
-The source drawing connects VDD_1V8 to connector pin 1 (VTref), SWDIO to pin 7, and SWCLK to pin 9 through 22 Î© series resistors. Standard [J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector) also uses pin 1 for [VTref](https://kb.segger.com/VTref), the target-voltage reference input, not a probe power output. Verify the header orientation and 1.8 V compatibility before connecting a standard cable.
+The source guide also says to configure the debugger's power source as external-interface input so the SF32LB55x board powers the J-Link; the relationship between that instruction and the standard 20-pin wiring is unclear. SEGGER defines pin 1 as [VTref](https://kb.segger.com/VTref), the target-voltage reference input, not a probe power input. On supported models, pin 19 is the probe's 5 V output for powering the target. The source drawing shows VDD_1V8 on pin 1 and SWDIO/SWCLK through 22 Î© series resistors to pins 7/9, but no probe-power path. Verify the power direction for the specific probe, cable, and target before wiring; do not treat VTref as a power input. Confirm standard [J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector) header orientation and 1.8 V compatibility before connecting a cable.
 
 ![Figure 5.7-4: Source SWD Connector: Verify Adapter Wiring](../../sf32-products/chips/assets/55x/SF32LB55x-SWD-SCH.png){ width="100%" loading="lazy" }
 

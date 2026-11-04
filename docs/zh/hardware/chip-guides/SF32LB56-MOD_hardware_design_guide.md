@@ -15,10 +15,10 @@ hide:
 
 **SF32LB56-MOD** 是思澈科技（SiFli）基于 SF32LB56xV 系列芯片推出的通用低功耗蓝牙（Bluetooth）MCU 模组系列。
 
-本指南以 **DS5602-SF32LB56-MOD 技术规格书 V0.3** 为依据，梳理原理图设计、PCB 布局、硬件验证和量产准备所需的模组专属信息。内容包括存储型号、89 个接口管脚、三路电源、显示/音频/存储接口、天线摆放要求、搬运要求，以及原理图核对表。
+本指南梳理原理图设计、PCB 布局、硬件验证和量产准备所需的模组专属信息，依据 **DS5602-SF32LB56-MOD 技术规格书 V0.3** 编写。指南内容包括存储型号、89 个接口管脚、三路电源、显示/音频/存储接口、天线摆放要求、搬运要求，以及原理图核对表。
 
 !!! note "来源与设计建议"
-    除特别标注为集成指导或设计建议的内容外，本文所有技术参数均来自 **DS5602-SF32LB56-MOD 技术规格书 V0.3**。
+    本指南中的技术参数和管脚分配依据 DS5602 V0.3。规格书本身存在的电气或制造工艺歧义，会在相关章节中保留并说明定版前需确认的事项。集成指导和设计建议与原始规格要求分别标明。
 
 !!! note "合规标识适用范围"
     所提供的 SF32LB56-MOD-N16R12N1 和 SF32LB56-MOD-A128R12N1 标签上标有 FCC、IC、CMIIT ID 和 HVIN 编号，以及 CE 标志，详见[模组标识汇总](../../sf32-products/modules/SF32LB56-MOD.md#regulatory-markings)。请针对具体版本核实批准文件以及天线和集成条件；不要据此推定其他型号或最终产品也在覆盖范围内。
@@ -59,7 +59,7 @@ SF32LB56-MOD 基于 SF32LB56xV 系列双核 MCU 平台：HCPU 负责应用和图
 | CPU | HCPU 最高 240 MHz，LCPU 最高 96 MHz，均为 Arm Cortex-M33 STAR-MC1 |
 | 无线 | 双模蓝牙 5.3，支持 BLE Audio |
 | 图形 | ePicasso 2.0、eZip 2.0、TurboPixel，支持 8080/SPI/Dual-SPI/Quad-SPI/DPI/RGB/JDI LCD 接口 |
-| 音频 | 24-bit DAC、24-bit Sigma-Delta ADC、2 路 PDM 接口（PDM1/PDM2），每路通过左右声道接入 2 个数字麦克风，两路合计最多接入 4 个；1 路 I2S |
+| 音频 | 24-bit DAC、24-bit Sigma-Delta ADC、2 路 PDM 接口（PDM1/PDM2）；DS5602 V0.3 列出 2 路数字麦克风输入；1 路 I2S |
 | AI/DSP | 矩阵加速器最高 1.92 GOPS，FFT、FIR、CORDIC 加速器 |
 | 存储 | 模组 Flash/PSRAM 可选，支持 MPI3 和 SD/SDIO/eMMC |
 | 安全 | AES、HASH、CRC、TRNG、Secure Boot、1024-bit eFuse、PSA Certified Level 1 |
@@ -228,6 +228,8 @@ LCD RGB 信号线需要串 33–100 Ω 电阻。RGB、SPI 显示和触摸接口�
 
 模组引出模拟 DAC 输出、MIC_BIAS、MIC_ADC_IN、I2S 和 PDM 相关管脚。音频 DAC 为 24-bit 输出，支持 8 kHz 至 48 kHz 采样率，SNR 和动态范围均为 109 dB。音频 ADC 为 24-bit Sigma-Delta 输入，支持 8 kHz 至 48 kHz 采样率，SNR 和动态范围均为 99 dB。
 
+DS5602 V0.3 列出 2 路数字麦克风输入和 2 路 PDM 接口（PDM1/PDM2）。其推荐管脚分配图列出了以下选项：PDM1_DATA 为 PA20 或 PA64，PDM1_CLK 为 PA24 或 PA69，PDM2_DATA 为 PA25 或 PA71，PDM2_CLK 为 PA26 或 PA73。这些是可选复用管脚，不代表载板的实际布线。输入数和接口数均不能证明实体麦克风数量上限或通道共享支持。设计多麦克风系统前，请确认支持的工作模式和实际载板管脚映射。
+
 模拟音频走线应远离开关电源、LCD 时钟和天线馈线区域。MIC_BIAS 与 MIC_ADC_IN 的滤波器件应靠近麦克风电路放置。
 
 #### 5.3.3 按键 { #533-buttons }
@@ -321,6 +323,8 @@ USB2.0 FS 支持 Host/Device 并集成 PHY。SPI 支持 SSP/SPI 与 Microwire，
 
 ### 7.1 电气特性 { #71-electrical-characteristics }
 
+本节电气参数依据 DS5602 V0.3。绝对最大额定值属于应力额定值：超出限值可能造成永久性损坏；超出建议工作条件时不保证正常工作，长期处于此类条件下还可能影响可靠性。
+
 <div align="center"><em>表 7.1-1：绝对最大额定值</em></div>
 
 <div align="center" markdown>
@@ -380,10 +384,19 @@ VDD 为 I/O 电源。VOH 和 VOL 的测量条件为高阻负载。
 | 模式 | 条件 | 典型电流 |
 | :--- | :--- | :-: |
 | BT Sniff | 50 ms 间隔 | 196.0 μA |
+| BT Sniff | 100 ms 间隔 | 100.1 μA |
+| BT Sniff | 200 ms 间隔 | 52.2 μA |
+| BT Sniff | 500 ms 间隔 | 23.4 μA |
 | BT Sniff | 1 s 间隔 | 13.8 μA |
 | BLE ADV | 50 ms 间隔 | 228.7 μA |
+| BLE ADV | 100 ms 间隔 | 116.6 μA |
+| BLE ADV | 200 ms 间隔 | 60.5 μA |
+| BLE ADV | 500 ms 间隔 | 26.9 μA |
 | BLE ADV | 1 s 间隔 | 15.7 μA |
 | BLE Connection | 50 ms 间隔 | 172.8 μA |
+| BLE Connection | 100 ms 间隔 | 87.9 μA |
+| BLE Connection | 200 ms 间隔 | 45.5 μA |
+| BLE Connection | 500 ms 间隔 | 20.0 μA |
 | BLE Connection | 1 s 间隔 | 11.5 μA |
 | Scan | Inquiry Scan 或 Page Scan | 36.8 μA |
 | Both Scan | Inquiry Scan 和 Page Scan | 64.0 μA |
@@ -391,19 +404,21 @@ VDD 为 I/O 电源。VOH 和 VOL 的测量条件为高阻负载。
 
 </div>
 
+BT Sniff 测试条件为 iPhone 8 Plus、attempt=1。Scan 和 Both Scan 分别每 1.28 s 接收 28.82 ms 和 57.64 ms；供电为 PVDD + VDD_3V3。以上数据依据 DS5602 V0.3。
+
 <div align="center"><em>表 7.2-2：处理器电流</em></div>
 
 <div align="center" markdown>
 
-| 负载 | 域 | 频率 | 电流 | 单位频率电流 |
+| 负载 | 域 | 频率 | 电流 | 电流增量 |
 | :--- | :--- | :-: | :-: | :-: |
 | CoreMark | HPSYS | 240 MHz | 9.38 mA | 30.92 μA/MHz |
 | CoreMark | HPSYS | 192 MHz | 7.90 mA | 30.92 μA/MHz |
-| CoreMark | HPSYS | 48 MHz | 0.92 mA | 30.92 μA/MHz |
+| CoreMark | LPSYS | 48 MHz | 0.92 mA | 15.13 μA/MHz |
 | CoreMark | LPSYS | 24 MHz | 0.55 mA | 15.13 μA/MHz |
 | WhileLoop | HPSYS | 240 MHz | 7.54 mA | 25.75 μA/MHz |
 | WhileLoop | HPSYS | 192 MHz | 6.30 mA | 25.75 μA/MHz |
-| WhileLoop | HPSYS | 48 MHz | 0.70 mA | 25.75 μA/MHz |
+| WhileLoop | LPSYS | 48 MHz | 0.70 mA | 10.63 μA/MHz |
 | WhileLoop | LPSYS | 24 MHz | 0.44 mA | 10.63 μA/MHz |
 
 </div>
@@ -419,7 +434,7 @@ VDD 为 I/O 电源。VOH 和 VOL 的测量条件为高阻负载。
 | 1 | VDD_3V3 输入范围为 2.97–3.6 V，靠近模组管脚放置 4.7 μF 电容。 |
 | 2 | VDD_1V8 输入范围为 1.7–1.95 V，靠近模组管脚放置 4.7 μF 电容。 |
 | 3 | VDDIO 输入范围为 1.7–3.6 V，靠近模组管脚放置 4.7 μF 电容。 |
-| 4 | 对于规格书规定接口电平为 3.3 V 的模组 I/O，所连接外设的接口电平必须兼容。 |
+| 4 | 模组 I/O 接口电平为 3.3 V；所连接外设的接口电平必须兼容。 |
 | 5 | 若模组已配置内部 Flash，PA06、PA07、PA08、PA09、PA10、PA11 不可外接使用。 |
 | 6 | SDIO 和 MPI3 共用 I/O，不能同时使用。 |
 | 7 | PA50、PA51、PB32、PB35 可在 MCU 睡眠时接收中断。 |
@@ -451,7 +466,7 @@ VDD 为 I/O 电源。VOH 和 VOL 的测量条件为高阻负载。
 </div>
 
 !!! info "图 7.4-1：回流焊温度曲线图"
-    见 DS5602 V0.3 图 9-1。
+    DS5602 V0.3 图 9-1 规定：25–150°C 升温 60–90 s，升温速率 1–3°C/s；150–200°C 预热 60–120 s；高于 217°C 持续 60–90 s；峰值为 235–250°C；从峰值以 -1 至 -5°C/s 降至 180°C。图中指定 SAC305 焊料。下方图例给出的峰值时间范围为 30–70 s，曲线另标“焊接时间 >30 s”；规格书未说明两者的关系。不要将两项标注混为一谈；量产前请确认工艺曲线。
 
 ## 8. 相关文档 { #8-related-documents }
 
@@ -474,7 +489,7 @@ VDD 为 I/O 电源。VOH 和 VOL 的测量条件为高阻负载。
 
 ### 9.1. 附录 A. 管脚规划参考 { #appendix-a-pin-planning-reference }
 
-DS5602 V0.3 提供了完整的 89 个管脚定义表和顶视图管脚布局。下表重点列出对原理图风险、启动/调试访问和共享资源规划影响最大的管脚和信号组。
+DS5602 V0.3 包含 89 个管脚定义表和顶视图管脚布局。下表重点列出对原理图风险、启动/调试访问和共享资源规划影响最大的管脚和信号组。请根据具体模组版本的规格书核对完整管脚定义。
 
 <div align="center"><em>表 9.1-1：关键管脚和信号组</em></div>
 
@@ -488,7 +503,7 @@ DS5602 V0.3 提供了完整的 89 个管脚定义表和顶视图管脚布局。�
 | 管脚 26 VDD_3V3 | 3.3 V 电源，工作范围 2.97–3.6 V。 |
 | 管脚 27 VDD_1V8 | 1.8 V 电源，工作范围 1.7–1.95 V。 |
 | 管脚 29 VDDIO | I/O 电源，工作范围 1.7–3.6 V。 |
-| 管脚 43/44 | AU_DACP / AU_DACN 差分 DAC 输出。 |
+| 管脚 43/44 | AU_DAC1P_OUT / AU_DAC1N_OUT 差分 DAC 输出。 |
 | 管脚 46 MIC_BIAS | 麦克风偏置。 |
 | 管脚 47 MIC_ADC_IN | 模拟麦克风 ADC 输入。 |
 | 管脚 67–72 PA06–PA11 | 默认连接模组内部 Flash，不可外接使用。 |
@@ -509,7 +524,7 @@ DS5602 V0.3 提供了完整的 89 个管脚定义表和顶视图管脚布局。�
 
 | 版本 | 日期 | 说明 |
 | :--- | :--- | :--- |
-| 0.1 | 2026-07 | 基于 DS5602-SF32LB56-MOD V0.3 发布 SF32LB56-MOD 模组硬件设计指南初版。 |
+| 0.1 | 2026-07 | SF32LB56-MOD 模组硬件设计指南初版；引用的目标规格版本为 DS5602 V0.3。 |
 
 </div>
 

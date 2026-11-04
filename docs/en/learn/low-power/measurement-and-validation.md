@@ -54,7 +54,7 @@ Before connecting the DUT, verify that the selected PPK2 mode supports its volta
 
 ## Characterize Each Component Before Full-System Tests
 
-Measure each component at an isolatable rail or fixture before relying on a whole-board trace. The goal is not to create a catalogue number; it is to determine which operating modes, loads, and firmware settings dominate the component's energy in the actual product.
+Measure each component on an isolatable power rail or in a dedicated test fixture before relying on a whole-board trace. The goal is not to create a catalogue number; it is to determine which operating modes, loads, and firmware settings dominate the component's energy in the actual product.
 
 <div align="center"><em>Table: Component-Level Characterization Plan</em></div>
 
@@ -150,7 +150,7 @@ When measurement and model disagree, do not edit a table merely to force agreeme
 | Component measurement is higher than expected | Incorrect component mode, rail leakage, regulator loss, or test fixture loading | Isolate the rail; verify mode pins, voltage, and board population. |
 | Scenario energy is higher than the component sum | Extra wakeups, display or radio dwell, service code, or overlapping loads | Add firmware markers and compare component states across the full scenario. |
 | Daily profile is higher than the scenario sum | Usage frequency, connected-idle time, disabled feature, or background task is wrong | Audit event counts, timers, radio schedule, and the definition of remaining standby time. |
-| Model and measurement agree only in one setup | Voltage, temperature, RF environment, battery state, or firmware build differs | Repeat the same scenes across the intended operating range. |
+| Model and measurement agree only in one setup | Voltage, temperature, RF environment, battery state, or firmware build differs | Repeat the same scenarios under each relevant condition in the intended operating range. |
 
 </div>
 

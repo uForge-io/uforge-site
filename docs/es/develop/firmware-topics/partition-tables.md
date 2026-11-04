@@ -69,7 +69,7 @@ Para PSRAM, la fuente distingue los espacios de direcciones CBUS y SBUS. Asigne 
 
 ## v2: particiones JSON con nombre y tipo { #v2-named-and-typed-json-partitions }
 
-v2 también usa `ptab.json`, pero el encabezado debe declarar `"version": "2"`. Los campos de memoria siguen siendo `mem`, `base` y `regions`. Cada región conserva `offset` y `max_size`, y puede usar `tags` y `custom`; además, v2 asigna a la región un `name`, un `type` y, en una partición de ejecución, un `core` opcional.
+v2 también usa `ptab.json`, pero el encabezado debe declarar `"version": "2"`. Los campos de memoria siguen siendo `mem`, `base` y `regions`. Cada región conserva `offset` y `max_size`, y puede usar `tags` y `custom`; además, v2 asigna a la región un `name`, un `type` y, en una partición de ejecución, un `core` opcional. En v2, `type` es una lista de cadenas, por lo que una misma partición puede tener varios roles, como `app_img` y `app_exec` a la vez.
 
 <div align="center"><em>Tabla: campos y tipos de región en v2</em></div>
 <div align="center" markdown>

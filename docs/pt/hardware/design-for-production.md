@@ -8,7 +8,7 @@ tags:
 
 # Projeto para produção { #design-for-production }
 
-Use este fluxo depois de selecionar um chip ou módulo e antes de liberar o esquemático, o layout da PCB, a BOM ou o pacote de fabricação. Ele reúne referências de implementação que ajudam a reduzir os riscos durante o bring-up (ativação inicial) e a qualificação da primeira versão: guias de projeto de hardware específicos de cada dispositivo, checklists, definições de interface dos módulos, componentes aprovados e bibliotecas EDA.
+Use este fluxo depois de selecionar um chip ou módulo e antes de liberar o esquemático, o layout da PCB, a BOM ou o pacote de fabricação. Ele reúne referências de implementação para reduzir os riscos durante a ativação inicial e a qualificação do produto: guias de projeto de hardware específicos de cada dispositivo, checklists, definições de interface dos módulos, componentes aprovados e bibliotecas EDA.
 
 ## Fluxo recomendado para produção { #recommended-production-sequence }
 
@@ -20,12 +20,12 @@ Use este fluxo como um processo iterativo de revisão, não como uma transição
 
 | Etapa | Aplicação | Evidências a registrar |
 |:------|:----|:-------------------|
-| Arquitetura | Apresentação do produto e requisitos de interface | Componente, encapsulamento, memória, display, áudio e armazenamento selecionados; premissas de alimentação definidas. |
-| Esquemático e layout | Guia de projeto de hardware do chip ou módulo | Implementação revisada de alimentação, clock, reset, RF, armazenamento, display e interfaces. |
-| BOM | Lista de fornecedores aprovados (AVL) e datasheets dos componentes | Alternativas qualificadas ou validadas especificamente para cada item crítico. |
-| Revisão do projeto | Checklist de projeto de hardware | Decisão documentada para cada item aplicável da lista e cada exceção. |
-| Bring-up | Referências de placas de desenvolvimento, exemplos do SDK e testes com medições | Resultados reproduzíveis de boot, gravação, periféricos, comunicação sem fio, consumo de energia e recuperação. |
-| Liberação do CAD para produção | Bibliotecas EDA oficiais e desenhos do encapsulamento | Símbolo, footprint, pinagem, padrão de pads e arquivos de fabricação verificados. |
+| Arquitetura | Apresentação do produto e requisitos de interface | Registre o componente e o encapsulamento selecionados, além das premissas sobre memória, display, áudio, armazenamento e alimentação. |
+| Esquemático e layout | Guia de projeto de hardware do chip ou módulo | Mantenha o registro da implementação revisada de alimentação, clock, reset, RF, armazenamento, display e interfaces. |
+| BOM | Lista de fornecedores aprovados (AVL) e datasheets dos componentes | Para cada item crítico, registre evidências de que o componente alternativo foi qualificado ou validado intencionalmente. |
+| Revisão do projeto | Checklist de projeto de hardware | Documente a resolução de cada item aplicável do checklist e de cada exceção. |
+| Bring-up | Referências de placas de desenvolvimento, exemplos do SDK e testes com medições | Mantenha resultados reproduzíveis de boot, gravação, operação dos periféricos, comunicação sem fio, consumo de energia e recuperação. |
+| Liberação do CAD para produção | Bibliotecas EDA oficiais e desenhos do encapsulamento | Mantenha os registros de verificação do símbolo, footprint, pinagem, padrão de pads e arquivos de fabricação. |
 
 </div>
 

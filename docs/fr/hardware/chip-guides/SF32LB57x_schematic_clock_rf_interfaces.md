@@ -550,7 +550,7 @@ Directives :
 
 - Confirmez la largeur d'interface, l'horloge, les signaux de synchronisation, les lignes de données et le multiplexage de broches.
 - Rendez l'alimentation, la réinitialisation, le signal PWDN et l'horloge de la caméra contrôlables par la MCU.
-- Regroupez les pistes de données et d'horloge de la caméra en maintenant leurs longueurs cohérentes et éloignez-les des signaux RF et analogiques.
+- Regroupez les pistes de données et d'horloge de la caméra, puis éloignez-les des signaux RF et analogiques.
 - Fournissez un plan de masse de référence continu sous les pistes caméra à haute vitesse.
 - Ajoutez une protection ESD pour le connecteur de caméra ou le FPC lorsque nécessaire.
 
@@ -592,13 +592,13 @@ Pour les caméras DVP 10 bits, utilisez un câblage 8 bits lorsque les ressource
 
 #### 5.5.11. Boutons et moteur { #5511-buttons-and-motor }
 
-- Le bouton d'alimentation/réinitialisation doit utiliser `PA34` et être actif à l'état haut ; la broche est tirée à l'état bas par défaut et passe à l'état haut lorsque le bouton est pressé. `PA34` permet une réinitialisation matérielle après un appui maintenu pendant 10 secondes. La résistance de rappel à la masse de 10 kΩ doit être placée sur la carte principale.
+- `PA34` prend en charge la réinitialisation par appui prolongé et peut aussi servir de bouton d'alimentation. L'entrée de réinitialisation est active à l'état haut : elle est tirée à l'état bas par défaut et passe à l'état haut lorsque le bouton est pressé. Placez une résistance de rappel à la masse de 10 kΩ sur la carte principale.
 - Pour les conceptions de boutons GPADC à diviseur résistif, distinguez les boutons par la tension du diviseur et placez un condensateur de filtrage de 0,1 µF vers la masse près de la broche pour améliorer la précision d'échantillonnage.
 - L'échelle résistive illustrée utilise des résistances de bouton de 1,1 kΩ, 2,8 kΩ et 5,1 kΩ, ainsi qu'une résistance de rappel à la masse de 10 kΩ et un condensateur de filtrage de 100 nF. Utilisez ces valeurs comme référence et vérifiez les seuils ADC en fonction de l'alimentation et des tolérances des résistances de la conception.
 - Ajoutez une protection ESD pour les boutons externes.
 
-![Figure 5.5-4 : Circuit de référence du bouton d'alimentation et du bouton GPADC](../../sf32-products/chips/assets/57x/SF32LB57x-PWKEY.png){ width="80%" loading="lazy" }
+![Figure 5.5-4 : Circuit de référence du bouton GPADC](../../sf32-products/chips/assets/57x/SF32LB57x-PWKEY.png){ width="80%" loading="lazy" }
 
-<div align="center"><em>Figure 5.5-4 : Circuit de référence du bouton d'alimentation et du bouton GPADC</em></div>
+<div align="center"><em>Figure 5.5-4 : Circuit de référence du bouton GPADC</em></div>
 
 Utilisez le circuit de référence du moteur vibrant SF32LB57x pour mettre en œuvre le retour haptique. Dans les produits basse consommation, l'alimentation du moteur devrait pouvoir être coupée ; la broche PWM/de commande ne devrait pas entrer en conflit avec les exigences de démarrage, d'affichage, de stockage ou de débogage.

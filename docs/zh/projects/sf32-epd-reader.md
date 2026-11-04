@@ -12,7 +12,7 @@ tags:
 
 ## 什么是 EPD Reader？ { #what-is-epd-reader }
 
-[OpenSiFli EPD Reader](https://github.com/OpenSiFli/EPD_Reader) 是将 [atomic14/diy-esp32-epub-reader](https://github.com/atomic14/diy-esp32-epub-reader) 适配到思澈科技（SiFli）`SF32-OED-EPD` 系列硬件。它以 SF32LB52x 为处理核心，从内置文件系统或 TF 卡读取 EPUB，通过 ZIP/XML/XHTML 解析、FreeType 字体和图像解码链路排版内容，再使用全刷/局刷波形驱动电子纸面板。
+[OpenSiFli EPD Reader](https://github.com/OpenSiFli/EPD_Reader) 是将 [atomic14/diy-esp32-epub-reader](https://github.com/atomic14/diy-esp32-epub-reader) 适配到思澈科技（SiFli）`SF32-OED-EPD` 系列硬件。SF32LB52x 是处理核心。应用从内置文件系统或 TF 卡读取 EPUB，通过 ZIP/XML/XHTML 解析内容，并使用 FreeType 字体和图像解码器完成排版，再通过全刷/局刷波形驱动电子纸面板。
 
 当前应用提供书库、目录、阅读、阅读设置、功能设置、欢迎/熄屏、低电量、充电和关机页面；支持按键与触控、中文/英文、动态 TTF/OTF 字体、字号/字重/行距/边距设置，以及把阅读设置保存到 TF 卡。为节省资源，内置中文字体默认未启用独立粗体/斜体字形；使用字重选项时必须以目标字体的实际显示结果为准。它适合作为低刷新率阅读终端的完整参考，而不是通用 EPUB 标准符合性或量产电子书方案的证明。
 
@@ -137,11 +137,11 @@ flowchart LR
     UI --> PM["TF 卡睡眠 / 欢迎页 / 关机"]
 ```
 
-主要失效域包括：内容包与 XHTML 解析、字体文件与内存、TF 卡检测/供电、触控/按键映射、面板型号/波形/VCOM、全刷/局刷残影、电池 ADC/充电状态和关机唤醒。在项目文档明确无线功能及其内容传输路径前，应将其排除在本地文件、显示和功耗基线之外。
+主要失效域包括：EPUB 压缩包与 XHTML 解析、字体文件与内存、TF 卡检测/供电、触控/按键映射、面板型号/波形/VCOM、全刷/局刷残影、电池 ADC/充电状态和关机唤醒。在项目文档明确无线功能及其内容传输路径前，应将其排除在本地文件、显示和功耗基线之外。
 
 ## 阶段 1 — 固定实物和源码 { #stage-1-pin-the-physical-and-source-baseline }
 
-**目标：** 证明板卡、面板、触控和源码确实对应同一个受支持组合。
+**目标：** 证明板卡、面板、触控和固定的软件版本对应一个受支持的组合。
 
 1. 记录 V1.1 板卡丝印、SF32 器件、面板型号、触控型号、排线方向和供电方式。
 2. 固定顶层提交与 SDK 子模块，保存所有子模块状态。

@@ -8,7 +8,7 @@ tags:
 
 # État de MicroPython { #micropython-status }
 
-Les recherches dans la documentation SiFli et les dépôts OpenSiFli vérifiés n'ont révélé ni portage officiel de MicroPython pour SF32, ni image de firmware, ni procédure de flashage propre à une carte.
+Au 2026-11-04, les recherches dans la documentation SiFli et les dépôts OpenSiFli vérifiés n'avaient révélé ni portage officiel de MicroPython pour SF32, ni image de firmware, ni procédure de flashage propre à une carte.
 
 Cette vérification a porté sur les [dépôts publics d'OpenSiFli sur GitHub](https://github.com/OpenSiFli/) et le [portail documentaire de SiFli](https://docs.sifli.com/).
 
@@ -59,4 +59,7 @@ MicroPython peut passer d'une page de suivi à une page de prise en main lorsque
 
 ## Pourquoi c'est important { #why-this-matters }
 
-Une instruction vague du type « télécharger une image MicroPython » n'est pas exploitable. Les utilisateurs ont besoin d'une image exacte, d'une carte compatible, d'un outil de flashage, d'un réglage REPL et d'une voie de récupération. Sans cela, une page MicroPython crée une charge de support au lieu d'aider.
+Une instruction vague du type « télécharger une image MicroPython » n'est pas exploitable. Les utilisateurs ont besoin d'une image exacte, d'une carte compatible, d'un outil de flashage, d'un réglage REPL et d'une voie de récupération. Sans cela, une page MicroPython augmente la charge de support au lieu d'aider.
+
+!!! note "Contenu généré automatiquement"
+    Cette page a été rédigée sans document source dédié. Avant de vous appuyer sur ses informations techniques, vérifiez-les dans la documentation officielle de SiFli.

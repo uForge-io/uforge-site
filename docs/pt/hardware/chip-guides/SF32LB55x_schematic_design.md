@@ -31,7 +31,7 @@ tags:
 
 ### 5.1. Sistema de alimentação { #51-power-system }
 
-O SF32LB551 em QFN68L não tem os pinos VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_VOUT nem AVDD_DSI. Consulte as tabelas de alimentação e capacitores apenas para os pinos presentes no encapsulamento escolhido. Os encapsulamentos BGA oferecem duas saídas BUCK; BUCK2 pode operar em modo BUCK ou LDO, mas recomenda-se o modo BUCK. QFN68L oferece uma saída BUCK.
+O SF32LB551 em QFN68L não tem os pinos VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_VOUT nem AVDD_DSI. O SF32LB553 em BGA125 também não tem o pino AVDD_DSI. Consulte as tabelas de alimentação e capacitores apenas para os pinos presentes no encapsulamento escolhido. Os encapsulamentos BGA oferecem duas saídas BUCK; BUCK2 pode operar em modo BUCK ou LDO, mas recomenda-se o modo BUCK. QFN68L oferece uma saída BUCK.
 
 <div align="center"><em>Tabela 5.1-1: Pinos de alimentação da PMU</em></div>
 
@@ -248,7 +248,7 @@ Cada PSRAM ilustrada usa 1,8 V, três capacitores de 0,1 µF e um de 1 µF/6,3 V
 
 <div align="center" markdown>
 
-| Sinal da interface | QFN68 | BGA145/169 | Descrição detalhada |
+| Sinal da interface | QFN68 | BGA125/145/169 | Descrição detalhada |
 | :--- | :--- | :--- | :--- |
 | CS# | GPIO9 | PA61 | Seleção do chip, ativo em nível baixo |
 | SO | GPIO7 | PA65 | Entrada de dados (linha de entrada/saída 1) |
@@ -263,7 +263,7 @@ Cada PSRAM ilustrada usa 1,8 V, três capacitores de 0,1 µF e um de 1 µF/6,3 V
 
 <div align="center" markdown>
 
-| Sinal da interface | QFN68 | BGA145/169 | Descrição detalhada |
+| Sinal da interface | QFN68 | BGA125/145/169 | Descrição detalhada |
 | :--- | :--- | :--- | :--- |
 | CS# | GPIO16 | PA45 | Seleção do chip, ativo em nível baixo |
 | SO | GPIO14 | PA49 | Entrada de dados (linha de entrada/saída 1) |
@@ -278,7 +278,7 @@ Cada PSRAM ilustrada usa 1,8 V, três capacitores de 0,1 µF e um de 1 µF/6,3 V
 
 <div align="center" markdown>
 
-| Sinal da interface | QFN68 | BGA145/169 | Descrição detalhada |
+| Sinal da interface | QFN68/BGA125 | BGA145/169 | Descrição detalhada |
 | :--- | :--- | :--- | :--- |
 | CS# | - | PB33 | Seleção do chip, ativo em nível baixo |
 | SO | - | PB36 | Entrada de dados (linha de entrada/saída 1) |
@@ -293,14 +293,14 @@ Cada PSRAM ilustrada usa 1,8 V, três capacitores de 0,1 µF e um de 1 µF/6,3 V
 
 <div align="center" markdown>
 
-| Sinal da interface | QFN68 | BGA145/169 | Descrição detalhada |
-| :--- | :--- | :--- | :--- |
-| CLK | GPIO10 | PA34 | Entrada de clock |
-| CMD | GPIO9 | PA36 | Entrada de comando |
-| DATA0 | GPIO8 | PA28 | Bit de dados 0 |
-| DATA1 | GPIO7 | PA29 | Bit de dados 1 |
-| DATA2 | GPIO6 | PA30 | Bit de dados 2 |
-| DATA3 | GPIO5 | PA31 | Bit de dados 3 |
+| Sinal da interface | QFN68 | BGA125 | BGA145/169 | Descrição detalhada |
+| :--- | :--- | :--- | :--- | :--- |
+| CLK | GPIO10 | PA60 | PA34 | Entrada de clock |
+| CMD | GPIO9 | PA61 | PA36 | Entrada de comando |
+| DATA0 | GPIO8 | PA63 | PA28 | Bit de dados 0 |
+| DATA1 | GPIO7 | PA65 | PA29 | Bit de dados 1 |
+| DATA2 | GPIO6 | PA66 | PA30 | Bit de dados 2 |
+| DATA3 | GPIO5 | PA68 | PA31 | Bit de dados 3 |
 
 </div>
 
@@ -308,18 +308,18 @@ Cada PSRAM ilustrada usa 1,8 V, três capacitores de 0,1 µF e um de 1 µF/6,3 V
 
 <div align="center" markdown>
 
-| Sinal da interface | QFN68 | BGA145/169 | Descrição detalhada |
-| :--- | :--- | :--- | :--- |
-| CLK | GPIO10 | PA34 | Entrada de clock |
-| CMD | GPIO9 | PA36 | Entrada de comando |
-| DATA0 | GPIO8 | PA28 | Bit de dados 0 |
-| DATA1 | GPIO7 | PA29 | Bit de dados 1 |
-| DATA2 | GPIO6 | PA30 | Bit de dados 2 |
-| DATA3 | GPIO5 | PA31 | Bit de dados 3 |
-| DATA4 | GPIO15 | PA47 | Bit de dados 4 |
-| DATA5 | GPIO14 | PA49 | Bit de dados 5 |
-| DATA6 | GPIO13 | PA51 | Bit de dados 6 |
-| DATA7 | GPIO12 | PA55 | Bit de dados 7 |
+| Sinal da interface | QFN68 | BGA125 | BGA145/169 | Descrição detalhada |
+| :--- | :--- | :--- | :--- | :--- |
+| CLK | GPIO10 | - | PA34 | Entrada de clock |
+| CMD | GPIO9 | - | PA36 | Entrada de comando |
+| DATA0 | GPIO8 | - | PA28 | Bit de dados 0 |
+| DATA1 | GPIO7 | - | PA29 | Bit de dados 1 |
+| DATA2 | GPIO6 | - | PA30 | Bit de dados 2 |
+| DATA3 | GPIO5 | - | PA31 | Bit de dados 3 |
+| DATA4 | GPIO15 | - | PA47 | Bit de dados 4 |
+| DATA5 | GPIO14 | - | PA49 | Bit de dados 5 |
+| DATA6 | GPIO13 | - | PA51 | Bit de dados 6 |
+| DATA7 | GPIO12 | - | PA55 | Bit de dados 7 |
 
 </div>
 
@@ -327,7 +327,7 @@ Cada PSRAM ilustrada usa 1,8 V, três capacitores de 0,1 µF e um de 1 µF/6,3 V
 
 <div align="center" markdown>
 
-| Sinal da interface | QFN68 | BGA145/169 | Descrição detalhada |
+| Sinal da interface | QFN68 | BGA125/145/169 | Descrição detalhada |
 | :--- | :--- | :--- | :--- |
 | CLK | GPIO17 | PA44 | Entrada de clock |
 | CMD | GPIO16 | PA45 | Entrada de comando |
@@ -375,17 +375,17 @@ Notas de atribuição dos pinos do display:
 
 <div align="center" markdown>
 
-| Sinal SPI | GPIO QFN68 | Pino BGA145/169 | Descrição detalhada |
-| :--- | :--- | :--- | :--- |
-| CSX | GPIO22 | PB33 | Sinal de habilitação |
-| WRX_SCL | GPIO23 | PB32 | Sinal de clock |
-| DCX | GPIO20 | PB36 | Sinal de dados/comando no modo SPI de 4 fios; bit de dados 1 no modo Quad-SPI |
-| SDI_RDX | GPIO21 | PB35 | Sinal de entrada de dados no modo SPI de 3/4 fios; bit de dados 0 no modo Quad-SPI |
-| SDO | GPIO21 | PB35 | Sinal de saída de dados no modo SPI de 3/4 fios; conecte-o ao SDI_RDX |
-| D[0] | GPIO19 | PB37 | Bit de dados 2 no modo Quad-SPI |
-| D[1] | GPIO18 | PB07 | Bit de dados 3 no modo Quad-SPI |
-| RESET | GPIO2 | PB17 | Sinal de reset do painel de display |
-| TE | GPIO3 | PB77 | Sinal TE de sincronização dos quadros do MCU |
+| Sinal SPI | GPIO QFN68 | Pino BGA125 | Pino BGA145/169 | Descrição detalhada |
+| :--- | :--- | :--- | :--- | :--- |
+| CSX | GPIO22 | PA31 | PB33 | Sinal de habilitação |
+| WRX_SCL | GPIO23 | PA20 | PB32 | Sinal de clock |
+| DCX | GPIO20 | PA36 | PB36 | Sinal de dados/comando no modo SPI de 4 fios; bit de dados 1 no modo Quad-SPI |
+| SDI_RDX | GPIO21 | PA34 | PB35 | Sinal de entrada de dados no modo SPI de 3/4 fios; bit de dados 0 no modo Quad-SPI |
+| SDO | GPIO21 | PA34 | PB35 | Sinal de saída de dados no modo SPI de 3/4 fios; conecte-o ao SDI_RDX |
+| D[0] | GPIO19 | PA38 | PB37 | Bit de dados 2 no modo Quad-SPI |
+| D[1] | GPIO18 | PA42 | PB07 | Bit de dados 3 no modo Quad-SPI |
+| RESET | GPIO2 | PA78 | PB17 | Sinal de reset do painel de display |
+| TE | GPIO3 | PA77 | PB77 | Sinal TE de sincronização dos quadros do MCU |
 
 </div>
 
@@ -398,22 +398,22 @@ Notas de atribuição dos pinos do display:
 
 <div align="center" markdown>
 
-| Sinal MCU8080 | GPIO QFN68 | Pino BGA145/169 | Descrição detalhada |
-| :--- | :--- | :--- | :--- |
-| CSX | GPIO22 | - | Seleção do chip |
-| WRX | GPIO23 | - | Sinal de strobe de escrita de dados |
-| DCX | GPIO20 | - | Seleção entre dados e comando do display |
-| RDX | GPIO21 | - | Sinal de strobe para operações de leitura do controlador do display |
-| D[0] | GPIO19 | - | Bit de dados 0 |
-| D[1] | GPIO18 | - | Bit de dados 1 |
-| D[2] | GPIO17 | - | Bit de dados 2 |
-| D[3] | GPIO16 | - | Bit de dados 3 |
-| D[4] | GPIO15 | - | Bit de dados 4 |
-| D[5] | GPIO14 | - | Bit de dados 5 |
-| D[6] | GPIO13 | - | Bit de dados 6 |
-| D[7] | GPIO12 | - | Bit de dados 7 |
-| RESET | GPIO2 | - | Reset |
-| TE | GPIO3 | - | Sinal TE de sincronização dos quadros do MCU |
+| Sinal MCU8080 | GPIO QFN68 | Pino BGA125 | Pino BGA145/169 | Descrição detalhada |
+| :--- | :--- | :--- | :--- | :--- |
+| CSX | GPIO22 | PA31 | - | Seleção do chip |
+| WRX | GPIO23 | PA20 | - | Sinal de strobe de escrita de dados |
+| DCX | GPIO20 | PA36 | - | Seleção entre dados e comando do display |
+| RDX | GPIO21 | PA34 | - | Sinal de strobe para operações de leitura do controlador do display |
+| D[0] | GPIO19 | PA38 | - | Bit de dados 0 |
+| D[1] | GPIO18 | PA42 | - | Bit de dados 1 |
+| D[2] | GPIO17 | PA44 | - | Bit de dados 2 |
+| D[3] | GPIO16 | PA45 | - | Bit de dados 3 |
+| D[4] | GPIO15 | PA47 | - | Bit de dados 4 |
+| D[5] | GPIO14 | PA49 | - | Bit de dados 5 |
+| D[6] | GPIO13 | PA51 | - | Bit de dados 6 |
+| D[7] | GPIO12 | PA55 | - | Bit de dados 7 |
+| RESET | GPIO2 | PA78 | - | Reset |
+| TE | GPIO3 | PA77 | - | Sinal TE de sincronização dos quadros do MCU |
 
 </div>
 
@@ -465,14 +465,14 @@ O [guia de aplicação de hardware da SiFli](https://github.com/OpenSiFli/SiFli-
 
 <div align="center" markdown>
 
-| Sinais de toque e retroiluminação | GPIO QFN68 | Pino BGA145 | Pino BGA169 | Descrição detalhada |
-| :--- | :--- | :--- | :--- | :--- |
-| Interrupção | GPIO1 | PA79 | PA79 | Interrupção de status do painel de toque (pode despertar o sistema) |
-| I2C1_SCL | GPIO25 | PA10 | PA10 | Clock I2C do painel de toque |
-| I2C1_SDA | GPIO24 | PA14 | PA14 | Dados I2C do painel de toque |
-| BL_PWM | GPIO0 | - | - | Controle PWM da retroiluminação |
-| Reset | GPIO16 | PA00 | PA00 | Sinal de reset do painel de toque |
-| Habilitação da alimentação | GPIO26 | PA06 | PA03 | Habilitação da alimentação do painel de toque |
+| Sinais de toque e retroiluminação | GPIO QFN68 | Pino BGA125 | Pino BGA145 | Pino BGA169 | Descrição detalhada |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Interrupção | GPIO1 | PA79 | PA79 | PA79 | Interrupção de status do painel de toque (pode despertar o sistema) |
+| I2C1_SCL | GPIO25 | PA10 | PA10 | PA10 | Clock I2C do painel de toque |
+| I2C1_SDA | GPIO24 | PA14 | PA14 | PA14 | Dados I2C do painel de toque |
+| BL_PWM | GPIO0 | PA80 | - | - | Controle PWM da retroiluminação |
+| Reset | GPIO16 | PA00 | PA00 | PA00 | Sinal de reset do painel de toque |
+| Habilitação da alimentação | GPIO26 | PA06 | PA06 | PA03 | Habilitação da alimentação do painel de toque |
 
 </div>
 
@@ -500,7 +500,7 @@ Use um GPIO com GPTIM1_CHx para o PWM do motor. Selecione o comportamento PU/PD 
 
 <div align="center" markdown>
 
-| Fonte de interrupção | QFN68 | BGA145/169 | Descrição detalhada |
+| Fonte de interrupção | QFN68 | BGA125/145/169 | Descrição detalhada |
 | :--- | :--- | :--- | :--- |
 | WKUP_A0 | GPIO3 | PA77 | Sinal de interrupção 0 do HCPU |
 | WKUP_A1 | GPIO2 | PA78 | Sinal de interrupção 1 do HCPU |
@@ -545,7 +545,7 @@ O áudio Bluetooth externo usa UART1 do HCPU. Compatibilize os níveis lógicos 
 
 <div align="center" markdown>
 
-| Sinal UART | QFN68 | BGA145/169 | Descrição detalhada |
+| Sinal UART | QFN68 | BGA125/145/169 | Descrição detalhada |
 | :--- | :--- | :--- | :--- |
 | TXD1 | GPIO13 | PA19 | Sinal UART1 RXD |
 | RXD1 | GPIO14 | PA17 | Sinal UART1 TXD |
@@ -564,7 +564,7 @@ O áudio Bluetooth externo usa UART1 do HCPU. Compatibilize os níveis lógicos 
 
 Não deixe UART RXD flutuante; habilite o pull-up interno na inicialização do firmware. UART3 é a porta de registro padrão. A SiFli oferece um gravador autônomo para gravação em produção e calibração dos cristais. Reserve ao menos VBAT, GND, VDDIOA, VDDIOB, RSTN, Mode, SWDIO, SWCLK, RXD1, TXD1, RXD3 e TXD3 como pontos de teste. O subconjunto do gabarito de teste de produção é VBAT, GND, boot_mode, VDDIOB, RXD3 e TXD3. VBAT e boot_mode são nomes usados no gabarito de teste da fonte; identifique a alimentação real da placa e a conexão Mode antes de conectar os cabos.
 
-O desenho original conecta VDD_1V8 ao pino 1 (VTref), SWDIO ao pino 7 e SWCLK ao pino 9, por resistores em série de 22 Ω. O [J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector) padrão também usa o pino 1 para [VTref](https://kb.segger.com/VTref), a entrada de referência da tensão-alvo, e não uma saída de alimentação da sonda de depuração. Verifique a orientação do conector e a compatibilidade com 1,8 V antes de conectar um cabo padrão.
+A fonte da SiFli também orienta configurar a alimentação do depurador pela interface externa para que a placa SF32LB55x alimente o J-Link, mas não está clara a relação entre essa instrução e a ligação padrão de 20 pinos. A SEGGER define o pino 1 como [VTref](https://kb.segger.com/VTref), a entrada de referência da tensão-alvo, e não uma entrada de alimentação da sonda. Nos modelos compatíveis, o pino 19 é a saída de 5 V da sonda para alimentar o alvo. O desenho da fonte mostra VDD_1V8 conectado ao pino 1 e SWDIO/SWCLK conectados aos pinos 7/9 por resistores em série de 22 Ω, mas não mostra um caminho de alimentação da sonda. Antes de fazer a ligação, confirme o sentido da alimentação para a sonda, o cabo e o alvo específicos; não trate VTref como entrada de alimentação. Verifique também a orientação do conector e a compatibilidade com 1,8 V antes de conectar um cabo padrão de [J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector).
 
 ![Figura 5.7-4: Conector SWD original: verificar o adaptador](../../sf32-products/chips/assets/55x/SF32LB55x-SWD-SCH.png){ width="100%" loading="lazy" }
 

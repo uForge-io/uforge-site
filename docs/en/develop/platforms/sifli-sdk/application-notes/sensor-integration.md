@@ -87,6 +87,8 @@ The group switch can contain several supported models, such as LSM6DSL and SC7A2
 - `LSM6DSL_INT_GPIO_BIT` and `LSM6DSL_INT2_GPIO_BIT` describe the interrupt pins when the board assigns them.
 - `LSM_USING_AWT`, `LSM_USING_PEDO`, and `LSM6DSL_USE_FIFO` represent device-specific functions; define them only when the selected driver supports them.
 
+The code block retains the guide's default `0` (SPI). To use the I2C access example below, set `LSM6DSL_USING_I2C=1`; when selecting SPI, use the corresponding SPI access code.
+
 This example follows the SF32LB52x guide. Other family guides or SDK branches may expose different options or menu paths; verify each symbol in the target branch before applying the example.
 
 ### Find the bus and implement register access { #find-the-bus-and-implement-register-access }

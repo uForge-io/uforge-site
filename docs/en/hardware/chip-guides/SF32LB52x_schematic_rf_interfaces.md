@@ -297,7 +297,7 @@ Use the reference design as the baseline for the rotary encoder button circuit.
 
 <div align="center"><em>Figure 5.5-5: Mechanical Rotary Encoder Button Circuit</em></div>
 
-The encoder's A and B signals connect to PA35 and PA36 through 0 Ω resistors. Each signal has a 200 kΩ pull-up to VDD33_LDO2_VOUT and ESD protection; C0703 and C0706 are marked NF (not fitted). The signal labels also identify USB/UART multiplexed functions, so check pin conflicts before adopting this assignment.
+The encoder's A and B signals connect to PA35 and PA36 through 0 Ω resistors. Each signal has a 200 kΩ pull-up to VDD33_LDO2_VOUT and ESD protection; C0703 and C0708 are marked NF (not fitted). The signal labels also identify USB/UART multiplexed functions, so check pin conflicts before adopting this assignment.
 
 **Common Mistakes - Buttons**
 

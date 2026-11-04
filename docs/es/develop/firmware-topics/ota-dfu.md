@@ -11,11 +11,11 @@ tags:
 
 DFU v2 es el middleware de SiFli-SDK para flujos de actualización de firmware DFU y OTA. Ofrece tres canales de transporte: USB-CDC, BLE y Bluetooth PAN. Cada canal incluye una aplicación de usuario y un subproyecto de cargador correspondiente.
 
-Empiece por elegir el transporte que coincida con la ruta de actualización del producto. Después, utilice el ejemplo de aplicación correspondiente; el cargador asociado se incorpora automáticamente a la compilación.
+Elija el canal de transporte que coincida con la ruta de actualización del producto.
 
 ## Estructura de DFU v2 { #dfu-v2-structure }
 
-<div align="center"><em>Figura: Estructura de los ejemplos DFU v2</em></div>
+<div align="center"><em>Figura: Estructura de directorios de los ejemplos DFU v2</em></div>
 
 ```text
 dfu_v2/

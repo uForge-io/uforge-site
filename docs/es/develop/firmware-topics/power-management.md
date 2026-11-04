@@ -1,6 +1,6 @@
 ---
 icon: lucide/battery-charging
-description: "Mida y ajuste el consumo de SF32 según relojes, modos de suspensión, pantalla, intervalos Bluetooth y sensores para convertir un prototipo en un producto con batería."
+description: "Mida y ajuste el consumo de SF32 según relojes, modos de suspensión, pantalla, intervalos Bluetooth y sensores para convertir un prototipo en un producto alimentado por batería."
 tags:
     - Desarrollo
     - Energía
@@ -22,10 +22,10 @@ No optimice el consumo basándose en fragmentos de código aislados. Mida escena
 
 ## Puntos de partida útiles { #useful-starting-points }
 
-- Ejemplos de gestión de energía del SDK.
-- Perfilado de uso de CPU.
-- Inspección mediante el shell de RT-Thread.
-- Medición de corriente a nivel de placa.
+- [Ejemplos de gestión de energía del SDK](../../learn/low-power/low-power-sdk-examples.md).
+- [Perfilado de uso de CPU](../../getting-started/tutorials/advanced.md).
+- [Inspección mediante el shell de RT-Thread](../platforms/sifli-sdk/debugging-diagnostics.md).
+- [Medición de corriente a nivel de placa](../../learn/low-power/measurement-and-validation.md).
 
 ## Datos que registrar en las mediciones { #measurement-notes }
 

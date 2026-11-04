@@ -23,39 +23,39 @@ La ruta típica de recursos de pantalla es:
 <div align="center"><em>Diagrama: flujo de recursos gráficos y visualización</em></div>
 
 ```text
-Imágenes, fuentes y animaciones de origen
+Source images, fonts, and animations
         │
         ▼
-GraphicsTool convierte los recursos compatibles a eZip o eZip-A
+GraphicsTool converts supported resources to eZip or eZip-A
         │
         ▼
-Recursos comprimidos en Flash NOR, PSRAM, NAND o almacenamiento de archivos
+Compressed assets in NOR Flash, PSRAM, NAND, or file storage
         │
         ▼
-El decodificador eZip por hardware descomprime un recurso cuando se necesita
+eZip hardware decoder expands an asset when required
         │
         ▼
-LVGL u otro framework de UI + controlador gráfico/de pantalla
+LVGL or another UI framework + graphics/display driver
         │
-        ├── Renderizado de respaldo por CPU
+        ├── CPU fallback rendering
         │
-        └── Aceleración de píxeles por ePicasso
+        └── ePicasso pixel acceleration
         │
         ▼
-Mapa de bits final renderizado en un búfer de dibujo o framebuffer
+Final rendered bitmap in a draw buffer or framebuffer
         │
-        ├── Ruta de pantalla sin comprimir
+        ├── Uncompressed display path
         │
-        └── Opcional: extDMA lo comprime en TurboPixel
+        └── Optional: extDMA compresses it into TurboPixel
                     │
                     ▼
-             Framebuffer TurboPixel en PSRAM
+             TurboPixel framebuffer in PSRAM
         │
         ▼
-El controlador de pantalla transfiere los píxeles al panel
+Display controller transfers pixels to the panel
         │
         ▼
-Panel SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI
+SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
 ```
 
 El flujo es configurable: un producto puede prescindir de eZip, ePicasso, TurboPixel o de un framebuffer completo. La disponibilidad y las conexiones dependen del dispositivo, el SDK, la interfaz de pantalla, el panel y la configuración del controlador. El encabezado LCDC actual de OpenSiFli define `LCDC_SUPPORTED_COMPRESSED_LAYER` solo cuando está habilitado `HAL_EXTDMA_MODULE_ENABLED` y se cumple la condición de compilación correspondiente a la familia; SF32LB52x y SF32LB57x quedan excluidos. Un comentario del código también indica que la ruta LCPU aún no está habilitada. La tabla publicada de funciones LCDC del SDK marca como no compatible la descompresión de capas comprimidas en SF32LB55x; por eso, en 55x debe considerarse una capacidad condicional, no una ruta de ejecución validada de extremo a extremo. Compruebe la revisión exacta del SDK, el núcleo, la configuración de compilación y el hardware objetivo; consulte [TurboPixel](turbopixel.md#availability-in-the-sf32-family).

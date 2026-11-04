@@ -60,7 +60,7 @@ El diseño de referencia admite montaje por una o ambas caras. Los componentes p
 
 <div align="center"><em>Figura 6.2-1: Estructura de apilado de referencia</em></div>
 
-La figura 6.2-1 muestra un apilado de referencia de 0,8 mm ±10 %, incluidos el metalizado y la máscara de soldadura. Su espesor total calculado es de 0,79553 mm. Confirme el espesor acabado y la estructura dieléctrica con el fabricante; este ejemplo no es un apilado universal.
+La figura 6.2-1 muestra un apilado de referencia de 0,8 mm ± 10 %, incluidos el metalizado y la máscara de soldadura. Su espesor total calculado es de 0,79553 mm. Confirme el espesor acabado y la estructura dieléctrica con el fabricante; este ejemplo no es un apilado universal.
 
 <div align="center"><em>Tabla 6.2-1: Valores del apilado de referencia</em></div>
 
@@ -104,7 +104,7 @@ Realice el fanout de todas las señales del encapsulado QFN por la capa superior
 
 ### 6.5. Trazado de la interfaz de reloj { #65-clock-interface-routing }
 
-Aplique estas reglas de trazado del reloj a ambos grupos de diseño:
+Aplique estas reglas de trazado del reloj tanto a las variantes con alimentación por batería como a las de alimentación normal:
 
 - Coloque los cristales dentro de la caja de blindaje y a más de 1 mm del borde de la PCB. Aléjelos tanto como sea posible de los componentes que generan calor (PA, cargador y circuitos PMU), idealmente más de 5 mm, para evitar que se altere la deriva de frecuencia del cristal.
 - Mantenga una zona de exclusión de más de 0,25 mm alrededor del cristal, sin otros metales ni componentes.
@@ -142,11 +142,11 @@ Aplique estas reglas de trazado del reloj a ambos grupos de diseño:
 Las figuras 6.5-3 y 6.5-6 muestran una separación ≥0,15 mm entre las pistas paralelas XI/XO de ambos cristales. La figura 6.5-2 usa un cristal de 48 MHz con capacitancia de carga de 8,8 pF y marca los condensadores externos como NF (no montados). La figura 6.5-5 usa un cristal de 32,768 kHz y 7 pF en PA22/PA23, pines compartidos con PDM_CLK/PDM_DATA.
 
 !!! important "Discrepancia entre fuentes sobre el cobre bajo el cristal"
-    La nota de aplicación de las variantes con batería se contradice sobre el cobre bajo el cristal: su sección de reloj pide retirar el plano GND de L2 justo debajo, mientras que su sección de trazado de PCB prohíbe los huecos en planos y los recortes de cobre en la capa superior y las adyacentes, y muestra GND continuo en L2. La guía independiente de diseño de PCB repite la instrucción de no crear huecos. No deduzca una regla universal para L2 ni decida solo por el número de capas; confirme con SiFli el tratamiento específico del apilado antes de liberar el diseño. La zona de exclusión y las distancias a componentes siguen siendo comprobaciones independientes.
+    La nota de aplicación de las variantes con batería se contradice sobre el cobre bajo el cristal: la sección de reloj indica expresamente que se retire, como mínimo, el cobre GND de la segunda capa situado debajo. La sección posterior de trazado de PCB pide mantener como zona de exclusión el área bajo el cristal en la capa superior y las adyacentes, y no pasar otras pistas por ella; la versión inglesa prohíbe expresamente los huecos en los planos y los recortes de cobre. La guía independiente de diseño de PCB da la misma instrucción de exclusión y de no pasar pistas, y su versión inglesa también prohíbe expresamente los huecos y recortes. Sin embargo, los modelos de trazado de ambas guías muestran GND continuo en L2. No deduzca una regla universal para L2 ni decida solo por el número de capas; confirme con SiFli el tratamiento específico del apilado antes de liberar el diseño. La zona de exclusión y las distancias a componentes siguen siendo comprobaciones independientes.
 
 ### 6.6. Trazado de la interfaz RF { #66-rf-interface-routing }
 
-Aplique estas reglas de trazado RF a ambos grupos de diseño:
+Aplique estas reglas de trazado RF tanto a las variantes con alimentación por batería como a las de alimentación normal:
 
 - Coloque el circuito de adaptación RF cerca del chip, no de la antena.
 - Coloque el condensador de filtro AVDD_BRF cerca del pin del chip y conecte directamente a la tierra principal las vías asociadas a su terminal de tierra.
@@ -173,7 +173,7 @@ Los ejemplos RF usan un condensador en serie de 15 pF/50 V (C0333), dejan C0318/
 
 ### 6.7. Trazado de la interfaz de audio { #67-audio-interface-routing }
 
-Aplique estas reglas de trazado de audio a ambos grupos de diseño:
+Aplique estas reglas de trazado de audio tanto a las variantes con alimentación por batería como a las de alimentación normal:
 
 - Coloque los condensadores de filtro de AVDD33_AUD, MIC_BIAS y AUD_VREF cerca de sus respectivos pines y conecte sus terminales de tierra firmemente a la tierra principal.
 - Coloque cerca del pin del chip los componentes de entrada analógica ADCP; mantenga las pistas cortas, con apantallamiento completo de tierra y alejadas de otras fuentes de interferencia intensa.
@@ -305,7 +305,7 @@ Apantalle con tierra las pistas de entrada GPADC y manténgalas alejadas de otro
 
 ### 6.13. EMI y ESD { #613-emi-esd }
 
-Aplique estas reglas de EMI y ESD a ambos grupos de diseño:
+Aplique estas reglas de EMI y ESD tanto a las variantes con alimentación por batería como a las de alimentación normal:
 
 - No trace por la capa superior las líneas largas de reloj y alimentación que generen interferencias fuera de la caja de blindaje; llévelas por capas internas.
 - Coloque los dispositivos de protección ESD cerca de los pines del conector y haga pasar primero las señales por ellos.

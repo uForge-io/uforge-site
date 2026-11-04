@@ -9,7 +9,7 @@ En août, nous nous sommes attachés à rendre μForge.io plus utile à trois é
 
 ### Des choix plus clairs avant le schéma { #clearer-choices-before-the-schematic }
 
-Le [sélecteur de produits SF32](../../sf32-products/product-selector.md) et les pages de famille aident à transformer des exigences de mémoire, de boîtier, d'E/S, de consommation, d'affichage et d'audio en une présélection concrète. Ces ressources ne remplacent pas les fiches techniques ; elles offrent un meilleur point de départ avant que des hypothèses de conception ne se retrouvent dans un schéma.
+Le [sélecteur de produits SF32](../../sf32-products/product-selector.md) et les pages de famille aident à transformer des exigences de mémoire, de boîtier, d'E/S, d'alimentation électrique, d'affichage et d'audio en une présélection concrète. Ces ressources ne remplacent pas les fiches techniques ; elles offrent un meilleur point de départ avant que des hypothèses de conception ne se retrouvent dans un schéma.
 
 ### Des chemins plus utiles vers la mise en œuvre { #more-useful-paths-into-implementation }
 

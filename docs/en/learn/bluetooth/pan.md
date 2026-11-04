@@ -49,7 +49,7 @@ A PANU can find nearby devices through inquiry and use SDP to identify their PAN
 
 </div>
 
-For products already committed to dual-mode Bluetooth for audio, GATT services, or Classic profiles, PAN is frequently the lowest-incremental-cost way to add internet access without a second radio subsystem — provided the product's use case tolerates being dependent on a nearby, tethering-enabled phone.
+For products already committed to dual-mode Bluetooth for audio, GATT services, or Classic profiles, PAN is often a relatively low-incremental-cost way to add internet access without a second radio subsystem — provided the product's use case tolerates being dependent on a nearby, tethering-enabled phone.
 
 ## iOS Data Transport: BLE Relay, Classic Bluetooth, and PAN { #ios-data-transport-ble-relay-classic-bluetooth-and-pan }
 

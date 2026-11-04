@@ -11,11 +11,11 @@ tags:
 
 DFU v2は、DFU／OTA更新フロー向けのSiFli-SDKファームウェア更新ミドルウェアです。USB-CDC、BLE、Bluetooth PANの3つの転送経路に対応し、それぞれにユーザーアプリケーションと対応するローダーのサブプロジェクトがあります。
 
-まず、製品の更新経路に合う転送方式を選びます。対応するアプリケーションのサンプルから始めれば、ローダーは自動的にビルドへ組み込まれます。
+まず、製品の更新経路に合う転送方式を選びます。
 
 ## DFU v2の構成 { #dfu-v2-structure }
 
-<div align="center"><em>図: DFU v2のサンプル構成</em></div>
+<div align="center"><em>図: DFU v2サンプルのディレクトリ構成</em></div>
 
 ```text
 dfu_v2/

@@ -97,9 +97,16 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 - SDIO를 통한 외부 Wi-Fi 연결
 - 통합 오디오 ADC 2개
 - 통합 오디오 DAC 2개
-- PDM 인터페이스 2개. 각 인터페이스는 디지털 마이크를 최대 2개까지 연결할 수 있으며, 인터페이스 개수와 마이크 개수는 같지 않고 실제로 사용 가능한 연결은 핀 멀티플렉싱과 보드 라우팅에도 달려 있음
+- PDM 인터페이스 2개. SiFli 하드웨어 애플리케이션 노트에는 PDM 마이크 입력 2개가 명시되어 있습니다. 실제 사용 가능 채널은 핀 멀티플렉싱과 보드 라우팅을 확인하십시오.
 - I2S 인터페이스 3개: I2S1은 입력 전용이고, I2S2와 I2S3은 입력과 출력을 지원함. 모두 마스터 모드로 동작함
 - 호스트 및 디바이스 모드의 USB 2.0 High-Speed
+
+### 보안 { #security }
+
+- AES, HASH, CRC 하드웨어 가속기와 진정한 난수 생성기(TRNG)
+- Secure Boot 및 신뢰 루트(Root of Trust)와 UID 저장용 1,024비트 eFuse
+- MPI1, MPI2, MPI3, MPI5를 통한 외부 코드 실시간 복호화
+- SiFli 제품 개요서에는 PSA Certified Level 1이 기재되어 있습니다. 해당 부품과 제품에 대한 인증 범위와 현재 상태를 확인하십시오.
 
 ### 시스템 통합 { #system-integration }
 
@@ -128,19 +135,24 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 
 ## 제품군 변형
 
-현재 SiFli 칩 모델 가이드에는 SF32LB58x 주문 코드 3개가 나열되어 있으며, 모두 BGA256이고 코패키지 메모리 구성은 아래와 같습니다. 구성과 공급 가능 여부는 바뀔 수 있으므로 정확한 주문 코드를 현재 데이터시트 및 승인 업체 목록(AVL)과 대조하여 확인하십시오.
+현재 SiFli 칩 모델 가이드에는 SF32LB58x 주문 코드 6개가 나열되어 있으며, 모두 BGA256입니다. 메모리 표에서는 MPI5 부팅 SiP와 MPI1 및 MPI2 메모리를 구분합니다.
 
-<div align="center"><em>SF32LB58x 주문 코드와 코패키지 메모리</em></div>
+<div align="center"><em>SF32LB58x 주문 코드, SiP 메모리, 공통 제한 사항</em></div>
 
 <div align="center" markdown>
 
-| 부품 번호 | 패키지 | 코패키지 메모리 |
-| :--- | :--- | :--- |
-| SF32LB583VCC36 | BGA256 | 1 MB 부트 NOR 플래시 + MPI1과 MPI2의 2 × 8 MB OPI-PSRAM |
-| SF32LB586VDD36 | BGA256 | 1 MB 부트 NOR 플래시 + MPI1과 MPI2의 2 × 16 MB HPI-PSRAM |
-| SF32LB587VEE56 | BGA256 | 4 MB 부트 NOR 플래시 + MPI1과 MPI2의 2 × 32 MB HPI-PSRAM |
+| 주문 코드 | 패키지 | MPI5 부팅 SiP | MPI1 SiP | MPI2 SiP |
+| :--- | :--- | :--- | :--- | :--- |
+| SF32LB580VNN36 | BGA256 | 1 MB NOR 플래시 | n/a | n/a |
+| SF32LB581VCN36 | BGA256 | 1 MB NOR 플래시 | 8 MB OPI-PSRAM | n/a |
+| SF32LB583VCC36 | BGA256 | 1 MB NOR 플래시 | 8 MB OPI-PSRAM | 8 MB OPI-PSRAM |
+| SF32LB585V5E56 | BGA256 | 4 MB NOR 플래시 | 4 MB NOR 플래시 | 32 MB HPI-PSRAM |
+| SF32LB586VDD36 | BGA256 | 1 MB NOR 플래시 | 16 MB HPI-PSRAM | 16 MB HPI-PSRAM |
+| SF32LB587VEE56 | BGA256 | 4 MB NOR 플래시 | 32 MB HPI-PSRAM | 32 MB HPI-PSRAM |
 
 </div>
+
+가이드에 따르면 6개 주문 코드 모두 패키지 크기는 6.5 × 8.5 × 0.94 mm, 피치는 0.4 mm, 공급 전압 범위는 1.71–3.63 V이고 HCPU GPIO 94개와 LCPU GPIO 66개를 제공합니다. 동작 온도 범위는 −40~85 °C입니다. 모델 가이드에는 I/O 전압 범위(데이터시트에서는 I/O 뱅크별로 규정)나 핀 호환성이 명시되어 있지 않습니다. BGA256 패키지가 같다는 이유로 서로 대체할 수 있다고 추정하지 말고, PCB 레이아웃 전에 사용하는 I/O 전원과 정확한 부품의 핀 기능 표를 확인하십시오. 구성과 공급 가능 여부는 바뀔 수 있으므로 구매 전에 최신 데이터시트와 승인 업체 목록(AVL)에서 정확한 코드를 확인하십시오.
 
 변형을 선택할 때는 먼저 다음 항목을 확인하십시오.
 

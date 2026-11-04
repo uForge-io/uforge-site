@@ -22,10 +22,10 @@ Não otimize o consumo com base em trechos de código isolados. Meça cenários 
 
 ## Pontos de partida úteis { #useful-starting-points }
 
-- Exemplos de gerenciamento de energia do SDK.
-- Perfilamento do uso da CPU.
-- Inspeção pelo shell do RT-Thread.
-- Medição de corrente na placa.
+- [Exemplos de gerenciamento de energia do SDK](../../learn/low-power/low-power-sdk-examples.md).
+- [Perfilamento do uso da CPU](../../getting-started/tutorials/advanced.md).
+- [Inspeção pelo shell do RT-Thread](../platforms/sifli-sdk/debugging-diagnostics.md).
+- [Medição de corrente na placa](../../learn/low-power/measurement-and-validation.md).
 
 ## Informações a registrar nas medições { #measurement-notes }
 

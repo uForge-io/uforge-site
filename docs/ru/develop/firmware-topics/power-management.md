@@ -22,10 +22,10 @@ tags:
 
 ## С чего начать { #useful-starting-points }
 
-- Примеры энергосбережения из SDK.
-- Профилирование загрузки процессора.
-- Проверка состояния через оболочку RT-Thread.
-- Измерение тока на плате.
+- [Примеры энергосбережения из SDK](../../learn/low-power/low-power-sdk-examples.md).
+- [Профилирование загрузки процессора](../../getting-started/tutorials/advanced.md).
+- [Проверка состояния через оболочку RT-Thread](../platforms/sifli-sdk/debugging-diagnostics.md).
+- [Измерение тока на плате](../../learn/low-power/measurement-and-validation.md).
 
 ## Что фиксировать при измерениях { #measurement-notes }
 

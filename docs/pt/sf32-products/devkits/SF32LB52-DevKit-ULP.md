@@ -61,6 +61,7 @@ Use esses nomes como aliases da mesma família ao procurar documentação de har
 - Slot para cartão MicroSD via SPI
 - Um botão de função e um botão de alimentação/reset
 - LED RGB SK6812MINI-HS (guia SiFli V1.0.0; a página da LCKFB, sem revisão identificada, informa WS2812B-2020)
+- LED indicador de alimentação separado (identificado nas anotações da placa SiFli V1.0.0)
 - Circuito de acionamento do motor vibratório com pads de solda para conexão de um motor externo
 - IMU de 6 eixos LSM6DS3TR-C
 - Sensor magnético de 3 eixos MMC5603NJ
@@ -99,6 +100,7 @@ Para uma placa de avaliação geral com foco em display, use a [SF32LB52-DevKit-
 | Controlador de toque | FT6146-M00 |
 | Microfone | Microfone MEMS integrado |
 | Saída de áudio | Amplificador classe D, conector externo GH-1,25 mm para alto-falante |
+| Amplificador de potência de áudio | NS4150B (identificado nas anotações da placa SiFli V1.0.0) |
 | Armazenamento | Cartão MicroSD via SPI |
 | Sensor de movimento | IMU de 6 eixos LSM6DS3TR-C |
 | Sensor magnético | Magnetômetro de 3 eixos MMC5603NJ |
@@ -110,7 +112,7 @@ Para uma placa de avaliação geral com foco em display, use a [SF32LB52-DevKit-
 
 </div>
 
-**Os códigos dos componentes variam entre fontes ou revisões; confirme antes de projetar.** O guia SiFli V1.0.0 da [placa Huangshan Pi][Original SiFli Huangshan Pi Guide] identifica o carregador SY6103, o OVP SY5320 e o LED RGB SK6812MINI-HS. A [wiki de hardware da LCKFB][LCKFB Hardware Wiki], sem revisão identificada, cita o OVP LP5305AQVF e o LED RGB WS2812B-2020; para o carregador, informa AW32001ECSR na lista de características e AW23001ECSR na seção sobre carga. As fontes não permitem determinar se as diferenças decorrem de outra revisão ou de documentação desatualizada. Use os valores SiFli V1.0.0 apenas para essa referência documentada; antes de usar especificações próprias de um componente, confira as marcações, o esquemático e a BOM da unidade.
+**Os códigos dos componentes variam entre fontes ou revisões; confirme antes de projetar.** O guia SiFli V1.0.0 da [placa Huangshan Pi][Original SiFli Huangshan Pi Guide] identifica o carregador SY6103, o OVP SY5320 e o LED RGB SK6812MINI-HS. A [wiki de hardware da LCKFB][LCKFB Hardware Wiki], sem revisão identificada, cita o OVP LP5305AQVF e o LED RGB WS2812B-2020; para o carregador, informa AW32001ECSR na lista de características e AW23001ECSR na seção sobre carga. As fontes não permitem determinar se as diferenças decorrem de outra revisão ou de documentação desatualizada. Use os valores SiFli V1.0.0 apenas para essa referência documentada; antes de usar especificações próprias de um componente, confira as marcações, o esquemático e a BOM da unidade. As anotações da placa SiFli V1.0.0 também identificam LDOs separados para a alimentação dos sensores, o barramento de 3,3 V e a alimentação do CH340N, além de uma chave de alimentação do VSYS e diodos TVS. Confirme as conexões exatas no esquemático da revisão correspondente.
 
 ## Conteúdo do kit { #package-contents }
 
@@ -135,6 +137,8 @@ A entrada de bateria foi projetada para uma bateria Li-ion de uma célula, conec
 Ao usar a placa sem bateria e alimentar VBAT por uma fonte de bancada, a faixa de entrada VBAT documentada é de 3,7 V a 4,7 V; para testes com tensão de alimentação normal, recomenda-se 3,8 V. Os limiares documentados do SF32LB52-MOD-1-N16R8 são 3,58 V para ligar e 3,48 V para desligar.
 
 A documentação de hardware da LCKFB alerta que a função de pressionamento prolongado pode não funcionar quando a bateria está desconectada. Verifique esse comportamento na revisão específica da placa e na configuração de alimentação prevista.
+
+O guia SiFli V1.0.0 apresenta duas indicações de capacidade: a lista de hardware opcional pede uma bateria acima de 450 mAh, enquanto a seção de seleção recomenda 450–500 mAh. Confirme qual requisito se aplica à revisão exata da placa e à bateria escolhida.
 
 ## Jumpers de medição de corrente { #power-measurement-jumpers }
 
@@ -168,8 +172,17 @@ Hardware opcional:
 
 - Alto-falante externo
 - Cartão TF
-- Bateria Li-ion de 450 mAh ou maior
+- Bateria Li-ion com capacidade superior a 450 mAh
 - Segundo cabo USB para usar a depuração UART e testar o USB nativo simultaneamente
+
+### Configuração da placa e modos de inicialização
+
+Conecte o computador host à porta UART USB Type-C da placa; em seguida, abra o SifliTrace e selecione a porta COM correta.
+
+1. **Gravação do firmware:** habilite BOOT na ferramenta de gravação e, em seguida, ligue ou reinicie a placa.
+2. **Modo de desenvolvimento de software/log serial:** desabilite BOOT e, em seguida, ligue ou reinicie a placa.
+
+O guia da SiFli descreve o reset do módulo acionando a linha RTS# do CH340N integrado primeiro em nível baixo e depois em nível alto. Em placas que usam RTS para reset, abrir a porta serial pode provocar um reset ou desligamento inesperado; se isso ocorrer, desabilite o controle de fluxo por modem nas configurações avançadas da porta serial do computador host.
 
 Use um cabo USB que realmente suporte transferência de dados. Cabos apenas para carga podem alimentar a placa, mas não disponibilizam a interface serial de dados.
 
@@ -242,6 +255,8 @@ O conector de 30 pinos disponibiliza sinais de alimentação, USB, sensores, dis
 ## Interface de display e toque { #display-and-touch-interface }
 
 A placa usa um display AMOLED e disponibiliza um conjunto de sinais QSPI em um FPC de 22 pinos. A tabela SiFli V1.0.0 marca os pinos 5-10 como NC; a tabela abaixo inclui as 22 posições e identifica explicitamente esses pinos sem conexão.
+
+As anotações da placa de display distinguem um conector FPC de 22 pinos para o módulo LCD e um conector placa a placa (B2B) separado, de 24 pinos, para a placa principal. Antes da montagem, confirme as duas interfaces na revisão exata do conjunto.
 
 <div align="center"><em>Mapa dos sinais do FPC QSPI de 22 pinos para display e toque</em></div>
 

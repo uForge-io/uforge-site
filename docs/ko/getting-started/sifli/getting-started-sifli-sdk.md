@@ -24,8 +24,8 @@ Arduino, Zephyr 또는 MicroPython을 사용할 계획이더라도 이 가이드
 **소프트웨어**
 
 - [git](https://git-scm.com/)
-- [`uv`](https://docs.astral.sh/uv/getting-started/installation/)를 기반으로 설치하는 C/C++ 툴체인(SiFli-SDK 설치 프로그램이 컴파일러, 디버거, Python 환경을 준비합니다)
-- [SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) 저장소 자체
+- [`uv`](https://docs.astral.sh/uv/getting-started/installation/). SiFli-SDK 설치 스크립트는 이를 사용해 Python 런타임과 의존성을 관리합니다.
+- [SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) 저장소. 설치 프로그램이 해당 컴파일러와 디버거를 다운로드합니다.
 
 **공식 문서**
 
@@ -111,6 +111,7 @@ Arduino, Zephyr 또는 MicroPython을 사용할 계획이더라도 이 가이드
 | SF32LB52-DevKit-Nano | `sf32lb52-nano_n4`<br>`sf32lb52-nano_n16r16`<br>`sf32lb52-nano_a128r16` |
 | Huangshan-Pi (SF32LB52-LCHSPI-ULP) | `sf32lb52-lchspi-ulp` |
 | SF32LB56-DevKit-LCD | `sf32lb56-lcd_a128r12n1`<br>`sf32lb56-lcd_n16r12n1` |
+| SF32LB57-DevKit-EPD_MB_V1.0 | `sf32lb57-epd_n16r16` |
 | SF32LB58-DevKit-LCD | `sf32lb58-lcd_a128r32n1_dsi`<br>`sf32lb58-lcd_a128r32n1_qspi`<br>`sf32lb58-lcd_n16r32n1_dpi`<br>`sf32lb58-lcd_n16r32n1_dsi`<br>`sf32lb58-lcd_n16r32n1_qspi`<br>`sf32lb58-lcd_n16r64n4` |
 
 </div>
@@ -169,7 +170,7 @@ scons --board=sf32lb52-lcd_n16r8 -j8
 
 ## 다음 단계 { #where-to-go-next }
 
-- **칩 선택:** [SF32 제품군 개요](../../sf32-products/family/SF32_family.md)에서 LB52, LB55, LB56, LB58 시리즈를 비교하십시오.
+- **칩 선택:** [SF32 제품군 개요](../../sf32-products/family/SF32_family.md)에서 LB52, LB55, LB56, LB57, LB58 시리즈를 비교하십시오.
 - **더 많은 예제 살펴보기:** `hello_world` 외에도 SDK에는 BLE, 클래식 Bluetooth, LVGL 그래픽, 오디오, 저전력 모드 예제가 포함되어 있습니다.
 - **다른 프레임워크 선호:** [Arduino](../arduino/getting-started-arduino.md), [Zephyr](../zephyr/getting-started-zephyr-upstream.md) 또는 [MicroPython](../micropython/getting-started-micropython.md)으로 이어가십시오.
 - **막혔을 때:** 일반적인 툴체인, J-Link, 디버깅 문제는 [SiFli FAQ](https://wiki.sifli.com/en/faq/index.html)를 확인하십시오.

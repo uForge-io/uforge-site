@@ -11,7 +11,7 @@ These tutorials pick up right after [Get Started](../index.md). You should alrea
 
 The examples assume an SF32LB52-DevKit-LCD-class board such as `sf32lb52-lcd_n16r8`. If you are using another board, replace the board name in the build command and confirm the pin names, peripheral instances, and storage layout from that board's support files.
 
-Use this series to build reliable habits: verify one board-level behavior, state a clear success condition, and preserve the working baseline before moving to the next peripheral. It is deliberately practical for developers who are new to the SF32 SDK, even when they already know embedded C.
+Use this series to build reliable habits: verify one board-level behavior and preserve the working baseline before moving to the next peripheral. It is deliberately practical for developers who are new to the SF32 SDK, even when they already know embedded C.
 
 ## Before You Start { #before-you-start }
 
@@ -157,7 +157,7 @@ RT-Thread's **FinSH** shell gives you an interactive `msh>` prompt over the same
 
 **Start from:** `example/rt_device/adc/channel`
 
-For this RT-Thread example, enable `BSP_USING_ADC`, `BSP_USING_ADC1`, and `RT_USING_ADC`; otherwise, the SDK will not register `bat1`. On SF32LB52, channel 7 is internally connected to VBAT, so it is not a general-purpose external sensor input. Select an ADC channel and pin mux supported by your exact chip and board. In the documented SF32LB52 setup, channel 0 uses PA28. In the current SiFli SDK example, `rt_adc_read()` returns a voltage-scaled value in 0.1 mV units, not raw ADC counts; confirm the unit and conversion for the specific chip and driver version you use.
+For this RT-Thread example, enable `BSP_USING_ADC`, `BSP_USING_ADC1`, and `RT_USING_ADC`; otherwise, the SDK will not register `bat1`. On SF32LB52, channel 7 is internally connected to VBAT, so it is not a general-purpose external sensor input. Select an ADC channel and pin mux supported by your exact chip and board. In the documented SF32LB52 setup, channel 0 uses PA28. In the current SiFli-SDK example, `rt_adc_read()` applies a default 22-sample average and returns a voltage-scaled value in 0.1 mV units, not raw ADC counts; confirm the averaging, unit, and conversion for the specific chip and driver version you use.
 
 ```c
 rt_adc_device_t adc = (rt_adc_device_t)rt_device_find("bat1");

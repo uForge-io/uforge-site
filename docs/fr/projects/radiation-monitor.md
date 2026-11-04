@@ -8,11 +8,11 @@ tags:
     - Mesure
 ---
 
-# Radiation Monitor, détecteur portable du niveau de signal { #radiation-monitor-portable-signal-strength-detector }
+# Radiation Monitor, afficheur portable du niveau de signal { #radiation-monitor-portable-signal-strength-detector }
 
 ## Qu'est-ce que Radiation Monitor ? { #what-is-radiation-monitor }
 
-[SiFliSparks/RadiationMonitor](https://github.com/SiFliSparks/RadiationMonitor) est un afficheur portable du niveau de signal dans la bande Bluetooth, construit sur SF32LB52 et SiFli-SDK. Son firmware parcourt 79 points de fréquence de 2402 à 2480 MHz et affiche les niveaux de signal reçu sous forme de diagramme en barres LVGL. KEY2 démarre ou arrête le balayage et permet de parcourir l'historique enregistré.
+[SiFliSparks/RadiationMonitor](https://github.com/SiFliSparks/RadiationMonitor) est un afficheur portable du niveau de signal dans la bande Bluetooth, construit sur SF32LB52 et SiFli-SDK. Son firmware parcourt 79 points de fréquence de 2402 à 2480 MHz et affiche les valeurs de l'indicateur de puissance du signal reçu (RSSI) sous forme de diagramme en barres LVGL. KEY2 démarre ou arrête le balayage et permet de parcourir l'historique enregistré.
 
 Le projet est utile pour étudier le balayage de la bande Bluetooth, le traitement de données en temps réel, la visualisation des fréquences et l'interaction à un seul bouton. Ce n'est pas un analyseur de spectre étalonné et il n'identifie pas la source du signal reçu. Les émissions voisines à 2,4 GHz et les conditions de mesure peuvent influencer le diagramme. Sans étalonnage ni comparaison contrôlée, ses valeurs ne conviennent ni aux mesures réglementaires, ni à la certification, ni aux mesures RF de précision.
 
@@ -46,7 +46,7 @@ Avant de commencer, ayez :
 | Domaine | Base source figée | Preuves requises avant adaptation |
 |:-----|:------------------------|:------------------------------------|
 | Balayage en fréquence | 79 points de 2402 à 2480 MHz | Commit du firmware, révision du SDK et de la carte, et journal complet du balayage |
-| Traitement | La description du module dans le README amont dit de moyenner les dix balayages précédents ; sa vue d'ensemble indique 30 balayages. Il ne précise pas si la moyenne porte sur la puissance linéaire ou sur les dBm | Révision de source figée, échelle/profondeur de moyenne, résultats bruts/lissés et comparaison avec une source stable |
+| Traitement | Voir l'avertissement ci-dessous sur les indications contradictoires du README | Révision de source figée, échelle/profondeur de moyenne, résultats bruts/lissés et comparaison avec une source stable |
 | Historique | Historique circulaire de dix enregistrements | Relevé d'arrêt, de pagination, de rebouclage et de redémarrage |
 | Interface | Diagramme en barres LVGL avec axe Y nominal de -110 à -20 dBm | Capture d'écran et vérification de la correspondance entre étiquette et tableau |
 | Limite de mesure | Aucun étalonnage traçable ni aucune incertitude n'est fourni | Relevé d'instrument de référence, de montage et d'erreur, ou mention explicite « tendance relative seulement » |
@@ -94,7 +94,7 @@ Utilisez le commit de projet figé [`670cf20`](https://github.com/SiFliSparks/Ra
 |:--------|:----------------|:--------------|
 | Carte | Partez de l'argument de carte SCons `sf32lb52-lchspi-ulp` de SiFli ; consignez le circuit imprimé réel et vérifiez la configuration du projet | Que le répertoire de sortie du README `build_sf32lb52-lchspi-ulp_hcpu` prouve que tous les chemins d'antenne et d'affichage des cartes SF32LB52x sont équivalents |
 | SDK | Consignez le commit de SiFli-SDK qui se compile avec succès | Ne supposez pas que le SDK le plus récent préserve le comportement de balayage Bluetooth du projet |
-| Lissage | Résolvez l'écart du README entre 30 balayages et les 10 balayages précédents par rapport à la source figée ; vérifiez si la moyenne porte sur la puissance linéaire ou les dBm, et établissez la profondeur | La description du module indique dix balayages, la vue d'ensemble 30, et aucune ne précise l'échelle de la moyenne |
+| Lissage | Voir l'avertissement ci-dessous ; établir l'échelle et la profondeur de la moyenne à partir de la source figée, puis vérifier sur l'appareil | Les descriptions du README ne permettent pas d'établir le comportement du code figé |
 | Timing | Le README indique un intervalle de mise à jour des données de 30 ms ; mesurez la durée complète du balayage des 79 points | Que 30 ms soit une période garantie de mise à jour complète des 79 points |
 | Licences | Confirmez les licences du dépôt et du code intégré avant toute réutilisation ou distribution | Qu'un code source visible publiquement confère automatiquement des droits de distribution du produit |
 
@@ -161,7 +161,7 @@ Les principaux domaines de défaillance sont l'entrée RF/l'antenne, le comporte
 
 | Test | Méthode | Preuve de réussite |
 |:-----|:-------|:--------------|
-| Algorithme et profondeur de lissage | Relever les valeurs brutes et `rssi_res` pour une fréquence ; comparer avec la source figée et résoudre l'écart du README | L'échelle et la profondeur de la moyenne correspondent à la révision exacte de la source et sont confirmées sur l'appareil |
+| Algorithme et profondeur de lissage | Relever les valeurs brutes et `rssi_res` pour une fréquence, puis comparer avec la source figée | L'échelle et la profondeur de la moyenne correspondent à la révision exacte de la source et sont confirmées sur l'appareil |
 | Démarrage/arrêt | Appuyer brièvement sur KEY2 pendant le balayage, puis reprendre | L'arrêt conserve l'historique ; la reprise continue sans blocage |
 | Historique | À l'arrêt, appuyer longuement sur KEY2 plusieurs fois | Jusqu'à dix enregistrements se parcourent en arrière et reviennent correctement au début |
 | Historique vide | Arrêter ou appuyer longuement avant qu'un historique valide ne s'accumule | Aucun accès hors limites ni plantage ; l'interface reste dans un état « aucune donnée » reconnaissable |

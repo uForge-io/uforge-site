@@ -20,6 +20,8 @@ tags:
 
 The SF32LB58x series uses a BGA256 package measuring 8.5 mm x 6.5 mm x 0.94 mm, with a 0.4 mm ball pitch and 0.25 mm nominal ball diameter. Refer to the official datasheet for full package qualification data.
 
+The package-substrate cross-section also labels the ball-pad diameter as 0.27 mm and the ball opening as 0.23 mm. Use the official package drawing for complete land-pattern dimensions, tolerances, and qualification data.
+
 !!! warning "Conflicting package-height values in the source"
     The SiFli guide prose gives a package height of 0.94 mm, while its BGA256 drawing labels dimension A as 0.91 mm nominal, with a 0.84–1.04 mm range. These source values conflict. If package height affects mechanical clearance or enclosure fit, do not choose one value without confirmation from SiFli; use the confirmed package specification.
 
@@ -81,7 +83,7 @@ Refer to the buried-via design figure (layers 2-5) in the official datasheet (di
 
 ### 6.4. Trace Fanout { #64-trace-fanout }
 
-The first two rows of BGA balls are fanned out on the top layer; the remaining balls are fanned out through vias to inner layers.
+The first two rows and columns of BGA balls are fanned out on the top layer; the remaining balls are fanned out through vias to inner layers.
 
 ![Figure 6.4-1: Top-Layer Fanout Reference](../../sf32-products/chips/assets/58x/sf32lb58x-FANOUT-T-PCB.png){ width="100%" loading="lazy" }
 
@@ -96,6 +98,8 @@ The first two rows of BGA balls are fanned out on the top layer; the remaining b
 Place the crystal inside a shield can, more than 1 mm from the PCB board edge, and as far as possible from heat-generating components (such as PA, charging, and PMU circuitry) — ideally more than 5 mm away — to avoid affecting crystal frequency offset. Keep the crystal keep-out zone more than 0.25 mm from other metal or components.
 
 Route the 48 MHz crystal on the top layer with a length of 3-10 mm, trace width 0.075 mm, with full 3D shielding, and route away from VBAT, DC/DC, and high-speed signal lines. Keep the top layer and adjacent layer beneath the 48 MHz crystal area clear of any other routing.
+
+The reference schematic in Figure 6.5-2 labels the 48 MHz crystal as 8.8 pF and marks C0307/C0308 as NF (not fitted); these annotations do not replace checking that the selected crystal meets the design requirements.
 
 Route the 32.768 kHz crystal on the top layer with a length ≤10 mm, trace width 0.075 mm, and 32K_XI/32K_XO parallel-trace spacing ≥0.15 mm, with full 3D shielding. Keep the top layer and adjacent layer beneath the crystal area clear of any other routing.
 
@@ -136,6 +140,8 @@ Place the RF matching circuit as close to the chip as possible, not near the ant
 
 Route RF traces on the top layer where possible to avoid vias that would degrade RF performance; use a trace width preferably greater than 10 mil, apply full 3D shielding, and avoid sharp or right angles. Add extra shielding ground vias along both sides of the RF trace, and control the RF trace to 50 Ω impedance. Keep DC-DC, VBAT, and high-speed digital signals (such as the crystal, high-frequency clocks, and I2C/SPI/SDIO/I2S/UART interface signals) out of the RF routing area. AVSS_RRF, AVSS_TRF, AVSS_TRF2, AVSS_VCO, and AVSS_BB are RF circuit ground pins that must be well grounded — place blind vias directly on their pads connecting to the main ground.
 
+The example pi-matching schematic labels a 2.7 nH series inductor and two 2 pF shunt capacitors. Treat these as reference-circuit values only; determine the final match by testing with the actual antenna and PCB layout.
+
 ![Figure 6.6-1: π-Network and Power Circuit Schematic](../../sf32-products/chips/assets/58x/sf32lb58x-%CF%80-SCH.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 6.6-1: π-Network and Power Circuit Schematic</em></div>
@@ -168,8 +174,10 @@ AU_ADC1P/AU_ADC1N and AU_ADC2P/AU_ADC2N are the two analog input pairs — place
 
 AU_DAC1P/AU_DAC1N and AU_DAC2P/AU_DAC2N are the two analog output pairs — place associated components as close to their pins as possible, route each P/N pair as a differential line as short as possible and under 2 mm, with trace parasitic capacitance below 10 pF and a differential trace width of 0.075 mm. Apply 3D shielding to the differential pair, and keep other strongly interfering signals away from these traces.
 
-!!! warning "Conflicting DAC trace-length limits in the source"
-    The layout guide specifies a DAC trace length under 2 mm, while the PCB checklist workbook specifies a length under 2 cm (20 mm). These limits differ by a factor of ten. Do not select or substitute a limit without confirmation from SiFli.
+The reference schematic uses C0327 (1 µF/6.3 V) on MIC_BIAS, C0326 (4.7 µF/6.3 V) on AVDD33_AUD, and C0325 (1 µF/6.3 V) on AUD_VREF. It maps ADC1P/N and ADC2P/N to BGA balls G19/G18 and F19/F18, and DAC1P/N and DAC2P/N to J20/J21 and H21/H20, respectively; these are reference-circuit ball labels.
+
+!!! warning "Conflicting DAC trace-length limits in SiFli's guide"
+    SiFli's hardware guide gives conflicting DAC trace-length limits: its audio-interface overview specifies under 2 cm (20 mm), while its PCB-layout section specifies under 2 mm. The limits differ by a factor of ten. Do not select or substitute a limit without confirmation from SiFli.
 
 ![Figure 6.7-1: Audio Power Schematic](../../sf32-products/chips/assets/58x/sf32lb58x-AU-PWR-SCH.png){ width="100%" loading="lazy" }
 
@@ -199,6 +207,8 @@ AU_DAC1P/AU_DAC1N and AU_DAC2P/AU_DAC2N are the two analog output pairs — plac
 
 Place the AVDD33_USB decoupling capacitor close to its pin, and place the USB2_REXT calibration resistor close to its pin. USB traces must pass through the ESD-protection component pins before reaching the chip, with the ESD device's ground pin well connected to the main ground. Route USB DP/DN as a differential pair controlled to 90 Ω differential impedance, with 3D shielding applied.
 
+The reference schematic maps USB2_DP/USB2_DN to T6/R6 and AVDD33_USB/USB2_REXT to P5/T5; it shows C0317 = 1 µF/6.3 V and R0307 = 200 Ω ±1%. The component-placement figure marks branching before the ESD device as incorrect.
+
 ![Figure 6.8-1: USB Signal Schematic](../../sf32-products/chips/assets/58x/sf32lb58x-USBS-SCH.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 6.8-1: USB Signal Schematic</em></div>
@@ -219,6 +229,8 @@ Place the AVDD33_USB decoupling capacitor close to its pin, and place the USB2_R
 
 The SF32LB58x provides 2 SDIO interfaces, SDIO1 and SDIO2. Route all signals of each SDIO interface together rather than splitting them — total trace length ≤50 mm, with intra-group length control ≤6 mm. Apply 3D shielding to the SDIO clock signal, and shield the DATA and CMD signals as well.
 
+Figure 6.9-1 is the SDIO1 reference circuit and pin map; its pin assignments do not apply to SDIO2.
+
 ![Figure 6.9-1: SDIO1 Interface Circuit](../../sf32-products/chips/assets/58x/sf32lb58x-SDIOM-SCH.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 6.9-1: SDIO1 Interface Circuit</em></div>
@@ -230,6 +242,8 @@ The SF32LB58x provides 2 SDIO interfaces, SDIO1 and SDIO2. Route all signals of 
 ### 6.10. DSI Interface Routing { #610-dsi-interface-routing }
 
 Place the AVDD18_DSI decoupling capacitor close to its pin, and place the DSI_REXT calibration resistor close to its pin. Route DSI signals as differential pairs controlled to 100 Ω differential impedance, with clock and data length-matched: intra-pair skew ≤0.5 mm and inter-pair skew ≤2 mm. Apply 3D shielding to each differential pair.
+
+The reference schematic shows the DSI_D0 and DSI_D1 differential data lanes plus the differential clock pair. It shows C0323 = 4.7 µF/6.3 V on AVDD18_DSI and R0301 = 10 kΩ on DSI_REXT.
 
 !!! warning "Conflicting DSI pair-to-pair limits in the source"
     The layout guide limits inter-pair skew to ≤2 mm (and intra-pair skew to ≤0.5 mm). The PCB checklist workbook instead requires the DSI data differential pairs to match the clock differential pair within 200 mil (5.08 mm). The pair-to-pair limits conflict. Keep the intra-pair limit distinct, and confirm the applicable pair-to-pair limit with SiFli before finalizing the layout.
@@ -246,6 +260,8 @@ Place the AVDD18_DSI decoupling capacitor close to its pin, and place the DSI_RE
 
 Place the DC-DC power inductor and decoupling capacitors close to the chip pins. Keep BUCK_LX traces as short and wide as possible to minimize loop inductance in the DC-DC circuit. Add extra ground vias on all DC-DC output decoupling-capacitor ground pins connecting to the main ground plane. The BUCK_FB feedback trace must not be too thin — keep it above 0.25 mm. Prohibit copper pour on the top layer beneath the power inductor, keep the adjacent layer as a complete reference ground, and avoid routing other traces through the inductor area.
 
+The reference circuit uses 4.7 µH inductors for BUCK1 and BUCK2 and shows 4.7 µF/10 V plus 0.1 µF capacitors on each output.
+
 ![Figure 6.11-1: DC-DC Key Component Circuit](../../sf32-products/chips/assets/58x/sf32lb58x-DCDC-P-SCH.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 6.11-1: DC-DC Key Component Circuit</em></div>
@@ -257,6 +273,8 @@ Place the DC-DC power inductor and decoupling capacitors close to the chip pins.
 ### 6.12. Power Supply Routing { #612-power-supply-routing }
 
 PVDD1 and PVDD2 are the power inputs to the built-in PMU module — place their decoupling capacitors close to the pins and keep the traces as wide as possible, never below 0.5 mm. PVSS1 and PVSS2 are PMU module ground pins that must be connected to the main ground through vias — avoid leaving them floating, which would affect overall PMU performance.
+
+The reference schematic pairs PVDD1 and PVDD2 with 10 µF/10 V and 0.1 µF decoupling capacitors.
 
 ![Figure 6.12-1: DC-DC Circuit Diagram](../../sf32-products/chips/assets/58x/sf32lb58x-DCDC-R-SCH.png){ width="100%" loading="lazy" }
 
@@ -277,6 +295,8 @@ Place decoupling capacitors for all LDO outputs and IO power inputs close to the
 ### 6.14. Other Interface Routing { #614-other-interface-routing }
 
 GPADC pin signal nets require full 3D shielding and must be kept away from other interference sources, such as battery-level sensing and temperature-sensing circuits.
+
+The pin-function figure shows GPADC_CH0–CH7 multiplexed onto PB32–PB39 alongside other peripheral functions; check the target device's alternate-function selections and conflicts in the datasheet.
 
 ![Figure 6.14-1: GPADC Circuit](../../sf32-products/chips/assets/58x/sf32lb58x-GPADC-R-SCH.png){ width="100%" loading="lazy" }
 
@@ -328,6 +348,8 @@ Place USB charging-line test points before the TVS diode, and place the battery-
 <div align="center"><em>Figure 6.17-2: TVS Routing Reference</em></div>
 
 To keep solder mask off the pads and preserve solder-joint reliability, vias in BGA pads must land at the center of the ball — avoid off-center placement. For improved manufacturability yield, refer to the BGA ball-connection reference figures.
+
+Figures 6.17-4 and 6.17-5 mark diagonal routing that creates etch traps and vias that intrude into BGA ball pads as poor patterns. Follow the better/good patterns shown to preserve clearance and manufacturability.
 
 ![Figure 6.17-3: BGA Via Placement Reference](../../sf32-products/chips/assets/58x/sf32lb58x-BGA-VIA-PCB.png){ width="100%" loading="lazy" }
 

@@ -39,24 +39,24 @@ Una arquitectura inalámbrica simplificada de SF32 se representa así:
 <div align="center"><em>Figura: Arquitectura inalámbrica simplificada de SF32</em></div>
 
 ```text
-Procesador de aplicación
-  - firmware de producto
-  - interfaz de usuario y gráficos
-  - lógica de aplicación de audio
-  - servicios de usuario
+Application Processor
+  - product firmware
+  - UI and graphics
+  - audio application logic
+  - user services
         │
         ▼
-Host Bluetooth / servicios del sistema
+Bluetooth Host / System Services
         │
         ▼
-Procesador Bluetooth / firmware del controlador
-  - temporización de capa de enlace
-  - planificación de radio
-  - eventos de conexión de bajo consumo
-  - procesamiento de protocolo en el controlador
+Bluetooth Processor / Controller Firmware
+  - link-layer timing
+  - radio scheduling
+  - low-power connection events
+  - controller-side protocol work
         │
         ▼
-Radio Bluetooth y etapa frontal de RF
+Bluetooth Radio and RF Front End
 ```
 
 La división exacta entre el firmware del host, el controlador y la aplicación depende del SDK, de la configuración de la pila y de los requisitos del producto. En cualquier caso, el procesador de aplicaciones no debe tratarse como la única CPU que participa en el funcionamiento de Bluetooth: el subsistema Bluetooth tiene su propio contexto de ejecución y está diseñado para ofrecer un comportamiento inalámbrico determinista y eficiente en consumo.
@@ -154,7 +154,7 @@ El consumo real depende del intervalo de conexión, la potencia de transmisión,
 
 El software Bluetooth a menudo se describe en dos capas principales:
 
-<div align="center"><em>Tabla: Límites entre el host, el controlador y la aplicación</em></div>
+<div align="center"><em>Tabla: Responsabilidades del host y del controlador</em></div>
 
 <div align="center" markdown>
 

@@ -271,8 +271,8 @@ Wählen Sie Weckquellen und Anfangszustände der externen Lastschalter so, dass 
 |:---|:---|:---|:---|:---|:---|:---|:---|
 | Active | Läuft | Läuft | Zugänglich | Kann umschalten | Läuft | - | - |
 | Sleep | Gestoppt | Läuft | Zugänglich | Kann umschalten | Läuft | Beliebiger Interrupt | <0,5 µs |
-| DeepSleep | Gestoppt | Gestoppt | Nicht zugänglich, vollständig erhalten | Pegel gehalten | Läuft | RTC, Wake-up-IO, GPIO, LPTIM, Bluetooth | 250 µs |
-| Standby | Reset | Reset | Nicht zugänglich, vollständig erhalten | Pegel gehalten | Läuft | RTC, Wake-up-IO, LPTIM, Bluetooth | 1 ms |
+| DeepSleep | Gestoppt | Gestoppt | Nicht zugänglich; Inhalte bleiben erhalten | Pegel gehalten | Läuft | RTC, Wake-up-IO, GPIO, LPTIM, Bluetooth | 250 µs |
+| Standby | Reset | Reset | Nicht zugänglich; Inhalte bleiben erhalten | Pegel gehalten | Läuft | RTC, Wake-up-IO, LPTIM, Bluetooth | 1 ms |
 | Hibernate | Reset | Reset | Nicht zugänglich, nicht erhalten | Hochohmig | Reset | RTC, Wake-up-IO | >2 ms |
 
 </div>
@@ -327,7 +327,7 @@ Der Chip benötigt zwei externe Taktquellen: einen 48-MHz-Hauptquarz und einen 3
 
     | Quarz | Anforderung | Hinweise |
     |:---|:---|:---|
-    | 48 MHz | 7 pF ≤ CL ≤ 12 pF (8,8 pF empfohlen), ΔF/F0 ≤ ±10 ppm, ESR ≤ 30 Ω (22 Ω empfohlen) | Niedrigeres CL und ESR verringern den Stromverbrauch; Anpasskondensatoren sind bei CL < 12 pF in der Regel nicht erforderlich |
+    | 48 MHz | CL ≤ 12 pF (≤7 pF empfohlen), ΔF/F0 ≤ ±10 ppm, ESR ≤ 30 Ω (22 Ω empfohlen) | Niedrigeres CL und ESR verringern den Stromverbrauch. Sehen Sie einen parallelen Anpasskondensator vor; bei CL < 9 pF muss er in der Regel nicht bestückt werden. |
     | 32,768 kHz | CL ≤ 12,5 pF (7 pF empfohlen), ΔF/F0 ≤ ±20 ppm, ESR ≤ 80 kΩ (38 kΩ empfohlen) | Niedrigeres CL und ESR verringern den Stromverbrauch; Anpasskondensatoren sind bei CL < 12,5 pF in der Regel nicht erforderlich |
 
     </div>
@@ -349,6 +349,9 @@ Empfohlene Quarze:
 
 !!! note "Zusätzliche Hinweise"
     Der TKD SX20Y048000B31T-8.8 hat einen etwas höheren ESR, was den statischen Stromverbrauch geringfügig erhöht. Der Schaltplan-Anwendungshinweis von SiFli empfiehlt außerdem, mindestens die GND-Kupferfläche der zweiten Lage unter dem 48-MHz-Quarz zu entfernen, um die parasitäre Lastkapazität zu verringern. Der PCB-Layout-Leitfaden verbietet jedoch Masseflächen-Aussparungen oder Kupferfreistellungen unter dem Quarzbereich auf benachbarten Lagen. Die Empfehlungen widersprechen sich; siehe [Routing der Taktschnittstelle](SF32LB52x_pcb_layout.md#65-clock-interface-routing). Klären Sie mit SiFli, welche Lagenbehandlung gilt, bevor Sie das Layout freigeben.
+
+!!! important "Die 48-MHz-CL-Empfehlung weicht von den aufgeführten Bauteilen ab"
+    Die Quelle empfiehlt allgemein CL ≤ 7 pF für 48 MHz, führt in ihrer Liste empfohlener Bauteile aber zwei 48-MHz-Quarze mit CL = 8,8 pF auf. Wie diese Werte zum allgemeinen Ziel passen, wird nicht erläutert. Klären Sie vor der Freigabe mit SiFli den geltenden CL-Grenzwert und die Qualifizierung des konkreten Bauteils.
 
 !!! important "Abweichender Quarz-ESR in der Quelle"
     Die Quelle führt den TKD SX20Y048000B31T-8.8 mit ESR ≤ 40 Ω auf, obwohl die allgemeine Anforderung für 48 MHz ESR ≤ 30 Ω lautet. Prüfen Sie deshalb die Freigabe dieses konkreten Bauteils; daraus folgt keine allgemeine Zulässigkeit von 40-Ω-Quarzen. Bestätigen Sie vor der Projektfreigabe die aktuelle AVL-Zulassung der genauen Teilenummer und prüfen Sie Anschwingen, Frequenzkalibrierung und Oszillatorstrom.

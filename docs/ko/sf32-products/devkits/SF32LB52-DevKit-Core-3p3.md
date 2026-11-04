@@ -53,6 +53,7 @@ SF32LB52-DevKit-Core-3p3는 SF32LB52x 칩을 직접 평가하기 위한 소형 �
 - 16핀, 0.5 mm 피치 FPC 디스플레이 커넥터. 디스플레이 인터페이스로 SPI, DSPI, Quad-SPI를 지원하며 DDR 모드 QSPI도 지원합니다.
 - I2C 터치 패널 신호
 - 아날로그 마이크 및 차동 오디오 출력 핀
+- PDM 디지털 마이크 입력 신호는 LCD 데이터 핀과 멀티플렉싱됩니다.
 - 사용자 LED 1개
 - 전원 키와 기능 키
 - 단일 레일 전류 측정용 테스트 포인트. SiFli는 단일 MCU, 최소 시스템, 전체 보드 전력 테스트도 문서화합니다.
@@ -82,6 +83,8 @@ SF32LB52x 신호에 가장 직접적으로 접근해야 한다면 SF32LB52-DevKi
 단일 레일 전류를 측정하려면 보드의 측정 지점에서 측정 대상 레일에 직렬로 전류계를 연결하십시오.
 
 USB Type-C가 연결되면 이 보드는 선택된 헤더 핀을 통해 3.3 V, 1.8 V, 5 V 출력도 제공할 수 있습니다. 외부 회로를 연결하기 전에 필요한 방향을 확인하십시오.
+
+USB Type-C VBUS는 온보드 LDO를 통해 5 V에서 3.3 V로 변환됩니다.
 
 보드에는 전원 스위치가 있습니다. CH340N의 RTS# 신호로 보드 활성화를 제어할 수 있으므로, 플래싱이나 디버그 중 호스트 툴에서 MCU를 리셋할 수 있습니다.
 
@@ -168,6 +171,39 @@ SiFli의 중국어 보드 가이드는 1.85인치 AMOLED 모듈이 16핀 FPC 케
 
 </div>
 
+<div align="center"><em>표: J1 핀별 기능 및 리셋 시 풀 상태</em></div>
+
+<div align="center" markdown>
+
+| 핀 | 핀 이름 | 리셋 기본값 및 멀티플렉스 기능 | 풀 |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | 접지 |  |
+| 2 | PA_44 | **PA44**, UART, I2C, GPTIM, WKUP20 | PD |
+| 3 | PA_43 | **PA43**, UART, I2C, GPTIM, WKUP19 | PD |
+| 4 | PA_42 | **PA42**, UART, I2C, GPTIM, WKUP18 | PU |
+| 5 | PA_41 | **PA41**, UART, I2C, GPTIM, WKUP17 | PU |
+| 6 | PA_40 | **PA40**, UART, I2C, GPTIM, SPI2_CS, WKUP16 | PU |
+| 7 | PA_39 | **PA39**, UART, I2C, GPTIM, SPI2_CLK, WKUP15 | PU |
+| 8 | PA_38 | **PA38**, UART, I2C, GPTIM, SPI2_DI, WKUP14 | PD |
+| 9 | PA_37 | **PA37**, UART, I2C, GPTIM, SPI2_DIO, WKUP13 | PD |
+| 10 | PA_36 | **PA36**, UART, I2C, GPTIM, USB_DM, WKUP12 | PD |
+| 11 | PA_35 | **PA35**, UART, I2C, GPTIM, USB_DP, WKUP11 | PD |
+| 12 | PA_31 | **PA31**, UART, I2C, GPTIM, GPADC3 | PD |
+| 13 | PA_30 | **PA30**, UART, I2C, GPTIM, I2S1_LRCK, GPADC2 | PD |
+| 14 | PA_29 | **PA29**, UART, I2C, GPTIM, SPI1_CS, I2S1_BCK, GPADC1 | PD |
+| 15 | PA_28 | **PA28**, UART, I2C, GPTIM, SPI1_CLK, I2S1_SDI, GPADC0 | PD |
+| 16 | GND | 접지 |  |
+| 17 | 3.3V | 3.3 V 전원; USB Type-C 분리 시 입력, 연결 시 출력 |  |
+| 18 | PA_27 | **PA27**, UART, I2C, GPTIM, WKUP3 | PU |
+| 19 | PA_26 | **PA26**, UART, I2C, GPTIM, WKUP2 | PU |
+| 20 | PA_25 | **PA25**, UART, I2C, GPTIM, SPI1_DI, I2S1_SDO, WKUP1 | PD |
+| 21 | PA_24 | **PA24**, UART, I2C, GPTIM, SPI1_DIO, I2S1_MCLK, WKUP0 | PD |
+| 22 | PA_34 | **PA34**, UART, I2C, GPTIM, GPADC6, WKUP10 | PD |
+| 23 | PA_33 | **PA33**, UART, I2C, GPTIM, GPADC5 | PD |
+| 24 | PA_32 | **PA32**, UART, I2C, GPTIM, GPADC4 | PD |
+
+</div>
+
 ### LCD, 오디오, 디버그 헤더 { #lcd-audio-and-debug-header }
 
 <div align="center"><em>LCD, 오디오, 디버그 헤더 핀 할당</em></div>
@@ -186,9 +222,44 @@ SiFli의 중국어 보드 가이드는 1.85인치 AMOLED 모듈이 16핀 FPC 케
 
 </div>
 
+<div align="center"><em>표: J2 핀별 기능 및 리셋 시 풀 상태</em></div>
+
+<div align="center" markdown>
+
+| 핀 | 핀 이름 | 리셋 기본값 및 멀티플렉스 기능 | 풀 |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | 접지 |  |
+| 2 | PA_00 | **PA00**, UART, I2C, GPTIM, LCD_RST | PD |
+| 3 | PA_01 | **PA01**, UART, I2C, GPTIM, BL_PWM | PD |
+| 4 | PA_02 | **PA02**, UART, I2C, GPTIM, LCD_TE, I2S1_MCLK | PD |
+| 5 | PA_03 | **PA03**, UART, I2C, GPTIM, LCD_CS, I2S1_SDO | PU |
+| 6 | PA_04 | **PA04**, UART, I2C, GPTIM, LCD_CLK, I2S1_SDI | PD |
+| 7 | PA_05 | **PA05**, UART, I2C, GPTIM, LCD_D0, I2S1_BCK | PD |
+| 8 | PA_06 | **PA06**, UART, I2C, GPTIM, LCD_D1, I2S1_LRCK | PD |
+| 9 | PA_07 | **PA07**, UART, I2C, GPTIM, LCD_D2, PDM1_CLK | PD |
+| 10 | PA_08 | **PA08**, UART, I2C, GPTIM, LCD_D3, PDM1_DAT | PD |
+| 11 | PA_09 | **PA09**, UART, I2C, GPTIM, CTP_INT | PD |
+| 12 | MIC_ADC | 아날로그 마이크 입력 |  |
+| 13 | MIC_BIAS | 마이크 바이어스 |  |
+| 14 | DACP | 아날로그 오디오 출력 |  |
+| 15 | DACN | 아날로그 오디오 출력 |  |
+| 16 | GND | 접지 |  |
+| 17 | 1.8V | 1.8 V 전원; USB Type-C 분리 시 입력, 연결 시 출력 |  |
+| 18 | PA_10 | **PA10**, UART, I2C, GPTIM, CTP_RST | PD |
+| 19 | PA_11 | **PA11**, UART, I2C, GPTIM, CTP_SDA | PU |
+| 20 | PA_20 | **PA20**, UART, I2C, GPTIM, CTP_SCL | PD |
+| 21 | PA_21 | **PA21**, UART, I2C, GPTIM | PD |
+| 22 | PA_18 | **UART0_RXD**, debug/download port, PA18, SWDIO, I2C, GPTIM | PU |
+| 23 | PA_19 | **UART0_TXD**, 디버그/다운로드 포트, PA19, SWCLK, I2C, GPTIM | 없음 |
+| 24 | 5V | 5 V 전원; USB Type-C 분리 시 입력, 연결 시 출력 |  |
+
+</div>
+
 ## 외장 플래시 및 SDIO 핀 { #external-flash-and-sdio-pins }
 
 일부 변형에는 외장 16 MB QSPI-NOR 플래시가 포함되어 있습니다. 공유되는 스토리지/SDIO 핀 그룹은 다음과 같습니다.
+
+보드 가이드에는 외장 플래시의 패키지 옵션도 기재되어 있습니다. 실제 실장 부품은 보드 변형과 BOM에 따라 다릅니다. SPI NOR Flash는 WSON8-8x6mm 또는 WSON8-6x5mm, SPI NAND Flash 및 SD NAND Flash는 WSON8-8x6mm 패키지입니다.
 
 <div align="center"><em>외장 플래시 및 SDIO 핀 그룹</em></div>
 
@@ -210,6 +281,8 @@ SiFli의 중국어 보드 가이드는 1.85인치 AMOLED 모듈이 16핀 FPC 케
 ## 오디오 확장 { #audio-expansion }
 
 이 보드는 아날로그 마이크 바이어스/입력과 차동 DAC 출력을 연결합니다. 마이크와 스피커를 구동하는 Class-AB/D 앰프는 외장이므로, 의도한 오디오 경로에 맞게 선택하십시오.
+
+PDM 디지털 마이크 입력도 지원하며, PA07은 `PDM1_CLK`, PA08은 `PDM1_DAT`와 멀티플렉싱됩니다.
 
 ## SDK 빌드 타깃 { #sdk-build-targets }
 

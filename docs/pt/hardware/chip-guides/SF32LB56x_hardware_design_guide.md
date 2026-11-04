@@ -77,7 +77,7 @@ A variante U usa o encapsulamento QFN68L. A variante V usa o WBBGA175 e exige um
 - Requisitos dos cristais de 48 MHz e 32,768 kHz e modelos recomendados.
 - Projeto de RF Bluetooth e requisitos de casamento da antena.
 - Display SPI/QSPI e JDI na variante U; SPI/QSPI, MCU8080, DPI e JDI na variante V.
-- Opções de memória externa e armazenamento de boot, incluindo interfaces SDIO/eMMC/SD NAND.
+- Opções de memória externa e armazenamento de boot que incluem SDIO, eMMC e SD NAND.
 - Botões, motor de vibração, interface de áudio, pinos PBR, sensores, UART/I2C, GPTIM, depuração/gravação e calibração.
 
 ### 3.4. Aplicações típicas { #34-typical-applications }
@@ -166,7 +166,7 @@ Para obter melhores resultados, use o checklist como registro formal de aprovaç
 
 [SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## Continue a leitura do guia de projeto { #continue-the-design-guide }
+### 4.5. Continue a leitura do guia de projeto { #continue-the-design-guide }
 
 O guia completo continua nas páginas abaixo. Cada uma aborda uma etapa do processo de projeto.
 

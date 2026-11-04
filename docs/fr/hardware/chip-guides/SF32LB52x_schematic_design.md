@@ -271,8 +271,8 @@ Choisir les sources de réveil et l'état par défaut des interrupteurs d'alimen
 |:---|:---|:---|:---|:---|:---|:---|:---|
 | Active | En fonctionnement | En fonctionnement | Accessible | Peut basculer | En fonctionnement | - | - |
 | Sleep | Arrêté | En fonctionnement | Accessible | Peut basculer | En fonctionnement | Toute interruption | <0,5 µs |
-| DeepSleep | Arrêté | Arrêtés | Inaccessible, entièrement conservée | Niveau maintenu | En fonctionnement | RTC, IO de réveil, GPIO, LPTIM, Bluetooth | 250 µs |
-| Standby | Réinitialisé | Réinitialisés | Inaccessible, entièrement conservée | Niveau maintenu | En fonctionnement | RTC, IO de réveil, LPTIM, Bluetooth | 1 ms |
+| DeepSleep | Arrêté | Arrêtés | Inaccessible ; contenu conservé | Niveau maintenu | En fonctionnement | RTC, IO de réveil, GPIO, LPTIM, Bluetooth | 250 µs |
+| Standby | Réinitialisé | Réinitialisés | Inaccessible ; contenu conservé | Niveau maintenu | En fonctionnement | RTC, IO de réveil, LPTIM, Bluetooth | 1 ms |
 | Hibernate | Réinitialisé | Réinitialisés | Inaccessible, non conservée | Haute impédance | Réinitialisé | RTC, IO de réveil | >2 ms |
 
 </div>
@@ -327,7 +327,7 @@ La puce nécessite deux sources d'horloge externes : un quartz principal 48 MHz 
 
     | Quartz | Exigence | Remarques |
     |:---|:---|:---|
-    | 48 MHz | 7 pF ≤ CL ≤ 12 pF (8,8 pF recommandé), ΔF/F0 ≤ ±10 ppm, ESR ≤ 30 Ω (22 Ω recommandé) | Un CL et un ESR plus faibles réduisent la consommation ; des condensateurs d'adaptation sont généralement inutiles lorsque CL < 12 pF |
+    | 48 MHz | CL ≤ 12 pF (≤7 pF recommandé), ΔF/F0 ≤ ±10 ppm, ESR ≤ 30 Ω (22 Ω recommandé) | Un CL et un ESR plus faibles réduisent la consommation. Prévoir un condensateur d'adaptation en parallèle ; il n'est généralement pas nécessaire de le monter si CL < 9 pF. |
     | 32,768 kHz | CL ≤ 12,5 pF (7 pF recommandé), ΔF/F0 ≤ ±20 ppm, ESR ≤ 80 kΩ (38 kΩ recommandé) | Un CL et un ESR plus faibles réduisent la consommation ; des condensateurs d'adaptation sont généralement inutiles lorsque CL < 12,5 pF |
 
     </div>
@@ -349,6 +349,9 @@ Quartz recommandés :
 
 !!! note "Remarques supplémentaires"
     Le TKD SX20Y048000B31T-8.8 présente un ESR quelque peu plus élevé, ce qui augmente légèrement la consommation statique. La note d'application de SiFli sur le schéma recommande également de supprimer au moins le cuivre GND du deuxième plan sous le quartz 48 MHz afin de réduire la capacité de charge parasite. Or, le guide de routage PCB interdit les évidements de plan ou découpes de cuivre sous le quartz sur les couches adjacentes. Ces consignes se contredisent ; voir [Routage de l'interface d'horloge](SF32LB52x_pcb_layout.md#65-clock-interface-routing). Confirmez avec SiFli le traitement de couche attendu avant de figer le routage.
+
+!!! important "La recommandation de CL pour 48 MHz diffère des composants listés"
+    La source recommande en général CL ≤ 7 pF pour 48 MHz, mais sa liste de composants recommandés comprend deux quartz 48 MHz à CL = 8,8 pF. Elle n'explique pas le rapport entre ces valeurs et la cible générale. Avant la publication, confirmez auprès de SiFli la limite de CL applicable et la qualification du composant exact.
 
 !!! important "Exception concernant l'ESR du quartz dans la source"
     La source cite le TKD SX20Y048000B31T-8.8 avec ESR ≤ 40 Ω, alors que l'exigence générale à 48 MHz est ESR ≤ 30 Ω. Il faut donc vérifier la qualification de cette référence précise, sans en déduire que tout quartz de 40 Ω convient. Avant la publication, confirmez son approbation dans l'AVL en vigueur et validez le démarrage, l'étalonnage de fréquence et le courant de l'oscillateur.

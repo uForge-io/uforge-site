@@ -9,7 +9,7 @@ Embedded engineers read documentation in the language they think in, so μForge.
 
 ### Built with LLM tools, over many iterations { #built-with-llm-tools }
 
-None of this would have been practical without LLM tools, and we are grateful for them. It was not a single run, though. It took many iterations, for two reasons. The first is the limited usage plan: a long translation job regularly hit its limit before the pages were done and had to wait for a reset or continue elsewhere. The multiple free resets from ChatGPT helped a great deal, and thanks go to them. The second is that translating this way is slow and inefficient: technical pages are long and full of tables, code, pin names, and cross-links, so each pass produced something that needed checking, fixing, and re-running.
+None of this would have been practical without LLM tools, and we are grateful for them. It was not a single run, though. It took many iterations, for two reasons. The first is the limited usage plan: a long translation job regularly hit its limit before the pages were done and had to wait for a reset or continue elsewhere. ChatGPT's repeated free usage-limit resets helped a great deal, and we are grateful for them. The second is that translating this way is slow and inefficient: technical pages are long and full of tables, code, pin names, and cross-links, so each pass produced something that needed checking, fixing, and re-running.
 
 ### Keeping translations consistent { #keeping-translations-consistent }
 

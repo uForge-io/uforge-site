@@ -41,7 +41,7 @@ Elija SF32LB56x si el diseño requiere una o varias de estas capacidades:
 - Interfaz de pantalla DPI/RGB
 - Wi-Fi externo mediante SDIO; almacenamiento externo mediante SD/SDIO o eMMC
 - Más GPIO con la opción WBBGA175
-- Más margen para ejecutar simultáneamente cargas TinyML, audio e interfaz de usuario
+- Más margen para cargas concurrentes de TinyML, audio e interfaz de usuario
 
 ## Recursos de desarrollo { #development-resources }
 
@@ -183,10 +183,12 @@ Siga estos pasos para convertir una selección preliminar de SF32LB56x en un dis
 ## Preguntas frecuentes { #frequently-asked-questions }
 
 **¿Cuáles son las especificaciones principales del SF32LB56x?**
-El SF32LB56x combina una CPU de aplicación (Cortex-M33 @240 MHz) con un núcleo de bajo consumo (Cortex-M33 @48/96 MHz, programable por el usuario), 960 KB de SRAM interna y Bluetooth dual (BT clásico + BLE). Gráficos: ePicasso 2.0. Encapsulado: QFN68 / BGA175 (7 × 7 mm (QFN), 6,5 × 6,1 mm (BGA)). USB 2.0 FS.
+El SF32LB56x utiliza Cortex-M33 @240 MHz para ejecutar las aplicaciones y dispone de un núcleo de bajo consumo (Cortex-M33, hasta 96 MHz, programable por el usuario). Cuenta con 960 KB de SRAM interna y admite Bluetooth dual (BT clásico + BLE). Gráficos: ePicasso 2.0. Encapsulado: QFN68L / WBBGA175 (7 × 7 mm (QFN68L), 6,1 × 6,5 mm (WBBGA175)). USB 2.0 FS.
+
+La frecuencia del LCPU y la compatibilidad con tareas de aplicación dependen del dispositivo exacto y de la configuración del SDK admitida; 96 MHz es un límite, no la frecuencia predeterminada. Los 960 KB de SRAM se reparten entre 800 KB del HCPU (incluidos 128 KB de retención) y 160 KB de retención del LCPU, no forman un bloque contiguo. Compruebe el SKU y el mapa de memoria del SDK.
 
 **¿Qué interfaces de pantalla admite el SF32LB56x?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix)) Es una lista de toda la familia, no una garantía para cada referencia o encapsulado; compruebe la matriz de interfaces enlazada.
 
 **¿Cuál es la resolución de pantalla máxima del SF32LB56x?**
 Hasta 1024 × 600 con color RGB888, mediante la interfaz DPI/RGB del encapsulado BGA. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -198,7 +200,7 @@ Hasta 16 MB de PSRAM y hasta 1 MB de Flash NOR en el encapsulado.
 1,71–3,63 V.
 
 **¿Por dónde empezar un diseño de hardware con el SF32LB56x?**
-Empiece con la [guía de diseño de hardware del SF32LB56x](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) para esquemático, alimentación, reloj/RF y diseño de PCB, y use después las listas de verificación de esquemático y layout antes de liberar la placa.
+Empiece con la [guía de diseño de hardware del SF32LB56x](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) para esquemático, alimentación, reloj/RF y diseño de PCB, y use después las listas de comprobación de esquemático y layout antes de liberar la placa.
 <!-- uf-faq:end -->
 
 ## Productos relacionados { #related-products }

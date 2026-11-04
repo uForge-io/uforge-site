@@ -106,7 +106,7 @@ Le module compte 68 broches au total, décrites dans le tableau ci-dessous.
 | PA33 | 15 | I/O/T | GPIO_A33 | I | GPIO_A33, PA33_I2C_UART, PA33_TIM, #GPADC_CH6 |
 | PA32 | 16 | I/O/T | GPIO_A32 | O | GPIO_A32, PA32_I2C_UART, PA32_TIM, #GPADC_CH5 |
 | VDD33_VOUT2 | 17 | P | VDD33_VOUT2 | P | Sortie d'alimentation 3,3 V |
-| PA24 | 18 | I/O/T | GPIO_A24 | O | GPIO_A24, SPI1_DI, I2S1_MCLK, PA24_I2C_UART, PA24_TIM, #WKUP_PIN0 |
+| PA24 | 18 | I/O/T | GPIO_A24 | O | GPIO_A24, SPI1_DIO, I2S1_MCLK, PA24_I2C_UART, PA24_TIM, #WKUP_PIN0 |
 | PA25 | 19 | I/O/T | GPIO_A25 | O | GPIO_A25, SPI1_DI, I2S1_SDO, PA25_I2C_UART, PA25_TIM, #XTAL32K_EXT, #WKUP_PIN1 |
 | PA26 | 20 | I/O/T | GPIO_A26 | O | GPIO_A26, PA26_I2C_UART, PA26_TIM, #WKUP_PIN2 |
 | PA27 | 21 | I/O/T | GPIO_A27 | O | GPIO_A27, PA27_I2C_UART, PA27_TIM, #WKUP_PIN3 |
@@ -147,6 +147,9 @@ Le module compte 68 broches au total, décrites dans le tableau ci-dessous.
 | PA12 | 68 | I/O/T | GPIO_A12 | O | GPIO_A12, MPI2_CS, SD1_DIO2, PA12_I2C_UART, PA12_TIM |
 
 </div>
+
+!!! important "Les sources SiFli divergent sur la fonction SPI1 de PA24"
+    La fiche DS5203 V0.3 indique `SPI1_DI` pour PA24 ; le tableau des broches du DevKit-LCD d’OpenSiFli indique `SPI1_DIO`, tandis que le guide de conception EPD utilise PA24 comme `SPI1_DO` pour la connexion CMD de la carte TF. Ce tableau suit la désignation `SPI1_DIO` d’OpenSiFli. Ces désignations ne permettent pas d’établir le sens du signal ni la configuration du multiplexeur de broches pour toutes les révisions du SDK ou du module. Avant d’affecter PA24, vérifiez le multiplexeur de broches du SDK cible et la révision exacte du module. Consultez le [tableau des broches du DevKit-LCD](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-DevKit-LCD.md) et le [guide de conception de l’écran EPD](https://wiki.sifli.com/hardware/SF32LB52-MOD-1-EPD-HW-Application.html).
 
 *Légende : P = alimentation ; I = entrée ; O = sortie ; T = configurable en haute impédance ; AO = sortie audio ; AI = entrée audio.*
 

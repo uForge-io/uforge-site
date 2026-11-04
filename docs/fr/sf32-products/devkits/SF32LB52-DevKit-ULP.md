@@ -61,6 +61,7 @@ Employez ces noms comme synonymes d'une même famille de cartes lorsque vous che
 - Emplacement de carte MicroSD via SPI
 - Une touche de fonction et une touche d'alimentation/réinitialisation
 - LED RVB SK6812MINI-HS (guide SiFli Huangshan Pi V1.0.0 ; la page LCKFB sans version indique WS2812B-2020)
+- LED témoin d'alimentation distincte (indiquée dans les annotations de la carte SiFli V1.0.0)
 - Circuit de pilotage de moteur vibrant avec plots externes à souder pour le moteur
 - IMU 6 axes LSM6DS3TR-C
 - Capteur magnétique 3 axes MMC5603NJ
@@ -99,6 +100,7 @@ Pour une carte d'évaluation généraliste centrée sur l'écran, utilisez le [S
 | Contrôleur tactile | FT6146-M00 |
 | Microphone | Microphone MEMS sur la carte |
 | Sortie haut-parleur | Amplificateur de classe D, connecteur haut-parleur externe GH-1.25mm |
+| Amplificateur de puissance audio | NS4150B (indiqué dans les annotations de la carte SiFli V1.0.0) |
 | Stockage | Carte MicroSD via SPI |
 | Capteur de mouvement | IMU 6 axes LSM6DS3TR-C |
 | Capteur magnétique | Magnétomètre 3 axes MMC5603NJ |
@@ -110,7 +112,7 @@ Pour une carte d'évaluation généraliste centrée sur l'écran, utilisez le [S
 
 </div>
 
-**Liste de composants dépendant de la révision — à vérifier avant la conception :** le [guide Huangshan Pi][Guide d'origine Huangshan Pi de SiFli] de SiFli en version V1.0.0 indique le chargeur SY6103, l'OVP SY5320 et la LED RVB SK6812MINI-HS. Le [wiki matériel LCKFB] sans version cite à la place AW32001ECSR dans sa liste de fonctions et AW23001ECSR dans la section charge, ainsi que l'OVP LP5305AQVF et la LED RVB WS2812B-2020. Les sources ne précisent pas si ces différences reflètent une révision matérielle ou une documentation obsolète. N'utilisez les valeurs de SiFli V1.0.0 que pour cette référence documentée ; vérifiez le marquage réel de la carte, le schéma et la nomenclature avant de vous appuyer sur un comportement propre à un composant.
+**Liste de composants dépendant de la révision — à vérifier avant la conception :** le [guide Huangshan Pi][Guide d'origine Huangshan Pi de SiFli] de SiFli en version V1.0.0 indique le chargeur SY6103, l'OVP SY5320 et la LED RVB SK6812MINI-HS. Le [wiki matériel LCKFB] sans version cite à la place AW32001ECSR dans sa liste de fonctions et AW23001ECSR dans la section charge, ainsi que l'OVP LP5305AQVF et la LED RVB WS2812B-2020. Les sources ne précisent pas si ces différences reflètent une révision matérielle ou une documentation obsolète. N'utilisez les valeurs de SiFli V1.0.0 que pour cette référence documentée ; vérifiez le marquage réel de la carte, le schéma et la nomenclature avant de vous appuyer sur un comportement propre à un composant. Les annotations de la carte SiFli V1.0.0 indiquent aussi des LDO distincts pour l'alimentation des capteurs, le rail 3,3 V et le CH340N, ainsi qu'un interrupteur d'alimentation sur VSYS et des diodes TVS. Vérifiez leur raccordement exact dans le schéma de la révision concernée.
 
 ## Contenu du kit { #package-contents }
 
@@ -135,6 +137,8 @@ L'entrée batterie est prévue pour une seule cellule Li-ion avec un connecteur 
 Si la carte fonctionne sans batterie et que VBAT est alimenté par une alimentation de laboratoire, la plage d'entrée documentée de VBAT est de 3,7 V à 4,7 V, avec 3,8 V recommandés pour les essais à la tension nominale. Les seuils du SF32LB52-MOD-1-N16R8 sont documentés à 3,58 V pour la mise sous tension et 3,48 V pour la mise hors tension.
 
 Le guide matériel de LCKFB avertit que la fonction d'appui long sur la touche peut ne pas fonctionner lorsqu'aucune batterie n'est connectée. Vérifiez ce comportement sur la révision exacte de la carte et avec l'alimentation prévue.
+
+Le guide SiFli V1.0.0 donne deux indications de capacité : sa liste de matériel optionnel demande une batterie de plus de 450 mAh, tandis que sa section de sélection recommande 450 à 500 mAh. Vérifiez l'indication applicable à la révision exacte de la carte et à la batterie choisie.
 
 ## Cavaliers de mesure du courant { #power-measurement-jumpers }
 
@@ -168,8 +172,17 @@ Matériel optionnel :
 
 - Haut-parleur externe
 - Carte TF
-- Batterie Li-ion de 450 mAh ou plus
+- Batterie Li-ion de plus de 450 mAh
 - Second câble USB si le débogage UART et le test USB natif sont nécessaires en même temps
+
+### Configuration de la carte et modes de démarrage
+
+Reliez l'hôte au port UART USB Type-C de la carte. Ouvrez ensuite SifliTrace et sélectionnez le bon port COM.
+
+1. **Téléchargement du firmware :** activez BOOT dans l'outil de téléchargement, puis mettez la carte sous tension ou réinitialisez-la.
+2. **Mode développement logiciel/journal série :** désactivez BOOT, puis mettez la carte sous tension ou réinitialisez-la.
+
+Le guide de SiFli décrit la réinitialisation du module en faisant passer la ligne RTS# du CH340N embarqué de l'état bas à l'état haut. Sur les cartes qui utilisent RTS pour la réinitialisation, l'ouverture du port série peut provoquer une réinitialisation ou une extinction inattendue ; dans ce cas, désactivez le contrôle de flux modem dans les paramètres avancés du port série de l'hôte.
 
 Utilisez un véritable câble capable de transmettre des données. Les câbles de charge seule peuvent alimenter la carte mais n'offrent pas l'interface de données série.
 
@@ -242,6 +255,8 @@ Le connecteur à 30 broches expose l'alimentation, l'USB, les signaux de capteur
 ## Interface d'écran et tactile { #display-and-touch-interface }
 
 La carte utilise un chemin d'affichage AMOLED et expose un jeu de signaux QSPI sur FPC à 22 broches. Le tableau de SiFli V1.0.0 marque les broches 5 à 10 comme NC ; le tableau ci-dessous comprend les 22 positions et nomme explicitement ces broches.
+
+Les annotations de la carte écran distinguent un connecteur FPC à 22 broches vers le module LCD d'un connecteur carte à carte (B2B) distinct à 24 broches vers la carte principale. Vérifiez ces deux interfaces sur la révision exacte de l'ensemble avant le montage.
 
 <div align="center"><em>Affectation des signaux du FPC QSPI à 22 broches pour l'écran et le tactile</em></div>
 

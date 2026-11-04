@@ -66,35 +66,40 @@ As conexões de armazenamento incluem várias interfaces QSPI, uma interface ind
 | Encapsulamento | Dimensões | Passo dos pinos | Diâmetro das esferas |
 | :--- | :--- | :--- | :--- |
 | QFN68L | 7 × 7 × 0,75 mm | 0,35 mm | - |
+| BGA125 | 7 × 7 × 0,94 mm | 0,5 mm | 0,25 mm |
 | BGA145 | 7 × 7 × 0,94 mm | 0,5 mm | 0,25 mm |
 | BGA169 | 7 × 7 × 0,94 mm | 0,5 mm | 0,25 mm |
 
 </div>
 
-O SF32LB55x está disponível nos encapsulamentos QFN68L, BGA145 e BGA169. Escolha o encapsulamento desde o início, pois as interfaces de memória, o fanout, os requisitos de fabricação da PCB e a quantidade de GPIO disponível variam conforme o encapsulamento.
+O SF32LB55x está disponível nos encapsulamentos QFN68L, BGA125, BGA145 e BGA169. Escolha o encapsulamento desde o início, pois as interfaces de memória, o fanout, os requisitos de fabricação da PCB e a quantidade de GPIO disponível variam conforme o encapsulamento.
 
 ![Figura 3.2-1: Distribuição dos pinos do QFN68L](../../sf32-products/chips/assets/55x/SF32LB55x-QFN68-Leadmap.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 3.2-1: Distribuição dos pinos do QFN68L</em></div>
 
-![Figura 3.2-2: Distribuição dos pinos do BGA145](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-Ballmap.svg){ width="100%" loading="lazy" }
+![Figura 3.2-2: Mapa de esferas do BGA125](../../sf32-products/chips/assets/55x/SF32LB55x-BGA125-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 3.2-2: Distribuição dos pinos do BGA145</em></div>
+<div align="center"><em>Figura 3.2-2: Mapa de esferas do BGA125</em></div>
+
+![Figura 3.2-3: Distribuição dos pinos do BGA145](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-Ballmap.svg){ width="100%" loading="lazy" }
+
+<div align="center"><em>Figura 3.2-3: Distribuição dos pinos do BGA145</em></div>
 
 !!! warning "Mapas históricos de esferas BGA169"
     A SiFli identifica o SF32LB557V8N6 como um componente em fim de vida (EOL). Seu mapa é mantido abaixo para revisar projetos existentes, não como recomendação para novos projetos. O SF32LB557VD3A6 usa outro mapa BGA169: D11, E9, K12, L11, L13 e M13 são NC. Confira o mapa do código exato da peça; dimensões idênticas não significam compatibilidade de pinos.
 
-![Figura 3.2-3: Distribuição dos pinos do BGA169 SF32LB557V8N6](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg){ width="100%" loading="lazy" }
+![Figura 3.2-4: Distribuição dos pinos do BGA169 SF32LB557V8N6](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 3.2-3: Distribuição dos pinos do BGA169 SF32LB557V8N6</em></div>
+<div align="center"><em>Figura 3.2-4: Distribuição dos pinos do BGA169 SF32LB557V8N6</em></div>
 
-![Figura 3.2-4: Distribuição dos pinos do BGA169 SF32LB557VD3A6](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-2-Ballmap.svg){ width="100%" loading="lazy" }
+![Figura 3.2-5: Distribuição dos pinos do BGA169 SF32LB557VD3A6](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-2-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 3.2-4: Distribuição dos pinos do BGA169 SF32LB557VD3A6</em></div>
+<div align="center"><em>Figura 3.2-5: Distribuição dos pinos do BGA169 SF32LB557VD3A6</em></div>
 
 ### 3.3. Principais recursos de hardware { #33-major-hardware-features }
 
-- Opções de encapsulamento QFN68L, BGA145 e BGA169.
+- Opções de encapsulamento QFN68L, BGA125, BGA145 e BGA169.
 - Requisitos de projeto para os cristais de 48 MHz e 32,768 kHz.
 - Transceptor Bluetooth 5.2 de baixo consumo, requisitos de casamento de RF e layout da antena.
 - OPI PSRAM; QSPI para NOR/NAND Flash e PSRAM; SDIO para eMMC ou Micro SD. A memória integrada varia conforme o código exato da peça.

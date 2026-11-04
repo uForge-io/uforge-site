@@ -20,11 +20,11 @@ Le tableau ci-dessous associe les tâches courantes aux outils correspondants. I
 
 | Outil | Usage |
 |:-----|:----|
-| [`sftool`](https://github.com/OpenSiFli/sftool) | Outil multiplateforme pour télécharger et flasher le firmware SF32, utilisé dans les flux OpenSiFli avec Zephyr et Arduino. |
+| [`sftool`](https://github.com/OpenSiFli/sftool) | CLI série multiplateforme pour les SoC SiFli pris en charge ; elle permet d'écrire, lire et effacer la mémoire flash, de réinitialiser la puce et d'autres opérations. |
 | [Scripts de téléchargement UART du SDK](../platforms/sifli-sdk/build-flash-monitor.md) | Scripts de flashage de première exécution générés par les compilations SiFli-SDK. |
 | [Actions CodeKit](codekit.md) | Actions VS Code de configuration, compilation, flashage et surveillance. |
 | [`AssertDump`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/AssertDump/AssertDump_UM.html) | Capture des données mémoire lors d'un plantage pour analyse ultérieure. |
-| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | Capture de traces et de journaux, et débogage via UART au moyen du Debug IP de la puce. |
+| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace` capture les journaux de la carte cible ; `UsartServer` permet le débogage UART via le Debug IP de la puce. |
 | [`Impeller`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/Impeller/Impeller_UM.html) | Programmation du firmware, calibration et tests PCBA en production. |
 | [eZip / outillage d'images](../../learn/graphics/ezip.md) | Conversion de ressources pour les pipelines graphiques compressés. |
 | [Outils RF, audio et de production](https://docs.sifli.com/projects/solution/6.tools/index.html) | Flux de calibration, de test et de réglage en production. |
@@ -33,12 +33,13 @@ Le tableau ci-dessous associe les tâches courantes aux outils correspondants. I
 
 ## Outils de flashage { #flashing-tools }
 
-Utilisez les scripts UART générés par le SDK pour la première mise en service, car ils sont produits par la compilation que vous venez d'effectuer. Ajoutez `sftool` lorsque vous avez besoin de :
+Utilisez les scripts UART générés par le SDK pour la première mise en service, car ils sont produits par la compilation que vous venez d'effectuer. Utilisez `sftool` lorsqu'une CLI série multiplateforme convient à la tâche :
 
-- Un outil de flashage en ligne de commande cohérent entre les flux de travail.
-- L'intégration `west flash` de Zephyr.
-- Le comportement de téléversement d'ArduinoCore-zephyr.
-- L'automatisation en CI, en usine ou pour les tests de régression.
+- Écrire, lire ou effacer directement la mémoire flash en dehors du script de téléchargement généré par le SDK.
+- Répéter le même flux en ligne de commande sur les SoC SiFli et les plateformes hôtes pris en charge.
+- Automatiser les opérations via un fichier de commandes JSON ou un wrapper pour la CI, l'usine ou les tests de régression.
+
+L'intégration à un flux de compilation ou de téléversement donné, comme `west flash` ou un téléverseur Arduino, dépend de la configuration du projet concerné.
 
 Consignez les deux méthodes dans la documentation du projet jusqu'à ce que l'équipe en adopte une comme référence.
 

@@ -18,7 +18,7 @@ tags:
 
 ## SiFli-SDK 기준 구성 확립 { #establish-a-sifli-sdk-baseline }
 
-[SiFli-SDK](platforms/sifli-sdk/overview.md)는 RT-Thread 기반의 SiFli 공식 소프트웨어 패키지이자 SF32 펌웨어의 레퍼런스 개발 경로입니다. 다른 생태계를 평가해야 할 분명한 이유가 없다면 여기서 시작하십시오. 보드 지원, Bluetooth, 그래픽, 오디오, 스토리지, 전원 관리, 양산 작업을 폭넓게 다루는 문서화된 기준 구성입니다.
+[SiFli-SDK](platforms/sifli-sdk/overview.md)는 RT-Thread 기반의 SiFli 공식 소프트웨어 패키지이자 SF32 펌웨어의 레퍼런스 개발 경로입니다. 다른 생태계를 평가해야 할 분명한 이유가 없다면 여기서 시작하십시오. SiFli-SDK 문서에는 보드 지원, Bluetooth, 그래픽, 오디오, 스토리지, 전원 관리, 양산 작업에 관한 안내가 있습니다.
 
 제품 기능을 만들기 전에, 재현 가능한 기준 구성 하나를 확립하고 기록하십시오.
 

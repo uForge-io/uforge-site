@@ -116,7 +116,7 @@ Wählen Sie das Gerät anhand der Operatoren, des Speicherbudgets und der gesamt
 | Gerätefamilie | KI-Positionierung |
 |:--------------|:---------------|
 | **SF32LB52x** | Ein Kandidat für kostenoptimierte Bluetooth-, Audio- und einfache HMI-Produkte; verwenden Sie eine schlanke CPU-Implementierung als Referenz, sofern keine konkrete Beschleunigung verifiziert ist. |
-| **SF32LB55x** | Geeignet für tragbare BLE-Geräte und sensorreiche Produkte; passend für stromsparende Sensorik und kompakte Algorithmen. |
+| **SF32LB55x** | Der SDK-Leitfaden nennt einen HCPU-NNACC; prüfen Sie die Operatorunterstützung für die gewählte Konfiguration. Geeignet für tragbare BLE-Geräte und sensorreiche Produkte, einschließlich stromsparender Sensorik und kompakter Algorithmen. |
 | **SF32LB56x** | Ein Kandidat für umfangreichere UI, vernetzte HMI sowie Sensor- oder Multimedia-Verarbeitung; prüfen Sie die gewählte Konfiguration und die Operatorunterstützung des HCPU-NNACC. |
 | **SF32LB57x** | Der zitierte Leitfaden belegt die NNACC-Verfügbarkeit für diese Familie nicht; prüfen Sie vor der Auswahl für KI das genaue Bauteil sowie Operator-, Laufzeit- und Speicherunterstützung von SDK und Platine. |
 | **SF32LB58x** | Ein Kandidat für kombinierte KI-, Grafik- und Audiolasten, wenn Speicher und HCPU/LCPU-Ressourcen des gewählten Bauteils die Produktanforderungen erfüllen; prüfen Sie Operatoren, Integrationsaufwand und gemessenen Energiebedarf. |
@@ -253,16 +253,13 @@ Ein erfolgreiches eingebettetes KI-Produkt kombiniert in der Regel ein kompaktes
 
 ## Typische Anwendungsfälle { #typical-use-cases }
 
-SF32-KI-Beschleunigung kommt für kompakte lokale Inferenz in vernetzten, batteriebetriebenen Produkten infrage, wenn unterstützte Operatoren und das gemessene Systembudget passen:
+SF32-KI-Beschleunigung kommt für kompakte lokale Inferenz in vernetzten, batteriebetriebenen Produkten infrage, wenn unterstützte Operatoren und das gemessene Systembudget passen. Produktszenarien verbinden die oben genannten Modellaufgaben mit konkreten Anwendungsanforderungen:
 
-- Gestenerkennung bei Uhren, Armbändern und Handgeräten.
-- Aktivitätsklassifikation für Fitness- und Gesundheitsprodukte.
-- Sprachereignis- oder Schlüsselworterkennung für Audiozubehör.
-- Sensorfusionsalgorithmen für tragbare Geräte.
-- Biometrische Signalanalyse, sofern von Sensoren und Software unterstützt.
-- Lokale Anomalieerkennung für intelligente Geräte.
-- Einfache Bildklassifikation oder kameraausgelöste Ereignisse bei Geräten mit Kameraeingang.
-- Eine HMI, die ihr Verhalten an den Nutzungskontext anpasst.
+- Wearables können Gestenerkennung, Aktivitätsklassifikation und Sensorfusion kombinieren; biometrische Signalanalyse hängt von der Sensor- und Softwareunterstützung ab.
+- Audiozubehör kann Sprachereignisse oder Schlüsselwörter erkennen.
+- Intelligente Geräte können Anomalien lokal erkennen und Ereignisse filtern.
+- Produkte mit Kamera können einfache Bilder klassifizieren oder auf kameragestützte Ereignisse reagieren, sofern der Erfassungspfad dies unterstützt.
+- Eine HMI kann ihr Verhalten an den Nutzungskontext anpassen.
 
 ## Wichtigste Erkenntnisse { #key-takeaways }
 

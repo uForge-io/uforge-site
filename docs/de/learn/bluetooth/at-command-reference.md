@@ -21,7 +21,7 @@ tags:
 
 Diese Referenz dokumentiert die externe AT-Befehlsschnittstelle des SF32LB57-Dual-Mode-Bluetooth-Moduls (SIFLI_AT) in Version V1.2.1. Befehle und Antwortzeichenketten sind in Monospace-Schrift dargestellt; `\r` steht für einen Wagenrücklauf (0x0D), `\n` für einen Zeilenvorschub (0x0A). AT-Befehle werden als ASCII-Text übertragen; binäre Felder in PDU-Rahmen verwenden Little-Endian-Byte-Reihenfolge.
 
-Dies ist die vollständige AT-Schnittstellenspezifikation, auf die von der Seite Bluetooth-AT-Befehlsmodul verwiesen wird.
+Die Seite Bluetooth-AT-Befehlsmodul verlinkt auf diese Referenz für V1.2.1. Daraus lässt sich keine Befehlsunterstützung für andere Firmwareversionen ableiten. Prüfen Sie vor der Verwendung die Firmwareversion des Moduls.
 
 <div align="center"><em>Tabelle: Versionshistorie</em></div>
 
@@ -66,6 +66,9 @@ Das SF32LB57-Dual-Mode-Bluetooth-Modul stellt dem Host eine UART-basierte AT-Bef
 ### Syntaxdefinition { #syntax-definition }
 
 AT-Befehle werden als ASCII-Text übertragen und mit einem Wagenrücklaufzeichen `\r` (0x0D) abgeschlossen. Das Befehlspräfix ist `AT+` (AT-Format-Befehle) oder `AT>` (PDU-Format-Befehle). Beim SF32LB57 ist der AT-Port USART1; er verwendet 8N1 ohne Hardware-Flusskontrolle und standardmäßig 460800 Baud. Ein einzelner AT-Frame ist auf 512 Byte begrenzt.
+
+!!! warning "Längenbegrenzung für PDU-Rahmen bestätigen"
+    Die Quelle begrenzt AT-Rahmen auf 512 Byte, erlaubt jedoch zugleich einen PDU-Body von bis zu 508 Byte. Zusammen mit den dargestellten 8 Byte für den Befehlsrahmen ergäben sich 516 Byte auf der UART. Die Quelle erklärt nicht, wie diese zusätzlichen Bytes bei der Begrenzung des Empfangspuffers berücksichtigt werden. Bestätigen Sie die vom Ziel-Firmwarestand akzeptierte maximale PDU-Rahmenlänge, bevor Sie Hostpuffer dimensionieren oder die maximale Body-Länge verwenden. Ersetzen Sie keinen der beiden Quellwerte durch eine vermutete Grenze.
 
 ### AT-Format-Befehle { #at-format-commands }
 
@@ -138,7 +141,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Element | Inhalt |
 |:-----|:--------|
 | Befehl | `AT+GFWVER?\r` |
-| Antwort | Erfolg: `\r\n+GFWVER:SIFLI_AT_<version>_<build date>\r\n\r\nOK\r\n`; bei jedem Schreibversuch: `\r\nERROR\r\n` |
+| Antwort | Erfolg: `\r\n+GFWVER:SIFLI_AT_<version>_<build date>\r\n\r\nOK\r\n`; bei Verwendung der Schreibform: `\r\nERROR\r\n`. |
 | Parameter | Keine |
 | Hinweise | Nur Abfrage. Der Rückgabewert beginnt immer mit `SIFLI_AT_`, gefolgt von Versionsnummer und Build-Datum. |
 
@@ -673,7 +676,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Befehl | `AT+BAUD?\r` |
 | Antwort | `\r\n+BAUD:<baud_rate>\r\n\r\nOK\r\n` |
 | Parameter | `baud_rate`: die aktuell konfigurierte Baudrate, in bps. |
-| Hinweise | Nach dem Setzen der Baudrate wird das Gerät zurückgesetzt; die neue Baudrate wird nach dem Reset wirksam. |
+| Hinweise | Keine |
 
 </div>
 
@@ -688,7 +691,7 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Befehl | `AT+BAUD=<baud_rate>\r` |
 | Antwort | Erfolg: `\r\nOK\r\n`; Fehlschlag: `\r\nERROR\r\n` |
 | Parameter | `baud_rate`: serielle Baudrate, in bps. Unterstützte Werte: 38400, 57600, 115200, 230400, 460800, 921600, 1000000. Standard 460800. |
-| Hinweise | Das Setzen aktualisiert die Konfiguration. |
+| Hinweise | Das Setzen der Baudrate aktualisiert die Konfiguration und setzt das Gerät zurück; die neue Baudrate wird nach dem Reset wirksam. |
 
 </div>
 

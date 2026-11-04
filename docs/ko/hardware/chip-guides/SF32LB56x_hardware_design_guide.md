@@ -77,7 +77,7 @@ U 변형은 QFN68L 패키지를 사용합니다. V 변형은 WBBGA175 패키지�
 - 48 MHz 및 32.768 kHz 크리스털 요구 사항과 권장 크리스털 모델.
 - Bluetooth RF 설계와 안테나 매칭 요구 사항.
 - U는 SPI/QSPI 및 JDI 디스플레이, V는 SPI/QSPI, MCU8080, DPI, JDI 디스플레이.
-- SDIO/eMMC/SD NAND 방식 인터페이스를 포함한 외부 메모리 및 부트 스토리지 옵션.
+- SDIO, eMMC, SD NAND를 포함한 외부 메모리 및 부트 스토리지 옵션.
 - 버튼, 진동 모터, 오디오 인터페이스, PBR 핀, 센서, UART/I2C, GPTIM, 디버그/플래싱, 캘리브레이션.
 
 ### 3.4. 대표 애플리케이션 { #34-typical-applications }
@@ -166,7 +166,7 @@ EVT 전에 U/V 원본 문서 버전, 데이터시트/사용자 매뉴얼 버전,
 
 [SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## 설계 가이드 이어서 보기 { #continue-the-design-guide }
+### 4.5. 설계 가이드 이어서 보기 { #continue-the-design-guide }
 
 전체 가이드는 아래 페이지로 이어집니다. 각 페이지는 설계 과정의 한 단계를 다루며, 여기에서 바로 이동할 수 있습니다.
 

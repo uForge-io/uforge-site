@@ -40,7 +40,7 @@ BLE é uma boa opção padrão para a maioria dos dispositivos vestíveis e sens
 
 ### Bluetooth clássico e modo dual { #classic-bluetooth-and-dual-mode }
 
-Inclua Bluetooth clássico quando o produto precisar de streaming de áudio (A2DP/AVRCP), chamadas em viva-voz (HFP), enlaces de dados seriais (SPP) ou compatibilidade com perfis clássicos existentes. Projetos de modo dual exigem mais do escalonamento do rádio e da coexistência do que projetos apenas com BLE; é exatamente essa a carga de trabalho que o processador Bluetooth dedicado foi projetado para isolar do restante do sistema.
+Inclua Bluetooth clássico quando o produto precisar de streaming de áudio (A2DP/AVRCP), chamadas em viva-voz (HFP), enlaces de dados seriais (SPP) ou compatibilidade com perfis clássicos existentes. Projetos de modo dual exigem mais do escalonamento do rádio e da coexistência do que projetos apenas com BLE. O processador Bluetooth dedicado executa as tarefas de enlace com requisitos temporais rigorosos separadamente do processador de aplicação, mas ainda é necessário validar a coexistência sob a carga combinada do produto.
 
 Nem todos os dispositivos SF32 oferecem Bluetooth de modo dual. Antes de definir o número de peça, consulte a tabela de dispositivos em [Processador Bluetooth](processor.md#device-family-differences).
 

@@ -21,7 +21,7 @@ hide:
 - [ ] Verify that the selected BUCK inductor has a nominal inductance of 4.7 µH, DCR ≤ 0.4 Ω, and Isat ≥ 500 mA
 - [ ] Confirm that the 48 MHz and 32.768 kHz crystals meet the recommended specifications and that their routing and keep-out zones meet the design requirements
 - [ ] Verify a 50 Ω controlled-impedance RF trace and place the matching network close to the chip
-- [ ] Confirm that the selected external storage interface is compatible with the intended boot design. Separately verify that the Mode pin is strapped high for download mode or low for user-application startup, as intended
+- [ ] Confirm that the selected external storage interface is compatible with the intended boot design. Separately verify that an external 10 kΩ pull-up to the supply or pull-down to ground holds the Mode pin at the intended stable level: high for download mode or low for user-application startup. Do not leave the pin floating or allow interference to toggle its level
 - [ ] Confirm that display-interface routing (MIPI-DSI/SPI-QSPI/MCU8080/DPI/JDI) meets each interface's impedance and length-matching rules; for DSI, verify 100 Ω differential impedance, intra-pair length mismatch ≤0.5 mm, and inter-pair length mismatch ≤2 mm
 - [ ] Confirm that USB routing meets the 90 Ω differential-impedance requirement. Route SDIO signals together, keep total routing length ≤50 mm, and limit within-group length mismatch to ≤6 mm
 - [ ] Preserve SWD access and the selected debug-output interface from the six available UARTs, along with its signal pins and production test points
@@ -32,7 +32,7 @@ hide:
 
 ## 8. Related Documents and References { #8-related-documents-and-references }
 
-Use the latest official documents when checking electrical limits, package data, pin multiplexing, software configuration, and component qualification.
+Use the linked official documents to check electrical limits, package data, pin multiplexing, software configuration, and component qualification. Before design release, verify that each cited document is still the current revision.
 
 <div class="grid cards" markdown>
 
@@ -83,7 +83,7 @@ A typical SF32LB58x design for a wearable device or smart terminal includes the 
 | Version | Date | Note |
 |:---|:---|:---|
 | 1.0 | 2026-07 | Updated SF32LB58x hardware design guide with schematic, PCB, validation, and production-review guidance |
-| 0.0.1 | 1/2025 | Official Draft release of `SF32LB58x-HW-Application` |
+| 0.0.1 | 1/2025 | Draft version of `SF32LB58x-HW-Application` |
 
 </div>
 

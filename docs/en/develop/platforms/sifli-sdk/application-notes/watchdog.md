@@ -14,7 +14,7 @@ The SiFli SDK documents watchdog behavior at two layers: the hardware watchdogs 
 <em>Table: Watchdog behavior documented by family</em>
 
 | Family | HAL watchdog behavior | Clock behavior stated in the HAL guide |
-|---|---|
+|---|---|---|
 | SF32LB52x | The HAL guide describes dedicated HCPU and LCPU watchdogs that can interrupt or reset their own subsystem, plus a system-level IWDT that resets the entire chip. | The counter description uses a 32K clock; the guide does not state a separate 52x clock-selection option. |
 | SF32LB55x | HCPU WDT1 and LCPU WDT2 can interrupt; their hardware reset is limited to the corresponding subsystem. The system IWDT cannot interrupt but can reset the entire chip. | Selectable RC10K or 32K LXT. |
 | SF32LB56x / SF32LB58x | The HAL guide says WDT1/WDT2 have the added ability to reset the entire chip. | RC10K; the clock is no longer sourced from the 32K low-power clock. |
@@ -22,7 +22,7 @@ The SiFli SDK documents watchdog behavior at two layers: the hardware watchdogs 
 </div>
 
 !!! warning "Scope of the RT-Thread usage guide"
-    The [Watchdog Usage Guide](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/watchdog.html) is published under the `sf32lb52x` path, but its text explicitly names SF32LB55X. Treat its 30-second default, IDLE-thread feeding, sleep behavior, and application reset sequence below as guidance for the documented 55x setup, not as a family-wide guarantee. Verify these details against the target family's source and generated configuration.
+    The [Watchdog Usage Guide](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/watchdog.html) is published under the `sf32lb52x` path, but its text explicitly names SF32LB55X. Treat its 30-second default, IDLE-thread feeding, sleep behavior, and reset behavior described below as guidance for the documented 55x setup, not as a family-wide guarantee. Verify these details against the target family's source and generated configuration.
 
 ## Enable and configure the watchdog { #enable-and-configure-the-watchdog }
 
@@ -62,6 +62,8 @@ Do not add an unconditional feed loop that masks a scheduler stall or a deadlock
 - HCPU uses the system watchdog. A timeout restarts the entire chip.
 - LCPU uses the LCPU-subsystem watchdog. A timeout first generates an interrupt; the interrupt handler then triggers a software restart of the entire chip.
 
+The SiFli Wiki watchdog note further describes the Standby flow: the watchdog hardware block is not powered down; RT-Thread stops the WDT, and the resume path initializes it again, restarting the count. Here, "disabled" describes a software stop, not power removal from the watchdog block.
+
 ## Validation sequence { #validation-sequence }
 
 1. Record the chip family, SDK revision, timeout, feeding owner, and sleep mode.
@@ -76,5 +78,6 @@ Do not add an unconditional feed loop that masks a scheduler stall or a deadlock
 - [Watchdog Usage Guide (Chinese; same SF32LB52x path, body names SF32LB55X)](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/watchdog.html)
 - [SF32LB52x HAL WDT guide (English)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/hal/wdt.html)
 - [SF32LB55x HAL WDT guide (Chinese; includes 56x/58x comparison notes)](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/hal/wdt.html)
+- [OpenSiFli SiFli-Wiki: Watchdog-related notes (Chinese)](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/faq/mcu/wdt.md)
 
 Separate family-specific application-note pages at `sf32lb55x/app_note/watchdog.html`, `sf32lb56x/app_note/watchdog.html`, and `sf32lb58x/app_note/watchdog.html` remain unverified. Search and direct-open results were inconclusive; they do not establish that these routes return 404.

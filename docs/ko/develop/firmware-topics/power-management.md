@@ -14,18 +14,18 @@ tags:
 
 ## 실무 워크플로 { #practical-workflow }
 
-1. 수정하지 않은 SDK 예제를 측정합니다.
-2. 서브시스템을 한 번에 하나씩 활성화합니다.
-3. 초기 측정 중에는 디스플레이, Bluetooth, 오디오, 스토리지, 센서 활동을 서로 분리합니다.
-4. 폴링 대신 인터럽트 기반 웨이크업을 사용합니다.
-5. 모드별, 제품 시나리오별로 소비 전류를 기록합니다.
+1. 수정하지 않은 SDK 예제를 측정하십시오.
+2. 서브시스템을 한 번에 하나씩 활성화하십시오.
+3. 초기 측정 중에는 디스플레이, Bluetooth, 오디오, 스토리지, 센서 활동을 서로 분리하여 측정하십시오.
+4. 폴링 대신 인터럽트 기반 웨이크업을 사용하십시오.
+5. 모드별, 제품 시나리오별로 소비 전류를 기록하십시오.
 
 ## 유용한 시작점 { #useful-starting-points }
 
-- SDK 전원 예제.
-- CPU 사용률 프로파일링.
-- RT-Thread 셸 점검.
-- 보드 수준의 전류 측정.
+- [SDK 전원 예제](../../learn/low-power/low-power-sdk-examples.md).
+- [CPU 사용률 프로파일링](../../getting-started/tutorials/advanced.md).
+- [RT-Thread 셸 점검](../platforms/sifli-sdk/debugging-diagnostics.md).
+- [보드 수준의 전류 측정](../../learn/low-power/measurement-and-validation.md).
 
 ## 측정 참고 사항 { #measurement-notes }
 

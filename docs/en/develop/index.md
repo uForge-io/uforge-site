@@ -18,7 +18,7 @@ Use [Getting Started](../getting-started/index.md) for the first board run, [SF3
 
 ## Establish a SiFli-SDK Baseline { #establish-a-sifli-sdk-baseline }
 
-[SiFli-SDK](platforms/sifli-sdk/overview.md) is SiFli's official, RT-Thread-based software package and the reference development path for SF32 firmware. Start there unless you have a deliberate reason to evaluate another ecosystem: it provides the broadest documented baseline for board support, Bluetooth, graphics, audio, storage, power management, and production work.
+[SiFli-SDK](platforms/sifli-sdk/overview.md) is SiFli's official, RT-Thread-based software package and the reference development path for SF32 firmware. Start there unless you have a deliberate reason to evaluate another ecosystem: its documentation provides guidance on board support, Bluetooth, graphics, audio, storage, power management, and production work.
 
 Before building product features, establish and record one reproducible baseline:
 

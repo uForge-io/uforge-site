@@ -1,6 +1,6 @@
 ---
 icon: lucide/waypoints
-description: "μForge 参考设计路径：比较可复现的硬件与软件验证路径，然后选择最接近产品需求的路径。"
+description: "μForge 参考设计路径：比较硬件与软件验证流程，然后选择最接近产品需求的路径。"
 tags:
     - 硬件
     - 参考设计

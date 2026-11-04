@@ -51,7 +51,9 @@ USB 开发涉及固件、描述符、主机操作系统、供电与功耗表现�
 
 [SiFli-SDK 官方 CherryUSB 示例索引](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/index.html)将 USB Device 和 USB Host 示例分开组织。先按产品需要确定 USB 角色和设备类别，再从相应示例入手；其描述符、电源和主机兼容性检查也应落实到产品实现中。
 
-<div align="center"><em>表：适用于 SF32LB58x 的 SiFli-SDK CherryUSB 示例</em></div>
+不同示例支持的开发板并不相同。复用前，请查看对应示例页面的支持平台部分，并确认目标板在支持列表中。
+
+<div align="center"><em>表：SF32LB58x SDK 文档中列出的 SiFli-SDK CherryUSB 示例</em></div>
 <div align="center" markdown>
 
 | USB 角色 | 示例 | 适用起点 |

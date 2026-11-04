@@ -15,6 +15,8 @@ tags:
 !!! note "Parte de la guía de diseño de hardware SF32LB52x"
     Esta página cubre la sección 5.8, con los puntos de comprobación del esquemático. Vuelva a [Sistema mínimo, alimentación y reloj](SF32LB52x_schematic_design.md), la primera de las tres páginas de directrices de diseño del esquemático.
 
+La versión de la lista de SiFli consultada para esta página es *SF32LB52 Schematic&PCB Checklist*, V1.0 (2026-01-21). No se ha verificado si coincide con una versión posterior en línea.
+
 ## 5.8. Lista de comprobación del esquemático { #58-schematic-checklist }
 
 Cada tabla cubre un bloque funcional del esquemático. La columna «Aplicable a» indica la variante de alimentación o revisión de silicio a la que se aplica cada punto cuando no afecta a todas las variantes.
@@ -29,7 +31,7 @@ Cada tabla cubre un bloque funcional del esquemático. La columna «Aplicable a�
 
 | N.º | Punto de comprobación | Aplicable a | Categoría |
 |:---|:---|:---|:---|
-| 1 | El encapsulado de la referencia seleccionada es correcto, incluidos los nombres y números de los pines | Todas las variantes | Obligatorio |
+| 1 | El encapsulado, los nombres y la numeración de los pines corresponden a la referencia seleccionada | Todas las variantes | Obligatorio |
 
 </div>
 

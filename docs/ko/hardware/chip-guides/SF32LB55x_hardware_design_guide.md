@@ -66,35 +66,40 @@ SF32LB55x는 사용자에게 빠르게 응답하면서도 standby와 슬립 전�
 | 패키지 이름 | 크기 | 핀 피치 | 볼 직경 |
 | :--- | :--- | :--- | :--- |
 | QFN68L | 7x7x0.75 mm | 0.35 mm | - |
+| BGA125 | 7x7x0.94 mm | 0.5 mm | 0.25 mm |
 | BGA145 | 7x7x0.94 mm | 0.5 mm | 0.25 mm |
 | BGA169 | 7x7x0.94 mm | 0.5 mm | 0.25 mm |
 
 </div>
 
-SF32LB55x는 QFN68L, BGA145, BGA169 패키지를 지원합니다. 메모리 인터페이스, 팬아웃, PCB 공정 요구 사항, 사용 가능한 GPIO가 패키지마다 다르므로 패키지를 일찍 선택하십시오.
+SF32LB55x는 QFN68L, BGA125, BGA145, BGA169 패키지를 지원합니다. 메모리 인터페이스, 팬아웃, PCB 공정 요구 사항, 사용 가능한 GPIO가 패키지마다 다르므로 패키지를 일찍 선택하십시오.
 
 ![그림 3.2-1: QFN68L 핀 배치](../../sf32-products/chips/assets/55x/SF32LB55x-QFN68-Leadmap.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>그림 3.2-1: QFN68L 핀 배치</em></div>
 
-![그림 3.2-2: BGA145 핀 배치](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-Ballmap.svg){ width="100%" loading="lazy" }
+![그림 3.2-2: BGA125 볼 맵](../../sf32-products/chips/assets/55x/SF32LB55x-BGA125-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>그림 3.2-2: BGA145 핀 배치</em></div>
+<div align="center"><em>그림 3.2-2: BGA125 볼 맵</em></div>
+
+![그림 3.2-3: BGA145 핀 배치](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-Ballmap.svg){ width="100%" loading="lazy" }
+
+<div align="center"><em>그림 3.2-3: BGA145 핀 배치</em></div>
 
 !!! warning "레거시 BGA169 핀 맵"
     SiFli는 SF32LB557V8N6을 EOL(end-of-life)로 분류합니다. 이 부품의 볼 맵은 신규 설계에 대한 권장이 아니라 기존 설계 검토를 위해 아래에 유지합니다. SF32LB557VD3A6은 다른 BGA169 볼 맵을 사용하며, D11, E9, K12, L11, L13, M13이 NC입니다. 정확한 부품의 맵을 확인하십시오. 패키지 치수가 같다고 핀 호환이 되는 것은 아닙니다.
 
-![그림 3.2-3: BGA169 SF32LB557V8N6 핀 배치](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg){ width="100%" loading="lazy" }
+![그림 3.2-4: BGA169 SF32LB557V8N6 핀 배치](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>그림 3.2-3: BGA169 SF32LB557V8N6 핀 배치</em></div>
+<div align="center"><em>그림 3.2-4: BGA169 SF32LB557V8N6 핀 배치</em></div>
 
-![그림 3.2-4: BGA169 SF32LB557VD3A6 핀 배치](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-2-Ballmap.svg){ width="100%" loading="lazy" }
+![그림 3.2-5: BGA169 SF32LB557VD3A6 핀 배치](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-2-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>그림 3.2-4: BGA169 SF32LB557VD3A6 핀 배치</em></div>
+<div align="center"><em>그림 3.2-5: BGA169 SF32LB557VD3A6 핀 배치</em></div>
 
 ### 3.3. 주요 하드웨어 기능 { #33-major-hardware-features }
 
-- QFN68L, BGA145, BGA169 패키지 옵션.
+- QFN68L, BGA125, BGA145, BGA169 패키지 옵션.
 - 48 MHz와 32.768 kHz 듀얼 크리스털 설계 요구 사항.
 - 저전력 Bluetooth 5.2 트랜시버, RF 매칭, 안테나 레이아웃 요구 사항.
 - OPI PSRAM, QSPI NOR/NAND 플래시 및 PSRAM, SDIO eMMC 또는 Micro SD 인터페이스. 공동 패키징 메모리는 정확한 부품 번호에 따라 다릅니다.

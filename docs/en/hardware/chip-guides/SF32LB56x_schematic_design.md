@@ -24,7 +24,7 @@ Review processor rails, required local capacitors, PMIC output assignments, rese
 
 <div align="center" markdown>
 
-| PMU Power Supply pin | Minimum Voltage(V) | Typical Voltage(V) | Maximum Voltage(V) | Maximum Current(mA) | Detailed Description |
+| PMU Power Supply pin | Minimum Voltage (V) | Typical Voltage (V) | Maximum Voltage (V) | Maximum Current (mA) | Detailed Description |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | PVDD | 1.7 | 1.8 | 3.6 | 100 | PVDD Power Supply input |
 | BUCK_LX BUCK_FB | - | 1.25 | - | 100 | BUCK_LX output, connected to the inductor; internal Power Supply input, connected to the other end of the inductor and to an external capacitor |
@@ -77,21 +77,21 @@ Review processor rails, required local capacitors, PMIC output assignments, rese
 
 | Power Supply Pin | Capacitor | Detailed Description |
 | :--- | :--- | :--- |
-| PVDD | 0.1uF + 10uF | Place at least two capacitors, 10uF and 0.1uF, close to the pin. |
-| BUCK_LX BUCK_FB | 0.1uF + 4.7uF | Place at least two capacitors, 4.7uF and 0.1uF, close to the pin. |
-| LDO1_VOUT | 4.7uF | Place at least one 4.7uF capacitor close to the pin. |
-| LDO2_VOUT | 4.7uF | Place at least one 4.7uF capacitor close to the pin. |
-| VDD_RET | 0.47uF | Place at least one 0.47uF capacitor close to the pin. |
-| VDD_RTC | 1uF | Place at least one 1uF capacitor close to the pin. |
-| AVDD33_ANA | 4.7uF | Place at least one 4.7uF capacitor close to the pin. |
-| GPADC_VREF | 4.7uF | Place at least one 4.7uF capacitor close to the pin. |
-| AVDD33_AUD | 4.7uF | Place at least one 4.7uF capacitor close to the pin. |
-| AUD_VREF | 1uF | Place at least one 1uF capacitor close to the pin. |
-| MIC_BIAS | 1uF | Place at least one 1uF capacitor close to the pin. |
-| VDDIO1 | 1uF | Place at least one 1uF capacitor close to the pin. |
-| VDDIO2 | 1uF | Place at least one 1uF capacitor close to the pin. |
-| VDDIO3 | 1uF | Place at least one 1uF capacitor close to the pin. |
-| VDDIO4 | 1uF | Place at least one 1uF capacitor close to the pin. |
+| PVDD | 0.1 µF + 10 µF | Place at least two capacitors, 10 µF and 0.1 µF, close to the pin. |
+| BUCK_LX BUCK_FB | 0.1 µF + 4.7 µF | Place at least two capacitors, 4.7 µF and 0.1 µF, close to the pin. |
+| LDO1_VOUT | 4.7 µF | Place at least one 4.7 µF capacitor close to the pin. |
+| LDO2_VOUT | 4.7 µF | Place at least one 4.7 µF capacitor close to the pin. |
+| VDD_RET | 0.47 µF | Place at least one 0.47 µF capacitor close to the pin. |
+| VDD_RTC | 1 µF | Place at least one 1 µF capacitor close to the pin. |
+| AVDD33_ANA | 4.7 µF | Place at least one 4.7 µF capacitor close to the pin. |
+| GPADC_VREF | 4.7 µF | Place at least one 4.7 µF capacitor close to the pin. |
+| AVDD33_AUD | 4.7 µF | Place at least one 4.7 µF capacitor close to the pin. |
+| AUD_VREF | 1 µF | Place at least one 1 µF capacitor close to the pin. |
+| MIC_BIAS | 1 µF | Place at least one 1 µF capacitor close to the pin. |
+| VDDIO1 | 1 µF | Place at least one 1 µF capacitor close to the pin. |
+| VDDIO2 | 1 µF | Place at least one 1 µF capacitor close to the pin. |
+| VDDIO3 | 1 µF | Place at least one 1 µF capacitor close to the pin. |
+| VDDIO4 | 1 µF | Place at least one 1 µF capacitor close to the pin. |
 
 </div>
 
@@ -101,24 +101,24 @@ Review processor rails, required local capacitors, PMIC output assignments, rese
 
 | Power Supply pin | Capacitor | Detailed description |
 | :--- | :--- | :--- |
-| PVDD | 0.1uF + 10uF | Place at least two capacitors, 10uF and 0.1uF, close to the pin. |
-| BUCK_LX BUCK_FB | 0.1uF + 4.7uF | Place at least two capacitors, 4.7uF and 0.1uF, close to the pin. |
-| LDO1_VOUT | 4.7uF | Place at least one 4.7uF capacitor close to the pin. |
-| LDO2_VOUT | 4.7uF | Place at least one 4.7uF capacitor close to the pin. |
-| VDD_RET | 0.47uF | Place at least one 0.47uF capacitor close to the pin. |
-| VDD_RTC | 1uF | Place at least one 1uF capacitor close to the pin. |
-| AVDD_BRF | 4.7uF | Place at least one 4.7uF capacitor close to the pin. |
-| AVDD33_ANA | 4.7uF | Place at least one 4.7uF capacitor close to the pin. |
-| GPADC_VREFP | 4.7uF | Place at least one 4.7uF capacitor close to the pin. |
-| AVDD33_AUD | 4.7uF | Place at least one 4.7uF capacitor close to the pin. |
-| AUD_VREF | 1uF | Place at least one 1uF capacitor close to the pin. |
-| MIC_BIAS | 1uF | Place at least one 1uF capacitor close to the pin. |
-| VDDIOA | 1uF | Place at least one 1uF capacitor close to the pin. |
-| VDDIOA2 | 1uF | Place at least one 1uF capacitor close to the pin. |
-| VDDIOB | 1uF | Place at least one 1uF capacitor close to the pin. |
-| VDDIOSA | 0.1uF | Place at least one 0.1uF capacitor close to the pin. |
-| VDDIOSB | 0.1uF | Place at least one 0.1uF capacitor close to the pin. |
-| VDDIOSC | 0.1uF | Place at least one 0.1uF capacitor close to the pin. |
+| PVDD | 0.1 µF + 10 µF | Place at least two capacitors, 10 µF and 0.1 µF, close to the pin. |
+| BUCK_LX BUCK_FB | 0.1 µF + 4.7 µF | Place at least two capacitors, 4.7 µF and 0.1 µF, close to the pin. |
+| LDO1_VOUT | 4.7 µF | Place at least one 4.7 µF capacitor close to the pin. |
+| LDO2_VOUT | 4.7 µF | Place at least one 4.7 µF capacitor close to the pin. |
+| VDD_RET | 0.47 µF | Place at least one 0.47 µF capacitor close to the pin. |
+| VDD_RTC | 1 µF | Place at least one 1 µF capacitor close to the pin. |
+| AVDD_BRF | 4.7 µF | Place at least one 4.7 µF capacitor close to the pin. |
+| AVDD33_ANA | 4.7 µF | Place at least one 4.7 µF capacitor close to the pin. |
+| GPADC_VREFP | 4.7 µF | Place at least one 4.7 µF capacitor close to the pin. |
+| AVDD33_AUD | 4.7 µF | Place at least one 4.7 µF capacitor close to the pin. |
+| AUD_VREF | 1 µF | Place at least one 1 µF capacitor close to the pin. |
+| MIC_BIAS | 1 µF | Place at least one 1 µF capacitor close to the pin. |
+| VDDIOA | 1 µF | Place at least one 1 µF capacitor close to the pin. |
+| VDDIOA2 | 1 µF | Place at least one 1 µF capacitor close to the pin. |
+| VDDIOB | 1 µF | Place at least one 1 µF capacitor close to the pin. |
+| VDDIOSA | 0.1 µF | Place at least one 0.1 µF capacitor close to the pin. |
+| VDDIOSB | 0.1 µF | Place at least one 0.1 µF capacitor close to the pin. |
+| VDDIOSC | 0.1 µF | Place at least one 0.1 µF capacitor close to the pin. |
 
 </div>
 
@@ -128,16 +128,16 @@ Review processor rails, required local capacitors, PMIC output assignments, rese
 
 | SF30147C Power Supply Pin | Minimum Voltage (V) | Maximum Voltage (V) | Maximum Current (mA) | Detailed Description |
 | :--- | :--- | :--- | :--- | :--- |
-| VBUCK | 1.8 | 1.8 | 500 | 1.8V output; do not infer the U-variant chip-rail mapping from this row. |
-| LVSW1 | 1.8 | 1.8 | 100 | 1.8V power supply output |
-| LVSW2 | 1.8 | 1.8 | 100 | G-SENSOR 1.8V power supply input |
-| LVSW3 | 1.8 | 1.8 | 150 | Heart rate 1.8V power supply input |
-| LVSW4 | 1.8 | 1.8 | 150 | LCD 1.8V power supply input |
-| LVSW5 | 1.8 | 1.8 | 150 | 1.8V power supply output |
-| LDO1 | 2.8 | 3.3 | 100 | 2.8–3.3V output; do not infer the U-variant chip-rail mapping from this row. |
+| VBUCK | 1.8 | 1.8 | 500 | 1.8 V output; do not infer the U-variant chip-rail mapping from this row. |
+| LVSW1 | 1.8 | 1.8 | 100 | 1.8 V power-supply output |
+| LVSW2 | 1.8 | 1.8 | 100 | G-SENSOR 1.8 V power-supply input |
+| LVSW3 | 1.8 | 1.8 | 150 | Heart-rate 1.8 V power-supply input |
+| LVSW4 | 1.8 | 1.8 | 150 | LCD 1.8 V power-supply input |
+| LVSW5 | 1.8 | 1.8 | 150 | 1.8 V power-supply output |
+| LDO1 | 2.8 | 3.3 | 100 | 2.8–3.3 V output; do not infer the U-variant chip-rail mapping from this row. |
 | LDO2 | 2.8 | 3.3 | 100 | Motor power supply input |
-| LDO3 | 2.8 | 3.3 | 100 | LCD 3.3V power supply input |
-| LDO4 | 2.8 | 3.3 | 100 | Heart rate 3.3V power supply input |
+| LDO3 | 2.8 | 3.3 | 100 | LCD 3.3 V power-supply input |
+| LDO4 | 2.8 | 3.3 | 100 | Heart-rate 3.3 V power-supply input |
 | HVSW1 | 2.8 | 5 | 150 | Analog Class-K PA power supply input |
 | HVSW2 | 2.8 | 5 | 150 | GPS power supply input |
 
@@ -152,16 +152,16 @@ Review processor rails, required local capacitors, PMIC output assignments, rese
 
 | SF30147C Power Supply Pin | Minimum Voltage (V) | Maximum Voltage (V) | Maximum Current (mA) | Detailed Description |
 | :--- | :--- | :--- | :--- | :--- |
-| VBUCK | 1.8 | 1.8 | 500 | 1.8V Power Supply input for SF32LB56xV PVDD, VDDIOA, VDDIOA2, VDDIOB, VDDIOSA, VDDIOSB, VDDIOSC, AVDD_BRF, etc. |
+| VBUCK | 1.8 | 1.8 | 500 | 1.8 V power-supply input for SF32LB56xV PVDD, VDDIOA, VDDIOA2, VDDIOB, VDDIOSA, VDDIOSB, VDDIOSC, AVDD_BRF, etc. |
 | LVSW1 | 1.8 | 1.8 | 100 | I2S Class-K PA logic power supply input |
-| LVSW2 | 1.8 | 1.8 | 100 | G-SENSOR 1.8V power supply input |
-| LVSW3 | 1.8 | 1.8 | 150 | Heart rate 1.8V power supply input |
-| LVSW4 | 1.8 | 1.8 | 150 | LCD 1.8V power supply input |
+| LVSW2 | 1.8 | 1.8 | 100 | G-SENSOR 1.8 V power-supply input |
+| LVSW3 | 1.8 | 1.8 | 150 | Heart-rate 1.8 V power-supply input |
+| LVSW4 | 1.8 | 1.8 | 150 | LCD 1.8 V power-supply input |
 | LVSW5 | 1.8 | 1.8 | 150 | EMMC CORE power supply input |
-| LDO1 | 2.8 | 3.3 | 100 | 3.3V Power Supply input for SF32LB56xV AVDD33_ANA, AVDD33_AUD, VDDIOA2, etc. |
+| LDO1 | 2.8 | 3.3 | 100 | 3.3 V power-supply input for SF32LB56xV AVDD33_ANA, AVDD33_AUD, VDDIOA2, etc. |
 | LDO2 | 2.8 | 3.3 | 100 | EMMC or SD NAND power supply input |
-| LDO3 | 2.8 | 3.3 | 100 | LCD 3.3V power supply input |
-| LDO4 | 2.8 | 3.3 | 100 | Heart rate 3.3V power supply input |
+| LDO3 | 2.8 | 3.3 | 100 | LCD 3.3 V power-supply input |
+| LDO4 | 2.8 | 3.3 | 100 | Heart-rate 3.3 V power-supply input |
 | HVSW1 | 2.8 | 5 | 150 | Analog Class-K PA power supply input |
 | HVSW2 | 2.8 | 5 | 150 | GPS power supply input |
 
@@ -199,11 +199,11 @@ Review processor rails, required local capacitors, PMIC output assignments, rese
 
 <div align="center"><em>Figure 5.1-8: SF32LB56xV Charging Reference Circuit</em></div>
 
-Without power-path management, the system is connected directly to VBAT with the battery. This is lower cost, but downstream circuitry cannot be fully disconnected from the battery, increasing leakage and preventing the low-power Shipping Mode target. When the battery is over-discharged, charger trickle current must exceed the combined system and leakage load (i1+i2 in the source diagram). While the system is running, constant-current charge current must also exceed i1+i2; otherwise, the system load draws part of the charge current and the battery may not reach full charge. A power-path charger separates system power at VSYS from battery charging at VBAT, supports Shipping Mode, and can power the system from VSYS even when the battery is over-discharged.
+Without power-path management, the battery and system are connected directly to VBAT. This costs less, but downstream circuitry cannot be fully disconnected from the battery, increasing leakage and preventing the low-power Shipping Mode target. When the battery is over-discharged, the charger's trickle current must exceed the combined system and leakage load (i1+i2 in the source diagram). While the system is running, the charger's constant-current output must also exceed i1+i2; otherwise, the system load draws part of the charge current and the battery may not reach full charge. A power-path charger separates system power at VSYS from battery charging at VBAT, supports Shipping Mode, and can power the system from VSYS even when the battery is over-discharged.
 
-For the U variant, choose among three power topologies according to peripheral I/O voltage and the system power target. In all three, AVDD33_ANA and AVDD33_AUD are supplied at 3.3V. The lowest-power topology supplies PVDD and VDDIO1–VDDIO4 at 1.8V and uses peripherals with 1.8V I/O. The intermediate topology keeps PVDD and VDDIO1 at 1.8V while supplying VDDIO2–VDDIO4 and peripheral I/O at 3.3V. The highest-power topology keeps only VDDIO1, which supplies the co-packaged PSRAM, at 1.8V; PVDD, VDDIO2–VDDIO4, and peripheral I/O use 3.3V. Use load switches for dynamic power management of external modules and keep them off by default when unused. For modules that must remain on, select devices with low quiescent current. The load-switch control GPIO's hardware default level must match the switch enable polarity so the switch remains off at startup; SiFli recommends a 1MΩ pull-up or pull-down at the enable input.
+For the U variant, choose among three power topologies according to peripheral I/O voltage and the system power target. In all three, AVDD33_ANA and AVDD33_AUD are supplied at 3.3 V. The lowest-power topology supplies PVDD and VDDIO1–VDDIO4 at 1.8 V and uses peripherals with 1.8 V I/O. The intermediate topology keeps PVDD and VDDIO1 at 1.8 V while supplying VDDIO2–VDDIO4 and peripheral I/O at 3.3 V. The highest-power topology keeps only VDDIO1, which supplies the co-packaged PSRAM, at 1.8 V; PVDD, VDDIO2–VDDIO4, and peripheral I/O use 3.3 V. Use load switches to manage external-module power dynamically, and keep them off by default when unused. For modules that must remain on, select devices with low quiescent current. Set the load-switch control GPIO's hardware default level to match the switch's enable polarity so the switch remains off at startup; SiFli recommends a 1 MΩ pull-up or pull-down at the enable input.
 
-The U-variant PMU completes power-on reset when PVDD rises to 1.5V. A falling PVDD triggers brownout reset at the configured BOR threshold, which is configurable from 1.5V to 2.5V.
+The U-variant PMU completes power-on reset when PVDD rises to 1.5 V. A falling PVDD triggers brownout reset at the configured BOR threshold, which is configurable from 1.5 V to 2.5 V.
 
 ### 5.2. Operating Modes and Wake Sources { #52-operating-modes-and-wake-sources }
 
@@ -283,7 +283,7 @@ Operating mode, wake source, pull-up rail, and leakage-current decisions should 
 
 </div>
 
-BOOT_MODE selects startup behavior: high enters download mode; low makes ROM check for a user program, starting it if present and otherwise entering download mode. The U-variant Mode pin has an internal pull-down, may be left floating when unused, and shares the VDDIO2 domain. The V-variant Mode pin shares VDDIOA and should be held stable with a 10kΩ pull-up or pull-down; do not leave it floating or allow it to toggle from interference. Reserve a Mode test point on production boards; a jumper is useful on development boards for recovery.
+BOOT_MODE selects startup behavior: a high level enters download mode; at a low level, the ROM checks for a user program, starts it if present, and otherwise enters download mode. The U-variant Mode pin has an internal pull-down, may be left floating when unused, and shares the VDDIO2 domain. The V-variant Mode pin shares VDDIOA and should be held stable with a 10 kΩ pull-up or pull-down; do not leave it floating or allow interference to change its level. Reserve a Mode test point on production boards; a jumper is useful on development boards for recovery.
 
 Account for memory I/O power in low-power shutdown designs. In U-variant Standby, GPIO levels are retained and VDDIO1 can remain powered; put storage on MPI1/MPI2 into its low-power mode. In Hibernate, GPIO levels are not retained, so turn off VDDIO1 to prevent leakage through the co-packaged memory I/O. For the V variant, keep the co-packaged-memory I/O powered in Standby; before Hibernate, turn off VDDIOSA and VDDIOSB under PBR0 control and place NOR Flash in Deep Power-Down. VDDIOSC must remain powered.
 
@@ -295,8 +295,8 @@ Account for memory I/O power in low-power shutdown designs. In U-variant Standby
 
 | Crystal | Crystal specification requirements | Detailed description |
 | :--- | :--- | :--- |
-| 48MHz | 7pF≦CL≦12pF (recommended value 8.8pF) △F/F0≦±10ppm ESR≦30 ohms (recommended value 22ohms) | Crystal oscillator power consumption is related to CL and ESR. The smaller the CL and ESR, the lower the power consumption. For optimal power performance, it is recommended to use components with relatively smaller CL and ESR values within the required range. Reserve parallel matching capacitors next to the crystal. When CL<12pF, no capacitors need to be mounted |
-| 32.768KHz | CL≦12.5pF (recommended value 7pF) △F/F0≦±20ppm ESR≦80k ohms (recommended value 38Kohms) | Crystal power consumption is related to CL and ESR. The smaller the CL and ESR, the lower the power consumption. For optimal power consumption performance, it is recommended to use components with relatively small CL and ESR values within the required range. Reserve parallel matching capacitors next to the crystal. When CL<12.5pF, no capacitor needs to be soldered |
+| 48 MHz | 7 pF ≤ CL ≤ 12 pF (recommended: 8.8 pF); △F/F0 ≤ ±10 ppm; ESR ≤ 30 Ω (recommended: 22 Ω) | Crystal oscillator power consumption depends on CL and ESR. Lower CL and ESR reduce power consumption. For best power performance, choose components with relatively low CL and ESR within the specified ranges. Reserve footprints for parallel matching capacitors near the crystal. If CL < 12 pF, no capacitor is required. |
+| 32.768 kHz | CL ≤ 12.5 pF (recommended: 7 pF); △F/F0 ≤ ±20 ppm; ESR ≤ 80 kΩ (recommended: 38 kΩ) | Crystal power consumption depends on CL and ESR. Lower CL and ESR reduce power consumption. For best power performance, choose components with relatively low CL and ESR within the specified ranges. Reserve footprints for parallel matching capacitors near the crystal. If CL < 12.5 pF, no capacitor is required. |
 
 </div>
 
@@ -306,10 +306,10 @@ Account for memory I/O power in low-power shutdown designs. In U-variant Standby
 
 | Model | Manufacturer | Parameters |
 | :--- | :--- | :--- |
-| E1SB48E001G00E | Hosonic | F0 = 48.000000MHz, △F/F0 = -6 ~ 8 ppm, CL = 8.8 pF, ESR = 22 ohms Max TOPR = -30 ~ 85℃, Package = (2016 metric) |
-| ETST00327000LE | Hosonic | F0 = 32.768KHz, △F/F0 = -20 ~ 20 ppm, CL = 7 pF, ESR = 70K ohms Max TOPR = -40 ~ 85℃, Package = (3215 metric) |
-| SX20Y048000B31T-8.8 | TKD | F0 = 48.000000MHz, △F/F0 = -10 ~ 10 ppm, CL = 8.8 pF, ESR = 40 ohms Max TOPR = -20 ~ 75℃, Package = (2016 metric) |
-| SF32K32768D71T01 | TKD | F0 = 32.768KHz, △F/F0 = -20 ~ 20 ppm, CL = 7 pF, ESR = 70K ohms Max TOPR = -40 ~ 85℃, Package = (3215 metric) |
+| E1SB48E001G00E | Hosonic | F0 = 48.000000 MHz; △F/F0 = −6 to +8 ppm; CL = 8.8 pF; ESR ≤ 22 Ω; TOPR = −30 to +85 °C; metric package: 2016 |
+| ETST00327000LE | Hosonic | F0 = 32.768 kHz; △F/F0 = −20 to +20 ppm; CL = 7 pF; ESR ≤ 70 kΩ; TOPR = −40 to +85 °C; metric package: 3215 |
+| SX20Y048000B31T-8.8 | TKD | F0 = 48.000000 MHz; △F/F0 = −10 to +10 ppm; CL = 8.8 pF; ESR ≤ 40 Ω; TOPR = −20 to +75 °C; metric package: 2016 |
+| SF32K32768D71T01 | TKD | F0 = 32.768 kHz; △F/F0 = −20 to +20 ppm; CL = 7 pF; ESR ≤ 70 kΩ; TOPR = −40 to +85 °C; metric package: 3215 |
 
 </div>
 
@@ -349,13 +349,13 @@ Display interface selection is a package-level decision. The U variant documents
 | :--- | :--- | :--- | :--- |
 | CSX | PA36 | PA36 | Enable signal |
 | WRX_SCL | PA37 | PA37 | Clock signal |
-| DCX | PA39 | PA39 | Data/command signal in 4-wire SPI mode Data 1 in Quad-SPI mode |
-| SDI_RDX | PA38 | PA38 | Data input signal in 3/4-wire SPI mode Data 0 in Quad-SPI mode |
-| SDO | PA38 | PA38 | Data output signal in 3/4-wire SPI mode Please short it together with SDI_RDX |
+| DCX | PA39 | PA39 | Data/command signal in 4-wire SPI mode; data 1 in Quad-SPI mode |
+| SDI_RDX | PA38 | PA38 | Data input signal in 3/4-wire SPI mode; data 0 in Quad-SPI mode |
+| SDO | PA38 | PA38 | Data output signal in 3/4-wire SPI mode; connect it to SDI_RDX |
 | D0 | PA40 | PA40 | Data 2 in Quad-SPI mode |
 | D1 | PA41 | PA41 | Data 3 in Quad-SPI mode |
 | REST | PA05 | PB04 | Display panel reset signal |
-| TE | PA33 | PA33 | Tearing effect to MCU frame signal |
+| TE | PA33 | PA33 | Tearing Effect (TE) signal for MCU frame synchronization |
 
 </div>
 
@@ -397,11 +397,11 @@ Display interface selection is a package-level decision. The U variant documents
 | WRX_SCL | PA37 | Clock signal |
 | DCX | PA39 | Data/command signal in 4-wire SPI mode; data 1 in Quad-SPI mode |
 | SDI_RDX | PA38 | Data input signal in 3/4-wire SPI mode; data 0 in Quad-SPI mode |
-| SDO | PA38 | Data output signal in 3/4-wire SPI mode; short together with SDI_RDX |
+| SDO | PA38 | Data output signal in 3/4-wire SPI mode; connect it to SDI_RDX |
 | D[0] | PA40 | Data 2 in Quad-SPI mode |
 | D[1] | PA41 | Data 3 in Quad-SPI mode |
 | REST | PA43 | Reset signal for the display |
-| TE | PA33 | Tearing effect to MCU frame signal |
+| TE | PA33 | Tearing Effect (TE) signal for MCU frame synchronization |
 
 </div>
 
@@ -414,7 +414,7 @@ Display interface selection is a package-level decision. The U variant documents
 | CSX | PA36 | Chip select |
 | WRX | PA37 | Writes strobe signal to write data |
 | DCX | PA39 | Display data / command selection |
-| RDX | PA38 | Reads strobe signal to write data |
+| RDX | PA38 | Read-data strobe signal (see warning below) |
 | D[0] | PA40 | Data 0 |
 | D[1] | PA41 | Data 1 |
 | D[2] | PA28 | Data 2 |
@@ -424,9 +424,12 @@ Display interface selection is a package-level decision. The U variant documents
 | D[6] | PA32 | Data 6 |
 | D[7] | PA34 | Data 7 |
 | REST | PA43 | Reset |
-| TE | PA33 | Tearing effect to MCU frame signal |
+| TE | PA33 | Tearing Effect (TE) signal for MCU frame synchronization |
 
 </div>
+
+!!! warning "Verify the SF32LB56xV MCU8080 RDX description"
+    The SiFli pin table describes RDX as a read strobe "to write data," while SiFli's MCU/8080 interface overview says that toggling RDX reads data. These descriptions conflict; verify the intended operation against the target display controller's documentation before assigning the signal.
 
 <div align="center"><em>Table 5.5-7: SF32LB56xV DPI Display Interface</em></div>
 
@@ -615,7 +618,7 @@ Storage and display buses should not be assigned independently because both cons
 
 </div>
 
-Match the storage I/O supply to the attached memory's logic level: U-variant storage I/O uses VDDIO3, while V-variant storage I/O uses VDDIOA2. Pull the SPI NAND Flash Hold# pin up to its supply through a 10kΩ resistor. SD1/eMMC is available on the V variant; do not apply the V-variant SD1/eMMC pin table to the U variant, which uses the SD2 storage interface.
+Match the storage I/O supply to the attached memory's logic level: U-variant storage I/O uses VDDIO3, while V-variant storage I/O uses VDDIOA2. Pull the SPI NAND Flash Hold# pin up to its supply through a 10 kΩ resistor. SD1/eMMC is available on the V variant; do not apply the V-variant SD1/eMMC pin table to the U variant, which uses the SD2 storage interface.
 
 <div align="center"><em>Table 5.6-7: SF32LB56xU Audio Interface</em></div>
 
@@ -650,9 +653,9 @@ Match the storage I/O supply to the attached memory's logic level: U-variant sto
 !!! warning "Verify the V-variant I2S instance"
     The SiFli pin table and schematic net labels identify these pins as I2S1_LRCK/SDI/SDO/BCK, but the table descriptions call them I2S2 signals. Treat the peripheral instance as unresolved and confirm it against the released pin-mux documentation before assigning these pins.
 
-For an external differential analog microphone, place at least 2.2µF DC-blocking capacitors in the ADC inputs and power the microphone from MIC_BIAS. The U-variant MEMS-microphone reference feeds MIC_BIAS through 1kΩ with a 4.7µF bypass capacitor; its microphone-output reference also shows a 0.01µF coupling capacitor. The U-variant analog-PA reference uses 33nF input coupling capacitors, with the differential low-pass filter close to the chip. Route analog DAC outputs as a guarded differential pair; keep parasitic capacitance below 10pF and trace length below 2cm. The V variant also provides I2S; its reference I2S amplifier is configured over I2C3. Place audio supply/reference capacitors close to their pins and route analog audio away from switchers and high-speed digital signals.
+For an external differential analog microphone, place DC-blocking capacitors of at least 2.2 µF at the ADC inputs and power the microphone from MIC_BIAS. The U-variant MEMS-microphone reference feeds MIC_BIAS through 1 kΩ with a 4.7 µF bypass capacitor; its microphone-output reference also shows a 0.01 µF coupling capacitor. The U-variant analog-PA reference uses 33 nF input coupling capacitors, with the differential low-pass filter close to the chip. Route analog DAC outputs as a guarded differential pair; keep parasitic capacitance below 10 pF and trace length below 2 cm. The V variant also provides I2S; its reference I2S amplifier is configured over I2C3. Place audio supply/reference capacitors close to their pins and route analog audio away from switchers and high-speed digital signals.
 
-Both variants provide PWM for vibration motors. The motor may be powered directly from VBAT if its startup current does not destabilize the system. When `BSP_PM_FREQ_SCALING` is defined as `1`, HCPU frequency scaling changes PWM frequency on PA pins; use a PB pin for this case. PB32 is an active-high power/reset input; a long press of at least 10s triggers reset. The U-variant reference connects the key through 1kΩ from VDDIOB and adds a 10kΩ pull-down and 0.1µF capacitor to ground. The V-variant reference uses a 1kΩ series resistor from VDD_1V8 and a 10kΩ pull-down. Other buttons and rotary encoders require pull-ups; for a mechanical encoder that does not return to the off state after rotation, its pull-up rail must be switchable in standby to avoid leakage.
+Both variants provide PWM for vibration motors. The motor may be powered directly from VBAT if its startup current does not destabilize the system. When `BSP_PM_FREQ_SCALING` is defined as `1`, HCPU frequency scaling changes PWM frequency on PA pins; use a PB pin in this case. PB32 is an active-high power/reset input; holding the button for at least 10 s triggers a reset. The U-variant reference connects the button to VDDIOB through 1 kΩ and adds a 10 kΩ pull-down and a 0.1 µF capacitor to ground. The V-variant reference uses a 1 kΩ series resistor from VDD_1V8 and a 10 kΩ pull-down. Other buttons and rotary encoders require pull-ups; for a mechanical encoder that does not return to the off state after rotation, its pull-up rail must be switchable in Standby to avoid leakage.
 
 U provides PBR0–PBR2 and V provides PBR0–PBR3. PBR0 transitions low-to-high during startup and can control an external load switch; the other PBR pins default low. PBR pins can output in Standby and Hibernate and can carry LPTIM; all except PBR0 can output a 32kHz clock. PBR pins can also be configured as wake inputs, but the MCU cannot receive an interrupt from that input after wake. Prefer LCPU PB pins for sensor I2C, SPI, control, and interrupt-wake signals; sensor power can be switched as needed from an SF30147C LVSW or LDO output.
 

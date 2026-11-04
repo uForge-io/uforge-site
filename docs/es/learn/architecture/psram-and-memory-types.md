@@ -70,9 +70,9 @@ Un diseño embebido común es por tanto:
 <div align="center"><em>Diagrama: Distribución típica de memoria en un sistema embebido</em></div>
 
 ```text
-Imagen de firmware, recursos y ajustes que deben conservarse -> Almacenamiento no volátil
-Búferes grandes activos y framebuffers   -> PSRAM
-Pilas de uso frecuente, estado de control y datos DMA -> SRAM interna
+Persistent firmware image, assets, settings -> Non-volatile storage
+Active large buffers and framebuffers -> PSRAM
+Hot stacks, control state, DMA data  -> Internal SRAM
 ```
 
 Esta es una estrategia de ubicación, no una regla que deba aplicarse a todos los búferes. Puede convenir almacenar en SRAM una imagen pequeña que se reutiliza con frecuencia; un modelo grande puede permanecer en Flash o PSRAM; un sistema de pantalla puede necesitar PSRAM simplemente porque un framebuffer completo no cabe en la memoria interna.
@@ -107,6 +107,8 @@ Las filas DTR/DDR siguientes suponen dos transferencias por ciclo, y las de dobl
 La columna de líneas de datos cuenta las señales de carga útil, no el reloj, la selección de chip ni otros pines de control. Estas frecuencias son ejemplos documentados, no límites para toda la familia. La [guía de SF32LB52-DevKit-LCD](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-LCD.md) especifica OPI-PSRAM a 144 MHz y QSPI-NOR a 72 MHz en modo STR; la [guía de SF32LB58-DevKit-LCD](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb58x/SF32LB58-DevKit-LCD.md) especifica HPI-PSRAM a 144 MHz y variantes de la placa con Flash externa a 72 MHz. La fila QSPI/DTR usa 72 MHz únicamente para aislar el efecto de la transferencia de doble tasa de datos. Las filas de doble canal suponen que ambos canales pueden usarse simultáneamente; muestran el ancho de bus agregado, no garantizan que un flujo de CPU obtenga el doble de tasa efectiva. Estos son **límites teóricos de carga útil del bus**, no rendimiento de aplicación medido. Los ciclos de comando/dirección, los ciclos dummy, el refresco, los cambios de sentido lectura/escritura, los límites del controlador, los fallos de caché, el arbitraje de DMA, la integridad de la señal en la PCB y los clientes concurrentes reducen la tasa utilizable. El chip, el encapsulado, el dispositivo de memoria y la configuración del SDK seleccionados determinan lo que es válido.
 
 La [guía de modelos de chip de SiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) enumera ejemplos de configuraciones de doble canal: **SF32LB566VCB36** tiene 8 MB de OPI-PSRAM en MPI1 y 4 MB en MPI2; **SF32LB586VDD36** tiene 16 MB de HPI-PSRAM en cada interfaz; y **SF32LB587VEE56** tiene 32 MB de HPI-PSRAM en cada interfaz. Estos números de pieza ilustran la topología de memoria; no garantizan que un único cliente alcance la carga útil agregada de la tabla. Antes de dimensionar un diseño sensible al ancho de banda, confirme la referencia completa y el mapa de memoria del SDK: otros encapsulados o SKU de la misma familia pueden usar una configuración diferente.
+
+La guía de SF32LB52 indica que las frecuencias de interfaz que enumera pueden cambiar en la versión oficial.
 
 ### Por qué importan los dos canales de memoria { #why-two-memory-channels-matter }
 

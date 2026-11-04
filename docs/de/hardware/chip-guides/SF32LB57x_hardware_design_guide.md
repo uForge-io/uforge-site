@@ -47,6 +47,8 @@ Dieses Dokument setzt Grundkenntnisse im Embedded-Hardware-Design und in der Sch
 
 Typische SF32LB57x-Ressourcen sind unter anderem:
 
+- STAR-MC1-Arm-Cortex-M33-Architektur mit zwei großen und einem kleinen Kern.
+- Integriert sind eine 2D/2.5D-Grafik-Engine, ein KI-Beschleuniger für neuronale Netze, Dual-Mode-Bluetooth 6.0 und ein Audio-Codec.
 - Bis zu 58 GPIOs<!-- BGA-ONLY -->; bei passenden BGA112-Varianten kommen sechs I/Os hinzu, die für MPI3 oder per Pull-up/Pull-down als statische GP-Ausgänge verwendet werden können. Weitere Hinweise stehen unter „Gehäuse“<!-- /BGA-ONLY -->.
 - 3x UART, 4x I2C, 2x SPI, 2x CAN.
 - 2x GPTIM (je 4 Kanäle), 2x LPTIM, 2x ATIM (je 3 differenzielle oder 4 Single-Ended-Kanäle), 1x PWM (5 Kanäle), 1x PTM (16 Kanäle).
@@ -62,6 +64,9 @@ Typische SF32LB57x-Ressourcen sind unter anderem:
 
 !!! note "Geltungsbereich der Display-Schnittstellen"
     Der SF32LB57x-Hardware-Anwendungshinweis nennt in der LCDC-Schnittstellenübersicht SPI/QSPI, 24-Bit-DPI, 16-Bit-8080, 16-Bit-EPD sowie serielle/parallele JDI. MIPI-DSI erscheint in der Kompatibilitätsliste bestimmter Display-Controller-ICs, nicht jedoch in dieser Übersicht der direkten LCDC-Schnittstellen des Chips. Die Nennung eines Panel-Controllers ist kein Nachweis für eine native MIPI-DSI-Hostschnittstelle des Chips. Klären Sie den genauen Display-Controller-Pfad vor der Designauswahl mit SiFli.
+
+!!! note "Softwareunterstützung des KI-Beschleunigers"
+    Der Hardware-Anwendungshinweis von SiFli nennt einen integrierten KI-Beschleuniger für neuronale Netze im SF32LB57x. Der [SiFli-SDK-NNACC-Leitfaden](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/nnacc.html) führt SF32LB55x, SF32LB56x und SF32LB58x auf, nicht jedoch SF32LB57x. Die Hardwareangabe allein bestätigt daher keine Softwareunterstützung für beschleunigte Inferenz auf dem SF32LB57x. Klären Sie die Unterstützung für die genaue Teilenummer und SDK-Version mit SiFli, bevor Sie sich darauf verlassen.
 
 ### 3.2. Varianten { #32-variants }
 

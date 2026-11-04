@@ -69,7 +69,7 @@ PSRAMにはCBUSとSBUSの別々のアドレス空間があります。コード�
 
 ## v2：名前付き・型付きJSONパーティション { #v2-named-and-typed-json-partitions }
 
-v2も`ptab.json`を使いますが、ヘッダーで`"version": "2"`を宣言する必要があります。メモリーのフィールドは`mem`、`base`、`regions`のままです。各regionでは`offset`と`max_size`を指定し、`tags`と`custom`も使用できます。さらに、regionの`name`、`type`、実行用パーティションの場合は任意の`core`を指定します。
+v2も`ptab.json`を使いますが、ヘッダーで`"version": "2"`を宣言する必要があります。メモリーのフィールドは`mem`、`base`、`regions`のままです。各regionでは`offset`と`max_size`を指定し、`tags`と`custom`も使用できます。さらに、regionの`name`、`type`、実行用パーティションの場合は任意の`core`を指定します。v2の`type`は文字列のリストなので、1つのパーティションに複数の役割を指定できます。たとえば、`app_img`と`app_exec`を同時に指定できます。
 
 <div align="center"><em>表: v2のregionフィールドと型</em></div>
 <div align="center" markdown>

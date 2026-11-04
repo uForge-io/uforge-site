@@ -32,10 +32,10 @@ Routez la RF sur une piste asymétrique à impédance contrôlée de 50 Ω, de p
 
 #### 6.2.3. Alimentation et masse { #623-power-and-ground }
 
-Placez l'inductance BUCK et les condensateurs de filtrage près des broches de la puce. Gardez la piste BUCK_LX courte et large ; la piste BUCK_FB doit avoir une largeur d'au moins 0,25 mm. Ne coulez pas de cuivre sur la couche supérieure sous l'inductance ; conservez un plan de masse continu sur la couche adjacente et ne faites passer aucune autre piste dans la zone de l'inductance. Reliez les masses des condensateurs de sortie BUCK au plan de masse principal par plusieurs vias. Placez le condensateur PVDD près de sa broche et routez PVDD de manière courte et large ; reliez PVSS à la masse principale par des vias. Placez les condensateurs de découplage LDO et E/S près de leurs broches et dimensionnez les pistes d'alimentation selon le courant de charge.
+Placez l'inductance BUCK et les condensateurs de filtrage près des broches de la puce. Gardez la piste BUCK_LX courte et large ; la piste BUCK_FB doit avoir une largeur supérieure à 0,25 mm. Ne coulez pas de cuivre sur la couche supérieure sous l'inductance ; conservez un plan de masse continu sur la couche adjacente et ne faites passer aucune autre piste dans la zone de l'inductance. Reliez les masses des condensateurs de sortie BUCK au plan de masse principal par plusieurs vias. Placez le condensateur PVDD près de sa broche et routez PVDD de manière courte et large ; reliez PVSS à la masse principale par des vias. Placez les condensateurs de découplage LDO et E/S près de leurs broches et dimensionnez les pistes d'alimentation selon le courant de charge.
 
-!!! warning "Valeurs contradictoires pour la largeur de piste PVDD"
-    Le guide d'application matérielle SF32LB56xU/V spécifie une largeur minimale de piste PVDD de 0,5 mm, tandis que la liste de contrôle PCB correspondante indique 8 mil. Ces valeurs diffèrent ; confirmez auprès de SiFli ou du responsable de la conception PCB l'exigence applicable avant le gel du routage.
+!!! warning "Valeurs contradictoires pour la largeur des pistes PVDD et BUCK_FB"
+    Le guide d'application matérielle SF32LB56xU/V spécifie une largeur minimale de piste PVDD de 0,5 mm, tandis que la liste de contrôle PCB correspondante indique 8 mil. Le guide exige aussi une largeur BUCK_FB supérieure à 0,25 mm, alors que la liste impose au moins 8 mil pour BUCK_LX et BUCK_FB. Ces exigences diffèrent ; confirmez les valeurs applicables auprès de SiFli ou du responsable de la conception PCB avant le gel du routage.
 
 #### 6.2.4. Audio et signaux analogiques { #624-audio-and-analog-signals }
 
@@ -47,7 +47,7 @@ Routez USB D+/D− (PA17/PA18) en paire différentielle de 90 Ω protégée par 
 
 #### 6.2.6. EMI, ESD et points de test { #626-emi-esd-and-test-points }
 
-Évitez les longues pistes sur la couche supérieure, hors du blindage, pour les signaux d'horloge et d'alimentation bruyants ; utilisez si possible les couches internes. Placez les composants TVS/ESD près du connecteur correspondant. Faites passer chaque signal par son composant de protection, puis reliez la pastille de masse du composant à la masse principale par des pistes courtes et larges et des vias. Placez le point de test du câble de charge USB en amont de sa TVS ; placez la TVS du connecteur de batterie en amont de la plateforme batterie afin que les lignes externes passent par la TVS avant d'atteindre la puce. Reliez suffisamment le réseau de masse sous la puce au plan de masse principal à l'aide de vias borgnes ou enterrés.
+Évitez les longues pistes sur la couche supérieure hors du blindage ; les signaux d'horloge et d'alimentation bruyants doivent être routés sur les couches internes, pas sur la couche supérieure. Placez les composants TVS/ESD près du connecteur correspondant. Faites passer chaque signal par son composant de protection, puis reliez la pastille de masse du composant à la masse principale par des pistes courtes et larges et des vias. Placez le point de test du câble de charge USB en amont de sa TVS ; placez la TVS du connecteur de batterie en amont de la plateforme batterie afin que les lignes externes passent par la TVS avant d'atteindre la puce. Reliez suffisamment le réseau de masse sous la puce au plan de masse principal à l'aide de vias borgnes ou enterrés. Configurés en sorties d'horloge, les PBR0–PBR2 de la variante U et les PBR0–PBR3 de la variante V doivent bénéficier d'un blindage de masse tridimensionnel et être éloignés des sources d'interférence, telles que les sorties 32 kHz.
 
 ### 6.3. Liste de contrôle d'implantation et de routage du PCB { #63-pcb-layout-checklist }
 
@@ -124,6 +124,8 @@ Chaque tableau ci-dessous couvre un aspect de la revue de l'implantation et du r
 | 5 | L'espacement entre les deux pistes parallèles du quartz 32 kHz dépasse 2 fois l'espacement entre pistes | Obligatoire |
 
 </div>
+
+La liste de contrôle PCB source indique que l'espacement de la paire de pistes parallèles du quartz 32 kHz doit dépasser deux fois l'espacement entre pistes, mais ne précise pas une autre dimension de référence. Confirmez l'interprétation auprès du responsable de la liste avant d'appliquer ce critère au routage.
 
 #### 6.3.5. Boutons { #635-buttons }
 

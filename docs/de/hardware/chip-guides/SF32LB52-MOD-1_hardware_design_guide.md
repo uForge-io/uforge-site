@@ -106,7 +106,7 @@ Die folgende Tabelle beschreibt alle 68 Modulanschlüsse.
 | PA33 | 15 | I/O/T | GPIO_A33 | I | GPIO_A33, PA33_I2C_UART, PA33_TIM, #GPADC_CH6 |
 | PA32 | 16 | I/O/T | GPIO_A32 | O | GPIO_A32, PA32_I2C_UART, PA32_TIM, #GPADC_CH5 |
 | VDD33_VOUT2 | 17 | P | VDD33_VOUT2 | P | 3,3-V-Versorgungsausgang |
-| PA24 | 18 | I/O/T | GPIO_A24 | O | GPIO_A24, SPI1_DI, I2S1_MCLK, PA24_I2C_UART, PA24_TIM, #WKUP_PIN0 |
+| PA24 | 18 | I/O/T | GPIO_A24 | O | GPIO_A24, SPI1_DIO, I2S1_MCLK, PA24_I2C_UART, PA24_TIM, #WKUP_PIN0 |
 | PA25 | 19 | I/O/T | GPIO_A25 | O | GPIO_A25, SPI1_DI, I2S1_SDO, PA25_I2C_UART, PA25_TIM, #XTAL32K_EXT, #WKUP_PIN1 |
 | PA26 | 20 | I/O/T | GPIO_A26 | O | GPIO_A26, PA26_I2C_UART, PA26_TIM, #WKUP_PIN2 |
 | PA27 | 21 | I/O/T | GPIO_A27 | O | GPIO_A27, PA27_I2C_UART, PA27_TIM, #WKUP_PIN3 |
@@ -147,6 +147,9 @@ Die folgende Tabelle beschreibt alle 68 Modulanschlüsse.
 | PA12 | 68 | I/O/T | GPIO_A12 | O | GPIO_A12, MPI2_CS, SD1_DIO2, PA12_I2C_UART, PA12_TIM |
 
 </div>
+
+!!! important "SiFli-Quellen nennen unterschiedliche SPI1-Funktionen für PA24"
+    DS5203 V0.3 führt PA24 als `SPI1_DI`; die OpenSiFli-Pintabelle des DevKit-LCD nennt `SPI1_DIO`, während die EPD-Designanleitung PA24 für die TF-Karten-CMD-Verbindung als `SPI1_DO` verwendet. Diese Tabelle folgt der OpenSiFli-Bezeichnung `SPI1_DIO`. Aus diesen Bezeichnungen lässt sich weder die Signalrichtung noch die Multiplexer-Konfiguration für jede SDK- oder Modulrevision ableiten. Prüfen Sie vor der Zuweisung von PA24 den Pin-Multiplexer des Ziel-SDK und die genaue Modulrevision. Siehe die [DevKit-LCD-Pintabelle](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-DevKit-LCD.md) und die [EPD-Display-Designanleitung](https://wiki.sifli.com/hardware/SF32LB52-MOD-1-EPD-HW-Application.html).
 
 *Legende: P = Versorgung; I = Eingang; O = Ausgang; T = hochohmig konfigurierbar; AO = Audioausgang; AI = Audioeingang.*
 

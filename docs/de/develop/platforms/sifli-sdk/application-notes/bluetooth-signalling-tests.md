@@ -7,7 +7,10 @@ tags: [Entwicklung, SiFli-SDK, Anwendungshinweise, Bluetooth]
 
 # Bluetooth-Signalisierungstests durchführen { #run-bluetooth-signaling-tests }
 
-Im Signalisierungsmodus wird eine echte Bluetooth-Verbindung zwischen dem Prüfling (DUT) und dem Kommunikationstester hergestellt. Das SDK nutzt diesen Modus zur protokollkonformen TX/RX-Prüfung und für BQB-/QDID-Tests. Er unterscheidet sich von herstellerspezifischen Tests ohne Signalisierung und von RF-Tests einzelner Parameter.
+Im Signalisierungsmodus wird für protokollkonforme TX/RX-Tests eine echte Bluetooth-Verbindung zwischen DUT und Kommunikationstester hergestellt. Der SiFli-Leitfaden beschreibt sowohl manuelle Bedienung als auch automatisierte Tests, bei denen Software den Tester steuert, etwa R&S® CMWrun einen CMW-Tester. Dies unterscheidet sich von herstellerspezifischen Tests ohne Signalisierung und von RF-Einzelparametertests.
+
+!!! note "Geltungsbereich für Qualifikationstests"
+    Für Qualifikationstests ist der Ablauf passend zum jeweiligen Testtyp zu wählen. Laut SiFli-RF-Testleitfaden wird BT-Signalisierung für QDID-/Protokollkonformitätstests eingesetzt. BR/EDR-BQB-RF-Tests verwenden BT-Signalisierung, BLE-BQB-RF-Tests dagegen SIG DTM (BLE ohne Signalisierung). Die BLE-Signalisierungsschritte auf dieser Seite sind daher kein BLE-BQB-RF-Testablauf.
 
 ## Testaufbau { #test-setup }
 
@@ -15,7 +18,7 @@ Bereiten Sie einen Prüfling (DUT), einen Bluetooth-Kommunikationstester, einen 
 
 <div align="center" markdown>
 
-<em>Tabelle: Standard-UART1-Pins nach Gerät/Gehäuse</em>
+<em>Tabelle: Standard-UART1-Pins laut SiFli-Bluetooth-Signalisierungsleitfaden</em>
 
 | Gerät/Gehäuse | UART1 TX | UART1 RX |
 |---|---|---|
@@ -28,6 +31,9 @@ Bereiten Sie einen Prüfling (DUT), einen Bluetooth-Kommunikationstester, einen 
 | SF32LB58x | PA32 | PA31 |
 
 </div>
+
+!!! warning "Widersprüchliche Angaben zur UART1-Richtung bei SF32LB58x"
+    Der SiFli-Bluetooth-Signalisierungsleitfaden und die Debug-Port-Tabelle im [SF32LB58x-Hardwaredesignleitfaden](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md) ordnen UART1-TX/RX des Chips PA32/PA31 zu. Die [Pin-Tabelle des SF32LB58-DevKit-LCD](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb58x/SF32LB58-DevKit-LCD.md) bezeichnet dagegen PA31 als UART1_TXD und PA32 als UART1_RXD; auch der [SiFli-RF-Testleitfaden](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/rf_test_guide.html) nennt TX=PA31/RX=PA32. Die offiziellen Quellen widersprechen sich. Prüfen Sie vor dem Verdrahten den Schaltplan des Zielboards und die Pin-Konfiguration des Projekts; verlassen Sie sich nicht allein auf diese zusammengefasste Tabelle.
 
 Weicht die tatsächliche Projektkonfiguration von dieser Standardbelegung ab, verwenden Sie die dort festgelegte Pin-Zuordnung. Für BLE-Signalisierung ist eine serielle EUT-Steuerverbindung zum Tester erforderlich. Bei Classic BT kann der Tester den Prüfling über die Luftschnittstelle steuern, sobald dieser im Testmodus ist.
 
@@ -52,7 +58,7 @@ Der entscheidende Unterschied liegt in der Steuertopologie: Bei BLE wird der UAR
 4. Trennen Sie den PC und verbinden Sie dieselbe UART1 mit dem USB-zu-RS232-EUT-Steuerport des Testers.
 
 ![Serielle Antwort im BLE-Testmodus](../../../../assets/develop/app-notes/bluetooth-signalling/figure_2-1.png){ loading="lazy" }
-<div align="center"><em>Abbildung: Beispiel für SF32LB52x aus der Quellanleitung — `04 0E 04 XX 03 0C 00` bestätigen, bevor die UART-Verbindung umgesteckt wird.</em></div>
+<div align="center"><em>Abbildung: Beispiel für SF32LB52x aus der Quellanleitung — `04 0E 04 XX 03 0C 00` vor dem Umstecken der UART-Verbindung bestätigen; der Beispiel-Screenshot zeigt `04 0E 04 06 03 0C 00`.</em></div>
 
 ### Classic Bluetooth { #classic-bluetooth }
 
@@ -62,7 +68,7 @@ Der entscheidende Unterschied liegt in der Steuertopologie: Bei BLE wird der UAR
 
 ## Signalisierungsverbindung herstellen { #establish-the-signaling-connection }
 
-Schalten Sie in der Anwendung `Bluetooth Signaling` des Testers die Signalisierung ein. Wählen Sie für BLE unter `EUT Control` die Optionen `USB-to-RS232 adapter`, 1 000 000 Baud und `Low Energy burst type`. Verbinden Sie UART1 des Prüflings mit dem Tester und das RF-Koaxialkabel mit dessen RF-Eingang. Führen Sie anschließend `Connection Check` aus und warten Sie auf `LE comm test passed`. Setzen Sie für Classic BT `HW Interface` auf `None (EUT Control off)`, suchen Sie mit `Inquire` nach der Adresse des Prüflings und wählen Sie `Connect Test Mode`.
+Schalten Sie in der Tester-Anwendung `Bluetooth Signaling` die Signalisierung ein. Wählen Sie für BLE unter `EUT Control` `HW Interface`=`USB to RS232 adapter`, `EUT Comm Protocol`=`HCI` und `Baud Rate`=`1000000`; wählen Sie unter General Setup `Burst Type: Low Energy`. Das gezeigte Messbeispiel verwendet `PHY=LE1M`. Solange das serielle Kabel nicht angeschlossen ist, wird `Virtual COM Port` als `None` angezeigt und ist deaktiviert. Verbinden Sie UART1 des Prüflings mit dem Tester und das RF-Koaxialkabel mit dessen RF-Eingang. Schalten Sie Bluetooth Signaling anschließend aus und wieder ein, damit der Tester den seriellen Port erkennt. Führen Sie `Connection Check` aus; nach etwa 3 Sekunden sollte `LE comm test passed` erscheinen. Setzen Sie für Classic BT `HW Interface` auf `None (EUT Control off)`, suchen Sie mit `Inquire` nach der DUT-Adresse und wählen Sie `Connect Test Mode`.
 
 ![BLE-Tester-EUT-Control-Einstellungen](../../../../assets/develop/app-notes/bluetooth-signalling/figure_3-5.jpg){ loading="lazy" }
 <div align="center"><em>Abbildung: Beispiel für SF32LB52x aus der Quellanleitung — BLE-EUT-Control-, Baudraten- und Low-Energy-Einstellungen.</em></div>
@@ -70,13 +76,16 @@ Schalten Sie in der Anwendung `Bluetooth Signaling` des Testers die Signalisieru
 ![Classic-BT-Tester-Einstellungen](../../../../assets/develop/app-notes/bluetooth-signalling/figure_3-7.jpg){ loading="lazy" }
 <div align="center"><em>Abbildung: Beispiel für SF32LB52x aus der Quellanleitung — Classic-BT-Signalisierung mit EUT Control auf `None (EUT Control off)`.</em></div>
 
+!!! note "In den Tester-Screenshots gezeigte Beispielwerte"
+    Der BLE-Screenshot zeigt außerdem `Stop Bits=1`, `Parity=None`, serielles `Protocol=None`, `Autoreset EUT` aktiviert und `Use BR/EDR Settings` deaktiviert. Das Messbeispiel nennt `Operating Mode=RF Test`, `Burst Type=Low Energy`, `PHY=LE1M`, `Channel=19`, `Frequency=2440.0 MHz`, `Tx Level (CMW)=-40.00 dBm`, `Exp. Nom. Power=30.00 dBm`, `Auto Ranging` und `Dirty Tx` deaktiviert, `Packet Type=RE_PHY_TestRef`, `Payload Length=37 byte(s)` und `Pattern Type=PRBS9`. Der Classic-BT-Screenshot zeigt `Operating Mode=RF Test`, `Burst Type=Basic Rate`, `Test Mode=Loopback Test` in der Oberfläche, RX-/TX-Werte von `Channel` 10/39 und von `Frequency` 2412.0/2441.0 MHz, `Tx Level (CMW)=-40.00 dBm`, `Exp. Nom. Power=30.00 dBm`, `Packet Type=DH5`, `Payload Length=339 byte(s)` und `Pattern Type=10101010`; Hopping, Auto Ranging, Dirty Tx und Whitening sind deaktiviert. Dies sind screenshotspezifische Messbeispiele, keine allgemeingültigen Einstellungen. Das Feld `Loopback Test` im Screenshot ändert nicht den Verbindungsschritt oben, bei dem nach `Inquire` `Connect Test Mode` gewählt wird.
+
 ## TX-Messungen durchführen { #run-tx-measurements }
 
-Öffnen Sie `Bluetooth 1 Multi Eval.` und aktivieren Sie die Messung. Wählen Sie den erforderlichen BLE-1M/2M- oder Classic-BT-BR/EDR-Burst-Typ, Kanal, Pakettyp und Nutzlastlänge. Derselbe Tester-TX-Bildschirm wird nach jeder BLE- oder BT-Signalisierungsverbindung verwendet.
+Öffnen Sie `Bluetooth 1 Multi Eval.`; der Messbildschirm ist standardmäßig ausgeschaltet und wird mit `ON/OFF` aktiviert. Zum Ändern der Testparameter wählen Sie rechts `Input Signal` und unten am Bildschirm `Burst Type`. Für BLE stehen 1M/2M, für Classic BT BR/EDR zur Wahl. Kanal, Pakettyp und Nutzlastlänge werden im Bluetooth-Signaling-Bildschirm oder unter `Input Signal` eingestellt. Nach einer BLE- oder BT-Signalisierungsverbindung wird derselbe TX-Bildschirm verwendet.
 
 ## RX-Empfindlichkeitsmessungen durchführen { #run-rx-sensitivity-measurements }
 
-Deaktivieren Sie TX, kehren Sie zum Signalisierungsbildschirm zurück und öffnen Sie `Bluetooth 1 RX Meas.`. Wählen Sie für Classic BT BER und für BLE PER, konfigurieren Sie Kanal und Pakettyp und aktivieren Sie Rx Quality. Verringern Sie den `Tx Level (CMW)` des Testers schrittweise. Der letzte Wert, bei dem die BER-/PER-Anzeige noch gültig ist, entspricht der gemessenen Empfindlichkeit. Halten Sie fest, ob leitungsgebunden oder abgestrahlt gemessen wurde, und berücksichtigen Sie die Kabeldämpfung.
+Deaktivieren Sie TX, kehren Sie über `Bluetooth Signaling` rechts zum Verbindungsbildschirm zurück und öffnen Sie `Bluetooth 1 RX Meas.`. Wählen Sie für Classic BT BER und für BLE PER, konfigurieren Sie Kanal, Pakettyp und Nutzlastlänge und aktivieren Sie Rx Quality. Verringern Sie `Tx Level (CMW)` in Schritten von 0,01 oder 0,1. Wenn die BER-/PER-Anzeige rot wird, entspricht der vorherige Pegel der RX-Empfindlichkeit für diesen Kanal. Halten Sie fest, ob leitungsgebunden oder abgestrahlt gemessen wurde, und berücksichtigen Sie die Kabeldämpfung.
 
 ## Protokollieren und reproduzieren { #record-and-reproduce }
 

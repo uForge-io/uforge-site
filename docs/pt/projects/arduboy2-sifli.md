@@ -102,7 +102,7 @@ O repositório Arduboy2-SiFli não fornece o mapa de pinos da placa em um arquiv
 |:-----------------|:---------------|:--------------|
 | Placa-alvo | A variante ArduinoCore-Zephyr `sf32lb52_devkit_lcd_sf32lb525uc6` indicada pelo README do Arduboy2-SiFli e, em seguida, o esquemático da placa física. | A variante de software comprova a compatibilidade de todas as revisões físicas e conjuntos de periféricos. |
 | Core do Arduino | Pacote OpenSiFli e revisão documentados para o alvo. | O pacote mais recente pode substituir a revisão usada pelo repositório. |
-| Display e entradas | Definições de pinos/configuração do repositório e esquemático da placa física. | A geometria de display, polaridade dos botões ou nomes de pinos originais da Arduboy coincidem com os da placa SF32. |
+| Display e entradas | Definições de pinos/configuração do repositório e esquemático da placa física. | A geometria de display, polaridade dos botões ou nomes de pinos originais do Arduboy coincidem com os da placa SF32. |
 | Áudio | Caminho de saída compatível documentado pelo repositório e configuração específica da placa. | Uma API de tons comprova que temporização do alto-falante, volume e comportamento de consumo estão prontos para produção. |
 | Gravação e recuperação | Fluxo Arduino ou `sftool` documentado para a placa selecionada. | Uma gravação bem-sucedida em um host comprova um caminho recuperável de atualização em campo. |
 

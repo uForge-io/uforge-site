@@ -32,7 +32,7 @@ Esta página clasifica por tarea de ingeniería los ejemplos de [Bluetooth clás
 
 </div>
 
-## Ponga en marcha un ejemplo como evidencia { #bring-up-an-example-as-evidence }
+## Ponga en marcha un ejemplo y documente la validación { #bring-up-an-example-as-evidence }
 
 Antes de cambiar el proyecto, registre la versión exacta del SDK, el nombre de la placa, la configuración, el dispositivo par o la aplicación, los ajustes de radio y los mensajes de registro esperados. Luego siga esta secuencia:
 

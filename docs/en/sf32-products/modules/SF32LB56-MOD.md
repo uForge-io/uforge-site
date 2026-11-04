@@ -145,11 +145,11 @@ SiFli identifies SF32LB566VCB36 with 4 MB + 8 MB OPI-PSRAM and 1 MB QSPI-NOR as 
 
 - 1 × 24-bit audio DAC
 - 1 × 24-bit Sigma-Delta audio ADC
-- 2 × PDM interfaces (PDM1/PDM2), each supporting left/right microphone channels
+- 2 × PDM interfaces (PDM1/PDM2); DS5602 V0.3 lists two digital-microphone inputs
 - 1 × I2S interface
 - Audio sample-rate conversion and EQ acceleration
 
-Each PDM interface can serve up to two digital microphones, so the two interfaces can support up to four microphones in total. PDM interface count is not microphone count; actual connectivity depends on pin multiplexing and board routing.
+The recommended pin-assignment figure lists PDM1_DATA on PA20 or PA64, PDM1_CLK on PA24 or PA69, PDM2_DATA on PA25 or PA71, and PDM2_CLK on PA26 or PA73. These are alternative pin-mux choices, not confirmation of carrier-board routing. DS5602 V0.3 does not establish support for channel sharing or a four-microphone configuration. Verify the supported mode and actual board routing before designing a multi-microphone system.
 
 ### Power and I/O
 

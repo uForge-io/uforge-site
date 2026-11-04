@@ -57,7 +57,7 @@ tags:
 | 主系统总线接口 | 3 × AMBA AHB-Lite（哈佛架构） | 3 × AMBA AHB-Lite（哈佛架构） | 2 个 AMBA 5 AHB5 接口：C-AHB + S-AHB | 2 个 AMBA 5 AHB5 接口：C-AHB + S-AHB | 64 位 AMBA 5 AXI5；32 位 AHB 外设接口；64 位 TCM AHB 从接口 | 64 位 AMBA 4 AXI；32 位 AHB 外设接口；32 位 TCM AHB 从接口 |
 | TrustZone 支持 | 否 | 否 | 可选；由 SoC 实现决定 | 可选；由 SoC 实现决定 | 可选；由 SoC 实现决定 | 否 |
 | DSP 指令 | 无专用 DSP 扩展 | 原生 DSP 扩展 | 可选 DSP 扩展 | 可选 DSP 扩展 | 原生 DSP 扩展；可选 Helium（MVE） | 原生 DSP 扩展 |
-| Arm Helium（MVE） | 不支持 | 不支持 | 不支持 | 不支持 | 可选；整数或浮点 MVE，取决于配置 | 不支持 |
+| Arm Helium（MVE） | 不支持 | 不支持 | 不支持 | 不支持 | 可选；可仅包含整数 MVE-I，或同时包含 MVE-I 和 FP16/FP32 浮点 MVE-F；具体组合取决于 FPU 和实现配置 | 不支持 |
 | 浮点单元 | 无原生 IP 能力 | 可选单精度 | 可选单精度 | 可选单精度 | 可选标量 FP16/FP32/FP64；可选向量 FP16/FP32 | 可选单精度/双精度 |
 | I-cache / D-cache | 不包含在处理器 IP 中；SoC 层级可另行加入缓存 | 不包含在处理器 IP 中；SoC 层级可另行加入缓存 | 不包含在处理器 IP 中；SoC 层级可另行加入缓存 | 处理器 IP 可选；是否实现及其配置取决于具体实现 | 处理器 IP 可选；是否实现及其配置取决于具体实现 | 处理器 IP 可选；是否实现及其配置取决于具体实现 |
 | Arm Custom Instructions / CDE | 无原生 IP 能力 | 无原生 IP 能力 | Arm 定义 CDE 指令编码；自定义运算和数据通路由 SoC 定义；整数 CDE 可选，浮点 CDE 取决于 FPU 和配置 | STAR-MC1 技术参考手册记载了 GPR CDE 和 FPCDE 模块；实际实现及产品可用性取决于 SoC 配置 | Arm 定义 CDE 指令编码；自定义运算和数据通路由 SoC 定义；r1 及以后版本可选，r0 不支持 | 无原生 IP 能力 |
@@ -79,6 +79,8 @@ tags:
 
 处理器 IP 参考资料：Arm [CM3 数据手册](https://documentation-service.arm.com/static/62053c120ca305732a3a5c14)、[CM4 文档](https://support.arm.com/compute-ip/cortex-m4)、[CM33 技术参考手册](https://documentation-service.arm.com/static/66be1ce8882fec713ef49954)、[CM55 数据手册](https://documentation-service.arm.com/static/6205407494e7af28dd7c9cb5)、[CM7 数据手册](https://developer.arm.com/-/media/Arm%20Developer%20Community/PDF/Processor%20Datasheets/Arm-Cortex-M7-Processor-Datasheet.pdf)和 [STAR-MC1 技术参考手册](https://www.armchina.com/webarm/arm/common/download/profile/resource/file/Documents/Application-Notes/Technical-Reference-Manual/Star_Technical_Reference_Manual_00903001_0100_00_en.pdf)。
 
+关于 Cortex-M55 的 MVE 配置细节，参见 Arm [CM55 技术参考手册](https://documentation-service.arm.com/static/63190fc5ce77a54a32db3ac2)。
+
 ## 架构增强点 { #architectural-enhancements }
 
 STAR-MC1 是在 Cortex-M33 基础上的增强，而不是替代。最关键的改进来自实现层面的优化，它们让内核少花时间等待存储器，多花时间完成有效执行。
@@ -97,6 +99,8 @@ I-cache 和 D-cache 是否可用以及如何配置，取决于 SoC 实现。只�
 对于可缓存且硬件不保证一致性的缓冲区，与 DMA、显示控制器、音频接口或其他总线主设备共享内存的驱动，必须遵循 SDK 或 RTOS 的缓存维护规则。外设读取 CPU 写入的数据前，应将修改后的缓存内容写回内存；DMA 写入前应按平台要求准备接收缓冲区，传输完成后、CPU 读取前再使过期缓存行失效。DMA 占用缓冲区期间，CPU 不得访问它。缓冲区应按完整缓存行分配，不能与无关数据共用缓存行，并应执行平台要求的完成检查和内存屏障。不可缓存或硬件保证一致性的缓冲区，仍需遵循各自的同步规则。具体的缓冲区使用权交接和脏缓存行风险，见 [PSRAM 与其他存储器](psram-and-memory-types.md#caches-and-external-memory-execution)。
 
 ### Armv8-M 自定义数据通路扩展 { #armv8-m-custom-datapath-extension }
+
+CDE 与 Arm Helium（MVE）是不同的扩展：CDE 定义用于 SoC 自定义运算的指令编码，MVE 则是 Armv8.1-M 的标准向量扩展。STAR-MC1 基于 Armv8-M Mainline，不能据此推断其支持 MVE。
 
 在处理器 IP 层面，Arm 定义 CDE 指令编码，SoC 设计者定义自定义运算和数据通路。CM33 可选支持整数 CDE；浮点 CDE 取决于 FPU 和具体配置。STAR-MC1 技术参考手册记载了 GPR CDE 和 FPCDE 模块，但这只能说明 IP 层面的能力，不能据此认定某个 SF32 器件或 SDK 已提供可用的 CDE。思澈科技（SiFli）的 SiFli-SDK [v2.5.1 发布说明](https://github.com/OpenSiFli/SiFli-SDK/releases/tag/v2.5.1)记录了修复 SF32LB57x 上 CDE 被误启用的问题；实际使用前，应确认目标器件和 SDK 的支持情况。CM55 从 r1 开始可选支持 CDE，r0 不支持。CP0–CP7 是分配给协处理器或 CDE 的编码空间，并不代表有八条自定义指令或八个额外加速器。使用前应核对内核版本、已实现模块，以及编译器和 SDK 的支持。详情见 [CM33 数据手册](https://www.arm.com/-/media/Arm%20Developer%20Community/PDF/Processor%20Datasheets/Arm-Cortex-M33-Processor-Datasheet.pdf)、[CM55 CDE 版本说明](https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/armv8_2d00_m-based-processor-software-development-hints-and-tips)和 STAR-MC1 技术参考手册 B7、B8 章。
 

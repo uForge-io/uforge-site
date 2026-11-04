@@ -20,11 +20,11 @@ SF32の開発では、コンパイラーだけでなく、ファームウェア�
 
 | ツール | 用途 |
 |:-------|:-----|
-| [`sftool`](https://github.com/OpenSiFli/sftool) | OpenSiFliのZephyr／Arduinoフローで使われる、SF32向けのクロスプラットフォーム書き込みツール。 |
+| [`sftool`](https://github.com/OpenSiFli/sftool) | 対応するSiFli SoC向けのクロスプラットフォーム・シリアルCLI。フラッシュの書き込み、読み出し、消去、リセットなどを実行できます。 |
 | [SDKのUART書き込みスクリプト](../platforms/sifli-sdk/build-flash-monitor.md) | SiFli-SDKのビルドで生成される初回書き込み用スクリプト。 |
 | [CodeKitの操作](codekit.md) | VS Codeでの設定、ビルド、書き込み、モニター操作。 |
 | [`AssertDump`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/AssertDump/AssertDump_UM.html) | クラッシュ時のメモリーデータを取得し、後から解析する。 |
-| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | トレース／ログの取得、およびUART経由でチップのDebug IPを利用したデバッグ。 |
+| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace`はターゲットボードのログ取得に、`UsartServer`はチップのDebug IPを介したUARTデバッグに使用します。 |
 | [`Impeller`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/Impeller/Impeller_UM.html) | 量産ライン向けファームウェア書き込み、校正、PCBAテスト。 |
 | [eZip／画像ツール](../../learn/graphics/ezip.md) | 圧縮グラフィックスのパイプライン向けアセット変換。 |
 | [RF／オーディオ／工場用ツール](https://docs.sifli.com/projects/solution/6.tools/index.html) | 量産時の校正、試験、調整のワークフロー。 |
@@ -33,12 +33,13 @@ SF32の開発では、コンパイラーだけでなく、ファームウェア�
 
 ## 書き込みツール { #flashing-tools }
 
-最初の立ち上げでは、直前のビルドによって生成されたSDKのUARTスクリプトを使ってください。次の用途がある場合は`sftool`を追加します。
+最初の立ち上げでは、直前のビルドによって生成されたSDKのUARTスクリプトを使ってください。クロスプラットフォームのシリアルCLIが適する作業には`sftool`を使います。
 
-- ワークフローをまたいで一貫したコマンドライン書き込みツールを使う。
-- Zephyrの`west flash`と連携する。
-- ArduinoCore-zephyrのアップロード動作を使う。
-- CI、工場、回帰試験で自動化する。
+- SDK生成のダウンロードスクリプト以外から、フラッシュへの書き込み、読み出し、消去を直接実行する。
+- 対応するSiFli SoCとホストプラットフォーム間で、再現可能なコマンドライン手順を使う。
+- JSONコマンドファイルや、CI、工場、回帰試験用のラッパーを通じて自動化する。
+
+`west flash`やArduinoアップローダーなど、特定のビルド／アップロードフローとの連携には、そのプロジェクト側の設定が必要です。
 
 チームで一方の経路に標準化するまでは、両方の手順をプロジェクトに記録してください。
 

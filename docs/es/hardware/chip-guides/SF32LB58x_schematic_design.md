@@ -657,7 +657,7 @@ SD1 utiliza 12 GPIO (PA00-PA11) alimentadas desde el dominio VDDIOA2 y admite 1,
 </div>
 
 !!! note "Verificación de las etiquetas SD1"
-    La fuente indica que SD1 utiliza 12 GPIO (PA00–PA11), pero su tabla de señales solo incluye 10 señales (SD1_D[7:0], CLK y CMD). Además, la tabla describe tanto SD1_D2 como SD1_D6 como «Data 6». La fuente no especifica las dos GPIO omitidas ni aclara la etiqueta duplicada. Antes de cerrar el esquemático, verifique la asignación completa de pines SD1 en la hoja de datos del chip.
+    La fuente indica que SD1 utiliza 12 GPIO (PA00–PA11), pero su tabla de señales solo incluye 10 señales (SD1_D[7:0], CLK y CMD). El esquema de referencia eMMC etiqueta PA11 como `SD1_RESET`, pero esa señal no aparece en la tabla. La fuente no explica la función de PA02 ni la discrepancia restante en el recuento. Además, la tabla describe tanto SD1_D2 como SD1_D6 como «Data 6». Antes de cerrar el esquemático, verifique la asignación completa de pines SD1 en la hoja de datos del chip.
 
 <div align="center"><em>Tabla 5.6-4: Conexiones de señales SD2</em></div>
 

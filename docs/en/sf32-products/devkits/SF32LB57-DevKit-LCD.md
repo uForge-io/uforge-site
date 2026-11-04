@@ -11,7 +11,7 @@ tags:
 
 ## Overview { #overview }
 
-SF32LB57-DevKit-LCD is a multimedia evaluation board built around **SF32LB57-MOD-WD** (apparently intended as a SiFli module product, with **WD** likely standing for **Wi-Fi Dual-band**; this naming interpretation is not officially confirmed), combining the SF32LB57x MCU with SDIO Wi-Fi, boot Flash and peripheral connections. Use it to develop a smart HMI, camera terminal, intercom or connected display, and to validate graphics, capture, audio and connectivity before designing a carrier board.
+SF32LB57-DevKit-LCD is a multimedia evaluation board built around **SF32LB57-MOD-WD**. The name appears to indicate a SiFli module product; **WD** may stand for **Wi-Fi Dual-band**, but that interpretation is not officially confirmed. The board combines the SF32LB57x MCU with SDIO Wi-Fi, boot Flash and peripheral connections. Use it to develop a smart HMI, camera terminal, intercom or connected display, and to validate graphics, capture, audio and connectivity before designing a carrier board.
 
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 900px; margin: 1rem auto;">
 <figure style="margin: 0;"><a href="assets/sf32lb57x/57DEVKIT_LCD_T_Look.png"><img src="assets/sf32lb57x/57DEVKIT_LCD_T_Look.png" alt="SF32LB57-DevKit-LCD — Front View" loading="lazy" style="display: block; width: 100%; height: auto;"></a><figcaption>Front View</figcaption></figure>
@@ -61,7 +61,7 @@ The original block diagram is a functional overview, not a wiring reference. It 
 <figure style="margin: 0;"><a href="assets/sf32lb57x/57DEVKIT-LCD-B-Notes.svg"><img src="assets/sf32lb57x/57DEVKIT-LCD-B-Notes.svg" alt="SF32LB57-DevKit-LCD — Back-Side Components" loading="lazy" style="display: block; width: 100%; height: auto;"></a><figcaption>Back-Side Components</figcaption></figure>
 </div>
 
-## First Run { #getting-started }
+## Initial Bring-Up { #getting-started }
 
 For the display baseline, prepare the board, a compatible 40-pin / 0.5 mm DPI-RGB panel, a data-capable USB cable and a Windows, Linux or macOS computer. Optional equipment includes an IPEX-1 antenna, a DVP camera, a MicroSD/TF card, an 8 Ω speaker and a J-Link or DAP-Link debugger. UART logging and native USB testing together require two data cables.
 
@@ -72,20 +72,9 @@ For the display baseline, prepare the board, a compatible 40-pin / 0.5 mm DPI-RG
 
 A factory-programmed board may show its default UI at power-on; that depends on the installed firmware and panel. A blank screen alone does not prove a download failure. Follow [SiFli-SDK Getting Started](../../getting-started/sifli/getting-started-sifli-sdk.md) for the toolchain, environment and flashing workflow.
 
-## SDK Build Targets { #sdk-build-targets }
+## SDK Setup { #sdk-build-targets }
 
-The current SDK build configuration lists the targets below. These are exact build identifiers, not proof that every SF32LB57-MOD-WD board fits every target: match memory, display, pin configuration and board revision against your SDK checkout. In particular, the board guide does not map its WD module revisions to these target names.
-
-- `sf32lb57-lcd_n16r16_dpi`
-- `sf32lb57-lcd_n16r8_dpi`
-- `sf32lb57-lcd_n16r16_qspi`
-
-After setting up the SDK environment, this is a hello-world build example **only for hardware matching the N16R16 DPI configuration**. A successful UART hello-world does not validate the display, camera or Wi-Fi drivers.
-
-```bash
-cd example/get-started/hello_world/rtt/project
-scons --board=sf32lb57-lcd_n16r16_dpi -j8
-```
+SiFli's board guide says to install the SiFli SDK and select the `SF32LB57-DevKit-LCD` board support package. The currently linked upstream `build_config_gcc.yaml` does not list an SF32LB57 build target. Confirm the board-support package and exact build identifier in the SDK checkout you use before compiling; do not substitute a target from another board. A successful UART hello-world verifies basic serial startup only, not the display, camera or Wi-Fi drivers.
 
 ## Power and Debug { #power-and-debug }
 
@@ -159,7 +148,7 @@ S1–S3 share `PA_34` / `GPADC_CH6`, with source nominal key voltages 2.97 V, 2.
 ## Connector Reference { #connector-reference }
 
 !!! warning
-    These tables transcribe the source’s board-level assignments; they are not a replacement for the schematic. The module summary is incomplete (`58~?`) and mislabels `PA_00`/`PA_01` as USB_DP/USB_DM, conflicting with the explicit native USB mapping `PA35`/`PA36`. Preserve the distinction between a module pad number and an MCU GPIO. Do not use those unresolved rows to design a PCB.
+    These tables transcribe the source’s board-level assignments; they are not a replacement for the schematic. The module summary is incomplete (`58~?`) and lists `PA_00`/`PA_01` as USB_DP/USB_DM, in conflict with the explicit native USB mapping `PA35`/`PA36`. Some source rows group module-pad ranges, GPIO ranges, and alternate functions without specifying each pad’s function; this page preserves those groupings and does not infer individual assignments. Preserve the distinction between a module pad number and an MCU GPIO. Do not use those unresolved rows to design a PCB.
 
 <div align="center"><em>Module Pad Summary — Unresolved Entries Retained</em></div>
 

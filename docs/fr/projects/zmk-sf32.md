@@ -176,12 +176,12 @@ Traitez les défaillances comme des domaines distincts : matrice physique/câbla
 **Objectif :** prouver la référence OpenSiFli exacte avant de modifier une disposition, une surcouche ou une dépendance.
 
 1. Consignez les deux révisions de carte et câblez les deux bancs exactement selon les surcouches Urchin gauche et droite. Étiquetez les cartes et les câbles USB/de flashage selon leur rôle.
-2. Compilez les deux images au commit figé, enregistrez `west list` et inspectez la configuration générée pour confirmer la carte, le shield, le rôle dans le clavier scindé, le BLE, CherryUSB, ZMK Studio et les paramètres NVS attendus.
+2. Compilez les deux images au commit figé et consignez `west list`. Vérifiez que la configuration générée correspond à la table de référence ci-dessus pour la carte, le shield, le rôle dans le clavier scindé, le BLE, CherryUSB, ZMK Studio et NVS.
 3. Flashez chaque image par son chemin de récupération vérifié indépendamment. Capturez le démarrage à froid et le comportement de la console avant d'appairer les moitiés ou l'hôte.
 4. Établissez la connexion BLE du clavier scindé, puis vérifiez les 38 positions par rapport aux couches `default`, `lower` et `raise`. Contrôlez volontairement la sélection/l'effacement des profils Bluetooth et les liaisons de déverrouillage de Studio afin qu'elles ne soient pas déclenchées par accident pendant les tests de frappe.
 5. Validez le HID USB et ZMK Studio sur la moitié gauche, puis le HID Bluetooth vers l'hôte retenu. Répétez après un démarrage à froid.
 
-**Preuves à conserver :** relevés de carte et de câblage, révisions du fork et du manifeste, configurations générées, empreintes des images, journaux de flashage et de démarrage, matrice complète des positions de touches, résultats par couche, sélection du point de terminaison et versions de l'hôte/de Studio.
+**Preuves à conserver :** ajoutez au relevé du contrat de projet ci-dessus les configurations générées, les empreintes des images, les journaux de flashage/démarrage, la matrice complète des positions et les résultats par couche, le point de terminaison retenu et les versions de l'hôte/de Studio.
 
 **Critère de sortie du point de contrôle 1 :** deux démarrages à froid reproduisent la disposition complète de 38 positions, les trois couches, la liaison scindée de droite à gauche et au moins un point de terminaison d'hôte retenu ; les deux moitiés restent récupérables indépendamment.
 
@@ -246,7 +246,7 @@ Avant de concevoir un circuit imprimé de clavier sur mesure ou un prototype sur
 - Qui est responsable du fork ZMK d'OpenSiFli, de la branche Zephyr personnalisée, de la révision du HAL SiFli, de l'adaptation de CherryUSB et des futures mises à jour de sécurité ou de compatibilité ?
 - Quelles fonctions de ZMK amont sont réellement exercées sur SF32, et lesquelles ne sont présentes que dans l'arborescence héritée ?
 - Comment l'identité des images gauche/droite, la révision de la carte, la disposition, la configuration, les appairages enregistrés et l'état de réinitialisation d'usine seront-ils maîtrisés en fabrication et en service ?
-- Quels sont les courants mesurés de chaque moitié en fonctionnement actif, connecté au repos, déconnecté et en veille, y compris le fréquence de balayage, le comportement de reconnexion et la protection de la batterie ?
+- Quels sont les courants mesurés de chaque moitié en fonctionnement actif, connecté au repos, déconnecté et en veille, y compris la fréquence de balayage, le comportement de reconnexion et la protection de la batterie ?
 - Quels hôtes, systèmes d'exploitation, contrôleurs USB, piles Bluetooth, chemins de réveil, cas de rollover et conditions d'interférence ont été testés ?
 - Une mise à jour de dépendance échouée, une modification de Studio, une écriture de paramètres ou une mise à jour sur le terrain peut-elle être récupérée sans ouvrir ni mettre au rebut le produit ?
 - Les licences de ZMK/Zephyr, les fichiers de circuit imprimé et de boîtier, le contenu des dispositions, les logos, les polices et toute configuration fournie conviennent-ils à la distribution ?

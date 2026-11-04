@@ -122,7 +122,7 @@ You are ready to move on when:
 
 - CodeKit recognizes the SDK location.
 - The selected board matches your hardware.
-- Build and flash actions complete.
+- Build and flash actions complete successfully.
 - The serial console shows `hello_world` output after reset.
 
 ## Troubleshooting { #troubleshooting }

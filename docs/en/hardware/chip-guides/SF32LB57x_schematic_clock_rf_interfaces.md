@@ -29,7 +29,7 @@ Recommended parameters:
 |:----------|:---------------|
 | Load capacitance CL | 7 pF to 12 pF, about 8.8 pF recommended |
 | Frequency tolerance | <= ±10 ppm |
-| ESR | <= 30 ohm, about 22 ohm recommended |
+| ESR | <= 30 Ω, about 22 Ω recommended |
 
 </div>
 
@@ -59,7 +59,7 @@ Recommended parameters:
 |:----------|:---------------|
 | Load capacitance CL | 7 pF or 11.5 pF (the chip defaults to 11.5 pF; 7 pF requires a register change); 7 pF is recommended for the lowest power |
 | Frequency tolerance | <= ±20 ppm |
-| ESR | <= 80 kohm, about 38 kohm recommended |
+| ESR | <= 80 kΩ, about 38 kΩ recommended |
 
 </div>
 
@@ -78,13 +78,13 @@ Layout requirements:
 
 | Crystal | Part Number | Vendor | Key Parameters |
 |:--------|:------------|:-------|:---------------|
-| 48 MHz | E1SB48E001G00E | Hosonic | F0 = 48.000000 MHz, ΔF/F0 = -6 to +8 ppm, CL = 8.8 pF, ESR <= 22 ohm, TOPR -30 to 85 °C, 2016 package. |
-| 32.768 kHz | ETST00327000LE | Hosonic | F0 = 32.768 kHz, ΔF/F0 = -20 to +20 ppm, CL = 7 pF, ESR <= 70 kohm, TOPR -40 to 85 °C, 3215 package. |
-| 48 MHz | SX20Y048000B31T-8.8 | TKD | F0 = 48.000000 MHz, ΔF/F0 = -10 to +10 ppm, CL = 8.8 pF, ESR <= 40 ohm, TOPR -20 to 75 °C, 2016 package; higher ESR slightly increases static power consumption. |
-| 32.768 kHz | SF32K32768D71T01 | TKD | F0 = 32.768 kHz, ΔF/F0 = -20 to +20 ppm, CL = 7 pF, ESR <= 70 kohm, TOPR -40 to 85 °C, 3215 package. |
-| 32.768 kHz | SF32WK32768D71T005 | TKD | F0 = 32.768 kHz, ΔF/F0 = -20 to +20 ppm, CL = 7 pF, ESR <= 70 kohm, TOPR -40 to 85 °C, 3215 package. |
-| 48 MHz | CN4048M000885C822000 | JWT | F0 = 48.000000 MHz, ΔF/F0 = -8 to +8 ppm, CL = 8.8 pF, ESR <= 22 ohm, TOPR -30 to 85 °C, 2016 package. |
-| 32.768 kHz | DH2032K76807T2719002 | JWT | F0 = 32.768 kHz, ΔF/F0 = -20 to +20 ppm, CL = 7 pF, ESR <= 70 kohm, TOPR -40 to 85 °C, 3215 package. |
+| 48 MHz | E1SB48E001G00E | Hosonic | F0 = 48.000000 MHz, ΔF/F0 = -6 to +8 ppm, CL = 8.8 pF, ESR <= 22 Ω, TOPR -30 to 85 °C, 2016 package. |
+| 32.768 kHz | ETST00327000LE | Hosonic | F0 = 32.768 kHz, ΔF/F0 = -20 to +20 ppm, CL = 7 pF, ESR <= 70 kΩ, TOPR -40 to 85 °C, 3215 package. |
+| 48 MHz | SX20Y048000B31T-8.8 | TKD | F0 = 48.000000 MHz, ΔF/F0 = -10 to +10 ppm, CL = 8.8 pF, ESR <= 40 Ω, TOPR -20 to 75 °C, 2016 package; higher ESR slightly increases static power consumption. |
+| 32.768 kHz | SF32K32768D71T01 | TKD | F0 = 32.768 kHz, ΔF/F0 = -20 to +20 ppm, CL = 7 pF, ESR <= 70 kΩ, TOPR -40 to 85 °C, 3215 package. |
+| 32.768 kHz | SF32WK32768D71T005 | TKD | F0 = 32.768 kHz, ΔF/F0 = -20 to +20 ppm, CL = 7 pF, ESR <= 70 kΩ, TOPR -40 to 85 °C, 3215 package. |
+| 48 MHz | CN4048M000885C822000 | JWT | F0 = 48.000000 MHz, ΔF/F0 = -8 to +8 ppm, CL = 8.8 pF, ESR <= 22 Ω, TOPR -30 to 85 °C, 2016 package. |
+| 32.768 kHz | DH2032K76807T2719002 | JWT | F0 = 32.768 kHz, ΔF/F0 = -20 to +20 ppm, CL = 7 pF, ESR <= 70 kΩ, TOPR -40 to 85 °C, 3215 package. |
 
 </div>
 
@@ -119,7 +119,7 @@ Key RF schematic requirements:
 
 PCB requirements:
 
-- Route the RF trace as single-ended 50 ohm.
+- Route the RF trace as single-ended 50 Ω.
 - Prefer top-layer routing with minimal vias and layer changes.
 - Avoid sharp angles and right-angle corners.
 - Add ground copper and via fences along both sides.
@@ -470,7 +470,7 @@ SF32LB57x provides two analog ADC inputs, each supporting single-ended or differ
 Guidelines:
 
 - Place MIC_BIAS, AUD_VREF, and AVDD33_AUD decoupling capacitors close to the chip.
-- Add a DC-blocking capacitor for analog microphone input; 2.2 uF or larger is recommended.
+- Add a DC-blocking capacitor for analog microphone input; 2.2 µF or larger is recommended.
 - Place analog input components close to the chip pins.
 - Keep ADCP and other analog traces short, shielded, and away from noise sources.
 - When a multiplexed GPIO is used as analog input, configure the pin as high impedance as required.
@@ -497,7 +497,7 @@ Guidelines:
 
 <div align="center"><em>Figure 5.5-1: Single-Ended Analog Microphone Input Reference Circuit</em></div>
 
-The reference circuit shows each microphone biased through a 1 kohm resistor, with 4.7 uF bias decoupling, a 2.2 uF series input capacitor, and a 10 nF capacitor from the ADC input to ground. These are values in the illustrated reference circuit; verify them for the selected microphone and analog-input design.
+The reference circuit shows each microphone biased through a 1 kΩ resistor, with 4.7 µF bias decoupling, a 2.2 µF series input capacitor, and a 10 nF capacitor from the ADC input to ground. These are values in the illustrated reference circuit; verify them for the selected microphone and analog-input design.
 
 ![Figure 5.5-2: PDM Digital Microphone Input Reference Circuit](../../sf32-products/chips/assets/57x/SF32LB57x-PDM-MIC.png){ width="80%" loading="lazy" }
 
@@ -521,7 +521,7 @@ Follow the recommended circuit in Figure 5.5-3. The differential low-pass filter
 
 <div align="center"><em>Figure 5.5-3: Analog Audio PA Output Reference Circuit</em></div>
 
-The illustrated NS4150B stage uses a +5 V supply, 100 nF DAC coupling capacitors, 43.2 kohm input resistors, and PA51 for amplifier enable with a 5.1 Mohm pull-down. The drawing annotates 3 mA static current for the amplifier, 0.1 uA in shutdown, and 0.6 uA through the pull-down. Treat these as values for the example circuit, not universal PA specifications, and verify them against the selected amplifier and system requirements.
+The illustrated NS4150B stage uses a +5 V supply, 100 nF DAC coupling capacitors, 43.2 kΩ input resistors, and PA51 for amplifier enable with a 5.1 MΩ pull-down. The drawing annotates 3 mA static current for the amplifier, 0.1 µA in shutdown, and 0.6 µA through the pull-down. Treat these as values for the example circuit, not universal PA specifications, and verify them against the selected amplifier and system requirements.
 
 #### 5.5.8. Digital Audio { #558-digital-audio }
 
@@ -550,7 +550,7 @@ Guidelines:
 
 - Confirm interface width, clock, sync signals, data lines, and pinmux.
 - Make camera power, reset, PWDN, and clock controllable by the MCU.
-- Keep camera data and clock traces length grouped and away from RF and analog signals.
+- Route camera data and clock traces together, and keep them away from RF and analog signals.
 - Provide continuous reference ground for high-speed camera routing.
 - Add ESD protection for the camera connector or FPC where required.
 
@@ -592,13 +592,13 @@ For 10-bit DVP cameras, use 8-bit wiring when GPIO resources are tight; connect 
 
 #### 5.5.11. Buttons and Motor { #5511-buttons-and-motor }
 
-- The power/reset key must use `PA34`, active-high; the pin is pulled low by default and goes high when pressed. `PA34` supports a 10-second long-press hardware reset, and the 10 kohm pull-down resistor must be placed on the main board.
-- For resistor-divider GPADC key designs, distinguish keys by divider voltage and place a 0.1 uF-to-ground filter capacitor close to the pin to improve sampling accuracy.
-- The reference ladder shows 1.1 kohm, 2.8 kohm, and 5.1 kohm key resistors, plus a 10 kohm pull-down and a 100 nF filter capacitor. Use these as reference-circuit values and verify the ADC thresholds for the chosen supply and resistor tolerances.
+- `PA34` supports long-press reset and can be reused as a power key. The reset input is active-high, pulled low by default, and goes high when the button is pressed. Place a 10 kΩ pull-down resistor on the main board.
+- For resistor-divider GPADC key designs, distinguish keys by divider voltage and place a 0.1 µF-to-ground filter capacitor close to the pin to improve sampling accuracy.
+- The reference ladder shows 1.1 kΩ, 2.8 kΩ, and 5.1 kΩ key resistors, plus a 10 kΩ pull-down and a 100 nF filter capacitor. Use these as reference-circuit values and verify the ADC thresholds for the chosen supply and resistor tolerances.
 - Add ESD protection for external keys.
 
-![Figure 5.5-4: Power Key and GPADC Key Reference Circuit](../../sf32-products/chips/assets/57x/SF32LB57x-PWKEY.png){ width="80%" loading="lazy" }
+![Figure 5.5-4: GPADC Key Reference Circuit](../../sf32-products/chips/assets/57x/SF32LB57x-PWKEY.png){ width="80%" loading="lazy" }
 
-<div align="center"><em>Figure 5.5-4: Power Key and GPADC Key Reference Circuit</em></div>
+<div align="center"><em>Figure 5.5-4: GPADC Key Reference Circuit</em></div>
 
 Use the SF32LB57x vibration-motor reference circuit when implementing haptic feedback. The motor supply should be switchable in low-power products, and the PWM/control pin should not conflict with boot, display, storage, or debug requirements.

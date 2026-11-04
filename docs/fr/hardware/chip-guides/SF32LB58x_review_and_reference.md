@@ -21,7 +21,7 @@ hide:
 - [ ] Vérifiez que l'inductance nominale de la bobine BUCK sélectionnée est de 4,7 µH, avec une DCR ≤ 0,4 Ω et un Isat ≥ 500 mA.
 - [ ] Vérifiez que les quartz 48 MHz et 32,768 kHz respectent les spécifications recommandées et que leur routage ainsi que les zones d'exclusion respectent les exigences de conception.
 - [ ] Assurez une impédance contrôlée de 50 Ω sur la piste RF et placez le réseau d'adaptation près de la puce.
-- [ ] Vérifiez que l'interface de stockage externe sélectionnée est compatible avec la conception de démarrage prévue. Vérifiez séparément le niveau de la broche Mode : niveau haut pour le mode téléchargement, niveau bas pour le démarrage de l'application utilisateur.
+- [ ] Vérifiez que l'interface de stockage externe sélectionnée est compatible avec la conception de démarrage prévue. Vérifiez séparément qu'une résistance externe de 10 kΩ maintient la broche Mode à un niveau stable, tirée vers l'alimentation pour le niveau haut (mode de téléchargement) ou vers GND pour le niveau bas (démarrage de l'application utilisateur) ; ne la laissez pas flottante et évitez les perturbations susceptibles de faire basculer son niveau.
 - [ ] Vérifiez que le routage des interfaces d'affichage (MIPI-DSI/SPI-QSPI/MCU8080/DPI/JDI) respecte les règles d'impédance et d'adaptation de longueur propres à chaque interface. Pour le DSI, l'impédance différentielle doit être de 100 Ω, l'écart de longueur au sein de chaque paire ≤ 0,5 mm et l'écart entre les paires ≤ 2 mm.
 - [ ] Vérifiez que le routage USB respecte l'exigence d'impédance différentielle de 90 Ω. Routez ensemble les signaux SDIO ; la longueur totale doit rester ≤ 50 mm et l'écart de longueur au sein d'un groupe ≤ 6 mm.
 - [ ] Préservez l'accès SWD et l'interface de sortie de débogage sélectionnée parmi les six UART disponibles, ainsi que ses broches de signal et les points de test de production.
@@ -32,7 +32,7 @@ hide:
 
 ## 8. Documents et références associés { #8-related-documents-and-references }
 
-Utilisez les derniers documents officiels lors de la vérification des limites électriques, des données de boîtier, du multiplexage des broches, de la configuration logicielle, et de la qualification des composants.
+Consultez les documents officiels liés ci-dessous pour vérifier les limites électriques, les données de boîtier, le multiplexage des broches, la configuration logicielle et la qualification des composants. Avant la libération du design, vérifiez que chaque document cité correspond toujours à la révision en vigueur.
 
 <div class="grid cards" markdown>
 
@@ -83,7 +83,7 @@ Une conception typique basée sur le SF32LB58x pour un objet connecté portable 
 | Version | Date | Note |
 |:---|:---|:---|
 | 1.0 | 2026-07 | Mise à jour du guide de conception matérielle du SF32LB58x avec des directives de schéma, de PCB, de validation, et de revue de production |
-| 0.0.1 | 1/2025 | Publication du brouillon officiel de `SF32LB58x-HW-Application` |
+| 0.0.1 | 1/2025 | Version préliminaire de `SF32LB58x-HW-Application` |
 
 </div>
 

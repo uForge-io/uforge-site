@@ -64,7 +64,7 @@ Use this order:
 2. Match the framework.
 3. Match the hardest peripheral.
 4. Match the middleware.
-5. Match the power or memory constraints.
+5. Ensure the example fits the product's power and memory constraints.
 
 For example, a Bluetooth audio product should start closer to an audio/Bluetooth example than to a clean `hello_world`, even if the latter is easier to understand.
 
@@ -78,7 +78,7 @@ For example, a Bluetooth audio product should start closer to an audio/Bluetooth
 
 This workflow is slower for the first hour and much faster after the first hard failure.
 
-## Evidence to Keep { #evidence-to-keep }
+## What to Record { #evidence-to-keep }
 
 For each example that becomes a product base, record:
 

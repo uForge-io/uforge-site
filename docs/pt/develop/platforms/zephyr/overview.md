@@ -72,7 +72,7 @@ A árvore downstream contém drivers relacionados ao SF32LB, bindings ou configu
 - Bluetooth HCI mailbox e configuração de receptor de broadcast BAP.
 - Codec de áudio, DMA, CRC, criptografia, entropia, OTP/eFuse, reguladores, reset e sensor de temperatura.
 
-A presença no código não significa que todo cenário de produto esteja pronto para produção. Valide a combinação exata de exemplo e driver na placa de destino.
+A presença no código não significa que o driver esteja habilitado para o alvo da placa nem que todo cenário de produto esteja pronto para produção. Valide na placa de destino a combinação exata de exemplo, driver e configuração da placa.
 
 ## Sequência de integração { #integration-sequence }
 

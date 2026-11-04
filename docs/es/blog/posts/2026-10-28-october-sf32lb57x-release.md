@@ -1,6 +1,6 @@
 ---
 icon: lucide/rss
-description: "SF32LB57x ya está documentado: cerca del doble de potencia de CPU de aplicación que SF32LB56x, gráficos ePicasso 3.0 y una estructura de costes competitiva."
+description: "SF32LB57x ya está documentado: casi duplica la capacidad de cálculo de la CPU de aplicación del SF32LB56x, con gráficos ePicasso 3.0 y una estructura de costes competitiva."
 ---
 
 # Octubre: presentamos SF32LB57x [2026-10-28] { #october-sf32lb57x-2026-10-28 }
@@ -13,7 +13,7 @@ SF32LB52x y SF32LB56x combinan cada uno un núcleo de aplicación Cortex-M33 de 
 
 ### Más capacidad gráfica { #more-graphics-capability }
 
-Los gráficos pasan a ePicasso 3.0 con descompresión por hardware eZip 3.0, frente a ePicasso 2.0 Lite en SF32LB52x y ePicasso 2.0 en SF32LB56x. ePicasso 3.0 acelera la rotación, el escalado, la proyección, el espejo y la mezcla alfa en tiempo real, y eZip 3.0 descomprime recursos eZip, JPEG y MJPEG sin una decodificación que sobrecargue la CPU. Además de los núcleos, la familia añade entrada de cámara DCMI, hasta 48 MB de PSRAM y 32 MB de NOR Flash en el encapsulado en ciertas referencias, dos ADC de audio, dos interfaces CAN y PTM, una máquina de tareas paralelas que descarga trabajo de periféricos sensible a la temporización.
+Los gráficos pasan a ePicasso 3.0 con descompresión por hardware eZip 3.0, frente a ePicasso 2.0 Lite en SF32LB52x y ePicasso 2.0 en SF32LB56x. ePicasso 3.0 acelera la rotación, el escalado, la proyección, el reflejo y la mezcla alfa en tiempo real, y eZip 3.0 descomprime recursos eZip, JPEG y MJPEG sin una decodificación que sobrecargue la CPU. Además de los núcleos, la familia añade entrada de cámara DCMI, hasta 48 MB de PSRAM y 32 MB de NOR Flash en el encapsulado en ciertas referencias, dos ADC de audio, dos interfaces CAN y PTM, una máquina de tareas paralelas que asume tareas de periféricos sensibles a la temporización.
 
 ### Una estructura de costes competitiva { #competitive-cost-structure }
 
@@ -21,8 +21,8 @@ Este salto no sitúa a SF32LB57x en otra categoría de coste. En nuestra opinió
 
 ### Documentación y por dónde empezar { #documentation-and-where-to-start }
 
-La [página del chip SF32LB57x](../../sf32-products/chips/SF32LB57x.md) ofrece la descripción completa y las referencias están en el [selector de productos](../../sf32-products/product-selector.md). La [guía de diseño de hardware](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md) sigue la misma estructura de esquemático, diseño de PCB, listas de verificación y revisión que las demás familias. Elige la referencia exacta antes de reutilizar un esquemático, ya que el encapsulado y la base de alimentación determinan detalles como cuántos GPIO se pueden usar, y confirma las cifras finales en las hojas de datos de SiFli.
+La [página del chip SF32LB57x](../../sf32-products/chips/SF32LB57x.md) ofrece la descripción completa y las referencias están en el [selector de productos](../../sf32-products/product-selector.md). La [guía de diseño de hardware](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md) sigue la misma estructura de esquemático, diseño de PCB, listas de verificación y revisión que las demás familias. Seleccione el número de pieza comercial exacto antes de reutilizar un esquemático, ya que el encapsulado y la configuración de alimentación determinan detalles como el número de GPIO utilizables. Confirme las cifras finales en las hojas de datos de SiFli.
 
 ### Otras novedades del mes { #also-this-month }
 
-El coreano se suma como noveno idioma y las traducciones descritas en la [entrada anterior](2026-10-07-multi-language-translation.md) ya están publicadas. Siguen siendo traducciones asistidas por máquina y pueden no sonar naturales a los hablantes nativos; si alguna página necesita mejoras, [cuéntanoslo](../../about/contact.md).
+El coreano se suma como noveno idioma y las traducciones descritas en la [entrada anterior](2026-10-07-multi-language-translation.md) ya están publicadas. Siguen siendo traducciones asistidas por máquina y pueden no sonar naturales a los hablantes nativos; si alguna página necesita mejoras, [comuníquenoslo](../../about/contact.md).

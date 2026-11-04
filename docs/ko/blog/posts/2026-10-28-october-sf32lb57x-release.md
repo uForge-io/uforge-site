@@ -1,6 +1,6 @@
 ---
 icon: lucide/rss
-description: "SF32LB57x를 문서화했습니다. SF32LB56x의 약 2배에 이르는 애플리케이션 CPU 성능, ePicasso 3.0 그래픽, 경쟁력 있는 비용 구조를 갖췄습니다."
+description: "SF32LB57x를 문서화했습니다. SF32LB56x 애플리케이션 코어의 약 2배인 연산 성능, ePicasso 3.0 그래픽, 경쟁력 있는 비용 구조를 갖췄습니다."
 ---
 
 # 10월: SF32LB57x를 소개합니다 [2026-10-28] { #october-sf32lb57x-2026-10-28 }
@@ -9,7 +9,7 @@ description: "SF32LB57x를 문서화했습니다. SF32LB56x의 약 2배에 이�
 
 ### 더 높은 CPU 연산 성능 { #more-cpu-power }
 
-SF32LB52x와 SF32LB56x는 각각 240 MHz Cortex-M33 애플리케이션 코어 하나와 저전력 코어 하나를 조합합니다. SF32LB57x는 240 MHz Cortex-M33 STAR-MC1 고성능 코어 두 개와 전용 블루투스 컨트롤러 역할을 하는 24 MHz 저전력 코어를 사용합니다. 두 고성능 코어의 합산 성능은 1968 CoreMark / 740 DMIPS로, SF32LB56x 애플리케이션 코어(984 CoreMark / 370 DMIPS)의 약 두 배입니다. 이 여유 덕분에 UI 렌더링, 애플리케이션 로직, 오디오·멀티미디어 처리를 하나의 코어에서 경쟁시키지 않고 서로 다른 코어에서 실행할 수 있으며, 블루투스와 센서 작업은 저전력 경로에 그대로 남습니다.
+SF32LB52x와 SF32LB56x는 각각 240 MHz Cortex-M33 애플리케이션 코어 하나와 저전력 코어 하나를 조합합니다. SF32LB57x는 240 MHz Cortex-M33 STAR-MC1 고성능 코어 두 개와 전용 Bluetooth 컨트롤러 역할을 하는 24 MHz 저전력 코어를 사용합니다. 두 고성능 코어의 합산 성능은 1968 CoreMark / 740 DMIPS로, SF32LB56x 애플리케이션 코어(984 CoreMark / 370 DMIPS)의 약 두 배입니다. 이 여유 덕분에 UI 렌더링, 애플리케이션 로직, 오디오·멀티미디어 처리를 하나의 코어에서 경쟁시키지 않고 서로 다른 코어에서 실행할 수 있으며, Bluetooth와 센서 작업은 저전력 경로에 그대로 남습니다.
 
 ### 더 강력한 그래픽 기능 { #more-graphics-capability }
 

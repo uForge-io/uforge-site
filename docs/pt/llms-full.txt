@@ -2,7 +2,7 @@
 
 > Pacote de texto completo da μForge.io: páginas principais da documentação SF32 reunidas para assistentes de IA. A referência é a versão em inglês. Índice: llms.txt.
 
-Nome: μForge.io e uForge.io são o mesmo projeto e são usados de forma intercambiável. O «μ» (letra grega mu, de «micro») é escrito como o «u» ASCII (também lido como «you», «você») quando letras gregas são pouco práticas; assim, μForge = uForge e μForge.io = uForge.io (domínio: uForge.io).
+Nome: O nome do projeto é μForge.io; μ é a letra grega mu e representa “micro”. O endereço do site usa o domínio ASCII `uforge.io`.
 
 Idiomas: inglês (a referência, na raiz do site) e traduções assistidas por máquina para chinês (/zh/), japonês (/ja/), espanhol (/es/), alemão (/de/), francês (/fr/), português (/pt/), russo (/ru/) e coreano (/ko/). Cada página traduzida tem o mesmo caminho da página em inglês sob seu prefixo de idioma; os índices por idioma estão em https://uForge.io/<lang>/llms.txt.
 
@@ -23,7 +23,7 @@ Consulte [Primeiros passos](../getting-started/index.md) para a primeira execuç
 
 ## Estabeleça uma base de referência com o SiFli-SDK
 
-[SiFli-SDK](platforms/sifli-sdk/overview.md) é o pacote oficial da SiFli baseado em RT-Thread e o caminho de desenvolvimento de referência para o firmware SF32. Comece por ele, a menos que exista um motivo concreto para avaliar outro ecossistema: é a base com a documentação mais abrangente para suporte a placas, Bluetooth, gráficos, áudio, armazenamento, gerenciamento de energia e desenvolvimento para produção.
+[SiFli-SDK](platforms/sifli-sdk/overview.md) é o pacote oficial da SiFli baseado em RT-Thread e o caminho de desenvolvimento de referência para o firmware SF32. Comece por ele, a menos que exista um motivo concreto para avaliar outro ecossistema: a documentação oferece orientações sobre suporte a placas, Bluetooth, gráficos, áudio, armazenamento, gerenciamento de energia e desenvolvimento para produção.
 
 Antes de implementar os recursos do produto, estabeleça e registre uma base reproduzível:
 
@@ -200,7 +200,7 @@ Valide cada alteração com o menor exemplo que permita testar o recurso corresp
 
 Source: https://uForge.io/pt/develop/platforms/sifli-sdk/build-flash-monitor/
 
-Summary: O ciclo diário do SiFli-SDK: ativar o ambiente, compilar com scons, gravar por download UART ou sftool e acompanhar a saída serial.
+Summary: O ciclo diário do SiFli-SDK: ativar o ambiente, compilar com scons, gravar com o script de download UART gerado ou com sftool e acompanhar a saída serial.
 
 # Compilar, gravar e monitorar a saída serial
 
@@ -527,9 +527,7 @@ Use **Dynamic** no fluxo com o loader do Zephyr. Use **Static** quando precisar 
 
 ## Coloque a placa no modo de download serial
 
-Segundo a documentação do OpenSiFli, na primeira utilização a placa precisa estar no modo de download serial. Siga a sequência de boot/reset do SF32LB52 DevKit LCD e, em seguida, faça a gravação pelo Arduino IDE ou CLI.
-
-A ferramenta de gravação é `sftool`.
+Segundo a OpenSiFli, na primeira utilização a placa precisa estar no modo de download serial. No SF32LB52 DevKit LCD, habilite a opção **BOOT** na ferramenta de download e, em seguida, ligue ou reinicie a placa; consulte as [instruções de gravação e depuração da placa](../../sf32-products/devkits/SF32LB52-DevKit-LCD.md#download-and-debug). Depois que o modo de download estiver ativo, grave pelo Arduino IDE ou CLI usando `sftool`.
 
 ## Grave um teste serial básico
 
@@ -609,11 +607,11 @@ O pacote publicado atualmente tem como alvo a SF32LB52 DevKit LCD e continua em 
 
 Source: https://uForge.io/pt/getting-started/
 
-Summary: Escolha seu primeiro caminho de desenvolvimento para SF32 — SiFli-SDK, CodeKit, Zephyr, Arduino, Rust ou MicroPython — e veja o status atual e o hardware necessário.
+Summary: Escolha um ponto de partida de software para SF32 — SiFli-SDK, CodeKit, Zephyr, Arduino, Rust ou MicroPython — com o status atual e o hardware necessário.
 
 # Visão geral: primeiros passos
 
-Os dispositivos SF32 oferecem diferentes caminhos de desenvolvimento de software. Atualmente, SiFli-SDK e CodeKit são as opções oficiais para a primeira configuração e validação. Desde o Zephyr v4.3.0, o projeto principal do Zephyr mantém suporte para a placa SF32LB52 DevKit LCD. O OpenSiFli também oferece o ArduinoCore-zephyr em versão beta e desenvolve o suporte a Rust para SF32LB52. Para que o MicroPython possa ser apresentado em um tutorial validado, ainda são necessárias imagens oficiais de firmware e instruções específicas para cada placa.
+Os dispositivos SF32 oferecem diferentes caminhos de desenvolvimento de software. O SiFli-SDK é a pilha oficial de referência da SiFli; o CodeKit é o fluxo oficial da SiFli para VS Code, usado para instalar o SDK, criar projetos, compilá-los, gravar o firmware e acompanhar a saída serial. Desde o Zephyr v4.3.0, o projeto principal do Zephyr mantém suporte para a placa SF32LB52 DevKit LCD. O OpenSiFli também oferece o ArduinoCore-zephyr em versão beta e desenvolve o suporte a Rust para SF32LB52. Para que o MicroPython possa ser apresentado em um tutorial validado, ainda são necessárias imagens oficiais de firmware e instruções específicas para cada placa.
 
 Para conhecer o fluxo de desenvolvimento de referência e o escopo atual de cada caminho, consulte a [visão geral do desenvolvimento](../develop/index.md). Use a tabela abaixo apenas para escolher por onde começar; a página de cada plataforma é a referência oficial para placas compatíveis e respectivas limitações.
 
@@ -623,7 +621,7 @@ Para conhecer o fluxo de desenvolvimento de referência e o escopo atual de cada
 
 <div align="center" markdown>
 
-| Caminho | Status atual | Comece aqui |
+| Opção | Status atual | Comece aqui |
 |:-----|:---------------|:-----------|
 | **SiFli-SDK** | Caminho oficial da SiFli para desenvolvimento de referência em SF32, com RT-Thread, Bluetooth, gráficos, áudio, baixo consumo e bring-up de placas. | [SiFli-SDK](sifli/getting-started-sifli-sdk.md) |
 | **SiFli CodeKit** | Fluxo oficial da SiFli para VS Code: configurar o SDK, criar projetos, compilar, gravar o firmware e usar o monitor serial. | [SiFli CodeKit](sifli/getting-started-sifli-codekit.md) |
@@ -696,7 +694,7 @@ Summary: MicroPython ainda não é um início validado no SF32: use o SiFli-SDK 
 
 Ainda não há um procedimento de introdução ao MicroPython validado para SF32. As fontes consultadas da SiFli e do OpenSiFli ainda não documentam imagens oficiais de firmware específicas para cada placa, procedimentos de gravação nem configurações do REPL.
 
-Use o [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) para estabelecer uma configuração de referência reproduzível de placa, cabo, porta serial e gravação. Não siga instruções genéricas de instalação do MicroPython nem use uma imagem destinada a outro MCU ou outra placa.
+Use o [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) para estabelecer uma configuração de referência reproduzível para a placa, o cabo, a porta serial e o processo de gravação. Não siga instruções genéricas de instalação do MicroPython nem use uma imagem destinada a outro MCU ou outra placa.
 
 A página de [status do MicroPython](../../develop/platforms/micropython/status.md) acompanha os artefatos públicos e os critérios de aceitação exatos que precisam ser atendidos antes que esta página possa se tornar um tutorial.
 
@@ -898,7 +896,7 @@ Você pode prosseguir quando:
 
 - O CodeKit reconhecer a localização do SDK.
 - A placa selecionada corresponder ao seu hardware.
-- As ações de compilação e gravação forem concluídas.
+- As ações de compilação e gravação forem concluídas com sucesso.
 - O console serial exibir a saída de `hello_world` após a reinicialização.
 
 ## Solução de problemas
@@ -950,8 +948,8 @@ Mesmo que pretenda usar Arduino, Zephyr ou MicroPython, vale a pena seguir este 
 **Software**
 
 - [git](https://git-scm.com/)
-- Uma cadeia de ferramentas C/C++ configurada por meio do [`uv`](https://docs.astral.sh/uv/getting-started/installation/) (o instalador do SiFli-SDK baixa o compilador, o depurador e o ambiente Python)
-- O próprio repositório [SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK)
+- [`uv`](https://docs.astral.sh/uv/getting-started/installation/), usado pelos scripts de instalação do SiFli-SDK para gerenciar o ambiente Python e suas dependências
+- O repositório [SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK); o instalador baixa o compilador e o depurador correspondentes
 
 **Referências oficiais**
 
@@ -1037,6 +1035,7 @@ O valor passado a `scons --board` é o nome do diretório da placa dentro de `cu
 | SF32LB52-DevKit-Nano | `sf32lb52-nano_n4`<br>`sf32lb52-nano_n16r16`<br>`sf32lb52-nano_a128r16` |
 | Huangshan-Pi (SF32LB52-LCHSPI-ULP) | `sf32lb52-lchspi-ulp` |
 | SF32LB56-DevKit-LCD | `sf32lb56-lcd_a128r12n1`<br>`sf32lb56-lcd_n16r12n1` |
+| SF32LB57-DevKit-EPD_MB_V1.0 | `sf32lb57-epd_n16r16` |
 | SF32LB58-DevKit-LCD | `sf32lb58-lcd_a128r32n1_dsi`<br>`sf32lb58-lcd_a128r32n1_qspi`<br>`sf32lb58-lcd_n16r32n1_dpi`<br>`sf32lb58-lcd_n16r32n1_dsi`<br>`sf32lb58-lcd_n16r32n1_qspi`<br>`sf32lb58-lcd_n16r64n4` |
 
 </div>
@@ -1095,7 +1094,7 @@ Você pode prosseguir quando:
 
 ## Próximos passos
 
-- **Escolha seu chip:** compare as séries LB52, LB55, LB56 e LB58 na [visão geral da família SF32](../../sf32-products/family/SF32_family.md).
+- **Escolha seu chip:** compare as séries LB52, LB55, LB56, LB57 e LB58 na [visão geral da família SF32](../../sf32-products/family/SF32_family.md).
 - **Explore outros exemplos:** além de `hello_world`, o SDK inclui exemplos de BLE, Bluetooth clássico, gráficos com LVGL, áudio e modos de baixo consumo.
 - **Prefere outro framework?** Continue com [Arduino](../arduino/getting-started-arduino.md), [Zephyr](../zephyr/getting-started-zephyr-upstream.md) ou [MicroPython](../micropython/getting-started-micropython.md).
 - **Precisa de ajuda?** Consulte as [perguntas frequentes da SiFli](https://wiki.sifli.com/en/faq/index.html) para solucionar problemas comuns com a cadeia de ferramentas, J-Link e depuração.
@@ -1223,7 +1222,7 @@ Summary: Ponto de partida do projeto de hardware SF32 para produção: guias de 
 
 # Projeto para produção
 
-Use este fluxo depois de selecionar um chip ou módulo e antes de liberar o esquemático, o layout da PCB, a BOM ou o pacote de fabricação. Ele reúne referências de implementação que ajudam a reduzir os riscos durante o bring-up (ativação inicial) e a qualificação da primeira versão: guias de projeto de hardware específicos de cada dispositivo, checklists, definições de interface dos módulos, componentes aprovados e bibliotecas EDA.
+Use este fluxo depois de selecionar um chip ou módulo e antes de liberar o esquemático, o layout da PCB, a BOM ou o pacote de fabricação. Ele reúne referências de implementação para reduzir os riscos durante a ativação inicial e a qualificação do produto: guias de projeto de hardware específicos de cada dispositivo, checklists, definições de interface dos módulos, componentes aprovados e bibliotecas EDA.
 
 ## Fluxo recomendado para produção
 
@@ -1235,12 +1234,12 @@ Use este fluxo como um processo iterativo de revisão, não como uma transição
 
 | Etapa | Aplicação | Evidências a registrar |
 |:------|:----|:-------------------|
-| Arquitetura | Apresentação do produto e requisitos de interface | Componente, encapsulamento, memória, display, áudio e armazenamento selecionados; premissas de alimentação definidas. |
-| Esquemático e layout | Guia de projeto de hardware do chip ou módulo | Implementação revisada de alimentação, clock, reset, RF, armazenamento, display e interfaces. |
-| BOM | Lista de fornecedores aprovados (AVL) e datasheets dos componentes | Alternativas qualificadas ou validadas especificamente para cada item crítico. |
-| Revisão do projeto | Checklist de projeto de hardware | Decisão documentada para cada item aplicável da lista e cada exceção. |
-| Bring-up | Referências de placas de desenvolvimento, exemplos do SDK e testes com medições | Resultados reproduzíveis de boot, gravação, periféricos, comunicação sem fio, consumo de energia e recuperação. |
-| Liberação do CAD para produção | Bibliotecas EDA oficiais e desenhos do encapsulamento | Símbolo, footprint, pinagem, padrão de pads e arquivos de fabricação verificados. |
+| Arquitetura | Apresentação do produto e requisitos de interface | Registre o componente e o encapsulamento selecionados, além das premissas sobre memória, display, áudio, armazenamento e alimentação. |
+| Esquemático e layout | Guia de projeto de hardware do chip ou módulo | Mantenha o registro da implementação revisada de alimentação, clock, reset, RF, armazenamento, display e interfaces. |
+| BOM | Lista de fornecedores aprovados (AVL) e datasheets dos componentes | Para cada item crítico, registre evidências de que o componente alternativo foi qualificado ou validado intencionalmente. |
+| Revisão do projeto | Checklist de projeto de hardware | Documente a resolução de cada item aplicável do checklist e de cada exceção. |
+| Bring-up | Referências de placas de desenvolvimento, exemplos do SDK e testes com medições | Mantenha resultados reproduzíveis de boot, gravação, operação dos periféricos, comunicação sem fio, consumo de energia e recuperação. |
+| Liberação do CAD para produção | Bibliotecas EDA oficiais e desenhos do encapsulamento | Mantenha os registros de verificação do símbolo, footprint, pinagem, padrão de pads e arquivos de fabricação. |
 
 </div>
 
@@ -1292,13 +1291,13 @@ Escolha o chip ou módulo principal do projeto e consulte o material de implemen
 
 <div align="center" markdown style="max-width: 100%; overflow-x: auto;">
 
-| Família de chips | Guia de projeto de hardware | Checklist | Comece por aqui para |
+| Família de chips | Guia de projeto de hardware | Checklist | Uso recomendado |
 |:-----------------|:----------------------------|:--------------------|:---------------------|
-| SF32LB52x | [Guia](chip-guides/SF32LB52x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | Projetar uma placa chip-down com o SF32LB52x. |
-| SF32LB55x | [Guia](chip-guides/SF32LB55x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | Projetar uma placa chip-down com o SF32LB55x. |
-| SF32LB56x | [Guia](chip-guides/SF32LB56x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | Projetar uma placa chip-down com o SF32LB56x. |
-| SF32LB57x | [Guia](chip-guides/SF32LB57x_hardware_design_guide.md) | [Esquemático](chip-guides/SF32LB57x_schematic_checklist.md) / [Layout da PCB](chip-guides/SF32LB57x_pcb_layout_checklist.md) | Projetar uma placa chip-down com o SF32LB57x. |
-| SF32LB58x | [Guia](chip-guides/SF32LB58x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | Projetar uma placa chip-down com o SF32LB58x. |
+| SF32LB52x | [Guia](chip-guides/SF32LB52x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | Projeto de placa chip-down com o SF32LB52x. |
+| SF32LB55x | [Guia](chip-guides/SF32LB55x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | Projeto de placa chip-down com o SF32LB55x. |
+| SF32LB56x | [Guia](chip-guides/SF32LB56x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | Projeto de placa chip-down com o SF32LB56x. |
+| SF32LB57x | [Guia](chip-guides/SF32LB57x_hardware_design_guide.md) | [Esquemático](chip-guides/SF32LB57x_schematic_checklist.md) / [Layout da PCB](chip-guides/SF32LB57x_pcb_layout_checklist.md) | Projeto de placa chip-down com o SF32LB57x. |
+| SF32LB58x | [Guia](chip-guides/SF32LB58x_hardware_design_guide.md) | [Lista](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | Projeto de placa chip-down com o SF32LB58x. |
 
 </div>
 
@@ -1460,7 +1459,7 @@ A largura de banda da memória pode limitar o desempenho da IA mesmo quando há 
 - Mantenha pesos grandes ou recursos pouco usados em memória externa somente se o caminho de execução aceitar essa localização. Inclua eventuais cópias para memória acessível ao acelerador nos orçamentos de memória, latência e energia.
 - Durante uma transferência, apenas a CPU ou o acelerador/DMA deve controlar o buffer compartilhado. Antes do acesso pelo hardware, prepare todo o intervalo alinhado às linhas de cache: limpe as linhas de cache que contêm dados de entrada gravados pela CPU e trate as linhas modificadas do buffer de saída conforme as regras do SDK para escritas de dispositivos. Aguarde a conclusão antes de invalidar a saída e devolver o controle à CPU. Não altere o buffer nem outros dados que compartilhem suas linhas de cache enquanto o hardware o utiliza.
 
-A [implementação do HAL v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/hal/bf0_hal_nn_acc.c) verifica se os buffers atravessam limites de janelas de endereços de 1 MiB (1.048.576 bytes) e exige que entrada e bias estejam na mesma janela. Confira os endereços realmente alocados, não apenas o total de memória livre. O início bloqueante espera a conclusão por polling; o caminho por interrupção exige tratamento correto da IRQ e notificação de conclusão. Verifique os valores de retorno e defina recuperação de falhas e esperas limitadas na aplicação, sem presumir que o runtime do modelo forneça um timeout.
+Nas compilações do SDK que definem `HAL_NNACC_MODULE_ENABLED` (o código também é incluído quando `_SIFLI_DOXYGEN_` está definido), a [implementação do HAL v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/drivers/hal/bf0_hal_nn_acc.c) verifica os limites de janelas de endereços de 1 MiB (1.048.576 bytes) para os buffers de pesos, entrada, saída e bias, e exige que entrada e bias estejam na mesma janela. Confira os endereços realmente alocados, não apenas o total de memória livre. O início bloqueante espera a conclusão por polling; o caminho por interrupção exige tratamento correto da IRQ e notificação de conclusão. Verifique os valores de retorno e defina recuperação de falhas e esperas limitadas na aplicação, sem presumir que o runtime do modelo forneça um timeout.
 
 Consulte [STAR-MC1](../architecture/star-mc1.md#memory-system-optimization) para ver considerações sobre cache e sistema de memória nesse tipo de padrão de acesso misto.
 
@@ -1716,7 +1715,7 @@ Os recursos de áudio variam entre as famílias. Consulte o datasheet do modelo 
 | Família | ADC/DAC de áudio integrados | Interfaces PDM (máximo de microfones) | Interfaces I2S | Aplicação sugerida |
 |:---|:---|:---|:---|:---|
 | **SF32LB52x** | 1 ADC + 1 DAC | 1 (2) | 1 | Acessórios de áudio Bluetooth com foco em baixo custo e HMIs compactas com suporte a voz. |
-| **SF32LB55x** | Nenhum; use um codec de áudio externo para áudio analógico. | SF32LB551/555: 1 (2); SF32LB557: 2 (4) | SF32LB551/555: 1; SF32LB557: 2 | Dispositivos vestíveis BLE e produtos com muitos sensores, nos quais o áudio é secundário. |
+| **SF32LB55x** | Nenhum; use um codec de áudio externo para áudio analógico. | SF32LB551/553/555: 1 (2); SF32LB557: 2 (4) | SF32LB551/553/555: 1; SF32LB557: 2 | Dispositivos vestíveis BLE e produtos com muitos sensores, nos quais o áudio é secundário. |
 | **SF32LB56x** | 1 ADC + 1 DAC | 2 (4) | 1 | Produtos com HMI e displays mais avançados que também precisam captar voz com vários microfones. |
 | **SF32LB57x** | 2 ADC + 1 DAC | 2 (4) | 2 | Captura de voz com vários microfones e reprodução local. |
 | **SF32LB58x** | 2 ADC + 2 DAC | 2 (4) | 3 | Produtos topo de linha que combinam áudio, gráficos, IA e conectividade complexa. |
@@ -1936,7 +1935,7 @@ BLE é uma boa opção padrão para a maioria dos dispositivos vestíveis e sens
 
 ### Bluetooth clássico e modo dual
 
-Inclua Bluetooth clássico quando o produto precisar de streaming de áudio (A2DP/AVRCP), chamadas em viva-voz (HFP), enlaces de dados seriais (SPP) ou compatibilidade com perfis clássicos existentes. Projetos de modo dual exigem mais do escalonamento do rádio e da coexistência do que projetos apenas com BLE; é exatamente essa a carga de trabalho que o processador Bluetooth dedicado foi projetado para isolar do restante do sistema.
+Inclua Bluetooth clássico quando o produto precisar de streaming de áudio (A2DP/AVRCP), chamadas em viva-voz (HFP), enlaces de dados seriais (SPP) ou compatibilidade com perfis clássicos existentes. Projetos de modo dual exigem mais do escalonamento do rádio e da coexistência do que projetos apenas com BLE. O processador Bluetooth dedicado executa as tarefas de enlace com requisitos temporais rigorosos separadamente do processador de aplicação, mas ainda é necessário validar a coexistência sob a carga combinada do produto.
 
 Nem todos os dispositivos SF32 oferecem Bluetooth de modo dual. Antes de definir o número de peça, consulte a tabela de dispositivos em [Processador Bluetooth](processor.md#device-family-differences).
 
@@ -2601,7 +2600,7 @@ Summary: Encontre orientações sobre a arquitetura SF32 e seus subsistemas: gr�
 
 # Visão geral da seção Aprendizado
 
-Use a seção **Aprendizado** para tomar decisões de arquitetura e de subsistemas enquanto ainda é fácil ajustá-las no firmware ou no hardware. Estas páginas explicam como os blocos do SF32 se integram e quando uma CPU de uso geral deve delegar tarefas a um mecanismo gráfico, controlador sem fio, acelerador de IA ou outro hardware dedicado. Elas também indicam o que validar quando gráficos, conectividade sem fio, áudio, IA e memória precisam coexistir em um produto sujeito a um orçamento de consumo de energia.
+Use a seção **Aprendizado** para tomar decisões de arquitetura e de subsistemas enquanto ainda é fácil ajustá-las no firmware ou no hardware. Estas páginas explicam como os blocos do SF32 se integram e quando pode fazer sentido delegar tarefas de uma CPU de uso geral a um mecanismo gráfico, controlador sem fio, acelerador de IA ou outro hardware dedicado. Elas também indicam o que validar quando os subsistemas de gráficos, conectividade sem fio, áudio e IA compartilham os orçamentos de memória e energia de um produto.
 
 Consulte [Primeiros passos](../getting-started/index.md) para colocar a placa em funcionamento pela primeira vez, [Tutoriais](../getting-started/tutorials/overview.md) para seguir exercícios guiados, [Desenvolvimento](../develop/index.md) para conhecer fluxos de trabalho e exemplos de software e a [Família SF32](../sf32-products/family/SF32_family.md) para selecionar componentes e preparar o projeto para produção.
 
@@ -2613,7 +2612,7 @@ Consulte [Primeiros passos](../getting-started/index.md) para colocar a placa em
 
 | Se você precisa… | Comece por aqui | Em seguida, consulte |
 |:----------------|:-----------|:-------------|
-| Entender o processador, a memória e como o SF32 delega tarefas ao hardware dedicado | [Visão geral da arquitetura](architecture/overview.md) | [STAR-MC1](architecture/star-mc1.md), [PSRAM em comparação com outros tipos de memória para sistemas embarcados](architecture/psram-and-memory-types.md) e [PTM](architecture/ptm-parallel-task-machine.md), quando forem relevantes para o dispositivo selecionado. |
+| Entender o processador, a memória e como o SF32 delega tarefas ao hardware dedicado | [Visão geral da arquitetura](architecture/overview.md) | [STAR-MC1](architecture/star-mc1.md), [PSRAM em comparação com outros tipos de memória para sistemas embarcados](architecture/psram-and-memory-types.md) e [PTM: máquina de tarefas paralelas](architecture/ptm-parallel-task-machine.md), quando forem relevantes para o dispositivo selecionado. |
 | Desenvolver uma interface gráfica ou definir a estratégia para recursos visuais e framebuffer | [Visão geral de gráficos](graphics/overview.md) | [Controlador de display](graphics/display-controller.md), [ePicasso](graphics/epicasso-gpu.md), [eZip](graphics/ezip.md) e [TurboPixel](graphics/turbopixel.md), conforme as decisões de display, renderização e compressão. |
 | Conectar um telefone, acessório ou dispositivo de áudio | [Visão geral do Bluetooth](bluetooth/overview.md) | [Processador Bluetooth](bluetooth/processor.md) para entender a divisão entre controlador e aplicação; depois, [Bluetooth PAN](bluetooth/pan.md) se o produto precisar de transporte IP por meio do telefone. |
 | Adicionar inferência no dispositivo | [Visão geral de IA](ai/overview.md) | [Acelerador de IA](ai/accelerator.md) e, em seguida, as verificações de memória, latência e consumo energético exigidas pelo modelo e pelo pipeline. |
@@ -2624,14 +2623,14 @@ Consulte [Primeiros passos](../getting-started/index.md) para colocar a placa em
 
 ## Use as páginas em conjunto
 
-A maioria dos produtos combina vários subsistemas. Em um dispositivo vestível com display, BLE e microfone, as decisões precisam considerar em conjunto a autonomia da bateria: a atualização do display afeta o tráfego de memória e o tempo ativo; o escalonamento do Bluetooth afeta a frequência de despertar; o áudio e a IA afetam os buffers e a latência. Cada decisão altera o orçamento de energia do produto.
+A maioria dos produtos combina vários subsistemas. Em um dispositivo vestível com display, BLE e microfone, sujeito a um orçamento de energia limitado pela bateria, não convém tratar esses recursos isoladamente: a atualização do display afeta o tráfego de memória e o tempo ativo; o escalonamento do Bluetooth afeta a frequência de despertar; o áudio e a IA afetam os buffers e a latência. Cada decisão altera o orçamento de energia do produto.
 
 Use estas páginas como parte de um ciclo de projeto:
 
 1. Comece pelo principal requisito do produto e pelo dispositivo selecionado. Confirme se a documentação desse dispositivo especifica as capacidades necessárias de display, Bluetooth, IA, áudio, memória e baixo consumo.
 2. Defina as responsabilidades dos processadores e a alocação de memória antes de integrar a aplicação. Planeje onde ficarão o conjunto de trabalho, os framebuffers, o modelo e os buffers de áudio; coloque o código e os dados necessários às tarefas sensíveis à latência em uma memória adequada de baixa latência; e use hardware dedicado somente quando seus recursos e requisitos de integração forem compatíveis com o produto.
 3. Parta da visão geral do subsistema mais importante e avance para a página de implementação detalhada. Trate as referências a Bluetooth, memória e baixo consumo como dependências do projeto, não como leitura opcional.
-4. Valide a combinação completa no hardware previsto. Use os fluxos de trabalho de [Desenvolvimento](../develop/index.md) e as medições indicadas nas páginas pertinentes de Aprendizado para testar em conjunto o funcionamento, a latência, a largura de banda, o comportamento de RF e o consumo de energia.
+4. Valide a combinação completa no hardware previsto. Use os fluxos de trabalho de [Desenvolvimento](../develop/index.md) e as medições indicadas nas páginas pertinentes de Aprendizado para testar em conjunto o funcionamento, a latência, a largura de banda, o comportamento de radiofrequência (RF) e o consumo de energia.
 
 !!! note "Conteúdo gerado automaticamente"
     Esta página foi compilada e redigida sem um documento-fonte existente dedicado ao seu conteúdo. Verifique as afirmações técnicas na documentação oficial da SiFli antes de se basear nelas.
@@ -2690,7 +2689,7 @@ Durante a execução normal, o sistema alterna entre estados. Uma fonte de despe
 
 A seleção do modo de baixo consumo e o bloqueio da suspensão são mecanismos distintos. A [referência do middleware PM para SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/middleware/pm.html) e o [guia de baixo consumo para SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/low_power.html) da SiFli documentam que `rt_pm_request(PM_SLEEP_MODE_IDLE)` bloqueia a entrada em LIGHT, DEEP e STANDBY até a chamada correspondente a `rt_pm_release(PM_SLEEP_MODE_IDLE)`; essa solicitação não seleciona um modo mais profundo.
 
-Para implementar a gestão de energia, consulte o guia oficial da família do dispositivo: [SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html), [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/low_power.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/low_power.html) ou [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/low_power.html). Os modos disponíveis, as condições de entrada, as fontes de despertar e o estado preservado dependem da família do chip, da placa e da configuração do SDK. O [guia de baixo consumo do SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html) inclui um exemplo de configuração dos pinos de despertar Hibernate, explicitamente agrupado para 58x/56x/52x/57x. A referência comum da [API HAL PMU do SDK](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/pmu.html) informa que, no SF32LB57x, o intervalo de índices usado por `HAL_PMU_EnablePinWakeup()` vai de 0 a 13. Essas fontes comprovam apenas essa configuração de pinos; não comprovam que a disponibilidade dos modos RT-Thread, os limites da política de PM ou o comportamento de retenção do 52x também se apliquem ao 57x. Confirme esses pontos na documentação do SDK e do dispositivo-alvo. Em geral, uma política configurada só pode selecionar um estado elegível mais profundo quando o intervalo de inatividade e as demais condições de entrada permitem. Uma solicitação não liberada pode manter o sistema em um estado mais superficial do que o previsto.
+Para implementar a gestão de energia, consulte o guia oficial da família do dispositivo: [SF32LB52x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html), [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/low_power.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/low_power.html) ou [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/low_power.html). Os modos disponíveis, as condições de entrada, as fontes de despertar e o estado preservado dependem da família do chip, da placa e da configuração do SDK. O [guia de baixo consumo do SF32LB58x](https://docs.sifli.com/projects/sdk/latest/en/sf32lb58x/app_note/low_power.html) identifica seu exemplo de configuração dos pinos de despertar Hibernate como aplicável a 58x/56x/52x/57x. A referência comum da [API HAL PMU do SDK](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/api/hal/pmu.html) informa que, no SF32LB57x, o intervalo de índices usado por `HAL_PMU_EnablePinWakeup()` vai de 0 a 13. Essas fontes comprovam apenas essa configuração de pinos; não comprovam que a disponibilidade dos modos RT-Thread, os limites da política de PM ou o comportamento de retenção do 52x também se apliquem ao 57x. Confirme esses pontos na documentação do SDK e do dispositivo-alvo. Em geral, uma política configurada só pode selecionar um estado elegível mais profundo quando o intervalo de inatividade e as demais condições de entrada permitem. Uma solicitação não liberada pode manter o sistema em um estado mais superficial do que o previsto.
 
 ## O que consome energia em um produto SF32
 
@@ -2941,7 +2940,9 @@ Summary: SF32LB52x: família de MCUs AIoT Arm Cortex-M33 de dois núcleos e cust
 
 SF32LB52x é uma família de MCUs da SiFli otimizada para reduzir custos, voltada a dispositivos vestíveis de entrada, HMIs gráficas compactas, periféricos Bluetooth e outros produtos AIoT com espaço limitado que ainda precisam de display, áudio, armazenamento e conectividade sem fio integrados.
 
-Em nível de plataforma, a família combina um núcleo de aplicação Arm Cortex-M33 STAR-MC1[^1] a 240 MHz com um núcleo controlador Bluetooth dedicado de baixo consumo a 24 MHz. Ao manter a conectividade Bluetooth e as tarefas sempre ativas separadas da aplicação, o chip consegue executar uma interface responsiva e a pilha principal da aplicação.
+Em nível de plataforma, a família combina um núcleo de aplicação Arm Cortex-M33 STAR-MC1[^1] a 240 MHz com um núcleo controlador Bluetooth dedicado de baixo consumo, cuja frequência máxima indicada na datasheet é 24 MHz. Ao manter a conectividade Bluetooth e as tarefas sempre ativas separadas da aplicação, o chip consegue executar uma interface responsiva e a pilha principal da aplicação.
+
+**Nota sobre a frequência do LCPU:** a [datasheet DS5201 V2.5.3 (em chinês)](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p5p3.pdf) informa o máximo de 24 MHz para o LCPU. O [relatório atual de medições de baixo consumo do SF32LB52x](https://docs.sifli.com/projects/rpt5202_sf32lb52x-low-power-measurement-report/latest/en/brief_introduction.html) e o [guia de baixo consumo do SDK](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html) indicam 48 MHz, mas nenhum especifica SKU, modo de operação ou condição de configuração que explique a diferença. Esta página usa o valor da datasheet para comparação; não interprete `24/48 MHz` como uma faixa selecionável nem como diferença entre variantes. Confirme com a SiFli a frequência LCPU permitida para o dispositivo e o SDK exatos.
 
 Para planejar o produto, as principais variantes listadas no guia de modelos de chips da SiFli podem ser divididas em dois grupos definidos pela alimentação:
 
@@ -3106,7 +3107,9 @@ Siga esta sequência para transformar uma seleção preliminar de SF32LB52x em u
 ## Perguntas frequentes
 
 **Quais são as principais especificações do SF32LB52x?**
-O SF32LB52x combina uma CPU de aplicação (Cortex-M33 @240 MHz) com um núcleo de baixo consumo (Cortex-M33 @24/48 MHz, controlador Bluetooth dedicado). Integra 576 KB de SRAM interna e oferece Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 2.0 Lite. Encapsulamento: QFN68 (7 × 7 mm). USB 2.0 FS.
+O SF32LB52x oferece processamento de aplicações (Cortex-M33 @240 MHz) e um núcleo de baixo consumo (Cortex-M33, até 24 MHz, controlador Bluetooth dedicado). Integra 576 KB de SRAM interna e oferece Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 2.0 Lite. Encapsulamento: QFN68 (7 × 7 mm). USB 2.0 FS.
+
+Este clock do LCPU segue o datasheet, não uma faixa de operação de 24/48 MHz já confirmada. Consulte a [divergência entre fontes](#overview) e confirme o componente e o SDK exatos com a SiFli.
 
 **Quais interfaces de display o SF32LB52x suporta?**
 SPI / DSPI / QSPI / 8080 / EPD / JDI. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -3141,6 +3144,9 @@ Comece pelo [guia de projeto de hardware do SF32LB52x](../../hardware/chip-guide
 
 Produtos típicos com SF32LB52 incluem smartwatches e pulseiras fitness de entrada, acessórios Bluetooth, controles gráficos compactos, etiquetas eletrônicas de prateleira, crachás inteligentes, impressoras portáteis de etiquetas e displays para e-bikes ou e-scooters com foco em custo.
 
+!!! note "Conteúdo gerado automaticamente"
+    Esta página foi compilada/redigida sem um documento-fonte existente. Verifique as afirmações técnicas na documentação oficial da SiFli antes de utilizá-las.
+
 ---
 
 Source: https://uForge.io/pt/sf32-products/chips/SF32LB55x/
@@ -3152,6 +3158,8 @@ Summary: SF32LB55x: família de MCUs de consumo ultrabaixo para wearables e prod
 ## Visão geral
 
 A série SF32LB55x é uma família de microcontroladores AIoT de categoria intermediária e consumo ultrabaixo, voltada a produtos conectados por BLE que precisam de melhores recursos de exibição, mais memória disponível e maior flexibilidade de encapsulamento que os MCUs Bluetooth de entrada.
+
+Na seleção, uma das diferenças mais importantes está no encapsulamento e na memória integrada: SS6600A8 usa QFN68L, não inclui PSRAM no encapsulamento e requer 2,97–3,63 V; SF32LB551U4O5 e as variantes BGA listadas aqui usam 1,71–3,63 V.
 
 A arquitetura big.LITTLE de dois núcleos reúne dois processadores Arm Cortex-M33 STAR-MC1[^1]: um núcleo de aplicação de alto desempenho, com frequência de até 240 MHz, e um núcleo que opera com consumo ultrabaixo, de até 48 MHz. Essa divisão permite executar as tarefas de interface do usuário mais exigentes no núcleo de aplicação, enquanto o núcleo de baixo consumo cuida do processamento dos sensores, do controle em modo de espera e das tarefas BLE que precisam permanecer ativas.
 
@@ -3341,10 +3349,10 @@ Siga esta sequência para passar de uma pré-seleção de componentes SF32LB55x 
 ## Perguntas frequentes
 
 **Quais são as principais especificações do SF32LB55x?**
-O SF32LB55x combina uma CPU de aplicação (Cortex-M33 @240 MHz) com um núcleo de baixo consumo (Cortex-M33 @48 MHz, programável pelo usuário). Integra 1.312 KB de SRAM interna e oferece apenas Bluetooth Low Energy (BLE). Gráficos: ePicasso 1.0. Encapsulamento: QFN68 / BGA145 / BGA169 (7 × 7 mm (QFN68)). USB 2.0 FS.
+O SF32LB55x oferece processamento de aplicações (Cortex-M33 @240 MHz) e um núcleo de baixo consumo (Cortex-M33 @48 MHz, programável pelo usuário). Integra 1.312 KB de SRAM interna e oferece apenas Bluetooth Low Energy (BLE). Gráficos: ePicasso 1.0. Encapsulamento: QFN68L / BGA145 / BGA169 (7 × 7 mm (QFN68L)). USB 2.0 FS.
 
 **Quais interfaces de display o SF32LB55x suporta?**
-SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix)) Esta lista abrange toda a família, não garante todas as interfaces em cada código de componente ou encapsulamento; confira a matriz de interfaces vinculada.
 
 **Qual é a resolução máxima de display do SF32LB55x?**
 Até 512 × 512 com cor RGB888, via MIPI-DSI, apenas com drivers de display com RAM integrada. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -3353,7 +3361,7 @@ Até 512 × 512 com cor RGB888, via MIPI-DSI, apenas com drivers de display com 
 Até 16 MB + 2 MB de PSRAM e até 8 MB de Flash NOR no encapsulamento.
 
 **Qual tensão de alimentação o SF32LB55x precisa?**
-1,71–3,63 V.
+SS6600A8 requer 2,97–3,63 V; SF32LB551U4O5 e as variantes BGA listadas nesta página usam 1,71–3,63 V. Defina o componente exato antes de projetar a árvore de alimentação.
 
 **Por onde começar um projeto de hardware com o SF32LB55x?**
 Comece pelo [guia de projeto de hardware do SF32LB55x](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) para esquemático, alimentação, clock/RF e layout de PCB, e use os checklists de esquemático e layout antes de liberar a placa.
@@ -3410,7 +3418,7 @@ Considere a SF32LB56x quando o projeto precisar de um ou mais destes recursos:
 - Suporte a interfaces de display DPI/RGB
 - Wi-Fi externo via SDIO; armazenamento externo via SD/SDIO ou eMMC
 - Mais GPIOs com a opção WBBGA175
-- Mais margem para executar TinyML, áudio e interface do usuário em paralelo
+- Mais margem para executar simultaneamente cargas de TinyML, áudio e interface do usuário
 
 ## Recursos de desenvolvimento
 
@@ -3552,10 +3560,12 @@ Siga esta sequência para transformar uma lista preliminar de componentes SF32LB
 ## Perguntas frequentes
 
 **Quais são as principais especificações do SF32LB56x?**
-O SF32LB56x combina uma CPU de aplicação (Cortex-M33 @240 MHz) com um núcleo de baixo consumo (Cortex-M33 @48/96 MHz, programável pelo usuário). Integra 960 KB de SRAM interna e oferece Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 2.0. Encapsulamento: QFN68 / BGA175 (7 × 7 mm (QFN), 6,5 × 6,1 mm (BGA)). USB 2.0 FS.
+O SF32LB56x oferece processamento de aplicações (Cortex-M33 @240 MHz) e um núcleo de baixo consumo (Cortex-M33, até 96 MHz, programável pelo usuário). Integra 960 KB de SRAM interna e oferece Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 2.0. Encapsulamento: QFN68L / WBBGA175 (7 × 7 mm (QFN68L), 6,1 × 6,5 mm (WBBGA175)). USB 2.0 FS.
+
+O clock do LCPU e o suporte às tarefas de aplicação dependem do dispositivo exato e da configuração compatível do SDK; 96 MHz é um limite, não o clock padrão. Os 960 KB de SRAM se dividem em 800 KB do HCPU (incluindo 128 KB de retenção) e 160 KB de retenção do LCPU, não formam um espaço contíguo. Confira o SKU e o mapa de memória do SDK.
 
 **Quais interfaces de display o SF32LB56x suporta?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix)) Esta lista abrange toda a família, não garante todas as interfaces em cada código de componente ou encapsulamento; confira a matriz de interfaces vinculada.
 
 **Qual é a resolução máxima de display do SF32LB56x?**
 Até 1024 × 600 com cor RGB888, pela interface DPI/RGB no encapsulamento BGA. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -3594,9 +3604,9 @@ Summary: SF32LB57x: família de MCUs AIoT multicore de ultrabaixo consumo com Bl
 
 ## Visão geral
 
-A série SF32LB57x reúne MCUs AIoT de ultrabaixo consumo para wearables, dispositivos inteligentes portáteis, casas inteligentes e produtos compactos com display. É indicada quando o produto precisa de mais recursos gráficos, áudio Bluetooth, entrada de câmera, armazenamento externo e operação sempre ativa do que um MCU Bluetooth básico oferece, sem assumir os compromissos de consumo, custo e integração de uma plataforma da classe de processador de aplicação. Como oferta da SiFli para 2026, o SF32LB57x representa uma evolução das famílias SF32LB52x e SF32LB56x, mantendo o foco na competitividade de custo. Oferece mais desempenho de CPU e de gráficos, mais GPIOs em encapsulamentos QFN de baixo custo e fácil manuseio, além de combinações mais flexíveis de memória integrada ao encapsulamento. Em gráficos, suporta resoluções de até 1024 × 600 com cor RGB888 (24 bits).
+A série SF32LB57x reúne MCUs AIoT de ultrabaixo consumo para wearables, dispositivos inteligentes portáteis, casas inteligentes e produtos compactos com display. É indicada quando o produto precisa de mais recursos gráficos, áudio Bluetooth, entrada de câmera, armazenamento externo e operação sempre ativa do que um MCU Bluetooth básico oferece, sem assumir os compromissos de consumo, custo e integração de uma plataforma da classe de processador de aplicação. Como oferta da SiFli para 2026, o SF32LB57x representa uma evolução das famílias SF32LB52x e SF32LB56x, mantendo o foco na competitividade de custo. Oferece mais desempenho de CPU e de gráficos, mais GPIOs em encapsulamentos QFN compactos adequados à montagem de menor custo, além de combinações mais flexíveis de memória integrada ao encapsulamento. O [guia de projeto de hardware](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html) da SiFli informa um limite de tela de 1024 × 1024, enquanto o [FAQ de LCD](https://docs.sifli.com/projects/solution/7.FAQ/lcd/index.html) lista 1024 × 600 e 720 × 720 entre projetos RGB/DPI comuns ou validados e esclarece que essas referências não representam o limite físico absoluto do silício. A [matriz de interfaces](../../learn/graphics/display-controller.md#per-device-interface-matrix) atual da μForge registra 1024 × 600 RGB888 via DPI/RGB. Trate esses valores como referências, não como modos de painel garantidos; valide a referência e o encapsulamento exatos, a interface, os tempos do painel, a taxa de atualização, o pinmux e a largura de banda do framebuffer/PSRAM.
 
-A família usa uma arquitetura de três núcleos Arm Cortex-M33 STAR-MC1[^1]: dois núcleos de alto desempenho (HCPU e ACPU) operando a até 240 MHz, com pontuação conjunta de 1.968 CoreMark / 740 DMIPS, e um núcleo LCPU de baixo consumo a 24 MHz. O [guia de uso da ACPU da SiFli](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/acpu.html) indica que o ACPU processa áudio e gráficos, enquanto o LCPU executa tarefas de BLE e de dados de sensores por um caminho de menor consumo. A plataforma inclui 592 KB de SRAM de retenção, gráficos ePicasso 3.0, descompressão eZip 3.0, controladores LCD e de câmera DCMI, Bluetooth de modo duplo, ADC/DAC de áudio, interfaces para memória SiP e externa, aceleração de segurança e atribuição de pinos via FreeIO. Seu principal diferencial é o PTM (Parallel Task Machine), um pequeno processador paralelo de tarefas que assume funções como o sequenciamento de periféricos sensível a ciclos, protocolos de E/S personalizados, aquisição de sensores, temporização semelhante a PWM e tratamento de eventos, liberando as CPUs principais desse trabalho.
+A família usa uma arquitetura de três núcleos Arm Cortex-M33 STAR-MC1[^1]: dois núcleos de alto desempenho (HCPU e ACPU) operando a até 240 MHz, com pontuação conjunta de 1.968 CoreMark / 740 DMIPS, e um núcleo LCPU de baixo consumo a 24 MHz. O [guia de uso da ACPU da SiFli](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/acpu.html) descreve explicitamente o SF32LB57x como um sistema de três núcleos: a ACPU processa áudio e gráficos, enquanto a LCPU executa tarefas sensíveis ao consumo, como BLE e processamento de dados de sensores. Confirme a configuração do SDK e a distribuição de tarefas para a carga de trabalho do produto. A plataforma inclui 592 KB de SRAM de retenção, gráficos ePicasso 3.0, descompressão eZip 3.0, controladores LCD e de câmera DCMI, Bluetooth de modo duplo, ADC/DAC de áudio, interfaces para memória SiP e externa, aceleração de segurança e atribuição de pinos via FreeIO. Seu principal diferencial é o PTM (Parallel Task Machine), um pequeno processador paralelo de tarefas que assume funções como o sequenciamento de periféricos sensível a ciclos, protocolos de E/S personalizados, aquisição de sensores, temporização semelhante a PWM e tratamento de eventos, liberando as CPUs principais desse trabalho.
 
 Defina a referência comercial exata antes de reutilizar esquemáticos ou iniciar o layout da PCB. O SF32LB57x está disponível nos encapsulamentos QFN68, QFN80 e BGA112, com versões alimentadas por bateria e versões para alimentação externa regulada de 3,3 V, conforme a família do componente. Essa escolha define a árvore de alimentação, a quantidade de GPIOs, o fanout do encapsulamento, o roteamento do display e da memória, o acesso para depuração e a estratégia de bring-up.
 
@@ -3630,6 +3640,11 @@ Consulte [Características e especificações](#features-and-specs) para ver os 
 
 [Hardware Design Guide (μForge)]: ../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md
 [SiFli Approved Vendor List]: ../../hardware/cad-components/sifli-approved-vendor-list.md
+[Repositório do código-fonte do SiFli SDK]: https://github.com/OpenSiFli/SiFli-SDK
+[Datasheet para bateria]: https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/DS5701-SF32LB57x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf
+[Datasheet para 3,3 V]: https://downloads.sifli.com/docs/Datasheet/%E5%B8%B8%E4%BE%9B%E7%94%B5/DS5702-SF32LB57X-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf
+[Manual do usuário]: https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/UM5701-SF32LB57x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p1.pdf
+[Guia de projeto original]: https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html
 [Buy Samples]: https://sifli.taobao.com/
 [Buy Dev Kits]: https://sifli.taobao.com/
 
@@ -3638,6 +3653,7 @@ Consulte [Características e especificações](#features-and-specs) para ver os 
 - :fontawesome-solid-file-pdf: __Resumo do produto ([bateria](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/PB5701-SF32LB57x-Product%20Brief%20v0.4.pdf), [3,3 V](https://downloads.sifli.com/docs/Datasheet/%E5%B8%B8%E4%BE%9B%E7%94%B5/PB5702-SF32LB57X-Product%20Brief%20v0p4.pdf))__
 - :fontawesome-solid-file-pdf: __Datasheet ([bateria / ZH](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/DS5701-SF32LB57x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf), [3,3 V / ZH](https://downloads.sifli.com/docs/Datasheet/%E5%B8%B8%E4%BE%9B%E7%94%B5/DS5702-SF32LB57X-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf))__
 - :fontawesome-solid-file-pdf: __[Manual do usuário (ZH)](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/UM5701-SF32LB57x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p1.pdf)__
+- :fontawesome-brands-github: __[Repositório do código-fonte do SiFli SDK]__
 - :fontawesome-solid-file-lines: __[Guia de projeto original (wiki.sifli.com, ZH)](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html)__
 - :fontawesome-solid-file-lines: __[Guia da placa de desenvolvimento (wiki.sifli.com, ZH)](https://wiki.sifli.com/board/sf32lb57x/SF32LB57-DevKit-LCD.html)__
 - :fontawesome-solid-file-lines: __[Guia de projeto de hardware (μForge)][Hardware Design Guide (μForge)]__
@@ -3659,6 +3675,10 @@ Consulte [Características e especificações](#features-and-specs) para ver os 
 - 592 KB de SRAM de retenção (512 KB HPSYS + 80 KB LPSYS), incluindo 128 KB de D-TCM sem ciclos de espera
 - Memória integrada ao encapsulamento, conforme a variante: até 48 MB de PSRAM e 32 MB de Flash NOR
 
+### Aceleração de IA
+
+O [guia de hardware do SF32LB57x](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html) da SiFli lista um acelerador integrado de rede neural para IA. No entanto, o [guia NNACC do SiFli SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/docs/source/en/hal/nnacc.md) cita as famílias 55x, 56x e 58x, mas não a 57x. Antes de depender dessa aceleração, confirme com a SiFli o suporte de driver, operadores e toolchain para a referência 57x exata.
+
 ### PTM (Parallel Task Machine)
 
 - PTM de 4 núcleos para tarefas periféricas personalizadas, com execução temporizada por hardware em vez de atendimento contínuo da CPU
@@ -3676,7 +3696,7 @@ Consulte [Características e especificações](#features-and-specs) para ver os 
 
 ### Gráficos, display e câmera
 
-Resolução máxima e interfaces de painel: consulte [Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix).
+A matriz de interfaces atual da μForge registra 1024 × 600 RGB888 via DPI/RGB; as ressalvas sobre as fontes e a validação de modos estão na [Visão geral](#overview). Confirme as interfaces e os pinos disponíveis para a referência e o encapsulamento exatos na [Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix).
 
 - Acelerador gráfico 2D/2.5D ePicasso 3.0, de até 2048 × 2048
 - Decodificador de hardware eZip 3.0 para eZip/eZip-A sem perdas, além de JPEG e MJPEG
@@ -3780,26 +3800,28 @@ Siga esta sequência para transformar uma lista inicial de opções SF32LB57x em
 
 1. **Valide o caminho do firmware.** Comece pelo [guia de introdução ao SiFli SDK](../../getting-started/sifli/getting-started-sifli-sdk.md). Em seguida, use o [fluxo de trabalho do SiFli SDK](../../develop/platforms/sifli-sdk/overview.md) e os [exemplos](../../develop/examples/index.md) para validar os recursos de gráficos, áudio, câmera, Bluetooth e armazenamento previstos para o produto.
 2. **Planeje o hardware de avaliação.** Use a [SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md) para avaliar o display, a câmera, o áudio e a conectividade. Antes de usá-la como referência para um produto 57x, confirme a configuração de memória do módulo, a revisão da placa e a configuração dos pinos compartilhados.
-3. **Projete e revise o hardware.** Antes de liberar o esquemático ou o layout, siga o [guia de projeto de hardware](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md), incluindo a [autoverificação do projeto pelo cliente](../../hardware/chip-guides/SF32LB57x_review_and_reference.md#7-customer-design-self-check), e o processo de revisão de [projeto para produção](../../hardware/design-for-production.md). Ainda não há um checklist específico da μForge para esta família.
-4. **Consulte as fontes oficiais.** Confirme a referência comercial e o encapsulamento exatos nas fontes primárias da SiFli: [Datasheet], [Manual do usuário][User Manual] e [Guia de projeto original (wiki.sifli.com)][Original Design Guide (wiki.sifli.com)]. Para selecionar componentes críticos da lista de materiais, consulte também a [Lista de fornecedores aprovados da SiFli][SiFli Approved Vendor List].
+3. **Projete e revise o hardware.** Antes de liberar o esquemático ou o layout, siga o [guia de projeto de hardware](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md), incluindo a [autoverificação do projeto pelo cliente](../../hardware/chip-guides/SF32LB57x_review_and_reference.md#7-customer-design-self-check), e o processo de revisão de [projeto para produção](../../hardware/design-for-production.md). Aplique também os checklists de [esquemático](../../hardware/chip-guides/SF32LB57x_schematic_checklist.md) e de [layout de PCB](../../hardware/chip-guides/SF32LB57x_pcb_layout_checklist.md).
+4. **Consulte as fontes oficiais.** Confirme a referência comercial e o encapsulamento exatos no [datasheet para bateria] ou no [datasheet para 3,3 V], no [manual do usuário] e no [guia de projeto original] da SiFli. Para selecionar componentes críticos da lista de materiais, consulte também a [lista de fornecedores aprovados da SiFli].
 
 <!-- uf-faq:start -->
 ## Perguntas frequentes
 
 **Quais são as principais especificações do SF32LB57x?**
-O SF32LB57x combina uma CPU de aplicação (2× Cortex-M33 @240 MHz) com um núcleo de baixo consumo (Cortex-M33 @24 MHz, controlador Bluetooth dedicado). Integra 592 KB de SRAM interna e oferece Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 3.0 + eZip 3.0. Encapsulamento: QFN68 / QFN80 / BGA112 (7 × 7 mm (QFN68), 8 × 8 mm (QFN80), 5,4 × 4,4 mm (BGA112)). USB 2.0 FS.
+O SF32LB57x oferece processamento de aplicações (2× Cortex-M33 @240 MHz) e um núcleo de baixo consumo (Cortex-M33 @24 MHz, controlador Bluetooth dedicado). Integra 592 KB de SRAM interna e oferece Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 3.0 + eZip 3.0. Encapsulamento: QFN68 / QFN80 / BGA112 (7 × 7 mm (QFN68), 8 × 8 mm (QFN80), 5,4 × 4,4 mm (BGA112)). USB 2.0 FS.
+
+O guia de hardware lista um acelerador de redes neurais integrado, mas o guia NNACC do SDK v2.5.1 não comprova suporte de driver ou operadores para o 57x. Confirme o caminho de software do alvo exato; veja [aceleração de IA](#ai-acceleration).
 
 **Quais interfaces de display o SF32LB57x suporta?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix)) Esta lista abrange toda a família, não garante todas as interfaces em cada código de componente ou encapsulamento; confira a matriz de interfaces vinculada.
 
 **Qual é a resolução máxima de display do SF32LB57x?**
-Até 1024 × 600 com cor RGB888, pela interface DPI/RGB. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+O guia de hardware estabelece um limite de 1024 × 1024; a FAQ de LCD da SiFli cita projetos RGB/DPI comuns ou validados de 1024 × 600 e 720 × 720. A matriz de interfaces atual lista 1024 × 600 RGB888. Esses valores não são garantias intercambiáveis. Confira o componente e o encapsulamento exatos, a interface, o timing do painel, a taxa de atualização, o multiplexamento de pinos e a largura de banda do framebuffer/PSRAM; veja as [condições de display](#overview). ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
 **Quanta memória no encapsulamento o SF32LB57x oferece?**
 Até 48 MB de PSRAM e até 32 MB de Flash NOR no encapsulamento.
 
 **Qual tensão de alimentação o SF32LB57x precisa?**
-3,0–4,7 V ou 2,97–3,63 V.
+Variantes com bateria: o DS5701 informa 3,0–4,7 V, enquanto o guia de hardware informa 3,45–4,7 V para QFN68/QFN80/BGA112. O DS5701 também especifica tensão na energização de 3,5 V ±10%. Variantes com regulador externo: 2,97–3,63 V. Esclareça a divergência para o componente e o pino de entrada exatos; veja as [condições de alimentação](#power-management).
 
 **Por onde começar um projeto de hardware com o SF32LB57x?**
 Comece pelo [guia de projeto de hardware do SF32LB57x](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md) para esquemático, alimentação, clock/RF e layout de PCB, e use os checklists de esquemático e layout antes de liberar a placa.
@@ -3813,13 +3835,16 @@ Use o [guia de projeto de hardware (μForge)](../../hardware/chip-guides/SF32LB5
 
 ### Kits de desenvolvimento
 
-[SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md) é a placa de avaliação para displays RGB, câmeras DVP, dois microfones PDM, saída de alto-falante, Wi-Fi SDIO e USB. Ela é baseada na placa principal (core board) SF32LB57, que faz as vezes do módulo 57 até que ele obtenha a certificação de RF completa e esteja disponível comercialmente.
+[SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md) é a placa de avaliação para displays RGB, câmeras DVP, dois microfones PDM, saída de alto-falante, Wi-Fi SDIO e USB. Ela usa um módulo SF32LB57-MOD-WD. O guia da placa da SiFli o descreve como um módulo SF32LB57X de 3,3 V com Wi-Fi/Bluetooth integrado e Flash QSPI de boot; a presença de OPI-PSRAM depende do SKU do módulo. Antes de usar a placa como base para produção, confirme com a SiFli a configuração exata do módulo e seu status de certificação de RF.
 
 Use os esquemáticos de referência oficiais, as orientações de projeto do sistema mínimo e os materiais de checklist para planejar alimentação, clocks, RF, display, armazenamento, áudio, câmera e acesso para produção.
 
 ### Produtos de referência
 
 Entre os produtos típicos baseados em SF32LB57x estão smartwatches e pulseiras, dispositivos HMI inteligentes, produtos com display de papel eletrônico, eletrodomésticos inteligentes de pequeno e médio porte, equipamentos portáteis de gravação e áudio, painéis para casas inteligentes, terminais compactos com display e produtos Bluetooth com câmera.
+
+!!! note "Conteúdo gerado automaticamente"
+    Esta página foi compilada/redigida sem um documento-fonte existente. Verifique as afirmações técnicas na documentação oficial da SiFli antes de usá-las como referência.
 
 ---
 
@@ -3918,9 +3943,16 @@ Resolução máxima e interfaces de painel: consulte [Matriz de interfaces por d
 - Conectividade Wi-Fi externa via SDIO
 - 2 ADCs de áudio integrados
 - 2 DACs de áudio integrados
-- 2 interfaces PDM, cada uma compatível com até dois microfones digitais. A quantidade de interfaces não equivale à quantidade de microfones; as conexões efetivamente utilizáveis também dependem da multiplexação dos pinos e do roteamento da placa.
+- 2 interfaces PDM; a nota de aplicação de hardware da SiFli documenta duas entradas de microfone PDM. Verifique os canais utilizáveis conforme a multiplexação dos pinos e o roteamento da placa.
 - 3 interfaces I2S: I2S1 é somente de entrada; I2S2 e I2S3 aceitam entrada e saída. Todas operam apenas no modo mestre.
 - USB 2.0 High-Speed em modo host/dispositivo
+
+### Segurança
+
+- Aceleradores de hardware AES, HASH e CRC; gerador de números aleatórios verdadeiro (TRNG)
+- Inicialização segura (Secure Boot) e eFuse de 1.024 bits para armazenar a raiz de confiança (Root of Trust) e o UID
+- Descriptografia em tempo real de código externo por MPI1, MPI2, MPI3 e MPI5
+- O resumo do produto da SiFli lista PSA Certified Level 1; confirme o escopo e a validade do certificado para o componente e o produto específicos.
 
 ### Integração do sistema
 
@@ -3949,19 +3981,24 @@ Resolução máxima e interfaces de painel: consulte [Matriz de interfaces por d
 
 ## Variantes da família
 
-O guia atual de modelos de chips da SiFli lista três códigos de pedido SF32LB58x, todos em BGA256, com as configurações de memória integrada ao encapsulamento mostradas abaixo. Confirme o código exato no datasheet vigente e na lista de fornecedores aprovados (AVL), pois as configurações e a disponibilidade podem mudar.
+O guia atual de modelos de chips da SiFli lista seis códigos de pedido SF32LB58x, todos em BGA256. A tabela separa a SiP de inicialização em MPI5 das memórias em MPI1 e MPI2:
 
-<div align="center"><em>Códigos de pedido SF32LB58x e memória integrada ao encapsulamento</em></div>
+<div align="center"><em>Códigos de pedido SF32LB58x, memória SiP e limites comuns</em></div>
 
 <div align="center" markdown>
 
-| Código de pedido | Encapsulamento | Memória integrada ao encapsulamento |
-| :--- | :--- | :--- |
-| SF32LB583VCC36 | BGA256 | Flash NOR de inicialização de 1 MB + 2 × OPI-PSRAM de 8 MB em MPI1 e MPI2 |
-| SF32LB586VDD36 | BGA256 | Flash NOR de inicialização de 1 MB + 2 × HPI-PSRAM de 16 MB em MPI1 e MPI2 |
-| SF32LB587VEE56 | BGA256 | Flash NOR de inicialização de 4 MB + 2 × HPI-PSRAM de 32 MB em MPI1 e MPI2 |
+| Código de pedido | Encapsulamento | SiP de inicialização MPI5 | SiP MPI1 | SiP MPI2 |
+| :--- | :--- | :--- | :--- | :--- |
+| SF32LB580VNN36 | BGA256 | Flash NOR de 1 MB | n/a | n/a |
+| SF32LB581VCN36 | BGA256 | Flash NOR de 1 MB | OPI-PSRAM de 8 MB | n/a |
+| SF32LB583VCC36 | BGA256 | Flash NOR de 1 MB | OPI-PSRAM de 8 MB | OPI-PSRAM de 8 MB |
+| SF32LB585V5E56 | BGA256 | Flash NOR de 4 MB | Flash NOR de 4 MB | HPI-PSRAM de 32 MB |
+| SF32LB586VDD36 | BGA256 | Flash NOR de 1 MB | HPI-PSRAM de 16 MB | HPI-PSRAM de 16 MB |
+| SF32LB587VEE56 | BGA256 | Flash NOR de 4 MB | HPI-PSRAM de 32 MB | HPI-PSRAM de 32 MB |
 
 </div>
+
+Para os seis códigos, o guia informa encapsulamento de 6,5 × 8,5 × 0,94 mm com passo de 0,4 mm, alimentação de 1,71–3,63 V, 94 GPIO HCPU + 66 GPIO LCPU e faixa de temperatura operacional de −40 a 85 °C. O guia de modelos não informa as faixas de tensão de E/S, especificadas por banco no datasheet, nem declara compatibilidade pino a pino. Não presuma que os componentes sejam intercambiáveis por compartilharem o BGA256; antes do layout, confira cada alimentação de E/S usada e a tabela de funções dos pinos do código exato. As configurações e a disponibilidade podem mudar; antes da compra, confirme o código no datasheet vigente e na lista de fornecedores aprovados (AVL).
 
 Ao escolher uma variante, verifique primeiro:
 
@@ -3983,7 +4020,7 @@ Siga esta sequência para transformar uma seleção inicial de SF32LB58x em um p
 ## Perguntas frequentes
 
 **Quais são as principais especificações do SF32LB58x?**
-O SF32LB58x combina uma CPU de aplicação (2× Cortex-M33 @240 MHz) com um núcleo de baixo consumo (Cortex-M33 @48/96 MHz, programável pelo usuário). Integra 3,7 MB de SRAM interna e oferece Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 2.0 + Vivante GCNanoUltraV (vetorial). Encapsulamento: BGA256 (8,5 × 6,5 mm). USB 2.0 HS.
+O SF32LB58x oferece processamento de aplicações (2× Cortex-M33 @240 MHz) e um núcleo de baixo consumo (Cortex-M33 @48/96 MHz, programável pelo usuário). Integra 3,7 MB de SRAM interna e oferece Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 2.0 + Vivante GCNanoUltraV (vetorial). Encapsulamento: BGA256 (8,5 × 6,5 mm). USB 2.0 HS.
 
 **Quais interfaces de display o SF32LB58x suporta?**
 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -4068,6 +4105,7 @@ As variantes somente com NOR são adequadas a produtos compactos com Bluetooth, 
 - Conector FPC de 16 pinos com passo de 0,5 mm; as interfaces de display incluem SPI, DSPI e Quad-SPI, com suporte a QSPI em modo DDR
 - Sinais I2C para o painel de toque
 - Pinos para microfone analógico e saída de áudio diferencial
+- Entrada de microfone digital PDM
 - Um LED de usuário
 - Botão de alimentação e botão de função
 - Pontos de teste para medir a corrente de uma linha individual; a SiFli também documenta testes de consumo do MCU, do sistema mínimo e da placa inteira
@@ -4099,6 +4137,8 @@ Para medir a corrente de uma única linha de alimentação, conecte um amperíme
 Quando o USB Type-C está conectado, alguns pinos do conector também podem fornecer saídas de 3,3 V, 1,8 V e 5 V. Confirme a direção necessária antes de conectar circuitos externos.
 
 A placa inclui uma chave de alimentação. O sinal RTS# do CH340N pode controlar a habilitação da placa, permitindo que a ferramenta host reinicie o MCU durante a gravação ou a depuração.
+
+Com alimentação por USB Type-C, o LDO integrado converte os 5 V do VBUS para 3,3 V.
 
 ## Gravação e depuração
 
@@ -4183,6 +4223,39 @@ A placa disponibiliza dois conectores de borda com 24 pinos cada. Um lado reúne
 
 </div>
 
+<div align="center"><em>Tabela: funções detalhadas e resistores de pull de J1</em></div>
+
+<div align="center" markdown>
+
+| Pino | Nome do pino | Função padrão após reset e funções multiplexadas | Pull |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | Terra |  |
+| 2 | PA_44 | **PA44**, UART, I2C, GPTIM, WKUP20 | PD |
+| 3 | PA_43 | **PA43**, UART, I2C, GPTIM, WKUP19 | PD |
+| 4 | PA_42 | **PA42**, UART, I2C, GPTIM, WKUP18 | PU |
+| 5 | PA_41 | **PA41**, UART, I2C, GPTIM, WKUP17 | PU |
+| 6 | PA_40 | **PA40**, UART, I2C, GPTIM, SPI2_CS, WKUP16 | PU |
+| 7 | PA_39 | **PA39**, UART, I2C, GPTIM, SPI2_CLK, WKUP15 | PU |
+| 8 | PA_38 | **PA38**, UART, I2C, GPTIM, SPI2_DI, WKUP14 | PD |
+| 9 | PA_37 | **PA37**, UART, I2C, GPTIM, SPI2_DIO, WKUP13 | PD |
+| 10 | PA_36 | **PA36**, UART, I2C, GPTIM, USB_DM, WKUP12 | PD |
+| 11 | PA_35 | **PA35**, UART, I2C, GPTIM, USB_DP, WKUP11 | PD |
+| 12 | PA_31 | **PA31**, UART, I2C, GPTIM, GPADC3 | PD |
+| 13 | PA_30 | **PA30**, UART, I2C, GPTIM, I2S1_LRCK, GPADC2 | PD |
+| 14 | PA_29 | **PA29**, UART, I2C, GPTIM, SPI1_CS, I2S1_BCK, GPADC1 | PD |
+| 15 | PA_28 | **PA28**, UART, I2C, GPTIM, SPI1_CLK, I2S1_SDI, GPADC0 | PD |
+| 16 | GND | Terra |  |
+| 17 | 3.3V | Entrada de 3,3 V com USB Type-C desconectado; saída quando conectado |  |
+| 18 | PA_27 | **PA27**, UART, I2C, GPTIM, WKUP3 | PU |
+| 19 | PA_26 | **PA26**, UART, I2C, GPTIM, WKUP2 | PU |
+| 20 | PA_25 | **PA25**, UART, I2C, GPTIM, SPI1_DI, I2S1_SDO, WKUP1 | PD |
+| 21 | PA_24 | **PA24**, UART, I2C, GPTIM, SPI1_DIO, I2S1_MCLK, WKUP0 | PD |
+| 22 | PA_34 | **PA34**, UART, I2C, GPTIM, GPADC6, WKUP10 | PD |
+| 23 | PA_33 | **PA33**, UART, I2C, GPTIM, GPADC5 | PD |
+| 24 | PA_32 | **PA32**, UART, I2C, GPTIM, GPADC4 | PD |
+
+</div>
+
 ### Conector de LCD, áudio e depuração
 
 <div align="center"><em>Distribuição dos pinos do conector de LCD, áudio e depuração</em></div>
@@ -4201,9 +4274,44 @@ A placa disponibiliza dois conectores de borda com 24 pinos cada. Um lado reúne
 
 </div>
 
+<div align="center"><em>Tabela: funções detalhadas e resistores de pull de J2</em></div>
+
+<div align="center" markdown>
+
+| Pino | Nome do pino | Função padrão após reset e funções multiplexadas | Pull |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | Terra |  |
+| 2 | PA_00 | **PA00**, UART, I2C, GPTIM, LCD_RST | PD |
+| 3 | PA_01 | **PA01**, UART, I2C, GPTIM, BL_PWM | PD |
+| 4 | PA_02 | **PA02**, UART, I2C, GPTIM, LCD_TE, I2S1_MCLK | PD |
+| 5 | PA_03 | **PA03**, UART, I2C, GPTIM, LCD_CS, I2S1_SDO | PU |
+| 6 | PA_04 | **PA04**, UART, I2C, GPTIM, LCD_CLK, I2S1_SDI | PD |
+| 7 | PA_05 | **PA05**, UART, I2C, GPTIM, LCD_D0, I2S1_BCK | PD |
+| 8 | PA_06 | **PA06**, UART, I2C, GPTIM, LCD_D1, I2S1_LRCK | PD |
+| 9 | PA_07 | **PA07**, UART, I2C, GPTIM, LCD_D2, PDM1_CLK | PD |
+| 10 | PA_08 | **PA08**, UART, I2C, GPTIM, LCD_D3, PDM1_DAT | PD |
+| 11 | PA_09 | **PA09**, UART, I2C, GPTIM, CTP_INT | PD |
+| 12 | MIC_ADC | Sinal de entrada MIC |  |
+| 13 | MIC_BIAS | Tensão de polarização MIC |  |
+| 14 | DACP | Sinal de saída de áudio analógico |  |
+| 15 | DACN | Sinal de saída de áudio analógico |  |
+| 16 | GND | Terra |  |
+| 17 | 1.8V | Entrada de 1,8 V com USB Type-C desconectado; saída quando conectado |  |
+| 18 | PA_10 | **PA10**, UART, I2C, GPTIM, CTP_RST | PD |
+| 19 | PA_11 | **PA11**, UART, I2C, GPTIM, CTP_SDA | PU |
+| 20 | PA_20 | **PA20**, UART, I2C, GPTIM, CTP_SCL | PD |
+| 21 | PA_21 | **PA21**, UART, I2C, GPTIM | PD |
+| 22 | PA_18 | **UART0_RXD**, porta de depuração e gravação, PA18, SWDIO, I2C, GPTIM | PU |
+| 23 | PA_19 | **UART0_TXD**, porta de depuração e gravação, PA19, SWCLK, I2C, GPTIM | Nenhum |
+| 24 | 5V | Entrada de 5 V com USB Type-C desconectado; saída quando conectado |  |
+
+</div>
+
 ## Pinos de Flash externa e SDIO
 
 Algumas variantes incluem uma Flash QSPI-NOR externa de 16 MB. O grupo de pinos compartilhado entre armazenamento e SDIO é:
+
+O guia original da placa também lista estas opções de encapsulamento para Flash externa; a montagem depende da variante e da BOM: Flash SPI NOR em WSON8-8x6mm ou WSON8-6x5mm, Flash SPI NAND em WSON8-8x6mm e SD NAND em WSON8-8x6mm.
 
 <div align="center"><em>Grupo de pinos da Flash externa e do SDIO</em></div>
 
@@ -4225,6 +4333,8 @@ Antes de usar esses pinos para SDIO ou outras funções de expansão, verifique 
 ## Expansão de áudio
 
 A placa disponibiliza a polarização e a entrada para microfone analógico, além de uma saída DAC diferencial. O microfone e um amplificador Class-AB/D para acionar um alto-falante são externos; selecione-os de acordo com o caminho de áudio pretendido.
+
+A placa também aceita entrada de microfone digital PDM: PA07 multiplexa `PDM1_CLK` e PA08 multiplexa `PDM1_DAT`.
 
 ## Alvos de compilação do SDK
 
@@ -4282,12 +4392,13 @@ A placa reúne em uma única plataforma de avaliação o módulo MCU, conectores
 - Suporte a LCD QSPI/SPI/DSPI por conector FPC de 22 pinos
 - Suporte a LCD MCU/8080 de 8 bits pelo FPC e pelo conector de expansão de 40 pinos
 - Suporte a painel de toque via I2C
-- USB Type-C para gravação/depuração via USB-UART e alimentação da placa
+- USB Type-C para gravação/depuração pelo conversor USB-UART CH343P integrado e para alimentação da placa
 - Interface USB Type-C separada para aplicações USB 2.0 FS
 - Microfone MEMS integrado e amplificador de potência de áudio classe D
 - Slot para cartão MicroSD via SPI
 - Conector de bateria e carregador linear ETA9640P
 - Conector de expansão de 40 pinos para sinais de display, GPIO, armazenamento, áudio e alimentação
+- Chave integrada à placa, botões de função e reset, indicadores RGB/de carga/GPIO/de alimentação e driver da retroiluminação do LCD
 
 ## Quando usar esta placa
 
@@ -4361,7 +4472,7 @@ Antes de usar o mapa de pinos no projeto de uma placa portadora ou de um disposi
 
 - Alto-falante
 - Cartão TF
-- Bateria Li-ion/Li-poly de uma célula, normalmente de 450 mAh a 500 mAh
+- Bateria Li-ion/Li-poly de uma célula; capacidade recomendada pela SiFli: 450 mAh
 - Segundo cabo USB quando for necessário depurar via UART e testar o USB nativo ao mesmo tempo
 
 ### Configuração básica
@@ -4568,14 +4679,22 @@ A placa mede 51 mm × 20,32 mm e disponibiliza os principais recursos do SF32LB5
 
 A variante N4 é adequada para controle compacto, Bluetooth e interfaces de usuário simples. A N16R16 combina 16 MB de OPI-PSRAM com 16 MB de QSPI-NOR; a A128R16 combina 16 MB de OPI-PSRAM com 128 MB de QSPI-NAND. Ambas atendem a aplicações que precisam de recursos gráficos maiores, sistemas de arquivos externos ou buffers de quadro e memória de trabalho na PSRAM.
 
-**Divergência entre fontes — confirme antes de selecionar:** O [guia detalhado da placa Nano](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html) chama sua configuração com 16 MB de OPI-PSRAM e 16 MB de NOR de `R16N16 V1.0.0`. O [guia atual de modelos de placas](https://wiki.sifli.com/en/board/devkit_guide.html) identifica essa mesma configuração como `N16R16` e lista separadamente a `A128R16`, com 16 MB de OPI-PSRAM e 128 MB de QSPI-NAND. O guia detalhado não descreve a A128R16; para esse SKU, use as informações do guia de modelos e não extrapole outras características da N16R16. Antes de escolher o firmware ou o layout de armazenamento, confira a identificação da placa e o esquemático/BOM atual.
+**Divergência entre fontes — confirme antes de selecionar:** O [guia detalhado da placa Nano](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html) chama sua configuração com 16 MB de OPI-PSRAM e 16 MB de NOR de `R16N16 V1.0.0`. O [guia atual de modelos de placas](https://wiki.sifli.com/en/board/devkit_guide.html) identifica essa mesma configuração como `N16R16` e lista separadamente a `A128R16`, com 16 MB de OPI-PSRAM e 128 MB de QSPI-NAND.
 
-As fontes da SiFli também apresentam uma pequena diferença nas dimensões da placa Nano: o guia detalhado informa 21 × 51 mm, enquanto o guia de modelos especifica 51 × 20,32 mm. O lado de 51 mm coincide, mas a medida do lado menor difere em 0,68 mm. Esta página usa o valor mais preciso do guia de modelos; antes de projetar um gabinete ou uma placa portadora, confira o desenho mecânico da revisão correspondente.
+O guia detalhado não descreve a A128R16; para esse SKU, use as informações do guia de modelos e não extrapole outras características da N16R16.
+
+Antes de escolher o firmware ou o layout de armazenamento, confira a identificação da placa e o esquemático/BOM atual.
+
+**Divergência nas dimensões:** o guia detalhado informa 21 × 51 mm, enquanto o guia de modelos especifica 51 × 20,32 mm. O lado de 51 mm coincide, mas a medida do lado menor difere em 0,68 mm. Esta página usa o valor mais preciso do guia de modelos.
+
+Antes de projetar um gabinete ou uma placa portadora, confira o desenho mecânico da revisão correspondente.
 
 ## Destaques da placa
 
 - Placa compacta de 51 mm × 20,32 mm
 - Furos semicirculares metalizados nas bordas para soldar a placa a um protótipo
+- Cristais de 48 MHz e 32,768 kHz, além de uma antena PCBA integrada
+- 17 GPIOs expostos pelo grupo LCC e 13 pelo grupo de pads LGA; recursos para 3 UART, 4 I2C, 2 GPTIM, 2 SPI e 3 GPADC
 - Alimentação USB Type-C e gravação/depuração via USB-UART por meio do CH340N
 - Pinos GPIO, UART, I2C, SPI, GPADC, PWM, I2S, PDM e com capacidade de despertar o sistema
 - Suporte a LCD QSPI por FPC de 16 pinos, normalmente com cabo adaptador de 22 para 16 pinos
@@ -4637,11 +4756,11 @@ Use a interface UART USB Type-C para gravar o firmware e consultar os logs seria
 
 ## Resumo dos pinos com furos semicirculares metalizados
 
-A Nano expõe dois grupos de pinos nas bordas. O primeiro reúne áudio, SPI1, UART de depuração, alimentação próxima ao USB e pinos compatíveis com GPADC. O segundo reúne SPI2, USB FS, GPIOs com capacidade de despertar o sistema e alimentação.
+A Nano expõe dois grupos de pinos LCC nas bordas: J1, à esquerda, reúne principalmente áudio, SPI1, UART de depuração e pinos compatíveis com GPADC; J2, à direita, reúne principalmente SPI2, USB FS, GPIOs com capacidade de despertar o sistema e alimentação. Todos os GPIOs podem ser multiplexados como UART, I2C ou GPTIM. As tabelas mostram apenas algumas funções, não todas as opções de multiplexação nem os estados de pull após reset; consulte o esquemático e os arquivos de projeto antes de projetar o circuito.
 
-### Sinais de borda do lado frontal
+### J1 — Sinais da borda LCC esquerda
 
-<div align="center"><em>Mapa dos sinais de borda do lado frontal</em></div>
+<div align="center"><em>Mapa dos sinais da borda LCC esquerda J1</em></div>
 
 <div align="center" markdown>
 
@@ -4666,9 +4785,9 @@ A Nano expõe dois grupos de pinos nas bordas. O primeiro reúne áudio, SPI1, U
 
 </div>
 
-### Sinais de borda do lado traseiro
+### J2 — Sinais da borda LCC direita
 
-<div align="center"><em>Mapa dos sinais de borda do lado traseiro</em></div>
+<div align="center"><em>Mapa dos sinais da borda LCC direita J2</em></div>
 
 <div align="center" markdown>
 
@@ -4695,7 +4814,7 @@ A Nano expõe dois grupos de pinos nas bordas. O primeiro reúne áudio, SPI1, U
 
 ## Interface LCD
 
-A placa suporta displays LCD QSPI por meio de um conjunto de sinais FPC de 16 pinos. A nota original da placa descreve a conexão com o display AMOLED de 1,85 polegadas do Huangshan Pi usando um cabo FPC adaptador de 22 para 16 pinos.
+A placa suporta os modos LCD SPI, DSPI e Quad-SPI, incluindo QSPI em modo DDR, por meio de um conjunto de sinais FPC de 16 pinos com passo de 0,5 mm. A nota original da placa descreve a conexão com o display AMOLED de 1,85 polegadas do Huangshan Pi usando um cabo FPC adaptador de 22 para 16 pinos.
 
 ![Cabo adaptador FPC de 22 para 16 pinos](assets/sf32lb52x/22p-to-16p.png){ loading="lazy" }
 <div align="center"><em>Cabo adaptador FPC de 22 para 16 pinos</em></div>
@@ -4746,9 +4865,11 @@ A variante N16R16 inclui 16 MB de Flash QSPI-NOR externa. O grupo de pinos de ar
 
 Dependendo da variante, esses pinos podem estar ocupados pela Flash montada na placa. Confirme a montagem exata antes de usá-los como pinos de expansão.
 
+O guia detalhado da placa também lista opções de footprint WSON8: SPI NOR de 8 × 6 mm ou 6 × 5 mm, e SPI NAND e SD NAND de 8 × 6 mm. A montagem da Flash varia conforme a placa; confira o esquemático e a lista de materiais da revisão correspondente antes de escolher um componente.
+
 ## Expansão de áudio
 
-A Nano disponibiliza entrada para microfone analógico, polarização do microfone e saída de áudio analógico diferencial. Acrescente um circuito externo de microfone e um amplificador de potência de áudio conforme os requisitos do produto final.
+A Nano disponibiliza entrada para microfone analógico, polarização do microfone, sinais para microfone digital PDM e saída de áudio analógico diferencial. A entrada analógica aceita um microfone analógico ou de silício. Para acionar um alto-falante, acrescente um amplificador de potência de áudio externo Classe AB ou Classe D.
 
 ## Alvos de compilação do SDK
 
@@ -4839,6 +4960,7 @@ Use esses nomes como aliases da mesma família ao procurar documentação de har
 - Slot para cartão MicroSD via SPI
 - Um botão de função e um botão de alimentação/reset
 - LED RGB SK6812MINI-HS (guia SiFli V1.0.0; a página da LCKFB, sem revisão identificada, informa WS2812B-2020)
+- LED indicador de alimentação separado (identificado nas anotações da placa SiFli V1.0.0)
 - Circuito de acionamento do motor vibratório com pads de solda para conexão de um motor externo
 - IMU de 6 eixos LSM6DS3TR-C
 - Sensor magnético de 3 eixos MMC5603NJ
@@ -4877,6 +4999,7 @@ Para uma placa de avaliação geral com foco em display, use a [SF32LB52-DevKit-
 | Controlador de toque | FT6146-M00 |
 | Microfone | Microfone MEMS integrado |
 | Saída de áudio | Amplificador classe D, conector externo GH-1,25 mm para alto-falante |
+| Amplificador de potência de áudio | NS4150B (identificado nas anotações da placa SiFli V1.0.0) |
 | Armazenamento | Cartão MicroSD via SPI |
 | Sensor de movimento | IMU de 6 eixos LSM6DS3TR-C |
 | Sensor magnético | Magnetômetro de 3 eixos MMC5603NJ |
@@ -4888,7 +5011,7 @@ Para uma placa de avaliação geral com foco em display, use a [SF32LB52-DevKit-
 
 </div>
 
-**Os códigos dos componentes variam entre fontes ou revisões; confirme antes de projetar.** O guia SiFli V1.0.0 da [placa Huangshan Pi][Original SiFli Huangshan Pi Guide] identifica o carregador SY6103, o OVP SY5320 e o LED RGB SK6812MINI-HS. A [wiki de hardware da LCKFB][LCKFB Hardware Wiki], sem revisão identificada, cita o OVP LP5305AQVF e o LED RGB WS2812B-2020; para o carregador, informa AW32001ECSR na lista de características e AW23001ECSR na seção sobre carga. As fontes não permitem determinar se as diferenças decorrem de outra revisão ou de documentação desatualizada. Use os valores SiFli V1.0.0 apenas para essa referência documentada; antes de usar especificações próprias de um componente, confira as marcações, o esquemático e a BOM da unidade.
+**Os códigos dos componentes variam entre fontes ou revisões; confirme antes de projetar.** O guia SiFli V1.0.0 da [placa Huangshan Pi][Original SiFli Huangshan Pi Guide] identifica o carregador SY6103, o OVP SY5320 e o LED RGB SK6812MINI-HS. A [wiki de hardware da LCKFB][LCKFB Hardware Wiki], sem revisão identificada, cita o OVP LP5305AQVF e o LED RGB WS2812B-2020; para o carregador, informa AW32001ECSR na lista de características e AW23001ECSR na seção sobre carga. As fontes não permitem determinar se as diferenças decorrem de outra revisão ou de documentação desatualizada. Use os valores SiFli V1.0.0 apenas para essa referência documentada; antes de usar especificações próprias de um componente, confira as marcações, o esquemático e a BOM da unidade. As anotações da placa SiFli V1.0.0 também identificam LDOs separados para a alimentação dos sensores, o barramento de 3,3 V e a alimentação do CH340N, além de uma chave de alimentação do VSYS e diodos TVS. Confirme as conexões exatas no esquemático da revisão correspondente.
 
 ## Conteúdo do kit
 
@@ -4913,6 +5036,8 @@ A entrada de bateria foi projetada para uma bateria Li-ion de uma célula, conec
 Ao usar a placa sem bateria e alimentar VBAT por uma fonte de bancada, a faixa de entrada VBAT documentada é de 3,7 V a 4,7 V; para testes com tensão de alimentação normal, recomenda-se 3,8 V. Os limiares documentados do SF32LB52-MOD-1-N16R8 são 3,58 V para ligar e 3,48 V para desligar.
 
 A documentação de hardware da LCKFB alerta que a função de pressionamento prolongado pode não funcionar quando a bateria está desconectada. Verifique esse comportamento na revisão específica da placa e na configuração de alimentação prevista.
+
+O guia SiFli V1.0.0 apresenta duas indicações de capacidade: a lista de hardware opcional pede uma bateria acima de 450 mAh, enquanto a seção de seleção recomenda 450–500 mAh. Confirme qual requisito se aplica à revisão exata da placa e à bateria escolhida.
 
 ## Jumpers de medição de corrente
 
@@ -4946,8 +5071,17 @@ Hardware opcional:
 
 - Alto-falante externo
 - Cartão TF
-- Bateria Li-ion de 450 mAh ou maior
+- Bateria Li-ion com capacidade superior a 450 mAh
 - Segundo cabo USB para usar a depuração UART e testar o USB nativo simultaneamente
+
+### Configuração da placa e modos de inicialização
+
+Conecte o computador host à porta UART USB Type-C da placa; em seguida, abra o SifliTrace e selecione a porta COM correta.
+
+1. **Gravação do firmware:** habilite BOOT na ferramenta de gravação e, em seguida, ligue ou reinicie a placa.
+2. **Modo de desenvolvimento de software/log serial:** desabilite BOOT e, em seguida, ligue ou reinicie a placa.
+
+O guia da SiFli descreve o reset do módulo acionando a linha RTS# do CH340N integrado primeiro em nível baixo e depois em nível alto. Em placas que usam RTS para reset, abrir a porta serial pode provocar um reset ou desligamento inesperado; se isso ocorrer, desabilite o controle de fluxo por modem nas configurações avançadas da porta serial do computador host.
 
 Use um cabo USB que realmente suporte transferência de dados. Cabos apenas para carga podem alimentar a placa, mas não disponibilizam a interface serial de dados.
 
@@ -5020,6 +5154,8 @@ O conector de 30 pinos disponibiliza sinais de alimentação, USB, sensores, dis
 ## Interface de display e toque
 
 A placa usa um display AMOLED e disponibiliza um conjunto de sinais QSPI em um FPC de 22 pinos. A tabela SiFli V1.0.0 marca os pinos 5-10 como NC; a tabela abaixo inclui as 22 posições e identifica explicitamente esses pinos sem conexão.
+
+As anotações da placa de display distinguem um conector FPC de 22 pinos para o módulo LCD e um conector placa a placa (B2B) separado, de 24 pinos, para a placa principal. Antes da montagem, confirme as duas interfaces na revisão exata do conjunto.
 
 <div align="center"><em>Mapa dos sinais do FPC QSPI de 22 pinos para display e toque</em></div>
 
@@ -5128,7 +5264,9 @@ A SF32LB56-DevKit-LCD é uma placa de desenvolvimento voltada a aplicações com
 
 </div>
 
-**Nota sobre as fontes — confirme a revisão da placa:** O guia detalhado da SiFli identifica a placa descrita como equipada com o módulo `SF32LB56-MOD-A128R12N1`, com 4 MB + 8 MB de OPI-PSRAM no encapsulamento e 1 Gb de QSPI-NAND; também informa que esses dados de memória podem mudar antes do lançamento oficial. O guia atual de modelos lista as configurações N16R12N1 e A128R12N1, ambas com 4 + 8 MB de OPI-PSRAM e 1 MB de QSPI-NOR padrão. Para a A128R12N1, os 128 MB de QSPI-NAND no guia de modelos equivalem em capacidade ao 1 Gb do guia detalhado. Portanto, essas capacidades são consistentes para a A128R12N1. No entanto, o guia detalhado não menciona a QSPI-NOR padrão de 1 MB nem determina qual SKU está montado em cada placa ou revisão. O guia de modelos informa que o CH343K oferece dois canais de depuração USB-UART, mas o guia detalhado apenas atribui as funções USB-UART e USB 2.0 FS aos conectores Type-C, sem indicar como os canais UART são distribuídos entre eles. Antes de depender de um canal UART específico, consulte o esquemático/BOM da revisão correspondente. Antes de usar uma unidade específica como referência de produto, confira a identificação do módulo e o esquemático/BOM correspondente.
+**Nota sobre as fontes — confirme a revisão da placa:** O guia detalhado da SiFli identifica a placa descrita como equipada com o módulo `SF32LB56-MOD-A128R12N1`, com 4 MB + 8 MB de OPI-PSRAM no encapsulamento e 1 Gb de QSPI-NAND; também informa que esses dados de memória podem mudar antes do lançamento oficial. O guia atual de modelos lista as configurações N16R12N1 e A128R12N1, ambas com 4 + 8 MB de OPI-PSRAM e 1 MB de QSPI-NOR padrão. Para a A128R12N1, os 128 MB de QSPI-NAND no guia de modelos equivalem em capacidade ao 1 Gb do guia detalhado. Portanto, essas capacidades são consistentes para a A128R12N1. No entanto, o guia detalhado não menciona a QSPI-NOR padrão de 1 MB nem determina qual SKU está montado em cada placa ou revisão.
+
+O guia de modelos informa que o CH343K oferece dois canais de depuração USB-UART, mas o guia detalhado apenas atribui as funções USB-UART e USB 2.0 FS aos conectores Type-C, sem indicar como os canais UART são distribuídos entre eles. Antes de depender de um canal UART específico, consulte o esquemático/BOM da revisão correspondente.
 
 **Divergência na identificação da ponte USB-UART — confirme o componente montado:** O diagrama de blocos do guia detalhado identifica a ponte como CH342K, enquanto o guia de modelos informa CH343K. Confira o componente real no esquemático/BOM da revisão correspondente.
 
@@ -5169,7 +5307,7 @@ Summary: SF32LB57-DevKit-LCD: placa de avaliação baseada em módulo para displ
 
 ## Visão geral
 
-A SF32LB57-DevKit-LCD é uma placa de avaliação multimídia baseada no **SF32LB57-MOD-WD** (aparentemente destinado à comercialização pela SiFli; **WD** provavelmente significa **Wi-Fi Dual-band** (Wi-Fi de banda dupla), mas essa interpretação não foi confirmada oficialmente). A placa reúne o MCU SF32LB57x, Wi-Fi SDIO, Flash de inicialização e conexões para periféricos. Ela permite desenvolver HMIs inteligentes, terminais com câmera, interfones e displays conectados, além de validar gráficos, captura, áudio e conectividade antes do projeto de uma placa portadora.
+A SF32LB57-DevKit-LCD é uma placa de avaliação multimídia baseada no **SF32LB57-MOD-WD**. O nome parece indicar que a SiFli prevê o módulo como produto. **WD** pode significar **Wi-Fi Dual-band** (Wi-Fi de banda dupla), mas essa interpretação não foi confirmada oficialmente. A placa reúne o MCU SF32LB57x, Wi-Fi SDIO, Flash de inicialização e conexões para periféricos. Ela permite desenvolver HMIs inteligentes, terminais com câmera, interfones e displays conectados, além de validar gráficos, captura, áudio e conectividade antes do projeto de uma placa portadora.
 
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 900px; margin: 1rem auto;">
 <figure style="margin: 0;"><a href="assets/sf32lb57x/57DEVKIT_LCD_T_Look.png"><img src="assets/sf32lb57x/57DEVKIT_LCD_T_Look.png" alt="SF32LB57-DevKit-LCD — Vista frontal" loading="lazy" style="display: block; width: 100%; height: auto;"></a><figcaption>Vista frontal</figcaption></figure>
@@ -5219,7 +5357,7 @@ O diagrama original apresenta uma visão funcional, não uma referência de liga
 <figure style="margin: 0;"><a href="assets/sf32lb57x/57DEVKIT-LCD-B-Notes.svg"><img src="assets/sf32lb57x/57DEVKIT-LCD-B-Notes.svg" alt="SF32LB57-DevKit-LCD — Componentes de trás" loading="lazy" style="display: block; width: 100%; height: auto;"></a><figcaption>Componentes de trás</figcaption></figure>
 </div>
 
-## Primeira execução
+## Primeira inicialização
 
 Para avaliar o display, tenha em mãos a placa, um painel DPI-RGB compatível de 40 pinos / 0,5 mm, um cabo USB com suporte a dados e um computador com Windows, Linux ou macOS. Antena IPEX-1, câmera DVP, cartão MicroSD/TF, alto-falante de 8 Ω e depurador J-Link ou DAP-Link são opcionais. Para usar simultaneamente os logs UART e testar o USB nativo, são necessários dois cabos de dados.
 
@@ -5230,20 +5368,9 @@ Para avaliar o display, tenha em mãos a placa, um painel DPI-RGB compatível de
 
 Uma placa programada de fábrica pode exibir sua interface padrão ao ser ligada, dependendo do firmware instalado e do painel. Uma tela preta, por si só, não comprova uma falha de gravação. Consulte [Primeiros passos com SiFli-SDK](../../getting-started/sifli/getting-started-sifli-sdk.md) para obter informações sobre as ferramentas, o ambiente e a gravação.
 
-## Alvos de compilação do SDK
+## Configuração do SDK
 
-A configuração atual de compilação do SDK lista os alvos abaixo. São identificadores exatos, mas não garantem que toda placa SF32LB57-MOD-WD corresponda a todos eles. Compare a memória, o display, a configuração dos pinos e a revisão da placa com a configuração do SDK usada. O guia não relaciona as revisões do módulo WD a esses nomes de alvo.
-
-- `sf32lb57-lcd_n16r16_dpi`
-- `sf32lb57-lcd_n16r8_dpi`
-- `sf32lb57-lcd_n16r16_qspi`
-
-Depois de configurar o ambiente do SDK, use este exemplo hello-world **somente em hardware correspondente à configuração N16R16 DPI**. O sucesso do teste via UART não valida os drivers de display, câmera ou Wi-Fi.
-
-```bash
-cd example/get-started/hello_world/rtt/project
-scons --board=sf32lb57-lcd_n16r16_dpi -j8
-```
+O guia da placa da SiFli instrui a instalar o SiFli SDK e selecionar o pacote de suporte da placa `SF32LB57-DevKit-LCD`. O arquivo upstream `build_config_gcc.yaml` atualmente vinculado não lista nenhum alvo de compilação SF32LB57. Antes de compilar, confirme o pacote de suporte e o identificador exato de build no checkout do SDK que será usado; não substitua o alvo por um de outra placa. Um hello-world bem-sucedido via UART verifica apenas a inicialização serial básica, não os drivers de display, câmera ou Wi-Fi.
 
 ## Alimentação e depuração
 
@@ -5317,7 +5444,7 @@ S1–S3 compartilham `PA_34` / `GPADC_CH6`; a documentação indica tensões nom
 ## Referência dos conectores
 
 !!! warning
-    Estas tabelas transcrevem as conexões descritas na documentação e não substituem o esquemático. O resumo do módulo está incompleto (`58~?`) e identifica `PA_00`/`PA_01` como USB_DP/USB_DM, em conflito com o mapeamento explícito do USB nativo em `PA35`/`PA36`. Diferencie o número do pad do módulo do GPIO do MCU. Não use as linhas indefinidas para projetar uma PCB.
+    Estas tabelas transcrevem as conexões descritas na documentação e não substituem o esquemático. O resumo do módulo está incompleto (`58~?`) e identifica `PA_00`/`PA_01` como USB_DP/USB_DM, em conflito com o mapeamento explícito do USB nativo em `PA35`/`PA36`. Algumas linhas da fonte agrupam faixas de pads do módulo, faixas de GPIO e funções alternativas sem indicar a função de cada pad; esta página mantém esses agrupamentos e não infere atribuições individuais. Diferencie o número do pad do módulo do GPIO do MCU. Não use as linhas indefinidas para projetar uma PCB.
 
 <div align="center"><em>Pads do módulo: entradas indefinidas preservadas</em></div>
 
@@ -5538,7 +5665,7 @@ Antes de desenvolver uma placa própria, é possível usar esta placa para valid
 
 | Versão da placa | Base | Observações |
 | :--- | :--- | :--- |
-| V1.0.1 | SF32LB58-MOD-N16R32N1-V1.0.1 e SF32LB58-MOD-A128R32N1-V1.0.1 | Versão atual; adiciona detecção de conexão USB em PB24; altera o PTC para 2 A / 6 V para suportar a potência máxima dos dois canais de áudio; remove a adaptação de nível do LED RGB, cuja temporização era inadequada; substitui o conversor CC-CC para reduzir a ondulação na saída; remove o resistor pull-up de USB DP para corrigir o problema de interrupção no modo periférico USB |
+| V1.0.1 | SF32LB58-MOD-N16R32N1-V1.0.1 e SF32LB58-MOD-A128R32N1-V1.0.1 | Versão atual; adiciona detecção de conexão USB em PB24; altera o PTC para 2 A / 6 V para corrigir a falta de corrente de alimentação quando os dois canais de áudio operam na potência máxima; remove a adaptação de nível do LED RGB, cuja temporização era inadequada; substitui o conversor CC-CC para reduzir a ondulação na saída; remove o resistor pull-up de USB DP para corrigir o problema de interrupção no modo periférico USB |
 | V1.0.0 | SF32LB58-MOD-N16R32N1-V1.0.0 com SF32LB587VEE56 | Versão pública inicial da placa |
 
 </div>
@@ -5563,14 +5690,14 @@ A fonte da SiFli apresenta uma divergência para a versão V1.0.0: a seção de 
 
 ## Quando usar esta placa
 
-Escolha a SF32LB58-DevKit-LCD quando o projeto precisar de uma plataforma representativa para validar displays avançados e periféricos, em vez de uma placa breakout mínima.
+Escolha a SF32LB58-DevKit-LCD quando precisar validar displays de alta resolução e a integração de periféricos, em vez de apenas expor um conjunto mínimo de sinais.
 
 - Fazer o bring-up de displays MIPI DSI, RGB888 ou QSPI
 - Validar em conjunto toque, áudio, armazenamento e USB
 - Testar interfaces de usuário de alta resolução na plataforma SF32LB58x
 - Avaliar a expansão CAN ou Wi-Fi via SDIO
 - Comparar variantes de módulo com NOR e NAND
-- Validar o firmware em uma placa de classe topo de linha antes de projetar uma PCB personalizada
+- Validar o firmware nesta placa antes de projetar uma PCB personalizada
 
 Para planejar a integração no nível do módulo, consulte também [SF32LB58-MOD](../modules/SF32LB58-MOD.md). Para conhecer a arquitetura da família de chips e os recursos de display e memória, consulte [SF32LB58x](../chips/SF32LB58x.md).
 
@@ -5599,6 +5726,8 @@ Para planejar a integração no nível do módulo, consulte também [SF32LB58-MO
 
 </div>
 
+**Divergência na identificação da ponte USB-UART — confirme o componente montado:** O guia de modelos da SiFli identifica um CH343K com dois canais de depuração USB-UART. Já o diagrama de blocos da placa identifica a ponte como CH342K e mostra UART1 e UART4, sem associar cada canal a um conector Type-C. Confira o componente instalado e a ligação dos canais no esquemático/BOM da revisão correspondente.
+
 ## Primeiros passos
 
 ### Hardware necessário
@@ -5607,6 +5736,8 @@ Para planejar a integração no nível do módulo, consulte também [SF32LB58-MO
 - Módulo de display LCD com interface MIPI DSI, RGB888 ou QSPI, conforme a aplicação
 - Cabo de dados USB 2.0, Type-A para Type-C ou equivalente
 - Computador com Windows, Linux ou macOS
+
+Para depurar via UART e testar USB ao mesmo tempo, use dois cabos USB 2.0 de dados, um para cada conector Type-C.
 
 ### Hardware opcional
 
@@ -5620,9 +5751,9 @@ Para planejar a integração no nível do módulo, consulte também [SF32LB58-MO
 
 1. Conecte o painel de display desejado ao conector LCD correspondente.
 2. Conecte a porta USB-UART Type-C ao computador.
-3. Abra a ferramenta de gravação da SiFli e selecione a porta COM correta.
+3. Abra o SifliTrace e selecione a porta COM correta.
 4. Instale ou remova o jumper Mode conforme queira usar o modo de gravação ou o modo de execução normal.
-5. Ligue a placa e grave ou execute o firmware desejado.
+5. Ligue a placa; no modo de gravação, use o Impeller para gravar o firmware desejado ou deixe o aplicativo iniciar no modo normal.
 6. Depois do bring-up do display, valide o toque, o áudio, o armazenamento e os periféricos de expansão necessários ao produto.
 
 Use um cabo USB que suporte transferência de dados. Alguns cabos Type-C fornecem apenas alimentação e não disponibilizam os caminhos de dados UART ou USB.
@@ -5630,6 +5761,8 @@ Use um cabo USB que suporte transferência de dados. Alguns cabos Type-C fornece
 ## Alimentação
 
 A SF32LB58-DevKit-LCD é alimentada por USB Type-C.
+
+O diagrama de blocos mostra alimentação de 5 V para o LCD DPI, o LED RGB, o driver da luz de fundo, o amplificador de áudio e os headers de 40 pinos. Antes de adicionar cargas, confira no esquemático os limites dos trilhos e conectores.
 
 - As duas portas USB Type-C da placa podem alimentá-la.
 - Para gravar o firmware e capturar logs UART, use a porta USB-UART Type-C.
@@ -5639,10 +5772,14 @@ A SF32LB58-DevKit-LCD é alimentada por USB Type-C.
 
 A principal interface para gravação de firmware e logs seriais é a porta USB-UART Type-C.
 
+Antes da gravação, selecione o firmware desejado na ferramenta de gravação Impeller da SiFli.
+
 - **Modo de gravação**: instale o jumper Mode e ligue ou reinicie a placa.
 - **Modo de depuração/log de software**: remova o jumper Mode e ligue ou reinicie a placa.
 
 A placa também oferece depuração J-Link / SWD.
+
+A referência de ligação usa os pinos CONN2 1 (3,3 V), 12 (SWD-DIO), 7 (SWD-CLK) e 9 (GND); conecte-os pelo adaptador fornecido, na orientação mostrada.
 
 ![Referência de ligação J-Link da SF32LB58-DevKit-LCD](assets/sf32lb58x/58KIT-JLINK-CONN2.png){ loading="lazy" }
 <div align="center"><em>SF32LB58-DevKit-LCD — referência de ligação J-Link</em></div>
@@ -5723,6 +5860,8 @@ A placa oferece:
 - Duas saídas para alto-falantes
 - Um caminho de sinal PDM multiplexado com os sinais RGB; portanto, ele não fica disponível enquanto a interface de display RGB estiver ativa
 
+A referência de ligação de áudio associa CONN2-11 a MIC_BIAS, CONN2-13/15 a ADC1N/P, CONN2-16/18 a ADC2N/P e CONN2-35–38 a SPK1/2 P/N.
+
 A [documentação detalhada da placa](https://wiki.sifli.com/en/board/sf32lb58x/SF32LB58-DevKit-LCD.html) da SiFli indica saída de áudio analógico estéreo de até 2,8 W/4 Ω, enquanto o [guia de modelos de placas de desenvolvimento](https://wiki.sifli.com/en/board/devkit_guide.html) informa 3 W/4 Ω para as duas saídas de alto-falante. Nenhuma das fontes esclarece se a potência se aplica a cada canal ou ao conjunto. Antes de escolher os alto-falantes, confira a revisão exata da placa, o esquemático e as condições de alimentação e carga do amplificador; não trate nenhum dos valores como potência garantida por canal.
 
 ![Referência de ligação de áudio](assets/sf32lb58x/58KIT-AUDIO-CONN2.png){ loading="lazy" }
@@ -5739,6 +5878,8 @@ O módulo SF32LB58 inclui um controlador CAN, e a placa disponibiliza a interfac
 <div align="center"><em>Placa de transceptor CAN de referência</em></div>
 
 A placa também oferece expansão Wi-Fi SDIO pelo conector de expansão.
+
+O esquema de ligação identifica SDIO1_EN, SDIO1_CMD, SDIO1_D0–D3, SDIO1_CLK e WAKE_HOST, além de 3,3 V e GND; confira os números dos pinos no diagrama do conector antes de fazer a ligação.
 
 ![Módulo Wi-Fi SDIO de referência](assets/sf32lb58x/ATK-RTL8189-SDIO-WIFI-LOOK.png){ loading="lazy" }
 <div align="center"><em>Módulo Wi-Fi SDIO de referência</em></div>
@@ -5863,6 +6004,8 @@ A série **LB** (Low-Power Bluetooth) é a primeira da família SF32; outras sé
     * Interfaces de câmera (DVP e SPI)
     * Fusão de sensores e algoritmos biométricos
 
+    O [guia de hardware do SF32LB57x da SiFli](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html) lista um acelerador de redes neurais integrado. No entanto, o [guia NNACC do SiFli-SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/docs/source/en/hal/nnacc.md) não comprova suporte de driver ou de operadores para o 57x. Confirme o caminho de software para o código exato do componente antes de planejar o uso desse acelerador.
+
     Esses recursos permitem executar inferências de IA com baixa latência no próprio dispositivo, reduzindo o consumo de energia e a dependência da nuvem.
 
 5. **Memória System-in-Package (SiP) de alta densidade**
@@ -5880,7 +6023,7 @@ A série **LB** (Low-Power Bluetooth) é a primeira da família SF32; outras sé
 
 <div align="center"><em>Comparação entre microcontroladores SF32</em></div>
 
-A tabela resume os recursos de cada família, mas não garante que todos os SKUs ofereçam tudo o que está listado. As interfaces e suas quantidades podem variar conforme o código do componente, o encapsulamento ou a configuração; confirme os dados no datasheet do SKU escolhido. Para consultar a resolução máxima de display e as interfaces de painel de cada família, veja a [Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix).
+A tabela resume os recursos de cada família, mas não garante que todos os SKUs ofereçam tudo o que está listado. As interfaces e suas quantidades podem variar conforme o código do componente, o encapsulamento ou a configuração; confirme os dados no datasheet do SKU escolhido. Os dados de resolução de display e interfaces de painel da tabela seguem a [Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix) atual.
 
 <div align="center" markdown>
 
@@ -5888,12 +6031,12 @@ A tabela resume os recursos de cada família, mas não garante que todos os SKUs
 |----------|----------|----------|----------|----------|----------|
 | Posicionamento | Entrada | Intermediário, somente BLE | Avançado | Computação aprimorada | Topo de linha |
 | CPU de aplicação | Cortex-M33 @ 240 MHz | Cortex-M33 @ 240 MHz | Cortex-M33 @ 240 MHz | 2× Cortex-M33 @ 240 MHz | 2× Cortex-M33 @ 240 MHz |
-| CPU de baixo consumo | Cortex-M33 @ 24/48 MHz, controlador Bluetooth dedicado | Cortex-M33 @ 48 MHz, programável pelo usuário | Cortex-M33 @ 48/96 MHz, programável pelo usuário | Cortex-M33 @ 24 MHz, controlador Bluetooth dedicado | Cortex-M33 @ 48/96 MHz, programável pelo usuário |
+| CPU de baixo consumo | Cortex-M33 até 24 MHz*, controlador Bluetooth dedicado | Cortex-M33 @ 48 MHz, programável pelo usuário | Cortex-M33, até 96 MHz, programável pelo usuário | Cortex-M33 @ 24 MHz, controlador Bluetooth dedicado | Cortex-M33 @ 48/96 MHz, programável pelo usuário |
 | SRAM interna | 576 KB | 1.312 KB | 960 KB | 592 KB | 3,7 MB |
 | Bluetooth | BT Classic + BLE | BLE | BT Classic + BLE | BT Classic + BLE | BT Classic + BLE |
 | Acelerador gráfico | 2.5D<br>ePicasso 2.0 Lite | 2.5D<br>ePicasso 1.0 | 2.5D<br>ePicasso 2.0 | 2.5D<br>ePicasso 3.0 + eZip 3.0 | 2.5D + gráficos vetoriais<br>ePicasso 2.0 + Vivante GCNanoUltraV |
 | Suporte a displays | SPI / DSPI / QSPI / 8080 / EPD / JDI | SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB | SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI |
-| Resolução máxima de display | 512 × 512, RGB888 | 512 × 512, RGB888 | BGA: 1024 × 600, RGB888<br>QFN: 512 × 512, RGB888 | 1024 × 600, RGB888 | 1280 × 800, RGB565<br>1280 × 720, RGB888 |
+| Resolução de display (matriz de interfaces atual) | 512 × 512, RGB888 | 512 × 512, RGB888 | BGA: 1024 × 600, RGB888<br>QFN: 512 × 512, RGB888 | 1024 × 600, RGB888 | 1280 × 800, RGB565<br>1280 × 720, RGB888 |
 | ADC de áudio | 1× | Não disponível | 1× | 2× | 2× |
 | DAC de áudio | 1× | Não disponível | 1× | 1× | 2× |
 | Interfaces de áudio PDM | 1× | 1–2×* | 2× | 2× | 2× |
@@ -5905,15 +6048,23 @@ A tabela resume os recursos de cada família, mas não garante que todos os SKUs
 | Número de GPIOs | 44 / 45 | 49 / 95 / 113* | 44 / 120 | 46 / 47 / 58; até 6 E/S adicionais no BGA112* | 154 |
 | Opções de encapsulamento | QFN68 | QFN68 / BGA145 / BGA169 | QFN68 / BGA175 | QFN68 / QFN80 / BGA112 | BGA256 |
 | Dimensões do encapsulamento (C × L) | 7 × 7 mm | 7 × 7 mm | QFN: 7 × 7 mm<br>BGA: 6,5 × 6,1 mm | QFN68: 7 × 7 mm<br>QFN80: 8 × 8 mm<br>BGA: 5,4 × 4,4 mm | 8,5 × 6,5 mm |
-| Alimentação | 3,2–4,7 V (520/3/5/7)<br>2,97–3,63 V (52B/E/G/J)<br>1,8 V (52D) | 1,71–3,63 V | 1,71–3,63 V | 3,0–4,7 V<br>2,97–3,63 V | 1,71–3,63 V |
+| Alimentação | 3,2–4,7 V (520/3/5/7)<br>2,97–3,63 V (52B/E/G/J)<br>1,8 V (52D) | 1,71–3,63 V | 1,71–3,63 V | Variantes com bateria: 3,0–4,7 V (datasheet); guia de hardware: 3,45–4,7 V<br>Variantes com regulador externo: 2,97–3,63 V | 1,71–3,63 V |
 
 </div>
+
+**Nota sobre a frequência do LCPU do SF32LB52x:** a [datasheet DS5201 V2.5.3 (em chinês)](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p5p3.pdf) informa o máximo de 24 MHz. O [relatório atual de medições de baixo consumo do SF32LB52x](https://docs.sifli.com/projects/rpt5202_sf32lb52x-low-power-measurement-report/latest/en/brief_introduction.html) e o [guia de baixo consumo do SDK](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html) indicam 48 MHz, sem especificar SKU, modo de operação ou condição de configuração que explique a diferença. A tabela segue o datasheet; não interprete `24/48 MHz` como uma faixa selecionável nem como diferença entre variantes. Confirme com a SiFli a frequência LCPU permitida para o dispositivo e o SDK exatos.
+
+**Nota sobre LCPU e SRAM do SF32LB56x:** o limite de clock do LCPU é 96 MHz; o ponto de operação efetivo e o suporte às tarefas de aplicação dependem do dispositivo exato e da configuração do SDK compatível. Não considere esse limite como clock padrão. Os 960 KB totais de SRAM são compostos por 800 KB de SRAM do HCPU (incluindo 128 KB de SRAM de retenção) e 160 KB de SRAM de retenção do LCPU. São regiões de memória associadas a núcleos distintos, não um único espaço contíguo. Dimensione a memória conforme o SKU e o mapa de memória do SDK. Consulte a [página do SF32LB56x](../chips/SF32LB56x.md).
+
+**Nota sobre a faixa de alimentação do SF32LB57x:** a faixa de 3,0–4,7 V para as variantes com bateria na tabela vem do [datasheet das variantes com bateria](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/DS5701-SF32LB57x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf). O [guia de projeto de hardware](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html) informa 3,45–4,7 V para QFN68, QFN80 e BGA112. As fontes divergem. O datasheet das variantes com bateria também especifica uma tensão de power-on de 3,5 V ±10%. Confirme o pino de entrada e os limites aplicáveis no datasheet do código exato do componente. A faixa de 2,97–3,63 V da tabela se aplica às variantes com regulador externo.
+
+**Nota sobre a resolução de display do SF32LB57x:** O [guia de projeto de hardware da SiFli](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html) estabelece um limite de display de 1024 × 1024. A [FAQ de LCD da SiFli](https://docs.sifli.com/projects/solution/7.FAQ/lcd/index.html) lista 1024 × 600 e 720 × 720 entre projetos RGB/DPI comuns ou validados, enquanto a matriz de interfaces atual da μForge lista 1024 × 600 RGB888. São tipos de evidência diferentes, não garantias intercambiáveis. Verifique o componente e o encapsulamento exatos, a interface, o timing do painel, a taxa de atualização, o multiplexamento de pinos e a largura de banda do framebuffer/PSRAM.
 
 **Nota sobre o SF32LB55x:** o número de interfaces de áudio depende do código do componente: as variantes SF32LB551/553/555 têm uma interface PDM e uma I²S cada; o SF32LB557VD3A6 tem duas de cada. O resumo de encapsulamentos do [datasheet mais recente do SF32LB55x (V1.7.2)](https://downloads.sifli.com/user%20manual/DS5501-SF32LB55x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p7p2.pdf) indica 119 GPIOs para BGA169 (71 HCPU + 48 LCPU), mas a tabela detalhada de produtos da mesma ficha atribui ao SF32LB557 71 HCPU + 42 LCPU = 113. O [guia de modelos de chips da SiFli](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) também informa 71 + 42 = 113 para o SF32LB557VD3A6. A SiFli não explica essa inconsistência interna no datasheet; esta tabela adota o valor específico de 113 GPIOs. Antes de definir a pinagem, confirme o SKU exato no datasheet e na tabela de pinos. Cada interface PDM pode conectar até dois microfones digitais; quantidade de interfaces não é quantidade de microfones.
 
 **Nota sobre a NOR integrada no SiP do SF32LB55x:** O máximo de 8 MB desta tabela inclui a configuração SS6600A8, documentada separadamente: dois dispositivos QSPI-NOR de 4 MB configurados como um único dispositivo OSPI-NOR de 8 MB. Os códigos de pedido com prefixo SF32 listados para a família SF32LB55x têm até 4 MB de NOR integrada no SiP. Confirme o modelo exato.
 
-**Nota sobre o BGA112 do SF32LB57x:** Esta nota se aplica somente ao BGA112. O SF32LB57x tem MPI1, MPI2 e MPI3 internos; as posições de MPI* no código do componente são explicadas na [convenção de nomenclatura SF32](SF32_namingrule.md). Em qualquer uma destas configurações de memória SiP, os pinos MPI2 e MPI3 não ficam acessíveis externamente, restando exatamente 58 GPIOs: (1) uma PSRAM integrada em cada um dos MPI1 e MPI2; (2) uma PSRAM de 256 Mb integrada em MPI2; ou (3) uma NOR Flash integrada em MPI3. O `SF32LB57GVD776` corresponde ao caso (3): o segundo `7` no código final `776` indica que um dispositivo interno usa MPI3, por isso há apenas 58 GPIOs. Nas demais configurações BGA112, as seis E/S adicionais podem ser usadas para MPI3 ou como saídas estáticas GP configuradas por pull-up ou pull-down; elas não são GPIOs de atribuição livre. Por exemplo, `58 + 6` em `SF32LB57ZVN7N6` significa 58 GPIOs disponíveis mais seis pinos que podem ser usados para MPI3 ou como saídas estáticas. QFN68 e QFN80 não estão sujeitos a esta restrição do BGA112: oferecem apenas a quantidade de GPIO indicada, sem opção adicional para MPI3 ou saída estática. Consulte a [página do SF32LB57x](../chips/SF32LB57x.md) e o datasheet do SKU.
+**Nota sobre o BGA112 do SF32LB57x:** Esta nota se aplica somente ao BGA112. O SF32LB57x tem MPI1, MPI2 e MPI3 internos; as posições de MPI* no código do componente são explicadas na [convenção de nomenclatura SF32](SF32_namingrule.md). Em qualquer uma destas duas configurações de memória SiP, os pinos MPI2 e MPI3 não ficam acessíveis externamente, restando exatamente 58 GPIOs: (1) PSRAM em MPI2, sozinha ou junto com PSRAM em MPI1; ou (2) NOR Flash em MPI3. O `SF32LB57GVD776` corresponde à condição (2): o segundo `7` no código final `776` indica que um dispositivo interno usa MPI3, por isso há apenas 58 GPIOs. Nas demais configurações BGA112, as seis E/S adicionais podem ser usadas para MPI3 ou como saídas estáticas GP configuradas por pull-up ou pull-down; elas não são GPIOs de atribuição livre. Por exemplo, `58 + 6` em `SF32LB57ZVN7N6` significa 58 GPIOs disponíveis mais seis pinos que podem ser usados para MPI3 ou como saídas estáticas. QFN68 e QFN80 não estão sujeitos a esta restrição do BGA112: oferecem apenas a quantidade de GPIO indicada, sem opção adicional para MPI3 ou saída estática. Consulte a [página do SF32LB57x](../chips/SF32LB57x.md) e o datasheet do SKU.
 
 **Esclarecimento sobre a quantidade de GPIOs do SF32LB58x:** O [datasheet DS5801 V1.8.3](https://downloads.sifli.com/user%20manual/DS5801-SF32LB58x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p8p3.pdf) e a comparação da família publicada pela SiFli especificam 154 GPIOs no total (HPSYS: 94; LPSYS: 60). O [guia de modelos de chip](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html), em separado, lista HCPU: 94 e LCPU: 66, cuja soma é 160 e diverge do total do datasheet. Esta comparação segue o datasheet; antes de atribuir os pinos, confirme a disponibilidade na tabela de pinos do encapsulamento do SKU exato.
 
@@ -5941,7 +6092,7 @@ Ao selecionar um dispositivo, considere estes requisitos principais:
 | SF32LB52x | • Bluetooth de modo duplo (BT/BLE)<br>• ADC e DAC de áudio integrados<br>• Carregamento integrado de bateria Li-ion<br>• Até 45 GPIOs<br>• Resoluções de display de até 512 × 512<br>• Solução compacta e econômica<br> | • Smartwatches e pulseiras fitness de entrada<br>• Módulos Bluetooth e adaptadores sem fio<br>• Acessórios de áudio Bluetooth<br>• Sensores inteligentes e dispositivos vestíveis<br>• Etiquetas eletrônicas de prateleira e crachás inteligentes<br>• Impressoras portáteis de etiquetas<br>• Displays para e-bikes e e-scooters<br>• Dispositivos HMI básicos baseados em LVGL |
 | SF32LB55x | • Bluetooth Low Energy (BLE)<br>• Displays MIPI DSI em modo comando<br>• SRAM de grande capacidade para algoritmos de processamento de sensores<br>• Mais de 45 GPIOs<br>• Recursos ampliados de processamento de baixo consumo | • Pulseiras fitness e rastreadores de atividade<br>• Computadores esportivos e de ciclismo<br>• Dispositivos vestíveis com muitos sensores<br>• Dispositivos de monitoramento de saúde<br>• Periféricos BLE alimentados por bateria |
 | SF32LB56x | • Bluetooth de modo duplo (BT/BLE)<br>• Interfaces de display RGB/DPI<br>• ADC e DAC de áudio integrados<br>• Resoluções de display de até 1024 × 600<br>• Wi-Fi externo por SDIO<br>• Maior capacidade de GPIO | • Smartwatches com interfaces avançadas<br>• Sistemas HMI conectados<br>• Dispositivos médicos e de saúde<br>• Dispositivos portáteis industriais<br>• Instrumentos portáteis<br>• Displays avançados para e-bikes e e-scooters |
-| SF32LB57x | • Bluetooth de modo duplo (BT/BLE), BLE Audio e LE Long Range<br>• Gráficos ePicasso 3.0/eZip 3.0 com interfaces RGB<br>• Entrada de câmera DCMI e ADC/DAC de áudio de alta fidelidade integrados<br>• Resoluções de display de até 1024 × 600<br>• Delegação de tarefas ao PTM para E/S determinística ou temporização personalizada de periféricos<br>• Até 58 GPIOs de uso geral; o BGA112 acrescenta até 6 E/S para MPI3 ou saídas estáticas GP configuradas por pull-up/pull-down, conforme a configuração SiP*<br>• Interfaces de armazenamento SD/SDIO/eMMC | • Smartwatches compactos e avançados<br>• HMIs com muitos recursos de display e dispositivos de e-paper<br>• Produtos Bluetooth com câmera<br>• Dispositivos portáteis de áudio e gravação<br>• Painéis de controle para casas inteligentes |
+| SF32LB57x | • Bluetooth de modo duplo (BT/BLE), BLE Audio e LE Long Range<br>• Gráficos ePicasso 3.0/eZip 3.0 com interfaces RGB<br>• Entrada de câmera DCMI e ADC/DAC de áudio de alta fidelidade integrados<br>• Matriz de interfaces atual: 1024 × 600 RGB888 via DPI/RGB; configurações comuns ou validadas também incluem 720 × 720<br>• Delegação de tarefas ao PTM para E/S determinística ou temporização personalizada de periféricos<br>• Até 58 GPIOs de uso geral; o BGA112 acrescenta até 6 E/S para MPI3 ou saídas estáticas GP configuradas por pull-up/pull-down, conforme a configuração SiP*<br>• Interfaces de armazenamento SD/SDIO/eMMC | • Smartwatches compactos e avançados<br>• HMIs com muitos recursos de display e dispositivos de e-paper<br>• Produtos Bluetooth com câmera<br>• Dispositivos portáteis de áudio e gravação<br>• Painéis de controle para casas inteligentes |
 | SF32LB58x | • Bluetooth de modo duplo (BT/BLE)<br>• Renderização gráfica avançada, incluindo gráficos vetoriais<br>• Displays MIPI DSI em modo comando ou vídeo<br>• Resoluções de display de até 1280 × 800<br>• Configurações de memória de grande capacidade<br>• Alta densidade e quantidade de GPIOs<br>• Wi-Fi externo por SDIO<br>• Cargas de trabalho de IA de borda e aprendizado de máquina | • Smartwatches premium<br>• Dispositivos vestíveis para esportes e atividades ao ar livre<br>• Computadores avançados para ciclismo<br>• Displays inteligentes e painéis conectados<br>• Dispositivos vestíveis com IA<br>• Sistemas de IA de borda e fusão de sensores |
 
 </div>
@@ -5990,7 +6141,7 @@ Summary: Como decodificar um código SF32LB5xyZxYx6: categoria do produto, varia
 ### Número de peça: ***SF32LB5xyZxYx6***
 
 !!! note "Nota sobre a sintaxe"
-    * ***x*** minúsculo representa um algarismo.
+    * ***x*** minúsculo representa um código numérico no padrão genérico; posições de memória publicadas também podem usar códigos específicos da família, como **N**.
     * ***Y*** ou ***Z*** maiúsculos representam uma letra.
     * No SF32LB57x, a posição da subsérie (**y**) é um algarismo nas peças alimentadas por bateria e uma letra nas peças com alimentação de 3,3 V.
 
@@ -6017,7 +6168,7 @@ Summary: Como decodificar um código SF32LB5xyZxYx6: categoria do produto, varia
 - **xYx** — configuração da memória integrada (Flash QSPI-NOR e PSRAM)
   *(Nota: o mapeamento exato da codificação depende do encapsulamento e da família específica do dispositivo.)*
 
-`ZxYx6` é um padrão geral da família, não um modelo de comprimento fixo para decodificação. A quantidade e a ordem dos códigos de memória variam conforme a família do dispositivo e o encapsulamento: o código numérico de Flash pode ser omitido, e o código alfabético de PSRAM pode se repetir quando há vários dispositivos integrados. Para decodificar um código específico, consulte a tabela de variantes da família correspondente.
+`ZxYx6` é um padrão geral da família, não um modelo de comprimento fixo para decodificação. O guia geral associa códigos numéricos à NOR e códigos alfabéticos à PSRAM. Os sufixos publicados também podem incluir códigos específicos da família, como os que indicam que uma posição não tem memória integrada. A quantidade e a ordem dos códigos de memória variam conforme a família do dispositivo e o encapsulamento: o código numérico de Flash pode ser omitido, e o código alfabético de PSRAM pode se repetir quando há vários dispositivos integrados. Para decodificar um código específico, consulte a tabela de variantes da família correspondente.
 
 <div align="center"><em>Definição dos campos do sufixo do número de peça</em></div>
 
@@ -6025,8 +6176,9 @@ Summary: Como decodificar um código SF32LB5xyZxYx6: categoria do produto, varia
 
 | Campo | Tipo | Opções | Descrição |
 | :--- | :--- | :--- | :--- |
-| **x** | Alfanumérico | **N**, **1** a **8** | Mapeamento genérico de capacidade da Flash QSPI-NOR:<br>• **N**: Sem memória integrada ao encapsulamento<br>• **1**: 2 Mb<br>• **2**: 4 Mb<br>• **3**: 8 Mb<br>• **4**: 16 Mb<br>• **5**: 32 Mb<br>• **6**: 64 Mb<br>• **7**: 128 Mb<br>• **8**: 256 Mb |
-| **Y** | Alfabético | **N**, **A** a **E** | Capacidade e interface da PSRAM integrada:<br>• **N**: Sem memória integrada ao encapsulamento<br>• **A**: 16 Mb QPI-PSRAM<br>• **B**: 32 Mb OPI-PSRAM<br>• **C**: 64 Mb OPI-PSRAM<br>• **D**: 128 Mb OPI/HPI-PSRAM<br>• **E**: 256 Mb HPI-PSRAM |
+| **x** | Código numérico no padrão genérico | **1** a **6** no guia geral; **7** na tabela de variantes do SF32LB57 | Mapeamento de capacidade QSPI-NOR do guia geral:<br>• **1**: 2 Mb<br>• **2**: 4 Mb<br>• **3**: 8 Mb<br>• **4**: 16 Mb<br>• **5**: 32 Mb<br>• **6**: 64 Mb<br>A tabela de variantes do SF32LB57 usa **7** para NOR Flash de 128 Mb. O guia geral não define um mapeamento universal para **8**; decodifique cada código na tabela específica da família. |
+| **Y** | Código alfabético no padrão genérico | **A** a **E** no guia geral | Capacidade e interface da PSRAM integrada segundo o guia geral:<br>• **A**: 16 Mb QPI-PSRAM<br>• **B**: 32 Mb OPI-PSRAM<br>• **C**: 64 Mb OPI-PSRAM<br>• **D**: 128 Mb OPI/HPI-PSRAM<br>• **E**: 256 Mb HPI-PSRAM |
+| **N** | Código de posição de memória específico da família | Quando indicado na tabela da família | Indica que não há memória integrada ao encapsulamento nessa posição. |
 
 </div>
 
@@ -6139,9 +6291,9 @@ Summary: Perguntas frequentes sobre produtos SF32: escolha de chips, módulos e 
 
 # Perguntas frequentes sobre SF32
 
-## 1. Escolha do produto
+## Escolha do produto
 
-### 1.1. Qual família SF32 devo escolher?
+### Qual família SF32 devo escolher?
 
 Comece por estes fatores essenciais de seleção:
 
@@ -6156,97 +6308,97 @@ Compare componentes exatos, não apenas números de família: um número maior n
 
 [Comparação de famílias](SF32_family.md) · [Seletor de produtos](../product-selector.md)
 
-### 1.2. Devo usar um chip, um módulo ou uma placa de desenvolvimento?
+### Devo usar um chip, um módulo ou uma placa de desenvolvimento?
 
 Use uma placa de desenvolvimento para avaliar a plataforma e validar o firmware. Um módulo reduz o trabalho de projeto de RF, do circuito do cristal e de roteamento da memória na placa portadora, além de poder diminuir o custo total de desenvolvimento. Em produtos de menor volume, ele também transfere ao fornecedor a gestão da cadeia de suprimentos dos componentes internos; em algumas regiões, a certificação de RF do módulo pode ser especialmente útil. Opte pelo projeto com chip diretamente quando o custo, o tamanho ou a flexibilidade justificarem assumir o trabalho de esquemático, layout e RF. Nenhuma das opções elimina a necessidade de validar o produto final. Mais módulos serão listados à medida que estiverem disponíveis.
 
 [Planejar um produto](product-planning.md)
 
-### 1.3. Com qual placa de desenvolvimento devo começar?
+### Com qual placa de desenvolvimento devo começar?
 
 Comece pela placa de desenvolvimento com LCD da família do chip escolhido: [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md), [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md), [SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md) (variante de memória N32R16) ou [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) (variante N16R32N1). Para o SF32LB52x, também há placas compactas: [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md), [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) e [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) (para avaliação de baixo consumo em wearables). Confirme se a variante de memória da placa corresponde ao código-alvo; o guia oficial de modelos de placas da SiFli lista todas elas.
 
 [Seletor de produtos](../product-selector.md) · [Guia oficial de modelos de placas](https://wiki.sifli.com/en/board/devkit_guide.html)
 
-### 1.4. Como interpretar os códigos de chips e módulos?
+### Como interpretar os códigos de chips e módulos?
 
 Leia o código de pedido completo, não apenas o prefixo da família. Os códigos dos chips distinguem dispositivo, encapsulamento e memória; os sufixos dos módulos descrevem o armazenamento e a memória instalados. Consulte exemplos e exceções históricas do guia e confirme com o fornecedor a configuração disponível para pedido.
 
 [Nomenclatura SF32](SF32_namingrule.md)
 
-## 2. Memória e especificações
+## Memória e especificações
 
-### 2.1. Qual é a diferença entre SRAM, PSRAM e Flash?
+### Qual é a diferença entre SRAM, PSRAM e Flash?
 
 SRAM e PSRAM guardam dados de execução, que se perdem quando a alimentação é removida; os modos de retenção dependem do dispositivo. SRAM interna e PSRAM externa ou integrada ao encapsulamento diferem em acesso, largura de banda e consumo. Flash é armazenamento não volátil para firmware e recursos. Mais Flash não substitui RAM de trabalho insuficiente.
 
 [Tipos de memória](../../learn/architecture/psram-and-memory-types.md)
 
-### 2.2. De quanta memória minha aplicação precisa?
+### De quanta memória minha aplicação precisa?
 
 Reserve RAM para o sistema operacional, pilhas, heap, buffers gráficos, áudio e tarefas simultâneas. Um framebuffer básico exige largura × altura × bytes por pixel × quantidade de buffers; considere alinhamento do passo de linha e buffers extras de renderização. Calcule separadamente armazenamento não volátil para firmware, fontes, imagens, áudio, arquivos e imagens OTA. Meça o pico de uso com a carga pretendida.
 
 [Visão geral de gráficos](../../learn/graphics/overview.md) · [Planejar um produto](product-planning.md)
 
-### 2.3. Quando escolher NOR, NAND ou eMMC?
+### Quando escolher NOR, NAND ou eMMC?
 
 Escolha conforme o caminho de inicialização, a capacidade, o padrão de acesso e o suporte de software, não apenas a capacidade. NOR é comum para código e leituras aleatórias; NAND exige gerenciamento adequado de blocos de apagamento, ECC e blocos defeituosos; eMMC inclui um controlador de armazenamento gerenciado. Nestas descrições, SPI-NAND e QSPI-NAND são a mesma opção, não uma divergência entre produtos. Confirme o suporte do bootloader, do driver e do sistema de arquivos para o dispositivo exato.
 
 [Tipos de memória](../../learn/architecture/psram-and-memory-types.md) · [Códigos de sufixo dos módulos](SF32_namingrule.md#module-naming)
 
-### 2.4. Todos os componentes têm todos os recursos da família?
+### Todos os componentes têm todos os recursos da família?
 
 Não. O resumo da família pode combinar capacidades de vários componentes. Memória, alimentação, pinos utilizáveis e interfaces expostas dependem do SKU, do encapsulamento e da multiplexação. Um periférico presente no chip pode não estar acessível no módulo ou na placa. Confira a tabela de variantes, o datasheet e a pinagem do componente, além do suporte à função no SDK.
 
 [Comparação de famílias](SF32_family.md) · [Seletor de produtos](../product-selector.md)
 
-## 3. Adequação à aplicação
+## Adequação à aplicação
 
-### 3.1. Como escolher um dispositivo para meu display?
+### Como escolher um dispositivo para meu display?
 
 Verifique primeiro a interface elétrica e a temporização do painel; em seguida, confira a resolução, o formato de pixel, a taxa de atualização, a memória de framebuffer e a largura de banda. A resolução máxima, por si só, não garante uma exibição fluida. Confirme o suporte à aceleração gráfica e ao driver do painel e teste telas e animações representativas com a configuração de memória prevista.
 
 [Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix) · [Controlador de display](../../learn/graphics/display-controller.md) · [Visão geral de gráficos](../../learn/graphics/overview.md)
 
-### 3.2. Como verificar o suporte a áudio e microfones?
+### Como verificar o suporte a áudio e microfones?
 
 Confira canais ADC e DAC para caminhos analógicos, I2S para dispositivos de áudio digital e PDM para microfones digitais. Uma interface PDM pode transportar até dois canais de microfone; número de interfaces não é número de microfones. Os canais utilizáveis dependem também dos pinos expostos, multiplexação, drivers e roteamento. Verifique a configuração pretendida, em vez de somar interfaces.
 
 [Visão geral de áudio](../../learn/audio/overview.md) · [Glossário](../../about/glossary.md)
 
-### 3.3. Quais produtos suportam BLE, Bluetooth Classic ou ambos?
+### Quais produtos suportam BLE, Bluetooth Classic ou ambos?
 
 SF32LB55x oferece apenas BLE; SF32LB52x, SF32LB56x, SF32LB57x e SF32LB58x oferecem Bluetooth em modo duplo. A capacidade do rádio não garante todos os perfis, codecs e recursos em cada configuração do SDK. Confira o perfil necessário e o respectivo exemplo testado; o suporte a BLE, por si só, não comprova suporte a áudio Bluetooth Classic nem a BLE Audio.
 
 [Comparação de famílias](SF32_family.md) · [Visão geral de Bluetooth](../../learn/bluetooth/overview.md)
 
-### 3.4. Meu projeto precisa de um dispositivo Wi-Fi externo?
+### Meu projeto precisa de um dispositivo Wi-Fi externo?
 
 Os produtos SF32 deste catálogo não integram rádio Wi-Fi. A opção Wi-Fi do seletor indica um caminho externo via SDIO, não Wi-Fi integrado. O dispositivo externo exige alimentação, pinos, drivers e software de rede compatíveis; ter SDIO não comprova uma solução funcional.
 
 [Seletor de produtos](../product-selector.md)
 
-### 3.5. Quantos GPIOs estão realmente disponíveis?
+### Quantos GPIOs estão realmente disponíveis?
 
 Parta do encapsulamento e da memória exatos e desconte pinos ocupados pelas interfaces e funções da placa. Um módulo expõe apenas parte dos pinos do chip. No SF32LB57x BGA112, os pinos adicionais MPI3/saída estática têm função restrita, não são GPIOs de atribuição livre. Não trate o total anunciado como orçamento garantido de GPIOs da aplicação.
 
 [Notas de GPIO das famílias](SF32_family.md) · [Variantes SF32LB57x](../chips/SF32LB57x.md)
 
-## 4. Disponibilidade e planejamento do produto
+## Disponibilidade e planejamento do produto
 
-### 4.1. O que as marcações do módulo significam para meu produto?
+### O que as marcações do módulo significam para meu produto?
 
 Use o resumo das etiquetas para identificar as variantes marcadas e solicite os documentos de aprovação e as condições de integração aplicáveis. Um identificador FCC ou marcação CE impressos não comprovam, por si só, que o produto final esteja coberto. Mudanças de antena, placa portadora ou gabinete exigem análise conforme as condições aplicáveis.
 
 [Marcações do módulo 52](../modules/SF32LB52-MOD-1.md#regulatory-markings) · [Marcações do módulo 56](../modules/SF32LB56-MOD.md#regulatory-markings) · [Marcações do módulo 58](../modules/SF32LB58-MOD.md#regulatory-markings)
 
-### 4.2. Posso solicitar outra configuração de memória ou módulo?
+### Posso solicitar outra configuração de memória ou módulo?
 
 Informe à μForge.io qual chip ou módulo deseja, as capacidades de armazenamento e PSRAM, as interfaces e os requisitos de antena, além do volume e do cronograma previstos. Confirme a viabilidade, o suporte do SDK, a quantidade mínima de pedido e o prazo antes de fechar o projeto. Uma configuração listada em documentos antigos não garante disponibilidade atual; o SF32LB58-MOD-E4R32N1 não está mais disponível devido à escassez de chips de memória.
 
 [Entrar em contato com a μForge.io](../../about/contact.md) · [Disponibilidade do módulo 58](../modules/SF32LB58-MOD.md#storage-interfaces-and-module-variants)
 
-### 4.3. Como confirmar disponibilidade e obter amostras?
+### Como confirmar disponibilidade e obter amostras?
 
 Use os links de compra e documentação da página do produto e informe ao fornecedor o código completo e a revisão desejada. Confirme a disponibilidade atual, a configuração de memória, a opção de antena e o prazo. Sempre que possível, comece com uma placa de avaliação compatível e use a documentação oficial do componente exato, e não o resumo da família, como referência final de projeto.
 
@@ -6315,19 +6467,19 @@ A seção Produtos SF32 ajuda a transformar uma ideia de produto em um projeto S
 |:----------|:-----------|:--------------------|
 | Conhecer a família SF32 | [Entenda o SF32](family/SF32_family.md) | Uma comparação das famílias e as regras de nomenclatura necessárias para interpretar o código de um dispositivo disponível para compra. |
 | Transformar um conceito em plano | [Planeje um produto](family/product-planning.md) | Um fluxo por etapas, dos requisitos e da escolha do dispositivo à validação da placa e à preparação para produção. |
-| Escolher um chip ou módulo | [Seletor de produtos SF32](product-selector.md) | Uma ferramenta interativa para filtrar chips e módulos, critérios de seleção e apresentações dos produtos. As placas de desenvolvimento são catalogadas separadamente para validação. |
+| Escolher um chip ou módulo | [Seletor de produtos SF32](product-selector.md) | Uma ferramenta interativa para filtrar chips e módulos, com critérios de seleção e apresentações dos produtos. As placas de desenvolvimento são catalogadas separadamente para validação. |
 | Reutilizar uma base técnica | [Projetos de referência](../hardware/reference-designs/reference-designs.md) | Bases reproduzíveis de hardware e software, o que foi validado e os limites de reutilização. |
 | Preparar o projeto da placa para produção | [Projeto para produção](../hardware/design-for-production.md) | Guias de projeto, checklists, definições de interface, componentes aprovados e bibliotecas EDA oficiais. |
 
 </div>
 
-## Conteúdo desta seção
+## Siga o caminho de desenvolvimento do hardware
 
-Comece pela [Visão geral da família SF32](family/SF32_family.md) para conhecer as famílias disponíveis e as principais diferenças entre seus recursos. Depois de definir a família e o encapsulamento, consulte as [regras de nomenclatura](family/SF32_namingrule.md) para interpretar o código completo do componente.
+Comece pela Visão geral da família SF32 para conhecer as famílias disponíveis e as principais diferenças entre seus recursos. Depois de definir a família e o encapsulamento, consulte as [regras de nomenclatura](family/SF32_namingrule.md) para interpretar o código completo do componente.
 
-Use o [Seletor de produtos SF32](product-selector.md) quando a escolha depender de requisitos como arquitetura de alimentação, encapsulamento, display, áudio, memória, GPIO, conectividade ou hardware especializado. O seletor ajuda a criar uma lista inicial, mas ainda é necessário confirmar o código exato do componente, o encapsulamento, os limites elétricos e o roteamento na placa com base na documentação correspondente da SiFli. A página [Perguntas frequentes sobre SF32](family/faq.md) responde a dúvidas sobre seleção, compra e personalização de componentes.
+Use o Seletor de produtos SF32 quando a escolha depender de requisitos como arquitetura de alimentação, encapsulamento, display, áudio, memória, GPIO, conectividade ou hardware especializado. O seletor ajuda a criar uma lista inicial, mas ainda é necessário confirmar o código exato do componente, o encapsulamento, os limites elétricos e o roteamento na placa com base na documentação correspondente da SiFli. A página [Perguntas frequentes sobre SF32](family/faq.md) responde a dúvidas sobre seleção, compra e personalização de componentes.
 
-Depois de escolher uma direção, consulte os [projetos de referência](../hardware/reference-designs/reference-designs.md) e o [fluxo de projeto para produção](../hardware/design-for-production.md). Essas páginas conectam a seleção do dispositivo ao hardware de referência, às orientações de projeto, às bibliotecas CAD, às decisões sobre a BOM, aos checklists de revisão e às evidências de bring-up.
+Depois de escolher uma direção, consulte os projetos de referência e o fluxo de projeto para produção. Essas páginas conectam a seleção do dispositivo ao hardware de referência, às orientações de projeto, às bibliotecas CAD, às decisões sobre a BOM, aos checklists de revisão e às evidências de bring-up.
 
 ## Acesse diretamente o catálogo de hardware
 
@@ -6360,7 +6512,7 @@ Dependendo do SKU selecionado, o chip montado no módulo pode incluir OPI-PSRAM 
 
 ## Aplicações
 
-**SF32LB52-MOD-1 é indicado para** produtos que precisam de Bluetooth, gráficos e áudio com menor risco de RF e de layout, incluindo:
+**SF32LB52-MOD-1 é recomendado para** produtos que precisam de Bluetooth, gráficos e áudio com menor risco de RF e de layout, incluindo:
 
 - Relógios inteligentes, pulseiras de atividade e dispositivos médicos vestíveis
 - Hubs de sensores Bluetooth e acessórios conectados
@@ -6666,11 +6818,11 @@ A SiFli indica que a configuração padrão do SF32LB566VCB36 combina 4 MB + 8 M
 
 - 1 DAC de áudio de 24 bits
 - 1 ADC de áudio Sigma-Delta de 24 bits
-- 2 interfaces PDM (PDM1/PDM2), cada uma com canais esquerdo e direito
+- 2 interfaces PDM (PDM1/PDM2); a DS5602 V0.3 lista duas entradas de microfone digital
 - 1 interface I2S
 - Conversão da taxa de amostragem de áudio e aceleração do equalizador (EQ)
 
-A cada interface PDM podem ser conectados até dois microfones digitais; juntas, as duas interfaces podem atender até quatro microfones no total. O número de interfaces PDM não corresponde ao número de microfones. A conectividade efetiva depende da multiplexação dos pinos e do roteamento da placa portadora.
+A figura de atribuição recomendada indica PDM1_DATA em PA20 ou PA64, PDM1_CLK em PA24 ou PA69, PDM2_DATA em PA25 ou PA71 e PDM2_CLK em PA26 ou PA73. Essas são opções alternativas de multiplexação dos pinos, não uma confirmação do roteamento na placa portadora. A DS5602 V0.3 não confirma o compartilhamento de canais nem uma configuração com quatro microfones. Antes de projetar um sistema com vários microfones, confirme o modo compatível e o roteamento efetivo da placa.
 
 ### Alimentação e I/O
 
@@ -6712,7 +6864,7 @@ O módulo integra o componente BGA256, o circuito de RF, o cristal e a memória 
 
 Conforme o SKU escolhido, a plataforma pode combinar HPI-PSRAM com QSPI-NOR, QSPI-NAND ou eMMC. As interfaces do módulo atendem a produtos que precisam de recursos de display, áudio, armazenamento e conectividade, mantendo uma plataforma da classe MCU.
 
-O documento DS5802 V0.1 descreve uma antena PCB integrada ao módulo e opções para conectar uma antena externa. A antena externa pode ser conectada por pads castellados ou pelo conector externo de primeira geração, compatível com conectores Hirose U.FL, I-PEX MHFI e Amphenol AMC. O documento não informa qual configuração corresponde a cada SKU; confirme com a SiFli a implementação da antena do módulo escolhido antes de finalizar o layout da placa portadora.
+O documento DS5802 V0.1 descreve uma antena PCB integrada ao módulo e opções para conectar uma antena externa. A antena externa pode ser conectada pelo conector externo de primeira geração, compatível com conectores Hirose U.FL, I-PEX MHFI e Amphenol AMC. O documento não informa qual configuração corresponde a cada SKU; confirme com a SiFli a implementação da antena do módulo escolhido antes de finalizar o layout da placa portadora.
 
 !!! info
     Para conhecer a família de chips, sua arquitetura e seus periféricos, consulte [SF32LB58x](../chips/SF32LB58x.md). Esta página se concentra na integração do módulo, nas variantes de memória, nas linhas de alimentação e nos critérios de escolha do produto.
@@ -6731,7 +6883,7 @@ Segundo a SiFli, as áreas de aplicação do SF32LB58-MOD incluem:
 Considere o SF32LB58-MOD quando o projeto precisar de um ou mais destes recursos:
 
 - Componente BGA256, caminho de RF, cristal e memória de alta velocidade integrados ao módulo
-- Antena PCB integrada ou antena externa conectada por pads castellados ou por um conector compatível com Hirose U.FL, I-PEX MHFI e Amphenol AMC; confirme a configuração do SKU
+- Antena PCB integrada ou antena externa conectada por um conector compatível com Hirose U.FL, I-PEX MHFI ou Amphenol AMC; confirme a configuração do SKU
 - Opções de memória QSPI-NOR, QSPI-NAND ou eMMC conforme o SKU
 - Interfaces externas para display, áudio, armazenamento e controle
 
@@ -6804,7 +6956,7 @@ As informações acima reproduzem o conteúdo das etiquetas; não constituem uma
 </div>
 
 !!! note "Disponibilidade e personalização"
-    **O SF32LB58-MOD-E4R32N1 não está mais disponível devido à recente escassez de chips de memória.** Outras configurações do módulo também são possíveis. Para solicitar uma configuração personalizada, [entre em contato com a μForge.io](../../about/contact.md).
+    **O SF32LB58-MOD-E4R32N1 está indisponível no momento devido à escassez de chips de memória.** Outras configurações do módulo também são possíveis. Para solicitar uma configuração personalizada, [entre em contato com a μForge.io](../../about/contact.md).
 
 O [guia de modelos de módulos da SiFli](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) lista essas variantes, informa que a eMMC pode ser incluída como dispositivo interno e que outras configurações podem ser personalizadas. Escolha o SKU de acordo com o tipo de mídia e a capacidade necessários e confirme com a SiFli a disponibilidade atual e a configuração de memória. Verifique também se o SDK e o firmware de destino oferecem suporte ao dispositivo e ao caminho de inicialização e armazenamento escolhidos.
 
@@ -6850,10 +7002,14 @@ O [guia de hardware SF32LB58x](https://wiki.sifli.com/en/hardware/SF32LB58x-HW-A
 - VDD_3V3: 2,97–3,6 V
 - VDD_1V8: 1,7–1,95 V
 - VDDIOA / VDDIOA2 / VDDIOB: 1,7–3,6 V
+
 - VDD_3V3 alimenta AVDD33_ANA, AVDD33_AUD e AVDD_USB; se o módulo incluir eMMC, também alimenta sua entrada VDD. A SiFli recomenda um LDO para esta linha de alimentação.
 - VDD_1V8 alimenta PVDD1, PVDD2, AVDD_BRF e AVDD18_DSI, além da memória integrada ao encapsulamento.
 - VDDIOA alimenta as I/Os PA, exceto PA00–PA11, a Flash externa e o VIO do eMMC, quando instalado. VDDIOA2 alimenta PA00–PA11; VDDIOB alimenta as I/Os PB.
 - Interface de módulo com 138 pinos; os pinos multiplexados disponibilizam funções como GPIO, SPI, LCD, MPI, UART, I2C, PWM, SDIO, USB 2.0 HS e áudio
+
+!!! note "Tensão de I/O externa"
+    A DS5802 V0.1 especifica 1,7–3,6 V para VDDIOA, VDDIOA2 e VDDIOB, mas sua lista de verificação de hardware estabelece nível de interface de 3,3 V para as I/Os do módulo e os periféricos externos. O documento não esclarece essa diferença. Confirme com a SiFli a tensão permitida para a interface e a revisão do módulo escolhidas; não conclua, apenas pela faixa da linha de alimentação, que todas as I/Os externas toleram 3,6 V.
 
 ## Produtos relacionados
 

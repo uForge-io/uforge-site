@@ -21,7 +21,7 @@ Dependendo do SKU selecionado, o chip montado no módulo pode incluir OPI-PSRAM 
 
 ## Aplicações { #applications }
 
-**SF32LB52-MOD-1 é indicado para** produtos que precisam de Bluetooth, gráficos e áudio com menor risco de RF e de layout, incluindo:
+**SF32LB52-MOD-1 é recomendado para** produtos que precisam de Bluetooth, gráficos e áudio com menor risco de RF e de layout, incluindo:
 
 - Relógios inteligentes, pulseiras de atividade e dispositivos médicos vestíveis
 - Hubs de sensores Bluetooth e acessórios conectados

@@ -76,7 +76,7 @@ U 变体使用 QFN68L 封装。V 变体使用 WBBGA175 封装，需要更谨慎�
 - 48 MHz 与 32.768 kHz 晶体要求及推荐型号。
 - 蓝牙 RF 设计和天线匹配要求。
 - U 支持 SPI/QSPI 和 JDI 显示；V 支持 SPI/QSPI、MCU8080、DPI 和 JDI 显示。
-- 外部存储和启动存储选项，包括 SDIO/eMMC/SD NAND 类接口。
+- 外部存储和启动存储选项包括 SDIO、eMMC 和 SD NAND。
 - 按键、振动马达、音频接口、PBR 管脚、传感器、UART/I2C、GPTIM、调试下载和校准。
 
 ### 3.4. 应用场景 { #34-typical-applications }
@@ -165,7 +165,7 @@ EVT 前应归档 SF32LB56xU 与 SF32LB56xV 硬件应用说明的版本、数据�
 
 [思澈科技（SiFli）芯片硬件设计指南索引（Wiki）]: https://wiki.sifli.com/hardware/index.html
 
-## 继续设计指南 { #continue-the-design-guide }
+### 4.5. 继续设计指南 { #continue-the-design-guide }
 
 完整指南在以下页面中继续展开，每页对应设计流程的一个阶段，均可从本页进入。
 

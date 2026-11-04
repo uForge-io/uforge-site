@@ -116,7 +116,7 @@ Choose the device from the operators, memory budget and complete product workloa
 | Device Family | AI Positioning |
 |:--------------|:---------------|
 | **SF32LB52x** | Consider for cost-optimized Bluetooth, audio and basic HMI products; use a lightweight CPU implementation as the baseline unless specific acceleration is verified. |
-| **SF32LB55x** | Suitable for BLE wearables and sensor-rich products; useful for low-power sensing and compact algorithms. |
+| **SF32LB55x** | The SDK guide lists one HCPU NNACC; verify operator support for the chosen configuration. Suitable for BLE wearables and sensor-rich products, including low-power sensing and compact algorithms. |
 | **SF32LB56x** | Consider for richer UI, connected HMI and sensor or multimedia pipelines; verify the selected configuration and HCPU NNACC operator support. |
 | **SF32LB57x** | The cited guide does not establish NNACC availability for this family; verify the exact part, board, and SDK operator, runtime, and memory support before selecting it for AI. |
 | **SF32LB58x** | Consider for combined AI, graphics and audio workloads when the selected part's memory and HCPU/LCPU resources meet the product requirements; verify operators, integration costs and measured energy. |
@@ -253,16 +253,13 @@ A successful embedded-AI product usually combines a compact model, careful data 
 
 ## Typical Use Cases { #typical-use-cases }
 
-Consider SF32 AI acceleration for compact local inference in connected, battery-powered products, where supported operators and the measured system budget fit:
+Consider SF32 AI acceleration for compact local inference in connected, battery-powered products when supported operators and the measured system budget fit. Product scenarios combine the model tasks above with application needs:
 
-- Gesture recognition on watches, bands, and handheld devices.
-- Activity classification for fitness and health products.
-- Voice-event or keyword detection for audio accessories.
-- Sensor-fusion algorithms for wearables.
-- Biometric signal analysis where supported by sensors and software.
-- Local anomaly detection for smart devices.
-- Simple image classification or camera-triggered events on devices with camera input.
-- Smart HMI behavior that adapts to user context.
+- Wearables can combine gesture recognition, activity classification and sensor fusion; biometric analysis depends on sensor and software support.
+- Audio accessories can detect voice events or keywords.
+- Smart devices can run local anomaly detection and event filtering.
+- Camera-enabled products can use simple image classification or camera-triggered events when the capture path supports them.
+- An HMI can adapt its behavior to the user's context.
 
 ## Key Takeaways { #key-takeaways }
 

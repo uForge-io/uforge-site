@@ -51,7 +51,7 @@ Filtre pela interface de display exigida pelo painel e use a resolução desejad
 
 ### Interfaces de áudio { #audio-interfaces }
 
-O seletor oferece filtros independentes de quantidade mínima para DACs de áudio, ADCs, interfaces PDM e interfaces I2S. Cada valor é um limite mínimo, não um perfil de áudio combinado. Em seguida, verifique o compartilhamento de recursos com outros periféricos e o projeto analógico da placa.
+O seletor oferece filtros independentes de correspondência exata para a quantidade de DACs de áudio, ADCs, interfaces PDM e interfaces I2S. Cada quantidade selecionada precisa corresponder exatamente; os filtros não representam um perfil de áudio combinado. Em seguida, verifique o compartilhamento de recursos com outros periféricos e o projeto analógico da placa.
 
 ### Conectividade e hardware especializado { #connectivity-and-specialist-hardware }
 

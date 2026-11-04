@@ -12,6 +12,8 @@ tags:
 
 La série SF32LB55x est une famille de microcontrôleurs AIoT grand public à très basse consommation pour les produits connectés en BLE qui exigent des capacités d'affichage plus poussées, plus de marge mémoire et un choix de boîtiers plus large que les MCU Bluetooth d'entrée de gamme.
 
+Pour le choix du composant, la distinction principale concerne le boîtier et la mémoire intégrée : le SS6600A8 utilise le QFN68L sans PSRAM intégrée au boîtier et requiert 2,97–3,63 V ; le SF32LB551U4O5 et les variantes BGA présentées ici utilisent 1,71–3,63 V.
+
 Son architecture bicœur big.LITTLE associe deux processeurs Arm Cortex-M33 STAR-MC1[^1] : un cœur applicatif hautes performances jusqu'à 240 MHz et un cœur à très basse consommation jusqu'à 48 MHz. Un produit peut ainsi garder le travail d'interface exigeant sur le cœur applicatif, tout en confiant au cœur basse consommation le traitement des capteurs, la gestion de la veille et les tâches BLE qui doivent rester actives.
 
 La fiche produit et la fiche technique officielles de SiFli indiquent le BLE 5.2, le moteur graphique 2,5D ePicasso, deux contrôleurs LCD, un accélérateur matriciel de réseaux de neurones orienté TinyML et 1 312 Ko de SRAM sur puce (1 088 Ko HCPU + 224 Ko LCPU), ainsi que la prise en charge de NOR, NAND, eMMC et PSRAM externes. SF32LB55x est ainsi un choix pertinent pour les objets portables, les produits riches en capteurs et les conceptions IHM compactes qui demandent plus de ressources que le SF32LB52x sans exiger un composant de la gamme supérieure 56/58.
@@ -200,10 +202,10 @@ Suivez cette séquence pour transformer une présélection SF32LB55x en concepti
 ## Questions fréquentes { #frequently-asked-questions }
 
 **Quelles sont les principales caractéristiques du SF32LB55x ?**
-Le SF32LB55x associe un CPU applicatif (Cortex-M33 @240 MHz) à un cœur basse consommation (Cortex-M33 @48 MHz, programmable par l'utilisateur). Il intègre 1 312 KB de SRAM interne et prend en charge le Bluetooth Low Energy (BLE) uniquement. Graphismes : ePicasso 1.0. Boîtier : QFN68 / BGA145 / BGA169 (7 × 7 mm (QFN68)). USB 2.0 FS.
+Le SF32LB55x assure le traitement applicatif (Cortex-M33 @240 MHz) et dispose d'un cœur basse consommation (Cortex-M33 @48 MHz, programmable par l'utilisateur). Il intègre 1 312 KB de SRAM interne et prend en charge le Bluetooth Low Energy (BLE) uniquement. Graphismes : ePicasso 1.0. Boîtier : QFN68L / BGA145 / BGA169 (7 × 7 mm (QFN68L)). USB 2.0 FS.
 
 **Quelles interfaces d'affichage le SF32LB55x prend-il en charge ?**
-SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix)) Cette liste couvre toute la famille et ne garantit pas toutes les interfaces pour chaque référence ou boîtier ; vérifiez la matrice d'interfaces liée.
 
 **Quelle est la résolution d'affichage maximale du SF32LB55x ?**
 La résolution maximale est de 512 × 512 en couleur RGB888, via MIPI-DSI, uniquement avec des pilotes d'affichage à RAM intégrée. ([Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -212,7 +214,7 @@ La résolution maximale est de 512 × 512 en couleur RGB888, via MIPI-DSI, uniqu
 Jusqu'à 16 MB + 2 MB de PSRAM et jusqu'à 8 MB de Flash NOR dans le boîtier.
 
 **Quelle tension d'alimentation faut-il pour le SF32LB55x ?**
-1,71–3,63 V.
+SS6600A8 nécessite 2,97–3,63 V ; SF32LB551U4O5 et les variantes BGA présentées sur cette page utilisent 1,71–3,63 V. Choisissez la référence exacte avant de concevoir l'arbre d'alimentation.
 
 **Par où commencer une conception matérielle avec le SF32LB55x ?**
 Commencez par le [guide de conception matérielle du SF32LB55x](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) (schéma, alimentation, horloge/RF, routage PCB), puis utilisez les listes de contrôle de schéma et d'implantation avant de figer la carte.

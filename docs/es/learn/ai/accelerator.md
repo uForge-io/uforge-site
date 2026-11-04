@@ -39,30 +39,30 @@ Una cadena simplificada de IA en el borde en SF32 se representa así:
 <div align="center"><em>Diagrama: Etapas de procesamiento e inferencia controlada por firmware</em></div>
 
 ```text
-Sensores / Audio / Cámara
+Sensors / Audio / Camera
         │
         ▼
-Preprocesamiento
-  - filtrado
-  - segmentación en tramas
-  - normalización
-  - extracción de características
+Pre-processing
+  - filtering
+  - framing
+  - normalization
+  - feature extraction
         │
         ▼
-Firmware / entorno de inferencia
-  - orquestación del grafo del modelo
-  - operaciones compatibles con NNACC
-  - otras operaciones en la CPU, si están implementadas
+Firmware / Inference Runtime
+  - model graph orchestration
+  - supported operations on NNACC
+  - other operations on CPU, if implemented
         │
         ▼
-Postprocesamiento
-  - aplicación de umbrales
-  - suavizado
-  - detección de eventos
-  - decisiones de la aplicación
+Post-processing
+  - thresholding
+  - smoothing
+  - event detection
+  - application decisions
         │
         ▼
-Aplicación, UI, Bluetooth o almacenamiento
+Application, UI, Bluetooth, or Storage
 ```
 
 El acelerador es solo una parte de la cadena completa de IA. El producto también debe adquirir datos, gestionar búferes, preprocesar las entradas, planificar la inferencia, posprocesar los resultados y aplicar la lógica de decisión. Por lo general, se obtiene un mejor rendimiento al diseñar toda la cadena teniendo en cuenta la jerarquía de memoria y los aceleradores disponibles, en lugar de tratar la inferencia como una llamada de función aislada.
@@ -116,7 +116,7 @@ Elija el dispositivo según los operadores, el presupuesto de memoria y la carga
 | Familia de dispositivos | Posicionamiento para IA |
 |:--------------|:---------------|
 | **SF32LB52x** | Considérelo para Bluetooth, audio y HMI básica con coste ajustado; tome una implementación ligera en CPU como referencia salvo que se verifique una aceleración específica. |
-| **SF32LB55x** | Adecuado para dispositivos BLE vestibles y productos con numerosos sensores; útil para tareas de detección de bajo consumo y algoritmos compactos. |
+| **SF32LB55x** | La guía del SDK indica un NNACC en la HCPU; verifique la compatibilidad de operadores para la configuración elegida. Adecuado para dispositivos BLE vestibles y productos con numerosos sensores, incluidas tareas de detección de bajo consumo y algoritmos compactos. |
 | **SF32LB56x** | Considérelo para UI más completas, HMI conectada y cadenas de sensores o multimedia; verifique la configuración elegida y los operadores compatibles con el NNACC de HCPU. |
 | **SF32LB57x** | La guía citada no establece la disponibilidad de NNACC para esta familia; verifique el componente, la placa y el soporte de operadores, runtime y memoria del SDK antes de elegirlo para IA. |
 | **SF32LB58x** | Considérelo para cargas que combinan IA, gráficos y audio cuando la memoria y los recursos HCPU/LCPU de la referencia elegida cubran los requisitos del producto; verifique operadores, costes de integración y energía medida. |
@@ -253,16 +253,13 @@ Un producto de IA embebida bien diseñado combina un modelo compacto, una recopi
 
 ## Casos de uso típicos { #typical-use-cases }
 
-Considere la aceleración de IA de SF32 para inferencia local compacta en productos conectados y alimentados por batería cuando los operadores compatibles y el presupuesto medido del sistema lo permitan:
+Considere la aceleración de IA de SF32 para inferencia local compacta en productos conectados y alimentados por batería cuando los operadores compatibles y el presupuesto medido del sistema lo permitan. Los escenarios de producto combinan las tareas de modelo anteriores con necesidades de aplicación:
 
-- Reconocimiento de gestos en relojes, pulseras y dispositivos de mano.
-- Clasificación de actividad para productos de fitness y salud.
-- Detección de eventos de voz o palabras clave para accesorios de audio.
-- Algoritmos de fusión de sensores para dispositivos vestibles.
-- Análisis de señales biométricas cuando lo permitan los sensores y el software.
-- Detección local de anomalías para dispositivos inteligentes.
-- Clasificación sencilla de imágenes o eventos activados por la cámara, en dispositivos con entrada de cámara.
-- Una HMI que adapta su comportamiento al contexto de uso.
+- Los dispositivos vestibles pueden combinar reconocimiento de gestos, clasificación de actividad y fusión de sensores; el análisis biométrico depende del soporte de sensores y software.
+- Los accesorios de audio pueden detectar eventos de voz o palabras clave.
+- Los dispositivos inteligentes pueden ejecutar detección local de anomalías y filtrado de eventos.
+- Los productos con cámara pueden realizar clasificación sencilla de imágenes o responder a eventos activados por ella si la ruta de captura lo permite.
+- Una HMI puede adaptar su comportamiento al contexto del usuario.
 
 ## Conclusiones clave { #key-takeaways }
 

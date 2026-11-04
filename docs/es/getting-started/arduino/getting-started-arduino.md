@@ -97,9 +97,7 @@ Elija **Dynamic** para usar el flujo del cargador de Zephyr. Elija **Static** si
 
 ## Ponga la placa en modo de descarga serie { #put-the-board-in-serial-download-mode }
 
-OpenSiFli documenta que el primer uso requiere que la placa esté en modo de descarga serie. Utilice la secuencia de arranque/reinicio del SF32LB52 DevKit LCD y luego suba el sketch desde Arduino IDE o CLI.
-
-La herramienta de subida es `sftool`.
+OpenSiFli indica que, para el primer uso, la placa debe estar en modo de descarga serie. En la SF32LB52 DevKit LCD, active la opción **BOOT** en la herramienta de descarga y, a continuación, encienda o reinicie la placa; consulte las [instrucciones de descarga y depuración de la placa](../../sf32-products/devkits/SF32LB52-DevKit-LCD.md#download-and-debug). Una vez en modo de descarga, suba el sketch desde Arduino IDE o CLI con `sftool`.
 
 ## Suba una prueba serie básica { #upload-a-serial-smoke-test }
 
@@ -139,7 +137,7 @@ sketch
 
 ## Suba Blink { #upload-blink }
 
-Compruebe si la variante instalada del SF32LB52 DevKit LCD define `LED_BUILTIN`; no dé por hecho que los números de pin de Arduino son universales. Si la macro está disponible y la variante asigna el LED integrado, pruebe Blink cuando la prueba serie básica funcione. De lo contrario, consulte la documentación de la placa para confirmar la conexión y la polaridad del LED antes de elegir una GPIO.
+Compruebe si la variante instalada del SF32LB52 DevKit LCD define `LED_BUILTIN`; no dé por hecho que los números de pin de Arduino son universales. Si la macro está disponible y la variante asigna el LED integrado, pruebe Blink cuando la prueba serie básica funcione. De lo contrario, consulte la documentación de la placa para confirmar la conexión y la polaridad del LED antes de elegir un pin GPIO.
 
 ```cpp
 void setup() {

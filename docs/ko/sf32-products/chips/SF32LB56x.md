@@ -41,7 +41,7 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 - DPI/RGB 디스플레이 인터페이스 지원
 - SDIO를 통한 외부 Wi-Fi, SD/SDIO 또는 eMMC를 통한 외부 스토리지
 - WBBGA175 옵션을 통한 더 많은 GPIO
-- TinyML, 오디오, UI를 동시에 처리할 수 있는 더 큰 여유
+- TinyML, 오디오, UI 워크로드를 동시에 처리할 여유
 
 ## 개발 리소스
 
@@ -183,10 +183,12 @@ SF32LB56x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 ## 자주 묻는 질문 { #frequently-asked-questions }
 
 **SF32LB56x의 주요 사양은 무엇입니까?**
-SF32LB56x는 애플리케이션 CPU(Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @48/96 MHz, 사용자 프로그래밍 가능)를 갖추고 있으며, 내장 SRAM은 960 KB입니다. Bluetooth 모드는 듀얼 모드(Classic Bluetooth + BLE)입니다. 그래픽: ePicasso 2.0. 패키지는 QFN68 / BGA175이며, 크기는 7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)입니다. USB는 2.0 FS를 지원합니다.
+SF32LB56x는 애플리케이션 CPU(Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33, 최대 96 MHz, 사용자 프로그래밍 가능)를 갖추고 있으며, 내장 SRAM은 960 KB입니다. Bluetooth 모드는 듀얼 모드(Classic Bluetooth + BLE)입니다. 그래픽: ePicasso 2.0. 패키지는 QFN68L / WBBGA175이며, 크기는 7 × 7 mm (QFN68L), 6.1 × 6.5 mm (WBBGA175)입니다. USB는 2.0 FS를 지원합니다.
+
+LCPU 동작 클럭과 애플리케이션 작업 지원 여부는 정확한 디바이스와 지원되는 SDK 구성에 따라 달라집니다. 96 MHz는 상한이며 기본 클럭이 아닙니다. 총 960 KB SRAM은 HCPU SRAM 800 KB(리텐션 SRAM 128 KB 포함)와 LCPU 리텐션 SRAM 160 KB로 나뉘며, 하나의 연속된 메모리 공간이 아닙니다. 대상 SKU와 SDK 메모리 맵을 확인하십시오.
 
 **SF32LB56x는 어떤 디스플레이 인터페이스를 지원합니까?**
-지원하는 인터페이스는 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB입니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+지원하는 인터페이스는 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB입니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)) 전체 제품군의 인터페이스 목록이며 모든 부품 번호나 패키지에 대한 보장이 아닙니다. 연결된 인터페이스 매트릭스를 확인하십시오.
 
 **SF32LB56x가 지원하는 최대 디스플레이 해상도는 얼마입니까?**
 RGB888 색상에서 최대 1024 × 600 해상도를 지원합니다. BGA 패키지의 DPI/RGB 인터페이스를 사용합니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix))

@@ -15,11 +15,13 @@ tags:
 
 ### 6.1. Huella y apilado de capas { #61-footprint-and-stack-up }
 
-Compruebe el plano mecánico, los requisitos de la huella de montaje y las capacidades de ensamblaje del encapsulado QFN o BGA seleccionado. En el caso de BGA, confirme desde el inicio el trazado de salida de las bolas (fan-out), la estrategia de vías, las reglas de máscara de soldadura y los límites de fabricación.
+Contraste el plano mecánico y los requisitos de la huella de montaje del encapsulado QFN o BGA seleccionado con la capacidad de ensamblaje del fabricante previsto. En el caso de BGA, confirme cuanto antes el escape de las bolas (fan-out), la estrategia de vías, las reglas de máscara de soldadura y los límites de fabricación.
 
 #### 6.1.1. Referencias de apilado y fabricación { #611-stack-up-and-fabrication }
 
-SiFli recomienda un proceso PTH convencional y una placa de cuatro capas para QFN68L y BGA145. Para BGA169, la referencia recomienda HDI de un paso con vías ciegas/enterradas. Los apilados ilustrados de cuatro y seis capas tienen un espesor final de 0,7 mm ±10%. Son construcciones de referencia, no límites universales; confirme el plano del encapsulado, el espesor final y la capacidad de proceso con el fabricante de PCB.
+La serie SF32LB55x admite componentes montados en una o en ambas caras de la placa.
+
+SiFli recomienda un proceso PTH convencional y una placa de cuatro capas para QFN68L, BGA125 y BGA145. Para BGA169, la referencia recomienda HDI de un paso con vías ciegas/enterradas. Los apilados ilustrados de cuatro y seis capas tienen un espesor final de 0,7 mm ±10%. Son construcciones de referencia, no límites universales; confirme el plano del encapsulado, el espesor final y la capacidad de proceso con el fabricante de PCB.
 
 <div align="center"><em>Tabla 6.1-1: Apilado de referencia PTH de cuatro capas</em></div>
 
@@ -27,16 +29,16 @@ SiFli recomienda un proceso PTH convencional y una placa de cuatro capas para QF
 
 | Capa / material | Área de cobre supuesta | Tipo de material | Dk | DF | Espesor teórico (mil) | Espesor teórico (mm) |
 |:---|:---:|:---|:---:|:---:|---:|---:|
-| Máscara de soldadura superior | - | - | 3.5 | 0.8 | 1 | 0.0254 |
-| Cobre + metalizado L1 | - | Cobre + metalizado | - | - | 0.048 | 0.001219 |
-| Prepreg | 70% | 2116 | 4.2 | 0.015 | 4.2 | 0.10668 |
-| Cobre L2 | - | Cobre | - | - | 0.07 | 0.001778 |
-| Núcleo | 70% | No indicado en el diagrama fuente | 4 | 0.017 | 16.1 | 0.408941 |
-| Cobre L3 | - | Cobre | - | - | 0.07 | 0.001778 |
-| Prepreg | 70% | 2116 | 4.2 | 0.015 | 4.2 | 0.10668 |
-| Cobre + metalizado L4 | - | Cobre + metalizado | - | - | 0.048 | 0.001219 |
-| Máscara de soldadura inferior | - | - | 3.5 | 0.8 | 1 | 0.0254 |
-| Total teórico | - | - | - | - | 26.736 | 0.679096 |
+| Máscara de soldadura superior | - | - | 3,5 | 0,8 | 1 | 0,0254 |
+| Cobre + metalizado L1 | - | Cobre + metalizado | - | - | 0,048 | 0,001219 |
+| Prepreg | 70% | 2116 | 4,2 | 0,015 | 4,2 | 0,10668 |
+| Cobre L2 | - | Cobre | - | - | 0,07 | 0,001778 |
+| Núcleo | 70% | No indicado en el diagrama fuente | 4 | 0,017 | 16,1 | 0,408941 |
+| Cobre L3 | - | Cobre | - | - | 0,07 | 0,001778 |
+| Prepreg | 70% | 2116 | 4,2 | 0,015 | 4,2 | 0,10668 |
+| Cobre + metalizado L4 | - | Cobre + metalizado | - | - | 0,048 | 0,001219 |
+| Máscara de soldadura inferior | - | - | 3,5 | 0,8 | 1 | 0,0254 |
+| Total teórico | - | - | - | - | 26,736 | 0,679096 |
 
 </div>
 
@@ -48,28 +50,43 @@ El diagrama fuente especifica un espesor final de placa de 0,7 mm ±10%, incluid
 
 | Capa / material | Área de cobre supuesta | Tipo de material | Dk | DF | Espesor teórico (mil) | Espesor teórico (mm) |
 |:---|:---:|:---|:---:|:---:|---:|---:|
-| Máscara de soldadura superior | - | - | 3.5 | 0.8 | 0.4 | 0.01016 |
-| Cobre + metalizado L1 | - | Cobre + metalizado | - | - | 1.2 | 0.03048 |
-| Prepreg | 70% | 1080 | 4.14 | 0.02 | 2.6 | 0.06604 |
-| Cobre L2 | - | Cobre | - | - | 0.7 | 0.01778 |
-| Prepreg | 70% | 2116 | 4.14 | 0.02 | 4.8 | 0.12192 |
-| Cobre L3 | - | Cobre | - | - | 0.7 | 0.01778 |
-| Núcleo | 70% | FR-4 CORE | 4.43 | 0.017 | 4 | 0.1016 |
-| Cobre L4 | - | Cobre | - | - | 0.7 | 0.01778 |
-| Prepreg | 70% | 2116 | 4.14 | 0.02 | 4.8 | 0.12192 |
-| Cobre L5 | - | Cobre | - | - | 0.7 | 0.01778 |
-| Prepreg | 70% | 1080 | 4.14 | 0.02 | 2.6 | 0.06604 |
-| Cobre + metalizado L6 | - | Cobre + metalizado | - | - | 1.2 | 0.03048 |
-| Máscara de soldadura inferior | - | - | 3.5 | 0.8 | 0.4 | 0.01016 |
-| Total teórico | - | - | - | - | 24.8 | 0.629921 |
+| Máscara de soldadura superior | - | - | 3,5 | 0,8 | 0,4 | 0,01016 |
+| Cobre + metalizado L1 | - | Cobre + metalizado | - | - | 1,2 | 0,03048 |
+| Prepreg | 70% | 1080 | 4,14 | 0,02 | 2,6 | 0,06604 |
+| Cobre L2 | - | Cobre | - | - | 0,7 | 0,01778 |
+| Prepreg | 70% | 2116 | 4,14 | 0,02 | 4,8 | 0,12192 |
+| Cobre L3 | - | Cobre | - | - | 0,7 | 0,01778 |
+| Núcleo | 70% | FR-4 CORE | 4,43 | 0,017 | 4 | 0,1016 |
+| Cobre L4 | - | Cobre | - | - | 0,7 | 0,01778 |
+| Prepreg | 70% | 2116 | 4,14 | 0,02 | 4,8 | 0,12192 |
+| Cobre L5 | - | Cobre | - | - | 0,7 | 0,01778 |
+| Prepreg | 70% | 1080 | 4,14 | 0,02 | 2,6 | 0,06604 |
+| Cobre + metalizado L6 | - | Cobre + metalizado | - | - | 1,2 | 0,03048 |
+| Máscara de soldadura inferior | - | - | 3,5 | 0,8 | 0,4 | 0,01016 |
+| Total teórico | - | - | - | - | 24,8 | 0,629921 |
 
 </div>
 
 El diagrama fuente especifica un espesor final de 0,7 mm ±10% para la placa HDI de seis capas, incluido el metalizado y la máscara de soldadura. El apilado, los parámetros dieléctricos y el espesor teórico son referencias; pida al fabricante que los verifique según los materiales reales, el espesor del cobre y los requisitos de impedancia.
 
-#### 6.1.2. Dimensiones de los patrones de pads { #612-land-pattern-dimensions }
+#### 6.1.2. Dimensiones del encapsulado y del patrón de pads { #612-land-pattern-dimensions }
 
-- BGA145/BGA169: bolas de 0,25 mm de diámetro y paso de 0,5 mm; el patrón de referencia muestra una apertura de máscara de soldadura de 0,33 mm y una apertura de pasta de 0,25 mm.
+<div align="center"><em>Tabla 6.1-3: Dimensiones nominales del encapsulado y paso</em></div>
+
+<div align="center" markdown>
+
+| Encapsulado | Dimensiones nominales del cuerpo (largo × ancho × alto) | Paso de bolas/patillas |
+|:---|:---:|:---:|
+| BGA125 | 7 × 7 × 0,94 mm | 0,5 mm |
+| BGA145 | 7 × 7 × 0,94 mm | 0,5 mm |
+| BGA169 | 7 × 7 × 0,94 mm | 0,5 mm |
+| QFN68L | 7 × 7 × 0,75 mm | 0,35 mm |
+
+</div>
+
+Las dimensiones nominales se transcriben de los planos del encapsulado de origen; consulte el plano de la variante seleccionada para comprobar las tolerancias.
+
+- BGA125/BGA145/BGA169: bolas de 0,25 mm de diámetro y paso de 0,5 mm; el patrón de referencia muestra una apertura de máscara de soldadura de 0,33 mm y una apertura de pasta de 0,25 mm.
 - QFN68L: pads perimetrales de 0,2 × 0,55 mm con paso de 0,35 mm; la referencia indica una apertura de máscara de 0,3 × 0,65 mm y una apertura de pasta de 0,2 × 0,55 mm. El pad expuesto es cuadrado, con un lado nominal de 5,49 mm y un intervalo de 5,39–5,59 mm.
 
 Antes de liberar la huella, compruebe el plano del encapsulado y las reglas de máscara de soldadura y esténcil del fabricante de montaje.
@@ -78,7 +95,7 @@ Antes de liberar la huella, compruebe el plano del encapsulado y las reglas de m
 
 - Mantenga los lazos BUCK cortos y anchos, con la corriente de retorno cerca del lazo de conmutación.
 - Mantenga las zonas RF, de cristal, GPADC y audio alejadas de las fuentes conmutadas, los relojes de pantalla, los motores y los cargadores.
-- Trace las interfaces de memoria de alta velocidad y pantalla sobre una referencia de tierra continua.
+- Trace las interfaces de memoria de alta velocidad y pantalla sobre un plano de referencia de tierra continuo.
 - Coloque la protección ESD cerca de los conectores y trace las señales de modo que pasen primero por el dispositivo de protección.
 - Incluya suficientes puntos de prueba para alimentación, arranque, depuración, RF y calibración de producción.
 
@@ -92,17 +109,17 @@ Los siguientes valores se transcriben de los diagramas de reglas de referencia P
 
 | Regla / separación | PTH de cuatro capas (mm) | HDI de seis capas (mm) |
 |:---|---:|---:|
-| Ancho de pista: mínimo / recomendado | 0.10 / 0.10 | 0.075 / 0.075 |
-| Ancho de pista: máximo | 2.54 | 2.54 |
-| Pista-pista, pista-vía, vía-vía | 0.10 | 0.075 |
-| Pad/SMD-pista o vía | 0.10 | 0.075 |
-| Pad-pad o SMD-pad | 0.10 | 0.10 |
-| Cobre-pista, vía, pad o SMD | 0.127 | 0.10 |
-| Cobre-cobre | 0.15 | 0.15 |
-| Borde de placa-pista, vía, pad, SMD o cobre | 0.25 | 0.20 |
-| Taladro-pista o vía | 0.10 | 0.075 |
-| Taladro-pad, SMD o cobre | 0.10 | 0.10 |
-| Taladro-taladro; cuerpo de componente-cuerpo de componente | 0.10 | 0.10 |
+| Ancho de pista: mínimo / recomendado | 0,10 / 0,10 | 0,075 / 0,075 |
+| Ancho de pista: máximo | 2,54 | 2,54 |
+| Pista-pista, pista-vía, vía-vía | 0,10 | 0,075 |
+| Pad/SMD-pista o vía | 0,10 | 0,075 |
+| Pad-pad o SMD-pad | 0,10 | 0,10 |
+| Cobre-pista, vía, pad o SMD | 0,127 | 0,10 |
+| Cobre-cobre | 0,15 | 0,15 |
+| Borde de placa-pista, vía, pad, SMD o cobre | 0,25 | 0,20 |
+| Taladro-pista o vía | 0,10 | 0,075 |
+| Taladro-pad, SMD o cobre | 0,10 | 0,10 |
+| Taladro-taladro; cuerpo de componente-cuerpo de componente | 0,10 | 0,10 |
 
 </div>
 
@@ -118,17 +135,17 @@ En la matriz de separaciones para la misma red de cada diagrama fuente, solo alg
 
 #### 6.2.3. EMI, ESD y protección { #623-emi-esd-and-protection }
 
-Cuando sea posible, lleve por capas internas los relojes y las pistas de alimentación ruidosas. Coloque los dispositivos ESD junto al conector para que cada señal pase por la protección antes de entrar en la placa, sin ramificaciones; use una conexión a masa corta y ancha con una vía directa al plano. En la carga USB, sitúe el punto de prueba en el lado del conector respecto al TVS. En la entrada de batería, coloque el TVS entre el conector y la carga de la placa para que la ruta hacia el chip pase primero por el TVS, y mantenga corta su conexión a masa.
+Evite los recorridos largos por la capa exterior fuera del blindaje. Trace las señales de reloj y de alimentación ruidosas en capas internas; no las trace por la superficie. Coloque los dispositivos ESD junto al conector para que cada señal pase por la protección antes de entrar en la placa, sin ramificaciones; use una conexión a masa corta y ancha con una vía directa al plano. En la carga USB, sitúe el punto de prueba en el lado del conector respecto al TVS. En la entrada de batería, coloque el TVS entre el conector y la carga de la placa para que la ruta hacia el chip pase primero por el TVS, y mantenga corta su conexión a masa.
 
 ### 6.3. Trazado de interfaces { #63-interface-routing }
 
-Las pistas de reloj deben ser cortas, estar apantalladas y aisladas de las señales digitales rápidas. Trace la señal RF como una línea de 50 Ω con una red de adaptación compacta. Ajuste la longitud de las pistas de memoria y pantalla según su velocidad y agrúpelas por bus. Apantalle las señales de audio y GPADC y manténgalas alejadas de las corrientes de conmutación.
+Las pistas de reloj deben ser cortas, estar apantalladas y aisladas de las señales digitales rápidas. Trace RF con impedancia controlada de 50 Ω y mantenga compacta la red de adaptación. Ajuste la longitud de las pistas de memoria y pantalla según su velocidad y agrúpelas por bus. Apantalle las señales de audio y GPADC y manténgalas alejadas de las corrientes de conmutación.
 
 #### 6.3.1. Colocación y trazado de cristales { #631-crystal-placement-and-routing }
 
 - Coloque cada cristal dentro de la zona apantallada, a más de 1 mm del borde de la placa y a más de 5 mm de fuentes de calor como PA, cargador y PMU. Deje al menos 0,25 mm de separación alrededor del cristal.
 - Trace las pistas del cristal de 48 MHz en la capa superior, con una longitud de 3–10 mm y un ancho de 0,1 mm. Mantenga al menos 0,15 mm entre 48M_XI y 48M_XO, como muestra el [modelo de trazado original](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-48M-M-PCB.png), y apantállelas con masa en tres dimensiones. Aléjelas de VBAT, DC-DC y señales rápidas. El texto original pide una zona sin cobre en las capas superior y adyacente bajo la zona del cristal, y prohíbe que otras pistas la atraviesen.
-- Trace las pistas del cristal de 32,768 kHz en la capa superior, con una longitud máxima de 10 mm y un ancho de 0,1 mm. Mantenga XI y XO separados al menos 0,15 mm y apantállelos con masa en tres dimensiones. El texto original pide una zona sin cobre en las capas superior y adyacente bajo la zona del cristal, y prohíbe que otras pistas la atraviesen.
+- Trace las pistas del cristal de 32,768 kHz en la capa superior, con una longitud máxima de 10 mm y un ancho de 0,1 mm. Mantenga 32K_XI y 32K_XO separados al menos 0,15 mm y apantállelos con masa en tres dimensiones. El texto original pide una zona sin cobre en las capas superior y adyacente bajo la zona del cristal, y prohíbe que otras pistas la atraviesen.
 
 #### 6.3.2. RF e interfaces de alta velocidad { #632-rf-and-high-speed-interfaces }
 
@@ -281,6 +298,8 @@ Cada tabla cubre un área de revisión del diseño de PCB. Si una tabla no inclu
 </div>
 
 #### 6.4.9. Puntos de prueba { #649-test-points }
+
+Como mínimo, reserve puntos de prueba para diseño de hardware en VBAT, GND, VDDIOA, VDDIOB, RSTN, Mode, SWDIO, SWCLK, RXD1, TXD1, RXD3 y TXD3. Las pruebas de producción requieren puntos de prueba en VBAT, GND, boot_mode, VDDIOB, RXD3 y TXD3.
 
 <div align="center"><em>Tabla 6.4-9: Lista de comprobación de puntos de prueba</em></div>
 

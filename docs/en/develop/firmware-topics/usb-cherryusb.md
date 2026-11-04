@@ -51,7 +51,9 @@ USB work crosses firmware, descriptors, host operating systems, power behavior, 
 
 The [official SiFli-SDK CherryUSB example index](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/index.html) separates USB-device and USB-host work. Start with the example that matches the intended USB role and class, then carry its descriptor, power, and host-compatibility checks into the product implementation.
 
-<div align="center"><em>Table: SiFli-SDK CherryUSB examples for SF32LB58x</em></div>
+Board support varies by example. Check the example's Supported Platforms section and confirm that the target board is listed before adapting it.
+
+<div align="center"><em>Table: SiFli-SDK CherryUSB examples listed in the SF32LB58x documentation</em></div>
 <div align="center" markdown>
 
 | USB role | Example | Starting point |

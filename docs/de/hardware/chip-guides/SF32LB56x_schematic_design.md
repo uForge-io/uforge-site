@@ -355,7 +355,7 @@ Die Auswahl der Display-Schnittstelle hängt vom Gehäuse ab. Für die U-Variant
 | D0 | PA40 | PA40 | Daten 2 im Quad-SPI-Modus |
 | D1 | PA41 | PA41 | Daten 3 im Quad-SPI-Modus |
 | REST | PA05 | PB04 | Reset-Signal für das Display-Panel |
-| TE | PA33 | PA33 | Tearing-Effect-Signal zur Synchronisierung mit dem MCU-Frame |
+| TE | PA33 | PA33 | TE-Signal zur MCU-Framesynchronisierung |
 
 </div>
 
@@ -401,7 +401,7 @@ Die Auswahl der Display-Schnittstelle hängt vom Gehäuse ab. Für die U-Variant
 | D[0] | PA40 | Daten 2 im Quad-SPI-Modus |
 | D[1] | PA41 | Daten 3 im Quad-SPI-Modus |
 | REST | PA43 | Reset-Signal für das Display |
-| TE | PA33 | Tearing-Effect-Signal zur Synchronisierung mit dem MCU-Frame |
+| TE | PA33 | TE-Signal zur MCU-Framesynchronisierung |
 
 </div>
 
@@ -414,7 +414,7 @@ Die Auswahl der Display-Schnittstelle hängt vom Gehäuse ab. Für die U-Variant
 | CSX | PA36 | Chip-Select |
 | WRX | PA37 | Schreib-Strobe-Signal zum Schreiben von Daten |
 | DCX | PA39 | Auswahl zwischen Display-Daten/-Befehl |
-| RDX | PA38 | Lese-Strobe-Signal zum Schreiben von Daten |
+| RDX | PA38 | Lesestrobosignal; siehe den Warnhinweis unten. |
 | D[0] | PA40 | Daten 0 |
 | D[1] | PA41 | Daten 1 |
 | D[2] | PA28 | Daten 2 |
@@ -424,9 +424,12 @@ Die Auswahl der Display-Schnittstelle hängt vom Gehäuse ab. Für die U-Variant
 | D[6] | PA32 | Daten 6 |
 | D[7] | PA34 | Daten 7 |
 | REST | PA43 | Reset |
-| TE | PA33 | Tearing-Effect-Signal zur Synchronisierung mit dem MCU-Frame |
+| TE | PA33 | TE-Signal zur MCU-Framesynchronisierung |
 
 </div>
+
+!!! warning "RDX-Beschreibung der SF32LB56xV-MCU8080-Schnittstelle prüfen"
+    Die SiFli-Pintabelle beschreibt RDX als Lesestroboskop-Signal „zum Schreiben von Daten“, während SiFlis Übersicht zur MCU/8080-Schnittstelle besagt, dass durch Umschalten von RDX Daten gelesen werden. Diese Angaben widersprechen sich. Prüfen Sie die vorgesehene Funktion anhand der Dokumentation des verwendeten Display-Controllers, bevor Sie das Signal zuweisen.
 
 <div align="center"><em>Tabelle 5.5-7: SF32LB56xV DPI-Display-Schnittstelle</em></div>
 

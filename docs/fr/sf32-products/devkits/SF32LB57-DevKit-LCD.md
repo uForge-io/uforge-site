@@ -11,7 +11,7 @@ tags:
 
 ## Vue d’ensemble { #overview }
 
-La SF32LB57-DevKit-LCD est une carte d'évaluation multimédia basée sur **SF32LB57-MOD-WD**, un module que SiFli semble prévoir comme produit. **WD** pourrait signifier **Wi-Fi Dual-band** (« Wi-Fi double bande »), mais cette interprétation n'est pas confirmée. La carte associe la MCU SF32LB57x, le Wi-Fi via SDIO, une Flash de démarrage et des interfaces pour périphériques. Elle convient aux IHM intelligentes, aux terminaux à caméra, aux interphones et aux écrans connectés ; elle permet de valider l'affichage, la capture, l'audio et la connectivité avant de concevoir une carte porteuse.
+La SF32LB57-DevKit-LCD est une carte d'évaluation multimédia basée sur **SF32LB57-MOD-WD**. Le nom semble indiquer que SiFli prévoit ce module comme produit. **WD** pourrait signifier **Wi-Fi Dual-band** (« Wi-Fi double bande »), mais cette interprétation n'est pas confirmée officiellement. La carte associe la MCU SF32LB57x, le Wi-Fi via SDIO, une Flash de démarrage et des interfaces pour périphériques. Elle convient aux IHM intelligentes, aux terminaux à caméra, aux interphones et aux écrans connectés ; elle permet de valider l'affichage, la capture, l'audio et la connectivité avant de concevoir une carte porteuse.
 
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 900px; margin: 1rem auto;">
 <figure style="margin: 0;"><a href="assets/sf32lb57x/57DEVKIT_LCD_T_Look.png"><img src="assets/sf32lb57x/57DEVKIT_LCD_T_Look.png" alt="SF32LB57-DevKit-LCD — Vue de face" loading="lazy" style="display: block; width: 100%; height: auto;"></a><figcaption>Vue de face</figcaption></figure>
@@ -61,7 +61,7 @@ Le schéma fonctionnel d'origine décrit les fonctions, pas le câblage de réf�
 <figure style="margin: 0;"><a href="assets/sf32lb57x/57DEVKIT-LCD-B-Notes.svg"><img src="assets/sf32lb57x/57DEVKIT-LCD-B-Notes.svg" alt="SF32LB57-DevKit-LCD — Composants côté dos" loading="lazy" style="display: block; width: 100%; height: auto;"></a><figcaption>Composants côté dos</figcaption></figure>
 </div>
 
-## Premier démarrage { #getting-started }
+## Mise en service initiale { #getting-started }
 
 Pour les essais d'affichage, prévoyez la carte, une dalle DPI-RGB compatible avec un connecteur de 40 broches au pas de 0,5 mm, un câble USB de données et un ordinateur Windows, Linux ou macOS. L'antenne IPEX-1, la caméra DVP, une carte MicroSD/TF, un haut-parleur de 8 Ω et un J-Link ou DAP-Link sont facultatifs. Pour utiliser simultanément les journaux UART et l'USB natif, il faut deux câbles de données.
 
@@ -72,20 +72,9 @@ Pour les essais d'affichage, prévoyez la carte, une dalle DPI-RGB compatible av
 
 Avec le firmware d'usine, la carte peut afficher son interface par défaut à la mise sous tension ; cela dépend du firmware et de la dalle. Un écran noir ne suffit pas à conclure à un échec de programmation. Consultez [Premiers pas avec SiFli-SDK](../../getting-started/sifli/getting-started-sifli-sdk.md) pour les outils, l'environnement et le flashage.
 
-## Cibles de compilation du SDK { #sdk-build-targets }
+## Configuration du SDK { #sdk-build-targets }
 
-La configuration actuelle du SDK répertorie les cibles suivantes. Ce sont des identifiants précis ; ils ne garantissent pas que toute carte SF32LB57-MOD-WD soit compatible avec chacune d'elles. Faites correspondre la mémoire, l'écran, les broches et la révision à la version du SDK utilisée. La source n'établit pas de correspondance entre les révisions du module WD et ces noms.
-
-- `sf32lb57-lcd_n16r16_dpi`
-- `sf32lb57-lcd_n16r8_dpi`
-- `sf32lb57-lcd_n16r16_qspi`
-
-Après avoir configuré l'environnement SDK, utilisez cet exemple hello-world **uniquement avec le matériel correspondant à la configuration N16R16 DPI**. Une exécution réussie sur UART ne valide pas les pilotes d'écran, de caméra ou de Wi-Fi.
-
-```bash
-cd example/get-started/hello_world/rtt/project
-scons --board=sf32lb57-lcd_n16r16_dpi -j8
-```
+Le guide de la carte publié par SiFli demande d'installer SiFli SDK et de sélectionner le package de prise en charge de carte `SF32LB57-DevKit-LCD`. Le fichier amont `build_config_gcc.yaml` actuellement lié ne répertorie aucune cible de compilation SF32LB57. Avant de compiler, vérifiez le package de prise en charge et l'identifiant exact dans la copie du SDK utilisée ; ne réutilisez pas la cible d'une autre carte. Un hello-world réussi sur UART ne vérifie que le démarrage série de base, pas les pilotes d'écran, de caméra ou de Wi-Fi.
 
 ## Alimentation et débogage { #power-and-debug }
 
@@ -159,7 +148,7 @@ S1–S3 partagent `PA_34` / `GPADC_CH6` ; selon la source, les tensions correspo
 ## Référence des connecteurs { #connector-reference }
 
 !!! warning
-    Ces tableaux reprennent les affectations de la source et ne remplacent pas le schéma. Le résumé du module est incomplet (`58~?`) et attribue les signaux USB_DP/USB_DM à `PA_00`/`PA_01`, en contradiction avec l'affectation explicite de l'USB natif à `PA35`/`PA36`. Distinguez le numéro de pastille du module du GPIO de la MCU. N'utilisez pas les lignes non résolues pour concevoir la carte.
+    Ces tableaux reprennent les affectations de la source et ne remplacent pas le schéma. Le résumé du module est incomplet (`58~?`) et attribue les signaux USB_DP/USB_DM à `PA_00`/`PA_01`, en contradiction avec l'affectation explicite de l'USB natif à `PA35`/`PA36`. Certaines lignes de la source regroupent des plages de pastilles du module et de GPIO avec plusieurs fonctions alternatives, sans préciser la fonction de chaque pastille. Cette page conserve ces regroupements sans déduire d'affectations individuelles. Distinguez le numéro de pastille du module du GPIO de la MCU. N'utilisez pas les lignes non résolues pour concevoir la carte.
 
 <div align="center"><em>Pastilles du module : entrées non résolues conservées</em></div>
 

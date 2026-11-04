@@ -61,10 +61,11 @@ SF32LB52x 系列在紧凑的 QFN68 封装中集成双核 STAR-MC1 处理器、�
 - 双核 Arm China STAR-MC1 处理器，兼容 Arm Cortex-M33，并配有 FPU 和 MPU
 - 双模蓝牙 5.3 射频
 - ePicasso 2.0 2D/2.5D 图形加速器
+- 思澈科技（SiFli）的原始硬件应用说明提到集成式 AI 神经网络加速器。SiFli-SDK 的 [NNACC 指南](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/nnacc.html)列出了 SF32LB55x、SF32LB56x 和 SF32LB58x，但未列出 SF32LB52x；如需依赖该加速器，请先确认具体型号的软件支持情况。
 - 支持 SPI、QSPI、8080、JDI 和 8-bit EPD 的显示控制器
 - USB 2.0 全速设备
 - 在支持该功能的型号上提供 SDIO/eMMC 存储接口
-- 模拟和数字音频接口
+- 集成音频编解码器，并提供模拟和数字音频接口
 - 集成 PMU、DC/DC 转换器和 LDO 稳压器
 - QFN68 封装，最多 44/45 个 GPIO
 
@@ -99,12 +100,12 @@ SF32LB52x 系列在紧凑的 QFN68 封装中集成双核 STAR-MC1 处理器、�
 
     | 型号 | 合封存储器 | 供电方式 | 设计说明 |
     |:---|:---|:---|:---|
-    | SF32LB52BU36 | 1 MB QSPI-NOR Flash | 2.97–3.63 V，不可充电 | `VDD_SIP` 需要外部 1.8 V 或 3.3 V 供电 |
-    | SF32LB52BU56 | 4 MB QSPI-NOR Flash | 2.97–3.63 V，不可充电 | `VDD_SIP` 需要外部 3.3 V 供电 |
-    | SF32LB52DUB6 | 4 MB OPI-PSRAM | 1.71–1.98 V，不可充电 | `VDD_SIP` 需要外部 1.8 V 供电 |
-    | SF32LB52EUB6 | 4 MB OPI-PSRAM | 2.97–3.63 V，不可充电 | `VDD_SIP` 可由内部 LDO 供电 |
-    | SF32LB52GUC6 | 8 MB OPI-PSRAM | 2.97–3.63 V，不可充电 | `VDD_SIP` 可由内部 LDO 供电 |
-    | SF32LB52JUD6 | 16 MB OPI-PSRAM | 2.97–3.63 V，不可充电 | `VDD_SIP` 可由内部 LDO 供电 |
+    | SF32LB52BU36 | 1 MB QSPI-NOR Flash | 2.97–3.63 V，未集成充电电路 | `VDD_SIP` 需要外部 1.8 V 或 3.3 V 供电 |
+    | SF32LB52BU56 | 4 MB QSPI-NOR Flash | 2.97–3.63 V，未集成充电电路 | `VDD_SIP` 需要外部 3.3 V 供电 |
+    | SF32LB52DUB6 | 4 MB OPI-PSRAM | 1.71–1.98 V，未集成充电电路 | `VDD_SIP` 需要外部 1.8 V 供电 |
+    | SF32LB52EUB6 | 4 MB OPI-PSRAM | 2.97–3.63 V，未集成充电电路 | `VDD_SIP` 可由内部 LDO 供电 |
+    | SF32LB52GUC6 | 8 MB OPI-PSRAM | 2.97–3.63 V，未集成充电电路 | `VDD_SIP` 可由内部 LDO 供电 |
+    | SF32LB52JUD6 | 16 MB OPI-PSRAM | 2.97–3.63 V，未集成充电电路 | `VDD_SIP` 可由内部 LDO 供电 |
 
     </div>
 

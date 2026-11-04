@@ -151,7 +151,7 @@ Dasselbe Szenario kann je nach Produktnutzung vernachlässigbar oder dominant se
 
 | Szenario | Vorkommen pro Tag | Dauer je Vorkommen | Gesamtdauer pro Tag | Anteil an der täglichen Ladung | Status im Modell |
 |:---------|--------------------:|------------------------:|-----------------------:|----------------------:|:----------------|
-| Basis-Standby | 1 | Verbleibende Sekunden des Tages (`=G7`) | 52 425,7 s | 11,69 % | Aktiviert |
+| Basis-Standby | 1 | Verbleibende Sekunden des Tages | 52 425,7 s | 11,69 % | Aktiviert |
 | Nachrichtenbenachrichtigung | 100 | 5 s | 500 s | 22,62 % | Aktiviert |
 | Hinweis auf eingehenden Anruf | 10 | 10 s | 100 s | 4,52 % | Aktiviert |
 | Raise-to-Wake | 200 | 5 s | 1 000 s | 27,72 % | Aktiviert |
@@ -169,6 +169,8 @@ Dasselbe Szenario kann je nach Produktnutzung vernachlässigbar oder dominant se
 </div>
 
 Die leeren Szenariozellen in der Quellmatrix sind beabsichtigt: Auf jedes benannte Szenario folgen seine Lastzeilen für Display, Vibrationsmotor und `Other`. Diese Zeilen übernehmen Vorkommen und Dauer pro Tag aus der Szenariozeile darüber, sodass die Quelle jedes Szenario nur einmal benennt.
+
+Die Berechnung der Tagesdauer setzt voraus, dass aktivierte Szenarien getrennte, nicht überlappende Zeiträume belegen. Die Arbeitsmappe zieht die Dauer der einbezogenen Szenarien von den Sekunden eines 24-Stunden-Tags ab und ordnet die verbleibende Zeit dem Basis-Standby zu. Sie addiert die vollständigen Komponentenlasten jedes Szenarios einzeln; gleichzeitig stattfindende Szenen werden nicht zusammengeführt. Überlappen sich Ereignisse im Produkt, können gemeinsame Lasten mehrfach gezählt und überlappende Zeiträume mehrfach vom Standby abgezogen werden. Um solche Überlappungen realistisch abzubilden, modellieren Sie ein kombiniertes Szenario mit den gleichzeitigen Komponentenströmen oder gleichen Sie gemeinsame Lasten und die nur einmal gezählte Aktivzeit vor der Summierung ab. Das zweite AOD-Szenario ist in dieser Standby-Berechnung nicht enthalten; beide AOD-Szenarien sind in dieser Basis null. Prüfen Sie vor dem Aktivieren eines der beiden Szenarien, ob die Standby-Berechnung alle aktiven Szenarien berücksichtigt.
 
 <div align="center"><em>Tabelle: Berechnetes Ergebnis der Tagesnutzung</em></div>
 

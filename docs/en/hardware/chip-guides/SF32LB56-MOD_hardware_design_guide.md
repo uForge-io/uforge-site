@@ -15,10 +15,10 @@ hide:
 
 **SF32LB56-MOD** is SiFli's general-purpose low-power Bluetooth MCU module family, built on the SF32LB56xV series.
 
-This guide uses **DS5602-SF32LB56-MOD Technical Specification V0.3** as its source and organizes the module-specific information needed for schematic design, PCB layout, validation, and production release. It covers memory variants, the 89-pin interface, three power rails, display/audio/storage interfaces, antenna-placement rules, handling requirements, and the schematic checklist.
+This guide organizes the module-specific information needed for schematic design, PCB layout, validation, and production release. It follows **DS5602-SF32LB56-MOD Technical Specification V0.3** and covers memory variants, the 89-pin interface, three power rails, display/audio/storage interfaces, antenna-placement rules, handling requirements, and the schematic checklist.
 
 !!! note "Source and recommendations"
-    Technical values below follow **DS5602-SF32LB56-MOD Technical Specification V0.3** unless explicitly marked as integration guidance or a design recommendation.
+    Technical values and pin assignments follow DS5602 V0.3. Where the specification contains unresolved electrical or manufacturing ambiguities, the relevant section preserves them and identifies what must be confirmed before design release. Integration guidance and recommendations are distinguished from source requirements.
 
 !!! note "Regulatory marking scope"
     The supplied labels for SF32LB56-MOD-N16R12N1 and SF32LB56-MOD-A128R12N1 show FCC, IC, CMIIT ID and HVIN identifiers and a CE mark. See the [module marking summary](../../sf32-products/modules/SF32LB56-MOD.md#regulatory-markings). Confirm approval documents and antenna/integration conditions for the exact revision; do not assume other variants or the finished product are covered.
@@ -59,7 +59,7 @@ The module supports Bluetooth 5.3 connectivity and provides display acceleration
 | CPU | HCPU up to 240MHz, LCPU up to 96MHz, both Arm Cortex-M33 STAR-MC1 |
 | Wireless | Dual-mode Bluetooth 5.3 with BLE Audio support |
 | Graphics | ePicasso 2.0, eZip 2.0, TurboPixel, LCD 8080/SPI/Dual-SPI/Quad-SPI/DPI/RGB/JDI |
-| Audio | 24-bit DAC, 24-bit Sigma-Delta ADC, 2 PDM interfaces (PDM1/PDM2), each supporting two microphones on left/right channels (up to four microphones total), 1x I2S |
+| Audio | 24-bit DAC, 24-bit Sigma-Delta ADC, two PDM interfaces (PDM1/PDM2); DS5602 V0.3 lists two digital-microphone inputs; one I2S interface |
 | AI/DSP | Matrix accelerator up to 1.92 GOPS, FFT, FIR, CORDIC |
 | Storage | Module Flash/PSRAM options, MPI3, SD/SDIO/eMMC support |
 | Security | AES, HASH, CRC, TRNG, Secure Boot, 1024-bit eFuse, PSA Certified Level 1 |
@@ -228,6 +228,8 @@ Add 33–100 ohm series resistors on LCD RGB signal lines. Keep RGB, SPI display
 
 The module exposes analog audio DAC outputs, MIC_BIAS, MIC_ADC_IN, I2S, and PDM-capable pins. The audio DAC is a 24-bit output path supporting 8kHz to 48kHz sample rates with 109dB SNR and dynamic range. The audio ADC is a 24-bit Sigma-Delta input path supporting 8kHz to 48kHz sample rates with 99dB SNR and dynamic range.
 
+DS5602 V0.3 lists two digital-microphone inputs and two PDM interfaces (PDM1/PDM2). Its recommended pin-assignment figure lists PDM1_DATA on PA20 or PA64, PDM1_CLK on PA24 or PA69, PDM2_DATA on PA25 or PA71, and PDM2_CLK on PA26 or PA73. These are alternative pin-mux options, not proof of carrier-board routing. The input and interface counts do not establish a maximum physical microphone count or support for channel sharing. Verify the supported mode and routed board mapping before designing a multi-microphone system.
+
 Route analog audio away from noisy switching nodes, LCD clocks, and antenna feed structures. Keep MIC_BIAS and MIC_ADC_IN filtering close to the attached microphone circuit.
 
 #### 5.3.3 Buttons
@@ -321,6 +323,8 @@ For external antenna designs, the datasheet describes a first-generation externa
 
 ### 7.1 Electrical Characteristics
 
+Electrical values in this section follow DS5602 V0.3. Absolute maximum ratings are stress ratings: exceeding them may permanently damage the device; operation outside recommended conditions is not guaranteed, and prolonged exposure may affect reliability.
+
 <div align="center"><em>Table 7.1-1: Absolute Maximum Ratings</em></div>
 
 <div align="center" markdown>
@@ -380,10 +384,19 @@ VDD is the I/O supply. VOH and VOL are measured with a high-impedance load.
 | Mode | Condition | Typical Current |
 | :--- | :--- | :-: |
 | BT Sniff | 50ms interval | 196.0uA |
+| BT Sniff | 100ms interval | 100.1uA |
+| BT Sniff | 200ms interval | 52.2uA |
+| BT Sniff | 500ms interval | 23.4uA |
 | BT Sniff | 1s interval | 13.8uA |
 | BLE ADV | 50ms interval | 228.7uA |
+| BLE ADV | 100ms interval | 116.6uA |
+| BLE ADV | 200ms interval | 60.5uA |
+| BLE ADV | 500ms interval | 26.9uA |
 | BLE ADV | 1s interval | 15.7uA |
 | BLE Connection | 50ms interval | 172.8uA |
+| BLE Connection | 100ms interval | 87.9uA |
+| BLE Connection | 200ms interval | 45.5uA |
+| BLE Connection | 500ms interval | 20.0uA |
 | BLE Connection | 1s interval | 11.5uA |
 | Scan | Inquiry Scan or Page Scan | 36.8uA |
 | Both Scan | Inquiry Scan and Page Scan | 64.0uA |
@@ -391,19 +404,21 @@ VDD is the I/O supply. VOH and VOL are measured with a high-impedance load.
 
 </div>
 
+The BT Sniff measurement used an iPhone 8 Plus with attempt=1. Scan and Both Scan receive for 28.82ms and 57.64ms, respectively, every 1.28s; the supply is PVDD + VDD_3V3. These values follow DS5602 V0.3.
+
 <div align="center"><em>Table 7.2-2: Processor Current</em></div>
 
 <div align="center" markdown>
 
-| Workload | Domain | Frequency | Current | Efficiency |
+| Workload | Domain | Frequency | Current | Current Increment |
 | :--- | :--- | :-: | :-: | :-: |
 | CoreMark | HPSYS | 240MHz | 9.38mA | 30.92uA/MHz |
 | CoreMark | HPSYS | 192MHz | 7.90mA | 30.92uA/MHz |
-| CoreMark | HPSYS | 48MHz | 0.92mA | 30.92uA/MHz |
+| CoreMark | LPSYS | 48MHz | 0.92mA | 15.13uA/MHz |
 | CoreMark | LPSYS | 24MHz | 0.55mA | 15.13uA/MHz |
 | WhileLoop | HPSYS | 240MHz | 7.54mA | 25.75uA/MHz |
 | WhileLoop | HPSYS | 192MHz | 6.30mA | 25.75uA/MHz |
-| WhileLoop | HPSYS | 48MHz | 0.70mA | 25.75uA/MHz |
+| WhileLoop | LPSYS | 48MHz | 0.70mA | 10.63uA/MHz |
 | WhileLoop | LPSYS | 24MHz | 0.44mA | 10.63uA/MHz |
 
 </div>
@@ -419,7 +434,7 @@ VDD is the I/O supply. VOH and VOL are measured with a high-impedance load.
 | 1 | VDD_3V3 input range is 2.97–3.6V; place a 4.7uF capacitor close to the module pin. |
 | 2 | VDD_1V8 input range is 1.7–1.95V; place a 4.7uF capacitor close to the module pin. |
 | 3 | VDDIO input range is 1.7–3.6V; place a 4.7uF capacitor close to the module pin. |
-| 4 | Module I/O interface level is 3.3V where specified; attached peripheral levels must be compatible. |
+| 4 | Module I/O interface level is 3.3V; attached peripheral levels must be compatible. |
 | 5 | If internal module Flash is populated, PA06, PA07, PA08, PA09, PA10, and PA11 cannot be used externally. |
 | 6 | SDIO and MPI3 share I/O resources and cannot be used simultaneously. |
 | 7 | PA50, PA51, PB32, and PB35 can receive interrupts while the MCU is sleeping. |
@@ -431,6 +446,8 @@ VDD is the I/O supply. VOH and VOL are measured with a high-impedance load.
 | 13 | PA16 and PA17 multiplexed as DBG_UART are program download/debug pins and need 100 ohm series resistors. |
 
 </div>
+
+DS5602 V0.3 gives VDDIO an operating range of 1.7–3.6V and states that PA00–PA11 are fixed at 3.3V independently of VDDIO, while checklist item 4 broadly says the module I/O interface level is 3.3V. The specification does not define whether that checklist statement applies to every I/O pin. Do not infer universal 3.3V compatibility; confirm the electrical domain of each selected pin and peripheral with SiFli.
 
 ### 7.4 Storage, Handling, and Assembly
 
@@ -451,7 +468,7 @@ VDD is the I/O supply. VOH and VOL are measured with a high-impedance load.
 </div>
 
 !!! info "Figure 7.4-1: Reflow Temperature Profile"
-    See Figure 9-1 in DS5602 V0.3.
+    DS5602 V0.3 Figure 9-1 specifies a 25–150°C ramp over 60–90s at 1–3°C/s; 150–200°C preheat for 60–120s; 60–90s above 217°C; a 235–250°C peak; and cooling from the peak to 180°C at -1 to -5°C/s. It specifies SAC305 solder. The lower legend gives a peak-time interval of 30–70s, while the graph separately says soldering time >30s; the specification does not reconcile these annotations. Do not conflate them; confirm the production profile.
 
 ## 8. Related Documents
 
@@ -474,7 +491,7 @@ VDD is the I/O supply. VOH and VOL are measured with a high-impedance load.
 
 ### 9.1. Appendix A. Pin Planning Reference { #appendix-a-pin-planning-reference }
 
-DS5602 V0.3 provides the complete 89-pin definition table and top-view pinout. The table below highlights the pins and signal groups that most often affect schematic risk, boot/debug access, or shared-resource planning.
+DS5602 V0.3 includes the 89-pin definition table and top-view pinout. The table below highlights the pins and signal groups that most often affect schematic risk, boot/debug access, or shared-resource planning. Confirm the complete pinout against the datasheet for the exact module revision.
 
 <div align="center"><em>Table 9.1-1: Critical Pin and Signal Groups</em></div>
 
@@ -488,7 +505,7 @@ DS5602 V0.3 provides the complete 89-pin definition table and top-view pinout. T
 | Pin 26 VDD_3V3 | 3.3V rail, 2.97–3.6V operating range. |
 | Pin 27 VDD_1V8 | 1.8V rail, 1.7–1.95V operating range. |
 | Pin 29 VDDIO | I/O rail, 1.7–3.6V operating range. |
-| Pins 43/44 | AU_DACP / AU_DACN differential DAC outputs. |
+| Pins 43/44 | AU_DAC1P_OUT / AU_DAC1N_OUT differential DAC outputs. |
 | Pin 46 MIC_BIAS | Microphone bias output. |
 | Pin 47 MIC_ADC_IN | Analog microphone ADC input. |
 | Pins 67–72 PA06–PA11 | Connected to internal Flash by default; unavailable externally. |
@@ -509,7 +526,7 @@ DS5602 V0.3 provides the complete 89-pin definition table and top-view pinout. T
 
 | Version | Date | Notes |
 | :--- | :--- | :--- |
-| 0.1 | 2026-07 | Initial SF32LB56-MOD module hardware design guide based on DS5602-SF32LB56-MOD V0.3. |
+| 0.1 | 2026-07 | Initial guide based on DS5602 V0.3. |
 
 </div>
 

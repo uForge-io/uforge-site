@@ -50,7 +50,7 @@ Las rutas de los ejemplos y las placas compatibles pueden variar según la versi
 3. Active una actualización OTA y confirme que el dispositivo arranca la nueva imagen.
 4. En una unidad de prueba con una ruta de recuperación documentada, provoque una sola interrupción cada vez, por ejemplo, desconectando durante la transferencia o saliendo del alcance. No corte la alimentación salvo que la documentación de la placa y el diseño de recuperación del producto confirmen que la prueba es segura.
 5. Compruebe qué comportamiento implementa realmente el producto tras una actualización interrumpida o rechazada: por ejemplo, reintento, reanudación, modo de recuperación o rollback. Exija rollback solo si está implementado en el arranque y el diseño de particiones.
-6. Pruebe la OTA cuando el dispositivo conserve datos de vinculación persistente obsoletos, después de eliminarlo del teléfono y tras reiniciarlo.
+6. Pruebe la OTA en tres condiciones: con datos de vinculación obsoletos, después de olvidar el dispositivo en el teléfono y después de reiniciarlo.
 7. Si su producto ya usa PAN para datos, evalúe la ruta de OTA por PAN como una decisión de diseño independiente.
 
 **Criterios de éxito:** tras una OTA correcta arranca la nueva imagen; una actualización interrumpida o rechazada sigue la política de recuperación documentada del producto, y el usuario puede identificar el estado del dispositivo. No dé por hecho que todas las OTA admiten rollback.

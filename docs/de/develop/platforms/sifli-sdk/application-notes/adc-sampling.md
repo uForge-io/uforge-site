@@ -26,13 +26,17 @@ SF32LB52x verfügt über einen dedizierten Akkumesspfad auf `GPADC_CH7` (`BAT`):
 | Familie | GPADC-Kanäle | Auflösung | Typische Genauigkeit | Maximale Spannung an normalen GPADC-Eingängen |
 |:-------|:--------------|:-----------|:--------------------|:----------------------------------------------|
 | SF32LB55x | 8 | 10 Bit | 3–4 mV | 1,1 V (X1); 3,3 V (X3) |
-| SF32LB52x | 8 | 12 Bit | 1–2 mV | 3,3 V |
+| SF32LB52x | 8 | 12 Bit | 1–2 mV | 1,1 V (A0); 3,3 V (RPO) |
 | SF32LB56x / 58x | 8 | 12 Bit | 1–2 mV | 3,3 V |
 | SF32LB57x | 12 | 12 Bit | 1–2 mV | 3,3 V |
 
 </div>
 
-Die oben angegebenen maximalen Eingangsspannungen gelten für normale GPADC-Eingänge; dedizierte Akkumesskanäle haben eigene Beschaltungen und Grenzwerte. Das SF32LB55x-Beispiel verwendet einen Teiler mit 1 MΩ / 220 kΩ und einer RC-Einschwingzeit von 157 ms. Die zusammengefasste ADC-Tabelle im SF32LB56x-Guide nennt 470 kΩ / 1000 kΩ und 200 ms für SF32LB52x, SF32LB56x und SF32LB58x; für SF32LB57x enthält sie diese Empfehlung nicht. Folgen Sie bei 57x dem für die genaue Variante dokumentierten Akkumesspfad und dessen Grenzwerten, statt diese Widerstandswerte oder Einschwingzeit zu übertragen. Diese Empfehlungen gelten für externe Teilernetzwerke. Insbesondere besitzt der dedizierte SF32LB52x-Akkupfad `GPADC_CH7` bereits einen internen Teiler. Fügen Sie keinen externen Teiler hinzu, sofern dies nicht der Schaltungsentwurf des Zielboards vorsieht. Die Toleranz des Teilers beeinflusst die endgültige Messgenauigkeit; kalibrieren Sie einen externen Teiler separat in der Fertigung, wenn der Entwurf dies erfordert.
+Die oben angegebenen maximalen Eingangsspannungen gelten für normale GPADC-Eingänge; dedizierte Akkumesskanäle haben eigene Beschaltungen und Grenzwerte. Die SF32LB52x-Eingangsgrenze hängt von der Chiprevision ab: Der dedizierte ADC-Leitfaden nennt einen Messbereich von 0–1,0 V, während die aktuelle HAL-API maximal 1,1 V für A0 und 3,3 V für RPO definiert. Die OpenSiFli-FAQ und die zusammengefasste ADC-Tabelle nennen 3,3 V für die Familie, ohne diese Varianten zu unterscheiden. Prüfen Sie vor dem Anschließen eines Eingangs die genaue Chiprevision und das HAL-Limit des Ziel-SDKs; 3,3 V gelten nicht pauschal für jedes 52x-Gerät.
+
+Auch beim SF32LB55x sind Messbereich und Chiprevision auseinanderzuhalten: Die OpenSiFli-FAQ nennt 1,1 V / 3,3 V für X1 / X3, während die aktuelle HAL-API 1,1 V / 3,3 V als Höchstwerte für A0 / RPO definiert. Die Quellen stellen nicht fest, dass diese Bezeichnungen einander entsprechen. Prüfen Sie Ziel-SDK, Chiprevision und den zur Laufzeit verwendeten Messbereich, bevor Sie eine Eingangsspannung anlegen.
+
+Das SF32LB55x-Beispiel verwendet einen Teiler mit 1 MΩ / 220 kΩ und einer RC-Einschwingzeit von 157 ms. Die zusammengefasste ADC-Tabelle im SF32LB56x-Guide nennt 470 kΩ / 1000 kΩ und 200 ms für SF32LB52x, SF32LB56x und SF32LB58x; die aktuelle zusammengefasste Tabelle im SF32LB58x-Guide nimmt SF32LB57x in dieselbe Empfehlung für externe Teiler auf. Diese Empfehlung gilt für externe Teilernetzwerke und ersetzt nicht die bauteilspezifischen Grenzwerte des dedizierten SF32LB57x-Akkumesskanals. Prüfen Sie den tatsächlichen Pfad auf dem Zielboard und übertragen Sie die Empfehlung nicht direkt auf einen dedizierten `VBAT`- / `VBATS`-Kanal. Insbesondere besitzt der dedizierte SF32LB52x-Akkupfad `GPADC_CH7` bereits einen internen Teiler. Fügen Sie keinen externen Teiler hinzu, sofern dies nicht der Schaltungsentwurf des Zielboards vorsieht. Die Toleranz des Teilers beeinflusst die endgültige Messgenauigkeit; kalibrieren Sie einen externen Teiler separat in der Fertigung, wenn der Entwurf dies erfordert.
 
 <div align="center"><em>Tabelle: Akkuspannungsmesspfade nach SF32-Familie</em></div>
 
@@ -166,7 +170,7 @@ In der Quellimplementierung ist `ADC_RATIO_ACCURATE` auf 1000 gesetzt; die Anfan
 
 ### SF32LB55x-Kalibrierbereiche { #sf32lb55x-calibration-ranges }
 
-Die OpenSiFli-FAQ beschreibt den Kalibrierablauf des SF32LB55x ausführlicher. Bei `sifli_adc_init` werden die gespeicherten Kalibriermesswerte aus der Werkskonfiguration im Flash ausgelesen, die durch `FACTORY_CFG_ID_ADC` gekennzeichnet ist. `sifli_adc_calibration` leitet daraus den linearen `offset` und `ratio` ab; spätere Abtastungen verwenden die `sifli_adc_get_mv`-Berechnung für den gewählten Bereich.
+Die OpenSiFli-FAQ beschreibt den Kalibrierablauf des SF32LB55x ausführlicher. Bei `sifli_adc_init` werden die gespeicherten Kalibriermesswerte aus der Werkskonfiguration im Flash ausgelesen, die durch `FACTORY_CFG_ID_ADC` gekennzeichnet ist. `sifli_adc_calibration` leitet daraus den linearen `offset` und `ratio` ab; spätere Abtastungen verwenden die `sifli_adc_get_mv`-Berechnung für den gewählten Bereich. Die FAQ nennt eine fehlende Kalibrierung des 55x ebenfalls als mögliche Ursache ungenauer Messwerte. Prüfen Sie, ob die Initialisierung des Ziel-SDKs die Werkskalibrierwerte tatsächlich ausliest und verwendet.
 
 Zwei Kalibrierbereiche sind dokumentiert:
 

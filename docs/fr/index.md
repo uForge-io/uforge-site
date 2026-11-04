@@ -75,7 +75,7 @@ hide:
 <a class="uf-spotlight-item uf-spotlight-item--examples" href="projects/index.md" data-radius="230">
   <span class="uf-spotlight-item__art uf-spotlight-item__art--examples" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">Projets</span>
-  <span class="uf-spotlight-item__title">Montres et HMI</span>
+  <span class="uf-spotlight-item__title">Montres connectées et HMI</span>
   <span class="uf-spotlight-item__copy">Exemples d'applications de qualité production.</span>
 </a>
 
@@ -144,7 +144,7 @@ hide:
 
 ---
 
-## Microcontrôleurs SF32 pris en charge [^1] { #supported-sf32-mcus .uf-center-heading }
+## Familles de microcontrôleurs SF32 [^1] { #supported-sf32-mcus .uf-center-heading }
 
 <div class="grid cards uf-mcu-grid" markdown>
 

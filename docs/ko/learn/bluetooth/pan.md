@@ -49,7 +49,7 @@ PANU는 inquiry로 주변 디바이스를 찾고 SDP를 사용하여 해당 디�
 
 </div>
 
-오디오, GATT 서비스 또는 Classic 프로파일 때문에 이미 듀얼 모드 Bluetooth를 채택한 제품이라면, 제품의 사용 사례가 근처의 테더링이 활성화된 휴대폰에 의존해도 괜찮은 한, PAN은 두 번째 라디오 서브시스템 없이 인터넷 접속을 추가하는 가장 낮은 증분 비용의 방법인 경우가 많습니다.
+오디오, GATT 서비스 또는 Classic 프로파일 때문에 이미 듀얼 모드 Bluetooth를 채택한 제품이라면, 제품의 사용 사례가 근처의 테더링이 활성화된 휴대폰에 의존해도 괜찮은 한, PAN은 두 번째 라디오 서브시스템 없이 인터넷 접속을 추가하는 비교적 낮은 추가 비용의 방법인 경우가 많습니다.
 
 ## iOS 데이터 전송: BLE 릴레이, Classic Bluetooth, PAN { #ios-data-transport-ble-relay-classic-bluetooth-and-pan }
 
@@ -62,8 +62,8 @@ PANU는 inquiry로 주변 디바이스를 찾고 SDP를 사용하여 해당 디�
 | 설계 | 디바이스-휴대폰 경로 | iOS 제품에 미치는 영향 | 인터넷 처리량과 엔지니어링 장단점 |
 |:-------|:---------------------|:------------------------|:--------------------------------------------|
 | BLE → 앱 → 인터넷 | 커스텀 GATT 프로토콜. iOS 앱이 디바이스 데이터를 수신하여 클라우드로 전달합니다. | BLE는 External Accessory MFi 경로 없이 Core Bluetooth를 사용할 수 있습니다. 앱이 페어링, 프레이밍, 재시도, 백그라운드 동작, 클라우드 릴레이를 책임져야 합니다. | BLE의 페이로드 용량과 스케줄링은 연결 파라미터와 iOS/앱 동작에 의해 제한됩니다. 이 경로는 소량이고 간헐적인 데이터에는 적합한 경우가 많지만 범용 IP 링크가 아니며, 연속적이거나 데이터 비중이 큰 트래픽에서는 실질적인 병목이 될 수 있습니다. |
-| 커스텀 Classic Bluetooth → 앱 | iOS 앱으로 향하는 커스텀 Bluetooth Classic 액세서리 데이터 채널. | [External Accessory 프레임워크](https://developer.apple.com/documentation/externalaccessory)는 MFi 액세서리용입니다. Apple은 이 프레임워크가 MFi 하드웨어로 제한된다고 밝히고 있습니다. 지원되는 표준 프로파일은 별개의 경우입니다. | 이 경로에는 MFi 액세서리와 해당 액세서리 프로토콜, 그리고 앱 통합과 제품 인증이 필요합니다. 그 자체로 디바이스에 직접적인 IP 네트워킹을 제공하지는 않습니다. |
-| Bluetooth PAN → 휴대폰 핫스팟 → 인터넷 | 표준 PANU-NAP 네트워킹. SF32는 휴대폰의 Bluetooth Personal Hotspot/테더링 서비스를 사용합니다. | 디바이스는 커스텀 앱-액세서리 전송 대신 휴대폰의 테더링 서비스를 사용합니다. 제품은 여전히 휴대폰, 통신사, 테더링 동작을 인증해야 합니다. | SF32는 앱 릴레이 없이 자체 IP 클라이언트를 실행합니다. 이것이 BLE에 비한 속도나 에너지 이점을 입증하지는 않습니다. 동일한 페이로드와 서버를 사용하여 대상 휴대폰에서 실제 전달된 페이로드 처리량, 업데이트 시간, 에너지를 비교하십시오. 결과는 Bluetooth 링크, 휴대폰 정책, 업스트림 네트워크, 엔드포인트에 따라 달라집니다. |
+| 커스텀 Classic Bluetooth → 앱 | iOS 앱으로 향하는 커스텀 Bluetooth Classic 액세서리 데이터 채널. | [External Accessory 프레임워크](https://developer.apple.com/documentation/externalaccessory)는 MFi 액세서리용입니다. Apple은 이 프레임워크가 MFi 하드웨어로 제한된다고 밝히고 있습니다. 지원되는 표준 프로파일은 별개의 경우입니다. | 이 경로에는 MFi 액세서리와 해당 액세서리 프로토콜, 그리고 앱 통합과 제품 적합성 검증이 필요합니다. 그 자체로 디바이스에 직접적인 IP 네트워킹을 제공하지는 않습니다. |
+| Bluetooth PAN → 휴대폰 핫스팟 → 인터넷 | 표준 PANU-NAP 네트워킹. SF32는 휴대폰의 Bluetooth Personal Hotspot/테더링 서비스를 사용합니다. | 디바이스는 커스텀 앱-액세서리 전송 대신 휴대폰의 테더링 서비스를 사용합니다. 제품은 여전히 휴대폰, 통신사, 테더링 동작을 검증해야 합니다. | SF32는 앱 릴레이 없이 자체 IP 클라이언트를 실행합니다. 이것이 BLE에 비한 속도나 에너지 이점을 입증하지는 않습니다. 동일한 페이로드와 서버를 사용하여 대상 휴대폰에서 실제 전달된 페이로드 처리량, 업데이트 시간, 에너지를 비교하십시오. 결과는 Bluetooth 링크, 휴대폰 정책, 업스트림 네트워크, 엔드포인트에 따라 달라집니다. |
 
 </div>
 
@@ -120,7 +120,7 @@ README는 이 패키지 디렉터리를 `mbedtls_288`로 표기하지만, README
 - `CONFIG_BSP_BLE_NVDS_SYNC`는 Bluetooth가 실행되는 위치에 따라 설정하십시오. README는 HCPU에서는 이를 활성화하고 LCPU에서는 비활성화합니다. 다른 프로세서 할당의 구성을 그대로 복사하지 마십시오.
 - 마지막 디바이스에 재연결하려면 `CONFIG_BT_AUTO_CONNECT_LAST_DEVICE`와 `CONFIG_PKG_USING_FLASHDB`를 확인하십시오. 재부팅 후에도 값이 유지되는지 검증하고, 무기한 재시도하지 말고 위의 재시도 제어를 사용하여 재연결 시도를 제한하십시오.
 
-## 휴대폰 OS 지원과 인증 { #mobile-phone-os-support-and-qualification }
+## 휴대폰 OS 지원과 검증 { #mobile-phone-os-support-and-qualification }
 
 휴대폰은 PAN **NAP**이며 제품 네트워크 경로의 일부입니다. 단순한 프로비저닝 도구가 아닙니다. 휴대폰의 운영체제, 기종, 요금제, 테더링 정책을 지원 제품 구성으로 취급하십시오. Bluetooth 페어링이 성공하는 것만으로는 충분하지 않습니다. PANU가 연결된 뒤 휴대폰이 Bluetooth 테더링/PAN 서비스를 제공하고 트래픽을 라우팅해야 합니다.
 
@@ -128,11 +128,11 @@ README는 이 패키지 디렉터리를 `mbedtls_288`로 표기하지만, README
 
 <div align="center" markdown>
 
-| 모바일 OS | 플랫폼이 문서화한 내용 | SF32 브링업 가이드 | 제품 인증 경계 |
+| 모바일 OS | 플랫폼이 문서화한 내용 | SF32 브링업 가이드 | 제품 검증 범위 |
 |:----------|:----------------------------|:-----------------------|:-------------------------------|
 | **셀룰러 서비스를 사용하는 iOS / iPadOS** | [Apple Personal Hotspot 문서](https://support.apple.com/guide/iphone/share-your-internet-connection-iph45447ca6/27/ios/27)는 Bluetooth를 연결 방법으로 문서화하고 있으며, Personal Hotspot이 휴대폰의 셀룰러 인터넷 연결을 공유한다고 설명합니다. | [SiFli Xiaozhi iOS 경로](https://docs.sifli.com/projects/xiaozhi/get-started/)를 따르십시오. 셀룰러 서비스가 활성화된 휴대폰을 사용하고, 페어링 전에 Personal Hotspot을 활성화하고, Bluetooth를 켜 두고, SF32 디바이스와 페어링/연결하십시오. `sifli-pan`이 보이지 않으면 휴대폰을 재시작하면 도움이 될 수 있다고 SiFli 가이드는 설명합니다. | Personal Hotspot 사용 가능 여부, 데이터 한도, 연결할 수 있는 디바이스 수는 통신사와 iPhone 기종에 따라 달라집니다. 지원하는 모든 iOS/iPadOS 릴리스, 기종 등급, 통신사 요금제를 테스트하십시오. Wi-Fi 핫스팟 동작만으로 지원 여부를 추론하지 마십시오. |
-| **Android** | [Android 도움말](https://support.google.com/android/answer/9059108)은 대부분의 Android 휴대폰이 Bluetooth로 모바일 데이터를 공유할 수 있다고 설명합니다. 먼저 페어링하고, 다른 디바이스의 Bluetooth 네트워크 연결을 구성한 다음, **Bluetooth 테더링**을 활성화합니다. | `pan_cmd conn_pan`을 실행하기 전에 Bluetooth 테더링을 활성화하십시오. 설정 이름과 메뉴 위치는 제조사, Android 릴리스, 기업 정책에 따라 다릅니다. 인증한 각 휴대폰에서 사용한 정확한 경로를 기록하십시오. | Google은 이 기능이 모든 Android 휴대폰이 아니라 *대부분의* 휴대폰에서 사용할 수 있다고 설명합니다. 통신사가 테더링을 제한하거나 요금을 부과할 수 있고, 제조사가 해당 제어를 숨기거나 변경할 수 있습니다. Android 버전만 믿지 말고 출하할 기종/OS/통신사 조합을 테스트하십시오. |
-| **HarmonyOS 및 기타 Android 파생 모바일 시스템** | 이 가이드에는 이들 시스템에 대한 플랫폼 전반의 PAN 지원 주장이 없습니다. 이들의 Bluetooth 및 테더링 구현은 Android에서 파생되었더라도 모델, 시장, 릴리스, 통신사 구성, 디바이스 관리 정책에 따라 다를 수 있습니다. | Bluetooth 테더링 제어를 찾고, 휴대폰과 SF32 디바이스를 페어링한 다음, PAN 예제로 실제 IP 트래픽을 확인하십시오. | 정확한 기종, OS 빌드, 지역, 통신사가 Android에 사용한 것과 동일한 검증 기록을 통과할 때까지 **인증 필요**로 취급하십시오. 브랜드나 Bluetooth 페어링만으로 지원을 홍보하지 마십시오. |
+| **Android** | [Android 도움말](https://support.google.com/android/answer/9059108)은 대부분의 Android 휴대폰이 Bluetooth로 모바일 데이터를 공유할 수 있다고 설명합니다. 먼저 페어링하고, 다른 디바이스의 Bluetooth 네트워크 연결을 구성한 다음, **Bluetooth 테더링**을 활성화합니다. | `pan_cmd conn_pan`을 실행하기 전에 Bluetooth 테더링을 활성화하십시오. 설정 이름과 메뉴 위치는 제조사, Android 릴리스, 기업 정책에 따라 다릅니다. 검증한 각 휴대폰에서 사용한 정확한 경로를 기록하십시오. | Google은 이 기능이 모든 Android 휴대폰이 아니라 *대부분의* 휴대폰에서 사용할 수 있다고 설명합니다. 통신사가 테더링을 제한하거나 요금을 부과할 수 있고, 제조사가 해당 제어를 숨기거나 변경할 수 있습니다. Android 버전만 믿지 말고 출하할 기종/OS/통신사 조합을 테스트하십시오. |
+| **HarmonyOS 및 기타 Android 파생 모바일 시스템** | 이 가이드에는 이들 시스템에 대한 플랫폼 전반의 PAN 지원 주장이 없습니다. 이들의 Bluetooth 및 테더링 구현은 Android에서 파생되었더라도 모델, 시장, 릴리스, 통신사 구성, 디바이스 관리 정책에 따라 다를 수 있습니다. | Bluetooth 테더링 제어를 찾고, 휴대폰과 SF32 디바이스를 페어링한 다음, PAN 예제로 실제 IP 트래픽을 확인하십시오. | 정확한 기종, OS 빌드, 지역, 통신사가 Android에 사용한 것과 동일한 검증 기록을 통과할 때까지 **검증 필요**로 취급하십시오. 브랜드나 Bluetooth 페어링만으로 지원을 홍보하지 마십시오. |
 
 </div>
 
@@ -185,18 +185,18 @@ README는 Bluetooth 주소 할당도 진단 항목으로 제시합니다. `nvds 
 | PAN은 연결되지만 네트워크 명령(예: `weather`)이 실패함 | BNEP 수립, 할당된 IP 주소, 라우트, DNS, 엔드포인트 가용성, 해당하는 경우 TLS 오류를 확인하십시오. README는 `nvds get_mac`으로 Bluetooth MAC OUI를 확인할 것도 권장합니다. `nvds update addr 6 ...`로 변경하는 것은 허가된 할당 정책 하에서만 하십시오. 잘못된 OUI가 유일한 원인은 아닙니다. |
 | 휴대폰이 디바이스를 보지 못하거나 연결되지 않음 | 연결하기 *전에* 휴대폰의 테더링/네트워크 공유가 활성화되어 있는지, 그리고 디바이스가 검색 가능한 상태(inquiry/page scan 활성)인지 확인하십시오. |
 | 휴대폰은 페어링되지만 `weather` 또는 다른 IP 작업이 실패함 | 페어링은 PAN NAP 서비스가 있음을 입증하지 않습니다. Bluetooth 테더링/Personal Hotspot이 활성화되어 있고 업스트림 연결이 동작하는지 확인하십시오. 셀룰러 백홀의 경우 통신사의 허용 여부를 확인하고, Android Wi-Fi 공유의 경우 해당 기종/OS의 지원 여부를 확인하십시오. 테스트한 조합을 지원 매트릭스와 대조하십시오. |
-| 휴대폰 측 네트워크 상태가 변경된 후 PAN이 끊김 | 발생할 수 있는 현상이므로 지원하는 각 휴대폰에서 이 동작을 인증하십시오. `pan_cmd conn_pan`으로 재연결하거나 `pan_cmd set_retry_flag 1`을 활성화하고, 위의 재시도 한도로 자동 시도를 제한하십시오. |
+| 휴대폰 측 네트워크 상태가 변경된 후 PAN이 끊김 | 발생할 수 있는 현상이므로 지원하는 각 휴대폰에서 이 동작을 검증하십시오. `pan_cmd conn_pan`으로 재연결하거나 `pan_cmd set_retry_flag 1`을 활성화하고, 위의 재시도 한도로 자동 시도를 제한하십시오. |
 | PAN을 통한 OTA가 도중에 실패함 | PAN 자체에 원인이 있다고 가정하지 말고 다른 OTA 전송 수단과 똑같이 취급하십시오. [OTA와 DFU](../../develop/firmware-topics/ota-dfu.md)에 따라 이미지 URL, 파티션 레이아웃, 롤백 동작을 확인하십시오. |
 
 </div>
 
 ## 브링업 체크리스트 { #bring-up-checklist }
 
-- [ ] 정확한 SDK와 보드에 대해 Classic Bluetooth 하드웨어와 PAN 스택/구성을 확인하십시오. 참조한 예제는 SF32LB52x/56x/58x를 나열하며, SF32LB57x는 별도로 인증하십시오. SF32LB55x는 BLE 전용입니다.
+- [ ] 정확한 SDK와 보드에 대해 Classic Bluetooth 하드웨어와 PAN 스택/구성을 확인하십시오. 참조한 예제는 SF32LB52x/56x/58x를 나열하며, SF32LB57x는 별도로 검증하십시오. SF32LB55x는 BLE 전용입니다.
 - [ ] PAN의 휴대폰 테더링 의존성이 제품의 연결 모델에 맞는지, 아니면 전용 Wi-Fi 라디오가 실제로 필요한지 결정하십시오.
 - [ ] 타깃 보드에서 `example/bt/pan`을 브링업하고 휴대폰 측 테더링 설정(iOS/iPadOS Personal Hotspot 또는 Android Bluetooth 테더링)을 확인하십시오.
 - [ ] 실제 PAN 연결과 최소 하나의 네트워크 작업(예: 예제의 `weather` 명령)을 종단 간으로 검증하십시오.
-- [ ] 의도한 모든 휴대폰 기종, OS 빌드, 지역/통신사 요금제, 테더링 설정 경로를 인증하십시오. 일반적인 "iOS/Android 지원" 주장으로 출하하지 마십시오.
+- [ ] 의도한 모든 휴대폰 기종, OS 빌드, 지역/통신사 요금제, 테더링 설정 경로를 검증하십시오. 일반적인 "iOS/Android 지원" 주장으로 출하하지 마십시오.
 - [ ] 네트워크 기능에 의존하기 전에 디바이스의 Bluetooth MAC OUI가 유효한지 확인하십시오.
 - [ ] PAN을 OTA에 사용하는 경우, 출하 전에 롤백 동작을 포함하여 `pan_cmd ota_pan` 경로 전체를 테스트하십시오.
 - [ ] 제품이 휴대폰이 범위 안에 있을 것으로 예상하는 빈도에 맞춰 재연결/자동 연결 동작(`set_retry_flag`, `set_retry_time`)을 설계하십시오.

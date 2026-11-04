@@ -1,6 +1,6 @@
 ---
 icon: lucide/waypoints
-description: "Reference-design journeys for μForge: compare reproducible hardware and software validation paths, then follow the one closest to your product."
+description: "Reference-design journeys for μForge: compare hardware and software validation paths, then choose the one closest to your product."
 tags:
     - Hardware
     - Reference design

@@ -106,7 +106,7 @@ tags:
 | PA33 | 15 | I/O/T | GPIO_A33 | I | GPIO_A33, PA33_I2C_UART, PA33_TIM, #GPADC_CH6 |
 | PA32 | 16 | I/O/T | GPIO_A32 | O | GPIO_A32, PA32_I2C_UART, PA32_TIM, #GPADC_CH5 |
 | VDD33_VOUT2 | 17 | P | VDD33_VOUT2 | P | Выход питания 3,3 V |
-| PA24 | 18 | I/O/T | GPIO_A24 | O | GPIO_A24, SPI1_DI, I2S1_MCLK, PA24_I2C_UART, PA24_TIM, #WKUP_PIN0 |
+| PA24 | 18 | I/O/T | GPIO_A24 | O | GPIO_A24, SPI1_DIO, I2S1_MCLK, PA24_I2C_UART, PA24_TIM, #WKUP_PIN0 |
 | PA25 | 19 | I/O/T | GPIO_A25 | O | GPIO_A25, SPI1_DI, I2S1_SDO, PA25_I2C_UART, PA25_TIM, #XTAL32K_EXT, #WKUP_PIN1 |
 | PA26 | 20 | I/O/T | GPIO_A26 | O | GPIO_A26, PA26_I2C_UART, PA26_TIM, #WKUP_PIN2 |
 | PA27 | 21 | I/O/T | GPIO_A27 | O | GPIO_A27, PA27_I2C_UART, PA27_TIM, #WKUP_PIN3 |
@@ -147,6 +147,9 @@ tags:
 | PA12 | 68 | I/O/T | GPIO_A12 | O | GPIO_A12, MPI2_CS, SD1_DIO2, PA12_I2C_UART, PA12_TIM |
 
 </div>
+
+!!! important "В источниках SiFli указаны разные функции SPI1 для PA24"
+    В DS5203 V0.3 для PA24 указана функция `SPI1_DI`; в таблице контактов DevKit-LCD от OpenSiFli указана `SPI1_DIO`, а руководство по проектированию EPD использует PA24 как `SPI1_DO` для подключения CMD карты TF. В этой таблице используется обозначение OpenSiFli `SPI1_DIO`. Эти обозначения не позволяют определить направление сигнала и настройку мультиплексора контактов для всех версий SDK и модуля. Перед назначением PA24 проверьте мультиплексор контактов целевого SDK и точную ревизию модуля. См. [таблицу контактов DevKit-LCD](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-DevKit-LCD.md) и [руководство по проектированию EPD-дисплея](https://wiki.sifli.com/hardware/SF32LB52-MOD-1-EPD-HW-Application.html).
 
 *Обозначения: P — питание; I — вход; O — выход; T — можно настроить как высокоимпедансный; AO — аудиовыход; AI — аудиовход.*
 

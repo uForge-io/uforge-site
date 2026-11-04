@@ -34,13 +34,13 @@ Choose the chip or module at the center of your design, then open the matching i
 
 <div align="center" markdown style="max-width: 100%; overflow-x: auto;">
 
-| Selected chip family | Hardware design guide | Checklist | Start here when |
+| Selected chip family | Hardware design guide | Checklist | Recommended use |
 |:---------------------|:----------------------|:----------|:----------------|
-| SF32LB52x | [Guide](chip-guides/SF32LB52x_hardware_design_guide.md) | [Checklist](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | Designing an SF32LB52x chip-down board. |
-| SF32LB55x | [Guide](chip-guides/SF32LB55x_hardware_design_guide.md) | [Checklist](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | Designing an SF32LB55x chip-down board. |
-| SF32LB56x | [Guide](chip-guides/SF32LB56x_hardware_design_guide.md) | [Checklist](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | Designing an SF32LB56x chip-down board. |
-| SF32LB57x | [Guide](chip-guides/SF32LB57x_hardware_design_guide.md) | [Schematic](chip-guides/SF32LB57x_schematic_checklist.md) / [PCB layout](chip-guides/SF32LB57x_pcb_layout_checklist.md) | Designing an SF32LB57x chip-down board. |
-| SF32LB58x | [Guide](chip-guides/SF32LB58x_hardware_design_guide.md) | [Checklist](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | Designing an SF32LB58x chip-down board. |
+| SF32LB52x | [Guide](chip-guides/SF32LB52x_hardware_design_guide.md) | [Checklist](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | Chip-down board design for SF32LB52x. |
+| SF32LB55x | [Guide](chip-guides/SF32LB55x_hardware_design_guide.md) | [Checklist](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | Chip-down board design for SF32LB55x. |
+| SF32LB56x | [Guide](chip-guides/SF32LB56x_hardware_design_guide.md) | [Checklist](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | Chip-down board design for SF32LB56x. |
+| SF32LB57x | [Guide](chip-guides/SF32LB57x_hardware_design_guide.md) | [Schematic](chip-guides/SF32LB57x_schematic_checklist.md) / [PCB layout](chip-guides/SF32LB57x_pcb_layout_checklist.md) | Chip-down board design for SF32LB57x. |
+| SF32LB58x | [Guide](chip-guides/SF32LB58x_hardware_design_guide.md) | [Checklist](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | Chip-down board design for SF32LB58x. |
 
 </div>
 

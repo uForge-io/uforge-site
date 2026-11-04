@@ -297,7 +297,7 @@ Use o projeto de referência como base para o circuito do botão com encoder rot
 
 <div align="center"><em>Figura 5.5-5: Circuito do botão com encoder rotativo mecânico</em></div>
 
-Os sinais A e B do encoder se conectam a PA35 e PA36 por resistores de 0 Ω. Cada sinal tem um pull-up de 200 kΩ para VDD33_LDO2_VOUT e proteção ESD; C0703 e C0706 estão marcados como NF (não montados). Os nomes dos sinais também indicam funções USB/UART multiplexadas. Verifique conflitos de pinos antes de adotar essa atribuição.
+Os sinais A e B do encoder se conectam a PA35 e PA36 por resistores de 0 Ω. Cada sinal tem um pull-up de 200 kΩ para VDD33_LDO2_VOUT e proteção ESD; C0703 e C0708 estão marcados como NF (não montados). Os nomes dos sinais também indicam funções USB/UART multiplexadas. Verifique conflitos de pinos antes de adotar essa atribuição.
 
 **Erros frequentes: botões**
 

@@ -77,7 +77,7 @@ Die U-Variante verwendet ein QFN68L-Gehäuse. Die V-Variante verwendet ein WBBGA
 - Anforderungen an 48-MHz- und 32,768-kHz-Quarze und empfohlene Quarzmodelle.
 - Anforderungen an Bluetooth-RF-Design und Antennenanpassung.
 - SPI/QSPI- und JDI-Display bei U; SPI/QSPI-, MCU8080-, DPI- und JDI-Display bei V.
-- Optionen für externen Speicher und Boot-Speicher, darunter SDIO-Anbindungen für eMMC und SD NAND.
+- Optionen für externen Speicher und Boot-Speicher, darunter SDIO, eMMC und SD NAND.
 - Tasten, Vibrationsmotor, Audio-Schnittstelle, PBR-Pins, Sensoren, UART/I2C, GPTIM, Debug/Flashen und Kalibrierung.
 
 ### 3.4. Typische Anwendungen { #34-typical-applications }
@@ -166,7 +166,7 @@ Am besten dient die Checkliste als Abnahmeprotokoll und nicht nur als Leseliste:
 
 [SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## Fortsetzung des Hardware-Design-Leitfadens { #continue-the-design-guide }
+### 4.5. Fortsetzung des Hardware-Design-Leitfadens { #continue-the-design-guide }
 
 Der vollständige Leitfaden setzt sich auf den folgenden Seiten fort. Jede behandelt eine Phase des Designprozesses und ist von hier aus erreichbar.
 

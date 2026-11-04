@@ -64,7 +64,7 @@ Siga esta ordem:
 2. Escolha o framework correspondente.
 3. Escolha o exemplo que cobre o periférico mais complexo.
 4. Escolha o middleware necessário.
-5. Escolha o exemplo que atenda às restrições de energia ou de memória.
+5. Verifique se o exemplo atende às restrições de consumo de energia e memória do produto.
 
 Por exemplo, um produto de áudio Bluetooth deve começar por um exemplo de áudio/Bluetooth próximo do caso de uso, e não por um `hello_world` simples, mesmo que este seja mais fácil de entender.
 
@@ -78,7 +78,7 @@ Por exemplo, um produto de áudio Bluetooth deve começar por um exemplo de áud
 
 Esse fluxo consome mais tempo na primeira hora, mas poupa muito tempo quando ocorre o primeiro problema sério.
 
-## Evidências a manter { #evidence-to-keep }
+## O que registrar { #evidence-to-keep }
 
 Para cada exemplo que se tornar a base de um produto, registre:
 

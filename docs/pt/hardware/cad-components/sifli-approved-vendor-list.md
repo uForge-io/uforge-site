@@ -378,7 +378,7 @@ Antes de congelar o esquemático ou a BOM, confira cada componente escolhido na 
 - [ ] Os tempos de apagamento, programação e leitura da Flash foram testados na faixa de tensão e temperatura prevista para o produto.
 - [ ] Foi identificado pelo menos um fornecedor alternativo para cada item de alto risco da BOM, como cristais, indutores, Flash e painéis de display.
 
-Este checklist é intencionalmente mais rigorosa do que “a peça aparece na AVL”. A AVL reduz o espaço de busca, mas a liberação do produto ainda depende de evidências obtidas na placa.
+Este checklist é intencionalmente mais rigoroso do que “a peça aparece na AVL”. A AVL reduz o espaço de busca, mas a liberação do produto ainda depende de evidências obtidas na placa.
 
 ## Checklist de fornecimento { #sourcing-checklist }
 

@@ -12,7 +12,7 @@ tags:
 
 The SF32LB52-DevKit-Nano is a small SF32LB52x development board for compact prototypes and embedded evaluation. It uses castellated half-holes around the board edge, making it suitable both as a stand-alone development board and as a solder-down module in early product prototypes.
 
-The board measures 51mm × 20.32mm and exposes the key SF32LB52x resources needed for GPIO, UART, I2C, SPI, LCD, I2S, GPADC, PWM, USB, and analog audio development.
+The board measures 51 mm × 20.32 mm and exposes the key SF32LB52x resources needed for GPIO, UART, I2C, SPI, LCD, I2S, GPADC, PWM, USB, and analog audio development.
 
 ![SF32LB52-DevKit-Nano front view](assets/sf32lb52x/Nano_Front_look.png){ loading="lazy" }
 <div align="center"><em>SF32LB52-DevKit-Nano — Front View</em></div>
@@ -36,14 +36,22 @@ The board measures 51mm × 20.32mm and exposes the key SF32LB52x resources neede
 
 The N4 variant is suitable for compact control, Bluetooth, and simple UI applications. N16R16 pairs 16 MB OPI-PSRAM with 16 MB QSPI-NOR, while A128R16 pairs 16 MB OPI-PSRAM with 128 MB QSPI-NAND. Both suit applications that need larger display assets, external file systems, or a frame buffer or working memory in PSRAM.
 
-**Source discrepancy — verify before selection:** SiFli's [detailed Nano board guide](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html) calls its 16 MB OPI-PSRAM + 16 MB NOR configuration `R16N16 V1.0.0`; the [current development-board model guide](https://wiki.sifli.com/en/board/devkit_guide.html) lists the same memory configuration as `N16R16` and separately lists `A128R16` with 16 MB OPI-PSRAM + 128 MB QSPI-NAND. The detailed guide does not describe A128R16 specifically. For that SKU, rely on the model-guide listing rather than transferring details from the N16R16 board description. Before choosing firmware or a storage layout, verify the board marking and the current schematic/BOM.
+**Source discrepancy — verify before selection:** SiFli's [detailed Nano board guide](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html) calls its 16 MB OPI-PSRAM + 16 MB NOR configuration `R16N16 V1.0.0`; the [current development-board model guide](https://wiki.sifli.com/en/board/devkit_guide.html) lists the same memory configuration as `N16R16` and separately lists `A128R16` with 16 MB OPI-PSRAM + 128 MB QSPI-NAND.
 
-The SiFli sources also differ slightly on the Nano board dimensions: the detailed guide gives 21 × 51 mm, while the model guide specifies 51 × 20.32 mm. The 51 mm side agrees, but the shorter dimension differs by 0.68 mm. This page uses the more precise model-guide value; verify the mechanical drawing for the exact board revision before enclosure or carrier-board design.
+The detailed guide does not describe A128R16 specifically. For that SKU, rely on the model-guide listing rather than transferring details from the N16R16 board description.
+
+Before choosing firmware or a storage layout, verify the board marking and the current schematic/BOM.
+
+**Dimensions discrepancy:** the detailed guide gives 21 × 51 mm, while the model guide specifies 51 × 20.32 mm. The 51 mm side agrees, but the shorter dimension differs by 0.68 mm. This page uses the more precise model-guide value.
+
+Before enclosure or carrier-board design, verify the mechanical drawing for the exact board revision.
 
 ## Board Highlights { #board-highlights }
 
 - 51 mm × 20.32 mm compact board
 - Castellated half-hole edge layout for solder-down prototypes
+- 48 MHz and 32.768 kHz crystals, plus an onboard PCBA antenna
+- 17 GPIOs exposed through the LCC castellated edge and 13 through the LGA pad group; 3 UARTs, 4 I2C, 2 GPTIM, 2 SPI, and 3 GPADC resources
 - USB Type-C power and USB-to-UART download/debug through CH340N
 - GPIO, UART, I2C, SPI, GPADC, PWM, I2S, PDM, and wake-capable pins exposed
 - QSPI LCD support through a 16-pin FPC path, typically using a 22-pin-to-16-pin adapter cable
@@ -105,11 +113,11 @@ Use the USB Type-C UART interface for firmware download and serial logs.
 
 ## Castellated Pin Summary { #castellated-pin-summary }
 
-The Nano board exposes two edge pin groups. The first group carries audio, SPI1, debug UART, USB-adjacent power, and GPADC-capable pins. The second group carries SPI2, USB FS, wake-capable GPIOs, and power.
+The Nano board exposes two LCC edge groups: J1 on the left carries audio, SPI1, debug UART, and GPADC-capable pins; J2 on the right carries SPI2, USB FS, wake-capable GPIOs, and power. All GPIOs support UART, I2C, and GPTIM pin-mux configurations. The tables below summarize selected functions, not every mux option or reset pull state; consult the schematic and design files before electrical design.
 
-### Front-Side Edge Signals { #front-side-edge-signals }
+### J1 — Left LCC Edge Signals { #front-side-edge-signals }
 
-<div align="center"><em>Front-Side Edge Signal Map</em></div>
+<div align="center"><em>J1 Left LCC Edge Signal Map</em></div>
 
 <div align="center" markdown>
 
@@ -134,9 +142,9 @@ The Nano board exposes two edge pin groups. The first group carries audio, SPI1,
 
 </div>
 
-### Back-Side Edge Signals { #back-side-edge-signals }
+### J2 — Right LCC Edge Signals { #back-side-edge-signals }
 
-<div align="center"><em>Back-Side Edge Signal Map</em></div>
+<div align="center"><em>J2 Right LCC Edge Signal Map</em></div>
 
 <div align="center" markdown>
 
@@ -163,7 +171,7 @@ The Nano board exposes two edge pin groups. The first group carries audio, SPI1,
 
 ## LCD Interface { #lcd-interface }
 
-The board supports QSPI LCD panels through a 16-pin FPC signal set. The original board note describes connection to the Huangshan Pi 1.85-inch AMOLED screen through a 22-pin-to-16-pin FPC cable.
+The board supports SPI, DSPI, and Quad-SPI LCD modes through a 16-pin, 0.5 mm-pitch FPC signal set, including DDR-mode QSPI. The original board note describes connection to the Huangshan Pi 1.85-inch AMOLED screen through a 22-pin-to-16-pin FPC cable.
 
 ![22-pin to 16-pin FPC adapter cable](assets/sf32lb52x/22p-to-16p.png){ loading="lazy" }
 <div align="center"><em>22-Pin to 16-Pin FPC Adapter Cable</em></div>
@@ -195,7 +203,7 @@ The board supports QSPI LCD panels through a 16-pin FPC signal set. The original
 
 ## External Flash and SDIO Pins { #external-flash-and-sdio-pins }
 
-The N16R16 variant includes external 16MB QSPI-NOR Flash. The storage pin group is:
+The N16R16 variant includes external 16 MB QSPI-NOR Flash. The storage pin group is:
 
 <div align="center"><em>External Flash and SDIO Pin Group</em></div>
 
@@ -214,9 +222,11 @@ The N16R16 variant includes external 16MB QSPI-NOR Flash. The storage pin group 
 
 These pins may be occupied by the mounted Flash depending on the variant. Check the exact board assembly before using them as expansion pins.
 
+The detailed board guide also lists WSON8 footprint options for SPI NOR (8 × 6 mm or 6 × 5 mm), SPI NAND, and SD NAND (both 8 × 6 mm). Flash population varies by board; verify the exact schematic and BOM before selecting or routing a device.
+
 ## Audio Expansion { #audio-expansion }
 
-The Nano board exposes analog microphone input, microphone bias, and differential analog audio output. Add an external microphone circuit and audio power amplifier as required by the target product.
+The Nano board exposes analog microphone input, microphone bias, PDM digital microphone signals, and differential analog audio output. The analog input can connect to an analog or silicon microphone. Add an external Class-AB or Class-D audio power amplifier to drive a speaker.
 
 ## SDK Build Targets { #sdk-build-targets }
 

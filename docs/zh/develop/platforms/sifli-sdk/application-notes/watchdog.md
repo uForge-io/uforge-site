@@ -14,7 +14,7 @@ SiFli SDK 从两个层面介绍看门狗：HAL 暴露的硬件看门狗，以及
 <em>表：各系列资料中说明的看门狗行为</em>
 
 | 系列 | HAL 看门狗行为 | HAL 指南中说明的时钟行为 |
-|---|---|
+|---|---|---|
 | SF32LB52x | HAL 指南说明 HCPU 和 LCPU 各有专用看门狗，可触发中断或复位各自子系统；此外还有可复位整颗芯片的系统级 IWDT。 | 计数器以 32K 时钟为基准；该指南未说明 52x 专属的时钟选择选项。 |
 | SF32LB55x | HCPU WDT1 和 LCPU WDT2 可触发中断，硬件复位仅作用于各自子系统。系统级 IWDT 不产生中断，但可复位整颗芯片。 | 可选择 RC10K 或 32K LXT。 |
 | SF32LB56x / SF32LB58x | HAL 指南说明 WDT1/WDT2 增加了复位整颗芯片的能力。 | 使用 RC10K，不再取自 32K 低功耗时钟。 |
@@ -22,7 +22,7 @@ SiFli SDK 从两个层面介绍看门狗：HAL 暴露的硬件看门狗，以及
 </div>
 
 !!! warning "RT-Thread 看门狗使用指南的适用范围"
-    [看门狗使用指南](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/watchdog.html) 的发布路径位于 `sf32lb52x`，但正文明确写的是 SF32LB55X。下文提到的 30 秒默认超时、IDLE 线程喂狗、睡眠行为和应用层复位流程，均应视为该指南所述 55x 配置的说明，不能直接推广为所有 SF32 系列的共同保证。请根据目标系列的资料和生成的配置逐项确认。
+    [看门狗使用指南](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/watchdog.html) 的发布路径位于 `sf32lb52x`，但正文明确写的是 SF32LB55X。下文提到的 30 秒默认超时、IDLE 线程喂狗、睡眠行为和复位行为，均应视为该指南所述 55x 配置的说明，不能直接推广为所有 SF32 系列的共同保证。请根据目标系列的资料和生成的配置逐项确认。
 
 ## 使能和配置看门狗 { #enable-and-configure-the-watchdog }
 
@@ -62,6 +62,8 @@ rt_hw_watchdog_pet();
 - HCPU 使用系统看门狗，超时会重启整个芯片。
 - LCPU 使用 LCPU 子系统看门狗，超时先产生中断，再由中断处理函数通过软件触发整个芯片重启。
 
+思澈科技（SiFli）Wiki 的看门狗说明还补充了 `Standby` 流程：看门狗硬件本身不会掉电；RT-Thread 会停止 WDT，并在 resume 路径中重新初始化，使计数重新开始。这里的“关闭”指软件停止看门狗，不表示看门狗硬件断电。
+
 ## 验证流程 { #validation-sequence }
 
 1. 记录芯片系列、SDK 版本、超时时间、喂狗负责方和睡眠模式。
@@ -76,5 +78,6 @@ rt_hw_watchdog_pet();
 - [Watchdog Usage Guide（英文；发布路径为 SF32LB52x，正文注明 SF32LB55X）](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/watchdog.html)
 - [SF32LB52x HAL WDT 指南（英文）](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/hal/wdt.html)
 - [SF32LB55x HAL WDT 指南（中文，含 56x/58x 差异说明）](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/hal/wdt.html)
+- [思澈科技（SiFli）Wiki：看门狗相关说明（中文）](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/faq/mcu/wdt.md)
 
 以下系列专属看门狗应用笔记路径目前尚未核实：`sf32lb55x/app_note/watchdog.html`、`sf32lb56x/app_note/watchdog.html` 和 `sf32lb58x/app_note/watchdog.html`。搜索和直接打开的结果均无定论，不能据此认定这些路径会返回 404。

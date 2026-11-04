@@ -23,17 +23,17 @@ La section Produits SF32 vous aide à passer d’une idée de produit à une con
 | Transformer une idée en plan produit | [Planifier un produit](family/product-planning.md) | Une démarche par étapes, des exigences et du choix du composant à la validation de la carte et à la préparation de la production. |
 | Choisir une puce ou un module | [Sélecteur de produits SF32](product-selector.md) | Un outil interactif pour établir une présélection de puces et de modules, consulter les critères de choix et accéder aux présentations des produits. Les cartes de développement sont répertoriées séparément pour la validation. |
 | Réutiliser une base technique | [Conceptions de référence](../hardware/reference-designs/reference-designs.md) | Des bases matérielles et logicielles reproductibles, leurs points de validation et leurs limites de réutilisation. |
-| Finaliser une conception de carte | [Conception pour la production](../hardware/design-for-production.md) | Guides de conception, listes de contrôle, définitions d’interfaces, composants de la liste approuvée et bibliothèques EDA officielles. |
+| Préparer une conception de carte pour la production | [Conception pour la production](../hardware/design-for-production.md) | Guides de conception, listes de contrôle, définitions d’interfaces, composants de la liste approuvée et bibliothèques EDA officielles. |
 
 </div>
 
-## Contenu de cette section { #what-this-section-covers }
+## Suivre le parcours de conception matérielle { #what-this-section-covers }
 
-Consultez d’abord la [présentation de la famille SF32](family/SF32_family.md) pour découvrir les familles disponibles et leurs principales différences fonctionnelles. Une fois la famille et le boîtier ciblés, les [règles de nomenclature](family/SF32_namingrule.md) vous aideront à décoder la référence complète.
+Consultez d’abord la présentation de la famille SF32 pour découvrir les familles disponibles et leurs principales différences fonctionnelles. Une fois la famille et le boîtier ciblés, les [règles de nomenclature](family/SF32_namingrule.md) vous aideront à décoder la référence complète.
 
-Utilisez le [sélecteur de produits SF32](product-selector.md) lorsque le choix dépend de l'alimentation, du boîtier, de l'affichage, de l'audio, de la mémoire, des GPIO, de la connectivité ou de fonctions matérielles spécialisées. Il permet d'établir une première liste de candidats ; vérifiez ensuite la référence exacte, le boîtier, les limites électriques et le routage sur la carte dans la documentation SiFli correspondante. La [FAQ SF32](family/faq.md) répond aux questions courantes sur le choix, la commande et la personnalisation des composants.
+Utilisez le sélecteur de produits SF32 lorsque le choix dépend de l'alimentation, du boîtier, de l'affichage, de l'audio, de la mémoire, des GPIO, de la connectivité ou de fonctions matérielles spécialisées. Il permet d'établir une première liste de candidats ; vérifiez ensuite la référence exacte, le boîtier, les limites électriques et le routage sur la carte dans la documentation SiFli correspondante. La [FAQ SF32](family/faq.md) répond aux questions courantes sur le choix, la commande et la personnalisation des composants.
 
-Une fois l’orientation choisie, poursuivez avec les [conceptions de référence](../hardware/reference-designs/reference-designs.md) et la [préparation à la production](../hardware/design-for-production.md). Ces ressources relient le choix du composant au matériel de référence, aux recommandations de conception, aux bibliothèques CAO, aux décisions relatives à la nomenclature (BOM), aux listes de contrôle de revue et aux preuves de mise en service.
+Une fois l’orientation choisie, poursuivez avec les conceptions de référence et la préparation à la production. Ces ressources relient le choix du composant au matériel de référence, aux recommandations de conception, aux bibliothèques CAO, aux décisions relatives à la nomenclature (BOM), aux listes de contrôle de revue et aux preuves de mise en service.
 
 ## Accéder directement au matériel { #browse-hardware-directly }
 

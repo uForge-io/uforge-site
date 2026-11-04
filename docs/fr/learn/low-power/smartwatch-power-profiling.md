@@ -151,7 +151,7 @@ Un même scénario peut être négligeable ou dominant selon l'usage du produit.
 
 | Scénario | Occurrences par jour | Durée par occurrence | Durée totale par jour | Part de la charge quotidienne | Statut dans le modèle |
 |:---------|--------------------:|------------------------:|-----------------------:|----------------------:|:----------------|
-| Veille de référence | 1 | Secondes restantes de la journée (`=G7`) | 52 425,7 s | 11,69 % | Activé |
+| Veille de référence | 1 | Secondes restantes de la journée | 52 425,7 s | 11,69 % | Activé |
 | Notification de message | 100 | 5 s | 500 s | 22,62 % | Activé |
 | Alerte d'appel entrant | 10 | 10 s | 100 s | 4,52 % | Activé |
 | Réveil au lever du poignet | 200 | 5 s | 1 000 s | 27,72 % | Activé |
@@ -169,6 +169,8 @@ Un même scénario peut être négligeable ou dominant selon l'usage du produit.
 </div>
 
 Les cellules de scénario vides de la matrice source sont intentionnelles : chaque scénario nommé est suivi de ses lignes de charge pour l'écran, le moteur haptique et `Autre`. Ces lignes héritent des occurrences et de la durée quotidiennes de la ligne de scénario située au-dessus, si bien que la source ne nomme chaque scénario qu'une fois.
+
+Le calcul de la durée quotidienne suppose que les scénarios activés occupent des intervalles distincts, sans chevauchement. Le classeur soustrait la durée des scénarios inclus au nombre total de secondes d'une journée de 24 heures, puis affecte le temps restant à la veille de référence. Il additionne séparément les charges complètes des composants de chaque scénario ; il ne fusionne pas les scènes simultanées. Si des événements du produit se chevauchent, les charges communes peuvent être comptées plusieurs fois et les périodes qui se chevauchent déduites plusieurs fois du temps de veille. Pour modéliser ces chevauchements, créez une scène combinée avec les courants simultanés de ses composants, ou rapprochez les charges communes et le temps d'activité à ne compter qu'une fois avant de sommer. Le second scénario AOD n'est pas inclus dans ce calcul de veille ; les deux scénarios AOD sont à zéro dans cette configuration. Avant d'activer l'un ou l'autre, vérifiez que le calcul de la veille prend en compte toutes les scènes actives.
 
 <div align="center"><em>Tableau : Résultat calculé de l'usage quotidien</em></div>
 

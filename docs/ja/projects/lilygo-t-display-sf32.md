@@ -15,7 +15,7 @@ tags:
 
 ## T-Display-SF32とは { #what-is-t-display-sf32 }
 
-[Xinyuan-LilyGO/T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32)は、SF32LB52x MCU、2.16インチCO5300 AMOLEDディスプレイ、CST9220タッチコントローラーを搭載した開発プラットフォームです。リポジトリーには、16 MBフラッシュ、8 MB PSRAM、BHI260AP IMU、SX1262 LoRa、microSDインターフェース、オーディオ、USB Type-C、充電機能、ボードのピン割り当て、サンプルアプリケーション、ハードウェアファイル、工場出荷時ファームウェア、ボード固有の消費電力レポートが掲載されています。
+[Xinyuan-LilyGO/T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32)は、SF32LB52x MCU、2.16インチCO5300 AMOLEDディスプレイ、CST9220タッチコントローラーを搭載した開発プラットフォームです。リポジトリーには、サンプルアプリケーション、ハードウェア資料、工場出荷時ファームウェア、ボードのピン割り当て、ボード固有の消費電力レポートも含まれます。下の部品一覧に、資料に記載されたハードウェア構成をまとめています。
 
 この構成は、ディスプレイを中心としたウェアラブル機器、携帯型コントローラー、ポータブルセンサー端末、接続型HMIの評価に役立ちます。ただし、本ボードは完成品ではなく、あくまでプラットフォームの参考例です。多くのハードウェア機能が用意されていますが、製品チームは必要な機能を選定し、既知の基準状態を再現したうえで、実際に使用する基板リビジョンで計測し、電源、RF、安全性、ソフトウェア保守、復旧方法を評価・検証する必要があります。
 
@@ -67,9 +67,9 @@ T-Display-SF32は、SF32LB52xのグラフィックス、Bluetooth、オーディ
 
 | 構成要素 | 必要な仕様 | 役割 | 状態 | 入手先 | 互換性・代替に関する注意 |
 |:---------|:-----------|:-----|:-----|:-------|:-------------------------|
-| T-Display-SF32ボード | SF32LB52x。資料に記載された構成は2.16インチCO5300 AMOLED、CST9220タッチ、16 MB Flash、8 MB PSRAM、BHI260AP IMU、SX1262 LoRa、microSD、オンボードマイク、スピーカーアンプ、3.5 mmオーディオジャック、ユーザーボタン3個を含む | 演算、表示、センシング、無線、ストレージ、オーディオを統合した評価環境 | 必須 | [LilyGOリポジトリー](https://github.com/Xinyuan-LilyGO/T-Display-SF32); [ハードウェア資料](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | 正確なボードリビジョンと実装部品を記録してください。すべてのバリアントが同じ部品構成とは限りません |
-| T-SF32-Keyboard拡張ボード | ESP32-C6 Wi-Fi、L76K GPS、TCA8418/AW21009/XL9555キーボードサブシステム、BME280、赤外線送信機、AW86224振動モーターを備えるオプション拡張 | 記載した無線、測位、キーボード、環境センシング、赤外線、触覚機能を追加 | オプション。該当機能を使う場合にのみ必要 | [LilyGOリポジトリー](https://github.com/Xinyuan-LilyGO/T-Display-SF32); [ハードウェア資料](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | これらの部品は単体のT-SF32-Displayには搭載されません。Wi-FiとGPSはUART2を共有するため、拡張ボード上の併用構成を検証してください |
-| USB Type-Cデータ接続と管理された電源 | データ対応ケーブル。電流制限付き電源、または電圧を監視できる保護回路付きバッテリー | 書き込み、ログ取得、安全な電源検証 | 必須 | [LilyGOリポジトリー](https://github.com/Xinyuan-LilyGO/T-Display-SF32) | Type-CのD+/D- はCH343P USB-to-UARTブリッジに接続されています。このポートはUART経由の書き込みとログ取得用で、SF32のネイティブUSBデバイス/ホスト通信には使えません。ボード固有の3.5 V超の起動条件にも従ってください |
+| T-Display-SF32ボード | 資料に記載された構成：SF32LB52x、2.16インチCO5300 AMOLED、CST9220タッチ。<br>16 MB Flash、8 MB PSRAM、BHI260AP IMU、SX1262 LoRa。<br>microSD、オンボードマイク、3.5 mmオーディオジャック付きスピーカーアンプ、ユーザーボタン3個 | 演算、表示、センシング、無線、ストレージ、オーディオを統合した評価環境 | 必須 | [LilyGOリポジトリー](https://github.com/Xinyuan-LilyGO/T-Display-SF32); [ハードウェア資料](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | ボードのリビジョンと実装部品を記録してください。<br>microSDは専用CSを使ってSPI1を共有します。資料に記載された充電ICはSGM41562Bです。<br>SX1262の周波数設定はボードのバージョンによって異なります。実装構成を確認してください。 |
+| T-SF32-Keyboard拡張ボード | ESP32-C6 Wi-Fi、L76K GPS、TCA8418/AW21009/XL9555キーボードサブシステム、BME280、赤外線送信機、AW86224振動モーターを備えるオプション拡張 | 記載した無線、測位、キーボード、環境センシング、赤外線、触覚機能を追加 | オプション。該当機能を使う場合にのみ必要 | [LilyGOリポジトリー](https://github.com/Xinyuan-LilyGO/T-Display-SF32); [ハードウェア資料](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | これらの部品は単体のT-SF32-Displayには搭載されません。<br>Wi-FiとGPSはUART2を共有するため、拡張ボード上の併用構成を検証してください。 |
+| USB Type-Cデータ接続と管理された電源 | データ対応ケーブル。電流制限付き電源、または電圧を監視できる保護回路付きバッテリー | 書き込み、ログ取得、安全な電源検証 | 必須 | [LilyGOリポジトリー](https://github.com/Xinyuan-LilyGO/T-Display-SF32) | Type-CのD+/D-はCH343P USB-to-UARTブリッジに接続されています。<br>このポートはUART経由の書き込みとログ取得用で、SF32のネイティブUSBデバイス/ホスト通信には使えません。<br>ボード固有の3.5 V超の起動条件にも従ってください。 |
 | インターフェース別のテスト用アクセサリー | 試験対象に応じてmicroSDカード、オーディオ負荷/ヘッドホン、または使用地域の周波数帯に適合するLoRa対向機 | オプションのボードインターフェースを検証 | 任意。試験ごとに選択 | [サンプル](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/examples) | 接続前にハードウェア資料で正確なコネクター、電圧、地域、リビジョンを確認してください |
 
 </div>
@@ -91,7 +91,7 @@ T-Display-SF32は、SF32LB52xのグラフィックス、Bluetooth、オーディ
 
 ## サポート対象の基準構成を選ぶ { #choose-a-supported-baseline }
 
-上流リポジトリーでは現在`master`ブランチが使用されており、すべての環境に共通するソフトウェア基準としてタグ付きリリースは示されていません。「最新版」とだけ記録せず、使用するコミットを正確に記録してください。リポジトリーには`firmware/T-SF32-Factory-V1.2`ディレクトリーがありますが、そのディレクトリー名だけでは対応する基板リビジョン、リポジトリーのコミット、書き込み手順を特定できません。
+参照先のリポジトリー文書は`master`ブランチを参照しており、共通のソフトウェア基準となるタグ付きリリースを指定していません。「最新版」とだけ記録せず、使用するコミットを正確に記録してください。リポジトリーには`firmware/T-SF32-Factory-V1.2`ディレクトリーがありますが、そのディレクトリー名だけでは対応する基板リビジョン、リポジトリーのコミット、書き込み手順を特定できません。
 
 <div align="center"><em>表: T-Display-SF32の基準状態の選定</em></div>
 

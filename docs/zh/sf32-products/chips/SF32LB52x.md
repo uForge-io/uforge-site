@@ -12,7 +12,9 @@ tags:
 
 SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧凑型图形 HMI、蓝牙（Bluetooth）外设及其他空间受限 AIoT 产品推出的高性价比 MCU 系列，集成显示、音频、存储和无线连接能力。
 
-平台采用 240 MHz Arm Cortex-M33 STAR-MC1[^1] 应用核心，并集成专用的 24 MHz 低功耗蓝牙控制核心。蓝牙连接和需要持续运行的任务由低功耗核心处理，使应用核心能够流畅运行图形界面和主应用栈。
+平台采用 240 MHz Arm Cortex-M33 STAR-MC1[^1] 应用核心，并集成专用的低功耗蓝牙控制核心；数据手册列出的 LCPU 最高频率为 24 MHz。蓝牙连接和需要持续运行的任务由低功耗核心处理，使应用核心能够流畅运行图形界面和主应用栈。
+
+**LCPU 频率说明：**思澈科技（SiFli）的 [DS5201 V2.5.3 芯片技术规格书](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p5p3.pdf)将 LCPU 最高频率列为 24 MHz。当前 [SF32LB52x 低功耗场景测试报告](https://docs.sifli.com/projects/rpt5202_sf32lb52x-low-power-measurement-report/latest/zh_CN/brief_introduction.html)和 [SDK 低功耗开发指南](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/low_power.html)则列为 48 MHz，但均未说明能解释这一差异的具体 SKU、工作模式或配置条件。本页对比采用数据手册中的数值；不要将 `24/48 MHz` 理解为可选范围或型号差异。请向思澈科技确认具体器件和 SDK 允许的 LCPU 频率。
 
 选型时，可以先按思澈科技（SiFli）芯片型号指南列出的主要型号，区分两类供电方案：
 
@@ -177,7 +179,9 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 ## 常见问题 { #frequently-asked-questions }
 
 **SF32LB52x 的主要规格是什么？**
-SF32LB52x 配备应用 CPU（Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33 @24/48 MHz，专用蓝牙控制器）和 576 KB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 2.0 Lite。封装：QFN68（7 × 7 mm）。USB 2.0 FS。
+SF32LB52x 配备应用 CPU（Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33，最高 24 MHz，专用蓝牙控制器）和 576 KB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 2.0 Lite。封装：QFN68（7 × 7 mm）。USB 2.0 FS。
+
+此处 LCPU 频率采用数据手册的上限，并非已核实的 24/48 MHz 工作范围。请参阅[资料差异说明](#overview)，向 SiFli 确认具体器件和 SDK 的允许频率。
 
 **SF32LB52x 支持哪些显示接口？**
 SPI / DSPI / QSPI / 8080 / EPD / JDI。各接口适用型号见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
@@ -211,3 +215,6 @@ SPI / DSPI / QSPI / 8080 / EPD / JDI。各接口适用型号见[按器件划分�
 ### 参考产品 { #reference-products }
 
 典型 SF32LB52 终端包括入门级智能手表、运动手环、蓝牙配件、紧凑型图形控制器、电子货架标签、智能徽章、便携式标签打印机，以及成本敏感的电动自行车 / 电动滑板车显示设备。
+
+!!! note "自动生成内容"
+    本页在没有专门源文档的情况下编写。使用前，请对照思澈科技（SiFli）官方文档核实其中的技术信息。

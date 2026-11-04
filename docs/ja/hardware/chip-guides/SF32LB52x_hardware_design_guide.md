@@ -60,10 +60,11 @@ SF32LB52xファミリーは、デュアルコアSTAR-MC1プロセッサー、Blu
 - Arm Cortex-M33互換で、FPUとMPUを備えたデュアルコアArm China STAR-MC1プロセッサー
 - デュアルモードBluetooth 5.3無線機能
 - ePicasso 2.0 2D/2.5Dグラフィックスアクセラレーター
+- SiFliの元のハードウェアアプリケーションノートには、AIニューラルネットワークアクセラレーターの内蔵が記載されています。[SiFli-SDK NNACCガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/nnacc.html)にはSF32LB55x、SF32LB56x、SF32LB58xが記載されていますが、SF32LB52xは含まれていません。このアクセラレーターに依存する場合は、対象型番のソフトウェア対応を確認してください。
 - SPI、QSPI、8080、JDI、8ビットEPDインターフェースに対応するディスプレイコントローラー
 - USB 2.0 Full-Speedデバイス
 - 対応バリアントで利用できるSDIO/eMMCストレージインターフェース
-- アナログ／デジタルオーディオインターフェース
+- 内蔵オーディオコーデックとアナログ／デジタルオーディオインターフェース
 - PMU、DC/DCコンバーター、LDOレギュレーターを内蔵
 - 最大44/45本のGPIOを備えるQFN68パッケージ
 
@@ -98,12 +99,12 @@ SF32LB52xファミリーは、電源アーキテクチャに応じて、バッ�
 
     | 型番 | 同一パッケージ内メモリー | 電源 | 設計上の注意 |
     |:---|:---|:---|:---|
-    | SF32LB52BU36 | 1 MB QSPI-NOR Flash | 2.97～3.63 V、充電不可 | `VDD_SIP`には外部1.8 Vまたは3.3 V電源が必要 |
-    | SF32LB52BU56 | 4 MB QSPI-NOR Flash | 2.97～3.63 V、充電不可 | `VDD_SIP`には外部3.3 V電源が必要 |
-    | SF32LB52DUB6 | 4 MB OPI-PSRAM | 1.71～1.98 V、充電不可 | `VDD_SIP`には外部1.8 V電源が必要 |
-    | SF32LB52EUB6 | 4 MB OPI-PSRAM | 2.97～3.63 V、充電不可 | `VDD_SIP`は内蔵LDOから給電可能 |
-    | SF32LB52GUC6 | 8 MB OPI-PSRAM | 2.97～3.63 V、充電不可 | `VDD_SIP`は内蔵LDOから給電可能 |
-    | SF32LB52JUD6 | 16 MB OPI-PSRAM | 2.97～3.63 V、充電不可 | `VDD_SIP`は内蔵LDOから給電可能 |
+    | SF32LB52BU36 | 1 MB QSPI-NOR Flash | 2.97～3.63 V、充電回路なし | `VDD_SIP`には外部1.8 Vまたは3.3 V電源が必要 |
+    | SF32LB52BU56 | 4 MB QSPI-NOR Flash | 2.97～3.63 V、充電回路なし | `VDD_SIP`には外部3.3 V電源が必要 |
+    | SF32LB52DUB6 | 4 MB OPI-PSRAM | 1.71～1.98 V、充電回路なし | `VDD_SIP`には外部1.8 V電源が必要 |
+    | SF32LB52EUB6 | 4 MB OPI-PSRAM | 2.97～3.63 V、充電回路なし | `VDD_SIP`は内蔵LDOから給電可能 |
+    | SF32LB52GUC6 | 8 MB OPI-PSRAM | 2.97～3.63 V、充電回路なし | `VDD_SIP`は内蔵LDOから給電可能 |
+    | SF32LB52JUD6 | 16 MB OPI-PSRAM | 2.97～3.63 V、充電回路なし | `VDD_SIP`は内蔵LDOから給電可能 |
 
     </div>
 

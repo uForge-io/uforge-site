@@ -23,39 +23,39 @@ SF32デバイスは、消費電力、メモリー、基板面積に厳しい制�
 <div align="center"><em>図: グラフィックスリソースから表示までの流れ</em></div>
 
 ```text
-画像・フォント・アニメーション素材
+Source images, fonts, and animations
         │
         ▼
-GraphicsToolで、対応リソースをeZipまたはeZip-A形式に変換
+GraphicsTool converts supported resources to eZip or eZip-A
         │
         ▼
-圧縮リソースをNOR Flash、PSRAM、NAND、またはファイルストレージに保存
+Compressed assets in NOR Flash, PSRAM, NAND, or file storage
         │
         ▼
-必要に応じてeZipハードウェアデコーダでリソースを展開
+eZip hardware decoder expands an asset when required
         │
         ▼
-LVGLなどのUIフレームワークとグラフィックス／ディスプレイドライバー
+LVGL or another UI framework + graphics/display driver
         │
-        ├── CPUによるフォールバックレンダリング
+        ├── CPU fallback rendering
         │
-        └── ePicassoによるピクセル処理の高速化
+        └── ePicasso pixel acceleration
         │
         ▼
-最終的な描画結果を描画バッファまたはフレームバッファに格納
+Final rendered bitmap in a draw buffer or framebuffer
         │
-        ├── 非圧縮の表示経路
+        ├── Uncompressed display path
         │
-        └── 任意：extDMAでTurboPixel形式に圧縮
+        └── Optional: extDMA compresses it into TurboPixel
                     │
                     ▼
-             TurboPixel形式のフレームバッファをPSRAMに格納
+             TurboPixel framebuffer in PSRAM
         │
         ▼
-ディスプレイコントローラーがピクセルをパネルへ転送
+Display controller transfers pixels to the panel
         │
         ▼
-SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDIパネル
+SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
 ```
 
 この処理経路は構成可能で、すべての製品に必須というわけではありません。eZip、ePicasso、TurboPixelや画面全体のフレームバッファーを使わない構成もあります。各機能の対応状況と接続方法は、デバイス、SDK、ディスプレイインターフェース、パネル、ドライバーの構成によって異なります。現行のOpenSiFli LCDCヘッダーは、`HAL_EXTDMA_MODULE_ENABLED`が有効で、チップ系列の条件を満たす場合に`LCDC_SUPPORTED_COMPRESSED_LAYER`を定義します。SF32LB52xとSF32LB57xは対象外です。また、ソースのコメントにはLCPU側では有効化されていないとの記載があります。公開SDKのLCDC機能表ではSF32LB55xの圧縮レイヤー展開が非対応とされているため、55xは実機での一連の動作が確認済みの対応ではなく、条件付きと考えてください。SDKの版、コア、ビルド設定、実機で経路全体を検証してください。詳しくは[TurboPixel](turbopixel.md#availability-in-the-sf32-family)を参照してください。

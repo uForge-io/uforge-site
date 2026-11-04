@@ -21,7 +21,7 @@ tags:
 
 Esta referencia documenta la interfaz externa de comandos AT de la versión V1.2.1 del módulo Bluetooth de modo dual SF32LB57 (SIFLI_AT). Los comandos y las cadenas de respuesta se muestran en monoespaciado; `\r` denota un retorno de carro (0x0D) y `\n` denota un salto de línea (0x0A). Los comandos AT se transmiten como texto ASCII, mientras que los campos binarios en las tramas PDU usan orden de bytes little-endian.
 
-Esta es la especificación completa de la interfaz AT referenciada por la página del Módulo de comandos AT Bluetooth.
+La página del Módulo de comandos AT Bluetooth enlaza esta referencia de V1.2.1. Esto no confirma que otras versiones de firmware admitan los mismos comandos; compruebe la versión del firmware del módulo antes de utilizarlos.
 
 <div align="center"><em>Tabla: Historial de revisiones</em></div>
 
@@ -66,6 +66,9 @@ El módulo Bluetooth de modo dual SF32LB57 ofrece al host una interfaz de comand
 ### Definición de sintaxis { #syntax-definition }
 
 Los comandos AT se transmiten como texto ASCII y terminan con un retorno de carro `\r` (0x0D). El prefijo es `AT+` para los comandos en formato AT o `AT>` para los comandos en formato PDU. En el SF32LB57, el puerto AT es USART1 y usa el formato 8N1, sin control de flujo por hardware, a una velocidad predeterminada de 460800 baudios. Cada trama AT puede ocupar como máximo 512 bytes.
+
+!!! warning "Confirme el límite de longitud de las tramas PDU"
+    La fuente fija un límite de 512 bytes por trama AT, pero también permite un cuerpo PDU de hasta 508 bytes. Al añadir los 8 bytes de entramado del comando ilustrado, se transmitirían 516 bytes por la UART. La fuente no explica cómo se contabilizan esos bytes frente al límite del búfer de recepción. Confirme la longitud máxima de trama PDU que acepta el firmware de destino antes de dimensionar los búferes del host o usar el cuerpo de longitud máxima; no sustituya ninguno de los valores de la fuente por un límite supuesto.
 
 ### Comandos en formato AT { #at-format-commands }
 
@@ -138,7 +141,7 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Elemento | Contenido |
 |:-----|:--------|
 | Comando | `AT+GFWVER?\r` |
-| Respuesta | Éxito: `\r\n+GFWVER:SIFLI_AT_<version>_<build date>\r\n\r\nOK\r\n`; cualquier comando de configuración devuelve `\r\nERROR\r\n`. |
+| Respuesta | Éxito: `\r\n+GFWVER:SIFLI_AT_<version>_<build date>\r\n\r\nOK\r\n`; la forma de ajuste devuelve `\r\nERROR\r\n`. |
 | Parámetros | Ninguno |
 | Notas | Solo consulta. El valor de retorno siempre comienza con `SIFLI_AT_`, seguido del número de versión y la fecha de compilación. |
 
@@ -673,7 +676,7 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Comando | `AT+BAUD?\r` |
 | Respuesta | `\r\n+BAUD:<baud_rate>\r\n\r\nOK\r\n` |
 | Parámetros | `baud_rate`: la tasa de baudios actualmente configurada, en bps. |
-| Notas | Después de establecer la tasa de baudios el dispositivo se reinicia; la nueva tasa de baudios surte efecto después del reinicio. |
+| Notas | Ninguna |
 
 </div>
 
@@ -688,7 +691,7 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Comando | `AT+BAUD=<baud_rate>\r` |
 | Respuesta | Éxito: `\r\nOK\r\n`; fallo: `\r\nERROR\r\n` |
 | Parámetros | `baud_rate`: tasa de baudios serial, en bps. Valores soportados: 38400, 57600, 115200, 230400, 460800, 921600, 1000000. Predeterminado 460800. |
-| Notas | El ajuste actualiza la configuración. |
+| Notas | Al establecer la tasa de baudios se actualiza la configuración y se reinicia el dispositivo; la nueva tasa surte efecto después del reinicio. |
 
 </div>
 

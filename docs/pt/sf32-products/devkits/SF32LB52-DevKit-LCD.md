@@ -29,12 +29,13 @@ A placa reúne em uma única plataforma de avaliação o módulo MCU, conectores
 - Suporte a LCD QSPI/SPI/DSPI por conector FPC de 22 pinos
 - Suporte a LCD MCU/8080 de 8 bits pelo FPC e pelo conector de expansão de 40 pinos
 - Suporte a painel de toque via I2C
-- USB Type-C para gravação/depuração via USB-UART e alimentação da placa
+- USB Type-C para gravação/depuração pelo conversor USB-UART CH343P integrado e para alimentação da placa
 - Interface USB Type-C separada para aplicações USB 2.0 FS
 - Microfone MEMS integrado e amplificador de potência de áudio classe D
 - Slot para cartão MicroSD via SPI
 - Conector de bateria e carregador linear ETA9640P
 - Conector de expansão de 40 pinos para sinais de display, GPIO, armazenamento, áudio e alimentação
+- Chave integrada à placa, botões de função e reset, indicadores RGB/de carga/GPIO/de alimentação e driver da retroiluminação do LCD
 
 ## Quando usar esta placa { #when-to-use-this-board }
 
@@ -108,7 +109,7 @@ Antes de usar o mapa de pinos no projeto de uma placa portadora ou de um disposi
 
 - Alto-falante
 - Cartão TF
-- Bateria Li-ion/Li-poly de uma célula, normalmente de 450 mAh a 500 mAh
+- Bateria Li-ion/Li-poly de uma célula; capacidade recomendada pela SiFli: 450 mAh
 - Segundo cabo USB quando for necessário depurar via UART e testar o USB nativo ao mesmo tempo
 
 ### Configuração básica { #basic-setup }

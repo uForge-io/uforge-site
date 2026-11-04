@@ -70,9 +70,9 @@ PSRAMは一般に、従来のディスクリートDRAMとは異なる動作領�
 <div align="center"><em>図: 組み込みシステムにおける一般的なメモリー配置</em></div>
 
 ```text
-保持が必要なファームウェアイメージ・アセット・設定 -> 不揮発性ストレージ
-使用中の大容量バッファー・フレームバッファー -> PSRAM
-頻繁に使うスタック・制御状態・DMAデータ -> 内蔵SRAM
+Persistent firmware image, assets, settings -> Non-volatile storage
+Active large buffers and framebuffers -> PSRAM
+Hot stacks, control state, DMA data  -> Internal SRAM
 ```
 
 これは配置を考えるための方針であり、すべてのバッファーに適用する固定ルールではありません。小さく繰り返し使う画像はSRAMに置く方が適切な場合もあります。大きなモデルはFlashやPSRAMに保持する場合があります。ディスプレイでは、1画面分のフレームバッファーが内蔵メモリーに収まらないためにPSRAMが必要になることもあります。
@@ -107,6 +107,8 @@ PSRAMの容量が十分でも、帯域幅が足りるとは限りません。対
 データライン列は、クロック、チップセレクト、その他の制御ピンではなく、ペイロード信号を数えています。ここに示すクロック周波数はSiFliの資料に記載された構成例であり、ファミリー全体の上限ではありません。[SF32LB52-DevKit-LCDガイド](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb52x/SF32LB52-DevKit-LCD.md)には144 MHzのOPI-PSRAMと72 MHz・STRモードのQSPI-NORが記載されています。[SF32LB58-DevKit-LCDガイド](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb58x/SF32LB58-DevKit-LCD.md)には144 MHzのHPI-PSRAMと、72 MHzで動作する基板上Flashの構成例があります。QSPI/DTR行は、ダブルデータレート転送の効果を切り分けて示すためだけに同じ72 MHzを使用しています。デュアルチャネル行は両方のチャネルを同時に使えることを前提としており、合計のバス幅を示します。1つのCPUストリームが2倍の実効レートを得られる保証ではありません。これらは**バスのペイロード上限**であり、実測されたアプリケーションのスループットではありません。コマンド/アドレスサイクル、ダミーサイクル、リフレッシュ、読み書きの切り替え、コントローラーの制限、キャッシュミス、DMA調停、PCBのシグナルインテグリティ、同時アクセスするクライアントは、実際に使用できるレートを低下させます。選択したチップ、パッケージ、メモリーデバイス、SDK構成が有効な値を決定します。
 
 SiFliの[チップ型番ガイド](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md)には、デュアルチャネル構成の例として、**SF32LB566VCB36**（MPI1に8 MB OPI-PSRAM、MPI2に4 MB）、**SF32LB586VDD36**（各インターフェースに16 MB HPI-PSRAM）、**SF32LB587VEE56**（各インターフェースに32 MB HPI-PSRAM）が記載されています。これらの型番はメモリー構成の例であり、1つのクライアントが表の合計ペイロードレートを得られる保証ではありません。帯域幅が重要な設計では、正式な注文型番とSDKのメモリーマップを確認してください。同じファミリーでも、パッケージやSKUによって構成が異なる場合があります。
+
+SiFliはSF32LB52ガイドで、記載されたインターフェース周波数が正式リリース時に変更される可能性があると注記しています。
 
 ### 2つのメモリーチャネルが重要な理由 { #why-two-memory-channels-matter }
 

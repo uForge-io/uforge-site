@@ -47,6 +47,8 @@ struct rt_i2c_msg msgs[2] = { /* write register address, then read result */ };
 rt_i2c_transfer(bus, msgs, 2);
 ```
 
+En este fragmento, `msgs` es solo un marcador: inicialice ambos descriptores con la dirección del sensor, las banderas de lectura/escritura, los búferes y sus longitudes antes de llamar a `rt_i2c_transfer()`.
+
 El nombre `i2c1` es ilustrativo. Utilice el nombre de dispositivo I2C registrado por su placa y confirme que `rt_device_find()` devuelve un dispositivo válido antes de usar el bus.
 
 1. Confirme en la hoja de datos la dirección I2C del sensor, el mapa de registros, la tensión de alimentación y las resistencias pull-up necesarias.

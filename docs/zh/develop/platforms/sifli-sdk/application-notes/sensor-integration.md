@@ -87,6 +87,8 @@ menuconfig SENSOR_USING_6D
 - `LSM6DSL_INT_GPIO_BIT` 和 `LSM6DSL_INT2_GPIO_BIT` 在开发板分配了中断引脚时，用于指定这些引脚。
 - `LSM_USING_AWT`、`LSM_USING_PEDO` 和 `LSM6DSL_USE_FIFO` 表示设备相关功能，只有在所选驱动支持时才应定义。
 
+代码块保留了指南中的默认值 `0`（SPI）。若采用下文的 I2C 访问示例，应设置 `LSM6DSL_USING_I2C=1`；若选择 SPI，则使用相应的 SPI 访问代码。
+
 本示例遵循 SF32LB52x 指南。其他系列的指南或 SDK 分支可能采用不同的选项和菜单路径；套用示例前，请先核对目标分支中的实际配置符号。
 
 ### 查找总线并实现寄存器读写 { #find-the-bus-and-implement-register-access }

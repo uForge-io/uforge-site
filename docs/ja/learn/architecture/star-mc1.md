@@ -57,7 +57,7 @@ STAR-MC1では、SoCに実装されたオプションのキャッシュ、TCM、
 | 主要なシステムバスインターフェース | 3 × AMBA AHB-Lite（Harvard） | 3 × AMBA AHB-Lite（Harvard） | 2 × AMBA 5 AHB5インターフェース: C-AHB + S-AHB | 2 × AMBA 5 AHB5インターフェース: C-AHB + S-AHB | 64ビットAMBA 5 AXI5、32ビットAHBペリフェラルインターフェース、64ビットTCM用AHBスレーブインターフェース | 64ビットAMBA 4 AXI、32ビットAHBペリフェラルインターフェース、32ビットTCM用AHBスレーブインターフェース |
 | TrustZoneサポート | なし | なし | オプション、SoC依存 | オプション、SoC依存 | オプション、SoC依存 | なし |
 | DSP命令 | 専用DSP拡張なし | ネイティブDSP拡張 | オプションのDSP拡張 | オプションのDSP拡張 | ネイティブDSP拡張、オプションでHelium（MVE） | ネイティブDSP拡張 |
-| Arm Helium（MVE） | 非対応 | 非対応 | 非対応 | 非対応 | オプション、整数または浮動小数点MVE、設定依存 | 非対応 |
+| Arm Helium（MVE） | 非対応 | 非対応 | 非対応 | 非対応 | オプション。整数MVE-Iのみ、またはMVE-IとFP16/FP32浮動小数点MVE-Fの組み合わせが可能で、構成はFPUと実装に依存します | 非対応 |
 | 浮動小数点ユニット | ネイティブIP機能なし | オプションの単精度 | オプションの単精度 | オプションの単精度 | スカラーFP16/FP32/FP64はオプション。ベクトルFP16/FP32もオプション | オプションの単精度/倍精度 |
 | I-cache / D-cache | プロセッサーIPには含まれず、SoCレベルで追加可能 | プロセッサーIPには含まれず、SoCレベルで追加可能 | プロセッサーIPには含まれず、SoCレベルで追加可能 | プロセッサーIPではオプション。搭載有無と構成は実装に依存 | プロセッサーIPではオプション。搭載有無と構成は実装に依存 | プロセッサーIPではオプション。搭載有無と構成は実装に依存 |
 | Armカスタム命令 / CDE | ネイティブIP機能なし | ネイティブIP機能なし | ArmがCDE命令の符号化を定義し、カスタム演算とデータパスはSoCが定義。整数CDEはオプション。浮動小数点CDEはFPUと構成に依存 | STAR-MC1 TRMにはGPR CDEとFPCDEモジュールの記載あり。実装と製品での利用可否はSoC構成に依存 | ArmがCDE命令の符号化を定義し、カスタム演算とデータパスはSoCが定義。r1以降でオプション、r0では利用不可 | ネイティブIP機能なし |
@@ -79,6 +79,8 @@ STAR-MC1では、SoCに実装されたオプションのキャッシュ、TCM、
 
 プロセッサーIPの参考資料: Arm [CM3データシート](https://documentation-service.arm.com/static/62053c120ca305732a3a5c14)、[CM4ドキュメント](https://support.arm.com/compute-ip/cortex-m4)、[CM33テクニカルリファレンスマニュアル](https://documentation-service.arm.com/static/66be1ce8882fec713ef49954)、[CM55データシート](https://documentation-service.arm.com/static/6205407494e7af28dd7c9cb5)、[CM7データシート](https://developer.arm.com/-/media/Arm%20Developer%20Community/PDF/Processor%20Datasheets/Arm-Cortex-M7-Processor-Datasheet.pdf)、および[STAR-MC1テクニカルリファレンスマニュアル](https://www.armchina.com/webarm/arm/common/download/profile/resource/file/Documents/Application-Notes/Technical-Reference-Manual/Star_Technical_Reference_Manual_00903001_0100_00_en.pdf)。
 
+Cortex-M55のMVE構成の詳細は、Armの[CM55テクニカルリファレンスマニュアル](https://documentation-service.arm.com/static/63190fc5ce77a54a32db3ac2)を参照してください。
+
 ## アーキテクチャ上の拡張 { #architectural-enhancements }
 
 STAR-MC1はCortex-M33を置き換えるのではなく、その上に構築されています。最も重要な追加要素は、コアがメモリー待ちに費やす時間を減らし、有用な処理の実行により多くの時間を割けるようにする、実装レベルの改良です。
@@ -97,6 +99,8 @@ STAR-MC1はCortex-M33を置き換えるのではなく、その上に構築さ�
 ハードウェアが整合性を保証しないキャッシュ可能なバッファーをDMA、ディスプレイコントローラー、オーディオインターフェースなどと共有する場合、ドライバーはSDKまたはRTOSのキャッシュ管理規則に従う必要があります。周辺機器がCPUの書き込んだデータを読む前に、変更済みのキャッシュ内容をメモリーへ書き戻します。DMAが書き込む前には受信バッファーを準備し、転送完了後、CPUが読む前に古いキャッシュラインを無効化します。DMAがバッファーを使用している間、CPUはアクセスしてはいけません。バッファーはキャッシュライン単位で確保し、無関係なデータとラインを共有せず、プラットフォームが要求する完了確認とメモリーバリアも実行してください。非キャッシュ領域やハードウェアが整合性を保証する領域でも、それぞれの同期規則は必要です。所有権の引き渡しとダーティラインの問題は、[PSRAMと組み込みシステムで使われる他のメモリーの比較](psram-and-memory-types.md#caches-and-external-memory-execution)で説明しています。
 
 ### Armv8-Mカスタムデータパス拡張 { #armv8-m-custom-datapath-extension }
+
+CDEとArm Helium（MVE）は別の拡張です。CDEは実装固有のカスタム演算に使う命令エンコーディングを定義し、MVEはArmv8.1-Mで定義された標準のベクトル拡張です。STAR-MC1がArmv8-M Mainlineベースであることから、MVEへの対応を推定してはいけません。
 
 IPレベルでは、ArmがCDE命令の符号化を定義し、SoC設計者がカスタム演算とデータパスを定義します。CM33はオプションで整数CDEに対応し、浮動小数点CDEはFPUと構成に依存します。STAR-MC1のTRMにはGPR CDEとFPCDEモジュールが記載されていますが、このIPレベルの記述だけでは、特定のSF32デバイスやSDKでCDEを利用できるとは限りません。SiFliのSiFli-SDK [v2.5.1リリースノート](https://github.com/OpenSiFli/SiFli-SDK/releases/tag/v2.5.1)には、SF32LB57xでCDEが誤って有効化されていた問題の修正が記載されています。CDEを前提とする前に、対象デバイスとSDKでのサポートを確認してください。CM55のCDEはr1以降でオプション、r0では非対応です。CP0～CP7はコプロセッサーまたはCDEに割り当てる符号化空間であり、8個のカスタム命令や追加アクセラレーターを意味しません。コアのリビジョン、実装モジュール、コンパイラーとSDKの対応も確認してください。詳細は[CM33データシート](https://www.arm.com/-/media/Arm%20Developer%20Community/PDF/Processor%20Datasheets/Arm-Cortex-M33-Processor-Datasheet.pdf)、[CM55のCDEリビジョン情報](https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/armv8_2d00_m-based-processor-software-development-hints-and-tips)、およびSTAR-MC1 TRMのB7章・B8章を参照してください。
 

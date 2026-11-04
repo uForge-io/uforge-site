@@ -22,7 +22,7 @@ Ce parcours réunit BLE, audio, écran, touches, surveillance de la batterie et 
 
 « Jusqu'à huit appareils et trois locuteurs simultanés » décrit une limite de l'implémentation amont, et non une capacité produit validée pour toutes les distances, interférences, pertes de paquets et configurations de simultanéité. La documentation amont ne précise pas non plus l'authentification des salles, la politique de chiffrement de la liaison, une garantie de confidentialité vocale, le statut réglementaire radio ni l'ensemble des conditions de licence du composant binaire `talk_back`. Chacun de ces points nécessite une revue produit distincte.
 
-**Note sur la source de la carte :** La page chinoise de SiFli consacrée à la carte ULP est explicitement signalée comme pas encore disponible ; elle indique seulement les usages pour capteurs basse consommation et objets connectés portés, les options de capteurs à 3 ou 6 axes et des points de test réservés aux mesures basse consommation. Elle ne constitue pas une spécification complète de la carte. Vérifiez les périphériques à partir de la révision réelle et du schéma ; le comportement Talkback décrit ci-dessous provient du code applicatif figé.
+**Note sur la source de la carte :** La page chinoise de SiFli consacrée à la carte ULP est explicitement signalée comme pas encore disponible ; elle indique seulement les usages pour capteurs basse consommation et objets connectés portés, les options de capteurs à 3 ou 6 axes et des points de test réservés aux mesures basse consommation. Elle ne constitue pas une spécification complète de la carte et ne précise pas de révision matérielle validée pour cet exemple. Vérifiez les périphériques à partir de la révision réelle et du schéma ; le comportement Talkback décrit ci-dessous provient du code applicatif figé.
 
 ## Résultat, portée et critères d'entrée { #outcome-scope-and-entry-criteria }
 
@@ -146,7 +146,7 @@ flowchart LR
     BP["Batterie / alimentation USB"] --> B
 ```
 
-Les principaux domaines de panne sont la recherche BLE et la création de salle, la synchronisation de son état, l'ordonnancement des locuteurs simultanés, la chaîne Opus/acoustique, les événements des touches, la batterie faible et la veille, la récupération par la touche d'alimentation, ainsi que les détails non publiés des composants et de leurs licences. Commencez par diagnostiquer le rôle et l'état, puis distinguez les défaillances radio, audio et d'alimentation locale.
+Le diagramme montre le chemin audio du Master vers le Slave ; l'étape 2 vérifie séparément le sens inverse. Les principaux domaines de panne sont la recherche BLE et la création de salle, la synchronisation de son état, l'ordonnancement des locuteurs simultanés, la chaîne Opus/acoustique, les événements des touches, la batterie faible et la veille, la récupération par la touche d'alimentation, ainsi que les détails non publiés des composants et de leurs licences. Commencez par diagnostiquer le rôle et l'état, puis distinguez les défaillances radio, audio et d'alimentation locale.
 
 ## Étape 1 — Établir la référence source intacte { #stage-1-establish-the-untouched-source-baseline }
 

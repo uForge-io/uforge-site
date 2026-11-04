@@ -9,7 +9,7 @@ tags: [Desenvolvimento, SiFli-SDK, Notas de aplicação, Flash]
 
 Este artigo organiza o [guia de uso de Flash](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/flash_usage.html) da SiFli como um fluxo prático de integração para SF32LB52x, SF32LB55x, SF32LB56x e SF32LB58x. Ele aborda a configuração dos controladores, os espaços de endereçamento de cada família, o acesso direto pelo RT-Thread, sistemas de arquivos MTD, regiões reservadas, a adaptação do suporte a novas memórias Flash, PSRAM e Open Flashloader do J-Link.
 
-O guia de origem usa `FLASH` tanto para NOR Flash quanto para NAND Flash. Os exemplos mantêm os símbolos do SDK e os nomes dos dispositivos; antes de aplicar uma configuração ao produto, confira a branch do SDK usada pelo alvo e o esquemático da placa.
+O guia de origem usa `FLASH` tanto para NOR Flash quanto para NAND Flash. Os exemplos mantêm os símbolos do SDK e os nomes dos dispositivos; antes de aplicar uma configuração ao produto, confira o ramo do SDK usado pelo alvo e o esquemático da placa.
 
 ## Modelo e recursos dos controladores { #1-controller-model-and-capabilities }
 
@@ -332,7 +332,7 @@ cleanup:
 
 ## Usar Flash por meio do MTD do RT-Thread { #5-use-flash-through-rt-thread-mtd }
 
-O RT-Thread fornece drivers de dispositivo MTD-NOR e MTD-NAND. Quando as opções de MTD e do sistema de arquivos estão habilitadas na configuração, os dispositivos são registrados durante a inicialização. Consulte um controlador com `rt_device_find("flash1")`; os nomes dos controladores são `flash1`, `flash2` e `flash3` (há um nome de dispositivo correspondente para cada controlador habilitado). Um resultado diferente de nulo indica que o registro foi concluído.
+O RT-Thread fornece drivers de dispositivo MTD-NOR e MTD-NAND. Quando o MTD está configurado e habilitado corretamente para um controlador Flash, o dispositivo correspondente é registrado durante a inicialização. O uso de um sistema de arquivos também exige a configuração correspondente. Consulte um controlador com `rt_device_find("flash1")`; os nomes dos controladores são `flash1`, `flash2` e `flash3` (há um nome de dispositivo correspondente para cada controlador habilitado). Um resultado diferente de nulo indica que o registro foi concluído.
 
 O MTD é usado por sistemas de arquivos e pelo armazenamento USB. Normalmente, o código da aplicação localiza e associa o dispositivo; a camada MTD-NOR encapsula as operações de leitura e gravação. Se você registrar um dispositivo manualmente, implemente a tabela de operações mostrada abaixo.
 
@@ -551,7 +551,9 @@ typedef struct
 } FLASH_CMD_CFG_T;
 ```
 
-Aqui, `cmd` é o ID do comando (`0x06` para habilitar gravação e `0x05` para ler o status nos exemplos da fonte). `func_mode` seleciona leitura ou gravação; `data_mode` seleciona ausência de dados ou dados em uma, duas ou quatro linhas; `dummy_cycle` define os ciclos de clock entre o comando e o endereço/dado; `ab_size` e `ab_mode` descrevem os bytes alternativos; `addr_size` e `addr_mode` definem o tamanho do endereço e o modo de linhas; e `cmd_mode` indica se o próprio comando é enviado em uma, duas ou quatro linhas.
+Aqui, `cmd` é o ID do comando (`0x06` para habilitar gravação e `0x05` para ler o status nos exemplos da fonte). `func_mode` seleciona leitura ou gravação; `data_mode` seleciona ausência de dados ou dados em uma, duas ou quatro linhas; `dummy_cycle` define os ciclos de clock entre o comando e o endereço/dado; `ab_size` e `ab_mode` descrevem os bytes alternativos; `addr_size` codifica o tamanho do endereço como `n-1` bytes; `addr_mode` usa `0` para indicar ausência de endereço e `1`, `2` e `3` para endereçamento em uma, duas e quatro linhas, respectivamente. Quando `addr_mode` é `0`, não há endereço e `addr_size` também deve ser `0`. O comentário da estrutura descreve `cmd_mode` como o modo de linhas usado para transmitir o próprio comando.
+
+A fonte apresenta como exemplo o comando de leitura em quatro linhas `0xEB` da PUYA: o diagrama de temporização mostra um `MBYTE` de 8 bits após `ADDR`, usado para determinar o modo `continue`. A fonte define `ab_size` e `ab_mode` como `0/3`, explicando esses valores como um byte (codificação `n-1`) e o modo de quatro linhas. A fonte é internamente contraditória quanto a `cmd_mode`: o comentário da estrutura mapeia, respectivamente, `0/1/2/3` para ausência de modo e modos de comando em uma, duas e quatro linhas, enquanto o texto seguinte diz que o valor de um comando Flash válido é sempre `1`. Confira a definição e a implementação no SDK de destino antes de escolher um valor; não o deduza apenas com base nesta explicação.
 
 ## Adicionar suporte a uma NAND Flash { #8-port-a-nand-flash-part }
 

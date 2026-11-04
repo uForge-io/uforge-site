@@ -49,10 +49,11 @@ Las variantes con solo NOR son adecuadas para productos compactos con Bluetooth,
 - Alimentación de la MCU seleccionable por jumper entre 1,8 V y 3,3 V
 - Señales USB 2.0 FS disponibles en el conector lateral
 - La placa expone 37 GPIO; la MCU dispone de 3 UART, 4 interfaces I2C, 2 GPTIM, 2 interfaces SPI y 6 canales GPADC
-- Todos las GPIO pueden configurarse como UART, I2C o GPTIM; la multiplexación también incluye SPI, PWM, I2S, PDM y entradas de activación
+- Todos los GPIO pueden configurarse como UART, I2C o GPTIM; la multiplexación también incluye SPI, PWM, I2S, PDM y entradas de activación
 - Conector FPC de 16 pines con paso de 0,5 mm; las interfaces de pantalla admiten SPI, DSPI y Quad-SPI, incluido QSPI en modo DDR
 - Señales I2C para el panel táctil
 - Pines para micrófono analógico y salida de audio diferencial
+- Entrada de micrófono digital PDM
 - Un LED de usuario
 - Tecla de encendido y tecla de función
 - Puntos de prueba para medir la corriente de cada línea por separado; SiFli también documenta pruebas de consumo de la MCU, del sistema mínimo y de toda la placa
@@ -84,6 +85,8 @@ Para medir la corriente de un único riel, conecte un amperímetro en serie con 
 Al conectar USB Type-C, algunos pines del conector también pueden suministrar 3,3 V, 1,8 V y 5 V. Compruebe la dirección de cada pin antes de conectar circuitos externos.
 
 La placa incorpora un interruptor de alimentación. La señal RTS# del CH340N puede controlar la habilitación de la placa y permitir que la herramienta de grabación reinicie la MCU durante la grabación o la depuración.
+
+Con alimentación USB Type-C, el LDO integrado convierte los 5 V de VBUS a 3,3 V.
 
 ## Grabación y depuración { #download-and-debug }
 
@@ -168,6 +171,39 @@ La placa ofrece dos conectores laterales de 24 pines. El primero agrupa principa
 
 </div>
 
+<div align="center"><em>Tabla: funciones detalladas y resistencias de polarización de J1</em></div>
+
+<div align="center" markdown>
+
+| Pin | Nombre del pin | Función predeterminada tras el reset y funciones multiplexadas | Pull |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | Tierra |  |
+| 2 | PA_44 | **PA44**, UART, I2C, GPTIM, WKUP20 | PD |
+| 3 | PA_43 | **PA43**, UART, I2C, GPTIM, WKUP19 | PD |
+| 4 | PA_42 | **PA42**, UART, I2C, GPTIM, WKUP18 | PU |
+| 5 | PA_41 | **PA41**, UART, I2C, GPTIM, WKUP17 | PU |
+| 6 | PA_40 | **PA40**, UART, I2C, GPTIM, SPI2_CS, WKUP16 | PU |
+| 7 | PA_39 | **PA39**, UART, I2C, GPTIM, SPI2_CLK, WKUP15 | PU |
+| 8 | PA_38 | **PA38**, UART, I2C, GPTIM, SPI2_DI, WKUP14 | PD |
+| 9 | PA_37 | **PA37**, UART, I2C, GPTIM, SPI2_DIO, WKUP13 | PD |
+| 10 | PA_36 | **PA36**, UART, I2C, GPTIM, USB_DM, WKUP12 | PD |
+| 11 | PA_35 | **PA35**, UART, I2C, GPTIM, USB_DP, WKUP11 | PD |
+| 12 | PA_31 | **PA31**, UART, I2C, GPTIM, GPADC3 | PD |
+| 13 | PA_30 | **PA30**, UART, I2C, GPTIM, I2S1_LRCK, GPADC2 | PD |
+| 14 | PA_29 | **PA29**, UART, I2C, GPTIM, SPI1_CS, I2S1_BCK, GPADC1 | PD |
+| 15 | PA_28 | **PA28**, UART, I2C, GPTIM, SPI1_CLK, I2S1_SDI, GPADC0 | PD |
+| 16 | GND | Tierra |  |
+| 17 | 3.3V | Entrada de 3,3 V con USB Type-C desconectado; salida cuando está conectado |  |
+| 18 | PA_27 | **PA27**, UART, I2C, GPTIM, WKUP3 | PU |
+| 19 | PA_26 | **PA26**, UART, I2C, GPTIM, WKUP2 | PU |
+| 20 | PA_25 | **PA25**, UART, I2C, GPTIM, SPI1_DI, I2S1_SDO, WKUP1 | PD |
+| 21 | PA_24 | **PA24**, UART, I2C, GPTIM, SPI1_DIO, I2S1_MCLK, WKUP0 | PD |
+| 22 | PA_34 | **PA34**, UART, I2C, GPTIM, GPADC6, WKUP10 | PD |
+| 23 | PA_33 | **PA33**, UART, I2C, GPTIM, GPADC5 | PD |
+| 24 | PA_32 | **PA32**, UART, I2C, GPTIM, GPADC4 | PD |
+
+</div>
+
 ### Conector de LCD, audio y depuración { #lcd-audio-and-debug-header }
 
 <div align="center"><em>Asignaciones de pines del encabezado de LCD, audio y depuración</em></div>
@@ -186,9 +222,44 @@ La placa ofrece dos conectores laterales de 24 pines. El primero agrupa principa
 
 </div>
 
+<div align="center"><em>Tabla: funciones detalladas y resistencias de polarización de J2</em></div>
+
+<div align="center" markdown>
+
+| Pin | Nombre del pin | Función predeterminada tras el reset y funciones multiplexadas | Pull |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | Tierra |  |
+| 2 | PA_00 | **PA00**, UART, I2C, GPTIM, LCD_RST | PD |
+| 3 | PA_01 | **PA01**, UART, I2C, GPTIM, BL_PWM | PD |
+| 4 | PA_02 | **PA02**, UART, I2C, GPTIM, LCD_TE, I2S1_MCLK | PD |
+| 5 | PA_03 | **PA03**, UART, I2C, GPTIM, LCD_CS, I2S1_SDO | PU |
+| 6 | PA_04 | **PA04**, UART, I2C, GPTIM, LCD_CLK, I2S1_SDI | PD |
+| 7 | PA_05 | **PA05**, UART, I2C, GPTIM, LCD_D0, I2S1_BCK | PD |
+| 8 | PA_06 | **PA06**, UART, I2C, GPTIM, LCD_D1, I2S1_LRCK | PD |
+| 9 | PA_07 | **PA07**, UART, I2C, GPTIM, LCD_D2, PDM1_CLK | PD |
+| 10 | PA_08 | **PA08**, UART, I2C, GPTIM, LCD_D3, PDM1_DAT | PD |
+| 11 | PA_09 | **PA09**, UART, I2C, GPTIM, CTP_INT | PD |
+| 12 | MIC_ADC | Señal de entrada MIC |  |
+| 13 | MIC_BIAS | Tensión de polarización MIC |  |
+| 14 | DACP | Señal de salida de audio analógico |  |
+| 15 | DACN | Señal de salida de audio analógico |  |
+| 16 | GND | Tierra |  |
+| 17 | 1.8V | Entrada de 1,8 V con USB Type-C desconectado; salida cuando está conectado |  |
+| 18 | PA_10 | **PA10**, UART, I2C, GPTIM, CTP_RST | PD |
+| 19 | PA_11 | **PA11**, UART, I2C, GPTIM, CTP_SDA | PU |
+| 20 | PA_20 | **PA20**, UART, I2C, GPTIM, CTP_SCL | PD |
+| 21 | PA_21 | **PA21**, UART, I2C, GPTIM | PD |
+| 22 | PA_18 | **UART0_RXD**, puerto de depuración y descarga, PA18, SWDIO, I2C, GPTIM | PU |
+| 23 | PA_19 | **UART0_TXD**, puerto de depuración y descarga, PA19, SWCLK, I2C, GPTIM | Ninguno |
+| 24 | 5V | Entrada de 5 V con USB Type-C desconectado; salida cuando está conectado |  |
+
+</div>
+
 ## Pines de Flash externa y SDIO { #external-flash-and-sdio-pins }
 
 Algunas variantes incorporan 16 MB de Flash QSPI-NOR externa. El siguiente grupo de pines se comparte con SDIO:
+
+La guía original de la placa también enumera estas opciones de encapsulado para la Flash externa; el montaje real depende de la variante y su BOM: Flash SPI NOR en WSON8-8x6mm o WSON8-6x5mm, Flash SPI NAND en WSON8-8x6mm y SD NAND en WSON8-8x6mm.
 
 <div align="center"><em>Grupo de pines de Flash externa y SDIO</em></div>
 
@@ -210,6 +281,8 @@ Antes de usar estos pines para SDIO u otras funciones de expansión, compruebe s
 ## Expansión de audio { #audio-expansion }
 
 La placa ofrece la polarización y la entrada del micrófono analógico, además de una salida DAC diferencial. El micrófono y un amplificador Class-AB/D para accionar un altavoz son externos; selecciónelos para la ruta de audio prevista.
+
+La placa también admite entrada de micrófono digital PDM: PA07 multiplexa `PDM1_CLK` y PA08 multiplexa `PDM1_DAT`.
 
 ## Objetivos de compilación del SDK { #sdk-build-targets }
 

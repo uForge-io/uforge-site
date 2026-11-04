@@ -70,18 +70,18 @@ O SF30147C é um PMIC altamente integrado e de alta eficiência, desenvolvido pa
 
 | Pino de alimentação do SF30147C | Tensão mín. (V) | Tensão máx. (V) | Corrente máx. (mA) | Descrição |
 |:---|:---|:---|:---|:---|
-| VBUCK | 1.8 | 1.8 | 500 | Alimenta PVDD1, PVDD2, VDDIOA, VDDIOA2, VDDIOB, AVDD_BRF, AVDD18_DSI e outros trilhos de 1,8 V do SF32LB58x |
-| LVSW1 | 1.8 | 1.8 | 100 | Alimentação lógica do PA Classe K com I2S |
-| LVSW2 | 1.8 | 1.8 | 100 | Alimentação de 1,8 V do acelerômetro |
-| LVSW3 | 1.8 | 1.8 | 150 | Alimentação de 1,8 V do sensor de frequência cardíaca |
-| LVSW4 | 1.8 | 1.8 | 150 | Alimentação de 1,8 V do LCD |
-| LVSW5 | 1.8 | 1.8 | 150 | Alimentação do núcleo do eMMC |
-| LDO1 | 2.8 | 3.3 | 100 | Alimenta AVDD33_USB, AVDD33_ANA, AVDD33_AUD, AVDDIOA2 e outros trilhos de 3,3 V do SF32LB58x |
-| LDO2 | 2.8 | 3.3 | 100 | Alimentação do eMMC ou SD NAND |
-| LDO3 | 2.8 | 3.3 | 100 | Alimentação de 3,3 V do LCD |
-| LDO4 | 2.8 | 3.3 | 100 | Alimentação de 3,3 V do sensor de frequência cardíaca |
-| HVSW1 | 2.8 | 5 | 150 | Alimentação do PA analógico Classe K |
-| HVSW2 | 2.8 | 5 | 150 | Alimentação do GPS |
+| VBUCK | 1,8 | 1,8 | 500 | Alimenta PVDD1, PVDD2, VDDIOA, VDDIOA2, VDDIOB, AVDD_BRF, AVDD18_DSI e outros trilhos de 1,8 V do SF32LB58x |
+| LVSW1 | 1,8 | 1,8 | 100 | Alimentação lógica do PA Classe K com I2S |
+| LVSW2 | 1,8 | 1,8 | 100 | Alimentação de 1,8 V do acelerômetro |
+| LVSW3 | 1,8 | 1,8 | 150 | Alimentação de 1,8 V do sensor de frequência cardíaca |
+| LVSW4 | 1,8 | 1,8 | 150 | Alimentação de 1,8 V do LCD |
+| LVSW5 | 1,8 | 1,8 | 150 | Alimentação do núcleo do eMMC |
+| LDO1 | 2,8 | 3,3 | 100 | Alimenta AVDD33_USB, AVDD33_ANA, AVDD33_AUD, AVDDIOA2 e outros trilhos de 3,3 V do SF32LB58x |
+| LDO2 | 2,8 | 3,3 | 100 | Alimentação do eMMC ou SD NAND |
+| LDO3 | 2,8 | 3,3 | 100 | Alimentação de 3,3 V do LCD |
+| LDO4 | 2,8 | 3,3 | 100 | Alimentação de 3,3 V do sensor de frequência cardíaca |
+| HVSW1 | 2,8 | 5 | 150 | Alimentação do PA analógico Classe K |
+| HVSW2 | 2,8 | 5 | 150 | Alimentação do GPS |
 
 </div>
 
@@ -97,14 +97,14 @@ As especificações de alimentação da PMU integradas à série SF32LB58x são 
 
 | Pino de alimentação da PMU | Tensão mín. (V) | Tensão típica (V) | Tensão máx. (V) | Corrente máx. (mA) | Descrição |
 |:---|:---|:---|:---|:---|:---|
-| PVDD1 | 1.71 | 1.8 | 3.6 | 100 | Entrada de alimentação PVDD1 |
-| PVDD2 | 1.71 | 1.8 | 3.6 | 50 | Entrada de alimentação PVDD2 |
-| BUCK1_LX / BUCK1_FB | - | 1.25 | - | 100 | A saída BUCK1_LX conecta-se ao indutor e à entrada interna de alimentação 1; a outra extremidade do indutor conecta-se a um capacitor externo |
-| BUCK2_LX / BUCK2_FB | - | 0.9 | - | 50 | A saída BUCK2_LX conecta-se ao indutor e à entrada interna de alimentação 2; a outra extremidade do indutor conecta-se a um capacitor externo |
-| LDO_VOUT1 | - | 1.1 | - | 100 | Saída do LDO; requer capacitor externo |
-| VDD_RET | - | 0.9 | - | 1 | Saída do LDO RET; requer capacitor externo |
-| VDD_RTC | - | 1.1 | - | 1 | Saída do LDO RTC; requer capacitor externo |
-| MIC_BIAS | 1.4 | - | 2.8 | - | Saída de alimentação do microfone |
+| PVDD1 | 1,71 | 1,8 | 3,6 | 100 | Entrada de alimentação PVDD1 |
+| PVDD2 | 1,71 | 1,8 | 3,6 | 50 | Entrada de alimentação PVDD2 |
+| BUCK1_LX / BUCK1_FB | - | 1,25 | - | 100 | A saída BUCK1_LX conecta-se ao indutor e à entrada interna de alimentação 1; a outra extremidade do indutor conecta-se a um capacitor externo |
+| BUCK2_LX / BUCK2_FB | - | 0,9 | - | 50 | A saída BUCK2_LX conecta-se ao indutor e à entrada interna de alimentação 2; a outra extremidade do indutor conecta-se a um capacitor externo |
+| LDO_VOUT1 | - | 1,1 | - | 100 | Saída do LDO; requer capacitor externo |
+| VDD_RET | - | 0,9 | - | 1 | Saída do LDO RET; requer capacitor externo |
+| VDD_RTC | - | 1,1 | - | 1 | Saída do LDO RTC; requer capacitor externo |
+| MIC_BIAS | 1,4 | - | 2,8 | - | Saída de alimentação do microfone |
 
 </div>
 
@@ -116,17 +116,17 @@ Os demais pinos de alimentação que exigem uma fonte externa estão especificad
 
 | Outros pinos de alimentação | Tensão mín. (V) | Tensão típica (V) | Tensão máx. (V) | Corrente máx. (mA) | Descrição |
 |:---|:---|:---|:---|:---|:---|
-| AVDD_BRF | 1.71 | 1.8 | 3.3 | 1 | Entrada de alimentação de RF |
-| AVDD18_DSI | 1.71 | 1.8 | 2.5 | 20 | Entrada de alimentação MIPI DSI; deixe sem conexão se não for usada |
-| AVDD33_ANA | 3.15 | 3.3 | 3.45 | 50 | Entrada de alimentação analógica e do PA de RF |
-| AVDD33_AUD | 3.15 | 3.3 | 3.45 | 50 | Entrada de alimentação de áudio analógico |
-| AVDD33_USB | 3.15 | 3.3 | 3.45 | 50 | Entrada de alimentação USB |
-| VDDIOA | 1.71 | 1.8 | 3.45 | - | Entrada de alimentação de I/O para PA12–PA93 |
-| VDDIOA2 | 1.71 | 1.8 | 3.45 | - | Entrada de alimentação de I/O para PA0–PA11 |
-| VDDIOB | 1.71 | 1.8 | 3.45 | - | Entrada de alimentação de I/O para PB |
-| VDDIOSA | 1.71 | 1.8 | 1.98 | - | Entrada de alimentação de SIPA |
-| VDDIOSB | 1.71 | 1.8 | 1.98 | - | Entrada de alimentação de SIPB |
-| VDDIOSC | 1.71 | 1.8 | 1.98 | - | Entrada de alimentação de SIPC |
+| AVDD_BRF | 1,71 | 1,8 | 3,3 | 1 | Entrada de alimentação de RF |
+| AVDD18_DSI | 1,71 | 1,8 | 2,5 | 20 | Entrada de alimentação MIPI DSI; deixe sem conexão se não for usada |
+| AVDD33_ANA | 3,15 | 3,3 | 3,45 | 50 | Entrada de alimentação analógica e do PA de RF |
+| AVDD33_AUD | 3,15 | 3,3 | 3,45 | 50 | Entrada de alimentação de áudio analógico |
+| AVDD33_USB | 3,15 | 3,3 | 3,45 | 50 | Entrada de alimentação USB |
+| VDDIOA | 1,71 | 1,8 | 3,45 | - | Entrada de alimentação de I/O para PA12–PA93 |
+| VDDIOA2 | 1,71 | 1,8 | 3,45 | - | Entrada de alimentação de I/O para PA0–PA11 |
+| VDDIOB | 1,71 | 1,8 | 3,45 | - | Entrada de alimentação de I/O para PB |
+| VDDIOSA | 1,71 | 1,8 | 1,98 | - | Entrada de alimentação de SIPA |
+| VDDIOSB | 1,71 | 1,8 | 1,98 | - | Entrada de alimentação de SIPB |
+| VDDIOSC | 1,71 | 1,8 | 1,98 | - | Entrada de alimentação de SIPC |
 | GPADC_VREFP | - | - | - | - | Entrada da tensão de referência do GPADC; exige apenas um capacitor, sem alimentação externa |
 | AUD_VREF | - | - | - | - | Entrada da tensão de referência de áudio; exige apenas um capacitor, sem alimentação externa |
 
@@ -140,17 +140,17 @@ Os demais pinos de alimentação que exigem uma fonte externa estão especificad
 
 | Pino de alimentação | Capacitor | Descrição |
 |:---|:---|:---|
-| PVDD1 | 0.1 uF + 10 uF | Coloque pelo menos um capacitor de 10 uF e outro de 0,1 uF (dois no total) próximos ao pino |
-| PVDD2 | 0.1 uF + 10 uF | Coloque pelo menos um capacitor de 10 uF e outro de 0,1 uF (dois no total) próximos ao pino |
-| BUCK1_LX / BUCK1_FB | 0.1 uF + 4.7 uF | Coloque pelo menos um capacitor de 4,7 uF e outro de 0,1 uF (dois no total) próximos ao pino |
-| BUCK2_LX / BUCK2_FB | 0.1 uF + 4.7 uF | Coloque pelo menos um capacitor de 4,7 uF e outro de 0,1 uF (dois no total) próximos ao pino |
-| LDO_VOUT1 | 4.7 uF | Coloque pelo menos um capacitor de 4,7 uF próximo ao pino |
-| VDD_RET | 0.47 uF | Coloque pelo menos um capacitor de 0,47 uF próximo ao pino |
-| VDD_RTC | 0.1 uF | Coloque pelo menos um capacitor de 0,1 uF próximo ao pino |
+| PVDD1 | 0,1 uF + 10 uF | Coloque pelo menos um capacitor de 10 uF e outro de 0,1 uF (dois no total) próximos ao pino |
+| PVDD2 | 0,1 uF + 10 uF | Coloque pelo menos um capacitor de 10 uF e outro de 0,1 uF (dois no total) próximos ao pino |
+| BUCK1_LX / BUCK1_FB | 0,1 uF + 4,7 uF | Coloque pelo menos um capacitor de 4,7 uF e outro de 0,1 uF (dois no total) próximos ao pino |
+| BUCK2_LX / BUCK2_FB | 0,1 uF + 4,7 uF | Coloque pelo menos um capacitor de 4,7 uF e outro de 0,1 uF (dois no total) próximos ao pino |
+| LDO_VOUT1 | 4,7 uF | Coloque pelo menos um capacitor de 4,7 uF próximo ao pino |
+| VDD_RET | 0,47 uF | Coloque pelo menos um capacitor de 0,47 uF próximo ao pino |
+| VDD_RTC | 0,1 uF | Coloque pelo menos um capacitor de 0,1 uF próximo ao pino |
 | AVDD_BRF | 1 uF | Coloque pelo menos um capacitor de 1 uF próximo ao pino |
-| AVDD18_DSI | 4.7 uF | Coloque pelo menos um capacitor de 4,7 uF próximo ao pino |
+| AVDD18_DSI | 4,7 uF | Coloque pelo menos um capacitor de 4,7 uF próximo ao pino |
 | AVDD33_ANA | 1 uF | Coloque pelo menos um capacitor de 1 uF próximo ao pino |
-| AVDD33_AUD | 4.7 uF | Coloque pelo menos um capacitor de 4,7 uF próximo ao pino |
+| AVDD33_AUD | 4,7 uF | Coloque pelo menos um capacitor de 4,7 uF próximo ao pino |
 | AVDD33_USB | 1 uF | Coloque pelo menos um capacitor de 1 uF próximo ao pino |
 | MIC_BIAS | 1 uF | Coloque pelo menos um capacitor de 1 uF próximo ao pino |
 | VDDIOA / VDDIOA2 / VDDIOB | 1 uF | Coloque pelo menos um capacitor de 1 uF próximo ao pino |
@@ -252,8 +252,8 @@ A série SF32LB58x requer duas fontes externas de clock: um cristal principal de
 
 | Cristal | Especificação | Descrição |
 |:---|:---|:---|
-| 48 MHz | 7 pF ≤ CL ≤ 12 pF (recomendado: 8.8 pF), ΔF/F0 ≤ ±10 ppm, ESR ≤ 30 Ω (recomendado: 22 Ω) | O consumo do cristal depende de CL e ESR: valores menores reduzem o consumo. Reserve espaço para capacitores de casamento em paralelo, próximos ao cristal; eles não são necessários quando CL < 12 pF. |
-| 32.768 kHz | CL ≤ 12.5 pF (recomendado: 7 pF), ΔF/F0 ≤ ±20 ppm, ESR ≤ 80 kΩ (recomendado: 38 kΩ) | O consumo do cristal depende de CL e ESR: valores menores reduzem o consumo. Reserve espaço para capacitores de casamento em paralelo, próximos ao cristal; eles não são necessários quando CL < 12,5 pF. |
+| 48 MHz | 7 pF ≤ CL ≤ 12 pF (recomendado: 8,8 pF), ΔF/F0 ≤ ±10 ppm, ESR ≤ 30 Ω (recomendado: 22 Ω) | O consumo do cristal depende de CL e ESR: valores menores reduzem o consumo. Reserve espaço para capacitores de casamento em paralelo, próximos ao cristal; eles não são necessários quando CL < 12 pF. |
+| 32,768 kHz | CL ≤ 12,5 pF (recomendado: 7 pF), ΔF/F0 ≤ ±20 ppm, ESR ≤ 80 kΩ (recomendado: 38 kΩ) | O consumo do cristal depende de CL e ESR: valores menores reduzem o consumo. Reserve espaço para capacitores de casamento em paralelo, próximos ao cristal; eles não são necessários quando CL < 12,5 pF. |
 
 </div>
 
@@ -263,10 +263,10 @@ A série SF32LB58x requer duas fontes externas de clock: um cristal principal de
 
 | Modelo | Fabricante | Parâmetros |
 |:---|:---|:---|
-| E1SB48E001G00E | Hosonic | F0 = 48.000000 MHz, ΔF/F0 = -6 ~ 8 ppm, CL = 8.8 pF, ESR ≤ 22 Ω máx., TOPR = -30 ~ 85°C, encapsulamento 2016 (métrico) |
-| ETST00327000LE | Hosonic | F0 = 32.768 kHz, ΔF/F0 = -20 ~ 20 ppm, CL = 7 pF, ESR ≤ 70 kΩ máx., TOPR = -40 ~ 85°C, encapsulamento 3215 (métrico) |
-| SX20Y048000B31T-8.8 | TKD | F0 = 48.000000 MHz, ΔF/F0 = -10 ~ 10 ppm, CL = 8.8 pF, ESR ≤ 40 Ω máx., TOPR = -20 ~ 75°C, encapsulamento 2016 (métrico) |
-| SF32K32768D71T01 | TKD | F0 = 32.768 kHz, ΔF/F0 = -20 ~ 20 ppm, CL = 7 pF, ESR ≤ 70 kΩ máx., TOPR = -40 ~ 85°C, encapsulamento 3215 (métrico) |
+| E1SB48E001G00E | Hosonic | F0 = 48,000000 MHz, ΔF/F0 = -6 ~ 8 ppm, CL = 8,8 pF, ESR ≤ 22 Ω máx., TOPR = -30 ~ 85°C, encapsulamento 2016 (métrico) |
+| ETST00327000LE | Hosonic | F0 = 32,768 kHz, ΔF/F0 = -20 ~ 20 ppm, CL = 7 pF, ESR ≤ 70 kΩ máx., TOPR = -40 ~ 85°C, encapsulamento 3215 (métrico) |
+| SX20Y048000B31T-8.8 | TKD | F0 = 48,000000 MHz, ΔF/F0 = -10 ~ 10 ppm, CL = 8,8 pF, ESR ≤ 40 Ω máx., TOPR = -20 ~ 75°C, encapsulamento 2016 (métrico) |
+| SF32K32768D71T01 | TKD | F0 = 32,768 kHz, ΔF/F0 = -20 ~ 20 ppm, CL = 7 pF, ESR ≤ 70 kΩ máx., TOPR = -40 ~ 85°C, encapsulamento 3215 (métrico) |
 
 </div>
 
@@ -657,7 +657,7 @@ A SD1 usa 12 GPIOs (PA00–PA11), alimentados pelo domínio VDDIOA2, que pode op
 </div>
 
 !!! note "Verificação dos rótulos SD1"
-    A fonte informa que SD1 usa 12 GPIOs (PA00–PA11), mas sua tabela de sinais lista apenas 10 sinais (SD1_D[7:0], CLK e CMD). Além disso, a tabela descreve SD1_D2 e SD1_D6 como "Data 6". A fonte não informa a função dos dois GPIOs não listados nem esclarece a descrição duplicada. Antes de finalizar o esquemático, confirme o mapeamento completo dos pinos SD1 no datasheet do chip.
+    A fonte informa que SD1 usa 12 GPIOs (PA00–PA11), mas sua tabela de sinais lista apenas 10 sinais (SD1_D[7:0], CLK e CMD). O esquema de referência da eMMC identifica PA11 como `SD1_RESET`, mas esse sinal não aparece na tabela. A fonte não explica a função de PA02 nem a discrepância restante na contagem. Além disso, a tabela descreve SD1_D2 e SD1_D6 como "Data 6". Antes de finalizar o esquemático, confirme o mapeamento completo dos pinos SD1 no datasheet do chip.
 
 <div align="center"><em>Tabela 5.6-4: Conexões dos sinais SD2</em></div>
 

@@ -32,10 +32,10 @@ Führen Sie die RF-Leiterbahn als unsymmetrische, impedanzkontrollierte Leitung 
 
 #### 6.2.3. Versorgung und Masse { #623-power-and-ground }
 
-Platzieren Sie BUCK-Induktivität und Filterkondensatoren nahe an den Chip-Pins. Führen Sie BUCK_LX kurz und breit; BUCK_FB muss mindestens 0,25 mm breit sein. Sehen Sie auf der Oberseite unter der Induktivität kein Kupfer vor. Sorgen Sie auf der benachbarten Lage für eine durchgehende Massefläche und führen Sie keine anderen Leiterbahnen durch den Induktivitätsbereich. Verbinden Sie die Massen der BUCK-Ausgangskondensatoren mit mehreren Vias mit der Hauptmasse. Platzieren Sie den PVDD-Kondensator nahe am Pin und führen Sie PVDD kurz und breit. Verbinden Sie PVSS über Vias mit der Hauptmasse. Platzieren Sie die LDO- und I/O-Abblockkondensatoren nahe an den jeweiligen Pins und dimensionieren Sie die Versorgungsleiterbahnen nach dem Laststrom.
+Platzieren Sie BUCK-Induktivität und Filterkondensatoren nahe an den Chip-Pins. Führen Sie BUCK_LX kurz und breit; BUCK_FB muss breiter als 0,25 mm sein. Sehen Sie auf der Oberseite unter der Induktivität kein Kupfer vor. Sorgen Sie auf der benachbarten Lage für eine durchgehende Massefläche und führen Sie keine anderen Leiterbahnen durch den Induktivitätsbereich. Verbinden Sie die Massen der BUCK-Ausgangskondensatoren mit mehreren Vias mit der Hauptmasse. Platzieren Sie den PVDD-Kondensator nahe am Pin und führen Sie PVDD kurz und breit. Verbinden Sie PVSS über Vias mit der Hauptmasse. Platzieren Sie die LDO- und I/O-Abblockkondensatoren nahe an den jeweiligen Pins und dimensionieren Sie die Versorgungsleiterbahnen nach dem Laststrom.
 
-!!! warning "Widersprüchliche Vorgaben zur PVDD-Leiterbahnbreite"
-    Der SF32LB56xU/V-Hardwareleitfaden fordert für PVDD mindestens 0,5 mm Leiterbahnbreite; die zugehörige PCB-Checkliste nennt dagegen 8 mil. Die Angaben weichen voneinander ab. Vor dem Layout-Freeze ist mit SiFli oder der PCB-Designverantwortung zu klären, welche Vorgabe gilt.
+!!! warning "Widersprüchliche Vorgaben zu PVDD- und BUCK_FB-Leiterbahnbreiten"
+    Der SF32LB56xU/V-Hardwareleitfaden fordert für PVDD mindestens 0,5 mm Leiterbahnbreite; die zugehörige PCB-Checkliste nennt dagegen 8 mil. Außerdem muss BUCK_FB laut Leitfaden breiter als 0,25 mm sein, während die Checkliste für BUCK_LX und BUCK_FB jeweils mindestens 8 mil vorgibt. Stimmen Sie die geltenden Werte vor dem Layout-Freeze mit SiFli oder der PCB-Designverantwortung ab.
 
 #### 6.2.4. Audio- und Analogsignale { #624-audio-and-analog-signals }
 
@@ -47,7 +47,7 @@ Führen Sie USB D+/D− (PA17/PA18) als abgeschirmtes Differenzpaar mit 90 Ω. P
 
 #### 6.2.6. EMI, ESD und Testpunkte { #626-emi-esd-and-test-points }
 
-Vermeiden Sie lange Leiterbahnen auf der Oberseite außerhalb des Abschirmblechs für störende Takt- und Versorgungssignale; verwenden Sie nach Möglichkeit Innenlagen. Platzieren Sie TVS-/ESD-Bauteile nahe am jeweiligen Steckverbinder. Führen Sie jedes Signal zuerst durch das Schutzbauteil und verbinden Sie dessen Massepad über kurze, breite Leiterbahnen und Vias mit der Hauptmasse. Platzieren Sie den Testpunkt des USB-Ladekabels vor der zugehörigen TVS. Setzen Sie die TVS am Akkuanschluss vor der Akkuplattform, sodass externe Leitungen auf dem Weg zum Chip zuerst durch die TVS geführt werden. Binden Sie das Masse-Netz unter dem Chip mit ausreichend vielen Blind-/Buried-Vias an die Hauptmassefläche an.
+Vermeiden Sie lange Leiterbahnen auf der Oberseite außerhalb des Abschirmblechs; störende Takt- und Versorgungssignale müssen auf Innenlagen und dürfen nicht auf der Oberseite geführt werden. Platzieren Sie TVS-/ESD-Bauteile nahe am jeweiligen Steckverbinder. Führen Sie jedes Signal zuerst durch das Schutzbauteil und verbinden Sie dessen Massepad über kurze, breite Leiterbahnen und Vias mit der Hauptmasse. Platzieren Sie den Testpunkt des USB-Ladekabels vor der zugehörigen TVS. Setzen Sie die TVS am Akkuanschluss vor der Akkuplattform, sodass externe Leitungen auf dem Weg zum Chip zuerst durch die TVS geführt werden. Binden Sie das Masse-Netz unter dem Chip mit ausreichend vielen Blind-/Buried-Vias an die Hauptmassefläche an. Werden PBR0–PBR2 der U-Variante und PBR0–PBR3 der V-Variante als Taktausgänge konfiguriert, müssen sie dreidimensional mit Masse abgeschirmt und von Störquellen wie 32-kHz-Ausgängen ferngehalten werden.
 
 ### 6.3. PCB-Layout-Checkliste { #63-pcb-layout-checklist }
 
@@ -124,6 +124,8 @@ Die folgenden Tabellen decken jeweils einen Prüfbereich des PCB-Layouts ab. Ist
 | 5 | Der Abstand des parallelen Leiterbahnpaares des 32-kHz-Quarzes ist größer als das 2-Fache des Leiterbahnabstands | Erforderlich |
 
 </div>
+
+Die PCB-Checkliste aus der Quelle verlangt, dass der Abstand des parallelen 32-kHz-Quarz-Leiterbahnpaares mehr als das 2-Fache des Leiterbahnabstands beträgt, nennt jedoch keine separate Bezugsgröße. Klären Sie mit dem Ersteller der Checkliste, welcher Vergleich gemeint ist, bevor Sie diese Vorgabe als Layoutregel verwenden.
 
 #### 6.3.5. Tasten { #635-buttons }
 

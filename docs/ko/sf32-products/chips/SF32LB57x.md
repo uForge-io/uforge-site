@@ -10,9 +10,9 @@ tags:
 
 ## 개요 { #overview }
 
-SF32LB57x는 웨어러블, 휴대용 스마트 디바이스, 스마트 홈, 소형 디스플레이 제품을 위한 기능 강화형 초저전력 AIoT MCU 제품군입니다. 기본 Bluetooth MCU만으로는 부족해 더 풍부한 그래픽, Bluetooth 오디오, 카메라 입력, 외부 스토리지, 상시 동작이 필요하지만, 애플리케이션 프로세서급 플랫폼의 전력·비용·통합 부담까지는 원하지 않는 설계에 적합합니다. SiFli의 2026년 제품인 SF32LB57x는 SF32LB52x와 SF32LB56x의 업그레이드 제품으로, 가격 경쟁력을 유지하는 것도 목표로 합니다. 더 높은 CPU 성능과 향상된 그래픽 성능을 제공하며, 저렴하고 설계하기 쉬운 QFN 패키지에서도 GPIO 수를 늘리고 패키지 내장 메모리 구성을 더 유연하게 선택할 수 있습니다. 그래픽은 RGB888(24비트) 기준 최대 1024 × 600 해상도를 지원합니다.
+SF32LB57x는 웨어러블, 휴대용 스마트 디바이스, 스마트 홈, 소형 디스플레이 제품을 위한 기능 강화형 초저전력 AIoT MCU 제품군입니다. 기본 Bluetooth MCU만으로는 부족해 더 풍부한 그래픽, Bluetooth 오디오, 카메라 입력, 외부 스토리지, 상시 동작이 필요하지만, 애플리케이션 프로세서급 플랫폼의 전력·비용·통합 부담까지는 원하지 않는 설계에 적합합니다. SiFli의 2026년 제품인 SF32LB57x는 SF32LB52x와 SF32LB56x의 업그레이드 제품으로, 가격 경쟁력을 유지하는 것도 목표로 합니다. 더 높은 CPU 성능과 향상된 그래픽 성능을 제공하며, 저비용 실장에 적합한 소형 QFN 패키지에서도 GPIO 수를 늘리고 패키지 내장 메모리 구성을 더 유연하게 선택할 수 있습니다. SiFli의 [하드웨어 설계 가이드](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html)는 디스플레이 해상도 상한을 1024 × 1024로 제시합니다. [LCD FAQ](https://docs.sifli.com/projects/solution/7.FAQ/lcd/index.html)는 1024 × 600과 720 × 720을 일반적으로 사용되거나 검증된 RGB/DPI 설계로 들며, 이것이 실리콘의 절대적인 물리 한계를 뜻하지는 않는다고 설명합니다. μForge의 현재 [인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)에는 DPI/RGB에서 RGB888 최대 1024 × 600으로 기재되어 있습니다. 이 수치는 참고값이지 모든 패널 모드를 보장하지 않습니다. 정확한 부품과 패키지, 인터페이스, 패널 타이밍, 주사율, 핀 멀티플렉싱, 프레임버퍼/PSRAM 대역폭을 확인하십시오.
 
-3코어 Arm Cortex-M33 STAR-MC1[^1] 아키텍처를 사용합니다. 고성능 코어 2개(HCPU와 ACPU)는 최대 240 MHz로 동작하며 합산 성능은 1968 CoreMark / 740 DMIPS이고, 여기에 24 MHz 저전력 LCPU가 더해집니다. SiFli의 [ACPU 사용 가이드](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/acpu.html)에 따르면 ACPU는 오디오와 그래픽 처리를 담당하고, LCPU는 BLE와 센서 데이터 처리를 저전력 경로에서 담당합니다. 이 플랫폼은 592 KB의 리텐션 SRAM, ePicasso 3.0 그래픽, eZip 3.0 압축 해제, LCD 및 DCMI 카메라 컨트롤러, 듀얼 모드 Bluetooth, 오디오 ADC/DAC, SiP 및 외부 메모리 인터페이스, 보안 가속, FreeIO 핀 할당을 갖추고 있습니다. 핵심 차별점은 PTM(Parallel Task Machine)입니다. PTM은 사이클 단위 타이밍에 민감한 주변 장치 시퀀싱, 커스텀 IO 프로토콜, 센서 데이터 수집, PWM과 유사한 타이밍, 이벤트 처리를 메인 CPU에서 분리해 처리하는 소형 병렬 태스크 프로세서입니다.
+3코어 Arm Cortex-M33 STAR-MC1[^1] 아키텍처를 사용합니다. 고성능 코어 2개(HCPU와 ACPU)는 최대 240 MHz로 동작하며 합산 성능은 1968 CoreMark / 740 DMIPS이고, 여기에 24 MHz 저전력 LCPU가 더해집니다. SiFli의 [ACPU 사용 가이드](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/acpu.html)는 SF32LB57x를 3코어 시스템으로 명시하고, ACPU에는 오디오·그래픽 작업을, LCPU에는 BLE와 센서 데이터 처리 등 소비 전력에 민감한 작업을 배정합니다. 제품의 워크로드에 맞게 대상 SDK 구성과 작업 분담을 확인하십시오. 이 플랫폼은 592 KB의 리텐션 SRAM, ePicasso 3.0 그래픽, eZip 3.0 압축 해제, LCD 및 DCMI 카메라 컨트롤러, 듀얼 모드 Bluetooth, 오디오 ADC/DAC, SiP 및 외부 메모리 인터페이스, 보안 가속, FreeIO 핀 할당을 갖추고 있습니다. 핵심 차별점은 PTM(Parallel Task Machine)입니다. PTM은 사이클 단위 타이밍에 민감한 주변 장치 시퀀싱, 커스텀 IO 프로토콜, 센서 데이터 수집, PWM과 유사한 타이밍, 이벤트 처리를 메인 CPU에서 분리해 처리하는 소형 병렬 태스크 프로세서입니다.
 
 회로도를 재사용하거나 PCB 레이아웃을 시작하기 전에 정확한 주문 부품을 선택하십시오. SF32LB57x는 QFN68, QFN80, BGA112 패키지로 제공되며, 부품군에 따라 배터리 전원 기준 구성과 외부 레귤레이션 3.3 V 기준 구성으로 나뉩니다. 이 선택은 전원 트리, GPIO 수, 패키지 팬아웃, 디스플레이 및 스토리지 라우팅, 디버그 접근, 브링업 전략을 결정합니다.
 
@@ -45,6 +45,11 @@ SF32LB57x는 웨어러블, 휴대용 스마트 디바이스, 스마트 홈, 소�
 
 [Hardware Design Guide (μForge)]: ../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md
 [SiFli Approved Vendor List]: ../../hardware/cad-components/sifli-approved-vendor-list.md
+[SiFli SDK 소스 코드 저장소]: https://github.com/OpenSiFli/SiFli-SDK
+[배터리 전원 데이터시트]: https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/DS5701-SF32LB57x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf
+[3.3 V 전원 데이터시트]: https://downloads.sifli.com/docs/Datasheet/%E5%B8%B8%E4%BE%9B%E7%94%B5/DS5702-SF32LB57X-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf
+[사용자 설명서]: https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/UM5701-SF32LB57x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p1.pdf
+[원본 하드웨어 설계 가이드]: https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html
 [Buy Samples]: https://sifli.taobao.com/
 [Buy Dev Kits]: https://sifli.taobao.com/
 
@@ -53,6 +58,7 @@ SF32LB57x는 웨어러블, 휴대용 스마트 디바이스, 스마트 홈, 소�
 - :fontawesome-solid-file-pdf: __제품 개요서 ([배터리](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/PB5701-SF32LB57x-Product%20Brief%20v0.4.pdf), [3.3 V](https://downloads.sifli.com/docs/Datasheet/%E5%B8%B8%E4%BE%9B%E7%94%B5/PB5702-SF32LB57X-Product%20Brief%20v0p4.pdf))__
 - :fontawesome-solid-file-pdf: __데이터시트 ([배터리 / ZH](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/DS5701-SF32LB57x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf), [3.3 V / ZH](https://downloads.sifli.com/docs/Datasheet/%E5%B8%B8%E4%BE%9B%E7%94%B5/DS5702-SF32LB57X-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf))__
 - :fontawesome-solid-file-pdf: __[사용자 설명서 (ZH)](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/UM5701-SF32LB57x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p1.pdf)__
+- :fontawesome-brands-github: __[SiFli SDK 소스 코드 저장소]__
 - :fontawesome-solid-file-lines: __[원본 설계 가이드(wiki.sifli.com, ZH)](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html)__
 - :fontawesome-solid-file-lines: __[개발 키트 가이드(wiki.sifli.com, ZH)](https://wiki.sifli.com/board/sf32lb57x/SF32LB57-DevKit-LCD.html)__
 - :fontawesome-solid-file-lines: __[하드웨어 설계 가이드(μForge)][Hardware Design Guide (μForge)]__
@@ -74,6 +80,10 @@ SF32LB57x는 웨어러블, 휴대용 스마트 디바이스, 스마트 홈, 소�
 - 592 KB 리텐션 SRAM(512 KB HPSYS + 80 KB LPSYS), 128 KB 제로 웨이트 사이클 D-TCM 포함
 - 변형에 따라 달라지는 코패키지 메모리, 최대 48 MB PSRAM 및 32 MB NOR 플래시
 
+### AI 가속 { #ai-acceleration }
+
+SiFli의 [SF32LB57x 하드웨어 가이드](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html)는 AI 신경망 가속기가 통합되어 있다고 명시합니다. 하지만 [SiFli SDK v2.5.1 NNACC 가이드](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/docs/source/en/hal/nnacc.md)는 55x, 56x, 58x를 언급하지만 57x는 나열하지 않습니다. 가속 기능을 설계 전제로 삼기 전에 정확한 57x 부품의 드라이버, 연산자, 툴체인 지원 여부를 SiFli에 확인하십시오.
+
 ### PTM 병렬 태스크 머신 { #ptm-peripheral-task-machine }
 
 - CPU가 계속 서비스하는 대신 하드웨어 타이밍으로 실행하는 커스텀 주변 장치 작업용 4코어 Parallel Task Machine
@@ -91,7 +101,7 @@ SF32LB57x는 웨어러블, 휴대용 스마트 디바이스, 스마트 홈, 소�
 
 ### 그래픽, 디스플레이, 카메라 { #graphics-display-and-camera }
 
-최대 해상도와 패널 인터페이스는 [디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)에서 확인하십시오.
+현재 μForge 인터페이스 매트릭스는 DPI/RGB를 통한 RGB888 1024 × 600을 기재하며, 출처별 주의사항과 모드 검증 조건은 [개요](#overview)에 설명되어 있습니다. 정확한 부품/패키지의 인터페이스와 노출 핀은 [디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)에서 확인하십시오.
 
 - ePicasso 3.0 2D/2.5D 그래픽 가속기, 최대 2048 × 2048
 - 무손실 eZip/eZip-A와 JPEG, MJPEG용 eZip 3.0 하드웨어 디코더
@@ -195,8 +205,8 @@ SF32LB57x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 
 1. **펌웨어 경로 검증.** [SiFli SDK 시작 가이드](../../getting-started/sifli/getting-started-sifli-sdk.md)로 시작한 다음, [SiFli SDK 워크플로](../../develop/platforms/sifli-sdk/overview.md)와 [예제](../../develop/examples/index.md)를 사용해 의도한 그래픽, 오디오, 카메라, Bluetooth, 스토리지 기능을 검증하십시오.
 2. **평가 하드웨어 계획.** [SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md)로 디스플레이, 카메라, 오디오 및 통신 기능을 평가하십시오. 57x 제품의 설계 기준으로 사용하기 전에 모듈 메모리 구성, 보드 리비전 및 공유 핀 설정을 확인하십시오.
-3. **하드웨어 설계 및 검토.** 회로도 또는 레이아웃을 릴리스하기 전에 로컬 [SF32LB57x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md)와 그 [고객 설계 자체 점검](../../hardware/chip-guides/SF32LB57x_review_and_reference.md#7-customer-design-self-check), 그리고 [양산 설계](../../hardware/design-for-production.md) 검토 절차를 사용하십시오. 제품군 전용 μForge.io 체크리스트는 현재 게시되어 있지 않습니다.
-4. **주요 정보 출처 확인.** 실제 주문할 부품과 패키지를 SiFli [데이터시트][Datasheet], [사용자 매뉴얼][User Manual], [원본 설계 가이드][Original Design Guide (wiki.sifli.com)]와 대조하여 확인하고, 핵심 BOM 선택을 관리할 때는 [SiFli 승인 업체 목록][SiFli Approved Vendor List]을 사용하십시오.
+3. **하드웨어 설계 및 검토.** 회로도 또는 레이아웃을 릴리스하기 전에 로컬 [SF32LB57x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md)와 그 [고객 설계 자체 점검](../../hardware/chip-guides/SF32LB57x_review_and_reference.md#7-customer-design-self-check), 그리고 [양산 설계](../../hardware/design-for-production.md) 검토 절차를 사용하십시오. [회로도 체크리스트](../../hardware/chip-guides/SF32LB57x_schematic_checklist.md)와 [PCB 레이아웃 체크리스트](../../hardware/chip-guides/SF32LB57x_pcb_layout_checklist.md)도 함께 적용하십시오.
+4. **주요 정보 출처 확인.** 실제 주문할 부품과 패키지를 [배터리 전원 데이터시트] 또는 [3.3 V 전원 데이터시트], [사용자 설명서], SiFli [원본 하드웨어 설계 가이드]와 대조하여 확인하십시오. 핵심 BOM 선택에는 [SiFli 승인 업체 목록]을 사용하십시오.
 
 <!-- uf-faq:start -->
 ## 자주 묻는 질문 { #frequently-asked-questions }
@@ -204,17 +214,19 @@ SF32LB57x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 **SF32LB57x의 주요 사양은 무엇입니까?**
 SF32LB57x는 애플리케이션 CPU(2× Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @24 MHz, 전용 Bluetooth 컨트롤러)를 갖추고 있으며, 내장 SRAM은 592 KB입니다. Bluetooth 모드는 듀얼 모드(Classic Bluetooth + BLE)입니다. 그래픽: ePicasso 3.0 + eZip 3.0. 패키지는 QFN68 / QFN80 / BGA112이며, 크기는 7 × 7 mm (QFN68), 8 × 8 mm (QFN80), 5.4 × 4.4 mm (BGA112)입니다. USB는 2.0 FS를 지원합니다.
 
+하드웨어 설계 가이드에는 신경망 가속기가 통합된 것으로 기재되어 있지만, SDK v2.5.1 NNACC 가이드는 57x의 드라이버 또는 연산자 지원을 확인해 주지 않습니다. 정확한 대상의 소프트웨어 지원 경로를 확인하십시오. [AI 가속](#ai-acceleration)을 참조하십시오.
+
 **SF32LB57x는 어떤 디스플레이 인터페이스를 지원합니까?**
-지원하는 인터페이스는 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB입니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+지원하는 인터페이스는 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB입니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)) 전체 제품군의 인터페이스 목록이며 모든 부품 번호나 패키지에 대한 보장이 아닙니다. 연결된 인터페이스 매트릭스를 확인하십시오.
 
 **SF32LB57x가 지원하는 최대 디스플레이 해상도는 얼마입니까?**
-RGB888 색상에서 최대 1024 × 600 해상도를 지원합니다. DPI/RGB 인터페이스를 사용합니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+하드웨어 설계 가이드의 한계는 1024 × 1024이며, SiFli LCD FAQ는 일반적이거나 검증된 RGB/DPI 설계로 1024 × 600과 720 × 720을 제시합니다. 현재 인터페이스 매트릭스에는 1024 × 600 RGB888이 기재되어 있습니다. 서로 대체할 수 있는 보장값이 아닙니다. 정확한 부품과 패키지, 인터페이스, 패널 타이밍, 주사율, 핀 멀티플렉싱, 프레임버퍼/PSRAM 대역폭을 확인하십시오. [디스플레이 적용 조건](#overview)을 참조하십시오. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
 **SF32LB57x는 패키지 내 메모리를 얼마나 제공합니까?**
 패키지 내 PSRAM은 최대 48 MB, NOR 플래시는 최대 32 MB를 제공합니다.
 
 **SF32LB57x에는 어떤 공급 전압이 필요합니까?**
-공급 전압은 3.0–4.7 V 또는 2.97–3.63 V입니다.
+배터리 구동 부품: DS5701은 3.0–4.7 V를, 하드웨어 설계 가이드는 QFN68/QFN80/BGA112에 대해 3.45–4.7 V를 제시합니다. DS5701의 전원 인가 전압은 3.5 V ±10%입니다. 외부 레귤레이터 사용 부품: 2.97–3.63 V입니다. 정확한 부품과 입력 핀에 대해 출처 간 차이를 확인하십시오. [전원 적용 조건](#power-management)을 참조하십시오.
 
 **SF32LB57x로 하드웨어 설계를 시작하려면 어떻게 해야 합니까?**
 먼저 [SF32LB57x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하십시오.
@@ -228,10 +240,13 @@ RGB888 색상에서 최대 1024 × 600 해상도를 지원합니다. DPI/RGB 인
 
 ### 개발 키트 { #development-kits }
 
-[SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md)는 RGB 디스플레이, DVP 카메라, 듀얼 PDM 마이크, 스피커 출력, SDIO Wi-Fi, USB를 평가할 수 있는 평가 보드입니다. SF32LB57 코어 보드를 기반으로 하며, 이 코어 보드는 RF 인증을 완전히 마치고 상용화되기 전까지 57 모듈 역할을 합니다.
+[SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md)는 RGB 디스플레이, DVP 카메라, 듀얼 PDM 마이크, 스피커 출력, SDIO Wi-Fi, USB를 평가할 수 있는 평가 보드입니다. SF32LB57-MOD-WD 모듈을 사용합니다. SiFli 보드 가이드는 이 모듈을 3.3 V SF32LB57X 모듈로 설명하며, Wi-Fi/Bluetooth 콤보와 부팅용 QSPI 플래시가 탑재되고 OPI-PSRAM 포함 여부는 모듈 SKU에 따라 달라진다고 안내합니다. 양산 기준으로 사용하기 전에 정확한 모듈 구성과 RF 인증 상태를 SiFli에 확인하십시오.
 
 공식 레퍼런스 회로도, 최소 시스템 가이드, 체크리스트 자료를 사용해 전원, 클럭, RF, 디스플레이, 스토리지, 오디오, 카메라, 양산 접근 방법을 계획하십시오.
 
 ### 레퍼런스 제품 { #reference-products }
 
 일반적인 SF32LB57x 최종 제품으로는 웨어러블 워치와 밴드, 스마트 HMI 디바이스, e-paper 제품, 중소형 스마트 가전, 휴대용 녹음/오디오 디바이스, 스마트 홈 패널, 소형 디스플레이 단말기, 카메라를 지원하는 Bluetooth 제품이 있습니다.
+
+!!! note "자동 생성 콘텐츠"
+    이 페이지는 기존 원본 문서 없이 편집/작성되었습니다. 기술 정보를 신뢰하기 전에 SiFli 공식 문서에서 확인하십시오.

@@ -12,6 +12,8 @@ tags:
 
 A série SF32LB55x é uma família de microcontroladores AIoT de categoria intermediária e consumo ultrabaixo, voltada a produtos conectados por BLE que precisam de melhores recursos de exibição, mais memória disponível e maior flexibilidade de encapsulamento que os MCUs Bluetooth de entrada.
 
+Na seleção, uma das diferenças mais importantes está no encapsulamento e na memória integrada: SS6600A8 usa QFN68L, não inclui PSRAM no encapsulamento e requer 2,97–3,63 V; SF32LB551U4O5 e as variantes BGA listadas aqui usam 1,71–3,63 V.
+
 A arquitetura big.LITTLE de dois núcleos reúne dois processadores Arm Cortex-M33 STAR-MC1[^1]: um núcleo de aplicação de alto desempenho, com frequência de até 240 MHz, e um núcleo que opera com consumo ultrabaixo, de até 48 MHz. Essa divisão permite executar as tarefas de interface do usuário mais exigentes no núcleo de aplicação, enquanto o núcleo de baixo consumo cuida do processamento dos sensores, do controle em modo de espera e das tarefas BLE que precisam permanecer ativas.
 
 Segundo o resumo de produto e o datasheet oficiais da SiFli, a família combina BLE 5.2, o mecanismo gráfico ePicasso 2.5D, dois controladores LCD e um acelerador matricial de redes neurais voltado a TinyML. A SRAM no chip totaliza 1.312 KB (1.088 KB no HCPU + 224 KB no LCPU), e há suporte a memórias externas NOR, NAND, eMMC e PSRAM. Essa combinação torna o SF32LB55x uma opção prática para dispositivos vestíveis, produtos com muitos sensores e HMIs compactas que precisam de mais recursos que o SF32LB52x, sem precisar recorrer às categorias superiores 56/58.
@@ -201,10 +203,10 @@ Siga esta sequência para passar de uma pré-seleção de componentes SF32LB55x 
 ## Perguntas frequentes { #frequently-asked-questions }
 
 **Quais são as principais especificações do SF32LB55x?**
-O SF32LB55x combina uma CPU de aplicação (Cortex-M33 @240 MHz) com um núcleo de baixo consumo (Cortex-M33 @48 MHz, programável pelo usuário). Integra 1.312 KB de SRAM interna e oferece apenas Bluetooth Low Energy (BLE). Gráficos: ePicasso 1.0. Encapsulamento: QFN68 / BGA145 / BGA169 (7 × 7 mm (QFN68)). USB 2.0 FS.
+O SF32LB55x oferece processamento de aplicações (Cortex-M33 @240 MHz) e um núcleo de baixo consumo (Cortex-M33 @48 MHz, programável pelo usuário). Integra 1.312 KB de SRAM interna e oferece apenas Bluetooth Low Energy (BLE). Gráficos: ePicasso 1.0. Encapsulamento: QFN68L / BGA145 / BGA169 (7 × 7 mm (QFN68L)). USB 2.0 FS.
 
 **Quais interfaces de display o SF32LB55x suporta?**
-SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix)) Esta lista abrange toda a família, não garante todas as interfaces em cada código de componente ou encapsulamento; confira a matriz de interfaces vinculada.
 
 **Qual é a resolução máxima de display do SF32LB55x?**
 Até 512 × 512 com cor RGB888, via MIPI-DSI, apenas com drivers de display com RAM integrada. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -213,7 +215,7 @@ Até 512 × 512 com cor RGB888, via MIPI-DSI, apenas com drivers de display com 
 Até 16 MB + 2 MB de PSRAM e até 8 MB de Flash NOR no encapsulamento.
 
 **Qual tensão de alimentação o SF32LB55x precisa?**
-1,71–3,63 V.
+SS6600A8 requer 2,97–3,63 V; SF32LB551U4O5 e as variantes BGA listadas nesta página usam 1,71–3,63 V. Defina o componente exato antes de projetar a árvore de alimentação.
 
 **Por onde começar um projeto de hardware com o SF32LB55x?**
 Comece pelo [guia de projeto de hardware do SF32LB55x](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) para esquemático, alimentação, clock/RF e layout de PCB, e use os checklists de esquemático e layout antes de liberar a placa.

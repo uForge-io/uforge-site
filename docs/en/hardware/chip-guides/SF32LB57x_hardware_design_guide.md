@@ -47,6 +47,8 @@ This document assumes a basic understanding of embedded hardware design and sche
 
 Typical SF32LB57x resources include:
 
+- STAR-MC1 Arm Cortex-M33 architecture with two large cores plus one small core.
+- Integrated 2D/2.5D graphics engine, AI neural-network accelerator, dual-mode Bluetooth 6.0, and audio codec.
 - Up to 58 GPIOs<!-- BGA-ONLY -->; some BGA112 variants expose six additional I/Os that can be used for MPI3 or configured as GP static outputs through pull-up/pull-down; see Packages<!-- /BGA-ONLY -->.
 - 3x UART, 4x I2C, 2x SPI, 2x CAN.
 - 2x GPTIM (4 channels each), 2x LPTIM, 2x ATIM (3 differential or 4 single-ended channels each), 1x PWM (5 channels), 1x PTM (16 channels).
@@ -62,6 +64,9 @@ Typical SF32LB57x resources include:
 
 !!! note "Display-interface scope"
     The hardware application note lists SPI/QSPI, 24-bit DPI, 16-bit 8080, 16-bit EPD, and serial/parallel JDI in the SF32LB57x LCDC interface summary. MIPI-DSI appears in the compatibility list for certain display-driver ICs, not in that direct LCDC interface summary. Do not treat the panel-driver listing as confirmation of a native MIPI-DSI host interface on the chip; verify the exact display-controller path with SiFli before selecting a design.
+
+!!! note "AI-accelerator software support"
+    SiFli's hardware application note identifies an integrated AI neural-network accelerator for SF32LB57x. The [SiFli SDK NNACC guide](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/nnacc.html) lists SF32LB55x, SF32LB56x, and SF32LB58x, but not SF32LB57x. The hardware feature alone therefore does not confirm software support for accelerated inference on SF32LB57x; confirm support for the exact part and SDK release with SiFli before relying on it.
 
 ### 3.2. Variants { #32-variants }
 

@@ -13,7 +13,7 @@ tags:
 ### Part Number: ***SF32LB5xyZxYx6*** { #part-number-sf32lb5xyzxyx6 }
 
 !!! note "Syntax Note"
-    * Lowercase ***x*** denotes a numeric digit.
+    * Lowercase ***x*** denotes a numeric code in the generic pattern; published memory positions may also use family-specific codes such as **N**.
     * Uppercase ***Y*** or ***Z*** denotes an alphabetic character.
     * On SF32LB57x, the sub-series position (**y**) is a digit for battery-powered parts and a letter for 3.3 V-supply parts.
 
@@ -40,15 +40,16 @@ tags:
 - **xYx** — Integrated Memory Configuration (QSPI-NOR Flash & PSRAM)
   *(Note: Exact encoding mapping depends on the specific package and device family)*
 
-Treat `ZxYx6` as a family-level pattern, not a fixed-width parsing template. The number and order of memory codes vary by device family and package: a numeric Flash code may be absent, and a PSRAM letter may repeat when multiple devices are integrated. Decode each exact order code against its family-specific variant table.
+Treat `ZxYx6` as a family-level pattern, not a fixed-width parsing template. The general guide maps numeric NOR codes and alphabetic PSRAM codes. Published suffixes may also contain family-specific codes, including codes for memory not integrated at a given position. The number and order of memory codes vary by device family and package: a numeric Flash code may be absent, and a PSRAM letter may repeat when multiple devices are integrated. Decode each exact order code against its family-specific variant table.
 <div align="center"><em>Part Number Suffix Field Definitions</em></div>
 
 <div align="center" markdown>
 
 | Field | Type | Options | Description |
 | :--- | :--- | :--- | :--- |
-| **x** | Alphanumeric | **N**, **1** to **8** | Generic QSPI-NOR Flash capacity mapping:<br>• **N**: No co-packaged memory<br>• **1**: 2 Mb<br>• **2**: 4 Mb<br>• **3**: 8 Mb<br>• **4**: 16 Mb<br>• **5**: 32 Mb<br>• **6**: 64 Mb<br>• **7**: 128 Mb<br>• **8**: 256 Mb |
-| **Y** | Alphabetic | **N**, **A** to **E** | Integrated PSRAM capacity & interface:<br>• **N**: No co-packaged memory<br>• **A**: 16 Mb QPI-PSRAM<br>• **B**: 32 Mb OPI-PSRAM<br>• **C**: 64 Mb OPI-PSRAM<br>• **D**: 128 Mb OPI/HPI-PSRAM<br>• **E**: 256 Mb HPI-PSRAM |
+| **x** | Numeric code in the generic pattern | **1** to **6** in the general guide; **7** in the SF32LB57 variant table | General-guide QSPI-NOR capacity mapping:<br>• **1**: 2 Mb<br>• **2**: 4 Mb<br>• **3**: 8 Mb<br>• **4**: 16 Mb<br>• **5**: 32 Mb<br>• **6**: 64 Mb<br>The SF32LB57 variant table uses **7** for 128 Mb NOR Flash. The general guide does not define a universal mapping for **8**; decode each part against its family-specific table. |
+| **Y** | Alphabetic code in the generic pattern | **A** to **E** in the general guide | General-guide integrated PSRAM capacity and interface:<br>• **A**: 16 Mb QPI-PSRAM<br>• **B**: 32 Mb OPI-PSRAM<br>• **C**: 64 Mb OPI-PSRAM<br>• **D**: 128 Mb OPI/HPI-PSRAM<br>• **E**: 256 Mb HPI-PSRAM |
+| **N** | Family-specific memory-position code | Where listed in a family table | Indicates no co-packaged memory at that position. |
 
 </div>
 

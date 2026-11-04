@@ -10,7 +10,7 @@ tags:
 
 Para dispositivos SF32 e placas com hardware USB compatível, a documentação e os exemplos do SiFli-SDK mostram a integração com CherryUSB. Confirme quais papéis e classes USB são compatíveis com o chip, a placa e a versão do SDK específicos, e trate o USB como uma pilha de software completa, não apenas como um recurso de hardware.
 
-O desenvolvimento USB envolve firmware, descritores, sistemas operacionais host, comportamento da alimentação e ferramentas de produção. Um dispositivo que enumera uma vez no notebook de desenvolvimento ainda não está concluído.
+O desenvolvimento USB envolve firmware, descritores, sistemas operacionais host, comportamento da alimentação e ferramentas de produção. O fato de um dispositivo ser enumerado com sucesso uma única vez no notebook de desenvolvimento não significa que ele esteja pronto.
 
 ## Aplicações { #use-cases }
 
@@ -51,7 +51,9 @@ O desenvolvimento USB envolve firmware, descritores, sistemas operacionais host,
 
 O [índice oficial de exemplos CherryUSB do SiFli-SDK](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/index.html) organiza separadamente os exemplos de USB Device e USB Host. Comece pelo exemplo correspondente ao papel USB e à classe desejada; aplique à implementação do produto as verificações de descritores, alimentação e compatibilidade com o host.
 
-<div align="center"><em>Tabela: Exemplos CherryUSB do SiFli-SDK para SF32LB58x</em></div>
+Os exemplos não oferecem suporte ao mesmo conjunto de placas. Antes de reutilizar um deles, consulte a seção “Supported Platforms” na página correspondente e confirme se a placa de destino está listada.
+
+<div align="center"><em>Tabela: Exemplos CherryUSB do SiFli-SDK listados na documentação do SF32LB58x</em></div>
 <div align="center" markdown>
 
 | Papel USB | Exemplo | Ponto de partida |

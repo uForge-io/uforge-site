@@ -82,7 +82,7 @@ Die extDMA-Anleitung nennt RGB565, RGB888 und ARGB8888 als Eingabeformate. Darau
 
 Der aktuelle OpenSiFli-LCDC-Header definiert das Support-Makro für komprimierte Ebenen nur bei aktiviertem `HAL_EXTDMA_MODULE_ENABLED`; die Familienbedingung schließt SF32LB52x und SF32LB57x aus. Der Header legt maximale Breiten von 512 Pixeln für SF32LB55x/SF32LB56x und 1024 Pixeln für SF32LB58x fest. Das sind Integrationsgrenzen für komprimierte Ebenen, keine allgemeinen Grenzen der Panelauflösung. Ein Quellcodekommentar weist zudem darauf hin, dass der LCPU-Pfad nicht aktiviert ist.
 
-Für SF32LB55x ist eine Integrationsbesonderheit zu beachten: Der aktuelle OpenSiFli-LCDC-Header definiert das Makro für komprimierte Ebenen, wenn `HAL_EXTDMA_MODULE_ENABLED` aktiviert ist; ein Kommentar weist jedoch darauf hin, dass der LCPU-Pfad nicht aktiviert ist. Die veröffentlichte SDK-LCDC-Funktionstabelle kennzeichnet die Dekomprimierung komprimierter Ebenen auf 55x als nicht unterstützt, während das SF32LB55x-Datenblatt TurboPixel und die Dekomprimierung durch den LCD-Controller beschreibt. Ein Präprozessor-Makro belegt nicht, dass der vollständige Displaypfad validiert wurde. Betrachten Sie 55x daher als bedingt unterstützt und prüfen Sie die konkrete SDK-Version, den Kern, die Build-Konfiguration und die Zielhardware. Leiten Sie die Laufzeitunterstützung nicht allein aus dem Makro ab.
+Die verfügbaren Quellen unterscheiden sich hinsichtlich der Integration auf SF32LB55x. Die veröffentlichte SDK-LCDC-Funktionstabelle kennzeichnet die Dekomprimierung komprimierter Ebenen auf 55x als nicht unterstützt, während das SF32LB55x-Datenblatt TurboPixel und die Dekomprimierung durch den LCD-Controller beschreibt. Diese Quellen belegen keinen validierten vollständigen Displaypfad; das zuvor beschriebene Header-Makro ist kein Nachweis für die Laufzeitunterstützung. Betrachten Sie 55x als bedingt unterstützt und prüfen Sie die konkrete SDK-Version, den Kern, die Build-Konfiguration und die Zielhardware.
 
 Regeln Sie die Pufferübergabe zwischen Renderer, extDMA und Display-Controller eindeutig. Starten Sie die Kompression erst nach dem Rendering, übergeben Sie den Puffer nach abgeschlossener Kompression an den Display-Controller und verwenden Sie ihn erst wieder, wenn die Übertragung abgeschlossen ist. Bei cachebarem gemeinsamem Speicher schreiben Sie die vom Prozessor geänderten Quell-Cachezeilen vor dem Hardware-Lesezugriff mit einer Cache-Clean-Operation in den Speicher zurück. Bereiten Sie Ziel-Cachezeilen so vor, dass veränderte Cachezeilen das Hardware-Ergebnis nicht nachträglich überschreiben; invalidieren Sie nach Abschluss veraltete Cachezeilen, bevor die CPU liest. Beachten Sie Cachezeilengrenzen und benachbarte Daten. Das Ende der Kompression bedeutet nicht, dass auch die Panel-Übertragung abgeschlossen ist.
 
@@ -90,7 +90,7 @@ Quelladresse, Zieladresse und extDMA-Übertragungslänge müssen auf 4 Byte ausg
 
 ## Verfügbarkeit in der SF32-Familie { #availability-in-the-sf32-family }
 
-TurboPixel ist für die folgenden SF32-Familien dokumentiert:
+Die aktuelle Quellenlage zur TurboPixel-Verfügbarkeit in den SF32-Familien ist unten zusammengefasst:
 
 <div align="center"><em>Dokumentierte TurboPixel-Verfügbarkeit</em></div>
 

@@ -428,6 +428,9 @@ La elección de la interfaz de pantalla debe hacerse al seleccionar el encapsula
 
 </div>
 
+!!! warning "Verifique la descripción de RDX para MCU8080 en SF32LB56xV"
+    La tabla de pines de SiFli describe RDX como una señal de lectura «para escribir datos», mientras que la descripción de la interfaz MCU/8080 de SiFli indica que al conmutar RDX se leen datos. Ambas descripciones son contradictorias; confirme el funcionamiento previsto en la documentación del controlador de pantalla antes de asignar esta señal.
+
 <div align="center"><em>Tabla 5.5-7: Interfaz de pantalla DPI de SF32LB56xV</em></div>
 
 <div align="center" markdown>

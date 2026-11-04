@@ -283,7 +283,7 @@ Review four items for every peripheral interface:
 1. Electrical connectivity, including crossed signals, pull-up/down resistors, ESD, and termination.
 2. IO voltage-domain compatibility, including back-power risk when the peripheral is off.
 3. Safe reset and sleep default states.
-4. Conflicts with boot, download, SWD, USB, wake, or high-speed display multiplexed functions.
+4. Conflicts with boot, download, SWD, USB, wake, or high-speed display-multiplexed functions; also confirm whether a key must provide hardware wake and complete the required circuit and software configuration.
 
 #### 5.6.9. UART
 
@@ -291,6 +291,7 @@ Review four items for every peripheral interface:
 - MCU RXD connects to peripheral TXD; MCU TXD connects to peripheral RXD.
 - Match peripheral IO voltage with the MCU IO domain.
 - Review reset-state behavior for UART pins that are multiplexed with USB, boot, download, or debug functions.
+- If UART is multiplexed onto `PA35` or `PA36`, keep the external peripheral powered off during MCU reset or configure the corresponding pin low in software to prevent unintended peripheral activity.
 - `PA18` and `PA19` are the default `DBG-UART` pins. For UART test interfaces that are frequently plugged and unplugged, the source recommends `PA18`, `PA19`, `PA43`, or `PA44`; this GPIO group is rated to 5.5 V. For long test leads, add a 100 Ω series resistor to suppress overshoot.
 
 #### 5.6.10. I2C
@@ -299,6 +300,8 @@ Review four items for every peripheral interface:
 - SF32LB57x provides four I2C interfaces, each supporting host and device modes; matrix routing can assign them to any GPIO.
 - The source recommends 4.7 kΩ for Standard-mode (100 kHz), 2.2 kΩ to 3.3 kΩ for Fast-mode (400 kHz), and 1 kΩ to 2.2 kΩ for Fast-mode Plus (1 MHz). For 400 kHz, 2.2 kΩ is a starting point; adjust for bus capacitance.
 - One pull-up set near the host is sufficient for a shared I2C bus; do not add a separate set at every device. Power the pull-ups from the peripheral rail so they turn off with it and do not cause sleep leakage.
+- Check whether an I2C peripheral's interrupt needs to wake the MCU; if so, complete the corresponding circuit and software configuration.
+- I2C accelerometer, heart-rate, and geomagnetic sensors must support a single continuous bulk read of all registers.
 - Ensure every device on the same bus has a unique address.
 
 #### 5.6.11. SPI
@@ -336,8 +339,9 @@ Review four items for every peripheral interface:
 
 - Route USB DP/DN as a 90 ohm differential pair.
 - USB DP/DM commonly use `PA35` / `PA36` multiplexed functions. When USB is enabled, ensure external circuitry does not force unsafe levels during reset.
-- Place ESD close to the connector; route signals through ESD before the chip.
+- Protect USB data lines, VBUS, and other critical pins with ESD devices. Place ESD close to the connector and route the signals through the devices before they reach the chip.
 - Avoid stubs and maintain pair matching and reference ground continuity.
+- When the MCU is not asleep, keep USB enabled so the protocol can detect device attachment and removal.
 - If USB insertion must wake the device during sleep, connect a VBUS resistor divider to a hardware-wake GPIO; sharing that GPIO with charger-insertion detection is recommended.
 - `PA35` is fixed as `USB_DP`, and `PA36` is fixed as `USB_DM`; these functions are not remappable. USB2.0 FS supports up to 12 Mbps.
 - Reserve 22 ohm or 33 ohm series resistors near the chip side on DP/DM, plus unpopulated shunt capacitor footprints for signal-integrity tuning.
@@ -357,6 +361,7 @@ Review four items for every peripheral interface:
 - Use 1% resistors for divider-based measurement.
 - Place a 100 nF (0.1 uF) filtering capacitor close to the chip pin on every GPADC input.
 - Keep GPADC traces away from DC/DC, RF, USB, SDIO, display clocks, and charging loops.
+- Also keep GPADC traces away from high-speed parallel signals and provide ground shielding around the route to reduce digital-noise coupling.
 
 <div align="center"><em>Table 5.6-8: GPADC Pin Assignment</em></div>
 

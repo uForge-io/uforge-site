@@ -20,11 +20,11 @@ tags:
 
 | Инструмент | Назначение |
 |:-----------|:-----------|
-| [`sftool`](https://github.com/OpenSiFli/sftool) | Кроссплатформенная утилита для загрузки и прошивки SF32, используемая в процессах OpenSiFli на Zephyr и Arduino. |
+| [`sftool`](https://github.com/OpenSiFli/sftool) | Кроссплатформенная последовательная CLI для поддерживаемых SoC SiFli: запись, чтение и стирание Flash, сброс микросхемы и другие операции. |
 | [UART-скрипты SDK для прошивки](../platforms/sifli-sdk/build-flash-monitor.md) | Скрипты для первичной прошивки, создаваемые при сборке SiFli-SDK. |
 | [Действия CodeKit](codekit.md) | Настройка, сборка, прошивка и мониторинг из VS Code. |
 | [`AssertDump`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/AssertDump/AssertDump_UM.html) | Сохранение данных памяти при сбое для последующего анализа. |
-| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | Сбор трассировок/журналов и отладка по UART через Debug IP микросхемы. |
+| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace` собирает журналы целевой платы; `UsartServer` обеспечивает отладку по UART через Debug IP микросхемы. |
 | [`Impeller`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/Impeller/Impeller_UM.html) | Программирование прошивки, калибровка и тестирование PCBA на производственной линии. |
 | [eZip / инструменты для изображений](../../learn/graphics/ezip.md) | Преобразование ресурсов для графических конвейеров со сжатием. |
 | [Инструменты для RF, аудио и производства](https://docs.sifli.com/projects/solution/6.tools/index.html) | Калибровка, тестирование и настройка на этапе производства. |
@@ -33,12 +33,13 @@ tags:
 
 ## Инструменты прошивки { #flashing-tools }
 
-Для первого запуска платы используйте UART-скрипты SDK: они создаются для только что собранной прошивки. Добавьте `sftool`, если вам нужны:
+Для первого запуска платы используйте UART-скрипты SDK: они создаются для только что собранной прошивки. Используйте `sftool`, когда для задачи подходит кроссплатформенная последовательная CLI:
 
-- Единый инструмент командной строки для прошивки в разных процессах.
-- Интеграция с `west flash` в Zephyr.
-- Поддержка загрузки прошивки через ArduinoCore-zephyr.
-- Автоматизация в CI, на производстве или при регрессионном тестировании.
+- Прямая запись, чтение или стирание Flash вне скрипта загрузки, созданного SDK.
+- Повторяемый процесс командной строки на поддерживаемых SoC SiFli и хост-платформах.
+- Автоматизация через JSON-файл команд или обёртку для CI, производства либо регрессионного тестирования.
+
+Интеграция с конкретным процессом сборки или загрузки, например `west flash` или загрузчиком Arduino, зависит от конфигурации проекта.
 
 Пока команда не выбрала единый стандарт, документируйте в проекте оба способа.
 

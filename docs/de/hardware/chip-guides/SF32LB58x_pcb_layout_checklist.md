@@ -19,6 +19,8 @@ tags:
 
 Jede Tabelle behandelt einen eigenen Prüfbereich des PCB-Layouts. Fehlt die Spalte „Gilt für“, gelten die Prüfpunkte für alle SF32LB58x-PCB-Designs im Umfang dieser Checkliste.
 
+Diese Checkliste basiert auf SiFlis Arbeitsmappe „SF32LB58x Schematic&PCB checklist“, Version V1.0 vom 2026-01-21.
+
 ### 6.18.1. Gehäuse { #6181-package }
 
 <div align="center"><em>Tabelle 6.18.1-1: Gehäuse-Checkliste</em></div>
@@ -179,9 +181,9 @@ Jede Tabelle behandelt einen eigenen Prüfbereich des PCB-Layouts. Fehlt die Spa
 
 | Nr. | Prüfpunkt | Kategorie |
 |:---|:---|:---|
-| 1 | Schnell schaltende Signale nicht parallel zum GPADC-Signal führen; ist das nicht vermeidbar, eine geeignete Masseabschirmung vorsehen | Erforderlich |
+| 1 | Schnell schaltende Signale nicht parallel zum GPADC-Signal führen | Erforderlich |
 | 2 | Akkuspannungsteiler-Widerstände sind nah am Chip-Eingangspin platziert | Erforderlich |
-| 3 | Schnell schaltende Signale nicht parallel zum SDMADC-Signal führen; ist das nicht vermeidbar, eine geeignete Masseabschirmung vorsehen | Optional |
+| 3 | Schnell schaltende Signale nicht parallel zum SDMADC-Signal führen | Optional |
 
 </div>
 

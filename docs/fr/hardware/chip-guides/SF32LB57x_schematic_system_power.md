@@ -208,7 +208,7 @@ Utilisez ce tableau pour la pré-revue de schéma. Les valeurs finales doivent t
 
 | Rail / Broche | Condensateur externe typique | Usage principal | Remarques de conception |
 |:-----------|:---------------------------|:---------|:-------------|
-| `VBUS` | >= 10 µF | Entrée USB / chargeur | Variantes alimentées par batterie uniquement ; ajoutez une protection OVP/ESD/EOS. |
+| `VBUS` | >= 10 µF | Entrée USB / chargeur | Ce condensateur n'est nécessaire qu'avec le chargeur intégré ; sinon, `VBUS` peut rester non connecté et le condensateur peut être omis. En cas d'utilisation de `VBUS`, prévoyez une protection OVP/ESD/EOS. |
 | `VBAT` | >= 4,7 µF | Connexion batterie et détection de tension de batterie | Gardez le chemin de batterie court et large ; évitez le routage parallèle avec des pistes sensibles. |
 | `VCC` / `PVDD` | >= 10 µF | Entrée PMU / système principale | Placez le découplage près de la puce et dimensionnez la piste pour le courant. |
 | `VSYS` | Environ 2,2 µF | Alimentation interne ou analogique/RF spécifiée | Ne l'utilisez pas comme alimentation périphérique générale ; contrôlez la charge totale et la capacité. |

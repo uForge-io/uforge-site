@@ -29,12 +29,13 @@ The board combines the MCU module, display connectors, touch interface, analog m
 - QSPI/SPI/DSPI LCD support through a 22-pin FPC connector
 - 8-bit MCU/8080 LCD support through the FPC and 40-pin expansion header
 - I2C touch-panel support
-- USB-C for USB-to-UART download/debug and board power
+- USB-C for download/debug through the on-board CH343P USB-to-UART bridge and for board power
 - Separate USB-C interface for USB2.0 FS use cases
 - On-board MEMS microphone and Class-D audio power amplifier
 - MicroSD card slot using SPI
 - Battery connector and ETA9640P linear charger
 - 40-pin expansion header for display, GPIO, storage, audio, and power signals
+- On-board switch, function and reset buttons, RGB/charge/GPIO/power indicators, and LCD backlight driver
 
 ## When to Use This Board { #when-to-use-this-board }
 
@@ -108,7 +109,7 @@ Check the silkscreen and design package for the exact board revision before usin
 
 - Speaker
 - TF card
-- Single-cell Li-ion/Li-poly battery, typically 450mAh to 500mAh
+- Single-cell Li-ion/Li-poly battery; SiFli recommends 450 mAh
 - Second USB cable when UART debug and native USB testing are needed at the same time
 
 ### Basic Setup { #basic-setup }

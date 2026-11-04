@@ -34,13 +34,13 @@ Wählen Sie den Chip oder das Modul aus, auf dem Ihr Design basiert, und öffnen
 
 <div align="center" markdown style="max-width: 100%; overflow-x: auto;">
 
-| Ausgewählte Chip-Familie | Hardware-Design-Leitfaden | Checkliste | Hier beginnen, wenn |
+| Ausgewählte Chip-Familie | Hardware-Design-Leitfaden | Checkliste | Typischer Einsatz |
 |:---------------------|:----------------------|:----------|:----------------|
-| SF32LB52x | [Leitfaden](chip-guides/SF32LB52x_hardware_design_guide.md) | [Checkliste](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | Sie eine Leiterplatte für den direkt bestückten SF32LB52x entwickeln. |
-| SF32LB55x | [Leitfaden](chip-guides/SF32LB55x_hardware_design_guide.md) | [Checkliste](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | Sie eine Leiterplatte für den direkt bestückten SF32LB55x entwickeln. |
-| SF32LB56x | [Leitfaden](chip-guides/SF32LB56x_hardware_design_guide.md) | [Checkliste](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | Sie eine Leiterplatte für den direkt bestückten SF32LB56x entwickeln. |
-| SF32LB57x | [Leitfaden](chip-guides/SF32LB57x_hardware_design_guide.md) | [Schaltplan](chip-guides/SF32LB57x_schematic_checklist.md) / [PCB-Layout](chip-guides/SF32LB57x_pcb_layout_checklist.md) | Sie eine Leiterplatte für den direkt bestückten SF32LB57x entwickeln. |
-| SF32LB58x | [Leitfaden](chip-guides/SF32LB58x_hardware_design_guide.md) | [Checkliste](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | Sie eine Leiterplatte für den direkt bestückten SF32LB58x entwickeln. |
+| SF32LB52x | [Leitfaden](chip-guides/SF32LB52x_hardware_design_guide.md) | [Checkliste](chip-guides/SF32LB52x_hardware_design_guide.md#using-the-checklists) | Leiterplattenentwicklung mit direkt bestücktem SF32LB52x. |
+| SF32LB55x | [Leitfaden](chip-guides/SF32LB55x_hardware_design_guide.md) | [Checkliste](chip-guides/SF32LB55x_hardware_design_guide.md#using-the-checklists) | Leiterplattenentwicklung mit direkt bestücktem SF32LB55x. |
+| SF32LB56x | [Leitfaden](chip-guides/SF32LB56x_hardware_design_guide.md) | [Checkliste](chip-guides/SF32LB56x_hardware_design_guide.md#using-the-checklists) | Leiterplattenentwicklung mit direkt bestücktem SF32LB56x. |
+| SF32LB57x | [Leitfaden](chip-guides/SF32LB57x_hardware_design_guide.md) | [Schaltplan](chip-guides/SF32LB57x_schematic_checklist.md) / [PCB-Layout](chip-guides/SF32LB57x_pcb_layout_checklist.md) | Leiterplattenentwicklung mit direkt bestücktem SF32LB57x. |
+| SF32LB58x | [Leitfaden](chip-guides/SF32LB58x_hardware_design_guide.md) | [Checkliste](chip-guides/SF32LB58x_hardware_design_guide.md#using-the-checklists) | Leiterplattenentwicklung mit direkt bestücktem SF32LB58x. |
 
 </div>
 

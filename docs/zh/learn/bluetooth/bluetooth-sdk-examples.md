@@ -32,7 +32,7 @@ SiFli-SDK 的蓝牙（Bluetooth）示例针对特定蓝牙应用规范（Profile
 
 </div>
 
-## 启动调试示例并留存证据 { #bring-up-an-example-as-evidence }
+## 启动调试示例并记录验证结果 { #bring-up-an-example-as-evidence }
 
 修改项目之前，应记录准确的 SDK 版本、开发板名称、配置、对端设备或应用、无线参数和预期日志。建议按以下步骤推进：
 

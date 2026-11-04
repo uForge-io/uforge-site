@@ -36,14 +36,22 @@ SF32LB52-DevKit-Nano 是一款小型 SF32LB52x 开发板，适合紧凑型原型
 
 N4 变体适合紧凑型控制、蓝牙（Bluetooth）和简单 UI 应用。N16R16 配备 16 MB OPI-PSRAM 和 16 MB QSPI-NOR；A128R16 配备 16 MB OPI-PSRAM 和 128 MB QSPI-NAND。两者都适合需要较大显示资源、外部文件系统，或利用 PSRAM 存放帧缓冲和工作数据的应用。
 
-**来源差异，选型前请核实：** 思澈科技（SiFli）的[详细 Nano 开发板指南](https://wiki.sifli.com/board/sf32lb52x/SF32LB52-DevKit-Nano.html)将其 16 MB OPI-PSRAM + 16 MB NOR 配置称为 `R16N16 V1.0.0`；[当前开发板型号指南](https://wiki.sifli.com/board/devkit_guide.html)则将相同存储配置列为 `N16R16`，并单独列出配备 16 MB OPI-PSRAM 和 128 MB QSPI-NAND 的 `A128R16`。详细指南没有具体说明 A128R16；该型号应以型号指南所列信息为准，不要把 N16R16 板卡的其他细节套用于 A128R16。确定固件或存储布局前，请核对实物丝印及当前原理图/BOM。
+**来源差异，选型前请核实：** 思澈科技（SiFli）的[详细 Nano 开发板指南](https://wiki.sifli.com/board/sf32lb52x/SF32LB52-DevKit-Nano.html)将其 16 MB OPI-PSRAM + 16 MB NOR 配置称为 `R16N16 V1.0.0`；[当前开发板型号指南](https://wiki.sifli.com/board/devkit_guide.html)则将相同存储配置列为 `N16R16`，并单独列出配备 16 MB OPI-PSRAM 和 128 MB QSPI-NAND 的 `A128R16`。
 
-思澈科技（SiFli）的两份资料对 Nano 尺寸的记载也略有差异：详细指南给出的尺寸为 21 mm × 51 mm，型号指南则为 51 mm × 20.32 mm。两份资料的 51 mm 边长一致，较短边相差 0.68 mm。本文采用型号指南中精度更高的数据；设计外壳或载板前，请以对应板卡版本的机械图纸为准。
+详细指南没有具体说明 A128R16；该型号应以型号指南所列信息为准，不要把 N16R16 板卡的其他细节套用于 A128R16。
+
+确定固件或存储布局前，请核对实物丝印及当前原理图/BOM。
+
+**尺寸差异：**详细指南给出的 Nano 尺寸为 21 mm × 51 mm，型号指南则为 51 mm × 20.32 mm。两份资料的 51 mm 边长一致，较短边相差 0.68 mm。本文采用型号指南中精度更高的数据。
+
+设计外壳或载板前，请以对应板卡版本的机械图纸为准。
 
 ## 开发板亮点 { #board-highlights }
 
 - 51 mm × 20.32 mm 紧凑型开发板
 - 采用半孔边缘布局，适合焊接到原型板上
+- 配备 48 MHz 和 32.768 kHz 晶振，以及板载 PCBA 天线
+- LCC 半孔组引出 17 个 GPIO，LGA 焊盘组引出 13 个 GPIO；提供 3 路 UART、4 路 I2C、2 路 GPTIM、2 路 SPI 和 3 路 GPADC 资源
 - USB Type-C 供电，以及通过 CH340N 实现 USB 转 UART 下载 / 调试
 - 引出 GPIO、UART、I2C、SPI、GPADC、PWM、I2S、PDM 和支持唤醒的引脚
 - 通过 16 针 FPC 信号组支持 QSPI LCD，通常配合 22 针转 16 针适配线使用
@@ -105,11 +113,11 @@ N4 变体适合紧凑型控制、蓝牙（Bluetooth）和简单 UI 应用。N16R
 
 ## 半孔引脚摘要 { #castellated-pin-summary }
 
-Nano 开发板引出了两组板边引脚。第一组主要承载音频、SPI1、调试 UART、靠近 USB 的电源，以及支持 GPADC 的引脚；第二组主要承载 SPI2、USB FS、支持唤醒的 GPIO 和电源。
+Nano 开发板引出了两组 LCC 板边引脚：左侧 J1 主要承载音频、SPI1、调试 UART 和支持 GPADC 的引脚；右侧 J2 主要承载 SPI2、USB FS、支持唤醒的 GPIO 和电源。所有 GPIO 均可复用为 UART、I2C 或 GPTIM。下表只列出部分功能，并非完整复用选项或复位默认上下拉状态；进行电气设计前，请查阅原理图和设计文件。
 
-### 正面边缘信号 { #front-side-edge-signals }
+### J1 — 左侧 LCC 边缘信号 { #front-side-edge-signals }
 
-<div align="center"><em>正面边缘信号图</em></div>
+<div align="center"><em>J1 左侧 LCC 边缘信号图</em></div>
 
 <div align="center" markdown>
 
@@ -134,9 +142,9 @@ Nano 开发板引出了两组板边引脚。第一组主要承载音频、SPI1�
 
 </div>
 
-### 背面边缘信号 { #back-side-edge-signals }
+### J2 — 右侧 LCC 边缘信号 { #back-side-edge-signals }
 
-<div align="center"><em>背面边缘信号图</em></div>
+<div align="center"><em>J2 右侧 LCC 边缘信号图</em></div>
 
 <div align="center" markdown>
 
@@ -163,7 +171,7 @@ Nano 开发板引出了两组板边引脚。第一组主要承载音频、SPI1�
 
 ## LCD 接口 { #lcd-interface }
 
-开发板通过 16 针 FPC 信号组支持 QSPI LCD 面板。原始开发板说明提到，可通过 22 针转 16 针 FPC 线缆连接 Huangshan Pi 1.85 英寸 AMOLED 屏幕。
+开发板通过 16 针、0.5 mm 间距的 FPC 信号组支持 SPI、DSPI 和 Quad-SPI LCD 模式，包括 DDR 模式 QSPI。原始开发板说明提到，可通过 22 针转 16 针 FPC 线缆连接 Huangshan Pi 1.85 英寸 AMOLED 屏幕。
 
 ![22 针转 16 针 FPC 适配线](assets/sf32lb52x/22p-to-16p.png){ loading="lazy" }
 <div align="center"><em>22 针转 16 针 FPC 适配线</em></div>
@@ -214,9 +222,11 @@ N16R16 变体包含外部 16 MB QSPI-NOR Flash。其存储引脚组如下：
 
 这些引脚可能会因具体变体而被已安装的 Flash 占用。在将其作为扩展引脚使用前，请先核对实物板卡的装配情况。
 
+详细开发板指南还列出 WSON8 封装选项：SPI NOR 可采用 8 × 6 mm 或 6 × 5 mm 封装；SPI NAND 和 SD NAND 则为 8 × 6 mm。不同板卡的 Flash 实装可能不同，选型前请核对对应原理图和 BOM。
+
 ## 音频扩展 { #audio-expansion }
 
-Nano 开发板引出了模拟麦克风输入、麦克风偏置和差分模拟音频输出。可根据目标产品需求增加外部麦克风电路和音频功放。
+Nano 开发板引出了模拟麦克风输入、麦克风偏置、PDM 数字麦克风信号和差分模拟音频输出。模拟输入可连接模拟麦克风或硅麦克风；驱动扬声器时，需要增加外部 Class-AB 或 Class-D 音频功率放大器。
 
 ## SDK 构建目标 { #sdk-build-targets }
 

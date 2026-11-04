@@ -105,7 +105,7 @@ rt_kprintf("CR:0x%x, WER:0x%x\n", hwp_pmuc->CR, hwp_pmuc->WER);
 
 ## 在运行状态控制时钟 { #control-clocks-while-awake }
 
-如果 IDLE 线程无法进入睡眠，可以使用 WFI 自动降频降低电流。只有 EPIC、EZIP、LCDC、USB 和 SD 均空闲时才可以降频。如果应用没有使用 SDK 自带的 LVGL/设备忙闲管理，请在外设开始和结束工作时调用 `rt_pm_hw_device_start()` 与 `rt_pm_hw_device_stop()`。使用 `HAL_RCC_HCPU_SetDeepWFIDiv()` 配置降频分频；有音频工作时通常只能降到 48 MHz，其他场景可降到 4 MHz，并按 SDK 指南设置 `HPSYS_RCC_DBGR_FORCE_HP`。
+如果 IDLE 线程无法进入睡眠，可以使用 WFI 自动降频降低电流。只有 EPIC、EZIP、LCDC、USB 和 SD 均空闲时才可以降频。SDK 自带的 LVGL 实现会跟踪 EPIC/EZIP 的忙闲状态，RT-Thread LCD Device 驱动会跟踪 LCDC/USB/SD；如果没有使用 SDK 自带的 LVGL 实现，应在 EPIC/EZIP 开始和结束工作时分别调用 `rt_pm_hw_device_start()` 和 `rt_pm_hw_device_stop()`。使用 `HAL_RCC_HCPU_SetDeepWFIDiv()` 配置降频分频。WFI 降频参数因系列而异：SF32LB52x 指南规定，音频外设工作时只能降到 48 MHz，其他情况下可降到 4 MHz，并要求将 `HPSYS_RCC_DBGR_FORCE_HP` 位置 1；SiFli 的[电源管理应用说明](https://docs.sifli.com/projects/solution/2.application-notes/power_manager/index.html)列出 SF32LB55x、SF32LB56x 和 SF32LB58x 的 CPU 空闲频率为 1 MHz。现有引用资料未确认 SF32LB57x 的数值，请以目标系列 SDK 指南为准。
 
 运行状态可通过 `rt_pm_run_enter()` 选择：
 

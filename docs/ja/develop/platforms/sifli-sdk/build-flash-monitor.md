@@ -1,6 +1,6 @@
 ---
 icon: lucide/terminal
-description: "SiFli-SDKの日常的な開発手順：環境を有効化し、sconsでビルドし、UARTダウンロードスクリプトまたはsftoolで書き込み、シリアル出力を確認します。"
+description: "SiFli-SDKの日常的な開発手順：環境を有効化し、sconsでビルドし、生成されたUARTダウンロードスクリプトまたはsftoolで書き込み、シリアル出力を確認します。"
 tags:
     - 開発
     - SiFli-SDK

@@ -40,7 +40,7 @@ BLE suele ser la opción inicial más adecuada para la mayoría de los dispositi
 
 ### Bluetooth clásico y modo dual { #classic-bluetooth-and-dual-mode }
 
-Añada Bluetooth clásico si el producto necesita transmisión de audio (A2DP/AVRCP), llamadas manos libres (HFP), enlaces de datos serie (SPP) o compatibilidad con perfiles Bluetooth clásicos existentes. El modo dual exige más planificación de radio y pruebas de coexistencia que BLE por sí solo. Precisamente para aislar esa carga del resto del sistema se utiliza el procesador Bluetooth dedicado.
+Añada Bluetooth clásico si el producto necesita transmisión de audio (A2DP/AVRCP), llamadas manos libres (HFP), enlaces de datos serie (SPP) o compatibilidad con perfiles Bluetooth clásicos existentes. El modo dual exige más planificación de radio y pruebas de coexistencia que BLE por sí solo. El procesador Bluetooth dedicado gestiona las tareas de enlace con requisitos temporales estrictos por separado del procesador de aplicaciones, pero aun así hay que validar la coexistencia con la carga combinada del producto.
 
 No todos los dispositivos de la familia SF32 admiten Bluetooth de modo dual. Antes de elegir una referencia concreta, consulte la tabla de dispositivos de [Procesador Bluetooth](processor.md#device-family-differences).
 

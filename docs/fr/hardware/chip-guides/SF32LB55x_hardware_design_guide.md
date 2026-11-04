@@ -66,35 +66,40 @@ La connectivité de stockage comprend plusieurs interfaces QSPI, une interface O
 | Nom du boîtier | Taille | Pas des broches | Diamètre des billes |
 | :--- | :--- | :--- | :--- |
 | QFN68L | 7x7x0,75 mm | 0,35 mm | - |
+| BGA125 | 7x7x0,94 mm | 0,5 mm | 0,25 mm |
 | BGA145 | 7x7x0,94 mm | 0,5 mm | 0,25 mm |
 | BGA169 | 7x7x0,94 mm | 0,5 mm | 0,25 mm |
 
 </div>
 
-Le SF32LB55x est proposé en boîtiers QFN68L, BGA145 et BGA169. Choisissez le boîtier tôt dans la conception, car les interfaces mémoire, le fan-out des broches, les exigences de fabrication du PCB et le nombre de GPIO disponibles varient selon le boîtier.
+Le SF32LB55x est proposé en boîtiers QFN68L, BGA125, BGA145 et BGA169. Choisissez le boîtier tôt dans la conception, car les interfaces mémoire, le fan-out des broches, les exigences de fabrication du PCB et le nombre de GPIO disponibles varient selon le boîtier.
 
 ![Figure 3.2-1 : Répartition des broches du QFN68L](../../sf32-products/chips/assets/55x/SF32LB55x-QFN68-Leadmap.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 3.2-1 : Répartition des broches du QFN68L</em></div>
 
-![Figure 3.2-2 : Répartition des broches du BGA145](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-Ballmap.svg){ width="100%" loading="lazy" }
+![Figure 3.2-2 : Plan des billes du BGA125](../../sf32-products/chips/assets/55x/SF32LB55x-BGA125-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figure 3.2-2 : Répartition des broches du BGA145</em></div>
+<div align="center"><em>Figure 3.2-2 : Plan des billes du BGA125</em></div>
+
+![Figure 3.2-3 : Répartition des broches du BGA145](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-Ballmap.svg){ width="100%" loading="lazy" }
+
+<div align="center"><em>Figure 3.2-3 : Répartition des broches du BGA145</em></div>
 
 !!! warning "Anciens plans de billes BGA169"
     SiFli indique que SF32LB557V8N6 est en fin de vie (EOL). Son plan reste présenté pour vérifier les conceptions existantes, et non pour recommander ce composant dans un nouveau produit. SF32LB557VD3A6 utilise un autre plan BGA169 : D11, E9, K12, L11, L13 et M13 sont NC. Vérifiez le plan de la référence exacte ; des dimensions identiques ne garantissent pas la compatibilité des broches.
 
-![Figure 3.2-3 : Répartition des broches du BGA169 SF32LB557V8N6](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg){ width="100%" loading="lazy" }
+![Figure 3.2-4 : Répartition des broches du BGA169 SF32LB557V8N6](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figure 3.2-3 : Répartition des broches du BGA169 SF32LB557V8N6</em></div>
+<div align="center"><em>Figure 3.2-4 : Répartition des broches du BGA169 SF32LB557V8N6</em></div>
 
-![Figure 3.2-4 : Répartition des broches du BGA169 SF32LB557VD3A6](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-2-Ballmap.svg){ width="100%" loading="lazy" }
+![Figure 3.2-5 : Répartition des broches du BGA169 SF32LB557VD3A6](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-2-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figure 3.2-4 : Répartition des broches du BGA169 SF32LB557VD3A6</em></div>
+<div align="center"><em>Figure 3.2-5 : Répartition des broches du BGA169 SF32LB557VD3A6</em></div>
 
 ### 3.3. Principales fonctionnalités matérielles { #33-major-hardware-features }
 
-- Options de boîtier QFN68L, BGA145 et BGA169.
+- Options de boîtier QFN68L, BGA125, BGA145 et BGA169.
 - Exigences de conception associées aux quartz de 48 MHz et de 32,768 kHz.
 - Émetteur-récepteur Bluetooth 5.2 basse consommation, exigences d'adaptation RF et d'implantation de l'antenne.
 - Interfaces OPI PSRAM, mémoire flash QSPI NOR/NAND et PSRAM, SDIO eMMC ou Micro SD ; la mémoire intégrée dépend de la référence exacte.

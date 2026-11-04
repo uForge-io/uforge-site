@@ -26,7 +26,7 @@ Cette section présente les conventions utilisées pour décrire les interfaces 
 
 ## Nommage et compatibilité électrique { #what-is-stable-and-what-must-be-verified }
 
-Appliquez les règles de nommage de façon cohérente dans les descriptions de modules, les schémas, les notes de BOM et la documentation produit. Les noms décrivent le profil d'interface prévu, pas une spécification électrique ou mécanique définitive. Ni un nom de profil ni une forme de connecteur identique ne prouvent l'interchangeabilité d'un module et d'une carte porteuse.
+Appliquez les règles de nommage de façon cohérente dans les descriptions de modules, les schémas, les notes de BOM et la documentation produit. Les noms décrivent le profil d'interface prévu, pas une spécification électrique ou mécanique définitive. Ni l'appellation `M2` ni la forme correspondante d'un connecteur n'établissent la conformité à la spécification PCI-SIG M.2 E-key ni l'interchangeabilité d'un module et d'une carte porteuse.
 
 La proposition de brochage ne garantit pas que tous les modules μForge ou boîtiers SF32 prennent en charge l'ensemble des signaux et interfaces proposés, ni toutes les combinaisons d'utilisation simultanée. Avant de figer la conception, vérifiez les points suivants dans la documentation du module, de la puce et du boîtier sélectionnés, ainsi que dans le guide de conception matérielle correspondant :
 

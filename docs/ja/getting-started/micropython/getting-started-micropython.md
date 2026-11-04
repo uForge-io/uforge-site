@@ -10,7 +10,7 @@ tags:
 
 SF32向けのMicroPython入門手順は、まだ検証されていません。確認したSiFliおよびOpenSiFliの資料には、公式のボード別ファームウェアイメージ、書き込み手順、REPL設定が現時点で記載されていません。
 
-[SiFli-SDK](../sifli/getting-started-sifli-sdk.md)の手順に沿って、ボードとケーブルの状態を確認し、シリアルポートを特定してファームウェアを書き込み、再現可能な基準環境を整えてください。一般的なMicroPythonのインストール手順や、別のMCUまたはボード向けのイメージは使用しないでください。
+[SiFli-SDK](../sifli/getting-started-sifli-sdk.md)を使い、ボード、ケーブル、シリアルポート、書き込み手順を含む再現可能な基準構成を確立してください。一般的なMicroPythonのインストール手順や、別のMCUまたはボード向けのイメージは使用しないでください。
 
 [MicroPythonの状況](../../develop/platforms/micropython/status.md)ページでは、このページをチュートリアルにするために必要な公開成果物と受け入れ基準を具体的に管理しています。
 

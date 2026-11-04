@@ -77,7 +77,7 @@ La variante U utilise un boîtier QFN68L. La variante V utilise un boîtier WBBG
 - Exigences de quartz 48 MHz et 32,768 kHz et modèles de quartz recommandés.
 - Conception RF Bluetooth et exigences d'adaptation d'antenne.
 - Affichage SPI/QSPI et JDI sur la variante U ; affichage SPI/QSPI, MCU8080, DPI et JDI sur la variante V.
-- Options de mémoire externe et de stockage de démarrage, y compris les interfaces de type SDIO/eMMC/SD NAND.
+- Options de mémoire externe et de stockage de démarrage comprenant SDIO, eMMC et SD NAND.
 - Boutons, moteur de vibration, interface audio, broches PBR, capteurs, UART/I2C, GPTIM, débogage/flashage et étalonnage.
 
 ### 3.4. Applications typiques { #34-typical-applications }
@@ -166,7 +166,7 @@ Pour tirer le meilleur parti de la liste de contrôle, utilisez-la comme un rele
 
 [Index Wiki SiFli des guides de conception matérielle des puces]: https://wiki.sifli.com/hardware/index.html
 
-## Poursuivre le guide de conception { #continue-the-design-guide }
+### 4.5. Poursuivre le guide de conception { #continue-the-design-guide }
 
 Le guide complet se poursuit sur les pages ci-dessous. Chacune couvre une étape du processus de conception et est accessible depuis ici.
 

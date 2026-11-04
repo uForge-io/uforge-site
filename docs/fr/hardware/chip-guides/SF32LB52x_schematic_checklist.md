@@ -15,6 +15,8 @@ tags:
 !!! note "Fait partie du Guide de conception matérielle SF32LB52x"
     Cette page couvre la section 5.8, la liste de contrôle du schéma point par point. Retournez à [Système minimal, alimentation et horloge](SF32LB52x_schematic_design.md), première des trois pages consacrées à la conception du schéma.
 
+La version de la liste SiFli consultée pour cette page est *SF32LB52 Schematic&PCB Checklist*, V1.0 (2026-01-21). Sa concordance avec une version en ligne ultérieure n'a pas été vérifiée.
+
 ## 5.8. Liste de contrôle du schéma { #58-schematic-checklist }
 
 Chaque tableau couvre un bloc fonctionnel du schéma. La colonne « S'applique à » précise les variantes d'alimentation ou les révisions du silicium concernées lorsqu'un point de contrôle ne s'applique pas à toutes les variantes.
@@ -29,7 +31,7 @@ Chaque tableau couvre un bloc fonctionnel du schéma. La colonne « S'applique �
 
 | N° | Point de contrôle | S'applique à | Catégorie |
 |:---|:---|:---|:---|
-| 1 | Le boîtier de la référence commerciale sélectionnée est correct, y compris les noms et numéros de broches | Toutes les variantes | Obligatoire |
+| 1 | Le boîtier, les noms de broches et leur numérotation correspondent à la référence sélectionnée | Toutes les variantes | Obligatoire |
 
 </div>
 

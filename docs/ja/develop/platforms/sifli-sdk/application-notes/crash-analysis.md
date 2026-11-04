@@ -16,7 +16,7 @@ SDKの`debug_logging`と`crash_analysis`のガイドは相互に補完します�
 
 | ファミリー | デバッグとログの方法 |
 |---|---|
-| SF32LB52x、SF32LB56x、SF32LB58x | SiFliのガイドでは、UARTでの取得、`SifliUsartServer`／`AssertDumpUart`、J-Link/Trace32による実行コンテキストの復元方法が説明されています。選択したスリープ状態でも利用できる転送手段を選んでください。 |
+| SF32LB52x、SF32LB56x、SF32LB58x | SiFliの各ファミリーガイドでは、UARTでの取得、`SifliUsartServer`／`AssertDumpUart`、J-Link/Trace32による実行コンテキストの復元方法が説明されています。選択したスリープ状態でも利用できる転送手段を選んでください。 |
 | SF32LB55x | `$SDK_ROOT/tools/segger/jlink_hcpu_a0.bat`と`jlink_lcpu_a0.bat`でSWD接続先をHCPU／LCPU間で切り替えられます。LCPUのROMコンソールはUART3、1,000,000 baudです。HCPUではUART1/2またはSWDを使えます。SWDはPB IOを使うため、接続中はLPSYSをアクティブまたはLight Sleep状態に保ってください。 |
 
 </div>
@@ -36,7 +36,7 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
   --output /tmp/live-crash --elf build_hcpu/main.elf
 ```
 
-対象がPSRAMを使う場合は`--include-psram --psram-size 8MB`を追加します。J-Linkプローブでは`--transport jlink --jlink-ip 127.0.0.1:19025`を使えます。`--core hcpu`または`--core lcpu`で対象コアを選択します。出力ディレクトリには、取得したバイナリー、対象コアのELF/AXF、`log.txt`、`manifest.json`、`sdk_manifest.json`が含まれているはずです。
+PSRAMもエクスポートする場合は`--include-psram`を追加するか、`--psram-size 8MB`で使用するPSRAMスクリプトを手動指定します。`SifliUsartServer`経由でJ-LinkをIP接続する場合は`--transport jlink --jlink-ip 127.0.0.1:19025`を使い、`--core hcpu`または`--core lcpu`で対象コアを選択します。出力ディレクトリには、取得したバイナリー、対象コアのELF/AXF、`log.txt`、`manifest.json`、`sdk_manifest.json`が含まれているはずです。
 
 古いSDKでは、各ファミリーのガイドに記載された方法を使ってください。
 
@@ -49,13 +49,13 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
 ![menuconfigのSF32LB52xメモリートレース設定](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_mem_trace.png){ loading="lazy" }
 <div align="center"><em>図: SF32LB52xガイドの例 — ヒープ情報が必要な障害を再現する前に、メモリートレースを有効にします。</em></div>
 
-UARTで取得する場合、シリアルユーティリティ、サーバーアドレス、対象コアを一致させる必要があります。次の画面例は接続確認に役立ちます。
+UARTで取得する場合、シリアルユーティリティ、サーバーアドレス、対象コアを一致させる必要があります。SF32LB52xガイドのWindows例では、ツールは`SiFli_Trace_v2.3.0/Sifli_UsartServer_v2.8`にあり、`SifliUsartServer.exe`が含まれています。実際のインストール先やバージョンは異なる場合があります。接続設定画面には、チップ側UART1とホスト側COM17の対応、ボーレート1,000,000、サーバー`127.0.0.1:19025`、対象コアHCPUが示されています。これらはガイドの例であり、他のボードや配線に共通する既定値ではありません。
 
 ![SiFli_TraceとSifliUsartServerのツール配置](../../../../assets/develop/app-notes/crash-analysis/Sifli_Trace.png){ loading="lazy" }
-<div align="center"><em>図: SF32LB52xガイドの例 — ツールディレクトリ。</em></div>
+<div align="center"><em>図: SF32LB52xガイドの例 — バージョン付きサーバーユーティリティを含むSiFli_Trace/SifliUsartServerのツールディレクトリ。</em></div>
 
 ![SifliUsartServerのSF32LB52x接続設定](../../../../assets/develop/app-notes/crash-analysis/UsartServer52.png){ loading="lazy" }
-<div align="center"><em>図: SF32LB52xガイドの例 — 取得対象に合わせてシリアルポート、ボーレート、サーバーアドレス、デバッグ対象コアを設定します。</em></div>
+<div align="center"><em>図: SF32LB52xガイドの例 — UART1とCOM17の対応、ボーレート1,000,000、サーバー`127.0.0.1:19025`、対象コアHCPUを示します。これらは例示設定で、共通の既定値ではありません。</em></div>
 
 ![クラッシュダンプ解析用RAM保存スクリプト](../../../../assets/develop/app-notes/crash-analysis/save_ram_uart_52.png){ loading="lazy" }
 <div align="center"><em>図: SF32LB52xガイドの例 — 一覧には`save_ram_55x.bat`、`save_ram_58x.bat`、`save_ram_uart_52x.bat`など、ファミリー別・接続方式別のスクリプトがあります。対象と接続方式に合うものを選びます。</em></div>
@@ -74,10 +74,10 @@ sdk.py crash-dump analyze --core /tmp/live-crash/coredump.elf \
 従来のTrace32手順では、HCPUアサーションデータをHCPU assertion (HA) ボタンと`run_next_step`で読み込みます。LCPUダンプにはLCPUのコンテキスト復元用設定を使います。例外スタックが表示されない場合、レジスターを解釈する前にコア選択、ELF、メモリー範囲を確認してください。
 
 ![Trace32の取得スクリプト選択例](../../../../assets/develop/app-notes/crash-analysis/dump_select.png){ loading="lazy" }
-<div align="center"><em>図: SF32LB52xガイドの例 — J-Link/Trace32の取得スクリプト選択。</em></div>
+<div align="center"><em>図: SF32LB52xガイドの例 — IPモードとUSBモードの`.jlink`スクリプトを並べて表示しています。IP版は`127.0.0.1:19025`を使用し、J-Linkを直接接続する場合はUSB版を選びます。</em></div>
 
 ![Trace32のHCPUアサーション画面](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_hcpu_window.png){ loading="lazy" }
-<div align="center"><em>図: SF32LB52xガイドの例 — コンテキストの復元後はコールスタック、スレッド一覧、ヒープ、エラー理由をまとめて確認します。</em></div>
+<div align="center"><em>図: SF32LB52xガイドの例 — 復元後はコールスタック、`TaskList`、`TaskSwitchHistory`、`heapAllocation`、`error_reason`、逆アセンブリの各ウィンドウを確認できます。</em></div>
 
 ## 起動初期や競合の疑いがある箇所で停止する { #stop-early-during-boot-or-a-suspected-race }
 
@@ -101,6 +101,6 @@ J-Linkを接続し、実行を再開するにはPCを2バイト進めます。C�
 SDKのバスモニターで、バスフォルトにつながるアクセスを取得できます。`dbg_busmon_reg_callback`でコールバックを登録し、ガイドの例にある`dbg_busmon_read`と`dbg_busmon_write`を使って対象アドレス範囲を調査します。ヒープトレースとクラッシュデータを組み合わせてください。シンボルやメモリーコンテキストのないレジスターダンプだけでは、ほとんどの場合、十分な情報が得られません。
 
 ![Trace32のヒープコールスタック例](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_heap_callstack.png){ loading="lazy" }
-<div align="center"><em>図: SF32LB52xガイドの例 — ヒープコールスタックとメモリーウィンドウ。</em></div>
+<div align="center"><em>図: SF32LB52xガイドの例 — アサーションハンドラーと行番号を未加工のメモリーダンプのウィンドウと照合します。</em></div>
 
 公式ファミリー別資料: [SF32LB52xのクラッシュ解析](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/crash_analysis.html)、[SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/crash_analysis.html)、[SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/crash_analysis.html)、[SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/crash_analysis.html)、および対応する[デバッグ／ログガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/debug_logging.html)。

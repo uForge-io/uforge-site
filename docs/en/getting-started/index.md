@@ -1,7 +1,7 @@
 ---
 icon: lucide/rocket
 title: "Getting Started Overview"
-description: "Choosing your first SF32 software path — SiFli-SDK, CodeKit, Zephyr, Arduino, Rust, or MicroPython — with current status and what hardware you'll need."
+description: "Choose an SF32 software starting point — SiFli-SDK, CodeKit, Zephyr, Arduino, Rust, or MicroPython — with current status and required hardware."
 tags:
     - Getting started
     - SF32
@@ -9,7 +9,7 @@ tags:
 
 # Getting Started Overview { #getting-started }
 
-SF32 devices support several software paths. SiFli-SDK and CodeKit are the official first-run paths today. The SF32LB52 DevKit LCD also has maintained upstream Zephyr support starting with Zephyr v4.3.0. OpenSiFli offers a beta ArduinoCore-zephyr package and is developing Rust support for SF32LB52. MicroPython still needs official firmware images and board-specific instructions before it can become a verified tutorial.
+SF32 devices support several software paths. SiFli-SDK is SiFli's official reference stack; CodeKit is the official VS Code workflow for installing the SDK, creating projects, building, flashing, and monitoring serial output. The SF32LB52 DevKit LCD also has maintained upstream Zephyr support starting with Zephyr v4.3.0. OpenSiFli offers a beta ArduinoCore-zephyr package and is developing Rust support for SF32LB52. MicroPython still needs official firmware images and board-specific instructions before it can become a verified tutorial.
 
 For the reference development workflow and the current scope of each development path, consult [Develop Overview](../develop/index.md). Use the table below only to choose where to begin; each platform page is the canonical reference for its supported boards and limits.
 
@@ -19,7 +19,7 @@ For the reference development workflow and the current scope of each development
 
 <div align="center" markdown>
 
-| Path | Current status | Start here |
+| Option | Current status | Start here |
 |:-----|:---------------|:-----------|
 | **SiFli-SDK** | Official SiFli path for reference SF32 development, RT-Thread, Bluetooth, graphics, audio, low power, and board bring-up. | [SiFli-SDK](sifli/getting-started-sifli-sdk.md) |
 | **SiFli CodeKit** | Official SiFli VS Code workflow for SDK setup, project creation, build, flash, and serial monitor. | [SiFli CodeKit](sifli/getting-started-sifli-codekit.md) |

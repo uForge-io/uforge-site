@@ -1,6 +1,6 @@
 ---
 icon: lucide/terminal
-description: "La boucle quotidienne SiFli-SDK : activer l'environnement, compiler avec scons, flasher via téléchargement UART ou sftool, puis suivre la sortie série."
+description: "La boucle quotidienne SiFli-SDK : activer l'environnement, compiler avec scons, flasher avec le script de téléchargement UART généré ou sftool, puis suivre la sortie série."
 tags:
     - Développement
     - SiFli-SDK

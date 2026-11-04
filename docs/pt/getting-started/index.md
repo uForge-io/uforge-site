@@ -1,7 +1,7 @@
 ---
 icon: lucide/rocket
 title: "Visão geral: primeiros passos"
-description: "Escolha seu primeiro caminho de desenvolvimento para SF32 — SiFli-SDK, CodeKit, Zephyr, Arduino, Rust ou MicroPython — e veja o status atual e o hardware necessário."
+description: "Escolha um ponto de partida de software para SF32 — SiFli-SDK, CodeKit, Zephyr, Arduino, Rust ou MicroPython — com o status atual e o hardware necessário."
 tags:
     - Primeiros passos
     - SF32
@@ -9,7 +9,7 @@ tags:
 
 # Visão geral: primeiros passos { #getting-started }
 
-Os dispositivos SF32 oferecem diferentes caminhos de desenvolvimento de software. Atualmente, SiFli-SDK e CodeKit são as opções oficiais para a primeira configuração e validação. Desde o Zephyr v4.3.0, o projeto principal do Zephyr mantém suporte para a placa SF32LB52 DevKit LCD. O OpenSiFli também oferece o ArduinoCore-zephyr em versão beta e desenvolve o suporte a Rust para SF32LB52. Para que o MicroPython possa ser apresentado em um tutorial validado, ainda são necessárias imagens oficiais de firmware e instruções específicas para cada placa.
+Os dispositivos SF32 oferecem diferentes caminhos de desenvolvimento de software. O SiFli-SDK é a pilha oficial de referência da SiFli; o CodeKit é o fluxo oficial da SiFli para VS Code, usado para instalar o SDK, criar projetos, compilá-los, gravar o firmware e acompanhar a saída serial. Desde o Zephyr v4.3.0, o projeto principal do Zephyr mantém suporte para a placa SF32LB52 DevKit LCD. O OpenSiFli também oferece o ArduinoCore-zephyr em versão beta e desenvolve o suporte a Rust para SF32LB52. Para que o MicroPython possa ser apresentado em um tutorial validado, ainda são necessárias imagens oficiais de firmware e instruções específicas para cada placa.
 
 Para conhecer o fluxo de desenvolvimento de referência e o escopo atual de cada caminho, consulte a [visão geral do desenvolvimento](../develop/index.md). Use a tabela abaixo apenas para escolher por onde começar; a página de cada plataforma é a referência oficial para placas compatíveis e respectivas limitações.
 
@@ -19,7 +19,7 @@ Para conhecer o fluxo de desenvolvimento de referência e o escopo atual de cada
 
 <div align="center" markdown>
 
-| Caminho | Status atual | Comece aqui |
+| Opção | Status atual | Comece aqui |
 |:-----|:---------------|:-----------|
 | **SiFli-SDK** | Caminho oficial da SiFli para desenvolvimento de referência em SF32, com RT-Thread, Bluetooth, gráficos, áudio, baixo consumo e bring-up de placas. | [SiFli-SDK](sifli/getting-started-sifli-sdk.md) |
 | **SiFli CodeKit** | Fluxo oficial da SiFli para VS Code: configurar o SDK, criar projetos, compilar, gravar o firmware e usar o monitor serial. | [SiFli CodeKit](sifli/getting-started-sifli-codekit.md) |

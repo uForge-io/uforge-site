@@ -154,7 +154,7 @@ Bluetooth-подсистема особенно полезна, когда гл�
 
 Программную часть Bluetooth обычно делят на два основных уровня:
 
-<div align="center"><em>Таблица: границы Host, Controller и приложения</em></div>
+<div align="center"><em>Таблица: обязанности Host и Controller</em></div>
 
 <div align="center" markdown>
 

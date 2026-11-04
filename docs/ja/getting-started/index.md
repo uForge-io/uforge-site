@@ -1,7 +1,7 @@
 ---
 icon: lucide/rocket
 title: "SF32開発の始め方"
-description: "SF32で開発を始める方法：SiFli-SDK、CodeKit、Zephyr、Arduino、Rust、MicroPythonの現状と、各環境で必要なハードウェア。"
+description: "SF32開発の開始点となるSiFli-SDK、CodeKit、Zephyr、Arduino、Rust、MicroPythonの現状と必要なハードウェア。"
 tags:
     - はじめに
     - SF32
@@ -9,7 +9,7 @@ tags:
 
 # SF32開発の始め方 { #getting-started }
 
-SF32デバイスでは、複数のソフトウェア開発環境を利用できます。現時点で、初回の環境構築と動作確認にはSiFli-SDKとCodeKitが公式ルートとして案内されています。Zephyr v4.3.0以降、SF32LB52 DevKit LCDはupstream Zephyrで継続的にメンテナンスされています。OpenSiFliはArduinoCore-zephyrのベータ版パッケージを公開しており、SF32LB52向けのRustサポートを開発中です。MicroPythonについては、公式ファームウェアイメージとボード別の手順が整うまでは、検証済みチュートリアルとして案内できません。
+SF32デバイスでは、複数のソフトウェア開発環境を利用できます。SiFli-SDKはSiFli公式のリファレンスソフトウェアスタックで、CodeKitはSDKのインストール、プロジェクト作成、ビルド、書き込み、シリアルモニターを行う公式のVS Codeワークフローです。Zephyr v4.3.0以降、SF32LB52 DevKit LCDはupstream Zephyrで継続的にメンテナンスされています。OpenSiFliはArduinoCore-zephyrのベータ版パッケージを公開しており、SF32LB52向けのRustサポートを開発中です。MicroPythonについては、公式ファームウェアイメージとボード別の手順が整うまでは、検証済みチュートリアルとして案内できません。
 
 開発の標準ワークフローと各開発環境の対応範囲については、[開発の概要](../develop/index.md)を参照してください。以下の表は開始点を選ぶためのものです。対応ボードと制限事項の正式な情報は、各プラットフォームのページで確認してください。
 
@@ -19,7 +19,7 @@ SF32デバイスでは、複数のソフトウェア開発環境を利用でき�
 
 <div align="center" markdown>
 
-| 開発環境 | 現在の状況 | ここから開始 |
+| 選択肢 | 現在の状況 | ここから開始 |
 |:-----|:---------------|:-----------|
 | **SiFli-SDK** | SF32のリファレンス開発向けSiFli公式環境。RT-Thread、Bluetooth、グラフィックス、オーディオ、低消費電力機能、ボードの立ち上げを扱います。 | [SiFli-SDK](sifli/getting-started-sifli-sdk.md) |
 | **SiFli CodeKit** | SDKのセットアップ、プロジェクト作成、ビルド、書き込み、シリアルモニターを行うSiFli公式のVS Code開発フロー。 | [SiFli CodeKit](sifli/getting-started-sifli-codekit.md) |
@@ -40,7 +40,7 @@ SF32デバイスでは、複数のソフトウェア開発環境を利用でき�
 - ブートログとサンプル出力を確認できるよう、ボードのコンソールに合わせて設定したシリアルターミナル。
 
 !!! tip "データ通信対応ケーブルを使う"
-    充電専用のUSBケーブルは、初回起動時のトラブルでよくある原因です。ボードに電源は入るのにシリアルポートが表示されない場合は、動作確認済みのデータ通信対応ケーブルを使い、USBハブを介さずパソコンに直接接続してください。
+    充電専用のUSBケーブルは、初回起動時のトラブルでよくある原因です。ボードに電源は入るのにシリアルポートが表示されない場合は、動作確認済みのデータ通信対応ケーブルを使い、パソコンのUSBポートに直接接続してください。
 
 ## 最初の動作確認におすすめの手順 { #recommended-first-run }
 

@@ -1,7 +1,7 @@
 ---
 icon: lucide/rocket
 title: "시작하기 개요"
-description: "첫 SF32 소프트웨어 경로 선택하기: SiFli-SDK, CodeKit, Zephyr, Arduino, Rust, MicroPython의 현재 상태와 필요한 하드웨어."
+description: "SF32 개발 시작점 선택하기: SiFli-SDK, CodeKit, Zephyr, Arduino, Rust, MicroPython의 현재 상태와 필요한 하드웨어."
 tags:
     - 시작하기
     - SF32
@@ -9,7 +9,7 @@ tags:
 
 # 시작하기 개요 { #getting-started }
 
-SF32 디바이스는 여러 소프트웨어 경로를 지원합니다. 현재 SiFli가 공식 제공하는 첫 실행 경로는 SiFli-SDK와 CodeKit입니다. SF32LB52 DevKit LCD는 Zephyr v4.3.0부터 업스트림 Zephyr에서 지원 및 유지 관리되고 있습니다. OpenSiFli는 베타 단계의 ArduinoCore-zephyr 패키지를 제공하며, SF32LB52용 Rust 지원을 개발하고 있습니다. MicroPython은 아직 검증된 튜토리얼에 필요한 공식 펌웨어 이미지와 보드별 지침이 마련되지 않았습니다.
+SF32 디바이스는 여러 소프트웨어 경로를 지원합니다. SiFli-SDK는 SiFli의 공식 기준 소프트웨어 스택이며, CodeKit은 SDK 설치, 프로젝트 생성, 빌드, 플래싱, 시리얼 모니터링을 위한 공식 VS Code 워크플로입니다. SF32LB52 DevKit LCD는 Zephyr v4.3.0부터 업스트림 Zephyr에서 지원 및 유지 관리되고 있습니다. OpenSiFli는 베타 단계의 ArduinoCore-zephyr 패키지를 제공하며, SF32LB52용 Rust 지원을 개발하고 있습니다. MicroPython은 아직 검증된 튜토리얼에 필요한 공식 펌웨어 이미지와 보드별 지침이 마련되지 않았습니다.
 
 기준 개발 워크플로와 각 경로의 현재 지원 범위는 [개발 개요](../develop/index.md)를 참조하십시오. 아래 표는 시작할 경로를 고르는 용도로만 사용하십시오. 지원 보드와 제한 사항은 각 플랫폼 페이지에서 확인할 수 있습니다.
 
@@ -19,7 +19,7 @@ SF32 디바이스는 여러 소프트웨어 경로를 지원합니다. 현재 Si
 
 <div align="center" markdown>
 
-| 경로 | 현재 상태 | 시작 위치 |
+| 옵션 | 현재 상태 | 시작 위치 |
 |:-----|:---------------|:-----------|
 | **SiFli-SDK** | SF32 개발의 기준이 되는 SiFli 공식 경로입니다. RT-Thread, Bluetooth, 그래픽, 오디오, 저전력, 보드 브링업을 지원합니다. | [SiFli-SDK](sifli/getting-started-sifli-sdk.md) |
 | **SiFli CodeKit** | SDK 설정, 프로젝트 생성, 빌드, 플래싱, 시리얼 모니터를 지원하는 SiFli 공식 VS Code 워크플로입니다. | [SiFli CodeKit](sifli/getting-started-sifli-codekit.md) |

@@ -13,7 +13,7 @@ tags:
 ### Teilenummer: ***SF32LB5xyZxYx6*** { #part-number-sf32lb5xyzxyx6 }
 
 !!! note "Syntaxhinweis"
-    * Kleinbuchstabe ***x*** bezeichnet eine numerische Ziffer.
+    * Der Kleinbuchstabe ***x*** steht im allgemeinen Muster für einen Zahlencode; veröffentlichte Speicherpositionen können auch familienbezogene Codes wie **N** verwenden.
     * Großbuchstabe ***Y*** oder ***Z*** bezeichnet ein alphabetisches Zeichen.
     * Im SF32LB57x-Namensschema steht an der Unterfamilienposition (**y**) bei akkubetriebenen Bausteinen eine Ziffer und bei Bausteinen mit 3,3-V-Versorgung ein Buchstabe.
 
@@ -40,15 +40,16 @@ tags:
 - **xYx** — Integrierte Speicherkonfiguration (QSPI-NOR-Flash & PSRAM)
   *(Hinweis: Die genaue Codierungszuordnung hängt vom jeweiligen Gehäuse und der Bausteinfamilie ab)*
 
-`ZxYx6` ist ein familienweites Schema und keine Vorlage mit fester Länge. Anzahl und Reihenfolge der Speichercodes hängen von Bausteinfamilie und Gehäuse ab: Ein numerischer Flash-Code kann fehlen, und der PSRAM-Buchstabencode kann bei mehreren integrierten Bausteinen wiederholt auftreten. Die konkrete Bestellnummer ist anhand der Variantentabelle der jeweiligen Familie zu decodieren.
+`ZxYx6` ist ein familienweites Schema und keine Vorlage mit fester Länge. Der allgemeine Leitfaden ordnet NOR numerische Codes und PSRAM alphabetische Codes zu. Veröffentlichte Suffixe können zusätzlich familienbezogene Codes enthalten, darunter Codes für Speicherpositionen ohne integrierten Speicher. Anzahl und Reihenfolge der Speichercodes hängen von Bausteinfamilie und Gehäuse ab: Ein numerischer Flash-Code kann fehlen, und der PSRAM-Buchstabencode kann bei mehreren integrierten Bausteinen wiederholt auftreten. Die konkrete Bestellnummer ist anhand der Variantentabelle der jeweiligen Familie zu decodieren.
 <div align="center"><em>Felddefinitionen des Teilenummern-Suffixes</em></div>
 
 <div align="center" markdown>
 
 | Feld | Typ | Optionen | Beschreibung |
 | :--- | :--- | :--- | :--- |
-| **x** | Alphanumerisch | **N**, **1** bis **8** | Allgemeine Zuordnung der QSPI-NOR-Flash-Kapazität:<br>• **N**: Kein im Gehäuse integrierter Speicher<br>• **1**: 2 Mb<br>• **2**: 4 Mb<br>• **3**: 8 Mb<br>• **4**: 16 Mb<br>• **5**: 32 Mb<br>• **6**: 64 Mb<br>• **7**: 128 Mb<br>• **8**: 256 Mb |
-| **Y** | Alphabetisch | **N**, **A** bis **E** | Integrierte PSRAM-Kapazität und Schnittstelle:<br>• **N**: Kein im Gehäuse integrierter Speicher<br>• **A**: 16 Mb QPI-PSRAM<br>• **B**: 32 Mb OPI-PSRAM<br>• **C**: 64 Mb OPI-PSRAM<br>• **D**: 128 Mb OPI/HPI-PSRAM<br>• **E**: 256 Mb HPI-PSRAM |
+| **x** | Numerischer Code im allgemeinen Muster | **1** bis **6** im allgemeinen Leitfaden; **7** in der Variantentabelle des SF32LB57 | QSPI-NOR-Kapazitätszuordnung im allgemeinen Leitfaden:<br>• **1**: 2 Mb<br>• **2**: 4 Mb<br>• **3**: 8 Mb<br>• **4**: 16 Mb<br>• **5**: 32 Mb<br>• **6**: 64 Mb<br>Die Variantentabelle des SF32LB57 verwendet **7** für 128 Mb NOR Flash. Der allgemeine Leitfaden definiert keine universelle Zuordnung für **8**; den konkreten Typ anhand der Variantentabelle der jeweiligen Familie entschlüsseln. |
+| **Y** | Alphabetischer Code im allgemeinen Muster | **A** bis **E** im allgemeinen Leitfaden | Integrierte PSRAM-Kapazität und Schnittstelle laut allgemeinem Leitfaden:<br>• **A**: 16 Mb QPI-PSRAM<br>• **B**: 32 Mb OPI-PSRAM<br>• **C**: 64 Mb OPI-PSRAM<br>• **D**: 128 Mb OPI/HPI-PSRAM<br>• **E**: 256 Mb HPI-PSRAM |
+| **N** | Familienbezogener Speicherpositionscode | Wenn in einer Familientabelle aufgeführt | Bedeutet, dass an dieser Position kein Speicher im Gehäuse integriert ist. |
 
 </div>
 

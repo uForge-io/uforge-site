@@ -271,8 +271,8 @@ Seleccione las fuentes de activación y los estados predeterminados de los inter
 |:---|:---|:---|:---|:---|:---|:---|:---|
 | Active | En ejecución | En ejecución | Accesible | Puede cambiar de estado | En ejecución | - | - |
 | Sleep | Detenida | En ejecución | Accesible | Puede cambiar de estado | En ejecución | Cualquier interrupción | <0,5 µs |
-| DeepSleep | Detenida | Detenidos | Inaccesible, totalmente retenida | Nivel mantenido | En ejecución | RTC, E/S de activación, GPIO, LPTIM, Bluetooth | 250 µs |
-| Standby | Reiniciada | Reiniciados | Inaccesible, totalmente retenida | Nivel mantenido | En ejecución | RTC, E/S de activación, LPTIM, Bluetooth | 1 ms |
+| DeepSleep | Detenida | Detenidos | Inaccesible; contenido conservado | Nivel mantenido | En ejecución | RTC, E/S de activación, GPIO, LPTIM, Bluetooth | 250 µs |
+| Standby | Reiniciada | Reiniciados | Inaccesible; contenido conservado | Nivel mantenido | En ejecución | RTC, E/S de activación, LPTIM, Bluetooth | 1 ms |
 | Hibernate | Reiniciada | Reiniciados | Inaccesible, no retenida | High-Z | Reiniciado | RTC, E/S de activación | >2 ms |
 
 </div>
@@ -327,7 +327,7 @@ El chip requiere dos fuentes de reloj externas: un cristal principal de 48 MHz y
 
     | Cristal | Requisito | Notas |
     |:---|:---|:---|
-    | 48 MHz | 7 pF ≤ CL ≤ 12 pF (8,8 pF recomendado), ΔF/F0 ≤ ±10 ppm, ESR ≤ 30 Ω (22 Ω recomendado) | Un CL y un ESR menores reducen el consumo; normalmente no hacen falta condensadores de adaptación si CL < 12 pF. |
+    | 48 MHz | CL ≤ 12 pF (≤7 pF recomendado), ΔF/F0 ≤ ±10 ppm, ESR ≤ 30 Ω (22 Ω recomendado) | Un CL y un ESR menores reducen el consumo. Reserve un condensador de adaptación en paralelo; normalmente no hace falta montarlo si CL < 9 pF. |
     | 32,768 kHz | CL ≤ 12,5 pF (7 pF recomendado), ΔF/F0 ≤ ±20 ppm, ESR ≤ 80 kΩ (38 kΩ recomendado) | Un CL y un ESR menores reducen el consumo; normalmente no hacen falta condensadores de adaptación si CL < 12,5 pF. |
 
     </div>
@@ -349,6 +349,9 @@ Cristales recomendados:
 
 !!! note "Notas adicionales"
     El TKD SX20Y048000B31T-8.8 tiene un ESR algo más alto, lo que aumenta ligeramente el consumo estático. Además, la nota de aplicación de esquemáticos de SiFli recomienda eliminar al menos el cobre GND de la segunda capa bajo el cristal de 48 MHz para reducir la capacitancia de carga parásita. Sin embargo, la guía de diseño de PCB prohíbe los vaciados de plano o recortes de cobre bajo la zona del cristal en las capas adyacentes. Las indicaciones se contradicen; consulte [Trazado de la interfaz de reloj](SF32LB52x_pcb_layout.md#65-clock-interface-routing). Confirme con SiFli el tratamiento de capas previsto antes de liberar el diseño de PCB.
+
+!!! important "La recomendación de CL para 48 MHz difiere de los componentes enumerados"
+    La fuente recomienda en general CL ≤ 7 pF para 48 MHz, pero su tabla de componentes recomendados incluye dos cristales de 48 MHz con CL = 8,8 pF. No explica cómo se relacionan esos valores con el objetivo general. Antes de liberar el diseño, confirme con SiFli el límite de CL aplicable y la cualificación del componente exacto.
 
 !!! important "Excepción de ESR del cristal en la fuente"
     La fuente incluye el TKD SX20Y048000B31T-8.8 con ESR ≤ 40 Ω, aunque el requisito general para 48 MHz es ESR ≤ 30 Ω. Trátelo como una cuestión de homologación específica de ese componente, no como permiso para usar cualquier cristal de 40 Ω. Antes de liberar el diseño, confirme su aprobación en la AVL vigente y valide el arranque, la calibración de frecuencia y la corriente del oscilador.

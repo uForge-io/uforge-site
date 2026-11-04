@@ -32,10 +32,10 @@ Route RF as a 50Ω single-ended controlled-impedance trace, preferably wider tha
 
 #### 6.2.3. Power and Ground { #623-power-and-ground }
 
-Place the BUCK inductor and filter capacitors close to the chip pins. Keep BUCK_LX short and wide; BUCK_FB must be at least 0.25mm wide. Do not pour copper on the top layer beneath the inductor; keep a solid ground reference on the adjacent layer and do not route other traces through the inductor area. Connect BUCK output-capacitor grounds to the main ground plane with multiple vias. Place the PVDD capacitor close to its pin and route PVDD short and wide; connect PVSS to main ground through vias. Place LDO and I/O supply decoupling capacitors close to their pins, and size supply traces for load current.
+Place the BUCK inductor and filter capacitors close to the chip pins. Keep BUCK_LX short and wide; BUCK_FB must be wider than 0.25mm. Do not pour copper on the top layer beneath the inductor; keep a solid ground reference on the adjacent layer and do not route other traces through the inductor area. Connect BUCK output-capacitor grounds to the main ground plane with multiple vias. Place the PVDD capacitor close to its pin and route PVDD short and wide; connect PVSS to main ground through vias. Place LDO and I/O supply decoupling capacitors close to their pins, and size supply traces for load current.
 
-!!! warning "Conflicting PVDD Trace-Width Limits"
-    The SF32LB56xU/V hardware application guide specifies a minimum PVDD trace width of 0.5mm, while the corresponding PCB checklist specifies 8mil. These values differ; confirm the applicable requirement with SiFli or the PCB design owner before layout freeze.
+!!! warning "Conflicting PVDD and BUCK_FB Trace-Width Limits"
+    The SF32LB56xU/V hardware application guide specifies a minimum PVDD trace width of 0.5mm, while the corresponding PCB checklist specifies 8mil. The guide also requires BUCK_FB to be wider than 0.25mm, while the checklist sets an 8mil minimum for both BUCK_LX and BUCK_FB. These requirements differ; confirm the applicable values with SiFli or the PCB design owner before layout freeze.
 
 #### 6.2.4. Audio and Analog Signals { #624-audio-and-analog-signals }
 
@@ -47,7 +47,7 @@ Route USB D+/D− (PA17/PA18) as a guarded 90Ω differential pair. Place ESD dev
 
 #### 6.2.6. EMI, ESD, and Test Points { #626-emi-esd-and-test-points }
 
-Avoid long surface-layer runs outside the shield can for noisy clock and power signals; route them on inner layers where practical. Place TVS/ESD devices close to the associated connector. Route each signal through its protection device, then connect the device ground pad to main ground with short, wide traces and vias. Put the USB charging-cable test point upstream of its TVS; place the battery-connector TVS upstream of the battery platform so external lines pass through the TVS before reaching the chip. Connect the ground network under the chip adequately to the main ground plane using blind/buried vias.
+Avoid long surface-layer runs outside the shield can; keep noisy clock and power signals off the surface layer and route them on inner layers. Place TVS/ESD devices close to the associated connector. Route each signal through its protection device, then connect the device ground pad to main ground with short, wide traces and vias. Put the USB charging-cable test point upstream of its TVS; place the battery-connector TVS upstream of the battery platform so external lines pass through the TVS before reaching the chip. Connect the ground network under the chip adequately to the main ground plane using blind/buried vias. When configured as clock outputs, U-variant PBR0–PBR2 and V-variant PBR0–PBR3 must have three-dimensional ground shielding and be kept away from interference sources such as 32kHz outputs.
 
 ### 6.3. PCB Layout Checklist { #63-pcb-layout-checklist }
 
@@ -124,6 +124,8 @@ Each table below covers one PCB layout review area. When an Applies To column is
 | 5 | 32 kHz crystal's parallel trace pair spacing is greater than 2x the trace spacing | Required |
 
 </div>
+
+The source PCB checklist says that the spacing of the 32kHz crystal's parallel trace pair must exceed 2x the trace spacing, but does not identify a distinct reference dimension. Confirm the intended comparison with the checklist owner before applying it as a layout constraint.
 
 #### 6.3.5. Buttons { #635-buttons }
 

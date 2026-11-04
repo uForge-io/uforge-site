@@ -11,7 +11,9 @@ tags:
 
 OpenSiFli desarrolla código Rust en [OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs), que incluye HAL, PAC, crates para tablas Flash, ejemplos y notas sobre grabación de la memoria Flash y depuración.
 
-Los responsables del mantenimiento describen el proyecto como trabajo en curso y aún no apto para producción. Considere Rust en SF32 una vía exploratoria, salvo que su equipo esté dispuesto a trabajar a bajo nivel y aportar correcciones al proyecto de origen.
+Los responsables del mantenimiento describen el proyecto como trabajo en curso y aún no apto para producción. Considere Rust en SF32 una vía exploratoria, salvo que su equipo pueda trabajar directamente con el hardware y esté preparado para aportar correcciones al proyecto upstream.
+
+A fecha de 2026-11-04, el [estado de soporte de `sifli-hal` en el repositorio upstream](https://github.com/OpenSiFli/sifli-rs/blob/main/sifli-hal/README.md) identifica `sf32lb52x` como el único objetivo admitido. Antes de planificar la adaptación, compruebe en ese estado y en los ejemplos el soporte del chip exacto; no deduzca que otras familias SF32 están admitidas solo por el nombre del repositorio o de un crate.
 
 Para configurar la cadena de herramientas y el ejecutor de grabación, y compilar Blinky sin modificar, consulte [Primeros pasos con Rust](../../../getting-started/rust/getting-started-rust.md). Esta página ayuda a evaluar el alcance del soporte y decidir si conviene ir más allá de esa base.
 
@@ -42,7 +44,7 @@ Para firmware de producción actual, use SiFli-SDK.
 
 ## Hitos de evaluación { #evaluation-gates }
 
-No inicie la adaptación a un producto hasta que la configuración de referencia para los primeros pasos funcione en la placa de destino. Después, establezca una prueba independiente para cada periférico, distribución Flash, ruta de depuración y función de ejecución requerida. Registre con cada resultado el commit upstream, el destino Rust, la configuración de Cargo, la revisión de la placa y el procedimiento de recuperación.
+No inicie la adaptación a un producto hasta que la configuración de referencia para los primeros pasos funcione en la placa de destino. Después, establezca una prueba independiente para cada periférico, distribución Flash, ruta de depuración y función necesaria durante la ejecución. Registre con cada resultado el commit upstream, el destino Rust, la configuración de Cargo, la revisión de la placa y el procedimiento de recuperación.
 
 El uso de `sifli-hal`, `sifli-pac`, herramientas para tablas Flash y ejemplos asíncronos de estilo Embassy en el repositorio implica que el éxito de una aplicación también depende de cómo interactúan, no solo de que compile un crate. Al evaluar una carencia, conserve el caso mínimo que la reproduce.
 

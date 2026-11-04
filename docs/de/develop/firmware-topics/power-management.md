@@ -22,10 +22,10 @@ Optimieren Sie den Stromverbrauch nicht anhand einzelner Codeausschnitte. Messen
 
 ## Nützliche Ausgangspunkte { #useful-starting-points }
 
-- SDK-Beispiele zum Energiemanagement.
-- Profiling der CPU-Auslastung.
-- Zustandsprüfung über die RT-Thread-Shell.
-- Strommessung auf Boardebene.
+- [SDK-Beispiele zum Energiemanagement](../../learn/low-power/low-power-sdk-examples.md).
+- [Profiling der CPU-Auslastung](../../getting-started/tutorials/advanced.md).
+- [Zustandsprüfung über die RT-Thread-Shell](../platforms/sifli-sdk/debugging-diagnostics.md).
+- [Strommessung auf Boardebene](../../learn/low-power/measurement-and-validation.md).
 
 ## Hinweise zur Messung { #measurement-notes }
 
@@ -51,7 +51,7 @@ Dokumentieren Sie zu jeder Messung:
 | Leerlaufstrom zu hoch | Pollingschleife, Protokollierung, Display-Versorgung oder Peripherietakt bleibt eingeschaltet. |
 | Schlafmodus lässt sich nicht aktivieren | Ein aktiver Timer, ein noch geöffnetes Gerät, anstehende Aufgaben oder eine nicht behandelte Weckquelle. |
 | Bluetooth verursacht Stromspitzen | Verbindungsintervall, Scan-Fenster, Audiopfad oder erneute Übertragungen. |
-| Display dominiert den Stromverbrauch | LCD-Hintergrundbeleuchtung, angezeigter AMOLED-Inhalt, Display-Aktualisierungsstrategie oder Strategie für Teilaktualisierungen. |
+| Display dominiert den Stromverbrauch | Leistungsaufnahme der LCD-Hintergrundbeleuchtung, angezeigter AMOLED-Inhalt, Bildwiederholungsrichtlinie oder Strategie für Teilaktualisierungen. |
 | Messwerte schwanken stark | Änderungen am Testaufbau, Akkuzustand, USB-Strompfad oder Protokollierungsaufwand. |
 
 </div>

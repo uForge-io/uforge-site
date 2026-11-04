@@ -26,7 +26,7 @@ Esta seção apresenta as convenções usadas para descrever as interfaces dos m
 
 ## Nomenclatura e compatibilidade elétrica { #what-is-stable-and-what-must-be-verified }
 
-Aplique as regras de nomenclatura de modo consistente nas descrições dos módulos, nos esquemáticos, nas notas da BOM e na documentação do produto. Os nomes descrevem o perfil de interface pretendido, não uma especificação elétrica ou mecânica definitiva. Nem o nome do perfil nem o formato coincidente do conector comprovam que um módulo e uma placa portadora sejam intercambiáveis.
+Aplique as regras de nomenclatura de modo consistente nas descrições dos módulos, nos esquemáticos, nas notas da BOM e na documentação do produto. Os nomes descrevem o perfil de interface pretendido, não uma especificação elétrica ou mecânica definitiva. Nem o rótulo `M2` nem o formato coincidente do conector comprovam conformidade com a especificação PCI-SIG M.2 E-key ou a intercambiabilidade entre um módulo e uma placa portadora.
 
 A definição em nível de pino não garante que todos os módulos da μForge ou encapsulamentos SF32 sejam compatíveis com todos os sinais e interfaces atribuídos, nem com todas as combinações de uso simultâneo. Antes de fechar o projeto, verifique os pontos a seguir com base no módulo, chip, encapsulamento e guia de projeto de hardware exatos que foram selecionados:
 

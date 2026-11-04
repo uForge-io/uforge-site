@@ -87,6 +87,8 @@ Der Gruppenschalter kann mehrere unterstützte Modelle enthalten, wie LSM6DSL un
 - `LSM6DSL_INT_GPIO_BIT` und `LSM6DSL_INT2_GPIO_BIT` beschreiben die Interrupt-Pins, wenn das Board sie zuweist.
 - `LSM_USING_AWT`, `LSM_USING_PEDO` und `LSM6DSL_USE_FIFO` stehen für gerätespezifische Funktionen; definieren Sie sie nur, wenn der ausgewählte Treiber sie unterstützt.
 
+Der Codeblock übernimmt den Standardwert `0` aus dem Leitfaden (SPI). Für das folgende I2C-Beispiel muss `LSM6DSL_USING_I2C=1` gesetzt werden; bei Auswahl von SPI ist der entsprechende SPI-Zugriffscode zu verwenden.
+
 Dieses Beispiel folgt dem SF32LB52x-Leitfaden. Andere Familienleitfäden oder SDK-Branches können abweichende Optionen oder Menüpfade enthalten. Prüfen Sie vor der Übernahme die tatsächlich im Ziel-Branch definierten Symbole.
 
 ### Den Bus finden und den Registerzugriff implementieren { #find-the-bus-and-implement-register-access }
@@ -354,7 +356,7 @@ FINSH_FUNCTION_EXPORT_ALIAS(cmd_bmpt, __cmd_bmpt, Test driver bmp280);
 #endif //DRV_BMP280_TEST
 ```
 
-Bevor Sie einen Messwert als gültig akzeptieren, überprüfen Sie die Geräteadresse, lesen Sie ein bekanntes Identitäts- oder Kalibrierregister und vergleichen Sie den Messwert mit dem erwarteten Bereich. Das Kommando dient nur als einfache Bring-up-Hilfe und ist kein produktionsreifer CLI-Code. Validieren Sie vor der Integration die Argumente jedes Unterkommandos, kontrollieren Sie die Rückgabewerte von Geräte- und API-Aufrufen und ergänzen Sie Grenzprüfungen.
+Bevor Sie einen Messwert als gültig akzeptieren, überprüfen Sie die Geräteadresse, lesen Sie ein bekanntes Identitäts- oder Kalibrierregister und vergleichen Sie den Messwert mit dem erwarteten Bereich. Das Kommando dient nur als einfache Hilfe zur Inbetriebnahme und ist kein produktionsreifer CLI-Code. Validieren Sie vor der Integration die Argumente jedes Unterkommandos, kontrollieren Sie die Rückgabewerte von Geräte- und API-Aufrufen und ergänzen Sie Grenzprüfungen.
 
 ## Verwandte Seiten { #related-pages }
 

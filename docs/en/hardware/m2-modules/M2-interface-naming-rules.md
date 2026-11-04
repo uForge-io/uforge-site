@@ -39,7 +39,7 @@ Where:
 
 | Specification | Description |
 | --- | --- |
-| **M2xM** | Multimedia: future RGB display, DVP camera, digital-microphone, and advanced-audio capabilities. |
+| **M2xM** | Multimedia: future support for RGB displays, DVP cameras, digital microphones, and advanced audio. |
 | **M2xA** | Analog: future precision analog I/O and data-acquisition capabilities. |
 | **M2xN** | Networking: future Ethernet, CAN, and industrial-networking capabilities. |
 | **M2xH** | High-speed: future high-bandwidth interfaces. |
@@ -47,7 +47,11 @@ Where:
 
 </div>
 
-These descriptions state the intended scope of each category, not finalized electrical requirements. The available local proposal workbook contains M2 and M2xM contact maps. The interface-definition article also summarizes M2xN and M2xA, but no original contact-map data was found to verify those summaries; treat them as unverified. M2xH and M2xP remain naming reservations without assigned contacts.
+These descriptions state the intended scope of each category, not finalized electrical requirements.
+**Evidence status:**
+- **M2 / M2xM:** The linked draft reports contact maps in a local proposal workbook, but the workbook is not included in this repository or linked here; treat the maps as proposal-only.
+- **M2xN / M2xA:** The draft summarizes these extensions, but no original contact-map data was found to verify the summaries; treat them as unverified.
+- **M2xH / M2xP:** Reserved names with no contacts assigned.
 
 ## Module declaration { #module-declaration }
 

@@ -10,9 +10,9 @@ tags:
 
 ## 概览 { #overview }
 
-SF32LB57x 是增强型超低功耗 AIoT MCU 系列，面向可穿戴设备、便携式智能设备、智能家居和紧凑型显示产品。这些产品通常需要更强的图形处理能力、蓝牙（Bluetooth）音频、摄像头输入、外部存储和常开运行能力，普通蓝牙 MCU 难以兼顾这些需求；同时，SF32LB57x 又避免了应用处理器级平台在功耗、成本和集成方面的负担。作为思澈科技（SiFli）2026 年推出的产品，SF32LB57x 定位为 SF32LB52x 和 SF32LB56x 的升级款，并力求保持成本竞争力。它提升了 CPU 和图形性能，在低成本、易于装配的 QFN 封装中提供更多 GPIO，并支持更灵活的合封存储组合。其图形显示分辨率最高可达 1024 × 600，色彩格式为 RGB888（24 位）。
+SF32LB57x 是增强型超低功耗 AIoT MCU 系列，面向可穿戴设备、便携式智能设备、智能家居和紧凑型显示产品。这些产品通常需要更强的图形处理能力、蓝牙（Bluetooth）音频、摄像头输入、外部存储和常开运行能力，普通蓝牙 MCU 难以兼顾这些需求；同时，SF32LB57x 又避免了应用处理器级平台在功耗、成本和集成方面的负担。作为思澈科技（SiFli）2026 年推出的产品，SF32LB57x 定位为 SF32LB52x 和 SF32LB56x 的升级款，并力求保持成本竞争力。它提升了 CPU 和图形性能，在适合低成本装配的紧凑型 QFN 封装中提供更多 GPIO，并支持更灵活的合封存储组合。思澈科技（SiFli）的[硬件设计指南](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html)给出的显示分辨率上限为 1024 × 1024；其[LCD FAQ](https://docs.sifli.com/projects/solution/7.FAQ/lcd/index.html)将 1024 × 600 和 720 × 720 列为常见或已验证的 RGB/DPI 方案，并明确指出这些参考值不等同于芯片的绝对上限。μForge 当前的[器件接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)列出 DPI/RGB 接口下最高 1024 × 600、RGB888。以上均应视为参考值，而非对任意面板模式的保证；请根据确切料号/封装、接口、面板时序、刷新率、引脚复用以及帧缓冲/PSRAM 带宽进行验证。
 
-SF32LB57x 采用三核 Arm Cortex-M33 STAR-MC1[^1] 架构：两颗性能核 HCPU 和 ACPU 的最高频率均为 240 MHz，合计性能为 1968 CoreMark / 740 DMIPS；另有一颗 24 MHz 的低功耗核 LCPU。根据思澈科技（SiFli）的 [ACPU 使用指南](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/acpu.html)，ACPU 负责音频和图形处理，LCPU 则以较低功耗处理 BLE 和传感器数据任务。平台还集成 592 KB 保留 SRAM、ePicasso 3.0 图形引擎、eZip 3.0 解压缩引擎、LCD 和 DCMI 摄像头控制器、双模蓝牙、音频 ADC/DAC、SiP 与外部存储接口、安全加速功能，以及 FreeIO 引脚分配。该系列的一项关键差异化能力是 PTM（并行任务机，Parallel Task Machine）：这是一种小型并行任务处理器，可接管对周期敏感的外设时序、自定义 IO 协议、传感器采集、类 PWM 时序和事件处理，减少主 CPU 的持续负担。
+SF32LB57x 采用三核 Arm Cortex-M33 STAR-MC1[^1] 架构：两颗性能核 HCPU 和 ACPU 的最高频率均为 240 MHz，合计性能为 1968 CoreMark / 740 DMIPS；另有一颗 24 MHz 的低功耗核 LCPU。思澈科技（SiFli）的 [ACPU 使用指南](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/acpu.html)明确将 SF32LB57x 列为三核系统，其中 ACPU 处理音频和图形任务，LCPU 处理 BLE、传感器数据等低功耗任务。请按产品负载确认目标 SDK 配置及任务分配。平台还集成 592 KB 保持型 SRAM、ePicasso 3.0 图形引擎、eZip 3.0 解压缩引擎、LCD 和 DCMI 摄像头控制器、双模蓝牙、音频 ADC/DAC、SiP 与外部存储接口、安全加速功能，以及 FreeIO 引脚分配。该系列的一项关键差异化能力是 PTM（并行任务机，Parallel Task Machine）：这是一种小型并行任务处理器，可接管对周期敏感的外设时序、自定义 IO 协议、传感器采集、类 PWM 时序和事件处理，减少主 CPU 的持续负担。
 
 复用原理图或开始 PCB 布局前，先确定准确的可订购料号。SF32LB57x 提供 QFN68、QFN80 和 BGA112 封装；不同料号家族分别对应电池供电或外部稳压 3.3 V 供电基线。封装和供电方案会影响电源树、GPIO 数量、封装扇出、显示与存储布线、调试接口及启动调试策略。
 
@@ -46,6 +46,11 @@ SF32LB57x 采用三核 Arm Cortex-M33 STAR-MC1[^1] 架构：两颗性能核 HCPU
 
 [硬件设计指南（μForge）]: ../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md
 [合格供应商名录（AVL）]: ../../hardware/cad-components/sifli-approved-vendor-list.md
+[SiFli-SDK 源代码仓库]: https://github.com/OpenSiFli/SiFli-SDK
+[电池供电数据手册]: https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/DS5701-SF32LB57x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf
+[3.3 V 供电数据手册]: https://downloads.sifli.com/docs/Datasheet/%E5%B8%B8%E4%BE%9B%E7%94%B5/DS5702-SF32LB57X-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf
+[用户手册]: https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/UM5701-SF32LB57x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p1.pdf
+[思澈科技原始设计指南]: https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html
 [购买样品]: https://sifli.taobao.com/
 [购买开发板]: https://sifli.taobao.com/
 
@@ -54,6 +59,7 @@ SF32LB57x 采用三核 Arm Cortex-M33 STAR-MC1[^1] 架构：两颗性能核 HCPU
 - :fontawesome-solid-file-pdf: __产品简介（[锂电池供电](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/PB5701-SF32LB57x-Product%20Brief%20v0.4.pdf)，[3.3 V 供电](https://downloads.sifli.com/docs/Datasheet/%E5%B8%B8%E4%BE%9B%E7%94%B5/PB5702-SF32LB57X-Product%20Brief%20v0p4.pdf)）__
 - :fontawesome-solid-file-pdf: __数据手册（[锂电池供电 / ZH](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/DS5701-SF32LB57x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf)，[3.3 V 供电 / ZH](https://downloads.sifli.com/docs/Datasheet/%E5%B8%B8%E4%BE%9B%E7%94%B5/DS5702-SF32LB57X-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf)）__
 - :fontawesome-solid-file-pdf: __[用户手册（ZH）](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/UM5701-SF32LB57x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p1.pdf)__
+- :fontawesome-brands-github: __[SiFli-SDK 源代码仓库]__
 - :fontawesome-solid-file-lines: __[原始设计指南（wiki.sifli.com，ZH）](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html)__
 - :fontawesome-solid-file-lines: __[开发板使用指南（wiki.sifli.com，ZH）](https://wiki.sifli.com/board/sf32lb57x/SF32LB57-DevKit-LCD.html)__
 - :fontawesome-solid-file-lines: __[硬件设计指南（μForge）]__
@@ -72,8 +78,12 @@ SF32LB57x 采用三核 Arm Cortex-M33 STAR-MC1[^1] 架构：两颗性能核 HCPU
 - 2 个 Arm Cortex-M33 STAR-MC1 性能核，最高 240 MHz，带 FPU 与 MPU（合计 1968 CoreMark / 740 DMIPS）
 - 1 个 Arm Cortex-M33 STAR-MC1 低功耗核，24 MHz
 - 32 KB 指令缓存 + 16 KB 数据缓存（HCPU）
-- 592 KB 保留 SRAM（512 KB HPSYS + 80 KB LPSYS），含 128 KB 零等待周期 D-TCM
+- 592 KB 保持型 SRAM（512 KB HPSYS + 80 KB LPSYS），含 128 KB 零等待周期 D-TCM
 - 合封存储随具体型号变化，最高 48 MB PSRAM 和 32 MB NOR Flash
+
+### AI 加速 { #ai-acceleration }
+
+思澈科技（SiFli）的 [SF32LB57x 硬件指南](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html)列出了集成式 AI 神经网络加速器。不过，[SiFli-SDK v2.5.1 NNACC 指南](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/docs/source/en/hal/nnacc.md)列出的系列为 55x、56x 和 58x，未列出 57x。若产品方案依赖加速功能，请先向思澈科技（SiFli）确认目标 57x 料号对应的驱动、算子和工具链支持。
 
 ### PTM 并行任务机 { #ptm-peripheral-task-machine }
 
@@ -92,7 +102,7 @@ SF32LB57x 采用三核 Arm Cortex-M33 STAR-MC1[^1] 架构：两颗性能核 HCPU
 
 ### 图形、显示与摄像头 { #graphics-display-and-camera }
 
-各型号支持的最高分辨率和面板接口，见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
+μForge 当前的器件接口矩阵列出 DPI/RGB 接口下最高 1024 × 600、RGB888；显示上限的来源说明和模式验证注意事项见[概览](#overview)。请通过[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)确认确切料号/封装可用的接口和引脚。
 
 - ePicasso 3.0 2D/2.5D 图形加速器，最大 2048 × 2048
 - eZip 3.0 硬件解码器，支持无损 eZip/eZip-A，以及 JPEG 和 MJPEG
@@ -196,8 +206,8 @@ SF32LB57x 包括电池供电型号和采用外部稳压 3.3 V 供电的型号。
 
 1. **验证固件路径。** 从 [SiFli-SDK 快速开始](../../getting-started/sifli/getting-started-sifli-sdk.md)开始，再通过 [SiFli-SDK 工作流](../../develop/platforms/sifli-sdk/overview.md)和[示例](../../develop/examples/index.md)验证计划使用的图形、音频、摄像头、蓝牙和存储功能。
 2. **规划评估硬件。** 使用 [SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md) 评估显示、摄像头、音频和连接功能。在将其作为 57x 产品设计的参考平台前，先确认模组存储配置、开发板版本及复用引脚配置。
-3. **进行硬件设计与评审。** 在发布原理图或布局前，使用本地[硬件设计指南](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md)——包括其[客户设计自查表](../../hardware/chip-guides/SF32LB57x_review_and_reference.md#7-customer-design-self-check)——以及[面向量产的设计](../../hardware/design-for-production.md)中的评审顺序；μForge 当前尚未发布该系列专用检查清单。
-4. **核对权威来源。** 针对准确的可订购型号和封装，核对思澈科技（SiFli）的[数据手册]、[用户手册]和[原始设计指南（wiki.sifli.com）]；控制关键 BOM 选型时，请使用[合格供应商名录（AVL）]。
+3. **进行硬件设计与评审。** 在发布原理图或布局前，使用本地[硬件设计指南](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md)——包括其[客户设计自查表](../../hardware/chip-guides/SF32LB57x_review_and_reference.md#7-customer-design-self-check)——以及[面向量产的设计](../../hardware/design-for-production.md)中的评审顺序。评审时同时使用[原理图检查清单](../../hardware/chip-guides/SF32LB57x_schematic_checklist.md)和 [PCB 布局检查清单](../../hardware/chip-guides/SF32LB57x_pcb_layout_checklist.md)。
+4. **核对权威来源。** 针对准确的可订购型号和封装，核对思澈科技（SiFli）的[电池供电数据手册]或[3.3 V 供电数据手册]、[用户手册]和[原始设计指南][思澈科技原始设计指南]；控制关键 BOM 选型时，请使用[合格供应商名录（AVL）]。
 
 <!-- uf-faq:start -->
 ## 常见问题 { #frequently-asked-questions }
@@ -205,17 +215,19 @@ SF32LB57x 包括电池供电型号和采用外部稳压 3.3 V 供电的型号。
 **SF32LB57x 的主要规格是什么？**
 SF32LB57x 配备应用 CPU（2× Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33 @24 MHz，专用蓝牙控制器）和 592 KB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 3.0 + eZip 3.0。封装：QFN68 / QFN80 / BGA112（7 × 7 mm (QFN68), 8 × 8 mm (QFN80), 5.4 × 4.4 mm (BGA112)）。USB 2.0 FS。
 
+硬件指南列出了集成式神经网络加速器，但固定版本 SDK v2.5.1 的 NNACC 指南并未确认 57x 的驱动或算子支持。请先确认具体目标的软件支持路径，详见 [AI 加速](#ai-acceleration)。
+
 **SF32LB57x 支持哪些显示接口？**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB。各接口适用型号见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB。各接口适用型号见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。这是整个系列的接口汇总，并非每个订货型号或封装都支持全部接口；请查阅所链接的接口矩阵。
 
 **SF32LB57x 支持的最大显示分辨率是多少？**
-通过 DPI/RGB 接口，最高支持 1024 × 600、RGB888。详见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
+硬件指南给出的上限为 1024 × 1024；SiFli 的 LCD FAQ 将 1024 × 600 和 720 × 720 列为常见或已验证的 RGB/DPI 设计。当前接口矩阵列出的是 1024 × 600 RGB888，不能将这些数据相互视为保证值。请针对具体型号和封装核查接口、面板时序、刷新率、引脚复用及帧缓冲区/PSRAM 带宽，详见[显示能力的适用条件](#overview)。 ([按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
 **SF32LB57x 的封装内存储器有多大？**
 封装内 PSRAM 最多 48 MB，封装内 NOR Flash 最多 32 MB。
 
 **SF32LB57x 需要什么供电电压？**
-3.0–4.7 V 或 2.97–3.63 V。
+电池供电型号：DS5701 给出 3.0–4.7 V，硬件指南针对 QFN68/QFN80/BGA112 给出 3.45–4.7 V。DS5701 还规定上电电压为 3.5 V ±10%。外部稳压供电型号：2.97–3.63 V。请按具体型号和输入引脚确认这两份资料的差异，详见[供电适用条件](#power-management)。
 
 **如何开始基于 SF32LB57x 的硬件设计？**
 请先阅读 [SF32LB57x 硬件设计指南](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求；投板前再使用原理图与布局检查清单。
@@ -229,10 +241,13 @@ SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB。各接口适用型号见[按器件�
 
 ### 开发板 { #development-kits }
 
-[SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md) 是一款评估板，可用于评估 RGB 显示屏、DVP 摄像头、双 PDM 麦克风、扬声器输出、SDIO Wi-Fi 和 USB。该板基于 SF32LB57 核心板；在 SF32LB57 模组完成射频认证并正式上市前，这块核心板承担模组的角色。
+[SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md) 是一款评估板，可用于评估 RGB 显示屏、DVP 摄像头、双 PDM 麦克风、扬声器输出、SDIO Wi-Fi 和 USB。该板采用 SF32LB57-MOD-WD 模组；思澈科技（SiFli）的开发板指南将其描述为 3.3 V 供电的 SF32LB57X 模组，板载 Wi-Fi/蓝牙组合芯片和启动用 QSPI Flash，是否合封 OPI-PSRAM 则取决于模组料号。将该板作为量产设计基线前，请向思澈科技（SiFli）确认具体模组配置和射频认证状态。
 
 使用官方参考原理图、最小系统连接方式和检查清单资料，规划电源、时钟、RF、显示、存储、音频、摄像头和量产接口。
 
 ### 参考产品 { #reference-products }
 
 SF32LB57x 的典型终端产品包括可穿戴智能手表和手环、智能 HMI 设备、电子纸产品、中小型智能家电、便携式录音/音频设备、智能家居面板、紧凑型显示终端，以及带摄像头的蓝牙产品。
+
+!!! note "自动生成内容"
+    本页是在没有现成源文件的情况下汇编/起草的。依赖其中技术声明前，请依据思澈科技（SiFli）官方文档核实。

@@ -53,6 +53,7 @@ As variantes somente com NOR são adequadas a produtos compactos com Bluetooth, 
 - Conector FPC de 16 pinos com passo de 0,5 mm; as interfaces de display incluem SPI, DSPI e Quad-SPI, com suporte a QSPI em modo DDR
 - Sinais I2C para o painel de toque
 - Pinos para microfone analógico e saída de áudio diferencial
+- Entrada de microfone digital PDM
 - Um LED de usuário
 - Botão de alimentação e botão de função
 - Pontos de teste para medir a corrente de uma linha individual; a SiFli também documenta testes de consumo do MCU, do sistema mínimo e da placa inteira
@@ -84,6 +85,8 @@ Para medir a corrente de uma única linha de alimentação, conecte um amperíme
 Quando o USB Type-C está conectado, alguns pinos do conector também podem fornecer saídas de 3,3 V, 1,8 V e 5 V. Confirme a direção necessária antes de conectar circuitos externos.
 
 A placa inclui uma chave de alimentação. O sinal RTS# do CH340N pode controlar a habilitação da placa, permitindo que a ferramenta host reinicie o MCU durante a gravação ou a depuração.
+
+Com alimentação por USB Type-C, o LDO integrado converte os 5 V do VBUS para 3,3 V.
 
 ## Gravação e depuração { #download-and-debug }
 
@@ -168,6 +171,39 @@ A placa disponibiliza dois conectores de borda com 24 pinos cada. Um lado reúne
 
 </div>
 
+<div align="center"><em>Tabela: funções detalhadas e resistores de pull de J1</em></div>
+
+<div align="center" markdown>
+
+| Pino | Nome do pino | Função padrão após reset e funções multiplexadas | Pull |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | Terra |  |
+| 2 | PA_44 | **PA44**, UART, I2C, GPTIM, WKUP20 | PD |
+| 3 | PA_43 | **PA43**, UART, I2C, GPTIM, WKUP19 | PD |
+| 4 | PA_42 | **PA42**, UART, I2C, GPTIM, WKUP18 | PU |
+| 5 | PA_41 | **PA41**, UART, I2C, GPTIM, WKUP17 | PU |
+| 6 | PA_40 | **PA40**, UART, I2C, GPTIM, SPI2_CS, WKUP16 | PU |
+| 7 | PA_39 | **PA39**, UART, I2C, GPTIM, SPI2_CLK, WKUP15 | PU |
+| 8 | PA_38 | **PA38**, UART, I2C, GPTIM, SPI2_DI, WKUP14 | PD |
+| 9 | PA_37 | **PA37**, UART, I2C, GPTIM, SPI2_DIO, WKUP13 | PD |
+| 10 | PA_36 | **PA36**, UART, I2C, GPTIM, USB_DM, WKUP12 | PD |
+| 11 | PA_35 | **PA35**, UART, I2C, GPTIM, USB_DP, WKUP11 | PD |
+| 12 | PA_31 | **PA31**, UART, I2C, GPTIM, GPADC3 | PD |
+| 13 | PA_30 | **PA30**, UART, I2C, GPTIM, I2S1_LRCK, GPADC2 | PD |
+| 14 | PA_29 | **PA29**, UART, I2C, GPTIM, SPI1_CS, I2S1_BCK, GPADC1 | PD |
+| 15 | PA_28 | **PA28**, UART, I2C, GPTIM, SPI1_CLK, I2S1_SDI, GPADC0 | PD |
+| 16 | GND | Terra |  |
+| 17 | 3.3V | Entrada de 3,3 V com USB Type-C desconectado; saída quando conectado |  |
+| 18 | PA_27 | **PA27**, UART, I2C, GPTIM, WKUP3 | PU |
+| 19 | PA_26 | **PA26**, UART, I2C, GPTIM, WKUP2 | PU |
+| 20 | PA_25 | **PA25**, UART, I2C, GPTIM, SPI1_DI, I2S1_SDO, WKUP1 | PD |
+| 21 | PA_24 | **PA24**, UART, I2C, GPTIM, SPI1_DIO, I2S1_MCLK, WKUP0 | PD |
+| 22 | PA_34 | **PA34**, UART, I2C, GPTIM, GPADC6, WKUP10 | PD |
+| 23 | PA_33 | **PA33**, UART, I2C, GPTIM, GPADC5 | PD |
+| 24 | PA_32 | **PA32**, UART, I2C, GPTIM, GPADC4 | PD |
+
+</div>
+
 ### Conector de LCD, áudio e depuração { #lcd-audio-and-debug-header }
 
 <div align="center"><em>Distribuição dos pinos do conector de LCD, áudio e depuração</em></div>
@@ -186,9 +222,44 @@ A placa disponibiliza dois conectores de borda com 24 pinos cada. Um lado reúne
 
 </div>
 
+<div align="center"><em>Tabela: funções detalhadas e resistores de pull de J2</em></div>
+
+<div align="center" markdown>
+
+| Pino | Nome do pino | Função padrão após reset e funções multiplexadas | Pull |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | Terra |  |
+| 2 | PA_00 | **PA00**, UART, I2C, GPTIM, LCD_RST | PD |
+| 3 | PA_01 | **PA01**, UART, I2C, GPTIM, BL_PWM | PD |
+| 4 | PA_02 | **PA02**, UART, I2C, GPTIM, LCD_TE, I2S1_MCLK | PD |
+| 5 | PA_03 | **PA03**, UART, I2C, GPTIM, LCD_CS, I2S1_SDO | PU |
+| 6 | PA_04 | **PA04**, UART, I2C, GPTIM, LCD_CLK, I2S1_SDI | PD |
+| 7 | PA_05 | **PA05**, UART, I2C, GPTIM, LCD_D0, I2S1_BCK | PD |
+| 8 | PA_06 | **PA06**, UART, I2C, GPTIM, LCD_D1, I2S1_LRCK | PD |
+| 9 | PA_07 | **PA07**, UART, I2C, GPTIM, LCD_D2, PDM1_CLK | PD |
+| 10 | PA_08 | **PA08**, UART, I2C, GPTIM, LCD_D3, PDM1_DAT | PD |
+| 11 | PA_09 | **PA09**, UART, I2C, GPTIM, CTP_INT | PD |
+| 12 | MIC_ADC | Sinal de entrada MIC |  |
+| 13 | MIC_BIAS | Tensão de polarização MIC |  |
+| 14 | DACP | Sinal de saída de áudio analógico |  |
+| 15 | DACN | Sinal de saída de áudio analógico |  |
+| 16 | GND | Terra |  |
+| 17 | 1.8V | Entrada de 1,8 V com USB Type-C desconectado; saída quando conectado |  |
+| 18 | PA_10 | **PA10**, UART, I2C, GPTIM, CTP_RST | PD |
+| 19 | PA_11 | **PA11**, UART, I2C, GPTIM, CTP_SDA | PU |
+| 20 | PA_20 | **PA20**, UART, I2C, GPTIM, CTP_SCL | PD |
+| 21 | PA_21 | **PA21**, UART, I2C, GPTIM | PD |
+| 22 | PA_18 | **UART0_RXD**, porta de depuração e gravação, PA18, SWDIO, I2C, GPTIM | PU |
+| 23 | PA_19 | **UART0_TXD**, porta de depuração e gravação, PA19, SWCLK, I2C, GPTIM | Nenhum |
+| 24 | 5V | Entrada de 5 V com USB Type-C desconectado; saída quando conectado |  |
+
+</div>
+
 ## Pinos de Flash externa e SDIO { #external-flash-and-sdio-pins }
 
 Algumas variantes incluem uma Flash QSPI-NOR externa de 16 MB. O grupo de pinos compartilhado entre armazenamento e SDIO é:
+
+O guia original da placa também lista estas opções de encapsulamento para Flash externa; a montagem depende da variante e da BOM: Flash SPI NOR em WSON8-8x6mm ou WSON8-6x5mm, Flash SPI NAND em WSON8-8x6mm e SD NAND em WSON8-8x6mm.
 
 <div align="center"><em>Grupo de pinos da Flash externa e do SDIO</em></div>
 
@@ -210,6 +281,8 @@ Antes de usar esses pinos para SDIO ou outras funções de expansão, verifique 
 ## Expansão de áudio { #audio-expansion }
 
 A placa disponibiliza a polarização e a entrada para microfone analógico, além de uma saída DAC diferencial. O microfone e um amplificador Class-AB/D para acionar um alto-falante são externos; selecione-os de acordo com o caminho de áudio pretendido.
+
+A placa também aceita entrada de microfone digital PDM: PA07 multiplexa `PDM1_CLK` e PA08 multiplexa `PDM1_DAT`.
 
 ## Alvos de compilação do SDK { #sdk-build-targets }
 

@@ -20,6 +20,8 @@ tags:
 
 La serie SF32LB58x usa un encapsulado BGA256 de 8,5 mm × 6,5 mm × 0,94 mm, con paso de 0,4 mm y diámetro nominal de bola de 0,25 mm. Consulte la hoja de datos oficial para ver todos los datos de cualificación del encapsulado.
 
+La sección del sustrato también indica un diámetro de pad de bola de 0,27 mm y una abertura de bola de 0,23 mm. Consulte el dibujo oficial del encapsulado para conocer las dimensiones completas del patrón de pads, las tolerancias y los datos de cualificación.
+
 !!! warning "Las fuentes discrepan sobre la altura del encapsulado"
     El texto de la guía de SiFli indica una altura de 0,94 mm, mientras que el dibujo del BGA256 da para la dimensión A un valor nominal de 0,91 mm y un intervalo de 0,84–1,04 mm. Son valores contradictorios en la fuente. Si la altura afecta a las holguras mecánicas o al ajuste de la carcasa, no elija uno sin confirmarlo con SiFli; utilice la especificación de encapsulado confirmada.
 
@@ -81,7 +83,7 @@ Consulte la figura de diseño de vías enterradas entre las capas 2-5 de la hoja
 
 ### 6.4. Fanout de pistas { #64-trace-fanout }
 
-Las pistas de las dos primeras filas de bolas BGA salen por la capa superior; las de las filas restantes se enrutan hacia las capas internas mediante vías.
+Las pistas de las dos primeras filas y columnas de bolas BGA salen por la capa superior; las de las bolas restantes se enrutan hacia las capas internas mediante vías.
 
 ![Figura 6.4-1: Referencia de fanout en la capa superior](../../sf32-products/chips/assets/58x/sf32lb58x-FANOUT-T-PCB.png){ width="100%" loading="lazy" }
 
@@ -96,6 +98,8 @@ Las pistas de las dos primeras filas de bolas BGA salen por la capa superior; la
 Coloque el cristal dentro de una cubierta de apantallamiento, a más de 1 mm del borde de la PCB y lo más lejos posible de los componentes que generan calor —como el PA, el circuito de carga y la PMU—, idealmente a más de 5 mm, para evitar que afecten al desplazamiento de frecuencia del cristal. Mantenga una distancia superior a 0,25 mm entre la zona de exclusión del cristal y otros metales o componentes.
 
 Trace el cristal de 48 MHz en la capa superior, con una longitud de 3–10 mm y un ancho de pista de 0,075 mm, y aplíquele apantallamiento 3D completo. Aléjelo de VBAT, DC/DC y las líneas de señal de alta velocidad. No trace otras señales por la capa superior ni por la capa adyacente bajo la zona del cristal de 48 MHz.
+
+El esquema de referencia de la Figura 6.5-2 identifica el cristal de 48 MHz como 8,8 pF y marca C0307/C0308 como NF (no montados); son anotaciones del esquema de referencia y no sustituyen la comprobación de que el cristal seleccionado cumple los requisitos de diseño.
 
 Trace el cristal de 32,768 kHz en la capa superior, con una longitud ≤10 mm, un ancho de pista de 0,075 mm y una separación entre las pistas paralelas 32K_XI/32K_XO ≥0,15 mm; aplique apantallamiento 3D completo. Mantenga libres de otras pistas la capa superior y la capa adyacente bajo la zona del cristal.
 
@@ -136,6 +140,8 @@ Coloque el circuito de adaptación RF lo más cerca posible del chip, no junto a
 
 Cuando sea posible, trace las pistas RF en la capa superior para evitar vías que degraden el rendimiento; se recomienda un ancho de pista superior a 10 mil. Aplique apantallamiento 3D completo y evite ángulos agudos o rectos. Añada vías de tierra de apantallamiento a ambos lados de la pista RF y controle su impedancia a 50 Ω. Mantenga DC-DC, VBAT y las señales digitales de alta velocidad —como el cristal, los relojes de alta frecuencia y las señales de interfaz I2C/SPI/SDIO/I2S/UART— fuera de la zona de trazado RF. AVSS_RRF, AVSS_TRF, AVSS_TRF2, AVSS_VCO y AVSS_BB son pines de tierra del circuito RF y deben conectarse correctamente a tierra; coloque vías ciegas directamente en sus pads para conectarlos a la tierra principal.
 
+La red π de adaptación de referencia muestra un inductor en serie de 2,7 nH y dos condensadores en derivación de 2 pF. Son valores del circuito de referencia; determine la adaptación final probando con la antena y el diseño de PCB reales.
+
 ![Figura 6.6-1: Esquemático de la red π y del circuito de alimentación](../../sf32-products/chips/assets/58x/sf32lb58x-%CF%80-SCH.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 6.6-1: Esquemático de la red π y del circuito de alimentación</em></div>
@@ -168,8 +174,10 @@ AU_ADC1P/AU_ADC1N y AU_ADC2P/AU_ADC2N son los dos pares de entrada analógica. C
 
 AU_DAC1P/AU_DAC1N y AU_DAC2P/AU_DAC2N son los dos pares de salida analógica. Coloque los componentes asociados lo más cerca posible de sus pines, trace cada par P/N como una línea diferencial lo más corta posible y de menos de 2 mm, con una capacitancia parásita de pista inferior a 10 pF y un ancho de pista diferencial de 0,075 mm. Apantalle el par diferencial en 3D y mantenga alejadas otras señales con interferencia intensa.
 
-!!! warning "Las fuentes discrepan sobre la longitud máxima de las pistas DAC"
-    La guía de PCB limita la longitud de las pistas DAC a menos de 2 mm, mientras que el libro de trabajo de la lista de comprobación indica menos de 2 cm (20 mm). Los límites difieren por un factor de diez. No elija ni sustituya un límite sin confirmarlo con SiFli.
+El esquema de referencia usa C0327 (1 µF/6,3 V) en MIC_BIAS, C0326 (4,7 µF/6,3 V) en AVDD33_AUD y C0325 (1 µF/6,3 V) en AUD_VREF. También asigna ADC1P/N y ADC2P/N a las bolas BGA G19/G18 y F19/F18, y DAC1P/N y DAC2P/N a J20/J21 y H21/H20, respectivamente; son designaciones de bola del circuito de referencia.
+
+!!! warning "La guía de SiFli contiene límites distintos para las pistas DAC"
+    La guía de hardware de SiFli da límites distintos para las pistas DAC: el resumen de la interfaz de audio especifica menos de 2 cm (20 mm), mientras que la sección de diseño de PCB especifica menos de 2 mm. Los límites difieren por un factor de diez. No elija ni sustituya un límite sin confirmarlo con SiFli.
 
 ![Figura 6.7-1: Esquemático de alimentación de audio](../../sf32-products/chips/assets/58x/sf32lb58x-AU-PWR-SCH.png){ width="100%" loading="lazy" }
 
@@ -199,6 +207,8 @@ AU_DAC1P/AU_DAC1N y AU_DAC2P/AU_DAC2N son los dos pares de salida analógica. Co
 
 Coloque el condensador de desacoplo AVDD33_USB y la resistencia de calibración USB2_REXT cerca de sus respectivos pines. Las pistas USB deben pasar por los pines del componente de protección ESD antes de llegar al chip, y el pin de tierra de dicho componente debe conectarse bien a la tierra principal. Trace USB DP/DN como un par diferencial con impedancia diferencial controlada a 90 Ω y apantallamiento 3D.
 
+El esquema de referencia asigna USB2_DP/USB2_DN a T6/R6 y AVDD33_USB/USB2_REXT a P5/T5; muestra C0317 = 1 µF/6,3 V y R0307 = 200 Ω ±1 %. El diagrama de colocación marca como incorrectas las derivaciones anteriores al dispositivo ESD.
+
 ![Figura 6.8-1: Esquemático de señal USB](../../sf32-products/chips/assets/58x/sf32lb58x-USBS-SCH.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 6.8-1: Esquemático de señal USB</em></div>
@@ -219,6 +229,8 @@ Coloque el condensador de desacoplo AVDD33_USB y la resistencia de calibración 
 
 SF32LB58x ofrece dos interfaces SDIO, SDIO1 y SDIO2. Trace juntas todas las señales de cada interfaz SDIO, sin dividirlas. La longitud total de las pistas debe ser ≤50 mm y la diferencia de longitud dentro del grupo, ≤6 mm. Apantalle en 3D la señal de reloj SDIO y proteja también las señales DATA y CMD.
 
+La Figura 6.9-1 muestra el circuito y el mapa de pines de referencia de SDIO1; sus asignaciones de pines no corresponden a SDIO2.
+
 ![Figura 6.9-1: Circuito de la interfaz SDIO1](../../sf32-products/chips/assets/58x/sf32lb58x-SDIOM-SCH.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 6.9-1: Circuito de la interfaz SDIO1</em></div>
@@ -230,6 +242,8 @@ SF32LB58x ofrece dos interfaces SDIO, SDIO1 y SDIO2. Trace juntas todas las señ
 ### 6.10. Trazado de la interfaz DSI { #610-dsi-interface-routing }
 
 Coloque el condensador de desacoplo AVDD18_DSI y la resistencia de calibración DSI_REXT cerca de sus respectivos pines. Trace las señales DSI como pares diferenciales con impedancia diferencial controlada a 100 Ω, igualando las longitudes del reloj y los datos: el desfase dentro de cada par debe ser ≤0,5 mm y entre pares, ≤2 mm. Aplique apantallamiento 3D a cada par diferencial.
+
+El esquema de referencia muestra los pares de datos diferenciales DSI_D0 y DSI_D1, además del par diferencial de reloj. Incluye C0323 = 4,7 µF/6,3 V en AVDD18_DSI y R0301 = 10 kΩ en DSI_REXT.
 
 !!! warning "Las fuentes discrepan sobre el límite entre pares diferenciales DSI"
     La guía de PCB limita el desfase entre pares a ≤2 mm y el desfase dentro de cada par a ≤0,5 mm. En cambio, el libro de trabajo de la lista de comprobación exige que los pares diferenciales de datos DSI coincidan con el par diferencial de reloj dentro de 200 mil (5,08 mm). Los límites entre pares son contradictorios. Mantenga separado el límite intra-par y confirme con SiFli cuál límite entre pares se debe aplicar antes de cerrar el diseño.
@@ -246,6 +260,8 @@ Coloque el condensador de desacoplo AVDD18_DSI y la resistencia de calibración 
 
 Coloque el inductor de alimentación DC-DC y los condensadores de desacoplo cerca de los pines del chip. Mantenga las pistas BUCK_LX lo más cortas y anchas posible para reducir al mínimo la inductancia del lazo DC-DC. Añada vías de tierra adicionales en los pines de tierra de todos los condensadores de desacoplo de salida DC-DC y conéctelas al plano GND principal. La pista de realimentación BUCK_FB no debe ser demasiado fina: su ancho debe superar 0,25 mm. No vierta cobre en la capa superior bajo el inductor de alimentación; mantenga la capa adyacente como un plano de referencia GND completo y evite pasar otras pistas por la zona del inductor.
 
+El circuito de referencia usa inductores de 4,7 µH para BUCK1 y BUCK2, y muestra condensadores de 4,7 µF/10 V y 0,1 µF en cada salida.
+
 ![Figura 6.11-1: Circuito de componentes clave DC-DC](../../sf32-products/chips/assets/58x/sf32lb58x-DCDC-P-SCH.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 6.11-1: Circuito de componentes clave DC-DC</em></div>
@@ -257,6 +273,8 @@ Coloque el inductor de alimentación DC-DC y los condensadores de desacoplo cerc
 ### 6.12. Trazado de la alimentación { #612-power-supply-routing }
 
 PVDD1 y PVDD2 son las entradas de alimentación del módulo PMU integrado. Coloque sus condensadores de desacoplo cerca de los pines y use pistas lo más anchas posible; nunca menos de 0,5 mm. PVSS1 y PVSS2 son pines de tierra del módulo PMU y deben conectarse a la tierra principal mediante vías. No los deje flotantes, ya que afectaría al rendimiento general de la PMU.
+
+El esquema de referencia asigna a cada entrada PVDD1 y PVDD2 condensadores de desacoplo de 10 µF/10 V y 0,1 µF.
 
 ![Figura 6.12-1: Diagrama del circuito DC-DC](../../sf32-products/chips/assets/58x/sf32lb58x-DCDC-R-SCH.png){ width="100%" loading="lazy" }
 
@@ -277,6 +295,8 @@ Coloque los condensadores de desacoplo de todas las salidas LDO y entradas de al
 ### 6.14. Trazado de otras interfaces { #614-other-interface-routing }
 
 Las señales de los pines GPADC requieren apantallamiento 3D completo y deben mantenerse alejadas de otras fuentes de interferencia, como los circuitos de medición del nivel de batería y de temperatura.
+
+El diagrama de funciones de pines muestra GPADC_CH0–CH7 multiplexados en PB32–PB39 junto con otras funciones periféricas; compruebe en la hoja de datos las funciones alternativas y los posibles conflictos del dispositivo objetivo.
 
 ![Figura 6.14-1: Circuito GPADC](../../sf32-products/chips/assets/58x/sf32lb58x-GPADC-R-SCH.png){ width="100%" loading="lazy" }
 
@@ -328,6 +348,8 @@ Coloque los puntos de prueba de las líneas de carga USB antes del diodo TVS y s
 <div align="center"><em>Figura 6.17-2: Referencia de trazado del TVS</em></div>
 
 Para evitar que la máscara de soldadura cubra los pads y preservar la fiabilidad de las uniones, las vías de los pads BGA deben quedar centradas en la bola; no las desplace. Para mejorar el rendimiento de fabricación, consulte las figuras de referencia de conexión de bolas BGA.
+
+Las Figuras 6.17-4 y 6.17-5 identifican como deficientes los trazados diagonales que crean trampas de grabado y las vías que invaden los pads de las bolas BGA. Siga las geometrías mejores/buenas mostradas para mantener la separación y la fabricabilidad.
 
 ![Figura 6.17-3: Referencia de colocación de vías BGA](../../sf32-products/chips/assets/58x/sf32lb58x-BGA-VIA-PCB.png){ width="100%" loading="lazy" }
 

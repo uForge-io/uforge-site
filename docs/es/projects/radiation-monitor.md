@@ -8,11 +8,11 @@ tags:
     - Medición
 ---
 
-# Radiation Monitor: detector portátil de intensidad de señal { #radiation-monitor-portable-signal-strength-detector }
+# Radiation Monitor: visor portátil de intensidad de señal { #radiation-monitor-portable-signal-strength-detector }
 
 ## ¿Qué es Radiation Monitor? { #what-is-radiation-monitor }
 
-[SiFliSparks/RadiationMonitor](https://github.com/SiFliSparks/RadiationMonitor) es un visor portátil de intensidad de señal en la banda Bluetooth, basado en SF32LB52 y SiFli-SDK. El firmware recorre 79 puntos de frecuencia entre 2402 y 2480 MHz y representa los valores recibidos en un gráfico de barras LVGL. KEY2 inicia o detiene el barrido y permite consultar el historial guardado.
+[SiFliSparks/RadiationMonitor](https://github.com/SiFliSparks/RadiationMonitor) es un visor portátil de intensidad de señal en la banda Bluetooth, basado en SF32LB52 y SiFli-SDK. El firmware recorre 79 puntos de frecuencia entre 2402 y 2480 MHz y representa los valores del indicador de intensidad de la señal recibida (RSSI) en un gráfico de barras LVGL. KEY2 inicia o detiene el barrido y permite consultar el historial guardado.
 
 El proyecto permite estudiar el barrido de la banda Bluetooth, el procesamiento de datos en tiempo real, la visualización de frecuencias y la interacción con un solo botón. No es un analizador de espectro calibrado ni identifica el origen de la señal recibida. Las transmisiones cercanas en 2,4 GHz y las condiciones de medida pueden influir en el gráfico. Sin calibración ni una comparación en condiciones controladas, sus valores no son adecuados para mediciones reglamentarias, de certificación o de RF de precisión.
 
@@ -46,7 +46,7 @@ Antes de empezar, tenga preparado:
 | Área | Base del código en la revisión fijada | Evidencia necesaria antes de adaptar |
 |:-----|:-----------------------|:-------------------------------------|
 | Barrido de frecuencias | 79 puntos entre 2402 y 2480 MHz | Commit del firmware, revisión del SDK/placa y registro completo del barrido |
-| Procesamiento | La descripción del módulo en el README indica promediar las diez exploraciones anteriores; el resumen habla de 30. El README no especifica si se promedian valores de potencia lineal o dBm | Revisión del código fijado, escala y profundidad del promedio, resultados sin/con suavizado y comparación con una fuente estable |
+| Procesamiento | Consulte la advertencia siguiente para ver las cifras contradictorias del README y la escala de promedio no especificada | Revisión del código fijado, escala y profundidad del promedio, resultados sin/con suavizado y comparación con una fuente estable |
 | Historial | Historial circular de diez registros | Registro de detención, navegación, vuelta al inicio y reinicio |
 | Interfaz | Gráfico de barras LVGL con eje Y nominal de -110 a -20 dBm | Captura de pantalla y verificación de la correspondencia entre etiquetas e índices del arreglo |
 | Alcance de la medición | No se proporciona calibración trazable ni incertidumbre | Registro del instrumento de referencia, el montaje y el error, o indicación explícita de que solo muestra tendencias relativas |
@@ -93,7 +93,7 @@ Use el commit fijado del proyecto [`670cf20`](https://github.com/SiFliSparks/Rad
 |:---------|:---------------------|:------------------|
 | Placa | Parta del argumento SCons de SiFli `sf32lb52-lchspi-ulp`; registre la PCB real y verifique la configuración del proyecto | Que el directorio de salida `build_sf32lb52-lchspi-ulp_hcpu` demuestre que todas las antenas y rutas de pantalla SF32LB52x son equivalentes |
 | SDK | Registre el commit de SiFli-SDK con el que la compilación funciona | No suponga que el SDK más reciente conserve el comportamiento de escaneo Bluetooth del proyecto |
-| Suavizado | Resuelva con el código fijado la discrepancia del README entre 30 barridos y el promedio de las diez exploraciones anteriores; verifique si se promedian valores de potencia lineal o dBm y establezca la profundidad | La descripción del módulo indica diez exploraciones; el resumen, 30, y ninguno especifica la escala del promedio |
+| Suavizado | Consulte la advertencia siguiente; determine en el código fijado la escala y profundidad del promedio y verifique el comportamiento en el dispositivo | Las descripciones del README no demuestran qué comportamiento implementa el código fijado |
 | Temporización | El README indica un intervalo de actualización de datos de 30 ms; mida el tiempo del barrido completo de 79 puntos | Que 30 ms sea el periodo garantizado para actualizar los 79 puntos completos |
 | Licencia | Confirme las licencias del repositorio y del código incorporado antes de reutilizarlo o distribuirlo | Que la disponibilidad pública del código conceda automáticamente derechos de distribución comercial |
 
@@ -160,7 +160,7 @@ Los principales dominios de fallo son la entrada RF/antena, el comportamiento de
 
 | Prueba | Método | Evidencia de aprobación |
 |:-------|:-------|:------------------------|
-| Algoritmo y profundidad del suavizado | Registre los valores sin procesar y `rssi_res` para una frecuencia; compárelos con el commit fijado y resuelva la discrepancia del README | La escala y la profundidad del promedio coinciden con esa revisión exacta del código y se confirman en el dispositivo |
+| Algoritmo y profundidad del suavizado | Registre los valores sin procesar y `rssi_res` de una frecuencia y compárelos con el código fijado | La escala y la profundidad del promedio coinciden con esa revisión exacta del código y se confirman en el dispositivo |
 | Inicio/detención | Pulse KEY2 brevemente durante el barrido y después reanude | La detención conserva el historial; al reanudar no se bloquea |
 | Historial | Con el barrido detenido, mantenga KEY2 pulsado más de una vez | Se pueden recorrer correctamente hasta diez registros hacia atrás y volver al inicio |
 | Historial vacío | Detenga o mantenga pulsado antes de acumular un historial válido | No hay acceso fuera de límites ni fallos; la interfaz muestra un estado reconocible sin datos |

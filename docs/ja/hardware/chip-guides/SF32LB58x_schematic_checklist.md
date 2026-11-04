@@ -19,6 +19,8 @@ hide:
 
 以下の各表は、回路図の機能ブロックごとに確認項目をまとめたものです。各項目に記載された条件に基づいて適用範囲を判断してください。「必須」項目は条件を満たす場合に必ず確認し、「任意」項目は該当する機能や設計を採用する場合に確認してください。
 
+本ページは、リンク先の SiFli ワークブック V1.0（2026-01-21付）に基づいています。この版がオンラインでの最新改訂版であることを示すものではありません。
+
 ### 5.8.1. パッケージ { #581-package }
 
 <div align="center"><em>表 5.8.1-1: パッケージのチェックリスト</em></div>
@@ -484,7 +486,7 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
 | 2 | PBR0～PBR5はStandbyとHibernateの両方で出力として使用できる | 任意 |
 | 3 | PBR0～PBR5からLPTIM信号を出力できる | 任意 |
 | 4 | <span class="flag-red">SF32LB567ではLPTIM3を推奨する。LPTIM3_OUTとLPTIM3_OUT_BARからPBRピン経由で、デューティ比が異なり極性が逆の21～25 kHz信号を出力する</span> | 任意 |
-| 5 | <span class="flag-red">デューティ比が異なる逆極性の21～25 kHz信号は、HCPUのATIMからも出力できる。適切なATIMx_CHxおよびATIMx_CHxN信号をPin_Configとともに選び、HCPU周波数を下げた場合の影響を考慮する</span> | 任意 |
+| 5 | <span class="flag-red">デューティ比が異なる逆極性の21～25 kHz信号は、HCPUのATIMからも出力できる。適切なATIMx_CHxおよびATMx_CHxN信号をPin_Configとともに選び、HCPU周波数を下げた場合の影響を考慮する</span> | 任意 |
 | 6 | PBR0～PBR5から32 kHzクロック信号を出力できる | 任意 |
 | 7 | <span class="flag-red">PBR0～PBR3をウェイクアップ入力として設定できる。ただしMCUのウェイクアップ後、PBR0～PBRxでは割り込み信号を受信できず、0／1レベルのみを検出するため、使用時は注意する</span> | 任意 |
 
@@ -494,6 +496,8 @@ SD1のI/O電源ドメインであるVDDIOA2は1.8 Vまたは3.3 Vに設定でき
     [出典のチェックリストワークブック](https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx)のPBRチェックリスト項目4にはSF32LB567が記載されています。ただし、PBRチェックリスト項目4と5がSF32LB58x向けの推奨事項であることはワークブックから確認できません。採用する前に、SiFliへ適用可否を確認してください。
 
     ワークブックのストレージチェックリスト項目6では、量産時にPA43をHighにして「MPI3の電源」を有効にするとしています。一方、[公式SF32LB58xハードウェアアプリケーションノート](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md)では、PA43は外付けフラッシュの電源制御ピンと説明され、外付けフラッシュに給電するにはHighにすると記載されています。チェックリストにはワークブックの記述をそのまま残しています。量産書き込みの方法を確定する前に、実際に制御される電源レールと対象インターフェースをSiFliに確認してください。
+
+    ワークブックでは相補出力を `ATMx_CHxN` と表記しています。ここでは出典の表記を保持しています。使用前に、選定した部品の `Pin_Config` で信号名を確認してください。
 
 ### 5.8.26. 消費電力 { #5826-power-consumption }
 

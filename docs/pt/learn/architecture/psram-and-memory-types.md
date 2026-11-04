@@ -108,6 +108,8 @@ A coluna de linhas de dados conta apenas os sinais da carga útil; não inclui c
 
 O [guia de modelos de chip da SiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) lista configurações de canal duplo como exemplos: **SF32LB566VCB36** tem 8 MB de OPI-PSRAM em MPI1 e 4 MB em MPI2; **SF32LB586VDD36** tem 16 MB de HPI-PSRAM em cada interface; e **SF32LB587VEE56** tem 32 MB de HPI-PSRAM em cada interface. Esses códigos de peça ilustram a topologia de memória, mas não garantem que um único cliente alcance a carga útil agregada da tabela. Antes de dimensionar um projeto sensível à largura de banda, confirme o número de peça comercial exato e o mapa de memória do SDK; outro encapsulamento ou SKU da mesma família pode usar uma organização diferente.
 
+O guia do SF32LB52 informa que as frequências de interface listadas podem mudar no lançamento oficial.
+
 ### Por que dois canais de memória fazem diferença { #why-two-memory-channels-matter }
 
 O principal benefício de uma configuração de canal duplo não é apenas um número agregado maior. Quando o mapa de memória SF32 e a configuração do display/controlador permitem alocação independente, um canal pode ser dedicado a uma carga crítica em largura de banda e o outro atender ao restante do sistema.

@@ -122,7 +122,7 @@ Puede continuar cuando se cumplan estas condiciones:
 
 - CodeKit reconoce la ubicación del SDK.
 - La placa seleccionada coincide con su hardware.
-- Las acciones de compilación y grabación se completan.
+- Las acciones de compilación y grabación se completan correctamente.
 - La consola serie muestra la salida de `hello_world` tras el reinicio.
 
 ## Solución de problemas { #troubleshooting }
@@ -145,7 +145,7 @@ Puede continuar cuando se cumplan estas condiciones:
 
 - Utilice [SiFli-SDK](getting-started-sifli-sdk.md) para entender los comandos de terminal equivalentes.
 - Continúe con [Primeros pasos con los periféricos](../tutorials/beginner.md) una vez que `hello_world` funcione.
-- Cuando empiece a implementar funciones para un producto real, consulte el [Resumen de Bluetooth](../../learn/bluetooth/overview.md), el [Resumen de gráficos](../../learn/graphics/overview.md), el [Resumen del audio local](../../learn/audio/overview.md) y el [Resumen del diseño de bajo consumo](../../learn/low-power/overview.md).
+- Cuando empiece a implementar funciones para un producto real, consulte el [Resumen de Bluetooth](../../learn/bluetooth/overview.md), el [Resumen de gráficos](../../learn/graphics/overview.md), la [Descripción general del audio](../../learn/audio/overview.md) y el [Resumen del diseño de bajo consumo](../../learn/low-power/overview.md).
 
 ## Registre una configuración reproducible { #what-sifli-should-add }
 

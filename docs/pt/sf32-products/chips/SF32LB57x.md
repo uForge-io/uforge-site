@@ -10,9 +10,9 @@ tags:
 
 ## Visão geral { #overview }
 
-A série SF32LB57x reúne MCUs AIoT de ultrabaixo consumo para wearables, dispositivos inteligentes portáteis, casas inteligentes e produtos compactos com display. É indicada quando o produto precisa de mais recursos gráficos, áudio Bluetooth, entrada de câmera, armazenamento externo e operação sempre ativa do que um MCU Bluetooth básico oferece, sem assumir os compromissos de consumo, custo e integração de uma plataforma da classe de processador de aplicação. Como oferta da SiFli para 2026, o SF32LB57x representa uma evolução das famílias SF32LB52x e SF32LB56x, mantendo o foco na competitividade de custo. Oferece mais desempenho de CPU e de gráficos, mais GPIOs em encapsulamentos QFN de baixo custo e fácil manuseio, além de combinações mais flexíveis de memória integrada ao encapsulamento. Em gráficos, suporta resoluções de até 1024 × 600 com cor RGB888 (24 bits).
+A série SF32LB57x reúne MCUs AIoT de ultrabaixo consumo para wearables, dispositivos inteligentes portáteis, casas inteligentes e produtos compactos com display. É indicada quando o produto precisa de mais recursos gráficos, áudio Bluetooth, entrada de câmera, armazenamento externo e operação sempre ativa do que um MCU Bluetooth básico oferece, sem assumir os compromissos de consumo, custo e integração de uma plataforma da classe de processador de aplicação. Como oferta da SiFli para 2026, o SF32LB57x representa uma evolução das famílias SF32LB52x e SF32LB56x, mantendo o foco na competitividade de custo. Oferece mais desempenho de CPU e de gráficos, mais GPIOs em encapsulamentos QFN compactos adequados à montagem de menor custo, além de combinações mais flexíveis de memória integrada ao encapsulamento. O [guia de projeto de hardware](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html) da SiFli informa um limite de tela de 1024 × 1024, enquanto o [FAQ de LCD](https://docs.sifli.com/projects/solution/7.FAQ/lcd/index.html) lista 1024 × 600 e 720 × 720 entre projetos RGB/DPI comuns ou validados e esclarece que essas referências não representam o limite físico absoluto do silício. A [matriz de interfaces](../../learn/graphics/display-controller.md#per-device-interface-matrix) atual da μForge registra 1024 × 600 RGB888 via DPI/RGB. Trate esses valores como referências, não como modos de painel garantidos; valide a referência e o encapsulamento exatos, a interface, os tempos do painel, a taxa de atualização, o pinmux e a largura de banda do framebuffer/PSRAM.
 
-A família usa uma arquitetura de três núcleos Arm Cortex-M33 STAR-MC1[^1]: dois núcleos de alto desempenho (HCPU e ACPU) operando a até 240 MHz, com pontuação conjunta de 1.968 CoreMark / 740 DMIPS, e um núcleo LCPU de baixo consumo a 24 MHz. O [guia de uso da ACPU da SiFli](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/acpu.html) indica que o ACPU processa áudio e gráficos, enquanto o LCPU executa tarefas de BLE e de dados de sensores por um caminho de menor consumo. A plataforma inclui 592 KB de SRAM de retenção, gráficos ePicasso 3.0, descompressão eZip 3.0, controladores LCD e de câmera DCMI, Bluetooth de modo duplo, ADC/DAC de áudio, interfaces para memória SiP e externa, aceleração de segurança e atribuição de pinos via FreeIO. Seu principal diferencial é o PTM (Parallel Task Machine), um pequeno processador paralelo de tarefas que assume funções como o sequenciamento de periféricos sensível a ciclos, protocolos de E/S personalizados, aquisição de sensores, temporização semelhante a PWM e tratamento de eventos, liberando as CPUs principais desse trabalho.
+A família usa uma arquitetura de três núcleos Arm Cortex-M33 STAR-MC1[^1]: dois núcleos de alto desempenho (HCPU e ACPU) operando a até 240 MHz, com pontuação conjunta de 1.968 CoreMark / 740 DMIPS, e um núcleo LCPU de baixo consumo a 24 MHz. O [guia de uso da ACPU da SiFli](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/acpu.html) descreve explicitamente o SF32LB57x como um sistema de três núcleos: a ACPU processa áudio e gráficos, enquanto a LCPU executa tarefas sensíveis ao consumo, como BLE e processamento de dados de sensores. Confirme a configuração do SDK e a distribuição de tarefas para a carga de trabalho do produto. A plataforma inclui 592 KB de SRAM de retenção, gráficos ePicasso 3.0, descompressão eZip 3.0, controladores LCD e de câmera DCMI, Bluetooth de modo duplo, ADC/DAC de áudio, interfaces para memória SiP e externa, aceleração de segurança e atribuição de pinos via FreeIO. Seu principal diferencial é o PTM (Parallel Task Machine), um pequeno processador paralelo de tarefas que assume funções como o sequenciamento de periféricos sensível a ciclos, protocolos de E/S personalizados, aquisição de sensores, temporização semelhante a PWM e tratamento de eventos, liberando as CPUs principais desse trabalho.
 
 Defina a referência comercial exata antes de reutilizar esquemáticos ou iniciar o layout da PCB. O SF32LB57x está disponível nos encapsulamentos QFN68, QFN80 e BGA112, com versões alimentadas por bateria e versões para alimentação externa regulada de 3,3 V, conforme a família do componente. Essa escolha define a árvore de alimentação, a quantidade de GPIOs, o fanout do encapsulamento, o roteamento do display e da memória, o acesso para depuração e a estratégia de bring-up.
 
@@ -46,6 +46,11 @@ Consulte [Características e especificações](#features-and-specs) para ver os 
 
 [Hardware Design Guide (μForge)]: ../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md
 [SiFli Approved Vendor List]: ../../hardware/cad-components/sifli-approved-vendor-list.md
+[Repositório do código-fonte do SiFli SDK]: https://github.com/OpenSiFli/SiFli-SDK
+[Datasheet para bateria]: https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/DS5701-SF32LB57x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf
+[Datasheet para 3,3 V]: https://downloads.sifli.com/docs/Datasheet/%E5%B8%B8%E4%BE%9B%E7%94%B5/DS5702-SF32LB57X-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf
+[Manual do usuário]: https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/UM5701-SF32LB57x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p1.pdf
+[Guia de projeto original]: https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html
 [Buy Samples]: https://sifli.taobao.com/
 [Buy Dev Kits]: https://sifli.taobao.com/
 
@@ -54,6 +59,7 @@ Consulte [Características e especificações](#features-and-specs) para ver os 
 - :fontawesome-solid-file-pdf: __Resumo do produto ([bateria](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/PB5701-SF32LB57x-Product%20Brief%20v0.4.pdf), [3,3 V](https://downloads.sifli.com/docs/Datasheet/%E5%B8%B8%E4%BE%9B%E7%94%B5/PB5702-SF32LB57X-Product%20Brief%20v0p4.pdf))__
 - :fontawesome-solid-file-pdf: __Datasheet ([bateria / ZH](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/DS5701-SF32LB57x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf), [3,3 V / ZH](https://downloads.sifli.com/docs/Datasheet/%E5%B8%B8%E4%BE%9B%E7%94%B5/DS5702-SF32LB57X-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2p2.pdf))__
 - :fontawesome-solid-file-pdf: __[Manual do usuário (ZH)](https://downloads.sifli.com/docs/Datasheet/%E9%94%82%E7%94%B5/UM5701-SF32LB57x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p1.pdf)__
+- :fontawesome-brands-github: __[Repositório do código-fonte do SiFli SDK]__
 - :fontawesome-solid-file-lines: __[Guia de projeto original (wiki.sifli.com, ZH)](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html)__
 - :fontawesome-solid-file-lines: __[Guia da placa de desenvolvimento (wiki.sifli.com, ZH)](https://wiki.sifli.com/board/sf32lb57x/SF32LB57-DevKit-LCD.html)__
 - :fontawesome-solid-file-lines: __[Guia de projeto de hardware (μForge)][Hardware Design Guide (μForge)]__
@@ -75,6 +81,10 @@ Consulte [Características e especificações](#features-and-specs) para ver os 
 - 592 KB de SRAM de retenção (512 KB HPSYS + 80 KB LPSYS), incluindo 128 KB de D-TCM sem ciclos de espera
 - Memória integrada ao encapsulamento, conforme a variante: até 48 MB de PSRAM e 32 MB de Flash NOR
 
+### Aceleração de IA { #ai-acceleration }
+
+O [guia de hardware do SF32LB57x](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html) da SiFli lista um acelerador integrado de rede neural para IA. No entanto, o [guia NNACC do SiFli SDK v2.5.1](https://github.com/OpenSiFli/SiFli-SDK/blob/v2.5.1/docs/source/en/hal/nnacc.md) cita as famílias 55x, 56x e 58x, mas não a 57x. Antes de depender dessa aceleração, confirme com a SiFli o suporte de driver, operadores e toolchain para a referência 57x exata.
+
 ### PTM (Parallel Task Machine) { #ptm-peripheral-task-machine }
 
 - PTM de 4 núcleos para tarefas periféricas personalizadas, com execução temporizada por hardware em vez de atendimento contínuo da CPU
@@ -92,7 +102,7 @@ Consulte [Características e especificações](#features-and-specs) para ver os 
 
 ### Gráficos, display e câmera { #graphics-display-and-camera }
 
-Resolução máxima e interfaces de painel: consulte [Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix).
+A matriz de interfaces atual da μForge registra 1024 × 600 RGB888 via DPI/RGB; as ressalvas sobre as fontes e a validação de modos estão na [Visão geral](#overview). Confirme as interfaces e os pinos disponíveis para a referência e o encapsulamento exatos na [Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix).
 
 - Acelerador gráfico 2D/2.5D ePicasso 3.0, de até 2048 × 2048
 - Decodificador de hardware eZip 3.0 para eZip/eZip-A sem perdas, além de JPEG e MJPEG
@@ -196,26 +206,28 @@ Siga esta sequência para transformar uma lista inicial de opções SF32LB57x em
 
 1. **Valide o caminho do firmware.** Comece pelo [guia de introdução ao SiFli SDK](../../getting-started/sifli/getting-started-sifli-sdk.md). Em seguida, use o [fluxo de trabalho do SiFli SDK](../../develop/platforms/sifli-sdk/overview.md) e os [exemplos](../../develop/examples/index.md) para validar os recursos de gráficos, áudio, câmera, Bluetooth e armazenamento previstos para o produto.
 2. **Planeje o hardware de avaliação.** Use a [SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md) para avaliar o display, a câmera, o áudio e a conectividade. Antes de usá-la como referência para um produto 57x, confirme a configuração de memória do módulo, a revisão da placa e a configuração dos pinos compartilhados.
-3. **Projete e revise o hardware.** Antes de liberar o esquemático ou o layout, siga o [guia de projeto de hardware](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md), incluindo a [autoverificação do projeto pelo cliente](../../hardware/chip-guides/SF32LB57x_review_and_reference.md#7-customer-design-self-check), e o processo de revisão de [projeto para produção](../../hardware/design-for-production.md). Ainda não há um checklist específico da μForge para esta família.
-4. **Consulte as fontes oficiais.** Confirme a referência comercial e o encapsulamento exatos nas fontes primárias da SiFli: [Datasheet], [Manual do usuário][User Manual] e [Guia de projeto original (wiki.sifli.com)][Original Design Guide (wiki.sifli.com)]. Para selecionar componentes críticos da lista de materiais, consulte também a [Lista de fornecedores aprovados da SiFli][SiFli Approved Vendor List].
+3. **Projete e revise o hardware.** Antes de liberar o esquemático ou o layout, siga o [guia de projeto de hardware](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md), incluindo a [autoverificação do projeto pelo cliente](../../hardware/chip-guides/SF32LB57x_review_and_reference.md#7-customer-design-self-check), e o processo de revisão de [projeto para produção](../../hardware/design-for-production.md). Aplique também os checklists de [esquemático](../../hardware/chip-guides/SF32LB57x_schematic_checklist.md) e de [layout de PCB](../../hardware/chip-guides/SF32LB57x_pcb_layout_checklist.md).
+4. **Consulte as fontes oficiais.** Confirme a referência comercial e o encapsulamento exatos no [datasheet para bateria] ou no [datasheet para 3,3 V], no [manual do usuário] e no [guia de projeto original] da SiFli. Para selecionar componentes críticos da lista de materiais, consulte também a [lista de fornecedores aprovados da SiFli].
 
 <!-- uf-faq:start -->
 ## Perguntas frequentes { #frequently-asked-questions }
 
 **Quais são as principais especificações do SF32LB57x?**
-O SF32LB57x combina uma CPU de aplicação (2× Cortex-M33 @240 MHz) com um núcleo de baixo consumo (Cortex-M33 @24 MHz, controlador Bluetooth dedicado). Integra 592 KB de SRAM interna e oferece Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 3.0 + eZip 3.0. Encapsulamento: QFN68 / QFN80 / BGA112 (7 × 7 mm (QFN68), 8 × 8 mm (QFN80), 5,4 × 4,4 mm (BGA112)). USB 2.0 FS.
+O SF32LB57x oferece processamento de aplicações (2× Cortex-M33 @240 MHz) e um núcleo de baixo consumo (Cortex-M33 @24 MHz, controlador Bluetooth dedicado). Integra 592 KB de SRAM interna e oferece Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 3.0 + eZip 3.0. Encapsulamento: QFN68 / QFN80 / BGA112 (7 × 7 mm (QFN68), 8 × 8 mm (QFN80), 5,4 × 4,4 mm (BGA112)). USB 2.0 FS.
+
+O guia de hardware lista um acelerador de redes neurais integrado, mas o guia NNACC do SDK v2.5.1 não comprova suporte de driver ou operadores para o 57x. Confirme o caminho de software do alvo exato; veja [aceleração de IA](#ai-acceleration).
 
 **Quais interfaces de display o SF32LB57x suporta?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix)) Esta lista abrange toda a família, não garante todas as interfaces em cada código de componente ou encapsulamento; confira a matriz de interfaces vinculada.
 
 **Qual é a resolução máxima de display do SF32LB57x?**
-Até 1024 × 600 com cor RGB888, pela interface DPI/RGB. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+O guia de hardware estabelece um limite de 1024 × 1024; a FAQ de LCD da SiFli cita projetos RGB/DPI comuns ou validados de 1024 × 600 e 720 × 720. A matriz de interfaces atual lista 1024 × 600 RGB888. Esses valores não são garantias intercambiáveis. Confira o componente e o encapsulamento exatos, a interface, o timing do painel, a taxa de atualização, o multiplexamento de pinos e a largura de banda do framebuffer/PSRAM; veja as [condições de display](#overview). ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
 
 **Quanta memória no encapsulamento o SF32LB57x oferece?**
 Até 48 MB de PSRAM e até 32 MB de Flash NOR no encapsulamento.
 
 **Qual tensão de alimentação o SF32LB57x precisa?**
-3,0–4,7 V ou 2,97–3,63 V.
+Variantes com bateria: o DS5701 informa 3,0–4,7 V, enquanto o guia de hardware informa 3,45–4,7 V para QFN68/QFN80/BGA112. O DS5701 também especifica tensão na energização de 3,5 V ±10%. Variantes com regulador externo: 2,97–3,63 V. Esclareça a divergência para o componente e o pino de entrada exatos; veja as [condições de alimentação](#power-management).
 
 **Por onde começar um projeto de hardware com o SF32LB57x?**
 Comece pelo [guia de projeto de hardware do SF32LB57x](../../hardware/chip-guides/SF32LB57x_hardware_design_guide.md) para esquemático, alimentação, clock/RF e layout de PCB, e use os checklists de esquemático e layout antes de liberar a placa.
@@ -229,10 +241,13 @@ Use o [guia de projeto de hardware (μForge)](../../hardware/chip-guides/SF32LB5
 
 ### Kits de desenvolvimento { #development-kits }
 
-[SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md) é a placa de avaliação para displays RGB, câmeras DVP, dois microfones PDM, saída de alto-falante, Wi-Fi SDIO e USB. Ela é baseada na placa principal (core board) SF32LB57, que faz as vezes do módulo 57 até que ele obtenha a certificação de RF completa e esteja disponível comercialmente.
+[SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md) é a placa de avaliação para displays RGB, câmeras DVP, dois microfones PDM, saída de alto-falante, Wi-Fi SDIO e USB. Ela usa um módulo SF32LB57-MOD-WD. O guia da placa da SiFli o descreve como um módulo SF32LB57X de 3,3 V com Wi-Fi/Bluetooth integrado e Flash QSPI de boot; a presença de OPI-PSRAM depende do SKU do módulo. Antes de usar a placa como base para produção, confirme com a SiFli a configuração exata do módulo e seu status de certificação de RF.
 
 Use os esquemáticos de referência oficiais, as orientações de projeto do sistema mínimo e os materiais de checklist para planejar alimentação, clocks, RF, display, armazenamento, áudio, câmera e acesso para produção.
 
 ### Produtos de referência { #reference-products }
 
 Entre os produtos típicos baseados em SF32LB57x estão smartwatches e pulseiras, dispositivos HMI inteligentes, produtos com display de papel eletrônico, eletrodomésticos inteligentes de pequeno e médio porte, equipamentos portáteis de gravação e áudio, painéis para casas inteligentes, terminais compactos com display e produtos Bluetooth com câmera.
+
+!!! note "Conteúdo gerado automaticamente"
+    Esta página foi compilada/redigida sem um documento-fonte existente. Verifique as afirmações técnicas na documentação oficial da SiFli antes de usá-las como referência.

@@ -69,7 +69,7 @@ v1 在 `ptab.json` 中使用 JSON 数组。它没有专用版本字段，但可�
 
 ## v2：带名称和类型的 JSON 分区 { #v2-named-and-typed-json-partitions }
 
-v2 同样使用 `ptab.json`，但头元素必须声明 `"version": "2"`。存储器字段仍为 `mem`、`base` 和 `regions`。分区保留 `offset` 和 `max_size`，并可使用 `tags` 和 `custom`；v2 还增加了 `name`、`type`，以及执行分区可选的 `core`。
+v2 同样使用 `ptab.json`，但头元素必须声明 `"version": "2"`。存储器字段仍为 `mem`、`base` 和 `regions`。分区保留 `offset` 和 `max_size`，并可使用 `tags` 和 `custom`；v2 还增加了 `name`、`type`，以及执行分区可选的 `core`。v2 的 `type` 是字符串列表，因此同一分区可以兼具多个角色，例如同时作为 `app_img` 和 `app_exec`。
 
 <div align="center"><em>表：v2 分区字段与类型</em></div>
 <div align="center" markdown>

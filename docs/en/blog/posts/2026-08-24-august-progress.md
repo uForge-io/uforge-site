@@ -3,7 +3,7 @@ icon: lucide/rss
 description: "August at μForge.io: clearer product selection, reusable projects, practical learning, and a direct route to support."
 ---
 
-# August: From Coverage to Confidence [2026-08-24] { #august-from-coverage-to-confidence-2026-08-24 }
+# August: from coverage to confidence [2026-08-24] { #august-from-coverage-to-confidence-2026-08-24 }
 
 In August, we focused on making μForge.io more useful at three stages that move a product forward: choosing a part, establishing a working baseline, and validating the result. The goal is simple: spend less time piecing together answers from scattered resources.
 
@@ -13,7 +13,7 @@ The [SF32 Product Selector](../../sf32-products/product-selector.md) and family 
 
 ### More useful paths into implementation { #more-useful-paths-into-implementation }
 
-The [Projects](../../projects/index.md) library now collects reproducible starting points for real product classes. Each project is intended to be more than a demo: a hardware and software baseline that you can inspect, adapt, and use to estimate the work required for your own design.
+The [Projects](../../projects/index.md) library now collects reproducible starting points for specific product categories. Each project is intended to be more than a demo: a hardware and software baseline that you can inspect, adapt, and use to estimate the work required for your own design.
 
 Hardware design guides, checklists, and the Learn section support the next steps. They cover board-level constraints, measurement-based power analysis, and runnable examples for audio, graphics, USB, Bluetooth, and low power.
 

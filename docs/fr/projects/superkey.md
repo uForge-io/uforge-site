@@ -180,7 +180,7 @@ Répartissez les pannes en cinq domaines : matériel/écran du périphérique, e
 |:-----|:-------|:--------------|
 | Application compagnon absente | Fermer SuperKeyHub et redémarrer l'appareil | L'interface locale et HID restent fonctionnels ; les valeurs dépendant du compagnon apparaissent clairement comme obsolètes ou indisponibles |
 | Perte de CDC | Débrancher/rebrancher l'USB ou changer de port pendant l'envoi de données | L'appareil ne se bloque pas ; la requête de version et l'envoi de données reprennent après reconnexion |
-| Mise en veille de l'hôte | Activer `power_mode sleep/normal`, puis effectuer un cycle veille/réveil de l'hôte | LCD, LED, rétroéclairage et capteurs s'arrêtent/redémarrent comme prévu ; les données sont ensuite actualisées |
+| Mise en veille de l'hôte | Activer dans SuperKeyHub le suivi de la veille du système, puis effectuer un cycle veille/réveil de l'hôte | LCD, LED, rétroéclairage et capteurs s'arrêtent/redémarrent comme prévu ; les données sont ensuite actualisées |
 | Incompatibilité de version | Tester dans un environnement contrôlé une paire firmware/application compagnon incompatible | Le couple refuse de fonctionner ou signale une erreur diagnostiquable au lieu d'appliquer une mise à jour incompatible |
 | Défaillance de l'API | Utiliser une configuration météo invalide ou déconnecter le réseau | La panne météo n'affecte ni HID, ni CDC, ni l'interface locale, ni la récupération |
 | DFU interrompu | Interrompre une mise à jour sur une unité de test récupérable | La voie filaire de flashage conservée restaure l'image connue |

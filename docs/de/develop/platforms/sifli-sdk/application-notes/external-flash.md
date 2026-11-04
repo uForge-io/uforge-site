@@ -332,7 +332,7 @@ cleanup:
 
 ## Flash über RT-Thread MTD verwenden { #5-use-flash-through-rt-thread-mtd }
 
-RT-Thread stellt MTD-NOR- und MTD-NAND-Gerätetreiber bereit. Sind MTD- und Dateisystemoptionen in der Konfiguration aktiviert, werden die Geräte beim Start registriert. Suchen Sie das Gerät mit `rt_device_find("flash1")`. Die Gerätenamen der Controller lauten `flash1`, `flash2` und `flash3`; für jeden weiteren aktivierten Controller wird der entsprechende Gerätename verwendet. Ein von null verschiedener Rückgabewert zeigt an, dass das Gerät erfolgreich registriert wurde.
+RT-Thread stellt MTD-NOR- und MTD-NAND-Gerätetreiber bereit. Wenn MTD für einen Flash-Controller korrekt konfiguriert und aktiviert ist, wird das Gerät beim Start registriert. Für die Nutzung eines Dateisystems ist zusätzlich dessen Konfiguration erforderlich. Suchen Sie das Gerät mit `rt_device_find("flash1")`. Die Gerätenamen der Controller lauten `flash1`, `flash2` und `flash3`; für jeden weiteren aktivierten Controller wird der entsprechende Gerätename verwendet. Ein von null verschiedener Rückgabewert zeigt an, dass das Gerät erfolgreich registriert wurde.
 
 MTD wird von Dateisystemen und USB-Speicher genutzt. Anwendungscode sucht das Gerät normalerweise und bindet es ein; die MTD-NOR-Schicht kapselt die Lese- und Schreiboperationen. Wenn Sie ein Gerät selbst registrieren, implementieren Sie die unten gezeigte Operationstabelle.
 
@@ -551,7 +551,9 @@ typedef struct
 } FLASH_CMD_CFG_T;
 ```
 
-Dabei ist `cmd` die Befehls-ID (`0x06` für Write Enable und `0x05` für Read Status in den Beispielen der Anleitung). `func_mode` wählt Lesen oder Schreiben; `data_mode` legt fest, ob keine Daten oder Daten im 1-, 2- oder 4-Leitungsmodus übertragen werden; `dummy_cycle` gibt die zusätzlichen Taktzyklen zwischen Befehl und Adresse beziehungsweise Daten an; `ab_size` und `ab_mode` beschreiben die Alternate-Bytes; `addr_size` und `addr_mode` legen Adresslänge und Leitungsmodus fest; `cmd_mode` bestimmt, ob der Befehl selbst über eine, zwei oder vier Leitungen gesendet wird.
+Dabei ist `cmd` die Befehls-ID (`0x06` für Write Enable und `0x05` für Read Status in den Beispielen der Anleitung). `func_mode` wählt Lesen oder Schreiben; `data_mode` legt fest, ob keine Daten oder Daten im 1-, 2- oder 4-Leitungsmodus übertragen werden; `dummy_cycle` gibt die zusätzlichen Taktzyklen zwischen Befehl und Adresse beziehungsweise Daten an; `ab_size` und `ab_mode` beschreiben die Alternate-Bytes; `addr_size` codiert die Adresslänge als `n-1` Byte; `addr_mode` verwendet `0` für keine Adresse sowie `1`, `2` und `3` für Ein-, Zwei- und Vier-Leitungsadressierung. Bei `addr_mode` = `0` ist keine Adresse erforderlich und `addr_size` muss ebenfalls `0` sein. Der Strukturkommentar beschreibt `cmd_mode` als Leitungsmodus für die Übertragung des Befehls selbst.
+
+Als Beispiel nennt die Quelle den Quad-Read-Befehl `0xEB` von PUYA: Im Timingdiagramm folgt auf `ADDR` ein 8-Bit-`MBYTE` zur Erkennung des `continue`-Modus. Die Quelle setzt `ab_size` und `ab_mode` auf `0/3` und erklärt dies als ein Byte (Codierung `n-1`) und den Vier-Leitungsmodus. Die Quelle ist bei `cmd_mode` intern widersprüchlich: Der Strukturkommentar ordnet `0/1/2/3` keinem, dem Ein-, Zwei- beziehungsweise Vier-Leitungsmodus zu, während der folgende Text sagt, ein gültiger Flash-Befehl habe immer den Wert `1`. Prüfen Sie vor der Festlegung eines Werts die Definition und Implementierung im Ziel-SDK; leiten Sie ihn nicht allein aus dieser Erklärung ab.
 
 ## Einen NAND-Flash-Baustein portieren { #8-port-a-nand-flash-part }
 

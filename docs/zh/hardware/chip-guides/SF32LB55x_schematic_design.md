@@ -31,7 +31,7 @@ tags:
 
 ### 5.1. 电源系统 { #51-power-system }
 
-QFN68L 封装的 SF32LB551 没有 VDD2、BUCK2_VSW、BUCK2_VOUT、LDOVCC2_VOUT 和 AVDD_DSI 管脚。电源和电容表仅适用于所选封装实际提供的管脚。BGA 封装提供两路 BUCK 输出，BUCK2 可配置为 BUCK 或 LDO 模式，推荐使用 BUCK 模式；QFN68L 仅提供一路 BUCK 输出。
+QFN68L 封装的 SF32LB551 没有 VDD2、BUCK2_VSW、BUCK2_VOUT、LDOVCC2_VOUT 和 AVDD_DSI 管脚。BGA125 封装的 SF32LB553 也没有 AVDD_DSI 管脚。电源和电容表仅适用于所选封装实际提供的管脚。BGA 封装提供两路 BUCK 输出，BUCK2 可配置为 BUCK 或 LDO 模式，推荐使用 BUCK 模式；QFN68L 仅提供一路 BUCK 输出。
 
 <div align="center"><em>表 5.1-1：PMU 电源管脚</em></div>
 
@@ -248,7 +248,7 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 <div align="center" markdown>
 
-| 接口信号 | QFN68 | BGA145/169 | 说明 |
+| 接口信号 | QFN68 | BGA125/145/169 | 说明 |
 | :--- | :--- | :--- | :--- |
 | CS# | GPIO9 | PA61 | 片选，低有效 |
 | SO | GPIO7 | PA65 | 数据输入（数据输入输出 1） |
@@ -263,7 +263,7 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 <div align="center" markdown>
 
-| 接口信号 | QFN68 | BGA145/169 | 说明 |
+| 接口信号 | QFN68 | BGA125/145/169 | 说明 |
 | :--- | :--- | :--- | :--- |
 | CS# | GPIO16 | PA45 | 片选，低有效 |
 | SO | GPIO14 | PA49 | 数据输入（数据输入输出 1） |
@@ -278,7 +278,7 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 <div align="center" markdown>
 
-| 接口信号 | QFN68 | BGA145/169 | 说明 |
+| 接口信号 | QFN68/BGA125 | BGA145/169 | 说明 |
 | :--- | :--- | :--- | :--- |
 | CS# | - | PB33 | 片选，低有效 |
 | SO | - | PB36 | 数据输入（数据输入输出 1） |
@@ -293,14 +293,14 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 <div align="center" markdown>
 
-| 接口信号 | QFN68 | BGA145/169 | 说明 |
-| :--- | :--- | :--- | :--- |
-| CLK | GPIO10 | PA34 | 时钟输入 |
-| CMD | GPIO9 | PA36 | 命令输入 |
-| DATA0 | GPIO8 | PA28 | 数据 0 |
-| DATA1 | GPIO7 | PA29 | 数据 1 |
-| DATA2 | GPIO6 | PA30 | 数据 2 |
-| DATA3 | GPIO5 | PA31 | 数据 3 |
+| 接口信号 | QFN68 | BGA125 | BGA145/169 | 说明 |
+| :--- | :--- | :--- | :--- | :--- |
+| CLK | GPIO10 | PA60 | PA34 | 时钟输入 |
+| CMD | GPIO9 | PA61 | PA36 | 命令输入 |
+| DATA0 | GPIO8 | PA63 | PA28 | 数据 0 |
+| DATA1 | GPIO7 | PA65 | PA29 | 数据 1 |
+| DATA2 | GPIO6 | PA66 | PA30 | 数据 2 |
+| DATA3 | GPIO5 | PA68 | PA31 | 数据 3 |
 
 </div>
 
@@ -308,18 +308,18 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 <div align="center" markdown>
 
-| 接口信号 | QFN68 | BGA145/169 | 说明 |
-| :--- | :--- | :--- | :--- |
-| CLK | GPIO10 | PA34 | 时钟输入 |
-| CMD | GPIO9 | PA36 | 命令输入 |
-| DATA0 | GPIO8 | PA28 | 数据 0 |
-| DATA1 | GPIO7 | PA29 | 数据 1 |
-| DATA2 | GPIO6 | PA30 | 数据 2 |
-| DATA3 | GPIO5 | PA31 | 数据 3 |
-| DATA4 | GPIO15 | PA47 | 数据 4 |
-| DATA5 | GPIO14 | PA49 | 数据 5 |
-| DATA6 | GPIO13 | PA51 | 数据 6 |
-| DATA7 | GPIO12 | PA55 | 数据 7 |
+| 接口信号 | QFN68 | BGA125 | BGA145/169 | 说明 |
+| :--- | :--- | :--- | :--- | :--- |
+| CLK | GPIO10 | - | PA34 | 时钟输入 |
+| CMD | GPIO9 | - | PA36 | 命令输入 |
+| DATA0 | GPIO8 | - | PA28 | 数据 0 |
+| DATA1 | GPIO7 | - | PA29 | 数据 1 |
+| DATA2 | GPIO6 | - | PA30 | 数据 2 |
+| DATA3 | GPIO5 | - | PA31 | 数据 3 |
+| DATA4 | GPIO15 | - | PA47 | 数据 4 |
+| DATA5 | GPIO14 | - | PA49 | 数据 5 |
+| DATA6 | GPIO13 | - | PA51 | 数据 6 |
+| DATA7 | GPIO12 | - | PA55 | 数据 7 |
 
 </div>
 
@@ -327,7 +327,7 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 <div align="center" markdown>
 
-| 接口信号 | QFN68 | BGA145/169 | 说明 |
+| 接口信号 | QFN68 | BGA125/145/169 | 说明 |
 | :--- | :--- | :--- | :--- |
 | CLK | GPIO17 | PA44 | 时钟输入 |
 | CMD | GPIO16 | PA45 | 命令输入 |
@@ -375,17 +375,17 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 <div align="center" markdown>
 
-| SPI 信号 | QFN68 GPIO | BGA145/169 管脚 | 说明 |
-| :--- | :--- | :--- | :--- |
-| CSX | GPIO22 | PB33 | 使能信号 |
-| WRX_SCL | GPIO23 | PB32 | 时钟信号 |
-| DCX | GPIO20 | PB36 | 4 线 SPI 模式下为数据/命令信号，Quad-SPI 模式下为数据 1 |
-| SDI_RDX | GPIO21 | PB35 | 3/4 线 SPI 模式下为数据输入信号，Quad-SPI 模式下为数据 0 |
-| SDO | GPIO21 | PB35 | 3/4 线 SPI 模式下为数据输出信号，需与 SDI_RDX 短接 |
-| D[0] | GPIO19 | PB37 | Quad-SPI 模式下为数据 2 |
-| D[1] | GPIO18 | PB07 | Quad-SPI 模式下为数据 3 |
-| RESET | GPIO2 | PB17 | 显示面板复位信号 |
-| TE | GPIO3 | PB77 | 发往 MCU 的防撕裂同步（TE）信号 |
+| SPI 信号 | QFN68 GPIO | BGA125 管脚 | BGA145/169 管脚 | 说明 |
+| :--- | :--- | :--- | :--- | :--- |
+| CSX | GPIO22 | PA31 | PB33 | 使能信号 |
+| WRX_SCL | GPIO23 | PA20 | PB32 | 时钟信号 |
+| DCX | GPIO20 | PA36 | PB36 | 4 线 SPI 模式下为数据/命令信号，Quad-SPI 模式下为数据 1 |
+| SDI_RDX | GPIO21 | PA34 | PB35 | 3/4 线 SPI 模式下为数据输入信号，Quad-SPI 模式下为数据 0 |
+| SDO | GPIO21 | PA34 | PB35 | 3/4 线 SPI 模式下为数据输出信号，需与 SDI_RDX 短接 |
+| D[0] | GPIO19 | PA38 | PB37 | Quad-SPI 模式下为数据 2 |
+| D[1] | GPIO18 | PA42 | PB07 | Quad-SPI 模式下为数据 3 |
+| RESET | GPIO2 | PA78 | PB17 | 显示面板复位信号 |
+| TE | GPIO3 | PA77 | PB77 | 发往 MCU 的防撕裂同步（TE）信号 |
 
 </div>
 
@@ -398,22 +398,22 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 <div align="center" markdown>
 
-| MCU8080 信号 | QFN68 GPIO | BGA145/169 管脚 | 说明 |
-| :--- | :--- | :--- | :--- |
-| CSX | GPIO22 | - | 片选 |
-| WRX | GPIO23 | - | 向显示屏写入数据的选通信号 |
-| DCX | GPIO20 | - | 显示数据/命令选择 |
-| RDX | GPIO21 | - | 从显示控制器读取数据的读选通信号 |
-| D[0] | GPIO19 | - | 数据 0 |
-| D[1] | GPIO18 | - | 数据 1 |
-| D[2] | GPIO17 | - | 数据 2 |
-| D[3] | GPIO16 | - | 数据 3 |
-| D[4] | GPIO15 | - | 数据 4 |
-| D[5] | GPIO14 | - | 数据 5 |
-| D[6] | GPIO13 | - | 数据 6 |
-| D[7] | GPIO12 | - | 数据 7 |
-| RESET | GPIO2 | - | 复位 |
-| TE | GPIO3 | - | 发往 MCU 的防撕裂同步（TE）信号 |
+| MCU8080 信号 | QFN68 GPIO | BGA125 管脚 | BGA145/169 管脚 | 说明 |
+| :--- | :--- | :--- | :--- | :--- |
+| CSX | GPIO22 | PA31 | - | 片选 |
+| WRX | GPIO23 | PA20 | - | 向显示屏写入数据的选通信号 |
+| DCX | GPIO20 | PA36 | - | 显示数据/命令选择 |
+| RDX | GPIO21 | PA34 | - | 从显示控制器读取数据的读选通信号 |
+| D[0] | GPIO19 | PA38 | - | 数据 0 |
+| D[1] | GPIO18 | PA42 | - | 数据 1 |
+| D[2] | GPIO17 | PA44 | - | 数据 2 |
+| D[3] | GPIO16 | PA45 | - | 数据 3 |
+| D[4] | GPIO15 | PA47 | - | 数据 4 |
+| D[5] | GPIO14 | PA49 | - | 数据 5 |
+| D[6] | GPIO13 | PA51 | - | 数据 6 |
+| D[7] | GPIO12 | PA55 | - | 数据 7 |
+| RESET | GPIO2 | PA78 | - | 复位 |
+| TE | GPIO3 | PA77 | - | 发往 MCU 的防撕裂同步（TE）信号 |
 
 </div>
 
@@ -465,14 +465,14 @@ BGA145 支持一路外接 OPI PSRAM，BGA169 支持两路。表 5.5-1 至表 5.5
 
 <div align="center" markdown>
 
-| 触摸屏和背光信号 | QFN68 GPIO | BGA145 管脚 | BGA169 管脚 | 说明 |
-| :--- | :--- | :--- | :--- | :--- |
-| 中断 | GPIO1 | PA79 | PA79 | 触摸状态中断信号（支持唤醒） |
-| I2C1_SCL | GPIO25 | PA10 | PA10 | 触摸屏 I2C 时钟信号 |
-| I2C1_SDA | GPIO24 | PA14 | PA14 | 触摸屏 I2C 数据信号 |
-| BL_PWM | GPIO0 | - | - | 背光 PWM 控制信号 |
-| 复位 | GPIO16 | PA00 | PA00 | 触摸复位信号 |
-| 电源使能 | GPIO26 | PA06 | PA03 | 触摸屏电源使能信号 |
+| 触摸屏和背光信号 | QFN68 GPIO | BGA125 管脚 | BGA145 管脚 | BGA169 管脚 | 说明 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 中断 | GPIO1 | PA79 | PA79 | PA79 | 触摸状态中断信号（支持唤醒） |
+| I2C1_SCL | GPIO25 | PA10 | PA10 | PA10 | 触摸屏 I2C 时钟信号 |
+| I2C1_SDA | GPIO24 | PA14 | PA14 | PA14 | 触摸屏 I2C 数据信号 |
+| BL_PWM | GPIO0 | PA80 | - | - | 背光 PWM 控制信号 |
+| 复位 | GPIO16 | PA00 | PA00 | PA00 | 触摸复位信号 |
+| 电源使能 | GPIO26 | PA06 | PA06 | PA03 | 触摸屏电源使能信号 |
 
 </div>
 
@@ -500,7 +500,7 @@ SF32LB55x 提供 4 路 HCPU 唤醒源（WKUP_A0–WKUP_A3）和 6 路 LCPU 唤�
 
 <div align="center" markdown>
 
-| 中断源 | QFN68 | BGA145/169 | 说明 |
+| 中断源 | QFN68 | BGA125/145/169 | 说明 |
 | :--- | :--- | :--- | :--- |
 | WKUP_A0 | GPIO3 | PA77 | HCPU 中断信号 0 |
 | WKUP_A1 | GPIO2 | PA78 | HCPU 中断信号 1 |
@@ -545,7 +545,7 @@ SF32LB55x 提供 4 路 HCPU 唤醒源（WKUP_A0–WKUP_A3）和 6 路 LCPU 唤�
 
 <div align="center" markdown>
 
-| UART 信号 | QFN68 | BGA145/169 | 说明 |
+| UART 信号 | QFN68 | BGA125/145/169 | 说明 |
 | :--- | :--- | :--- | :--- |
 | TXD1 | GPIO13 | PA19 | UART1 RXD 信号 |
 | RXD1 | GPIO14 | PA17 | UART1 TXD 信号 |
@@ -564,7 +564,7 @@ SF32LB55x 提供 4 路 HCPU 唤醒源（WKUP_A0–WKUP_A3）和 6 路 LCPU 唤�
 
 UART RXD 不能悬空，固件初始化时应启用内部上拉。UART3 是默认日志接口。思澈科技（SiFli）提供脱机下载器，用于产线烧录和晶体校准。硬件至少预留 VBAT、GND、VDDIOA、VDDIOB、RSTN、Mode、SWDIO、SWCLK、RXD1、TXD1、RXD3 和 TXD3 测试点；产线夹具所需子集为 VBAT、GND、boot_mode、VDDIOB、RXD3 和 TXD3。VBAT 和 boot_mode 是源文档中的夹具信号名称，接线前应核对其对应的实际板级电源及 Mode 连接。
 
-源图将 VDD_1V8 接至连接器第 1 脚（VTref）；SWDIO 和 SWCLK 各经一颗 22 Ω 串联电阻，分别接至第 7 脚和第 9 脚。标准 [J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector) 也将第 1 脚用作 [VTref](https://kb.segger.com/VTref)，即目标电压参考输入，而非探针电源输出。连接标准线缆前，应确认连接器方向及其与 1.8 V 电平的兼容性。
+源文档还建议将调试工具切换为外部接口供电，并称由 SF32LB55x 板为 J-Link 供电；这一供电说明与标准 20 针接线图之间的关系并不明确。SEGGER 将第 1 脚定义为 [VTref](https://kb.segger.com/VTref)，即目标电压参考输入，不是探针的电源输入；在支持该功能的型号上，第 19 脚才是探针为目标板供电的 5 V 输出。源图只显示 VDD_1V8 接至连接器第 1 脚，SWDIO 和 SWCLK 各经一颗 22 Ω 串联电阻，分别接至第 7 脚和第 9 脚，没有显示探针供电路径。接线前，请根据具体探针、线缆和目标板核对供电方向；不要将 VTref 当作电源输入。标准 [J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector) 的连接器方向和对 1.8 V 电平的兼容性也应在接入前确认。
 
 ![图 5.7-4：源文档 SWD 连接器：需核对转接线](../../sf32-products/chips/assets/55x/SF32LB55x-SWD-SCH.png){ width="100%" loading="lazy" }
 

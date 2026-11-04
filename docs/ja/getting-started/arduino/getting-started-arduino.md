@@ -97,9 +97,7 @@ Zephyrローダーを使う場合は**Dynamic**を選びます。スケッチを
 
 ## ボードをシリアルダウンロードモードにする { #put-the-board-in-serial-download-mode }
 
-OpenSiFliのドキュメントによると、初回使用時にはボードをシリアルダウンロードモードにする必要があります。SF32LB52 DevKit LCD用のブート/リセットシーケンスを使用してから、Arduino IDEまたはCLIからアップロードしてください。
-
-アップロードツールは`sftool`です。
+OpenSiFliによると、初回使用時はボードをシリアルダウンロードモードにする必要があります。SF32LB52 DevKit LCDでは、ダウンロードツールの**BOOT**オプションを有効にしてから、ボードの電源を入れるかリセットしてください。詳しくはボードの[ダウンロードとデバッグの手順](../../sf32-products/devkits/SF32LB52-DevKit-LCD.md#download-and-debug)を参照してください。ダウンロードモードに入ったら、Arduino IDEまたはCLIから`sftool`でアップロードします。
 
 ## シリアルスモークテストのアップロード { #upload-a-serial-smoke-test }
 

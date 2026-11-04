@@ -49,7 +49,7 @@ Die [Schaltplan-Checkliste](SF32LB56x_schematic_checklist.md) (Abschnitt 5.8) un
 
 ### 9.1. Anhang A. Ein typisches SF32LB56x-Produkt { #appendix-a-a-typical-sf32lb56x-product }
 
-Ein typisches SF32LB56x-Produkt umfasst MCU, PMIC, Display- und Touch-Controller, Boot-Speicher, optionalen externen Speicher, Sensoren, Vibrationsmotor, Audio-Ein- und -Ausgänge, Bluetooth-Antenne, Quarze sowie Debug-Zugang und Zugänge für Produktionstests. Das U-Gehäuse eignet sich für ein kompaktes QFN-Design. Das V-Gehäuse bietet mehr Schnittstellen, erfordert dafür aber eine entsprechende BGA-/HDI-Layoutplanung.
+Die Anwendungsdiagramme für die U- und V-Gehäuse sind Beispiele, keine verbindlichen Stücklisten. Beide zeigen MCU, Ladegerät und Buck/LDO-Versorgung, einen LCD-Pfad, externe Flash-Optionen (QSPI-NAND, SD-NAND oder NOR-Flash), einen SPI-Bewegungssensor und einen I2C-Herzfrequenzsensor. Außerdem sind ein analoger Mikrofoneingang, ein Lautsprecherausgang über einen Audio-PA, ein PWM-Vibrationsmotor, eine Bluetooth-/RF-Antenne, 48-MHz- und 32,768-kHz-Quarze sowie SWD/UART-Zugriff dargestellt. Touch- und Hintergrundbeleuchtungsschaltungen werden separat in den [Schaltplanrichtlinien](SF32LB56x_schematic_design.md) behandelt. Das V-Diagramm zeigt zusätzlich eMMC und WLAN über SDIO, GPS und NFC über UART sowie ein LTE-Modul über SPI. Prüfen Sie für das konkrete Design die benötigten Peripheriegeräte, die Schnittstellenführung und die Gehäuseunterstützung.
 
 ## 10. Versionshistorie { #10-revision-history }
 

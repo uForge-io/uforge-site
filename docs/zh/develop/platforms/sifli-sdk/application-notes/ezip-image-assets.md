@@ -63,7 +63,7 @@ tags: [开发, SiFli-SDK, 应用笔记, EZIP]
 
 ## 转换 PNG 资源 { #2-convert-png-assets }
 
-将 `png_filename.png` 替换为源文件名。除非外围构建流程改变了工作目录，否则生成文件会写入工具目录。
+将 `png_filename.png` 替换为源文件名。生成文件会写入工具目录。
 
 ### PIXEL 二进制文件 { #pixel-binary }
 

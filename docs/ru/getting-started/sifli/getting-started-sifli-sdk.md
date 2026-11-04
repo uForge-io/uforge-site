@@ -24,8 +24,8 @@ tags:
 **Программное обеспечение**
 
 - [git](https://git-scm.com/)
-- Инструментарий C/C++, подготовленный с помощью [`uv`](https://docs.astral.sh/uv/getting-started/installation/). Установщик SiFli-SDK автоматически загрузит компилятор, отладчик и среду Python.
-- Сам репозиторий [SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK).
+- [`uv`](https://docs.astral.sh/uv/getting-started/installation/), который установщик SiFli-SDK использует для управления средой Python и её зависимостями.
+- Репозиторий [SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK); его установщик загружает подходящие компилятор и отладчик.
 
 **Официальная документация**
 
@@ -111,6 +111,7 @@ tags:
 | SF32LB52-DevKit-Nano | `sf32lb52-nano_n4`<br>`sf32lb52-nano_n16r16`<br>`sf32lb52-nano_a128r16` |
 | Huangshan-Pi (SF32LB52-LCHSPI-ULP) | `sf32lb52-lchspi-ulp` |
 | SF32LB56-DevKit-LCD | `sf32lb56-lcd_a128r12n1`<br>`sf32lb56-lcd_n16r12n1` |
+| SF32LB57-DevKit-EPD_MB_V1.0 | `sf32lb57-epd_n16r16` |
 | SF32LB58-DevKit-LCD | `sf32lb58-lcd_a128r32n1_dsi`<br>`sf32lb58-lcd_a128r32n1_qspi`<br>`sf32lb58-lcd_n16r32n1_dpi`<br>`sf32lb58-lcd_n16r32n1_dsi`<br>`sf32lb58-lcd_n16r32n1_qspi`<br>`sf32lb58-lcd_n16r64n4` |
 
 </div>
@@ -169,7 +170,7 @@ scons --board=sf32lb52-lcd_n16r8 -j8
 
 ## Что делать дальше { #where-to-go-next }
 
-- **Выбрать микросхему:** сравните серии LB52, LB55, LB56 и LB58 в [обзоре семейства SF32](../../sf32-products/family/SF32_family.md).
+- **Выбрать микросхему:** сравните серии LB52, LB55, LB56, LB57 и LB58 в [обзоре семейства SF32](../../sf32-products/family/SF32_family.md).
 - **Изучить другие примеры:** помимо `hello_world`, в SDK есть примеры для BLE, классического Bluetooth, графики LVGL, аудио и режимов энергосбережения.
 - **Попробовать другую платформу:** перейдите к руководствам по [Arduino](../arduino/getting-started-arduino.md), [Zephyr](../zephyr/getting-started-zephyr-upstream.md) или [MicroPython](../micropython/getting-started-micropython.md).
 - **Если возникла проблема:** найдите решение типичных проблем с инструментарием, J-Link и отладкой в [разделе часто задаваемых вопросов SiFli](https://wiki.sifli.com/en/faq/index.html).

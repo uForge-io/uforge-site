@@ -8,7 +8,7 @@ tags:
 
 # Zephyr amont { #zephyr-upstream }
 
-Depuis Zephyr v4.3.0, la carte `sf32lb52_devkit_lcd` est maintenue dans le dépôt amont de Zephyr. Consultez les [notes de version v4.3.0](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html) et la [documentation de la carte SF32LB52 DevKit LCD](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html). Ce guide crée un espace de travail v4.3.0, compile un premier exemple et flashe la carte. Pour bénéficier d'un ensemble plus complet de fonctions officielles SF32, utilisez [SiFli-SDK](../sifli/getting-started-sifli-sdk.md).
+Depuis Zephyr v4.3.0, la carte `sf32lb52_devkit_lcd` est prise en charge et maintenue dans le dépôt amont de Zephyr. Consultez les [notes de version v4.3.0](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html) et la [documentation de la carte SF32LB52 DevKit LCD](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html). Ce guide crée un espace de travail v4.3.0, compile un premier exemple et flashe la carte. Pour bénéficier d'un ensemble plus complet de fonctions officielles SF32, utilisez [SiFli-SDK](../sifli/getting-started-sifli-sdk.md).
 
 !!! note "Vérifiez les fonctions de la carte"
     La présence d'une définition de carte en amont ne confirme pas, à elle seule, que tous les périphériques et modes de fonctionnement sont activés ou validés pour un produit. Consultez le tableau des fonctions prises en charge dans la documentation de la carte et vérifiez le comportement requis sur la révision exacte de votre carte.

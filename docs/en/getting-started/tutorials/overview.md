@@ -7,7 +7,7 @@ tags:
 
 # Tutorials Overview { #tutorials-overview }
 
-This series turns a successful first flash into practical SF32 development skills. It is organized by engineering scope: first prove one peripheral, then combine subsystems, then build the evidence needed for a product. The tutorials use SiFli-SDK examples as starting points, but the habits—verify hardware, keep a known-good baseline, and measure the result—apply to every SF32 software path.
+After a successful first flash, this series develops practical SF32 skills in stages: first verify one peripheral, then combine subsystems, and finally gather the evidence needed for product validation. The tutorials use SiFli-SDK examples as starting points, but the habits—verifying hardware, preserving a known-good baseline, and measuring results—apply to every SF32 software path.
 
 Tutorials are the second stage of [Getting Started](../index.md). Complete its first-run success criteria first. If you are choosing a chip, module, or development board, start with the [SF32 Family](../../sf32-products/family/SF32_family.md) before beginning the series.
 

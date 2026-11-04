@@ -19,7 +19,7 @@ Cada projeto deve ser:
 - **Feito para ser duplicado.** Oferece uma base prática para reproduzir primeiro e modificar depois conforme o seu hardware, modelo de interação ou requisitos de produto.
 - **Divertido de fazer.** Um projeto deve incentivar a experimentação e mostrar o que as capacidades SF32 permitem criar; aqui, utilidade e diversão andam juntas.
 
-Use um projeto depois de concluir a base correspondente em [Primeiros passos](../getting-started/index.md). [Projetos de referência](../hardware/reference-designs/reference-designs.md) apresentam bases reutilizáveis e jornadas de validação. A página atual sobre dispositivos vestíveis conectados descreve um fluxo de trabalho, não um pacote de placa publicado. Quando houver uma base concreta e aplicável, o projeto deve apontar para ela; caso contrário, deve identificar e validar sua própria base, sem dar a entender que uma jornada de planejamento é um projeto qualificado.
+Use um projeto depois de concluir a base correspondente em [Primeiros passos](../getting-started/index.md). [Projetos de referência](../hardware/reference-designs/reference-designs.md) apresentam bases reutilizáveis e jornadas de validação. A página atual do projeto Connected Wearable descreve um fluxo de trabalho, não um pacote de placa publicado. Quando houver uma base concreta e aplicável, o projeto deve apontar para ela; caso contrário, deve identificar e validar sua própria base, sem dar a entender que uma jornada de planejamento é um projeto qualificado.
 
 ## Projetos com SiFli-SDK { #sifli-sdk-projects }
 

@@ -43,6 +43,8 @@ Die SF32LB58x-Serie verwendet ein BGA256-Gehäuse mit den Abmessungen 8,5 mm × 
 
 <div align="center"><em>Abbildung 6.1-5: Ball-Daten des Gehäusesubstrats</em></div>
 
+Der Ball-Querschnitt im Gehäusesubstrat nennt außerdem einen BGA-Pad-Durchmesser von 0,27 mm und eine Ballöffnung von 0,23 mm. Vollständige Land-Pattern-Maße, Toleranzen und Qualifikationsdaten sind der offiziellen Gehäusezeichnung zu entnehmen.
+
 ### 6.2. PCB-Lagenaufbau { #62-pcb-stack-up }
 
 Die SF32LB58x-Serie kann ein- oder beidseitig bestückt werden. Die Leiterplatte muss in HDI-Technik ausgeführt sein; PTH wird nicht unterstützt. Empfohlen wird der Lagenaufbau 6HDI-2. Die Referenzstruktur in der Abbildung gibt eine fertige Leiterplattendicke von 0,8 mm ±10 % (nominal etwa 32 mil) an.
@@ -81,7 +83,7 @@ Beachten Sie die Abbildung zur Ausführung des Buried-Vias zwischen den Lagen 2�
 
 ### 6.4. Leiterbahn-Fanout { #64-trace-fanout }
 
-Die Anschlüsse der ersten beiden BGA-Reihen werden auf der obersten Lage herausgeführt; die übrigen Anschlüsse werden über Vias auf die Innenlagen geführt.
+Die Anschlüsse der ersten beiden BGA-Reihen und -Spalten werden auf der obersten Lage herausgeführt; die übrigen Anschlüsse werden über Vias auf die Innenlagen geführt.
 
 ![Abbildung 6.4-1: Referenz für Fanout auf der obersten Lage](../../sf32-products/chips/assets/58x/sf32lb58x-FANOUT-T-PCB.png){ width="100%" loading="lazy" }
 
@@ -130,6 +132,8 @@ Führen Sie die 32,768-kHz-Quarzleitungen auf der obersten Lage. Die Leiterbahnl
 
 <div align="center"><em>Abbildung 6.5-7: 32,768-kHz-Quarz-Routing-Referenz</em></div>
 
+Der Referenzschaltplan in Abbildung 6.5-2 bezeichnet den 48-MHz-Quarz mit 8,8 pF und markiert C0307/C0308 als NF (nicht bestückt). Diese Angaben ersetzen nicht die Prüfung, ob der ausgewählte Quarz die Designanforderungen erfüllt.
+
 ### 6.6. RF-Leiterbahnführung { #66-rf-interface-routing }
 
 Platzieren Sie die RF-Anpassschaltung so nah wie möglich am Chip und nicht am antennenseitigen Ende. Platzieren Sie den RF-Entkopplungskondensator für AVDD_BRF so nah wie möglich am Chip-Pin und verbinden Sie seine Masse-Pads über Vias direkt mit der Hauptmassefläche.
@@ -160,6 +164,8 @@ Führen Sie RF-Leiterbahnen nach Möglichkeit auf der obersten Lage, um Vias zu 
 
 <div align="center"><em>Abbildung 6.6-6: PCB des RF-Schaltungs-Massesignals</em></div>
 
+Das Referenzschaltbild des π-Anpassnetzwerks nennt eine Serieninduktivität von 2,7 nH und zwei Shunt-Kondensatoren mit je 2 pF. Dies sind Werte der Referenzschaltung; bestimmen Sie die endgültige Anpassung durch Messungen mit der tatsächlichen Antenne und dem tatsächlichen PCB-Layout.
+
 ### 6.7. Leiterbahnführung der Audioschnittstelle { #67-audio-interface-routing }
 
 Platzieren Sie den Entkopplungskondensator für die Audio-Versorgung AVDD33_AUD nahe am zugehörigen Pin und verbinden Sie sein Masse-Pad zuverlässig mit der Hauptmasse. Gehen Sie ebenso mit dem Entkopplungskondensator für die Mikrofonversorgung MIC_BIAS vor. Platzieren Sie auch den Entkopplungskondensator für AUD_VREF nahe am zugehörigen Pin.
@@ -168,8 +174,8 @@ AU_ADC1P/AU_ADC1N und AU_ADC2P/AU_ADC2N sind die beiden analogen Eingangspaare �
 
 AU_DAC1P/AU_DAC1N und AU_DAC2P/AU_DAC2N sind die beiden analogen Ausgangspaare — platzieren Sie zugehörige Bauteile so nah wie möglich an ihren Pins, führen Sie jedes P/N-Paar als möglichst kurze Differenzleitung unter 2 mm, mit einer Leiterbahn-Parasitärkapazität unter 10 pF und einer Differenzleiterbahnbreite von 0,075 mm. Wenden Sie 3D-Abschirmung auf das Differenzpaar an und halten Sie andere stark störende Signale von diesen Leiterbahnen fern.
 
-!!! warning "Widersprüchliche Grenzwerte für die DAC-Leiterbahnlänge"
-    Der Layoutleitfaden begrenzt die DAC-Leiterbahnlänge auf unter 2 mm; die Checklisten-Arbeitsmappe nennt dagegen unter 2 cm (20 mm). Die Grenzwerte unterscheiden sich um den Faktor zehn. Wählen oder ersetzen Sie keinen Grenzwert ohne Bestätigung durch SiFli.
+!!! warning "Widersprüchliche DAC-Leiterbahnlängen im SiFli-Leitfaden"
+    SiFlis Hardwareleitfaden nennt widersprüchliche DAC-Leiterbahnlängen: Die Übersicht zur Audioschnittstelle gibt unter 2 cm (20 mm) an, der Abschnitt zum PCB-Layout dagegen unter 2 mm. Die Grenzwerte unterscheiden sich um den Faktor zehn. Wählen oder ersetzen Sie keinen Grenzwert ohne Bestätigung durch SiFli.
 
 ![Abbildung 6.7-1: Schaltplan der Audio-Stromversorgung](../../sf32-products/chips/assets/58x/sf32lb58x-AU-PWR-SCH.png){ width="100%" loading="lazy" }
 
@@ -195,6 +201,8 @@ AU_DAC1P/AU_DAC1N und AU_DAC2P/AU_DAC2N sind die beiden analogen Ausgangspaare �
 
 <div align="center"><em>Abbildung 6.7-6: PCB-Design des analogen Audioausgangs</em></div>
 
+Im Referenzschaltplan liegen C0327 (1 µF/6,3 V) an MIC_BIAS, C0326 (4,7 µF/6,3 V) an AVDD33_AUD und C0325 (1 µF/6,3 V) an AUD_VREF. Außerdem sind ADC1P/N und ADC2P/N den BGA-Kugeln G19/G18 bzw. F19/F18 sowie DAC1P/N und DAC2P/N den Kugeln J20/J21 bzw. H21/H20 zugeordnet. Dies sind Ballbezeichnungen der Referenzschaltung.
+
 ### 6.8. Leiterbahnführung der USB-Schnittstelle { #68-usb-interface-routing }
 
 Platzieren Sie den Entkopplungskondensator für AVDD33_USB und den Kalibrierwiderstand USB2_REXT jeweils nahe am zugehörigen Pin. Die USB-Leiterbahnen müssen zuerst durch die ESD-Schutzkomponente und dann zum Chip führen. Verbinden Sie den Masse-Pin der ESD-Komponente zuverlässig mit der Hauptmasse. Führen Sie USB DP/DN als Differenzpaar mit kontrollierter Differenzimpedanz von 90 Ω und dreidimensionaler Abschirmung.
@@ -215,6 +223,8 @@ Platzieren Sie den Entkopplungskondensator für AVDD33_USB und den Kalibrierwide
 
 <div align="center"><em>Abbildung 6.8-4: Routing-Modell des USB-Signals</em></div>
 
+Der Referenzschaltplan ordnet USB2_DP/USB2_DN den Pins T6/R6 und AVDD33_USB/USB2_REXT den Pins P5/T5 zu; er nennt C0317 = 1 µF/6,3 V und R0307 = 200 Ω ±1 %. Die Bauteilplatzierungsabbildung kennzeichnet eine Verzweigung vor dem ESD-Bauteil als ungeeignet.
+
 ### 6.9. Leiterbahnführung der SDIO-Schnittstelle { #69-sdio-interface-routing }
 
 Der SF32LB58x bietet zwei SDIO-Schnittstellen: SDIO1 und SDIO2. Führen Sie die Signale jeder Schnittstelle gemeinsam, statt sie aufzuteilen. Die Gesamtleiterbahnlänge muss ≤50 mm betragen; die Längenabweichung zwischen den Signalen einer Gruppe darf ≤6 mm betragen. Schirmen Sie das SDIO-Taktsignal dreidimensional ab und sehen Sie eine Abschirmung auch für DATA und CMD vor.
@@ -226,6 +236,8 @@ Der SF32LB58x bietet zwei SDIO-Schnittstellen: SDIO1 und SDIO2. Führen Sie die 
 ![Abbildung 6.9-2: SDIO1-PCB-Routing-Modell](../../sf32-products/chips/assets/58x/sf32lb58x-SDIOM-PCB.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Abbildung 6.9-2: SDIO1-PCB-Routing-Modell</em></div>
+
+Abbildung 6.9-1 zeigt die SDIO1-Referenzschaltung und deren Pinbelegung; diese Pinzuordnung gilt nicht für SDIO2.
 
 ### 6.10. Leiterbahnführung der DSI-Schnittstelle { #610-dsi-interface-routing }
 
@@ -242,6 +254,8 @@ Platzieren Sie den AVDD18_DSI-Entkopplungskondensator und den DSI_REXT-Kalibrier
 
 <div align="center"><em>Abbildung 6.10-2: PCB-Routing des DSI-Signals</em></div>
 
+Der Referenzschaltplan zeigt die differentiellen Datenleitungen DSI_D0 und DSI_D1 sowie das differentielle Taktpaar. Für AVDD18_DSI nennt er C0323 = 4,7 µF/6,3 V und für DSI_REXT R0301 = 10 kΩ.
+
 ### 6.11. Leiterbahnführung des DC-DC-Wandlers { #611-dc-dc-circuit-routing }
 
 Platzieren Sie die DC-DC-Leistungsdrossel und die Entkopplungskondensatoren nahe an den Chip-Pins. Halten Sie BUCK_LX-Leiterbahnen so kurz und breit wie möglich, um die Schleifeninduktivität des DC-DC-Wandlers zu minimieren. Fügen Sie an den Massepins aller DC-DC-Ausgangsentkopplungskondensatoren zusätzliche Massevias hinzu und verbinden Sie diese mit der Hauptmassefläche. Die BUCK_FB-Rückkopplungsleiterbahn muss >0,25 mm breit sein. Unter der Drossel darf auf der obersten Lage keine Kupferfläche vorhanden sein. Die angrenzende Lage muss als durchgehende Masse-Referenzfläche ausgeführt sein; andere Leiterbahnen dürfen nicht durch den Drosselbereich verlaufen.
@@ -254,6 +268,8 @@ Platzieren Sie die DC-DC-Leistungsdrossel und die Entkopplungskondensatoren nahe
 
 <div align="center"><em>Abbildung 6.11-2: PCB-Layout der DC-DC-Schlüsselbauteile</em></div>
 
+Die Referenzschaltung verwendet für BUCK1 und BUCK2 jeweils eine Induktivität von 4,7 µH und zeigt an jedem Ausgang Kondensatoren mit 4,7 µF/10 V und 0,1 µF.
+
 ### 6.12. Stromversorgungs-Routing { #612-power-supply-routing }
 
 PVDD1 und PVDD2 sind die Stromversorgungseingänge des integrierten PMU-Moduls. Platzieren Sie die Entkopplungskondensatoren nahe an den Pins. Die Leiterbahnen müssen so breit wie möglich sein; ihre Breite muss ≥0,5 mm betragen. PVSS1 und PVSS2 sind Massepins des PMU-Moduls und müssen über Vias mit der Hauptmassefläche verbunden werden. Sie dürfen nicht unbeschaltet bleiben, da dies die Gesamtleistung der PMU beeinträchtigen kann.
@@ -265,6 +281,8 @@ PVDD1 und PVDD2 sind die Stromversorgungseingänge des integrierten PMU-Moduls. 
 ![Abbildung 6.12-2: DC-DC-PCB-Routing](../../sf32-products/chips/assets/58x/sf32lb58x-DCDC-R-PCB.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Abbildung 6.12-2: DC-DC-PCB-Routing</em></div>
+
+Der Referenzschaltplan zeigt an PVDD1 und PVDD2 jeweils Entkopplungskondensatoren mit 10 µF/10 V und 0,1 µF.
 
 ### 6.13. Leiterbahnführung der LDO- und I/O-Versorgung { #613-ldo-and-io-power-input-routing }
 
@@ -287,6 +305,8 @@ Leiterbahnen an Takteingangs- und -ausgangspins, etwa am 32-kHz-Ausgang, müssen
 ![Abbildung 6.14-2: 32-kHz-Taktausgangsschaltung](../../sf32-products/chips/assets/58x/sf32lb58x-32K-R-SCH.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Abbildung 6.14-2: 32-kHz-Taktausgangsschaltung</em></div>
+
+Die Pinfunktionsabbildung zeigt GPADC_CH0–CH7 auf PB32–PB39 multiplexiert und gemeinsam mit weiteren Peripheriefunktionen. Prüfen Sie die Alternate-Function-Auswahl und mögliche Konflikte für das Zielbauteil im Datenblatt.
 
 ### 6.15. Masseführung des Chips { #615-chip-ground-routing }
 
@@ -340,3 +360,5 @@ Damit der Lötstopplack die Pads nicht bedeckt und die Lötverbindungen zuverlä
 ![Abbildung 6.17-5: BGA-Ball-Verbindungsreferenz 2](../../sf32-products/chips/assets/58x/sf32lb58x-BGA-R2-PCB.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Abbildung 6.17-5: BGA-Ball-Verbindungsreferenz 2</em></div>
+
+Die Abbildungen 6.17-4 und 6.17-5 kennzeichnen diagonale Leiterbahnführungen mit Ätzfallen sowie Vias, die in BGA-Ball-Pads hineinragen, als ungeeignet. Halten Sie die Abstände ein und orientieren Sie sich an den besseren/guten Beispielen, um die Fertigbarkeit zu gewährleisten.

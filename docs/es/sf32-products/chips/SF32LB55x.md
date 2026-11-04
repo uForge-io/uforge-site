@@ -12,6 +12,8 @@ tags:
 
 La serie SF32LB55x es una familia de microcontroladores AIoT de gama media y consumo ultrabajo para productos conectados por BLE que necesitan mejores capacidades de visualización, más capacidad de memoria y más opciones de encapsulado que las MCU Bluetooth de entrada.
 
+Una de las principales diferencias para la selección es el encapsulado y la memoria integrada: SS6600A8 usa QFN68L, no incluye PSRAM integrada en el encapsulado y requiere 2,97–3,63 V; SF32LB551U4O5 y las variantes BGA incluidas aquí funcionan con 1,71–3,63 V.
+
 La familia utiliza una arquitectura big.LITTLE de doble núcleo basada en dos procesadores Arm Cortex-M33 STAR-MC1[^1]: un núcleo de aplicación de alto rendimiento, con una frecuencia de hasta 240 MHz, y un núcleo de consumo ultrabajo, de hasta 48 MHz. Esta distribución permite ejecutar las tareas exigentes de la interfaz de usuario en el núcleo de aplicación y dejar en manos del núcleo de bajo consumo el procesamiento de sensores, la gestión del modo de espera y las tareas BLE que deben permanecer activas.
 
 Según el resumen de producto y la hoja de datos oficiales de SiFli, la familia integra BLE 5.2, el motor gráfico ePicasso 2.5D, dos controladores LCD y un acelerador matricial de redes neuronales para TinyML. Dispone de 1 312 KB de SRAM en el chip (1 088 KB en HCPU + 224 KB en LCPU) y admite memorias externas NOR, NAND, eMMC y PSRAM. Por esta combinación, SF32LB55x es una opción práctica para dispositivos vestibles, productos con numerosos sensores e HMI compactas que necesitan más recursos que SF32LB52x, pero no las prestaciones de los dispositivos de las familias superiores 56/58.
@@ -200,10 +202,10 @@ Siga estos pasos para pasar de una preselección de SF32LB55x a un diseño valid
 ## Preguntas frecuentes { #frequently-asked-questions }
 
 **¿Cuáles son las especificaciones principales del SF32LB55x?**
-El SF32LB55x combina una CPU de aplicación (Cortex-M33 @240 MHz) con un núcleo de bajo consumo (Cortex-M33 @48 MHz, programable por el usuario), 1 312 KB de SRAM interna y admite únicamente Bluetooth Low Energy (BLE). Gráficos: ePicasso 1.0. Encapsulado: QFN68 / BGA145 / BGA169 (7 × 7 mm (QFN68)). USB 2.0 FS.
+El SF32LB55x utiliza Cortex-M33 @240 MHz para ejecutar las aplicaciones y dispone de un núcleo de bajo consumo (Cortex-M33 @48 MHz, programable por el usuario). Cuenta con 1 312 KB de SRAM interna y admite únicamente Bluetooth Low Energy (BLE). Gráficos: ePicasso 1.0. Encapsulado: QFN68L / BGA145 / BGA169 (7 × 7 mm (QFN68L)). USB 2.0 FS.
 
 **¿Qué interfaces de pantalla admite el SF32LB55x?**
-SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix)) Es una lista de toda la familia, no una garantía para cada referencia o encapsulado; compruebe la matriz de interfaces enlazada.
 
 **¿Cuál es la resolución de pantalla máxima del SF32LB55x?**
 Hasta 512 × 512 con color RGB888, mediante MIPI-DSI, solo con controladores de pantalla con RAM integrada. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -212,10 +214,10 @@ Hasta 512 × 512 con color RGB888, mediante MIPI-DSI, solo con controladores de 
 Hasta 16 MB + 2 MB de PSRAM y hasta 8 MB de Flash NOR en el encapsulado.
 
 **¿Qué tensión de alimentación necesita el SF32LB55x?**
-1,71–3,63 V.
+SS6600A8 requiere 2,97–3,63 V; SF32LB551U4O5 y las referencias BGA de esta página utilizan 1,71–3,63 V. Seleccione la referencia exacta antes de diseñar el árbol de alimentación.
 
 **¿Por dónde empezar un diseño de hardware con el SF32LB55x?**
-Empiece con la [guía de diseño de hardware del SF32LB55x](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) para esquemático, alimentación, reloj/RF y diseño de PCB, y use después las listas de verificación de esquemático y layout antes de liberar la placa.
+Empiece con la [guía de diseño de hardware del SF32LB55x](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) para esquemático, alimentación, reloj/RF y diseño de PCB, y use después las listas de comprobación de esquemático y layout antes de liberar la placa.
 <!-- uf-faq:end -->
 
 ## Productos relacionados { #related-products }

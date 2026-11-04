@@ -1,6 +1,6 @@
 ---
 icon: lucide/rss
-description: "SF32LB57x is now documented: about twice the application CPU compute of SF32LB56x, ePicasso 3.0 graphics, and a competitive cost structure."
+description: "SF32LB57x is now documented: roughly twice the application-core performance of SF32LB56x, ePicasso 3.0 graphics, and a competitive cost structure."
 ---
 
 # October: Introducing SF32LB57x [2026-10-28] { #october-sf32lb57x-2026-10-28 }

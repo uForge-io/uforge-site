@@ -21,7 +21,7 @@ SDK의 `debug_logging` 가이드와 `crash_analysis` 가이드는 서로 보완 
 
 | 제품군 | 디버그 및 로그 동작 |
 |---|---|
-| SF32LB52x, SF32LB56x, SF32LB58x | 소스 가이드는 UART 캡처, `SifliUsartServer`/`AssertDumpUart`, J-Link/Trace32 복구를 문서화합니다. 선택한 슬립 상태에서 계속 사용할 수 있는 전송 방식을 사용하십시오. |
+| SF32LB52x, SF32LB56x, SF32LB58x | 해당 제품군에 대한 SiFli 가이드는 UART 캡처, `SifliUsartServer`/`AssertDumpUart`, J-Link/Trace32 복구를 문서화합니다. 선택한 슬립 상태에서 계속 사용할 수 있는 전송 방식을 사용하십시오. |
 | SF32LB55x | `$SDK_ROOT/tools/segger/jlink_hcpu_a0.bat`과 `jlink_lcpu_a0.bat` 스크립트로 SWD를 HCPU와 LCPU 사이에서 전환할 수 있습니다. LCPU의 ROM 콘솔은 보레이트 1,000,000의 UART3이며, HCPU는 UART1/2 또는 SWD를 사용할 수 있습니다. SWD는 PB IO를 사용하므로 연결하는 동안 LPSYS를 활성 상태 또는 Light Sleep 상태로 유지하십시오. |
 
 </div>
@@ -41,9 +41,9 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
   --output /tmp/live-crash --elf build_hcpu/main.elf
 ```
 
-대상이 PSRAM을 사용하면 `--include-psram --psram-size 8MB`를 추가하십시오. J-Link 프로브는 `--transport jlink --jlink-ip 127.0.0.1:19025`를 사용할 수 있으며, 영향을 받은 코어는 `--core hcpu` 또는 `--core lcpu`로 선택합니다. 출력 디렉터리에는 캡처한 바이너리, 코어 ELF/AXF, `log.txt`, `manifest.json`, `sdk_manifest.json`이 있어야 합니다.
+PSRAM도 내보내려면 `--include-psram`을 추가하거나 `--psram-size 8MB`를 사용해 PSRAM 스크립트를 수동으로 지정하십시오. `SifliUsartServer`를 통해 J-Link를 IP로 연결할 때는 `--transport jlink --jlink-ip 127.0.0.1:19025`를 사용하고, 영향을 받은 코어는 `--core hcpu` 또는 `--core lcpu`로 선택합니다. 출력 디렉터리에는 캡처한 바이너리, 코어 ELF/AXF, `log.txt`, `manifest.json`, `sdk_manifest.json`이 있어야 합니다.
 
-이전 SDK에서는 소스 가이드의 제품군별 방법을 사용하십시오.
+이전 SDK에서는 해당 제품군에 대한 SiFli 가이드의 방법을 사용하십시오.
 
 - UART: 콘솔을 사용할 수 있는 동안 `SifliUsartServer` 또는 `AssertDumpUart`로 어서트 패키지를 내보낼 수 있습니다.
 - J-Link/SWD: J-Link를 `PATH`에 추가한 다음 대상 제품군의 스크립트를 실행합니다. 예를 들어 SF32LB55x는 `$SDK_ROOT/tools/crash_dump_analyser/script/save_ram_55x.bat`을 사용합니다. 해당 스크립트는 RAM, EPIC 레지스터, PSRAM을 저장합니다.
@@ -54,13 +54,13 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
 ![menuconfig의 SF32LB52x 메모리 트레이스 옵션](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_mem_trace.png){ loading="lazy" }
 <div align="center"><em>그림: SF32LB52x 가이드 예시 — 힙 증거가 필요하면 실패를 재현하기 전에 메모리 트레이스를 활성화합니다.</em></div>
 
-UART 캡처에서는 보통 시리얼 유틸리티, 서버 주소, 대상 코어를 맞춰야 합니다. 가이드의 다음 스크린샷은 연결을 점검하는 데 유용합니다.
+UART 캡처에서는 보통 시리얼 유틸리티, 서버 주소, 대상 코어를 맞춰야 합니다. SF32LB52x 가이드의 Windows 예시에서 도구는 `SiFli_Trace_v2.3.0/Sifli_UsartServer_v2.8`에 있으며 `SifliUsartServer.exe`를 포함합니다. 실제 설치 경로와 버전은 다를 수 있습니다. 연결 설정 화면은 칩 UART1이 호스트 COM17에 매핑되고 보레이트가 1,000,000이며 서버가 `127.0.0.1:19025`, 대상 코어가 HCPU임을 보여줍니다. 이는 가이드 예시이며 다른 보드나 배선에 적용되는 기본값은 아닙니다.
 
 ![SiFli_Trace 및 SifliUsartServer 도구 위치](../../../../assets/develop/app-notes/crash-analysis/Sifli_Trace.png){ loading="lazy" }
-<div align="center"><em>그림: SF32LB52x 가이드 예시 — 도구 디렉터리.</em></div>
+<div align="center"><em>그림: SF32LB52x 가이드 예시 — 버전이 지정된 서버 유틸리티가 포함된 SiFli_Trace/SifliUsartServer 도구 디렉터리.</em></div>
 
 ![SF32LB52x의 SifliUsartServer 연결 설정](../../../../assets/develop/app-notes/crash-analysis/UsartServer52.png){ loading="lazy" }
-<div align="center"><em>그림: SF32LB52x 가이드 예시 — 시리얼 포트, 보레이트, 서버 주소, 디버그 코어가 캡처 대상과 일치해야 합니다.</em></div>
+<div align="center"><em>그림: SF32LB52x 가이드 예시 — UART1과 COM17의 매핑, 보레이트 1,000,000, 서버 `127.0.0.1:19025`, 대상 코어 HCPU를 보여줍니다. 이는 예시 설정이며 일반 기본값은 아닙니다.</em></div>
 
 ![크래시 덤프 분석기의 RAM 저장 스크립트](../../../../assets/develop/app-notes/crash-analysis/save_ram_uart_52.png){ loading="lazy" }
 <div align="center"><em>그림: SF32LB52x 가이드 예시 — 이 디렉터리에는 `save_ram_55x.bat`, `save_ram_58x.bat`, `save_ram_uart_52x.bat`처럼 제품군 및 전송 방식별 스크립트가 있습니다. 대상과 연결 방식에 맞는 것을 선택하십시오.</em></div>
@@ -79,10 +79,10 @@ sdk.py crash-dump analyze --core /tmp/live-crash/coredump.elf \
 이전 Trace32 워크플로는 HCPU 어서트(HA) 버튼과 `run_next_step`으로 HCPU 어서트 패키지를 로드합니다. LCPU 덤프에는 LCPU 복구 구성을 사용하십시오. 예외 스택이 표시되지 않으면 레지스터를 해석하기 전에 코어 선택, ELF, 메모리 범위를 확인하십시오.
 
 ![Trace32 캡처 스크립트 선택 예](../../../../assets/develop/app-notes/crash-analysis/dump_select.png){ loading="lazy" }
-<div align="center"><em>그림: SF32LB52x 가이드 예시 — J-Link/Trace32 캡처 스크립트 선택.</em></div>
+<div align="center"><em>그림: SF32LB52x 가이드 예시 — IP 및 USB 모드의 `.jlink` 스크립트를 나란히 보여줍니다. IP 버전은 `127.0.0.1:19025`를 사용하며 J-Link 직접 연결에는 USB 버전을 선택합니다.</em></div>
 
 ![Trace32 HCPU 어서트 창](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_hcpu_window.png){ loading="lazy" }
-<div align="center"><em>그림: SF32LB52x 가이드 예시 — 복구 후 콜 스택, 스레드 목록, 힙, 오류 원인을 함께 확인합니다.</em></div>
+<div align="center"><em>그림: SF32LB52x 가이드 예시 — 복구 후 콜 스택과 `TaskList`, `TaskSwitchHistory`, `heapAllocation`, `error_reason`, 디스어셈블리 창을 확인합니다.</em></div>
 
 ## 부팅 중 또는 경쟁 상태 의심 시 조기 정지 { #stop-early-during-boot-or-a-suspected-race }
 
@@ -106,6 +106,6 @@ J-Link에서 PC를 2바이트 앞으로 이동하면 실행을 재개할 수 있
 SDK 버스 모니터는 버스 폴트로 이어지는 접근을 캡처할 수 있습니다. `dbg_busmon_reg_callback`으로 콜백을 등록한 다음, 가이드의 예제에서 `dbg_busmon_read`와 `dbg_busmon_write`를 사용하여 관련 주소 범위를 검사하십시오. 이를 힙 트레이싱 및 크래시 패키지와 함께 사용하십시오. 심볼이나 메모리 컨텍스트가 없는 레지스터 덤프만으로는 충분한 경우가 드뭅니다.
 
 ![Trace32 힙 콜 스택 예](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_heap_callstack.png){ loading="lazy" }
-<div align="center"><em>그림: SF32LB52x 가이드 예시 — 힙 콜 스택과 메모리 창.</em></div>
+<div align="center"><em>그림: SF32LB52x 가이드 예시 — 어서트 핸들러와 줄 번호를 원시 메모리 덤프 창과 대조합니다.</em></div>
 
 공식 제품군 출처: [SF32LB52x 크래시 분석](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/crash_analysis.html), [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/crash_analysis.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/crash_analysis.html), [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/crash_analysis.html), 그리고 해당 [디버깅 및 로깅 가이드](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/debug_logging.html).

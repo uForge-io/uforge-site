@@ -12,7 +12,7 @@ tags:
 
 La calculadora de batería del SiFli-SDK estima el estado de carga, expresado en porcentaje, a partir de la tensión medida. No mide la carga acumulada como un contador de culombios; por tanto, la precisión depende de la curva de batería utilizada y de que la información sobre el estado del cargador sea correcta.
 
-El middleware detecta el estado del cargador, selecciona la curva de carga o descarga correspondiente y estima el porcentaje mediante interpolación. También aplica un filtro primario de saltos y un filtro opcional de media ponderada para estabilizar el resultado. La guía publicada no especifica por completo el orden interno de los filtros; consulte la implementación de la revisión del SDK que use el proyecto antes de dar por supuesto un orden concreto.
+El middleware detecta el estado del cargador, selecciona la curva de carga o descarga correspondiente y estima el porcentaje mediante interpolación. También aplica un filtro primario de saltos y un filtro opcional de media ponderada para estabilizar el resultado.
 
 ## Qué hace la calculadora { #what-the-calculator-does }
 

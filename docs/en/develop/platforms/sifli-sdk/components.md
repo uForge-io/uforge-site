@@ -48,6 +48,8 @@ sdk.py sf-pkg upload --name <package_name>/<version>@<username>
 
 The exact workflow can vary by SDK release. See SiFli's [package integration guide (Chinese)](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/sf_pkg/use.html), [package creation and publishing guide (English)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/sf_pkg/create.html), and [Chinese edition](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/sf_pkg/create.html) for setup, authentication, and version-specific details.
 
+Use the [SDK documentation home](https://docs.sifli.com/) to locate the package integration and creation topics for your exact chip family and checked-out SDK release. The family-specific links above are examples, not a support matrix. Verify the commands and dependencies in that release before copying an example.
+
 ## Component Quality Bar { #component-quality-bar }
 
 A component is ready to share when:

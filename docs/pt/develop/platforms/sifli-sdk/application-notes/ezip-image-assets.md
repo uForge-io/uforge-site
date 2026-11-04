@@ -63,7 +63,7 @@ Os campos de bits dos formatos de pixel acima são armazenados em ordem little-e
 
 ## Converter imagens PNG { #2-convert-png-assets }
 
-Substitua `png_filename.png` pelo nome do arquivo de origem. O arquivo gerado é salvo no diretório da ferramenta, a menos que o processo de compilação que a executa altere o diretório de trabalho.
+Substitua `png_filename.png` pelo nome do arquivo de origem. O arquivo gerado é salvo no diretório da ferramenta.
 
 ### Binário PIXEL { #pixel-binary }
 

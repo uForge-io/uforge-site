@@ -150,7 +150,7 @@ Si les mesures ne concordent pas avec le modèle, ne modifiez pas le tableau dan
 | La consommation mesurée d'un composant dépasse la prévision | Mode incorrect, fuite sur le rail, pertes du régulateur ou charge introduite par le montage d'essai | Isoler le rail ; vérifier les broches de mode, la tension et la configuration de la carte. |
 | L'énergie du scénario dépasse la somme des composants | Réveils supplémentaires, écran ou radio actifs trop longtemps, traitement logiciel ou charges simultanées | Ajouter des marqueurs du firmware et examiner l'état des composants pendant tout le scénario. |
 | Le profil journalier dépasse la somme des scénarios | Fréquence d'utilisation ou durée d'inactivité connectée mal estimée, fonction désactivée à tort ou tâche d'arrière-plan oubliée | Vérifier le nombre d'événements, les temporisations, le calendrier radio et la durée de veille restante. |
-| Le modèle et les mesures ne concordent que dans une configuration | Écart de tension, de température, d'environnement RF, d'état de batterie ou de version du firmware | Répéter les mêmes scénarios sur toute la plage de fonctionnement prévue. |
+| Le modèle et les mesures ne concordent que dans une configuration | Écart de tension, de température, d'environnement RF, d'état de batterie ou de version du firmware | Répéter les mêmes scénarios dans chaque condition pertinente de la plage de fonctionnement prévue. |
 
 </div>
 

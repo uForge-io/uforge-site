@@ -51,7 +51,7 @@ Filtern Sie nach der Schnittstelle, die Ihr Display tatsächlich benötigt, und 
 
 ### Audio-Schnittstellen { #audio-interfaces }
 
-Der Selektor bietet unabhängige Mindestwertfilter für Audio-DACs, ADCs, PDM-Schnittstellen und I2S-Schnittstellen. Jeder Wert ist eine Untergrenze und kein gebündeltes Audio-Profil. Prüfen Sie anschließend mögliche Ressourcenkonflikte mit anderer Peripherie und berücksichtigen Sie die analoge Schaltung auf Platinenebene.
+Der Selektor bietet unabhängige Filter für die genaue Anzahl an Audio-DACs, ADCs, PDM-Schnittstellen und I2S-Schnittstellen. Die ausgewählte Anzahl muss jeweils exakt übereinstimmen; die Filter bilden kein gebündeltes Audio-Profil ab. Prüfen Sie anschließend mögliche Ressourcenkonflikte mit anderer Peripherie und berücksichtigen Sie die analoge Schaltung auf Platinenebene.
 
 ### Konnektivität und Spezialhardware { #connectivity-and-specialist-hardware }
 

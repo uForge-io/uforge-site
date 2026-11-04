@@ -12,7 +12,7 @@ tags:
 
 Der Akkurechner des SiFli-SDK schätzt den Ladezustand eines Akkus anhand seiner gemessenen Spannung als Prozentwert. Er ordnet Spannungswerten einen Ladezustand zu, misst aber nicht wie ein Coulomb-Zähler die ein- und ausfließende Ladung. Die Genauigkeit hängt daher von der hinterlegten Akkukurve und der korrekten Ladegerätesterkennung ab.
 
-Die Middleware erkennt den Ladegerätestatus, wählt die passende Lade- oder Entladekurve aus und schätzt den Prozentwert durch Interpolation. Zusätzlich stabilisieren ein primärer Sprungfilter und ein optionaler gewichteter Mittelwertfilter das Ergebnis. Die veröffentlichte Anleitung beschreibt die interne Reihenfolge der Filter nicht vollständig. Prüfen Sie daher die Implementierung der SDK-Revision Ihres Projekts, bevor Sie eine bestimmte Reihenfolge annehmen.
+Die Middleware erkennt den Ladegerätestatus, wählt die passende Lade- oder Entladekurve aus und schätzt den Prozentwert durch Interpolation. Zusätzlich stabilisieren ein primärer Sprungfilter und ein optionaler gewichteter Mittelwertfilter das Ergebnis.
 
 ## Was der Rechner tut { #what-the-calculator-does }
 

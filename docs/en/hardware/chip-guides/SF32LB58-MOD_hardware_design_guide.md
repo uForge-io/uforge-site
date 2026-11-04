@@ -42,7 +42,7 @@ For the underlying chip architecture (cores, graphics, memory subsystem, and per
 </div>
 
 !!! note "Availability and Customization"
-    **SF32LB58-MOD-E4R32N1 is no longer available due to recent memory-chip supply shortages.** Other module configurations are possible. For customization requests, [contact μForge.io](../../about/contact.md).
+    **SF32LB58-MOD-E4R32N1 is currently unavailable because of memory-chip supply shortages.** Other module configurations are possible. For customization requests, [contact μForge.io](../../about/contact.md).
 
 ### 2.2 Key Specifications
 
@@ -61,7 +61,7 @@ For the underlying chip architecture (cores, graphics, memory subsystem, and per
 | Storage | 5x MPI (in-package + external), 2x SD/SDIO/eMMC |
 | Package | 138-pin, 24 × 24 × 3.1mm |
 | Power supply | VDD_3V3 (2.97–3.6V), VDD_1V8 (1.7–1.95V), VDDIOA/VDDIOA2/VDDIOB (1.7–3.6V) |
-| Antenna | External antenna through a stamp-hole RF feed or an IPEX-compatible connector, depending on part number |
+| Antenna | PCB-mounted antenna or external antenna through the connector shown in the datasheet; confirm the option for the exact module SKU |
 | Operating temperature | -40 to 85°C |
 
 </div>
@@ -77,7 +77,7 @@ The module integrates the SF32LB586VDD36 chip, a 48MHz crystal, an optional 32.7
 
 ### 4.1 Pinout Diagram
 
-The module exposes 138 pins around its perimeter.
+The 138 numbered contacts comprise 72 castellated perimeter positions, 60 inner pads, and six center pads; the top-view drawing shows pins 1–138.
 
 !!! info "Figure 4-1: Pinout Diagram, Top View"
     See Figure 3-1 in the official datasheet for this diagram — not reproduced in this guide.
@@ -231,6 +231,9 @@ The module has 138 pins in total, described in the table below.
 *Legend: P = power; I = input; O = output; T = can be configured as high-impedance; AO = audio output; AI = audio input.*
 
 !!! note
+    In pin 10's row, the V0.1 datasheet lists `GPIO_A38` as PA79's default MUX but `GPIO_A79` as its function. This table uses `GPIO_A79` to follow the named pin/function; confirm PA79's MUX with SiFli before finalizing the pin assignment.
+
+!!! note
     Pin 2 (USART_RXD) and pin 3 (USART_TXD) are the default log, program-debug, and program-download port.
 
 ### 4.3 Physical Pin Description
@@ -277,6 +280,8 @@ Any pin marked `PAxx_I2C_UART` or `PBxx_I2C_UART` in the table above can be conf
 ## 6. Electrical Characteristics
 
 ### 6.1 Absolute Maximum Ratings
+
+Exceeding any absolute maximum rating may permanently damage the module. These ratings do not imply functional operation beyond the recommended operating conditions; prolonged exposure may affect reliability.
 
 <div align="center"><em>Table 6.1-1: Absolute Maximum Ratings</em></div>
 
@@ -375,11 +380,13 @@ Full tables (including input leakage, reset thresholds, and pin capacitance at b
 | Symbol | Condition | Current (mA) | Increment (µA/MHz) |
 | :--- | :--- | :-: | :-: |
 | ICoreMark | HPSYS @240MHz | 10.34 | 31.3 |
-| ICoreMark | LPSYS @48MHz | 0.89 | 27.6 |
+| ICoreMark | LPSYS @48MHz | 0.89 | 14.5 |
 | IWhileLoop | HPSYS @240MHz | 7.98 | 21.3 |
-| IWhileLoop | LPSYS @48MHz | 0.67 | 18.7 |
+| IWhileLoop | LPSYS @48MHz | 0.67 | 9.8 |
 
 </div>
+
+These tables show selected operating points. The datasheet includes additional radio intervals and scan states in §5.4.2 and processor frequencies in §5.4.3. Its 3.8 V figures are calculated from measurements on the 1.8 V and 3.3 V rails at 90% conversion efficiency: `I3.8V = I1.8V × 1.8 / (0.90 × 3.8) + I3.3V`. They are system-input-equivalent current values, not direct measurements with 3.8 V applied to a module supply pin.
 
 ### 6.5 Dual-Mode Bluetooth RF Performance
 
@@ -432,18 +439,28 @@ Use these as the starting point for a production schematic and adapt pin selecti
 | :-: | :--- |
 | 1 | VDD_3V3 input voltage range must be 2.97V–3.6V; place a 4.7µF capacitor near the module pin. |
 | 2 | VDD_1V8 input voltage range must be 1.7V–1.95V; place a 4.7µF capacitor near the module pin. |
-| 3 | VDDIOA, VDDIOA2, and VDDIOB input voltage range must be 1.7V–3.6V; place capacitors near the module pins. |
+| 3 | VDDIOA, VDDIOA2, and VDDIOB input voltage range must be 1.7V–3.6V; place a 4.7µF capacitor near each module pin. |
+| 4 | The module I/O interface level is 3.3V; connected peripherals must also use a 3.3V interface level. |
+| 5 | During MCU sleep, the signals listed as able to receive interrupts are PA65, PA67, PB54, PB56, PB57, PB58, and PB59. |
+| 6 | PB54 supports a 10s long-press reset, active high; add a 10kΩ pull-down resistor. |
+| 7 | The I/Os marked GPADC_CHx in Figure 7-9 support analog input from 0–3.3V. |
+| 8 | The I/Os marked GPTIM in Figure 7-9 support PWM output. |
+| 9 | Reserve ESD protection devices for the TP interface and similar interfaces. |
+| 10 | Add 33–100Ω series resistors to the LCD RGB signal lines. |
+| 11 | PB36 and PB37 multiplexed as DBG_UART form the program-download and debug interface; add 100Ω series resistors and reserve test points. |
+| 12 | PA31 and PA32 are used for HCPU Trace; reserve test points. |
+| 13 | Reserve a test point for BOOT_MODE. |
 
 </div>
 
 !!! note
-    This guide reproduces only the three checklist items above. Consult §7.3 of the [official datasheet PDF](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) for the complete checklist before finalizing a production schematic.
+    V0.1 lists a 1.7–3.6V VDDIO operating range in §5.2, but checklist item 4 specifies a 3.3V I/O interface level in §7.3. Confirm the applicable interface voltage for the exact module revision with SiFli before connecting peripherals; the datasheet does not reconcile these statements. Check the [official datasheet PDF](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) for any later revisions before finalizing a production schematic.
 
 ## 10. Module Dimensions and PCB Footprint
 
 ### 10.1 Module Dimensions
 
-The module measures 24 × 24 × 3.1mm.
+The module measures 24 × 24 × 3.1mm, and its PCB is 0.8mm thick. The castellated perimeter pitch is 1.1mm.
 
 !!! info "Figure 10-1: Module Dimensions"
     See Figure 8-1 in the official datasheet for this diagram — not reproduced in this guide.
@@ -453,9 +470,13 @@ The module measures 24 × 24 × 3.1mm.
 !!! info "Figure 10-2: Recommended PCB Footprint"
     See Figure 8-2 in the official datasheet for this diagram — not reproduced in this guide.
 
+The recommended footprint has 72 outer pads measuring 1.8 × 0.8mm, 60 inner pads measuring 0.7 × 1.0mm, and six center pads measuring 1.3 × 1.3mm. Dimensions are in millimeters; use the datasheet drawing as the authority for the complete geometry.
+
 ### 10.3 External Antenna Connector
 
-For SKUs supporting an external antenna, the module can use a stamp-hole RF feed or an IPEX-compatible connector, depending on part number.
+The datasheet describes either a PCB-mounted antenna or a first-generation external antenna connector. It lists compatibility with the Hirose U.FL series, I-PEX MHFI connectors, and Amphenol AMC connectors; confirm the antenna configuration for the exact module SKU.
+
+The connector drawing dimensions are in millimeters.
 
 !!! info "Figure 10-3: External Antenna Connector Dimensions"
     See Figure 8-3 in the official datasheet for this diagram — not reproduced in this guide.
@@ -473,18 +494,20 @@ Reserve the module antenna zone so that no components, copper, traces, chassis m
 ### 11.1 Storage Conditions
 
 - Store products sealed in a moisture barrier bag (MBB) at <40°C / 90%RH, non-condensing.
-- After opening the vacuum bag, use the module within the floor-life window specified for its moisture sensitivity level (MSL); otherwise it must be baked before a second reflow pass.
+- The module's moisture sensitivity level is MSL 3. After opening the vacuum-sealed bag, use the module within 168 hours under 25 ± 5°C and 60%RH conditions; otherwise bake it before returning it to production. This does not change the one-reflow-pass recommendation.
 
 ### 11.2 Electrostatic Discharge (ESD)
 
-Follow SiFli's standard module ESD handling precautions during assembly and test.
+The datasheet lists an HBM rating of ±2000V and a CDM rating of ±500V. Follow SiFli's standard module ESD handling precautions during assembly and test.
 
 ### 11.3 Reflow Profile
 
 The module is recommended to go through reflow only once.
 
+The V0.1 profile specifies a 25–150°C ramp over 60–90s at 1–3°C/s; 150–200°C preheat for 60–120s; 60–90s above 217°C with a 235–250°C peak; and cooling from the peak to 180°C at -1 to -5°C/s. The diagram specifies SAC305 solder. Its bottom legend gives a peak-time interval of 30–70s, while a graph label separately states 焊接时间 >30s (soldering time >30s). These are distinct source labels, and the datasheet does not reconcile them; confirm the production profile rather than combining the intervals.
+
 !!! info "Figure 11-1: Recommended Reflow Temperature Profile"
-    See Figure 9-1 in the official datasheet for this diagram — not reproduced in this guide.
+    See Figure 9-1 in the official datasheet; the profile details and source-label discrepancy are summarized above.
 
 ### 11.4 Ultrasonic Vibration
 

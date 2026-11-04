@@ -106,7 +106,7 @@ tags:
 | PA33 | 15 | I/O/T | GPIO_A33 | I | GPIO_A33,PA33_I2C_UART,PA33_TIM,#GPADC_CH6 |
 | PA32 | 16 | I/O/T | GPIO_A32 | O | GPIO_A32,PA32_I2C_UART,PA32_TIM,#GPADC_CH5 |
 | VDD33_VOUT2 | 17 | P | VDD33_VOUT2 | P | 3.3 V 电源输出 |
-| PA24 | 18 | I/O/T | GPIO_A24 | O | GPIO_A24,SPI1_DI,I2S1_MCLK,PA24_I2C_UART,PA24_TIM, #WKUP_PIN0 |
+| PA24 | 18 | I/O/T | GPIO_A24 | O | GPIO_A24,SPI1_DIO,I2S1_MCLK,PA24_I2C_UART,PA24_TIM, #WKUP_PIN0 |
 | PA25 | 19 | I/O/T | GPIO_A25 | O | GPIO_A25,SPI1_DI,I2S1_SDO,PA25_I2C_UART,PA25_TIM, #XTAL32K_EXT,#WKUP_PIN1 |
 | PA26 | 20 | I/O/T | GPIO_A26 | O | GPIO_A26,PA26_I2C_UART,PA26_TIM,#WKUP_PIN2 |
 | PA27 | 21 | I/O/T | GPIO_A27 | O | GPIO_A27,PA27_I2C_UART,PA27_TIM,#WKUP_PIN3 |
@@ -147,6 +147,9 @@ tags:
 | PA12 | 68 | I/O/T | GPIO_A12 | O | GPIO_A12, MPI2_CS, SD1_DIO2,PA12_I2C_UART,PA12_TIM |
 
 </div>
+
+!!! important "PA24 的 SPI1 映射存在来源差异"
+    DS5203 V0.3 将 PA24 列为 `SPI1_DI`；OpenSiFli 的 DevKit-LCD 引脚表列为 `SPI1_DIO`，EPD 设计指南则在 TF 卡 CMD 连接中将 PA24 标为 `SPI1_DO`。本表按 OpenSiFli 的 `SPI1_DIO` 标注。不同来源的标记不能证明特定 SDK/模组版本下的方向和复用配置；设计前应核实目标 SDK 的引脚复用和具体模组版本。参见 [开发板引脚表](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-DevKit-LCD.md) 和 [EPD 屏幕设计指南](https://wiki.sifli.com/hardware/SF32LB52-MOD-1-EPD-HW-Application.html)。
 
 *图例：P：电源；I：输入；O：输出；T：可配置为高阻；AO：音频输出；AI：音频输入。*
 

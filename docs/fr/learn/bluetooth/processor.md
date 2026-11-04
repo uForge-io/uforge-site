@@ -39,24 +39,24 @@ Une architecture sans fil simplifiée de SF32 se présente ainsi :
 <div align="center"><em>Figure : Architecture sans fil simplifiée de SF32</em></div>
 
 ```text
-Processeur applicatif
-  - firmware produit
-  - interface utilisateur et graphisme
-  - logique applicative audio
-  - services utilisateur
+Application Processor
+  - product firmware
+  - UI and graphics
+  - audio application logic
+  - user services
         │
         ▼
-Hôte Bluetooth / services système
+Bluetooth Host / System Services
         │
         ▼
-Processeur Bluetooth / firmware du contrôleur
-  - temporisation de la couche liaison
-  - planification radio
-  - événements de connexion basse consommation
-  - travail de protocole côté contrôleur
+Bluetooth Processor / Controller Firmware
+  - link-layer timing
+  - radio scheduling
+  - low-power connection events
+  - controller-side protocol work
         │
         ▼
-Radio Bluetooth et étage RF
+Bluetooth Radio and RF Front End
 ```
 
 La répartition exacte entre le firmware hôte, le contrôleur et l'application dépend du SDK, de la configuration de la pile et des exigences du produit. Le processeur applicatif principal ne devrait toutefois pas être considéré comme le seul processeur impliqué dans le fonctionnement Bluetooth. Le sous-système Bluetooth dispose de son propre contexte d'exécution et vise à assurer un comportement sans fil déterministe tout en limitant la consommation.
@@ -154,7 +154,7 @@ Le profil de consommation réel dépend de l'intervalle de connexion, de la puis
 
 Le logiciel Bluetooth est souvent décrit en deux couches principales :
 
-<div align="center"><em>Tableau : Répartition entre l'hôte, le contrôleur et l'application</em></div>
+<div align="center"><em>Tableau : Responsabilités de l'hôte et du contrôleur</em></div>
 
 <div align="center" markdown>
 

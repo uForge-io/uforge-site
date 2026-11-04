@@ -48,6 +48,8 @@ sdk.py sf-pkg upload --name <package_name>/<version>@<username>
 
 O fluxo exato pode variar conforme a versão do SDK. Consulte os guias da SiFli sobre [integração de pacotes (em chinês)](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/sf_pkg/use.html), [criação e publicação (em inglês)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/sf_pkg/create.html) e [a versão em chinês](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/sf_pkg/create.html) para ver a configuração, a autenticação e os comandos específicos de cada versão.
 
+Na [página inicial da documentação do SDK](https://docs.sifli.com/), localize os tópicos de integração e criação de pacotes correspondentes à família exata do chip e à versão do SDK da sua cópia de trabalho. Os links específicos de cada família acima são exemplos, não uma matriz de compatibilidade. Verifique os comandos e as dependências dessa versão antes de copiar um exemplo.
+
 ## Critérios de qualidade { #component-quality-bar }
 
 Um componente está pronto para ser compartilhado quando:

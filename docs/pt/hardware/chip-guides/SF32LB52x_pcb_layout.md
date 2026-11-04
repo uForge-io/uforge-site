@@ -68,15 +68,15 @@ A Figura 6.2-1 apresenta um empilhamento de referência de 0,8 mm ±10%, incluin
 
 | Camada | Material | Espessura (mil) | Espessura (mm) | Dk | Df |
 |:---|:---|---:|---:|---:|---:|
-| Máscara superior | Máscara de solda | 1 | 0.0254 | 3.5 | 0.8 |
-| L1 | Cobre + metalização | 1.81 | 0.045974 | — | — |
-| Dielétrico L1–L2 | Prepreg 1080 (66%) x3 | 8.5 | 0.2159 | 3.8 | 0.019 |
-| L2 | Cobre + metalização | 1.4 | 0.03556 | — | — |
-| Dielétrico L2–L3 | Núcleo | 5.9 | 0.14986 | 4 | 0.017 |
-| L3 | Cobre + metalização | 1.4 | 0.03556 | — | — |
-| Dielétrico L3–L4 | Prepreg 1080 (66%) x3 | 8.5 | 0.2159 | 3.8 | 0.019 |
-| L4 | Cobre + metalização | 1.81 | 0.045974 | — | — |
-| Máscara inferior | Máscara de solda | 1 | 0.0254 | 3.5 | 0.8 |
+| Máscara superior | Máscara de solda | 1 | 0,0254 | 3,5 | 0,8 |
+| L1 | Cobre + metalização | 1,81 | 0,045974 | — | — |
+| Dielétrico L1–L2 | Prepreg 1080 (66%) x3 | 8,5 | 0,2159 | 3,8 | 0,019 |
+| L2 | Cobre + metalização | 1,4 | 0,03556 | — | — |
+| Dielétrico L2–L3 | Núcleo | 5,9 | 0,14986 | 4 | 0,017 |
+| L3 | Cobre + metalização | 1,4 | 0,03556 | — | — |
+| Dielétrico L3–L4 | Prepreg 1080 (66%) x3 | 8,5 | 0,2159 | 3,8 | 0,019 |
+| L4 | Cobre + metalização | 1,81 | 0,045974 | — | — |
+| Máscara inferior | Máscara de solda | 1 | 0,0254 | 3,5 | 0,8 |
 
 </div>
 
@@ -104,7 +104,7 @@ Faça o fanout de todos os sinais do encapsulamento QFN pela camada superior.
 
 ### 6.5. Roteamento de clock { #65-clock-interface-routing }
 
-Aplique estas regras de roteamento de clock aos dois grupos de projeto:
+Aplique estas regras de roteamento de clock tanto às variantes alimentadas por bateria quanto às de alimentação convencional:
 
 - Coloque os cristais dentro da blindagem, a mais de 1 mm da borda da PCB e o mais longe possível dos componentes que geram calor, como PA, carregador e circuitos da PMU. O ideal é manter mais de 5 mm de distância para evitar que o aquecimento afete a deriva de frequência.
 - Mantenha uma distância de exclusão superior a 0,25 mm ao redor do cristal, sem outros metais ou componentes.
@@ -142,11 +142,11 @@ Aplique estas regras de roteamento de clock aos dois grupos de projeto:
 As Figuras 6.5-3 e 6.5-6 mostram espaçamento ≥0,15 mm entre as trilhas paralelas XI/XO dos dois cristais. A Figura 6.5-2 usa um cristal de 48 MHz com capacitância de carga de 8,8 pF e marca os capacitores externos como NF (não montados). A Figura 6.5-5 usa um cristal de 32,768 kHz e 7 pF em PA22/PA23, pinos também multiplexados com PDM_CLK/PDM_DATA.
 
 !!! important "Tratamento do GND sob o cristal"
-    A nota de aplicação das variantes alimentadas por bateria se contradiz sobre o cobre sob o cristal: a seção de clock pede remover o plano GND da L2 diretamente abaixo, enquanto a seção de roteamento de PCB proíbe vazios nos planos e recortes de cobre na camada superior e nas adjacentes, e mostra GND contínuo na L2. O guia separado de layout de PCB repete a proibição de vazios. Não deduza uma regra geral para a L2 nem decida apenas pelo número de camadas; confirme com a SiFli o tratamento adequado ao empilhamento escolhido antes de liberar o projeto. A área de exclusão do cristal e o afastamento dos componentes devem ser verificados separadamente.
+    A nota de aplicação das variantes alimentadas por bateria se contradiz sobre o cobre sob o cristal: a seção de clock determina expressamente a remoção de pelo menos o cobre GND da segunda camada situado abaixo. A seção posterior de roteamento de PCB pede uma área “禁空” na camada superior e nas adjacentes sob o cristal e proíbe outras trilhas nessa região; a versão em inglês proíbe expressamente vazios nos planos e recortes de cobre. O guia separado de layout de PCB repete as mesmas instruções de exclusão e de não roteamento, e sua versão em inglês também proíbe vazios e recortes. No entanto, os modelos das duas guias mostram GND contínuo na L2. Não deduza uma regra geral para a L2 nem decida apenas pelo número de camadas; confirme com a SiFli o tratamento adequado ao empilhamento escolhido antes de liberar o projeto. A área de exclusão do cristal e o afastamento dos componentes devem ser verificados separadamente.
 
 ### 6.6. Roteamento de RF { #66-rf-interface-routing }
 
-Aplique estas regras de roteamento de RF aos dois grupos de projeto:
+Aplique estas regras de roteamento de RF tanto às variantes alimentadas por bateria quanto às de alimentação convencional:
 
 - Coloque o circuito de casamento de impedância de RF próximo ao chip, não à antena.
 - Coloque o capacitor de filtro de AVDD_BRF próximo ao pino do chip e conecte seu terminal de GND diretamente à massa principal por vias.
@@ -173,7 +173,7 @@ Os exemplos de RF usam um capacitor série de 15 pF/50 V (C0333), deixam C0318/C
 
 ### 6.7. Roteamento de áudio { #67-audio-interface-routing }
 
-Aplique estas regras de roteamento de áudio aos dois grupos de projeto:
+Aplique estas regras de roteamento de áudio tanto às variantes alimentadas por bateria quanto às de alimentação convencional:
 
 - Coloque os capacitores de filtro de AVDD33_AUD, MIC_BIAS e AUD_VREF próximos aos respectivos pinos. Conecte seus terminais de GND de forma confiável à massa principal.
 - Coloque os componentes da entrada analógica ADCP próximos ao pino do chip, com trilhas curtas, blindagem completa por GND e afastamento de fontes de interferência intensa.
@@ -305,7 +305,7 @@ Use blindagem completa por GND nas trilhas de entrada GPADC e mantenha-as afasta
 
 ### 6.13. EMI e ESD { #613-emi-esd }
 
-Aplique estas regras de EMI e ESD aos dois grupos de projeto:
+Aplique estas regras de EMI e ESD tanto às variantes alimentadas por bateria quanto às de alimentação convencional:
 
 - Não passe pela camada superior as linhas longas de clock e alimentação que gerem interferência fora da blindagem; use camadas internas.
 - Coloque as proteções ESD próximas aos pinos do conector e faça os sinais passarem primeiro por elas.

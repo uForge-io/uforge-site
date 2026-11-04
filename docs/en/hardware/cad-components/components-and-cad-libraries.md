@@ -9,7 +9,7 @@ tags:
 
 # Components and CAD Libraries { #components-and-cad-libraries }
 
-Use this page when a selected SF32 device or module is moving from an architecture decision into a controlled BOM and PCB design. The two resources below serve different purposes: the **Approved Vendor List (AVL)** helps choose components that SiFli has qualified, while the **EDA Tool Libraries** provide the symbols, footprints, and reference project data needed to implement the chosen hardware correctly.
+Use this page when a selected SF32 device or module is moving from an architecture decision into a controlled BOM and PCB design. The two resources below serve different purposes: the **Approved Vendor List (AVL)** helps choose components that SiFli has qualified, while the **EDA Tool Libraries** provide official schematic symbols and PCB footprints as a starting point for implementing the chosen hardware.
 
 Neither resource replaces the device-specific hardware design guide, package drawing, or final validation on the production-intent board.
 
@@ -22,7 +22,7 @@ Neither resource replaces the device-specific hardware design guide, package dra
 | Resource | Use it for | Do not use it as a substitute for |
 |:---------|:-----------|:----------------------------------|
 | [SF32 Approved Vendor List](sifli-approved-vendor-list.md) | Shortlisting qualified crystals, inductors, Flash, and other supported components; checking electrical and firmware-identification constraints. | Final component approval, supply-chain qualification, or product-level electrical validation. |
-| [EDA Tool Libraries](eda-tool-libraries.md) | Obtaining schematic symbols, PCB footprints, package drawings, and reference design assets as a starting point in the supported EDA tools. | Verification of the exact orderable part number, pad-stack definitions, assembly process, or current device documentation. |
+| [EDA Tool Libraries](eda-tool-libraries.md) | Obtaining official schematic symbols and PCB footprints as starting data in the supported EDA tools. | Verification of the exact orderable part number, pad-stack definitions, assembly process, or current device documentation. |
 
 </div>
 

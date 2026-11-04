@@ -594,9 +594,9 @@
     }
 
     // SDIO and each audio dimension (DAC/ADC/PDM/I2S) are independent
-    // minimum-threshold filters, same pattern as PSRAM/GPIO -- each one is
-    // its own dropdown rather than one combined "audio profile" preset, so
-    // they're evaluated separately instead of as a single bundled check.
+    // Exact-count filters: each audio dimension has its own dropdown, and
+    // higher counts do not satisfy lower selections. These are not a bundled
+    // audio-profile check.
     if (state.sdio !== "any" && (record.sdio === null || record.sdio === undefined || record.sdio !== parseInt(state.sdio, 10))) {
       reasons.push(t.reasons.sdio);
     }

@@ -94,7 +94,7 @@ Schließen Sie nicht allein deshalb auf Bibliotheksunterstützung, weil eine Ard
 
 ## Diagnose und Eskalation { #diagnose-and-escalate }
 
-Beginnen Sie mit dem Leitfaden zur ersten Inbetriebnahme, wenn ein Board nicht erkannt oder geflasht werden kann oder Blink nicht ausführt. Sobald diese Baseline funktioniert, nutzen Sie die folgende Zuordnung, um die Fehlersuche zu verkürzen.
+Beginnen Sie mit dem Leitfaden zur ersten Inbetriebnahme, wenn ein Board nicht erkannt oder geflasht werden kann oder Blink nicht ausführt. Sobald die Erstinbetriebnahme funktioniert, nutzen Sie die folgende Zuordnung, um die Fehlersuche zu verkürzen.
 
 <div align="center"><em>Tabelle: Zuständigkeit bei Arduino-Problemen</em></div>
 
@@ -104,7 +104,7 @@ Beginnen Sie mit dem Leitfaden zur ersten Inbetriebnahme, wenn ein Board nicht e
 |:-------------------------------------------|:--------------------|
 | Sketch startet erst nach `sketch` | Bestätigen, dass der Debug-Modus absichtlich gewählt wurde. |
 | Fehlende Zephyr-Funktion oder fehlendes Subsystem | Core-README und Loader-Exporte/-Konfiguration prüfen. |
-| Speicherfehler oder Instabilität | Das Sketch-Budget messen; dynamisches Laden und die Zephyr-Shell berücksichtigen; Static nur mit Recovery-Plan bewerten. |
+| Speicherfehler oder Instabilität | Das Sketch-Budget messen; dynamisches Laden und die Zephyr-Shell berücksichtigen; Static nur mit Wiederherstellungsplan bewerten. |
 | Bibliothek kompiliert, aber Hardware funktioniert nicht | Board-Pin-Annahmen bestätigen und gegen ein minimales, board-spezifisches Beispiel testen. |
 | Upload oder Wiederherstellung schlägt fehl | Die dokumentierte Arduino-Baseline neu herstellen, danach bei Bedarf den Wiederherstellungspfad des Boards mit SiFli-SDK verwenden. |
 

@@ -18,7 +18,7 @@ Consultez [Prise en main](../getting-started/index.md) pour votre première mise
 
 ## Établir une configuration de référence SiFli-SDK { #establish-a-sifli-sdk-baseline }
 
-[SiFli-SDK](platforms/sifli-sdk/overview.md) est le package logiciel officiel de SiFli, basé sur RT-Thread, et constitue le parcours de référence pour le développement du firmware SF32. Commencez par là, sauf si vous avez une raison précise d'évaluer un autre écosystème : c'est la voie de développement de référence dont la documentation couvre le plus largement la prise en charge des cartes, le Bluetooth, le graphisme, l'audio, le stockage, la gestion de l'énergie et le travail de mise en production.
+[SiFli-SDK](platforms/sifli-sdk/overview.md) est le package logiciel officiel de SiFli, basé sur RT-Thread, et constitue le parcours de référence pour le développement du firmware SF32. Commencez par là, sauf si vous avez une raison précise d'évaluer un autre écosystème : sa documentation fournit des indications sur la prise en charge des cartes, le Bluetooth, le graphisme, l'audio, le stockage, la gestion de l'énergie et la mise en production.
 
 Avant de développer les fonctionnalités du produit, établissez et consignez une configuration de référence reproductible :
 
@@ -104,7 +104,7 @@ Avant de retenir l'un de ces parcours pour un produit, validez sur la carte exac
 
 Avant de considérer un parcours firmware comme prêt pour le produit, assurez-vous de pouvoir répondre à ces questions :
 
-- Quel composant, quelle révision de carte ou de matériel personnalisé, et quelle configuration ont été testés ?
+- Quelle puce, quelle révision de carte ou de matériel personnalisé, et quelle configuration ont été testées ?
 - Quel SDK, quel package, quelle branche ou quel commit a servi à produire le firmware ?
 - Quelles commandes de compilation, de flashage, de surveillance et de récupération complète fonctionnent ?
 - Quel exemple ou test valide le fonctionnement de chaque périphérique requis et de chaque sous-système du produit ?

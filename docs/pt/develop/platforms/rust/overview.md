@@ -13,6 +13,8 @@ O trabalho da OpenSiFli com Rust está no repositório [OpenSiFli/sifli-rs](http
 
 Os mantenedores descrevem o projeto como ainda em desenvolvimento e não pronto para produção. Considere Rust no SF32 uma via de exploração, a menos que sua equipe possa trabalhar próxima ao hardware e esteja preparada para contribuir com correções ao projeto upstream.
 
+Em 2026-11-04, a [situação de suporte do `sifli-hal` no upstream](https://github.com/OpenSiFli/sifli-rs/blob/main/sifli-hal/README.md) identifica `sf32lb52x` como o único alvo suportado. Antes de planejar a portabilidade, verifique nessa situação e nos exemplos o suporte ao chip exato; não deduza que outras famílias SF32 são suportadas apenas pelo nome do repositório ou das crates.
+
 Para configurar a toolchain inicial, compilar o Blinky sem modificações e configurar o runner de gravação, consulte [Primeiros passos com Rust](../../../getting-started/rust/getting-started-rust.md). Use esta página para avaliar o suporte atual e decidir se vale avançar com Rust além dessa base.
 
 ## Crates mencionadas pela OpenSiFli { #crates-mentioned-by-opensifli }
@@ -42,7 +44,7 @@ Por enquanto, use o SiFli-SDK para firmware de produção.
 
 ## Pontos de controle de avaliação { #evaluation-gates }
 
-Antes de iniciar a adaptação para um produto, confirme que a configuração de referência para os primeiros passos funciona na placa de destino. Em seguida, valide separadamente cada periférico, layout Flash, caminho de depuração e recurso de execução necessário. Registre, para cada resultado, o commit upstream, o target Rust, a configuração do Cargo, a revisão da placa e o procedimento de recuperação.
+Antes de iniciar a adaptação para um produto, confirme que a configuração de referência para os primeiros passos funciona na placa de destino. Em seguida, valide separadamente cada periférico, layout Flash, caminho de depuração e funcionalidade necessária durante a execução. Registre, para cada resultado, o commit upstream, o target Rust, a configuração do Cargo, a revisão da placa e o procedimento de recuperação.
 
 O repositório usa `sifli-hal`, `sifli-pac`, ferramentas para tabelas Flash e exemplos assíncronos no estilo Embassy. Portanto, o sucesso da aplicação também depende da interação entre esses componentes, não apenas de uma crate compilar. Ao investigar uma lacuna, mantenha o caso de reprodução o menor possível.
 

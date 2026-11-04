@@ -29,12 +29,13 @@ SF32LB52-DevKit-LCD 是一块面向显示应用的 SF32LB52x 家族开发板。�
 - 通过 22 针 FPC 连接器支持 QSPI / SPI / DSPI LCD
 - 通过 FPC 和 40 针扩展排针支持 8 位 MCU/8080 LCD
 - 支持 I2C 触摸面板
-- 提供 USB-C 用于 USB 转 UART 下载 / 调试及开发板供电
+- 提供 USB-C，通过板载 CH343P USB 转 UART 桥接器进行下载 / 调试，并为开发板供电
 - 提供独立 USB-C 接口用于 USB 2.0 FS 应用场景
 - 板载 MEMS 麦克风和 Class-D 音频功放
 - 使用 SPI 的 MicroSD 卡槽
 - 电池连接器和 ETA9640P 线性充电器
 - 40 针扩展排针引出显示、GPIO、存储、音频和电源信号
+- 板载开关、功能键和复位键，以及 RGB、充电、GPIO、电源指示灯和 LCD 背光驱动器
 
 ## 何时使用这块开发板 { #when-to-use-this-board }
 
@@ -108,7 +109,7 @@ SF32LB52-DevKit-LCD 是一块面向显示应用的 SF32LB52x 家族开发板。�
 
 - 扬声器
 - TF 卡
-- 单节锂离子/锂聚合物电池，容量通常为 450 mAh 至 500 mAh
+- 单节锂离子/锂聚合物电池；SiFli 建议容量为 450 mAh
 - 当需要同时进行 UART 调试和原生 USB 测试时，第二根 USB 线缆
 
 ### 基本连接步骤 { #basic-setup }

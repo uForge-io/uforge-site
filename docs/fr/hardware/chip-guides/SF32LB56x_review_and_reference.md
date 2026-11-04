@@ -49,7 +49,7 @@ La [liste de contrôle du schéma](SF32LB56x_schematic_checklist.md) (section 5.
 
 ### 9.1. Annexe A. Produit type à base de SF32LB56x { #appendix-a-a-typical-sf32lb56x-product }
 
-Un produit SF32LB56x typique comprend le MCU, le PMIC, le contrôleur d'affichage et tactile, le stockage de démarrage, la mémoire externe en option, les capteurs, le moteur de vibration, l'entrée/sortie audio, l'antenne Bluetooth, les quartz, ainsi que des accès au débogage et aux tests de production. Le boîtier U favorise une intégration QFN compacte, tandis que le boîtier V permet davantage d'interfaces et nécessite une planification de l'implantation et du routage BGA/HDI.
+Les schémas d'application des boîtiers U et V sont des exemples, pas des nomenclatures obligatoires. Tous deux montrent le MCU avec le chargeur et l'alimentation Buck/LDO, une liaison vers l'écran LCD, des options de mémoire flash externe (QSPI NAND, SD NAND ou NOR), des capteurs de mouvement en SPI et de fréquence cardiaque en I2C, une entrée microphone analogique et une sortie haut-parleur via un amplificateur audio (PA), un moteur vibrant commandé par PWM, une antenne Bluetooth/RF, des quartz de 48 MHz et 32,768 kHz, et un accès SWD/UART. Les circuits tactiles et de rétroéclairage sont traités séparément dans les [directives de conception du schéma](SF32LB56x_schematic_design.md). Le schéma V montre en plus l'eMMC et le Wi-Fi via SDIO, le GPS et le NFC via UART, ainsi qu'un module LTE via SPI. Vérifiez les périphériques requis, le routage des interfaces et la compatibilité du boîtier pour le design visé.
 
 ## 10. Historique des révisions { #10-revision-history }
 

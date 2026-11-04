@@ -22,7 +22,7 @@ This path combines SF32LB52 BLE, audio, display, keys, battery monitoring, and l
 
 “Up to eight devices and three concurrent talkers” is an upstream implementation boundary, not a product capability validated across distance, interference, packet loss, and every concurrency pattern. Upstream material also does not specify room authentication, link-encryption policy, a voice-privacy guarantee, radio-regulatory status, or the complete licensing boundary of the binary `talk_back` component. Each requires separate product review.
 
-**Board-source note:** SiFli's Chinese ULP board page is explicitly marked as not yet available; it only identifies low-power sensor/wearable use, 3- or 6-axis sensor options, and reserved low-power test points. It is not a complete board specification. Verify peripherals against the actual board revision and schematic; Talkback-specific behavior below is based on the pinned application source.
+**Board-source note:** SiFli's Chinese ULP board page is explicitly marked as not yet available; it only identifies low-power sensor/wearable use, 3- or 6-axis sensor options, and reserved low-power test points. It is not a complete board specification and does not identify a hardware revision validated for this example. Verify peripherals against the actual board revision and schematic; Talkback-specific behavior below is based on the pinned application source.
 
 ## Outcome, Scope, and Entry Criteria { #outcome-scope-and-entry-criteria }
 
@@ -146,7 +146,7 @@ flowchart LR
     BP["Battery / USB power"] --> B
 ```
 
-The principal failure domains are BLE scanning/room creation, room-state synchronization, concurrent-speaker scheduling, the Opus/acoustic path, key events, low battery and sleep, power-key recovery, and unpublished component/licensing details. Diagnose role and state first, then distinguish radio, audio, and local-power failures.
+The diagram shows the Master-to-Slave audio path; Stage 2 separately verifies the reverse direction. The principal failure domains are BLE scanning/room creation, room-state synchronization, concurrent-speaker scheduling, the Opus/acoustic path, key events, low battery and sleep, power-key recovery, and unpublished component/licensing details. Diagnose role and state first, then distinguish radio, audio, and local-power failures.
 
 ## Stage 1 — Establish the Untouched Source Baseline { #stage-1-establish-the-untouched-source-baseline }
 

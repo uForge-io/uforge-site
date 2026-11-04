@@ -49,7 +49,7 @@ O [checklist do esquemático](SF32LB56x_schematic_checklist.md) (seção 5.8) e 
 
 ### 9.1. Apêndice A. Um produto SF32LB56x típico { #appendix-a-a-typical-sf32lb56x-product }
 
-Um produto típico baseado no SF32LB56x inclui o MCU, o PMIC, o controlador do display e do painel de toque, a memória de boot, memória externa opcional, sensores, motor de vibração, entrada e saída de áudio, antena Bluetooth, cristais e acessos para depuração e testes de produção. O encapsulamento U favorece uma implementação compacta em QFN, enquanto o encapsulamento V oferece mais interfaces e exige planejamento do layout com BGA/HDI.
+Os diagramas de aplicação dos encapsulamentos U e V são exemplos, não listas de materiais obrigatórias. Ambos mostram o MCU com carregador e alimentação Buck/LDO, um caminho para LCD, opções de memória flash externa (QSPI NAND, SD NAND ou NOR), sensores de movimento por SPI e de frequência cardíaca por I2C, entrada de microfone analógica e saída para alto-falante via amplificador de áudio (PA), motor de vibração por PWM, antena Bluetooth/RF, cristais de 48 MHz e 32,768 kHz e acesso SWD/UART. A circuitaria de toque e retroiluminação é abordada separadamente nas [orientações de esquemático](SF32LB56x_schematic_design.md). O diagrama V também mostra eMMC e Wi-Fi via SDIO, GPS e NFC via UART e módulo LTE via SPI. Confirme os periféricos necessários, o roteamento das interfaces e o suporte do encapsulamento para o projeto específico.
 
 ## 10. Histórico de revisões { #10-revision-history }
 

@@ -16,7 +16,7 @@ SF32LB58-MOD 是思澈科技（SiFli）基于 SF32LB586VDD36 推出的低功耗�
 
 根据所选 SKU，模组可采用 HPI-PSRAM 搭配 QSPI-NOR、QSPI-NAND 或 eMMC 的存储组合。它提供的接口适用于既需要显示、音频、存储和连接能力，又希望采用 MCU 级平台的产品。
 
-DS5802 V0.1 列出了模组板载 PCB 天线和外接天线方案。外接天线可通过邮票孔引出，也可连接第一代外部天线连接器；该连接器兼容 Hirose U.FL、I-PEX MHFI 和 Amphenol AMC 连接器。规格书未注明各 SKU 分别采用哪种方案；确定载板布局前，请向思澈科技（SiFli）确认所选模组的天线配置。
+DS5802 V0.1 列出了模组板载 PCB 天线和外接天线方案。外接天线可通过第一代外部天线连接器接入；该连接器兼容 Hirose U.FL、I-PEX MHFI 和 Amphenol AMC 连接器。规格书未注明各 SKU 分别采用哪种方案；确定载板布局前，请向思澈科技（SiFli）确认所选模组的天线配置。
 
 !!! info
     如需了解底层芯片家族、架构和外设能力，请参见 [SF32LB58x](../chips/SF32LB58x.md)。本页重点介绍模组级集成、存储配置、电源轨与产品适配性。
@@ -35,7 +35,7 @@ DS5802 V0.1 列出了模组板载 PCB 天线和外接天线方案。外接天线
 如果项目需要以下一项或多项能力，可将 SF32LB58-MOD 纳入选型：
 
 - 模组内已集成 BGA256 芯片、RF 链路、晶振和高速存储
-- 提供板载 PCB 天线或外接天线方案；外接天线可通过邮票孔或兼容 Hirose U.FL、I-PEX MHFI 和 Amphenol AMC 连接器的接口接入，具体配置需按 SKU 确认
+- 提供板载 PCB 天线或外接天线方案；外接天线通过兼容 Hirose U.FL、I-PEX MHFI 或 Amphenol AMC 的连接器接入，具体配置需按 SKU 确认
 - 不同 SKU 提供 QSPI-NOR、QSPI-NAND 或 eMMC 存储配置
 - 提供显示、音频、存储与控制所需的外部接口
 
@@ -108,7 +108,7 @@ DS5802 V0.1 列出了模组板载 PCB 天线和外接天线方案。外接天线
 </div>
 
 !!! note "供货与定制"
-    **受近期存储芯片供应短缺影响，SF32LB58-MOD-E4R32N1 已无法供货。** 模组也可采用其他配置。如有定制需求，请[联系 μForge.io](../../about/contact.md)。
+    **受存储芯片供应短缺影响，SF32LB58-MOD-E4R32N1 目前暂无法供货。** 模组也可采用其他配置。如有定制需求，请[联系 μForge.io](../../about/contact.md)。
 
 
 思澈科技（SiFli）的[《模组型号指南》](https://wiki.sifli.com/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)列出了上述型号，并说明可在模组内贴装 eMMC，也可定制其他配置。请按所需的存储介质和容量选择 SKU，并向思澈科技（SiFli）确认当前供货状态及存储配置。设计定型前，还应确认目标 SDK 和固件支持相应器件及其启动/存储路径。
@@ -119,7 +119,7 @@ DS5802 V0.1 列出了模组板载 PCB 天线和外接天线方案。外接天线
 - 1 个用户可编程 Arm Cortex-M33 STAR-MC1 低功耗核心，最高 96 MHz
 - 每个应用核心最高 370 DMIPS / 984 EEMBC CoreMark
 - 低功耗核心最高 148 DMIPS / 394 EEMBC CoreMark
-- 2176 KB SRAM（HCPU）+ 512 KB SRAM（ACPU）+ 1056 KB 保留 SRAM（LCPU）
+- 2176 KB SRAM（HCPU）+ 512 KB SRAM（ACPU）+ 1056 KB 保持型 SRAM（LCPU）
 - 所有核心均带单精度 FPU 与 MPU
 
 ### 无线连接 { #wireless-connectivity }
@@ -155,10 +155,14 @@ DS5802 V0.1 列出了模组板载 PCB 天线和外接天线方案。外接天线
 - VDD_3V3：2.97–3.6 V
 - VDD_1V8：1.7–1.95 V
 - VDDIOA / VDDIOA2 / VDDIOB：1.7–3.6 V
+
 - VDD_3V3 为 AVDD33_ANA、AVDD33_AUD 和 AVDD_USB 供电；若模组内贴装 eMMC，也为其 VDD 引脚供电。思澈科技（SiFli）建议该电源轨采用 LDO。
 - VDD_1V8 为 PVDD1、PVDD2、AVDD_BRF、AVDD18_DSI 以及合封存储器供电。
 - VDDIOA 为除 PA00–PA11 以外的 PA I/O、外部 Flash 以及（若模组内贴装 eMMC）其 VIO 供电；VDDIOA2 为 PA00–PA11 供电；VDDIOB 为 PB I/O 供电。
 - 138 引脚模组接口；复用引脚可提供 GPIO、SPI、LCD、MPI、UART、I2C、PWM、SDIO、USB 2.0 HS 和音频功能
+
+!!! note "外部 I/O 电压"
+    DS5802 V0.1 将 VDDIOA、VDDIOA2 和 VDDIOB 列为 1.7–3.6 V，但其硬件检查清单又要求模组 I/O 和外接外设采用 3.3 V 接口电平。该文件未解释这两处信息之间的关系。请向思澈科技（SiFli）确认所选接口和模组版本允许的电压；不要仅凭电源轨范围就推断所有外部 I/O 均可耐受 3.6 V。
 
 ## 相关产品 { #related-products }
 

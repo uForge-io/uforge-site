@@ -355,7 +355,7 @@ RF 매칭 회로는 안테나보다 칩에 가깝게 배치하십시오. AVDD_BR
 | D0 | PA40 | PA40 | Quad-SPI 모드에서는 Data 2 |
 | D1 | PA41 | PA41 | Quad-SPI 모드에서는 Data 3 |
 | REST | PA05 | PB04 | 디스플레이 패널 리셋 신호 |
-| TE | PA33 | PA33 | MCU에 프레임을 알리는 티어링 이펙트 신호 |
+| TE | PA33 | PA33 | MCU 프레임 동기화를 위한 Tearing Effect(TE) 신호 |
 
 </div>
 
@@ -401,7 +401,7 @@ RF 매칭 회로는 안테나보다 칩에 가깝게 배치하십시오. AVDD_BR
 | D[0] | PA40 | Quad-SPI 모드에서는 Data 2 |
 | D[1] | PA41 | Quad-SPI 모드에서는 Data 3 |
 | REST | PA43 | 디스플레이 리셋 신호 |
-| TE | PA33 | MCU에 프레임을 알리는 티어링 이펙트 신호 |
+| TE | PA33 | MCU 프레임 동기화를 위한 Tearing Effect(TE) 신호 |
 
 </div>
 
@@ -414,7 +414,7 @@ RF 매칭 회로는 안테나보다 칩에 가깝게 배치하십시오. AVDD_BR
 | CSX | PA36 | 칩 셀렉트 |
 | WRX | PA37 | 데이터를 쓰기 위한 쓰기 스트로브 신호 |
 | DCX | PA39 | 디스플레이 데이터/명령 선택 |
-| RDX | PA38 | 데이터를 쓰기 위한 읽기 스트로브 신호 |
+| RDX | PA38 | 데이터 읽기 스트로브 신호(아래 경고 참조) |
 | D[0] | PA40 | Data 0 |
 | D[1] | PA41 | Data 1 |
 | D[2] | PA28 | Data 2 |
@@ -424,9 +424,12 @@ RF 매칭 회로는 안테나보다 칩에 가깝게 배치하십시오. AVDD_BR
 | D[6] | PA32 | Data 6 |
 | D[7] | PA34 | Data 7 |
 | REST | PA43 | 리셋 |
-| TE | PA33 | MCU에 프레임을 알리는 티어링 이펙트 신호 |
+| TE | PA33 | MCU 프레임 동기화를 위한 Tearing Effect(TE) 신호 |
 
 </div>
+
+!!! warning "SF32LB56xV MCU8080 RDX 설명 확인"
+    SiFli 핀 표는 RDX를 "데이터 쓰기용 읽기 스트로브"로 설명하지만, SiFli의 MCU/8080 인터페이스 개요는 RDX를 토글해 데이터를 읽는다고 설명합니다. 두 설명이 서로 모순되므로, 신호를 할당하기 전에 대상 디스플레이 컨트롤러 문서에서 의도된 동작을 확인하십시오.
 
 <div align="center"><em>표 5.5-7: SF32LB56xV DPI 디스플레이 인터페이스</em></div>
 

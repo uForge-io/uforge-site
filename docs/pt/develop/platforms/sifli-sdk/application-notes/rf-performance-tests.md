@@ -19,7 +19,7 @@ O SDK divide a validação de RF Bluetooth em testes com sinalização, sem sina
 | Suporte de ferramentas ao SF32LB57x | O [guia de teste de RF](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/rf_test_guide.html) lista os pinos UART do SF32LB57x, mas o seletor de plataforma do [manual do SiFli_RfTool](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/SiFli_RfTool/SiFli_RfTool_UM.html) não inclui o 57x. Use essa informação apenas como referência de pinagem e confirme qual caminho de teste é compatível com a versão do SDK de destino. |
 | Diagramas de topologia e matriz de comandos HCI | Exemplos do guia do SF32LB52x; para implementar, consulte os comandos e a documentação de pinos da família de destino. |
 | Configuração de `CONFIG_BT_RF_TEST` | Aplicável ao procedimento documentado para famílias diferentes de 55x; o `bt_rftest` do SF32LB55x não usa esse símbolo. |
-| Pinos UART, valores de pacotes e sintaxe dos comandos | Dependem da família e da versão do SDK; confira a configuração do projeto e a saída de `bt_rftest help`. |
+| Pinos UART, valores de pacotes e comportamento dos comandos | Dependem da família e da versão do SDK; confira a configuração do projeto e a implementação do SDK de destino. |
 
 </div>
 
@@ -33,16 +33,16 @@ O SDK divide a validação de RF Bluetooth em testes com sinalização, sem sina
 
 | Modo | Aplicação | Entrada do SDK | Caminho de controle |
 |---|---|---|---|
-| Sinalização BT | Qualificação BQB/QDID e avaliação de desempenho em conformidade com o protocolo | `bt_cm dut`, `gap_enb_dut_mode_req()` | Interface de rádio do testador e controle de teste LMP |
+| Sinalização BT (BR/EDR) | Qualificação BQB/QDID e avaliação de desempenho em conformidade com o protocolo | `bt_cm dut`, `gap_enb_dut_mode_req()` | Interface de rádio do testador e controle de teste LMP |
 | BT sem sinalização | Ajuste de RF durante o desenvolvimento e triagem na produção | `bt_rftest`, `bt_enter_no_signal_dut_mode()` | HCI local específico do fabricante |
-| BLE sem sinalização (SIG DTM) | Triagem de RF BLE e itens SIG DTM | `bt_rftest bletx/blerx`, `ble_enter_dut_mode()` | HCI local ou HCI padrão encaminhado por `bt_cm uart_dut` |
+| BLE sem sinalização (SIG DTM) | Triagem de RF BLE e testes de qualificação SIG DTM | `bt_rftest bletx/blerx`, `ble_enter_dut_mode()` | HCI local ou HCI padrão encaminhado por `bt_cm uart_dut` |
 | Teste individual de RF | Ajuste de RF na placa e pré-avaliação FCC/CE | `bt_cm uart_dut` + `SiFli_RfTool` | A ferramenta no PC envia uma operação de baixo nível por vez |
 
 </div>
 
-A sinalização estabelece uma conexão Bluetooth real e é o procedimento de qualificação. No modo sem sinalização, o circuito de RF permanece em um canal e nível de potência fixos, transmitindo ou recebendo; esse é o caminho normalmente usado no desenvolvimento e na triagem de produção. Os testes individuais de RF usam a ferramenta no PC para controlar com precisão a portadora ou a modulação, com medição em analisador de espectro ou medidor de potência. Os testes BT sem sinalização e os testes individuais de RF são procedimentos específicos da SiFli, não testes BQB.
+Para BR/EDR, a sinalização estabelece uma conexão Bluetooth real e é o caminho de qualificação RF BQB. Os testes RF BQB de BLE usam SIG DTM, apresentado aqui como BLE sem sinalização. Os testes BT sem sinalização e os testes individuais de RF são procedimentos específicos da SiFli, não testes BQB. No modo sem sinalização, o rádio transmite ou recebe em um canal fixo e com potência definida; esse é o caminho normalmente usado no desenvolvimento e na triagem de produção. Os testes individuais de RF usam a ferramenta no PC para ajustar com precisão a portadora ou a modulação e medir com analisador de espectro ou medidor de potência.
 
-Os diagramas de topologia a seguir vêm do guia de testes RF do SF32LB52x. Eles destacam as diferenças entre o PC, o DUT, o testador e os caminhos UART/HCI/RF. Para a pinagem UART padrão real, consulte a tabela da família de destino.
+Os diagramas de topologia a seguir vêm do guia de testes RF do SF32LB52x. Eles destacam as diferenças entre o PC, o DUT, o testador e os caminhos UART/HCI/RF. Para conferir os pinos UART padrão, consulte o guia de testes RF da família de destino.
 
 ![Topologia do teste de sinalização BT](../../../../assets/develop/app-notes/rf/bt_signaling_test.png){ loading="lazy" }
 <div align="center"><em>Figura: Exemplo do guia do SF32LB52x — sinalização BT: o PC configura o testador enquanto o DUT e o testador estabelecem o enlace RF.</em></div>
@@ -50,7 +50,7 @@ Os diagramas de topologia a seguir vêm do guia de testes RF do SF32LB52x. Eles 
 ![Topologia do teste BT sem sinalização](../../../../assets/develop/app-notes/rf/non_signaling_test.png){ loading="lazy" }
 <div align="center"><em>Figura: Exemplo do guia do SF32LB52x — BT sem sinalização: o PC controla diretamente o estado de RF do DUT por comandos seriais/HCI.</em></div>
 
-![Topologia do teste de sinalização BLE](../../../../assets/develop/app-notes/rf/ble_signaling_test.png){ loading="lazy" }
+![Topologia do teste BLE DTM](../../../../assets/develop/app-notes/rf/ble_signaling_test.png){ loading="lazy" }
 <div align="center"><em>Figura: Exemplo do guia do SF32LB52x — BLE DTM: os caminhos de controle UART/HCI e de medição RF se conectam ao testador.</em></div>
 
 ## Escolher o firmware e configurar o projeto { #choose-firmware-and-configure-the-project }
@@ -67,10 +67,10 @@ CONFIG_BT_RF_TEST=y
 
 O caminho `bt_rftest` do SF32LB55x não usa `CONFIG_BT_RF_TEST`. `CONFIG_BT_FINSH` serve para rastreamento e não é necessário para os comandos de teste. Quando o caminho de controle usar a UART IPC própria do SDK, defina `CONFIG_IPC_USE_OWN_DEVICE=y` e `CONFIG_IPC_OWN_DEVICE_NAME="uart2"` conforme a placa. Os exemplos do SDK `example/bt/spp/` e `example/bt/HCI_over_uart/` oferecem pontos de partida.
 
-## Teste de sinalização BT { #bt-signaling-test }
+## Sinalização BR/EDR e configuração de BLE DTM { #bt-signaling-test }
 
 1. Disponibilize `VBAT`, `GND` e TX/RX da UART1 no DUT. Os pinos padrão da UART1 variam conforme o encapsulamento; use a configuração de pinos do projeto.
-2. Para sinalização BLE, conecte a UART1 a um PC e envie `bt_cm uart_dut`. Confirme `04 0E 04 XX 03 0C 00` e, em seguida, transfira a UART para o testador.
+2. Para BLE DTM, conecte a UART1 a um PC e envie `bt_cm uart_dut`. Confirme `04 0E 04 XX 03 0C 00` e, em seguida, transfira a UART para o testador.
 3. Para sinalização BT, mantenha o DUT ativo, envie `bt_cm dut`, confirme a resposta `Write scan enable success` e conecte o cabo coaxial de RF ao testador.
 4. Em Bluetooth Signaling, o BLE usa controle EUT por USB-to-RS232 a 1 000 000 baud; o BT usa `None (EUT Control off)` e localiza o DUT pelo enlace de rádio.
 5. Execute TX em `Bluetooth 1 Multi Eval.` e RX em `Bluetooth 1 RX Meas.`. Use BER para Bluetooth clássico e PER para BLE; reduza o nível TX do testador para determinar a sensibilidade.
@@ -81,13 +81,15 @@ Depois de habilitar o caminho de teste RF, use o shell FinSH:
 
 ```text
 bt_rftest enter
-bt_rftest bttx <channel> <packet_type> <power> <length>
-bt_rftest btrx <channel> <packet_type> <power>
+bt_rftest bttx
+bt_rftest btrx
 bt_rftest btstop
 bt_rftest exit
 ```
 
-A ordem exata dos argumentos e os valores de pacote aceitos dependem da versão do SDK; use a sintaxe exibida por `bt_rftest help` no SDK de destino. As estatísticas de pacotes RX são significativas; a contagem de pacotes TX não mede quantos pacotes foram recebidos. Para BLE DTM, use `bt_rftest bletx`/`blerx` ou os comandos HCI padrão `LE_Transmitter_Test`, `LE_Receiver_Test v2` e `LE_Test_End`. Os canais BLE vão de 0 a 39 e os valores de PHY são 1M/2M/Coded; os canais de Bluetooth clássico vão de 0 a 78. Em chips de modo dual compatíveis com ambos, BT e BLE compartilham o hardware de RF e devem ser testados separadamente.
+No SDK documentado, `bt_rftest bttx` e `bt_rftest btrx` usam parâmetros de teste fixos e não recebem argumentos. Para alterá-los, consulte a implementação de `bt_rftest()` em `middleware/bluetooth/service/common/bf0_bt_common.c` da versão de destino e defina subcomandos parametrizados, se necessário. A implementação e os valores disponíveis podem variar conforme a versão.
+
+As estatísticas RX são úteis, mas a contagem TX não indica quantos pacotes o DUT recebeu. Para BLE DTM, use `bt_rftest bletx`/`blerx` ou os comandos HCI padrão `LE_Transmitter_Test`, `LE_Receiver_Test v2` e `LE_Test_End`. Os canais BLE vão de 0 a 39 e os valores de PHY são 1M/2M/Coded; os canais de Bluetooth clássico vão de 0 a 78. Em chips de modo dual compatíveis com ambos, BT e BLE compartilham o hardware de RF e devem ser testados separadamente.
 
 ## Testes individuais de RF com SiFli_RfTool { #single-item-testing-with-sifli_rftool }
 
@@ -119,4 +121,4 @@ A matriz de origem indica o envio de `HCI_Reset` (`01,03,0C,00`) antes de tentar
 ![Matriz de comandos HCI de teste RF do SF32LB52x](../../../../assets/develop/app-notes/rf/hci_cmd.png){ loading="lazy" }
 <div align="center"><em>Figura: Exemplo do guia do SF32LB52x — matriz de comandos HCI, valores de retorno e itens de teste RF.</em></div>
 
-Registre, junto a cada resultado, a família, a revisão do SDK, a identificação do firmware, os pinos UART, o caminho RF, a perda do cabo, o modelo e a configuração do instrumento, o canal, a PHY/tipo de pacote, a potência, as contagens RX, o RSSI, BER/PER e a revisão da placa. Consulte os guias oficiais detalhados para [SF32LB52x](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/rf_test_guide.html), [SF32LB55x (a tabela UART também inclui SF32LB57x)](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/rf_test_guide.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/rf_test_guide.html) e [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/rf_test_guide.html).
+Para cada ensaio, registre a família, a revisão do SDK, a identificação do firmware, a revisão da placa, os pinos UART, o caminho RF e a perda do cabo. Registre também o modelo e a configuração do instrumento, o canal, a PHY/tipo de pacote, a potência, as contagens RX, o RSSI e BER/PER. Consulte os guias oficiais detalhados para [SF32LB52x](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/rf_test_guide.html), [SF32LB55x (a tabela UART também inclui SF32LB57x)](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/rf_test_guide.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/rf_test_guide.html) e [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/rf_test_guide.html).

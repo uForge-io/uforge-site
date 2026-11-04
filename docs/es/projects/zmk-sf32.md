@@ -176,12 +176,12 @@ Separe los fallos por ámbito: matriz y cableado físico, enlace de derecha a iz
 **Objetivo:** verificar exactamente la referencia de OpenSiFli antes de cambiar el mapa de teclas, un overlay o alguna dependencia.
 
 1. Registre las revisiones de ambas placas y conecte los dos montajes de prueba exactamente según las configuraciones overlay Urchin izquierda y derecha. Identifique las placas y los cables USB/de grabación según su función.
-2. Compile ambas imágenes en el commit fijado y guarde `west list`. Inspeccione la configuración generada para confirmar la placa, el shield, las funciones central y periférica, BLE, CherryUSB, ZMK Studio y los ajustes NVS esperados.
+2. Compile ambas imágenes en el commit fijado y guarde `west list`. Compare la configuración generada con la tabla de referencia anterior para confirmar la placa, el shield, las funciones central y periférica, BLE, CherryUSB, ZMK Studio y NVS esperados.
 3. Grabe cada imagen mediante la ruta de recuperación verificada de forma independiente para cada placa. Registre el arranque en frío y la consola antes de emparejar las mitades o el host.
 4. Establezca el enlace BLE entre las dos mitades y compruebe las 38 posiciones con las capas `default`, `lower` y `raise`. Pruebe expresamente la selección y eliminación del perfil Bluetooth y las combinaciones de desbloqueo de Studio para evitar que se activen accidentalmente durante las pruebas de escritura.
 5. Valide HID USB y ZMK Studio en la mitad izquierda y, a continuación, HID Bluetooth en el host elegido. Repita las pruebas después de un arranque en frío.
 
-**Evidencias que se deben conservar:** registro de placas y cableado, revisiones del repositorio derivado y del manifiesto, configuraciones generadas, hashes de las imágenes, registros de grabación y arranque, matriz completa de posiciones, resultados por capa, endpoint HID seleccionado y versiones del host/Studio.
+**Evidencias que se deben conservar:** añada al registro del contrato del proyecto las configuraciones generadas, los hashes de las imágenes, los registros de grabación/arranque, la matriz completa de posiciones y sus resultados por capa, el endpoint seleccionado y las versiones del host/Studio.
 
 **Criterio de salida del punto de control 1:** dos arranques en frío reproducen las 38 posiciones, las tres capas, el enlace de derecha a izquierda entre mitades y al menos un endpoint HID del host; ambas mitades se pueden recuperar de manera independiente.
 

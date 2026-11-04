@@ -87,6 +87,8 @@ Le groupe peut proposer plusieurs modèles pris en charge, tels que LSM6DSL et S
 - `LSM6DSL_INT_GPIO_BIT` et `LSM6DSL_INT2_GPIO_BIT` décrivent les broches d'interruption lorsque la carte les assigne.
 - `LSM_USING_AWT`, `LSM_USING_PEDO` et `LSM6DSL_USE_FIFO` représentent des fonctions spécifiques au composant ; ne les définissez que si le pilote sélectionné les prend en charge.
 
+Le bloc conserve la valeur par défaut `0` du guide (SPI). Pour utiliser l'exemple d'accès I2C ci-dessous, définissez `LSM6DSL_USING_I2C=1` ; si vous choisissez SPI, utilisez le code d'accès SPI correspondant.
+
 Cet exemple suit le guide SF32LB52x. Les guides d'autres familles ou branches du SDK peuvent proposer des options ou des chemins de menu différents ; vérifiez les symboles effectivement définis dans la branche cible avant de reprendre l'exemple.
 
 ### Trouver le bus et implémenter l'accès aux registres { #find-the-bus-and-implement-register-access }

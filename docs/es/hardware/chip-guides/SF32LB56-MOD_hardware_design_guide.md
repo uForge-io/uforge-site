@@ -15,10 +15,10 @@ hide:
 
 **SF32LB56-MOD** es una familia de módulos MCU Bluetooth de bajo consumo y propósito general de SiFli, basada en la serie SF32LB56xV.
 
-Esta guía toma como referencia la **especificación técnica DS5602-SF32LB56-MOD V0.3** y reúne la información específica del módulo necesaria para diseñar el esquemático, planificar la PCB, validar el hardware y preparar la producción. Incluye las variantes de memoria, la interfaz de 89 pines, los tres raíles de alimentación, las interfaces de pantalla, audio y almacenamiento, la ubicación de la antena, los requisitos de manipulación y la lista de comprobación del esquemático.
+Esta guía reúne la información específica del módulo necesaria para diseñar el esquemático, planificar la PCB, validar el hardware y preparar la producción. Sigue la **especificación técnica DS5602-SF32LB56-MOD V0.3** e incluye las variantes de memoria, la interfaz de 89 pines, los tres raíles de alimentación, las interfaces de pantalla, audio y almacenamiento, la ubicación de la antena, los requisitos de manipulación y la lista de comprobación del esquemático.
 
 !!! note "Fuente y recomendaciones"
-    Salvo que se indiquen expresamente como pautas de integración o recomendaciones de diseño, los valores técnicos siguientes se basan en la **especificación técnica DS5602-SF32LB56-MOD V0.3**.
+    Los valores técnicos y las asignaciones de pines siguen DS5602 V0.3. Las ambigüedades eléctricas o de fabricación que la propia especificación deja sin resolver se conservan en las secciones pertinentes, junto con lo que debe confirmarse antes de aprobar el diseño. Las pautas y recomendaciones de integración se distinguen de los requisitos de la fuente.
 
 !!! note "Alcance del marcado reglamentario"
     Las etiquetas suministradas para SF32LB56-MOD-N16R12N1 y SF32LB56-MOD-A128R12N1 muestran los identificadores FCC, IC, CMIIT ID y HVIN, además del marcado CE. Consulte el [resumen de marcados](../../sf32-products/modules/SF32LB56-MOD.md#regulatory-markings). Confirme los documentos de aprobación y las condiciones de antena e integración para la revisión exacta; no suponga que estos marcados cubren otras variantes o el producto final.
@@ -59,7 +59,7 @@ El módulo admite Bluetooth 5.3 y ofrece aceleración de pantalla, entrada y sal
 | CPU | HCPU hasta 240 MHz y LCPU hasta 96 MHz; ambos son Arm Cortex-M33 STAR-MC1 |
 | Conectividad inalámbrica | Bluetooth 5.3 de modo dual con BLE Audio |
 | Gráficos | ePicasso 2.0, eZip 2.0, TurboPixel, LCD 8080/SPI/Dual-SPI/Quad-SPI/DPI/RGB/JDI |
-| Audio | DAC de 24 bits, ADC Sigma-Delta de 24 bits, 2 interfaces PDM (PDM1/PDM2), cada una para 2 micrófonos mediante los canales izquierdo y derecho (hasta 4 en total), y 1 I2S |
+| Audio | DAC de 24 bits, ADC Sigma-Delta de 24 bits, 2 interfaces PDM (PDM1/PDM2); DS5602 V0.3 indica 2 entradas de micrófono digital; 1 interfaz I2S |
 | IA/DSP | Acelerador matricial de hasta 1,92 GOPS, FFT, FIR y CORDIC |
 | Almacenamiento | Opciones de Flash/PSRAM del módulo, MPI3 y compatibilidad con SD/SDIO/eMMC |
 | Seguridad | AES, HASH, CRC, TRNG, Secure Boot, eFuse de 1024 bits y PSA Certified Level 1 |
@@ -228,6 +228,8 @@ Añada resistencias en serie de 33–100 Ω en las líneas RGB de la LCD. Manten
 
 El módulo ofrece salidas DAC de audio analógico, MIC_BIAS, MIC_ADC_IN, I2S y pines compatibles con PDM. El DAC de audio es una ruta de salida de 24 bits compatible con frecuencias de muestreo de 8 kHz a 48 kHz, con una SNR y un rango dinámico de 109 dB. El ADC de audio es una ruta de entrada Sigma-Delta de 24 bits compatible con frecuencias de muestreo de 8 kHz a 48 kHz, con una SNR y un rango dinámico de 99 dB.
 
+DS5602 V0.3 indica dos entradas de micrófono digital y dos interfaces PDM (PDM1/PDM2). La figura de asignación recomendada ofrece estas opciones: PDM1_DATA en PA20 o PA64, PDM1_CLK en PA24 o PA69, PDM2_DATA en PA25 o PA71, y PDM2_CLK en PA26 o PA73. Son opciones alternativas de multiplexación de pines, no una confirmación del trazado de la placa portadora. El número de entradas e interfaces no establece el máximo de micrófonos físicos ni confirma que se admita compartir canales. Antes de diseñar un sistema con varios micrófonos, verifique el modo admitido y el mapa de pines de la placa.
+
 Aleje las pistas de audio analógico de los nodos de conmutación ruidosos, los relojes LCD y las estructuras de alimentación de la antena. Coloque los filtros de MIC_BIAS y MIC_ADC_IN cerca del circuito del micrófono conectado.
 
 #### 5.3.3 Botones { #533-buttons }
@@ -321,6 +323,8 @@ Para diseños con antena externa, la hoja de datos describe un conector de prime
 
 ### 7.1 Características eléctricas { #71-electrical-characteristics }
 
+Los valores eléctricos de esta sección siguen DS5602 V0.3. Los valores máximos absolutos son límites de estrés: superarlos puede dañar permanentemente el dispositivo; el funcionamiento fuera de las condiciones recomendadas no está garantizado, y la exposición prolongada puede afectar a la fiabilidad.
+
 <div align="center"><em>Tabla 7.1-1: Valores máximos absolutos</em></div>
 
 <div align="center" markdown>
@@ -380,10 +384,19 @@ VDD es la alimentación de E/S. VOH y VOL se miden con una carga de alta impedan
 | Modo | Condición | Corriente típica |
 | :--- | :--- | :-: |
 | BT Sniff | Intervalo de 50 ms | 196,0 µA |
+| BT Sniff | Intervalo de 100 ms | 100,1 µA |
+| BT Sniff | Intervalo de 200 ms | 52,2 µA |
+| BT Sniff | Intervalo de 500 ms | 23,4 µA |
 | BT Sniff | Intervalo de 1 s | 13,8 µA |
 | BLE ADV | Intervalo de 50 ms | 228,7 µA |
+| BLE ADV | Intervalo de 100 ms | 116,6 µA |
+| BLE ADV | Intervalo de 200 ms | 60,5 µA |
+| BLE ADV | Intervalo de 500 ms | 26,9 µA |
 | BLE ADV | Intervalo de 1 s | 15,7 µA |
 | Conexión BLE | Intervalo de 50 ms | 172,8 µA |
+| Conexión BLE | Intervalo de 100 ms | 87,9 µA |
+| Conexión BLE | Intervalo de 200 ms | 45,5 µA |
+| Conexión BLE | Intervalo de 500 ms | 20,0 µA |
 | Conexión BLE | Intervalo de 1 s | 11,5 µA |
 | Scan | Inquiry Scan o Page Scan | 36,8 µA |
 | Both Scan | Inquiry Scan y Page Scan | 64,0 µA |
@@ -391,19 +404,21 @@ VDD es la alimentación de E/S. VOH y VOL se miden con una carga de alta impedan
 
 </div>
 
+La medición BT Sniff se realizó con un iPhone 8 Plus y attempt=1. Scan y Both Scan reciben durante 28,82 ms y 57,64 ms, respectivamente, cada 1,28 s; la alimentación es PVDD + VDD_3V3. Estos datos siguen DS5602 V0.3.
+
 <div align="center"><em>Tabla 7.2-2: Corriente del procesador</em></div>
 
 <div align="center" markdown>
 
-| Carga de trabajo | Dominio | Frecuencia | Corriente | Corriente por MHz |
+| Carga de trabajo | Dominio | Frecuencia | Corriente | Incremento de corriente |
 | :--- | :--- | :-: | :-: | :-: |
 | CoreMark | HPSYS | 240 MHz | 9,38 mA | 30,92 µA/MHz |
 | CoreMark | HPSYS | 192 MHz | 7,90 mA | 30,92 µA/MHz |
-| CoreMark | HPSYS | 48 MHz | 0,92 mA | 30,92 µA/MHz |
+| CoreMark | LPSYS | 48 MHz | 0,92 mA | 15,13 µA/MHz |
 | CoreMark | LPSYS | 24 MHz | 0,55 mA | 15,13 µA/MHz |
 | WhileLoop | HPSYS | 240 MHz | 7,54 mA | 25,75 µA/MHz |
 | WhileLoop | HPSYS | 192 MHz | 6,30 mA | 25,75 µA/MHz |
-| WhileLoop | HPSYS | 48 MHz | 0,70 mA | 25,75 µA/MHz |
+| WhileLoop | LPSYS | 48 MHz | 0,70 mA | 10,63 µA/MHz |
 | WhileLoop | LPSYS | 24 MHz | 0,44 mA | 10,63 µA/MHz |
 
 </div>
@@ -419,7 +434,7 @@ VDD es la alimentación de E/S. VOH y VOL se miden con una carga de alta impedan
 | 1 | El rango de entrada de VDD_3V3 es 2,97–3,6 V; coloque un condensador de 4,7 µF cerca del pin del módulo. |
 | 2 | El rango de entrada de VDD_1V8 es 1,7–1,95 V; coloque un condensador de 4,7 µF cerca del pin del módulo. |
 | 3 | El rango de entrada de VDDIO es 1,7–3,6 V; coloque un condensador de 4,7 µF cerca del pin del módulo. |
-| 4 | El nivel de la interfaz de E/S del módulo es de 3,3 V donde así se especifica; los niveles de los periféricos conectados deben ser compatibles. |
+| 4 | El nivel de la interfaz de E/S del módulo es de 3,3 V; los niveles de los periféricos conectados deben ser compatibles. |
 | 5 | Si el módulo incorpora Flash interna, PA06, PA07, PA08, PA09, PA10 y PA11 no pueden utilizarse externamente. |
 | 6 | SDIO y MPI3 comparten recursos de E/S y no pueden utilizarse simultáneamente. |
 | 7 | PA50, PA51, PB32 y PB35 pueden recibir interrupciones mientras la MCU está en suspensión. |
@@ -431,6 +446,8 @@ VDD es la alimentación de E/S. VOH y VOL se miden con una carga de alta impedan
 | 13 | PA16 y PA17 multiplexados como DBG_UART son pines de descarga/depuración del programa y requieren resistencias en serie de 100 Ω. |
 
 </div>
+
+DS5602 V0.3 da a VDDIO un rango operativo de 1,7–3,6 V y especifica que PA00–PA11 permanecen fijos a 3,3 V, independientemente de VDDIO; sin embargo, el punto 4 de la lista indica de forma general que el nivel de la interfaz de E/S del módulo es de 3,3 V. La especificación no aclara si esto se aplica a todos los pines de E/S. No presuponga compatibilidad universal con 3,3 V: confirme con SiFli el dominio eléctrico de cada pin y periférico seleccionado.
 
 ### 7.4 Almacenamiento, manipulación y montaje { #74-storage-handling-and-assembly }
 
@@ -451,7 +468,7 @@ VDD es la alimentación de E/S. VOH y VOL se miden con una carga de alta impedan
 </div>
 
 !!! info "Figura 7.4-1: Perfil de temperatura de reflujo"
-    Consulte la figura 9-1 de DS5602 V0.3.
+    La figura 9-1 de DS5602 V0.3 especifica una rampa de 25–150 °C durante 60–90 s a 1–3 °C/s; precalentamiento de 150–200 °C durante 60–120 s; 60–90 s por encima de 217 °C; un pico de 235–250 °C; y enfriamiento desde el pico hasta 180 °C a -1 a -5 °C/s. Indica soldadura SAC305. La leyenda inferior da un intervalo de 30–70 s en el pico, mientras que el gráfico indica por separado un tiempo de soldadura >30 s. La especificación no concilia ambas anotaciones. No las confunda y confirme el perfil de producción.
 
 ## 8. Documentos relacionados { #8-related-documents }
 
@@ -474,7 +491,7 @@ VDD es la alimentación de E/S. VOH y VOL se miden con una carga de alta impedan
 
 ### 9.1. Apéndice A. Referencia para la planificación de pines { #appendix-a-pin-planning-reference }
 
-DS5602 V0.3 incluye la tabla completa de definición de los 89 pines y la distribución de pines vista desde arriba. La tabla siguiente destaca los pines y grupos de señales que suelen afectar al riesgo del esquemático, al acceso de arranque/depuración o a la planificación de recursos compartidos.
+DS5602 V0.3 incluye la tabla de definición de los 89 pines y el pinout visto desde arriba. La tabla siguiente destaca los pines y grupos de señales que suelen afectar al riesgo del esquemático, al acceso de arranque/depuración o a la planificación de recursos compartidos. Confirme el pinout completo con la ficha de la revisión exacta del módulo.
 
 <div align="center"><em>Tabla 9.1-1: Pines y grupos de señales críticos</em></div>
 
@@ -488,7 +505,7 @@ DS5602 V0.3 incluye la tabla completa de definición de los 89 pines y la distri
 | Pin 26 VDD_3V3 | Raíl de 3,3 V, rango de funcionamiento de 2,97–3,6 V. |
 | Pin 27 VDD_1V8 | Raíl de 1,8 V, rango de funcionamiento de 1,7–1,95 V. |
 | Pin 29 VDDIO | Raíl de E/S, rango de funcionamiento de 1,7–3,6 V. |
-| Pines 43/44 | Salidas DAC diferenciales AU_DACP / AU_DACN. |
+| Pines 43/44 | Salidas DAC diferenciales AU_DAC1P_OUT / AU_DAC1N_OUT. |
 | Pin 46 MIC_BIAS | Salida de polarización del micrófono. |
 | Pin 47 MIC_ADC_IN | Entrada ADC para micrófono analógico. |
 | Pines 67–72 PA06–PA11 | Conectados por defecto a la Flash interna; no disponibles externamente. |
@@ -509,7 +526,7 @@ DS5602 V0.3 incluye la tabla completa de definición de los 89 pines y la distri
 
 | Versión | Fecha | Notas |
 | :--- | :--- | :--- |
-| 0.1 | 2026-07 | Versión inicial de la guía de diseño de hardware del módulo SF32LB56-MOD, basada en DS5602-SF32LB56-MOD V0.3. |
+| 0.1 | 2026-07 | Versión inicial de la guía, basada en DS5602 V0.3. |
 
 </div>
 

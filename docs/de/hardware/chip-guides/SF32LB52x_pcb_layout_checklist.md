@@ -20,7 +20,7 @@ tags:
 Die ursprüngliche PCB-Checkliste enthält keine Spalte „Gilt für“. Wenden Sie jeden Prüfpunkt nur an, wenn die gewählte Variante und Schaltung den genannten Pin, die Versorgung oder die Funktion enthalten; kennzeichnen Sie nicht vorhandene Funktionen als nicht zutreffend. Die ursprünglichen Kategorien Erforderlich/Optional bleiben erhalten. Optional bedeutet jedoch nicht, dass ein laut Bauteilspezifikation notwendiges Bauteil entfallen darf.
 
 !!! note "Kupferbehandlung am Quarz in der Quelle"
-    Takt-Prüfpunkt 3 der Checkliste legt nicht fest, auf welchen Lagen ein Kupfer-Freihaltebereich erforderlich ist. Der Anwendungshinweis für batteriegespeiste Varianten widerspricht sich: Im Taktabschnitt soll die L2-Massefläche unter dem Quarz entfernt werden; im PCB-Routing-Abschnitt sind dagegen Ebenenaussparungen und Kupferausschnitte auf der oberen und den angrenzenden Lagen verboten. Das Routing-Modell zeigt eine durchgehende L2-Massefläche. Der separate PCB-Layout-Leitfaden wiederholt das Verbot von Aussparungen. Klären Sie die Ausführung für den gewählten Lagenaufbau vor der Freigabe mit SiFli, statt sie aus der Checkliste abzuleiten.
+    Takt-Prüfpunkt 3 der Checkliste legt nicht fest, auf welchen Lagen ein Kupfer-Freihaltebereich erforderlich ist. Der Anwendungshinweis für batteriegespeiste Varianten widerspricht sich: Im Taktabschnitt wird ausdrücklich verlangt, mindestens das GND-Kupfer der zweiten Lage unter dem Quarz zu entfernen. Der spätere PCB-Routing-Abschnitt fordert dort auf der oberen und den angrenzenden Lagen eine „禁空“-Freihaltung und verbietet andere Leiterbahnen; die englische Fassung untersagt ausdrücklich Ebenenaussparungen und Kupferausschnitte. Der separate PCB-Layout-Leitfaden enthält dieselbe Freihalte- und Routing-Anweisung, und seine englische Fassung untersagt ebenfalls Ebenenaussparungen und Kupferausschnitte. Die Routing-Modelle beider Leitfäden zeigen jedoch eine durchgehende L2-Massefläche. Stimmen Sie den gewählten Lagenaufbau vor der Freigabe mit SiFli ab, statt aus der Checkliste darauf zu schließen.
 
 !!! note "Prüfung der Leiterbahnbreiten"
     Die Arbeitsmappe gibt VCC ≥12 mil, BUCK-Leiterbahnen ≥10 mil und RF ≥10 mil vor. Abschnitt 6 enthält strengere Vorgaben für VCC und BUCK sowie die Empfehlung RF >10 mil. Erfüllen Sie beide jeweils zutreffenden Vorgabensätze einschließlich der 50-Ω-Anforderung für RF. Der Mindestwert der Checkliste ersetzt nicht die detaillierten Layoutvorgaben.
@@ -120,10 +120,10 @@ Die ursprüngliche PCB-Checkliste enthält keine Spalte „Gilt für“. Wenden 
 | 1 | RF-Leiterbahn erfüllt die Anforderung an den unsymmetrischen 50-Ω-Wellenwiderstand | Erforderlich |
 | 2 | RF-Leiterbahnbreite ≥10 mil | Erforderlich |
 | 3 | Mindestens 60 mil Massefläche auf jeder Seite der RF-Leiterbahn, mit ausreichend Masse-Durchkontaktierungen zur Hauptmasse | Erforderlich |
-| 4 | Reserviertes π-Antennenanpassnetzwerk nahe der Chipseite platziert | Erforderlich |
+| 4 | Reserviertes π-förmiges Antennenanpassnetzwerk nahe der Chipseite platziert | Erforderlich |
 | 5 | Durchgehende GND-Fläche unter dem RF-Signal | Erforderlich |
-| 6 | Keine Hochgeschwindigkeits-Digitalsignalleiterbahnen kreuzen unter dem RF-Signal | Erforderlich |
-| 7 | Keine Stromversorgungsleiterbahnen mit hohem di/dt kreuzen unter dem RF-Signal | Erforderlich |
+| 6 | Unter dem RF-Signal verlaufen keine Leiterbahnen für digitale Hochgeschwindigkeitssignale | Erforderlich |
+| 7 | Unter dem RF-Signal verlaufen keine Versorgungsleiterbahnen mit hohem di/dt | Erforderlich |
 
 </div>
 

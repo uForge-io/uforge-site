@@ -428,6 +428,9 @@ RF 匹配网络应靠近芯片端放置，而不是靠近天线端。AVDD_BRF �
 
 </div>
 
+!!! warning "核实 SF32LB56xV MCU8080 接口的 RDX 说明"
+    SiFli 引脚表将 RDX 描述为“读选通信号，用于写入数据”，而 SiFli 的 MCU/8080 接口说明称，翻转 RDX 可读取数据。这两处描述存在冲突；在依据目标显示屏控制器文档确认其实际用途前，请勿据此分配该信号。
+
 <div align="center"><em>表 5.5-7：SF32LB56xV DPI 显示接口</em></div>
 
 <div align="center" markdown>

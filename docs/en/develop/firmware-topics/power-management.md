@@ -22,10 +22,10 @@ Do not optimize power from isolated code snippets. Measure product scenarios: bo
 
 ## Useful Starting Points { #useful-starting-points }
 
-- SDK power examples.
-- CPU usage profiling.
-- RT-Thread shell inspection.
-- Board-level current measurement.
+- [SDK power examples](../../learn/low-power/low-power-sdk-examples.md).
+- [CPU usage profiling](../../getting-started/tutorials/advanced.md).
+- [RT-Thread shell inspection](../platforms/sifli-sdk/debugging-diagnostics.md).
+- [Board-level current measurement](../../learn/low-power/measurement-and-validation.md).
 
 ## Measurement Notes { #measurement-notes }
 

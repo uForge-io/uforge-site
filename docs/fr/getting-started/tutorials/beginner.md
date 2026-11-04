@@ -11,7 +11,7 @@ Ces tutoriels font suite à la [prise en main](../index.md). Vous devriez déjà
 
 Les exemples prennent pour référence une carte de la gamme SF32LB52-DevKit-LCD, telle que `sf32lb52-lcd_n16r8`. Si vous utilisez une autre carte, remplacez son nom dans la commande de compilation et vérifiez les broches, les instances de périphériques et la disposition mémoire à partir de ses fichiers de support.
 
-Cette série vous aide à acquérir de bonnes habitudes : valider un comportement sur la carte, définir un critère de réussite clair et conserver une configuration de référence fonctionnelle avant de passer au périphérique suivant. Elle est conçue pour les personnes qui découvrent le SDK SF32, même si elles connaissent déjà le C embarqué.
+Cette série vous aide à acquérir de bonnes habitudes : valider un comportement sur la carte et conserver une configuration de référence fonctionnelle avant de passer au périphérique suivant. Elle est conçue pour les personnes qui découvrent le SDK SF32, même si elles connaissent déjà le C embarqué.
 
 ## Avant de commencer { #before-you-start }
 
@@ -157,7 +157,7 @@ Le shell **FinSH** de RT-Thread fournit une invite interactive `msh>` sur le mê
 
 **Exemple de départ :** `example/rt_device/adc/channel`
 
-Pour cet exemple RT-Thread, activez `BSP_USING_ADC`, `BSP_USING_ADC1` et `RT_USING_ADC` ; sinon, le SDK n'enregistrera pas `bat1`. Sur le SF32LB52, le canal 7 est relié en interne à VBAT : ce n'est donc pas une entrée générique pour capteur externe. Choisissez un canal ADC et un multiplexage de broche pris en charge par la puce et la carte concernées. Dans la configuration documentée pour le SF32LB52, le canal 0 utilise PA28. Dans l'exemple actuel du SDK SiFli, `rt_adc_read()` renvoie une tension mise à l'échelle en unités de 0,1 mV, et non des comptes ADC bruts. Vérifiez l'unité et la conversion pour la puce et la version du pilote utilisées.
+Pour cet exemple RT-Thread, activez `BSP_USING_ADC`, `BSP_USING_ADC1` et `RT_USING_ADC` ; sinon, le SDK n'enregistrera pas `bat1`. Sur le SF32LB52, le canal 7 est relié en interne à VBAT : ce n'est donc pas une entrée générique pour capteur externe. Choisissez un canal ADC et un multiplexage de broche pris en charge par la puce et la carte concernées. Dans la configuration documentée pour le SF32LB52, le canal 0 utilise PA28. Dans l'exemple actuel du SDK SiFli, `rt_adc_read()` calcule par défaut la moyenne de 22 échantillons et renvoie une tension mise à l'échelle en unités de 0,1 mV, et non des comptes ADC bruts. Vérifiez la moyenne, l'unité et la conversion pour la puce et la version du pilote utilisées.
 
 ```c
 rt_adc_device_t adc = (rt_adc_device_t)rt_device_find("bat1");

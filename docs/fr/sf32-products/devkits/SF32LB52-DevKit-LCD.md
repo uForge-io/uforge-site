@@ -29,12 +29,13 @@ La carte réunit sur une même plateforme d'évaluation le module MCU, les conne
 - Prise en charge de LCD QSPI/SPI/DSPI via un connecteur FPC à 22 broches
 - Prise en charge de LCD MCU/8080 8 bits via le FPC et l'embase d'extension à 40 broches
 - Prise en charge d'un panneau tactile I2C
-- USB-C pour le téléchargement/débogage USB-UART et l'alimentation de la carte
+- USB-C pour le téléchargement et le débogage via le pont USB-UART CH343P embarqué, ainsi que pour l'alimentation de la carte
 - Interface USB-C distincte pour les cas d'usage USB 2.0 FS
 - Microphone MEMS et amplificateur de puissance audio de classe D embarqués
 - Emplacement pour carte MicroSD utilisant le SPI
 - Connecteur de batterie et chargeur linéaire ETA9640P
 - Embase d'extension à 40 broches pour les signaux d'affichage, de GPIO, de stockage, d'audio et d'alimentation
+- Interrupteur embarqué, boutons de fonction et de réinitialisation, indicateurs RVB/de charge/de GPIO/d'alimentation et circuit de commande du rétroéclairage LCD
 
 ## Quand utiliser cette carte { #when-to-use-this-board }
 
@@ -108,7 +109,7 @@ Vérifiez la sérigraphie et le paquet de conception de la révision exacte de l
 
 - Haut-parleur
 - Carte TF
-- Batterie Li-ion/Li-polymère à un élément, généralement de 450 mAh à 500 mAh
+- Batterie Li-ion/Li-polymère à un élément ; capacité recommandée par SiFli : 450 mAh
 - Second câble USB lorsque le débogage UART et le test USB natif sont nécessaires en même temps
 
 ### Installation de base { #basic-setup }

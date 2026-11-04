@@ -1,6 +1,6 @@
 ---
 icon: lucide/waypoints
-description: "Compare os roteiros de projetos de referência da μForge: avalie fluxos reproduzíveis de validação de hardware e software e siga o mais próximo do seu produto."
+description: "Projetos de referência da μForge: compare fluxos de validação de hardware e software e escolha o roteiro mais próximo do seu produto."
 tags:
     - Hardware
     - Projeto de referência

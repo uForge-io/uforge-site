@@ -36,14 +36,22 @@ La placa mide 51 mm × 20,32 mm y expone los recursos principales del SF32LB52x 
 
 La variante N4 es adecuada para productos compactos de control y Bluetooth, así como para aplicaciones con interfaces de usuario sencillas. N16R16 combina 16 MB de OPI-PSRAM con 16 MB de QSPI-NOR, mientras que A128R16 combina 16 MB de OPI-PSRAM con 128 MB de QSPI-NAND. Ambas variantes sirven para aplicaciones que necesitan recursos gráficos de mayor tamaño, sistemas de archivos externos o una zona de trabajo o búfer de imagen en PSRAM.
 
-**Discrepancia entre fuentes; verifique antes de seleccionar:** La [guía detallada de la placa Nano](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html) denomina `R16N16 V1.0.0` a su configuración con 16 MB de OPI-PSRAM y 16 MB de NOR. La [guía vigente de modelos de placas](https://wiki.sifli.com/en/board/devkit_guide.html) identifica esa misma configuración como `N16R16` y especifica por separado `A128R16` con 16 MB de OPI-PSRAM y 128 MB de QSPI-NAND. La guía detallada no describe A128R16; para ese SKU, use la información de la guía de modelos y no extrapole otros detalles de N16R16. Antes de elegir firmware o memoria, compruebe la serigrafía y el esquemático/BOM actualizados.
+**Discrepancia entre fuentes; verifique antes de seleccionar:** La [guía detallada de la placa Nano](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html) denomina `R16N16 V1.0.0` a su configuración con 16 MB de OPI-PSRAM y 16 MB de NOR. La [guía vigente de modelos de placas](https://wiki.sifli.com/en/board/devkit_guide.html) identifica esa misma configuración como `N16R16` y especifica por separado `A128R16` con 16 MB de OPI-PSRAM y 128 MB de QSPI-NAND.
 
-Las fuentes de SiFli también difieren ligeramente en las dimensiones de la placa Nano: la guía detallada indica 21 × 51 mm, mientras que la guía de modelos especifica 51 × 20,32 mm. La dimensión de 51 mm coincide, pero la medida del lado corto difiere en 0,68 mm. Esta página adopta el valor más preciso de la guía de modelos; antes de diseñar una carcasa o una placa portadora, compruebe el plano mecánico de la revisión concreta.
+La guía detallada no describe A128R16; para ese SKU, use la información de la guía de modelos y no extrapole otros detalles de N16R16.
+
+Antes de elegir firmware o memoria, compruebe la serigrafía y el esquemático/BOM actualizados.
+
+**Discrepancia en las dimensiones:** la guía detallada indica 21 × 51 mm, mientras que la guía de modelos especifica 51 × 20,32 mm. La dimensión de 51 mm coincide, pero la medida del lado corto difiere en 0,68 mm. Esta página adopta el valor más preciso de la guía de modelos.
+
+Antes de diseñar una carcasa o una placa portadora, compruebe el plano mecánico de la revisión concreta.
 
 ## Aspectos destacados de la placa { #board-highlights }
 
 - Placa compacta de 51 mm × 20,32 mm
 - Semiorificios metalizados en los bordes para soldar la placa a una placa portadora
+- Cristales de 48 MHz y 32,768 kHz, además de una antena PCBA integrada
+- 17 GPIO expuestos por el grupo LCC y 13 por el grupo de pads LGA; recursos para 3 UART, 4 I2C, 2 GPTIM, 2 SPI y 3 GPADC
 - Alimentación USB Type-C y descarga/depuración USB-a-UART a través de CH340N
 - Pines GPIO, UART, I2C, SPI, GPADC, PWM, I2S, PDM y pines capaces de reactivar el sistema
 - Compatibilidad con LCD QSPI mediante FPC de 16 pines; normalmente se necesita un cable adaptador de 22 a 16 pines
@@ -58,7 +66,7 @@ Las fuentes de SiFli también difieren ligeramente en las dimensiones de la plac
 Elija SF32LB52-DevKit-Nano cuando quiera evaluar un prototipo con dimensiones y montaje próximos a los del producto final.
 
 - Construir prototipos compactos de Bluetooth y pantalla
-- Soldar la placa en una PCB portador
+- Soldar la placa en una PCB portadora
 - Validar una asignación de pines representativa del producto antes de diseñar una placa propia
 - Comparar la variante con solo Flash NOR y las variantes con PSRAM y Flash QSPI-NOR o QSPI-NAND
 - Poner en marcha funciones de LCD, audio, sensor y USB en una huella pequeña
@@ -105,11 +113,11 @@ Use la interfaz UART USB Type-C para la descarga de firmware y los registros ser
 
 ## Resumen de pines de borde con semiorificios metalizados { #castellated-pin-summary }
 
-La placa Nano expone dos grupos de terminales en los bordes. El primero incluye señales de audio, SPI1, UART de depuración, alimentación asociada al USB y pines compatibles con GPADC. El segundo incluye SPI2, USB FS, GPIO aptos para despertar el sistema y alimentación.
+La placa Nano expone dos grupos de pines LCC en los bordes: J1, a la izquierda, reúne principalmente audio, SPI1, UART de depuración y pines compatibles con GPADC; J2, a la derecha, reúne principalmente SPI2, USB FS, GPIO aptos para despertar el sistema y alimentación. Todos los GPIO admiten multiplexación para UART, I2C y GPTIM. Las tablas muestran solo algunas funciones, no todas las opciones de multiplexación ni los estados de pull al reiniciar; consulte el esquemático y los archivos de diseño antes de diseñar el circuito.
 
-### Señales de borde del lado frontal { #front-side-edge-signals }
+### J1 — Señales del borde LCC izquierdo { #front-side-edge-signals }
 
-<div align="center"><em>Mapa de señales de borde del lado frontal</em></div>
+<div align="center"><em>Mapa de señales del borde LCC izquierdo J1</em></div>
 
 <div align="center" markdown>
 
@@ -134,9 +142,9 @@ La placa Nano expone dos grupos de terminales en los bordes. El primero incluye 
 
 </div>
 
-### Señales de borde del lado posterior { #back-side-edge-signals }
+### J2 — Señales del borde LCC derecho { #back-side-edge-signals }
 
-<div align="center"><em>Mapa de señales de borde del lado posterior</em></div>
+<div align="center"><em>Mapa de señales del borde LCC derecho J2</em></div>
 
 <div align="center" markdown>
 
@@ -163,7 +171,7 @@ La placa Nano expone dos grupos de terminales en los bordes. El primero incluye 
 
 ## Interfaz de LCD { #lcd-interface }
 
-La placa admite paneles LCD QSPI mediante una interfaz FPC de 16 pines. La documentación original indica que puede conectarse a la pantalla AMOLED Huangshan Pi de 1,85 pulgadas mediante un cable FPC adaptador de 22 a 16 pines.
+La placa admite los modos LCD SPI, DSPI y Quad-SPI, incluido QSPI en modo DDR, mediante un conjunto de señales FPC de 16 pines y paso de 0,5 mm. La documentación original indica que puede conectarse a la pantalla AMOLED Huangshan Pi de 1,85 pulgadas mediante un cable FPC adaptador de 22 a 16 pines.
 
 ![Cable adaptador FPC de 22 pines a 16 pines](assets/sf32lb52x/22p-to-16p.png){ loading="lazy" }
 <div align="center"><em>Cable adaptador FPC de 22 pines a 16 pines</em></div>
@@ -214,9 +222,11 @@ La variante N16R16 incorpora 16 MB de Flash QSPI-NOR externa. El grupo de pines 
 
 Estos pines pueden estar ocupados por la Flash montada según la variante. Verifique el ensamblaje exacto de la placa antes de usarlos como pines de expansión.
 
+La guía detallada de la placa también enumera opciones de huella WSON8: SPI NOR de 8 × 6 mm o 6 × 5 mm, y SPI NAND y SD NAND de 8 × 6 mm. El montaje de Flash varía según la placa; compruebe el esquemático y la lista de materiales de la revisión concreta antes de elegir un dispositivo.
+
 ## Expansión de audio { #audio-expansion }
 
-La placa Nano expone entrada de micrófono analógico, polarización de micrófono y salida de audio analógico diferencial. Añada un circuito de micrófono externo y un amplificador de potencia de audio según lo requiera el producto objetivo.
+La placa Nano expone entrada de micrófono analógico, polarización de micrófono, señales de micrófono digital PDM y salida de audio analógico diferencial. La entrada analógica admite un micrófono analógico o de silicio. Para accionar un altavoz, añada un amplificador de potencia de audio externo de clase AB o clase D.
 
 ## Objetivos de compilación del SDK { #sdk-build-targets }
 

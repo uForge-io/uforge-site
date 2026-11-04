@@ -53,6 +53,7 @@ Utilisez les variantes NOR seule pour les produits compacts axés sur le Bluetoo
 - Connecteur FPC d'affichage 16 broches au pas de 0,5 mm ; les interfaces d'affichage comprennent SPI, DSPI et Quad-SPI, avec prise en charge du QSPI en mode DDR
 - Signaux I2C de l'écran tactile
 - Microphone analogique et broches de sortie audio différentielle
+- Entrée de microphone numérique PDM
 - Une LED utilisateur
 - Touche d'alimentation et touche de fonction
 - Points de test pour mesurer le courant sur un seul rail ; SiFli documente aussi des tests de consommation de la MCU seule, du système minimal et de la carte entière
@@ -84,6 +85,8 @@ Pour mesurer le courant d'un seul rail, placez un ampèremètre en série avec l
 Lorsque l'USB Type-C est connecté, la carte peut aussi fournir des sorties 3,3 V, 1,8 V et 5 V sur certaines broches du connecteur. Confirmez le sens requis avant de raccorder des circuits externes.
 
 La carte comprend un interrupteur d'alimentation. Le signal RTS# du CH340N peut commander l'activation de la carte, ce qui permet à l'outil hôte de réinitialiser la MCU pendant les opérations de téléchargement ou de débogage.
+
+Lorsque la carte est alimentée par USB Type-C, le LDO embarqué convertit le VBUS de 5 V en 3,3 V.
 
 ## Téléchargement et débogage { #download-and-debug }
 
@@ -168,6 +171,39 @@ La carte expose deux embases de bord à 24 broches. Le premier côté est consac
 
 </div>
 
+<div align="center"><em>Tableau : fonctions détaillées et résistances de rappel de J1</em></div>
+
+<div align="center" markdown>
+
+| Broche | Nom de broche | Fonction par défaut au reset et fonctions multiplexées | Pull |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | Masse |  |
+| 2 | PA_44 | **PA44**, UART, I2C, GPTIM, WKUP20 | PD |
+| 3 | PA_43 | **PA43**, UART, I2C, GPTIM, WKUP19 | PD |
+| 4 | PA_42 | **PA42**, UART, I2C, GPTIM, WKUP18 | PU |
+| 5 | PA_41 | **PA41**, UART, I2C, GPTIM, WKUP17 | PU |
+| 6 | PA_40 | **PA40**, UART, I2C, GPTIM, SPI2_CS, WKUP16 | PU |
+| 7 | PA_39 | **PA39**, UART, I2C, GPTIM, SPI2_CLK, WKUP15 | PU |
+| 8 | PA_38 | **PA38**, UART, I2C, GPTIM, SPI2_DI, WKUP14 | PD |
+| 9 | PA_37 | **PA37**, UART, I2C, GPTIM, SPI2_DIO, WKUP13 | PD |
+| 10 | PA_36 | **PA36**, UART, I2C, GPTIM, USB_DM, WKUP12 | PD |
+| 11 | PA_35 | **PA35**, UART, I2C, GPTIM, USB_DP, WKUP11 | PD |
+| 12 | PA_31 | **PA31**, UART, I2C, GPTIM, GPADC3 | PD |
+| 13 | PA_30 | **PA30**, UART, I2C, GPTIM, I2S1_LRCK, GPADC2 | PD |
+| 14 | PA_29 | **PA29**, UART, I2C, GPTIM, SPI1_CS, I2S1_BCK, GPADC1 | PD |
+| 15 | PA_28 | **PA28**, UART, I2C, GPTIM, SPI1_CLK, I2S1_SDI, GPADC0 | PD |
+| 16 | GND | Masse |  |
+| 17 | 3.3V | Entrée 3,3 V lorsque l'USB Type-C est déconnecté, sortie lorsqu'il est connecté |  |
+| 18 | PA_27 | **PA27**, UART, I2C, GPTIM, WKUP3 | PU |
+| 19 | PA_26 | **PA26**, UART, I2C, GPTIM, WKUP2 | PU |
+| 20 | PA_25 | **PA25**, UART, I2C, GPTIM, SPI1_DI, I2S1_SDO, WKUP1 | PD |
+| 21 | PA_24 | **PA24**, UART, I2C, GPTIM, SPI1_DIO, I2S1_MCLK, WKUP0 | PD |
+| 22 | PA_34 | **PA34**, UART, I2C, GPTIM, GPADC6, WKUP10 | PD |
+| 23 | PA_33 | **PA33**, UART, I2C, GPTIM, GPADC5 | PD |
+| 24 | PA_32 | **PA32**, UART, I2C, GPTIM, GPADC4 | PD |
+
+</div>
+
 ### Embase LCD, audio et débogage { #lcd-audio-and-debug-header }
 
 <div align="center"><em>Affectation des broches de l'embase LCD, audio et débogage</em></div>
@@ -186,9 +222,44 @@ La carte expose deux embases de bord à 24 broches. Le premier côté est consac
 
 </div>
 
+<div align="center"><em>Tableau : fonctions détaillées et résistances de rappel de J2</em></div>
+
+<div align="center" markdown>
+
+| Broche | Nom de broche | Fonction par défaut au reset et fonctions multiplexées | Pull |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | Masse |  |
+| 2 | PA_00 | **PA00**, UART, I2C, GPTIM, LCD_RST | PD |
+| 3 | PA_01 | **PA01**, UART, I2C, GPTIM, BL_PWM | PD |
+| 4 | PA_02 | **PA02**, UART, I2C, GPTIM, LCD_TE, I2S1_MCLK | PD |
+| 5 | PA_03 | **PA03**, UART, I2C, GPTIM, LCD_CS, I2S1_SDO | PU |
+| 6 | PA_04 | **PA04**, UART, I2C, GPTIM, LCD_CLK, I2S1_SDI | PD |
+| 7 | PA_05 | **PA05**, UART, I2C, GPTIM, LCD_D0, I2S1_BCK | PD |
+| 8 | PA_06 | **PA06**, UART, I2C, GPTIM, LCD_D1, I2S1_LRCK | PD |
+| 9 | PA_07 | **PA07**, UART, I2C, GPTIM, LCD_D2, PDM1_CLK | PD |
+| 10 | PA_08 | **PA08**, UART, I2C, GPTIM, LCD_D3, PDM1_DAT | PD |
+| 11 | PA_09 | **PA09**, UART, I2C, GPTIM, CTP_INT | PD |
+| 12 | MIC_ADC | Signal d'entrée MIC |  |
+| 13 | MIC_BIAS | Tension de polarisation MIC |  |
+| 14 | DACP | Signal de sortie audio analogique |  |
+| 15 | DACN | Signal de sortie audio analogique |  |
+| 16 | GND | Masse |  |
+| 17 | 1.8V | Entrée 1,8 V lorsque l'USB Type-C est déconnecté, sortie lorsqu'il est connecté |  |
+| 18 | PA_10 | **PA10**, UART, I2C, GPTIM, CTP_RST | PD |
+| 19 | PA_11 | **PA11**, UART, I2C, GPTIM, CTP_SDA | PU |
+| 20 | PA_20 | **PA20**, UART, I2C, GPTIM, CTP_SCL | PD |
+| 21 | PA_21 | **PA21**, UART, I2C, GPTIM | PD |
+| 22 | PA_18 | **UART0_RXD**, port de débogage et de téléchargement, PA18, SWDIO, I2C, GPTIM | PU |
+| 23 | PA_19 | **UART0_TXD**, port de débogage et de téléchargement, PA19, SWCLK, I2C, GPTIM | Aucun |
+| 24 | 5V | Entrée 5 V lorsque l'USB Type-C est déconnecté, sortie lorsqu'il est connecté |  |
+
+</div>
+
 ## Broches de la flash externe et de l'interface SDIO { #external-flash-and-sdio-pins }
 
 Certaines variantes comprennent un Flash QSPI-NOR externe de 16 Mo. Le groupe de broches partagé stockage/SDIO est le suivant :
+
+Le guide d'origine de la carte répertorie aussi les options de boîtier suivantes pour la Flash externe ; le montage réel dépend de la variante et de sa BOM : Flash SPI NOR en WSON8-8x6mm ou WSON8-6x5mm, Flash SPI NAND en WSON8-8x6mm et SD NAND en WSON8-8x6mm.
 
 <div align="center"><em>Groupe de broches de la flash externe et de l'interface SDIO</em></div>
 
@@ -210,6 +281,8 @@ Vérifiez si ces broches sont déjà utilisées par la flash montée avant de le
 ## Extension audio { #audio-expansion }
 
 La carte achemine la polarisation et l'entrée du microphone analogique ainsi que la sortie différentielle du DAC. Le microphone et l'amplificateur de classe AB/D qui pilote le haut-parleur sont externes ; choisissez-les en fonction du chemin audio visé.
+
+La carte prend aussi en charge l'entrée d'un microphone numérique PDM : PA07 est multiplexée avec `PDM1_CLK` et PA08 avec `PDM1_DAT`.
 
 ## Cibles de compilation du SDK { #sdk-build-targets }
 

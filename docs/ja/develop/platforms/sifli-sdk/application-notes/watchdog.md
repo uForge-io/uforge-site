@@ -13,14 +13,14 @@ SiFli SDKのウォッチドッグ資料は、HALが公開するハードウェ�
 <em>表: ファミリー別にHAL資料が示すウォッチドッグ動作</em>
 
 | ファミリー | HALに記載されたウォッチドッグ動作 | HALガイドに記載されたクロック |
-|---|---|
+|---|---|---|
 | SF32LB52x | HALガイドには、HCPUとLCPUに専用ウォッチドッグがあり、それぞれ割り込みまたは担当サブシステムのリセットを行えるとあります。また、チップ全体をリセットするシステムIWDTも備えます。 | カウンターは32Kクロックを基準に説明されています。52x固有のクロック選択肢は記載されていません。 |
 | SF32LB55x | HCPUのWDT1とLCPUのWDT2は割り込みを生成できます。ハードウェアリセットの対象はそれぞれのサブシステムに限られます。システムIWDTは割り込みを生成せず、チップ全体をリセットできます。 | RC10Kまたは32K LXTを選択できます。 |
 | SF32LB56x / SF32LB58x | HALガイドによると、WDT1/WDT2はチップ全体をリセットする機能も備えます。 | RC10Kを使用し、32K低消費電力クロックからは取得しません。 |
 </div>
 
 !!! warning "RT-Threadウォッチドッグ使用ガイドの適用範囲"
-    [ウォッチドッグ使用ガイド](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/watchdog.html)は`sf32lb52x`のパスで公開されていますが、本文ではSF32LB55Xを明記しています。以下に示す30秒の既定値、IDLEスレッドからのキック、スリープ時の動作、アプリケーション層のリセット手順は、同ガイドに記載された55xの設定に対するものです。SF32全ファミリー共通の保証として扱わず、対象ファミリーの資料と生成された設定で確認してください。
+    [ウォッチドッグ使用ガイド](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/watchdog.html)は`sf32lb52x`のパスで公開されていますが、本文ではSF32LB55Xを明記しています。以下に示す30秒の既定値、IDLEスレッドからのキック、スリープ時の動作、リセット時の動作は、同ガイドに記載された55xの設定に対するものです。SF32全ファミリー共通の保証として扱わず、対象ファミリーの資料と生成された設定で確認してください。
 
 ## ウォッチドッグを有効化・設定する { #enable-and-configure-the-watchdog }
 
@@ -60,6 +60,8 @@ rt_hw_watchdog_pet();
 - HCPUはシステムウォッチドッグを使います。タイムアウトするとチップ全体が再起動します。
 - LCPUはLCPUサブシステムのウォッチドッグを使います。タイムアウトするとまず割り込みが発生し、その割り込みハンドラーがソフトウェアによるチップ全体の再起動を実行します。
 
+SiFli Wikiのウォッチドッグに関する説明では、`Standby`時もウォッチドッグのハードウェア自体は電源断されず、RT-ThreadドライバーがWDTを停止し、resume経路で再初期化してカウントを再開すると補足されています。ここでの「無効化」はソフトウェアによる停止であり、ウォッチドッグ・ハードウェアの電源遮断を意味しません。
+
 ## 検証手順 { #validation-sequence }
 
 1. チップファミリー、SDKリビジョン、タイムアウト、キックを担当する処理、スリープモードを記録します。
@@ -74,5 +76,6 @@ rt_hw_watchdog_pet();
 - [ウォッチドッグ使用ガイド（中国語、同じSF32LB52xのパスで公開。本文はSF32LB55Xを明記）](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/watchdog.html)
 - [SF32LB52x HAL WDTガイド（英語）](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/hal/wdt.html)
 - [SF32LB55x HAL WDTガイド（中国語、56x/58xの比較情報を含む）](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/hal/wdt.html)
+- [OpenSiFli SiFli-Wiki: ウォッチドッグ関連の補足（中国語）](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/faq/mcu/wdt.md)
 
 次のファミリー別ウォッチドッグ・アプリケーションノートのパスは、現時点で確認できていません: `sf32lb55x/app_note/watchdog.html`、`sf32lb56x/app_note/watchdog.html`、`sf32lb58x/app_note/watchdog.html`。検索結果や直接アクセスで確認できないことは、これらのパスが404を返すことを意味しません。

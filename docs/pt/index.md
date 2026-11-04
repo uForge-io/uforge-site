@@ -144,7 +144,7 @@ hide:
 
 ---
 
-## MCUs SF32 com suporte [^1] { #supported-sf32-mcus .uf-center-heading }
+## Famílias de MCUs SF32 [^1] { #supported-sf32-mcus .uf-center-heading }
 
 <div class="grid cards uf-mcu-grid" markdown>
 

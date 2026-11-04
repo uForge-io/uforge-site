@@ -22,7 +22,7 @@ Esta ruta reúne BLE, audio, pantalla, teclas, supervisión de batería y compor
 
 «Hasta ocho dispositivos y tres hablantes simultáneos» es un límite de la implementación original, no una capacidad de producto validada para todas las distancias, interferencias, pérdidas de paquetes y patrones de concurrencia. El material del proyecto original tampoco especifica la autenticación de salas, la política de cifrado del enlace, una garantía de privacidad de voz, el estado normativo de la radio ni todo el alcance de licencias del componente binario `talk_back`. Cada uno de estos aspectos requiere una revisión de producto independiente.
 
-**Nota sobre la fuente de la placa:** La página china de SiFli Wiki para la placa ULP está marcada como pendiente de publicación; solo indica su uso en sensores de bajo consumo y dispositivos vestibles, opciones de sensores de 3 o 6 ejes y puntos de prueba reservados para medir bajo consumo. No es una especificación completa de la placa. Verifique los periféricos con la revisión física y el esquemático; el comportamiento de Talkback descrito abajo procede del código fuente fijado de la aplicación.
+**Nota sobre la fuente de la placa:** La página china de SiFli Wiki para la placa ULP está marcada como pendiente de publicación; solo indica su uso en sensores de bajo consumo y dispositivos vestibles, opciones de sensores de 3 o 6 ejes y puntos de prueba reservados para medir bajo consumo. No es una especificación completa de la placa ni identifica una revisión de hardware validada para este ejemplo. Verifique los periféricos con la revisión física y el esquemático; el comportamiento de Talkback descrito abajo procede del código fuente fijado de la aplicación.
 
 ## Resultado, alcance y criterios de entrada { #outcome-scope-and-entry-criteria }
 
@@ -145,7 +145,7 @@ flowchart LR
     BP["Batería / alimentación USB"] --> B
 ```
 
-Los principales ámbitos de fallo son el escaneo BLE y la creación de sala, la sincronización del estado de la sala, la planificación de hablantes simultáneos, la ruta acústica/Opus, los eventos de teclas, la batería baja y el reposo, la recuperación mediante la tecla de encendido y los datos no publicados del componente y sus licencias. Diagnostique primero el rol y el estado; después separe los fallos de radio, audio y alimentación local.
+El diagrama muestra la ruta de audio de Master a Slave; la etapa 2 verifica por separado la dirección inversa. Los principales ámbitos de fallo son el escaneo BLE y la creación de sala, la sincronización del estado de la sala, la planificación de hablantes simultáneos, la ruta acústica/Opus, los eventos de teclas, la batería baja y el reposo, la recuperación mediante la tecla de encendido y los datos no publicados del componente y sus licencias. Diagnostique primero el rol y el estado; después separe los fallos de radio, audio y alimentación local.
 
 ## Etapa 1 — Establecer la configuración intacta de referencia del código fuente { #stage-1-establish-the-untouched-source-baseline }
 

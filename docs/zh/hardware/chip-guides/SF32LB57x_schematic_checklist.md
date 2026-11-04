@@ -13,7 +13,7 @@ tags:
 # SF32LB57x 硬件设计指南 — 原理图核对表 { #sf32lb57x-hardware-design-guide-schematic-checklist }
 
 !!! note "SF32LB57x 硬件设计指南的一部分"
-    本页列出第 5.8 节的原理图逐项核对内容，整理自思澈科技（SiFli）官方设计自查表。可返回[最小系统与电源](SF32LB57x_schematic_system_power.md)，查看三篇原理图设计指南中的第一页。
+    本页整理的是思澈科技（SiFli）官方 SF32LB57x《硬件应用指南》第 4.1–4.8 节中的原理图检查项；同一组自查表中的 PCB 布局检查项见[PCB 布局检查表](SF32LB57x_pcb_layout_checklist.md)。[OpenSiFli 官方源 Markdown](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/SF32LB57x-HW-Application.md)包含完整自查表；本页和 PCB 检查表的条目覆盖、适用范围及列示数值均已据此核对。下文所列来源差异在原始资料中仍未解决。Markdown 中的自查表没有编码工作簿专有的审阅高亮，因此本次未单独核对 Excel 单元格颜色。设计签核前，请就具体订购型号向思澈科技（SiFli）确认这些冲突。可返回[最小系统与电源](SF32LB57x_schematic_system_power.md)，查看三篇原理图设计指南中的第一页。
 
 ## 5.8. 原理图核对表 { #58-schematic-checklist }
 

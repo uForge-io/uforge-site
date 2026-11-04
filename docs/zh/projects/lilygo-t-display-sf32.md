@@ -15,7 +15,7 @@ tags:
 
 ## T-Display-SF32 是什么？ { #what-is-t-display-sf32 }
 
-[Xinyuan-LilyGO/T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32) 是一套围绕 SF32LB52x MCU 和 2.16 英寸 CO5300 AMOLED（带 CST9220 触控）构建的开发平台。仓库记录了 16 MB Flash、8 MB PSRAM、BHI260AP IMU、SX1262 LoRa、microSD 接口、音频、USB Type-C、充电支持、板级引脚分配、示例应用、硬件文件、出厂固件目录，以及板级功耗测试报告。
+[Xinyuan-LilyGO/T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32) 是一套围绕 SF32LB52x MCU 和 2.16 英寸 CO5300 AMOLED（带 CST9220 触控）构建的开发平台。仓库还提供示例应用、硬件文件、出厂固件目录、板级引脚分配和板级功耗测试报告；下方器件表汇总了文档所述的硬件配置。
 
 这种组合适合用来评估以显示为核心的可穿戴设备、手持控制器、便携式传感终端或联网 HMI。它属于平台参考，而不是成品：仓库提供了多种硬件路径，但产品团队仍需选定真正需要的路径，复现已知基线，在确切开发板版本上进行测量，并验证功耗、射频（RF）、安全性、软件维护和故障恢复。
 
@@ -67,9 +67,9 @@ T-Display-SF32 把 SF32LB52x 的图形、蓝牙（Bluetooth）、音频和低功
 
 | 器件或设备 | 必要规格 | 用途 | 状态 | 获取方式或来源 | 兼容性与替换说明 |
 |:-----------|:---------|:-----|:-----|:---------------|:-----------------|
-| T-Display-SF32 开发板 | SF32LB52x；文档所述配置包括 2.16 英寸 CO5300 AMOLED、CST9220 触控、16 MB Flash、8 MB PSRAM、BHI260AP IMU、SX1262 LoRa、microSD、板载麦克风、扬声器功放与 3.5 mm 音频接口，以及三个用户按键 | 集成计算、显示、传感、无线、存储和音频参考平台 | 必需 | [LilyGO 代码仓库](https://github.com/Xinyuan-LilyGO/T-Display-SF32)；[硬件文件](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | 记录具体开发板修订版和实际装配的器件；不要假定不同版本的器件配置完全相同 |
-| T-SF32-Keyboard 扩展板 | 可选扩展，包含 ESP32-C6 Wi-Fi、L76K GPS、TCA8418/AW21009/XL9555 键盘子系统、BME280、红外发射器和 AW86224 振动马达 | 增加上述无线、定位、键盘、环境感知、红外和触觉功能 | 可选；仅在使用这些功能时必需 | [LilyGO 代码仓库](https://github.com/Xinyuan-LilyGO/T-Display-SF32)；[硬件文件](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | 这些器件不在独立的 T-SF32-Display 开发板上；Wi-Fi 与 GPS 共用 UART2，需验证扩展板的组合配置 |
-| USB Type-C 数据连接及受控电源 | 支持数据传输的线缆；带限流的电源或可监测电压的受保护电池 | 烧录固件、读取日志并安全验证供电 | 必需 | [LilyGO 代码仓库](https://github.com/Xinyuan-LilyGO/T-Display-SF32) | Type-C 的 D+/D- 连接到 CH343P USB 转 UART 桥；该接口用于 UART 烧录和日志，不提供 SF32 原生 USB 设备/主机数据通路。还应遵循开发板大于 3.5 V 的启动条件 |
+| T-Display-SF32 开发板 | 文档所述配置：SF32LB52x；2.16 英寸 CO5300 AMOLED 和 CST9220 触控；<br>16 MB Flash、8 MB PSRAM、BHI260AP IMU 和 SX1262 LoRa；<br>microSD、板载麦克风、带 3.5 mm 音频接口的扬声器功放，以及三个用户按键 | 集成计算、显示、传感、无线、存储和音频参考平台 | 必需 | [LilyGO 代码仓库](https://github.com/Xinyuan-LilyGO/T-Display-SF32)；[硬件文件](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | 记录开发板修订版和实装器件。<br>microSD 与其他设备共用 SPI1，但使用独立 CS；文档所述充电 IC 为 SGM41562B。<br>SX1262 频率因开发板版本而异；请核对实物配置。 |
+| T-SF32-Keyboard 扩展板 | 可选扩展，包含 ESP32-C6 Wi-Fi、L76K GPS、TCA8418/AW21009/XL9555 键盘子系统、BME280、红外发射器和 AW86224 振动马达 | 增加上述无线、定位、键盘、环境感知、红外和触觉功能 | 可选；仅在使用这些功能时必需 | [LilyGO 代码仓库](https://github.com/Xinyuan-LilyGO/T-Display-SF32)；[硬件文件](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | 这些器件未安装在独立的 T-SF32-Display 开发板上。<br>Wi-Fi 与 GPS 共用 UART2；请验证扩展板的组合配置。 |
+| USB Type-C 数据连接及受控电源 | 支持数据传输的线缆；带限流的电源或可监测电压的受保护电池 | 烧录固件、读取日志并安全验证供电 | 必需 | [LilyGO 代码仓库](https://github.com/Xinyuan-LilyGO/T-Display-SF32) | Type-C 的 D+/D- 连接到 CH343P USB 转 UART 桥。<br>该接口用于 UART 烧录和日志，不提供 SF32 原生 USB 设备/主机数据通路。<br>还应遵循开发板大于 3.5 V 的启动条件。 |
 | 按接口选择的测试配件 | 仅在测试相应接口时使用 microSD 卡、音频负载/耳机或符合当地频段要求的 LoRa 对端 | 验证可选板载接口 | 可选；按测试选择 | [示例](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/examples) | 连接前根据硬件文件确认具体连接器、电压、地区要求和开发板修订版 |
 
 </div>
@@ -91,7 +91,7 @@ T-Display-SF32 把 SF32LB52x 的图形、蓝牙（Bluetooth）、音频和低功
 
 ## 选择受支持的基线 { #choose-a-supported-baseline }
 
-上游仓库目前使用 `master` 分支，并没有把某个带 tag 的发布版列为通用软件基线。应记录准确 commit，而不是只写“最新版”。仓库包含 `firmware/T-SF32-Factory-V1.2` 目录，但目录名不能替代配套开发板版本、仓库 commit 和烧录流程记录。
+本文引用的仓库文档使用 `master` 分支作为代码参考，并未指定可作为通用软件基线的带 tag 发布版。应记录准确 commit，而不是只写“最新版”。仓库包含 `firmware/T-SF32-Factory-V1.2` 目录，但目录名不能替代配套开发板版本、仓库 commit 和烧录流程记录。
 
 <div align="center"><em>表：T-Display-SF32 基线选择</em></div>
 

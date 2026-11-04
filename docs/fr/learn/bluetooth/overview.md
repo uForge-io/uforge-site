@@ -40,7 +40,7 @@ Le BLE est le choix par défaut pour la plupart des appareils portables connect�
 
 ### Bluetooth classique et bimode { #classic-bluetooth-and-dual-mode }
 
-Ajoutez le Bluetooth classique si le produit doit diffuser de l'audio (A2DP/AVRCP), prendre en charge les appels mains libres (HFP), fournir une liaison de données de type série (SPP) ou rester compatible avec les profils Bluetooth classiques existants. Le fonctionnement bimode impose davantage de contraintes d'ordonnancement radio et de coexistence que le BLE seul. Le processeur Bluetooth dédié est précisément conçu pour isoler cette charge du reste du système.
+Ajoutez le Bluetooth classique si le produit doit diffuser de l'audio (A2DP/AVRCP), prendre en charge les appels mains libres (HFP), fournir une liaison de données de type série (SPP) ou rester compatible avec les profils Bluetooth classiques existants. Le fonctionnement bimode exige davantage de l'ordonnancement radio et de la coexistence que le BLE seul. Le processeur Bluetooth dédié prend en charge les tâches de liaison à fortes contraintes temporelles séparément du processeur d'application, mais la coexistence doit tout de même être validée avec la charge combinée du produit.
 
 Tous les appareils de la famille SF32 ne prennent pas en charge le Bluetooth bimode. Consultez le tableau des appareils dans [Processeur Bluetooth](processor.md#device-family-differences) avant de choisir une référence.
 

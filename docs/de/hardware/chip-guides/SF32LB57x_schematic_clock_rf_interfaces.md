@@ -550,7 +550,7 @@ Richtlinien:
 
 - Bestätigen Sie Schnittstellenbreite, Takt, Sync-Signale, Datenleitungen und Pinmux.
 - Stellen Sie sicher, dass Kameraversorgung, Reset, PWDN und Takt von der MCU gesteuert werden können.
-- Führen Sie Kamera-Daten- und Taktleitungen als längenabgestimmte Gruppe und halten Sie sie von RF- und Analogsignalen fern.
+- Führen Sie Kamera-Daten- und Taktleitungen gemeinsam und halten Sie sie von RF- und Analogsignalen fern.
 - Sorgen Sie beim Hochgeschwindigkeits-Routing der Kamera für eine durchgehende Referenzmasse.
 - Ergänzen Sie bei Bedarf ESD-Schutz am Kamerastecker oder FPC.
 
@@ -592,13 +592,13 @@ Verwenden Sie bei 10-Bit-DVP-Kameras und knappen GPIO-Ressourcen die 8-Bit-Verdr
 
 #### 5.5.11. Tasten und Motor { #5511-buttons-and-motor }
 
-- Die Ein-/Aus- und Reset-Taste muss `PA34` verwenden und high-aktiv sein; der Pin wird standardmäßig auf Low gezogen und geht beim Drücken auf High. `PA34` unterstützt einen Hardware-Reset bei 10 Sekunden langem Tastendruck, und der 10-kΩ-Pull-down-Widerstand muss auf der Hauptplatine platziert werden.
+- `PA34` unterstützt einen Reset bei langem Tastendruck und kann auch als Ein-/Aus-Taste verwendet werden. Der Reset-Eingang ist high-aktiv, wird standardmäßig auf Low gezogen und wechselt beim Drücken auf High. Platzieren Sie einen 10-kΩ-Pull-down-Widerstand auf der Hauptplatine.
 - Bei GPADC-Tastendesigns mit Spannungsteiler werden Tasten anhand der Teilerspannung unterschieden. Platzieren Sie nahe am Pin einen 0,1-µF-Filterkondensator gegen Masse, um die Abtastgenauigkeit zu verbessern.
 - Die dargestellte Widerstandsleiter verwendet 1,1 kΩ, 2,8 kΩ und 5,1 kΩ für die Tasten sowie einen 10-kΩ-Pulldown und einen 100-nF-Filterkondensator. Verwenden Sie diese Werte als Referenz und prüfen Sie die ADC-Schwellen für Versorgung und Widerstandstoleranzen des konkreten Designs.
 - Ergänzen Sie ESD-Schutz für externe Tasten.
 
-![Abbildung 5.5-4: Referenzschaltung für Power-Taste und GPADC-Taste](../../sf32-products/chips/assets/57x/SF32LB57x-PWKEY.png){ width="80%" loading="lazy" }
+![Abbildung 5.5-4: Referenzschaltung für GPADC-Taste](../../sf32-products/chips/assets/57x/SF32LB57x-PWKEY.png){ width="80%" loading="lazy" }
 
-<div align="center"><em>Abbildung 5.5-4: Referenzschaltung für Power-Taste und GPADC-Taste</em></div>
+<div align="center"><em>Abbildung 5.5-4: Referenzschaltung für GPADC-Taste</em></div>
 
 Verwenden Sie für haptisches Feedback die SF32LB57x-Referenzschaltung für den Vibrationsmotor. In stromsparenden Produkten sollte sich die Motorversorgung abschalten lassen; der PWM-/Steuerpin sollte nicht mit Anforderungen an Boot, Display, Speicher oder Debugging kollidieren.

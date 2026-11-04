@@ -24,16 +24,16 @@ tags:
 - [ ] 48 MHz 및 32.768 kHz 크리스털이 권장 사양을 충족하며, 라우팅과 금지 구역 요구 사항을 만족합니다.
 - [ ] RF 트레이스의 임피던스가 50 Ω이며, 매칭 회로를 칩 가까이에 배치했습니다.
 - [ ] 스토리지 부트 구성(일반 전원 변형의 eMMC 구성 포함)이 부트스트랩 핀 설정과 일치합니다.
-- [ ] 스토리지 전원 스위치 제어 핀을 해당 변형에 맞게 검증했습니다. 릴리스 전에 공식 체크리스트와 애플리케이션 노트 간의 PA11/PA21 불일치를 해소하십시오.
+- [ ] 해당 변형의 스토리지 전원 스위치 제어 핀을 확인하십시오. V1.0 체크리스트는 520/3/5/7에 PA11, 52B/D/E/G/J에 PA21을 지정하지만 두 애플리케이션 노트 모두 부트 스토리지 전원 제어 핀으로 PA21을 지정합니다. 출시 전에 SiFli에 확인해 520/3/5/7의 불일치를 해결하십시오.
 - [ ] USB DP/DN을 차동 임피던스 90 Ω의 차동 쌍으로 라우팅했습니다.
 - [ ] SDIO 신호를 함께 라우팅했으며, 전체 길이는 ≤50 mm, 그룹 내 길이 차이는 ≤6 mm이고 그라운드 차폐가 적용되어 있습니다.
 - [ ] DBG_UART/SWD 멀티플렉싱 핀과 양산 테스트 포인트를 확보했습니다.
-- [ ] 주요 부품 번호를 최신 [SiFli 승인 업체 목록 (AVL)][SiFli Approved Vendor List (AVL)]과 대조해 확인했습니다.
+- [ ] 주요 부품 번호를 링크된 [SiFli 승인 업체 목록 (AVL)][SiFli Approved Vendor List (AVL)]과 대조해 확인했습니다.
 
 ## 8. 관련 문서 및 참고 자료 { #8-related-documents-and-references }
 
-[SF32LB52x Datasheet (Official PDF)]: https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?
-[SF32LB52x User Manual (Official PDF)]: https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?
+[specification-pdf]: https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?
+[user-manual-pdf]: https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?
 [SF32LB52 Hardware Reference Design Package]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83%E8%AE%BE%E8%AE%A1-20250619.zip?
 [SF32LB520/3/5/7 Hardware Application Note (Source)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB520-3-5-7-HW-Application.md
 [52B/D/E/G/J Hardware Application Note (Source)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52B-E-G-J-HW-Application.md
@@ -43,8 +43,8 @@ tags:
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[SF32LB52x 데이터시트 (공식 PDF)][SF32LB52x Datasheet (Official PDF)]__
-- :fontawesome-solid-file-pdf: __[SF32LB52x 사용자 매뉴얼 (공식 PDF)][SF32LB52x User Manual (Official PDF)]__
+- :fontawesome-solid-file-pdf: __[SF32LB52x 데이터시트 (공식 PDF, V2p4)][specification-pdf]__
+- :fontawesome-solid-file-pdf: __[SF32LB52x 사용자 매뉴얼 (공식 PDF, V0p3)][user-manual-pdf]__
 - :fontawesome-solid-file-zipper: __[SF32LB52 하드웨어 레퍼런스 디자인 패키지][SF32LB52 Hardware Reference Design Package]__
 - :fontawesome-brands-github: __[SF32LB520/3/5/7 하드웨어 애플리케이션 노트 (원본)][SF32LB520/3/5/7 Hardware Application Note (Source)]__
 - :fontawesome-brands-github: __[52B/D/E/G/J 하드웨어 애플리케이션 노트 (원본)][52B/D/E/G/J Hardware Application Note (Source)]__
@@ -57,8 +57,8 @@ tags:
 추가 출처 참고 자료:
 
 - [SF32LB52x 제품 개요서](https://downloads.sifli.com/user%20manual/PB5201-SF32LB52x-Product%20Brief.pdf)
-- [SF32LB52x 데이터시트](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf)
-- [SF32LB52x 레퍼런스 매뉴얼](https://downloads.sifli.com/user%20manual/UM5201-SF32LB52x-User%20Manual%20V0p8p4.pdf)
+- [SF32LB52x 데이터시트 (V2p5p3)](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf)
+- [SF32LB52x 레퍼런스 매뉴얼 (V0p8p4)](https://downloads.sifli.com/user%20manual/UM5201-SF32LB52x-User%20Manual%20V0p8p4.pdf)
 - [SF32LB520/3/5/7 하드웨어 애플리케이션 노트](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB520-3-5-7-HW-Application.md)
 - [52B/D/E/G/J 하드웨어 애플리케이션 노트](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52B-E-G-J-HW-Application.md)
 
@@ -69,7 +69,7 @@ tags:
 원본 SiFli 애플리케이션 노트에는 다음과 같은 회로도, PCB 레이아웃, 기구, 전원 레퍼런스 그림이 포함되어 있습니다. 이 부록은 검토 근거로 삼을 수 있도록 해당 원본 그림을 보존하며, 5절과 6절이 여전히 주된 설계 가이드입니다.
 
 !!! note "이 그림의 활용 방법"
-    이 그림은 원본 애플리케이션 노트의 레퍼런스 회로 및 레이아웃 예시로 취급하십시오. 해당 디바이스와 제품의 최종 구현은 규칙 본문, 표, 데이터시트, 레퍼런스 매뉴얼, 최신 레퍼런스 디자인 패키지, AVL로 확인하십시오.
+    이 그림은 원본 애플리케이션 노트의 레퍼런스 회로 및 레이아웃 예시로 취급하십시오. 해당 디바이스와 제품의 최종 구현은 규칙 본문, 표, 데이터시트, 레퍼런스 매뉴얼, 8절에 링크된 레퍼런스 디자인 패키지와 AVL 링크를 기준으로 확인하십시오.
 
 <div align="center"><em>표 9-1: 부록 맵</em></div>
 

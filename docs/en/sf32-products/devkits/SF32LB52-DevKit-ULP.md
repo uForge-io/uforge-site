@@ -61,6 +61,7 @@ Use these names as aliases for the same board family when searching for hardware
 - MicroSD card slot using SPI
 - One function key and one power/reset key
 - SK6812MINI-HS RGB LED (SiFli Huangshan Pi V1.0.0 guide; the unversioned LCKFB page lists WS2812B-2020)
+- Separate power-on indicator LED (identified in SiFli's V1.0.0 board annotations)
 - Vibration motor driver circuit with external motor solder pads
 - LSM6DS3TR-C 6-axis IMU
 - MMC5603NJ 3-axis magnetic sensor
@@ -99,6 +100,7 @@ For a display-focused general evaluation board, use [SF32LB52-DevKit-LCD](SF32LB
 | Touch controller | FT6146-M00 |
 | Microphone | On-board MEMS microphone |
 | Speaker output | Class-D amplifier, external GH-1.25mm speaker connector |
+| Audio power amplifier | NS4150B (identified in SiFli's V1.0.0 board annotations) |
 | Storage | MicroSD card over SPI |
 | Motion sensor | LSM6DS3TR-C 6-axis IMU |
 | Magnetic sensor | MMC5603NJ 3-axis magnetometer |
@@ -110,7 +112,7 @@ For a display-focused general evaluation board, use [SF32LB52-DevKit-LCD](SF32LB
 
 </div>
 
-**Revision-dependent component list — verify before design:** SiFli's V1.0.0 [Huangshan Pi guide][Original SiFli Huangshan Pi Guide] lists SY6103 charger, SY5320 OVP, and SK6812MINI-HS RGB LED. The unversioned [LCKFB hardware wiki] instead lists AW32001ECSR in its feature list and AW23001ECSR in its charging section, plus LP5305AQVF OVP and WS2812B-2020 RGB LED. The sources do not establish whether these differences reflect a hardware revision or stale documentation. Use the SiFli V1.0.0 values only for that documented baseline; verify the actual board markings, schematic, and BOM before relying on component-specific behavior.
+**Revision-dependent component list — verify before design:** SiFli's V1.0.0 [Huangshan Pi guide][Original SiFli Huangshan Pi Guide] lists SY6103 charger, SY5320 OVP, and SK6812MINI-HS RGB LED. The unversioned [LCKFB hardware wiki] instead lists AW32001ECSR in its feature list and AW23001ECSR in its charging section, plus LP5305AQVF OVP and WS2812B-2020 RGB LED. The sources do not establish whether these differences reflect a hardware revision or stale documentation. Use the SiFli V1.0.0 values only for that documented baseline; verify the actual board markings, schematic, and BOM before relying on component-specific behavior. SiFli's V1.0.0 board annotations also label separate LDOs for sensor power, the 3.3V rail, and CH340N power, plus a VSYS load switch and TVS diodes; confirm their exact connections in the schematic for the target revision.
 
 ## Package Contents { #package-contents }
 
@@ -133,6 +135,8 @@ The board supports two primary power modes:
 The battery input is intended for a single-cell Li-ion battery using a GH1.25mm connector with forward pin order. The documented charging configuration supports a maximum charge current of 500mA, with a default constant-current setting of 450mA.
 
 When using the board without a battery and supplying VBAT from a bench supply, the documented VBAT input range is 3.7V to 4.7V, with 3.8V recommended for normal-voltage supply testing. The SF32LB52-MOD-1-N16R8 power thresholds are documented as 3.58V for power-on and 3.48V for power-off.
+
+The SiFli V1.0.0 guide gives two battery-capacity statements: its optional-hardware list calls for a battery over 450 mAh, while its battery-selection section recommends 450–500 mAh. Confirm the applicable requirement for the exact board revision and cell.
 
 The LCKFB hardware guide warns that the long-press key function may not work when no battery is connected. Verify this behavior on the exact board revision and intended power setup.
 
@@ -168,8 +172,17 @@ Optional hardware:
 
 - External speaker
 - TF card
-- Li-ion battery, 450mAh or larger
+- Li-ion battery with a capacity greater than 450 mAh
 - Second USB cable when UART debug and native USB testing are needed at the same time
+
+### Board Setup and Boot Modes
+
+Connect the host to the board's USB Type-C UART port, then open SifliTrace and select the correct COM port.
+
+1. **Firmware download:** Enable BOOT in the download tool, then power on or reset the board.
+2. **Software development/serial-log mode:** Clear BOOT, then power on or reset the board.
+
+SiFli's guide describes resetting the module by driving the on-board CH340N RTS# line low and then high. On boards that use RTS for reset, opening the serial port can trigger an unexpected reset or power-off; if this occurs, disable modem flow control in the host's advanced serial-port settings.
 
 Use a real data-capable USB cable. Charge-only cables can power the board but will not expose the serial data interface.
 
@@ -242,6 +255,8 @@ The 30-pin header exposes power, USB, sensor, display-adjacent, storage, vibrati
 ## Display and Touch Interface { #display-and-touch-interface }
 
 The board uses an AMOLED display path and exposes a 22-pin QSPI FPC signal set. SiFli's V1.0.0 table marks pins 5-10 as NC; the table below includes all 22 positions and identifies those pins explicitly.
+
+The screen-board annotations distinguish a 22-pin FPC connector to the LCD module from a separate 24-pin board-to-board (B2B) connector to the core board. Confirm both interfaces against the exact assembly revision.
 
 <div align="center"><em>22-Pin QSPI Display and Touch FPC Signal Map</em></div>
 

@@ -145,11 +145,11 @@ SiFli führt SF32LB566VCB36 mit 4 MB + 8 MB OPI-PSRAM und 1 MB QSPI-NOR als Stan
 
 - 1 × 24-Bit-Audio-DAC
 - 1 × 24-Bit-Sigma-Delta-Audio-ADC
-- 2 × PDM-Schnittstellen (PDM1/PDM2), jeweils mit linkem und rechtem Mikrofonkanal
+- 2 × PDM-Schnittstellen (PDM1/PDM2); DS5602 V0.3 nennt zwei Digitarmikrofoneingänge
 - 1 × I2S-Schnittstelle
 - Audio-Abtastratenkonvertierung und EQ-Beschleunigung
 
-Jede PDM-Schnittstelle kann bis zu zwei digitale Mikrofone anbinden; beide Schnittstellen unterstützen zusammen also bis zu vier Mikrofone. Die Anzahl der PDM-Schnittstellen entspricht nicht der Mikrofonanzahl. Die tatsächliche Nutzung hängt von der Pin-Multiplexierung und dem Trägerboard-Layout ab.
+Die empfohlene Pinbelegung nennt PDM1_DATA auf PA20 oder PA64, PDM1_CLK auf PA24 oder PA69, PDM2_DATA auf PA25 oder PA71 sowie PDM2_CLK auf PA26 oder PA73. Das sind alternative Pin-Multiplexoptionen, keine Bestätigung der Leiterbahnführung auf dem Trägerboard. DS5602 V0.3 bestätigt weder Kanalteilung noch eine Konfiguration mit vier Mikrofonen. Prüfen Sie vor einer Mehrmikrofon-Auslegung den unterstützten Modus und die tatsächliche Boardführung.
 
 ### Stromversorgung und I/O { #power-and-io }
 

@@ -15,11 +15,13 @@ tags:
 
 ### 6.1. Footprint e stack-up { #61-footprint-and-stack-up }
 
-Consulte o desenho do encapsulamento, os requisitos do padrão de pads e a capacidade de montagem correspondentes ao QFN ou BGA selecionado. Em encapsulamentos BGA, confirme com antecedência o escape das esferas (fan-out), a estratégia de vias, as regras da máscara de solda e os limites de fabricação.
+Compare o desenho do encapsulamento e os requisitos do padrão de pads do QFN ou BGA selecionado com a capacidade de montagem do fabricante previsto. Em encapsulamentos BGA, confirme com antecedência o escape das esferas (fan-out), a estratégia de vias, as regras da máscara de solda e os limites de fabricação.
 
 #### 6.1.1. Referência de stack-up e fabricação { #611-stack-up-and-fabrication }
 
-A SiFli recomenda processo PTH convencional e placa de quatro camadas para QFN68L e BGA145. Para BGA169, a referência recomenda HDI de um estágio com vias cegas/enterradas. Os stack-ups ilustrados de quatro e seis camadas têm espessura final de 0,7 mm ±10%. São estruturas de referência, não limites universais; confirme o desenho do encapsulamento, a espessura final e a capacidade do processo com o fabricante da PCB.
+A série SF32LB55x permite montar componentes em uma ou nas duas faces da placa.
+
+A SiFli recomenda processo PTH convencional e placa de quatro camadas para QFN68L, BGA125 e BGA145. Para BGA169, a referência recomenda HDI de um estágio com vias cegas/enterradas. Os stack-ups ilustrados de quatro e seis camadas têm espessura final de 0,7 mm ±10%. São estruturas de referência, não limites universais; confirme o desenho do encapsulamento, a espessura final e a capacidade do processo com o fabricante da PCB.
 
 <div align="center"><em>Tabela 6.1-1: Stack-up de referência PTH de quatro camadas</em></div>
 
@@ -67,9 +69,24 @@ A figura original especifica espessura final da placa de 0,7 mm ±10%, incluindo
 
 A figura original especifica espessura final de 0,7 mm ±10% para a placa HDI de seis camadas, incluindo metalização e máscara de solda. O stack-up, os parâmetros dielétricos e a espessura teórica são referências; peça ao fabricante que os verifique com base nos materiais, nas espessuras de cobre e nos requisitos de impedância reais.
 
-#### 6.1.2. Dimensões do padrão de pads { #612-land-pattern-dimensions }
+#### 6.1.2. Dimensões do encapsulamento e do padrão de pads { #612-land-pattern-dimensions }
 
-- BGA145/BGA169: bolas de 0,25 mm de diâmetro e passo de 0,5 mm; o padrão de referência indica abertura de máscara de solda de 0,33 mm e abertura de pasta de 0,25 mm.
+<div align="center"><em>Tabela 6.1-3: Dimensões nominais do encapsulamento e pitch</em></div>
+
+<div align="center" markdown>
+
+| Encapsulamento | Dimensões nominais do corpo (comprimento × largura × altura) | Pitch das esferas/pinos |
+|:---|:---:|:---:|
+| BGA125 | 7 × 7 × 0,94 mm | 0,5 mm |
+| BGA145 | 7 × 7 × 0,94 mm | 0,5 mm |
+| BGA169 | 7 × 7 × 0,94 mm | 0,5 mm |
+| QFN68L | 7 × 7 × 0,75 mm | 0,35 mm |
+
+</div>
+
+As dimensões nominais foram transcritas dos desenhos originais do encapsulamento; consulte o desenho da variante selecionada para conferir as tolerâncias.
+
+- BGA125/BGA145/BGA169: bolas de 0,25 mm de diâmetro e passo de 0,5 mm; o padrão de referência indica abertura de máscara de solda de 0,33 mm e abertura de pasta de 0,25 mm.
 - QFN68L: pads periféricos de 0,2 × 0,55 mm com passo de 0,35 mm; a referência indica abertura de máscara de 0,3 × 0,65 mm e abertura de pasta de 0,2 × 0,55 mm. O pad exposto tem dimensão nominal de 5,49 mm × 5,49 mm, com faixa de 5,39–5,59 mm.
 
 Antes de liberar o footprint, confira o desenho do encapsulamento e as regras de estêncil e máscara de solda da montadora.
@@ -78,7 +95,7 @@ Antes de liberar o footprint, confira o desenho do encapsulamento e as regras de
 
 - Mantenha curtas e largas as malhas BUCK e faça a corrente de retorno passar perto da malha de comutação.
 - Afaste as regiões de RF, cristal, GPADC e áudio das fontes chaveadas, dos clocks do display, dos motores e dos carregadores.
-- Roteie as interfaces de memória de alta velocidade e do display sobre um plano de referência GND contínuo.
+- Roteie as interfaces de memória de alta velocidade e do display sobre um plano de referência de GND contínuo.
 - Coloque a proteção ESD perto dos conectores e faça os sinais passarem primeiro pelo dispositivo de proteção.
 - Preveja pontos de teste suficientes para alimentação, boot, depuração, RF e calibração de produção.
 
@@ -118,17 +135,17 @@ Na matriz de afastamento entre elementos da mesma rede das figuras-fonte, apenas
 
 #### 6.2.3. EMI, ESD e proteção { #623-emi-esd-and-protection }
 
-Quando possível, roteie clocks e trilhas de alimentação ruidosas nas camadas internas. Coloque os dispositivos ESD junto ao conector para que cada sinal passe pela proteção antes de entrar na placa, sem ramificações; use uma trilha de aterramento curta e larga, com via direta para o plano. Para carregamento USB, coloque o ponto de teste no lado do conector em relação ao TVS. Na entrada da bateria, coloque o TVS entre o conector e a carga da placa, de modo que o caminho até o chip passe primeiro pelo TVS, e mantenha curta sua conexão de terra.
+Evite trilhas longas na camada externa fora da blindagem. Roteie clocks e trilhas de alimentação ruidosas nas camadas internas; não as roteie na superfície. Coloque os dispositivos ESD junto ao conector para que cada sinal passe pela proteção antes de entrar na placa, sem ramificações; use uma trilha de aterramento curta e larga, com via direta para o plano. Para carregamento USB, coloque o ponto de teste no lado do conector em relação ao TVS. Na entrada da bateria, coloque o TVS entre o conector e a carga da placa, de modo que o caminho até o chip passe primeiro pelo TVS, e mantenha curta sua conexão de terra.
 
 ### 6.3. Roteamento das interfaces { #63-interface-routing }
 
-As trilhas de clock devem ser curtas, blindadas e afastadas de sinais digitais rápidos. Controle a impedância da trilha de RF em 50 Ω e mantenha compacta a rede de casamento. Controle o comprimento das trilhas de memória e do display conforme a velocidade e agrupe-as por barramento. Os sinais de áudio e GPADC devem ter blindagem e ficar afastados das correntes de comutação.
+As trilhas de clock devem ser curtas, blindadas e afastadas de sinais digitais rápidos. Roteie RF com impedância controlada de 50 Ω e mantenha compacta a rede de casamento. Controle o comprimento das trilhas de memória e do display conforme a velocidade e agrupe-as por barramento. Os sinais de áudio e GPADC devem ter blindagem e ficar afastados das correntes de comutação.
 
 #### 6.3.1. Posicionamento e roteamento dos cristais { #631-crystal-placement-and-routing }
 
 - Posicione cada cristal dentro da área blindada, a mais de 1 mm da borda da placa e a mais de 5 mm de fontes de calor como PA, carregador e PMU. Mantenha pelo menos 0,25 mm de afastamento ao redor do cristal.
 - Roteie as trilhas do cristal de 48 MHz na camada superior, com 3–10 mm de comprimento e 0,1 mm de largura. Mantenha pelo menos 0,15 mm entre 48M_XI e 48M_XO, conforme o [modelo original de roteamento](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-48M-M-PCB.png), e faça blindagem de terra tridimensional. Afaste as trilhas de VBAT, DC-DC e sinais de alta velocidade. O texto original pede uma área sem cobre nas camadas superior e adjacente sob a região do cristal e proíbe a passagem de trilhas sem relação por essa região.
-- Roteie as trilhas do cristal de 32,768 kHz na camada superior, com no máximo 10 mm de comprimento e 0,1 mm de largura. Mantenha pelo menos 0,15 mm entre XI e XO e faça blindagem de terra tridimensional. O texto original pede uma área sem cobre nas camadas superior e adjacente sob a região do cristal e proíbe a passagem de trilhas sem relação por essa região.
+- Roteie as trilhas do cristal de 32,768 kHz na camada superior, com no máximo 10 mm de comprimento e 0,1 mm de largura. Mantenha pelo menos 0,15 mm entre 32K_XI e 32K_XO e faça blindagem de terra tridimensional. O texto original pede uma área sem cobre nas camadas superior e adjacente sob a região do cristal e proíbe a passagem de trilhas sem relação por essa região.
 
 #### 6.3.2. RF e interfaces de alta velocidade { #632-rf-and-high-speed-interfaces }
 
@@ -281,6 +298,8 @@ Cada tabela abaixo corresponde a uma área de revisão do layout da PCB. Quando 
 </div>
 
 #### 6.4.9. Pontos de teste { #649-test-points }
+
+No mínimo, reserve pontos de teste para o projeto de hardware em VBAT, GND, VDDIOA, VDDIOB, RSTN, Mode, SWDIO, SWCLK, RXD1, TXD1, RXD3 e TXD3. Os testes de produção exigem pontos de teste em VBAT, GND, boot_mode, VDDIOB, RXD3 e TXD3.
 
 <div align="center"><em>Tabela 6.4-9: checklist dos pontos de teste</em></div>
 

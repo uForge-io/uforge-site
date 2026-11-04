@@ -52,7 +52,7 @@ Halten Sie vor dem Start Folgendes bereit:
 | Quelle | Ein erfasster Commit von OpenSiFli/Arduboy2-SiFli und die Revisionen seiner Abhängigkeiten. | Sauberer Checkout und reproduzierbares Build-Protokoll. |
 | Board | SF32LB52 und ArduinoCore-Zephyr-Variante `sf32lb52_devkit_lcd_sf32lb525uc6` mit den unten aufgeführten externen Peripheriegeräten. | Erfassen Sie physische Board-Revision, Verdrahtung, Stromquelle und erfolgreichen Upload; das Repository legt weder eine Board-Revision noch ein OLED-Modell fest. |
 | Toolchain | Arduino IDE oder CLI, OpenSiFli-Board-Paket und der dokumentierte Upload-Pfad. | Paketversionen, Board-Auswahl, Compiler-Ausgabe, Upload-Log und serielles Log. |
-| Referenzverhalten | Ein Upstream-Beispiel oder minimaler Sketch, der die Portierung beansprucht. | Display-Aktualisierung, Eingabereaktion und unterstütztes Audioverhalten sind beobachtet und wiederholbar. |
+| Referenzverhalten | Ein Upstream-Beispiel oder minimaler Sketch, der die Portierung erprobt. | Display-Aktualisierung, Eingabereaktion und unterstütztes Audioverhalten sind beobachtet und wiederholbar. |
 | Produktänderung | Eine begrenzte Spiel- oder UI-Anpassung. | Der Referenztest besteht nach der Änderung weiterhin, Ressourcen- und Lizenznachweise bleiben erhalten. |
 
 </div>

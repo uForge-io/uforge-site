@@ -48,6 +48,8 @@ sdk.py sf-pkg upload --name <package_name>/<version>@<username>
 
 具体的な手順はSDKのバージョンによって異なる場合があります。環境設定、認証、バージョンごとのコマンドについては、SiFliの[パッケージ利用ガイド（中国語）](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/sf_pkg/use.html)、[作成・公開ガイド（英語）](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/sf_pkg/create.html)、[中国語版](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/sf_pkg/create.html)を参照してください。
 
+[SDKドキュメントのトップページ](https://docs.sifli.com/)から、対象のチップファミリーとチェックアウトしたSDKリリースに対応するパッケージ統合・作成の説明を探してください。上記のファミリー別リンクは例であり、対応状況の一覧ではありません。例をコピーする前に、そのリリースのコマンドと依存関係を確認してください。
+
 ## コンポーネントの品質基準 { #component-quality-bar }
 
 次の条件を満たしたら、共有できるコンポーネントとみなせます。

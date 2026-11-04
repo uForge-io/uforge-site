@@ -69,7 +69,7 @@ PSRAM의 경우 소스 문서는 CBUS와 SBUS 주소 공간을 구분합니다. 
 
 ## v2: 이름과 타입이 있는 JSON 파티션 { #v2-named-and-typed-json-partitions }
 
-v2도 `ptab.json`을 사용하지만, 헤더에 `"version": "2"`를 선언해야 합니다. 메모리 필드는 `mem`, `base`, `regions` 그대로입니다. 리전은 `offset`과 `max_size`를 유지하며 `tags`와 `custom`을 사용할 수 있습니다. v2는 여기에 더해 리전에 `name`과 `type`을 부여하며, 실행 파티션에는 선택적으로 `core`를 지정할 수 있습니다.
+v2도 `ptab.json`을 사용하지만, 헤더에 `"version": "2"`를 선언해야 합니다. 메모리 필드는 `mem`, `base`, `regions` 그대로입니다. 리전은 `offset`과 `max_size`를 유지하며 `tags`와 `custom`을 사용할 수 있습니다. v2는 여기에 더해 리전에 `name`과 `type`을 부여하며, 실행 파티션에는 선택적으로 `core`를 지정할 수 있습니다. v2의 `type`은 문자열 목록이므로 하나의 파티션에 여러 역할을 지정할 수 있습니다. 예를 들어 `app_img`와 `app_exec`를 함께 지정할 수 있습니다.
 
 <div align="center"><em>표: v2 리전 필드와 타입</em></div>
 <div align="center" markdown>

@@ -32,10 +32,10 @@ Enrute RF como una pista de impedancia controlada de 50 Ω en configuración no 
 
 #### 6.2.3. Alimentación y masa { #623-power-and-ground }
 
-Coloque el inductor BUCK y los condensadores de filtro cerca de los pines del chip. Mantenga corta y ancha la pista BUCK_LX; la pista BUCK_FB debe tener un ancho mínimo de 0,25 mm. No vierta cobre en la capa superior bajo el inductor; mantenga un plano de masa íntegro en la capa adyacente y no pase otras pistas por la zona del inductor. Conecte las masas de los condensadores de salida BUCK al plano principal con varias vías. Sitúe el condensador PVDD junto a su pin y enrute PVDD con un trazado corto y ancho; conecte PVSS a masa principal mediante vías. Coloque los condensadores de desacoplo de LDO y E/S cerca de sus pines y dimensione las pistas de alimentación según la corriente de carga.
+Coloque el inductor BUCK y los condensadores de filtro cerca de los pines del chip. Mantenga corta y ancha la pista BUCK_LX; la pista BUCK_FB debe tener un ancho superior a 0,25 mm. No vierta cobre en la capa superior bajo el inductor; mantenga un plano de masa íntegro en la capa adyacente y no pase otras pistas por la zona del inductor. Conecte las masas de los condensadores de salida BUCK al plano principal con varias vías. Sitúe el condensador PVDD junto a su pin y enrute PVDD con un trazado corto y ancho; conecte PVSS a masa principal mediante vías. Coloque los condensadores de desacoplo de LDO y E/S cerca de sus pines y dimensione las pistas de alimentación según la corriente de carga.
 
-!!! warning "Límites contradictorios para el ancho de PVDD"
-    La guía de aplicación de hardware SF32LB56xU/V especifica un ancho mínimo de 0,5 mm para PVDD, mientras que la lista de comprobación de PCB correspondiente especifica 8 mil. Los valores difieren; confirme con SiFli o con el responsable del diseño de PCB cuál es el requisito aplicable antes de congelar el diseño.
+!!! warning "Límites contradictorios para el ancho de PVDD y BUCK_FB"
+    La guía de aplicación de hardware SF32LB56xU/V especifica un ancho mínimo de 0,5 mm para PVDD, mientras que la lista de comprobación de PCB correspondiente especifica 8 mil. La guía también exige que BUCK_FB supere 0,25 mm, mientras que la lista fija un mínimo de 8 mil tanto para BUCK_LX como para BUCK_FB. Confirme con SiFli o con el responsable del diseño de PCB qué valores se aplican antes de congelar el diseño.
 
 #### 6.2.4. Audio y señales analógicas { #624-audio-and-analog-signals }
 
@@ -47,7 +47,7 @@ Enrute USB D+/D− (PA17/PA18) como par diferencial de 90 Ω protegido por masa.
 
 #### 6.2.6. EMI, ESD y puntos de prueba { #626-emi-esd-and-test-points }
 
-Evite tramos largos en capas superficiales, fuera del blindaje, para señales ruidosas de reloj y alimentación; use capas internas cuando sea posible. Coloque los dispositivos TVS/ESD cerca del conector correspondiente. Enrute cada señal primero por el dispositivo de protección y conecte su pad de masa a la masa principal con pistas cortas y anchas y vías. Sitúe el punto de prueba del cable de carga USB antes de su TVS y coloque el TVS del conector de batería antes de la plataforma de batería, de modo que las líneas externas pasen por el TVS antes de llegar al chip. Conecte adecuadamente la red de masa bajo el chip al plano de masa principal mediante vías ciegas/enterradas.
+Evite los tramos largos por la capa superficial fuera del blindaje; las señales ruidosas de reloj y alimentación deben ir por capas internas y no por la superficie. Coloque los dispositivos TVS/ESD cerca del conector correspondiente. Enrute cada señal primero por el dispositivo de protección y conecte su pad de masa a la masa principal con pistas cortas y anchas y vías. Sitúe el punto de prueba del cable de carga USB antes de su TVS y coloque el TVS del conector de batería antes de la plataforma de batería, de modo que las líneas externas pasen por el TVS antes de llegar al chip. Conecte adecuadamente la red de masa bajo el chip al plano de masa principal mediante vías ciegas/enterradas. Cuando se configuren como salidas de reloj, PBR0–PBR2 de U y PBR0–PBR3 de V deben llevar blindaje de masa tridimensional y mantenerse alejados de fuentes de interferencia, como las salidas de 32 kHz.
 
 ### 6.3. Lista de comprobación del diseño de PCB { #63-pcb-layout-checklist }
 
@@ -124,6 +124,8 @@ Cada tabla corresponde a un área de revisión del diseño de PCB. Si no aparece
 | 5 | Separe las dos pistas paralelas del cristal de 32 kHz más de 2 veces la separación entre pistas | Obligatorio |
 
 </div>
+
+La lista de comprobación PCB de origen indica que la separación del par de pistas paralelas del cristal de 32 kHz debe superar 2 veces la separación entre pistas, pero no identifica una dimensión de referencia distinta. Confirme con el responsable de la lista qué comparación se pretende antes de aplicar este criterio al diseño.
 
 #### 6.3.5. Botones { #635-buttons }
 

@@ -41,7 +41,7 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 - DPI（RGB）ディスプレイインターフェース
 - SDIO経由の外部Wi-Fi、SD/SDIOまたはeMMC経由の外部ストレージ
 - WBBGA175パッケージで利用できる、より多くのGPIO
-- TinyML、オーディオ、UIを並行処理するための余裕
+- TinyML、オーディオ、UIを同時に処理する余力
 
 ## 開発リソース { #development-resources }
 
@@ -183,10 +183,12 @@ SF32LB56xの候補リストを検証済みの設計へと進めるには、以�
 ## よくある質問 { #frequently-asked-questions }
 
 **SF32LB56xの主な仕様は？**
-SF32LB56xはアプリケーションCPU（Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33 @48/96 MHz、ユーザーによるプログラミングが可能）を備えています。内蔵SRAMは960 KBで、Bluetoothはデュアルモード（Classic Bluetooth + BLE）です。グラフィックスはePicasso 2.0、パッケージはQFN68 / BGA175（7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)）、USBは2.0 FSです。
+SF32LB56xはアプリケーションCPU（Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33、最大96 MHz、ユーザーによるプログラミングが可能）を備えています。内蔵SRAMは960 KBで、Bluetoothはデュアルモード（Classic Bluetooth + BLE）です。グラフィックスはePicasso 2.0、パッケージはQFN68L / WBBGA175（7 × 7 mm (QFN68L), 6.1 × 6.5 mm (WBBGA175)）、USBは2.0 FSです。
+
+LCPUの動作クロックとアプリケーションタスクへの対応は、デバイスとサポート対象のSDK構成によって異なります。96 MHzは上限であり、標準クロックではありません。960 KBのSRAMはHCPU用800 KB（保持SRAM 128 KBを含む）とLCPU用保持SRAM 160 KBで構成され、単一の連続領域ではありません。対象SKUとSDKのメモリーマップで確認してください。
 
 **SF32LB56xが対応するディスプレイインターフェースは？**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGBに対応しています。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGBに対応しています。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。これはファミリー全体の一覧であり、すべての型番やパッケージで全インターフェースを利用できる保証ではありません。リンク先のインターフェースマトリクスを確認してください。
 
 **SF32LB56xがサポートする最大ディスプレイ解像度は？**
 RGB888カラーで最大1024 × 600です（BGAパッケージのDPI/RGBインターフェース経由）。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。

@@ -35,7 +35,7 @@ Belassen Sie nur für eine Anwendung benötigte Logik im Anwendungsprojekt, bis 
 
 ## Komponenten mit `sf-pkg` verteilen { #use-sf-pkg-to-distribute-components }
 
-Eine Komponente ist eine wiederverwendbare technische Einheit. SiFlis Komponenten-Registry basiert auf Conan; das aktuelle Kommandozeilen-Subkommando im SDK heißt `sf-pkg`.
+Eine Komponente ist eine wiederverwendbare technische Einheit. Die Komponenten-Registry von SiFli basiert auf Conan; das aktuelle Kommandozeilen-Unterkommando im SDK heißt `sf-pkg`.
 
 Um ein Paket zu verwenden, führen Sie `sdk.py sf-pkg init` im Verzeichnis `project` des SDK-Projekts aus; dadurch wird `conanfile.py` erstellt. Ergänzen Sie im Feld `requires` Paketverweise im Format `package/version@<username>`, wobei der Platzhalter den Benutzernamen im Paketregister bezeichnet. Führen Sie anschließend im selben Verzeichnis `sdk.py sf-pkg install` aus. Installierte Pakete liegen unter `project/sf-pkgs`; ihre Kconfig-Dateien werden in `menuconfig` unter `SiFli External Components` eingebunden.
 
@@ -47,6 +47,8 @@ sdk.py sf-pkg upload --name <package_name>/<version>@<username>
 ```
 
 Der genaue Ablauf kann je nach SDK-Version abweichen. Hinweise zu Einrichtung, Anmeldung und versionsabhängigen Befehlen finden Sie in den Anleitungen von SiFli zur [Paketintegration (Chinesisch)](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/sf_pkg/use.html), zur [Erstellung und Veröffentlichung von Paketen (Englisch)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/sf_pkg/create.html) und in der [chinesischen Fassung](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/sf_pkg/create.html).
+
+Suchen Sie über die [Startseite der SDK-Dokumentation](https://docs.sifli.com/) nach den Themen zur Paketintegration und -erstellung für Ihre genaue Chipfamilie und die ausgecheckte SDK-Version. Die familienbezogenen Links oben sind Beispiele, keine Kompatibilitätsmatrix. Prüfen Sie die Befehle und Abhängigkeiten dieser Version, bevor Sie ein Beispiel übernehmen.
 
 ## Qualitätsmaßstab für Komponenten { #component-quality-bar }
 

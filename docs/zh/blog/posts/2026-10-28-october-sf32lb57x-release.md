@@ -1,6 +1,6 @@
 ---
 icon: lucide/rss
-description: "SF32LB57x 现已上线：应用 CPU 算力约为 SF32LB56x 的两倍，搭载 ePicasso 3.0 图形加速，成本结构极具竞争力。"
+description: "SF32LB57x 已加入产品文档：应用核心性能约为 SF32LB56x 的两倍，搭载 ePicasso 3.0 图形加速，成本结构极具竞争力。"
 ---
 
 # 十月：SF32LB57x 来了 [2026-10-28] { #october-sf32lb57x-2026-10-28 }

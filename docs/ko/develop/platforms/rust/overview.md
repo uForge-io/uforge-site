@@ -11,7 +11,9 @@ tags:
 
 OpenSiFli의 Rust 프로젝트 [OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs)에는 HAL, PAC, 플래시 테이블 크레이트, 예제, 플래싱 및 디버깅 관련 안내가 포함되어 있습니다.
 
-프로젝트 유지관리자는 아직 개발 중이며 양산에 사용할 준비가 되지 않았다고 설명합니다. 하드웨어 저수준까지 다룰 수 있고 수정 사항을 업스트림에 기여할 준비도 된 팀이 아니라면, SF32에서 Rust는 탐색용 경로로만 취급하십시오.
+프로젝트 유지관리자는 아직 개발 중이며 양산에 사용할 준비가 되지 않았다고 설명합니다. 하드웨어를 직접 다룰 수 있고 수정 사항을 업스트림에 기여할 준비가 된 팀이 아니라면, SF32에서 Rust는 탐색용 경로로만 취급하십시오.
+
+2026-11-04 현재 upstream의 [`sifli-hal` 지원 상태](https://github.com/OpenSiFli/sifli-rs/blob/main/sifli-hal/README.md)에는 `sf32lb52x`만 지원 대상으로 명시되어 있습니다. 포팅을 계획하기 전에 해당 상태와 예제에서 정확한 칩의 지원 여부를 확인하십시오. 저장소나 크레이트 이름만으로 다른 SF32 제품군도 지원한다고 추정하지 마십시오.
 
 초기 툴체인 설정, 수정하지 않은 Blinky 빌드, 플래싱 도구 구성은 [Rust 시작하기](../../../getting-started/rust/getting-started-rust.md)를 참조하십시오. 이 페이지에서는 현재 지원 수준을 평가하고, 기준 구성을 넘어 Rust 적용을 진행할지 판단합니다.
 
@@ -34,7 +36,7 @@ OpenSiFli의 Rust 프로젝트 [OpenSiFli/sifli-rs](https://github.com/OpenSiFli
 다음을 원한다면 Rust가 적합할 수 있습니다.
 
 - 임베디드 Rust를 실험하려는 경우.
-- 저수준 펌웨어 코드에서 강한 타입 안정성을 활용하려는 경우.
+- 저수준 펌웨어 코드에서 강한 타입 시스템을 활용하려는 경우.
 - `embedded-hal` 스타일의 드라이버를 개발할 기반을 마련하려는 경우.
 - SF32 Rust 생태계에 기여하려는 경우.
 

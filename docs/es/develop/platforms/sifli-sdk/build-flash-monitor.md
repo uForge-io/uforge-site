@@ -1,6 +1,6 @@
 ---
 icon: lucide/terminal
-description: "Flujo diario con SiFli-SDK: active el entorno, compile con scons, grabe por descarga UART o sftool y supervise la salida serie."
+description: "Flujo diario con SiFli-SDK: active el entorno, compile con scons, grabe con el script de descarga UART generado o con sftool y supervise la salida serie."
 tags:
     - Desarrollo
     - SiFli-SDK

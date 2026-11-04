@@ -1,6 +1,6 @@
 ---
 icon: lucide/waypoints
-description: "Recorridos de diseño de referencia de μForge: compare rutas reproducibles de validación de hardware y software y elija la más cercana a su producto."
+description: "Diseños de referencia de μForge: compare los flujos de validación de hardware y software y elija el recorrido más cercano a su producto."
 tags:
     - Hardware
     - Diseño de referencia

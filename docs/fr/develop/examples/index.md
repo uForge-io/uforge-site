@@ -64,7 +64,7 @@ Suivez cet ordre :
 2. Choisissez le framework utilisé par le projet.
 3. Repérez l'exemple qui couvre le périphérique le plus exigeant.
 4. Vérifiez qu'il utilise le middleware adapté.
-5. Tenez compte des contraintes de consommation et de mémoire.
+5. Vérifiez que l'exemple respecte les contraintes de consommation et de mémoire du produit.
 
 Par exemple, un produit audio Bluetooth devrait partir d'un exemple audio/Bluetooth plutôt que d'un `hello_world` de base, même si ce dernier est plus facile à comprendre.
 
@@ -78,7 +78,7 @@ Par exemple, un produit audio Bluetooth devrait partir d'un exemple audio/Blueto
 
 Cette méthode est plus lente pendant la première heure, et beaucoup plus rapide après le premier incident difficile.
 
-## Preuves à conserver { #evidence-to-keep }
+## Informations à consigner { #evidence-to-keep }
 
 Pour chaque exemple qui servira de base au produit, consignez :
 

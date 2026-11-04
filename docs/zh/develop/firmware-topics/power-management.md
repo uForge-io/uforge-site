@@ -22,10 +22,10 @@ tags:
 
 ## 可用起点 { #useful-starting-points }
 
-- SDK 电源管理示例。
-- CPU 使用率分析。
-- RT-Thread Shell 检查。
-- 板级电流测量。
+- [SDK 电源管理示例](../../learn/low-power/low-power-sdk-examples.md)。
+- [CPU 使用率分析](../../getting-started/tutorials/advanced.md)。
+- [RT-Thread Shell 检查](../platforms/sifli-sdk/debugging-diagnostics.md)。
+- [板级电流测量](../../learn/low-power/measurement-and-validation.md)。
 
 ## 测量记录 { #measurement-notes }
 

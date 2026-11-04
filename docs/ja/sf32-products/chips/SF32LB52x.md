@@ -12,7 +12,9 @@ tags:
 
 SF32LB52xは、エントリークラスのスマートウェアラブル機器や小型のグラフィカルHMI、Bluetooth周辺機器など、限られた実装スペースでディスプレイ、オーディオ、ストレージ、無線機能を必要とするAIoT製品向けに、SiFliがコストを抑えて提供するMCUファミリーです。
 
-本ファミリーは、240 MHzのArm Cortex-M33 STAR-MC1[^1] アプリケーションコアと、低消費電力の専用Bluetoothコントローラーコア（24 MHz）を搭載しています。Bluetooth接続の処理と常時動作が必要なタスクを分担することで、UIやアプリケーションを応答性よく動作させられます。
+本ファミリーは、240 MHzのArm Cortex-M33 STAR-MC1[^1] アプリケーションコアと、データシート上の上限が24 MHzの低消費電力専用Bluetoothコントローラーコアを搭載しています。Bluetooth接続の処理と常時動作が必要なタスクを分担することで、UIやアプリケーションを応答性よく動作させられます。
+
+**LCPU周波数に関する注記：**SiFliの[DS5201 V2.5.3データシート（中国語）](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p5p3.pdf)はLCPUの上限を24 MHzとしています。一方、現行の[SF32LB52x低消費電力測定レポート](https://docs.sifli.com/projects/rpt5202_sf32lb52x-low-power-measurement-report/latest/en/brief_introduction.html)と[SDK低消費電力ガイド](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html)は48 MHzとしていますが、その差を説明するSKU、動作モード、設定条件は示していません。本ページでは比較用にデータシートの値を使用しています。`24/48 MHz`を選択可能な範囲や型番別の値と解釈せず、対象デバイスとSDKで許容されるLCPU周波数をSiFliに確認してください。
 
 選定時には、SiFliのチップ型番ガイドに掲載されている主要品種を、電源方式の異なる次の2系統に分けて考えます。
 
@@ -177,7 +179,9 @@ SiFliのチップ型番ガイドに掲載されている主要品種は、次の
 ## よくある質問 { #frequently-asked-questions }
 
 **SF32LB52xの主な仕様は？**
-SF32LB52xはアプリケーションCPU（Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33 @24/48 MHz、専用Bluetoothコントローラー）を備えています。内蔵SRAMは576 KBで、Bluetoothはデュアルモード（Classic Bluetooth + BLE）です。グラフィックスはePicasso 2.0 Lite、パッケージはQFN68（7 × 7 mm）、USBは2.0 FSです。
+SF32LB52xはアプリケーションCPU（Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33、最大24 MHz、専用Bluetoothコントローラー）を備えています。内蔵SRAMは576 KBで、Bluetoothはデュアルモード（Classic Bluetooth + BLE）です。グラフィックスはePicasso 2.0 Lite、パッケージはQFN68（7 × 7 mm）、USBは2.0 FSです。
+
+このLCPUクロックはデータシートの上限に基づくものであり、24/48 MHzの動作範囲が確認されたわけではありません。[資料間の相違](#overview)を参照し、対象デバイスとSDKで許容されるクロックをSiFliに確認してください。
 
 **SF32LB52xが対応するディスプレイインターフェースは？**
 SPI / DSPI / QSPI / 8080 / EPD / JDIに対応しています。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
@@ -211,3 +215,6 @@ RGB888カラーで最大512 × 512です（DTR対応のQSPIディスプレイイ
 ### リファレンス製品 { #reference-products }
 
 SF32LB52の代表的な用途には、エントリークラスのスマートウォッチやフィットネスバンド、Bluetoothアクセサリー、小型グラフィカル操作パネル、電子棚札、スマートバッジ、携帯型ラベルプリンター、コストを重視する電動自転車・電動キックボード用ディスプレイなどがあります。
+
+!!! note "自動生成コンテンツ"
+    本ページは専用の原資料がない状態で作成されています。技術情報を利用する前に、SiFliの公式ドキュメントと照合してください。

@@ -40,9 +40,9 @@ hide:
 </div>
 
 </div>
-<div class="uf-spotlight-field" aria-label="Explore the μForge platform" markdown>
+<div class="uf-spotlight-field" aria-label="Explorar la plataforma μForge" markdown>
 
-<button type="button" class="uf-spotlight-toggle" id="uf-spotlight-toggle" aria-pressed="false" aria-label="Reveal all cards"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><g class="uf-wand-shake"><line x1="6" y1="18.5" x2="14.3" y2="10.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/><path class="uf-wand-star" d="M17.5 3.2c.18 0 .34.12.38.3l.5 2.1c.15.6.62 1.07 1.22 1.22l2.1.5c.18.04.3.2.3.38s-.12.34-.3.38l-2.1.5c-.6.15-1.07.62-1.22 1.22l-.5 2.1a.39.39 0 0 1-.76 0l-.5-2.1c-.15-.6-.62-1.07-1.22-1.22l-2.1-.5a.39.39 0 0 1 0-.76l2.1-.5c.6-.15 1.07-.62 1.22-1.22l.5-2.1c.04-.18.2-.3.38-.3Z"/><circle class="uf-wand-dot uf-wand-dot--a" cx="20.6" cy="11.2" r=".75"/><circle class="uf-wand-dot uf-wand-dot--b" cx="14.6" cy="4.4" r=".55"/></g></svg></button>
+<button type="button" class="uf-spotlight-toggle" id="uf-spotlight-toggle" aria-pressed="false" aria-label="Mostrar todas las tarjetas"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><g class="uf-wand-shake"><line x1="6" y1="18.5" x2="14.3" y2="10.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/><path class="uf-wand-star" d="M17.5 3.2c.18 0 .34.12.38.3l.5 2.1c.15.6.62 1.07 1.22 1.22l2.1.5c.18.04.3.2.3.38s-.12.34-.3.38l-2.1.5c-.6.15-1.07.62-1.22 1.22l-.5 2.1a.39.39 0 0 1-.76 0l-.5-2.1c-.15-.6-.62-1.07-1.22-1.22l-2.1-.5a.39.39 0 0 1 0-.76l2.1-.5c.6-.15 1.07-.62 1.22-1.22l.5-2.1c.04-.18.2-.3.38-.3Z"/><circle class="uf-wand-dot uf-wand-dot--a" cx="20.6" cy="11.2" r=".75"/><circle class="uf-wand-dot uf-wand-dot--b" cx="14.6" cy="4.4" r=".55"/></g></svg></button>
 
 <a class="uf-spotlight-item uf-spotlight-item--silicon" href="sf32-products/family/SF32_family.md" data-radius="260">
   <span class="uf-spotlight-item__art uf-spotlight-item__art--silicon" aria-hidden="true"></span>
@@ -75,7 +75,7 @@ hide:
 <a class="uf-spotlight-item uf-spotlight-item--examples" href="projects/index.md" data-radius="230">
   <span class="uf-spotlight-item__art uf-spotlight-item__art--examples" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">Proyectos</span>
-  <span class="uf-spotlight-item__title">Relojes y HMI</span>
+  <span class="uf-spotlight-item__title">Relojes inteligentes y HMI</span>
   <span class="uf-spotlight-item__copy">Ejemplos de aplicaciones de calidad de producción.</span>
 </a>
 
@@ -144,7 +144,7 @@ hide:
 
 ---
 
-## Microcontroladores SF32 compatibles [^1] { #supported-sf32-mcus .uf-center-heading }
+## Familias de microcontroladores SF32 [^1] { #supported-sf32-mcus .uf-center-heading }
 
 <div class="grid cards uf-mcu-grid" markdown>
 

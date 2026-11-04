@@ -49,22 +49,39 @@ Un produit SF32LB55x typique comprend la MCU, l'architecture d'alimentation, les
 
 ### 9.2. Questions de conception { #91-design-qa }
 
+
 1. **Pourquoi l'état par défaut de certains GPIO diffère-t-il de la spécification avec Mode = 1 ?** Le mode téléchargement modifie l'état des GPIO associés à la mémoire Flash externe sur QSPI2 et QSPI3.
+
 2. **Pourquoi un moteur CMS peut-il vibrer de façon inattendue pendant la programmation ?** Son alimentation ou son signal PWM peut être activé par erreur. Si un niveau haut démarre le moteur, un GPIO avec pull-up (PU) par défaut peut l'alimenter ; SiFli recommande GPIO17 ou GPIO39 avec pull-down (PD) par défaut pour le PWM.
+
 3. **Pourquoi la soudure de la batterie peut-elle bloquer la puce, et comment l'éviter ?** Une mauvaise mise à la terre du fer peut provoquer une surtension transitoire. Ajoutez une protection contre les surtensions et les décharges électrostatiques à l'interface batterie, et reliez correctement le fer à la terre.
+
 4. **Pourquoi un bouton de réveil ne réveille-t-il pas la MCU depuis le mode Hibernate ?** Seules les six entrées de réveil du LCPU, GPIO43–GPIO48, peuvent sortir la MCU du mode Hibernate ; les GPIO0–GPIO3 du HCPU ne le peuvent pas.
+
 5. **Pourquoi un G-sensor ou un capteur de fréquence cardiaque peut-il consommer trop ou fonctionner anormalement pendant le débogage basse consommation ?** Son firmware s'exécute sur le LCPU ; les signaux I2C, SPI, de commande et d'interruption doivent donc tous utiliser des interfaces du LCPU. Une affectation au HCPU peut augmenter la consommation ou entraîner un dysfonctionnement.
+
 6. **Pourquoi la consommation du capteur reste-t-elle élevée alors que tous les signaux utilisent des interfaces du LCPU ?** Couper uniquement l'alimentation du capteur ne suffit pas si les alimentations des pull-up I2C ou d'interruption restent actives. Coupez également ces alimentations de pull-up.
+
 7. **Pourquoi l'utilisation de GPIO26 et GPIO27 comme sorties de commande peut-elle augmenter le courant de sommeil ?** Pendant le sommeil, placez les deux GPIO au même niveau ou configurez au moins l'un d'eux en haute impédance, sans pull-up ni pull-down.
+
 8. **Comment analyser une consommation élevée de SS6600 en mode Hibernate ?** Maintenez les dix entrées de réveil à un niveau haut ou bas stable : GPIO0–GPIO3 du HCPU et GPIO43–GPIO48 du LCPU. Si les dix sont tirées au niveau haut, utilisez une alimentation 3,3 V toujours présente pour les pull-up.
+
 9. **Le courant de repos des composants d'alimentation peut-il expliquer une consommation trop élevée en basse consommation ?** Oui. Des convertisseurs BUCK, LDO ou interrupteurs de charge à courant de repos (Iq) élevé augmentent la consommation ; SiFli recommande des composants avec Iq inférieur à 1 µA.
+
 10. **Comment éviter les artefacts d'affichage pendant les essais ESD ?** Ajoutez une protection ESD sur VDD, SCL, SDA, RESET et INT de l'écran tactile, ainsi que sur l'alimentation et RESET de l'écran LCD.
+
 11. **Comment éviter les anomalies du mode d'affichage permanent ?** Cette fonction concerne surtout les écrans AMOLED, qui consomment moins d'énergie que les écrans TFT. Les GPIO PB sont recommandés pour LCD_EN, LCD_RST et les commandes associées. Si un GPIO PA commande une activation à l'état haut, il doit avoir un pull-up (PU) par défaut ; un GPIO PA avec pull-down (PD) par défaut peut maintenir l'écran anormalement éteint pendant plus de 10 ms après le réveil.
+
 12. **Comment éviter les défauts de commande d'alimentation de l'audio Bluetooth externe après le réveil, lorsque le module doit rester alimenté pendant le sommeil ?** Commandez son alimentation avec un GPIO du LCPU. Pour un interrupteur actif à l'état bas, choisissez un GPIO du LCPU avec pull-down (PD) par défaut.
+
 13. **Comment garantir la charge après une surdécharge de la batterie ?** Lorsque la tension de la batterie est trop basse, la gestion du chemin d'alimentation doit permettre à l'entrée du chargeur d'alimenter le système après son branchement. En l'absence de cette gestion, le circuit intégré de charge choisi doit fournir un courant de charge lente d'au moins 40 mA.
+
 14. **Pourquoi la charge peut-elle ne pas démarrer après le branchement du chargeur ?** Le signal de détection du branchement doit être relié à l'un des GPIO de réveil du LCPU, GPIO43–GPIO48. Un autre GPIO peut empêcher le démarrage correct de la séquence de charge.
+
 15. **Comment éviter une consommation excessive en mode téléchargement lorsque MODE est haut ?** Pour les périphériques à fort courant, comme un amplificateur de puissance audio (PA) activé à l'état haut, utilisez un GPIO avec pull-down (PD) par défaut, jamais un GPIO avec pull-up (PU). Le mode téléchargement pourrait sinon activer le périphérique et perturber la programmation.
+
 16. **Pourquoi la programmation peut-elle échouer lorsque MODE est haut, et que faire si l'interruption d'un capteur utilise GPIO46 ?** En mode téléchargement, GPIO46 est par défaut UART3_RX et peut perturber la programmation. Déplacez l'interruption du capteur sur GPIO43, GPIO44, GPIO47 ou GPIO48. Si davantage d'entrées de réveil LCPU sont nécessaires, reliez un bouton externe à GPIO45 ou GPIO46 au moyen d'une résistance de 0 Ω.
+
 17. **Que faire si les algorithmes du G-sensor et de fréquence cardiaque dépassent la mémoire disponible ?** Vérifiez que la mémoire allouée au LCPU est suffisante. Si elle ne l'est pas, ajoutez une mémoire Flash NOR externe sur QSPI4.
 
 ## 10. Historique des révisions { #10-revision-history }

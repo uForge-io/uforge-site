@@ -11,7 +11,7 @@ tags:
 
 ## 概览 { #overview }
 
-SF32LB57-DevKit-LCD 是一款基于 **SF32LB57-MOD-WD** 的多媒体评估板（该命名似乎表明思澈科技（SiFli）有意将其作为模组产品；**WD** 可能代表 **Wi-Fi Dual-band（双频 Wi-Fi）**，但这一解读尚未经官方确认）。开发板集成 SF32LB57x MCU、SDIO Wi-Fi、启动 Flash 和多种外设接口，适用于智能 HMI、摄像头终端、可视对讲及联网显示产品，可用于在设计载板前验证图形、图像采集、音频和连接能力。
+SF32LB57-DevKit-LCD 是一款基于 **SF32LB57-MOD-WD** 的多媒体评估板。其命名似乎表明思澈科技（SiFli）有意将该型号作为模组产品；**WD** 可能代表 **Wi-Fi Dual-band（双频 Wi-Fi）**，但这一解读尚未经官方确认。开发板集成 SF32LB57x MCU、SDIO Wi-Fi、启动 Flash 和多种外设接口，适用于智能 HMI、摄像头终端、可视对讲及联网显示产品，可用于在设计载板前验证图形、图像采集、音频和连接能力。
 
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 900px; margin: 1rem auto;">
 <figure style="margin: 0;"><a href="assets/sf32lb57x/57DEVKIT_LCD_T_Look.png"><img src="assets/sf32lb57x/57DEVKIT_LCD_T_Look.png" alt="SF32LB57-DevKit-LCD — 正面" loading="lazy" style="display: block; width: 100%; height: auto;"></a><figcaption>正面</figcaption></figure>
@@ -61,7 +61,7 @@ SF32LB57-DevKit-LCD 是一款基于 **SF32LB57-MOD-WD** 的多媒体评估板（
 <figure style="margin: 0;"><a href="assets/sf32lb57x/57DEVKIT-LCD-B-Notes.svg"><img src="assets/sf32lb57x/57DEVKIT-LCD-B-Notes.svg" alt="SF32LB57-DevKit-LCD — 背面组件" loading="lazy" style="display: block; width: 100%; height: auto;"></a><figcaption>背面组件</figcaption></figure>
 </div>
 
-## 首次运行 { #getting-started }
+## 初次上电与调试 { #getting-started }
 
 验证显示功能需要开发板、兼容的 40 针/0.5 mm DPI-RGB 屏、支持数据传输的 USB 线，以及运行 Windows、Linux 或 macOS 的电脑。还可选配 IPEX-1 天线、DVP 摄像头、MicroSD/TF 卡、8 Ω 扬声器和 J-Link 或 DAP-Link 调试器。若要同时使用 UART 日志和原生 USB，需准备两根数据线。
 
@@ -72,20 +72,9 @@ SF32LB57-DevKit-LCD 是一款基于 **SF32LB57-MOD-WD** 的多媒体评估板（
 
 预烧录了出厂固件的开发板可能在上电后显示默认界面，具体表现取决于固件和面板；不能仅凭黑屏就判断下载失败。工具链、环境配置和烧录流程见 [SiFli-SDK 快速入门](../../getting-started/sifli/getting-started-sifli-sdk.md)。
 
-## SDK 编译目标 { #sdk-build-targets }
+## SDK 设置 { #sdk-build-targets }
 
-当前 SDK 编译配置列出以下目标。这些标识可直接用于编译，但不代表每块 SF32LB57-MOD-WD 开发板都适配所有目标；应结合所用 SDK，核对存储、显示、管脚配置及硬件版本。开发板原文未说明 WD 模组各版本与这些目标名称之间的对应关系。
-
-- `sf32lb57-lcd_n16r16_dpi`
-- `sf32lb57-lcd_n16r8_dpi`
-- `sf32lb57-lcd_n16r16_qspi`
-
-完成 SDK 环境配置后，以下 hello-world 编译命令**仅适用于硬件与 N16R16 DPI 配置相符的情况**。串口 hello-world 编译成功，不代表显示、摄像头或 Wi-Fi 驱动也已验证通过。
-
-```bash
-cd example/get-started/hello_world/rtt/project
-scons --board=sf32lb57-lcd_n16r16_dpi -j8
-```
+思澈科技（SiFli）的开发板指南建议安装 SiFli SDK，并在 SDK 中选择 `SF32LB57-DevKit-LCD` 板级支持包。当前链接的上游 `build_config_gcc.yaml` 未列出 SF32LB57 编译目标。编译前请在实际使用的 SDK 检出版本中确认板级支持包和准确的构建标识，不要用其他开发板的目标代替。串口 hello-world 成功只能确认基本串口启动，不能据此确认显示、摄像头或 Wi-Fi 驱动正常。
 
 ## 供电与调试 { #power-and-debug }
 
@@ -159,7 +148,7 @@ S1–S3 共用 `PA_34`/`GPADC_CH6`，原文给出的按键标称电压依次为 
 ## 连接器参考 { #connector-reference }
 
 !!! warning
-    以下表格转录自源文档中的板级连接信息，不能替代原理图。模组摘要包含未完整列出的条目（`58~?`），并将 `PA_00`/`PA_01` 标为 USB_DP/USB_DM，与明确列出的原生 USB 管脚 `PA35`/`PA36` 冲突。须区分模组焊盘编号与 MCU GPIO；这些尚未确认的条目不能直接作为 PCB 设计依据。
+    以下表格转录自源文档中的板级连接信息，不能替代原理图。模组摘要包含未完整列出的条目（`58~?`），并将 `PA_00`/`PA_01` 标为 USB_DP/USB_DM，与明确列出的原生 USB 管脚 `PA35`/`PA36` 冲突。源文档中的部分行合并列出模组焊盘范围、GPIO 范围及复用功能，并未逐一说明每个焊盘的功能；本页保留这些分组，不推断单个焊盘的具体分配。须区分模组焊盘编号与 MCU GPIO；这些尚未确认的条目不能直接作为 PCB 设计依据。
 
 <div align="center"><em>模组焊盘摘要——保留源文档未确认项</em></div>
 

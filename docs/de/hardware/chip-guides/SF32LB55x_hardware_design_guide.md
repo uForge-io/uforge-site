@@ -66,35 +66,40 @@ Die Speicheranbindung umfasst mehrere QSPI-Schnittstellen, eine unabhängige OPI
 | Gehäusename | Größe | Rastermaß | Kugeldurchmesser |
 | :--- | :--- | :--- | :--- |
 | QFN68L | 7 × 7 × 0,75 mm | 0,35 mm | - |
+| BGA125 | 7 × 7 × 0,94 mm | 0,5 mm | 0,25 mm |
 | BGA145 | 7 × 7 × 0,94 mm | 0,5 mm | 0,25 mm |
 | BGA169 | 7 × 7 × 0,94 mm | 0,5 mm | 0,25 mm |
 
 </div>
 
-SF32LB55x ist in den Gehäusen QFN68L, BGA145 und BGA169 verfügbar. Legen Sie das Gehäuse frühzeitig fest, da sich Speicherschnittstellen, Fanout, PCB-Fertigungsanforderungen und verfügbare GPIOs je nach Gehäuse unterscheiden.
+SF32LB55x ist in den Gehäusen QFN68L, BGA125, BGA145 und BGA169 verfügbar. Legen Sie das Gehäuse frühzeitig fest, da sich Speicherschnittstellen, Fanout, PCB-Fertigungsanforderungen und verfügbare GPIOs je nach Gehäuse unterscheiden.
 
 ![Abbildung 3.2-1: QFN68L-Pinverteilung](../../sf32-products/chips/assets/55x/SF32LB55x-QFN68-Leadmap.svg){ width="100%" loading="lazy" }
 
 <div align="center"><em>Abbildung 3.2-1: QFN68L-Pinverteilung</em></div>
 
-![Abbildung 3.2-2: BGA145-Pinverteilung](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-Ballmap.svg){ width="100%" loading="lazy" }
+![Abbildung 3.2-2: BGA125-Ballbelegung](../../sf32-products/chips/assets/55x/SF32LB55x-BGA125-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>Abbildung 3.2-2: BGA145-Pinverteilung</em></div>
+<div align="center"><em>Abbildung 3.2-2: BGA125-Ballbelegung</em></div>
+
+![Abbildung 3.2-3: BGA145-Pinverteilung](../../sf32-products/chips/assets/55x/SF32LB55x-BGA145-Ballmap.svg){ width="100%" loading="lazy" }
+
+<div align="center"><em>Abbildung 3.2-3: BGA145-Pinverteilung</em></div>
 
 !!! warning "Historische BGA169-Pinbelegungen"
     SiFli kennzeichnet SF32LB557V8N6 als abgekündigt (EOL). Die folgende Belegung bleibt zur Prüfung bestehender Designs erhalten, ist aber keine Empfehlung für neue Designs. SF32LB557VD3A6 verwendet eine andere BGA169-Belegung: D11, E9, K12, L11, L13 und M13 sind NC. Prüfen Sie die Belegung der exakten Bestellnummer; gleiche Gehäuseabmessungen bedeuten keine Pinkompatibilität.
 
-![Abbildung 3.2-3: BGA169 SF32LB557V8N6-Pinverteilung](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg){ width="100%" loading="lazy" }
+![Abbildung 3.2-4: BGA169 SF32LB557V8N6-Pinverteilung](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-1-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>Abbildung 3.2-3: BGA169 SF32LB557V8N6-Pinverteilung</em></div>
+<div align="center"><em>Abbildung 3.2-4: BGA169 SF32LB557V8N6-Pinverteilung</em></div>
 
-![Abbildung 3.2-4: BGA169 SF32LB557VD3A6-Pinverteilung](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-2-Ballmap.svg){ width="100%" loading="lazy" }
+![Abbildung 3.2-5: BGA169 SF32LB557VD3A6-Pinverteilung](../../sf32-products/chips/assets/55x/SF32LB55x-BGA169-2-Ballmap.svg){ width="100%" loading="lazy" }
 
-<div align="center"><em>Abbildung 3.2-4: BGA169 SF32LB557VD3A6-Pinverteilung</em></div>
+<div align="center"><em>Abbildung 3.2-5: BGA169 SF32LB557VD3A6-Pinverteilung</em></div>
 
 ### 3.3. Wichtige Hardwaremerkmale { #33-major-hardware-features }
 
-- Gehäuseoptionen QFN68L, BGA145 und BGA169.
+- Gehäuseoptionen QFN68L, BGA125, BGA145 und BGA169.
 - Designanforderungen für die beiden Quarze mit 48 MHz und 32,768 kHz.
 - Energieeffizienter Bluetooth-5.2-Transceiver sowie Anforderungen an RF-Anpassung und Antennenlayout.
 - Schnittstellen für OPI-PSRAM, QSPI-NOR-/NAND-Flash und PSRAM sowie SDIO-eMMC oder Micro SD; der integrierte Speicher hängt von der genauen Bestellnummer ab.

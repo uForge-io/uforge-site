@@ -15,11 +15,13 @@ tags:
 
 ### 6.1. Empreinte et empilage des couches { #61-footprint-and-stack-up }
 
-Utilisez le dessin du boîtier, respectez les exigences relatives au motif des pastilles et tenez compte des capacités d'assemblage du boîtier QFN ou BGA sélectionné. Pour un boîtier BGA, confirmez tôt le fan-out des billes, la stratégie de vias, les règles de masque de soudure et les limites de fabrication.
+Vérifiez la compatibilité du dessin et du motif de pastilles du boîtier QFN ou BGA sélectionné avec les capacités d'assemblage du fabricant prévu. Pour un boîtier BGA, confirmez tôt le fan-out des billes, la stratégie de vias, les règles de masque de soudure et les limites de fabrication.
 
 #### 6.1.1. Références d'empilage et de fabrication { #611-stack-up-and-fabrication }
 
-SiFli recommande un procédé PTH conventionnel et un circuit imprimé à quatre couches pour les QFN68L et BGA145. Pour le BGA169, la référence recommande une technologie HDI en une étape avec vias borgnes/enterrés. Les empilages illustrés à quatre et six couches ont une épaisseur finie de 0,7 mm ±10 %. Ce sont des constructions de référence, et non des limites universelles ; confirmez le dessin du boîtier, l'épaisseur finie et les capacités de fabrication auprès du fabricant du PCB.
+La série SF32LB55x prend en charge le montage de composants sur une ou deux faces du PCB.
+
+SiFli recommande un procédé PTH conventionnel et un circuit imprimé à quatre couches pour les QFN68L, BGA125 et BGA145. Pour le BGA169, la référence recommande une technologie HDI en une étape avec vias borgnes/enterrés. Les empilages illustrés à quatre et six couches ont une épaisseur finie de 0,7 mm ±10 %. Ce sont des constructions de référence, et non des limites universelles ; confirmez le dessin du boîtier, l'épaisseur finie et les capacités de fabrication auprès du fabricant du PCB.
 
 <div align="center"><em>Tableau 6.1-1 : Empilage PTH de référence à quatre couches</em></div>
 
@@ -27,16 +29,16 @@ SiFli recommande un procédé PTH conventionnel et un circuit imprimé à quatre
 
 | Couche / matériau | Surface de cuivre supposée | Type de matériau | Dk | DF | Épaisseur théorique (mil) | Épaisseur théorique (mm) |
 |:---|:---:|:---|:---:|:---:|---:|---:|
-| Masque de soudure supérieur | - | - | 3.5 | 0.8 | 1 | 0.0254 |
-| Cuivre + métallisation L1 | - | Cuivre + métallisation | - | - | 0.048 | 0.001219 |
-| Préimprégné | 70% | 2116 | 4.2 | 0.015 | 4.2 | 0.10668 |
-| Cuivre L2 | - | Cuivre | - | - | 0.07 | 0.001778 |
-| Noyau | 70% | Non indiqué dans la figure source | 4 | 0.017 | 16.1 | 0.408941 |
-| Cuivre L3 | - | Cuivre | - | - | 0.07 | 0.001778 |
-| Préimprégné | 70% | 2116 | 4.2 | 0.015 | 4.2 | 0.10668 |
-| Cuivre + métallisation L4 | - | Cuivre + métallisation | - | - | 0.048 | 0.001219 |
-| Masque de soudure inférieur | - | - | 3.5 | 0.8 | 1 | 0.0254 |
-| Total théorique | - | - | - | - | 26.736 | 0.679096 |
+| Masque de soudure supérieur | - | - | 3,5 | 0,8 | 1 | 0,0254 |
+| Cuivre + métallisation L1 | - | Cuivre + métallisation | - | - | 0,048 | 0,001219 |
+| Préimprégné | 70% | 2116 | 4,2 | 0,015 | 4,2 | 0,10668 |
+| Cuivre L2 | - | Cuivre | - | - | 0,07 | 0,001778 |
+| Noyau | 70% | Non indiqué dans la figure source | 4 | 0,017 | 16,1 | 0,408941 |
+| Cuivre L3 | - | Cuivre | - | - | 0,07 | 0,001778 |
+| Préimprégné | 70% | 2116 | 4,2 | 0,015 | 4,2 | 0,10668 |
+| Cuivre + métallisation L4 | - | Cuivre + métallisation | - | - | 0,048 | 0,001219 |
+| Masque de soudure inférieur | - | - | 3,5 | 0,8 | 1 | 0,0254 |
+| Total théorique | - | - | - | - | 26,736 | 0,679096 |
 
 </div>
 
@@ -48,28 +50,43 @@ La figure source indique une épaisseur finie de 0,7 mm ±10 %, métallisation e
 
 | Couche / matériau | Surface de cuivre supposée | Type de matériau | Dk | DF | Épaisseur théorique (mil) | Épaisseur théorique (mm) |
 |:---|:---:|:---|:---:|:---:|---:|---:|
-| Masque de soudure supérieur | - | - | 3.5 | 0.8 | 0.4 | 0.01016 |
-| Cuivre + métallisation L1 | - | Cuivre + métallisation | - | - | 1.2 | 0.03048 |
-| Préimprégné | 70% | 1080 | 4.14 | 0.02 | 2.6 | 0.06604 |
-| Cuivre L2 | - | Cuivre | - | - | 0.7 | 0.01778 |
-| Préimprégné | 70% | 2116 | 4.14 | 0.02 | 4.8 | 0.12192 |
-| Cuivre L3 | - | Cuivre | - | - | 0.7 | 0.01778 |
-| Noyau | 70% | FR-4 CORE | 4.43 | 0.017 | 4 | 0.1016 |
-| Cuivre L4 | - | Cuivre | - | - | 0.7 | 0.01778 |
-| Préimprégné | 70% | 2116 | 4.14 | 0.02 | 4.8 | 0.12192 |
-| Cuivre L5 | - | Cuivre | - | - | 0.7 | 0.01778 |
-| Préimprégné | 70% | 1080 | 4.14 | 0.02 | 2.6 | 0.06604 |
-| Cuivre + métallisation L6 | - | Cuivre + métallisation | - | - | 1.2 | 0.03048 |
-| Masque de soudure inférieur | - | - | 3.5 | 0.8 | 0.4 | 0.01016 |
-| Total théorique | - | - | - | - | 24.8 | 0.629921 |
+| Masque de soudure supérieur | - | - | 3,5 | 0,8 | 0,4 | 0,01016 |
+| Cuivre + métallisation L1 | - | Cuivre + métallisation | - | - | 1,2 | 0,03048 |
+| Préimprégné | 70% | 1080 | 4,14 | 0,02 | 2,6 | 0,06604 |
+| Cuivre L2 | - | Cuivre | - | - | 0,7 | 0,01778 |
+| Préimprégné | 70% | 2116 | 4,14 | 0,02 | 4,8 | 0,12192 |
+| Cuivre L3 | - | Cuivre | - | - | 0,7 | 0,01778 |
+| Noyau | 70% | FR-4 CORE | 4,43 | 0,017 | 4 | 0,1016 |
+| Cuivre L4 | - | Cuivre | - | - | 0,7 | 0,01778 |
+| Préimprégné | 70% | 2116 | 4,14 | 0,02 | 4,8 | 0,12192 |
+| Cuivre L5 | - | Cuivre | - | - | 0,7 | 0,01778 |
+| Préimprégné | 70% | 1080 | 4,14 | 0,02 | 2,6 | 0,06604 |
+| Cuivre + métallisation L6 | - | Cuivre + métallisation | - | - | 1,2 | 0,03048 |
+| Masque de soudure inférieur | - | - | 3,5 | 0,8 | 0,4 | 0,01016 |
+| Total théorique | - | - | - | - | 24,8 | 0,629921 |
 
 </div>
 
 La figure source indique une épaisseur finie de 0,7 mm ±10 % pour le circuit imprimé HDI à six couches, métallisation et masque de soudure compris. L'empilage, les paramètres diélectriques et l'épaisseur théorique sont des références ; faites-les vérifier par le fabricant du PCB selon les matériaux, épaisseurs de cuivre et exigences d'impédance réels.
 
-#### 6.1.2. Dimensions des motifs de pastilles { #612-land-pattern-dimensions }
+#### 6.1.2. Dimensions du boîtier et de l'empreinte { #612-land-pattern-dimensions }
 
-- BGA145/BGA169 : billes de 0,25 mm de diamètre au pas de 0,5 mm ; le motif de référence indique une ouverture de masque de soudure de 0,33 mm et une ouverture de pâte de 0,25 mm.
+<div align="center"><em>Tableau 6.1-3 : Dimensions nominales du boîtier et pas</em></div>
+
+<div align="center" markdown>
+
+| Boîtier | Dimensions nominales du corps (L × l × H) | Pas des billes/pattes |
+|:---|:---:|:---:|
+| BGA125 | 7 × 7 × 0,94 mm | 0,5 mm |
+| BGA145 | 7 × 7 × 0,94 mm | 0,5 mm |
+| BGA169 | 7 × 7 × 0,94 mm | 0,5 mm |
+| QFN68L | 7 × 7 × 0,75 mm | 0,35 mm |
+
+</div>
+
+Ces dimensions nominales sont reprises des dessins de boîtier sources ; utilisez le dessin du boîtier choisi pour vérifier les tolérances.
+
+- BGA125/BGA145/BGA169 : billes de 0,25 mm de diamètre au pas de 0,5 mm ; le motif de référence indique une ouverture de masque de soudure de 0,33 mm et une ouverture de pâte de 0,25 mm.
 - QFN68L : pastilles périphériques de 0,2 × 0,55 mm au pas de 0,35 mm ; la référence indique une ouverture de masque de 0,3 × 0,65 mm et une ouverture de pâte de 0,2 × 0,55 mm. La pastille exposée mesure 5,49 mm de côté nominalement, dans une plage de 5,39 à 5,59 mm.
 
 Avant de valider l'empreinte, vérifiez le dessin du boîtier et les règles de pochoir et de masque de soudure de l'assembleur.
@@ -78,7 +95,7 @@ Avant de valider l'empreinte, vérifiez le dessin du boîtier et les règles de 
 
 - Gardez les boucles BUCK courtes et larges, avec un courant de retour proche de la boucle de commutation.
 - Éloignez les zones RF, quartz, GPADC et audio des alimentations à commutation, des horloges d'affichage, des moteurs et des chargeurs.
-- Routez les interfaces mémoire et d'affichage haute vitesse au-dessus d'un plan de masse de référence continu.
+- Routez les interfaces mémoire et d'affichage haute vitesse au-dessus d'un plan de référence de masse continu.
 - Placez la protection ESD près des connecteurs et routez les signaux d'abord à travers le composant de protection.
 - Prévoyez suffisamment de points de test pour l'alimentation, le démarrage, le débogage, la RF et l'étalonnage de production.
 
@@ -92,17 +109,17 @@ Les valeurs suivantes sont retranscrites des figures de règles de référence P
 
 | Règle / distance | PTH à quatre couches (mm) | HDI à six couches (mm) |
 |:---|---:|---:|
-| Largeur de piste : minimum / recommandée | 0.10 / 0.10 | 0.075 / 0.075 |
-| Largeur de piste : maximum | 2.54 | 2.54 |
-| Piste-piste, piste-via, via-via | 0.10 | 0.075 |
-| Pastille/SMD-piste ou via | 0.10 | 0.075 |
-| Pastille-pastille ou SMD-pastille | 0.10 | 0.10 |
-| Cuivre-piste, via, pastille ou SMD | 0.127 | 0.10 |
-| Cuivre-cuivre | 0.15 | 0.15 |
-| Bord de carte-piste, via, pastille, SMD ou cuivre | 0.25 | 0.20 |
-| Perçage-piste ou via | 0.10 | 0.075 |
-| Perçage-pastille, SMD ou cuivre | 0.10 | 0.10 |
-| Perçage-perçage ; corps de composant-corps de composant | 0.10 | 0.10 |
+| Largeur de piste : minimum / recommandée | 0,10 / 0,10 | 0,075 / 0,075 |
+| Largeur de piste : maximum | 2,54 | 2,54 |
+| Piste-piste, piste-via, via-via | 0,10 | 0,075 |
+| Pastille/SMD-piste ou via | 0,10 | 0,075 |
+| Pastille-pastille ou SMD-pastille | 0,10 | 0,10 |
+| Cuivre-piste, via, pastille ou SMD | 0,127 | 0,10 |
+| Cuivre-cuivre | 0,15 | 0,15 |
+| Bord de carte-piste, via, pastille, SMD ou cuivre | 0,25 | 0,20 |
+| Perçage-piste ou via | 0,10 | 0,075 |
+| Perçage-pastille, SMD ou cuivre | 0,10 | 0,10 |
+| Perçage-perçage ; corps de composant-corps de composant | 0,10 | 0,10 |
 
 </div>
 
@@ -118,17 +135,17 @@ Dans la matrice de distances entre éléments d'un même réseau des figures sou
 
 #### 6.2.3. EMI, ESD et protection { #623-emi-esd-and-protection }
 
-Lorsque c'est possible, placez les horloges et les pistes d'alimentation bruyantes sur les couches internes. Placez les composants ESD près du connecteur afin que chaque signal passe par la protection avant d'entrer sur la carte, sans dérivation ; utilisez une connexion de masse courte et large avec un via direct vers le plan. Pour la charge USB, placez le point de test côté connecteur par rapport à la TVS. À l'entrée batterie, placez la TVS entre le connecteur et la charge de la carte afin que le trajet vers la puce passe d'abord par la TVS, et gardez sa connexion de masse courte.
+Évitez les longues pistes sur une couche externe hors de la zone blindée. Routez les horloges et les alimentations bruyantes sur des couches internes, pas sur une couche externe. Placez les composants ESD près du connecteur afin que chaque signal passe par la protection avant d'entrer sur la carte, sans dérivation ; utilisez une connexion de masse courte et large avec un via direct vers le plan. Pour la charge USB, placez le point de test côté connecteur par rapport à la TVS. À l'entrée batterie, placez la TVS entre le connecteur et la charge de la carte afin que le trajet vers la puce passe d'abord par la TVS, et gardez sa connexion de masse courte.
 
 ### 6.3. Routage des interfaces { #63-interface-routing }
 
-Les pistes d'horloge doivent être courtes, blindées et isolées des signaux numériques rapides. La ligne RF doit être conçue pour une impédance de 50 Ω avec un réseau d'adaptation compact. Les pistes mémoire et d'affichage doivent avoir une longueur contrôlée selon leur vitesse et être regroupées par bus. Les signaux audio et GPADC doivent être blindés et éloignés des courants de commutation.
+Les pistes d'horloge doivent être courtes, blindées et isolées des signaux numériques rapides. Routez la RF avec une impédance contrôlée de 50 Ω et gardez le réseau d'adaptation compact. Les pistes mémoire et d'affichage doivent avoir une longueur contrôlée selon leur vitesse et être regroupées par bus. Les signaux audio et GPADC doivent être blindés et éloignés des courants de commutation.
 
 #### 6.3.1. Implantation et routage des quartz { #631-crystal-placement-and-routing }
 
 - Placez chaque quartz dans la zone blindée, à plus de 1 mm du bord du circuit et à plus de 5 mm des sources de chaleur telles que le PA, le chargeur et le PMU. Maintenez un dégagement d'au moins 0,25 mm autour du quartz.
 - Routez les pistes du quartz 48 MHz sur la couche supérieure, sur une longueur de 3 à 10 mm et avec une largeur de 0,1 mm. Espacez 48M_XI et 48M_XO d'au moins 0,15 mm, comme indiqué dans le [modèle de routage source](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-48M-M-PCB.png), et blindez-les par la masse en trois dimensions. Éloignez-les de VBAT, du DC-DC et des signaux rapides. Le texte source demande une zone sans cuivre sur les couches supérieure et adjacente sous la zone du quartz, et interdit le passage de pistes sans rapport dans cette zone.
-- Routez les pistes du quartz 32,768 kHz sur la couche supérieure, sur une longueur maximale de 10 mm et avec une largeur de 0,1 mm. Espacez XI et XO d'au moins 0,15 mm et blindez-les par la masse en trois dimensions. Le texte source demande une zone sans cuivre sur les couches supérieure et adjacente sous la zone du quartz, et interdit le passage de pistes sans rapport dans cette zone.
+- Routez les pistes du quartz 32,768 kHz sur la couche supérieure, sur une longueur maximale de 10 mm et avec une largeur de 0,1 mm. Espacez 32K_XI et 32K_XO d'au moins 0,15 mm et blindez-les par la masse en trois dimensions. Le texte source demande une zone sans cuivre sur les couches supérieure et adjacente sous la zone du quartz, et interdit le passage de pistes sans rapport dans cette zone.
 
 #### 6.3.2. RF et interfaces à haut débit { #632-rf-and-high-speed-interfaces }
 
@@ -281,6 +298,8 @@ Chaque tableau ci-dessous couvre un domaine de revue de l'implantation et du rou
 </div>
 
 #### 6.4.9. Points de test { #649-test-points }
+
+Pour la conception matérielle, prévoyez au minimum des points de test pour VBAT, GND, VDDIOA, VDDIOB, RSTN, Mode, SWDIO, SWCLK, RXD1, TXD1, RXD3 et TXD3. Les essais en production nécessitent des points de test pour VBAT, GND, boot_mode, VDDIOB, RXD3 et TXD3.
 
 <div align="center"><em>Tableau 6.4-9 : Liste de contrôle des points de test</em></div>
 

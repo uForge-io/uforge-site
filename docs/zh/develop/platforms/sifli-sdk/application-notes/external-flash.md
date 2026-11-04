@@ -332,7 +332,7 @@ cleanup:
 
 ## 通过 RT-Thread MTD 使用 Flash { #5-use-flash-through-rt-thread-mtd }
 
-RT-Thread 提供 MTD-NOR 和 MTD-NAND 两类设备驱动。如果在配置文件中正确配置并使能 MTD 和文件系统，系统启动时会自动注册设备。可以通过 `rt_device_find("flash1")` 查询；控制器设备名分别为 `flash1`、`flash2`、`flash3`（以及其他已使能控制器对应的设备名）。返回非空值表示注册成功。
+RT-Thread 提供 MTD-NOR 和 MTD-NAND 两类设备驱动。在配置中为 Flash 控制器正确配置并使能 MTD 后，系统启动时会自动注册设备。使用文件系统时，还需配置相应的文件系统。可以通过 `rt_device_find("flash1")` 查询；控制器设备名分别为 `flash1`、`flash2`、`flash3`（以及其他已使能控制器对应的设备名）。返回非空值表示注册成功。
 
 MTD 可供文件系统和 USB 存储使用。应用通常只需查找设备并绑定；MTD-NOR 已封装读写操作。如果自行注册设备，则需要实现下面的操作表。
 
@@ -551,7 +551,9 @@ typedef struct
 } FLASH_CMD_CFG_T;
 ```
 
-其中，`cmd` 是命令 ID（源示例中写使能为 `0x06`，读状态寄存器为 `0x05`）；`func_mode` 选择读或写；`data_mode` 选择无数据、单线、双线或四线数据；`dummy_cycle` 表示命令与地址/数据之间的空时钟周期；`ab_size` 和 `ab_mode` 描述交替字节（alternate bytes）；`addr_size` 和 `addr_mode` 描述地址长度及线数模式；`cmd_mode` 表示命令本身使用单线、双线还是四线发送。
+其中，`cmd` 是命令 ID（源示例中写使能为 `0x06`，读状态寄存器为 `0x05`）；`func_mode` 选择读或写；`data_mode` 选择无数据、单线、双线或四线数据；`dummy_cycle` 表示命令与地址/数据之间的空时钟周期；`ab_size` 和 `ab_mode` 描述交替字节（alternate bytes）；`addr_size` 以 `n-1` 编码表示地址长度，`addr_mode` 中 `0` 表示无地址，`1`、`2`、`3` 分别表示单线、双线和四线地址模式；当 `addr_mode` 为 `0` 时无需地址，`addr_size` 必须为 `0`。结构体注释将 `cmd_mode` 解释为发送命令本身所用的线数模式。
+
+原指南以 PUYA 的四线读取命令 `0xEB` 为例：时序图中 `ADDR` 后有 8 位 `MBYTE`，用于判断 `continue` 模式；原指南给出的 `ab_size` 和 `ab_mode` 值为 `0/3`，并将其解释为 1 字节（`n-1` 编码）和四线模式。原指南对 `cmd_mode` 的说明存在内部矛盾：结构体注释将 `0/1/2/3` 分别映射为无、单线、双线和四线，而后续文字称有效 Flash 命令的值始终为 `1`。配置前请核对目标 SDK 中该字段的定义和实现，不要仅依据这段说明推断取值。
 
 ## 移植 NAND Flash 器件驱动 { #8-port-a-nand-flash-part }
 

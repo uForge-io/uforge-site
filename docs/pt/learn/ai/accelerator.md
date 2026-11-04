@@ -116,7 +116,7 @@ Escolha o dispositivo pelos operadores, pelo orçamento de memória e pela carga
 | Família de dispositivos | Perfil para IA |
 |:--------------|:---------------|
 | **SF32LB52x** | Considere para Bluetooth, áudio e HMI básica com custo otimizado; use uma implementação leve na CPU como referência, salvo quando houver aceleração específica verificada. |
-| **SF32LB55x** | Adequado a dispositivos vestíveis BLE e produtos com muitos sensores; indicado para sensoriamento de baixo consumo e algoritmos compactos. |
+| **SF32LB55x** | O guia do SDK lista um NNACC na HCPU; confira o suporte a operadores na configuração escolhida. Adequado a dispositivos vestíveis BLE e produtos com muitos sensores, incluindo sensoriamento de baixo consumo e algoritmos compactos. |
 | **SF32LB56x** | Considere para UI mais completas, HMI conectada e pipelines de sensores ou multimídia; confira a configuração escolhida e os operadores do NNACC da HCPU. |
 | **SF32LB57x** | O guia citado não estabelece a disponibilidade de NNACC nessa família; verifique o componente, a placa e o suporte do SDK a operadores, runtime e memória antes de escolhê-lo para IA. |
 | **SF32LB58x** | Considere para cargas que combinam IA, gráficos e áudio quando a memória e os recursos HCPU/LCPU do número de peça escolhido atenderem aos requisitos do produto; verifique operadores, custos de integração e energia medida. |
@@ -253,16 +253,13 @@ Um produto de IA embarcada bem-sucedido geralmente combina um modelo compacto, c
 
 ## Casos de uso típicos { #typical-use-cases }
 
-Considere a aceleração de IA do SF32 para inferência local compacta em produtos conectados e alimentados por bateria quando os operadores compatíveis e o orçamento medido do sistema forem adequados:
+Considere a aceleração de IA do SF32 para inferência local compacta em produtos conectados e alimentados por bateria quando os operadores compatíveis e o orçamento medido do sistema forem adequados. Os cenários de produto combinam as tarefas de modelo acima com as necessidades da aplicação:
 
-- Reconhecimento de gestos em relógios, pulseiras e dispositivos portáteis.
-- Classificação de atividades em produtos de fitness e saúde.
-- Detecção de eventos de voz ou palavras-chave em acessórios de áudio.
-- Algoritmos de fusão de sensores em dispositivos vestíveis.
-- Análise de sinais biométricos quando houver suporte dos sensores e do software.
-- Detecção local de anomalias em dispositivos inteligentes.
-- Classificação simples de imagens ou eventos acionados pela câmera em dispositivos com entrada de câmera.
-- Comportamento inteligente de HMI que se adapta ao contexto do usuário.
+- Dispositivos vestíveis podem combinar reconhecimento de gestos, classificação de atividades e fusão de sensores; a análise biométrica depende do suporte dos sensores e do software.
+- Acessórios de áudio podem detectar eventos de voz ou palavras-chave.
+- Dispositivos inteligentes podem detectar anomalias localmente e filtrar eventos.
+- Produtos com câmera podem classificar imagens de forma simples ou reagir a eventos acionados pela câmera, se a captura oferecer suporte.
+- Uma HMI pode adaptar o comportamento ao contexto do usuário.
 
 ## Principais conclusões { #key-takeaways }
 

@@ -105,7 +105,7 @@ Hibernateからの復帰は`PM_HIBERNATE_BOOT`が設定されたコールドブ�
 
 ## 動作中のクロックを制御する { #control-clocks-while-awake }
 
-アイドルスレッドがスリープ状態に入れない場合、WFIの自動周波数低減によって消費電流を抑えられます。ただし、EPIC、EZIP、LCDC、USB、SDがアイドル状態の場合に限り安全です。アプリケーションでSDKのLVGL／周辺機器の稼働状態管理を利用しない場合は、`rt_pm_hw_device_start()`と`rt_pm_hw_device_stop()`で周辺機器の動作開始と終了を通知してください。`HAL_RCC_HCPU_SetDeepWFIDiv()`で分周比を設定します。通常、オーディオ処理では低減後のクロックを48 MHzに制限し、それ以外の処理では4 MHzを使用できます。SDKガイドの指示に従い、必要に応じて`HPSYS_RCC_DBGR_FORCE_HP`を設定してください。
+アイドルスレッドがスリープ状態に入れない場合、WFIの自動周波数低減で消費電流を抑えられます。EPIC、EZIP、LCDC、USB、SDがすべてアイドル状態の場合に限り安全です。SDK同梱のLVGL実装はEPIC/EZIPの稼働状態を追跡し、RT-Thread LCD DeviceドライバーはLCDC/USB/SDを追跡します。同梱LVGLを使用しない場合は、EPIC/EZIPの動作開始と終了を`rt_pm_hw_device_start()`と`rt_pm_hw_device_stop()`で通知してください。分周比は`HAL_RCC_HCPU_SetDeepWFIDiv()`で設定します。WFI周波数の設定値はファミリーごとに異なります。SF32LB52xガイドでは、オーディオ周辺機器の動作中は48 MHzまでしか下げられず、それ以外では4 MHzまで下げられます。また同ガイドは`HPSYS_RCC_DBGR_FORCE_HP`を1に設定するよう求めています。SiFliの[電源管理アプリケーションノート](https://docs.sifli.com/projects/solution/2.application-notes/power_manager/index.html)では、SF32LB55x、SF32LB56x、SF32LB58xのCPUアイドル周波数を1 MHzとしています。参照した資料ではSF32LB57xの値は確認できません。対象SDKのガイドを参照してください。
 
 処理を実行する場合は`rt_pm_run_enter()`を使用します。
 

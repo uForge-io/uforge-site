@@ -24,16 +24,16 @@ tags:
 - [ ] Os cristais de 48 MHz e 32,768 kHz atendem às especificações recomendadas, e o roteamento e as áreas de exclusão atendem aos requisitos
 - [ ] A trilha RF tem impedância de 50 Ω, e a rede de casamento está próxima ao chip
 - [ ] A configuração de boot pelo armazenamento, incluindo a opção eMMC da variante com alimentação regulada externa, corresponde à configuração dos pinos Bootstrap
-- [ ] O pino de controle da chave de alimentação do armazenamento foi verificado para a variante exata; resolva, antes da liberação, a divergência PA11/PA21 entre o checklist oficial e as notas de aplicação
+- [ ] Verifique o pino de controle da chave de alimentação do armazenamento para a variante exata. O checklist V1.0 atribui PA11 a 520/3/5/7 e PA21 a 52B/D/E/G/J; as duas notas de aplicação especificam PA21 para o controle da alimentação do armazenamento de boot. Antes da liberação, confirme com SiFli e resolva a divergência de 520/3/5/7.
 - [ ] USB DP/DN são roteados como par diferencial com impedância diferencial de 90 Ω
 - [ ] Os sinais SDIO são roteados em conjunto, com comprimento total ≤50 mm, diferença de comprimento no grupo ≤6 mm e blindagem de GND
 - [ ] Os pinos multiplexados DBG_UART/SWD e os pontos de teste de produção estão reservados
-- [ ] Os números de peça dos principais componentes foram conferidos na [lista de fornecedores aprovados pela SiFli][SiFli Approved Vendor List (AVL)] mais recente
+- [ ] Os números de peça dos principais componentes foram conferidos na [lista de fornecedores aprovados pela SiFli][SiFli Approved Vendor List (AVL)] vinculada
 
 ## 8. Documentos e referências { #8-related-documents-and-references }
 
-[SF32LB52x Datasheet (Official PDF)]: https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?
-[SF32LB52x User Manual (Official PDF)]: https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?
+[specification-pdf]: https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?
+[user-manual-pdf]: https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?
 [SF32LB52 Hardware Reference Design Package]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83%E8%AE%BE%E8%AE%A1-20250619.zip?
 [SF32LB520/3/5/7 Hardware Application Note (Source)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB520-3-5-7-HW-Application.md
 [52B/D/E/G/J Hardware Application Note (Source)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52B-E-G-J-HW-Application.md
@@ -43,8 +43,8 @@ tags:
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[Datasheet do SF32LB52x (PDF oficial)][SF32LB52x Datasheet (Official PDF)]__
-- :fontawesome-solid-file-pdf: __[Manual do usuário do SF32LB52x (PDF oficial)][SF32LB52x User Manual (Official PDF)]__
+- :fontawesome-solid-file-pdf: __[Datasheet do SF32LB52x (PDF oficial, V2p4)][specification-pdf]__
+- :fontawesome-solid-file-pdf: __[Manual do usuário do SF32LB52x (PDF oficial, V0p3)][user-manual-pdf]__
 - :fontawesome-solid-file-zipper: __[Pacote de projeto de referência do SF32LB52][SF32LB52 Hardware Reference Design Package]__
 - :fontawesome-brands-github: __[Nota de aplicação de hardware do SF32LB520/3/5/7 (fonte)][SF32LB520/3/5/7 Hardware Application Note (Source)]__
 - :fontawesome-brands-github: __[Nota de aplicação de hardware do 52B/D/E/G/J (fonte)][52B/D/E/G/J Hardware Application Note (Source)]__
@@ -57,8 +57,8 @@ tags:
 Outras referências:
 
 - [Resumo do produto SF32LB52x](https://downloads.sifli.com/user%20manual/PB5201-SF32LB52x-Product%20Brief.pdf)
-- [Datasheet do SF32LB52x](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf)
-- [Manual de referência do SF32LB52x](https://downloads.sifli.com/user%20manual/UM5201-SF32LB52x-User%20Manual%20V0p8p4.pdf)
+- [Datasheet do SF32LB52x (V2p5p3)](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf)
+- [Manual de referência do SF32LB52x (V0p8p4)](https://downloads.sifli.com/user%20manual/UM5201-SF32LB52x-User%20Manual%20V0p8p4.pdf)
 - [Nota de aplicação de hardware do SF32LB520/3/5/7](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB520-3-5-7-HW-Application.md)
 - [Nota de aplicação de hardware do 52B/D/E/G/J](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52B-E-G-J-HW-Application.md)
 
@@ -69,7 +69,7 @@ Os [checklists do esquemático](SF32LB52x_schematic_checklist.md) (Seção 5.8) 
 As notas de aplicação originais da SiFli incluem as figuras de referência de esquemáticos, layout de PCB, mecânica e alimentação apresentadas a seguir. Os apêndices mantêm essas figuras como material de referência para a revisão; as Seções 5 e 6 continuam sendo as principais orientações de projeto.
 
 !!! note "Como usar estas figuras"
-    Use estas figuras como circuitos de referência e exemplos de layout das notas de aplicação originais. Confirme a implementação final para o dispositivo e o produto escolhidos usando as regras, tabelas, datasheet, manual de referência, pacote de projeto de referência mais recente e AVL.
+    Use estas figuras como circuitos de referência e exemplos de layout das notas de aplicação originais. Confirme a implementação final para o dispositivo e o produto escolhidos usando as regras, tabelas, datasheet, manual de referência, pacote de projeto de referência citado na Seção 8 e AVL vinculada.
 
 <div align="center"><em>Tabela 9-1: Mapa dos apêndices</em></div>
 

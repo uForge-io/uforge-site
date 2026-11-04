@@ -13,7 +13,7 @@ tags:
 # Guía de diseño de hardware de SF32LB57x — Lista de comprobación del esquemático { #sf32lb57x-hardware-design-guide-schematic-checklist }
 
 !!! note "Parte de la guía de diseño de hardware de SF32LB57x"
-    Esta página reúne los puntos de comprobación del esquemático de la sección 5.8 a partir de las tablas oficiales de autocomprobación del diseño de SiFli. Vuelva a [Sistema mínimo y alimentación](SF32LB57x_schematic_system_power.md), la primera de las tres páginas de directrices de diseño del esquemático.
+    Esta página reúne las comprobaciones de esquemático de las secciones 4.1–4.8 de la guía oficial de hardware del SF32LB57x de SiFli. Las comprobaciones de diseño y trazado de PCB de esas mismas tablas están en la [Lista de comprobación de diseño de PCB](SF32LB57x_pcb_layout_checklist.md). El [Markdown oficial de OpenSiFli](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/SF32LB57x-HW-Application.md) contiene las tablas completas de autocomprobación; se contrastaron con él la cobertura de puntos, la aplicabilidad y los valores indicados en ambas listas. Las discrepancias de la fuente que se describen a continuación siguen sin resolverse. Las tablas de comprobación del Markdown no codifican los resaltados de revisión propios del libro de trabajo, por lo que no se comprobaron de forma independiente los colores de las celdas de Excel. Confirme con SiFli las discrepancias para el número de pieza exacto antes de aprobar el diseño. Vuelva a [Sistema mínimo y alimentación](SF32LB57x_schematic_system_power.md), la primera de las tres páginas de directrices de diseño del esquemático.
 
 ## 5.8. Lista de comprobación del esquemático { #58-schematic-checklist }
 

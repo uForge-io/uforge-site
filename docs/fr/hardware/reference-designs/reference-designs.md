@@ -1,6 +1,6 @@
 ---
 icon: lucide/waypoints
-description: "Parcours de conceptions de référence pour μForge : comparez les démarches de validation matérielle et logicielle et choisissez celle qui correspond le mieux à votre produit."
+description: "μForge : comparez les parcours de validation matérielle et logicielle des conceptions de référence et choisissez celui qui correspond le mieux à votre produit."
 tags:
     - Matériel
     - Conception de référence

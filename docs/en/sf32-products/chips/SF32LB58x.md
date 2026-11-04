@@ -97,9 +97,16 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - External Wi-Fi connectivity through SDIO
 - 2x integrated audio ADCs
 - 2x integrated audio DACs
-- 2 PDM interfaces, each able to serve up to two digital microphones; the interface count is not the microphone count, and usable connections also depend on pin multiplexing and board routing
+- 2 PDM interfaces; SiFli's hardware application note documents two PDM microphone inputs. Verify usable channels against pin multiplexing and board routing.
 - 3 I2S interfaces: I2S1 is input-only; I2S2 and I2S3 support input and output. All operate in master mode.
 - USB 2.0 High-Speed in host and device modes
+
+### Security { #security }
+
+- AES, HASH, and CRC hardware accelerators; true random number generator (TRNG)
+- Secure Boot and 1,024-bit eFuse for the Root of Trust and UID
+- Real-time decryption of off-chip code through MPI1, MPI2, MPI3, and MPI5
+- SiFli's product brief lists PSA Certified Level 1; verify certificate scope and status for the exact part and intended product.
 
 ### System Integration { #system-integration }
 
@@ -128,19 +135,24 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 
 ## Family Variants
 
-The current SiFli Chip Model Guide lists three SF32LB58x order codes, all in BGA256, with the co-packaged memory configurations shown below. Confirm the exact order code against the current datasheet and approved vendor list (AVL), because configurations and availability can change.
+The current SiFli Chip Model Guide lists six SF32LB58x order codes, all in BGA256. Its memory table separates the boot SiP on MPI5 from memory on MPI1 and MPI2:
 
-<div align="center"><em>SF32LB58x Order Codes and Co-Packaged Memory</em></div>
+<div align="center"><em>SF32LB58x Order Codes, SiP Memory, and Common Limits</em></div>
 
 <div align="center" markdown>
 
-| Part Number | Package | Co-Packaged Memory |
-| :--- | :--- | :--- |
-| SF32LB583VCC36 | BGA256 | 1 MB boot NOR Flash + 2 × 8 MB OPI-PSRAM on MPI1 and MPI2 |
-| SF32LB586VDD36 | BGA256 | 1 MB boot NOR Flash + 2 × 16 MB HPI-PSRAM on MPI1 and MPI2 |
-| SF32LB587VEE56 | BGA256 | 4 MB boot NOR Flash + 2 × 32 MB HPI-PSRAM on MPI1 and MPI2 |
+| Order Code | Package | MPI5 Boot SiP | MPI1 SiP | MPI2 SiP |
+| :--- | :--- | :--- | :--- | :--- |
+| SF32LB580VNN36 | BGA256 | 1 MB NOR Flash | n/a | n/a |
+| SF32LB581VCN36 | BGA256 | 1 MB NOR Flash | 8 MB OPI-PSRAM | n/a |
+| SF32LB583VCC36 | BGA256 | 1 MB NOR Flash | 8 MB OPI-PSRAM | 8 MB OPI-PSRAM |
+| SF32LB585V5E56 | BGA256 | 4 MB NOR Flash | 4 MB NOR Flash | 32 MB HPI-PSRAM |
+| SF32LB586VDD36 | BGA256 | 1 MB NOR Flash | 16 MB HPI-PSRAM | 16 MB HPI-PSRAM |
+| SF32LB587VEE56 | BGA256 | 4 MB NOR Flash | 32 MB HPI-PSRAM | 32 MB HPI-PSRAM |
 
 </div>
+
+For all six entries, the guide lists a 6.5 × 8.5 × 0.94 mm package, 0.4 mm pitch, 1.71–3.63 V supply range, 94 HCPU + 66 LCPU GPIOs, and an operating-temperature range of −40 to 85 °C. The model guide does not give I/O-voltage ranges, which are bank-specific in the datasheet, or claim pin-to-pin compatibility. Do not infer substitutability from the shared BGA256 package; verify every used I/O rail and the pin-function table for the exact part before layout. Confirm current orderability against the latest datasheet and approved vendor list (AVL), because configurations and availability can change.
 
 When selecting a variant, check these items first:
 
@@ -162,7 +174,7 @@ Use this sequence to turn an SF32LB58x shortlist into a validated design:
 ## Frequently Asked Questions
 
 **What are the key specifications of SF32LB58x?**
-SF32LB58x pairs an application CPU (2× Cortex-M33 @240 MHz) with a low-power core (Cortex-M33 @48/96 MHz, a user-programmable core), 3.7 MB of internal SRAM and dual-mode Bluetooth (BT Classic + BLE). Graphics: ePicasso 2.0 + Vivante GCNanoUltraV (vector). Package: BGA256 (8.5 × 6.5 mm). USB 2.0 HS.
+SF32LB58x provides application processing (2× Cortex-M33 @240 MHz), a low-power core (Cortex-M33 @48/96 MHz, a user-programmable core), 3.7 MB of internal SRAM and dual-mode Bluetooth (BT Classic + BLE). Graphics: ePicasso 2.0 + Vivante GCNanoUltraV (vector). Package: BGA256 (8.5 × 6.5 mm). USB 2.0 HS.
 
 **Which display interfaces does SF32LB58x support?**
 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix))

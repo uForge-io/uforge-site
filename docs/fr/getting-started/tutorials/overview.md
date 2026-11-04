@@ -7,7 +7,7 @@ tags:
 
 # Vue d'ensemble des tutoriels { #tutorials-overview }
 
-Cette série vous aide à passer d'un premier flash réussi à des compétences pratiques de développement sur SF32. La progression suit les étapes du travail d'ingénierie : vérifier d'abord un périphérique, combiner ensuite des sous-systèmes, puis réunir les éléments de validation nécessaires au produit. Les tutoriels partent d'exemples SiFli-SDK, mais les bonnes pratiques — vérifier le matériel, conserver une configuration de référence validée et mesurer les résultats — s'appliquent quel que soit le parcours logiciel SF32.
+Après un premier flash réussi, cette série développe progressivement des compétences pratiques sur SF32 : vérifier d'abord un périphérique, combiner ensuite des sous-systèmes, puis réunir les éléments nécessaires à la validation d'un produit. Les tutoriels partent d'exemples SiFli-SDK, mais les bonnes pratiques — vérifier le matériel, conserver une configuration de référence validée et mesurer les résultats — s'appliquent quel que soit le parcours logiciel SF32.
 
 Les tutoriels constituent la deuxième étape de la [prise en main](../index.md). Validez d'abord les critères de réussite de la première mise en route. Si vous choisissez une puce, un module ou une carte de développement, consultez la [famille SF32](../../sf32-products/family/SF32_family.md) avant de commencer.
 

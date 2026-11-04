@@ -122,7 +122,7 @@ Vous pouvez poursuivre lorsque les conditions suivantes sont réunies :
 
 - CodeKit reconnaît l'emplacement du SDK.
 - La carte sélectionnée correspond à votre matériel.
-- Les actions de compilation et de flashage se terminent.
+- Les actions de compilation et de flashage se terminent correctement.
 - La console série affiche la sortie de `hello_world` après réinitialisation.
 
 ## Dépannage { #troubleshooting }

@@ -176,12 +176,12 @@ Trate cada falha como um domínio distinto: matriz e fiação física, comunica�
 **Objetivo:** comprovar a referência exata da OpenSiFli antes de alterar o mapa de teclas, um overlay ou uma dependência.
 
 1. Registre as revisões das duas placas e ligue os gabaritos exatamente de acordo com os overlays Urchin esquerdo e direito. Identifique placas e cabos USB/de gravação conforme a função.
-2. Compile as duas imagens no commit fixado, salve `west list` e inspecione a configuração gerada para confirmar a placa, o shield, a função de cada metade, BLE, CherryUSB, ZMK Studio e NVS esperados.
+2. Compile as duas imagens no commit fixado e salve `west list`. Confira se a configuração gerada corresponde à tabela de referência acima quanto à placa, ao shield, à função de cada metade, ao BLE, CherryUSB, ZMK Studio e NVS.
 3. Grave cada imagem usando o caminho de recuperação previamente verificado para aquela placa. Registre a inicialização a frio e o comportamento do console antes de parear as metades ou o host.
 4. Estabeleça o link BLE entre as metades e verifique as 38 posições nas camadas `default`, `lower` e `raise`. Teste deliberadamente a seleção/limpeza de perfis Bluetooth e os atalhos de desbloqueio do Studio para evitar acioná-los por acidente durante os testes de digitação.
 5. Valide USB HID e ZMK Studio na metade esquerda e, depois, Bluetooth HID no host escolhido. Repita após uma inicialização a frio.
 
-**Evidências a guardar:** registros das placas e da fiação, revisões do repositório derivado e do manifesto, configurações geradas, hashes das imagens, registros de gravação e inicialização, matriz completa de posições das teclas, resultados por camada, destino HID selecionado e versões do host/Studio.
+**Evidências a guardar:** acrescente ao registro do contrato do projeto as configurações geradas, os hashes das imagens, os registros de gravação/inicialização, a matriz completa de posições e os resultados por camada, o destino selecionado e as versões do host/Studio.
 
 **Critério de saída do ponto de controle 1:** duas inicializações a frio reproduzem as 38 posições, as três camadas, a comunicação da metade direita para a esquerda e pelo menos um destino HID do host; as duas metades continuam recuperáveis de forma independente.
 

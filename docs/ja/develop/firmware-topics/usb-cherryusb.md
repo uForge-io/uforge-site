@@ -51,7 +51,9 @@ USBの実装では、ファームウェア、記述子、ホストOS、電源動
 
 [SiFli-SDKの公式CherryUSBサンプル一覧](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/index.html)では、USBデバイスとUSBホストのサンプルが分かれています。想定するUSBの役割とクラスに合うサンプルから始め、そこで確認されている記述子、電源、ホスト互換性の項目を製品実装にも引き継いでください。
 
-<div align="center"><em>表: SF32LB58x向けSiFli-SDK CherryUSBサンプル</em></div>
+サンプルごとに対応ボードが異なります。流用する前に各サンプルページの「Supported Platforms」を確認し、対象ボードが一覧に含まれていることを確かめてください。
+
+<div align="center"><em>表: SF32LB58xのSDKドキュメントに掲載されたSiFli-SDK CherryUSBサンプル</em></div>
 
 <div align="center" markdown>
 

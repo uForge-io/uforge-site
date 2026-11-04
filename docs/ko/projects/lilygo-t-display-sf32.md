@@ -15,7 +15,7 @@ tags:
 
 ## T-Display-SF32란 무엇인가? { #what-is-t-display-sf32 }
 
-[Xinyuan-LilyGO/T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32)는 SF32LB52x MCU와 CST9220 터치를 갖춘 2.16인치 CO5300 AMOLED를 중심으로 구성된 개발 플랫폼입니다. 이 저장소에는 16 MB 플래시, 8 MB PSRAM, BHI260AP IMU, SX1262 LoRa, microSD 인터페이스, 오디오, USB Type-C, 충전 지원, 보드 핀 할당, 예제 애플리케이션, 하드웨어 파일, 공장 출하 펌웨어 디렉터리, 보드 전용 소비 전력 보고서가 문서화되어 있습니다.
+[Xinyuan-LilyGO/T-Display-SF32](https://github.com/Xinyuan-LilyGO/T-Display-SF32)는 SF32LB52x MCU와 CST9220 터치를 갖춘 2.16인치 CO5300 AMOLED를 중심으로 구성된 개발 플랫폼입니다. 저장소에는 예제 애플리케이션, 하드웨어 파일, 공장 출하 펌웨어, 보드 핀 할당, 보드별 소비 전력 보고서도 포함되어 있으며, 아래 구성품 표에서 문서화된 하드웨어 구성을 정리합니다.
 
 이러한 조합 덕분에 이 보드는 디스플레이 중심의 웨어러블, 휴대용 컨트롤러, 휴대용 센서 단말, 연결형 HMI를 평가하는 데 유용합니다. 완성된 제품이 아니라 플랫폼 레퍼런스입니다. 저장소가 많은 하드웨어 경로를 제공하지만, 제품 팀은 여전히 어떤 경로가 중요한지 선택하고, 알려진 기준 구성을 재현하고, 정확한 보드 리비전에서 측정하고, 전력, RF, 안전, 소프트웨어 유지 관리, 복구를 검증해야 합니다.
 
@@ -67,9 +67,9 @@ T-Display-SF32는 SF32LB52x의 그래픽, Bluetooth, 오디오, 저전력 기능
 
 | 구성 요소 | 필수 사양 | 역할 | 상태 | 구하는 곳 | 호환성 및 대체 참고 사항 |
 |:----------|:-----------------------|:-----|:-------|:----------------|:-------------------------------------|
-| T-Display-SF32 보드 | SF32LB52x; 문서화된 구성에는 2.16인치 CO5300 AMOLED, CST9220 터치, 16 MB 플래시, 8 MB PSRAM, BHI260AP IMU, SX1262 LoRa, microSD, 온보드 마이크와 3.5 mm 오디오 잭이 있는 스피커 앰프, 사용자 버튼 3개가 포함됨 | 통합된 연산, 디스플레이, 센싱, 무선, 스토리지, 오디오 레퍼런스 | 필수 | [LilyGO 저장소](https://github.com/Xinyuan-LilyGO/T-Display-SF32); [하드웨어 파일](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | 정확한 보드 리비전과 실장된 디바이스 목록을 기록하십시오. 모든 변형이 같은 구성으로 실장되어 있다고 가정하지 마십시오 |
-| T-SF32-Keyboard 확장 | ESP32-C6 Wi-Fi, L76K GPS, TCA8418/AW21009/XL9555 키보드 서브시스템, BME280, 적외선 송신기, AW86224 진동 모터를 갖춘 선택적 확장 | 나열된 무선, 위치 측정, 키보드, 환경 센싱, IR, 햅틱 기능을 추가 | 선택; 해당 기능에만 필수 | [LilyGO 저장소](https://github.com/Xinyuan-LilyGO/T-Display-SF32); [하드웨어 파일](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | 이 부품들은 단독형 T-SF32-Display에는 없습니다. Wi-Fi와 GPS는 UART2를 공유하므로 확장의 통합 구성을 검증하십시오 |
-| USB Type-C 데이터 연결과 제어된 전원 | 데이터 전송이 가능한 케이블; 전류 제한이 있는 전원 공급 장치 또는 전압을 모니터링하는 보호된 배터리 | 플래싱, 로그, 안전한 전원 검증 | 필수 | [LilyGO 저장소](https://github.com/Xinyuan-LilyGO/T-Display-SF32) | Type-C의 D+/D-는 CH343P USB-UART 브리지에 연결됩니다. 이 포트는 UART 플래싱/로그를 지원하며 SF32 네이티브 USB 디바이스/호스트 데이터는 지원하지 않습니다. 또한 보드별 3.5 V 초과 시작 조건을 따르십시오 |
+| T-Display-SF32 보드 | 문서화된 구성: SF32LB52x, 2.16인치 CO5300 AMOLED, CST9220 터치;<br>16 MB 플래시, 8 MB PSRAM, BHI260AP IMU, SX1262 LoRa;<br>microSD, 온보드 마이크, 3.5 mm 오디오 잭이 있는 스피커 앰프, 사용자 버튼 3개 | 통합된 연산, 디스플레이, 센싱, 무선, 스토리지, 오디오 레퍼런스 | 필수 | [LilyGO 저장소](https://github.com/Xinyuan-LilyGO/T-Display-SF32); [하드웨어 파일](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | 정확한 보드 리비전과 실장 부품을 기록하십시오.<br>microSD는 전용 CS를 사용하며 SPI1을 공유합니다. 문서화된 충전 IC는 SGM41562B입니다.<br>SX1262 주파수는 보드 버전에 따라 달라집니다. 실제 실장 구성을 확인하십시오. |
+| T-SF32-Keyboard 확장 | ESP32-C6 Wi-Fi, L76K GPS, TCA8418/AW21009/XL9555 키보드 서브시스템, BME280, 적외선 송신기, AW86224 진동 모터를 갖춘 선택적 확장 | 나열된 무선, 위치 측정, 키보드, 환경 센싱, IR, 햅틱 기능을 추가 | 선택; 해당 기능에만 필수 | [LilyGO 저장소](https://github.com/Xinyuan-LilyGO/T-Display-SF32); [하드웨어 파일](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/hardware) | 이 부품들은 단독형 T-SF32-Display에는 실장되지 않습니다.<br>Wi-Fi와 GPS는 UART2를 공유하므로 확장의 통합 구성을 검증하십시오. |
+| USB Type-C 데이터 연결과 제어된 전원 | 데이터 전송이 가능한 케이블; 전류 제한이 있는 전원 공급 장치 또는 전압을 모니터링하는 보호된 배터리 | 플래싱, 로그, 안전한 전원 검증 | 필수 | [LilyGO 저장소](https://github.com/Xinyuan-LilyGO/T-Display-SF32) | Type-C의 D+/D-는 CH343P USB-UART 브리지에 연결됩니다.<br>이 포트는 UART 플래싱과 로그에 사용되며 SF32 네이티브 USB 디바이스/호스트 데이터는 지원하지 않습니다.<br>또한 보드별 3.5 V 초과 시작 조건을 따르십시오. |
 | 인터페이스별 테스트 액세서리 | 테스트하는 경로에 필요한 microSD 카드, 오디오 부하/헤드폰, 합법적인 대역의 LoRa 상대 장치만 | 선택적인 보드 인터페이스를 점검 | 선택; 테스트별로 선택 | [예제](https://github.com/Xinyuan-LilyGO/T-Display-SF32/tree/master/examples) | 연결하기 전에 보드 파일과 대조하여 정확한 커넥터, 전압, 지역, 리비전을 확인하십시오 |
 
 </div>
@@ -91,7 +91,7 @@ T-Display-SF32는 SF32LB52x의 그래픽, Bluetooth, 오디오, 저전력 기능
 
 ## 지원되는 기준 구성 선택 { #choose-a-supported-baseline }
 
-업스트림 저장소는 현재 `master` 브랜치를 사용하며, 태그된 릴리스를 공통 소프트웨어 기준 구성으로 제시하지 않습니다. "최신"이라고 적지 말고 정확한 커밋을 기록하십시오. 저장소에는 `firmware/T-SF32-Factory-V1.2` 디렉터리가 있지만, 그 디렉터리 이름이 일치하는 보드 리비전, 저장소 커밋, 플래시 기록 절차의 기록을 대신하지는 않습니다.
+인용한 저장소 문서는 `master` 브랜치를 참조하며, 공통 소프트웨어 기준 구성으로 지정된 태그 릴리스는 없습니다. "최신"이라고 적지 말고 정확한 커밋을 기록하십시오. 저장소에는 `firmware/T-SF32-Factory-V1.2` 디렉터리가 있지만, 그 디렉터리 이름이 일치하는 보드 리비전, 저장소 커밋, 플래시 기록 절차의 기록을 대신하지는 않습니다.
 
 <div align="center"><em>표: T-Display-SF32 기준 구성 선택</em></div>
 

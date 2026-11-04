@@ -283,7 +283,7 @@ Für jede Peripherieschnittstelle vier Punkte prüfen:
 1. Elektrische Konnektivität, einschließlich gekreuzter Signale, Pull-up-/Pull-down-Widerstände, ESD und Terminierung.
 2. Kompatibilität der I/O-Spannungsdomäne, einschließlich des Rückspeisungsrisikos bei ausgeschalteter Peripherie.
 3. Sichere Zustände nach Reset und im Schlafmodus.
-4. Konflikte mit Boot-, Download-, SWD-, USB- und Aufweckfunktionen sowie mit multiplexierten Hochgeschwindigkeits-Displayfunktionen.
+4. Konflikte mit Boot-, Download-, SWD-, USB- und Aufweckfunktionen sowie mit multiplexierten Hochgeschwindigkeits-Displayfunktionen; prüfen Sie außerdem, ob eine Taste zum hardwareseitigen Aufwecken der MCU vorgesehen ist, und setzen Sie die erforderliche Schaltungs- und Softwarekonfiguration um.
 
 #### 5.6.9. UART { #569-uart }
 
@@ -291,6 +291,7 @@ Für jede Peripherieschnittstelle vier Punkte prüfen:
 - MCU-RXD verbindet sich mit Peripherie-TXD; MCU-TXD verbindet sich mit Peripherie-RXD.
 - Stimmen Sie die I/O-Spannung der Peripherie auf die I/O-Domäne der MCU ab.
 - Prüfen Sie das Reset-Verhalten von UART-Pins, die sich Pins mit USB-, Boot-, Download- oder Debug-Funktionen teilen.
+- Ist die UART auf `PA35` oder `PA36` multiplexiert, muss die externe Peripherie während des MCU-Resets ausgeschaltet oder der jeweilige Pin per Software auf Low gesetzt werden, um unbeabsichtigte Peripherieaktivität zu verhindern.
 - `PA18` und `PA19` sind die Standardpins der `DBG-UART`. Für häufig gesteckte und gezogene UART-Testanschlüsse empfiehlt die Quelle `PA18`, `PA19`, `PA43` oder `PA44`; diese GPIO-Gruppe ist bis 5,5 V ausgelegt. Sehen Sie bei langen Testleitungen einen 100-Ω-Serienwiderstand gegen Überschwingen vor.
 
 #### 5.6.10. I2C { #5610-i2c }
@@ -299,6 +300,8 @@ Für jede Peripherieschnittstelle vier Punkte prüfen:
 - Der SF32LB57x bietet vier I2C-Schnittstellen mit Host- und Gerätemodus; sie lassen sich per Matrix jedem GPIO zuordnen.
 - Die Quelle empfiehlt 4,7 kΩ im Standardmodus (100 kHz), 2,2 bis 3,3 kΩ im Schnellmodus (400 kHz) und 1 bis 2,2 kΩ im Schnellmodus Plus (1 MHz). Beginnen Sie bei 400 kHz mit 2,2 kΩ und passen Sie den Wert an die Buskapazität an.
 - Für einen gemeinsam genutzten I2C-Bus genügt ein Pull-up-Satz nahe am Host; nicht jedes Gerät benötigt einen eigenen Satz. Betreiben Sie Pull-ups an der Peripherieversorgung, damit sie mit dieser abgeschaltet werden und im Schlafmodus keinen Leckstrom verursachen.
+- Prüfen Sie, ob ein Interrupt der I2C-Peripherie die MCU aufwecken muss; falls ja, setzen Sie die erforderliche Schaltungs- und Softwarekonfiguration um.
+- I2C-Sensoren für Beschleunigung, Herzfrequenz und Magnetfeldmessung müssen alle Register in einem einzigen fortlaufenden Blockzugriff auslesen können.
 - Stellen Sie sicher, dass jedes Gerät am selben Bus eine eindeutige Adresse hat.
 
 #### 5.6.11. SPI { #5611-spi }
@@ -336,8 +339,9 @@ Für jede Peripherieschnittstelle vier Punkte prüfen:
 
 - Führen Sie USB DP/DN als 90-Ω-Differenzpaar aus.
 - USB DP/DM verwenden üblicherweise die gemultiplexten Funktionen `PA35` / `PA36`. Stellen Sie bei aktiviertem USB sicher, dass die externe Beschaltung während des Resets keine unzulässigen Pegel erzwingt.
-- Platzieren Sie das ESD-Schutzbauteil nahe am Steckverbinder und führen Sie die Signale zuerst durch dieses Bauteil und anschließend zum Chip.
+- Schützen Sie USB-Datenleitungen, VBUS und andere wichtige Pins mit ESD-Bauteilen. Platzieren Sie diese nahe am Steckverbinder und führen Sie die Signale vor dem Chip durch sie.
 - Vermeiden Sie Stichleitungen und erhalten Sie die Paaranpassung sowie eine durchgehende Referenzmasse.
+- Lassen Sie USB eingeschaltet, solange die MCU nicht schläft, damit das Protokoll das Anschließen und Trennen des Geräts erkennen kann.
 - Wenn das System im Schlafmodus durch das Anstecken von USB geweckt werden soll, verbinden Sie einen VBUS-Widerstandsteiler mit einem hardwareseitigen Weck-GPIO. Es wird empfohlen, denselben GPIO auch zur Erkennung eines angeschlossenen Ladegeräts zu verwenden.
 - `PA35` ist fest als `USB_DP` und `PA36` fest als `USB_DM` zugeordnet; diese Funktionen sind nicht remappbar. USB2.0 FS unterstützt bis zu 12 Mbit/s.
 - Reservieren Sie für DP/DM chipseitig 22-Ω- oder 33-Ω-Serienwiderstände sowie unbestückte Footprints für parallel geschaltete Kondensatoren zur Abstimmung der Signalintegrität.
@@ -357,6 +361,7 @@ Für jede Peripherieschnittstelle vier Punkte prüfen:
 - Verwenden Sie für spannungsteilerbasierte Messungen Widerstände mit 1 % Toleranz.
 - Platzieren Sie an jedem GPADC-Eingang nahe am Chip-Pin einen 100-nF-(0,1-µF-)Filterkondensator.
 - Halten Sie GPADC-Leitungen von DC/DC, RF, USB, SDIO, Display-Takten und Ladeschleifen fern.
+- Halten Sie GPADC-Leitungen außerdem von parallelen Hochgeschwindigkeitssignalen fern und schirmen Sie den Leitungsbereich mit Masse ab, um die Einkopplung digitaler Störungen zu verringern.
 
 <div align="center"><em>Tabelle 5.6-8: GPADC-Pin-Zuweisung</em></div>
 

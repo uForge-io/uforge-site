@@ -17,7 +17,7 @@ tags: [Разработка, SiFli-SDK, Практические руковод�
 
 | Семейство | Особенности отладки и сбора журналов |
 |---|---|
-| SF32LB52x, SF32LB56x, SF32LB58x | Исходное руководство описывает сбор через UART, использование `SifliUsartServer`/`AssertDumpUart` и восстановление дампа с помощью J-Link/Trace32. Выбирайте транспорт, который остаётся доступным в заданном режиме энергосбережения. |
+| SF32LB52x, SF32LB56x, SF32LB58x | В руководствах SiFli для этих семейств описаны сбор через UART, использование `SifliUsartServer`/`AssertDumpUart` и восстановление дампа с помощью J-Link/Trace32. Выбирайте транспорт, который остаётся доступным в заданном режиме энергосбережения. |
 | SF32LB55x | Подключение SWD можно переключать между HCPU и LCPU с помощью `$SDK_ROOT/tools/segger/jlink_hcpu_a0.bat` и `jlink_lcpu_a0.bat`. ROM-консоль LCPU работает через UART3 со скоростью 1 000 000 бод; для HCPU можно использовать UART1/2 или SWD. Поскольку SWD использует выводы PB, на время подключения оставьте LPSYS активной или переведите её в режим легкого сна (light sleep). |
 
 </div>
@@ -37,9 +37,9 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
   --output /tmp/live-crash --elf build_hcpu/main.elf
 ```
 
-Если в целевом устройстве используется PSRAM, добавьте `--include-psram --psram-size 8MB`. Для J-Link можно задать `--transport jlink --jlink-ip 127.0.0.1:19025`; выберите ядро, в котором произошёл сбой, с помощью `--core hcpu` или `--core lcpu`. В каталоге результатов должны находиться сохранённый двоичный дамп, ELF/AXF ядра, `log.txt`, `manifest.json` и `sdk_manifest.json`.
+Чтобы также экспортировать PSRAM, добавьте `--include-psram` или используйте `--psram-size 8MB` для ручного выбора скрипта PSRAM. Для подключения J-Link по IP через `SifliUsartServer` задайте `--transport jlink --jlink-ip 127.0.0.1:19025`; выберите ядро, в котором произошёл сбой, с помощью `--core hcpu` или `--core lcpu`. В каталоге результатов должны находиться сохранённый двоичный дамп, ELF/AXF ядра, `log.txt`, `manifest.json` и `sdk_manifest.json`.
 
-Для более старых версий SDK используйте способ, предусмотренный для семейства в исходном руководстве:
+Для более старых версий SDK используйте способ, предусмотренный в руководстве SiFli для соответствующего семейства:
 
 - UART: `SifliUsartServer` или `AssertDumpUart` могут выгрузить пакет assert, пока консоль доступна.
 - J-Link/SWD: добавьте J-Link в `PATH` и запустите скрипт для целевого семейства. Например, для SF32LB55x используется `$SDK_ROOT/tools/crash_dump_analyser/script/save_ram_55x.bat`. Соответствующий скрипт сохраняет RAM, регистры EPIC и PSRAM.
@@ -50,13 +50,13 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
 ![Параметр трассировки памяти в menuconfig SF32LB52x](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_mem_trace.png){ loading="lazy" }
 <div align="center"><em>Рисунок: пример для SF32LB52x — включите трассировку памяти до воспроизведения сбоя, если нужны данные о куче.</em></div>
 
-Для сбора по UART обычно требуется согласовать настройки утилиты последовательного порта, адрес сервера и целевое ядро. Следующие снимки экрана из исходного руководства помогут проверить подключение:
+Для сбора по UART обычно требуется согласовать настройки утилиты последовательного порта, адрес сервера и целевое ядро. В примере для Windows из руководства SF32LB52x инструменты находятся в `SiFli_Trace_v2.3.0/Sifli_UsartServer_v2.8`, где есть `SifliUsartServer.exe`; локальный путь установки и версия могут отличаться. На снимке настроек подключения показаны UART1 микросхемы, сопоставленный с COM17 хост-компьютера, скорость 1 000 000 бод, сервер `127.0.0.1:19025` и целевое ядро HCPU. Это пример из руководства, а не значения по умолчанию для других плат или схем подключения:
 
 ![Расположение SiFli_Trace и SifliUsartServer](../../../../assets/develop/app-notes/crash-analysis/Sifli_Trace.png){ loading="lazy" }
-<div align="center"><em>Рисунок: пример для SF32LB52x — каталог инструментов, показанный в исходном руководстве.</em></div>
+<div align="center"><em>Рисунок: пример для SF32LB52x — каталог SiFli_Trace/SifliUsartServer с версионированной серверной утилитой.</em></div>
 
 ![Настройки подключения SifliUsartServer для SF32LB52x](../../../../assets/develop/app-notes/crash-analysis/UsartServer52.png){ loading="lazy" }
-<div align="center"><em>Рисунок: пример для SF32LB52x — последовательный порт, скорость обмена, адрес сервера и ядро отладки должны соответствовать целевому устройству.</em></div>
+<div align="center"><em>Рисунок: пример для SF32LB52x — UART1 сопоставлен с COM17, скорость 1 000 000 бод, сервер `127.0.0.1:19025`, целевое ядро HCPU; это пример настроек, а не универсальные значения по умолчанию.</em></div>
 
 ![Скрипт сохранения RAM для анализатора аварийных дампов](../../../../assets/develop/app-notes/crash-analysis/save_ram_uart_52.png){ loading="lazy" }
 <div align="center"><em>Рисунок: пример для SF32LB52x — в каталоге есть скрипты для разных семейств и способов подключения, например `save_ram_55x.bat`, `save_ram_58x.bat` и `save_ram_uart_52x.bat`. Выберите скрипт для целевого устройства и подключения.</em></div>
@@ -75,10 +75,10 @@ sdk.py crash-dump analyze --core /tmp/live-crash/coredump.elf \
 В старом процессе с Trace32 загрузите пакет assert HCPU кнопкой HCPU assertion (HA) и командой `run_next_step`; для дампа LCPU используйте конфигурацию восстановления LCPU. Если стек исключения не отображается, прежде чем интерпретировать регистры, проверьте выбранное ядро, ELF и диапазоны памяти.
 
 ![Пример выбора скрипта захвата в Trace32](../../../../assets/develop/app-notes/crash-analysis/dump_select.png){ loading="lazy" }
-<div align="center"><em>Рисунок: пример для SF32LB52x — выбор скрипта захвата для J-Link/Trace32.</em></div>
+<div align="center"><em>Рисунок: пример для SF32LB52x — рядом показаны `.jlink`-скрипты для режимов IP и USB; вариант IP использует `127.0.0.1:19025`, а для прямого подключения J-Link следует выбрать вариант USB.</em></div>
 
 ![Окно assert HCPU в Trace32](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_hcpu_window.png){ loading="lazy" }
-<div align="center"><em>Рисунок: пример для SF32LB52x — после восстановления сопоставьте стек вызовов, список потоков, состояние кучи и причину ошибки.</em></div>
+<div align="center"><em>Рисунок: пример для SF32LB52x — после восстановления проверьте стек вызовов, окна `TaskList`, `TaskSwitchHistory`, `heapAllocation`, `error_reason` и дизассемблирования.</em></div>
 
 ## Остановка на раннем этапе загрузки или при подозрении на гонку { #stop-early-during-boot-or-a-suspected-race }
 
@@ -102,6 +102,6 @@ sdk.py crash-dump analyze --core /tmp/live-crash/coredump.elf \
 Монитор шины SDK позволяет зафиксировать обращения, приводящие к ошибке шины (bus fault). Зарегистрируйте функцию обратного вызова с помощью `dbg_busmon_reg_callback`, а затем используйте `dbg_busmon_read` и `dbg_busmon_write` из исходного примера, чтобы проверить нужный диапазон адресов. Дополните это трассировкой кучи и пакетом аварийного дампа: одного дампа регистров без символов и контекста памяти обычно недостаточно.
 
 ![Пример стека вызовов для кучи в Trace32](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_heap_callstack.png){ loading="lazy" }
-<div align="center"><em>Рисунок: пример для SF32LB52x — стек вызовов для кучи и окна памяти.</em></div>
+<div align="center"><em>Рисунок: пример для SF32LB52x — сопоставьте обработчик assertion и строку с окном необработанного дампа памяти.</em></div>
 
 Официальные источники по семействам: [анализ сбоев SF32LB52x](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/crash_analysis.html), [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/crash_analysis.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/crash_analysis.html), [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/crash_analysis.html) и соответствующее [руководство по отладке и журналированию](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/debug_logging.html).

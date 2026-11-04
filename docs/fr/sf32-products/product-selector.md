@@ -51,7 +51,7 @@ Filtrez d'abord les composants selon l'interface réellement requise par l'écra
 
 ### Interfaces audio { #audio-interfaces }
 
-Le sélecteur propose des filtres indépendants de nombre minimal pour les DAC audio, les ADC, les interfaces PDM et les interfaces I2S. Chaque valeur est un seuil minimal, et non un profil audio combiné. Vérifiez ensuite le partage des ressources avec les autres périphériques et la conception analogique de la carte.
+Le sélecteur propose des filtres indépendants de correspondance exacte pour le nombre de DAC audio, d'ADC, d'interfaces PDM et d'interfaces I2S. Chaque nombre sélectionné doit correspondre exactement ; ces filtres ne constituent pas un profil audio combiné. Vérifiez ensuite le partage des ressources avec les autres périphériques et la conception analogique de la carte.
 
 ### Connectivité et fonctions matérielles spécialisées { #connectivity-and-specialist-hardware }
 

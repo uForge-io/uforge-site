@@ -12,7 +12,7 @@ tags:
 
 The SiFli-SDK battery calculator estimates a battery's state of charge as a percentage from its measured voltage. It is a voltage-to-percentage estimator, not a coulomb counter: the result is only as accurate as the battery curve and charger-state information supplied to it.
 
-The middleware detects the charger state, selects the matching charge or discharge curve, and estimates the percentage by interpolation. It also uses a primary jump filter and an optional weighted-average filter to stabilize the result. The published guide does not fully specify the filters' internal ordering, so check the implementation in the SDK revision used by your project before assuming an exact processing sequence.
+The middleware detects the charger state, selects the matching charge or discharge curve, and estimates the percentage by interpolation. It also uses a primary jump filter and an optional weighted-average filter to stabilize the result.
 
 ## What the Calculator Does { #what-the-calculator-does }
 

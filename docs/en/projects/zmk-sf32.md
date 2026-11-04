@@ -176,12 +176,12 @@ Treat failures as distinct domains: physical matrix/wiring, the right-to-left sp
 **Goal:** prove the exact OpenSiFli reference before changing a keymap, overlay, or dependency.
 
 1. Record both board revisions and wire the two fixtures exactly to the left and right Urchin overlays. Label the boards and USB/download cables by role.
-2. Build both images at the pinned commit, save `west list`, and inspect the generated configuration to confirm the expected board, shield, split role, BLE, CherryUSB, ZMK Studio, and NVS settings.
+2. Build both images at the pinned commit and save `west list`. Compare the generated configuration with the baseline table above for the expected board, shield, split role, BLE, CherryUSB, ZMK Studio, and NVS settings.
 3. Download each image through its independently verified recovery path. Capture cold-boot and console behavior before pairing the halves or host.
 4. Establish the BLE split connection, then verify all 38 positions against the `default`, `lower`, and `raise` layers. Check Bluetooth profile selection/clear and Studio-unlock bindings deliberately so they are not triggered accidentally during typing tests.
 5. Validate USB HID and ZMK Studio on the left half, then validate Bluetooth HID to the selected host. Repeat after a cold start.
 
-**Evidence to retain:** board and wiring records, fork and manifest revisions, generated configurations, image hashes, download and boot logs, complete key-position matrix, layer results, endpoint selection, and host/Studio versions.
+**Evidence to retain:** add the generated configurations, image hashes, download/boot logs, full key-position matrix and layer results, selected endpoint, and host/Studio versions to the project-contract record above.
 
 **Gate 1 exit criterion:** two cold starts reproduce the full 38-position keymap, all three layers, the right-to-left split link, and at least one selected host endpoint; both halves remain independently recoverable.
 

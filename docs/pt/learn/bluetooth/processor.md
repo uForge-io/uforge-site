@@ -154,7 +154,7 @@ O perfil de consumo real depende do intervalo de conexão, da potência de trans
 
 O software Bluetooth costuma ser descrito em duas camadas principais:
 
-<div align="center"><em>Tabela: limites entre host, controlador e aplicação</em></div>
+<div align="center"><em>Tabela: responsabilidades do host e do controlador</em></div>
 
 <div align="center" markdown>
 

@@ -49,7 +49,7 @@ The [Schematic Checklist](SF32LB56x_schematic_checklist.md) (Section 5.8) and Se
 
 ### 9.1. Appendix A. A Typical SF32LB56x Product { #appendix-a-a-typical-sf32lb56x-product }
 
-A typical SF32LB56x product includes the MCU, PMIC, display and touch controller, boot storage, optional external memory, sensors, vibration motor, audio input/output, Bluetooth antenna, crystals, debug access, and production test access. The U package favors compact QFN implementation, while the V package enables richer interfaces with BGA/HDI layout planning.
+The U- and V-package application diagrams are examples, not required bills of materials. Both show the MCU with charger and Buck/LDO power, an LCD path, external flash options (QSPI NAND, SD NAND, or NOR flash), SPI motion and I2C heart-rate sensors, analog microphone input and speaker output through an audio PA, a PWM vibration motor, a Bluetooth/RF antenna, 48 MHz and 32.768 kHz crystals, and SWD/UART access. Touch and backlight circuitry are covered separately in the [Schematic Design Guidelines](SF32LB56x_schematic_design.md). The V diagram additionally shows eMMC and Wi-Fi over SDIO, GPS and NFC over UART, and an LTE module over SPI. Confirm the required peripherals, interface routing, and package support for the exact design.
 
 ## 10. Revision History { #10-revision-history }
 

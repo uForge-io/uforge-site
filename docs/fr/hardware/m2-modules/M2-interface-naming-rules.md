@@ -39,7 +39,7 @@ Où :
 
 | Spécification | Description |
 | --- | --- |
-| **M2xM** | Multimédia : futures capacités d'affichage RGB, de caméra DVP, de microphone numérique et d'audio avancé. |
+| **M2xM** | Multimédia : fonctionnalités envisagées pour l'avenir, notamment des écrans RGB, des caméras DVP, des microphones numériques et des fonctions audio avancées. |
 | **M2xA** | Analogique : futures capacités d'E/S analogiques de précision et d'acquisition de données. |
 | **M2xN** | Réseau : futures capacités Ethernet, CAN et de mise en réseau industrielle. |
 | **M2xH** | Haute vitesse : futures interfaces à haute bande passante. |
@@ -47,7 +47,11 @@ Où :
 
 </div>
 
-Ces descriptions indiquent le périmètre prévu pour chaque catégorie, pas des exigences électriques définitives. Le classeur local de la proposition contient les plans d'affectation des contacts M2 et M2xM. L'article de définition présente aussi des résumés M2xN et M2xA, mais aucune donnée source de cartographie des contacts n'a été trouvée pour vérifier ces résumés ; ils doivent donc être considérés comme non vérifiés. M2xH et M2xP restent des noms réservés, sans affectation de contacts.
+Ces descriptions indiquent le périmètre prévu pour chaque catégorie, pas des exigences électriques définitives.
+**État des sources :**
+- **M2 / M2xM :** Le brouillon lié indique qu'un classeur local de proposition contient des plans d'affectation des contacts, mais ce fichier n'est ni inclus dans ce dépôt ni lié ici ; ces plans restent des propositions.
+- **M2xN / M2xA :** Le brouillon résume ces extensions, mais aucune donnée originale de cartographie des contacts n'a été trouvée pour vérifier ces résumés ; ils restent non vérifiés.
+- **M2xH / M2xP :** Noms réservés, sans contacts affectés.
 
 ## Déclaration de module { #module-declaration }
 

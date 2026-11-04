@@ -72,7 +72,7 @@ L'arborescence downstream contient des pilotes et des bindings liés à SF32LB, 
 - Configuration de la boîte aux lettres HCI Bluetooth et du récepteur de diffusion BAP.
 - Codec audio, DMA, CRC, cryptographie, entropie, OTP/eFuse, régulateurs, reset et capteur de température.
 
-La présence dans l'arborescence ne signifie pas que chaque scénario produit est prêt pour la production. Validez la combinaison exacte d'exemple et de pilote sur la carte cible.
+La présence dans l'arborescence ne signifie pas qu'un pilote est activé pour la cible de carte ni que chaque scénario produit est prêt pour la production. Validez sur la carte cible la combinaison exacte de l'exemple, du pilote et de la configuration de carte.
 
 ## Séquence d'intégration { #integration-sequence }
 

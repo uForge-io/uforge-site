@@ -12,6 +12,8 @@ tags:
 
 SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产品，这类产品需要比入门级蓝牙（Bluetooth）MCU 更强的显示能力、更充裕的内存余量和更多的封装选择。
 
+选型时应优先区分封装与合封内存：SS6600A8 采用 QFN68L，不含合封 PSRAM，供电范围为 2.97–3.63 V；SF32LB551U4O5 和本页列出的 BGA 型号则为 1.71–3.63 V。
+
 它采用 big.LITTLE 双核架构，由两个 Arm Cortex-M33 STAR-MC1[^1] 处理器组成：高性能应用核最高运行频率为 240 MHz，超低功耗核最高运行频率为 48 MHz。这样，应用核可处理负载较重的 UI，低功耗核则负责传感器处理、待机控制以及需要持续运行的 BLE 任务。
 
 根据思澈科技（SiFli）官方产品简介和数据手册，SF32LB55x 支持 BLE 5.2，集成 ePicasso 2.5D 图形引擎、双 LCD 控制器和面向 TinyML 的神经网络矩阵加速器；片上 SRAM 共 1,312 KB（HCPU 1,088 KB + LCPU 224 KB），并支持 NOR、NAND、eMMC、PSRAM 等外部存储器。因此，对于需要比 SF32LB52x 更充足资源、又无需采用 56/58 系列更高规格器件的可穿戴设备、传感器密集型产品和紧凑型 HMI，SF32LB55x 是值得考虑的选择。
@@ -83,8 +85,8 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 - 超低功耗 Arm Cortex-M33 STAR-MC1 处理器，最高 48 MHz
 - 应用处理器最高 360 DMIPS / 965 EEMBC CoreMark
 - 低功耗处理器最高 72 DMIPS / 193 EEMBC CoreMark
-- 1,088 KB 应用 SRAM，其中包含 64 KB 保留 SRAM
-- 224 KB 低功耗 SRAM，全部为保留 SRAM
+- 1,088 KB 应用 SRAM，其中包含 64 KB 保持型 SRAM
+- 224 KB 低功耗 SRAM，全部为保持型 SRAM
 - 支持 NOR、NAND、eMMC、QSPI-PSRAM 和 OPI-PSRAM 外部存储
 
 ### 图形、显示与 AI { #graphics-display-and-ai }
@@ -200,10 +202,10 @@ SF32LB55x 提供 QFN 与 BGA 封装。由于 GPIO 数量、合封存储、显示
 ## 常见问题 { #frequently-asked-questions }
 
 **SF32LB55x 的主要规格是什么？**
-SF32LB55x 配备应用 CPU（Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33 @48 MHz，用户可编程内核）和 1,312 KB SRAM，仅支持低功耗蓝牙（BLE）。图形：ePicasso 1.0。封装：QFN68 / BGA145 / BGA169（7 × 7 mm (QFN68)）。USB 2.0 FS。
+SF32LB55x 配备应用 CPU（Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33 @48 MHz，用户可编程内核）和 1,312 KB SRAM，仅支持低功耗蓝牙（BLE）。图形：ePicasso 1.0。封装：QFN68L / BGA145 / BGA169（7 × 7 mm (QFN68L)）。USB 2.0 FS。
 
 **SF32LB55x 支持哪些显示接口？**
-SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI。各接口适用型号见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
+SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI。各接口适用型号见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。这是整个系列的接口汇总，并非每个订货型号或封装都支持全部接口；请查阅所链接的接口矩阵。
 
 **SF32LB55x 支持的最大显示分辨率是多少？**
 通过 MIPI-DSI 接口，最高支持 512 × 512、RGB888；仅适用于带内置 RAM 的显示驱动。详见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
@@ -212,7 +214,7 @@ SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI。各接口适用型号见[按器件
 封装内 PSRAM 最多 16 MB + 2 MB，封装内 NOR Flash 最多 8 MB。
 
 **SF32LB55x 需要什么供电电压？**
-1.71–3.63 V。
+SS6600A8 需要 2.97–3.63 V；本页列出的 SF32LB551U4O5 和 BGA 型号采用 1.71–3.63 V。设计电源树前，请先确定具体型号。
 
 **如何开始基于 SF32LB55x 的硬件设计？**
 请先阅读 [SF32LB55x 硬件设计指南](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求；投板前再使用原理图与布局检查清单。

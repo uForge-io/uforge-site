@@ -35,7 +35,7 @@ Mantenga en el proyecto de aplicación la lógica específica de esa aplicación
 
 ## Distribuir componentes con `sf-pkg` { #use-sf-pkg-to-distribute-components }
 
-Un componente es una unidad de ingeniería reutilizable. SiFli utiliza Conan como registro de paquetes; el subcomando actual del SDK es `sf-pkg`.
+Un componente es una unidad de ingeniería reutilizable. SiFli utiliza un registro de componentes basado en Conan; el subcomando actual del SDK es `sf-pkg`.
 
 Para consumir un paquete, ejecute `sdk.py sf-pkg init` desde el directorio `project` del proyecto SDK; se generará `conanfile.py`. Añada las referencias en el campo `requires` con el formato `package/version@<username>`, donde `<username>` es el nombre de usuario del registro de paquetes. Después, ejecute `sdk.py sf-pkg install` desde el mismo directorio. Los paquetes instalados se guardan en `project/sf-pkgs`; sus archivos Kconfig se integran en `menuconfig`, dentro de `SiFli External Components`.
 
@@ -47,6 +47,8 @@ sdk.py sf-pkg upload --name <package_name>/<version>@<username>
 ```
 
 El flujo exacto puede variar según la versión del SDK. Consulte las guías de SiFli sobre [integración de paquetes (en chino)](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/sf_pkg/use.html), [creación y publicación de paquetes (en inglés)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/sf_pkg/create.html) y [la versión en chino](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/sf_pkg/create.html) para ver la configuración, la autenticación y los comandos específicos de cada versión.
+
+Desde la [página principal de la documentación del SDK](https://docs.sifli.com/), localice los temas de integración y creación de paquetes correspondientes a la familia exacta del chip y a la versión del SDK de su copia de trabajo. Los enlaces de cada familia indicados arriba son ejemplos, no una matriz de compatibilidad. Compruebe los comandos y las dependencias de esa versión antes de copiar un ejemplo.
 
 ## Criterios de calidad de un componente { #component-quality-bar }
 

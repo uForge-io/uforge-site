@@ -657,7 +657,7 @@ SD1 nutzt 12 GPIOs (PA00–PA11), die über die VDDIOA2-Domäne versorgt werden.
 </div>
 
 !!! note "Prüfung der SD1-Bezeichnung"
-    Die Quelle gibt an, dass SD1 12 GPIOs (PA00–PA11) verwendet, ihre Signaltabelle führt jedoch nur 10 Signale auf (SD1_D[7:0], CLK und CMD). Außerdem sind in der Tabelle sowohl SD1_D2 als auch SD1_D6 mit „Daten 6“ beschrieben. Die Quelle erklärt weder die zwei nicht aufgeführten GPIOs noch die doppelte Bezeichnung. Prüfen Sie die vollständige SD1-Pinbelegung vor Abschluss des Schaltplans anhand des Chip-Datenblatts.
+    Die Quelle gibt an, dass SD1 12 GPIOs (PA00–PA11) verwendet, ihre Signaltabelle führt jedoch nur 10 Signale auf (SD1_D[7:0], CLK und CMD). Im eMMC-Referenzschaltplan ist PA11 als `SD1_RESET` bezeichnet, dieses Signal fehlt jedoch in der Tabelle. Die Quelle erklärt weder die Funktion von PA02 noch die verbleibende Abweichung bei der Anzahl. Außerdem sind in der Tabelle sowohl SD1_D2 als auch SD1_D6 mit „Daten 6“ beschrieben. Prüfen Sie die vollständige SD1-Pinbelegung vor Abschluss des Schaltplans anhand des Chip-Datenblatts.
 
 <div align="center"><em>Tabelle 5.6-4: SD2-Signalverbindungen</em></div>
 

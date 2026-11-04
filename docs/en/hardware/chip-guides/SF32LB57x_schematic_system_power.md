@@ -208,7 +208,7 @@ Use this table for schematic pre-review. Final values must still be checked agai
 
 | Rail / Pin | Typical External Capacitor | Main Use | Design Notes |
 |:-----------|:---------------------------|:---------|:-------------|
-| `VBUS` | >= 10 uF | USB / charger input | Battery-powered variants only; add OVP/ESD/EOS protection. |
+| `VBUS` | >= 10 uF | USB / charger input | Required only when using the integrated charger; otherwise `VBUS` may be left floating and this capacitor omitted. Add OVP/ESD/EOS protection when `VBUS` is used. |
 | `VBAT` | >= 4.7 uF | Battery connection and battery voltage sensing | Keep the battery path short and wide; avoid parallel routing with sensitive traces. |
 | `VCC` / `PVDD` | >= 10 uF | Main PMU / system input | Place decoupling close to the chip and size the trace for current. |
 | `VSYS` | About 2.2 uF | Internal or specified analog/RF-related supply | Do not use as a general peripheral supply; control total load and capacitance. |

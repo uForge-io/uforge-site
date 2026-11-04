@@ -26,13 +26,13 @@ The SF32LB52x has a dedicated battery-sense path on `GPADC_CH7` (`BAT`): the SDK
 | Family | GPADC channels | Resolution | Typical accuracy | Maximum normal GPADC input |
 |:-------|:---------------|:-----------|:-----------------|:---------------------------|
 | SF32LB55x | 8 | 10 bit | 3–4 mV | 1.1 V (X1); 3.3 V (X3) |
-| SF32LB52x | 8 | 12 bit | 1–2 mV | 3.3 V |
+| SF32LB52x | 8 | 12 bit | 1–2 mV | 1.1 V (A0); 3.3 V (RPO) |
 | SF32LB56x / 58x | 8 | 12 bit | 1–2 mV | 3.3 V |
 | SF32LB57x | 12 | 12 bit | 1–2 mV | 3.3 V |
 
 </div>
 
-The maximum input voltages listed above apply to normal GPADC inputs; dedicated battery-sense channels have their own routing and limits. The SF32LB55x example uses a 1 MΩ / 220 kΩ divider with 157 ms RC settling. The consolidated SF32LB56x guide lists 470 kΩ / 1000 kΩ with 200 ms settling for SF32LB52x, SF32LB56x, and SF32LB58x; it does not make this recommendation for SF32LB57x. For 57x, follow the battery-sense path and limits documented for the exact part rather than extrapolating these resistor values or settling time. These recommendations apply to external divider networks. In particular, do not add an external divider to the SF32LB52x dedicated `GPADC_CH7` battery path unless the target board design calls for one: that path already uses an internal divider. Divider tolerance affects the final measurement accuracy, so calibrate an external divider separately on the production line when the design requires it.
+The maximum input voltages listed above apply to normal GPADC inputs; dedicated battery-sense channels have their own routing and limits. SF32LB52x input limits are revision-specific: the dedicated ADC guide describes a 0–1.0 V measurement range, while the current HAL API defines a maximum of 1.1 V for A0 and 3.3 V for RPO. The OpenSiFli FAQ and consolidated ADC table list 3.3 V at the family level without that distinction. Check the exact chip revision and target SDK's HAL limit before connecting an input; do not treat 3.3 V as universal for every 52x device. SF32LB55x also requires care when comparing range and revision labels: the OpenSiFli FAQ gives 1.1 V / 3.3 V for X1 / X3, while the current HAL API defines 1.1 V / 3.3 V as the maximum for A0 / RPO. The sources do not establish that these two label pairs are interchangeable. Verify the target SDK, chip revision, and runtime range before applying an input. The SF32LB55x example uses a 1 MΩ / 220 kΩ divider with 157 ms RC settling. The consolidated SF32LB56x guide lists 470 kΩ / 1000 kΩ with 200 ms settling for SF32LB52x, SF32LB56x, and SF32LB58x; the current SF32LB58x guide's consolidated table also includes SF32LB57x in the same external-divider recommendation. This recommendation is for external divider networks and does not replace the part-specific limits of the dedicated SF32LB57x battery-sense channel; verify the actual board path and do not apply it directly to a dedicated `VBAT` / `VBATS` channel. In particular, do not add an external divider to the SF32LB52x dedicated `GPADC_CH7` battery path unless the target board design calls for one: that path already uses an internal divider. Divider tolerance affects the final measurement accuracy, so calibrate an external divider separately on the production line when the design requires it.
 
 <div align="center"><em>Table: Battery-voltage sensing routes by SF32 family</em></div>
 
@@ -166,7 +166,7 @@ The source implementation sets `ADC_RATIO_ACCURATE` to 1000, with initial `adc_v
 
 ### SF32LB55x Calibration Ranges { #sf32lb55x-calibration-ranges }
 
-The OpenSiFli ADC FAQ documents the SF32LB55x calibration flow in more detail. During `sifli_adc_init`, the factory-area Flash configuration identified by `FACTORY_CFG_ID_ADC` supplies the stored calibration readings. `sifli_adc_calibration` derives the linear `offset` and `ratio` from those readings; subsequent samples use the selected range's `sifli_adc_get_mv` calculation.
+The OpenSiFli ADC FAQ documents the SF32LB55x calibration flow in more detail. During `sifli_adc_init`, the factory-area Flash configuration identified by `FACTORY_CFG_ID_ADC` supplies the stored calibration readings. `sifli_adc_calibration` derives the linear `offset` and `ratio` from those readings; subsequent samples use the selected range's `sifli_adc_get_mv` calculation. The FAQ also lists an uncalibrated 55x device as a possible cause of inaccurate readings; confirm that the target SDK initialization path reads and uses the factory calibration parameters.
 
 Two calibration ranges are documented:
 

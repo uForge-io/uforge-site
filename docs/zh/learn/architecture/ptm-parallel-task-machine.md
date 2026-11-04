@@ -39,19 +39,19 @@ PTM 可视为连接 SF32LB57x SoC 的 IO、事件、FIFO/DMA 和 AHB 总线资�
 <div align="center"><em>图：PTM 任务执行流程</em></div>
 
 ```text
-应用程序／固件
+Application / firmware
         │
         ▼
-CPU 配置 PTM 任务
+CPU configures PTM task
         │
         ▼
-PTM 执行确定性的外设任务序列
+PTM executes deterministic peripheral sequences
         │
-        ├── IO 读写
-        ├── FIFO／DMA 数据搬运
-        ├── AHB 存储器或寄存器访问
-        ├── 等待事件／固定延时
-        └── CPU 中断或内部事件通知
+        ├── IO read/write
+        ├── FIFO / DMA data movement
+        ├── AHB memory or register access
+        ├── Event wait / fixed delay
+        └── CPU interrupt or internal event notification
 ```
 
 PTM 执行精简的自定义指令流，交互对象不局限于引脚。它可以读写 IO、等待事件、通过 FIFO/DMA 搬运数据、访问 AHB 上的存储器和外设寄存器，并在需要上层固件处理时通知 CPU。
@@ -182,13 +182,13 @@ PTM、RP2040 PIO 和 Nordic PPI/DPPI 都可减少 CPU 对时序敏感工作的�
 <div align="center"><em>图：PPI、DPPI、PIO 与 PTM 的执行路径</em></div>
 
 ```text
-PPI：事件端点 ──> PPI 通道 ──> 任务端点
+PPI:  Event endpoint ──> PPI channel ──> Task endpoint
 
-DPPI：发布事件的外设 ──> DPPI 通道 ──> 订阅事件的外设任务
+DPPI: Publisher peripheral ──> DPPI channel ──> Subscriber peripheral task
 
-PIO：CPU／DMA ──> PIO 状态机指令 ──> GPIO 时序与 FIFO
+PIO: CPU/DMA ──> PIO state-machine instructions ──> GPIO timing and FIFOs
 
-PTM：CPU 配置 ──> PTM 任务指令 ──> IO＋事件＋FIFO／DMA＋AHB 访问
+PTM: CPU configuration ──> PTM task instructions ──> IO + events + FIFO/DMA + AHB access
 ```
 
 PPI 和 DPPI 通过事件互连工作，不执行指令，但只能把已经存在的事件和任务连接起来，不能编写新的协议逻辑。PIO 可通过状态机定义新的管脚行为，但工作范围主要是 GPIO 与 FIFO。PTM 的任务范围更宽：除 IO 时序外，还可把事件等待、数据搬运、寄存器访问和多个小任务的协同组织成一个可执行流程。

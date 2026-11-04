@@ -154,7 +154,7 @@ Das tatsächliche Energieprofil hängt vom Verbindungsintervall, der Sendeleistu
 
 Bluetooth-Software wird oft in zwei Hauptschichten beschrieben:
 
-<div align="center"><em>Tabelle: Host-, Controller- und Anwendungsgrenzen</em></div>
+<div align="center"><em>Tabelle: Aufgaben von Host und Controller</em></div>
 
 <div align="center" markdown>
 

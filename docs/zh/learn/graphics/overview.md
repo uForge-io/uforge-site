@@ -23,39 +23,39 @@ SF32 面向紧凑型 AIoT 和可穿戴产品。此类产品既要求 UI 流畅�
 <div align="center"><em>图：图形资源与显示流程</em></div>
 
 ```text
-源图像、字体和动画
+Source images, fonts, and animations
         │
         ▼
-GraphicsTool 将支持的资源转换为 eZip 或 eZip-A 格式
+GraphicsTool converts supported resources to eZip or eZip-A
         │
         ▼
-压缩资源存放在 NOR Flash、PSRAM、NAND 或文件存储中
+Compressed assets in NOR Flash, PSRAM, NAND, or file storage
         │
         ▼
-需要时由 eZip 硬件解码器解压资源
+eZip hardware decoder expands an asset when required
         │
         ▼
-LVGL 或其他 UI 框架 + 图形/显示驱动
+LVGL or another UI framework + graphics/display driver
         │
-        ├── CPU 回退渲染
+        ├── CPU fallback rendering
         │
-        └── ePicasso 像素加速
+        └── ePicasso pixel acceleration
         │
         ▼
-最终渲染位图写入绘制缓冲区或帧缓冲区
+Final rendered bitmap in a draw buffer or framebuffer
         │
-        ├── 未压缩显示路径
+        ├── Uncompressed display path
         │
-        └── 可选：extDMA 将其压缩为 TurboPixel 格式
+        └── Optional: extDMA compresses it into TurboPixel
                     │
                     ▼
-             TurboPixel 帧缓冲区存放在 PSRAM 中
+             TurboPixel framebuffer in PSRAM
         │
         ▼
-显示控制器将像素传输至面板
+Display controller transfers pixels to the panel
         │
         ▼
-SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI 面板
+SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
 ```
 
 该路径可按需配置，并非所有产品都必须使用 eZip、ePicasso、TurboPixel 或完整帧缓冲区。各图形功能是否可用及其连接方式，取决于所选器件、SDK、显示接口、面板和驱动配置。当前 OpenSiFli LCDC 头文件仅在启用 `HAL_EXTDMA_MODULE_ENABLED` 且芯片系列条件允许时定义 `LCDC_SUPPORTED_COMPRESSED_LAYER`；SF32LB52x 和 SF32LB57x 被排除在外。源码注释还指出 LCPU 路径尚未启用。已发布的 SDK LCDC 功能表将 SF32LB55x 的压缩图层解压标为不支持，因此 55x 应视为有条件支持，而非已验证的完整运行时能力。请结合具体 SDK 版本、核心、构建配置和目标硬件验证；详见 [TurboPixel](turbopixel.md#availability-in-the-sf32-family)。

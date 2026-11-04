@@ -9,12 +9,12 @@ Quien evalúa un nuevo microcontrolador no debería tener que reunir el panorama
 
 Reunimos la documentación de la familia SF32 de microcontroladores de consumo ultrabajo de SiFli en una ruta coherente y conectada, en lugar de dejarla dispersa en distintas fuentes. Estos chips, dirigidos a dispositivos vestibles, pantallas inteligentes y otros productos conectados alimentados por batería, combinan conectividad Bluetooth y capacidad gráfica, con foco en aplicaciones AIoT. Aquí encontrará información para seleccionar chips y módulos, placas de desarrollo, flujos de trabajo del SDK, guías de diseño de hardware y listas de comprobación de producción. El contenido está organizado según las etapas reales de desarrollo: elegir el componente, validar su funcionamiento, integrarlo en el diseño y preparar el producto para su lanzamiento. Contrastamos los detalles técnicos con la documentación oficial de SiFli cuando hay fuentes disponibles e indicamos cuándo una página aún requiere verificación.
 
-Elegimos SF32 por dos razones. La familia ofrece varias configuraciones de núcleos e integra aceleración gráfica y descompresión por hardware; la combinación exacta varía según el modelo. Además, su SDK, sus guías de diseño de hardware y su código fuente son realmente abiertos, aunque su ecosistema todavía sea menos conocido que el de ESP32 o STM32. Este sitio busca dar visibilidad a una plataforma abierta que aún no es muy conocida.
+Elegimos SF32 por dos razones. La familia ofrece varias configuraciones de núcleos e integra aceleración gráfica y descompresión por hardware; la combinación exacta varía según el modelo. Además, su SDK, sus guías de diseño de hardware y su código fuente son realmente abiertos, aunque su ecosistema todavía sea menos conocido que el de ESP32 o STM32. Esa combinación de apertura real y poca visibilidad del ecosistema explica precisamente por qué existe este sitio.
 
 Nuestro objetivo es sencillo: ayudar a los ingenieros a tomar decisiones de hardware y firmware con más rapidez y confianza, dedicar menos tiempo a volver a buscar la información básica y más a desarrollar productos.
 
 ## Sobre el nombre { #the-name }
 
-μForge.io y uForge.io son el mismo proyecto y se usan indistintamente. La «μ» (letra griega mu, de «micro») se escribe como la «u» ASCII (que también se lee «you», «tú») cuando las letras griegas no resultan prácticas, de modo que μForge = uForge y μForge.io = uForge.io (dominio: uForge.io).
+El nombre del proyecto es μForge.io; μ es la letra griega mu y representa «micro». La dirección del sitio utiliza el dominio ASCII `uforge.io`.
 
 ¿Tiene una pregunta, una corrección o algo que le gustaría que este sitio cubriera? [Contáctenos](contact.md).

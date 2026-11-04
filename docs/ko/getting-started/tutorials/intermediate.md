@@ -47,6 +47,8 @@ struct rt_i2c_msg msgs[2] = { /* write register address, then read result */ };
 rt_i2c_transfer(bus, msgs, 2);
 ```
 
+여기서 `msgs`는 자리 표시자일 뿐입니다. `rt_i2c_transfer()`를 호출하기 전에 센서 주소, 읽기/쓰기 플래그, 버퍼, 길이를 지정해 두 메시지 디스크립터를 초기화하십시오.
+
 `i2c1`이라는 이름은 예시입니다. 보드에 등록된 I2C 디바이스 이름을 사용하고, 버스를 사용하기 전에 `rt_device_find()`가 성공하는지 확인하십시오.
 
 1. 센서 데이터시트에서 I2C 주소, 레지스터 맵, 공급 전압, 필요한 풀업을 확인하십시오.

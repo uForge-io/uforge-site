@@ -11,7 +11,7 @@ Estes tutoriais pressupõem que você já está familiarizado com a [integraçã
 
 A validação de produto não consiste tanto em copiar um exemplo, mas em reunir evidências. Em cada tutorial, registre a revisão da placa, a versão do SDK, o exemplo usado como base, a configuração do teste, os resultados esperados e observados e as alterações realizadas.
 
-Use esta série quando sua responsabilidade for além de fazer um recurso funcionar uma única vez: é preciso medir o consumo, recuperar o dispositivo após falhas de atualização, repetir o bring-up de hardware personalizado e reunir evidências de problemas que ocorrem fora do fluxo normal.
+Use esta série quando sua responsabilidade for além de fazer um recurso funcionar uma única vez: é preciso medir o consumo, recuperar o dispositivo após falhas de atualização, repetir o bring-up (ativação inicial) de hardware personalizado e reunir evidências de problemas que ocorrem fora do fluxo normal.
 
 Os caminhos dos exemplos e as placas compatíveis podem variar conforme a versão do SDK. Antes de compilar, consulte a lista “Supported Platforms” e os requisitos de hardware e configuração de cada exemplo; o suporte a um exercício não garante suporte aos demais exemplos nem a todas as combinações de recursos.
 
@@ -50,7 +50,7 @@ Os caminhos dos exemplos e as placas compatíveis podem variar conforme a versã
 3. Inicie uma atualização OTA e confirme se o dispositivo inicializa com a nova imagem.
 4. Em uma unidade de teste com um procedimento de recuperação documentado, provoque uma interrupção por vez, como desconectar durante a transferência ou sair da área de alcance. Não corte a alimentação, a menos que a documentação da placa e o projeto de recuperação do produto confirmem explicitamente que o teste é seguro.
 5. Verifique o comportamento realmente implementado pelo produto após uma atualização interrompida ou rejeitada, como nova tentativa, retomada, modo de recuperação ou rollback. Exija rollback somente se ele estiver implementado no boot e no projeto de partições.
-6. Teste a OTA quando houver dados de bonding desatualizados, após remover o dispositivo pelo telefone e depois de reiniciar o dispositivo.
+6. Teste a OTA em três condições: com dados de bonding desatualizados, após remover o dispositivo da lista de pareamentos do telefone e após reiniciar o dispositivo.
 7. Se o produto já usa PAN para transmitir dados, avalie a OTA por PAN como uma opção de projeto independente.
 
 **Critério de sucesso:** após uma OTA bem-sucedida, o dispositivo inicia com a nova imagem; uma atualização interrompida ou rejeitada segue a política de recuperação documentada do produto, e o usuário consegue identificar o estado do dispositivo. Não presuma que toda OTA oferece rollback.
@@ -59,7 +59,7 @@ Os caminhos dos exemplos e as placas compatíveis podem variar conforme a versã
 
 **O que você aprendeu:** como o layout das partições, a validação da imagem, a seleção de boot e a política de recuperação determinam o comportamento da OTA, e por que uma atualização bem-sucedida, por si só, não prova que seja possível recuperar o dispositivo após uma interrupção.
 
-## Faça o bring-up (ativação inicial) de um módulo de display personalizado { #bring-up-a-custom-display-module }
+## Faça o bring-up de um módulo de display personalizado { #bring-up-a-custom-display-module }
 
 **Objetivo:** adaptar um novo display LCD, AMOLED, EPD ou display de memória, em vez de usar somente um painel de referência já suportado.
 

@@ -10,7 +10,7 @@ tags:
 # M2 Interface Definition { #m2-interface-definition }
 
 !!! warning "Draft interface definition"
-    This page preserves a draft M2 proposal. A local proposal workbook contains M2 and M2xM sheets, but it cites a separate `M2E接口定义_0714.xlsx` that is not present, and its approval and version provenance could not be established. No primary SiFli source confirming the assignments or counts was found. The workbook has no M2xN or M2xA sheets, so the corresponding summaries below are unverified. This is not a released μForge.io interface standard. Treat all assignments as provisional; verify the selected module, carrier, connector, electrical limits, and pin multiplexing before committing to production.
+    This page preserves a draft M2/M2xM proposal. The original proposal workbook referenced by this page was not available among the materials reviewed; it cites a separate `M2E接口定义_0714.xlsx`, which is also unavailable, so the proposal's version and approval provenance could not be established. A separate local file, `MKEY_IO_MAP.xlsx`, contains only one sheet (`Sheet1`), headed `MCU_KEY_M`, and is not the source of the Key-E maps below: it omits positions 59–66, whereas this draft omits 24–31. No primary SiFli source confirming these assignments or counts was found. This page includes only summaries for M2xN and M2xA; no source contact maps were available. This is not a released μForge.io interface standard. Treat all assignments as provisional; verify the selected module, carrier, connector, electrical limits, and pin multiplexing before committing to production.
 
 ## Scope { #scope }
 

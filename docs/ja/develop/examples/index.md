@@ -20,7 +20,7 @@ tags:
 
 | 分野 | 開始点 |
 |:-----|:-----------|
-| 最初の実行 | `example/get-started/hello_world/rtt/project` |
+| 初回実行 | `example/get-started/hello_world/rtt/project` |
 | LED点滅／GPIO | `example/get-started/blink/rtt`またはGPIO HAL／デバイスのサンプル。 |
 | Bluetooth | BLE、Classic BT、LE Audio、スループット、ビーコン、OTA、プロファイルの各サンプル。[Bluetooth SDKの例](../../learn/bluetooth/bluetooth-sdk-examples.md)の用途別一覧を参照してください。 |
 | グラフィックス | LVGLデモ、デザインツール連携、ウィジェット、圧縮アセット、アニメーション／メディア、ディスプレイ別サンプル。[LVGL SDKサンプル](../../learn/graphics/lvgl-sdk-examples.md)の用途別一覧を参照してください。 |
@@ -64,7 +64,7 @@ tags:
 2. フレームワークを合わせる。
 3. 最も実装が難しい周辺機器を合わせる。
 4. ミドルウェアを合わせる。
-5. 電源またはメモリーの制約を合わせる。
+5. 製品の消費電力とメモリーの制約に合うサンプルを選びます。
 
 たとえばBluetoothオーディオ製品なら、理解しやすい`hello_world`よりも、オーディオ／Bluetoothのサンプルに近いものから始めます。
 
@@ -78,7 +78,7 @@ tags:
 
 この手順は最初の1時間は遅く感じられますが、最初の深刻な障害が起きた後は大幅に速くなります。
 
-## 残しておく証跡 { #evidence-to-keep }
+## 記録しておく情報 { #evidence-to-keep }
 
 製品のベースとして採用したサンプルごとに、次の情報を記録してください。
 

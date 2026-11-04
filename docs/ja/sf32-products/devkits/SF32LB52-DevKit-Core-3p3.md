@@ -53,6 +53,7 @@ SF32LB52-DevKit-Core-3p3は、SF32LB52xチップを直接評価するための�
 - 16ピン、0.5 mmピッチのFPCディスプレイコネクター。表示インターフェースはSPI、DSPI、Quad-SPIに対応し、DDRモードQSPIもサポート
 - I2Cタッチパネル信号
 - アナログマイク入力および差動オーディオ出力用ピン
+- PDMデジタルマイク入力
 - ユーザーLED 1個
 - 電源ボタンと機能ボタン
 - 単一電源レールの電流測定用テストポイント。SiFliは単一MCU、最小システム、基板全体の消費電力試験も記載
@@ -84,6 +85,8 @@ MCU電源は別の基板ジャンパーで1.8 Vまたは3.3 Vに設定します�
 USB Type-Cを接続すると、所定のヘッダーピンから3.3 V、1.8 V、5 Vを出力できます。外部回路を接続する前に、各ピンの入出力方向を確認してください。
 
 ボードには電源スイッチがあります。CH340NのRTS# 信号でボードの有効/無効を制御できるため、書き込みやデバッグ時にホストツールからMCUをリセットできます。
+
+USB Type-C給電時、基板上のLDOがVBUSの5 Vを3.3 Vに変換します。
 
 ## 書き込みとデバッグ { #download-and-debug }
 
@@ -168,6 +171,39 @@ SiFliの中国語ボードガイドでは、1.85インチAMOLEDモジュール�
 
 </div>
 
+<div align="center"><em>表: J1ヘッダーの詳細なピン機能とリセット時プル設定</em></div>
+
+<div align="center" markdown>
+
+| ピン | ピン名 | リセット時のデフォルト機能と多重化機能 | プル |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | グラウンド |  |
+| 2 | PA_44 | **PA44**、UART、I2C、GPTIM、WKUP20 | PD |
+| 3 | PA_43 | **PA43**、UART、I2C、GPTIM、WKUP19 | PD |
+| 4 | PA_42 | **PA42**、UART、I2C、GPTIM、WKUP18 | PU |
+| 5 | PA_41 | **PA41**、UART、I2C、GPTIM、WKUP17 | PU |
+| 6 | PA_40 | **PA40**、UART、I2C、GPTIM、SPI2_CS、WKUP16 | PU |
+| 7 | PA_39 | **PA39**、UART、I2C、GPTIM、SPI2_CLK、WKUP15 | PU |
+| 8 | PA_38 | **PA38**、UART、I2C、GPTIM、SPI2_DI、WKUP14 | PD |
+| 9 | PA_37 | **PA37**、UART、I2C、GPTIM、SPI2_DIO、WKUP13 | PD |
+| 10 | PA_36 | **PA36**、UART、I2C、GPTIM、USB_DM、WKUP12 | PD |
+| 11 | PA_35 | **PA35**、UART、I2C、GPTIM、USB_DP、WKUP11 | PD |
+| 12 | PA_31 | **PA31**、UART、I2C、GPTIM、GPADC3 | PD |
+| 13 | PA_30 | **PA30**、UART、I2C、GPTIM、I2S1_LRCK、GPADC2 | PD |
+| 14 | PA_29 | **PA29**、UART、I2C、GPTIM、SPI1_CS、I2S1_BCK、GPADC1 | PD |
+| 15 | PA_28 | **PA28**、UART、I2C、GPTIM、SPI1_CLK、I2S1_SDI、GPADC0 | PD |
+| 16 | GND | グラウンド |  |
+| 17 | 3.3V | USB Type-C未接続時は3.3 V入力、接続時は出力 |  |
+| 18 | PA_27 | **PA27**、UART、I2C、GPTIM、WKUP3 | PU |
+| 19 | PA_26 | **PA26**、UART、I2C、GPTIM、WKUP2 | PU |
+| 20 | PA_25 | **PA25**、UART、I2C、GPTIM、SPI1_DI、I2S1_SDO、WKUP1 | PD |
+| 21 | PA_24 | **PA24**、UART、I2C、GPTIM、SPI1_DIO、I2S1_MCLK、WKUP0 | PD |
+| 22 | PA_34 | **PA34**、UART、I2C、GPTIM、GPADC6、WKUP10 | PD |
+| 23 | PA_33 | **PA33**、UART、I2C、GPTIM、GPADC5 | PD |
+| 24 | PA_32 | **PA32**、UART、I2C、GPTIM、GPADC4 | PD |
+
+</div>
+
 ### LCD、オーディオ、デバッグヘッダー { #lcd-audio-and-debug-header }
 
 <div align="center"><em>LCD、オーディオ、デバッグヘッダーのピン割り当て</em></div>
@@ -186,9 +222,44 @@ SiFliの中国語ボードガイドでは、1.85インチAMOLEDモジュール�
 
 </div>
 
+<div align="center"><em>表: J2ヘッダーの詳細なピン機能とリセット時プル設定</em></div>
+
+<div align="center" markdown>
+
+| ピン | ピン名 | リセット時のデフォルト機能と多重化機能 | プル |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | グラウンド |  |
+| 2 | PA_00 | **PA00**、UART、I2C、GPTIM、LCD_RST | PD |
+| 3 | PA_01 | **PA01**、UART、I2C、GPTIM、BL_PWM | PD |
+| 4 | PA_02 | **PA02**、UART、I2C、GPTIM、LCD_TE、I2S1_MCLK | PD |
+| 5 | PA_03 | **PA03**、UART、I2C、GPTIM、LCD_CS、I2S1_SDO | PU |
+| 6 | PA_04 | **PA04**、UART、I2C、GPTIM、LCD_CLK、I2S1_SDI | PD |
+| 7 | PA_05 | **PA05**、UART、I2C、GPTIM、LCD_D0、I2S1_BCK | PD |
+| 8 | PA_06 | **PA06**、UART、I2C、GPTIM、LCD_D1、I2S1_LRCK | PD |
+| 9 | PA_07 | **PA07**、UART、I2C、GPTIM、LCD_D2、PDM1_CLK | PD |
+| 10 | PA_08 | **PA08**、UART、I2C、GPTIM、LCD_D3、PDM1_DAT | PD |
+| 11 | PA_09 | **PA09**、UART、I2C、GPTIM、CTP_INT | PD |
+| 12 | MIC_ADC | MIC入力信号 |  |
+| 13 | MIC_BIAS | MICバイアス電圧 |  |
+| 14 | DACP | アナログ音声出力信号 |  |
+| 15 | DACN | アナログ音声出力信号 |  |
+| 16 | GND | グラウンド |  |
+| 17 | 1.8V | USB Type-C未接続時は1.8 V入力、接続時は出力 |  |
+| 18 | PA_10 | **PA10**、UART、I2C、GPTIM、CTP_RST | PD |
+| 19 | PA_11 | **PA11**、UART、I2C、GPTIM、CTP_SDA | PU |
+| 20 | PA_20 | **PA20**、UART、I2C、GPTIM、CTP_SCL | PD |
+| 21 | PA_21 | **PA21**、UART、I2C、GPTIM | PD |
+| 22 | PA_18 | **UART0_RXD**、デバッグ/書き込みポート、PA18、SWDIO、I2C、GPTIM | PU |
+| 23 | PA_19 | **UART0_TXD**、デバッグ/書き込みポート、PA19、SWCLK、I2C、GPTIM | なし |
+| 24 | 5V | USB Type-C未接続時は5 V入力、接続時は出力 |  |
+
+</div>
+
 ## 外部FlashとSDIOピン { #external-flash-and-sdio-pins }
 
 一部のバリアントには16 MBの外部QSPI-NOR Flashが搭載されています。ストレージとSDIOで共有するピンは次のとおりです。
+
+SiFliの元の開発ボードガイドには、次の外部Flashパッケージも記載されています。実装の有無はボードバリアントとBOMで確認してください。SPI NOR Flash: WSON8-8x6mmまたはWSON8-6x5mm、SPI NAND Flash: WSON8-8x6mm、SD NAND Flash: WSON8-8x6mm。
 
 <div align="center"><em>外部Flash / SDIO用ピンの割り当て</em></div>
 
@@ -210,6 +281,8 @@ SDIOや他の拡張機能に使用する前に、これらのピンが基板上�
 ## オーディオ拡張 { #audio-expansion }
 
 ボードには、アナログマイク用のバイアス電圧と入力信号、差動DAC出力が配線されています。マイクとスピーカー駆動用Class-AB/Dアンプは外付けです。想定する音声経路に合わせて選定してください。
+
+PDMデジタルマイク入力にも対応し、PA07を`PDM1_CLK`、PA08を`PDM1_DAT`として多重化します。
 
 ## SDKビルドターゲット { #sdk-build-targets }
 

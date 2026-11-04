@@ -72,7 +72,7 @@ OpenSiFli 正在 [OpenSiFli/zephyr-downstream](https://github.com/OpenSiFli/zeph
 - 蓝牙（Bluetooth）HCI 邮箱和 BAP 广播接收端配置
 - 音频编解码器、DMA、CRC、加密、熵源、OTP / eFuse、稳压器、复位和温度传感器
 
-代码树中存在相关驱动、绑定或示例配置，并不代表每种产品场景都已具备量产条件。请在目标开发板上验证具体的示例与驱动组合。
+代码树中存在相关驱动、绑定或示例配置，并不代表驱动已在该开发板目标中启用，也不代表每种产品场景都已具备量产条件。请在目标开发板上验证具体的示例、驱动组合和板级配置。
 
 ## 集成顺序 { #integration-sequence }
 

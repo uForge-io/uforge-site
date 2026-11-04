@@ -11,11 +11,11 @@ tags:
 
 DFU v2는 DFU 및 OTA 워크플로를 위한 SiFli-SDK 펌웨어 업데이트 미들웨어입니다. USB-CDC, BLE, Bluetooth PAN의 세 가지 전송 채널을 제공합니다. 각 채널에는 사용자 애플리케이션과 이에 대응하는 로더 서브프로젝트가 포함됩니다.
 
-먼저 제품의 업데이트 경로에 맞는 전송 채널을 선택하십시오. 그런 다음 해당하는 애플리케이션 예제에서 시작하십시오. 대응하는 로더는 빌드에 자동으로 추가됩니다.
+먼저 제품의 업데이트 경로에 맞는 전송 채널을 선택하십시오.
 
 ## DFU v2 구조 { #dfu-v2-structure }
 
-<div align="center"><em>그림: DFU v2 예제 구조</em></div>
+<div align="center"><em>그림: DFU v2 예제 디렉터리 구조</em></div>
 
 ```text
 dfu_v2/

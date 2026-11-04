@@ -32,7 +32,7 @@ SiFli-SDK Bluetooth 예제는 특정 프로파일, 역할 또는 라디오 워�
 
 </div>
 
-## 예제 브링업과 증거 확보 { #bring-up-an-example-as-evidence }
+## 예제 브링업과 검증 결과 기록 { #bring-up-an-example-as-evidence }
 
 프로젝트를 변경하기 전에 정확한 SDK 버전, 보드 이름, 구성, 상대 기기 또는 앱, 라디오 설정, 예상 로그를 기록하십시오. 그런 다음 아래 순서로 진행하십시오.
 

@@ -12,14 +12,14 @@ tags:
 SiFli-SDK는 SF32 펌웨어 개발을 위한 SiFli 공식 SDK입니다. RT-Thread 기반 개발 환경을 제공하며, 지원되는 타깃에서는 No-OS 예제도 제공합니다. 또한 Bluetooth, 그래픽, 오디오, 전력 관리, 스토리지, 양산 워크플로 등의 영역에 대해 SiFli가 관리하는 보드 지원과 미들웨어를 포함합니다. 제공 여부는 칩, 보드, SDK 릴리스에 따라 다릅니다.
 
 !!! info "SiFli-Solution"
-    SiFli-Solution은 별도의 SiFli 소프트웨어 패키지이며 이 페이지의 범위에 포함되지 않습니다. 이 페이지와 연결된 개발 관련 자료는 SiFli-SDK만 다룹니다. SiFli-Solution의 범위, 지원 디바이스, 이용 요건은 공식 [SiFli Solution Documentation](https://docs.sifli.com/projects/solution/index.html)을 참조하고 SiFli에 직접 문의하십시오.
+    SiFli-Solution은 별도의 SiFli 소프트웨어 패키지이며 이 페이지의 범위에 포함되지 않습니다. 이 페이지와 연결된 개발 관련 자료는 SiFli-SDK만 다룹니다. SiFli-Solution의 범위, 지원 디바이스, 이용 요건은 공식 [SiFli Solution 문서](https://docs.sifli.com/projects/solution/index.html)을 참조하고 SiFli에 직접 문의하십시오.
 
 처음 설치하고 `hello_world`를 실행하려면 [SiFli-SDK 시작하기](../../../getting-started/sifli/getting-started-sifli-sdk.md) 페이지를 참조하십시오. 이 페이지는 툴체인이 이미 동작하는 상태에서 SDK를 어떻게 이해하고 활용할지 설명합니다.
 
 주요 참고 자료:
 
-- [SiFli-SDK install guide](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/quickstart/install/index.html)
-- [SF32LB52x SDK supported-board list](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/index.html)
+- [SiFli-SDK 설치 안내](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/quickstart/install/index.html)
+- [SF32LB52x SDK 지원 보드 목록](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/index.html)
 - [OpenSiFli/SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK)
 
 ## SiFli-SDK를 사용해야 하는 경우 { #when-to-use-sifli-sdk }

@@ -104,7 +104,7 @@ Führen Sie alle QFN-Gehäusesignale über die obere Lage heraus (Fanout).
 
 ### 6.5. Routing der Taktschnittstelle { #65-clock-interface-routing }
 
-Wenden Sie diese Takt-Routing-Regeln auf beide Variantengruppen an:
+Diese Takt-Routing-Regeln gelten für beide Variantengruppen (batteriegespeist und regulär versorgt):
 
 - Platzieren Sie Quarze innerhalb des Abschirmgehäuses und mehr als 1 mm vom PCB-Rand entfernt. Halten Sie möglichst großen Abstand zu wärmeerzeugenden Bauteilen (PA, Lader, PMU-Schaltungen), idealerweise mehr als 5 mm, damit deren Wärme die Frequenzdrift nicht beeinflusst.
 - Halten Sie um den Quarz einen Freiraum von mehr als 0,25 mm ein, in dem sich weder anderes Metall noch Bauteile befinden.
@@ -142,11 +142,11 @@ Wenden Sie diese Takt-Routing-Regeln auf beide Variantengruppen an:
 Abbildungen 6.5-3 und 6.5-6 zeigen für beide Quarze mindestens 0,15 mm Abstand zwischen den parallelen XI/XO-Leiterbahnen. Abbildung 6.5-2 verwendet einen 48-MHz-Quarz mit 8,8 pF Lastkapazität; die externen Lastkondensatoren sind als NF (nicht bestückt) markiert. Abbildung 6.5-5 verwendet einen 32,768-kHz-Quarz mit 7 pF an PA22/PA23, die auch mit PDM_CLK/PDM_DATA multiplexiert sind.
 
 !!! important "Widersprüchliche Quellen zur Kupferfläche unter dem Quarz"
-    Der Anwendungshinweis für batteriegespeiste Varianten widerspricht sich bei der Kupferfläche unter dem Quarz: Im Taktabschnitt soll die L2-Massefläche direkt unter dem Quarz entfernt werden; im PCB-Routing-Abschnitt sind dagegen Ebenenaussparungen und Kupferausschnitte auf der oberen und den angrenzenden Lagen untersagt. Das Routing-Modell zeigt eine durchgehende L2-Massefläche. Der separate PCB-Layout-Leitfaden wiederholt das Verbot von Aussparungen. Leiten Sie keine allgemeine L2-Regel ab und entscheiden Sie nicht allein anhand der Lagenzahl. Klären Sie die Ausführung für den gewählten Lagenaufbau vor der Freigabe mit SiFli. Quarz-Freihaltebereich und Bauteilabstände sind getrennt zu prüfen.
+    Der Anwendungshinweis für batteriegespeiste Varianten widerspricht sich bei der Kupferfläche unter dem Quarz: Im Taktabschnitt wird ausdrücklich verlangt, mindestens das GND-Kupfer der zweiten Lage unter dem Quarz zu entfernen. Der spätere PCB-Routing-Abschnitt fordert dort auf der oberen und den angrenzenden Lagen eine „禁空“-Freihaltung und verbietet andere Leiterbahnen; die englische Fassung untersagt ausdrücklich Ebenenaussparungen und Kupferausschnitte. Der separate PCB-Layout-Leitfaden enthält dieselbe Freihalte- und Routing-Anweisung, und seine englische Fassung untersagt ebenfalls Ebenenaussparungen und Kupferausschnitte. Die Routing-Modelle beider Leitfäden zeigen jedoch eine durchgehende L2-Massefläche. Leiten Sie keine allgemeine L2-Regel ab und entscheiden Sie nicht allein anhand der Lagenzahl. Stimmen Sie den gewählten Lagenaufbau vor der Freigabe mit SiFli ab. Quarz-Freihaltebereich und Bauteilabstände sind getrennt zu prüfen.
 
 ### 6.6. Routing der RF-Schnittstelle { #66-rf-interface-routing }
 
-Wenden Sie diese RF-Routing-Regeln auf beide Variantengruppen an:
+Wenden Sie diese RF-Routing-Regeln auf die batteriegespeisten und die regulär versorgten Varianten an:
 
 - Platzieren Sie das RF-Anpassnetzwerk nahe am Chip, nicht an der Antenne
 - Platzieren Sie den AVDD_BRF-Filterkondensator nahe am Chip-Pin und verbinden Sie seine Masse-Vias direkt mit der Hauptmasse
@@ -173,7 +173,7 @@ Die RF-Beispiele verwenden einen Serienkondensator mit 15 pF/50 V (C0333), lasse
 
 ### 6.7. Routing der Audioschnittstelle { #67-audio-interface-routing }
 
-Wenden Sie diese Audio-Routing-Regeln auf beide Variantengruppen an:
+Wenden Sie diese Audio-Routing-Regeln auf die batteriegespeisten und die regulär versorgten Varianten an:
 
 - Platzieren Sie die Filterkondensatoren für AVDD33_AUD, MIC_BIAS und AUD_VREF nahe an den jeweiligen Pins und verbinden Sie ihre Masseanschlüsse zuverlässig mit der Hauptmasse.
 - Platzieren Sie die Bauteile für den analogen ADCP-Eingang nahe am Chip-Pin. Halten Sie die Leiterbahnen kurz, schirmen Sie sie vollständig mit Masse ab und halten Sie Abstand zu starken Störquellen.
@@ -305,7 +305,7 @@ Schirmen Sie GPADC-Eingangsleiterbahnen mit Masse ab und halten Sie Abstand zu a
 
 ### 6.13. EMI & ESD { #613-emi-esd }
 
-Wenden Sie diese EMI- und ESD-Regeln auf beide Variantengruppen an:
+Wenden Sie diese EMI- und ESD-Regeln auf die batteriegespeisten und die regulär versorgten Varianten an:
 
 - Führen Sie lange störende Takt- und Versorgungsleitungen außerhalb der Abschirmung nicht auf der oberen Lage, sondern auf inneren Lagen.
 - Platzieren Sie ESD-Schutzbauteile nahe an den Steckverbinder-Pins und führen Sie Signale zuerst durch das ESD-Bauteil, bevor sie weiterverlaufen

@@ -63,7 +63,7 @@ The pixel-format fields above are stored in little-endian order.
 
 ## Convert PNG assets { #2-convert-png-assets }
 
-Replace `png_filename.png` with the source file name. The generated file is written in the tool directory unless the surrounding build changes the working directory.
+Replace `png_filename.png` with the source file name. The generated file is written in the tool directory.
 
 ### PIXEL binary { #pixel-binary }
 

@@ -49,7 +49,7 @@ hide:
 
 ### 9.1. 附录 A. 典型 SF32LB56x 产品 { #appendix-a-a-typical-sf32lb56x-product }
 
-典型 SF32LB56x 产品包含 MCU、PMIC、显示和触摸控制器、启动存储、可选外部存储、传感器、振动马达、音频输入/输出、蓝牙（Bluetooth）天线、晶体，以及调试和量产测试接口。U 封装适合紧凑的 QFN 实现；V 封装支持更多接口，但需要规划 BGA/HDI 布局。
+U、V 两种封装的应用框图仅为示例，并非必须照搬的物料清单。两图均展示 MCU、充电器与 Buck/LDO 供电、LCD 显示通路、外部存储选项（QSPI NAND、SD NAND 或 NOR Flash）、通过 SPI 连接的运动传感器、通过 I2C 连接的心率传感器、模拟麦克风输入和经音频 PA 驱动扬声器的输出、PWM 振动马达、蓝牙（Bluetooth）/RF 天线、48 MHz 与 32.768 kHz 晶体，以及 SWD/UART 接口。[原理图设计指导](SF32LB56x_schematic_design.md)另行介绍触控和背光电路。V 封装框图还展示了通过 SDIO 连接的 eMMC 和 Wi-Fi 模块、通过 UART 连接的 GPS 和 NFC 模块，以及通过 SPI 连接的 LTE 模块。请针对具体设计确认所需外设、接口走线和封装支持。
 
 ## 10. 修订历史 { #10-revision-history }
 

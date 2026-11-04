@@ -75,7 +75,7 @@ hide:
 <a class="uf-spotlight-item uf-spotlight-item--examples" href="projects/index.md" data-radius="230">
   <span class="uf-spotlight-item__art uf-spotlight-item__art--examples" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">Projekte</span>
-  <span class="uf-spotlight-item__title">Watch und HMI</span>
+  <span class="uf-spotlight-item__title">Smartwatch und HMI</span>
   <span class="uf-spotlight-item__copy">Anwendungsbeispiele in Produktionsqualität.</span>
 </a>
 
@@ -144,7 +144,7 @@ hide:
 
 ---
 
-## Unterstützte SF32-MCUs [^1] { #supported-sf32-mcus .uf-center-heading }
+## SF32-MCU-Familien [^1] { #supported-sf32-mcus .uf-center-heading }
 
 <div class="grid cards uf-mcu-grid" markdown>
 

@@ -1,6 +1,6 @@
 ---
 icon: lucide/terminal
-description: "O ciclo diário do SiFli-SDK: ativar o ambiente, compilar com scons, gravar por download UART ou sftool e acompanhar a saída serial."
+description: "O ciclo diário do SiFli-SDK: ativar o ambiente, compilar com scons, gravar com o script de download UART gerado ou com sftool e acompanhar a saída serial."
 tags:
     - Desenvolvimento
     - SiFli-SDK

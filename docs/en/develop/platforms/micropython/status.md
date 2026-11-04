@@ -8,7 +8,7 @@ tags:
 
 # MicroPython Status { #micropython-status }
 
-No official SF32 MicroPython port, firmware image, or board-specific flashing flow was found in the checked SiFli documentation and OpenSiFli repositories.
+As of 2026-11-04, no official SF32 MicroPython port, firmware image, or board-specific flashing flow was found in the SiFli documentation and OpenSiFli repositories checked.
 
 The checked public sources are [OpenSiFli on GitHub](https://github.com/OpenSiFli/) and [SiFli's documentation portal](https://docs.sifli.com/).
 
@@ -59,4 +59,7 @@ MicroPython can move from "status" to "getting started" when all of these exist:
 
 ## Why This Matters { #why-this-matters }
 
-A vague instruction to "download a MicroPython image" is not actionable. Users need an exact image, board match, flash tool, REPL setting, and recovery path. Without those, a MicroPython page creates support burden instead of helping.
+A vague instruction to "download a MicroPython image" is not actionable. Users need an exact image, a compatible board, a flashing tool, REPL settings, and a recovery path. Without those, a MicroPython page creates a support burden instead of helping.
+
+!!! note "Auto-generated content"
+    This page was compiled/drafted without an existing source document. Verify technical claims against SiFli's official documentation before relying on them.

@@ -97,9 +97,16 @@ Maximale Auflösung und Panel-Schnittstellen: siehe [Schnittstellenmatrix pro Ge
 - Externe WLAN-Konnektivität über SDIO
 - 2 × integrierte Audio-ADCs
 - 2 × integrierte Audio-DACs
-- 2 PDM-Schnittstellen, die jeweils bis zu zwei digitale Mikrofone bedienen können; die Schnittstellenanzahl ist nicht die Mikrofonanzahl, und nutzbare Verbindungen hängen auch von Pin-Multiplexing und Board-Routing ab
+- 2 PDM-Schnittstellen; der SiFli-Hardware-Anwendungshinweis dokumentiert zwei PDM-Mikrofoneingänge. Prüfen Sie nutzbare Kanäle anhand von Pin-Multiplexing und Board-Routing.
 - 3 I2S-Schnittstellen: I2S1 ist nur Eingang; I2S2 und I2S3 unterstützen Ein- und Ausgang. Alle arbeiten im Master-Modus.
 - USB 2.0 High-Speed im Host- und Device-Modus
+
+### Sicherheit { #security }
+
+- AES-, HASH- und CRC-Hardwarebeschleuniger sowie True Random Number Generator (TRNG)
+- Secure Boot und 1.024-Bit-eFuse für Root of Trust und UID
+- Echtzeitentschlüsselung von externem Code über MPI1, MPI2, MPI3 und MPI5
+- Das SiFli-Produktbrief führt PSA Certified Level 1 auf; prüfen Sie Geltungsbereich und aktuellen Status des Zertifikats für das genaue Bauteil und Produkt.
 
 ### Systemintegration { #system-integration }
 
@@ -128,19 +135,24 @@ Maximale Auflösung und Panel-Schnittstellen: siehe [Schnittstellenmatrix pro Ge
 
 ## Familienvarianten { #family-variants }
 
-Der aktuelle SiFli-Chip-Modellleitfaden führt drei SF32LB58x-Bestellcodes auf, alle im BGA256, mit den unten gezeigten Speicherkonfigurationen im Gehäuse. Bestätigen Sie den genauen Bestellcode anhand des aktuellen Datenblatts und der Approved Vendor List (AVL), da sich Konfigurationen und Verfügbarkeit ändern können.
+Der aktuelle SiFli-Chip-Modellleitfaden führt sechs SF32LB58x-Bestellcodes auf, alle im BGA256. Die Speichertabelle trennt das Boot-SiP auf MPI5 vom Speicher auf MPI1 und MPI2:
 
-<div align="center"><em>SF32LB58x-Bestellcodes und Speicher im Gehäuse</em></div>
+<div align="center"><em>SF32LB58x-Bestellcodes, SiP-Speicher und gemeinsame Grenzwerte</em></div>
 
 <div align="center" markdown>
 
-| Teilenummer | Gehäuse | Speicher im Gehäuse |
-| :--- | :--- | :--- |
-| SF32LB583VCC36 | BGA256 | 1 MB Boot-NOR-Flash + 2 × 8 MB OPI-PSRAM an MPI1 und MPI2 |
-| SF32LB586VDD36 | BGA256 | 1 MB Boot-NOR-Flash + 2 × 16 MB HPI-PSRAM an MPI1 und MPI2 |
-| SF32LB587VEE56 | BGA256 | 4 MB Boot-NOR-Flash + 2 × 32 MB HPI-PSRAM an MPI1 und MPI2 |
+| Bestellcode | Gehäuse | MPI5 Boot-SiP | MPI1 SiP | MPI2 SiP |
+| :--- | :--- | :--- | :--- | :--- |
+| SF32LB580VNN36 | BGA256 | 1 MB NOR-Flash | n/a | n/a |
+| SF32LB581VCN36 | BGA256 | 1 MB NOR-Flash | 8 MB OPI-PSRAM | n/a |
+| SF32LB583VCC36 | BGA256 | 1 MB NOR-Flash | 8 MB OPI-PSRAM | 8 MB OPI-PSRAM |
+| SF32LB585V5E56 | BGA256 | 4 MB NOR-Flash | 4 MB NOR-Flash | 32 MB HPI-PSRAM |
+| SF32LB586VDD36 | BGA256 | 1 MB NOR-Flash | 16 MB HPI-PSRAM | 16 MB HPI-PSRAM |
+| SF32LB587VEE56 | BGA256 | 4 MB NOR-Flash | 32 MB HPI-PSRAM | 32 MB HPI-PSRAM |
 
 </div>
+
+Für alle sechs Einträge nennt der Leitfaden ein Gehäuse von 6,5 × 8,5 × 0,94 mm mit 0,4 mm Rastermaß, einen Versorgungsspannungsbereich von 1,71–3,63 V, 94 HCPU- plus 66 LCPU-GPIOs und einen Betriebstemperaturbereich von −40 bis 85 °C. Der Chip-Modellleitfaden nennt keine I/O-Spannungsbereiche, die im Datenblatt je I/O-Bank festgelegt werden, und bestätigt keine Pin-Kompatibilität. Leiten Sie die Austauschbarkeit nicht allein aus dem gemeinsamen BGA256-Gehäuse ab; prüfen Sie vor dem Layout jede verwendete I/O-Versorgung und die Pinfunktionstabelle des genauen Bauteils. Konfiguration und Verfügbarkeit können sich ändern; bestätigen Sie den Bestellcode vor dem Kauf anhand des aktuellen Datenblatts und der Approved Vendor List (AVL).
 
 Prüfen Sie bei der Variantenwahl zuerst diese Punkte:
 
@@ -162,7 +174,7 @@ Mit dieser Abfolge machen Sie aus einer SF32LB58x-Vorauswahl ein validiertes Des
 ## Häufig gestellte Fragen { #frequently-asked-questions }
 
 **Was sind die wichtigsten Spezifikationen des SF32LB58x?**
-Der SF32LB58x kombiniert eine Anwendungs-CPU (2× Cortex-M33 @240 MHz) mit einem Low-Power-Kern (Cortex-M33 @48/96 MHz; vom Anwender programmierbar). Hinzu kommen 3,7 MB internes SRAM und Dual-Mode-Bluetooth (BT Classic + BLE). Grafik: ePicasso 2.0 + Vivante GCNanoUltraV (Vektorgrafik). Gehäuse: BGA256 (8,5 × 6,5 mm). USB 2.0 HS.
+Der SF32LB58x nutzt 2× Cortex-M33 @240 MHz für Anwendungsaufgaben und verfügt über einen Low-Power-Kern (Cortex-M33 @48/96 MHz; vom Anwender programmierbar). Hinzu kommen 3,7 MB internes SRAM und Dual-Mode-Bluetooth (BT Classic + BLE). Grafik: ePicasso 2.0 + Vivante GCNanoUltraV (Vektorgrafik). Gehäuse: BGA256 (8,5 × 6,5 mm). USB 2.0 HS.
 
 **Welche Display-Schnittstellen unterstützt der SF32LB58x?**
 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. ([Schnittstellenmatrix pro Gerät](../../learn/graphics/display-controller.md#per-device-interface-matrix))

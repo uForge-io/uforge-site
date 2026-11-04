@@ -10,7 +10,7 @@ tags:
 
 SiFli CodeKitは、SiFli-SDK開発用のVS Code拡張機能です。SDKのセットアップ、プロジェクト作成、設定、ビルド、Flash書き込み、モニターの各作業を支援します。
 
-初回の使用については[SiFli CodeKit](../../getting-started/sifli/getting-started-sifli-codekit.md)を参照してください。このページでは、CodeKitを開発ワークフローの中でどう使うかを説明します。
+初めて使う場合は[CodeKitの始め方](../../getting-started/sifli/getting-started-sifli-codekit.md)を参照してください。このページでは、CodeKitを開発ワークフローの中でどう使うかを説明します。
 
 主な参照先:
 
@@ -47,7 +47,7 @@ CodeKitの操作が失敗した場合は、可能であれば対応するSDKコ�
 
 CodeKitのエディター操作は、基盤となるSDKから再現できる状態にしておくと最も有用です。拡張機能は操作画面、SiFli-SDKはツールチェーン、ボード定義、ビルド出力、ダウンロード成果物の正式な基準として扱います。
 
-[SiFli CodeKit](../../getting-started/sifli/getting-started-sifli-codekit.md)では、拡張機能のインストールと`hello_world`の実行を説明しています。この基準構成が動作したら、CodeKitで編集・ビルド・書き込み・モニターの反復を短縮してください。操作を自動化、調査、またはVS Code外で再現する必要がある場合は、SDKのコマンドラインを使います。
+[CodeKitの始め方](../../getting-started/sifli/getting-started-sifli-codekit.md)では、拡張機能のインストールと`hello_world`の実行を説明しています。この基準構成が動作したら、CodeKitで編集・ビルド・書き込み・モニターの反復を短縮してください。操作を自動化、調査、またはVS Code外で再現する必要がある場合は、SDKのコマンドラインを使います。
 
 ## 記録する内容 { #what-to-record }
 

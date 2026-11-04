@@ -31,13 +31,13 @@ El desarrollo USB abarca el firmware, los descriptores, los sistemas operativos 
 
 ## Qué probar { #what-to-test }
 
-- Conectar el dispositivo antes de encenderlo; conectarlo y desconectarlo mientras está en funcionamiento.
+- Conecte el dispositivo antes de encenderlo; conéctelo y desconéctelo mientras está en funcionamiento.
 - Reinicio con el dispositivo conectado.
 - Suspensión/reactivación del host.
 - Desconexión del cable durante una transferencia.
 - Enumeración en Windows, macOS y Linux.
 - Comportamiento del dispositivo compuesto cuando se habilitan varias clases.
-- Informar a los usuarios de que los cables USB de solo carga no admiten comunicación de datos.
+- Informe a los usuarios de que los cables USB de solo carga no admiten comunicación de datos.
 
 ## Lista de comprobación de descriptores { #descriptor-checklist }
 
@@ -51,7 +51,9 @@ El desarrollo USB abarca el firmware, los descriptores, los sistemas operativos 
 
 El [índice oficial de ejemplos CherryUSB de SiFli-SDK](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/index.html) separa los ejemplos de dispositivo USB y de host USB. Empiece por el ejemplo que corresponda al rol y a la clase USB previstos, y aplique a la implementación del producto las comprobaciones de descriptores, alimentación y compatibilidad con el host de ese ejemplo.
 
-<div align="center"><em>Tabla: Ejemplos CherryUSB de SiFli-SDK para SF32LB58x</em></div>
+Los ejemplos no admiten necesariamente las mismas placas. Antes de reutilizar uno, consulte la sección «Supported Platforms» de su página y confirme que incluye la placa de destino.
+
+<div align="center"><em>Tabla: Ejemplos CherryUSB de SiFli-SDK incluidos en la documentación de SF32LB58x</em></div>
 
 <div align="center" markdown>
 

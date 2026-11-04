@@ -17,7 +17,7 @@ Die SDK-Leitfäden `debug_logging` und `crash_analysis` ergänzen sich: Logs zei
 
 | Familie | Debug- und Log-Verhalten |
 |---|---|
-| SF32LB52x, SF32LB56x, SF32LB58x | Der zugehörige SiFli-Leitfaden dokumentiert UART-Erfassung, `SifliUsartServer`/`AssertDumpUart` sowie die Wiederherstellung mit J-Link/Trace32. Verwenden Sie den Transport, der im ausgewählten Schlafzustand verfügbar bleibt. |
+| SF32LB52x, SF32LB56x, SF32LB58x | Die SiFli-Leitfäden für diese Familien dokumentieren UART-Erfassung, `SifliUsartServer`/`AssertDumpUart` sowie die Wiederherstellung mit J-Link/Trace32. Verwenden Sie den Transport, der im ausgewählten Schlafzustand verfügbar bleibt. |
 | SF32LB55x | SWD kann mit `$SDK_ROOT/tools/segger/jlink_hcpu_a0.bat` und `jlink_lcpu_a0.bat` zwischen HCPU und LCPU umgeschaltet werden. Die ROM-Konsole des LCPU ist UART3 mit 1 000 000 Baud; HCPU kann UART1/2 oder SWD verwenden. Da SWD PB-IO nutzt, halten Sie LPSYS aktiv oder im Light Sleep, solange die Verbindung besteht. |
 
 </div>
@@ -37,9 +37,9 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
   --output /tmp/live-crash --elf build_hcpu/main.elf
 ```
 
-Fügen Sie `--include-psram --psram-size 8MB` hinzu, wenn das Ziel PSRAM verwendet. Mit J-Link lässt sich `--transport jlink --jlink-ip 127.0.0.1:19025` verwenden; wählen Sie den betroffenen Kern mit `--core hcpu` oder `--core lcpu` aus. Das Ausgabeverzeichnis sollte die erfasste Binärdatei, Core-ELF/AXF, `log.txt`, `manifest.json` und `sdk_manifest.json` enthalten.
+Um auch PSRAM zu exportieren, ergänzen Sie `--include-psram` oder verwenden Sie `--psram-size 8MB`, um das PSRAM-Skript manuell auszuwählen. Für J-Link über IP mit `SifliUsartServer` verwenden Sie `--transport jlink --jlink-ip 127.0.0.1:19025`; wählen Sie den betroffenen Kern mit `--core hcpu` oder `--core lcpu` aus. Das Ausgabeverzeichnis sollte die erfasste Binärdatei, Core-ELF/AXF, `log.txt`, `manifest.json` und `sdk_manifest.json` enthalten.
 
-Verwenden Sie bei älteren SDKs das familienspezifische Verfahren aus dem Quellleitfaden:
+Verwenden Sie bei älteren SDKs das familienspezifische Verfahren aus dem entsprechenden SiFli-Crash-Analyseleitfaden:
 
 - UART: `SifliUsartServer` oder `AssertDumpUart` kann ein Assertion-Paket exportieren, solange die Konsole verfügbar ist.
 - J-Link/SWD: Fügen Sie J-Link zu `PATH` hinzu und führen Sie das Skript für die Zielfamilie aus; für SF32LB55x beispielsweise `$SDK_ROOT/tools/crash_dump_analyser/script/save_ram_55x.bat`. Das passende Skript sichert RAM, EPIC-Register und PSRAM.
@@ -50,13 +50,13 @@ Bei skriptbasierter Erfassung muss die `.jlink`-Datei zur Zielfamilie, zur PSRAM
 ![SF32LB52x-Option Memory Trace im menuconfig](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_mem_trace.png){ loading="lazy" }
 <div align="center"><em>Abbildung: Beispiel aus dem SF32LB52x-Leitfaden — Memory Trace vor der Fehlerreproduktion aktivieren, wenn Heap-Nachweise benötigt werden.</em></div>
 
-Für eine UART-Erfassung müssen in der Regel das serielle Hilfsprogramm, die Serveradresse und der Zielkern übereinstimmen. Die folgenden Screenshots aus dem Leitfaden helfen, die Verbindungseinstellungen zu prüfen:
+Für eine UART-Erfassung müssen in der Regel das serielle Hilfsprogramm, die Serveradresse und der Zielkern übereinstimmen. Im Windows-Beispiel des SF32LB52x-Leitfadens liegen die Tools unter `SiFli_Trace_v2.3.0/Sifli_UsartServer_v2.8`; dazu gehört `SifliUsartServer.exe`. Lokaler Installationspfad und Version können abweichen. Der Screenshot der Verbindungseinstellungen zeigt UART1 des Chips, zugeordnet zu COM17 des Host-PCs, 1 000 000 Baud, den Server `127.0.0.1:19025` und den Zielkern HCPU. Diese Angaben sind Leitfadenbeispiele und keine allgemeinen Standardwerte für andere Boards oder Verdrahtungen:
 
 ![SiFli_Trace- und SifliUsartServer-Tool-Speicherort](../../../../assets/develop/app-notes/crash-analysis/Sifli_Trace.png){ loading="lazy" }
-<div align="center"><em>Abbildung: Beispiel aus dem SF32LB52x-Leitfaden — Verzeichnis der Tools.</em></div>
+<div align="center"><em>Abbildung: Beispiel aus dem SF32LB52x-Leitfaden — SiFli_Trace-/SifliUsartServer-Toolverzeichnis mit einem versionsgebundenen Serverprogramm.</em></div>
 
 ![SifliUsartServer SF32LB52x-Verbindungseinstellungen](../../../../assets/develop/app-notes/crash-analysis/UsartServer52.png){ loading="lazy" }
-<div align="center"><em>Abbildung: Beispiel aus dem SF32LB52x-Leitfaden — serieller Port, Baudrate, Serveradresse und Debug-Kern müssen zum erfassten Ziel passen.</em></div>
+<div align="center"><em>Abbildung: Beispiel aus dem SF32LB52x-Leitfaden — UART1 ist COM17 zugeordnet; Baudrate 1 000 000, Server `127.0.0.1:19025` und Zielkern HCPU. Dies sind Beispielwerte, keine universellen Standardwerte.</em></div>
 
 ![RAM-Sicherungsskript des Crash-Dump-Analyzers](../../../../assets/develop/app-notes/crash-analysis/save_ram_uart_52.png){ loading="lazy" }
 <div align="center"><em>Abbildung: Beispiel aus dem SF32LB52x-Leitfaden — das Verzeichnis enthält familien- und verbindungsspezifische Skripte, etwa `save_ram_55x.bat`, `save_ram_58x.bat` und `save_ram_uart_52x.bat`. Wählen Sie das zum Ziel und zur Verbindung passende Skript.</em></div>
@@ -75,10 +75,10 @@ sdk.py crash-dump analyze --core /tmp/live-crash/coredump.elf \
 Der ältere Trace32-Workflow lädt ein HCPU-Assertion-Paket über die HCPU-Assertion-Schaltfläche (HA) und `run_next_step`; verwenden Sie für einen LCPU-Dump die LCPU-Wiederherstellungskonfiguration. Wird kein Exception-Stack angezeigt, überprüfen Sie Kernauswahl, ELF und Speicherbereiche, bevor Sie Register interpretieren.
 
 ![Trace32-Beispiel für die Auswahl des Erfassungsskripts](../../../../assets/develop/app-notes/crash-analysis/dump_select.png){ loading="lazy" }
-<div align="center"><em>Abbildung: Beispiel aus dem SF32LB52x-Leitfaden — Auswahl des J-Link-/Trace32-Erfassungsskripts.</em></div>
+<div align="center"><em>Abbildung: Beispiel aus dem SF32LB52x-Leitfaden — IP- und USB-`.jlink`-Skripte im Vergleich; die IP-Variante verwendet `127.0.0.1:19025`, bei direkter J-Link-Verbindung ist die USB-Variante zu wählen.</em></div>
 
 ![Trace32-HCPU-Assertion-Fenster](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_hcpu_window.png){ loading="lazy" }
-<div align="center"><em>Abbildung: Beispiel aus dem SF32LB52x-Leitfaden — Callstack, Thread-Liste, Heap und Fehlerursache nach der Wiederherstellung gemeinsam betrachten.</em></div>
+<div align="center"><em>Abbildung: Beispiel aus dem SF32LB52x-Leitfaden — nach der Wiederherstellung Callstack sowie die Fenster `TaskList`, `TaskSwitchHistory`, `heapAllocation`, `error_reason` und Disassembly prüfen.</em></div>
 
 ## Frühzeitig beim Booten oder bei einer vermuteten Race Condition anhalten { #stop-early-during-boot-or-a-suspected-race }
 
@@ -102,6 +102,6 @@ Für die interaktive Untersuchung kann Ozone die HCPU-/LCPU-ELF sowie die passen
 Der Bus-Monitor des SDK kann Zugriffe erfassen, die zu einem Bus-Fault führen. Registrieren Sie einen Callback mit `dbg_busmon_reg_callback` und verwenden Sie dann `dbg_busmon_read` und `dbg_busmon_write` aus dem Leitfadenbeispiel, um den betreffenden Adressbereich zu untersuchen. Kombinieren Sie dies mit Heap-Tracing und dem Crash-Paket; ein Registerdump ohne Symbole oder Speicherkontext ist selten ausreichend.
 
 ![Trace32-Beispiel für Heap-Callstack](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_heap_callstack.png){ loading="lazy" }
-<div align="center"><em>Abbildung: Beispiel aus dem SF32LB52x-Leitfaden — Heap-Callstack und Speicherfenster.</em></div>
+<div align="center"><em>Abbildung: Beispiel aus dem SF32LB52x-Leitfaden — Assertion-Handler und Zeile mit dem Fenster des unverarbeiteten Speicherdumps abgleichen.</em></div>
 
 Offizielle Quellen nach Familie: [SF32LB52x Crash-Analyse](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/crash_analysis.html), [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/crash_analysis.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/crash_analysis.html) und [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/crash_analysis.html) sowie der passende [Leitfaden zu Debugging und Logging](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/debug_logging.html).

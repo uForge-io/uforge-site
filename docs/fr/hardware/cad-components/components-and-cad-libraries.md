@@ -9,7 +9,7 @@ tags:
 
 # Composants et bibliothèques CAO { #components-and-cad-libraries }
 
-Utilisez cette page lorsqu'une puce ou un module SF32 retenu passe de la décision d'architecture à une nomenclature (BOM) maîtrisée et à la conception du PCB. Les deux ressources ci-dessous remplissent des fonctions différentes : la **liste de fournisseurs approuvés (AVL)** aide à choisir des composants qualifiés par SiFli, tandis que les **bibliothèques d'outils EDA** fournissent les symboles, empreintes et données de projet de référence nécessaires à la mise en œuvre correcte du matériel choisi.
+Utilisez cette page lorsqu'une puce ou un module SF32 retenu passe de la décision d'architecture à une nomenclature (BOM) maîtrisée et à la conception du PCB. Les deux ressources ci-dessous remplissent des fonctions différentes : la **liste de fournisseurs approuvés (AVL)** aide à choisir des composants qualifiés par SiFli, tandis que les **bibliothèques d'outils EDA** fournissent les symboles de schéma et empreintes PCB officiels comme point de départ pour la mise en œuvre du matériel choisi.
 
 Aucune des deux ressources ne remplace le guide de conception matérielle spécifique au composant, le plan de boîtier ou la validation finale sur la carte destinée à la production.
 
@@ -22,7 +22,7 @@ Aucune des deux ressources ne remplace le guide de conception matérielle spéci
 | Ressource | À utiliser pour | Ne pas utiliser comme substitut pour |
 |:---------|:-----------|:----------------------------------|
 | [Liste de fournisseurs approuvés SF32](sifli-approved-vendor-list.md) | Présélectionner les quartz, inductances, mémoires Flash et autres composants pris en charge et qualifiés ; vérifier les contraintes électriques et d'identification par le firmware. | L'approbation finale des composants, la qualification de la chaîne d'approvisionnement ou la validation électrique au niveau du produit. |
-| [Bibliothèques d'outils EDA](eda-tool-libraries.md) | Point de départ pour les symboles de schéma, les empreintes PCB, les plans de boîtier et les ressources de conception de référence dans les outils EDA pris en charge. | La vérification de la référence exacte à commander, de l'empilement des pastilles, du processus d'assemblage ou de la documentation actuelle du composant. |
+| [Bibliothèques d'outils EDA](eda-tool-libraries.md) | Symboles de schéma et empreintes PCB officiels à utiliser comme données de départ dans les outils EDA pris en charge. | La vérification de la référence exacte à commander, de l'empilement des pastilles, du processus d'assemblage ou de la documentation actuelle du composant. |
 
 </div>
 

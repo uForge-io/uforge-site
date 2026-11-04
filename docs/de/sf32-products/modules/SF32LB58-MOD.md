@@ -16,7 +16,7 @@ Das Modul integriert den BGA256-Baustein, den RF-Pfad, den Quarz und den schnell
 
 Je nach Modul-SKU lässt sich die Plattform mit HPI-PSRAM sowie QSPI-NOR-, QSPI-NAND- oder eMMC-Speicher konfigurieren. Die herausgeführten Schnittstellen ermöglichen Produkte mit Display-, Audio-, Speicher- und Konnektivitätsfunktionen auf einer MCU-Plattform.
 
-DS5802 V0.1 beschreibt eine modulintegrierte PCB-Antenne sowie Möglichkeiten zum Anschluss einer externen Antenne. Die externe Antenne kann über metallisierte Halblöcher oder den externen Antennenanschluss der ersten Generation angeschlossen werden; dieser Anschluss ist mit Hirose-U.FL-, I-PEX-MHFI- und Amphenol-AMC-Steckverbindern kompatibel. Das Datenblatt ordnet die Ausführungen nicht den einzelnen SKUs zu. Klären Sie daher die Antennenausführung des gewählten Moduls mit SiFli, bevor Sie das Layout der Trägerplatine festlegen.
+DS5802 V0.1 beschreibt eine modulintegrierte PCB-Antenne sowie Möglichkeiten zum Anschluss einer externen Antenne. Die externe Antenne kann über den externen Antennenanschluss der ersten Generation angeschlossen werden; dieser Anschluss ist mit Hirose-U.FL-, I-PEX-MHFI- und Amphenol-AMC-Steckverbindern kompatibel. Das Datenblatt ordnet die Ausführungen nicht den einzelnen SKUs zu. Klären Sie daher die Antennenausführung des gewählten Moduls mit SiFli, bevor Sie das Layout der Trägerplatine festlegen.
 
 !!! info
     Architektur und Peripherie der Chipfamilie sind auf der Seite [SF32LB58x](../chips/SF32LB58x.md) beschrieben. Diese Seite behandelt die Integration des Moduls, seine Speichervarianten, Versorgungsschienen und Auswahlkriterien.
@@ -35,7 +35,7 @@ SiFli nennt für SF32LB58-MOD folgende Anwendungsbereiche:
 Ziehen Sie SF32LB58-MOD in Betracht, wenn das Design eine oder mehrere der folgenden Eigenschaften erfordert:
 
 - Integration von BGA256-Baustein, RF-Pfad, Quarz und schnellem Speicher auf Modulebene
-- Modulintegrierte PCB-Antenne oder externe Antenne über metallisierte Halblöcher bzw. einen Anschluss, kompatibel mit Hirose U.FL, I-PEX MHFI und Amphenol AMC; SKU-Ausführung bestätigen
+- Modulintegrierte PCB-Antenne oder externe Antenne über einen Anschluss, kompatibel mit Hirose U.FL, I-PEX MHFI oder Amphenol AMC; SKU-Ausführung bestätigen
 - Speicheroptionen mit QSPI-NOR, QSPI-NAND oder eMMC entsprechend der SKU
 - Herausgeführte Schnittstellen für Display, Audio, Speicher und Steuerungsfunktionen
 
@@ -108,7 +108,7 @@ Die Angaben wurden von den Etiketten übernommen; eine unabhängige Prüfung anh
 </div>
 
 !!! note "Verfügbarkeit und Anpassungen"
-    **SF32LB58-MOD-E4R32N1 ist aufgrund der jüngsten Lieferengpässe bei Speicherchips nicht mehr verfügbar.** Andere Modulkonfigurationen sind ebenfalls möglich. Für individuelle Anpassungen [wenden Sie sich an μForge.io](../../about/contact.md).
+    **SF32LB58-MOD-E4R32N1 ist aufgrund von Lieferengpässen bei Speicherchips derzeit nicht verfügbar.** Andere Modulkonfigurationen sind ebenfalls möglich. Für individuelle Anpassungen [wenden Sie sich an μForge.io](../../about/contact.md).
 
 Die [Modellübersicht für SiFli-Module](https://wiki.sifli.com/en/silicon/%E6%A8%A1%E7%BB%84%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) führt diese Varianten auf, nennt eMMC als mögliche interne Bestückung und weist darauf hin, dass weitere Konfigurationen angepasst werden können. Wählen Sie die SKU passend zum Speichermedium und zur Kapazität und klären Sie mit SiFli die aktuelle Verfügbarkeit und Speicherkonfiguration. Prüfen Sie außerdem, ob das Ziel-SDK und die Firmware das gewählte Gerät sowie den Boot- und Speicherpfad unterstützen.
 
@@ -154,10 +154,14 @@ Der [SF32LB58x-Hardwareleitfaden](https://wiki.sifli.com/en/hardware/SF32LB58x-H
 - VDD_3V3: 2,97–3,6 V
 - VDD_1V8: 1,7–1,95 V
 - VDDIOA / VDDIOA2 / VDDIOB: 1,7–3,6 V
+
 - VDD_3V3 versorgt AVDD33_ANA, AVDD33_AUD und AVDD_USB sowie bei bestücktem eMMC dessen VDD-Eingang. SiFli empfiehlt für diese Versorgungsschiene einen LDO.
 - VDD_1V8 versorgt PVDD1, PVDD2, AVDD_BRF, AVDD18_DSI und den im Gehäuse integrierten Speicher.
 - VDDIOA versorgt die PA-I/Os außer PA00–PA11, den externen Flash und bei bestücktem eMMC dessen VIO. VDDIOA2 versorgt PA00–PA11; VDDIOB versorgt die PB-I/Os.
 - 138-polige Modulschnittstelle; die multiplexierten Signalpins stellen Funktionen wie GPIO, SPI, LCD, MPI, UART, I2C, PWM, SDIO, USB 2.0 HS und Audio bereit
+
+!!! note "Externe I/O-Spannung"
+    DS5802 V0.1 gibt für VDDIOA, VDDIOA2 und VDDIOB 1,7–3,6 V an; die Hardware-Checkliste desselben Dokuments fordert für Modul-I/Os und externe Peripherie jedoch einen Schnittstellenpegel von 3,3 V. Das Dokument erläutert diese unterschiedlichen Angaben nicht. Klären Sie die zulässige Spannung für die gewählte Schnittstelle und Modulrevision mit SiFli; leiten Sie aus dem Versorgungsschienenbereich nicht ab, dass alle externen I/Os 3,6 V tolerieren.
 
 ## Verwandte Produkte { #related-products }
 

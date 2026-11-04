@@ -32,7 +32,7 @@ Cette page classe par tâche d'ingénierie les exemples de [Bluetooth classique]
 
 </div>
 
-## Mise en service d'un exemple pour établir des preuves { #bring-up-an-example-as-evidence }
+## Mettre en service un exemple et consigner sa validation { #bring-up-an-example-as-evidence }
 
 Avant de modifier le projet, consignez la version exacte du SDK, le nom de la carte, la configuration, l'appareil pair ou l'application, les paramètres radio et les journaux attendus. Suivez ensuite ces étapes :
 

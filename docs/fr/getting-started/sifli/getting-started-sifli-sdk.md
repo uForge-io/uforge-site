@@ -24,8 +24,8 @@ Même si vous comptez utiliser Arduino, Zephyr ou MicroPython, suivez ce guide u
 **Logiciel**
 
 - [git](https://git-scm.com/)
-- Une chaîne d'outils C/C++ préparée avec [`uv`](https://docs.astral.sh/uv/getting-started/installation/) (l'installateur de SiFli-SDK télécharge le compilateur, le débogueur et l'environnement Python)
-- Le dépôt [SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) lui-même
+- [`uv`](https://docs.astral.sh/uv/getting-started/installation/), que les scripts d'installation de SiFli-SDK utilisent pour gérer l'environnement Python et ses dépendances
+- Le dépôt [SiFli-SDK](https://github.com/OpenSiFli/SiFli-SDK) ; son installateur télécharge le compilateur et le débogueur correspondants
 
 **Références officielles**
 
@@ -111,6 +111,7 @@ La valeur passée à `scons --board` correspond au nom du répertoire de la cart
 | SF32LB52-DevKit-Nano | `sf32lb52-nano_n4`<br>`sf32lb52-nano_n16r16`<br>`sf32lb52-nano_a128r16` |
 | Huangshan-Pi (SF32LB52-LCHSPI-ULP) | `sf32lb52-lchspi-ulp` |
 | SF32LB56-DevKit-LCD | `sf32lb56-lcd_a128r12n1`<br>`sf32lb56-lcd_n16r12n1` |
+| SF32LB57-DevKit-EPD_MB_V1.0 | `sf32lb57-epd_n16r16` |
 | SF32LB58-DevKit-LCD | `sf32lb58-lcd_a128r32n1_dsi`<br>`sf32lb58-lcd_a128r32n1_qspi`<br>`sf32lb58-lcd_n16r32n1_dpi`<br>`sf32lb58-lcd_n16r32n1_dsi`<br>`sf32lb58-lcd_n16r32n1_qspi`<br>`sf32lb58-lcd_n16r64n4` |
 
 </div>
@@ -169,7 +170,7 @@ Vous pouvez poursuivre lorsque les conditions suivantes sont réunies :
 
 ## Où aller ensuite { #where-to-go-next }
 
-- **Choisissez votre puce :** comparez les séries LB52, LB55, LB56 et LB58 dans la [vue d'ensemble de la famille SF32](../../sf32-products/family/SF32_family.md).
+- **Choisissez votre puce :** comparez les séries LB52, LB55, LB56, LB57 et LB58 dans la [vue d'ensemble de la famille SF32](../../sf32-products/family/SF32_family.md).
 - **Explorez plus d'exemples :** au-delà de `hello_world`, le SDK fournit des exemples pour BLE, Bluetooth classique, l'interface graphique LVGL, l'audio et les modes basse consommation.
 - **Vous préférez un autre framework :** continuez avec [Arduino](../arduino/getting-started-arduino.md), [Zephyr](../zephyr/getting-started-zephyr-upstream.md) ou [MicroPython](../micropython/getting-started-micropython.md).
 - **Besoin d'aide :** consultez la [FAQ SiFli](https://wiki.sifli.com/en/faq/index.html) pour résoudre les problèmes courants de chaîne d'outils, de J-Link et de débogage.

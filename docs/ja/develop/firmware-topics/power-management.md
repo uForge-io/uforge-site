@@ -22,10 +22,10 @@ tags:
 
 ## 測定の出発点 { #useful-starting-points }
 
-- SDKの電源管理サンプル。
-- CPU使用率のプロファイリング。
-- RT-Thread shellによる状態確認。
-- ボード上での電流測定。
+- [SDKの電源管理サンプル](../../learn/low-power/low-power-sdk-examples.md)。
+- [CPU使用率のプロファイリング](../../getting-started/tutorials/advanced.md)。
+- [RT-Thread shellによる状態確認](../platforms/sifli-sdk/debugging-diagnostics.md)。
+- [ボード上での電流測定](../../learn/low-power/measurement-and-validation.md)。
 
 ## 測定時の記録事項 { #measurement-notes }
 
@@ -40,7 +40,7 @@ tags:
 - ログ出力レベル。
 - 平均電流、ピーク電流、測定区間。
 
-## よくある電力問題 { #common-power-problems }
+## よくある消費電力の問題 { #common-power-problems }
 
 <div align="center"><em>表: よくある消費電力の問題</em></div>
 

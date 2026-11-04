@@ -332,7 +332,7 @@ cleanup:
 
 ## Usar Flash mediante MTD de RT-Thread { #5-use-flash-through-rt-thread-mtd }
 
-RT-Thread proporciona controladores de dispositivo MTD-NOR y MTD-NAND. Al habilitar MTD y las opciones del sistema de archivos en la configuración, los dispositivos se registran durante el arranque. Busque un controlador con `rt_device_find("flash1")`; los nombres son `flash1`, `flash2` y `flash3` (y el nombre correspondiente para cada controlador habilitado). Un resultado distinto de NULL indica que el registro se completó correctamente.
+RT-Thread proporciona controladores de dispositivo MTD-NOR y MTD-NAND. Cuando MTD está correctamente configurado y habilitado para un controlador Flash, el dispositivo se registra durante el arranque. El uso de un sistema de archivos también requiere la configuración correspondiente. Busque un controlador con `rt_device_find("flash1")`; los nombres son `flash1`, `flash2` y `flash3` (y el nombre correspondiente para cada controlador habilitado). Un resultado distinto de NULL indica que el registro se completó correctamente.
 
 MTD se utiliza con sistemas de archivos y almacenamiento USB. Normalmente, el código de aplicación busca el dispositivo y lo asocia; la capa MTD-NOR encapsula las operaciones de lectura y escritura. Si registra un dispositivo manualmente, implemente la tabla de operaciones siguiente.
 
@@ -551,7 +551,9 @@ typedef struct
 } FLASH_CMD_CFG_T;
 ```
 
-Aquí, `cmd` es el ID de comando (`0x06` para habilitar escritura y `0x05` para leer el estado en los ejemplos de origen). `func_mode` selecciona lectura o escritura; `data_mode` selecciona sin datos o datos por una, dos o cuatro líneas; `dummy_cycle` especifica los ciclos de reloj entre el comando y la dirección/datos; `ab_size` y `ab_mode` describen los bytes alternativos; `addr_size` y `addr_mode` indican la longitud de la dirección y el modo de líneas; y `cmd_mode` especifica si el propio comando se envía por una, dos o cuatro líneas.
+Aquí, `cmd` es el ID de comando (`0x06` para habilitar escritura y `0x05` para leer el estado en los ejemplos de origen). `func_mode` selecciona lectura o escritura; `data_mode` selecciona sin datos o datos por una, dos o cuatro líneas; `dummy_cycle` especifica los ciclos de reloj entre el comando y la dirección/datos; `ab_size` y `ab_mode` describen los bytes alternativos; `addr_size` codifica la longitud de la dirección como `n-1` bytes; `addr_mode` usa `0` para indicar que no hay dirección, `1` para direccionamiento por una línea, `2` por dos líneas y `3` por cuatro líneas. Si `addr_mode` es `0`, no se requiere dirección y `addr_size` también debe ser `0`. El comentario de la estructura describe `cmd_mode` como el modo de líneas utilizado para enviar el propio comando.
+
+La fuente presenta como ejemplo el comando de lectura cuádruple `0xEB` de PUYA: su diagrama temporal coloca un `MBYTE` de 8 bits después de `ADDR` para determinar el modo `continue`. La fuente asigna `0/3` a `ab_size` y `ab_mode`, y lo explica como un byte (codificación `n-1`) y modo de cuatro líneas. La fuente es internamente contradictoria sobre `cmd_mode`: el comentario de la estructura asigna `0/1/2/3`, respectivamente, a la ausencia de modo y a los modos de comando por una, dos y cuatro líneas, mientras que el texto siguiente afirma que el valor de un comando Flash válido siempre es `1`. Compruebe la definición y la implementación del SDK de destino antes de elegir un valor; no lo deduzca únicamente de esta explicación.
 
 ## Añadir soporte para una memoria NAND Flash { #8-port-a-nand-flash-part }
 

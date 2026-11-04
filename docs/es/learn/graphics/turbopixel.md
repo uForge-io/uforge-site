@@ -82,7 +82,7 @@ La guía extDMA incluye entradas RGB565, RGB888 y ARGB8888. Admitir una entrada 
 
 El encabezado LCDC actual de OpenSiFli define la macro de soporte para capas comprimidas solo cuando está habilitado `HAL_EXTDMA_MODULE_ENABLED`; la condición de familia excluye SF32LB52x y SF32LB57x. El encabezado establece anchos máximos de 512 píxeles para SF32LB55x/SF32LB56x y 1024 píxeles para SF32LB58x. Son límites de integración de la capa comprimida, no límites universales de resolución del panel. Un comentario del código también indica que la ruta LCPU aún no está habilitada.
 
-SF32LB55x requiere una salvedad de integración. El encabezado LCDC actual de OpenSiFli define la macro de capas comprimidas cuando está habilitado `HAL_EXTDMA_MODULE_ENABLED`, pero su comentario indica que la ruta LCPU aún no está habilitada. La tabla publicada de funciones LCDC del SDK marca como no compatible la descompresión de capas comprimidas en 55x, mientras que la hoja de datos del SF32LB55x describe TurboPixel y la descompresión por el controlador LCD. La presencia de una macro de compilación no demuestra que se haya validado la ruta de visualización completa. Trate el soporte de 55x como condicional y compruebe la revisión del SDK, el núcleo, la configuración de compilación y el hardware objetivo; no deduzca que funciona en tiempo de ejecución solo por la macro.
+Las fuentes disponibles difieren sobre la integración en SF32LB55x. La tabla publicada de funciones LCDC del SDK marca como no compatible la descompresión de capas comprimidas en 55x, mientras que la hoja de datos del SF32LB55x describe TurboPixel y la descompresión por el controlador LCD. Estas fuentes no demuestran que se haya validado la ruta de visualización completa; la macro del encabezado mencionada antes tampoco demuestra el funcionamiento en tiempo de ejecución. Trate el soporte de 55x como condicional y compruebe la revisión del SDK, el núcleo, la configuración de compilación y el hardware objetivo.
 
 Separe la propiedad de los búferes entre el renderizador, extDMA y el controlador de pantalla. Espere a que termine el renderizado para comprimir, a que termine la compresión para mostrar y a que termine el uso por la pantalla para reutilizar el búfer. En memoria compartida con caché, ejecute clean sobre los datos de entrada escritos por la CPU antes de que los lea el hardware. Prepare las líneas de caché de destino para impedir que líneas sucias vuelvan a sobrescribir el resultado del hardware; una vez completada la operación, invalide las líneas obsoletas antes de que la CPU lea el resultado. Respete los límites de las líneas de caché y los datos vecinos. El final de la compresión no es el final de la transferencia al panel.
 
@@ -90,7 +90,7 @@ La dirección de origen, la de destino y la longitud de transferencia extDMA deb
 
 ## Disponibilidad en la familia SF32 { #availability-in-the-sf32-family }
 
-TurboPixel está documentado para las siguientes familias SF32:
+La evidencia disponible sobre la compatibilidad de TurboPixel en las familias SF32 se resume a continuación:
 
 <div align="center"><em>Disponibilidad documentada de TurboPixel</em></div>
 

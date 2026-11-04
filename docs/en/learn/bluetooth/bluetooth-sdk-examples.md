@@ -32,7 +32,7 @@ This page organizes the [Classic Bluetooth](https://docs.sifli.com/projects/sdk/
 
 </div>
 
-## Bring Up an Example as Evidence { #bring-up-an-example-as-evidence }
+## Bring Up an Example and Record Validation Results { #bring-up-an-example-as-evidence }
 
 Before changing the project, record the exact SDK version, board name, configuration, peer device or app, radio settings, and expected log. Then work through this sequence:
 

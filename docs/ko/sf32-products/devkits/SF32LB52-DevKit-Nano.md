@@ -36,14 +36,22 @@ SF32LB52-DevKit-Nano는 소형 시제품과 임베디드 평가를 위한 SF32LB
 
 N4 변형은 소형 제어, Bluetooth, 간단한 UI 애플리케이션에 적합합니다. N16R16은 16 MB OPI-PSRAM과 16 MB QSPI-NOR를 결합하고, A128R16은 16 MB OPI-PSRAM과 128 MB QSPI-NAND를 결합합니다. 두 변형 모두 더 큰 디스플레이 에셋, 외부 파일 시스템, 또는 PSRAM의 프레임버퍼나 작업 메모리가 필요한 애플리케이션에 적합합니다.
 
-**출처 간 불일치 — 선택하기 전에 확인하십시오:** SiFli의 [상세 Nano 보드 가이드](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html)는 16 MB OPI-PSRAM + 16 MB NOR 구성을 `R16N16 V1.0.0`으로 부르지만, [현재 개발 보드 모델 가이드](https://wiki.sifli.com/en/board/devkit_guide.html)는 동일한 메모리 구성을 `N16R16`으로 나열하며, 이와 별도로 `A128R16`을 16 MB OPI-PSRAM + 128 MB QSPI-NAND로 나열합니다. 상세 가이드는 A128R16을 구체적으로 설명하지 않습니다. 이 SKU에 대해서는 N16R16 보드 설명의 내용을 그대로 옮겨 적용하지 말고 모델 가이드의 목록을 따르십시오. 펌웨어나 스토리지 레이아웃을 선택하기 전에 보드 마킹과 현재 회로도/BOM을 확인하십시오.
+**출처 간 불일치 — 선택하기 전에 확인하십시오:** SiFli의 [상세 Nano 보드 가이드](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html)는 16 MB OPI-PSRAM + 16 MB NOR 구성을 `R16N16 V1.0.0`으로 부르지만, [현재 개발 보드 모델 가이드](https://wiki.sifli.com/en/board/devkit_guide.html)는 동일한 메모리 구성을 `N16R16`으로 나열하며, 이와 별도로 `A128R16`을 16 MB OPI-PSRAM + 128 MB QSPI-NAND로 나열합니다.
 
-SiFli 출처에 따라 Nano 보드 치수도 약간 다릅니다. 상세 가이드는 21 × 51 mm, 모델 가이드는 51 × 20.32 mm로 표기합니다. 51 mm 변은 일치하지만 짧은 변은 0.68 mm 차이가 납니다. 이 문서에서는 더 정밀한 모델 가이드의 값을 사용합니다. 인클로저나 캐리어 보드를 설계하기 전에 해당 보드 리비전의 기구 도면을 확인하십시오.
+상세 가이드는 A128R16을 구체적으로 설명하지 않습니다. 이 SKU에 대해서는 N16R16 보드 설명의 내용을 그대로 옮겨 적용하지 말고 모델 가이드의 목록을 따르십시오.
+
+펌웨어나 스토리지 레이아웃을 선택하기 전에 보드 마킹과 현재 회로도/BOM을 확인하십시오.
+
+**치수 차이:** 상세 가이드는 21 × 51 mm, 모델 가이드는 51 × 20.32 mm로 표기합니다. 51 mm 변은 일치하지만 짧은 변은 0.68 mm 차이가 납니다. 이 문서에서는 더 정밀한 모델 가이드의 값을 사용합니다.
+
+인클로저나 캐리어 보드를 설계하기 전에 해당 보드 리비전의 기구 도면을 확인하십시오.
 
 ## 보드 주요 특징 { #board-highlights }
 
 - 51 mm × 20.32 mm 소형 보드
 - 캐리어 PCB에 납땜해 시제품에 실장할 수 있는 캐슬레이션 패드 구조
+- 48 MHz 및 32.768 kHz 크리스털과 보드 내장 PCBA 안테나
+- LCC 캐슬레이션 그룹으로 GPIO 17개, LGA 패드 그룹으로 GPIO 13개를 노출하며 UART 3개, I2C 4개, GPTIM 2개, SPI 2개, GPADC 3개의 리소스를 제공합니다.
 - USB Type-C 전원 및 CH340N을 통한 USB-UART 플래싱/디버그
 - GPIO, UART, I2C, SPI, GPADC, PWM, I2S, PDM, 웨이크 가능 핀 노출
 - 16핀 FPC 경로를 통한 QSPI LCD 지원. 일반적으로 22핀-16핀 어댑터 케이블을 사용합니다.
@@ -105,11 +113,11 @@ USB Type-C가 연결되면 지정된 3.3 V 및 5 V 핀을 출력으로 사용할
 
 ## 캐슬레이션 핀 요약 { #castellated-pin-summary }
 
-Nano 보드는 가장자리의 두 핀 그룹을 노출합니다. 첫 번째 그룹에는 오디오, SPI1, 디버그 UART, USB 관련 전원, GPADC 입력으로 사용할 수 있는 핀이 있습니다. 두 번째 그룹에는 SPI2, USB FS, 웨이크업 입력으로 설정할 수 있는 GPIO, 전원 핀이 있습니다.
+Nano 보드는 가장자리에 두 개의 LCC 핀 그룹을 노출합니다. 왼쪽 J1에는 주로 오디오, SPI1, 디버그 UART, GPADC 지원 핀이 있고, 오른쪽 J2에는 주로 SPI2, USB FS, 웨이크업 기능 GPIO와 전원 핀이 있습니다. 모든 GPIO는 핀 멀티플렉싱을 통해 UART, I2C 또는 GPTIM으로 설정할 수 있습니다. 아래 표에는 일부 기능만 나와 있으며 모든 멀티플렉싱 옵션이나 리셋 시 풀 상태는 포함되지 않습니다. 회로 설계 전에 회로도와 설계 파일을 확인하십시오.
 
-### 전면 에지 신호 { #front-side-edge-signals }
+### J1 — 왼쪽 LCC 에지 신호 { #front-side-edge-signals }
 
-<div align="center"><em>전면 에지 신호 맵</em></div>
+<div align="center"><em>J1 왼쪽 LCC 에지 신호 맵</em></div>
 
 <div align="center" markdown>
 
@@ -134,9 +142,9 @@ Nano 보드는 가장자리의 두 핀 그룹을 노출합니다. 첫 번째 그
 
 </div>
 
-### 후면 에지 신호 { #back-side-edge-signals }
+### J2 — 오른쪽 LCC 에지 신호 { #back-side-edge-signals }
 
-<div align="center"><em>후면 에지 신호 맵</em></div>
+<div align="center"><em>J2 오른쪽 LCC 에지 신호 맵</em></div>
 
 <div align="center" markdown>
 
@@ -163,7 +171,7 @@ Nano 보드는 가장자리의 두 핀 그룹을 노출합니다. 첫 번째 그
 
 ## LCD 인터페이스 { #lcd-interface }
 
-이 보드는 16핀 FPC 신호 세트로 QSPI LCD 패널을 지원합니다. 원본 보드 노트에는 22핀-16핀 FPC 케이블을 사용해 Huangshan Pi 1.85인치 AMOLED 화면에 연결하는 방법이 설명되어 있습니다.
+이 보드는 0.5 mm 피치의 16핀 FPC 신호 세트를 통해 SPI, DSPI, Quad-SPI LCD 모드를 지원하며 DDR 모드 QSPI도 사용할 수 있습니다. 원본 보드 노트에는 22핀-16핀 FPC 케이블을 사용해 Huangshan Pi 1.85인치 AMOLED 화면에 연결하는 방법이 설명되어 있습니다.
 
 ![22핀-16핀 FPC 어댑터 케이블](assets/sf32lb52x/22p-to-16p.png){ loading="lazy" }
 <div align="center"><em>22핀-16핀 FPC 어댑터 케이블</em></div>
@@ -214,9 +222,11 @@ N16R16 변형에는 외장 16 MB QSPI-NOR 플래시가 포함되어 있습니다
 
 변형에 따라 이 핀을 실장된 플래시가 사용하고 있을 수 있습니다. 이 핀을 확장 핀으로 사용하기 전에 정확한 보드 조립 구성을 확인하십시오.
 
+상세 보드 가이드에는 WSON8 풋프린트 선택지도 나와 있습니다. SPI NOR는 8 × 6 mm 또는 6 × 5 mm, SPI NAND와 SD NAND는 8 × 6 mm입니다. 보드별 플래시 실장 구성이 다를 수 있으므로 부품을 선택하기 전에 해당 리비전의 회로도와 BOM을 확인하십시오.
+
 ## 오디오 확장 { #audio-expansion }
 
-Nano 보드는 아날로그 마이크 입력, 마이크 바이어스, 차동 아날로그 오디오 출력을 노출합니다. 대상 제품에 필요한 외부 마이크 회로와 오디오 파워 앰프를 추가하십시오.
+Nano 보드는 아날로그 마이크 입력, 마이크 바이어스, PDM 디지털 마이크 신호, 차동 아날로그 오디오 출력을 노출합니다. 아날로그 입력에는 아날로그 마이크 또는 실리콘 마이크를 연결할 수 있습니다. 스피커를 구동하려면 외부 Class-AB 또는 Class-D 오디오 파워 앰프를 추가하십시오.
 
 ## SDK 빌드 타깃 { #sdk-build-targets }
 

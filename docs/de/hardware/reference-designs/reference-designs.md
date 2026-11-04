@@ -1,6 +1,6 @@
 ---
 icon: lucide/waypoints
-description: "Referenzdesign-Pfade für μForge: Vergleichen Sie reproduzierbare Hardware- und Softwarevalidierungen und wählen Sie den Pfad, der Ihrem Produkt am nächsten kommt."
+description: "Referenzdesign-Pfade für μForge: Vergleichen Sie Hardware- und Softwarevalidierungsabläufe und wählen Sie den Pfad, der Ihrem Produkt am nächsten kommt."
 tags:
     - Hardware
     - Referenzdesign

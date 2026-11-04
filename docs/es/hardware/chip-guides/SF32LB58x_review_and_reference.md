@@ -21,7 +21,7 @@ hide:
 - [ ] Verifique que la inductancia nominal del inductor BUCK seleccionado sea de 4,7 µH, con DCR ≤ 0,4 Ω e Isat ≥ 500 mA.
 - [ ] Confirme que los cristales de 48 MHz y 32,768 kHz cumplen las especificaciones recomendadas y que su trazado y zonas de exclusión respetan los requisitos de diseño.
 - [ ] Verifique que la pista RF tiene una impedancia controlada de 50 Ω y que la red de adaptación está cerca del chip.
-- [ ] Confirme que la interfaz de almacenamiento externa elegida es compatible con el diseño de arranque previsto. Por separado, verifique que el pin Mode esté configurado como corresponde: nivel alto para el modo de descarga o nivel bajo para iniciar desde el área de aplicaciones del usuario.
+- [ ] Confirme que la interfaz de almacenamiento externa elegida es compatible con el diseño de arranque previsto. Por separado, compruebe que una resistencia externa de 10 kΩ mantiene estable el pin Mode, con pull-up a la alimentación para el nivel alto (modo de descarga) o pull-down a GND para el nivel bajo (inicio de la aplicación de usuario). No deje el pin flotante ni permita perturbaciones que conmuten su nivel.
 - [ ] Confirme que el trazado de las interfaces de pantalla (MIPI-DSI/SPI-QSPI/MCU8080/DPI/JDI) cumple las reglas de impedancia y ajuste de longitudes propias de cada interfaz. Para DSI, verifique una impedancia diferencial de 100 Ω, una diferencia de longitud ≤0,5 mm dentro de cada par y ≤2 mm entre pares.
 - [ ] Compruebe que el trazado USB cumple el requisito de impedancia diferencial de 90 Ω. Enrute juntas las señales SDIO, mantenga la longitud total ≤50 mm y limite la diferencia de longitud dentro de cada grupo a ≤6 mm.
 - [ ] Reserve el acceso SWD y seleccione, entre las seis UART disponibles, la interfaz de salida de depuración y sus pines de señal; reserve también puntos de prueba para producción.
@@ -32,7 +32,7 @@ hide:
 
 ## 8. Documentos y referencias relacionados { #8-related-documents-and-references }
 
-Consulte la documentación oficial más reciente para verificar límites eléctricos, datos del encapsulado, multiplexación de pines, configuración del software y cualificación de componentes.
+Consulte los documentos oficiales enlazados a continuación para verificar límites eléctricos, datos del encapsulado, multiplexación de pines, configuración del software y cualificación de componentes. Antes de liberar el diseño, confirme que cada documento citado sigue siendo la revisión vigente.
 
 <div class="grid cards" markdown>
 
@@ -83,7 +83,7 @@ Un diseño típico basado en SF32LB58x para un dispositivo vestible inteligente 
 | Versión | Fecha | Nota |
 |:---|:---|:---|
 | 1.0 | 2026-07 | Guía de diseño de hardware SF32LB58x actualizada con pautas de esquemático, PCB, validación y revisión de producción. |
-| 0.0.1 | 1/2025 | Publicación del borrador oficial de `SF32LB58x-HW-Application`. |
+| 0.0.1 | 1/2025 | Versión preliminar de `SF32LB58x-HW-Application`. |
 
 </div>
 

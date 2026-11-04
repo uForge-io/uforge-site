@@ -63,7 +63,7 @@ Les champs de bits associés aux formats de pixel ci-dessus sont stockés selon 
 
 ## Convertir des ressources PNG { #2-convert-png-assets }
 
-Remplacez `png_filename.png` par le nom du fichier source. Le fichier généré est écrit dans le répertoire de l'outil, sauf si la chaîne de compilation environnante modifie le répertoire de travail.
+Remplacez `png_filename.png` par le nom du fichier source. Le fichier généré est écrit dans le répertoire de l'outil.
 
 ### Binaire PIXEL { #pixel-binary }
 

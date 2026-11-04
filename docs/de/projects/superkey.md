@@ -180,7 +180,7 @@ Ordnen Sie Fehler fünf Bereichen zu: Gerätehardware/Display, HID-Eingabe, CDC-
 |:-----|:-------|:--------------|
 | Begleitprogramm nicht gestartet | SuperKeyHub schließen und Gerät neu starten | Lokale UI und HID funktionieren weiterhin; vom Begleitprogramm abhängige Werte sind erkennbar veraltet oder nicht verfügbar |
 | CDC-Verbindung verloren | Während der Datenübertragung USB trennen/wiederverbinden oder den Port wechseln | Gerät hängt sich nicht auf; Versionsabfrage und Datenübertragung funktionieren nach der Wiederverbindung wieder |
-| Host wechselt in den Schlafmodus | `power_mode sleep/normal` aktivieren und einen Schlaf-/Aufwachzyklus des Hosts ausführen | LCDs, LEDs, Hintergrundbeleuchtung und Sensoren stoppen und starten wie vorgesehen; spätere Daten werden erneut aktualisiert |
+| Host wechselt in den Schlafmodus | In SuperKeyHub die Kopplung an den Systemschlafmodus aktivieren und einen Schlaf-/Aufwachzyklus des Hosts ausführen | LCDs, LEDs, Hintergrundbeleuchtung und Sensoren stoppen und starten wie vorgesehen; spätere Daten werden erneut aktualisiert |
 | Versionskonflikt | In einer kontrollierten Umgebung ein inkompatibles Paar aus Begleitprogramm und Firmware testen | Das Paar weist den Betrieb zurück oder zeigt einen diagnostizierbaren Fehler, statt ein inkompatibles Update anzuwenden |
 | API-Fehler | Ungültige Wetterkonfiguration verwenden oder Netzwerkverbindung trennen | Wetterfehler beeinträchtigen weder HID noch CDC noch die lokale UI noch die Wiederherstellung |
 | DFU unterbrochen | Update auf einem wiederherstellbaren Testgerät unterbrechen | Der vorhandene kabelgebundene Programmierpfad stellt das bekannte Image wieder her |

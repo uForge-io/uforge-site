@@ -19,6 +19,8 @@ tags:
 
 Cada tabla cubre un área de revisión del diseño de PCB. Si no aparece una columna «Aplicable a», las comprobaciones se aplican a todos los diseños de PCB SF32LB58x incluidos en esta lista.
 
+Esta lista se basa en el libro de comprobación SF32LB58x Schematic&PCB checklist V1.0 de SiFli, fechado el 2026-01-21.
+
 ### 6.18.1. Encapsulado { #6181-package }
 
 <div align="center"><em>Tabla 6.18.1-1: Lista de comprobación del encapsulado</em></div>
@@ -179,9 +181,9 @@ Cada tabla cubre un área de revisión del diseño de PCB. Si no aparece una col
 
 | N.º | Punto de comprobación | Categoría |
 |:---|:---|:---|
-| 1 | Evite enrutar señales de conmutación rápida en paralelo con la señal GPADC; si no puede evitarlo, aplique una guarda de masa adecuada | Obligatorio |
+| 1 | No enrute señales de conmutación rápida en paralelo con la señal GPADC | Obligatorio |
 | 2 | Coloque las resistencias divisoras de tensión de batería cerca del pin de entrada del chip | Obligatorio |
-| 3 | Evite enrutar señales de conmutación rápida en paralelo con la señal SDMADC; si no puede evitarlo, aplique una guarda de masa adecuada | Opcional |
+| 3 | No enrute señales de conmutación rápida en paralelo con la señal SDMADC | Opcional |
 
 </div>
 

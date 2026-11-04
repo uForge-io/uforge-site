@@ -12,7 +12,7 @@ tags:
 
 ## What Is EPD Reader? { #what-is-epd-reader }
 
-[OpenSiFli EPD Reader](https://github.com/OpenSiFli/EPD_Reader) adapts [atomic14/diy-esp32-epub-reader](https://github.com/atomic14/diy-esp32-epub-reader) to SiFli `SF32-OED-EPD` hardware. It uses SF32LB52x as the processing core, reads EPUB files from the built-in file system or a TF card, lays out content through ZIP/XML/XHTML parsing, FreeType fonts, and image decoders, then drives an e-paper panel with full- and partial-refresh waveforms.
+[OpenSiFli EPD Reader](https://github.com/OpenSiFli/EPD_Reader) adapts [atomic14/diy-esp32-epub-reader](https://github.com/atomic14/diy-esp32-epub-reader) to SiFli `SF32-OED-EPD` hardware. SF32LB52x is the processing core. The application reads EPUB files from the built-in file system or a TF card, parses ZIP/XML/XHTML content, and lays out pages with FreeType fonts and image decoders. It then drives an e-paper panel using full- and partial-refresh waveforms.
 
 The current application provides library, table-of-contents, reading, reading-settings, function-settings, welcome/screen-off, low-battery, charging, and shutdown pages. It supports keys and touch, Chinese and English text, dynamic TTF/OTF fonts, font size/weight, line spacing, margins, and persistence of reading settings to the TF card. To conserve resources, the bundled Chinese font does not enable separate bold/italic faces by default; validate the actual result of weight options with the target font. It is a complete reference for a low-refresh reading terminal, not proof of general EPUB conformance or a production e-reader.
 
@@ -137,11 +137,11 @@ flowchart LR
     UI --> PM["TF-card sleep / welcome page / shutdown"]
 ```
 
-The main failure domains are content archive/XHTML parsing, font files and memory, TF-card detection/power, touch/key mapping, panel model/waveform/VCOM, full/partial ghosting, battery ADC/charge state, and shutdown/wake. Keep any future wireless feature outside the local-file, display, and power baseline until its project support and delivery path are documented.
+The main failure domains are EPUB archive and XHTML parsing, font files and memory, TF-card detection/power, touch/key mapping, panel model/waveform/VCOM, full/partial ghosting, battery ADC/charge state, and shutdown/wake. Keep any future wireless feature outside the local-file, display, and power baseline until its project support and delivery path are documented.
 
 ## Stage 1 — Pin the Physical and Source Baseline { #stage-1-pin-the-physical-and-source-baseline }
 
-**Goal:** prove that board, panel, touch controller, and source describe one supported combination.
+**Goal:** prove that the board, panel, touch controller, and pinned software correspond to a supported combination.
 
 1. Record V1.1 board markings, the SF32 device, panel model, touch controller, flex orientation, and power source.
 2. Pin the top-level commit and SDK submodule and retain complete submodule status.

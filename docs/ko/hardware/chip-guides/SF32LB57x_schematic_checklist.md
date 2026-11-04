@@ -13,7 +13,7 @@ tags:
 # SF32LB57x 하드웨어 설계 가이드 — 회로도 체크리스트 { #sf32lb57x-hardware-design-guide-schematic-checklist }
 
 !!! note "SF32LB57x 하드웨어 설계 가이드의 일부"
-    이 페이지는 SiFli 공식 설계 자체 점검표를 옮겨 놓은 항목별 회로도 체크리스트인 5.8절을 다룹니다. 세 개의 회로 설계 가이드라인 페이지 중 첫 번째인 [최소 시스템 및 전원](SF32LB57x_schematic_system_power.md)으로 돌아갑니다.
+    이 페이지에는 SiFli 공식 SF32LB57x 하드웨어 애플리케이션 가이드 4.1~4.8절 가운데 회로도 점검 항목이 실려 있습니다. 같은 표의 PCB 배치·라우팅 항목은 [PCB 배치 체크리스트](SF32LB57x_pcb_layout_checklist.md)에 있습니다. [OpenSiFli 공식 원본 Markdown](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/SF32LB57x-HW-Application.md)에 전체 자체 점검표가 있으며, 두 체크리스트의 항목 범위, 적용 대상, 기재된 값도 이 원본과 대조했습니다. 아래에 설명한 출처 간 불일치는 원문에도 남아 있어 아직 해결되지 않았습니다. Markdown의 자체 점검표에는 워크북 전용 검토 하이라이트가 표시되어 있지 않으므로 Excel 셀 색상은 별도로 확인하지 않았습니다. 설계 승인 전에 정확한 주문 부품에 해당하는 불일치를 SiFli에 확인하십시오. 세 개의 회로 설계 가이드라인 페이지 중 첫 번째인 [최소 시스템 및 전원](SF32LB57x_schematic_system_power.md)으로 돌아갑니다.
 
 ## 5.8. 회로도 체크리스트 { #58-schematic-checklist }
 

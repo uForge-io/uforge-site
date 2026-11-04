@@ -20,7 +20,7 @@ Este roteiro reúne BLE, áudio, display, teclas, monitoramento da bateria e rec
 
 O limite de “até oito dispositivos e três participantes falando simultaneamente” é uma característica da implementação upstream, não uma capacidade do produto validada para diferentes distâncias, interferências, perdas de pacotes e todos os padrões de simultaneidade. A documentação upstream também não especifica autenticação das salas, política de criptografia do enlace, garantia de privacidade da voz, conformidade com a regulamentação de rádio nem o escopo completo da licença do componente binário `talk_back`. Cada um desses pontos exige análise específica do produto.
 
-**Nota sobre a fonte da placa:** A página chinesa da SiFli Wiki para a placa ULP está marcada como ainda não publicada; ela só informa o uso em sensores de baixo consumo e dispositivos vestíveis, opções de sensores de 3 ou 6 eixos e pontos de teste reservados para medições de baixo consumo. Não é uma especificação completa da placa. Confira os periféricos na revisão real da placa e no esquemático; o comportamento do Talkback descrito a seguir se baseia no código-fonte fixado do aplicativo.
+**Nota sobre a fonte da placa:** A página chinesa da SiFli Wiki para a placa ULP está marcada como ainda não publicada; ela só informa o uso em sensores de baixo consumo e dispositivos vestíveis, opções de sensores de 3 ou 6 eixos e pontos de teste reservados para medições de baixo consumo. Não é uma especificação completa da placa e não identifica uma revisão de hardware validada para este exemplo. Confira os periféricos na revisão real da placa e no esquemático; o comportamento do Talkback descrito a seguir se baseia no código-fonte fixado do aplicativo.
 
 ## Resultado, escopo e critérios de entrada { #outcome-scope-and-entry-criteria }
 **Resultado esperado:** usar pelo menos duas placas com as revisões de hardware identificadas e controladas para reproduzir a criação e a entrada em salas, a comunicação PTT, a saída e reconexão, a suspensão e retomada e a indicação do nível da bateria. Em seguida, reunir evidências suficientes para decidir se o desenvolvimento de hardware próprio se justifica.
@@ -136,7 +136,7 @@ flowchart LR
     BP["Bateria / alimentação USB"] --> B
 ```
 
-Os principais domínios de falha são a busca BLE e a criação de salas, a sincronização dos estados da sala, o agendamento de participantes simultâneos, o caminho Opus/acústica, os eventos das teclas, bateria fraca e suspensão, a recuperação pelo botão de alimentação e os detalhes não publicados do componente e de seu licenciamento. Primeiro diagnostique o papel e o estado do dispositivo; depois, diferencie falhas de rádio, áudio e alimentação local.
+O diagrama mostra o caminho de áudio do Master para o Slave; a etapa 2 valida separadamente o sentido inverso. Os principais domínios de falha são a busca BLE e a criação de salas, a sincronização dos estados da sala, o agendamento de participantes simultâneos, o caminho Opus/acústica, os eventos das teclas, bateria fraca e suspensão, a recuperação pelo botão de alimentação e os detalhes não publicados do componente e de seu licenciamento. Primeiro diagnostique o papel e o estado do dispositivo; depois, diferencie falhas de rádio, áudio e alimentação local.
 
 ## Etapa 1 — Estabelecer a base de código-fonte sem alterações { #stage-1-establish-the-untouched-source-baseline }
 

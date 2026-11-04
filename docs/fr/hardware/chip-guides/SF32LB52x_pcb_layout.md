@@ -60,7 +60,7 @@ La conception de référence prend en charge un placement simple ou double face.
 
 <div align="center"><em>Figure 6.2-1 : Structure d'empilement de référence</em></div>
 
-La figure 6.2-1 présente un empilement de référence de 0,8 mm ±10%, métallisation et vernis épargne compris. Son épaisseur totale calculée est de 0,79553 mm. Confirmez l'épaisseur finie et la constitution des diélectriques avec le fabricant de PCB ; cet exemple ne définit pas un empilement universel.
+La figure 6.2-1 présente un empilement de référence de 0,8 mm ± 10 %, métallisation et vernis épargne compris. Son épaisseur totale calculée est de 0,79553 mm. Confirmez l'épaisseur finie et la constitution des diélectriques avec le fabricant de PCB ; cet exemple ne définit pas un empilement universel.
 
 <div align="center"><em>Tableau 6.2-1 : Valeurs de l'empilage de référence</em></div>
 
@@ -68,19 +68,19 @@ La figure 6.2-1 présente un empilement de référence de 0,8 mm ±10%, métalli
 
 | Couche | Matériau | Épaisseur (mil) | Épaisseur (mm) | Dk | Df |
 |:---|:---|---:|---:|---:|---:|
-| Vernis épargne supérieur | Vernis épargne | 1 | 0.0254 | 3.5 | 0.8 |
-| L1 | Cuivre + métallisation | 1.81 | 0.045974 | — | — |
-| Diélectrique L1–L2 | Préimprégné 1080 (66%) x3 | 8.5 | 0.2159 | 3.8 | 0.019 |
-| L2 | Cuivre + métallisation | 1.4 | 0.03556 | — | — |
-| Diélectrique L2–L3 | Noyau | 5.9 | 0.14986 | 4 | 0.017 |
-| L3 | Cuivre + métallisation | 1.4 | 0.03556 | — | — |
-| Diélectrique L3–L4 | Préimprégné 1080 (66%) x3 | 8.5 | 0.2159 | 3.8 | 0.019 |
-| L4 | Cuivre + métallisation | 1.81 | 0.045974 | — | — |
-| Vernis épargne inférieur | Vernis épargne | 1 | 0.0254 | 3.5 | 0.8 |
+| Vernis épargne supérieur | Vernis épargne | 1 | 0,0254 | 3,5 | 0,8 |
+| L1 | Cuivre + métallisation | 1,81 | 0,045974 | — | — |
+| Diélectrique L1–L2 | Préimprégné 1080 (66 %) x3 | 8,5 | 0,2159 | 3,8 | 0,019 |
+| L2 | Cuivre + métallisation | 1,4 | 0,03556 | — | — |
+| Diélectrique L2–L3 | Noyau | 5,9 | 0,14986 | 4 | 0,017 |
+| L3 | Cuivre + métallisation | 1,4 | 0,03556 | — | — |
+| Diélectrique L3–L4 | Préimprégné 1080 (66 %) x3 | 8,5 | 0,2159 | 3,8 | 0,019 |
+| L4 | Cuivre + métallisation | 1,81 | 0,045974 | — | — |
+| Vernis épargne inférieur | Vernis épargne | 1 | 0,0254 | 3,5 | 0,8 |
 
 </div>
 
-Les lignes de préimprégné supposent une surface de cuivre de 70%. Dk et Df sont repris de l'image, y compris Df 0,8 pour le vernis épargne ; ce ne sont pas des propriétés universelles vérifiées. Confirmez les données réelles du fabricant pour calculer l'impédance et les pertes.
+Les lignes de préimprégné supposent une surface de cuivre de 70 %. Dk et Df sont repris de l'image, y compris Df 0,8 pour le vernis épargne ; ce ne sont pas des propriétés universelles vérifiées. Confirmez les données réelles du fabricant pour calculer l'impédance et les pertes.
 
 ### 6.3. Règles générales de conception PCB { #63-general-pcb-design-rules }
 
@@ -104,7 +104,7 @@ Réalisez le fanout de tous les signaux du boîtier QFN sur la couche supérieur
 
 ### 6.5. Routage de l'interface d'horloge { #65-clock-interface-routing }
 
-Appliquez ces règles de routage d'horloge aux deux groupes de conception :
+Appliquez ces règles de routage d'horloge aux variantes alimentées par batterie comme à celles à alimentation classique :
 
 - Placez les quartz à l'intérieur du blindage, à plus de 1 mm du bord du PCB, et aussi loin que possible des composants générateurs de chaleur (PA, chargeur, circuits PMU) — idéalement plus de 5 mm — pour éviter d'affecter la dérive de fréquence du quartz
 - Réservez autour du quartz un dégagement supérieur à 0,25 mm, sans autre métal ni composant.
@@ -142,11 +142,11 @@ Appliquez ces règles de routage d'horloge aux deux groupes de conception :
 Les figures 6.5-3 et 6.5-6 montrent un espacement ≥0,15 mm entre les pistes parallèles XI/XO des deux quartz. La figure 6.5-2 utilise un quartz de 48 MHz à capacité de charge de 8,8 pF et marque les condensateurs externes NF (non montés). La figure 6.5-5 utilise un quartz de 32,768 kHz, 7 pF, sur PA22/PA23, broches également multiplexées avec PDM_CLK/PDM_DATA.
 
 !!! important "Traitement de la masse sous le quartz"
-    La note d'application des variantes sur batterie se contredit au sujet du cuivre sous le quartz : sa section sur l'horloge demande de retirer le plan de masse L2 juste en dessous, tandis que sa section de routage PCB interdit les évidements de plan et les découpes de cuivre sur la couche supérieure et les couches adjacentes, et montre une masse L2 continue. Le guide de routage PCB distinct reprend l'interdiction des évidements. N'en déduisez pas de règle générale pour L2 et ne tranchez pas selon le seul nombre de couches ; confirmez auprès de SiFli le traitement propre à l'empilement avant validation. La zone d'exclusion du quartz et les dégagements des composants restent des contrôles distincts.
+    La note d'application des variantes sur batterie se contredit au sujet du cuivre sous le quartz : sa section sur l'horloge demande explicitement de retirer au moins le cuivre GND de la deuxième couche sous le quartz. La section ultérieure de routage PCB demande une zone « 禁空 » sous le quartz sur la couche supérieure et les couches adjacentes, et interdit d'y faire passer d'autres pistes ; la version anglaise interdit explicitement les évidements de plan et les découpes de cuivre. Le guide de routage PCB distinct reprend les mêmes consignes de dégagement et d'interdiction de routage ; sa version anglaise interdit elle aussi les évidements de plan et les découpes de cuivre. Les modèles des deux guides montrent pourtant une masse L2 continue. N'en déduisez pas de règle générale pour L2 et ne tranchez pas selon le seul nombre de couches ; confirmez auprès de SiFli le traitement propre à l'empilement avant validation. La zone d'exclusion du quartz et les dégagements des composants restent des contrôles distincts.
 
 ### 6.6. Routage de l'interface RF { #66-rf-interface-routing }
 
-Appliquez ces règles de routage RF aux deux groupes de conception :
+Appliquez ces règles de routage RF aux variantes alimentées par batterie comme à celles à alimentation classique :
 
 - Placez le circuit d'adaptation RF près de la puce, et non de l'antenne
 - Placez le condensateur de filtrage AVDD_BRF près de la broche de la puce et reliez directement à la masse principale les vias associés à sa broche de masse
@@ -173,7 +173,7 @@ Les exemples RF utilisent un condensateur série de 15 pF/50 V (C0333), laissent
 
 ### 6.7. Routage de l'interface audio { #67-audio-interface-routing }
 
-Appliquez ces règles de routage audio aux deux groupes de conception :
+Appliquez ces règles de routage audio aux variantes alimentées par batterie comme à celles à alimentation classique :
 
 - Placez les condensateurs de filtrage d'AVDD33_AUD, de MIC_BIAS et d'AUD_VREF près de leurs broches respectives, puis reliez solidement leurs bornes de masse à la masse principale.
 - Placez les composants de l'entrée analogique ADCP près de la broche de la puce. Utilisez des pistes courtes avec un blindage complet par la masse, et éloignez-les des sources de fortes perturbations.
@@ -305,7 +305,7 @@ Blindez les pistes d'entrée GPADC par la masse et éloignez-les des autres circ
 
 ### 6.13. EMI et ESD { #613-emi-esd }
 
-Appliquez ces règles EMI et ESD aux deux groupes de conception :
+Appliquez ces règles EMI et ESD aux variantes alimentées par batterie comme à celles à alimentation classique :
 
 - N'acheminez pas sur la couche supérieure les longues lignes d'horloge et d'alimentation perturbatrices situées hors du blindage ; utilisez les couches internes.
 - Placez les composants de protection ESD près des broches du connecteur, en acheminant les signaux à travers le composant ESD avant tout autre chose

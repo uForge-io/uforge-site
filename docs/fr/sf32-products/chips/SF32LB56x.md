@@ -41,7 +41,7 @@ Choisissez le SF32LB56x lorsque la conception exige une ou plusieurs de ces capa
 - Prise en charge de l'interface d'affichage DPI/RGB
 - Wi-Fi externe via SDIO ; stockage externe via SD/SDIO ou eMMC
 - Nombre de GPIO plus élevé grâce à l'option WBBGA175
-- Plus de marge pour exécuter simultanément des charges TinyML, audio et d'interface
+- Davantage de marge pour exécuter simultanément des charges TinyML, audio et d'interface utilisateur
 
 ## Ressources de développement { #development-resources }
 
@@ -183,10 +183,12 @@ Suivez cette séquence pour transformer une présélection SF32LB56x en concepti
 ## Questions fréquentes { #frequently-asked-questions }
 
 **Quelles sont les principales caractéristiques du SF32LB56x ?**
-Le SF32LB56x associe un CPU applicatif (Cortex-M33 @240 MHz) à un cœur basse consommation (Cortex-M33 @48/96 MHz, programmable par l'utilisateur). Il intègre 960 KB de SRAM interne et prend en charge le Bluetooth bimode (BT classique + BLE). Graphismes : ePicasso 2.0. Boîtier : QFN68 / BGA175 (7 × 7 mm (QFN), 6,5 × 6,1 mm (BGA)). USB 2.0 FS.
+Le SF32LB56x assure le traitement applicatif (Cortex-M33 @240 MHz) et dispose d'un cœur basse consommation (Cortex-M33, jusqu'à 96 MHz, programmable par l'utilisateur). Il intègre 960 KB de SRAM interne et prend en charge le Bluetooth bimode (BT classique + BLE). Graphismes : ePicasso 2.0. Boîtier : QFN68L / WBBGA175 (7 × 7 mm (QFN68L), 6,1 × 6,5 mm (WBBGA175)). USB 2.0 FS.
+
+La fréquence du LCPU et la prise en charge des tâches applicatives dépendent du composant exact et de la configuration SDK prise en charge ; 96 MHz est une limite, pas la fréquence par défaut. Les 960 KB de SRAM se répartissent entre 800 KB pour le HCPU (dont 128 KB de rétention) et 160 KB de rétention pour le LCPU, et ne forment pas un espace contigu. Vérifiez le SKU cible et la cartographie mémoire du SDK.
 
 **Quelles interfaces d'affichage le SF32LB56x prend-il en charge ?**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. ([Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB. ([Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix)) Cette liste couvre toute la famille et ne garantit pas toutes les interfaces pour chaque référence ou boîtier ; vérifiez la matrice d'interfaces liée.
 
 **Quelle est la résolution d'affichage maximale du SF32LB56x ?**
 La résolution maximale est de 1024 × 600 en couleur RGB888, via l'interface DPI/RGB du boîtier BGA. ([Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix))

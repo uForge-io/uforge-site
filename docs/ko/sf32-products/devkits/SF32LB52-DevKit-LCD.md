@@ -29,12 +29,13 @@ SF32LB52-DevKit-LCD는 SF32LB52x 제품군을 위한 디스플레이 중심 개�
 - 22핀 FPC 커넥터를 통한 QSPI/SPI/DSPI LCD 지원
 - FPC와 40핀 확장 헤더를 통한 8비트 MCU/8080 LCD 지원
 - I2C 터치 패널 지원
-- USB-UART 플래싱/디버그 및 보드 전원용 USB-C
+- 온보드 CH343P USB-UART 브리지를 통한 플래싱/디버그 및 보드 전원용 USB-C
 - USB2.0 FS 사용 사례를 위한 별도의 USB-C 인터페이스
 - 온보드 MEMS 마이크와 Class-D 오디오 파워 앰프
 - SPI를 사용하는 MicroSD 카드 슬롯
 - 배터리 커넥터와 ETA9640P 리니어 충전기
 - 디스플레이, GPIO, 스토리지, 오디오, 전원 신호용 40핀 확장 헤더
+- 온보드 스위치, 기능 버튼과 리셋 버튼, RGB/충전/GPIO/전원 표시등, LCD 백라이트 드라이버
 
 ## 이 보드를 사용하는 경우 { #when-to-use-this-board }
 
@@ -108,7 +109,7 @@ SF32LB52-DevKit-LCD는 SF32LB52x 제품군을 위한 디스플레이 중심 개�
 
 - 스피커
 - TF 카드
-- 단일 셀 Li-ion/Li-poly 배터리(일반적으로 450 mAh~500 mAh)
+- 단일 셀 Li-ion/Li-poly 배터리(SiFli 권장 용량: 450 mAh)
 - UART 디버그와 네이티브 USB 테스트를 동시에 해야 할 때 필요한 두 번째 USB 케이블
 
 ### 기본 설정 { #basic-setup }

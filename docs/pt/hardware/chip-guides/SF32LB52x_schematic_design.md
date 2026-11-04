@@ -327,7 +327,7 @@ O chip requer duas fontes externas de clock: um cristal principal de 48 MHz e um
 
     | Cristal | Requisito | Observações |
     |:---|:---|:---|
-    | 48 MHz | 7 pF ≤ CL ≤ 12 pF (8,8 pF recomendado), ΔF/F0 ≤ ±10 ppm, ESR ≤ 30 Ω (22 Ω recomendado) | CL e ESR menores reduzem o consumo; normalmente não são necessários capacitores de ajuste quando CL < 12 pF |
+    | 48 MHz | CL ≤ 12 pF (≤7 pF recomendado), ΔF/F0 ≤ ±10 ppm, ESR ≤ 30 Ω (22 Ω recomendado) | CL e ESR menores reduzem o consumo. Reserve um capacitor de ajuste em paralelo; normalmente não é preciso montá-lo quando CL < 9 pF. |
     | 32,768 kHz | CL ≤ 12,5 pF (7 pF recomendado), ΔF/F0 ≤ ±20 ppm, ESR ≤ 80 kΩ (38 kΩ recomendado) | CL e ESR menores reduzem o consumo; normalmente não são necessários capacitores de ajuste quando CL < 12,5 pF |
 
     </div>
@@ -349,6 +349,9 @@ Cristais recomendados:
 
 !!! note "Observações adicionais"
     O TKD SX20Y048000B31T-8.8 tem ESR um pouco maior, o que aumenta ligeiramente o consumo estático. A nota de aplicação de esquemático da SiFli também recomenda remover pelo menos o cobre GND da segunda camada sob o cristal de 48 MHz para reduzir a capacitância parasita de carga. Porém, o guia de layout da PCB proíbe vazios no plano ou recortes de cobre sob o cristal em camadas adjacentes. As recomendações são conflitantes; consulte [Roteamento de clock](SF32LB52x_pcb_layout.md#65-clock-interface-routing). Confirme com a SiFli o tratamento previsto para as camadas antes de liberar o layout.
+
+!!! important "A recomendação de CL para 48 MHz diverge dos componentes listados"
+    A fonte recomenda em geral CL ≤ 7 pF para 48 MHz, mas sua lista de componentes recomendados inclui dois cristais de 48 MHz com CL = 8,8 pF. Ela não explica como esses valores se relacionam com a meta geral. Antes da liberação, confirme com a SiFli o limite de CL aplicável e a qualificação do componente exato.
 
 !!! important "Exceção de ESR do cristal na fonte"
     A fonte lista o TKD SX20Y048000B31T-8.8 com ESR ≤ 40 Ω, embora o requisito geral de 48 MHz seja ESR ≤ 30 Ω. Verifique a qualificação desse componente específico; isso não significa que qualquer cristal de 40 Ω seja adequado. Antes da liberação, confirme a aprovação do código exato na AVL vigente e valide a partida, a calibração de frequência e a corrente do oscilador.

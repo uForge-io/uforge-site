@@ -9,12 +9,12 @@ Wer einen neuen Mikrocontroller bewertet, sollte sich das Gesamtbild nicht aus e
 
 Wir dokumentieren die SF32-Familie von SiFli: Mikrocontroller mit sehr niedrigem Stromverbrauch für Wearables, Smart Displays und andere vernetzte, batteriebetriebene Produkte. Sie unterstützen Bluetooth und Grafikverarbeitung und sind auf AIoT-Anwendungen ausgerichtet. Statt verstreuter Einzelquellen bieten wir einen durchgängigen, verknüpften Informationspfad. Hier finden sich Hinweise zur Auswahl von Chips und Modulen, zu Entwicklungsboards, SDK-Workflows, Hardware-Design-Leitfäden und Produktions-Checklisten. Die Themen sind nach dem tatsächlichen Produktablauf geordnet: Bauteil auswählen, Funktion nachweisen, ins Design integrieren und das Produkt ausliefern. Technische Angaben gleichen wir mit der offiziellen Dokumentation von SiFli ab, sofern Quellen verfügbar sind; Seiten mit noch offenem Prüfbedarf sind entsprechend gekennzeichnet.
 
-Für SF32 haben wir uns aus zwei Gründen entschieden. Die Familie bietet verschiedene Kernkonfigurationen und integriert Grafikbeschleunigung sowie Hardware-Dekompression; die genaue Kombination variiert je nach Modell. Zum anderen sind SDK, Hardware-Design-Leitfäden und Quellcode tatsächlich offen zugänglich, obwohl das Ökosystem noch deutlich weniger bekannt ist als ESP32 oder STM32. Diese Kombination aus tatsächlicher Offenheit und geringer Bekanntheit ist genau die Lücke, die diese Website schließen soll.
+Für SF32 haben wir uns aus zwei Gründen entschieden. Die Familie bietet verschiedene Kernkonfigurationen und integriert Grafikbeschleunigung sowie Hardware-Dekompression; die genaue Kombination variiert je nach Modell. Zum anderen sind SDK, Hardware-Design-Leitfäden und Quellcode tatsächlich offen zugänglich, obwohl das Ökosystem noch deutlich weniger bekannt ist als ESP32 oder STM32. Diese Kombination aus echter Offenheit und geringer Bekanntheit erklärt, warum es diese Website gibt.
 
 Unser Ziel ist einfach: Ingenieure sollen Hardware- und Firmware-Entscheidungen schneller und fundierter treffen können. So müssen sie weniger Zeit aufwenden, um Grundlagen immer wieder neu zu recherchieren, und können mehr Zeit in die Produktentwicklung investieren.
 
 ## Zum Namen { #the-name }
 
-μForge.io und uForge.io sind dasselbe Projekt und werden austauschbar verwendet. Das „μ“ (griechisches My, für „micro“) wird dort, wo griechische Buchstaben unpraktisch sind, als ASCII-„u“ geschrieben (auch als „you“ lesbar); es gilt also μForge = uForge und μForge.io = uForge.io (Domain: uForge.io).
+Der Projektname lautet μForge.io. Das μ ist der griechische Buchstabe My und steht für „micro“. Die Website verwendet in ihrer Adresse die ASCII-Domain `uforge.io`.
 
 Haben Sie eine Frage, eine Korrektur oder etwas, das diese Website Ihrer Meinung nach abdecken sollte? [Kontaktieren Sie uns](contact.md).

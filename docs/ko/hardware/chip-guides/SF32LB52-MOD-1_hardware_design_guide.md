@@ -9,9 +9,9 @@ tags:
     - 모듈
 ---
 
-# SF32LB52-MOD-1 하드웨어 설계 가이드
+# SF32LB52-MOD-1 하드웨어 설계 가이드 { #sf32lb52-mod-1-hardware-design-guide }
 
-## 1. 개요
+## 1. 개요 { #1-overview }
 
 **SF32LB52-MOD-1**은 SiFli의 SF32LB525UC6 칩(Arm Cortex-M33 STAR-MC1 듀얼 코어, 최대 240 MHz)을 기반으로 한 범용 저전력 Bluetooth MCU 모듈입니다. 48 MHz 크리스털은 기본 탑재되며, 32.768 kHz 크리스털과 64 Mb OPI-PSRAM 다이는 선택 사양으로 패키지에 통합됩니다. 모듈은 27.9 × 18.0 × 3.1 mm 크기의 68핀 표면 실장 패키지입니다.
 
@@ -25,9 +25,9 @@ tags:
 !!! note "규제 관련 표기 범위"
     제공된 SF32LB52-MOD-1-N16R8 및 SF32LB52-MOD-1-A128R16 라벨에는 FCC, IC, CMIIT ID, HVIN 식별번호와 CE 마크가 있습니다. [모듈의 규제 관련 표기 요약](../../sf32-products/modules/SF32LB52-MOD-1.md#regulatory-markings)을 참조하십시오. 정확한 리비전의 승인 문서와 안테나/통합 조건을 확인하고 다른 모델이나 최종 제품까지 적용된다고 가정하지 마십시오.
 
-## 2. 설계 요약
+## 2. 설계 요약 { #2-quick-design-summary }
 
-### 2.1 모듈 변형
+### 2.1 모듈 변형 { #21-module-variant }
 
 <div align="center"><em>표 2.1-1: 모듈 변형(variant)</em></div>
 
@@ -42,7 +42,7 @@ tags:
 !!! note "맞춤 구성"
     다른 모듈 구성이나 맞춤 구성이 필요하면 [μForge.io에 문의하십시오](../../about/contact.md).
 
-### 2.2 주요 사양
+### 2.2 주요 사양 { #22-key-specifications }
 
 <div align="center"><em>표 2.2-1: 주요 사양</em></div>
 
@@ -63,23 +63,23 @@ tags:
 
 </div>
 
-## 3. 기능 블록 다이어그램
+## 3. 기능 블록 다이어그램 { #3-functional-block-diagram }
 
 이 모듈은 SF32LB525UC6 칩, 48 MHz 크리스털, 선택 사양인 32.768 kHz 크리스털, (이 SKU의 경우) 패키지 내장 64 Mb OPI-PSRAM 다이를 RF 매칭 회로 및 안테나 급전부와 함께 통합합니다.
 
 !!! info "그림 3-1: 기능 블록 다이어그램"
     이 다이어그램은 공식 데이터시트의 그림 2-1을 참조하십시오. 이 가이드에는 수록하지 않았습니다.
 
-## 4. 핀 정의
+## 4. 핀 정의 { #4-pin-definition }
 
-### 4.1 핀 배치도
+### 4.1 핀 배치도 { #41-pinout-diagram }
 
 모듈은 가장자리를 따라 68개의 핀을 노출합니다. 핀 1은 안테나 영역에 가까운 모서리에 표시되며, 핀 번호는 패키지를 따라 시계 반대 방향으로 매겨집니다.
 
 !!! info "그림 4.1-1: 핀 배치도, 상면도"
     이 다이어그램은 공식 데이터시트의 그림 3-1을 참조하십시오. 이 가이드에는 수록하지 않았습니다.
 
-### 4.2 핀 정의 표
+### 4.2 핀 정의 표 { #42-pin-definition-table }
 
 모듈에는 핀이 총 68개 있으며, 기능은 아래 표에 정리되어 있습니다.
 
@@ -106,7 +106,7 @@ tags:
 | PA33 | 15 | I/O/T | GPIO_A33 | I | GPIO_A33, PA33_I2C_UART, PA33_TIM, #GPADC_CH6 |
 | PA32 | 16 | I/O/T | GPIO_A32 | O | GPIO_A32, PA32_I2C_UART, PA32_TIM, #GPADC_CH5 |
 | VDD33_VOUT2 | 17 | P | VDD33_VOUT2 | P | 3.3 V 전원 출력 |
-| PA24 | 18 | I/O/T | GPIO_A24 | O | GPIO_A24, SPI1_DI, I2S1_MCLK, PA24_I2C_UART, PA24_TIM, #WKUP_PIN0 |
+| PA24 | 18 | I/O/T | GPIO_A24 | O | GPIO_A24, SPI1_DIO, I2S1_MCLK, PA24_I2C_UART, PA24_TIM, #WKUP_PIN0 |
 | PA25 | 19 | I/O/T | GPIO_A25 | O | GPIO_A25, SPI1_DI, I2S1_SDO, PA25_I2C_UART, PA25_TIM, #XTAL32K_EXT, #WKUP_PIN1 |
 | PA26 | 20 | I/O/T | GPIO_A26 | O | GPIO_A26, PA26_I2C_UART, PA26_TIM, #WKUP_PIN2 |
 | PA27 | 21 | I/O/T | GPIO_A27 | O | GPIO_A27, PA27_I2C_UART, PA27_TIM, #WKUP_PIN3 |
@@ -148,21 +148,24 @@ tags:
 
 </div>
 
+!!! important "PA24의 SPI1 기능에 관한 SiFli 자료 간 차이"
+    DS5203 V0.3에는 PA24가 `SPI1_DI`로 기재되어 있지만, OpenSiFli의 DevKit-LCD 핀 표에는 `SPI1_DIO`로, EPD 설계 가이드의 TF 카드 CMD 연결에는 `SPI1_DO`로 나와 있습니다. 이 표는 OpenSiFli의 `SPI1_DIO` 표기를 따릅니다. 이 명칭만으로 모든 SDK/모듈 리비전의 신호 방향이나 핀 멀티플렉싱을 확정할 수는 없습니다. PA24를 할당하기 전에 대상 SDK의 핀 멀티플렉싱과 정확한 모듈 리비전을 확인하십시오. [DevKit-LCD 핀 표](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb52x/SF32LB52-DevKit-LCD.md)와 [EPD 디스플레이 설계 가이드](https://wiki.sifli.com/hardware/SF32LB52-MOD-1-EPD-HW-Application.html)를 참조하십시오.
+
 *범례: P = 전원, I = 입력, O = 출력, T = 고임피던스로 설정 가능, AO = 오디오 출력, AI = 오디오 입력.*
 
 !!! note
     핀 29(DBG_UART_TXD)와 핀 30(DBG_UART_RXD)는 기본 로그 출력, 프로그램 디버그, 펌웨어 다운로드에 사용하는 포트입니다.
 
-### 4.3 물리 핀 설명
+### 4.3 물리 핀 설명 { #43-physical-pin-description }
 
 데이터시트의 물리 핀 설명 그림은 SF32LB525UC6 다이 윤곽 위에 SDIO, SPI, I2C, UART, GPTIM, LCD 인터페이스, GPADC, MPI, 아날로그 오디오, 외부 32K 오실레이터, 외부 웨이크업, SWD/디버그 UART의 기능군별로 핀을 묶어 보여 줍니다. 호스트 PCB에서 신호 그룹을 배치할 때 위의 핀 정의 표와 함께 사용하십시오.
 
 !!! info "그림 4.3-1: 물리 핀 설명"
     이 다이어그램은 공식 데이터시트의 그림 3-2를 참조하십시오. 이 가이드에는 수록하지 않았습니다.
 
-## 5. 주변 장치
+## 5. 주변 장치 { #5-peripherals }
 
-### 5.1 통신 인터페이스
+### 5.1 통신 인터페이스 { #51-communication-interfaces }
 
 위 표에서 `PAxx_I2C_UART`로 표시된 핀은 I2C 또는 UART 중 하나로 설정할 수 있습니다. 데이터시트는 설정 가능한 최대 개수를 I2C 인터페이스 4개, UART 인터페이스 3개로 명시합니다.
 
@@ -185,7 +188,7 @@ tags:
 
 **LCD 인터페이스** — DBI 직렬 SPI 모드(3선/4선, 듀얼/쿼드 데이터선)와 병렬 8080 모드(8/16/24비트 버스 폭)를 지원합니다. 모드에 따라 RGB332/RGB444/RGB565/RGB666/RGB888 색상 형식을 지원합니다.
 
-### 5.2 아날로그 신호 처리
+### 5.2 아날로그 신호 처리 { #52-analog-signal-processing }
 
 **12비트 GPADC** — SAR ADC, 최대 샘플링 속도 4 MS/s, 입력 범위 0–3.3 V 싱글 엔디드 / ±2.1 V 차동, 싱글 엔디드 채널 7개 + 배터리 전압 채널 1개(또는 차동 쌍 3개), 단일/연속 측정 모드, 측정당 설정 가능한 타임 슬롯 4개, 소프트웨어/하드웨어 트리거, DMA 지원을 갖췄습니다.
 
@@ -197,9 +200,9 @@ tags:
 
 **오디오 ADC** — 24비트 Sigma-Delta ADC 입력 경로 1개, 8 kHz–48 kHz 샘플링 속도를 지원합니다.
 
-## 6. 전기적 특성
+## 6. 전기적 특성 { #6-electrical-characteristics }
 
-### 6.1 절대 최대 정격
+### 6.1 절대 최대 정격 { #61-absolute-maximum-ratings }
 
 아래 표의 값을 초과하면 모듈이 영구적으로 손상될 수 있습니다. 이 값은 스트레스 정격일 뿐이며, §6.2의 권장 동작 조건을 벗어난 기능 동작을 보장하지 않습니다. 절대 최대 조건에 장시간 노출되면 모듈 신뢰성이 저하될 수 있습니다.
 
@@ -214,7 +217,7 @@ tags:
 
 </div>
 
-### 6.2 권장 동작 조건
+### 6.2 권장 동작 조건 { #62-recommended-operating-conditions }
 
 <div align="center"><em>표 6.2-1: 권장 동작 조건</em></div>
 
@@ -228,7 +231,7 @@ tags:
 
 </div>
 
-### 6.3 DC 전기적 특성 (3.3 V, 25 °C)
+### 6.3 DC 전기적 특성 (3.3 V, 25 °C) { #63-dc-electrical-characteristics-33v-25c }
 
 <div align="center"><em>표 6.3-1: DC 전기적 특성 (3.3 V, 25 °C)</em></div>
 
@@ -254,7 +257,7 @@ tags:
 
 VDD는 I/O 전원 레일이며, VOH/VOL은 고임피던스 부하 조건에서 측정한 값입니다.
 
-### 6.4 소비 전력
+### 6.4 소비 전력 { #64-power-consumption }
 
 <div align="center"><em>표 6.4-1: Bluetooth 및 BLE 평균 전류 (3.8 V 전원)</em></div>
 
@@ -287,7 +290,7 @@ VDD는 I/O 전원 레일이며, VOH/VOL은 고임피던스 부하 조건에서 �
 
 </div>
 
-### 6.5 듀얼 모드 Bluetooth RF 성능
+### 6.5 듀얼 모드 Bluetooth RF 성능 { #65-dual-mode-bluetooth-rf-performance }
 
 Bluetooth 5.3을 지원하며 4.2/4.1/4.0과 하위 호환됩니다. 동작 채널 중심 주파수는 2402–2480 MHz입니다.
 
@@ -301,7 +304,7 @@ Bluetooth 5.3을 지원하며 4.2/4.1/4.0과 하위 호환됩니다. 동작 채�
 
 모든 BLE 1Mbps/2 Mbps TX/RX 성능과 Classic BT BR/EDR TX/RX 성능에 대한 전체 최소/전형/최대 표는 공식 데이터시트의 §5.5에 있습니다.
 
-## 7. 모듈 전원
+## 7. 모듈 전원 { #7-module-power-supply }
 
 모듈의 주 전원 입력은 **VSYS** 하나이며, 리튬 이온/리튬 폴리머 배터리(3.2–4.7 V)에서 직접 공급하거나 DCDC/LDO 레귤레이터(3.7–4.7 V, 3.8 V 권장)로 공급할 수 있습니다.
 
@@ -309,7 +312,7 @@ Bluetooth 5.3을 지원하며 4.2/4.1/4.0과 하위 호환됩니다. 동작 채�
 
 **VDD33_VOUT2**는 모듈 내부 3.3 V LDO의 출력으로 외부 주변 장치에 최대 150 mA를 공급할 수 있으며, 이 레일의 총 커패시턴스는 7.4 µF를 초과하면 안 됩니다.
 
-## 8. 레퍼런스 회로도 및 핀 할당
+## 8. 레퍼런스 회로도 및 핀 할당 { #8-reference-schematic-and-pin-assignment }
 
 데이터시트는 SF32LB52-MOD-1 기반 개발 보드의 전체 레퍼런스 회로도를 제공하며, 여기에는 전원, 리셋, JTAG/SWD, UART, SDIO, LCD, 오디오 회로가 포함됩니다.
 
@@ -323,7 +326,7 @@ Bluetooth 5.3을 지원하며 4.2/4.1/4.0과 하위 호환됩니다. 동작 채�
 
 이를 양산 회로도의 시작점으로 사용하고, 제품의 주변 장치 구성에 맞게 핀 선택을 조정하십시오.
 
-## 9. 회로도 설계 체크리스트
+## 9. 회로도 설계 체크리스트 { #9-schematic-design-checklist }
 
 <div align="center"><em>표 9-1: 회로도 설계 체크리스트</em></div>
 
@@ -348,21 +351,21 @@ Bluetooth 5.3을 지원하며 4.2/4.1/4.0과 하위 호환됩니다. 동작 채�
 
 </div>
 
-## 10. 모듈 치수 및 PCB 풋프린트
+## 10. 모듈 치수 및 PCB 풋프린트 { #10-module-dimensions-and-pcb-footprint }
 
-### 10.1 모듈 치수
+### 10.1 모듈 치수 { #101-module-dimensions }
 
 모듈 크기는 27.9 × 18.0 × 3.1 mm입니다.
 
 !!! info "그림 10.1-1: 모듈 치수 — 상면, 측면, 하면도"
     이 다이어그램은 공식 데이터시트의 그림 8-1을 참조하십시오. 이 가이드에는 수록하지 않았습니다.
 
-### 10.2 권장 PCB 풋프린트
+### 10.2 권장 PCB 풋프린트 { #102-recommended-pcb-footprint }
 
 !!! info "그림 10.2-1: 권장 PCB 풋프린트"
     이 다이어그램은 공식 데이터시트의 그림 8-2를 참조하십시오. 이 가이드에는 수록하지 않았습니다.
 
-### 10.3 외부 안테나 커넥터
+### 10.3 외부 안테나 커넥터 { #103-external-antenna-connector }
 
 외부 안테나를 지원하는 SKU의 모듈은 다음과 호환되는 1세대 커넥터 풋프린트를 사용합니다.
 
@@ -373,7 +376,7 @@ Bluetooth 5.3을 지원하며 4.2/4.1/4.0과 하위 호환됩니다. 동작 채�
 !!! info "그림 10.3-1: 외부 안테나 커넥터 치수"
     이 다이어그램은 공식 데이터시트의 그림 8-3을 참조하십시오. 이 가이드에는 수록하지 않았습니다.
 
-### 10.4 PCB 설계에서의 모듈 배치
+### 10.4 PCB 설계에서의 모듈 배치 { #104-module-placement-in-pcb-design }
 
 최종 제품이 온보드 모듈 설계를 사용하는 경우, 방사 효율 저하를 막기 위해 모듈의 PCB 안테나 영역에 다른 부품이나 금속 영역이 겹치지 않도록 공간을 확보하십시오. 안테나 성능에 미치는 영향이 최소화되도록 호스트 보드에서 모듈의 위치를 계획하십시오.
 
@@ -392,38 +395,38 @@ Bluetooth 5.3을 지원하며 4.2/4.1/4.0과 하위 호환됩니다. 동작 채�
 - 금지 구역 레이아웃에서도 안테나 급전점을 보드 가장자리에 가깝게 두십시오.
 - 완성된 최종 제품 설계에서는 케이스가 안테나에 미치는 영향을 평가하고, 완제품에서의 최종 통신 거리 테스트를 포함한 RF 검증을 수행하십시오.
 
-## 11. 제품 취급
+## 11. 제품 취급 { #11-product-handling }
 
-### 11.1 보관 조건
+### 11.1 보관 조건 { #111-storage-conditions }
 
 - 제품은 <40 °C / 90%RH, 비응축 조건에서 방습 포장 봉투(MBB)에 밀봉하여 보관하십시오.
 - 모듈 습기 민감도 등급(MSL): 3.
 - 진공 포장을 개봉한 뒤에는 25±5 °C / 60%RH에서 168시간 이내에 모듈을 사용해야 하며, 그렇지 않으면 생산 라인에 되돌리기 전에 베이킹해야 합니다.
 
-### 11.2 정전기 방전(ESD)
+### 11.2 정전기 방전(ESD) { #112-electrostatic-discharge-esd }
 
 - 인체 모델(HBM): ±2000 V
 - 소자 대전 모델(CDM): ±500 V
 
-### 11.3 리플로 프로파일
+### 11.3 리플로 프로파일 { #113-reflow-profile }
 
 모듈은 리플로를 한 번만 거치는 것을 권장합니다.
 
 !!! info "그림 11.3-1: 권장 리플로 온도 프로파일"
     이 다이어그램은 공식 데이터시트의 그림 9-1을 참조하십시오. 이 가이드에는 수록하지 않았습니다.
 
-### 11.4 초음파 진동
+### 11.4 초음파 진동 { #114-ultrasonic-vibration }
 
 SiFli 모듈이 초음파 용접 또는 초음파 세척 장비의 진동에 노출되지 않도록 하십시오. 초음파 진동은 모듈 내부 크리스털 오실레이터와 공진하여 크리스털 고장이나 오동작을 일으킬 수 있으며, 모듈이 동작하지 않거나 성능이 저하될 수 있습니다.
 
-## 12. 관련 문서
+## 12. 관련 문서 { #12-related-documents }
 
 - [DS5203-SF32LB52-MOD-1 데이터시트 (V0.3)](https://downloads.sifli.com/user%20manual/DS5203-SF32LB52-MOD-1%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p3.pdf)
 - [SF32LB52x 칩 소개](../../sf32-products/chips/SF32LB52x.md)
 - [SF32LB52x 하드웨어 설계 가이드](../chip-guides/SF32LB52x_hardware_design_guide.md)
 - [SF32LB52-DevKit-LCD](../../sf32-products/devkits/SF32LB52-DevKit-LCD.md)
 
-## 13. 개정 이력
+## 13. 개정 이력 { #13-revision-history }
 
 <div align="center"><em>표 13-1: 개정 이력</em></div>
 

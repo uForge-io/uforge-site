@@ -31,7 +31,7 @@ tags:
 
 ### 5.1. Stromversorgungssystem { #51-power-system }
 
-SF32LB551 im QFN68L besitzt keine Pins VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_VOUT oder AVDD_DSI. Wenden Sie die Versorgungs- und Kondensatortabellen nur auf vorhandene Pins des gewählten Gehäuses an. BGA-Gehäuse bieten zwei BUCK-Ausgänge; BUCK2 unterstützt BUCK- oder LDO-Betrieb, wobei BUCK empfohlen wird. QFN68L bietet einen BUCK-Ausgang.
+SF32LB551 im QFN68L besitzt keine Pins VDD2, BUCK2_VSW, BUCK2_VOUT, LDOVCC2_VOUT oder AVDD_DSI. Auch SF32LB553 im BGA125 besitzt keinen AVDD_DSI-Pin. Wenden Sie die Versorgungs- und Kondensatortabellen nur auf vorhandene Pins des gewählten Gehäuses an. BGA-Gehäuse bieten zwei BUCK-Ausgänge; BUCK2 unterstützt BUCK- oder LDO-Betrieb, wobei BUCK empfohlen wird. QFN68L bietet einen BUCK-Ausgang.
 
 <div align="center"><em>Tabelle 5.1-1: PMU-Stromversorgungspins</em></div>
 
@@ -141,8 +141,8 @@ Der Mode-Pin gehört zur gleichen Spannungsdomäne wie VDDIOA. Halten Sie ihn mi
 
 | Quarz | Spezifikationsanforderungen | Detaillierte Beschreibung |
 | :--- | :--- | :--- |
-| 48 MHz | 7 pF≦CL≦12 pF (empfohlener Wert 8,8 pF) △F/F0≦±10 ppm ESR≦30 Ω (empfohlener Wert 22 Ω) | Die Leistungsaufnahme des Quarzoszillators hängt von CL und ESR ab: Je kleiner beide Werte sind, desto geringer ist der Verbrauch. Für einen möglichst niedrigen Verbrauch sollten innerhalb des zulässigen Bereichs Bauteile mit vergleichsweise niedrigen CL- und ESR-Werten gewählt werden. Sehen Sie neben dem Quarz Footprints für parallel geschaltete Anpassungskondensatoren vor. Bei CL<12 pF müssen keine Kondensatoren bestückt werden |
-| 32,768 kHz | CL≦12,5 pF (empfohlener Wert 7 pF) △F/F0≦±20 ppm ESR≦80 kΩ (empfohlener Wert 38 kΩ) | Die Leistungsaufnahme des Quarzes hängt von CL und ESR ab: Je kleiner beide Werte sind, desto geringer ist der Verbrauch. Für einen möglichst niedrigen Verbrauch sollten innerhalb des zulässigen Bereichs Bauteile mit vergleichsweise niedrigen CL- und ESR-Werten gewählt werden. Sehen Sie neben dem Quarz Footprints für parallel geschaltete Anpassungskondensatoren vor. Bei CL<12,5 pF muss kein Kondensator bestückt werden |
+| 48 MHz | 7 pF ≦ CL ≦ 12 pF (empfohlener Wert: 8,8 pF); △F/F0 ≦ ±10 ppm; ESR ≦ 30 Ω (empfohlener Wert: 22 Ω) | Die Leistungsaufnahme des Quarzoszillators hängt von CL und ESR ab: Je kleiner beide Werte sind, desto geringer ist der Verbrauch. Für einen möglichst niedrigen Verbrauch sollten innerhalb des zulässigen Bereichs Bauteile mit vergleichsweise niedrigen CL- und ESR-Werten gewählt werden. Sehen Sie neben dem Quarz Footprints für parallel geschaltete Anpassungskondensatoren vor. Bei CL < 12 pF müssen keine Kondensatoren bestückt werden |
+| 32,768 kHz | CL ≦ 12,5 pF (empfohlener Wert: 7 pF); △F/F0 ≦ ±20 ppm; ESR ≦ 80 kΩ (empfohlener Wert: 38 kΩ) | Die Leistungsaufnahme des Quarzes hängt von CL und ESR ab: Je kleiner beide Werte sind, desto geringer ist der Verbrauch. Für einen möglichst niedrigen Verbrauch sollten innerhalb des zulässigen Bereichs Bauteile mit vergleichsweise niedrigen CL- und ESR-Werten gewählt werden. Sehen Sie neben dem Quarz Footprints für parallel geschaltete Anpassungskondensatoren vor. Bei CL < 12,5 pF muss kein Kondensator bestückt werden |
 
 </div>
 
@@ -248,7 +248,7 @@ Jeder gezeigte PSRAM verwendet 1,8 V, drei 0,1-µF-Kondensatoren und einen 1-µF
 
 <div align="center" markdown>
 
-| Schnittstellensignal | QFN68 | BGA145/169 | Detaillierte Beschreibung |
+| Schnittstellensignal | QFN68 | BGA125/145/169 | Detaillierte Beschreibung |
 | :--- | :--- | :--- | :--- |
 | CS# | GPIO9 | PA61 | Chip-Select, low-aktiv |
 | SO | GPIO7 | PA65 | Dateneingang (Daten-E/A-Leitung 1) |
@@ -263,7 +263,7 @@ Jeder gezeigte PSRAM verwendet 1,8 V, drei 0,1-µF-Kondensatoren und einen 1-µF
 
 <div align="center" markdown>
 
-| Schnittstellensignal | QFN68 | BGA145/169 | Detaillierte Beschreibung |
+| Schnittstellensignal | QFN68 | BGA125/145/169 | Detaillierte Beschreibung |
 | :--- | :--- | :--- | :--- |
 | CS# | GPIO16 | PA45 | Chip-Select, low-aktiv |
 | SO | GPIO14 | PA49 | Dateneingang (Daten-E/A-Leitung 1) |
@@ -278,7 +278,7 @@ Jeder gezeigte PSRAM verwendet 1,8 V, drei 0,1-µF-Kondensatoren und einen 1-µF
 
 <div align="center" markdown>
 
-| Schnittstellensignal | QFN68 | BGA145/169 | Detaillierte Beschreibung |
+| Schnittstellensignal | QFN68/BGA125 | BGA145/169 | Detaillierte Beschreibung |
 | :--- | :--- | :--- | :--- |
 | CS# | - | PB33 | Chip-Select, low-aktiv |
 | SO | - | PB36 | Dateneingang (Daten-E/A-Leitung 1) |
@@ -293,14 +293,14 @@ Jeder gezeigte PSRAM verwendet 1,8 V, drei 0,1-µF-Kondensatoren und einen 1-µF
 
 <div align="center" markdown>
 
-| Schnittstellensignal | QFN68 | BGA145/169 | Detaillierte Beschreibung |
-| :--- | :--- | :--- | :--- |
-| CLK | GPIO10 | PA34 | Takt-Eingang |
-| CMD | GPIO9 | PA36 | Befehlseingang |
-| DATA0 | GPIO8 | PA28 | Daten 0 |
-| DATA1 | GPIO7 | PA29 | Daten 1 |
-| DATA2 | GPIO6 | PA30 | Daten 2 |
-| DATA3 | GPIO5 | PA31 | Daten 3 |
+| Schnittstellensignal | QFN68 | BGA125 | BGA145/169 | Detaillierte Beschreibung |
+| :--- | :--- | :--- | :--- | :--- |
+| CLK | GPIO10 | PA60 | PA34 | Takt-Eingang |
+| CMD | GPIO9 | PA61 | PA36 | Befehlseingang |
+| DATA0 | GPIO8 | PA63 | PA28 | Daten 0 |
+| DATA1 | GPIO7 | PA65 | PA29 | Daten 1 |
+| DATA2 | GPIO6 | PA66 | PA30 | Daten 2 |
+| DATA3 | GPIO5 | PA68 | PA31 | Daten 3 |
 
 </div>
 
@@ -308,18 +308,18 @@ Jeder gezeigte PSRAM verwendet 1,8 V, drei 0,1-µF-Kondensatoren und einen 1-µF
 
 <div align="center" markdown>
 
-| Schnittstellensignal | QFN68 | BGA145/169 | Detaillierte Beschreibung |
-| :--- | :--- | :--- | :--- |
-| CLK | GPIO10 | PA34 | Takt-Eingang |
-| CMD | GPIO9 | PA36 | Befehlseingang |
-| DATA0 | GPIO8 | PA28 | Daten 0 |
-| DATA1 | GPIO7 | PA29 | Daten 1 |
-| DATA2 | GPIO6 | PA30 | Daten 2 |
-| DATA3 | GPIO5 | PA31 | Daten 3 |
-| DATA4 | GPIO15 | PA47 | Daten 4 |
-| DATA5 | GPIO14 | PA49 | Daten 5 |
-| DATA6 | GPIO13 | PA51 | Daten 6 |
-| DATA7 | GPIO12 | PA55 | Daten 7 |
+| Schnittstellensignal | QFN68 | BGA125 | BGA145/169 | Detaillierte Beschreibung |
+| :--- | :--- | :--- | :--- | :--- |
+| CLK | GPIO10 | - | PA34 | Takt-Eingang |
+| CMD | GPIO9 | - | PA36 | Befehlseingang |
+| DATA0 | GPIO8 | - | PA28 | Daten 0 |
+| DATA1 | GPIO7 | - | PA29 | Daten 1 |
+| DATA2 | GPIO6 | - | PA30 | Daten 2 |
+| DATA3 | GPIO5 | - | PA31 | Daten 3 |
+| DATA4 | GPIO15 | - | PA47 | Daten 4 |
+| DATA5 | GPIO14 | - | PA49 | Daten 5 |
+| DATA6 | GPIO13 | - | PA51 | Daten 6 |
+| DATA7 | GPIO12 | - | PA55 | Daten 7 |
 
 </div>
 
@@ -327,7 +327,7 @@ Jeder gezeigte PSRAM verwendet 1,8 V, drei 0,1-µF-Kondensatoren und einen 1-µF
 
 <div align="center" markdown>
 
-| Schnittstellensignal | QFN68 | BGA145/169 | Detaillierte Beschreibung |
+| Schnittstellensignal | QFN68 | BGA125/145/169 | Detaillierte Beschreibung |
 | :--- | :--- | :--- | :--- |
 | CLK | GPIO17 | PA44 | Takt-Eingang |
 | CMD | GPIO16 | PA45 | Befehlseingang |
@@ -375,17 +375,17 @@ Hinweise zur Display-Pinbelegung:
 
 <div align="center" markdown>
 
-| SPI-Signal | QFN68-GPIO | BGA145/169-Pin | Detaillierte Beschreibung |
-| :--- | :--- | :--- | :--- |
-| CSX | GPIO22 | PB33 | Enable-Signal |
-| WRX_SCL | GPIO23 | PB32 | Taktsignal |
-| DCX | GPIO20 | PB36 | Daten-/Befehlssignal im 4-Draht-SPI-Modus; Daten 1 im Quad-SPI-Modus |
-| SDI_RDX | GPIO21 | PB35 | Dateneingangssignal im 3-/4-Draht-SPI-Modus; Daten 0 im Quad-SPI-Modus |
-| SDO | GPIO21 | PB35 | Datenausgangssignal im 3-/4-Draht-SPI-Modus; mit SDI_RDX kurzschließen |
-| D[0] | GPIO19 | PB37 | Daten 2 im Quad-SPI-Modus |
-| D[1] | GPIO18 | PB07 | Daten 3 im Quad-SPI-Modus |
-| RESET | GPIO2 | PB17 | Reset-Signal für das Display-Panel |
-| TE | GPIO3 | PB77 | Tearing-Effect-Signal zur Synchronisierung mit dem MCU-Frame |
+| SPI-Signal | QFN68-GPIO | BGA125-Pin | BGA145/169-Pin | Detaillierte Beschreibung |
+| :--- | :--- | :--- | :--- | :--- |
+| CSX | GPIO22 | PA31 | PB33 | Enable-Signal |
+| WRX_SCL | GPIO23 | PA20 | PB32 | Taktsignal |
+| DCX | GPIO20 | PA36 | PB36 | Daten-/Befehlssignal im 4-Draht-SPI-Modus; Daten 1 im Quad-SPI-Modus |
+| SDI_RDX | GPIO21 | PA34 | PB35 | Dateneingangssignal im 3-/4-Draht-SPI-Modus; Daten 0 im Quad-SPI-Modus |
+| SDO | GPIO21 | PA34 | PB35 | Datenausgangssignal im 3-/4-Draht-SPI-Modus; mit SDI_RDX kurzschließen |
+| D[0] | GPIO19 | PA38 | PB37 | Daten 2 im Quad-SPI-Modus |
+| D[1] | GPIO18 | PA42 | PB07 | Daten 3 im Quad-SPI-Modus |
+| RESET | GPIO2 | PA78 | PB17 | Reset-Signal für das Display-Panel |
+| TE | GPIO3 | PA77 | PB77 | Tearing-Effect-Signal zur Synchronisierung mit dem MCU-Frame |
 
 </div>
 
@@ -398,22 +398,22 @@ Hinweise zur Display-Pinbelegung:
 
 <div align="center" markdown>
 
-| MCU8080-Signal | QFN68-GPIO | BGA145/169-Pin | Detaillierte Beschreibung |
-| :--- | :--- | :--- | :--- |
-| CSX | GPIO22 | - | Chip-Select |
-| WRX | GPIO23 | - | Schreib-Strobe-Signal zum Schreiben von Daten |
-| DCX | GPIO20 | - | Auswahl zwischen Display-Daten/-Befehl |
-| RDX | GPIO21 | - | Lese-Strobe-Signal für Lesezugriffe auf den Displaycontroller |
-| D[0] | GPIO19 | - | Daten 0 |
-| D[1] | GPIO18 | - | Daten 1 |
-| D[2] | GPIO17 | - | Daten 2 |
-| D[3] | GPIO16 | - | Daten 3 |
-| D[4] | GPIO15 | - | Daten 4 |
-| D[5] | GPIO14 | - | Daten 5 |
-| D[6] | GPIO13 | - | Daten 6 |
-| D[7] | GPIO12 | - | Daten 7 |
-| RESET | GPIO2 | - | Reset |
-| TE | GPIO3 | - | Tearing-Effect-Signal zur Synchronisierung mit dem MCU-Frame |
+| MCU8080-Signal | QFN68-GPIO | BGA125-Pin | BGA145/169-Pin | Detaillierte Beschreibung |
+| :--- | :--- | :--- | :--- | :--- |
+| CSX | GPIO22 | PA31 | - | Chip-Select |
+| WRX | GPIO23 | PA20 | - | Schreib-Strobe-Signal zum Schreiben von Daten |
+| DCX | GPIO20 | PA36 | - | Auswahl zwischen Display-Daten/-Befehl |
+| RDX | GPIO21 | PA34 | - | Lese-Strobe-Signal für Lesezugriffe auf den Displaycontroller |
+| D[0] | GPIO19 | PA38 | - | Daten 0 |
+| D[1] | GPIO18 | PA42 | - | Daten 1 |
+| D[2] | GPIO17 | PA44 | - | Daten 2 |
+| D[3] | GPIO16 | PA45 | - | Daten 3 |
+| D[4] | GPIO15 | PA47 | - | Daten 4 |
+| D[5] | GPIO14 | PA49 | - | Daten 5 |
+| D[6] | GPIO13 | PA51 | - | Daten 6 |
+| D[7] | GPIO12 | PA55 | - | Daten 7 |
+| RESET | GPIO2 | PA78 | - | Reset |
+| TE | GPIO3 | PA77 | - | Tearing-Effect-Signal zur Synchronisierung mit dem MCU-Frame |
 
 </div>
 
@@ -465,14 +465,14 @@ Der [SiFli-Hardware-Anwendungshinweis](https://github.com/OpenSiFli/SiFli-Wiki/b
 
 <div align="center" markdown>
 
-| Touch- und Hintergrundbeleuchtungssignale | QFN68-GPIO | BGA145-Pin | BGA169-Pin | Detaillierte Beschreibung |
-| :--- | :--- | :--- | :--- | :--- |
-| Interrupt | GPIO1 | PA79 | PA79 | Touch-Status-Interruptsignal (weckfähig) |
-| I2C1_SCL | GPIO25 | PA10 | PA10 | Touchscreen-I2C-Taktsignal |
-| I2C1_SDA | GPIO24 | PA14 | PA14 | Touchscreen-I2C-Datensignal |
-| BL_PWM | GPIO0 | - | - | PWM-Steuersignal der Hintergrundbeleuchtung |
-| Reset | GPIO16 | PA00 | PA00 | Touch-Reset-Signal |
-| Stromversorgungsfreigabe | GPIO26 | PA06 | PA03 | Freigabesignal für die Touchscreen-Stromversorgung |
+| Touch- und Hintergrundbeleuchtungssignale | QFN68-GPIO | BGA125-Pin | BGA145-Pin | BGA169-Pin | Detaillierte Beschreibung |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Interrupt | GPIO1 | PA79 | PA79 | PA79 | Touch-Status-Interruptsignal (weckfähig) |
+| I2C1_SCL | GPIO25 | PA10 | PA10 | PA10 | Touchscreen-I2C-Taktsignal |
+| I2C1_SDA | GPIO24 | PA14 | PA14 | PA14 | Touchscreen-I2C-Datensignal |
+| BL_PWM | GPIO0 | PA80 | - | - | PWM-Steuersignal der Hintergrundbeleuchtung |
+| Reset | GPIO16 | PA00 | PA00 | PA00 | Touch-Reset-Signal |
+| Stromversorgungsfreigabe | GPIO26 | PA06 | PA06 | PA03 | Freigabesignal für die Touchscreen-Stromversorgung |
 
 </div>
 
@@ -500,7 +500,7 @@ Verwenden Sie für Motor-PWM einen GPIO mit GPTIM1_CHx. Wählen Sie das passende
 
 <div align="center" markdown>
 
-| Interrupt-Weckquelle | QFN68 | BGA145/169 | Detaillierte Beschreibung |
+| Interrupt-Weckquelle | QFN68 | BGA125/145/169 | Detaillierte Beschreibung |
 | :--- | :--- | :--- | :--- |
 | WKUP_A0 | GPIO3 | PA77 | HCPU-Interruptsignal 0 |
 | WKUP_A1 | GPIO2 | PA78 | HCPU-Interruptsignal 1 |
@@ -545,7 +545,7 @@ Externes Bluetooth-Audio kommuniziert über HCPU-UART1. Passen Sie die Spannungs
 
 <div align="center" markdown>
 
-| UART-Signal | QFN68 | BGA145/169 | Detaillierte Beschreibung |
+| UART-Signal | QFN68 | BGA125/145/169 | Detaillierte Beschreibung |
 | :--- | :--- | :--- | :--- |
 | TXD1 | GPIO13 | PA19 | UART1-RXD-Signal |
 | RXD1 | GPIO14 | PA17 | UART1-TXD-Signal |
@@ -564,7 +564,7 @@ Externes Bluetooth-Audio kommuniziert über HCPU-UART1. Passen Sie die Spannungs
 
 UART RXD darf nicht offen bleiben; aktivieren Sie beim Firmwarestart den internen Pull-up. UART3 ist der Standard-Logport. SiFli bietet einen Offline-Programmierer für Fertigungsprogrammierung und Quarzkalibrierung. Reservieren Sie mindestens VBAT, GND, VDDIOA, VDDIOB, RSTN, Mode, SWDIO, SWCLK, RXD1, TXD1, RXD3 und TXD3 als Testpunkte. Für die Fertigung ist folgende Teilmenge vorgesehen: VBAT, GND, boot_mode, VDDIOB, RXD3 und TXD3. VBAT und boot_mode sind Prüfaufbau-Bezeichnungen der Quelle; ordnen Sie diese vor der Verdrahtung der tatsächlichen Platinenversorgung und Mode-Verbindung zu.
 
-Die Quellzeichnung verbindet VDD_1V8 mit Pin 1 (VTref). SWDIO und SWCLK sind jeweils über einen 22-Ω-Serienwiderstand mit Pin 7 beziehungsweise Pin 9 verbunden. Standard-[J-Link SWD](https://kb.segger.com/20-pin_J-Link_Connector) verwendet Pin 1 ebenfalls als [VTref](https://kb.segger.com/VTref), also als Eingang für die Zielspannungsreferenz und nicht als Stromversorgungsausgang des Debug-Probes. Prüfen Sie vor dem Anschluss eines Standardkabels die Steckerausrichtung und die Kompatibilität mit 1,8 V.
+Die SiFli-Quelle empfiehlt außerdem, die Stromversorgung des Debuggers auf den externen Schnittstelleneingang umzustellen, damit die SF32LB55x-Platine den J-Link versorgt; der Zusammenhang mit der standardmäßigen 20-Pin-Belegung ist jedoch unklar. SEGGER definiert Pin 1 als [VTref](https://kb.segger.com/VTref), also als Eingang für die Zielspannungsreferenz und nicht als Versorgungseingang des Debug-Probes. Bei unterstützten Modellen ist Pin 19 der 5-V-Ausgang des Probes zur Versorgung des Zielsystems. Die Quellzeichnung zeigt VDD_1V8 an Pin 1 sowie SWDIO/SWCLK über 22-Ω-Serienwiderstände an Pin 7/9, jedoch keinen Versorgungspfad für den Probe. Prüfen Sie vor der Verdrahtung die Stromversorgungsrichtung für den konkreten Probe, das Kabel und das Zielsystem; behandeln Sie VTref nicht als Versorgungseingang. Prüfen Sie vor dem Anschluss eines Standard-[J-Link-SWD](https://kb.segger.com/20-pin_J-Link_Connector)-Kabels außerdem die Steckerausrichtung und die Kompatibilität mit 1,8 V.
 
 ![Abbildung 5.7-4: SWD-Steckverbinder aus der Quelle: Adapterbelegung prüfen](../../sf32-products/chips/assets/55x/SF32LB55x-SWD-SCH.png){ width="100%" loading="lazy" }
 

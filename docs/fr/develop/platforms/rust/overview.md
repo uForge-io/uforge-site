@@ -11,7 +11,9 @@ tags:
 
 OpenSiFli mène des travaux Rust dans [OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs). Le dépôt contient des crates pour le HAL, le PAC et les tables Flash, ainsi que des exemples et des notes sur le flashage et le débogage.
 
-Les mainteneurs décrivent le projet comme un travail en cours, non prêt pour la production. Considérez Rust sur SF32 comme une voie d'exploration, sauf si votre équipe est prête à travailler au niveau du matériel et à proposer des correctifs au dépôt amont.
+Les mainteneurs décrivent le projet comme un travail en cours, non prêt pour la production. Considérez Rust sur SF32 comme une voie d'exploration, sauf si votre équipe peut travailler au plus près du matériel et est prête à proposer des correctifs au dépôt amont.
+
+D'après le [statut de prise en charge de `sifli-hal` en amont](https://github.com/OpenSiFli/sifli-rs/blob/main/sifli-hal/README.md), consulté le 2026-11-04, `sf32lb52x` est la seule cible prise en charge. Avant de planifier un portage, vérifiez dans ce statut et dans les exemples la prise en charge de la puce exacte ; ne déduisez pas celle des autres familles SF32 du seul nom du dépôt ou des crates.
 
 Pour configurer la chaîne d'outils, compiler l'exemple Blinky sans le modifier et préparer le runner de flashage, consultez [Premiers pas avec Rust](../../../getting-started/rust/getting-started-rust.md). Cette page aide à évaluer le périmètre du support et à décider s'il convient d'aller au-delà de cette configuration de référence avec Rust.
 
@@ -42,7 +44,7 @@ Utilisez SiFli-SDK pour le firmware de production aujourd'hui.
 
 ## Points de validation { #evaluation-gates }
 
-Ne commencez pas le portage vers un produit avant que la configuration de référence ne fonctionne sur la carte cible. Validez ensuite séparément chaque périphérique requis, la disposition Flash, le chemin de débogage et chaque fonctionnalité d'exécution. Pour chaque résultat, consignez le commit upstream, la cible Rust, la configuration Cargo, la révision de la carte et la procédure de récupération.
+Ne commencez pas le portage vers un produit avant que la configuration de référence ne fonctionne sur la carte cible. Validez ensuite séparément chaque périphérique requis, la disposition Flash, le chemin de débogage et chaque fonctionnalité nécessaire pendant l'exécution. Pour chaque résultat, consignez le commit upstream, la cible Rust, la configuration Cargo, la révision de la carte et la procédure de récupération.
 
 Le dépôt associe `sifli-hal`, `sifli-pac`, des outils pour les tables Flash et des exemples asynchrones de style Embassy. La réussite d'une application dépend donc aussi de leur interaction, et pas seulement de la compilation d'une crate. Pour analyser une lacune, conservez l'exemple le plus réduit possible qui permet de la reproduire.
 

@@ -19,7 +19,7 @@ Use el selector interactivo como primer filtro. Solo incluye chips y módulos, q
 !!! info "Terminología y número de interfaces de audio"
     Consulte el [glosario](../about/glossary.md) para ver abreviaturas y definiciones de interfaces. Cada interfaz PDM puede conectar hasta dos micrófonos digitales; por tanto, el número de interfaces PDM no equivale al número de micrófonos. La cantidad de entradas de micrófono utilizables y su asignación de pines dependen del dispositivo; confírmelas en la documentación del componente exacto.
 
-Un resultado debe cumplir todos los filtros activos. El selector contrasta los rangos de PSRAM y GPIO con el valor de cada componente. Los rangos de resolución incluyen todos los componentes cuya resolución máxima alcanza, como mínimo, el límite inferior del rango. Los recuentos de SDIO y audio deben coincidir exactamente. Las casillas añaden capacidades obligatorias; el recuento de SDIO es independiente de la casilla de Wi-Fi externo.
+Un resultado debe cumplir todos los filtros activos. El selector contrasta los rangos de PSRAM y GPIO con el valor de cada componente. Los rangos de resolución incluyen todos los componentes cuya resolución máxima supera el límite inferior del rango. Los recuentos de SDIO y audio deben coincidir exactamente. Las casillas añaden capacidades obligatorias; el recuento de SDIO es independiente de la casilla de Wi-Fi externo.
 
 <div id="uf-product-selector"></div>
 
@@ -51,7 +51,7 @@ Filtre por la interfaz de pantalla que realmente requiere el panel y use la reso
 
 ### Interfaces de audio { #audio-interfaces }
 
-El selector ofrece filtros independientes de cantidad mínima para DAC y ADC de audio, interfaces PDM e interfaces I2S. Cada valor es un umbral mínimo, no un perfil de audio combinado. Después, revise el uso compartido de recursos con otros periféricos y el diseño analógico de la placa.
+El selector ofrece filtros independientes de coincidencia exacta para la cantidad de DAC y ADC de audio e interfaces PDM e I2S. Cada cantidad seleccionada debe coincidir exactamente; los filtros no representan un perfil de audio combinado. Después, revise el uso compartido de recursos con otros periféricos y el diseño analógico de la placa.
 
 ### Conectividad y hardware especializado { #connectivity-and-specialist-hardware }
 

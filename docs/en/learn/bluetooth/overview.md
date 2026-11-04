@@ -40,7 +40,7 @@ BLE is the right default for most connected wearables and sensors: intermittent,
 
 ### Classic Bluetooth and Dual-Mode { #classic-bluetooth-and-dual-mode }
 
-Add Classic Bluetooth when the product needs audio streaming (A2DP/AVRCP), hands-free calling (HFP), serial-style data links (SPP), or compatibility with existing Classic profiles. Dual-mode designs are more demanding on radio scheduling and coexistence than BLE-only designs, which is exactly the workload the dedicated Bluetooth processor is built to isolate from the rest of the system.
+Add Classic Bluetooth when the product needs audio streaming (A2DP/AVRCP), hands-free calling (HFP), serial-style data links (SPP), or compatibility with existing Classic profiles. Dual-mode designs place greater demands on radio scheduling and coexistence than BLE-only designs. The dedicated Bluetooth processor handles time-critical link work separately from the application processor, but coexistence still needs validation under the product's combined workload.
 
 Not every SF32 family member exposes dual-mode Bluetooth — check the [Bluetooth Processor Architecture](processor.md#device-family-differences) device table before committing to a part number.
 

@@ -24,16 +24,16 @@ tags:
 - [ ] 48 MHzと32.768 kHzの水晶振動子が推奨仕様を満たし、配線とキープアウト領域の要件にも適合している
 - [ ] RF配線のインピーダンスが50 Ωで、整合回路がチップの近くに配置されている
 - [ ] ストレージからのブート設定（外部レギュレーター給電バリアントのeMMCオプションを含む）がBootstrapピンの設定と一致している
-- [ ] ストレージ電源スイッチの制御ピンが対象バリアントに適合することを確認し、リリース前に公式チェックリストとアプリケーションノート間のPA11/PA21の不一致を解消する
+- [ ] 対象品種のストレージ電源スイッチ制御ピンを確認してください。V1.0チェックリストは520/3/5/7にPA11、52B/D/E/G/JにPA21を割り当てていますが、2つのアプリケーションノートはいずれもブートストレージの電源制御にPA21を指定しています。リリース前にSiFliへ確認し、520/3/5/7の不一致を解消してください。
 - [ ] USB DP/DNが差動ペアで配線され、差動インピーダンスが90 Ωである
 - [ ] SDIO信号がまとめて配線され、総配線長 ≤50 mm、グループ内の配線長差 ≤6 mmを満たし、GNDシールドが設けられている
 - [ ] DBG_UART/SWDの多重化ピンと量産テストポイントを確保している
-- [ ] 主要部品の型番を最新の[SiFli 承認ベンダーリスト][SiFli 承認ベンダーリスト (AVL)]と照合している
+- [ ] 主要部品の型番をリンク先の[SiFli 承認ベンダーリスト][SiFli 承認ベンダーリスト (AVL)]と照合している
 
 ## 8. 関連資料と参考資料 { #8-related-documents-and-references }
 
-[SF32LB52x データシート (公式 PDF)]: https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?
-[SF32LB52x ユーザーマニュアル (公式 PDF)]: https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?
+[SF32LB52x データシート (公式 PDF、V2p4)]: https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?
+[SF32LB52x ユーザーマニュアル (公式 PDF、V0p3)]: https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?
 [SF32LB52 ハードウェアリファレンスデザイン一式]: https://downloads.sifli.com/hardware/files/documentation/SF32LB52-%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83%E8%AE%BE%E8%AE%A1-20250619.zip?
 [SF32LB520/3/5/7 ハードウェアアプリケーションノート (ソース)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB520-3-5-7-HW-Application.md
 [52B/D/E/G/J ハードウェアアプリケーションノート (ソース)]: https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52B-E-G-J-HW-Application.md
@@ -43,8 +43,8 @@ tags:
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-file-pdf: __[SF32LB52x データシート (公式 PDF)]__
-- :fontawesome-solid-file-pdf: __[SF32LB52x ユーザーマニュアル (公式 PDF)]__
+- :fontawesome-solid-file-pdf: __[SF32LB52x データシート (公式 PDF、V2p4)]__
+- :fontawesome-solid-file-pdf: __[SF32LB52x ユーザーマニュアル (公式 PDF、V0p3)]__
 - :fontawesome-solid-file-zipper: __[SF32LB52 ハードウェアリファレンスデザイン一式]__
 - :fontawesome-brands-github: __[SF32LB520/3/5/7 ハードウェアアプリケーションノート (ソース)]__
 - :fontawesome-brands-github: __[52B/D/E/G/J ハードウェアアプリケーションノート (ソース)]__
@@ -57,8 +57,8 @@ tags:
 追加の参考資料:
 
 - [SF32LB52x製品概要](https://downloads.sifli.com/user%20manual/PB5201-SF32LB52x-Product%20Brief.pdf)
-- [SF32LB52xデータシート](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf)
-- [SF32LB52xリファレンスマニュアル](https://downloads.sifli.com/user%20manual/UM5201-SF32LB52x-User%20Manual%20V0p8p4.pdf)
+- [SF32LB52xデータシート (V2p5p3)](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-Datasheet%20V2p5p3.pdf)
+- [SF32LB52xリファレンスマニュアル (V0p8p4)](https://downloads.sifli.com/user%20manual/UM5201-SF32LB52x-User%20Manual%20V0p8p4.pdf)
 - [SF32LB520/3/5/7ハードウェアアプリケーションノート](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB520-3-5-7-HW-Application.md)
 - [52B/D/E/G/Jハードウェアアプリケーションノート](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB52B-E-G-J-HW-Application.md)
 
@@ -69,7 +69,7 @@ tags:
 SiFliのアプリケーションノートには、次の回路図、PCBレイアウト、機構、電源の参考図が掲載されています。ここではレビュー証跡として元資料の図を掲載します。主な設計指針は引き続き第 5 節と第 6 節を参照してください。
 
 !!! note "図の使い方"
-    これらの図は、元のアプリケーションノートにある回路例およびレイアウト例として参照してください。正確なデバイスと製品に対する最終実装は、ルールの説明、表、データシート、リファレンスマニュアル、最新版のリファレンスデザイン一式、AVLに基づいて確認してください。
+    これらの図は、元のアプリケーションノートにある回路例およびレイアウト例として参照してください。正確なデバイスと製品に対する最終実装は、ルールの説明、表、データシート、リファレンスマニュアル、第 8 節に記載したリファレンスデザイン一式とリンク先のAVLに基づいて確認してください。
 
 <div align="center"><em>表 9-1: 付録一覧</em></div>
 

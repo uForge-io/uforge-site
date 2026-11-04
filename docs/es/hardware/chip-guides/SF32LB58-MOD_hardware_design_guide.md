@@ -42,7 +42,7 @@ Para conocer en más detalle la arquitectura del chip (núcleos, gráficos, subs
 </div>
 
 !!! note "Disponibilidad y personalización"
-    **SF32LB58-MOD-E4R32N1 ya no está disponible debido a la reciente escasez de chips de memoria.** Se pueden solicitar otras configuraciones del módulo. Para pedir una configuración personalizada, [contacte con μForge.io](../../about/contact.md).
+    **SF32LB58-MOD-E4R32N1 no está disponible actualmente debido a la escasez de chips de memoria.** Se pueden solicitar otras configuraciones del módulo. Para pedir una configuración personalizada, [contacte con μForge.io](../../about/contact.md).
 
 ### 2.2 Especificaciones principales { #22-key-specifications }
 
@@ -61,7 +61,7 @@ Para conocer en más detalle la arquitectura del chip (núcleos, gráficos, subs
 | Almacenamiento | 5 MPI (integrados en el encapsulado y externos), 2 SD/SDIO/eMMC |
 | Encapsulado | 138 pines, 24 × 24 × 3,1 mm |
 | Alimentación | VDD_3V3 (2,97–3,6 V), VDD_1V8 (1,7–1,95 V), VDDIOA/VDDIOA2/VDDIOB (1,7–3,6 V) |
-| Antena | Antena externa mediante una conexión RF con semiorificios metalizados o un conector compatible con IPEX, según el número de pieza |
+| Antena | Antena montada en PCB o antena externa mediante el conector mostrado en la hoja de datos; confirme la opción para el SKU exacto del módulo |
 | Temperatura de funcionamiento | -40 a 85 °C |
 
 </div>
@@ -77,7 +77,7 @@ El módulo integra el chip SF32LB586VDD36, un cristal de 48 MHz, otro opcional d
 
 ### 4.1 Diagrama de pines { #41-pinout-diagram }
 
-El módulo dispone de 138 pines distribuidos por su perímetro.
+Los 138 contactos numerados que muestra la vista superior se distribuyen en 72 posiciones castelladas en el perímetro, 60 pads interiores y 6 pads centrales; la numeración va del 1 al 138.
 
 !!! info "Figura 4-1: Diagrama de pines, vista superior"
     Este diagrama no se reproduce en esta guía. Consulte la figura 3-1 de la hoja de datos oficial.
@@ -231,6 +231,9 @@ El módulo tiene 138 pines en total, descritos en la siguiente tabla.
 *Leyenda: P = alimentación; I = entrada; O = salida; T = configurable como alta impedancia; AO = salida de audio; AI = entrada de audio.*
 
 !!! note
+    En la fila del pin 10, la hoja de datos V0.1 indica `GPIO_A38` como MUX predeterminado de PA79, pero `GPIO_A79` como función. Esta tabla usa `GPIO_A79` de acuerdo con el nombre del pin y la función; confirme el MUX de PA79 con SiFli antes de cerrar la asignación de pines.
+
+!!! note
     Los pines 2 (USART_RXD) y 3 (USART_TXD) forman el puerto predeterminado para registros, depuración y descarga de programas.
 
 ### 4.3 Distribución física de los pines { #43-physical-pin-description }
@@ -277,6 +280,8 @@ Cualquier pin marcado como `PAxx_I2C_UART` o `PBxx_I2C_UART` en la tabla anterio
 ## 6. Características eléctricas { #6-electrical-characteristics }
 
 ### 6.1 Valores máximos absolutos { #61-absolute-maximum-ratings }
+
+Superar cualquier valor máximo absoluto puede causar daños permanentes en el módulo. Estos valores no implican un funcionamiento normal fuera de las condiciones de funcionamiento recomendadas; la exposición prolongada puede afectar a la fiabilidad.
 
 <div align="center"><em>Tabla 6.1-1: Valores máximos absolutos</em></div>
 
@@ -375,11 +380,13 @@ Las tablas completas (incluidas las fugas de entrada, los umbrales de reinicio y
 | Símbolo | Condición | Corriente (mA) | Incremento (µA/MHz) |
 | :--- | :--- | :-: | :-: |
 | ICoreMark | HPSYS @240 MHz | 10,34 | 31,3 |
-| ICoreMark | LPSYS @48 MHz | 0,89 | 27,6 |
+| ICoreMark | LPSYS @48 MHz | 0,89 | 14,5 |
 | IWhileLoop | HPSYS @240 MHz | 7,98 | 21,3 |
-| IWhileLoop | LPSYS @48 MHz | 0,67 | 18,7 |
+| IWhileLoop | LPSYS @48 MHz | 0,67 | 9,8 |
 
 </div>
+
+Estas tablas muestran puntos de funcionamiento seleccionados. La hoja de datos incluye otros intervalos y estados de exploración de radio en §5.4.2, así como otras frecuencias de procesador en §5.4.3. Los valores indicados para 3,8 V se calculan a partir de mediciones en los raíles de 1,8 V y 3,3 V, suponiendo una eficiencia de conversión del 90 %: `I3.8V = I1.8V × 1.8 / (0.90 × 3.8) + I3.3V`. Son corrientes equivalentes a la entrada del sistema, no mediciones directas aplicando 3,8 V a un pin de alimentación del módulo.
 
 ### 6.5 Rendimiento RF de Bluetooth de modo dual { #65-dual-mode-bluetooth-rf-performance }
 
@@ -432,18 +439,28 @@ Utilice estos recursos como punto de partida del esquemático de producción y a
 | :-: | :--- |
 | 1 | El rango de entrada de VDD_3V3 debe ser de 2,97 V–3,6 V; coloque un condensador de 4,7 µF cerca del pin del módulo. |
 | 2 | El rango de entrada de VDD_1V8 debe ser de 1,7 V–1,95 V; coloque un condensador de 4,7 µF cerca del pin del módulo. |
-| 3 | El rango de entrada de VDDIOA, VDDIOA2 y VDDIOB debe ser de 1,7 V–3,6 V; coloque condensadores cerca de los pines del módulo. |
+| 3 | El rango de entrada de VDDIOA, VDDIOA2 y VDDIOB debe ser de 1,7 V–3,6 V; coloque un condensador de 4,7 µF cerca de cada pin del módulo. |
+| 4 | El nivel de la interfaz de E/S del módulo es 3,3 V; los periféricos conectados también deben usar un nivel de interfaz de 3,3 V. |
+| 5 | Durante el modo de suspensión del MCU, las señales que la hoja de datos indica que pueden recibir interrupciones son PA65, PA67, PB54, PB56, PB57, PB58 y PB59. |
+| 6 | PB54 admite un reinicio mediante pulsación larga de 10 s, activo en nivel alto; añada una resistencia pull-down de 10 kΩ. |
+| 7 | Las E/S marcadas como GPADC_CHx en la figura 7-9 admiten entradas analógicas de 0–3,3 V. |
+| 8 | Las E/S marcadas como GPTIM en la figura 7-9 admiten salida PWM. |
+| 9 | Reserve dispositivos de protección ESD para la interfaz TP y otras similares. |
+| 10 | Añada resistencias en serie de 33–100 Ω a las líneas de señal RGB del LCD. |
+| 11 | La función DBG_UART multiplexada en PB36 y PB37 es la interfaz de descarga y depuración del programa; añada resistencias en serie de 100 Ω y reserve puntos de prueba. |
+| 12 | PA31 y PA32 se utilizan para HCPU Trace; reserve puntos de prueba. |
+| 13 | Reserve un punto de prueba para BOOT_MODE. |
 
 </div>
 
 !!! note
-    Esta guía solo reproduce los tres puntos anteriores. Antes de cerrar el esquemático de producción, consulte la lista completa del §7.3 en el [PDF oficial de la hoja de datos](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf).
+    La hoja de datos V0.1 indica un rango recomendado de VDDIO de 1,7–3,6 V en §5.2, pero el punto 4 de la lista de §7.3 especifica un nivel de interfaz de E/S de 3,3 V. Antes de conectar periféricos, confirme con SiFli la tensión de interfaz aplicable a la revisión exacta del módulo; la hoja de datos no concilia ambas indicaciones. Antes de cerrar el esquemático de producción, consulte la versión más reciente del [PDF oficial de la hoja de datos](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf).
 
 ## 10. Dimensiones del módulo y huella de PCB { #10-module-dimensions-and-pcb-footprint }
 
 ### 10.1 Dimensiones del módulo { #101-module-dimensions }
 
-El módulo mide 24 × 24 × 3,1 mm.
+El módulo mide 24 × 24 × 3,1 mm y su PCB tiene 0,8 mm de grosor. El paso de los contactos castellados del perímetro es de 1,1 mm.
 
 !!! info "Figura 10-1: Dimensiones del módulo"
     Esta figura no se reproduce en la guía. Consulte la figura 8-1 de la hoja de datos oficial.
@@ -453,9 +470,13 @@ El módulo mide 24 × 24 × 3,1 mm.
 !!! info "Figura 10-2: Huella de PCB recomendada"
     Esta figura no se reproduce en la guía. Consulte la figura 8-2 de la hoja de datos oficial.
 
+La huella recomendada tiene 72 pads exteriores de 1,8 × 0,8 mm, 60 pads interiores de 0,7 × 1,0 mm y 6 pads centrales de 1,3 × 1,3 mm. Las dimensiones están en milímetros; el dibujo de la hoja de datos es la referencia para la geometría completa.
+
 ### 10.3 Conector de antena externa { #103-external-antenna-connector }
 
-En los SKU que admiten una antena externa, el módulo puede utilizar una conexión RF con semiorificios metalizados o un conector compatible con IPEX, según el número de pieza.
+La hoja de datos describe una antena montada en PCB o un conector de antena externa de primera generación, compatible con la serie Hirose U.FL, los conectores I-PEX MHFI y los conectores Amphenol AMC. Confirme la configuración de antena para el SKU exacto del módulo.
+
+Las dimensiones del conector en el dibujo están en milímetros.
 
 !!! info "Figura 10-3: Dimensiones del conector de antena externa"
     Esta figura no se reproduce en la guía. Consulte la figura 8-3 de la hoja de datos oficial.
@@ -473,18 +494,20 @@ Reserve la zona de antena del módulo para que ningún componente, cobre, pista,
 ### 11.1 Condiciones de almacenamiento { #111-storage-conditions }
 
 - Guarde los productos sellados en una bolsa barrera contra la humedad (MBB), a <40 °C / 90 % HR, sin condensación.
-- Tras abrir la bolsa de vacío, utilice el módulo dentro del tiempo de exposición especificado por su nivel de sensibilidad a la humedad (MSL); de lo contrario, deberá secarlo en horno antes de una segunda pasada de reflujo.
+- El nivel de sensibilidad a la humedad del módulo es MSL 3. Tras abrir la bolsa de vacío, utilice el módulo dentro de 168 horas en condiciones de 25 ± 5 °C y 60 % HR; de lo contrario, hornéelo antes de devolverlo a producción. Esto no modifica la recomendación de una sola pasada de reflujo.
 
 ### 11.2 Descarga electrostática (ESD) { #112-electrostatic-discharge-esd }
 
-Durante el montaje y las pruebas, siga las precauciones estándar de SiFli para manipular módulos sensibles a ESD.
+La hoja de datos indica una clasificación ESD de ±2000 V HBM y ±500 V CDM. Durante el montaje y las pruebas, siga las precauciones estándar de SiFli para manipular módulos sensibles a ESD.
 
 ### 11.3 Perfil de reflujo { #113-reflow-profile }
 
 Se recomienda someter el módulo a un único ciclo de reflujo.
 
+El perfil V0.1 especifica una rampa de 25 a 150 °C en 60–90 s a 1–3 °C/s; precalentamiento de 150 a 200 °C durante 60–120 s; 60–90 s por encima de 217 °C, con un pico de 235–250 °C; y enfriamiento desde el pico hasta 180 °C a -1 a -5 °C/s. El diagrama especifica soldadura SAC305. La leyenda inferior indica un intervalo en el pico de 30–70 s, mientras que el gráfico señala por separado 焊接时间 >30 s (tiempo de soldadura >30 s). Son etiquetas distintas y la hoja de datos no explica su relación; confirme el perfil aplicable en lugar de combinar los intervalos.
+
 !!! info "Figura 11-1: Perfil de temperatura de reflujo recomendado"
-    Esta figura no se reproduce en la guía. Consulte la figura 9-1 de la hoja de datos oficial.
+    Consulte la figura 9-1 de la hoja de datos oficial; los parámetros y la diferencia entre sus etiquetas se resumen arriba.
 
 ### 11.4 Vibración ultrasónica { #114-ultrasonic-vibration }
 

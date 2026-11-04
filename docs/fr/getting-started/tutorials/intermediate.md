@@ -47,6 +47,8 @@ struct rt_i2c_msg msgs[2] = { /* write register address, then read result */ };
 rt_i2c_transfer(bus, msgs, 2);
 ```
 
+Dans cet extrait, `msgs` n'est qu'un espace réservé. Avant d'appeler `rt_i2c_transfer()`, initialisez les deux descripteurs de message avec l'adresse du capteur, les indicateurs de lecture/écriture, les tampons et leur longueur.
+
 Le nom `i2c1` est donné à titre d'exemple. Utilisez le nom du périphérique I2C enregistré par votre carte et vérifiez que `rt_device_find()` renvoie bien un périphérique avant d'utiliser le bus.
 
 1. À l'aide de la fiche technique, vérifiez l'adresse I2C du capteur, la cartographie des registres, la tension d'alimentation et les résistances de rappel (pull-up) requises.

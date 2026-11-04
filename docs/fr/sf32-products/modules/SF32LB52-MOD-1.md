@@ -21,7 +21,7 @@ Selon le code de commande, le composant monté sur le module peut intégrer de l
 
 ## Applications { #applications }
 
-**Le SF32LB52-MOD-1 convient aux produits qui nécessitent Bluetooth, graphisme et audio tout en réduisant les risques liés à la RF et à la conception de la carte.** Exemples :
+**Le SF32LB52-MOD-1 est recommandé pour les produits qui nécessitent Bluetooth, graphisme et audio tout en réduisant les risques liés à la RF et à la conception de la carte.** Exemples :
 
 - Montres connectées, bracelets d'activité et appareils médicaux portables
 - Hubs de capteurs Bluetooth et accessoires connectés

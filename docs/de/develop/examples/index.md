@@ -64,7 +64,7 @@ Gehen Sie in dieser Reihenfolge vor:
 2. Wählen Sie ein Beispiel für das verwendete Framework.
 3. Wählen Sie ein Beispiel, das die anspruchsvollste Peripherie abdeckt.
 4. Wählen Sie ein Beispiel mit der benötigten Middleware.
-5. Berücksichtigen Sie Leistungsaufnahme und Speicherbedarf.
+5. Stellen Sie sicher, dass das Beispiel zum Leistungs- und Speicherbedarf des Produkts passt.
 
 Ein Bluetooth-Audio-Produkt sollte beispielsweise mit einem passenden Audio-/Bluetooth-Beispiel beginnen und nicht mit einem schlichten `hello_world`, auch wenn Letzteres leichter zu verstehen ist.
 
@@ -78,7 +78,7 @@ Ein Bluetooth-Audio-Produkt sollte beispielsweise mit einem passenden Audio-/Blu
 
 Dieser Ablauf ist in der ersten Stunde langsamer und nach dem ersten schwerwiegenden Fehler deutlich schneller.
 
-## Zu bewahrende Nachweise { #evidence-to-keep }
+## Was zu dokumentieren ist { #evidence-to-keep }
 
 Dokumentieren Sie für jedes Beispiel, das zur Produktbasis wird:
 

@@ -87,6 +87,8 @@ El interruptor del grupo puede incluir varios modelos compatibles, como LSM6DSL 
 - `LSM6DSL_INT_GPIO_BIT` y `LSM6DSL_INT2_GPIO_BIT` especifican los pines de interrupción cuando la placa los asigna.
 - `LSM_USING_AWT`, `LSM_USING_PEDO` y `LSM6DSL_USE_FIFO` representan funciones específicas del dispositivo; defina estos símbolos solo si las admite el controlador elegido.
 
+El bloque conserva el valor predeterminado `0` (SPI) de la guía. Para seguir el ejemplo de acceso I2C que aparece más adelante, configure `LSM6DSL_USING_I2C=1`; si selecciona SPI, use el código de acceso SPI correspondiente.
+
 Este ejemplo sigue la guía SF32LB52x. Otras guías de familia o ramas del SDK pueden ofrecer opciones o rutas de menú distintas; antes de aplicarlo, compruebe los símbolos definidos en la rama de destino.
 
 ### Buscar el bus e implementar el acceso a registros { #find-the-bus-and-implement-register-access }

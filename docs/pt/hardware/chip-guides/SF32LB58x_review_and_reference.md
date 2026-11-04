@@ -21,7 +21,7 @@ hide:
 - [ ] Verifique se a indutância nominal do indutor BUCK selecionado é de 4,7 µH, com DCR ≤ 0,4 Ω e Isat ≥ 500 mA.
 - [ ] Confirme que os cristais de 48 MHz e 32,768 kHz atendem às especificações recomendadas e que o roteamento e as áreas de exclusão cumprem os requisitos de projeto.
 - [ ] Garanta impedância controlada de 50 Ω na trilha de RF e posicione a rede de casamento perto do chip.
-- [ ] Confirme que a interface de armazenamento externa escolhida é compatível com o projeto de inicialização previsto. Separadamente, verifique o nível do pino Mode: alto para o modo de download e baixo para iniciar a aplicação do usuário.
+- [ ] Confirme que a interface de armazenamento externa escolhida é compatível com o projeto de inicialização previsto. Separadamente, verifique se um resistor externo de 10 kΩ mantém o pino Mode estável, com pull-up para a alimentação no nível alto (modo de download) ou pull-down para GND no nível baixo (inicialização do aplicativo do usuário); não deixe o pino flutuando nem permita interferência que alterne seu nível.
 - [ ] Confirme que o roteamento das interfaces de display (MIPI-DSI/SPI-QSPI/MCU8080/DPI/JDI) atende às regras de impedância e casamento de comprimento de cada interface. Para DSI, verifique impedância diferencial de 100 Ω, diferença de comprimento ≤0,5 mm dentro de cada par e ≤2 mm entre pares.
 - [ ] Verifique se o roteamento USB atende ao requisito de impedância diferencial de 90 Ω. Roteie juntos os sinais SDIO; mantenha o comprimento total ≤50 mm e a diferença de comprimento dentro do grupo ≤6 mm.
 - [ ] Mantenha o acesso SWD e a interface escolhida para saída de depuração, entre as seis UART disponíveis, com seus pinos de sinal e pontos de teste de produção.
@@ -32,7 +32,7 @@ hide:
 
 ## 8. Documentos e referências { #8-related-documents-and-references }
 
-Consulte os documentos oficiais mais recentes para verificar limites elétricos, dados do encapsulamento, multiplexação dos pinos, configuração de software e qualificação de componentes.
+Use os documentos oficiais indicados abaixo para verificar limites elétricos, dados do encapsulamento, multiplexação dos pinos, configuração de software e qualificação de componentes. Antes de liberar o projeto, confirme se cada documento citado continua na revisão vigente.
 
 <div class="grid cards" markdown>
 
@@ -83,7 +83,7 @@ Um produto típico baseado no SF32LB58x para um dispositivo vestível inteligent
 | Versão | Data | Nota |
 |:---|:---|:---|
 | 1.0 | 2026-07 | Guia de projeto de hardware SF32LB58x atualizado com orientações de esquemático, PCB, validação e revisão de produção. |
-| 0.0.1 | 1/2025 | Publicação da versão preliminar oficial de `SF32LB58x-HW-Application`. |
+| 0.0.1 | 1/2025 | Versão preliminar de `SF32LB58x-HW-Application`. |
 
 </div>
 

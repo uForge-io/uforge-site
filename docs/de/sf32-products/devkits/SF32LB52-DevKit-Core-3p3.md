@@ -53,6 +53,7 @@ Varianten mit ausschließlich NOR-Speicher eignen sich für kompakte Bluetooth- 
 - 16-poliger FPC-Display-Steckverbinder mit 0,5 mm Raster; Display-Schnittstellen sind SPI, DSPI und Quad-SPI, mit Unterstützung für QSPI im DDR-Modus
 - I2C-Touchpanel-Signale
 - Analoges Mikrofon und differenzielle Audioausgangspins
+- Digitale PDM-Mikrofoneingabe
 - Eine Benutzer-LED
 - Power-Taste und Funktionstaste
 - Messpunkte zur Strommessung an einzelnen Versorgungsschienen; SiFli dokumentiert außerdem Stromverbrauchsmessungen an der einzelnen MCU, am Minimalsystem und am gesamten Board
@@ -84,6 +85,8 @@ Für Strommessungen einzelner Schienen schalten Sie ein Amperemeter an den Messp
 Ist USB Type-C angeschlossen, kann das Board über ausgewählte Pins der Randleiste auch 3,3 V, 1,8 V und 5 V ausgeben. Bestätigen Sie die erforderliche Richtung, bevor Sie externe Schaltungen anschließen.
 
 Das Board enthält einen Versorgungsschalter. Das Signal RTS# des CH340N kann den Board-Enable steuern, sodass das Host-Werkzeug die MCU bei Download- oder Debug-Abläufen zurücksetzen kann.
+
+Bei USB-Type-C-Versorgung wandelt der integrierte LDO die 5 V von VBUS in 3,3 V um.
 
 ## Download und Debug { #download-and-debug }
 
@@ -168,6 +171,39 @@ Das Board führt zwei 24-polige Randleisten heraus. Die erste Seite konzentriert
 
 </div>
 
+<div align="center"><em>Tabelle: Detaillierte Pin-Funktionen und Pull-Zustände von J1</em></div>
+
+<div align="center" markdown>
+
+| Pin | Pinname | Reset-Standardfunktion und Multiplexfunktionen | Pull |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | Masse |  |
+| 2 | PA_44 | **PA44**, UART, I2C, GPTIM, WKUP20 | PD |
+| 3 | PA_43 | **PA43**, UART, I2C, GPTIM, WKUP19 | PD |
+| 4 | PA_42 | **PA42**, UART, I2C, GPTIM, WKUP18 | PU |
+| 5 | PA_41 | **PA41**, UART, I2C, GPTIM, WKUP17 | PU |
+| 6 | PA_40 | **PA40**, UART, I2C, GPTIM, SPI2_CS, WKUP16 | PU |
+| 7 | PA_39 | **PA39**, UART, I2C, GPTIM, SPI2_CLK, WKUP15 | PU |
+| 8 | PA_38 | **PA38**, UART, I2C, GPTIM, SPI2_DI, WKUP14 | PD |
+| 9 | PA_37 | **PA37**, UART, I2C, GPTIM, SPI2_DIO, WKUP13 | PD |
+| 10 | PA_36 | **PA36**, UART, I2C, GPTIM, USB_DM, WKUP12 | PD |
+| 11 | PA_35 | **PA35**, UART, I2C, GPTIM, USB_DP, WKUP11 | PD |
+| 12 | PA_31 | **PA31**, UART, I2C, GPTIM, GPADC3 | PD |
+| 13 | PA_30 | **PA30**, UART, I2C, GPTIM, I2S1_LRCK, GPADC2 | PD |
+| 14 | PA_29 | **PA29**, UART, I2C, GPTIM, SPI1_CS, I2S1_BCK, GPADC1 | PD |
+| 15 | PA_28 | **PA28**, UART, I2C, GPTIM, SPI1_CLK, I2S1_SDI, GPADC0 | PD |
+| 16 | GND | Masse |  |
+| 17 | 3.3V | 3,3-V-Eingang bei getrenntem USB Type-C, Ausgang bei angeschlossenem USB Type-C |  |
+| 18 | PA_27 | **PA27**, UART, I2C, GPTIM, WKUP3 | PU |
+| 19 | PA_26 | **PA26**, UART, I2C, GPTIM, WKUP2 | PU |
+| 20 | PA_25 | **PA25**, UART, I2C, GPTIM, SPI1_DI, I2S1_SDO, WKUP1 | PD |
+| 21 | PA_24 | **PA24**, UART, I2C, GPTIM, SPI1_DIO, I2S1_MCLK, WKUP0 | PD |
+| 22 | PA_34 | **PA34**, UART, I2C, GPTIM, GPADC6, WKUP10 | PD |
+| 23 | PA_33 | **PA33**, UART, I2C, GPTIM, GPADC5 | PD |
+| 24 | PA_32 | **PA32**, UART, I2C, GPTIM, GPADC4 | PD |
+
+</div>
+
 ### Randleiste für LCD, Audio und Debug { #lcd-audio-and-debug-header }
 
 <div align="center"><em>Pinzuordnung der Randleiste für LCD, Audio und Debug</em></div>
@@ -186,9 +222,44 @@ Das Board führt zwei 24-polige Randleisten heraus. Die erste Seite konzentriert
 
 </div>
 
+<div align="center"><em>Tabelle: Detaillierte Pin-Funktionen und Pull-Zustände von J2</em></div>
+
+<div align="center" markdown>
+
+| Pin | Pinname | Reset-Standardfunktion und Multiplexfunktionen | Pull |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | Masse |  |
+| 2 | PA_00 | **PA00**, UART, I2C, GPTIM, LCD_RST | PD |
+| 3 | PA_01 | **PA01**, UART, I2C, GPTIM, BL_PWM | PD |
+| 4 | PA_02 | **PA02**, UART, I2C, GPTIM, LCD_TE, I2S1_MCLK | PD |
+| 5 | PA_03 | **PA03**, UART, I2C, GPTIM, LCD_CS, I2S1_SDO | PU |
+| 6 | PA_04 | **PA04**, UART, I2C, GPTIM, LCD_CLK, I2S1_SDI | PD |
+| 7 | PA_05 | **PA05**, UART, I2C, GPTIM, LCD_D0, I2S1_BCK | PD |
+| 8 | PA_06 | **PA06**, UART, I2C, GPTIM, LCD_D1, I2S1_LRCK | PD |
+| 9 | PA_07 | **PA07**, UART, I2C, GPTIM, LCD_D2, PDM1_CLK | PD |
+| 10 | PA_08 | **PA08**, UART, I2C, GPTIM, LCD_D3, PDM1_DAT | PD |
+| 11 | PA_09 | **PA09**, UART, I2C, GPTIM, CTP_INT | PD |
+| 12 | MIC_ADC | MIC-Eingangssignal |  |
+| 13 | MIC_BIAS | MIC-Vorspannung |  |
+| 14 | DACP | Analoges Audioausgangssignal |  |
+| 15 | DACN | Analoges Audioausgangssignal |  |
+| 16 | GND | Masse |  |
+| 17 | 1.8V | 1,8-V-Eingang bei getrenntem USB Type-C, Ausgang bei angeschlossenem USB Type-C |  |
+| 18 | PA_10 | **PA10**, UART, I2C, GPTIM, CTP_RST | PD |
+| 19 | PA_11 | **PA11**, UART, I2C, GPTIM, CTP_SDA | PU |
+| 20 | PA_20 | **PA20**, UART, I2C, GPTIM, CTP_SCL | PD |
+| 21 | PA_21 | **PA21**, UART, I2C, GPTIM | PD |
+| 22 | PA_18 | **UART0_RXD**, Debug- und Download-Port, PA18, SWDIO, I2C, GPTIM | PU |
+| 23 | PA_19 | **UART0_TXD**, Debug- und Download-Port, PA19, SWCLK, I2C, GPTIM | Keiner |
+| 24 | 5V | 5-V-Eingang bei getrenntem USB Type-C, Ausgang bei angeschlossenem USB Type-C |  |
+
+</div>
+
 ## Pins für externen Flash und SDIO { #external-flash-and-sdio-pins }
 
 Einige Varianten enthalten einen externen 16-MB-QSPI-NOR-Flash. Die gemeinsam genutzte Pin-Gruppe für Speicher und SDIO lautet:
+
+Der ursprüngliche Board-Leitfaden nennt außerdem folgende Gehäuseoptionen für externen Flash; die Bestückung hängt von Boardvariante und BOM ab: SPI-NOR-Flash in WSON8-8x6mm oder WSON8-6x5mm, SPI-NAND-Flash in WSON8-8x6mm sowie SD-NAND-Flash in WSON8-8x6mm.
 
 <div align="center"><em>Pin-Gruppe für externen Flash und SDIO</em></div>
 
@@ -210,6 +281,8 @@ Prüfen Sie, ob diese Pins bereits vom bestückten Flash belegt sind, bevor Sie 
 ## Audio-Erweiterung { #audio-expansion }
 
 Das Board führt Mikrofonvorspannung und -eingang sowie den differenziellen DAC-Ausgang heraus. Mikrofon und Class-AB/D-Verstärker zum Ansteuern eines Lautsprechers sind extern; wählen Sie beide passend zum vorgesehenen Audiopfad aus.
+
+Das Board unterstützt außerdem digitale PDM-Mikrofoneingabe: PA07 ist mit `PDM1_CLK` und PA08 mit `PDM1_DAT` multiplexiert.
 
 ## SDK-Build-Targets { #sdk-build-targets }
 

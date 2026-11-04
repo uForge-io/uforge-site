@@ -17,7 +17,7 @@ SDK 的 `debug_logging` 与 `crash_analysis` 指南互为补充：日志用于�
 
 | 芯片系列 | 调试与日志行为 |
 |---|---|
-| SF32LB52x、SF32LB56x、SF32LB58x | 官方指南介绍了 UART 采集、`SifliUsartServer`/`AssertDumpUart` 以及通过 J-Link/Trace32 恢复现场的方法。应根据所选的睡眠状态，使用此时仍然可用的传输方式。 |
+| SF32LB52x、SF32LB56x、SF32LB58x | SiFli 对应系列指南介绍了 UART 采集、`SifliUsartServer`/`AssertDumpUart` 以及通过 J-Link/Trace32 恢复现场的方法。应根据所选的睡眠状态，使用此时仍然可用的传输方式。 |
 | SF32LB55x | 可使用 `$SDK_ROOT/tools/segger/jlink_hcpu_a0.bat` 和 `jlink_lcpu_a0.bat` 在 HCPU/LCPU 间切换 SWD。LCPU ROM 控制台为 UART3、波特率 1,000,000；HCPU 可使用 UART1/2 或 SWD。由于 SWD 使用 PB IO，连接期间应保持 LPSYS 处于活动状态（Active）或轻度睡眠（Light Sleep）。 |
 
 </div>
@@ -37,7 +37,7 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
   --output /tmp/live-crash --elf build_hcpu/main.elf
 ```
 
-目标使用 PSRAM 时添加 `--include-psram --psram-size 8MB`。J-Link 可使用 `--transport jlink --jlink-ip 127.0.0.1:19025`，并用 `--core hcpu` 或 `--core lcpu` 指定发生故障的处理器核。输出目录应包含现场二进制文件、对应处理器核的 ELF/AXF、`log.txt`、`manifest.json` 和 `sdk_manifest.json`。
+需要导出 PSRAM 时，添加 `--include-psram`；也可使用 `--psram-size 8MB` 手动指定 PSRAM 脚本。通过 `SifliUsartServer` 使用 J-Link IP 连接时，可设置 `--transport jlink --jlink-ip 127.0.0.1:19025`，并用 `--core hcpu` 或 `--core lcpu` 指定发生故障的处理器核。输出目录应包含现场二进制文件、对应处理器核的 ELF/AXF、`log.txt`、`manifest.json` 和 `sdk_manifest.json`。
 
 较早版本 SDK 可参考对应系列指南，选择以下方法：
 
@@ -50,13 +50,13 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
 ![SF32LB52x menuconfig 中的 memory trace 选项](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_mem_trace.png){ loading="lazy" }
 <div align="center"><em>图：SF32LB52x 指南示例——若需获取堆跟踪信息，应在复现故障前启用内存跟踪（memory trace）。</em></div>
 
-UART 方式通常需要先确认串口工具、服务器地址和目标处理器核。指南中的截图可用于检查连接设置：
+UART 方式通常需要先确认串口工具、服务器地址和目标处理器核。SF32LB52x 指南中的 Windows 工具示例位于 `SiFli_Trace_v2.3.0/Sifli_UsartServer_v2.8`，其中包含 `SifliUsartServer.exe`；实际安装路径和版本可能不同。连接设置截图显示芯片 UART1 映射到主机 COM17、波特率 1,000,000、服务器 `127.0.0.1:19025`、目标核 HCPU。这些只是指南示例，其他板卡和接线应按实际情况配置：
 
 ![SiFli_Trace 和 SifliUsartServer 工具位置](../../../../assets/develop/app-notes/crash-analysis/Sifli_Trace.png){ loading="lazy" }
-<div align="center"><em>图：SF32LB52x 指南示例——SiFli_Trace/SifliUsartServer 工具目录。</em></div>
+<div align="center"><em>图：SF32LB52x 指南示例——SiFli_Trace/SifliUsartServer 工具目录，包含版本化的服务器程序。</em></div>
 
 ![SifliUsartServer 的 SF32LB52x 连接设置](../../../../assets/develop/app-notes/crash-analysis/UsartServer52.png){ loading="lazy" }
-<div align="center"><em>图：SF32LB52x 指南示例——串口、波特率、服务器地址和调试核选择必须与目标现场匹配。</em></div>
+<div align="center"><em>图：SF32LB52x 指南示例——UART1 映射到 COM17，波特率为 1,000,000，服务器地址为 `127.0.0.1:19025`，目标核为 HCPU；这些是示例设置，并非通用默认值。</em></div>
 
 ![崩溃转储分析工具的 RAM 保存脚本](../../../../assets/develop/app-notes/crash-analysis/save_ram_uart_52.png){ loading="lazy" }
 <div align="center"><em>图：SF32LB52x 指南示例——目录中包含按芯片系列和连接方式区分的脚本，例如 `save_ram_55x.bat`、`save_ram_58x.bat` 和 `save_ram_uart_52x.bat`；应根据目标芯片和连接方式选择脚本。</em></div>
@@ -75,10 +75,10 @@ sdk.py crash-dump analyze --core /tmp/live-crash/coredump.elf \
 较早的 Trace32 流程使用 HCPU 断言（HA）按钮和 `run_next_step` 加载 HCPU 现场；LCPU 转储则必须使用 LCPU 恢复配置。如果没有显示异常栈，应先确认调试核、ELF 和内存范围，再解读寄存器。
 
 ![Trace32 现场恢复脚本选择示例](../../../../assets/develop/app-notes/crash-analysis/dump_select.png){ loading="lazy" }
-<div align="center"><em>图：SF32LB52x 指南示例——J-Link/Trace32 现场导出脚本选择。</em></div>
+<div align="center"><em>图：SF32LB52x 指南示例——并列展示 IP 与 USB 模式的 `.jlink` 脚本；IP 版本使用 `127.0.0.1:19025`，直连 J-Link 时选择 USB 版本。</em></div>
 
 ![Trace32 HCPU 断言窗口](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_hcpu_window.png){ loading="lazy" }
-<div align="center"><em>图：SF32LB52x 指南示例——恢复后同时查看调用栈、线程列表、堆信息和错误原因。</em></div>
+<div align="center"><em>图：SF32LB52x 指南示例——恢复后可查看调用栈、`TaskList`、`TaskSwitchHistory`、`heapAllocation`、`error_reason` 和反汇编窗口。</em></div>
 
 ## 在启动或疑似竞态处暂停 { #stop-early-during-boot-or-a-suspected-race }
 
@@ -102,6 +102,6 @@ Ozone 可加载 HCPU/LCPU ELF，以及 `$SDK_ROOT/tools/svd_external` 中适用�
 SDK 的总线监控功能（bus monitor）可以捕获导致总线错误（bus fault）的访问。参考指南中的示例，使用 `dbg_busmon_reg_callback` 注册回调，再用 `dbg_busmon_read` 和 `dbg_busmon_write` 检查相关地址范围。将总线监控与堆跟踪和崩溃现场包结合使用；没有符号和内存上下文的寄存器转储通常不足以定位问题。
 
 ![Trace32 堆调用栈示例](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_heap_callstack.png){ loading="lazy" }
-<div align="center"><em>图：SF32LB52x 指南示例——堆调用栈与内存窗口。</em></div>
+<div align="center"><em>图：SF32LB52x 指南示例——将断言处理函数及行号与原始内存转储窗口对照查看。</em></div>
 
 官方系列资料：[SF32LB52x 崩溃分析](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/crash_analysis.html)、[SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/crash_analysis.html)、[SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/crash_analysis.html)、[SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/crash_analysis.html) 以及对应的[调试和日志指南](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/debug_logging.html)。

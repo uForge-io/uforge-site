@@ -180,7 +180,7 @@ Treat failures as five domains: device hardware/display, HID input, CDC/UART dat
 |:-----|:-------|:--------------|
 | Companion absent | Close SuperKeyHub and restart the device | Local UI and HID still work; companion-dependent values remain recognizably stale or unavailable |
 | CDC loss | Unplug/replug USB or change ports during data delivery | Device does not hang; version query and data delivery recover after reconnection |
-| Host sleep | Enable `power_mode sleep/normal`, then run one host sleep/wake cycle | LCD, LEDs, backlight, and sensors stop/resume as intended, and later data still refreshes |
+| Host sleep | Enable SuperKeyHub's follow-system-sleep behavior, then run one host sleep/wake cycle | LCD, LEDs, backlight, and sensors stop/resume as intended, and later data still refreshes |
 | Version mismatch | In a controlled setup, test an incompatible companion/firmware pair | The pair rejects operation or presents a diagnosable error instead of applying an incompatible update |
 | API failure | Use invalid weather configuration or disconnect the network | Weather failure does not break HID, CDC, local UI, or recovery |
 | Interrupted DFU | Interrupt an update on a recoverable test unit | The retained wired download path restores the known image |

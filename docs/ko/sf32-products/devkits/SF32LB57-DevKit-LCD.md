@@ -11,7 +11,7 @@ tags:
 
 ## 개요 { #overview }
 
-SF32LB57-DevKit-LCD는 **SF32LB57-MOD-WD**를 중심으로 SF32LB57x MCU, SDIO Wi-Fi, 부팅 플래시와 주변 장치 연결을 통합한 멀티미디어 평가 보드입니다. SiFli가 이 모듈을 제품으로 제공하려는 것으로 보이며, **WD**가 **Wi-Fi Dual-band**를 뜻한다는 해석은 공식적으로 확인되지 않았습니다. 스마트 HMI, 카메라 단말, 인터콤, 네트워크 디스플레이를 개발하고 캐리어 보드 설계 전에 그래픽, 영상 캡처, 오디오, 연결 기능을 검증하는 데 적합합니다.
+SF32LB57-DevKit-LCD는 **SF32LB57-MOD-WD** 기반의 멀티미디어 평가 보드입니다. 제품명은 SiFli가 해당 모듈을 제품으로 제공하려는 것으로 보입니다. **WD**는 **Wi-Fi Dual-band**를 뜻할 수 있지만, 이 해석은 공식적으로 확인되지 않았습니다. 보드는 SF32LB57x MCU, SDIO Wi-Fi, 부팅 플래시와 주변 장치 연결을 통합합니다. 스마트 HMI, 카메라 단말, 인터콤, 네트워크 디스플레이를 개발하고 캐리어 보드 설계 전에 그래픽, 영상 캡처, 오디오, 연결 기능을 검증하는 데 적합합니다.
 
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 900px; margin: 1rem auto;">
 <figure style="margin: 0;"><a href="assets/sf32lb57x/57DEVKIT_LCD_T_Look.png"><img src="assets/sf32lb57x/57DEVKIT_LCD_T_Look.png" alt="SF32LB57-DevKit-LCD — 앞면" loading="lazy" style="display: block; width: 100%; height: auto;"></a><figcaption>앞면</figcaption></figure>
@@ -61,7 +61,7 @@ SiFli는 Wi-Fi 디바이스를 AIC8800D40LS-N으로 명시하며 일부 문장�
 <figure style="margin: 0;"><a href="assets/sf32lb57x/57DEVKIT-LCD-B-Notes.svg"><img src="assets/sf32lb57x/57DEVKIT-LCD-B-Notes.svg" alt="SF32LB57-DevKit-LCD — 뒷면 부품" loading="lazy" style="display: block; width: 100%; height: auto;"></a><figcaption>뒷면 부품</figcaption></figure>
 </div>
 
-## 첫 실행 { #getting-started }
+## 초기 보드 구동 { #getting-started }
 
 디스플레이 검증에는 보드, 호환되는 40핀 / 0.5 mm DPI-RGB 패널, 데이터 USB 케이블, Windows·Linux·macOS 컴퓨터가 필요합니다. IPEX-1 안테나, DVP 카메라, MicroSD/TF 카드, 8 Ω 스피커, J-Link 또는 DAP-Link는 선택 사항입니다. UART 로그와 네이티브 USB 시험을 동시에 수행하려면 데이터 케이블 2개가 필요합니다.
 
@@ -72,20 +72,9 @@ SiFli는 Wi-Fi 디바이스를 AIC8800D40LS-N으로 명시하며 일부 문장�
 
 출하 펌웨어가 기록된 보드는 켜질 때 기본 UI를 표시할 수 있지만 펌웨어와 패널에 따라 다릅니다. 검은 화면만으로 기록 실패라고 판단하면 안 됩니다. 툴체인, 환경 설정, 플래싱 절차는 [SiFli-SDK 시작하기](../../getting-started/sifli/getting-started-sifli-sdk.md)를 참조하십시오.
 
-## SDK 빌드 대상 { #sdk-build-targets }
+## SDK 설정 { #sdk-build-targets }
 
-현재 SDK 빌드 설정에는 다음 대상이 나열됩니다. 정확한 빌드 식별자이지만 모든 SF32LB57-MOD-WD 보드가 각 대상에 맞는다는 뜻은 아닙니다. SDK 체크아웃과 실제 보드의 메모리, 디스플레이, 핀 설정, 리비전을 대조하십시오. 원문은 WD 모듈 리비전과 이 대상 이름의 대응 관계를 제시하지 않습니다.
-
-- `sf32lb57-lcd_n16r16_dpi`
-- `sf32lb57-lcd_n16r8_dpi`
-- `sf32lb57-lcd_n16r16_qspi`
-
-SDK 환경을 설정한 후 다음 hello-world 명령은 **하드웨어가 N16R16 DPI 구성과 일치할 때만 적용하는 예**입니다. UART hello-world가 성공해도 디스플레이, 카메라, Wi-Fi 드라이버가 검증된 것은 아닙니다.
-
-```bash
-cd example/get-started/hello_world/rtt/project
-scons --board=sf32lb57-lcd_n16r16_dpi -j8
-```
+SiFli 보드 가이드는 SiFli SDK를 설치하고 `SF32LB57-DevKit-LCD` 보드 지원 패키지를 선택하도록 안내합니다. 현재 링크된 upstream `build_config_gcc.yaml`에는 SF32LB57 빌드 대상이 없습니다. 컴파일하기 전에 사용 중인 SDK 체크아웃에서 보드 지원 패키지와 정확한 빌드 식별자를 확인하고, 다른 보드의 대상을 대신 사용하지 마십시오. UART hello-world 성공은 기본 시리얼 시작만 확인하며 디스플레이, 카메라, Wi-Fi 드라이버를 검증하지는 않습니다.
 
 ## 전원 및 디버깅 { #power-and-debug }
 
@@ -159,7 +148,7 @@ S1–S3은 `PA_34` / `GPADC_CH6`을 공유하며 원문의 버튼 공칭 전압�
 ## 커넥터 참조 { #connector-reference }
 
 !!! warning
-    다음 표는 원문의 보드 연결을 옮긴 것이며 회로도를 대체하지 않습니다. 모듈 요약에는 미완성 항목(`58~?`)이 있고 `PA_00`/`PA_01`을 USB_DP/USB_DM으로 표기하여 명시된 네이티브 USB 핀 `PA35`/`PA36`과 충돌합니다. 모듈 패드 번호와 MCU GPIO를 구분하고 미확정 행으로 PCB를 설계하면 안 됩니다.
+    다음 표는 원문의 보드 연결을 옮긴 것이며 회로도를 대체하지 않습니다. 모듈 요약에는 미완성 항목(`58~?`)이 있고 `PA_00`/`PA_01`을 USB_DP/USB_DM으로 표기하여 명시된 네이티브 USB 핀 `PA35`/`PA36`과 충돌합니다. 원문의 일부 행은 모듈 패드 범위, GPIO 범위와 대체 기능을 묶어 표시하며 각 패드의 기능을 개별적으로 지정하지 않습니다. 이 페이지는 해당 표기를 유지하고 개별 할당을 추론하지 않습니다. 모듈 패드 번호와 MCU GPIO를 구분하고 미확정 행으로 PCB를 설계하면 안 됩니다.
 
 <div align="center"><em>모듈 패드 요약: 원문 미확정 항목 유지</em></div>
 

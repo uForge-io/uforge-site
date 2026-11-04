@@ -150,7 +150,7 @@ Quando a medição e o modelo não concordarem, não altere a tabela apenas para
 | A medição de um componente supera o esperado | Modo incorreto, fuga na linha de alimentação, perdas do regulador ou carga do dispositivo de teste | Isole a linha; verifique pinos de modo, tensão e componentes montados na placa. |
 | A energia do cenário supera a soma dos componentes | Despertares adicionais, tempo extra de display ou rádio ativo, rotinas de serviço ou cargas sobrepostas | Adicione marcadores do firmware e compare os estados dos componentes durante todo o cenário. |
 | O perfil diário supera a soma dos cenários | Frequência de uso, tempo inativo com conexão, recurso desabilitado ou tarefa em segundo plano modelados incorretamente | Verifique contagens de eventos, temporizadores, programação do rádio e a definição do tempo restante em standby. |
-| O modelo e a medição concordam em apenas uma configuração | Tensão, temperatura, ambiente de RF, estado da bateria ou versão do firmware diferentes | Repita os mesmos cenários em toda a faixa de operação prevista. |
+| O modelo e a medição concordam em apenas uma configuração | Tensão, temperatura, ambiente de RF, estado da bateria ou versão do firmware diferentes | Repita os mesmos cenários em cada condição relevante da faixa de operação prevista. |
 
 </div>
 

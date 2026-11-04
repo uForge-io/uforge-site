@@ -8,7 +8,7 @@ tags:
 
 # Zephyr upstream { #zephyr-upstream }
 
-Zephyr v4.3.0以降、upstream Zephyrでは`sf32lb52_devkit_lcd`ボードが継続的にメンテナンスされています。[v4.3.0リリースノート](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html)と [SF32LB52 DevKit LCDボードドキュメント](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)を参照してください。このガイドではv4.3.0のワークスペースを作成し、最初のサンプルをビルドしてボードに書き込みます。SF32のより広範な公式機能が必要な場合は、[SiFli-SDK](../sifli/getting-started-sifli-sdk.md)を使用してください。
+Zephyr v4.3.0以降、upstream Zephyrでは`sf32lb52_devkit_lcd`ボードがサポートされ、継続的にメンテナンスされています。[v4.3.0リリースノート](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html)と [SF32LB52 DevKit LCDボードドキュメント](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)を参照してください。このガイドではv4.3.0のワークスペースを作成し、最初のサンプルをビルドしてボードに書き込みます。SF32のより広範な公式機能が必要な場合は、[SiFli-SDK](../sifli/getting-started-sifli-sdk.md)を使用してください。
 
 !!! note "ボードの対応機能を確認"
     upstreamのボード定義があることだけでは、すべての周辺機能や動作モードが有効で、製品向けに検証済みであるとは限りません。ボードドキュメントの対応機能表を確認し、使用するボードのリビジョンで必要な動作を検証してください。

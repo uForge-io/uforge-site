@@ -47,6 +47,8 @@ Este documento pressupõe conhecimentos básicos de projeto de hardware embarcad
 
 Os recursos típicos do SF32LB57x incluem:
 
+- Arquitetura STAR-MC1 Arm Cortex-M33 com dois núcleos grandes e um núcleo pequeno.
+- Motor gráfico 2D/2.5D, acelerador de rede neural de IA, Bluetooth 6.0 de modo duplo e codec de áudio integrados.
 - Até 58 GPIOs<!-- BGA-ONLY -->; algumas variantes BGA112 têm seis E/S adicionais, que podem ser usadas para MPI3 ou configuradas, por pull-up/pull-down, como saídas estáticas GP; consulte Encapsulamentos<!-- /BGA-ONLY -->.
 - 3 UART, 4 I2C, 2 SPI e 2 CAN.
 - 2 GPTIM (4 canais cada), 2 LPTIM, 2 ATIM (3 canais diferenciais ou 4 canais de terminação simples (single-ended) cada), 1 PWM (5 canais) e 1 PTM (16 canais).
@@ -62,6 +64,9 @@ Os recursos típicos do SF32LB57x incluem:
 
 !!! note "Escopo das interfaces de display"
     A nota de aplicação de hardware lista SPI/QSPI, DPI de 24 bits, 8080 de 16 bits, EPD de 16 bits e JDI serial/paralelo no resumo da interface LCDC do SF32LB57x. MIPI-DSI aparece na lista de compatibilidade de alguns CIs controladores de display, mas não nesse resumo das interfaces LCDC diretas do chip. Não interprete a referência ao controlador do painel como confirmação de uma interface host MIPI-DSI nativa no chip; antes de selecionar o projeto, confirme com a SiFli o caminho do controlador de display específico.
+
+!!! note "Suporte de software do acelerador de IA"
+    A nota de aplicação de hardware da SiFli identifica um acelerador integrado de rede neural de IA no SF32LB57x. O [guia NNACC do SDK da SiFli](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/nnacc.html) lista SF32LB55x, SF32LB56x e SF32LB58x, mas não SF32LB57x. O recurso de hardware, por si só, não confirma o suporte de software para inferência acelerada no SF32LB57x; antes de depender dele, confirme com a SiFli o suporte para o número de peça exato e a versão do SDK.
 
 ### 3.2. Variantes { #32-variants }
 

@@ -26,13 +26,13 @@ O SF32LB52x tem uma rota dedicada de detecção da bateria em `GPADC_CH7` (`BAT`
 | Família | Canais GPADC | Resolução | Precisão típica | Tensão máxima nas entradas GPADC normais |
 |:-------|:---------------|:-----------|:----------------|:----------------------------------------|
 | SF32LB55x | 8 | 10 bits | 3–4 mV | 1,1 V (X1); 3,3 V (X3) |
-| SF32LB52x | 8 | 12 bits | 1–2 mV | 3,3 V |
+| SF32LB52x | 8 | 12 bits | 1–2 mV | 1,1 V (A0); 3,3 V (RPO) |
 | SF32LB56x / 58x | 8 | 12 bits | 1–2 mV | 3,3 V |
 | SF32LB57x | 12 | 12 bits | 1–2 mV | 3,3 V |
 
 </div>
 
-Os limites máximos de entrada indicados acima aplicam-se às entradas GPADC normais; os canais dedicados à detecção da bateria têm conexões e limites próprios. O exemplo do SF32LB55x usa um divisor de 1 MΩ / 220 kΩ com tempo de estabilização RC de 157 ms. A tabela consolidada do guia SF32LB56x indica 470 kΩ / 1000 kΩ e 200 ms para SF32LB52x, SF32LB56x e SF32LB58x; ela não faz essa recomendação para o SF32LB57x. No 57x, siga o caminho de detecção da bateria e os limites documentados para a referência exata, sem extrapolar esses valores de resistência nem esse tempo de estabilização. Essas recomendações se aplicam a redes divisoras externas. Em particular, a rota dedicada `GPADC_CH7` do SF32LB52x já usa um divisor interno. Não acrescente outro divisor externo, a menos que o projeto da placa de destino exija isso. A tolerância dos resistores afeta a precisão; quando o projeto usar um divisor externo, calibre essa rede separadamente na produção.
+Os limites máximos de entrada indicados acima aplicam-se às entradas GPADC normais; os canais dedicados à detecção da bateria têm conexões e limites próprios. O limite de entrada do SF32LB52x depende da revisão do chip: o guia ADC específico descreve uma faixa de medição de 0–1,0 V, enquanto a API HAL atual define o máximo de 1,1 V para A0 e 3,3 V para RPO. O FAQ do OpenSiFli e a tabela ADC consolidada indicam 3,3 V para a família sem distinguir essas variantes. Antes de conectar uma entrada, confirme a revisão exata do chip e o limite HAL da versão do SDK de destino; não considere 3,3 V universal para todos os 52x. No SF32LB55x, também é preciso distinguir faixa e revisão: o FAQ do OpenSiFli indica 1,1 V / 3,3 V para X1 / X3, enquanto a API HAL atual define 1,1 V / 3,3 V como máximos para A0 / RPO. As fontes não dizem que esses pares de rótulos são equivalentes. Confira o SDK, a revisão do chip e a faixa em tempo de execução antes de aplicar uma tensão. O exemplo do SF32LB55x usa um divisor de 1 MΩ / 220 kΩ com tempo de estabilização RC de 157 ms. A tabela consolidada do guia SF32LB56x indica 470 kΩ / 1000 kΩ e 200 ms para SF32LB52x, SF32LB56x e SF32LB58x; a tabela consolidada atual do guia SF32LB58x também inclui o SF32LB57x nessa mesma recomendação para divisores externos. Essa recomendação se aplica a redes divisoras externas e não substitui os limites específicos do canal dedicado de detecção da bateria do SF32LB57x. Confirme o caminho real na placa de destino e não a aplique diretamente ao canal dedicado `VBAT` / `VBATS`. Em particular, a rota dedicada `GPADC_CH7` do SF32LB52x já usa um divisor interno. Não acrescente outro divisor externo, a menos que o projeto da placa de destino exija isso. A tolerância dos resistores afeta a precisão; quando o projeto usar um divisor externo, calibre essa rede separadamente na produção.
 
 <div align="center"><em>Tabela: Rotas de detecção da tensão da bateria por família SF32</em></div>
 
@@ -166,7 +166,7 @@ A implementação de referência define `ADC_RATIO_ACCURATE` como 1000 e inicial
 
 ### Faixas de calibração do SF32LB55x { #sf32lb55x-calibration-ranges }
 
-O FAQ de ADC do OpenSiFli detalha o fluxo de calibração do SF32LB55x. Durante `sifli_adc_init`, a configuração de fábrica na Flash, identificada por `FACTORY_CFG_ID_ADC`, fornece as leituras de calibração armazenadas. `sifli_adc_calibration` calcula o `offset` e o `ratio` lineares a partir dessas leituras; as amostras seguintes usam o cálculo `sifli_adc_get_mv` correspondente à faixa selecionada.
+O FAQ de ADC do OpenSiFli detalha o fluxo de calibração do SF32LB55x. Durante `sifli_adc_init`, a configuração de fábrica na Flash, identificada por `FACTORY_CFG_ID_ADC`, fornece as leituras de calibração armazenadas. `sifli_adc_calibration` calcula o `offset` e o `ratio` lineares a partir dessas leituras; as amostras seguintes usam o cálculo `sifli_adc_get_mv` correspondente à faixa selecionada. O FAQ também cita a falta de calibração no 55x como possível causa de leituras imprecisas; confirme que a inicialização do SDK de destino lê e usa os parâmetros de calibração de fábrica.
 
 São documentadas duas faixas de calibração:
 

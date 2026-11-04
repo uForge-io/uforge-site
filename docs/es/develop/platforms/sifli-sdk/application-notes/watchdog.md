@@ -13,14 +13,14 @@ La documentación del SDK de SiFli trata el watchdog en dos niveles: el hardware
 <em>Tabla: Comportamiento del watchdog documentado para cada familia</em>
 
 | Familia | Comportamiento del watchdog según la HAL | Reloj indicado en la guía HAL |
-|---|---|
+|---|---|---|
 | SF32LB52x | La guía HAL describe watchdogs dedicados para HCPU y LCPU que pueden generar interrupciones o reiniciar su propio subsistema, además de un IWDT de sistema que reinicia el chip completo. | La descripción del contador usa un reloj de 32K; la guía no indica una opción de selección de reloj específica para 52x. |
 | SF32LB55x | WDT1 para HCPU y WDT2 para LCPU pueden generar interrupciones; su reinicio por hardware se limita al subsistema correspondiente. El IWDT de sistema no genera interrupciones, pero puede reiniciar el chip completo. | Seleccionable entre RC10K y 32K LXT. |
 | SF32LB56x / SF32LB58x | La guía HAL indica que WDT1/WDT2 incorporan la capacidad de reiniciar el chip completo. | Usan RC10K, no el reloj de bajo consumo de 32K. |
 </div>
 
 !!! warning "Ámbito de la guía de watchdog para RT-Thread"
-    La [guía de uso del watchdog](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/watchdog.html) se publica bajo la ruta `sf32lb52x`, pero su texto menciona explícitamente SF32LB55X. El tiempo predeterminado de 30 segundos, el refresco desde el hilo IDLE, el comportamiento durante la suspensión y la secuencia de reinicio de la aplicación que se describen abajo corresponden a la configuración 55x documentada allí; no son una garantía común a toda la familia SF32. Verifique estos detalles en la documentación y la configuración generada para el chip de destino.
+    La [guía de uso del watchdog](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/watchdog.html) se publica bajo la ruta `sf32lb52x`, pero su texto menciona explícitamente SF32LB55X. El tiempo predeterminado de 30 segundos, el refresco desde el hilo IDLE, el comportamiento durante la suspensión y el comportamiento de reinicio descrito abajo corresponden a la configuración 55x documentada allí; no son una garantía común a toda la familia SF32. Verifique estos detalles en la documentación y la configuración generada para el chip de destino.
 
 ## Activar y configurar el watchdog { #enable-and-configure-the-watchdog }
 
@@ -60,6 +60,8 @@ No añada un bucle de refresco incondicional que oculte una parada del planifica
 - HCPU usa el watchdog del sistema. Si vence el tiempo de espera, se reinicia todo el chip.
 - LCPU usa el watchdog del subsistema LCPU. Cuando vence el tiempo de espera, primero se genera una interrupción; después, el controlador de interrupción provoca un reinicio por software de todo el chip.
 
+La nota sobre watchdog de SiFli Wiki añade detalles del modo `Standby`: el bloque de hardware no se apaga; RT-Thread detiene el WDT y la ruta de reanudación lo inicializa de nuevo, reiniciando la cuenta. Por tanto, «desactivado» se refiere a una parada por software, no a que se corte la alimentación del bloque.
+
 ## Secuencia de validación { #validation-sequence }
 
 1. Registre la familia del chip, la revisión del SDK, el tiempo de espera, el responsable de refrescar el watchdog y el modo de suspensión.
@@ -74,5 +76,6 @@ No añada un bucle de refresco incondicional que oculte una parada del planifica
 - [Guía de uso del watchdog (en chino; misma ruta SF32LB52x, el texto identifica SF32LB55X)](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/watchdog.html)
 - [Guía HAL WDT de SF32LB52x (en inglés)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/hal/wdt.html)
 - [Guía HAL WDT de SF32LB55x (en chino; incluye notas comparativas de 56x/58x)](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/hal/wdt.html)
+- [OpenSiFli SiFli-Wiki: notas sobre el watchdog (en chino)](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/faq/mcu/wdt.md)
 
 No se han podido verificar estas rutas de notas de aplicación del watchdog específicas de cada familia: `sf32lb55x/app_note/watchdog.html`, `sf32lb56x/app_note/watchdog.html` y `sf32lb58x/app_note/watchdog.html`. Las búsquedas y los intentos de acceso directo no fueron concluyentes; eso no demuestra que las rutas devuelvan un error 404.

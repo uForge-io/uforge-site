@@ -297,7 +297,7 @@ Verwenden Sie das Referenzdesign als Grundlage für die Drehgeber-Tastenschaltun
 
 <div align="center"><em>Abbildung 5.5-5: Schaltung der mechanischen Drehgeber-Taste</em></div>
 
-Die A- und B-Signale des Drehgebers sind über 0-Ω-Widerstände mit PA35 und PA36 verbunden. Jedes Signal besitzt einen 200-kΩ-Pull-up nach VDD33_LDO2_VOUT und ESD-Schutz; C0703 und C0706 sind mit NF (nicht bestückt) gekennzeichnet. Die Signalnamen nennen auch multiplexierte USB-/UART-Funktionen. Prüfen Sie daher mögliche Pin-Konflikte, bevor Sie diese Zuordnung übernehmen.
+Die A- und B-Signale des Drehgebers sind über 0-Ω-Widerstände mit PA35 und PA36 verbunden. Jedes Signal besitzt einen 200-kΩ-Pull-up nach VDD33_LDO2_VOUT und ESD-Schutz; C0703 und C0708 sind mit NF (nicht bestückt) gekennzeichnet. Die Signalnamen nennen auch multiplexierte USB-/UART-Funktionen. Prüfen Sie daher mögliche Pin-Konflikte, bevor Sie diese Zuordnung übernehmen.
 
 **Häufige Fehler - Tasten**
 

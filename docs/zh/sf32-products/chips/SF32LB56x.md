@@ -41,7 +41,7 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 - DPI/RGB 显示接口支持
 - 通过 SDIO 连接外部 Wi-Fi；通过 SD/SDIO 或 eMMC 扩展外部存储
 - 通过 WBBGA175 获取更高 GPIO 数量
-- 同时承载 TinyML、音频与图形界面的更高并发余量
+- 为 TinyML、音频和 UI 并发处理留出更多余量
 
 ## 开发资源 { #development-resources }
 
@@ -89,8 +89,8 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 - 超低功耗 Arm Cortex-M33 STAR-MC1 处理器（LCPU），最高 96 MHz
 - HCPU 最高 370 DMIPS / 984 EEMBC CoreMark
 - LCPU 最高 148 DMIPS / 394 EEMBC CoreMark
-- HCPU 内存系统：32 KB I-cache + 16 KB D-cache，800 KB SRAM，其中包含 128 KB 保留 SRAM
-- LCPU 内存系统：16 KB I-cache + 8 KB D-cache，160 KB 保留 SRAM
+- HCPU 内存系统：32 KB I-cache + 16 KB D-cache，800 KB SRAM，其中包含 128 KB 保持型 SRAM
+- LCPU 内存系统：16 KB I-cache + 8 KB D-cache，160 KB 保持型 SRAM
 - 提供 512 KB 或 1 MB 封装内 QSPI-NOR 选项
 - 支持 QSPI-NOR、SPI-NAND、QPI/OPI-PSRAM、SD/SDIO 和 eMMC 外部存储
 
@@ -183,10 +183,12 @@ SF32LB56x 同时覆盖紧凑型 QFN68L 与高 I/O 的 WBBGA175 料号，并提�
 ## 常见问题 { #frequently-asked-questions }
 
 **SF32LB56x 的主要规格是什么？**
-SF32LB56x 配备应用 CPU（Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33 @48/96 MHz，用户可编程内核）和 960 KB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 2.0。封装：QFN68 / BGA175（7 × 7 mm (QFN), 6.5 × 6.1 mm (BGA)）。USB 2.0 FS。
+SF32LB56x 配备应用 CPU（Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33，最高 96 MHz，用户可编程内核）和 960 KB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 2.0。封装：QFN68L / WBBGA175（7 × 7 mm (QFN68L), 6.1 × 6.5 mm (WBBGA175)）。USB 2.0 FS。
+
+LCPU 的实际频率和应用任务支持情况取决于具体器件及受支持的 SDK 配置；96 MHz 是上限，并非默认频率。960 KB SRAM 由 HCPU 的 800 KB SRAM（含 128 KB 保持型 SRAM）和 LCPU 的 160 KB 保持型 SRAM 组成，不能视为一个连续内存池。请按目标 SKU 和 SDK 内存映射核算。
 
 **SF32LB56x 支持哪些显示接口？**
-SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB。各接口适用型号见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
+SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB。各接口适用型号见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。这是整个系列的接口汇总，并非每个订货型号或封装都支持全部接口；请查阅所链接的接口矩阵。
 
 **SF32LB56x 支持的最大显示分辨率是多少？**
 通过 BGA 封装提供的 DPI/RGB 接口，最高支持 1024 × 600、RGB888。详见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。

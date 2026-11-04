@@ -145,11 +145,11 @@ SiFli identifica como configuración estándar la combinación de SF32LB566VCB36
 
 - 1x DAC de audio de 24 bits
 - 1x ADC de audio Sigma-Delta de 24 bits
-- 2 interfaces PDM (PDM1/PDM2), cada una compatible con los canales izquierdo y derecho
+- 2 interfaces PDM (PDM1/PDM2); DS5602 V0.3 indica dos entradas para micrófono digital
 - 1 interfaz I2S
 - Conversión de tasa de muestreo de audio y aceleración de EQ
 
-Cada interfaz PDM puede conectar hasta dos micrófonos digitales, por lo que las dos interfaces admiten hasta cuatro en total. El número de interfaces PDM no equivale al número de micrófonos; la conectividad real depende de la multiplexación de pines y del diseño de la placa.
+La figura de asignación recomendada ofrece estas opciones: PDM1_DATA en PA20 o PA64, PDM1_CLK en PA24 o PA69, PDM2_DATA en PA25 o PA71 y PDM2_CLK en PA26 o PA73. Son alternativas de multiplexación de pines, no una confirmación del trazado de la placa portadora. DS5602 V0.3 no confirma el uso compartido de canales ni una configuración de cuatro micrófonos. Antes de diseñar un sistema con varios micrófonos, verifique el modo admitido y el trazado real de la placa.
 
 ### Alimentación y E/S { #power-and-io }
 

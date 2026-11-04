@@ -72,7 +72,7 @@ Der Downstream-Baum enthält SF32LB-bezogene Treiber, Bindings oder board-spezif
 - Bluetooth-HCI-Mailbox und BAP-Broadcast-Sink-Konfiguration.
 - Audio-Codec, DMA, CRC, Kryptografie, Entropie, OTP/eFuse, Spannungsregler, Reset und Temperatursensor.
 
-Das Vorhandensein im Baum bedeutet nicht, dass jedes Produktszenario produktionsreif ist. Validieren Sie die genaue Kombination aus Beispiel und Treiber auf dem Ziel-Board.
+Das Vorhandensein im Baum bedeutet weder, dass ein Treiber für das Board-Target aktiviert ist, noch dass jedes Produktszenario produktionsreif ist. Validieren Sie auf dem Ziel-Board die genaue Kombination aus Beispiel, Treiber und Board-Konfiguration.
 
 ## Integrationsreihenfolge { #integration-sequence }
 

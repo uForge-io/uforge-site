@@ -26,7 +26,7 @@ This section introduces the conventions used to describe μForge module interfac
 
 ## Naming Versus Electrical Compatibility { #what-is-stable-and-what-must-be-verified }
 
-Use the naming rules consistently in module descriptions, schematics, BOM notes, and product documentation. They describe the intended interface profile, not a finalized electrical or mechanical specification. Neither a profile name nor a matching connector form establishes interchangeability between a module and a carrier board.
+Use the naming rules consistently in module descriptions, schematics, BOM notes, and product documentation. They describe the intended interface profile, not a finalized electrical or mechanical specification. Neither the `M2` label nor a matching connector form establishes conformance with PCI-SIG M.2 E-key or interchangeability between a module and a carrier board.
 
 The pin-level definition is not a promise that every μForge module or SF32 package supports every assigned signal, interface, or simultaneous-use combination. Before a design commitment, verify all of the following against the exact selected module, chip, package, and hardware design guide:
 

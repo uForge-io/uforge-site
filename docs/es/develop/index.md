@@ -18,7 +18,7 @@ Para la primera ejecución de la placa, consulte [Primeros pasos](../getting-sta
 
 ## Establecer una base de SiFli-SDK { #establish-a-sifli-sdk-baseline }
 
-[SiFli-SDK](platforms/sifli-sdk/overview.md) es el paquete oficial de SiFli basado en RT-Thread y la ruta de referencia para desarrollar firmware SF32. Empiece por aquí, salvo que tenga un motivo concreto para evaluar otro ecosistema: ofrece la cobertura documental más amplia para placas, Bluetooth, gráficos, audio, almacenamiento, gestión de energía y desarrollo para producción.
+[SiFli-SDK](platforms/sifli-sdk/overview.md) es el paquete oficial de SiFli basado en RT-Thread y la ruta de referencia para desarrollar firmware SF32. Empiece por aquí, salvo que tenga un motivo concreto para evaluar otro ecosistema: su documentación ofrece orientación sobre soporte de placas, Bluetooth, gráficos, audio, almacenamiento, gestión de energía y desarrollo para producción.
 
 Antes de implementar funciones del producto, establezca y registre una base reproducible:
 

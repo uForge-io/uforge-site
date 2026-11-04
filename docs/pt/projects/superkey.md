@@ -179,7 +179,7 @@ Classifique as falhas em cinco domínios: hardware e displays do dispositivo; en
 |:------|:-------|:-----------------------|
 | Aplicativo complementar ausente | Feche o SuperKeyHub e reinicie o dispositivo | A interface local e o HID continuam funcionando; os valores dependentes do aplicativo aparecem claramente como desatualizados ou indisponíveis |
 | Perda de CDC | Desconecte e reconecte o USB ou troque de porta durante o envio de dados | O dispositivo não trava; a consulta de versão e o envio de dados voltam a funcionar após a reconexão |
-| Suspensão do computador | Habilite `power_mode sleep/normal` e execute um ciclo de suspensão e retomada do computador | LCDs, LEDs, retroiluminação e sensores param/retomam conforme esperado, e os dados voltam a ser atualizados |
+| Suspensão do computador | Ative no SuperKeyHub o acompanhamento da suspensão do sistema e execute um ciclo de suspensão e retomada do computador | LCDs, LEDs, retroiluminação e sensores param/retomam conforme esperado, e os dados voltam a ser atualizados |
 | Incompatibilidade de versões | Em um ambiente controlado, teste uma combinação incompatível de aplicativo e firmware | A combinação é rejeitada ou apresenta um erro diagnosticável, sem aplicar uma atualização incompatível |
 | Falha da API | Use uma configuração de clima inválida ou desconecte a rede | A falha do clima não afeta HID, CDC, a interface local nem a recuperação |
 | Interrupção do DFU | Interrompa uma atualização em uma unidade de teste recuperável | O caminho cabeado de gravação mantido disponível restaura a imagem conhecida |

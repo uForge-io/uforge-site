@@ -9,11 +9,11 @@ Im August haben wir μForge.io entlang dreier Schritte ausgebaut, die ein Produk
 
 ### Klarere Entscheidungen vor dem Schaltplan { #clearer-choices-before-the-schematic }
 
-Der [SF32-Produktselektor](../../sf32-products/product-selector.md) und die Familienseiten helfen dabei, Anforderungen an Speicher, Gehäuse, I/O, Energie, Display und Audio in eine praxistaugliche Vorauswahl zu überführen. Sie ersetzen nicht die Datenblätter, bieten aber einen besseren Ausgangspunkt, bevor Designannahmen in einen Schaltplan einfließen.
+Der [SF32-Produktselektor](../../sf32-products/product-selector.md) und die Familienseiten helfen dabei, Anforderungen an Speicher, Gehäuse, I/O, Energieversorgung, Display und Audio in eine praxistaugliche Vorauswahl zu überführen. Sie ersetzen nicht die Datenblätter, bieten aber einen besseren Ausgangspunkt, bevor Designannahmen in einen Schaltplan einfließen.
 
 ### Nützlichere Wege in die Umsetzung { #more-useful-paths-into-implementation }
 
-Die Bibliothek [Projekte](../../projects/index.md) bündelt reproduzierbare Ausgangspunkte für reale Produktklassen. Jedes Projekt soll mehr sein als eine Demo: Es bietet eine Hardware- und Software-Referenzkonfiguration, die Sie untersuchen und anpassen können und mit der Sie den Aufwand für Ihr eigenes Design abschätzen können.
+Die [Projektbibliothek](../../projects/index.md) bündelt reproduzierbare Ausgangspunkte für konkrete Produktkategorien. Jedes Projekt soll mehr sein als eine Demo: Es bietet eine Hardware- und Software-Referenzkonfiguration, die Sie untersuchen und anpassen können und mit der Sie den Aufwand für Ihr eigenes Design abschätzen können.
 
 Hardware-Design-Leitfäden, Checklisten und der Bereich „Lernen“ unterstützen die nächsten Schritte. Sie behandeln Randbedingungen auf Platinenebene, messbasierte Energieanalyse sowie lauffähige Beispiele für Audio, Grafik, USB, Bluetooth und Energiesparen.
 

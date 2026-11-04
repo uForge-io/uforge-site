@@ -12,7 +12,7 @@ tags:
 
 ## O que é o Radiation Monitor? { #what-is-radiation-monitor }
 
-[SiFliSparks/RadiationMonitor](https://github.com/SiFliSparks/RadiationMonitor) é um visualizador portátil da intensidade do sinal na banda Bluetooth, baseado no SF32LB52 e no SiFli-SDK. O firmware percorre 79 pontos de frequência entre 2402 e 2480 MHz e exibe os níveis recebidos em um gráfico de barras LVGL. A tecla KEY2 inicia ou interrompe a varredura e permite consultar o histórico armazenado.
+[SiFliSparks/RadiationMonitor](https://github.com/SiFliSparks/RadiationMonitor) é um visualizador portátil da intensidade do sinal na banda Bluetooth, baseado no SF32LB52 e no SiFli-SDK. O firmware percorre 79 pontos de frequência entre 2402 e 2480 MHz e exibe os valores do indicador de intensidade do sinal recebido (RSSI) em um gráfico de barras LVGL. A tecla KEY2 inicia ou interrompe a varredura e permite consultar o histórico armazenado.
 
 O projeto permite estudar a varredura da banda Bluetooth, o processamento de dados em tempo real, a visualização por frequência e a interação com um único botão. Não é um analisador de espectro calibrado nem identifica a origem do sinal recebido. Transmissões próximas em 2,4 GHz e as condições de medição podem afetar o gráfico. Sem calibração e comparação em condições controladas, os valores não devem ser usados em medições regulatórias, de certificação ou de RF de precisão.
 
@@ -46,7 +46,7 @@ Antes de começar, tenha à disposição:
 | Área | Base de referência fixada | Evidências necessárias antes da adaptação |
 |:-----|:------------------------|:------------------------------------|
 | Varredura de frequência | 79 pontos entre 2402 e 2480 MHz | Commit do firmware, revisões do SDK e da placa e log completo da varredura |
-| Processamento | A descrição do módulo no README diz que se calcula a média das dez varreduras anteriores; o resumo menciona 30. O README não informa se a média é feita sobre valores de potência linear ou dBm | Revisão do código fixado, escala e profundidade da média, resultados brutos e suavizados e comparação com uma fonte estável |
+| Processamento | Consulte o aviso abaixo sobre as informações conflitantes do README | Revisão do código fixado, escala e profundidade da média, resultados brutos e suavizados e comparação com uma fonte estável |
 | Histórico | Buffer circular com dez registros | Registro dos testes de interrupção, navegação, retorno circular e reinício |
 | Interface | Gráfico de barras LVGL com eixo Y nominal de -110 a -20 dBm | Captura de tela e conferência da correspondência entre rótulos e índices do vetor |
 | Limites da medição | Não há calibração rastreável nem incerteza informada | Registro do instrumento de referência, do arranjo de teste e do erro de medição, ou indicação explícita de que o produto exibe apenas tendências relativas |
@@ -93,7 +93,7 @@ Use o commit fixado [`670cf20`](https://github.com/SiFliSparks/RadiationMonitor/
 |:--------|:----------------|:--------------|
 | Placa | Comece pelo argumento SCons `sf32lb52-lchspi-ulp`, confira a configuração do projeto e registre a PCB utilizada | O diretório de saída `build_sf32lb52-lchspi-ulp_hcpu` do README prova que os caminhos de antena e display de todas as placas SF32LB52x são equivalentes |
 | SDK | Registre o commit do SiFli-SDK com o qual a compilação funciona | Não presuma que a versão mais recente do SDK mantém o comportamento de varredura Bluetooth do projeto |
-| Suavização | Resolva com o código fixado a divergência do README entre 30 varreduras e a média das dez varreduras anteriores; confirme se a média usa valores de potência linear ou dBm e determine sua profundidade | A descrição do módulo menciona dez varreduras; o resumo menciona 30, e nenhuma das duas especifica a escala da média |
+| Suavização | Consulte o aviso abaixo; determine a escala e a profundidade da média no código fixado e confirme o comportamento no dispositivo | As descrições do README não comprovam o comportamento do código fixado |
 | Temporização | O README informa intervalo de atualização dos dados de 30 ms; meça o tempo da varredura completa dos 79 pontos | 30 ms é um período garantido de atualização completa dos 79 pontos |
 | Licenciamento | Antes de reutilizar ou distribuir, confirme as licenças do repositório e do código incorporado | A disponibilidade pública do código concede automaticamente direitos para distribuí-lo em um produto |
 
@@ -160,7 +160,7 @@ Os principais domínios de falha são a entrada de RF/antena, o comportamento da
 
 | Teste | Método | Evidência de aprovação |
 |:-----|:-------|:--------------|
-| Algoritmo e profundidade da suavização | Registre os valores brutos e `rssi_res` para uma frequência; compare-os com o commit fixado e resolva a divergência do README | A escala e a profundidade da média correspondem à revisão exata do código e foram confirmadas no dispositivo |
+| Algoritmo e profundidade da suavização | Registre os valores brutos e `rssi_res` de uma frequência e compare-os com o código fixado | A escala e a profundidade da média correspondem à revisão exata do código e foram confirmadas no dispositivo |
 | Início/parada | Durante a varredura, pressione KEY2 brevemente para interrompê-la e depois retome | O histórico é mantido durante a interrupção; a retomada ocorre sem travar o dispositivo |
 | Histórico | Com a varredura interrompida, mantenha KEY2 pressionada por mais tempo, repetindo a ação | É possível percorrer até dez registros em ordem inversa, com retorno circular correto |
 | Histórico vazio | Interrompa a varredura ou mantenha KEY2 pressionada antes de acumular um histórico válido | Não há acesso fora dos limites nem falha; a interface indica claramente que não há dados |

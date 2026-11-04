@@ -15,6 +15,8 @@ tags:
 !!! note "Teil des SF32LB52x Hardware-Design-Leitfadens"
     Diese Seite enthält die Schaltplan-Checkliste aus Abschnitt 5.8. Zurück zu [Minimalsystem, Stromversorgung und Takt](SF32LB52x_schematic_design.md), der ersten der drei Seiten zu den Schaltplan-Designrichtlinien.
 
+Als Quelle für diese Seite wurde SiFlis *SF32LB52 Schematic&PCB Checklist*, V1.0 (2026-01-21), geprüft. Ein Abgleich mit einer späteren Online-Version wurde nicht vorgenommen.
+
 ## 5.8. Schaltplan-Checkliste { #58-schematic-checklist }
 
 Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt für“ nennt die Stromversorgungsvariante oder Siliziumrevision des SF32LB52x, für die ein Prüfpunkt gilt, wenn er nicht alle Varianten betrifft.
@@ -29,7 +31,7 @@ Jede Tabelle behandelt einen Funktionsblock des Schaltplans. Die Spalte „Gilt 
 
 | Nr. | Prüfpunkt | Gilt für | Kategorie |
 |:---|:---|:---|:---|
-| 1 | Das Gehäuse der ausgewählten Teilenummer ist korrekt, einschließlich Pin-Namen und Pin-Nummern | Alle Varianten | Erforderlich |
+| 1 | Gehäuse, Pinnamen und Pinnummern stimmen mit der ausgewählten Teilenummer überein | Alle Varianten | Erforderlich |
 
 </div>
 

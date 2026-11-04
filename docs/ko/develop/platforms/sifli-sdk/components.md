@@ -48,6 +48,8 @@ sdk.py sf-pkg upload --name <package_name>/<version>@<username>
 
 정확한 워크플로는 SDK 릴리스에 따라 다를 수 있습니다. 설정, 인증, 버전별 세부 사항은 SiFli의 [패키지 통합 가이드(중국어)](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/sf_pkg/use.html), [패키지 생성 및 게시 가이드(영어)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/sf_pkg/create.html), [중국어판](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/sf_pkg/create.html)을 참조하십시오.
 
+[SDK 문서 홈](https://docs.sifli.com/)에서 대상 칩 제품군과 현재 체크아웃한 SDK 릴리스에 맞는 패키지 통합 및 생성 항목을 찾으십시오. 위의 제품군별 링크는 예시이며 지원 여부를 정리한 표가 아닙니다. 예제를 복사하기 전에 해당 릴리스의 명령과 의존성을 확인하십시오.
+
 ## 컴포넌트 품질 기준 { #component-quality-bar }
 
 컴포넌트는 다음 조건을 갖추었을 때 공유할 준비가 된 것입니다.

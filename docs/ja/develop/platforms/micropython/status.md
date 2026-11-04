@@ -8,7 +8,7 @@ tags:
 
 # MicroPythonの状況 { #micropython-status }
 
-確認したSiFliのドキュメントおよびOpenSiFliリポジトリーでは、SF32公式のMicroPythonポート、ファームウェアイメージ、ボード固有の書き込み手順は見つかっていません。
+2026年11月4日時点で、確認したSiFliのドキュメントおよびOpenSiFliリポジトリーでは、SF32公式のMicroPythonポート、ファームウェアイメージ、ボード固有の書き込み手順は見つかっていません。
 
 今回の確認対象は、[OpenSiFliの公開GitHubリポジトリー](https://github.com/OpenSiFli/)と[SiFliの公式ドキュメント](https://docs.sifli.com/)です。
 
@@ -60,3 +60,6 @@ while True:
 ## 重要な理由 { #why-this-matters }
 
 「MicroPythonイメージをダウンロードする」という曖昧な指示だけでは、開発者はそのままでは作業を進められません。正確なイメージ、対応ボード、書き込みツール、REPL設定、復旧手段が必要です。これらがなければ、MicroPythonのページは役に立つどころか、サポート負荷を増やすだけです。
+
+!!! note "自動生成コンテンツ"
+    本ページは専用の原資料がない状態で作成されています。技術情報を利用する前に、SiFliの公式ドキュメントと照合してください。

@@ -355,7 +355,7 @@ A escolha da interface de display depende do encapsulamento. A documentação da
 | D0 | PA40 | PA40 | Linha de dados 2 no modo Quad-SPI. |
 | D1 | PA41 | PA41 | Linha de dados 3 no modo Quad-SPI. |
 | REST | PA05 | PB04 | Sinal de reset do painel do display. |
-| TE | PA33 | PA33 | Sinal de tearing effect (TE) de sincronização de quadros para o MCU. |
+| TE | PA33 | PA33 | Sinal TE (Tearing Effect) para sincronização de quadros com o MCU. |
 
 </div>
 
@@ -401,7 +401,7 @@ A escolha da interface de display depende do encapsulamento. A documentação da
 | D[0] | PA40 | Linha de dados 2 no modo Quad-SPI. |
 | D[1] | PA41 | Linha de dados 3 no modo Quad-SPI. |
 | REST | PA43 | Sinal de reset do display. |
-| TE | PA33 | Sinal de tearing effect (TE) de sincronização de quadros para o MCU. |
+| TE | PA33 | Sinal TE (Tearing Effect) para sincronização de quadros com o MCU. |
 
 </div>
 
@@ -414,7 +414,7 @@ A escolha da interface de display depende do encapsulamento. A documentação da
 | CSX | PA36 | Seleção do chip. |
 | WRX | PA37 | Sinal de strobe de escrita dos dados. |
 | DCX | PA39 | Seleção de dados/comando do display. |
-| RDX | PA38 | Sinal de strobe de leitura para gravar dados. |
+| RDX | PA38 | Sinal de leitura (strobe RDX); consulte o aviso abaixo. |
 | D[0] | PA40 | Bit de dados 0. |
 | D[1] | PA41 | Bit de dados 1. |
 | D[2] | PA28 | Bit de dados 2. |
@@ -424,9 +424,12 @@ A escolha da interface de display depende do encapsulamento. A documentação da
 | D[6] | PA32 | Bit de dados 6. |
 | D[7] | PA34 | Bit de dados 7. |
 | REST | PA43 | Reset. |
-| TE | PA33 | Sinal de tearing effect (TE) de sincronização de quadros para o MCU. |
+| TE | PA33 | Sinal TE (Tearing Effect) para sincronização de quadros com o MCU. |
 
 </div>
+
+!!! warning "Verifique a descrição de RDX na interface MCU8080 do SF32LB56xV"
+    A tabela de pinos da SiFli descreve RDX como um sinal de leitura "para gravar dados", enquanto a visão geral da interface MCU/8080 da SiFli diz que a comutação de RDX lê dados. As descrições são contraditórias; confirme o funcionamento previsto na documentação do controlador de display utilizado antes de atribuir esse sinal.
 
 <div align="center"><em>Tabela 5.5-7: Interface de display DPI do SF32LB56xV</em></div>
 

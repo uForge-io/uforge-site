@@ -151,7 +151,7 @@ The same scenario can be negligible or dominant depending on how the product is 
 
 | Scenario | Occurrences per Day | Duration per Occurrence | Total Duration per Day | Share of Daily Charge | Modelling Status |
 |:---------|--------------------:|------------------------:|-----------------------:|----------------------:|:----------------|
-| Baseline standby | 1 | Remaining seconds of the day (`=G7`) | 52,425.7 s | 11.69% | Enabled |
+| Baseline standby | 1 | Remaining seconds of the day | 52,425.7 s | 11.69% | Enabled |
 | Message notification | 100 | 5 s | 500 s | 22.62% | Enabled |
 | Incoming-call alert | 10 | 10 s | 100 s | 4.52% | Enabled |
 | Raise-to-wake | 200 | 5 s | 1,000 s | 27.72% | Enabled |
@@ -169,6 +169,8 @@ The same scenario can be negligible or dominant depending on how the product is 
 </div>
 
 The blank scenario cells in the source matrix are intentional: each named scenario is followed by its display, haptic-motor, and `Other` component-load rows. Those rows inherit the daily occurrence and duration from the scenario row above, so the source names each scenario only once.
+
+The daily-duration calculation assumes that enabled scenarios occupy separate, non-overlapping intervals. The workbook subtracts the included scenario durations from the total seconds in a 24-hour day and assigns the remaining time to baseline standby. It sums each scenario's full component loads independently; it does not merge concurrent scenes. If product events overlap, this can count shared loads more than once and subtract overlapping time from standby more than once. For realistic overlap, model a combined scene with its concurrent component currents, or reconcile shared loads and unique active time before summing. The second AOD scenario is not included in this standby calculation. Both AOD scenarios are zero in this baseline. Before enabling either, verify that the standby-duration calculation accounts for every active scene.
 
 <div align="center"><em>Table: Calculated Daily-Use Result</em></div>
 

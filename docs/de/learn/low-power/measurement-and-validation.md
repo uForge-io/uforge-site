@@ -150,7 +150,7 @@ Weichen Messung und Modell voneinander ab, verändern Sie die Tabelle nicht einf
 | Messwert einer Komponente liegt über der Erwartung | Falscher Betriebsmodus, Leckstrom auf der Versorgungsschiene, Reglerverluste oder zusätzliche Last durch den Prüfaufbau | Versorgungsschiene isolieren sowie Moduspins, Spannung und Bestückung der Platine prüfen. |
 | Szenarioenergie übersteigt die Summe der Komponentenwerte | Zusätzliche Aufwachvorgänge, zu lange Display- oder Funkaktivität, Hintergrundverarbeitung oder überlappende Lasten | Firmware-Marker ergänzen und die Zustände der Komponenten während des gesamten Szenarios vergleichen. |
 | Tagesprofil übersteigt die Summe der Szenarien | Nutzungshäufigkeit, Leerlaufzeit bei bestehender Verbindung, deaktivierte Funktion oder Hintergrundaufgabe falsch angesetzt | Ereigniszahlen, Timer, Funkzeitplan und angenommene verbleibende Bereitschaftszeit überprüfen. |
-| Modell und Messung stimmen nur bei einer Konfiguration überein | Abweichende Spannung, Temperatur, Funkumgebung, Akkuzustand oder Firmware-Version | Dieselben Szenarien über den gesamten vorgesehenen Betriebsbereich erneut messen. |
+| Modell und Messung stimmen nur bei einer Konfiguration überein | Abweichende Spannung, Temperatur, Funkumgebung, Akkuzustand oder Firmware-Version | Dieselben Szenarien unter allen relevanten Bedingungen des vorgesehenen Betriebsbereichs erneut messen. |
 
 </div>
 

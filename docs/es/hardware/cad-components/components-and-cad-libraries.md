@@ -9,7 +9,7 @@ tags:
 
 # Componentes y bibliotecas CAD { #components-and-cad-libraries }
 
-Use esta página cuando un dispositivo o módulo SF32 seleccionado pase de la decisión de arquitectura a una gestión controlada de la BOM y del diseño de PCB. Los dos recursos siguientes cumplen funciones distintas: la **Lista de proveedores aprobados (AVL)** ayuda a elegir componentes cualificados por SiFli, mientras que las **Bibliotecas de herramientas EDA** proporcionan los símbolos, las huellas y los datos de proyectos de referencia necesarios para implementar correctamente el hardware elegido.
+Use esta página cuando un dispositivo o módulo SF32 seleccionado pase de la decisión de arquitectura a una gestión controlada de la BOM y del diseño de PCB. Los dos recursos siguientes cumplen funciones distintas: la **Lista de proveedores aprobados (AVL)** ayuda a elegir componentes cualificados por SiFli, mientras que las **Bibliotecas de herramientas EDA** proporcionan símbolos esquemáticos y huellas de PCB oficiales como punto de partida para implementar el hardware elegido.
 
 Ninguno de estos recursos sustituye la guía de diseño de hardware específica del dispositivo, el plano del encapsulado ni la validación final en una placa destinada a producción.
 
@@ -22,7 +22,7 @@ Ninguno de estos recursos sustituye la guía de diseño de hardware específica 
 | Recurso | Uso | No sustituye a |
 |:--------|:----|:---------------|
 | [Lista de proveedores aprobados para SF32](sifli-approved-vendor-list.md) | Seleccionar cristales, inductores, Flash y otros componentes compatibles ya cualificados; comprobar restricciones eléctricas y de identificación por firmware. | Aprobación final de componentes, cualificación de la cadena de suministro o validación eléctrica del producto. |
-| [Bibliotecas de herramientas EDA](eda-tool-libraries.md) | Obtener símbolos esquemáticos, huellas de PCB, planos de encapsulado y recursos de diseños de referencia como punto de partida en las herramientas EDA compatibles. | Verificación de la referencia exacta del componente disponible para pedido, las definiciones de pad stack, el proceso de montaje o la documentación vigente del dispositivo. |
+| [Bibliotecas de herramientas EDA](eda-tool-libraries.md) | Obtener símbolos esquemáticos y huellas de PCB oficiales como datos iniciales en las herramientas EDA compatibles. | Verificación de la referencia exacta del componente disponible para pedido, las definiciones de pad stack, el proceso de montaje o la documentación vigente del dispositivo. |
 
 </div>
 

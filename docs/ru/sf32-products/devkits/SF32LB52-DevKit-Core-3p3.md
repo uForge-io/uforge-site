@@ -1,6 +1,6 @@
 ---
 icon: lucide/circuit-board
-description: "SF32LB52-DevKit-Core-3p3: компактная плата SF32LB52x, питание MCU 1,8 или 3,3 В перемычкой и прямой доступ к GPIO, дисплею, аудио, USB и линиям питания."
+description: "SF32LB52-DevKit-Core-3p3: компактная плата SF32LB52x, питание MCU 1,8 или 3,3 V перемычкой и прямой доступ к GPIO, дисплею, аудио, USB и линиям питания."
 tags:
     - Аппаратное обеспечение
     - Отладочная плата
@@ -53,6 +53,7 @@ SF32LB52-DevKit-Core-3p3 — компактная плата для оценки
 - 16-контактный разъём FPC для дисплея с шагом 0,5 mm; интерфейсы дисплея поддерживают SPI, DSPI и Quad-SPI, включая QSPI в режиме DDR
 - Сигналы I2C для сенсорной панели
 - Выводы аналогового микрофона и дифференциального аудиовыхода
+- Вход цифрового микрофона PDM
 - Один пользовательский светодиод
 - Кнопка питания и функциональная кнопка
 - Контрольные точки для измерения тока отдельной линии питания; SiFli также описывает измерение потребления MCU, минимальной системы и всей платы
@@ -84,6 +85,8 @@ SF32LB52-DevKit-Core-3p3 — компактная плата для оценки
 При подключённом USB Type-C выбранные контакты разъёма также могут выдавать 3,3 V, 1,8 V и 5 V. Перед подключением внешних схем проверьте требуемое направление питания.
 
 На плате установлен выключатель питания. Сигнал RTS# микросхемы CH340N может управлять разрешением работы платы, позволяя хост-инструменту сбрасывать MCU при загрузке прошивки или отладке.
+
+При питании через USB Type-C установленный на плате LDO преобразует 5 V VBUS в 3,3 V.
 
 ## Загрузка прошивки и отладка { #download-and-debug }
 
@@ -168,6 +171,39 @@ SF32LB52-DevKit-Core-3p3 — компактная плата для оценки
 
 </div>
 
+<div align="center"><em>Таблица: функции контактов J1 и подтяжки после сброса</em></div>
+
+<div align="center" markdown>
+
+| Контакт | Имя контакта | Функция по умолчанию после сброса и функции мультиплексирования | Подтяжка |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | Земля |  |
+| 2 | PA_44 | **PA44**, UART, I2C, GPTIM, WKUP20 | PD |
+| 3 | PA_43 | **PA43**, UART, I2C, GPTIM, WKUP19 | PD |
+| 4 | PA_42 | **PA42**, UART, I2C, GPTIM, WKUP18 | PU |
+| 5 | PA_41 | **PA41**, UART, I2C, GPTIM, WKUP17 | PU |
+| 6 | PA_40 | **PA40**, UART, I2C, GPTIM, SPI2_CS, WKUP16 | PU |
+| 7 | PA_39 | **PA39**, UART, I2C, GPTIM, SPI2_CLK, WKUP15 | PU |
+| 8 | PA_38 | **PA38**, UART, I2C, GPTIM, SPI2_DI, WKUP14 | PD |
+| 9 | PA_37 | **PA37**, UART, I2C, GPTIM, SPI2_DIO, WKUP13 | PD |
+| 10 | PA_36 | **PA36**, UART, I2C, GPTIM, USB_DM, WKUP12 | PD |
+| 11 | PA_35 | **PA35**, UART, I2C, GPTIM, USB_DP, WKUP11 | PD |
+| 12 | PA_31 | **PA31**, UART, I2C, GPTIM, GPADC3 | PD |
+| 13 | PA_30 | **PA30**, UART, I2C, GPTIM, I2S1_LRCK, GPADC2 | PD |
+| 14 | PA_29 | **PA29**, UART, I2C, GPTIM, SPI1_CS, I2S1_BCK, GPADC1 | PD |
+| 15 | PA_28 | **PA28**, UART, I2C, GPTIM, SPI1_CLK, I2S1_SDI, GPADC0 | PD |
+| 16 | GND | Земля |  |
+| 17 | 3.3V | Вход 3,3 V при отключённом USB Type-C; выход при подключённом |  |
+| 18 | PA_27 | **PA27**, UART, I2C, GPTIM, WKUP3 | PU |
+| 19 | PA_26 | **PA26**, UART, I2C, GPTIM, WKUP2 | PU |
+| 20 | PA_25 | **PA25**, UART, I2C, GPTIM, SPI1_DI, I2S1_SDO, WKUP1 | PD |
+| 21 | PA_24 | **PA24**, UART, I2C, GPTIM, SPI1_DIO, I2S1_MCLK, WKUP0 | PD |
+| 22 | PA_34 | **PA34**, UART, I2C, GPTIM, GPADC6, WKUP10 | PD |
+| 23 | PA_33 | **PA33**, UART, I2C, GPTIM, GPADC5 | PD |
+| 24 | PA_32 | **PA32**, UART, I2C, GPTIM, GPADC4 | PD |
+
+</div>
+
 ### Разъём LCD, аудио и отладки { #lcd-audio-and-debug-header }
 
 <div align="center"><em>Назначение контактов разъёма LCD, аудио и отладки</em></div>
@@ -186,9 +222,44 @@ SF32LB52-DevKit-Core-3p3 — компактная плата для оценки
 
 </div>
 
+<div align="center"><em>Таблица: функции контактов J2 и подтяжки после сброса</em></div>
+
+<div align="center" markdown>
+
+| Контакт | Имя контакта | Функция по умолчанию после сброса и функции мультиплексирования | Подтяжка |
+| :--- | :--- | :--- | :--- |
+| 1 | GND | Земля |  |
+| 2 | PA_00 | **PA00**, UART, I2C, GPTIM, LCD_RST | PD |
+| 3 | PA_01 | **PA01**, UART, I2C, GPTIM, BL_PWM | PD |
+| 4 | PA_02 | **PA02**, UART, I2C, GPTIM, LCD_TE, I2S1_MCLK | PD |
+| 5 | PA_03 | **PA03**, UART, I2C, GPTIM, LCD_CS, I2S1_SDO | PU |
+| 6 | PA_04 | **PA04**, UART, I2C, GPTIM, LCD_CLK, I2S1_SDI | PD |
+| 7 | PA_05 | **PA05**, UART, I2C, GPTIM, LCD_D0, I2S1_BCK | PD |
+| 8 | PA_06 | **PA06**, UART, I2C, GPTIM, LCD_D1, I2S1_LRCK | PD |
+| 9 | PA_07 | **PA07**, UART, I2C, GPTIM, LCD_D2, PDM1_CLK | PD |
+| 10 | PA_08 | **PA08**, UART, I2C, GPTIM, LCD_D3, PDM1_DAT | PD |
+| 11 | PA_09 | **PA09**, UART, I2C, GPTIM, CTP_INT | PD |
+| 12 | MIC_ADC | Аналоговый вход микрофона |  |
+| 13 | MIC_BIAS | Смещение микрофона |  |
+| 14 | DACP | Аналоговый аудиовыход |  |
+| 15 | DACN | Аналоговый аудиовыход |  |
+| 16 | GND | Земля |  |
+| 17 | 1.8V | Питание 1,8 V; вход при отключённом USB Type-C, выход при подключённом |  |
+| 18 | PA_10 | **PA10**, UART, I2C, GPTIM, CTP_RST | PD |
+| 19 | PA_11 | **PA11**, UART, I2C, GPTIM, CTP_SDA | PU |
+| 20 | PA_20 | **PA20**, UART, I2C, GPTIM, CTP_SCL | PD |
+| 21 | PA_21 | **PA21**, UART, I2C, GPTIM | PD |
+| 22 | PA_18 | **UART0_RXD**, порт загрузки/отладки, PA18, SWDIO, I2C, GPTIM | PU |
+| 23 | PA_19 | **UART0_TXD**, порт загрузки/отладки, PA19, SWCLK, I2C, GPTIM | Нет |
+| 24 | 5V | Питание 5 V; вход при отключённом USB Type-C, выход при подключённом |  |
+
+</div>
+
 ## Контакты внешней флеш-памяти и SDIO { #external-flash-and-sdio-pins }
 
 Некоторые варианты оснащены внешней QSPI-NOR Flash объёмом 16 MB. Группа контактов, общая для памяти и SDIO:
+
+В исходном руководстве платы также перечислены варианты корпуса для внешней Flash; фактическая установка зависит от варианта платы и BOM: SPI NOR Flash в корпусе WSON8-8x6mm или WSON8-6x5mm, SPI NAND Flash в WSON8-8x6mm и SD NAND Flash в WSON8-8x6mm.
 
 <div align="center"><em>Группа контактов внешней флеш-памяти и SDIO</em></div>
 
@@ -210,6 +281,8 @@ SF32LB52-DevKit-Core-3p3 — компактная плата для оценки
 ## Подключение аудио { #audio-expansion }
 
 На плату выведены аналоговое смещение и вход микрофона, а также дифференциальный выход DAC. Микрофон и усилитель Class-AB/D для динамика подключаются отдельно; выбирайте их с учётом требуемого аудиотракта.
+
+Плата также поддерживает вход цифрового микрофона PDM: PA07 мультиплексируется с `PDM1_CLK`, а PA08 — с `PDM1_DAT`.
 
 ## Целевые конфигурации сборки SDK { #sdk-build-targets }
 

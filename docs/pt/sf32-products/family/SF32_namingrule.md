@@ -13,7 +13,7 @@ tags:
 ### Número de peça: ***SF32LB5xyZxYx6*** { #part-number-sf32lb5xyzxyx6 }
 
 !!! note "Nota sobre a sintaxe"
-    * ***x*** minúsculo representa um algarismo.
+    * ***x*** minúsculo representa um código numérico no padrão genérico; posições de memória publicadas também podem usar códigos específicos da família, como **N**.
     * ***Y*** ou ***Z*** maiúsculos representam uma letra.
     * No SF32LB57x, a posição da subsérie (**y**) é um algarismo nas peças alimentadas por bateria e uma letra nas peças com alimentação de 3,3 V.
 
@@ -40,7 +40,7 @@ tags:
 - **xYx** — configuração da memória integrada (Flash QSPI-NOR e PSRAM)
   *(Nota: o mapeamento exato da codificação depende do encapsulamento e da família específica do dispositivo.)*
 
-`ZxYx6` é um padrão geral da família, não um modelo de comprimento fixo para decodificação. A quantidade e a ordem dos códigos de memória variam conforme a família do dispositivo e o encapsulamento: o código numérico de Flash pode ser omitido, e o código alfabético de PSRAM pode se repetir quando há vários dispositivos integrados. Para decodificar um código específico, consulte a tabela de variantes da família correspondente.
+`ZxYx6` é um padrão geral da família, não um modelo de comprimento fixo para decodificação. O guia geral associa códigos numéricos à NOR e códigos alfabéticos à PSRAM. Os sufixos publicados também podem incluir códigos específicos da família, como os que indicam que uma posição não tem memória integrada. A quantidade e a ordem dos códigos de memória variam conforme a família do dispositivo e o encapsulamento: o código numérico de Flash pode ser omitido, e o código alfabético de PSRAM pode se repetir quando há vários dispositivos integrados. Para decodificar um código específico, consulte a tabela de variantes da família correspondente.
 
 <div align="center"><em>Definição dos campos do sufixo do número de peça</em></div>
 
@@ -48,8 +48,9 @@ tags:
 
 | Campo | Tipo | Opções | Descrição |
 | :--- | :--- | :--- | :--- |
-| **x** | Alfanumérico | **N**, **1** a **8** | Mapeamento genérico de capacidade da Flash QSPI-NOR:<br>• **N**: Sem memória integrada ao encapsulamento<br>• **1**: 2 Mb<br>• **2**: 4 Mb<br>• **3**: 8 Mb<br>• **4**: 16 Mb<br>• **5**: 32 Mb<br>• **6**: 64 Mb<br>• **7**: 128 Mb<br>• **8**: 256 Mb |
-| **Y** | Alfabético | **N**, **A** a **E** | Capacidade e interface da PSRAM integrada:<br>• **N**: Sem memória integrada ao encapsulamento<br>• **A**: 16 Mb QPI-PSRAM<br>• **B**: 32 Mb OPI-PSRAM<br>• **C**: 64 Mb OPI-PSRAM<br>• **D**: 128 Mb OPI/HPI-PSRAM<br>• **E**: 256 Mb HPI-PSRAM |
+| **x** | Código numérico no padrão genérico | **1** a **6** no guia geral; **7** na tabela de variantes do SF32LB57 | Mapeamento de capacidade QSPI-NOR do guia geral:<br>• **1**: 2 Mb<br>• **2**: 4 Mb<br>• **3**: 8 Mb<br>• **4**: 16 Mb<br>• **5**: 32 Mb<br>• **6**: 64 Mb<br>A tabela de variantes do SF32LB57 usa **7** para NOR Flash de 128 Mb. O guia geral não define um mapeamento universal para **8**; decodifique cada código na tabela específica da família. |
+| **Y** | Código alfabético no padrão genérico | **A** a **E** no guia geral | Capacidade e interface da PSRAM integrada segundo o guia geral:<br>• **A**: 16 Mb QPI-PSRAM<br>• **B**: 32 Mb OPI-PSRAM<br>• **C**: 64 Mb OPI-PSRAM<br>• **D**: 128 Mb OPI/HPI-PSRAM<br>• **E**: 256 Mb HPI-PSRAM |
+| **N** | Código de posição de memória específico da família | Quando indicado na tabela da família | Indica que não há memória integrada ao encapsulamento nessa posição. |
 
 </div>
 

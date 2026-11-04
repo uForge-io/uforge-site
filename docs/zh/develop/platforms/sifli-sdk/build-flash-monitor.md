@@ -1,6 +1,6 @@
 ---
 icon: lucide/terminal
-description: "SiFli-SDK 的日常开发流程：激活环境、使用 scons 构建、通过 UART 下载脚本或 sftool 烧录，并查看串口输出。"
+description: "SiFli-SDK 的日常开发流程：激活环境、使用 scons 构建、通过生成的 UART 下载脚本或 sftool 烧录，并查看串口输出。"
 tags:
     - 开发
     - SiFli-SDK

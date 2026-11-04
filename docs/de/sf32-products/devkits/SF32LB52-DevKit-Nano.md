@@ -36,14 +36,22 @@ Das Board misst 51 mm × 20,32 mm und führt die wichtigsten Ressourcen des SF32
 
 Die Variante N4 eignet sich für kompakte Steuerungen, Bluetooth und einfache UI-Anwendungen. N16R16 kombiniert 16 MB OPI-PSRAM mit 16 MB QSPI-NOR, A128R16 kombiniert 16 MB OPI-PSRAM mit 128 MB QSPI-NAND. Beide passen zu Anwendungen, die größere Display-Assets, externe Dateisysteme oder einen Framebuffer bzw. Arbeitsspeicher im PSRAM benötigen.
 
-**Quellenabweichung — vor der Auswahl prüfen:** Der [ausführliche Nano-Board-Leitfaden](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html) von SiFli nennt seine Konfiguration mit 16 MB OPI-PSRAM + 16 MB NOR `R16N16 V1.0.0`; der [aktuelle Modellleitfaden für Entwicklungsboards](https://wiki.sifli.com/en/board/devkit_guide.html) führt dieselbe Speicherkonfiguration als `N16R16` auf und listet `A128R16` mit 16 MB OPI-PSRAM + 128 MB QSPI-NAND separat. Der ausführliche Leitfaden beschreibt A128R16 nicht gesondert. Verlassen Sie sich für diese SKU auf den Eintrag im Modellleitfaden, statt Angaben aus der Beschreibung des N16R16-Boards zu übertragen. Prüfen Sie vor der Wahl von Firmware oder Speicherlayout die Kennzeichnung des Boards sowie den aktuellen Schaltplan bzw. die Stückliste.
+**Quellenabweichung — vor der Auswahl prüfen:** Der [ausführliche Nano-Board-Leitfaden](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html) von SiFli nennt seine Konfiguration mit 16 MB OPI-PSRAM + 16 MB NOR `R16N16 V1.0.0`; der [aktuelle Modellleitfaden für Entwicklungsboards](https://wiki.sifli.com/en/board/devkit_guide.html) führt dieselbe Speicherkonfiguration als `N16R16` auf und listet `A128R16` mit 16 MB OPI-PSRAM + 128 MB QSPI-NAND separat.
 
-Auch bei den Abmessungen des Nano-Boards weichen die SiFli-Quellen leicht voneinander ab: Der ausführliche Leitfaden nennt 21 × 51 mm, der Modellleitfaden 51 × 20,32 mm. Die längere Abmessung von 51 mm stimmt überein, die kürzere unterscheidet sich um 0,68 mm. Diese Seite verwendet den genaueren Wert des Modellleitfadens; prüfen Sie die mechanische Zeichnung der konkreten Board-Revision, bevor Sie Gehäuse oder Trägerplatine entwerfen.
+Der ausführliche Leitfaden beschreibt A128R16 nicht gesondert. Verlassen Sie sich für diese SKU auf den Eintrag im Modellleitfaden, statt Angaben aus der Beschreibung des N16R16-Boards zu übertragen.
+
+Prüfen Sie vor der Wahl von Firmware oder Speicherlayout die Kennzeichnung des Boards sowie den aktuellen Schaltplan bzw. die Stückliste.
+
+**Abweichung bei den Abmessungen:** Der ausführliche Leitfaden nennt 21 × 51 mm, der Modellleitfaden 51 × 20,32 mm. Die längere Abmessung von 51 mm stimmt überein, die kürzere unterscheidet sich um 0,68 mm. Diese Seite verwendet den genaueren Wert des Modellleitfadens.
+
+Prüfen Sie vor dem Entwurf von Gehäuse oder Trägerplatine die mechanische Zeichnung der konkreten Board-Revision.
 
 ## Highlights des Boards { #board-highlights }
 
 - Kompaktes Board mit 51 mm × 20,32 mm
 - Lötrandkontakte an der Kante für aufgelötete Prototypen
+- 48-MHz- und 32,768-kHz-Quarze sowie eine integrierte PCBA-Antenne
+- 17 GPIOs über die LCC-Randkontakte und 13 über die LGA-Padgruppe herausgeführt; verfügbar sind 3 UART-, 4 I2C-, 2 GPTIM-, 2 SPI- und 3 GPADC-Ressourcen
 - USB-Type-C-Versorgung sowie Download/Debug über USB-zu-UART mit CH340N
 - GPIO, UART, I2C, SPI, GPADC, PWM, I2S, PDM und weckfähige Pins herausgeführt
 - QSPI-LCD-Unterstützung über einen 16-poligen FPC-Pfad, üblicherweise mit einem Adapterkabel von 22 auf 16 Pins
@@ -105,11 +113,11 @@ Verwenden Sie für Firmware-Download und serielle Logs die UART-Schnittstelle ü
 
 ## Übersicht der Randkontakte { #castellated-pin-summary }
 
-Das Nano-Board führt zwei Gruppen von Randkontakten heraus. Die erste Gruppe enthält Audio, SPI1, Debug-UART, USB-nahe Versorgung und GPADC-fähige Pins. Die zweite Gruppe enthält SPI2, USB FS, weckfähige GPIOs und Versorgung.
+Das Nano-Board führt zwei LCC-Randkontaktgruppen heraus: J1 auf der linken Seite umfasst hauptsächlich Audio, SPI1, Debug-UART und GPADC-fähige Pins; J2 auf der rechten Seite umfasst hauptsächlich SPI2, USB FS, weckfähige GPIOs und Versorgung. Alle GPIOs lassen sich per Pin-Multiplexing als UART, I2C oder GPTIM konfigurieren. Die Tabellen zeigen nur ausgewählte Funktionen, nicht alle Multiplexing-Optionen oder Pull-Zustände nach dem Reset; prüfen Sie vor dem Schaltungsentwurf den Schaltplan und die Konstruktionsunterlagen.
 
-### Signale am Rand der Vorderseite { #front-side-edge-signals }
+### J1 — Signale an der linken LCC-Kante { #front-side-edge-signals }
 
-<div align="center"><em>Signalbelegung am Rand der Vorderseite</em></div>
+<div align="center"><em>Signalbelegung an der linken LCC-Kante J1</em></div>
 
 <div align="center" markdown>
 
@@ -134,9 +142,9 @@ Das Nano-Board führt zwei Gruppen von Randkontakten heraus. Die erste Gruppe en
 
 </div>
 
-### Signale am Rand der Rückseite { #back-side-edge-signals }
+### J2 — Signale an der rechten LCC-Kante { #back-side-edge-signals }
 
-<div align="center"><em>Signalbelegung am Rand der Rückseite</em></div>
+<div align="center"><em>Signalbelegung an der rechten LCC-Kante J2</em></div>
 
 <div align="center" markdown>
 
@@ -163,7 +171,7 @@ Das Nano-Board führt zwei Gruppen von Randkontakten heraus. Die erste Gruppe en
 
 ## LCD-Schnittstelle { #lcd-interface }
 
-Das Board unterstützt QSPI-LCD-Panels über einen 16-poligen FPC-Signalsatz. Die ursprüngliche Board-Notiz beschreibt den Anschluss des 1,85-Zoll-AMOLED-Displays der Huangshan Pi über ein FPC-Kabel von 22 auf 16 Pins.
+Das Board unterstützt LCD-Modi mit SPI, DSPI und Quad-SPI, einschließlich QSPI im DDR-Modus, über einen 16-poligen FPC-Signalsatz mit 0,5-mm-Raster. Die ursprüngliche Board-Notiz beschreibt den Anschluss des 1,85-Zoll-AMOLED-Displays der Huangshan Pi über ein FPC-Kabel von 22 auf 16 Pins.
 
 ![FPC-Adapterkabel von 22 auf 16 Pins](assets/sf32lb52x/22p-to-16p.png){ loading="lazy" }
 <div align="center"><em>FPC-Adapterkabel von 22 auf 16 Pins</em></div>
@@ -214,9 +222,11 @@ Die Variante N16R16 enthält externen 16-MB-QSPI-NOR-Flash. Die gemeinsam genutz
 
 Je nach Variante können diese Pins vom bestückten Flash belegt sein. Prüfen Sie die genaue Bestückung des Boards, bevor Sie sie als Erweiterungspins verwenden.
 
+Der ausführliche Board-Leitfaden nennt außerdem WSON8-Footprint-Optionen: 8 × 6 mm oder 6 × 5 mm für SPI-NOR sowie 8 × 6 mm für SPI-NAND und SD-NAND. Die Flash-Bestückung variiert je nach Board; prüfen Sie vor der Komponentenauswahl den Schaltplan und die Stückliste der konkreten Revision.
+
 ## Audio-Erweiterung { #audio-expansion }
 
-Das Nano-Board führt den analogen Mikrofoneingang, die Mikrofon-Vorspannung und den differenziellen analogen Audioausgang heraus. Ergänzen Sie je nach Zielprodukt eine externe Mikrofonschaltung und einen Audio-Leistungsverstärker.
+Das Nano-Board führt den analogen Mikrofoneingang, die Mikrofon-Vorspannung, PDM-Signale für digitale Mikrofone und den differenziellen analogen Audioausgang heraus. Der Analogeingang kann mit einem analogen Mikrofon oder einem Siliziummikrofon verbunden werden. Zum Ansteuern eines Lautsprechers ist ein externer Audio-Leistungsverstärker der Klasse AB oder D erforderlich.
 
 ## SDK-Build-Targets { #sdk-build-targets }
 

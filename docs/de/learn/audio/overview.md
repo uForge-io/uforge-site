@@ -92,7 +92,7 @@ Die Audiofunktionen unterscheiden sich je nach Familie. Prüfen Sie das Datenbla
 | Gerätefamilie | Integrierte Audio-ADC/DAC | PDM-Schnittstellen (maximale Mikrofonzahl) | I2S-Schnittstellen | Typische Anwendung |
 |:---|:---|:---|:---|:---|
 | **SF32LB52x** | 1 ADC + 1 DAC | 1 (2) | 1 | Kostenoptimiertes Bluetooth-Audiozubehör, kompakte HMIs mit Sprachfunktion. |
-| **SF32LB55x** | Keine; für analoges Audio ist ein externer Audio-Codec erforderlich. | SF32LB551/555: 1 (2); SF32LB557: 2 (4) | SF32LB551/555: 1; SF32LB557: 2 | BLE-Wearables und sensorreiche Produkte, bei denen Audio eine untergeordnete Rolle spielt. |
+| **SF32LB55x** | Keine; für analoges Audio ist ein externer Audio-Codec erforderlich. | SF32LB551/553/555: 1 (2); SF32LB557: 2 (4) | SF32LB551/553/555: 1; SF32LB557: 2 | BLE-Wearables und sensorreiche Produkte, bei denen Audio eine untergeordnete Rolle spielt. |
 | **SF32LB56x** | 1 ADC + 1 DAC | 2 (4) | 1 | Produkte mit umfangreicher HMI-/Display-Funktionalität, die zusätzlich Spracherfassung mit mehreren Mikrofonen benötigen. |
 | **SF32LB57x** | 2 ADC + 1 DAC | 2 (4) | 2 | Spracherfassung mit mehreren Mikrofonen und lokale Wiedergabe. |
 | **SF32LB58x** | 2 ADC + 2 DAC | 2 (4) | 3 | Flaggschiff-Produkte, die Audio, Grafik, KI und komplexe Konnektivität kombinieren. |

@@ -43,6 +43,8 @@ A série SF32LB58x usa um encapsulamento BGA256 com dimensões de 8,5 mm × 6,5 
 
 <div align="center"><em>Figura 6.1-5: Informações das esferas do substrato do encapsulamento</em></div>
 
+A seção transversal da esfera no substrato do encapsulamento também indica diâmetro do pad da esfera de 0,27 mm e abertura de 0,23 mm. Consulte o desenho oficial do encapsulamento para obter as dimensões completas do padrão de pads, as tolerâncias e os dados de qualificação.
+
 ### 6.2. Empilhamento de camadas da PCB { #62-pcb-stack-up }
 
 A série SF32LB58x permite a montagem de componentes em uma ou em ambas as faces. A PCB deve usar tecnologia HDI; placas PTH não são compatíveis. Recomenda-se o empilhamento 6HDI-2. A estrutura de referência da figura especifica espessura final da placa de 0,8 mm ± 10% (cerca de 32 mil nominais).
@@ -81,7 +83,7 @@ Consulte no datasheet oficial a figura de projeto da via enterrada entre as cama
 
 ### 6.4. Fanout das trilhas { #64-trace-fanout }
 
-As duas primeiras fileiras de esferas do BGA são direcionadas pela camada superior; as demais são levadas às camadas internas por meio de vias.
+As duas primeiras fileiras e colunas de esferas do BGA são direcionadas pela camada superior; as demais são levadas às camadas internas por meio de vias.
 
 ![Figura 6.4-1: Referência de fanout na camada superior](../../sf32-products/chips/assets/58x/sf32lb58x-FANOUT-T-PCB.png){ width="100%" loading="lazy" }
 
@@ -130,6 +132,8 @@ Roteie o cristal de 32,768 kHz na camada superior, com trilhas de até 10 mm de 
 
 <div align="center"><em>Figura 6.5-7: Referência de roteamento do cristal de 32,768 kHz</em></div>
 
+O esquema de referência da Figura 6.5-2 identifica o cristal de 48 MHz como 8,8 pF e marca C0307/C0308 como NF (não montados). Essas são anotações do esquema de referência e não substituem a verificação de que o cristal selecionado atende aos requisitos do projeto.
+
 ### 6.6. Roteamento da interface RF { #66-rf-interface-routing }
 
 Posicione o circuito de casamento RF o mais perto possível do chip, e não junto à antena. Coloque o capacitor de desacoplamento da alimentação RF AVDD_BRF o mais perto possível do pino do chip, com as vias do terminal de terra caindo diretamente no plano de terra principal.
@@ -160,6 +164,8 @@ Sempre que possível, roteie as trilhas RF na camada superior para evitar vias q
 
 <div align="center"><em>Figura 6.6-6: Conexões de terra do circuito RF na PCB</em></div>
 
+O esquema de referência da rede π de casamento indica um indutor em série de 2,7 nH e dois capacitores em derivação de 2 pF. São valores do circuito de referência; determine o casamento final por meio de testes com a antena e o layout real da PCB.
+
 ### 6.7. Roteamento da interface de áudio { #67-audio-interface-routing }
 
 Posicione o capacitor de desacoplamento da alimentação de áudio AVDD33_AUD próximo ao respectivo pino e conecte seu terminal de terra ao plano principal de terra. Faça o mesmo com o capacitor de desacoplamento da alimentação do microfone MIC_BIAS. Posicione também o capacitor de desacoplamento de AUD_VREF próximo ao respectivo pino.
@@ -168,8 +174,8 @@ AU_ADC1P/AU_ADC1N e AU_ADC2P/AU_ADC2N são os dois pares de entrada analógica. 
 
 AU_DAC1P/AU_DAC1N e AU_DAC2P/AU_DAC2N são os dois pares de saída analógica. Posicione os componentes associados o mais perto possível dos pinos e roteie cada par P/N como um par diferencial com menos de 2 mm. A capacitância parasita das trilhas deve ser inferior a 10 pF, e a largura da trilha diferencial deve ser de 0,075 mm. Aplique blindagem 3D ao par e mantenha afastadas outras fontes de interferência intensa.
 
-!!! warning "Limites de comprimento das trilhas DAC divergentes nas fontes"
-    O guia de layout especifica comprimento inferior a 2 mm para as trilhas DAC, enquanto a planilha de verificação especifica comprimento inferior a 2 cm (20 mm). Os limites diferem por um fator de dez. Não escolha nem substitua um limite sem confirmação da SiFli.
+!!! warning "O guia da SiFli apresenta limites divergentes para as trilhas DAC"
+    O guia de hardware da SiFli apresenta limites diferentes para as trilhas DAC: a visão geral da interface de áudio especifica menos de 2 cm (20 mm), enquanto a seção de layout da PCB especifica menos de 2 mm. Os limites diferem por um fator de dez. Não escolha nem substitua um limite sem confirmação da SiFli.
 
 ![Figura 6.7-1: Esquemático da alimentação de áudio](../../sf32-products/chips/assets/58x/sf32lb58x-AU-PWR-SCH.png){ width="100%" loading="lazy" }
 
@@ -195,6 +201,8 @@ AU_DAC1P/AU_DAC1N e AU_DAC2P/AU_DAC2N são os dois pares de saída analógica. P
 
 <div align="center"><em>Figura 6.7-6: Layout da PCB da saída de áudio analógico</em></div>
 
+O esquema de referência usa C0327 (1 µF/6,3 V) em MIC_BIAS, C0326 (4,7 µF/6,3 V) em AVDD33_AUD e C0325 (1 µF/6,3 V) em AUD_VREF. Também associa ADC1P/N e ADC2P/N às esferas BGA G19/G18 e F19/F18, e DAC1P/N e DAC2P/N a J20/J21 e H21/H20, respectivamente; essas são identificações de esferas do circuito de referência.
+
 ### 6.8. Roteamento da interface USB { #68-usb-interface-routing }
 
 Posicione o capacitor de desacoplamento de AVDD33_USB e o resistor de calibração USB2_REXT perto de seus respectivos pinos. Antes de chegar ao chip, as trilhas USB devem passar pelos pinos do componente de proteção ESD; conecte o pino de terra desse componente ao terra principal. Roteie USB DP/DN como par diferencial com impedância diferencial controlada em 90 Ω e aplique blindagem 3D.
@@ -215,6 +223,8 @@ Posicione o capacitor de desacoplamento de AVDD33_USB e o resistor de calibraç�
 
 <div align="center"><em>Figura 6.8-4: Modelo de roteamento dos sinais USB</em></div>
 
+O esquema de referência associa USB2_DP/USB2_DN a T6/R6 e AVDD33_USB/USB2_REXT a P5/T5; mostra C0317 = 1 µF/6,3 V e R0307 = 200 Ω ±1 %. O diagrama de posicionamento marca como incorretas as derivações antes do componente ESD.
+
 ### 6.9. Roteamento da interface SDIO { #69-sdio-interface-routing }
 
 O SF32LB58x oferece duas interfaces SDIO: SDIO1 e SDIO2. Roteie juntos todos os sinais de cada interface, sem separá-los. O comprimento total das trilhas deve ser de até 50 mm, e a diferença de comprimento entre sinais do mesmo grupo, de até 6 mm. Aplique blindagem 3D ao clock SDIO e também aos sinais DATA e CMD.
@@ -226,6 +236,8 @@ O SF32LB58x oferece duas interfaces SDIO: SDIO1 e SDIO2. Roteie juntos todos os 
 ![Figura 6.9-2: Modelo de roteamento da interface SDIO1 na PCB](../../sf32-products/chips/assets/58x/sf32lb58x-SDIOM-PCB.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 6.9-2: Modelo de roteamento da interface SDIO1 na PCB</em></div>
+
+A Figura 6.9-1 mostra o circuito de referência e o mapa de pinos do SDIO1; essas atribuições de pinos não se aplicam ao SDIO2.
 
 ### 6.10. Roteamento da interface DSI { #610-dsi-interface-routing }
 
@@ -242,6 +254,8 @@ Posicione o capacitor de desacoplamento de AVDD18_DSI e o resistor de calibraç�
 
 <div align="center"><em>Figura 6.10-2: Roteamento dos sinais DSI na PCB</em></div>
 
+O esquema de referência mostra as linhas de dados diferenciais DSI_D0 e DSI_D1 e o par diferencial do clock. Indica C0323 = 4,7 µF/6,3 V em AVDD18_DSI e R0301 = 10 kΩ em DSI_REXT.
+
 ### 6.11. Roteamento do circuito DC-DC { #611-dc-dc-circuit-routing }
 
 Posicione o indutor de potência e os capacitores de desacoplamento do circuito DC-DC perto dos pinos do chip. Mantenha as trilhas BUCK_LX tão curtas e largas quanto possível para reduzir a indutância do circuito. Adicione vias de terra aos terminais de terra de todos os capacitores de saída DC-DC e conecte-as ao plano de terra principal. A trilha de realimentação BUCK_FB deve ter largura superior a 0,25 mm. Não faça preenchimento de cobre na camada superior sob o indutor; mantenha a camada adjacente como plano de referência de terra contínuo e não passe outras trilhas pela área do indutor.
@@ -254,6 +268,8 @@ Posicione o indutor de potência e os capacitores de desacoplamento do circuito 
 
 <div align="center"><em>Figura 6.11-2: Layout da PCB dos principais componentes DC-DC</em></div>
 
+O circuito de referência usa indutores de 4,7 µH em BUCK1 e BUCK2 e mostra capacitores de 4,7 µF/10 V e 0,1 µF em cada saída.
+
 ### 6.12. Roteamento da alimentação { #612-power-supply-routing }
 
 PVDD1 e PVDD2 são entradas de alimentação da PMU integrada. Posicione os capacitores de desacoplamento perto dos pinos e use trilhas tão largas quanto possível, nunca inferiores a 0,5 mm. PVSS1 e PVSS2 são pinos de terra da PMU e devem ser conectados ao terra principal por vias. Não os deixe desconectados, pois isso prejudica o desempenho geral da PMU.
@@ -265,6 +281,8 @@ PVDD1 e PVDD2 são entradas de alimentação da PMU integrada. Posicione os capa
 ![Figura 6.12-2: Roteamento do circuito DC-DC na PCB](../../sf32-products/chips/assets/58x/sf32lb58x-DCDC-R-PCB.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 6.12-2: Roteamento do circuito DC-DC na PCB</em></div>
+
+O esquema de referência associa capacitores de desacoplamento de 10 µF/10 V e 0,1 µF a cada uma das entradas PVDD1 e PVDD2.
 
 ### 6.13. Roteamento das entradas de alimentação de LDO e I/O { #613-ldo-and-io-power-input-routing }
 
@@ -287,6 +305,8 @@ As redes dos pinos de entrada e saída de clock, como a saída de 32 kHz, també
 ![Figura 6.14-2: Circuito da saída de clock de 32 kHz](../../sf32-products/chips/assets/58x/sf32lb58x-32K-R-SCH.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 6.14-2: Circuito da saída de clock de 32 kHz</em></div>
+
+A figura de funções dos pinos mostra GPADC_CH0–CH7 multiplexados em PB32–PB39 junto com outras funções periféricas. Consulte o datasheet para verificar as funções alternativas e os possíveis conflitos do dispositivo-alvo.
 
 ### 6.15. Roteamento de terra sob o chip { #615-chip-ground-routing }
 
@@ -340,3 +360,5 @@ Para evitar que a máscara de solda cubra os pads e preservar a confiabilidade d
 ![Figura 6.17-5: Referência de conexão das esferas BGA 2](../../sf32-products/chips/assets/58x/sf32lb58x-BGA-R2-PCB.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 6.17-5: Referência de conexão das esferas BGA 2</em></div>
+
+As Figuras 6.17-4 e 6.17-5 identificam como inadequados os traçados diagonais que criam armadilhas de corrosão e as vias que invadem os pads das esferas BGA. Siga os exemplos melhores/bons apresentados e mantenha as folgas para preservar a fabricabilidade.

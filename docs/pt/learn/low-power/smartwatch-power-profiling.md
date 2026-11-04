@@ -151,7 +151,7 @@ O mesmo cenário pode ter efeito desprezível ou dominar o consumo, dependendo d
 
 | Cenário | Ocorrências por dia | Duração por ocorrência | Duração total por dia | Participação no consumo diário | Estado no modelo |
 |:---------|--------------------:|------------------------:|-----------------------:|----------------------:|:----------------|
-| Standby de referência | 1 | Segundos restantes do dia (`=G7`) | 52.425,7 s | 11,69% | Habilitado |
+| Standby de referência | 1 | Segundos restantes do dia | 52.425,7 s | 11,69% | Habilitado |
 | Notificação de mensagem | 100 | 5 s | 500 s | 22,62% | Habilitado |
 | Alerta de chamada recebida | 10 | 10 s | 100 s | 4,52% | Habilitado |
 | Acionamento da tela pelo gesto de erguer o pulso | 200 | 5 s | 1.000 s | 27,72% | Habilitado |
@@ -169,6 +169,8 @@ O mesmo cenário pode ter efeito desprezível ou dominar o consumo, dependendo d
 </div>
 
 As células vazias na coluna de cenários da matriz de origem são intencionais. Cada cenário nomeado é seguido pelas linhas de display, motor de vibração e `Other`. Essas linhas usam a mesma frequência diária e duração da linha de cenário acima; por isso, o nome aparece apenas uma vez na origem.
+
+O cálculo da duração diária pressupõe que os cenários habilitados ocupem intervalos separados, sem sobreposição. A planilha subtrai a duração dos cenários incluídos do total de segundos de um dia de 24 horas e atribui o tempo restante ao standby de referência. Ela soma separadamente as cargas completas dos componentes de cada cenário; não combina cenas simultâneas. Se eventos do produto se sobrepuserem, as cargas compartilhadas poderão ser contadas mais de uma vez, e o tempo sobreposto poderá ser subtraído do standby mais de uma vez. Para modelar sobreposições reais, crie uma cena combinada com as correntes simultâneas dos componentes ou reconcilie as cargas compartilhadas e o tempo de atividade contado uma única vez antes de somar. O segundo cenário AOD não entra nesse cálculo do standby; nesta configuração, os dois cenários AOD estão zerados. Antes de habilitar qualquer um deles, confirme se o cálculo do standby considera todos os cenários ativos.
 
 <div align="center"><em>Tabela: resultado calculado do uso diário</em></div>
 

@@ -1,6 +1,6 @@
 ---
 icon: lucide/rss
-description: "SF32LB57xを掲載しました。アプリケーションCPUの演算性能はSF32LB56xの約2倍、ePicasso 3.0グラフィックス、そして競争力のあるコスト構造を備えています。"
+description: "SF32LB57xの情報を公開しました。アプリケーションコアの合計性能はSF32LB56xの約2倍で、ePicasso 3.0グラフィックスと競争力のあるコスト構造を備えています。"
 ---
 
 # 10月：SF32LB57xのご紹介 [2026-10-28] { #october-sf32lb57x-2026-10-28 }
@@ -13,7 +13,7 @@ SF32LB52xとSF32LB56xは、いずれも240 MHzのCortex-M33アプリケーショ
 
 ### より強力なグラフィックス機能 { #more-graphics-capability }
 
-グラフィックスはePicasso 3.0とeZip 3.0ハードウェア展開に進化しました（SF32LB52xはePicasso 2.0 Lite、SF32LB56xはePicasso 2.0）。ePicasso 3.0はリアルタイムの回転、拡大縮小、投影、ミラー、アルファブレンドを高速化し、eZip 3.0はeZip、JPEG、MJPEGのアセットをCPUに重いデコード処理を課さずに展開します。コア以外にも、DCMIカメラ入力、一部の型番で最大48 MBのパッケージ内PSRAMと32 MBのパッケージ内NORフラッシュ、2系統のオーディオADC、2系統のCANインターフェース、そしてタイミングに敏感な周辺処理をオフロードする並列タスクマシンPTMを備えています。
+グラフィックスはePicasso 3.0とeZip 3.0によるハードウェア解凍に進化しました（SF32LB52xはePicasso 2.0 Lite、SF32LB56xはePicasso 2.0）。ePicasso 3.0はリアルタイムの回転、拡大縮小、投影、ミラーリング、アルファブレンドを高速化し、eZip 3.0はeZip、JPEG、MJPEGのアセットをCPUに重いデコード処理を課さずに解凍します。コア以外にも、DCMIカメラ入力、一部の型番で最大48 MBのパッケージ内PSRAMと32 MBのパッケージ内NORフラッシュ、2系統のオーディオADC、2系統のCANインターフェース、そしてタイミングに敏感な周辺処理をオフロードする並列タスクマシンPTMを備えています。
 
 ### 競争力のあるコスト構造 { #competitive-cost-structure }
 

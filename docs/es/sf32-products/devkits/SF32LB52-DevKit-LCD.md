@@ -29,12 +29,13 @@ La placa integra en una sola plataforma de evaluación el módulo MCU, conectore
 - Soporte de LCD QSPI/SPI/DSPI a través de un conector FPC de 22 pines
 - Soporte de LCD MCU/8080 de 8 bits a través del FPC y el encabezado de expansión de 40 pines
 - Soporte de panel táctil I2C
-- USB-C para grabación y depuración por USB-UART, y para alimentar la placa
+- USB-C para grabación y depuración a través del puente USB-UART CH343P integrado, y para alimentar la placa
 - Interfaz USB-C separada para USB 2.0 FS
 - Micrófono MEMS en placa y amplificador de potencia de audio Clase D
 - Ranura para tarjeta MicroSD usando SPI
 - Conector de batería y cargador lineal ETA9640P
 - Encabezado de expansión de 40 pines para señales de pantalla, GPIO, almacenamiento, audio y alimentación
+- Interruptor integrado, botones de función y reinicio, indicadores RGB/de carga/GPIO/de alimentación y controlador de retroiluminación LCD
 
 ## Cuándo usar esta placa { #when-to-use-this-board }
 
@@ -108,7 +109,7 @@ Verifique la serigrafía y el paquete de diseño de la revisión exacta de la pl
 
 - Altavoz
 - Tarjeta TF
-- Batería Li-ion/Li-poly de una sola celda, normalmente de 450 mAh a 500 mAh
+- Batería Li-ion/Li-poly de una celda; SiFli recomienda 450 mAh
 - Segundo cable USB cuando se necesitan depuración UART y pruebas USB nativas al mismo tiempo
 
 ### Configuración básica { #basic-setup }

@@ -105,7 +105,7 @@ Hibernate 웨이크업은 `PM_HIBERNATE_BOOT`이 설정된 콜드 부트이며, 
 
 ## 동작 중 클럭 제어 { #control-clocks-while-awake }
 
-idle 스레드가 슬립 상태로 진입하지 못하면 WFI 자동 클럭 저감 기능으로 전류를 줄일 수 있습니다. 단, EPIC, EZIP, LCDC, USB, SD가 모두 유휴 상태일 때만 안전합니다. 애플리케이션이 SDK의 LVGL/디바이스 관리 기능을 사용하지 않는다면 주변 장치 동작 구간을 `rt_pm_hw_device_start()`와 `rt_pm_hw_device_stop()`으로 감싸십시오. 분주비는 `HAL_RCC_HCPU_SetDeepWFIDiv()`로 설정합니다. 오디오 워크로드에서는 낮춘 클럭을 보통 48 MHz로 제한하고, 다른 워크로드에서는 4 MHz를 사용할 수 있습니다. `HPSYS_RCC_DBGR_FORCE_HP`는 SDK 가이드의 요구 사항에 따라 설정하십시오.
+idle 스레드가 슬립 상태에 진입하지 못하면 WFI 자동 주파수 저감으로 전류를 줄일 수 있습니다. EPIC, EZIP, LCDC, USB, SD가 모두 유휴 상태일 때만 안전합니다. SDK에 포함된 LVGL 구현은 EPIC/EZIP의 사용 상태를 추적하고, RT-Thread LCD Device 드라이버는 LCDC/USB/SD를 추적합니다. 기본 LVGL 구현을 사용하지 않으면 EPIC/EZIP 동작의 시작과 종료 시 `rt_pm_hw_device_start()` 및 `rt_pm_hw_device_stop()`을 호출해 상태를 알리십시오. 분주비는 `HAL_RCC_HCPU_SetDeepWFIDiv()`로 설정합니다. WFI 주파수 설정은 제품군마다 다릅니다. SF32LB52x 가이드는 오디오 주변 장치가 동작 중일 때 48 MHz까지만 낮추고, 그 외에는 4 MHz까지 낮출 수 있다고 설명하며, `HPSYS_RCC_DBGR_FORCE_HP`를 1로 설정하도록 요구합니다. SiFli [전원 관리 애플리케이션 노트](https://docs.sifli.com/projects/solution/2.application-notes/power_manager/index.html)는 SF32LB55x, SF32LB56x, SF32LB58x의 CPU 유휴 주파수를 1 MHz로 제시합니다. 인용한 자료에서는 SF32LB57x의 값을 확인할 수 없으므로 대상 SDK 버전의 가이드를 확인하십시오.
 
 동작 중인 작업에는 `rt_pm_run_enter()`를 사용합니다.
 

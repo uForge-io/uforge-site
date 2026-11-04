@@ -12,7 +12,7 @@ tags:
 
 ## O que é o EPD Reader? { #what-is-epd-reader }
 
-[OpenSiFli EPD Reader](https://github.com/OpenSiFli/EPD_Reader) adapta o projeto [atomic14/diy-esp32-epub-reader](https://github.com/atomic14/diy-esp32-epub-reader) ao hardware SiFli `SF32-OED-EPD`. O SF32LB52x atua como processador. O sistema lê arquivos EPUB do sistema de arquivos integrado ou de um cartão TF, analisa ZIP/XML/XHTML, usa fontes FreeType e decodificadores de imagem para compor as páginas e, em seguida, controla um display de tinta eletrônica com formas de onda de atualização completa e parcial.
+[OpenSiFli EPD Reader](https://github.com/OpenSiFli/EPD_Reader) adapta o projeto [atomic14/diy-esp32-epub-reader](https://github.com/atomic14/diy-esp32-epub-reader) ao hardware SiFli `SF32-OED-EPD`. O SF32LB52x é o núcleo de processamento. O aplicativo lê arquivos EPUB do sistema de arquivos integrado ou de um cartão TF, analisa o conteúdo ZIP/XML/XHTML e compõe as páginas com fontes FreeType e decodificadores de imagem. Em seguida, controla um display de tinta eletrônica com formas de onda de atualização completa e parcial.
 
 O aplicativo atual oferece telas de biblioteca, sumário, leitura, configurações de leitura e de funções, boas-vindas/tela apagada, bateria fraca, carregamento e desligamento. Aceita teclas e toque, textos em chinês e inglês, fontes TTF/OTF carregadas dinamicamente, ajustes no tamanho e no peso da fonte, espaçamento entre linhas e margens, além de salvar as configurações de leitura no cartão TF. Para economizar recursos, a fonte chinesa incluída não habilita estilos separados de negrito e itálico por padrão; valide o resultado real das opções de peso com a fonte escolhida. É uma referência completa para um terminal de leitura com baixa frequência de atualização do display, mas não comprova conformidade geral com EPUB nem constitui um leitor eletrônico pronto para produção.
 
@@ -129,11 +129,11 @@ flowchart LR
     UI --> PM["Suspensão do cartão TF / tela de boas-vindas / desligamento"]
 ```
 
-Os principais domínios de falha são a análise do arquivo compactado e do XHTML, os arquivos de fonte e a memória, a detecção e alimentação do cartão TF, o mapeamento de toque/teclas, o modelo do painel e sua forma de onda/VCOM, o efeito fantasma na atualização completa/parcial, o ADC da bateria e o estado de carga, além do desligamento e da retomada. Mantenha qualquer recurso sem fio futuro fora da configuração de referência para arquivos locais, display e alimentação até que a documentação do projeto confirme seu suporte e descreva como o conteúdo será transferido.
+Os principais domínios de falha são a análise do arquivo EPUB e do XHTML, os arquivos de fonte e a memória, a detecção e alimentação do cartão TF, o mapeamento de toque/teclas, o modelo do painel e sua forma de onda/VCOM, o efeito fantasma na atualização completa/parcial, o ADC da bateria e o estado de carga, além do desligamento e da retomada. Mantenha qualquer recurso sem fio futuro fora da configuração de referência para arquivos locais, display e alimentação até que a documentação do projeto confirme seu suporte e descreva como o conteúdo será transferido.
 
 ## Etapa 1 — Fixar a base física e de código-fonte { #stage-1-pin-the-physical-and-source-baseline }
 
-**Objetivo:** comprovar que placa, painel, controlador de toque e código-fonte correspondem a uma combinação compatível.
+**Objetivo:** comprovar que a versão fixada do software corresponde a uma combinação compatível de placa, painel e controlador de toque.
 
 1. Registre as marcações da placa V1.1, o dispositivo SF32, o modelo do painel, o controlador de toque, a orientação do cabo flexível e a fonte de alimentação.
 2. Fixe o commit principal e o submódulo do SDK e guarde o estado completo dos submódulos.

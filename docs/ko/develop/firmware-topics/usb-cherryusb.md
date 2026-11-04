@@ -51,7 +51,9 @@ USB 통합에는 펌웨어, 디스크립터, 호스트 운영 체제, 전원 동
 
 [공식 SiFli-SDK CherryUSB 예제 색인](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/example/cherryusb/index.html)은 USB 디바이스 작업과 USB 호스트 작업을 구분합니다. 의도한 USB 역할과 클래스에 맞는 예제에서 시작하고, 해당 예제의 디스크립터, 전원, 호스트 호환성 점검 사항을 제품 구현으로 가져오십시오.
 
-<div align="center"><em>표: SF32LB58x용 SiFli-SDK CherryUSB 예제</em></div>
+예제마다 지원하는 보드가 다릅니다. 재사용하기 전에 각 예제 페이지의 Supported Platforms 섹션을 확인하고 대상 보드가 목록에 있는지 확인하십시오.
+
+<div align="center"><em>표: SF32LB58x SDK 문서에 수록된 SiFli-SDK CherryUSB 예제</em></div>
 <div align="center" markdown>
 
 | USB 역할 | 예제 | 시작점 |

@@ -10,7 +10,7 @@ tags:
 
 Aucune procédure de prise en main de MicroPython pour SF32 n'a encore été validée. Les sources SiFli et OpenSiFli consultées ne décrivent actuellement ni image officielle du firmware pour une carte précise, ni procédure de flashage, ni configuration du REPL.
 
-Suivez les étapes de [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) pour vérifier la carte et son câble, identifier le port série et flasher le firmware, afin de disposer d'une configuration de référence reproductible. Ne suivez pas les instructions d'installation MicroPython génériques et n'utilisez pas une image destinée à un autre microcontrôleur ou à une autre carte.
+Suivez la procédure [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) pour vérifier la carte et son câble, identifier le port série et flasher le firmware. Vous disposerez ainsi d'une configuration de référence reproductible. Ne suivez pas les instructions d'installation MicroPython génériques et n'utilisez pas une image destinée à un autre microcontrôleur ou à une autre carte.
 
 La page [État de MicroPython](../../develop/platforms/micropython/status.md) recense les artefacts publics et critères d'acceptation nécessaires pour faire de cette page un tutoriel.
 

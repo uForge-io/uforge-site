@@ -15,11 +15,13 @@ tags:
 
 ### 6.1. Footprint und Leiterplattenaufbau { #61-footprint-and-stack-up }
 
-Berücksichtigen Sie die Gehäusezeichnung, die Vorgaben für das Pad-Layout und die Bestückbarkeit des gewählten QFN- oder BGA-Gehäuses. Bei BGA-Gehäusen müssen das Ball-Fanout, die Via-Strategie, die Lötstopplack-Regeln und die Fertigungsgrenzen frühzeitig geklärt werden.
+Gleichen Sie Gehäusezeichnung und Pad-Layout-Vorgaben des gewählten QFN- oder BGA-Gehäuses mit den Bestückungsmöglichkeiten des vorgesehenen Herstellers ab. Bei BGA-Gehäusen sind Ball-Fanout, Via-Strategie, Lötstopplack-Regeln und Fertigungsgrenzen frühzeitig zu klären.
 
 #### 6.1.1. Referenz für Lagenaufbau und Fertigung { #611-stack-up-and-fabrication }
 
-SiFli empfiehlt für QFN68L und BGA145 ein konventionelles PTH-Verfahren und eine vierlagige Leiterplatte. Für BGA169 empfiehlt die Referenz einen einstufigen HDI-Aufbau mit Blind-/Buried-Vias. Die dargestellten vier- und sechslagigen Aufbauten haben eine fertige Dicke von 0,7 mm ±10 %. Dies sind Referenzaufbauten, keine allgemeinen Grenzwerte. Stimmen Sie Gehäusezeichnung, fertige Dicke und Fertigungsfähigkeit mit dem Leiterplattenhersteller ab.
+Die SF32LB55x-Serie unterstützt die Bestückung auf einer oder auf beiden Leiterplattenseiten.
+
+SiFli empfiehlt für QFN68L, BGA125 und BGA145 ein konventionelles PTH-Verfahren und eine vierlagige Leiterplatte. Für BGA169 empfiehlt die Referenz einen einstufigen HDI-Aufbau mit Blind-/Buried-Vias. Die dargestellten vier- und sechslagigen Aufbauten haben eine fertige Dicke von 0,7 mm ±10 %. Dies sind Referenzaufbauten, keine allgemeinen Grenzwerte. Stimmen Sie Gehäusezeichnung, fertige Dicke und Fertigungsfähigkeit mit dem Leiterplattenhersteller ab.
 
 <div align="center"><em>Tabelle 6.1-1: Referenz-Lagenaufbau mit vier PTH-Lagen</em></div>
 
@@ -67,9 +69,24 @@ Die Quelldarstellung nennt eine fertige Leiterplattendicke von 0,7 mm ±10 %, ei
 
 Die Quelldarstellung nennt für die sechslagige HDI-Leiterplatte eine fertige Dicke von 0,7 mm ±10 %, einschließlich Beschichtung und Lötstoppmaske. Lagenaufbau, dielektrische Parameter und theoretische Dicke sind Referenzwerte; lassen Sie sie vor der Serienfertigung anhand der tatsächlichen Materialien, Kupferdicken und Impedanzvorgaben vom Leiterplattenhersteller prüfen.
 
-#### 6.1.2. Abmessungen der Padgeometrie { #612-land-pattern-dimensions }
+#### 6.1.2. Gehäuse- und Land-Pattern-Abmessungen { #612-land-pattern-dimensions }
 
-- BGA145/BGA169: Kugeldurchmesser 0,25 mm und Rastermaß 0,5 mm; das Referenz-Land-Pattern zeigt eine Lötstoppmaskenöffnung von 0,33 mm und eine Pastenöffnung von 0,25 mm.
+<div align="center"><em>Tabelle 6.1-3: Nennmaße der Gehäusekontur und Rastermaß</em></div>
+
+<div align="center" markdown>
+
+| Gehäuse | Nennmaße des Gehäusekörpers (L × B × H) | Kugel-/Anschlussraster |
+|:---|:---:|:---:|
+| BGA125 | 7 × 7 × 0,94 mm | 0,5 mm |
+| BGA145 | 7 × 7 × 0,94 mm | 0,5 mm |
+| BGA169 | 7 × 7 × 0,94 mm | 0,5 mm |
+| QFN68L | 7 × 7 × 0,75 mm | 0,35 mm |
+
+</div>
+
+Die Nennmaße wurden aus den Quell-Gehäusezeichnungen übernommen. Für die Toleranzprüfung ist die Zeichnung des tatsächlich ausgewählten Gehäuses maßgeblich.
+
+- BGA125/BGA145/BGA169: Kugeldurchmesser 0,25 mm und Rastermaß 0,5 mm; das Referenz-Land-Pattern zeigt eine Lötstoppmaskenöffnung von 0,33 mm und eine Pastenöffnung von 0,25 mm.
 - QFN68L: Umfangspads 0,2 × 0,55 mm bei 0,35 mm Rastermaß; die Referenz zeigt eine Lötstoppmaskenöffnung von 0,3 × 0,65 mm und eine Pastenöffnung von 0,2 × 0,55 mm. Das freiliegende Pad hat nominal 5,49 mm × 5,49 mm, zulässig sind 5,39–5,59 mm.
 
 Prüfen Sie vor der Footprint-Freigabe die Gehäusezeichnung sowie die Vorgaben des Bestückers für Schablone und Lötstoppmaske.
@@ -78,7 +95,7 @@ Prüfen Sie vor der Footprint-Freigabe die Gehäusezeichnung sowie die Vorgaben 
 
 - BUCK-Schleifen kurz und breit halten, mit Rückstrom nahe der Schaltschleife.
 - RF-, Quarz-, GPADC- und Audio-Bereiche von Schaltnetzteilen, Display-Takten, Motoren und Ladeschaltungen fernhalten.
-- High-Speed-Speicher- und Display-Schnittstellen über einer durchgehenden Referenzmasse routen.
+- High-Speed-Speicher- und Display-Schnittstellen über einer durchgehenden Masse-Referenzfläche routen.
 - ESD-Schutz nahe an Steckverbindern platzieren und Signale zuerst durch das Schutzbauteil führen.
 - Ausreichend Testpunkte für Stromversorgung, Boot, Debug, RF und Produktionskalibrierung vorsehen.
 
@@ -118,17 +135,17 @@ In der Gleichnetz-Abstandsmatrix der Quelldarstellungen sind nur einzelne Zellen
 
 #### 6.2.3. EMI, ESD und Schutz { #623-emi-esd-and-protection }
 
-Führen Sie Takt- und störende Versorgungsleitungen nach Möglichkeit auf Innenlagen. Platzieren Sie ESD-Bauteile am Steckverbinder, sodass jedes Signal vor dem Eintritt in die Leiterplatte durch den Schutz geführt wird und keine Abzweigung entsteht. Die Masseverbindung soll kurz und breit sein und über ein direktes Via an die Fläche angebunden werden. Beim USB-Laden liegt der Testpunkt auf der Steckverbinderseite des TVS. Am Akkueingang wird das TVS zwischen Steckverbinder und Platinenlast platziert; damit liegt es auf dem Strompfad zum Chip vor der Last. Halten Sie seine Masseverbindung kurz.
+Vermeiden Sie lange Leiterbahnen auf der Außenlage außerhalb des Schirms. Takt- und störende Versorgungsleitungen sind auf Innenlagen zu führen und dürfen nicht auf einer Außenlage verlaufen. Platzieren Sie ESD-Bauteile am Steckverbinder, sodass jedes Signal vor dem Eintritt in die Leiterplatte durch den Schutz geführt wird und keine Abzweigung entsteht. Die Masseverbindung soll kurz und breit sein und über ein direktes Via an die Fläche angebunden werden. Beim USB-Laden liegt der Testpunkt auf der Steckverbinderseite des TVS. Am Akkueingang wird das TVS zwischen Steckverbinder und Platinenlast platziert; damit liegt es auf dem Strompfad zum Chip vor der Last. Halten Sie seine Masseverbindung kurz.
 
 ### 6.3. Schnittstellen-Routing { #63-interface-routing }
 
-Takt-Leiterbahnen sollten kurz, geschirmt und von schnellen digitalen Signalen isoliert sein. RF-Leiterbahnen sind als 50-Ω-Leitungen mit einem kompakten Anpassungsnetzwerk auszulegen. Speicher- und Display-Leiterbahnen sollten entsprechend ihrer Geschwindigkeit längenkontrolliert und als gruppierte Busse geroutet werden. Audio- und GPADC-Signale sollten geschirmt und von Schaltströmen ferngehalten werden.
+Takt-Leiterbahnen sollten kurz, geschirmt und von schnellen digitalen Signalen isoliert sein. Führen Sie RF als Leiterbahn mit kontrollierter Impedanz von 50 Ω und halten Sie das Anpassungsnetzwerk kompakt. Speicher- und Display-Leiterbahnen sollten entsprechend ihrer Geschwindigkeit längenkontrolliert und als gruppierte Busse geroutet werden. Audio- und GPADC-Signale sollten geschirmt und von Schaltströmen ferngehalten werden.
 
 #### 6.3.1. Platzierung und Routing der Quarze { #631-crystal-placement-and-routing }
 
 - Platzieren Sie jeden Quarz innerhalb des geschirmten Bereichs, mehr als 1 mm vom Leiterplattenrand und mehr als 5 mm von Wärmequellen wie PA, Ladegerät und PMU entfernt. Halten Sie rund um den Quarz mindestens 0,25 mm Abstand ein.
 - Führen Sie die 48-MHz-Quarzleitungen auf der obersten Lage; sie sollen 3–10 mm lang und 0,1 mm breit sein. Der Abstand zwischen 48M_XI und 48M_XO muss mindestens 0,15 mm betragen, wie im [ursprünglichen Routingmodell](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/assets/55x/SF32LB55x-48M-M-PCB.png) dargestellt; sorgen Sie für eine dreidimensionale Masseabschirmung. Halten Sie die Leitungen von VBAT, DC-DC und schnellen Signalen fern. Der Begleittext fordert unter dem Quarzbereich auf der obersten und angrenzenden Lage eine Kupferfreihaltung und verbietet dort fremde Leiterbahnen.
-- Führen Sie die 32,768-kHz-Quarzleitungen auf der obersten Lage; sie sollen höchstens 10 mm lang und 0,1 mm breit sein. Der Abstand zwischen XI und XO muss mindestens 0,15 mm betragen; sorgen Sie für eine dreidimensionale Masseabschirmung. Der Begleittext fordert unter dem Quarzbereich auf der obersten und angrenzenden Lage eine Kupferfreihaltung und verbietet dort fremde Leiterbahnen.
+- Führen Sie die 32,768-kHz-Quarzleitungen auf der obersten Lage; sie sollen höchstens 10 mm lang und 0,1 mm breit sein. Der Abstand zwischen 32K_XI und 32K_XO muss mindestens 0,15 mm betragen; sorgen Sie für eine dreidimensionale Masseabschirmung. Der Begleittext fordert unter dem Quarzbereich auf der obersten und angrenzenden Lage eine Kupferfreihaltung und verbietet dort fremde Leiterbahnen.
 
 #### 6.3.2. RF- und Hochgeschwindigkeitsschnittstellen { #632-rf-and-high-speed-interfaces }
 
@@ -281,6 +298,8 @@ Die folgenden Tabellen decken die einzelnen Prüfbereiche des PCB-Layouts ab. Is
 </div>
 
 #### 6.4.9. Testpunkte { #649-test-points }
+
+Für die Hardwareentwicklung sind mindestens Testpunkte für VBAT, GND, VDDIOA, VDDIOB, RSTN, Mode, SWDIO, SWCLK, RXD1, TXD1, RXD3 und TXD3 vorzusehen. Für Produktionstests werden Testpunkte für VBAT, GND, boot_mode, VDDIOB, RXD3 und TXD3 benötigt.
 
 <div align="center"><em>Tabelle 6.4-9: Checkliste Testpunkte</em></div>
 

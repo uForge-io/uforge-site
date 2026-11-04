@@ -77,7 +77,7 @@ The U variant uses a QFN68L package. The V variant uses a WBBGA175 package and r
 - 48 MHz and 32.768 kHz crystal requirements and recommended crystal models.
 - Bluetooth RF design and antenna matching requirements.
 - SPI/QSPI and JDI display on U; SPI/QSPI, MCU8080, DPI, and JDI display on V.
-- External memory and boot storage options, including SDIO/eMMC/SD NAND style interfaces.
+- External-memory and boot-storage options include SDIO, eMMC, and SD NAND.
 - Buttons, vibration motor, audio interface, PBR pins, sensors, UART/I2C, GPTIM, debug/flashing, and calibration.
 
 ### 3.4. Typical Applications { #34-typical-applications }
@@ -166,7 +166,7 @@ For best results, treat the checklist as a sign-off record rather than a reading
 
 [SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## Continue the Design Guide { #continue-the-design-guide }
+### 4.5. Continue the Design Guide { #continue-the-design-guide }
 
 The full guide continues across the pages below. Each covers one stage of the design process and can be reached from here.
 

@@ -13,6 +13,8 @@ OpenSiFli 正在 [OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs) 开
 
 维护者说明该项目仍在开发中，尚不适合用于量产。除非团队能够贴近硬件开发，并准备好向上游贡献修复，否则应将 Rust 在 SF32 上的使用限定在探索阶段。
 
+截至 2026-11-04，上游 [`sifli-hal` 支持状态](https://github.com/OpenSiFli/sifli-rs/blob/main/sifli-hal/README.md)显示只支持 `sf32lb52x`。规划移植前，应对照该状态和示例核实具体芯片的支持情况；不要仅凭仓库或 crate 名称推断其他 SF32 系列也受支持。
+
 如需搭建初始工具链、原样构建 Blinky 示例并配置烧录 runner，请参阅 [Rust 快速开始](../../../getting-started/rust/getting-started-rust.md)。本页用于评估当前支持范围，并判断是否在该基线之上继续采用 Rust。
 
 ## OpenSiFli 提及的 crate { #crates-mentioned-by-opensifli }

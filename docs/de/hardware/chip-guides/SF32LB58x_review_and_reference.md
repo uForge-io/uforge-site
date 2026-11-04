@@ -21,7 +21,7 @@ hide:
 - [ ] Prüfen Sie, ob die Nenninduktivität der ausgewählten BUCK-Drossel 4,7 µH beträgt und DCR ≤ 0,4 Ω sowie Isat ≥ 500 mA einhält.
 - [ ] Prüfen Sie, ob 48-MHz- und 32,768-kHz-Quarze die empfohlenen Spezifikationen erfüllen und Routing sowie Freihaltebereiche den Designvorgaben entsprechen.
 - [ ] Stellen Sie für die RF-Leiterbahn eine kontrollierte Impedanz von 50 Ω sicher und platzieren Sie das Anpassnetzwerk nahe am Chip.
-- [ ] Prüfen Sie, ob die ausgewählte externe Speicherschnittstelle mit dem vorgesehenen Boot-Design kompatibel ist. Prüfen Sie separat die Beschaltung des Mode-Pins: High-Pegel für den Download-Modus, Low-Pegel für den Start aus dem Benutzerprogrammbereich.
+- [ ] Prüfen Sie, ob die ausgewählte externe Speicherschnittstelle mit dem vorgesehenen Boot-Design kompatibel ist. Prüfen Sie separat, ob ein externer 10-kΩ-Pull-up zur Versorgung oder Pull-down zu GND den Mode-Pin auf dem vorgesehenen stabilen Pegel hält: High für den Download-Modus, Low für den Start der Benutzeranwendung. Der Pin darf nicht offen bleiben oder durch Störungen umschalten.
 - [ ] Prüfen Sie, ob die Display-Schnittstellen (MIPI-DSI/SPI-QSPI/MCU8080/DPI/JDI) die jeweiligen Impedanz- und Längenabgleichregeln erfüllen. Für DSI gelten 100 Ω differentielle Impedanz, ein Längenunterschied von ≤0,5 mm innerhalb jedes Differenzpaars und ≤2 mm zwischen den Differenzpaaren.
 - [ ] Prüfen Sie, ob die USB-Leitung die Anforderung von 90 Ω differentieller Impedanz erfüllt. Führen Sie SDIO-Signale gemeinsam; die Gesamtlänge darf 50 mm und der Längenunterschied innerhalb einer Gruppe 6 mm nicht überschreiten.
 - [ ] Sichern Sie den Zugang zu SWD, zur ausgewählten Debug-Ausgabeschnittstelle aus den sechs verfügbaren UARTs samt zugehörigen Signalpins und zu den Produktionstestpunkten.
@@ -32,7 +32,7 @@ hide:
 
 ## 8. Zugehörige Dokumente und Referenzen { #8-related-documents-and-references }
 
-Verwenden Sie die aktuellsten offiziellen Dokumente zur Prüfung elektrischer Grenzwerte, Gehäusedaten, Pin-Multiplexing, Softwarekonfiguration und Komponentenqualifizierung.
+Prüfen Sie elektrische Grenzwerte, Gehäusedaten, Pin-Multiplexing, Softwarekonfiguration und Komponentenqualifizierung anhand der unten verlinkten offiziellen Unterlagen. Vergewissern Sie sich vor der Designfreigabe, dass für jedes Dokument weiterhin die aktuelle Revision gilt.
 
 <div class="grid cards" markdown>
 
@@ -83,7 +83,7 @@ Ein typisches Smart-Wearable auf Basis des SF32LB58x oder ein intelligentes Endg
 | Version | Datum | Anmerkung |
 |:---|:---|:---|
 | 1.0 | 2026-07 | SF32LB58x-Hardware-Design-Leitfaden mit Hinweisen zu Schaltplan, PCB, Validierung und Fertigungsreview aktualisiert |
-| 0.0.1 | 1/2025 | Erstveröffentlichung des offiziellen Entwurfs von `SF32LB58x-HW-Application` |
+| 0.0.1 | 1/2025 | Entwurfsversion von `SF32LB58x-HW-Application` |
 
 </div>
 

@@ -12,6 +12,8 @@ tags:
 
 SF32LB55x 시리즈는 BLE 연결 제품을 위한 메인스트림 초저전력 AIoT 마이크로컨트롤러 제품군으로, 보급형 Bluetooth MCU보다 강력한 디스플레이 기능, 더 큰 메모리 여유, 더 다양한 패키지가 필요한 제품을 대상으로 합니다.
 
+선택 시 패키지와 패키지 내장 메모리 구분이 중요합니다. SS6600A8은 QFN68L 패키지이며 패키지 내 PSRAM이 없고 2.97~3.63 V 공급 전압이 필요합니다. SF32LB551U4O5와 여기에 나열한 BGA 변형은 1.71~3.63 V를 사용합니다.
+
 big.LITTLE 듀얼 코어 아키텍처에서 두 개의 Arm Cortex-M33 STAR-MC1[^1] 프로세서를 조합합니다. 하나는 최대 240 MHz로 동작하는 고성능 애플리케이션 코어이고, 다른 하나는 최대 48 MHz로 동작하는 초저전력 코어입니다. 이를 통해 부하가 큰 UI 작업은 애플리케이션 코어에 맡기고, 센서 처리, Standby 제어, 계속 동작해야 하는 BLE 작업은 저전력 코어에 배정할 수 있습니다.
 
 SiFli의 공식 제품 브리프와 데이터시트에는 BLE 5.2, ePicasso 2.5D 그래픽 엔진, 듀얼 LCD 컨트롤러, TinyML 지향 신경망 행렬 가속기, 1,312 KB의 온칩 SRAM(HCPU 1,088 KB + LCPU 224 KB)이 나열되어 있으며, 외부 NOR, NAND, eMMC, PSRAM도 지원합니다. 따라서 SF32LB55x는 SF32LB52x보다 많은 리소스가 필요하지만 상위 56/58 제품군 디바이스까지는 필요하지 않은 웨어러블, 센서 중심 제품, 소형 HMI 설계에 실용적인 선택입니다.
@@ -200,10 +202,10 @@ SF32LB55x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 ## 자주 묻는 질문 { #frequently-asked-questions }
 
 **SF32LB55x의 주요 사양은 무엇입니까?**
-SF32LB55x는 애플리케이션 CPU(Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @48 MHz, 사용자 프로그래밍 가능)를 갖추고 있으며, 내장 SRAM은 1,312 KB입니다. Bluetooth 모드는 BLE 전용입니다. 그래픽: ePicasso 1.0. 패키지는 QFN68 / BGA145 / BGA169이며, 크기는 7 × 7 mm (QFN68)입니다. USB는 2.0 FS를 지원합니다.
+SF32LB55x는 애플리케이션 CPU(Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @48 MHz, 사용자 프로그래밍 가능)를 갖추고 있으며, 내장 SRAM은 1,312 KB입니다. Bluetooth 모드는 BLE 전용입니다. 그래픽: ePicasso 1.0. 패키지는 QFN68L / BGA145 / BGA169이며, 크기는 7 × 7 mm (QFN68L)입니다. USB는 2.0 FS를 지원합니다.
 
 **SF32LB55x는 어떤 디스플레이 인터페이스를 지원합니까?**
-지원하는 인터페이스는 SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI입니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix))
+지원하는 인터페이스는 SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI입니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)) 전체 제품군의 인터페이스 목록이며 모든 부품 번호나 패키지에 대한 보장이 아닙니다. 연결된 인터페이스 매트릭스를 확인하십시오.
 
 **SF32LB55x가 지원하는 최대 디스플레이 해상도는 얼마입니까?**
 RGB888 색상에서 최대 512 × 512 해상도를 지원합니다. MIPI-DSI를 사용하며, 내장 RAM이 있는 디스플레이 드라이버만 지원합니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -212,7 +214,7 @@ RGB888 색상에서 최대 512 × 512 해상도를 지원합니다. MIPI-DSI를 
 패키지 내 PSRAM은 최대 16 MB + 2 MB, NOR 플래시는 최대 8 MB를 제공합니다.
 
 **SF32LB55x에는 어떤 공급 전압이 필요합니까?**
-공급 전압은 1.71–3.63 V입니다.
+SS6600A8은 2.97–3.63 V가 필요하며, 이 페이지에 나열된 SF32LB551U4O5와 BGA 모델은 1.71–3.63 V를 사용합니다. 전원 트리를 설계하기 전에 정확한 부품을 선택하십시오.
 
 **SF32LB55x로 하드웨어 설계를 시작하려면 어떻게 해야 합니까?**
 먼저 [SF32LB55x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하십시오.

@@ -7,7 +7,7 @@ tags:
 
 # Tutorial-Übersicht { #tutorials-overview }
 
-Diese Reihe baut auf dem ersten erfolgreichen Flash-Vorgang auf und vermittelt praktische Entwicklungsfähigkeiten für SF32. Sie ist nach dem jeweiligen Entwicklungsziel gegliedert: zuerst ein Peripheriegerät praktisch erproben, dann Subsysteme kombinieren und schließlich die nötigen Nachweise für ein Produkt erarbeiten. Die Tutorials verwenden SiFli-SDK-Beispiele als Ausgangspunkt. Hardware zu prüfen, eine bewährte Ausgangskonfiguration beizubehalten und Ergebnisse zu messen, ist jedoch bei jedem Softwarepfad für SF32 sinnvoll.
+Nach dem ersten erfolgreichen Flash-Vorgang vermittelt diese Reihe praktische Entwicklungsfähigkeiten für SF32 in mehreren Stufen: zuerst ein Peripheriegerät prüfen, dann Subsysteme kombinieren und schließlich die nötigen Nachweise für die Produktvalidierung erarbeiten. Die Tutorials verwenden SiFli-SDK-Beispiele als Ausgangspunkt. Hardware zu prüfen, eine bewährte Ausgangskonfiguration beizubehalten und Ergebnisse zu messen, ist jedoch bei jedem Softwarepfad für SF32 sinnvoll.
 
 Tutorials sind die zweite Stufe von [Erste Schritte](../index.md). Erfüllen Sie zunächst die dort genannten Kriterien für eine erfolgreiche erste Inbetriebnahme. Wenn Sie einen Chip, ein Modul oder ein Entwicklungsboard auswählen, beginnen Sie mit der [SF32-Familie](../../sf32-products/family/SF32_family.md), bevor Sie mit der Reihe beginnen.
 
@@ -25,7 +25,7 @@ Verwenden Sie ein Entwicklungsboard für SF32 mit funktionierender USB-Datenverb
 | Flash-Ablauf | Sie können das Board wiederholt programmieren, ohne die Einrichtung zu ändern. |
 | Serielle Konsole | Sie können Boot-Logs sehen und auf den FinSH-`msh>`-Prompt zugreifen. |
 | Board-Informationen | Halten Sie den Schaltplan oder die Support-Dateien des Boards bereit, bevor Sie Pins oder Peripherie zuweisen. |
-| Messwerkzeuge | Verwenden Sie bei Bedarf ein Multimeter oder einen Logikanalysator; für Energiesparmessungen benötigen Sie einen geeigneten Strommessaufbau. |
+| Messwerkzeuge | Verwenden Sie bei Bedarf ein Multimeter oder einen Logikanalysator; für Messungen im Energiesparbetrieb benötigen Sie einen geeigneten Strommessaufbau. |
 
 </div>
 

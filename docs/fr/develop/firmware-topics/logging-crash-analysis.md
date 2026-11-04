@@ -58,3 +58,6 @@ Pour chaque compilation du firmware, consignez les éléments suivants :
 - Il indique si le plantage se produit sur un exemple du SDK non modifié.
 - Il liste les périphériques connectés et la source d'alimentation.
 - Il indique si le plantage persiste après l'effacement complet de la mémoire Flash et un nouveau flashage.
+
+!!! note "Contenu généré automatiquement"
+    Cette page a été compilée et rédigée sans document source dédié. Vérifiez les affirmations techniques dans la documentation officielle de SiFli avant de vous y fier.

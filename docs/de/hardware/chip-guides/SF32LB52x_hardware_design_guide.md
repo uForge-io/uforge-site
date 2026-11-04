@@ -60,10 +60,11 @@ Die Familie integriert:
 - Zwei STAR-MC1-Prozessorkerne von Arm China, kompatibel mit Arm Cortex-M33 und mit FPU und MPU ausgestattet
 - Dual-Mode-Bluetooth-Funktechnik nach Bluetooth 5.3
 - ePicasso 2.0: 2D/2.5D-Grafikbeschleunigung
+- SiFlis ursprüngliche Hardware-Anwendungshinweise beschreiben einen integrierten KI-Beschleuniger für neuronale Netze. Der [SiFli-SDK-NNACC-Leitfaden](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/nnacc.html) listet SF32LB55x, SF32LB56x und SF32LB58x, jedoch nicht SF32LB52x; bestätigen Sie die Softwareunterstützung für die genaue Variante, bevor Sie sich auf den Beschleuniger verlassen.
 - Display-Controller für SPI-, QSPI-, 8080-, JDI- und 8-Bit-EPD-Schnittstellen
 - USB-2.0-Full-Speed-Device
 - SDIO/eMMC-Speicherschnittstelle bei unterstützten Varianten
-- Analoge und digitale Audioschnittstellen
+- Integrierter Audio-Codec mit analogen und digitalen Audioschnittstellen
 - Integrierte PMU sowie DC/DC-Wandler und LDO-Regler
 - QFN68-Gehäuse mit bis zu 44/45 GPIOs
 
@@ -98,12 +99,12 @@ Je nach Stromversorgungsarchitektur lässt sich die SF32LB52x-Familie in zwei De
 
     | Modell | Speicher im selben Gehäuse | Versorgung | Design-Hinweis |
     |:---|:---|:---|:---|
-    | SF32LB52BU36 | 1 MB QSPI-NOR-Flash | 2,97–3,63 V, nicht wiederaufladbar | `VDD_SIP` benötigt eine externe 1,8-V- oder 3,3-V-Versorgung |
-    | SF32LB52BU56 | 4 MB QSPI-NOR-Flash | 2,97–3,63 V, nicht wiederaufladbar | `VDD_SIP` benötigt eine externe 3,3-V-Versorgung |
-    | SF32LB52DUB6 | 4 MB OPI-PSRAM | 1,71–1,98 V, nicht wiederaufladbar | `VDD_SIP` benötigt eine externe 1,8-V-Versorgung |
-    | SF32LB52EUB6 | 4 MB OPI-PSRAM | 2,97–3,63 V, nicht wiederaufladbar | `VDD_SIP` kann vom internen LDO versorgt werden |
-    | SF32LB52GUC6 | 8 MB OPI-PSRAM | 2,97–3,63 V, nicht wiederaufladbar | `VDD_SIP` kann vom internen LDO versorgt werden |
-    | SF32LB52JUD6 | 16 MB OPI-PSRAM | 2,97–3,63 V, nicht wiederaufladbar | `VDD_SIP` kann vom internen LDO versorgt werden |
+    | SF32LB52BU36 | 1 MB QSPI-NOR-Flash | 2,97–3,63 V, ohne integrierte Ladeschaltung | `VDD_SIP` benötigt eine externe 1,8-V- oder 3,3-V-Versorgung |
+    | SF32LB52BU56 | 4 MB QSPI-NOR-Flash | 2,97–3,63 V, ohne integrierte Ladeschaltung | `VDD_SIP` benötigt eine externe 3,3-V-Versorgung |
+    | SF32LB52DUB6 | 4 MB OPI-PSRAM | 1,71–1,98 V, ohne integrierte Ladeschaltung | `VDD_SIP` benötigt eine externe 1,8-V-Versorgung |
+    | SF32LB52EUB6 | 4 MB OPI-PSRAM | 2,97–3,63 V, ohne integrierte Ladeschaltung | `VDD_SIP` kann vom internen LDO versorgt werden |
+    | SF32LB52GUC6 | 8 MB OPI-PSRAM | 2,97–3,63 V, ohne integrierte Ladeschaltung | `VDD_SIP` kann vom internen LDO versorgt werden |
+    | SF32LB52JUD6 | 16 MB OPI-PSRAM | 2,97–3,63 V, ohne integrierte Ladeschaltung | `VDD_SIP` kann vom internen LDO versorgt werden |
 
     </div>
 

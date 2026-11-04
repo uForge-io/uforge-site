@@ -16,7 +16,7 @@ Las guías `debug_logging` y `crash_analysis` del SDK se complementan: los regis
 
 | Familia | Métodos de depuración y registro |
 |---|---|
-| SF32LB52x, SF32LB56x, SF32LB58x | La guía oficial documenta la captura por UART, `SifliUsartServer`/`AssertDumpUart` y la recuperación con J-Link/Trace32. Use el transporte que siga disponible en el estado de suspensión seleccionado. |
+| SF32LB52x, SF32LB56x, SF32LB58x | Las guías de SiFli para estas familias documentan la captura por UART, `SifliUsartServer`/`AssertDumpUart` y la recuperación con J-Link/Trace32. Use el transporte que siga disponible en el estado de suspensión seleccionado. |
 | SF32LB55x | Se puede cambiar SWD entre HCPU y LCPU con `$SDK_ROOT/tools/segger/jlink_hcpu_a0.bat` y `jlink_lcpu_a0.bat`. La consola ROM de LCPU es UART3 a 1 000 000 baudios; HCPU puede usar UART1/2 o SWD. Como SWD utiliza PB IO, mantenga LPSYS activo o en Light Sleep mientras esté conectado. |
 
 </div>
@@ -36,7 +36,7 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
   --output /tmp/live-crash --elf build_hcpu/main.elf
 ```
 
-Añada `--include-psram --psram-size 8MB` si el destino utiliza PSRAM. Con una sonda J-Link se puede usar `--transport jlink --jlink-ip 127.0.0.1:19025`; seleccione el núcleo afectado con `--core hcpu` o `--core lcpu`. El directorio de salida debe contener el binario capturado, el ELF/AXF del núcleo correspondiente, `log.txt`, `manifest.json` y `sdk_manifest.json`.
+Para exportar también la PSRAM, añada `--include-psram` o use `--psram-size 8MB` para seleccionar manualmente el script de PSRAM. Con J-Link por IP mediante `SifliUsartServer`, use `--transport jlink --jlink-ip 127.0.0.1:19025`; seleccione el núcleo afectado con `--core hcpu` o `--core lcpu`. El directorio de salida debe contener el binario capturado, el ELF/AXF del núcleo correspondiente, `log.txt`, `manifest.json` y `sdk_manifest.json`.
 
 En versiones antiguas del SDK, use el método específico de la familia descrito en la guía correspondiente:
 
@@ -49,13 +49,13 @@ Al capturar con scripts, haga coincidir el archivo `.jlink` con la familia, la c
 ![Opción de traza de memoria de SF32LB52x en menuconfig](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_mem_trace.png){ loading="lazy" }
 <div align="center"><em>Figura: Ejemplo de la guía SF32LB52x: habilite la traza de memoria antes de reproducir un fallo si necesita datos del heap.</em></div>
 
-La captura por UART normalmente requiere que coincidan la utilidad serie, la dirección del servidor y el núcleo de destino. Las capturas de pantalla siguientes, tomadas de la guía, ayudan a comprobar la conexión:
+La captura por UART normalmente requiere que coincidan la utilidad serie, la dirección del servidor y el núcleo de destino. El ejemplo para Windows de la guía SF32LB52x ubica las herramientas en `SiFli_Trace_v2.3.0/Sifli_UsartServer_v2.8`, que contiene `SifliUsartServer.exe`; la ruta y la versión locales pueden variar. La captura de los ajustes de conexión muestra UART1 del chip asignado a COM17 del equipo anfitrión, 1 000 000 baudios, el servidor `127.0.0.1:19025` y el núcleo HCPU. Son valores ilustrativos de la guía, no valores predeterminados para otras placas o conexiones:
 
 ![Ubicación de las herramientas SiFli_Trace y SifliUsartServer](../../../../assets/develop/app-notes/crash-analysis/Sifli_Trace.png){ loading="lazy" }
-<div align="center"><em>Figura: Ejemplo de la guía SF32LB52x: directorio de herramientas.</em></div>
+<div align="center"><em>Figura: Ejemplo de la guía SF32LB52x: directorio SiFli_Trace/SifliUsartServer con una utilidad de servidor versionada.</em></div>
 
 ![Ajustes de conexión SifliUsartServer SF32LB52x](../../../../assets/develop/app-notes/crash-analysis/UsartServer52.png){ loading="lazy" }
-<div align="center"><em>Figura: Ejemplo de la guía SF32LB52x: el puerto serie, la velocidad en baudios, la dirección del servidor y el núcleo de depuración deben coincidir con el destino capturado.</em></div>
+<div align="center"><em>Figura: Ejemplo de la guía SF32LB52x: UART1 asignado a COM17, 1 000 000 baudios, servidor `127.0.0.1:19025` y núcleo HCPU; son ajustes de ejemplo, no valores predeterminados universales.</em></div>
 
 ![Script de guardado de RAM del analizador de volcados](../../../../assets/develop/app-notes/crash-analysis/save_ram_uart_52.png){ loading="lazy" }
 <div align="center"><em>Figura: Ejemplo de la guía SF32LB52x: el directorio incluye scripts por familia y método de conexión, como `save_ram_55x.bat`, `save_ram_58x.bat` y `save_ram_uart_52x.bat`; elija el que corresponda al destino y a la conexión.</em></div>
@@ -74,10 +74,10 @@ sdk.py crash-dump analyze --core /tmp/live-crash/coredump.elf \
 El flujo antiguo de Trace32 carga un paquete de aserción HCPU con el botón HCPU assertion (HA) y `run_next_step`; para un volcado LCPU, use la configuración de recuperación LCPU. Si no aparece la pila de excepciones, compruebe qué núcleo seleccionó, el ELF y los rangos de memoria antes de interpretar los registros.
 
 ![Ejemplo de selección del script de captura de Trace32](../../../../assets/develop/app-notes/crash-analysis/dump_select.png){ loading="lazy" }
-<div align="center"><em>Figura: Ejemplo de la guía SF32LB52x: selección del script de captura J-Link/Trace32.</em></div>
+<div align="center"><em>Figura: Ejemplo de la guía SF32LB52x: se muestran juntos scripts `.jlink` para los modos IP y USB; la variante IP usa `127.0.0.1:19025` y la conexión directa de J-Link usa la variante USB.</em></div>
 
 ![Ventana de aserción HCPU de Trace32](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_hcpu_window.png){ loading="lazy" }
-<div align="center"><em>Figura: Ejemplo de la guía SF32LB52x: tras recuperar el contexto, inspeccione conjuntamente la pila de llamadas, la lista de hilos, el heap y el motivo del error.</em></div>
+<div align="center"><em>Figura: Ejemplo de la guía SF32LB52x: tras recuperar el contexto, inspeccione la pila de llamadas y los paneles `TaskList`, `TaskSwitchHistory`, `heapAllocation`, `error_reason` y desensamblado.</em></div>
 
 ## Detenerse al inicio o ante una posible condición de carrera { #stop-early-during-boot-or-a-suspected-race }
 
@@ -101,6 +101,6 @@ Para inspección interactiva, Ozone puede cargar los ELF de HCPU/LCPU y el SVD c
 El monitor de bus del SDK puede capturar accesos que provoquen un fallo de bus (bus fault). Registre un callback con `dbg_busmon_reg_callback` y use `dbg_busmon_read` y `dbg_busmon_write` del ejemplo de la guía para inspeccionar el rango de direcciones relevante. Combine esta información con el seguimiento del heap y el paquete de fallo; un volcado de registros sin símbolos ni contexto de memoria rara vez basta.
 
 ![Ejemplo de pila de llamadas del heap en Trace32](../../../../assets/develop/app-notes/crash-analysis/crash_analysis_heap_callstack.png){ loading="lazy" }
-<div align="center"><em>Figura: Ejemplo de la guía SF32LB52x: pila de llamadas del heap y ventanas de memoria.</em></div>
+<div align="center"><em>Figura: Ejemplo de la guía SF32LB52x: correlacione la función y línea del manejador de aserciones con la ventana del volcado de memoria sin procesar.</em></div>
 
 Fuentes oficiales por familia: [análisis de fallos SF32LB52x](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/crash_analysis.html), [SF32LB55x](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/crash_analysis.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/crash_analysis.html), [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/crash_analysis.html) y la [guía correspondiente de depuración y registro](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/debug_logging.html).

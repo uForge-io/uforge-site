@@ -75,7 +75,7 @@ hide:
 <a class="uf-spotlight-item uf-spotlight-item--examples" href="projects/index.md" data-radius="230">
   <span class="uf-spotlight-item__art uf-spotlight-item__art--examples" aria-hidden="true"></span>
   <span class="uf-spotlight-item__eyebrow">프로젝트</span>
-  <span class="uf-spotlight-item__title">워치, HMI</span>
+  <span class="uf-spotlight-item__title">스마트워치 및 HMI</span>
   <span class="uf-spotlight-item__copy">양산 수준의 애플리케이션 예제.</span>
 </a>
 
@@ -144,7 +144,7 @@ hide:
 
 ---
 
-## 지원하는 SF32 MCU [^1] { #supported-sf32-mcus .uf-center-heading }
+## SF32 MCU 제품군 [^1] { #supported-sf32-mcus .uf-center-heading }
 
 <div class="grid cards uf-mcu-grid" markdown>
 

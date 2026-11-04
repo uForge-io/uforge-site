@@ -6,7 +6,7 @@
 
 このサイトで公開されているのは、以下に挙げるページのみです。社内の作業メモ、プロセス文書、執筆テンプレートはこのドメインから完全に除外されており、公開コンテンツには含まれません。
 
-名称：μForge.io と uForge.io は同一のプロジェクトで、相互に置き換えて使われます。「μ」（ギリシャ文字のミュー、micro＝マイクロ）はギリシャ文字を入力しにくい場面で ASCII の「u」（you＝あなた、とも読む）と書かれ、μForge = uForge、μForge.io = uForge.io（ドメインは uForge.io）です。
+名称：プロジェクト名はμForge.ioです。μはギリシャ文字のミューで、micro（マイクロ）を表します。サイトのURLではASCIIドメインの `uforge.io` を使用します。
 
 言語：英語（基準、サイトのルート）と、機械支援による翻訳の中国語（/zh/）、日本語（/ja/）、スペイン語（/es/）、ドイツ語（/de/）、フランス語（/fr/）、ポルトガル語（/pt/）、ロシア語（/ru/）、韓国語（/ko/）。翻訳ページは英語ページと同じパスに言語プレフィックスを付けたもので、各言語の索引は https://uForge.io/<lang>/llms.txt にあります。
 
@@ -14,7 +14,7 @@
 
 ## はじめに
 
-- [SF32開発の始め方](https://uForge.io/ja/getting-started/): SF32で開発を始める方法：SiFli-SDK、CodeKit、Zephyr、Arduino、Rust、MicroPythonの現状と、各環境で必要なハードウェア。
+- [SF32開発の始め方](https://uForge.io/ja/getting-started/): SF32開発の開始点となるSiFli-SDK、CodeKit、Zephyr、Arduino、Rust、MicroPythonの現状と必要なハードウェア。
 - [SiFli-SDKをはじめる](https://uForge.io/ja/getting-started/sifli/getting-started-sifli-sdk/): 開封したばかりのSF32ボードで、SiFli-SDKの環境を構築し、sconsでビルドして、UART経由でhello_worldを実行するまでを説明します。
 - [SiFli CodeKit](https://uForge.io/ja/getting-started/sifli/getting-started-sifli-codekit/): VS CodeでSiFli CodeKitを初めて使う手順を説明します。拡張機能、SF32ボード、hello_worldのビルドと書き込み、シリアルコンソールを扱います。
 - [Zephyr upstream](https://uForge.io/ja/getting-started/zephyr/getting-started-zephyr-upstream/): Zephyr upstreamのSF32LB52 DevKit LCDボードターゲットをビルド、書き込みし、ドキュメントに記載されたコンソール設定とサポート機能を確認します。
@@ -28,7 +28,7 @@
 - [ハードウェア](https://uForge.io/ja/hardware/): SF32の基準構成を再利用するか、選定したデバイスを使って設計し、量産に向けて仕上げます。
 - [製品を計画する](https://uForge.io/ja/sf32-products/family/product-planning/): SF32製品の企画から量産準備までの一連の流れ。デバイスと実装形態を選び、開発ボードでソフトウェアを検証してから、量産に向けて設計を準備します。
 - [SF32 FAQ](https://uForge.io/ja/sf32-products/family/faq/): SF32製品選定のFAQ：チップ、モジュール、開発ボード、メモリーとインターフェース、Bluetooth、GPIO、規制表示、供給とカスタマイズ。
-- [リファレンスデザイン](https://uForge.io/ja/hardware/reference-designs/reference-designs/): μForgeのリファレンスデザインを比較し、再現可能なハードウェア／ソフトウェア検証の流れから、製品に最も近いものを選びます。
+- [リファレンスデザイン](https://uForge.io/ja/hardware/reference-designs/reference-designs/): μForgeのリファレンスデザインを比較し、製品に合ったハードウェア／ソフトウェア検証の道筋を選びます。
 - [コネクテッド・ウェアラブルのリファレンスデザイン](https://uForge.io/ja/hardware/reference-designs/connected-wearable-journey/): SF32LB52開発ボードでの検証から、コネクテッド・ウェアラブルのカスタムハードウェア／ファームウェアのリリースまでを進める、実践的なリファレンスデザインの道筋です。
 - [SF32製品選定ツール](https://uForge.io/ja/sf32-products/product-selector/): 製品の制約条件からSF32チップとモジュールを絞り込み、対応ハードウェアで実装パスを検証します。
 - [量産に向けた設計](https://uForge.io/ja/hardware/design-for-production/): SF32ハードウェアの量産設計の入口。チップ／モジュールの設計ガイド、チェックリスト、インターフェース定義、適合性確認済み部品、EDAライブラリをまとめています。
@@ -107,7 +107,7 @@
 
 - [開発の概要](https://uForge.io/ja/develop/): SiFli-SDKを使ってSF32製品を開発するための実務ガイドです。日々の開発フロー、アプリケーションノート、サンプル、ツール、ファームウェアのトピック、コミュニティの選択肢を案内します。
 - [SiFli-SDKプラットフォーム概要](https://uForge.io/ja/develop/platforms/sifli-sdk/overview/): SF32ファームウェア開発の標準となるSiFli-SDKを紹介します。sconsによるビルドとsdk.py menuconfigの基本的な使い方、ボード名、プロジェクト構成、量産準備に関する確認事項を説明します。
-- [ビルド、書き込み、シリアル出力の確認](https://uForge.io/ja/develop/platforms/sifli-sdk/build-flash-monitor/): SiFli-SDKの日常的な開発手順：環境を有効化し、sconsでビルドし、UARTダウンロードスクリプトまたはsftoolで書き込み、シリアル出力を確認します。
+- [ビルド、書き込み、シリアル出力の確認](https://uForge.io/ja/develop/platforms/sifli-sdk/build-flash-monitor/): SiFli-SDKの日常的な開発手順：環境を有効化し、sconsでビルドし、生成されたUARTダウンロードスクリプトまたはsftoolで書き込み、シリアル出力を確認します。
 - [ボード設定](https://uForge.io/ja/develop/platforms/sifli-sdk/board-configuration/): SiFli-SDKの --board 名を実際のSF32ハードウェアに対応付け、Flash/PSRAM配置、ピン多重化、ディスプレイ／オーディオ経路を確認する方法と、ボード立ち上げチェックリストを説明します。
 - [コンポーネントと`sf-pkg`](https://uForge.io/ja/develop/platforms/sifli-sdk/components/): SiFli-SDKのサンプルを再利用可能なコンポーネントや `sf-pkg` パッケージにする方法、品質基準、記録すべき内容、パッケージ化で起こりやすい問題を説明します。
 - [デバッグと診断](https://uForge.io/ja/develop/platforms/sifli-sdk/debugging-diagnostics/): sftool、AssertDump、SiFli_Trace、RT-Threadシェルを使ったSF32ファームウェアのデバッグ手順と、再現の進め方、クラッシュレポートのチェックリストを説明します。
@@ -174,7 +174,7 @@
 - [SF32 BLE Talkbackインターコム](https://uForge.io/ja/projects/sf32-ble-talkback/): SF32LB52-DevKit-ULPとOpenSiFli Talkbackを使い、複数デバイス対応BLEプッシュ・トゥ・トークを再現・評価するための製品開発手順。
 - [SF32電子ペーパーEPUBリーダー](https://uForge.io/ja/projects/sf32-epd-reader/): SF32-OED-EPDハードウェア上でOpenSiFli EPD Readerを再現・評価するための製品開発手順。
 - [SuperKey多機能マクロキーボード](https://uForge.io/ja/projects/superkey/): 3 画面、USB HID/CDC、PC連携アプリを備えるSF32LB52ベースのSuperKey。再現、通信と復旧の検証、計画的な変更、製品設計への引き継ぎまでを案内します。
-- [Radiation Monitor携帯型電波強度検出器](https://uForge.io/ja/projects/radiation-monitor/): SF32LB52ベースのBluetooth帯域電波強度ビューアー。Radiation Monitorを再現し、79 点スキャン、RSSI平滑化、履歴再生を検証して、校正と製品レビューの範囲を定めます。
+- [Radiation Monitor携帯型電波強度ビューアー](https://uForge.io/ja/projects/radiation-monitor/): SF32LB52ベースのBluetooth帯域電波強度ビューアー。Radiation Monitorを再現し、79 点スキャン、RSSI平滑化、履歴再生を検証して、校正と製品レビューの範囲を定めます。
 - [Pocket Pi SF32ハンドヘルドゲーム機](https://uForge.io/ja/projects/pocket-pi/): Pocket Piで再現可能な開発手順を示します。SF32LB52上でNESエミュレーション、320 × 240 ディスプレイ、AW9523入力、オーディオ、ROMファイルシステム、ステートセーブからの復旧を検証します。
 - [LilyGO T-Display-SF32](https://uForge.io/ja/projects/lilygo-t-display-sf32/): LilyGO製のサードパーティーT-Display-SF32を製品開発に活用するための手順。ベンダー提供の基準構成を確立し、ディスプレイ、周辺機器、電源動作、復旧方法を検証したうえで、SiFli-SDKのビルドを再現し、計画的に変更を加えます。
 - [SF32向けZMKキーボードファームウェア](https://uForge.io/ja/projects/zmk-sf32/): OpenSiFliによるSF32LB52向けZMKポートを評価するための手順。Urchin分割キーボードの基準構成を再現し、USB、BLE、設定、復旧を検証してから、キーマップやハードウェアを計画的に変更します。
@@ -193,7 +193,7 @@
 ## ブログ
 
 - [ブログ](https://uForge.io/ja/blog/): μForge.ioブログ：製品の更新情報やリリース情報、SF32ドキュメントの技術解説を掲載します。
-- [10月：SF32LB57xのご紹介 [2026-10-28]](https://uForge.io/ja/blog/posts/2026-10-28-october-sf32lb57x-release/): SF32LB57xを掲載しました。アプリケーションCPUの演算性能はSF32LB56xの約2倍、ePicasso 3.0グラフィックス、そして競争力のあるコスト構造を備えています。
+- [10月：SF32LB57xのご紹介 [2026-10-28]](https://uForge.io/ja/blog/posts/2026-10-28-october-sf32lb57x-release/): SF32LB57xの情報を公開しました。アプリケーションコアの合計性能はSF32LB56xの約2倍で、ePicasso 3.0グラフィックスと競争力のあるコスト構造を備えています。
 - [多言語翻訳を、一歩ずつ反復して [2026-10-07]](https://uForge.io/ja/blog/posts/2026-10-07-multi-language-translation/): μForge.ioに7言語の翻訳を追加。LLMツールを使い、何度も反復して仕上げました。
 - [8月：情報の拡充から確信へ [2026-08-24]](https://uForge.io/ja/blog/posts/2026-08-24-august-progress/): μForge.ioの8月：製品選定の改善、再利用できるプロジェクト、実践的な学習コンテンツ、サポートへの直接の問い合わせ窓口。
 - [最初のブログ記事 [2026-07-31]](https://uForge.io/ja/blog/posts/2026-07-31-the-first-blog/): μForge.io最初のブログ記事: 私たちのミッション、この1か月で構築してきたもの、そしてSF32ドキュメントの今後の展望。
@@ -205,7 +205,7 @@
 ## AI エージェントおよびコーディングアシスタント向けの注記
 
 - すべてのハードウェア設計ガイドは、H3 小節ごとに採番された節・表・図（例：「表 5.1-1」「図 5.2-3」）を使用しています。特定の値を引用する際は、これらの番号を安定したアンカーとして扱ってください。
-- 各チップ／モジュールファミリーは同じ構成です。イントロダクションページ（デバイス概要、バリアント、パッケージ、用途）とハードウェア設計ガイド（回路図ガイダンス、PCB レイアウト、製造チェックリスト）があり、一部のチップには独立したハードウェア設計チェックリストページもあります。
+- 各チップ／モジュールファミリーには、紹介ページ（デバイス概要、バリアント、パッケージ、用途）とハードウェア設計ガイドのページ群（回路図、PCBレイアウト、製造時の確認事項）があります。回路図とPCBの詳細チェックリストはガイドのページ構成に含まれます。短いPCBチェックリストはレイアウトページの末尾にまとめる場合もあります。
 - サイトは 9 言語で公開されています。英語（基準、サイトのルート）と、機械支援翻訳の中国語（/zh/）、日本語（/ja/）、スペイン語（/es/）、ドイツ語（/de/）、フランス語（/fr/）、ポルトガル語（/pt/）、ロシア語（/ru/）、韓国語（/ko/）です。翻訳ページは、言語プレフィックスの下で英語ページと同じパスを持ちます。
 - 正式な電気的仕様、ピンマッピング、部品の適格性については、各ガイドから SiFli のデータシート、ユーザーマニュアル、SiFli 承認ベンダーリスト（AVL）へリンクしています。
 - A full-text bundle of the key pages (getting started, SF32 chips, modules, dev boards, SDK basics, and learning overviews) is at https://uForge.io/llms-full.txt, with a localized copy at https://uForge.io/<lang>/llms-full.txt; fetch it when one request should cover the whole platform.

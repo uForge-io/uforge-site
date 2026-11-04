@@ -42,16 +42,16 @@ PTM est un moteur programmable relié aux E/S, aux événements, aux FIFO/DMA et
 Application / firmware
         │
         ▼
-Le CPU configure la tâche PTM
+CPU configures PTM task
         │
         ▼
-PTM exécute une séquence déterministe de tâches périphériques
+PTM executes deterministic peripheral sequences
         │
-        ├── Lecture / écriture des E/S
-        ├── Transfert de données par FIFO / DMA
-        ├── Accès à la mémoire ou aux registres AHB
-        ├── Attente d'un événement / délai fixe
-        └── Interruption CPU ou notification d'événement interne
+        ├── IO read/write
+        ├── FIFO / DMA data movement
+        ├── AHB memory or register access
+        ├── Event wait / fixed delay
+        └── CPU interrupt or internal event notification
 ```
 
 L'intérêt architectural de PTM est qu'il exécute un programme d'instructions compact et personnalisé et ne se limite pas au contrôle des broches. Il peut lire et écrire les E/S, attendre des événements, utiliser les FIFO/DMA, accéder à la mémoire AHB et aux registres des périphériques, puis avertir le CPU lorsqu'une intervention du firmware de plus haut niveau est nécessaire.
@@ -184,13 +184,13 @@ Les chemins d'exécution de ces mécanismes sont les suivants :
 <div align="center"><em>Figure : chemins d'exécution de PPI, DPPI, PIO et PTM</em></div>
 
 ```text
-PPI : point de connexion d'événement ──> canal PPI ──> point de connexion de tâche
+PPI:  Event endpoint ──> PPI channel ──> Task endpoint
 
-DPPI : périphérique émetteur ──> canal DPPI ──> tâche du périphérique abonné
+DPPI: Publisher peripheral ──> DPPI channel ──> Subscriber peripheral task
 
-PIO : CPU/DMA ──> instructions de la machine à états PIO ──> temporisation GPIO et FIFO
+PIO: CPU/DMA ──> PIO state-machine instructions ──> GPIO timing and FIFOs
 
-PTM : configuration CPU ──> instructions de tâche PTM ──> E/S + événements + FIFO/DMA + accès AHB
+PTM: CPU configuration ──> PTM task instructions ──> IO + events + FIFO/DMA + AHB access
 ```
 
 PPI et DPPI relient les événements sans exécuter de programme, mais se limitent à relier des événements et des tâches existants ; ils ne permettent pas de définir une nouvelle logique de protocole. PIO permet de programmer le comportement des broches au moyen de machines à états, principalement pour les GPIO et les FIFO. PTM couvre des tâches plus larges : il peut réunir dans une même séquence exécutable la temporisation des E/S, l'attente d'événements, les transferts de données, l'accès aux registres et la coordination de petites tâches.

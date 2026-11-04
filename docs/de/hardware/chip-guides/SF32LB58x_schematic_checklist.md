@@ -19,6 +19,8 @@ hide:
 
 Die folgenden Tabellen sind nach funktionalen Schaltungsblöcken gegliedert. Maßgeblich für die Anwendbarkeit sind die Bedingungen im jeweiligen Prüfpunkt: erforderliche Punkte sind zu prüfen, sobald diese Bedingungen erfüllt sind; optionale Punkte sind relevant, wenn die entsprechende Funktion oder Entwurfsoption verwendet wird.
 
+Diese Seite gibt die verlinkte SiFli-Arbeitsmappe in Version V1.0 vom 2026-01-21 wieder; sie erhebt nicht den Anspruch, die neueste Online-Fassung zu sein.
+
 ### 5.8.1. Gehäuse { #581-package }
 
 <div align="center"><em>Tabelle 5.8.1-1: Gehäuse-Checkliste</em></div>
@@ -484,7 +486,7 @@ Die I/O-Versorgung VDDIOA2 für SD1 unterstützt 1,8 V oder 3,3 V und muss zum I
 | 2 | PBR0-PBR5 können sowohl in Standby als auch in Hibernate als Ausgänge verwendet werden | Optional |
 | 3 | PBR0-PBR5 können das LPTIM-Signal ausgeben | Optional |
 | 4 | <span class="flag-red">Für den SF32LB567 wird LPTIM3 empfohlen: LPTIM3_OUT und LPTIM3_OUT_BAR geben 21-25-kHz-Signale von PBR-Pins mit unterschiedlichen Tastverhältnissen und entgegengesetzter Polarität aus</span> | Optional |
-| 5 | <span class="flag-red">Die 21-25-kHz-Signale mit entgegengesetzter Polarität und unterschiedlichen Tastverhältnissen können auch von HCPU ATIM ausgegeben werden; geeignete ATIMx_CHx- und ATIMx_CHxN-Signale zusammen mit Pin_Config auswählen und die Auswirkung der HCPU-Frequenzabsenkung berücksichtigen</span> | Optional |
+| 5 | <span class="flag-red">Die 21-25-kHz-Signale mit entgegengesetzter Polarität und unterschiedlichen Tastverhältnissen können auch von HCPU ATIM ausgegeben werden; geeignete ATIMx_CHx- und ATMx_CHxN-Signale zusammen mit Pin_Config auswählen und die Auswirkung der HCPU-Frequenzabsenkung berücksichtigen</span> | Optional |
 | 6 | PBR0-PBR5 können ein 32-kHz-Taktsignal ausgeben | Optional |
 | 7 | <span class="flag-red">PBR0-PBR3 können als Weckeingänge konfiguriert werden. Nach dem Wecken der MCU können PBR0-PBRx jedoch keine Interruptsignale empfangen, sondern nur 0-/1-Pegel erkennen. Mit Vorsicht verwenden</span> | Optional |
 
@@ -494,6 +496,8 @@ Die I/O-Versorgung VDDIOA2 für SD1 unterstützt 1,8 V oder 3,3 V und muss zum I
     Prüfpunkt 4 der PBR-Checkliste in der [ursprünglichen Checklisten-Arbeitsmappe](https://downloads.sifli.com/hardware/files/documentation/SF32LB58x%20Schematic%26PCB%20checklist_V1.0_20260121.xlsx) nennt SF32LB567. Die Arbeitsmappe bestätigt jedoch nicht, dass die Punkte 4 und 5 der PBR-Checkliste Empfehlungen für SF32LB58x sind. Klären Sie die Anwendbarkeit mit SiFli, bevor Sie diese Punkte übernehmen.
 
     Prüfpunkt 6 der Speicher-Checkliste in der Arbeitsmappe sagt, dass PA43 auf High getrieben wird, um die „MPI3-Stromversorgung“ zu aktivieren. Der [offizielle Hardware-Anwendungshinweis für SF32LB58x](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/hardware/SF32LB58x-HW-Application.md) beschreibt PA43 dagegen als Steuerpin für die Stromversorgung des externen Flash und fordert High, um diesen zu versorgen. Die Checklistenzeile behält den Wortlaut der Arbeitsmappe bei. Klären Sie mit SiFli, welche Versorgungsschiene und welcher Schnittstellenumfang vorgesehen sind, bevor Sie den Produktions-Programmierablauf festlegen.
+
+    Die Arbeitsmappe schreibt den komplementären Ausgang als `ATMx_CHxN`. Diese Quellschreibweise bleibt erhalten; prüfen Sie die genauen Signalnamen vor der Verwendung in der `Pin_Config` des ausgewählten Bauteils.
 
 ### 5.8.26. Stromverbrauch { #5826-power-consumption }
 

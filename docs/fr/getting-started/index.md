@@ -1,7 +1,7 @@
 ---
 icon: lucide/rocket
 title: "Vue d'ensemble des premiers pas"
-description: "Choisir votre premier parcours logiciel SF32 — SiFli-SDK, CodeKit, Zephyr, Arduino, Rust ou MicroPython — selon son état actuel et le matériel requis."
+description: "Choisissez un point de départ logiciel pour SF32 — SiFli-SDK, CodeKit, Zephyr, Arduino, Rust ou MicroPython — avec son état actuel et le matériel requis."
 tags:
     - Prise en main
     - SF32
@@ -9,7 +9,7 @@ tags:
 
 # Vue d'ensemble de la prise en main { #getting-started }
 
-Les puces SF32 prennent en charge plusieurs parcours logiciels. SiFli-SDK et CodeKit sont actuellement les parcours officiels pour une première mise en route. Depuis Zephyr v4.3.0, le projet Zephyr en amont maintient la prise en charge de la SF32LB52 DevKit LCD. OpenSiFli propose aussi une version bêta d'ArduinoCore-zephyr et développe la prise en charge de Rust pour SF32LB52. Pour proposer un tutoriel MicroPython vérifié, il manque encore des images de firmware officielles et des instructions propres à chaque carte.
+Les appareils SF32 prennent en charge plusieurs parcours logiciels. SiFli-SDK est la pile logicielle de référence officielle de SiFli ; CodeKit est le flux officiel pour VS Code qui permet d'installer le SDK, de créer des projets, de les compiler et flasher, puis de surveiller la sortie série. Depuis Zephyr v4.3.0, le projet Zephyr en amont maintient la prise en charge de la SF32LB52 DevKit LCD. OpenSiFli propose aussi une version bêta d'ArduinoCore-zephyr et développe la prise en charge de Rust pour SF32LB52. Pour proposer un tutoriel MicroPython vérifié, il manque encore des images de firmware officielles et des instructions propres à chaque carte.
 
 Pour connaître le flux de développement de référence et le périmètre actuel de chaque parcours, consultez la [Vue d'ensemble du développement](../develop/index.md). Le tableau ci-dessous sert uniquement à choisir un point de départ. Les pages de chaque plateforme font référence pour connaître les cartes prises en charge et leurs limites.
 
@@ -19,7 +19,7 @@ Pour connaître le flux de développement de référence et le périmètre actue
 
 <div align="center" markdown>
 
-| Parcours | Statut actuel | Commencer ici |
+| Option | Statut actuel | Commencer ici |
 |:-----|:---------------|:-----------|
 | **SiFli-SDK** | Parcours officiel de SiFli pour le développement de référence sur SF32 : RT-Thread, Bluetooth, graphismes, audio, basse consommation et mise en service des cartes. | [SiFli-SDK](sifli/getting-started-sifli-sdk.md) |
 | **SiFli CodeKit** | Environnement officiel SiFli pour VS Code : configuration du SDK, création de projets, compilation, flashage et utilisation du moniteur série. | [SiFli CodeKit](sifli/getting-started-sifli-codekit.md) |

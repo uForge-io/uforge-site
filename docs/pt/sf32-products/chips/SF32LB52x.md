@@ -12,7 +12,9 @@ tags:
 
 SF32LB52x é uma família de MCUs da SiFli otimizada para reduzir custos, voltada a dispositivos vestíveis de entrada, HMIs gráficas compactas, periféricos Bluetooth e outros produtos AIoT com espaço limitado que ainda precisam de display, áudio, armazenamento e conectividade sem fio integrados.
 
-Em nível de plataforma, a família combina um núcleo de aplicação Arm Cortex-M33 STAR-MC1[^1] a 240 MHz com um núcleo controlador Bluetooth dedicado de baixo consumo a 24 MHz. Ao manter a conectividade Bluetooth e as tarefas sempre ativas separadas da aplicação, o chip consegue executar uma interface responsiva e a pilha principal da aplicação.
+Em nível de plataforma, a família combina um núcleo de aplicação Arm Cortex-M33 STAR-MC1[^1] a 240 MHz com um núcleo controlador Bluetooth dedicado de baixo consumo, cuja frequência máxima indicada na datasheet é 24 MHz. Ao manter a conectividade Bluetooth e as tarefas sempre ativas separadas da aplicação, o chip consegue executar uma interface responsiva e a pilha principal da aplicação.
+
+**Nota sobre a frequência do LCPU:** a [datasheet DS5201 V2.5.3 (em chinês)](https://downloads.sifli.com/user%20manual/DS5201-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p5p3.pdf) informa o máximo de 24 MHz para o LCPU. O [relatório atual de medições de baixo consumo do SF32LB52x](https://docs.sifli.com/projects/rpt5202_sf32lb52x-low-power-measurement-report/latest/en/brief_introduction.html) e o [guia de baixo consumo do SDK](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/low_power.html) indicam 48 MHz, mas nenhum especifica SKU, modo de operação ou condição de configuração que explique a diferença. Esta página usa o valor da datasheet para comparação; não interprete `24/48 MHz` como uma faixa selecionável nem como diferença entre variantes. Confirme com a SiFli a frequência LCPU permitida para o dispositivo e o SDK exatos.
 
 Para planejar o produto, as principais variantes listadas no guia de modelos de chips da SiFli podem ser divididas em dois grupos definidos pela alimentação:
 
@@ -178,7 +180,9 @@ Siga esta sequência para transformar uma seleção preliminar de SF32LB52x em u
 ## Perguntas frequentes { #frequently-asked-questions }
 
 **Quais são as principais especificações do SF32LB52x?**
-O SF32LB52x combina uma CPU de aplicação (Cortex-M33 @240 MHz) com um núcleo de baixo consumo (Cortex-M33 @24/48 MHz, controlador Bluetooth dedicado). Integra 576 KB de SRAM interna e oferece Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 2.0 Lite. Encapsulamento: QFN68 (7 × 7 mm). USB 2.0 FS.
+O SF32LB52x oferece processamento de aplicações (Cortex-M33 @240 MHz) e um núcleo de baixo consumo (Cortex-M33, até 24 MHz, controlador Bluetooth dedicado). Integra 576 KB de SRAM interna e oferece Bluetooth dual-mode (BT clássico + BLE). Gráficos: ePicasso 2.0 Lite. Encapsulamento: QFN68 (7 × 7 mm). USB 2.0 FS.
+
+Este clock do LCPU segue o datasheet, não uma faixa de operação de 24/48 MHz já confirmada. Consulte a [divergência entre fontes](#overview) e confirme o componente e o SDK exatos com a SiFli.
 
 **Quais interfaces de display o SF32LB52x suporta?**
 SPI / DSPI / QSPI / 8080 / EPD / JDI. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -212,3 +216,6 @@ Comece pelo [guia de projeto de hardware do SF32LB52x](../../hardware/chip-guide
 ### Produtos de referência { #reference-products }
 
 Produtos típicos com SF32LB52 incluem smartwatches e pulseiras fitness de entrada, acessórios Bluetooth, controles gráficos compactos, etiquetas eletrônicas de prateleira, crachás inteligentes, impressoras portáteis de etiquetas e displays para e-bikes ou e-scooters com foco em custo.
+
+!!! note "Conteúdo gerado automaticamente"
+    Esta página foi compilada/redigida sem um documento-fonte existente. Verifique as afirmações técnicas na documentação oficial da SiFli antes de utilizá-las.

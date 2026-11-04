@@ -108,6 +108,8 @@ Die Spalte der Datenleitungen zählt Nutzdatensignale, nicht Takt-, Chip-Select-
 
 Der SiFli-[Chipmodell-Leitfaden](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.md) nennt als Beispiele für Dual-Channel-Konfigurationen: **SF32LB566VCB36** mit 8 MB OPI-PSRAM an MPI1 und 4 MB an MPI2, **SF32LB586VDD36** mit jeweils 16 MB HPI-PSRAM an beiden Schnittstellen sowie **SF32LB587VEE56** mit jeweils 32 MB HPI-PSRAM. Diese Bestellnummern veranschaulichen die Speichertopologie; sie garantieren nicht, dass ein einzelner Client die aggregierte Payload-Rate aus der Tabelle erreicht. Prüfen Sie vor der Auslegung eines bandbreitenkritischen Designs die vollständige Bestellnummer und das SDK-Speichermapping. Andere Gehäusevarianten oder SKUs derselben Familie können eine andere Speicheranordnung verwenden.
 
+Der SF32LB52-Leitfaden weist darauf hin, dass sich die dort aufgeführten Schnittstellenfrequenzen in der offiziellen Freigabe noch ändern können.
+
 ### Warum zwei Speicherkanäle wichtig sind { #why-two-memory-channels-matter }
 
 Der wichtigste Vorteil einer Dual-Channel-Anordnung ist nicht allein ein höherer aggregierter Durchsatz. Wenn die Speicherzuordnung des ausgewählten SF32 und die Display-/Controller-Konfiguration eine unabhängige Platzierung erlauben, kann ein Kanal einem bandbreitenkritischen Client zugewiesen werden, während der andere die übrigen Systemzugriffe übernimmt.

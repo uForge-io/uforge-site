@@ -46,11 +46,11 @@ DUT를 연결하기 전에 PPK II의 동작 한계를 확인하십시오. Source
 
 ```mermaid
 flowchart LR
-    A["Configured source or battery emulator"] --> B["Current measurement instrument"]
-    B --> C["Defined product supply boundary"]
-    C --> D["SF32 device, radio, and enabled peripherals"]
-    E["Voltage monitor at the same boundary"] -. "record alongside current" .-> C
-    F["Isolated debug or trace interface"] -. "state markers only" .-> D
+    A["설정된 전원 또는 배터리 에뮬레이터"] --> B["전류 측정 계측기"]
+    B --> C["정의된 제품 전원 측정 경계"]
+    C --> D["SF32 디바이스, 라디오 및 활성 주변 장치"]
+    E["같은 경계의 전압 모니터"] -. "전류와 함께 기록" .-> C
+    F["분리된 디버그 또는 트레이스 인터페이스"] -. "상태 마커만 출력" .-> D
 ```
 
 각 실행 전에 다음을 수행하십시오.
@@ -178,12 +178,12 @@ Classic Bluetooth 역할, 상대 기기, Scan 또는 Sniff 정책, TX 전력, �
 
 ```mermaid
 flowchart LR
-    A["Measure device idle baseline"] --> B["Measure BLE-only scenarios"]
-    A --> C["Measure Classic Bluetooth-only scenarios"]
-    B --> D["Run the shipping dual-mode scenario"]
+    A["디바이스 유휴 기준선 측정"] --> B["BLE 단독 시나리오 측정"]
+    A --> C["Classic Bluetooth 단독 시나리오 측정"]
+    B --> D["양산 듀얼 모드 시나리오 실행"]
     C --> D
-    D --> E["Mark BLE, Classic Bluetooth, host, and peripheral work"]
-    E --> F["Use the measured combined energy in the product budget"]
+    D --> E["BLE, Classic Bluetooth, 호스트 및 주변 장치 작업 표시"]
+    E --> F["측정한 결합 에너지를 제품 예산에 반영"]
 ```
 
 독립 BLE 및 Classic Bluetooth 기준선을 파악한 뒤에 비로소 듀얼 모드 제품을 프로파일링해야 합니다. 예를 들어 Classic Bluetooth 오디오를 스트리밍하는 동안 BLE 링크도 유지하는 제품이라면, 동일한 하드웨어와 상대 기기 구성에서 다음을 모두 측정하십시오.
@@ -251,12 +251,12 @@ E_day = sum(E_scenario x events_per_day) + E_mode_idle + E_other_states
 
 ```mermaid
 flowchart LR
-    A["Define one product scenario"] --> B["Measure current and voltage on the device"]
-    B --> C["Mark and attribute trace regions"]
-    C --> D["Calculate energy per completed scenario"]
-    D --> E["Scale by real daily use"]
-    E --> F["Compare with the power budget"]
-    F --> G["Change the largest contributor"]
+    A["제품 시나리오 하나 정의"] --> B["디바이스에서 전류와 전압 측정"]
+    B --> C["트레이스 구간을 표시하고 원인 귀속"]
+    C --> D["완료 시나리오당 에너지 계산"]
+    D --> E["실제 일일 사용량으로 환산"]
+    E --> F["전력 예산과 비교"]
+    F --> G["가장 큰 기여 요인 개선"]
     G --> A
 ```
 

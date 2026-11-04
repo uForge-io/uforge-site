@@ -12,7 +12,7 @@ tags:
 # SF32LB57x Hardware Design Guide — Design Review Checklist and References { #sf32lb57x-hardware-design-guide-design-review-checklist-and-references }
 
 !!! note "Part of the SF32LB57x Hardware Design Guide"
-This page covers Sections 7-10: the customer design self-check, related documents and references, appendices, and revision history. Return to the [PCB layout guidelines](SF32LB57x_pcb_layout.md).
+    This page covers Sections 7-10: the customer design self-check, related documents and references, appendices, and revision history. Return to the [PCB layout guidelines](SF32LB57x_pcb_layout.md).
 
 ## 7. Customer Design Self-Check { #7-customer-design-self-check }
 

@@ -36,14 +36,22 @@ La carte mesure 51 mm × 20,32 mm et expose les principales ressources du SF32LB
 
 La variante N4 convient aux applications compactes de commande, de Bluetooth et d'interface simple. La N16R16 associe 16 MB de PSRAM OPI à 16 MB de QSPI-NOR, tandis que la variante A128R16 associe 16 MB de PSRAM OPI à 128 MB de QSPI-NAND. Toutes deux conviennent aux applications qui ont besoin de ressources d'affichage plus volumineuses, de systèmes de fichiers externes ou d'un tampon d'image ou d'une mémoire de travail en PSRAM.
 
-**Divergence entre sources — à vérifier avant le choix :** le [guide détaillé de la carte Nano](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html) de SiFli appelle sa configuration 16 MB de PSRAM OPI + 16 MB de NOR `R16N16 V1.0.0` ; le [guide actuel des modèles de cartes de développement](https://wiki.sifli.com/en/board/devkit_guide.html) répertorie la même configuration mémoire sous le nom `N16R16` et indique séparément `A128R16` avec 16 MB de PSRAM OPI + 128 MB de QSPI-NAND. Le guide détaillé ne décrit pas spécifiquement la A128R16. Pour cette référence, fiez-vous à l'entrée du guide des modèles plutôt que de transposer des éléments de la description de la carte N16R16. Avant de choisir un firmware ou une organisation du stockage, vérifiez le marquage de la carte ainsi que le schéma et la nomenclature actuels.
+**Divergence entre sources — à vérifier avant le choix :** le [guide détaillé de la carte Nano](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html) de SiFli appelle sa configuration 16 MB de PSRAM OPI + 16 MB de NOR `R16N16 V1.0.0` ; le [guide actuel des modèles de cartes de développement](https://wiki.sifli.com/en/board/devkit_guide.html) répertorie la même configuration mémoire sous le nom `N16R16` et indique séparément `A128R16` avec 16 MB de PSRAM OPI + 128 MB de QSPI-NAND.
 
-Les sources SiFli diffèrent aussi légèrement sur les dimensions de la carte Nano : le guide détaillé indique 21 × 51 mm, tandis que le guide des modèles indique 51 × 20,32 mm. Le côté de 51 mm concorde, mais la dimension la plus courte diffère de 0,68 mm. Cette page retient la valeur plus précise du guide des modèles ; vérifiez le plan mécanique de la révision exacte de la carte avant de concevoir un boîtier ou une carte porteuse.
+Le guide détaillé ne décrit pas spécifiquement la A128R16. Pour cette référence, fiez-vous à l'entrée du guide des modèles plutôt que de transposer des éléments de la description de la carte N16R16.
+
+Avant de choisir un firmware ou une organisation du stockage, vérifiez le marquage de la carte ainsi que le schéma et la nomenclature actuels.
+
+**Écart de dimensions :** le guide détaillé indique 21 × 51 mm, tandis que le guide des modèles indique 51 × 20,32 mm. Le côté de 51 mm concorde, mais la dimension la plus courte diffère de 0,68 mm. Cette page retient la valeur plus précise du guide des modèles.
+
+Avant de concevoir un boîtier ou une carte porteuse, vérifiez le plan mécanique de la révision exacte de la carte.
 
 ## Points forts de la carte { #board-highlights }
 
 - Carte compacte de 51 mm × 20,32 mm
 - Demi-trous métallisés pour des prototypes à braser
+- Quartz de 48 MHz et 32,768 kHz, avec une antenne PCBA intégrée
+- 17 GPIO exposées par le groupe LCC et 13 par le groupe de pastilles LGA ; ressources disponibles : 3 UART, 4 I2C, 2 GPTIM, 2 SPI et 3 GPADC
 - Alimentation USB Type-C et téléchargement/débogage USB-UART via CH340N
 - Les fonctions GPIO, UART, I2C, SPI, GPADC, PWM, I2S et PDM, ainsi que les broches capables de réveiller le système, sont exposées
 - Prise en charge d'un LCD QSPI via un chemin FPC 16 broches, généralement avec un câble adaptateur 22 broches vers 16 broches
@@ -105,11 +113,11 @@ Utilisez l'interface UART via USB Type-C pour le téléchargement du firmware et
 
 ## Récapitulatif des demi-trous métallisés { #castellated-pin-summary }
 
-La carte Nano expose deux groupes de demi-trous métallisés sur son pourtour. Le premier groupe comprend l'audio, le SPI1, l'UART de débogage, l'alimentation proche de l'USB et des broches compatibles GPADC. Le second groupe comprend le SPI2, l'USB FS, des GPIO capables de réveiller le système et l'alimentation.
+La carte Nano expose deux groupes de broches LCC sur son pourtour : J1, à gauche, regroupe principalement l'audio, le SPI1, l'UART de débogage et des broches compatibles GPADC ; J2, à droite, regroupe principalement le SPI2, l'USB FS, des GPIO capables de réveiller le système et l'alimentation. Toutes les GPIO peuvent être multiplexées en UART, I2C ou GPTIM. Les tableaux ne présentent qu'une sélection de fonctions, et non toutes les options de multiplexage ni les états de rappel à la réinitialisation ; consultez le schéma et les fichiers de conception avant la conception électrique.
 
-### Signaux du bord côté face { #front-side-edge-signals }
+### J1 — Signaux du bord LCC gauche { #front-side-edge-signals }
 
-<div align="center"><em>Table des signaux du bord côté face</em></div>
+<div align="center"><em>Table des signaux du bord LCC gauche J1</em></div>
 
 <div align="center" markdown>
 
@@ -134,9 +142,9 @@ La carte Nano expose deux groupes de demi-trous métallisés sur son pourtour. L
 
 </div>
 
-### Signaux du bord côté dos { #back-side-edge-signals }
+### J2 — Signaux du bord LCC droit { #back-side-edge-signals }
 
-<div align="center"><em>Table des signaux du bord côté dos</em></div>
+<div align="center"><em>Table des signaux du bord LCC droit J2</em></div>
 
 <div align="center" markdown>
 
@@ -163,7 +171,7 @@ La carte Nano expose deux groupes de demi-trous métallisés sur son pourtour. L
 
 ## Interface LCD { #lcd-interface }
 
-La carte prend en charge les dalles LCD QSPI via un jeu de signaux FPC à 16 broches. La note d'origine de la carte décrit la connexion à l'écran AMOLED 1,85 pouce de la Huangshan Pi au moyen d'un câble FPC 22 broches vers 16 broches.
+La carte prend en charge les modes LCD SPI, DSPI et Quad-SPI, y compris le QSPI en mode DDR, via un jeu de signaux FPC à 16 broches au pas de 0,5 mm. La note d'origine de la carte décrit la connexion à l'écran AMOLED 1,85 pouce de la Huangshan Pi au moyen d'un câble FPC 22 broches vers 16 broches.
 
 ![Câble adaptateur FPC 22 broches vers 16 broches](assets/sf32lb52x/22p-to-16p.png){ loading="lazy" }
 <div align="center"><em>Câble adaptateur FPC 22 broches vers 16 broches</em></div>
@@ -214,9 +222,11 @@ La variante N16R16 comprend un Flash QSPI-NOR externe de 16 MB. Le groupe de bro
 
 Selon la variante, ces broches peuvent être occupées par le Flash monté. Vérifiez la configuration exacte de la carte avant de les utiliser comme broches d'extension.
 
+Le guide détaillé de la carte répertorie aussi des empreintes WSON8 : 8 × 6 mm ou 6 × 5 mm pour le SPI NOR, et 8 × 6 mm pour le SPI NAND et le SD NAND. Le montage du Flash varie selon la carte ; vérifiez le schéma et la nomenclature de la révision concernée avant de choisir un composant.
+
 ## Extension audio { #audio-expansion }
 
-La carte Nano expose l'entrée microphone analogique, la polarisation du microphone et la sortie audio analogique différentielle. Ajoutez un circuit de microphone externe et un amplificateur de puissance audio selon les besoins du produit visé.
+La carte Nano expose une entrée microphone analogique, la polarisation du microphone, des signaux de microphone numérique PDM et une sortie audio analogique différentielle. L'entrée analogique accepte un microphone analogique ou un microphone au silicium. Pour piloter un haut-parleur, ajoutez un amplificateur de puissance audio externe de classe AB ou D.
 
 ## Cibles de compilation du SDK { #sdk-build-targets }
 

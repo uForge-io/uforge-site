@@ -12,7 +12,7 @@ tags:
 
 ## Was ist EPD Reader? { #what-is-epd-reader }
 
-[OpenSiFli EPD Reader](https://github.com/OpenSiFli/EPD_Reader) passt [atomic14/diy-esp32-epub-reader](https://github.com/atomic14/diy-esp32-epub-reader) an die SiFli-Hardware `SF32-OED-EPD` an. Als Rechenkern dient SF32LB52x. EPUB-Dateien werden aus dem integrierten Dateisystem oder von einer TF-Karte gelesen, per ZIP/XML/XHTML geparst, mit FreeType-Schriften und Bilddecodern aufbereitet und anschließend mit Voll- und Teilaktualisierungs-Waveforms auf dem E-Paper-Panel dargestellt.
+[OpenSiFli EPD Reader](https://github.com/OpenSiFli/EPD_Reader) passt [atomic14/diy-esp32-epub-reader](https://github.com/atomic14/diy-esp32-epub-reader) an die SiFli-Hardware `SF32-OED-EPD` an. SF32LB52x ist der Rechenkern. Die Anwendung liest EPUB-Dateien aus dem integrierten Dateisystem oder von einer TF-Karte, verarbeitet deren ZIP-, XML- und XHTML-Inhalte und berechnet mit FreeType-Schriften und Bilddecodern das Seitenlayout. Anschließend steuert sie das E-Paper-Panel mit Waveforms für Voll- und Teilaktualisierungen an.
 
 Die aktuelle Anwendung umfasst Ansichten für Bibliothek, Inhaltsverzeichnis, Lesen, Leseeinstellungen, Funktionseinstellungen, Begrüßungsbildschirm und ausgeschaltetes Display, niedrigen Akkustand, Laden und Herunterfahren. Sie unterstützt Tasten und Touch, chinesische und englische Texte, dynamische TTF-/OTF-Schriften, Schriftgröße und -stärke, Zeilenabstand, Ränder sowie das Speichern der Leseeinstellungen auf der TF-Karte. Um Ressourcen zu sparen, sind für die mitgelieferte chinesische Schrift standardmäßig keine separaten Fett- und Kursivschnitte aktiviert. Prüfen Sie daher mit der Zielschrift, wie die Einstellungen zur Schriftstärke tatsächlich dargestellt werden. Das Projekt ist eine vollständige Referenz für ein E-Paper-Lesegerät mit niedriger Aktualisierungsrate, aber kein Nachweis allgemeiner EPUB-Konformität und kein serienreifer E-Reader.
 
@@ -137,11 +137,11 @@ flowchart LR
     UI --> PM["TF-Karten-Schlafmodus / Begrüßungsseite / Herunterfahren"]
 ```
 
-Die wichtigsten Fehlerbereiche sind Archiv-/XHTML-Parsing der Inhalte, Schriftdateien und Speicher, Erkennung und Stromversorgung der TF-Karte, Touch-/Tastenzuordnung, Panelmodell/Waveform/VCOM, Geisterbilder bei Voll-/Teilaktualisierung, Akku-ADC/Ladezustand sowie Herunterfahren und Aufwecken. Halten Sie künftige drahtlose Funktionen aus der Basis für lokale Dateien, Display und Stromversorgung heraus, bis ihre Unterstützung im Projekt und ihr Übertragungsweg dokumentiert sind.
+Die wichtigsten Fehlerbereiche sind das Parsing des EPUB-Archivs und von XHTML, Schriftdateien und Speicher, Erkennung und Stromversorgung der TF-Karte, Touch-/Tastenzuordnung, Panelmodell/Waveform/VCOM, Geisterbilder bei Voll-/Teilaktualisierung, Akku-ADC/Ladezustand sowie Herunterfahren und Aufwecken. Halten Sie künftige drahtlose Funktionen aus der Basis für lokale Dateien, Display und Stromversorgung heraus, bis ihre Unterstützung im Projekt und ihr Übertragungsweg dokumentiert sind.
 
 ## Phase 1 — Physische Basis und Quellbasis festlegen { #stage-1-pin-the-physical-and-source-baseline }
 
-**Ziel:** nachweisen, dass Board, Panel, Touchcontroller und Quellcode dieselbe unterstützte Kombination beschreiben.
+**Ziel:** nachweisen, dass die festgelegte Softwareversion zu einer unterstützten Kombination aus Board, Panel und Touchcontroller passt.
 
 1. Kennzeichnungen des Boards V1.1, SF32-Gerät, Panelmodell, Touchcontroller, Flexkabelausrichtung und Stromquelle erfassen.
 2. Top-Level-Commit und SDK-Submodul fixieren und den vollständigen Submodulstatus sichern.

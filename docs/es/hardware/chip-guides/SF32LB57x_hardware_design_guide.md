@@ -47,6 +47,8 @@ Se presuponen conocimientos básicos de diseño de hardware integrado y captura 
 
 Los recursos típicos del SF32LB57x incluyen:
 
+- Arquitectura STAR-MC1 Arm Cortex-M33 con dos núcleos grandes y uno pequeño.
+- Motor gráfico 2D/2.5D, acelerador de red neuronal de IA, Bluetooth 6.0 de modo dual y códec de audio integrados.
 - Hasta 58 GPIO<!-- BGA-ONLY -->; algunas variantes BGA112 disponen de seis E/S adicionales que pueden utilizarse para MPI3 o configurarse mediante pull-up/pull-down como salidas estáticas de propósito general (GP); consulte la sección Encapsulados<!-- /BGA-ONLY -->.
 - 3 UART, 4 I2C, 2 SPI y 2 CAN.
 - 2 GPTIM (4 canales cada uno), 2 LPTIM, 2 ATIM (cada uno con 3 canales diferenciales o 4 de extremo único), 1 PWM (5 canales) y 1 PTM (16 canales).
@@ -62,6 +64,9 @@ Los recursos típicos del SF32LB57x incluyen:
 
 !!! note "Alcance de las interfaces de pantalla"
     La nota de aplicación de hardware enumera SPI/QSPI, DPI de 24 bits, 8080 de 16 bits, EPD de 16 bits y JDI serie/paralelo en el resumen de interfaces LCDC del SF32LB57x. MIPI-DSI aparece en la lista de compatibilidad de ciertos circuitos integrados controladores de pantalla, pero no en ese resumen de interfaces LCDC directas del chip. No interprete la mención del controlador de panel como confirmación de una interfaz host MIPI-DSI nativa en el chip; antes de elegir el diseño, confirme con SiFli la ruta del controlador de pantalla concreto.
+
+!!! note "Compatibilidad de software del acelerador de IA"
+    La nota de aplicación de hardware de SiFli identifica un acelerador integrado de red neuronal de IA en el SF32LB57x. La [guía NNACC del SDK de SiFli](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/nnacc.html) enumera SF32LB55x, SF32LB56x y SF32LB58x, pero no SF32LB57x. La función de hardware por sí sola no confirma la compatibilidad de software para inferencia acelerada en el SF32LB57x; antes de depender de ella, confirme con SiFli la compatibilidad de la referencia exacta y de la versión del SDK.
 
 ### 3.2. Variantes { #32-variants }
 

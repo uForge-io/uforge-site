@@ -14,7 +14,7 @@ SiFli-SDK 문서는 워치독을 두 계층으로 설명합니다. 하나는 HAL
 <em>표: 제품군별로 문서화된 워치독 동작</em>
 
 | 제품군 | HAL 워치독 동작 | HAL 가이드에 명시된 클럭 동작 |
-|---|---|
+|---|---|---|
 | SF32LB52x | HAL 가이드는 자체 서브시스템에 인터럽트를 발생시키거나 자체 서브시스템을 리셋할 수 있는 전용 HCPU 및 LCPU 워치독과, 전체 칩을 리셋하는 시스템 수준 IWDT를 설명합니다. | 카운터 설명에는 32K 클럭이 사용됩니다. 가이드에는 52x 전용 클럭 선택 옵션이 별도로 명시되어 있지 않습니다. |
 | SF32LB55x | HCPU WDT1과 LCPU WDT2는 인터럽트를 발생시킬 수 있으며, 하드웨어 리셋은 해당 서브시스템으로 제한됩니다. 시스템 IWDT는 인터럽트를 발생시킬 수 없지만 전체 칩을 리셋할 수 있습니다. | RC10K 또는 32K LXT 중에서 선택 가능. |
 | SF32LB56x / SF32LB58x | HAL 가이드에 따르면 WDT1/WDT2에는 전체 칩을 리셋하는 기능이 추가되었습니다. | RC10K. 클럭이 더 이상 32K 저전력 클럭에서 공급되지 않습니다. |
@@ -22,7 +22,7 @@ SiFli-SDK 문서는 워치독을 두 계층으로 설명합니다. 하나는 HAL
 </div>
 
 !!! warning "RT-Thread 사용 가이드의 적용 범위"
-    [Watchdog Usage Guide](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/watchdog.html)는 `sf32lb52x` 경로에 게시되어 있지만 본문에는 SF32LB55X가 명시되어 있습니다. 아래의 기본 타임아웃 30초, IDLE 스레드의 워치독 갱신 방식, 슬립 동작, 애플리케이션 리셋 순서는 문서화된 55x 구성에 대한 안내로 취급하십시오. 제품군 전체에 적용된다고 간주하면 안 됩니다. 세부 사항은 대상 제품군의 소스와 생성된 설정에서 확인하십시오.
+    [Watchdog Usage Guide](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/watchdog.html)는 `sf32lb52x` 경로에 게시되어 있지만 본문에는 SF32LB55X가 명시되어 있습니다. 아래의 기본 타임아웃 30초, IDLE 스레드의 워치독 갱신 방식, 슬립 동작, 리셋 동작은 문서화된 55x 구성에 대한 안내로 취급하십시오. 제품군 전체에 적용된다고 간주하면 안 됩니다. 세부 사항은 대상 제품군의 소스와 생성된 설정에서 확인하십시오.
 
 ## 워치독 활성화 및 설정 { #enable-and-configure-the-watchdog }
 
@@ -37,10 +37,10 @@ SiFli-SDK 문서는 워치독을 두 계층으로 설명합니다. 하나는 HAL
 
 아래 그림은 링크된 가이드의 메뉴 위치와 타임아웃 필드를 보여 줍니다. 가이드 URL의 제품군 경로와 본문에 명시된 칩 제품군이 다르므로 스크린샷은 참고용으로만 보십시오. 실제 메뉴 경로와 기본값은 대상 프로젝트의 `menuconfig` 출력에서 확인하십시오.
 
-![Watchdog driver option in menuconfig](../../../../assets/develop/app-notes/watchdog/watchdog2.png){ loading="lazy" }
+![menuconfig의 워치독 드라이버 옵션](../../../../assets/develop/app-notes/watchdog/watchdog2.png){ loading="lazy" }
 <div align="center"><em>그림: 링크된 Watchdog Usage Guide에 나온 워치독 드라이버 메뉴.</em></div>
 
-![Watchdog timer option in menuconfig](../../../../assets/develop/app-notes/watchdog/watchdog.png){ loading="lazy" }
+![menuconfig의 워치독 타이머 옵션](../../../../assets/develop/app-notes/watchdog/watchdog.png){ loading="lazy" }
 <div align="center"><em>그림: 링크된 Watchdog Usage Guide에 나온 워치독 타이머 설정.</em></div>
 
 ## 워치독 갱신 방식 { #feeding-policy }
@@ -62,6 +62,8 @@ rt_hw_watchdog_pet();
 - HCPU는 시스템 워치독을 사용합니다. 타임아웃이 발생하면 전체 칩이 재시작됩니다.
 - LCPU는 LCPU 서브시스템 워치독을 사용합니다. 타임아웃이 발생하면 먼저 인터럽트가 생성되고, 인터럽트 핸들러가 전체 칩의 소프트웨어 재시작을 트리거합니다.
 
+SiFli Wiki의 워치독 설명은 `Standby` 동작을 보충합니다. 워치독 하드웨어 블록의 전원은 꺼지지 않으며 RT-Thread 드라이버가 WDT를 정지합니다. 복귀 경로에서 다시 초기화하여 카운트를 처음부터 시작합니다. 따라서 여기서 “비활성화”는 소프트웨어 정지를 뜻하며, 워치독 블록의 전원 차단을 의미하지 않습니다.
+
 ## 검증 순서 { #validation-sequence }
 
 1. 칩 제품군, SDK 리비전, 타임아웃, 워치독 갱신 담당 주체, 슬립 모드를 기록합니다.
@@ -76,5 +78,6 @@ rt_hw_watchdog_pet();
 - [Watchdog Usage Guide(중국어, 동일한 SF32LB52x 경로에 게시되었으나 본문은 SF32LB55X를 설명)](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/watchdog.html)
 - [SF32LB52x HAL WDT 가이드(영어)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/hal/wdt.html)
 - [SF32LB55x HAL WDT 가이드(중국어. 56x/58x 비교 참고 사항 포함)](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/hal/wdt.html)
+- [OpenSiFli SiFli-Wiki: 워치독 관련 참고 사항(중국어)](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/faq/mcu/wdt.md)
 
 `sf32lb55x/app_note/watchdog.html`, `sf32lb56x/app_note/watchdog.html`, `sf32lb58x/app_note/watchdog.html`의 제품군별 애플리케이션 노트 페이지는 아직 확인되지 않았습니다. 검색과 직접 접속만으로는 결론을 내릴 수 없었으며, 해당 경로가 404를 반환한다고 입증된 것은 아닙니다.

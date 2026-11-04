@@ -20,11 +20,11 @@ La tabla siguiente relaciona tareas habituales con las herramientas correspondie
 
 | Herramienta | Uso |
 |:------------|:----|
-| [`sftool`](https://github.com/OpenSiFli/sftool) | Herramienta multiplataforma para descargar y grabar firmware SF32, utilizada en los flujos OpenSiFli con Zephyr y Arduino. |
+| [`sftool`](https://github.com/OpenSiFli/sftool) | CLI serie multiplataforma para los SoC SiFli compatibles; permite escribir, leer y borrar la memoria flash, restablecer el chip y otras operaciones. |
 | [Scripts UART de descarga del SDK](../platforms/sifli-sdk/build-flash-monitor.md) | Scripts de grabación para la primera ejecución, generados por las compilaciones de SiFli-SDK. |
 | [Acciones CodeKit](codekit.md) | Configuración, compilación, grabación y supervisión desde VS Code. |
 | [`AssertDump`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/AssertDump/AssertDump_UM.html) | Captura de los datos de memoria en el momento de un fallo para analizarlos después. |
-| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | Captura de trazas y registros; depuración por UART mediante el Debug IP del chip. |
+| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace` captura los registros de la placa; `UsartServer` permite depurar por UART mediante el Debug IP del chip. |
 | [`Impeller`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/Impeller/Impeller_UM.html) | Grabación de firmware, calibración y pruebas PCBA en líneas de producción. |
 | [eZip / herramientas de imagen](../../learn/graphics/ezip.md) | Conversión de recursos para los flujos de gráficos comprimidos. |
 | [Herramientas RF/audio/fábrica](https://docs.sifli.com/projects/solution/6.tools/index.html) | Flujos de calibración, prueba y ajuste para producción. |
@@ -33,12 +33,13 @@ La tabla siguiente relaciona tareas habituales con las herramientas correspondie
 
 ## Herramientas de grabación { #flashing-tools }
 
-Para la primera puesta en marcha de la placa, use los scripts UART generados por el SDK: corresponden a la compilación que acaba de realizar. Añada `sftool` cuando necesite:
+Para la primera puesta en marcha de la placa, use los scripts UART generados por el SDK: corresponden a la compilación que acaba de realizar. Use `sftool` cuando convenga una CLI serie multiplataforma:
 
-- Una herramienta de línea de comandos uniforme para grabar en distintos flujos.
-- Integración con `west flash` de Zephyr.
-- El comportamiento de carga de ArduinoCore-zephyr.
-- Automatización en CI, fábrica o pruebas de regresión.
+- Escribir, leer o borrar la memoria flash directamente, fuera del script de descarga generado por el SDK.
+- Mantener un flujo de línea de comandos repetible en los SoC SiFli y plataformas anfitrionas compatibles.
+- Automatizar operaciones mediante un archivo de comandos JSON o un wrapper para CI, fábrica o pruebas de regresión.
+
+La integración con un flujo concreto de compilación o carga, como `west flash` o un cargador de Arduino, depende de la configuración de ese proyecto.
 
 Mantenga ambos procesos documentados en el proyecto hasta que el equipo adopte un único estándar.
 

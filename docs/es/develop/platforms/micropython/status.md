@@ -8,7 +8,7 @@ tags:
 
 # Estado de MicroPython { #micropython-status }
 
-En la documentación de SiFli y los repositorios de OpenSiFli consultados no se encontró un port oficial de MicroPython para SF32, una imagen de firmware ni un proceso de grabación específico para una placa.
+A fecha de 2026-11-04, en la documentación de SiFli y los repositorios de OpenSiFli consultados no se había encontrado un port oficial de MicroPython para SF32, una imagen de firmware ni un proceso de grabación específico para una placa.
 
 La revisión abarcó los [repositorios públicos de OpenSiFli en GitHub](https://github.com/OpenSiFli/) y el [portal de documentación de SiFli](https://docs.sifli.com/).
 
@@ -60,3 +60,6 @@ MicroPython podrá pasar de «estado» a «primeros pasos» cuando se cumplan to
 ## Por qué importa { #why-this-matters }
 
 Una instrucción imprecisa como «descargue una imagen de MicroPython» no basta para empezar. Los usuarios necesitan una imagen exacta, una placa compatible, una herramienta de grabación, los ajustes del REPL y una vía de recuperación. Sin ellos, una página de MicroPython aumenta la carga de soporte en vez de ayudar.
+
+!!! note "Contenido generado automáticamente"
+    Esta página se redactó sin un documento fuente específico. Verifique las afirmaciones técnicas con la documentación oficial de SiFli antes de confiar en ellas.

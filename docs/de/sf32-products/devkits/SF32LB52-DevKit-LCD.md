@@ -29,12 +29,13 @@ Das Board vereint auf einer Evaluierungsplattform das MCU-Modul, Display-Steckve
 - QSPI/SPI/DSPI-LCD-Unterstützung über einen 22-poligen FPC-Steckverbinder
 - 8-Bit-MCU/8080-LCD-Unterstützung über den FPC und die 40-polige Erweiterungsleiste
 - Unterstützung für I2C-Touchpanels
-- USB-C für Download/Debug über USB-zu-UART und für die Board-Versorgung
+- USB-C für Download/Debug über die integrierte CH343P-USB-zu-UART-Bridge und für die Board-Versorgung
 - Separate USB-C-Schnittstelle für USB-2.0-FS-Anwendungsfälle
 - MEMS-Mikrofon und Class-D-Audio-Leistungsverstärker auf dem Board
 - MicroSD-Kartensteckplatz über SPI
 - Akkuanschluss und linearer Lader ETA9640P
 - 40-polige Erweiterungsleiste für Display-, GPIO-, Speicher-, Audio- und Versorgungssignale
+- Schalter auf dem Board, Funktions- und Reset-Tasten, RGB-, Lade-, GPIO- und Betriebsanzeigen sowie LCD-Hintergrundbeleuchtungstreiber
 
 ## Wann dieses Board geeignet ist { #when-to-use-this-board }
 
@@ -108,7 +109,7 @@ Prüfen Sie Bestückungsdruck und Designpaket der genauen Board-Revision, bevor 
 
 - Lautsprecher
 - TF-Karte
-- Einzelne Li-Ion-/Li-Poly-Zelle, typischerweise 450 mAh bis 500 mAh
+- Einzelne Li-Ion-/Li-Poly-Zelle; SiFli empfiehlt 450 mAh
 - Zweites USB-Kabel, wenn UART-Debug und nativer USB-Test gleichzeitig benötigt werden
 
 ### Grundlegender Aufbau { #basic-setup }

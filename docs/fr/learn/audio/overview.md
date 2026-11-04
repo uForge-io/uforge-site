@@ -92,7 +92,7 @@ Les capacités audio varient selon la famille. Vérifiez la fiche technique de l
 | Famille | ADC/DAC audio intégrés | Interfaces PDM (maximum de microphones) | Interfaces I2S | Usage envisagé |
 |:---|:---|:---|:---|:---|
 | **SF32LB52x** | 1 ADC + 1 DAC | 1 (2) | 1 | Accessoires audio Bluetooth à coût optimisé, HMI compactes à commande vocale. |
-| **SF32LB55x** | Aucun ; un codec audio externe est requis pour l'audio analogique. | SF32LB551/555 : 1 (2) ; SF32LB557 : 2 (4) | SF32LB551/555 : 1 ; SF32LB557 : 2 | Appareils portables BLE et produits riches en capteurs où l'audio est secondaire. |
+| **SF32LB55x** | Aucun ; un codec audio externe est requis pour l'audio analogique. | SF32LB551/553/555 : 1 (2) ; SF32LB557 : 2 (4) | SF32LB551/553/555 : 1 ; SF32LB557 : 2 | Appareils portables BLE et produits riches en capteurs où l'audio est secondaire. |
 | **SF32LB56x** | 1 ADC + 1 DAC | 2 (4) | 1 | Produits HMI/écran plus riches nécessitant aussi une capture vocale multi-microphone. |
 | **SF32LB57x** | 2 ADC + 1 DAC | 2 (4) | 2 | Capture vocale multi-microphone et lecture locale. |
 | **SF32LB58x** | 2 ADC + 2 DAC | 2 (4) | 3 | Produits phares combinant audio, graphismes, IA et connectivité complexe. |

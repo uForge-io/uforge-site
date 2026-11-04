@@ -6,7 +6,7 @@ Public principal : ingénieurs matériel, concepteurs de circuits imprimés, ing
 
 Seules les pages listées ci-dessous sont publiées sur ce site. Les notes de travail internes, la documentation de processus et les modèles de rédaction sont entièrement exclus de ce domaine et ne font pas partie du contenu public.
 
-Nom : μForge.io et uForge.io désignent le même projet et s’emploient indifféremment. Le « μ » (lettre grecque mu, pour « micro ») s’écrit « u » en ASCII (qui se lit aussi « you », « toi ») lorsque les lettres grecques sont peu pratiques ; ainsi μForge = uForge et μForge.io = uForge.io (domaine : uForge.io).
+Nom : Le nom du projet est μForge.io ; μ est la lettre grecque mu et représente « micro ». L’adresse du site utilise le domaine ASCII `uforge.io`.
 
 Langues : anglais (la référence, à la racine du site) et traductions assistées par machine en chinois (/zh/), japonais (/ja/), espagnol (/es/), allemand (/de/), français (/fr/), portugais (/pt/), russe (/ru/) et coréen (/ko/). Une page traduite a le même chemin que la page anglaise sous son préfixe de langue ; les index par langue se trouvent à https://uForge.io/<lang>/llms.txt.
 
@@ -14,7 +14,7 @@ Ce fichier liste les pages en français (/fr/). La version anglaise (racine du s
 
 ## Premiers pas
 
-- [Vue d'ensemble des premiers pas](https://uForge.io/fr/getting-started/): Choisir votre premier parcours logiciel SF32 — SiFli-SDK, CodeKit, Zephyr, Arduino, Rust ou MicroPython — selon son état actuel et le matériel requis.
+- [Vue d'ensemble des premiers pas](https://uForge.io/fr/getting-started/): Choisissez un point de départ logiciel pour SF32 — SiFli-SDK, CodeKit, Zephyr, Arduino, Rust ou MicroPython — avec son état actuel et le matériel requis.
 - [Premiers pas avec SiFli-SDK](https://uForge.io/fr/getting-started/sifli/getting-started-sifli-sdk/): Exécutez hello_world sur une carte SF32 par UART avec SiFli-SDK : installez la chaîne d'outils, compilez avec scons et flashez le firmware par UART.
 - [SiFli CodeKit](https://uForge.io/fr/getting-started/sifli/getting-started-sifli-codekit/): Guide de première utilisation de SiFli CodeKit dans VS Code : installer l'extension, choisir une carte SF32, compiler et flasher hello_world, puis ouvrir la console série.
 - [Zephyr amont](https://uForge.io/fr/getting-started/zephyr/getting-started-zephyr-upstream/): Compilez et flashez la cible amont SF32LB52 DevKit LCD de Zephyr, puis vérifiez la console et les fonctions documentées.
@@ -28,7 +28,7 @@ Ce fichier liste les pages en français (/fr/). La version anglaise (racine du s
 - [Matériel](https://uForge.io/fr/hardware/): Réutilisez une configuration de référence SF32 ou concevez autour du composant choisi, puis préparez la carte pour la production.
 - [Planifier un produit](https://uForge.io/fr/sf32-products/family/product-planning/): Guide de planification d’un produit SF32 : choisissez la puce et le niveau d’intégration, validez le logiciel sur une carte, puis préparez la conception pour la production.
 - [FAQ SF32](https://uForge.io/fr/sf32-products/family/faq/): FAQ produits SF32 : choix de puces, modules et cartes, mémoire et interfaces, Bluetooth, GPIO, marquages, disponibilité et personnalisation.
-- [Conceptions de référence](https://uForge.io/fr/hardware/reference-designs/reference-designs/): Parcours de conceptions de référence pour μForge : comparez les démarches de validation matérielle et logicielle et choisissez celle qui correspond le mieux à votre produit.
+- [Conceptions de référence](https://uForge.io/fr/hardware/reference-designs/reference-designs/): μForge : comparez les parcours de validation matérielle et logicielle des conceptions de référence et choisissez celui qui correspond le mieux à votre produit.
 - [Parcours de conception de référence pour objet connecté portable](https://uForge.io/fr/hardware/reference-designs/connected-wearable-journey/): Parcours de conception de référence SF32, de la validation sur carte SF32LB52 à un plan de mise en production matériel et firmware d'un objet connecté portable.
 - [Sélecteur de produits SF32](https://uForge.io/fr/sf32-products/product-selector/): Présélectionnez des puces et modules SF32 selon les contraintes du produit, puis validez le parcours d'intégration sur du matériel pris en charge.
 - [Conception pour la production](https://uForge.io/fr/hardware/design-for-production/): Point d'entrée de la conception pour la production SF32 : guides puces et modules, listes de contrôle, définitions d'interface, composants approuvés et bibliothèques EDA.
@@ -107,7 +107,7 @@ Ce fichier liste les pages en français (/fr/). La version anglaise (racine du s
 
 - [Vue d'ensemble du développement](https://uForge.io/fr/develop/): Guide orienté tâches pour développer des produits SF32 avec SiFli-SDK : flux de travail, notes d'application, exemples, outils, sujets firmware et communauté.
 - [Présentation de la plateforme SiFli-SDK](https://uForge.io/fr/develop/platforms/sifli-sdk/overview/): SiFli-SDK, voie de référence du développement SF32 : build scons et menuconfig, noms de carte, structure de projet et préparation à la production.
-- [Compiler, flasher et surveiller la sortie série](https://uForge.io/fr/develop/platforms/sifli-sdk/build-flash-monitor/): La boucle quotidienne SiFli-SDK : activer l'environnement, compiler avec scons, flasher via téléchargement UART ou sftool, puis suivre la sortie série.
+- [Compiler, flasher et surveiller la sortie série](https://uForge.io/fr/develop/platforms/sifli-sdk/build-flash-monitor/): La boucle quotidienne SiFli-SDK : activer l'environnement, compiler avec scons, flasher avec le script de téléchargement UART généré ou sftool, puis suivre la sortie série.
 - [Configuration de la carte](https://uForge.io/fr/develop/platforms/sifli-sdk/board-configuration/): Comment l'option --board de SiFli-SDK relie le firmware au matériel SF32 : disposition Flash/PSRAM, multiplexage, chemins affichage et audio, checklist de mise en service.
 - [Composants et `sf-pkg`](https://uForge.io/fr/develop/platforms/sifli-sdk/components/): Transformer le code d'exemple SiFli-SDK en composants réutilisables et paquets `sf-pkg` : critères de qualité, documentation attendue et pièges courants.
 - [Débogage et diagnostics](https://uForge.io/fr/develop/platforms/sifli-sdk/debugging-diagnostics/): Déboguer le firmware SF32 avec sftool, AssertDump, SiFli_Trace et le shell RT-Thread, avec un ordre de reproduction répétable et une liste pour signaler un plantage.
@@ -174,7 +174,7 @@ Ce fichier liste les pages en français (/fr/). La version anglaise (racine du s
 - [Interphone BLE SF32 (Talkback)](https://uForge.io/fr/projects/sf32-ble-talkback/): Démarche de développement produit pour reproduire et valider le push-to-talk BLE multiappareil avec SF32LB52-DevKit-ULP et OpenSiFli Talkback.
 - [Lecteur EPUB SF32 à écran e-paper](https://uForge.io/fr/projects/sf32-epd-reader/): Parcours de développement pour reproduire et valider OpenSiFli EPD Reader sur le matériel SF32-OED-EPD.
 - [Clavier macro multifonction SuperKey](https://uForge.io/fr/projects/superkey/): Parcours d'ingénierie pour SuperKey sur SF32LB52 (trois écrans, USB HID/CDC, application compagnon) : reproduire, valider, adapter et transférer à la conception produit.
-- [Radiation Monitor, détecteur portable du niveau de signal](https://uForge.io/fr/projects/radiation-monitor/): Afficheur de signal en bande Bluetooth sur SF32LB52 : reproduire Radiation Monitor, vérifier balayage à 79 points, lissage RSSI, historique et limites d'étalonnage.
+- [Radiation Monitor, afficheur portable du niveau de signal](https://uForge.io/fr/projects/radiation-monitor/): Afficheur de signal en bande Bluetooth sur SF32LB52 : reproduire Radiation Monitor, vérifier balayage à 79 points, lissage RSSI, historique et limites d'étalonnage.
 - [Console de jeu portable Pocket Pi SF32](https://uForge.io/fr/projects/pocket-pi/): Parcours d'ingénierie reproductible pour Pocket Pi : émulation NES, écran 320 × 240, entrées AW9523, audio, systèmes de fichiers de ROM et sauvegardes sur SF32LB52.
 - [LilyGO T-Display-SF32](https://uForge.io/fr/projects/lilygo-t-display-sf32/): Parcours d'ingénierie pour la T-Display-SF32 de LilyGO : référence fournisseur, validation affichage, périphériques, alimentation et récupération, puis adaptation SiFli-SDK.
 - [Firmware de clavier ZMK sur SF32](https://uForge.io/fr/projects/zmk-sf32/): Parcours d'ingénierie du portage ZMK d'OpenSiFli sur SF32LB52 : reproduire le clavier scindé Urchin, valider USB, BLE et récupération, puis adapter keymap ou matériel.
@@ -193,7 +193,7 @@ Ce fichier liste les pages en français (/fr/). La version anglaise (racine du s
 ## Blog
 
 - [Blog](https://uForge.io/fr/blog/): Le blog μForge.io : actualités produit, notes de version et analyses techniques approfondies pour la documentation SF32.
-- [Octobre : présentation de SF32LB57x [2026-10-28]](https://uForge.io/fr/blog/posts/2026-10-28-october-sf32lb57x-release/): SF32LB57x est désormais documenté : environ deux fois la puissance CPU applicative de SF32LB56x, graphismes ePicasso 3.0 et une structure de coûts compétitive.
+- [Octobre : présentation de SF32LB57x [2026-10-28]](https://uForge.io/fr/blog/posts/2026-10-28-october-sf32lb57x-release/): SF32LB57x documenté : ses cœurs applicatifs offrent environ deux fois les performances de ceux du SF32LB56x, avec ePicasso 3.0 et une structure de coûts compétitive.
 - [Traduction multilingue, itération après itération [2026-10-07]](https://uForge.io/fr/blog/posts/2026-10-07-multi-language-translation/): μForge.io compte désormais sept langues de plus, traduites avec des outils LLM au fil de nombreuses itérations.
 - [Août : de la couverture à la confiance [2026-08-24]](https://uForge.io/fr/blog/posts/2026-08-24-august-progress/): μForge.io en août : un choix de produit plus clair, des projets réutilisables, un apprentissage pratique et une voie directe vers le support.
 - [Premier article du blog [2026-07-31]](https://uForge.io/fr/blog/posts/2026-07-31-the-first-blog/): Le premier article du blog μForge.io : notre mission, ce que nous avons construit le mois dernier et ce qui vient ensuite pour la documentation SF32.
@@ -205,7 +205,7 @@ Ce fichier liste les pages en français (/fr/). La version anglaise (racine du s
 ## Notes pour les agents IA et assistants de programmation
 
 - Tous les guides de conception matérielle utilisent des sections, tableaux et figures numérotés (p. ex. « Tableau 5.1-1 », « Figure 5.2-3 ») par sous-section H3 ; considérez ces numéros comme des ancres stables pour citer des valeurs précises.
-- Chaque famille de puces ou de modules suit la même structure : une page d'introduction (présentation du composant, variantes, boîtiers, applications) et un guide de conception matérielle (conseils de schéma, routage du circuit imprimé, liste de contrôle de fabrication) ; plusieurs puces disposent aussi d'une page distincte de liste de contrôle de conception matérielle.
+- Chaque famille de puces ou de modules comporte une introduction (présentation du composant, variantes, boîtiers, applications) et un guide de conception matérielle réparti sur plusieurs pages (schéma, routage PCB et contrôles de fabrication). Les listes de contrôle complètes des schémas et du PCB font partie de cette arborescence ; une liste PCB courte peut figurer à la fin de la page de routage.
 - Le site est publié en neuf langues : l'anglais (la référence, à la racine du site) et des traductions assistées par machine en chinois (/zh/), japonais (/ja/), espagnol (/es/), allemand (/de/), français (/fr/), portugais (/pt/), russe (/ru/) et coréen (/ko/). Chaque page traduite a le même chemin que sa page anglaise sous le préfixe de langue.
 - Pour les spécifications électriques, les affectations de broches et la qualification des composants faisant autorité, les guides renvoient aux fiches techniques et manuels d'utilisation de SiFli ainsi qu'à sa liste de fournisseurs approuvés (AVL).
 - A full-text bundle of the key pages (getting started, SF32 chips, modules, dev boards, SDK basics, and learning overviews) is at https://uForge.io/llms-full.txt, with a localized copy at https://uForge.io/<lang>/llms-full.txt; fetch it when one request should cover the whole platform.

@@ -661,7 +661,7 @@ SD1 utilise 12 GPIO (PA00-PA11) alimentés par le domaine VDDIOA2. Celui-ci peut
 </div>
 
 !!! note "Vérification des libellés SD1"
-    La source indique que SD1 utilise 12 GPIO (PA00–PA11), mais son tableau des signaux n'en répertorie que 10 (SD1_D[7:0], CLK et CMD). De plus, le tableau décrit à la fois SD1_D2 et SD1_D6 comme « Data 6 ». La source ne précise ni la fonction des deux GPIO non répertoriés ni l'origine du libellé en double. Vérifiez le brochage complet de SD1 dans la fiche technique de la puce avant de finaliser le schéma.
+    La source indique que SD1 utilise 12 GPIO (PA00–PA11), mais son tableau des signaux n'en répertorie que 10 (SD1_D[7:0], CLK et CMD). Le schéma de référence eMMC désigne PA11 comme `SD1_RESET`, mais ce signal ne figure pas dans le tableau. La source n'explique ni la fonction de PA02 ni l'écart restant dans le décompte. De plus, le tableau décrit à la fois SD1_D2 et SD1_D6 comme « Data 6 ». Vérifiez le brochage complet de SD1 dans la fiche technique de la puce avant de finaliser le schéma.
 
 <div align="center"><em>Tableau 5.6-4 : Connexions de signaux SD2</em></div>
 

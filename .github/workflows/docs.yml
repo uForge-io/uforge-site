@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+  # Manual re-run button (Actions > Documentation > Run workflow): redeploys main with a
+  # single fresh artifact when a deploy fails, instead of re-running the failed job.
+  workflow_dispatch:
 permissions:
   contents: read
   pages: write

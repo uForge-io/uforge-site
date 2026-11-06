@@ -9,12 +9,18 @@ tags:
     - Chip
 ---
 
+<div id="sf32lb57x"></div>
+
 # Guia de projeto de hardware do SF32LB57x — armazenamento e fabricação { #sf32lb57x-hardware-design-guide-storage-manufacturing }
 
 !!! note "Parte do guia de projeto de hardware do SF32LB57x"
     Esta página aborda as seções 5.6 e 5.7 das diretrizes de projeto de esquemático: armazenamento e conectividade, e fabricação. Volte para [Clock, RF e interfaces de usuário](SF32LB57x_schematic_clock_rf_interfaces.md) ou avance para [Diretrizes de layout de PCB](SF32LB57x_pcb_layout.md).
 
+<div id="56"></div>
+
 ### 5.6. Armazenamento e conectividade { #56-storage-and-connectivity }
+
+<div id="561"></div>
 
 #### 5.6.1. Armazenamento e boot { #561-storage-and-boot }
 
@@ -37,6 +43,8 @@ Variantes com Flash SPI NOR integrada ao encapsulamento inicializam por ela por 
 | H | H | eMMC |
 
 </div>
+
+<div id="562"></div>
 
 #### 5.6.2. Interfaces de armazenamento { #562-storage-interfaces }
 
@@ -69,6 +77,8 @@ Antes de finalizar o esquemático, confirme:
     A tabela de conexões de memória da SiFli identifica os sinais de `PA12`–`PA17` como `SD2_*`, enquanto a tabela de IO MUX indica `SD1_*` para a Function 2 nesses pinos. A tabela acima mantém os nomes usados na tabela de conexões. Embora os pinos físicos coincidam, esses nomes não bastam para selecionar SDIO2 ou uma instância no firmware. Confirme o manual, a configuração de pinos do SDK e o projeto de referência do componente exato.
 
 
+<div id="563"></div>
+
 #### 5.6.3. Controle de boot e alimentação { #563-boot-and-power-control }
 
 A eMMC tem domínios de alimentação separados para `VCC` e `VCCQ`. Comutar os dois juntos reduz o consumo durante o desligamento, mas torna mais lenta a saída do modo de suspensão e aumenta o consumo médio da CPU. Comutar apenas `VCC` e manter `VCCQ` sempre alimentado aumenta o consumo durante o desligamento, mas acelera a retomada da eMMC e reduz o consumo médio da CPU.
@@ -97,9 +107,13 @@ A seleção da mídia externa de boot é mostrada na Tabela 5.6-1 e na Figura 5.
 - Se a memória integrada ao encapsulamento ocupar o MPI3, o uso externo desse canal fica limitado a SD NAND ou eMMC; não conecte Flash SPI NOR/SPI NAND externa a ele.
 - Compatibilize a tensão de IO do armazenamento com a alimentação de IO do MCU e escolha um componente listado na Lista de Fornecedores Aprovados (AVL) do projeto.
 
+<div id="564-gpio"></div>
+
 #### 5.6.4. GPIO e multiplexação de pinos { #564-gpio-and-pin-multiplexing }
 
 Planeje os GPIOs antes de atribuir todos os periféricos do produto, pois sinais de boot, depuração, despertar, USB, analógicos, de display, de armazenamento e de alta velocidade podem limitar a flexibilidade da matriz de roteamento.
+
+<div id="565"></div>
 
 #### 5.6.5. Planejamento dos pinos { #565-pin-planning }
 
@@ -108,6 +122,8 @@ O SF32LB57x oferece multiplexação flexível de pinos, mas os seguintes sinais 
 - RF, cristais, alimentação, USB, áudio analógico, GPADC, boot e depuração.
 - Interfaces de alta velocidade para display, SDIO, armazenamento e DCMI que exigem grupos específicos de pinos.
 - GPIOs de despertar, configuração de boot, seleção de SWD e pinos de teste de produção.
+
+<div id="566-gpio"></div>
 
 #### 5.6.6. Diretrizes para GPIO { #566-gpio-guidelines }
 
@@ -264,6 +280,8 @@ A matriz pode rotear qualquer GPIO para qualquer uma das funções acima, respei
 !!! warning "Valores de IF_SEL na tabela de submultiplexação LCDC"
     A tabela original da SiFli atribui `IF_SEL=0` tanto ao modo SPI quanto ao JDI. Este artigo mantém os valores da fonte, mas a atribuição duplicada é ambígua. Antes de configurar o painel, confirme o valor no driver SDK e no projeto de referência correspondentes; não deduza o valor do registro apenas com base nesta tabela.
 
+<div id="567"></div>
+
 #### 5.6.7. Interfaces gerais { #567-general-interfaces }
 
 Use os mesmos critérios para revisar cada interface de uso geral: conexões elétricas, tensão de IO, estado padrão durante reset e suspensão, alimentação dos pull-ups, exposição a ESD e conflitos com boot, depuração, despertar ou funções de alta velocidade.
@@ -275,6 +293,8 @@ Use os mesmos critérios para revisar cada interface de uso geral: conexões el�
 
 !!! warning "Identificação das tensões da tecla GPADC"
     O esquemático da SiFli mostra dois valores de tensão separados por barra em cada nó de tecla, mas não explica as condições correspondentes. Confirme o mapeamento com a configuração de alimentação prevista e o projeto de referência antes de usar esses valores como limiares.
+
+<div id="568"></div>
 
 #### 5.6.8. Princípios de revisão das interfaces { #568-interface-review-principles }
 
@@ -387,7 +407,11 @@ Revise quatro aspectos em cada interface periférica:
 !!! warning "Tensão do pino VBATS e faixa de medição"
     Para as variantes alimentadas com 3,3 V, a tabela de pinos de alimentação indica 0–4,7 V para `VBATS`, enquanto o checklist do esquemático limita a medição da tensão da bateria a 0–4,5 V. Para medições com GPADC, siga a faixa mais estreita de 0–4,5 V; não trate o limite de 4,7 V da tabela de pinos como uma faixa válida de medição do ADC.
 
+<div id="57"></div>
+
 ### 5.7. Fabricação { #57-manufacturing }
+
+<div id="571"></div>
 
 #### 5.7.1. Modos de boot e download em produção { #571-production-boot-and-download-modes }
 
@@ -436,6 +460,8 @@ Mantenha os pinos padrão de depuração e download acessíveis ao gabarito de p
 | Checklist de hardware 4.8, item 3 | Todos os modelos | `VBAT` ou 3,3 V, `GND`, `PA18`, `PA19`, `VDD33_VOUT1` (ausente na série de 3,3 V), `PA00`, `PA01` e `PA34`; dimensione, espace e oriente os pads conforme as sondas do gabarito. |
 
 </div>
+
+<div id="572"></div>
 
 #### 5.7.2. Gravação e calibração em produção { #572-production-programming-and-calibration }
 

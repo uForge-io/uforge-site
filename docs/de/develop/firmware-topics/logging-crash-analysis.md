@@ -27,7 +27,7 @@ Erfassen Sie für jeden Firmware-Build:
 
 ## Ablauf der Absturzanalyse { #crash-analysis-flow }
 
-1. Reproduzieren Sie den Fehler auf einem Board, dessen funktionierende Baseline verifiziert wurde.
+1. Reproduzieren Sie den Fehler auf einem Board mit einem verifizierten, funktionsfähigen Referenzstand.
 2. Erfassen Sie das vollständige Startprotokoll ab dem Reset.
 3. Sichern Sie die exakte Binärdatei und die zugehörigen Symboldateien.
 4. Dekodieren Sie Assert- oder Dump-Ausgaben mit den SiFli-Tools.

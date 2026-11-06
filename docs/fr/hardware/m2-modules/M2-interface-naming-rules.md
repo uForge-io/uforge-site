@@ -48,6 +48,7 @@ Où :
 </div>
 
 Ces descriptions indiquent le périmètre prévu pour chaque catégorie, pas des exigences électriques définitives.
+
 **État des sources :**
 - **M2 / M2xM :** Le brouillon lié indique qu'un classeur local de proposition contient des plans d'affectation des contacts, mais ce fichier n'est ni inclus dans ce dépôt ni lié ici ; ces plans restent des propositions.
 - **M2xN / M2xA :** Le brouillon résume ces extensions, mais aucune donnée originale de cartographie des contacts n'a été trouvée pour vérifier ces résumés ; ils restent non vérifiés.

@@ -6,7 +6,11 @@ tags:
   - Puce
 ---
 
+<div id="sf32"></div>
+
 # Famille SF32 { #sf32-family }
+
+<div id="_1"></div>
 
 ## Introduction { #introduction }
 
@@ -39,6 +43,8 @@ La série **LB** (Low-Power Bluetooth) est la première gamme de produits SF32. 
     [Préparer la conception pour la production :material-arrow-right:](../../hardware/design-for-production.md){ .uf-hw-link-green }
 
 </div>
+
+<div id="_2"></div>
 
 ## Principales caractéristiques { #key-features }
 

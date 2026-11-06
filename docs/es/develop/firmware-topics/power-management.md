@@ -8,7 +8,7 @@ tags:
 
 # Gestión de energía { #power-management }
 
-La gestión de energía convierte un prototipo funcional en un producto apto para dispositivos vestibles. En SF32, el trabajo sobre el consumo abarca la configuración de reloj, los modos de suspensión, el comportamiento de la pantalla, los intervalos de conexión Bluetooth, las interrupciones de los sensores y la arquitectura de la aplicación.
+La gestión de energía convierte un prototipo funcional en un producto listo para su uso como dispositivo vestible. En SF32, el trabajo sobre el consumo abarca la configuración de reloj, los modos de suspensión, el comportamiento de la pantalla, los intervalos de conexión Bluetooth, las interrupciones de los sensores y la arquitectura de la aplicación.
 
 No optimice el consumo basándose en fragmentos de código aislados. Mida escenarios del producto: arranque, inactividad, inactividad con conexión, pantalla encendida, audio activo, despertar por sensor, OTA y apagado.
 

@@ -132,7 +132,7 @@ NAND 플래시에 저장된 애플리케이션을 PSRAM으로 복사하는 경�
 
 ### 기본값과 프로젝트 오버레이 { #defaults-and-project-overlays }
 
-v3는 해당 파티션이 없을 때 시스템 기본값을 도출합니다. SF32LB52에서는 HCPU 공장 출하 애플리케이션의 스토리지 리전으로부터 `flash_table`과 `bootloader`를 추론할 수 있으며, NAND 및 SDMMC 부트 스토리지에도 문서화된 기본 데이터 파티션이 부여됩니다. SF32LB56과 SF32LB58에서는 내부 `mpi5`의 `flash_table`과 `bootloader`를 생략할 수 있습니다. 기본 SiP PSRAM 윈도우와 표준 RAM 파티션도 프로젝트가 RAM 레이아웃을 변경하지 않는 한 생략할 수 있습니다.
+v3는 해당 파티션이 없을 때 시스템 기본값을 도출합니다. SF32LB52에서 부트 스토리지가 NOR, NAND 또는 SDMMC이면 HCPU 공장 출하 애플리케이션의 스토리지 리전에서 `flash_table`과 `bootloader`를 도출합니다. NAND 및 SDMMC 부트 스토리지에는 문서화된 기본 데이터 파티션도 추가됩니다. SF32LB56과 SF32LB58에서는 내부 `mpi5`의 `flash_table`과 `bootloader`를 생략할 수 있습니다. 기본 SiP PSRAM 윈도우와 표준 RAM 파티션도 프로젝트가 RAM 레이아웃을 변경하지 않는 한 생략할 수 있습니다.
 
 프로젝트별로 작게 변경할 때는 보드의 전체 `ptab.yaml`을 복사하는 대신 `ptab.overlay.yaml`을 사용하십시오. 이 파일로 파티션을 추가하거나 기존 파티션을 재정의할 수 있습니다.
 

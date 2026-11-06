@@ -6,7 +6,11 @@ tags:
   - Чип
 ---
 
+<div id="sf32"></div>
+
 # Семейство SF32 { #sf32-family }
+
+<div id="_1"></div>
 
 ## Введение { #introduction }
 
@@ -39,6 +43,8 @@ tags:
     [Подготовить проект к производству :material-arrow-right:](../../hardware/design-for-production.md){ .uf-hw-link-green }
 
 </div>
+
+<div id="_2"></div>
 
 ## Основные характеристики { #key-features }
 

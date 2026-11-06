@@ -13,11 +13,11 @@ None of this would have been practical without LLM tools, and we are grateful fo
 
 ### Keeping translations consistent { #keeping-translations-consistent }
 
-To make the iterations converge, we maintain a glossary of terms that must stay untranslated (part numbers, units, protocol names) or use an approved rendering, plus a QA checklist covering technical completeness, link and anchor correctness, and Markdown and code safety. Every language keeps the same page structure as the English source, and builds are checked in strict mode, so a broken link or missing page fails loudly instead of shipping quietly.
+To make the iterations converge, we maintain a glossary of terms that must stay untranslated (part numbers, units, protocol names) or use an approved rendering, plus a QA checklist covering technical completeness, link and anchor correctness, and Markdown and code safety. Each locale keeps the same page structure as the English source. Strict-mode builds catch broken links and other build errors; a separate path-parity audit checks for missing or extra pages before release.
 
 ### A caveat and a request { #caveat-and-request }
 
-These are machine-assisted translations, and the English pages remain the reference. Since none of these languages is native to us, some pages may not read naturally to native speakers. When a technical detail matters for your design, check it against the English page and SiFli's official documentation. If you find a mistranslation or an awkward term, or think a page could be improved, [tell us](../../about/contact.md); that feedback goes straight into the glossary so the same mistake does not come back.
+These are machine-assisted translations, and the English pages remain the reference. Since none of these languages is native to us, some pages may not read naturally to native speakers. When a technical detail matters for your design, check it against the English page and SiFli's official documentation. If you find a mistranslation or an awkward term, or think a page could be improved, [tell us](../../about/contact.md); recurring terminology issues go into the glossary, while other suggestions are reviewed against the relevant page.
 
 ### Next { #next }
 

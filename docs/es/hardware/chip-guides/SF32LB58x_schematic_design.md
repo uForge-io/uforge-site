@@ -87,6 +87,9 @@ El SF30147C es un circuito integrado de gestión de alimentación altamente inte
 
 Consulte la hoja de datos del SF30147C para obtener todos los detalles.
 
+!!! warning "Discrepancia en la fuente sobre el nombre del rail"
+    La [fila resumen de LDO1](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md#L38) de la fuente indica AVDDIOA2, pero la [tabla de pines del chip](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md#L79) asigna VDDIOA2 a PA0–PA11; el [mapa oficial de pines del DevKit](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb58x/SF32LB58-DevKit-LCD.md#L195) también usa VDDIOA2. Estas fuentes no aclaran qué nombre corresponde al rail de LDO1. Confírmelo con SiFli antes de liberar el esquemático.
+
 ##### 5.2.1.2. Requisitos de alimentación del SF32LB58x {#5112-sf32lb58x-power-requirements}
 
 Las especificaciones de alimentación de la PMU integrada en la serie SF32LB58x se resumen a continuación.
@@ -715,6 +718,9 @@ El SF32LB58x ofrece una interfaz SWD y seis interfaces UART seleccionables para 
 | SWDIO | PB11 | Señal de datos de J-Link |
 
 </div>
+
+!!! warning "Conflicto entre fuentes"
+    La [tabla de aplicación de hardware de OpenSiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md) asigna `TXD1`/`PA31` a UART1 RXD y `RXD1`/`PA32` a UART1 TXD; el [mapa de pines del SF32LB58-DevKit-LCD](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb58x/SF32LB58-DevKit-LCD.md), en cambio, identifica `PA31` como `UART1_TXD` y `PA32` como `UART1_RXD`. Las fuentes discrepan sobre la dirección de las señales, así que no confirman qué asignación es correcta. Confirme con SiFli el pinmux y la dirección de UART1 antes de cablear; no deduzca las conexiones TX/RX de la placa basándose únicamente en estas etiquetas.
 
 !!! note "Nota"
     Las señales UARTx RXD no deben quedar flotantes; habilite una resistencia pull-up interna durante la inicialización del software.

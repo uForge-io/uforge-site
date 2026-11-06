@@ -160,7 +160,7 @@ Bluetooth 연결이 이미 수립된 뒤에 공유를 활성화했다면, `pan_c
 
 ## PAN 기반 OTA 전달 { #pan-based-ota-delivery }
 
-PAN 예제는 OTA가 기본으로 활성화된 상태로 제공됩니다. `pan_cmd ota_pan`은 이미 네트워크 트래픽에 사용 중인 동일한 Bluetooth PAN 링크를 통해 펌웨어 이미지를 다운로드하고 설치하며, SiFli-SDK의 펌웨어 업그레이드 서비스와 함께 문서화된 DFU_PAN OTA 경로를 사용합니다. 이미 데이터에 PAN을 사용하고 있어 두 번째 OTA 전송 수단을 원하지 않는 제품에 적합합니다. PAN이 BLE 및 다른 업데이트 전송 수단과 어떻게 다른지는 [OTA와 DFU](../../develop/firmware-topics/ota-dfu.md)를 참조하고, 전송 수단에 관계없이 롤백/복구 동작을 같은 방식으로 계획하십시오.
+`example/bt/pan`에서 `pan_cmd ota_pan`은 `main.c`에 설정된 URL에서 펌웨어 이미지를 다운로드해 설치하며, README는 `peripheral_with_ota`도 참조합니다. 이를 `check_dynamic_cmd`와 `reset_to_dload_cmd`를 사용하는 별도의 `example/bt/pan_ota` DFU_PAN 예제와 혼동하지 마십시오. 서로 다른 업데이트 경로이므로 대상 SDK 리비전을 확인하고 실제 배포할 경로에 대한 복구 방안을 계획하십시오. PAN과 BLE 및 다른 업데이트 전송 수단의 비교는 [OTA와 DFU](../../develop/firmware-topics/ota-dfu.md)를 참조하십시오.
 
 README는 선택한 타깃에 적합한 OTA `ptab.json`이 없을 때 발생하는 별도의 빌드 실패를 명시합니다. README의 스크린샷은 OTA가 아닌 예제를 테스트하기 위해 DFU 서브프로젝트와 미들웨어 펌웨어 업데이트 지원을 비활성화하는 방법을 보여 줍니다. 이 진단은 OTA를 제거하는 것이며, 업데이트가 필요한 제품을 출하하는 방법이 아닙니다. OTA 경로를 활성화하기 전에 올바른 파티션 레이아웃과 업데이트 구성을 제공하고 검증하십시오.
 

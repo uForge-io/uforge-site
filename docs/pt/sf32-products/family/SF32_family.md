@@ -6,7 +6,11 @@ tags:
   - Chip
 ---
 
+<div id="sf32"></div>
+
 # Família SF32 { #sf32-family }
+
+<div id="_1"></div>
 
 ## Introdução { #introduction }
 
@@ -39,6 +43,8 @@ A série **LB** (Low-Power Bluetooth) é a primeira da família SF32; outras sé
     [Planejar as etapas para produção :material-arrow-right:](../../hardware/design-for-production.md){ .uf-hw-link-green }
 
 </div>
+
+<div id="_2"></div>
 
 ## Principais recursos { #key-features }
 
@@ -181,7 +187,7 @@ Ao selecionar um dispositivo, considere estes requisitos principais:
 | SF32LB52x | • Bluetooth de modo duplo (BT/BLE)<br>• ADC e DAC de áudio integrados<br>• Carregamento integrado de bateria Li-ion<br>• Até 45 GPIOs<br>• Resoluções de display de até 512 × 512<br>• Solução compacta e econômica<br> | • Smartwatches e pulseiras fitness de entrada<br>• Módulos Bluetooth e adaptadores sem fio<br>• Acessórios de áudio Bluetooth<br>• Sensores inteligentes e dispositivos vestíveis<br>• Etiquetas eletrônicas de prateleira e crachás inteligentes<br>• Impressoras portáteis de etiquetas<br>• Displays para e-bikes e e-scooters<br>• Dispositivos HMI básicos baseados em LVGL |
 | SF32LB55x | • Bluetooth Low Energy (BLE)<br>• Displays MIPI DSI em modo comando<br>• SRAM de grande capacidade para algoritmos de processamento de sensores<br>• Mais de 45 GPIOs<br>• Recursos ampliados de processamento de baixo consumo | • Pulseiras fitness e rastreadores de atividade<br>• Computadores esportivos e de ciclismo<br>• Dispositivos vestíveis com muitos sensores<br>• Dispositivos de monitoramento de saúde<br>• Periféricos BLE alimentados por bateria |
 | SF32LB56x | • Bluetooth de modo duplo (BT/BLE)<br>• Interfaces de display RGB/DPI<br>• ADC e DAC de áudio integrados<br>• Resoluções de display de até 1024 × 600<br>• Wi-Fi externo por SDIO<br>• Maior capacidade de GPIO | • Smartwatches com interfaces avançadas<br>• Sistemas HMI conectados<br>• Dispositivos médicos e de saúde<br>• Dispositivos portáteis industriais<br>• Instrumentos portáteis<br>• Displays avançados para e-bikes e e-scooters |
-| SF32LB57x | • Bluetooth de modo duplo (BT/BLE), BLE Audio e LE Long Range<br>• Gráficos ePicasso 3.0/eZip 3.0 com interfaces RGB<br>• Entrada de câmera DCMI e ADC/DAC de áudio de alta fidelidade integrados<br>• Matriz de interfaces atual: 1024 × 600 RGB888 via DPI/RGB; configurações comuns ou validadas também incluem 720 × 720<br>• Delegação de tarefas ao PTM para E/S determinística ou temporização personalizada de periféricos<br>• Até 58 GPIOs de uso geral; o BGA112 acrescenta até 6 E/S para MPI3 ou saídas estáticas GP configuradas por pull-up/pull-down, conforme a configuração SiP*<br>• Interfaces de armazenamento SD/SDIO/eMMC | • Smartwatches compactos e avançados<br>• HMIs com muitos recursos de display e dispositivos de e-paper<br>• Produtos Bluetooth com câmera<br>• Dispositivos portáteis de áudio e gravação<br>• Painéis de controle para casas inteligentes |
+| SF32LB57x | • Bluetooth de modo duplo (BT/BLE), BLE Audio e LE Long Range<br>• Gráficos ePicasso 3.0/eZip 3.0 com interfaces RGB<br>• Entrada de câmera DCMI e ADC/DAC de áudio de alta fidelidade integrados<br>• Matriz de interfaces atual: 1024 × 600 RGB888 via DPI/RGB; configurações comuns ou validadas também incluem 720 × 720<br>• Delegação de tarefas ao PTM para E/S determinística ou temporização personalizada de periféricos<br>• Até 58 GPIOs de uso geral; o BGA112 acrescenta até 6 E/S para MPI3 ou saídas estáticas GP configuradas por pull-up/pull-down, conforme a configuração SiP<br>• Interfaces de armazenamento SD/SDIO/eMMC | • Smartwatches compactos e avançados<br>• HMIs com muitos recursos de display e dispositivos de e-paper<br>• Produtos Bluetooth com câmera<br>• Dispositivos portáteis de áudio e gravação<br>• Painéis de controle para casas inteligentes |
 | SF32LB58x | • Bluetooth de modo duplo (BT/BLE)<br>• Renderização gráfica avançada, incluindo gráficos vetoriais<br>• Displays MIPI DSI em modo comando ou vídeo<br>• Resoluções de display de até 1280 × 800<br>• Configurações de memória de grande capacidade<br>• Alta densidade e quantidade de GPIOs<br>• Wi-Fi externo por SDIO<br>• Cargas de trabalho de IA de borda e aprendizado de máquina | • Smartwatches premium<br>• Dispositivos vestíveis para esportes e atividades ao ar livre<br>• Computadores avançados para ciclismo<br>• Displays inteligentes e painéis conectados<br>• Dispositivos vestíveis com IA<br>• Sistemas de IA de borda e fusão de sensores |
 
 </div>

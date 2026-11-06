@@ -9,12 +9,18 @@ tags:
     - Chip
 ---
 
+<div id="sf32lb57x-pcb"></div>
+
 # SF32LB57x Hardware Design Guide — PCB Layout Guidelines
 
 !!! note "Part of the SF32LB57x Hardware Design Guide"
     This page covers Section 6, PCB Layout Guidelines. Return to [Storage & Manufacturing](SF32LB57x_schematic_storage_mfg.md), or continue to [Design Review Checklist and References](SF32LB57x_review_and_reference.md).
 
+<div id="6-pcb"></div>
+
 ## 6. PCB Layout Guidelines
+
+<div id="61"></div>
 
 ### 6.1. Stack-Up
 
@@ -63,6 +69,8 @@ All four reference stack-ups use 1 oz copper on L1/L4 (1.38 mil, 0.0350 mm) and 
 
 For a 4-layer QFN design, the recommended layer assignment is: Layer 1 (top) — full ground pour, component placement, and signal routing; Layer 2 — solid ground plane, no signal routing, to preserve reference-ground integrity; Layer 3 — power plane, may be split by power domain and can also carry signal routing; Layer 4 (bottom) — full ground pour with signal routing.
 
+<div id="62-pcb"></div>
+
 ### 6.2. Critical PCB Constraint Quick Reference
 
 <div align="center"><em>Table 6.2-1: Critical PCB Constraint Quick Reference</em></div>
@@ -90,6 +98,8 @@ For a 4-layer QFN design, the recommended layer assignment is: Layer 1 (top) —
 
 The PTH and HDI design-rule figures also show example fabrication values: minimum and recommended trace widths are 0.10 mm for PTH and 0.075 mm for HDI, with a 2.54 mm maximum for both. The via examples show a 0.25 mm drill with a 0.45 mm pad for PTH, and a 0.10 mm drill with a 0.23 mm pad for an HDI microvia (the through-via example is 0.25 mm/0.45 mm). These are reference constructions; confirm the fabricator's capabilities and actual rules before release.
 
+<div id="63"></div>
+
 ### 6.3. Power Layout
 
 - Keep high-current power paths short and wide.
@@ -105,6 +115,8 @@ The PTH and HDI design-rule figures also show example fabrication values: minimu
     - **Trace width and rail label:** Original PCB guide Section 3.2.1 specifies at least 0.4 mm (about 15.7 mil) for both `VCC` and `PVDD`. Self-check Table 4-2-1-1 item 44, scoped to battery-powered variants, specifies at least 12 mil for `VCC`; item 47, scoped to 3.3 V-powered variants, is titled `PVDD` but its check detail specifies `VCC` at at least 12 mil. The source does not reconcile these widths or explain whether item 47's title or check detail identifies the intended rail. Do not infer a corrected value or apply one entry across both supply variants; obtain SiFli confirmation of the applicable rail, scope, and width before finalizing.
     Without SiFli confirmation, do not choose a trace width, or assign item 47 to a rail when finalizing the design.
 
+<div id="64"></div>
+
 ### 6.4. Crystal Layout
 
 - Preserve a solid, continuous reference ground beneath the RF circuit and main chip; do not split or slot the ground plane. The crystal guidance also calls for continuous reference ground in the crystal region and copper removal beneath the crystal; see the warning below and do not finalize this copper region until SiFli confirms the stack-up-specific boundary.
@@ -119,6 +131,8 @@ The PTH and HDI design-rule figures also show example fabrication values: minimu
     - **Clearance scope:** Figure 3-3-1 (shown here as Figure 6.9-30) specifies at least 0.25 mm of TOP-layer copper clearance around the crystal component. Self-check Table 4-3-1, item 7 separately defines which layers must be copper-free beneath the crystal for the two listed stack-ups, but the source does not say how the 0.25 mm perimeter clearance relates to those under-crystal zones or to adjacent-layer routing exclusions.
     These conflicts and scope gaps are unresolved in SiFli's source guidance. Before layout release, obtain confirmation for the actual package and stack-up; do not choose between the spacing requirements or derive a layer-specific ground/keep-out boundary from these references.
 
+<div id="65-rf"></div>
+
 ### 6.5. RF Layout
 
 - Place the RF matching network close to the chip and away from the antenna. Place the AVDD_BRF filter capacitor next to its chip pin and connect its ground directly to the main ground plane with a via.
@@ -128,6 +142,8 @@ The PTH and HDI design-rule figures also show example fabrication values: minimu
 - A mismatch between matching-component pad width and trace width can cause an impedance discontinuity. A ground-plane cutout beneath the pads, sized to the component pads, can help maintain impedance continuity.
 - If using an IPEX antenna connector, remove copper from every PCB layer beneath it. Simulate and tune PCB antennas on the actual board; reserve a CLC matching network and place it as close to the antenna as practical.
 - Keep RF away from LCD FPC, USB, SDIO, DC/DC, crystals, and charger paths.
+
+<div id="66"></div>
 
 ### 6.6. Analog and Audio
 
@@ -139,6 +155,8 @@ The PTH and HDI design-rule figures also show example fabrication values: minimu
 - Provide three-dimensional ground shielding for GPADC traces and keep them away from potentially interfering circuits such as battery and temperature sensing.
 - Avoid routing high-current return paths through the audio area.
 
+<div id="67"></div>
+
 ### 6.7. High-Speed Interfaces
 
 - Route USB DP/DN as a 90 Ω differential pair and through ESD protection first.
@@ -148,6 +166,8 @@ The PTH and HDI design-rule figures also show example fabrication values: minimu
 - Route USB PA35 (USB_DP) and PA36 (USB_DN) through ESD protection before they reach the chip. Use 90 Ω differential routing with three-dimensional ground shielding, and connect the ESD device ground reliably to the main ground.
 - Reserve series resistors on high-speed clocks where EMI tuning may be needed.
 
+<div id="68-emi-esd-eos"></div>
+
 ### 6.8. EMI, ESD, and EOS
 
 - Review ESD protection for every external interface.
@@ -156,6 +176,8 @@ The PTH and HDI design-rule figures also show example fabrication values: minimu
 - USB, charger, battery connector, keys, touch, display, heart-rate sensor, and antenna are high-priority protection points.
 - Place the USB charging-line test point ahead of its TVS device. Place the battery-connector TVS ahead of the chip circuitry so the signal passes through the TVS before reaching the chip.
 - Charger input protection should consider OVP, EOS, and ESD together.
+
+<div id="69-pcb"></div>
 
 ### 6.9. PCB Reference Figures
 

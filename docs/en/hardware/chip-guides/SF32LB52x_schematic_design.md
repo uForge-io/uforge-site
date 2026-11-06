@@ -8,10 +8,14 @@ tags:
     - Chip
 ---
 
+<div id="sf32lb52x"></div>
+
 # SF32LB52x Hardware Design Guide — Schematic Design Guidelines
 
 !!! note "Part of the SF32LB52x Hardware Design Guide"
     Schematic Design Guidelines now spans three pages: this page (Sections 5.1-5.3: Minimum System, Power, and Clock), [RF & User Interfaces](SF32LB52x_schematic_rf_interfaces.md) (Sections 5.4-5.5), and [Storage & Manufacturing](SF32LB52x_schematic_storage_mfg.md) (Sections 5.6-5.7). Start from the [SF32LB52x Hardware Design Guide overview](SF32LB52x_hardware_design_guide.md) for device selection and the full design flow, or see the [Schematic Checklist](SF32LB52x_schematic_checklist.md) for the item-by-item review.
+
+<div id="5"></div>
 
 ## 5. Schematic Design Guidelines
 
@@ -32,6 +36,8 @@ This chapter follows the schematic workflow across three pages. Complete the min
 | Manufacturing | DBG_UART/SWD, test points, production flashing, calibration access, and release checklists | Test-point drawing, production fixture plan, completed release evidence |
 
 </div>
+
+<div id="51"></div>
 
 ### 5.1. Minimum System Design
 
@@ -54,6 +60,8 @@ At the end of this gate, the schematic should be able to power up, boot from the
 
 Power-system design defines the rails, load switches, charger path, OVP, internal LDO usage, wake behavior, and low-power states that make the minimum system reliable. Complete this section before PCB placement, because later display, storage, RF, audio, and sensor decisions depend on these rail assumptions.
 
+<div id="521"></div>
+
 #### 5.2.1. Power Supply
 
 **Quick Summary**
@@ -65,6 +73,8 @@ Power-system design defines the rails, load switches, charger path, OVP, interna
 **Design Goal**
 
 Create a stable, low-leakage power tree that supports the selected variant, avoids overloading internal LDO outputs, keeps RF and audio rails quiet, and allows unused loads and boot storage to be switched off in low-power modes.
+
+<div id="5211"></div>
 
 ##### 5.2.1.1. Processor Power Supply Requirements
 
@@ -126,8 +136,13 @@ Create a stable, low-leakage power tree that supports the selected variant, avoi
 
     (1) VDD_SIP: SF32LB52BU36 requires an external 1.8 V or 3.3 V supply; SF32LB52BU56 requires an external 3.3 V supply; SF32LB52DUB6 requires an external 1.8 V supply; SF32LB52E/G/JUx6 are powered directly by the internal LDO and need no external supply.
 
+    !!! note "PVDD scope requires confirmation"
+        The table specifies PVDD = 2.97–3.63 V (3.3 V typical), within which the E/G/J internal-LDO statement applies. The B3 source separately describes PVDD = 1.8 V, where the internal LDO is unavailable and an external 1.8 V supply is required. That case is outside the tabulated range and the source does not reconcile the scope. Confirm applicability with SiFli; this is not a recommendation to use PVDD = 1.8 V. See [Storage and Manufacturing](SF32LB52x_schematic_storage_mfg.md) for the related VDD_SIP switching caveat.
+
     !!! important "Hibernate mode note"
         When the system enters Hibernate mode, VDD_SIP must be switched off, otherwise there is a leakage risk on the I/O of the co-packaged storage. Use the dedicated PA21 pin to control the VDD_SIP power switch.
+
+<div id="5212-buck"></div>
 
 ##### 5.2.1.2. BUCK Inductor Selection
 
@@ -135,6 +150,8 @@ Both design groups use the same inductor specification.
 
 !!! important "Key Power Inductor Parameters"
     L (inductance) = 4.7 uH ± 20%, DCR (DC resistance) ≤ 0.4 Ω, Isat (saturation current) ≥ 450 mA.
+
+<div id="5213"></div>
 
 ##### 5.2.1.3. Battery and Charging Control
 
@@ -208,6 +225,8 @@ Both design groups use the same inductor specification.
     !!! info "Not Applicable"
         The regular-powered variant is powered directly from a regulated external supply and **has no charging management circuitry**. This section does not apply. If your product needs battery power and charging, use the SF32LB520/3/5/7 series instead.
 
+<div id="5214-standby"></div>
+
 ##### 5.2.1.4. Reducing Standby Power
 
 === "SF32LB520/3/5/7 (Battery-Powered)"
@@ -225,6 +244,8 @@ Both design groups use the same inductor specification.
     Use load switches for dynamic power management of each functional block; for always-on modules or paths, select devices with low quiescent current.
 
     Control the default hardware state of power-switch GPIO pins carefully, and add megohm-range pull-up/pull-down resistors so load switches default to off. For LDO and load-switch selection, choose devices with low quiescent current (Iq) and low shutdown current (Istb), and pay particular attention to Iq on always-on power devices.
+
+<div id="5215"></div>
 
 ##### 5.2.1.5. Power Design Checklist
 
@@ -247,6 +268,8 @@ Both design groups use the same inductor specification.
 - Measure `VCC`/`PVDD`, BUCK output, RF/audio rails, and storage supply before firmware enables peripherals.
 - Confirm charger attach, trickle charge, constant-current charge, and recharge behavior on battery-powered designs.
 - Measure standby and Hibernate current with display, sensors, storage, and motor load switches off.
+
+<div id="522"></div>
 
 #### 5.2.2. Operating Modes and Wake Sources
 
@@ -304,7 +327,11 @@ The whole family supports 15 wake-capable interrupt sources in Standby and Hiber
 - [ ] External storage and sensor supplies do not leak through I/O pins in Hibernate.
 - [ ] Firmware and hardware teams agree which state is used for shipping, shelf, and normal standby modes.
 
+<div id="53"></div>
+
 ### 5.3. Clock Generation
+
+<div id="531"></div>
 
 #### 5.3.1. Crystal Selection
 

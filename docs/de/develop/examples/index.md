@@ -97,7 +97,7 @@ Wählen Sie das Beispiel für das Subsystem mit den strengsten technischen Randb
 
 - Bei Bluetooth-Produkten mit dem nächstliegenden Profil beginnen.
 - Bei Display-Produkten mit dem Display- und LVGL-Pfad beginnen.
-- Bei akkubetriebenen Produkten mit einem Energiesparbeispiel beginnen.
+- Bei batteriebetriebenen Produkten mit einem Energiesparbeispiel beginnen.
 - Bei OTA-Produkten mit dem Update-Ablauf und dem Partitionslayout beginnen.
 
 Fügen Sie dann die übrigen Subsysteme nacheinander hinzu.

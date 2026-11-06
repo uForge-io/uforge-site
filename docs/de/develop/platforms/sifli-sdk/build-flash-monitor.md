@@ -115,7 +115,7 @@ Wenn Sie [CodeKit](../../tools/codekit.md) verwenden, bewahren Sie dieselben Nac
 | Build-Tool nicht gefunden | `export.sh` / `export.ps1` im aktuellen Terminal erneut ausführen. |
 | Boardname unbekannt | Die SDK-Dokumentation zu den unterstützten Boards prüfen. |
 | Download-Skript kann den Port nicht öffnen | Serielle Terminals schließen und USB-UART-Kabel sowie Anschluss prüfen. |
-| Flashen startet nicht | Die dokumentierte Download-Sequenz des Boards befolgen. Bei `sf32lb52-lcd_n16r8` nach Auswahl des seriellen Ports das Board neu starten und innerhalb von 2 Sekunden die Eingabetaste drücken, um den Download zu starten. Für andere Boards gilt deren jeweilige Anleitung. Zusätzlich Stromversorgung, ausgewählten Port und UART-Verbindung prüfen. |
+| Flashen startet nicht | Die dokumentierte Download-Sequenz des Boards befolgen. Bei `sf32lb52-lcd_n16r8` wird ein Neustart des Boards empfohlen; bei dieser Sequenz innerhalb von 2 Sekunden nach dem Neustart die Eingabetaste drücken, um den Download zu starten. Für andere Boards gilt deren jeweilige Anleitung. Zusätzlich Stromversorgung, ausgewählten Port und UART-Verbindung prüfen. |
 | Serielle Ausgabe ist unlesbar | Baudrate prüfen und die Daten-UART verwenden, kein reines Ladekabel. |
 
 </div>

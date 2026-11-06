@@ -6,9 +6,13 @@ tags:
   - 칩
 ---
 
-# SF32 제품군
+<div id="sf32"></div>
 
-## 소개
+# SF32 제품군 { #sf32-family }
+
+<div id="_1"></div>
+
+## 소개 { #introduction }
 
 **SF32** 제품군, 특히 **SF32LB5xx** 시리즈는 SiFli Technologies가 배터리로 구동되는 AIoT 및 웨어러블 애플리케이션을 위해 개발한 고집적 초저전력 32비트 마이크로컨트롤러 포트폴리오입니다.
 
@@ -40,7 +44,9 @@ tags:
 
 </div>
 
-## 주요 기능
+<div id="_2"></div>
+
+## 주요 기능 { #key-features }
 
 1. **이기종 멀티 코어 아키텍처**
 

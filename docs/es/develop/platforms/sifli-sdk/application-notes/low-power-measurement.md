@@ -105,13 +105,15 @@ Los valores por familia son referencias de las guías del SDK, no tiempos garant
 
 ## Controlar los relojes durante la actividad { #control-clocks-while-awake }
 
-Si el hilo inactivo no puede entrar en un estado de suspensión, la reducción automática de frecuencia WFI puede disminuir la corriente. Solo es segura cuando EPIC, EZIP, LCDC, USB y SD están inactivos. La implementación de LVGL incluida en el SDK registra la actividad de EPIC/EZIP, mientras que el controlador RT-Thread LCD Device registra la de LCDC/USB/SD. Si la aplicación no utiliza la implementación de LVGL incluida, indique el inicio y el fin de la actividad de EPIC/EZIP mediante `rt_pm_hw_device_start()` y `rt_pm_hw_device_stop()`. Configure el divisor con `HAL_RCC_HCPU_SetDeepWFIDiv()`. Los objetivos de frecuencia WFI varían según la familia: la guía SF32LB52x permite reducirla solo hasta 48 MHz cuando hay periféricos de audio activos y hasta 4 MHz en los demás casos; también exige poner `HPSYS_RCC_DBGR_FORCE_HP` en 1. La [nota de aplicación de gestión de energía de SiFli](https://docs.sifli.com/projects/solution/2.application-notes/power_manager/index.html) indica una frecuencia de CPU inactiva de 1 MHz para SF32LB55x, SF32LB56x y SF32LB58x. Las fuentes citadas no establecen un valor para SF32LB57x; consulte la guía de la versión del SDK de destino.
+Si el hilo inactivo no puede entrar en un estado de suspensión, la reducción automática de frecuencia WFI puede disminuir la corriente. Solo es segura cuando EPIC, EZIP, LCDC, USB y SD están inactivos. La implementación de LVGL incluida en el SDK registra la actividad de EPIC/EZIP, mientras que el controlador RT-Thread LCD Device registra la de LCDC/USB/SD. Si la aplicación no utiliza la implementación de LVGL incluida, indique el inicio y el fin de la actividad de EPIC/EZIP mediante `rt_pm_hw_device_start()` y `rt_pm_hw_device_stop()`. Configure el divisor con `HAL_RCC_HCPU_SetDeepWFIDiv()`.
+
+Los objetivos de frecuencia WFI varían según la familia. La guía SF32LB52x permite reducirla hasta 48 MHz con periféricos de audio activos y hasta 4 MHz en los demás casos. También exige poner `HPSYS_RCC_DBGR_FORCE_HP` en 1. La [nota de aplicación de gestión de energía de SiFli](https://docs.sifli.com/projects/solution/2.application-notes/power_manager/index.html) indica una frecuencia de CPU inactiva de 1 MHz para SF32LB55x, SF32LB56x y SF32LB58x. Las fuentes citadas no establecen un valor para SF32LB57x. Consulte la guía de la versión del SDK de destino.
 
 Para ejecutar tareas, use `rt_pm_run_enter()`:
 
 <div align="center" markdown>
 
-<em>Tabla: selecciones de reloj HCPU para los modos Run</em>
+<em>Tabla: selecciones de reloj HCPU en modo Run para SF32LB52x (confirme su disponibilidad en la guía del SDK de la familia de destino)</em>
 
 | Modo | Reloj HCPU |
 |---|---:|
@@ -125,7 +127,7 @@ Para ejecutar tareas, use `rt_pm_run_enter()`:
 
 ## Revisar la secuencia de suspensión entre subsistemas { #understand-inter-subsystem-sleep-sequencing }
 
-Cuando se apaga la pantalla, HPSYS puede entrar en suspensión. En 55x/56x/58x, LPSYS suele hacerlo después de HPSYS. La familia 52x es la excepción documentada y permite que HCPU y LCPU duerman de forma independiente. Las fuentes disponibles no confirman que ACPU siga la misma secuencia en 57x; compruebe la política de sus subsistemas en la versión correspondiente del SDK. Tras la activación, `gui_resume` inicia un nuevo ciclo de decisión para apagar la pantalla. Mantenga despierto un núcleo mientras lo necesite un periférico compartido o una transacción IPC.
+Cuando se apaga la pantalla, HPSYS puede entrar en suspensión. En 55x/56x/58x, LPSYS suele hacerlo después de HPSYS. La familia 52x es la excepción documentada: permite que HCPU y LCPU duerman de forma independiente. Las fuentes disponibles no confirman que ACPU siga la misma secuencia en 57x. Compruebe la política de sus subsistemas en la versión correspondiente del SDK. Tras la activación, `gui_resume` inicia un nuevo ciclo de decisión para apagar la pantalla. Mantenga despierto un núcleo mientras lo necesite un periférico compartido o una transacción IPC.
 
 Active `BSP_PM_DEBUG` temporalmente y busque estos marcadores en los registros:
 
@@ -141,7 +143,7 @@ Active `BSP_PM_DEBUG` temporalmente y busque estos marcadores en los registros:
 | `[pm]WSR:0x...` | Motivo de activación; consulte el manual de usuario de la familia para interpretar los bits. |
 </div>
 
-Si no se alcanza el estado de suspensión esperado, compruebe `list_thread`, `pm_dump` y `list_timer`. El hilo inactivo debe ejecutarse, ningún código debe mantener `rt_pm_request(PM_SLEEP_MODE_IDLE)`, el temporizador de SO más cercano debe quedar más allá del umbral de la política (normalmente 100 ms para HCPU y 10 ms para LCPU), no debe haber condiciones de activación activas y las colas IPC deben estar vacías. Una demora periódica inferior al umbral puede impedir la suspensión de forma indefinida.
+Si no se alcanza el estado de suspensión esperado, compruebe `list_thread`, `pm_dump` y `list_timer`. El hilo inactivo debe ejecutarse y ningún código debe mantener `rt_pm_request(PM_SLEEP_MODE_IDLE)`. El temporizador de SO más cercano debe quedar más allá del umbral de la política (normalmente 100 ms para HCPU y 10 ms para LCPU). Las condiciones de activación deben estar inactivas y las colas IPC, vacías. Una demora periódica inferior al umbral puede impedir la suspensión de forma indefinida.
 
 La guía de SiFli también muestra los flujos «pantalla apagada → IDLE → suspensión cuando se cumplen las condiciones» y «una tecla activa LPSYS; después, LCPU envía el evento a HCPU por Mailbox y el sistema activa HPSYS automáticamente». Son útiles para comprobar el orden de los registros; las descripciones y el flujo son ejemplos de SF32LB52x, y no deben usarse para deducir la asignación de bits WSR de otra familia.
 

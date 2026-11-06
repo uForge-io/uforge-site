@@ -288,7 +288,7 @@ Registre la versión del firmware, la revisión de la placa, la tensión de la b
 - El consumo es una propiedad del sistema: las decisiones sobre Bluetooth, pantalla, audio, IA y memoria determinan en conjunto cuánto y con qué frecuencia puede suspenderse el dispositivo.
 - La política PM configurada selecciona entre los estados de bajo consumo admisibles; una solicitud no liberada que inhiba modos más profundos puede dejar el sistema en un estado menos profundo del previsto.
 - El diseño basado en eventos e interrupciones suele consumir menos que la consulta periódica cuando la energía es importante.
-- En un dispositivo conectado, los parámetros de conexión Bluetooth y la estrategia de actualización de la pantalla suelen ser las dos principales palancas de ahorro.
+- En un producto vestible conectado, los parámetros de conexión Bluetooth y la estrategia de actualización de la pantalla suelen ser las dos principales palancas de ahorro.
 - Mida el consumo real con cargas combinadas y representativas, sobre el hardware definitivo y dentro de su carcasa final. Las mediciones de banco y las de subsistemas aislados pueden infravalorar el consumo del producto completo.
 
 Para estimar el porcentaje de batería restante a partir de la tensión, consulte [Estimación del nivel de carga de la batería](battery-capacity-calculation.md).

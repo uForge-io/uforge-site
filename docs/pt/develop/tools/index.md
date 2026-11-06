@@ -24,7 +24,7 @@ A tabela abaixo relaciona tarefas comuns às ferramentas correspondentes. Ela se
 | [Scripts UART de gravação do SDK](../platforms/sifli-sdk/build-flash-monitor.md) | Scripts para a primeira gravação, gerados durante a compilação do SiFli-SDK. |
 | [Ações do CodeKit](codekit.md) | Configuração, compilação, gravação e monitoramento pelo VS Code. |
 | [`AssertDump`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/AssertDump/AssertDump_UM.html) | Captura de dados da memória no momento de uma falha para análise posterior. |
-| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace` captura logs da placa-alvo; `UsartServer` oferece depuração via UART pelo Debug IP do chip. |
+| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace` captura logs da placa-alvo; a documentação descreve `UsartServer` como um auxiliar UART para J-Link destinado a SF32LB52x e SF32LB56x. Essa função no host não descarta o UART Debug IP do chip; consulte o manual para conhecer a configuração compatível. |
 | [`Impeller`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/Impeller/Impeller_UM.html) | Gravação de firmware, calibração e testes de PCBA na linha de produção. |
 | [eZip / ferramentas de imagem](../../learn/graphics/ezip.md) | Conversão de recursos para pipelines gráficos com compressão. |
 | [Ferramentas de RF, áudio e fábrica](https://docs.sifli.com/projects/solution/6.tools/index.html) | Calibração, testes e ajustes para produção. |

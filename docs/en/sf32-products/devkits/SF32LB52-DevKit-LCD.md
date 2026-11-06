@@ -207,7 +207,13 @@ The original SiFli board note lists `TFT-H043A28WQISTKN22_V0-3` as a supported d
 | Module Pin | Signal | Board Function |
 | :--- | :--- | :--- |
 | PA44 | VBUS_DET | Charger insertion detection |
-| PA43..PA37 | DB7..DB2 | MCU/8080 LCD data |
+| PA43 | DB7 | MCU/8080 LCD data |
+| PA42 | DB6 | MCU/8080 LCD data |
+| PA41 | DB5 | MCU/8080 LCD data |
+| PA40 | DB4 | MCU/8080 LCD data |
+| PA39 | DB3 | MCU/8080 LCD data |
+| PA38 | GPIO | General-purpose I/O |
+| PA37 | DB2 | MCU/8080 LCD data |
 | PA08..PA07 | DB1..DB0 / QSPI D3..D2 | LCD data |
 | PA06 | DC / QSPI D1 | LCD data/command |
 | PA05 | RD / QSPI D0 | LCD data |
@@ -219,7 +225,7 @@ The original SiFli board note lists `TFT-H043A28WQISTKN22_V0-3` as a supported d
 | PA33 / PA30 | I2C SDA / SCL | Touch panel |
 | PA31 / PA09 | Touch INT / RST | Touch panel |
 | PA24, PA25, PA28, PA29 | SPI1 | TF-card interface |
-| PA26 | Card detect / LED | Shared function |
+| PA26 | SD-card detect / external Flash2 CS / GPIO LED | Shared on V1.2.0; confirm exact revision |
 | PA20 / PA27 | UART RX/TX | User UART |
 | PA18 / PA19 | Debug UART RX/TX | Download and software debug |
 | PA10 | AU_PA_EN | Audio amplifier enable |

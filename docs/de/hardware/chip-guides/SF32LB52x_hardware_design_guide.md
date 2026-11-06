@@ -61,7 +61,7 @@ Die Familie integriert:
 - Dual-Mode-Bluetooth-Funktechnik nach Bluetooth 5.3
 - ePicasso 2.0: 2D/2.5D-Grafikbeschleunigung
 - SiFlis ursprüngliche Hardware-Anwendungshinweise beschreiben einen integrierten KI-Beschleuniger für neuronale Netze. Der [SiFli-SDK-NNACC-Leitfaden](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/nnacc.html) listet SF32LB55x, SF32LB56x und SF32LB58x, jedoch nicht SF32LB52x; bestätigen Sie die Softwareunterstützung für die genaue Variante, bevor Sie sich auf den Beschleuniger verlassen.
-- Display-Controller für SPI-, QSPI-, 8080-, JDI- und 8-Bit-EPD-Schnittstellen
+- Display-Controller für SPI, QSPI, 8080 und JDI; die parallele 8-Bit-EPD-Schnittstelle ist für `52B/D/E/G/J` dokumentiert und muss für die genaue Variante bestätigt werden
 - USB-2.0-Full-Speed-Device
 - SDIO/eMMC-Speicherschnittstelle bei unterstützten Varianten
 - Integrierter Audio-Codec mit analogen und digitalen Audioschnittstellen
@@ -122,7 +122,7 @@ Beide Design-Gruppen verwenden dasselbe QFN68-Gehäuse.
 
 </div>
 
-Die Peripherieressourcen unterscheiden sich zwischen den beiden Designgruppen geringfügig: Die akkubetriebenen Varianten bieten 44 GPIOs, die extern versorgten 45. Bei den akkubetriebenen Varianten ist ein Pin für die Ladefunktion reserviert.
+Die Peripherieressourcen unterscheiden sich zwischen den beiden Designgruppen geringfügig: Die akkubetriebenen Varianten bieten 44 GPIOs, die extern versorgten 45. Die Differenz ergibt sich aus den für die Ladefunktion reservierten Pins der akkubetriebenen Varianten.
 
 - 44/45 GPIOs
 - 3x UART
@@ -144,9 +144,9 @@ Die folgenden Abbildungen zeigen die Pinbelegung der beiden Gruppen. Auf die Unt
 
 <div align="center"><em>Abbildung 3.3-1: QFN68L-Pin-Layout für SF32LB520/3/5/7</em></div>
 
-![Abbildung 3.3-2: QFN68L-Pin-Layout für SF32LB52B/E/G/J](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ width="100%" loading="lazy" }
+![Abbildung 3.3-2: QFN68L-Pin-Layout für SF32LB52B/D/E/G/J](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Abbildung 3.3-2: QFN68L-Pin-Layout für SF32LB52B/E/G/J</em></div>
+<div align="center"><em>Abbildung 3.3-2: QFN68L-Pin-Layout für SF32LB52B/D/E/G/J</em></div>
 
 ### 3.4. Anwendungen { #34-applications }
 
@@ -183,7 +183,7 @@ Die folgende Tabelle gibt einen kompakten Überblick über die empfohlene Hardwa
 | Buck-Induktivität | 4,7 µH ±20 %, DCR ≤ 0,4 Ω, Isat ≥ 450 mA |
 | Quarz | 48-MHz-Hauptquarz und 32,768-kHz-RTC-Quarz |
 | RF | 50-Ω-Leitung mit kontrolliertem Wellenwiderstand und reserviertem π-Anpassnetzwerk |
-| Display | 3-Draht-SPI, 4-Draht-SPI, Dual-SPI, Quad-SPI (bis 512 x 512), JDI und 8-Bit-EPD |
+| Display | 3-Draht-SPI, 4-Draht-SPI, Dual-SPI, Quad-SPI (bis 512 x 512), JDI und paralleles 8-Bit-EPD (für `52B/D/E/G/J` dokumentiert; genaue Variante bestätigen) |
 | Touch | kapazitiver I2C-Touch-Controller; das System kann per Interrupt aufgeweckt werden |
 | Speicher | SiP-Flash/PSRAM, externes SPI-NOR, SPI-NAND, SD-NAND oder eMMC, abhängig von der Variante |
 | Audio | Analoger Mikrofoneingang, differenzieller DAC-Ausgang, externer PA |

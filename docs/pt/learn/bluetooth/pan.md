@@ -160,7 +160,7 @@ Para um produto de consumo, publique as combinações compatíveis de **modelo d
 
 ## Atualização OTA via PAN { #pan-based-ota-delivery }
 
-A atualização OTA está habilitada por padrão no exemplo PAN: `pan_cmd ota_pan` baixa e instala, pelo mesmo link Bluetooth PAN usado para o tráfego de rede, uma imagem de firmware usando o fluxo OTA DFU_PAN documentado junto ao serviço de atualização de firmware do SiFli-SDK. É uma opção adequada para produtos que já usam PAN para transferir dados e não precisam de um segundo transporte OTA. Consulte [OTA e DFU](../../develop/firmware-topics/ota-dfu.md) para comparar PAN com BLE e outros transportes de atualização; planeje a reversão e a recuperação independentemente do transporte.
+Em `example/bt/pan`, `pan_cmd ota_pan` baixa da URL configurada em `main.c` e instala a imagem de firmware; o README também aponta para `peripheral_with_ota`. Não confunda esse fluxo com o exemplo DFU_PAN separado `example/bt/pan_ota`, que usa `check_dynamic_cmd` e `reset_to_dload_cmd`. São caminhos de atualização distintos: confira a revisão do SDK de destino e planeje a recuperação para o caminho que será distribuído. Consulte [OTA e DFU](../../develop/firmware-topics/ota-dfu.md) para comparar PAN com BLE e outros transportes de atualização.
 
 O README também descreve uma falha de compilação quando o destino selecionado não tem um `ptab.json` adequado para OTA. As capturas mostram como desabilitar o subprojeto DFU e o suporte de atualização do middleware para testar o exemplo sem OTA. Esse diagnóstico remove OTA; não é uma solução para lançar um produto que precise de atualizações. Forneça e valide o mapa de partições e a configuração de atualização corretos antes de habilitar esse caminho.
 

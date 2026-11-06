@@ -22,7 +22,7 @@ tags:
 
 - Les mémoires de démarrage externes comprennent SPI NOR, SPI NAND et SD NAND ; eMMC est disponible sur les variantes compatibles à alimentation externe régulée.
 - Les broches de bootstrap `PA13` et `PA17` sélectionnent le support de démarrage.
-- Les notes d'application et le guide de conception du schéma indiquent `PA21` pour la commutation de l'alimentation du stockage de démarrage, tandis que la liste de contrôle officielle indique `PA11` pour la Flash externe des variantes alimentées par batterie. Faites confirmer par SiFli la broche de commande adaptée à votre conception. Par ailleurs, une mémoire NOR Flash de 32 Mo ou plus connectée via MPI doit pouvoir être mise hors tension puis réalimentée par `PA21` afin que la ROM la reconnaisse après une réinitialisation ou l'entrée en Hibernate. Pendant Hibernate, `VDD_SIP` doit être coupé afin d'éviter les courants de fuite sur les E/S de la mémoire intégrée au même boîtier.
+- Les notes d'application et le guide de conception du schéma indiquent `PA21` pour la commutation de l'alimentation du stockage de démarrage, tandis que la liste de contrôle officielle indique `PA11` pour la Flash externe des variantes alimentées par batterie. Faites confirmer par SiFli la broche de commande adaptée à votre conception. La règle de commutation de la NOR MPI de 32 MB ou plus et l'instruction de couper `VDD_SIP` pendant Hibernate proviennent des documents sur les variantes à alimentation régulée `52B/D/E/G/J`. La source des variantes alimentées par batterie décrit `VDD18_VOUT` et indique qu'aucun interrupteur supplémentaire n'est nécessaire pour la NOR externe, mais ne traite pas le seuil de 32 MB ; faites confirmer par SiFli l'application de cette règle aux variantes `520/3/5/7`.
 
 **Objectif de conception**
 
@@ -131,18 +131,18 @@ Les notes d'application OpenSiFli et le guide de conception du schéma, qui ont 
 
     - Le SF32LB520Ux6 intègre une mémoire Flash dans son boîtier : alimentez VDD18_VOUT depuis VDD33_VOUT1 et désactivez le LDO VDD18_VOUT interne.
     - Les SF32LB523/5/7Ux6 intègrent une PSRAM dans leur boîtier : utilisez le LDO interne ; VDD18_VOUT peut aussi être alimenté par une source externe.
-    - Alimentez la Flash NOR externe depuis VDD33_VOUT1 ; aucun interrupteur d'alimentation supplémentaire n'est nécessaire.
+    - La source des variantes alimentées par batterie indique que la Flash NOR externe est alimentée par VDD33_VOUT1 sans interrupteur supplémentaire, mais ne précise pas si cela vaut aussi pour une capacité de 32 MB ou plus. Faites confirmer ce point par SiFli avant de l'appliquer à une grande mémoire NOR MPI.
     - Alimentez la Flash SPI NAND ou SD NAND externe depuis VDD33_VOUT1 et ajoutez un interrupteur d'alimentation.
     - Le circuit de référence prévoit des emplacements pour les résistances de pull-up de PA13 et PA17. Montez-les selon le type de mémoire ; la valeur recommandée est 7,5 kΩ.
 
 === "52B/D/E/G/J (alimentation externe régulée)"
 
     - Le modèle avec Flash intégrée dans le boîtier (SF32LB52BU36) : ajoutez un interrupteur d'alimentation sur VDD_SIP.
-    - Pour les modèles avec PSRAM intégrée dans le boîtier (SF32LB52DUB6/EUB6/GUC6/JUD6), l'interrupteur de VDD_SIP est optionnel si PVDD = 3,3 V et si VDD_SIP utilise le LDO interne ; il est obligatoire si PVDD = 1,8 V.
+    - Pour les modèles avec PSRAM intégrée dans le boîtier (SF32LB52DUB6/EUB6/GUC6/JUD6), l'interrupteur de VDD_SIP est optionnel dans la plage PVDD indiquée au tableau avec le LDO interne. La note de bas de page de la source B3 indique qu'il est nécessaire si PVDD = 1,8 V, mais cette valeur est hors de la plage tabulée de 2,97–3,63 V. Son applicabilité reste indéterminée : faites confirmer ce point par SiFli et ne considérez pas 1,8 V comme une condition de conception PVDD recommandée. Voir la note sur la plage de fonctionnement dans [Conception du schéma](SF32LB52x_schematic_design.md).
     - L'alimentation du stockage externe est indépendante de VDD_SIP — ajoutez un interrupteur d'alimentation séparé.
     - Voir la section 5.6.1.1 pour les compromis de domaine d'alimentation VCC/VCCQ de l'eMMC.
     - La note d'application indique **PA21** pour les interrupteurs d'alimentation du stockage liés au démarrage ; la divergence entre les sources concernant la Flash externe des variantes alimentées par batterie est signalée plus haut.
-    - Les mémoires Flash NOR de 32 Mo ou plus connectées via MPI (Memory Peripheral Interface, interface de périphériques mémoire utilisée avec les mémoires SPI-NOR/SPI-NAND) doivent pouvoir être mises hors tension par PA21. Elles quittent ainsi le mode d'adressage sur 4 octets au redémarrage de la MCU ou à l'entrée en Hibernate ; sinon, la ROM ne reconnaîtra pas la Flash. Les Flash NOR de 16 Mo ou moins peuvent rester alimentées en permanence.
+    - Les mémoires Flash NOR de 32 MB ou plus connectées via MPI (Memory Peripheral Interface, interface de périphériques mémoire utilisée avec les mémoires SPI-NOR/SPI-NAND) doivent pouvoir être mises hors tension par PA21. Elles quittent ainsi le mode d'adressage sur 4 octets au redémarrage de la MCU ou à l'entrée en Hibernate ; sinon, la ROM ne reconnaîtra pas la Flash. Les Flash NOR de 16 MB ou moins peuvent rester alimentées en permanence.
     - Le circuit de référence prévoit des emplacements pour les résistances de pull-up de PA13 et PA17. Montez-les selon le type de mémoire ; la valeur recommandée est 7,5 kΩ.
 
 **Erreurs courantes - Stockage**

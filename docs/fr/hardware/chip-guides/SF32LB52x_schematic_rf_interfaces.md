@@ -8,12 +8,16 @@ tags:
     - Puce
 ---
 
+<div id="sf32lb52x-rf"></div>
+
 # Guide de conception matérielle SF32LB52x — RF et interfaces utilisateur { #sf32lb52x-hardware-design-guide-rf-user-interfaces }
 
 !!! note "Fait partie du Guide de conception matérielle SF32LB52x"
     Cette page couvre les sections 5.4-5.5 des Recommandations de conception du schéma : RF et interfaces utilisateur. Retournez à [Système minimal, alimentation et horloge](SF32LB52x_schematic_design.md), poursuivez vers [Stockage et fabrication](SF32LB52x_schematic_storage_mfg.md), ou consultez la [Liste de contrôle du schéma](SF32LB52x_schematic_checklist.md) pour la revue point par point.
 
 ### 5.4. RF { #54-rf }
+
+<div id="541-rf"></div>
 
 #### 5.4.1. Schéma RF et chemin d'antenne { #541-rf-schematic-and-antenna-path }
 
@@ -35,6 +39,8 @@ L'impédance caractéristique de la piste RF est de 50 Ω. Si l'antenne est déj
 
 La figure 5.4-1 montre un condensateur série de 15 pF, 50 V (C0323) ; les deux emplacements en dérivation C0318 et C0319 sont marqués NF (non montés). Ces valeurs décrivent le circuit de référence, pas une adaptation valable pour toute antenne. Placez le réseau près de la broche RF côté puce et choisissez sa configuration finale à partir de mesures sur le produit assemblé.
 
+<div id="542-rf"></div>
+
 #### 5.4.2. Revue et réglage RF { #542-rf-review-and-tuning }
 
 **Erreurs courantes - RF**
@@ -51,7 +57,11 @@ La figure 5.4-1 montre un condensateur série de 15 pF, 50 V (C0323) ; les deux 
 - [ ] La rangée de vias de masse et la zone d'exclusion RF ont été vérifiées.
 - [ ] Les accès nécessaires au réglage de l'antenne et aux essais de certification sont prévus avant la finalisation de la conception du boîtier.
 
+<div id="55"></div>
+
 ### 5.5. Interfaces utilisateur { #55-user-interfaces }
+
+<div id="551"></div>
 
 #### 5.5.1. Affichage { #551-display }
 
@@ -59,7 +69,7 @@ La figure 5.4-1 montre un condensateur série de 15 pF, 50 V (C0323) ; les deux 
 
 - Les interfaces prises en charge comprennent SPI, Dual-SPI, Quad-SPI et JDI série. L'EPD est également pris en charge sur les variantes compatibles à alimentation externe régulée.
 - La résolution d'affichage maximale documentée est de 512 x 512.
-- Le reset, le TE, le PWM de rétroéclairage, l'I2C tactile, l'interruption tactile, et le séquencement d'alimentation de l'afficheur doivent être revus ensemble.
+- Le reset, le TE, le PWM de rétroéclairage, l'I2C tactile, l'interruption tactile, et le séquencement d'alimentation de l'afficheur devraient être revus ensemble.
 
 **Objectif de conception**
 
@@ -91,6 +101,8 @@ Modèles de contrôleur LCD pris en charge :
 !!! note "Les interfaces du pilote ne définissent pas les capacités du MCU"
     Le tableau 5.5-1 indique les interfaces proposées par les circuits intégrés pilotes LCD, et non des interfaces toutes disponibles sur SF32LB52x. La présence de MIPI-DSI ou d'un bus MCU 8080 de 8 bits dans une ligne ne prouve pas leur prise en charge par le MCU. Choisissez une interface compatible avec la référence exacte du MCU et avec le pilote.
 
+<div id="5511-spiqspi"></div>
+
 ##### 5.5.1.1. Interface d'affichage SPI/QSPI { #5511-spiqspi-display-interface }
 
 <div align="center"><em>Tableau 5.5-2 : Connexions de signal SPI/QSPI</em></div>
@@ -110,6 +122,8 @@ Modèles de contrôleur LCD pris en charge :
 | TE | PA02 | Signal de synchronisation anti-déchirement (tearing effect), envoyé au MCU |
 
 </div>
+
+<div id="5512-jdi"></div>
 
 ##### 5.5.1.2. Interface d'affichage JDI { #5512-jdi-display-interface }
 
@@ -136,6 +150,8 @@ Modèles de contrôleur LCD pris en charge :
 | JDI_B2 | PA02 | Donnée d'image bleue (pixels pairs) |
 
 </div>
+
+<div id="5513-epd"></div>
 
 ##### 5.5.1.3. Interface d'affichage EPD { #5513-epd-display-interface }
 
@@ -175,6 +191,8 @@ Modèles de contrôleur LCD pris en charge :
     !!! info "Non applicable"
         La note d'application matérielle officielle de SiFli pour SF32LB520/3/5/7 n'inclut pas de conception de référence pour l'interface parallèle EPD. Si votre produit nécessite une prise en charge d'affichage EPD, consultez la documentation 52B/D/E/G/J et confirmez la faisabilité pour la variante alimentée par batterie directement avec le support FAE de SiFli.
 
+<div id="5514"></div>
+
 ##### 5.5.1.4. Interface tactile et rétroéclairage { #5514-touch-and-backlight-interface }
 
 Le SF32LB52x prend en charge un contrôleur tactile raccordé en I2C, avec une entrée d'interruption pour signaler les événements tactiles. Un signal PWM permet d'activer le rétroéclairage et d'en régler la luminosité.
@@ -207,12 +225,14 @@ Le SF32LB52x prend en charge un contrôleur tactile raccordé en I2C, avec une e
 - [ ] Le rail d'alimentation de l'afficheur et son séquencement sont compatibles avec le comportement de veille et de réveil.
 - [ ] Le plan de mise en service couvre le reset, l'identification/relecture du panneau lorsque disponible, le rétroéclairage, l'interruption tactile, et la première image.
 
+<div id="552"></div>
+
 #### 5.5.2. Interface audio { #552-audio-interface }
 
 **Résumé rapide**
 
 - L'entrée microphone analogique est asymétrique et nécessite un condensateur de liaison pour bloquer la composante continue.
-- La sortie DAC est différentielle et doit être routée comme une paire différentielle courte et blindée.
+- La sortie DAC est différentielle et devrait être routée comme une paire différentielle courte et blindée.
 - Le filtrage de l'alimentation audio et le placement de MIC_BIAS influent fortement sur le niveau de bruit.
 
 **Objectif de conception**
@@ -268,26 +288,32 @@ Les circuits de microphone de référence filtrent MIC_BIAS avec une résistance
 !!! important "Compléter les chemins du microphone et du DAC"
     La source relie MEMS_MIC_ADC_IN et ECM_MIC_ADC_IN à ADCP. Ajoutez en série le condensateur de blocage de la composante continue d'au moins 2,2 uF exigé plus haut ; le condensateur de 0,01 uF relié à la masse dans les circuits de microphone ne le remplace pas. Placez le filtre passe-bas différentiel du cadre en pointillés de la figure 5.5-3 près du MCU. Maintenez la capacité des pistes de sortie du DAC sous 10 pF et leur longueur sous 2 cm.
 
+<div id="553"></div>
+
 #### 5.5.3. Boutons { #553-buttons }
 
 **Résumé rapide**
 
 - `PA34` prend en charge le bouton d'alimentation, le comportement de mise sous/hors tension, et le reset par appui long.
-- Les boutons d'encodeur rotatif doivent suivre le circuit de référence et être revus conjointement avec les exigences de réveil, d'anti-rebond, et d'ESD.
+- Les boutons d'encodeur rotatif devraient suivre le circuit de référence et être revus conjointement avec les exigences de réveil, d'anti-rebond, et d'ESD.
 
 **Objectif de conception**
 
 Fournir des entrées utilisateur et un reset fiables, sans faux réveils, état de reset maintenu ni courant de fuite excessif en veille dans les réseaux de polarisation.
 
+<div id="5531"></div>
+
 ##### 5.5.3.1. Bouton d'alimentation { #5531-power-button }
 
-PA34 prend en charge le reset par appui long. Le même bouton peut assurer la mise sous/hors tension et le reset par appui long. Cette fonction de reset est active à l'état haut : au repos, le signal doit être maintenu à l'état bas par une résistance de pull-down, puis passer à l'état haut lorsque le bouton est enfoncé.
+PA34 prend en charge le reset par appui long. Le même bouton peut assurer la mise sous/hors tension et le reset par appui long. Cette fonction de reset est active à l'état haut : au repos, il est recommandé de maintenir le signal à l'état bas par une résistance de pull-down, puis de le faire passer à l'état haut lorsque le bouton est enfoncé.
 
 ![Figure 5.5-4 : Circuit du bouton d'alimentation / reset par appui long](../../sf32-products/chips/assets/52xB/sf32lb52X-B-PWKEY.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 5.5-4 : Circuit du bouton d'alimentation / reset par appui long</em></div>
 
-Le circuit de référence utilise R0703 (5,1 kΩ) entre VSYS_3V3 et le bouton, R0702 (100 kΩ) pour maintenir PA34 à l'état bas et C0720 (0,1 uF) relié à la masse. Il comprend aussi un composant de protection ESD. Ces valeurs correspondent au schéma présenté ; lors de son adaptation, vérifiez les seuils d'entrée, l'anti-rebond, les courants de fuite et les temps de reset.
+Le circuit de référence utilise R0703 (5,1 kΩ) entre VSYS_3V3 et le bouton, R0702 (10 kΩ) pour maintenir PA34 à l'état bas et C0720 (0,1 uF) relié à la masse. Il comprend aussi un composant de protection ESD. Ces valeurs correspondent au schéma présenté ; lors de son adaptation, vérifiez les seuils d'entrée, l'anti-rebond, les courants de fuite et les temps de reset.
+
+<div id="5532"></div>
 
 ##### 5.5.3.2. Bouton d'encodeur rotatif mécanique { #5532-mechanical-rotary-encoder-button }
 
@@ -311,6 +337,8 @@ Les signaux A et B de l'encodeur sont reliés à PA35 et PA36 par des résistanc
 - [ ] Le comportement de réveil est vérifié pour les états basse consommation prévus.
 - [ ] Les exigences d'ESD et d'anti-rebond mécanique sont revues.
 - [ ] Le plan de mise en service inclut le comportement d'appui court, appui long, réveil, et reset.
+
+<div id="554"></div>
 
 #### 5.5.4. Moteur de vibration { #554-vibration-motor }
 

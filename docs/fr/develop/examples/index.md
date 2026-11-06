@@ -97,7 +97,7 @@ Choisissez l'exemple correspondant au sous-système qui impose les contraintes l
 
 - Pour les produits Bluetooth, partez du profil le plus proche.
 - Pour les produits dotés d'un écran, partez de la chaîne d'affichage et de LVGL.
-- Pour les produits sur batterie, partez d'un exemple de gestion de l'énergie.
+- Pour les produits alimentés par batterie, partez d'un exemple à basse consommation.
 - Pour les produits OTA, partez du flux de mise à jour et de la disposition des partitions.
 
 Ajoutez ensuite les autres sous-systèmes un par un.

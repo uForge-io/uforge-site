@@ -105,13 +105,15 @@ Hibernate 웨이크업은 `PM_HIBERNATE_BOOT`이 설정된 콜드 부트이며, 
 
 ## 동작 중 클럭 제어 { #control-clocks-while-awake }
 
-idle 스레드가 슬립 상태에 진입하지 못하면 WFI 자동 주파수 저감으로 전류를 줄일 수 있습니다. EPIC, EZIP, LCDC, USB, SD가 모두 유휴 상태일 때만 안전합니다. SDK에 포함된 LVGL 구현은 EPIC/EZIP의 사용 상태를 추적하고, RT-Thread LCD Device 드라이버는 LCDC/USB/SD를 추적합니다. 기본 LVGL 구현을 사용하지 않으면 EPIC/EZIP 동작의 시작과 종료 시 `rt_pm_hw_device_start()` 및 `rt_pm_hw_device_stop()`을 호출해 상태를 알리십시오. 분주비는 `HAL_RCC_HCPU_SetDeepWFIDiv()`로 설정합니다. WFI 주파수 설정은 제품군마다 다릅니다. SF32LB52x 가이드는 오디오 주변 장치가 동작 중일 때 48 MHz까지만 낮추고, 그 외에는 4 MHz까지 낮출 수 있다고 설명하며, `HPSYS_RCC_DBGR_FORCE_HP`를 1로 설정하도록 요구합니다. SiFli [전원 관리 애플리케이션 노트](https://docs.sifli.com/projects/solution/2.application-notes/power_manager/index.html)는 SF32LB55x, SF32LB56x, SF32LB58x의 CPU 유휴 주파수를 1 MHz로 제시합니다. 인용한 자료에서는 SF32LB57x의 값을 확인할 수 없으므로 대상 SDK 버전의 가이드를 확인하십시오.
+idle 스레드가 슬립 상태에 진입하지 못하면 WFI 자동 주파수 저감으로 전류를 줄일 수 있습니다. EPIC, EZIP, LCDC, USB, SD가 모두 유휴 상태일 때만 안전합니다. SDK에 포함된 LVGL 구현은 EPIC/EZIP의 사용 상태를 추적합니다. RT-Thread LCD Device 드라이버는 LCDC/USB/SD 사용 상태를 추적합니다. SDK에 포함된 LVGL 구현을 사용하지 않는다면 EPIC/EZIP 동작을 시작하고 끝낼 때 `rt_pm_hw_device_start()` 및 `rt_pm_hw_device_stop()`을 호출해 상태를 알리십시오. 분주비는 `HAL_RCC_HCPU_SetDeepWFIDiv()`로 설정하십시오.
+
+WFI 주파수 설정은 제품군마다 다릅니다. SF32LB52x 가이드는 오디오 주변 장치가 동작 중일 때 48 MHz까지만 낮추고, 그 외에는 4 MHz까지 낮출 수 있다고 설명합니다. 또한 `HPSYS_RCC_DBGR_FORCE_HP`를 1로 설정하도록 요구합니다. SiFli [전원 관리 애플리케이션 노트](https://docs.sifli.com/projects/solution/2.application-notes/power_manager/index.html)는 SF32LB55x, SF32LB56x, SF32LB58x의 CPU 유휴 주파수를 1 MHz로 제시합니다. 인용한 자료에서는 SF32LB57x의 값을 확인할 수 없습니다. 대상 SDK 버전의 가이드를 확인하십시오.
 
 동작 중인 작업에는 `rt_pm_run_enter()`를 사용합니다.
 
 <div align="center" markdown>
 
-<em>표: Run 모드별 HCPU 클럭 선택</em>
+<em>표: SF32LB52x Run 모드의 HCPU 클럭 선택(대상 제품군 SDK 가이드에서 지원 여부를 확인하십시오)</em>
 
 | 모드 | HCPU 클럭 |
 |---|---:|
@@ -125,7 +127,7 @@ idle 스레드가 슬립 상태에 진입하지 못하면 WFI 자동 주파수 �
 
 ## 서브시스템 간 슬립 순서 이해 { #understand-inter-subsystem-sleep-sequencing }
 
-화면이 꺼지면 HPSYS가 슬립에 들어갈 수 있습니다. 55x/56x/58x에서는 보통 HPSYS가 먼저 슬립한 뒤 LPSYS가 슬립합니다. 52x 제품군은 HCPU와 LCPU가 독립적으로 슬립할 수 있는 예외로 문서화되어 있습니다. 인용한 자료만으로는 57x ACPU에도 같은 순서가 적용되는지 확인할 수 없으므로 해당 SDK 릴리스의 서브시스템 정책을 확인하십시오. 웨이크업 후 `gui_resume`은 다음 화면 꺼짐 판단 주기를 시작합니다. 공유 주변 장치나 IPC 트랜잭션에 코어가 계속 필요하다면 해당 코어를 깨어 있는 상태로 유지하십시오.
+화면이 꺼지면 HPSYS가 슬립에 들어갈 수 있습니다. 55x/56x/58x에서는 보통 HPSYS가 먼저 슬립한 뒤 LPSYS가 슬립합니다. 52x 제품군은 HCPU와 LCPU가 독립적으로 슬립할 수 있는 예외로 문서화되어 있습니다. 인용한 자료만으로는 57x ACPU에도 같은 순서가 적용되는지 확인할 수 없습니다. 해당 SDK 릴리스의 서브시스템 정책을 확인하십시오. 웨이크업 후 `gui_resume`은 다음 화면 꺼짐 판단 주기를 시작합니다. 공유 주변 장치나 IPC 트랜잭션에 코어가 계속 필요하다면 해당 코어를 깨어 있는 상태로 유지하십시오.
 
 `BSP_PM_DEBUG`를 일시적으로 활성화하고 로그에서 다음을 검색합니다.
 

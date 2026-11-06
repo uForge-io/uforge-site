@@ -24,7 +24,7 @@ SF32の開発では、コンパイラーだけでなく、ファームウェア�
 | [SDKのUART書き込みスクリプト](../platforms/sifli-sdk/build-flash-monitor.md) | SiFli-SDKのビルドで生成される初回書き込み用スクリプト。 |
 | [CodeKitの操作](codekit.md) | VS Codeでの設定、ビルド、書き込み、モニター操作。 |
 | [`AssertDump`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/AssertDump/AssertDump_UM.html) | クラッシュ時のメモリーデータを取得し、後から解析する。 |
-| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace`はターゲットボードのログ取得に、`UsartServer`はチップのDebug IPを介したUARTデバッグに使用します。 |
+| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace`はターゲットボードのログ取得に使用します。`UsartServer`はSF32LB52xとSF32LB56x向けのUART-to-J-Linkヘルパーとして説明されています。このホスト側の役割はチップのUART Debug IPの存在を否定するものではありません。対応する設定はマニュアルを確認してください。 |
 | [`Impeller`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/Impeller/Impeller_UM.html) | 量産ライン向けファームウェア書き込み、校正、PCBAテスト。 |
 | [eZip／画像ツール](../../learn/graphics/ezip.md) | 圧縮グラフィックスのパイプライン向けアセット変換。 |
 | [RF／オーディオ／工場用ツール](https://docs.sifli.com/projects/solution/6.tools/index.html) | 量産時の校正、試験、調整のワークフロー。 |

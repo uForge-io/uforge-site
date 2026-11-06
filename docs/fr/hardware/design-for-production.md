@@ -8,7 +8,7 @@ tags:
 
 # Conception pour la production { #design-for-production }
 
-Utilisez ce parcours après avoir sélectionné une puce ou un module et avant d'approuver le schéma, de figer le routage du PCB, la BOM ou le dossier de fabrication. Il rassemble les références de mise en œuvre qui réduisent les risques lors de la première mise en service et de la qualification du produit : guides de conception matérielle propres au composant, listes de contrôle, définitions d'interface des modules, composants approuvés et bibliothèques EDA.
+Utilisez ce parcours après avoir sélectionné une puce ou un module et avant de valider le schéma, le placement et le routage de la PCB, la BOM ou le dossier de fabrication. Il rassemble les références de mise en œuvre qui réduisent les risques lors de la première mise en service et de la qualification du produit : guides de conception matérielle propres au composant, listes de contrôle, définitions d'interface des modules, composants approuvés et bibliothèques EDA.
 
 ## Séquence de conception pour la production recommandée { #recommended-production-sequence }
 
@@ -39,4 +39,4 @@ Pour la mise en œuvre, utilisez les références suivantes :
 
 ## Une référence de production ne remplace pas la validation { #a-production-reference-is-not-a-substitute-for-validation }
 
-Les guides de conception et les listes de composants qualifiés réduisent le risque, mais ne prouvent pas qu'un produit fini est validé. Vérifiez la révision finale du PCB, l'image du firmware, le boîtier, la batterie, l'affichage, le composant de stockage, le comportement RF, l'environnement d'exploitation et le processus de test en fabrication. Consignez les écarts par rapport à un guide ou à une liste de contrôle comme des décisions d'ingénierie explicites, et non comme des exceptions non documentées.
+Les guides de conception et les listes de composants qualifiés réduisent le risque, mais ne prouvent pas qu'un produit fini est validé. Vérifiez la révision finale de la PCB, l'image du firmware, le boîtier, la batterie, l'affichage, le composant de stockage, le comportement RF, l'environnement d'exploitation et le processus de test en fabrication. Consignez les écarts par rapport à un guide ou à une liste de contrôle comme des décisions d'ingénierie explicites, et non comme des exceptions non documentées.

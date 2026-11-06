@@ -92,7 +92,7 @@ Notez les informations suivantes :
 | Activer | Charger l'environnement SDK dans le terminal actuel. |
 | Configurer | Sélectionner la carte et les options de fonctionnalités. |
 | Compiler | Produire des binaires spécifiques à la carte. |
-| Flasher | Placer l'image sur le matériel. |
+| Flasher | Écrire l'image du firmware sur la carte. |
 | Surveiller | Confirmer le comportement de démarrage et de l'application. |
 | Consigner | Enregistrer les commandes et les journaux pour pouvoir reproduire le processus. |
 
@@ -115,7 +115,7 @@ Si vous utilisez [CodeKit](../../tools/codekit.md), conservez les mêmes traces 
 | Outil de compilation introuvable | Réexécutez `export.sh` / `export.ps1` dans le terminal actuel. |
 | Nom de carte inconnu | Vérifiez la documentation des cartes prises en charge du SDK. |
 | Le script de téléchargement ne peut pas ouvrir le port | Fermez les terminaux série et vérifiez le câble/connecteur USB-vers-UART. |
-| Le flashage ne démarre pas | Suivez la séquence de téléchargement documentée pour la carte. Pour `sf32lb52-lcd_n16r8`, après avoir sélectionné le port série, redémarrez la carte, puis appuyez sur Entrée dans les 2 secondes pour lancer le téléchargement ; pour les autres cartes, suivez leur procédure propre. Vérifiez également l'alimentation, le port sélectionné et la connexion UART. |
+| Le flashage ne démarre pas | Suivez la séquence de téléchargement documentée pour la carte. Pour `sf32lb52-lcd_n16r8`, le redémarrage de la carte est recommandé ; avec cette séquence, appuyez sur Entrée dans les 2 secondes suivant le redémarrage pour lancer le téléchargement. Pour les autres cartes, suivez leur procédure propre. Vérifiez également l'alimentation, le port sélectionné et la connexion UART. |
 | La sortie série est illisible | Vérifiez le débit en bauds et utilisez l'UART de données, et non un câble réservé à la charge. |
 
 </div>

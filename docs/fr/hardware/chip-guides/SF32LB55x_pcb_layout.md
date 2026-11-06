@@ -17,6 +17,16 @@ tags:
 
 Vérifiez la compatibilité du dessin et du motif de pastilles du boîtier QFN ou BGA sélectionné avec les capacités d'assemblage du fabricant prévu. Pour un boîtier BGA, confirmez tôt le fan-out des billes, la stratégie de vias, les règles de masque de soudure et les limites de fabrication.
 
+La source de SiFli fournit des exemples de fan-out propres aux boîtiers BGA et QFN. Ils servent uniquement de référence : le breakout exact dépend du boîtier choisi et des règles de fabrication du fabricant, à vérifier pour chaque conception.
+
+![Exemple de fan-out pour boîtier BGA](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA-FANOUT-PCB.png)
+
+<div align="center"><em>Figure 6.1-1 : Référence de fan-out pour boîtier BGA</em></div>
+
+![Exemple de fan-out pour boîtier QFN](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/assets/55x/SF32LB55x-QFN-FANOUT-PCB.png)
+
+<div align="center"><em>Figure 6.1-2 : Référence de fan-out pour boîtier QFN</em></div>
+
 #### 6.1.1. Références d'empilage et de fabrication { #611-stack-up-and-fabrication }
 
 La série SF32LB55x prend en charge le montage de composants sur une ou deux faces du PCB.

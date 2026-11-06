@@ -132,7 +132,7 @@ v3 自动生成的 `FAL_PART_TABLE` 仅包含 `data/flashdb_kv`、`data/filesyst
 
 ### 默认分区与项目叠加配置 { #defaults-and-project-overlays }
 
-若相应分区缺失，v3 会推导系统默认分区。对于 SF32LB52，`flash_table` 和 `bootloader` 可根据 HCPU 出厂应用的存储区域推导；以 NAND 或 SDMMC 作为启动存储器时，还会生成文档定义的默认数据分区。对于 SF32LB56 和 SF32LB58，可以省略内部 `mpi5` 上的 `flash_table` 和 `bootloader`。默认 SiP PSRAM 窗口和标准 RAM 分区同样可以省略，除非项目修改了 RAM 布局。
+若相应分区缺失，v3 会推导系统默认分区。对于 SF32LB52，当启动存储位于 NOR、NAND 或 SDMMC 时，`flash_table` 和 `bootloader` 会根据 HCPU 出厂应用的存储 `region` 自动推导；以 NAND 或 SDMMC 作为启动存储器时，还会生成文档定义的默认数据分区。对于 SF32LB56 和 SF32LB58，可以省略内部 `mpi5` 上的 `flash_table` 和 `bootloader`。默认 SiP PSRAM 窗口和标准 RAM 分区同样可以省略，除非项目修改了 RAM 布局。
 
 仅需进行少量项目级修改时，应使用 `ptab.overlay.yaml` 叠加配置，而不是复制完整的开发板 `ptab.yaml`。它可以新增分区或覆盖已有分区：
 

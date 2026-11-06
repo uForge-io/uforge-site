@@ -61,7 +61,7 @@ SF32LB52-DevKit-LCD는 SF32LB52x 제품군을 위한 디스플레이 중심 개�
 | SF32LB52-DevKit-LCD-1-N16R8 | SF32LB52-MOD-1-N16R8 / SF32LB525UC6, 16 MB QSPI-NOR + 8 MB OPI-PSRAM |
 | SF32LB52-DevKit-LCD-1-A128R16 | SF32LB52-MOD-1-A128R16 / SF32LB527UD6, 128 MB QSPI-NAND + 16 MB OPI-PSRAM |
 | 클럭 | 모듈에 48 MHz 메인 크리스털과 32.768 kHz RTC 크리스털 탑재 |
-| RF | 온보드 안테나와 0 Ω 저항으로 선택하는 IPEX 커넥터 |
+| RF | 0 Ω 저항으로 온보드 안테나와 IPEX 커넥터 중 하나를 선택 |
 | 디스플레이 | QSPI/SPI/DSPI 및 8비트 MCU/8080 |
 | 터치 | I2C 터치 인터페이스 |
 | 오디오 | MEMS 마이크 입력 및 Class-D 스피커 앰프 |
@@ -207,7 +207,13 @@ USB-UART 포트는 기본 펌웨어 플래싱 및 로그 인터페이스입니�
 | 모듈 핀 | 신호 | 보드 기능 |
 | :--- | :--- | :--- |
 | PA44 | VBUS_DET | 충전기 연결 감지 |
-| PA43..PA37 | DB7..DB2 | MCU/8080 LCD 데이터 |
+| PA43 | DB7 | MCU/8080 LCD 데이터 |
+| PA42 | DB6 | MCU/8080 LCD 데이터 |
+| PA41 | DB5 | MCU/8080 LCD 데이터 |
+| PA40 | DB4 | MCU/8080 LCD 데이터 |
+| PA39 | DB3 | MCU/8080 LCD 데이터 |
+| PA38 | GPIO | 범용 입출력 |
+| PA37 | DB2 | MCU/8080 LCD 데이터 |
 | PA08..PA07 | DB1..DB0 / QSPI D3..D2 | LCD 데이터 |
 | PA06 | DC / QSPI D1 | LCD 데이터/명령 |
 | PA05 | RD / QSPI D0 | LCD 데이터 |
@@ -219,7 +225,7 @@ USB-UART 포트는 기본 펌웨어 플래싱 및 로그 인터페이스입니�
 | PA33 / PA30 | I2C SDA / SCL | 터치 패널 |
 | PA31 / PA09 | Touch INT / RST | 터치 패널 |
 | PA24, PA25, PA28, PA29 | SPI1 | TF 카드 인터페이스 |
-| PA26 | Card detect / LED | 공유 기능 |
+| PA26 | SD 카드 감지 / 외부 Flash2 CS / GPIO LED | V1.2.0에서 공유; 정확한 리비전 확인 |
 | PA20 / PA27 | UART RX/TX | 사용자 UART |
 | PA18 / PA19 | Debug UART RX/TX | 플래싱 및 소프트웨어 디버그 |
 | PA10 | AU_PA_EN | 오디오 앰프 인에이블 |

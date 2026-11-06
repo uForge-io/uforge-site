@@ -22,7 +22,7 @@ tags:
 
 - 外部启动介质包括 SPI NOR、SPI NAND 和 SD NAND；支持的外部稳压供电型号还可使用 eMMC。
 - Bootstrap 管脚 `PA13` 和 `PA17` 选择启动介质。
-- 应用说明和原理图设计指南均指定由 `PA21` 控制启动存储电源开关；官方核对表则将电池供电型号的外部 Flash 电源开关指定为 `PA11`。具体设计应使用哪个管脚，需向思澈科技（SiFli）确认。另需注意：经 MPI 接入、容量为 32 MB 或更大的 NOR Flash，必须由 `PA21` 控制断电重上电，以便 ROM 在复位或进入休眠（Hibernate）后重新识别 Flash；休眠期间必须关闭 `VDD_SIP`，以避免经合封存储器 I/O 漏电。
+- 应用说明和原理图设计指南均指定由 `PA21` 控制启动存储电源开关；官方核对表则将电池供电型号的外部 Flash 电源开关指定为 `PA11`。具体设计应使用哪个管脚，需向思澈科技（SiFli）确认。经 MPI 接入且容量为 32 MB 或更大的 NOR Flash 电源重启规则，以及 Hibernate 期间关闭 `VDD_SIP` 的要求，均来自常规供电 `52B/D/E/G/J` 设计资料。电池供电型号的资料描述的是 `VDD18_VOUT`，并称外部 NOR 无需额外电源开关，但未说明 32 MB 阈值是否例外；将该规则用于 `520/3/5/7` 前请向思澈科技（SiFli）确认。
 
 **设计目标**
 
@@ -131,14 +131,14 @@ tags:
 
     - SF32LB520Ux6 合封 Flash：VDD18_VOUT 由 VDD33_VOUT1 供电，并关闭内部 VDD18_VOUT LDO
     - SF32LB523/5/7Ux6 合封 PSRAM：使用内部 LDO；VDD18_VOUT 可由外部供电
-    - 外部 NOR Flash 从 VDD33_VOUT1 供电，无需额外电源开关
+    - 电池供电型号资料称，外部 NOR Flash 从 VDD33_VOUT1 供电，无需额外电源开关；但资料未说明这一点是否适用于容量为 32 MB 或更大的 Flash。将其用于大容量 MPI NOR 前，请向思澈科技（SiFli）确认。
     - 外部 SPI NAND 或 SD NAND 从 VDD33_VOUT1 供电，并增加电源开关
     - 参考设计在 PA13 和 PA17 预留上拉电阻焊盘，应按存储类型选择是否贴装，推荐 7.5 kΩ
 
 === "52B/D/E/G/J（外部稳压供电）"
 
     - 合封 Flash 型号（SF32LB52BU36）：在 VDD_SIP 上增加电源开关
-    - 合封 PSRAM 型号（SF32LB52DUB6/EUB6/GUC6/JUD6）：若 PVDD = 3.3 V 且 VDD_SIP 使用内部 LDO，VDD_SIP 电源开关可选；若 PVDD = 1.8 V，则必须增加 VDD_SIP 电源开关
+    - 合封 PSRAM 型号（SF32LB52DUB6/EUB6/GUC6/JUD6）：在表列 PVDD 范围内使用内部 LDO 时，VDD_SIP 电源开关可选。B3 资料脚注另称 PVDD = 1.8 V 时必须增加该开关，但此电压超出表列的 2.97–3.63 V 范围。其适用性尚未明确；请向思澈科技（SiFli）确认，不要将 1.8 V 视为推荐的 PVDD 设计条件。工作电压范围说明见[原理图设计指南](SF32LB52x_schematic_design.md)。
     - 外部存储电源独立于 VDD_SIP，应增加独立电源开关
     - eMMC VCC/VCCQ 电源域取舍见第 5.6.1.1 节
     - 应用说明为启动相关的存储电源开关指定 **PA21**；电池供电型号外部 Flash 的源资料差异见上文

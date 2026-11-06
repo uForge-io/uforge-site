@@ -1,7 +1,7 @@
 ---
 icon: lucide/code
 title: "Rust-Plattform im Überblick"
-description: "Community-Rust-Unterstützung für SF32 über OpenSiFlis sifli-rs (sifli-hal, sifli-pac) bewerten: Reifegrad, passende und unpassende Szenarien und Risiko-Checkliste."
+description: "Community-Rust-Unterstützung für SF32 über OpenSiFli/sifli-rs (sifli-hal, sifli-pac) bewerten: Reifegrad, geeignete und ungeeignete Szenarien, Risikocheckliste."
 tags:
     - Entwicklung
     - Rust
@@ -44,7 +44,7 @@ Verwenden Sie heute SiFli-SDK für Produktions-Firmware.
 
 ## Prüfpunkte zur Bewertung { #evaluation-gates }
 
-Beginnen Sie erst mit einer Produktportierung, wenn die Erstinbetriebnahme auf dem Ziel-Board funktioniert. Validieren Sie anschließend jede benötigte Peripherie, jedes Flash-Layout, jeden Debug-Pfad und jede Laufzeitfunktion einzeln. Dokumentieren Sie zu jedem Ergebnis den Upstream-Commit, das Rust-Target, die Cargo-Konfiguration, die Board-Revision und das Wiederherstellungsverfahren.
+Beginnen Sie erst mit einer Produktportierung, wenn die unveränderte Referenzkonfiguration für den ersten Lauf auf dem Ziel-Board funktioniert. Validieren Sie anschließend jede benötigte Peripherie, jedes Flash-Layout, jeden Debug-Pfad und jede Laufzeitfunktion einzeln. Dokumentieren Sie zu jedem Ergebnis den Upstream-Commit, das Rust-Target, die Cargo-Konfiguration, die Board-Revision und das Wiederherstellungsverfahren.
 
 Da das Repository `sifli-hal`, `sifli-pac`, Werkzeuge für Flash-Tabellen und Beispiele im Embassy-Stil (async) verwendet, hängt der Anwendungserfolg auch davon ab, wie diese Komponenten zusammenspielen, und nicht nur davon, ob ein Crate kompiliert. Halten Sie bei der Untersuchung einer Lücke das Reproduktionsbeispiel so klein wie möglich.
 

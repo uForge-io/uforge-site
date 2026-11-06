@@ -8,10 +8,14 @@ tags:
     - Puce
 ---
 
+<div id="sf32lb57x"></div>
+
 # Guide de conception matérielle SF32LB57x — Système minimal et alimentation { #sf32lb57x-hardware-design-guide-minimum-system-power }
 
 !!! note "Fait partie du Guide de conception matérielle SF32LB57x"
     Les directives de conception du schéma sont réparties sur trois pages : celle-ci (sections 5.1 et 5.2 : système minimal et alimentation), [Horloge, RF et interfaces utilisateur](SF32LB57x_schematic_clock_rf_interfaces.md) (sections 5.3 à 5.5) et [Stockage et fabrication](SF32LB57x_schematic_storage_mfg.md) (sections 5.6 et 5.7). Consultez d'abord l'[aperçu du guide de conception matérielle SF32LB57x](SF32LB57x_hardware_design_guide.md) pour choisir le composant et connaître l'ensemble du processus de conception.
+
+<div id="5"></div>
 
 ## 5. Directives de conception de schéma { #5-schematic-design-guidelines }
 
@@ -33,7 +37,11 @@ Ce chapitre suit l'ordre habituel de mise en service d'une carte. Commencez par 
 
 </div>
 
+<div id="51"></div>
+
 ### 5.1. Conception du système minimal { #51-minimum-system-design }
+
+<div id="511"></div>
 
 #### 5.1.1. Séquence de conception du système minimal { #511-minimum-system-design-sequence }
 
@@ -45,6 +53,8 @@ Les problèmes rencontrés lors de la mise en service proviennent souvent du sys
 4. Définissez l'architecture d'alimentation, le chemin de charge et d'OVP, l'inductance et les condensateurs BUCK ainsi que les états par défaut des rails ; terminez la revue détaillée à la section 5.2.
 5. Choisissez les quartz de 48 MHz et de 32,768 kHz, puis confirmez le plan d'étalonnage à la section 5.3.
 6. Prévoyez des points de test pour le DBG-UART, le SWD, le mode de démarrage, l'alimentation, la masse et le banc de test.
+
+<div id="512"></div>
 
 #### 5.1.2. Schémas de système minimal { #512-minimum-system-schematics }
 
@@ -78,6 +88,8 @@ Le SF32LB57x dispose de plusieurs variantes de schéma de système minimal. Util
 
 <div align="center"><em>Figure 5.1-6 : Système minimal alimenté en 3,3 V BGA112</em></div>
 <!-- /BGA-ONLY -->
+
+<div id="513"></div>
 
 #### 5.1.3. Stockage de démarrage et configuration des straps { #513-boot-storage-and-strap-configuration }
 
@@ -114,6 +126,8 @@ Choisissez le support de démarrage avant de figer le schéma. La mémoire inté
 <div align="center"><em>Figure 5.1-7 : Circuit recommandé de la broche bootstrap</em></div>
 
 L'alimentation du support de démarrage dépend de son type et de la famille d'alimentation. Dans les variantes alimentées par batterie, la Flash NOR externe est alimentée par `VDD33_VOUT1` ; la Flash SPI NAND externe nécessite un interrupteur de charge en aval de `VDD33_VOUT1` ; la Flash SD NAND externe et l'eMMC utilisent un LDO externe. Dans les variantes alimentées en 3,3 V, tous les supports de démarrage externes doivent utiliser un LDO externe. SiFli recommande `PA21` comme signal d'activation du commutateur d'alimentation du support externe : un niveau haut active le rail et un niveau bas le désactive. Si `PA21` n'est pas exposée sur une variante alimentée par batterie, le guide source autorise à utiliser à la place un GPIO avec pull-up par défaut. Vérifiez que le rail du support est disponible au démarrage. Si le stockage intégré au boîtier occupe déjà MPI3, l'utilisation externe de MPI3 est limitée à SD NAND ou eMMC ; ne connectez pas de Flash SPI NOR/SPI NAND externe à ce canal.
+
+<div id="514"></div>
 
 #### 5.1.4. Accès de débogage et de téléchargement { #514-debug-and-download-access }
 
@@ -153,7 +167,11 @@ Réservez l'accès au débogage et à la récupération avant d'attribuer les E/
 
 `PA18`/`PA19` sont les broches DBG-UART par défaut et `PA43`/`PA44` les broches SWD par défaut ; le SWD peut également être basculé sur `PA18`/`PA19`. La puce prend en charge quatre interfaces de téléchargement : DBG-UART, SWD, UART standard et USB. Le démarrage normal ne prend en charge que DBG-UART et SWD ; le mode BOOT peut activer les quatre interfaces. Le mode BOOT et la commutation des broches SWD dépendent de `PA00`, du registre BOOT, de `PA01` et du commutateur BOOT de l'hôte. Pour concevoir la programmation de production et la récupération, consultez le tableau complet des modes dans la source ; ne déduisez pas l'interface de téléchargement d'un seul état de broche.
 
+<div id="52"></div>
+
 ### 5.2. Système d'alimentation { #52-power-system }
+
+<div id="521"></div>
 
 #### 5.2.1. Planification de la distribution des alimentations { #521-power-tree-planning }
 
@@ -173,6 +191,8 @@ Réservez l'accès au débogage et à la récupération avant d'attribuer les E/
 
 </div>
 
+<div id="522"></div>
+
 #### 5.2.2. Variantes alimentées par batterie { #522-battery-powered-variants }
 
 Les variantes alimentées par batterie utilisent couramment `VBUS`, `VBAT`, `VCC`, `VSYS`, `BUCK_LX`, `BUCK_FB`, les sorties LDO internes, les broches d'alimentation audio et les broches d'alimentation RF.
@@ -186,6 +206,8 @@ Exigences clés :
 - Utilisez `VDD33_VOUT1`, `VDD33_VOUT2` et les autres sorties de régulateurs internes uniquement pour les charges explicitement autorisées. La source SiFli présente une divergence : le texte et le schéma basse consommation montrent des capteurs externes alimentés par `VDD33_VOUT1`, tandis que la liste de contrôle d'alimentation du même guide limite cette sortie aux Flash NOR/NAND intégrées au boîtier ou externes et à `AVDD33_AUD` et interdit les autres périphériques. Dans l'attente d'une clarification de SiFli, ne connectez pas de capteurs à `VDD33_VOUT1`.
 - Alimentez `AVDD_BRF` et `AVDD33_AUD` depuis les rails recommandés, avec un filtrage local.
 
+<div id="523-33-v"></div>
+
 #### 5.2.3. Variantes alimentées en 3,3 V { #523-33-v-supply-variants }
 
 Les variantes alimentées en 3,3 V utilisent une source externe de 3,3 V pour `PVDD`, `AVDD33`, `AVDD_BRF`, `AVDD33_AUD` et les domaines associés. Choisissez une alimentation de 1,8 V ou 3,3 V pour `VDDIOA`, selon la référence exacte.
@@ -197,6 +219,8 @@ Exigences clés :
 - Si `VBATS` est utilisé pour la détection de batterie, vérifiez la plage d'entrée et le filtrage.
 - Dans les variantes alimentées en 3,3 V, alimentez tous les supports de démarrage externes depuis un LDO externe ; `PA21` est le signal d'activation recommandé.
 - Les références internes et les broches de sortie LDO internes ne devraient être connectées qu'aux condensateurs externes requis. Ne les pilotez pas depuis une source de tension externe.
+
+<div id="524"></div>
 
 #### 5.2.4. Référence rapide des condensateurs d'alimentation et de leur usage { #524-power-capacitor-and-usage-quick-reference }
 
@@ -224,6 +248,8 @@ Utilisez ce tableau pour la pré-revue de schéma. Les valeurs finales doivent t
 
 </div>
 
+<div id="525-buck"></div>
+
 #### 5.2.5. Inductance BUCK et rétroaction { #525-buck-inductor-and-feedback }
 
 Paramètres recommandés de l'inductance BUCK :
@@ -247,6 +273,8 @@ Exigences PCB :
 - Gardez la piste `BUCK_FB` raisonnablement large ; 0,25 mm ou plus est recommandé.
 - Gardez un plan de masse de référence continu près de l'inductance et évitez de coupler du bruit aux pistes du quartz, RF, audio et GPADC.
 - Si le produit contient des circuits sensibles tels que le GPS, la mesure de la fréquence cardiaque, l'ECG ou des microphones analogiques, prévoyez des empreintes facultatives pour les composants de filtrage CEM près de la zone BUCK_LX. Déterminez les valeurs finales lors de la validation CEM du système.
+
+<div id="526-ovp"></div>
 
 #### 5.2.6. Charge et OVP { #526-charging-and-ovp }
 
@@ -274,6 +302,8 @@ Directives OVP :
 !!! warning "Écart dans la plage de VBUS"
     Les tableaux actuels par boîtier et le texte sur l'OVP indiquent une plage de 4,5–5,5 V pour `VBUS`, tandis que la liste de contrôle exige toujours 4,6–5,5 V. Dans l'attente d'une confirmation de SiFli, retenez la limite minimale la plus stricte : 4,6 V.
 
+<div id="527"></div>
+
 #### 5.2.7. Stratégie d'alimentation basse consommation { #527-low-power-supply-strategy }
 
 Le comportement basse consommation doit être conçu dans le schéma.
@@ -286,6 +316,8 @@ Recommandations :
 - Alimentez les résistances de pull-up du bus I2C depuis le même rail que le périphérique correspondant afin d'éviter les courants de fuite en veille.
 - Choisissez des composants à faible Iq et à faible courant d'arrêt pour les circuits toujours actifs.
 - Si `VSYS` ou un LDO toujours actif alimente les résistances de pull-up GPIO, incluez le courant correspondant dans le budget de veille.
+
+<div id="528"></div>
 
 #### 5.2.8. Figures de référence d'alimentation et de charge { #528-power-and-charging-reference-figures }
 
@@ -334,6 +366,8 @@ Figures de référence de charge et OVP :
 ![Figure 5.2-9 : Application OVP à sortie régulée](../../sf32-products/chips/assets/57x/SF32LB57x-OVP-REGU.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 5.2-9 : Application OVP à sortie régulée</em></div>
+
+<div id="529"></div>
 
 #### 5.2.9. Contraintes électriques par boîtier et famille d'alimentation { #529-package-and-power-family-electrical-constraints }
 
@@ -400,9 +434,13 @@ Les exigences d'alimentation du SF32LB57x diffèrent selon le boîtier et la fam
 </div>
 
 
+<div id="5210"></div>
+
 #### 5.2.10. Modes de fonctionnement et sources de réveil { #5210-operating-modes-and-wake-sources }
 
 Les modes de fonctionnement et les sources de réveil font partie de la revue de l'alimentation : ils déterminent les rails actifs, les résistances de pull-up, les charges externes et les GPIO capables de réveil dans chaque état basse consommation.
+
+<div id="5211"></div>
 
 #### 5.2.11. Modes d'alimentation { #5211-power-modes }
 
@@ -422,6 +460,8 @@ La famille SF32LB57x fournit dix sources d'interruption capables de réveiller l
 
 </div>
 
+<div id="5212"></div>
+
 #### 5.2.12. Conception du réveil { #5212-wake-design }
 
 - Connectez les touches, interruptions tactiles et interruptions de capteur nécessitant une capacité de réveil à des GPIO capables de réveil.
@@ -429,6 +469,8 @@ La famille SF32LB57x fournit dix sources d'interruption capables de réveiller l
 - Vérifiez en Standby et Hibernate l'état de maintien des E/S, la haute impédance, les résistances de pull-up et de pull-down ainsi que l'alimentation des périphériques.
 - Le réveil par branchement USB nécessite un diviseur VBUS connecté à un GPIO capable de réveil avec la tension d'E/S correcte.
 - Le comportement de réveil Bluetooth, RTC et externe doit être examiné avec la politique basse consommation du firmware.
+
+<div id="5213"></div>
 
 #### 5.2.13. Validation basse consommation { #5213-low-power-validation }
 
@@ -469,6 +511,8 @@ Pendant l'EVT, mesurez au moins ces états :
 </div>
 
 Enregistrez la version du firmware, la tension d'alimentation, le réglage du simulateur de batterie, l'état de connexion des périphériques, l'état de connexion Bluetooth et la température ambiante pour chaque mesure.
+
+<div id="5214"></div>
 
 #### 5.2.14. Référence complète des broches d'alimentation { #5214-full-power-supply-pin-reference }
 

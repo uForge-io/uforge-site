@@ -111,7 +111,7 @@ Hibernateからの復帰は`PM_HIBERNATE_BOOT`が設定されたコールドブ�
 
 <div align="center" markdown>
 
-<em>表: 動作モード別のHCPUクロック設定</em>
+<em>表: SF32LB52xのRunモードにおけるHCPUクロック設定（対象ファミリーでの利用可否はSDKガイドで確認）</em>
 
 | モード | HCPUクロック |
 |---|---:|

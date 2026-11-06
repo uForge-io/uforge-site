@@ -22,40 +22,22 @@ SF32デバイスは、消費電力、メモリー、基板面積に厳しい制�
 
 <div align="center"><em>図: グラフィックスリソースから表示までの流れ</em></div>
 
-```text
-Source images, fonts, and animations
-        │
-        ▼
-GraphicsTool converts supported resources to eZip or eZip-A
-        │
-        ▼
-Compressed assets in NOR Flash, PSRAM, NAND, or file storage
-        │
-        ▼
-eZip hardware decoder expands an asset when required
-        │
-        ▼
-LVGL or another UI framework + graphics/display driver
-        │
-        ├── CPU fallback rendering
-        │
-        └── ePicasso pixel acceleration
-        │
-        ▼
-Final rendered bitmap in a draw buffer or framebuffer
-        │
-        ├── Uncompressed display path
-        │
-        └── Optional: extDMA compresses it into TurboPixel
-                    │
-                    ▼
-             TurboPixel framebuffer in PSRAM
-        │
-        ▼
-Display controller transfers pixels to the panel
-        │
-        ▼
-SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
+```mermaid
+flowchart TD
+    A["ソース画像、フォント、アニメーション"] --> B["GraphicsToolが対応リソースをeZipまたはeZip-Aに変換"]
+    B --> C["NOR Flash、PSRAM、NAND、またはファイルストレージ内の圧縮アセット"]
+    C --> D["eZipハードウェアデコーダーが必要に応じてアセットを展開"]
+    D --> E["LVGLなどのUIフレームワーク + グラフィックス/ディスプレイドライバー"]
+    E --> F["CPUによるフォールバック描画"]
+    E --> G["ePicassoによるピクセルアクセラレーション"]
+    F --> H["描画バッファーまたはフレームバッファー内の最終ビットマップ"]
+    G --> H
+    H --> I["非圧縮ディスプレイ経路"]
+    H --> J["任意：extDMAがビットマップをTurboPixelに圧縮"]
+    J --> K["PSRAM内のTurboPixelフレームバッファー"]
+    I --> L["ディスプレイコントローラーがピクセルをパネルへ転送"]
+    K --> L
+    L --> M["パネルインターフェース：SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI"]
 ```
 
 この処理経路は構成可能で、すべての製品に必須というわけではありません。eZip、ePicasso、TurboPixelや画面全体のフレームバッファーを使わない構成もあります。各機能の対応状況と接続方法は、デバイス、SDK、ディスプレイインターフェース、パネル、ドライバーの構成によって異なります。現行のOpenSiFli LCDCヘッダーは、`HAL_EXTDMA_MODULE_ENABLED`が有効で、チップ系列の条件を満たす場合に`LCDC_SUPPORTED_COMPRESSED_LAYER`を定義します。SF32LB52xとSF32LB57xは対象外です。また、ソースのコメントにはLCPU側では有効化されていないとの記載があります。公開SDKのLCDC機能表ではSF32LB55xの圧縮レイヤー展開が非対応とされているため、55xは実機での一連の動作が確認済みの対応ではなく、条件付きと考えてください。SDKの版、コア、ビルド設定、実機で経路全体を検証してください。詳しくは[TurboPixel](turbopixel.md#availability-in-the-sf32-family)を参照してください。

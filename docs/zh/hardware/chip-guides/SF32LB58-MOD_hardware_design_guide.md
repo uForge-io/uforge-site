@@ -9,7 +9,11 @@ tags:
     - 模组
 ---
 
+<div id="sf32lb58-mod"></div>
+
 # SF32LB58-MOD 硬件设计指南 { #sf32lb58-mod-hardware-design-guide }
+
+<div id="1"></div>
 
 ## 1. 概述 { #1-overview }
 
@@ -25,7 +29,11 @@ tags:
 !!! note "合规标识适用范围"
     所提供的 SF32LB58-MOD-N16R32N1 和 SF32LB58-MOD-A128R32N1 标签上标有 FCC、IC、CMIIT ID 和 HVIN 编号，以及 CE 标志，详见[模组标识汇总](../../sf32-products/modules/SF32LB58-MOD.md#regulatory-markings)。请针对具体版本核实批准文件以及天线和集成条件；不要据此推定其他型号或最终产品也在覆盖范围内。
 
+<div id="2"></div>
+
 ## 2. 快速设计概览 { #2-quick-design-summary }
+
+<div id="21"></div>
 
 ### 2.1 模组型号 { #21-module-variants }
 
@@ -43,6 +51,8 @@ tags:
 
 !!! note "供货与定制"
     **受存储芯片供应短缺影响，SF32LB58-MOD-E4R32N1 目前无法供货。** 模组也可采用其他配置。如需定制，请[联系 μForge.io](../../about/contact.md)。
+
+<div id="22"></div>
 
 ### 2.2 关键规格 { #22-key-specifications }
 
@@ -66,6 +76,8 @@ tags:
 
 </div>
 
+<div id="3"></div>
+
 ## 3. 功能框图 { #3-functional-block-diagram }
 
 模组集成了 SF32LB586VDD36 芯片、48 MHz 晶振、可选配的 32.768 kHz 晶振，以及（根据型号）合封的 HPI-PSRAM、QSPI-NOR/NAND Flash 或 eMMC，配合射频匹配网络和天线馈线。
@@ -73,14 +85,20 @@ tags:
 !!! info "图 3-1：功能框图"
     完整图示请参见官方技术规格书图 2-1（本指南未复现该图）。
 
+<div id="4"></div>
+
 ## 4. 管脚定义 { #4-pin-definition }
+
+<div id="41"></div>
 
 ### 4.1 管脚布局 { #41-pinout-diagram }
 
 顶视图所示的 138 个编号触点由 72 个周边半孔焊盘、60 个内部焊盘和 6 个中心焊盘组成，编号为 1–138。
 
-!!! info "图 4-1：管脚布局图（顶视图）"
+!!! info "图 4.1-1：管脚布局图（顶视图）"
     完整图示请参见官方技术规格书图 3-1（本指南未复现该图）。
+
+<div id="42"></div>
 
 ### 4.2 管脚定义表 { #42-pin-definition-table }
 
@@ -230,20 +248,32 @@ tags:
 
 *图例：P：电源；I：输入；O：输出；T：可配置为高阻；AO：音频输出；AI：音频输入。*
 
+!!! warning "PB29 引脚功能的源资料差异"
+    [DS5802-SF32LB58-MOD V0.1](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) 表 3-1 将 PB29 的默认 MUX 列为 `GPIO_B29`，但功能栏写作 `GPIO_B28`。[SF32LB58x 芯片数据手册](https://downloads.sifli.com/silicon/DS0058-SF32LB58x-Datasheet%20V1p6.pdf) 和[用户手册](https://downloads.sifli.com/docs/user%20manual/SF32LB58x/UM5801%E2%80%90SF32LB58x%E2%80%90CN.pdf) 均将 PB29 列为 `GPIO_B29`，本表据此填写。模组数据手册中的该项疑似源资料笔误；确定管脚分配前，请向 SiFli 确认。
+
 !!! note
     V0.1 数据手册的管脚 10 行将 PA79 的默认 MUX 列为 `GPIO_A38`，但功能列为 `GPIO_A79`。本表按管脚/功能名称列为 `GPIO_A79`；确定管脚分配前，请向 SiFli 确认 PA79 的 MUX。
 
+!!! warning "确认 UART1 的 TX/RX 方向"
+    思澈科技（SiFli）的资料对 PA31 和 PA32 上 UART1 TX/RX 方向的标注存在冲突。上方管脚表保留模块管脚定义中的标注；定稿前请向思澈科技（SiFli）确认信号方向。
+
 !!! note
     管脚 2（USART_RXD）和管脚 3（USART_TXD）是默认的日志输出、程序调试和程序下载接口。
+
+<div id="43"></div>
 
 ### 4.3 实物管脚描述 { #43-physical-pin-description }
 
 技术规格书图 3-2 按功能分组展示了 SDIO、SPI、I2C、UART、GPTIM、LCD 接口（DPI/8080/SPI/JDI/DSI）、GPADC、MPI、模拟音频、启动模式、电源、蓝牙天线、CAN/USB 以及 SWD/调试 UART 等信号在 SF32LB586VDD36 晶粒轮廓上的分布。规划主板信号分组和走线时，应结合上方的管脚定义表一并确认。
 
-!!! info "图 4-2：实物管脚描述图"
+!!! info "图 4.3-1：实物管脚描述图"
     完整图示请参见官方技术规格书图 3-2（本指南未复现该图）。
 
+<div id="5"></div>
+
 ## 5. 外设 { #5-peripherals }
+
+<div id="51"></div>
 
 ### 5.1 通信接口 { #51-communication-interfaces }
 
@@ -265,6 +295,8 @@ tags:
 
 **LCD 接口** — 支持 DBI 串行 SPI 模式（3 线/4 线，支持双线/四线数据线）和并行 8080 模式（8/16/24-bit 总线位宽），按模式不同，支持 RGB332/RGB444/RGB565/RGB666/RGB888 色彩格式。管脚 47~52 还提供一组独立的 MIPI DSI 通道（1 组时钟 + 2 组数据）。
 
+<div id="52"></div>
+
 ### 5.2 模拟信号处理 { #52-analog-signal-processing }
 
 **12 比特 GPADC** — SAR ADC，最大采样率 4 MS/s，单端输入 0~3.3 V / 差分输入 ±2.1 V，支持 8 路单端模拟输入或 4 对差分模拟输入，支持单次/循环测量模式，每次测量可分 4 个可独立配置的时隙，支持软件/硬件触发，支持 DMA。
@@ -277,7 +309,11 @@ tags:
 
 **音频 ADC** — 集成两路 24-bit ADC，采样率 8 kHz~48 kHz，每路独立增益调节。
 
+<div id="6"></div>
+
 ## 6. 电气特性 { #6-electrical-characteristics }
+
+<div id="61"></div>
 
 ### 6.1 绝对最大额定值 { #61-absolute-maximum-ratings }
 
@@ -296,6 +332,8 @@ tags:
 
 </div>
 
+<div id="62"></div>
+
 ### 6.2 建议工作条件 { #62-recommended-operating-conditions }
 
 <div align="center"><em>表 6.2-1：建议工作条件</em></div>
@@ -310,6 +348,8 @@ tags:
 | TA | 工作温度 | -40 | - | 85 | °C |
 
 </div>
+
+<div id="63-dc"></div>
 
 ### 6.3 直流电气特性 { #63-dc-electrical-characteristics }
 
@@ -343,6 +383,8 @@ tags:
 </div>
 
 完整表格（含输入漏电流、复位阈值以及两种供电电压下的管脚电容）请参见技术规格书 §5.3。
+
+<div id="64"></div>
 
 ### 6.4 功耗特性 { #64-power-consumption }
 
@@ -388,6 +430,8 @@ tags:
 
 本节表格仅列出部分工作点。数据手册 §5.4.2 还提供了其他无线工作间隔和扫描状态的数据，§5.4.3 则提供了其他处理器频率下的数据。其中标注为 3.8 V 的电流，是基于 1.8 V 和 3.3 V 电源轨的测试数据、按 90% 转换效率计算得出的系统输入等效电流：`I3.8V = I1.8V × 1.8 / (0.90 × 3.8) + I3.3V`。这不是在模组电源引脚施加 3.8 V 时直接测得的电流。
 
+<div id="65-bluetooth-rf"></div>
+
 ### 6.5 双模蓝牙射频 { #65-dual-mode-bluetooth-rf-performance }
 
 支持蓝牙协议 V5.3 并向下兼容 V4.2、V4.1、V4.0，包含低功耗蓝牙和经典蓝牙。工作信道中心频率：2402~2480 MHz。
@@ -402,6 +446,8 @@ tags:
 
 完整的 BLE 1 Mbps/2 Mbps/LR 收发性能表和经典蓝牙 BR/EDR 收发性能表，请参见技术规格书 §5.5。
 
+<div id="7"></div>
+
 ## 7. 模组供电 { #7-module-power-supply }
 
 模组电源接口有五个，即 **VDD_3V3**、**VDD_1V8**、**VDDIOA**、**VDDIOA2** 和 **VDDIOB**：
@@ -414,6 +460,8 @@ tags:
 
 !!! info "图 7-1：模组供电示意图"
     完整图示请参见官方技术规格书图 7-1（本指南未复现该图）。
+
+<div id="8"></div>
 
 ## 8. 开发板参考原理图和管脚分配 { #8-reference-schematic-and-pin-assignment }
 
@@ -428,6 +476,8 @@ tags:
     完整图示请参见官方技术规格书图 7-9（本指南未复现该图）。
 
 可将上述资料作为量产原理图设计的起点，并根据产品的实际外设需求调整管脚选择。
+
+<div id="9"></div>
 
 ## 9. 原理图设计检查清单 { #9-schematic-design-checklist }
 
@@ -456,21 +506,29 @@ tags:
 !!! note
     V0.1 数据手册 §5.2 将 VDDIO 建议工作范围列为 1.7~3.6 V，但 §7.3 第 4 项要求外设接口电平为 3.3 V。连接外设前，请向 SiFli 确认具体模组版本适用的接口电压；数据手册未解释这两处表述之间的关系。定稿量产原理图前，请查阅[官方技术规格书 PDF](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf)的最新版本。
 
+<div id="10-pcb"></div>
+
 ## 10. 模组尺寸和 PCB 封装图形 { #10-module-dimensions-and-pcb-footprint }
+
+<div id="101"></div>
 
 ### 10.1 模组尺寸 { #101-module-dimensions }
 
 模组尺寸为 24 × 24 × 3.1 mm，模组 PCB 厚度为 0.8 mm。周边半孔焊盘间距为 1.1 mm。
 
-!!! info "图 10-1：模组尺寸图"
+!!! info "图 10.1-1：模组尺寸图"
     完整图示请参见官方技术规格书图 8-1（本指南未复现该图）。
+
+<div id="102-pcb"></div>
 
 ### 10.2 推荐 PCB 封装图 { #102-recommended-pcb-footprint }
 
-!!! info "图 10-2：推荐 PCB 封装图"
+!!! info "图 10.2-1：推荐 PCB 封装图"
     完整图示请参见官方技术规格书图 8-2（本指南未复现该图）。
 
 推荐封装包含 72 个外侧焊盘（1.8 × 0.8 mm）、60 个内部焊盘（0.7 × 1.0 mm）和 6 个中心焊盘（1.3 × 1.3 mm）。尺寸单位均为毫米；完整几何尺寸以数据手册图纸为准。
+
+<div id="103"></div>
 
 ### 10.3 外部天线连接器 { #103-external-antenna-connector }
 
@@ -478,8 +536,10 @@ tags:
 
 连接器图纸中的尺寸单位为毫米。
 
-!!! info "图 10-3：外部天线连接器尺寸图"
+!!! info "图 10.3-1：外部天线连接器尺寸图"
     完整图示请参见官方技术规格书图 8-3（本指南未复现该图）。
+
+<div id="104-pcb"></div>
 
 ### 10.4 PCB 设计中的模组位置摆放 { #104-module-placement-in-pcb-design }
 
@@ -489,16 +549,24 @@ tags:
 - 如果天线无法伸出板边，请给 PCB 天线预留足够大的净空区域（不得铺铜、走线或摆放元件），并尽可能切割掉天线下方区域的底板材料。
 - 涉及整机设计时，应评估外壳对天线的影响并进行 RF 验证，包括在最终整机上进行通信距离测试。
 
+<div id="11"></div>
+
 ## 11. 产品处理 { #11-product-handling }
+
+<div id="111"></div>
 
 ### 11.1 储存条件 { #111-storage-conditions }
 
 - 密封在防潮袋（MBB）中的产品应储存在 <40°C/90%RH 的非冷凝环境中。
 - 模组的潮湿敏感度等级为 MSL 3。真空袋拆封后，须在 25 ± 5°C、60%RH 条件下 168 小时内使用完毕；否则需烘烤后再返回产线。这不改变模组建议只进行一次回流焊的要求。
 
+<div id="112-esd"></div>
+
 ### 11.2 静电放电（ESD） { #112-electrostatic-discharge-esd }
 
 数据手册列出的静电放电耐受值为 HBM ±2000 V、CDM ±500 V。组装和测试期间，请遵循思澈科技（SiFli）模组标准 ESD 防护规范。
+
+<div id="113"></div>
 
 ### 11.3 炉温曲线 { #113-reflow-profile }
 
@@ -506,8 +574,10 @@ tags:
 
 V0.1 曲线的升温段为 25–150°C、60–90 s、升温速率 1–3°C/s；预热段为 150–200°C、60–120 s；高于 217°C 持续 60–90 s，峰值为 235–250°C；从峰值降至 180°C 的降温速率为 -1 至 -5°C/s。图示指定 SAC305 焊料。图例的峰值时间范围为 30–70 s，曲线另标“焊接时间 >30 s”。两项标注不可视为同一时间范围，数据手册未解释其关系；量产前请确认适用的工艺曲线。
 
-!!! info "图 11-1：推荐回流焊温度曲线"
+!!! info "图 11.3-1：推荐回流焊温度曲线"
     图示及其标注参见官方技术规格书图 9-1；参数与来源标注差异见上文。
+
+<div id="114"></div>
 
 ### 11.4 超声波振动 { #114-ultrasonic-vibration }
 
@@ -516,12 +586,16 @@ V0.1 曲线的升温段为 25–150°C、60–90 s、升温速率 1–3°C/s；�
 !!! note
     在定稿量产工艺规范前，请查阅[官方技术规格书 PDF](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) §9，确认 SF32LB58-MOD 的最终湿敏等级、车间寿命、ESD 等级和回流焊要求。
 
+<div id="12"></div>
+
 ## 12. 相关文档 { #12-related-documents }
 
 - [DS5802-SF32LB58-MOD 技术规格书（V0.1）](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf)
 - [SF32LB58x 芯片介绍](../../sf32-products/chips/SF32LB58x.md)
 - [SF32LB58x 硬件设计指南](../chip-guides/SF32LB58x_hardware_design_guide.md)
 - [SF32LB58-DevKit-LCD](../../sf32-products/devkits/SF32LB58-DevKit-LCD.md)
+
+<div id="13"></div>
 
 ## 13. 修订历史 { #13-revision-history }
 
@@ -535,4 +609,4 @@ V0.1 曲线的升温段为 25–150°C、60–90 s、升温速率 1–3°C/s；�
 
 </div>
 
-本指南基于 **DS5802-SF32LB58-MOD V0.1**（首个公开发布版本）整理。请以官方 PDF 的最新版本为准。
+本指南基于 **DS5802-SF32LB58-MOD V0.1** 草稿。设计发布前，请查阅官方 PDF，确认权威且最新的修订版本。

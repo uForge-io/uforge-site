@@ -204,6 +204,8 @@ Das Board führt zwei 24-polige Randleisten heraus. Die erste Seite konzentriert
 
 </div>
 
+Die Board-Übersicht nennt sechs GPADC-Kanäle, während diese Pinfunktionsübersicht GPADC0–GPADC6 auf PA28–PA34 aufführt. Im SiFli-SDK ist ADC CH7 VBAT zugeordnet. Daraus lässt sich nicht ableiten, dass sieben externe Eingänge auf dem Board gleichzeitig nutzbar sind; die Anzahl auf Board-Ebene bleibt daher ungeklärt. Prüfen Sie vor dem Anschluss externer Analogsignale die genaue Board-Revision, den Pin-Multiplexer und die Kanalkonfiguration. Siehe den [SiFli-ADC-Leitfaden](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/adc.html).
+
 ### Randleiste für LCD, Audio und Debug { #lcd-audio-and-debug-header }
 
 <div align="center"><em>Pinzuordnung der Randleiste für LCD, Audio und Debug</em></div>

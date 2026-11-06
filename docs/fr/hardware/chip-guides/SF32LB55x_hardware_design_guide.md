@@ -138,7 +138,7 @@ Les applications visées comprennent notamment les bracelets connectés, les app
 3. Sélectionnez les quartz, la topologie d'adaptation RF et les contraintes de disposition d'antenne.
 4. Affectez les broches de mémoire, d'affichage, de réveil, de capteurs, d'audio, de débogage et de test de production.
 5. Définissez l'empilage PCB, le fan-out des broches, l'impédance, l'ESD, la RF et les contraintes des interfaces haut débit.
-6. Passez en revue la liste de contrôle de la section 7 avant le gel du schéma, la validation du routage et l'EVT.
+6. Passez en revue la liste de contrôle de la section 7 avant le gel du schéma, la libération du layout et l'EVT.
 
 ### 4.3. Éléments à archiver pour la revue { #43-review-evidence-pack }
 
@@ -187,7 +187,7 @@ Pour tirer pleinement parti des listes, utilisez-les comme dossier de validation
 
 [Index des guides de conception matérielle des puces SiFli (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## Poursuivre le guide de conception { #continue-the-design-guide }
+## 5. Poursuivre le guide de conception { #continue-the-design-guide }
 
 Le guide complet se poursuit sur les pages ci-dessous. Chacune couvre une étape du processus de conception et est accessible depuis ici.
 

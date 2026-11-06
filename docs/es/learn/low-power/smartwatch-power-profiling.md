@@ -7,6 +7,8 @@ tags:
   - Dispositivos vestibles
 ---
 
+<div id="_1"></div>
+
 # Análisis del consumo energético de un reloj inteligente { #power-profiling-a-smartwatch }
 
 El análisis del consumo energético permite estimar la autonomía a partir del uso diario previsto y, sobre todo, ordenar los consumidores según su impacto para priorizar las optimizaciones. Este artículo toma como ejemplo el [libro de trabajo en inglés con los datos del perfil de consumo de un reloj inteligente](assets/smartwatch-power-profile-data.xlsx). Explica cómo convertir los hábitos de uso en mAh por día, identificar los principales consumidores y transformar el modelo de la hoja de cálculo en un plan de medición.
@@ -16,6 +18,8 @@ El análisis del consumo energético permite estimar la autonomía a partir del 
     El libro de trabajo no incluye registros de medición, así que no permite saber si alguno de sus valores se obtuvo midiendo. Los 13,15 días son una estimación del modelo, no una autonomía medida.
 
 Para conocer las pautas de arquitectura y firmware, consulte el [Resumen del diseño de bajo consumo](overview.md). El artículo [Medición y validación del consumo energético](measurement-and-validation.md) describe cómo verificar el modelo con mediciones.
+
+<div id="_2"></div>
 
 ## Sistema del reloj y límites del modelo { #smartwatch-system-overview }
 
@@ -34,6 +38,8 @@ Empiece por delimitar el sistema que representa el modelo. El libro de trabajo d
 | Tensión nominal de la batería | 3,87 V | Se usa en el cálculo auxiliar de normalización de tensión del libro de trabajo. |
 
 </div>
+
+<div id="_3"></div>
 
 ## Consumo por escenario { #power-consumption-by-scenario }
 
@@ -118,6 +124,8 @@ flowchart LR
     F --> B
 ```
 
+<div id="_4"></div>
+
 ### Calcular el consumo diario de un escenario { #convert-a-scenario-into-daily-charge }
 
 Si la corriente de una carga ya está expresada en el lado de la batería, su consumo diario se calcula directamente:
@@ -135,11 +143,15 @@ battery_current_mA = (load_voltage_V x load_current_mA) /
 
 Use el rendimiento medido del regulador para la corriente de carga prevista. El rendimiento máximo destacado de un regulador rara vez es útil para un reloj que pasa buena parte del día con una carga ligera.
 
+<div id="_5"></div>
+
 ### Revisar la hipótesis de conversión del libro de trabajo { #check-the-workbooks-conversion-assumption }
 
 La columna «Power-Conversion Efficiency (%)» del libro de trabajo se calcula como `load voltage / battery voltage`. La fórmula posterior divide por ese valor y por la tensión de la batería, por lo que los términos de tensión se cancelan. El consumo diario resultante equivale simplemente a la corriente de la carga multiplicada por el tiempo: se considera que la corriente de la batería es igual a la de la carga, en lugar de modelar una conversión de potencia ideal. Esto se aproxima a un regulador lineal sin corriente de reposo; no es un modelo general para un regulador conmutado.
 
 Por ejemplo, una carga de 1 mA a 3,3 V alimentada desde una batería de 3,87 V mediante un convertidor ideal demandaría unos 0,853 mA de la batería, mientras que el libro de trabajo cuenta 1 mA. El resultado de un convertidor real depende de su rendimiento y de su corriente de reposo. Por tanto, esta hipótesis de conversión por sí sola no permite determinar si la estimación de autonomía es optimista o conservadora. El orden de los escenarios sigue siendo útil para revisar las hipótesis de corriente y duración, pero no constituye un presupuesto definitivo. Para un presupuesto de producción, sustituya el valor auxiliar por el rendimiento medido de cada línea de alimentación y rango de carga. Incluya la corriente de reposo sin contabilizarla dos veces si ya está incluida en la medición, además de las pérdidas del circuito de protección de la batería y de la ruta de carga.
+
+<div id="_6"></div>
 
 ## Calcular el consumo diario a partir del uso del producto { #calculate-daily-consumption-from-product-usage }
 
@@ -302,6 +314,8 @@ El libro de trabajo no tiene una categoría específica para los sensores. Su co
 
 </div>
 
+<div id="_7"></div>
+
 ## Convertir el orden de consumo en acciones de diseño { #turn-the-ranking-into-design-work }
 
 Empiece por el mayor consumidor del modelo y valide el orden con mediciones. Para este caso, conviene seguir esta secuencia:
@@ -313,6 +327,8 @@ Empiece por el mayor consumidor del modelo y valide el orden con mediciones. Par
 5. **Detección de larga duración:** analice el seguimiento del sueño y el registro de ejercicio como escenarios completos, incluidos el ciclo de trabajo de los sensores, el procesamiento, el tráfico de memoria y el uso de la radio.
 
 No optimice una cifra aislada de la hoja de cálculo. Un cambio que parezca eficiente puede aumentar la frecuencia de activación, empeorar la experiencia de usuario o prolongar tanto el tiempo activo que anule el ahorro previsto.
+
+<div id="_8"></div>
 
 ## Validar el modelo en el hardware { #validate-the-model-on-hardware }
 
@@ -333,6 +349,8 @@ El modelo resulta útil cuando se contrasta periódicamente con mediciones reale
 
 </div>
 
+<div id="_9"></div>
+
 ## Mantener un perfil realista { #keep-the-profile-honest }
 
 - Considere los escenarios desactivados como no contabilizados, no como gratuitos. El libro de trabajo asigna actualmente consumo cero a NFC, las llamadas Bluetooth y AOD.
@@ -340,6 +358,8 @@ El modelo resulta útil cuando se contrasta periódicamente con mediciones reale
 - Siempre que sea posible, mida en la entrada de la batería. Las mediciones por línea de alimentación también son útiles, pero para estimar la autonomía debe sumar las pérdidas del regulador y su corriente de reposo.
 - Cambie una sola hipótesis cada vez y compare el consumo en mAh por día, no solo la corriente instantánea.
 - Recalcule el perfil cuando cambien la gestión de la pantalla, los ajustes de Bluetooth, la frecuencia de muestreo de los sensores, la política de gestión de energía o alguna función importante del firmware.
+
+<div id="_10"></div>
 
 ## Conclusiones principales { #key-takeaways }
 

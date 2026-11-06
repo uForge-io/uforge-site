@@ -71,7 +71,7 @@ STAR-MC1은 SoC가 구현하고 소프트웨어가 효과적으로 활용하는 
 
 \* 이 참고값은 Arm의 [Cortex-M 비교표, 2020년판](https://developer.arm.com/-/media/Arm%20Developer%20Community/PDF/Cortex-A%20R%20M%20datasheets/Arm%20Cortex-M%20Comparison%20Table_v3.pdf?revision=077cd073-b4ff-4193-8a26-5e854aa6e431)에서 가져온 것입니다. 현재 기준의 범용 점수나 완성된 SoC의 직접적인 순위가 아닙니다. 컴파일러, 메모리 시스템, 캐시 설정, 벤치마크 구성이 결과에 영향을 줍니다.
 
-† STAR-MC1은 CM33과 호환되므로 여기서는 CM33의 참고값을 사용합니다. 이는 비교 기준값이며 Arm이 발표했거나 측정한 STAR-MC1 결과가 아닙니다.
+† 표에서는 Arm이 발표한 Cortex-M33의 4.02 CoreMark/MHz를 STAR-MC1의 공통 비교 기준으로 사용합니다. Arm China의 STAR-MC1 제품 브로슈어에도 4.02 CoreMark/MHz가 기재되어 있지만, 이 페이지에서는 해당 시험 방법을 독립적으로 확인하지 않았으므로 두 결과가 방법론적으로 동등하다고 간주해서는 안 됩니다.
 
 ‡ 이는 아키텍처상의 위치를 나타내는 지침이며 실리콘에서 측정한 데이터가 아닙니다. 실제 전력은 공정 기술, 전압, 주파수, 메모리 아키텍처, 활성화된 기능, 주변 장치, 펌웨어 듀티 사이클, 최종 SoC 구현에 따라 달라집니다.
 

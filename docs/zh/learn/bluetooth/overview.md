@@ -110,7 +110,7 @@ SDK 提供多种标准和厂商 Profile 的示例实现，包括：
 - **经典蓝牙音频**——A2DP 用于音频流、AVRCP 用于播放控制、HFP 用于通话。技术成熟，并与现有手机和耳机广泛兼容。
 - **LE Audio**——[基础音频应用规范（Basic Audio Profile，BAP）](https://www.bluetooth.com/specifications/specs/basic-audio-profile-1-0-2/)定义了管理单播和广播 LE Audio 音频流的流程。SDK 提供广播发送端（Source）和广播接收端（Sink）示例，也提供 LE Audio 广播发送端与经典蓝牙混合工作的示例，适用于过渡期需要兼容两类方案的产品。
 
-两条路径都需要稳定的时序、缓冲和音频采样数据的可靠传输，通常使用 DMA。当 SF32LB52x/56x/58x 所支持的蓝牙音频角色和 SDK 配置满足产品要求时，可选用它们。SF32LB55x 仅支持 BLE，不能提供经典蓝牙音频，但这并不意味着它没有本地音频能力。DMA 和缓冲区设计请参阅[音频概览](../audio/overview.md)及[蓝牙处理器架构](processor.md#bluetooth-audio-and-le-audio)。
+两条路径都需要稳定的时序、缓冲和音频采样数据的可靠传输，通常使用 DMA。当 SF32LB52x/56x/58x 所支持的蓝牙音频角色和 SDK 配置满足产品要求时，可选用它们。SiFli SDK 的 A2DP 共享示例列出了 `eh-lb57x` 开发板，并演示 A2DP 音乐共享与 HFP 通话中继；这并不能证明所有 SF32LB57x 料号和角色都受支持，需核实具体 SKU、角色和 SDK 配置。SF32LB55x 仅支持 BLE，不能提供经典蓝牙音频，但这并不意味着它没有本地音频能力。DMA 和缓冲区设计请参阅[音频概览](../audio/overview.md)及[蓝牙处理器架构](processor.md#bluetooth-audio-and-le-audio)。
 
 ## Sibles 服务实现模式 { #implementation-pattern-for-sibles-services }
 

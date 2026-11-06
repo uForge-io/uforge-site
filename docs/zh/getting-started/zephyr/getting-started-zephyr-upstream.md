@@ -8,7 +8,7 @@ tags:
 
 # Zephyr 上游版本 { #zephyr-upstream }
 
-自 Zephyr v4.3.0 起，上游 Zephyr 已提供并持续维护 `sf32lb52_devkit_lcd` 开发板支持。请参阅 [v4.3.0 发布说明](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html)和 [SF32LB52 DevKit LCD 开发板文档](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)。本指南将创建 v4.3.0 工作区、构建首个示例并烧录开发板。如果需要更完整的 SF32 官方功能支持，请使用 [SiFli-SDK](../sifli/getting-started-sifli-sdk.md)。
+上游 Zephyr 自 v4.3.0 起支持 `sf32lb52_devkit_lcd` 开发板。本指南使用仍受维护的 Zephyr v4.5.0 新建工作区、构建首个示例并烧录开发板；请参阅 [v4.3.0 发布说明](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html)、[v4.5.0 发布说明](https://docs.zephyrproject.org/4.5.0/releases/release-notes-4.5.html)和当前的 [SF32LB52 DevKit LCD 开发板文档](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)。如果需要更完整的 SF32 官方功能支持，请使用 [SiFli-SDK](../sifli/getting-started-sifli-sdk.md)。
 
 !!! note "检查开发板功能列表"
     上游开发板定义本身并不能证明所有外设或工作模式都已启用，或已针对产品完成验证。请查看开发板文档中的受支持功能表，并在目标硬件的具体版本上验证所需行为。
@@ -22,23 +22,49 @@ tags:
 
 **软件**
 
-- Zephyr v4.3.0 支持的主机操作系统，并按其[入门指南](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html)进行配置。
+- Zephyr v4.5.0 支持的主机操作系统，并按其[入门指南](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html)进行配置。
 - 按该指南为 ARM Cortex-M 目标安装 Zephyr 主机依赖项和 Zephyr SDK。
 - Git、Python 3 和 `pip`。
 
 ## 准备工具链 { #prepare-the-tooling }
 
-先按照 Zephyr 的 [v4.3.0 入门指南](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html)完成主机依赖项和 Zephyr SDK 的安装。然后创建 Python 环境，并从对应的 Zephyr tag 初始化工作区：
+先按照 Zephyr 的 [v4.5.0 入门指南](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html)完成主机依赖项和 Zephyr SDK 的安装。然后根据所用 shell 运行相应命令，创建 Python 环境并从对应的 Zephyr tag 初始化工作区：
 
 ```bash
 python3 -m venv ~/zephyr-venv
-source ~/zephyr-venv/bin/activate
-pip install west
-west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.3.0 ~/zephyrproject
+. ~/zephyr-venv/bin/activate
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 ~/zephyrproject
 cd ~/zephyrproject
 west update
 west zephyr-export
-pip install -r zephyr/scripts/requirements.txt
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+Windows PowerShell：
+
+```powershell
+py -3 -m venv "$HOME\zephyr-venv"
+& "$HOME\zephyr-venv\Scripts\Activate.ps1"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "$HOME\zephyrproject"
+Set-Location "$HOME\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+Windows 命令提示符：
+
+```bat
+py -3 -m venv "%USERPROFILE%\zephyr-venv"
+call "%USERPROFILE%\zephyr-venv\Scripts\activate.bat"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "%USERPROFILE%\zephyrproject"
+cd /d "%USERPROFILE%\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
 ```
 
 执行下方构建和烧录步骤时，请保持此 Python 环境处于激活状态。
@@ -75,7 +101,7 @@ west build -b sf32lb52_devkit_lcd samples/hello_world --pristine
 west flash
 ```
 
-如果烧录失败，请检查串口选择、下载模式，以及[开发板文档](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)中的 runner 说明。
+如果烧录失败，请检查串口选择、下载模式，以及[开发板文档](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)中的 runner 说明。
 
 ## 打开串口控制台 { #open-the-serial-console }
 
@@ -87,7 +113,7 @@ Hello World! sf32lb52_devkit_lcd
 
 ## 选择下一个示例 { #choose-a-next-sample }
 
-结合上游开发板文档中的受支持功能表和 [Zephyr 示例目录](https://docs.zephyrproject.org/4.3.0/samples/index.html)，选择接下来要评估的 API 或外设。请先确认该开发板支持相应功能，并启用了所需配置；不要把示例能够运行直接当作产品级验证的依据。
+结合上游开发板文档中的受支持功能表和 [Zephyr 示例目录](https://docs.zephyrproject.org/4.5.0/samples/index.html)，选择接下来要评估的 API 或外设。请先确认该开发板支持相应功能，并启用了所需配置；不要把示例能够运行直接当作产品级验证的依据。
 
 ## 故障排查 { #troubleshooting }
 
@@ -97,8 +123,8 @@ Hello World! sf32lb52_devkit_lcd
 
 | 现象 | 检查项 |
 |:-----|:-------|
-| `west boards` 中未显示 SF32 目标 | 确认工作区使用上游 Zephyr v4.3.0 或更高版本初始化，并且 `west update` 已完成。 |
-| 编译开始前构建即失败 | 确认 Python 环境已激活、已为 ARM Cortex-M 安装 Zephyr SDK，并已安装 v4.3.0 所需依赖项。 |
+| `west boards` 中未显示 SF32 目标 | 确认工作区使用上游 Zephyr v4.5.0 或更高版本初始化，并且 `west update` 已完成。 |
+| 编译开始前构建即失败 | 确认 Python 环境已激活、已为 ARM Cortex-M 安装 Zephyr SDK，并已安装 v4.5.0 所需依赖项。 |
 | 开发板构建成功但无法烧录 | 确认已安装 `sftool` 且其位于 `PATH` 中，串口选择正确，并且开发板处于串口下载模式。 |
 | 串口没有输出 | 检查 `usart1`、`1000000` 波特率、USB 转 UART 连接，以及该串口是否已被其他终端占用。 |
 | 外设示例运行失败 | 查看开发板的受支持功能表和示例配置；不要假设基础开发板目标已启用所有外设。 |

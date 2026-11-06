@@ -17,6 +17,16 @@ tags:
 
 Check the package drawing and land-pattern requirements for the selected QFN or BGA against the assembly capabilities of the intended manufacturer. For BGA packages, confirm ball escape, via strategy, solder-mask rules, and fabrication limits early.
 
+SiFli's source provides package-specific BGA and QFN fan-out examples. Use them as references only: the exact breakout depends on the selected package and fabricator rules, which must be verified for the design.
+
+![BGA package fan-out example](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA-FANOUT-PCB.png)
+
+<div align="center"><em>Figure 6.1-1: BGA Package Fan-Out Reference</em></div>
+
+![QFN package fan-out example](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/assets/55x/SF32LB55x-QFN-FANOUT-PCB.png)
+
+<div align="center"><em>Figure 6.1-2: QFN Package Fan-Out Reference</em></div>
+
 #### 6.1.1. Stack-Up and Fabrication Reference { #611-stack-up-and-fabrication }
 
 The SF32LB55x series supports component placement on one or both PCB sides.

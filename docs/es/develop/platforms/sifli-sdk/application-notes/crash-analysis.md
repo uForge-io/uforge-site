@@ -25,7 +25,7 @@ Cuando LPSYS sale del estado Standby, SWD vuelve a HCPU. Un reinicio de J-Link n
 
 ## Capturar datos en tiempo real o un paquete para el análisis posterior al fallo { #capture-a-live-or-post-mortem-package }
 
-En las versiones actuales del SDK, use `sdk.py` para capturar por UART o J-Link:
+La CLI actual de `sdk.py` admite J-Link en todas las series y UART DEBUG IP directo solo en SF32LB52X y SF32LB56X. Use J-Link para las demás familias; los métodos heredados AssertDump/UART descritos más abajo son flujos distintos.
 
 !!! note "Ámbito del ejemplo"
     El comando siguiente es un ejemplo para SF32LB52/LB525. Mantenga su estructura, pero sustituya el chip/modelo, núcleo, transporte y ELF por valores admitidos por la familia y versión del SDK de destino.
@@ -36,7 +36,7 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
   --output /tmp/live-crash --elf build_hcpu/main.elf
 ```
 
-Para exportar también la PSRAM, añada `--include-psram` o use `--psram-size 8MB` para seleccionar manualmente el script de PSRAM. Con J-Link por IP mediante `SifliUsartServer`, use `--transport jlink --jlink-ip 127.0.0.1:19025`; seleccione el núcleo afectado con `--core hcpu` o `--core lcpu`. El directorio de salida debe contener el binario capturado, el ELF/AXF del núcleo correspondiente, `log.txt`, `manifest.json` y `sdk_manifest.json`.
+Para exportar también la PSRAM, añada `--include-psram` o use `--psram-size 8MB` para seleccionar manualmente el script de PSRAM. Con J-Link por IP mediante `SifliUsartServer`, use `--transport jlink --jlink-ip 127.0.0.1:19025`; seleccione el núcleo afectado con `--core hcpu` o `--core lcpu`. El paquete de fallo contiene los binarios capturados, `manifest.json` y `sdk_manifest.json`; si se proporciona `--elf`, se copia como `hcpu.axf`. `log.txt` solo se copia desde `capture.log` para `capture-live --transport jlink`, o se proporciona mediante `--log` para `export-coredump`.
 
 En versiones antiguas del SDK, use el método específico de la familia descrito en la guía correspondiente:
 

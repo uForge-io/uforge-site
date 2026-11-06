@@ -8,15 +8,19 @@ tags:
 
 # SF32LB58x { #sf32lb58x }
 
+<div id="_1"></div>
+
 ## Présentation { #overview }
 
 La série SF32LB58x se situe au sommet de la gamme SF32LB5x. Elle cible les produits AIoT alimentés par batterie qui ont besoin de graphismes avancés, d'une grande capacité mémoire, du Bluetooth bimode, d'une connectique audio et d'affichage étendue et d'une forte densité de GPIO, sans adopter une plateforme plus volumineuse de la catégorie des processeurs applicatifs.
 
 Le SF32LB58x repose sur une architecture hétérogène à trois cœurs Arm Cortex-M33 STAR-MC1[^1]. Le HCPU et l'ACPU sont des cœurs hautes performances jusqu'à 240 MHz ; le LCPU fonctionne jusqu'à 96 MHz et vise les tâches sensibles à la consommation. Le HCPU gère le contrôle du système, l'interface utilisateur et le traitement applicatif général ; l'ACPU peut prendre en charge des charges de DSP audio ; et le LCPU convient au Bluetooth LE, à l'acquisition de capteurs et aux autres tâches basse consommation. Ce partitionnement permet au firmware de mettre le HCPU hors tension pour des charges adaptées, même si l'économie réelle dépend de l'application et de son firmware.
 
-SiFli documente 3 744 Ko de SRAM sur puce et des combinaisons, selon la référence, de flash NOR et de PSRAM OPI/HPI intégrées au boîtier. La famille offre aussi une prise en charge de l'affichage incluant MIPI DSI, l'accélération graphique vectorielle, l'USB 2.0 High-Speed et un boîtier BGA offrant un grand nombre d'E/S. Évaluez le SF32LB58x lorsqu'une conception exige une interface haute résolution, d'importantes ressources graphiques, du Wi-Fi externe via SDIO ou des ressources de calcul et de mémoire adaptées à des charges d'IA embarquée ou de fusion de capteurs.
+SiFli documente 3 744 KB de SRAM sur puce et des combinaisons, selon la référence, de flash NOR et de PSRAM OPI/HPI intégrées au boîtier. La famille offre aussi une prise en charge de l'affichage incluant MIPI DSI, l'accélération graphique vectorielle, l'USB 2.0 High-Speed et un boîtier BGA offrant un grand nombre d'E/S. Évaluez le SF32LB58x lorsqu'une conception exige une interface haute résolution, d'importantes ressources graphiques, du Wi-Fi externe via SDIO ou des ressources de calcul et de mémoire adaptées à des charges d'IA embarquée ou de fusion de capteurs.
 
 [^1]: STAR-MC1 est un IP de CPU embarqué Armv8-M Mainline configurable, proposé par Arm China. Dans les composants SF32 compatibles, SiFli le documente comme processeur applicatif Arm Cortex-M33 STAR-MC1. Son modèle logiciel de classe Cortex-M33 facilite la reprise du firmware, des intergiciels, des portages de RTOS et des outils Cortex-M33 existants, sous réserve du travail d'intégration habituel propre à chaque composant. Ses configurations CU, SP et SE diffèrent principalement par le cache, la TCM, la XIPU et les capacités TrustZone ; les instructions personnalisées Arm/CDE et l'interface de coprocesseur sont des fonctions optionnelles à vérifier pour la référence SF32 exacte. La documentation SiFli peut employer ***Arm Cortex-M33 STAR-MC1*** ou ***Arm Cortex-M33*** selon le contexte.
+
+<div id="_2"></div>
 
 ## Applications { #applications }
 
@@ -38,6 +42,8 @@ Choisissez le SF32LB58x lorsque la conception exige une ou plusieurs de ces capa
 - Wi-Fi externe via SDIO
 - Grande mémoire pour tampon d'image, audio, graphismes ou modèles d'IA
 - Nombre élevé de GPIO ou plusieurs interfaces externes haute vitesse
+
+<div id="_3"></div>
 
 ## Ressources de développement { #development-resources }
 
@@ -65,15 +71,21 @@ Choisissez le SF32LB58x lorsque la conception exige une ou plusieurs de ces capa
 
 ---
 
+<div id="_4"></div>
+
 ## Caractéristiques et spécifications { #features-and-specs }
+
+<div id="_5"></div>
 
 ### Calcul et mémoire { #compute-and-memory }
 
 - Trois cœurs Arm Cortex-M33 STAR-MC1 : HCPU et ACPU jusqu'à 240 MHz ; LCPU jusqu'à 96 MHz
-- 3 744 Ko de SRAM sur puce
-- Options de flash NOR intégrée au boîtier de 1 Mo à 8 Mo au total, selon la référence
-- Options de PSRAM OPI et HPI intégrées au boîtier ; la PSRAM HPI est disponible jusqu'à 2 × 32 Mo, selon la référence
+- 3 744 KB de SRAM sur puce
+- Options de flash NOR intégrée au boîtier de 1 MB à 8 MB au total, selon la référence
+- Options de PSRAM OPI et HPI intégrées au boîtier ; la PSRAM HPI est disponible jusqu'à 2 × 32 MB, selon la référence
 - Flash NOR ou NAND SPI externe via MPI3/MPI4 ; NAND SD, eMMC, cartes SD ou Wi-Fi externe via SDIO. Les combinaisons disponibles dépendent du choix des interfaces et de l'affectation des broches.
+
+<div id="ai"></div>
 
 ### Graphismes, affichage et IA { #graphics-display-and-ai }
 
@@ -89,6 +101,8 @@ Pour connaître la résolution maximale et les interfaces d'affichage prises en 
 - Interfaces d'affichage SPI, DSPI, QSPI (y compris SPI pour papier électronique), MCU8080, JDI, RGB/DPI (RGB888 ou RGB565) et MIPI DSI
 - Prend en charge deux écrans au contenu différent, en associant MIPI DSI à SPI, DSPI ou QSPI
 - Adapté aux charges locales d'IA embarquée, d'apprentissage automatique et de fusion de capteurs
+
+<div id="_6"></div>
 
 ### Audio et connectivité sans fil { #audio-and-wireless-connectivity }
 
@@ -127,11 +141,15 @@ Pour connaître la résolution maximale et les interfaces d'affichage prises en 
 - RTC, watchdog, réveil par GPIO, réveil par PBR, PWM, I2C, SPI et interfaces analogiques à usage général
 - Boîtier BGA256 pour conceptions haute densité
 
+<div id="_7"></div>
+
 ### Alimentation et boîtier { #power-supply-and-package }
 
 - Plage de tension d'alimentation : 1,71 V à 3,63 V
 - Boîtier BGA256, 6,5 × 8,5 × 0,94 mm, pas de 0,4 mm
 - Circuit imprimé HDI requis ; l'empilage 6HDI-2 est recommandé pour les conceptions de production
+
+<div id="_8"></div>
 
 ## Variantes de la famille { #family-variants }
 
@@ -143,12 +161,12 @@ Le guide SiFli des modèles de puces répertorie actuellement six codes de comma
 
 | Code de commande | Boîtier | SiP de démarrage MPI5 | SiP MPI1 | SiP MPI2 |
 | :--- | :--- | :--- | :--- | :--- |
-| SF32LB580VNN36 | BGA256 | Flash NOR de 1 Mo | n/a | n/a |
-| SF32LB581VCN36 | BGA256 | Flash NOR de 1 Mo | PSRAM OPI de 8 Mo | n/a |
-| SF32LB583VCC36 | BGA256 | Flash NOR de 1 Mo | PSRAM OPI de 8 Mo | PSRAM OPI de 8 Mo |
-| SF32LB585V5E56 | BGA256 | Flash NOR de 4 Mo | Flash NOR de 4 Mo | PSRAM HPI de 32 Mo |
-| SF32LB586VDD36 | BGA256 | Flash NOR de 1 Mo | PSRAM HPI de 16 Mo | PSRAM HPI de 16 Mo |
-| SF32LB587VEE56 | BGA256 | Flash NOR de 4 Mo | PSRAM HPI de 32 Mo | PSRAM HPI de 32 Mo |
+| SF32LB580VNN36 | BGA256 | Flash NOR de 1 MB | n/a | n/a |
+| SF32LB581VCN36 | BGA256 | Flash NOR de 1 MB | PSRAM OPI de 8 MB | n/a |
+| SF32LB583VCC36 | BGA256 | Flash NOR de 1 MB | PSRAM OPI de 8 MB | PSRAM OPI de 8 MB |
+| SF32LB585V5E56 | BGA256 | Flash NOR de 4 MB | Flash NOR de 4 MB | PSRAM HPI de 32 MB |
+| SF32LB586VDD36 | BGA256 | Flash NOR de 1 MB | PSRAM HPI de 16 MB | PSRAM HPI de 16 MB |
+| SF32LB587VEE56 | BGA256 | Flash NOR de 4 MB | PSRAM HPI de 32 MB | PSRAM HPI de 32 MB |
 
 </div>
 
@@ -160,6 +178,8 @@ Lors du choix d'une variante, vérifiez d'abord ces points :
 - Interface d'affichage et résolution cible
 - Besoins en stockage externe et en interface Wi-Fi
 - Capacité de fabrication du circuit imprimé pour une implantation HDI BGA256 au pas de 0,4 mm
+
+<div id="_9"></div>
 
 ## Parcours d'intégration { #integration-path }
 
@@ -174,7 +194,7 @@ Suivez cette séquence pour transformer une présélection SF32LB58x en concepti
 ## Questions fréquentes { #frequently-asked-questions }
 
 **Quelles sont les principales caractéristiques du SF32LB58x ?**
-Le SF32LB58x assure le traitement applicatif (2× Cortex-M33 @240 MHz) et dispose d'un cœur basse consommation (Cortex-M33 @48/96 MHz, programmable par l'utilisateur). Il intègre 3,7 MB de SRAM interne et prend en charge le Bluetooth bimode (BT classique + BLE). Graphismes : ePicasso 2.0 + Vivante GCNanoUltraV (graphismes vectoriels). Boîtier : BGA256 (8,5 × 6,5 mm). USB 2.0 HS.
+Le SF32LB58x assure le traitement applicatif (2× Cortex-M33 @240 MHz) et dispose d'un Cortex-M33 basse consommation, programmable par l'utilisateur et réglable jusqu'à 96 MHz. La valeur distincte de 48 MHz correspond à un point de mesure de consommation CoreMark ; les sources disponibles ne l'établissent pas comme une seconde fréquence de fonctionnement spécifiée. Il intègre 3,7 MB de SRAM interne et prend en charge le Bluetooth bimode (BT classique + BLE). Graphismes : ePicasso 2.0 + Vivante GCNanoUltraV (graphismes vectoriels). Boîtier : BGA256 (8,5 × 6,5 mm). USB 2.0 HS.
 
 **Quelles interfaces d'affichage le SF32LB58x prend-il en charge ?**
 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. ([Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -192,15 +212,23 @@ Jusqu'à 32 MB + 32 MB de PSRAM et jusqu'à 8 MB de Flash NOR dans le boîtier.
 Commencez par le [guide de conception matérielle du SF32LB58x](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md) (schéma, alimentation, horloge/RF, routage PCB), puis utilisez les listes de contrôle de schéma et d'implantation avant de figer la carte.
 <!-- uf-faq:end -->
 
+<div id="_10"></div>
+
 ## Produits associés { #related-products }
+
+<div id="_11"></div>
 
 ### Module { #module }
 
 Le [SF32LB58-MOD](../modules/SF32LB58-MOD.md) regroupe la puce SF32LB586VDD36, son réseau d'adaptation RF, ainsi que de la PSRAM HPI intégrée au boîtier et des options de stockage dans un module prêt à intégrer. Utilisez-le lorsque le projet a besoin des capacités de la série 58 tout en limitant, dès les premières étapes du développement matériel, les risques liés à la RF, au boîtier BGA et au routage de la mémoire.
 
+<div id="_12"></div>
+
 ### Kits de développement { #development-kits }
 
 Le [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) est le point de départ pour les décisions de conception portant sur l'arbre d'alimentation, l'affichage, le stockage, l'audio, la RF, l'USB et le SDIO.
+
+<div id="_13"></div>
 
 ### Produits de référence { #reference-products }
 

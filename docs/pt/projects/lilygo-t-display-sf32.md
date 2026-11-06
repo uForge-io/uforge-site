@@ -111,7 +111,7 @@ A documentação citada do repositório se refere à branch `master` e não iden
 Depois de configurar o ambiente necessário, o README do T-Display-SF32 documenta este fluxo de compilação e gravação no Windows:
 
 ```powershell
-cd T-Display-SF32\examples\rt_os\rt_driver\project
+cd SIFLI\T-Display-SF32\examples\rt_os\rt_driver\project
 scons --board=t-display-sf32_hcpu -j8
 build_t-display-sf32_hcpu\uart_download.bat
 ```

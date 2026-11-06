@@ -311,7 +311,7 @@ If you use [CodeKit](../../tools/codekit.md), preserve the same evidence and con
 | Build tool not found | Re-run `export.sh` / `export.ps1` in the current terminal. |
 | Board name unknown | Check the SDK supported-boards documentation. |
 | Download script cannot open port | Close serial terminals and verify the USB-to-UART cable/connector. |
-| Flash does not start | Follow the board's documented download sequence. For `sf32lb52-lcd_n16r8`, after selecting the serial port, restart the board and press Enter within 2 seconds to start the download; use the target-specific sequence for other boards. Check board power and the selected port/UART connection. |
+| Flash does not start | Follow the board's documented download sequence. For `sf32lb52-lcd_n16r8`, restarting the board is recommended; in that sequence, press Enter within 2 seconds after restart to start the download. Use the target-specific sequence for other boards. Check board power and the selected port/UART connection. |
 | Serial output is unreadable | Check baud rate and use the data UART, not a charge-only cable. |
 
 </div>
@@ -1111,7 +1111,7 @@ Summary: Build and flash Zephyr's upstream SF32LB52 DevKit LCD board target, the
 
 # Zephyr Upstream
 
-The `sf32lb52_devkit_lcd` board has been supported and maintained in upstream Zephyr since v4.3.0. See the [v4.3.0 release notes](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html) and the [SF32LB52 DevKit LCD board documentation](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html). This guide creates a v4.3.0 workspace, builds a first sample, and flashes the board. Use [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) when you need the broader official SF32 feature set.
+The `sf32lb52_devkit_lcd` board has been supported upstream since v4.3.0. This guide uses the maintained Zephyr v4.5.0 release for a new workspace, a first sample, and board flashing; see the [v4.3.0 release notes](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html), [v4.5.0 release notes](https://docs.zephyrproject.org/4.5.0/releases/release-notes-4.5.html), and current [SF32LB52 DevKit LCD board documentation](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html). Use [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) when you need the broader official SF32 feature set.
 
 !!! note "Check the board feature list"
     An upstream board definition does not by itself confirm that every peripheral or operating mode is enabled or validated for a product. Check the board documentation's supported-features table and verify the required behavior on your exact board revision.
@@ -1125,23 +1125,49 @@ The `sf32lb52_devkit_lcd` board has been supported and maintained in upstream Ze
 
 **Software**
 
-- A host OS supported by Zephyr v4.3.0 and its [Getting Started instructions](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html).
+- A host OS supported by Zephyr v4.5.0 and its [Getting Started instructions](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html).
 - Zephyr host dependencies and the Zephyr SDK, installed for the ARM Cortex-M target as described in that guide.
 - Git, Python 3, and `pip`.
 
 ## Prepare the Tooling
 
-First complete the host-dependency and Zephyr SDK setup in Zephyr's [v4.3.0 Getting Started guide](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html). Then create a Python environment and initialize a workspace at the matching Zephyr tag:
+First complete the host-dependency and Zephyr SDK setup in Zephyr's [v4.5.0 Getting Started guide](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html). Then follow the commands for your shell to create a Python environment and initialize a workspace at the matching Zephyr tag.
 
 ```bash
 python3 -m venv ~/zephyr-venv
-source ~/zephyr-venv/bin/activate
-pip install west
-west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.3.0 ~/zephyrproject
+. ~/zephyr-venv/bin/activate
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 ~/zephyrproject
 cd ~/zephyrproject
 west update
 west zephyr-export
-pip install -r zephyr/scripts/requirements.txt
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+For PowerShell on Windows:
+
+```powershell
+py -3 -m venv "$HOME\zephyr-venv"
+& "$HOME\zephyr-venv\Scripts\Activate.ps1"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "$HOME\zephyrproject"
+Set-Location "$HOME\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+For Command Prompt on Windows:
+
+```bat
+py -3 -m venv "%USERPROFILE%\zephyr-venv"
+call "%USERPROFILE%\zephyr-venv\Scripts\activate.bat"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "%USERPROFILE%\zephyrproject"
+cd /d "%USERPROFILE%\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
 ```
 
 Keep this environment active for the build and flash steps below.
@@ -1178,7 +1204,7 @@ The upstream board declares `sftool` as its default flash runner. Install [OpenS
 west flash
 ```
 
-If flashing fails, check the serial port selection, download mode, and the runner instructions in the [board documentation](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html).
+If flashing fails, check the serial port selection, download mode, and the runner instructions in the [board documentation](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html).
 
 ## Open the Serial Console
 
@@ -1190,7 +1216,7 @@ Hello World! sf32lb52_devkit_lcd
 
 ## Choose a Next Sample
 
-Use the upstream board documentation's supported-features table together with the [Zephyr sample browser](https://docs.zephyrproject.org/4.3.0/samples/index.html) to choose the next API or peripheral to evaluate. Confirm that the feature is listed for this board and that any required configuration is enabled before treating a sample as evidence of product readiness.
+Use the upstream board documentation's supported-features table together with the [Zephyr sample browser](https://docs.zephyrproject.org/4.5.0/samples/index.html) to choose the next API or peripheral to evaluate. Confirm that the feature is listed for this board and that any required configuration is enabled before treating a sample as evidence of product readiness.
 
 ## Troubleshooting
 
@@ -1200,8 +1226,8 @@ Use the upstream board documentation's supported-features table together with th
 
 | Symptom | Check |
 |:--------|:------|
-| `west boards` does not show the SF32 target | Confirm the workspace is initialized from upstream Zephyr v4.3.0 or later and that `west update` completed. |
-| Build fails before compiling | Confirm the Python environment is active, the Zephyr SDK is installed for ARM Cortex-M, and the v4.3.0 requirements were installed. |
+| `west boards` does not show the SF32 target | Confirm the workspace is initialized from upstream Zephyr v4.5.0 or later and that `west update` completed. |
+| Build fails before compiling | Confirm the Python environment is active, the Zephyr SDK is installed for ARM Cortex-M, and the v4.5.0 requirements were installed. |
 | Board builds but does not flash | Confirm `sftool` is installed and on `PATH`, the selected serial port is correct, and the board is in serial download mode. |
 | No serial output | Check `usart1`, `1000000` baud, the USB-to-UART connection, and whether another terminal has the port open. |
 | A peripheral sample fails | Check the board's supported-features table and sample configuration; do not assume every peripheral is enabled by the base board target. |
@@ -2005,7 +2031,7 @@ Two distinct paths exist depending on the audio approach:
 - **Classic Bluetooth audio** — A2DP for streaming, AVRCP for transport control, HFP for calls. Mature, broadly compatible with existing phones and headsets.
 - **LE Audio** — the [Basic Audio Profile (BAP)](https://www.bluetooth.com/specifications/specs/basic-audio-profile-1-0-2/) defines procedures for managing both unicast and broadcast LE Audio streams. The SDK includes broadcast source and sink examples, including a mixed broadcast-source-with-Classic-BT example for products that need to bridge both worlds during a transition period.
 
-Either path needs stable timing, buffering, and reliable sample movement, typically using DMA. Select SF32LB52x/56x/58x when their supported Bluetooth audio roles and SDK configurations meet the product requirements; SF32LB55x is BLE-only and cannot provide Classic Bluetooth audio. BLE-only does not mean the device has no local audio capability. For DMA and buffering, see [Audio Overview](../audio/overview.md) and [Bluetooth Processor Architecture](processor.md#bluetooth-audio-and-le-audio).
+Either path needs stable timing, buffering, and reliable sample movement, typically using DMA. Select SF32LB52x/56x/58x when their supported Bluetooth audio roles and SDK configurations meet the product requirements. The SiFli SDK's A2DP-sharing example lists the `eh-lb57x` board and demonstrates A2DP music sharing with HFP call relay; this does not establish support across every SF32LB57x part or role, so verify the exact SKU, role, and SDK configuration. SF32LB55x is BLE-only and cannot provide Classic Bluetooth audio. BLE-only does not mean the device has no local audio capability. For DMA and buffering, see [Audio Overview](../audio/overview.md) and [Bluetooth Processor Architecture](processor.md#bluetooth-audio-and-le-audio).
 
 ## Implementation Pattern for Sibles Services
 
@@ -2191,40 +2217,22 @@ The typical display-resource path is:
 
 <div align="center"><em>Diagram: Graphics Resource and Display Flow</em></div>
 
-```text
-Source images, fonts, and animations
-        │
-        ▼
-GraphicsTool converts supported resources to eZip or eZip-A
-        │
-        ▼
-Compressed assets in NOR Flash, PSRAM, NAND, or file storage
-        │
-        ▼
-eZip hardware decoder expands an asset when required
-        │
-        ▼
-LVGL or another UI framework + graphics/display driver
-        │
-        ├── CPU fallback rendering
-        │
-        └── ePicasso pixel acceleration
-        │
-        ▼
-Final rendered bitmap in a draw buffer or framebuffer
-        │
-        ├── Uncompressed display path
-        │
-        └── Optional: extDMA compresses it into TurboPixel
-                    │
-                    ▼
-             TurboPixel framebuffer in PSRAM
-        │
-        ▼
-Display controller transfers pixels to the panel
-        │
-        ▼
-SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
+```mermaid
+flowchart TD
+    A["Source images, fonts, and animations"] --> B["GraphicsTool converts supported resources to eZip or eZip-A"]
+    B --> C["Compressed assets in NOR Flash, PSRAM, NAND, or file storage"]
+    C --> D["eZip hardware decoder expands an asset when required"]
+    D --> E["LVGL or another UI framework + graphics/display driver"]
+    E --> F["CPU fallback rendering"]
+    E --> G["ePicasso pixel acceleration"]
+    F --> H["Final rendered bitmap in a draw buffer or framebuffer"]
+    G --> H
+    H --> I["Uncompressed display path"]
+    H --> J["Optional: extDMA compresses the bitmap into TurboPixel"]
+    J --> K["TurboPixel framebuffer in PSRAM"]
+    I --> L["Display controller transfers pixels to the panel"]
+    K --> L
+    L --> M["Panel interfaces: SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI"]
 ```
 
 The path is configurable rather than mandatory: a product may not use eZip, ePicasso, TurboPixel, or a full framebuffer. Availability and connections depend on the selected device, SDK, display interface, panel, and driver configuration. The current OpenSiFli LCDC header defines `LCDC_SUPPORTED_COMPRESSED_LAYER` only when `HAL_EXTDMA_MODULE_ENABLED` is enabled and the family guard permits it; SF32LB52x and SF32LB57x are excluded. A source comment also notes that the LCPU path is not enabled. The published SDK LCDC capability table marks compressed-layer decompression unsupported on SF32LB55x, so treat 55x as conditional rather than validated end-to-end support. Verify the exact SDK revision, core, build configuration, and target hardware; see [TurboPixel](turbopixel.md#availability-in-the-sf32-family).
@@ -2953,6 +2961,8 @@ These groups are not interchangeable at the board level. The battery-powered and
 
 [^1]: STAR-MC1 is a configurable Armv8-M Mainline embedded CPU IP from Arm China. In compatible SF32 devices, SiFli documents it as an Arm Cortex-M33 STAR-MC1 application processor. Its Cortex-M33-class software model helps existing Cortex-M33 firmware, middleware, RTOS ports, and tools carry forward, subject to normal device-specific integration work. Its CU, SP, and SE configurations vary chiefly in cache, TCM, XIPU, and TrustZone capability; Arm Custom Instructions/CDE and the coprocessor interface are optional capabilities that must be verified for the exact SF32 part. SiFli documentation may use ***Arm Cortex-M33 STAR-MC1*** or ***Arm Cortex-M33*** according to context.
 
+<div id="_1"></div>
+
 ## Applications
 
 **SF32LB52x is recommended for** Bluetooth-centric products where cost, integration, and battery life are the primary design considerations, including:
@@ -3000,7 +3010,11 @@ These groups are not interchangeable at the board level. The battery-powered and
 
 ---
 
+<div id="_2"></div>
+
 ## Features and Specs
+
+<div id="_3"></div>
 
 ### Compute and Memory
 
@@ -3009,6 +3023,8 @@ These groups are not interchangeable at the board level. The battery-powered and
 - 32 KB instruction cache + 16 KB data cache
 - 512 KB application SRAM plus 64 KB Bluetooth-controller SRAM
 - Variant-dependent co-packaged memory options ranging from 1MB QSPI-NOR to 16MB OPI-PSRAM
+
+<div id="_4"></div>
 
 ### Graphics and Audio
 
@@ -3020,6 +3036,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - 1x 24-bit Audio ADC with 99 dB SNR
 - 1x 24-bit Audio DAC with 109 dB SNR
 
+<div id="_5"></div>
+
 ### Wireless Connectivity
 
 - Dual-mode Bluetooth 5.3 (Classic Bluetooth and BLE)
@@ -3030,11 +3048,15 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - Dedicated Arm Cortex-M33 STAR-MC1 Bluetooth-controller core with 64 KB SRAM @ 24 MHz
 - Sleep current: 2 µA in the product brief; system-level standby current depends on the operating mode and board-level leakage
 
+<div id="_6"></div>
+
 ### Security
 
 - AES/HASH/CRC hardware accelerators
 - TRNG
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### Peripherals and I/Os
 
@@ -3050,6 +3072,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - RTC and watchdog timers
 - 44 or 45 GPIOs depending on variant family
 
+<div id="_7"></div>
+
 ### Power Supply
 
 - **Battery-powered group: SF32LB520/3/5/7** — powered directly from a single-cell Li-ion/Li-Po battery and intended for designs that use the integrated charging-oriented power architecture.
@@ -3059,6 +3083,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - **External-supply 1.8V group: SF32LB52D** — intended for special ultra-low-power 1.8V designs and not electrically interchangeable with the 3.3V parts.
 
 The battery-powered and external-supply groups are independent silicon configurations and are **not pin compatible** across those supply families.
+
+<div id="_8"></div>
 
 ## Family Variants
 
@@ -3092,7 +3118,7 @@ If you are migrating between memory tiers, the nearest content-correspondence ma
 
 </div>
 
-This table follows the key variants in SiFli's [Chip Model Guide](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html); it is not a complete ordering catalog. The linked external-supply datasheet also lists **SF32LB52HUD6** (1.8 V, QFN68L, 128 Mb PSRAM), while the hardware guide uses the additional suffix patterns `52AUx6` and `52D/F/HUx6`. The available sources do not provide a single, consistent variant table. Before design release, verify the ordering status, supply limits, memory interface, and I/O details of any such SKU in its current datasheet.
+This table follows the key variants in SiFli's [Chip Model Guide](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html); it is not a complete ordering catalog. The linked [DS5202-SF32LB52X Datasheet V0.2.6](https://downloads.sifli.com/docs/Datasheet/SF32LB52X/DS5202-SF32LB52X-Datasheet%20V0p2p6.pdf) mentions **SF32LB52HUD6** in its revision history (2025-03-12), but the current ordering list in Table 5-7 does not include it. That historical mention does not establish current orderability or verify the SKU's specifications. The hardware guide separately uses the suffix patterns `52AUx6` and `52D/F/HUx6`; verify the exact orderable part and its specifications against a current official source before design release.
 
 ## Integration Path
 
@@ -3101,7 +3127,7 @@ Use this sequence to turn an SF32LB52x shortlist into a validated design:
 1. **Prove the firmware path.** Start with the [SiFli SDK getting-started guide](../../getting-started/sifli/getting-started-sifli-sdk.md), then use the [SiFli SDK workflow](../../develop/platforms/sifli-sdk/overview.md) and [examples](../../develop/examples/index.md) to validate the required peripherals and Bluetooth behavior.
 2. **Choose the integration vehicle.** Evaluate [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) when a ready-integrated RF module suits the product; otherwise select the closest [SF32LB52 development board](../devkits/SF32LB52-DevKit-LCD.md) for early firmware and peripheral validation.
 3. **Design and review the hardware.** Use the local [hardware design guide](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) — including its [schematic](../../hardware/chip-guides/SF32LB52x_schematic_checklist.md) and [PCB layout](../../hardware/chip-guides/SF32LB52x_pcb_layout_checklist.md) checklists — before releasing the schematic or layout. Confirm the correct supply-family baseline: 520/3/5/7, 52B/E/G/J, or 52D.
-4. **Verify the authoritative source.** Check the applicable [datasheet](#development-resources) and SiFli [hardware design guide for 520/3/5/7] or [hardware design guide for 52B/D/E/G/J] against the exact orderable part and package.
+4. **Verify the authoritative source.** Check the applicable [datasheet](#development-resources) and SiFli [hardware design guide for 520/3/5/7][Hardware Design Guide (520/3/5/7)] or [hardware design guide for 52B/D/E/G/J][Hardware Design Guide (52B/D/E/G/J)] against the exact orderable part and package.
 
 <!-- uf-faq:start -->
 ## Frequently Asked Questions
@@ -3127,11 +3153,17 @@ Up to 16 MB of in-package PSRAM and up to 4 MB of in-package NOR Flash.
 Start with the [SF32LB52x hardware design guide](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) for schematic, power, clock/RF and PCB layout guidance, then use the schematic and layout checklists before releasing the board.
 <!-- uf-faq:end -->
 
+<div id="_9"></div>
+
 ## Related Products
+
+<div id="_10"></div>
 
 ### Module
 
 [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) combines the SF32LB525UC6, which has 8 MB of co-packaged OPI-PSRAM in the standard configuration, with an RF matching network. The module measures 27.9 × 18.0 × 3.1 mm and suits projects that need SF32LB52-class capability without taking on chip-level RF layout and validation.
+
+<div id="_11"></div>
 
 ### Development Kits
 
@@ -3139,6 +3171,8 @@ Start with the [SF32LB52x hardware design guide](../../hardware/chip-guides/SF32
 - [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) is the compact external-supply core board for quick firmware, GPIO, and low-power bring-up on 52B/52J-class parts.
 - [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) is the smallest 52-series dev board, useful when the target product is size constrained.
 - [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) is the low-power-oriented board path for battery-focused evaluation and compact product experiments.
+
+<div id="_12"></div>
 
 ### Reference Products
 
@@ -3155,6 +3189,8 @@ Summary: SF32LB55x: mainstream ultra-low-power MCU family for wearable and HMI p
 
 # SF32LB55x
 
+<div id="_1"></div>
+
 ## Overview
 
 The SF32LB55x series is a mainstream, ultra-low-power AIoT microcontroller family for BLE-connected products that need stronger display capabilities, more memory headroom, and a wider choice of packages than entry-level Bluetooth MCUs.
@@ -3168,6 +3204,8 @@ SiFli's official product brief and datasheet list BLE 5.2, the ePicasso 2.5D gra
 SiFli's chip model guide notes that SF32LB55x was defined before the later 52/56/58 families, so its suffixes do not fully follow the newer numbering convention. Use the complete orderable part number and package-specific capability tables when selecting a device; do not infer every capability from the suffix alone.
 
 [^1]: STAR-MC1 is a configurable Armv8-M Mainline embedded CPU IP from Arm China. In compatible SF32 devices, SiFli documents it as an Arm Cortex-M33 STAR-MC1 application processor. Its Cortex-M33-class software model helps existing Cortex-M33 firmware, middleware, RTOS ports, and tools carry forward, subject to normal device-specific integration work. Its CU, SP, and SE configurations vary chiefly in cache, TCM, XIPU, and TrustZone capability; Arm Custom Instructions/CDE and the coprocessor interface are optional capabilities that must be verified for the exact SF32 part. SiFli documentation may use ***Arm Cortex-M33 STAR-MC1*** or ***Arm Cortex-M33*** according to context.
+
+<div id="_2"></div>
 
 ## Applications
 
@@ -3189,6 +3227,8 @@ Choose SF32LB55x when the design needs one or more of these capabilities:
 - A user-programmable low-power processor
 - More GPIO or denser package options than SF32LB52x
 - External NOR, NAND, eMMC, QSPI-PSRAM, or OPI-PSRAM flexibility
+
+<div id="_3"></div>
 
 ## Development Resources
 
@@ -3224,7 +3264,11 @@ Choose SF32LB55x when the design needs one or more of these capabilities:
 
 ---
 
+<div id="_4"></div>
+
 ## Features and Specs
+
+<div id="_5"></div>
 
 ### Compute and Memory
 
@@ -3235,6 +3279,8 @@ Choose SF32LB55x when the design needs one or more of these capabilities:
 - 1,088 KB application SRAM, including 64 KB retention SRAM
 - 224 KB low-power SRAM, all retention SRAM
 - External memory interfaces for NOR, NAND, eMMC, QSPI-PSRAM, and OPI-PSRAM
+
+<div id="ai"></div>
 
 ### Graphics, Display, and AI
 
@@ -3248,6 +3294,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - Dual LCD controllers; always-on-display interfaces and dual-display capability depend on the selected model and package
 - Neural-network matrix accelerator for TinyML workloads, up to 1.92 GOPS and 5.73 TOPS/W
 
+<div id="_6"></div>
+
 ### Wireless Connectivity
 
 - Bluetooth Low Energy 5.2
@@ -3256,11 +3304,15 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - Maximum transmit power: 10 dBm
 - Receive peak current: 2.0 mA at 3.3 V
 
+<div id="_7"></div>
+
 ### Security
 
 - AES and CRC hardware accelerators
 - True random number generator (TRNG)
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### Peripherals and I/Os
 
@@ -3291,6 +3343,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - Peripheral Task Controller (PTC)
 - GPIO count varies by package; see the package table and source-discrepancy note below
 
+<div id="_8"></div>
+
 ### Power Supply and Package
 
 - Power supply range is variant-specific: 2.97 V to 3.63 V for SS6600A8; 1.71 V to 3.63 V for 551U4O5 and the selected BGA variants
@@ -3299,6 +3353,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - Sleep current with RTC wake-up: 600 nA
 - Sleep current with pin wake-up: 280 nA
 - Package options: QFN68L, BGA145, and BGA169
+
+<div id="_9"></div>
 
 ## Family Variants
 
@@ -3336,6 +3392,8 @@ The following current models listed in SiFli's chip model guide make the package
 
 For SF32LB557VD3A6, the current SiFli Chip Model Guide and Table 0-1 in the DS5501 V1.7.2 datasheet list 71 HCPU + 42 LCPU = 113 GPIOs. The datasheet's feature and package summaries, as well as the PB0001 V1.3 Product Brief, instead give BGA169 119 GPIOs (71 HCPU + 48 LCPU). The official sources therefore conflict, including within the datasheet. This page follows the model-specific row and current model guide (113). Before assigning pins or finalizing the design, verify GPIO availability against the selected package's ball map and confirm the orderable part with SiFli. Also verify the variant's supply and temperature ratings, full part number, and integrated-memory configuration against the [DS5501 V1.7.2 datasheet][Datasheet], [PB0001 V1.3 Product Brief][Product Brief], and [SiFli Chip Model Guide]. The BGA145 and BGA169 packages measure 7 × 7 × 0.94 mm with 0.5 mm pitch.
 
+<div id="_10"></div>
+
 ## Integration Path
 
 Use this sequence to turn an SF32LB55x shortlist into a validated design:
@@ -3349,7 +3407,7 @@ Use this sequence to turn an SF32LB55x shortlist into a validated design:
 ## Frequently Asked Questions
 
 **What are the key specifications of SF32LB55x?**
-SF32LB55x provides application processing (Cortex-M33 @240 MHz), a low-power core (Cortex-M33 @48 MHz, a user-programmable core), 1,312 KB of internal SRAM and Bluetooth Low Energy (BLE) only. Graphics: ePicasso 1.0. Package: QFN68L / BGA145 / BGA169 (7 × 7 mm (QFN68L)). USB 2.0 FS.
+SF32LB55x provides application processing (Cortex-M33 @240 MHz), a low-power core (Cortex-M33 @48 MHz, a user-programmable core), 1,312 KB of internal SRAM and Bluetooth Low Energy (BLE) only. Graphics: ePicasso 1.0. The family overview above calls the engine ePicasso 2.5D. The available sources do not explain how that label relates to ePicasso 1.0; do not infer equivalence or a generation change, and verify the graphics capabilities for the exact orderable part against current official documentation. Package: QFN68L / BGA145 / BGA169 (7 × 7 mm (QFN68L)). USB 2.0 FS.
 
 **Which display interfaces does SF32LB55x support?**
 SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix)) This is a family-wide list, not a guarantee for every order code or package; check the linked interface matrix.
@@ -3367,11 +3425,17 @@ SS6600A8 requires 2.97–3.63 V; SF32LB551U4O5 and the BGA variants listed on th
 Start with the [SF32LB55x hardware design guide](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) for schematic, power, clock/RF and PCB layout guidance, then use the schematic and layout checklists before releasing the board.
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## Related Products
+
+<div id="_12"></div>
 
 ### Development Kits
 
 Use the official hardware application note, reference schematics, and checklist as the starting point for package selection, power-tree definition, display-interface choice, memory planning, RF layout, and production-test planning.
+
+<div id="_13"></div>
 
 ### Reference Products
 
@@ -3385,6 +3449,8 @@ Summary: SF32LB56x: advanced ultra-low-power dual-mode Bluetooth MCU family for 
 
 # SF32LB56x
 
+<div id="_1"></div>
+
 ## Overview
 
 The SF32LB56x series is an advanced ultra-low-power AIoT microcontroller family for products that need dual-mode Bluetooth, richer graphics, integrated audio, external memory, and more display/storage flexibility than the lower-tier SF32LB devices.
@@ -3396,6 +3462,8 @@ SiFli's official product brief and datasheet position SF32LB56x as a higher-inte
 SiFli's chip model guide also matters here: the SF32LB56x family supports different display-interface combinations across its packages, so exact part number and package selection should be treated as a first-order architecture choice, not a late PCB detail.
 
 [^1]: STAR-MC1 is a configurable Armv8-M Mainline embedded CPU IP from Arm China. In compatible SF32 devices, SiFli documents it as an Arm Cortex-M33 STAR-MC1 application processor. Its Cortex-M33-class software model helps existing Cortex-M33 firmware, middleware, RTOS ports, and tools carry forward, subject to normal device-specific integration work. Its CU, SP, and SE configurations vary chiefly in cache, TCM, XIPU, and TrustZone capability; Arm Custom Instructions/CDE and the coprocessor interface are optional capabilities that must be verified for the exact SF32 part. SiFli documentation may use ***Arm Cortex-M33 STAR-MC1*** or ***Arm Cortex-M33*** according to context.
+
+<div id="_2"></div>
 
 ## Applications
 
@@ -3419,6 +3487,8 @@ Choose SF32LB56x when the design needs one or more of these capabilities:
 - External Wi-Fi over SDIO; external storage over SD/SDIO or eMMC
 - Higher GPIO count through the WBBGA175 option
 - More headroom for concurrent TinyML, audio, and UI workloads
+
+<div id="_3"></div>
 
 ## Development Resources
 
@@ -3458,7 +3528,11 @@ Choose SF32LB56x when the design needs one or more of these capabilities:
 
 ---
 
+<div id="_4"></div>
+
 ## Features and Specs
+
+<div id="_5"></div>
 
 ### Compute and Memory
 
@@ -3470,6 +3544,8 @@ Choose SF32LB56x when the design needs one or more of these capabilities:
 - LCPU memory system: 16 KB I-cache + 8 KB D-cache, 160 KB retention SRAM
 - 512 KB or 1 MB in-package QSPI-NOR options
 - External memory interfaces for QSPI-NOR, SPI-NAND, QPI/OPI-PSRAM, SD/SDIO, and eMMC
+
+<div id="ai"></div>
 
 ### Graphics, Display, and AI
 
@@ -3484,6 +3560,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - TurboPixel: extDMA fixed-ratio lossy final-framebuffer compression and display-controller decompression, reducing PSRAM bandwidth and capacity
 - Neural-network matrix accelerator for TinyML workloads, up to 1.92 GOPS and above 10 TOPS/W
 
+<div id="_6"></div>
+
 ### Audio and Wireless Connectivity
 
 - Dual-mode Bluetooth 5.3 with BLE Audio support
@@ -3494,11 +3572,17 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - 1 HiFi 24-bit audio ADC with 99 dB SNR
 - 2 PDM interfaces and 1 I2S interface
 
+**DAC SNR source discrepancy:** [PB0056 V1.1](https://downloads.sifli.com/silicon/PB0056-SF32LB56x-Product%20Brief%20V1p1.pdf) and [UM5601 V1.0.2](https://downloads.sifli.com/user%20manual/UM5601-SF32LB56x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V1p0p2.pdf) state 108 dB, while [DS5601 V1.9.2](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-Datasheet%20V1p9p2.pdf) states 109 dB. The newer linked PB0056 V1.2, DS5601 V1.9.3, and UM5601 V1.0.5 have not been reconciled here, so the governing value remains unresolved; verify it against the current documentation for the exact part before relying on it.
+
+<div id="_7"></div>
+
 ### Security
 
 - AES, HASH, and CRC hardware accelerators
 - True random number generator (TRNG)
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### Peripherals and I/Os
 
@@ -3515,6 +3599,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - Peripheral Task Controller (PTC)
 - Up to 120 GPIOs, depending on package
 
+<div id="_8"></div>
+
 ### Power Supply and Package
 
 - Power supply range: 1.71 V to 3.63 V
@@ -3523,6 +3609,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - Sleep current with RTC wake-up: 600 nA
 - Sleep current with pin wake-up: 300 nA
 - Package options: QFN68L and WBBGA175
+
+<div id="_9"></div>
 
 ## Family Variants
 
@@ -3546,6 +3634,8 @@ The listed variants have a documented supply range of 1.71 V to 3.63 V and an op
 | SF32LB567VND36 | WBBGA175 | 79 / 41 | 16 MB OPI-PSRAM + 1 MB QSPI-NOR Flash | DPI / QSPI / 8080 / JDI | High-I/O designs that prioritize larger single-pool PSRAM and advanced display routing without using the module’s standard chip choice |
 
 </div>
+
+<div id="_10"></div>
 
 ## Integration Path
 
@@ -3580,15 +3670,23 @@ Up to 16 MB of in-package PSRAM and up to 1 MB of in-package NOR Flash.
 Start with the [SF32LB56x hardware design guide](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) for schematic, power, clock/RF and PCB layout guidance, then use the schematic and layout checklists before releasing the board.
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## Related Products
+
+<div id="_12"></div>
 
 ### Module
 
 [SF32LB56-MOD](../modules/SF32LB56-MOD.md) packages the SF32LB566VCB36 chip, memory, RF design, and antenna options into a ready-to-integrate module. It is a strong choice when the project wants SF32LB56x capability while reducing RF layout, antenna matching, crystal placement, and high-speed memory integration risk.
 
+<div id="_13"></div>
+
 ### Development Kits
 
 [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) is a practical starting point for firmware bring-up, display validation, audio and storage testing, RF checks, and power profiling before committing to a chip-down or module-based design.
+
+<div id="_14"></div>
 
 ### Reference Products
 
@@ -3853,6 +3951,8 @@ Summary: SF32LB58x: flagship-tier AIoT MCU family for connected products with su
 
 # SF32LB58x
 
+<div id="_1"></div>
+
 ## Overview
 
 The SF32LB58x series occupies the flagship tier of the SF32LB5x family. It targets battery-powered AIoT products that need advanced graphics, large memory capacity, dual-mode Bluetooth, rich audio/display I/O, and high GPIO density without moving to a larger application-processor platform.
@@ -3862,6 +3962,8 @@ SF32LB58x uses a heterogeneous three-core Arm Cortex-M33 STAR-MC1[^1] architectu
 SiFli documents 3,744 KB of on-chip SRAM and SKU-dependent combinations of co-packaged NOR Flash and OPI-/HPI-PSRAM. The family also provides display support including MIPI DSI, vector-graphics acceleration, USB 2.0 High-Speed, and a BGA package with a high I/O count. Evaluate SF32LB58x when a design needs a high-resolution UI, substantial graphics assets, external Wi-Fi through SDIO, or the compute and memory resources for edge-AI or sensor-fusion workloads.
 
 [^1]: STAR-MC1 is a configurable Armv8-M Mainline embedded CPU IP from Arm China. In compatible SF32 devices, SiFli documents it as an Arm Cortex-M33 STAR-MC1 application processor. Its Cortex-M33-class software model helps existing Cortex-M33 firmware, middleware, RTOS ports, and tools carry forward, subject to normal device-specific integration work. Its CU, SP, and SE configurations vary chiefly in cache, TCM, XIPU, and TrustZone capability; Arm Custom Instructions/CDE and the coprocessor interface are optional capabilities that must be verified for the exact SF32 part. SiFli documentation may use ***Arm Cortex-M33 STAR-MC1*** or ***Arm Cortex-M33*** according to context.
+
+<div id="_2"></div>
 
 ## Applications
 
@@ -3883,6 +3985,8 @@ Choose SF32LB58x when the design needs one or more of these capabilities:
 - External Wi-Fi over SDIO
 - Large framebuffer, audio, graphics, or AI-model memory
 - High GPIO count or multiple high-speed external interfaces
+
+<div id="_3"></div>
 
 ## Development Resources
 
@@ -3910,7 +4014,11 @@ Choose SF32LB58x when the design needs one or more of these capabilities:
 
 ---
 
+<div id="_4"></div>
+
 ## Features and Specs
+
+<div id="_5"></div>
 
 ### Compute and Memory
 
@@ -3919,6 +4027,8 @@ Choose SF32LB58x when the design needs one or more of these capabilities:
 - Co-packaged NOR Flash options from 1 MB to 8 MB total across the package, depending on SKU
 - Co-packaged OPI-PSRAM and HPI-PSRAM options; HPI-PSRAM is available up to 2 × 32 MB, depending on SKU
 - External NOR or SPI NAND Flash through MPI3/MPI4; SD NAND, eMMC, SD cards, or external Wi-Fi through SDIO. Available combinations depend on interface selection and pin assignment.
+
+<div id="ai"></div>
 
 ### Graphics, Display, and AI
 
@@ -3934,6 +4044,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - SPI, DSPI, QSPI (including SPI e-paper), MCU8080, JDI, RGB/DPI (RGB888 or RGB565), and MIPI DSI display interfaces
 - Supports two displays with different content, using MIPI DSI together with SPI, DSPI, or QSPI
 - Suitable for local edge-AI, machine-learning, and sensor-fusion workloads
+
+<div id="_6"></div>
 
 ### Audio and Wireless Connectivity
 
@@ -3972,11 +4084,15 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - RTC, watchdog, GPIO wake, PBR wake, PWM, I2C, SPI, and general-purpose analog interfaces
 - BGA256 package for high-density designs
 
+<div id="_7"></div>
+
 ### Power Supply and Package
 
 - Power-supply range: 1.71 V to 3.63 V
 - BGA256 package, 6.5 × 8.5 × 0.94 mm, 0.4 mm pitch
 - HDI PCB required; 6HDI-2 stack-up is recommended for production designs
+
+<div id="_8"></div>
 
 ## Family Variants
 
@@ -4006,6 +4122,8 @@ When selecting a variant, check these items first:
 - External storage and Wi-Fi interface requirements
 - PCB manufacturing capability for BGA256, 0.4mm-pitch HDI layout
 
+<div id="_9"></div>
+
 ## Integration Path
 
 Use this sequence to turn an SF32LB58x shortlist into a validated design:
@@ -4019,7 +4137,7 @@ Use this sequence to turn an SF32LB58x shortlist into a validated design:
 ## Frequently Asked Questions
 
 **What are the key specifications of SF32LB58x?**
-SF32LB58x provides application processing (2× Cortex-M33 @240 MHz), a low-power core (Cortex-M33 @48/96 MHz, a user-programmable core), 3.7 MB of internal SRAM and dual-mode Bluetooth (BT Classic + BLE). Graphics: ePicasso 2.0 + Vivante GCNanoUltraV (vector). Package: BGA256 (8.5 × 6.5 mm). USB 2.0 HS.
+SF32LB58x provides application processing (2× Cortex-M33 @240 MHz), a low-power core (user-programmable Cortex-M33 adjustable up to 96 MHz; a separate 48 MHz figure is a CoreMark power-measurement point, not established here as a second specified operating rate), 3.7 MB of internal SRAM and dual-mode Bluetooth (BT Classic + BLE). Graphics: ePicasso 2.0 + Vivante GCNanoUltraV (vector). Package: BGA256 (8.5 × 6.5 mm). USB 2.0 HS.
 
 **Which display interfaces does SF32LB58x support?**
 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -4037,15 +4155,23 @@ Up to 32 MB + 32 MB of in-package PSRAM and up to 8 MB of in-package NOR Flash.
 Start with the [SF32LB58x hardware design guide](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md) for schematic, power, clock/RF and PCB layout guidance, then use the schematic and layout checklists before releasing the board.
 <!-- uf-faq:end -->
 
+<div id="_10"></div>
+
 ## Related Products
+
+<div id="_11"></div>
 
 ### Module
 
 [SF32LB58-MOD](../modules/SF32LB58-MOD.md) packages the SF32LB586VDD36 chip, its RF matching network, and in-package HPI-PSRAM plus storage options into a ready-to-integrate module. Use it when the project needs 58-series capability but should reduce RF, BGA, and memory-layout risk early in hardware development.
 
+<div id="_12"></div>
+
 ### Development Kits
 
 [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) is the starting point for power-tree, display, storage, audio, RF, USB, and SDIO design decisions.
+
+<div id="_13"></div>
 
 ### Reference Products
 
@@ -4254,6 +4380,8 @@ The board exposes two 24-pin edge headers. The first side focuses on general GPI
 | 24 | PA_32 | **PA32**, UART, I2C, GPTIM, GPADC4 | PD |
 
 </div>
+
+The board summary lists six GPADC channels, while this pin-function map lists GPADC0–GPADC6 on PA28–PA34. The SiFli SDK maps ADC CH7 to VBAT. These references do not establish seven simultaneously usable external board inputs, so the board-level count remains unresolved; confirm the exact board revision, pin mux, and channel configuration before connecting external analog sources. See the [SiFli ADC guide](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/adc.html).
 
 ### LCD, Audio, and Debug Header
 
@@ -4569,7 +4697,13 @@ The original SiFli board note lists `TFT-H043A28WQISTKN22_V0-3` as a supported d
 | Module Pin | Signal | Board Function |
 | :--- | :--- | :--- |
 | PA44 | VBUS_DET | Charger insertion detection |
-| PA43..PA37 | DB7..DB2 | MCU/8080 LCD data |
+| PA43 | DB7 | MCU/8080 LCD data |
+| PA42 | DB6 | MCU/8080 LCD data |
+| PA41 | DB5 | MCU/8080 LCD data |
+| PA40 | DB4 | MCU/8080 LCD data |
+| PA39 | DB3 | MCU/8080 LCD data |
+| PA38 | GPIO | General-purpose I/O |
+| PA37 | DB2 | MCU/8080 LCD data |
 | PA08..PA07 | DB1..DB0 / QSPI D3..D2 | LCD data |
 | PA06 | DC / QSPI D1 | LCD data/command |
 | PA05 | RD / QSPI D0 | LCD data |
@@ -4581,7 +4715,7 @@ The original SiFli board note lists `TFT-H043A28WQISTKN22_V0-3` as a supported d
 | PA33 / PA30 | I2C SDA / SCL | Touch panel |
 | PA31 / PA09 | Touch INT / RST | Touch panel |
 | PA24, PA25, PA28, PA29 | SPI1 | TF-card interface |
-| PA26 | Card detect / LED | Shared function |
+| PA26 | SD-card detect / external Flash2 CS / GPIO LED | Shared on V1.2.0; confirm exact revision |
 | PA20 / PA27 | UART RX/TX | User UART |
 | PA18 / PA19 | Debug UART RX/TX | Download and software debug |
 | PA10 | AU_PA_EN | Audio amplifier enable |
@@ -5073,6 +5207,12 @@ Optional hardware:
 - Li-ion battery with a capacity greater than 450 mAh
 - Second USB cable when UART debug and native USB testing are needed at the same time
 
+<div id="_1"></div>
+<div id="board-einrichtung-und-startmodi"></div>
+<div id="configuracao-da-placa-e-modos-de-inicializacao"></div>
+<div id="configuracion-y-modos-de-arranque-de-la-placa"></div>
+<div id="configuration-de-la-carte-et-modes-de-demarrage"></div>
+
 ### Board Setup and Boot Modes
 
 Connect the host to the board's USB Type-C UART port, then open SifliTrace and select the correct COM port.
@@ -5154,7 +5294,7 @@ The 30-pin header exposes power, USB, sensor, display-adjacent, storage, vibrati
 
 The board uses an AMOLED display path and exposes a 22-pin QSPI FPC signal set. SiFli's V1.0.0 table marks pins 5-10 as NC; the table below includes all 22 positions and identifies those pins explicitly.
 
-The screen-board annotations distinguish a 22-pin FPC connector to the LCD module from a separate 24-pin board-to-board (B2B) connector to the core board. Confirm both interfaces against the exact assembly revision.
+**Source-interface discrepancy — verify before selecting a connector:** SiFli's guide prose says the dedicated display interface is brought out through a 22-pin FPC and a 40-pin header, while the screen-board figure labels a 22-pin FPC to the LCD module and a 24-pin B2B connector to the core board. The source does not explain how the 40-pin header relates to the 24-pin B2B connector. Do not select or mate connectors from either count alone; verify the schematic/BOM for the exact assembly revision.
 
 <div align="center"><em>22-Pin QSPI Display and Touch FPC Signal Map</em></div>
 
@@ -5917,7 +6057,11 @@ Source: https://uForge.io/sf32-products/family/SF32_family/
 
 Summary: SF32LB5xx family overview: heterogeneous Cortex-M33 cores, Bluetooth, ePicasso graphics, and edge AI, with a comparison table and quick chip-selection guide.
 
+<div id="sf32"></div>
+
 # SF32 Family
+
+<div id="_1"></div>
 
 ## Introduction
 
@@ -5950,6 +6094,8 @@ The **LB** (Low-Power Bluetooth) series is the first SF32 product line. Addition
     [Plan production work :material-arrow-right:](../../hardware/design-for-production.md){ .uf-hw-link-green }
 
 </div>
+
+<div id="_2"></div>
 
 ## Key Features
 
@@ -6300,7 +6446,7 @@ Start with these critical selection factors:
 - **Power supply:** Battery or regulated supply, operating voltage range and I/O levels.
 - **Audio functions:** ADC/DAC, I2S and PDM requirements, including microphone channels.
 
-Compare exact parts rather than choosing by family number alone: a higher number is not automatically the best fit. Every one of these factors is a filter in the [Product selector](../product-selector.md): set them there to shortlist exact parts.
+Compare exact parts rather than choosing by family number alone: a higher number is not automatically the best fit. The [Product selector](../product-selector.md) provides filters for package, power, display, GPIO, audio, and other criteria, but not for Bluetooth mode. Use the available filters to shortlist candidates, then confirm BLE/Classic support on the exact part page.
 
 [Family comparison](SF32_family.md) · [Product selector](../product-selector.md)
 
@@ -6448,6 +6594,8 @@ For a complete worked path, choose the closest [Reference Design](../../hardware
 Source: https://uForge.io/sf32-products/
 
 Summary: Start here to explore SF32 hardware, plan a product, choose a chip, module, or development board, reuse a reference design, and prepare a production design.
+
+<div id="sf32"></div>
 
 # SF32 Products
 

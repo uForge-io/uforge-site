@@ -12,7 +12,7 @@ Les projets sont des références ancrées dans des usages concrets, que vous po
 
 ## À quoi servent les projets { #what-projects-are-for }
 
-Chaque projet doit réunir les qualités suivantes :
+Chaque projet devrait réunir les qualités suivantes :
 
 - **Être ancré dans un usage.** Chaque projet part d’un comportement produit ou d’un cas d’usage reconnaissable, pas d’une démonstration abstraite.
 - **Être assez complet pour être suivi.** Il relie le matériel choisi, la base logicielle, ses dépendances, les étapes d’intégration, les preuves de validation et les pistes d’adaptation. Vous pouvez ainsi parcourir une part importante du cycle de développement.

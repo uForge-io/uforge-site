@@ -56,9 +56,9 @@ Un producto SF32LB55x típico incluye la MCU, el árbol de alimentación, los cr
 
 3. **¿Por qué puede bloquearse el chip al soldar la batería y cómo evitarlo?** Una mala conexión a tierra del soldador puede provocar una sobretensión transitoria. Añada protección contra sobretensiones y ESD en la interfaz de batería y conecte correctamente a tierra el soldador.
 
-4. **¿Por qué un botón de activación no despierta la MCU en Hibernate?** Solo las seis entradas de activación de la LCPU, GPIO43–GPIO48, pueden despertar la MCU desde Hibernate; GPIO0–GPIO3 de la HCPU no sirven para ello.
+4. **¿Por qué un botón de activación no despierta la MCU en Hibernate?** Solo las seis entradas de activación de la LCPU, GPIO43–GPIO48, pueden despertar la MCU desde Hibernate; GPIO0–GPIO3 de la HCPU no sirven para ello. Son identificadores lógicos GPIO. En BGA125/145/169, HCPU GPIO0–GPIO3 corresponden a los pads PA80/PA79/PA78/PA77 y LCPU GPIO43–GPIO48 a PB43–PB48; QFN68 utiliza los nombres GPIO indicados.
 
-5. **¿Por qué un sensor G o de frecuencia cardíaca puede consumir demasiado o funcionar mal durante la depuración de bajo consumo?** Su firmware se ejecuta en la LCPU, por lo que las señales I2C, SPI, de control y de interrupción deben usar interfaces de la LCPU. Asignarlas a la HCPU puede aumentar el consumo o provocar fallos.
+5. **¿Por qué un acelerómetro o un sensor de frecuencia cardíaca puede consumir demasiado o funcionar mal durante la depuración de bajo consumo?** Su firmware se ejecuta en la LCPU, por lo que las señales I2C, SPI, de control y de interrupción deben usar interfaces de la LCPU. Asignarlas a la HCPU puede aumentar el consumo o provocar fallos.
 
 6. **¿Por qué sigue elevado el consumo del sensor aunque todas las señales estén conectadas a interfaces de la LCPU?** Apagar solo la alimentación del sensor no basta si siguen activas las alimentaciones de pull-up de I2C o de interrupción. Apague también esas alimentaciones de pull-up.
 
@@ -82,7 +82,7 @@ Un producto SF32LB55x típico incluye la MCU, el árbol de alimentación, los cr
 
 16. **¿Por qué puede fallar la grabación con MODE alto y cómo tratar una interrupción de sensor en GPIO46?** En modo de descarga, GPIO46 pasa a ser UART3_RX y puede interferir con la grabación. Cambie la interrupción del sensor a GPIO43, GPIO44, GPIO47 o GPIO48. Si hacen falta más entradas de activación de la LCPU, conecte un botón externo a GPIO45 o GPIO46 mediante una resistencia de 0 Ω.
 
-17. **¿Qué hacer si los algoritmos del sensor G y de frecuencia cardíaca superan la memoria disponible?** Compruebe si la memoria asignada a la LCPU es suficiente. Si no lo es, añada Flash NOR externa en QSPI4.
+17. **¿Qué hacer si los algoritmos del acelerómetro y de frecuencia cardíaca superan la memoria disponible?** Compruebe si la memoria asignada a la LCPU es suficiente. Si no lo es, añada Flash NOR externa en QSPI4.
 
 ## 10. Historial de revisiones { #10-revision-history }
 

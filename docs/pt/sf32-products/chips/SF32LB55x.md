@@ -8,6 +8,8 @@ tags:
 
 # SF32LB55x { #sf32lb55x }
 
+<div id="_1"></div>
+
 ## Visão geral { #overview }
 
 A série SF32LB55x é uma família de microcontroladores AIoT de categoria intermediária e consumo ultrabaixo, voltada a produtos conectados por BLE que precisam de melhores recursos de exibição, mais memória disponível e maior flexibilidade de encapsulamento que os MCUs Bluetooth de entrada.
@@ -21,6 +23,8 @@ Segundo o resumo de produto e o datasheet oficiais da SiFli, a família combina 
 O guia de modelos de chips da SiFli também informa que o SF32LB55x foi definido antes das famílias 52/56/58 mais recentes; por isso, a nomenclatura dos sufixos não segue integralmente a convenção posterior. Use o código completo do componente e as tabelas de recursos específicas de cada encapsulamento ao selecionar um dispositivo, sem tentar deduzir todas as características apenas pelo sufixo.
 
 [^1]: STAR-MC1 é um IP configurável de CPU embarcada Armv8-M Mainline da Arm China. Em dispositivos SF32 compatíveis, a SiFli o documenta como um processador de aplicação Arm Cortex-M33 STAR-MC1. Seu modelo de software da classe Cortex-M33 facilita reaproveitar firmware, middleware, adaptações de RTOS e ferramentas já existentes para Cortex-M33; ainda assim, cada componente exige o trabalho habitual de integração específico do dispositivo. As configurações CU, SP e SE diferem principalmente em cache, TCM, XIPU e TrustZone; as instruções personalizadas Arm/CDE e a interface de coprocessador são recursos opcionais que devem ser verificados para o componente SF32 exato. A documentação da SiFli pode usar ***Arm Cortex-M33 STAR-MC1*** ou ***Arm Cortex-M33***, conforme o contexto.
+
+<div id="_2"></div>
 
 ## Aplicações { #applications }
 
@@ -42,6 +46,8 @@ Considere o SF32LB55x quando o projeto precisar de um ou mais dos seguintes recu
 - Um processador de baixo consumo programável pelo usuário
 - Mais GPIOs ou opções de encapsulamento com maior densidade de E/S que o SF32LB52x
 - Flexibilidade para usar memória externa NOR, NAND, eMMC, QSPI-PSRAM ou OPI-PSRAM
+
+<div id="_3"></div>
 
 ## Recursos de desenvolvimento { #development-resources }
 
@@ -77,7 +83,11 @@ Considere o SF32LB55x quando o projeto precisar de um ou mais dos seguintes recu
 
 ---
 
+<div id="_4"></div>
+
 ## Características e especificações { #features-and-specs }
+
+<div id="_5"></div>
 
 ### Processamento e memória { #compute-and-memory }
 
@@ -88,6 +98,8 @@ Considere o SF32LB55x quando o projeto precisar de um ou mais dos seguintes recu
 - 1.088 KB de SRAM de aplicação, incluindo 64 KB de SRAM de retenção
 - 224 KB de SRAM de baixo consumo, toda ela de retenção
 - Interfaces de memória externa para NOR, NAND, eMMC, QSPI-PSRAM e OPI-PSRAM
+
+<div id="ai"></div>
 
 ### Gráficos, display e IA { #graphics-display-and-ai }
 
@@ -101,6 +113,8 @@ Resolução máxima e interfaces de painel: consulte [Matriz de interfaces por d
 - Dois controladores LCD; as interfaces para display sempre ativo e o uso de dois displays dependem do modelo e do encapsulamento
 - Acelerador matricial de redes neurais para cargas TinyML, de até 1,92 GOPS e 5,73 TOPS/W
 
+<div id="_6"></div>
+
 ### Conectividade sem fio { #wireless-connectivity }
 
 - Bluetooth Low Energy 5.2
@@ -109,11 +123,15 @@ Resolução máxima e interfaces de painel: consulte [Matriz de interfaces por d
 - Potência máxima de transmissão: 10 dBm
 - Corrente de pico na recepção: 2,0 mA a 3,3 V
 
+<div id="_7"></div>
+
 ### Segurança { #security }
 
 - Aceleradores de hardware AES e CRC
 - Gerador de números aleatórios verdadeiros (TRNG)
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### Periféricos e E/S { #peripherals-and-ios }
 
@@ -144,6 +162,8 @@ Resolução máxima e interfaces de painel: consulte [Matriz de interfaces por d
 - Controlador de tarefas periféricas (PTC)
 - A quantidade de GPIOs varia conforme o encapsulamento; consulte a tabela de encapsulamentos e a nota sobre divergências entre fontes
 
+<div id="_8"></div>
+
 ### Alimentação e encapsulamento { #power-supply-and-package }
 
 - A faixa de alimentação depende da variante: 2,97–3,63 V para SS6600A8; 1,71–3,63 V para 551U4O5 e as variantes BGA selecionadas
@@ -152,6 +172,8 @@ Resolução máxima e interfaces de painel: consulte [Matriz de interfaces por d
 - Corrente em modo de suspensão com despertar pelo RTC: 600 nA
 - Corrente em modo de suspensão com despertar por pino: 280 nA
 - Opções de encapsulamento: QFN68L, BGA145 e BGA169
+
+<div id="_9"></div>
 
 ## Variantes da família { #family-variants }
 
@@ -190,6 +212,8 @@ Os modelos atuais representativos listados no guia de modelos de chips da SiFli 
 Para o SF32LB557VD3A6, o guia atual de modelos de chips da SiFli e a tabela 0-1 do datasheet DS5501 V1.7.2 indicam 113 GPIOs (71 HCPU + 42 LCPU). Já o resumo de características e o resumo de encapsulamentos desse mesmo datasheet, assim como o resumo de produto PB0001 V1.3, indicam 119 GPIOs para o BGA169 (71 HCPU + 48 LCPU). Portanto, as fontes oficiais divergem, inclusive dentro da própria DS5501. Esta página segue a linha específica do modelo e o guia atual (113). Antes de alocar pinos ou fechar o projeto, confira os GPIOs disponíveis no mapa de esferas do encapsulamento escolhido e confirme com a SiFli o código realmente comercializado. Confira também a alimentação, a faixa de temperatura, o código completo e a memória integrada no [datasheet DS5501 V1.7.2][Datasheet], no [resumo do produto PB0001 V1.3][Product Brief] e no [guia de modelos de chips da SiFli][SiFli Chip Model Guide]. Os encapsulamentos BGA145 e BGA169 medem 7 × 7 × 0,94 mm, com passo de 0,5 mm.
 
 
+<div id="_10"></div>
+
 ## Caminho de integração { #integration-path }
 
 Siga esta sequência para passar de uma pré-seleção de componentes SF32LB55x a um projeto validado:
@@ -203,7 +227,7 @@ Siga esta sequência para passar de uma pré-seleção de componentes SF32LB55x 
 ## Perguntas frequentes { #frequently-asked-questions }
 
 **Quais são as principais especificações do SF32LB55x?**
-O SF32LB55x oferece processamento de aplicações (Cortex-M33 @240 MHz) e um núcleo de baixo consumo (Cortex-M33 @48 MHz, programável pelo usuário). Integra 1.312 KB de SRAM interna e oferece apenas Bluetooth Low Energy (BLE). Gráficos: ePicasso 1.0. Encapsulamento: QFN68L / BGA145 / BGA169 (7 × 7 mm (QFN68L)). USB 2.0 FS.
+O SF32LB55x oferece processamento de aplicações (Cortex-M33 @240 MHz) e um núcleo de baixo consumo (Cortex-M33 @48 MHz, programável pelo usuário). Integra 1.312 KB de SRAM interna e oferece apenas Bluetooth Low Energy (BLE). Gráficos: ePicasso 1.0. Na apresentação da família acima, o mecanismo é identificado como ePicasso 2.5D. As fontes disponíveis não explicam a relação entre essas denominações; não presuma equivalência nem uma mudança de geração e confirme os recursos gráficos do código de pedido exato na documentação oficial atualizada. Encapsulamento: QFN68L / BGA145 / BGA169 (7 × 7 mm (QFN68L)). USB 2.0 FS.
 
 **Quais interfaces de display o SF32LB55x suporta?**
 SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Matriz de interfaces por dispositivo](../../learn/graphics/display-controller.md#per-device-interface-matrix)) Esta lista abrange toda a família, não garante todas as interfaces em cada código de componente ou encapsulamento; confira a matriz de interfaces vinculada.
@@ -221,11 +245,17 @@ SS6600A8 requer 2,97–3,63 V; SF32LB551U4O5 e as variantes BGA listadas nesta p
 Comece pelo [guia de projeto de hardware do SF32LB55x](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) para esquemático, alimentação, clock/RF e layout de PCB, e use os checklists de esquemático e layout antes de liberar a placa.
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## Produtos relacionados { #related-products }
+
+<div id="_12"></div>
 
 ### Kits de desenvolvimento { #development-kits }
 
 Use a nota oficial de aplicação de hardware, os esquemáticos de referência e o checklist como ponto de partida para selecionar o encapsulamento, definir a arquitetura de alimentação, escolher a interface de display, planejar a memória e o layout de RF e preparar os testes de produção.
+
+<div id="_13"></div>
 
 ### Produtos de referência { #reference-products }
 

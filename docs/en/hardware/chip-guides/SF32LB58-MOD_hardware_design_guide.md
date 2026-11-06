@@ -9,7 +9,11 @@ tags:
     - Module
 ---
 
+<div id="sf32lb58-mod"></div>
+
 # SF32LB58-MOD Hardware Design Guide
+
+<div id="1"></div>
 
 ## 1. Overview
 
@@ -25,7 +29,11 @@ For the underlying chip architecture (cores, graphics, memory subsystem, and per
 !!! note "Regulatory marking scope"
     The supplied labels for SF32LB58-MOD-N16R32N1 and SF32LB58-MOD-A128R32N1 show FCC, IC, CMIIT ID and HVIN identifiers and a CE mark. See the [module marking summary](../../sf32-products/modules/SF32LB58-MOD.md#regulatory-markings). Confirm approval documents and antenna/integration conditions for the exact revision; do not assume other variants or the finished product are covered.
 
+<div id="2"></div>
+
 ## 2. Quick Design Summary
+
+<div id="21"></div>
 
 ### 2.1 Module Variants
 
@@ -43,6 +51,8 @@ For the underlying chip architecture (cores, graphics, memory subsystem, and per
 
 !!! note "Availability and Customization"
     **SF32LB58-MOD-E4R32N1 is currently unavailable because of memory-chip supply shortages.** Other module configurations are possible. For customization requests, [contact μForge.io](../../about/contact.md).
+
+<div id="22"></div>
 
 ### 2.2 Key Specifications
 
@@ -66,6 +76,8 @@ For the underlying chip architecture (cores, graphics, memory subsystem, and per
 
 </div>
 
+<div id="3"></div>
+
 ## 3. Functional Block Diagram
 
 The module integrates the SF32LB586VDD36 chip, a 48MHz crystal, an optional 32.768kHz crystal, and, depending on SKU, in-package HPI-PSRAM, QSPI-NOR/NAND Flash, or eMMC, alongside the RF matching network and antenna feed.
@@ -73,14 +85,20 @@ The module integrates the SF32LB586VDD36 chip, a 48MHz crystal, an optional 32.7
 !!! info "Figure 3-1: Functional Block Diagram"
     See Figure 2-1 in the official datasheet for this diagram — not reproduced in this guide.
 
+<div id="4"></div>
+
 ## 4. Pin Definition
+
+<div id="41"></div>
 
 ### 4.1 Pinout Diagram
 
 The 138 numbered contacts comprise 72 castellated perimeter positions, 60 inner pads, and six center pads; the top-view drawing shows pins 1–138.
 
-!!! info "Figure 4-1: Pinout Diagram, Top View"
+!!! info "Figure 4.1-1: Pinout Diagram, Top View"
     See Figure 3-1 in the official datasheet for this diagram — not reproduced in this guide.
+
+<div id="42"></div>
 
 ### 4.2 Pin Definition Table
 
@@ -230,20 +248,32 @@ The module has 138 pins in total, described in the table below.
 
 *Legend: P = power; I = input; O = output; T = can be configured as high-impedance; AO = audio output; AI = audio input.*
 
+!!! warning "PB29 Source Discrepancy"
+    Table 3-1 of [DS5802-SF32LB58-MOD V0.1](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) lists PB29's default MUX as `GPIO_B29` but its Function cell as `GPIO_B28`. The [SF32LB58x datasheet](https://downloads.sifli.com/silicon/DS0058-SF32LB58x-Datasheet%20V1p6.pdf) and [user manual](https://downloads.sifli.com/docs/user%20manual/SF32LB58x/UM5801%E2%80%90SF32LB58x%E2%80%90CN.pdf) both list PB29 as `GPIO_B29`, which this table follows. The module-datasheet entry appears to be a source typo; confirm with SiFli before finalizing the pin assignment.
+
 !!! note
     In pin 10's row, the V0.1 datasheet lists `GPIO_A38` as PA79's default MUX but `GPIO_A79` as its function. This table uses `GPIO_A79` to follow the named pin/function; confirm PA79's MUX with SiFli before finalizing the pin assignment.
 
+!!! warning "UART1 Direction Requires Confirmation"
+    SiFli source materials disagree about UART1 TX/RX direction on PA31 and PA32. The pin table above follows the module pinout labels; confirm the direction with SiFli before finalizing the design.
+
 !!! note
     Pin 2 (USART_RXD) and pin 3 (USART_TXD) are the default log, program-debug, and program-download port.
+
+<div id="43"></div>
 
 ### 4.3 Physical Pin Description
 
 The datasheet's physical pin description figure groups pins by function family — SDIO, SPI, I2C, UART, GPTIM, LCD interface (DPI/8080/SPI/JDI/DSI), GPADC, MPI, analog audio, boot mode, power supply, BT antenna, CAN/USB, and SWD/debug UART — overlaid on the SF32LB586VDD36 die outline. Use it alongside the pin definition table above when laying out signal groups on the host PCB.
 
-!!! info "Figure 4-2: Physical Pin Description"
+!!! info "Figure 4.3-1: Physical Pin Description"
     See Figure 3-2 in the official datasheet for this diagram — not reproduced in this guide.
 
+<div id="5"></div>
+
 ## 5. Peripherals
+
+<div id="51"></div>
 
 ### 5.1 Communication Interfaces
 
@@ -265,6 +295,8 @@ Any pin marked `PAxx_I2C_UART` or `PBxx_I2C_UART` in the table above can be conf
 
 **LCD Interface** — DBI serial SPI mode (3-line/4-line, dual/quad data line) and parallel 8080 mode (8/16/24-bit bus width). Supports RGB332/RGB444/RGB565/RGB666/RGB888 color formats depending on mode. A dedicated MIPI DSI lane set (clock + 2 data lanes) is also available on pins 47–52.
 
+<div id="52"></div>
+
 ### 5.2 Analog Signal Processing
 
 **12-bit GPADC** — SAR ADC, 4MS/s max sample rate, 0–3.3V single-ended / ±2.1V differential input range, 8 single-ended channels (or 4 differential pairs), single/continuous measurement modes, 4 configurable time-slots per measurement, software/hardware trigger, DMA support.
@@ -277,7 +309,11 @@ Any pin marked `PAxx_I2C_UART` or `PBxx_I2C_UART` in the table above can be conf
 
 **Audio ADC** — 2 integrated 24-bit channels, 8kHz–48kHz sample rates, independent per-channel gain control.
 
+<div id="6"></div>
+
 ## 6. Electrical Characteristics
+
+<div id="61"></div>
 
 ### 6.1 Absolute Maximum Ratings
 
@@ -296,6 +332,8 @@ Exceeding any absolute maximum rating may permanently damage the module. These r
 
 </div>
 
+<div id="62"></div>
+
 ### 6.2 Recommended Operating Conditions
 
 <div align="center"><em>Table 6.2-1: Recommended Operating Conditions</em></div>
@@ -310,6 +348,8 @@ Exceeding any absolute maximum rating may permanently damage the module. These r
 | TA | Operating temperature | -40 | - | 85 | °C |
 
 </div>
+
+<div id="63-dc"></div>
 
 ### 6.3 DC Electrical Characteristics
 
@@ -343,6 +383,8 @@ Exceeding any absolute maximum rating may permanently damage the module. These r
 </div>
 
 Full tables (including input leakage, reset thresholds, and pin capacitance at both supply voltages) are provided in §5.3 of the official datasheet.
+
+<div id="64"></div>
 
 ### 6.4 Power Consumption
 
@@ -388,6 +430,8 @@ Full tables (including input leakage, reset thresholds, and pin capacitance at b
 
 These tables show selected operating points. The datasheet includes additional radio intervals and scan states in §5.4.2 and processor frequencies in §5.4.3. Its 3.8 V figures are calculated from measurements on the 1.8 V and 3.3 V rails at 90% conversion efficiency: `I3.8V = I1.8V × 1.8 / (0.90 × 3.8) + I3.3V`. They are system-input-equivalent current values, not direct measurements with 3.8 V applied to a module supply pin.
 
+<div id="65-bluetooth-rf"></div>
+
 ### 6.5 Dual-Mode Bluetooth RF Performance
 
 Supports Bluetooth 5.3, backward compatible with 4.2/4.1/4.0, including BLE and Classic Bluetooth. Operating channel center frequency: 2402–2480MHz.
@@ -402,6 +446,8 @@ Supports Bluetooth 5.3, backward compatible with 4.2/4.1/4.0, including BLE and 
 
 Full min/typ/max tables for all BLE 1Mbps/2Mbps/LR TX/RX performance and Classic BT BR/EDR TX/RX performance are provided in §5.5 of the official datasheet.
 
+<div id="7"></div>
+
 ## 7. Module Power Supply
 
 The module has five power interfaces: **VDD_3V3**, **VDD_1V8**, **VDDIOA**, **VDDIOA2**, and **VDDIOB**.
@@ -414,6 +460,8 @@ The module has five power interfaces: **VDD_3V3**, **VDD_1V8**, **VDDIOA**, **VD
 
 !!! info "Figure 7-1: Module Power-Supply Block Diagram"
     See Figure 7-1 in the official datasheet for this diagram — not reproduced in this guide.
+
+<div id="8"></div>
 
 ## 8. Reference Schematic and Pin Assignment
 
@@ -428,6 +476,8 @@ The datasheet also provides a recommended pin-assignment table for that referenc
     See Figure 7-9 in the official datasheet for this diagram — not reproduced in this guide.
 
 Use these as the starting point for a production schematic and adapt pin selection to your product's specific peripheral mix.
+
+<div id="9"></div>
 
 ## 9. Schematic Design Checklist
 
@@ -456,21 +506,29 @@ Use these as the starting point for a production schematic and adapt pin selecti
 !!! note
     V0.1 lists a 1.7–3.6V VDDIO operating range in §5.2, but checklist item 4 specifies a 3.3V I/O interface level in §7.3. Confirm the applicable interface voltage for the exact module revision with SiFli before connecting peripherals; the datasheet does not reconcile these statements. Check the [official datasheet PDF](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) for any later revisions before finalizing a production schematic.
 
+<div id="10-pcb"></div>
+
 ## 10. Module Dimensions and PCB Footprint
+
+<div id="101"></div>
 
 ### 10.1 Module Dimensions
 
 The module measures 24 × 24 × 3.1mm, and its PCB is 0.8mm thick. The castellated perimeter pitch is 1.1mm.
 
-!!! info "Figure 10-1: Module Dimensions"
+!!! info "Figure 10.1-1: Module Dimensions"
     See Figure 8-1 in the official datasheet for this diagram — not reproduced in this guide.
+
+<div id="102-pcb"></div>
 
 ### 10.2 Recommended PCB Footprint
 
-!!! info "Figure 10-2: Recommended PCB Footprint"
+!!! info "Figure 10.2-1: Recommended PCB Footprint"
     See Figure 8-2 in the official datasheet for this diagram — not reproduced in this guide.
 
 The recommended footprint has 72 outer pads measuring 1.8 × 0.8mm, 60 inner pads measuring 0.7 × 1.0mm, and six center pads measuring 1.3 × 1.3mm. Dimensions are in millimeters; use the datasheet drawing as the authority for the complete geometry.
+
+<div id="103"></div>
 
 ### 10.3 External Antenna Connector
 
@@ -478,8 +536,10 @@ The datasheet describes either a PCB-mounted antenna or a first-generation exter
 
 The connector drawing dimensions are in millimeters.
 
-!!! info "Figure 10-3: External Antenna Connector Dimensions"
+!!! info "Figure 10.3-1: External Antenna Connector Dimensions"
     See Figure 8-3 in the official datasheet for this diagram — not reproduced in this guide.
+
+<div id="104-pcb"></div>
 
 ### 10.4 Module Placement in PCB Design
 
@@ -489,16 +549,24 @@ Reserve the module antenna zone so that no components, copper, traces, chassis m
 - If the antenna cannot extend past the board edge, provide a generous keepout zone (no copper pour, traces, or components) and cut away host-board material beneath the antenna where possible.
 - For full end-product designs, evaluate the enclosure's effect on the antenna and perform RF validation, including a final communication-range test on the finished product.
 
+<div id="11"></div>
+
 ## 11. Product Handling
+
+<div id="111"></div>
 
 ### 11.1 Storage Conditions
 
 - Store products sealed in a moisture barrier bag (MBB) at <40°C / 90%RH, non-condensing.
 - The module's moisture sensitivity level is MSL 3. After opening the vacuum-sealed bag, use the module within 168 hours under 25 ± 5°C and 60%RH conditions; otherwise bake it before returning it to production. This does not change the one-reflow-pass recommendation.
 
+<div id="112-esd"></div>
+
 ### 11.2 Electrostatic Discharge (ESD)
 
 The datasheet lists an HBM rating of ±2000V and a CDM rating of ±500V. Follow SiFli's standard module ESD handling precautions during assembly and test.
+
+<div id="113"></div>
 
 ### 11.3 Reflow Profile
 
@@ -506,8 +574,10 @@ The module is recommended to go through reflow only once.
 
 The V0.1 profile specifies a 25–150°C ramp over 60–90s at 1–3°C/s; 150–200°C preheat for 60–120s; 60–90s above 217°C with a 235–250°C peak; and cooling from the peak to 180°C at -1 to -5°C/s. The diagram specifies SAC305 solder. Its bottom legend gives a peak-time interval of 30–70s, while a graph label separately states 焊接时间 >30s (soldering time >30s). These are distinct source labels, and the datasheet does not reconcile them; confirm the production profile rather than combining the intervals.
 
-!!! info "Figure 11-1: Recommended Reflow Temperature Profile"
+!!! info "Figure 11.3-1: Recommended Reflow Temperature Profile"
     See Figure 9-1 in the official datasheet; the profile details and source-label discrepancy are summarized above.
+
+<div id="114"></div>
 
 ### 11.4 Ultrasonic Vibration
 
@@ -516,12 +586,16 @@ Avoid exposing SiFli modules to vibration from ultrasonic welding or ultrasonic 
 !!! note
     Confirm the final moisture sensitivity level, floor-life window, ESD limits, and reflow requirements for SF32LB58-MOD against §9 of the [official datasheet PDF](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) before releasing manufacturing process specifications.
 
+<div id="12"></div>
+
 ## 12. Related Documents
 
 - [DS5802-SF32LB58-MOD Datasheet (V0.1)](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf)
 - [SF32LB58x Chip Introduction](../../sf32-products/chips/SF32LB58x.md)
 - [SF32LB58x Hardware Design Guide](../chip-guides/SF32LB58x_hardware_design_guide.md)
 - [SF32LB58-DevKit-LCD](../../sf32-products/devkits/SF32LB58-DevKit-LCD.md)
+
+<div id="13"></div>
 
 ## 13. Revision History
 
@@ -535,4 +609,4 @@ Avoid exposing SiFli modules to vibration from ultrasonic welding or ultrasonic 
 
 </div>
 
-This guide is based on **DS5802-SF32LB58-MOD V0.1**, the initial published revision. Refer to the official PDF for the authoritative and most current revision.
+This guide is based on draft **DS5802-SF32LB58-MOD V0.1**. Before design release, consult the official PDF to confirm the authoritative and most current revision.

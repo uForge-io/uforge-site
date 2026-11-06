@@ -18,7 +18,7 @@ Nordic의 [Online Power Profiler for Bluetooth LE](https://devzone.nordicsemi.co
 
 ## 측정 대상 정의 { #define-what-you-are-measuring }
 
-"Bluetooth 전력"은 의미가 매우 다양할 수 있습니다. 라디오만 측정하면 연결 파라미터를 최적화하는 데는 도움이 되지만, 컨트롤러, 애플리케이션 CPU, 센서, 디스플레이, 메모리, 전원 공급이 모두 관여하는 양산 디바이스의 소비 전력은 알 수 없습니다.
+"Bluetooth 전력"은 의미가 매우 다양할 수 있습니다. 라디오만 측정하면 연결 파라미터를 최적화하는 데는 도움이 되지만, 컨트롤러, 애플리케이션 CPU, 센서, 디스플레이, 메모리, 전원 공급이 모두 관여하는 제품 전체의 소비 전력은 알 수 없습니다.
 
 <div align="center"><em>표: Bluetooth 전력 측정 경계</em></div>
 
@@ -69,7 +69,7 @@ flowchart LR
 
 <div align="center"><em>그림: BLE 광고 이벤트 단계</em></div>
 
-![BLE 광고 이벤트 단계](assets/ble-advertising-event-stages.svg)
+![BLE 광고 이벤트 단계](assets/ble-advertising-event-stages-ko.svg)
 
 이 도해는 세 개의 기본 채널을 모두 사용하는 레거시 스캔 가능 또는 연결 가능(scannable 또는 connectable) 광고 이벤트를 나타내며, 요청/응답 교환은 표시하지 않습니다. 37, 38, 39라는 표기는 설명을 위한 것입니다. Bluetooth Core Specification은 사용하는 기본 채널 인덱스를 임의의 순서로 허용하며, 어떤 인덱스를 쓸지는 구성한 채널 맵이 결정합니다. 이벤트는 보통 사용하는 인덱스마다 광고 PDU를 하나씩, 인덱스당 최대 하나만 전송합니다. 세 번의 송신은 서로 다른 채널에서 광고 데이터의 사본을 전달하는 것이며, 확인 응답에 따른 재시도가 아닙니다. 스캔 가능 또는 연결 가능 광고에서는 Link Layer가 허용된 요청을 같은 기본 채널에서 수신 대기하며, 연결 불가·스캔 불가 이벤트는 요청을 수신하지 않습니다. [Bluetooth Core 6.2 Link Layer 사양](https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-62/out/en/low-energy-controller/link-layer-specification.html)과 [Bluetooth SIG 입문서](https://www.bluetooth.com/bluetooth-le-primer/)를 참조하십시오. 확장 광고, 다른 채널 맵, 또는 수신한 요청에 따라 트레이스가 달라질 수 있으므로 타깃 디바이스에서 구성한 동작을 확인하십시오.
 

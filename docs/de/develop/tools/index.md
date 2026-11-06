@@ -24,7 +24,7 @@ Die folgende Tabelle ordnet typischen Entwicklungsaufgaben passende Werkzeuge zu
 | [SDK-UART-Download-Skripte](../platforms/sifli-sdk/build-flash-monitor.md) | Von SiFli-SDK-Builds erzeugte Skripte zum ersten Flashen. |
 | [CodeKit-Aktionen](codekit.md) | VS-Code-Einrichtungs-, Build-, Flash- und Monitor-Aktionen. |
 | [`AssertDump`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/AssertDump/AssertDump_UM.html) | Erfassung von Speicherinhalten bei einem Absturz zur späteren Analyse. |
-| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace` erfasst Logs des Zielboards; `UsartServer` ermöglicht UART-Debugging über die Debug-IP des Chips. |
+| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace` erfasst Logs des Zielboards; `UsartServer` wird als UART-zu-J-Link-Hilfswerkzeug für SF32LB52x und SF32LB56x dokumentiert. Diese hostseitige Rolle schließt die UART Debug IP des Chips nicht aus; die unterstützte Einrichtung ist im Handbuch beschrieben. |
 | [`Impeller`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/Impeller/Impeller_UM.html) | Firmware-Programmierung, Kalibrierung und PCBA-Tests in der Fertigung. |
 | [eZip-/Bildwerkzeuge](../../learn/graphics/ezip.md) | Asset-Konvertierung für komprimierte Grafik-Pipelines. |
 | [RF-/Audio-/Fertigungswerkzeuge](https://docs.sifli.com/projects/solution/6.tools/index.html) | Produktionskalibrierung, Test- und Abstimmungsworkflows. |

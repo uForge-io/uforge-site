@@ -9,12 +9,18 @@ tags:
     - Chip
 ---
 
+<div id="sf32lb57x-pcb"></div>
+
 # SF32LB57x Hardware-Design-Leitfaden — PCB-Layout-Richtlinien { #sf32lb57x-hardware-design-guide-pcb-layout-guidelines }
 
 !!! note "Teil des SF32LB57x Hardware-Design-Leitfadens"
     Diese Seite behandelt die PCB-Layout-Richtlinien aus Abschnitt 6. Zurück zu [Speicher und Fertigung](SF32LB57x_schematic_storage_mfg.md) oder weiter zur [Design-Review-Checkliste und den Referenzen](SF32LB57x_review_and_reference.md).
 
+<div id="6-pcb"></div>
+
 ## 6. PCB-Layout-Richtlinien { #6-pcb-layout-guidelines }
+
+<div id="61"></div>
 
 ### 6.1. Lagenaufbau { #61-stack-up }
 
@@ -63,6 +69,8 @@ Alle vier Referenzaufbauten verwenden 1 oz Kupfer auf L1/L4 (1,38 mil; 0,0350 mm
 
 Für ein 4-lagiges QFN-Design wird folgende Lagenzuordnung empfohlen: Lage 1 (oben) mit durchgehender Massefläche, Bauteilplatzierung und Signalführung; Lage 2 als durchgehende Massefläche ohne Signale, damit die Referenzmasse intakt bleibt; Lage 3 als Versorgungsfläche, die nach Versorgungsdomänen aufgeteilt werden und zusätzlich Signale führen kann; Lage 4 (unten) mit durchgehender Massefläche und Signalführung.
 
+<div id="62-pcb"></div>
+
 ### 6.2. Kurzreferenz kritischer PCB-Randbedingungen { #62-critical-pcb-constraint-quick-reference }
 
 <div align="center"><em>Tabelle 6.2-1: Kurzreferenz kritischer PCB-Randbedingungen</em></div>
@@ -90,6 +98,8 @@ Für ein 4-lagiges QFN-Design wird folgende Lagenzuordnung empfohlen: Lage 1 (ob
 
 Die PTH- und HDI-Designregelabbildungen zeigen auch beispielhafte Fertigungswerte: Die minimale und empfohlene Leiterbahnbreite beträgt 0,10 mm für PTH und 0,075 mm für HDI, die maximale Breite jeweils 2,54 mm. Die Via-Beispiele zeigen für PTH eine Bohrung von 0,25 mm mit einem Pad von 0,45 mm und für ein HDI-Microvia eine Bohrung von 0,10 mm mit einem Pad von 0,23 mm (das Durchkontaktierungsbeispiel beträgt 0,25 mm/0,45 mm). Diese Werte sind Referenzaufbauten; vor der Freigabe die Fertigungsmöglichkeiten und konkreten Regeln des Leiterplattenherstellers bestätigen.
 
+<div id="63"></div>
+
 ### 6.3. Stromversorgungs-Layout { #63-power-layout }
 
 - Hochstrom-Versorgungspfade kurz und breit halten.
@@ -105,6 +115,8 @@ Die PTH- und HDI-Designregelabbildungen zeigen auch beispielhafte Fertigungswert
     - **Leiterbahnbreite und Netzbezeichnung:** Abschnitt 3.2.1 des originalen PCB-Leitfadens verlangt für `VCC` und `PVDD` jeweils mindestens 0,4 mm (ca. 15,7 mil). Punkt 44 der Selbstprüftabelle 4-2-1-1 gilt für akkubetriebene Varianten und verlangt für `VCC` mindestens 12 mil; Punkt 47 gilt für 3,3-V-Varianten, trägt den Titel `PVDD`, nennt im Prüfdetail jedoch `VCC` mit mindestens 12 mil. Die Quelle gleicht diese Breitenangaben nicht ab und erklärt nicht, ob bei Punkt 47 der Titel oder das Prüfdetail das Zielnetz bezeichnet. Keinen korrigierten Wert ableiten und keinen Eintrag pauschal auf beide Versorgungsvarianten übertragen; vor der Freigabe mit SiFli Zielnetz, Anwendungsbereich und Breite bestätigen.
     Ohne Bestätigung durch SiFli beim Finalisieren des Designs weder eine Leiterbahnbreite wählen noch Punkt 47 einem Netz zuordnen.
 
+<div id="64"></div>
+
 ### 6.4. Quarz-Layout { #64-crystal-layout }
 
 - Unter der RF-Schaltung und dem Hauptchip eine durchgehende Referenzmasse erhalten; die Massefläche nicht aufteilen oder durch Schlitze unterbrechen. Für den Quarzbereich fordert die Quelle zugleich eine durchgehende Referenzmasse und kupferfreie Bereiche unter dem Quarz. Siehe den folgenden Warnhinweis; die Kupfergeometrie dort erst festlegen, wenn SiFli die für den jeweiligen Lagenaufbau geltenden Grenzen bestätigt hat.
@@ -119,6 +131,8 @@ Die PTH- und HDI-Designregelabbildungen zeigen auch beispielhafte Fertigungswert
     - **Geltungsbereich des Quarzabstands:** Abbildung 3-3-1 (hier als Abbildung 6.9-30 wiedergegeben) fordert auf der TOP-Lage mindestens 0,25 mm Kupferabstand um das Quarzbauteil. Punkt 7 der Selbstprüftabelle 4-3-1 legt für zwei Lagenaufbauten separat fest, welche Lagen unter dem Quarz kupferfrei bleiben müssen; die Quelle erklärt jedoch nicht, wie der umlaufende 0,25-mm-Abstand zu den Bereichen unter dem Quarzbauteil oder zu den Routing-Ausschlüssen auf angrenzenden Lagen steht.
     Diese Konflikte und Unklarheiten zum Geltungsbereich sind in SiFlis Quelldokumentation ungelöst. Vor der Layoutfreigabe die Anforderungen für das konkrete Gehäuse und den Lagenaufbau von SiFli bestätigen lassen; weder einen der Leiterbahnabstände auswählen noch lagenbezogene Masse- oder Kupferfreistellungsgrenzen ableiten.
 
+<div id="65-rf"></div>
+
 ### 6.5. RF-Layout { #65-rf-layout }
 
 - Das RF-Anpassnetzwerk nahe am Chip und entfernt von der Antenne platzieren. Den AVDD_BRF-Filterkondensator direkt neben dem Chip-Pin platzieren und seine Masse über eine Durchkontaktierung direkt mit der Hauptmassefläche verbinden.
@@ -128,6 +142,8 @@ Die PTH- und HDI-Designregelabbildungen zeigen auch beispielhafte Fertigungswert
 - Ein Unterschied zwischen der Padbreite eines Anpassbauteils und der Leiterbahnbreite kann eine Impedanzdiskontinuität verursachen. Ein an die Padabmessungen angepasster Kupfer-Ausschnitt in der darunterliegenden Referenzmasse kann die Impedanzkontinuität verbessern.
 - Bei einem IPEX-Antennenstecker das Kupfer auf allen Leiterplattenlagen unter dem Stecker entfernen. PCB-Antennen auf der tatsächlichen Leiterplatte simulieren und abstimmen; ein CLC-Anpassnetzwerk vorsehen und möglichst nahe an der Antenne platzieren.
 - RF von LCD-FPC, USB, SDIO, DC/DC, Quarzen und Ladepfaden fernhalten.
+
+<div id="66"></div>
 
 ### 6.6. Analog und Audio { #66-analog-and-audio }
 
@@ -139,6 +155,8 @@ Die PTH- und HDI-Designregelabbildungen zeigen auch beispielhafte Fertigungswert
 - GPADC-Leiterbahnen mit Masse abschirmen und von potenziell störenden Schaltungen wie Akku- und Temperaturmessungen fernhalten.
 - Hochstrom-Rückstrompfade nicht durch den Audiobereich führen.
 
+<div id="67"></div>
+
 ### 6.7. Hochgeschwindigkeitsschnittstellen { #67-high-speed-interfaces }
 
 - USB DP/DN als 90-Ω-Differenzpaar führen und zuerst durch den ESD-Schutz leiten.
@@ -148,6 +166,8 @@ Die PTH- und HDI-Designregelabbildungen zeigen auch beispielhafte Fertigungswert
 - USB PA35 (USB_DP) und PA36 (USB_DN) vor dem Chip durch ESD-Schutz führen. Eine differenzielle Leitungsführung mit 90 Ω Impedanz und dreidimensionaler Masseabschirmung verwenden; den Masseanschluss des ESD-Bauteils zuverlässig mit der Hauptmasse verbinden.
 - Serienwiderstände auf Hochgeschwindigkeitstakten reservieren, falls EMI-Abstimmung nötig sein könnte.
 
+<div id="68-emi-esd-eos"></div>
+
 ### 6.8. EMI, ESD und EOS { #68-emi-esd-and-eos }
 
 - ESD-Schutz für jede externe Schnittstelle prüfen.
@@ -156,6 +176,8 @@ Die PTH- und HDI-Designregelabbildungen zeigen auch beispielhafte Fertigungswert
 - USB, Ladeanschluss, Akkustecker, Tasten, Touch, Display und Herzfrequenzsensor sowie Antenne sind vorrangige Schutzpunkte.
 - Den Testpunkt der USB-Ladeleitung vor dem TVS-Bauteil platzieren. Das TVS-Bauteil des Akkuanschlusses vor der Chip-Schaltung platzieren, sodass das Signal vor dem Chip zuerst durch das TVS läuft.
 - Beim Ladeeingangsschutz OVP, EOS und ESD gemeinsam betrachten.
+
+<div id="69-pcb"></div>
 
 ### 6.9. PCB-Referenzabbildungen { #69-pcb-reference-figures }
 

@@ -9,12 +9,18 @@ tags:
     - Puce
 ---
 
+<div id="sf32lb57x-pcb"></div>
+
 # Guide de conception matérielle SF32LB57x — Recommandations de placement et de routage PCB { #sf32lb57x-hardware-design-guide-pcb-layout-guidelines }
 
 !!! note "Fait partie du Guide de conception matérielle SF32LB57x"
     Cette page présente les recommandations de placement et de routage PCB de la section 6. Revenez à [Stockage et fabrication](SF32LB57x_schematic_storage_mfg.md) ou passez à [Liste de contrôle de revue de conception et références](SF32LB57x_review_and_reference.md).
 
+<div id="6-pcb"></div>
+
 ## 6. Recommandations de placement et de routage PCB { #6-pcb-layout-guidelines }
+
+<div id="61"></div>
 
 ### 6.1. Empilement { #61-stack-up }
 
@@ -63,6 +69,8 @@ Les quatre empilements de référence utilisent du cuivre 1 oz sur L1/L4 (1,38 m
 
 Pour une conception QFN à 4 couches, la répartition recommandée est la suivante : couche 1 (supérieure), cuivre relié à la masse, composants et routage des signaux ; couche 2, plan de masse continu sans signal afin de préserver la continuité de la référence ; couche 3, plan d'alimentation, éventuellement divisé par domaine et pouvant aussi accueillir des signaux ; couche 4 (inférieure), cuivre relié à la masse et routage des signaux.
 
+<div id="62-pcb"></div>
+
 ### 6.2. Référence rapide des contraintes PCB critiques { #62-critical-pcb-constraint-quick-reference }
 
 <div align="center"><em>Tableau 6.2-1 : Référence rapide des contraintes PCB critiques</em></div>
@@ -90,6 +98,8 @@ Pour une conception QFN à 4 couches, la répartition recommandée est la suivan
 
 Les figures de règles PTH et HDI donnent également des exemples de fabrication : largeur de piste minimale et recommandée de 0,10 mm pour le PTH et de 0,075 mm pour le HDI, avec un maximum de 2,54 mm dans les deux cas. Les exemples de vias montrent un perçage de 0,25 mm et un pad de 0,45 mm pour le PTH, ainsi qu'un perçage de 0,10 mm et un pad de 0,23 mm pour un microvia HDI (l'exemple de via traversant est de 0,25 mm/0,45 mm). Ce sont des constructions de référence ; confirmez les capacités et règles réelles du fabricant avant la fabrication.
 
+<div id="63"></div>
+
 ### 6.3. Placement et routage de l'alimentation { #63-power-layout }
 
 - Gardez les chemins d'alimentation à fort courant courts et larges.
@@ -105,6 +115,8 @@ Les figures de règles PTH et HDI donnent également des exemples de fabrication
     - **Largeur des pistes et désignation du rail :** La section 3.2.1 du guide PCB original exige au moins 0,4 mm (environ 15,7 mil) pour `VCC` et `PVDD`. Le point 44 de la table d'autocontrôle 4-2-1-1, applicable aux variantes sur batterie, exige au moins 12 mil pour `VCC` ; le point 47, applicable aux variantes 3,3 V, porte le titre `PVDD`, mais son détail de contrôle exige au moins 12 mil pour `VCC`. La source ne concilie pas ces largeurs et ne précise pas si le titre ou le détail du point 47 désigne le rail visé. Ne déduisez pas de valeur corrigée et n'appliquez pas une entrée aux deux variantes d'alimentation ; faites confirmer par SiFli le rail, le périmètre et la largeur applicables avant de figer la conception.
     Sans confirmation de SiFli, ne choisissez pas de largeur de piste et n'affectez pas le point 47 à un rail avant de finaliser la conception.
 
+<div id="64"></div>
+
 ### 6.4. Placement et routage du quartz { #64-crystal-layout }
 
 - Conservez une masse de référence solide et continue sous le circuit RF et la puce principale ; ne divisez pas le plan de masse et ne le découpez pas par des fentes. Pour la zone du quartz, la source exige aussi une masse de référence continue et une suppression du cuivre sous le quartz. Voir l'avertissement ci-dessous : ne figez pas la géométrie de cuivre de cette zone avant que SiFli ait confirmé les limites propres à l'empilement choisi.
@@ -119,6 +131,8 @@ Les figures de règles PTH et HDI donnent également des exemples de fabrication
     - **Portée du dégagement autour du résonateur à quartz :** La figure 3-3-1 (reproduite ici en figure 6.9-30) spécifie au moins 0,25 mm de dégagement de cuivre TOP autour du résonateur à quartz. Le point 7 du tableau d'autocontrôle 4-3-1 précise séparément les couches sans cuivre sous le quartz pour les deux empilements, sans expliquer le rapport entre ce dégagement périphérique et les zones sous le résonateur à quartz ou les interdictions de routage sur les couches adjacentes.
     Ces conflits et imprécisions de portée restent non résolus dans les documents source de SiFli. Avant de figer le routage, faites confirmer les exigences pour le boîtier et l'empilement réels ; ne choisissez pas entre les espacements et ne déduisez pas les limites de masse ou de zone sans cuivre couche par couche.
 
+<div id="65-rf"></div>
+
 ### 6.5. Placement et routage RF { #65-rf-layout }
 
 - Placez le réseau d'adaptation RF près de la puce et à l'écart de l'antenne. Placez le condensateur de filtrage AVDD_BRF juste à côté de sa broche sur la puce et reliez sa masse directement au plan de masse principal par un via.
@@ -128,6 +142,8 @@ Les figures de règles PTH et HDI donnent également des exemples de fabrication
 - Une différence entre la largeur du pad d'un composant d'adaptation et celle de la piste peut créer une discontinuité d'impédance. Une ouverture du plan de masse de référence sous les pads, adaptée à leurs dimensions, peut améliorer la continuité d'impédance.
 - Avec un connecteur d'antenne IPEX, supprimez le cuivre sous le connecteur sur toutes les couches du PCB. Simulez les antennes PCB et mettez-les au point sur la carte réelle ; prévoyez un réseau d'adaptation CLC et placez-le aussi près que possible de l'antenne.
 - Éloignez la RF des FPC LCD, de l'USB, du SDIO, du DC/DC, des quartz et des chemins de charge.
+
+<div id="66"></div>
 
 ### 6.6. Analogique et audio { #66-analog-and-audio }
 
@@ -139,6 +155,8 @@ Les figures de règles PTH et HDI donnent également des exemples de fabrication
 - Assurez un blindage tridimensionnel relié à la masse pour les pistes GPADC et éloignez-les des circuits susceptibles de les perturber, comme la détection de batterie ou de température.
 - Évitez de router les chemins de retour à fort courant à travers la zone audio.
 
+<div id="67"></div>
+
 ### 6.7. Interfaces haute vitesse { #67-high-speed-interfaces }
 
 - Routez USB DP/DN en paire différentielle de 90 Ω et faites-les passer d'abord par la protection ESD.
@@ -148,6 +166,8 @@ Les figures de règles PTH et HDI donnent également des exemples de fabrication
 - Faites passer USB PA35 (USB_DP) et PA36 (USB_DN) par la protection ESD avant leur connexion à la puce. Utilisez un routage différentiel de 90 Ω avec un blindage tridimensionnel relié à la masse et reliez correctement la masse du composant ESD à la masse principale.
 - Réservez des résistances série sur les horloges haute vitesse où un ajustement EMI pourrait être nécessaire.
 
+<div id="68-emi-esd-eos"></div>
+
 ### 6.8. EMI, ESD et EOS { #68-emi-esd-and-eos }
 
 - Vérifiez la protection ESD pour chaque interface externe.
@@ -156,6 +176,8 @@ Les figures de règles PTH et HDI donnent également des exemples de fabrication
 - L'USB, le chargeur, le connecteur de batterie, les touches, le tactile, l'affichage, le capteur de fréquence cardiaque et l'antenne sont des points de protection prioritaires.
 - Placez le point de test de la ligne de charge USB en amont du TVS. Placez le TVS du connecteur de batterie en amont du circuit de la puce afin que le signal traverse le TVS avant d'atteindre la puce.
 - La protection d'entrée du chargeur devrait prendre en compte l'OVP, l'EOS et l'ESD ensemble.
+
+<div id="69-pcb"></div>
 
 ### 6.9. Figures de référence PCB { #69-pcb-reference-figures }
 

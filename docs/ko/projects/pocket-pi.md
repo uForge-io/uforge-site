@@ -2,10 +2,10 @@
 icon: lucide/gamepad-2
 description: "재현 가능한 Pocket Pi 엔지니어링 경로: SF32LB52에서 NES 에뮬레이션, 320 × 240 디스플레이, AW9523 입력, 오디오, ROM 파일 시스템, 세이브 스테이트 복구를 검증합니다."
 tags:
-    - Projects
-    - Gaming
-    - Emulation
-    - Graphics
+    - 프로젝트
+    - 게임
+    - 에뮬레이션
+    - 그래픽
 ---
 
 # Pocket Pi SF32 휴대용 게임기 { #pocket-pi-sf32-handheld-game-console }

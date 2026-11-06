@@ -323,4 +323,4 @@ Die Board-Unterlagen führen das SF32LB57x-Benutzerhandbuch als noch nicht verö
 - [Impeller-Programmierwerkzeug](https://wiki.sifli.com/tools/%E7%83%A7%E5%BD%95%E5%B7%A5%E5%85%B7.html)
 - [SiFli-Shop](https://sifli.taobao.com/)
 
-SiFlis Quelle verweist für Muster und kleinere Bestellmengen auf den Shop und für größere Mengen auf sales@sifli.com. Sie nennt außerdem Open-Source-Musteranträge und die QQ-Gruppe 674699679. Klären Sie Bedingungen und aktuelle Verfügbarkeit mit SiFli. Für Projektanfragen können Sie [μForge.io kontaktieren](../../about/contact.md).
+SiFlis Quelle verweist für Muster und kleinere Bestellmengen auf den Shop und für größere Mengen auf sales@sifli.com. Sie nennt außerdem Open-Source-Beispielanwendungen und die QQ-Gruppe 674699679. Klären Sie Bedingungen und aktuelle Verfügbarkeit mit SiFli. Für Projektanfragen können Sie [μForge.io kontaktieren](../../about/contact.md).

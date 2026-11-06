@@ -8,6 +8,8 @@ tags:
 
 # SF32LB56x { #sf32lb56x }
 
+<div id="_1"></div>
+
 ## Présentation { #overview }
 
 La série SF32LB56x est une famille avancée de microcontrôleurs AIoT à très basse consommation pour les produits qui ont besoin du Bluetooth bimode, de graphismes plus riches, d'audio intégré, de mémoire externe et d'une plus grande souplesse d'affichage et de stockage que les composants SF32LB d'entrée de gamme.
@@ -19,6 +21,8 @@ La fiche produit et la fiche technique officielles de SiFli positionnent le SF32
 Le guide des modèles de puces de SiFli est également déterminant : la famille SF32LB56x prend en charge différentes combinaisons d'interfaces d'affichage selon le boîtier. La référence exacte et le choix du boîtier sont donc des décisions d'architecture à prendre en amont, et non des détails à reporter jusqu'à l'implantation du circuit imprimé.
 
 [^1]: STAR-MC1 est un IP de CPU embarqué Armv8-M Mainline configurable, proposé par Arm China. Dans les composants SF32 compatibles, SiFli le documente comme processeur applicatif Arm Cortex-M33 STAR-MC1. Son modèle logiciel de classe Cortex-M33 facilite la reprise du firmware, des intergiciels, des portages de RTOS et des outils Cortex-M33 existants, sous réserve du travail d'intégration habituel propre à chaque composant. Ses configurations CU, SP et SE diffèrent principalement par le cache, la TCM, la XIPU et les capacités TrustZone ; les instructions personnalisées Arm/CDE et l'interface de coprocesseur sont des fonctions optionnelles à vérifier pour la référence SF32 exacte. La documentation SiFli peut employer ***Arm Cortex-M33 STAR-MC1*** ou ***Arm Cortex-M33*** selon le contexte.
+
+<div id="_2"></div>
 
 ## Applications { #applications }
 
@@ -42,6 +46,8 @@ Choisissez le SF32LB56x lorsque la conception exige une ou plusieurs de ces capa
 - Wi-Fi externe via SDIO ; stockage externe via SD/SDIO ou eMMC
 - Nombre de GPIO plus élevé grâce à l'option WBBGA175
 - Davantage de marge pour exécuter simultanément des charges TinyML, audio et d'interface utilisateur
+
+<div id="_3"></div>
 
 ## Ressources de développement { #development-resources }
 
@@ -81,7 +87,11 @@ Choisissez le SF32LB56x lorsque la conception exige une ou plusieurs de ces capa
 
 ---
 
+<div id="_4"></div>
+
 ## Caractéristiques et spécifications { #features-and-specs }
+
+<div id="_5"></div>
 
 ### Calcul et mémoire { #compute-and-memory }
 
@@ -89,10 +99,12 @@ Choisissez le SF32LB56x lorsque la conception exige une ou plusieurs de ces capa
 - Processeur Arm Cortex-M33 STAR-MC1 à très basse consommation (LCPU), jusqu'à 96 MHz
 - Jusqu'à 370 DMIPS / 984 EEMBC CoreMark sur le HCPU
 - Jusqu'à 148 DMIPS / 394 EEMBC CoreMark sur le LCPU
-- Système mémoire du HCPU : cache d'instructions de 32 Ko + cache de données de 16 Ko, 800 Ko de SRAM dont 128 Ko de SRAM de rétention
-- Système mémoire du LCPU : cache d'instructions de 16 Ko + cache de données de 8 Ko, 160 Ko de SRAM de rétention
-- Options de 512 Ko ou 1 Mo de NOR QSPI dans le boîtier
+- Système mémoire du HCPU : cache d'instructions de 32 KB + cache de données de 16 KB, 800 KB de SRAM dont 128 KB de SRAM de rétention
+- Système mémoire du LCPU : cache d'instructions de 16 KB + cache de données de 8 KB, 160 KB de SRAM de rétention
+- Options de 512 KB ou 1 MB de NOR QSPI dans le boîtier
 - Interfaces mémoire externes pour NOR QSPI, NAND SPI, PSRAM QPI/OPI, SD/SDIO et eMMC
+
+<div id="ai"></div>
 
 ### Graphismes, affichage et IA { #graphics-display-and-ai }
 
@@ -107,6 +119,8 @@ Pour connaître la résolution maximale et les interfaces d'affichage prises en 
 - TurboPixel : compression avec perte à rapport fixe du tampon d'image final via extDMA et décompression dans le contrôleur d'affichage, réduisant la bande passante et la capacité de PSRAM
 - Accélérateur matriciel de réseaux de neurones pour charges TinyML, jusqu'à 1,92 GOPS et plus de 10 TOPS/W
 
+<div id="_6"></div>
+
 ### Audio et connectivité sans fil { #audio-and-wireless-connectivity }
 
 - Bluetooth 5.3 bimode avec prise en charge de BLE Audio
@@ -117,11 +131,17 @@ Pour connaître la résolution maximale et les interfaces d'affichage prises en 
 - 1 ADC audio HiFi 24 bits, RSB de 99 dB
 - 2 interfaces PDM et 1 interface I2S
 
+**Divergence des sources sur le rapport signal/bruit du DAC :** [PB0056 V1.1](https://downloads.sifli.com/silicon/PB0056-SF32LB56x-Product%20Brief%20V1p1.pdf) et [UM5601 V1.0.2](https://downloads.sifli.com/user%20manual/UM5601-SF32LB56x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V1p0p2.pdf) indiquent 108 dB, tandis que [DS5601 V1.9.2](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-Datasheet%20V1p9p2.pdf) indique 109 dB. Les versions plus récentes liées ici (PB0056 V1.2, DS5601 V1.9.3 et UM5601 V1.0.5) n'ont pas permis de lever cette divergence lors de cette vérification ; la valeur de référence reste donc indéterminée. Vérifiez-la dans la documentation à jour de la référence exacte avant de vous y fier.
+
+<div id="_7"></div>
+
 ### Sécurité { #security }
 
 - Accélérateurs matériels AES, HASH et CRC
 - Générateur de nombres aléatoires vrais (TRNG)
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### Périphériques et E/S { #peripherals-and-ios }
 
@@ -138,6 +158,8 @@ Pour connaître la résolution maximale et les interfaces d'affichage prises en 
 - Contrôleur de tâches périphériques (PTC)
 - Jusqu'à 120 GPIO, selon le boîtier
 
+<div id="_8"></div>
+
 ### Alimentation et boîtier { #power-supply-and-package }
 
 - Plage de tension d'alimentation : 1,71 V à 3,63 V
@@ -147,13 +169,15 @@ Pour connaître la résolution maximale et les interfaces d'affichage prises en 
 - Courant en veille avec réveil par broche : 300 nA
 - Options de boîtier : QFN68L et WBBGA175
 
+<div id="_9"></div>
+
 ## Variantes de la famille { #family-variants }
 
 La famille SF32LB56x comprend des composants QFN68L compacts et des composants WBBGA175 offrant davantage d'E/S, avec différentes options de mémoire intégrée. Choisissez le code de commande exact dès le début du projet, car la prise en charge de l'interface d'affichage, la marge de GPIO, la capacité de stockage, le procédé de circuit imprimé et les options de migration vers un module diffèrent sensiblement au sein de la famille.
 
 Les variantes listées ont une plage de tension d'alimentation documentée de 1,71 V à 3,63 V et une plage de température de fonctionnement de -40 °C à +85 °C. Les domaines d'alimentation des GPIO prennent en charge 1,71 V à 3,45 V ; les rails d'E/S de la mémoire intégrée au boîtier ont des limites distinctes. Consultez le guide matériel de la variante U ou V correspondante avant de définir les niveaux d'interface.
 
-**Écart de documentation pour `SF32LB566VCB36` :** le [guide des modèles de puces SiFli](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) indique 1 Mo de NOR QSPI intégré au boîtier, alors que les informations de commande de la [fiche technique DS5601 V1.9.2](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-Datasheet%20V1p9p2.pdf) plus ancienne indiquent 4 Mb (0,5 Mo). L'[index des produits](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/docs/product-index.rst) actuel de SiFli renvoie vers la DS5601 V1.9.3, dont les informations de commande n'ont pas pu être vérifiées lors de cette revue ; ne supposez ni que l'ancien écart persiste ni qu'il a été corrigé. Ce tableau suit le guide des modèles de puces. Vérifiez l'entrée de la V1.9.3 ou confirmez auprès de SiFli le code de commande exact et la configuration mémoire livrée avant de figer la nomenclature.
+**Écart de documentation pour `SF32LB566VCB36` :** le [guide des modèles de puces SiFli](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) indique 1 MB de NOR QSPI intégré au boîtier, alors que les informations de commande de la [fiche technique DS5601 V1.9.2](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-Datasheet%20V1p9p2.pdf) plus ancienne indiquent 4 Mb (0,5 MB). L'[index des produits](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/docs/product-index.rst) actuel de SiFli renvoie vers la DS5601 V1.9.3, dont les informations de commande n'ont pas pu être vérifiées lors de cette revue ; ne supposez ni que l'ancien écart persiste ni qu'il a été corrigé. Ce tableau suit le guide des modèles de puces. Vérifiez l'entrée de la V1.9.3 ou confirmez auprès de SiFli le code de commande exact et la configuration mémoire livrée avant de figer la nomenclature.
 
 <div align="center"><em>Variantes représentatives de la famille SF32LB56x</em></div>
 
@@ -161,14 +185,16 @@ Les variantes listées ont une plage de tension d'alimentation documentée de 1,
 
 | Référence exemple | Boîtier | GPIO HCPU / LCPU | Mémoire intégrée | Interface d'affichage | Cas d'usage typique |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB560UNN26 | QFN68L | 24 / 20 | 512 Ko de flash NOR QSPI | QSPI | Conceptions d'entrée de gamme de la série 56 pour objets portables, papier électronique ou IHM compacte, avec l'empreinte mémoire la plus faible et le routage des broches le plus simple |
-| SF32LB561UBN26 | QFN68L | 24 / 20 | 4 Mo de PSRAM OPI + 512 Ko de flash NOR QSPI | QSPI | Conceptions graphiques compactes nécessitant plus de marge de tampon d'image que le niveau 560 de base |
-| SF32LB563UCN26 | QFN68L | 24 / 20 | 8 Mo de PSRAM OPI + 512 Ko de flash NOR QSPI | QSPI | Conceptions IHM compactes de plus haute résolution qui restent sur la voie QFN, moins coûteuse |
-| SF32LB56WUND26 | QFN68L | 24 / 20 | 16 Mo de PSRAM OPI + 512 Ko de flash NOR QSPI | QSPI | Produits compacts gourmands en mémoire nécessitant de plus grandes ressources locales sans passer au BGA |
-| SF32LB566VCB36 | WBBGA175 | 79 / 41 | 8 Mo + 4 Mo de PSRAM OPI + 1 Mo de flash NOR QSPI | DPI / QSPI / 8080 / JDI | Conceptions complètes pour objets portables et IHM exigeant des options d'affichage plus riches, davantage d'E/S et exactement le silicium utilisé par le SF32LB56-MOD |
-| SF32LB567VND36 | WBBGA175 | 79 / 41 | 16 Mo de PSRAM OPI + 1 Mo de flash NOR QSPI | DPI / QSPI / 8080 / JDI | Conceptions à nombre élevé d'E/S privilégiant un plus grand bloc unique de PSRAM et un routage d'affichage avancé, sans utiliser la puce standard du module |
+| SF32LB560UNN26 | QFN68L | 24 / 20 | 512 KB de flash NOR QSPI | QSPI | Conceptions d'entrée de gamme de la série 56 pour objets portables, papier électronique ou IHM compacte, avec l'empreinte mémoire la plus faible et le routage des broches le plus simple |
+| SF32LB561UBN26 | QFN68L | 24 / 20 | 4 MB de PSRAM OPI + 512 KB de flash NOR QSPI | QSPI | Conceptions graphiques compactes nécessitant plus de marge de tampon d'image que le niveau 560 de base |
+| SF32LB563UCN26 | QFN68L | 24 / 20 | 8 MB de PSRAM OPI + 512 KB de flash NOR QSPI | QSPI | Conceptions IHM compactes de plus haute résolution qui restent sur la voie QFN, moins coûteuse |
+| SF32LB56WUND26 | QFN68L | 24 / 20 | 16 MB de PSRAM OPI + 512 KB de flash NOR QSPI | QSPI | Produits compacts gourmands en mémoire nécessitant de plus grandes ressources locales sans passer au BGA |
+| SF32LB566VCB36 | WBBGA175 | 79 / 41 | 8 MB + 4 MB de PSRAM OPI + 1 MB de flash NOR QSPI | DPI / QSPI / 8080 / JDI | Conceptions complètes pour objets portables et IHM exigeant des options d'affichage plus riches, davantage d'E/S et exactement le silicium utilisé par le SF32LB56-MOD |
+| SF32LB567VND36 | WBBGA175 | 79 / 41 | 16 MB de PSRAM OPI + 1 MB de flash NOR QSPI | DPI / QSPI / 8080 / JDI | Conceptions à nombre élevé d'E/S privilégiant un plus grand bloc unique de PSRAM et un routage d'affichage avancé, sans utiliser la puce standard du module |
 
 </div>
+
+<div id="_10"></div>
 
 ## Parcours d'intégration { #integration-path }
 
@@ -203,15 +229,23 @@ Jusqu'à 16 MB de PSRAM et jusqu'à 1 MB de Flash NOR dans le boîtier.
 Commencez par le [guide de conception matérielle du SF32LB56x](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) (schéma, alimentation, horloge/RF, routage PCB), puis utilisez les listes de contrôle de schéma et d'implantation avant de figer la carte.
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## Produits associés { #related-products }
+
+<div id="_12"></div>
 
 ### Module { #module }
 
 Le [SF32LB56-MOD](../modules/SF32LB56-MOD.md) regroupe la puce SF32LB566VCB36, la mémoire, la conception RF et des options d'antenne dans un module prêt à intégrer. Il convient aux projets qui veulent bénéficier des capacités du SF32LB56x tout en réduisant les risques liés à l'implantation RF, à l'adaptation d'antenne, au placement du quartz et à l'intégration de la mémoire haute vitesse.
 
+<div id="_13"></div>
+
 ### Kits de développement { #development-kits }
 
 Le [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) est un point de départ pratique pour la mise en service du firmware, la validation de l'écran, les tests audio et de stockage, les vérifications RF et le profilage de puissance avant de s'engager dans une conception à puce nue ou à base de module.
+
+<div id="_14"></div>
 
 ### Produits de référence { #reference-products }
 

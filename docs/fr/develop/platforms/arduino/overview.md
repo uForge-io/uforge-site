@@ -12,9 +12,9 @@ tags:
 [OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) est un cœur Arduino basé sur Zephyr pour SF32. Cette solution convient aux sketches, aux essais de périphériques, aux démonstrations et aux premiers prototypes sur le **SiFli SF32LB52 DevKit LCD**.
 
 !!! warning "Cœur bêta"
-    OpenSiFli qualifie ce cœur de **BETA**. Les fonctionnalités, les API, le contenu des packages, le comportement du loader et les versions peuvent changer. Vérifiez le comportement actuel dans le README du projet et les Releases avant de choisir cette solution pour un produit.
+    OpenSiFli qualifie ce cœur de **BETA** et précise qu'il est réservé aux tests. Ne le considérez pas comme une solution prête pour un produit. Les fonctionnalités, les API, le contenu des packages, le comportement du loader et les versions peuvent changer. Vérifiez le comportement actuel dans le README du projet et les Releases avant de poursuivre l'évaluation.
 
-Pour l'installation initiale de l'IDE, la sélection de la carte et du port, l'installation du bootloader et la vérification de Blink, consultez la page [Arduino](../../../getting-started/arduino/getting-started-arduino.md). Cette page vous aide à déterminer si Arduino convient et à maintenir un projet Arduino après sa première mise en route.
+Pour l'installation initiale de l'IDE, la sélection de la carte et du port, l'installation du bootloader et la vérification de Blink, consultez la page [Premiers pas avec Arduino](../../../getting-started/arduino/getting-started-arduino.md). Cette page vous aide à déterminer si Arduino convient et à maintenir un projet Arduino après sa première mise en route.
 
 ## Où Arduino trouve sa place { #where-arduino-fits }
 

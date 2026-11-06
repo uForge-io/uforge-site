@@ -124,7 +124,7 @@ Jede `region` wird einer SBUS-Speicheradresse und einer CBUS-Adresse für CPU-Au
 
 </div>
 
-Die von v3 generierte `FAL_PART_TABLE` enthält ausschließlich `data/flashdb_kv`, `data/filesystem` und `app`-Partitionen, deren Subtyp nicht `ex` ist. Ausgeschlossen sind `ftab`, `bootloader`, `app/ex` sowie alle übrigen `data`-Subtypen, darunter `littlefs`, `fat`, `fatfs`, `raw`, `ram`, `calibration` und `int_res`. Die Einträge verwenden den jeweiligen Partitionsnamen (`name`); ältere Layout-Aliase wie `main`, `dfu_code` und `fs_root` werden nicht auf Partitionsnamen abgebildet. Definieren Sie `FAL_PART_TABLE` bei der Migration zu v3 nicht manuell; entfernen Sie eine vorhandene board-spezifische `custom_mem_map.h`, um eine Warnung wegen Mehrfachdefinition zu vermeiden.
+Die von v3 generierte `FAL_PART_TABLE` enthält ausschließlich `data/flashdb_kv`, `data/filesystem` und `app`-Partitionen, deren Subtyp nicht `ex` ist. Ausgeschlossen sind `ftab`, `bootloader`, `app/ex` sowie alle übrigen `data`-Subtypen, darunter `littlefs`, `fat`, `fatfs`, `raw`, `ram`, `calibration` und `int_res`. Die Einträge verwenden den jeweiligen Partitionsnamen (`name`). Ältere Layout-Aliase wie `main`, `dfu_code` und `fs_root` werden nicht auf Partitionsnamen abgebildet. Definieren Sie `FAL_PART_TABLE` bei der Migration zu v3 nicht manuell. Entfernen Sie eine vorhandene board-spezifische `custom_mem_map.h`, um eine Warnung wegen Mehrfachdefinition zu vermeiden.
 
 Für jede Partition erzeugt `ptab.h` die Makros `<NAME>_START_ADDR`, `<NAME>_SIZE` und `<NAME>_OFFSET`; `<NAME>` ist der Partitionsname in Großbuchstaben. Wenn der Speichertyp der Region erkannt wird, kommt `<NAME>_MEM_TYPE` hinzu. Bei einer `app/factory`-Partition verwendet `CODE_START_ADDR` die in `exec` angegebene Adresse, falls vorhanden, andernfalls die CBUS-Adresse der Partition.
 
@@ -132,7 +132,7 @@ Verwenden Sie `exec: {region, offset}`, wenn eine Anwendung nicht direkt aus ihr
 
 ### Standardwerte und Projekt-Overlays { #defaults-and-project-overlays }
 
-v3 leitet Systemstandardwerte ab, wenn die entsprechenden Partitionen fehlen. Für SF32LB52 können `flash_table` und `bootloader` aus der Speicherregion der HCPU-Werksanwendung abgeleitet werden; bei NAND- oder SDMMC-Bootspeicher werden außerdem die dokumentierten Standard-Datenpartitionen angelegt. Für SF32LB56 und SF32LB58 können `flash_table` und `bootloader` auf dem internen `mpi5` entfallen. Standard-SiP-PSRAM-Fenster und Standard-RAM-Partitionen können ebenfalls entfallen, sofern das Projekt das RAM-Layout nicht ändert.
+v3 leitet Systemstandardwerte ab, wenn die entsprechenden Partitionen fehlen. Für SF32LB52 werden `flash_table` und `bootloader` aus der Speicherregion der HCPU-Werksanwendung abgeleitet, wenn der Bootspeicher NOR, NAND oder SDMMC ist; bei NAND- oder SDMMC-Bootspeicher werden außerdem die dokumentierten Standard-Datenpartitionen angelegt. Für SF32LB56 und SF32LB58 können `flash_table` und `bootloader` auf dem internen `mpi5` entfallen. Standard-SiP-PSRAM-Fenster und Standard-RAM-Partitionen können ebenfalls entfallen, sofern das Projekt das RAM-Layout nicht ändert.
 
 Verwenden Sie für eine kleine projektspezifische Änderung `ptab.overlay.yaml`, statt die vollständige `ptab.yaml` des Boards zu kopieren. Es kann eine Partition hinzufügen oder eine bestehende überschreiben:
 

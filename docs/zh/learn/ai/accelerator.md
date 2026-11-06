@@ -38,31 +38,12 @@ tags:
 
 <div align="center"><em>示意图：处理阶段与固件管理的推理流程</em></div>
 
-```text
-Sensors / Audio / Camera
-        │
-        ▼
-Pre-processing
-  - filtering
-  - framing
-  - normalization
-  - feature extraction
-        │
-        ▼
-Firmware / Inference Runtime
-  - model graph orchestration
-  - supported operations on NNACC
-  - other operations on CPU, if implemented
-        │
-        ▼
-Post-processing
-  - thresholding
-  - smoothing
-  - event detection
-  - application decisions
-        │
-        ▼
-Application, UI, Bluetooth, or Storage
+```mermaid
+flowchart TD
+    A["传感器 / 音频 / 摄像头"] --> B["预处理<br/>滤波<br/>分帧<br/>归一化<br/>特征提取"]
+    B --> C["固件 / 推理运行时<br/>模型图编排<br/>NNACC 支持的运算<br/>其他运算由 CPU 执行（如已实现）"]
+    C --> D["后处理<br/>阈值判定<br/>平滑<br/>事件检测<br/>应用决策"]
+    D --> E["应用、UI、Bluetooth 或存储"]
 ```
 
 加速器只是完整 AI 流水线的一部分。实际产品仍需完成数据采集、缓冲、预处理、推理调度、后处理和应用层决策。围绕内存层级和可用加速器设计整条流水线，通常能获得最佳性能，而不是把推理当作孤立的函数调用。

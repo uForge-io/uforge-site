@@ -8,7 +8,7 @@ tags:
 
 # Zephyr upstream { #zephyr-upstream }
 
-Zephyr v4.3.0以降、upstream Zephyrでは`sf32lb52_devkit_lcd`ボードがサポートされ、継続的にメンテナンスされています。[v4.3.0リリースノート](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html)と [SF32LB52 DevKit LCDボードドキュメント](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)を参照してください。このガイドではv4.3.0のワークスペースを作成し、最初のサンプルをビルドしてボードに書き込みます。SF32のより広範な公式機能が必要な場合は、[SiFli-SDK](../sifli/getting-started-sifli-sdk.md)を使用してください。
+`sf32lb52_devkit_lcd`ボードはZephyr v4.3.0からupstreamでサポートされています。このガイドでは、現在も保守されているZephyr v4.5.0を使って新しいワークスペースを作成し、サンプルをビルドしてボードに書き込みます。[v4.3.0リリースノート](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html)、[v4.5.0リリースノート](https://docs.zephyrproject.org/4.5.0/releases/release-notes-4.5.html)、最新の[SF32LB52 DevKit LCDボードドキュメント](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)を参照してください。SF32のより広範な公式機能が必要な場合は、[SiFli-SDK](../sifli/getting-started-sifli-sdk.md)を使用してください。
 
 !!! note "ボードの対応機能を確認"
     upstreamのボード定義があることだけでは、すべての周辺機能や動作モードが有効で、製品向けに検証済みであるとは限りません。ボードドキュメントの対応機能表を確認し、使用するボードのリビジョンで必要な動作を検証してください。
@@ -22,23 +22,49 @@ Zephyr v4.3.0以降、upstream Zephyrでは`sf32lb52_devkit_lcd`ボードがサ�
 
 **ソフトウェア**
 
-- Zephyr v4.3.0がサポートするホストOS。[Getting Startedガイド](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html)に従ってセットアップしてください。
+- Zephyr v4.5.0がサポートするホストOS。[Getting Startedガイド](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html)に従ってセットアップしてください。
 - 同ガイドの手順に従い、ARM Cortex-Mターゲット用のZephyrホスト依存パッケージとZephyr SDKをインストール。
 - Git、Python 3、`pip`。
 
 ## ツールを準備する { #prepare-the-tooling }
 
-まずZephyrの [v4.3.0 Getting Startedガイド](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html)に従い、ホスト依存パッケージとZephyr SDKをセットアップします。次にPython環境を作成し、対応するZephyrタグからワークスペースを初期化します。
+まずZephyrの [v4.5.0 Getting Startedガイド](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html)に従い、ホスト依存パッケージとZephyr SDKをセットアップします。以下のコマンドから使用するシェルを選び、Python環境を作成して対応するZephyrタグでワークスペースを初期化します。
 
 ```bash
 python3 -m venv ~/zephyr-venv
-source ~/zephyr-venv/bin/activate
-pip install west
-west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.3.0 ~/zephyrproject
+. ~/zephyr-venv/bin/activate
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 ~/zephyrproject
 cd ~/zephyrproject
 west update
 west zephyr-export
-pip install -r zephyr/scripts/requirements.txt
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+Windows PowerShell:
+
+```powershell
+py -3 -m venv "$HOME\zephyr-venv"
+& "$HOME\zephyr-venv\Scripts\Activate.ps1"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "$HOME\zephyrproject"
+Set-Location "$HOME\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+Windowsコマンドプロンプト:
+
+```bat
+py -3 -m venv "%USERPROFILE%\zephyr-venv"
+call "%USERPROFILE%\zephyr-venv\Scripts\activate.bat"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "%USERPROFILE%\zephyrproject"
+cd /d "%USERPROFILE%\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
 ```
 
 以下のビルドと書き込みでは、このPython環境を有効にしたままにしてください。
@@ -75,7 +101,7 @@ upstreamのボードでは`sftool`がデフォルトの書き込みrunnerに指�
 west flash
 ```
 
-書き込みに失敗する場合は、シリアルポートの選択、ダウンロードモード、および[ボードドキュメント](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)のrunner説明を確認してください。
+書き込みに失敗する場合は、シリアルポートの選択、ダウンロードモード、および[ボードドキュメント](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)のrunner説明を確認してください。
 
 ## シリアルコンソールを開く { #open-the-serial-console }
 
@@ -87,7 +113,7 @@ Hello World! sf32lb52_devkit_lcd
 
 ## 次のサンプルを選ぶ { #choose-a-next-sample }
 
-upstreamボードドキュメントの対応機能表と[Zephyrサンプル一覧](https://docs.zephyrproject.org/4.3.0/samples/index.html)を参照し、次に評価するAPIや周辺機能を選びます。その機能がボードでサポートされ、必要な設定が有効になっていることを確認してください。サンプルが動作しただけで製品レベルの準備が整ったと判断しないでください。
+upstreamボードドキュメントの対応機能表と[Zephyrサンプル一覧](https://docs.zephyrproject.org/4.5.0/samples/index.html)を参照し、次に評価するAPIや周辺機能を選びます。その機能がボードでサポートされ、必要な設定が有効になっていることを確認してください。サンプルが動作しただけで製品レベルの準備が整ったと判断しないでください。
 
 ## トラブルシューティング { #troubleshooting }
 
@@ -97,8 +123,8 @@ upstreamボードドキュメントの対応機能表と[Zephyrサンプル一�
 
 | 症状 | 確認項目 |
 |:-----|:---------|
-| `west boards`にSF32ターゲットが表示されない | upstream Zephyr v4.3.0以降からワークスペースを初期化したこと、および`west update`が完了したことを確認します。 |
-| コンパイル開始前にビルドが失敗する | Python環境が有効であること、ARM Cortex-M用Zephyr SDKがインストール済みであること、v4.3.0の依存パッケージを導入したことを確認します。 |
+| `west boards`にSF32ターゲットが表示されない | upstream Zephyr v4.5.0以降からワークスペースを初期化したこと、および`west update`が完了したことを確認します。 |
+| コンパイル開始前にビルドが失敗する | Python環境が有効であること、ARM Cortex-M用Zephyr SDKがインストール済みであること、v4.5.0の依存パッケージを導入したことを確認します。 |
 | ビルドできるが書き込みできない | `sftool`がインストールされ`PATH`にあること、シリアルポートが正しいこと、ボードがシリアルダウンロードモードであることを確認します。 |
 | シリアル出力がない | `usart1`、`1000000` baud、USB-to-UART接続、および別のターミナルがポートを開いていないかを確認します。 |
 | 周辺機能のサンプルが失敗する | ボードの対応機能表とサンプル設定を確認します。ベースのボードターゲットですべての周辺機能が有効とは限りません。 |

@@ -55,7 +55,7 @@ Esta lista se basa en el libro de comprobación SF32LB58x Schematic&PCB checklis
 | 12 | Ancho de la pista de alimentación AVDD33_ANA de al menos 6 mil | Obligatorio |
 | 13 | Ancho de la pista de alimentación AVDD_BRF de al menos 8 mil | Obligatorio |
 | 14 | Ancho de la pista de alimentación AVDD33_AUD de al menos 6 mil | Obligatorio |
-| 15 | Ancho de la pista de alimentación AVDD33_DSI de al menos 8 mil | Obligatorio |
+| 15 | Ancho de la pista de alimentación AVDD18_DSI de al menos 8 mil | Obligatorio |
 
 </div>
 
@@ -86,7 +86,7 @@ Esta lista se basa en el libro de comprobación SF32LB58x Schematic&PCB checklis
 | 17 | Coloque el condensador AVDD33_ANA cerca del pin | Obligatorio |
 | 18 | Coloque el condensador AVDD_BRF cerca del pin | Obligatorio |
 | 19 | Coloque el condensador AVDD33_AUD cerca del pin | Obligatorio |
-| 20 | Coloque el condensador AVDD33_DSI cerca del pin | Obligatorio |
+| 20 | Coloque el condensador AVDD18_DSI cerca del pin | Obligatorio |
 
 </div>
 

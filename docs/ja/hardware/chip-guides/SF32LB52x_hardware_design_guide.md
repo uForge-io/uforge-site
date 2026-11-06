@@ -61,7 +61,7 @@ SF32LB52xファミリーは、デュアルコアSTAR-MC1プロセッサー、Blu
 - デュアルモードBluetooth 5.3無線機能
 - ePicasso 2.0 2D/2.5Dグラフィックスアクセラレーター
 - SiFliの元のハードウェアアプリケーションノートには、AIニューラルネットワークアクセラレーターの内蔵が記載されています。[SiFli-SDK NNACCガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/nnacc.html)にはSF32LB55x、SF32LB56x、SF32LB58xが記載されていますが、SF32LB52xは含まれていません。このアクセラレーターに依存する場合は、対象型番のソフトウェア対応を確認してください。
-- SPI、QSPI、8080、JDI、8ビットEPDインターフェースに対応するディスプレイコントローラー
+- SPI、QSPI、8080、JDIに対応するディスプレイコントローラー。8ビットパラレルEPDは資料上`52B/D/E/G/J`で確認されています。対象品番の対応をSiFliに確認してください
 - USB 2.0 Full-Speedデバイス
 - 対応バリアントで利用できるSDIO/eMMCストレージインターフェース
 - 内蔵オーディオコーデックとアナログ／デジタルオーディオインターフェース
@@ -72,11 +72,11 @@ SF32LB52xファミリーは、デュアルコアSTAR-MC1プロセッサー、Blu
 
 SF32LB52xファミリーは、電源アーキテクチャに応じて、バッテリー駆動デバイスと外部レギュレーター給電デバイスの2つの設計グループに分かれます。
 
-=== "SF32LB520/3/5/7 (バッテリー駆動)"
+=== "SF32LB520/3/5/7（バッテリー駆動）"
 
     このグループは、チップ内に**充電管理モジュールとPMU**を搭載しています。単セルのリチウムイオンバッテリーに直接接続できるほか、外付け充電方式にも対応します。
 
-    <div align="center"><em>表 3.2-1: 型番対応表 (バッテリー駆動バリアント)</em></div>
+    <div align="center"><em>表 3.2-1: 型番対応表（バッテリー駆動バリアント）</em></div>
 
     <div align="center" markdown>
 
@@ -89,11 +89,11 @@ SF32LB52xファミリーは、電源アーキテクチャに応じて、バッ�
 
     </div>
 
-=== "52B/D/E/G/J (外部レギュレーター給電)"
+=== "52B/D/E/G/J（外部レギュレーター給電）"
 
     このグループにはチップ内蔵の**PMU**がありますが、充電回路は含まれません。安定化された外部電源から給電します。
 
-    <div align="center"><em>表 3.2-2: 型番対応表 (外部レギュレーター給電バリアント)</em></div>
+    <div align="center"><em>表 3.2-2: 型番対応表（外部レギュレーター給電バリアント）</em></div>
 
     <div align="center" markdown>
 
@@ -144,9 +144,9 @@ SF32LB52xファミリーは、電源アーキテクチャに応じて、バッ�
 
 <div align="center"><em>図 3.3-1: SF32LB520/3/5/7のQFN68Lピン配置</em></div>
 
-![図 3.3-2: SF32LB52B/E/G/JのQFN68Lピン配置](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ width="100%" loading="lazy" }
+![図 3.3-2: SF32LB52B/D/E/G/JのQFN68Lピン配置](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>図 3.3-2: SF32LB52B/E/G/JのQFN68Lピン配置</em></div>
+<div align="center"><em>図 3.3-2: SF32LB52B/D/E/G/JのQFN68Lピン配置</em></div>
 
 ### 3.4. 用途 { #34-applications }
 
@@ -183,7 +183,7 @@ SF32LB52xファミリーは、電源アーキテクチャに応じて、バッ�
 | Buckインダクター | 4.7 uH ±20%、DCR ≤ 0.4 Ω、Isat ≥ 450 mA |
 | 水晶振動子 | 48 MHzメイン水晶振動子と32.768 kHz RTC水晶振動子 |
 | RF | 50 Ω制御インピーダンス配線と、π型整合回路用の実装スペース |
-| ディスプレイ | 3線SPI、4線SPI、Dual-SPI、Quad-SPI (最大512 x 512)、JDI、8ビットEPD |
+| ディスプレイ | 3線SPI、4線SPI、Dual-SPI、Quad-SPI（最大512 x 512）、JDI、8ビットパラレルEPD（資料で確認されているのは`52B/D/E/G/J`。対象品番の対応をSiFliに確認） |
 | タッチ | 割り込みウェイクアップに対応するI2C静電容量式タッチコントローラー |
 | ストレージ | バリアントに応じてSiP Flash/PSRAM、外付けSPI NOR、SPI NAND、SD NAND、eMMC |
 | オーディオ | アナログマイク入力、差動DAC出力、外付けPA |
@@ -283,9 +283,9 @@ SF32LB52xファミリーは、電源アーキテクチャに応じて、バッ�
 <div class="grid cards" markdown>
 
 - :fontawesome-solid-bolt: __[回路図設計指針](SF32LB52x_schematic_design.md)__ — 最小システム、電源システム、クロック生成、RF、ユーザーインターフェース、ストレージと接続性、製造時に必要なアクセス手段を3ページで解説
-- :fontawesome-solid-list-check: __[回路図チェックリスト](SF32LB52x_schematic_checklist.md)__ — 項目別の回路図レビュー用チェックリスト (第 5.8 節)
+- :fontawesome-solid-list-check: __[回路図チェックリスト](SF32LB52x_schematic_checklist.md)__ — 項目別の回路図レビュー用チェックリスト（第 5.8 節）
 - :fontawesome-solid-microchip: __[PCBレイアウト指針](SF32LB52x_pcb_layout.md)__ — フットプリント、積層、ファンアウト、クロック／RF／オーディオ／USB／SDIO／電源の配線指針
-- :fontawesome-solid-list-check: __[PCBレイアウトチェックリスト](SF32LB52x_pcb_layout_checklist.md)__ — 項目別のPCBレイアウトレビューチェックリスト (第 6.15 節)
+- :fontawesome-solid-list-check: __[PCBレイアウトチェックリスト](SF32LB52x_pcb_layout_checklist.md)__ — 項目別のPCBレイアウトレビューチェックリスト（第 6.15 節）
 - :fontawesome-solid-book-open: __[設計レビュー用チェックリストと参考資料](SF32LB52x_review_and_reference.md)__ — リリース前チェックリスト、関連資料、回路図／PCB／機構／電源の参考資料、改訂履歴
 
 </div>

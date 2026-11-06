@@ -8,6 +8,8 @@ tags:
 
 # SF32LB58x { #sf32lb58x }
 
+<div id="_1"></div>
+
 ## Überblick { #overview }
 
 Die Serie SF32LB58x bildet die Flaggschiffklasse der Familie SF32LB5x. Sie richtet sich an akkubetriebene AIoT-Produkte, die fortschrittliche Grafik, große Speicherkapazität, Dual-Mode-Bluetooth, vielfältige Audio-/Display-I/Os und eine hohe GPIO-Dichte benötigen, ohne auf eine größere Applikationsprozessor-Plattform zu wechseln.
@@ -17,6 +19,8 @@ SF32LB58x nutzt eine heterogene Drei-Kern-Architektur mit Arm Cortex-M33 STAR-MC
 SiFli dokumentiert 3 744 KB On-Chip-SRAM und SKU-abhängige Kombinationen aus NOR-Flash und OPI-/HPI-PSRAM im Gehäuse. Die Familie bietet außerdem Display-Unterstützung einschließlich MIPI DSI, Vektorgrafikbeschleunigung, USB 2.0 High-Speed und ein BGA-Gehäuse mit hoher I/O-Zahl. Evaluieren Sie SF32LB58x, wenn ein Design eine hochauflösende Bedienoberfläche, umfangreiche Grafikressourcen, externes WLAN über SDIO oder die Rechen- und Speicherressourcen für Edge-KI- oder Sensorfusionslasten benötigt.
 
 [^1]: STAR-MC1 ist ein konfigurierbarer Embedded-CPU-IP-Baustein von Arm China auf Basis von Armv8-M Mainline. In kompatiblen SF32-Geräten dokumentiert SiFli STAR-MC1 als Anwendungsprozessor Arm Cortex-M33 STAR-MC1. Das Softwaremodell auf Cortex-M33-Niveau erleichtert die Übernahme vorhandener Cortex-M33-Firmware, Middleware, RTOS-Portierungen und Werkzeuge, vorbehaltlich der üblichen bausteinspezifischen Integrationsarbeit. Die Konfigurationen CU, SP und SE unterscheiden sich hauptsächlich bei Cache, TCM, XIPU und TrustZone; Arm Custom Instructions/CDE und die Coprozessor-Schnittstelle sind optionale Funktionen, die für das genaue SF32-Gerät zu prüfen sind. In der SiFli-Dokumentation steht je nach Kontext ***Arm Cortex-M33 STAR-MC1*** oder ***Arm Cortex-M33***.
+
+<div id="_2"></div>
 
 ## Anwendungen { #applications }
 
@@ -38,6 +42,8 @@ Wählen Sie SF32LB58x, wenn das Design eine oder mehrere dieser Fähigkeiten ben
 - Externes WLAN über SDIO
 - Großer Speicher für Framebuffer, Audio, Grafik oder KI-Modelle
 - Hohe GPIO-Anzahl oder mehrere schnelle externe Schnittstellen
+
+<div id="_3"></div>
 
 ## Entwicklungsressourcen { #development-resources }
 
@@ -65,7 +71,11 @@ Wählen Sie SF32LB58x, wenn das Design eine oder mehrere dieser Fähigkeiten ben
 
 ---
 
+<div id="_4"></div>
+
 ## Merkmale und Spezifikationen { #features-and-specs }
+
+<div id="_5"></div>
 
 ### Rechenleistung und Speicher { #compute-and-memory }
 
@@ -74,6 +84,8 @@ Wählen Sie SF32LB58x, wenn das Design eine oder mehrere dieser Fähigkeiten ben
 - NOR-Flash-Optionen im Gehäuse von 1 MB bis 8 MB insgesamt, je nach SKU
 - OPI-PSRAM- und HPI-PSRAM-Optionen im Gehäuse; HPI-PSRAM ist je nach SKU bis zu 2 × 32 MB verfügbar
 - Externes NOR- oder SPI-NAND-Flash über MPI3/MPI4; SD-NAND, eMMC, SD-Karten oder externes WLAN über SDIO. Die verfügbaren Kombinationen hängen von Schnittstellenwahl und Pinzuweisung ab.
+
+<div id="ai"></div>
 
 ### Grafik, Display und KI { #graphics-display-and-ai }
 
@@ -89,6 +101,8 @@ Maximale Auflösung und Panel-Schnittstellen: siehe [Schnittstellenmatrix pro Ge
 - Display-Schnittstellen SPI, DSPI, QSPI (einschließlich SPI-E-Paper), MCU8080, JDI, RGB/DPI (RGB888 oder RGB565) und MIPI DSI
 - Unterstützt zwei Displays mit unterschiedlichem Inhalt, mit MIPI DSI zusammen mit SPI, DSPI oder QSPI
 - Geeignet für lokale Edge-KI-, Machine-Learning- und Sensorfusions-Lasten
+
+<div id="_6"></div>
 
 ### Audio und drahtlose Konnektivität { #audio-and-wireless-connectivity }
 
@@ -127,11 +141,15 @@ Maximale Auflösung und Panel-Schnittstellen: siehe [Schnittstellenmatrix pro Ge
 - RTC, Watchdog, GPIO-Aufwachen, PBR-Aufwachen, PWM, I2C, SPI und universelle Analogschnittstellen
 - BGA256-Gehäuse für hochdichte Designs
 
+<div id="_7"></div>
+
 ### Stromversorgung und Gehäuse { #power-supply-and-package }
 
 - Versorgungsspannungsbereich: 1,71 V bis 3,63 V
 - BGA256-Gehäuse, 6,5 × 8,5 × 0,94 mm, 0,4 mm Rastermaß
 - HDI-PCB erforderlich; für Serienprodukte wird der Lagenaufbau 6HDI-2 empfohlen
+
+<div id="_8"></div>
 
 ## Familienvarianten { #family-variants }
 
@@ -161,6 +179,8 @@ Prüfen Sie bei der Variantenwahl zuerst diese Punkte:
 - Anforderungen an externen Speicher und WLAN-Schnittstelle
 - PCB-Fertigungsfähigkeit für BGA256-HDI-Layout mit 0,4 mm Rastermaß
 
+<div id="_9"></div>
+
 ## Integrationspfad { #integration-path }
 
 Mit dieser Abfolge machen Sie aus einer SF32LB58x-Vorauswahl ein validiertes Design:
@@ -174,7 +194,7 @@ Mit dieser Abfolge machen Sie aus einer SF32LB58x-Vorauswahl ein validiertes Des
 ## Häufig gestellte Fragen { #frequently-asked-questions }
 
 **Was sind die wichtigsten Spezifikationen des SF32LB58x?**
-Der SF32LB58x nutzt 2× Cortex-M33 @240 MHz für Anwendungsaufgaben und verfügt über einen Low-Power-Kern (Cortex-M33 @48/96 MHz; vom Anwender programmierbar). Hinzu kommen 3,7 MB internes SRAM und Dual-Mode-Bluetooth (BT Classic + BLE). Grafik: ePicasso 2.0 + Vivante GCNanoUltraV (Vektorgrafik). Gehäuse: BGA256 (8,5 × 6,5 mm). USB 2.0 HS.
+Der SF32LB58x nutzt 2× Cortex-M33 @240 MHz für Anwendungsaufgaben und verfügt über einen vom Anwender programmierbaren Low-Power-Cortex-M33, der bis auf 96 MHz eingestellt werden kann. Die separate Angabe von 48 MHz ist ein CoreMark-Messpunkt für die Leistungsaufnahme; die Quellen belegen sie hier nicht als zweite spezifizierte Betriebsfrequenz. Hinzu kommen 3,7 MB internes SRAM und Dual-Mode-Bluetooth (BT Classic + BLE). Grafik: ePicasso 2.0 + Vivante GCNanoUltraV (Vektorgrafik). Gehäuse: BGA256 (8,5 × 6,5 mm). USB 2.0 HS.
 
 **Welche Display-Schnittstellen unterstützt der SF32LB58x?**
 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. ([Schnittstellenmatrix pro Gerät](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -192,15 +212,23 @@ Bis zu 32 MB + 32 MB PSRAM und bis zu 8 MB NOR-Flash im Gehäuse.
 Beginnen Sie mit dem [Hardware-Design-Leitfaden für den SF32LB58x](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md) zu Schaltplan, Stromversorgung, Takt/RF und PCB-Layout und nutzen Sie vor der Freigabe die Checklisten für Schaltplan und Layout.
 <!-- uf-faq:end -->
 
+<div id="_10"></div>
+
 ## Verwandte Produkte { #related-products }
+
+<div id="_11"></div>
 
 ### Modul { #module }
 
 [SF32LB58-MOD](../modules/SF32LB58-MOD.md) bündelt den Chip SF32LB586VDD36 mit seinem RF-Anpassnetzwerk, dem HPI-PSRAM im Gehäuse und den Speicheroptionen zu einem integrationsfertigen Modul. Nutzen Sie es, wenn das Projekt die Fähigkeiten der 58er-Serie benötigt, aber das Risiko bei RF, BGA und Speicherlayout früh in der Hardwareentwicklung senken soll.
 
+<div id="_12"></div>
+
 ### Entwicklungsboards { #development-kits }
 
 [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) ist der Ausgangspunkt für Designentscheidungen zu Versorgungsbaum, Display, Speicher, Audio, RF, USB und SDIO.
+
+<div id="_13"></div>
 
 ### Referenzprodukte { #reference-products }
 

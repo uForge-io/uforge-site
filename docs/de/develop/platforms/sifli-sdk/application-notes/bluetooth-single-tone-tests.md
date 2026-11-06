@@ -70,6 +70,8 @@ Stoppen Sie TX, bevor Sie RX aktivieren. Stellen Sie den Kanal ein und drücken 
 PER = (1500 - received_packets) / 1500 × 100%
 ```
 
+Die verlinkte [SiFli-Anleitung](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/bt_individual_test_guide.html) definiert `n` als Zahl der empfangenen Pakete, gibt aber derzeit `PER = (n - 1500) / 1500 × 100%` an. Das Vorzeichen ist damit umgekehrt zur obigen Berechnung verlorener Pakete. Diese Seite behält die Verlustformel bei; lassen Sie die beabsichtigte Formel von SiFli bestätigen, bevor Sie beide als gleichwertig behandeln.
+
 Notieren Sie auch den RSSI-Wert. Verwenden Sie für Classic-BT-RX eine CMW500-GPRF-Generator-Wellenform wie DH1/2-DH1/3-DH1 und zeichnen Sie empfangene Pakete, Fehlerpakete, Bitanzahl, BER und RSSI auf. Die BLE- und Classic-BT-RF-Pfade teilen sich die Hardware; führen Sie sie nicht parallel aus.
 
 ![SiFli_RfTool BLE-RX-Einstellungen](../../../../assets/develop/app-notes/bluetooth-single-item/figure_13-5.png){ loading="lazy" }

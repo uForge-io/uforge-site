@@ -38,31 +38,12 @@ tags:
 
 <div align="center"><em>Схема: этапы обработки и управление инференсом из прошивки</em></div>
 
-```text
-Sensors / Audio / Camera
-        │
-        ▼
-Pre-processing
-  - filtering
-  - framing
-  - normalization
-  - feature extraction
-        │
-        ▼
-Firmware / Inference Runtime
-  - model graph orchestration
-  - supported operations on NNACC
-  - other operations on CPU, if implemented
-        │
-        ▼
-Post-processing
-  - thresholding
-  - smoothing
-  - event detection
-  - application decisions
-        │
-        ▼
-Application, UI, Bluetooth, or Storage
+```mermaid
+flowchart TD
+    A["Датчики / Аудио / Камера"] --> B["Предварительная обработка<br/>фильтрация<br/>разбиение на кадры<br/>нормализация<br/>извлечение признаков"]
+    B --> C["Прошивка / среда инференса<br/>координация графа модели<br/>поддерживаемые операции на NNACC<br/>другие операции на CPU, если реализованы"]
+    C --> D["Постобработка<br/>пороговая обработка<br/>сглаживание<br/>обнаружение событий<br/>решения приложения"]
+    D --> E["Приложение, UI, Bluetooth или хранилище"]
 ```
 
 Ускоритель — лишь один из компонентов полного ИИ-конвейера. Реальному изделию также нужны сбор данных, буферизация, предварительная обработка, планирование инференса, постобработка и логика принятия решений на уровне приложения. Обычно максимальную производительность даёт проектирование всего конвейера с учётом иерархии памяти и доступных ускорителей, а не рассмотрение инференса как отдельного вызова функции.

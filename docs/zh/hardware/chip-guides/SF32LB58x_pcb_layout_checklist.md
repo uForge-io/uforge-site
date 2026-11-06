@@ -55,7 +55,7 @@ tags:
 | 12 | AVDD33_ANA 供电走线至少 6 mil | 必检 |
 | 13 | AVDD_BRF 供电走线宽度至少为 8 mil | 必检 |
 | 14 | AVDD33_AUD 供电走线至少 6 mil | 必检 |
-| 15 | AVDD33_DSI 供电走线至少 8 mil | 必检 |
+| 15 | AVDD18_DSI 供电走线至少 8 mil | 必检 |
 
 </div>
 
@@ -86,7 +86,7 @@ tags:
 | 17 | AVDD33_ANA 电容靠近引脚放置 | 必检 |
 | 18 | AVDD_BRF 电容靠近引脚放置 | 必检 |
 | 19 | AVDD33_AUD 电容靠近引脚放置 | 必检 |
-| 20 | AVDD33_DSI 电容靠近引脚放置 | 必检 |
+| 20 | AVDD18_DSI 电容靠近引脚放置 | 必检 |
 
 </div>
 

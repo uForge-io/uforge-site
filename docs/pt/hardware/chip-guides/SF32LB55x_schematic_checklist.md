@@ -221,10 +221,10 @@ A planilha de origem deixa em branco a categoria do item 3 de RF, e ela permanec
 | 5 | <span class="flag-red">A chave de tensão controlada por PA58 é ligada em nível alto e desligada em nível baixo</span> | Todas as variantes | Obrigatório |
 | 6 | <span class="flag-red">Recomenda-se usar resistores série de 33 Ω nas linhas CLK e de dados da Flash</span> | Todas as variantes | Obrigatório |
 | 7 | O QSPI3 está conectado à Flash NAND ou eMMC conforme previsto | Somente 555/557 | Opcional |
-| 8 | O controle da chave de alimentação do QSPI3 é PA41; <span class="flag-red">a alimentação do QSPI3 fica desligada por padrão e uma chave ativa em nível alto deve usar pull-down interno padrão</span> | Somente 555/557 | Opcional |
+| 8 | O controle da chave de alimentação do QSPI3 é PA41; <span class="flag-red">a alimentação do QSPI3 fica desligada por padrão e recomenda-se usar pull-down interno padrão para uma chave ativa em nível alto</span> | Somente 555/557 | Opcional |
 | 9 | <span class="flag-red">Se o controle da chave de alimentação do QSPI3 não for PA41, confirme com a equipe de software o uso do I/O alternativo</span> | Somente 555/557 | Opcional |
 | 10 | Se a Flash externa no QSPI3 precisar ser programada na produção, a chave de alimentação deve ser controlada por PA58 | Somente 555/557 | Obrigatório |
-| 11 | O controle da chave de alimentação da OPI PSRAM é PA70; <span class="flag-red">a alimentação da PSRAM fica ligada por padrão e uma chave ativa em nível alto deve usar pull-up interno padrão</span> | Somente 555/557 | Opcional |
+| 11 | O controle da chave de alimentação da OPI PSRAM é PA70; <span class="flag-red">a alimentação da PSRAM fica ligada por padrão e recomenda-se usar pull-up interno padrão para uma chave ativa em nível alto</span> | Somente 555/557 | Opcional |
 | 12 | <span class="flag-red">A OPI PSRAM é um modelo compatível e consta como qualificada no guia de seleção de componentes críticos</span> | Somente 555/557 | Opcional |
 | 13 | As conexões dos sinais da OPI PSRAM estão corretas | Somente 555/557 | Opcional |
 | 14 | A conexão dos sinais do QSPI2 está correta | Todas as variantes | Opcional |

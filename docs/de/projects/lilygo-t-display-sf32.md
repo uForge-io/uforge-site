@@ -111,7 +111,7 @@ Die zitierte Repository-Dokumentation verweist auf den Branch `master` und weist
 Die T-Display-SF32-README beschreibt nach Einrichtung der erforderlichen Umgebung folgenden Build- und Flashablauf unter Windows:
 
 ```powershell
-cd T-Display-SF32\examples\rt_os\rt_driver\project
+cd SIFLI\T-Display-SF32\examples\rt_os\rt_driver\project
 scons --board=t-display-sf32_hcpu -j8
 build_t-display-sf32_hcpu\uart_download.bat
 ```

@@ -1,7 +1,7 @@
 ---
 icon: lucide/lightbulb
 title: "Descripción general de la sección Aprendizaje"
-description: "Consulte la orientación que necesita sobre la arquitectura de SF32 y sus subsistemas: gráficos, Bluetooth, IA, audio y bajo consumo."
+description: "Consulte la orientación que necesita sobre la arquitectura de SF32 y sus subsistemas: gráficos, Bluetooth, IA, audio, bajo consumo y la arquitectura subyacente del procesador."
 tags:
     - Aprendizaje
 ---
@@ -21,7 +21,7 @@ Para poner en marcha una placa por primera vez, consulte [Primeros pasos](../get
 | Si necesita… | Comience aquí | Luego explore |
 |:----------------|:-----------|:-------------|
 | Entender el procesador, la memoria y cómo delegar tareas en hardware especializado | [Panorama de la arquitectura](architecture/overview.md) | Consulte [STAR-MC1](architecture/star-mc1.md), [PSRAM frente a otros tipos de memoria para sistemas embebidos](architecture/psram-and-memory-types.md) y [PTM (Parallel Task Machine)](architecture/ptm-parallel-task-machine.md) cuando sean pertinentes para el dispositivo elegido. |
-| Crear una interfaz para la pantalla o definir la estrategia de recursos gráficos y framebuffer | [Resumen de gráficos](graphics/overview.md) | Consulte [Controlador de pantalla](graphics/display-controller.md), [ePicasso](graphics/epicasso-gpu.md), [eZip](graphics/ezip.md) y [TurboPixel](graphics/turbopixel.md) para tomar las decisiones pertinentes sobre pantalla, renderizado y compresión. |
+| Crear una interfaz para la pantalla o definir la estrategia para los recursos gráficos y el búfer de imagen (framebuffer) | [Resumen de gráficos](graphics/overview.md) | Consulte [Controlador de pantalla](graphics/display-controller.md), [ePicasso](graphics/epicasso-gpu.md), [eZip](graphics/ezip.md) y [TurboPixel](graphics/turbopixel.md) para tomar las decisiones pertinentes sobre pantalla, renderizado y compresión. |
 | Conectar un teléfono, accesorio o dispositivo de audio | [Resumen de Bluetooth](bluetooth/overview.md) | [Procesador Bluetooth](bluetooth/processor.md) para conocer la separación de responsabilidades entre el controlador y la aplicación, y luego [Bluetooth PAN](bluetooth/pan.md) cuando el producto necesite transporte IP a través del teléfono. |
 | Añadir inferencia en el dispositivo | [Resumen de IA](ai/overview.md) | Consulte [Acelerador de IA](ai/accelerator.md) y, después, las comprobaciones de memoria, latencia y consumo que requieran el modelo y la canalización. |
 | Capturar, reproducir o procesar sonido | [Descripción general del audio](audio/overview.md) | Consulte [Audio Server y gestión de búferes](audio/audio-server-buffering.md). Si el producto transmite audio o gestiona llamadas por Bluetooth, revise también la guía de Bluetooth. |

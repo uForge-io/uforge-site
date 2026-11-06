@@ -227,7 +227,7 @@ AVDD33_USB 디커플링 커패시터는 해당 핀 가까이에 배치하고, US
 
 ### 6.9. SDIO 인터페이스 라우팅 { #69-sdio-interface-routing }
 
-SF32LB58x는 SDIO1과 SDIO2, 두 개의 SDIO 인터페이스를 제공합니다. 각 SDIO 인터페이스의 모든 신호는 나누지 말고 함께 라우팅하되, 총 트레이스 길이는 ≤50 mm, 그룹 내 길이 제어는 ≤6 mm로 하십시오. SDIO 클럭 신호에는 3차원 실드를 적용하고, DATA와 CMD 신호도 실드하십시오.
+SF32LB58x는 SDIO1과 SDIO2, 두 개의 SDIO 인터페이스를 제공합니다. 각 SDIO 인터페이스의 모든 신호는 나누지 말고 함께 라우팅하되, 총 트레이스 길이는 ≤50 mm, 그룹 내 신호 간 길이 편차는 ≤6 mm로 하십시오. SDIO 클럭 신호에는 3차원 실드를 적용하고, DATA와 CMD 신호도 실드하십시오.
 
 ![그림 6.9-1: SDIO1 인터페이스 회로](../../sf32-products/chips/assets/58x/sf32lb58x-SDIOM-SCH.png){ width="100%" loading="lazy" }
 

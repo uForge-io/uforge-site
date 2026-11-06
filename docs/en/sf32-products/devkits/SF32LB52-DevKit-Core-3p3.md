@@ -204,6 +204,8 @@ The board exposes two 24-pin edge headers. The first side focuses on general GPI
 
 </div>
 
+The board summary lists six GPADC channels, while this pin-function map lists GPADC0–GPADC6 on PA28–PA34. The SiFli SDK maps ADC CH7 to VBAT. These references do not establish seven simultaneously usable external board inputs, so the board-level count remains unresolved; confirm the exact board revision, pin mux, and channel configuration before connecting external analog sources. See the [SiFli ADC guide](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/adc.html).
+
 ### LCD, Audio, and Debug Header { #lcd-audio-and-debug-header }
 
 <div align="center"><em>LCD, Audio, and Debug Header Pin Assignments</em></div>

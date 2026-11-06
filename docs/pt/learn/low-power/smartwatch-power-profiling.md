@@ -7,6 +7,8 @@ tags:
   - Dispositivos vestíveis
 ---
 
+<div id="_1"></div>
+
 # Análise de consumo de um smartwatch { #power-profiling-a-smartwatch }
 
 A análise de consumo transforma o uso diário esperado em uma estimativa de autonomia e, sobretudo, em uma lista das cargas que mais vale a pena otimizar. Este artigo usa a [planilha de dados de consumo de um smartwatch, em inglês](assets/smartwatch-power-profile-data.xlsx), como exemplo prático. Você verá como converter o comportamento do usuário em mAh por dia, identificar as cargas que dominam o orçamento de energia e transformar o modelo em um plano de medição.
@@ -16,6 +18,8 @@ A análise de consumo transforma o uso diário esperado em uma estimativa de aut
     A planilha não contém registros de medição; portanto, não permite saber se algum valor de entrada foi medido. O resultado de 13,15 dias é uma estimativa do modelo, não uma autonomia observada.
 
 Leia também a [Visão geral do projeto de baixo consumo de energia](overview.md), para orientações de arquitetura e firmware, e [Medição e validação do consumo de energia](measurement-and-validation.md), para o procedimento de medição que valida o modelo.
+
+<div id="_2"></div>
 
 ## Visão geral do sistema { #smartwatch-system-overview }
 
@@ -34,6 +38,8 @@ Comece definindo os limites do modelo. A planilha representa um smartwatch alime
 | Tensão nominal da bateria | 3,87 V | Usada no cálculo auxiliar de normalização de tensão da planilha. |
 
 </div>
+
+<div id="_3"></div>
 
 ## Consumo por cenário { #power-consumption-by-scenario }
 
@@ -118,6 +124,8 @@ flowchart LR
     F --> B
 ```
 
+<div id="_4"></div>
+
 ### Converter um cenário em consumo diário { #convert-a-scenario-into-daily-charge }
 
 Para uma carga cuja corrente já esteja expressa no lado da bateria, o cálculo é direto:
@@ -135,11 +143,15 @@ battery_current_mA = (load_voltage_V x load_current_mA) /
 
 Use a eficiência medida do regulador na corrente de carga prevista. A eficiência de pico anunciada raramente é representativa de um relógio que passa grande parte do dia com carga leve.
 
+<div id="_5"></div>
+
 ### Verificar a hipótese de conversão da planilha { #check-the-workbooks-conversion-assumption }
 
 A coluna “Power-Conversion Efficiency (%)” da planilha é calculada como `load voltage / battery voltage`. A fórmula de carga divide por esse valor e pela tensão da bateria, cancelando os termos de tensão. Assim, o consumo diário resulta apenas da corrente da carga multiplicada pelo tempo: a corrente da bateria é considerada igual à corrente da carga, em vez de se modelar uma conversão de potência ideal. Isso se aproxima de um regulador linear sem corrente quiescente; não é um modelo geral para reguladores chaveados.
 
 Por exemplo, uma carga de 1 mA a 3,3 V alimentada por uma bateria de 3,87 V através de um conversor ideal exigiria cerca de 0,853 mA da bateria, mas a planilha contabiliza 1 mA. Em um conversor real, o resultado depende da eficiência e da corrente quiescente. Portanto, essa hipótese de conversão, por si só, não permite dizer se a estimativa de autonomia é otimista ou conservadora. A classificação continua útil para uma primeira análise das correntes e dos tempos assumidos, mas não constitui um orçamento de energia final. Para um orçamento de energia de produção, substitua o fator auxiliar pela eficiência medida de cada linha de alimentação e faixa de carga. Inclua a corrente quiescente sem contá-la duas vezes se já estiver incorporada à medição, além das perdas nos circuitos de proteção da bateria e no caminho de alimentação do carregador.
+
+<div id="_6"></div>
 
 ## Calcular o consumo diário a partir do uso do produto { #calculate-daily-consumption-from-product-usage }
 
@@ -302,6 +314,8 @@ A planilha não tem uma categoria exclusiva para sensores. `Other` é a única c
 
 </div>
 
+<div id="_7"></div>
+
 ## Transformar a classificação em ações de projeto { #turn-the-ranking-into-design-work }
 
 Comece pela maior contribuição modelada e valide a ordem por medição. Neste modelo, uma sequência razoável é:
@@ -313,6 +327,8 @@ Comece pela maior contribuição modelada e valide a ordem por medição. Neste 
 5. **Sensoriamento prolongado:** analise monitoramento do sono e registro de exercício como cenários completos, incluindo ciclo de trabalho dos sensores, processamento, acessos à memória e atividade de rádio.
 
 Não otimize um número isolado na planilha. Uma mudança aparentemente eficiente pode aumentar a frequência de despertares, prejudicar a experiência do usuário ou prolongar o tempo ativo a ponto de anular a economia esperada.
+
+<div id="_8"></div>
 
 ## Validar o modelo no hardware { #validate-the-model-on-hardware }
 
@@ -333,6 +349,8 @@ O modelo ganha utilidade quando é continuamente ajustado às medições. Para c
 
 </div>
 
+<div id="_9"></div>
+
 ## Manter o modelo confiável { #keep-the-profile-honest }
 
 - Considere cenários desabilitados como não orçados, não como funções sem consumo. A planilha atribui carga zero aos cenários de NFC, chamadas Bluetooth e AOD.
@@ -340,6 +358,8 @@ O modelo ganha utilidade quando é continuamente ajustado às medições. Para c
 - Sempre que possível, meça na entrada da bateria. Medições por linha de alimentação também são úteis, mas precisam considerar perdas do regulador e corrente quiescente antes de virarem números de autonomia.
 - Altere uma hipótese por vez e compare mAh por dia, não apenas a corrente instantânea.
 - Refaça o perfil quando mudar a política do display, uma configuração do Bluetooth, a frequência de medição dos sensores, a política de gerenciamento de energia ou uma função importante do firmware.
+
+<div id="_10"></div>
 
 ## Principais conclusões { #key-takeaways }
 

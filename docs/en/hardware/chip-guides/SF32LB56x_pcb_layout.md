@@ -24,7 +24,7 @@ The U variant uses a 68-pin QFN68L package measuring 7 × 7 × 0.75mm with 0.35m
 
 #### 6.2.1. Clock Routing { #621-clock-routing }
 
-Place crystals inside the shield can, more than 1mm from the board edge and preferably at least 5mm from heat-generating PA, charger, and PMU components. Keep other metal and components at least 0.25mm from the crystal circuit. Route the 48MHz crystal on the top layer where practical; keep its traces 3–10mm long and 0.075mm wide, with three-dimensional ground shielding. Keep them away from VBAT, DC-DC, and high-speed signals. Route the 32.768kHz crystal on the top layer, with trace length no greater than 10mm, 0.075mm trace width, and at least 0.15mm spacing between 32K_XI and 32K_XO. Keep the top and adjacent layers beneath both crystal areas clear; no other traces may cross them.
+Place crystals inside the shield can, more than 1 mm from the board edge and preferably more than 5 mm from heat-generating PA, charger, and PMU components. Keep other metal and components more than 0.25 mm from the crystal circuit. Top-layer routing is recommended for the 48 MHz crystal where practical, with recommended trace dimensions of 3–10 mm long and 0.075 mm wide. Three-dimensional ground shielding is required. Keep the traces away from VBAT, DC-DC, and high-speed signals. Top-layer routing is recommended for the 32.768 kHz crystal, with a recommended trace length no greater than 10 mm, trace width of 0.075 mm, and spacing of at least 0.15 mm between 32K_XI and 32K_XO. Three-dimensional ground shielding is required. Keep the top and adjacent layers beneath both crystal areas clear as keep-out areas; no other traces may cross them.
 
 #### 6.2.2. RF Routing { #622-rf-routing }
 

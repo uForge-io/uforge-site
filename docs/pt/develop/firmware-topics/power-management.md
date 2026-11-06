@@ -1,6 +1,6 @@
 ---
 icon: lucide/battery-charging
-description: "Meça e ajuste o consumo do SF32: clocks, modos de suspensão, display, intervalos de conexão Bluetooth e sensores, para levar o protótipo a um produto com bateria."
+description: "Meça e ajuste o consumo do SF32: clocks, modos de suspensão, display, intervalos de conexão Bluetooth e sensores, para transformar o protótipo em um produto alimentado por bateria."
 tags:
     - Desenvolvimento
     - Energia
@@ -8,15 +8,15 @@ tags:
 
 # Gerenciamento de energia { #power-management }
 
-O gerenciamento de energia transforma um protótipo funcional em um produto adequado para uso em dispositivos vestíveis. No SF32, a otimização do consumo envolve a configuração dos clocks, os modos de suspensão, o comportamento do display, os intervalos de conexão Bluetooth, as interrupções dos sensores e a arquitetura da aplicação.
+O gerenciamento de energia transforma um protótipo funcional em um produto pronto para uso como dispositivo vestível. No SF32, a otimização do consumo envolve a configuração dos clocks, os modos de suspensão, o comportamento do display, os intervalos de conexão Bluetooth, as interrupções dos sensores e a arquitetura da aplicação.
 
 Não otimize o consumo com base em trechos de código isolados. Meça cenários do produto: inicialização, repouso, repouso com conexão ativa, display ligado, áudio ativo, despertar por sensor, OTA e desligamento.
 
 ## Fluxo prático { #practical-workflow }
 
-1. Meça um exemplo do SDK sem modificações.
+1. Meça o exemplo do SDK sem modificações.
 2. Ative um subsistema por vez.
-3. Nas medições iniciais, mantenha separadas a atividade do display, do Bluetooth, do áudio, do armazenamento e dos sensores.
+3. Nas medições iniciais, meça separadamente a atividade do display, do Bluetooth, do áudio, do armazenamento e dos sensores.
 4. Use interrupções para despertar o sistema em vez de recorrer à consulta periódica (polling).
 5. Registre a corrente consumida em cada modo e cenário do produto.
 

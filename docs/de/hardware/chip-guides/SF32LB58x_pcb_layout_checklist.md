@@ -55,7 +55,7 @@ Diese Checkliste basiert auf SiFlis Arbeitsmappe „SF32LB58x Schematic&PCB chec
 | 12 | Leiterbahnbreite der AVDD33_ANA-Versorgung: mindestens 6 mil | Erforderlich |
 | 13 | Leiterbahnbreite der AVDD_BRF-Versorgung: mindestens 8 mil | Erforderlich |
 | 14 | Leiterbahnbreite der AVDD33_AUD-Versorgung: mindestens 6 mil | Erforderlich |
-| 15 | Leiterbahnbreite der AVDD33_DSI-Versorgung: mindestens 8 mil | Erforderlich |
+| 15 | Leiterbahnbreite der AVDD18_DSI-Versorgung: mindestens 8 mil | Erforderlich |
 
 </div>
 
@@ -86,7 +86,7 @@ Diese Checkliste basiert auf SiFlis Arbeitsmappe „SF32LB58x Schematic&PCB chec
 | 17 | Kondensator für AVDD33_ANA nahe am Pin platziert | Erforderlich |
 | 18 | Kondensator für AVDD_BRF nahe am Pin platziert | Erforderlich |
 | 19 | Kondensator für AVDD33_AUD nahe am Pin platziert | Erforderlich |
-| 20 | Kondensator für AVDD33_DSI nahe am Pin platziert | Erforderlich |
+| 20 | Kondensator für AVDD18_DSI nahe am Pin platziert | Erforderlich |
 
 </div>
 

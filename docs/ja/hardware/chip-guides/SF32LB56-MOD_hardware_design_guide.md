@@ -9,7 +9,11 @@ hide:
     - navigation
 ---
 
+<div id="sf32lb56-mod"></div>
+
 # SF32LB56-MODハードウェア設計ガイド { #sf32lb56-mod-hardware-design-guide }
+
+<div id="1"></div>
 
 ## 1. はじめに { #1-introduction }
 
@@ -23,7 +27,11 @@ hide:
 !!! note "規制表示の適用範囲"
     提供されたSF32LB56-MOD-N16R12N1とSF32LB56-MOD-A128R12N1のラベルには、FCC、IC、CMIIT ID、HVINの識別番号とCEマークが記載されています。[モジュール表示のまとめ](../../sf32-products/modules/SF32LB56-MOD.md#regulatory-markings)を参照してください。該当するモジュール改版の承認文書、アンテナ条件、組み込み条件を確認してください。他の品種や完成品まで認証対象とみなさないでください。
 
+<div id="2"></div>
+
 ## 2. デバイス概要 { #2-device-overview }
+
+<div id="21"></div>
 
 ### 2.1 アーキテクチャ { #21-architecture }
 
@@ -34,6 +42,8 @@ SF32LB56-MODは、SF32LB56xVシリーズのデュアルコアMCUプラットフ�
 !!! note "カスタマイズ"
     その他のモジュール構成やカスタマイズについては、[μForge.ioへのお問い合わせ](../../about/contact.md)をご利用ください。
 
+<div id="22"></div>
+
 ### 2.2 バリエーション { #22-variants }
 
 <div align="center"><em>表 2.2-1: SF32LB56-MODシリーズのバリエーション</em></div>
@@ -42,11 +52,13 @@ SF32LB56-MODは、SF32LB56xVシリーズのデュアルコアMCUプラットフ�
 
 | モジュール型番 | メインFlash | PSRAM | バックアップFlash | 動作温度 | 外形寸法 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB56-MOD-N16R12N1 | 16MB QSPI-NOR | 4+8MB OPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 18.0 × 32.9 × 3.1mm |
-| SF32LB56-MOD-A128R12N1 | 128MB QSPI-NAND | 4+8MB OPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 18.0 × 32.9 × 3.1mm |
-| SF32LB56-MOD-D128R12N1 | 128MB SD-NAND | 4+8MB OPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 18.0 × 32.9 × 3.1mm |
+| SF32LB56-MOD-N16R12N1 | 16 MB QSPI-NOR | 4+8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 18.0 × 32.9 × 3.1 mm |
+| SF32LB56-MOD-A128R12N1 | 128 MB QSPI-NAND | 4+8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 18.0 × 32.9 × 3.1 mm |
+| SF32LB56-MOD-D128R12N1 | 128 MB SD-NAND | 4+8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 18.0 × 32.9 × 3.1 mm |
 
 </div>
+
+<div id="23"></div>
 
 ### 2.3 主なハードウェア機能 { #23-major-hardware-features }
 
@@ -67,11 +79,17 @@ SF32LB56-MODは、SF32LB56xVシリーズのデュアルコアMCUプラットフ�
 
 </div>
 
+<div id="24"></div>
+
 ### 2.4 主な用途 { #24-typical-applications }
 
 主な用途として、ハイエンドスマートウォッチ、スマートバンド、ウェアラブル医療機器、フィットネス機器、電動自転車の操作パネル、スマートキー、車両向けウェアラブルリモコン、スマート家電、スマートロック、グラフィカルHMI機器、産業用センサーハブ、産業用監視端末、低消費電力センサーハブ、Bluetooth Mesh機器などが挙げられます。
 
+<div id="3"></div>
+
 ## 3. 設計の要点 { #3-design-at-a-glance }
+
+<div id="31"></div>
 
 ### 3.1 設計要点一覧 { #31-one-page-engineering-summary }
 
@@ -91,9 +109,11 @@ SF32LB56-MODは、SF32LB56xVシリーズのデュアルコアMCUプラットフ�
 | ウェイクアップ要因 | PA50、PA51、PB32、PB35はMCUのスリープ中に割り込みを受け付けます。 |
 | PWRKEY | PB32はアクティブHighの10秒長押しリセットに対応し、10 kΩのプルダウンが必要です。 |
 | アンテナ | PCBアンテナ領域には銅箔、配線、部品、金属を配置しないでください。アンテナを基板端から張り出せない場合は、15mm以上のクリアランスを確保します。 |
-| 製造 | MSL 3です。開封後は25±5°C/60%RHで168時間以内に使用し、それを超えた場合は再使用前にベーキングしてください。 |
+| 製造 | MSL 3です。開封後は25±5 °C/60%RHで168時間以内に使用し、それを超えた場合は再使用前にベーキングしてください。 |
 
 </div>
+
+<div id="32"></div>
 
 ### 3.2 推奨外付け部品 { #32-recommended-external-components }
 
@@ -113,12 +133,16 @@ SF32LB56-MODは、SF32LB56xVシリーズのデュアルコアMCUプラットフ�
 
 </div>
 
+<div id="33"></div>
+
 ### 3.3 電源ツリー { #33-power-tree }
 
 VDD_3V3は、MCUのPVDD、AVDD33_ANA、AVDD33_AUD、AVDD_BRF、VDDIOA2、およびモジュール内蔵Flashに給電します。SiFliはこの電源レールにLDOを使用することを推奨しています。VDD_1V8はMCUと同一パッケージ内のメモリーに給電し、VDDIOはMCUのVDDIOA/VDDIOB I/Oポートに給電します。
 
 !!! info "図 3.3-1: SF32LB56-MOD電源系統図"
     DS5602 V0.3の図7-1を参照してください。
+
+<div id="34"></div>
 
 ### 3.4 システムブロック図 { #34-system-block-diagram }
 
@@ -127,7 +151,11 @@ VDD_3V3は、MCUのPVDD、AVDD33_ANA、AVDD33_AUD、AVDD_BRF、VDDIOA2、およ�
 !!! info "図 3.4-1: SF32LB56-MOD機能ブロック図"
     DS5602 V0.3の図2-1を参照してください。
 
+<div id="4"></div>
+
 ## 4. ハードウェア設計フロー { #4-hardware-design-flow }
+
+<div id="41"></div>
 
 ### 4.1 設計手順 { #41-design-sequence }
 
@@ -140,9 +168,13 @@ VDD_3V3は、MCUのPVDD、AVDD33_ANA、AVDD33_AUD、AVDD_BRF、VDDIOA2、およ�
 7. 必要なアンテナクリアランスとキープアウトを確保してモジュールを配置します。
 8. リリース前に、セクション7のチェックリストに照らして回路図とPCBをレビューします。
 
+<div id="42"></div>
+
 ### 4.2 レビュー手順 { #42-review-sequence }
 
 レビューは段階的に実施します。回路図、ピンマルチプレクス、電源投入、RF／アンテナ、レイアウト、初回試作機の立ち上げ、RF検証、環境／信頼性、量産テストの順に確認してください。
+
+<div id="43"></div>
 
 ### 4.3 マイルストーン { #43-milestones }
 
@@ -160,9 +192,15 @@ VDD_3V3は、MCUのPVDD、AVDD33_ANA、AVDD33_AUD、AVDD_BRF、VDDIOA2、およ�
 
 </div>
 
+<div id="5"></div>
+
 ## 5. 回路図設計 { #5-schematic-design }
 
+<div id="51"></div>
+
 ### 5.1 電源システム { #51-power-system }
+
+<div id="511"></div>
 
 #### 5.1.1 電源 { #511-power-supply }
 
@@ -180,11 +218,17 @@ VDD_3V3は、MCUのPVDD、AVDD33_ANA、AVDD33_AUD、AVDD_BRF、VDDIOA2、およ�
 
 VDD_3V3、VDD_1V8、VDDIOは同時に立ち上げてください。各モジュール電源ピンの近くに4.7 µFコンデンサーを配置します。VDDIOの動作範囲は1.7～3.6 Vですが、データシートにはPA00～PA11が3.3 V固定であり、VDDIOには追従しないと明記されています。
 
+<div id="512"></div>
+
 #### 5.1.2 動作モード { #512-operating-modes }
 
 BOOT_MODEで起動動作を選択します。Highでダウンロードモード、Lowでユーザーモードになります。リセット中および量産書き込み時にBOOT_MODEの状態が確定するようにしてください。PB32/PWRKEYはアクティブHighの10秒長押しリセットに対応し、10 kΩのプルダウンが必要です。
 
+<div id="52-rf"></div>
+
 ### 5.2 クロックとRF { #52-timing-and-rf }
+
+<div id="521"></div>
 
 #### 5.2.1 クロック { #521-clock }
 
@@ -213,7 +257,11 @@ BOOT_MODEで起動動作を選択します。Highでダウンロードモード�
 
 本モジュールはPCBオンボードアンテナ、またはIPEX互換コネクター経由の外部アンテナに対応しています。通信距離とRF性能は、オープンベンチ上だけでなく、最終筐体に組み込んだ状態でも検証してください。
 
+<div id="53"></div>
+
 ### 5.3 ユーザーインターフェース { #53-user-interfaces }
+
+<div id="531"></div>
 
 #### 5.3.1 ディスプレイ { #531-display }
 
@@ -224,6 +272,8 @@ LCD RGB信号ラインには33～100 Ωの直列抵抗を追加してくださ�
 !!! info "図 5.3-1: 開発ボードの推奨ピン割り当て"
     DS5602 V0.3の図7-6を参照してください。
 
+<div id="532"></div>
+
 #### 5.3.2 オーディオ { #532-audio }
 
 本モジュールには、アナログオーディオDAC出力、MIC_BIAS、MIC_ADC_IN、I2S、およびPDM対応ピンがあります。オーディオDACは24-bit出力で、サンプリングレート8 kHz～48 kHzに対応し、SNRおよびダイナミックレンジは109 dBです。オーディオADCは24-bit Sigma-Delta入力で、サンプリングレート8 kHz～48 kHzに対応し、SNRおよびダイナミックレンジは99 dBです。
@@ -232,19 +282,29 @@ DS5602 V0.3には、デジタルマイク入力2系統とPDMインターフェ�
 
 アナログオーディオ配線は、ノイズの多いスイッチングノード、LCDクロック、アンテナ給電部から離してください。MIC_BIASとMIC_ADC_INのフィルターは、接続するマイク回路の近くに配置します。
 
+<div id="533"></div>
+
 #### 5.3.3 ボタン { #533-buttons }
 
 PB32はPWRKEY入力で、アクティブHighの10秒長押しリセットに対応しています。必須の10 kΩプルダウンを追加し、輸送中、ディープスリープ中、電源シーケンス中にボタン回路がフローティング状態にならないようにしてください。
+
+<div id="534-pwm"></div>
 
 #### 5.3.4 モーターおよびPWM負荷 { #534-motor-and-pwm-loads }
 
 データシートの推奨ピン割り当て図でGPTIMと記されたピンはPWM出力に対応しています。モーター、バックライト、ブザーなどの負荷には外付けドライバーを使用し、誘導性負荷や大電流負荷をモジュールのGPIOから直接駆動しないでください。
 
+<div id="54"></div>
+
 ### 5.4 ストレージと接続インターフェース { #54-storage-and-connectivity }
+
+<div id="541"></div>
 
 #### 5.4.1 ストレージ { #541-storage }
 
-本モジュールファミリーでは、SKUに応じたメインFlash、4+8MB OPI-PSRAM、1MBのバックアップQSPI-NOR Flashを利用できます。MPI3には外付けSPI NORまたはSPI NANDを接続できますが、PA06～PA11は標準でモジュール内蔵Flashに接続されているため、外部からは使用できません。SDIOとMPI3はI/Oリソースを共有しており、同時には使用できません。
+本モジュールファミリーでは、SKUに応じたメインFlash、4+8 MB OPI-PSRAM、1 MBのバックアップQSPI-NOR Flashを利用できます。MPI3には外付けSPI NORまたはSPI NANDを接続できますが、PA06～PA11は標準でモジュール内蔵Flashに接続されているため、外部からは使用できません。SDIOとMPI3はI/Oリソースを共有しており、同時には使用できません。
+
+<div id="542"></div>
 
 #### 5.4.2 センサー { #542-sensors }
 
@@ -256,21 +316,33 @@ UARTは最大6Mbpsの全二重通信に対応しています。I2CはStandard 10
 
 6番ピンのUART4_TXDと7番ピンのUART4_RXDは、デフォルトのログ出力用シリアルポートであり、プログラムのダウンロード／デバッグにも使用できます。PA16とPA17はDBG_UARTに多重化でき、プログラムのダウンロード／デバッグに使用する場合は100 Ωの直列抵抗が必要です。
 
+<div id="544-usb-spi-sdio-i2s"></div>
+
 #### 5.4.4 USB、SPI、SDIO、I2S { #544-usb-spi-sdio-and-i2s }
 
 USB2.0 FSはPHYを内蔵し、Host/Deviceモードに対応しています。SPIはSSP/SPIおよびMicrowire形式に対応し、HPSYSのSPIは最大48 MHz、LPSYSのSPIは最大24 MHzで動作します。SDMMC1はSD 3.0、SDIO 3.0、eMMC 4.5.1に対応し、SDRおよびDDRモードを利用できます。SDMMC2はSD/SDIO/eMMC機能に対応し、SDRモードで最大48 MHzです。I2Sはマスター／スレーブ、全二重、Left/Right/Standard形式、および最大24-bit PCM幅に対応しています。
 
+<div id="55"></div>
+
 ### 5.5 製造 { #55-manufacturing }
+
+<div id="551"></div>
 
 #### 5.5.1 デバッグ { #551-debug }
 
 79番ピンのSWDIOと80番ピンのSWCLKは、SWDデバッグ／ダウンロード用ピンです。初期試作機と量産治具でSWDにアクセスできるようにしてください。別の承認済み書き込み手段がない場合は、デフォルトのUART4ダウンロード／デバッグ経路も外部に引き出してください。
 
+<div id="552"></div>
+
 #### 5.5.2 量産 { #552-production }
 
 量産工程で電源、グラウンド、起動モード、リセット／PWRKEY、SWD、UARTダウンロード、および基板レベルの校正やRF試験用インターフェースにアクセスできるようにしてください。最終テスト用ソフトウェアでは、起動、Flash、ディスプレイ、タッチ、オーディオ、USB、センサー、RF通信、スリープ／ウェイクアップ動作、消費電流を確認します。
 
+<div id="6-pcb"></div>
+
 ## 6. PCBレイアウト { #6-pcb-layout }
+
+<div id="61"></div>
 
 ### 6.1 外形とフットプリント { #61-mechanical-and-footprint }
 
@@ -281,6 +353,8 @@ USB2.0 FSはPHYを内蔵し、Host/Deviceモードに対応しています。SPI
 
 !!! info "図 6.1-2: 推奨PCBフットプリント"
     DS5602 V0.3の図8-2を参照してください。寸法の単位はmmです。
+
+<div id="62"></div>
 
 ### 6.2 アンテナ配置 { #62-antenna-placement }
 
@@ -294,12 +368,16 @@ USB2.0 FSはPHYを内蔵し、Host/Deviceモードに対応しています。SPI
 !!! info "図 6.2-2: PCBアンテナのクリアランス領域"
     DS5602 V0.3の図8-5を参照してください。
 
+<div id="63"></div>
+
 ### 6.3 外部アンテナコネクター { #63-external-antenna-connector }
 
 外部アンテナを使用する設計では、データシートに記載された第1世代の外部アンテナコネクターを使用します。このコネクターはHirose U.FLシリーズ、I-PEX MHF I、Amphenol AMCの各コネクターと互換性があります。
 
 !!! info "図 6.3-1: 外部アンテナコネクターの寸法"
     DS5602 V0.3の図8-3を参照してください。
+
+<div id="64"></div>
 
 ### 6.4 レイアウトチェックリスト { #64-layout-checklist }
 
@@ -319,7 +397,11 @@ USB2.0 FSはPHYを内蔵し、Host/Deviceモードに対応しています。SPI
 
 </div>
 
+<div id="7"></div>
+
 ## 7. ハードウェア検証 { #7-hardware-validation }
+
+<div id="71"></div>
 
 ### 7.1 電気的特性 { #71-electrical-characteristics }
 
@@ -351,7 +433,7 @@ USB2.0 FSはPHYを内蔵し、Host/Deviceモードに対応しています。SPI
 
 </div>
 
-<div align="center"><em>表 7.1-3: DC電気的特性（3.3 V、25°C）</em></div>
+<div align="center"><em>表 7.1-3: DC電気的特性（3.3 V、25 °C）</em></div>
 
 <div align="center" markdown>
 
@@ -374,6 +456,8 @@ USB2.0 FSはPHYを内蔵し、Host/Deviceモードに対応しています。SPI
 </div>
 
 VDDはI/O電源です。VOHとVOLは高インピーダンス負荷で測定されています。
+
+<div id="72"></div>
 
 ### 7.2 消費電流 { #72-power-consumption }
 
@@ -423,6 +507,8 @@ BT Sniffの測定条件はiPhone 8 Plus、attempt=1です。ScanとBoth Scanの�
 
 </div>
 
+<div id="73"></div>
+
 ### 7.3 回路図チェックリスト { #73-schematic-checklist }
 
 <div align="center"><em>表 7.3-1: 回路図設計チェックリスト</em></div>
@@ -449,6 +535,8 @@ BT Sniffの測定条件はiPhone 8 Plus、attempt=1です。ScanとBoth Scanの�
 
 DS5602 V0.3では、VDDIOの動作範囲を1.7～3.6 Vとし、PA00～PA11はVDDIOに関係なく3.3 V固定としています。一方、チェックリストの項目4はモジュールI/Oインターフェース全般のレベルを3.3 Vと記していますが、全I/Oピンに適用されるかは説明されていません。全ピンが3.3 V対応だと推定せず、使用する各ピンと周辺機器の電気レベルをSiFliに確認してください。
 
+<div id="74"></div>
+
 ### 7.4 保管・取り扱い・実装 { #74-storage-handling-and-assembly }
 
 <div align="center"><em>表 7.4-1: 保管・取り扱い・実装要件</em></div>
@@ -457,9 +545,9 @@ DS5602 V0.3では、VDDIOの動作範囲を1.7～3.6 Vとし、PA00～PA11はVDD
 
 | 項目 | 要件 |
 | :--- | :--- |
-| 密封MBBでの保管 | 結露しない環境で40°C未満／90%RH未満。 |
+| 密封MBBでの保管 | 結露しない環境で40 °C未満／90%RH未満。 |
 | 吸湿感度 | MSL 3。 |
-| 真空袋の開封後 | 25±5°C / 60%RHで168時間以内に使用するか、再使用前にベーキングしてください。 |
+| 真空袋の開封後 | 25±5 °C / 60%RHで168時間以内に使用するか、再使用前にベーキングしてください。 |
 | ESD HBM | ±2000 V。 |
 | ESD CDM | ±500 V。 |
 | リフロー | SiFliはモジュールのリフローを1回のみ推奨しています。 |
@@ -469,6 +557,8 @@ DS5602 V0.3では、VDDIOの動作範囲を1.7～3.6 Vとし、PA00～PA11はVDD
 
 !!! info "図 7.4-1: リフロー温度プロファイル"
     DS5602 V0.3の図9-1では、25～150°Cを60～90 s、昇温速度1～3°C/s、150～200°Cで60～120 sの予熱、217°C超で60～90 s、ピーク235～250°C、ピークから180°Cまで-1～-5°C/sで冷却する条件を示しています。はんだはSAC305です。下部の凡例にはピーク時間30～70 sとありますが、グラフには別途、はんだ付け時間 >30 sと記載されています。仕様書は両者の関係を説明していません。混同せず、量産プロファイルを確認してください。
+
+<div id="8"></div>
 
 ## 8. 関連資料 { #8-related-documents }
 

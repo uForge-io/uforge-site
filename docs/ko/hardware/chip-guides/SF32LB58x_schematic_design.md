@@ -88,6 +88,9 @@ SF30147C는 초저전력 웨어러블 제품용 고집적·고효율 전원 관�
 
 자세한 내용은 SF30147C 칩 데이터시트를 참조하십시오.
 
+!!! warning "전원 레일 이름에 대한 출처 불일치"
+    원문의 [LDO1 요약 행](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md#L38)은 AVDDIOA2라고 표기하지만, [칩 핀 표](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md#L79)는 PA0–PA11에 VDDIOA2를 할당합니다. [공식 DevKit 핀 맵](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb58x/SF32LB58-DevKit-LCD.md#L195)도 VDDIOA2를 사용합니다. 이 자료들만으로는 LDO1 네트에 사용할 이름을 판단할 수 없습니다. 회로도를 릴리스하기 전에 SiFli에 확인하십시오.
+
 ##### 5.2.1.2. SF32LB58x 전원 요구 사항 { #5112-sf32lb58x-power-requirements }
 
 다음은 SF32LB58x 시리즈의 PMU 전원 사양입니다.
@@ -720,6 +723,9 @@ SF32LB58x는 SWD 인터페이스 1개와 디버그 출력용으로 선택 가능
 | SWDIO | PB11 | J-Link 데이터 신호 |
 
 </div>
+
+!!! warning "출처 간 충돌"
+    OpenSiFli [하드웨어 애플리케이션 표](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md)는 `TXD1`/`PA31`을 UART1 RXD에, `RXD1`/`PA32`를 UART1 TXD에 연결합니다. 반면 [SF32LB58-DevKit-LCD 핀 맵](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb58x/SF32LB58-DevKit-LCD.md)은 `PA31`을 `UART1_TXD`, `PA32`를 `UART1_RXD`로 표시합니다. 원문 자료는 신호 방향이 서로 달라 어느 매핑이 맞는지 확정하지 못합니다. 배선 전에 SiFli에 UART1 `pinmux` 기능과 신호 방향을 확인하십시오. 어느 한쪽 레이블만으로 보드의 TX/RX 연결을 판단하지 마십시오.
 
 !!! note "참고"
     UARTx RXD 신호는 플로팅되면 안 됩니다. 소프트웨어 초기화 중에 내부 풀업을 활성화하십시오.

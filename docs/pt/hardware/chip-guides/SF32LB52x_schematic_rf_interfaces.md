@@ -8,12 +8,16 @@ tags:
     - Microcontrolador
 ---
 
+<div id="sf32lb52x-rf"></div>
+
 # Guia de hardware do SF32LB52x — RF e interfaces de usuário { #sf32lb52x-hardware-design-guide-rf-user-interfaces }
 
 !!! note "Parte do guia de hardware do SF32LB52x"
     Esta página trata das Seções 5.4–5.5 das orientações de esquemático: RF e interfaces de usuário. Volte a [Sistema mínimo, alimentação e clock](SF32LB52x_schematic_design.md), continue em [Armazenamento e fabricação](SF32LB52x_schematic_storage_mfg.md) ou consulte o [Checklist do esquemático](SF32LB52x_schematic_checklist.md) para a revisão item a item.
 
 ### 5.4. RF { #54-rf }
+
+<div id="541-rf"></div>
 
 #### 5.4.1. Esquemático de RF e caminho da antena { #541-rf-schematic-and-antenna-path }
 
@@ -35,6 +39,8 @@ A impedância característica das trilhas de RF é 50 Ω. Se a antena já estive
 
 A figura 5.4-1 mostra um capacitor em série de 15 pF e 50 V (C0323); as posições em derivação C0318 e C0319 estão marcadas como NF (não montadas). Esses valores são do circuito de referência, não uma adaptação válida para qualquer antena. Posicione a rede perto do pino de RF do chip e defina sua montagem final com base em medições do produto montado.
 
+<div id="542-rf"></div>
+
 #### 5.4.2. Revisão e ajuste de RF { #542-rf-review-and-tuning }
 
 **Erros frequentes: RF**
@@ -51,7 +57,11 @@ A figura 5.4-1 mostra um capacitor em série de 15 pF e 50 V (C0323); as posiç�
 - [ ] A cerca de vias de terra e a área de exclusão de RF foram revisadas.
 - [ ] Preveja o acesso para ajuste da antena e testes de certificação antes de finalizar o projeto do gabinete.
 
+<div id="55"></div>
+
 ### 5.5. Interfaces de usuário { #55-user-interfaces }
+
+<div id="551"></div>
 
 #### 5.5.1. Display { #551-display }
 
@@ -91,6 +101,8 @@ Modelos de controlador LCD suportados:
 !!! note "As interfaces do controlador não são as capacidades do MCU"
     A Tabela 5.5-1 lista as interfaces oferecidas pelos CIs controladores de LCD, não interfaces necessariamente disponíveis no SF32LB52x. Uma entrada com MIPI-DSI ou barramento MCU 8080 de 8 bits não comprova que o MCU ofereça essa interface. Escolha uma interface compatível tanto com o modelo exato do MCU quanto com o controlador.
 
+<div id="5511-spiqspi"></div>
+
 ##### 5.5.1.1. Interface de display SPI/QSPI { #5511-spiqspi-display-interface }
 
 <div align="center"><em>Tabela 5.5-2: Conexões dos sinais SPI/QSPI</em></div>
@@ -110,6 +122,8 @@ Modelos de controlador LCD suportados:
 | TE | PA02 | Sinal de sincronismo para evitar rasgo de imagem (tearing effect), enviado ao MCU |
 
 </div>
+
+<div id="5512-jdi"></div>
 
 ##### 5.5.1.2. Interface de display JDI { #5512-jdi-display-interface }
 
@@ -136,6 +150,8 @@ Modelos de controlador LCD suportados:
 | JDI_B2 | PA02 | Dados de imagem azuis (pixels pares) |
 
 </div>
+
+<div id="5513-epd"></div>
 
 ##### 5.5.1.3. Interface de display EPD { #5513-epd-display-interface }
 
@@ -175,6 +191,8 @@ Modelos de controlador LCD suportados:
     !!! info "Não se aplica"
         A nota de aplicação oficial da SiFli para SF32LB520/3/5/7 não inclui um projeto de referência para a interface EPD paralela. Se o produto precisar de suporte a display EPD, consulte a documentação de 52B/D/E/G/J e confirme diretamente com o suporte FAE da SiFli a viabilidade para o modelo alimentado por bateria.
 
+<div id="5514"></div>
+
 ##### 5.5.1.4. Interface de toque e backlight { #5514-touch-and-backlight-interface }
 
 O SF32LB52x oferece uma interface I2C para o controlador de toque, com entrada de interrupção de estado do toque, além de um sinal PWM para habilitar o backlight e controlar seu brilho.
@@ -206,6 +224,8 @@ O SF32LB52x oferece uma interface I2C para o controlador de toque, com entrada d
 - [ ] Reset, TE, PWM do backlight, I2C de toque e interrupção de toque foram atribuídos e documentados.
 - [ ] A alimentação e o sequenciamento do display são compatíveis com standby e despertar.
 - [ ] O plano de bring-up cobre reset, leitura de ID/dados do painel quando disponível, backlight, interrupção de toque e primeira imagem.
+
+<div id="552"></div>
 
 #### 5.5.2. Interface de áudio { #552-audio-interface }
 
@@ -268,6 +288,8 @@ Os circuitos de referência dos microfones filtram MIC_BIAS com um resistor em s
 !!! important "Complete os caminhos do microfone e do DAC"
     A fonte conecta MEMS_MIC_ADC_IN e ECM_MIC_ADC_IN a ADCP. Inclua em série o capacitor de bloqueio de DC de pelo menos 2,2 uF exigido acima; o capacitor de 0,01 uF ligado ao terra nos circuitos de microfone não o substitui. Posicione o filtro passa-baixas diferencial no quadro tracejado da Figura 5.5-3 perto do MCU, mantendo a capacitância das trilhas de saída do DAC abaixo de 10 pF e o comprimento abaixo de 2 cm.
 
+<div id="553"></div>
+
 #### 5.5.3. Botões { #553-buttons }
 
 **Resumo**
@@ -279,6 +301,8 @@ Os circuitos de referência dos microfones filtram MIC_BIAS com um resistor em s
 
 Garanta entradas de usuário e reset confiáveis, evitando eventos de despertar indevidos, estados de reset permanentes e corrente de fuga elevada em standby pelas redes de pull-up/pull-down.
 
+<div id="5531"></div>
+
 ##### 5.5.3.1. Botão de alimentação { #5531-power-button }
 
 PA34 oferece reset por pressão longa e pode ser usado em um botão que combine liga/desliga e reset por pressão longa. Como o reset é ativo em nível alto, recomenda-se manter o estado padrão em nível baixo com pull-down e levá-lo a nível alto quando o botão for pressionado.
@@ -287,7 +311,9 @@ PA34 oferece reset por pressão longa e pode ser usado em um botão que combine 
 
 <div align="center"><em>Figura 5.5-4: Circuito do botão de alimentação/reset por pressão longa</em></div>
 
-O circuito de referência usa R0703 (5,1 kΩ) entre VSYS_3V3 e o botão, R0702 (100 kΩ) para manter PA34 em nível baixo e C0720 (0,1 uF) conectado ao terra. Há também um componente de proteção ESD. Esses valores descrevem o projeto ilustrado; ao adaptá-lo, verifique os limiares de entrada, a eliminação de repiques, as fugas e os tempos de reset.
+O circuito de referência usa R0703 (5,1 kΩ) entre VSYS_3V3 e o botão, R0702 (10 kΩ) para manter PA34 em nível baixo e C0720 (0,1 uF) conectado ao terra. Há também um componente de proteção ESD. Esses valores descrevem o projeto ilustrado; ao adaptá-lo, verifique os limiares de entrada, a eliminação de repiques, as fugas e os tempos de reset.
+
+<div id="5532"></div>
 
 ##### 5.5.3.2. Botão com encoder rotativo mecânico { #5532-mechanical-rotary-encoder-button }
 
@@ -311,6 +337,8 @@ Os sinais A e B do encoder se conectam a PA35 e PA36 por resistores de 0 Ω. Cad
 - [ ] O comportamento de despertar foi verificado nos estados de baixo consumo pretendidos.
 - [ ] Os requisitos de proteção ESD e debounce mecânico foram revisados.
 - [ ] O plano de bring-up inclui pressão curta, pressão longa, despertar e reset.
+
+<div id="554"></div>
 
 #### 5.5.4. Motor de vibração { #554-vibration-motor }
 

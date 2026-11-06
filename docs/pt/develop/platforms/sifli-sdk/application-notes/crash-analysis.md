@@ -26,7 +26,7 @@ Quando o LPSYS sai do standby, o SWD volta para o HCPU. Um reset do J-Link não 
 
 ## Capturar um pacote em tempo real ou post-mortem { #capture-a-live-or-post-mortem-package }
 
-Nas versões atuais do SDK, capture pela UART ou por J-Link com `sdk.py`:
+A CLI atual de `sdk.py` oferece suporte a J-Link em todas as séries e a UART DEBUG IP direta somente em SF32LB52X e SF32LB56X. Para as demais famílias, use J-Link; os métodos antigos AssertDump/UART abaixo são fluxos distintos.
 
 !!! note "Escopo do exemplo"
     O comando abaixo é um exemplo para SF32LB52/LB525. Mantenha a estrutura do comando, mas substitua o chip/modelo, o núcleo, o transporte e o ELF por valores compatíveis com a família e a versão do SDK de destino.
@@ -37,7 +37,7 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
   --output /tmp/live-crash --elf build_hcpu/main.elf
 ```
 
-Para exportar também a PSRAM, adicione `--include-psram` ou use `--psram-size 8MB` para selecionar manualmente o script da PSRAM. Para J-Link por IP via `SifliUsartServer`, use `--transport jlink --jlink-ip 127.0.0.1:19025`; selecione o núcleo afetado com `--core hcpu` ou `--core lcpu`. O diretório de saída deve conter o binário capturado, o ELF/AXF do núcleo, `log.txt`, `manifest.json` e `sdk_manifest.json`.
+Para exportar também a PSRAM, adicione `--include-psram` ou use `--psram-size 8MB` para selecionar manualmente o script da PSRAM. Para J-Link por IP via `SifliUsartServer`, use `--transport jlink --jlink-ip 127.0.0.1:19025`; selecione o núcleo afetado com `--core hcpu` ou `--core lcpu`. O pacote de falha contém os binários capturados, `manifest.json` e `sdk_manifest.json`; quando `--elf` é informado, ele é copiado como `hcpu.axf`. `log.txt` é copiado de `capture.log` apenas em `capture-live --transport jlink`, ou é fornecido por `--log` em `export-coredump`.
 
 Em versões antigas do SDK, use o método específico da família indicado no guia correspondente da SiFli:
 

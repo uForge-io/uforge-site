@@ -187,7 +187,7 @@ Para obter melhores resultados, use o checklist como registro formal de aprovaç
 
 [SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## Acesse as demais partes do guia { #continue-the-design-guide }
+## 5. Acesse as demais partes do guia { #continue-the-design-guide }
 
 O guia completo continua nas páginas a seguir. Cada uma aborda uma etapa do processo de projeto; acesse-as pelos links abaixo.
 

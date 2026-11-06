@@ -482,7 +482,7 @@ For BL_PWM, use a GPIO with the GPTIM1_CHx function and configure an appropriate
 
 Wake, analog, debug, and production access must be planned with the enclosure and fixture in mind. Wake pins need defined idle levels and ESD protection, GPADC dividers must balance settling time and leakage, and debug/download access must remain reachable in EVT and production.
 
-SF32LB55x provides four HCPU wake sources (WKUP_A0–WKUP_A3) and six LCPU wake sources (WKUP_B0–WKUP_B5). Each wakes its associated CPU; only the six LCPU sources wake the system from Hibernate. None of these ten inputs may float: add external pull-up or pull-down resistors to suit the function and avoid sleep leakage.
+SF32LB55x provides four HCPU wake sources (WKUP_A0–WKUP_A3) and six LCPU wake sources (WKUP_B0–WKUP_B5), ten non-maskable wake-up interrupt sources in total. Each wakes its associated CPU; only the six LCPU sources wake the system from Hibernate. None of these ten inputs may float: add external pull-up or pull-down resistors to suit the function and avoid sleep leakage.
 
 In the reference circuit, KEY1 connects to PB48 with a 10 kΩ pull-up to VDD_1V8, ESD protection, and a capacitor. The KEY2 network shows 10 kΩ pull-ups, ESD protection, and jumper-selectable connections to PA08, PA77, and PA78; C0004 is marked NF. These are circuit examples, not a list of wake-capable pins: PA08 is not listed in Table 5.7-1. Choose the actual wake-capable input from that table and keep every input at a defined idle level.
 

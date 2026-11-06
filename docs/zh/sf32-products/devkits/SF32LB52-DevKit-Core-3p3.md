@@ -204,6 +204,8 @@ USB Type-C 供电时，板载 LDO 将 VBUS 的 5 V 转换为 3.3 V。
 
 </div>
 
+板卡概述列出 6 个 GPADC 通道，而此引脚功能表在 PA28–PA34 上列出 GPADC0–GPADC6。思澈科技 SDK 将 ADC CH7 映射到 VBAT。这些资料不足以证明板上有 7 路可同时使用的外部输入，因此板级通道数仍未确定；连接外部模拟信号前，请核对准确的板卡版本、引脚复用和通道配置。参见[思澈科技 ADC 指南](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/adc.html)。
+
 ### LCD、音频与调试排针 { #lcd-audio-and-debug-header }
 
 <div align="center"><em>LCD、音频与调试排针引脚分配</em></div>

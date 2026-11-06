@@ -25,6 +25,8 @@ Los grupos no son intercambiables directamente en una misma placa: las familias 
 
 [^1]: STAR-MC1 es una IP configurable de CPU embebida Armv8-M Mainline de Arm China. En los dispositivos SF32 compatibles, SiFli lo documenta como un procesador de aplicación Arm Cortex-M33 STAR-MC1. Su modelo de software de clase Cortex-M33 facilita reutilizar el firmware, el middleware, las adaptaciones para RTOS y las herramientas existentes para Cortex-M33, aunque cada dispositivo requiere el trabajo habitual de integración específico. Las configuraciones CU, SP y SE varían principalmente en caché, TCM, XIPU y TrustZone; las instrucciones personalizadas de Arm/CDE y la interfaz de coprocesador son capacidades opcionales que deben verificarse para el componente SF32 concreto. La documentación de SiFli puede usar ***Arm Cortex-M33 STAR-MC1*** o ***Arm Cortex-M33*** según el contexto.
 
+<div id="_1"></div>
+
 ## Aplicaciones { #applications }
 
 **SF32LB52x se recomienda para** productos centrados en Bluetooth en los que el coste, el nivel de integración y la autonomía son factores de diseño prioritarios, por ejemplo:
@@ -72,7 +74,11 @@ Los grupos no son intercambiables directamente en una misma placa: las familias 
 
 ---
 
+<div id="_2"></div>
+
 ## Características y especificaciones { #features-and-specs }
+
+<div id="_3"></div>
 
 ### Cómputo y memoria { #compute-and-memory }
 
@@ -81,6 +87,8 @@ Los grupos no son intercambiables directamente en una misma placa: las familias 
 - Caché de instrucciones de 32 KB + caché de datos de 16 KB
 - 512 KB de SRAM para aplicaciones y 64 KB de SRAM para el controlador Bluetooth
 - Memoria integrada en el encapsulado según la variante, desde 1 MB de QSPI-NOR hasta 16 MB de OPI-PSRAM
+
+<div id="_4"></div>
 
 ### Gráficos y audio { #graphics-and-audio }
 
@@ -92,6 +100,8 @@ Resolución máxima e interfaces de panel: consulte [Matriz de interfaces por di
 - 1 ADC de audio de 24 bits, con una relación señal/ruido (SNR) de 99 dB
 - 1 DAC de audio de 24 bits, con una relación señal/ruido (SNR) de 109 dB
 
+<div id="_5"></div>
+
 ### Conectividad inalámbrica { #wireless-connectivity }
 
 - Bluetooth 5.3 de modo dual (Bluetooth Classic y BLE)
@@ -102,11 +112,15 @@ Resolución máxima e interfaces de panel: consulte [Matriz de interfaces por di
 - Núcleo controlador Bluetooth Arm Cortex-M33 STAR-MC1 dedicado, con 64 KB de SRAM y frecuencia de 24 MHz
 - La ficha de producto indica una corriente de suspensión de 2 µA; la corriente de reposo del sistema depende del modo de funcionamiento y de las fugas de la placa
 
+<div id="_6"></div>
+
 ### Seguridad { #security }
 
 - Aceleradores de hardware AES/HASH/CRC
 - TRNG
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### Periféricos y E/S { #peripherals-and-ios }
 
@@ -122,6 +136,8 @@ Resolución máxima e interfaces de panel: consulte [Matriz de interfaces por di
 - Temporizadores RTC y watchdog
 - 44 o 45 GPIO según la variante
 
+<div id="_7"></div>
+
 ### Alimentación { #power-supply }
 
 - **Grupo alimentado por batería: SF32LB520/3/5/7**: alimentación directa desde una batería Li-ion/Li-Po de una celda; está destinado a diseños basados en la arquitectura de alimentación con carga integrada.
@@ -131,6 +147,8 @@ Resolución máxima e interfaces de panel: consulte [Matriz de interfaces por di
 - **Grupo de alimentación externa de 1,8 V: SF32LB52D**: destinado a diseños especiales de ultra bajo consumo a 1,8 V; no es eléctricamente intercambiable con las variantes de 3,3 V.
 
 Los grupos con batería y de alimentación externa corresponden a configuraciones de silicio distintas y **no son compatibles pin a pin** entre sí.
+
+<div id="_8"></div>
 
 ## Variantes de la familia { #family-variants }
 
@@ -164,7 +182,7 @@ Si se cambia de nivel de memoria, las variantes más próximas son:
 
 </div>
 
-Esta tabla resume las variantes principales de la [guía de modelos de chips de SiFli](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html); no es un catálogo completo de referencias. La hoja de datos enlazada para la familia con alimentación externa también incluye **SF32LB52HUD6** (1,8 V, QFN68L, PSRAM de 128 Mb), mientras que la guía de diseño de hardware utiliza además los patrones de sufijo `52AUx6` y `52D/F/HUx6`. Las fuentes disponibles no ofrecen una única tabla coherente con todas las variantes. Antes de liberar el diseño, confirme en la hoja de datos vigente el estado de pedido, los límites de alimentación, la interfaz de memoria y las características de E/S de cualquier SKU de este tipo.
+Esta tabla resume las variantes principales de la [guía de modelos de chips de SiFli](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html); no es un catálogo completo de referencias. La [hoja de datos DS5202-SF32LB52X V0.2.6](https://downloads.sifli.com/docs/Datasheet/SF32LB52X/DS5202-SF32LB52X-Datasheet%20V0p2p6.pdf) menciona **SF32LB52HUD6** en su historial de revisiones (2025-03-12), pero la lista de pedidos actual de la tabla 5-7 no incluye esta referencia. Esa mención histórica no demuestra que siga disponible para pedidos ni confirma sus especificaciones. La guía de diseño de hardware utiliza por separado los patrones de sufijo `52AUx6` y `52D/F/HUx6`; antes de liberar el diseño, verifique la referencia exacta y sus especificaciones en fuentes oficiales actuales.
 
 ## Ruta de integración { #integration-path }
 
@@ -199,11 +217,17 @@ Hasta 16 MB de PSRAM y hasta 4 MB de Flash NOR en el encapsulado.
 Empiece con la [guía de diseño de hardware del SF32LB52x](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) para esquemático, alimentación, reloj/RF y diseño de PCB, y use después las listas de comprobación de esquemático y layout antes de liberar la placa.
 <!-- uf-faq:end -->
 
+<div id="_9"></div>
+
 ## Productos relacionados { #related-products }
+
+<div id="_10"></div>
 
 ### Módulo { #module }
 
 [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) combina el chip SF32LB525UC6 —que, en la configuración estándar, incorpora 8 MB de OPI-PSRAM en su encapsulado— con una red de adaptación de RF. El módulo mide 27,9 × 18,0 × 3,1 mm y está pensado para proyectos que necesitan las prestaciones de SF32LB52 sin asumir el diseño y la validación de RF a nivel de chip.
+
+<div id="_11"></div>
 
 ### Placas de desarrollo { #development-kits }
 
@@ -211,6 +235,8 @@ Empiece con la [guía de diseño de hardware del SF32LB52x](../../hardware/chip-
 - [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) es una placa núcleo compacta con alimentación externa, pensada para poner en marcha rápidamente el firmware, las GPIO y las funciones de bajo consumo en variantes de la clase 52B/52J.
 - [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) es la placa de desarrollo más pequeña de la serie 52 y resulta útil cuando el producto final tiene restricciones de espacio.
 - [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) está orientada a la evaluación de diseños con batería y a las primeras pruebas de productos compactos de bajo consumo.
+
+<div id="_12"></div>
 
 ### Productos de referencia { #reference-products }
 

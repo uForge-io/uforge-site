@@ -110,7 +110,7 @@ SDKには、標準およびベンダー独自の複数のプロファイルの�
 - **Classic Bluetoothオーディオ** — ストリーミング用のA2DP、再生操作用のAVRCP、通話用のHFP。成熟しており、既存のスマートフォンやヘッドセットと広く互換性があります。
 - **LE Audio** — [Basic Audio Profile（BAP）](https://www.bluetooth.com/specifications/specs/basic-audio-profile-1-0-2/)は、ユニキャストとブロードキャストの両方のLE Audioストリームを管理する手順を定義しています。SDKにはブロードキャストソースとシンクの例があり、移行期間中にClassic BTとLE Audioを併用する製品向けの、両方式を組み合わせたブロードキャストソースの例も用意されています。
 
-どちらの方式でも、安定したタイミング、バッファリング、音声サンプルの確実な転送が必要で、通常はDMAを使います。必要なBluetoothオーディオの役割とSDK構成に対応するかを確認して、SF32LB52x/56x/58xを選んでください。SF32LB55xはBLE専用でClassic Bluetoothオーディオには対応しませんが、ローカル音声機能がないという意味ではありません。DMAとバッファリングについては、[オーディオ概要](../audio/overview.md)と[Bluetoothプロセッサーアーキテクチャ](processor.md#bluetooth-audio-and-le-audio)を参照してください。
+どちらの方式でも、安定したタイミング、バッファリング、音声サンプルの確実な転送が必要で、通常はDMAを使います。必要なBluetoothオーディオの役割とSDK構成に対応するかを確認して、SF32LB52x/56x/58xを選んでください。SiFli SDKのA2DP共有サンプルには`eh-lb57x`ボードが掲載され、A2DP音楽共有とHFP通話リレーが示されています。ただし、これはSF32LB57xの全品種・全役割への対応を示すものではありません。具体的なSKU、役割、SDK構成を確認してください。SF32LB55xはBLE専用でClassic Bluetoothオーディオには対応しませんが、ローカル音声機能がないという意味ではありません。DMAとバッファリングについては、[オーディオ概要](../audio/overview.md)と[Bluetoothプロセッサーアーキテクチャ](processor.md#bluetooth-audio-and-le-audio)を参照してください。
 
 ## Siblesサービスの実装パターン { #implementation-pattern-for-sibles-services }
 

@@ -8,12 +8,16 @@ tags:
     - Chip
 ---
 
+<div id="sf32lb52x-rf"></div>
+
 # SF32LB52x Hardware Design Guide — RF & User Interfaces
 
 !!! note "Part of the SF32LB52x Hardware Design Guide"
     This page covers Sections 5.4-5.5 of Schematic Design Guidelines: RF and User Interfaces. Return to [Minimum System, Power & Clock](SF32LB52x_schematic_design.md), continue to [Storage & Manufacturing](SF32LB52x_schematic_storage_mfg.md), or see the [Schematic Checklist](SF32LB52x_schematic_checklist.md) for the item-by-item review.
 
 ### 5.4. RF
+
+<div id="541-rf"></div>
 
 #### 5.4.1. RF Schematic and Antenna Path
 
@@ -35,6 +39,8 @@ RF trace characteristic impedance is 50 Ω. If the antenna is already matched, n
 
 Figure 5.4-1 shows a 15 pF, 50 V series capacitor (C0323); the two shunt positions C0318 and C0319 are marked NF (not fitted). These are reference values, not a universal antenna match. Keep the matching network close to the chip-side RF pin and determine its final population from measurements on the assembled product.
 
+<div id="542-rf"></div>
+
 #### 5.4.2. RF Review and Tuning
 
 **Common Mistakes - RF**
@@ -51,7 +57,11 @@ Figure 5.4-1 shows a 15 pF, 50 V series capacitor (C0323); the two shunt positio
 - [ ] Ground-via fence and RF keep-out are reviewed.
 - [ ] Provide access for antenna tuning and certification testing before finalizing the enclosure design.
 
+<div id="55"></div>
+
 ### 5.5. User Interfaces
+
+<div id="551"></div>
 
 #### 5.5.1. Display
 
@@ -91,6 +101,8 @@ Supported LCD driver models:
 !!! note "Display-driver interfaces are not MCU capabilities"
     Table 5.5-1 lists the interfaces offered by the LCD driver ICs, not interfaces that are all available on SF32LB52x. A driver entry mentioning MIPI-DSI or an 8-bit 8080 MCU bus does not establish MCU support for that interface. Select a panel interface supported by both the exact MCU variant and the driver.
 
+<div id="5511-spiqspi"></div>
+
 ##### 5.5.1.1. SPI/QSPI Display Interface
 
 <div align="center"><em>Table 5.5-2: SPI/QSPI Signal Connections</em></div>
@@ -110,6 +122,8 @@ Supported LCD driver models:
 | TE | PA02 | Tearing-effect signal to MCU |
 
 </div>
+
+<div id="5512-jdi"></div>
 
 ##### 5.5.1.2. JDI Display Interface
 
@@ -136,6 +150,8 @@ Supported LCD driver models:
 | JDI_B2 | PA02 | Blue image data (even pixels) |
 
 </div>
+
+<div id="5513-epd"></div>
 
 ##### 5.5.1.3. EPD Display Interface
 
@@ -175,6 +191,8 @@ Supported LCD driver models:
     !!! info "Not Applicable"
         SiFli's official SF32LB520/3/5/7 hardware application note does not include an EPD parallel-interface reference design. If your product needs EPD display support, consult the 52B/D/E/G/J documentation and confirm feasibility for the battery-powered variant with SiFli FAE support directly.
 
+<div id="5514"></div>
+
 ##### 5.5.1.4. Touch and Backlight Interface
 
 The SF32LB52x supports an I2C touch-controller interface with a touch-status interrupt input, plus one PWM signal for backlight enable and brightness control.
@@ -206,6 +224,8 @@ The SF32LB52x supports an I2C touch-controller interface with a touch-status int
 - [ ] Reset, TE, backlight PWM, touch I2C, and touch interrupt are assigned and documented.
 - [ ] Display power rail and sequencing are compatible with standby and wake behavior.
 - [ ] Bring-up plan covers reset, panel ID/readback where available, backlight, touch interrupt, and first image.
+
+<div id="552"></div>
 
 #### 5.5.2. Audio Interface
 
@@ -268,6 +288,8 @@ The microphone examples filter MIC_BIAS with a 1 kΩ series resistor and a 1 uF,
 !!! important "Complete the microphone and DAC paths"
     The source connects both MEMS_MIC_ADC_IN and ECM_MIC_ADC_IN to ADCP. Include the series DC-blocking capacitor of at least 2.2 uF required above; the 0.01 uF shunt capacitor shown in the microphone circuits is not a substitute. Place the differential low-pass filter in the dashed box of Figure 5.5-3 close to the MCU, keeping the DAC output trace capacitance below 10 pF and length below 2 cm.
 
+<div id="553"></div>
+
 #### 5.5.3. Buttons
 
 **Quick Summary**
@@ -279,6 +301,8 @@ The microphone examples filter MIC_BIAS with a 1 kΩ series resistor and a 1 uF,
 
 Provide reliable user-input and reset behavior without false wake events, stuck reset states, or high standby leakage through pull networks.
 
+<div id="5531"></div>
+
 ##### 5.5.3.1. Power Button
 
 PA34 supports long-press reset and can be designed as a combined power on/off and long-press-reset button. The long-press reset function is active-high, so the default state should be pulled low and driven high when the button is pressed.
@@ -287,7 +311,9 @@ PA34 supports long-press reset and can be designed as a combined power on/off an
 
 <div align="center"><em>Figure 5.5-4: Power / Long-Press-Reset Button Circuit</em></div>
 
-The reference circuit uses R0703 (5.1 kΩ) between VSYS_3V3 and the button, with R0702 (100 kΩ) pulling PA34 low and C0720 (0.1 uF) connected to ground. It also includes an ESD protection device. These values describe the illustrated design; check the input thresholds, debounce behavior, leakage, and reset timing when adapting it.
+The reference circuit uses R0703 (5.1 kΩ) between VSYS_3V3 and the button, with R0702 (10 kΩ) pulling PA34 low and C0720 (0.1 uF) connected to ground. It also includes an ESD protection device. These values describe the illustrated design; check the input thresholds, debounce behavior, leakage, and reset timing when adapting it.
+
+<div id="5532"></div>
 
 ##### 5.5.3.2. Mechanical Rotary Encoder Button
 
@@ -311,6 +337,8 @@ The encoder's A and B signals connect to PA35 and PA36 through 0 Ω resistors. E
 - [ ] Wake behavior is verified for the intended low-power states.
 - [ ] ESD and mechanical debounce requirements are reviewed.
 - [ ] Bring-up plan includes short press, long press, wake, and reset behavior.
+
+<div id="554"></div>
 
 #### 5.5.4. Vibration Motor
 

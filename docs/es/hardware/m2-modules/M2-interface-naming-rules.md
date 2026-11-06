@@ -48,6 +48,7 @@ Donde:
 </div>
 
 Estas descripciones indican el alcance previsto de cada categoría, no requisitos eléctricos definitivos.
+
 **Estado de las fuentes:**
 - **M2 / M2xM:** El borrador enlazado indica que un libro de propuesta local contiene mapas de contactos, pero el archivo no está incluido en este repositorio ni enlazado aquí; considérelos solo propuestas.
 - **M2xN / M2xA:** El borrador resume estas extensiones, pero no se encontraron datos originales de mapas de contactos para verificar esos resúmenes; considérelos no verificados.

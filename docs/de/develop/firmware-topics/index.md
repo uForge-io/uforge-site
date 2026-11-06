@@ -1,6 +1,6 @@
 ---
 icon: lucide/blocks
-description: "Überblick über plattformübergreifende SF32-Firmware-Themen: Partitionstabellen, OTA/DFU, USB, Energiemanagement, Protokollierung und Fehleranalyse."
+description: "Überblick über plattformübergreifende SF32-Firmware-Themen: Partitionstabellen, OTA/DFU, USB, Energiemanagement, Protokollierung und Absturzanalyse."
 tags:
     - Entwicklung
     - Firmware
@@ -8,7 +8,7 @@ tags:
 
 # Themen rund um die Firmware { #firmware-topics }
 
-Diese Themen gelten plattformübergreifend. Sie behandeln die Firmware-Entscheidungen, die aus Beispielen Produkte machen: Boot-Layout, Partitionierung, OTA, USB, Energiemanagement, Protokollierung und Fehleranalyse.
+Diese Themen gelten plattformübergreifend. Sie behandeln die Firmware-Entscheidungen, die aus Beispielen Produkte machen: Boot-Layout, Partitionierung, OTA, USB, Energiemanagement, Protokollierung und Absturzanalyse.
 
 Lesen Sie diese Seiten, bevor Sie das Firmware-Layout, das Update-Verhalten oder die Energiesparstrategie ändern. Solche Fehler verhindern nicht immer einen erfolgreichen Build, können aber die Wiederherstellung, Fehlersuche und Freigabe des Produkts erschweren.
 
@@ -24,7 +24,7 @@ Lesen Sie diese Seiten, bevor Sie das Firmware-Layout, das Update-Verhalten oder
 | [OTA und DFU](ota-dfu.md) | Grundlage für Updates im Feld und Wiederherstellungspläne. |
 | [USB und CherryUSB](usb-cherryusb.md) | Behandelt die USB-Funktionen als Gerät und als Host, die über eine bloße Datenblattangabe hinausgehen. |
 | [Energiemanagement](power-management.md) | Macht aus einer funktionierenden Demo ein für den Akkubetrieb ausgelegtes Produkt. |
-| [Protokollierung und Fehleranalyse](logging-crash-analysis.md) | Macht Fehlerursachen nachvollziehbar. |
+| [Protokollierung und Absturzanalyse](logging-crash-analysis.md) | Macht Fehlerursachen nachvollziehbar. |
 
 </div>
 

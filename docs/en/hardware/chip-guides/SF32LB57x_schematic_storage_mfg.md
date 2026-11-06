@@ -9,12 +9,18 @@ tags:
     - Chip
 ---
 
+<div id="sf32lb57x"></div>
+
 # SF32LB57x Hardware Design Guide — Storage & Manufacturing
 
 !!! note "Part of the SF32LB57x Hardware Design Guide"
     This page covers Sections 5.6-5.7 of Schematic Design Guidelines: Storage and Connectivity, and Manufacturing. Return to [Clock, RF & User Interfaces](SF32LB57x_schematic_clock_rf_interfaces.md), or skip ahead to [PCB Layout Guidelines](SF32LB57x_pcb_layout.md).
 
+<div id="56"></div>
+
 ### 5.6. Storage and Connectivity
+
+<div id="561"></div>
 
 #### 5.6.1. Storage and Boot
 
@@ -37,6 +43,8 @@ Parts with package-integrated SPI NOR Flash boot from it by default. Parts witho
 | H | H | eMMC |
 
 </div>
+
+<div id="562"></div>
 
 #### 5.6.2. Storage Interfaces
 
@@ -69,6 +77,8 @@ Before schematic freeze, confirm:
     SiFli’s storage wiring table labels the signals on `PA12`–`PA17` as `SD2_*`, while its IO MUX table labels Function 2 on those pins as `SD1_*`. The table above retains the wiring-table labels. The physical pin mapping agrees, but these names must not be used alone to select SDIO2 or a firmware instance. Verify the exact part’s user manual, SDK pin configuration, and reference design before configuring the controller.
 
 
+<div id="563"></div>
+
 #### 5.6.3. Boot and Power Control
 
 An eMMC device has separate `VCC` and `VCCQ` power domains. Switching both rails together reduces shutdown power, but eMMC resumes from sleep more slowly and average CPU power is higher. Switching only `VCC` while keeping `VCCQ` on increases shutdown power, but eMMC resumes faster and average CPU power is lower.
@@ -97,9 +107,13 @@ The external boot selection is shown in Table 5.6-1 and Figure 5.6-1. The storag
 - If package-integrated storage already occupies MPI3, external MPI3 usage is limited to SD NAND or eMMC; do not attach external SPI NOR/SPI NAND to that channel.
 - Match the storage device's operating IO voltage to the MCU IO supply, and use a storage part listed on the project's Approved Vendor List (AVL).
 
+<div id="564-gpio"></div>
+
 #### 5.6.4. GPIO and Pin Multiplexing
 
 GPIO planning should happen before product peripherals are fully assigned, because boot, debug, wake, USB, analog, display, storage, and high-speed signals can constrain otherwise flexible matrix routing.
+
+<div id="565"></div>
 
 #### 5.6.5. Pin Planning
 
@@ -108,6 +122,8 @@ SF32LB57x supports flexible pin multiplexing, but the following signals should b
 - RF, crystals, power, USB, analog audio, GPADC, boot, and debug pins.
 - High-speed display, SDIO, storage, and DCMI interfaces that require specific pin groups.
 - Wake GPIOs, boot configuration, SWD switching, and production-test pins.
+
+<div id="566-gpio"></div>
 
 #### 5.6.6. GPIO Guidelines
 
@@ -264,6 +280,8 @@ Any GPIO can be matrix-mapped to any of the functions above (subject to the rout
 !!! warning "IF_SEL values in the LCDC sub-mux table"
     SiFli's source table assigns `IF_SEL=0` to both SPI and JDI modes. This article preserves the source values, but the duplicate assignment is ambiguous. Before configuring a panel, verify the setting against its SDK driver and reference design; do not infer the register value from this table alone.
 
+<div id="567"></div>
+
 #### 5.6.7. General Interfaces
 
 Apply the same review pattern to every general-purpose interface: electrical connection, IO voltage, reset/sleep default state, pull-up rail, ESD exposure, and conflicts with boot, debug, wake, or high-speed functions.
@@ -275,6 +293,8 @@ Apply the same review pattern to every general-purpose interface: electrical con
 
 !!! warning "GPADC Key-Voltage Labels"
     The SiFli source schematic shows two slash-separated voltage values at each key node but does not explain the conditions represented by each value. Confirm the mapping against the target supply configuration and reference design before using these values as thresholds.
+
+<div id="568"></div>
 
 #### 5.6.8. Interface Review Principles
 
@@ -387,7 +407,11 @@ Review four items for every peripheral interface:
 !!! warning "VBATS pin voltage and measurement range"
     For 3.3 V supply variants, the power-pin table lists `VBATS` as 0 V to 4.7 V, while the schematic checklist gives a battery-voltage sensing range of 0 V to 4.5 V. For GPADC measurements, follow the narrower 0 V to 4.5 V range; do not treat the 4.7 V pin-table limit as a valid ADC measurement range.
 
+<div id="57"></div>
+
 ### 5.7. Manufacturing
+
+<div id="571"></div>
 
 #### 5.7.1. Production Boot and Download Modes
 
@@ -436,6 +460,8 @@ Keep the default debug/download pins accessible to the production fixture, and r
 | Hardware checklist 4.8, item 3 | All models | `VBAT` or 3.3 V, `GND`, `PA18`, `PA19`, `VDD33_VOUT1` (absent on 3.3 V series), `PA00`, `PA01`, and `PA34`; make pad dimensions, spacing, and orientation match the fixture probes. |
 
 </div>
+
+<div id="572"></div>
 
 #### 5.7.2. Production Programming and Calibration
 

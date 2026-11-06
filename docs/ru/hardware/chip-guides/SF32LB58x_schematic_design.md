@@ -88,6 +88,9 @@ SF30147C — это высокоинтегрированная и эффекти
 
 Подробные сведения приведены в даташите SF30147C.
 
+!!! warning "Расхождение в источнике в названии шины питания"
+    В [сводной строке LDO1](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md#L38) источника указана AVDDIOA2, но в [таблице выводов микросхемы](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md#L79) для PA0–PA11 указана VDDIOA2; в [официальной карте выводов DevKit](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb58x/SF32LB58-DevKit-LCD.md#L195) также используется VDDIOA2. Эти источники не позволяют определить, какое имя предназначено для шины LDO1. Перед выпуском принципиальной схемы уточните его у SiFli.
+
 ##### 5.2.1.2. Требования к питанию SF32LB58x {#5112-sf32lb58x-power-requirements}
 
 Для встроенного модуля питания PMU серии SF32LB58x действуют следующие параметры.
@@ -720,6 +723,9 @@ USB-интерфейс серии SF32LB58x поддерживает USB 2.0 HS 
 | SWDIO | PB11 | Сигнал данных J-Link |
 
 </div>
+
+!!! warning "Конфликт источников"
+    В [таблице по аппаратному применению OpenSiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md) `TXD1`/`PA31` сопоставлены с RXD UART1, а `RXD1`/`PA32` — с TXD UART1. В [карте выводов SF32LB58-DevKit-LCD](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb58x/SF32LB58-DevKit-LCD.md), напротив, указано, что `PA31` — это `UART1_TXD`, а `PA32` — `UART1_RXD`. Источники расходятся в направлении сигналов, поэтому по ним нельзя определить, какое назначение верно. До разводки подтвердите у SiFli функцию `pinmux` UART1 и направление сигналов; не определяйте подключение TX/RX на плате только по этим обозначениям.
 
 !!! note "Примечание"
     Сигналы UARTx RXD не должны оставаться неподключёнными; при инициализации ПО включите внутреннюю подтяжку к питанию.

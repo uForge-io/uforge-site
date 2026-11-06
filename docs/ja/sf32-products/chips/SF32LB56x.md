@@ -8,6 +8,8 @@ tags:
 
 # SF32LB56x { #sf32lb56x }
 
+<div id="_1"></div>
+
 ## 概要 { #overview }
 
 SF32LB56xシリーズは、デュアルモードBluetooth、より高度なグラフィックス、内蔵オーディオ、外部メモリーを必要とし、下位クラスのSF32LBデバイスより柔軟なディスプレイ・ストレージ構成を求める製品向けの、先進的な超低消費電力AIoTマイクロコントローラーファミリーです。
@@ -19,6 +21,8 @@ SiFliの公式製品ブリーフとデータシートでは、SF32LB56xを、表
 SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用できるディスプレイインターフェースはパッケージによって異なるため、正確な型番とパッケージはPCB設計の後半ではなく、アーキテクチャを決める段階で選定します。
 
 [^1]: STAR-MC1はArm China製の構成可能なArmv8-M Mainline組み込みCPU IPです。対応するSF32デバイスにおいて、SiFliはこれをArm Cortex-M33 STAR-MC1アプリケーションプロセッサーとして文書化しています。Cortex-M33クラスのソフトウェアモデルにより、通常のデバイス固有の統合作業を前提として、既存のCortex-M33ファームウェア、ミドルウェア、RTOSポート、ツールを引き継ぐことができます。CU、SP、SEの各構成は主にキャッシュ、TCM、XIPU、TrustZone対応の点で異なり、Arm Custom Instructions/CDEおよびコプロセッサーインターフェースはオプション機能であり、対象のSF32部品ごとに確認が必要です。SiFliのドキュメントでは、文脈に応じて ***Arm Cortex-M33 STAR-MC1*** または ***Arm Cortex-M33*** のいずれかの表記が使われることがあります。
+
+<div id="_2"></div>
 
 ## 用途 { #applications }
 
@@ -42,6 +46,8 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 - SDIO経由の外部Wi-Fi、SD/SDIOまたはeMMC経由の外部ストレージ
 - WBBGA175パッケージで利用できる、より多くのGPIO
 - TinyML、オーディオ、UIを同時に処理する余力
+
+<div id="_3"></div>
 
 ## 開発リソース { #development-resources }
 
@@ -81,7 +87,11 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 
 ---
 
+<div id="_4"></div>
+
 ## 機能と仕様 { #features-and-specs }
+
+<div id="_5"></div>
 
 ### 演算とメモリー { #compute-and-memory }
 
@@ -93,6 +103,8 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 - LCPUメモリーシステム：16 KB Iキャッシュ + 8 KB Dキャッシュ、160 KBのリテンションSRAM
 - パッケージ内QSPI-NORオプション：512 KBまたは1 MB
 - QSPI-NOR、SPI-NAND、QPI/OPI-PSRAM、SD/SDIO、eMMC用の外部メモリーインターフェース
+
+<div id="ai"></div>
 
 ### グラフィックス、ディスプレイ、AI { #graphics-display-and-ai }
 
@@ -107,6 +119,8 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 - TurboPixel: extDMAによる固定比率の非可逆最終フレームバッファ圧縮とディスプレイコントローラー側での展開により、PSRAMの帯域幅と容量を削減
 - TinyMLワークロード向けニューラルネットワーク行列アクセラレーター、最大1.92 GOPS、10 TOPS/W超
 
+<div id="_6"></div>
+
 ### オーディオと無線接続 { #audio-and-wireless-connectivity }
 
 - BLE Audio対応のデュアルモードBluetooth 5.3
@@ -117,11 +131,17 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 - 24ビットHiFiオーディオADC × 1、SNR 99 dB
 - PDMインターフェース × 2、I2Sインターフェース × 1
 
+**DACのSNRに関する資料間の相違：**[PB0056 V1.1](https://downloads.sifli.com/silicon/PB0056-SF32LB56x-Product%20Brief%20V1p1.pdf)と[UM5601 V1.0.2](https://downloads.sifli.com/user%20manual/UM5601-SF32LB56x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V1p0p2.pdf)は108 dB、[DS5601 V1.9.2](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-Datasheet%20V1p9p2.pdf)は109 dBと記載しています。本ページでリンクしている新しいPB0056 V1.2、DS5601 V1.9.3、UM5601 V1.0.5ではこの差異を解消できていないため、基準となる値は未確定です。使用前に正確な型番に対応する最新資料で確認してください。
+
+<div id="_7"></div>
+
 ### セキュリティ { #security }
 
 - AES、HASH、CRCハードウェアアクセラレーター
 - 真性乱数発生器(TRNG)
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### ペリフェラルとI/O { #peripherals-and-ios }
 
@@ -138,6 +158,8 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 - ペリフェラルタスクコントローラー(PTC)
 - パッケージに応じて最大120 GPIO
 
+<div id="_8"></div>
+
 ### 電源とパッケージ { #power-supply-and-package }
 
 - 電源電圧範囲：1.71 V～3.63 V
@@ -146,6 +168,8 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 - RTCウェイクアップ有効時のスリープ電流：600 nA
 - ピンウェイクアップ有効時のスリープ電流：300 nA
 - パッケージオプション: QFN68L、WBBGA175
+
+<div id="_9"></div>
 
 ## 製品バリエーション { #family-variants }
 
@@ -169,6 +193,8 @@ SF32LB56xには、コンパクトなQFN68L品からI/O数の多いWBBGA175品ま
 | SF32LB567VND36 | WBBGA175 | 79 / 41 | 16 MB OPI-PSRAM + 1 MB QSPI-NOR Flash | DPI / QSPI / 8080 / JDI | モジュール標準品とは異なるチップを選び、単一の大容量PSRAM領域と柔軟なディスプレイ配線を必要とする高I/O設計 |
 
 </div>
+
+<div id="_10"></div>
 
 ## 設計・導入の進め方 { #integration-path }
 
@@ -203,15 +229,23 @@ RGB888カラーで最大1024 × 600です（BGAパッケージのDPI/RGBイン�
 まず[SF32LB56xハードウェア設計ガイド](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md)で回路図、電源、クロック/RF、PCBレイアウトの指針を確認し、基板リリース前に回路図とレイアウトのチェックリストを使用してください。
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## 関連製品 { #related-products }
+
+<div id="_12"></div>
 
 ### モジュール { #module }
 
 [SF32LB56-MOD](../modules/SF32LB56-MOD.md) は、SF32LB566VCB36、メモリー、RF回路、アンテナの選択肢をまとめた組み込み用モジュールです。SF32LB56xの機能を活用しつつ、RF配線、アンテナ整合、水晶の配置、高速メモリーの実装に伴うリスクを抑えたい場合に適しています。
 
+<div id="_13"></div>
+
 ### 開発キット { #development-kits }
 
 [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) は、チップ単体またはモジュールを使った設計を確定する前に、ファームウェアの立ち上げ、ディスプレイ、オーディオ、ストレージ、RF、および消費電力を評価するための実用的な開発環境です。
+
+<div id="_14"></div>
 
 ### リファレンス製品 { #reference-products }
 

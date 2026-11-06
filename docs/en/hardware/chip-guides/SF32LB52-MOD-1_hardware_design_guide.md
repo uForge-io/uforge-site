@@ -17,6 +17,9 @@ tags:
 
 This guide covers module-level hardware integration: pin definitions, peripheral interfaces, electrical characteristics, power-supply requirements, reference schematics, a schematic design checklist, mechanical dimensions and PCB footprint, and product handling requirements. It is based on SiFli datasheet **DS5203-SF32LB52-MOD-1 V0.3**.
 
+!!! important "Module variant scope"
+    The module specifications and integration guidance below cover SF32LB52-MOD-1-N16R8 as documented in DS5203 V0.3. That datasheet does not establish these details for the distinct SF32LB52-MOD-1-A128R16 configuration. For A128R16-specific information, consult [SiFli's EPD module design guide](https://wiki.sifli.com/hardware/SF32LB52-MOD-1-EPD-HW-Application.html).
+
 For the underlying chip architecture (cores, graphics, memory subsystem, and peripherals in more depth), see [SF32LB52x](../../sf32-products/chips/SF32LB52x.md) and the [SF32LB52x Hardware Design Guide](../chip-guides/SF32LB52x_hardware_design_guide.md).
 
 !!! note "Source and figure handling"
@@ -54,7 +57,7 @@ For the underlying chip architecture (cores, graphics, memory subsystem, and per
 | Low-power core (LCPU) | Arm Cortex-M33 STAR-MC1, up to 24MHz, 64KB SRAM |
 | Wireless | Dual-mode Bluetooth 5.3 with BLE Audio |
 | Graphics | ePicasso 2.0 2D/2.5D engine, up to 512×512, eZip 2.0 lossless decompression |
-| Audio | 1x 24-bit audio DAC, 1x 24-bit audio Sigma-Delta ADC |
+| Audio | DS5203 V0.3's feature summary lists one 24-bit DAC and one Sigma-Delta ADC; its detailed audio sections list two of each. Confirm the channel count exposed on the module with SiFli. |
 | Storage | Optional in-package OPI-PSRAM (144MHz); 1x external MPI (QSPI); 1x SD/SDIO/eMMC |
 | Package | 68-pin, 27.9 × 18.0 × 3.1mm |
 | Power supply | VSYS 3.2–4.7V (Li-ion) or 3.7–4.7V (DCDC/LDO, 3.8V recommended) |
@@ -194,11 +197,14 @@ Any pin marked `PAxx_I2C_UART` in the table above can be configured as either I2
 
 **Temperature Sensor** — 0.2°C resolution, -40°C to 125°C range, ±3°C accuracy, polling or interrupt read-out.
 
-**Audio DAC** — One 24-bit DAC output path, 8kHz–48kHz sample rates, differential output.
+**Audio DAC** — The module-specific description lists one 24-bit DAC output path, with 8kHz–48kHz sample rates and differential output. DS5203 V0.3's detailed audio section describes two DACs on the MCU; confirm how many paths are exposed on the exact module with SiFli.
 
 **Audio PLL** — Fractional-N clock generation with 48MHz/2^18 resolution, supporting 48MHz, 32.768kHz, and 44.1kHz derived sample rates.
 
-**Audio ADC** — One 24-bit Sigma-Delta ADC input path, 8kHz–48kHz sample rates.
+!!! note "Audio PLL rate requires confirmation"
+    The V0.3 datasheet lists 48 MHz here as a derived sample rate, while the adjacent DAC and ADC specifications give ranges of 8–48 kHz. The source does not reconcile this difference; confirm the 48 MHz entry with SiFli before relying on it.
+
+**Audio ADC** — The module-specific description lists one 24-bit Sigma-Delta ADC input path, with 8kHz–48kHz sample rates. DS5203 V0.3's detailed audio section describes two ADCs on the MCU; confirm how many paths are exposed on the exact module with SiFli.
 
 ## 6. Electrical Characteristics
 

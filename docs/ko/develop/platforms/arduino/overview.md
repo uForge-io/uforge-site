@@ -12,7 +12,7 @@ tags:
 [OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr)는 SF32용 Zephyr 기반 Arduino 코어입니다. **SiFli SF32LB52 DevKit LCD**에서 스케치, 주변 장치 실험, 데모, 초기 프로토타입을 작업하기에 유용한 경로입니다.
 
 !!! warning "베타 코어"
-    OpenSiFli는 이 코어를 **BETA**로 표기합니다. 기능, API, 패키지 구성, 로더 동작, 릴리스가 변경될 수 있습니다. 제품을 이 경로로 확정하기 전에 프로젝트 README와 Releases에서 현재 동작을 확인하십시오.
+    OpenSiFli는 이 코어를 **BETA**로 표기하며 테스트 전용이라고 안내합니다. 제품용 경로로 채택하지 마십시오. 기능, API, 패키지 구성, 로더 동작, 릴리스가 변경될 수 있습니다. 추가 평가 전에 프로젝트 README와 Releases에서 현재 동작을 확인하십시오.
 
 초기 IDE 설치, 보드/포트 선택, 부트로더 설치, Blink 확인은 [Arduino 시작하기](../../../getting-started/arduino/getting-started-arduino.md)를 참조하십시오. 이 페이지는 Arduino가 적합한지 판단하고, 첫 실행 이후 Arduino 기반 프로젝트를 유지보수하기 위한 문서입니다.
 
@@ -76,7 +76,7 @@ ArduinoCore-zephyr는 스케치용 Arduino API를 Zephyr 로더 및 보드별 �
 
 **Standard**와 **Dynamic**으로 시작하십시오. Debug 모드에서는 Zephyr 셸에서 `sketch`를 실행하기 전까지 업로드한 스케치가 시작되지 않습니다. 업로드가 성공한 것처럼 보이는데 애플리케이션이 전혀 동작하지 않는 경우의 흔한 원인입니다.
 
-로더는 보드별 별도 산출물입니다. Burn Bootloader는 보통 최초 설치, 업데이트 또는 복구 시 수행하며, 매번 스케치를 업로드할 때 실행하는 절차는 아닙니다. Arduino 패키지 버전과 로더 업데이트 이력을 함께 기록하십시오. 두 버전에 대한 정보가 맞지 않으면 나중에 원인을 파악하기 어렵습니다.
+로더는 보드별 별도 산출물입니다. Burn Bootloader는 보통 최초 설치, 업데이트 또는 복구 시 수행하며, 매번 스케치를 업로드할 때 실행하는 절차는 아닙니다. Arduino 패키지 버전과 로더 업데이트 이력을 함께 기록하십시오. 두 버전 간 전제가 일치하지 않으면 나중에 문제를 진단하기 어렵습니다.
 
 ## 통합 경계 { #integration-boundaries }
 

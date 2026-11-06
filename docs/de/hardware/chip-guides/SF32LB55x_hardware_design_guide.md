@@ -187,7 +187,7 @@ Verwenden Sie die Checklisten als Abnahmeprotokoll und nicht nur als Leseliste:
 
 [SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## Fortsetzung des Design-Leitfadens { #continue-the-design-guide }
+## 5. Fortsetzung des Design-Leitfadens { #continue-the-design-guide }
 
 Der vollständige Leitfaden setzt sich auf den folgenden Seiten fort. Jede Seite behandelt eine Phase des Designprozesses und ist von hier aus erreichbar.
 

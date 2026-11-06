@@ -155,7 +155,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1アプリケーションコア + 専用Bluetoothコントローラーコア
-    - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルモードBluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルモードBluetooth 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU、ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0ハードウェア伸長処理
     - :fontawesome-solid-circle:{ .uf-dot-blue } オーディオコーデック、AMIC × 1、DMIC × 2
@@ -171,7 +171,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルコアCortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルモードBluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルモードBluetooth 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 最大1024 × 600のRGBディスプレイ
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU、ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0ハードウェア伸長処理
@@ -188,7 +188,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } トリプルコアCortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルモードBluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルモードBluetooth 6.3（データシート草稿）
     - :fontawesome-solid-circle:{ .uf-dot-blue } 最大1024 × 600のRGBディスプレイ
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU、ePicasso 3.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 3.0、JPEG / MJPEGデコーダー
@@ -206,7 +206,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } トリプルコアCortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルモードBluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } デュアルモードBluetooth 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 最大1280 × 800のMIPIディスプレイ
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPUとベクターグラフィックス、ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0、JPEG / MJPEGデコーダー

@@ -9,12 +9,18 @@ tags:
     - Chip
 ---
 
+<div id="sf32lb57x-pcb"></div>
+
 # Guia de projeto de hardware do SF32LB57x — diretrizes de layout de PCB { #sf32lb57x-hardware-design-guide-pcb-layout-guidelines }
 
 !!! note "Parte do guia de projeto de hardware do SF32LB57x"
     Esta página aborda a Seção 6, diretrizes de layout de PCB. Volte para [Armazenamento e fabricação](SF32LB57x_schematic_storage_mfg.md) ou avance para [Checklist de revisão do projeto e referências](SF32LB57x_review_and_reference.md).
 
+<div id="6-pcb"></div>
+
 ## 6. Diretrizes de layout de PCB { #6-pcb-layout-guidelines }
+
+<div id="61"></div>
 
 ### 6.1. Empilhamento de camadas { #61-stack-up }
 
@@ -63,6 +69,8 @@ Os quatro empilhamentos de referência usam cobre de 1 oz nas camadas L1/L4 (1,3
 
 Em uma PCB QFN de 4 camadas, recomenda-se esta distribuição: Camada 1 (superior) — preenchimento de terra, posicionamento dos componentes e roteamento de sinais; Camada 2 — plano de terra sólido, sem sinais, para preservar a integridade da referência; Camada 3 — plano de alimentação, que pode ser dividido por domínio e também receber sinais; Camada 4 (inferior) — preenchimento de terra e roteamento de sinais.
 
+<div id="62-pcb"></div>
+
 ### 6.2. Referência rápida das restrições críticas de PCB { #62-critical-pcb-constraint-quick-reference }
 
 <div align="center"><em>Tabela 6.2-1: Referência rápida das restrições críticas de PCB</em></div>
@@ -90,6 +98,8 @@ Em uma PCB QFN de 4 camadas, recomenda-se esta distribuição: Camada 1 (superio
 
 As figuras de regras PTH e HDI também apresentam valores de fabricação de referência: largura mínima e recomendada de trilha de 0,10 mm para PTH e 0,075 mm para HDI, com máximo de 2,54 mm em ambos. Os exemplos de vias mostram furo de 0,25 mm com pad de 0,45 mm para PTH e furo de 0,10 mm com pad de 0,23 mm para microvia HDI (o exemplo de via passante é 0,25 mm/0,45 mm). São construções de referência; confirme a capacidade e as regras reais do fabricante antes de liberar a placa.
 
+<div id="63"></div>
+
 ### 6.3. Layout da alimentação { #63-power-layout }
 
 - Mantenha curtos e largos os caminhos de alimentação que conduzem correntes elevadas.
@@ -105,6 +115,8 @@ As figuras de regras PTH e HDI também apresentam valores de fabricação de ref
     - **Largura das trilhas e identificação da linha de alimentação:** A seção 3.2.1 do guia original de PCB exige pelo menos 0,4 mm (cerca de 15,7 mil) para `VCC` e `PVDD`. O item 44 da tabela de autoverificação 4-2-1-1, aplicável às variantes alimentadas por bateria, exige pelo menos 12 mil para `VCC`; o item 47, aplicável às variantes de 3,3 V, tem o título `PVDD`, mas seu detalhe de verificação exige pelo menos 12 mil para `VCC`. A fonte não concilia essas larguras nem esclarece se o título ou o detalhe do item 47 identifica a linha de alimentação pretendida. Não infira um valor corrigido nem aplique uma entrada às duas variantes de alimentação; antes de fechar o projeto, confirme com a SiFli a linha de alimentação, o escopo e a largura aplicáveis.
     Sem a confirmação da SiFli, ao fechar o projeto não escolha uma largura, nem atribua o item 47 a uma linha de alimentação.
 
+<div id="64"></div>
+
 ### 6.4. Layout dos cristais { #64-crystal-layout }
 
 - Mantenha uma referência de terra sólida e contínua sob o circuito de RF e o chip principal; não divida nem abra fendas no plano de terra. Para a área do cristal, a fonte também exige uma referência de terra contínua e a remoção de cobre sob o cristal. Consulte o aviso abaixo e não finalize a geometria de cobre dessa área antes de a SiFli confirmar os limites para o empilhamento escolhido.
@@ -119,6 +131,8 @@ As figuras de regras PTH e HDI também apresentam valores de fabricação de ref
     - **Escopo da folga ao redor do cristal:** A figura 3-3-1 (reproduzida aqui como figura 6.9-30) especifica pelo menos 0,25 mm de afastamento do cobre da camada TOP ao redor do cristal. O item 7 da tabela 4-3-1 define separadamente quais camadas devem ficar sem cobre sob o cristal nos dois empilhamentos, mas a fonte não explica a relação entre a folga periférica de 0,25 mm, as áreas sob o cristal e as restrições de roteamento nas camadas adjacentes.
     Esses conflitos e lacunas de escopo permanecem sem solução na documentação original da SiFli. Antes de liberar o layout, confirme os requisitos para o encapsulamento e o empilhamento reais; não escolha entre os espaçamentos nem deduza os limites de terra ou de área sem cobre por camada.
 
+<div id="65-rf"></div>
+
 ### 6.5. Layout de RF { #65-rf-layout }
 
 - Posicione a rede de casamento RF perto do chip e afastada da antena. Coloque o capacitor de filtro AVDD_BRF junto ao pino do chip e conecte seu terra diretamente ao plano principal por uma via.
@@ -128,6 +142,8 @@ As figuras de regras PTH e HDI também apresentam valores de fabricação de ref
 - Diferenças entre a largura do pad de um componente de casamento e a largura da trilha podem causar descontinuidade de impedância. Uma abertura no plano de referência sob os pads, dimensionada conforme os próprios pads, pode ajudar a manter a continuidade.
 - Se usar um conector de antena IPEX, remova o cobre de todas as camadas da PCB sob o conector. Simule as antenas de PCB e ajuste-as na placa real; reserve uma rede de casamento CLC e posicione-a o mais perto possível da antena.
 - Afaste RF do FPC do LCD, de USB, SDIO, DC/DC, cristais e caminhos de carregamento.
+
+<div id="66"></div>
 
 ### 6.6. Sinais analógicos e áudio { #66-analog-and-audio }
 
@@ -139,6 +155,8 @@ As figuras de regras PTH e HDI também apresentam valores de fabricação de ref
 - Faça blindagem tridimensional de terra nas trilhas GPADC e mantenha-as afastadas de circuitos que possam interferir, como detecção de bateria e temperatura.
 - Evite passar retornos de alta corrente pela área de áudio.
 
+<div id="67"></div>
+
 ### 6.7. Interfaces de alta velocidade { #67-high-speed-interfaces }
 
 - Roteie USB DP/DN como um par diferencial de 90 Ω e faça os sinais passarem primeiro pela proteção ESD.
@@ -148,6 +166,8 @@ As figuras de regras PTH e HDI também apresentam valores de fabricação de ref
 - Faça os sinais USB PA35 (USB_DP) e PA36 (USB_DN) passarem pela proteção ESD antes de chegar ao chip. Use roteamento diferencial de 90 Ω com blindagem tridimensional de terra e conecte o terra do dispositivo ESD de forma confiável ao terra principal.
 - Reserve posições para resistores em série nos clocks de alta velocidade, caso seja necessário ajustar EMI.
 
+<div id="68-emi-esd-eos"></div>
+
 ### 6.8. EMI, ESD e EOS { #68-emi-esd-and-eos }
 
 - Revise a proteção ESD de todas as interfaces externas.
@@ -156,6 +176,8 @@ As figuras de regras PTH e HDI também apresentam valores de fabricação de ref
 - USB, carregador, conector da bateria, botões, toque, display, sensor de frequência cardíaca e antena são pontos prioritários de proteção.
 - Posicione o ponto de teste da linha de carga USB antes do TVS. Coloque o TVS do conector da bateria antes do circuito do chip, de modo que o sinal passe pelo TVS antes de chegar ao chip.
 - Considere em conjunto OVP, EOS e ESD na proteção da entrada do carregador.
+
+<div id="69-pcb"></div>
 
 ### 6.9. Figuras de referência de PCB { #69-pcb-reference-figures }
 

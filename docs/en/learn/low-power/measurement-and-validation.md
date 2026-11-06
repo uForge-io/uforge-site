@@ -6,9 +6,13 @@ tags:
   - Validation
 ---
 
+<div id="_1"></div>
+
 # Power Measurement and Validation
 
 A battery-life estimate becomes credible only when its assumptions converge with hardware measurements. Use this page with the [Low-Power Overview](overview.md) and the [Smartwatch Power Profiling](smartwatch-power-profiling.md) example. The workflow starts with individual components, validates complete firmware scenarios, reconciles the daily-use model, and then directs the next optimization effort to the largest verified energy cost.
+
+<div id="_2"></div>
 
 ## Measure Energy, Not Current Alone
 
@@ -26,6 +30,8 @@ Here, `t` is measured in seconds. The factor `3600` converts seconds to hours; u
 The energy integral is in Wh; convert it to mWh by multiplying by 1000 before combining it with a profile recorded in mWh. Keep mAh and mWh as separate quantities; they are not interchangeable.
 
 If the supply is stable, record the measured `V_DUT` for the capture and use it with the current trace. If the voltage changes during the test, sample it on the same timebase as current, or record enough synchronized voltage points to calculate a defensible average power. Comparing only mAh can hide a real change in energy when the supply voltage, regulator operating point, or battery state differs between captures.
+
+<div id="_3"></div>
 
 ## Set Up the Measurement Baseline
 
@@ -52,6 +58,8 @@ Before connecting the DUT, verify that the selected PPK2 mode supports its volta
 
 </div>
 
+<div id="_4"></div>
+
 ## Characterize Each Component Before Full-System Tests
 
 Measure each component on an isolatable power rail or in a dedicated test fixture before relying on a whole-board trace. The goal is not to create a catalogue number; it is to determine which operating modes, loads, and firmware settings dominate the component's energy in the actual product.
@@ -73,6 +81,8 @@ Measure each component on an isolatable power rail or in a dedicated test fixtur
 </div>
 
 Measure at the battery input whenever the question is whole-product energy. Rail-level measurements are still essential for isolation, but convert them back to the battery side with measured regulator efficiency and quiescent current before adding them to a battery-life model. Do not treat the sum of rail currents as a battery-input result.
+
+<div id="_5"></div>
 
 ## Verify Driver-Controlled Power States
 
@@ -96,6 +106,8 @@ A component reaches its specified low-power state only when its driver applies t
 
 Valid logic levels do not guarantee low leakage. Internal pulls, conflicting pull definitions, reset defaults, ESD paths, and bus pull-ups can create a leakage or back-power path even when both devices appear to be in a sensible logic state. Measure interface-related current with both sides of the interface powered, with one side unpowered, and across the transition between those conditions. If an observed state does not meet expectation, first distinguish a driver configuration or sequence error from a board-level leakage path before changing the power-profile table.
 
+<div id="_6"></div>
+
 ## Validate Firmware Scenarios
 
 Once component behavior is understood, measure the complete firmware scenarios that a user experiences. A scenario includes the components, PM states, wakeups, and timing that happen together. For a smartwatch, start with the same scenarios used in the [Smartwatch Power Profiling](smartwatch-power-profiling.md) model: display-off standby, notifications, incoming-call alerts, raise-to-wake, automatic heart-rate checks, manual SpO2 checks, exercise recording, alarms, sleep monitoring, and app synchronization. Add NFC, Bluetooth calling, and AOD as separate scenarios when those features are enabled.
@@ -115,6 +127,8 @@ Once component behavior is understood, measure the complete firmware scenarios t
 </div>
 
 Use firmware GPIO markers to divide one waveform into phases. For example, a raise-to-wake trace can expose gesture recognition, MCU wake, display enable, rendering, display-on dwell, dim or off, and return to sleep. This turns one average-current number into actions that firmware and hardware teams can own.
+
+<div id="_7"></div>
 
 ## Reconcile the Daily-Use Profile
 
@@ -154,6 +168,8 @@ When measurement and model disagree, do not edit a table merely to force agreeme
 
 </div>
 
+<div id="_8"></div>
+
 ## Optimize the Largest Verified Contributors
 
 Use the reconciled profile to decide where effort has the highest return. Separate two questions: which component consumes the most energy, and which product scenario consumes the most energy. The answer can be different. A display may be the largest component, while raise-to-wake frequency is the scenario that makes it dominant.
@@ -162,6 +178,8 @@ Use the reconciled profile to decide where effort has the highest return. Separa
 2. **Improve hardware where the component limit is real.** Select lower-power sensors, memory, regulators, codecs, amplifiers, displays, or haptic solutions only after comparing the measured energy in the intended operating mode, not a headline datasheet current in an unrelated state.
 3. **Re-measure the changed component and scenario.** A replacement can move the bottleneck, change wake timing, or require a different regulator operating point.
 4. **Update the profile and repeat the full-day comparison.** A change is complete only when both the scenario trace and the product-level budget improve.
+
+<div id="_9"></div>
 
 ## Release Evidence
 

@@ -22,40 +22,22 @@ Der typische Pfad für Display-Ressourcen ist:
 
 <div align="center"><em>Diagramm: Grafikressourcen und Display-Pipeline</em></div>
 
-```text
-Source images, fonts, and animations
-        │
-        ▼
-GraphicsTool converts supported resources to eZip or eZip-A
-        │
-        ▼
-Compressed assets in NOR Flash, PSRAM, NAND, or file storage
-        │
-        ▼
-eZip hardware decoder expands an asset when required
-        │
-        ▼
-LVGL or another UI framework + graphics/display driver
-        │
-        ├── CPU fallback rendering
-        │
-        └── ePicasso pixel acceleration
-        │
-        ▼
-Final rendered bitmap in a draw buffer or framebuffer
-        │
-        ├── Uncompressed display path
-        │
-        └── Optional: extDMA compresses it into TurboPixel
-                    │
-                    ▼
-             TurboPixel framebuffer in PSRAM
-        │
-        ▼
-Display controller transfers pixels to the panel
-        │
-        ▼
-SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
+```mermaid
+flowchart TD
+    A["Quellbilder, Schriftarten und Animationen"] --> B["GraphicsTool konvertiert unterstützte Ressourcen in eZip oder eZip-A"]
+    B --> C["Komprimierte Ressourcen in NOR Flash, PSRAM, NAND oder Dateispeicher"]
+    C --> D["Der eZip-Hardwaredecoder erweitert Ressourcen bei Bedarf"]
+    D --> E["LVGL oder ein anderes UI-Framework + Grafik-/Displaytreiber"]
+    E --> F["CPU-Fallback-Rendering"]
+    E --> G["ePicasso-Pixelbeschleunigung"]
+    F --> H["Fertig gerendertes Bitmap in einem Zeichenpuffer oder Framebuffer"]
+    G --> H
+    H --> I["Unkomprimierter Displaypfad"]
+    H --> J["Optional: extDMA komprimiert das Bitmap in TurboPixel"]
+    J --> K["TurboPixel-Framebuffer in PSRAM"]
+    I --> L["Der Displaycontroller überträgt Pixel zum Panel"]
+    K --> L
+    L --> M["Panelschnittstellen: SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI"]
 ```
 
 Der Grafikpfad lässt sich flexibel zusammenstellen; ein Produkt kann auch ohne eZip, ePicasso, TurboPixel oder einen vollständigen Framebuffer auskommen. Verfügbarkeit und Anbindung hängen vom Gerät, SDK, der Display-Schnittstelle, dem Panel und der Treiberkonfiguration ab. Der aktuelle OpenSiFli-LCDC-Header definiert `LCDC_SUPPORTED_COMPRESSED_LAYER` nur, wenn `HAL_EXTDMA_MODULE_ENABLED` aktiviert ist und die Familienbedingung erfüllt wird; SF32LB52x und SF32LB57x sind ausgeschlossen. Ein Quellcodekommentar weist außerdem darauf hin, dass der LCPU-Pfad nicht aktiviert ist. Die veröffentlichte SDK-LCDC-Funktionstabelle kennzeichnet die Dekomprimierung komprimierter Ebenen auf SF32LB55x als nicht unterstützt. Daher ist 55x als bedingt und nicht als end-to-end validiert zu betrachten. Prüfen Sie die genaue SDK-Version, den Kern, die Build-Konfiguration und die Zielhardware; weitere Hinweise finden Sie unter [TurboPixel](turbopixel.md#availability-in-the-sf32-family).

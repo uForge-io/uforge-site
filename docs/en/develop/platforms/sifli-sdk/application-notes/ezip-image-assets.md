@@ -83,6 +83,12 @@ ezip -convert png_filename.png -rgb888 -binfile 2
 
 The output is `png_filename.bin`, with the header format value set to EZIP.
 
+For SF32LB57 only, add `-winsize 2048`; do not use this option for other chips:
+
+```bash
+ezip -convert png_filename.png -rgb565 -binfile 2 -winsize 2048
+```
+
 ### PIXEL LVGL C array { #pixel-lvgl-c-array }
 
 ```bash

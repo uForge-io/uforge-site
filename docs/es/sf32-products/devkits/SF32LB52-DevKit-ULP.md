@@ -175,7 +175,13 @@ Material opcional:
 - Batería Li-ion con una capacidad superior a 450 mAh
 - Segundo cable USB cuando se necesitan depuración UART y pruebas USB nativas al mismo tiempo
 
-### Configuración y modos de arranque de la placa
+<div id="_1"></div>
+<div id="board-einrichtung-und-startmodi"></div>
+<div id="configuracao-da-placa-e-modos-de-inicializacao"></div>
+<div id="configuracion-y-modos-de-arranque-de-la-placa"></div>
+<div id="configuration-de-la-carte-et-modes-de-demarrage"></div>
+
+### Configuración y modos de arranque de la placa { #board-setup-and-boot-modes }
 
 Conecte el equipo host al puerto USB Type-C UART de la placa; después, abra SifliTrace y seleccione el puerto COM correcto.
 
@@ -256,7 +262,7 @@ El conector de expansión de 30 pines expone señales de alimentación, USB, sen
 
 La placa utiliza una pantalla AMOLED y expone las señales de un FPC QSPI de 22 pines. La tabla de SiFli V1.0.0 marca los pines 5-10 como NC; la siguiente tabla incluye las 22 posiciones y señala explícitamente esos pines sin conexión.
 
-Las anotaciones de la placa de pantalla distinguen un conector FPC de 22 pines para el módulo LCD y un conector independiente placa a placa (B2B) de 24 pines para la placa principal. Confirme ambas interfaces en la revisión exacta del conjunto antes de montarlo.
+**Discrepancia entre fuentes sobre los conectores; verifique antes de elegirlos:** El texto de la guía de SiFli dice que la interfaz de pantalla dedicada se expone mediante un FPC de 22 pines y un cabezal de 40 pines; la figura de la placa de pantalla, en cambio, etiqueta un FPC de 22 pines hacia el módulo LCD y un conector placa a placa (B2B) de 24 pines hacia la placa principal. La fuente no explica cómo se relaciona el cabezal de 40 pines con el conector B2B de 24 pines. No elija ni acople conectores basándose solo en uno de esos recuentos; compruebe el esquemático/BOM de la revisión exacta del conjunto.
 
 <div align="center"><em>Mapa de señales FPC de pantalla y táctil QSPI de 22 pines</em></div>
 

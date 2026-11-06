@@ -155,7 +155,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Núcleo de aplicación Cortex-M33 STAR-MC1 + núcleo dedicado al controlador Bluetooth
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 6.3 de modo dual
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 5.3 de modo dual
     - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2.5D, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Descompresión por hardware eZip 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Códec de audio, 1 × AMIC y 2 × DMIC
@@ -171,7 +171,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1 de doble núcleo
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 6.3 de modo dual
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 5.3 de modo dual
     - :fontawesome-solid-circle:{ .uf-dot-blue } Pantalla RGB de hasta 1024 × 600
     - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2.5D, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Descompresión por hardware eZip 2.0
@@ -188,7 +188,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1 de tres núcleos
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 6.3 de modo dual
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 6.3 de modo dual (ficha técnica preliminar)
     - :fontawesome-solid-circle:{ .uf-dot-blue } Pantalla RGB de hasta 1024 × 600
     - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2.5D, ePicasso 3.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 3.0 y decodificación JPEG/MJPEG
@@ -206,7 +206,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1 de tres núcleos
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 6.3 de modo dual
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 5.3 de modo dual
     - :fontawesome-solid-circle:{ .uf-dot-blue } Pantalla MIPI de hasta 1280 × 800
     - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2.5D y gráficos vectoriales, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 y decodificación JPEG/MJPEG

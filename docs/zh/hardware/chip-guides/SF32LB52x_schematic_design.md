@@ -8,10 +8,14 @@ tags:
     - 芯片
 ---
 
+<div id="sf32lb52x"></div>
+
 # SF32LB52x 硬件设计指南 — 原理图设计指导 { #sf32lb52x-hardware-design-guide-schematic-design-guidelines }
 
 !!! note "SF32LB52x 硬件设计指南的一部分"
     原理图设计指导现分为三页：本页（第 5.1-5.3 节：最小系统、电源与时钟）、[RF 与用户接口](SF32LB52x_schematic_rf_interfaces.md)（第 5.4-5.5 节），以及[存储与制造](SF32LB52x_schematic_storage_mfg.md)（第 5.6-5.7 节）。如需选型和完整设计流程，请从 [SF32LB52x 硬件设计指南概览](SF32LB52x_hardware_design_guide.md) 开始；如需逐项核对，请参见[原理图核对表](SF32LB52x_schematic_checklist.md)。
+
+<div id="5"></div>
 
 ## 5. 原理图设计指导 { #5-schematic-design-guidelines }
 
@@ -32,6 +36,8 @@ tags:
 | 制造 | DBG_UART/SWD、测试点、产线烧录、校准接入和设计放行检查表 | 测试点图、量产治具方案、完整的放行材料 |
 
 </div>
+
+<div id="51"></div>
 
 ### 5.1. 最小系统设计 { #51-minimum-system-design }
 
@@ -54,6 +60,8 @@ tags:
 
 电源系统设计定义电源轨、负载开关、充电路径、OVP、内部 LDO 用法、唤醒行为和低功耗状态，是最小系统可靠工作的基础。该部分应在 PCB 摆放前完成，因为后续显示、存储、RF、音频和传感器设计都会依赖这些电源假设。
 
+<div id="521"></div>
+
 #### 5.2.1. 供电设计 { #521-power-supply }
 
 **快速摘要**
@@ -65,6 +73,8 @@ tags:
 **设计目标**
 
 建立稳定、低漏电且与所选型号匹配的电源树，避免内部 LDO 输出过载，抑制 RF 和音频电源轨上的噪声，并确保未使用负载和启动存储可在低功耗模式下关闭。
+
+<div id="5211"></div>
 
 ##### 5.2.1.1. 处理器电源要求 { #5211-processor-power-supply-requirements }
 
@@ -126,8 +136,13 @@ tags:
 
     (1) VDD_SIP：SF32LB52BU36 需要外部 1.8 V 或 3.3 V 供电；SF32LB52BU56 需要外部 3.3 V 供电；SF32LB52DUB6 需要外部 1.8 V 供电；SF32LB52E/G/JUx6 由内部 LDO 直接供电，不需要外部供电。
 
+    !!! note "PVDD 适用范围需确认"
+        表格规定的 PVDD 范围为 2.97–3.63 V（典型值 3.3 V），E/G/J 内部 LDO 的说明适用于该范围。B3 资料另行描述了 PVDD = 1.8 V 时内部 LDO 不可用、需要外部 1.8 V 供电的情况。该情况超出表列范围，且资料未解释适用范围差异。请向思澈科技（SiFli）确认；这并不构成采用 PVDD = 1.8 V 的设计建议。VDD_SIP 电源开关的相关限定见[存储与制造](SF32LB52x_schematic_storage_mfg.md)。
+
     !!! important "休眠（Hibernate）模式注意事项"
         系统进入休眠模式时，必须关闭 VDD_SIP，否则合封存储器 I/O 可能产生漏电。VDD_SIP 电源开关应由专用 PA21 管脚控制。
+
+<div id="5212-buck"></div>
 
 ##### 5.2.1.2. BUCK 电感选择 { #5212-buck-inductor-selection }
 
@@ -135,6 +150,8 @@ tags:
 
 !!! important "关键电源电感参数"
     L（电感量）= 4.7 μH ± 20%，DCR（直流电阻）≤ 0.4 Ω，Isat（饱和电流）≥ 450 mA。
+
+<div id="5213"></div>
 
 ##### 5.2.1.3. 电池与充电控制 { #5213-battery-and-charging-control }
 
@@ -208,6 +225,8 @@ tags:
     !!! info "不适用"
         外部稳压供电型号直接由稳压电源供电，**不包含充电管理电路**。本节不适用。若产品需要电池供电和充电功能，应选择 SF32LB520/3/5/7 系列。
 
+<div id="5214-standby"></div>
+
 ##### 5.2.1.4. 降低待机功耗 { #5214-reducing-standby-power }
 
 === "SF32LB520/3/5/7（电池供电）"
@@ -225,6 +244,8 @@ tags:
     使用负载开关动态控制各功能模块的供电；对于常开模块或电源路径，应选择低静态电流器件。
 
     应仔细控制电源开关 GPIO 的默认硬件状态，并增加兆欧级上拉/下拉电阻，使负载开关默认关闭。LDO 和负载开关选型时，应选择低静态电流 (Iq) 和低关断电流 (Istb) 器件，并特别关注常开电源器件的 Iq。
+
+<div id="5215"></div>
 
 ##### 5.2.1.5. 电源设计检查表 { #5215-power-design-checklist }
 
@@ -247,6 +268,8 @@ tags:
 - 在固件使能外设前，测量 `VCC`/`PVDD`、BUCK 输出、RF/音频电源轨和存储电源。
 - 对电池供电设计，确认充电器插入、涓流充电、恒流充电和复充行为。
 - 在显示、传感器、存储和马达负载开关关闭时，测量待机和休眠电流。
+
+<div id="522"></div>
 
 #### 5.2.2. 工作模式与唤醒源 { #522-operating-modes-and-wake-sources }
 
@@ -304,7 +327,11 @@ tags:
 - [ ] 休眠模式下，外部存储和传感器电源不会通过 I/O 产生漏电
 - [ ] 固件和硬件团队已确认运输、成品存放和正常待机时各自使用的低功耗状态
 
+<div id="53"></div>
+
 ### 5.3. 时钟生成 { #53-clock-generation }
+
+<div id="531"></div>
 
 #### 5.3.1. 晶体选择 { #531-crystal-selection }
 

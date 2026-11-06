@@ -21,7 +21,7 @@ Start with these critical selection factors:
 - **Power supply:** Battery or regulated supply, operating voltage range and I/O levels.
 - **Audio functions:** ADC/DAC, I2S and PDM requirements, including microphone channels.
 
-Compare exact parts rather than choosing by family number alone: a higher number is not automatically the best fit. Every one of these factors is a filter in the [Product selector](../product-selector.md): set them there to shortlist exact parts.
+Compare exact parts rather than choosing by family number alone: a higher number is not automatically the best fit. The [Product selector](../product-selector.md) provides filters for package, power, display, GPIO, audio, and other criteria, but not for Bluetooth mode. Use the available filters to shortlist candidates, then confirm BLE/Classic support on the exact part page.
 
 [Family comparison](SF32_family.md) · [Product selector](../product-selector.md)
 

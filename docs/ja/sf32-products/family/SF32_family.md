@@ -6,7 +6,11 @@ tags:
   - チップ
 ---
 
+<div id="sf32"></div>
+
 # SF32ファミリー { #sf32-family }
+
+<div id="_1"></div>
 
 ## はじめに { #introduction }
 
@@ -39,6 +43,8 @@ tags:
     [量産準備を進める :material-arrow-right:](../../hardware/design-for-production.md){ .uf-hw-link-green }
 
 </div>
+
+<div id="_2"></div>
 
 ## 主な特徴 { #key-features }
 

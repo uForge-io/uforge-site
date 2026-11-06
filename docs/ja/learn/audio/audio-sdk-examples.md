@@ -21,7 +21,7 @@ SiFli-SDKのオーディオサンプルは、信号経路全体を検証する�
 
 | 目的 | 推奨サンプル | 検証できること | 公式ページに記載された対象と制約 |
 |:-----------------|:-----------|:---------------|:----------------------------|
-| 2本または4本のデジタルマイクで録音する | [PDMサンプル](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html) | PDM入力。対応する処理モードでWAV録音と再生 | 現在のページで明記されているのは`sf32lb56-lcd_a128r12n1`のみ。PDM配線とピン設定を確認してください。ピン設定の説明ではボード名が`f32lb56-lcd_a128r12n1`と誤記されています（先頭の`s`が抜けています）。ビルドコマンドでは正しい名前が使われています。 |
+| 2本または4本のデジタルマイクで録音する | [PDMサンプル](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html) | PDM入力。対応する処理モードでWAV録音と再生 | 現在のページで明記されているのは`sf32lb56-lcd_a128r12n1`のみ。PDM配線とピン設定を確認してください。ピン設定の説明とビルドコマンドの両方で、ボード名の先頭の`s`が抜けています。使用するSDKリビジョンで`sf32lb56-lcd_a128r12n1`が対応していることを確認してください。 |
 | 2本のアナログマイクで録音する | [ステレオスピーカー向けローカル音楽サンプル（Local Music Example for stereo speaker、デュアルADC/DAC）](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/dual_adc_dac/README.html) | 2本のマイクを同時に録音して別々のPCMファイルに保存し、どちらか一方をスピーカーでモニター | SF32LB58xのカスタムボードが必要で、SiFliモジュールボードでは動作しません。アナログマイク2本とアナログスピーカー2台が必要です。 |
 | マイクからスピーカーまでの基本経路を検証する | [録音サンプル](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/record/README.html) | 5秒間マイク録音してPCMメモリーバッファーに保存し、その後に自動再生 | `eh-lb525`、`sf32lb52-lcd`、`sf32lb56-lcd`、`sf32lb58-lcd`各シリーズ。スピーカーが必要です。 |
 | ルートファイルシステムからプリセット音声を再生する | [ローカル再生サンプル](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/local_music/README.html) | マウントしたFATルートパーティションからプリセットの`16k.wav`を再生。容量内ならプリセットMP3も利用可能 | `eh-lb525`、`sf32lb52-lcd`、`sf32lb56-lcd`、`sf32lb58-lcd`各シリーズ。FATルートパーティションとスピーカーが必要です。 |

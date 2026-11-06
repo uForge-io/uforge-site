@@ -17,6 +17,16 @@ tags:
 
 将所选 QFN 或 BGA 封装的封装图和焊盘要求与预定装配厂的工艺能力核对。对于 BGA 封装，应尽早确认焊球扇出、过孔方案、阻焊规则和制造限制。
 
+思澈科技（SiFli）的资料提供了针对不同封装的 BGA 和 QFN 扇出示例。请将其作为参考；具体逃线取决于所选封装和制造商工艺规则，设计时必须逐项核实。
+
+![BGA 封装扇出示例](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA-FANOUT-PCB.png)
+
+<div align="center"><em>图 6.1-1：BGA 封装扇出参考图</em></div>
+
+![QFN 封装扇出示例](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/assets/55x/SF32LB55x-QFN-FANOUT-PCB.png)
+
+<div align="center"><em>图 6.1-2：QFN 封装扇出参考图</em></div>
+
 #### 6.1.1. 叠层与制造工艺参考 { #611-stack-up-and-fabrication }
 
 SF32LB55x 系列芯片支持单面和双面摆件。

@@ -8,12 +8,16 @@ tags:
     - Chip
 ---
 
+<div id="sf32lb52x-rf"></div>
+
 # SF32LB52x Hardware-Design-Leitfaden — RF & Benutzerschnittstellen { #sf32lb52x-hardware-design-guide-rf-user-interfaces }
 
 !!! note "Teil des SF32LB52x Hardware-Design-Leitfadens"
     Diese Seite behandelt die Abschnitte 5.4-5.5 der Schaltplanrichtlinien: RF und Benutzerschnittstellen. Die vorherige Seite behandelt [Minimalsystem, Stromversorgung & Takt](SF32LB52x_schematic_design.md), die folgende [Speicher & Fertigung](SF32LB52x_schematic_storage_mfg.md). Für die Prüfung einzelner Punkte verwenden Sie die [Schaltplan-Checkliste](SF32LB52x_schematic_checklist.md).
 
 ### 5.4. RF { #54-rf }
+
+<div id="541-rf"></div>
 
 #### 5.4.1. RF-Schaltplan und Antennenpfad { #541-rf-schematic-and-antenna-path }
 
@@ -35,6 +39,8 @@ Der Wellenwiderstand der RF-Leiterbahn beträgt 50 Ω. Ist die Antenne bereits a
 
 Abbildung 5.4-1 zeigt einen Serienkondensator mit 15 pF und 50 V (C0323); die beiden Positionen nach Masse, C0318 und C0319, sind mit NF (nicht bestückt) gekennzeichnet. Diese Werte gehören zum Referenzdesign und sind keine universelle Antennenanpassung. Platzieren Sie das Anpassnetzwerk nahe am chipseitigen RF-Pin und legen Sie die endgültige Bestückung anhand von Messungen am zusammengebauten Produkt fest.
 
+<div id="542-rf"></div>
+
 #### 5.4.2. RF-Review und Abstimmung { #542-rf-review-and-tuning }
 
 **Häufige Fehler - RF**
@@ -51,7 +57,11 @@ Abbildung 5.4-1 zeigt einen Serienkondensator mit 15 pF und 50 V (C0323); die be
 - [ ] Masse-Via-Zaun und RF-Freihaltebereich sind geprüft.
 - [ ] Vor Abschluss des Gehäusedesigns sind die Zugänge für die Antennenabstimmung und Zertifizierungsmessungen vorgesehen.
 
+<div id="55"></div>
+
 ### 5.5. Benutzerschnittstellen { #55-user-interfaces }
+
+<div id="551"></div>
 
 #### 5.5.1. Display { #551-display }
 
@@ -91,6 +101,8 @@ Unterstützte LCD-Treibermodelle:
 !!! note "Schnittstellen des Displaytreibers sind keine MCU-Funktionsliste"
     Tabelle 5.5-1 nennt die Schnittstellen der LCD-Treiber-ICs. Daraus folgt nicht, dass SF32LB52x alle aufgeführten Schnittstellen unterstützt. Ein Eintrag mit MIPI-DSI oder einem 8-Bit-8080-MCU-Bus belegt keine entsprechende MCU-Unterstützung. Wählen Sie eine Schnittstelle, die sowohl die genaue MCU-Variante als auch der Treiber unterstützt.
 
+<div id="5511-spiqspi"></div>
+
 ##### 5.5.1.1. SPI-/QSPI-Display-Schnittstelle { #5511-spiqspi-display-interface }
 
 <div align="center"><em>Tabelle 5.5-2: SPI-/QSPI-Signalverbindungen</em></div>
@@ -110,6 +122,8 @@ Unterstützte LCD-Treibermodelle:
 | TE | PA02 | Tearing-Effect-Signal an die MCU |
 
 </div>
+
+<div id="5512-jdi"></div>
 
 ##### 5.5.1.2. JDI-Display-Schnittstelle { #5512-jdi-display-interface }
 
@@ -136,6 +150,8 @@ Unterstützte LCD-Treibermodelle:
 | JDI_B2 | PA02 | Blau-Bilddaten (gerade Pixel) |
 
 </div>
+
+<div id="5513-epd"></div>
 
 ##### 5.5.1.3. EPD-Display-Schnittstelle { #5513-epd-display-interface }
 
@@ -175,6 +191,8 @@ Unterstützte LCD-Treibermodelle:
     !!! info "Nicht zutreffend"
         SiFlis offizieller Hardware-Anwendungshinweis für SF32LB520/3/5/7 enthält kein Referenzdesign für eine parallele EPD-Schnittstelle. Wenn Ihr Produkt EPD-Display-Unterstützung benötigt, konsultieren Sie die 52B/D/E/G/J-Dokumentation und bestätigen Sie die Machbarkeit für die akkubetriebene Variante direkt mit dem SiFli-FAE-Support.
 
+<div id="5514"></div>
+
 ##### 5.5.1.4. Touch- und Hintergrundbeleuchtungsschnittstelle { #5514-touch-and-backlight-interface }
 
 Der SF32LB52x unterstützt eine I2C-Schnittstelle für den Touch-Controller mit einem Eingang für dessen Statusinterrupt. Ein PWM-Signal steuert die Freigabe und Helligkeit der Hintergrundbeleuchtung.
@@ -206,6 +224,8 @@ Der SF32LB52x unterstützt eine I2C-Schnittstelle für den Touch-Controller mit 
 - [ ] Reset, TE, Hintergrundbeleuchtungs-PWM, Touch-I2C und Touch-Interrupt sind zugewiesen und dokumentiert.
 - [ ] Die Versorgung des Displays und ihre Einschaltreihenfolge sind mit Standby und dem Aufwecken vereinbar.
 - [ ] Der Inbetriebnahmeplan umfasst Reset, Panel-ID/Readback (sofern verfügbar), Hintergrundbeleuchtung, Touch-Interrupt und die erste Bildausgabe.
+
+<div id="552"></div>
 
 #### 5.5.2. Audioschnittstelle { #552-audio-interface }
 
@@ -268,6 +288,8 @@ Die Mikrofon-Referenzschaltungen filtern MIC_BIAS mit einem Serienwiderstand von
 !!! important "Mikrofon- und DAC-Signalpfade vervollständigen"
     Die Quelle verbindet MEMS_MIC_ADC_IN und ECM_MIC_ADC_IN jeweils mit ADCP. Fügen Sie den oben geforderten DC-Sperrkondensator mit mindestens 2,2 µF in Reihe ein. Der in den Mikrofonschaltungen gegen Masse geschaltete 0,01-µF-Kondensator ersetzt ihn nicht. Platzieren Sie den differentiellen Tiefpass im gestrichelten Rahmen von Abbildung 5.5-3 nahe an der MCU. Halten Sie die Kapazität der DAC-Ausgangsleiterbahnen unter 10 pF und ihre Länge unter 2 cm.
 
+<div id="553"></div>
+
 #### 5.5.3. Tasten { #553-buttons }
 
 **Kurzübersicht**
@@ -279,6 +301,8 @@ Die Mikrofon-Referenzschaltungen filtern MIC_BIAS mit einem Serienwiderstand von
 
 Ermöglichen Sie zuverlässige Benutzereingaben und Resets, ohne falsche Weckereignisse, dauerhaft aktive Reset-Zustände oder hohen Leckstrom im Standby über Pull-Netzwerke.
 
+<div id="5531"></div>
+
 ##### 5.5.3.1. Ein-/Aus-Taste { #5531-power-button }
 
 PA34 unterstützt einen Reset bei langem Tastendruck. Die Taste kann zugleich zum Ein- und Ausschalten dienen. Die Reset-Funktion ist high-aktiv: Der Standardzustand sollte low sein (Pull-down), und beim Drücken der Taste sollte der Pegel auf high gelegt werden.
@@ -287,7 +311,9 @@ PA34 unterstützt einen Reset bei langem Tastendruck. Die Taste kann zugleich zu
 
 <div align="center"><em>Abbildung 5.5-4: Schaltung der Ein-/Aus-Taste mit Reset bei langem Tastendruck</em></div>
 
-Die Referenzschaltung verwendet R0703 (5,1 kΩ) zwischen VSYS_3V3 und der Taste, R0702 (100 kΩ) als Pull-down für PA34 und C0720 (0,1 µF) nach Masse. Außerdem ist ein ESD-Schutzbauteil vorgesehen. Diese Werte beschreiben das dargestellte Design. Prüfen Sie bei Anpassungen die Eingangsschwellen, Entprellung, Leckströme und Reset-Zeiten.
+Die Referenzschaltung verwendet R0703 (5,1 kΩ) zwischen VSYS_3V3 und der Taste, R0702 (10 kΩ) als Pull-down für PA34 und C0720 (0,1 µF) nach Masse. Außerdem ist ein ESD-Schutzbauteil vorgesehen. Diese Werte beschreiben das dargestellte Design. Prüfen Sie bei Anpassungen die Eingangsschwellen, Entprellung, Leckströme und Reset-Zeiten.
+
+<div id="5532"></div>
 
 ##### 5.5.3.2. Mechanische Drehgeber-Taste { #5532-mechanical-rotary-encoder-button }
 
@@ -311,6 +337,8 @@ Die A- und B-Signale des Drehgebers sind über 0-Ω-Widerstände mit PA35 und PA
 - [ ] Das Weckverhalten ist für die vorgesehenen Energiesparzustände verifiziert.
 - [ ] ESD- und mechanische Entprellanforderungen sind geprüft.
 - [ ] Der Inbetriebnahmeplan umfasst kurze und lange Tastendrücke sowie das Weck- und Reset-Verhalten.
+
+<div id="554"></div>
 
 #### 5.5.4. Vibrationsmotor { #554-vibration-motor }
 

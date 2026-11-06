@@ -25,7 +25,9 @@ SF32LB52x는 SiFli의 비용 효율적인 MCU 제품군입니다. 디스플레�
 
 [^1]: STAR-MC1은 Arm China의 구성 가능한 Armv8-M Mainline 임베디드 CPU IP입니다. 호환되는 SF32 디바이스에서 SiFli는 이를 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서로 문서화합니다. Cortex-M33급 소프트웨어 모델은 기존 Cortex-M33용 펌웨어, 미들웨어, RTOS 포트, 개발 도구를 활용하는 데 도움이 됩니다. 다만 실제 디바이스에 맞춘 통합 작업은 여전히 필요합니다. CU, SP, SE 구성은 주로 캐시, TCM, XIPU, TrustZone 기능에서 차이가 나며, Arm Custom Instructions/CDE와 코프로세서 인터페이스는 선택 기능이므로 해당 SF32 부품에서 지원되는지 반드시 확인해야 합니다. SiFli 문서는 문맥에 따라 ***Arm Cortex-M33 STAR-MC1*** 또는 ***Arm Cortex-M33***이라는 표기를 사용할 수 있습니다.
 
-## 애플리케이션
+<div id="_1"></div>
+
+## 애플리케이션 { #applications }
 
 **SF32LB52x는** 비용, 통합도, 배터리 수명이 핵심 설계 요소인 Bluetooth 중심 제품에 **권장되며**, 대표적인 예는 다음과 같습니다.
 
@@ -72,9 +74,13 @@ SF32LB52x는 SiFli의 비용 효율적인 MCU 제품군입니다. 디스플레�
 
 ---
 
-## 기능 및 사양
+<div id="_2"></div>
 
-### 연산 및 메모리
+## 기능 및 사양 { #features-and-specs }
+
+<div id="_3"></div>
+
+### 연산 및 메모리 { #compute-and-memory }
 
 - 최대 240 MHz의 Arm Cortex-M33 STAR-MC1 애플리케이션 코어, DSP 및 MPU 포함
 - 24 MHz의 전용 Arm Cortex-M33 STAR-MC1 Bluetooth 컨트롤러 코어
@@ -82,7 +88,9 @@ SF32LB52x는 SiFli의 비용 효율적인 MCU 제품군입니다. 디스플레�
 - 512 KB 애플리케이션 SRAM과 64 KB Bluetooth 컨트롤러 SRAM
 - 변형에 따라 1 MB QSPI-NOR부터 16 MB OPI-PSRAM까지 선택 가능한 코패키지 메모리 구성
 
-### 그래픽 및 오디오
+<div id="_4"></div>
+
+### 그래픽 및 오디오 { #graphics-and-audio }
 
 최대 해상도와 패널 인터페이스는 [디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)에서 확인하십시오.
 
@@ -92,7 +100,9 @@ SF32LB52x는 SiFli의 비용 효율적인 MCU 제품군입니다. 디스플레�
 - SNR 99 dB의 24비트 오디오 ADC 1개
 - SNR 109 dB의 24비트 오디오 DAC 1개
 
-### 무선 연결
+<div id="_5"></div>
+
+### 무선 연결 { #wireless-connectivity }
 
 - 듀얼 모드 Bluetooth 5.3(Classic Bluetooth 및 BLE)
 - 최대 송신 전력:
@@ -102,13 +112,17 @@ SF32LB52x는 SiFli의 비용 효율적인 MCU 제품군입니다. 디스플레�
 - 64 KB SRAM을 갖춘 24 MHz 전용 Arm Cortex-M33 STAR-MC1 Bluetooth 컨트롤러 코어
 - 슬립 전류: 제품 브리프 기준 2 µA. 시스템 수준의 Standby 전류는 동작 모드와 보드 수준의 누설에 따라 달라집니다.
 
-### 보안
+<div id="_6"></div>
+
+### 보안 { #security }
 
 - AES/HASH/CRC 하드웨어 가속기
 - TRNG
 - PSA Certified Level 1
 
-### 주변 장치 및 I/O
+<div id="io"></div>
+
+### 주변 장치 및 I/O { #peripherals-and-ios }
 
 - UART 3개
 - I2C 4개
@@ -122,7 +136,9 @@ SF32LB52x는 SiFli의 비용 효율적인 MCU 제품군입니다. 디스플레�
 - RTC 및 워치독 타이머
 - 변형 제품군에 따라 44개 또는 45개의 GPIO
 
-### 전원 공급
+<div id="_7"></div>
+
+### 전원 공급 { #power-supply }
 
 - **배터리 전원 그룹: SF32LB520/3/5/7** — 단일 셀 Li-ion/Li-Po 배터리로 직접 전원을 공급받으며, 충전 중심의 통합 전원 아키텍처를 사용하는 설계를 대상으로 합니다.
 
@@ -132,7 +148,9 @@ SF32LB52x는 SiFli의 비용 효율적인 MCU 제품군입니다. 디스플레�
 
 배터리 전원 그룹과 외부 전원 그룹은 서로 독립된 실리콘 구성이며, 이 전원 제품군 간에는 **핀 호환이 되지 않습니다**.
 
-## 제품군 변형
+<div id="_8"></div>
+
+## 제품군 변형 { #family-variants }
 
 SiFli 칩 모델 가이드에 나열된 주요 변형을 기준으로, 실제 부품 선택은 다음과 같이 나뉩니다.
 
@@ -164,7 +182,7 @@ SiFli 칩 모델 가이드에 나열된 주요 변형을 기준으로, 실제 �
 
 </div>
 
-이 표는 SiFli [칩 모델 가이드](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)의 주요 변형을 따른 것이며, 전체 주문 카탈로그는 아닙니다. 링크된 외부 전원 데이터시트에는 **SF32LB52HUD6**(1.8 V, QFN68L, 128 Mb PSRAM)도 나열되어 있고, 하드웨어 가이드에는 `52AUx6` 및 `52D/F/HUx6`이라는 추가 접미사 패턴이 사용됩니다. 확보 가능한 자료만으로는 일관된 단일 변형 표를 얻을 수 없습니다. 설계를 릴리스하기 전에 이러한 SKU의 주문 가능 여부, 공급 전압 한계, 메모리 인터페이스, I/O 세부 사항을 최신 데이터시트에서 확인해야 합니다.
+이 표는 SiFli [칩 모델 가이드](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)의 주요 변형을 따른 것이며, 전체 주문 카탈로그는 아닙니다. 링크된 [DS5202-SF32LB52X 데이터시트 V0.2.6](https://downloads.sifli.com/docs/Datasheet/SF32LB52X/DS5202-SF32LB52X-Datasheet%20V0p2p6.pdf)은 개정 이력(2025-03-12)에서 **SF32LB52HUD6**를 언급하지만, 현재 주문 정보인 표 5-7에는 이 SKU가 없습니다. 이 과거 기록만으로 현재 주문 가능 여부나 SKU 사양을 확인할 수는 없습니다. 하드웨어 가이드에는 별도로 `52AUx6` 및 `52D/F/HUx6` 접미사 패턴이 사용됩니다. 설계 릴리스 전에 정확한 주문 부품 번호와 사양을 SiFli의 최신 공식 자료에서 확인하십시오.
 
 ## 통합 경로 { #integration-path }
 
@@ -173,7 +191,7 @@ SF32LB52x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 1. **펌웨어 경로 검증.** [SiFli SDK 시작 가이드](../../getting-started/sifli/getting-started-sifli-sdk.md)로 시작한 다음, [SiFli SDK 워크플로](../../develop/platforms/sifli-sdk/overview.md)와 [예제](../../develop/examples/index.md)를 사용해 필요한 주변 장치와 Bluetooth 동작을 검증하십시오.
 2. **통합 방식 선택.** 통합이 끝난 RF 모듈이 제품에 적합하면 [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md)을 평가하고, 그렇지 않으면 초기 펌웨어 및 주변 장치 검증용으로 가장 가까운 [SF32LB52 개발 보드](../devkits/SF32LB52-DevKit-LCD.md)를 선택하십시오.
 3. **하드웨어 설계 및 검토.** 회로도 또는 레이아웃을 릴리스하기 전에 로컬 [하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)와 그 [회로도](../../hardware/chip-guides/SF32LB52x_schematic_checklist.md) 및 [PCB 레이아웃](../../hardware/chip-guides/SF32LB52x_pcb_layout_checklist.md) 체크리스트를 사용하십시오. 전원 제품군의 기준 구성이 520/3/5/7, 52B/E/G/J, 52D 중 무엇인지 올바르게 확인하십시오.
-4. **주요 정보 출처 확인.** 해당 [데이터시트](#development-resources)와 SiFli [hardware design guide for 520/3/5/7] 또는 [hardware design guide for 52B/D/E/G/J]를 실제 주문할 부품 및 패키지와 대조하여 확인하십시오.
+4. **주요 정보 출처 확인.** 실제 주문할 부품 및 패키지에 맞춰 해당 [데이터시트](#development-resources)와 SiFli의 [520/3/5/7 하드웨어 설계 가이드][Hardware Design Guide (520/3/5/7)] 또는 [52B/D/E/G/J 하드웨어 설계 가이드][Hardware Design Guide (52B/D/E/G/J)]를 대조하십시오.
 
 <!-- uf-faq:start -->
 ## 자주 묻는 질문 { #frequently-asked-questions }
@@ -199,20 +217,28 @@ RGB888 색상에서 최대 512 × 512 해상도를 지원합니다. DTR을 지�
 먼저 [SF32LB52x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하십시오.
 <!-- uf-faq:end -->
 
-## 관련 제품
+<div id="_9"></div>
 
-### 모듈
+## 관련 제품 { #related-products }
+
+<div id="_10"></div>
+
+### 모듈 { #module }
 
 [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md)은 표준 구성에서 8 MB 코패키지 OPI-PSRAM을 탑재한 SF32LB525UC6와 RF 매칭 회로를 결합한 제품입니다. 크기는 27.9 × 18.0 × 3.1 mm이며, 칩 수준의 RF 레이아웃과 검증을 직접 수행하지 않고 SF32LB52급 기능을 사용하려는 프로젝트에 적합합니다.
 
-### 개발 키트
+<div id="_11"></div>
+
+### 개발 키트 { #development-kits }
 
 - [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md)는 SF32LB52 모듈 생태계에서 디스플레이 중심 브링업을 위한 주력 보드이며, QSPI 및 MCU/8080 LCD 연결을 제공합니다.
 - [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md)은 52B/52J급 부품에서 펌웨어, GPIO, 저전력 브링업을 빠르게 수행하기 위한 소형 외부 전원 코어 보드입니다.
 - [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md)는 52 시리즈에서 가장 작은 개발 보드로, 목표 제품의 크기 제약이 클 때 유용합니다.
 - [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md)는 배터리 중심 평가와 소형 제품 실험을 위한 저전력 지향 보드 경로입니다.
 
-### 레퍼런스 제품
+<div id="_12"></div>
+
+### 레퍼런스 제품 { #reference-products }
 
 일반적인 SF32LB52 설계로는 보급형 스마트워치, 피트니스 밴드, Bluetooth 액세서리, 소형 그래픽 컨트롤, 전자 가격표, 스마트 배지, 휴대용 라벨 프린터, 비용에 민감한 eBike 또는 eScooter 디스플레이가 있습니다.
 

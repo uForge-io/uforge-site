@@ -204,6 +204,8 @@ SiFliの中国語ボードガイドでは、1.85インチAMOLEDモジュール�
 
 </div>
 
+ボード概要ではGPADCを6チャネルとしていますが、このピン機能表ではPA28～PA34にGPADC0～GPADC6が記載されています。SiFli SDKではADC CH7がVBATに割り当てられています。これらの資料から、ボード上で外部入力として7チャネルを同時に使用できるとは確認できないため、ボード上のチャネル数は未確定です。外部アナログ信号を接続する前に、対象ボードのリビジョン、ピン多重化、チャネル設定を確認してください。[SiFli ADCガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/adc.html)を参照してください。
+
 ### LCD、オーディオ、デバッグヘッダー { #lcd-audio-and-debug-header }
 
 <div align="center"><em>LCD、オーディオ、デバッグヘッダーのピン割り当て</em></div>

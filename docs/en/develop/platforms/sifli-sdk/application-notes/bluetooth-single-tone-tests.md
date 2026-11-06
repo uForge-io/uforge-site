@@ -70,6 +70,8 @@ Stop TX before entering RX. Set the channel and press Start RX; stop RX before c
 PER = (1500 - received_packets) / 1500 × 100%
 ```
 
+The linked [SiFli guide](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/bt_individual_test_guide.html) defines `n` as received packets but currently prints `PER = (n - 1500) / 1500 × 100%`, which has the opposite sign from the lost-packet calculation above. This page keeps the lost-packet formula; ask SiFli to confirm the intended source formula before treating the two as consistent.
+
 Record RSSI as well. For Classic BT RX, use a CMW500 GPRF Generator waveform such as DH1/2-DH1/3-DH1 and record received packets, error packets, bit counts, BER, and RSSI. The BLE and Classic BT RF paths share hardware; do not run them in parallel.
 
 ![SiFli_RfTool BLE RX settings](../../../../assets/develop/app-notes/bluetooth-single-item/figure_13-5.png){ loading="lazy" }

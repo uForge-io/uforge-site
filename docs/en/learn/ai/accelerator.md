@@ -38,31 +38,12 @@ A simplified SF32 edge-AI pipeline looks like this:
 
 <div align="center"><em>Diagram: Processing Stages and Firmware-Controlled Inference</em></div>
 
-```text
-Sensors / Audio / Camera
-        │
-        ▼
-Pre-processing
-  - filtering
-  - framing
-  - normalization
-  - feature extraction
-        │
-        ▼
-Firmware / Inference Runtime
-  - model graph orchestration
-  - supported operations on NNACC
-  - other operations on CPU, if implemented
-        │
-        ▼
-Post-processing
-  - thresholding
-  - smoothing
-  - event detection
-  - application decisions
-        │
-        ▼
-Application, UI, Bluetooth, or Storage
+```mermaid
+flowchart TD
+    A["Sensors / Audio / Camera"] --> B["Pre-processing<br/>filtering<br/>framing<br/>normalization<br/>feature extraction"]
+    B --> C["Firmware / Inference Runtime<br/>model graph orchestration<br/>supported operations on NNACC<br/>other operations on CPU, if implemented"]
+    C --> D["Post-processing<br/>thresholding<br/>smoothing<br/>event detection<br/>application decisions"]
+    D --> E["Application, UI, Bluetooth, or Storage"]
 ```
 
 The accelerator is one part of the complete AI pipeline. Real products still need data capture, buffering, pre-processing, inference scheduling, post-processing, and application-level decision logic. The best performance usually comes from designing the entire pipeline around the memory hierarchy and available accelerators rather than treating inference as an isolated function call.

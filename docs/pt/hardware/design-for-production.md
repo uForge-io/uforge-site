@@ -8,7 +8,7 @@ tags:
 
 # Projeto para produção { #design-for-production }
 
-Use este fluxo depois de selecionar um chip ou módulo e antes de liberar o esquemático, o layout da PCB, a BOM ou o pacote de fabricação. Ele reúne referências de implementação para reduzir os riscos durante a ativação inicial e a qualificação do produto: guias de projeto de hardware específicos de cada dispositivo, checklists, definições de interface dos módulos, componentes aprovados e bibliotecas EDA.
+Use este fluxo depois de selecionar um chip ou módulo e antes de liberar o esquemático, o layout da PCB, a BOM ou o pacote de fabricação. Ele reúne referências de implementação para reduzir os riscos durante o bring-up (ativação inicial) e a qualificação do produto: guias de projeto de hardware específicos de cada dispositivo, checklists, definições de interface dos módulos, componentes aprovados e bibliotecas EDA.
 
 ## Fluxo recomendado para produção { #recommended-production-sequence }
 

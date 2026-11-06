@@ -70,6 +70,8 @@ SDK 源码中包含 LB52x HDK 的参考 TX 电平，但这些数值只适用于�
 PER = (1500 - received_packets) / 1500 × 100%
 ```
 
+链接的[思澈科技（SiFli）指南](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/bt_individual_test_guide.html)将 `n` 定义为实际收到的数据包数，但当前印出的公式为 `PER = (n - 1500) / 1500 × 100%`，与上面的丢包率计算符号相反。本文保留按丢失数据包计算的公式；在两者统一前，应请思澈科技（SiFli）确认指南中的公式意图。
+
 同时记录 RSSI。经典蓝牙 RX 使用 CMW500 GPRF Generator 的 DH1/2-DH1/3-DH1 等波形，记录收包数、错误包数、比特数、BER 和 RSSI。BLE 与经典蓝牙共用射频硬件，不能并行运行。
 
 ![SiFli_RfTool 的 BLE RX 设置](../../../../assets/develop/app-notes/bluetooth-single-item/figure_13-5.png){ loading="lazy" }

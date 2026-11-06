@@ -26,7 +26,7 @@ Lorsque le LPSYS quitte le mode Standby, l'interface SWD repasse sur le HCPU. Un
 
 ## Capturer les données en direct ou après un plantage { #capture-a-live-or-post-mortem-package }
 
-Pour les versions actuelles du SDK, effectuez la capture via UART ou J-Link avec `sdk.py` :
+La CLI actuelle de `sdk.py` prend en charge J-Link sur toutes les séries, mais l'UART DEBUG IP direct uniquement sur SF32LB52X et SF32LB56X. Utilisez J-Link pour les autres familles ; les méthodes AssertDump/UART héritées ci-dessous constituent des flux distincts.
 
 !!! note "Portée de l'exemple"
     La commande ci-dessous est un exemple SF32LB52/LB525. Conservez la structure de la commande, mais remplacez la puce/le modèle, le cœur, le transport et l'ELF par des valeurs prises en charge par la famille et la version du SDK ciblées.
@@ -37,7 +37,7 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
   --output /tmp/live-crash --elf build_hcpu/main.elf
 ```
 
-Pour exporter aussi la PSRAM, ajoutez `--include-psram` ou utilisez `--psram-size 8MB` pour sélectionner manuellement le script PSRAM. Pour J-Link via IP avec `SifliUsartServer`, utilisez `--transport jlink --jlink-ip 127.0.0.1:19025` ; sélectionnez le cœur concerné avec `--core hcpu` ou `--core lcpu`. Le répertoire de sortie doit contenir le binaire capturé, l'ELF/AXF du cœur, `log.txt`, `manifest.json` et `sdk_manifest.json`.
+Pour exporter aussi la PSRAM, ajoutez `--include-psram` ou utilisez `--psram-size 8MB` pour sélectionner manuellement le script PSRAM. Pour J-Link via IP avec `SifliUsartServer`, utilisez `--transport jlink --jlink-ip 127.0.0.1:19025` ; sélectionnez le cœur concerné avec `--core hcpu` ou `--core lcpu`. Le paquet de plantage contient les binaires capturés, `manifest.json` et `sdk_manifest.json` ; si `--elf` est fourni, il est copié sous le nom `hcpu.axf`. `log.txt` est copié depuis `capture.log` uniquement pour `capture-live --transport jlink`, ou fourni via `--log` pour `export-coredump`.
 
 Pour les SDK plus anciens, utilisez la méthode spécifique à la famille décrite dans le guide SiFli d'analyse de plantage correspondant :
 

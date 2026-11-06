@@ -155,7 +155,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Прикладное ядро Cortex-M33 STAR-MC1 + выделенное ядро Bluetooth-контроллера
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Двухрежимный Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Двухрежимный Bluetooth 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Аппаратная декомпрессия eZip 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Аудиокодек, 1 x AMIC, 2 x DMIC
@@ -171,7 +171,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Двухъядерный Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Двухрежимный Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Двухрежимный Bluetooth 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } Дисплей RGB с разрешением до 1024 x 600
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Аппаратная декомпрессия eZip 2.0
@@ -188,7 +188,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Трёхъядерный Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Двухрежимный Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Двухрежимный Bluetooth 6.3 (предварительная спецификация)
     - :fontawesome-solid-circle:{ .uf-dot-blue } Дисплей RGB с разрешением до 1024 x 600
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 3.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 3.0 и декодирование JPEG/MJPEG
@@ -206,7 +206,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Трёхъядерный Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Двухрежимный Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Двухрежимный Bluetooth 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } Дисплей MIPI с разрешением до 1280 x 800
     - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2.5D и векторная графика, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 и декодирование JPEG/MJPEG
@@ -218,7 +218,7 @@ hide:
 
 - <span class="uf-mcu-chip">SF32LB55</span>
 
-    <span class="uf-mcu-headtext">**SF32LB55x**{ .uf-mcu-title } <span class="uf-mcu-sub">Универсальный BLE MCU для носимых устройств</span></span>
+    <span class="uf-mcu-headtext">**SF32LB55x**{ .uf-mcu-title } <span class="uf-mcu-sub">BLE MCU массового сегмента для носимых устройств</span></span>
 
     ---
 

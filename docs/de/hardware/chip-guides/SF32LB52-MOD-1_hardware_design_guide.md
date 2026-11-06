@@ -17,6 +17,9 @@ tags:
 
 Dieser Leitfaden beschreibt die Hardware-Integration auf Modulebene. Er enthält Pinbelegungen, Peripherieschnittstellen, elektrische Kenndaten, Anforderungen an die Stromversorgung, Referenzschaltpläne, eine Checkliste für den Schaltplanentwurf, mechanische Abmessungen und das empfohlene PCB-Footprint sowie Hinweise zur Handhabung. Grundlage ist das SiFli-Datenblatt **DS5203-SF32LB52-MOD-1 V0.3**.
 
+!!! important "Geltungsbereich der Modulvariante"
+    Die folgenden Modulspezifikationen und Integrationshinweise gelten für SF32LB52-MOD-1-N16R8, wie in DS5203 V0.3 dokumentiert. Das Datenblatt belegt diese Angaben nicht für die abweichende Konfiguration SF32LB52-MOD-1-A128R16. Für A128R16-spezifische Informationen lesen Sie SiFlis [EPD-Modul-Designleitfaden](https://wiki.sifli.com/hardware/SF32LB52-MOD-1-EPD-HW-Application.html).
+
 Weitere Einzelheiten zur Chiparchitektur, zu den Kernen, zur Grafik, zum Speichersubsystem und zu den Peripherieeinheiten finden Sie unter [SF32LB52x](../../sf32-products/chips/SF32LB52x.md) und im [SF32LB52x Hardware-Design-Leitfaden](../chip-guides/SF32LB52x_hardware_design_guide.md).
 
 !!! note "Quellen und Abbildungen"
@@ -54,7 +57,7 @@ Weitere Einzelheiten zur Chiparchitektur, zu den Kernen, zur Grafik, zum Speiche
 | Low-Power-Kern (LCPU) | Arm Cortex-M33 STAR-MC1, bis zu 24 MHz, 64 KB SRAM |
 | Funk | Dual-Mode-Bluetooth 5.3 mit BLE Audio |
 | Grafik | ePicasso-2.0-2D/2.5D-Grafik-Engine, bis zu 512×512, verlustfreie Dekompression mit eZip 2.0 |
-| Audio | 1x 24-Bit-Audio-DAC, 1x 24-Bit-Audio-Sigma-Delta-ADC |
+| Audio | Die Funktionsübersicht von DS5203 V0.3 nennt je einen 24-Bit-DAC und Sigma-Delta-ADC; die detaillierten Audioabschnitte nennen jeweils zwei. Klären Sie mit SiFli, wie viele Kanäle das Modul bereitstellt. |
 | Speicher | Optionaler im Gehäuse integrierter OPI-PSRAM (144 MHz); 1x externes MPI (QSPI); 1x SD/SDIO/eMMC |
 | Gehäuse | 68-Pin, 27,9 × 18,0 × 3,1 mm |
 | Stromversorgung | VSYS 3,2–4,7 V (Li-Ion) oder 3,7–4,7 V (DCDC/LDO, 3,8 V empfohlen) |
@@ -194,11 +197,14 @@ Jeder in der obigen Tabelle mit `PAxx_I2C_UART` markierte Pin lässt sich entwed
 
 **Temperatursensor** — Auflösung 0,2 °C, Messbereich -40 °C bis 125 °C und Genauigkeit ±3 °C; die Messwerte können per Polling oder Interrupt ausgelesen werden.
 
-**Audio-DAC** — Ein 24-Bit-Ausgangspfad mit Abtastraten von 8 kHz bis 48 kHz und differenziellem Ausgang.
+**Audio-DAC** — Die modulspezifische Beschreibung nennt einen 24-Bit-DAC-Ausgangspfad mit Abtastraten von 8 kHz bis 48 kHz und differenziellem Ausgang. Der detaillierte Audioabschnitt von DS5203 V0.3 beschreibt zwei DACs im MCU; klären Sie mit SiFli, wie viele Pfade das konkrete Modul bereitstellt.
 
 **Audio-PLL** — Fractional-N-Takterzeugung mit einer Auflösung von 48 MHz/2^18. Unterstützt werden daraus abgeleitete Abtastraten von 48 MHz, 32,768 kHz und 44,1 kHz.
 
-**Audio-ADC** — Ein 24-Bit-Sigma-Delta-Eingangspfad mit Abtastraten von 8 kHz bis 48 kHz.
+!!! note "Abtastrate des Audio-PLL bestätigen"
+    Das Datenblatt V0.3 nennt hier 48 MHz als abgeleitete Abtastrate; die direkt benachbarten DAC- und ADC-Angaben nennen jedoch Bereiche von 8 bis 48 kHz. Die Quelle löst diesen Widerspruch nicht auf. Klären Sie den Eintrag 48 MHz mit SiFli, bevor Sie ihn Ihrer Auslegung zugrunde legen.
+
+**Audio-ADC** — Die modulspezifische Beschreibung nennt einen 24-Bit-Sigma-Delta-ADC-Eingangspfad mit Abtastraten von 8 kHz bis 48 kHz. Der detaillierte Audioabschnitt von DS5203 V0.3 beschreibt zwei ADCs im MCU; klären Sie mit SiFli, wie viele Pfade das konkrete Modul bereitstellt.
 
 ## 6. Elektrische Eigenschaften { #6-electrical-characteristics }
 
@@ -272,7 +278,7 @@ VDD bezeichnet die Versorgungsschiene der I/O-Pins. VOH und VOL werden bei hocho
 | BLE-Verbindung | 50 ms | 95,0 | 105,0 | 118,7 | µA |
 | BLE-Verbindung | 1 s | 4,1 | 4,6 | 9,1 | µA |
 | Scan (Inquiry oder Page) | — | 33,4 | — | — | µA |
-| Inquiry- und Page-Scan | — | 67,3 | — | — | µA |
+| Beide Scan-Typen | — | 67,3 | — | — | µA |
 | Sleep | — | 20,0 | — | — | µA |
 
 </div>

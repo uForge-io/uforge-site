@@ -9,7 +9,11 @@ hide:
     - navigation
 ---
 
+<div id="sf32lb56-mod"></div>
+
 # SF32LB56-MOD Hardware-Design-Leitfaden { #sf32lb56-mod-hardware-design-guide }
+
+<div id="1"></div>
 
 ## 1. Einführung { #1-introduction }
 
@@ -18,12 +22,16 @@ hide:
 Dieser Leitfaden bündelt die modulspezifischen Angaben, die für Schaltplanentwurf, PCB-Layout, Validierung und Produktionsfreigabe benötigt werden. Er folgt der **technischen Spezifikation DS5602-SF32LB56-MOD V0.3** und behandelt Speichervarianten, die 89-Pin-Schnittstelle, drei Versorgungsschienen, Display-, Audio- und Speicherschnittstellen, Antennenplatzierung, Handhabungsanforderungen und die Schaltplan-Checkliste.
 
 !!! note "Quelle und Empfehlungen"
-Technische Werte und Pinbelegungen folgen DS5602 V0.3. Ungeklärte elektrische oder fertigungstechnische Mehrdeutigkeiten der Spezifikation bleiben in den jeweiligen Abschnitten erhalten; dort ist auch angegeben, was vor der Designfreigabe bestätigt werden muss. Integrationshinweise und Empfehlungen sind von Quellenanforderungen unterschieden.
+    Technische Werte und Pinbelegungen folgen DS5602 V0.3. Ungeklärte elektrische oder fertigungstechnische Mehrdeutigkeiten der Spezifikation bleiben in den jeweiligen Abschnitten erhalten; dort ist auch angegeben, was vor der Designfreigabe bestätigt werden muss. Integrationshinweise und Empfehlungen sind von Quellenanforderungen unterschieden.
 
 !!! note "Geltungsbereich der Kennzeichnung"
     Die bereitgestellten Etiketten für SF32LB56-MOD-N16R12N1 und SF32LB56-MOD-A128R12N1 zeigen FCC-, IC-, CMIIT-ID- und HVIN-Kennungen sowie CE. Siehe [Kennzeichnungsübersicht](../../sf32-products/modules/SF32LB56-MOD.md#regulatory-markings). Prüfen Sie Unterlagen und Antennen-/Integrationsbedingungen der genauen Revision; andere Varianten und das Endprodukt sind nicht automatisch abgedeckt.
 
+<div id="2"></div>
+
 ## 2. Geräteübersicht { #2-device-overview }
+
+<div id="21"></div>
 
 ### 2.1 Architektur { #21-architecture }
 
@@ -33,6 +41,8 @@ Das Modul unterstützt Bluetooth 5.3 und bietet Display-Beschleunigung, Audio-Ei
 
 !!! note "Individuelle Anpassungen"
     Für andere Modulkonfigurationen oder individuelle Anpassungen [wenden Sie sich an μForge.io](../../about/contact.md).
+
+<div id="22"></div>
 
 ### 2.2 Varianten { #22-variants }
 
@@ -47,6 +57,8 @@ Das Modul unterstützt Bluetooth 5.3 und bietet Display-Beschleunigung, Audio-Ei
 | SF32LB56-MOD-D128R12N1 | 128 MB SD-NAND | 4+8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 18,0 × 32,9 × 3,1 mm |
 
 </div>
+
+<div id="23"></div>
 
 ### 2.3 Wichtige Hardware-Merkmale { #23-major-hardware-features }
 
@@ -67,11 +79,17 @@ Das Modul unterstützt Bluetooth 5.3 und bietet Display-Beschleunigung, Audio-Ei
 
 </div>
 
+<div id="24"></div>
+
 ### 2.4 Typische Anwendungen { #24-typical-applications }
 
 Typische Anwendungen umfassen High-End-Smartwatches, Smart Bands, tragbare medizinische Geräte, Fitnessgeräte, E-Bike-Bedienfelder, Autoschlüssel, am Körper tragbare Fernbedienungen für Fahrzeuge, smarte Haushaltsgeräte, Smart Locks, grafische HMI-Geräte, industrielle Sensor-Hubs, industrielle Überwachungsterminals, Low-Power-Sensor-Hubs und Bluetooth-Mesh-Geräte.
 
+<div id="3"></div>
+
 ## 3. Design auf einen Blick { #3-design-at-a-glance }
+
+<div id="31"></div>
 
 ### 3.1 Technische Zusammenfassung auf einer Seite { #31-one-page-engineering-summary }
 
@@ -95,6 +113,8 @@ Typische Anwendungen umfassen High-End-Smartwatches, Smart Bands, tragbare mediz
 
 </div>
 
+<div id="32"></div>
+
 ### 3.2 Empfohlene externe Bauteile { #32-recommended-external-components }
 
 <div align="center"><em>Tabelle 3.2-1: Empfohlene externe Bauteile</em></div>
@@ -113,12 +133,16 @@ Typische Anwendungen umfassen High-End-Smartwatches, Smart Bands, tragbare mediz
 
 </div>
 
+<div id="33"></div>
+
 ### 3.3 Stromversorgungsbaum { #33-power-tree }
 
 VDD_3V3 versorgt MCU-PVDD, AVDD33_ANA, AVDD33_AUD, AVDD_BRF, VDDIOA2 und den internen Flash des Moduls. SiFli empfiehlt für diese Schiene einen LDO. VDD_1V8 versorgt den Speicher, der sich im selben Gehäuse wie die MCU befindet. VDDIO versorgt die VDDIOA-/VDDIOB-I/O-Ports der MCU.
 
 !!! info "Abbildung 3.3-1: SF32LB56-MOD Stromversorgungsdiagramm"
     Siehe Abbildung 7-1 in DS5602 V0.3.
+
+<div id="34"></div>
 
 ### 3.4 Systemblockdiagramm { #34-system-block-diagram }
 
@@ -127,7 +151,11 @@ Das Modulblockdiagramm zeigt die MCU der Serie SF32LB56xV, Speicherressourcen, R
 !!! info "Abbildung 3.4-1: SF32LB56-MOD Funktionsblockdiagramm"
     Siehe Abbildung 2-1 in DS5602 V0.3.
 
+<div id="4"></div>
+
 ## 4. Hardware-Design-Ablauf { #4-hardware-design-flow }
+
+<div id="41"></div>
 
 ### 4.1 Design-Reihenfolge { #41-design-sequence }
 
@@ -140,9 +168,13 @@ Das Modulblockdiagramm zeigt die MCU der Serie SF32LB56xV, Speicherressourcen, R
 7. Platzieren Sie das Modul mit dem erforderlichen Antennenabstand und Freihaltebereich.
 8. Prüfen Sie Schaltplan und PCB vor der Freigabe anhand der Checkliste in Abschnitt 7.
 
+<div id="42"></div>
+
 ### 4.2 Prüfreihenfolge { #42-review-sequence }
 
 Verwenden Sie eine gestufte Prüfreihenfolge: Schaltplanprüfung, Pin-Mux-Prüfung, Prüfung des Hochfahrens, RF-/Antennenprüfung, Layoutprüfung, Inbetriebnahme des Erstmusters, RF-Validierung, Umwelt- und Zuverlässigkeitsprüfung sowie Produktionstest.
+
+<div id="43"></div>
 
 ### 4.3 Meilensteine { #43-milestones }
 
@@ -160,9 +192,15 @@ Verwenden Sie eine gestufte Prüfreihenfolge: Schaltplanprüfung, Pin-Mux-Prüfu
 
 </div>
 
+<div id="5"></div>
+
 ## 5. Schaltplandesign { #5-schematic-design }
 
+<div id="51"></div>
+
 ### 5.1 Stromversorgungssystem { #51-power-system }
+
+<div id="511"></div>
 
 #### 5.1.1 Stromversorgung { #511-power-supply }
 
@@ -180,11 +218,17 @@ Verwenden Sie eine gestufte Prüfreihenfolge: Schaltplanprüfung, Pin-Mux-Prüfu
 
 VDD_3V3, VDD_1V8 und VDDIO müssen gleichzeitig hochfahren. Platzieren Sie an jedem Modul-Versorgungspin einen 4,7-µF-Kondensator in unmittelbarer Nähe. Obwohl VDDIO mit 1,7 V bis 3,6 V betrieben werden kann, weist das Datenblatt gesondert darauf hin, dass PA00–PA11 fest auf 3,3 V eingestellt sind und VDDIO nicht folgen.
 
+<div id="512"></div>
+
 #### 5.1.2 Betriebsmodi { #512-operating-modes }
 
 BOOT_MODE wählt den Startmodus: High für den Download-Modus und Low für den Benutzermodus. Legen Sie den Pegel am BOOT_MODE-Pin bei Reset und während der Produktionsprogrammierung eindeutig fest. PB32/PWRKEY unterstützt einen Reset nach 10 s langem Drücken bei High-Pegel; ein 10-kΩ-Pull-down ist erforderlich.
 
+<div id="52-rf"></div>
+
 ### 5.2 Takt und RF { #52-timing-and-rf }
+
+<div id="521"></div>
 
 #### 5.2.1 Takt { #521-clock }
 
@@ -213,7 +257,11 @@ Die Modulplattform verwendet einen 48-MHz-Quarzoszillator und unterstützt strom
 
 Das Modul unterstützt eine integrierte PCB-Antenne oder eine externe Antenne über einen IPEX-kompatiblen Steckverbinder. Validieren Sie Kommunikationsreichweite und RF-Leistung im endgültigen Gehäuse, nicht nur auf einer offenen Werkbank.
 
+<div id="53"></div>
+
 ### 5.3 Benutzerschnittstellen { #53-user-interfaces }
+
+<div id="531"></div>
 
 #### 5.3.1 Display { #531-display }
 
@@ -224,6 +272,8 @@ Fügen Sie den LCD-RGB-Signalleitungen Serienwiderstände von 33–100 Ω hinzu.
 !!! info "Abbildung 5.3-1: Empfohlene Pin-Zuweisung des Entwicklungsboards"
     Siehe Abbildung 7-6 in DS5602 V0.3.
 
+<div id="532"></div>
+
 #### 5.3.2 Audio { #532-audio }
 
 Das Modul stellt analoge Audio-DAC-Ausgänge, MIC_BIAS, MIC_ADC_IN, I2S und PDM-fähige Pins bereit. Der Audio-DAC ist ein 24-Bit-Ausgangspfad, der Abtastraten von 8 kHz bis 48 kHz mit 109 dB SNR und Dynamikumfang unterstützt. Der Audio-ADC ist ein 24-Bit-Sigma-Delta-Eingangspfad, der Abtastraten von 8 kHz bis 48 kHz mit 99 dB SNR und Dynamikumfang unterstützt.
@@ -232,19 +282,29 @@ DS5602 V0.3 nennt zwei Digitarmikrofoneingänge und zwei PDM-Schnittstellen (PDM
 
 Halten Sie analoge Audiosignale von störenden Schaltknoten, LCD-Takten und Antennenzuführungsstrukturen fern. Platzieren Sie die Filterung für MIC_BIAS und MIC_ADC_IN nahe an der angeschlossenen Mikrofonschaltung.
 
+<div id="533"></div>
+
 #### 5.3.3 Tasten { #533-buttons }
 
 PB32 ist der PWRKEY-Eingang und unterstützt einen Reset nach 10 s langem Drücken bei High-Pegel. Sehen Sie den erforderlichen 10-kΩ-Pull-down vor und stellen Sie sicher, dass der Tastenschaltkreis während Transport, Deep Sleep und Ein-/Ausschaltsequenzen keinen undefinierten Pegel annimmt.
+
+<div id="534-pwm"></div>
 
 #### 5.3.4 Motor- und PWM-Lasten { #534-motor-and-pwm-loads }
 
 Die in der empfohlenen Pin-Zuweisungsabbildung des Datenblatts mit GPTIM gekennzeichneten Pins unterstützen PWM-Ausgänge. Verwenden Sie externe Treiber für Motoren, Hintergrundbeleuchtung, Summer oder andere Lasten. Steuern Sie induktive oder stromstarke Lasten nicht direkt über Modul-GPIOs an.
 
+<div id="54"></div>
+
 ### 5.4 Speicher und Konnektivität { #54-storage-and-connectivity }
+
+<div id="541"></div>
 
 #### 5.4.1 Speicher { #541-storage }
 
 Die Modulfamilie stellt SKU-abhängigen Haupt-Flash, 4+8 MB OPI-PSRAM und 1 MB Backup-QSPI-NOR-Flash bereit. MPI3 kann extern SPI-NOR oder SPI-NAND anbinden, aber PA06–PA11 sind standardmäßig mit dem internen Flash des Moduls verbunden und extern nicht verfügbar. SDIO und MPI3 teilen sich I/O-Ressourcen und können nicht gleichzeitig verwendet werden.
+
+<div id="542"></div>
 
 #### 5.4.2 Sensoren { #542-sensors }
 
@@ -256,21 +316,33 @@ UART unterstützt Vollduplex-Betrieb bis zu 6 Mbps. I2C unterstützt die Standar
 
 UART4_TXD an Pin 6 und UART4_RXD an Pin 7 bilden die Standard-UART für Logausgabe und unterstützen Programm-Download sowie Debugging. PA16 und PA17 können als DBG_UART gemultiplext werden; werden diese Pins für Download oder Debugging verwendet, sind Serienwiderstände von 100 Ω erforderlich.
 
+<div id="544-usb-spi-sdio-i2s"></div>
+
 #### 5.4.4 USB, SPI, SDIO und I2S { #544-usb-spi-sdio-and-i2s }
 
 USB2.0 FS unterstützt Host-/Device-Modus mit integriertem PHY. SPI unterstützt SSP/SPI- und Microwire-Formate; HPSYS-SPI erreicht bis zu 48 MHz, LPSYS-SPI bis zu 24 MHz. SDMMC1 unterstützt SD 3.0, SDIO 3.0 und eMMC 4.5.1 mit SDR- und DDR-Modi; SDMMC2 unterstützt SD-/SDIO-/eMMC-Funktionen mit SDR-Modi bis zu 48 MHz. I2S unterstützt Master-/Slave-Betrieb, Vollduplex, Links-/Rechts-/Standardformate und eine PCM-Breite von bis zu 24 Bit.
 
+<div id="55"></div>
+
 ### 5.5 Fertigung { #55-manufacturing }
+
+<div id="551"></div>
 
 #### 5.5.1 Debug { #551-debug }
 
 SWDIO an Pin 79 und SWCLK an Pin 80 sind SWD-Debug-/Download-Pins. Halten Sie SWD bei frühen Prototypen und an Fertigungsprüfvorrichtungen zugänglich. Halten Sie außerdem den Standard-UART4-Download-/Debug-Pfad zugänglich, sofern das Produkt keinen anderen zugelassenen Programmierpfad besitzt.
 
+<div id="552"></div>
+
 #### 5.5.2 Produktion { #552-production }
 
 Reservieren Sie auf Platinenebene Fertigungszugänge für Stromversorgung, Masse, Boot-Modus, Reset/PWRKEY, SWD, UART-Download sowie jede Kalibrierungs- oder RF-Testschnittstelle. Die finale Testsoftware sollte Boot, Flash, Display, Touch, Audio, USB, Sensoren, RF-Kommunikation, Schlaf- und Weckverhalten sowie Stromverbrauch abdecken.
 
+<div id="6-pcb"></div>
+
 ## 6. PCB-Layout { #6-pcb-layout }
+
+<div id="61"></div>
 
 ### 6.1 Mechanik und Footprint { #61-mechanical-and-footprint }
 
@@ -281,6 +353,8 @@ Das Modul misst 18,0 × 32,9 × 3,1 mm. Verwenden Sie den empfohlenen PCB-Footpr
 
 !!! info "Abbildung 6.1-2: Empfohlener PCB-Footprint"
     Siehe Abbildung 8-2 in DS5602 V0.3. Abmessungen in Millimetern.
+
+<div id="62"></div>
 
 ### 6.2 Antennenplatzierung { #62-antenna-placement }
 
@@ -294,12 +368,16 @@ Kann die Antenne nicht über den Platinenrand hinausragen, sehen Sie einen Freih
 !!! info "Abbildung 6.2-2: PCB-Antennen-Freihaltebereich"
     Siehe Abbildung 8-5 in DS5602 V0.3.
 
+<div id="63"></div>
+
 ### 6.3 Externer Antennensteckverbinder { #63-external-antenna-connector }
 
 Für Designs mit externer Antenne beschreibt das Datenblatt einen Steckverbinder der ersten Generation für externe Antennen, kompatibel mit Hirose-U.FL-Serie, I-PEX-MHF-I- und Amphenol-AMC-Steckverbindern.
 
 !!! info "Abbildung 6.3-1: Abmessungen des externen Antennensteckverbinders"
     Siehe Abbildung 8-3 in DS5602 V0.3.
+
+<div id="64"></div>
 
 ### 6.4 Layout-Checkliste { #64-layout-checklist }
 
@@ -319,7 +397,11 @@ Für Designs mit externer Antenne beschreibt das Datenblatt einen Steckverbinder
 
 </div>
 
+<div id="7"></div>
+
 ## 7. Hardware-Validierung { #7-hardware-validation }
+
+<div id="71"></div>
 
 ### 7.1 Elektrische Eigenschaften { #71-electrical-characteristics }
 
@@ -375,6 +457,8 @@ Die elektrischen Werte in diesem Abschnitt folgen DS5602 V0.3. Absolute Maximalw
 
 VDD ist die I/O-Versorgung. VOH und VOL werden mit einer hochohmigen Last gemessen.
 
+<div id="72"></div>
+
 ### 7.2 Stromverbrauch { #72-power-consumption }
 
 <div align="center"><em>Tabelle 7.2-1: Bluetooth- und BLE-Strom bei 3,3 V, TX-Leistung 0 dBm</em></div>
@@ -423,6 +507,8 @@ Die BT-Sniff-Messung erfolgte mit einem iPhone 8 Plus und attempt=1. Scan und Be
 
 </div>
 
+<div id="73"></div>
+
 ### 7.3 Schaltplan-Checkliste { #73-schematic-checklist }
 
 <div align="center"><em>Tabelle 7.3-1: Schaltplan-Design-Checkliste</em></div>
@@ -449,6 +535,8 @@ Die BT-Sniff-Messung erfolgte mit einem iPhone 8 Plus und attempt=1. Scan und Be
 
 DS5602 V0.3 gibt für VDDIO einen Betriebsbereich von 1,7–3,6 V an und hält PA00–PA11 unabhängig von VDDIO auf 3,3 V fest. Prüfpunkt 4 der Checkliste nennt dagegen pauschal 3,3 V als Modul-I/O-Schnittstellenpegel. Die Spezifikation klärt nicht, ob diese Aussage für alle I/O-Pins gilt. Leiten Sie keine allgemeine 3,3-V-Kompatibilität ab; klären Sie die elektrische Domäne jedes verwendeten Pins und Peripheriegeräts mit SiFli.
 
+<div id="74"></div>
+
 ### 7.4 Lagerung, Handhabung und Bestückung { #74-storage-handling-and-assembly }
 
 <div align="center"><em>Tabelle 7.4-1: Anforderungen an Lagerung, Handhabung und Bestückung</em></div>
@@ -469,6 +557,8 @@ DS5602 V0.3 gibt für VDDIO einen Betriebsbereich von 1,7–3,6 V an und hält P
 
 !!! info "Abbildung 7.4-1: Reflow-Temperaturprofil"
     Abbildung 9-1 in DS5602 V0.3 nennt: Aufheizen von 25–150 °C in 60–90 s bei 1–3 °C/s; Vorheizen von 150–200 °C für 60–120 s; 60–90 s oberhalb von 217 °C; einen Spitzenwert von 235–250 °C; und Abkühlen vom Spitzenwert auf 180 °C mit -1 bis -5 °C/s. Als Lot ist SAC305 angegeben. Die Legende unten nennt ein Zeitfenster am Spitzenwert von 30–70 s, während die Grafik separat „焊接时间 >30 s“ (Lötzeit >30 s) angibt. Die Spezifikation löst diesen Unterschied nicht auf. Führen Sie die Angaben nicht zusammen und bestätigen Sie das Produktionsprofil.
+
+<div id="8"></div>
 
 ## 8. Verwandte Dokumente { #8-related-documents }
 

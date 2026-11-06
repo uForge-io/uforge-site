@@ -73,7 +73,7 @@ Each example README lists its supported boards. The DFU v2 middleware configurat
 
 ## DFU v2 SDK Examples { #dfu-v2-sdk-examples }
 
-<div align="center"><em>Table: Official SiFli-SDK DFU v2 examples for SF32LB58x</em></div>
+<div align="center"><em>Table: Official SiFli-SDK DFU v2 example paths</em></div>
 
 <div align="center" markdown>
 

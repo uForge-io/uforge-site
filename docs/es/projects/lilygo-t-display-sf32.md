@@ -111,7 +111,7 @@ La documentación citada del repositorio se refiere a la rama `master` y no desi
 El README de T-Display-SF32 documenta este flujo de compilación y grabación del firmware en Windows, una vez configurado el entorno requerido:
 
 ```powershell
-cd T-Display-SF32\examples\rt_os\rt_driver\project
+cd SIFLI\T-Display-SF32\examples\rt_os\rt_driver\project
 scons --board=t-display-sf32_hcpu -j8
 build_t-display-sf32_hcpu\uart_download.bat
 ```

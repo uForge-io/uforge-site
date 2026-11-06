@@ -115,7 +115,7 @@ If you use [CodeKit](../../tools/codekit.md), preserve the same evidence and con
 | Build tool not found | Re-run `export.sh` / `export.ps1` in the current terminal. |
 | Board name unknown | Check the SDK supported-boards documentation. |
 | Download script cannot open port | Close serial terminals and verify the USB-to-UART cable/connector. |
-| Flash does not start | Follow the board's documented download sequence. For `sf32lb52-lcd_n16r8`, after selecting the serial port, restart the board and press Enter within 2 seconds to start the download; use the target-specific sequence for other boards. Check board power and the selected port/UART connection. |
+| Flash does not start | Follow the board's documented download sequence. For `sf32lb52-lcd_n16r8`, restarting the board is recommended; in that sequence, press Enter within 2 seconds after restart to start the download. Use the target-specific sequence for other boards. Check board power and the selected port/UART connection. |
 | Serial output is unreadable | Check baud rate and use the data UART, not a charge-only cable. |
 
 </div>

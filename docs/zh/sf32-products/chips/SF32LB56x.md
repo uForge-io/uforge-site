@@ -8,6 +8,8 @@ tags:
 
 # SF32LB56x { #sf32lb56x }
 
+<div id="_1"></div>
+
 ## 概览 { #overview }
 
 SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模蓝牙（Bluetooth）、更强图形能力、集成音频、外部存储，以及比 SF32LB 系列低阶型号更灵活的显示和存储接口的产品。
@@ -19,6 +21,8 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 思澈科技（SiFli）的芯片型号指南还提示了 56x 家族的一个关键选型点：不同封装支持的显示接口组合并不完全相同，因此准确料号和封装选择应被视为前期架构决策，而不是后期 PCB 细节。
 
 [^1]: STAR-MC1 是安谋科技（Arm China）的可配置 Armv8-M Mainline 嵌入式 CPU IP。思澈科技（SiFli）在兼容的 SF32 器件中，将其标注为 Arm Cortex-M33 STAR-MC1 应用处理器。其 Cortex-M33 级软件模型有助于沿用既有 Cortex-M33 固件、中间件、RTOS 移植和工具链，但仍需完成器件专用的常规集成工作。CU、SP 和 SE 配置主要在缓存、TCM、XIPU 和 TrustZone 能力上有所不同；Arm 自定义指令/CDE 和协处理器接口属于可选能力，具体功能以目标 SF32 料号为准。思澈科技（SiFli）文档会依上下文使用 ***Arm Cortex-M33 STAR-MC1*** 或 ***Arm Cortex-M33***。
+
+<div id="_2"></div>
 
 ## 应用场景 { #applications }
 
@@ -42,6 +46,8 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 - 通过 SDIO 连接外部 Wi-Fi；通过 SD/SDIO 或 eMMC 扩展外部存储
 - 通过 WBBGA175 获取更高 GPIO 数量
 - 为 TinyML、音频和 UI 并发处理留出更多余量
+
+<div id="_3"></div>
 
 ## 开发资源 { #development-resources }
 
@@ -81,7 +87,11 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 
 ---
 
+<div id="_4"></div>
+
 ## 特性与规格 { #features-and-specs }
+
+<div id="_5"></div>
 
 ### 计算与存储 { #compute-and-memory }
 
@@ -93,6 +103,8 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 - LCPU 内存系统：16 KB I-cache + 8 KB D-cache，160 KB 保持型 SRAM
 - 提供 512 KB 或 1 MB 封装内 QSPI-NOR 选项
 - 支持 QSPI-NOR、SPI-NAND、QPI/OPI-PSRAM、SD/SDIO 和 eMMC 外部存储
+
+<div id="ai"></div>
 
 ### 图形、显示与 AI { #graphics-display-and-ai }
 
@@ -107,6 +119,8 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 - TurboPixel：extDMA 以固定压缩比对最终帧缓冲区进行有损压缩，再由显示控制器解压，从而降低 PSRAM 带宽和容量需求
 - 面向 TinyML 的神经网络矩阵加速器，最高 1.92 GOPS，效率超过 10 TOPS/W
 
+<div id="_6"></div>
+
 ### 音频与无线连接 { #audio-and-wireless-connectivity }
 
 - 双模蓝牙 5.3，支持 BLE Audio
@@ -117,11 +131,17 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 - 1 个 HiFi 24 位音频 ADC，信噪比 99 dB
 - 2 路 PDM 接口和 1 路 I2S 接口
 
+**DAC 信噪比资料差异：**[PB0056 V1.1](https://downloads.sifli.com/silicon/PB0056-SF32LB56x-Product%20Brief%20V1p1.pdf) 和 [UM5601 V1.0.2](https://downloads.sifli.com/user%20manual/UM5601-SF32LB56x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V1p0p2.pdf) 标为 108 dB，而 [DS5601 V1.9.2](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-Datasheet%20V1p9p2.pdf) 标为 109 dB。本页链接的较新版本 PB0056 V1.2、DS5601 V1.9.3 和 UM5601 V1.0.5 尚未据此消除这一差异，因此目前无法确定应以哪个数值为准；使用前请按准确型号核对当前资料。
+
+<div id="_7"></div>
+
 ### 安全 { #security }
 
 - AES、HASH 与 CRC 硬件加速器
 - 真随机数发生器（TRNG）
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### 外设与 I/O { #peripherals-and-ios }
 
@@ -138,6 +158,8 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 - 外设任务控制器（PTC）
 - 最多 120 路 GPIO，取决于封装
 
+<div id="_8"></div>
+
 ### 电源与封装 { #power-supply-and-package }
 
 - 供电范围：1.71 V 至 3.63 V
@@ -146,6 +168,8 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 - RTC 唤醒下睡眠电流：600 nA
 - 引脚唤醒下睡眠电流：300 nA
 - 封装选项：QFN68L 与 WBBGA175
+
+<div id="_9"></div>
 
 ## 系列型号 { #family-variants }
 
@@ -169,6 +193,8 @@ SF32LB56x 同时覆盖紧凑型 QFN68L 与高 I/O 的 WBBGA175 料号，并提�
 | SF32LB567VND36 | WBBGA175 | 79 / 41 | 16 MB OPI-PSRAM + 1 MB QSPI-NOR Flash | DPI / QSPI / 8080 / JDI | 适合需要更大单一 PSRAM 区域与更复杂显示布线的高 I/O 设计，但不是 56 模组的标准芯片选择 |
 
 </div>
+
+<div id="_10"></div>
 
 ## 集成路径 { #integration-path }
 
@@ -203,15 +229,23 @@ SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB。各接口适用型号见[按器件�
 请先阅读 [SF32LB56x 硬件设计指南](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求；投板前再使用原理图与布局检查清单。
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## 相关产品 { #related-products }
+
+<div id="_12"></div>
 
 ### 模组 { #module }
 
 [SF32LB56-MOD](../modules/SF32LB56-MOD.md) 将 SF32LB566VCB36 芯片、存储器、RF 设计与天线选项整合在一块可直接集成的模组中。若项目希望在保留 SF32LB56x 能力的同时降低 RF 布局、天线匹配、晶振布局与高速存储集成风险，它是很实用的方案。
 
+<div id="_13"></div>
+
 ### 开发板 { #development-kits }
 
 [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) 开发板适合作为固件启动调试、显示验证、音频与存储测试、RF 检查以及功耗分析的起点，尤其适合在投入芯片级或模组级硬件开发前先完成软件与系统验证。
+
+<div id="_14"></div>
 
 ### 参考产品 { #reference-products }
 

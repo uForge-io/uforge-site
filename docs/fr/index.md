@@ -118,7 +118,7 @@ hide:
 
 - :fontawesome-solid-microchip:{ .uf-icon-blue } **Hautes performances**
 
-    Le nombre de cœurs et les fonctions varient selon le composant. La famille couvre des architectures monocœur à tricœur, et plusieurs séries utilisent des processeurs Cortex-M33 / STAR-MC1. La présence de caches, d'une FPU et d'une MPU dépend du composant et de son implémentation SoC ; reportez-vous à la documentation de la référence choisie. Certains composants proposent jusqu'à 64 Mo de PSRAM dans le boîtier.
+    Le nombre de cœurs et les fonctions varient selon le composant. La famille couvre des architectures monocœur à tricœur, et plusieurs séries utilisent des processeurs Cortex-M33 / STAR-MC1. La présence de caches, d'une FPU et d'une MPU dépend du composant et de son implémentation SoC ; reportez-vous à la documentation de la référence choisie. Certains composants proposent jusqu'à 64 MB de PSRAM dans le boîtier.
 
 - :fontawesome-brands-bluetooth:{ .uf-icon-blue } **Connectivité Bluetooth**
 
@@ -155,11 +155,11 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cœur applicatif Cortex-M33 STAR-MC1 + cœur dédié au contrôleur Bluetooth
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 6.3 bimode
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth bimode 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2,5D, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Décompression matérielle eZip 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Codec audio, 1 x AMIC, 2 x DMIC
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 576 Ko de SRAM, jusqu'à 16 Mo de PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 576 KB de SRAM, jusqu'à 16 MB de PSRAM
     - :fontawesome-solid-circle:{ .uf-dot-blue } Boîtier QFN68, jusqu'à 45 GPIO et chargeur linéaire intégré optionnel
 
     [Voir la série :material-arrow-right:](sf32-products/chips/SF32LB52x.md){ .uf-link-blue }
@@ -171,12 +171,12 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1 bicœur
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 6.3 bimode
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth bimode 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } Affichage RGB jusqu'à 1024 x 600
     - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2,5D, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Décompression matérielle eZip 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Codec audio, 1 x AMIC, 4 x DMIC
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 960 Ko de SRAM, jusqu'à 16 Mo de PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 960 KB de SRAM, jusqu'à 16 MB de PSRAM
     - :fontawesome-solid-circle:{ .uf-dot-blue } Disponible en boîtiers QFN68 et BGA175, jusqu'à 44 / 120 GPIO
 
     [Voir la série :material-arrow-right:](sf32-products/chips/SF32LB56x.md){ .uf-link-blue }
@@ -188,13 +188,13 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1 tricœur
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 6.3 bimode
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth bimode 6.3 (fiche technique préliminaire)
     - :fontawesome-solid-circle:{ .uf-dot-blue } Affichage RGB jusqu'à 1024 x 600
     - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2,5D, ePicasso 3.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 3.0 et décodage JPEG/MJPEG
     - :fontawesome-solid-circle:{ .uf-dot-blue } Entrée caméra DCMI jusqu'à 2 MP
     - :fontawesome-solid-circle:{ .uf-dot-blue } Codec audio, 2 x AMIC, 4 x DMIC
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 592 Ko de SRAM, jusqu'à 48 Mo de PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 592 KB de SRAM, jusqu'à 48 MB de PSRAM
     - :fontawesome-solid-circle:{ .uf-dot-blue } Disponible en boîtiers QFN68, QFN80 et BGA112, jusqu'à 46 / 47 / 58 GPIO ; certaines variantes BGA112 ajoutent six broches pour MPI3 ou des sorties statiques
 
     [Voir la série :material-arrow-right:](sf32-products/chips/SF32LB57x.md){ .uf-link-blue }
@@ -206,12 +206,12 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1 tricœur
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth 6.3 bimode
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Bluetooth bimode 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } Affichage MIPI jusqu'à 1280 x 800
     - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2,5D + graphiques vectoriels, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 et décodage JPEG/MJPEG
     - :fontawesome-solid-circle:{ .uf-dot-blue } Codec audio, 2 x AMIC, 4 x DMIC
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 3,7 Mo de SRAM, jusqu'à 64 Mo de PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 3,7 MB de SRAM, jusqu'à 64 MB de PSRAM
     - :fontawesome-solid-circle:{ .uf-dot-blue } Disponible en boîtier BGA256, jusqu'à 154 GPIO
 
     [Voir la série :material-arrow-right:](sf32-products/chips/SF32LB58x.md){ .uf-link-blue }
@@ -227,7 +227,7 @@ hide:
     - :fontawesome-solid-circle:{ .uf-dot-blue } GPU 2D / 2,5D, ePicasso 1.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Décompression matérielle eZip 1.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } Accélérateur IA
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 1,4 Mo de SRAM, jusqu'à 18 Mo de PSRAM
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 1,4 MB de SRAM, jusqu'à 18 MB de PSRAM
     - :fontawesome-solid-circle:{ .uf-dot-blue } Disponible en boîtiers QFN68, BGA145 et BGA169, jusqu'à 49 / 95 / 119 GPIO
 
     [Voir la série :material-arrow-right:](sf32-products/chips/SF32LB55x.md){ .uf-link-blue }

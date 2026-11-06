@@ -175,7 +175,13 @@ Hardware opcional:
 - Bateria Li-ion com capacidade superior a 450 mAh
 - Segundo cabo USB para usar a depuração UART e testar o USB nativo simultaneamente
 
-### Configuração da placa e modos de inicialização
+<div id="_1"></div>
+<div id="board-einrichtung-und-startmodi"></div>
+<div id="configuracao-da-placa-e-modos-de-inicializacao"></div>
+<div id="configuracion-y-modos-de-arranque-de-la-placa"></div>
+<div id="configuration-de-la-carte-et-modes-de-demarrage"></div>
+
+### Configuração da placa e modos de inicialização { #board-setup-and-boot-modes }
 
 Conecte o computador host à porta UART USB Type-C da placa; em seguida, abra o SifliTrace e selecione a porta COM correta.
 
@@ -256,7 +262,7 @@ O conector de 30 pinos disponibiliza sinais de alimentação, USB, sensores, dis
 
 A placa usa um display AMOLED e disponibiliza um conjunto de sinais QSPI em um FPC de 22 pinos. A tabela SiFli V1.0.0 marca os pinos 5-10 como NC; a tabela abaixo inclui as 22 posições e identifica explicitamente esses pinos sem conexão.
 
-As anotações da placa de display distinguem um conector FPC de 22 pinos para o módulo LCD e um conector placa a placa (B2B) separado, de 24 pinos, para a placa principal. Antes da montagem, confirme as duas interfaces na revisão exata do conjunto.
+**Divergência entre as fontes sobre os conectores — verifique antes de escolhê-los:** O texto do guia da SiFli diz que a interface de display dedicada é disponibilizada por um FPC de 22 pinos e um header de 40 pinos; já a figura da placa de display identifica um FPC de 22 pinos para o módulo LCD e um conector placa a placa (B2B) de 24 pinos para a placa principal. A fonte não explica a relação entre o header de 40 pinos e o conector B2B de 24 pinos. Não escolha nem conecte os conectores com base em apenas uma dessas contagens; confira o esquemático/BOM da revisão exata do conjunto.
 
 <div align="center"><em>Mapa dos sinais do FPC QSPI de 22 pinos para display e toque</em></div>
 

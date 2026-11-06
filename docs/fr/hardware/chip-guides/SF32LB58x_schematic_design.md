@@ -88,6 +88,9 @@ Le SF30147C est un PMIC hautement intégré et efficace destiné aux produits po
 
 Reportez-vous à la fiche technique de la puce SF30147C pour les détails complets.
 
+!!! warning "Divergence de la source sur le nom du rail"
+    La [ligne récapitulative LDO1](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md#L38) de la source indique AVDDIOA2, mais le [tableau des broches du circuit](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md#L79) associe VDDIOA2 à PA0–PA11 ; le [brochage officiel du DevKit](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb58x/SF32LB58-DevKit-LCD.md#L195) utilise également VDDIOA2. Ces sources ne permettent pas de déterminer le nom à employer pour le rail LDO1. Confirmez-le auprès de SiFli avant la libération du schéma.
+
 ##### 5.2.1.2. Exigences d'alimentation du SF32LB58x {#5112-sf32lb58x-power-requirements}
 
 La série SF32LB58x intègre les spécifications d'alimentation PMU suivantes.
@@ -720,6 +723,9 @@ Le SF32LB58x offre 1 interface SWD plus 6 interfaces UART sélectionnables pour 
 | SWDIO | PB11 | Signal de données J-Link |
 
 </div>
+
+!!! warning "Conflit entre les sources"
+    Le [tableau d'application matérielle d'OpenSiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md) associe `TXD1`/`PA31` à UART1 RXD et `RXD1`/`PA32` à UART1 TXD, tandis que le [plan de brochage du SF32LB58-DevKit-LCD](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb58x/SF32LB58-DevKit-LCD.md) indique `PA31` comme `UART1_TXD` et `PA32` comme `UART1_RXD`. Les sources se contredisent sur le sens des signaux et ne permettent pas de déterminer quelle correspondance est correcte. Faites confirmer le pinmux UART1 et le sens des signaux par SiFli avant le câblage ; ne déduisez pas les connexions TX/RX de la carte à partir de ces seuls libellés.
 
 !!! note "Remarque"
     Les signaux RXD des UARTx ne doivent pas flotter ; activez un tirage haut interne lors de l'initialisation logicielle.

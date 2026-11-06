@@ -122,6 +122,8 @@ Examinez ensemble les rails d'alimentation du processeur, les condensateurs loca
 
 </div>
 
+La source de la variante V nomme cette entrée `GPADC_VREF` dans le tableau des rails d'alimentation et `GPADC_VREFP` dans celui des condensateurs. Confirmez le raccordement prévu auprès de SiFli avant de finaliser le schéma.
+
 <div align="center"><em>Tableau 5.1-5 : Caractéristiques de sortie du PMIC SF30147C (exemple variante U)</em></div>
 
 <div align="center" markdown>
@@ -215,12 +217,12 @@ Le mode de fonctionnement, la source de réveil, l'alimentation des résistances
 
 | Mode de fonctionnement | CPU | Périphérique | SRAM | IO | LPTIM | Source de réveil | Temps de réveil |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Active | Actif | Actif | Accessible | Commutable | Actif |  |  |
+| Actif | Actif | Actif | Accessible | Commutable | Actif |  |  |
 | WFI/WFE | Arrêté | Actif | Accessible | Commutable | Actif | Toute interruption | < 0,5 µs |
 | DEEPWFI | Arrêté | Actif | Accessible | Commutable | Actif | Toute interruption | < 5 µs |
 | Light sleep | Arrêté | Arrêté | Non accessible, entièrement conservée | Niveau maintenu | Actif | RTC, GPIO, LPTIM, inter-système, Bluetooth, comparateur | < 100 µs |
 | Deep sleep | Arrêté | Arrêté | Non accessible, entièrement conservée | Niveau maintenu | Actif |  | < 300 µs |
-| Standby | En réinitialisation | En réinitialisation | Non accessible, LP entièrement conservée, HP conserve seulement 160 Ko | Niveau maintenu | Actif | RTC, boutons, LPTIM, inter-système, Bluetooth | 1,5 ms + reprise |
+| Standby | En réinitialisation | En réinitialisation | Non accessible, LP entièrement conservée, HP conserve seulement 160 KB | Niveau maintenu | Actif | RTC, boutons, LPTIM, inter-système, Bluetooth | 1,5 ms + reprise |
 | Hibernate rtc | En réinitialisation | En réinitialisation | Données non conservées | Haute impédance | En réinitialisation | RTC, boutons | > 2 ms |
 | Hibernate pin | En réinitialisation | En réinitialisation | Données non conservées | Haute impédance | En réinitialisation | Boutons | > 2 ms |
 
@@ -232,12 +234,12 @@ Le mode de fonctionnement, la source de réveil, l'alimentation des résistances
 
 | Mode de fonctionnement | CPU | Périphérique | SRAM | IO | LPTIM | Source de réveil | Temps de réveil |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Active | Actif | Actif | Accessible | Commutable | Actif |  |  |
+| Actif | Actif | Actif | Accessible | Commutable | Actif |  |  |
 | WFI/WFE | Arrêté | Actif | Accessible | Commutable | Actif | Toute interruption | < 0,5 µs |
 | DEEPWFI | Arrêté | Actif | Accessible | Commutable | Actif | Toute interruption | < 5 µs |
 | Light sleep | Arrêté | Arrêté | Non accessible, entièrement conservée | Niveau maintenu | Actif | RTC/GPIO/LPTIM/LPCOMP/interruption inter-système/Bluetooth | < 100 µs |
 | Deep sleep | Arrêté | Arrêté | Non accessible, entièrement conservée | Niveau maintenu | Actif | RTC/GPIO/LPTIM/LPCOMP/interruption inter-système/Bluetooth | < 300 µs |
-| Standby | En réinitialisation | En réinitialisation | Non accessible, LP entièrement conservée, HP conserve seulement 160 Ko | Niveau maintenu | Actif | RTC/boutons/LPTIM/interruption inter-système/Bluetooth | 1,5 ms + reprise |
+| Standby | En réinitialisation | En réinitialisation | Non accessible, LP entièrement conservée, HP conserve seulement 160 KB | Niveau maintenu | Actif | RTC/boutons/LPTIM/interruption inter-système/Bluetooth | 1,5 ms + reprise |
 | Hibernate rtc | En réinitialisation | En réinitialisation | Données non conservées | Haute impédance | En réinitialisation | RTC/boutons | > 2 ms |
 | Hibernate pin | En réinitialisation | En réinitialisation | Données non conservées | Haute impédance | En réinitialisation | Boutons | > 2 ms |
 
@@ -285,7 +287,7 @@ Le mode de fonctionnement, la source de réveil, l'alimentation des résistances
 
 BOOT_MODE sélectionne le démarrage : un niveau haut active le mode téléchargement ; à niveau bas, la ROM recherche un programme utilisateur, le lance s'il existe et passe sinon en mode téléchargement. La broche Mode de la variante U possède un rappel interne au niveau bas (pull-down), peut rester non connectée lorsqu'elle est inutilisée et appartient au domaine VDDIO2. La broche Mode de la variante V appartient au domaine VDDIOA et devrait être maintenue stable par une résistance de rappel de 10 kΩ au niveau haut ou bas ; ne la laissez pas flottante et évitez les changements d'état dus aux interférences. Réservez un point de test Mode sur les cartes de production ; un cavalier de récupération est utile sur les cartes de développement.
 
-Tenez compte de l'alimentation des E/S mémoire lors de l'arrêt en basse consommation. En Standby sur la variante U, les niveaux GPIO sont conservés et VDDIO1 peut rester alimenté ; placez en mode basse consommation les mémoires reliées à MPI1/MPI2. En Hibernate, les niveaux GPIO ne sont pas conservés : coupez VDDIO1 pour éviter les fuites par les E/S de la mémoire intégrée. Sur la variante V, gardez les E/S de la mémoire intégrée alimentées en Standby. Avant Hibernate, coupez VDDIOSA et VDDIOSB via PBR0 et placez la mémoire NOR en Deep Power-Down. VDDIOSC doit rester alimenté.
+Tenez compte de l'alimentation des E/S mémoire lors de l'arrêt en basse consommation. En Standby sur la variante U, les niveaux GPIO sont conservés et VDDIO1 peut rester alimenté ; placez en mode basse consommation les mémoires reliées à MPI1/MPI2. En Hibernate, les niveaux GPIO ne sont pas conservés : coupez VDDIO1 pour éviter les fuites par les E/S de la mémoire intégrée. Sur la variante V, les E/S de la mémoire intégrée peuvent rester alimentées en Standby. Avant Hibernate, coupez VDDIOSA et VDDIOSB via PBR0 et placez la mémoire NOR en Deep Power-Down. VDDIOSC doit rester alimenté.
 
 ### 5.3. Génération d'horloge { #53-clock-generation }
 
@@ -655,11 +657,11 @@ Adaptez l'alimentation des E/S mémoire au niveau logique de la mémoire connect
 
 Pour un microphone analogique différentiel externe, placez des condensateurs de blocage CC d'au moins 2,2 µF sur les entrées ADC et alimentez le microphone depuis MIC_BIAS. Le schéma de référence U pour microphone MEMS alimente MIC_BIAS via 1 kΩ et ajoute un condensateur de découplage de 4,7 µF ; il montre également un condensateur de couplage de 0,01 µF sur la sortie du microphone. Le schéma de référence U pour PA analogique utilise des condensateurs de couplage d'entrée de 33 nF et place le filtre passe-bas différentiel près de la puce. Routez les sorties DAC analogiques en paire différentielle protégée par la masse ; limitez la capacité parasite à moins de 10 pF et la longueur à moins de 2 cm. La variante V dispose aussi d'I2S ; son amplificateur I2S de référence se configure via I2C3. Placez les condensateurs d'alimentation et de référence audio près de leurs broches et éloignez l'audio analogique des convertisseurs à découpage et des signaux numériques rapides.
 
-Les deux variantes prennent en charge le PWM pour les moteurs de vibration. Le moteur peut être alimenté directement depuis VBAT si son courant de démarrage ne déstabilise pas le système. Lorsque `BSP_PM_FREQ_SCALING` est défini à `1`, le changement de fréquence du HCPU modifie également la fréquence PWM des broches PA ; utilisez alors une broche PB. PB32 est une entrée d'alimentation/réinitialisation active à l'état haut ; un appui d'au moins 10 s déclenche la réinitialisation. Le schéma U relie le bouton à VDDIOB via 1 kΩ et ajoute une résistance de rappel vers le bas de 10 kΩ ainsi qu'un condensateur de 0,1 µF vers GND. Le schéma V utilise une résistance série de 1 kΩ depuis VDD_1V8 et une résistance de rappel vers le bas de 10 kΩ. Les autres boutons et encodeurs rotatifs nécessitent des résistances de rappel vers le haut. Pour un encodeur mécanique qui ne revient pas à l'état arrêt après rotation, l'alimentation de la résistance de rappel vers le haut doit pouvoir être coupée en Standby afin d'éviter les fuites.
+Les deux variantes prennent en charge le PWM pour les moteurs de vibration. Le moteur peut être alimenté directement depuis VBAT si son courant de démarrage ne déstabilise pas le système. Lorsque `BSP_PM_FREQ_SCALING` est défini à `1`, le changement de fréquence du HCPU modifie également la fréquence PWM des broches PA ; SiFli recommande alors une broche PB. PB32 est une entrée d'alimentation/réinitialisation active à l'état haut ; un appui d'au moins 10 s déclenche la réinitialisation. Le schéma U relie le bouton à VDDIOB via 1 kΩ et ajoute une résistance de rappel vers le bas de 10 kΩ ainsi qu'un condensateur de 0,1 µF vers GND. Le schéma V utilise une résistance série de 1 kΩ depuis VDD_1V8 et une résistance de rappel vers le bas de 10 kΩ. Les autres boutons et encodeurs rotatifs nécessitent des résistances de rappel vers le haut. Pour un encodeur mécanique qui ne revient pas à l'état arrêt après rotation, l'alimentation de la résistance de rappel vers le haut doit pouvoir être coupée en Standby afin d'éviter les fuites.
 
 U fournit PBR0–PBR2 et V fournit PBR0–PBR3. Au démarrage, PBR0 passe de l'état bas à l'état haut et peut commander un interrupteur de charge externe ; les autres broches PBR sont à l'état bas par défaut. Les broches PBR peuvent fonctionner en sortie en Standby et Hibernate et transporter LPTIM ; toutes sauf PBR0 peuvent aussi fournir une horloge de 32 kHz. Elles peuvent être configurées en entrées de réveil, mais la MCU ne reçoit pas d'interruption depuis cette entrée après son réveil. Privilégiez les broches PB du LCPU pour l'I2C, le SPI, la commande et les interruptions de réveil des capteurs. L'alimentation des capteurs peut être commutée selon les besoins depuis une sortie LVSW ou LDO du SF30147C.
 
-Toutes les broches PA de U/V peuvent être multiplexées en UART, I2C ou GPTIM. Pour U, les exceptions sont PB32/PB33/PB34 et PBR0/PBR1/PBR2 ; pour V, PB32–PB36 et PBR0–PBR3. Vérifiez ces restrictions avec les affectations de réveil, de boutons et de PBR.
+Toutes les broches PA des variantes U/V prennent en charge le multiplexage UART, I2C et GPTIM. Les broches PB prennent également en charge ces fonctions, à l'exception de PB32/PB33/PB34 pour U et de PB32–PB36 pour V. PBR0–PBR2 pour U et PBR0–PBR3 pour V sont également exclus de ce multiplexage. Vérifiez ces restrictions avec les affectations de réveil, de boutons et de PBR.
 
 ### 5.7. Fabrication { #57-manufacturing }
 

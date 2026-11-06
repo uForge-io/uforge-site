@@ -13,11 +13,11 @@ Nada disso seria viável sem as ferramentas baseadas em modelos de linguagem, e 
 
 ### Mantendo as traduções consistentes { #keeping-translations-consistent }
 
-Para que as iterações convirjam, mantemos um glossário com os termos que devem permanecer sem tradução (números de peça, unidades, nomes de protocolos) ou usar uma tradução aprovada, além de um checklist de qualidade que cobre a completude técnica, a correção de links e âncoras e a integridade do Markdown e do código. Cada idioma mantém a mesma estrutura de páginas do original em inglês. Os builds são validados em modo estrito: links quebrados ou páginas ausentes fazem a compilação falhar antes da publicação.
+Para que as iterações convirjam, mantemos um glossário com os termos que devem permanecer sem tradução (números de peça, unidades, nomes de protocolos) ou usar uma tradução aprovada, além de um checklist de qualidade que cobre a completude técnica, a correção de links e âncoras e a integridade do Markdown e do código. Cada idioma mantém a mesma estrutura de páginas do original em inglês. Os builds em modo estrito detectam links quebrados e outros erros de compilação; uma auditoria separada de paridade de caminhos verifica páginas ausentes ou extras antes da publicação.
 
 ### Um aviso e um pedido { #caveat-and-request }
 
-São traduções assistidas por máquina, e as páginas em inglês continuam sendo a referência. Como nenhum desses idiomas é nossa língua materna, algumas páginas podem não soar naturais para falantes nativos. Quando um detalhe técnico for importante para o seu projeto, confira-o na página em inglês e na documentação oficial da SiFli. Se encontrar uma tradução incorreta ou um termo estranho, ou achar que alguma página pode melhorar, [fale conosco](../../about/contact.md); esse retorno vai direto para o glossário, para que o mesmo erro não volte.
+São traduções assistidas por máquina, e as páginas em inglês continuam sendo a referência. Como nenhum desses idiomas é nossa língua materna, algumas páginas podem não soar naturais para falantes nativos. Quando um detalhe técnico for importante para o seu projeto, confira-o na página em inglês e na documentação oficial da SiFli. Se encontrar uma tradução incorreta ou um termo estranho, ou achar que alguma página pode melhorar, [fale conosco](../../about/contact.md); problemas terminológicos recorrentes entram no glossário, enquanto as demais sugestões são avaliadas na página correspondente.
 
 ### Próximos passos { #next }
 

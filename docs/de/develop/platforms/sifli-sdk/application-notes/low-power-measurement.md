@@ -101,17 +101,19 @@ Der zitierte aktuelle SDK-Leitfaden zu niedrigem Stromverbrauch enthält keine v
 
 In dieser Tabelle entsprechen `PM_SLEEP_MODE_LIGHT`, `PM_SLEEP_MODE_DEEP` und `PM_SLEEP_MODE_STANDBY` den Modi Light Sleep, Deep Sleep und Standby.
 
-Die familienbezogenen Werte sind Richtwerte aus den SDK-Leitfäden und keine garantierten Aufwachzeiten auf dem Board. Der SF32LB52x-Leitfaden beschreibt, dass HCPU bei vorhandenem PSRAM Daten aus dem abzuschaltenden RAM im PSRAM sichert und nach dem Aufwachen wiederherstellt; ohne PSRAM dient 64 KB Retention-RAM als Sicherungsziel. Dieser Sicherungsbereich ist nicht mit der in der Familientabelle genannten SRAM-Erhaltungskapazität gleichzusetzen (für den Standby-Modus von SF32LB52x sind beispielsweise 384 KB HPSYS-SRAM-Erhalt angegeben). Der tatsächliche Strom hängt außerdem von aktivierten Peripheriegeräten, IO-Pegeln, externem Speicher und dem Board ab.
+Die familienbezogenen Werte aus den SDK-Leitfäden sind Richtwerte, keine garantierten Aufwachzeiten für ein Board. Bei SF32LB52x sichert HCPU laut Leitfaden Daten aus RAM, das abgeschaltet wird, im PSRAM und stellt sie nach dem Aufwachen wieder her. Ohne PSRAM dient der 64 KB große Retention-RAM als Sicherungsziel. Dieses Backup ist nicht mit der SRAM-Erhaltung in der Familientabelle gleichzusetzen: Für SF32LB52x sind dort im Standby-Modus zum Beispiel 384 KB erhaltenes HPSYS-SRAM angegeben. Übertragen Sie weder diese Sicherungsrichtlinie noch ihre Kapazität auf andere Familien, sofern der jeweilige SDK-Leitfaden dies nicht bestätigt. Der tatsächliche Strom hängt außerdem von aktiven Peripheriegeräten, IO-Pegeln, externem Speicher und dem Board ab.
 
 ## Takte im Wachzustand steuern { #control-clocks-while-awake }
 
-Kann der Idle-Thread nicht in einen Schlafzustand wechseln, kann die automatische Taktreduzierung bei WFI den Stromverbrauch senken. Sie ist nur sicher, wenn EPIC, EZIP, LCDC, USB und SD im Leerlauf sind. Die mit dem SDK gelieferte LVGL-Implementierung erfasst den Belegungszustand von EPIC/EZIP; der RT-Thread-LCD-Device-Treiber erfasst den von LCDC/USB/SD. Wird die mitgelieferte LVGL-Implementierung nicht verwendet, melden Sie Beginn und Ende der EPIC/EZIP-Aktivität mit `rt_pm_hw_device_start()` und `rt_pm_hw_device_stop()`. Konfigurieren Sie den Teiler mit `HAL_RCC_HCPU_SetDeepWFIDiv()`. Die WFI-Taktwerte unterscheiden sich je nach Familie: Der SF32LB52x-Leitfaden erlaubt bei aktiven Audio-Peripheriegeräten nur eine Reduzierung auf 48 MHz, in anderen Fällen auf 4 MHz; außerdem muss `HPSYS_RCC_DBGR_FORCE_HP` auf 1 gesetzt werden. Die [SiFli-Anwendungsnotiz zum Energiemanagement](https://docs.sifli.com/projects/solution/2.application-notes/power_manager/index.html) nennt 1 MHz als CPU-Leerlauftakt für SF32LB55x, SF32LB56x und SF32LB58x. Die zitierten Quellen belegen keinen Wert für SF32LB57x; maßgeblich ist der Leitfaden der verwendeten SDK-Version.
+Kann der Idle-Thread nicht in den Schlaf wechseln, kann die automatische WFI-Taktreduzierung den Stromverbrauch senken. Sicher ist sie nur, wenn EPIC, EZIP, LCDC, USB und SD im Leerlauf sind. Die mitgelieferte LVGL-Implementierung erfasst den Belegungszustand von EPIC/EZIP; der RT-Thread-LCD-Device-Treiber erfasst LCDC/USB/SD. Verwenden Sie die mitgelieferte LVGL-Implementierung nicht, melden Sie Beginn und Ende der EPIC/EZIP-Aktivität mit `rt_pm_hw_device_start()` und `rt_pm_hw_device_stop()`. Stellen Sie den Teiler mit `HAL_RCC_HCPU_SetDeepWFIDiv()` ein.
+
+Die WFI-Taktwerte unterscheiden sich je nach Familie. Der SF32LB52x-Leitfaden erlaubt bei aktiven Audio-Peripheriegeräten nur eine Reduzierung auf 48 MHz, sonst auf 4 MHz. Außerdem muss `HPSYS_RCC_DBGR_FORCE_HP` auf 1 gesetzt werden. Die [SiFli-Anwendungsnotiz zum Energiemanagement](https://docs.sifli.com/projects/solution/2.application-notes/power_manager/index.html) nennt 1 MHz als CPU-Leerlauftakt für SF32LB55x, SF32LB56x und SF32LB58x. Die zitierten Quellen belegen keinen Wert für SF32LB57x. Maßgeblich ist der Leitfaden der verwendeten SDK-Version.
 
 Verwenden Sie für aktive Arbeit `rt_pm_run_enter()`:
 
 <div align="center" markdown>
 
-<em>Tabelle: HCPU-Taktauswahl im Run-Modus</em>
+<em>Tabelle: HCPU-Taktauswahl im Run-Modus für SF32LB52x (Verfügbarkeit im SDK-Leitfaden der Zielfamilie prüfen)</em>
 
 | Modus | HCPU-Takt |
 |---|---:|
@@ -125,7 +127,7 @@ Verwenden Sie für aktive Arbeit `rt_pm_run_enter()`:
 
 ## Reihenfolge der Subsysteme beim Übergang in den Schlafmodus { #understand-inter-subsystem-sleep-sequencing }
 
-Nach dem Ausschalten des Bildschirms kann HPSYS in den Schlafmodus wechseln. Bei 55x/56x/58x folgt LPSYS normalerweise auf HPSYS; die 52x-Familie bildet die dokumentierte Ausnahme und erlaubt unabhängige Schlafzustände für HCPU und LCPU. Die verfügbaren Quellen belegen nicht, dass der ACPU des 57x derselben Reihenfolge folgt. Prüfen Sie dessen Subsystem-Richtlinie anhand der passenden SDK-Version. Nach dem Aufwachen startet `gui_resume` einen neuen Zyklus zur Entscheidung über das Abschalten des Bildschirms. Halten Sie einen Kern wach, solange ein gemeinsam genutztes Peripheriegerät oder eine IPC-Transaktion ihn noch benötigt.
+Nach dem Ausschalten des Bildschirms kann HPSYS in den Schlafmodus wechseln. Bei 55x/56x/58x folgt LPSYS normalerweise auf HPSYS. Die 52x-Familie bildet die dokumentierte Ausnahme: HCPU und LCPU können unabhängig schlafen. Die verfügbaren Quellen belegen nicht, dass der ACPU des 57x derselben Reihenfolge folgt. Prüfen Sie dessen Subsystem-Richtlinie anhand der passenden SDK-Version. Nach dem Aufwachen startet `gui_resume` einen neuen Zyklus zur Entscheidung über das Abschalten des Bildschirms. Halten Sie einen Kern wach, solange ihn ein gemeinsam genutztes Peripheriegerät oder eine IPC-Transaktion noch benötigt.
 
 Aktivieren Sie `BSP_PM_DEBUG` vorübergehend und suchen Sie in den Logs nach:
 

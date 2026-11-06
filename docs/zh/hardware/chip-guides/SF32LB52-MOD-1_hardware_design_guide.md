@@ -17,6 +17,9 @@ tags:
 
 本指南介绍模组硬件集成所需的引脚定义、外设接口、电气特性、供电要求、参考原理图、原理图设计检查清单、模组尺寸与 PCB 封装图形，以及产品处理要求。内容基于思澈科技（SiFli）数据手册 **DS5203-SF32LB52-MOD-1 V0.3**。
 
+!!! important "模组型号范围"
+    下文的模组规格和集成建议仅适用于 DS5203 V0.3 记录的 SF32LB52-MOD-1-N16R8。该数据手册未确认这些内容适用于不同配置的 SF32LB52-MOD-1-A128R16。A128R16 的具体信息请参阅[思澈科技（SiFli）的 EPD 模组设计指南](https://wiki.sifli.com/hardware/SF32LB52-MOD-1-EPD-HW-Application.html)。
+
 关于芯片底层架构（内核、图形、存储子系统和外设）的更多信息，请参见 [SF32LB52x](../../sf32-products/chips/SF32LB52x.md) 与 [SF32LB52x 硬件设计指南](../chip-guides/SF32LB52x_hardware_design_guide.md)。
 
 !!! note "来源与图片处理"
@@ -54,7 +57,7 @@ tags:
 | 低功耗处理器（LCPU） | Arm Cortex-M33 STAR-MC1，最高 24 MHz，64 KB SRAM |
 | 无线连接 | 双模蓝牙 5.3，支持 BLE Audio |
 | 图形显示 | ePicasso 2.0 2D/2.5D 图形引擎，最高分辨率 512×512，eZip 2.0 无损解压缩 |
-| 音频 | 1× 24-bit 音频 DAC，1× 24-bit 音频 Sigma-Delta ADC |
+| 音频 | DS5203 V0.3 的特性摘要列出 1 个 24-bit DAC 和 1 个 Sigma-Delta ADC，详细音频章节则列出各 2 个。模组实际引出的通道数需向思澈科技（SiFli）确认。 |
 | 存储 | 可选合封 OPI-PSRAM（144 MHz）；1 路外部 MPI（QSPI）接口；1× SD/SDIO/eMMC |
 | 封装 | 68 引脚，27.9×18.0×3.1 mm |
 | 供电 | VSYS 3.2~4.7 V（锂离子电池）或 3.7~4.7 V（DCDC/LDO，推荐 3.8 V） |
@@ -194,11 +197,14 @@ tags:
 
 **温度传感器** — 分辨率为 0.2°C，测量范围为 -40°C 至 125°C，精度为 ±3°C；支持轮询或中断方式读取。
 
-**音频 DAC** — 集成 1 路 24 位 DAC 输出通道，采样率为 8–48 kHz，支持差分输出。
+**音频 DAC** — 本指南的模组级说明列出 1 路 24 位 DAC 输出通道，采样率为 8–48 kHz，支持差分输出。DS5203 V0.3 的详细音频章节则称 MCU 集成 2 个 DAC；具体模组实际引出的通道数需向思澈科技（SiFli）确认。
 
 **音频 PLL** — 支持小数分频时钟生成，分辨率为 48 MHz/2^18；支持 48 MHz、32.768 kHz 和 44.1 kHz 等派生采样率。
 
-**音频 ADC** — 集成 1 路 24 位 Sigma-Delta ADC 输入通道，采样率为 8–48 kHz。
+!!! note "音频 PLL 采样率需确认"
+    V0.3 数据手册在此将 48 MHz 列为派生采样率，但紧邻的 DAC 和 ADC 规格给出的采样率范围均为 8–48 kHz。原文没有解释这一差异；在依赖 48 MHz 这一项前，请向 SiFli 确认。
+
+**音频 ADC** — 本指南的模组级说明列出 1 路 24 位 Sigma-Delta ADC 输入通道，采样率为 8–48 kHz。DS5203 V0.3 的详细音频章节则称 MCU 集成 2 个 ADC；具体模组实际引出的通道数需向思澈科技（SiFli）确认。
 
 ## 6. 电气特性 { #6-electrical-characteristics }
 

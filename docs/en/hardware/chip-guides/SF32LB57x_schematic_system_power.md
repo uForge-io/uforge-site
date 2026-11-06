@@ -8,10 +8,14 @@ tags:
     - Chip
 ---
 
+<div id="sf32lb57x"></div>
+
 # SF32LB57x Hardware Design Guide — Minimum System & Power
 
 !!! note "Part of the SF32LB57x Hardware Design Guide"
     Schematic Design Guidelines spans three pages: this page (Section 5.1-5.2: Minimum System Design and Power System), [Clock, RF & User Interfaces](SF32LB57x_schematic_clock_rf_interfaces.md) (Sections 5.3-5.5), and [Storage & Manufacturing](SF32LB57x_schematic_storage_mfg.md) (Sections 5.6-5.7). Start from the [SF32LB57x Hardware Design Guide overview](SF32LB57x_hardware_design_guide.md) for device selection and the full design flow.
+
+<div id="5"></div>
 
 ## 5. Schematic Design Guidelines
 
@@ -33,7 +37,11 @@ This chapter follows the normal board bring-up order. Complete the minimum syste
 
 </div>
 
+<div id="51"></div>
+
 ### 5.1. Minimum System Design
+
+<div id="511"></div>
 
 #### 5.1.1. Minimum System Design Sequence
 
@@ -45,6 +53,8 @@ Bring-up failures most often trace back to the minimum system, power family, boo
 4. Define the power-tree outline, charger/OVP path, BUCK inductor/capacitors, and default rail states, then complete the detailed review in Section 5.2.
 5. Select the 48 MHz and 32.768 kHz crystals and confirm the calibration plan in Section 5.3.
 6. Reserve DBG-UART, SWD, boot-mode, power, ground, and fixture test points.
+
+<div id="512"></div>
 
 #### 5.1.2. Minimum System Schematics
 
@@ -78,6 +88,8 @@ SF32LB57x has multiple minimum-system schematic variants. Use the one that match
 
 <div align="center"><em>Figure 5.1-6: BGA112 3.3 V Supply Minimum System</em></div>
 <!-- /BGA-ONLY -->
+
+<div id="513"></div>
 
 #### 5.1.3. Boot Storage and Strap Configuration
 
@@ -114,6 +126,8 @@ Select the boot medium before schematic freeze. Package-integrated memory may al
 <div align="center"><em>Figure 5.1-7: Recommended Bootstrap Pin Circuit</em></div>
 
 Power the boot medium according to its type and the supply family. In battery-powered variants, external NOR Flash is powered from `VDD33_VOUT1`; external SPI NAND Flash requires a load switch downstream of `VDD33_VOUT1`; external SD NAND Flash and eMMC use an external LDO. In 3.3 V supply variants, use an external LDO for all external boot media. SiFli recommends `PA21` as the external boot-medium switch enable: high turns the rail on and low turns it off. If a battery-powered package does not expose `PA21`, the source guide allows a default-pulled-up GPIO instead. Ensure the boot-medium rail is available during boot. If package-integrated storage already occupies MPI3, external MPI3 usage is limited to SD NAND or eMMC; do not attach external SPI NOR/SPI NAND to that channel.
+
+<div id="514"></div>
 
 #### 5.1.4. Debug and Download Access
 
@@ -153,7 +167,11 @@ Reserve debug and recovery access before product IO assignment. Many first-board
 
 `PA18`/`PA19` are the default DBG-UART pins, and `PA43`/`PA44` are the default SWD pins; SWD can also be switched to `PA18`/`PA19`. The device supports four download interfaces: DBG-UART, SWD, standard UART, and USB. Normal boot supports only DBG-UART and SWD; BOOT mode can enable all four. BOOT mode and SWD pin switching depend on `PA00`, the BOOT register, `PA01`, and the host BOOT switch. Check the complete source mode table when designing production programming and recovery; do not infer the download interface from one pin state alone.
 
+<div id="52"></div>
+
 ### 5.2. Power System
+
+<div id="521"></div>
 
 #### 5.2.1. Power Tree Planning
 
@@ -173,6 +191,8 @@ Draw the power tree before schematic entry, and label each rail with source, def
 
 </div>
 
+<div id="522"></div>
+
 #### 5.2.2. Battery-Powered Variants
 
 Battery-powered variants commonly use `VBUS`, `VBAT`, `VCC`, `VSYS`, `BUCK_LX`, `BUCK_FB`, internal LDO outputs, audio supply pins, and RF supply pins.
@@ -186,6 +206,8 @@ Key requirements:
 - Use `VDD33_VOUT1`, `VDD33_VOUT2`, and other internal regulator outputs only for explicitly permitted loads. Note a conflict in SiFli's source: the low-power prose and diagram show external sensors on `VDD33_VOUT1`, while the same guide's power checklist restricts it to co-packaged/external NOR/NAND Flash and `AVDD33_AUD`, prohibiting other peripherals. Until SiFli clarifies the discrepancy, do not connect sensors to `VDD33_VOUT1`.
 - Connect `AVDD_BRF` and `AVDD33_AUD` from the recommended source rails with local filtering.
 
+<div id="523-33-v"></div>
+
 #### 5.2.3. 3.3 V Supply Variants
 
 3.3 V supply variants use external 3.3 V for `PVDD`, `AVDD33`, `AVDD_BRF`, `AVDD33_AUD`, and related domains. Select 1.8 V or 3.3 V for `VDDIOA` according to the exact orderable part.
@@ -197,6 +219,8 @@ Key requirements:
 - If `VBATS` is used for battery sensing, verify the input range and filtering.
 - Power all external boot media in 3.3 V supply variants from an external LDO; `PA21` is the recommended enable signal.
 - Internal references and internal LDO output pins should only be connected to the required external capacitors. Do not drive them from an external voltage source.
+
+<div id="524"></div>
 
 #### 5.2.4. Power Capacitor and Usage Quick Reference
 
@@ -224,6 +248,8 @@ Use this table for schematic pre-review. Final values must still be checked agai
 
 </div>
 
+<div id="525-buck"></div>
+
 #### 5.2.5. BUCK Inductor and Feedback
 
 Recommended BUCK inductor parameters:
@@ -247,6 +273,8 @@ PCB requirements:
 - Keep the `BUCK_FB` trace reasonably wide; 0.25 mm or wider is recommended.
 - Keep a solid reference ground near the inductor area and avoid coupling noise into crystals, RF, audio, and GPADC traces.
 - If the product contains sensitive blocks such as GPS, heart-rate sensing, ECG, or analog microphones, reserve optional EMI-tuning footprints near the BUCK_LX area. Final values should be selected during system EMC validation.
+
+<div id="526-ovp"></div>
 
 #### 5.2.6. Charging and OVP
 
@@ -274,6 +302,8 @@ OVP guidance:
 !!! warning "VBUS range discrepancy"
     The current package power tables and OVP text specify 4.5–5.5 V for `VBUS`; the checklist still requires 4.6–5.5 V. Until SiFli confirms the applicable limit, design to the stricter 4.6 V minimum.
 
+<div id="527"></div>
+
 #### 5.2.7. Low-Power Supply Strategy
 
 Low-power behavior must be designed into the schematic.
@@ -286,6 +316,8 @@ Recommendations:
 - Power I2C pull-ups from the same rail as the corresponding peripheral to avoid sleep leakage.
 - Choose low-Iq and low-shutdown-current parts for always-on circuits.
 - If `VSYS` or an always-on LDO is used as a GPIO pull-up rail, include that leakage in the sleep-current budget.
+
+<div id="528"></div>
 
 #### 5.2.8. Power and Charging Reference Figures
 
@@ -334,6 +366,8 @@ Charging and OVP reference figures:
 ![Figure 5.2-9: Regulated-Output OVP Application](../../sf32-products/chips/assets/57x/SF32LB57x-OVP-REGU.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figure 5.2-9: Regulated-Output OVP Application</em></div>
+
+<div id="529"></div>
 
 #### 5.2.9. Package and Power-Family Electrical Constraints
 
@@ -400,9 +434,13 @@ The SF32LB57x power requirements differ by package and power family. The must-ch
 </div>
 
 
+<div id="5210"></div>
+
 #### 5.2.10. Operating Modes and Wake Sources
 
 Operating modes and wake sources belong to the power-system review because they determine which rails, pull-ups, external loads, and wake-capable GPIOs remain active in each low-power state.
+
+<div id="5211"></div>
 
 #### 5.2.11. Power Modes
 
@@ -422,6 +460,8 @@ The SF32LB57x family provides ten interrupt sources that can wake the device fro
 
 </div>
 
+<div id="5212"></div>
+
 #### 5.2.12. Wake Design
 
 - Connect keys, touch interrupts, and sensor interrupts that need wake capability to wake-capable GPIOs.
@@ -429,6 +469,8 @@ The SF32LB57x family provides ten interrupt sources that can wake the device fro
 - Review IO hold, high-Z, pull-up, pull-down, and peripheral supply states in Standby and Hibernate.
 - USB attach wake requires a VBUS divider connected to a wake-capable GPIO with the correct IO voltage.
 - Bluetooth, RTC, and external wake behavior should be reviewed together with firmware low-power policy.
+
+<div id="5213"></div>
 
 #### 5.2.13. Low-Power Validation
 
@@ -469,6 +511,8 @@ During EVT, measure at least these states:
 </div>
 
 Record firmware version, supply voltage, battery-simulator setting, peripheral connection state, Bluetooth connection state, and ambient temperature for every measurement.
+
+<div id="5214"></div>
 
 #### 5.2.14. Full Power Supply Pin Reference
 

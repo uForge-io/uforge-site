@@ -58,8 +58,8 @@ Pour une carte plus petite à demi-trous métallisés, utilisez la [SF32LB52-Dev
 
 | Domaine | Configuration |
 | :--- | :--- |
-| SF32LB52-DevKit-LCD-1-N16R8 | SF32LB52-MOD-1-N16R8 / SF32LB525UC6 ; 16 Mo de QSPI-NOR + 8 Mo de PSRAM OPI |
-| SF32LB52-DevKit-LCD-1-A128R16 | SF32LB52-MOD-1-A128R16 / SF32LB527UD6 ; 128 Mo de QSPI-NAND + 16 Mo de PSRAM OPI |
+| SF32LB52-DevKit-LCD-1-N16R8 | SF32LB52-MOD-1-N16R8 / SF32LB525UC6 ; 16 MB de QSPI-NOR + 8 MB de PSRAM OPI |
+| SF32LB52-DevKit-LCD-1-A128R16 | SF32LB52-MOD-1-A128R16 / SF32LB527UD6 ; 128 MB de QSPI-NAND + 16 MB de PSRAM OPI |
 | Horloges | Quartz principal de 48 MHz et quartz RTC de 32,768 kHz sur le module |
 | RF | Antenne embarquée ou connecteur IPEX sélectionné par une résistance de 0 Ω |
 | Affichage | QSPI/SPI/DSPI et MCU/8080 8 bits |
@@ -207,7 +207,13 @@ La note d'origine de la carte publiée par SiFli indique `TFT-H043A28WQISTKN22_V
 | Broche du module | Signal | Fonction sur la carte |
 | :--- | :--- | :--- |
 | PA44 | VBUS_DET | Détection de branchement du chargeur |
-| PA43..PA37 | DB7..DB2 | Données LCD MCU/8080 |
+| PA43 | DB7 | Données LCD MCU/8080 |
+| PA42 | DB6 | Données LCD MCU/8080 |
+| PA41 | DB5 | Données LCD MCU/8080 |
+| PA40 | DB4 | Données LCD MCU/8080 |
+| PA39 | DB3 | Données LCD MCU/8080 |
+| PA38 | GPIO | Entrée/sortie à usage général |
+| PA37 | DB2 | Données LCD MCU/8080 |
 | PA08..PA07 | DB1..DB0 / QSPI D3..D2 | Données LCD |
 | PA06 | DC / QSPI D1 | Données/commande LCD |
 | PA05 | RD / QSPI D0 | Données LCD |
@@ -219,7 +225,7 @@ La note d'origine de la carte publiée par SiFli indique `TFT-H043A28WQISTKN22_V
 | PA33 / PA30 | I2C SDA / SCL | Panneau tactile |
 | PA31 / PA09 | Touch INT / RST | Panneau tactile |
 | PA24, PA25, PA28, PA29 | SPI1 | Interface de la carte TF |
-| PA26 | Détection de carte / LED | Fonction partagée |
+| PA26 | Détection de carte SD / CS de la Flash2 externe / LED GPIO | Fonctions partagées en V1.2.0 ; vérifier la révision exacte |
 | PA20 / PA27 | UART RX/TX | UART utilisateur |
 | PA18 / PA19 | UART de débogage RX/TX | Téléchargement et débogage logiciel |
 | PA10 | AU_PA_EN | Activation de l'amplificateur audio |

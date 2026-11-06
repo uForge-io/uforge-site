@@ -55,7 +55,7 @@ This checklist is based on SiFli's SF32LB58x Schematic&PCB checklist V1.0, dated
 | 12 | AVDD33_ANA supply trace is at least 6 mil | Required |
 | 13 | AVDD_BRF supply trace is at least 8 mil wide | Required |
 | 14 | AVDD33_AUD supply trace is at least 6 mil | Required |
-| 15 | AVDD33_DSI supply trace is at least 8 mil | Required |
+| 15 | AVDD18_DSI supply trace is at least 8 mil | Required |
 
 </div>
 
@@ -86,7 +86,7 @@ This checklist is based on SiFli's SF32LB58x Schematic&PCB checklist V1.0, dated
 | 17 | AVDD33_ANA capacitor is placed close to the pin | Required |
 | 18 | AVDD_BRF capacitor is placed close to the pin | Required |
 | 19 | AVDD33_AUD capacitor is placed close to the pin | Required |
-| 20 | AVDD33_DSI capacitor is placed close to the pin | Required |
+| 20 | AVDD18_DSI capacitor is placed close to the pin | Required |
 
 </div>
 

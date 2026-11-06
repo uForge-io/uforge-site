@@ -204,6 +204,8 @@ A placa disponibiliza dois conectores de borda com 24 pinos cada. Um lado reúne
 
 </div>
 
+O resumo da placa indica seis canais GPADC, enquanto este mapa de funções dos pinos lista GPADC0–GPADC6 em PA28–PA34. O SDK da SiFli mapeia ADC CH7 para VBAT. Essas referências não comprovam que a placa permita usar simultaneamente sete entradas externas; portanto, a quantidade de canais no nível da placa continua indefinida. Antes de conectar sinais analógicos externos, confirme a revisão exata da placa, o multiplexador de pinos e a configuração dos canais. Consulte o [guia ADC da SiFli](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/adc.html).
+
 ### Conector de LCD, áudio e depuração { #lcd-audio-and-debug-header }
 
 <div align="center"><em>Distribuição dos pinos do conector de LCD, áudio e depuração</em></div>

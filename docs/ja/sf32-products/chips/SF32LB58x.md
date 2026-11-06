@@ -8,6 +8,8 @@ tags:
 
 # SF32LB58x { #sf32lb58x }
 
+<div id="_1"></div>
+
 ## 概要 { #overview }
 
 SF32LB58xシリーズは、SF32LB5xファミリーの最上位クラスに位置します。高度なグラフィックス、大容量メモリー、デュアルモードBluetooth、豊富なオーディオ／ディスプレイI/O、多数のGPIOが求められるバッテリー駆動AIoT製品に適しており、より大型のアプリケーションプロセッサー搭載プラットフォームへ移行する必要はありません。
@@ -17,6 +19,8 @@ SF32LB58xは、3基のArm Cortex-M33 STAR-MC1[^1] コアを備えた異種マル
 SiFliの資料によると、SF32LB58xは3,744 KBのオンチップSRAMを搭載し、SKUに応じてNOR Flash、OPI-PSRAM、HPI-PSRAMの異なる組み合わせをパッケージに内蔵します。また、MIPI DSIを含むディスプレイ機能、ベクターグラフィックスアクセラレーション、USB 2.0 High-Speedに対応し、I/O数の多いBGAパッケージを採用しています。高解像度UI、大きなグラフィックスアセット、SDIO接続の外部Wi-Fi、またはエッジAIやセンサーフュージョンに必要な処理・メモリー資源を求める設計では、SF32LB58xを評価候補にできます。
 
 [^1]: STAR-MC1はArm China製の構成可能なArmv8-M Mainline組み込みCPU IPです。対応するSF32デバイスにおいて、SiFliはこれをArm Cortex-M33 STAR-MC1アプリケーションプロセッサーとして文書化しています。Cortex-M33クラスのソフトウェアモデルにより、通常のデバイス固有の統合作業を前提として、既存のCortex-M33ファームウェア、ミドルウェア、RTOSポート、ツールを引き継ぐことができます。CU、SP、SEの各構成は主にキャッシュ、TCM、XIPU、TrustZone対応の点で異なり、Arm Custom Instructions/CDEおよびコプロセッサーインターフェースはオプション機能であり、対象のSF32部品ごとに確認が必要です。SiFliのドキュメントでは、文脈に応じて ***Arm Cortex-M33 STAR-MC1*** または ***Arm Cortex-M33*** のいずれかの表記が使われることがあります。
+
+<div id="_2"></div>
 
 ## 用途 { #applications }
 
@@ -38,6 +42,8 @@ SiFliの資料によると、SF32LB58xは3,744 KBのオンチップSRAMを搭載
 - SDIO経由の外部Wi-Fi
 - 大容量のフレームバッファ、オーディオ、グラフィックス、またはAIモデル用メモリー
 - 高いGPIO数、または複数の高速外部インターフェース
+
+<div id="_3"></div>
 
 ## 開発リソース { #development-resources }
 
@@ -65,7 +71,11 @@ SiFliの資料によると、SF32LB58xは3,744 KBのオンチップSRAMを搭載
 
 ---
 
+<div id="_4"></div>
+
 ## 機能と仕様 { #features-and-specs }
+
+<div id="_5"></div>
 
 ### 演算・メモリー { #compute-and-memory }
 
@@ -74,6 +84,8 @@ SiFliの資料によると、SF32LB58xは3,744 KBのオンチップSRAMを搭載
 - パッケージ内蔵NOR FlashはSKUに応じて合計1～8 MB
 - パッケージ内蔵OPI-PSRAMおよびHPI-PSRAMのオプション。HPI-PSRAMはSKUに応じて最大2 × 32 MB
 - 外部NORまたはSPI NAND FlashはMPI3/MPI4で接続し、SD NAND、eMMC、SDカード、外部Wi-FiはSDIOで接続します。利用できる組み合わせは、インターフェースの選択とピン割り当てによって異なります。
+
+<div id="ai"></div>
 
 ### グラフィックス・ディスプレイ・AI { #graphics-display-and-ai }
 
@@ -89,6 +101,8 @@ SiFliの資料によると、SF32LB58xは3,744 KBのオンチップSRAMを搭載
 - SPI、DSPI、QSPI（SPI接続の電子ペーパーを含む）、MCU8080、JDI、RGB/DPI（RGB888またはRGB565）、MIPI DSIディスプレイインターフェース
 - MIPI DSIとSPI、DSPI、またはQSPIを組み合わせ、異なる内容を表示する2画面構成に対応
 - ローカルなエッジAI、機械学習、センサーフュージョンワークロードに適合
+
+<div id="_6"></div>
 
 ### オーディオ・無線通信 { #audio-and-wireless-connectivity }
 
@@ -127,11 +141,15 @@ SiFliの資料によると、SF32LB58xは3,744 KBのオンチップSRAMを搭載
 - RTC、ウォッチドッグ、GPIOウェイク、PBRウェイク、PWM、I2C、SPI、汎用アナログインターフェース
 - 高密度設計向けのBGA256パッケージ
 
+<div id="_7"></div>
+
 ### 電源・パッケージ { #power-supply-and-package }
 
 - 電源電圧範囲：1.71～3.63 V
 - BGA256パッケージ、6.5 × 8.5 × 0.94 mm、0.4 mmピッチ
 - HDI PCBが必須。量産設計には6HDI-2積層構成が推奨されます
+
+<div id="_8"></div>
 
 ## 製品バリエーション { #family-variants }
 
@@ -161,6 +179,8 @@ SiFliの現行チップ型番ガイドには、BGA256のSF32LB58x注文コード
 - 外部ストレージとWi-Fiインターフェースの要件
 - BGA256、0.4 mmピッチのHDIレイアウトに対するPCB製造能力
 
+<div id="_9"></div>
+
 ## 設計・導入の進め方 { #integration-path }
 
 SF32LB58xの候補リストを検証済みの設計へと進めるには、以下の順序で進めてください。
@@ -174,7 +194,7 @@ SF32LB58xの候補リストを検証済みの設計へと進めるには、以�
 ## よくある質問 { #frequently-asked-questions }
 
 **SF32LB58xの主な仕様は？**
-SF32LB58xはアプリケーションCPU（2× Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33 @48/96 MHz、ユーザーによるプログラミングが可能）を備えています。内蔵SRAMは3.7 MBで、Bluetoothはデュアルモード（Classic Bluetooth + BLE）です。グラフィックスはePicasso 2.0 + Vivante GCNanoUltraV (vector)、パッケージはBGA256（8.5 × 6.5 mm）、USBは2.0 HSです。
+SF32LB58xはアプリケーションCPU（2× Cortex-M33 @240 MHz）と、最大96 MHzに調整可能なユーザープログラム対応の低消費電力Cortex-M33を備えています。別に示される48 MHzはCoreMarkの電力測定点であり、2つ目の規定動作周波数であることは資料から確認できません。内蔵SRAMは3.7 MBで、Bluetoothはデュアルモード（Classic Bluetooth + BLE）です。グラフィックスはePicasso 2.0 + Vivante GCNanoUltraV (vector)、パッケージはBGA256（8.5 × 6.5 mm）、USBは2.0 HSです。
 
 **SF32LB58xが対応するディスプレイインターフェースは？**
 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPIに対応しています。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
@@ -192,15 +212,23 @@ RGB565カラーでは最大1280 × 800、RGB888カラーでは最大1280 × 720�
 まず[SF32LB58xハードウェア設計ガイド](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md)で回路図、電源、クロック/RF、PCBレイアウトの指針を確認し、基板リリース前に回路図とレイアウトのチェックリストを使用してください。
 <!-- uf-faq:end -->
 
+<div id="_10"></div>
+
 ## 関連製品 { #related-products }
+
+<div id="_11"></div>
 
 ### モジュール { #module }
 
 [SF32LB58-MOD](../modules/SF32LB58-MOD.md) は、SF32LB586VDD36チップ、そのRFマッチングネットワーク、パッケージ内HPI-PSRAMとストレージオプションを、すぐに組み込めるモジュールにまとめています。58シリーズの機能を必要としながらも、ハードウェア開発の早い段階でRF、BGA、メモリーレイアウトのリスクを軽減したいプロジェクトに適しています。
 
+<div id="_12"></div>
+
 ### 開発キット { #development-kits }
 
 [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) は、電源ツリー、ディスプレイ、ストレージ、オーディオ、RF、USB、SDIOの設計判断の出発点です。
+
+<div id="_13"></div>
 
 ### リファレンス製品 { #reference-products }
 

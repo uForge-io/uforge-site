@@ -17,6 +17,16 @@ tags:
 
 선택한 QFN 또는 BGA 패키지의 도면과 랜드 패턴 요구 사항을 예정된 제조업체의 조립 능력과 대조하십시오. BGA 패키지는 볼 이스케이프, 비아 전략, 솔더 마스크 규칙, 제작 한계를 일찍 확인해야 합니다.
 
+SiFli 자료에는 BGA 및 QFN 패키지별 팬아웃 예시가 있습니다. 참고용으로만 사용하십시오. 실제 브레이크아웃은 선택한 패키지와 제조업체의 제조 규칙에 따라 달라지므로 설계별로 확인해야 합니다.
+
+![BGA 패키지 팬아웃 예시](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA-FANOUT-PCB.png)
+
+<div align="center"><em>그림 6.1-1: BGA 패키지 팬아웃 참고도</em></div>
+
+![QFN 패키지 팬아웃 예시](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/assets/55x/SF32LB55x-QFN-FANOUT-PCB.png)
+
+<div align="center"><em>그림 6.1-2: QFN 패키지 팬아웃 참고도</em></div>
+
 #### 6.1.1. 스택업 및 제작 참고 자료 { #611-stack-up-and-fabrication }
 
 SF32LB55x 시리즈는 기판 한쪽 또는 양쪽 면에 부품을 실장할 수 있습니다.

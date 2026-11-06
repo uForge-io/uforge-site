@@ -13,7 +13,7 @@ SF32LB52x et SF32LB56x associent chacun un cœur applicatif Cortex-M33 à 240 MH
 
 ### Plus de capacités graphiques { #more-graphics-capability }
 
-Les graphismes passent à ePicasso 3.0 avec décompression matérielle eZip 3.0, contre ePicasso 2.0 Lite sur SF32LB52x et ePicasso 2.0 sur SF32LB56x. ePicasso 3.0 accélère en temps réel la rotation, la mise à l'échelle, la projection, l'effet miroir et le mélange alpha, et eZip 3.0 décompresse les ressources eZip, JPEG et MJPEG sans décodage gourmand en CPU. Autour des cœurs, la famille ajoute une entrée caméra DCMI, jusqu'à 48 Mo de PSRAM et 32 Mo de NOR Flash intégrés au boîtier sur certaines références, deux ADC audio, deux interfaces CAN et PTM, une machine de tâches parallèles qui décharge les CPU des tâches périphériques soumises à des contraintes temporelles.
+Les graphismes passent à ePicasso 3.0 avec décompression matérielle eZip 3.0, contre ePicasso 2.0 Lite sur SF32LB52x et ePicasso 2.0 sur SF32LB56x. ePicasso 3.0 accélère en temps réel la rotation, la mise à l'échelle, la projection, l'effet miroir et le mélange alpha, et eZip 3.0 décompresse les ressources eZip, JPEG et MJPEG sans décodage gourmand en CPU. Autour des cœurs, la famille ajoute une entrée caméra DCMI, jusqu'à 48 MB de PSRAM et 32 MB de NOR Flash intégrés au boîtier sur certaines références, deux ADC audio, deux interfaces CAN et PTM, une machine de tâches parallèles qui décharge les CPU des tâches périphériques soumises à des contraintes temporelles.
 
 ### Une structure de coûts compétitive { #competitive-cost-structure }
 

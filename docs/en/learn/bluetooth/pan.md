@@ -160,7 +160,7 @@ For a consumer product, publish supported **phone model + OS version + carrier/r
 
 ## PAN-Based OTA Delivery { #pan-based-ota-delivery }
 
-The PAN example ships with OTA enabled by default: `pan_cmd ota_pan` downloads and installs a firmware image over the same Bluetooth PAN link already used for network traffic, using the DFU_PAN OTA path documented alongside SiFli-SDK's firmware upgrade service. This is a good fit for products that already rely on PAN for data and don't want a second OTA transport — see [OTA and DFU](../../develop/firmware-topics/ota-dfu.md) for how PAN compares to BLE and other update transports, and plan rollback/recovery behavior the same way regardless of transport.
+In `example/bt/pan`, `pan_cmd ota_pan` downloads the firmware image from the URL configured in `main.c` and installs it; the README points to `peripheral_with_ota`. Do not conflate this with the separate `example/bt/pan_ota` DFU_PAN example, which uses `check_dynamic_cmd` and `reset_to_dload_cmd`. These are distinct update paths; verify the target SDK revision and plan recovery for the path you ship. See [OTA and DFU](../../develop/firmware-topics/ota-dfu.md) for how PAN compares with BLE and other update transports.
 
 The README identifies a separate build failure when a selected target has no suitable OTA `ptab.json`. Its screenshots show disabling the DFU subproject and middleware firmware-update support to test the non-OTA example. That diagnostic removes OTA; it is not a way to ship a product that requires updates. Supply and validate the correct partition layout and update configuration before enabling the OTA path.
 

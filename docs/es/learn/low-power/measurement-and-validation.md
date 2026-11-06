@@ -6,9 +6,13 @@ tags:
   - Validación
 ---
 
+<div id="_1"></div>
+
 # Medición y validación del consumo energético { #power-measurement-and-validation }
 
 Una estimación de autonomía solo es fiable cuando las hipótesis del modelo concuerdan con las mediciones del hardware. Consulte esta página junto con el [resumen del diseño de bajo consumo](overview.md) y el ejemplo de [análisis del consumo energético de un reloj inteligente](smartwatch-power-profiling.md). El proceso empieza midiendo cada componente por separado, valida escenarios completos del firmware, contrasta el modelo con el uso diario y, por último, concentra la optimización en el consumo más significativo que se haya medido.
+
+<div id="_2"></div>
 
 ## Mida la energía, no solo la corriente { #measure-energy-not-current-alone }
 
@@ -26,6 +30,8 @@ En estas fórmulas, `t` se expresa en segundos. Dividir por `3600` convierte los
 La integral de energía se expresa en Wh; multiplique el resultado por 1000 antes de sumarlo a un perfil expresado en mWh. Mantenga separadas la carga (mAh) y la energía (mWh): no son magnitudes intercambiables.
 
 Si la tensión de alimentación es estable, registre el valor de `V_DUT` medido durante la captura y úselo junto con la traza de corriente. Si cambia durante la prueba, mídala con la misma base de tiempo que la corriente o registre suficientes muestras sincronizadas para calcular una potencia media fiable. Comparar solo los mAh puede ocultar diferencias reales de energía cuando varían entre capturas la tensión de alimentación, el punto de funcionamiento del regulador o el estado de la batería.
+
+<div id="_3"></div>
 
 ## Establezca las condiciones de referencia { #set-up-the-measurement-baseline }
 
@@ -52,6 +58,8 @@ Antes de conectar el DUT, compruebe que el modo seleccionado del PPK2 admite su 
 
 </div>
 
+<div id="_4"></div>
+
 ## Caracterice los componentes antes de probar el sistema completo { #characterize-each-component-before-full-system-tests }
 
 Antes de basarse en una traza de la placa completa, mida cada componente en una línea de alimentación aislable o con un montaje de prueba. No se trata de obtener otro valor de catálogo, sino de identificar qué modos de funcionamiento, cargas y ajustes del firmware determinan el consumo del componente en el producto real.
@@ -73,6 +81,8 @@ Antes de basarse en una traza de la placa completa, mida cada componente en una 
 </div>
 
 Para evaluar el consumo energético del producto completo, mida en la entrada de la batería. Las mediciones en cada línea de alimentación siguen siendo esenciales para aislar las causas, pero conviértalas al lado de la batería usando la eficiencia y la corriente en reposo medidas del regulador antes de incorporarlas al modelo de autonomía. No considere la suma de las corrientes de las distintas líneas como una medición en la entrada de la batería.
+
+<div id="_5"></div>
 
 ## Verifique los estados de bajo consumo gestionados por el controlador { #verify-driver-controlled-power-states }
 
@@ -96,6 +106,8 @@ Un componente solo alcanza el estado de bajo consumo especificado si su controla
 
 Que los niveles lógicos sean válidos no significa que no haya corriente de fuga. Las resistencias internas de pull-up o pull-down, definiciones de pull-up/pull-down contradictorias, estados predeterminados tras un reinicio, rutas ESD y resistencias pull-up del bus pueden crear fugas o una ruta de alimentación inversa, aunque ambos dispositivos parezcan presentar niveles lógicos correctos. Mida la corriente de la interfaz con ambos lados alimentados, con uno de ellos sin alimentación y durante la transición entre ambos estados. Si el resultado no es el esperado, determine primero si se debe a la configuración o secuencia del controlador o a una fuga en la placa, antes de modificar la tabla del perfil de consumo.
 
+<div id="_6"></div>
+
 ## Valide los escenarios de firmware { #validate-firmware-scenarios }
 
 Una vez caracterizado cada componente, mida los escenarios completos de firmware que experimentará el usuario. Cada escenario combina la actividad de varios componentes, los estados de PM, las activaciones y sus tiempos. En un reloj inteligente, empiece por los mismos escenarios del modelo de [análisis del consumo energético de un reloj inteligente](smartwatch-power-profiling.md): espera con la pantalla apagada, notificaciones, avisos de llamada entrante, encendido de pantalla al levantar la muñeca, mediciones automáticas de frecuencia cardíaca, mediciones manuales de SpO2, registro de ejercicio, alarmas, seguimiento del sueño y sincronización con la aplicación. Si el producto habilita NFC, llamadas Bluetooth o AOD, añádalos como escenarios independientes.
@@ -115,6 +127,8 @@ Una vez caracterizado cada componente, mida los escenarios completos de firmware
 </div>
 
 Use marcadores GPIO controlados por el firmware para dividir la forma de onda en fases. Por ejemplo, una medición de activación al levantar la muñeca puede separar el reconocimiento del gesto, la activación de la MCU, el encendido de la pantalla, el renderizado, el tiempo que permanece encendida, la atenuación o el apagado y el regreso a la suspensión. Así, una corriente media se desglosa en operaciones concretas que los equipos de firmware y hardware pueden optimizar.
+
+<div id="_7"></div>
 
 ## Contraste el modelo con el uso diario { #reconcile-the-daily-use-profile }
 
@@ -154,6 +168,8 @@ Si las mediciones no concuerdan con el modelo, no modifique la tabla solo para f
 
 </div>
 
+<div id="_8"></div>
+
 ## Optimice los mayores consumos confirmados { #optimize-the-largest-verified-contributors }
 
 Use el perfil ya contrastado para priorizar el trabajo. Distinga dos preguntas: ¿qué componente consume más energía y qué escenario aporta más al consumo total del producto? La respuesta puede ser distinta. La pantalla podría ser el componente de mayor consumo, mientras que la frecuencia con que se enciende al levantar la muñeca podría hacer que ese escenario sea el dominante.
@@ -162,6 +178,8 @@ Use el perfil ya contrastado para priorizar el trabajo. Distinga dos preguntas: 
 2. **Modifique el hardware cuando el límite provenga del componente.** Considere sensores, memorias, reguladores, códecs, amplificadores, pantallas o soluciones hápticas de menor consumo. Compare la energía medida en el modo de uso previsto, no un valor destacado de corriente de la hoja de datos correspondiente a otro estado.
 3. **Vuelva a medir el componente y el escenario modificados.** Un reemplazo puede cambiar cuál es el principal consumidor, alterar los tiempos de activación o exigir otro punto de funcionamiento del regulador.
 4. **Actualice el perfil y repita la comparación de un día completo.** El cambio solo se valida si mejoran tanto la traza del escenario como el presupuesto energético del producto.
+
+<div id="_9"></div>
 
 ## Evidencias antes de la liberación { #release-evidence }
 

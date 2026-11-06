@@ -8,7 +8,9 @@ tags:
 
 # SF32LB58x
 
-## 개요
+<div id="_1"></div>
+
+## 개요 { #overview }
 
 SF32LB58x 시리즈는 SF32LB5x 제품군의 플래그십입니다. 더 큰 애플리케이션 프로세서급 플랫폼으로 전환하지 않고도 고급 그래픽, 대용량 메모리, 듀얼 모드 Bluetooth, 풍부한 오디오·디스플레이 I/O, 높은 GPIO 밀도가 필요한 배터리 구동 AIoT 제품을 대상으로 합니다.
 
@@ -18,7 +20,9 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 
 [^1]: STAR-MC1은 Arm China의 구성 가능한 Armv8-M Mainline 임베디드 CPU IP입니다. 호환되는 SF32 디바이스에서 SiFli는 이를 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서로 문서화합니다. Cortex-M33급 소프트웨어 모델은 기존 Cortex-M33용 펌웨어, 미들웨어, RTOS 포트, 개발 도구를 활용하는 데 도움이 됩니다. 다만 실제 디바이스에 맞춘 통합 작업은 여전히 필요합니다. CU, SP, SE 구성은 주로 캐시, TCM, XIPU, TrustZone 기능에서 차이가 나며, Arm Custom Instructions/CDE와 코프로세서 인터페이스는 선택 기능이므로 해당 SF32 부품에서 지원되는지 반드시 확인해야 합니다. SiFli 문서는 문맥에 따라 ***Arm Cortex-M33 STAR-MC1*** 또는 ***Arm Cortex-M33***이라는 표기를 사용할 수 있습니다.
 
-## 애플리케이션
+<div id="_2"></div>
+
+## 애플리케이션 { #applications }
 
 **SF32LB58x는** 더 큰 프레임버퍼, 더 풍부한 디스플레이, 더 많은 메모리, 더 고밀도의 고속 I/O가 필요한 프리미엄 연결형 제품에 **권장되며**, 대표적인 예는 다음과 같습니다.
 
@@ -39,7 +43,9 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 - 대용량 프레임버퍼, 오디오, 그래픽 또는 AI 모델 메모리
 - 많은 GPIO 수 또는 여러 개의 고속 외부 인터페이스
 
-## 개발 리소스
+<div id="_3"></div>
+
+## 개발 리소스 { #development-resources }
 
 [Product Brief]: https://downloads.sifli.com/docs/Product%20Brief/SF32LB58x/PB5801-SF32LB58x-Product%20Brief%20V0p72.pdf
 [Datasheet]: https://downloads.sifli.com/docs/Datasheet/sf32lb58/DS5801-SF32LB58x-Datasheet%20V1p8p6.pdf
@@ -65,9 +71,13 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 
 ---
 
-## 기능 및 사양
+<div id="_4"></div>
 
-### 연산 및 메모리
+## 기능 및 사양 { #features-and-specs }
+
+<div id="_5"></div>
+
+### 연산 및 메모리 { #compute-and-memory }
 
 - Arm Cortex-M33 STAR-MC1 코어 3개: HCPU와 ACPU는 최대 240 MHz, LCPU는 최대 96 MHz
 - 3,744 KB 온칩 SRAM
@@ -75,7 +85,9 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 - 코패키지 OPI-PSRAM 및 HPI-PSRAM 옵션. HPI-PSRAM은 SKU에 따라 최대 2 × 32 MB까지 사용 가능
 - MPI3/MPI4를 통한 외부 NOR 또는 SPI NAND 플래시, SDIO를 통한 SD NAND, eMMC, SD 카드 또는 외부 Wi-Fi. 사용 가능한 조합은 인터페이스 선택과 핀 할당에 따라 달라짐
 
-### 그래픽, 디스플레이, AI
+<div id="ai"></div>
+
+### 그래픽, 디스플레이, AI { #graphics-display-and-ai }
 
 최대 해상도와 패널 인터페이스는 [디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)에서 확인하십시오.
 
@@ -90,7 +102,9 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 - MIPI DSI와 SPI, DSPI 또는 QSPI를 함께 사용하여 서로 다른 콘텐츠를 표시하는 디스플레이 2개 지원
 - 로컬 엣지 AI, 머신러닝, 센서 퓨전 워크로드에 적합
 
-### 오디오 및 무선 연결
+<div id="_6"></div>
+
+### 오디오 및 무선 연결 { #audio-and-wireless-connectivity }
 
 - 듀얼 모드 Bluetooth 5.3
 - Bluetooth Classic 및 Bluetooth LE 지원
@@ -127,13 +141,17 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 - RTC, 워치독, GPIO 웨이크업, PBR 웨이크업, PWM, I2C, SPI, 범용 아날로그 인터페이스
 - 고밀도 설계를 위한 BGA256 패키지
 
-### 전원 공급 및 패키지
+<div id="_7"></div>
+
+### 전원 공급 및 패키지 { #power-supply-and-package }
 
 - 전원 공급 범위: 1.71 V~3.63 V
 - BGA256 패키지, 6.5 × 8.5 × 0.94 mm, 피치 0.4 mm
 - HDI PCB 필수. 양산 설계에는 6HDI-2 스택업을 권장
 
-## 제품군 변형
+<div id="_8"></div>
+
+## 제품군 변형 { #family-variants }
 
 현재 SiFli 칩 모델 가이드에는 SF32LB58x 주문 코드 6개가 나열되어 있으며, 모두 BGA256입니다. 메모리 표에서는 MPI5 부팅 SiP와 MPI1 및 MPI2 메모리를 구분합니다.
 
@@ -161,7 +179,9 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 - 외부 스토리지 및 Wi-Fi 인터페이스 요구 사항
 - BGA256, 피치 0.4 mm HDI 레이아웃에 대한 PCB 제조 역량
 
-## 통합 경로
+<div id="_9"></div>
+
+## 통합 경로 { #integration-path }
 
 SF32LB58x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따르십시오.
 
@@ -174,7 +194,7 @@ SF32LB58x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 ## 자주 묻는 질문 { #frequently-asked-questions }
 
 **SF32LB58x의 주요 사양은 무엇입니까?**
-SF32LB58x는 애플리케이션 CPU(2× Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @48/96 MHz, 사용자 프로그래밍 가능)를 갖추고 있으며, 내장 SRAM은 3.7 MB입니다. Bluetooth 모드는 듀얼 모드(Classic Bluetooth + BLE)입니다. 그래픽: ePicasso 2.0 + Vivante GCNanoUltraV (벡터 그래픽). 패키지는 BGA256이며, 크기는 8.5 × 6.5 mm입니다. USB는 2.0 HS를 지원합니다.
+SF32LB58x는 애플리케이션 처리용 2× Cortex-M33 @240 MHz와 사용자가 프로그래밍할 수 있고 최대 96 MHz로 조정 가능한 저전력 Cortex-M33 코어를 제공합니다. 별도로 제시된 48 MHz는 CoreMark 전력 측정 지점이며, 확인 가능한 자료에서는 두 번째로 규정된 동작 주파수로 입증되지 않았습니다. 내장 SRAM은 3.7 MB이고 Bluetooth는 듀얼 모드(Classic Bluetooth + BLE)입니다. 그래픽: ePicasso 2.0 + Vivante GCNanoUltraV (벡터 그래픽). 패키지는 BGA256이며, 크기는 8.5 × 6.5 mm입니다. USB는 2.0 HS를 지원합니다.
 
 **SF32LB58x는 어떤 디스플레이 인터페이스를 지원합니까?**
 지원하는 인터페이스는 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI입니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -192,16 +212,24 @@ RGB565 색상에서는 최대 1280 × 800, RGB888 색상에서는 최대 1280 ×
 먼저 [SF32LB58x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하십시오.
 <!-- uf-faq:end -->
 
-## 관련 제품
+<div id="_10"></div>
 
-### 모듈
+## 관련 제품 { #related-products }
+
+<div id="_11"></div>
+
+### 모듈 { #module }
 
 [SF32LB58-MOD](../modules/SF32LB58-MOD.md)는 SF32LB586VDD36 칩, RF 매칭 회로, 패키지 내장 HPI-PSRAM 및 스토리지 옵션을 바로 통합할 수 있는 모듈로 패키징한 제품입니다. 58 시리즈의 기능이 필요하면서 하드웨어 개발 초기에 RF, BGA, 메모리 레이아웃의 위험을 줄이려는 프로젝트에 사용하십시오.
 
-### 개발 키트
+<div id="_12"></div>
+
+### 개발 키트 { #development-kits }
 
 [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md)는 전원 트리, 디스플레이, 스토리지, 오디오, RF, USB, SDIO 설계 결정의 출발점입니다.
 
-### 레퍼런스 제품
+<div id="_13"></div>
+
+### 레퍼런스 제품 { #reference-products }
 
 일반적인 SF32LB58x 최종 제품으로는 프리미엄 워치 플랫폼, 고해상도 웨어러블 HMI, 스마트 대시보드, 휴대용 연결형 단말기, Bluetooth, 디스플레이, 오디오, 스토리지, 로컬 AI 워크로드를 결합한 디바이스가 있습니다.

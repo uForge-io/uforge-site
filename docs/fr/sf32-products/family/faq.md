@@ -21,7 +21,7 @@ Commencez par ces critères de sélection essentiels :
 - **Alimentation :** batterie ou alimentation régulée, plage de tension de fonctionnement et niveaux d’E/S.
 - **Fonctions audio :** besoins en ADC/DAC, I2S et PDM, y compris les canaux de microphone.
 
-Comparez des références précises plutôt que de vous fier au seul numéro de famille : un numéro supérieur n’est pas forcément mieux adapté. Chacun de ces critères figure dans le [Sélecteur de produits](../product-selector.md) ; utilisez-les pour présélectionner des références précises.
+Comparez des références précises plutôt que de vous fier au seul numéro de famille : un numéro supérieur n’est pas forcément mieux adapté. Le [Sélecteur de produits](../product-selector.md) propose notamment des filtres pour le boîtier, l’alimentation, l’affichage, les GPIO et l’audio, mais aucun filtre actuel pour le mode Bluetooth. Réduisez la liste avec les filtres disponibles, puis vérifiez la prise en charge de BLE/Classic Bluetooth sur la page de la référence exacte.
 
 [Comparaison des familles](SF32_family.md) · [Sélecteur de produits](../product-selector.md)
 
@@ -39,7 +39,7 @@ Commencez par la carte LCD de votre famille, conçue pour l’évaluation de l�
 
 ### Comment lire les références des puces et modules ? { #reading-part-numbers }
 
-Lisez le code de commande complet, pas seulement le préfixe de famille. Les codes des puces distinguent composant, boîtier et mémoire ; les suffixes des modules décrivent le stockage et la mémoire installés. Consultez les exemples et exceptions historiques du guide, puis confirmez la configuration commandable auprès du fournisseur.
+Lisez le code de commande complet, pas seulement le préfixe de famille. Les codes des puces distinguent composant, boîtier et mémoire ; les suffixes des modules décrivent le stockage et la mémoire installés. Consultez les exemples et exceptions historiques du guide, puis confirmez auprès du fournisseur la configuration disponible à la commande.
 
 [Nomenclature SF32](SF32_namingrule.md)
 

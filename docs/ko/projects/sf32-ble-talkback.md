@@ -2,9 +2,9 @@
 icon: lucide/radio
 description: "SF32LB52-DevKit-ULP와 OpenSiFli Talkback으로 멀티 디바이스 BLE 푸시투토크를 재현하고 평가하기 위한 제품 개발 경로입니다."
 tags:
-    - Projects
+    - 프로젝트
     - Bluetooth
-    - Audio
+    - 오디오
     - Talkback
 ---
 

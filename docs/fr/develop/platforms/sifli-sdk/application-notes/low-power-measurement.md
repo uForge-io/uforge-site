@@ -111,7 +111,7 @@ Pour le travail actif, utilisez `rt_pm_run_enter()` :
 
 <div align="center" markdown>
 
-<em>Tableau : Sélections d'horloge HCPU en mode d'exécution</em>
+<em>Tableau : Sélections d'horloge HCPU en mode Run pour SF32LB52x (vérifiez leur disponibilité dans le guide SDK de la famille cible)</em>
 
 | Mode | Horloge HCPU |
 |---|---:|

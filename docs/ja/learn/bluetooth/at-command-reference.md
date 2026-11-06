@@ -33,6 +33,8 @@ Bluetooth ATコマンドモジュールページは、このV1.2.1リファレ�
 
 </div>
 
+<div id="_1"></div>
+
 ## 概要 { #overview }
 
 SF32LB57のデュアルモードBluetoothモジュールは、BLEとClassic Bluetooth（BR/EDR）の両方を扱うUARTベースのATコマンドインターフェースをホストに提供します。ホストはATコマンドでデバイスの設定や接続を管理し、データを送受信できるほか、モジュールからの非同期ステータス通知も受信できます。
@@ -63,12 +65,16 @@ SF32LB57のデュアルモードBluetoothモジュールは、BLEとClassic Blue
 
 ## コマンド形式 { #command-format }
 
+<div id="_2"></div>
+
 ### 構文定義 { #syntax-definition }
 
 ATコマンドはASCIIテキストで送信し、キャリッジリターン`\r`（0x0D）で終端します。コマンドのプレフィックスは`AT+`（AT形式）または`AT>`（PDU形式）です。SF32LB57のATポートはUSART1で、ハードウェアフロー制御なしの8N1形式を使用します。デフォルトのボーレートは460800 bps、1フレームの上限は512バイトです。
 
 !!! warning "PDUフレーム長の上限を確認してください"
     原文はATフレームの上限を512バイトとする一方、PDUのbodyを最大508バイトとしています。図示された8バイトのコマンドフレーミングを加えると、UART上では516バイトになります。フレーミングの各バイトを受信バッファーの上限にどう算入するかは説明されていません。ホスト側のバッファー容量を決める前や最大body長を使用する前に、対象ファームウェアが受け付けるPDUフレームの最大長を確認してください。原文のいずれの値も、推測した上限で置き換えないでください。
+
+<div id="at"></div>
 
 ### AT形式コマンド { #at-format-commands }
 
@@ -95,6 +101,8 @@ ATコマンドはASCIIテキストで送信し、キャリッジリターン`\r`
 | クエリの戻り値 | `\r\n+<CMD>:<value>\r\n\r\nOK\r\n` |
 
 </div>
+
+<div id="pdu"></div>
 
 ### PDU形式コマンドのフレーム構成 { #pdu-format-command-framing }
 
@@ -130,7 +138,11 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 以下のコマンドは機能別に分類されています。分類はBluetooth ATコマンドモジュールページの一覧と同じです。
 
+<div id="_3"></div>
+
 ### システムとデバイス { #system-and-device }
+
+<div id="_4"></div>
 
 #### ファームウェアバージョンの取得 { #get-firmware-version }
 
@@ -147,6 +159,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_5"></div>
+
 #### デバイス名の照会 { #query-device-name }
 
 <div align="center"><em>表: デバイス名の照会</em></div>
@@ -161,6 +175,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | 現在設定されているデバイス名を返します（MACサフィックスは含みません。サフィックスが反映されるのはアドバタイズ名のみです）。 |
 
 </div>
+
+<div id="_6"></div>
 
 #### デバイス名の設定 { #set-device-name }
 
@@ -177,6 +193,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="mac"></div>
+
 #### デバイス名へのMACサフィックス付加設定の照会 { #query-mac-name-suffix-switch }
 
 <div align="center"><em>表: デバイス名へのMACサフィックス付加設定の照会</em></div>
@@ -191,6 +209,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | サフィックス付加設定の状態を返します。0 = オフ、1 = オン。 |
 
 </div>
+
+<div id="mac_1"></div>
 
 #### デバイス名へのMACサフィックス付加設定の変更 { #set-mac-name-suffix-switch }
 
@@ -207,6 +227,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="ieee-1284-id"></div>
+
 #### IEEE 1284デバイスIDの照会 { #query-ieee-1284-device-id }
 
 <div align="center"><em>表: IEEE 1284デバイスIDの照会</em></div>
@@ -221,6 +243,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | 現在設定されているIEEE 1284デバイスID文字列を返す。設定されていない場合は空。 |
 
 </div>
+
+<div id="ieee-1284-id_1"></div>
 
 #### IEEE 1284デバイスIDの設定 { #set-ieee-1284-device-id }
 
@@ -237,6 +261,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_7"></div>
+
 #### デバイスのリセット { #reset-device }
 
 <div align="center"><em>表: デバイスのリセット</em></div>
@@ -252,6 +278,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_8"></div>
+
 #### 工場出荷時リセット { #factory-reset }
 
 <div align="center"><em>表: 工場出荷時リセット</em></div>
@@ -266,6 +294,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | AT設定を初期化し、カスタムGATTサービス設定、BLEボンディング情報、Classic Bluetooth（BR/EDR）のペアリング情報、BLEの静的ランダムアドレスを消去してから`OK`を返し、リセットします。リセット後、ホストは`IM_READY`を待つ必要があります。 |
 
 </div>
+
+<div id="_9"></div>
 
 #### 設定リセット { #configuration-reset }
 
@@ -297,6 +327,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_10"></div>
+
 #### 周波数オフセット校正値の照会 { #query-frequency-offset-calibration }
 
 <div align="center"><em>表: 周波数オフセット校正値の照会</em></div>
@@ -311,6 +343,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | AT設定に記録されている値を返します。実際に有効な値は`FACTORY_CFG_ID_CRYSTAL`パーティションに保存されています。 |
 
 </div>
+
+<div id="_11"></div>
 
 #### 周波数オフセット校正値の設定 { #set-frequency-offset-calibration }
 
@@ -327,6 +361,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="dut"></div>
+
 #### DUTテストモードへの移行 { #enter-dut-test-mode }
 
 <div align="center"><em>表: DUTテストモードへの移行</em></div>
@@ -342,7 +378,11 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_12"></div>
+
 ### アドレスとアイデンティティ { #address-and-identity }
+
+<div id="bluetooth"></div>
 
 #### Bluetoothアドレスの照会 { #query-bluetooth-address }
 
@@ -359,6 +399,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="bluetooth_1"></div>
+
 #### Bluetoothアドレスの設定 { #set-bluetooth-address }
 
 <div align="center"><em>表: Bluetoothアドレスの設定</em></div>
@@ -373,6 +415,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | アドレスは設定に書き込まれ保存される。リセット後に有効になる。工場出荷時のデフォルトはすべてゼロであり、これはアドレスがチップUIDから自動生成されることを意味する。 |
 
 </div>
+
+<div id="ble"></div>
 
 #### BLEアドレスの照会 { #query-ble-address }
 
@@ -389,6 +433,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="ble_1"></div>
+
 #### BLEアドレスの設定 { #set-ble-address }
 
 <div align="center"><em>表: BLEアドレスの設定</em></div>
@@ -403,6 +449,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | このコマンドはBLEアドレスの直接設定を受け付けない — 呼び出すと常に`ERROR`を返す。BLE静的ランダムアドレスは`AT+RANDOMADDR=1`を通じて生成される。 |
 
 </div>
+
+<div id="ble_2"></div>
 
 #### BLEランダムアドレスの使用状態を照会する { #query-ble-random-address-switch }
 
@@ -419,6 +467,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="ble_3"></div>
+
 #### BLEランダムアドレスの使用を設定する { #set-ble-random-address-switch }
 
 <div align="center"><em>表: BLEランダムアドレスの使用設定</em></div>
@@ -433,6 +483,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | 設定を更新します。1に設定してパブリックアドレスの読み取りに失敗した場合、設定値は0に戻り、`ERROR`を返します。アドレスの変更はNVDSに書き込まれ、リセット後に有効になります。`AT+RANDOMADDR=1`を再実行すると、変更されていないパブリックアドレスから同じランダムアドレスが再生成されます。 |
 
 </div>
+
+<div id="class-of-device"></div>
 
 #### Class of Deviceの照会 { #query-class-of-device }
 
@@ -449,6 +501,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="class-of-device_1"></div>
+
 #### Class of Deviceの設定 { #set-class-of-device }
 
 <div align="center"><em>表: Class of Deviceの設定</em></div>
@@ -464,7 +518,11 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_13"></div>
+
 ### 動作モードと可視性 { #operating-mode-and-visibility }
+
+<div id="_14"></div>
 
 #### 発見可能状態の照会 { #query-discoverable-state }
 
@@ -481,6 +539,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_15"></div>
+
 #### 発見可能状態の設定 { #set-discoverable-state }
 
 <div align="center"><em>表: 発見可能状態の設定</em></div>
@@ -495,6 +555,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | 現在の動作モードに従って動作する。BLEモード（`BTMODE=1`）ではBLEアドバタイズをオン/オフする。BTモード（`BTMODE=2`）ではインクワイアリスキャンとページスキャンをオン/オフする。デュアルモード（`BTMODE=0`）ではBLEアドバタイズ、インクワイアリスキャン、ページスキャンをまとめて制御する。 |
 
 </div>
+
+<div id="gatt"></div>
 
 #### GATTアドバタイズ状態の照会 { #query-gatt-advertising-state }
 
@@ -511,6 +573,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="gatt_1"></div>
+
 #### GATTアドバタイズの設定 { #set-gatt-advertising }
 
 <div align="center"><em>表: GATTアドバタイズの設定</em></div>
@@ -525,6 +589,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | BLEアドバタイズの開始と停止を直接制御する。動作モードがBT専用（`BTMODE=2`）の場合は利用不可。 |
 
 </div>
+
+<div id="spp"></div>
 
 #### SPP発見可能状態の照会 { #query-spp-discoverable-state }
 
@@ -541,6 +607,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="spp_1"></div>
+
 #### SPP発見可能状態の設定 { #set-spp-discoverable-state }
 
 <div align="center"><em>表: SPP発見可能状態の設定</em></div>
@@ -555,6 +623,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | `AT+BTMODE`が1（BLE専用）の場合は`ERROR`を返す。インクワイアリスキャンビットのみを変更し、ページスキャンビットは変更しない。 |
 
 </div>
+
+<div id="spp_2"></div>
 
 #### SPP接続可能状態の照会 { #query-spp-connectable-state }
 
@@ -571,6 +641,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="spp_3"></div>
+
 #### SPP接続可能状態の設定 { #set-spp-connectable-state }
 
 <div align="center"><em>表: SPP接続可能状態の設定</em></div>
@@ -585,6 +657,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | `AT+BTMODE`が1（BLE専用）の場合は`ERROR`を返す。ページスキャンビットのみを変更し、インクワイアリスキャンビットは変更しない。 |
 
 </div>
+
+<div id="bluetooth_2"></div>
 
 #### Bluetooth動作モードの照会 { #query-bluetooth-operating-mode }
 
@@ -601,6 +675,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="bluetooth_3"></div>
+
 #### Bluetooth動作モードの設定 { #set-bluetooth-operating-mode }
 
 <div align="center"><em>表: Bluetooth動作モードの設定</em></div>
@@ -615,6 +691,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | 動作モードを変更します。変更はリセット後に有効になります。 |
 
 </div>
+
+<div id="_16"></div>
 
 #### コマンドモードの照会 { #query-command-mode }
 
@@ -631,6 +709,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_17"></div>
+
 #### コマンドモードの設定 { #set-command-mode }
 
 <div align="center"><em>表: コマンドモードの設定</em></div>
@@ -646,7 +726,11 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_18"></div>
+
 ### ペアリングとセキュリティ { #pairing-and-security }
+
+<div id="_19"></div>
 
 #### ペアリング情報のクリア { #clear-pairing-information }
 
@@ -663,7 +747,11 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_20"></div>
+
 ### シリアルポートとイベント { #serial-port-and-events }
+
+<div id="_21"></div>
 
 #### シリアルボーレートの照会 { #query-serial-baud-rate }
 
@@ -680,6 +768,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_22"></div>
+
 #### シリアルボーレートの設定 { #set-serial-baud-rate }
 
 <div align="center"><em>表: シリアルボーレートの設定</em></div>
@@ -694,6 +784,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | ボーレートの設定で構成が更新され、デバイスがリセットされます。新しいボーレートはリセット後に有効になります。 |
 
 </div>
+
+<div id="_23"></div>
 
 #### イベント通知の設定を照会する { #query-event-reporting-switch }
 
@@ -710,6 +802,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_24"></div>
+
 #### イベント通知を設定する { #set-event-reporting-switch }
 
 <div align="center"><em>表: イベント通知の設定</em></div>
@@ -724,6 +818,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | 設定を更新します。1に設定すると、接続確立、切断、利用可能状態の各通知はシリアルポートに出力されません。 |
 
 </div>
+
+<div id="_25"></div>
 
 #### パススルーアイドル切断時間の照会 { #query-pass-through-idle-disconnect-time }
 
@@ -740,6 +836,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_26"></div>
+
 #### パススルーアイドル切断時間の設定 { #set-pass-through-idle-disconnect-time }
 
 <div align="center"><em>表: パススルーアイドル切断時間の設定</em></div>
@@ -755,7 +853,11 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_27"></div>
+
 ### 接続管理 { #connection-management }
+
+<div id="_28"></div>
 
 #### マルチ接続の全体設定を照会する { #query-multi-connection-switch }
 
@@ -772,6 +874,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_29"></div>
+
 #### マルチ接続を設定する { #set-multi-connection-switch }
 
 <div align="center"><em>表: マルチ接続の設定</em></div>
@@ -786,6 +890,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | 設定内容を更新します。マルチ接続が無効の場合、同時接続の機能は制限されます。有効の場合は`AT+BLEMULTICONN`と`AT+BTMULTICONN`の設定に従って動作します。 |
 
 </div>
+
+<div id="ble_4"></div>
 
 #### BLE最大同時接続数の照会 { #query-maximum-ble-concurrent-connections }
 
@@ -802,6 +908,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="ble_5"></div>
+
 #### BLE最大同時接続数の設定 { #set-maximum-ble-concurrent-connections }
 
 <div align="center"><em>表: BLE最大同時接続数の設定</em></div>
@@ -816,6 +924,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | マルチ接続が有効（`AT+MULTICONN=1`）の場合にのみ設定できます。設定内容を更新します。接続数が上限に達するとアドバタイズを停止し、新たな接続を受け付けなくなります。接続数が上限を下回ると自動的に再開します。 |
 
 </div>
+
+<div id="classic-bluetooth"></div>
 
 #### Classic Bluetooth最大同時接続数の照会 { #query-maximum-classic-bluetooth-concurrent-connections }
 
@@ -832,6 +942,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="classic-bluetooth_1"></div>
+
 #### Classic Bluetooth最大同時接続数の設定 { #set-maximum-classic-bluetooth-concurrent-connections }
 
 <div align="center"><em>表: Classic Bluetooth最大同時接続数の設定</em></div>
@@ -846,6 +958,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | マルチ接続が有効（`AT+MULTICONN=1`）の場合にのみ設定できます。設定内容を更新します。接続数が上限に達するとモジュールはページスキャンを停止し、接続数が上限を下回ると自動的に再開します。 |
 
 </div>
+
+<div id="_30"></div>
 
 #### 切断 { #disconnect }
 
@@ -862,6 +976,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_31"></div>
+
 #### 接続リストの照会 { #query-connection-list }
 
 <div align="center"><em>表: 接続リストの照会</em></div>
@@ -877,7 +993,11 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_32"></div>
+
 ### データ転送 { #data-transfer }
+
+<div id="ble-mtu"></div>
 
 #### BLE MTUの照会 { #query-ble-mtu }
 
@@ -894,6 +1014,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="ble-mtu_1"></div>
+
 #### BLE MTUの設定 { #set-ble-mtu }
 
 <div align="center"><em>表: BLE MTUの設定</em></div>
@@ -908,6 +1030,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | この値はMTUネゴシエーション時に使用される上限を設定する。 |
 
 </div>
+
+<div id="spp_4"></div>
 
 #### SPPデータの送信 { #send-spp-data }
 
@@ -924,7 +1048,11 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="gatt_2"></div>
+
 ### カスタムGATT { #custom-gatt }
+
+<div id="gatt_3"></div>
 
 #### カスタムGATTサービスリストの照会 { #query-custom-gatt-service-list }
 
@@ -941,6 +1069,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="gatt_4"></div>
+
 #### カスタムGATTサービスの作成 { #create-custom-gatt-service }
 
 <div align="center"><em>表: カスタムGATTサービスの作成</em></div>
@@ -955,6 +1085,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | `idx`はカンマの直前の単一桁でなければならない。UUIDの長さは正確に4文字または32文字でなければならない — それ以外の長さは`ERROR`を返す。スロットがすでにプロトコルスタックに登録されている場合は再設定できず、作成は`ERROR`を返す。サービスを作成すると、そのスロットの以前の設定はクリアされる |
 
 </div>
+
+<div id="gatt_5"></div>
 
 #### カスタムGATTサービスの削除 { #delete-custom-gatt-service }
 
@@ -971,6 +1103,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="gatt_6"></div>
+
 #### カスタムGATTキャラクタリスティックリストの照会 { #query-custom-gatt-characteristic-list }
 
 <div align="center"><em>表: カスタムGATTキャラクタリスティックリストの照会</em></div>
@@ -985,6 +1119,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | なし |
 
 </div>
+
+<div id="gatt_7"></div>
 
 #### カスタムGATTキャラクタリスティックの追加 { #add-custom-gatt-characteristic }
 
@@ -1001,6 +1137,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="gatt_8"></div>
+
 #### カスタムGATTサービスの開始（登録） { #start-register-custom-gatt-services }
 
 <div align="center"><em>表: カスタムGATTサービスの開始（登録）</em></div>
@@ -1015,6 +1153,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | 使用中であり、まだ登録されておらず、かつ少なくとも1つのキャラクタリスティックを持つすべてのサービスをプロトコルスタックに登録する。一度登録されると、サービスは実行時に取り消したり再設定したりできなくなる。クエリ形式はサポートされていない |
 
 </div>
+
+<div id="gatt-notifyindicate"></div>
 
 #### GATTキャラクタリスティックデータの送信（通知/インディケーション） { #send-gatt-characteristic-data-notifyindicate }
 
@@ -1031,6 +1171,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="gatt_9"></div>
+
 #### カスタムGATT設定をFlashに保存 { #save-custom-gatt-configuration-to-flash }
 
 <div align="center"><em>表: カスタムGATT設定をFlashに保存</em></div>
@@ -1045,6 +1187,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | すべてのサービスとキャラクタリスティックの現在の設定をFlashに永続化する。設定データのみが保存され、登録状態などの実行時情報は保存されない。KVDBが準備できていない場合、または書き込みに失敗した場合は`ERROR`を返す。クエリ形式はサポートされていない |
 
 </div>
+
+<div id="gatt_10"></div>
 
 #### Flash内のカスタムGATT設定のクリア { #clear-custom-gatt-configuration-in-flash }
 
@@ -1061,6 +1205,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="gatt_11"></div>
+
 #### GATT設定の起動時自動ロード設定を照会する { #query-gatt-auto-load-on-power-up-switch }
 
 <div align="center"><em>表: GATT設定の起動時自動ロード設定</em></div>
@@ -1075,6 +1221,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | なし |
 
 </div>
+
+<div id="gatt_12"></div>
 
 #### GATT設定の起動時自動ロードを設定する { #set-gatt-auto-load-on-power-up-switch }
 
@@ -1091,9 +1239,13 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="urc"></div>
+
 ## 非同期イベント（URC） { #unsolicited-events-urc }
 
 以下はモジュールからホストへ送られる非同期のステータス通知です。受信のためにホストからコマンドを送る必要はありません。通知の有無はイベント通知設定（`AT+EVT`）で制御され、サイレントモード中は通知されません。
+
+<div id="im_ready"></div>
 
 ### IM_READYレディ通知 { #im_ready-ready-indication }
 
@@ -1110,6 +1262,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="im_conn"></div>
+
 ### IM_CONN接続通知 { #im_conn-connection-indication }
 
 <div align="center"><em>表: IM_CONN接続通知</em></div>
@@ -1124,6 +1278,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | コマンドモードでは、接続が確立されるたびにハンドル、ピアアドレス、MTUを含む通知が1回出力されます。パススルーモードでは最初の接続（接続数が1）のときだけ、パラメーターなしで通知されます。通知の有無は`AT+EVT`で制御され、`AT+EVT=1`を設定するとこれらの通知が抑制されます。 |
 
 </div>
+
+<div id="im_disconn"></div>
 
 ### IM_DISCONN切断通知 { #im_disconn-disconnect-indication }
 
@@ -1142,6 +1298,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 ## PDU形式コマンド { #pdu-format-commands }
 
+<div id="pdu-opcode-0x0101"></div>
+
 ### PDUデータレポート（オペコード0x0101） { #pdu-data-report-opcode-0x0101 }
 
 <div align="center"><em>表: PDUデータレポート（モジュール → ホスト、オペコード0x0101）</em></div>
@@ -1156,6 +1314,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | コマンドモードでは、カスタムBLEキャラクタリスティックへのデータ書き込み、またはClassic Bluetooth SPP経由でのデータ受信があった場合、モジュールは上記の形式でホストに報告する。パススルーモードでは、データは直接出力される。 |
 
 </div>
+
+<div id="pdu-notify-opcode-0x0101"></div>
 
 ### PDUモードでのデータ送信（通知キャラクタリスティックの自動選択、オペコード0x0101） { #pdu-mode-send-data-auto-select-notify-characteristic-opcode-0x0101 }
 
@@ -1172,6 +1332,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="pdu-opcode-0x0102"></div>
+
 ### PDUモードでのデータ送信（サービスとキャラクタリスティックの指定、オペコード0x0102） { #pdu-mode-send-data-specify-service-and-characteristic-opcode-0x0102 }
 
 <div align="center"><em>表: PDUモードでのデータ送信（サービスとキャラクタリスティックの指定、オペコード0x0102）</em></div>
@@ -1186,6 +1348,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 | 備考 | BLE接続のみ対応します。解決された接続がSPPの場合、フレームは破棄されます。`svc_idx`は登録済みのカスタムサービスに対応し、`char_idx`はそのサービスのキャラクタリスティック数未満でなければなりません。条件を満たさない場合、フレームは破棄されます。指定されたキャラクタリスティックにはNotifyまたはIndicateプロパティが必要です。`conn_hdl`の解決規則は`0x0101`と同じです（1始まりのBLEハンドルを先に照合し、次に生の値を照合）。フレームの直後に`\r`が必要です。 |
 
 </div>
+
+<div id="pdu_1"></div>
 
 ### PDUモードでの切断 { #pdu-mode-disconnect }
 
@@ -1202,6 +1366,8 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="pdu-im_conn-im_disconn"></div>
+
 ### PDU接続ステータス通知（IM_CONN / IM_DISCONN） { #pdu-connection-status-indication-im_conn-im_disconn }
 
 <div align="center"><em>表: PDU接続ステータス通知（IM_CONN / IM_DISCONN）</em></div>
@@ -1217,7 +1383,11 @@ PDUコマンドは、モジュールがコマンドモードにある間にバ�
 
 </div>
 
+<div id="_33"></div>
+
 ## 付録 { #appendix }
+
+<div id="class-of-device_2"></div>
 
 ### 一般的なClass of Deviceの値 { #common-class-of-device-values }
 

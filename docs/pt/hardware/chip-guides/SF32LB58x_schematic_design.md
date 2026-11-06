@@ -87,6 +87,9 @@ O SF30147C é um PMIC altamente integrado e de alta eficiência, desenvolvido pa
 
 Consulte o datasheet do SF30147C para obter todos os detalhes.
 
+!!! warning "Divergência na fonte sobre o nome do trilho"
+    A [linha de resumo do LDO1](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md#L38) na fonte indica AVDDIOA2, mas a [tabela de pinos do chip](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md#L79) associa VDDIOA2 a PA0–PA11; o [mapa oficial de pinos do DevKit](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb58x/SF32LB58-DevKit-LCD.md#L195) também usa VDDIOA2. Essas fontes não esclarecem qual nome deve ser usado para o trilho LDO1. Confirme-o com a SiFli antes de liberar o esquemático.
+
 ##### 5.2.1.2. Requisitos de alimentação do SF32LB58x {#5112-sf32lb58x-power-requirements}
 
 As especificações de alimentação da PMU integradas à série SF32LB58x são as seguintes.
@@ -715,6 +718,9 @@ O SF32LB58x oferece uma interface SWD e seis interfaces UART selecionáveis para
 | SWDIO | PB11 | Sinal de dados do J-Link |
 
 </div>
+
+!!! warning "Conflito entre fontes"
+    A [tabela de aplicação de hardware da OpenSiFli](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md) associa `TXD1`/`PA31` a RXD da UART1 e `RXD1`/`PA32` a TXD da UART1; já o [mapa de pinos do SF32LB58-DevKit-LCD](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb58x/SF32LB58-DevKit-LCD.md) identifica `PA31` como `UART1_TXD` e `PA32` como `UART1_RXD`. A divergência sobre o sentido dos sinais permanece sem resolução, portanto as fontes não confirmam qual mapeamento está correto. Antes de definir a conexão, confirme com a SiFli o pinmux e o sentido dos sinais da UART1; não deduza as conexões TX/RX da placa com base apenas nesses rótulos.
 
 !!! note "Observação"
     Os sinais UARTx RXD não podem ficar flutuantes; habilite um pull-up interno durante a inicialização do software.

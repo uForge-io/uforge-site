@@ -111,7 +111,7 @@ T-Display-SF32 把 SF32LB52x 的图形、蓝牙（Bluetooth）、音频和低功
 完成所需环境配置后，T-Display-SF32 README 给出的 Windows 构建和固件烧录流程如下：
 
 ```powershell
-cd T-Display-SF32\examples\rt_os\rt_driver\project
+cd SIFLI\T-Display-SF32\examples\rt_os\rt_driver\project
 scons --board=t-display-sf32_hcpu -j8
 build_t-display-sf32_hcpu\uart_download.bat
 ```

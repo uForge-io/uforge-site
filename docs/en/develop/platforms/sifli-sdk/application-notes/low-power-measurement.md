@@ -111,7 +111,7 @@ For active work, use `rt_pm_run_enter()`:
 
 <div align="center" markdown>
 
-<em>Table: Run-mode HCPU clock selections</em>
+<em>Table: SF32LB52x HCPU run-mode clock selections (confirm availability in the target-family SDK guide)</em>
 
 | Mode | HCPU clock |
 |---|---:|

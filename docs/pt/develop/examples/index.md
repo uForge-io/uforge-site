@@ -97,7 +97,7 @@ Escolha o exemplo que corresponda à parte do produto com mais restrições:
 
 - Para produtos Bluetooth, comece pelo perfil mais próximo.
 - Para produtos com display, comece pelo fluxo de display e LVGL.
-- Para produtos alimentados por bateria, comece por um exemplo de baixo consumo.
+- Para produtos alimentados por bateria, comece por um exemplo de baixo consumo de energia.
 - Para produtos com OTA, comece pelo fluxo de atualização e pelo layout das partições.
 
 Depois, adicione os outros subsistemas um de cada vez.

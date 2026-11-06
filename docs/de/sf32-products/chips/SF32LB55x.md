@@ -8,6 +8,8 @@ tags:
 
 # SF32LB55x { #sf32lb55x }
 
+<div id="_1"></div>
+
 ## Überblick { #overview }
 
 Die Serie SF32LB55x ist eine AIoT-Mikrocontrollerfamilie der Mittelklasse mit sehr niedrigem Energieverbrauch. Sie richtet sich an BLE-vernetzte Produkte, die umfangreichere Displayfunktionen, mehr Speicherreserven und eine größere Gehäuseauswahl benötigen als einfache Bluetooth-MCUs.
@@ -21,6 +23,8 @@ Die offizielle Produktkurzbeschreibung und das Datenblatt von SiFli nennen BLE 5
 Der Chip-Modellleitfaden von SiFli weist darauf hin, dass SF32LB55x vor den späteren Familien 52/56/58 definiert wurde und seine Suffixe deshalb der neueren Nummerierungskonvention nicht vollständig folgen. Verwenden Sie bei der Bauteilauswahl die vollständige bestellbare Teilenummer und die gehäusespezifischen Fähigkeitstabellen; leiten Sie nicht alle Fähigkeiten allein aus dem Suffix ab.
 
 [^1]: STAR-MC1 ist ein konfigurierbarer Embedded-CPU-IP-Baustein von Arm China auf Basis von Armv8-M Mainline. In kompatiblen SF32-Geräten dokumentiert SiFli STAR-MC1 als Anwendungsprozessor Arm Cortex-M33 STAR-MC1. Das Softwaremodell auf Cortex-M33-Niveau erleichtert die Übernahme vorhandener Cortex-M33-Firmware, Middleware, RTOS-Portierungen und Werkzeuge, vorbehaltlich der üblichen bausteinspezifischen Integrationsarbeit. Die Konfigurationen CU, SP und SE unterscheiden sich hauptsächlich bei Cache, TCM, XIPU und TrustZone; Arm Custom Instructions/CDE und die Coprozessor-Schnittstelle sind optionale Funktionen, die für das genaue SF32-Gerät zu prüfen sind. In der SiFli-Dokumentation steht je nach Kontext ***Arm Cortex-M33 STAR-MC1*** oder ***Arm Cortex-M33***.
+
+<div id="_2"></div>
 
 ## Anwendungen { #applications }
 
@@ -42,6 +46,8 @@ Wählen Sie SF32LB55x, wenn das Design eine oder mehrere dieser Fähigkeiten ben
 - Einen vom Anwender programmierbaren Low-Power-Prozessor
 - Mehr GPIOs oder eine größere Gehäuseauswahl als bei SF32LB52x
 - Flexibilität bei externem NOR, NAND, eMMC, QSPI-PSRAM oder OPI-PSRAM
+
+<div id="_3"></div>
 
 ## Entwicklungsressourcen { #development-resources }
 
@@ -77,7 +83,11 @@ Wählen Sie SF32LB55x, wenn das Design eine oder mehrere dieser Fähigkeiten ben
 
 ---
 
+<div id="_4"></div>
+
 ## Merkmale und Spezifikationen { #features-and-specs }
+
+<div id="_5"></div>
 
 ### Rechenleistung und Speicher { #compute-and-memory }
 
@@ -88,6 +98,8 @@ Wählen Sie SF32LB55x, wenn das Design eine oder mehrere dieser Fähigkeiten ben
 - 1 088 KB Anwendungs-SRAM, davon 64 KB Retention-SRAM
 - 224 KB Low-Power-SRAM, vollständig Retention-SRAM
 - Externe Speicherschnittstellen für NOR, NAND, eMMC, QSPI-PSRAM und OPI-PSRAM
+
+<div id="ai"></div>
 
 ### Grafik, Display und KI { #graphics-display-and-ai }
 
@@ -101,6 +113,8 @@ Maximale Auflösung und Panel-Schnittstellen: siehe [Schnittstellenmatrix pro Ge
 - Zwei LCD-Controller; Always-on-Display-Schnittstellen und Dual-Display-Fähigkeit hängen vom gewählten Modell und Gehäuse ab
 - Matrix-Beschleuniger für neuronale Netze für TinyML-Workloads, bis zu 1,92 GOPS und 5,73 TOPS/W
 
+<div id="_6"></div>
+
 ### Drahtlose Konnektivität { #wireless-connectivity }
 
 - Bluetooth Low Energy 5.2
@@ -109,11 +123,15 @@ Maximale Auflösung und Panel-Schnittstellen: siehe [Schnittstellenmatrix pro Ge
 - Maximale Sendeleistung: 10 dBm
 - Spitzenstrom im Empfang: 2,0 mA bei 3,3 V
 
+<div id="_7"></div>
+
 ### Sicherheit { #security }
 
 - Hardware-Beschleuniger für AES und CRC
 - Echter Zufallszahlengenerator (TRNG)
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### Peripherie und Ein-/Ausgänge { #peripherals-and-ios }
 
@@ -144,6 +162,8 @@ Maximale Auflösung und Panel-Schnittstellen: siehe [Schnittstellenmatrix pro Ge
 - Peripheral Task Controller (PTC)
 - Die GPIO-Anzahl hängt vom Gehäuse ab; siehe die Gehäusetabelle und den weiter unten stehenden Hinweis zur Quellenabweichung.
 
+<div id="_8"></div>
+
 ### Stromversorgung und Gehäuse { #power-supply-and-package }
 
 - Der Versorgungsspannungsbereich ist variantenspezifisch: 2,97 V bis 3,63 V für SS6600A8; 1,71 V bis 3,63 V für 551U4O5 und die ausgewählten BGA-Varianten
@@ -152,6 +172,8 @@ Maximale Auflösung und Panel-Schnittstellen: siehe [Schnittstellenmatrix pro Ge
 - Schlafstrom mit RTC-Aufwachen: 600 nA
 - Schlafstrom mit Pin-Aufwachen: 280 nA
 - Gehäuseoptionen: QFN68L, BGA145 und BGA169
+
+<div id="_9"></div>
 
 ## Familienvarianten { #family-variants }
 
@@ -189,6 +211,8 @@ Die folgenden aktuellen Modelle aus dem Chip-Modellleitfaden von SiFli verdeutli
 
 Für den SF32LB557VD3A6 nennen der aktuelle SiFli-Chip-Modellleitfaden und Tabelle 0-1 im Datenblatt DS5501 V1.7.2 71 HCPU + 42 LCPU = 113 GPIOs. Die Feature- und Gehäuse-Zusammenfassungen des Datenblatts sowie die Produktkurzbeschreibung PB0001 V1.3 geben für BGA169 dagegen 119 GPIOs an (71 HCPU + 48 LCPU). Die offiziellen Quellen widersprechen sich also, auch innerhalb des Datenblatts. Diese Seite folgt der modellspezifischen Zeile und dem aktuellen Modellleitfaden (113). Prüfen Sie vor der Pinzuweisung oder dem Abschluss des Designs die GPIO-Verfügbarkeit anhand der Ball-Map des gewählten Gehäuses und bestätigen Sie das bestellbare Bauteil bei SiFli. Prüfen Sie außerdem Versorgungs- und Temperaturwerte der Variante, die vollständige Teilenummer und die Konfiguration des integrierten Speichers anhand des [Datenblatts DS5501 V1.7.2][Datasheet], der [Produktkurzbeschreibung PB0001 V1.3][Product Brief] und des [SiFli-Chip-Modellleitfadens]. Die Gehäuse BGA145 und BGA169 messen 7 × 7 × 0,94 mm bei 0,5 mm Rastermaß.
 
+<div id="_10"></div>
+
 ## Integrationspfad { #integration-path }
 
 Mit dieser Abfolge wird aus einer SF32LB55x-Vorauswahl ein validiertes Design:
@@ -202,7 +226,7 @@ Mit dieser Abfolge wird aus einer SF32LB55x-Vorauswahl ein validiertes Design:
 ## Häufig gestellte Fragen { #frequently-asked-questions }
 
 **Was sind die wichtigsten Spezifikationen des SF32LB55x?**
-Der SF32LB55x nutzt Cortex-M33 @240 MHz für Anwendungsaufgaben und verfügt über einen Low-Power-Kern (Cortex-M33 @48 MHz; vom Anwender programmierbar). Hinzu kommen 1 312 KB internes SRAM und nur Bluetooth Low Energy (BLE). Grafik: ePicasso 1.0. Gehäuse: QFN68L / BGA145 / BGA169 (7 × 7 mm (QFN68L)). USB 2.0 FS.
+Der SF32LB55x nutzt Cortex-M33 @240 MHz für Anwendungsaufgaben und verfügt über einen Low-Power-Kern (Cortex-M33 @48 MHz; vom Anwender programmierbar). Hinzu kommen 1 312 KB internes SRAM und nur Bluetooth Low Energy (BLE). Grafik: ePicasso 1.0. In der Familienübersicht oben wird die Engine als ePicasso 2.5D bezeichnet. Die verfügbaren Quellen erläutern das Verhältnis der beiden Bezeichnungen nicht; leiten Sie daraus weder Gleichwertigkeit noch einen Generationswechsel ab und prüfen Sie die Grafikfunktionen der genauen bestellbaren Teilenummer anhand aktueller offizieller Dokumentation. Gehäuse: QFN68L / BGA145 / BGA169 (7 × 7 mm (QFN68L)). USB 2.0 FS.
 
 **Welche Display-Schnittstellen unterstützt der SF32LB55x?**
 SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Schnittstellenmatrix pro Gerät](../../learn/graphics/display-controller.md#per-device-interface-matrix)) Dies ist eine familienweite Liste, keine Zusicherung für jede Bestellnummer oder jedes Gehäuse; prüfen Sie die verlinkte Schnittstellenmatrix.
@@ -220,11 +244,17 @@ SS6600A8 benötigt 2,97–3,63 V; SF32LB551U4O5 und die auf dieser Seite aufgef�
 Beginnen Sie mit dem [Hardware-Design-Leitfaden für den SF32LB55x](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) zu Schaltplan, Stromversorgung, Takt/RF und PCB-Layout und nutzen Sie vor der Freigabe die Checklisten für Schaltplan und Layout.
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## Verwandte Produkte { #related-products }
+
+<div id="_12"></div>
 
 ### Entwicklungsboards { #development-kits }
 
 Verwenden Sie den offiziellen Hardware-Anwendungshinweis, die Referenzschaltpläne und die Checkliste als Ausgangspunkt für die Gehäusewahl, die Auslegung der Stromversorgung, die Wahl der Display-Schnittstelle, die Speicherplanung, das RF-Layout und die Planung der Produktionstests.
+
+<div id="_13"></div>
 
 ### Referenzprodukte { #reference-products }
 

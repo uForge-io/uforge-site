@@ -101,7 +101,7 @@ rt_kprintf("CR:0x%x, WER:0x%x\n", hwp_pmuc->CR, hwp_pmuc->WER);
 
 表中的模式名称按以下方式对应：`PM_SLEEP_MODE_LIGHT` 为轻度睡眠（Light Sleep），`PM_SLEEP_MODE_DEEP` 为深度睡眠（Deep Sleep），`PM_SLEEP_MODE_STANDBY` 为待机（Standby）。
 
-上表中的系列数据是 SDK 指南给出的参考值，不代表开发板上的保证时序。SF32LB52x 指南说明：如果配置了 PSRAM，HCPU 会将即将掉电的 RAM 中需要保留的数据备份到 PSRAM，并在唤醒后恢复；如果没有 PSRAM，则以 64 KB Retention RAM 作为备份空间。这个备份空间与各系列模式表中列出的 SRAM 保持容量不是同一指标（例如，SF32LB52x 的 Standby 表项列出 HPSYS 保持 384 KB）。实际电流还取决于已启用的外设、IO 电平、外部存储器和开发板。
+上表中的系列数据是 SDK 指南给出的参考值，不代表开发板上的保证时序。SF32LB52x 指南说明：如果配置了 PSRAM，HCPU 会将即将掉电的 RAM 中需要保留的数据备份到 PSRAM，并在唤醒后恢复；如果没有 PSRAM，则以 64 KB Retention RAM 作为备份空间。这个备份空间与各系列模式表中列出的 SRAM 保持容量不是同一指标（例如，SF32LB52x 的 Standby 表项列出 HPSYS 保持 384 KB）。未经对应系列 SDK 指南确认，不要将这项备份策略或其容量套用于其他系列。实际电流还取决于已启用的外设、IO 电平、外部存储器和开发板。
 
 ## 在运行状态控制时钟 { #control-clocks-while-awake }
 
@@ -111,7 +111,7 @@ rt_kprintf("CR:0x%x, WER:0x%x\n", hwp_pmuc->CR, hwp_pmuc->WER);
 
 <div align="center" markdown>
 
-<em>表：运行模式下的 HCPU 时钟</em>
+<em>表：SF32LB52x 运行模式下的 HCPU 时钟选择（支持情况请以目标产品系列的 SDK 指南为准）</em>
 
 | 模式 | HCPU 时钟 |
 |---|---:|

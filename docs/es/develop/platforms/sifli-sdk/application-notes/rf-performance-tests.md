@@ -15,7 +15,7 @@ El SDK separa la validación RF de Bluetooth en pruebas de señalización, sin s
 | Contenido | Alcance por familia |
 |---|---|
 | Comparación de modos de prueba y secuencia de medición | Flujo consolidado para SF32LB52x, SF32LB55x, SF32LB56x, SF32LB57x y SF32LB58x. |
-| Disponibilidad de pruebas Bluetooth clásico | Requiere un chip compatible con Bluetooth clásico. SF32LB55x solo admite BLE y no admite procedimientos de prueba Bluetooth clásico; en esta familia, use las pruebas BLE. |
+| Disponibilidad de las pruebas de Bluetooth clásico | Requiere un chip compatible con Bluetooth clásico. SF32LB55x solo admite BLE y no admite procedimientos de prueba de Bluetooth clásico; en esta familia, use las pruebas BLE. |
 | Compatibilidad de herramientas con SF32LB57x | La [guía de pruebas RF](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/rf_test_guide.html) incluye los pines UART de SF32LB57x, pero el selector de plataforma del [manual de SiFli_RfTool](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/SiFli_RfTool/SiFli_RfTool_UM.html) no incluye 57x. Use esa guía solo como referencia de pines y confirme qué ruta de prueba admite la versión del SDK de destino. |
 | Capturas de topología y matriz de comandos HCI | Ejemplos del SF32LB52x incluidos en la guía de SiFli; para la implementación, use los comandos y la documentación de pines de la familia de destino. |
 | Configuración `CONFIG_BT_RF_TEST` | Se aplica a la ruta documentada que no es 55x; `bt_rftest` de SF32LB55x no utiliza este símbolo. |
@@ -42,7 +42,7 @@ El SDK separa la validación RF de Bluetooth en pruebas de señalización, sin s
 
 Para BR/EDR, la señalización establece un enlace Bluetooth real y es la ruta de cualificación RF BQB. Las pruebas RF BQB de BLE usan SIG DTM, que aquí se presenta como BLE sin señalización. Las pruebas BT sin señalización y las pruebas RF individuales son procedimientos propios de SiFli, no pruebas BQB. En las pruebas sin señalización, la radio transmite o recibe en un canal fijo y con una potencia establecida; es la ruta habitual durante el desarrollo y la producción. Las pruebas RF individuales emplean la herramienta del PC para fijar con precisión la portadora o la modulación y medirlas con un analizador o medidor de potencia.
 
-Las figuras de topología siguientes proceden de la guía de pruebas RF SF32LB52x. Muestran las distintas rutas entre PC, DUT, probador y UART/HCI/RF; consulte la guía de pruebas RF de la familia de destino para conocer sus valores UART y asignaciones de pines predeterminados.
+Las figuras de topología siguientes proceden de la guía de pruebas RF SF32LB52x. Muestran las distintas rutas entre PC, DUT, probador y UART/HCI/RF; consulte la guía de pruebas RF de la familia de destino para saber qué UART se usa por defecto y cómo se asignan sus pines.
 
 ![Topología de la prueba de señalización BT](../../../../assets/develop/app-notes/rf/bt_signaling_test.png){ loading="lazy" }
 <div align="center"><em>Figura: Ejemplo del SF32LB52x incluido en la guía de SiFli: en señalización BT, el PC configura el probador y el DUT establece el enlace RF con este.</em></div>
@@ -65,7 +65,7 @@ CONFIG_BSP_BT_CONNECTION_MANAGER=y
 CONFIG_BT_RF_TEST=y
 ```
 
-La ruta `bt_rftest` de SF32LB55x no utiliza `CONFIG_BT_RF_TEST`. `CONFIG_BT_FINSH` sirve para trazas y no es necesaria para los comandos de prueba. Si la ruta de control usa el UART IPC propia del SDK, configure `CONFIG_IPC_USE_OWN_DEVICE=y` y `CONFIG_IPC_OWN_DEVICE_NAME="uart2"` según corresponda a la placa. Los ejemplos `example/bt/spp/` y `example/bt/HCI_over_uart/` del SDK sirven como punto de partida.
+La ruta `bt_rftest` de SF32LB55x no utiliza `CONFIG_BT_RF_TEST`. `CONFIG_BT_FINSH` sirve para trazas y no es necesaria para los comandos de prueba. Si la ruta de control usa el canal IPC basado en UART propio del SDK, configure `CONFIG_IPC_USE_OWN_DEVICE=y` y `CONFIG_IPC_OWN_DEVICE_NAME="uart2"` según corresponda a la placa. Los ejemplos `example/bt/spp/` y `example/bt/HCI_over_uart/` del SDK sirven como punto de partida.
 
 ## Señalización BR/EDR y configuración de BLE DTM { #bt-signaling-test }
 
@@ -93,6 +93,8 @@ Las estadísticas RX son útiles, pero el recuento TX no indica cuántos paquete
 
 ## Pruebas RF individuales con SiFli_RfTool { #single-item-testing-with-sifli_rftool }
 
+Esta sección cubre únicamente TX/RX sin señalización. Para pruebas de portadora única (CW), siga el [procedimiento independiente de tono único Bluetooth](bluetooth-single-tone-tests.md).
+
 Conecte UART1 del DUT al PC a 1 000 000 baudios. Conecte el puerto RF, mediante un cable coaxial, a un equipo de prueba, analizador de espectro o medidor de potencia.
 
 Envíe `bt_cm uart_dut` y compruebe la respuesta `04 0E 04 XX 03 0C 00`. En `SiFli_RfTool.exe`, seleccione la familia, el modo BLE o BT sin señalización y el puerto COM.
@@ -118,7 +120,116 @@ La guía de SiFli también contiene una matriz completa de comandos HCI y valore
 
 La matriz de origen indica que se envíe `HCI_Reset` (`01,03,0C,00`) antes de reintentar una prueba RX fallida. Estos comandos y canales son ejemplos de la documentación SF32LB52x; verifique la secuencia para el SDK y la familia de destino.
 
+Las tablas siguientes transcriben todas las filas del ejemplo fuente de SF32LB52x. No constituyen una API portátil; para la implementación, use la documentación del SDK de la familia de destino. Se conservan los identificadores de comando, las secuencias de bytes, los valores de prueba, los límites y las notas operativas de la fuente.
+
+<div align="center" markdown>
+<em>Tabla: Ejemplo fuente de SF32LB52x: comandos de configuración y entrada</em>
+
+| Descripción de la prueba | Nombre de la prueba | Comando enviado | Valor de retorno | Valor de prueba | Límite inferior | Límite superior | Observaciones |
+|---|---|---|---|---|---|---|---|
+| Entrar en modo sin señal | `AT_Cmd_Enter_BT_CM_Mode` | `bt_cm uart_dut` | `bt_cm uart_dut` | `1` | `0` | `1` |  |
+| Configurar la tabla de pérdidas | `BT_SetMultiLossTable` | `/` | `/` | `/` | `/` | `/` |  |
+| Entrar en modo de prueba HCI | `HEX_Cmd_Enter_HCI_Mode` | `01,03,0C,00` | `01,03,0C,04,0E,04,06,03,0C,00` | `1` | `0` | `1` |  |
+| Esperar 3 s | `Delay_Millisecond` | `/` | `/` | `/` | `/` | `/` |  |
+| Prueba de calibración de desviación de frecuencia | `BT_BR_TX_Cal_Test_L` | 1. `01,71,FC,06,00,53,01,01,05,0A`<br>2. `08,FF,EE,06`<br>3. `01,72,FC,00` | 1. `04,0E,04,06,71,FC,00`<br>2. `09,FF,EE,00,06,01,00`<br>3. `04,0E,06,06,72,FC,00,E7,02` | `1` | `0` | `1` |  |
+| Enviar el comando HCI_Reset | `HEX_Cmd_HCI_Reset_Mode` | `01,03,0C,00` | `04,0E,04,06,03,0C,00` | `1` | `0` | `1` |  |
+| Apagar la fuente programable | `Simple_For_Updata_8IuOFF2` | `/` | `/` | `1` | `0` | `1` |  |
+| Desactivar la comunicación serie | `Serial_Port_Switch_Reset2` | `/` | `/` | `1` | `0` | `1` |  |
+| Esperar 2 s | `Delay_Millisecond` | `/` | `/` | `1` | `0` | `1` |  |
+| Encender la fuente programable | `Simple_For_Updata_8IuON2` | `/` | `/` | `1` | `0` | `1` |  |
+| Habilitar la comunicación serie | `Serial_Port_Switch_COM` | `/` | `/` | `1` | `0` | `1` |  |
+| Esperar 3 s al arranque de la placa principal | `Delay_Millisecond` | `/` | `/` | `1` | `0` | `1` |  |
+| Comprobar el arranque de la placa principal | `AT_Cmd_Check_OS_Ready` | `AT_START` | `START=OK` | `1` | `0` | `1` |  |
+| Entrar en modo sin señal | `AT_Cmd_Enter_BT_CM_Mode` | `bt_cm uart_dut` | `bt_cm uart_dut` | `1` | `0` | `1` |  |
+| Enviar el comando de parada | `HEX_Cmd_Enter_BT_Mode` | `01,72,FC,00` | `04,0E,04,06,03,0C,00` | `1` | `0` | `1` | Comprobar si se ha entrado correctamente en el modo. |
+| Enviar el comando HCI_Reset | `HEX_Cmd_HCI_Reset_Mode` | `01,03,0C,00` | `04,0E,04,06,03,0C,00` | `1` | `0` | `1` |  |
+
+</div>
+
+<div align="center" markdown>
+<em>Tabla: Ejemplo fuente de SF32LB52x: matriz de pruebas RX</em>
+
+| Descripción de la prueba | Nombre de la prueba | Comando enviado | Valor de retorno | Valor de prueba | Límite inferior | Límite superior | Observaciones |
+|---|---|---|---|---|---|---|---|
+|  |  | `/` | `/` | `1` | `0` | `1` |  |
+| `BT_BR CH0` Prueba RX | `BT_BR_RX_BER_2402` | 1. `01,72,FC,00`<br>2. `01,70,FC,02,00,05`<br>3. `01,72,FC,00` | 1. `04,0E,06,06,72,FC,0C,00,00`<br>2. `04,0E,04,06,70,FC,00`<br>3. `04,0E,06,06,72,FC,00,EB,03` | `1` | `0` | `1` |  |
+| `BT_BR CH0` Prueba RX | `BT_BR_RX_RSSI_2402` | `08,FF,EE,05` | `09,FF,EE,00,05,02,00,BC` | `1` | `0` | `1` |  |
+| `BT_BR CH0` Prueba RX | `HCI_Reset` | `01,03,0C,00` | `01,03,0C,04,0E,04,06,03,0C,00` | `1` | `0` | `1` | Si falla una prueba RX, envíe el comando reset antes de reintentar. |
+|  |  | `/` | `/` | `1` | `0` | `1` |  |
+| `BT_BR CH39` Prueba RX | `BT_BR_RX_BER_2441` | 1. `01,72,FC,00`<br>2. `01,70,FC,02,27,05`<br>3. `01,72,FC,00` | 1. `04,0E,06,06,72,FC,0C,00,00`<br>2. `04,0E,04,06,70,FC,00`<br>3. `04,0E,06,06,72,FC,00,EB,03` | `1` | `0` | `1` |  |
+| `BT_BR CH39` Prueba RX | `BT_BR_RX_RSSI_2441` | `08,FF,EE,05` | `09,FF,EE,00,05,02,00,BC` | `1` | `0` | `1` |  |
+| `BT_BR CH39` Prueba RX | `HCI_Reset` | `01,03,0C,00` | `01,03,0C,04,0E,04,06,03,0C,00` | `1` | `0` | `1` | Si falla una prueba RX, envíe el comando reset antes de reintentar. |
+|  |  | `/` | `/` | `1` | `0` | `1` |  |
+| `BT_BR CH78` Prueba RX | `BT_BR_RX_BER_2480` | 1. `01,72,FC,00`<br>2. `01,70,FC,02,4E,05`<br>3. `01,72,FC,00` | 1. `04,0E,06,06,72,FC,0C,00,00`<br>2. `04,0E,04,06,70,FC,00`<br>3. `04,0E,06,06,72,FC,00,EB,03` | `1` | `0` | `1` |  |
+| `BT_BR CH78` Prueba RX | `BT_BR_RX_RSSI_2480` | `08,FF,EE,05` | `09,FF,EE,00,05,02,00,BC` | `1` | `0` | `1` |  |
+| `BT_BR CH78` Prueba RX | `HCI_Reset` | `01,03,0C,00` | `01,03,0C,04,0E,04,06,03,0C,00` | `1` | `0` | `1` | Si falla una prueba RX, envíe el comando reset antes de reintentar. |
+|  |  | `/` | `/` | `1` | `0` | `1` |  |
+| `BT_EDR CH0` Prueba RX | `BT_EDR_RX_BER_2402` | 1. `01,72,FC,00`<br>2. `01,70,FC,02,00,0A`<br>3. `01,72,FC,00` | 1. `04,0E,06,06,72,FC,0C,00,00`<br>2. `04,0E,04,06,70,FC,00`<br>3. `04,0E,06,06,72,FC,00,EB,03` | `1` | `0` | `1` |  |
+| `BT_EDR CH0` Prueba RX | `BT_EDR_RX_RSSI_2402` | `08,FF,EE,05` | `09,FF,EE,00,05,02,00,BC` | `1` | `0` | `1` |  |
+| `BT_EDR CH0` Prueba RX | `HCI_Reset` | `01,03,0C,00` | `01,03,0C,04,0E,04,06,03,0C,00` | `1` | `0` | `1` | Si falla una prueba RX, envíe el comando reset antes de reintentar. |
+|  |  | `/` | `/` | `1` | `0` | `1` |  |
+| `BT_EDR CH39` Prueba RX | `BT_EDR_RX_BER_2441` | 1. `01,72,FC,00`<br>2. `01,70,FC,02,27,0A`<br>3. `01,72,FC,00` | 1. `04,0E,06,06,72,FC,0C,00,00`<br>2. `04,0E,04,06,70,FC,00`<br>3. `04,0E,06,06,72,FC,00,EB,03` | `1` | `0` | `1` |  |
+| `BT_EDR CH39` Prueba RX | `BT_EDR_RX_RSSI_2441` | `08,FF,EE,05` | `09,FF,EE,00,05,02,00,BC` | `1` | `0` | `1` |  |
+| `BT_EDR CH39` Prueba RX | `HCI_Reset` | `01,03,0C,00` | `01,03,0C,04,0E,04,06,03,0C,00` | `1` | `0` | `1` | Si falla una prueba RX, envíe el comando reset antes de reintentar. |
+|  |  | `/` | `/` | `1` | `0` | `1` |  |
+| `BT_EDR CH78` Prueba RX | `BT_EDR_RX_BER_2480` | 1. `01,72,FC,00`<br>2. `01,70,FC,02,4E,0A`<br>3. `01,72,FC,00` | 1. `04,0E,06,06,72,FC,0C,00,00`<br>2. `04,0E,04,06,70,FC,00`<br>3. `04,0E,06,06,72,FC,00,EB,03` | `1` | `0` | `1` |  |
+| `BT_EDR CH78` Prueba RX | `BT_EDR_RX_RSSI_2480` | `08,FF,EE,05` | `09,FF,EE,00,05,02,00,BC` | `1` | `0` | `1` |  |
+| `BT_EDR CH78` Prueba RX | `HCI_Reset` | `01,03,0C,00` | `01,03,0C,04,0E,04,06,03,0C,00` | `1` | `0` | `1` | Si falla una prueba RX, envíe el comando reset antes de reintentar. |
+|  |  | `/` | `/` | `1` | `0` | `1` |  |
+| `BT_BLE CH0` Prueba RX | `BT_BLE_RX_BER_2402` | 1. `01,1F,20,00`<br>2. `01,33,20,03,00,01,01`<br>3. `01,1F,20,00` | 1. `04,0E,06,06,1F,20,0C,00,00`<br>2. `04,0E,04,06,33,20,00`<br>3. `04,0E,06,06,1F,20,00,44,19` | `1` | `0` | `1` |  |
+| `BT_BLE CH0` Prueba RX | `BT_BLE_RX_RSSI_2402` | `08,FF,EE,05` | `09,FF,EE,00,05,02,00,BB` | `1` | `0` | `1` |  |
+| `BT_BLE CH0` Prueba RX | `HCI_Reset` | `01,03,0C,00` | `01,03,0C,04,0E,04,06,03,0C,00` | `1` | `0` | `1` | Si falla una prueba RX, envíe el comando reset antes de reintentar. |
+|  |  | `/` | `/` | `1` | `0` | `1` |  |
+| `BT_BLE CH19` Prueba RX | `BT_BLE_RX_BER_2440` | 1. `01,1F,20,00`<br>2. `01,33,20,03,13,01,01`<br>3. `01,1F,20,00` | 1. `04,0E,06,06,1F,20,0C,00,00`<br>2. `04,0E,04,06,33,20,00`<br>3. `04,0E,06,06,1F,20,00,44,19` | `1` | `0` | `1` |  |
+| `BT_BLE CH19` Prueba RX | `BT_BLE_RX_RSSI_2440` | `08,FF,EE,05` | `09,FF,EE,00,05,02,00,BB` | `1` | `0` | `1` |  |
+| `BT_BLE CH19` Prueba RX | `HCI_Reset` | `01,03,0C,00` | `01,03,0C,04,0E,04,06,03,0C,00` | `1` | `0` | `1` | Si falla una prueba RX, envíe el comando reset antes de reintentar. |
+|  |  | `/` | `/` | `1` | `0` | `1` |  |
+| `BT_BLE CH39` Prueba RX | `BT_BLE_RX_BER_2480` | 1. `01,1F,20,00`<br>2. `01,33,20,03,27,01,01`<br>3. `01,1F,20,00` | 1. `04,0E,06,06,1F,20,0C,00,00`<br>2. `04,0E,04,06,33,20,00`<br>3. `04,0E,06,06,1F,20,00,44,19` | `1` | `0` | `1` |  |
+| `BT_BLE CH39` Prueba RX | `BT_BLE_RX_RSSI_2480` | `08,FF,EE,05` | `09,FF,EE,00,05,02,00,BB` | `1` | `0` | `1` |  |
+| `BT_BLE CH39` Prueba RX | `HCI_Reset` | `01,03,0C,00` | `01,03,0C,04,0E,04,06,03,0C,00` | `1` | `0` | `1` | Si falla una prueba RX, envíe el comando reset antes de reintentar. |
+
+</div>
+
+<div align="center" markdown>
+<em>Tabla: Ejemplo fuente de SF32LB52x: matriz de pruebas TX</em>
+
+| Descripción de la prueba | Nombre de la prueba | Comando enviado | Valor de retorno | Valor de prueba | Límite inferior | Límite superior | Observaciones |
+|---|---|---|---|---|---|---|---|
+| `BT_BR CH0` Prueba TX | `BT_BR_TX_DF1_2402` | 1. `01,72,FC,00`<br>2. `01,71,FC,06,00,53,01,01,05,0A` | 1. `04,0E,06,06,72,FC`<br>2. `04,0E,04,06,71,FC,00` | `1` | `0` | `1` |  |
+| `BT_BR CH0` Prueba TX | `BT_BR_TX_DF2_2402` | 1. `01,71,FC,06,00,53,01,02,05,0A`<br>2. `01,72,FC,00` | 1. `04,0E,04,06,71,FC,00`<br>2. `04,0E,06,06,72,FC` | `1` | `0` | `1` |  |
+| `BT_BR CH39` Prueba TX | `BT_BR_TX_DF1_2441` | 1. `01,72,FC,00`<br>2. `01,71,FC,06,27,53,01,01,05,0A` | 1. `04,0E,06,06,72,FC`<br>2. `04,0E,04,06,71,FC,00` | `1` | `0` | `1` |  |
+| `BT_BR CH39` Prueba TX | `BT_BR_TX_DF2_2441` | 1. `01,71,FC,06,27,53,01,02,05,0A`<br>2. `01,72,FC,00` | 1. `04,0E,04,06,71,FC,00`<br>2. `04,0E,06,06,72,FC` | `1` | `0` | `1` |  |
+| `BT_BR CH78` Prueba TX | `BT_BR_TX_DF1_2480` | 1. `01,72,FC,00`<br>2. `01,71,FC,06,4E,53,01,01,05,0A` | 1. `04,0E,06,06,72,FC`<br>2. `04,0E,04,06,71,FC,00` | `1` | `0` | `1` |  |
+| `BT_BR CH78` Prueba TX | `BT_BR_TX_DF2_2480` | 1. `01,71,FC,06,4E,53,01,02,05,0A`<br>2. `01,72,FC,00` | 1. `04,0E,04,06,71,FC,00`<br>2. `04,0E,06,06,72,FC` | `1` | `0` | `1` |  |
+| Cambiar de BR a EDR | `HEX_Cmd_Switch_To_EDR` | `08,FF,EE,02,0A` | `09,FF,EE,00,02,01,00` | `1` | `0` | `1` |  |
+| `BT_EDR CH0` Prueba TX | `BT_EDR_TX_2402` | 1. `01,72,FC,00`<br>2. `01,71,FC,06,00,A7,02,00,0A,0A`<br>3. `01,72,FC,00` | 1. `04,0E,06,06,72,FC`<br>2. `04,0E,04,06,71,FC,00`<br>3. `04,0E,06,06,72,FC` | `1` | `0` | `1` |  |
+| `BT_EDR CH39` Prueba TX | `BT_EDR_TX_2441` | 1. `01,72,FC,00`<br>2. `01,71,FC,06,27,A7,02,00,0A,0A`<br>3. `01,72,FC,00` | 1. `04,0E,06,06,72,FC`<br>2. `04,0E,04,06,71,FC,00`<br>3. `04,0E,06,06,72,FC` | `1` | `0` | `1` |  |
+| `BT_EDR CH78` Prueba TX | `BT_EDR_TX_2480` | 1. `01,72,FC,00`<br>2. `01,71,FC,06,4E,A7,02,00,0A,0A`<br>3. `01,72,FC,00` | 1. `04,0E,06,06,72,FC`<br>2. `04,0E,04,06,71,FC,00`<br>3. `04,0E,06,06,72,FC` | `1` | `0` | `1` |  |
+| `BT_BLE CH0` Prueba TX | `BT_BLE_TX_DF1_2402` | 1. `01,1F,20,00`<br>2. `01,34,20,04,00,FF,01,01` | 1. `04,0E,06,06,1F,20,0C,00,00`<br>2. `04,0E,04,06,34,20,00` | `1` | `0` | `1` |  |
+| `BT_BLE CH0` Prueba TX | `BT_BLE_TX_DF2_2402` | 1. `01,34,20,04,00,FF,02,01`<br>2. `01,1F,20,00` | 1. `04,0E,04,06,34,20,0C`<br>2. `04,0E,06,06,1F,20,0C,00,00` | `1` | `0` | `1` |  |
+| `BT_BLE CH19` Prueba TX | `BT_BLE_TX_DF1_2440` | 1. `01,1F,20,00`<br>2. `01,34,20,04,13,FF,01,01` | 1. `04,0E,06,06,1F,20,0C,00,00`<br>2. `04,0E,04,06,34,20,00` | `1` | `0` | `1` |  |
+| `BT_BLE CH19` Prueba TX | `BT_BLE_TX_DF2_2440` | 1. `01,34,20,04,13,FF,02,01`<br>2. `01,1F,20,00` | 1. `04,0E,04,06,34,20,0C`<br>2. `04,0E,06,06,1F,20,0C,00,00` | `1` | `0` | `1` |  |
+| `BT_BLE CH39` Prueba TX | `BT_BLE_TX_DF1_2480` | 1. `01,1F,20,00`<br>2. `01,34,20,04,27,FF,01,01` | 1. `04,0E,06,06,1F,20,0C,00,00`<br>2. `04,0E,04,06,34,20,00` | `1` | `0` | `1` |  |
+| `BT_BLE CH39` Prueba TX | `BT_BLE_TX_DF2_2480` | 1. `01,34,20,04,27,FF,02,01`<br>2. `01,1F,20,00` | 1. `04,0E,04,06,34,20,0C`<br>2. `04,0E,06,06,1F,20,0C,00,00` | `1` | `0` | `1` |  |
+
+</div>
+
+<div align="center" markdown>
+<em>Tabla: Ejemplo fuente de SF32LB52x: comandos de salida y restablecimiento</em>
+
+| Descripción de la prueba | Nombre de la prueba | Comando enviado | Valor de retorno | Valor de prueba | Límite inferior | Límite superior | Observaciones |
+|---|---|---|---|---|---|---|---|
+| Salir del modo sin señal | `AT_Cmd_Exit_BT_Mode` | `01,03,0C,00` | `01,03,0C,04,0E,04,06,03,0C,00` | `1` | `0` | `1` |  |
+| Escribir la marca RFT | `AT_Cmd_Write_RFT_Flag_Test` | `AT_SET_RFT_FLAG P` | `SET_RFT_FLAG=OK,P` | `1` | `0` | `1` |  |
+| Leer la marca RFT | `AT_Cmd_Read_RFT_Flag_Test` | `AT_GET_RFT_FLAG` | `GET_RFT_FLAG=OK,P` | `1` | `0` | `1` |  |
+| Esperar | `Delay_Millisecond2s` | `/` | `/` | `1` | `0` | `1` |  |
+| Restablecer la caja de comunicación | `Serial_Port_Switch_Reset` | `/` | `/` | `1` | `0` | `1` |  |
+| Restablecer la fuente programable | `Power_Supply_Off` | `/` | `/` | `1` | `0` | `1` |  |
+| Restablecer la herramienta | `Release_Test_Parameters` | `/` | `/` | `1` | `0` | `1` |  |
+
+</div>
+
 ![Matriz de comandos HCI para pruebas RF de SF32LB52x](../../../../assets/develop/app-notes/rf/hci_cmd.png){ loading="lazy" }
-<div align="center"><em>Figura: Ejemplo del SF32LB52x incluido en la guía de SiFli: matriz de comandos HCI, valores de retorno y elementos de prueba RF.</em></div>
+<div align="center"><em>Figura: Imagen original en chino de la matriz exclusiva de SF32LB52x; solo como referencia, no es una API portátil.</em></div>
 
 Para cada ensayo, registre la familia, revisión del SDK, identificación del firmware, revisión de la placa, pines UART, ruta RF y pérdida del cable. Registre también el modelo y la configuración del instrumento, el canal, PHY/tipo de paquete, potencia, recuentos RX, RSSI y BER/PER. Consulte las guías oficiales detalladas de [SF32LB52x](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/app_note/rf_test_guide.html), [SF32LB55x (la tabla UART también incluye SF32LB57x)](https://docs.sifli.com/projects/sdk/latest/sf32lb55x/app_note/rf_test_guide.html), [SF32LB56x](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/rf_test_guide.html) y [SF32LB58x](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/app_note/rf_test_guide.html).

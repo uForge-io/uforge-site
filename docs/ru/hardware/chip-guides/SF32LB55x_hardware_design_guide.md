@@ -187,7 +187,7 @@ SF32LB55x предназначен для энергоэффективных у�
 
 [SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## Продолжение руководства по проектированию { #continue-the-design-guide }
+## 5. Продолжение руководства по проектированию { #continue-the-design-guide }
 
 Полное руководство продолжается на страницах ниже. Каждая посвящена отдельному этапу проектирования, и на неё можно перейти отсюда.
 

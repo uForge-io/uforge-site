@@ -115,7 +115,7 @@ Se usar o [CodeKit](../../tools/codekit.md), mantenha os mesmos registros de val
 | Ferramenta de compilação não encontrada | Execute novamente `export.sh` / `export.ps1` no terminal atual. |
 | Nome da placa desconhecido | Consulte a documentação de placas compatíveis com o SDK. |
 | O script de download não consegue abrir a porta | Feche os terminais seriais e verifique o cabo/conector USB-UART. |
-| A gravação não começa | Siga o procedimento de download documentado para a placa. No caso da `sf32lb52-lcd_n16r8`, depois de selecionar a porta serial, reinicie a placa e pressione Enter em até 2 segundos para iniciar o download; para as demais placas, siga o procedimento específico de cada uma. Verifique também a alimentação, a porta selecionada e a conexão UART. |
+| A gravação não começa | Siga o procedimento de download documentado para a placa. No caso da `sf32lb52-lcd_n16r8`, recomenda-se reiniciar a placa; nessa sequência, pressione Enter em até 2 segundos após a reinicialização para iniciar o download. Para as demais placas, siga o procedimento específico de cada uma. Verifique também a alimentação, a porta selecionada e a conexão UART. |
 | A saída serial está ilegível | Confira a taxa de transmissão e use a UART de dados, não um cabo somente para carga. |
 
 </div>

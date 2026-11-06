@@ -8,10 +8,14 @@ tags:
     - Puce
 ---
 
+<div id="sf32lb52x"></div>
+
 # Guide de conception matérielle SF32LB52x — Recommandations de conception du schéma { #sf32lb52x-hardware-design-guide-schematic-design-guidelines }
 
 !!! note "Fait partie du Guide de conception matérielle SF32LB52x"
     Les recommandations de conception du schéma s'étendent désormais sur trois pages : cette page (sections 5.1-5.3 : Système minimal, Alimentation, et Horloge), [RF et interfaces utilisateur](SF32LB52x_schematic_rf_interfaces.md) (sections 5.4-5.5), et [Stockage et fabrication](SF32LB52x_schematic_storage_mfg.md) (sections 5.6-5.7). Partez de l'[aperçu du Guide de conception matérielle SF32LB52x](SF32LB52x_hardware_design_guide.md) pour la sélection du composant et le flux de conception complet, ou consultez la [Liste de contrôle du schéma](SF32LB52x_schematic_checklist.md) pour la revue point par point.
+
+<div id="5"></div>
 
 ## 5. Recommandations de conception du schéma { #5-schematic-design-guidelines }
 
@@ -32,6 +36,8 @@ Ce chapitre présente le flux de conception du schéma sur trois pages. Commence
 | Fabrication | DBG_UART/SWD, points de test, flashage en production, accès pour l'étalonnage et listes de contrôle de publication | Plan des points de test, plan du dispositif de test en production, éléments de preuve de publication complets |
 
 </div>
+
+<div id="51"></div>
 
 ### 5.1. Conception du système minimal { #51-minimum-system-design }
 
@@ -54,6 +60,8 @@ Effectuez la première revue du schéma dans l'ordre suivant :
 
 La conception du système d'alimentation définit les rails, les interrupteurs d'alimentation, le chemin de charge, l'OVP, l'utilisation des LDO internes, le comportement de réveil et les états de basse consommation qui assurent la fiabilité du système minimal. Terminez cette section avant le placement des composants sur le PCB, car les choix ultérieurs concernant l'affichage, le stockage, la RF, l'audio et les capteurs dépendent de l'architecture d'alimentation retenue.
 
+<div id="521"></div>
+
 #### 5.2.1. Alimentation { #521-power-supply }
 
 **Résumé rapide**
@@ -65,6 +73,8 @@ La conception du système d'alimentation définit les rails, les interrupteurs d
 **Objectif de conception**
 
 Concevoir une architecture d'alimentation stable et à faible courant de fuite, adaptée à la variante sélectionnée. Elle doit éviter de surcharger les sorties des LDO internes, limiter le bruit sur les rails d'alimentation RF et audio et permettre de couper les charges inutilisées ainsi que le stockage de démarrage en mode basse consommation.
+
+<div id="5211"></div>
 
 ##### 5.2.1.1. Exigences d'alimentation du processeur { #5211-processor-power-supply-requirements }
 
@@ -126,8 +136,13 @@ Concevoir une architecture d'alimentation stable et à faible courant de fuite, 
 
     (1) VDD_SIP : le SF32LB52BU36 nécessite une alimentation externe 1,8 V ou 3,3 V ; le SF32LB52BU56 nécessite une alimentation externe 3,3 V ; le SF32LB52DUB6 nécessite une alimentation externe 1,8 V ; les SF32LB52E/G/JUx6 sont alimentés directement par le LDO interne et n'ont besoin d'aucune alimentation externe.
 
+    !!! note "Portée de PVDD à confirmer"
+        Le tableau indique PVDD = 2,97–3,63 V (3,3 V typique), plage dans laquelle s'applique la mention du LDO interne pour E/G/J. La source B3 décrit séparément un cas où PVDD = 1,8 V : le LDO interne n'est alors pas disponible et une alimentation externe de 1,8 V est nécessaire. Ce cas est hors de la plage tabulée et la source n'en précise pas la portée. Faites confirmer son applicabilité par SiFli ; il ne s'agit pas d'une recommandation d'utiliser PVDD = 1,8 V. Voir [Stockage et fabrication](SF32LB52x_schematic_storage_mfg.md) pour la réserve liée à la commutation de VDD_SIP.
+
     !!! important "Remarque sur le mode Hibernate"
         À l'entrée en mode Hibernate, VDD_SIP doit être coupé ; sinon, un courant de fuite peut circuler par les E/S de la mémoire intégrée dans le même boîtier. Utilisez la broche dédiée PA21 pour commander l'interrupteur d'alimentation de VDD_SIP.
+
+<div id="5212-buck"></div>
 
 ##### 5.2.1.2. Sélection de l'inductance BUCK { #5212-buck-inductor-selection }
 
@@ -135,6 +150,8 @@ Les deux groupes de conception utilisent la même spécification d'inductance.
 
 !!! important "Paramètres clés de l'inductance de puissance"
     L (inductance) = 4,7 µH ± 20 %, DCR (résistance CC) ≤ 0,4 Ω, Isat (courant de saturation) ≥ 450 mA.
+
+<div id="5213"></div>
 
 ##### 5.2.1.3. Batterie et contrôle de charge { #5213-battery-and-charging-control }
 
@@ -208,6 +225,8 @@ Les deux groupes de conception utilisent la même spécification d'inductance.
     !!! info "Non applicable"
         Cette variante est alimentée directement par une source externe régulée et **ne comporte pas de circuit de gestion de charge**. Cette section ne s'applique pas. Si votre produit nécessite une alimentation par batterie et une fonction de charge, utilisez plutôt la série SF32LB520/3/5/7.
 
+<div id="5214-standby"></div>
+
 ##### 5.2.1.4. Réduction de la consommation en veille { #5214-reducing-standby-power }
 
 === "SF32LB520/3/5/7 (alimenté par batterie)"
@@ -225,6 +244,8 @@ Les deux groupes de conception utilisent la même spécification d'inductance.
     Utilisez des interrupteurs d'alimentation pour la gestion dynamique de l'alimentation de chaque bloc fonctionnel ; pour les modules ou chemins toujours actifs, sélectionnez des composants à faible courant de repos.
 
     Définissez soigneusement l'état matériel initial des GPIO qui commandent les interrupteurs d'alimentation. Ajoutez des résistances de rappel au niveau haut ou bas, de l'ordre du mégohm, pour que ces interrupteurs soient désactivés par défaut. Choisissez des LDO et des interrupteurs d'alimentation à faible courant de repos (Iq) et à faible courant d'arrêt (Istb). Accordez une attention particulière à l'Iq des composants d'alimentation qui restent toujours actifs.
+
+<div id="5215"></div>
 
 ##### 5.2.1.5. Liste de contrôle de conception de l'alimentation { #5215-power-design-checklist }
 
@@ -247,6 +268,8 @@ Les deux groupes de conception utilisent la même spécification d'inductance.
 - Mesurez `VCC`/`PVDD`, la sortie BUCK, les rails RF/audio, et l'alimentation du stockage avant que le firmware n'active les périphériques.
 - Sur les conceptions alimentées par batterie, vérifiez la détection de connexion du chargeur, la précharge, la charge à courant constant et le comportement de recharge.
 - Mesurez le courant en Standby et en Hibernate avec les interrupteurs d'alimentation de l'afficheur, des capteurs, du stockage, et du moteur désactivés.
+
+<div id="522"></div>
 
 #### 5.2.2. Modes de fonctionnement et sources de réveil { #522-operating-modes-and-wake-sources }
 
@@ -304,7 +327,11 @@ En modes Standby et Hibernate, toute la famille prend en charge 15 sources d'int
 - [ ] Les alimentations du stockage externe et des capteurs ne provoquent pas de courant de fuite par les broches d'E/S en Hibernate.
 - [ ] Les équipes firmware et matériel s'accordent sur l'état utilisé pour l'expédition, le stockage en rayon, et les modes de veille normaux.
 
+<div id="53"></div>
+
 ### 5.3. Génération d'horloge { #53-clock-generation }
+
+<div id="531"></div>
 
 #### 5.3.1. Sélection du quartz { #531-crystal-selection }
 

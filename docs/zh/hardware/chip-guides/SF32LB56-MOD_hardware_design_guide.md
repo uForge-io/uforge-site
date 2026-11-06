@@ -9,7 +9,11 @@ hide:
     - navigation
 ---
 
+<div id="sf32lb56-mod"></div>
+
 # SF32LB56-MOD 硬件设计指南 { #sf32lb56-mod-hardware-design-guide }
+
+<div id="1"></div>
 
 ## 1. 引言 { #1-introduction }
 
@@ -23,7 +27,11 @@ hide:
 !!! note "合规标识适用范围"
     所提供的 SF32LB56-MOD-N16R12N1 和 SF32LB56-MOD-A128R12N1 标签上标有 FCC、IC、CMIIT ID 和 HVIN 编号，以及 CE 标志，详见[模组标识汇总](../../sf32-products/modules/SF32LB56-MOD.md#regulatory-markings)。请针对具体版本核实批准文件以及天线和集成条件；不要据此推定其他型号或最终产品也在覆盖范围内。
 
+<div id="2"></div>
+
 ## 2. 器件概览 { #2-device-overview }
+
+<div id="21"></div>
 
 ### 2.1 架构 { #21-architecture }
 
@@ -33,6 +41,8 @@ SF32LB56-MOD 基于 SF32LB56xV 系列双核 MCU 平台：HCPU 负责应用和图
 
 !!! note "定制需求"
     如需其他模组配置或有定制需求，请[联系 μForge.io](../../about/contact.md)。
+
+<div id="22"></div>
 
 ### 2.2 型号 { #22-variants }
 
@@ -47,6 +57,8 @@ SF32LB56-MOD 基于 SF32LB56xV 系列双核 MCU 平台：HCPU 负责应用和图
 | SF32LB56-MOD-D128R12N1 | 128 MB SD-NAND | 4+8 MB OPI-PSRAM | 1 MB QSPI-NOR | -40~85°C | 18.0 × 32.9 × 3.1 mm |
 
 </div>
+
+<div id="23"></div>
 
 ### 2.3 主要硬件特性 { #23-major-hardware-features }
 
@@ -67,11 +79,17 @@ SF32LB56-MOD 基于 SF32LB56xV 系列双核 MCU 平台：HCPU 负责应用和图
 
 </div>
 
+<div id="24"></div>
+
 ### 2.4 典型应用 { #24-typical-applications }
 
 典型应用包括高端智能手表、智能手环、可穿戴医疗设备、健身设备、电动自行车仪表、汽车钥匙、可穿戴式车载遥控器、智能家电、智能门锁、图形化 HMI、工业传感器中枢、工业监测终端、低功耗传感器中枢和蓝牙 Mesh 设备。
 
+<div id="3"></div>
+
 ## 3. 设计速览 { #3-design-at-a-glance }
+
+<div id="31"></div>
 
 ### 3.1 一页式工程摘要 { #31-one-page-engineering-summary }
 
@@ -95,6 +113,8 @@ SF32LB56-MOD 基于 SF32LB56xV 系列双核 MCU 平台：HCPU 负责应用和图
 
 </div>
 
+<div id="32"></div>
+
 ### 3.2 推荐外设器件 { #32-recommended-external-components }
 
 <div align="center"><em>表 3.2-1：推荐外设器件</em></div>
@@ -113,12 +133,16 @@ SF32LB56-MOD 基于 SF32LB56xV 系列双核 MCU 平台：HCPU 负责应用和图
 
 </div>
 
+<div id="33"></div>
+
 ### 3.3 电源树 { #33-power-tree }
 
 VDD_3V3 为 MCU 的 PVDD、AVDD33_ANA、AVDD33_AUD、AVDD_BRF、VDDIOA2 以及模组内部 Flash 供电，思澈科技（SiFli）建议该电源轨使用 LDO。VDD_1V8 为 MCU 合封存储器供电。VDDIO 为 MCU 的 VDDIOA/VDDIOB I/O 端口供电。
 
 !!! info "图 3.3-1：SF32LB56-MOD 模组供电示意图"
     见 DS5602 V0.3 图 7-1。
+
+<div id="34"></div>
 
 ### 3.4 系统框图 { #34-system-block-diagram }
 
@@ -127,7 +151,11 @@ VDD_3V3 为 MCU 的 PVDD、AVDD33_ANA、AVDD33_AUD、AVDD_BRF、VDDIOA2 以及�
 !!! info "图 3.4-1：SF32LB56-MOD 功能框图"
     见 DS5602 V0.3 图 2-1。
 
+<div id="4"></div>
+
 ## 4. 硬件设计流程 { #4-hardware-design-flow }
+
+<div id="41"></div>
 
 ### 4.1 设计顺序 { #41-design-sequence }
 
@@ -140,9 +168,13 @@ VDD_3V3 为 MCU 的 PVDD、AVDD33_ANA、AVDD33_AUD、AVDD_BRF、VDDIOA2 以及�
 7. 按天线净空要求摆放模组。
 8. 发布前按第 7 章核对表完成原理图和 PCB 复查。
 
+<div id="42"></div>
+
 ### 4.2 评审顺序 { #42-review-sequence }
 
 建议按原理图评审、管脚复用评审、电源上电评审、RF/天线评审、PCB 评审、首板启动调试评审、RF 验证、环境/可靠性评审、量产测试评审的顺序推进。
+
+<div id="43"></div>
 
 ### 4.3 里程碑 { #43-milestones }
 
@@ -160,9 +192,15 @@ VDD_3V3 为 MCU 的 PVDD、AVDD33_ANA、AVDD33_AUD、AVDD_BRF、VDDIOA2 以及�
 
 </div>
 
+<div id="5"></div>
+
 ## 5. 原理图设计 { #5-schematic-design }
 
+<div id="51"></div>
+
 ### 5.1 电源系统 { #51-power-system }
+
+<div id="511"></div>
 
 #### 5.1.1 电源 { #511-power-supply }
 
@@ -180,11 +218,17 @@ VDD_3V3 为 MCU 的 PVDD、AVDD33_ANA、AVDD33_AUD、AVDD_BRF、VDDIOA2 以及�
 
 VDD_3V3、VDD_1V8 和 VDDIO 必须同时上电。每路电源都需要在靠近模组管脚处放置 4.7 μF 电容。虽然 VDDIO 支持 1.7–3.6 V，规格书同时说明 PA00–PA11 接口电平固定为 3.3 V，不随 VDDIO 变化。
 
+<div id="512"></div>
+
 #### 5.1.2 工作模式 { #512-operating-modes }
 
 BOOT_MODE 控制启动行为：高电平为下载模式，低电平为用户模式。复位和量产烧录期间应保证 BOOT_MODE 网络状态明确。PB32/PWRKEY 支持高有效 10 s 长按复位，需增加 10 kΩ 下拉电阻。
 
+<div id="52-rf"></div>
+
 ### 5.2 时钟与 RF { #52-timing-and-rf }
+
+<div id="521"></div>
 
 #### 5.2.1 时钟 { #521-clock }
 
@@ -213,7 +257,11 @@ BOOT_MODE 控制启动行为：高电平为下载模式，低电平为用户模�
 
 模组支持 PCB 板载天线，也支持通过 IPEX 兼容连接器连接外部天线。应在最终外壳中验证通信距离和 RF 性能，而不能只在开放的测试台上验证。
 
+<div id="53"></div>
+
 ### 5.3 用户接口 { #53-user-interfaces }
+
+<div id="531"></div>
 
 #### 5.3.1 显示 { #531-display }
 
@@ -224,6 +272,8 @@ LCD RGB 信号线需要串 33–100 Ω 电阻。RGB、SPI 显示和触摸接口�
 !!! info "图 5.3-1：开发板推荐管脚分配图"
     见 DS5602 V0.3 图 7-6。
 
+<div id="532"></div>
+
 #### 5.3.2 音频 { #532-audio }
 
 模组引出模拟 DAC 输出、MIC_BIAS、MIC_ADC_IN、I2S 和 PDM 相关管脚。音频 DAC 为 24-bit 输出，支持 8 kHz 至 48 kHz 采样率，SNR 和动态范围均为 109 dB。音频 ADC 为 24-bit Sigma-Delta 输入，支持 8 kHz 至 48 kHz 采样率，SNR 和动态范围均为 99 dB。
@@ -232,19 +282,29 @@ DS5602 V0.3 列出 2 路数字麦克风输入和 2 路 PDM 接口（PDM1/PDM2）
 
 模拟音频走线应远离开关电源、LCD 时钟和天线馈线区域。MIC_BIAS 与 MIC_ADC_IN 的滤波器件应靠近麦克风电路放置。
 
+<div id="533"></div>
+
 #### 5.3.3 按键 { #533-buttons }
 
 PB32 是 PWRKEY 输入，支持高有效 10 s 长按复位。设计中必须增加 10 kΩ 下拉电阻，并确保运输、深度睡眠（Deep Sleep）和上电过程中该信号不会悬空。
+
+<div id="534-pwm"></div>
 
 #### 5.3.4 马达和 PWM 负载 { #534-motor-and-pwm-loads }
 
 规格书推荐管脚分配图中标注 GPTIM 的管脚支持 PWM 输出。马达、背光、蜂鸣器和其他负载应使用外部驱动，不应由模组 GPIO 直接驱动电感或大电流负载。
 
+<div id="54"></div>
+
 ### 5.4 存储与连接 { #54-storage-and-connectivity }
+
+<div id="541"></div>
 
 #### 5.4.1 存储 { #541-storage }
 
 模组按型号提供不同主 Flash、4+8 MB OPI-PSRAM 和 1 MB 备用 QSPI-NOR Flash。MPI3 可连接外部 SPI NOR 或 SPI NAND，但 PA06–PA11 默认连接模组内部 Flash，外部不可用。SDIO 与 MPI3 共用 I/O，不能同时使用。
+
+<div id="542"></div>
 
 #### 5.4.2 传感器 { #542-sensors }
 
@@ -256,21 +316,33 @@ UART 支持全双工，最高 6 Mbps。I2C 支持标准模式 100 kbps、快速�
 
 管脚 6 UART4_TXD 和管脚 7 UART4_RXD 是默认打印串口，并支持程序下载和调试。PA16、PA17 可复用为 DBG_UART，用作程序下载和调试时需要串 100 Ω 电阻。
 
+<div id="544-usb-spi-sdio-i2s"></div>
+
 #### 5.4.4 USB、SPI、SDIO 和 I2S { #544-usb-spi-sdio-and-i2s }
 
 USB2.0 FS 支持 Host/Device 并集成 PHY。SPI 支持 SSP/SPI 与 Microwire，HPSYS SPI 最高 48 MHz，LPSYS SPI 最高 24 MHz。SDMMC1 支持 SD 3.0、SDIO 3.0 和 eMMC 4.5.1，包含 SDR 与 DDR 模式；SDMMC2 支持 SD/SDIO/eMMC 的 SDR 模式，最高 48 MHz。I2S 支持主/从、全双工、左对齐/右对齐/标准格式和最高 24-bit PCM 位宽。
 
+<div id="55"></div>
+
 ### 5.5 生产相关 { #55-manufacturing }
+
+<div id="551"></div>
 
 #### 5.5.1 调试 { #551-debug }
 
 管脚 79 SWDIO 和管脚 80 SWCLK 是 SWD 调试/下载接口。早期样机和量产夹具都应保留 SWD 访问能力。除非产品已有其他经认可的烧录路径，也应保留默认 UART4 下载/调试通道。
 
+<div id="552"></div>
+
 #### 5.5.2 量产 { #552-production }
 
 设计中应预留电源、地、BOOT_MODE、复位/PWRKEY、SWD、UART 下载以及校准或 RF 测试所需接口。量产测试软件应覆盖启动、Flash、显示、触摸、音频、USB、传感器、RF 通信、睡眠/唤醒和电流测试。
 
+<div id="6-pcb"></div>
+
 ## 6. PCB 布局 { #6-pcb-layout }
+
+<div id="61"></div>
 
 ### 6.1 机械尺寸与 PCB 封装图 { #61-mechanical-and-footprint }
 
@@ -281,6 +353,8 @@ USB2.0 FS 支持 Host/Device 并集成 PHY。SPI 支持 SSP/SPI 与 Microwire，
 
 !!! info "图 6.1-2：推荐 PCB 封装图"
     见 DS5602 V0.3 图 8-2，单位为 mm。
+
+<div id="62"></div>
 
 ### 6.2 天线摆放 { #62-antenna-placement }
 
@@ -294,12 +368,16 @@ USB2.0 FS 支持 Host/Device 并集成 PHY。SPI 支持 SSP/SPI 与 Microwire，
 !!! info "图 6.2-2：PCB 天线净空示意图"
     见 DS5602 V0.3 图 8-5。
 
+<div id="63"></div>
+
 ### 6.3 外部天线连接器 { #63-external-antenna-connector }
 
 外部天线方案中，规格书描述了一种与 Hirose U.FL 系列、I-PEX MHF I、Amphenol AMC 兼容的第一代外部天线连接器。
 
 !!! info "图 6.3-1：外部天线连接器尺寸图"
     见 DS5602 V0.3 图 8-3。
+
+<div id="64"></div>
 
 ### 6.4 PCB 布局核对表 { #64-layout-checklist }
 
@@ -319,7 +397,11 @@ USB2.0 FS 支持 Host/Device 并集成 PHY。SPI 支持 SSP/SPI 与 Microwire，
 
 </div>
 
+<div id="7"></div>
+
 ## 7. 硬件验证 { #7-hardware-validation }
+
+<div id="71"></div>
 
 ### 7.1 电气特性 { #71-electrical-characteristics }
 
@@ -375,6 +457,8 @@ USB2.0 FS 支持 Host/Device 并集成 PHY。SPI 支持 SSP/SPI 与 Microwire，
 
 VDD 为 I/O 电源。VOH 和 VOL 的测量条件为高阻负载。
 
+<div id="72"></div>
+
 ### 7.2 功耗 { #72-power-consumption }
 
 <div align="center"><em>表 7.2-1：3.3 V、发射功率（TX Power）为 0 dBm 时的 BT/BLE 电流</em></div>
@@ -423,6 +507,8 @@ BT Sniff 测试条件为 iPhone 8 Plus、attempt=1。Scan 和 Both Scan 分别�
 
 </div>
 
+<div id="73"></div>
+
 ### 7.3 原理图核对表 { #73-schematic-checklist }
 
 <div align="center"><em>表 7.3-1：原理图设计核对表</em></div>
@@ -447,6 +533,8 @@ BT Sniff 测试条件为 iPhone 8 Plus、attempt=1。Scan 和 Both Scan 分别�
 
 </div>
 
+<div id="74"></div>
+
 ### 7.4 存储、搬运与装配 { #74-storage-handling-and-assembly }
 
 <div align="center"><em>表 7.4-1：存储、搬运与装配要求</em></div>
@@ -467,6 +555,8 @@ BT Sniff 测试条件为 iPhone 8 Plus、attempt=1。Scan 和 Both Scan 分别�
 
 !!! info "图 7.4-1：回流焊温度曲线图"
     DS5602 V0.3 图 9-1 规定：25–150°C 升温 60–90 s，升温速率 1–3°C/s；150–200°C 预热 60–120 s；高于 217°C 持续 60–90 s；峰值为 235–250°C；从峰值以 -1 至 -5°C/s 降至 180°C。图中指定 SAC305 焊料。下方图例给出的峰值时间范围为 30–70 s，曲线另标“焊接时间 >30 s”；规格书未说明两者的关系。不要将两项标注混为一谈；量产前请确认工艺曲线。
+
+<div id="8"></div>
 
 ## 8. 相关文档 { #8-related-documents }
 

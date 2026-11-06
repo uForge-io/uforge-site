@@ -65,7 +65,7 @@ OpenSiFli 正在 [OpenSiFli/sifli-rs](https://github.com/OpenSiFli/sifli-rs) 开
 
 | 适合 | 不适合 |
 |:-----|:-------|
-| 实验和驱动探索。 | 量产进度紧迫且需要厂商支持的项目。 |
+| 实验和驱动探索。 | 量产排期需要厂商支持的项目。 |
 | 已经使用嵌入式 Rust 的团队。 | 当前就需要完整蓝牙（Bluetooth）、显示或音频栈的产品。 |
 | 为提高 HAL/PAC 成熟度作出贡献。 | 使用 Arduino 或 SDK 示例可以更快完成的一次性原型。 |
 

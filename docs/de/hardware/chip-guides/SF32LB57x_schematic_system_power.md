@@ -8,10 +8,14 @@ tags:
     - Chip
 ---
 
+<div id="sf32lb57x"></div>
+
 # SF32LB57x Hardware-Design-Leitfaden — Minimalsystem & Stromversorgung { #sf32lb57x-hardware-design-guide-minimum-system-power }
 
 !!! note "Teil des SF32LB57x Hardware-Design-Leitfadens"
     Die Schaltplanrichtlinien sind auf drei Seiten verteilt: diese Seite (Abschnitte 5.1-5.2: Minimalsystem und Stromversorgung), [Takt, RF & Benutzerschnittstellen](SF32LB57x_schematic_clock_rf_interfaces.md) (Abschnitte 5.3-5.5) und [Speicher & Fertigung](SF32LB57x_schematic_storage_mfg.md) (Abschnitte 5.6-5.7). Beginnen Sie mit der [Übersicht zum SF32LB57x-Hardware-Design-Leitfaden](SF32LB57x_hardware_design_guide.md), um das Gerät auszuwählen und den vollständigen Designablauf kennenzulernen.
+
+<div id="5"></div>
 
 ## 5. Richtlinien für den Schaltplanentwurf { #5-schematic-design-guidelines }
 
@@ -33,7 +37,11 @@ Dieses Kapitel folgt der üblichen Reihenfolge zur Inbetriebnahme einer Platine.
 
 </div>
 
+<div id="51"></div>
+
 ### 5.1. Minimalsystem-Design { #51-minimum-system-design }
+
+<div id="511"></div>
 
 #### 5.1.1. Ablauf zur Auslegung des Minimalsystems { #511-minimum-system-design-sequence }
 
@@ -45,6 +53,8 @@ Fehler bei der Inbetriebnahme gehen meist auf das Minimalsystem, die Stromversor
 4. Legen Sie den Stromversorgungsbaum im Grobentwurf, den Lade-/OVP-Pfad, BUCK-Induktivität und -Kondensatoren sowie die Standardzustände der Versorgungsschienen fest. Schließen Sie anschließend die Detailprüfung in Abschnitt 5.2 ab.
 5. Wählen Sie den 48-MHz- und den 32,768-kHz-Quarz und bestätigen Sie den Kalibrierplan in Abschnitt 5.3.
 6. Reservieren Sie Testpunkte für DBG-UART, SWD, Boot-Modus, Stromversorgung, Masse und den Prüfadapter.
+
+<div id="512"></div>
 
 #### 5.1.2. Minimalsystem-Schaltpläne { #512-minimum-system-schematics }
 
@@ -78,6 +88,8 @@ SF32LB57x besitzt mehrere Minimalsystem-Schaltplanvarianten. Verwenden Sie dieje
 
 <div align="center"><em>Abbildung 5.1-6: BGA112 Minimalsystem, 3,3-V-Versorgung</em></div>
 <!-- /BGA-ONLY -->
+
+<div id="513"></div>
 
 #### 5.1.3. Boot-Speicher und Strap-Konfiguration { #513-boot-storage-and-strap-configuration }
 
@@ -114,6 +126,8 @@ Wählen Sie das Boot-Medium vor dem Einfrieren des Schaltplans. Gehäuseintegrie
 <div align="center"><em>Abbildung 5.1-7: Empfohlene Bootstrap-Pin-Schaltung</em></div>
 
 Die Versorgung des Boot-Mediums hängt vom Medientyp und von der Versorgungsfamilie ab. Bei akkubetriebenen Varianten wird externes NOR-Flash aus `VDD33_VOUT1` versorgt; für externes SPI-NAND-Flash ist ein Lastschalter hinter `VDD33_VOUT1` erforderlich; externes SD-NAND-Flash und eMMC verwenden einen externen LDO. Verwenden Sie bei 3,3-V-Versorgungsvarianten für alle externen Boot-Medien einen externen LDO. SiFli empfiehlt `PA21` als Enable-Signal für den Versorgungsschalter des externen Boot-Mediums: High schaltet die Schiene ein, Low schaltet sie aus. Führt eine akkubetriebene Variante `PA21` nicht heraus, erlaubt der Quellleitfaden stattdessen einen GPIO mit standardmäßigem Pull-up. Stellen Sie sicher, dass die Versorgung des Boot-Mediums beim Start verfügbar ist. Belegt gehäuseintegrierter Speicher bereits MPI3, ist die externe Nutzung von MPI3 auf SD-NAND-Flash oder eMMC beschränkt; schließen Sie kein externes SPI-NOR- oder SPI-NAND-Flash an diesen Kanal an.
+
+<div id="514"></div>
 
 #### 5.1.4. Debug- und Download-Zugang { #514-debug-and-download-access }
 
@@ -153,7 +167,11 @@ Reservieren Sie Debug- und Wiederherstellungszugang vor der Zuweisung der Produk
 
 `PA18`/`PA19` sind standardmäßig die DBG-UART-Pins und `PA43`/`PA44` die SWD-Pins; SWD kann auch auf `PA18`/`PA19` umgeschaltet werden. Der Chip unterstützt vier Download-Schnittstellen: DBG-UART, SWD, Standard-UART und USB. Im normalen Boot sind nur DBG-UART und SWD verfügbar; der BOOT-Modus kann alle vier aktivieren. BOOT-Modus und SWD-Pinumschaltung hängen von `PA00`, dem BOOT-Register, `PA01` und dem BOOT-Schalter des Hosts ab. Prüfen Sie für Produktionsprogrammierung und Wiederherstellung die vollständige Modustabelle der Quelle; leiten Sie die Download-Schnittstelle nicht allein aus einem einzelnen Pinzustand ab.
 
+<div id="52"></div>
+
 ### 5.2. Stromversorgungssystem { #52-power-system }
+
+<div id="521"></div>
 
 #### 5.2.1. Planung des Stromversorgungsbaums { #521-power-tree-planning }
 
@@ -173,6 +191,8 @@ Zeichnen Sie den Stromversorgungsbaum vor der Schaltplaneingabe und beschriften 
 
 </div>
 
+<div id="522"></div>
+
 #### 5.2.2. Akkubetriebene Varianten { #522-battery-powered-variants }
 
 Akkubetriebene Varianten nutzen üblicherweise `VBUS`, `VBAT`, `VCC`, `VSYS`, `BUCK_LX`, `BUCK_FB`, interne LDO-Ausgänge, Audio-Versorgungspins und RF-Versorgungspins.
@@ -186,6 +206,8 @@ Wesentliche Anforderungen:
 - Nutzen Sie `VDD33_VOUT1`, `VDD33_VOUT2` und andere interne Reglerausgänge nur für ausdrücklich erlaubte Lasten. Die SiFli-Quelle enthält einen Widerspruch: Der Text zum Energiesparbetrieb und das zugehörige Diagramm zeigen externe Sensoren an `VDD33_VOUT1`, während die Stromversorgungs-Checkliste derselben Anleitung diesen Ausgang auf gehäuseintegriertes oder externes NOR-/NAND-Flash und `AVDD33_AUD` beschränkt und andere Peripherie untersagt. Bis SiFli den Widerspruch klärt, schließen Sie keine Sensoren an `VDD33_VOUT1` an.
 - Schließen Sie `AVDD_BRF` und `AVDD33_AUD` über die empfohlenen Quellschienen mit lokaler Filterung an.
 
+<div id="523-33-v"></div>
+
 #### 5.2.3. 3,3-V-Versorgungsvarianten { #523-33-v-supply-variants }
 
 Varianten mit 3,3-V-Versorgung verwenden externe 3,3 V für `PVDD`, `AVDD33`, `AVDD_BRF`, `AVDD33_AUD` und weitere Domänen. Wählen Sie für `VDDIOA` anhand der genauen Bestellnummer 1,8 V oder 3,3 V.
@@ -197,6 +219,8 @@ Wesentliche Anforderungen:
 - Wird `VBATS` zur Akkumessung genutzt, prüfen Sie Eingangsbereich und Filterung.
 - Versorgen Sie bei 3,3-V-Versorgungsvarianten alle externen Boot-Medien aus einem externen LDO; als Enable-Signal wird `PA21` empfohlen.
 - Verbinden Sie interne Referenzen und interne LDO-Ausgangspins nur mit den erforderlichen externen Kondensatoren. Speisen Sie sie nicht aus einer externen Spannungsquelle.
+
+<div id="524"></div>
 
 #### 5.2.4. Kurzreferenz zu Versorgungskondensatoren und ihrer Verwendung { #524-power-capacitor-and-usage-quick-reference }
 
@@ -224,6 +248,8 @@ Verwenden Sie diese Tabelle für die Schaltplan-Vorprüfung. Die endgültigen We
 
 </div>
 
+<div id="525-buck"></div>
+
 #### 5.2.5. BUCK-Induktivität und Feedback { #525-buck-inductor-and-feedback }
 
 Empfohlene BUCK-Induktivitätsparameter:
@@ -247,6 +273,8 @@ PCB-Anforderungen:
 - Halten Sie die `BUCK_FB`-Leitung angemessen breit; 0,25 mm oder breiter wird empfohlen.
 - Halten Sie eine solide Referenzmasse nahe dem Induktivitätsbereich und vermeiden Sie das Einkoppeln von Rauschen in Quarz-, RF-, Audio- und GPADC-Leitungen.
 - Enthält das Produkt empfindliche Schaltungen wie GPS, Herzfrequenzmessung, EKG oder analoge Mikrofone, reservieren Sie optionale Footprints für EMI-Abstimmbauteile nahe dem BUCK_LX-Bereich. Legen Sie die endgültigen Werte während der EMV-Validierung des Systems fest.
+
+<div id="526-ovp"></div>
 
 #### 5.2.6. Laden und OVP { #526-charging-and-ovp }
 
@@ -274,6 +302,8 @@ OVP-Hinweise:
 !!! warning "Abweichender VBUS-Bereich"
     Die aktuellen Gehäusetabellen und der OVP-Text nennen 4,5–5,5 V für `VBUS`; die Checkliste verlangt weiterhin 4,6–5,5 V. Bis zur Klärung durch SiFli mit der strengeren Untergrenze von 4,6 V auslegen.
 
+<div id="527"></div>
+
 #### 5.2.7. Versorgungsstrategie für Energiesparzustände { #527-low-power-supply-strategy }
 
 Planen Sie das Energiesparverhalten bereits im Schaltplan ein.
@@ -286,6 +316,8 @@ Empfehlungen:
 - Versorgen Sie I2C-Pull-ups aus derselben Schiene wie die entsprechende Peripherie, um Leckstrom im Schlafzustand zu vermeiden.
 - Wählen Sie für dauerhaft aktive Schaltungen Bauteile mit niedrigem Iq und niedrigem Abschaltstrom.
 - Dient `VSYS` oder ein dauerhaft aktiver LDO als GPIO-Pull-up-Schiene, berücksichtigen Sie diesen Leckstrom im Schlafstrombudget.
+
+<div id="528"></div>
 
 #### 5.2.8. Referenzabbildungen zu Stromversorgung und Laden { #528-power-and-charging-reference-figures }
 
@@ -334,6 +366,8 @@ Referenzabbildungen zu Laden und OVP:
 ![Abbildung 5.2-9: Anwendung mit geregeltem OVP-Ausgang](../../sf32-products/chips/assets/57x/SF32LB57x-OVP-REGU.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Abbildung 5.2-9: Anwendung mit geregeltem OVP-Ausgang</em></div>
+
+<div id="529"></div>
 
 #### 5.2.9. Elektrische Randbedingungen nach Gehäuse und Stromversorgungsfamilie { #529-package-and-power-family-electrical-constraints }
 
@@ -400,9 +434,13 @@ Die Versorgungsanforderungen des SF32LB57x unterscheiden sich je nach Gehäuse u
 </div>
 
 
+<div id="5210"></div>
+
 #### 5.2.10. Betriebsmodi und Weckquellen { #5210-operating-modes-and-wake-sources }
 
 Betriebsmodi und Weckquellen gehören zur Prüfung des Stromversorgungssystems, da sie bestimmen, welche Schienen, Pull-ups, externen Lasten und weckfähigen GPIOs in jedem Energiesparzustand aktiv bleiben.
+
+<div id="5211"></div>
 
 #### 5.2.11. Energiemodi { #5211-power-modes }
 
@@ -422,6 +460,8 @@ Die SF32LB57x-Familie bietet zehn Interruptquellen, die das Gerät aus Standby u
 
 </div>
 
+<div id="5212"></div>
+
 #### 5.2.12. Weckkonzept { #5212-wake-design }
 
 - Verbinden Sie Tasten, Touch-Interrupts und Sensor-Interrupts, die das System wecken sollen, mit weckfähigen GPIOs.
@@ -429,6 +469,8 @@ Die SF32LB57x-Familie bietet zehn Interruptquellen, die das Gerät aus Standby u
 - Prüfen Sie IO-Hold-, Hochohmig-, Pull-up-, Pull-down- und Peripherieversorgungszustände in Standby und Hibernate.
 - Für ein Wecken beim Anschließen von USB ist ein VBUS-Teiler erforderlich, der mit einem weckfähigen GPIO mit korrekter I/O-Spannung verbunden ist.
 - Prüfen Sie Bluetooth-, RTC- und externe Weckfunktionen gemeinsam mit der Energiesparrichtlinie der Firmware.
+
+<div id="5213"></div>
 
 #### 5.2.13. Validierung des Energiesparbetriebs { #5213-low-power-validation }
 
@@ -469,6 +511,8 @@ Messen Sie während des EVT mindestens die folgenden Zustände:
 </div>
 
 Erfassen Sie für jede Messung Firmware-Version, Versorgungsspannung, Akkusimulator-Einstellung, Peripherie-Verbindungszustand, Bluetooth-Verbindungszustand und Umgebungstemperatur.
+
+<div id="5214"></div>
 
 #### 5.2.14. Vollständige Stromversorgungs-Pin-Referenz { #5214-full-power-supply-pin-reference }
 

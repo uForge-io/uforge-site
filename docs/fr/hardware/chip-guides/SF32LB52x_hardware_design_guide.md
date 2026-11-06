@@ -62,7 +62,7 @@ La famille intègre :
 - Une radio Bluetooth 5.3 double mode
 - Un accélérateur graphique 2D/2.5D ePicasso 2.0
 - Les notes d'application matérielles originales de SiFli décrivent un accélérateur intégré de réseaux neuronaux pour l'IA. Le [guide NNACC de SiFli-SDK](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/nnacc.html) répertorie SF32LB55x, SF32LB56x et SF32LB58x, mais pas SF32LB52x ; vérifiez la prise en charge logicielle de la référence exacte avant de dépendre de cet accélérateur.
-- Un contrôleur d'affichage prenant en charge les interfaces SPI, QSPI, 8080, JDI et EPD 8 bits
+- Un contrôleur d'affichage prenant en charge SPI, QSPI, 8080 et JDI ; l'EPD parallèle 8 bits est documenté pour `52B/D/E/G/J` et doit être confirmé pour la référence exacte
 - Un périphérique USB 2.0 Full-Speed
 - Une interface de stockage SDIO/eMMC sur les variantes prises en charge
 - Un codec audio intégré avec des interfaces audio analogiques et numériques
@@ -145,9 +145,9 @@ Les schémas de disposition des broches sont présentés ci-dessous, et leurs di
 
 <div align="center"><em>Figure 3.3-1 : Disposition des broches QFN68L pour SF32LB520/3/5/7</em></div>
 
-![Figure 3.3-2 : Disposition des broches QFN68L pour SF32LB52B/E/G/J](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ width="100%" loading="lazy" }
+![Figure 3.3-2 : Disposition des broches QFN68L pour SF32LB52B/D/E/G/J](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figure 3.3-2 : Disposition des broches QFN68L pour SF32LB52B/E/G/J</em></div>
+<div align="center"><em>Figure 3.3-2 : Disposition des broches QFN68L pour SF32LB52B/D/E/G/J</em></div>
 
 ### 3.4. Applications { #34-applications }
 
@@ -184,7 +184,7 @@ Le tableau suivant résume l'architecture matérielle recommandée pour une appl
 | Inductance du convertisseur buck | 4,7 uH +/-20 %, DCR <= 0,4 Ω, Isat >= 450 mA |
 | Quartz | Quartz principal 48 MHz et quartz RTC 32,768 kHz |
 | RF | Piste à impédance contrôlée 50 Ω avec réseau d'adaptation en π réservé |
-| Affichage | SPI 3 fils, SPI 4 fils, Dual-SPI, Quad-SPI (jusqu'à 512 x 512), JDI, et EPD 8 bits |
+| Affichage | SPI 3 fils, SPI 4 fils, Dual-SPI, Quad-SPI (jusqu'à 512 x 512), JDI et EPD parallèle 8 bits (documenté pour `52B/D/E/G/J` ; confirmer la référence exacte) |
 | Tactile | Contrôleur tactile capacitif I2C avec prise en charge du réveil par interruption |
 | Stockage | Flash/PSRAM SiP, SPI NOR externe, SPI NAND, SD NAND, ou eMMC selon la variante |
 | Audio | Entrée microphone analogique, sortie DAC différentielle, PA externe |

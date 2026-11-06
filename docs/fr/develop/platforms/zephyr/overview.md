@@ -10,7 +10,7 @@ tags:
 
 OpenSiFli développe activement la prise en charge de Zephyr dans [OpenSiFli/zephyr-downstream](https://github.com/OpenSiFli/zephyr-downstream) et [OpenSiFli/zephyr-hal_sifli-downstream](https://github.com/OpenSiFli/zephyr-hal_sifli-downstream). L'arborescence downstream comprend la carte `sf32lb52_devkit_lcd`, l'intégration du HAL SiFli, les fichiers devicetree SF32LB52, les pilotes, les tests et les overlays d'exemples.
 
-Utilisez Zephyr si vous avez besoin de ses API, du devicetree, de Kconfig, d'une structure RTOS portable ou d'une voie d'intégration avec ArduinoCore-zephyr. À ce jour, SiFli-SDK offre la couverture fonctionnelle du fournisseur la plus complète.
+Utilisez Zephyr si vous avez besoin de ses API, du devicetree, de Kconfig, d'une structure RTOS portable ou d'une voie d'intégration avec ArduinoCore-zephyr. Si vous avez besoin aujourd'hui de la couverture fonctionnelle fournisseur la plus complète, choisissez SiFli-SDK.
 
 Pour la configuration de l'espace de travail, la première compilation `hello_world`, le flashage et la vérification de la console, consultez [Démarrer avec Zephyr downstream](../../../getting-started/zephyr/getting-started-zephyr-upstream.md). Cette page présente la plateforme downstream une fois cette configuration de référence validée.
 
@@ -40,7 +40,7 @@ Références principales :
 
 </div>
 
-La documentation de la carte downstream décrit le module SF32LB52x-MOD-N16R8 avec 8 Mo d'OPI-PSRAM, 128 Mb de QSPI-NOR, des quartz de 48 MHz et 32,768 kHz, des interfaces d'affichage et du matériel audio, USB et microSD.
+La documentation de la carte downstream décrit le module SF32LB52x-MOD-N16R8 avec 8 MB d'OPI-PSRAM, 128 Mb de QSPI-NOR, des quartz de 48 MHz et 32,768 kHz, des interfaces d'affichage et du matériel audio, USB et microSD.
 
 ## Limites de configuration { #configuration-boundaries }
 
@@ -53,7 +53,7 @@ Ne copiez pas un nom de carte, un mappage de broches ou un paramètre de runner 
 La documentation de la carte downstream liste :
 
 - Le module SF32LB52x-MOD-N16R8 basé sur le SF32LB525UC6.
-- 8 Mo d'OPI-PSRAM.
+- 8 MB d'OPI-PSRAM.
 - 128 Mb de QSPI-NOR.
 - Des quartz de 48 MHz et 32,768 kHz.
 - Des interfaces d'affichage SPI/DSPI/QSPI et MCU/8080.

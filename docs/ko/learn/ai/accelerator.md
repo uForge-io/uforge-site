@@ -38,31 +38,12 @@ SDK에서 NNACC라고 부르는 **AI 가속기**는 일부 SF32 디바이스에�
 
 <div align="center"><em>다이어그램: 처리 단계와 펌웨어가 제어하는 추론</em></div>
 
-```text
-Sensors / Audio / Camera
-        │
-        ▼
-Pre-processing
-  - filtering
-  - framing
-  - normalization
-  - feature extraction
-        │
-        ▼
-Firmware / Inference Runtime
-  - model graph orchestration
-  - supported operations on NNACC
-  - other operations on CPU, if implemented
-        │
-        ▼
-Post-processing
-  - thresholding
-  - smoothing
-  - event detection
-  - application decisions
-        │
-        ▼
-Application, UI, Bluetooth, or Storage
+```mermaid
+flowchart TD
+    A["센서 / 오디오 / 카메라"] --> B["전처리<br/>필터링<br/>프레이밍<br/>정규화<br/>특징 추출"]
+    B --> C["펌웨어 / 추론 런타임<br/>모델 그래프 오케스트레이션<br/>NNACC에서 지원되는 연산<br/>구현된 경우 그 밖의 연산은 CPU에서 처리"]
+    C --> D["후처리<br/>임계값 처리<br/>평활화<br/>이벤트 감지<br/>애플리케이션 결정"]
+    D --> E["애플리케이션, UI, Bluetooth 또는 저장소"]
 ```
 
 가속기는 전체 AI 파이프라인의 한 부분입니다. 실제 제품에는 여전히 데이터 캡처, 버퍼링, 전처리, 추론 스케줄링, 후처리, 애플리케이션 수준의 판단 로직이 필요합니다. 추론을 독립된 함수 호출로 취급하기보다 메모리 계층과 사용 가능한 가속기를 중심으로 파이프라인 전체를 설계할 때 대체로 가장 좋은 성능을 얻습니다.

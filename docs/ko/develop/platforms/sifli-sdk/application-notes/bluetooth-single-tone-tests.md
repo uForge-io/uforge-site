@@ -74,6 +74,8 @@ RX에 진입하기 전에 TX를 중지합니다. 채널을 설정한 뒤 Start R
 PER = (1500 - received_packets) / 1500 × 100%
 ```
 
+링크된 [SiFli 가이드](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/bt_individual_test_guide.html)는 `n`을 실제 수신한 패킷 수로 정의하지만, 현재 `PER = (n - 1500) / 1500 × 100%`라고 표기합니다. 이는 위의 패킷 손실 계산과 부호가 반대입니다. 이 페이지는 손실 계산식을 유지하며, 두 식을 같은 것으로 취급하기 전에 SiFli에 의도한 식을 확인하십시오.
+
 RSSI도 함께 기록하십시오. Classic BT RX에서는 DH1/2-DH1/3-DH1 같은 CMW500 GPRF Generator 파형을 사용하고, 수신 패킷, 오류 패킷, 비트 수, BER, RSSI를 기록합니다. BLE와 Classic BT의 RF 경로는 하드웨어를 공유하므로 병렬로 실행하지 마십시오.
 
 ![SiFli_RfTool의 BLE RX 설정](../../../../assets/develop/app-notes/bluetooth-single-item/figure_13-5.png){ loading="lazy" }

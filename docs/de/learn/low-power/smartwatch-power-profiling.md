@@ -7,6 +7,8 @@ tags:
   - Wearables
 ---
 
+<div id="_1"></div>
+
 # Stromverbrauchsanalyse einer Smartwatch { #power-profiling-a-smartwatch }
 
 Die Stromverbrauchsanalyse macht aus der erwarteten täglichen Nutzung eine Schätzung der Akkulaufzeit und, wichtiger noch, eine Rangliste der Lasten, die sich zu optimieren lohnen. Als durchgerechnetes Beispiel dient die bereitgestellte [englische Arbeitsmappe mit den Leistungsprofildaten einer Smartwatch](assets/smartwatch-power-profile-data.xlsx). Der Artikel zeigt, wie sich Nutzerverhalten in mAh pro Tag umrechnen lässt, welche Lasten das Budget dominieren und wie aus einem Tabellenmodell ein Messplan wird.
@@ -16,6 +18,8 @@ Die Stromverbrauchsanalyse macht aus der erwarteten täglichen Nutzung eine Sch�
     Die Arbeitsmappe enthält kein Messprotokoll und kennzeichnet daher keinen Eingabewert als Hardware-Messung. Das Ergebnis von 13,15 Tagen ist eine Modellschätzung und keine beobachtete Laufzeit.
 
 Nutzen Sie diese Seite zusammen mit der [Low-Power-Übersicht](overview.md) für Architektur und Firmware-Hinweise und mit [Energieverbrauch messen und validieren](measurement-and-validation.md) für den Messablauf, der das Modell validiert.
+
+<div id="_2"></div>
 
 ## Überblick über das Smartwatch-System { #smartwatch-system-overview }
 
@@ -34,6 +38,8 @@ Legen Sie zunächst die Modellgrenze fest. Diese Arbeitsmappe bildet eine akkube
 | Nennspannung des Akkus | 3,87 V | Wird vom Hilfswert der Arbeitsmappe zur Spannungsnormierung verwendet. |
 
 </div>
+
+<div id="_3"></div>
 
 ## Leistungsaufnahme je Szenario { #power-consumption-by-scenario }
 
@@ -118,6 +124,8 @@ flowchart LR
     F --> B
 ```
 
+<div id="_4"></div>
+
 ### Ein Szenario in tägliche Ladung umrechnen { #convert-a-scenario-into-daily-charge }
 
 Für eine Last, deren Strom bereits am Akku angegeben ist, ist die tägliche Ladung einfach:
@@ -135,11 +143,15 @@ battery_current_mA = (load_voltage_V x load_current_mA) /
 
 Verwenden Sie den gemessenen Reglerwirkungsgrad beim vorgesehenen Laststrom. Die Angabe des Spitzenwirkungsgrads eines Reglers ist für eine Uhr, die einen Großteil des Tages bei geringer Last verbringt, selten nützlich.
 
+<div id="_5"></div>
+
 ### Annahme zur Wandlung in der Arbeitsmappe prüfen { #check-the-workbooks-conversion-assumption }
 
 Die Spalte „Wirkungsgrad der Leistungswandlung (%)“ der Arbeitsmappe wird als `load voltage / battery voltage` berechnet. Ihre nachfolgende Ladungsformel teilt durch diesen Hilfswert und dann durch die Akkuspannung, sodass sich die Spannungsterme aufheben. Die resultierende tägliche Ladung ist schlicht Laststrom mal Zeit: Sie setzt den Akkustrom dem Laststrom gleich, statt eine ideale Leistungswandlung zu modellieren. Das ähnelt einem Linearregler ohne Ruhestrom; für einen Schaltregler ist es kein allgemeines Modell.
 
 Beispielsweise zieht eine 1-mA-Last bei 3,3 V aus einem Akku mit 3,87 V über einen idealen Wandler etwa 0,853 mA; die Arbeitsmappe setzt dagegen 1 mA an. Bei einem realen Wandler hängen die Werte von Wirkungsgrad und Ruhestrom ab. Allein anhand der Wandlungsannahme lässt sich daher nicht beurteilen, ob die Akkulaufzeitschätzung der Arbeitsmappe zu optimistisch oder zu konservativ ist. Die Szenario-Rangfolge eignet sich für eine erste Prüfung der angegebenen Strom- und Zeitannahmen, ersetzt aber kein belastbares Energiebudget. Für ein Produktionsbudget ersetzen Sie den Hilfswert durch den gemessenen Wirkungsgrad je Versorgungsschiene und Lastbereich. Berücksichtigen Sie den Ruhestrom, ohne ihn doppelt zu zählen, falls er bereits in der Messung enthalten ist. Erfassen Sie außerdem Verluste durch Akkuschutz und Ladepfad.
+
+<div id="_6"></div>
 
 ## Den Tagesverbrauch aus der Produktnutzung berechnen { #calculate-daily-consumption-from-product-usage }
 
@@ -302,6 +314,8 @@ Die Arbeitsmappe enthält keine eigene Sensorkategorie. Der Bereich `Other` ist 
 
 </div>
 
+<div id="_7"></div>
+
 ## Aus der Rangfolge konkrete Maßnahmen ableiten { #turn-the-ranking-into-design-work }
 
 Arbeiten Sie vom größten modellierten Beitrag abwärts und validieren Sie die Reihenfolge dann durch Messungen. In diesem Modell ist folgende Abfolge sinnvoll:
@@ -313,6 +327,8 @@ Arbeiten Sie vom größten modellierten Beitrag abwärts und validieren Sie die 
 5. **Langlaufende Sensorik:** Messen Sie Schlafüberwachung und Trainingsaufzeichnung als vollständige Nutzungsszenarien, einschließlich Sensor-Tastverhältnis, Verarbeitung, Speicherverkehr und Funkverhalten.
 
 Optimieren Sie keine isolierte Tabellenzahl. Eine scheinbar effiziente Änderung kann die Aufwachhäufigkeit erhöhen, die Nutzerzufriedenheit senken oder die Aktivzeit so weit verlängern, dass die erwartete Energieeinsparung verloren geht.
+
+<div id="_8"></div>
 
 ## Das Modell auf der Hardware validieren { #validate-the-model-on-hardware }
 
@@ -333,6 +349,8 @@ Das Modell wird nützlich, wenn es laufend an Messungen kalibriert wird. Erfasse
 
 </div>
 
+<div id="_9"></div>
+
 ## Das Modell realistisch halten { #keep-the-profile-honest }
 
 - Betrachten Sie deaktivierte Szenarien als nicht budgetiert und nicht als kostenlos. Die Arbeitsmappe setzt derzeit für die Szenarien NFC, Bluetooth-Telefonie und AOD die Ladung auf null.
@@ -340,6 +358,8 @@ Das Modell wird nützlich, wenn es laufend an Messungen kalibriert wird. Erfasse
 - Messen Sie nach Möglichkeit am Akkueingang. Messungen auf Schienenebene bleiben wertvoll, aber Reglerverluste und Ruhestrom müssen berücksichtigt werden, bevor sich daraus eine Akkulaufzeit ableiten lässt.
 - Ändern Sie jeweils eine Annahme und vergleichen Sie dann mAh pro Tag und nicht nur den momentanen Strom.
 - Führen Sie das Profil erneut aus, wenn sich Display-Richtlinie, Bluetooth-Einstellung, Sensortakt, PM-Richtlinie oder eine wichtige Firmware-Funktion ändert.
+
+<div id="_10"></div>
 
 ## Wichtigste Erkenntnisse { #key-takeaways }
 

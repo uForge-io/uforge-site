@@ -22,7 +22,7 @@ tags:
 
 - As opções de boot externo incluem SPI NOR, SPI NAND e SD NAND; eMMC está disponível nos modelos compatíveis com alimentação externa regulada.
 - Os pinos de bootstrap `PA13` e `PA17` selecionam a mídia de boot.
-- As notas de aplicação e o guia de projeto do esquemático indicam `PA21` para comutar a alimentação do armazenamento de boot, enquanto o checklist oficial indica `PA11` para a Flash externa das variantes alimentadas por bateria. Confirme com a SiFli qual pino de controle se aplica ao projeto exato. Como requisito separado, a Flash NOR de 32 MB ou mais conectada via MPI deve poder ser desligada e religada por PA21 para que a ROM a reconheça após um reset ou a entrada em Hibernate. Durante o Hibernate, VDD_SIP deve ficar desligado para evitar fuga de corrente nas E/S da memória integrada ao encapsulamento.
+- As notas de aplicação e o guia de projeto do esquemático indicam `PA21` para comutar a alimentação do armazenamento de boot, enquanto o checklist oficial indica `PA11` para a Flash externa das variantes alimentadas por bateria. Confirme com a SiFli qual pino de controle se aplica ao projeto exato. A regra de comutação da NOR MPI de 32 MB ou mais e a instrução de desligar `VDD_SIP` durante o Hibernate vêm dos materiais das variantes com alimentação regulada `52B/D/E/G/J`. A fonte das variantes alimentadas por bateria descreve `VDD18_VOUT` e diz que a NOR externa não precisa de uma chave adicional, mas não aborda o limite de 32 MB; confirme com a SiFli se a regra se aplica a `520/3/5/7` antes de usá-la.
 
 **Objetivo do projeto**
 
@@ -131,14 +131,14 @@ As notas de aplicação e o guia de projeto de esquemático da OpenSiFli, de mai
 
     - O SF32LB520Ux6 tem Flash integrada ao encapsulamento: alimente VDD18_VOUT a partir de VDD33_VOUT1 e desabilite o LDO interno de VDD18_VOUT.
     - Os SF32LB523/5/7Ux6 têm PSRAM integrada ao encapsulamento: use o LDO interno; VDD18_VOUT também pode receber alimentação externa.
-    - Alimente a Flash NOR externa por VDD33_VOUT1; não é necessário adicionar outra chave de alimentação.
+    - A fonte das variantes alimentadas por bateria diz que a Flash NOR externa deve usar VDD33_VOUT1 sem uma chave adicional, mas não esclarece se isso também se aplica a capacidades de 32 MB ou mais. Confirme com a SiFli antes de aplicar essa orientação a uma NOR MPI de grande capacidade.
     - Para Flash SPI NAND ou SD NAND externa, use VDD33_VOUT1 e adicione uma chave de alimentação.
     - O projeto de referência reserva posições para resistores de pull-up em PA13 e PA17. Instale-os conforme o tipo de armazenamento; recomenda-se 7,5 kΩ.
 
 === "52B/D/E/G/J (alimentação regulada externa)"
 
     - Para o modelo com Flash integrada ao encapsulamento (SF32LB52BU36), adicione uma chave de alimentação em VDD_SIP.
-    - Para os modelos com PSRAM integrada ao encapsulamento (SF32LB52DUB6/EUB6/GUC6/JUD6): se PVDD = 3,3 V e VDD_SIP usar o LDO interno, a chave de alimentação de VDD_SIP é opcional; se PVDD = 1,8 V, ela é obrigatória.
+    - Para os modelos com PSRAM integrada ao encapsulamento (SF32LB52DUB6/EUB6/GUC6/JUD6), a chave de VDD_SIP é opcional ao usar a faixa de PVDD da tabela e o LDO interno. A nota de rodapé da fonte B3 diz que ela é necessária se PVDD = 1,8 V, mas esse valor está fora da faixa tabulada de 2,97–3,63 V. A aplicabilidade não está resolvida: confirme com a SiFli e não trate 1,8 V como condição de projeto PVDD recomendada. Consulte a nota de faixa de operação em [Projeto do esquemático](SF32LB52x_schematic_design.md).
     - A alimentação do armazenamento externo é independente de VDD_SIP; adicione uma chave de alimentação separada.
     - Consulte a Seção 5.6.1.1 para conhecer as alternativas de alimentação de VCC/VCCQ do eMMC.
     - A nota de aplicação especifica **PA21** para as chaves de alimentação do armazenamento relacionadas ao boot; a divergência entre as fontes para a Flash externa das variantes alimentadas por bateria foi indicada acima.

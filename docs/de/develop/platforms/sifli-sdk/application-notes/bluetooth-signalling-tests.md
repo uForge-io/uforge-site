@@ -7,7 +7,7 @@ tags: [Entwicklung, SiFli-SDK, Anwendungshinweise, Bluetooth]
 
 # Bluetooth-Signalisierungstests durchführen { #run-bluetooth-signaling-tests }
 
-Im Signalisierungsmodus wird für protokollkonforme TX/RX-Tests eine echte Bluetooth-Verbindung zwischen DUT und Kommunikationstester hergestellt. Der SiFli-Leitfaden beschreibt sowohl manuelle Bedienung als auch automatisierte Tests, bei denen Software den Tester steuert, etwa R&S® CMWrun einen CMW-Tester. Dies unterscheidet sich von herstellerspezifischen Tests ohne Signalisierung und von RF-Einzelparametertests.
+Im Signalisierungsmodus wird für protokollkonforme TX/RX-Tests eine echte Bluetooth-Verbindung zwischen DUT und Kommunikationstester hergestellt. Der SiFli-Leitfaden beschreibt sowohl manuelle Bedienung als auch automatisierte Tests, bei denen Software den Tester steuert, etwa indem R&S® CMWrun einen CMW-Tester steuert. Dies unterscheidet sich von herstellerspezifischen Tests ohne Signalisierung und von RF-Einzelparametertests.
 
 !!! note "Geltungsbereich für Qualifikationstests"
     Für Qualifikationstests ist der Ablauf passend zum jeweiligen Testtyp zu wählen. Laut SiFli-RF-Testleitfaden wird BT-Signalisierung für QDID-/Protokollkonformitätstests eingesetzt. BR/EDR-BQB-RF-Tests verwenden BT-Signalisierung, BLE-BQB-RF-Tests dagegen SIG DTM (BLE ohne Signalisierung). Die BLE-Signalisierungsschritte auf dieser Seite sind daher kein BLE-BQB-RF-Testablauf.

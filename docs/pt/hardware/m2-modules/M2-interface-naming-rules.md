@@ -48,6 +48,7 @@ Em que:
 </div>
 
 Estas descrições indicam o escopo previsto de cada categoria, não requisitos elétricos definitivos.
+
 **Status das fontes:**
 - **M2 / M2xM:** O rascunho vinculado informa que uma planilha local de proposta contém mapas de contatos, mas o arquivo não está incluído neste repositório nem vinculado aqui; esses mapas permanecem apenas propostas.
 - **M2xN / M2xA:** O rascunho resume essas extensões, mas não foram encontrados dados originais dos mapas de contatos para verificar os resumos; eles permanecem não verificados.

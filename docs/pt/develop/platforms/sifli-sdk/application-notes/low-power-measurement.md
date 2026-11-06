@@ -111,7 +111,7 @@ Para executar tarefas, use `rt_pm_run_enter()`:
 
 <div align="center" markdown>
 
-<em>Tabela: clocks do HCPU nos modos de execução</em>
+<em>Tabela: seleções de clock do HCPU no modo Run para SF32LB52x (confirme a disponibilidade no guia do SDK da família de destino)</em>
 
 | Modo | Clock do HCPU |
 |---|---:|

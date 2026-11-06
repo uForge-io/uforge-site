@@ -175,7 +175,13 @@ SiFli V1.0.0ガイドにはバッテリー容量について2つの記述があ�
 - 容量が450 mAhを超えるLi-ionバッテリー
 - UARTデバッグとネイティブUSBテストを同時に行う場合の2本目のUSBケーブル
 
-### ボードのセットアップと起動モード
+<div id="_1"></div>
+<div id="board-einrichtung-und-startmodi"></div>
+<div id="configuracao-da-placa-e-modos-de-inicializacao"></div>
+<div id="configuracion-y-modos-de-arranque-de-la-placa"></div>
+<div id="configuration-de-la-carte-et-modes-de-demarrage"></div>
+
+### ボードのセットアップと起動モード { #board-setup-and-boot-modes }
 
 ホストとボードのUSB Type-C UARTポートを接続し、SifliTraceを開いて正しいCOMポートを選択してください。
 
@@ -256,7 +262,7 @@ SiFli-SDKの正確なボードターゲット名は`sf32lb52-lchspi-ulp`です�
 
 このボードはAMOLEDディスプレイパスを使用し、22ピンのQSPI FPC信号セットを引き出しています。SiFliのV1.0.0表では5～10番ピンがNCとされています。以下の表には22個すべての位置を記載し、未接続のピンも明示しています。
 
-スクリーンボードの注記では、LCDモジュール用の22ピンFPCコネクターと、コアボード用の24ピン基板対基板（B2B）コネクターが区別されています。組み立て前に、正確なボードリビジョンで両方のインターフェースを確認してください。
+**コネクター仕様の不一致 — 選定前に確認してください：**SiFliのガイド本文では、専用ディスプレイインターフェースを22ピンFPCと40ピンヘッダーで引き出すと説明しています。一方、スクリーンボードの図では、LCDモジュール用の22ピンFPCとコアボード用の24ピン基板対基板（B2B）コネクターが示されています。資料には40ピンヘッダーと24ピンB2Bコネクターの関係が説明されていません。どちらか一方のピン数だけでコネクターを選定・接続せず、実際のアセンブリーリビジョンの回路図/BOMで確認してください。
 
 <div align="center"><em>22ピンQSPIディスプレイ・タッチFPC信号マップ</em></div>
 

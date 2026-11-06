@@ -221,10 +221,10 @@ La hoja fuente deja vacía la categoría del punto 3 de RF; por eso se mantiene 
 | 5 | <span class="flag-red">El interruptor de tensión controlado por PA58 se activa en alto y se desactiva en bajo</span> | Todas las variantes | Obligatorio |
 | 6 | <span class="flag-red">Se recomiendan resistencias en serie de 33 Ω en las líneas CLK y de datos de la memoria Flash</span> | Todas las variantes | Obligatorio |
 | 7 | QSPI3 se conecta según lo previsto a memoria NAND o eMMC | Solo 555/557 | Opcional |
-| 8 | PA41 controla el interruptor de alimentación de QSPI3; <span class="flag-red">la alimentación de QSPI3 está desactivada por defecto y un interruptor activo en alto debe usar el pull-down interno predeterminado</span> | Solo 555/557 | Opcional |
+| 8 | PA41 controla el interruptor de alimentación de QSPI3; <span class="flag-red">la alimentación de QSPI3 está desactivada por defecto y se recomienda que un interruptor activo en alto use el pull-down interno predeterminado</span> | Solo 555/557 | Opcional |
 | 9 | <span class="flag-red">Si PA41 no controla el interruptor de alimentación de QSPI3, confirme con el equipo de software qué E/S alternativa se utilizará</span> | Solo 555/557 | Opcional |
 | 10 | Si en producción hay que grabar la memoria Flash externa de QSPI3, PA58 debe controlar su interruptor de alimentación | Solo 555/557 | Obligatorio |
-| 11 | PA70 controla el interruptor de alimentación de la PSRAM OPI; <span class="flag-red">la alimentación de PSRAM está activada por defecto y un interruptor activo en alto debe usar el pull-up interno predeterminado</span> | Solo 555/557 | Opcional |
+| 11 | PA70 controla el interruptor de alimentación de la PSRAM OPI; <span class="flag-red">la alimentación de PSRAM está activada por defecto y se recomienda que un interruptor activo en alto use el pull-up interno predeterminado</span> | Solo 555/557 | Opcional |
 | 12 | <span class="flag-red">La PSRAM OPI es un modelo compatible y figura como validada en la guía de selección de componentes clave</span> | Solo 555/557 | Opcional |
 | 13 | Las señales de la PSRAM OPI están conectadas correctamente | Solo 555/557 | Opcional |
 | 14 | Las señales de QSPI2 están conectadas correctamente | Todas las variantes | Opcional |

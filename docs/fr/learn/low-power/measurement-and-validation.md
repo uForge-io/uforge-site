@@ -6,9 +6,13 @@ tags:
   - Validation
 ---
 
+<div id="_1"></div>
+
 # Mesurer et valider la consommation énergétique { #power-measurement-and-validation }
 
 Une estimation d'autonomie n'est crédible que si ses hypothèses sont confirmées par les mesures du matériel réel. Consultez cette page avec la [Vue d'ensemble de la conception basse consommation](overview.md) et l'exemple d'[analyse de la consommation d'une montre connectée](smartwatch-power-profiling.md). La méthode consiste à mesurer chaque composant, à valider des scénarios complets exécutés par le firmware, à comparer le modèle à une journée d'utilisation représentative, puis à optimiser le poste de consommation le plus important parmi ceux qui ont été mesurés.
+
+<div id="_2"></div>
 
 ## Mesurer l'énergie, pas seulement le courant { #measure-energy-not-current-alone }
 
@@ -26,6 +30,8 @@ Dans ces formules, `t` est exprimé en secondes. La division par `3600` converti
 L'intégrale d'énergie est exprimée en Wh ; multipliez sa valeur par 1000 avant de l'ajouter à un profil exprimé en mWh. La charge (mAh) et l'énergie (mWh) sont des grandeurs distinctes et ne sont pas interchangeables.
 
 Si la tension d'alimentation reste stable, relevez la valeur mesurée de `V_DUT` pendant l'acquisition et utilisez-la avec la trace de courant. Si elle varie, échantillonnez-la sur la même base de temps que le courant ou recueillez suffisamment de mesures synchronisées pour calculer une puissance moyenne fiable. Une comparaison limitée aux mAh peut masquer un écart réel d'énergie si la tension d'alimentation, le point de fonctionnement du régulateur ou l'état de la batterie diffère d'une acquisition à l'autre.
+
+<div id="_3"></div>
 
 ## Définir les conditions de référence { #set-up-the-measurement-baseline }
 
@@ -52,6 +58,8 @@ Avant de connecter le DUT, vérifiez que le mode PPK2 choisi accepte sa tension 
 
 </div>
 
+<div id="_4"></div>
+
 ## Caractériser chaque composant avant les tests système complets { #characterize-each-component-before-full-system-tests }
 
 Avant d'interpréter la trace de la carte complète, mesurez chaque composant sur un rail isolable ou à l'aide d'un montage d'essai dédié. Il ne s'agit pas de produire une nouvelle valeur de catalogue, mais d'identifier les modes, les charges et les réglages du firmware qui déterminent réellement sa consommation dans le produit.
@@ -73,6 +81,8 @@ Avant d'interpréter la trace de la carte complète, mesurez chaque composant su
 </div>
 
 Pour évaluer la consommation énergétique du produit entier, mesurez au point d'entrée d'alimentation du produit, côté batterie. Les mesures par rail restent indispensables pour isoler les causes, mais convertissez-les côté batterie à l'aide du rendement et du courant de repos mesurés pour chaque régulateur avant de les intégrer au modèle d'autonomie. La somme des courants des rails ne correspond pas directement au courant d'entrée de la batterie.
+
+<div id="_5"></div>
 
 ## Vérifier les états basse consommation configurés par le pilote { #verify-driver-controlled-power-states }
 
@@ -96,6 +106,8 @@ Un composant n'atteint l'état de basse consommation spécifié que si son pilot
 
 Des niveaux logiques valides ne garantissent pas l'absence de courant de fuite. Les résistances de rappel internes, des configurations de rappel contradictoires, les états par défaut après réinitialisation, les chemins ESD et les résistances de rappel des bus peuvent créer une fuite ou une réalimentation parasite, même si les deux composants semblent présenter des niveaux logiques corrects. Mesurez le courant de l'interface lorsque les deux côtés sont alimentés, lorsqu'un seul l'est, ainsi que pendant les transitions entre ces états. Si l'état observé ne correspond pas à l'attendu, déterminez d'abord s'il provient d'une erreur de réglage ou de séquence du pilote ou d'un chemin de fuite sur la carte, avant de modifier le tableau de profil énergétique.
 
+<div id="_6"></div>
+
 ## Valider les scénarios du firmware { #validate-firmware-scenarios }
 
 Une fois le comportement de chaque composant caractérisé, mesurez les scénarios complets du firmware correspondant à l'expérience de l'utilisateur. Un scénario combine les composants actifs, les états de gestion d'énergie, les réveils et les temporisations qui surviennent ensemble. Pour une montre connectée, reprenez les scénarios de l'[analyse de la consommation d'une montre connectée](smartwatch-power-profiling.md) : attente écran éteint, notifications, alertes d'appel entrant, activation de l'écran au lever du poignet, mesures automatiques de la fréquence cardiaque, mesures manuelles de SpO2, suivi d'activité physique, alarmes, suivi du sommeil et synchronisation avec l'application. Si le produit intègre le NFC, les appels Bluetooth ou l'affichage permanent (AOD), ajoutez chacun comme scénario distinct.
@@ -115,6 +127,8 @@ Une fois le comportement de chaque composant caractérisé, mesurez les scénari
 </div>
 
 Utilisez des marqueurs GPIO pilotés par le firmware pour découper la trace en phases. Une mesure de l'activation de l'écran au lever du poignet peut ainsi distinguer la reconnaissance du geste, le réveil du MCU, l'allumage de l'écran, le rendu, la durée d'affichage, la baisse de luminosité ou l'extinction, puis le retour en veille. Une valeur moyenne unique est alors décomposée en opérations concrètes que les équipes firmware et matériel peuvent optimiser.
+
+<div id="_7"></div>
 
 ## Confronter le profil d'usage quotidien aux mesures { #reconcile-the-daily-use-profile }
 
@@ -154,6 +168,8 @@ Si les mesures ne concordent pas avec le modèle, ne modifiez pas le tableau dan
 
 </div>
 
+<div id="_8"></div>
+
 ## Optimiser les principaux postes de consommation confirmés par mesure { #optimize-the-largest-verified-contributors }
 
 Appuyez-vous sur le profil validé pour cibler les optimisations les plus efficaces. Distinguez deux questions : quel composant consomme le plus d'énergie, et quel scénario pèse le plus dans la consommation du produit ? Les réponses peuvent différer. L'écran peut être le composant le plus énergivore, tandis que la fréquence d'activation au lever du poignet peut faire de ce scénario le principal poste de consommation.
@@ -162,6 +178,8 @@ Appuyez-vous sur le profil validé pour cibler les optimisations les plus effica
 2. **Faites évoluer le matériel si la limite vient réellement d'un composant.** Envisagez des capteurs, mémoires, régulateurs, codecs, amplificateurs, afficheurs ou actionneurs haptiques moins énergivores. Comparez leur énergie mesurée dans le mode d'utilisation prévu, et non une valeur mise en avant dans la fiche technique pour un état sans rapport.
 3. **Mesurez de nouveau le composant et le scénario modifiés.** Un remplacement peut déplacer le principal poste de consommation, changer les délais de réveil ou imposer un autre point de fonctionnement au régulateur.
 4. **Mettez à jour le profil et répétez la comparaison sur une journée entière.** La modification n'est validée que si la trace du scénario et le bilan énergétique du produit s'améliorent tous deux.
+
+<div id="_9"></div>
 
 ## Dossier de validation avant mise en production { #release-evidence }
 

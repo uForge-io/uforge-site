@@ -9,7 +9,11 @@ tags:
     - Module
 ---
 
+<div id="sf32lb58-mod"></div>
+
 # Guide de conception matérielle du SF32LB58-MOD { #sf32lb58-mod-hardware-design-guide }
+
+<div id="1"></div>
 
 ## 1. Aperçu { #1-overview }
 
@@ -25,7 +29,11 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système m�
 !!! note "Portée du marquage réglementaire"
     Les étiquettes fournies pour SF32LB58-MOD-N16R32N1 et SF32LB58-MOD-A128R32N1 portent les identifiants FCC, IC, CMIIT ID et HVIN, ainsi que le marquage CE. Consultez le [résumé des marquages](../../sf32-products/modules/SF32LB58-MOD.md#regulatory-markings). Vérifiez les documents d'homologation et les conditions d'antenne et d'intégration applicables à la révision exacte ; ne présumez pas que les autres variantes ou le produit final sont couverts.
 
+<div id="2"></div>
+
 ## 2. Résumé de conception rapide { #2-quick-design-summary }
+
+<div id="21"></div>
 
 ### 2.1 Variantes du module { #21-module-variants }
 
@@ -35,14 +43,16 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système m�
 
 | Code du module | Flash | PSRAM | Flash standard | Température | Dimensions (mm) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| SF32LB58-MOD-N16R32N1 | 16 Mo QSPI-NOR | 16+16 Mo HPI-PSRAM | 1 Mo QSPI-NOR | -40~85 °C | 24 × 24 × 3,1 |
-| SF32LB58-MOD-A128R32N1 | 128 Mo QSPI-NAND | 16+16 Mo HPI-PSRAM | 1 Mo QSPI-NOR | -40~85 °C | 24 × 24 × 3,1 |
-| SF32LB58-MOD-E4R32N1 | 4 Go eMMC | 16+16 Mo HPI-PSRAM | 1 Mo QSPI-NOR | -40~85 °C | 24 × 24 × 3,1 |
+| SF32LB58-MOD-N16R32N1 | 16 MB QSPI-NOR | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 24 × 24 × 3,1 |
+| SF32LB58-MOD-A128R32N1 | 128 MB QSPI-NAND | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 24 × 24 × 3,1 |
+| SF32LB58-MOD-E4R32N1 | 4 GB eMMC | 16+16 MB HPI-PSRAM | 1 MB QSPI-NOR | -40~85 °C | 24 × 24 × 3,1 |
 
 </div>
 
 !!! note "Disponibilité et personnalisation"
     **SF32LB58-MOD-E4R32N1 est actuellement indisponible en raison d'une pénurie de puces mémoire.** D'autres configurations du module sont possibles. Pour toute demande de personnalisation, [contactez μForge.io](../../about/contact.md).
+
+<div id="22"></div>
 
 ### 2.2 Spécifications clés { #22-key-specifications }
 
@@ -54,7 +64,7 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système m�
 | :--- | :--- |
 | Cœurs d'application (HCPU/ACPU) | 2x Arm Cortex-M33 STAR-MC1, jusqu'à 240 MHz |
 | Cœur basse consommation (LCPU) | Arm Cortex-M33 STAR-MC1, jusqu'à 96 MHz |
-| SRAM | 2176 Ko (HCPU) + 512 Ko (ACPU) + 1056 Ko SRAM de rétention (LCPU) |
+| SRAM | 2176 KB (HCPU) + 512 KB (ACPU) + 1056 KB SRAM de rétention (LCPU) |
 | Sans fil | Bluetooth 5.3 bimode, rétrocompatible avec 4.2/4.1/4.0 ; prend en charge BLE et Bluetooth Classic |
 | Graphisme | ePicasso 2.0 + Vivante GCNanoUltraV, jusqu'à 1024×1024, eZip 2.0, codec JPEG matériel |
 | Audio | 2x DAC audio 24 bits, 2x ADC audio Sigma-Delta 24 bits |
@@ -66,6 +76,8 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphisme, sous-système m�
 
 </div>
 
+<div id="3"></div>
+
 ## 3. Schéma fonctionnel { #3-functional-block-diagram }
 
 Le module intègre la puce SF32LB586VDD36, un quartz 48 MHz, un quartz optionnel 32,768 kHz, et, selon la référence produit, de la mémoire HPI-PSRAM, Flash QSPI-NOR/NAND ou eMMC en boîtier, ainsi que le réseau d'adaptation RF et le point d'alimentation RF de l'antenne.
@@ -73,14 +85,20 @@ Le module intègre la puce SF32LB586VDD36, un quartz 48 MHz, un quartz optionnel
 !!! info "Figure 3-1 : Schéma fonctionnel"
     Voir la Figure 2-1 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
 
+<div id="4"></div>
+
 ## 4. Définition des broches { #4-pin-definition }
+
+<div id="41"></div>
 
 ### 4.1 Schéma de brochage { #41-pinout-diagram }
 
 La vue de dessus montre 138 contacts numérotés : 72 positions castellées en périphérie, 60 pastilles internes et 6 pastilles centrales ; la numérotation va de 1 à 138.
 
-!!! info "Figure 4-1 : Schéma de brochage, vue de dessus"
+!!! info "Figure 4.1-1 : Schéma de brochage, vue de dessus"
     Voir la Figure 3-1 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
+
+<div id="42"></div>
 
 ### 4.2 Tableau de définition des broches { #42-pin-definition-table }
 
@@ -230,20 +248,32 @@ Le module compte 138 broches au total, décrites dans le tableau ci-dessous.
 
 *Légende : P = alimentation ; I = entrée ; O = sortie ; T = configurable en haute impédance ; AO = sortie audio ; AI = entrée audio.*
 
+!!! warning "Divergence de la source concernant la fonction de PB29"
+    Le tableau 3-1 de [DS5802-SF32LB58-MOD V0.1](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) indique `GPIO_B29` comme MUX par défaut de PB29, mais `GPIO_B28` dans la cellule Function. La [fiche technique SF32LB58x](https://downloads.sifli.com/silicon/DS0058-SF32LB58x-Datasheet%20V1p6.pdf) et le [manuel utilisateur](https://downloads.sifli.com/docs/user%20manual/SF32LB58x/UM5801%E2%80%90SF32LB58x%E2%80%90CN.pdf) indiquent tous deux `GPIO_B29` pour PB29 ; ce tableau suit ces sources. L'entrée de la fiche technique du module semble être une erreur de la source ; confirmez auprès de SiFli avant de finaliser l'affectation des broches.
+
 !!! note
     La broche 2 (USART_RXD) et la broche 3 (USART_TXD) constituent le port par défaut pour le journal, le débogage du programme et le téléchargement du programme.
 
 !!! note
     Dans la ligne de la broche 10, la fiche technique V0.1 indique `GPIO_A38` comme MUX par défaut de PA79, mais `GPIO_A79` comme fonction. Ce tableau utilise `GPIO_A79` conformément au nom de la broche et à sa fonction ; confirmez le MUX de PA79 auprès de SiFli avant de finaliser l'affectation des broches.
 
+!!! warning "Confirmer le sens de l'UART1"
+    Les sources SiFli ne concordent pas sur le sens TX/RX de l'UART1 sur PA31 et PA32. Le tableau des broches ci-dessus conserve les libellés du brochage du module ; confirmez le sens auprès de SiFli avant de finaliser la conception.
+
+<div id="43"></div>
+
 ### 4.3 Description physique des broches { #43-physical-pin-description }
 
 La figure de description physique des broches de la fiche technique regroupe les broches par famille fonctionnelle — SDIO, SPI, I2C, UART, GPTIM, interface LCD (DPI/8080/SPI/JDI/DSI), GPADC, MPI, audio analogique, mode de démarrage, alimentation, antenne BT, CAN/USB, et SWD/UART de débogage — superposée au contour de la puce SF32LB586VDD36. Utilisez-la avec le tableau de définition des broches ci-dessus lors du placement des groupes de signaux sur le PCB hôte.
 
-!!! info "Figure 4-2 : Description physique des broches"
+!!! info "Figure 4.3-1 : Description physique des broches"
     Voir la Figure 3-2 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
 
+<div id="5"></div>
+
 ## 5. Périphériques { #5-peripherals }
+
+<div id="51"></div>
 
 ### 5.1 Interfaces de communication { #51-communication-interfaces }
 
@@ -259,11 +289,13 @@ Toute broche marquée `PAxx_I2C_UART` ou `PBxx_I2C_UART` dans le tableau ci-dess
 
 **MPI (Memory Peripheral Interface)** — Prend en charge la Flash SPI NOR (1/2/4 lignes, mode DTR) et la Flash SPI NAND (1/2/4 lignes), accès en mode registre et en mode mappé mémoire avec commutation matérielle automatique. L'interface MPI4 du module peut connecter une Flash SPI NOR/NAND externe.
 
-**SD/SDIO/eMMC** — Conforme aux normes SD 3.0 et eMMC 4.5.1 ; fonctionne en contrôleur hôte avec DMA chaîné et FIFO de 1 Ko. Prend en charge les cartes SDSC/SDHC/SDXC/SDHS, l'UHS-1 (SDR12/25/50/104/DDR50), les modes SDR simple ligne/4 lignes/8 lignes, et les modes DDR 4 lignes/8 lignes.
+**SD/SDIO/eMMC** — Conforme aux normes SD 3.0 et eMMC 4.5.1 ; fonctionne en contrôleur hôte avec DMA chaîné et FIFO de 1 KB. Prend en charge les cartes SDSC/SDHC/SDXC/SDHS, l'UHS-1 (SDR12/25/50/104/DDR50), les modes SDR simple ligne/4 lignes/8 lignes, et les modes DDR 4 lignes/8 lignes.
 
 **I2S** — Maître uniquement, duplex intégral, formats justifié à gauche/justifié à droite/standard, mono/stéréo 8 bits et 16 bits, largeur PCM jusqu'à 24 bits.
 
 **Interface LCD** — Mode SPI série DBI (3 lignes/4 lignes, ligne de données double/quadruple) et mode parallèle 8080 (largeur de bus 8/16/24 bits). Prend en charge les formats de couleur RGB332/RGB444/RGB565/RGB666/RGB888 selon le mode. Un jeu de voies MIPI DSI dédié (horloge + 2 voies de données) est également disponible sur les broches 47–52.
+
+<div id="52"></div>
 
 ### 5.2 Traitement des signaux analogiques { #52-analog-signal-processing }
 
@@ -277,7 +309,11 @@ Toute broche marquée `PAxx_I2C_UART` ou `PBxx_I2C_UART` dans le tableau ci-dess
 
 **ADC audio** — 2 voies intégrées 24 bits, taux d'échantillonnage 8 kHz–48 kHz, contrôle de gain indépendant par voie.
 
+<div id="6"></div>
+
 ## 6. Caractéristiques électriques { #6-electrical-characteristics }
+
+<div id="61"></div>
 
 ### 6.1 Valeurs limites absolues { #61-absolute-maximum-ratings }
 
@@ -296,6 +332,8 @@ Le dépassement d'une valeur limite absolue peut endommager définitivement le m
 
 </div>
 
+<div id="62"></div>
+
 ### 6.2 Conditions de fonctionnement recommandées { #62-recommended-operating-conditions }
 
 <div align="center"><em>Tableau 6.2-1 : Conditions de fonctionnement recommandées</em></div>
@@ -310,6 +348,8 @@ Le dépassement d'une valeur limite absolue peut endommager définitivement le m
 | TA | Température de fonctionnement | -40 | - | 85 | °C |
 
 </div>
+
+<div id="63-dc"></div>
 
 ### 6.3 Caractéristiques électriques CC { #63-dc-electrical-characteristics }
 
@@ -343,6 +383,8 @@ Le dépassement d'une valeur limite absolue peut endommager définitivement le m
 </div>
 
 Les tableaux complets (incluant le courant de fuite d'entrée, les seuils de réinitialisation et la capacité de broche aux deux tensions d'alimentation) figurent au §5.3 de la fiche technique officielle.
+
+<div id="64"></div>
 
 ### 6.4 Consommation électrique { #64-power-consumption }
 
@@ -388,6 +430,8 @@ Les tableaux complets (incluant le courant de fuite d'entrée, les seuils de ré
 
 Ces tableaux présentent certains points de fonctionnement. La fiche technique fournit d'autres intervalles radio et états de balayage au §5.4.2, ainsi que d'autres fréquences de processeur au §5.4.3. Les valeurs à 3,8 V sont calculées à partir des mesures sur les rails 1,8 V et 3,3 V avec un rendement de conversion de 90 % : `I3.8V = I1.8V × 1.8 / (0.90 × 3.8) + I3.3V`. Il s'agit de valeurs de courant équivalentes à l'entrée du système, et non de mesures directes avec 3,8 V appliqués à une broche d'alimentation du module.
 
+<div id="65-bluetooth-rf"></div>
+
 ### 6.5 Performances RF Bluetooth bimode { #65-dual-mode-bluetooth-rf-performance }
 
 Prend en charge Bluetooth 5.3, rétrocompatible avec les versions 4.2/4.1/4.0, ainsi que BLE et Bluetooth Classic. Fréquence centrale des canaux de fonctionnement : 2402–2480 MHz.
@@ -402,6 +446,8 @@ Prend en charge Bluetooth 5.3, rétrocompatible avec les versions 4.2/4.1/4.0, a
 
 Les tableaux complets min/typ/max pour toutes les performances TX/RX BLE 1 Mbps/2 Mbps/LR et TX/RX BT Classic BR/EDR figurent au §5.5 de la fiche technique officielle.
 
+<div id="7"></div>
+
 ## 7. Alimentation du module { #7-module-power-supply }
 
 Le module dispose de cinq interfaces d'alimentation : **VDD_3V3**, **VDD_1V8**, **VDDIOA**, **VDDIOA2** et **VDDIOB**.
@@ -414,6 +460,8 @@ Le module dispose de cinq interfaces d'alimentation : **VDD_3V3**, **VDD_1V8**, 
 
 !!! info "Figure 7-1 : Schéma fonctionnel de l'alimentation du module"
     Voir la Figure 7-1 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
+
+<div id="8"></div>
 
 ## 8. Schéma de référence et affectation des broches { #8-reference-schematic-and-pin-assignment }
 
@@ -428,6 +476,8 @@ La fiche technique fournit également un tableau d'affectation de broches recomm
     Voir la Figure 7-9 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
 
 Utilisez ces éléments comme point de départ pour un schéma de production et adaptez la sélection des broches aux périphériques spécifiques de votre produit.
+
+<div id="9"></div>
 
 ## 9. Liste de contrôle de conception du schéma { #9-schematic-design-checklist }
 
@@ -456,21 +506,29 @@ Utilisez ces éléments comme point de départ pour un schéma de production et 
 !!! note
     La fiche technique V0.1 indique une plage de fonctionnement VDDIO de 1,7 à 3,6 V au §5.2, mais le point 4 de la liste du §7.3 spécifie un niveau d'interface E/S de 3,3 V. Avant de connecter des périphériques, confirmez auprès de SiFli la tension d'interface applicable à la révision exacte du module ; la fiche technique ne concilie pas ces deux indications. Vérifiez toute révision plus récente de la [fiche technique officielle (PDF)](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) avant de finaliser un schéma de production.
 
+<div id="10-pcb"></div>
+
 ## 10. Dimensions du module et empreinte du PCB { #10-module-dimensions-and-pcb-footprint }
+
+<div id="101"></div>
 
 ### 10.1 Dimensions du module { #101-module-dimensions }
 
 Le module mesure 24 × 24 × 3,1 mm ; le PCB du module a une épaisseur de 0,8 mm. Le pas des contacts castellés du pourtour est de 1,1 mm.
 
-!!! info "Figure 10-1 : Dimensions du module"
+!!! info "Figure 10.1-1 : Dimensions du module"
     Voir la Figure 8-1 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
+
+<div id="102-pcb"></div>
 
 ### 10.2 Empreinte du PCB recommandée { #102-recommended-pcb-footprint }
 
-!!! info "Figure 10-2 : Empreinte du PCB recommandée"
+!!! info "Figure 10.2-1 : Empreinte du PCB recommandée"
     Voir la Figure 8-2 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
 
 L'empreinte recommandée comporte 72 pastilles externes de 1,8 × 0,8 mm, 60 pastilles internes de 0,7 × 1,0 mm et 6 pastilles centrales de 1,3 × 1,3 mm. Les dimensions sont en millimètres ; le dessin de la fiche technique fait autorité pour la géométrie complète.
+
+<div id="103"></div>
 
 ### 10.3 Connecteur d'antenne externe { #103-external-antenna-connector }
 
@@ -478,8 +536,10 @@ La fiche technique décrit une antenne montée sur PCB ou un connecteur d'antenn
 
 Les dimensions du connecteur indiquées sur le dessin sont en millimètres.
 
-!!! info "Figure 10-3 : Dimensions du connecteur d'antenne externe"
+!!! info "Figure 10.3-1 : Dimensions du connecteur d'antenne externe"
     Voir la Figure 8-3 de la fiche technique officielle pour ce schéma — non reproduit dans ce guide.
+
+<div id="104-pcb"></div>
 
 ### 10.4 Placement du module dans la conception du PCB { #104-module-placement-in-pcb-design }
 
@@ -489,16 +549,24 @@ Réservez la zone d'antenne du module de sorte qu'aucun composant, cuivre, piste
 - Si l'antenne ne peut pas dépasser le bord de la carte, prévoyez une zone d'exclusion généreuse (sans plan de cuivre, piste ni composant) et retirez, si possible, le matériau de la carte hôte sous l'antenne.
 - Pour les conceptions de produit final complètes, évaluez l'effet de l'enveloppe mécanique sur l'antenne et effectuez une validation RF, incluant un test final de portée de communication sur le produit fini.
 
+<div id="11"></div>
+
 ## 11. Manipulation du produit { #11-product-handling }
+
+<div id="111"></div>
 
 ### 11.1 Conditions de stockage { #111-storage-conditions }
 
 - Stockez les produits scellés dans un sachet barrière anti-humidité (MBB) à < 40 °C / 90 % HR, sans condensation.
 - Le niveau de sensibilité à l'humidité du module est MSL 3. Après ouverture du sachet sous vide, utilisez le module dans les 168 heures, dans des conditions de 25 ± 5 °C et 60 % HR ; sinon, faites-le sécher en étuve avant son retour en production. Cela ne modifie pas la recommandation d'un seul passage en refusion.
 
+<div id="112-esd"></div>
+
 ### 11.2 Décharge électrostatique (ESD) { #112-electrostatic-discharge-esd }
 
 La fiche technique indique une tenue ESD de ±2000 V HBM et ±500 V CDM. Lors de l'assemblage et des tests, suivez les précautions standard de manipulation ESD de SiFli pour les modules.
+
+<div id="113"></div>
 
 ### 11.3 Profil de refusion { #113-reflow-profile }
 
@@ -506,8 +574,10 @@ Il est recommandé de ne faire passer le module qu'une seule fois au four de ref
 
 Le profil V0.1 prévoit une rampe de 25 à 150 °C en 60–90 s à 1–3 °C/s ; un préchauffage de 150 à 200 °C pendant 60–120 s ; 60–90 s au-dessus de 217 °C, avec un pic de 235–250 °C ; puis un refroidissement du pic à 180 °C à raison de -1 à -5 °C/s. La figure indique une soudure SAC305. Sa légende inférieure donne un intervalle au pic de 30–70 s, tandis que le graphique porte séparément la mention 焊接时间 >30 s (temps de soudage >30 s). Ce sont deux indications distinctes que la fiche technique ne concilie pas ; ne fusionnez pas les intervalles et confirmez le profil de production.
 
-!!! info "Figure 11-1 : Profil de température de refusion recommandé"
+!!! info "Figure 11.3-1 : Profil de température de refusion recommandé"
     Voir la Figure 9-1 de la fiche technique officielle ; les valeurs du profil et l'écart entre les libellés sont résumés ci-dessus.
+
+<div id="114"></div>
 
 ### 11.4 Vibrations ultrasoniques { #114-ultrasonic-vibration }
 
@@ -516,12 +586,16 @@ Le profil V0.1 prévoit une rampe de 25 à 150 °C en 60–90 s à 1–3 °C/s ;
 !!! note
     Vérifiez le niveau de sensibilité à l'humidité final, la fenêtre de durée de vie hors sachet, les limites ESD et les exigences de refusion pour le SF32LB58-MOD dans le §9 de la [fiche technique officielle (PDF)](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf) avant de publier les spécifications du processus de fabrication.
 
+<div id="12"></div>
+
 ## 12. Documents associés { #12-related-documents }
 
 - [Fiche technique DS5802-SF32LB58-MOD (V0.1)](https://downloads.sifli.com/silicon/DS5802-SF32LB58-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf)
 - [Présentation de la puce SF32LB58x](../../sf32-products/chips/SF32LB58x.md)
 - [Guide de conception matérielle SF32LB58x](../chip-guides/SF32LB58x_hardware_design_guide.md)
 - [SF32LB58-DevKit-LCD](../../sf32-products/devkits/SF32LB58-DevKit-LCD.md)
+
+<div id="13"></div>
 
 ## 13. Historique des révisions { #13-revision-history }
 
@@ -535,4 +609,4 @@ Le profil V0.1 prévoit une rampe de 25 à 150 °C en 60–90 s à 1–3 °C/s ;
 
 </div>
 
-Ce guide s'appuie sur **DS5802-SF32LB58-MOD V0.1**, la révision initiale publiée. Reportez-vous au PDF officiel pour la révision faisant autorité et la plus récente.
+Ce guide s'appuie sur le brouillon **DS5802-SF32LB58-MOD V0.1**. Avant la libération du design, consultez le PDF officiel pour confirmer la révision faisant autorité et la plus récente.

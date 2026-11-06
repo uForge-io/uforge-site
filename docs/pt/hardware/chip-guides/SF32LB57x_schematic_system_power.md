@@ -8,10 +8,14 @@ tags:
     - Chip
 ---
 
+<div id="sf32lb57x"></div>
+
 # Guia de Projeto de Hardware do SF32LB57x — Sistema Mínimo e Alimentação { #sf32lb57x-hardware-design-guide-minimum-system-power }
 
 !!! note "Parte do Guia de Projeto de Hardware do SF32LB57x"
     As diretrizes de projeto do esquemático estão distribuídas em três páginas: esta página (Seções 5.1–5.2: Projeto do Sistema Mínimo e Sistema de Alimentação), [Clock, RF e Interfaces de Usuário](SF32LB57x_schematic_clock_rf_interfaces.md) (Seções 5.3–5.5) e [Armazenamento e Fabricação](SF32LB57x_schematic_storage_mfg.md) (Seções 5.6–5.7). Consulte primeiro a [visão geral do Guia de Projeto de Hardware do SF32LB57x](SF32LB57x_hardware_design_guide.md) para selecionar o dispositivo e conhecer o fluxo completo de projeto.
+
+<div id="5"></div>
 
 ## 5. Diretrizes de projeto do esquemático { #5-schematic-design-guidelines }
 
@@ -33,7 +37,11 @@ Este capítulo segue a sequência habitual de bring-up da placa. Conclua primeir
 
 </div>
 
+<div id="51"></div>
+
 ### 5.1. Projeto do sistema mínimo { #51-minimum-system-design }
+
+<div id="511"></div>
 
 #### 5.1.1. Sequência de projeto do sistema mínimo { #511-minimum-system-design-sequence }
 
@@ -45,6 +53,8 @@ Falhas durante o bring-up geralmente estão relacionadas ao sistema mínimo, à 
 4. Defina a estrutura da árvore de alimentação, o caminho do carregador/OVP, o indutor e os capacitores do BUCK e os estados padrão dos trilhos; depois conclua a revisão detalhada da Seção 5.2.
 5. Selecione os cristais de 48 MHz e 32,768 kHz e confirme o plano de calibração na Seção 5.3.
 6. Reserve pontos de teste para DBG-UART, SWD, modo de boot, alimentação, GND e gabarito de teste.
+
+<div id="512"></div>
 
 #### 5.1.2. Esquemáticos do sistema mínimo { #512-minimum-system-schematics }
 
@@ -78,6 +88,8 @@ O SF32LB57x possui diferentes variantes de esquemático do sistema mínimo. Use 
 
 <div align="center"><em>Figura 5.1-6: Sistema mínimo BGA112 com alimentação de 3,3 V</em></div>
 <!-- /BGA-ONLY -->
+
+<div id="513"></div>
 
 #### 5.1.3. Configuração de boot, armazenamento e pinos de bootstrap { #513-boot-storage-and-strap-configuration }
 
@@ -114,6 +126,8 @@ Selecione a mídia de boot antes de congelar o esquemático. A memória integrad
 <div align="center"><em>Figura 5.1-7: Circuito recomendado para os pinos de bootstrap</em></div>
 
 Projete a alimentação da mídia de boot conforme o tipo de mídia e a família de alimentação. Nas variantes alimentadas por bateria, a Flash NOR externa é alimentada por `VDD33_VOUT1`; a Flash SPI NAND externa requer uma chave de carga depois de `VDD33_VOUT1`; e a Flash SD NAND externa e a eMMC usam um LDO externo. Nas variantes de 3,3 V, use um LDO externo para alimentar todas as mídias de boot externas. A SiFli recomenda `PA21` como habilitação da chave da mídia externa: nível alto liga o trilho e nível baixo o desliga. Se uma variante alimentada por bateria não expuser `PA21`, o guia original permite usar, em seu lugar, um GPIO com pull-up padrão. Garanta que o trilho da mídia esteja disponível durante o boot. Se o armazenamento integrado ao encapsulamento já ocupar MPI3, o uso externo de MPI3 fica limitado a SD NAND ou eMMC; não conecte Flash SPI NOR/SPI NAND externas a esse canal.
+
+<div id="514"></div>
 
 #### 5.1.4. Acesso para depuração e download { #514-debug-and-download-access }
 
@@ -153,7 +167,11 @@ Reserve o acesso para depuração e recuperação antes de atribuir os pinos de 
 
 `PA18`/`PA19` são os pinos DBG-UART padrão e `PA43`/`PA44` são os pinos SWD padrão; o SWD também pode ser transferido para `PA18`/`PA19`. O chip oferece quatro interfaces de download: DBG-UART, SWD, UART padrão e USB. A inicialização normal oferece apenas DBG-UART e SWD; o modo BOOT pode habilitar as quatro. O modo BOOT e a troca dos pinos SWD dependem de `PA00`, do registrador BOOT, de `PA01` e da chave BOOT do host. Ao projetar a programação de produção e a recuperação, consulte a tabela completa de modos da fonte; não deduza a interface de download com base em um único estado de pino.
 
+<div id="52"></div>
+
 ### 5.2. Sistema de alimentação { #52-power-system }
+
+<div id="521"></div>
 
 #### 5.2.1. Planejamento da árvore de alimentação { #521-power-tree-planning }
 
@@ -173,6 +191,8 @@ Desenhe a árvore de alimentação antes de iniciar o esquemático e identifique
 
 </div>
 
+<div id="522"></div>
+
 #### 5.2.2. Variantes alimentadas por bateria { #522-battery-powered-variants }
 
 As variantes alimentadas por bateria normalmente utilizam `VBUS`, `VBAT`, `VCC`, `VSYS`, `BUCK_LX`, `BUCK_FB`, saídas dos LDOs internos e pinos de alimentação de áudio e RF.
@@ -186,6 +206,8 @@ Requisitos principais:
 - Use `VDD33_VOUT1`, `VDD33_VOUT2` e as demais saídas dos reguladores internos apenas para as cargas expressamente permitidas. Há uma divergência nas fontes da SiFli: o texto e o diagrama de baixo consumo mostram sensores externos em `VDD33_VOUT1`, enquanto o checklist de alimentação restringe essa saída à Flash NOR/NAND integrada ou externa e a `AVDD33_AUD`, proibindo outros periféricos. Até que a SiFli esclareça a divergência, não conecte sensores a `VDD33_VOUT1`.
 - Alimente `AVDD_BRF` e `AVDD33_AUD` pelos trilhos recomendados e use filtragem local.
 
+<div id="523-33-v"></div>
+
 #### 5.2.3. Variantes com alimentação de 3,3 V { #523-33-v-supply-variants }
 
 As variantes com alimentação de 3,3 V usam 3,3 V externos para `PVDD`, `AVDD33`, `AVDD_BRF`, `AVDD33_AUD` e domínios associados. Selecione 1,8 V ou 3,3 V para `VDDIOA` conforme a referência exata.
@@ -197,6 +219,8 @@ Requisitos principais:
 - Se `VBATS` for usado para medir a bateria, verifique a faixa de entrada e a filtragem.
 - Nas variantes com alimentação de 3,3 V, alimente todas as mídias de boot externas por um LDO externo; `PA21` é o sinal de habilitação recomendado.
 - Conecte as referências internas e as saídas dos LDOs internos somente aos capacitores externos especificados. Não aplique tensão externa nesses pinos.
+
+<div id="524"></div>
 
 #### 5.2.4. Referência rápida de capacitores e usos { #524-power-capacitor-and-usage-quick-reference }
 
@@ -224,6 +248,8 @@ Use esta tabela na revisão preliminar do esquemático. Confirme os valores fina
 
 </div>
 
+<div id="525-buck"></div>
+
 #### 5.2.5. Indutor e realimentação do BUCK { #525-buck-inductor-and-feedback }
 
 Parâmetros recomendados para o indutor do BUCK:
@@ -247,6 +273,8 @@ Requisitos de layout da PCB:
 - Use uma largura adequada para a trilha de `BUCK_FB`; recomenda-se pelo menos 0,25 mm.
 - Mantenha um plano de referência de terra contínuo perto do indutor e evite acoplar ruído às trilhas dos cristais, RF, áudio e GPADC.
 - Se o produto incluir blocos sensíveis, como GPS, sensor de frequência cardíaca, ECG ou microfones analógicos, reserve footprints opcionais para ajuste de EMI perto de BUCK_LX. Defina os valores finais durante a validação de EMC do sistema.
+
+<div id="526-ovp"></div>
 
 #### 5.2.6. Carregamento e OVP { #526-charging-and-ovp }
 
@@ -274,6 +302,8 @@ Recomendações para OVP:
 !!! warning "Diferença no intervalo de VBUS"
     As tabelas atuais por encapsulamento e o texto de OVP indicam 4,5–5,5 V para `VBUS`; o checklist continua a exigir 4,6–5,5 V. Até a SiFli confirmar, use o mínimo mais restritivo de 4,6 V.
 
+<div id="527"></div>
+
 #### 5.2.7. Estratégia de alimentação de baixo consumo { #527-low-power-supply-strategy }
 
 O comportamento de baixo consumo deve ser considerado desde o projeto do esquemático.
@@ -286,6 +316,8 @@ Recomendações:
 - Alimente os pull-ups de I2C pelo mesmo trilho do periférico correspondente para evitar corrente de fuga durante o repouso.
 - Escolha componentes com baixo Iq e baixa corrente no modo desligado para os circuitos sempre ligados.
 - Se `VSYS` ou um LDO sempre ligado for usado para alimentar os pull-ups dos GPIOs, inclua essa corrente de fuga no orçamento de corrente durante o repouso.
+
+<div id="528"></div>
 
 #### 5.2.8. Figuras de referência de alimentação e carregamento { #528-power-and-charging-reference-figures }
 
@@ -334,6 +366,8 @@ Figuras de referência para carregamento e OVP:
 ![Figura 5.2-9: Aplicação OVP com saída regulada](../../sf32-products/chips/assets/57x/SF32LB57x-OVP-REGU.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>Figura 5.2-9: Aplicação OVP com saída regulada</em></div>
+
+<div id="529"></div>
 
 #### 5.2.9. Restrições elétricas por encapsulamento e família de alimentação { #529-package-and-power-family-electrical-constraints }
 
@@ -400,9 +434,13 @@ Os requisitos de alimentação do SF32LB57x variam conforme o encapsulamento e a
 </div>
 
 
+<div id="5210"></div>
+
 #### 5.2.10. Modos de operação e fontes de despertar { #5210-operating-modes-and-wake-sources }
 
 Os modos de operação e as fontes de despertar fazem parte da revisão do sistema de alimentação, pois determinam quais trilhos, pull-ups, cargas externas e GPIOs capazes de gerar o despertar permanecem ativos em cada estado de baixo consumo.
+
+<div id="5211"></div>
 
 #### 5.2.11. Modos de energia { #5211-power-modes }
 
@@ -422,6 +460,8 @@ A família SF32LB57x oferece dez fontes de interrupção capazes de despertar o 
 
 </div>
 
+<div id="5212"></div>
+
 #### 5.2.12. Projeto do despertar { #5212-wake-design }
 
 - Conecte botões, interrupções do painel de toque e interrupções de sensores que precisem despertar o sistema a GPIOs compatíveis com essa função.
@@ -429,6 +469,8 @@ A família SF32LB57x oferece dez fontes de interrupção capazes de despertar o 
 - Revise retenção de E/S, High-Z, pull-up, pull-down e estado da alimentação dos periféricos durante Standby e Hibernate.
 - Para despertar ao conectar USB, use um divisor de VBUS ligado a um GPIO compatível com a função de despertar e com a tensão de E/S.
 - Revise em conjunto o despertar por Bluetooth, RTC e sinais externos com a política de baixo consumo do firmware.
+
+<div id="5213"></div>
 
 #### 5.2.13. Validação de baixo consumo { #5213-low-power-validation }
 
@@ -469,6 +511,8 @@ Durante EVT, meça pelo menos os seguintes estados:
 </div>
 
 Em cada medição, registre a versão do firmware, a tensão de alimentação, o ajuste do simulador de bateria, o estado de conexão dos periféricos e do Bluetooth e a temperatura ambiente.
+
+<div id="5214"></div>
 
 #### 5.2.14. Referência completa dos pinos de alimentação { #5214-full-power-supply-pin-reference }
 

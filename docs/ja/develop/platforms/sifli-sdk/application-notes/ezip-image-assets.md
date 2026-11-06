@@ -80,6 +80,12 @@ ezip -convert png_filename.png -rgb888 -binfile 2
 
 出力は`png_filename.bin`で、ヘッダーの形式値はEZIPに設定されます。
 
+SF32LB57のみ`-winsize 2048`を追加してください。他のチップではこのオプションを使用しないでください。
+
+```bash
+ezip -convert png_filename.png -rgb565 -binfile 2 -winsize 2048
+```
+
 ### PIXELのLVGL C配列 { #pixel-lvgl-c-array }
 
 ```bash

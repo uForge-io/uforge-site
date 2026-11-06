@@ -22,7 +22,7 @@ tags:
 
 - Externe Boot-Speicher können SPI NOR, SPI NAND oder SD NAND sein; eMMC ist bei unterstützten Varianten mit externer geregelter Versorgung verfügbar.
 - Die Bootstrap-Pins `PA13` und `PA17` wählen das Boot-Medium.
-- Anwendungshinweise und Leitfaden zum Schaltplanentwurf nennen `PA21` zum Schalten der Boot-Speicherversorgung, während die offizielle Checkliste `PA11` für externen Flash bei akkubetriebenen Varianten nennt. Lassen Sie den zutreffenden Steuerpin für das konkrete Design von SiFli bestätigen. Unabhängig davon muss NOR-Flash ab 32 MB am MPI über PA21 aus- und wieder eingeschaltet werden können, damit das ROM ihn nach einem Reset oder dem Wechsel in Hibernate erkennt. Bei Varianten mit Speicher im selben Gehäuse muss VDD_SIP in Hibernate abgeschaltet werden, um Leckströme an den Memory-I/Os zu vermeiden.
+- Anwendungshinweise und Leitfaden zum Schaltplanentwurf nennen `PA21` zum Schalten der Boot-Speicherversorgung, während die offizielle Checkliste `PA11` für externen Flash bei akkubetriebenen Varianten nennt. Lassen Sie den zutreffenden Steuerpin für das konkrete Design von SiFli bestätigen. Die Regel zum Aus- und Wiedereinschalten von MPI-NOR-Flash ab 32 MB sowie die Anweisung, `VDD_SIP` in Hibernate abzuschalten, stammen aus Unterlagen für extern versorgte Varianten `52B/D/E/G/J`. Die Quelle für akkubetriebene Varianten beschreibt `VDD18_VOUT` und nennt für externen NOR-Flash keinen zusätzlichen Schalter, behandelt aber die 32-MB-Schwelle nicht. Lassen Sie von SiFli klären, ob die Regel für `520/3/5/7` gilt, bevor Sie sie anwenden.
 
 **Design-Ziel**
 
@@ -131,14 +131,14 @@ Die höherrangigen OpenSiFli-Anwendungshinweise und der Leitfaden zum Schaltplan
 
     - Speisen Sie bei SF32LB520Ux6 mit Flash-Speicher im selben Gehäuse VDD18_VOUT aus VDD33_VOUT1 und deaktivieren Sie den internen VDD18_VOUT-LDO.
     - Verwenden Sie bei SF32LB523/5/7Ux6 mit PSRAM im selben Gehäuse den internen LDO; VDD18_VOUT kann auch extern versorgt werden.
-    - Versorgen Sie externen NOR-Flash aus VDD33_VOUT1; ein zusätzlicher Versorgungsschalter ist nicht erforderlich.
+    - Laut Quelle für akkubetriebene Varianten wird externer NOR-Flash aus VDD33_VOUT1 versorgt und benötigt keinen zusätzlichen Schalter. Ob dies auch für Kapazitäten ab 32 MB gilt, ist nicht angegeben. Lassen Sie dies vor der Anwendung auf großen MPI-NOR-Flash von SiFli bestätigen.
     - Versorgen Sie externen SPI-NAND- oder SD-NAND-Flash aus VDD33_VOUT1 und ergänzen Sie einen Versorgungsschalter.
     - Das Referenzdesign sieht an PA13 und PA17 Footprints für Pull-up-Widerstände vor. Bestücken Sie sie je nach Speichertyp; empfohlen werden 7,5 kΩ.
 
 === "52B/D/E/G/J (mit externer geregelter Versorgung)"
 
     - Sehen Sie beim Modell mit Flash-Speicher im selben Gehäuse (SF32LB52BU36) einen Versorgungsschalter an VDD_SIP vor.
-    - Bei Modellen mit PSRAM im selben Gehäuse (SF32LB52DUB6/EUB6/GUC6/JUD6) ist ein VDD_SIP-Versorgungsschalter optional, wenn PVDD = 3,3 V beträgt und VDD_SIP über den internen LDO versorgt wird. Bei PVDD = 1,8 V ist der Schalter erforderlich.
+    - Bei Modellen mit PSRAM im selben Gehäuse (SF32LB52DUB6/EUB6/GUC6/JUD6) ist ein VDD_SIP-Versorgungsschalter bei Nutzung des tabellierten PVDD-Bereichs und des internen LDO optional. Die Fußnote in der B3-Quelle nennt bei PVDD = 1,8 V einen erforderlichen Schalter, doch dieser Wert liegt außerhalb des Tabellenbereichs von 2,97–3,63 V. Die Anwendbarkeit ist ungeklärt: Lassen Sie sie von SiFli bestätigen und behandeln Sie 1,8 V nicht als empfohlene PVDD-Auslegung. Den Hinweis zum Betriebsbereich finden Sie im [Schaltplanentwurf](SF32LB52x_schematic_design.md).
     - Die Stromversorgung des externen Speichers ist unabhängig von VDD_SIP; ergänzen Sie daher einen separaten Versorgungsschalter.
     - Die Abwägungen zu den eMMC-Versorgungsdomänen VCC/VCCQ sind in Abschnitt 5.6.1.1 beschrieben.
     - Der Anwendungshinweis nennt **PA21** für bootbezogene Speicher-Versorgungsschalter; die Quellenabweichung für externen Flash bei akkubetriebenen Varianten ist oben beschrieben.

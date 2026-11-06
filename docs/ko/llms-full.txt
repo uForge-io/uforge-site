@@ -288,7 +288,7 @@ OpenSiFli는 시리얼 인터페이스로 SiFli SoC와 통신하는 오픈소스
 | 활성화 | SDK 환경을 현재 터미널에 로드합니다. |
 | 설정 | 보드와 기능 옵션을 선택합니다. |
 | 빌드 | 보드별 바이너리를 생성합니다. |
-| 플래싱 | 이미지를 하드웨어에 기록합니다. |
+| 플래싱 | 보드에 펌웨어 이미지를 기록합니다. |
 | 모니터링 | 부트 및 애플리케이션 동작을 확인합니다. |
 | 기록 | 재현이 가능하도록 명령/로그 세부 정보를 저장합니다. |
 
@@ -311,7 +311,7 @@ OpenSiFli는 시리얼 인터페이스로 SiFli SoC와 통신하는 오픈소스
 | 빌드 도구를 찾을 수 없음 | 현재 터미널에서 `export.sh` / `export.ps1`을 다시 실행합니다. |
 | 알 수 없는 보드 이름 | SDK 지원 보드 문서를 확인합니다. |
 | 다운로드 스크립트가 포트를 열 수 없음 | 시리얼 터미널을 닫고 USB-UART 케이블과 커넥터를 확인합니다. |
-| 펌웨어 기록이 시작되지 않음 | 보드에 문서화된 다운로드 순서를 따릅니다. `sf32lb52-lcd_n16r8`의 경우 시리얼 포트를 선택한 뒤 보드를 재시작하고 2초 이내에 Enter를 눌러 다운로드를 시작합니다. 다른 보드는 해당 보드에 지정된 절차를 따르십시오. 보드 전원과 선택한 포트 및 UART 연결도 확인합니다. |
+| 펌웨어 기록이 시작되지 않음 | 보드에 문서화된 다운로드 순서를 따릅니다. `sf32lb52-lcd_n16r8`은 보드 재시작을 권장합니다. 이 순서를 사용할 때는 재시작 후 2초 이내에 Enter를 눌러 다운로드를 시작합니다. 다른 보드는 해당 보드에 지정된 절차를 따르십시오. 보드 전원과 선택한 포트 및 UART 연결도 확인합니다. |
 | 시리얼 출력에 깨진 문자가 표시됨 | 보레이트를 확인하고, 충전 전용 케이블이 아닌 데이터 통신용 USB-UART 케이블을 사용합니다. |
 
 </div>
@@ -364,7 +364,7 @@ SiFli-SDK는 SF32 펌웨어 개발을 위한 SiFli 공식 SDK입니다. RT-Threa
 
 [SiFli-SDK 시작하기](../../../getting-started/sifli/getting-started-sifli-sdk.md) 페이지에서 툴체인과 `hello_world` 기준 구성을 마련합니다. 이후에는 SDK 리비전, 선택한 보드, 예제/프로젝트 디렉터리, 구성, 해당 빌드 및 다운로드 산출물을 재현 가능한 빌드 기록과 함께 보관하십시오. 보드 이름에 코어 접미사가 없으면 HCPU 출력은 일반적으로 `build_<board_name>_hcpu/` 형식입니다. 예를 들어 `sf32lb52-lcd_n16r8`을 지정하면 `build_sf32lb52-lcd_n16r8_hcpu/`가 생성됩니다. 디렉터리 이름을 직접 조합하지 말고 실제 빌드에서 선택된 보드와 코어에 대해 생성된 디렉터리를 사용하십시오.
 
-재현 가능한 개발을 위해 SDK 브랜치를 고정하고 보드 이름을 기록하십시오. 로컬 보드 변경 사항은 벤더 파일과 분리해 관리하고, 구성 변경은 검토하기 쉬운 작은 단계로 진행하십시오. 빌드, 펌웨어 기록, 모니터링의 상세 절차는 [빌드, 플래싱, 모니터링](build-flash-monitor.md)을 참조하십시오.
+재현 가능한 개발을 위해 SDK 브랜치를 고정하고 보드 이름을 기록하십시오. 로컬 보드 변경 사항은 벤더 파일과 분리해 관리하고, 구성 변경은 검토하기 쉬운 작은 단계로 진행하십시오. 빌드, 플래싱, 모니터링의 상세 절차는 [빌드, 플래싱, 모니터링](build-flash-monitor.md)을 참조하십시오.
 
 ## 보드 이름
 
@@ -1111,7 +1111,7 @@ Summary: Zephyr 업스트림의 SF32LB52 DevKit LCD 보드 타깃을 빌드하�
 
 # Zephyr 업스트림
 
-`sf32lb52_devkit_lcd` 보드는 Zephyr v4.3.0부터 업스트림 Zephyr에서 지원되고 유지 관리되고 있습니다. [v4.3.0 릴리스 노트](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html)와 [SF32LB52 DevKit LCD 보드 문서](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)를 참조하십시오. 이 가이드는 v4.3.0 워크스페이스를 만들고, 첫 샘플을 빌드한 다음, 보드에 플래싱합니다. 더 폭넓은 SF32 공식 기능 세트가 필요하면 [SiFli-SDK](../sifli/getting-started-sifli-sdk.md)를 사용하십시오.
+`sf32lb52_devkit_lcd` 보드는 Zephyr v4.3.0부터 업스트림에서 지원됩니다. 이 가이드는 계속 유지 관리되는 Zephyr v4.5.0으로 새 워크스페이스를 만들고 첫 샘플을 빌드한 다음 보드에 플래싱합니다. [v4.3.0 릴리스 노트](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html), [v4.5.0 릴리스 노트](https://docs.zephyrproject.org/4.5.0/releases/release-notes-4.5.html), 최신 [SF32LB52 DevKit LCD 보드 문서](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)를 참조하십시오. 더 폭넓은 SF32 공식 기능 세트가 필요하면 [SiFli-SDK](../sifli/getting-started-sifli-sdk.md)를 사용하십시오.
 
 !!! note "보드 기능 목록 확인"
     업스트림 보드 정의만으로는 모든 주변 장치나 동작 모드가 활성화되었거나 제품용으로 검증되었다고 확인할 수 없습니다. 보드 문서의 지원 기능 표를 확인하고, 사용하는 보드 리비전에서 필요한 동작을 검증하십시오.
@@ -1125,23 +1125,49 @@ Summary: Zephyr 업스트림의 SF32LB52 DevKit LCD 보드 타깃을 빌드하�
 
 **소프트웨어**
 
-- Zephyr v4.3.0과 해당 [시작하기 안내](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html)에서 지원하는 호스트 OS.
+- Zephyr v4.5.0과 해당 [시작하기 안내](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html)에서 지원하는 호스트 OS.
 - Zephyr 호스트 의존성과 Zephyr SDK. 해당 가이드의 설명대로 ARM Cortex-M 타깃용으로 설치해야 합니다.
 - Git, Python 3, `pip`.
 
 ## 개발 환경 준비
 
-먼저 Zephyr의 [v4.3.0 시작하기 가이드](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html)에 따라 호스트 의존성과 Zephyr SDK 설정을 완료하십시오. 그런 다음 Python 환경을 만들고 같은 Zephyr 태그로 워크스페이스를 초기화하십시오.
+먼저 Zephyr의 [v4.5.0 시작하기 가이드](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html)에 따라 호스트 의존성과 Zephyr SDK 설정을 완료하십시오. 그런 다음 사용할 셸에 맞는 명령으로 Python 환경을 만들고 해당 Zephyr 태그로 워크스페이스를 초기화하십시오.
 
 ```bash
 python3 -m venv ~/zephyr-venv
-source ~/zephyr-venv/bin/activate
-pip install west
-west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.3.0 ~/zephyrproject
+. ~/zephyr-venv/bin/activate
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 ~/zephyrproject
 cd ~/zephyrproject
 west update
 west zephyr-export
-pip install -r zephyr/scripts/requirements.txt
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+Windows PowerShell:
+
+```powershell
+py -3 -m venv "$HOME\zephyr-venv"
+& "$HOME\zephyr-venv\Scripts\Activate.ps1"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "$HOME\zephyrproject"
+Set-Location "$HOME\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+Windows 명령 프롬프트:
+
+```bat
+py -3 -m venv "%USERPROFILE%\zephyr-venv"
+call "%USERPROFILE%\zephyr-venv\Scripts\activate.bat"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "%USERPROFILE%\zephyrproject"
+cd /d "%USERPROFILE%\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
 ```
 
 아래의 빌드 및 플래시 단계에서도 이 환경을 활성 상태로 유지하십시오.
@@ -1178,7 +1204,7 @@ west build -b sf32lb52_devkit_lcd samples/hello_world --pristine
 west flash
 ```
 
-플래시 기록에 실패하면 시리얼 포트 선택, 다운로드 모드, 그리고 [보드 문서](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)의 러너 안내를 확인하십시오.
+플래시에 실패하면 시리얼 포트 선택, 다운로드 모드, 그리고 [보드 문서](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)의 러너 안내를 확인하십시오.
 
 ## 시리얼 콘솔 열기
 
@@ -1190,7 +1216,7 @@ Hello World! sf32lb52_devkit_lcd
 
 ## 다음 샘플 선택
 
-업스트림 보드 문서의 지원 기능 표와 [Zephyr 샘플 브라우저](https://docs.zephyrproject.org/4.3.0/samples/index.html)를 함께 사용하여 다음에 평가할 API 또는 주변 장치를 선택하십시오. 샘플을 제품 준비 상태의 증거로 간주하기 전에, 해당 기능이 이 보드에 나열되어 있는지와 필요한 구성이 활성화되어 있는지 확인하십시오.
+업스트림 보드 문서의 지원 기능 표와 [Zephyr 샘플 브라우저](https://docs.zephyrproject.org/4.5.0/samples/index.html)를 함께 사용하여 다음에 평가할 API 또는 주변 장치를 선택하십시오. 샘플을 제품 준비 상태의 증거로 간주하기 전에, 해당 기능이 이 보드에 나열되어 있는지와 필요한 구성이 활성화되어 있는지 확인하십시오.
 
 ## 문제 해결
 
@@ -1200,8 +1226,8 @@ Hello World! sf32lb52_devkit_lcd
 
 | 증상 | 확인 사항 |
 |:--------|:------|
-| `west boards`에 SF32 타깃이 표시되지 않음 | 워크스페이스가 업스트림 Zephyr v4.3.0 이상에서 초기화되었는지, `west update`가 완료되었는지 확인하십시오. |
-| 컴파일 전에 빌드가 실패함 | Python 환경이 활성 상태인지, ARM Cortex-M용 Zephyr SDK가 설치되어 있는지, v4.3.0 요구 사항이 설치되었는지 확인하십시오. |
+| `west boards`에 SF32 타깃이 표시되지 않음 | 워크스페이스가 업스트림 Zephyr v4.5.0 이상에서 초기화되었는지, `west update`가 완료되었는지 확인하십시오. |
+| 컴파일 전에 빌드가 실패함 | Python 환경이 활성 상태인지, ARM Cortex-M용 Zephyr SDK가 설치되어 있는지, v4.5.0 요구 사항이 설치되었는지 확인하십시오. |
 | 보드는 빌드되지만 플래시에 기록되지 않음 | `sftool`이 설치되어 `PATH`에서 실행 가능한지, 선택한 시리얼 포트가 올바른지, 보드가 시리얼 다운로드 모드인지 확인하십시오. |
 | 시리얼 출력이 없음 | `usart1`, `1000000` 보레이트, USB-to-UART 연결, 다른 터미널이 해당 포트를 열고 있는지를 확인하십시오. |
 | 주변 장치 샘플이 실패함 | 보드의 지원 기능 표와 샘플 구성을 확인하십시오. 기본 보드 타깃에서 모든 주변 장치가 활성화된다고 가정하지 마십시오. |
@@ -1238,7 +1264,7 @@ Summary: SF32 하드웨어의 양산 설계 시작점: 칩 및 모듈 설계 가
 | 회로도와 레이아웃 | 칩 또는 모듈 하드웨어 설계 가이드 | 전원, 클럭, 리셋, RF, 스토리지, 디스플레이, 인터페이스 구현의 검토 기록을 보관합니다. |
 | BOM | 승인 업체 목록(AVL)과 부품 데이터시트 | 핵심 품목마다 대체품의 승인 또는 의도적인 검증 여부를 입증할 자료를 남깁니다. |
 | 설계 검토 | 하드웨어 설계 체크리스트 | 적용되는 각 체크리스트 항목과 예외의 처리 결과를 기록합니다. |
-| 브링업 | 개발 보드 자료, SDK 예제, 측정 결과 | 부팅, 펌웨어 기록, 주변 장치 동작, 무선, 소비 전력, 복구의 재현 가능한 결과를 보관합니다. |
+| 브링업 | 개발 보드 자료, SDK 예제, 측정 결과 | 부팅, 펌웨어 플래싱, 주변 장치 동작, 무선, 소비 전력, 복구의 재현 가능한 결과를 보관합니다. |
 | 양산 CAD 릴리스 | 공식 EDA 라이브러리와 패키지 도면 | 심볼, 풋프린트, 핀 배치, 랜드 패턴, 제조 출력물의 검증 기록을 보관합니다. |
 
 </div>
@@ -2005,7 +2031,7 @@ SDK는 다음을 비롯한 여러 표준 및 벤더 프로파일의 예제 구�
 - **Classic Bluetooth 오디오** — 스트리밍에는 A2DP, 전송 제어에는 AVRCP, 통화에는 HFP를 사용합니다. 검증된 방식이며 기존 휴대폰 및 헤드셋과의 호환성이 넓습니다.
 - **LE Audio** — [Basic Audio Profile (BAP)](https://www.bluetooth.com/specifications/specs/basic-audio-profile-1-0-2/)은 유니캐스트와 브로드캐스트 LE Audio 스트림을 모두 관리하는 절차를 정의합니다. SDK에는 브로드캐스트 소스 및 싱크 예제가 포함되어 있으며, 전환 기간 동안 두 방식을 모두 연결해야 하는 제품을 위해 브로드캐스트 소스와 Classic BT를 함께 사용하는 혼합 예제도 있습니다.
 
-어느 경로든 안정적인 타이밍, 버퍼링, 신뢰할 수 있는 샘플 이동이 필요하며, 보통 DMA를 사용합니다. 지원되는 Bluetooth 오디오 역할과 SDK 구성이 제품 요구 사항을 충족한다면 SF32LB52x/56x/58x를 선택하십시오. SF32LB55x는 BLE 전용이므로 Classic Bluetooth 오디오를 제공할 수 없습니다. BLE 전용이라고 해서 디바이스에 로컬 오디오 기능이 없다는 뜻은 아닙니다. DMA와 버퍼링은 [오디오 개요](../audio/overview.md)와 [Bluetooth 프로세서](processor.md#bluetooth-audio-and-le-audio)를 참조하십시오.
+어느 경로든 안정적인 타이밍, 버퍼링, 신뢰할 수 있는 샘플 이동이 필요하며, 보통 DMA를 사용합니다. 지원되는 Bluetooth 오디오 역할과 SDK 구성이 제품 요구 사항을 충족한다면 SF32LB52x/56x/58x를 선택하십시오. SiFli SDK의 A2DP 공유 예제에는 `eh-lb57x` 보드가 포함되어 있으며 A2DP 음악 공유와 HFP 통화 릴레이를 보여 줍니다. 이는 모든 SF32LB57x 부품과 역할의 지원을 입증하지 않으므로, 구체적인 SKU, 역할, SDK 구성을 확인하십시오. SF32LB55x는 BLE 전용이므로 Classic Bluetooth 오디오를 제공할 수 없습니다. BLE 전용이라고 해서 디바이스에 로컬 오디오 기능이 없다는 뜻은 아닙니다. DMA와 버퍼링은 [오디오 개요](../audio/overview.md)와 [Bluetooth 프로세서](processor.md#bluetooth-audio-and-le-audio)를 참조하십시오.
 
 ## Sibles 서비스 구현 패턴
 
@@ -2191,40 +2217,22 @@ SF32 디바이스는 소형 AIoT 및 웨어러블 제품을 위해 설계되었�
 
 <div align="center"><em>그림: 그래픽 리소스와 디스플레이 흐름</em></div>
 
-```text
-Source images, fonts, and animations
-        │
-        ▼
-GraphicsTool converts supported resources to eZip or eZip-A
-        │
-        ▼
-Compressed assets in NOR Flash, PSRAM, NAND, or file storage
-        │
-        ▼
-eZip hardware decoder expands an asset when required
-        │
-        ▼
-LVGL or another UI framework + graphics/display driver
-        │
-        ├── CPU fallback rendering
-        │
-        └── ePicasso pixel acceleration
-        │
-        ▼
-Final rendered bitmap in a draw buffer or framebuffer
-        │
-        ├── Uncompressed display path
-        │
-        └── Optional: extDMA compresses it into TurboPixel
-                    │
-                    ▼
-             TurboPixel framebuffer in PSRAM
-        │
-        ▼
-Display controller transfers pixels to the panel
-        │
-        ▼
-SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
+```mermaid
+flowchart TD
+    A["원본 이미지, 글꼴, 애니메이션"] --> B["GraphicsTool이 지원 리소스를 eZip 또는 eZip-A로 변환"]
+    B --> C["NOR Flash, PSRAM, NAND 또는 파일 저장소에 있는 압축 리소스"]
+    C --> D["필요할 때 eZip 하드웨어 디코더가 리소스를 확장"]
+    D --> E["LVGL 또는 다른 UI 프레임워크 + 그래픽/디스플레이 드라이버"]
+    E --> F["CPU 대체 렌더링"]
+    E --> G["ePicasso 픽셀 가속"]
+    F --> H["그리기 버퍼 또는 프레임버퍼의 최종 렌더링 비트맵"]
+    G --> H
+    H --> I["압축하지 않는 디스플레이 경로"]
+    H --> J["선택 사항: extDMA가 비트맵을 TurboPixel로 압축"]
+    J --> K["PSRAM의 TurboPixel 프레임버퍼"]
+    I --> L["디스플레이 컨트롤러가 픽셀을 패널로 전송"]
+    K --> L
+    L --> M["패널 인터페이스: SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI"]
 ```
 
 이 경로는 필수가 아니라 구성 가능한 경로입니다. 제품에 따라 eZip, ePicasso, TurboPixel 또는 전체 프레임버퍼를 사용하지 않을 수 있습니다. 사용 가능 여부와 연결 방식은 선택한 디바이스, SDK, 디스플레이 인터페이스, 패널, 드라이버 구성에 따라 달라집니다. 현재 OpenSiFli LCDC 헤더는 `HAL_EXTDMA_MODULE_ENABLED`가 활성화되어 있고 제품군 가드가 허용하는 경우에만 `LCDC_SUPPORTED_COMPRESSED_LAYER`를 정의하며, SF32LB52x와 SF32LB57x는 제외됩니다. 소스 주석에는 LCPU 경로가 활성화되지 않았다는 내용도 있습니다. 공개된 SDK LCDC 기능 표는 SF32LB55x에서 압축 레이어 압축 해제를 지원하지 않는 것으로 표시하므로, 55x는 종단 간 검증된 지원이 아니라 조건부 지원으로 취급하십시오. 정확한 SDK 리비전, 코어, 빌드 구성, 대상 하드웨어를 확인하십시오. [TurboPixel 프레임버퍼 압축](turbopixel.md#availability-in-the-sf32-family)을 참고하십시오.
@@ -2683,7 +2691,7 @@ SiFli SDK 문서는 SF32LB52x를 포함한 특정 타깃에 대해 RT-Thread 기
 실제 작업이 시스템을 상태 사이에서 이동시킵니다. 구성된 웨이크업 소스가 CPU 또는 서브시스템을 저전력 상태에서 깨웁니다. 웨이크업 및 클럭 복원 시퀀스는 디바이스마다 다릅니다. 작업이 끝나면 해당 드라이버나 태스크는 슬립 진입을 막는 PM 요청을 해제하는 것이 좋으며, 그래야 구성된 정책이 조건을 충족하는 저전력 상태를 선택할 수 있습니다. 아래 트레이스는 설명용입니다. 상대적인 전이를 보여 줄 뿐이며, 디바이스별 전류 값이나 타이밍을 나타내지 않습니다.
 
 <div align="center">
-<img src="assets/power-mode-transition.svg" alt="Deep Sleep 진입, 웨이크업, 활성 작업, 유휴 상태, 저전력 상태 복귀에 따른 상대 전류 예시 파형" width="960">
+<img src="assets/power-mode-transition-ko.svg" alt="Deep Sleep 진입, 웨이크업, 활성 작업, 유휴 상태, 저전력 상태 복귀에 따른 상대 전류 예시 파형" width="960">
 <br><em>그림: 짧은 워크로드 동안의 전원 모드 전이(설명용)</em>
 </div>
 
@@ -2926,7 +2934,7 @@ SiFli SDK 문서는 AMOLED 및 JDI 디스플레이, GPIO, BLE/Classic Bluetooth,
 - Bluetooth 연결 파라미터와 디스플레이 리프레시 전략은 대개 연결형 웨어러블 제품에서 가장 큰 두 가지 수단입니다.
 - 현실적인 복합 워크로드에서, 최종 외장 안의 실제 하드웨어로 실제 에너지를 측정하십시오. 벤치 측정과 개별 서브시스템 측정은 실제 제품의 전력을 과소평가할 수 있습니다.
 
-전압으로 배터리 잔량(%)을 추정하는 방법은 [배터리 충전 잔량(SoC) 추정](battery-capacity-calculation.md)을 참고하세요.
+전압으로 배터리 잔량(%)을 추정하는 방법은 [배터리 충전 잔량(SoC) 추정](battery-capacity-calculation.md)을 참고하십시오.
 
 ---
 
@@ -2952,6 +2960,8 @@ SF32LB52x는 SiFli의 비용 효율적인 MCU 제품군입니다. 디스플레�
 이 그룹들은 보드 수준에서 서로 호환되지 않습니다. 배터리 전원 제품군과 외부 전원 제품군은 서로 핀 호환이 되지 않으며, 1.8 V 52D 변형은 패키지 레이아웃이 비슷해 보이더라도 3.3 V 52B/E/G/J 그룹과 전기적으로 다릅니다.
 
 [^1]: STAR-MC1은 Arm China의 구성 가능한 Armv8-M Mainline 임베디드 CPU IP입니다. 호환되는 SF32 디바이스에서 SiFli는 이를 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서로 문서화합니다. Cortex-M33급 소프트웨어 모델은 기존 Cortex-M33용 펌웨어, 미들웨어, RTOS 포트, 개발 도구를 활용하는 데 도움이 됩니다. 다만 실제 디바이스에 맞춘 통합 작업은 여전히 필요합니다. CU, SP, SE 구성은 주로 캐시, TCM, XIPU, TrustZone 기능에서 차이가 나며, Arm Custom Instructions/CDE와 코프로세서 인터페이스는 선택 기능이므로 해당 SF32 부품에서 지원되는지 반드시 확인해야 합니다. SiFli 문서는 문맥에 따라 ***Arm Cortex-M33 STAR-MC1*** 또는 ***Arm Cortex-M33***이라는 표기를 사용할 수 있습니다.
+
+<div id="_1"></div>
 
 ## 애플리케이션
 
@@ -3000,7 +3010,11 @@ SF32LB52x는 SiFli의 비용 효율적인 MCU 제품군입니다. 디스플레�
 
 ---
 
+<div id="_2"></div>
+
 ## 기능 및 사양
+
+<div id="_3"></div>
 
 ### 연산 및 메모리
 
@@ -3009,6 +3023,8 @@ SF32LB52x는 SiFli의 비용 효율적인 MCU 제품군입니다. 디스플레�
 - 32 KB 명령어 캐시 + 16 KB 데이터 캐시
 - 512 KB 애플리케이션 SRAM과 64 KB Bluetooth 컨트롤러 SRAM
 - 변형에 따라 1 MB QSPI-NOR부터 16 MB OPI-PSRAM까지 선택 가능한 코패키지 메모리 구성
+
+<div id="_4"></div>
 
 ### 그래픽 및 오디오
 
@@ -3020,6 +3036,8 @@ SF32LB52x는 SiFli의 비용 효율적인 MCU 제품군입니다. 디스플레�
 - SNR 99 dB의 24비트 오디오 ADC 1개
 - SNR 109 dB의 24비트 오디오 DAC 1개
 
+<div id="_5"></div>
+
 ### 무선 연결
 
 - 듀얼 모드 Bluetooth 5.3(Classic Bluetooth 및 BLE)
@@ -3030,11 +3048,15 @@ SF32LB52x는 SiFli의 비용 효율적인 MCU 제품군입니다. 디스플레�
 - 64 KB SRAM을 갖춘 24 MHz 전용 Arm Cortex-M33 STAR-MC1 Bluetooth 컨트롤러 코어
 - 슬립 전류: 제품 브리프 기준 2 µA. 시스템 수준의 Standby 전류는 동작 모드와 보드 수준의 누설에 따라 달라집니다.
 
+<div id="_6"></div>
+
 ### 보안
 
 - AES/HASH/CRC 하드웨어 가속기
 - TRNG
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### 주변 장치 및 I/O
 
@@ -3050,6 +3072,8 @@ SF32LB52x는 SiFli의 비용 효율적인 MCU 제품군입니다. 디스플레�
 - RTC 및 워치독 타이머
 - 변형 제품군에 따라 44개 또는 45개의 GPIO
 
+<div id="_7"></div>
+
 ### 전원 공급
 
 - **배터리 전원 그룹: SF32LB520/3/5/7** — 단일 셀 Li-ion/Li-Po 배터리로 직접 전원을 공급받으며, 충전 중심의 통합 전원 아키텍처를 사용하는 설계를 대상으로 합니다.
@@ -3059,6 +3083,8 @@ SF32LB52x는 SiFli의 비용 효율적인 MCU 제품군입니다. 디스플레�
 - **외부 전원 1.8 V 그룹: SF32LB52D** — 특수한 초저전력 1.8 V 설계를 대상으로 하며, 3.3 V 부품과 전기적으로 호환되지 않습니다.
 
 배터리 전원 그룹과 외부 전원 그룹은 서로 독립된 실리콘 구성이며, 이 전원 제품군 간에는 **핀 호환이 되지 않습니다**.
+
+<div id="_8"></div>
 
 ## 제품군 변형
 
@@ -3092,7 +3118,7 @@ SiFli 칩 모델 가이드에 나열된 주요 변형을 기준으로, 실제 �
 
 </div>
 
-이 표는 SiFli [칩 모델 가이드](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)의 주요 변형을 따른 것이며, 전체 주문 카탈로그는 아닙니다. 링크된 외부 전원 데이터시트에는 **SF32LB52HUD6**(1.8 V, QFN68L, 128 Mb PSRAM)도 나열되어 있고, 하드웨어 가이드에는 `52AUx6` 및 `52D/F/HUx6`이라는 추가 접미사 패턴이 사용됩니다. 확보 가능한 자료만으로는 일관된 단일 변형 표를 얻을 수 없습니다. 설계를 릴리스하기 전에 이러한 SKU의 주문 가능 여부, 공급 전압 한계, 메모리 인터페이스, I/O 세부 사항을 최신 데이터시트에서 확인해야 합니다.
+이 표는 SiFli [칩 모델 가이드](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)의 주요 변형을 따른 것이며, 전체 주문 카탈로그는 아닙니다. 링크된 [DS5202-SF32LB52X 데이터시트 V0.2.6](https://downloads.sifli.com/docs/Datasheet/SF32LB52X/DS5202-SF32LB52X-Datasheet%20V0p2p6.pdf)은 개정 이력(2025-03-12)에서 **SF32LB52HUD6**를 언급하지만, 현재 주문 정보인 표 5-7에는 이 SKU가 없습니다. 이 과거 기록만으로 현재 주문 가능 여부나 SKU 사양을 확인할 수는 없습니다. 하드웨어 가이드에는 별도로 `52AUx6` 및 `52D/F/HUx6` 접미사 패턴이 사용됩니다. 설계 릴리스 전에 정확한 주문 부품 번호와 사양을 SiFli의 최신 공식 자료에서 확인하십시오.
 
 ## 통합 경로
 
@@ -3101,7 +3127,7 @@ SF32LB52x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 1. **펌웨어 경로 검증.** [SiFli SDK 시작 가이드](../../getting-started/sifli/getting-started-sifli-sdk.md)로 시작한 다음, [SiFli SDK 워크플로](../../develop/platforms/sifli-sdk/overview.md)와 [예제](../../develop/examples/index.md)를 사용해 필요한 주변 장치와 Bluetooth 동작을 검증하십시오.
 2. **통합 방식 선택.** 통합이 끝난 RF 모듈이 제품에 적합하면 [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md)을 평가하고, 그렇지 않으면 초기 펌웨어 및 주변 장치 검증용으로 가장 가까운 [SF32LB52 개발 보드](../devkits/SF32LB52-DevKit-LCD.md)를 선택하십시오.
 3. **하드웨어 설계 및 검토.** 회로도 또는 레이아웃을 릴리스하기 전에 로컬 [하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)와 그 [회로도](../../hardware/chip-guides/SF32LB52x_schematic_checklist.md) 및 [PCB 레이아웃](../../hardware/chip-guides/SF32LB52x_pcb_layout_checklist.md) 체크리스트를 사용하십시오. 전원 제품군의 기준 구성이 520/3/5/7, 52B/E/G/J, 52D 중 무엇인지 올바르게 확인하십시오.
-4. **주요 정보 출처 확인.** 해당 [데이터시트](#development-resources)와 SiFli [hardware design guide for 520/3/5/7] 또는 [hardware design guide for 52B/D/E/G/J]를 실제 주문할 부품 및 패키지와 대조하여 확인하십시오.
+4. **주요 정보 출처 확인.** 실제 주문할 부품 및 패키지에 맞춰 해당 [데이터시트](#development-resources)와 SiFli의 [520/3/5/7 하드웨어 설계 가이드][Hardware Design Guide (520/3/5/7)] 또는 [52B/D/E/G/J 하드웨어 설계 가이드][Hardware Design Guide (52B/D/E/G/J)]를 대조하십시오.
 
 <!-- uf-faq:start -->
 ## 자주 묻는 질문
@@ -3127,11 +3153,17 @@ RGB888 색상에서 최대 512 × 512 해상도를 지원합니다. DTR을 지�
 먼저 [SF32LB52x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하십시오.
 <!-- uf-faq:end -->
 
+<div id="_9"></div>
+
 ## 관련 제품
+
+<div id="_10"></div>
 
 ### 모듈
 
 [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md)은 표준 구성에서 8 MB 코패키지 OPI-PSRAM을 탑재한 SF32LB525UC6와 RF 매칭 회로를 결합한 제품입니다. 크기는 27.9 × 18.0 × 3.1 mm이며, 칩 수준의 RF 레이아웃과 검증을 직접 수행하지 않고 SF32LB52급 기능을 사용하려는 프로젝트에 적합합니다.
+
+<div id="_11"></div>
 
 ### 개발 키트
 
@@ -3139,6 +3171,8 @@ RGB888 색상에서 최대 512 × 512 해상도를 지원합니다. DTR을 지�
 - [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md)은 52B/52J급 부품에서 펌웨어, GPIO, 저전력 브링업을 빠르게 수행하기 위한 소형 외부 전원 코어 보드입니다.
 - [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md)는 52 시리즈에서 가장 작은 개발 보드로, 목표 제품의 크기 제약이 클 때 유용합니다.
 - [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md)는 배터리 중심 평가와 소형 제품 실험을 위한 저전력 지향 보드 경로입니다.
+
+<div id="_12"></div>
 
 ### 레퍼런스 제품
 
@@ -3155,6 +3189,8 @@ Summary: SF32LB55x: 보급형 Bluetooth MCU보다 풍부한 그래픽, 더 큰 S
 
 # SF32LB55x
 
+<div id="_1"></div>
+
 ## 개요
 
 SF32LB55x 시리즈는 BLE 연결 제품을 위한 메인스트림 초저전력 AIoT 마이크로컨트롤러 제품군으로, 보급형 Bluetooth MCU보다 강력한 디스플레이 기능, 더 큰 메모리 여유, 더 다양한 패키지가 필요한 제품을 대상으로 합니다.
@@ -3168,6 +3204,8 @@ SiFli의 공식 제품 브리프와 데이터시트에는 BLE 5.2, ePicasso 2.5D
 SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제품군보다 먼저 정의되었기 때문에, 접미사가 새로운 번호 체계를 완전히 따르지 않습니다. 디바이스를 선택할 때는 전체 주문 부품 번호와 패키지별 기능 표를 사용하고, 접미사만으로 모든 기능을 추정하지 마십시오.
 
 [^1]: STAR-MC1은 Arm China의 구성 가능한 Armv8-M Mainline 임베디드 CPU IP입니다. 호환되는 SF32 디바이스에서 SiFli는 이를 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서로 문서화합니다. Cortex-M33급 소프트웨어 모델은 기존 Cortex-M33용 펌웨어, 미들웨어, RTOS 포트, 개발 도구를 활용하는 데 도움이 됩니다. 다만 실제 디바이스에 맞춘 통합 작업은 여전히 필요합니다. CU, SP, SE 구성은 주로 캐시, TCM, XIPU, TrustZone 기능에서 차이가 나며, Arm Custom Instructions/CDE와 코프로세서 인터페이스는 선택 기능이므로 해당 SF32 부품에서 지원되는지 반드시 확인해야 합니다. SiFli 문서는 문맥에 따라 ***Arm Cortex-M33 STAR-MC1*** 또는 ***Arm Cortex-M33***이라는 표기를 사용할 수 있습니다.
+
+<div id="_2"></div>
 
 ## 애플리케이션
 
@@ -3189,6 +3227,8 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 - 사용자가 프로그래밍할 수 있는 저전력 프로세서
 - SF32LB52x보다 많은 GPIO 또는 더 고밀도인 패키지 옵션
 - 외부 NOR, NAND, eMMC, QSPI-PSRAM, OPI-PSRAM을 유연하게 선택
+
+<div id="_3"></div>
 
 ## 개발 리소스
 
@@ -3224,7 +3264,11 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 
 ---
 
+<div id="_4"></div>
+
 ## 기능 및 사양
+
+<div id="_5"></div>
 
 ### 연산 및 메모리
 
@@ -3235,6 +3279,8 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 - 64 KB 리텐션 SRAM을 포함한 1,088 KB 애플리케이션 SRAM
 - 전부 리텐션 SRAM인 224 KB 저전력 SRAM
 - NOR, NAND, eMMC, QSPI-PSRAM, OPI-PSRAM용 외부 메모리 인터페이스
+
+<div id="ai"></div>
 
 ### 그래픽, 디스플레이, AI
 
@@ -3248,6 +3294,8 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 - 듀얼 LCD 컨트롤러. 상시 표시(always-on display) 인터페이스와 듀얼 디스플레이 기능은 선택한 모델과 패키지에 따라 달라집니다.
 - TinyML 워크로드용 신경망 행렬 가속기, 최대 1.92 GOPS 및 5.73 TOPS/W
 
+<div id="_6"></div>
+
 ### 무선 연결
 
 - Bluetooth Low Energy 5.2
@@ -3256,11 +3304,15 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 - 최대 송신 전력: 10 dBm
 - 수신 피크 전류: 3.3 V에서 2.0 mA
 
+<div id="_7"></div>
+
 ### 보안
 
 - AES 및 CRC 하드웨어 가속기
 - 진성 난수 생성기(TRNG)
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### 주변 장치 및 I/O
 
@@ -3291,6 +3343,8 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 - Peripheral Task Controller(PTC)
 - GPIO 개수는 패키지에 따라 다르므로, 아래의 패키지 표와 출처 불일치 참고 사항을 참조하십시오.
 
+<div id="_8"></div>
+
 ### 전원 공급 및 패키지
 
 - 전원 공급 범위는 변형별로 다릅니다. SS6600A8은 2.97~3.63 V, 551U4O5와 선택된 BGA 변형은 1.71~3.63 V입니다.
@@ -3299,6 +3353,8 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 - RTC 웨이크업 시 슬립 전류: 600 nA
 - 핀 웨이크업 시 슬립 전류: 280 nA
 - 패키지 옵션: QFN68L, BGA145, BGA169
+
+<div id="_9"></div>
 
 ## 제품군 변형
 
@@ -3336,6 +3392,8 @@ SiFli 칩 모델 가이드에 나열된 다음의 현재 모델은 패키지와 
 
 SF32LB557VD3A6에 대해 현재 SiFli 칩 모델 가이드와 DS5501 V1.7.2 데이터시트의 Table 0-1에는 HCPU 71개 + LCPU 42개 = GPIO 113개로 나열되어 있습니다. 반면 데이터시트의 기능 및 패키지 요약과 PB0001 V1.3 제품 브리프에는 BGA169의 GPIO가 119개(HCPU 71개 + LCPU 48개)로 기재되어 있습니다. 따라서 공식 자료끼리, 심지어 데이터시트 안에서도 값이 상충합니다. 이 페이지는 모델별 행과 현재 모델 가이드의 값(113)을 따릅니다. 핀을 할당하거나 설계를 확정하기 전에 선택한 패키지의 볼 맵에서 GPIO 사용 가능 여부를 확인하고, SiFli에 주문 가능한 부품을 확인하십시오. 또한 해당 변형의 공급 전압 및 온도 등급, 전체 부품 번호, 내장 메모리 구성을 [DS5501 V1.7.2 데이터시트][Datasheet], [PB0001 V1.3 제품 브리프][Product Brief], [SiFli 칩 모델 가이드][SiFli Chip Model Guide]와 대조하여 확인하십시오. BGA145와 BGA169 패키지의 크기는 7 × 7 × 0.94 mm이며 피치는 0.5 mm입니다.
 
+<div id="_10"></div>
+
 ## 통합 경로
 
 SF32LB55x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따르십시오.
@@ -3349,7 +3407,7 @@ SF32LB55x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 ## 자주 묻는 질문
 
 **SF32LB55x의 주요 사양은 무엇입니까?**
-SF32LB55x는 애플리케이션 CPU(Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @48 MHz, 사용자 프로그래밍 가능)를 갖추고 있으며, 내장 SRAM은 1,312 KB입니다. Bluetooth 모드는 BLE 전용입니다. 그래픽: ePicasso 1.0. 패키지는 QFN68L / BGA145 / BGA169이며, 크기는 7 × 7 mm (QFN68L)입니다. USB는 2.0 FS를 지원합니다.
+SF32LB55x는 애플리케이션 CPU(Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @48 MHz, 사용자 프로그래밍 가능)를 갖추고 있으며, 내장 SRAM은 1,312 KB입니다. Bluetooth 모드는 BLE 전용입니다. 그래픽: ePicasso 1.0. 앞부분의 제품군 개요에서는 그래픽 엔진을 ePicasso 2.5D로 표기합니다. 확인 가능한 자료에는 두 표기의 관계가 설명되어 있지 않으므로, 서로 동등하거나 세대 차이를 뜻한다고 추정하지 말고 정확한 주문 부품의 그래픽 기능을 최신 공식 문서에서 확인하십시오. 패키지는 QFN68L / BGA145 / BGA169이며, 크기는 7 × 7 mm (QFN68L)입니다. USB는 2.0 FS를 지원합니다.
 
 **SF32LB55x는 어떤 디스플레이 인터페이스를 지원합니까?**
 지원하는 인터페이스는 SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI입니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)) 전체 제품군의 인터페이스 목록이며 모든 부품 번호나 패키지에 대한 보장이 아닙니다. 연결된 인터페이스 매트릭스를 확인하십시오.
@@ -3367,11 +3425,17 @@ SS6600A8은 2.97–3.63 V가 필요하며, 이 페이지에 나열된 SF32LB551U
 먼저 [SF32LB55x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하십시오.
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## 관련 제품
+
+<div id="_12"></div>
 
 ### 개발 키트
 
 패키지 선택, 전원 트리 정의, 디스플레이 인터페이스 선택, 메모리 계획, RF 레이아웃, 양산 테스트 계획의 출발점으로 공식 하드웨어 애플리케이션 노트, 레퍼런스 회로도, 체크리스트를 사용하십시오.
+
+<div id="_13"></div>
 
 ### 레퍼런스 제품
 
@@ -3385,6 +3449,8 @@ Summary: SF32LB56x: 더 풍부한 디스플레이, 통합 오디오, 외부 메�
 
 # SF32LB56x
 
+<div id="_1"></div>
+
 ## 개요
 
 SF32LB56x 시리즈는 듀얼 모드 Bluetooth, 더 풍부한 그래픽, 통합 오디오, 외부 메모리, 하위 등급 SF32LB 디바이스보다 높은 디스플레이/스토리지 유연성이 필요한 제품을 위한 고급 초저전력 AIoT 마이크로컨트롤러 제품군입니다.
@@ -3396,6 +3462,8 @@ SiFli의 공식 제품 브리프와 데이터시트는 SF32LB56x를 디스플레
 SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군은 패키지마다 지원하는 디스플레이 인터페이스 조합이 다르므로, 정확한 부품 번호와 패키지 선택은 PCB 후반 단계의 세부 사항이 아니라 최우선 아키텍처 선택으로 다루어야 합니다.
 
 [^1]: STAR-MC1은 Arm China의 구성 가능한 Armv8-M Mainline 임베디드 CPU IP입니다. 호환되는 SF32 디바이스에서 SiFli는 이를 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서로 문서화합니다. Cortex-M33급 소프트웨어 모델은 기존 Cortex-M33용 펌웨어, 미들웨어, RTOS 포트, 개발 도구를 활용하는 데 도움이 됩니다. 다만 실제 디바이스에 맞춘 통합 작업은 여전히 필요합니다. CU, SP, SE 구성은 주로 캐시, TCM, XIPU, TrustZone 기능에서 차이가 나며, Arm Custom Instructions/CDE와 코프로세서 인터페이스는 선택 기능이므로 해당 SF32 부품에서 지원되는지 반드시 확인해야 합니다. SiFli 문서는 문맥에 따라 ***Arm Cortex-M33 STAR-MC1*** 또는 ***Arm Cortex-M33***이라는 표기를 사용할 수 있습니다.
+
+<div id="_2"></div>
 
 ## 애플리케이션
 
@@ -3419,6 +3487,8 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 - SDIO를 통한 외부 Wi-Fi, SD/SDIO 또는 eMMC를 통한 외부 스토리지
 - WBBGA175 옵션을 통한 더 많은 GPIO
 - TinyML, 오디오, UI 워크로드를 동시에 처리할 여유
+
+<div id="_3"></div>
 
 ## 개발 리소스
 
@@ -3458,7 +3528,11 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 
 ---
 
+<div id="_4"></div>
+
 ## 기능 및 사양
+
+<div id="_5"></div>
 
 ### 연산 및 메모리
 
@@ -3470,6 +3544,8 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 - LCPU 메모리 시스템: 16 KB I-cache + 8 KB D-cache, 160 KB 리텐션 SRAM
 - 512 KB 또는 1 MB 패키지 내장 QSPI-NOR 옵션
 - QSPI-NOR, SPI-NAND, QPI/OPI-PSRAM, SD/SDIO, eMMC용 외부 메모리 인터페이스
+
+<div id="ai"></div>
 
 ### 그래픽, 디스플레이, AI
 
@@ -3484,6 +3560,8 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 - TurboPixel: extDMA가 최종 프레임버퍼에 고정 비율 손실 압축을 적용하고 디스플레이 컨트롤러가 이를 해제해 필요한 PSRAM 대역폭과 용량을 줄임
 - TinyML 워크로드용 신경망 행렬 가속기, 최대 1.92 GOPS 및 10 TOPS/W 이상
 
+<div id="_6"></div>
+
 ### 오디오 및 무선 연결
 
 - BLE Audio를 지원하는 듀얼 모드 Bluetooth 5.3
@@ -3494,11 +3572,17 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 - SNR 99 dB의 HiFi 24비트 오디오 ADC 1개
 - PDM 인터페이스 2개와 I2S 인터페이스 1개
 
+**DAC SNR 자료 불일치:** [PB0056 V1.1](https://downloads.sifli.com/silicon/PB0056-SF32LB56x-Product%20Brief%20V1p1.pdf)과 [UM5601 V1.0.2](https://downloads.sifli.com/user%20manual/UM5601-SF32LB56x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V1p0p2.pdf)는 108 dB, [DS5601 V1.9.2](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-Datasheet%20V1p9p2.pdf)는 109 dB로 기재합니다. 이 페이지에서 링크한 최신 PB0056 V1.2, DS5601 V1.9.3, UM5601 V1.0.5는 이번 검토에서 불일치를 해소하지 못했으므로 적용할 값은 아직 확정되지 않았습니다. 사용 전 정확한 주문 부품의 최신 공식 문서에서 확인하십시오.
+
+<div id="_7"></div>
+
 ### 보안
 
 - AES, HASH, CRC 하드웨어 가속기
 - 진성 난수 생성기(TRNG)
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### 주변 장치 및 I/O
 
@@ -3515,6 +3599,8 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 - Peripheral Task Controller(PTC)
 - 패키지에 따라 최대 120개의 GPIO
 
+<div id="_8"></div>
+
 ### 전원 공급 및 패키지
 
 - 전원 공급 범위: 1.71 V~3.63 V
@@ -3523,6 +3609,8 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 - RTC 웨이크업 시 슬립 전류: 600 nA
 - 핀 웨이크업 시 슬립 전류: 300 nA
 - 패키지 옵션: QFN68L, WBBGA175
+
+<div id="_9"></div>
 
 ## 제품군 변형
 
@@ -3546,6 +3634,8 @@ SF32LB56x는 소형 QFN68L 부품부터 I/O가 더 많은 WBBGA175 부품까지 
 | SF32LB567VND36 | WBBGA175 | 79 / 41 | 16 MB OPI-PSRAM + 1 MB QSPI-NOR 플래시 | DPI / QSPI / 8080 / JDI | 모듈의 표준 칩 선택을 사용하지 않고, 더 큰 PSRAM을 단일 메모리 풀로 활용하고 고급 디스플레이 라우팅을 우선하는 고I/O 설계 |
 
 </div>
+
+<div id="_10"></div>
 
 ## 통합 경로
 
@@ -3580,15 +3670,23 @@ RGB888 색상에서 최대 1024 × 600 해상도를 지원합니다. BGA 패키�
 먼저 [SF32LB56x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하십시오.
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## 관련 제품
+
+<div id="_12"></div>
 
 ### 모듈
 
 [SF32LB56-MOD](../modules/SF32LB56-MOD.md)는 SF32LB566VCB36 칩, 메모리, RF 설계, 안테나 옵션을 바로 통합할 수 있는 모듈로 패키징한 제품입니다. SF32LB56x의 기능을 사용하면서 RF 레이아웃, 안테나 매칭, 크리스털 배치, 고속 메모리 통합의 위험을 줄이려는 프로젝트에 적합합니다.
 
+<div id="_13"></div>
+
 ### 개발 키트
 
 [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md)는 칩 다운 또는 모듈 기반 설계를 확정하기 전에 펌웨어 브링업, 디스플레이 검증, 오디오 및 스토리지 테스트, RF 점검, 전력 프로파일링을 수행하기 위한 실용적인 출발점입니다.
+
+<div id="_14"></div>
 
 ### 레퍼런스 제품
 
@@ -3853,6 +3951,8 @@ Summary: SF32LB58x: 고급 그래픽, 디스플레이, 메모리, 주변 장치�
 
 # SF32LB58x
 
+<div id="_1"></div>
+
 ## 개요
 
 SF32LB58x 시리즈는 SF32LB5x 제품군의 플래그십입니다. 더 큰 애플리케이션 프로세서급 플랫폼으로 전환하지 않고도 고급 그래픽, 대용량 메모리, 듀얼 모드 Bluetooth, 풍부한 오디오·디스플레이 I/O, 높은 GPIO 밀도가 필요한 배터리 구동 AIoT 제품을 대상으로 합니다.
@@ -3862,6 +3962,8 @@ SF32LB58x는 이기종 3코어 Arm Cortex-M33 STAR-MC1[^1] 아키텍처를 사�
 SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/HPI-PSRAM 조합을 문서화하고 있습니다. 이 제품군은 MIPI DSI를 포함한 디스플레이 인터페이스, 벡터 그래픽 가속, USB 2.0 High-Speed, GPIO 수가 많은 BGA 패키지도 제공합니다. 고해상도 UI, 많은 그래픽 에셋, SDIO를 통한 외부 Wi-Fi가 필요하거나 엣지 AI 및 센서 퓨전 작업에 필요한 연산·메모리 리소스를 확보해야 하는 설계라면 SF32LB58x를 검토하십시오.
 
 [^1]: STAR-MC1은 Arm China의 구성 가능한 Armv8-M Mainline 임베디드 CPU IP입니다. 호환되는 SF32 디바이스에서 SiFli는 이를 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서로 문서화합니다. Cortex-M33급 소프트웨어 모델은 기존 Cortex-M33용 펌웨어, 미들웨어, RTOS 포트, 개발 도구를 활용하는 데 도움이 됩니다. 다만 실제 디바이스에 맞춘 통합 작업은 여전히 필요합니다. CU, SP, SE 구성은 주로 캐시, TCM, XIPU, TrustZone 기능에서 차이가 나며, Arm Custom Instructions/CDE와 코프로세서 인터페이스는 선택 기능이므로 해당 SF32 부품에서 지원되는지 반드시 확인해야 합니다. SiFli 문서는 문맥에 따라 ***Arm Cortex-M33 STAR-MC1*** 또는 ***Arm Cortex-M33***이라는 표기를 사용할 수 있습니다.
+
+<div id="_2"></div>
 
 ## 애플리케이션
 
@@ -3883,6 +3985,8 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 - SDIO를 통한 외부 Wi-Fi
 - 대용량 프레임버퍼, 오디오, 그래픽 또는 AI 모델 메모리
 - 많은 GPIO 수 또는 여러 개의 고속 외부 인터페이스
+
+<div id="_3"></div>
 
 ## 개발 리소스
 
@@ -3910,7 +4014,11 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 
 ---
 
+<div id="_4"></div>
+
 ## 기능 및 사양
+
+<div id="_5"></div>
 
 ### 연산 및 메모리
 
@@ -3919,6 +4027,8 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 - SKU에 따라 패키지 전체 합계 1 MB~8 MB의 코패키지 NOR 플래시 옵션
 - 코패키지 OPI-PSRAM 및 HPI-PSRAM 옵션. HPI-PSRAM은 SKU에 따라 최대 2 × 32 MB까지 사용 가능
 - MPI3/MPI4를 통한 외부 NOR 또는 SPI NAND 플래시, SDIO를 통한 SD NAND, eMMC, SD 카드 또는 외부 Wi-Fi. 사용 가능한 조합은 인터페이스 선택과 핀 할당에 따라 달라짐
+
+<div id="ai"></div>
 
 ### 그래픽, 디스플레이, AI
 
@@ -3934,6 +4044,8 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 - SPI, DSPI, QSPI(SPI e-paper 포함), MCU8080, JDI, RGB/DPI(RGB888 또는 RGB565), MIPI DSI 디스플레이 인터페이스
 - MIPI DSI와 SPI, DSPI 또는 QSPI를 함께 사용하여 서로 다른 콘텐츠를 표시하는 디스플레이 2개 지원
 - 로컬 엣지 AI, 머신러닝, 센서 퓨전 워크로드에 적합
+
+<div id="_6"></div>
 
 ### 오디오 및 무선 연결
 
@@ -3972,11 +4084,15 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 - RTC, 워치독, GPIO 웨이크업, PBR 웨이크업, PWM, I2C, SPI, 범용 아날로그 인터페이스
 - 고밀도 설계를 위한 BGA256 패키지
 
+<div id="_7"></div>
+
 ### 전원 공급 및 패키지
 
 - 전원 공급 범위: 1.71 V~3.63 V
 - BGA256 패키지, 6.5 × 8.5 × 0.94 mm, 피치 0.4 mm
 - HDI PCB 필수. 양산 설계에는 6HDI-2 스택업을 권장
+
+<div id="_8"></div>
 
 ## 제품군 변형
 
@@ -4006,6 +4122,8 @@ SiFli는 3,744 KB의 온칩 SRAM과 SKU별 코패키지 NOR 플래시 및 OPI-/H
 - 외부 스토리지 및 Wi-Fi 인터페이스 요구 사항
 - BGA256, 피치 0.4 mm HDI 레이아웃에 대한 PCB 제조 역량
 
+<div id="_9"></div>
+
 ## 통합 경로
 
 SF32LB58x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따르십시오.
@@ -4019,7 +4137,7 @@ SF32LB58x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 ## 자주 묻는 질문
 
 **SF32LB58x의 주요 사양은 무엇입니까?**
-SF32LB58x는 애플리케이션 CPU(2× Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @48/96 MHz, 사용자 프로그래밍 가능)를 갖추고 있으며, 내장 SRAM은 3.7 MB입니다. Bluetooth 모드는 듀얼 모드(Classic Bluetooth + BLE)입니다. 그래픽: ePicasso 2.0 + Vivante GCNanoUltraV (벡터 그래픽). 패키지는 BGA256이며, 크기는 8.5 × 6.5 mm입니다. USB는 2.0 HS를 지원합니다.
+SF32LB58x는 애플리케이션 처리용 2× Cortex-M33 @240 MHz와 사용자가 프로그래밍할 수 있고 최대 96 MHz로 조정 가능한 저전력 Cortex-M33 코어를 제공합니다. 별도로 제시된 48 MHz는 CoreMark 전력 측정 지점이며, 확인 가능한 자료에서는 두 번째로 규정된 동작 주파수로 입증되지 않았습니다. 내장 SRAM은 3.7 MB이고 Bluetooth는 듀얼 모드(Classic Bluetooth + BLE)입니다. 그래픽: ePicasso 2.0 + Vivante GCNanoUltraV (벡터 그래픽). 패키지는 BGA256이며, 크기는 8.5 × 6.5 mm입니다. USB는 2.0 HS를 지원합니다.
 
 **SF32LB58x는 어떤 디스플레이 인터페이스를 지원합니까?**
 지원하는 인터페이스는 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI입니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -4037,15 +4155,23 @@ RGB565 색상에서는 최대 1280 × 800, RGB888 색상에서는 최대 1280 ×
 먼저 [SF32LB58x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하십시오.
 <!-- uf-faq:end -->
 
+<div id="_10"></div>
+
 ## 관련 제품
+
+<div id="_11"></div>
 
 ### 모듈
 
 [SF32LB58-MOD](../modules/SF32LB58-MOD.md)는 SF32LB586VDD36 칩, RF 매칭 회로, 패키지 내장 HPI-PSRAM 및 스토리지 옵션을 바로 통합할 수 있는 모듈로 패키징한 제품입니다. 58 시리즈의 기능이 필요하면서 하드웨어 개발 초기에 RF, BGA, 메모리 레이아웃의 위험을 줄이려는 프로젝트에 사용하십시오.
 
+<div id="_12"></div>
+
 ### 개발 키트
 
 [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md)는 전원 트리, 디스플레이, 스토리지, 오디오, RF, USB, SDIO 설계 결정의 출발점입니다.
+
+<div id="_13"></div>
 
 ### 레퍼런스 제품
 
@@ -4255,6 +4381,8 @@ SiFli의 중국어 보드 가이드는 1.85인치 AMOLED 모듈이 16핀 FPC 케
 
 </div>
 
+보드 개요에는 GPADC 채널이 6개로 표시되어 있지만, 이 핀 기능표에는 PA28–PA34의 GPADC0–GPADC6이 나열되어 있습니다. SiFli SDK는 ADC CH7을 VBAT에 매핑합니다. 이 자료만으로 보드에서 외부 입력 7개를 동시에 사용할 수 있다고 판단할 수 없으므로 보드 기준 채널 수는 아직 확정되지 않았습니다. 외부 아날로그 신호를 연결하기 전에 정확한 보드 리비전, 핀 멀티플렉싱 및 채널 구성을 확인하십시오. [SiFli ADC 가이드](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/adc.html)를 참조하십시오.
+
 ### LCD, 오디오, 디버그 헤더
 
 <div align="center"><em>LCD, 오디오, 디버그 헤더 핀 할당</em></div>
@@ -4423,7 +4551,7 @@ SF32LB52-DevKit-LCD는 SF32LB52x 제품군을 위한 디스플레이 중심 개�
 | SF32LB52-DevKit-LCD-1-N16R8 | SF32LB52-MOD-1-N16R8 / SF32LB525UC6, 16 MB QSPI-NOR + 8 MB OPI-PSRAM |
 | SF32LB52-DevKit-LCD-1-A128R16 | SF32LB52-MOD-1-A128R16 / SF32LB527UD6, 128 MB QSPI-NAND + 16 MB OPI-PSRAM |
 | 클럭 | 모듈에 48 MHz 메인 크리스털과 32.768 kHz RTC 크리스털 탑재 |
-| RF | 온보드 안테나와 0 Ω 저항으로 선택하는 IPEX 커넥터 |
+| RF | 0 Ω 저항으로 온보드 안테나와 IPEX 커넥터 중 하나를 선택 |
 | 디스플레이 | QSPI/SPI/DSPI 및 8비트 MCU/8080 |
 | 터치 | I2C 터치 인터페이스 |
 | 오디오 | MEMS 마이크 입력 및 Class-D 스피커 앰프 |
@@ -4569,7 +4697,13 @@ USB-UART 포트는 기본 펌웨어 플래싱 및 로그 인터페이스입니�
 | 모듈 핀 | 신호 | 보드 기능 |
 | :--- | :--- | :--- |
 | PA44 | VBUS_DET | 충전기 연결 감지 |
-| PA43..PA37 | DB7..DB2 | MCU/8080 LCD 데이터 |
+| PA43 | DB7 | MCU/8080 LCD 데이터 |
+| PA42 | DB6 | MCU/8080 LCD 데이터 |
+| PA41 | DB5 | MCU/8080 LCD 데이터 |
+| PA40 | DB4 | MCU/8080 LCD 데이터 |
+| PA39 | DB3 | MCU/8080 LCD 데이터 |
+| PA38 | GPIO | 범용 입출력 |
+| PA37 | DB2 | MCU/8080 LCD 데이터 |
 | PA08..PA07 | DB1..DB0 / QSPI D3..D2 | LCD 데이터 |
 | PA06 | DC / QSPI D1 | LCD 데이터/명령 |
 | PA05 | RD / QSPI D0 | LCD 데이터 |
@@ -4581,7 +4715,7 @@ USB-UART 포트는 기본 펌웨어 플래싱 및 로그 인터페이스입니�
 | PA33 / PA30 | I2C SDA / SCL | 터치 패널 |
 | PA31 / PA09 | Touch INT / RST | 터치 패널 |
 | PA24, PA25, PA28, PA29 | SPI1 | TF 카드 인터페이스 |
-| PA26 | Card detect / LED | 공유 기능 |
+| PA26 | SD 카드 감지 / 외부 Flash2 CS / GPIO LED | V1.2.0에서 공유; 정확한 리비전 확인 |
 | PA20 / PA27 | UART RX/TX | 사용자 UART |
 | PA18 / PA19 | Debug UART RX/TX | 플래싱 및 소프트웨어 디버그 |
 | PA10 | AU_PA_EN | 오디오 앰프 인에이블 |
@@ -5073,6 +5207,12 @@ SiFli V1.0.0 가이드에는 배터리 용량에 관한 설명이 두 가지 있
 - 용량이 450 mAh를 초과하는 Li-ion 배터리
 - UART 디버그와 네이티브 USB 테스트를 동시에 해야 할 때 사용할 두 번째 USB 케이블
 
+<div id="_1"></div>
+<div id="board-einrichtung-und-startmodi"></div>
+<div id="configuracao-da-placa-e-modos-de-inicializacao"></div>
+<div id="configuracion-y-modos-de-arranque-de-la-placa"></div>
+<div id="configuration-de-la-carte-et-modes-de-demarrage"></div>
+
 ### 보드 설정 및 부팅 모드
 
 호스트 컴퓨터와 보드의 USB Type-C UART 포트를 연결한 다음, SifliTrace를 열어 올바른 COM 포트를 선택하십시오.
@@ -5154,7 +5294,7 @@ SiFli의 SDK는 `scons --board=<board_name>`과 함께 정확한 보드 타깃 �
 
 이 보드는 AMOLED 디스플레이 경로를 사용하며 22핀 QSPI FPC 신호 세트를 노출합니다. SiFli의 V1.0.0 표는 5~10번 핀을 NC로 표기합니다. 아래 표는 22개 위치를 모두 포함하며 해당 핀을 명시적으로 나타냅니다.
 
-디스플레이 보드 주석은 LCD 모듈용 22핀 FPC 커넥터와 코어 보드 연결용 24핀 보드 간(B2B) 커넥터를 별도로 표시합니다. 조립 전에 정확한 세트 리비전에서 두 인터페이스를 모두 확인하십시오.
+**커넥터 사양 출처 불일치: 선택 전에 확인하십시오.** SiFli 가이드 본문은 전용 디스플레이 인터페이스가 22핀 FPC와 40핀 헤더로 연결된다고 설명하지만, 디스플레이 보드 그림은 LCD 모듈용 22핀 FPC와 코어 보드용 24핀 보드 간(B2B) 커넥터를 표시합니다. 자료는 40핀 헤더와 24핀 B2B 커넥터의 관계를 설명하지 않습니다. 어느 한쪽의 핀 수만으로 커넥터를 선택하거나 결합하지 말고, 정확한 조립 리비전의 회로도/BOM을 확인하십시오.
 
 <div align="center"><em>22핀 QSPI 디스플레이 및 터치 FPC 신호 맵</em></div>
 
@@ -5917,7 +6057,11 @@ Source: https://uForge.io/ko/sf32-products/family/SF32_family/
 
 Summary: SF32LB5xx 제품군 개요: 이기종 Cortex-M33 코어, Bluetooth, ePicasso 그래픽, 엣지 AI를 소개하고 비교표와 빠른 칩 선택 가이드를 제공합니다.
 
+<div id="sf32"></div>
+
 # SF32 제품군
+
+<div id="_1"></div>
 
 ## 소개
 
@@ -5950,6 +6094,8 @@ Summary: SF32LB5xx 제품군 개요: 이기종 Cortex-M33 코어, Bluetooth, ePi
     [양산 작업 계획하기 :material-arrow-right:](../../hardware/design-for-production.md){ .uf-hw-link-green }
 
 </div>
+
+<div id="_2"></div>
 
 ## 주요 기능
 
@@ -6300,7 +6446,7 @@ Summary: SF32 제품 FAQ: 칩, 모듈과 개발 보드 선택, 메모리와 인�
 - **전원:** 배터리 또는 정전압 전원, 동작 전압 범위, I/O 레벨.
 - **오디오 기능:** 마이크 채널을 포함한 ADC/DAC, I2S, PDM 요구 사항.
 
-제품군 번호만 보지 말고 정확한 부품을 비교하십시오. 번호가 크다고 항상 더 적합한 것은 아닙니다. 이 기준은 모두 [제품 선택기](../product-selector.md)의 필터로 제공되므로, 그곳에서 설정해 정확한 부품을 추리십시오.
+제품군 번호만 보지 말고 정확한 부품을 비교하십시오. 번호가 크다고 항상 더 적합한 것은 아닙니다. [제품 선택기](../product-selector.md)에서는 패키지, 전원, 디스플레이, GPIO, 오디오 및 기타 조건으로 필터링할 수 있지만 Bluetooth 모드 필터는 없습니다. 제공되는 필터로 후보를 좁힌 뒤 정확한 부품 페이지에서 BLE/Classic Bluetooth 지원을 확인하십시오.
 
 [제품군 비교](SF32_family.md) · [제품 선택기](../product-selector.md)
 
@@ -6448,6 +6594,8 @@ Summary: SF32 제품 계획의 전체 경로: 디바이스와 통합 수준을 �
 Source: https://uForge.io/ko/sf32-products/
 
 Summary: SF32 하드웨어를 살펴보고, 제품을 계획하고, 칩, 모듈 또는 개발 보드를 선택하고, 레퍼런스 디자인을 재사용하고, 양산 설계를 준비하는 시작점입니다.
+
+<div id="sf32"></div>
 
 # SF32 제품
 

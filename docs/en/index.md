@@ -155,7 +155,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1 application core + dedicated Bluetooth controller core
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-Mode Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-Mode Bluetooth 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 Hardware Decompression
     - :fontawesome-solid-circle:{ .uf-dot-blue } Audio Codec, 1 x AMIC, 2 x DMIC
@@ -171,7 +171,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-core Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-Mode Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-Mode Bluetooth 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } RGB Display up to 1024 x 600
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 Hardware Decompression
@@ -188,7 +188,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Tri-core Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-Mode Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-Mode Bluetooth 6.3 (draft datasheet)
     - :fontawesome-solid-circle:{ .uf-dot-blue } RGB Display up to 1024 x 600
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 3.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 3.0 and JPEG/MJPEG decoding
@@ -206,7 +206,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Tri-core Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-Mode Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } Dual-Mode Bluetooth 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } MIPI Display up to 1280 x 800
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU + Vector Graphics, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 and JPEG/MJPEG decoding

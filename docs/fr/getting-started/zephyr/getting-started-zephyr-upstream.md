@@ -8,7 +8,7 @@ tags:
 
 # Zephyr amont { #zephyr-upstream }
 
-Depuis Zephyr v4.3.0, la carte `sf32lb52_devkit_lcd` est prise en charge et maintenue dans le dépôt amont de Zephyr. Consultez les [notes de version v4.3.0](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html) et la [documentation de la carte SF32LB52 DevKit LCD](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html). Ce guide crée un espace de travail v4.3.0, compile un premier exemple et flashe la carte. Pour bénéficier d'un ensemble plus complet de fonctions officielles SF32, utilisez [SiFli-SDK](../sifli/getting-started-sifli-sdk.md).
+La carte `sf32lb52_devkit_lcd` est prise en charge dans Zephyr amont depuis la v4.3.0. Ce guide utilise la version Zephyr v4.5.0, toujours maintenue, pour créer un nouvel espace de travail, compiler un premier exemple et flasher la carte. Consultez les [notes de version v4.3.0](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html), les [notes de version v4.5.0](https://docs.zephyrproject.org/4.5.0/releases/release-notes-4.5.html) et la documentation actuelle de la [carte SF32LB52 DevKit LCD](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html). Pour bénéficier d'un ensemble plus complet de fonctions officielles SF32, utilisez [SiFli-SDK](../sifli/getting-started-sifli-sdk.md).
 
 !!! note "Vérifiez les fonctions de la carte"
     La présence d'une définition de carte en amont ne confirme pas, à elle seule, que tous les périphériques et modes de fonctionnement sont activés ou validés pour un produit. Consultez le tableau des fonctions prises en charge dans la documentation de la carte et vérifiez le comportement requis sur la révision exacte de votre carte.
@@ -22,23 +22,49 @@ Depuis Zephyr v4.3.0, la carte `sf32lb52_devkit_lcd` est prise en charge et main
 
 **Logiciel**
 
-- Un système hôte pris en charge par Zephyr v4.3.0, configuré conformément au [guide de démarrage](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html).
+- Un système hôte pris en charge par Zephyr v4.5.0, configuré conformément au [guide de démarrage](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html).
 - Les dépendances hôte de Zephyr et le Zephyr SDK pour la cible ARM Cortex-M, installés comme indiqué dans ce guide.
 - Git, Python 3 et `pip`.
 
 ## Préparer les outils { #prepare-the-tooling }
 
-Commencez par installer les dépendances hôte et le Zephyr SDK en suivant le [guide de démarrage de Zephyr v4.3.0](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html). Créez ensuite un environnement Python et initialisez un espace de travail à partir du tag Zephyr correspondant :
+Commencez par installer les dépendances hôte et le Zephyr SDK en suivant le [guide de démarrage de Zephyr v4.5.0](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html). Choisissez ensuite les commandes correspondant à votre shell pour créer un environnement Python et initialiser un espace de travail avec le tag Zephyr correspondant :
 
 ```bash
 python3 -m venv ~/zephyr-venv
-source ~/zephyr-venv/bin/activate
-pip install west
-west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.3.0 ~/zephyrproject
+. ~/zephyr-venv/bin/activate
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 ~/zephyrproject
 cd ~/zephyrproject
 west update
 west zephyr-export
-pip install -r zephyr/scripts/requirements.txt
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+Dans PowerShell sous Windows :
+
+```powershell
+py -3 -m venv "$HOME\zephyr-venv"
+& "$HOME\zephyr-venv\Scripts\Activate.ps1"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "$HOME\zephyrproject"
+Set-Location "$HOME\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+Dans l'invite de commandes Windows :
+
+```bat
+py -3 -m venv "%USERPROFILE%\zephyr-venv"
+call "%USERPROFILE%\zephyr-venv\Scripts\activate.bat"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "%USERPROFILE%\zephyrproject"
+cd /d "%USERPROFILE%\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
 ```
 
 Gardez cet environnement Python activé pour les étapes de compilation et de flash ci-dessous.
@@ -75,7 +101,7 @@ La définition amont de la carte désigne `sftool` comme outil de flashage par d
 west flash
 ```
 
-En cas d'échec, vérifiez le port série sélectionné, le mode de téléchargement et les instructions relatives à l'outil dans la [documentation de la carte](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html).
+En cas d'échec, vérifiez le port série sélectionné, le mode de téléchargement et les instructions relatives à l'outil dans la [documentation de la carte](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html).
 
 ## Ouvrir la console série { #open-the-serial-console }
 
@@ -87,7 +113,7 @@ Hello World! sf32lb52_devkit_lcd
 
 ## Choisir l'exemple suivant { #choose-a-next-sample }
 
-Choisissez la prochaine API ou le prochain périphérique à évaluer à l'aide du tableau des fonctions prises en charge dans la documentation amont de la carte et du [catalogue d'exemples Zephyr](https://docs.zephyrproject.org/4.3.0/samples/index.html). Vérifiez que la fonction est répertoriée pour cette carte et que la configuration requise est activée avant de considérer un exemple comme preuve de maturité pour un produit.
+Choisissez la prochaine API ou le prochain périphérique à évaluer à l'aide du tableau des fonctions prises en charge dans la documentation amont de la carte et du [catalogue d'exemples Zephyr](https://docs.zephyrproject.org/4.5.0/samples/index.html). Vérifiez que la fonction est répertoriée pour cette carte et que la configuration requise est activée avant de considérer un exemple comme preuve de maturité pour un produit.
 
 ## Dépannage { #troubleshooting }
 
@@ -97,8 +123,8 @@ Choisissez la prochaine API ou le prochain périphérique à évaluer à l'aide 
 
 | Symptôme | Vérification |
 |:---------|:-------------|
-| La cible SF32 n'apparaît pas dans `west boards` | Vérifiez que l'espace de travail a été initialisé avec Zephyr amont v4.3.0 ou une version ultérieure et que `west update` s'est achevé. |
-| Échec avant la compilation du code | Vérifiez que l'environnement Python est actif, que le Zephyr SDK pour ARM Cortex-M est installé et que les dépendances v4.3.0 ont été installées. |
+| La cible SF32 n'apparaît pas dans `west boards` | Vérifiez que l'espace de travail a été initialisé avec Zephyr amont v4.5.0 ou une version ultérieure et que `west update` s'est achevé. |
+| Échec avant la compilation du code | Vérifiez que l'environnement Python est actif, que le Zephyr SDK pour ARM Cortex-M est installé et que les dépendances v4.5.0 ont été installées. |
 | La carte compile, mais ne se flashe pas | Vérifiez que `sftool` est installé et présent dans `PATH`, que le port série sélectionné est correct et que la carte est en mode de téléchargement série. |
 | Aucune sortie série | Vérifiez `usart1`, le débit de `1000000` bauds, la connexion USB-UART et qu'aucun autre terminal n'occupe le port. |
 | Un exemple de périphérique échoue | Consultez le tableau des fonctions prises en charge et la configuration de l'exemple ; la cible de base n'active pas nécessairement tous les périphériques. |

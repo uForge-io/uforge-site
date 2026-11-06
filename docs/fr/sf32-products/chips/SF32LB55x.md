@@ -8,6 +8,8 @@ tags:
 
 # SF32LB55x { #sf32lb55x }
 
+<div id="_1"></div>
+
 ## Présentation { #overview }
 
 La série SF32LB55x est une famille de microcontrôleurs AIoT grand public à très basse consommation pour les produits connectés en BLE qui exigent des capacités d'affichage plus poussées, plus de marge mémoire et un choix de boîtiers plus large que les MCU Bluetooth d'entrée de gamme.
@@ -16,11 +18,13 @@ Pour le choix du composant, la distinction principale concerne le boîtier et la
 
 Son architecture bicœur big.LITTLE associe deux processeurs Arm Cortex-M33 STAR-MC1[^1] : un cœur applicatif hautes performances jusqu'à 240 MHz et un cœur à très basse consommation jusqu'à 48 MHz. Un produit peut ainsi garder le travail d'interface exigeant sur le cœur applicatif, tout en confiant au cœur basse consommation le traitement des capteurs, la gestion de la veille et les tâches BLE qui doivent rester actives.
 
-La fiche produit et la fiche technique officielles de SiFli indiquent le BLE 5.2, le moteur graphique 2,5D ePicasso, deux contrôleurs LCD, un accélérateur matriciel de réseaux de neurones orienté TinyML et 1 312 Ko de SRAM sur puce (1 088 Ko HCPU + 224 Ko LCPU), ainsi que la prise en charge de NOR, NAND, eMMC et PSRAM externes. SF32LB55x est ainsi un choix pertinent pour les objets portables, les produits riches en capteurs et les conceptions IHM compactes qui demandent plus de ressources que le SF32LB52x sans exiger un composant de la gamme supérieure 56/58.
+La fiche produit et la fiche technique officielles de SiFli indiquent le BLE 5.2, le moteur graphique 2,5D ePicasso, deux contrôleurs LCD, un accélérateur matriciel de réseaux de neurones orienté TinyML et 1 312 KB de SRAM sur puce (1 088 KB HCPU + 224 KB LCPU), ainsi que la prise en charge de NOR, NAND, eMMC et PSRAM externes. SF32LB55x est ainsi un choix pertinent pour les objets portables, les produits riches en capteurs et les conceptions IHM compactes qui demandent plus de ressources que le SF32LB52x sans exiger un composant de la gamme supérieure 56/58.
 
 Le guide des modèles de puces de SiFli précise que le SF32LB55x a été défini avant les familles ultérieures 52/56/58 ; ses suffixes ne suivent donc pas entièrement la convention de numérotation plus récente. Pour choisir un composant, utilisez la référence commandable complète et les tableaux de capacités propres à chaque boîtier ; ne déduisez pas toutes les capacités du seul suffixe.
 
 [^1]: STAR-MC1 est un IP de CPU embarqué Armv8-M Mainline configurable, proposé par Arm China. Dans les composants SF32 compatibles, SiFli le documente comme processeur applicatif Arm Cortex-M33 STAR-MC1. Son modèle logiciel de classe Cortex-M33 facilite la reprise du firmware, des intergiciels, des portages de RTOS et des outils Cortex-M33 existants, sous réserve du travail d'intégration habituel propre à chaque composant. Ses configurations CU, SP et SE diffèrent principalement par le cache, la TCM, la XIPU et les capacités TrustZone ; les instructions personnalisées Arm/CDE et l'interface de coprocesseur sont des fonctions optionnelles à vérifier pour la référence SF32 exacte. La documentation SiFli peut employer ***Arm Cortex-M33 STAR-MC1*** ou ***Arm Cortex-M33*** selon le contexte.
+
+<div id="_2"></div>
 
 ## Applications { #applications }
 
@@ -42,6 +46,8 @@ Choisissez le SF32LB55x lorsque la conception exige une ou plusieurs de ces capa
 - Un processeur basse consommation programmable par l'utilisateur
 - Plus de GPIO ou des boîtiers plus denses que le SF32LB52x
 - Souplesse pour NOR, NAND, eMMC, PSRAM QSPI ou PSRAM OPI externes
+
+<div id="_3"></div>
 
 ## Ressources de développement { #development-resources }
 
@@ -77,7 +83,11 @@ Choisissez le SF32LB55x lorsque la conception exige une ou plusieurs de ces capa
 
 ---
 
+<div id="_4"></div>
+
 ## Caractéristiques et spécifications { #features-and-specs }
+
+<div id="_5"></div>
 
 ### Calcul et mémoire { #compute-and-memory }
 
@@ -85,9 +95,11 @@ Choisissez le SF32LB55x lorsque la conception exige une ou plusieurs de ces capa
 - Processeur Arm Cortex-M33 STAR-MC1 à très basse consommation, jusqu'à 48 MHz
 - Jusqu'à 360 DMIPS / 965 EEMBC CoreMark sur le processeur applicatif
 - Jusqu'à 72 DMIPS / 193 EEMBC CoreMark sur le processeur basse consommation
-- 1 088 Ko de SRAM applicative, dont 64 Ko de SRAM de rétention
-- 224 Ko de SRAM basse consommation, entièrement en rétention
+- 1 088 KB de SRAM applicative, dont 64 KB de SRAM de rétention
+- 224 KB de SRAM basse consommation, entièrement en rétention
 - Interfaces mémoire externes pour NOR, NAND, eMMC, PSRAM QSPI et PSRAM OPI
+
+<div id="ai"></div>
 
 ### Graphismes, affichage et IA { #graphics-display-and-ai }
 
@@ -101,6 +113,8 @@ Pour connaître la résolution maximale et les interfaces d'affichage prises en 
 - Deux contrôleurs LCD ; les interfaces d'affichage permanent (always-on) et la capacité double écran dépendent du modèle et du boîtier choisis
 - Accélérateur matriciel de réseaux de neurones pour charges TinyML, jusqu'à 1,92 GOPS et 5,73 TOPS/W
 
+<div id="_6"></div>
+
 ### Connectivité sans fil { #wireless-connectivity }
 
 - Bluetooth Low Energy 5.2
@@ -109,11 +123,15 @@ Pour connaître la résolution maximale et les interfaces d'affichage prises en 
 - Puissance d'émission maximale : 10 dBm
 - Courant de crête en réception : 2,0 mA sous 3,3 V
 
+<div id="_7"></div>
+
 ### Sécurité { #security }
 
 - Accélérateurs matériels AES et CRC
 - Générateur de nombres aléatoires vrais (TRNG)
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### Périphériques et E/S { #peripherals-and-ios }
 
@@ -144,6 +162,8 @@ Pour connaître la résolution maximale et les interfaces d'affichage prises en 
 - Contrôleur de tâches périphériques (PTC)
 - Le nombre de GPIO varie selon le boîtier ; voir le tableau des boîtiers et la note sur l'écart entre sources ci-dessous
 
+<div id="_8"></div>
+
 ### Alimentation et boîtier { #power-supply-and-package }
 
 - La plage de tension d'alimentation dépend de la variante : 2,97 V à 3,63 V pour le SS6600A8 ; 1,71 V à 3,63 V pour le 551U4O5 et les variantes BGA retenues
@@ -152,6 +172,8 @@ Pour connaître la résolution maximale et les interfaces d'affichage prises en 
 - Courant en veille avec réveil par RTC : 600 nA
 - Courant en veille avec réveil par broche : 280 nA
 - Options de boîtier : QFN68L, BGA145 et BGA169
+
+<div id="_9"></div>
 
 ## Variantes de la famille { #family-variants }
 
@@ -179,15 +201,17 @@ Les modèles actuels suivants, issus du guide des modèles de puces de SiFli, ex
 
 | Référence | Boîtier | Mémoire intégrée | Interfaces d'affichage listées dans le guide des modèles | Remarques de sélection |
 | :--- | :--- | :--- | :--- | :--- |
-| SS6600A8 | QFN68L | Deux composants NOR QSPI de 4 Mo configurés comme un seul NOR OSPI de 8 Mo ; pas de PSRAM intégrée au boîtier | QSPI, 8080 | 49 GPIO ; 2,97 V à 3,63 V ; -20 °C à +70 °C ; option compacte sans PSRAM intégrée au boîtier |
-| SF32LB551U4O5 | QFN68L | Flash de démarrage NOR QSPI de 4 Mo + PSRAM OPI de 4 Mo | QSPI, 8080 | 49 GPIO ; 1,71 V à 3,63 V ; -20 °C à +70 °C ; option compacte avec PSRAM intégrée |
-| SF32LB555V4O6 | BGA145 | Flash de démarrage NOR QSPI de 4 Mo + PSRAM OPI de 4 Mo | MIPI DSI en mode commande, QSPI, 8080 | 95 GPIO ; -40 °C à +85 °C ; un choix BGA145 équilibré pour les produits à écran nécessitant 4 Mo de PSRAM |
-| SF32LB555V436 | BGA145 | Flash de démarrage NOR QSPI de 4 Mo + PSRAM OPI de 8 Mo | MIPI DSI en mode commande, QSPI, 8080 | 95 GPIO ; -40 °C à +85 °C ; l'option BGA145 lorsque la conception requiert deux fois la PSRAM intégrée du SF32LB555V4O6 |
-| SF32LB557VD3A6 | BGA169 | Flash de démarrage NOR QSPI de 1 Mo + PSRAM OPI de 16 Mo + PSRAM QPI de 2 Mo | MIPI DSI en mode commande, QSPI, 8080, JDI/Sharp MIP | 113 GPIO ; -40 °C à +85 °C ; prend en charge MIPI DSI plus des doubles écrans SPI/DSPI à contenu indépendant |
+| SS6600A8 | QFN68L | Deux composants NOR QSPI de 4 MB configurés comme un seul NOR OSPI de 8 MB ; pas de PSRAM intégrée au boîtier | QSPI, 8080 | 49 GPIO ; 2,97 V à 3,63 V ; -20 °C à +70 °C ; option compacte sans PSRAM intégrée au boîtier |
+| SF32LB551U4O5 | QFN68L | Flash de démarrage NOR QSPI de 4 MB + PSRAM OPI de 4 MB | QSPI, 8080 | 49 GPIO ; 1,71 V à 3,63 V ; -20 °C à +70 °C ; option compacte avec PSRAM intégrée |
+| SF32LB555V4O6 | BGA145 | Flash de démarrage NOR QSPI de 4 MB + PSRAM OPI de 4 MB | MIPI DSI en mode commande, QSPI, 8080 | 95 GPIO ; -40 °C à +85 °C ; un choix BGA145 équilibré pour les produits à écran nécessitant 4 MB de PSRAM |
+| SF32LB555V436 | BGA145 | Flash de démarrage NOR QSPI de 4 MB + PSRAM OPI de 8 MB | MIPI DSI en mode commande, QSPI, 8080 | 95 GPIO ; -40 °C à +85 °C ; l'option BGA145 lorsque la conception requiert deux fois la PSRAM intégrée du SF32LB555V4O6 |
+| SF32LB557VD3A6 | BGA169 | Flash de démarrage NOR QSPI de 1 MB + PSRAM OPI de 16 MB + PSRAM QPI de 2 MB | MIPI DSI en mode commande, QSPI, 8080, JDI/Sharp MIP | 113 GPIO ; -40 °C à +85 °C ; prend en charge MIPI DSI plus des doubles écrans SPI/DSPI à contenu indépendant |
 
 </div>
 
 Pour le SF32LB557VD3A6, le guide des modèles de puces SiFli actuel et le tableau 0-1 de la fiche technique DS5501 V1.7.2 indiquent 71 HCPU + 42 LCPU = 113 GPIO. Les résumés des fonctionnalités et des boîtiers de la fiche technique, ainsi que la fiche produit PB0001 V1.3, donnent en revanche 119 GPIO pour le BGA169 (71 HCPU + 48 LCPU). Les sources officielles se contredisent donc, y compris au sein de la fiche technique. Cette page suit la ligne propre au modèle et le guide des modèles actuel (113). Avant d'affecter les broches ou de finaliser la conception, vérifiez la disponibilité des GPIO à l'aide de la carte des billes du boîtier choisi et confirmez la référence commandable auprès de SiFli. Vérifiez aussi les valeurs d'alimentation et de température de la variante, la référence complète et la configuration de la mémoire intégrée dans la [fiche technique DS5501 V1.7.2][Fiche technique], la [fiche produit PB0001 V1.3][Fiche produit] et le [guide des modèles de puces SiFli]. Les boîtiers BGA145 et BGA169 mesurent 7 × 7 × 0,94 mm avec un pas de 0,5 mm.
+
+<div id="_10"></div>
 
 ## Parcours d'intégration { #integration-path }
 
@@ -202,7 +226,7 @@ Suivez cette séquence pour transformer une présélection SF32LB55x en concepti
 ## Questions fréquentes { #frequently-asked-questions }
 
 **Quelles sont les principales caractéristiques du SF32LB55x ?**
-Le SF32LB55x assure le traitement applicatif (Cortex-M33 @240 MHz) et dispose d'un cœur basse consommation (Cortex-M33 @48 MHz, programmable par l'utilisateur). Il intègre 1 312 KB de SRAM interne et prend en charge le Bluetooth Low Energy (BLE) uniquement. Graphismes : ePicasso 1.0. Boîtier : QFN68L / BGA145 / BGA169 (7 × 7 mm (QFN68L)). USB 2.0 FS.
+Le SF32LB55x assure le traitement applicatif (Cortex-M33 @240 MHz) et dispose d'un cœur basse consommation (Cortex-M33 @48 MHz, programmable par l'utilisateur). Il intègre 1 312 KB de SRAM interne et prend en charge le Bluetooth Low Energy (BLE) uniquement. Graphismes : ePicasso 1.0. La présentation de la famille plus haut désigne le moteur par ePicasso 2.5D. Les sources disponibles n'expliquent pas le rapport entre ces deux désignations ; n'en déduisez ni une équivalence ni un changement de génération, et vérifiez les capacités graphiques de la référence exacte dans la documentation officielle à jour. Boîtier : QFN68L / BGA145 / BGA169 (7 × 7 mm (QFN68L)). USB 2.0 FS.
 
 **Quelles interfaces d'affichage le SF32LB55x prend-il en charge ?**
 SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Matrice des interfaces par famille et variante](../../learn/graphics/display-controller.md#per-device-interface-matrix)) Cette liste couvre toute la famille et ne garantit pas toutes les interfaces pour chaque référence ou boîtier ; vérifiez la matrice d'interfaces liée.
@@ -220,11 +244,17 @@ SS6600A8 nécessite 2,97–3,63 V ; SF32LB551U4O5 et les variantes BGA présent�
 Commencez par le [guide de conception matérielle du SF32LB55x](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) (schéma, alimentation, horloge/RF, routage PCB), puis utilisez les listes de contrôle de schéma et d'implantation avant de figer la carte.
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## Produits associés { #related-products }
+
+<div id="_12"></div>
 
 ### Kits de développement { #development-kits }
 
 Utilisez la note d'application matérielle officielle, les schémas de référence et la liste de contrôle comme point de départ pour le choix du boîtier, la définition de l'arbre d'alimentation, le choix de l'interface d'affichage, la planification de la mémoire, le placement et le routage RF et la planification des tests de production.
+
+<div id="_13"></div>
 
 ### Produits de référence { #reference-products }
 

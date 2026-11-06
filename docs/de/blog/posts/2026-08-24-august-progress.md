@@ -3,7 +3,7 @@ icon: lucide/rss
 description: "μForge.io im August: klarere Produktauswahl, wiederverwendbare Projekte, praxisnahes Lernen und ein direkter Weg zum Support."
 ---
 
-# August: Von der Abdeckung zum Vertrauen [2026-08-24] { #august-from-coverage-to-confidence-2026-08-24 }
+# August: Von breiterer Dokumentation zu sicherer Auswahl [2026-08-24] { #august-from-coverage-to-confidence-2026-08-24 }
 
 Im August haben wir μForge.io entlang dreier Schritte ausgebaut, die ein Produkt voranbringen: ein Bauteil auswählen, eine funktionierende Referenzkonfiguration aufbauen und das Ergebnis validieren. So müssen Sie weniger Zeit damit verbringen, Antworten aus verstreuten Quellen zusammenzusuchen.
 
@@ -15,7 +15,7 @@ Der [SF32-Produktselektor](../../sf32-products/product-selector.md) und die Fami
 
 Die [Projektbibliothek](../../projects/index.md) bündelt reproduzierbare Ausgangspunkte für konkrete Produktkategorien. Jedes Projekt soll mehr sein als eine Demo: Es bietet eine Hardware- und Software-Referenzkonfiguration, die Sie untersuchen und anpassen können und mit der Sie den Aufwand für Ihr eigenes Design abschätzen können.
 
-Hardware-Design-Leitfäden, Checklisten und der Bereich „Lernen“ unterstützen die nächsten Schritte. Sie behandeln Randbedingungen auf Platinenebene, messbasierte Energieanalyse sowie lauffähige Beispiele für Audio, Grafik, USB, Bluetooth und Energiesparen.
+Hardware-Design-Leitfäden, Checklisten und der Bereich „Lernen“ unterstützen die nächsten Schritte. Sie behandeln Randbedingungen auf Platinenebene, die Analyse der Leistungsaufnahme anhand von Messungen sowie lauffähige Beispiele für Audio, Grafik, USB, Bluetooth und Energiesparen.
 
 ### Wenn die Dokumentation nicht ausreicht { #when-the-documentation-is-not-enough }
 

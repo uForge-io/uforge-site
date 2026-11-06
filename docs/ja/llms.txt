@@ -184,7 +184,7 @@
 - [チュートリアルの概要](https://uForge.io/ja/getting-started/tutorials/overview/): 実務で身につける内容に沿って、最初のペリフェラルからサブシステム連携、製品検証までを整理したSF32チュートリアル。
 - [ペリフェラル入門](https://uForge.io/ja/getting-started/tutorials/beginner/): hello_worldの次に学ぶSF32周辺機能の実践チュートリアル：GPIO、FinSH、ADC、PWM、RTCと、開発ボードを使った小規模なプロジェクト。
 - [複数サブシステムの連携](https://uForge.io/ja/getting-started/tutorials/intermediate/): 複数サブシステムの連携を学ぶSF32チュートリアル： I2Cセンサー、基本的なLVGL画面、BLEペリフェラルサービス、ローカルオーディオ再生、ファイルシステムへの保存、共存テスト。
-- [製品検証](https://uForge.io/ja/getting-started/tutorials/advanced/): SF32製品の検証に関するチュートリアル： 実測に基づく低消費電力化、復旧可能なBLE OTA、カスタムディスプレイの初期化、クラッシュ/コアダンプ解析、Bluetoothの複数接続、カスタムドライバー。
+- [製品検証](https://uForge.io/ja/getting-started/tutorials/advanced/): SF32製品の検証に関するチュートリアル： 実測に基づく低消費電力化、復旧可能なBLE OTA、カスタムディスプレイの立ち上げ、クラッシュ/コアダンプ解析、Bluetoothの複数接続、カスタムドライバー。
 
 ## リファレンス
 

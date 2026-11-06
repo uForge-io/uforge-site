@@ -132,7 +132,7 @@ Este arquivo lista as páginas em português do Brasil (/pt/). A versão em ingl
 - [Tabelas de partições](https://uForge.io/pt/develop/firmware-topics/partition-tables/): Descreva layouts de memória SF32 com tabelas de partições do SiFli-SDK: JSON v1/v2 legado, YAML v3 recomendado, overlays, arquivos gerados e validação.
 - [OTA e DFU](https://uForge.io/pt/develop/firmware-topics/ota-dfu/): Use o middleware DFU v2 do SiFli-SDK para atualizar o firmware por USB-CDC, BLE e Bluetooth PAN, com os pares documentados de exemplos de aplicação e carregador.
 - [USB e CherryUSB](https://uForge.io/pt/develop/firmware-topics/usb-cherryusb/): Como usar o hardware USB do SF32 com CherryUSB: aplicações CDC, HID, MSC, áudio e MTP, verificação de descritores e testes de enumeração em diferentes sistemas operacionais.
-- [Gerenciamento de energia](https://uForge.io/pt/develop/firmware-topics/power-management/): Meça e ajuste o consumo do SF32: clocks, modos de suspensão, display, intervalos de conexão Bluetooth e sensores, para levar o protótipo a um produto com bateria.
+- [Gerenciamento de energia](https://uForge.io/pt/develop/firmware-topics/power-management/): Meça e ajuste o consumo do SF32: clocks, modos de suspensão, display, intervalos de conexão Bluetooth e sensores, para transformar o protótipo em um produto alimentado por bateria.
 - [Logs e análise de falhas](https://uForge.io/pt/develop/firmware-topics/logging-crash-analysis/): Planeje logs e análise de falhas no firmware SF32 para diagnosticar problemas em campo: dados mínimos, fluxo de análise de falhas e níveis de log por etapa.
 - [Exemplos](https://uForge.io/pt/develop/examples/): Como escolher e adaptar exemplos do SiFli-SDK ou do Zephyr de acordo com a placa, o framework e o periférico mais complexo, em vez de criar o firmware SF32 do zero.
 
@@ -195,7 +195,7 @@ Este arquivo lista as páginas em português do Brasil (/pt/). A versão em ingl
 - [Blog](https://uForge.io/pt/blog/): O blog da μForge.io: novidades de produto, notas de versão e análises técnicas aprofundadas sobre a documentação do SF32.
 - [Outubro: apresentamos o SF32LB57x [2026-10-28]](https://uForge.io/pt/blog/posts/2026-10-28-october-sf32lb57x-release/): O SF32LB57x já está documentado: quase o dobro da capacidade de processamento da CPU de aplicação do SF32LB56x, gráficos ePicasso 3.0 e estrutura de custos competitiva.
 - [Tradução multilíngue, uma iteração de cada vez [2026-10-07]](https://uForge.io/pt/blog/posts/2026-10-07-multi-language-translation/): A μForge.io agora tem mais sete idiomas, traduzidos com ferramentas de LLM após muitas iterações.
-- [Agosto: da cobertura à confiança [2026-08-24]](https://uForge.io/pt/blog/posts/2026-08-24-august-progress/): Agosto na μForge.io: seleção de produtos mais clara, projetos reutilizáveis, conteúdo prático e acesso direto ao suporte.
+- [Agosto: mais recursos para escolher com confiança [2026-08-24]](https://uForge.io/pt/blog/posts/2026-08-24-august-progress/): Agosto na μForge.io: seleção de produtos mais clara, projetos reutilizáveis, conteúdo prático e acesso direto ao suporte.
 - [A primeira publicação do blog [2026-07-31]](https://uForge.io/pt/blog/posts/2026-07-31-the-first-blog/): A primeira publicação do blog da μForge.io: nosso propósito, o que construímos no último mês e os próximos passos da documentação do SF32.
 
 ## Sobre

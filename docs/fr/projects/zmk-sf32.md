@@ -20,7 +20,7 @@ tags:
 - l'intégration du SoC SF32LB52 dans l'arborescence de l'application ZMK ;
 - des configurations carte unique, clavier scindé, ZMK Studio et shield `urchin_sf32lb52` ;
 - un backend CherryUSB orienté SF32 ;
-- une partition de paramètres NVS de 256 Ko et la prise en charge des paramètres Bluetooth ;
+- une partition de paramètres NVS de 256 KB et la prise en charge des paramètres Bluetooth ;
 - une disposition de clavier scindé Urchin à trois couches, avec commandes de profils Bluetooth et liaisons de déverrouillage de ZMK Studio.
 
 Il s'agit d'un portage de développement, et non d'une version produit SF32 de ZMK publiée avec un tag de version. Le README de premier niveau du fork reste le README générique de ZMK amont et ne fournit pas de démarrage rapide propre à SF32. Considérez la carte, le shield, le manifeste, la source et le commit comme la référence exécutable, et exigez vos propres preuves de compilation propre, de flashage, de fonctionnement et de récupération avant de l'adapter.

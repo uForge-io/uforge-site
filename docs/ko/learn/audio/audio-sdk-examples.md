@@ -21,7 +21,7 @@ SiFli-SDK 오디오 예제는 전체 신호 경로를 위한 실용적인 출발
 
 | 엔지니어링 목표 | 시작할 예제 | 검증되는 내용 | 공식 문서에 명시된 타깃과 제약 |
 |:-----------------|:-----------|:---------------|:----------------------------|
-| 디지털 마이크 2개 또는 4개에서 캡처 | [PDM Example](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html) | PDM 캡처. 지원되는 처리 모드에서의 WAV 녹음 및 재생 | 현재 페이지에는 `sf32lb56-lcd_a128r12n1`만 나열되어 있습니다. PDM 배선과 핀 먹스를 확인하십시오. 핀 구성 캡션에는 보드 이름이 `f32lb56-lcd_a128r12n1`로 잘못 표기되어(맨 앞의 `s` 누락) 있으며, 빌드 명령에는 올바른 이름이 사용됩니다. |
+| 디지털 마이크 2개 또는 4개에서 캡처 | [PDM Example](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html) | PDM 캡처. 지원되는 처리 모드에서의 WAV 녹음 및 재생 | 현재 페이지에는 `sf32lb56-lcd_a128r12n1`만 나열되어 있습니다. PDM 배선과 핀 먹스를 확인하십시오. 핀 구성 캡션과 빌드 명령 모두 보드 이름의 첫 `s`가 빠져 있습니다. 사용 중인 SDK 리비전에서 `sf32lb56-lcd_a128r12n1`이 지원되는지 확인하십시오. |
 | 아날로그 마이크 2개에서 캡처 | [Local Music Example for stereo speaker (dual ADC/DAC)](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/dual_adc_dac/README.html) | 별도의 PCM 파일로 동시 캡처. 스피커 모니터링용으로 마이크 하나 선택 | SiFli 모듈 보드가 아닌 커스텀 SF32LB58x 보드. 아날로그 마이크 2개와 아날로그 스피커 2개가 필요합니다. |
 | 기본적인 마이크-스피커 동작 검증 | [Record Example](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/record/README.html) | 5초간 마이크 입력을 PCM 메모리 버퍼에 캡처한 뒤 자동 재생 | `eh-lb525`, `sf32lb52-lcd` 시리즈, `sf32lb56-lcd` 시리즈 또는 `sf32lb58-lcd` 시리즈. 스피커가 필요합니다. |
 | 루트 파일 시스템의 프리셋 파일 재생 | [Local Music Example](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/local_music/README.html) | 마운트된 FAT 루트 파티션에서 프리셋 `16k.wav` 재생. 용량에 맞으면 프리셋 MP3도 사용 가능 | `eh-lb525`, `sf32lb52-lcd` 시리즈, `sf32lb56-lcd` 시리즈 또는 `sf32lb58-lcd` 시리즈. FAT 루트 파티션과 스피커가 필요합니다. |

@@ -13,11 +13,11 @@ Nada de esto habría sido viable sin las herramientas LLM, y estamos agradecidos
 
 ### Mantener la coherencia de las traducciones { #keeping-translations-consistent }
 
-Para que las iteraciones converjan, mantenemos un glosario de términos que deben quedar sin traducir (números de pieza, unidades, nombres de protocolos) o usar una traducción aprobada, además de una lista de comprobación de QA que cubre la integridad técnica, la corrección de enlaces y anclas, y la seguridad del Markdown y del código. Cada idioma conserva la misma estructura de páginas que el original en inglés y las compilaciones se verifican en modo estricto, de modo que un enlace roto o una página ausente falla de forma visible en lugar de publicarse en silencio.
+Para que las iteraciones converjan, mantenemos un glosario de términos que deben quedar sin traducir (números de pieza, unidades, nombres de protocolos) o usar una traducción aprobada, además de una lista de comprobación de QA que cubre la integridad técnica, la corrección de enlaces y anclas, y la seguridad del Markdown y del código. Cada idioma conserva la misma estructura de páginas que el original en inglés. Las compilaciones en modo estricto detectan enlaces rotos y otros errores de compilación; una auditoría independiente de paridad de rutas comprueba si faltan páginas o hay páginas adicionales antes de publicar.
 
 ### Una advertencia y una petición { #caveat-and-request }
 
-Son traducciones asistidas por máquina y las páginas en inglés siguen siendo la referencia. Como ninguno de estos idiomas es nuestra lengua materna, es posible que algunas páginas no suenen naturales a los hablantes nativos. Cuando un detalle técnico sea importante para su diseño, contrástelo con la página en inglés y con la documentación oficial de SiFli. Si encuentra una traducción incorrecta o un término poco natural, o cree que alguna página puede mejorar, [cuéntenoslo](../../about/contact.md); esos comentarios pasan directamente al glosario para que el error no vuelva a aparecer.
+Son traducciones asistidas por máquina y las páginas en inglés siguen siendo la referencia. Como ninguno de estos idiomas es nuestra lengua materna, es posible que algunas páginas no suenen naturales a los hablantes nativos. Cuando un detalle técnico sea importante para su diseño, contrástelo con la página en inglés y con la documentación oficial de SiFli. Si encuentra una traducción incorrecta o un término poco natural, o cree que alguna página puede mejorar, [cuéntenoslo](../../about/contact.md); incorporamos al glosario los problemas terminológicos recurrentes y revisamos las demás sugerencias en la página correspondiente.
 
 ### Próximos pasos { #next }
 

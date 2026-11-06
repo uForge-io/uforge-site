@@ -33,6 +33,8 @@ tags:
 
 </div>
 
+<div id="_1"></div>
+
 ## 概述 { #overview }
 
 SF32LB57 双模蓝牙模组通过 UART 向主机提供 AT 指令接口，用于 BLE 和经典蓝牙（BR/EDR）。主机可用 AT 指令配置设备参数、管理连接、收发数据，并接收模组主动上报的状态信息。
@@ -63,12 +65,16 @@ SF32LB57 双模蓝牙模组通过 UART 向主机提供 AT 指令接口，用于 
 
 ## 指令格式 { #command-format }
 
+<div id="_2"></div>
+
 ### 语法定义 { #syntax-definition }
 
 AT 指令以 ASCII 文本传输，以回车符 `\r`（0x0D）作为命令结束符。命令前缀为 `AT+`（AT 格式指令）或 `AT>`（PDU 格式指令）。SF32LB57 的 AT 口为 USART1，串口格式为 8N1、无硬件流控，默认波特率为 460800 bps。单条 AT 帧最大长度为 512 字节。
 
 !!! warning "确认 PDU 帧长度上限"
     原文规定单条 AT 帧最多 512 字节，同时又允许 PDU 的 body 最多为 508 字节。按图示的 8 字节命令封装计算，串口上传输的整帧将达到 516 字节。原文没有说明封装字节如何计入接收缓冲区上限。在确定主机缓冲区大小或使用最大 body 长度前，请先核实目标固件实际接受的 PDU 帧长度；不要自行推定一个上限来替换原文中的任一数值。
+
+<div id="at"></div>
 
 ### AT 格式指令 { #at-format-commands }
 
@@ -95,6 +101,8 @@ AT 指令以 ASCII 文本传输，以回车符 `\r`（0x0D）作为命令结束�
 | 查询返回值 | `\r\n+<CMD>:<value>\r\n\r\nOK\r\n` |
 
 </div>
+
+<div id="pdu"></div>
 
 ### PDU 格式指令 { #pdu-format-command-framing }
 
@@ -130,7 +138,11 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 以下按能力分类列出全部 AT 指令；分类与"蓝牙 AT 指令模组"页中的索引表一致。
 
+<div id="_3"></div>
+
 ### 系统与设备 { #system-and-device }
+
+<div id="_4"></div>
 
 #### 获取固件版本信息 { #get-firmware-version }
 
@@ -147,6 +159,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_5"></div>
+
 #### 查询设备名 { #query-device-name }
 
 <div align="center"><em>表：查询设备名</em></div>
@@ -161,6 +175,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 返回当前配置的设备名（不含 MAC 后缀，MAC 后缀仅影响对外广播显示名）。 |
 
 </div>
+
+<div id="_6"></div>
 
 #### 设置设备名 { #set-device-name }
 
@@ -177,6 +193,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="mac"></div>
+
 #### 查询名称附加 MAC 后缀设置 { #query-mac-name-suffix-switch }
 
 <div align="center"><em>表：查询名称附加 MAC 后缀设置</em></div>
@@ -191,6 +209,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 返回当前设置状态：0=不附加后缀，1=附加后缀。 |
 
 </div>
+
+<div id="mac_1"></div>
 
 #### 设置是否附加 MAC 名称后缀 { #set-mac-name-suffix-switch }
 
@@ -207,6 +227,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="ieee-1284-id"></div>
+
 #### 查询 IEEE 1284 设备 ID { #query-ieee-1284-device-id }
 
 <div align="center"><em>表：查询 IEEE 1284 设备 ID</em></div>
@@ -221,6 +243,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 返回当前配置的 IEEE 1284 设备 ID 字符串；未配置时为空字符串。 |
 
 </div>
+
+<div id="ieee-1284-id_1"></div>
 
 #### 设置 IEEE 1284 设备 ID { #set-ieee-1284-device-id }
 
@@ -237,6 +261,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_7"></div>
+
 #### 重启设备 { #reset-device }
 
 <div align="center"><em>表：重启设备</em></div>
@@ -252,6 +278,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_8"></div>
+
 #### 恢复出厂设置 { #factory-reset }
 
 <div align="center"><em>表：恢复出厂设置</em></div>
@@ -266,6 +294,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 恢复 AT 配置默认值，清除自定义 GATT 服务配置、BLE 配对绑定、BR/EDR 经典蓝牙配对绑定和 BLE 静态随机地址，然后回复 `OK` 并重启设备。主机应在重启后等待 `IM_READY`。 |
 
 </div>
+
+<div id="_9"></div>
 
 #### 配置复位 { #configuration-reset }
 
@@ -297,6 +327,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_10"></div>
+
 #### 查询频偏校准值 { #query-frequency-offset-calibration }
 
 <div align="center"><em>表：查询频偏校准值</em></div>
@@ -311,6 +343,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 返回的是 AT 配置中记录的回显值；实际生效值保存在 `FACTORY_CFG_ID_CRYSTAL` 分区。 |
 
 </div>
+
+<div id="_11"></div>
 
 #### 设置频偏校准值 { #set-frequency-offset-calibration }
 
@@ -327,6 +361,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="dut"></div>
+
 #### 进入被测设备（DUT）测试模式 { #enter-dut-test-mode }
 
 <div align="center"><em>表：进入 DUT 测试模式</em></div>
@@ -342,7 +378,11 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_12"></div>
+
 ### 地址与标识 { #address-and-identity }
+
+<div id="bluetooth"></div>
 
 #### 查询蓝牙地址 { #query-bluetooth-address }
 
@@ -359,6 +399,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="bluetooth_1"></div>
+
 #### 设置蓝牙地址 { #set-bluetooth-address }
 
 <div align="center"><em>表：设置蓝牙地址</em></div>
@@ -373,6 +415,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 地址写入配置并保存。重启后生效。出厂默认为全 0，表示由芯片 UID 自动生成。 |
 
 </div>
+
+<div id="ble"></div>
 
 #### 查询 BLE 地址 { #query-ble-address }
 
@@ -389,6 +433,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="ble_1"></div>
+
 #### 设置 BLE 地址 { #set-ble-address }
 
 <div align="center"><em>表：设置 BLE 地址</em></div>
@@ -403,6 +449,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 该命令不接受直接设置 BLE 地址，调用即返回 `ERROR`。BLE 静态随机地址通过 `AT+RANDOMADDR=1` 生成。 |
 
 </div>
+
+<div id="ble_2"></div>
 
 #### 查询 BLE 随机地址使用设置 { #query-ble-random-address-switch }
 
@@ -419,6 +467,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="ble_3"></div>
+
 #### 设置 BLE 随机地址使用方式 { #set-ble-random-address-switch }
 
 <div align="center"><em>表：设置 BLE 随机地址使用方式</em></div>
@@ -433,6 +483,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 命令会更新配置。设为 1 后，如果读取公有地址失败，设置值会回退为 0 并返回 `ERROR`。地址变更会写入 NVDS，重启后生效。再次执行 `AT+RANDOMADDR=1` 时，会根据未改变的公有地址生成相同的随机地址。 |
 
 </div>
+
+<div id="class-of-device"></div>
 
 #### 查询设备类别（Class of Device） { #query-class-of-device }
 
@@ -449,6 +501,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="class-of-device_1"></div>
+
 #### 设置设备类别（Class of Device） { #set-class-of-device }
 
 <div align="center"><em>表：设置设备类别（Class of Device）</em></div>
@@ -464,7 +518,11 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_13"></div>
+
 ### 工作模式与可见性 { #operating-mode-and-visibility }
+
+<div id="_14"></div>
 
 #### 查询可被发现状态 { #query-discoverable-state }
 
@@ -481,6 +539,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_15"></div>
+
 #### 设置可被发现状态 { #set-discoverable-state }
 
 <div align="center"><em>表：设置可被发现状态</em></div>
@@ -495,6 +555,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 命令按当前工作模式生效：BLE 模式（`BTMODE=1`）下控制 BLE 广播；BT 模式（`BTMODE=2`）下控制查询扫描（inquiry scan）和分页扫描（page scan）；双模（`BTMODE=0`）下同时控制上述三项。 |
 
 </div>
+
+<div id="gatt"></div>
 
 #### 查询 GATT 广播状态 { #query-gatt-advertising-state }
 
@@ -511,6 +573,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="gatt_1"></div>
+
 #### 设置 GATT 广播 { #set-gatt-advertising }
 
 <div align="center"><em>表：设置 GATT 广播</em></div>
@@ -525,6 +589,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 直接控制 BLE 广播的启动与停止。当工作模式为 BT 模式（`BTMODE=2`）时该命令不可用。 |
 
 </div>
+
+<div id="spp"></div>
 
 #### 查询 SPP 可被发现状态 { #query-spp-discoverable-state }
 
@@ -541,6 +607,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="spp_1"></div>
+
 #### 设置 SPP 可被发现状态 { #set-spp-discoverable-state }
 
 <div align="center"><em>表：设置 SPP 可被发现状态</em></div>
@@ -555,6 +623,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 当 `AT+BTMODE` 为 1（仅 BLE）时返回 `ERROR`。仅改变查询扫描位，保持分页扫描（page scan）位不变。 |
 
 </div>
+
+<div id="spp_2"></div>
 
 #### 查询 SPP 可被连接状态 { #query-spp-connectable-state }
 
@@ -571,6 +641,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="spp_3"></div>
+
 #### 设置 SPP 可被连接状态 { #set-spp-connectable-state }
 
 <div align="center"><em>表：设置 SPP 可被连接状态</em></div>
@@ -585,6 +657,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 当 `AT+BTMODE` 为 1（仅 BLE）时返回 `ERROR`。仅改变分页扫描位，保持查询扫描（inquiry scan）位不变。 |
 
 </div>
+
+<div id="bluetooth_2"></div>
 
 #### 查询蓝牙工作模式 { #query-bluetooth-operating-mode }
 
@@ -601,6 +675,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="bluetooth_3"></div>
+
 #### 设置蓝牙工作模式 { #set-bluetooth-operating-mode }
 
 <div align="center"><em>表：设置蓝牙工作模式</em></div>
@@ -615,6 +691,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 设置值更新配置，重启后生效。 |
 
 </div>
+
+<div id="_16"></div>
 
 #### 查询命令模式 { #query-command-mode }
 
@@ -631,6 +709,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_17"></div>
+
 #### 设置命令模式 { #set-command-mode }
 
 <div align="center"><em>表：设置命令模式</em></div>
@@ -646,7 +726,11 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_18"></div>
+
 ### 配对与安全 { #pairing-and-security }
+
+<div id="_19"></div>
 
 #### 清除配对信息 { #clear-pairing-information }
 
@@ -663,7 +747,11 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_20"></div>
+
 ### 串口与事件 { #serial-port-and-events }
+
+<div id="_21"></div>
 
 #### 查询串口波特率 { #query-serial-baud-rate }
 
@@ -680,6 +768,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_22"></div>
+
 #### 设置串口波特率 { #set-serial-baud-rate }
 
 <div align="center"><em>表：设置串口波特率</em></div>
@@ -694,6 +784,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 设置波特率会更新配置并重启设备；新波特率在重启后生效。 |
 
 </div>
+
+<div id="_23"></div>
 
 #### 查询事件上报设置 { #query-event-reporting-switch }
 
@@ -710,6 +802,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_24"></div>
+
 #### 设置事件上报方式 { #set-event-reporting-switch }
 
 <div align="center"><em>表：设置事件上报方式</em></div>
@@ -724,6 +818,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 设置值会更新配置。置 1 后，连接建立、断开及就绪事件均不会通过串口输出。 |
 
 </div>
+
+<div id="_25"></div>
 
 #### 查询透传空闲断连时间 { #query-pass-through-idle-disconnect-time }
 
@@ -740,6 +836,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_26"></div>
+
 #### 设置透传空闲断连时间 { #set-pass-through-idle-disconnect-time }
 
 <div align="center"><em>表：设置透传空闲断连时间</em></div>
@@ -755,7 +853,11 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_27"></div>
+
 ### 连接管理 { #connection-management }
+
+<div id="_28"></div>
 
 #### 查询多连接设置 { #query-multi-connection-switch }
 
@@ -772,6 +874,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_29"></div>
+
 #### 设置多连接功能 { #set-multi-connection-switch }
 
 <div align="center"><em>表：设置多连接功能</em></div>
@@ -786,6 +890,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 设置后更新配置。关闭多连接时限制并发连接能力；开启多连接时按 `AT+BLEMULTICONN`、`AT+BTMULTICONN` 的配置工作。 |
 
 </div>
+
+<div id="ble_4"></div>
 
 #### 查询最大 BLE 并发连接数 { #query-maximum-ble-concurrent-connections }
 
@@ -802,6 +908,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="ble_5"></div>
+
 #### 设置最大 BLE 并发连接数 { #set-maximum-ble-concurrent-connections }
 
 <div align="center"><em>表：设置最大 BLE 并发连接数</em></div>
@@ -816,6 +924,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 仅在全局多连接已启用（`AT+MULTICONN=1`）时可设置。命令会更新配置；连接数达到上限后停止广播（不再接受新连接）。连接断开、连接数降至上限以下后，广播会自动恢复。 |
 
 </div>
+
+<div id="classic-bluetooth"></div>
 
 #### 查询最大经典蓝牙并发连接数 { #query-maximum-classic-bluetooth-concurrent-connections }
 
@@ -832,6 +942,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="classic-bluetooth_1"></div>
+
 #### 设置最大经典蓝牙并发连接数 { #set-maximum-classic-bluetooth-concurrent-connections }
 
 <div align="center"><em>表：设置最大经典蓝牙并发连接数</em></div>
@@ -846,6 +958,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 仅在全局多连接已启用（`AT+MULTICONN=1`）时可设置。命令会更新配置；连接数达到上限时，模组会停止分页扫描（page scan），连接数降至上限以下后自动恢复。 |
 
 </div>
+
+<div id="_30"></div>
 
 #### 断开连接 { #disconnect }
 
@@ -862,6 +976,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_31"></div>
+
 #### 查询连接列表 { #query-connection-list }
 
 <div align="center"><em>表：查询连接列表</em></div>
@@ -877,7 +993,11 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_32"></div>
+
 ### 数据收发 { #data-transfer }
+
+<div id="ble-mtu"></div>
 
 #### 查询 BLE MTU { #query-ble-mtu }
 
@@ -894,6 +1014,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="ble-mtu_1"></div>
+
 #### 设置 BLE MTU { #set-ble-mtu }
 
 <div align="center"><em>表：设置 BLE MTU</em></div>
@@ -908,6 +1030,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 该值为 MTU 协商的上限设置。 |
 
 </div>
+
+<div id="spp_4"></div>
 
 #### SPP 数据发送 { #send-spp-data }
 
@@ -924,7 +1048,11 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="gatt_2"></div>
+
 ### 自定义 GATT { #custom-gatt }
+
+<div id="gatt_3"></div>
 
 #### 查询自定义 GATT 服务列表 { #query-custom-gatt-service-list }
 
@@ -941,6 +1069,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="gatt_4"></div>
+
 #### 创建自定义 GATT 服务 { #create-custom-gatt-service }
 
 <div align="center"><em>表：创建自定义 GATT 服务</em></div>
@@ -955,6 +1085,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | `idx` 必须为单个数字且其后紧跟逗号。UUID 长度只能为 4 或 32 个字符，其它长度返回 `ERROR`。若该槽位已注册到协议栈，则不能重新配置，创建返回 `ERROR`。创建会清空该槽位原有配置 |
 
 </div>
+
+<div id="gatt_5"></div>
 
 #### 删除自定义 GATT 服务 { #delete-custom-gatt-service }
 
@@ -971,6 +1103,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="gatt_6"></div>
+
 #### 查询自定义 GATT 特征列表 { #query-custom-gatt-characteristic-list }
 
 <div align="center"><em>表：查询自定义 GATT 特征列表</em></div>
@@ -985,6 +1119,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 无 |
 
 </div>
+
+<div id="gatt_7"></div>
 
 #### 添加自定义 GATT 特征 { #add-custom-gatt-characteristic }
 
@@ -1001,6 +1137,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="gatt_8"></div>
+
 #### 启动（注册）自定义 GATT 服务 { #start-register-custom-gatt-services }
 
 <div align="center"><em>表：启动（注册）自定义 GATT 服务</em></div>
@@ -1015,6 +1153,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 将所有处于占用、尚未注册且至少含一个特征的服务注册到协议栈。服务一经注册即无法在运行期撤销或重新配置。不支持查询形式 |
 
 </div>
+
+<div id="gatt-notifyindicate"></div>
 
 #### 发送 GATT 特征数据（通知/指示） { #send-gatt-characteristic-data-notifyindicate }
 
@@ -1031,6 +1171,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="gatt_9"></div>
+
 #### 保存自定义 GATT 配置到 Flash { #save-custom-gatt-configuration-to-flash }
 
 <div align="center"><em>表：保存自定义 GATT 配置到 Flash</em></div>
@@ -1045,6 +1187,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 将当前所有服务与特征配置持久化到 Flash。仅保存配置数据，注册状态等运行期信息不保存。KVDB 未就绪或写入失败返回 `ERROR`。不支持查询形式 |
 
 </div>
+
+<div id="gatt_10"></div>
 
 #### 清除 Flash 中的自定义 GATT 配置 { #clear-custom-gatt-configuration-in-flash }
 
@@ -1061,6 +1205,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="gatt_11"></div>
+
 #### 查询 GATT 服务上电自动加载设置 { #query-gatt-auto-load-on-power-up-switch }
 
 <div align="center"><em>表：查询 GATT 服务上电自动加载设置</em></div>
@@ -1075,6 +1221,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 无 |
 
 </div>
+
+<div id="gatt_12"></div>
 
 #### 设置 GATT 服务上电自动加载方式 { #set-gatt-auto-load-on-power-up-switch }
 
@@ -1091,9 +1239,13 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="urc"></div>
+
 ## 主动上报事件（URC） { #unsolicited-events-urc }
 
 以下为模组主动发出的状态通知（URC），主机无需下发命令即可接收。通知由 `AT+EVT` 控制；启用静默模式后，不再输出这些事件。
+
+<div id="im_ready"></div>
 
 ### IM_READY 就绪通知 { #im_ready-ready-indication }
 
@@ -1110,6 +1262,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="im_conn"></div>
+
 ### IM_CONN 连接指示 { #im_conn-connection-indication }
 
 <div align="center"><em>表：IM_CONN 连接指示</em></div>
@@ -1124,6 +1278,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 命令模式下，每建立一条连接就会上报一次，并携带句柄、对端地址和 MTU。透传模式下，仅在首条连接建立时（连接数为 1）上报，且不带参数。是否输出由 `AT+EVT` 控制；设置为 `AT+EVT=1` 后，这些通知会被抑制。 |
 
 </div>
+
+<div id="im_disconn"></div>
 
 ### IM_DISCONN 断开指示 { #im_disconn-disconnect-indication }
 
@@ -1142,6 +1298,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 ## PDU 格式命令 { #pdu-format-commands }
 
+<div id="pdu-opcode-0x0101"></div>
+
 ### PDU 数据上报（opcode 0x0101） { #pdu-data-report-opcode-0x0101 }
 
 <div align="center"><em>表：PDU 数据上报（模组 → 主机，opcode 0x0101）</em></div>
@@ -1156,6 +1314,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 命令模式下，BLE 自定义特征写入数据或经典蓝牙 SPP 收到数据时，模组按上述格式向主机上报；透传模式下直接输出数据。 |
 
 </div>
+
+<div id="pdu-notify-opcode-0x0101"></div>
 
 ### PDU 模式发送数据（自动选择通知特征，opcode 0x0101） { #pdu-mode-send-data-auto-select-notify-characteristic-opcode-0x0101 }
 
@@ -1172,6 +1332,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="pdu-opcode-0x0102"></div>
+
 ### PDU 模式发送数据（指定服务与特征，opcode 0x0102） { #pdu-mode-send-data-specify-service-and-characteristic-opcode-0x0102 }
 
 <div align="center"><em>表：PDU 模式发送数据（指定服务与特征，opcode 0x0102）</em></div>
@@ -1186,6 +1348,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 | 备注 | 仅支持 BLE 连接；若解析到的连接为 SPP 类型则丢弃。`svc_idx` 必须对应一个已注册的自定义服务，`char_idx` 必须小于该服务的特征数量，否则丢弃。所指定特征必须带 Notify 或 Indicate 属性，否则丢弃。`conn_hdl` 解析方式同 `0x0101`（先按从 1 开始编号的 BLE 句柄、再按原始值查找）。帧尾必须紧跟 `\r`。 |
 
 </div>
+
+<div id="pdu_1"></div>
 
 ### PDU 模式断开连接 { #pdu-mode-disconnect }
 
@@ -1202,6 +1366,8 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="pdu-im_conn-im_disconn"></div>
+
 ### PDU 连接状态指示（IM_CONN / IM_DISCONN） { #pdu-connection-status-indication-im_conn-im_disconn }
 
 <div align="center"><em>表：PDU 连接状态指示（IM_CONN / IM_DISCONN）</em></div>
@@ -1217,7 +1383,11 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 </div>
 
+<div id="_33"></div>
+
 ## 附录 { #appendix }
+
+<div id="class-of-device_2"></div>
 
 ### 常用设备类别（Class of Device） { #common-class-of-device-values }
 
@@ -1227,11 +1397,11 @@ PDU 指令用于在命令模式下传输二进制数据。除特别标注外，�
 
 | 设备类别 | 十六进制值 |
 |:---------|:-----------|
-| Computer | `0x000100` |
-| Phone | `0x000200` |
-| LAN/Network Access Point | `0x000300` |
-| Audio/Video | `0x000400` |
-| Peripheral（键盘/鼠标等） | `0x000500` |
-| Imaging（打印机/扫描仪等） | `0x000600` |
+| 计算机（Computer） | `0x000100` |
+| 电话（Phone） | `0x000200` |
+| 局域网/网络接入点（LAN/Network Access Point） | `0x000300` |
+| 音频/视频（Audio/Video） | `0x000400` |
+| 外设（Peripheral，键盘/鼠标等） | `0x000500` |
+| 成像设备（Imaging，打印机/扫描仪等） | `0x000600` |
 
 </div>

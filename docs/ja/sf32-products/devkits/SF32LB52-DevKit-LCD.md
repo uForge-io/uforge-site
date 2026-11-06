@@ -207,7 +207,13 @@ SiFliの元のボードノートでは、`TFT-H043A28WQISTKN22_V0-3`がサポー
 | モジュールピン | 信号 | ボード機能 |
 | :--- | :--- | :--- |
 | PA44 | VBUS_DET | 充電器接続検出 |
-| PA43..PA37 | DB7..DB2 | MCU/8080 LCDデータ |
+| PA43 | DB7 | MCU/8080 LCDデータ |
+| PA42 | DB6 | MCU/8080 LCDデータ |
+| PA41 | DB5 | MCU/8080 LCDデータ |
+| PA40 | DB4 | MCU/8080 LCDデータ |
+| PA39 | DB3 | MCU/8080 LCDデータ |
+| PA38 | GPIO | 汎用入出力 |
+| PA37 | DB2 | MCU/8080 LCDデータ |
 | PA08..PA07 | DB1..DB0 / QSPI D3..D2 | LCDデータ |
 | PA06 | DC / QSPI D1 | LCDデータ/コマンド |
 | PA05 | RD / QSPI D0 | LCDデータ |
@@ -219,7 +225,7 @@ SiFliの元のボードノートでは、`TFT-H043A28WQISTKN22_V0-3`がサポー
 | PA33 / PA30 | I2C SDA / SCL | タッチパネル |
 | PA31 / PA09 | Touch INT / RST | タッチパネル |
 | PA24、PA25、PA28、PA29 | SPI1 | TFカードインターフェース |
-| PA26 | カード検出 / LED | 共有機能 |
+| PA26 | SDカード検出 / 外部Flash2チップセレクト / GPIO LED | V1.2.0で共用。実際のリビジョンを確認 |
 | PA20 / PA27 | UART RX/TX | ユーザーUART |
 | PA18 / PA19 | デバッグUART RX/TX | 書き込みとソフトウェアデバッグ |
 | PA10 | AU_PA_EN | オーディオアンプ有効化 |

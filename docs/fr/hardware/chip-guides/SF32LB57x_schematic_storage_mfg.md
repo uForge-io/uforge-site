@@ -9,12 +9,18 @@ tags:
     - Puce
 ---
 
+<div id="sf32lb57x"></div>
+
 # Guide de conception matérielle SF32LB57x — Stockage et fabrication { #sf32lb57x-hardware-design-guide-storage-manufacturing }
 
 !!! note "Fait partie du Guide de conception matérielle SF32LB57x"
     Cette page couvre les sections 5.6 et 5.7 des directives de conception des schémas : stockage et connectivité, puis fabrication. Revenez à [Horloge, RF et interfaces utilisateur](SF32LB57x_schematic_clock_rf_interfaces.md) ou passez aux [Recommandations de placement et de routage PCB](SF32LB57x_pcb_layout.md).
 
+<div id="56"></div>
+
 ### 5.6. Stockage et connectivité { #56-storage-and-connectivity }
+
+<div id="561"></div>
 
 #### 5.6.1. Stockage et démarrage { #561-storage-and-boot }
 
@@ -37,6 +43,8 @@ Les variantes dotées d'une mémoire Flash SPI NOR intégrée au boîtier démar
 | H | H | eMMC |
 
 </div>
+
+<div id="562"></div>
 
 #### 5.6.2. Interfaces de stockage { #562-storage-interfaces }
 
@@ -69,6 +77,8 @@ Avant de figer le schéma, confirmez :
     Le tableau de câblage mémoire de SiFli nomme `SD2_*` les signaux associés à `PA12`–`PA17`, tandis que le tableau IO MUX indique `SD1_*` pour la fonction 2 sur ces broches. Le tableau ci-dessus conserve les noms du câblage. Les broches physiques correspondent, mais ces noms ne permettent pas à eux seuls de choisir SDIO2 ou une instance dans le firmware. Vérifiez le manuel utilisateur, la configuration des broches du SDK et le schéma de référence du composant exact.
 
 
+<div id="563"></div>
+
 #### 5.6.3. Contrôle du démarrage et de l'alimentation { #563-boot-and-power-control }
 
 Une eMMC possède deux domaines d'alimentation distincts, `VCC` et `VCCQ`. La commutation simultanée des deux réduit la consommation à l'arrêt, mais ralentit la sortie de veille et augmente la consommation moyenne du processeur. La commutation de `VCC` uniquement, avec `VCCQ` toujours alimenté, augmente la consommation à l'arrêt, mais accélère la reprise de l'eMMC et réduit la consommation moyenne du processeur.
@@ -88,7 +98,7 @@ Une eMMC possède deux domaines d'alimentation distincts, `VCC` et `VCCQ`. La co
 
 « Non spécifié dans la source » signifie que la liste de contrôle SiFli ne donne aucune exigence pour cette cellule ; cela ne signifie pas qu'un pull-up est inutile.
 
-La sélection du support de démarrage externe est présentée dans le Tableau 5.6-1 et la Figure 5.6-1. L'activation du interrupteur d'alimentation du stockage est fixée à `PA21` et active à l'état haut. Choisissez l'alimentation selon la variante :
+La sélection du support de démarrage externe est présentée dans le Tableau 5.6-1 et la Figure 5.6-1. L'activation de l'interrupteur d'alimentation du stockage est fixée à `PA21` et active à l'état haut. Choisissez l'alimentation selon la variante :
 
 - Variantes alimentées par batterie : la SPI NOR Flash externe peut être alimentée en permanence par `VDD33_VOUT1` ; la SPI NAND Flash doit être alimentée par un interrupteur placé après `VDD33_VOUT1`. La SD NAND Flash et l'eMMC utilisent un LDO externe, de préférence activé par `PA21`. Pour les boîtiers sans `PA21`, un GPIO dont l'état par défaut après réinitialisation est un rappel haut (pull-up) peut être utilisé.
 - Variantes alimentées en 3,3 V : utilisez un LDO externe pour tout stockage de démarrage externe ; `PA21` est recommandé pour commander son activation.
@@ -97,9 +107,13 @@ La sélection du support de démarrage externe est présentée dans le Tableau 5
 - Si le stockage intégré au boîtier occupe MPI3, l'utilisation externe de MPI3 est limitée à SD NAND ou eMMC ; ne raccordez pas de SPI NOR/SPI NAND externe à ce canal.
 - Faites correspondre la tension d'E/S du stockage à l'alimentation d'E/S de la MCU et choisissez un composant figurant dans la liste des fournisseurs approuvés (AVL) du projet.
 
+<div id="564-gpio"></div>
+
 #### 5.6.4. GPIO et multiplexage des broches { #564-gpio-and-pin-multiplexing }
 
 Planifiez les GPIO avant d'affecter tous les périphériques du produit : les signaux de démarrage, de débogage, de réveil, USB, analogiques, d'affichage, de stockage et à haut débit peuvent restreindre le routage matriciel, malgré sa souplesse.
+
+<div id="565"></div>
 
 #### 5.6.5. Planification des broches { #565-pin-planning }
 
@@ -108,6 +122,8 @@ Le SF32LB57x prend en charge un multiplexage de broches flexible, mais les signa
 - Les broches RF, des quartz, d'alimentation, USB, audio analogique, GPADC, de démarrage et de débogage.
 - Les interfaces d'affichage haute vitesse, SDIO, de stockage et DCMI qui nécessitent des groupes de broches spécifiques.
 - Les GPIO de réveil, la configuration de démarrage, la commutation SWD et les broches de test de production.
+
+<div id="566-gpio"></div>
 
 #### 5.6.6. Directives GPIO { #566-gpio-guidelines }
 
@@ -264,6 +280,8 @@ N'importe quel GPIO peut être associé par la matrice à l'une des fonctions ci
 !!! warning "Valeurs IF_SEL dans le tableau du sous-multiplexeur LCDC"
     Le tableau source de SiFli attribue `IF_SEL=0` aux modes SPI et JDI. Cet article conserve les valeurs de la source, mais cette attribution en double est ambiguë. Avant de configurer un panneau, vérifiez le réglage dans le pilote SDK et le schéma de référence correspondants ; ne déduisez pas la valeur du registre à partir de ce seul tableau.
 
+<div id="567"></div>
+
 #### 5.6.7. Interfaces générales { #567-general-interfaces }
 
 Appliquez les mêmes critères à chaque interface générale : connexions électriques, tension d'E/S, état par défaut après réinitialisation et en veille, alimentation des résistances de pull-up, exposition aux décharges électrostatiques (ESD) et conflits éventuels avec les fonctions de démarrage, de débogage, de réveil ou à haut débit.
@@ -275,6 +293,8 @@ Appliquez les mêmes critères à chaque interface générale : connexions élec
 
 !!! warning "Étiquettes de tension des boutons GPADC"
     Le schéma SiFli indique deux tensions séparées par une barre oblique pour chaque nœud de bouton, sans préciser les conditions associées. Vérifiez leur correspondance avec l'alimentation prévue et le schéma de référence avant d'utiliser ces valeurs comme seuils.
+
+<div id="568"></div>
 
 #### 5.6.8. Principes de revue d'interface { #568-interface-review-principles }
 
@@ -387,7 +407,11 @@ Examinez quatre éléments pour chaque interface de périphérique :
 !!! warning "Tension de la broche VBATS et plage de mesure"
     Pour les variantes alimentées en 3,3 V, le tableau des broches d'alimentation indique 0 à 4,7 V pour `VBATS`, tandis que la liste de contrôle du schéma limite la mesure de tension de batterie à 0–4,5 V. Pour les mesures GPADC, respectez la plage la plus étroite de 0 à 4,5 V ; ne considérez pas la limite de 4,7 V du tableau des broches comme une plage de mesure ADC valide.
 
+<div id="57"></div>
+
 ### 5.7. Fabrication { #57-manufacturing }
+
+<div id="571"></div>
 
 #### 5.7.1. Modes de démarrage et de téléchargement en production { #571-production-boot-and-download-modes }
 
@@ -436,6 +460,8 @@ Les broches de débogage et de téléchargement par défaut doivent rester acces
 | Liste de contrôle matériel 4.8, élément 3 | Tous les modèles | `VBAT` ou 3,3 V, `GND`, `PA18`, `PA19`, `VDD33_VOUT1` (absent de la série 3,3 V), `PA00`, `PA01` et `PA34` ; adapter les dimensions, l'espacement et l'orientation des pastilles aux sondes du banc. |
 
 </div>
+
+<div id="572"></div>
 
 #### 5.7.2. Programmation et étalonnage de production { #572-production-programming-and-calibration }
 

@@ -24,7 +24,7 @@ Le tableau ci-dessous associe les tâches courantes aux outils correspondants. I
 | [Scripts de téléchargement UART du SDK](../platforms/sifli-sdk/build-flash-monitor.md) | Scripts de flashage de première exécution générés par les compilations SiFli-SDK. |
 | [Actions CodeKit](codekit.md) | Actions VS Code de configuration, compilation, flashage et surveillance. |
 | [`AssertDump`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/AssertDump/AssertDump_UM.html) | Capture des données mémoire lors d'un plantage pour analyse ultérieure. |
-| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace` capture les journaux de la carte cible ; `UsartServer` permet le débogage UART via le Debug IP de la puce. |
+| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace` capture les journaux de la carte cible ; la documentation présente `UsartServer` comme un outil UART vers J-Link pour SF32LB52x et SF32LB56x. Ce rôle côté hôte n'exclut pas le UART Debug IP de la puce ; consultez le manuel pour connaître la configuration prise en charge. |
 | [`Impeller`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/Impeller/Impeller_UM.html) | Programmation du firmware, calibration et tests PCBA en production. |
 | [eZip / outillage d'images](../../learn/graphics/ezip.md) | Conversion de ressources pour les pipelines graphiques compressés. |
 | [Outils RF, audio et de production](https://docs.sifli.com/projects/solution/6.tools/index.html) | Flux de calibration, de test et de réglage en production. |
@@ -45,7 +45,7 @@ Consignez les deux méthodes dans la documentation du projet jusqu'à ce que l'�
 
 ## Outils de journalisation et de trace { #logging-and-trace-tools }
 
-Pour un développement normal, un terminal série suffit. Pour les défaillances difficiles, capturez des journaux structurés et des données de plantage :
+Pour un développement normal, un terminal série suffit. En cas de défaillance grave, capturez des journaux structurés et des données de plantage :
 
 - Enregistrez un journal de démarrage complet depuis la réinitialisation.
 - Enregistrez les fichiers ELF/map/symboles exacts correspondant à l'image flashée.

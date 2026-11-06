@@ -25,7 +25,7 @@ tags:
 | Bluetooth | BLE, BT Classic, LE Audio, 처리량, 비콘, OTA, 프로파일 예제. [Bluetooth SDK 예제](../../learn/bluetooth/bluetooth-sdk-examples.md) 작업 맵에서 시작하십시오. |
 | 그래픽 | LVGL 데모, 디자인 도구 연동, 위젯, 압축 에셋, 애니메이션/미디어, 디스플레이별 예제. [LVGL SDK 예제](../../learn/graphics/lvgl-sdk-examples.md) 작업 맵에서 시작하십시오. |
 | 오디오 | 재생, 녹음, PDM 캡처, 코덱, Opus, MP3, 믹싱, 지원되는 경우 USB 오디오. [오디오 SDK 예제](../../learn/audio/audio-sdk-examples.md) 작업 맵에서 시작하십시오. |
-| 전원 | PM 상태, GPIO, 프로세서, Bluetooth, 디스플레이, UI, 웨어러블 시나리오 예제. [저전력 SDK 예제](../../learn/low-power/low-power-sdk-examples.md) 작업 맵에서 시작하십시오. |
+| 저전력 | PM 상태, GPIO, 프로세서, Bluetooth, 디스플레이, UI, 웨어러블 시나리오 예제. [저전력 SDK 예제](../../learn/low-power/low-power-sdk-examples.md) 작업 맵에서 시작하십시오. |
 | 스토리지 | 파일 시스템, 플래시, SD, 파티션 예제. |
 | USB | CherryUSB 디바이스 및 호스트 예제. |
 | AI | NNACC HAL 및 RT-device 예제. |
@@ -97,11 +97,11 @@ tags:
 
 - Bluetooth 제품은 가장 가까운 프로파일에서 시작하십시오.
 - 디스플레이 제품은 디스플레이 및 LVGL 경로에서 시작하십시오.
-- 배터리 제품은 전원 예제에서 시작하십시오.
+- 배터리 전원 제품은 저전력 예제에서 시작하십시오.
 - OTA 제품은 업데이트 흐름과 파티션 레이아웃에서 시작하십시오.
 
 그런 다음 나머지 서브시스템을 하나씩 추가하십시오.
 
 ## 권장 학습 경로 { #suggested-learning-path }
 
-SDK를 처음 사용한다면 [초급 튜토리얼](../../getting-started/tutorials/beginner.md)로 시작하고, 주변 장치 하나가 안정되면 [중급 튜토리얼](../../getting-started/tutorials/intermediate.md)로 넘어가십시오. 전력 측정 작업, OTA, 커스텀 디스플레이 브링업, 장애 분석, 다중 연결 Bluetooth, 커스텀 드라이버는 [고급 튜토리얼](../../getting-started/tutorials/advanced.md)을 사용하십시오. 주제별 개요 문서에서는 이러한 예제의 배경이 되는 아키텍처와 트레이드오프를 설명합니다.
+SDK를 처음 사용한다면 [초급 튜토리얼](../../getting-started/tutorials/beginner.md)로 시작하고, 주변 장치 하나가 안정되면 [중급 튜토리얼](../../getting-started/tutorials/intermediate.md)로 넘어가십시오. 전력 측정 작업, OTA, 커스텀 디스플레이 브링업(초기 구동 및 검증), 장애 분석, 다중 연결 Bluetooth, 커스텀 드라이버는 [고급 튜토리얼](../../getting-started/tutorials/advanced.md)을 사용하십시오. 주제별 개요 문서에서는 이러한 예제의 배경이 되는 아키텍처와 트레이드오프를 설명합니다.

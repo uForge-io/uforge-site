@@ -8,6 +8,8 @@ tags:
 
 # SF32LB56x
 
+<div id="_1"></div>
+
 ## Overview
 
 The SF32LB56x series is an advanced ultra-low-power AIoT microcontroller family for products that need dual-mode Bluetooth, richer graphics, integrated audio, external memory, and more display/storage flexibility than the lower-tier SF32LB devices.
@@ -19,6 +21,8 @@ SiFli's official product brief and datasheet position SF32LB56x as a higher-inte
 SiFli's chip model guide also matters here: the SF32LB56x family supports different display-interface combinations across its packages, so exact part number and package selection should be treated as a first-order architecture choice, not a late PCB detail.
 
 [^1]: STAR-MC1 is a configurable Armv8-M Mainline embedded CPU IP from Arm China. In compatible SF32 devices, SiFli documents it as an Arm Cortex-M33 STAR-MC1 application processor. Its Cortex-M33-class software model helps existing Cortex-M33 firmware, middleware, RTOS ports, and tools carry forward, subject to normal device-specific integration work. Its CU, SP, and SE configurations vary chiefly in cache, TCM, XIPU, and TrustZone capability; Arm Custom Instructions/CDE and the coprocessor interface are optional capabilities that must be verified for the exact SF32 part. SiFli documentation may use ***Arm Cortex-M33 STAR-MC1*** or ***Arm Cortex-M33*** according to context.
+
+<div id="_2"></div>
 
 ## Applications
 
@@ -42,6 +46,8 @@ Choose SF32LB56x when the design needs one or more of these capabilities:
 - External Wi-Fi over SDIO; external storage over SD/SDIO or eMMC
 - Higher GPIO count through the WBBGA175 option
 - More headroom for concurrent TinyML, audio, and UI workloads
+
+<div id="_3"></div>
 
 ## Development Resources
 
@@ -81,7 +87,11 @@ Choose SF32LB56x when the design needs one or more of these capabilities:
 
 ---
 
+<div id="_4"></div>
+
 ## Features and Specs
+
+<div id="_5"></div>
 
 ### Compute and Memory
 
@@ -93,6 +103,8 @@ Choose SF32LB56x when the design needs one or more of these capabilities:
 - LCPU memory system: 16 KB I-cache + 8 KB D-cache, 160 KB retention SRAM
 - 512 KB or 1 MB in-package QSPI-NOR options
 - External memory interfaces for QSPI-NOR, SPI-NAND, QPI/OPI-PSRAM, SD/SDIO, and eMMC
+
+<div id="ai"></div>
 
 ### Graphics, Display, and AI
 
@@ -107,6 +119,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - TurboPixel: extDMA fixed-ratio lossy final-framebuffer compression and display-controller decompression, reducing PSRAM bandwidth and capacity
 - Neural-network matrix accelerator for TinyML workloads, up to 1.92 GOPS and above 10 TOPS/W
 
+<div id="_6"></div>
+
 ### Audio and Wireless Connectivity
 
 - Dual-mode Bluetooth 5.3 with BLE Audio support
@@ -117,11 +131,17 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - 1 HiFi 24-bit audio ADC with 99 dB SNR
 - 2 PDM interfaces and 1 I2S interface
 
+**DAC SNR source discrepancy:** [PB0056 V1.1](https://downloads.sifli.com/silicon/PB0056-SF32LB56x-Product%20Brief%20V1p1.pdf) and [UM5601 V1.0.2](https://downloads.sifli.com/user%20manual/UM5601-SF32LB56x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V1p0p2.pdf) state 108 dB, while [DS5601 V1.9.2](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-Datasheet%20V1p9p2.pdf) states 109 dB. The newer linked PB0056 V1.2, DS5601 V1.9.3, and UM5601 V1.0.5 have not been reconciled here, so the governing value remains unresolved; verify it against the current documentation for the exact part before relying on it.
+
+<div id="_7"></div>
+
 ### Security
 
 - AES, HASH, and CRC hardware accelerators
 - True random number generator (TRNG)
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### Peripherals and I/Os
 
@@ -138,6 +158,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - Peripheral Task Controller (PTC)
 - Up to 120 GPIOs, depending on package
 
+<div id="_8"></div>
+
 ### Power Supply and Package
 
 - Power supply range: 1.71 V to 3.63 V
@@ -146,6 +168,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - Sleep current with RTC wake-up: 600 nA
 - Sleep current with pin wake-up: 300 nA
 - Package options: QFN68L and WBBGA175
+
+<div id="_9"></div>
 
 ## Family Variants
 
@@ -169,6 +193,8 @@ The listed variants have a documented supply range of 1.71 V to 3.63 V and an op
 | SF32LB567VND36 | WBBGA175 | 79 / 41 | 16 MB OPI-PSRAM + 1 MB QSPI-NOR Flash | DPI / QSPI / 8080 / JDI | High-I/O designs that prioritize larger single-pool PSRAM and advanced display routing without using the module’s standard chip choice |
 
 </div>
+
+<div id="_10"></div>
 
 ## Integration Path
 
@@ -203,15 +229,23 @@ Up to 16 MB of in-package PSRAM and up to 1 MB of in-package NOR Flash.
 Start with the [SF32LB56x hardware design guide](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) for schematic, power, clock/RF and PCB layout guidance, then use the schematic and layout checklists before releasing the board.
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## Related Products
+
+<div id="_12"></div>
 
 ### Module
 
 [SF32LB56-MOD](../modules/SF32LB56-MOD.md) packages the SF32LB566VCB36 chip, memory, RF design, and antenna options into a ready-to-integrate module. It is a strong choice when the project wants SF32LB56x capability while reducing RF layout, antenna matching, crystal placement, and high-speed memory integration risk.
 
+<div id="_13"></div>
+
 ### Development Kits
 
 [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) is a practical starting point for firmware bring-up, display validation, audio and storage testing, RF checks, and power profiling before committing to a chip-down or module-based design.
+
+<div id="_14"></div>
 
 ### Reference Products
 

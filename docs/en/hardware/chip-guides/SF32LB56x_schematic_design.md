@@ -122,6 +122,8 @@ Review processor rails, required local capacitors, PMIC output assignments, rese
 
 </div>
 
+The V-variant source names this input `GPADC_VREF` in its power-rail table and `GPADC_VREFP` in its capacitor table. Confirm the intended connection with SiFli before finalizing the schematic.
+
 <div align="center"><em>Table 5.1-5: SF30147C PMIC Output Ratings (U-Variant Example)</em></div>
 
 <div align="center" markdown>
@@ -285,7 +287,7 @@ Operating mode, wake source, pull-up rail, and leakage-current decisions should 
 
 BOOT_MODE selects startup behavior: a high level enters download mode; at a low level, the ROM checks for a user program, starts it if present, and otherwise enters download mode. The U-variant Mode pin has an internal pull-down, may be left floating when unused, and shares the VDDIO2 domain. The V-variant Mode pin shares VDDIOA and should be held stable with a 10 kΩ pull-up or pull-down; do not leave it floating or allow interference to change its level. Reserve a Mode test point on production boards; a jumper is useful on development boards for recovery.
 
-Account for memory I/O power in low-power shutdown designs. In U-variant Standby, GPIO levels are retained and VDDIO1 can remain powered; put storage on MPI1/MPI2 into its low-power mode. In Hibernate, GPIO levels are not retained, so turn off VDDIO1 to prevent leakage through the co-packaged memory I/O. For the V variant, keep the co-packaged-memory I/O powered in Standby; before Hibernate, turn off VDDIOSA and VDDIOSB under PBR0 control and place NOR Flash in Deep Power-Down. VDDIOSC must remain powered.
+Account for memory I/O power in low-power shutdown designs. In U-variant Standby, GPIO levels are retained and VDDIO1 can remain powered; put storage on MPI1/MPI2 into its low-power mode. In Hibernate, GPIO levels are not retained, so turn off VDDIO1 to prevent leakage through the co-packaged memory I/O. For the V variant, VDDIOSA and VDDIOSB can remain powered in Standby; before Hibernate, turn them off under PBR0 control and place NOR Flash in Deep Power-Down. VDDIOSC must remain powered.
 
 ### 5.3. Clock Generation { #53-clock-generation }
 
@@ -655,11 +657,11 @@ Match the storage I/O supply to the attached memory's logic level: U-variant sto
 
 For an external differential analog microphone, place DC-blocking capacitors of at least 2.2 µF at the ADC inputs and power the microphone from MIC_BIAS. The U-variant MEMS-microphone reference feeds MIC_BIAS through 1 kΩ with a 4.7 µF bypass capacitor; its microphone-output reference also shows a 0.01 µF coupling capacitor. The U-variant analog-PA reference uses 33 nF input coupling capacitors, with the differential low-pass filter close to the chip. Route analog DAC outputs as a guarded differential pair; keep parasitic capacitance below 10 pF and trace length below 2 cm. The V variant also provides I2S; its reference I2S amplifier is configured over I2C3. Place audio supply/reference capacitors close to their pins and route analog audio away from switchers and high-speed digital signals.
 
-Both variants provide PWM for vibration motors. The motor may be powered directly from VBAT if its startup current does not destabilize the system. When `BSP_PM_FREQ_SCALING` is defined as `1`, HCPU frequency scaling changes PWM frequency on PA pins; use a PB pin in this case. PB32 is an active-high power/reset input; holding the button for at least 10 s triggers a reset. The U-variant reference connects the button to VDDIOB through 1 kΩ and adds a 10 kΩ pull-down and a 0.1 µF capacitor to ground. The V-variant reference uses a 1 kΩ series resistor from VDD_1V8 and a 10 kΩ pull-down. Other buttons and rotary encoders require pull-ups; for a mechanical encoder that does not return to the off state after rotation, its pull-up rail must be switchable in Standby to avoid leakage.
+Both variants provide PWM for vibration motors. The motor may be powered directly from VBAT if its startup current does not destabilize the system. When `BSP_PM_FREQ_SCALING` is defined as `1`, HCPU frequency scaling changes PWM frequency on PA pins; SiFli recommends using a PB pin in this case. PB32 is an active-high power/reset input; holding the button for at least 10 s triggers a reset. The U-variant reference connects the button to VDDIOB through 1 kΩ and adds a 10 kΩ pull-down and a 0.1 µF capacitor to ground. The V-variant reference uses a 1 kΩ series resistor from VDD_1V8 and a 10 kΩ pull-down. Other buttons and rotary encoders require pull-ups; for a mechanical encoder that does not return to the off state after rotation, its pull-up rail must be switchable in Standby to avoid leakage.
 
 U provides PBR0–PBR2 and V provides PBR0–PBR3. PBR0 transitions low-to-high during startup and can control an external load switch; the other PBR pins default low. PBR pins can output in Standby and Hibernate and can carry LPTIM; all except PBR0 can output a 32kHz clock. PBR pins can also be configured as wake inputs, but the MCU cannot receive an interrupt from that input after wake. Prefer LCPU PB pins for sensor I2C, SPI, control, and interrupt-wake signals; sensor power can be switched as needed from an SF30147C LVSW or LDO output.
 
-All U/V PA pins can be muxed to UART, I2C, or GPTIM. On U, PB32/PB33/PB34 and PBR0/PBR1/PBR2 are exceptions; on V, PB32–PB36 and PBR0–PBR3 are exceptions. Review these restrictions together with wake, button, and PBR assignments.
+All U/V PA pins support UART, I2C, and GPTIM muxing. PB pins also support these functions except PB32/PB33/PB34 on U and PB32–PB36 on V. U-variant PBR0–PBR2 and V-variant PBR0–PBR3 are also excluded from this muxing. Review these restrictions together with wake, button, and PBR assignments.
 
 ### 5.7. Manufacturing { #57-manufacturing }
 

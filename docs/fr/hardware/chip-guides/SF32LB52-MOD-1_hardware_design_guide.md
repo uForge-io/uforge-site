@@ -17,6 +17,9 @@ tags:
 
 Ce guide traite de l'intégration matérielle du module : définition des broches, interfaces périphériques, caractéristiques électriques, exigences d'alimentation, schémas de référence, liste de contrôle du schéma, dimensions mécaniques, empreinte PCB et précautions de manipulation. Il s'appuie sur la fiche technique SiFli **DS5203-SF32LB52-MOD-1 V0.3**.
 
+!!! important "Périmètre de la variante du module"
+    Les spécifications et recommandations d'intégration ci-dessous concernent le SF32LB52-MOD-1-N16R8 documenté dans DS5203 V0.3. Cette fiche technique n'établit pas que ces informations s'appliquent à la configuration distincte SF32LB52-MOD-1-A128R16. Pour les informations propres à A128R16, consultez le [guide de conception du module EPD de SiFli](https://wiki.sifli.com/hardware/SF32LB52-MOD-1-EPD-HW-Application.html).
+
 Pour l'architecture sous-jacente de la puce (cœurs, graphiques, sous-système mémoire et périphériques plus en détail), voir [SF32LB52x](../../sf32-products/chips/SF32LB52x.md) et le [Guide de conception matérielle SF32LB52x](../chip-guides/SF32LB52x_hardware_design_guide.md).
 
 !!! note "Gestion des sources et figures"
@@ -35,7 +38,7 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphiques, sous-système m
 
 | Code du module | Flash | PSRAM | Température | Dimensions (mm) |
 | :--- | :--- | :--- | :--- | :--- |
-| SF32LB52-MOD-1-N16R8 | QSPI-NOR 16 Mo | OPI-PSRAM 8 Mo | -40 à 85 °C | 27,9 × 18,0 × 3,1 |
+| SF32LB52-MOD-1-N16R8 | QSPI-NOR 16 MB | OPI-PSRAM 8 MB | -40 à 85 °C | 27,9 × 18,0 × 3,1 |
 
 </div>
 
@@ -54,7 +57,7 @@ Pour l'architecture sous-jacente de la puce (cœurs, graphiques, sous-système m
 | Cœur basse consommation (LCPU) | Arm Cortex-M33 STAR-MC1, jusqu'à 24 MHz, 64 Ko de SRAM |
 | Sans fil | Bluetooth 5.3 double mode avec BLE Audio |
 | Graphiques | Moteur ePicasso 2.0 2D/2.5D, jusqu'à 512×512, décompression sans perte eZip 2.0 |
-| Audio | 1 × DAC audio 24 bits, 1 × ADC audio Sigma-Delta 24 bits |
+| Audio | Le résumé de DS5203 V0.3 indique un DAC 24 bits et un ADC Sigma-Delta ; les sections audio détaillées en indiquent deux de chaque. Confirmez auprès de SiFli le nombre de voies exposées par le module. |
 | Stockage | OPI-PSRAM en boîtier optionnelle (144 MHz) ; 1 × MPI externe (QSPI) ; 1 × SD/SDIO/eMMC |
 | Boîtier | 68 broches, 27,9 × 18,0 × 3,1 mm |
 | Alimentation | VSYS 3,2–4,7 V (Li-ion) ou 3,7–4,7 V (DCDC/LDO, 3,8 V recommandé) |
@@ -194,11 +197,14 @@ Toute broche marquée `PAxx_I2C_UART` dans le tableau ci-dessus peut être confi
 
 **Capteur de température** — Résolution de 0,2 °C, plage de -40 °C à 125 °C et précision de ±3 °C ; lecture par scrutation ou interruption.
 
-**DAC audio** — Une voie de sortie DAC 24 bits, avec des fréquences d'échantillonnage de 8 à 48 kHz et une sortie différentielle.
+**DAC audio** — La description spécifique au module indique une voie de sortie DAC 24 bits, avec des fréquences d'échantillonnage de 8 à 48 kHz et une sortie différentielle. La section audio détaillée de DS5203 V0.3 décrit deux DAC dans le MCU ; confirmez auprès de SiFli le nombre de voies exposées par le module exact.
 
 **PLL audio** — Génération d'horloge fractionnaire-N avec une résolution de 48 MHz/2^18, prenant en charge les fréquences d'échantillonnage dérivées suivantes : 48 MHz, 32,768 kHz et 44,1 kHz.
 
-**ADC audio** — Une voie d'entrée ADC Sigma-Delta 24 bits, avec des fréquences d'échantillonnage de 8 à 48 kHz.
+!!! note "Fréquence d’échantillonnage de la PLL audio à confirmer"
+    La fiche technique V0.3 indique ici 48 MHz comme fréquence d’échantillonnage dérivée, tandis que les spécifications DAC et ADC juste à côté donnent des plages de 8 à 48 kHz. La source n’explique pas cette différence ; confirmez auprès de SiFli la valeur de 48 MHz avant de vous y fier.
+
+**ADC audio** — La description spécifique au module indique une voie d'entrée ADC Sigma-Delta 24 bits, avec des fréquences d'échantillonnage de 8 à 48 kHz. La section audio détaillée de DS5203 V0.3 décrit deux ADC dans le MCU ; confirmez auprès de SiFli le nombre de voies exposées par le module exact.
 
 ## 6. Caractéristiques électriques { #6-electrical-characteristics }
 
@@ -272,7 +278,7 @@ VDD est le rail d'alimentation des E/S ; VOH/VOL sont mesurées sous charge haut
 | Connexion BLE | 50 ms | 95,0 | 105,0 | 118,7 | µA |
 | Connexion BLE | 1 s | 4,1 | 4,6 | 9,1 | µA |
 | Balayage (Inquiry ou Page) | — | 33,4 | — | — | µA |
-| Balayage combiné (Inquiry et Page) | — | 67,3 | — | — | µA |
+| Les deux types de balayage | — | 67,3 | — | — | µA |
 | Veille | — | 20,0 | — | — | µA |
 
 </div>

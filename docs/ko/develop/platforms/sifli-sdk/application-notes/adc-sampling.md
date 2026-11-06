@@ -177,7 +177,7 @@ OpenSiFli ADC FAQ에는 SF32LB55x 캘리브레이션 흐름이 더 자세히 설
 ![SF32LB55x 캘리브레이션 모드 선택 및 공장 보정값 흐름](../../../../assets/develop/adc/adc001.png){ loading="lazy" }
 <div align="center"><em>그림: SF32LB55x 캘리브레이션 초기화, 범위 선택, offset/ratio 계산.</em></div>
 
-- **X1 범위:** 0.3 V와 0.8 V. 저장된 캘리브레이션 값의 비트 15가 설정되어 있어 구현이 소범위 경로를 선택합니다. 0 V 근처와 1 V 이상에서는 정확도가 떨어집니다. 이 경로는 `GPADC_ADC_CFG_REG1_ANAU_GPADC_ATTN3X`를 비활성화하므로 내부 분압기가 꺼지며, ADC 테스트 포인트는 1.1 V를 초과해서는 안 됩니다.
+- **X1 범위:** 0.3 V와 0.8 V. 저장된 캘리브레이션 값의 비트 15가 설정되어 있어 구현이 소범위 경로를 선택합니다. 0 V 근처와 1 V 초과에서는 정확도가 떨어집니다. 이 경로는 `GPADC_ADC_CFG_REG1_ANAU_GPADC_ATTN3X`를 비활성화하므로 내부 분압기가 꺼지며, ADC 테스트 포인트는 1.1 V를 초과해서는 안 됩니다.
 - **X3 범위:** 1.0 V와 2.5 V. 이전 캘리브레이션 방식입니다. `GPADC_ADC_CFG_REG1_ANAU_GPADC_ATTN3X`를 활성화하여 3배 감쇠의 내부 분압기를 켜며, 입력은 3.3 V를 초과해서는 안 됩니다.
 
 ![SF32LB55x X1/X3 내부 분압기 제어](../../../../assets/develop/adc/adc002.png){ loading="lazy" }

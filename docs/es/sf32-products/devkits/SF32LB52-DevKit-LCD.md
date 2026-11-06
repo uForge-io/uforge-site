@@ -207,7 +207,13 @@ La nota original de la placa de SiFli lista `TFT-H043A28WQISTKN22_V0-3` como un 
 | Pin del módulo | Señal | Función en la placa |
 | :--- | :--- | :--- |
 | PA44 | VBUS_DET | Detección de inserción de cargador |
-| PA43..PA37 | DB7..DB2 | Datos LCD MCU/8080 |
+| PA43 | DB7 | Datos LCD MCU/8080 |
+| PA42 | DB6 | Datos LCD MCU/8080 |
+| PA41 | DB5 | Datos LCD MCU/8080 |
+| PA40 | DB4 | Datos LCD MCU/8080 |
+| PA39 | DB3 | Datos LCD MCU/8080 |
+| PA38 | GPIO | Entrada/salida de uso general |
+| PA37 | DB2 | Datos LCD MCU/8080 |
 | PA08..PA07 | DB1..DB0 / QSPI D3..D2 | Datos de LCD |
 | PA06 | DC / QSPI D1 | Datos/comando de LCD |
 | PA05 | RD / QSPI D0 | Datos de LCD |
@@ -219,7 +225,7 @@ La nota original de la placa de SiFli lista `TFT-H043A28WQISTKN22_V0-3` como un 
 | PA33 / PA30 | I2C SDA / SCL | Panel táctil |
 | PA31 / PA09 | Táctil INT / RST | Panel táctil |
 | PA24, PA25, PA28, PA29 | SPI1 | Interfaz de tarjeta TF |
-| PA26 | Detección de tarjeta / LED | Función compartida |
+| PA26 | Detección de tarjeta SD / CS de Flash2 externa / LED GPIO | Funciones compartidas en V1.2.0; confirme la revisión exacta |
 | PA20 / PA27 | UART RX/TX | UART de usuario |
 | PA18 / PA19 | UART de depuración RX/TX | Descarga y depuración de software |
 | PA10 | AU_PA_EN | Habilitación del amplificador de audio |

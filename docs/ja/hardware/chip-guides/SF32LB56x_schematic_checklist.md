@@ -101,7 +101,7 @@ hide:
 | 20 | AVDD33_BRFコンデンサーを4.7 uF以上とする | SF32LB565/567 | 必須 |
 | 21 | AUD_VREFコンデンサーを1 uFとする | 全チップ | 必須 |
 | 22 | GPADC VREFPコンデンサーを4.7 uFとする | 全チップ | 必須 |
-| 23 | BUCKインダクターの品番が[SF32 承認ベンダーリスト]（AVL）に掲載されている | 全チップ | 必須 |
+| 23 | BUCKインダクターの品番が[SiFli 承認ベンダーリスト]（AVL）に掲載されている | 全チップ | 必須 |
 | 24 | BUCKインダクターがSiFli推奨品でない場合、L = 4.7 uH、DCR ≤0.4 ohm、Isat ≥450 mAを満たす | 全チップ | 必須 |
 | 25 | <span class="flag-red">PVDD電源電圧を1.8 Vとし、VBAT駆動の1.8 V DCDCを推奨する</span> | 全チップ | 必須 |
 | 26 | <span class="flag-red">GPSなど干渉に敏感な周辺デバイスを搭載する場合、BUCK_LXに対地シャントコンデンサー用のフットプリントを確保する。容量値は実機評価で決定する</span> | 全チップ | 必須 |
@@ -460,4 +460,4 @@ hide:
 
 </div>
 
-[SF32 承認ベンダーリスト]: ../cad-components/sifli-approved-vendor-list.md
+[SiFli 承認ベンダーリスト]: ../cad-components/sifli-approved-vendor-list.md

@@ -38,31 +38,12 @@ SF32におけるエッジAIの処理は、概ね次のように進みます。
 
 <div align="center"><em>図: 処理段階とファームウェアによる推論制御</em></div>
 
-```text
-Sensors / Audio / Camera
-        │
-        ▼
-Pre-processing
-  - filtering
-  - framing
-  - normalization
-  - feature extraction
-        │
-        ▼
-Firmware / Inference Runtime
-  - model graph orchestration
-  - supported operations on NNACC
-  - other operations on CPU, if implemented
-        │
-        ▼
-Post-processing
-  - thresholding
-  - smoothing
-  - event detection
-  - application decisions
-        │
-        ▼
-Application, UI, Bluetooth, or Storage
+```mermaid
+flowchart TD
+    A["センサー / オーディオ / カメラ"] --> B["前処理<br/>フィルタリング<br/>フレーミング<br/>正規化<br/>特徴抽出"]
+    B --> C["ファームウェア / 推論ランタイム<br/>モデルグラフの制御<br/>NNACC 対応演算<br/>実装されている場合はその他の演算を CPU で実行"]
+    C --> D["後処理<br/>しきい値判定<br/>平滑化<br/>イベント検出<br/>アプリケーションでの判断"]
+    D --> E["アプリケーション、UI、Bluetooth、またはストレージ"]
 ```
 
 アクセラレーターはAI処理全体の一要素にすぎません。実際の製品では、データの取得とバッファリング、前処理、推論のスケジューリング、後処理、アプリケーション側の判断も必要です。推論を単独の関数呼び出しとして扱うのではなく、メモリー階層や利用可能なアクセラレーターを踏まえて処理全体を設計することが、性能向上につながります。

@@ -30,7 +30,7 @@ LPSYS가 Standby에서 웨이크하면 SWD가 HCPU로 돌아갑니다. J-Link �
 
 ## 라이브 또는 사후 분석 패키지 캡처 { #capture-a-live-or-post-mortem-package }
 
-현재 SDK 릴리스에서는 `sdk.py`로 UART 또는 J-Link를 통해 캡처합니다.
+현재 `sdk.py` CLI는 모든 제품군에서 J-Link를 지원하며, UART DEBUG IP 직접 캡처는 SF32LB52X와 SF32LB56X만 지원합니다. 다른 제품군에서는 J-Link를 사용하십시오. 아래의 기존 AssertDump/UART 방법은 별도의 흐름입니다.
 
 !!! note "예제 범위"
     아래 명령은 SF32LB52/LB525 예제입니다. 명령 구조는 유지하되, 칩/모델, 코어, 전송 방식, ELF는 대상 제품군과 SDK 릴리스에서 지원하는 값으로 바꾸십시오.
@@ -41,7 +41,7 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
   --output /tmp/live-crash --elf build_hcpu/main.elf
 ```
 
-PSRAM도 내보내려면 `--include-psram`을 추가하거나 `--psram-size 8MB`를 사용해 PSRAM 스크립트를 수동으로 지정하십시오. `SifliUsartServer`를 통해 J-Link를 IP로 연결할 때는 `--transport jlink --jlink-ip 127.0.0.1:19025`를 사용하고, 영향을 받은 코어는 `--core hcpu` 또는 `--core lcpu`로 선택합니다. 출력 디렉터리에는 캡처한 바이너리, 코어 ELF/AXF, `log.txt`, `manifest.json`, `sdk_manifest.json`이 있어야 합니다.
+PSRAM도 내보내려면 `--include-psram`을 추가하거나 `--psram-size 8MB`를 사용해 PSRAM 스크립트를 수동으로 지정하십시오. `SifliUsartServer`를 통해 J-Link를 IP로 연결할 때는 `--transport jlink --jlink-ip 127.0.0.1:19025`를 사용하고, 영향을 받은 코어는 `--core hcpu` 또는 `--core lcpu`로 선택합니다. 크래시 패키지에는 캡처한 바이너리와 `manifest.json`, `sdk_manifest.json`이 포함됩니다. `--elf`를 지정하면 해당 파일이 `hcpu.axf`로 복사됩니다. `log.txt`는 `capture-live --transport jlink`일 때만 `capture.log`에서 복사되며, `export-coredump`에서는 `--log`로 제공됩니다.
 
 이전 SDK에서는 해당 제품군에 대한 SiFli 가이드의 방법을 사용하십시오.
 

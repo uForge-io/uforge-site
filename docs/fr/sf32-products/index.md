@@ -7,6 +7,8 @@ tags:
     - Présentation
 ---
 
+<div id="sf32"></div>
+
 # Produits SF32 { #sf32-products }
 
 La section Produits SF32 vous aide à passer d’une idée de produit à une conception SF32 réalisable. Vous y découvrirez les familles SF32, pourrez choisir puis valider le matériel, trouver une base technique réutilisable et accéder aux ressources nécessaires à la préparation de la production.

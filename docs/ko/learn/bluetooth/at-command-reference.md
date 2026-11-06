@@ -33,7 +33,9 @@ Bluetooth AT 명령 모듈 페이지는 이 V1.2.1 레퍼런스로 연결됩니�
 
 </div>
 
-## 개요
+<div id="_1"></div>
+
+## 개요 { #overview }
 
 SF32LB57 듀얼 모드 Bluetooth 모듈은 호스트에 BLE와 Classic Bluetooth(BR/EDR)를 모두 지원하는 UART 기반 AT 명령 인터페이스를 제공합니다. 호스트는 AT 명령으로 디바이스 매개변수를 설정하고, 연결을 관리하고, 데이터를 송수신하며, 모듈이 보내는 비요청 상태 표시를 수신합니다.
 
@@ -63,14 +65,18 @@ SF32LB57 듀얼 모드 Bluetooth 모듈은 호스트에 BLE와 Classic Bluetooth
 
 ## 명령 형식 { #command-format }
 
-### 구문 정의
+<div id="_2"></div>
+
+### 구문 정의 { #syntax-definition }
 
 AT 명령은 ASCII 텍스트로 전송되며 캐리지 리턴 `\r`(0x0D)으로 끝납니다. 명령 접두사는 `AT+`(AT 형식 명령) 또는 `AT>`(PDU 형식 명령)입니다. SF32LB57에서 AT 포트는 USART1이며, 하드웨어 흐름 제어 없이 8N1 프레이밍을 사용하고 기본 보레이트는 460800 bps입니다. AT 프레임 하나는 512바이트로 제한됩니다.
 
 !!! warning "PDU 프레임 길이 제한을 확인하십시오"
     원문은 AT 프레임의 길이를 512바이트로 제한하면서 PDU 본문은 최대 508바이트까지 허용합니다. 그림에 표시된 8바이트의 명령 프레이밍을 더하면 UART에서는 516바이트가 전송됩니다. 원문에는 프레이밍 바이트를 수신 버퍼 제한에 어떻게 포함하는지 설명되어 있지 않습니다. 호스트 버퍼 크기를 정하거나 최대 본문 길이를 사용하기 전에 대상 펌웨어가 허용하는 최대 PDU 프레임 길이를 확인하십시오. 원문의 어느 값도 추정한 제한값으로 대체해서는 안 됩니다.
 
-### AT 형식 명령
+<div id="at"></div>
+
+### AT 형식 명령 { #at-format-commands }
 
 <div align="center"><em>표: AT 형식 명령 형태</em></div>
 
@@ -96,7 +102,9 @@ AT 명령은 ASCII 텍스트로 전송되며 캐리지 리턴 `\r`(0x0D)으로 �
 
 </div>
 
-### PDU 형식 명령 프레임 구조
+<div id="pdu"></div>
+
+### PDU 형식 명령 프레임 구조 { #pdu-format-command-framing }
 
 PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드를 전송합니다. 별도의 언급이 없으면 프레임 내 숫자 필드는 리틀 엔디언이며, `data`는 원시 바이너리 데이터입니다.
 
@@ -130,9 +138,13 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 아래 명령은 기능별로 분류되어 있으며, 분류는 Bluetooth AT 명령 모듈 페이지의 색인 표에 사용된 분류와 같습니다.
 
-### 시스템 및 디바이스
+<div id="_3"></div>
 
-#### 펌웨어 버전 조회
+### 시스템 및 디바이스 { #system-and-device }
+
+<div id="_4"></div>
+
+#### 펌웨어 버전 조회 { #get-firmware-version }
 
 <div align="center"><em>표: 펌웨어 버전 조회</em></div>
 
@@ -147,7 +159,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 디바이스 이름 조회
+<div id="_5"></div>
+
+#### 디바이스 이름 조회 { #query-device-name }
 
 <div align="center"><em>표: 디바이스 이름 조회</em></div>
 
@@ -162,7 +176,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 디바이스 이름 설정
+<div id="_6"></div>
+
+#### 디바이스 이름 설정 { #set-device-name }
 
 <div align="center"><em>표: 디바이스 이름 설정</em></div>
 
@@ -177,7 +193,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### MAC 이름 접미사 스위치 조회
+<div id="mac"></div>
+
+#### MAC 이름 접미사 스위치 조회 { #query-mac-name-suffix-switch }
 
 <div align="center"><em>표: MAC 이름 접미사 스위치 조회</em></div>
 
@@ -192,7 +210,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### MAC 이름 접미사 스위치 설정
+<div id="mac_1"></div>
+
+#### MAC 이름 접미사 스위치 설정 { #set-mac-name-suffix-switch }
 
 <div align="center"><em>표: MAC 이름 접미사 스위치 설정</em></div>
 
@@ -207,7 +227,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### IEEE 1284 디바이스 ID 조회
+<div id="ieee-1284-id"></div>
+
+#### IEEE 1284 디바이스 ID 조회 { #query-ieee-1284-device-id }
 
 <div align="center"><em>표: IEEE 1284 디바이스 ID 조회</em></div>
 
@@ -222,7 +244,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### IEEE 1284 디바이스 ID 설정
+<div id="ieee-1284-id_1"></div>
+
+#### IEEE 1284 디바이스 ID 설정 { #set-ieee-1284-device-id }
 
 <div align="center"><em>표: IEEE 1284 디바이스 ID 설정</em></div>
 
@@ -237,7 +261,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 디바이스 리셋
+<div id="_7"></div>
+
+#### 디바이스 리셋 { #reset-device }
 
 <div align="center"><em>표: 디바이스 리셋</em></div>
 
@@ -252,7 +278,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 공장 초기화
+<div id="_8"></div>
+
+#### 공장 초기화 { #factory-reset }
 
 <div align="center"><em>표: 공장 초기화</em></div>
 
@@ -267,7 +295,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 설정 리셋
+<div id="_9"></div>
+
+#### 설정 리셋 { #configuration-reset }
 
 <div align="center"><em>표: 설정 리셋</em></div>
 
@@ -297,7 +327,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 주파수 오프셋 캘리브레이션 조회
+<div id="_10"></div>
+
+#### 주파수 오프셋 캘리브레이션 조회 { #query-frequency-offset-calibration }
 
 <div align="center"><em>표: 주파수 오프셋 캘리브레이션 조회</em></div>
 
@@ -312,7 +344,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 주파수 오프셋 캘리브레이션 설정
+<div id="_11"></div>
+
+#### 주파수 오프셋 캘리브레이션 설정 { #set-frequency-offset-calibration }
 
 <div align="center"><em>표: 주파수 오프셋 캘리브레이션 설정</em></div>
 
@@ -327,7 +361,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### DUT 테스트 모드 진입
+<div id="dut"></div>
+
+#### DUT 테스트 모드 진입 { #enter-dut-test-mode }
 
 <div align="center"><em>표: DUT 테스트 모드 진입</em></div>
 
@@ -342,9 +378,13 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-### 주소 및 식별 정보
+<div id="_12"></div>
 
-#### Bluetooth 주소 조회
+### 주소 및 식별 정보 { #address-and-identity }
+
+<div id="bluetooth"></div>
+
+#### Bluetooth 주소 조회 { #query-bluetooth-address }
 
 <div align="center"><em>표: Bluetooth 주소 조회</em></div>
 
@@ -359,7 +399,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### Bluetooth 주소 설정
+<div id="bluetooth_1"></div>
+
+#### Bluetooth 주소 설정 { #set-bluetooth-address }
 
 <div align="center"><em>표: Bluetooth 주소 설정</em></div>
 
@@ -374,7 +416,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### BLE 주소 조회
+<div id="ble"></div>
+
+#### BLE 주소 조회 { #query-ble-address }
 
 <div align="center"><em>표: BLE 주소 조회</em></div>
 
@@ -389,7 +433,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### BLE 주소 설정
+<div id="ble_1"></div>
+
+#### BLE 주소 설정 { #set-ble-address }
 
 <div align="center"><em>표: BLE 주소 설정</em></div>
 
@@ -404,7 +450,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### BLE 랜덤 주소 스위치 조회
+<div id="ble_2"></div>
+
+#### BLE 랜덤 주소 스위치 조회 { #query-ble-random-address-switch }
 
 <div align="center"><em>표: BLE 랜덤 주소 스위치 조회</em></div>
 
@@ -419,7 +467,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### BLE 랜덤 주소 스위치 설정
+<div id="ble_3"></div>
+
+#### BLE 랜덤 주소 스위치 설정 { #set-ble-random-address-switch }
 
 <div align="center"><em>표: BLE 랜덤 주소 스위치 설정</em></div>
 
@@ -434,7 +484,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### Class of Device 조회
+<div id="class-of-device"></div>
+
+#### Class of Device 조회 { #query-class-of-device }
 
 <div align="center"><em>표: Class of Device 조회</em></div>
 
@@ -449,7 +501,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### Class of Device 설정
+<div id="class-of-device_1"></div>
+
+#### Class of Device 설정 { #set-class-of-device }
 
 <div align="center"><em>표: Class of Device 설정</em></div>
 
@@ -464,9 +518,13 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-### 동작 모드 및 가시성
+<div id="_13"></div>
 
-#### 검색 가능 상태 조회
+### 동작 모드 및 가시성 { #operating-mode-and-visibility }
+
+<div id="_14"></div>
+
+#### 검색 가능 상태 조회 { #query-discoverable-state }
 
 <div align="center"><em>표: 검색 가능 상태 조회</em></div>
 
@@ -481,7 +539,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 검색 가능 상태 설정
+<div id="_15"></div>
+
+#### 검색 가능 상태 설정 { #set-discoverable-state }
 
 <div align="center"><em>표: 검색 가능 상태 설정</em></div>
 
@@ -496,7 +556,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### GATT 광고 상태 조회
+<div id="gatt"></div>
+
+#### GATT 광고 상태 조회 { #query-gatt-advertising-state }
 
 <div align="center"><em>표: GATT 광고 상태 조회</em></div>
 
@@ -511,7 +573,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### GATT 광고 설정
+<div id="gatt_1"></div>
+
+#### GATT 광고 설정 { #set-gatt-advertising }
 
 <div align="center"><em>표: GATT 광고 설정</em></div>
 
@@ -526,7 +590,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### SPP 검색 가능 상태 조회
+<div id="spp"></div>
+
+#### SPP 검색 가능 상태 조회 { #query-spp-discoverable-state }
 
 <div align="center"><em>표: SPP 검색 가능 상태 조회</em></div>
 
@@ -541,7 +607,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### SPP 검색 가능 상태 설정
+<div id="spp_1"></div>
+
+#### SPP 검색 가능 상태 설정 { #set-spp-discoverable-state }
 
 <div align="center"><em>표: SPP 검색 가능 상태 설정</em></div>
 
@@ -556,7 +624,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### SPP 연결 가능 상태 조회
+<div id="spp_2"></div>
+
+#### SPP 연결 가능 상태 조회 { #query-spp-connectable-state }
 
 <div align="center"><em>표: SPP 연결 가능 상태 조회</em></div>
 
@@ -571,7 +641,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### SPP 연결 가능 상태 설정
+<div id="spp_3"></div>
+
+#### SPP 연결 가능 상태 설정 { #set-spp-connectable-state }
 
 <div align="center"><em>표: SPP 연결 가능 상태 설정</em></div>
 
@@ -586,7 +658,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### Bluetooth 동작 모드 조회
+<div id="bluetooth_2"></div>
+
+#### Bluetooth 동작 모드 조회 { #query-bluetooth-operating-mode }
 
 <div align="center"><em>표: Bluetooth 동작 모드 조회</em></div>
 
@@ -601,7 +675,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### Bluetooth 동작 모드 설정
+<div id="bluetooth_3"></div>
+
+#### Bluetooth 동작 모드 설정 { #set-bluetooth-operating-mode }
 
 <div align="center"><em>표: Bluetooth 동작 모드 설정</em></div>
 
@@ -616,7 +692,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 명령 모드 조회
+<div id="_16"></div>
+
+#### 명령 모드 조회 { #query-command-mode }
 
 <div align="center"><em>표: 명령 모드 조회</em></div>
 
@@ -631,7 +709,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 명령 모드 설정
+<div id="_17"></div>
+
+#### 명령 모드 설정 { #set-command-mode }
 
 <div align="center"><em>표: 명령 모드 설정</em></div>
 
@@ -646,9 +726,13 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-### 페어링 및 보안
+<div id="_18"></div>
 
-#### 페어링 정보 삭제
+### 페어링 및 보안 { #pairing-and-security }
+
+<div id="_19"></div>
+
+#### 페어링 정보 삭제 { #clear-pairing-information }
 
 <div align="center"><em>표: 페어링 정보 삭제</em></div>
 
@@ -663,9 +747,13 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-### 시리얼 포트 및 이벤트
+<div id="_20"></div>
 
-#### 시리얼 보레이트 조회
+### 시리얼 포트 및 이벤트 { #serial-port-and-events }
+
+<div id="_21"></div>
+
+#### 시리얼 보레이트 조회 { #query-serial-baud-rate }
 
 <div align="center"><em>표: 시리얼 보레이트 조회</em></div>
 
@@ -680,7 +768,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 시리얼 보레이트 설정
+<div id="_22"></div>
+
+#### 시리얼 보레이트 설정 { #set-serial-baud-rate }
 
 <div align="center"><em>표: 시리얼 보레이트 설정</em></div>
 
@@ -695,7 +785,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 이벤트 보고 스위치 조회
+<div id="_23"></div>
+
+#### 이벤트 보고 스위치 조회 { #query-event-reporting-switch }
 
 <div align="center"><em>표: 이벤트 보고 스위치 조회</em></div>
 
@@ -710,7 +802,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 이벤트 보고 스위치 설정
+<div id="_24"></div>
+
+#### 이벤트 보고 스위치 설정 { #set-event-reporting-switch }
 
 <div align="center"><em>표: 이벤트 보고 스위치 설정</em></div>
 
@@ -721,11 +815,13 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 | 명령 | `AT+EVT=<evt_silent>\r` |
 | 응답 | 성공: `\r\nOK\r\n`, 실패: `\r\nERROR\r\n` |
 | 매개변수 | `evt_silent`: 이벤트 보고 스위치입니다. 0 = `IM_CONN`/`IM_DISCONN`/`IM_READY` 등의 이벤트를 정상적으로 보고, 1 = 모두 무음 처리(보고하지 않음). 기본값 0(일반 보고). |
-| 비고 | 설정 변경이 구성에 반영됩니다. 1로 설정하면 연결 설정, 연결 해제, 준비 완료 이벤트가 시리얼 포트로 출력되지 않습니다. |
+| 비고 | 설정 변경이 구성에 반영됩니다. 1로 설정하면 연결 성립, 연결 해제, 준비 완료 이벤트가 시리얼 포트로 출력되지 않습니다. |
 
 </div>
 
-#### 패스스루 유휴 연결 해제 시간 조회
+<div id="_25"></div>
+
+#### 패스스루 유휴 연결 해제 시간 조회 { #query-pass-through-idle-disconnect-time }
 
 <div align="center"><em>표: 패스스루 유휴 연결 해제 시간 조회</em></div>
 
@@ -740,7 +836,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 패스스루 유휴 연결 해제 시간 설정
+<div id="_26"></div>
+
+#### 패스스루 유휴 연결 해제 시간 설정 { #set-pass-through-idle-disconnect-time }
 
 <div align="center"><em>표: 패스스루 유휴 연결 해제 시간 설정</em></div>
 
@@ -755,9 +853,13 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-### 연결 관리
+<div id="_27"></div>
 
-#### 다중 연결 스위치 조회
+### 연결 관리 { #connection-management }
+
+<div id="_28"></div>
+
+#### 다중 연결 스위치 조회 { #query-multi-connection-switch }
 
 <div align="center"><em>표: 다중 연결 스위치 조회</em></div>
 
@@ -772,7 +874,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 다중 연결 스위치 설정
+<div id="_29"></div>
+
+#### 다중 연결 스위치 설정 { #set-multi-connection-switch }
 
 <div align="center"><em>표: 다중 연결 스위치 설정</em></div>
 
@@ -787,7 +891,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### BLE 최대 동시 연결 수 조회
+<div id="ble_4"></div>
+
+#### BLE 최대 동시 연결 수 조회 { #query-maximum-ble-concurrent-connections }
 
 <div align="center"><em>표: BLE 최대 동시 연결 수 조회</em></div>
 
@@ -802,7 +908,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### BLE 최대 동시 연결 수 설정
+<div id="ble_5"></div>
+
+#### BLE 최대 동시 연결 수 설정 { #set-maximum-ble-concurrent-connections }
 
 <div align="center"><em>표: BLE 최대 동시 연결 수 설정</em></div>
 
@@ -817,7 +925,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### Classic Bluetooth 최대 동시 연결 수 조회
+<div id="classic-bluetooth"></div>
+
+#### Classic Bluetooth 최대 동시 연결 수 조회 { #query-maximum-classic-bluetooth-concurrent-connections }
 
 <div align="center"><em>표: Classic Bluetooth 최대 동시 연결 수 조회</em></div>
 
@@ -832,7 +942,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### Classic Bluetooth 최대 동시 연결 수 설정
+<div id="classic-bluetooth_1"></div>
+
+#### Classic Bluetooth 최대 동시 연결 수 설정 { #set-maximum-classic-bluetooth-concurrent-connections }
 
 <div align="center"><em>표: Classic Bluetooth 최대 동시 연결 수 설정</em></div>
 
@@ -847,7 +959,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 연결 해제
+<div id="_30"></div>
+
+#### 연결 해제 { #disconnect }
 
 <div align="center"><em>표: 연결 해제</em></div>
 
@@ -862,7 +976,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 연결 목록 조회
+<div id="_31"></div>
+
+#### 연결 목록 조회 { #query-connection-list }
 
 <div align="center"><em>표: 연결 목록 조회</em></div>
 
@@ -877,9 +993,13 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-### 데이터 전송
+<div id="_32"></div>
 
-#### BLE MTU 조회
+### 데이터 전송 { #data-transfer }
+
+<div id="ble-mtu"></div>
+
+#### BLE MTU 조회 { #query-ble-mtu }
 
 <div align="center"><em>표: BLE MTU 조회</em></div>
 
@@ -894,7 +1014,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### BLE MTU 설정
+<div id="ble-mtu_1"></div>
+
+#### BLE MTU 설정 { #set-ble-mtu }
 
 <div align="center"><em>표: BLE MTU 설정</em></div>
 
@@ -909,7 +1031,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### SPP 데이터 전송
+<div id="spp_4"></div>
+
+#### SPP 데이터 전송 { #send-spp-data }
 
 <div align="center"><em>표: SPP 데이터 전송</em></div>
 
@@ -924,9 +1048,13 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-### 커스텀 GATT
+<div id="gatt_2"></div>
 
-#### 커스텀 GATT 서비스 목록 조회
+### 커스텀 GATT { #custom-gatt }
+
+<div id="gatt_3"></div>
+
+#### 커스텀 GATT 서비스 목록 조회 { #query-custom-gatt-service-list }
 
 <div align="center"><em>표: 커스텀 GATT 서비스 목록 조회</em></div>
 
@@ -941,7 +1069,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 커스텀 GATT 서비스 생성
+<div id="gatt_4"></div>
+
+#### 커스텀 GATT 서비스 생성 { #create-custom-gatt-service }
 
 <div align="center"><em>표: 커스텀 GATT 서비스 생성</em></div>
 
@@ -956,7 +1086,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 커스텀 GATT 서비스 삭제
+<div id="gatt_5"></div>
+
+#### 커스텀 GATT 서비스 삭제 { #delete-custom-gatt-service }
 
 <div align="center"><em>표: 커스텀 GATT 서비스 삭제</em></div>
 
@@ -971,7 +1103,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 커스텀 GATT 특성 목록 조회
+<div id="gatt_6"></div>
+
+#### 커스텀 GATT 특성 목록 조회 { #query-custom-gatt-characteristic-list }
 
 <div align="center"><em>표: 커스텀 GATT 특성 목록 조회</em></div>
 
@@ -986,7 +1120,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 커스텀 GATT 특성 추가
+<div id="gatt_7"></div>
+
+#### 커스텀 GATT 특성 추가 { #add-custom-gatt-characteristic }
 
 <div align="center"><em>표: 커스텀 GATT 특성 추가</em></div>
 
@@ -1001,7 +1137,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 커스텀 GATT 서비스 시작(등록)
+<div id="gatt_8"></div>
+
+#### 커스텀 GATT 서비스 시작(등록) { #start-register-custom-gatt-services }
 
 <div align="center"><em>표: 커스텀 GATT 서비스 시작(등록)</em></div>
 
@@ -1016,7 +1154,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### GATT 특성 데이터 전송(Notify/Indicate)
+<div id="gatt-notifyindicate"></div>
+
+#### GATT 특성 데이터 전송(Notify/Indicate) { #send-gatt-characteristic-data-notifyindicate }
 
 <div align="center"><em>표: GATT 특성 데이터 전송(Notify/Indicate)</em></div>
 
@@ -1031,7 +1171,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 커스텀 GATT 설정을 플래시에 저장
+<div id="gatt_9"></div>
+
+#### 커스텀 GATT 설정을 플래시에 저장 { #save-custom-gatt-configuration-to-flash }
 
 <div align="center"><em>표: 커스텀 GATT 설정을 플래시에 저장</em></div>
 
@@ -1046,7 +1188,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 플래시의 커스텀 GATT 설정 삭제
+<div id="gatt_10"></div>
+
+#### 플래시의 커스텀 GATT 설정 삭제 { #clear-custom-gatt-configuration-in-flash }
 
 <div align="center"><em>표: 플래시의 커스텀 GATT 설정 삭제</em></div>
 
@@ -1061,7 +1205,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 전원 투입 시 GATT 자동 로드 스위치 조회
+<div id="gatt_11"></div>
+
+#### 전원 투입 시 GATT 자동 로드 스위치 조회 { #query-gatt-auto-load-on-power-up-switch }
 
 <div align="center"><em>표: 전원 투입 시 GATT 자동 로드 스위치 조회</em></div>
 
@@ -1076,7 +1222,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-#### 전원 투입 시 GATT 자동 로드 스위치 설정
+<div id="gatt_12"></div>
+
+#### 전원 투입 시 GATT 자동 로드 스위치 설정 { #set-gatt-auto-load-on-power-up-switch }
 
 <div align="center"><em>표: 전원 투입 시 GATT 자동 로드 스위치 설정</em></div>
 
@@ -1091,11 +1239,15 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-## 비요청 이벤트(URC)
+<div id="urc"></div>
+
+## 비요청 이벤트(URC) { #unsolicited-events-urc }
 
 아래는 모듈이 스스로 보고하는 상태 표시이며, 호스트가 명령을 보내지 않아도 수신됩니다. 보고 여부는 이벤트 보고 스위치(`AT+EVT`)가 제어하며, 무음 모드가 켜져 있는 동안에는 아무것도 보고되지 않습니다.
 
-### IM_READY 준비 완료 표시
+<div id="im_ready"></div>
+
+### IM_READY 준비 완료 표시 { #im_ready-ready-indication }
 
 <div align="center"><em>표: IM_READY 준비 완료 표시</em></div>
 
@@ -1110,7 +1262,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-### IM_CONN 연결 표시
+<div id="im_conn"></div>
+
+### IM_CONN 연결 표시 { #im_conn-connection-indication }
 
 <div align="center"><em>표: IM_CONN 연결 표시</em></div>
 
@@ -1125,7 +1279,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-### IM_DISCONN 연결 해제 표시
+<div id="im_disconn"></div>
+
+### IM_DISCONN 연결 해제 표시 { #im_disconn-disconnect-indication }
 
 <div align="center"><em>표: IM_DISCONN 연결 해제 표시</em></div>
 
@@ -1142,7 +1298,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 ## PDU 형식 명령 { #pdu-format-commands }
 
-### PDU 데이터 보고(opcode 0x0101)
+<div id="pdu-opcode-0x0101"></div>
+
+### PDU 데이터 보고(opcode 0x0101) { #pdu-data-report-opcode-0x0101 }
 
 <div align="center"><em>표: PDU 데이터 보고(모듈 → 호스트, opcode 0x0101)</em></div>
 
@@ -1157,7 +1315,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-### PDU 모드 데이터 전송(Notify 특성 자동 선택, opcode 0x0101)
+<div id="pdu-notify-opcode-0x0101"></div>
+
+### PDU 모드 데이터 전송(Notify 특성 자동 선택, opcode 0x0101) { #pdu-mode-send-data-auto-select-notify-characteristic-opcode-0x0101 }
 
 <div align="center"><em>표: PDU 모드 데이터 전송(Notify 특성 자동 선택, opcode 0x0101)</em></div>
 
@@ -1172,7 +1332,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-### PDU 모드 데이터 전송(서비스 및 특성 지정, opcode 0x0102)
+<div id="pdu-opcode-0x0102"></div>
+
+### PDU 모드 데이터 전송(서비스 및 특성 지정, opcode 0x0102) { #pdu-mode-send-data-specify-service-and-characteristic-opcode-0x0102 }
 
 <div align="center"><em>표: PDU 모드 데이터 전송(서비스 및 특성 지정, opcode 0x0102)</em></div>
 
@@ -1187,7 +1349,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-### PDU 모드 연결 해제
+<div id="pdu_1"></div>
+
+### PDU 모드 연결 해제 { #pdu-mode-disconnect }
 
 <div align="center"><em>표: PDU 모드 연결 해제</em></div>
 
@@ -1202,7 +1366,9 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-### PDU 연결 상태 표시(IM_CONN / IM_DISCONN)
+<div id="pdu-im_conn-im_disconn"></div>
+
+### PDU 연결 상태 표시(IM_CONN / IM_DISCONN) { #pdu-connection-status-indication-im_conn-im_disconn }
 
 <div align="center"><em>표: PDU 연결 상태 표시(IM_CONN / IM_DISCONN)</em></div>
 
@@ -1217,9 +1383,13 @@ PDU 명령은 모듈이 명령 모드에 있는 동안 바이너리 페이로드
 
 </div>
 
-## 부록
+<div id="_33"></div>
 
-### 일반적인 Class of Device 값
+## 부록 { #appendix }
+
+<div id="class-of-device_2"></div>
+
+### 일반적인 Class of Device 값 { #common-class-of-device-values }
 
 <div align="center"><em>표: 일반적인 Class of Device 값</em></div>
 

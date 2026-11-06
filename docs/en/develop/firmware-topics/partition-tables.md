@@ -132,7 +132,7 @@ Use `exec: {region, offset}` where code cannot execute in place, such as an appl
 
 ### Defaults and Project Overlays { #defaults-and-project-overlays }
 
-v3 derives system defaults when the corresponding partitions are absent. For SF32LB52, `flash_table` and `bootloader` can be inferred from the HCPU factory application's storage region; NAND and SDMMC boot storage also receive documented default data partitions. For SF32LB56 and SF32LB58, `flash_table` and `bootloader` on internal `mpi5` can be omitted. Default SiP PSRAM windows and standard RAM partitions can also be omitted unless the project changes the RAM layout.
+v3 derives system defaults when the corresponding partitions are absent. For SF32LB52, when boot storage is NOR, NAND, or SDMMC, `flash_table` and `bootloader` are inferred from the HCPU factory application's storage region; NAND and SDMMC boot storage also receive documented default data partitions. For SF32LB56 and SF32LB58, `flash_table` and `bootloader` on internal `mpi5` can be omitted. Default SiP PSRAM windows and standard RAM partitions can also be omitted unless the project changes the RAM layout.
 
 For a small project-specific change, use `ptab.overlay.yaml` rather than copying the board's full `ptab.yaml`. It can add a partition or override an existing one:
 

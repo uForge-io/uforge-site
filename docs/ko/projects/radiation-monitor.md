@@ -64,7 +64,7 @@ SF32LB52는 듀얼 모드 Bluetooth 5.3, 듀얼 코어 MCU, 디스플레이 기�
 | 구성 요소 | 필수 사양 | 역할 | 상태 | 구하는 곳 | 호환성 및 대체 참고 사항 |
 |:----------|:-----------------------|:-----|:-------|:----------------|:-------------------------------------|
 | SF32LB52-LCHSPI-ULP / Huangshan Pi | SiFli의 SCons 보드 타깃 `sf32lb52-lchspi-ulp`에서 시작하고, 정확한 보드 리비전, 안테나, 디스플레이 어셈블리를 기록 | Bluetooth 스캔, 차트, 조작, 이력 UI 실행 | 필수; 정확한 어셈블리를 확인해야 함 | [관련 μForge DevKit-ULP 레퍼런스](../sf32-products/devkits/SF32LB52-DevKit-ULP.md); [SiFli 지원 보드 목록](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/supported_boards/index.html); [LCKFB 보드 페이지](https://lckfb.com/project/detail/lckfb-hspi-sf32lb52-ulp?param=baseInfo); [프로젝트 소스](https://github.com/SiFliSparks/RadiationMonitor) | README의 출력 디렉터리 `build_sf32lb52-lchspi-ulp_hcpu`만으로는 정확한 PCB, 안테나, 디스플레이 리비전을 알 수 없습니다 |
-| 호스트, USB 데이터 케이블, 제어된 전원 | 선택한 SiFli-SDK 도구가 설치된 호스트, 데이터 전송이 가능한 케이블, 시리얼 로깅, 모니터링되는 전원 | 측정을 빌드, 플래싱, 관찰, 반복 | 필수 | [SiFli-SDK 퀵 스타트](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/index.html) | 포트, 전압, 호스트/도구 버전, 복구 방법을 기록하십시오 |
+| 호스트, USB 데이터 케이블, 제어된 전원 | 선택한 SiFli-SDK 도구가 설치된 호스트, 데이터 전송이 가능한 케이블, 시리얼 로깅, 모니터링되는 전원 | 펌웨어를 빌드·플래싱하고, 관찰하며, 측정을 반복 | 필수 | [SiFli-SDK 퀵 스타트](https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/index.html) | 포트, 전압, 호스트/도구 버전, 복구 방법을 기록하십시오 |
 
 </div>
 

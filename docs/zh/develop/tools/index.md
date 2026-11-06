@@ -24,7 +24,7 @@ SF32 开发需要的不止编译器。实用的固件开发流程还会用到烧
 | [SDK UART 下载脚本](../platforms/sifli-sdk/build-flash-monitor.md) | SiFli-SDK 构建生成的首次烧录脚本。 |
 | [CodeKit 操作](codekit.md) | 在 VS Code 中配置环境、构建、烧录和监视串口输出。 |
 | [`AssertDump`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/AssertDump/AssertDump_UM.html) | 导出目标板崩溃时的内存数据，供后续分析。 |
-| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace` 用于采集目标板日志；`UsartServer` 通过芯片 Debug IP 提供 UART 调试。 |
+| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace` 用于采集目标板日志；`UsartServer` 是面向 SF32LB52x 和 SF32LB56x 的 UART-to-J-Link 辅助工具。这里说明的是主机侧工具角色，并不否定芯片 UART Debug IP 的作用；支持的配置请参阅手册。 |
 | [`Impeller`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/Impeller/Impeller_UM.html) | 面向产线的固件烧录、校准和 PCBA 测试。 |
 | [eZip/图像工具](../../learn/graphics/ezip.md) | 压缩图形管线所需的资源转换。 |
 | [射频/音频/工厂工具](https://docs.sifli.com/projects/solution/6.tools/index.html) | 量产校准、测试和调试流程。 |
@@ -45,7 +45,7 @@ SF32 开发需要的不止编译器。实用的固件开发流程还会用到烧
 
 ## 日志和追踪工具 { #logging-and-trace-tools }
 
-常规开发使用串口终端即可。遇到复杂故障时，应采集结构化日志和崩溃数据：
+常规开发使用串口终端即可。遇到严重故障时，应采集结构化日志和崩溃数据：
 
 - 保存从复位开始的完整启动日志。
 - 保存与已烧录镜像完全匹配的 ELF、map 和符号文件。

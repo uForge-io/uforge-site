@@ -187,7 +187,7 @@ EVTの前に、データシート／ユーザーマニュアルの版、パッ�
 
 [SiFli チップ向けハードウェア設計ガイド一覧 (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## ハードウェア設計ガイドの続き { #continue-the-design-guide }
+## 5. ハードウェア設計ガイドの続き { #continue-the-design-guide }
 
 完全版ガイドは、設計プロセスの各段階を扱う以下のページで構成されています。このページから各ページに移動できます。
 

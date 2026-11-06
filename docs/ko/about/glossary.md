@@ -57,7 +57,7 @@ tags:
 * **LDO** — **Low-Dropout regulator(저드롭아웃 레귤레이터).** 선형 전압 레귤레이터의 한 종류로, SF32 제품 내부 PMU의 출력 단 중 하나입니다.
 * **BUCK** — 스위칭(비선형) 전압 레귤레이터 토폴로지로, 전류가 클 때 LDO보다 효율이 높으며 SF32 PMU에도 통합되어 있습니다.
 * **TRNG** — **True Random Number Generator(진난수 생성기).** 물리적인 열 잡음을 이용하는 하드웨어 엔트로피 소스로, 암호 키 생성과 보안 기능에 사용됩니다.
-* **PSA** — **Platform Security Architecture.** Arm의 보안 프레임워크 및 인증 체계입니다. 일부 SF32 칩 페이지에는 **PSA Certified Level 1**이 기재되어 있습니다. 제품군 전체에 일률적으로 적용된다고 가정하지 말고, 해당 제품의 공식 문서에서 인증 상태와 레벨을 확인하십시오.
+* **PSA** — **Platform Security Architecture(플랫폼 보안 아키텍처).** Arm의 보안 프레임워크 및 인증 체계입니다. 일부 SF32 칩 페이지에는 **PSA Certified Level 1**이 기재되어 있습니다. 제품군 전체에 일률적으로 적용된다고 가정하지 말고, 해당 제품의 공식 문서에서 인증 상태와 레벨을 확인하십시오.
 
 ## 스토리지와 메모리 { #storage-and-memory }
 

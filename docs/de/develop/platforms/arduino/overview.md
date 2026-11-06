@@ -12,7 +12,7 @@ tags:
 [OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) ist ein auf Zephyr basierender Arduino-Core für SF32. Er ist ein nützlicher Weg für Sketches, Peripherie-Experimente, Demonstrationen und frühe Prototypen auf dem **SiFli SF32LB52 DevKit LCD**.
 
 !!! warning "Beta-Core"
-    OpenSiFli kennzeichnet diesen Core als **BETA**. Funktionen, APIs, Paketinhalte, Loader-Verhalten und Releases können sich ändern. Prüfen Sie das aktuelle Verhalten im Projekt-README und in den Releases, bevor Sie diesen Weg für ein Produkt verbindlich festlegen.
+    OpenSiFli kennzeichnet diesen Core als **BETA** und gibt ihn nur für Tests frei. Planen Sie ihn nicht als produktionsreife Basis für ein Produkt ein. Funktionen, APIs, Paketinhalte, Loader-Verhalten und Releases können sich ändern. Prüfen Sie das aktuelle Verhalten im Projekt-README und in den Releases, bevor Sie ihn weiter evaluieren.
 
 Für die anfängliche IDE-Installation, Board-/Port-Auswahl, Bootloader-Installation und den Blink-Test verwenden Sie [Erste Schritte mit Arduino](../../../getting-started/arduino/getting-started-arduino.md). Diese Seite dient dazu, zu entscheiden, ob Arduino passt, und ein Arduino-basiertes Projekt nach diesem ersten Durchlauf zu pflegen.
 

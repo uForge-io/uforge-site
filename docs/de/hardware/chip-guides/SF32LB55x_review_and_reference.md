@@ -56,7 +56,7 @@ Ein typisches SF32LB55x-Produkt umfasst die MCU, die Versorgungsarchitektur, Qua
 
 3. **Warum kann der Chip beim Anlöten des Akkus hängen bleiben, und wie lässt sich das verhindern?** Eine schlechte Erdung des Lötkolbens kann eine transiente Überspannung verursachen. Ergänzen Sie am Akkuanschluss einen Überspannungs- und ESD-Schutz und erden Sie den Lötkolben ordnungsgemäß.
 
-4. **Warum kann eine Taste die MCU in Hibernate nicht aufwecken?** Aus Hibernate können nur die sechs LCPU-Weckeingänge GPIO43–GPIO48 die MCU aufwecken; die HCPU-GPIOs GPIO0–GPIO3 sind dafür nicht geeignet.
+4. **Warum kann eine Taste die MCU in Hibernate nicht aufwecken?** Aus Hibernate können nur die sechs LCPU-Weckeingänge GPIO43–GPIO48 die MCU aufwecken; die HCPU-GPIOs GPIO0–GPIO3 sind dafür nicht geeignet. Dies sind logische GPIO-Bezeichnungen. Bei BGA125/145/169 entsprechen HCPU GPIO0–GPIO3 den Pads PA80/PA79/PA78/PA77 und LCPU GPIO43–GPIO48 den Pads PB43–PB48; QFN68 verwendet die angegebenen GPIO-Bezeichnungen.
 
 5. **Warum können G-Sensor oder Herzfrequenzsensor beim Debuggen des Energiesparbetriebs zu viel Strom aufnehmen oder fehlerhaft arbeiten?** Die Sensor-Firmware läuft auf der LCPU. Daher müssen I2C-, SPI-, Steuer- und Interruptsignale ausschließlich LCPU-Schnittstellen verwenden. Eine Zuordnung zu HCPU-Schnittstellen kann den Stromverbrauch erhöhen oder Fehlfunktionen verursachen.
 

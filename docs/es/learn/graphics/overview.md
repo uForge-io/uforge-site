@@ -22,40 +22,22 @@ La ruta típica de recursos de pantalla es:
 
 <div align="center"><em>Diagrama: flujo de recursos gráficos y visualización</em></div>
 
-```text
-Source images, fonts, and animations
-        │
-        ▼
-GraphicsTool converts supported resources to eZip or eZip-A
-        │
-        ▼
-Compressed assets in NOR Flash, PSRAM, NAND, or file storage
-        │
-        ▼
-eZip hardware decoder expands an asset when required
-        │
-        ▼
-LVGL or another UI framework + graphics/display driver
-        │
-        ├── CPU fallback rendering
-        │
-        └── ePicasso pixel acceleration
-        │
-        ▼
-Final rendered bitmap in a draw buffer or framebuffer
-        │
-        ├── Uncompressed display path
-        │
-        └── Optional: extDMA compresses it into TurboPixel
-                    │
-                    ▼
-             TurboPixel framebuffer in PSRAM
-        │
-        ▼
-Display controller transfers pixels to the panel
-        │
-        ▼
-SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
+```mermaid
+flowchart TD
+    A["Imágenes, fuentes y animaciones de origen"] --> B["GraphicsTool convierte los recursos compatibles a eZip o eZip-A"]
+    B --> C["Recursos comprimidos en NOR Flash, PSRAM, NAND o almacenamiento de archivos"]
+    C --> D["El decodificador de hardware eZip expande un recurso cuando se necesita"]
+    D --> E["LVGL u otro framework de UI + controlador gráfico/de pantalla"]
+    E --> F["Renderizado alternativo por CPU"]
+    E --> G["Aceleración de píxeles con ePicasso"]
+    F --> H["Mapa de bits final en un búfer de dibujo o framebuffer"]
+    G --> H
+    H --> I["Ruta de pantalla sin compresión"]
+    H --> J["Opcional: extDMA comprime el mapa de bits en TurboPixel"]
+    J --> K["Framebuffer TurboPixel en PSRAM"]
+    I --> L["El controlador de pantalla transfiere los píxeles al panel"]
+    K --> L
+    L --> M["Interfaces del panel: SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI"]
 ```
 
 El flujo es configurable: un producto puede prescindir de eZip, ePicasso, TurboPixel o de un framebuffer completo. La disponibilidad y las conexiones dependen del dispositivo, el SDK, la interfaz de pantalla, el panel y la configuración del controlador. El encabezado LCDC actual de OpenSiFli define `LCDC_SUPPORTED_COMPRESSED_LAYER` solo cuando está habilitado `HAL_EXTDMA_MODULE_ENABLED` y se cumple la condición de compilación correspondiente a la familia; SF32LB52x y SF32LB57x quedan excluidos. Un comentario del código también indica que la ruta LCPU aún no está habilitada. La tabla publicada de funciones LCDC del SDK marca como no compatible la descompresión de capas comprimidas en SF32LB55x; por eso, en 55x debe considerarse una capacidad condicional, no una ruta de ejecución validada de extremo a extremo. Compruebe la revisión exacta del SDK, el núcleo, la configuración de compilación y el hardware objetivo; consulte [TurboPixel](turbopixel.md#availability-in-the-sf32-family).

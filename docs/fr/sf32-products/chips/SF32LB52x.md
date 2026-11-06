@@ -25,6 +25,8 @@ Ces groupes ne sont pas interchangeables au niveau de la carte. Les familles sur
 
 [^1]: STAR-MC1 est un IP de CPU embarqué Armv8-M Mainline configurable, proposé par Arm China. Dans les composants SF32 compatibles, SiFli le documente comme processeur applicatif Arm Cortex-M33 STAR-MC1. Son modèle logiciel de classe Cortex-M33 facilite la reprise du firmware, des intergiciels, des portages de RTOS et des outils Cortex-M33 existants, sous réserve du travail d'intégration habituel propre à chaque composant. Ses configurations CU, SP et SE diffèrent principalement par le cache, la TCM, la XIPU et les capacités TrustZone ; les instructions personnalisées Arm/CDE et l'interface de coprocesseur sont des fonctions optionnelles à vérifier pour la référence SF32 exacte. La documentation SiFli peut employer ***Arm Cortex-M33 STAR-MC1*** ou ***Arm Cortex-M33*** selon le contexte.
 
+<div id="_1"></div>
+
 ## Applications { #applications }
 
 **SF32LB52x est recommandé pour** les produits centrés sur le Bluetooth où le coût, l'intégration et l'autonomie sont les principaux critères de conception, notamment :
@@ -72,15 +74,21 @@ Ces groupes ne sont pas interchangeables au niveau de la carte. Les familles sur
 
 ---
 
+<div id="_2"></div>
+
 ## Caractéristiques et spécifications { #features-and-specs }
+
+<div id="_3"></div>
 
 ### Calcul et mémoire { #compute-and-memory }
 
 - Cœur applicatif Arm Cortex-M33 STAR-MC1 jusqu'à 240 MHz, avec DSP et MPU
 - Cœur contrôleur Bluetooth Arm Cortex-M33 STAR-MC1 dédié à 24 MHz
-- Cache d'instructions de 32 Ko + cache de données de 16 Ko
-- 512 Ko de SRAM applicative plus 64 Ko de SRAM pour le contrôleur Bluetooth
-- Options de mémoire intégrée au boîtier selon la variante, de 1 Mo de NOR QSPI à 16 Mo de PSRAM OPI
+- Cache d'instructions de 32 KB + cache de données de 16 KB
+- 512 KB de SRAM applicative plus 64 KB de SRAM pour le contrôleur Bluetooth
+- Options de mémoire intégrée au boîtier selon la variante, de 1 MB de NOR QSPI à 16 MB de PSRAM OPI
+
+<div id="_4"></div>
 
 ### Graphismes et audio { #graphics-and-audio }
 
@@ -92,6 +100,8 @@ Pour connaître la résolution maximale et les interfaces d'affichage prises en 
 - 1 ADC audio 24 bits, RSB de 99 dB
 - 1 DAC audio 24 bits, RSB de 109 dB
 
+<div id="_5"></div>
+
 ### Connectivité sans fil { #wireless-connectivity }
 
 - Bluetooth 5.3 bimode (Bluetooth Classic et BLE)
@@ -99,14 +109,18 @@ Pour connaître la résolution maximale et les interfaces d'affichage prises en 
     - 19 dBm pour BLE/BR
     - 13 dBm pour BT/EDR2 et BT/EDR3
 - Sensibilité : -100 dBm @ BLE/1Mbps
-- Cœur contrôleur Bluetooth Arm Cortex-M33 STAR-MC1 dédié avec 64 Ko de SRAM @ 24 MHz
-- Courant en veille profonde : 2 µA selon la fiche produit ; le courant de veille au niveau système dépend du mode de fonctionnement et des fuites au niveau de la carte
+- Cœur contrôleur Bluetooth Arm Cortex-M33 STAR-MC1 dédié avec 64 KB de SRAM @ 24 MHz
+- Courant en veille : 2 µA selon la fiche produit ; le courant de veille au niveau système dépend du mode de fonctionnement et des fuites au niveau de la carte
+
+<div id="_6"></div>
 
 ### Sécurité { #security }
 
 - Accélérateurs matériels AES/HASH/CRC
 - TRNG
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### Périphériques et E/S { #peripherals-and-ios }
 
@@ -122,6 +136,8 @@ Pour connaître la résolution maximale et les interfaces d'affichage prises en 
 - RTC et timers de surveillance (watchdog)
 - 44 ou 45 GPIO selon la famille de variantes
 
+<div id="_7"></div>
+
 ### Alimentation { #power-supply }
 
 - **Groupe sur batterie : SF32LB520/3/5/7** — alimenté directement par une seule cellule Li-ion/Li-Po et destiné aux conceptions utilisant l'architecture d'alimentation intégrée orientée charge.
@@ -131,6 +147,8 @@ Pour connaître la résolution maximale et les interfaces d'affichage prises en 
 - **Groupe à alimentation externe 1,8 V : SF32LB52D** — destiné aux conceptions spéciales à très basse consommation en 1,8 V, non interchangeable électriquement avec les composants 3,3 V.
 
 Les groupes sur batterie et à alimentation externe sont des configurations de silicium indépendantes et **ne sont pas compatibles broche à broche** d'une famille d'alimentation à l'autre.
+
+<div id="_8"></div>
 
 ## Variantes de la famille { #family-variants }
 
@@ -164,7 +182,7 @@ Si vous changez de niveau de mémoire, la correspondance de contenu la plus proc
 
 </div>
 
-Ce tableau reprend les principales variantes du [guide des modèles de puces](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) de SiFli ; ce n'est pas un catalogue de commande complet. La fiche technique de la famille à alimentation externe liée ici répertorie en outre le **SF32LB52HUD6** (1,8 V, QFN68L, PSRAM 128 Mb), tandis que le guide matériel emploie aussi les formes de suffixe `52AUx6` et `52D/F/HUx6`. Les sources disponibles ne fournissent pas de tableau de variantes unique et cohérent. Avant la validation de la conception, vérifiez dans la fiche technique à jour l'état de commercialisation, les limites d'alimentation, l'interface mémoire et les détails d'E/S de toute référence de ce type.
+Ce tableau reprend les principales variantes du [guide des modèles de puces](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html) de SiFli ; ce n'est pas un catalogue de commande complet. La [fiche technique DS5202-SF32LB52X V0.2.6](https://downloads.sifli.com/docs/Datasheet/SF32LB52X/DS5202-SF32LB52X-Datasheet%20V0p2p6.pdf) mentionne le **SF32LB52HUD6** dans son historique des révisions (2025-03-12), mais la liste de commande actuelle du tableau 5-7 ne contient pas cette référence. Cette mention historique ne prouve ni sa disponibilité actuelle à la commande ni ses spécifications. Le guide matériel utilise séparément les formes de suffixe `52AUx6` et `52D/F/HUx6` ; vérifiez la référence exacte et ses spécifications dans des sources officielles à jour avant la validation de la conception.
 
 ## Parcours d'intégration { #integration-path }
 
@@ -173,7 +191,7 @@ Suivez cette séquence pour transformer une présélection SF32LB52x en concepti
 1. **Valider le parcours de développement du firmware.** Commencez par le [guide de prise en main du SDK SiFli](../../getting-started/sifli/getting-started-sifli-sdk.md), puis utilisez le [flux de travail du SDK SiFli](../../develop/platforms/sifli-sdk/overview.md) et les [exemples](../../develop/examples/index.md) pour valider les périphériques requis et le comportement Bluetooth.
 2. **Choisir le support d'intégration.** Évaluez le [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) lorsqu'un module RF déjà intégré convient au produit ; sinon, choisissez la [carte de développement SF32LB52](../devkits/SF32LB52-DevKit-LCD.md) la plus proche pour la validation précoce du firmware et des périphériques.
 3. **Concevoir et relire le matériel.** Utilisez le [guide de conception matérielle](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) local — y compris ses listes de contrôle du [schéma](../../hardware/chip-guides/SF32LB52x_schematic_checklist.md) et de l'[implantation du circuit imprimé](../../hardware/chip-guides/SF32LB52x_pcb_layout_checklist.md) — avant de valider le schéma ou l'implantation. Confirmez la bonne base de famille d'alimentation : 520/3/5/7, 52B/E/G/J ou 52D.
-4. **Vérifier la source faisant autorité.** Contrôlez la [fiche technique](#development-resources) applicable et le [guide de conception matérielle pour 520/3/5/7] ou le [guide de conception matérielle pour 52B/D/E/G/J] de SiFli par rapport à la référence commandable et au boîtier exacts.
+4. **Vérifier la source faisant autorité.** Contrôlez la [fiche technique](#development-resources) applicable et le guide de conception matérielle SiFli pour [520/3/5/7][Guide de conception matérielle (520/3/5/7)] ou pour [52B/D/E/G/J][Guide de conception matérielle (52B/D/E/G/J)], par rapport à la référence commandable et au boîtier exacts.
 
 <!-- uf-faq:start -->
 ## Questions fréquentes { #frequently-asked-questions }
@@ -199,11 +217,17 @@ Jusqu'à 16 MB de PSRAM et jusqu'à 4 MB de Flash NOR dans le boîtier.
 Commencez par le [guide de conception matérielle du SF32LB52x](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md) (schéma, alimentation, horloge/RF, routage PCB), puis utilisez les listes de contrôle de schéma et d'implantation avant de figer la carte.
 <!-- uf-faq:end -->
 
+<div id="_9"></div>
+
 ## Produits associés { #related-products }
+
+<div id="_10"></div>
 
 ### Module { #module }
 
-Le [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) associe le SF32LB525UC6, qui dispose de 8 Mo de PSRAM OPI intégrée au boîtier dans la configuration standard, à un réseau d'adaptation RF. Le module mesure 27,9 × 18,0 × 3,1 mm et convient aux projets qui veulent les capacités de la classe SF32LB52 sans assumer l'implantation et la validation RF au niveau de la puce.
+Le [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) associe le SF32LB525UC6, qui dispose de 8 MB de PSRAM OPI intégrée au boîtier dans la configuration standard, à un réseau d'adaptation RF. Le module mesure 27,9 × 18,0 × 3,1 mm et convient aux projets qui veulent les capacités de la classe SF32LB52 sans assumer l'implantation et la validation RF au niveau de la puce.
+
+<div id="_11"></div>
 
 ### Kits de développement { #development-kits }
 
@@ -211,6 +235,8 @@ Le [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) associe le SF32LB525UC6, qui d
 - Le [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) est la carte cœur compacte à alimentation externe pour une mise en service rapide du firmware, des GPIO et du mode basse consommation sur des composants de classe 52B/52J.
 - Le [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) est la plus petite carte de développement de la série 52, utile lorsque le produit cible est contraint en taille.
 - Le [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) est la voie orientée basse consommation pour l'évaluation sur batterie et les expérimentations de produits compacts.
+
+<div id="_12"></div>
 
 ### Produits de référence { #reference-products }
 

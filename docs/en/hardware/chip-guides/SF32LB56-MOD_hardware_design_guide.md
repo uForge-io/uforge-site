@@ -9,7 +9,11 @@ hide:
     - navigation
 ---
 
+<div id="sf32lb56-mod"></div>
+
 # SF32LB56-MOD Hardware Design Guide
+
+<div id="1"></div>
 
 ## 1. Introduction
 
@@ -23,7 +27,11 @@ This guide organizes the module-specific information needed for schematic design
 !!! note "Regulatory marking scope"
     The supplied labels for SF32LB56-MOD-N16R12N1 and SF32LB56-MOD-A128R12N1 show FCC, IC, CMIIT ID and HVIN identifiers and a CE mark. See the [module marking summary](../../sf32-products/modules/SF32LB56-MOD.md#regulatory-markings). Confirm approval documents and antenna/integration conditions for the exact revision; do not assume other variants or the finished product are covered.
 
+<div id="2"></div>
+
 ## 2. Device Overview
+
+<div id="21"></div>
 
 ### 2.1 Architecture
 
@@ -33,6 +41,8 @@ The module supports Bluetooth 5.3 connectivity and provides display acceleration
 
 !!! note "Customization"
     For other module configurations or customization requests, [contact μForge.io](../../about/contact.md).
+
+<div id="22"></div>
 
 ### 2.2 Variants
 
@@ -47,6 +57,8 @@ The module supports Bluetooth 5.3 connectivity and provides display acceleration
 | SF32LB56-MOD-D128R12N1 | 128MB SD-NAND | 4+8MB OPI-PSRAM | 1MB QSPI-NOR | -40~85°C | 18.0 × 32.9 × 3.1mm |
 
 </div>
+
+<div id="23"></div>
 
 ### 2.3 Major Hardware Features
 
@@ -67,11 +79,17 @@ The module supports Bluetooth 5.3 connectivity and provides display acceleration
 
 </div>
 
+<div id="24"></div>
+
 ### 2.4 Typical Applications
 
 Typical applications include high-end smartwatches, smart bands, wearable medical equipment, fitness equipment, e-bike control panels, car keys, wearable remote controls for vehicles, smart appliances, smart locks, graphical HMI devices, industrial sensor hubs, industrial monitoring terminals, low-power sensor hubs, and Bluetooth Mesh devices.
 
+<div id="3"></div>
+
 ## 3. Design at a Glance
+
+<div id="31"></div>
 
 ### 3.1 One-Page Engineering Summary
 
@@ -95,6 +113,8 @@ Typical applications include high-end smartwatches, smart bands, wearable medica
 
 </div>
 
+<div id="32"></div>
+
 ### 3.2 Recommended External Components
 
 <div align="center"><em>Table 3.2-1: Recommended External Components</em></div>
@@ -113,12 +133,16 @@ Typical applications include high-end smartwatches, smart bands, wearable medica
 
 </div>
 
+<div id="33"></div>
+
 ### 3.3 Power Tree
 
 VDD_3V3 powers the MCU PVDD, AVDD33_ANA, AVDD33_AUD, AVDD_BRF, VDDIOA2, and module internal Flash. SiFli recommends using an LDO for this rail. VDD_1V8 powers the MCU co-packaged memory. VDDIO powers the MCU VDDIOA/VDDIOB I/O ports.
 
 !!! info "Figure 3.3-1: SF32LB56-MOD Power Supply Diagram"
     See Figure 7-1 in DS5602 V0.3.
+
+<div id="34"></div>
 
 ### 3.4 System Block Diagram
 
@@ -127,7 +151,11 @@ The module block diagram shows the SF32LB56xV MCU, memory resources, RF path, an
 !!! info "Figure 3.4-1: SF32LB56-MOD Functional Block Diagram"
     See Figure 2-1 in DS5602 V0.3.
 
+<div id="4"></div>
+
 ## 4. Hardware Design Flow
+
+<div id="41"></div>
 
 ### 4.1 Design Sequence
 
@@ -140,9 +168,13 @@ The module block diagram shows the SF32LB56xV MCU, memory resources, RF path, an
 7. Place the module with the required antenna clearance and keep-out.
 8. Review the schematic and PCB against the checklist in Section 7 before release.
 
+<div id="42"></div>
+
 ### 4.2 Review Sequence
 
 Use a staged review sequence: schematic review, pin-mux review, power-up review, RF/antenna review, layout review, first-article bring-up review, RF validation, environmental/reliability review, and production-test review.
+
+<div id="43"></div>
 
 ### 4.3 Milestones
 
@@ -160,9 +192,15 @@ Use a staged review sequence: schematic review, pin-mux review, power-up review,
 
 </div>
 
+<div id="5"></div>
+
 ## 5. Schematic Design
 
+<div id="51"></div>
+
 ### 5.1 Power System
+
+<div id="511"></div>
 
 #### 5.1.1 Power Supply
 
@@ -180,11 +218,17 @@ Use a staged review sequence: schematic review, pin-mux review, power-up review,
 
 VDD_3V3, VDD_1V8, and VDDIO must power up at the same time. Place a 4.7uF capacitor close to each module power pin. Although VDDIO can operate from 1.7V to 3.6V, the datasheet separately notes that PA00–PA11 are fixed at 3.3V and do not follow VDDIO.
 
+<div id="512"></div>
+
 #### 5.1.2 Operating Modes
 
 BOOT_MODE selects boot behavior: high for download mode and low for user mode. Keep the BOOT_MODE network deterministic during reset and production programming. PB32/PWRKEY supports active-high 10s long-press reset and requires a 10k pulldown.
 
+<div id="52-rf"></div>
+
 ### 5.2 Timing and RF
+
+<div id="521"></div>
 
 #### 5.2.1 Clock
 
@@ -213,7 +257,11 @@ The module platform uses a 48MHz crystal oscillator and supports low-power RC os
 
 The module supports an on-board PCB antenna or an external antenna connected through an IPEX-compatible connector. Validate the communication range and RF performance in the final enclosure, not only on an open bench.
 
+<div id="53"></div>
+
 ### 5.3 User Interfaces
+
+<div id="531"></div>
 
 #### 5.3.1 Display
 
@@ -224,6 +272,8 @@ Add 33–100 ohm series resistors on LCD RGB signal lines. Keep RGB, SPI display
 !!! info "Figure 5.3-1: Recommended Development-Board Pin Assignment"
     See Figure 7-6 in DS5602 V0.3.
 
+<div id="532"></div>
+
 #### 5.3.2 Audio
 
 The module exposes analog audio DAC outputs, MIC_BIAS, MIC_ADC_IN, I2S, and PDM-capable pins. The audio DAC is a 24-bit output path supporting 8kHz to 48kHz sample rates with 109dB SNR and dynamic range. The audio ADC is a 24-bit Sigma-Delta input path supporting 8kHz to 48kHz sample rates with 99dB SNR and dynamic range.
@@ -232,19 +282,29 @@ DS5602 V0.3 lists two digital-microphone inputs and two PDM interfaces (PDM1/PDM
 
 Route analog audio away from noisy switching nodes, LCD clocks, and antenna feed structures. Keep MIC_BIAS and MIC_ADC_IN filtering close to the attached microphone circuit.
 
+<div id="533"></div>
+
 #### 5.3.3 Buttons
 
 PB32 is the PWRKEY input and supports active-high 10s long-press reset. Add the required 10k pulldown and ensure the button circuit cannot float during shipping, deep sleep, or power sequencing.
+
+<div id="534-pwm"></div>
 
 #### 5.3.4 Motor and PWM Loads
 
 Pins marked GPTIM in the datasheet's recommended pin-assignment figure support PWM output. Use external drivers for motors, backlights, buzzers, or other loads; do not drive inductive or high-current loads directly from module GPIO.
 
+<div id="54"></div>
+
 ### 5.4 Storage and Connectivity
+
+<div id="541"></div>
 
 #### 5.4.1 Storage
 
 The module family provides SKU-dependent main Flash, 4+8MB OPI-PSRAM, and 1MB backup QSPI-NOR Flash. MPI3 can connect SPI NOR or SPI NAND externally, but PA06–PA11 are connected to module internal Flash by default and are unavailable externally. SDIO and MPI3 share I/O resources and cannot be used at the same time.
+
+<div id="542"></div>
 
 #### 5.4.2 Sensors
 
@@ -256,21 +316,33 @@ UART supports full-duplex operation up to 6Mbps. I2C supports standard 100kbps, 
 
 UART4_TXD on pin 6 and UART4_RXD on pin 7 are the default print serial port and support program download/debug. PA16 and PA17 can be multiplexed as DBG_UART and require 100 ohm series resistors when used for program download/debug.
 
+<div id="544-usb-spi-sdio-i2s"></div>
+
 #### 5.4.4 USB, SPI, SDIO, and I2S
 
 USB2.0 FS supports Host/Device mode with integrated PHY. SPI supports SSP/SPI and Microwire formats; HPSYS SPI reaches up to 48MHz and LPSYS SPI up to 24MHz. SDMMC1 supports SD 3.0, SDIO 3.0, and eMMC 4.5.1 with SDR and DDR modes; SDMMC2 supports SD/SDIO/eMMC functions with SDR modes up to 48MHz. I2S supports master/slave, full duplex, left/right/standard formats, and up to 24-bit PCM width.
 
+<div id="55"></div>
+
 ### 5.5 Manufacturing
+
+<div id="551"></div>
 
 #### 5.5.1 Debug
 
 SWDIO on pin 79 and SWCLK on pin 80 are SWD debug/download pins. Keep SWD accessible on early prototypes and production fixtures. Also expose the default UART4 download/debug path unless the product has another approved programming path.
 
+<div id="552"></div>
+
 #### 5.5.2 Production
 
 Reserve production access for power, ground, boot mode, reset/PWRKEY, SWD, UART download, and any board-level calibration or RF test interface. Final test software should cover boot, Flash, display, touch, audio, USB, sensors, RF communication, sleep/wake behavior, and current consumption.
 
+<div id="6-pcb"></div>
+
 ## 6. PCB Layout
+
+<div id="61"></div>
 
 ### 6.1 Mechanical and Footprint
 
@@ -281,6 +353,8 @@ The module measures 18.0 × 32.9 × 3.1 mm. Use the recommended PCB footprint fr
 
 !!! info "Figure 6.1-2: Recommended PCB Footprint"
     See Figure 8-2 in DS5602 V0.3. Dimensions are in millimeters.
+
+<div id="62"></div>
 
 ### 6.2 Antenna Placement
 
@@ -294,12 +368,16 @@ If the antenna cannot extend beyond the board edge, provide a clearance area of 
 !!! info "Figure 6.2-2: PCB Antenna Clearance Area"
     See Figure 8-5 in DS5602 V0.3.
 
+<div id="63"></div>
+
 ### 6.3 External Antenna Connector
 
 For external antenna designs, the datasheet describes a first-generation external antenna connector compatible with Hirose U.FL series, I-PEX MHF I, and Amphenol AMC connectors.
 
 !!! info "Figure 6.3-1: External Antenna Connector Dimensions"
     See Figure 8-3 in DS5602 V0.3.
+
+<div id="64"></div>
 
 ### 6.4 Layout Checklist
 
@@ -319,7 +397,11 @@ For external antenna designs, the datasheet describes a first-generation externa
 
 </div>
 
+<div id="7"></div>
+
 ## 7. Hardware Validation
+
+<div id="71"></div>
 
 ### 7.1 Electrical Characteristics
 
@@ -375,6 +457,8 @@ Electrical values in this section follow DS5602 V0.3. Absolute maximum ratings a
 
 VDD is the I/O supply. VOH and VOL are measured with a high-impedance load.
 
+<div id="72"></div>
+
 ### 7.2 Power Consumption
 
 <div align="center"><em>Table 7.2-1: Bluetooth and BLE Current at 3.3V, TX Power 0dBm</em></div>
@@ -423,6 +507,8 @@ The BT Sniff measurement used an iPhone 8 Plus with attempt=1. Scan and Both Sca
 
 </div>
 
+<div id="73"></div>
+
 ### 7.3 Schematic Checklist
 
 <div align="center"><em>Table 7.3-1: Schematic Design Checklist</em></div>
@@ -449,6 +535,8 @@ The BT Sniff measurement used an iPhone 8 Plus with attempt=1. Scan and Both Sca
 
 DS5602 V0.3 gives VDDIO an operating range of 1.7–3.6V and states that PA00–PA11 are fixed at 3.3V independently of VDDIO, while checklist item 4 broadly says the module I/O interface level is 3.3V. The specification does not define whether that checklist statement applies to every I/O pin. Do not infer universal 3.3V compatibility; confirm the electrical domain of each selected pin and peripheral with SiFli.
 
+<div id="74"></div>
+
 ### 7.4 Storage, Handling, and Assembly
 
 <div align="center"><em>Table 7.4-1: Storage, Handling, and Assembly Requirements</em></div>
@@ -469,6 +557,8 @@ DS5602 V0.3 gives VDDIO an operating range of 1.7–3.6V and states that PA00–
 
 !!! info "Figure 7.4-1: Reflow Temperature Profile"
     DS5602 V0.3 Figure 9-1 specifies a 25–150°C ramp over 60–90s at 1–3°C/s; 150–200°C preheat for 60–120s; 60–90s above 217°C; a 235–250°C peak; and cooling from the peak to 180°C at -1 to -5°C/s. It specifies SAC305 solder. The lower legend gives a peak-time interval of 30–70s, while the graph separately says soldering time >30s; the specification does not reconcile these annotations. Do not conflate them; confirm the production profile.
+
+<div id="8"></div>
 
 ## 8. Related Documents
 

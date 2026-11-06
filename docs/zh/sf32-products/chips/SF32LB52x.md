@@ -25,6 +25,8 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 
 [^1]: STAR-MC1 是安谋科技（Arm China）的可配置 Armv8-M Mainline 嵌入式 CPU IP。思澈科技（SiFli）在兼容的 SF32 器件中，将其标注为 Arm Cortex-M33 STAR-MC1 应用处理器。其 Cortex-M33 级软件模型有助于沿用既有 Cortex-M33 固件、中间件、RTOS 移植和工具链，但仍需完成器件专用的常规集成工作。CU、SP 和 SE 配置主要在缓存、TCM、XIPU 和 TrustZone 能力上有所不同；Arm 自定义指令/CDE 和协处理器接口属于可选能力，须针对具体 SF32 料号核实。思澈科技（SiFli）文档会依上下文使用 ***Arm Cortex-M33 STAR-MC1*** 或 ***Arm Cortex-M33***。
 
+<div id="_1"></div>
+
 ## 应用场景 { #applications }
 
 **SF32LB52x 适用于**以蓝牙为核心、且成本、集成度与电池续航是主要设计考量的产品，包括：
@@ -72,7 +74,11 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 
 ---
 
+<div id="_2"></div>
+
 ## 特性与规格 { #features-and-specs }
+
+<div id="_3"></div>
 
 ### 计算与存储 { #compute-and-memory }
 
@@ -81,6 +87,8 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 - 32 KB 指令缓存 + 16 KB 数据缓存
 - 512 KB 应用 SRAM + 64 KB 蓝牙控制器 SRAM
 - 合封存储随具体型号变化，可从 1 MB QSPI-NOR 到 16 MB OPI-PSRAM
+
+<div id="_4"></div>
 
 ### 图形与音频 { #graphics-and-audio }
 
@@ -92,6 +100,8 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 - 1 路 24 位音频 ADC，99 dB 信噪比
 - 1 路 24 位音频 DAC，109 dB 信噪比
 
+<div id="_5"></div>
+
 ### 无线连接 { #wireless-connectivity }
 
 - 双模蓝牙 5.3（经典蓝牙 + BLE）
@@ -102,11 +112,15 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 - 专用 Arm Cortex-M33 STAR-MC1 蓝牙控制核心，64 KB SRAM @ 24 MHz
 - 产品简介给出的睡眠电流为 2 μA；系统级待机电流还取决于工作模式和板级漏电
 
+<div id="_6"></div>
+
 ### 安全 { #security }
 
 - AES/HASH/CRC 硬件加速器
 - TRNG
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### 外设与 I/O { #peripherals-and-ios }
 
@@ -122,6 +136,8 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 - RTC 与看门狗定时器
 - 按型号系列提供 44 或 45 路 GPIO
 
+<div id="_7"></div>
+
 ### 电源 { #power-supply }
 
 - **电池供电组：SF32LB520/3/5/7** —— 由单节锂离子/锂聚合物电池直接供电，适用于采用集成充电路径的设计。
@@ -131,6 +147,8 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 - **外部稳压供电 1.8 V 组：SF32LB52D** —— 面向特殊超低功耗 1.8 V 系统，与 3.3 V 型号在电气上不能互换。
 
 电池供电组与外部稳压供电组是相互独立的芯片配置，两个供电系列之间**不引脚兼容**。
+
+<div id="_8"></div>
 
 ## 系列型号 { #family-variants }
 
@@ -164,7 +182,7 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 
 </div>
 
-本表依据思澈科技（SiFli）的[芯片型号指南](https://wiki.sifli.com/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)列出主要型号，并非完整的订购型号目录。当前链接的外部供电版数据手册还列有 **SF32LB52HUD6**（1.8 V、QFN68L、128 Mb PSRAM）；硬件设计指南中也使用了 `52AUx6` 和 `52D/F/HUx6` 等后缀写法。现有资料没有给出一份统一一致的型号表。设计定型前，任何此类 SKU 的订购状态、供电限制、合封存储接口和 I/O 规格都应以对应的最新版数据手册为准。
+本表依据思澈科技（SiFli）的[芯片型号指南](https://wiki.sifli.com/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)列出主要型号，并非完整的订购型号目录。链接的 [DS5202-SF32LB52X 数据手册 V0.2.6](https://downloads.sifli.com/docs/Datasheet/SF32LB52X/DS5202-SF32LB52X-Datasheet%20V0p2p6.pdf) 在修订记录（2025-03-12）中提到 **SF32LB52HUD6**，但当前表 5-7 的订购信息未列出该型号。这条历史记录不能证明该型号目前可订购，也不能核实其规格。硬件设计指南另有 `52AUx6` 和 `52D/F/HUx6` 等后缀写法；设计定型前，请通过思澈科技当前官方资料核实准确的可订购料号及其规格。
 
 ## 集成路径 { #integration-path }
 
@@ -173,7 +191,7 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 1. **验证固件路径。** 从 [SiFli-SDK 快速开始](../../getting-started/sifli/getting-started-sifli-sdk.md)开始，再通过 [SiFli-SDK 工作流](../../develop/platforms/sifli-sdk/overview.md)和[示例](../../develop/examples/index.md)验证所需外设和蓝牙行为。
 2. **选择集成载体。** 如果产品适合使用已集成 RF 的模组，请评估 [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md)；否则选择最接近的 [SF32LB52 开发板](../devkits/SF32LB52-DevKit-LCD.md)，用于早期固件和外设验证。
 3. **进行硬件设计与评审。** 在发布原理图或布局前，使用本地[硬件设计指南](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)，包括其[原理图核对表](../../hardware/chip-guides/SF32LB52x_schematic_checklist.md)和 [PCB 布局核对表](../../hardware/chip-guides/SF32LB52x_pcb_layout_checklist.md)。确认正确的供电系列基线：520/3/5/7、52B/E/G/J 或 52D。
-4. **核对权威来源。** 针对准确的可订购型号和封装，核对适用的[数据手册](#development-resources)，以及思澈科技（SiFli）的 [520/3/5/7 硬件设计指南]或 [52B/D/E/G/J 硬件设计指南]。
+4. **核对权威来源。** 针对准确的可订购型号和封装，核对适用的[数据手册](#development-resources)，以及思澈科技（SiFli）的[520/3/5/7 硬件设计指南][硬件设计指南(520/3/5/7)]或[52B/D/E/G/J 硬件设计指南][硬件设计指南(52B/D/E/G/J)]。
 
 <!-- uf-faq:start -->
 ## 常见问题 { #frequently-asked-questions }
@@ -199,11 +217,17 @@ SPI / DSPI / QSPI / 8080 / EPD / JDI。各接口适用型号见[按器件划分�
 请先阅读 [SF32LB52x 硬件设计指南](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求；投板前再使用原理图与布局检查清单。
 <!-- uf-faq:end -->
 
+<div id="_9"></div>
+
 ## 相关产品 { #related-products }
+
+<div id="_10"></div>
 
 ### 模组 { #module }
 
 [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) 集成 SF32LB525UC6 芯片及其 RF 匹配网络；标准配置下，芯片还合封 8 MB OPI-PSRAM。模组尺寸为 27.9 × 18.0 × 3.1 mm，适合希望采用 SF32LB52 级方案、同时减少芯片级 RF 布局与验证工作量的项目。
+
+<div id="_11"></div>
 
 ### 开发套件 { #development-kits }
 
@@ -211,6 +235,8 @@ SPI / DSPI / QSPI / 8080 / EPD / JDI。各接口适用型号见[按器件划分�
 - [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) 是面向 52B/52J 类外部供电设计的紧凑型核心板，适合快速完成固件、GPIO 与低功耗启动调试。
 - [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) 是 52 系列中尺寸最小的开发板，适合目标产品对尺寸有限制的场景。
 - [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) 更偏向低功耗与电池应用评估，适合做紧凑型方案实验。
+
+<div id="_12"></div>
 
 ### 参考产品 { #reference-products }
 

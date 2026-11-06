@@ -33,6 +33,8 @@ La página del Módulo de comandos AT Bluetooth enlaza esta referencia de V1.2.1
 
 </div>
 
+<div id="_1"></div>
+
 ## Resumen { #overview }
 
 El módulo Bluetooth de modo dual SF32LB57 ofrece al host una interfaz de comandos AT basada en UART para BLE y Bluetooth clásico (BR/EDR). El host puede usar estos comandos para configurar el dispositivo, gestionar conexiones, enviar y recibir datos, y recibir notificaciones de estado no solicitadas del módulo.
@@ -63,12 +65,16 @@ El módulo Bluetooth de modo dual SF32LB57 ofrece al host una interfaz de comand
 
 ## Formato de comandos { #command-format }
 
+<div id="_2"></div>
+
 ### Definición de sintaxis { #syntax-definition }
 
 Los comandos AT se transmiten como texto ASCII y terminan con un retorno de carro `\r` (0x0D). El prefijo es `AT+` para los comandos en formato AT o `AT>` para los comandos en formato PDU. En el SF32LB57, el puerto AT es USART1 y usa el formato 8N1, sin control de flujo por hardware, a una velocidad predeterminada de 460800 baudios. Cada trama AT puede ocupar como máximo 512 bytes.
 
 !!! warning "Confirme el límite de longitud de las tramas PDU"
     La fuente fija un límite de 512 bytes por trama AT, pero también permite un cuerpo PDU de hasta 508 bytes. Al añadir los 8 bytes de entramado del comando ilustrado, se transmitirían 516 bytes por la UART. La fuente no explica cómo se contabilizan esos bytes frente al límite del búfer de recepción. Confirme la longitud máxima de trama PDU que acepta el firmware de destino antes de dimensionar los búferes del host o usar el cuerpo de longitud máxima; no sustituya ninguno de los valores de la fuente por un límite supuesto.
+
+<div id="at"></div>
 
 ### Comandos en formato AT { #at-format-commands }
 
@@ -95,6 +101,8 @@ Los comandos AT se transmiten como texto ASCII y terminan con un retorno de carr
 | Valor devuelto por una consulta | `\r\n+<CMD>:<value>\r\n\r\nOK\r\n` |
 
 </div>
+
+<div id="pdu"></div>
 
 ### Estructura de las tramas PDU { #pdu-format-command-framing }
 
@@ -130,7 +138,11 @@ Los comandos PDU transfieren cargas útiles binarias mientras el módulo está e
 
 Los comandos siguientes se agrupan por función, con las mismas categorías que la tabla de referencia de la página Módulo de comandos AT Bluetooth.
 
+<div id="_3"></div>
+
 ### Sistema y dispositivo { #system-and-device }
+
+<div id="_4"></div>
 
 #### Obtener versión de firmware { #get-firmware-version }
 
@@ -147,6 +159,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_5"></div>
+
 #### Consultar nombre del dispositivo { #query-device-name }
 
 <div align="center"><em>Tabla: Consultar nombre del dispositivo</em></div>
@@ -161,6 +175,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Devuelve el nombre configurado actualmente, sin el sufijo MAC. El sufijo solo afecta al nombre anunciado. |
 
 </div>
+
+<div id="_6"></div>
 
 #### Establecer nombre del dispositivo { #set-device-name }
 
@@ -177,6 +193,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="mac"></div>
+
 #### Consultar la opción de añadir el sufijo MAC al nombre { #query-mac-name-suffix-switch }
 
 <div align="center"><em>Tabla: Lectura del estado del sufijo MAC del nombre</em></div>
@@ -191,6 +209,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Devuelve el estado de la opción de sufijo: 0 = desactivada, 1 = activada. |
 
 </div>
+
+<div id="mac_1"></div>
 
 #### Configurar la opción de añadir el sufijo MAC al nombre { #set-mac-name-suffix-switch }
 
@@ -207,6 +227,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="ieee-1284-id"></div>
+
 #### Consultar ID de dispositivo IEEE 1284 { #query-ieee-1284-device-id }
 
 <div align="center"><em>Tabla: Consultar ID de dispositivo IEEE 1284</em></div>
@@ -221,6 +243,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Devuelve la cadena de ID de dispositivo IEEE 1284 actualmente configurada; vacía si no está configurada. |
 
 </div>
+
+<div id="ieee-1284-id_1"></div>
 
 #### Establecer ID de dispositivo IEEE 1284 { #set-ieee-1284-device-id }
 
@@ -237,6 +261,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_7"></div>
+
 #### Reiniciar dispositivo { #reset-device }
 
 <div align="center"><em>Tabla: Reiniciar dispositivo</em></div>
@@ -252,6 +278,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_8"></div>
+
 #### Restablecimiento de fábrica { #factory-reset }
 
 <div align="center"><em>Tabla: Restablecimiento de fábrica</em></div>
@@ -266,6 +294,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Restaura la configuración AT a los valores predeterminados, borra la configuración de servicio GATT personalizado, las vinculaciones BLE, las vinculaciones de emparejamiento Bluetooth clásico (BR/EDR), y la dirección aleatoria estática BLE, luego responde `OK` y se reinicia. El host debe esperar `IM_READY` después del reinicio. |
 
 </div>
+
+<div id="_9"></div>
 
 #### Restablecimiento de configuración { #configuration-reset }
 
@@ -297,6 +327,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_10"></div>
+
 #### Consultar calibración de desviación de frecuencia { #query-frequency-offset-calibration }
 
 <div align="center"><em>Tabla: Consultar calibración de desviación de frecuencia</em></div>
@@ -311,6 +343,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Devuelve el valor de referencia guardado en la configuración AT; el valor que se aplica realmente se almacena en la partición `FACTORY_CFG_ID_CRYSTAL`. |
 
 </div>
+
+<div id="_11"></div>
 
 #### Establecer calibración de desviación de frecuencia { #set-frequency-offset-calibration }
 
@@ -327,6 +361,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="dut"></div>
+
 #### Entrar en modo de prueba DUT { #enter-dut-test-mode }
 
 <div align="center"><em>Tabla: Entrar en modo de prueba DUT</em></div>
@@ -342,7 +378,11 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_12"></div>
+
 ### Dirección e identidad { #address-and-identity }
+
+<div id="bluetooth"></div>
 
 #### Consultar dirección Bluetooth { #query-bluetooth-address }
 
@@ -359,6 +399,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="bluetooth_1"></div>
+
 #### Establecer dirección Bluetooth { #set-bluetooth-address }
 
 <div align="center"><em>Tabla: Establecer dirección Bluetooth</em></div>
@@ -373,6 +415,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | La dirección se escribe en la configuración y se guarda. Surte efecto después de un reinicio. El valor predeterminado de fábrica es todo ceros, lo que significa que la dirección se genera automáticamente a partir del UID del chip. |
 
 </div>
+
+<div id="ble"></div>
 
 #### Consultar dirección BLE { #query-ble-address }
 
@@ -389,6 +433,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="ble_1"></div>
+
 #### Establecer dirección BLE { #set-ble-address }
 
 <div align="center"><em>Tabla: Establecer dirección BLE</em></div>
@@ -403,6 +449,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Este comando no acepta establecer directamente la dirección BLE; llamarlo siempre devuelve `ERROR`. Una dirección aleatoria estática BLE se genera mediante `AT+RANDOMADDR=1`. |
 
 </div>
+
+<div id="ble_2"></div>
 
 #### Consultar el uso de una dirección aleatoria BLE { #query-ble-random-address-switch }
 
@@ -419,6 +467,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="ble_3"></div>
+
 #### Configurar el uso de una dirección aleatoria BLE { #set-ble-random-address-switch }
 
 <div align="center"><em>Tabla: Configuración del uso de una dirección aleatoria BLE</em></div>
@@ -433,6 +483,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | El ajuste actualiza la configuración. Si se establece en 1 y falla la lectura de la dirección pública, el valor vuelve a 0 y se devuelve `ERROR`. La nueva dirección se guarda en NVDS y surte efecto tras reiniciar. Volver a ejecutar `AT+RANDOMADDR=1` genera la misma dirección aleatoria a partir de la dirección pública, sin cambios. |
 
 </div>
+
+<div id="class-of-device"></div>
 
 #### Consultar clase de dispositivo { #query-class-of-device }
 
@@ -449,6 +501,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="class-of-device_1"></div>
+
 #### Establecer clase de dispositivo { #set-class-of-device }
 
 <div align="center"><em>Tabla: Establecer clase de dispositivo</em></div>
@@ -464,7 +518,11 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_13"></div>
+
 ### Modo de operación y visibilidad { #operating-mode-and-visibility }
+
+<div id="_14"></div>
 
 #### Consultar el estado de visibilidad { #query-discoverable-state }
 
@@ -481,6 +539,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_15"></div>
+
 #### Establecer el estado de visibilidad { #set-discoverable-state }
 
 <div align="center"><em>Tabla: Establecer estado visible</em></div>
@@ -495,6 +555,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | El efecto depende del modo de operación: en modo BLE (`BTMODE=1`), activa o desactiva el advertising BLE; en modo BT (`BTMODE=2`), activa o desactiva Inquiry Scan y Page Scan; en modo dual (`BTMODE=0`), controla conjuntamente el advertising BLE, Inquiry Scan y Page Scan. |
 
 </div>
+
+<div id="gatt"></div>
 
 #### Consultar el estado de advertising GATT { #query-gatt-advertising-state }
 
@@ -511,6 +573,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="gatt_1"></div>
+
 #### Establecer advertising GATT { #set-gatt-advertising }
 
 <div align="center"><em>Tabla: Establecer advertising GATT</em></div>
@@ -525,6 +589,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Inicia o detiene directamente el advertising BLE. No está disponible en el modo solo BT (`BTMODE=2`). |
 
 </div>
+
+<div id="spp"></div>
 
 #### Consultar estado visible de SPP { #query-spp-discoverable-state }
 
@@ -541,6 +607,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="spp_1"></div>
+
 #### Establecer estado visible de SPP { #set-spp-discoverable-state }
 
 <div align="center"><em>Tabla: Establecer estado visible de SPP</em></div>
@@ -555,6 +623,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Devuelve `ERROR` cuando `AT+BTMODE` es 1 (solo BLE). Solo cambia el bit de Inquiry Scan y deja el bit de Page Scan sin cambios. |
 
 </div>
+
+<div id="spp_2"></div>
 
 #### Consultar estado conectable de SPP { #query-spp-connectable-state }
 
@@ -571,6 +641,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="spp_3"></div>
+
 #### Establecer estado conectable de SPP { #set-spp-connectable-state }
 
 <div align="center"><em>Tabla: Establecer estado conectable de SPP</em></div>
@@ -585,6 +657,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Devuelve `ERROR` cuando `AT+BTMODE` es 1 (solo BLE). Solo cambia el bit de Page Scan y deja el bit de Inquiry Scan sin cambios. |
 
 </div>
+
+<div id="bluetooth_2"></div>
 
 #### Consultar modo de operación Bluetooth { #query-bluetooth-operating-mode }
 
@@ -601,6 +675,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="bluetooth_3"></div>
+
 #### Establecer modo de operación Bluetooth { #set-bluetooth-operating-mode }
 
 <div align="center"><em>Tabla: Establecer modo de operación Bluetooth</em></div>
@@ -615,6 +691,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | El ajuste actualiza la configuración y surte efecto después de un reinicio. |
 
 </div>
+
+<div id="_16"></div>
 
 #### Consultar modo de comando { #query-command-mode }
 
@@ -631,6 +709,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_17"></div>
+
 #### Establecer modo de comando { #set-command-mode }
 
 <div align="center"><em>Tabla: Establecer modo de comando</em></div>
@@ -646,7 +726,11 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_18"></div>
+
 ### Emparejamiento y seguridad { #pairing-and-security }
+
+<div id="_19"></div>
 
 #### Borrar información de emparejamiento { #clear-pairing-information }
 
@@ -663,7 +747,11 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_20"></div>
+
 ### Puerto serie y eventos { #serial-port-and-events }
+
+<div id="_21"></div>
 
 #### Consultar tasa de baudios serial { #query-serial-baud-rate }
 
@@ -680,6 +768,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_22"></div>
+
 #### Establecer tasa de baudios serial { #set-serial-baud-rate }
 
 <div align="center"><em>Tabla: Establecer tasa de baudios serial</em></div>
@@ -694,6 +784,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Al establecer la tasa de baudios se actualiza la configuración y se reinicia el dispositivo; la nueva tasa surte efecto después del reinicio. |
 
 </div>
+
+<div id="_23"></div>
 
 #### Consultar la configuración de notificaciones de eventos { #query-event-reporting-switch }
 
@@ -710,6 +802,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_24"></div>
+
 #### Configurar las notificaciones de eventos { #set-event-reporting-switch }
 
 <div align="center"><em>Tabla: Configuración de las notificaciones de eventos</em></div>
@@ -724,6 +818,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | El ajuste actualiza la configuración. Con el valor 1, las notificaciones de conexión, desconexión y disponibilidad no se envían por el puerto serie. |
 
 </div>
+
+<div id="_25"></div>
 
 #### Consultar tiempo de desconexión por inactividad en modo transparente { #query-pass-through-idle-disconnect-time }
 
@@ -740,6 +836,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_26"></div>
+
 #### Establecer tiempo de desconexión por inactividad en modo transparente { #set-pass-through-idle-disconnect-time }
 
 <div align="center"><em>Tabla: Establecer tiempo de desconexión por inactividad en modo transparente</em></div>
@@ -755,7 +853,11 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_27"></div>
+
 ### Gestión de conexiones { #connection-management }
+
+<div id="_28"></div>
 
 #### Consultar el ajuste global de multiconexión { #query-multi-connection-switch }
 
@@ -772,6 +874,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_29"></div>
+
 #### Configurar la multiconexión global { #set-multi-connection-switch }
 
 <div align="center"><em>Tabla: Configuración de la multiconexión global</em></div>
@@ -786,6 +890,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | El ajuste actualiza la configuración. Cuando la multiconexión está desactivada, la capacidad de conexión concurrente está restringida; cuando está activada, opera según los ajustes `AT+BLEMULTICONN` y `AT+BTMULTICONN`. |
 
 </div>
+
+<div id="ble_4"></div>
 
 #### Consultar el número máximo de conexiones concurrentes BLE { #query-maximum-ble-concurrent-connections }
 
@@ -802,6 +908,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="ble_5"></div>
+
 #### Establecer el número máximo de conexiones concurrentes BLE { #set-maximum-ble-concurrent-connections }
 
 <div align="center"><em>Tabla: Establecer el número máximo de conexiones concurrentes BLE</em></div>
@@ -816,6 +924,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Solo puede configurarse si la multiconexión global está habilitada (`AT+MULTICONN=1`). El ajuste actualiza la configuración. Al alcanzar el límite de conexiones, se detiene el advertising (el dispositivo deja de aceptar nuevas conexiones) y se reanuda automáticamente cuando el número de conexiones vuelve a estar por debajo del límite. |
 
 </div>
+
+<div id="classic-bluetooth"></div>
 
 #### Consultar el número máximo de conexiones concurrentes Bluetooth clásico { #query-maximum-classic-bluetooth-concurrent-connections }
 
@@ -832,6 +942,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="classic-bluetooth_1"></div>
+
 #### Establecer el número máximo de conexiones concurrentes Bluetooth clásico { #set-maximum-classic-bluetooth-concurrent-connections }
 
 <div align="center"><em>Tabla: Establecer el número máximo de conexiones concurrentes Bluetooth clásico</em></div>
@@ -846,6 +958,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Solo se puede establecer cuando está activada la multiconexión (`AT+MULTICONN=1`). El ajuste actualiza la configuración. Cuando se alcanza el límite de conexiones, el módulo detiene Page Scan y lo reanuda automáticamente cuando el número de conexiones vuelve a quedar por debajo del límite. |
 
 </div>
+
+<div id="_30"></div>
 
 #### Desconectar { #disconnect }
 
@@ -862,6 +976,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_31"></div>
+
 #### Consultar lista de conexiones { #query-connection-list }
 
 <div align="center"><em>Tabla: Consultar lista de conexiones</em></div>
@@ -877,7 +993,11 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="_32"></div>
+
 ### Transferencia de datos { #data-transfer }
+
+<div id="ble-mtu"></div>
 
 #### Consultar MTU BLE { #query-ble-mtu }
 
@@ -894,6 +1014,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="ble-mtu_1"></div>
+
 #### Establecer MTU BLE { #set-ble-mtu }
 
 <div align="center"><em>Tabla: Establecer MTU BLE</em></div>
@@ -908,6 +1030,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Este valor establece el límite máximo usado durante la negociación de MTU. |
 
 </div>
+
+<div id="spp_4"></div>
 
 #### Enviar datos SPP { #send-spp-data }
 
@@ -924,7 +1048,11 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="gatt_2"></div>
+
 ### GATT personalizado { #custom-gatt }
+
+<div id="gatt_3"></div>
 
 #### Consultar lista de servicios GATT personalizados { #query-custom-gatt-service-list }
 
@@ -941,6 +1069,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="gatt_4"></div>
+
 #### Crear servicio GATT personalizado { #create-custom-gatt-service }
 
 <div align="center"><em>Tabla: Crear servicio GATT personalizado</em></div>
@@ -955,6 +1085,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | `idx` debe ser un solo dígito seguido inmediatamente por una coma. La longitud del UUID debe ser exactamente 4 o 32 caracteres; cualquier otra longitud devuelve `ERROR`. Si la ranura ya está registrada con la pila de protocolo no se puede reconfigurar, y la creación devuelve `ERROR`. Crear un servicio borra cualquier configuración anterior en esa ranura |
 
 </div>
+
+<div id="gatt_5"></div>
 
 #### Eliminar servicio GATT personalizado { #delete-custom-gatt-service }
 
@@ -971,6 +1103,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="gatt_6"></div>
+
 #### Consultar lista de características GATT personalizadas { #query-custom-gatt-characteristic-list }
 
 <div align="center"><em>Tabla: Consultar lista de características GATT personalizadas</em></div>
@@ -985,6 +1119,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Ninguna |
 
 </div>
+
+<div id="gatt_7"></div>
 
 #### Añadir característica GATT personalizada { #add-custom-gatt-characteristic }
 
@@ -1001,6 +1137,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="gatt_8"></div>
+
 #### Iniciar (registrar) servicios GATT personalizados { #start-register-custom-gatt-services }
 
 <div align="center"><em>Tabla: Iniciar (registrar) servicios GATT personalizados</em></div>
@@ -1015,6 +1153,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Registra en la pila de protocolos cada servicio que esté en uso, aún no se haya registrado y contenga al menos una característica. Una vez registrado, el servicio ya no puede retirarse ni reconfigurarse durante la ejecución. No se admite la forma de consulta. |
 
 </div>
+
+<div id="gatt-notifyindicate"></div>
 
 #### Enviar datos de característica GATT (notificar/indicar) { #send-gatt-characteristic-data-notifyindicate }
 
@@ -1031,6 +1171,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="gatt_9"></div>
+
 #### Guardar configuración GATT personalizada en flash { #save-custom-gatt-configuration-to-flash }
 
 <div align="center"><em>Tabla: Guardar configuración GATT personalizada en flash</em></div>
@@ -1045,6 +1187,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Guarda en flash la configuración actual de todos los servicios y características. Solo se conservan los datos de configuración; no se guarda información de ejecución, como el estado de registro. Devuelve `ERROR` si KVDB no está listo o falla la escritura. No se admite la forma de consulta. |
 
 </div>
+
+<div id="gatt_10"></div>
 
 #### Borrar configuración GATT personalizada en flash { #clear-custom-gatt-configuration-in-flash }
 
@@ -1061,6 +1205,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="gatt_11"></div>
+
 #### Consultar la carga automática de GATT al encender { #query-gatt-auto-load-on-power-up-switch }
 
 <div align="center"><em>Tabla: Lectura del ajuste de carga automática de GATT al encender</em></div>
@@ -1075,6 +1221,8 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 | Notas | Ninguna |
 
 </div>
+
+<div id="gatt_12"></div>
 
 #### Configurar la carga automática de GATT al encender { #set-gatt-auto-load-on-power-up-switch }
 
@@ -1091,9 +1239,13 @@ Los comandos siguientes se agrupan por función, con las mismas categorías que 
 
 </div>
 
+<div id="urc"></div>
+
 ## Eventos no solicitados (URC) { #unsolicited-events-urc }
 
 Las siguientes son notificaciones de estado que el módulo emite por iniciativa propia; el host no necesita enviar un comando para recibirlas. Su emisión se controla con `AT+EVT`; en modo silencioso no se envían.
+
+<div id="im_ready"></div>
 
 ### Notificación de disponibilidad IM_READY { #im_ready-ready-indication }
 
@@ -1110,6 +1262,8 @@ Las siguientes son notificaciones de estado que el módulo emite por iniciativa 
 
 </div>
 
+<div id="im_conn"></div>
+
 ### Notificación de conexión IM_CONN { #im_conn-connection-indication }
 
 <div align="center"><em>Tabla: Notificación de conexión IM_CONN</em></div>
@@ -1124,6 +1278,8 @@ Las siguientes son notificaciones de estado que el módulo emite por iniciativa 
 | Notas | En modo de comando se emite una notificación por cada conexión establecida, con el identificador, la dirección del dispositivo remoto y la MTU. En modo transparente solo se notifica la primera conexión (cuando el número de conexiones es 1), sin parámetros. La emisión se controla con `AT+EVT`; el ajuste `AT+EVT=1` suprime estas notificaciones. |
 
 </div>
+
+<div id="im_disconn"></div>
 
 ### Notificación de desconexión IM_DISCONN { #im_disconn-disconnect-indication }
 
@@ -1142,6 +1298,8 @@ Las siguientes son notificaciones de estado que el módulo emite por iniciativa 
 
 ## Comandos en formato PDU { #pdu-format-commands }
 
+<div id="pdu-opcode-0x0101"></div>
+
 ### Notificación de datos PDU (opcode 0x0101) { #pdu-data-report-opcode-0x0101 }
 
 <div align="center"><em>Tabla: Notificación de datos PDU (módulo → host, opcode 0x0101)</em></div>
@@ -1156,6 +1314,8 @@ Las siguientes son notificaciones de estado que el módulo emite por iniciativa 
 | Notas | En modo de comando, cuando se escriben datos en una característica BLE personalizada o se reciben por Bluetooth clásico SPP, el módulo los reporta al host en el formato anterior; en modo transparente, los datos se emiten directamente. |
 
 </div>
+
+<div id="pdu-notify-opcode-0x0101"></div>
 
 ### Envío de datos en modo PDU (selección automática de característica de notificación, opcode 0x0101) { #pdu-mode-send-data-auto-select-notify-characteristic-opcode-0x0101 }
 
@@ -1172,6 +1332,8 @@ Las siguientes son notificaciones de estado que el módulo emite por iniciativa 
 
 </div>
 
+<div id="pdu-opcode-0x0102"></div>
+
 ### Envío de datos en modo PDU (especificar servicio y característica, opcode 0x0102) { #pdu-mode-send-data-specify-service-and-characteristic-opcode-0x0102 }
 
 <div align="center"><em>Tabla: Envío de datos en modo PDU (especificar servicio y característica, opcode 0x0102)</em></div>
@@ -1186,6 +1348,8 @@ Las siguientes son notificaciones de estado que el módulo emite por iniciativa 
 | Notas | Solo se admiten conexiones BLE; si la conexión resuelta es de tipo SPP, se descarta la trama. `svc_idx` debe corresponder a un servicio personalizado registrado y `char_idx` debe ser menor que el número de características de ese servicio; de lo contrario, se descarta la trama. La característica especificada debe tener la propiedad Notify o Indicate; si no, se descarta la trama. `conn_hdl` se resuelve con la misma regla que `0x0101` (primero el identificador BLE numerado desde 1 y luego el valor sin procesar). La trama debe ir seguida inmediatamente de `\r`. |
 
 </div>
+
+<div id="pdu_1"></div>
 
 ### Desconexión en modo PDU { #pdu-mode-disconnect }
 
@@ -1202,6 +1366,8 @@ Las siguientes son notificaciones de estado que el módulo emite por iniciativa 
 
 </div>
 
+<div id="pdu-im_conn-im_disconn"></div>
+
 ### Indicación de estado de conexión PDU (IM_CONN / IM_DISCONN) { #pdu-connection-status-indication-im_conn-im_disconn }
 
 <div align="center"><em>Tabla: Indicación de estado de conexión PDU (IM_CONN / IM_DISCONN)</em></div>
@@ -1217,7 +1383,11 @@ Las siguientes son notificaciones de estado que el módulo emite por iniciativa 
 
 </div>
 
+<div id="_33"></div>
+
 ## Apéndice { #appendix }
+
+<div id="class-of-device_2"></div>
 
 ### Valores comunes de clase de dispositivo { #common-class-of-device-values }
 

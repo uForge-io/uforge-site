@@ -2,9 +2,9 @@
 icon: lucide/gamepad-2
 description: "OpenSiFli의 Arduboy2 포트를 평가하고, 게임 루프와 주변 장치 경계를 검증하며, SF32 게임 지향 제품이 본격적인 설계 단계로 넘어갈 준비가 되었는지 판단하기 위한 재현 가능한 엔지니어링 경로입니다."
 tags:
-    - Projects
+    - 프로젝트
     - Arduino
-    - Graphics
+    - 그래픽
 ---
 
 # SF32LB52용 Arduboy2 포트 { #arduboy2-on-sifli }

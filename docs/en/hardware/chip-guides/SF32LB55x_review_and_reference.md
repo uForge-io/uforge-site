@@ -56,7 +56,7 @@ A typical SF32LB55x product includes the MCU, power tree, crystals, RF matching 
 
 3. **Why can soldering the battery cause the chip to hang, and how can this be prevented?** Poor grounding of the soldering iron can cause a surge. Add surge and ESD protection at the battery interface and ensure the iron is properly grounded.
 
-4. **Why does a wake button fail to wake the MCU from Hibernate?** Only the six LCPU wake inputs, GPIO43–GPIO48, can wake the MCU from Hibernate; the HCPU-side GPIO0–GPIO3 cannot.
+4. **Why does a wake button fail to wake the MCU from Hibernate?** Only the six LCPU wake inputs, GPIO43–GPIO48, can wake the MCU from Hibernate; the HCPU-side GPIO0–GPIO3 cannot. These are logical GPIO identifiers. On BGA125/145/169, HCPU GPIO0–GPIO3 map to PA80/PA79/PA78/PA77 and LCPU GPIO43–GPIO48 map to PB43–PB48; QFN68 uses the GPIO names shown.
 
 5. **Why can a G-sensor or heart-rate sensor draw too much power or malfunction during low-power debugging?** Its firmware runs on the LCPU, so its I2C, SPI, control, and interrupt signals must all use LCPU interfaces. Assigning any of them to an HCPU interface can increase power or cause malfunction.
 

@@ -187,7 +187,7 @@ For best results, treat the checklist as a sign-off record rather than a reading
 
 [SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## Continue the Design Guide { #continue-the-design-guide }
+## 5. Continue the Design Guide { #continue-the-design-guide }
 
 The full guide continues across the pages below. Each covers one stage of the design process and can be reached from here.
 

@@ -83,6 +83,12 @@ ezip -convert png_filename.png -rgb888 -binfile 2
 
 출력은 `png_filename.bin`이며, 헤더의 형식 값이 EZIP으로 설정됩니다.
 
+SF32LB57에만 `-winsize 2048`을 추가하십시오. 다른 칩에는 이 옵션을 사용하지 마십시오.
+
+```bash
+ezip -convert png_filename.png -rgb565 -binfile 2 -winsize 2048
+```
+
 ### PIXEL LVGL C 배열 { #pixel-lvgl-c-array }
 
 ```bash

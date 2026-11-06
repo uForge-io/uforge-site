@@ -8,6 +8,8 @@ tags:
 
 # SF32LB55x { #sf32lb55x }
 
+<div id="_1"></div>
+
 ## 概览 { #overview }
 
 SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产品，这类产品需要比入门级蓝牙（Bluetooth）MCU 更强的显示能力、更充裕的内存余量和更多的封装选择。
@@ -21,6 +23,8 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 思澈科技（SiFli）的芯片型号指南还指出，SF32LB55x 的定义早于后续的 52/56/58 系列，因此其型号后缀并未完全遵循这些系列采用的编号规则。选型时应以完整的可订购料号和对应封装的能力表为准，不要仅凭后缀推断器件的全部特性。
 
 [^1]: STAR-MC1 是安谋科技（Arm China）的可配置 Armv8-M Mainline 嵌入式 CPU IP。思澈科技（SiFli）在兼容的 SF32 器件中，将其标注为 Arm Cortex-M33 STAR-MC1 应用处理器。其 Cortex-M33 级软件模型有助于沿用既有 Cortex-M33 固件、中间件、RTOS 移植和工具链，但仍需完成器件专用的常规集成工作。CU、SP 和 SE 配置主要在缓存、TCM、XIPU 和 TrustZone 能力上有所不同；Arm 自定义指令/CDE 和协处理器接口属于可选能力，具体功能以目标 SF32 料号为准。思澈科技（SiFli）文档会依上下文使用 ***Arm Cortex-M33 STAR-MC1*** 或 ***Arm Cortex-M33***。
+
+<div id="_2"></div>
 
 ## 应用场景 { #applications }
 
@@ -42,6 +46,8 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 - 用户可编程的低功耗处理器
 - 比 SF32LB52x 更多的 GPIO 或更密集的封装选项
 - NOR、NAND、eMMC、QSPI-PSRAM 或 OPI-PSRAM 的外部存储灵活性
+
+<div id="_3"></div>
 
 ## 开发资源 { #development-resources }
 
@@ -77,7 +83,11 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 
 ---
 
+<div id="_4"></div>
+
 ## 特性与规格 { #features-and-specs }
+
+<div id="_5"></div>
 
 ### 计算与存储 { #compute-and-memory }
 
@@ -88,6 +98,8 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 - 1,088 KB 应用 SRAM，其中包含 64 KB 保持型 SRAM
 - 224 KB 低功耗 SRAM，全部为保持型 SRAM
 - 支持 NOR、NAND、eMMC、QSPI-PSRAM 和 OPI-PSRAM 外部存储
+
+<div id="ai"></div>
 
 ### 图形、显示与 AI { #graphics-display-and-ai }
 
@@ -101,6 +113,8 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 - 双 LCD 控制器；常开显示（always-on display）接口和双屏能力取决于所选型号与封装
 - 面向 TinyML 的神经网络矩阵加速器，最高 1.92 GOPS、5.73 TOPS/W
 
+<div id="_6"></div>
+
 ### 无线连接 { #wireless-connectivity }
 
 - 低功耗蓝牙（Bluetooth Low Energy，BLE）5.2
@@ -109,11 +123,15 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 - 最大发射功率 10 dBm
 - 接收峰值电流：3.3 V 下 2.0 mA
 
+<div id="_7"></div>
+
 ### 安全 { #security }
 
 - AES 与 CRC 硬件加速器
 - 真随机数发生器（TRNG）
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### 外设与 I/O { #peripherals-and-ios }
 
@@ -144,6 +162,8 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 - 外设任务控制器（PTC）
 - GPIO 数量因封装而异，详见下方封装表和资料差异说明
 
+<div id="_8"></div>
+
 ### 电源与封装 { #power-supply-and-package }
 
 - 供电范围因型号而异：SS6600A8 为 2.97 V 至 3.63 V；551U4O5 和表列 BGA 型号为 1.71 V 至 3.63 V
@@ -152,6 +172,8 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 - RTC 唤醒下睡眠电流：600 nA
 - 引脚唤醒下睡眠电流：280 nA
 - 封装选项：QFN68L、BGA145、BGA169
+
+<div id="_9"></div>
 
 ## 系列型号 { #family-variants }
 
@@ -189,6 +211,8 @@ SF32LB55x 提供 QFN 与 BGA 封装。由于 GPIO 数量、合封存储、显示
 
 针对 SF32LB557VD3A6，思澈科技（SiFli）当前的芯片型号指南和 DS5501 V1.7.2 数据手册表 0-1 均列出 HCPU 71 路 + LCPU 42 路，共 113 路 GPIO。但该数据手册的特性摘要和封装汇总，以及 PB0001 V1.3 产品简介，又将 BGA169 列为 119 路 GPIO（HCPU 71 路 + LCPU 48 路）。因此，官方资料之间存在冲突，DS5501 数据手册内部也不一致。本页按型号明细表和当前芯片型号指南采用 113 路。分配管脚或定版前，请根据所选封装的球位图核实可用 GPIO，并向思澈科技（SiFli）确认可订购料号；同时核对各型号的供电与温度等级、完整料号及合封存储配置。相关资料见 [DS5501 V1.7.2 数据手册][数据手册]、[PB0001 V1.3 产品简介][产品简介]和[思澈科技（SiFli）芯片型号指南]。BGA145 和 BGA169 封装尺寸均为 7 × 7 × 0.94 mm，球距为 0.5 mm。
 
+<div id="_10"></div>
+
 ## 集成路径 { #integration-path }
 
 可按以下步骤，将 SF32LB55x 的初步选型推进到设计验证：
@@ -202,7 +226,7 @@ SF32LB55x 提供 QFN 与 BGA 封装。由于 GPIO 数量、合封存储、显示
 ## 常见问题 { #frequently-asked-questions }
 
 **SF32LB55x 的主要规格是什么？**
-SF32LB55x 配备应用 CPU（Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33 @48 MHz，用户可编程内核）和 1,312 KB SRAM，仅支持低功耗蓝牙（BLE）。图形：ePicasso 1.0。封装：QFN68L / BGA145 / BGA169（7 × 7 mm (QFN68L)）。USB 2.0 FS。
+SF32LB55x 配备应用 CPU（Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33 @48 MHz，用户可编程内核）和 1,312 KB SRAM，仅支持低功耗蓝牙（BLE）。图形：ePicasso 1.0。本页前文的系列概述将图形引擎称为 ePicasso 2.5D。现有资料未说明这一名称与 ePicasso 1.0 的关系；请勿据此推断两者等同或代表代际变化，并应依据当前官方资料核实准确订购型号的图形能力。封装：QFN68L / BGA145 / BGA169（7 × 7 mm (QFN68L)）。USB 2.0 FS。
 
 **SF32LB55x 支持哪些显示接口？**
 SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI。各接口适用型号见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。这是整个系列的接口汇总，并非每个订货型号或封装都支持全部接口；请查阅所链接的接口矩阵。
@@ -220,11 +244,17 @@ SS6600A8 需要 2.97–3.63 V；本页列出的 SF32LB551U4O5 和 BGA 型号采�
 请先阅读 [SF32LB55x 硬件设计指南](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求；投板前再使用原理图与布局检查清单。
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## 相关产品 { #related-products }
+
+<div id="_12"></div>
 
 ### 开发套件 { #development-kits }
 
 建议以官方硬件应用说明、参考原理图和核对表作为封装选择、电源树定义、显示接口规划、存储选型、RF 布局以及量产测试规划的起点。
+
+<div id="_13"></div>
 
 ### 参考产品 { #reference-products }
 

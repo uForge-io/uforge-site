@@ -6,7 +6,11 @@ tags:
   - Chip
 ---
 
+<div id="sf32"></div>
+
 # SF32 Family
+
+<div id="_1"></div>
 
 ## Introduction
 
@@ -39,6 +43,8 @@ The **LB** (Low-Power Bluetooth) series is the first SF32 product line. Addition
     [Plan production work :material-arrow-right:](../../hardware/design-for-production.md){ .uf-hw-link-green }
 
 </div>
+
+<div id="_2"></div>
 
 ## Key Features
 

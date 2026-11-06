@@ -160,7 +160,7 @@ Bluetooth接続がすでに確立された後にのみ共有が有効化され�
 
 ## PANベースのOTA配信 { #pan-based-ota-delivery }
 
-PANサンプルでは、デフォルトでOTAが有効です。`pan_cmd ota_pan`を実行すると、ネットワーク通信に使っているBluetooth PANリンク経由でファームウェアイメージをダウンロードしてインストールします。これはSiFli-SDKのファームウェア更新サービスに記載されたDFU_PAN OTA経路を利用します。すでにPANでデータ通信を行い、OTA用に別の転送方式を追加したくない製品に適しています。PANとBLEなどの更新方式の違いは[OTAとDFU](../../develop/firmware-topics/ota-dfu.md)を参照してください。転送方式にかかわらず、ロールバックと障害復旧の動作を計画してください。
+`example/bt/pan`では、`pan_cmd ota_pan`が`main.c`で設定されたURLからファームウェアイメージをダウンロードしてインストールします。READMEは`peripheral_with_ota`も参照しています。これは、`check_dynamic_cmd`と`reset_to_dload_cmd`を使う別の`example/bt/pan_ota` DFU_PANサンプルとは区別してください。これらは別々の更新経路です。対象SDKリビジョンを確認し、製品で使う経路の復旧方法を計画してください。[OTAとDFU](../../develop/firmware-topics/ota-dfu.md)ではPANとBLEなどの更新方式を比較しています。
 
 READMEは、選択したターゲットに適切なOTA用`ptab.json`がない場合のビルド失敗も説明しています。掲載画面ではDFUサブプロジェクトとミドルウェアのファームウェア更新機能を無効にし、OTAなしのサンプルを試しています。この切り分けではOTAが使えなくなるため、更新機能が必要な製品の出荷構成にはできません。OTAを有効にする前に、適切なパーティション構成と更新設定を用意して検証してください。
 

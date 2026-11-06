@@ -73,7 +73,7 @@ El README de cada ejemplo indica las placas compatibles. La configuración del m
 
 ## Ejemplos DFU v2 del SDK { #dfu-v2-sdk-examples }
 
-<div align="center"><em>Tabla: Ejemplos oficiales DFU v2 de SiFli-SDK para SF32LB58x</em></div>
+<div align="center"><em>Tabla: Rutas de los ejemplos DFU v2 de SiFli-SDK</em></div>
 
 <div align="center" markdown>
 

@@ -18,8 +18,8 @@ Zephyr API, devicetree, Kconfig, 이식성 있는 RTOS 구조가 필요하거나
 
 - [OpenSiFli/zephyr-downstream](https://github.com/OpenSiFli/zephyr-downstream)
 - [OpenSiFli/zephyr-hal_sifli-downstream](https://github.com/OpenSiFli/zephyr-hal_sifli-downstream)
-- [Zephyr project documentation](https://docs.zephyrproject.org/)
-- [SF32LB52-DevKit-LCD in the Zephyr board documentation](https://docs.zephyrproject.org/latest/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)
+- [Zephyr 프로젝트 문서](https://docs.zephyrproject.org/)
+- [Zephyr 보드 문서의 SF32LB52-DevKit-LCD](https://docs.zephyrproject.org/latest/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)
 
 ## 검증된 다운스트림 보드 { #verified-downstream-board }
 

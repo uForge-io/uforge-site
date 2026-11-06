@@ -8,10 +8,14 @@ tags:
     - 芯片
 ---
 
+<div id="sf32lb57x"></div>
+
 # SF32LB57x 硬件设计指南 — 最小系统与电源 { #sf32lb57x-hardware-design-guide-minimum-system-power }
 
 !!! note "SF32LB57x 硬件设计指南的一部分"
     原理图设计指导现分为三页：本页（第 5.1-5.2 节：最小系统设计与电源系统）、[时钟、RF 与用户接口](SF32LB57x_schematic_clock_rf_interfaces.md)（第 5.3-5.5 节），以及[存储与制造](SF32LB57x_schematic_storage_mfg.md)（第 5.6-5.7 节）。如需选型和完整设计流程，请从 [SF32LB57x 硬件设计指南概览](SF32LB57x_hardware_design_guide.md) 开始。
+
+<div id="5"></div>
 
 ## 5. 原理图设计指导 { #5-schematic-design-guidelines }
 
@@ -33,7 +37,11 @@ tags:
 
 </div>
 
+<div id="51"></div>
+
 ### 5.1. 最小系统设计 { #51-minimum-system-design }
+
+<div id="511"></div>
 
 #### 5.1.1. 最小系统设计顺序 { #511-minimum-system-design-sequence }
 
@@ -45,6 +53,8 @@ tags:
 4. 定义电源树框架、充电/OVP 路径、BUCK 电感/电容和默认电源状态，并在第 5.2 节完成详细评审。
 5. 选择 48 MHz 和 32.768 kHz 晶体，并在第 5.3 节确认校准方案。
 6. 预留 DBG-UART、SWD、启动模式、电源、地和治具测试点。
+
+<div id="512"></div>
 
 #### 5.1.2. 最小系统原理图 { #512-minimum-system-schematics }
 
@@ -78,6 +88,8 @@ SF32LB57x 提供多种最小系统原理图变体。请使用同时匹配封装�
 
 <div align="center"><em>图 5.1-6：BGA112 3.3 V 供电系列最小系统</em></div>
 <!-- /BGA-ONLY -->
+
+<div id="513"></div>
 
 #### 5.1.3. 启动存储与 Strap 配置 { #513-boot-storage-and-strap-configuration }
 
@@ -114,6 +126,8 @@ SF32LB57x 提供多种最小系统原理图变体。请使用同时匹配封装�
 <div align="center"><em>图 5.1-7：Bootstrap 管脚推荐电路</em></div>
 
 启动存储介质的供电应按介质类型和供电系列分别设计。电池供电系列中，外接 NOR Flash 使用 `VDD33_VOUT1` 供电；外接 SPI NAND Flash 应在 `VDD33_VOUT1` 后级增加负载开关；外接 SD NAND Flash 或 eMMC 使用外部 LDO。3.3 V 供电系列的外接启动介质统一使用外部 LDO。思澈科技（SiFli）推荐使用 `PA21` 作为外部启动介质电源开关的使能脚，高电平开启、低电平关闭；若电池供电型号未引出 `PA21`，来源指南允许改用默认上拉的 GPIO。启动阶段必须保证介质电源处于可用状态。若合封存储已经占用 MPI3，外部 MPI3 仅支持 SD NAND 或 eMMC，不应再挂载外部 SPI NOR/SPI NAND。
+
+<div id="514"></div>
 
 #### 5.1.4. 调试与下载访问 { #514-debug-and-download-access }
 
@@ -153,7 +167,11 @@ SF32LB57x 提供多种最小系统原理图变体。请使用同时匹配封装�
 
 `PA18`/`PA19` 默认用于 DBG-UART，`PA43`/`PA44` 默认用于 SWD；SWD 也可切换到 `PA18`/`PA19`。芯片支持 DBG-UART、SWD、普通 UART 和 USB 四种下载方式：常规启动模式仅支持 DBG-UART 和 SWD，BOOT 模式可启用四种方式。BOOT 模式与 SWD 引脚切换由 `PA00`、BOOT 寄存器、`PA01` 及上位机 BOOT 开关共同决定；设计量产和恢复流程时，应按来源指南中的完整模式表核对，不能只依据单一管脚状态推断下载方式。
 
+<div id="52"></div>
+
 ### 5.2. 电源系统 { #52-power-system }
+
+<div id="521"></div>
 
 #### 5.2.1. 电源树规划 { #521-power-tree-planning }
 
@@ -173,6 +191,8 @@ SF32LB57x 提供多种最小系统原理图变体。请使用同时匹配封装�
 
 </div>
 
+<div id="522"></div>
+
 #### 5.2.2. 电池供电系列 { #522-battery-powered-variants }
 
 电池供电系列通常涉及 `VBUS`、`VBAT`、`VCC`、`VSYS`、`BUCK_LX`、`BUCK_FB`、内部 LDO 输出、音频电源和 RF 电源。
@@ -186,6 +206,8 @@ SF32LB57x 提供多种最小系统原理图变体。请使用同时匹配封装�
 - `VDD33_VOUT1`、`VDD33_VOUT2` 等内部 LDO 输出只能用于规格明确允许的负载，不应作为通用外设电源。注意：来源指南的低功耗说明图文将外部传感器列为 `VDD33_VOUT1` 的负载，但同一指南的电源自查表规定该电源仅用于合封/外部 NOR/NAND Flash 和 `AVDD33_AUD`，并禁止驱动其他外设。该处存在来源冲突；在思澈科技（SiFli）澄清前，不要将传感器接到 `VDD33_VOUT1`。
 - `AVDD_BRF`、`AVDD33_AUD` 应从推荐的电源轨取电，并就近滤波。
 
+<div id="523-33-v"></div>
+
 #### 5.2.3. 3.3 V 供电系列 { #523-33-v-supply-variants }
 
 3.3 V 供电系列由外部 3.3 V 电源为 `PVDD`、`AVDD33`、`AVDD_BRF`、`AVDD33_AUD` 等电源域供电；`VDDIOA` 根据具体订购型号选择 1.8 V 或 3.3 V。
@@ -197,6 +219,8 @@ SF32LB57x 提供多种最小系统原理图变体。请使用同时匹配封装�
 - 使用 `VBATS` 检测电池电压时，应确认输入范围并配置合适滤波。
 - 3.3 V 供电系列的所有外接启动存储介质统一由外部 LDO 供电；其使能脚推荐使用 `PA21`。
 - 所有内部参考或 LDO 输出管脚只允许连接所需的外部电容，不应接外部电压。
+
+<div id="524"></div>
 
 #### 5.2.4. 电源电容与用途速查 { #524-power-capacitor-and-usage-quick-reference }
 
@@ -224,6 +248,8 @@ SF32LB57x 提供多种最小系统原理图变体。请使用同时匹配封装�
 
 </div>
 
+<div id="525-buck"></div>
+
 #### 5.2.5. BUCK 电感与反馈 { #525-buck-inductor-and-feedback }
 
 BUCK 电感推荐参数：
@@ -247,6 +273,8 @@ PCB 要点：
 - `BUCK_FB` 反馈线宽不宜过细，建议不小于 0.25 mm。
 - 电感附近应保持完整参考地，避免噪声耦合到晶体、RF、音频和 GPADC 走线。
 - 若整机包含 GPS、心率、ECG、模拟麦克风等敏感模组，可在 BUCK_LX 附近为 EMI 调试器件预留可选焊盘；最终器件值应在整机 EMC 验证期间确定。
+
+<div id="526-ovp"></div>
 
 #### 5.2.6. 充电与 OVP { #526-charging-and-ovp }
 
@@ -274,6 +302,8 @@ OVP 选型要求：
 !!! warning "VBUS 范围差异"
     当前封装电源表和 OVP 正文将 `VBUS` 输入列为 4.5–5.5 V，自查表仍要求 4.6–5.5 V。在思澈科技（SiFli）确认前，按较严格的 4.6 V 下限设计。
 
+<div id="527"></div>
+
 #### 5.2.7. 低功耗电源策略 { #527-low-power-supply-strategy }
 
 低功耗行为应在原理图阶段纳入设计。
@@ -286,6 +316,8 @@ OVP 选型要求：
 - I2C 上拉电源应与对应外设使用同一电源轨，避免睡眠漏电。
 - 常开器件优先选择低 Iq、低关断电流型号。
 - 用 `VSYS` 或常供电 LDO 作为 GPIO 上拉电源时，应将该漏电流计入睡眠电流预算。
+
+<div id="528"></div>
 
 #### 5.2.8. 电源与充电参考图 { #528-power-and-charging-reference-figures }
 
@@ -334,6 +366,8 @@ SF32LB57x 参考原理图和布局示例覆盖电源树、上电时序、充电�
 ![图 5.2-9：稳压输出型 OVP 应用电路](../../sf32-products/chips/assets/57x/SF32LB57x-OVP-REGU.png){ width="100%" loading="lazy" }
 
 <div align="center"><em>图 5.2-9：稳压输出型 OVP 应用电路</em></div>
+
+<div id="529"></div>
 
 #### 5.2.9. 封装与供电系列电气约束 { #529-package-and-power-family-electrical-constraints }
 
@@ -400,9 +434,13 @@ SF32LB57x 的电源要求随封装和供电系列不同而变化。下表汇总�
 </div>
 
 
+<div id="5210"></div>
+
 #### 5.2.10. 工作模式与唤醒源 { #5210-operating-modes-and-wake-sources }
 
 工作模式与唤醒源属于电源系统评审范围，因为它们决定每种低功耗状态下哪些电源轨、上拉、外部负载和可唤醒 GPIO 仍然保持有效。
+
+<div id="5211"></div>
 
 #### 5.2.11. 工作模式 { #5211-power-modes }
 
@@ -422,6 +460,8 @@ SF32LB57x 系列支持十路可在待机（Standby）和休眠（Hibernate）模
 
 </div>
 
+<div id="5212"></div>
+
 #### 5.2.12. 唤醒设计建议 { #5212-wake-design }
 
 - 需要硬件唤醒的按键、触摸、传感器中断应连接到支持唤醒的 GPIO。
@@ -429,6 +469,8 @@ SF32LB57x 系列支持十路可在待机（Standby）和休眠（Hibernate）模
 - 应评审待机和休眠状态下的 IO 保持、高阻、上拉、下拉和外设供电状态。
 - USB 接入唤醒需要将 VBUS 分压电路接到支持唤醒的 GPIO，并确保 IO 电压正确。
 - 蓝牙唤醒、RTC 唤醒和外部中断唤醒应与软件低功耗策略一起评审。
+
+<div id="5213"></div>
 
 #### 5.2.13. 低功耗验证建议 { #5213-low-power-validation }
 
@@ -469,6 +511,8 @@ EVT 阶段至少应测量以下状态：
 </div>
 
 每次测量均应记录固件版本、供电电压、电池模拟器设置、外设连接状态、蓝牙连接状态和环境温度。
+
+<div id="5214"></div>
 
 #### 5.2.14. 完整电源管脚参考表 { #5214-full-power-supply-pin-reference }
 

@@ -223,7 +223,7 @@ Os principais domínios de falha são sistema de arquivos/ROM, mapper/emulador, 
 
 </div>
 
-**Critério de saída do ponto de controle 4:** a alteração e os direitos do conteúdo foram revisados, a imagem original pode ser restaurada e todos os testes da Etapa 2 aplicáveis à ROM selecionada foram aprovados.
+**Critério de saída do ponto de controle 4:** a alteração e os direitos do conteúdo foram revisados, a imagem original pode ser restaurada e todos os testes da Etapa 2 para a ROM selecionada foram aprovados.
 
 ## Etapa 5 — Revisão de prontidão do produto { #stage-5-product-readiness-review }
 

@@ -55,7 +55,7 @@ Este checklist se baseia na planilha da SiFli SF32LB58x Schematic&PCB checklist 
 | 12 | A trilha de alimentação de AVDD33_ANA tem largura mínima de 6 mil | Obrigatório |
 | 13 | A trilha de alimentação de AVDD_BRF tem largura mínima de 8 mil | Obrigatório |
 | 14 | A trilha de alimentação de AVDD33_AUD tem largura mínima de 6 mil | Obrigatório |
-| 15 | A trilha de alimentação de AVDD33_DSI tem largura mínima de 8 mil | Obrigatório |
+| 15 | A trilha de alimentação de AVDD18_DSI tem largura mínima de 8 mil | Obrigatório |
 
 </div>
 
@@ -86,7 +86,7 @@ Este checklist se baseia na planilha da SiFli SF32LB58x Schematic&PCB checklist 
 | 17 | O capacitor de AVDD33_ANA está instalado próximo ao pino correspondente | Obrigatório |
 | 18 | O capacitor de AVDD_BRF está instalado próximo ao pino correspondente | Obrigatório |
 | 19 | O capacitor de AVDD33_AUD está instalado próximo ao pino correspondente | Obrigatório |
-| 20 | O capacitor de AVDD33_DSI está instalado próximo ao pino correspondente | Obrigatório |
+| 20 | O capacitor de AVDD18_DSI está instalado próximo ao pino correspondente | Obrigatório |
 
 </div>
 

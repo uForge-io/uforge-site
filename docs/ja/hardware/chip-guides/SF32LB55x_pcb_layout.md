@@ -17,6 +17,16 @@ tags:
 
 選択したQFNまたはBGAパッケージの図面とランドパターン要件を、実装を依頼するメーカーの対応能力と照合してください。BGAパッケージでは、ボールのファンアウト、ビア構成、ソルダーマスクのルール、製造限界を早めに確認します。
 
+SiFliの資料には、パッケージ別のBGAおよびQFNファンアウト例が掲載されています。これらは参考例です。実際のブレークアウトは選択したパッケージと基板メーカーの製造ルールに依存するため、設計ごとに確認してください。
+
+![BGAパッケージのファンアウト例](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA-FANOUT-PCB.png)
+
+<div align="center"><em>図 6.1-1：BGAパッケージのファンアウト参考図</em></div>
+
+![QFNパッケージのファンアウト例](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/assets/55x/SF32LB55x-QFN-FANOUT-PCB.png)
+
+<div align="center"><em>図 6.1-2：QFNパッケージのファンアウト参考図</em></div>
+
 #### 6.1.1. 基板積層と製造工程の参考 { #611-stack-up-and-fabrication }
 
 SF32LB55xシリーズは、基板の片面または両面に部品を実装できます。

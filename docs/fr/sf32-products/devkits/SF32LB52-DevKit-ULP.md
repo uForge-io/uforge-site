@@ -175,7 +175,13 @@ Matériel optionnel :
 - Batterie Li-ion de plus de 450 mAh
 - Second câble USB si le débogage UART et le test USB natif sont nécessaires en même temps
 
-### Configuration de la carte et modes de démarrage
+<div id="_1"></div>
+<div id="board-einrichtung-und-startmodi"></div>
+<div id="configuracao-da-placa-e-modos-de-inicializacao"></div>
+<div id="configuracion-y-modos-de-arranque-de-la-placa"></div>
+<div id="configuration-de-la-carte-et-modes-de-demarrage"></div>
+
+### Configuration de la carte et modes de démarrage { #board-setup-and-boot-modes }
 
 Reliez l'hôte au port UART USB Type-C de la carte. Ouvrez ensuite SifliTrace et sélectionnez le bon port COM.
 
@@ -256,7 +262,7 @@ Le connecteur à 30 broches expose l'alimentation, l'USB, les signaux de capteur
 
 La carte utilise un chemin d'affichage AMOLED et expose un jeu de signaux QSPI sur FPC à 22 broches. Le tableau de SiFli V1.0.0 marque les broches 5 à 10 comme NC ; le tableau ci-dessous comprend les 22 positions et nomme explicitement ces broches.
 
-Les annotations de la carte écran distinguent un connecteur FPC à 22 broches vers le module LCD d'un connecteur carte à carte (B2B) distinct à 24 broches vers la carte principale. Vérifiez ces deux interfaces sur la révision exacte de l'ensemble avant le montage.
+**Divergence entre les sources sur les connecteurs — vérifiez avant de les choisir :** Le texte du guide SiFli indique que l'interface d'affichage dédiée est exposée par un FPC à 22 broches et un connecteur à 40 broches ; la figure de la carte écran désigne plutôt un FPC à 22 broches vers le module LCD et un connecteur carte à carte (B2B) à 24 broches vers la carte principale. La source n'explique pas le lien entre le connecteur à 40 broches et le B2B à 24 broches. Ne choisissez ni n'accouplez les connecteurs d'après l'un de ces nombres seulement ; vérifiez le schéma et la nomenclature de la révision exacte de l'ensemble.
 
 <div align="center"><em>Affectation des signaux du FPC QSPI à 22 broches pour l'écran et le tactile</em></div>
 

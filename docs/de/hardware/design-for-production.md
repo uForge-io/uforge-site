@@ -20,7 +20,7 @@ Nutzen Sie diese Reihenfolge als wiederholten Prüfablauf, nicht als einmalige �
 
 | Phase | Verwendung | Aufzubewahrende Nachweise |
 |:------|:-----------|:-------------------------|
-| Architektur | Produktbeschreibung und Schnittstellenanforderungen | Dokumentieren Sie das ausgewählte Bauteil und Gehäuse sowie die Annahmen zu Speicher, Display, Audio, Massenspeicher und Stromversorgung. |
+| Architektur | Produktbeschreibung und Schnittstellenanforderungen | Dokumentieren Sie das ausgewählte Bauteil und Gehäuse sowie die Annahmen zu Speicher, Display, Audio, Datenspeicherung und Stromversorgung. |
 | Schaltplan und Layout | Chip- oder Modul-Hardware-Design-Leitfaden | Halten Sie die geprüfte Umsetzung von Stromversorgung, Takt, Reset, RF, Speicher, Display und Schnittstellen fest. |
 | Stückliste | Freigegebene Lieferantenliste (AVL) und Komponentendatenblätter | Belegen Sie für jede kritische Position, dass die Alternative qualifiziert oder gezielt validiert wurde. |
 | Designüberprüfung | Hardware-Designcheckliste | Dokumentieren Sie die Bewertung jedes zutreffenden Checklistenpunkts und jeder Ausnahme. |

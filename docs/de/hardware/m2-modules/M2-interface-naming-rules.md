@@ -48,6 +48,7 @@ Dabei gilt:
 </div>
 
 Diese Beschreibungen geben den vorgesehenen Umfang der Kategorien an, keine abschließend festgelegten elektrischen Anforderungen.
+
 **Quellenstatus:**
 - **M2 / M2xM:** Der verlinkte Entwurf verweist auf Kontaktbelegungen in einer lokalen Vorschlagsarbeitsmappe. Diese Datei ist jedoch nicht in diesem Repository enthalten und hier nicht verlinkt; die Belegungen sind daher nur Vorschläge.
 - **M2xN / M2xA:** Der Entwurf fasst diese Erweiterungen zusammen, aber es wurden keine Original-Kontaktbelegungen zur Prüfung der Zusammenfassungen gefunden; sie sind ungeprüft.

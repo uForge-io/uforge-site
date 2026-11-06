@@ -87,6 +87,9 @@ Der SF30147C ist ein hochintegrierter, effizienter Energiemanagement-Chip für W
 
 Vollständige Details finden Sie im Datenblatt des SF30147C-Chips.
 
+!!! warning "Widersprüchliche Bezeichnungen der Versorgungsschiene"
+    Die [LDO1-Übersichtszeile](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md#L38) der Quelle nennt AVDDIOA2, die [Chip-Pintabelle](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md#L79) ordnet PA0–PA11 jedoch VDDIOA2 zu; auch die [offizielle DevKit-Pinbelegung](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb58x/SF32LB58-DevKit-LCD.md#L195) verwendet VDDIOA2. Aus diesen Quellen geht nicht hervor, welche Bezeichnung für das LDO1-Netz gilt. Klären Sie dies vor der Schaltplanfreigabe mit SiFli.
+
 ##### 5.2.1.2. SF32LB58x-Stromversorgungsanforderungen {#5112-sf32lb58x-power-requirements}
 
 Die PMU-Versorgungsspezifikationen der SF32LB58x-Serie sind in der folgenden Tabelle zusammengefasst.
@@ -715,6 +718,9 @@ Der SF32LB58x bietet eine SWD-Schnittstelle sowie sechs wählbare UART-Schnittst
 | SWDIO | PB11 | J-Link-Datensignal |
 
 </div>
+
+!!! warning "Quellenkonflikt"
+    Die OpenSiFli-[Tabelle zur Hardware-Anwendung](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md) ordnet `TXD1`/`PA31` UART1 RXD und `RXD1`/`PA32` UART1 TXD zu. Die [Pinbelegung des SF32LB58-DevKit-LCD](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb58x/SF32LB58-DevKit-LCD.md) weist dagegen `PA31` als `UART1_TXD` und `PA32` als `UART1_RXD` aus. Die Quelldokumente widersprechen sich bei der Signalrichtung; daraus geht nicht hervor, welche Zuordnung korrekt ist. Lassen Sie vor der Verdrahtung die UART1-Pinmux-Funktion und Signalrichtung von SiFli bestätigen. Leiten Sie die TX/RX-Verbindung auf der Platine nicht allein aus diesen Bezeichnungen ab.
 
 !!! note "Hinweis"
     UARTx-RXD-Signale dürfen nicht offen bleiben. Aktivieren Sie während der Softwareinitialisierung den internen Pull-up.

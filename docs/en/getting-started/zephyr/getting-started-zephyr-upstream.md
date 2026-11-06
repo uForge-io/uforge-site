@@ -8,7 +8,7 @@ tags:
 
 # Zephyr Upstream { #zephyr-upstream }
 
-The `sf32lb52_devkit_lcd` board has been supported and maintained in upstream Zephyr since v4.3.0. See the [v4.3.0 release notes](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html) and the [SF32LB52 DevKit LCD board documentation](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html). This guide creates a v4.3.0 workspace, builds a first sample, and flashes the board. Use [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) when you need the broader official SF32 feature set.
+The `sf32lb52_devkit_lcd` board has been supported upstream since v4.3.0. This guide uses the maintained Zephyr v4.5.0 release for a new workspace, a first sample, and board flashing; see the [v4.3.0 release notes](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html), [v4.5.0 release notes](https://docs.zephyrproject.org/4.5.0/releases/release-notes-4.5.html), and current [SF32LB52 DevKit LCD board documentation](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html). Use [SiFli-SDK](../sifli/getting-started-sifli-sdk.md) when you need the broader official SF32 feature set.
 
 !!! note "Check the board feature list"
     An upstream board definition does not by itself confirm that every peripheral or operating mode is enabled or validated for a product. Check the board documentation's supported-features table and verify the required behavior on your exact board revision.
@@ -22,23 +22,49 @@ The `sf32lb52_devkit_lcd` board has been supported and maintained in upstream Ze
 
 **Software**
 
-- A host OS supported by Zephyr v4.3.0 and its [Getting Started instructions](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html).
+- A host OS supported by Zephyr v4.5.0 and its [Getting Started instructions](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html).
 - Zephyr host dependencies and the Zephyr SDK, installed for the ARM Cortex-M target as described in that guide.
 - Git, Python 3, and `pip`.
 
 ## Prepare the Tooling { #prepare-the-tooling }
 
-First complete the host-dependency and Zephyr SDK setup in Zephyr's [v4.3.0 Getting Started guide](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html). Then create a Python environment and initialize a workspace at the matching Zephyr tag:
+First complete the host-dependency and Zephyr SDK setup in Zephyr's [v4.5.0 Getting Started guide](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html). Then follow the commands for your shell to create a Python environment and initialize a workspace at the matching Zephyr tag.
 
 ```bash
 python3 -m venv ~/zephyr-venv
-source ~/zephyr-venv/bin/activate
-pip install west
-west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.3.0 ~/zephyrproject
+. ~/zephyr-venv/bin/activate
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 ~/zephyrproject
 cd ~/zephyrproject
 west update
 west zephyr-export
-pip install -r zephyr/scripts/requirements.txt
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+For PowerShell on Windows:
+
+```powershell
+py -3 -m venv "$HOME\zephyr-venv"
+& "$HOME\zephyr-venv\Scripts\Activate.ps1"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "$HOME\zephyrproject"
+Set-Location "$HOME\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+For Command Prompt on Windows:
+
+```bat
+py -3 -m venv "%USERPROFILE%\zephyr-venv"
+call "%USERPROFILE%\zephyr-venv\Scripts\activate.bat"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "%USERPROFILE%\zephyrproject"
+cd /d "%USERPROFILE%\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
 ```
 
 Keep this environment active for the build and flash steps below.
@@ -75,7 +101,7 @@ The upstream board declares `sftool` as its default flash runner. Install [OpenS
 west flash
 ```
 
-If flashing fails, check the serial port selection, download mode, and the runner instructions in the [board documentation](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html).
+If flashing fails, check the serial port selection, download mode, and the runner instructions in the [board documentation](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html).
 
 ## Open the Serial Console { #open-the-serial-console }
 
@@ -87,7 +113,7 @@ Hello World! sf32lb52_devkit_lcd
 
 ## Choose a Next Sample { #choose-a-next-sample }
 
-Use the upstream board documentation's supported-features table together with the [Zephyr sample browser](https://docs.zephyrproject.org/4.3.0/samples/index.html) to choose the next API or peripheral to evaluate. Confirm that the feature is listed for this board and that any required configuration is enabled before treating a sample as evidence of product readiness.
+Use the upstream board documentation's supported-features table together with the [Zephyr sample browser](https://docs.zephyrproject.org/4.5.0/samples/index.html) to choose the next API or peripheral to evaluate. Confirm that the feature is listed for this board and that any required configuration is enabled before treating a sample as evidence of product readiness.
 
 ## Troubleshooting { #troubleshooting }
 
@@ -97,8 +123,8 @@ Use the upstream board documentation's supported-features table together with th
 
 | Symptom | Check |
 |:--------|:------|
-| `west boards` does not show the SF32 target | Confirm the workspace is initialized from upstream Zephyr v4.3.0 or later and that `west update` completed. |
-| Build fails before compiling | Confirm the Python environment is active, the Zephyr SDK is installed for ARM Cortex-M, and the v4.3.0 requirements were installed. |
+| `west boards` does not show the SF32 target | Confirm the workspace is initialized from upstream Zephyr v4.5.0 or later and that `west update` completed. |
+| Build fails before compiling | Confirm the Python environment is active, the Zephyr SDK is installed for ARM Cortex-M, and the v4.5.0 requirements were installed. |
 | Board builds but does not flash | Confirm `sftool` is installed and on `PATH`, the selected serial port is correct, and the board is in serial download mode. |
 | No serial output | Check `usart1`, `1000000` baud, the USB-to-UART connection, and whether another terminal has the port open. |
 | A peripheral sample fails | Check the board's supported-features table and sample configuration; do not assume every peripheral is enabled by the base board target. |

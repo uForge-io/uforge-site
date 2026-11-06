@@ -195,7 +195,7 @@ rt_pwm_enable(pwm, channel);
 ```
 
 1. Escolha um canal compatível com PWM e confirme o multiplexador de pinos.
-2. Escolha um período adequado ao periférico: alto o bastante para evitar cintilação visível no LED ou dentro da faixa audível para um buzzer.
+2. Escolha uma frequência PWM adequada ao periférico: alta o bastante para evitar cintilação visível no LED ou dentro da faixa audível para um buzzer.
 3. Varie o ciclo de trabalho para aumentar e reduzir gradualmente o brilho do LED.
 4. Experimente alguns tons fixos no buzzer, alterando o período.
 5. Desabilite o PWM e confirme se a saída retorna a um estado de repouso seguro.

@@ -21,7 +21,7 @@ Beginnen Sie mit diesen entscheidenden Auswahlkriterien:
 - **Stromversorgung:** Batterie oder geregelte Versorgung, Betriebsspannungsbereich und I/O-Pegel.
 - **Audiofunktionen:** Anforderungen an ADC/DAC, I2S und PDM einschließlich Mikrofonkanälen.
 
-Vergleichen Sie konkrete Bestellnummern statt nur Familiennummern: Eine höhere Nummer ist nicht automatisch die bessere Wahl. Jeder dieser Faktoren ist ein Filter der [SF32-Produktauswahl](../product-selector.md): Stellen Sie sie dort ein, um konkrete Bestellnummern einzugrenzen.
+Vergleichen Sie konkrete Bestellnummern statt nur Familiennummern: Eine höhere Nummer ist nicht automatisch die bessere Wahl. Die [SF32-Produktauswahl](../product-selector.md) bietet Filter unter anderem für Gehäuse, Stromversorgung, Display, GPIO und Audio, aber derzeit keinen Filter für den Bluetooth-Modus. Grenzen Sie die Kandidaten mit den verfügbaren Filtern ein und prüfen Sie die BLE/Classic-Bluetooth-Unterstützung auf der Produktseite des konkreten Modells.
 
 [Familienvergleich](SF32_family.md) · [Produktauswahl](../product-selector.md)
 
@@ -33,7 +33,7 @@ Ein Entwicklungsboard dient zur Plattformbewertung und Firmware-Prüfung. Ein Mo
 
 ### Mit welchem Entwicklungsboard sollte ich beginnen? { #choosing-a-board }
 
-Beginnen Sie mit dem displayorientierten LCD-Board Ihrer Chipfamilie: [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md), [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md), [SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md) (Speichervariante N32R16) oder [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) (Variante N16R32N1). Für SF32LB52x gibt es zusätzlich kompakte Boards: [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md), [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) und [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) (Low-Power-Evaluierung für Wearables). Prüfen Sie, ob die Speichervariante des Boards zu Ihrer Zieltypnummer passt; der offizielle Board-Modellleitfaden von SiFli listet alle Boards.
+Beginnen Sie mit dem displayorientierten LCD-Board Ihrer Chipfamilie: [SF32LB52-DevKit-LCD](../devkits/SF32LB52-DevKit-LCD.md), [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md), [SF32LB57-DevKit-LCD](../devkits/SF32LB57-DevKit-LCD.md) (Speichervariante N32R16) oder [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) (Variante N16R32N1). Für SF32LB52x gibt es zusätzlich kompakte Boards: [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md), [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) und [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) (Low-Power-Evaluierung für Wearables). Prüfen Sie, ob die Speichervariante des Boards zu Ihrer Zielbestellnummer passt; der offizielle Board-Modellleitfaden von SiFli listet alle Boards.
 
 [Produktauswahl](../product-selector.md) · [Offizieller Board-Modellleitfaden](https://wiki.sifli.com/en/board/devkit_guide.html)
 

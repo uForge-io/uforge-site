@@ -25,6 +25,8 @@ SF32LB52xは、エントリークラスのスマートウェアラブル機器�
 
 [^1]: STAR-MC1はArm China製の構成可能なArmv8-M Mainline組み込みCPU IPです。対応するSF32デバイスにおいて、SiFliはこれをArm Cortex-M33 STAR-MC1アプリケーションプロセッサーとして文書化しています。Cortex-M33クラスのソフトウェアモデルにより、通常のデバイス固有の統合作業を前提として、既存のCortex-M33ファームウェア、ミドルウェア、RTOSポート、ツールを引き継ぐことができます。CU、SP、SEの各構成は主にキャッシュ、TCM、XIPU、TrustZone対応の点で異なり、Arm Custom Instructions/CDEおよびコプロセッサーインターフェースはオプション機能であり、対象のSF32部品ごとに確認が必要です。SiFliのドキュメントでは、文脈に応じて ***Arm Cortex-M33 STAR-MC1*** または ***Arm Cortex-M33*** のいずれかの表記が使われることがあります。
 
+<div id="_1"></div>
+
 ## 用途 { #applications }
 
 **SF32LB52xは、コスト、機能統合度、バッテリー駆動時間を重視するBluetooth中心の製品に推奨されます。** たとえば、次の用途が挙げられます。
@@ -72,7 +74,11 @@ SF32LB52xは、エントリークラスのスマートウェアラブル機器�
 
 ---
 
+<div id="_2"></div>
+
 ## 機能と仕様 { #features-and-specs }
+
+<div id="_3"></div>
 
 ### 演算とメモリー { #compute-and-memory }
 
@@ -81,6 +87,8 @@ SF32LB52xは、エントリークラスのスマートウェアラブル機器�
 - 32 KB命令キャッシュ + 16 KBデータキャッシュ
 - アプリケーション用SRAM 512 KB、Bluetoothコントローラー用SRAM 64 KB
 - バリアントに応じて、1 MB QSPI-NORから16 MB OPI-PSRAMまでのパッケージ内蔵メモリーを選択可能
+
+<div id="_4"></div>
 
 ### グラフィックスとオーディオ { #graphics-and-audio }
 
@@ -92,6 +100,8 @@ SF32LB52xは、エントリークラスのスマートウェアラブル機器�
 - 24-bitオーディオADC × 1（SNR 99 dB）
 - 24-bitオーディオDAC × 1（SNR 109 dB）
 
+<div id="_5"></div>
+
 ### 無線接続 { #wireless-connectivity }
 
 - Bluetooth 5.3デュアルモード（Classic Bluetooth / BLE）
@@ -102,11 +112,15 @@ SF32LB52xは、エントリークラスのスマートウェアラブル機器�
 - 64 KB SRAMを搭載し、24 MHzで動作する専用Arm Cortex-M33 STAR-MC1 Bluetoothコントローラーコア
 - 製品概要に記載されたスリープ電流は2 µA。システム全体の待機電流は動作モードや基板上の漏れ電流によって異なります。
 
+<div id="_6"></div>
+
 ### セキュリティ { #security }
 
 - AES/HASH/CRCハードウェアアクセラレーター
 - TRNG
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### ペリフェラルとI/O { #peripherals-and-ios }
 
@@ -122,6 +136,8 @@ SF32LB52xは、エントリークラスのスマートウェアラブル機器�
 - RTCおよびウォッチドッグタイマー
 - バリアントファミリーに応じて44または45 GPIO
 
+<div id="_7"></div>
+
 ### 電源 { #power-supply }
 
 - **バッテリー駆動グループ: SF32LB520/3/5/7** — 単セルLi-ion/Li-Poバッテリーから直接給電し、充電機能を内蔵した電源構成を使う設計向けです。
@@ -131,6 +147,8 @@ SF32LB52xは、エントリークラスのスマートウェアラブル機器�
 - **外部電源駆動1.8 Vグループ: SF32LB52D** — 特殊な1.8 V超低消費電力設計向けで、3.3 V品とは電気的に互換性がありません。
 
 バッテリー駆動品と外部電源駆動品はシリコン構成が異なり、電源系統をまたいだ **ピン互換性はありません**。
+
+<div id="_8"></div>
 
 ## 製品バリエーション { #family-variants }
 
@@ -164,7 +182,7 @@ SiFliのチップ型番ガイドに掲載されている主要品種は、次の
 
 </div>
 
-この表は、SiFliの[チップ型番ガイド](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)に掲載された主要品種をまとめたもので、完全な注文品目一覧ではありません。リンク先の外部電源版データシートには、**SF32LB52HUD6**（1.8 V、QFN68L、128 Mb PSRAM）も記載されています。また、ハードウェア設計ガイドでは`52AUx6`および`52D/F/HUx6`という追加の末尾表記も使われています。これらの資料には、統一された品種一覧がありません。設計を確定する前に、該当SKUの注文可否、電源範囲、内蔵メモリーのインターフェース、I/O仕様を最新のデータシートで確認してください。
+この表は、SiFliの[チップ型番ガイド](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)に掲載された主要品種をまとめたもので、完全な注文品目一覧ではありません。リンク先の[DS5202-SF32LB52Xデータシート V0.2.6](https://downloads.sifli.com/docs/Datasheet/SF32LB52X/DS5202-SF32LB52X-Datasheet%20V0p2p6.pdf)は改訂履歴（2025-03-12）で**SF32LB52HUD6**に言及していますが、現在の注文情報（Table 5-7）にはこの型番がありません。この履歴上の記載だけでは、現在注文可能であることもSKUの仕様も確認できません。ハードウェア設計ガイドには別途`52AUx6`および`52D/F/HUx6`というサフィックス表記があります。設計を確定する前に、該当する注文型番と仕様をSiFliの最新公式資料で確認してください。
 
 ## 設計・導入の進め方 { #integration-path }
 
@@ -199,11 +217,17 @@ RGB888カラーで最大512 × 512です（DTR対応のQSPIディスプレイイ
 まず[SF32LB52xハードウェア設計ガイド](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)で回路図、電源、クロック/RF、PCBレイアウトの指針を確認し、基板リリース前に回路図とレイアウトのチェックリストを使用してください。
 <!-- uf-faq:end -->
 
+<div id="_9"></div>
+
 ## 関連製品 { #related-products }
+
+<div id="_10"></div>
 
 ### モジュール { #module }
 
 [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) の標準構成では、8 MBのOPI-PSRAMをチップと同一パッケージに収めたSF32LB525UC6と、RFマッチング回路を組み合わせています。モジュール寸法は27.9 × 18.0 × 3.1 mmです。チップレベルのRF回路設計と検証の負担を抑えながら、SF32LB52クラスの機能を利用したいプロジェクトに適しています。
+
+<div id="_11"></div>
 
 ### 開発キット { #development-kits }
 
@@ -211,6 +235,8 @@ RGB888カラーで最大512 × 512です（DTR対応のQSPIディスプレイイ
 - [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) は外部電源駆動のコンパクトなコアボードで、52B/52Jクラスの品種を使ったファームウェア、GPIO、低消費電力機能の初期評価に適しています。
 - [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) は52シリーズで最も小型の開発ボードです。製品の実装スペースが限られる場合に役立ちます。
 - [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) は、低消費電力を重視したボードで、バッテリー駆動を重視した評価や小型製品の試作に適しています。
+
+<div id="_12"></div>
 
 ### リファレンス製品 { #reference-products }
 

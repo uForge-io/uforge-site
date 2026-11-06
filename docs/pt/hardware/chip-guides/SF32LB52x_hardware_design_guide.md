@@ -61,7 +61,7 @@ A família integra:
 - Rádio Bluetooth 5.3 de modo duplo
 - Acelerador gráfico ePicasso 2.0 2D/2.5D
 - As notas originais de aplicação de hardware da SiFli descrevem um acelerador integrado de redes neurais para IA. O [guia NNACC do SiFli-SDK](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/nnacc.html) lista SF32LB55x, SF32LB56x e SF32LB58x, mas não SF32LB52x; confirme o suporte de software do modelo exato antes de depender do acelerador.
-- Controlador de display com interfaces SPI, QSPI, 8080, JDI e EPD de 8 bits
+- Controlador de display com interfaces SPI, QSPI, 8080 e JDI; o EPD paralelo de 8 bits está documentado para `52B/D/E/G/J` e deve ser confirmado para o modelo exato
 - Dispositivo USB 2.0 Full-Speed
 - Interface de armazenamento SDIO/eMMC nos modelos compatíveis
 - Codec de áudio integrado com interfaces analógicas e digitais
@@ -144,9 +144,9 @@ Os diagramas de distribuição dos pinos são apresentados a seguir. As diferen�
 
 <div align="center"><em>Figura 3.3-1: Distribuição dos pinos QFN68L do SF32LB520/3/5/7</em></div>
 
-![Figura 3.3-2: Distribuição dos pinos QFN68L do SF32LB52B/E/G/J](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ width="100%" loading="lazy" }
+![Figura 3.3-2: Distribuição dos pinos QFN68L do SF32LB52B/D/E/G/J](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figura 3.3-2: Distribuição dos pinos QFN68L do SF32LB52B/E/G/J</em></div>
+<div align="center"><em>Figura 3.3-2: Distribuição dos pinos QFN68L do SF32LB52B/D/E/G/J</em></div>
 
 ### 3.4. Aplicações { #34-applications }
 
@@ -183,7 +183,7 @@ A tabela a seguir resume a arquitetura de hardware recomendada para uma aplicaç
 | Indutor do conversor buck | 4,7 µH ± 20 %, DCR ≤ 0,4 Ω, Isat ≥ 450 mA |
 | Cristal | Cristal principal de 48 MHz e cristal de RTC de 32,768 kHz |
 | RF | Trilha de impedância controlada de 50 Ω com posição reservada para rede de casamento π |
-| Display | SPI de 3 fios, SPI de 4 fios, Dual-SPI, Quad-SPI (até 512 × 512), JDI e EPD de 8 bits |
+| Display | SPI de 3 fios, SPI de 4 fios, Dual-SPI, Quad-SPI (até 512 × 512), JDI e EPD paralelo de 8 bits (documentado para `52B/D/E/G/J`; confirme o modelo exato) |
 | Painel de toque | Controlador capacitivo I2C com capacidade de despertar o sistema por interrupção |
 | Armazenamento | Flash/PSRAM SiP, SPI NOR externa, SPI NAND, SD NAND ou eMMC, conforme o modelo |
 | Áudio | Entrada de microfone analógico, saída diferencial de DAC e PA externo |

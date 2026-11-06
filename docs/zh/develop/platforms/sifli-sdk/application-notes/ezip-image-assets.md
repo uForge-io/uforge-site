@@ -83,6 +83,12 @@ ezip -convert png_filename.png -rgb888 -binfile 2
 
 输出文件为 `png_filename.bin`，文件头中的格式值为 EZIP。
 
+仅对 SF32LB57 添加 `-winsize 2048`；其他芯片不要使用此选项：
+
+```bash
+ezip -convert png_filename.png -rgb565 -binfile 2 -winsize 2048
+```
+
 ### PIXEL 格式的 LVGL C 数组 { #pixel-lvgl-c-array }
 
 ```bash

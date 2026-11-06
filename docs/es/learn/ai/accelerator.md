@@ -38,31 +38,12 @@ Una cadena simplificada de IA en el borde en SF32 se representa así:
 
 <div align="center"><em>Diagrama: Etapas de procesamiento e inferencia controlada por firmware</em></div>
 
-```text
-Sensors / Audio / Camera
-        │
-        ▼
-Pre-processing
-  - filtering
-  - framing
-  - normalization
-  - feature extraction
-        │
-        ▼
-Firmware / Inference Runtime
-  - model graph orchestration
-  - supported operations on NNACC
-  - other operations on CPU, if implemented
-        │
-        ▼
-Post-processing
-  - thresholding
-  - smoothing
-  - event detection
-  - application decisions
-        │
-        ▼
-Application, UI, Bluetooth, or Storage
+```mermaid
+flowchart TD
+    A["Sensores / Audio / Cámara"] --> B["Preprocesamiento<br/>filtrado<br/>segmentación en tramas<br/>normalización<br/>extracción de características"]
+    B --> C["Firmware / entorno de inferencia<br/>orquestación del grafo del modelo<br/>operaciones compatibles en NNACC<br/>otras operaciones en CPU, si están implementadas"]
+    C --> D["Posprocesamiento<br/>aplicación de umbrales<br/>suavizado<br/>detección de eventos<br/>decisiones de la aplicación"]
+    D --> E["Aplicación, UI, Bluetooth o almacenamiento"]
 ```
 
 El acelerador es solo una parte de la cadena completa de IA. El producto también debe adquirir datos, gestionar búferes, preprocesar las entradas, planificar la inferencia, posprocesar los resultados y aplicar la lógica de decisión. Por lo general, se obtiene un mejor rendimiento al diseñar toda la cadena teniendo en cuenta la jerarquía de memoria y los aceleradores disponibles, en lugar de tratar la inferencia como una llamada de función aislada.

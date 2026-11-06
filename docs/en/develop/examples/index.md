@@ -97,7 +97,7 @@ Choose the example that matches the most constrained part of the product:
 
 - For Bluetooth products, start from the closest profile.
 - For display products, start from the display and LVGL path.
-- For battery products, start from a power example.
+- For battery-powered products, start from a low-power example.
 - For OTA products, start from the update flow and partition layout.
 
 Then add the other subsystems one by one.

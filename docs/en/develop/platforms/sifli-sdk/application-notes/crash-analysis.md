@@ -26,7 +26,7 @@ When LPSYS wakes from standby, SWD returns to HCPU. A J-Link reset does not itse
 
 ## Capture a live or post-mortem package { #capture-a-live-or-post-mortem-package }
 
-For current SDK releases, capture over UART or J-Link with `sdk.py`:
+The current `sdk.py` CLI supports J-Link on all series and direct UART DEBUG IP only on SF32LB52X and SF32LB56X. Use J-Link for other families; the legacy AssertDump/UART methods below are separate workflows.
 
 !!! note "Example scope"
     The command below is an SF32LB52/LB525 example. Keep the command structure, but replace the chip/model, core, transport, and ELF with values supported by the target family and SDK release.
@@ -37,7 +37,7 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
   --output /tmp/live-crash --elf build_hcpu/main.elf
 ```
 
-To export PSRAM as well, add `--include-psram`, or use `--psram-size 8MB` to select the PSRAM script manually. With J-Link over IP through `SifliUsartServer`, use `--transport jlink --jlink-ip 127.0.0.1:19025`; select the affected core with `--core hcpu` or `--core lcpu`. The output directory should contain the captured binary, core ELF/AXF, `log.txt`, `manifest.json`, and `sdk_manifest.json`.
+To export PSRAM as well, add `--include-psram`, or use `--psram-size 8MB` to select the PSRAM script manually. With J-Link over IP through `SifliUsartServer`, use `--transport jlink --jlink-ip 127.0.0.1:19025`; select the affected core with `--core hcpu` or `--core lcpu`. The crash package contains captured binaries and `manifest.json` plus `sdk_manifest.json`; `hcpu.axf` is copied from `--elf` when supplied. `log.txt` is copied from `capture.log` only for `capture-live --transport jlink`, or from `--log` for `export-coredump`.
 
 For older SDKs, use the family-specific method in the corresponding SiFli crash-analysis guide:
 

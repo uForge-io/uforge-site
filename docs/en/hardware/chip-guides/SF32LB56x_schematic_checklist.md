@@ -101,7 +101,7 @@ Source: SiFli's *SF32LB56x Schematic&PCB Checklist*, version V1.0 (2026-01-21), 
 | 20 | AVDD33_BRF capacitor is at least 4.7 uF | SF32LB565/567 | Required |
 | 21 | AUD_VREF capacitor = 1 uF | All chips | Required |
 | 22 | GPADC VREFP capacitor = 4.7 uF | All chips | Required |
-| 23 | BUCK inductor is a part number listed on the [SiFli Approved Vendor List] (AVL) | All chips | Required |
+| 23 | BUCK inductor is a part number listed on the [SiFli Approved Vendor List][SiFli Approved Vendor List] (AVL) | All chips | Required |
 | 24 | If the BUCK inductor is not SiFli-recommended, it meets L = 4.7 uH, DCR &lt;= 0.4 ohm, and Isat &gt;= 450 mA | All chips | Required |
 | 25 | <span class="flag-red">Set PVDD to 1.8 V; a VBAT-to-1.8 V DCDC converter is recommended</span> | All chips | Required |
 | 26 | <span class="flag-red">If GPS or other interference-sensitive peripherals are present, reserve a shunt-to-ground capacitor footprint at BUCK_LX; the value depends on actual test results</span> | All chips | Required |

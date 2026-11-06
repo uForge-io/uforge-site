@@ -17,6 +17,9 @@ O **SF32LB52-MOD-1** é um módulo Bluetooth de uso geral e baixo consumo, basea
 
 Este guia trata da integração de hardware no nível do módulo: definição de pinos, interfaces de periféricos, características elétricas, requisitos de alimentação, esquemáticos de referência, checklist do esquemático, dimensões mecânicas e footprint da PCB, além dos requisitos de manuseio do produto. O conteúdo baseia-se no datasheet da SiFli **DS5203-SF32LB52-MOD-1 V0.3**.
 
+!!! important "Escopo da variante do módulo"
+    As especificações e orientações de integração abaixo tratam do SF32LB52-MOD-1-N16R8 documentado no DS5203 V0.3. Esse datasheet não estabelece que essas informações se aplicam à configuração distinta SF32LB52-MOD-1-A128R16. Para informações específicas do A128R16, consulte o [guia de projeto do módulo EPD da SiFli](https://wiki.sifli.com/hardware/SF32LB52-MOD-1-EPD-HW-Application.html).
+
 Para conhecer em mais detalhe a arquitetura do chip (núcleos, gráficos, subsistema de memória e periféricos), consulte [SF32LB52x](../../sf32-products/chips/SF32LB52x.md) e o [guia de projeto de hardware do SF32LB52x](../chip-guides/SF32LB52x_hardware_design_guide.md).
 
 !!! note "Fonte e tratamento das figuras"
@@ -54,7 +57,7 @@ Para conhecer em mais detalhe a arquitetura do chip (núcleos, gráficos, subsis
 | Núcleo de baixo consumo (LCPU) | Arm Cortex-M33 STAR-MC1, até 24 MHz, 64 KB SRAM |
 | Conectividade sem fio | Bluetooth 5.3 de modo duplo com BLE Audio |
 | Gráficos | Mecanismo 2D/2.5D ePicasso 2.0, até 512 × 512, descompressão sem perdas eZip 2.0 |
-| Áudio | 1 DAC de áudio de 24 bits e 1 ADC Sigma-Delta de áudio de 24 bits |
+| Áudio | O resumo do DS5203 V0.3 lista um DAC de 24 bits e um ADC Sigma-Delta; as seções detalhadas de áudio listam dois de cada. Confirme com a SiFli quantos canais o módulo disponibiliza. |
 | Armazenamento | OPI-PSRAM opcional no encapsulamento (144 MHz); 1 MPI externo (QSPI); 1 SD/SDIO/eMMC |
 | Encapsulamento | 68 pinos, 27,9 × 18,0 × 3,1 mm |
 | Alimentação | VSYS de 3,2–4,7 V (Li-ion) ou 3,7–4,7 V (DCDC/LDO; 3,8 V recomendado) |
@@ -194,11 +197,14 @@ Qualquer pino marcado como `PAxx_I2C_UART` na tabela acima pode ser configurado 
 
 **Sensor de temperatura** — Resolução de 0,2 °C, faixa de -40 °C a 125 °C, precisão de ±3 °C e leitura por consulta periódica (polling) ou por interrupção.
 
-**DAC de áudio** — Um canal de saída DAC de 24 bits, taxas de amostragem de 8–48 kHz e saída diferencial.
+**DAC de áudio** — A descrição específica do módulo lista um canal de saída DAC de 24 bits, com taxas de amostragem de 8–48 kHz e saída diferencial. A seção detalhada de áudio do DS5203 V0.3 descreve dois DACs no MCU; confirme com a SiFli quantos canais são disponibilizados no módulo exato.
 
 **PLL de áudio** — Geração de clock Fractional-N com resolução de 48 MHz/2^18; suporta as seguintes taxas de amostragem derivadas: 48 MHz, 32,768 kHz e 44,1 kHz.
 
-**ADC de áudio** — Um canal de entrada ADC Sigma-Delta de 24 bits, com taxas de amostragem de 8–48 kHz.
+!!! note "Taxa de amostragem do PLL de áudio a confirmar"
+    O datasheet V0.3 lista aqui 48 MHz como taxa de amostragem derivada, mas as especificações adjacentes do DAC e do ADC indicam faixas de 8 a 48 kHz. A fonte não esclarece essa diferença; confirme com a SiFli o valor de 48 MHz antes de usá-lo como referência.
+
+**ADC de áudio** — A descrição específica do módulo lista um canal de entrada ADC Sigma-Delta de 24 bits, com taxas de amostragem de 8–48 kHz. A seção detalhada de áudio do DS5203 V0.3 descreve dois ADCs no MCU; confirme com a SiFli quantos canais são disponibilizados no módulo exato.
 
 ## 6. Características elétricas { #6-electrical-characteristics }
 
@@ -272,7 +278,7 @@ VDD é o trilho de alimentação de I/O; VOH/VOL são medidos com carga de alta 
 | BLE Connection | 50 ms | 95,0 | 105,0 | 118,7 | µA |
 | BLE Connection | 1 s | 4,1 | 4,6 | 9,1 | µA |
 | Varredura (Inquiry ou Page) | — | 33,4 | — | — | µA |
-| Varredura simultânea | — | 67,3 | — | — | µA |
+| Ambos os tipos de varredura | — | 67,3 | — | — | µA |
 | Sleep | — | 20,0 | — | — | µA |
 
 </div>

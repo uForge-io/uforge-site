@@ -138,7 +138,7 @@ Este archivo enumera las páginas en español (/es/). La versión en inglés (ra
 
 ## Aprendizaje
 
-- [Descripción general de la sección Aprendizaje](https://uForge.io/es/learn/): Consulte la orientación que necesita sobre la arquitectura de SF32 y sus subsistemas: gráficos, Bluetooth, IA, audio y bajo consumo.
+- [Descripción general de la sección Aprendizaje](https://uForge.io/es/learn/): Consulte la orientación que necesita sobre la arquitectura de SF32 y sus subsistemas: gráficos, Bluetooth, IA, audio, bajo consumo y la arquitectura subyacente del procesador.
 - [Resumen de arquitectura](https://uForge.io/es/learn/architecture/overview/): Decisiones de arquitectura SF32 sobre procesadores, memoria, Bluetooth y aceleración por hardware, con comprobaciones específicas por dispositivo.
 - [STAR-MC1](https://uForge.io/es/learn/architecture/star-mc1/): Introducción a la CPU STAR-MC1 de Arm China basada en Armv8-M Mainline, su relación de modelo de software con Cortex-M33 y sus implicaciones para el firmware SF32.
 - [PSRAM frente a otros tipos de memoria para sistemas embebidos](https://uForge.io/es/learn/architecture/psram-and-memory-types/): PSRAM en sistemas embebidos: cómo la RAM pseudoestática extiende la SRAM, en qué se diferencia de DRAM, RRAM y MRAM, y cómo ubicar datos en una jerarquía de memoria SF32.
@@ -195,7 +195,7 @@ Este archivo enumera las páginas en español (/es/). La versión en inglés (ra
 - [Blog](https://uForge.io/es/blog/): El blog de μForge.io reúne novedades de producto, notas de versión y análisis técnicos en profundidad sobre la documentación de SF32.
 - [Octubre: presentamos SF32LB57x [2026-10-28]](https://uForge.io/es/blog/posts/2026-10-28-october-sf32lb57x-release/): SF32LB57x ya está documentado: casi duplica la capacidad de cálculo de la CPU de aplicación del SF32LB56x, con gráficos ePicasso 3.0 y una estructura de costes competitiva.
 - [Traducción multilingüe, una iteración tras otra [2026-10-07]](https://uForge.io/es/blog/posts/2026-10-07-multi-language-translation/): μForge.io suma traducciones a siete idiomas, creadas con herramientas LLM tras muchas iteraciones.
-- [Agosto: de la cobertura a la confianza [2026-08-24]](https://uForge.io/es/blog/posts/2026-08-24-august-progress/): Agosto en μForge.io: una selección de productos más clara, proyectos reutilizables, aprendizaje práctico y acceso directo al soporte.
+- [Agosto: de una documentación más amplia a una elección más segura [2026-08-24]](https://uForge.io/es/blog/posts/2026-08-24-august-progress/): Agosto en μForge.io: una selección de productos más clara, proyectos reutilizables, aprendizaje práctico y acceso directo al soporte.
 - [La primera entrada del blog [2026-07-31]](https://uForge.io/es/blog/posts/2026-07-31-the-first-blog/): La primera entrada del blog de μForge.io: nuestro propósito, lo que hemos construido durante el último mes y los próximos pasos para la documentación de SF32.
 
 ## Acerca de

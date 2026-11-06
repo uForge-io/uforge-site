@@ -6,7 +6,11 @@ tags:
   - 芯片
 ---
 
+<div id="sf32"></div>
+
 # SF32 产品系列 { #sf32-family }
+
+<div id="_1"></div>
 
 ## 简介 { #introduction }
 
@@ -39,6 +43,8 @@ SF32 旨在填补传统微控制器与应用处理器之间的空档。该系列
     [规划量产工作 :material-arrow-right:](../../hardware/design-for-production.md){ .uf-hw-link-green }
 
 </div>
+
+<div id="_2"></div>
 
 ## 关键特性 { #key-features }
 

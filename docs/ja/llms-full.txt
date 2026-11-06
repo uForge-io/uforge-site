@@ -246,7 +246,7 @@ scons -c
 
 ビルドターゲットと生成された一時ファイルおよびオブジェクトファイルを削除します。その後、対象のボード設定で再ビルドしてください。
 
-## Flash書き込み
+## 書き込み
 
 たとえば`sf32lb52-lcd_n16r8`のHCPUターゲットでは、ビルドで生成されたUARTダウンロードスクリプトを使用します。
 
@@ -274,7 +274,7 @@ OpenSiFliは、シリアルインターフェース経由でSiFli SoCと通信�
 - シリアルポート。
 - ボーレート。
 - ビルドコマンド。
-- Flash書き込みコマンド。
+- 書き込みコマンド。
 - SDKブランチまたはリリース。
 
 ## 日常的な開発サイクル
@@ -311,7 +311,7 @@ OpenSiFliは、シリアルインターフェース経由でSiFli SoCと通信�
 | ビルドツールが見つからない | 現在のターミナルで`export.sh` / `export.ps1`を再実行する。 |
 | ボード名が不明 | SDKの対応ボード資料を確認する。 |
 | ダウンロードスクリプトがポートを開けない | シリアルターミナルを閉じ、USB-to-UARTケーブル／コネクターを確認する。 |
-| Flash書き込みが開始しない | ボードの説明書に記載されたダウンロード手順に従ってください。`sf32lb52-lcd_n16r8`の場合は、シリアルポートを選択してからボードを再起動し、2秒以内にEnterキーを押してダウンロードを開始します。ほかのボードでは各ボード固有の手順に従い、電源、選択したポート、UART接続も確認してください。 |
+| 書き込みが開始しない | ボードの説明書に記載されたダウンロード手順に従ってください。`sf32lb52-lcd_n16r8`ではボードの再起動が推奨されています。この手順の場合、再起動後2秒以内にEnterキーを押してダウンロードを開始します。ほかのボードでは各ボード固有の手順に従い、電源、選択したポート、UART接続も確認してください。 |
 | シリアル出力が読めない | ボーレートを確認し、充電専用ではなくデータ通信に対応したUSBケーブルでUARTに接続する。 |
 
 </div>
@@ -324,7 +324,7 @@ OpenSiFliは、シリアルインターフェース経由でSiFli SoCと通信�
 - ボード名。
 - セットアップ／インストールのメモ。
 - ビルドコマンド。
-- Flash書き込みコマンド。
+- 書き込みコマンド。
 - モニター設定。
 - 起動時に期待される最初のログ行。
 - 復旧コマンド。
@@ -1111,7 +1111,7 @@ Summary: Zephyr upstreamのSF32LB52 DevKit LCDボードターゲットをビル�
 
 # Zephyr upstream
 
-Zephyr v4.3.0以降、upstream Zephyrでは`sf32lb52_devkit_lcd`ボードがサポートされ、継続的にメンテナンスされています。[v4.3.0リリースノート](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html)と [SF32LB52 DevKit LCDボードドキュメント](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)を参照してください。このガイドではv4.3.0のワークスペースを作成し、最初のサンプルをビルドしてボードに書き込みます。SF32のより広範な公式機能が必要な場合は、[SiFli-SDK](../sifli/getting-started-sifli-sdk.md)を使用してください。
+`sf32lb52_devkit_lcd`ボードはZephyr v4.3.0からupstreamでサポートされています。このガイドでは、現在も保守されているZephyr v4.5.0を使って新しいワークスペースを作成し、サンプルをビルドしてボードに書き込みます。[v4.3.0リリースノート](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html)、[v4.5.0リリースノート](https://docs.zephyrproject.org/4.5.0/releases/release-notes-4.5.html)、最新の[SF32LB52 DevKit LCDボードドキュメント](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)を参照してください。SF32のより広範な公式機能が必要な場合は、[SiFli-SDK](../sifli/getting-started-sifli-sdk.md)を使用してください。
 
 !!! note "ボードの対応機能を確認"
     upstreamのボード定義があることだけでは、すべての周辺機能や動作モードが有効で、製品向けに検証済みであるとは限りません。ボードドキュメントの対応機能表を確認し、使用するボードのリビジョンで必要な動作を検証してください。
@@ -1125,23 +1125,49 @@ Zephyr v4.3.0以降、upstream Zephyrでは`sf32lb52_devkit_lcd`ボードがサ�
 
 **ソフトウェア**
 
-- Zephyr v4.3.0がサポートするホストOS。[Getting Startedガイド](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html)に従ってセットアップしてください。
+- Zephyr v4.5.0がサポートするホストOS。[Getting Startedガイド](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html)に従ってセットアップしてください。
 - 同ガイドの手順に従い、ARM Cortex-Mターゲット用のZephyrホスト依存パッケージとZephyr SDKをインストール。
 - Git、Python 3、`pip`。
 
 ## ツールを準備する
 
-まずZephyrの [v4.3.0 Getting Startedガイド](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html)に従い、ホスト依存パッケージとZephyr SDKをセットアップします。次にPython環境を作成し、対応するZephyrタグからワークスペースを初期化します。
+まずZephyrの [v4.5.0 Getting Startedガイド](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html)に従い、ホスト依存パッケージとZephyr SDKをセットアップします。以下のコマンドから使用するシェルを選び、Python環境を作成して対応するZephyrタグでワークスペースを初期化します。
 
 ```bash
 python3 -m venv ~/zephyr-venv
-source ~/zephyr-venv/bin/activate
-pip install west
-west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.3.0 ~/zephyrproject
+. ~/zephyr-venv/bin/activate
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 ~/zephyrproject
 cd ~/zephyrproject
 west update
 west zephyr-export
-pip install -r zephyr/scripts/requirements.txt
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+Windows PowerShell:
+
+```powershell
+py -3 -m venv "$HOME\zephyr-venv"
+& "$HOME\zephyr-venv\Scripts\Activate.ps1"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "$HOME\zephyrproject"
+Set-Location "$HOME\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+Windowsコマンドプロンプト:
+
+```bat
+py -3 -m venv "%USERPROFILE%\zephyr-venv"
+call "%USERPROFILE%\zephyr-venv\Scripts\activate.bat"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "%USERPROFILE%\zephyrproject"
+cd /d "%USERPROFILE%\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
 ```
 
 以下のビルドと書き込みでは、このPython環境を有効にしたままにしてください。
@@ -1178,7 +1204,7 @@ upstreamのボードでは`sftool`がデフォルトの書き込みrunnerに指�
 west flash
 ```
 
-書き込みに失敗する場合は、シリアルポートの選択、ダウンロードモード、および[ボードドキュメント](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)のrunner説明を確認してください。
+書き込みに失敗する場合は、シリアルポートの選択、ダウンロードモード、および[ボードドキュメント](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)のrunner説明を確認してください。
 
 ## シリアルコンソールを開く
 
@@ -1190,7 +1216,7 @@ Hello World! sf32lb52_devkit_lcd
 
 ## 次のサンプルを選ぶ
 
-upstreamボードドキュメントの対応機能表と[Zephyrサンプル一覧](https://docs.zephyrproject.org/4.3.0/samples/index.html)を参照し、次に評価するAPIや周辺機能を選びます。その機能がボードでサポートされ、必要な設定が有効になっていることを確認してください。サンプルが動作しただけで製品レベルの準備が整ったと判断しないでください。
+upstreamボードドキュメントの対応機能表と[Zephyrサンプル一覧](https://docs.zephyrproject.org/4.5.0/samples/index.html)を参照し、次に評価するAPIや周辺機能を選びます。その機能がボードでサポートされ、必要な設定が有効になっていることを確認してください。サンプルが動作しただけで製品レベルの準備が整ったと判断しないでください。
 
 ## トラブルシューティング
 
@@ -1200,8 +1226,8 @@ upstreamボードドキュメントの対応機能表と[Zephyrサンプル一�
 
 | 症状 | 確認項目 |
 |:-----|:---------|
-| `west boards`にSF32ターゲットが表示されない | upstream Zephyr v4.3.0以降からワークスペースを初期化したこと、および`west update`が完了したことを確認します。 |
-| コンパイル開始前にビルドが失敗する | Python環境が有効であること、ARM Cortex-M用Zephyr SDKがインストール済みであること、v4.3.0の依存パッケージを導入したことを確認します。 |
+| `west boards`にSF32ターゲットが表示されない | upstream Zephyr v4.5.0以降からワークスペースを初期化したこと、および`west update`が完了したことを確認します。 |
+| コンパイル開始前にビルドが失敗する | Python環境が有効であること、ARM Cortex-M用Zephyr SDKがインストール済みであること、v4.5.0の依存パッケージを導入したことを確認します。 |
 | ビルドできるが書き込みできない | `sftool`がインストールされ`PATH`にあること、シリアルポートが正しいこと、ボードがシリアルダウンロードモードであることを確認します。 |
 | シリアル出力がない | `usart1`、`1000000` baud、USB-to-UART接続、および別のターミナルがポートを開いていないかを確認します。 |
 | 周辺機能のサンプルが失敗する | ボードの対応機能表とサンプル設定を確認します。ベースのボードターゲットですべての周辺機能が有効とは限りません。 |
@@ -1236,7 +1262,7 @@ Summary: SF32ハードウェアの量産設計の入口。チップ／モジュ�
 |:-----|:-------------|:-------------|
 | アーキテクチャ | 製品紹介とインターフェース要件 | 選定した部品とパッケージに加え、メモリー、ディスプレイ、オーディオ、ストレージ、電源に関する前提条件を記録します。 |
 | 回路図とレイアウト | チップまたはモジュールのハードウェア設計ガイド | 電源、クロック、リセット、RF、ストレージ、ディスプレイ、各インターフェースの実装内容をレビューして記録します。 |
-| BOM | 承認ベンダーリスト (AVL) と各部品のデータシート | 各重要部品について、代替品が適格と認められているか、計画的な検証を経ていることを記録します。 |
+| BOM | 承認ベンダーリスト (AVL) と各部品のデータシート | 各重要部品について、代替品が適合確認済みか、意図して検証したことを示す証跡を保管します。 |
 | 設計レビュー | ハードウェア設計チェックリスト | 適用される各チェック項目と例外への対応を記録します。 |
 | 立ち上げ | 開発ボード資料、SDKサンプル、実測試験 | 起動、書き込み、周辺機能、無線、消費電力、復旧について、再現可能な結果を記録します。 |
 | 量産用CADリリース | 公式EDAライブラリとパッケージ図 | シンボル、フットプリント、ピン配置、ランドパターン、製造データの検証記録を保管します。 |
@@ -2005,7 +2031,7 @@ SDKには、標準およびベンダー独自の複数のプロファイルの�
 - **Classic Bluetoothオーディオ** — ストリーミング用のA2DP、再生操作用のAVRCP、通話用のHFP。成熟しており、既存のスマートフォンやヘッドセットと広く互換性があります。
 - **LE Audio** — [Basic Audio Profile（BAP）](https://www.bluetooth.com/specifications/specs/basic-audio-profile-1-0-2/)は、ユニキャストとブロードキャストの両方のLE Audioストリームを管理する手順を定義しています。SDKにはブロードキャストソースとシンクの例があり、移行期間中にClassic BTとLE Audioを併用する製品向けの、両方式を組み合わせたブロードキャストソースの例も用意されています。
 
-どちらの方式でも、安定したタイミング、バッファリング、音声サンプルの確実な転送が必要で、通常はDMAを使います。必要なBluetoothオーディオの役割とSDK構成に対応するかを確認して、SF32LB52x/56x/58xを選んでください。SF32LB55xはBLE専用でClassic Bluetoothオーディオには対応しませんが、ローカル音声機能がないという意味ではありません。DMAとバッファリングについては、[オーディオ概要](../audio/overview.md)と[Bluetoothプロセッサーアーキテクチャ](processor.md#bluetooth-audio-and-le-audio)を参照してください。
+どちらの方式でも、安定したタイミング、バッファリング、音声サンプルの確実な転送が必要で、通常はDMAを使います。必要なBluetoothオーディオの役割とSDK構成に対応するかを確認して、SF32LB52x/56x/58xを選んでください。SiFli SDKのA2DP共有サンプルには`eh-lb57x`ボードが掲載され、A2DP音楽共有とHFP通話リレーが示されています。ただし、これはSF32LB57xの全品種・全役割への対応を示すものではありません。具体的なSKU、役割、SDK構成を確認してください。SF32LB55xはBLE専用でClassic Bluetoothオーディオには対応しませんが、ローカル音声機能がないという意味ではありません。DMAとバッファリングについては、[オーディオ概要](../audio/overview.md)と[Bluetoothプロセッサーアーキテクチャ](processor.md#bluetooth-audio-and-le-audio)を参照してください。
 
 ## Siblesサービスの実装パターン
 
@@ -2191,40 +2217,22 @@ SF32デバイスは、消費電力、メモリー、基板面積に厳しい制�
 
 <div align="center"><em>図: グラフィックスリソースから表示までの流れ</em></div>
 
-```text
-Source images, fonts, and animations
-        │
-        ▼
-GraphicsTool converts supported resources to eZip or eZip-A
-        │
-        ▼
-Compressed assets in NOR Flash, PSRAM, NAND, or file storage
-        │
-        ▼
-eZip hardware decoder expands an asset when required
-        │
-        ▼
-LVGL or another UI framework + graphics/display driver
-        │
-        ├── CPU fallback rendering
-        │
-        └── ePicasso pixel acceleration
-        │
-        ▼
-Final rendered bitmap in a draw buffer or framebuffer
-        │
-        ├── Uncompressed display path
-        │
-        └── Optional: extDMA compresses it into TurboPixel
-                    │
-                    ▼
-             TurboPixel framebuffer in PSRAM
-        │
-        ▼
-Display controller transfers pixels to the panel
-        │
-        ▼
-SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
+```mermaid
+flowchart TD
+    A["ソース画像、フォント、アニメーション"] --> B["GraphicsToolが対応リソースをeZipまたはeZip-Aに変換"]
+    B --> C["NOR Flash、PSRAM、NAND、またはファイルストレージ内の圧縮アセット"]
+    C --> D["eZipハードウェアデコーダーが必要に応じてアセットを展開"]
+    D --> E["LVGLなどのUIフレームワーク + グラフィックス/ディスプレイドライバー"]
+    E --> F["CPUによるフォールバック描画"]
+    E --> G["ePicassoによるピクセルアクセラレーション"]
+    F --> H["描画バッファーまたはフレームバッファー内の最終ビットマップ"]
+    G --> H
+    H --> I["非圧縮ディスプレイ経路"]
+    H --> J["任意：extDMAがビットマップをTurboPixelに圧縮"]
+    J --> K["PSRAM内のTurboPixelフレームバッファー"]
+    I --> L["ディスプレイコントローラーがピクセルをパネルへ転送"]
+    K --> L
+    L --> M["パネルインターフェース：SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI"]
 ```
 
 この処理経路は構成可能で、すべての製品に必須というわけではありません。eZip、ePicasso、TurboPixelや画面全体のフレームバッファーを使わない構成もあります。各機能の対応状況と接続方法は、デバイス、SDK、ディスプレイインターフェース、パネル、ドライバーの構成によって異なります。現行のOpenSiFli LCDCヘッダーは、`HAL_EXTDMA_MODULE_ENABLED`が有効で、チップ系列の条件を満たす場合に`LCDC_SUPPORTED_COMPRESSED_LAYER`を定義します。SF32LB52xとSF32LB57xは対象外です。また、ソースのコメントにはLCPU側では有効化されていないとの記載があります。公開SDKのLCDC機能表ではSF32LB55xの圧縮レイヤー展開が非対応とされているため、55xは実機での一連の動作が確認済みの対応ではなく、条件付きと考えてください。SDKの版、コア、ビルド設定、実機で経路全体を検証してください。詳しくは[TurboPixel](turbopixel.md#availability-in-the-sf32-family)を参照してください。
@@ -2953,6 +2961,8 @@ SF32LB52xは、エントリークラスのスマートウェアラブル機器�
 
 [^1]: STAR-MC1はArm China製の構成可能なArmv8-M Mainline組み込みCPU IPです。対応するSF32デバイスにおいて、SiFliはこれをArm Cortex-M33 STAR-MC1アプリケーションプロセッサーとして文書化しています。Cortex-M33クラスのソフトウェアモデルにより、通常のデバイス固有の統合作業を前提として、既存のCortex-M33ファームウェア、ミドルウェア、RTOSポート、ツールを引き継ぐことができます。CU、SP、SEの各構成は主にキャッシュ、TCM、XIPU、TrustZone対応の点で異なり、Arm Custom Instructions/CDEおよびコプロセッサーインターフェースはオプション機能であり、対象のSF32部品ごとに確認が必要です。SiFliのドキュメントでは、文脈に応じて ***Arm Cortex-M33 STAR-MC1*** または ***Arm Cortex-M33*** のいずれかの表記が使われることがあります。
 
+<div id="_1"></div>
+
 ## 用途
 
 **SF32LB52xは、コスト、機能統合度、バッテリー駆動時間を重視するBluetooth中心の製品に推奨されます。** たとえば、次の用途が挙げられます。
@@ -3000,7 +3010,11 @@ SF32LB52xは、エントリークラスのスマートウェアラブル機器�
 
 ---
 
+<div id="_2"></div>
+
 ## 機能と仕様
+
+<div id="_3"></div>
 
 ### 演算とメモリー
 
@@ -3009,6 +3023,8 @@ SF32LB52xは、エントリークラスのスマートウェアラブル機器�
 - 32 KB命令キャッシュ + 16 KBデータキャッシュ
 - アプリケーション用SRAM 512 KB、Bluetoothコントローラー用SRAM 64 KB
 - バリアントに応じて、1 MB QSPI-NORから16 MB OPI-PSRAMまでのパッケージ内蔵メモリーを選択可能
+
+<div id="_4"></div>
 
 ### グラフィックスとオーディオ
 
@@ -3020,6 +3036,8 @@ SF32LB52xは、エントリークラスのスマートウェアラブル機器�
 - 24-bitオーディオADC × 1（SNR 99 dB）
 - 24-bitオーディオDAC × 1（SNR 109 dB）
 
+<div id="_5"></div>
+
 ### 無線接続
 
 - Bluetooth 5.3デュアルモード（Classic Bluetooth / BLE）
@@ -3030,11 +3048,15 @@ SF32LB52xは、エントリークラスのスマートウェアラブル機器�
 - 64 KB SRAMを搭載し、24 MHzで動作する専用Arm Cortex-M33 STAR-MC1 Bluetoothコントローラーコア
 - 製品概要に記載されたスリープ電流は2 µA。システム全体の待機電流は動作モードや基板上の漏れ電流によって異なります。
 
+<div id="_6"></div>
+
 ### セキュリティ
 
 - AES/HASH/CRCハードウェアアクセラレーター
 - TRNG
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### ペリフェラルとI/O
 
@@ -3050,6 +3072,8 @@ SF32LB52xは、エントリークラスのスマートウェアラブル機器�
 - RTCおよびウォッチドッグタイマー
 - バリアントファミリーに応じて44または45 GPIO
 
+<div id="_7"></div>
+
 ### 電源
 
 - **バッテリー駆動グループ: SF32LB520/3/5/7** — 単セルLi-ion/Li-Poバッテリーから直接給電し、充電機能を内蔵した電源構成を使う設計向けです。
@@ -3059,6 +3083,8 @@ SF32LB52xは、エントリークラスのスマートウェアラブル機器�
 - **外部電源駆動1.8 Vグループ: SF32LB52D** — 特殊な1.8 V超低消費電力設計向けで、3.3 V品とは電気的に互換性がありません。
 
 バッテリー駆動品と外部電源駆動品はシリコン構成が異なり、電源系統をまたいだ **ピン互換性はありません**。
+
+<div id="_8"></div>
 
 ## 製品バリエーション
 
@@ -3092,7 +3118,7 @@ SiFliのチップ型番ガイドに掲載されている主要品種は、次の
 
 </div>
 
-この表は、SiFliの[チップ型番ガイド](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)に掲載された主要品種をまとめたもので、完全な注文品目一覧ではありません。リンク先の外部電源版データシートには、**SF32LB52HUD6**（1.8 V、QFN68L、128 Mb PSRAM）も記載されています。また、ハードウェア設計ガイドでは`52AUx6`および`52D/F/HUx6`という追加の末尾表記も使われています。これらの資料には、統一された品種一覧がありません。設計を確定する前に、該当SKUの注文可否、電源範囲、内蔵メモリーのインターフェース、I/O仕様を最新のデータシートで確認してください。
+この表は、SiFliの[チップ型番ガイド](https://wiki.sifli.com/en/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)に掲載された主要品種をまとめたもので、完全な注文品目一覧ではありません。リンク先の[DS5202-SF32LB52Xデータシート V0.2.6](https://downloads.sifli.com/docs/Datasheet/SF32LB52X/DS5202-SF32LB52X-Datasheet%20V0p2p6.pdf)は改訂履歴（2025-03-12）で**SF32LB52HUD6**に言及していますが、現在の注文情報（Table 5-7）にはこの型番がありません。この履歴上の記載だけでは、現在注文可能であることもSKUの仕様も確認できません。ハードウェア設計ガイドには別途`52AUx6`および`52D/F/HUx6`というサフィックス表記があります。設計を確定する前に、該当する注文型番と仕様をSiFliの最新公式資料で確認してください。
 
 ## 設計・導入の進め方
 
@@ -3127,11 +3153,17 @@ RGB888カラーで最大512 × 512です（DTR対応のQSPIディスプレイイ
 まず[SF32LB52xハードウェア設計ガイド](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)で回路図、電源、クロック/RF、PCBレイアウトの指針を確認し、基板リリース前に回路図とレイアウトのチェックリストを使用してください。
 <!-- uf-faq:end -->
 
+<div id="_9"></div>
+
 ## 関連製品
+
+<div id="_10"></div>
 
 ### モジュール
 
 [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) の標準構成では、8 MBのOPI-PSRAMをチップと同一パッケージに収めたSF32LB525UC6と、RFマッチング回路を組み合わせています。モジュール寸法は27.9 × 18.0 × 3.1 mmです。チップレベルのRF回路設計と検証の負担を抑えながら、SF32LB52クラスの機能を利用したいプロジェクトに適しています。
+
+<div id="_11"></div>
 
 ### 開発キット
 
@@ -3139,6 +3171,8 @@ RGB888カラーで最大512 × 512です（DTR対応のQSPIディスプレイイ
 - [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) は外部電源駆動のコンパクトなコアボードで、52B/52Jクラスの品種を使ったファームウェア、GPIO、低消費電力機能の初期評価に適しています。
 - [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) は52シリーズで最も小型の開発ボードです。製品の実装スペースが限られる場合に役立ちます。
 - [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) は、低消費電力を重視したボードで、バッテリー駆動を重視した評価や小型製品の試作に適しています。
+
+<div id="_12"></div>
 
 ### リファレンス製品
 
@@ -3155,6 +3189,8 @@ Summary: SF32LB55x: エントリークラスのBluetooth MCUより高い描画�
 
 # SF32LB55x
 
+<div id="_1"></div>
+
 ## 概要
 
 SF32LB55xシリーズは、エントリークラスのBluetooth MCUより高い表示性能、大きなメモリー容量、幅広いパッケージ選択肢を求めるBLE接続製品向けの、メインストリームの超低消費電力AIoT MCUファミリーです。
@@ -3168,6 +3204,8 @@ SiFliの公式製品ブリーフとデータシートによると、本ファミ
 SiFliのチップ型番ガイドによると、SF32LB55xは後発の52/56/58ファミリーより前に定義されたため、型番のサフィックスは新しい命名規則に完全には沿っていません。サフィックスだけから機能を推測せず、完全な注文型番とパッケージ別の機能表を選定の基準にしてください。
 
 [^1]: STAR-MC1はArm China製の構成可能なArmv8-M Mainline組み込みCPU IPです。対応するSF32デバイスにおいて、SiFliはこれをArm Cortex-M33 STAR-MC1アプリケーションプロセッサーとして文書化しています。通常のデバイス固有の統合作業は必要ですが、Cortex-M33クラスのソフトウェアモデルにより、既存のCortex-M33ファームウェア、ミドルウェア、RTOSポート、ツールを引き続き活用しやすくなります。CU、SP、SEの各構成は主にキャッシュ、TCM、XIPU、TrustZone対応の点で異なり、Arm Custom Instructions/CDEおよびコプロセッサーインターフェースはオプション機能であり、対象のSF32部品ごとに確認が必要です。SiFliのドキュメントでは、文脈に応じて ***Arm Cortex-M33 STAR-MC1*** または ***Arm Cortex-M33*** のいずれかの表記が使われることがあります。
+
+<div id="_2"></div>
 
 ## 用途
 
@@ -3189,6 +3227,8 @@ SiFliのチップ型番ガイドによると、SF32LB55xは後発の52/56/58フ�
 - ユーザープログラム可能な低消費電力プロセッサー
 - SF32LB52xより多いGPIO、またはI/O密度の高いパッケージの選択肢
 - NOR、NAND、eMMC、QSPI-PSRAM、OPI-PSRAMなどの外部メモリー選択肢
+
+<div id="_3"></div>
 
 ## 開発リソース
 
@@ -3224,7 +3264,11 @@ SiFliのチップ型番ガイドによると、SF32LB55xは後発の52/56/58フ�
 
 ---
 
+<div id="_4"></div>
+
 ## 機能と仕様
+
+<div id="_5"></div>
 
 ### 演算とメモリー
 
@@ -3235,6 +3279,8 @@ SiFliのチップ型番ガイドによると、SF32LB55xは後発の52/56/58フ�
 - 1,088 KBのアプリケーションSRAM（64 KBのリテンションSRAMを含む）
 - 224 KBの低消費電力SRAM（全領域がリテンションSRAM）
 - NOR、NAND、eMMC、QSPI-PSRAM、OPI-PSRAM用の外部メモリーインターフェース
+
+<div id="ai"></div>
 
 ### グラフィックス、ディスプレイ、AI
 
@@ -3248,6 +3294,8 @@ SiFliのチップ型番ガイドによると、SF32LB55xは後発の52/56/58フ�
 - LCDコントローラーを2基搭載。常時表示用インターフェースとデュアルディスプレイ機能は、型番とパッケージによって異なります
 - TinyML向けニューラルネットワーク行列アクセラレーター（最大1.92 GOPS、5.73 TOPS/W）
 
+<div id="_6"></div>
+
 ### 無線接続
 
 - Bluetooth Low Energy 5.2
@@ -3256,11 +3304,15 @@ SiFliのチップ型番ガイドによると、SF32LB55xは後発の52/56/58フ�
 - 最大送信電力: 10 dBm
 - 受信ピーク電流: 3.3 V時に2.0 mA
 
+<div id="_7"></div>
+
 ### セキュリティ
 
 - AESおよびCRCハードウェアアクセラレーター
 - 真性乱数発生器（TRNG）
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### ペリフェラルとI/O
 
@@ -3291,6 +3343,8 @@ SiFliのチップ型番ガイドによると、SF32LB55xは後発の52/56/58フ�
 - ペリフェラルタスクコントローラー（PTC）
 - GPIO数はパッケージによって異なります。下のパッケージ表と資料間の差異に関する注記を参照してください
 
+<div id="_8"></div>
+
 ### 電源とパッケージ
 
 - 電源電圧範囲は品種によって異なります。SS6600A8は2.97 V～3.63 V、551U4O5と本ページで取り上げたBGA品種は1.71 V～3.63 Vです
@@ -3299,6 +3353,8 @@ SiFliのチップ型番ガイドによると、SF32LB55xは後発の52/56/58フ�
 - RTCウェイクアップ有効時のスリープ電流: 600 nA
 - ピンウェイクアップ有効時のスリープ電流: 280 nA
 - パッケージオプション: QFN68L、BGA145、BGA169
+
+<div id="_9"></div>
 
 ## 製品バリエーション
 
@@ -3336,6 +3392,8 @@ SF32LB55xにはQFNとBGAのパッケージがあります。GPIO数、内蔵メ�
 
 SF32LB557VD3A6について、SiFliの現行チップ型番ガイドとDS5501 V1.7.2データシートの表 0-1 は、HCPU 71 GPIO + LCPU 42 GPIO、合計113 GPIOとしています。一方、同データシートの特性概要とパッケージ概要、およびPB0001 V1.3製品概要は、BGA169を119 GPIO（HCPU 71 + LCPU 48）と記載しています。つまり、公式資料の記載は一致しておらず、DS5501データシート内にも差異があります。本ページでは、型番別の記載と現行チップ型番ガイドに従い、113 GPIOとしています。ピンを割り当てる前、または設計を確定する前に、選定パッケージのボールマップで使用可能なGPIOを確認し、実際の注文型番についてSiFliに確認してください。電源・温度定格、完全な型番、パッケージ内蔵メモリーの構成も [DS5501 V1.7.2データシート][データシート]、[PB0001 V1.3製品概要][製品概要]、[SiFliチップ型番ガイド][SiFliチップ型番ガイド]で確認してください。BGA145とBGA169はいずれも、外形7 × 7 × 0.94 mm、端子ピッチ0.5 mmです。
 
+<div id="_10"></div>
+
 ## 設計・導入の進め方
 
 候補となるSF32LB55x品種を検証済みの設計につなげるには、次の順で進めます。
@@ -3349,7 +3407,7 @@ SF32LB557VD3A6について、SiFliの現行チップ型番ガイドとDS5501 V1.
 ## よくある質問
 
 **SF32LB55xの主な仕様は？**
-SF32LB55xはアプリケーションCPU（Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33 @48 MHz、ユーザーによるプログラミングが可能）を備えています。内蔵SRAMは1,312 KBで、BluetoothはBLEのみです。グラフィックスはePicasso 1.0、パッケージはQFN68L / BGA145 / BGA169（7 × 7 mm (QFN68L)）、USBは2.0 FSです。
+SF32LB55xはアプリケーションCPU（Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33 @48 MHz、ユーザーによるプログラミングが可能）を備えています。内蔵SRAMは1,312 KBで、BluetoothはBLEのみです。グラフィックスはePicasso 1.0です。本ページ前半のファミリー概要では、グラフィックスエンジンをePicasso 2.5Dと記載しています。利用可能な資料ではこの2つの表記の関係が説明されていないため、同等性や世代の違いを推測せず、正確な注文型番のグラフィックス機能を最新の公式資料で確認してください。パッケージはQFN68L / BGA145 / BGA169（7 × 7 mm (QFN68L)）、USBは2.0 FSです。
 
 **SF32LB55xが対応するディスプレイインターフェースは？**
 SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPIに対応しています。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。これはファミリー全体の一覧であり、すべての型番やパッケージで全インターフェースを利用できる保証ではありません。リンク先のインターフェースマトリクスを確認してください。
@@ -3367,11 +3425,17 @@ SS6600A8は2.97～3.63 V、本ページに記載のSF32LB551U4O5とBGA品種は1
 まず[SF32LB55xハードウェア設計ガイド](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md)で回路図、電源、クロック/RF、PCBレイアウトの指針を確認し、基板リリース前に回路図とレイアウトのチェックリストを使用してください。
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## 関連製品
+
+<div id="_12"></div>
 
 ### 開発キット
 
 パッケージの選定、電源系統の定義、ディスプレイインターフェースの選択、メモリーの計画、RFレイアウト、量産テスト計画の出発点として、公式のハードウェアアプリケーションノート、リファレンス回路図、チェックリストを使用してください。
+
+<div id="_13"></div>
 
 ### リファレンス製品
 
@@ -3385,6 +3449,8 @@ Summary: SF32LB56x: 高機能なディスプレイ、内蔵オーディオ、外
 
 # SF32LB56x
 
+<div id="_1"></div>
+
 ## 概要
 
 SF32LB56xシリーズは、デュアルモードBluetooth、より高度なグラフィックス、内蔵オーディオ、外部メモリーを必要とし、下位クラスのSF32LBデバイスより柔軟なディスプレイ・ストレージ構成を求める製品向けの、先進的な超低消費電力AIoTマイクロコントローラーファミリーです。
@@ -3396,6 +3462,8 @@ SiFliの公式製品ブリーフとデータシートでは、SF32LB56xを、表
 SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用できるディスプレイインターフェースはパッケージによって異なるため、正確な型番とパッケージはPCB設計の後半ではなく、アーキテクチャを決める段階で選定します。
 
 [^1]: STAR-MC1はArm China製の構成可能なArmv8-M Mainline組み込みCPU IPです。対応するSF32デバイスにおいて、SiFliはこれをArm Cortex-M33 STAR-MC1アプリケーションプロセッサーとして文書化しています。Cortex-M33クラスのソフトウェアモデルにより、通常のデバイス固有の統合作業を前提として、既存のCortex-M33ファームウェア、ミドルウェア、RTOSポート、ツールを引き継ぐことができます。CU、SP、SEの各構成は主にキャッシュ、TCM、XIPU、TrustZone対応の点で異なり、Arm Custom Instructions/CDEおよびコプロセッサーインターフェースはオプション機能であり、対象のSF32部品ごとに確認が必要です。SiFliのドキュメントでは、文脈に応じて ***Arm Cortex-M33 STAR-MC1*** または ***Arm Cortex-M33*** のいずれかの表記が使われることがあります。
+
+<div id="_2"></div>
 
 ## 用途
 
@@ -3419,6 +3487,8 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 - SDIO経由の外部Wi-Fi、SD/SDIOまたはeMMC経由の外部ストレージ
 - WBBGA175パッケージで利用できる、より多くのGPIO
 - TinyML、オーディオ、UIを同時に処理する余力
+
+<div id="_3"></div>
 
 ## 開発リソース
 
@@ -3458,7 +3528,11 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 
 ---
 
+<div id="_4"></div>
+
 ## 機能と仕様
+
+<div id="_5"></div>
 
 ### 演算とメモリー
 
@@ -3470,6 +3544,8 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 - LCPUメモリーシステム：16 KB Iキャッシュ + 8 KB Dキャッシュ、160 KBのリテンションSRAM
 - パッケージ内QSPI-NORオプション：512 KBまたは1 MB
 - QSPI-NOR、SPI-NAND、QPI/OPI-PSRAM、SD/SDIO、eMMC用の外部メモリーインターフェース
+
+<div id="ai"></div>
 
 ### グラフィックス、ディスプレイ、AI
 
@@ -3484,6 +3560,8 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 - TurboPixel: extDMAによる固定比率の非可逆最終フレームバッファ圧縮とディスプレイコントローラー側での展開により、PSRAMの帯域幅と容量を削減
 - TinyMLワークロード向けニューラルネットワーク行列アクセラレーター、最大1.92 GOPS、10 TOPS/W超
 
+<div id="_6"></div>
+
 ### オーディオと無線接続
 
 - BLE Audio対応のデュアルモードBluetooth 5.3
@@ -3494,11 +3572,17 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 - 24ビットHiFiオーディオADC × 1、SNR 99 dB
 - PDMインターフェース × 2、I2Sインターフェース × 1
 
+**DACのSNRに関する資料間の相違：**[PB0056 V1.1](https://downloads.sifli.com/silicon/PB0056-SF32LB56x-Product%20Brief%20V1p1.pdf)と[UM5601 V1.0.2](https://downloads.sifli.com/user%20manual/UM5601-SF32LB56x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V1p0p2.pdf)は108 dB、[DS5601 V1.9.2](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-Datasheet%20V1p9p2.pdf)は109 dBと記載しています。本ページでリンクしている新しいPB0056 V1.2、DS5601 V1.9.3、UM5601 V1.0.5ではこの差異を解消できていないため、基準となる値は未確定です。使用前に正確な型番に対応する最新資料で確認してください。
+
+<div id="_7"></div>
+
 ### セキュリティ
 
 - AES、HASH、CRCハードウェアアクセラレーター
 - 真性乱数発生器(TRNG)
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### ペリフェラルとI/O
 
@@ -3515,6 +3599,8 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 - ペリフェラルタスクコントローラー(PTC)
 - パッケージに応じて最大120 GPIO
 
+<div id="_8"></div>
+
 ### 電源とパッケージ
 
 - 電源電圧範囲：1.71 V～3.63 V
@@ -3523,6 +3609,8 @@ SiFliのチップ型番ガイドも確認してください。SF32LB56xで利用
 - RTCウェイクアップ有効時のスリープ電流：600 nA
 - ピンウェイクアップ有効時のスリープ電流：300 nA
 - パッケージオプション: QFN68L、WBBGA175
+
+<div id="_9"></div>
 
 ## 製品バリエーション
 
@@ -3546,6 +3634,8 @@ SF32LB56xには、コンパクトなQFN68L品からI/O数の多いWBBGA175品ま
 | SF32LB567VND36 | WBBGA175 | 79 / 41 | 16 MB OPI-PSRAM + 1 MB QSPI-NOR Flash | DPI / QSPI / 8080 / JDI | モジュール標準品とは異なるチップを選び、単一の大容量PSRAM領域と柔軟なディスプレイ配線を必要とする高I/O設計 |
 
 </div>
+
+<div id="_10"></div>
 
 ## 設計・導入の進め方
 
@@ -3580,15 +3670,23 @@ RGB888カラーで最大1024 × 600です（BGAパッケージのDPI/RGBイン�
 まず[SF32LB56xハードウェア設計ガイド](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md)で回路図、電源、クロック/RF、PCBレイアウトの指針を確認し、基板リリース前に回路図とレイアウトのチェックリストを使用してください。
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## 関連製品
+
+<div id="_12"></div>
 
 ### モジュール
 
 [SF32LB56-MOD](../modules/SF32LB56-MOD.md) は、SF32LB566VCB36、メモリー、RF回路、アンテナの選択肢をまとめた組み込み用モジュールです。SF32LB56xの機能を活用しつつ、RF配線、アンテナ整合、水晶の配置、高速メモリーの実装に伴うリスクを抑えたい場合に適しています。
 
+<div id="_13"></div>
+
 ### 開発キット
 
 [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) は、チップ単体またはモジュールを使った設計を確定する前に、ファームウェアの立ち上げ、ディスプレイ、オーディオ、ストレージ、RF、および消費電力を評価するための実用的な開発環境です。
+
+<div id="_14"></div>
 
 ### リファレンス製品
 
@@ -3853,6 +3951,8 @@ Summary: SF32LB58x: グラフィックス、ディスプレイ、メモリー、
 
 # SF32LB58x
 
+<div id="_1"></div>
+
 ## 概要
 
 SF32LB58xシリーズは、SF32LB5xファミリーの最上位クラスに位置します。高度なグラフィックス、大容量メモリー、デュアルモードBluetooth、豊富なオーディオ／ディスプレイI/O、多数のGPIOが求められるバッテリー駆動AIoT製品に適しており、より大型のアプリケーションプロセッサー搭載プラットフォームへ移行する必要はありません。
@@ -3862,6 +3962,8 @@ SF32LB58xは、3基のArm Cortex-M33 STAR-MC1[^1] コアを備えた異種マル
 SiFliの資料によると、SF32LB58xは3,744 KBのオンチップSRAMを搭載し、SKUに応じてNOR Flash、OPI-PSRAM、HPI-PSRAMの異なる組み合わせをパッケージに内蔵します。また、MIPI DSIを含むディスプレイ機能、ベクターグラフィックスアクセラレーション、USB 2.0 High-Speedに対応し、I/O数の多いBGAパッケージを採用しています。高解像度UI、大きなグラフィックスアセット、SDIO接続の外部Wi-Fi、またはエッジAIやセンサーフュージョンに必要な処理・メモリー資源を求める設計では、SF32LB58xを評価候補にできます。
 
 [^1]: STAR-MC1はArm China製の構成可能なArmv8-M Mainline組み込みCPU IPです。対応するSF32デバイスにおいて、SiFliはこれをArm Cortex-M33 STAR-MC1アプリケーションプロセッサーとして文書化しています。Cortex-M33クラスのソフトウェアモデルにより、通常のデバイス固有の統合作業を前提として、既存のCortex-M33ファームウェア、ミドルウェア、RTOSポート、ツールを引き継ぐことができます。CU、SP、SEの各構成は主にキャッシュ、TCM、XIPU、TrustZone対応の点で異なり、Arm Custom Instructions/CDEおよびコプロセッサーインターフェースはオプション機能であり、対象のSF32部品ごとに確認が必要です。SiFliのドキュメントでは、文脈に応じて ***Arm Cortex-M33 STAR-MC1*** または ***Arm Cortex-M33*** のいずれかの表記が使われることがあります。
+
+<div id="_2"></div>
 
 ## 用途
 
@@ -3883,6 +3985,8 @@ SiFliの資料によると、SF32LB58xは3,744 KBのオンチップSRAMを搭載
 - SDIO経由の外部Wi-Fi
 - 大容量のフレームバッファ、オーディオ、グラフィックス、またはAIモデル用メモリー
 - 高いGPIO数、または複数の高速外部インターフェース
+
+<div id="_3"></div>
 
 ## 開発リソース
 
@@ -3910,7 +4014,11 @@ SiFliの資料によると、SF32LB58xは3,744 KBのオンチップSRAMを搭載
 
 ---
 
+<div id="_4"></div>
+
 ## 機能と仕様
+
+<div id="_5"></div>
 
 ### 演算・メモリー
 
@@ -3919,6 +4027,8 @@ SiFliの資料によると、SF32LB58xは3,744 KBのオンチップSRAMを搭載
 - パッケージ内蔵NOR FlashはSKUに応じて合計1～8 MB
 - パッケージ内蔵OPI-PSRAMおよびHPI-PSRAMのオプション。HPI-PSRAMはSKUに応じて最大2 × 32 MB
 - 外部NORまたはSPI NAND FlashはMPI3/MPI4で接続し、SD NAND、eMMC、SDカード、外部Wi-FiはSDIOで接続します。利用できる組み合わせは、インターフェースの選択とピン割り当てによって異なります。
+
+<div id="ai"></div>
 
 ### グラフィックス・ディスプレイ・AI
 
@@ -3934,6 +4044,8 @@ SiFliの資料によると、SF32LB58xは3,744 KBのオンチップSRAMを搭載
 - SPI、DSPI、QSPI（SPI接続の電子ペーパーを含む）、MCU8080、JDI、RGB/DPI（RGB888またはRGB565）、MIPI DSIディスプレイインターフェース
 - MIPI DSIとSPI、DSPI、またはQSPIを組み合わせ、異なる内容を表示する2画面構成に対応
 - ローカルなエッジAI、機械学習、センサーフュージョンワークロードに適合
+
+<div id="_6"></div>
 
 ### オーディオ・無線通信
 
@@ -3972,11 +4084,15 @@ SiFliの資料によると、SF32LB58xは3,744 KBのオンチップSRAMを搭載
 - RTC、ウォッチドッグ、GPIOウェイク、PBRウェイク、PWM、I2C、SPI、汎用アナログインターフェース
 - 高密度設計向けのBGA256パッケージ
 
+<div id="_7"></div>
+
 ### 電源・パッケージ
 
 - 電源電圧範囲：1.71～3.63 V
 - BGA256パッケージ、6.5 × 8.5 × 0.94 mm、0.4 mmピッチ
 - HDI PCBが必須。量産設計には6HDI-2積層構成が推奨されます
+
+<div id="_8"></div>
 
 ## 製品バリエーション
 
@@ -4006,6 +4122,8 @@ SiFliの現行チップ型番ガイドには、BGA256のSF32LB58x注文コード
 - 外部ストレージとWi-Fiインターフェースの要件
 - BGA256、0.4 mmピッチのHDIレイアウトに対するPCB製造能力
 
+<div id="_9"></div>
+
 ## 設計・導入の進め方
 
 SF32LB58xの候補リストを検証済みの設計へと進めるには、以下の順序で進めてください。
@@ -4019,7 +4137,7 @@ SF32LB58xの候補リストを検証済みの設計へと進めるには、以�
 ## よくある質問
 
 **SF32LB58xの主な仕様は？**
-SF32LB58xはアプリケーションCPU（2× Cortex-M33 @240 MHz）と低消費電力コア（Cortex-M33 @48/96 MHz、ユーザーによるプログラミングが可能）を備えています。内蔵SRAMは3.7 MBで、Bluetoothはデュアルモード（Classic Bluetooth + BLE）です。グラフィックスはePicasso 2.0 + Vivante GCNanoUltraV (vector)、パッケージはBGA256（8.5 × 6.5 mm）、USBは2.0 HSです。
+SF32LB58xはアプリケーションCPU（2× Cortex-M33 @240 MHz）と、最大96 MHzに調整可能なユーザープログラム対応の低消費電力Cortex-M33を備えています。別に示される48 MHzはCoreMarkの電力測定点であり、2つ目の規定動作周波数であることは資料から確認できません。内蔵SRAMは3.7 MBで、Bluetoothはデュアルモード（Classic Bluetooth + BLE）です。グラフィックスはePicasso 2.0 + Vivante GCNanoUltraV (vector)、パッケージはBGA256（8.5 × 6.5 mm）、USBは2.0 HSです。
 
 **SF32LB58xが対応するディスプレイインターフェースは？**
 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPIに対応しています。詳細は[デバイスごとのインターフェースマトリクス](../../learn/graphics/display-controller.md#per-device-interface-matrix)を参照してください。
@@ -4037,15 +4155,23 @@ RGB565カラーでは最大1280 × 800、RGB888カラーでは最大1280 × 720�
 まず[SF32LB58xハードウェア設計ガイド](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md)で回路図、電源、クロック/RF、PCBレイアウトの指針を確認し、基板リリース前に回路図とレイアウトのチェックリストを使用してください。
 <!-- uf-faq:end -->
 
+<div id="_10"></div>
+
 ## 関連製品
+
+<div id="_11"></div>
 
 ### モジュール
 
 [SF32LB58-MOD](../modules/SF32LB58-MOD.md) は、SF32LB586VDD36チップ、そのRFマッチングネットワーク、パッケージ内HPI-PSRAMとストレージオプションを、すぐに組み込めるモジュールにまとめています。58シリーズの機能を必要としながらも、ハードウェア開発の早い段階でRF、BGA、メモリーレイアウトのリスクを軽減したいプロジェクトに適しています。
 
+<div id="_12"></div>
+
 ### 開発キット
 
 [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) は、電源ツリー、ディスプレイ、ストレージ、オーディオ、RF、USB、SDIOの設計判断の出発点です。
+
+<div id="_13"></div>
 
 ### リファレンス製品
 
@@ -4254,6 +4380,8 @@ SiFliの中国語ボードガイドでは、1.85インチAMOLEDモジュール�
 | 24 | PA_32 | **PA32**、UART、I2C、GPTIM、GPADC4 | PD |
 
 </div>
+
+ボード概要ではGPADCを6チャネルとしていますが、このピン機能表ではPA28～PA34にGPADC0～GPADC6が記載されています。SiFli SDKではADC CH7がVBATに割り当てられています。これらの資料から、ボード上で外部入力として7チャネルを同時に使用できるとは確認できないため、ボード上のチャネル数は未確定です。外部アナログ信号を接続する前に、対象ボードのリビジョン、ピン多重化、チャネル設定を確認してください。[SiFli ADCガイド](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/adc.html)を参照してください。
 
 ### LCD、オーディオ、デバッグヘッダー
 
@@ -4569,7 +4697,13 @@ SiFliの元のボードノートでは、`TFT-H043A28WQISTKN22_V0-3`がサポー
 | モジュールピン | 信号 | ボード機能 |
 | :--- | :--- | :--- |
 | PA44 | VBUS_DET | 充電器接続検出 |
-| PA43..PA37 | DB7..DB2 | MCU/8080 LCDデータ |
+| PA43 | DB7 | MCU/8080 LCDデータ |
+| PA42 | DB6 | MCU/8080 LCDデータ |
+| PA41 | DB5 | MCU/8080 LCDデータ |
+| PA40 | DB4 | MCU/8080 LCDデータ |
+| PA39 | DB3 | MCU/8080 LCDデータ |
+| PA38 | GPIO | 汎用入出力 |
+| PA37 | DB2 | MCU/8080 LCDデータ |
 | PA08..PA07 | DB1..DB0 / QSPI D3..D2 | LCDデータ |
 | PA06 | DC / QSPI D1 | LCDデータ/コマンド |
 | PA05 | RD / QSPI D0 | LCDデータ |
@@ -4581,7 +4715,7 @@ SiFliの元のボードノートでは、`TFT-H043A28WQISTKN22_V0-3`がサポー
 | PA33 / PA30 | I2C SDA / SCL | タッチパネル |
 | PA31 / PA09 | Touch INT / RST | タッチパネル |
 | PA24、PA25、PA28、PA29 | SPI1 | TFカードインターフェース |
-| PA26 | カード検出 / LED | 共有機能 |
+| PA26 | SDカード検出 / 外部Flash2チップセレクト / GPIO LED | V1.2.0で共用。実際のリビジョンを確認 |
 | PA20 / PA27 | UART RX/TX | ユーザーUART |
 | PA18 / PA19 | デバッグUART RX/TX | 書き込みとソフトウェアデバッグ |
 | PA10 | AU_PA_EN | オーディオアンプ有効化 |
@@ -5073,6 +5207,12 @@ SiFli V1.0.0ガイドにはバッテリー容量について2つの記述があ�
 - 容量が450 mAhを超えるLi-ionバッテリー
 - UARTデバッグとネイティブUSBテストを同時に行う場合の2本目のUSBケーブル
 
+<div id="_1"></div>
+<div id="board-einrichtung-und-startmodi"></div>
+<div id="configuracao-da-placa-e-modos-de-inicializacao"></div>
+<div id="configuracion-y-modos-de-arranque-de-la-placa"></div>
+<div id="configuration-de-la-carte-et-modes-de-demarrage"></div>
+
 ### ボードのセットアップと起動モード
 
 ホストとボードのUSB Type-C UARTポートを接続し、SifliTraceを開いて正しいCOMポートを選択してください。
@@ -5154,7 +5294,7 @@ SiFli-SDKの正確なボードターゲット名は`sf32lb52-lchspi-ulp`です�
 
 このボードはAMOLEDディスプレイパスを使用し、22ピンのQSPI FPC信号セットを引き出しています。SiFliのV1.0.0表では5～10番ピンがNCとされています。以下の表には22個すべての位置を記載し、未接続のピンも明示しています。
 
-スクリーンボードの注記では、LCDモジュール用の22ピンFPCコネクターと、コアボード用の24ピン基板対基板（B2B）コネクターが区別されています。組み立て前に、正確なボードリビジョンで両方のインターフェースを確認してください。
+**コネクター仕様の不一致 — 選定前に確認してください：**SiFliのガイド本文では、専用ディスプレイインターフェースを22ピンFPCと40ピンヘッダーで引き出すと説明しています。一方、スクリーンボードの図では、LCDモジュール用の22ピンFPCとコアボード用の24ピン基板対基板（B2B）コネクターが示されています。資料には40ピンヘッダーと24ピンB2Bコネクターの関係が説明されていません。どちらか一方のピン数だけでコネクターを選定・接続せず、実際のアセンブリーリビジョンの回路図/BOMで確認してください。
 
 <div align="center"><em>22ピンQSPIディスプレイ・タッチFPC信号マップ</em></div>
 
@@ -5917,7 +6057,11 @@ Source: https://uForge.io/ja/sf32-products/family/SF32_family/
 
 Summary: SF32LB5xxファミリーの概要。ヘテロジニアス構成のCortex-M33コア、Bluetooth、ePicassoグラフィックス、エッジAIの特長を、比較表と簡易チップ選定ガイドとともに紹介します。
 
+<div id="sf32"></div>
+
 # SF32ファミリー
+
+<div id="_1"></div>
 
 ## はじめに
 
@@ -5950,6 +6094,8 @@ Summary: SF32LB5xxファミリーの概要。ヘテロジニアス構成のCorte
     [量産準備を進める :material-arrow-right:](../../hardware/design-for-production.md){ .uf-hw-link-green }
 
 </div>
+
+<div id="_2"></div>
 
 ## 主な特徴
 
@@ -6300,7 +6446,7 @@ Summary: SF32製品選定のFAQ：チップ、モジュール、開発ボード�
 - **電源:** バッテリーまたは安定化電源、動作電圧範囲、I/Oレベル。
 - **オーディオ機能:** マイクチャンネルを含むADC/DAC、I2S、PDMの要件。
 
-ファミリー番号だけでなく、具体的な型番を比較してください。番号が大きい製品が必ずしも最適とは限りません。これらの要素はすべて[製品選定ツール](../product-selector.md)の絞り込み条件です。条件を設定して、候補となる型番を絞り込んでください。
+ファミリー番号だけでなく、具体的な型番を比較してください。番号が大きい製品が必ずしも最適とは限りません。[製品選定ツール](../product-selector.md)ではパッケージ、電源、ディスプレイ、GPIO、オーディオなどの条件で絞り込めますが、Bluetoothモードのフィルターはありません。利用可能な条件で候補を絞り、型番ごとのページでBLE/Classic Bluetoothへの対応を確認してください。
 
 [ファミリー比較](SF32_family.md) · [製品選定ツール](../product-selector.md)
 
@@ -6448,6 +6594,8 @@ Summary: SF32製品の企画から量産準備までの一連の流れ。デバ�
 Source: https://uForge.io/ja/sf32-products/
 
 Summary: SF32ハードウェアを理解し、製品を計画し、チップ・モジュール・開発ボードを選定し、リファレンスデザインを再利用し、量産設計を準備するための出発点です。
+
+<div id="sf32"></div>
 
 # SF32製品
 

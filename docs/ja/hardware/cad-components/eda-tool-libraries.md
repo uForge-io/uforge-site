@@ -29,7 +29,7 @@ SiFliは、SF32チップおよびモジュール向けの回路図シンボル�
 
 ## ライブラリ形式の概要 { #library-format-at-a-glance }
 
-<div align="center"><em>ライブラリ形式の概要</em></div>
+<div align="center"><em>表: ライブラリ形式の概要</em></div>
 
 <div align="center" markdown style="max-width: 100%; overflow-x: auto;">
 
@@ -50,7 +50,7 @@ JLCEDA / LCEDA ProとPADSはアーカイブ、OrCADは単独の`.OLB`ライブ�
 
 [OpenSiFli/kicad-libraries](https://github.com/OpenSiFli/kicad-libraries) リポジトリーは、SiFli公式のKiCad用シンボル、フットプリント、3DモデルライブラリをCC-BY-SA-4.0で提供しています。このレビューでは2026-10-05に[リリース`1.0.0`](https://github.com/OpenSiFli/kicad-libraries/releases/tag/1.0.0)を確認しました。新規設計の前に、より新しいリリースがないか確認してください。
 
-<div align="center"><em>KiCadライブラリの対応状況</em></div>
+<div align="center"><em>表: KiCadライブラリの対応状況</em></div>
 
 <div align="center" markdown style="max-width: 100%; overflow-x: auto;">
 

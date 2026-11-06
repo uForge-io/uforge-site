@@ -17,6 +17,16 @@ tags:
 
 Compare o desenho do encapsulamento e os requisitos do padrão de pads do QFN ou BGA selecionado com a capacidade de montagem do fabricante previsto. Em encapsulamentos BGA, confirme com antecedência o escape das esferas (fan-out), a estratégia de vias, as regras da máscara de solda e os limites de fabricação.
 
+A fonte da SiFli mostra exemplos de fan-out específicos para os encapsulamentos BGA e QFN. Use-os apenas como referência: o escape exato depende do encapsulamento escolhido e das regras de fabricação, que devem ser confirmadas para cada projeto.
+
+![Exemplo de fan-out para encapsulamento BGA](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA-FANOUT-PCB.png)
+
+<div align="center"><em>Figura 6.1-1: Referência de fan-out para encapsulamento BGA</em></div>
+
+![Exemplo de fan-out para encapsulamento QFN](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/assets/55x/SF32LB55x-QFN-FANOUT-PCB.png)
+
+<div align="center"><em>Figura 6.1-2: Referência de fan-out para encapsulamento QFN</em></div>
+
 #### 6.1.1. Referência de stack-up e fabricação { #611-stack-up-and-fabrication }
 
 A série SF32LB55x permite montar componentes em uma ou nas duas faces da placa.

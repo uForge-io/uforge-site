@@ -160,7 +160,7 @@ README 将目录写成了 `mbedtls_288`，但其截图和 [v2.5.1 证书生成�
 
 ## 基于 PAN 的 OTA 固件分发 { #pan-based-ota-delivery }
 
-PAN 示例默认已启用 OTA：`pan_cmd ota_pan` 会通过已用于网络流量的同一条蓝牙 PAN 链路下载并安装固件镜像，采用 SiFli-SDK 固件升级服务文档中说明的 DFU_PAN OTA 路径。对于已依赖 PAN 传输数据、又不希望引入第二种 OTA 传输方式的产品，这是合适的方案。参见 [OTA 与 DFU](../../develop/firmware-topics/ota-dfu.md)，了解 PAN 与 BLE 等其他升级传输方式的对比；无论采用哪种传输方式，都应规划回滚与故障恢复行为。
+在 `example/bt/pan` 中，`pan_cmd ota_pan` 会从 `main.c` 配置的 URL 下载固件镜像并安装；该示例 README 还指向 `peripheral_with_ota`。不要将其与独立的 `example/bt/pan_ota` DFU_PAN 示例混为一谈，后者使用 `check_dynamic_cmd` 和 `reset_to_dload_cmd`。这是两条不同的升级路径；请按目标 SDK 版本核实，并为实际发布的路径规划故障恢复。参见 [OTA 与 DFU](../../develop/firmware-topics/ota-dfu.md)，了解 PAN 与 BLE 等其他升级传输方式的对比。
 
 README 还提到一种构建失败：所选目标平台缺少适用的 OTA `ptab.json`。其截图展示了关闭 DFU 子工程和中间件固件升级支持，以便测试不带 OTA 的示例。这种排查手段会移除 OTA，不能用于交付必须支持升级的产品。启用 OTA 路径前，应补齐并验证正确的分区布局和升级配置。
 

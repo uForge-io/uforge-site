@@ -398,10 +398,10 @@ Cada tabela cobre um bloco funcional do esquemático. A coluna “Aplicável a�
 | 6 | Se LDO2 ou LDO3 alimentar pull-ups de GPIO, foram verificados os requisitos do projeto nas situações em que esses LDOs são desligados | Apenas 520/3/5/7 | Obrigatório |
 | 7 | A alimentação dos pull-ups de I2C é chaveada junto com a alimentação de I/O do periférico, para evitar corrente de fuga | Todas as variantes | Obrigatório |
 | 8 | Uso de PA09: nível alto para habilitar quando o display é ligado e nível baixo durante a suspensão | Revisão A2 do silício e anteriores | Obrigatório |
-| 9 | O requisito de corrente de base em Deep Sleep foi definido e registrado | Todas as variantes | Obrigatório |
-| 10 | <span class="flag-red">A soma das correntes de base de todos os periféricos selecionados em Deep Sleep está registrada e atende aos requisitos do projeto</span> | <span class="flag-red">Todas as variantes</span> | Obrigatório |
-| 11 | O requisito de corrente de base em Standby foi definido e registrado | Todas as variantes | Obrigatório |
-| 12 | <span class="flag-red">A soma das correntes de base de todos os periféricos selecionados em Standby está registrada e atende aos requisitos do projeto</span> | <span class="flag-red">Todas as variantes</span> | Obrigatório |
+| 9 | O requisito de consumo de corrente em Deep Sleep foi definido e registrado | Todas as variantes | Obrigatório |
+| 10 | <span class="flag-red">A soma do consumo de corrente de todos os periféricos selecionados em Deep Sleep está registrada e atende aos requisitos do projeto</span> | <span class="flag-red">Todas as variantes</span> | Obrigatório |
+| 11 | O requisito de consumo de corrente em Standby foi definido e registrado | Todas as variantes | Obrigatório |
+| 12 | <span class="flag-red">A soma do consumo de corrente de todos os periféricos selecionados em Standby está registrada e atende aos requisitos do projeto</span> | <span class="flag-red">Todas as variantes</span> | Obrigatório |
 
 [^52a-note]: A planilha de origem indica “52A/52D”. As variantes descritas no [guia de projeto de hardware do SF32LB52x][SF32LB52x Hardware Design Guide - Dev] são SF32LB52B/D/E/G/J; a indicação “52A” da planilha não identifica uma dessas variantes. Confirme o modelo exato e seu datasheet antes de aplicar este item; não substitua automaticamente “52A” por outro modelo.
 [^52a-category-note]: A planilha de origem deixa a categoria desta linha em branco. A indicação “Não especificado na fonte” preserva essa omissão, sem classificar o item como obrigatório ou opcional. Confirme a aplicabilidade e o critério de aprovação para o componente escolhido.

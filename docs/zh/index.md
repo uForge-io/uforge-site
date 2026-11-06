@@ -155,7 +155,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1 应用核心 + 专用蓝牙控制核心
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 双模蓝牙 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 双模蓝牙 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU，ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 硬件解压缩
     - :fontawesome-solid-circle:{ .uf-dot-blue } 音频编解码器，1 路 AMIC，2 路 DMIC
@@ -171,7 +171,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } 双核 Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 双模蓝牙 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 双模蓝牙 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 最高 1024 × 600 RGB 显示
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU，ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 硬件解压缩
@@ -188,7 +188,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } 三核 Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 双模蓝牙 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 双模蓝牙 6.3（规格书草稿）
     - :fontawesome-solid-circle:{ .uf-dot-blue } 最高 1024 × 600 RGB 显示
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU，ePicasso 3.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 3.0 及 JPEG/MJPEG 解码
@@ -206,7 +206,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } 三核 Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 双模蓝牙 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 双模蓝牙 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 最高 1280 × 800 MIPI 显示
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU + 矢量图形，ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 及 JPEG/MJPEG 解码

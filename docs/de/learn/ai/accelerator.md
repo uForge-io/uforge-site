@@ -38,31 +38,12 @@ Eine vereinfachte Edge-KI-Verarbeitung auf SF32 sieht so aus:
 
 <div align="center"><em>Diagramm: Verarbeitungsschritte und firmwaregesteuerte Inferenz</em></div>
 
-```text
-Sensors / Audio / Camera
-        │
-        ▼
-Pre-processing
-  - filtering
-  - framing
-  - normalization
-  - feature extraction
-        │
-        ▼
-Firmware / Inference Runtime
-  - model graph orchestration
-  - supported operations on NNACC
-  - other operations on CPU, if implemented
-        │
-        ▼
-Post-processing
-  - thresholding
-  - smoothing
-  - event detection
-  - application decisions
-        │
-        ▼
-Application, UI, Bluetooth, or Storage
+```mermaid
+flowchart TD
+    A["Sensoren / Audio / Kamera"] --> B["Vorverarbeitung<br/>Filterung<br/>Aufteilung in Frames<br/>Normalisierung<br/>Merkmalsextraktion"]
+    B --> C["Firmware / Inferenzlaufzeit<br/>Koordination des Modellgraphen<br/>unterstützte Operationen auf NNACC<br/>andere Operationen auf der CPU, sofern implementiert"]
+    C --> D["Nachverarbeitung<br/>Schwellwertbildung<br/>Glättung<br/>Ereigniserkennung<br/>Anwendungsentscheidungen"]
+    D --> E["Anwendung, UI, Bluetooth oder Speicher"]
 ```
 
 Der Beschleuniger ist nur ein Teil der vollständigen KI-Verarbeitungskette. Produkte benötigen weiterhin Datenerfassung und -pufferung, Vorverarbeitung, die Planung der Inferenz, Nachverarbeitung und Entscheidungslogik auf Anwendungsebene. Die beste Leistung ergibt sich meist, wenn die gesamte Verarbeitungskette auf die Speicherhierarchie und die verfügbaren Beschleuniger abgestimmt wird, statt Inferenz als isolierten Funktionsaufruf zu behandeln.

@@ -221,15 +221,15 @@ Le classeur source ne renseigne pas la catégorie du point RF 3 ; elle reste don
 | 5 | <span class="flag-red">L'interrupteur d'alimentation contrôlé par PA58 est activé à l'état haut et désactivé à l'état bas</span> | Toutes les variantes | Obligatoire |
 | 6 | <span class="flag-red">Des résistances série de 33 Ω sont recommandées sur les lignes CLK et de données de la mémoire flash</span> | Toutes les variantes | Obligatoire |
 | 7 | QSPI3 est connecté à la mémoire NAND flash ou eMMC comme prévu | 555/557 uniquement | Optionnel |
-| 8 | Le contrôle de l'interrupteur d'alimentation QSPI3 est PA41 ; <span class="flag-red">l'alimentation QSPI3 est désactivée par défaut, et un interrupteur actif à l'état haut doit utiliser le pull-down interne par défaut</span> | 555/557 uniquement | Optionnel |
+| 8 | Le contrôle de l'interrupteur d'alimentation QSPI3 est PA41 ; <span class="flag-red">l'alimentation QSPI3 est désactivée par défaut ; il est recommandé d'utiliser le pull-down interne par défaut pour un interrupteur actif à l'état haut</span> | 555/557 uniquement | Optionnel |
 | 9 | <span class="flag-red">Si PA41 ne commande pas l'interrupteur d'alimentation QSPI3, validez l'E/S de remplacement avec le logiciel</span> | 555/557 uniquement | Optionnel |
 | 10 | Si une mémoire flash externe sur QSPI3 doit être programmée en production, son interrupteur d'alimentation doit être contrôlé par PA58 | 555/557 uniquement | Obligatoire |
-| 11 | Le contrôle de l'interrupteur d'alimentation OPI PSRAM est PA70 ; <span class="flag-red">l'alimentation PSRAM est activée par défaut, et un interrupteur actif à l'état haut doit utiliser le pull-up interne par défaut</span> | 555/557 uniquement | Optionnel |
+| 11 | Le contrôle de l'interrupteur d'alimentation OPI PSRAM est PA70 ; <span class="flag-red">l'alimentation PSRAM est activée par défaut ; il est recommandé d'utiliser le pull-up interne par défaut pour un interrupteur actif à l'état haut</span> | 555/557 uniquement | Optionnel |
 | 12 | <span class="flag-red">La mémoire OPI PSRAM est un modèle pris en charge et figure parmi les composants qualifiés dans le guide de sélection des composants clés</span> | 555/557 uniquement | Optionnel |
 | 13 | Les connexions de signaux OPI PSRAM sont correctes | 555/557 uniquement | Optionnel |
 | 14 | La connexion des signaux QSPI2 est correcte | Toutes les variantes | Optionnel |
 | 15 | La connexion des signaux QSPI3 est correcte | Toutes les variantes | Optionnel |
-| 16 | <span class="flag-yellow">Lors de l'utilisation du SF32LB555 ou du <span class="flag-red">SF32LB557, confirmez la mémoire requise par l'algorithme de mesure de la fréquence cardiaque ; si la mémoire disponible dans le LCPU est insuffisante, ajoutez une mémoire flash externe de 1 Mo sur QSPI4</span></span> | 555/557 uniquement | Obligatoire |
+| 16 | <span class="flag-yellow">Lors de l'utilisation du SF32LB555 ou du <span class="flag-red">SF32LB557, confirmez la mémoire requise par l'algorithme de mesure de la fréquence cardiaque ; si la mémoire disponible dans le LCPU est insuffisante, ajoutez une mémoire flash externe de 1 MB sur QSPI4</span></span> | 555/557 uniquement | Obligatoire |
 | 17 | Le niveau logique d'E/S du périphérique correspond à celui de la puce principale | Toutes les variantes | Obligatoire |
 | 18 | <span class="flag-red">La mémoire NOR flash figure parmi les composants qualifiés dans le guide de sélection des composants clés</span> | Toutes les variantes | Obligatoire |
 | 19 | <span class="flag-red">La mémoire NAND flash figure parmi les composants qualifiés dans le guide de sélection des composants clés</span> | Toutes les variantes | Obligatoire |

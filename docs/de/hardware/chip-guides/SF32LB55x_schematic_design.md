@@ -482,7 +482,7 @@ Verwenden Sie für BL_PWM einen GPIO mit GPTIM1_CHx-Funktion. Legen Sie einen ge
 
 Zugänge für Wecksignale, analoge Messungen, Debugging und Produktion sind unter Berücksichtigung des Gehäuses und der Fertigungsprüfvorrichtungen zu planen. Für die Weckpins sind definierte Ruhezustände und ESD-Schutz erforderlich. Bei GPADC-Spannungsteilern sind Einschwingzeit und Leckstrom abzuwägen. Debug- und Download-Zugänge müssen während EVT und Fertigung erreichbar bleiben.
 
-SF32LB55x bietet vier HCPU-Weckquellen (WKUP_A0–WKUP_A3) und sechs LCPU-Weckquellen (WKUP_B0–WKUP_B5). Jede weckt ihre zugehörige CPU; aus Hibernate wecken nur die sechs LCPU-Quellen. Keiner der zehn Eingänge darf offen bleiben: Ergänzen Sie externe Pull-up- oder Pull-down-Widerstände passend zur Funktion, um Leckstrom im Schlafzustand zu vermeiden.
+SF32LB55x bietet vier HCPU-Weckquellen (WKUP_A0–WKUP_A3) und sechs LCPU-Weckquellen (WKUP_B0–WKUP_B5), insgesamt zehn nicht maskierbare Weckinterruptquellen. Jede weckt ihre zugehörige CPU; aus Hibernate wecken nur die sechs LCPU-Quellen. Keiner der zehn Eingänge darf offen bleiben: Ergänzen Sie externe Pull-up- oder Pull-down-Widerstände passend zur Funktion, um Leckstrom im Schlafzustand zu vermeiden.
 
 Im Referenzschaltplan ist KEY1 mit PB48 verbunden und über 10 kΩ nach VDD_1V8 hochgezogen; außerdem sind ESD-Schutz und ein Kondensator eingezeichnet. Das KEY2-Netzwerk zeigt 10-kΩ-Pull-ups, ESD-Schutz und per Jumper wählbare Verbindungen zu PA08, PA77 und PA78; C0004 ist mit NF (nicht bestückt) gekennzeichnet. Dies sind Schaltungsbeispiele, keine Liste weckfähiger Pins: PA08 ist in Tabelle 5.7-1 nicht aufgeführt. Wählen Sie den tatsächlich weckfähigen Eingang aus dieser Tabelle und sorgen Sie für einen definierten Ruhezustand aller Eingänge.
 
@@ -539,7 +539,7 @@ Quellenabweichung: Der höher priorisierte [OpenSiFli-Hardware-Anwendungshinweis
 
 Führen Sie I2C/SPI, Steuerung und Weckinterrupts von Herzfrequenz- und Beschleunigungssensoren über LCPU. Verwenden Sie DC-DC-Wandler, LDOs oder Lastschalter mit niedrigem Iq für bedarfsgerecht schaltbare Sensorversorgungen.
 
-Externes Bluetooth-Audio kommuniziert über HCPU-UART1. Passen Sie die Spannungspegel an oder verwenden Sie einen Pegelwandler; schalten Sie beim Abschalten des Moduls gleichzeitig die Versorgung des Pegelwandlers ab, um Leckstrom zu vermeiden. Bleibt das Modul in Standby versorgt und ist sein Versorgungseingang low-aktiv, verwenden Sie einen LCPU-GPIO mit standardmäßigem PD-Verhalten.
+Externes Bluetooth-Audio kommuniziert über HCPU-UART1. Passen Sie die Spannungspegel an oder verwenden Sie einen Pegelwandler; schalten Sie beim Abschalten des Moduls gleichzeitig die Versorgung des Pegelwandlers ab, um Leckstrom zu vermeiden. Bleibt das Modul in Standby versorgt und ist sein Versorgungsfreigabesignal low-aktiv, verwenden Sie einen LCPU-GPIO mit standardmäßigem PD-Verhalten.
 
 <div align="center"><em>Tabelle 5.7-3: Debug- und Flash-Schnittstelle</em></div>
 

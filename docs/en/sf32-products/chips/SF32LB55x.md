@@ -8,6 +8,8 @@ tags:
 
 # SF32LB55x
 
+<div id="_1"></div>
+
 ## Overview
 
 The SF32LB55x series is a mainstream, ultra-low-power AIoT microcontroller family for BLE-connected products that need stronger display capabilities, more memory headroom, and a wider choice of packages than entry-level Bluetooth MCUs.
@@ -21,6 +23,8 @@ SiFli's official product brief and datasheet list BLE 5.2, the ePicasso 2.5D gra
 SiFli's chip model guide notes that SF32LB55x was defined before the later 52/56/58 families, so its suffixes do not fully follow the newer numbering convention. Use the complete orderable part number and package-specific capability tables when selecting a device; do not infer every capability from the suffix alone.
 
 [^1]: STAR-MC1 is a configurable Armv8-M Mainline embedded CPU IP from Arm China. In compatible SF32 devices, SiFli documents it as an Arm Cortex-M33 STAR-MC1 application processor. Its Cortex-M33-class software model helps existing Cortex-M33 firmware, middleware, RTOS ports, and tools carry forward, subject to normal device-specific integration work. Its CU, SP, and SE configurations vary chiefly in cache, TCM, XIPU, and TrustZone capability; Arm Custom Instructions/CDE and the coprocessor interface are optional capabilities that must be verified for the exact SF32 part. SiFli documentation may use ***Arm Cortex-M33 STAR-MC1*** or ***Arm Cortex-M33*** according to context.
+
+<div id="_2"></div>
 
 ## Applications
 
@@ -42,6 +46,8 @@ Choose SF32LB55x when the design needs one or more of these capabilities:
 - A user-programmable low-power processor
 - More GPIO or denser package options than SF32LB52x
 - External NOR, NAND, eMMC, QSPI-PSRAM, or OPI-PSRAM flexibility
+
+<div id="_3"></div>
 
 ## Development Resources
 
@@ -77,7 +83,11 @@ Choose SF32LB55x when the design needs one or more of these capabilities:
 
 ---
 
+<div id="_4"></div>
+
 ## Features and Specs
+
+<div id="_5"></div>
 
 ### Compute and Memory
 
@@ -88,6 +98,8 @@ Choose SF32LB55x when the design needs one or more of these capabilities:
 - 1,088 KB application SRAM, including 64 KB retention SRAM
 - 224 KB low-power SRAM, all retention SRAM
 - External memory interfaces for NOR, NAND, eMMC, QSPI-PSRAM, and OPI-PSRAM
+
+<div id="ai"></div>
 
 ### Graphics, Display, and AI
 
@@ -101,6 +113,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - Dual LCD controllers; always-on-display interfaces and dual-display capability depend on the selected model and package
 - Neural-network matrix accelerator for TinyML workloads, up to 1.92 GOPS and 5.73 TOPS/W
 
+<div id="_6"></div>
+
 ### Wireless Connectivity
 
 - Bluetooth Low Energy 5.2
@@ -109,11 +123,15 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - Maximum transmit power: 10 dBm
 - Receive peak current: 2.0 mA at 3.3 V
 
+<div id="_7"></div>
+
 ### Security
 
 - AES and CRC hardware accelerators
 - True random number generator (TRNG)
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### Peripherals and I/Os
 
@@ -144,6 +162,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - Peripheral Task Controller (PTC)
 - GPIO count varies by package; see the package table and source-discrepancy note below
 
+<div id="_8"></div>
+
 ### Power Supply and Package
 
 - Power supply range is variant-specific: 2.97 V to 3.63 V for SS6600A8; 1.71 V to 3.63 V for 551U4O5 and the selected BGA variants
@@ -152,6 +172,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - Sleep current with RTC wake-up: 600 nA
 - Sleep current with pin wake-up: 280 nA
 - Package options: QFN68L, BGA145, and BGA169
+
+<div id="_9"></div>
 
 ## Family Variants
 
@@ -189,6 +211,8 @@ The following current models listed in SiFli's chip model guide make the package
 
 For SF32LB557VD3A6, the current SiFli Chip Model Guide and Table 0-1 in the DS5501 V1.7.2 datasheet list 71 HCPU + 42 LCPU = 113 GPIOs. The datasheet's feature and package summaries, as well as the PB0001 V1.3 Product Brief, instead give BGA169 119 GPIOs (71 HCPU + 48 LCPU). The official sources therefore conflict, including within the datasheet. This page follows the model-specific row and current model guide (113). Before assigning pins or finalizing the design, verify GPIO availability against the selected package's ball map and confirm the orderable part with SiFli. Also verify the variant's supply and temperature ratings, full part number, and integrated-memory configuration against the [DS5501 V1.7.2 datasheet][Datasheet], [PB0001 V1.3 Product Brief][Product Brief], and [SiFli Chip Model Guide]. The BGA145 and BGA169 packages measure 7 × 7 × 0.94 mm with 0.5 mm pitch.
 
+<div id="_10"></div>
+
 ## Integration Path
 
 Use this sequence to turn an SF32LB55x shortlist into a validated design:
@@ -202,7 +226,7 @@ Use this sequence to turn an SF32LB55x shortlist into a validated design:
 ## Frequently Asked Questions
 
 **What are the key specifications of SF32LB55x?**
-SF32LB55x provides application processing (Cortex-M33 @240 MHz), a low-power core (Cortex-M33 @48 MHz, a user-programmable core), 1,312 KB of internal SRAM and Bluetooth Low Energy (BLE) only. Graphics: ePicasso 1.0. Package: QFN68L / BGA145 / BGA169 (7 × 7 mm (QFN68L)). USB 2.0 FS.
+SF32LB55x provides application processing (Cortex-M33 @240 MHz), a low-power core (Cortex-M33 @48 MHz, a user-programmable core), 1,312 KB of internal SRAM and Bluetooth Low Energy (BLE) only. Graphics: ePicasso 1.0. The family overview above calls the engine ePicasso 2.5D. The available sources do not explain how that label relates to ePicasso 1.0; do not infer equivalence or a generation change, and verify the graphics capabilities for the exact orderable part against current official documentation. Package: QFN68L / BGA145 / BGA169 (7 × 7 mm (QFN68L)). USB 2.0 FS.
 
 **Which display interfaces does SF32LB55x support?**
 SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix)) This is a family-wide list, not a guarantee for every order code or package; check the linked interface matrix.
@@ -220,11 +244,17 @@ SS6600A8 requires 2.97–3.63 V; SF32LB551U4O5 and the BGA variants listed on th
 Start with the [SF32LB55x hardware design guide](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md) for schematic, power, clock/RF and PCB layout guidance, then use the schematic and layout checklists before releasing the board.
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## Related Products
+
+<div id="_12"></div>
 
 ### Development Kits
 
 Use the official hardware application note, reference schematics, and checklist as the starting point for package selection, power-tree definition, display-interface choice, memory planning, RF layout, and production-test planning.
+
+<div id="_13"></div>
 
 ### Reference Products
 

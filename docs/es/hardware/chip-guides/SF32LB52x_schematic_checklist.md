@@ -398,10 +398,10 @@ Cada tabla cubre un bloque funcional del esquemático. La columna «Aplicable a�
 | 6 | Si LDO2 o LDO3 alimenta los pull-up de GPIO, confirmar que apagar el LDO correspondiente sigue cumpliendo los requisitos de diseño | Solo 520/3/5/7 | Obligatorio |
 | 7 | Para evitar corrientes de fuga, conmutar la alimentación de los pull-up de I2C junto con la alimentación de E/S del periférico | Todas las variantes | Obligatorio |
 | 8 | Nota sobre PA09: se pone a nivel alto para habilitar al encender la pantalla y a nivel bajo durante la suspensión | Revisiones de silicio A2 y anteriores | Obligatorio |
-| 9 | Se define y registra el requisito de corriente de referencia en modo Deep Sleep | Todas las variantes | Obligatorio |
-| 10 | <span class="flag-red">Se registra la suma de las corrientes de referencia de todos los periféricos seleccionados en modo Deep Sleep y se confirma que cumple los requisitos del proyecto</span> | <span class="flag-red">Todas las variantes</span> | Obligatorio |
-| 11 | Se define y registra el requisito de corriente de referencia en modo Standby | Todas las variantes | Obligatorio |
-| 12 | <span class="flag-red">Se registra la suma de las corrientes de referencia de todos los periféricos seleccionados en modo Standby y se confirma que cumple los requisitos del proyecto</span> | <span class="flag-red">Todas las variantes</span> | Obligatorio |
+| 9 | Se define y registra el requisito de consumo de corriente en modo Deep Sleep | Todas las variantes | Obligatorio |
+| 10 | <span class="flag-red">Se registra la suma del consumo de corriente de todos los periféricos seleccionados en modo Deep Sleep y se confirma que cumple los requisitos del proyecto</span> | <span class="flag-red">Todas las variantes</span> | Obligatorio |
+| 11 | Se define y registra el requisito de consumo de corriente en modo Standby | Todas las variantes | Obligatorio |
+| 12 | <span class="flag-red">Se registra la suma del consumo de corriente de todos los periféricos seleccionados en modo Standby y se confirma que cumple los requisitos del proyecto</span> | <span class="flag-red">Todas las variantes</span> | Obligatorio |
 
 [^52a-note]: La hoja de cálculo fuente indica «52A/52D». La [guía de diseño de hardware del SF32LB52x][SF32LB52x Hardware Design Guide - Dev] describe las variantes SF32LB52B/D/E/G/J; la etiqueta «52A» no identifica ninguna de ellas. Confirme la referencia exacta y su hoja de datos antes de aplicar esta fila; no sustituya automáticamente «52A» por otro modelo.
 [^52a-category-note]: La fuente deja en blanco la categoría de esta fila. Se conserva como «No especificado en la fuente», sin asignarle la categoría Obligatorio u Opcional. Confirme su aplicabilidad y el criterio de liberación para el dispositivo elegido.

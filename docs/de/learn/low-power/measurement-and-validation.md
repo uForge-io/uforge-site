@@ -6,9 +6,13 @@ tags:
   - Validierung
 ---
 
+<div id="_1"></div>
+
 # Energieverbrauch messen und validieren { #power-measurement-and-validation }
 
 Eine Schätzung der Akkulaufzeit ist erst belastbar, wenn ihre Annahmen durch Messungen an der realen Hardware bestätigt werden. Nutzen Sie diese Seite zusammen mit dem [Überblick zum Energiespardesign](overview.md) und der [Stromverbrauchsanalyse einer Smartwatch](smartwatch-power-profiling.md). Messen Sie zunächst die einzelnen Komponenten, prüfen Sie anschließend vollständige Firmware-Szenarien und gleichen Sie das Tagesnutzungsmodell mit den Messwerten ab. Optimiert wird danach der größte nachgewiesene Energieverbraucher.
+
+<div id="_2"></div>
 
 ## Energie statt nur Stromstärke messen { #measure-energy-not-current-alone }
 
@@ -26,6 +30,8 @@ Dabei wird `t` in Sekunden angegeben. Der Faktor `3600` rechnet Sekunden in Stun
 Das Energieintegral wird in Wh angegeben. Multiplizieren Sie den Wert mit 1000, bevor Sie ihn zu einem in mWh geführten Profil addieren. Ladung (mAh) und Energie (mWh) sind unterschiedliche Größen und nicht austauschbar.
 
 Bleibt die Versorgungsspannung stabil, protokollieren Sie den gemessenen Wert von `V_DUT` für den jeweiligen Messlauf und werten Sie ihn zusammen mit dem Stromverlauf aus. Ändert sich die Spannung während des Tests, erfassen Sie sie auf derselben Zeitbasis wie den Strom oder nehmen Sie genügend synchronisierte Messpunkte auf, um eine verlässliche mittlere Leistung zu berechnen. Ein Vergleich allein anhand von mAh kann reale Energieunterschiede verschleiern, wenn Versorgungsspannung, Arbeitspunkt des Reglers oder Akkuzustand zwischen den Messläufen variieren.
+
+<div id="_3"></div>
 
 ## Messaufbau und Referenzbedingungen festlegen { #set-up-the-measurement-baseline }
 
@@ -52,6 +58,8 @@ Prüfen Sie vor dem Anschließen des Prüflings, ob der gewählte PPK2-Modus des
 
 </div>
 
+<div id="_4"></div>
+
 ## Jede Komponente vor Gesamtsystemtests charakterisieren { #characterize-each-component-before-full-system-tests }
 
 Messen Sie die einzelnen Komponenten zunächst an einer separat messbaren Versorgungsschiene oder mit einem geeigneten Prüfaufbau, bevor Sie die Gesamtmessung der Platine auswerten. Ziel ist kein weiterer Katalogwert, sondern die Frage, welche Betriebsarten, Lasten und Firmware-Einstellungen den Energieverbrauch der jeweiligen Komponente im realen Produkt bestimmen.
@@ -73,6 +81,8 @@ Messen Sie die einzelnen Komponenten zunächst an einer separat messbaren Versor
 </div>
 
 Wenn es um den Energieverbrauch des gesamten Produkts geht, messen Sie am Akkueingang. Messungen einzelner Versorgungsschienen sind für die Fehlersuche weiterhin wichtig. Rechnen Sie sie jedoch vor der Übernahme in das Akkulaufzeitmodell mithilfe des gemessenen Wirkungsgrads und Ruhestroms der Regler auf die Akkuseite um. Die Summe der Schienenströme ist nicht mit dem Strom am Akkueingang gleichzusetzen.
+
+<div id="_5"></div>
 
 ## Durch Treiber gesteuerte Energiesparzustände überprüfen { #verify-driver-controlled-power-states }
 
@@ -96,6 +106,8 @@ Eine Komponente erreicht den spezifizierten Energiesparzustand nur, wenn ihr Tre
 
 Gültige Logikpegel schließen Leckströme nicht aus. Interne Pull-Widerstände, widersprüchliche Pull-Konfigurationen, Vorgabewerte nach einem Reset, ESD-Pfade und Bus-Pull-ups können Leck- oder Rückspeisepfade bilden, obwohl an beiden Seiten der Schnittstelle scheinbar gültige Logikpegel anliegen. Messen Sie den Schnittstellenstrom, wenn beide Seiten versorgt sind, wenn eine Seite unversorgt ist und während des Übergangs zwischen diesen Zuständen. Weicht das Ergebnis von der Erwartung ab, prüfen Sie zuerst, ob eine falsche Treiberkonfiguration oder Schaltfolge oder ein Leckpfad auf der Platine die Ursache ist. Ändern Sie nicht vorschnell die Werte in der Energieprofiltabelle.
 
+<div id="_6"></div>
+
 ## Firmware-Szenarien validieren { #validate-firmware-scenarios }
 
 Nachdem das Verhalten der einzelnen Komponenten bekannt ist, messen Sie vollständige Firmware-Szenarien aus der Nutzungsperspektive. Ein Szenario umfasst die gleichzeitig aktiven Komponenten, Energieverwaltungszustände, Aufwachvorgänge und Zeitabläufe. Beginnen Sie bei einer Smartwatch mit den Szenarien aus der [Stromverbrauchsanalyse einer Smartwatch](smartwatch-power-profiling.md): Bereitschaft bei ausgeschaltetem Display, Benachrichtigungen, Anrufmeldungen, Displayaktivierung beim Anheben des Handgelenks, automatische Herzfrequenzmessung, manuelle SpO2-Messung, Trainingsaufzeichnung, Alarme, Schlafüberwachung und App-Synchronisierung. Sind NFC, Bluetooth-Telefonie oder AOD aktiviert, ergänzen Sie diese als eigene Szenarien.
@@ -115,6 +127,8 @@ Nachdem das Verhalten der einzelnen Komponenten bekannt ist, messen Sie vollstä
 </div>
 
 Teilen Sie den Stromverlauf mithilfe von Firmware-gesteuerten GPIO-Markern in Phasen auf. Eine Messung beim Anheben des Handgelenks kann beispielsweise Gestenerkennung, MCU-Aufwachen, Displayaktivierung und -darstellung, Einschaltdauer des Displays, Abdunkeln oder Ausschalten sowie die Rückkehr in den Schlafmodus sichtbar machen. So wird aus einem einzelnen Mittelwert eine Folge konkreter Vorgänge, die sich gezielt durch Firmware- und Hardwareteams optimieren lässt.
+
+<div id="_7"></div>
 
 ## Das Tagesnutzungsprofil abgleichen { #reconcile-the-daily-use-profile }
 
@@ -154,6 +168,8 @@ Weichen Messung und Modell voneinander ab, verändern Sie die Tabelle nicht einf
 
 </div>
 
+<div id="_8"></div>
+
 ## Die größten nachgewiesenen Energieverbraucher optimieren { #optimize-the-largest-verified-contributors }
 
 Nutzen Sie das abgeglichene Profil, um die wirksamsten Optimierungen zu priorisieren. Unterscheiden Sie dabei zwei Fragen: Welche Komponente verbraucht am meisten Energie, und welches Nutzungsszenario trägt am stärksten zum Gesamtverbrauch des Produkts bei? Die Antworten können unterschiedlich sein. Das Display kann die verbrauchsstärkste Komponente sein, während häufiges Einschalten beim Anheben des Handgelenks das maßgebliche Szenario darstellt.
@@ -162,6 +178,8 @@ Nutzen Sie das abgeglichene Profil, um die wirksamsten Optimierungen zu priorisi
 2. **Hardware optimieren, wenn eine Komponente nachweislich begrenzt.** Wählen Sie gegebenenfalls sparsamere Sensoren, Speicher, Regler, Codecs, Verstärker, Displays oder Haptikkomponenten. Vergleichen Sie die gemessene Energie im vorgesehenen Betriebsmodus, nicht einen hervorgehobenen Datenblattwert aus einem anderen Betriebszustand.
 3. **Geänderte Komponente und Szenario erneut messen.** Ein Austausch kann den größten Verbraucher verlagern, Aufwachzeiten verändern oder einen anderen Arbeitspunkt des Reglers erfordern.
 4. **Profil aktualisieren und den Tagesvergleich wiederholen.** Die Änderung gilt erst dann als bestätigt, wenn sich sowohl der Szenarioverlauf als auch das Energiebudget des Gesamtprodukts verbessern.
+
+<div id="_9"></div>
 
 ## Nachweise für die Freigabe { #release-evidence }
 

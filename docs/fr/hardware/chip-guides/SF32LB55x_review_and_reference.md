@@ -56,7 +56,7 @@ Un produit SF32LB55x typique comprend la MCU, l'architecture d'alimentation, les
 
 3. **Pourquoi la soudure de la batterie peut-elle bloquer la puce, et comment l'éviter ?** Une mauvaise mise à la terre du fer peut provoquer une surtension transitoire. Ajoutez une protection contre les surtensions et les décharges électrostatiques à l'interface batterie, et reliez correctement le fer à la terre.
 
-4. **Pourquoi un bouton de réveil ne réveille-t-il pas la MCU depuis le mode Hibernate ?** Seules les six entrées de réveil du LCPU, GPIO43–GPIO48, peuvent sortir la MCU du mode Hibernate ; les GPIO0–GPIO3 du HCPU ne le peuvent pas.
+4. **Pourquoi un bouton de réveil ne réveille-t-il pas la MCU depuis le mode Hibernate ?** Seules les six entrées de réveil du LCPU, GPIO43–GPIO48, peuvent sortir la MCU du mode Hibernate ; les GPIO0–GPIO3 du HCPU ne le peuvent pas. Ce sont des identifiants GPIO logiques. En BGA125/145/169, HCPU GPIO0–GPIO3 correspondent aux pastilles PA80/PA79/PA78/PA77 et LCPU GPIO43–GPIO48 à PB43–PB48 ; le QFN68 utilise les noms GPIO indiqués.
 
 5. **Pourquoi un G-sensor ou un capteur de fréquence cardiaque peut-il consommer trop ou fonctionner anormalement pendant le débogage basse consommation ?** Son firmware s'exécute sur le LCPU ; les signaux I2C, SPI, de commande et d'interruption doivent donc tous utiliser des interfaces du LCPU. Une affectation au HCPU peut augmenter la consommation ou entraîner un dysfonctionnement.
 
@@ -74,7 +74,7 @@ Un produit SF32LB55x typique comprend la MCU, l'architecture d'alimentation, les
 
 12. **Comment éviter les défauts de commande d'alimentation de l'audio Bluetooth externe après le réveil, lorsque le module doit rester alimenté pendant le sommeil ?** Commandez son alimentation avec un GPIO du LCPU. Pour un interrupteur actif à l'état bas, choisissez un GPIO du LCPU avec pull-down (PD) par défaut.
 
-13. **Comment garantir la charge après une surdécharge de la batterie ?** Lorsque la tension de la batterie est trop basse, la gestion du chemin d'alimentation doit permettre à l'entrée du chargeur d'alimenter le système après son branchement. En l'absence de cette gestion, le circuit intégré de charge choisi doit fournir un courant de charge lente d'au moins 40 mA.
+13. **Comment garantir la charge après une surdécharge de la batterie ?** Lorsque la tension de la batterie est trop basse, la gestion du chemin d'alimentation doit permettre à l'entrée du chargeur d'alimenter le système après son branchement. En l'absence de cette gestion, le circuit intégré de charge choisi doit fournir un courant de charge d'entretien (trickle charge) d'au moins 40 mA.
 
 14. **Pourquoi la charge peut-elle ne pas démarrer après le branchement du chargeur ?** Le signal de détection du branchement doit être relié à l'un des GPIO de réveil du LCPU, GPIO43–GPIO48. Un autre GPIO peut empêcher le démarrage correct de la séquence de charge.
 

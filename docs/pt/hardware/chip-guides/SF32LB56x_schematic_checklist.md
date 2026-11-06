@@ -101,7 +101,7 @@ Fonte: planilha "Schematic Check list" de *SF32LB56x Schematic&PCB Checklist* da
 | 20 | O capacitor de AVDD33_BRF deve ter pelo menos 4,7 µF. | SF32LB565/567 | Obrigatório |
 | 21 | O capacitor de AUD_VREF deve ter 1 µF. | Todos os chips | Obrigatório |
 | 22 | O capacitor de GPADC VREFP deve ter 4,7 µF. | Todos os chips | Obrigatório |
-| 23 | O indutor BUCK é um código de peça listado na [Lista de fornecedores aprovados da SiFli] (AVL). | Todos os chips | Obrigatório |
+| 23 | O indutor BUCK é um código de peça listado na [Lista de fornecedores aprovados da SiFli][SiFli Approved Vendor List] (AVL). | Todos os chips | Obrigatório |
 | 24 | Se o indutor BUCK não for recomendado pela SiFli, ele deve atender a L = 4,7 µH, DCR &lt;= 0,4 Ω e Isat &gt;= 450 mA. | Todos os chips | Obrigatório |
 | 25 | <span class="flag-red">A tensão de alimentação de PVDD deve ser 1,8 V. Recomenda-se usar um conversor DCDC de VBAT para 1,8 V.</span> | Todos os chips | Obrigatório |
 | 26 | <span class="flag-red">Se houver GPS ou outros periféricos sensíveis a interferência, reserve um footprint para capacitor de derivação para terra em BUCK_LX; o valor depende dos resultados dos testes.</span> | Todos os chips | Obrigatório |

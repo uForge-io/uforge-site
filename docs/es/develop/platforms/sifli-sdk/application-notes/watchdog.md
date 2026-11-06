@@ -58,7 +58,7 @@ No añada un bucle de refresco incondicional que oculte una parada del planifica
 - Al entrar en `Standby` o `Hibernate`, el watchdog se desactiva y vuelve a activarse al salir de ese modo.
 - En los demás modos de suspensión, el watchdog sigue funcionando; el sistema debe reanudarse y refrescarlo antes de que venza el tiempo de espera.
 - HCPU usa el watchdog del sistema. Si vence el tiempo de espera, se reinicia todo el chip.
-- LCPU usa el watchdog del subsistema LCPU. Cuando vence el tiempo de espera, primero se genera una interrupción; después, el controlador de interrupción provoca un reinicio por software de todo el chip.
+- LCPU usa el watchdog del subsistema LCPU. Cuando vence el tiempo de espera, primero se genera una interrupción; después, el manejador de interrupciones provoca un reinicio por software de todo el chip.
 
 La nota sobre watchdog de SiFli Wiki añade detalles del modo `Standby`: el bloque de hardware no se apaga; RT-Thread detiene el WDT y la ruta de reanudación lo inicializa de nuevo, reiniciando la cuenta. Por tanto, «desactivado» se refiere a una parada por software, no a que se corte la alimentación del bloque.
 

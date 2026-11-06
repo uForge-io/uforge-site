@@ -175,7 +175,13 @@ Optionale Hardware:
 - Li-Ion-Akku mit mehr als 450 mAh
 - Zweites USB-Kabel, wenn UART-Debug und nativer USB-Test gleichzeitig benötigt werden
 
-### Board-Einrichtung und Startmodi
+<div id="_1"></div>
+<div id="board-einrichtung-und-startmodi"></div>
+<div id="configuracao-da-placa-e-modos-de-inicializacao"></div>
+<div id="configuracion-y-modos-de-arranque-de-la-placa"></div>
+<div id="configuration-de-la-carte-et-modes-de-demarrage"></div>
+
+### Board-Einrichtung und Startmodi { #board-setup-and-boot-modes }
 
 Verbinden Sie den Host mit der USB-Type-C-UART-Buchse des Boards. Öffnen Sie anschließend SifliTrace und wählen Sie den richtigen COM-Port.
 
@@ -256,7 +262,7 @@ Die 30-polige Leiste führt Versorgung, USB, Sensor-, displaynahe, Speicher-, Vi
 
 Das Board nutzt einen AMOLED-Display-Pfad und führt einen 22-poligen QSPI-FPC-Signalsatz heraus. Die Tabelle von SiFli V1.0.0 kennzeichnet die Pins 5-10 als NC; die folgende Tabelle enthält alle 22 Positionen und benennt diese Pins ausdrücklich.
 
-Die Annotationen der Displayplatine unterscheiden einen 22-poligen FPC-Steckverbinder zum LCD-Modul von einem separaten 24-poligen Board-to-Board-Steckverbinder (B2B) zur Kernplatine. Prüfen Sie beide Schnittstellen anhand der genauen Revision der Baugruppe, bevor Sie sie montieren.
+**Widerspruch bei den Schnittstellenangaben — vor der Steckerauswahl prüfen:** Im Text des SiFli-Leitfadens heißt es, die dedizierte Displayschnittstelle werde über einen 22-poligen FPC und eine 40-polige Stiftleiste herausgeführt. Die Abbildung der Displayplatine kennzeichnet dagegen einen 22-poligen FPC zum LCD-Modul und einen 24-poligen Board-to-Board-Steckverbinder (B2B) zur Kernplatine. Der Leitfaden erklärt nicht, wie die 40-polige Stiftleiste mit dem 24-poligen B2B-Steckverbinder zusammenhängt. Wählen oder verbinden Sie Steckverbinder nicht allein anhand einer dieser Pinzahlen; prüfen Sie Schaltplan und BOM der genauen Baugruppenrevision.
 
 <div align="center"><em>Signalbelegung des 22-poligen QSPI-FPC für Display und Touch</em></div>
 

@@ -175,7 +175,13 @@ SiFli V1.0.0 가이드에는 배터리 용량에 관한 설명이 두 가지 있
 - 용량이 450 mAh를 초과하는 Li-ion 배터리
 - UART 디버그와 네이티브 USB 테스트를 동시에 해야 할 때 사용할 두 번째 USB 케이블
 
-### 보드 설정 및 부팅 모드
+<div id="_1"></div>
+<div id="board-einrichtung-und-startmodi"></div>
+<div id="configuracao-da-placa-e-modos-de-inicializacao"></div>
+<div id="configuracion-y-modos-de-arranque-de-la-placa"></div>
+<div id="configuration-de-la-carte-et-modes-de-demarrage"></div>
+
+### 보드 설정 및 부팅 모드 { #board-setup-and-boot-modes }
 
 호스트 컴퓨터와 보드의 USB Type-C UART 포트를 연결한 다음, SifliTrace를 열어 올바른 COM 포트를 선택하십시오.
 
@@ -256,7 +262,7 @@ SiFli의 SDK는 `scons --board=<board_name>`과 함께 정확한 보드 타깃 �
 
 이 보드는 AMOLED 디스플레이 경로를 사용하며 22핀 QSPI FPC 신호 세트를 노출합니다. SiFli의 V1.0.0 표는 5~10번 핀을 NC로 표기합니다. 아래 표는 22개 위치를 모두 포함하며 해당 핀을 명시적으로 나타냅니다.
 
-디스플레이 보드 주석은 LCD 모듈용 22핀 FPC 커넥터와 코어 보드 연결용 24핀 보드 간(B2B) 커넥터를 별도로 표시합니다. 조립 전에 정확한 세트 리비전에서 두 인터페이스를 모두 확인하십시오.
+**커넥터 사양 출처 불일치: 선택 전에 확인하십시오.** SiFli 가이드 본문은 전용 디스플레이 인터페이스가 22핀 FPC와 40핀 헤더로 연결된다고 설명하지만, 디스플레이 보드 그림은 LCD 모듈용 22핀 FPC와 코어 보드용 24핀 보드 간(B2B) 커넥터를 표시합니다. 자료는 40핀 헤더와 24핀 B2B 커넥터의 관계를 설명하지 않습니다. 어느 한쪽의 핀 수만으로 커넥터를 선택하거나 결합하지 말고, 정확한 조립 리비전의 회로도/BOM을 확인하십시오.
 
 <div align="center"><em>22핀 QSPI 디스플레이 및 터치 FPC 신호 맵</em></div>
 

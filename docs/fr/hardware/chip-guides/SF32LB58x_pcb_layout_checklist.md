@@ -55,7 +55,7 @@ Cette liste s'appuie sur le classeur SiFli « SF32LB58x Schematic&PCB checklist 
 | 12 | La piste d'alimentation AVDD33_ANA fait au moins 6 mil | Obligatoire |
 | 13 | La piste d'alimentation AVDD_BRF a une largeur d'au moins 8 mil | Obligatoire |
 | 14 | La piste d'alimentation AVDD33_AUD fait au moins 6 mil | Obligatoire |
-| 15 | La piste d'alimentation AVDD33_DSI fait au moins 8 mil | Obligatoire |
+| 15 | La piste d'alimentation AVDD18_DSI fait au moins 8 mil | Obligatoire |
 
 </div>
 
@@ -86,7 +86,7 @@ Cette liste s'appuie sur le classeur SiFli « SF32LB58x Schematic&PCB checklist 
 | 17 | Le condensateur AVDD33_ANA est placé près de la broche | Obligatoire |
 | 18 | Le condensateur AVDD_BRF est placé près de la broche | Obligatoire |
 | 19 | Le condensateur AVDD33_AUD est placé près de la broche | Obligatoire |
-| 20 | Le condensateur AVDD33_DSI est placé près de la broche | Obligatoire |
+| 20 | Le condensateur AVDD18_DSI est placé près de la broche | Obligatoire |
 
 </div>
 

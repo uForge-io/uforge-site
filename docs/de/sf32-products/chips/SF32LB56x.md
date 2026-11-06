@@ -8,6 +8,8 @@ tags:
 
 # SF32LB56x { #sf32lb56x }
 
+<div id="_1"></div>
+
 ## Überblick { #overview }
 
 Die Serie SF32LB56x ist eine fortschrittliche AIoT-Mikrocontrollerfamilie mit extrem niedrigem Energiebedarf für Produkte, die Dual-Mode-Bluetooth, anspruchsvollere Grafik, integriertes Audio, externen Speicher sowie mehr Display- und Speicherflexibilität benötigen als die SF32LB-Bausteine der unteren Klassen.
@@ -19,6 +21,8 @@ Die offizielle Produktkurzbeschreibung und das Datenblatt von SiFli positioniere
 Auch der Chip-Modellleitfaden von SiFli ist hier wichtig: Die Familie SF32LB56x unterstützt je nach Gehäuse unterschiedliche Kombinationen von Display-Schnittstellen. Genaue Teilenummer und Gehäusewahl sind daher eine Architekturentscheidung ersten Ranges und kein spätes PCB-Detail.
 
 [^1]: STAR-MC1 ist ein konfigurierbarer Embedded-CPU-IP-Baustein von Arm China auf Basis von Armv8-M Mainline. In kompatiblen SF32-Geräten dokumentiert SiFli STAR-MC1 als Anwendungsprozessor Arm Cortex-M33 STAR-MC1. Das Softwaremodell auf Cortex-M33-Niveau erleichtert die Übernahme vorhandener Cortex-M33-Firmware, Middleware, RTOS-Portierungen und Werkzeuge, vorbehaltlich der üblichen bausteinspezifischen Integrationsarbeit. Die Konfigurationen CU, SP und SE unterscheiden sich hauptsächlich bei Cache, TCM, XIPU und TrustZone; Arm Custom Instructions/CDE und die Coprozessor-Schnittstelle sind optionale Funktionen, die für das genaue SF32-Gerät zu prüfen sind. In der SiFli-Dokumentation steht je nach Kontext ***Arm Cortex-M33 STAR-MC1*** oder ***Arm Cortex-M33***.
+
+<div id="_2"></div>
 
 ## Anwendungen { #applications }
 
@@ -42,6 +46,8 @@ Wählen Sie SF32LB56x, wenn das Design eine oder mehrere dieser Fähigkeiten ben
 - Externes WLAN über SDIO; externer Speicher über SD/SDIO oder eMMC
 - Höhere GPIO-Anzahl über die Option WBBGA175
 - Mehr Reserven für den gleichzeitigen Betrieb von TinyML-, Audio- und UI-Workloads
+
+<div id="_3"></div>
 
 ## Entwicklungsressourcen { #development-resources }
 
@@ -81,7 +87,11 @@ Wählen Sie SF32LB56x, wenn das Design eine oder mehrere dieser Fähigkeiten ben
 
 ---
 
+<div id="_4"></div>
+
 ## Merkmale und Spezifikationen { #features-and-specs }
+
+<div id="_5"></div>
 
 ### Rechenleistung und Speicher { #compute-and-memory }
 
@@ -93,6 +103,8 @@ Wählen Sie SF32LB56x, wenn das Design eine oder mehrere dieser Fähigkeiten ben
 - Speichersystem der LCPU: 16 KB I-Cache + 8 KB D-Cache, 160 KB Retention-SRAM
 - Optionen mit 512 KB oder 1 MB QSPI-NOR im Gehäuse
 - Externe Speicherschnittstellen für QSPI-NOR, SPI-NAND, QPI/OPI-PSRAM, SD/SDIO und eMMC
+
+<div id="ai"></div>
 
 ### Grafik, Display und KI { #graphics-display-and-ai }
 
@@ -107,6 +119,8 @@ Maximale Auflösung und Panel-Schnittstellen: siehe [Schnittstellenmatrix pro Ge
 - TurboPixel: verlustbehaftete Kompression des finalen Framebuffers mit festem Verhältnis über extDMA und Dekompression im Display-Controller, was PSRAM-Bandbreite und -Kapazität reduziert
 - Matrix-Beschleuniger für neuronale Netze für TinyML-Lasten, bis zu 1,92 GOPS und über 10 TOPS/W
 
+<div id="_6"></div>
+
 ### Audio und drahtlose Konnektivität { #audio-and-wireless-connectivity }
 
 - Dual-Mode-Bluetooth 5.3 mit BLE-Audio-Unterstützung
@@ -117,11 +131,17 @@ Maximale Auflösung und Panel-Schnittstellen: siehe [Schnittstellenmatrix pro Ge
 - 1 HiFi-24-Bit-Audio-ADC mit 99 dB SNR
 - 2 PDM-Schnittstellen und 1 I2S-Schnittstelle
 
+**Abweichende Quellenangaben zum DAC-SNR:** [PB0056 V1.1](https://downloads.sifli.com/silicon/PB0056-SF32LB56x-Product%20Brief%20V1p1.pdf) und [UM5601 V1.0.2](https://downloads.sifli.com/user%20manual/UM5601-SF32LB56x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V1p0p2.pdf) nennen 108 dB, [DS5601 V1.9.2](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-Datasheet%20V1p9p2.pdf) dagegen 109 dB. Die neueren hier verlinkten Versionen PB0056 V1.2, DS5601 V1.9.3 und UM5601 V1.0.5 klären die Abweichung in dieser Prüfung nicht; der maßgebliche Wert bleibt offen. Prüfen Sie ihn vor der Verwendung anhand der aktuellen Dokumentation zur genauen Teilenummer.
+
+<div id="_7"></div>
+
 ### Sicherheit { #security }
 
 - Hardware-Beschleuniger für AES, HASH und CRC
 - Echter Zufallszahlengenerator (TRNG)
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### Peripherie und I/Os { #peripherals-and-ios }
 
@@ -138,6 +158,8 @@ Maximale Auflösung und Panel-Schnittstellen: siehe [Schnittstellenmatrix pro Ge
 - Peripheral Task Controller (PTC)
 - Bis zu 120 GPIOs, je nach Gehäuse
 
+<div id="_8"></div>
+
 ### Stromversorgung und Gehäuse { #power-supply-and-package }
 
 - Versorgungsspannungsbereich: 1,71 V bis 3,63 V
@@ -146,6 +168,8 @@ Maximale Auflösung und Panel-Schnittstellen: siehe [Schnittstellenmatrix pro Ge
 - Schlafstrom mit RTC-Aufwachen: 600 nA
 - Schlafstrom mit Pin-Aufwachen: 300 nA
 - Gehäuseoptionen: QFN68L und WBBGA175
+
+<div id="_9"></div>
 
 ## Familienvarianten { #family-variants }
 
@@ -169,6 +193,8 @@ Für die aufgeführten Varianten ist ein Versorgungsspannungsbereich von 1,71 V 
 | SF32LB567VND36 | WBBGA175 | 79 / 41 | 16 MB OPI-PSRAM + 1 MB QSPI-NOR-Flash | DPI / QSPI / 8080 / JDI | Designs mit hoher I/O-Zahl, die einen größeren einzelnen PSRAM-Pool und fortgeschrittenes Display-Routing priorisieren, ohne die Standard-Chipwahl des Moduls zu nutzen |
 
 </div>
+
+<div id="_10"></div>
 
 ## Integrationspfad { #integration-path }
 
@@ -203,15 +229,23 @@ Bis zu 16 MB PSRAM und bis zu 1 MB NOR-Flash im Gehäuse.
 Beginnen Sie mit dem [Hardware-Design-Leitfaden für den SF32LB56x](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md) zu Schaltplan, Stromversorgung, Takt/RF und PCB-Layout und nutzen Sie vor der Freigabe die Checklisten für Schaltplan und Layout.
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## Verwandte Produkte { #related-products }
+
+<div id="_12"></div>
 
 ### Modul { #module }
 
 [SF32LB56-MOD](../modules/SF32LB56-MOD.md) bündelt den Chip SF32LB566VCB36, Speicher, RF-Design und Antennenoptionen zu einem integrationsfertigen Modul. Es ist eine gute Wahl, wenn das Projekt die Fähigkeiten von SF32LB56x nutzen und zugleich das Risiko bei RF-Layout, Antennenanpassung, Quarzplatzierung und Integration des Hochgeschwindigkeitsspeichers senken will.
 
+<div id="_13"></div>
+
 ### Entwicklungsboards { #development-kits }
 
 [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) ist ein praktischer Ausgangspunkt für Firmware-Inbetriebnahme, Display-Validierung, Audio- und Speichertests, RF-Prüfungen und Stromverbrauchsmessungen, bevor Sie sich auf ein Chip-down- oder modulbasiertes Design festlegen.
+
+<div id="_14"></div>
 
 ### Referenzprodukte { #reference-products }
 

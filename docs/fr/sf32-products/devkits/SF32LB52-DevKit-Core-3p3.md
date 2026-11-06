@@ -204,6 +204,8 @@ La carte expose deux embases de bord à 24 broches. Le premier côté est consac
 
 </div>
 
+Le récapitulatif de la carte indique six canaux GPADC, tandis que cette table des fonctions des broches répertorie GPADC0–GPADC6 sur PA28–PA34. Le SDK de SiFli associe ADC CH7 à VBAT. Ces références ne permettent pas d'établir que sept entrées externes sont utilisables simultanément sur la carte ; le nombre de canaux au niveau de la carte reste donc indéterminé. Avant de connecter des signaux analogiques externes, vérifiez la révision exacte de la carte, le multiplexage des broches et la configuration des canaux. Voir le [guide ADC de SiFli](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/adc.html).
+
 ### Embase LCD, audio et débogage { #lcd-audio-and-debug-header }
 
 <div align="center"><em>Affectation des broches de l'embase LCD, audio et débogage</em></div>

@@ -195,7 +195,7 @@ rt_pwm_enable(pwm, channel);
 ```
 
 1. Wählen Sie einen PWM-fähigen Kanal und prüfen Sie das Pin-Muxing.
-2. Wählen Sie eine zum Peripheriegerät passende Periode: hoch genug, um sichtbares LED-Flackern zu vermeiden, oder im hörbaren Bereich für einen Summer.
+2. Wählen Sie eine zum Peripheriegerät passende PWM-Frequenz: hoch genug, um sichtbares LED-Flackern zu vermeiden, oder im hörbaren Bereich für einen Summer.
 3. Variieren Sie den Tastgrad, um die LED heller und dunkler zu stellen.
 4. Probieren Sie einige feste Töne an einem Summer aus, indem Sie die Periode ändern.
 5. Deaktivieren Sie die PWM und prüfen Sie, ob der Ausgang in einen sicheren Ruhezustand zurückkehrt.

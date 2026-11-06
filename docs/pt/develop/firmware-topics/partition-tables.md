@@ -132,7 +132,7 @@ Use `exec: {region, offset}` quando o código não puder ser executado no local,
 
 ### Padrões e overlays de projeto { #defaults-and-project-overlays }
 
-No v3, padrões do sistema são inferidos quando as partições correspondentes não estão presentes. Para SF32LB52, `flash_table` e `bootloader` podem ser inferidos a partir da região de armazenamento da aplicação de fábrica do HCPU; o armazenamento de inicialização em NAND ou SDMMC também recebe as partições de dados padrão documentadas. Para SF32LB56 e SF32LB58, é possível omitir `flash_table` e `bootloader` na `mpi5` interna. As janelas padrão da PSRAM SiP e as partições padrão de RAM também podem ser omitidas, a menos que o projeto altere o layout de RAM.
+No v3, padrões do sistema são inferidos quando as partições correspondentes não estão presentes. Para SF32LB52, quando o armazenamento de inicialização é NOR, NAND ou SDMMC, `flash_table` e `bootloader` são inferidos a partir da região de armazenamento da aplicação de fábrica do HCPU; o armazenamento de inicialização em NAND ou SDMMC também recebe as partições de dados padrão documentadas. Para SF32LB56 e SF32LB58, é possível omitir `flash_table` e `bootloader` na `mpi5` interna. As janelas padrão da PSRAM SiP e as partições padrão de RAM também podem ser omitidas, a menos que o projeto altere o layout de RAM.
 
 Para uma pequena alteração específica do projeto, use `ptab.overlay.yaml` em vez de copiar todo o `ptab.yaml` da placa. O overlay pode adicionar uma partição ou substituir uma existente:
 

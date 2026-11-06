@@ -22,40 +22,22 @@ tags:
 
 <div align="center"><em>Схема: путь графических ресурсов до дисплея</em></div>
 
-```text
-Source images, fonts, and animations
-        │
-        ▼
-GraphicsTool converts supported resources to eZip or eZip-A
-        │
-        ▼
-Compressed assets in NOR Flash, PSRAM, NAND, or file storage
-        │
-        ▼
-eZip hardware decoder expands an asset when required
-        │
-        ▼
-LVGL or another UI framework + graphics/display driver
-        │
-        ├── CPU fallback rendering
-        │
-        └── ePicasso pixel acceleration
-        │
-        ▼
-Final rendered bitmap in a draw buffer or framebuffer
-        │
-        ├── Uncompressed display path
-        │
-        └── Optional: extDMA compresses it into TurboPixel
-                    │
-                    ▼
-             TurboPixel framebuffer in PSRAM
-        │
-        ▼
-Display controller transfers pixels to the panel
-        │
-        ▼
-SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
+```mermaid
+flowchart TD
+    A["Исходные изображения, шрифты и анимация"] --> B["GraphicsTool преобразует поддерживаемые ресурсы в eZip или eZip-A"]
+    B --> C["Сжатые ресурсы в NOR Flash, PSRAM, NAND или файловом хранилище"]
+    C --> D["Аппаратный декодер eZip при необходимости распаковывает ресурс"]
+    D --> E["LVGL или другой UI-фреймворк + графический драйвер/драйвер дисплея"]
+    E --> F["Резервная отрисовка на CPU"]
+    E --> G["Ускорение обработки пикселей ePicasso"]
+    F --> H["Готовый растр в буфере рисования или кадровом буфере"]
+    G --> H
+    H --> I["Путь вывода без сжатия"]
+    H --> J["Необязательно: extDMA сжимает растр в TurboPixel"]
+    J --> K["Кадровый буфер TurboPixel в PSRAM"]
+    I --> L["Контроллер дисплея передаёт пиксели на панель"]
+    K --> L
+    L --> M["Интерфейсы панели: SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI"]
 ```
 
 Этот тракт можно настраивать под конкретное изделие: eZip, ePicasso, TurboPixel и полноэкранный кадровый буфер нужны не всегда. Доступность и взаимодействие функций зависят от выбранного устройства, SDK, интерфейса дисплея, панели и конфигурации драйвера. Текущий заголовочный файл LCDC в OpenSiFli определяет `LCDC_SUPPORTED_COMPRESSED_LAYER`, только если включён `HAL_EXTDMA_MODULE_ENABLED` и это допускает условие для семейства; SF32LB52x и SF32LB57x исключены. В комментарии к исходному коду также отмечено, что тракт LCPU не включён. В опубликованной таблице возможностей LCDC в SDK декомпрессия сжатых слоёв для SF32LB55x помечена как неподдерживаемая. Поэтому поддержку 55x следует считать условной, а не проверенной для полного тракта на работающем устройстве. Проверьте точную версию SDK, ядро, конфигурацию сборки и целевое оборудование; см. раздел [TurboPixel](turbopixel.md#availability-in-the-sf32-family).

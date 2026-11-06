@@ -33,6 +33,8 @@ The Bluetooth AT Command Module page links to this V1.2.1 reference. It does not
 
 </div>
 
+<div id="_1"></div>
+
 ## Overview
 
 The SF32LB57 dual-mode Bluetooth module provides the host with a UART-based AT command interface for both BLE and Classic Bluetooth (BR/EDR). The host uses AT commands to configure device parameters, manage connections, send and receive data, and receive unsolicited status indications from the module.
@@ -63,12 +65,16 @@ The SF32LB57 dual-mode Bluetooth module provides the host with a UART-based AT c
 
 ## Command Format
 
+<div id="_2"></div>
+
 ### Syntax Definition
 
 AT commands are transmitted as ASCII text, terminated by a carriage return `\r` (0x0D). The command prefix is `AT+` (AT-format commands) or `AT>` (PDU-format commands). On SF32LB57, the AT port is USART1, using 8N1 framing with no hardware flow control, at a default baud rate of 460800 bps. A single AT frame is limited to 512 bytes.
 
 !!! warning "Confirm the PDU frame-length limit"
     The source specifies a 512-byte AT-frame limit but also allows a PDU body of up to 508 bytes. With the illustrated 8-byte command framing, that would occupy 516 bytes on the UART. The source does not explain how framing bytes count toward the receive-buffer limit. Confirm the maximum accepted PDU frame against the target firmware before sizing host buffers or using the maximum body length; do not substitute a guessed limit for either source value.
+
+<div id="at"></div>
 
 ### AT-Format Commands
 
@@ -95,6 +101,8 @@ AT commands are transmitted as ASCII text, terminated by a carriage return `\r` 
 | Query return value | `\r\n+<CMD>:<value>\r\n\r\nOK\r\n` |
 
 </div>
+
+<div id="pdu"></div>
 
 ### PDU-Format Command Framing
 
@@ -130,7 +138,11 @@ PDU commands transfer binary payloads while the module is in command mode. Unles
 
 The commands below are grouped by capability, in the same categories used by the index table on the Bluetooth AT Command Module page.
 
+<div id="_3"></div>
+
 ### System and Device
+
+<div id="_4"></div>
 
 #### Get Firmware Version
 
@@ -147,6 +159,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_5"></div>
+
 #### Query Device Name
 
 <div align="center"><em>Table: Query Device Name</em></div>
@@ -161,6 +175,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Returns the currently configured device name (without the MAC suffix — the MAC suffix only affects the name shown in advertising). |
 
 </div>
+
+<div id="_6"></div>
 
 #### Set Device Name
 
@@ -177,6 +193,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="mac"></div>
+
 #### Query MAC Name Suffix Switch
 
 <div align="center"><em>Table: Query MAC Name Suffix Switch</em></div>
@@ -191,6 +209,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Returns the current suffix switch state: 0 = off, 1 = on. |
 
 </div>
+
+<div id="mac_1"></div>
 
 #### Set MAC Name Suffix Switch
 
@@ -207,6 +227,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="ieee-1284-id"></div>
+
 #### Query IEEE 1284 Device ID
 
 <div align="center"><em>Table: Query IEEE 1284 Device ID</em></div>
@@ -221,6 +243,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Returns the currently configured IEEE 1284 device ID string; empty if not configured. |
 
 </div>
+
+<div id="ieee-1284-id_1"></div>
 
 #### Set IEEE 1284 Device ID
 
@@ -237,6 +261,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_7"></div>
+
 #### Reset Device
 
 <div align="center"><em>Table: Reset Device</em></div>
@@ -252,6 +278,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_8"></div>
+
 #### Factory Reset
 
 <div align="center"><em>Table: Factory Reset</em></div>
@@ -266,6 +294,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Restores AT configuration to defaults, clears custom GATT service configuration, BLE bonding, Classic Bluetooth (BR/EDR) pairing bonds, and the BLE static random address, then replies `OK` and resets. The host should wait for `IM_READY` after the reset. |
 
 </div>
+
+<div id="_9"></div>
 
 #### Configuration Reset
 
@@ -297,6 +327,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_10"></div>
+
 #### Query Frequency Offset Calibration
 
 <div align="center"><em>Table: Query Frequency Offset Calibration</em></div>
@@ -311,6 +343,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Returns the echo value recorded in the AT configuration; the value actually in effect is stored in the `FACTORY_CFG_ID_CRYSTAL` partition. |
 
 </div>
+
+<div id="_11"></div>
 
 #### Set Frequency Offset Calibration
 
@@ -327,6 +361,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="dut"></div>
+
 #### Enter DUT Test Mode
 
 <div align="center"><em>Table: Enter DUT Test Mode</em></div>
@@ -342,7 +378,11 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_12"></div>
+
 ### Address and Identity
+
+<div id="bluetooth"></div>
 
 #### Query Bluetooth Address
 
@@ -359,6 +399,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="bluetooth_1"></div>
+
 #### Set Bluetooth Address
 
 <div align="center"><em>Table: Set Bluetooth Address</em></div>
@@ -373,6 +415,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | The address is written to configuration and saved. Takes effect after a reset. The factory default is all-zero, meaning the address is auto-generated from the chip UID. |
 
 </div>
+
+<div id="ble"></div>
 
 #### Query BLE Address
 
@@ -389,6 +433,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="ble_1"></div>
+
 #### Set BLE Address
 
 <div align="center"><em>Table: Set BLE Address</em></div>
@@ -403,6 +449,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | This command does not accept directly setting the BLE address — calling it always returns `ERROR`. A BLE static random address is generated via `AT+RANDOMADDR=1`. |
 
 </div>
+
+<div id="ble_2"></div>
 
 #### Query BLE Random Address Switch
 
@@ -419,6 +467,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="ble_3"></div>
+
 #### Set BLE Random Address Switch
 
 <div align="center"><em>Table: Set BLE Random Address Switch</em></div>
@@ -433,6 +483,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | The switch state updates the configuration. If set to 1 and reading the public address fails, the switch falls back to 0 and returns `ERROR`. The address change is written to NVDS and takes effect after a reset. Running `AT+RANDOMADDR=1` again re-derives the same random address from the (unchanged) public address. |
 
 </div>
+
+<div id="class-of-device"></div>
 
 #### Query Class of Device
 
@@ -449,6 +501,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="class-of-device_1"></div>
+
 #### Set Class of Device
 
 <div align="center"><em>Table: Set Class of Device</em></div>
@@ -464,7 +518,11 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_13"></div>
+
 ### Operating Mode and Visibility
+
+<div id="_14"></div>
 
 #### Query Discoverable State
 
@@ -481,6 +539,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_15"></div>
+
 #### Set Discoverable State
 
 <div align="center"><em>Table: Set Discoverable State</em></div>
@@ -495,6 +555,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Acts according to the current operating mode: in BLE mode (`BTMODE=1`), turns BLE advertising on or off; in BT mode (`BTMODE=2`), turns inquiry scan and page scan on or off; in dual-mode (`BTMODE=0`), controls BLE advertising, inquiry scan, and page scan together. |
 
 </div>
+
+<div id="gatt"></div>
 
 #### Query GATT Advertising State
 
@@ -511,6 +573,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="gatt_1"></div>
+
 #### Set GATT Advertising
 
 <div align="center"><em>Table: Set GATT Advertising</em></div>
@@ -525,6 +589,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Directly controls starting and stopping BLE advertising. Unavailable when the operating mode is BT-only (`BTMODE=2`). |
 
 </div>
+
+<div id="spp"></div>
 
 #### Query SPP Discoverable State
 
@@ -541,6 +607,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="spp_1"></div>
+
 #### Set SPP Discoverable State
 
 <div align="center"><em>Table: Set SPP Discoverable State</em></div>
@@ -555,6 +623,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Returns `ERROR` when `AT+BTMODE` is 1 (BLE-only). Changes only the inquiry-scan bit and leaves the page-scan bit unchanged. |
 
 </div>
+
+<div id="spp_2"></div>
 
 #### Query SPP Connectable State
 
@@ -571,6 +641,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="spp_3"></div>
+
 #### Set SPP Connectable State
 
 <div align="center"><em>Table: Set SPP Connectable State</em></div>
@@ -585,6 +657,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Returns `ERROR` when `AT+BTMODE` is 1 (BLE-only). Changes only the page-scan bit and leaves the inquiry-scan bit unchanged. |
 
 </div>
+
+<div id="bluetooth_2"></div>
 
 #### Query Bluetooth Operating Mode
 
@@ -601,6 +675,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="bluetooth_3"></div>
+
 #### Set Bluetooth Operating Mode
 
 <div align="center"><em>Table: Set Bluetooth Operating Mode</em></div>
@@ -615,6 +691,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Setting updates the configuration and takes effect after a reset. |
 
 </div>
+
+<div id="_16"></div>
 
 #### Query Command Mode
 
@@ -631,6 +709,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_17"></div>
+
 #### Set Command Mode
 
 <div align="center"><em>Table: Set Command Mode</em></div>
@@ -646,7 +726,11 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_18"></div>
+
 ### Pairing and Security
+
+<div id="_19"></div>
 
 #### Clear Pairing Information
 
@@ -663,7 +747,11 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_20"></div>
+
 ### Serial Port and Events
+
+<div id="_21"></div>
 
 #### Query Serial Baud Rate
 
@@ -680,6 +768,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_22"></div>
+
 #### Set Serial Baud Rate
 
 <div align="center"><em>Table: Set Serial Baud Rate</em></div>
@@ -694,6 +784,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Setting the baud rate updates the configuration and resets the device; the new rate takes effect after the reset. |
 
 </div>
+
+<div id="_23"></div>
 
 #### Query Event Reporting Switch
 
@@ -710,6 +802,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_24"></div>
+
 #### Set Event Reporting Switch
 
 <div align="center"><em>Table: Set Event Reporting Switch</em></div>
@@ -724,6 +818,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Setting updates the configuration. When set to 1, connection-established, disconnect, and ready events are not output over the serial port. |
 
 </div>
+
+<div id="_25"></div>
 
 #### Query Pass-Through Idle Disconnect Time
 
@@ -740,6 +836,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_26"></div>
+
 #### Set Pass-Through Idle Disconnect Time
 
 <div align="center"><em>Table: Set Pass-Through Idle Disconnect Time</em></div>
@@ -755,7 +853,11 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_27"></div>
+
 ### Connection Management
+
+<div id="_28"></div>
 
 #### Query Multi-Connection Switch
 
@@ -772,6 +874,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_29"></div>
+
 #### Set Multi-Connection Switch
 
 <div align="center"><em>Table: Set Multi-Connection Switch</em></div>
@@ -786,6 +890,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Setting updates the configuration. When multi-connection is off, concurrent connection capability is restricted; when on, it operates according to the `AT+BLEMULTICONN` and `AT+BTMULTICONN` settings. |
 
 </div>
+
+<div id="ble_4"></div>
 
 #### Query Maximum BLE Concurrent Connections
 
@@ -802,6 +908,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="ble_5"></div>
+
 #### Set Maximum BLE Concurrent Connections
 
 <div align="center"><em>Table: Set Maximum BLE Concurrent Connections</em></div>
@@ -816,6 +924,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Can only be set when the multi-connection switch is on (`AT+MULTICONN=1`). Setting updates the configuration; once the connection count hits the limit, advertising stops (no longer connectable), and automatically resumes once a link drops back below the limit. |
 
 </div>
+
+<div id="classic-bluetooth"></div>
 
 #### Query Maximum Classic Bluetooth Concurrent Connections
 
@@ -832,6 +942,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="classic-bluetooth_1"></div>
+
 #### Set Maximum Classic Bluetooth Concurrent Connections
 
 <div align="center"><em>Table: Set Maximum Classic Bluetooth Concurrent Connections</em></div>
@@ -846,6 +958,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Can only be set when the multi-connection switch is on (`AT+MULTICONN=1`). Setting updates the configuration. When the connection count reaches the limit, the module stops page scanning and resumes it automatically after the count falls below the limit. |
 
 </div>
+
+<div id="_30"></div>
 
 #### Disconnect
 
@@ -862,6 +976,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_31"></div>
+
 #### Query Connection List
 
 <div align="center"><em>Table: Query Connection List</em></div>
@@ -877,7 +993,11 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="_32"></div>
+
 ### Data Transfer
+
+<div id="ble-mtu"></div>
 
 #### Query BLE MTU
 
@@ -894,6 +1014,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="ble-mtu_1"></div>
+
 #### Set BLE MTU
 
 <div align="center"><em>Table: Set BLE MTU</em></div>
@@ -908,6 +1030,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | This value sets the ceiling used during MTU negotiation. |
 
 </div>
+
+<div id="spp_4"></div>
 
 #### Send SPP Data
 
@@ -924,7 +1048,11 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="gatt_2"></div>
+
 ### Custom GATT
+
+<div id="gatt_3"></div>
 
 #### Query Custom GATT Service List
 
@@ -941,6 +1069,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="gatt_4"></div>
+
 #### Create Custom GATT Service
 
 <div align="center"><em>Table: Create Custom GATT Service</em></div>
@@ -955,6 +1085,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | `idx` must be a single digit immediately followed by a comma. UUID length must be exactly 4 or 32 characters — any other length returns `ERROR`. If the slot is already registered with the protocol stack it cannot be reconfigured, and creation returns `ERROR`. Creating a service clears any previous configuration in that slot |
 
 </div>
+
+<div id="gatt_5"></div>
 
 #### Delete Custom GATT Service
 
@@ -971,6 +1103,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="gatt_6"></div>
+
 #### Query Custom GATT Characteristic List
 
 <div align="center"><em>Table: Query Custom GATT Characteristic List</em></div>
@@ -985,6 +1119,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | None |
 
 </div>
+
+<div id="gatt_7"></div>
 
 #### Add Custom GATT Characteristic
 
@@ -1001,6 +1137,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="gatt_8"></div>
+
 #### Start (Register) Custom GATT Services
 
 <div align="center"><em>Table: Start (Register) Custom GATT Services</em></div>
@@ -1015,6 +1153,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Registers with the protocol stack every service that is in use, not yet registered, and has at least one characteristic. Once registered, a service can no longer be revoked or reconfigured at runtime. The query form is not supported |
 
 </div>
+
+<div id="gatt-notifyindicate"></div>
 
 #### Send GATT Characteristic Data (Notify/Indicate)
 
@@ -1031,6 +1171,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="gatt_9"></div>
+
 #### Save Custom GATT Configuration to Flash
 
 <div align="center"><em>Table: Save Custom GATT Configuration to Flash</em></div>
@@ -1045,6 +1187,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | Persists the current configuration of all services and characteristics to flash. Only configuration data is saved — runtime information such as registration state is not saved. Returns `ERROR` if KVDB is not ready or the write fails. The query form is not supported |
 
 </div>
+
+<div id="gatt_10"></div>
 
 #### Clear Custom GATT Configuration in Flash
 
@@ -1061,6 +1205,8 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="gatt_11"></div>
+
 #### Query GATT Auto-Load-on-Power-Up Switch
 
 <div align="center"><em>Table: Query GATT Auto-Load-on-Power-Up Switch</em></div>
@@ -1075,6 +1221,8 @@ The commands below are grouped by capability, in the same categories used by the
 | Notes | None |
 
 </div>
+
+<div id="gatt_12"></div>
 
 #### Set GATT Auto-Load-on-Power-Up Switch
 
@@ -1091,9 +1239,13 @@ The commands below are grouped by capability, in the same categories used by the
 
 </div>
 
+<div id="urc"></div>
+
 ## Unsolicited Events (URC)
 
 The following are status indications the module reports on its own — the host does not send a command to receive them. Reporting is controlled by the event-reporting switch (`AT+EVT`); nothing is reported while silent mode is on.
+
+<div id="im_ready"></div>
 
 ### IM_READY Ready Indication
 
@@ -1110,6 +1262,8 @@ The following are status indications the module reports on its own — the host 
 
 </div>
 
+<div id="im_conn"></div>
+
 ### IM_CONN Connection Indication
 
 <div align="center"><em>Table: IM_CONN Connection Indication</em></div>
@@ -1124,6 +1278,8 @@ The following are status indications the module reports on its own — the host 
 | Notes | In command mode, each connection established is reported once, carrying the handle, peer address, and MTU. In pass-through mode, this is reported only when the connection count is 1 (the first connection), and carries no parameters. Whether it is reported is controlled by `AT+EVT`; setting `AT+EVT=1` suppresses it. |
 
 </div>
+
+<div id="im_disconn"></div>
 
 ### IM_DISCONN Disconnect Indication
 
@@ -1142,6 +1298,8 @@ The following are status indications the module reports on its own — the host 
 
 ## PDU-Format Commands
 
+<div id="pdu-opcode-0x0101"></div>
+
 ### PDU Data Report (opcode 0x0101)
 
 <div align="center"><em>Table: PDU Data Report (module → host, opcode 0x0101)</em></div>
@@ -1156,6 +1314,8 @@ The following are status indications the module reports on its own — the host 
 | Notes | In command mode, when data is written to a custom BLE characteristic or received over Classic Bluetooth SPP, the module reports it to the host in the format above; in pass-through mode, the data is output directly. |
 
 </div>
+
+<div id="pdu-notify-opcode-0x0101"></div>
 
 ### PDU Mode Send Data (Auto-Select Notify Characteristic, opcode 0x0101)
 
@@ -1172,6 +1332,8 @@ The following are status indications the module reports on its own — the host 
 
 </div>
 
+<div id="pdu-opcode-0x0102"></div>
+
 ### PDU Mode Send Data (Specify Service and Characteristic, opcode 0x0102)
 
 <div align="center"><em>Table: PDU Mode Send Data (Specify Service and Characteristic, opcode 0x0102)</em></div>
@@ -1186,6 +1348,8 @@ The following are status indications the module reports on its own — the host 
 | Notes | BLE connections only; if the resolved connection is of SPP type, the frame is dropped. `svc_idx` must correspond to a registered custom service, and `char_idx` must be less than that service's characteristic count, otherwise dropped. The specified characteristic must have a Notify or Indicate property, otherwise dropped. `conn_hdl` resolution follows the same rule as `0x0101` (1-based BLE handle first, then the raw value). The frame must be immediately followed by `\r`. |
 
 </div>
+
+<div id="pdu_1"></div>
 
 ### PDU Mode Disconnect
 
@@ -1202,6 +1366,8 @@ The following are status indications the module reports on its own — the host 
 
 </div>
 
+<div id="pdu-im_conn-im_disconn"></div>
+
 ### PDU Connection Status Indication (IM_CONN / IM_DISCONN)
 
 <div align="center"><em>Table: PDU Connection Status Indication (IM_CONN / IM_DISCONN)</em></div>
@@ -1217,7 +1383,11 @@ The following are status indications the module reports on its own — the host 
 
 </div>
 
+<div id="_33"></div>
+
 ## Appendix
+
+<div id="class-of-device_2"></div>
 
 ### Common Class of Device Values
 

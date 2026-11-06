@@ -70,6 +70,8 @@ Arrêtez le TX avant d'entrer en RX. Réglez le canal et appuyez sur Start RX ; 
 PER = (1500 - received_packets) / 1500 × 100%
 ```
 
+Le [guide SiFli lié](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/bt_individual_test_guide.html) définit `n` comme le nombre de paquets reçus, mais indique actuellement `PER = (n - 1500) / 1500 × 100%`, soit le signe opposé au calcul de paquets perdus ci-dessus. Cette page conserve la formule des pertes ; demandez à SiFli de confirmer la formule attendue avant de considérer les deux comme équivalentes.
+
 Notez également le RSSI. Pour le RX Bluetooth classique, utilisez une forme d'onde du générateur GPRF du CMW500, par exemple DH1/2-DH1/3-DH1, et consignez le nombre de paquets reçus et erronés, le nombre de bits, le BER et le RSSI. Les chemins RF du BLE et du Bluetooth classique partagent le même matériel ; n'effectuez donc pas ces deux essais en parallèle.
 
 ![Réglages RX BLE de SiFli_RfTool](../../../../assets/develop/app-notes/bluetooth-single-item/figure_13-5.png){ loading="lazy" }

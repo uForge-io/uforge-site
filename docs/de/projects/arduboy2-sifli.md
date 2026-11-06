@@ -86,7 +86,7 @@ Halten Sie vor dem Start Folgendes bereit:
 |:-------------------|:-----------------------------|:-----|:-------|:----------------|:-------------------------------|
 | OpenSiFli/Arduboy2-SiFli | Genau einen Commit festlegen und erfassen; dieser Artikel friert keine Revision ein | SF32-Kompatibilitätsschicht und Beispiele | Erforderlich | [Repository](https://github.com/OpenSiFli/Arduboy2-SiFli) | Prüfen Sie Board-Target, Abhängigkeiten und unterstützte API beim gewählten Commit erneut |
 | OpenSiFli/ArduinoCore-zephyr und Board-Paket | Der genaue kompatible Commit bzw. die Paketversion muss aus der Portierung ermittelt und erfasst werden | Arduino-Laufzeit, Board-Definition, Compiler und Upload-Integration | Erforderlich | [Repository](https://github.com/OpenSiFli/ArduinoCore-zephyr) | Ersetzen Sie den Core oder das Board-Paket nicht durch eine neuere Version oder ein anderes Paket, ohne einen sauberen Build und eine Peripherie-Regression |
-| Testsketch und Spielressourcen | Ein Beispiel aus dem Repository oder ein separat lizenzierter Testsketch; Ressourcen-Revisionen und Lizenzen erfassen | Beansprucht die gewählte API und den Produktpfad | Eines wählen | [Beispiele von Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Der Artikel gewährt keine Rechte zur Weitergabe von Spielen, Schriften, Bildern oder Klängen Dritter |
+| Testsketch und Spielressourcen | Ein Beispiel aus dem Repository oder ein separat lizenzierter Testsketch; Ressourcen-Revisionen und Lizenzen erfassen | Erprobt die gewählte API und den Produktpfad | Eines wählen | [Beispiele von Arduboy2-SiFli](https://github.com/OpenSiFli/Arduboy2-SiFli) | Der Artikel gewährt keine Rechte zur Weitergabe von Spielen, Schriften, Bildern oder Klängen Dritter |
 
 </div>
 

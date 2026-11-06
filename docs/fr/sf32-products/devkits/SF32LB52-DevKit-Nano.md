@@ -38,7 +38,7 @@ La variante N4 convient aux applications compactes de commande, de Bluetooth et 
 
 **Divergence entre sources — à vérifier avant le choix :** le [guide détaillé de la carte Nano](https://wiki.sifli.com/en/board/sf32lb52x/SF32LB52-DevKit-Nano.html) de SiFli appelle sa configuration 16 MB de PSRAM OPI + 16 MB de NOR `R16N16 V1.0.0` ; le [guide actuel des modèles de cartes de développement](https://wiki.sifli.com/en/board/devkit_guide.html) répertorie la même configuration mémoire sous le nom `N16R16` et indique séparément `A128R16` avec 16 MB de PSRAM OPI + 128 MB de QSPI-NAND.
 
-Le guide détaillé ne décrit pas spécifiquement la A128R16. Pour cette référence, fiez-vous à l'entrée du guide des modèles plutôt que de transposer des éléments de la description de la carte N16R16.
+Le guide détaillé ne décrit pas spécifiquement la variante A128R16. Pour cette référence, fiez-vous à l'entrée du guide des modèles plutôt que de transposer des éléments de la description de la carte N16R16.
 
 Avant de choisir un firmware ou une organisation du stockage, vérifiez le marquage de la carte ainsi que le schéma et la nomenclature actuels.
 

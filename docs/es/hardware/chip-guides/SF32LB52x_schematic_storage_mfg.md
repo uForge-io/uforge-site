@@ -22,7 +22,7 @@ tags:
 
 - Las opciones de arranque externo incluyen SPI NOR, SPI NAND y SD NAND; eMMC está disponible en las variantes compatibles con alimentación externa regulada.
 - Los pines bootstrap `PA13` y `PA17` seleccionan el medio de arranque.
-- Las notas de aplicación y la guía de diseño de esquemáticos asignan `PA21` a la conmutación de la alimentación del almacenamiento de arranque, mientras que la lista de comprobación oficial asigna `PA11` a la Flash externa de las variantes alimentadas por batería. Confirme con SiFli qué pin de control corresponde al diseño concreto. Como requisito independiente, la Flash NOR de 32 MB o más conectada mediante MPI debe apagarse y volver a encenderse mediante PA21 para que la ROM pueda reconocerla tras un reinicio o al entrar en Hibernate. En las variantes con memoria integrada en el encapsulado, VDD_SIP debe apagarse durante Hibernate para evitar fugas en las E/S de esa memoria.
+- Las notas de aplicación y la guía de diseño de esquemáticos asignan `PA21` a la conmutación de la alimentación del almacenamiento de arranque, mientras que la lista de comprobación oficial asigna `PA11` a la Flash externa de las variantes alimentadas por batería. Confirme con SiFli qué pin de control corresponde al diseño concreto. La regla de conmutación de la NOR MPI de 32 MB o más y la instrucción de apagar `VDD_SIP` durante Hibernate proceden de la documentación de las variantes con alimentación regulada `52B/D/E/G/J`. La fuente de las variantes con batería describe `VDD18_VOUT` e indica que la NOR externa no necesita un interruptor adicional, pero no aclara el umbral de 32 MB; confirme con SiFli si la regla se aplica a `520/3/5/7` antes de utilizarla.
 
 **Objetivo de diseño**
 
@@ -131,14 +131,14 @@ Las guías de aplicación y de diseño de esquemáticos de OpenSiFli, de mayor p
 
     - SF32LB520Ux6 integra Flash en el encapsulado: alimente VDD18_VOUT desde VDD33_VOUT1 y deshabilite el LDO interno VDD18_VOUT.
     - SF32LB523/5/7Ux6 integran PSRAM en el encapsulado: use el LDO interno; también es posible suministrar VDD18_VOUT externamente.
-    - Alimente la NOR Flash externa desde VDD33_VOUT1; no hace falta añadir otro interruptor de alimentación.
+    - La fuente de las variantes con batería indica que la NOR Flash externa se alimenta desde VDD33_VOUT1 sin un interruptor adicional, pero no aclara si esto también se aplica a capacidades de 32 MB o más. Confírmelo con SiFli antes de aplicarlo a una NOR MPI de gran capacidad.
     - Alimente SPI NAND o SD NAND externas desde VDD33_VOUT1 y añada un interruptor de alimentación.
     - El diseño de referencia reserva huellas para resistencias pull-up en PA13 y PA17; móntelas según el tipo de almacenamiento. Se recomiendan 7,5 kΩ.
 
 === "52B/D/E/G/J (alimentación regular)"
 
     - Para el modelo con Flash integrada en el encapsulado (SF32LB52BU36), añada un interruptor de alimentación en VDD_SIP.
-    - Para los modelos con PSRAM integrada en el encapsulado (SF32LB52DUB6/EUB6/GUC6/JUD6), el interruptor de VDD_SIP es opcional si PVDD = 3,3 V y VDD_SIP usa el LDO interno; es obligatorio si PVDD = 1,8 V.
+    - Para los modelos con PSRAM integrada en el encapsulado (SF32LB52DUB6/EUB6/GUC6/JUD6), el interruptor de VDD_SIP es opcional al usar el rango de PVDD de la tabla y el LDO interno. La nota al pie de la fuente B3 indica que se necesita si PVDD = 1,8 V, pero ese valor queda fuera del rango tabulado de 2,97–3,63 V. Su aplicabilidad no está resuelta: confirme con SiFli y no trate 1,8 V como una condición de diseño recomendada para PVDD. Consulte la nota de rango de funcionamiento en [Diseño del esquemático](SF32LB52x_schematic_design.md).
     - La alimentación del almacenamiento externo es independiente de VDD_SIP; añada un interruptor de alimentación separado.
     - Consulte la sección 5.6.1.1 para conocer las alternativas de los dominios VCC/VCCQ de eMMC.
     - La nota de aplicación asigna **PA21** a los interruptores de alimentación del almacenamiento relacionados con el arranque; la discrepancia entre las fuentes sobre la Flash externa de las variantes alimentadas por batería se señala más arriba.

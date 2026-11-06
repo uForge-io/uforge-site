@@ -8,7 +8,7 @@ tags:
 
 # Zephyr upstream { #zephyr-upstream }
 
-Desde o Zephyr v4.3.0, o projeto upstream do Zephyr mantém suporte para a placa `sf32lb52_devkit_lcd`. Consulte as [notas da versão v4.3.0](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html) e a [documentação da placa SF32LB52 DevKit LCD](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html). Este guia cria um workspace v4.3.0, compila um primeiro exemplo e grava o firmware na placa. Para obter o conjunto mais amplo de recursos oficiais de SF32, use o [SiFli-SDK](../sifli/getting-started-sifli-sdk.md).
+O upstream do Zephyr oferece suporte à placa `sf32lb52_devkit_lcd` desde a v4.3.0. Este guia usa a versão Zephyr v4.5.0, ainda mantida, para criar um novo workspace, compilar um primeiro exemplo e gravar o firmware na placa. Consulte as [notas da versão v4.3.0](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html), as [notas da versão v4.5.0](https://docs.zephyrproject.org/4.5.0/releases/release-notes-4.5.html) e a documentação atual da [placa SF32LB52 DevKit LCD](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html). Para obter o conjunto mais amplo de recursos oficiais de SF32, use o [SiFli-SDK](../sifli/getting-started-sifli-sdk.md).
 
 !!! note "Confira os recursos da placa"
     A existência de uma definição upstream da placa não confirma, por si só, que todos os periféricos ou modos de operação estejam habilitados ou validados para um produto. Consulte a tabela de recursos compatíveis na documentação da placa e verifique o comportamento necessário na revisão exata da sua placa.
@@ -22,23 +22,49 @@ Desde o Zephyr v4.3.0, o projeto upstream do Zephyr mantém suporte para a placa
 
 **Software**
 
-- Um sistema host compatível com o Zephyr v4.3.0, configurado conforme o [guia de primeiros passos](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html).
+- Um sistema host compatível com o Zephyr v4.5.0, configurado conforme o [guia de primeiros passos](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html).
 - As dependências de host do Zephyr e o Zephyr SDK para o alvo ARM Cortex-M, instalados conforme esse guia.
 - Git, Python 3 e `pip`.
 
 ## Preparar as ferramentas { #prepare-the-tooling }
 
-Primeiro, instale as dependências de host e o Zephyr SDK seguindo o [guia de primeiros passos do Zephyr v4.3.0](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html). Em seguida, crie um ambiente Python e inicialize um workspace na tag correspondente do Zephyr:
+Primeiro, instale as dependências de host e o Zephyr SDK seguindo o [guia de primeiros passos do Zephyr v4.5.0](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html). Em seguida, escolha os comandos do seu shell para criar um ambiente Python e inicializar um workspace na tag correspondente do Zephyr:
 
 ```bash
 python3 -m venv ~/zephyr-venv
-source ~/zephyr-venv/bin/activate
-pip install west
-west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.3.0 ~/zephyrproject
+. ~/zephyr-venv/bin/activate
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 ~/zephyrproject
 cd ~/zephyrproject
 west update
 west zephyr-export
-pip install -r zephyr/scripts/requirements.txt
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+No PowerShell do Windows:
+
+```powershell
+py -3 -m venv "$HOME\zephyr-venv"
+& "$HOME\zephyr-venv\Scripts\Activate.ps1"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "$HOME\zephyrproject"
+Set-Location "$HOME\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+No Prompt de Comando do Windows:
+
+```bat
+py -3 -m venv "%USERPROFILE%\zephyr-venv"
+call "%USERPROFILE%\zephyr-venv\Scripts\activate.bat"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "%USERPROFILE%\zephyrproject"
+cd /d "%USERPROFILE%\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
 ```
 
 Mantenha esse ambiente Python ativo durante as etapas de compilação e gravação abaixo.
@@ -75,7 +101,7 @@ A placa upstream define o `sftool` como ferramenta de gravação padrão. Instal
 west flash
 ```
 
-Se a gravação falhar, confira a seleção da porta serial, o modo de download e as instruções da ferramenta na [documentação da placa](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html).
+Se a gravação falhar, confira a seleção da porta serial, o modo de download e as instruções da ferramenta na [documentação da placa](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html).
 
 ## Abrir o console serial { #open-the-serial-console }
 
@@ -87,7 +113,7 @@ Hello World! sf32lb52_devkit_lcd
 
 ## Escolher o próximo exemplo { #choose-a-next-sample }
 
-Use a tabela de recursos compatíveis da documentação upstream da placa e o [catálogo de exemplos do Zephyr](https://docs.zephyrproject.org/4.3.0/samples/index.html) para escolher a próxima API ou o próximo periférico a avaliar. Confirme que o recurso está listado para esta placa e que a configuração necessária está habilitada antes de considerar um exemplo como evidência de prontidão para produção.
+Use a tabela de recursos compatíveis da documentação upstream da placa e o [catálogo de exemplos do Zephyr](https://docs.zephyrproject.org/4.5.0/samples/index.html) para escolher a próxima API ou o próximo periférico a avaliar. Confirme que o recurso está listado para esta placa e que a configuração necessária está habilitada antes de considerar um exemplo como evidência de prontidão para produção.
 
 ## Solução de problemas { #troubleshooting }
 
@@ -97,8 +123,8 @@ Use a tabela de recursos compatíveis da documentação upstream da placa e o [c
 
 | Sintoma | Verificação |
 |:--------|:------------|
-| `west boards` não mostra o alvo SF32 | Confirme que o workspace foi inicializado com o Zephyr upstream v4.3.0 ou posterior e que `west update` foi concluído. |
-| A compilação falha antes de começar | Confirme que o ambiente Python está ativo, que o Zephyr SDK para ARM Cortex-M está instalado e que os requisitos do v4.3.0 foram instalados. |
+| `west boards` não mostra o alvo SF32 | Confirme que o workspace foi inicializado com o Zephyr upstream v4.5.0 ou posterior e que `west update` foi concluído. |
+| A compilação falha antes de começar | Confirme que o ambiente Python está ativo, que o Zephyr SDK para ARM Cortex-M está instalado e que os requisitos do v4.5.0 foram instalados. |
 | O firmware compila, mas a gravação falha | Confirme que `sftool` está instalado e no `PATH`, que a porta serial selecionada está correta e que a placa está no modo de download serial. |
 | Não há saída serial | Confira `usart1`, `1000000` baud, a conexão USB-UART e se outro terminal está usando a porta. |
 | Um exemplo de periférico falha | Consulte a tabela de recursos compatíveis e a configuração do exemplo; o alvo básico da placa não habilita necessariamente todos os periféricos. |

@@ -9,12 +9,18 @@ tags:
     - 芯片
 ---
 
+<div id="sf32lb57x"></div>
+
 # SF32LB57x 硬件设计指南 — 存储与制造 { #sf32lb57x-hardware-design-guide-storage-manufacturing }
 
 !!! note "SF32LB57x 硬件设计指南的一部分"
     本页覆盖原理图设计指导的第 5.6-5.7 节：存储与连接、制造。返回[时钟、RF 与用户接口](SF32LB57x_schematic_clock_rf_interfaces.md)，或跳转至 [PCB 布局指导](SF32LB57x_pcb_layout.md)。
 
+<div id="56"></div>
+
 ### 5.6. 存储与连接 { #56-storage-and-connectivity }
+
+<div id="561"></div>
 
 #### 5.6.1. 存储与启动 { #561-storage-and-boot }
 
@@ -37,6 +43,8 @@ tags:
 | H | H | eMMC |
 
 </div>
+
+<div id="562"></div>
 
 #### 5.6.2. 存储接口 { #562-storage-interfaces }
 
@@ -68,6 +76,8 @@ SF32LB57x 支持外接 SPI NOR Flash、SPI NAND Flash、SD NAND Flash 和 eMMC�
 !!! warning "SDIO 控制器编号存在来源差异"
     思澈科技（SiFli）的存储接线表将 `PA12`–`PA17` 上的信号标为 `SD2_*`，而同一指南的 IO MUX 表将这些管脚的 Function 2 标为 `SD1_*`。上表保留接线表原标注；物理管脚对应关系相同，但不得据此直接选择 SDIO2 或固件实例。配置控制器前须核对具体型号的用户手册、SDK 管脚配置与参考设计。
 
+<div id="563"></div>
+
 #### 5.6.3. 启动与电源控制 { #563-boot-and-power-control }
 
 eMMC 有 `VCC` 和 `VCCQ` 两个电源域。同时切断两路电源可降低关机功耗，但 eMMC 从睡眠恢复较慢，CPU 平均功耗较高；只切断 `VCC`、保持 `VCCQ` 供电，则关机功耗较高，但 eMMC 恢复较快，CPU 平均功耗较低。
@@ -96,9 +106,13 @@ eMMC 有 `VCC` 和 `VCCQ` 两个电源域。同时切断两路电源可降低关
 - 若合封存储已经占用 MPI3，外部 MPI3 仅支持 SD NAND/eMMC 启动介质；不要再在该通道外接 SPI NOR 或 SPI NAND。
 - 所选存储器的工作电压范围必须与主芯片 IO 供电电平匹配；存储器型号应列入项目的合格供应商名录（AVL）。
 
+<div id="564-gpio"></div>
+
 #### 5.6.4. GPIO 与引脚复用 { #564-gpio-and-pin-multiplexing }
 
 GPIO 规划应在产品外设完全分配前完成，因为启动、调试、唤醒、USB、模拟、显示、存储和高速信号都会约束看似灵活的矩阵复用。
+
+<div id="565"></div>
 
 #### 5.6.5. 引脚规划原则 { #565-pin-planning }
 
@@ -107,6 +121,8 @@ SF32LB57x 支持灵活的引脚复用，但下列信号应尽早固定：
 - RF、晶体、电源、USB、模拟音频、GPADC、启动和调试相关引脚。
 - 高速显示、SDIO、存储和 DCMI 等对管脚组有要求的接口。
 - 唤醒 GPIO、启动配置、SWD 切换和产线测试引脚。
+
+<div id="566-gpio"></div>
 
 #### 5.6.6. GPIO 设计要点 { #566-gpio-guidelines }
 
@@ -263,6 +279,8 @@ SF32LB57x 支持灵活的引脚复用，但下列信号应尽早固定：
 !!! warning "LCDC 子复用表中的 IF_SEL 标注"
     思澈科技（SiFli）的原始表格将 SPI 和 JDI 两种模式均标为 `IF_SEL=0`。本文保留原表标注；由于该值存在歧义，配置所选面板前应结合对应型号的 SDK 驱动和参考设计核实，不要据此自行推断寄存器设置。
 
+<div id="567"></div>
+
 #### 5.6.7. 通用接口 { #567-general-interfaces }
 
 所有通用接口都应按同一模式评审：电气连接、IO 电压、复位/睡眠默认状态、上拉电源轨、ESD 暴露风险，以及是否与启动、调试、唤醒或高速功能冲突。
@@ -274,6 +292,8 @@ SF32LB57x 支持灵活的引脚复用，但下列信号应尽早固定：
 
 !!! warning "GPADC 按键电压标注"
     思澈科技（SiFli）源图对各按键节点使用斜线分隔的双电压标注，但未说明每组数值的对应条件。使用这些电压作为阈值前，应结合目标供电配置和参考设计确认其对应关系。
+
+<div id="568"></div>
 
 #### 5.6.8. 接口评审原则 { #568-interface-review-principles }
 
@@ -386,7 +406,11 @@ SF32LB57x 支持灵活的引脚复用，但下列信号应尽早固定：
 !!! warning "VBATS 管脚电压与采样范围"
     3.3 V 供电系列的电源管脚表将 `VBATS` 范围列为 0 V 至 4.7 V，而原理图自查表规定电池电压采样范围为 0 V 至 4.5 V。对于 GPADC 采样，应遵循 0 V 至 4.5 V 的较窄范围；不要把管脚表中的 4.7 V 上限当作 ADC 的有效测量范围。
 
+<div id="57"></div>
+
 ### 5.7. 制造 { #57-manufacturing }
+
+<div id="571"></div>
 
 #### 5.7.1. 量产启动与下载模式 { #571-production-boot-and-download-modes }
 
@@ -435,6 +459,8 @@ SF32LB57x 支持灵活的引脚复用，但下列信号应尽早固定：
 | 硬件自查表 4.8，第 3 项 | 所有型号 | `VBAT` 或 3.3 V、`GND`、`PA18`、`PA19`、`VDD33_VOUT1`（3.3 V 供电系列无此项）、`PA00`、`PA01`、`PA34`；焊盘尺寸、间距和方向须与夹具探针匹配。 |
 
 </div>
+
+<div id="572"></div>
 
 #### 5.7.2. 产线烧录与校准 { #572-production-programming-and-calibration }
 

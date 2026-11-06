@@ -7,6 +7,8 @@ tags:
   - Wearables
 ---
 
+<div id="_1"></div>
+
 # Power Profiling a Smartwatch
 
 Power profiling turns expected daily use into a battery-life estimate and, more importantly, a ranked list of the loads worth optimizing. This article uses the supplied [English Smartwatch Power Profile Data workbook](assets/smartwatch-power-profile-data.xlsx) as a worked example. It shows how to convert user behavior into mAh per day, identify the loads that dominate the budget, and turn a spreadsheet model into a measurement plan.
@@ -16,6 +18,8 @@ Power profiling turns expected daily use into a battery-life estimate and, more 
     The workbook contains no measurement log, so it does not identify any input as a hardware measurement. The 13.15-day result is a model estimate, not an observed runtime.
 
 Use this page with the [Low-Power Overview](overview.md) for architecture and firmware guidance, and [Power Measurement and Validation](measurement-and-validation.md) for the measurement workflow that validates the model.
+
+<div id="_2"></div>
 
 ## Smartwatch System Overview
 
@@ -34,6 +38,8 @@ Start by defining the model boundary. This workbook represents a battery-powered
 | Nominal battery voltage | 3.87 V | Used by the workbook's voltage-normalization helper. |
 
 </div>
+
+<div id="_3"></div>
 
 ## Power Consumption by Scenario
 
@@ -118,6 +124,8 @@ flowchart LR
     F --> B
 ```
 
+<div id="_4"></div>
+
 ### Convert a Scenario Into Daily Charge
 
 For a load whose current is already expressed at the battery, its daily charge is straightforward:
@@ -135,11 +143,15 @@ battery_current_mA = (load_voltage_V x load_current_mA) /
 
 Use measured regulator efficiency at the intended load current. A regulator's peak-efficiency headline is rarely useful for a watch that spends much of its day at light load.
 
+<div id="_5"></div>
+
 ### Check the Workbook's Conversion Assumption
 
 The workbook's “Power-Conversion Efficiency (%)” column is calculated as `load voltage / battery voltage`. Its subsequent charge formula divides by that helper and then by battery voltage, so the voltage terms cancel. The resulting daily charge is simply load current multiplied by time: it treats battery current as equal to load current, rather than modelling ideal power conversion. This resembles a linear regulator with quiescent current omitted; it is not a general model for a switching regulator.
 
 For example, a 1 mA load at 3.3 V supplied from a 3.87 V battery would draw about 0.853 mA through an ideal converter, whereas the workbook counts 1 mA. A real converter's result depends on its efficiency and quiescent current. Consequently, the workbook's conversion assumption alone does not establish whether its battery-life estimate is optimistic or conservative. The ranking is useful for a first review of the declared current and time assumptions, but it is not a final battery budget. For a production budget, replace the helper with measured efficiency for each rail and load range, include quiescent current without double-counting it if already included in that measurement, and account for battery-protection and charger-path losses.
+
+<div id="_6"></div>
 
 ## Calculate Daily Consumption from Product Usage
 
@@ -302,6 +314,8 @@ The workbook provides no dedicated sensor category. Its `Other` bucket is the on
 
 </div>
 
+<div id="_7"></div>
+
 ## Turn the Ranking Into Design Work
 
 Work from the largest modelled contributor downward, then validate the order with measurements. In this model, a sensible sequence is:
@@ -313,6 +327,8 @@ Work from the largest modelled contributor downward, then validate the order wit
 5. **Long-running sensing:** Profile sleep monitoring and exercise recording as complete scenes, including sensor duty cycle, processing, memory traffic, and radio behavior.
 
 Do not optimize an isolated spreadsheet number. An apparently efficient change can increase wake frequency, reduce user satisfaction, or extend active time enough to erase the expected energy saving.
+
+<div id="_8"></div>
 
 ## Validate the Model on Hardware
 
@@ -333,6 +349,8 @@ The model becomes useful when it is continuously calibrated against measurements
 
 </div>
 
+<div id="_9"></div>
+
 ## Keep the Profile Honest
 
 - Treat disabled scenarios as unbudgeted, not free. The workbook currently assigns zero charge to NFC, Bluetooth calling, and AOD scenarios.
@@ -340,6 +358,8 @@ The model becomes useful when it is continuously calibrated against measurements
 - Measure at the battery input when possible. Rail-level measurements are still valuable, but they need regulator losses and quiescent current added before they become battery-life numbers.
 - Change one assumption at a time, then compare mAh per day rather than only instantaneous current.
 - Re-run the profile whenever a display policy, Bluetooth setting, sensor cadence, PM policy, or major firmware feature changes.
+
+<div id="_10"></div>
 
 ## Key Takeaways
 

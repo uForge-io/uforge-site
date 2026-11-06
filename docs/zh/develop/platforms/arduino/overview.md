@@ -12,7 +12,7 @@ tags:
 [OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) 是面向 SF32 的 Zephyr Arduino Core。它适合在 **SiFli SF32LB52 DevKit LCD** 上编写 sketch、开展外设实验、制作演示和验证早期原型。
 
 !!! warning "测试版核心"
-    OpenSiFli 将此 Core 标记为 **BETA**。功能、API、软件包内容、loader 行为和发布版本均可能变化。将此路径用于产品前，请对照项目 README 和 Releases 确认当前行为。
+    OpenSiFli 将此 Core 标记为 **BETA**，并注明仅供测试。不要将它视为可用于产品的路径。功能、API、软件包内容、loader 行为和发布版本均可能变化。进一步评估前，请对照项目 README 和 Releases 确认当前行为。
 
 首次安装 IDE、选择开发板和端口、烧录 Bootloader，以及验证 Blink，请参阅[Arduino 快速开始](../../../getting-started/arduino/getting-started-arduino.md)。本页用于评估 Arduino 是否适合项目，以及在完成首次运行后维护 Arduino 项目。
 
@@ -55,7 +55,7 @@ tags:
 
 </div>
 
-名称相近的思澈科技（SiFli）或 Zephyr 开发板标识，不能与此 FQBN 互换使用。所选开发板决定构建和上传参数。
+名称相近的 SiFli 或 Zephyr 开发板标识，不能与此 FQBN 互换使用。所选开发板决定构建和上传参数。
 
 ## 构建与 Loader 模型 { #build-and-loader-model }
 

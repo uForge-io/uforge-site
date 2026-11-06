@@ -24,7 +24,7 @@ tags:
 | [UART-скрипты SDK для прошивки](../platforms/sifli-sdk/build-flash-monitor.md) | Скрипты для первичной прошивки, создаваемые при сборке SiFli-SDK. |
 | [Действия CodeKit](codekit.md) | Настройка, сборка, прошивка и мониторинг из VS Code. |
 | [`AssertDump`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/AssertDump/AssertDump_UM.html) | Сохранение данных памяти при сбое для последующего анализа. |
-| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace` собирает журналы целевой платы; `UsartServer` обеспечивает отладку по UART через Debug IP микросхемы. |
+| [`SiFli_Trace`](https://docs.sifli.com/projects/solution/6.tools/index.html) / [`UsartServer`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/UsartServer/UsartServer_UM.html) | `SiFli_Trace` собирает журналы целевой платы; в документации `UsartServer` описан как вспомогательный интерфейс UART-to-J-Link для SF32LB52x и SF32LB56x. Эта роль на стороне хоста не опровергает наличие UART Debug IP в микросхеме; поддерживаемую настройку см. в руководстве. |
 | [`Impeller`](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/tools/Impeller/Impeller_UM.html) | Программирование прошивки, калибровка и тестирование PCBA на производственной линии. |
 | [eZip / инструменты для изображений](../../learn/graphics/ezip.md) | Преобразование ресурсов для графических конвейеров со сжатием. |
 | [Инструменты для RF, аудио и производства](https://docs.sifli.com/projects/solution/6.tools/index.html) | Калибровка, тестирование и настройка на этапе производства. |
@@ -45,7 +45,7 @@ tags:
 
 ## Журналы и трассировки { #logging-and-trace-tools }
 
-Для обычной разработки достаточно терминала последовательного порта. При сложных сбоях сохраняйте структурированные журналы и данные для анализа:
+Для обычной разработки достаточно терминала последовательного порта. При серьёзных сбоях сохраняйте структурированные журналы и данные для анализа:
 
 - Сохраняйте полный журнал загрузки, начиная со сброса.
 - Храните точные файлы ELF, map и отладочных символов, соответствующие прошитому образу.

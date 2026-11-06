@@ -187,7 +187,7 @@ Para sacarles el máximo partido, utilice las listas como registros de aprobaci�
 
 [Índice de guías de diseño de hardware para chips de SiFli (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## Continuar con la guía de diseño { #continue-the-design-guide }
+## 5. Continuar con la guía de diseño { #continue-the-design-guide }
 
 La guía completa continúa en las siguientes páginas, cada una dedicada a una fase del proceso de diseño.
 

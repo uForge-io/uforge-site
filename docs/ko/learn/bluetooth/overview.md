@@ -110,7 +110,7 @@ SDK는 다음을 비롯한 여러 표준 및 벤더 프로파일의 예제 구�
 - **Classic Bluetooth 오디오** — 스트리밍에는 A2DP, 전송 제어에는 AVRCP, 통화에는 HFP를 사용합니다. 검증된 방식이며 기존 휴대폰 및 헤드셋과의 호환성이 넓습니다.
 - **LE Audio** — [Basic Audio Profile (BAP)](https://www.bluetooth.com/specifications/specs/basic-audio-profile-1-0-2/)은 유니캐스트와 브로드캐스트 LE Audio 스트림을 모두 관리하는 절차를 정의합니다. SDK에는 브로드캐스트 소스 및 싱크 예제가 포함되어 있으며, 전환 기간 동안 두 방식을 모두 연결해야 하는 제품을 위해 브로드캐스트 소스와 Classic BT를 함께 사용하는 혼합 예제도 있습니다.
 
-어느 경로든 안정적인 타이밍, 버퍼링, 신뢰할 수 있는 샘플 이동이 필요하며, 보통 DMA를 사용합니다. 지원되는 Bluetooth 오디오 역할과 SDK 구성이 제품 요구 사항을 충족한다면 SF32LB52x/56x/58x를 선택하십시오. SF32LB55x는 BLE 전용이므로 Classic Bluetooth 오디오를 제공할 수 없습니다. BLE 전용이라고 해서 디바이스에 로컬 오디오 기능이 없다는 뜻은 아닙니다. DMA와 버퍼링은 [오디오 개요](../audio/overview.md)와 [Bluetooth 프로세서](processor.md#bluetooth-audio-and-le-audio)를 참조하십시오.
+어느 경로든 안정적인 타이밍, 버퍼링, 신뢰할 수 있는 샘플 이동이 필요하며, 보통 DMA를 사용합니다. 지원되는 Bluetooth 오디오 역할과 SDK 구성이 제품 요구 사항을 충족한다면 SF32LB52x/56x/58x를 선택하십시오. SiFli SDK의 A2DP 공유 예제에는 `eh-lb57x` 보드가 포함되어 있으며 A2DP 음악 공유와 HFP 통화 릴레이를 보여 줍니다. 이는 모든 SF32LB57x 부품과 역할의 지원을 입증하지 않으므로, 구체적인 SKU, 역할, SDK 구성을 확인하십시오. SF32LB55x는 BLE 전용이므로 Classic Bluetooth 오디오를 제공할 수 없습니다. BLE 전용이라고 해서 디바이스에 로컬 오디오 기능이 없다는 뜻은 아닙니다. DMA와 버퍼링은 [오디오 개요](../audio/overview.md)와 [Bluetooth 프로세서](processor.md#bluetooth-audio-and-le-audio)를 참조하십시오.
 
 ## Sibles 서비스 구현 패턴 { #implementation-pattern-for-sibles-services }
 

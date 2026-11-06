@@ -26,7 +26,7 @@ LPSYS 从待机（Standby）唤醒后，SWD 会切回 HCPU。J-Link 复位不会
 
 ## 采集实时或事后崩溃现场 { #capture-a-live-or-post-mortem-package }
 
-对于当前版本的 SDK，可使用 `sdk.py` 通过 UART 或 J-Link 采集：
+当前 `sdk.py` 命令行工具支持所有系列使用 J-Link 采集；直接使用 UART DEBUG IP 仅支持 SF32LB52X 和 SF32LB56X。其他系列应使用 J-Link；下文所述旧版 AssertDump/UART 方法属于另一套流程。
 
 !!! note "示例适用范围"
     下面的命令以 SF32LB52/LB525 为例。保留命令结构，但必须根据目标系列和 SDK 版本替换芯片/型号、核、传输方式和 ELF。
@@ -37,7 +37,7 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
   --output /tmp/live-crash --elf build_hcpu/main.elf
 ```
 
-需要导出 PSRAM 时，添加 `--include-psram`；也可使用 `--psram-size 8MB` 手动指定 PSRAM 脚本。通过 `SifliUsartServer` 使用 J-Link IP 连接时，可设置 `--transport jlink --jlink-ip 127.0.0.1:19025`，并用 `--core hcpu` 或 `--core lcpu` 指定发生故障的处理器核。输出目录应包含现场二进制文件、对应处理器核的 ELF/AXF、`log.txt`、`manifest.json` 和 `sdk_manifest.json`。
+需要导出 PSRAM 时，添加 `--include-psram`；也可使用 `--psram-size 8MB` 手动指定 PSRAM 脚本。通过 `SifliUsartServer` 使用 J-Link IP 连接时，可设置 `--transport jlink --jlink-ip 127.0.0.1:19025`，并用 `--core hcpu` 或 `--core lcpu` 指定发生故障的处理器核。崩溃包包含采集到的二进制文件、`manifest.json` 和 `sdk_manifest.json`；提供 `--elf` 时会将该文件复制为 `hcpu.axf`。`log.txt` 仅在 `capture-live --transport jlink` 时由 `capture.log` 复制而来，或在 `export-coredump` 时由 `--log` 提供。
 
 较早版本 SDK 可参考对应系列指南，选择以下方法：
 

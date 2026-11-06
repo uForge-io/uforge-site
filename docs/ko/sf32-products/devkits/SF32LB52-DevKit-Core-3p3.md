@@ -204,6 +204,8 @@ SiFli의 중국어 보드 가이드는 1.85인치 AMOLED 모듈이 16핀 FPC 케
 
 </div>
 
+보드 개요에는 GPADC 채널이 6개로 표시되어 있지만, 이 핀 기능표에는 PA28–PA34의 GPADC0–GPADC6이 나열되어 있습니다. SiFli SDK는 ADC CH7을 VBAT에 매핑합니다. 이 자료만으로 보드에서 외부 입력 7개를 동시에 사용할 수 있다고 판단할 수 없으므로 보드 기준 채널 수는 아직 확정되지 않았습니다. 외부 아날로그 신호를 연결하기 전에 정확한 보드 리비전, 핀 멀티플렉싱 및 채널 구성을 확인하십시오. [SiFli ADC 가이드](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/adc.html)를 참조하십시오.
+
 ### LCD, 오디오, 디버그 헤더 { #lcd-audio-and-debug-header }
 
 <div align="center"><em>LCD, 오디오, 디버그 헤더 핀 할당</em></div>

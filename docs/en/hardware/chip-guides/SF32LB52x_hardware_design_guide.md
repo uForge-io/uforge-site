@@ -61,7 +61,7 @@ The family integrates:
 - Dual-mode Bluetooth 5.3 radio
 - ePicasso 2.0 2D/2.5D graphics accelerator
 - SiFli's original hardware application notes describe an integrated AI neural-network accelerator. The [SiFli-SDK NNACC guide](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/nnacc.html) lists SF32LB55x, SF32LB56x, and SF32LB58x, but not SF32LB52x; confirm software support for the exact part before relying on the accelerator.
-- Display controller supporting SPI, QSPI, 8080, JDI, and 8-bit EPD interfaces
+- Display controller supporting SPI, QSPI, 8080, JDI, and 8-bit parallel EPD on documented `52B/D/E/G/J` variants; confirm support for the exact part
 - USB 2.0 Full-Speed device
 - SDIO/eMMC storage interface on supported variants
 - Integrated audio codec with analog and digital audio interfaces
@@ -144,9 +144,9 @@ The pin layout diagrams are shown below, and their differences will be revisited
 
 <div align="center"><em>Figure 3.3-1: QFN68L Pin Layout for SF32LB520/3/5/7</em></div>
 
-![Figure 3.3-2: QFN68L Pin Layout for SF32LB52B/E/G/J](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ width="100%" loading="lazy" }
+![Figure 3.3-2: QFN68L Pin Layout for SF32LB52B/D/E/G/J](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>Figure 3.3-2: QFN68L Pin Layout for SF32LB52B/E/G/J</em></div>
+<div align="center"><em>Figure 3.3-2: QFN68L Pin Layout for SF32LB52B/D/E/G/J</em></div>
 
 ### 3.4. Applications
 
@@ -183,7 +183,7 @@ The following table summarizes the recommended hardware architecture for a typic
 | Buck Inductor | 4.7 uH +/-20%, DCR <= 0.4 Ω, Isat >= 450 mA |
 | Crystal | 48 MHz main crystal and 32.768 kHz RTC crystal |
 | RF | 50 Ω controlled-impedance trace with reserved π matching network |
-| Display | 3-line SPI, 4-line SPI, Dual-SPI, Quad-SPI (up to 512 x 512), JDI, and 8-bit EPD |
+| Display | 3-line SPI, 4-line SPI, Dual-SPI, Quad-SPI (up to 512 x 512), JDI, and 8-bit parallel EPD (documented for `52B/D/E/G/J`; confirm support for the exact part) |
 | Touch | I2C capacitive touch controller with interrupt wake support |
 | Storage | SiP Flash/PSRAM, external SPI NOR, SPI NAND, SD NAND, or eMMC depending on variant |
 | Audio | Analog microphone input, differential DAC output, external PA |

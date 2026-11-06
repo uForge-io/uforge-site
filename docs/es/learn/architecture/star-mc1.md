@@ -71,7 +71,7 @@ Para abreviar, la tabla usa `CM3`, `CM4`, `CM33`, `CM55` y `CM7` para los proces
 
 \* Estas cifras de referencia proceden de la [tabla comparativa Cortex-M de Arm, versión 2020](https://developer.arm.com/-/media/Arm%20Developer%20Community/PDF/Cortex-A%20R%20M%20datasheets/Arm%20Cortex-M%20Comparison%20Table_v3.pdf?revision=077cd073-b4ff-4193-8a26-5e854aa6e431). No son puntuaciones actuales universales ni una clasificación directa de SoC terminados: el compilador, el sistema de memoria, la configuración de caché y la configuración del benchmark afectan el resultado.
 
-† STAR-MC1 usa aquí la cifra de referencia de CM33 porque es compatible con CM33. Esta es una base de comparación, no un resultado de STAR-MC1 publicado por Arm o medido.
+† La tabla usa la cifra de 4,02 CoreMark/MHz del Cortex-M33 publicada por Arm como base común de comparación para STAR-MC1. El folleto de producto de STAR-MC1 de Arm China también publica 4,02 CoreMark/MHz, pero aquí no se ha verificado de forma independiente su metodología de prueba; no deben considerarse resultados metodológicamente equivalentes.
 
 ‡ Esta es una guía de posicionamiento arquitectónico, no datos de silicio medidos. El consumo real depende de la tecnología de proceso, el voltaje, la frecuencia, la arquitectura de memoria, las funciones habilitadas, los periféricos, el ciclo de trabajo del firmware y la implementación final del SoC.
 

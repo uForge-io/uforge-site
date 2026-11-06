@@ -48,6 +48,7 @@ Where:
 </div>
 
 These descriptions state the intended scope of each category, not finalized electrical requirements.
+
 **Evidence status:**
 - **M2 / M2xM:** The linked draft reports contact maps in a local proposal workbook, but the workbook is not included in this repository or linked here; treat the maps as proposal-only.
 - **M2xN / M2xA:** The draft summarizes these extensions, but no original contact-map data was found to verify the summaries; treat them as unverified.

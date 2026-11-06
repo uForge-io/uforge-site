@@ -8,6 +8,8 @@ tags:
 
 # SF32LB58x
 
+<div id="_1"></div>
+
 ## Overview
 
 The SF32LB58x series occupies the flagship tier of the SF32LB5x family. It targets battery-powered AIoT products that need advanced graphics, large memory capacity, dual-mode Bluetooth, rich audio/display I/O, and high GPIO density without moving to a larger application-processor platform.
@@ -17,6 +19,8 @@ SF32LB58x uses a heterogeneous three-core Arm Cortex-M33 STAR-MC1[^1] architectu
 SiFli documents 3,744 KB of on-chip SRAM and SKU-dependent combinations of co-packaged NOR Flash and OPI-/HPI-PSRAM. The family also provides display support including MIPI DSI, vector-graphics acceleration, USB 2.0 High-Speed, and a BGA package with a high I/O count. Evaluate SF32LB58x when a design needs a high-resolution UI, substantial graphics assets, external Wi-Fi through SDIO, or the compute and memory resources for edge-AI or sensor-fusion workloads.
 
 [^1]: STAR-MC1 is a configurable Armv8-M Mainline embedded CPU IP from Arm China. In compatible SF32 devices, SiFli documents it as an Arm Cortex-M33 STAR-MC1 application processor. Its Cortex-M33-class software model helps existing Cortex-M33 firmware, middleware, RTOS ports, and tools carry forward, subject to normal device-specific integration work. Its CU, SP, and SE configurations vary chiefly in cache, TCM, XIPU, and TrustZone capability; Arm Custom Instructions/CDE and the coprocessor interface are optional capabilities that must be verified for the exact SF32 part. SiFli documentation may use ***Arm Cortex-M33 STAR-MC1*** or ***Arm Cortex-M33*** according to context.
+
+<div id="_2"></div>
 
 ## Applications
 
@@ -38,6 +42,8 @@ Choose SF32LB58x when the design needs one or more of these capabilities:
 - External Wi-Fi over SDIO
 - Large framebuffer, audio, graphics, or AI-model memory
 - High GPIO count or multiple high-speed external interfaces
+
+<div id="_3"></div>
 
 ## Development Resources
 
@@ -65,7 +71,11 @@ Choose SF32LB58x when the design needs one or more of these capabilities:
 
 ---
 
+<div id="_4"></div>
+
 ## Features and Specs
+
+<div id="_5"></div>
 
 ### Compute and Memory
 
@@ -74,6 +84,8 @@ Choose SF32LB58x when the design needs one or more of these capabilities:
 - Co-packaged NOR Flash options from 1 MB to 8 MB total across the package, depending on SKU
 - Co-packaged OPI-PSRAM and HPI-PSRAM options; HPI-PSRAM is available up to 2 × 32 MB, depending on SKU
 - External NOR or SPI NAND Flash through MPI3/MPI4; SD NAND, eMMC, SD cards, or external Wi-Fi through SDIO. Available combinations depend on interface selection and pin assignment.
+
+<div id="ai"></div>
 
 ### Graphics, Display, and AI
 
@@ -89,6 +101,8 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - SPI, DSPI, QSPI (including SPI e-paper), MCU8080, JDI, RGB/DPI (RGB888 or RGB565), and MIPI DSI display interfaces
 - Supports two displays with different content, using MIPI DSI together with SPI, DSPI, or QSPI
 - Suitable for local edge-AI, machine-learning, and sensor-fusion workloads
+
+<div id="_6"></div>
 
 ### Audio and Wireless Connectivity
 
@@ -127,11 +141,15 @@ Maximum resolution and panel interfaces: see the [Per-Device Interface Matrix](.
 - RTC, watchdog, GPIO wake, PBR wake, PWM, I2C, SPI, and general-purpose analog interfaces
 - BGA256 package for high-density designs
 
+<div id="_7"></div>
+
 ### Power Supply and Package
 
 - Power-supply range: 1.71 V to 3.63 V
 - BGA256 package, 6.5 × 8.5 × 0.94 mm, 0.4 mm pitch
 - HDI PCB required; 6HDI-2 stack-up is recommended for production designs
+
+<div id="_8"></div>
 
 ## Family Variants
 
@@ -161,6 +179,8 @@ When selecting a variant, check these items first:
 - External storage and Wi-Fi interface requirements
 - PCB manufacturing capability for BGA256, 0.4mm-pitch HDI layout
 
+<div id="_9"></div>
+
 ## Integration Path
 
 Use this sequence to turn an SF32LB58x shortlist into a validated design:
@@ -174,7 +194,7 @@ Use this sequence to turn an SF32LB58x shortlist into a validated design:
 ## Frequently Asked Questions
 
 **What are the key specifications of SF32LB58x?**
-SF32LB58x provides application processing (2× Cortex-M33 @240 MHz), a low-power core (Cortex-M33 @48/96 MHz, a user-programmable core), 3.7 MB of internal SRAM and dual-mode Bluetooth (BT Classic + BLE). Graphics: ePicasso 2.0 + Vivante GCNanoUltraV (vector). Package: BGA256 (8.5 × 6.5 mm). USB 2.0 HS.
+SF32LB58x provides application processing (2× Cortex-M33 @240 MHz), a low-power core (user-programmable Cortex-M33 adjustable up to 96 MHz; a separate 48 MHz figure is a CoreMark power-measurement point, not established here as a second specified operating rate), 3.7 MB of internal SRAM and dual-mode Bluetooth (BT Classic + BLE). Graphics: ePicasso 2.0 + Vivante GCNanoUltraV (vector). Package: BGA256 (8.5 × 6.5 mm). USB 2.0 HS.
 
 **Which display interfaces does SF32LB58x support?**
 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI. ([Per-Device Interface Matrix](../../learn/graphics/display-controller.md#per-device-interface-matrix))
@@ -192,15 +212,23 @@ Up to 32 MB + 32 MB of in-package PSRAM and up to 8 MB of in-package NOR Flash.
 Start with the [SF32LB58x hardware design guide](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md) for schematic, power, clock/RF and PCB layout guidance, then use the schematic and layout checklists before releasing the board.
 <!-- uf-faq:end -->
 
+<div id="_10"></div>
+
 ## Related Products
+
+<div id="_11"></div>
 
 ### Module
 
 [SF32LB58-MOD](../modules/SF32LB58-MOD.md) packages the SF32LB586VDD36 chip, its RF matching network, and in-package HPI-PSRAM plus storage options into a ready-to-integrate module. Use it when the project needs 58-series capability but should reduce RF, BGA, and memory-layout risk early in hardware development.
 
+<div id="_12"></div>
+
 ### Development Kits
 
 [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) is the starting point for power-tree, display, storage, audio, RF, USB, and SDIO design decisions.
+
+<div id="_13"></div>
 
 ### Reference Products
 

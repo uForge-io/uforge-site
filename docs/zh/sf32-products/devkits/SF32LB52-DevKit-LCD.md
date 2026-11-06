@@ -207,7 +207,13 @@ USB 转 UART 端口是主要的固件下载和日志接口。
 | 模组引脚 | 信号 | 开发板功能 |
 | :--- | :--- | :--- |
 | PA44 | VBUS_DET | 充电器插入检测 |
-| PA43..PA37 | DB7..DB2 | MCU/8080 LCD 数据 |
+| PA43 | DB7 | MCU/8080 LCD 数据 |
+| PA42 | DB6 | MCU/8080 LCD 数据 |
+| PA41 | DB5 | MCU/8080 LCD 数据 |
+| PA40 | DB4 | MCU/8080 LCD 数据 |
+| PA39 | DB3 | MCU/8080 LCD 数据 |
+| PA38 | GPIO | 通用输入输出 |
+| PA37 | DB2 | MCU/8080 LCD 数据 |
 | PA08..PA07 | DB1..DB0 / QSPI D3..D2 | LCD 数据 |
 | PA06 | DC / QSPI D1 | LCD 数据 / 命令 |
 | PA05 | RD / QSPI D0 | LCD 数据 |
@@ -219,7 +225,7 @@ USB 转 UART 端口是主要的固件下载和日志接口。
 | PA33 / PA30 | I2C SDA / SCL | 触摸面板 |
 | PA31 / PA09 | 触摸 INT / RST | 触摸面板 |
 | PA24, PA25, PA28, PA29 | SPI1 | TF 卡接口 |
-| PA26 | 卡检测 / LED | 共用功能 |
+| PA26 | SD 卡检测 / 外部 Flash2 片选 / GPIO LED | V1.2.0 共用功能；请确认具体版本 |
 | PA20 / PA27 | UART RX/TX | 用户 UART |
 | PA18 / PA19 | 调试 UART RX/TX | 下载与软件调试 |
 | PA10 | AU_PA_EN | 音频功放使能 |

@@ -22,7 +22,7 @@ tags:
 
 - External boot options include SPI NOR, SPI NAND, and SD NAND; eMMC is available on supported externally regulated variants.
 - Bootstrap pins `PA13` and `PA17` select the boot medium.
-- The application notes and schematic-design guide specify `PA21` for boot-storage power switching, whereas the official checklist specifies `PA11` for external Flash on battery-powered variants. Confirm the applicable control pin with SiFli for the exact design. Separately, PA21 must power-cycle MPI-attached NOR Flash of 32 MB or larger so ROM can recognize it after reset or Hibernate entry; during Hibernate, VDD_SIP must be off to avoid leakage through co-packaged-memory I/O.
+- The application notes and schematic-design guide specify `PA21` for boot-storage power switching, whereas the official checklist specifies `PA11` for external Flash on battery-powered variants. Confirm the applicable control pin with SiFli for the exact design. The 32 MB-or-larger MPI NOR power-cycle rule and the Hibernate `VDD_SIP`-off instruction are documented for regular-powered `52B/D/E/G/J` designs. The battery-powered source describes `VDD18_VOUT` and says external NOR needs no extra switch, but does not address the 32 MB threshold; confirm how that rule applies to `520/3/5/7` before relying on it.
 
 **Design Goal**
 
@@ -131,14 +131,14 @@ The higher-priority OpenSiFli application guides and schematic-design guide spec
 
     - SF32LB520Ux6 has co-packaged Flash — power VDD18_VOUT from VDD33_VOUT1 and disable the internal VDD18_VOUT LDO
     - SF32LB523/5/7Ux6 have co-packaged PSRAM — use the internal LDO; VDD18_VOUT can be externally supplied
-    - For external NOR Flash, power it from VDD33_VOUT1 with no extra power switch needed
+    - For external NOR Flash, the battery-powered source says to use VDD33_VOUT1 and specifies no extra power switch; it does not address the 32 MB-or-larger case, so confirm applicability with SiFli before relying on this for large MPI NOR
     - For external SPI NAND or SD NAND, power it from VDD33_VOUT1 and add a power switch
     - The reference design reserves pull-up resistor footprints at PA13 and PA17 — populate based on the storage type, 7.5 kΩ recommended
 
 === "52B/D/E/G/J (Regular-Powered)"
 
     - The model with co-packaged Flash (SF32LB52BU36) — add a power switch on VDD_SIP
-    - Models with co-packaged PSRAM (SF32LB52DUB6/EUB6/GUC6/JUD6) — if PVDD = 3.3 V and VDD_SIP uses the internal LDO, a VDD_SIP power switch is optional; if PVDD = 1.8 V, a VDD_SIP power switch is required
+    - Models with co-packaged PSRAM (SF32LB52DUB6/EUB6/GUC6/JUD6) — when using the tabulated PVDD range and internal LDO, a VDD_SIP power switch is optional. The B3 source footnote separately says a switch is required when PVDD = 1.8 V, but this is outside the table's 2.97–3.63 V range. Applicability is unresolved; confirm with SiFli and do not treat 1.8 V as a recommended PVDD design condition. See [Schematic Design](SF32LB52x_schematic_design.md) for the corresponding operating-range note.
     - External storage power is independent of VDD_SIP — add a separate power switch
     - See Section 5.6.1.1 for the eMMC VCC/VCCQ power-domain tradeoffs
     - The application note specifies **PA21** for boot-related storage power switches; the source discrepancy for battery-powered external Flash is called out above

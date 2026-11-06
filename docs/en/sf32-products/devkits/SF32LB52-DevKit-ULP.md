@@ -175,6 +175,12 @@ Optional hardware:
 - Li-ion battery with a capacity greater than 450 mAh
 - Second USB cable when UART debug and native USB testing are needed at the same time
 
+<div id="_1"></div>
+<div id="board-einrichtung-und-startmodi"></div>
+<div id="configuracao-da-placa-e-modos-de-inicializacao"></div>
+<div id="configuracion-y-modos-de-arranque-de-la-placa"></div>
+<div id="configuration-de-la-carte-et-modes-de-demarrage"></div>
+
 ### Board Setup and Boot Modes
 
 Connect the host to the board's USB Type-C UART port, then open SifliTrace and select the correct COM port.
@@ -256,7 +262,7 @@ The 30-pin header exposes power, USB, sensor, display-adjacent, storage, vibrati
 
 The board uses an AMOLED display path and exposes a 22-pin QSPI FPC signal set. SiFli's V1.0.0 table marks pins 5-10 as NC; the table below includes all 22 positions and identifies those pins explicitly.
 
-The screen-board annotations distinguish a 22-pin FPC connector to the LCD module from a separate 24-pin board-to-board (B2B) connector to the core board. Confirm both interfaces against the exact assembly revision.
+**Source-interface discrepancy — verify before selecting a connector:** SiFli's guide prose says the dedicated display interface is brought out through a 22-pin FPC and a 40-pin header, while the screen-board figure labels a 22-pin FPC to the LCD module and a 24-pin B2B connector to the core board. The source does not explain how the 40-pin header relates to the 24-pin B2B connector. Do not select or mate connectors from either count alone; verify the schematic/BOM for the exact assembly revision.
 
 <div align="center"><em>22-Pin QSPI Display and Touch FPC Signal Map</em></div>
 

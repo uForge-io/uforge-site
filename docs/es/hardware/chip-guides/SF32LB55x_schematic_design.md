@@ -482,7 +482,7 @@ Para BL_PWM, use una GPIO con función GPTIM1_CHx y configure un estado adecuado
 
 Planifique las conexiones de activación, analógicas, de depuración y de producción teniendo en cuenta la carcasa y el utillaje. Los pines de activación necesitan niveles de reposo definidos y protección ESD; los divisores GPADC deben equilibrar el tiempo de establecimiento y las fugas; y el acceso de depuración/descarga debe seguir disponible durante EVT y producción.
 
-SF32LB55x dispone de cuatro fuentes de activación HCPU (WKUP_A0–WKUP_A3) y seis LCPU (WKUP_B0–WKUP_B5). Cada una activa su CPU; solo las seis LCPU permiten despertar de Hibernate. Ninguna de las diez entradas puede quedar flotante: añada resistencias externas pull-up o pull-down según la función para evitar fugas durante el reposo.
+SF32LB55x dispone de cuatro fuentes de activación HCPU (WKUP_A0–WKUP_A3) y seis LCPU (WKUP_B0–WKUP_B5), diez fuentes de interrupción de activación no enmascarables. Cada una activa su CPU; solo las seis LCPU permiten despertar de Hibernate. Ninguna de las diez entradas puede quedar flotante: añada resistencias externas pull-up o pull-down según la función para evitar fugas durante el reposo.
 
 En el circuito de referencia, KEY1 se conecta a PB48 con un pull-up de 10 kΩ a VDD_1V8, protección ESD y un condensador. La red KEY2 muestra pull-ups de 10 kΩ, protección ESD y conexiones seleccionables mediante puentes a PA08, PA77 y PA78; C0004 aparece marcado como NF (no montado). Son ejemplos de circuito, no una lista de pines capaces de despertar el sistema: PA08 no figura en la tabla 5.7-1. Elija de esa tabla la entrada compatible que vaya a usar y mantenga cada entrada en un nivel de reposo definido.
 

@@ -22,40 +22,22 @@ Le parcours habituel des ressources d'affichage est le suivant :
 
 <div align="center"><em>Schéma : parcours des ressources graphiques jusqu'à l'affichage</em></div>
 
-```text
-Source images, fonts, and animations
-        │
-        ▼
-GraphicsTool converts supported resources to eZip or eZip-A
-        │
-        ▼
-Compressed assets in NOR Flash, PSRAM, NAND, or file storage
-        │
-        ▼
-eZip hardware decoder expands an asset when required
-        │
-        ▼
-LVGL or another UI framework + graphics/display driver
-        │
-        ├── CPU fallback rendering
-        │
-        └── ePicasso pixel acceleration
-        │
-        ▼
-Final rendered bitmap in a draw buffer or framebuffer
-        │
-        ├── Uncompressed display path
-        │
-        └── Optional: extDMA compresses it into TurboPixel
-                    │
-                    ▼
-             TurboPixel framebuffer in PSRAM
-        │
-        ▼
-Display controller transfers pixels to the panel
-        │
-        ▼
-SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
+```mermaid
+flowchart TD
+    A["Images, polices et animations sources"] --> B["GraphicsTool convertit les ressources prises en charge en eZip ou eZip-A"]
+    B --> C["Ressources compressées dans NOR Flash, PSRAM, NAND ou un stockage de fichiers"]
+    C --> D["Le décodeur matériel eZip développe une ressource si nécessaire"]
+    D --> E["LVGL ou un autre framework d'interface + pilote graphique/d'affichage"]
+    E --> F["Rendu de secours par CPU"]
+    E --> G["Accélération des pixels par ePicasso"]
+    F --> H["Bitmap final rendu dans un tampon de dessin ou framebuffer"]
+    G --> H
+    H --> I["Chemin d'affichage non compressé"]
+    H --> J["En option : extDMA compresse le bitmap en TurboPixel"]
+    J --> K["Framebuffer TurboPixel dans la PSRAM"]
+    I --> L["Le contrôleur d'affichage transfère les pixels vers le panneau"]
+    K --> L
+    L --> M["Interfaces du panneau : SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI"]
 ```
 
 Ce pipeline est configurable : un produit n'a pas nécessairement besoin d'eZip, d'ePicasso, de TurboPixel ou d'un framebuffer complet. La disponibilité et le raccordement des fonctions dépendent du composant, du SDK, de l'interface d'affichage, de l'écran et de la configuration du pilote. L'en-tête LCDC actuel d'OpenSiFli définit `LCDC_SUPPORTED_COMPRESSED_LAYER` uniquement si `HAL_EXTDMA_MODULE_ENABLED` est activé et si la condition liée à la famille est remplie ; SF32LB52x et SF32LB57x sont exclus. Un commentaire du code précise également que le chemin LCPU n'est pas activé. Le tableau LCDC publié avec le SDK indique que la décompression des couches compressées n'est pas prise en charge sur SF32LB55x. Il faut donc considérer le support sur 55x comme conditionnel, et non comme une chaîne complète validée en fonctionnement. Vérifiez la version exacte du SDK, le cœur, la configuration de compilation et le matériel cible. Voir [TurboPixel](turbopixel.md#availability-in-the-sf32-family).

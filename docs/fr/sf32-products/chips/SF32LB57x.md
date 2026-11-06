@@ -16,7 +16,7 @@ Le [guide de conception matérielle](https://wiki.sifli.com/hardware/SF32LB57x-H
 
 Considérez ces valeurs comme des repères, et non comme des modes garantis pour tout écran ; vérifiez la référence et le boîtier exacts, l'interface, les timings de l'écran, la fréquence de rafraîchissement, le pinmux et la bande passante du framebuffer/PSRAM.
 
-Le SF32LB57x repose sur une architecture à trois cœurs Arm Cortex-M33 STAR-MC1[^1] : deux cœurs de performance (HCPU et ACPU) cadencés jusqu'à 240 MHz, pour un total de 1968 CoreMark / 740 DMIPS, auxquels s'ajoute le cœur basse consommation LCPU à 24 MHz. Le [guide d'utilisation de l'ACPU](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/acpu.html) de SiFli décrit explicitement le SF32LB57x comme un système à trois cœurs : l'ACPU traite l'audio et les graphismes, tandis que le LCPU prend en charge les tâches sensibles à la consommation, comme le BLE et le traitement des données de capteurs. Vérifiez la configuration du SDK et la répartition des tâches pour la charge de travail du produit. La plateforme intègre 592 Ko de SRAM de rétention, les moteurs graphiques ePicasso 3.0 et de décompression eZip 3.0, des contrôleurs LCD et caméra DCMI, le Bluetooth bimode, l'audio ADC/DAC, des interfaces de mémoire SiP et externe, l'accélération de sécurité et l'affectation flexible des broches FreeIO. Son principal atout est le PTM (Parallel Task Machine), un petit processeur de tâches parallèles qui décharge les CPU principaux du séquencement cadencé des périphériques, des protocoles d'E/S personnalisés, de l'acquisition de données de capteurs, du minutage de type PWM et de la gestion des événements.
+Le SF32LB57x repose sur une architecture à trois cœurs Arm Cortex-M33 STAR-MC1[^1] : deux cœurs de performance (HCPU et ACPU) cadencés jusqu'à 240 MHz, pour un total de 1968 CoreMark / 740 DMIPS, auxquels s'ajoute le cœur basse consommation LCPU à 24 MHz. Le [guide d'utilisation de l'ACPU](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/acpu.html) de SiFli décrit explicitement le SF32LB57x comme un système à trois cœurs : l'ACPU traite l'audio et les graphismes, tandis que le LCPU prend en charge les tâches sensibles à la consommation, comme le BLE et le traitement des données de capteurs. Vérifiez la configuration du SDK et la répartition des tâches pour la charge de travail du produit. La plateforme intègre 592 KB de SRAM de rétention, les moteurs graphiques ePicasso 3.0 et de décompression eZip 3.0, des contrôleurs LCD et caméra DCMI, le Bluetooth bimode, l'audio ADC/DAC, des interfaces de mémoire SiP et externe, l'accélération de sécurité et l'affectation flexible des broches FreeIO. Son principal atout est le PTM (Parallel Task Machine), un petit processeur de tâches parallèles qui décharge les CPU principaux du séquencement cadencé des périphériques, des protocoles d'E/S personnalisés, de l'acquisition de données de capteurs, du minutage de type PWM et de la gestion des événements.
 
 Arrêtez votre choix sur la référence commandable exacte avant de réutiliser un schéma ou de commencer l'implantation du circuit imprimé. Le SF32LB57x est disponible en boîtiers QFN68, QFN80 et BGA112, avec des variantes alimentées par batterie ou par une source externe régulée à 3,3 V, selon la famille de références. Ce choix détermine l'arbre d'alimentation, le nombre de GPIO disponibles, le routage des broches du boîtier, celui de l'affichage et du stockage, l'accès au débogage et la stratégie de mise en service.
 
@@ -80,9 +80,9 @@ Consultez la section [Caractéristiques et spécifications](#features-and-specs)
 
 - Deux cœurs de performance Arm Cortex-M33 STAR-MC1 jusqu'à 240 MHz, avec FPU et MPU (1968 CoreMark / 740 DMIPS au total)
 - Cœur basse consommation Arm Cortex-M33 STAR-MC1 à 24 MHz
-- Cache d'instructions de 32 Ko + cache de données de 16 Ko (HCPU)
-- 592 Ko de SRAM de rétention (512 Ko HPSYS + 80 Ko LPSYS), dont 128 Ko de D-TCM sans cycle d'attente
-- Mémoire intégrée au boîtier selon la variante, jusqu'à 48 Mo de PSRAM et 32 Mo de flash NOR
+- Cache d'instructions de 32 KB + cache de données de 16 KB (HCPU)
+- 592 KB de SRAM de rétention (512 KB HPSYS + 80 KB LPSYS), dont 128 KB de D-TCM sans cycle d'attente
+- Mémoire intégrée au boîtier selon la variante, jusqu'à 48 MB de PSRAM et 32 MB de flash NOR
 
 ### Accélération de l'IA { #ai-acceleration }
 
@@ -176,8 +176,8 @@ La fiche technique de la série sur batterie (DS5701) répertorie aussi un QFN80
 | Épaisseur[^3] | 0,9 mm | 1,1 mm | 1,1 mm | 0,9 mm | 0,9 mm | 0,9 mm |
 | Pas | 0,35 mm | 0,35 mm | 0,35 mm | 0,35 mm | 0,35 mm | 0,35 mm |
 | GPIO | 46 | 46 | 46 | 46 | 46 | 47 |
-| PSRAM intégrée au boîtier | 4 Mo OPI-PSRAM | 4 Mo OPI-PSRAM | 4 Mo OPI-PSRAM | 8 Mo OPI-PSRAM | 16 Mo OPI-PSRAM | Aucune |
-| Flash NOR intégrée au boîtier | 16 Mo QSPI-NOR | 16 Mo + 8 Mo QSPI-NOR (double puce)[^6] | 16 Mo × 2 QSPI-NOR (double puce)[^6] | Aucune | Aucune | 1 Mo QSPI-NOR |
+| PSRAM intégrée au boîtier | 4 MB OPI-PSRAM | 4 MB OPI-PSRAM | 4 MB OPI-PSRAM | 8 MB OPI-PSRAM | 16 MB OPI-PSRAM | Aucune |
+| Flash NOR intégrée au boîtier | 16 MB QSPI-NOR | 16 MB + 8 MB QSPI-NOR (double puce)[^6] | 16 MB × 2 QSPI-NOR (double puce)[^6] | Aucune | Aucune | 1 MB QSPI-NOR |
 | Alimentation[^4] | 3,0–4,7 V | 3,0–4,7 V | 3,0–4,7 V | 3,0–4,7 V | 3,0–4,7 V | **3,3 V** |
 | Tension d'E/S[^5] | 3,3 V | 3,3 V | 3,3 V | 3,3 V | 3,3 V | 3,3 V / 1,8 V |
 | Température | -40 à 85 °C | -40 à 85 °C | -40 à 85 °C | -40 à 85 °C | -40 à 85 °C | -40 à 85 °C |
@@ -195,8 +195,8 @@ La fiche technique de la série sur batterie (DS5701) répertorie aussi un QFN80
 | Épaisseur[^3] | 0,9 mm | 0,9 mm | 0,98 mm | 1,03 mm |
 | Pas | 0,35 mm | 0,35 mm | 0,4 mm | 0,4 mm |
 | GPIO | 58 | 58 | 58 + 6 (MPI3 ou sorties statiques)[^2] | 58[^2] |
-| PSRAM intégrée au boîtier | 8 Mo (2 × 4 Mo, double puce) OPI-PSRAM[^6] | 16 Mo OPI-PSRAM | Aucune | 16 Mo OPI-PSRAM |
-| Flash NOR intégrée au boîtier | Aucune | 16 Mo QSPI-NOR | 16 Mo QSPI-NOR | 32 Mo (2 × 16 Mo, double puce) QSPI-NOR[^6] |
+| PSRAM intégrée au boîtier | 8 MB (2 × 4 MB, double puce) OPI-PSRAM[^6] | 16 MB OPI-PSRAM | Aucune | 16 MB OPI-PSRAM |
+| Flash NOR intégrée au boîtier | Aucune | 16 MB QSPI-NOR | 16 MB QSPI-NOR | 32 MB (2 × 16 MB, double puce) QSPI-NOR[^6] |
 | Alimentation | **3,3 V** | **3,3 V** | **3,3 V** | **3,3 V** |
 | Tension d'E/S[^5] | 3,3 V / 1,8 V | 3,3 V / 1,8 V | 3,3 V / 1,8 V | 3,3 V / 1,8 V |
 | Température | -40 à 85 °C | -40 à 85 °C | -40 à 85 °C | -40 à 85 °C |

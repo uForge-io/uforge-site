@@ -8,7 +8,7 @@ tags:
 
 # Zephyr 업스트림 { #zephyr-upstream }
 
-`sf32lb52_devkit_lcd` 보드는 Zephyr v4.3.0부터 업스트림 Zephyr에서 지원되고 유지 관리되고 있습니다. [v4.3.0 릴리스 노트](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html)와 [SF32LB52 DevKit LCD 보드 문서](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)를 참조하십시오. 이 가이드는 v4.3.0 워크스페이스를 만들고, 첫 샘플을 빌드한 다음, 보드에 플래싱합니다. 더 폭넓은 SF32 공식 기능 세트가 필요하면 [SiFli-SDK](../sifli/getting-started-sifli-sdk.md)를 사용하십시오.
+`sf32lb52_devkit_lcd` 보드는 Zephyr v4.3.0부터 업스트림에서 지원됩니다. 이 가이드는 계속 유지 관리되는 Zephyr v4.5.0으로 새 워크스페이스를 만들고 첫 샘플을 빌드한 다음 보드에 플래싱합니다. [v4.3.0 릴리스 노트](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html), [v4.5.0 릴리스 노트](https://docs.zephyrproject.org/4.5.0/releases/release-notes-4.5.html), 최신 [SF32LB52 DevKit LCD 보드 문서](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)를 참조하십시오. 더 폭넓은 SF32 공식 기능 세트가 필요하면 [SiFli-SDK](../sifli/getting-started-sifli-sdk.md)를 사용하십시오.
 
 !!! note "보드 기능 목록 확인"
     업스트림 보드 정의만으로는 모든 주변 장치나 동작 모드가 활성화되었거나 제품용으로 검증되었다고 확인할 수 없습니다. 보드 문서의 지원 기능 표를 확인하고, 사용하는 보드 리비전에서 필요한 동작을 검증하십시오.
@@ -22,23 +22,49 @@ tags:
 
 **소프트웨어**
 
-- Zephyr v4.3.0과 해당 [시작하기 안내](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html)에서 지원하는 호스트 OS.
+- Zephyr v4.5.0과 해당 [시작하기 안내](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html)에서 지원하는 호스트 OS.
 - Zephyr 호스트 의존성과 Zephyr SDK. 해당 가이드의 설명대로 ARM Cortex-M 타깃용으로 설치해야 합니다.
 - Git, Python 3, `pip`.
 
 ## 개발 환경 준비 { #prepare-the-tooling }
 
-먼저 Zephyr의 [v4.3.0 시작하기 가이드](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html)에 따라 호스트 의존성과 Zephyr SDK 설정을 완료하십시오. 그런 다음 Python 환경을 만들고 같은 Zephyr 태그로 워크스페이스를 초기화하십시오.
+먼저 Zephyr의 [v4.5.0 시작하기 가이드](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html)에 따라 호스트 의존성과 Zephyr SDK 설정을 완료하십시오. 그런 다음 사용할 셸에 맞는 명령으로 Python 환경을 만들고 해당 Zephyr 태그로 워크스페이스를 초기화하십시오.
 
 ```bash
 python3 -m venv ~/zephyr-venv
-source ~/zephyr-venv/bin/activate
-pip install west
-west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.3.0 ~/zephyrproject
+. ~/zephyr-venv/bin/activate
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 ~/zephyrproject
 cd ~/zephyrproject
 west update
 west zephyr-export
-pip install -r zephyr/scripts/requirements.txt
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+Windows PowerShell:
+
+```powershell
+py -3 -m venv "$HOME\zephyr-venv"
+& "$HOME\zephyr-venv\Scripts\Activate.ps1"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "$HOME\zephyrproject"
+Set-Location "$HOME\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+Windows 명령 프롬프트:
+
+```bat
+py -3 -m venv "%USERPROFILE%\zephyr-venv"
+call "%USERPROFILE%\zephyr-venv\Scripts\activate.bat"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "%USERPROFILE%\zephyrproject"
+cd /d "%USERPROFILE%\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
 ```
 
 아래의 빌드 및 플래시 단계에서도 이 환경을 활성 상태로 유지하십시오.
@@ -75,7 +101,7 @@ west build -b sf32lb52_devkit_lcd samples/hello_world --pristine
 west flash
 ```
 
-플래시 기록에 실패하면 시리얼 포트 선택, 다운로드 모드, 그리고 [보드 문서](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)의 러너 안내를 확인하십시오.
+플래시에 실패하면 시리얼 포트 선택, 다운로드 모드, 그리고 [보드 문서](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)의 러너 안내를 확인하십시오.
 
 ## 시리얼 콘솔 열기 { #open-the-serial-console }
 
@@ -87,7 +113,7 @@ Hello World! sf32lb52_devkit_lcd
 
 ## 다음 샘플 선택 { #choose-a-next-sample }
 
-업스트림 보드 문서의 지원 기능 표와 [Zephyr 샘플 브라우저](https://docs.zephyrproject.org/4.3.0/samples/index.html)를 함께 사용하여 다음에 평가할 API 또는 주변 장치를 선택하십시오. 샘플을 제품 준비 상태의 증거로 간주하기 전에, 해당 기능이 이 보드에 나열되어 있는지와 필요한 구성이 활성화되어 있는지 확인하십시오.
+업스트림 보드 문서의 지원 기능 표와 [Zephyr 샘플 브라우저](https://docs.zephyrproject.org/4.5.0/samples/index.html)를 함께 사용하여 다음에 평가할 API 또는 주변 장치를 선택하십시오. 샘플을 제품 준비 상태의 증거로 간주하기 전에, 해당 기능이 이 보드에 나열되어 있는지와 필요한 구성이 활성화되어 있는지 확인하십시오.
 
 ## 문제 해결 { #troubleshooting }
 
@@ -97,8 +123,8 @@ Hello World! sf32lb52_devkit_lcd
 
 | 증상 | 확인 사항 |
 |:--------|:------|
-| `west boards`에 SF32 타깃이 표시되지 않음 | 워크스페이스가 업스트림 Zephyr v4.3.0 이상에서 초기화되었는지, `west update`가 완료되었는지 확인하십시오. |
-| 컴파일 전에 빌드가 실패함 | Python 환경이 활성 상태인지, ARM Cortex-M용 Zephyr SDK가 설치되어 있는지, v4.3.0 요구 사항이 설치되었는지 확인하십시오. |
+| `west boards`에 SF32 타깃이 표시되지 않음 | 워크스페이스가 업스트림 Zephyr v4.5.0 이상에서 초기화되었는지, `west update`가 완료되었는지 확인하십시오. |
+| 컴파일 전에 빌드가 실패함 | Python 환경이 활성 상태인지, ARM Cortex-M용 Zephyr SDK가 설치되어 있는지, v4.5.0 요구 사항이 설치되었는지 확인하십시오. |
 | 보드는 빌드되지만 플래시에 기록되지 않음 | `sftool`이 설치되어 `PATH`에서 실행 가능한지, 선택한 시리얼 포트가 올바른지, 보드가 시리얼 다운로드 모드인지 확인하십시오. |
 | 시리얼 출력이 없음 | `usart1`, `1000000` 보레이트, USB-to-UART 연결, 다른 터미널이 해당 포트를 열고 있는지를 확인하십시오. |
 | 주변 장치 샘플이 실패함 | 보드의 지원 기능 표와 샘플 구성을 확인하십시오. 기본 보드 타깃에서 모든 주변 장치가 활성화된다고 가정하지 마십시오. |

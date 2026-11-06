@@ -65,7 +65,7 @@ Dieses Glossar erläutert Abkürzungen und Begriffe aus der μForge.io-Dokumenta
 * **eMMC** — **Embedded MultiMediaCard.** Verwaltete NAND-Flash-Speicherschnittstelle für SF32-Designs mit höherem Speicherbedarf.
 
 ## Peripheriegeräte und Schnittstellen { #peripherals-and-interfaces }
-* **GPIO** — **General-Purpose Input/Output.** Konfigurierbare digitale Pins für einfache Signale, Tasten, LEDs und softwarebasierte Schnittstellen.
+* **GPIO** — **General-Purpose Input/Output.** Konfigurierbare digitale Pins für einfache Signale, Tasten, LEDs und per Bit-Banging implementierte Schnittstellen.
 * **I/O** — **Input/Output.** Allgemeine Bezeichnung für Pins und Peripheriesignale, über die ein Gerät Daten oder Steuersignale mit dem übrigen System austauscht.
 * **UART** — **Universal Asynchronous Receiver/Transmitter.** Serielle Standardschnittstelle für Konsolen- und Debug-Ausgaben sowie einfache Punkt-zu-Punkt-Verbindungen.
 * **SPI** — **Serial Peripheral Interface.** Synchroner serieller Bus für Displays, Flash-Speicher, Sensoren und andere schnelle Peripheriegeräte.

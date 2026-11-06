@@ -195,7 +195,7 @@ rt_pwm_enable(pwm, channel);
 ```
 
 1. Elija un canal con capacidad PWM y confirme el multiplexado de pines.
-2. Elija un periodo que se ajuste al periférico: lo bastante alto para evitar parpadeo visible del LED, o en el rango audible para un zumbador.
+2. Elija una frecuencia PWM adecuada para el periférico: lo bastante alta para evitar el parpadeo visible del LED o dentro del rango audible para un zumbador.
 3. Recorra el ciclo de trabajo para atenuar un LED de forma gradual.
 4. Pruebe algunos tonos fijos en un zumbador cambiando el periodo.
 5. Deshabilite la PWM y confirme que la salida vuelve a un estado de reposo seguro.

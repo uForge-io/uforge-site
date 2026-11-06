@@ -195,7 +195,7 @@ rt_pwm_enable(pwm, channel);
 ```
 
 1. Choisissez un canal compatible PWM et confirmez le multiplexage de broches.
-2. Choisissez une période adaptée au périphérique : elle donne une fréquence assez élevée pour éviter le scintillement visible de la LED, ou une fréquence audible pour un buzzer.
+2. Choisissez une fréquence PWM adaptée au périphérique : elle doit être assez élevée pour éviter le scintillement visible de la LED, ou se situer dans la plage audible pour un buzzer.
 3. Faites varier le rapport cyclique pour augmenter ou réduire progressivement la luminosité d'une LED.
 4. Essayez quelques tonalités fixes sur un buzzer en changeant la période.
 5. Désactivez le PWM et confirmez que la sortie revient à un état de repos sûr.

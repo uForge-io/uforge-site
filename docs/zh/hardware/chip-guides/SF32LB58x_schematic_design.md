@@ -87,6 +87,9 @@ SF30147C 面向超低功耗可穿戴产品，是一款高集成度、高效率�
 
 详细信息请参见 SF30147C 芯片数据手册。
 
+!!! warning "源资料中的电源轨命名冲突"
+    SiFli 原始资料的 [LDO1 汇总行](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md#L38)写作 AVDDIOA2，但其[芯片管脚表](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md#L79)将 PA0–PA11 对应的电源写作 VDDIOA2；[官方 DevKit 管脚图](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb58x/SF32LB58-DevKit-LCD.md#L195)也使用 VDDIOA2。这些资料未能确定 LDO1 网络应采用哪个名称。原理图发布前，请向 SiFli 确认。
+
 ##### 5.2.1.2. SF32LB58x 供电要求 {#5112-sf32lb58x-power-requirements}
 
 SF32LB58x 系列的 PMU 电源规格如下表所示。
@@ -715,6 +718,9 @@ SF32LB58x 提供 1 路 SWD 接口和 6 路可选 UART 接口，用于输出调�
 | SWDIO | PB11 | J-Link 数据信号 |
 
 </div>
+
+!!! warning "原始资料存在冲突"
+    OpenSiFli 的[硬件应用表](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md)将 `TXD1`/`PA31` 标为 UART1 的 RXD 信号，将 `RXD1`/`PA32` 标为 UART1 的 TXD 信号；而 [SF32LB58-DevKit-LCD 引脚图](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb58x/SF32LB58-DevKit-LCD.md)将 `PA31` 标为 `UART1_TXD`，将 `PA32` 标为 `UART1_RXD`。两份原始资料对信号方向的标注相互矛盾，无法据此确定哪种映射正确。布线前应向思澈科技（SiFli）确认 UART1 的 `pinmux` 和信号方向；不要仅凭任一组标签推断板级 TX/RX 接线。
 
 !!! note "注意"
     UARTx RXD 信号不得悬空；软件初始化时应启用内部上拉。

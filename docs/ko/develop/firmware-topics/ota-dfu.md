@@ -73,7 +73,7 @@ scons --board=<board-name> -j8
 
 ## DFU v2 SDK 예제 { #dfu-v2-sdk-examples }
 
-<div align="center"><em>표: SF32LB58x용 공식 SiFli-SDK DFU v2 예제</em></div>
+<div align="center"><em>표: SiFli-SDK의 DFU v2 예제 경로</em></div>
 
 <div align="center" markdown>
 

@@ -207,7 +207,13 @@ Die ursprüngliche Board-Notiz von SiFli nennt `TFT-H043A28WQISTKN22_V0-3` als u
 | Modul-Pin | Signal | Funktion auf dem Board |
 | :--- | :--- | :--- |
 | PA44 | VBUS_DET | Erkennung angeschlossener Ladequelle |
-| PA43..PA37 | DB7..DB2 | MCU/8080-LCD-Daten |
+| PA43 | DB7 | MCU/8080-LCD-Daten |
+| PA42 | DB6 | MCU/8080-LCD-Daten |
+| PA41 | DB5 | MCU/8080-LCD-Daten |
+| PA40 | DB4 | MCU/8080-LCD-Daten |
+| PA39 | DB3 | MCU/8080-LCD-Daten |
+| PA38 | GPIO | Allgemeine Ein-/Ausgabe |
+| PA37 | DB2 | MCU/8080-LCD-Daten |
 | PA08..PA07 | DB1..DB0 / QSPI D3..D2 | LCD-Daten |
 | PA06 | DC / QSPI D1 | LCD-Daten/-Befehl |
 | PA05 | RD / QSPI D0 | LCD-Daten |
@@ -219,7 +225,7 @@ Die ursprüngliche Board-Notiz von SiFli nennt `TFT-H043A28WQISTKN22_V0-3` als u
 | PA33 / PA30 | I2C SDA / SCL | Touchpanel |
 | PA31 / PA09 | Touch INT / RST | Touchpanel |
 | PA24, PA25, PA28, PA29 | SPI1 | TF-Karten-Schnittstelle |
-| PA26 | Kartenerkennung / LED | Gemeinsame Funktion |
+| PA26 | SD-Kartenerkennung / Chip-Select von externem Flash2 / GPIO-LED | Gemeinsame Funktionen bei V1.2.0; genaue Revision prüfen |
 | PA20 / PA27 | UART RX/TX | Benutzer-UART |
 | PA18 / PA19 | Debug-UART RX/TX | Download und Software-Debug |
 | PA10 | AU_PA_EN | Freigabe des Audioverstärkers |

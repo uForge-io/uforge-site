@@ -33,7 +33,7 @@ Antes de transformar esta página em um tutorial propriamente dito, a SiFli deve
 
 ## Primeiro teste rápido sugerido { #suggested-first-smoke-test }
 
-Quando houver firmware, o primeiro teste deve usar somente a interface serial:
+Quando houver firmware, recomenda-se que o primeiro teste use somente a interface serial:
 
 ```python
 import time

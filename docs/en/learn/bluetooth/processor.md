@@ -133,7 +133,7 @@ A well-designed SF32 Bluetooth audio system typically separates responsibilities
 - Audio interfaces such as I2S, PDM, ADC, or DAC move sample data to and from the rest of the system.
 - DMA and buffering reduce CPU overhead during continuous audio streaming.
 
-For LE Audio or other modern Bluetooth audio use cases, firmware architecture, stack support, codec selection, memory bandwidth, and power-management policy are all part of the final result. SiFli's SF32LB56x and SF32LB58x datasheets explicitly list BLE Audio support; BLE or dual-mode support alone does not imply LE Audio support. Availability of particular profiles, codecs, and SDK paths still depends on the exact part and SDK release, so verify these before committing to an LE Audio design. The Bluetooth processor provides the timing foundation, but the full product behavior depends on the SDK and application design.
+For LE Audio or other modern Bluetooth audio use cases, firmware architecture, stack support, codec selection, memory bandwidth, and power-management policy are all part of the final result. The SiFli SF32LB52x datasheet (DS5201 V2.5) lists BLE Audio at the family level; the SF32LB56x and SF32LB58x datasheets also explicitly list BLE Audio support. BLE or dual-mode support alone does not imply LE Audio support. Availability of particular profiles, codecs, and SDK paths still depends on the exact part and SDK release, so verify these before committing to an LE Audio design. The Bluetooth processor provides the timing foundation, but the full product behavior depends on the SDK and application design.
 
 ## Low-Power Operation { #low-power-operation }
 

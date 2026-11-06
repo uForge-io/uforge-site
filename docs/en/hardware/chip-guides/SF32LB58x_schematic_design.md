@@ -87,6 +87,9 @@ The SF30147C is a highly integrated, high-efficiency power management chip for u
 
 Refer to the SF30147C chip datasheet for full details.
 
+!!! warning "Source Rail-Name Discrepancy"
+    The source's [LDO1 summary row](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md#L38) lists AVDDIOA2, but its [chip-pin table](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md#L79) assigns VDDIOA2 to PA0–PA11; the [official DevKit pin map](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/en/board/sf32lb58x/SF32LB58-DevKit-LCD.md#L195) also uses VDDIOA2. These sources do not resolve which name is intended for the LDO1 net. Confirm it with SiFli before releasing the schematic.
+
 ##### 5.2.1.2. SF32LB58x Power Requirements {#5112-sf32lb58x-power-requirements}
 
 The SF32LB58x series integrates the following PMU power specifications.
@@ -715,6 +718,9 @@ The SF32LB58x offers 1 SWD interface plus 6 selectable UART interfaces for debug
 | SWDIO | PB11 | J-Link data signal |
 
 </div>
+
+!!! warning "Source conflict"
+    The OpenSiFli [hardware-application table](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/hardware/SF32LB58x-HW-Application.md) pairs `TXD1`/`PA31` with UART1 RXD and `RXD1`/`PA32` with UART1 TXD, while the [SF32LB58-DevKit-LCD pin map](https://github.com/OpenSiFli/SiFli-Wiki/blob/main/source/zh_CN/board/sf32lb58x/SF32LB58-DevKit-LCD.md) identifies `PA31` as `UART1_TXD` and `PA32` as `UART1_RXD`. The source documents conflict on signal direction; they do not establish which mapping is correct. Confirm the UART1 pinmux and signal direction with SiFli before wiring; do not infer board-level TX/RX connections from these labels alone.
 
 !!! note "Note"
     UARTx RXD signals must not float; enable an internal pull-up during software initialization.

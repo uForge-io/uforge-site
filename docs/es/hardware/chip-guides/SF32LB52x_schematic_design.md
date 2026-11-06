@@ -8,10 +8,14 @@ tags:
     - Chip
 ---
 
+<div id="sf32lb52x"></div>
+
 # Guía de diseño de hardware de SF32LB52x — Directrices de diseño de esquemáticos { #sf32lb52x-hardware-design-guide-schematic-design-guidelines }
 
 !!! note "Parte de la guía de diseño de hardware de SF32LB52x"
     Las directrices de diseño de esquemáticos se dividen ahora en tres páginas: esta página (secciones 5.1-5.3: sistema mínimo, alimentación y reloj), [RF e interfaces de usuario](SF32LB52x_schematic_rf_interfaces.md) (secciones 5.4-5.5) y [almacenamiento y fabricación](SF32LB52x_schematic_storage_mfg.md) (secciones 5.6-5.7). Consulte primero la [descripción general de la guía de diseño de hardware de SF32LB52x](SF32LB52x_hardware_design_guide.md) para elegir el dispositivo y conocer el flujo de diseño completo, o use la [lista de comprobación del esquemático](SF32LB52x_schematic_checklist.md) para revisar cada punto.
+
+<div id="5"></div>
 
 ## 5. Directrices de diseño de esquemáticos { #5-schematic-design-guidelines }
 
@@ -32,6 +36,8 @@ Este capítulo sigue el flujo de diseño del esquemático a lo largo de tres pá
 | Fabricación | DBG_UART/SWD, puntos de prueba, grabación de producción, acceso para calibración y listas de liberación | Plano de puntos de prueba, plan del útil de producción y evidencias de liberación completas |
 
 </div>
+
+<div id="51"></div>
 
 ### 5.1. Diseño del sistema mínimo { #51-minimum-system-design }
 
@@ -54,6 +60,8 @@ Al superar este criterio de liberación, el esquemático debe permitir encender 
 
 El diseño del sistema de alimentación define las líneas, los interruptores de carga, la ruta del cargador, OVP, el uso de los LDO internos, el comportamiento de activación y los estados de bajo consumo que garantizan la fiabilidad del sistema mínimo. Complete esta sección antes de ubicar los componentes en la PCB, ya que las decisiones posteriores sobre pantalla, almacenamiento, RF, audio y sensores dependen de estas condiciones de alimentación.
 
+<div id="521"></div>
+
 #### 5.2.1. Fuente de alimentación { #521-power-supply }
 
 **Resumen**
@@ -65,6 +73,8 @@ El diseño del sistema de alimentación define las líneas, los interruptores de
 **Objetivo de diseño**
 
 Diseñe un árbol de alimentación estable y con baja corriente de fuga que admita la variante seleccionada, evite sobrecargar las salidas de los LDO internos, mantenga limpias las líneas de alimentación de RF y audio y permita desconectar las cargas no utilizadas y el almacenamiento de arranque en los modos de bajo consumo.
+
+<div id="5211"></div>
 
 ##### 5.2.1.1. Requisitos de alimentación del procesador { #5211-processor-power-supply-requirements }
 
@@ -126,8 +136,13 @@ Diseñe un árbol de alimentación estable y con baja corriente de fuga que admi
 
     (1) VDD_SIP: SF32LB52BU36 requiere una fuente externa de 1,8 V o 3,3 V; SF32LB52BU56 requiere una fuente externa de 3,3 V; SF32LB52DUB6 requiere una fuente externa de 1,8 V; SF32LB52E/G/JUx6 se alimentan directamente desde el LDO interno y no necesitan una fuente externa.
 
+    !!! note "Debe confirmarse el alcance de PVDD"
+        La tabla especifica PVDD = 2,97–3,63 V (3,3 V típica), intervalo al que se aplica la descripción del LDO interno para E/G/J. La fuente B3 describe por separado el caso PVDD = 1,8 V, en el que el LDO interno no está disponible y se requiere una fuente externa de 1,8 V. Ese caso queda fuera del intervalo tabulado y la fuente no aclara el alcance. Confirme su aplicabilidad con SiFli; esto no recomienda usar PVDD = 1,8 V. Consulte la nota sobre la conmutación de VDD_SIP en [Almacenamiento y fabricación](SF32LB52x_schematic_storage_mfg.md).
+
     !!! important "Nota sobre el modo Hibernate"
         Cuando el sistema entre en modo Hibernate, debe apagarse VDD_SIP; de lo contrario, existe riesgo de corriente de fuga a través de las E/S de la memoria integrada en el mismo encapsulado. Use el pin dedicado PA21 para controlar el interruptor de alimentación de VDD_SIP.
+
+<div id="5212-buck"></div>
 
 ##### 5.2.1.2. Selección del inductor BUCK { #5212-buck-inductor-selection }
 
@@ -135,6 +150,8 @@ Ambos grupos de diseño utilizan la misma especificación de inductor.
 
 !!! important "Parámetros principales del inductor de alimentación"
     L (inductancia) = 4,7 µH ± 20 %, DCR (resistencia de CC) ≤ 0,4 Ω, Isat (corriente de saturación) ≥ 450 mA.
+
+<div id="5213"></div>
 
 ##### 5.2.1.3. Control de batería y carga { #5213-battery-and-charging-control }
 
@@ -208,6 +225,8 @@ Ambos grupos de diseño utilizan la misma especificación de inductor.
     !!! info "No aplicable"
         La variante con alimentación externa regulada recibe energía directamente de una fuente estabilizada y **no incorpora un circuito de gestión de carga**. Esta sección no es aplicable. Si el producto necesita batería y carga, utilice la serie SF32LB520/3/5/7.
 
+<div id="5214-standby"></div>
+
 ##### 5.2.1.4. Reducción del consumo en espera { #5214-reducing-standby-power }
 
 === "SF32LB520/3/5/7 (alimentación por batería)"
@@ -225,6 +244,8 @@ Ambos grupos de diseño utilizan la misma especificación de inductor.
     Utilice interruptores de carga para gestionar dinámicamente la alimentación de cada bloque funcional; para los módulos o las líneas siempre activos, elija componentes con baja corriente en reposo.
 
     Defina con cuidado el estado de hardware predeterminado de las GPIO que controlan los interruptores de alimentación y añada resistencias pull-up/pull-down del orden de megaohmios para que los interruptores de carga permanezcan apagados por defecto. Para los LDO e interruptores de carga, elija componentes con baja corriente en reposo (Iq) y baja corriente de apagado (Istb); preste especial atención a Iq en los dispositivos de alimentación siempre activos.
+
+<div id="5215"></div>
 
 ##### 5.2.1.5. Lista de comprobación del diseño de alimentación { #5215-power-design-checklist }
 
@@ -247,6 +268,8 @@ Ambos grupos de diseño utilizan la misma especificación de inductor.
 - Mida `VCC`/`PVDD`, la salida BUCK, las líneas de alimentación de RF/audio y la alimentación del almacenamiento antes de que el firmware habilite los periféricos.
 - En diseños con batería, compruebe la conexión del cargador, la precarga, la carga a corriente constante y el comportamiento de recarga.
 - Mida la corriente en espera y en Hibernate con los interruptores de carga de la pantalla, los sensores, el almacenamiento y el motor apagados.
+
+<div id="522"></div>
 
 #### 5.2.2. Modos de funcionamiento y fuentes de activación { #522-operating-modes-and-wake-sources }
 
@@ -304,7 +327,11 @@ Toda la familia admite 15 fuentes de interrupción capaces de activar el sistema
 - [ ] Durante Hibernate no hay corriente de fuga hacia el almacenamiento externo ni los sensores a través de los pines de E/S.
 - [ ] Los equipos de firmware y hardware han acordado qué estado se usará durante el envío, el almacenaje y la espera normal.
 
+<div id="53"></div>
+
 ### 5.3. Generación de reloj { #53-clock-generation }
+
+<div id="531"></div>
 
 #### 5.3.1. Selección de cristales { #531-crystal-selection }
 

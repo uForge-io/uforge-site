@@ -8,6 +8,8 @@ tags:
 
 # SF32LB58x { #sf32lb58x }
 
+<div id="_1"></div>
+
 ## 概览 { #overview }
 
 SF32LB58x 系列属于 SF32LB5x 家族中的旗舰级产品，面向需要高级图形、大容量内存、双模蓝牙（Bluetooth）、丰富音频和显示接口以及大量 GPIO 的电池供电 AIoT 产品，同时无需转向规模更大的应用处理器平台。
@@ -17,6 +19,8 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 思澈科技（SiFli）资料显示，SF32LB58x 片上集成 3,744 KB SRAM；不同 SKU 提供合封 NOR Flash、OPI-PSRAM 和 HPI-PSRAM 的不同组合。该系列还支持 MIPI DSI 等显示接口、矢量图形加速和 USB 2.0 High-Speed，并采用高 I/O 数量的 BGA 封装。若设计需要高分辨率 UI、大量图形资源、通过 SDIO 连接外部 Wi-Fi，或需要足够的计算与内存资源来运行边缘 AI、传感器融合任务，可以评估 SF32LB58x。
 
 [^1]: STAR-MC1 是安谋科技（Arm China）的可配置 Armv8-M Mainline 嵌入式 CPU IP。思澈科技（SiFli）在兼容的 SF32 器件中，将其标注为 Arm Cortex-M33 STAR-MC1 应用处理器。其 Cortex-M33 级软件模型有助于沿用既有 Cortex-M33 固件、中间件、RTOS 移植和工具链，但仍需完成器件专用的常规集成工作。CU、SP 和 SE 配置主要在缓存、TCM、XIPU 和 TrustZone 能力上有所不同；Arm 自定义指令/CDE 和协处理器接口属于可选能力，具体功能以目标 SF32 料号为准。思澈科技（SiFli）文档会依上下文使用 ***Arm Cortex-M33 STAR-MC1*** 或 ***Arm Cortex-M33***。
+
+<div id="_2"></div>
 
 ## 应用场景 { #applications }
 
@@ -38,6 +42,8 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 - 需要通过 SDIO 连接外部 Wi-Fi
 - 需要更大的帧缓冲、音频、图形或 AI 模型内存
 - 需要较高 GPIO 数量或多路高速外部接口
+
+<div id="_3"></div>
 
 ## 开发资源 { #development-resources }
 
@@ -65,7 +71,11 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 
 ---
 
+<div id="_4"></div>
+
 ## 特性与规格 { #features-and-specs }
+
+<div id="_5"></div>
 
 ### 计算与存储 { #compute-and-memory }
 
@@ -74,6 +84,8 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 - 合封 NOR Flash 选项的封装内总容量为 1 MB 至 8 MB，具体取决于 SKU
 - 可选合封 OPI-PSRAM 或 HPI-PSRAM；HPI-PSRAM 最高为 2 × 32 MB，具体取决于 SKU
 - 外部 NOR 或 SPI NAND Flash 可通过 MPI3/MPI4 连接；SD NAND、eMMC、SD 卡或外部 Wi-Fi 可通过 SDIO 连接。具体可用组合取决于接口选择和引脚分配。
+
+<div id="ai"></div>
 
 ### 图形、显示与 AI { #graphics-display-and-ai }
 
@@ -89,6 +101,8 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 - 支持 SPI、DSPI、QSPI（包括 SPI 电子纸）、MCU8080、JDI、RGB/DPI（RGB888 或 RGB565）与 MIPI DSI 显示接口
 - 支持 MIPI DSI 与 SPI、DSPI 或 QSPI 组合的双屏异显
 - 适用于本地边缘 AI、机器学习和传感器融合类任务
+
+<div id="_6"></div>
 
 ### 音频与无线连接 { #audio-and-wireless-connectivity }
 
@@ -127,11 +141,15 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 - RTC、看门狗、GPIO 唤醒、PBR 唤醒、PWM、I2C、SPI 与通用模拟接口
 - BGA256 封装，适合高密度设计
 
+<div id="_7"></div>
+
 ### 电源与封装 { #power-supply-and-package }
 
 - 供电范围：1.71 V 至 3.63 V
 - BGA256 封装，尺寸 6.5 × 8.5 × 0.94 mm，引脚间距 0.4 mm
 - 需要 HDI PCB；量产设计建议采用 6HDI-2 叠层
+
+<div id="_8"></div>
 
 ## 系列型号 { #family-variants }
 
@@ -161,6 +179,8 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 - 外部存储与外部 Wi-Fi 接口需求
 - BGA256、0.4 mm 间距 HDI 布局对应的 PCB 制造能力
 
+<div id="_9"></div>
+
 ## 集成路径 { #integration-path }
 
 使用以下顺序将 SF32LB58x 的初步选型推进为已验证的设计：
@@ -174,7 +194,7 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 ## 常见问题 { #frequently-asked-questions }
 
 **SF32LB58x 的主要规格是什么？**
-SF32LB58x 配备应用 CPU（2× Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33 @48/96 MHz，用户可编程内核）和 3.7 MB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 2.0 + Vivante GCNanoUltraV（矢量）。封装：BGA256（8.5 × 6.5 mm）。USB 2.0 HS。
+SF32LB58x 配备应用 CPU（2× Cortex-M33 @240 MHz）和低功耗内核（用户可编程 Cortex-M33，最高可调至 96 MHz；另有 48 MHz 这一 CoreMark 功耗测量点，但现有资料未证明它是第二个规定工作频率），并集成 3.7 MB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 2.0 + Vivante GCNanoUltraV（矢量）。封装：BGA256（8.5 × 6.5 mm）。USB 2.0 HS。
 
 **SF32LB58x 支持哪些显示接口？**
 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI。各接口适用型号见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
@@ -192,15 +212,23 @@ SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI。各接口适用型号见[按
 请先阅读 [SF32LB58x 硬件设计指南](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求；投板前再使用原理图与布局检查清单。
 <!-- uf-faq:end -->
 
+<div id="_10"></div>
+
 ## 相关产品 { #related-products }
+
+<div id="_11"></div>
 
 ### 模组 { #module }
 
 [SF32LB58-MOD](../modules/SF32LB58-MOD.md) 将 SF32LB586VDD36 芯片、射频匹配网络，以及封装内 HPI-PSRAM 与存储选项整合为可直接导入设计的模组。若项目需要 58 系列的能力，又希望在硬件开发早期降低 RF、BGA 与存储布局风险，可使用该模组。
 
+<div id="_12"></div>
+
 ### 开发板 { #development-kits }
 
 [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) 是电源树、显示、存储、音频、RF、USB 和 SDIO 设计决策的起点。
+
+<div id="_13"></div>
 
 ### 参考产品 { #reference-products }
 

@@ -61,7 +61,7 @@ SF32LB52x 제품군은 듀얼 코어 STAR-MC1 프로세서, Bluetooth 연결, �
 - 듀얼 모드 Bluetooth 5.3 라디오
 - ePicasso 2.0 2D/2.5D 그래픽 가속기
 - SiFli 원본 하드웨어 애플리케이션 노트에는 통합 AI 신경망 가속기가 기술되어 있습니다. [SiFli-SDK NNACC 가이드](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/nnacc.html)에는 SF32LB55x, SF32LB56x, SF32LB58x가 나열되어 있지만 SF32LB52x는 포함되어 있지 않습니다. 가속기에 의존하기 전에 정확한 모델의 소프트웨어 지원을 확인하십시오.
-- SPI, QSPI, 8080, JDI, 8비트 EPD 인터페이스를 지원하는 디스플레이 컨트롤러
+- SPI, QSPI, 8080, JDI 디스플레이 인터페이스 지원; 8비트 병렬 EPD는 `52B/D/E/G/J`에서 문서로 확인되며 정확한 모델의 지원 여부는 확인이 필요합니다
 - USB 2.0 Full-Speed 디바이스
 - 지원되는 변형(variant)의 SDIO/eMMC 스토리지 인터페이스
 - 통합 오디오 코덱과 아날로그 및 디지털 오디오 인터페이스
@@ -144,9 +144,9 @@ SF32LB52x 제품군은 전원 아키텍처에 따라 실질적으로 두 가지 
 
 <div align="center"><em>그림 3.3-1: SF32LB520/3/5/7의 QFN68L 핀 배치</em></div>
 
-![그림 3.3-2: SF32LB52B/E/G/J의 QFN68L 핀 배치](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ width="100%" loading="lazy" }
+![그림 3.3-2: SF32LB52B/D/E/G/J의 QFN68L 핀 배치](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>그림 3.3-2: SF32LB52B/E/G/J의 QFN68L 핀 배치</em></div>
+<div align="center"><em>그림 3.3-2: SF32LB52B/D/E/G/J의 QFN68L 핀 배치</em></div>
 
 ### 3.4. 애플리케이션 { #34-applications }
 
@@ -183,7 +183,7 @@ SF32LB52x 제품군은 전원 아키텍처에 따라 실질적으로 두 가지 
 | Buck 인덕터 | 4.7 uH +/-20%, DCR <= 0.4 Ω, Isat >= 450 mA |
 | 크리스털 | 48 MHz 메인 크리스털과 32.768 kHz RTC 크리스털 |
 | RF | 예약된 π 매칭 회로를 갖춘 50 Ω 임피던스 제어 트레이스 |
-| 디스플레이 | 3선 SPI, 4선 SPI, Dual-SPI, Quad-SPI(최대 512 x 512), JDI, 8비트 EPD |
+| 디스플레이 | 3선 SPI, 4선 SPI, Dual-SPI, Quad-SPI(최대 512 x 512), JDI, 8비트 병렬 EPD (`52B/D/E/G/J`에서 문서로 확인됨; 정확한 모델의 지원 여부 확인 필요) |
 | 터치 | 인터럽트 웨이크업을 지원하는 I2C 정전식 터치 컨트롤러 |
 | 스토리지 | 변형에 따라 SiP 플래시/PSRAM, 외부 SPI NOR, SPI NAND, SD NAND, 또는 eMMC |
 | 오디오 | 아날로그 마이크 입력, 차동 DAC 출력, 외부 PA |

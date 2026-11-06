@@ -21,7 +21,7 @@ Comece por estes fatores essenciais de seleção:
 - **Alimentação:** bateria ou fonte regulada, faixa de tensão de operação e níveis de E/S.
 - **Funções de áudio:** requisitos de ADC/DAC, I2S e PDM, incluindo canais de microfone.
 
-Compare componentes exatos, não apenas números de família: um número maior não significa automaticamente uma opção mais adequada. Cada um desses fatores é um filtro do [Seletor de produtos](../product-selector.md): defina-os lá para pré-selecionar componentes exatos.
+Compare componentes exatos, não apenas números de família: um número maior não significa automaticamente uma opção mais adequada. O [Seletor de produtos](../product-selector.md) oferece filtros para encapsulamento, alimentação, display, GPIO, áudio e outros critérios, mas não filtra o modo Bluetooth. Use os filtros disponíveis para reduzir a lista e confirme o suporte a BLE/Classic Bluetooth na página da peça exata.
 
 [Comparação de famílias](SF32_family.md) · [Seletor de produtos](../product-selector.md)
 

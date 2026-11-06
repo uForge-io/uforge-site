@@ -10,7 +10,7 @@ tags:
 
 Une bonne gestion de l'énergie transforme un prototype fonctionnel en un produit adapté aux objets connectés portés. Sur SF32, l'optimisation énergétique couvre la configuration des horloges, des modes de veille, du fonctionnement de l'affichage, des intervalles de connexion Bluetooth, des interruptions des capteurs et de l'architecture applicative.
 
-N'optimisez pas la consommation à partir d'extraits de code isolés. Mesurez des scénarios représentatifs du produit : démarrage, inactivité, inactivité avec connexion maintenue, affichage actif, audio actif, réveil par interruption d'un capteur, OTA et arrêt.
+N'optimisez pas la consommation à partir d'extraits de code isolés. Mesurez des scénarios représentatifs du produit : démarrage, inactivité, inactivité avec connexion maintenue, affichage actif, audio actif, réveil par un capteur, OTA et arrêt.
 
 ## Flux de travail pratique { #practical-workflow }
 

@@ -22,40 +22,22 @@ The typical display-resource path is:
 
 <div align="center"><em>Diagram: Graphics Resource and Display Flow</em></div>
 
-```text
-Source images, fonts, and animations
-        │
-        ▼
-GraphicsTool converts supported resources to eZip or eZip-A
-        │
-        ▼
-Compressed assets in NOR Flash, PSRAM, NAND, or file storage
-        │
-        ▼
-eZip hardware decoder expands an asset when required
-        │
-        ▼
-LVGL or another UI framework + graphics/display driver
-        │
-        ├── CPU fallback rendering
-        │
-        └── ePicasso pixel acceleration
-        │
-        ▼
-Final rendered bitmap in a draw buffer or framebuffer
-        │
-        ├── Uncompressed display path
-        │
-        └── Optional: extDMA compresses it into TurboPixel
-                    │
-                    ▼
-             TurboPixel framebuffer in PSRAM
-        │
-        ▼
-Display controller transfers pixels to the panel
-        │
-        ▼
-SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
+```mermaid
+flowchart TD
+    A["Source images, fonts, and animations"] --> B["GraphicsTool converts supported resources to eZip or eZip-A"]
+    B --> C["Compressed assets in NOR Flash, PSRAM, NAND, or file storage"]
+    C --> D["eZip hardware decoder expands an asset when required"]
+    D --> E["LVGL or another UI framework + graphics/display driver"]
+    E --> F["CPU fallback rendering"]
+    E --> G["ePicasso pixel acceleration"]
+    F --> H["Final rendered bitmap in a draw buffer or framebuffer"]
+    G --> H
+    H --> I["Uncompressed display path"]
+    H --> J["Optional: extDMA compresses the bitmap into TurboPixel"]
+    J --> K["TurboPixel framebuffer in PSRAM"]
+    I --> L["Display controller transfers pixels to the panel"]
+    K --> L
+    L --> M["Panel interfaces: SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI"]
 ```
 
 The path is configurable rather than mandatory: a product may not use eZip, ePicasso, TurboPixel, or a full framebuffer. Availability and connections depend on the selected device, SDK, display interface, panel, and driver configuration. The current OpenSiFli LCDC header defines `LCDC_SUPPORTED_COMPRESSED_LAYER` only when `HAL_EXTDMA_MODULE_ENABLED` is enabled and the family guard permits it; SF32LB52x and SF32LB57x are excluded. A source comment also notes that the LCPU path is not enabled. The published SDK LCDC capability table marks compressed-layer decompression unsupported on SF32LB55x, so treat 55x as conditional rather than validated end-to-end support. Verify the exact SDK revision, core, build configuration, and target hardware; see [TurboPixel](turbopixel.md#availability-in-the-sf32-family).

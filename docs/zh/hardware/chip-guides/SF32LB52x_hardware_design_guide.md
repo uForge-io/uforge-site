@@ -62,7 +62,7 @@ SF32LB52x 系列在紧凑的 QFN68 封装中集成双核 STAR-MC1 处理器、�
 - 双模蓝牙 5.3 射频
 - ePicasso 2.0 2D/2.5D 图形加速器
 - 思澈科技（SiFli）的原始硬件应用说明提到集成式 AI 神经网络加速器。SiFli-SDK 的 [NNACC 指南](https://docs.sifli.com/projects/sdk/latest/sf32lb58x/hal/nnacc.html)列出了 SF32LB55x、SF32LB56x 和 SF32LB58x，但未列出 SF32LB52x；如需依赖该加速器，请先确认具体型号的软件支持情况。
-- 支持 SPI、QSPI、8080、JDI 和 8-bit EPD 的显示控制器
+- 支持 SPI、QSPI、8080、JDI 的显示控制器；8-bit 并行 EPD 有资料明确支持 `52B/D/E/G/J`，其他具体型号需向思澈科技（SiFli）确认
 - USB 2.0 全速设备
 - 在支持该功能的型号上提供 SDIO/eMMC 存储接口
 - 集成音频编解码器，并提供模拟和数字音频接口
@@ -145,9 +145,9 @@ SF32LB52x 系列在紧凑的 QFN68 封装中集成双核 STAR-MC1 处理器、�
 
 <div align="center"><em>图 3.3-1：SF32LB520/3/5/7 QFN68L 管脚布局</em></div>
 
-![图 3.3-2：SF32LB52B/E/G/J QFN68L 管脚布局](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ width="100%" loading="lazy" }
+![图 3.3-2：SF32LB52B/D/E/G/J QFN68L 管脚布局](../../sf32-products/chips/assets/52xB/sf32lb52X-B-package-layout.png){ width="100%" loading="lazy" }
 
-<div align="center"><em>图 3.3-2：SF32LB52B/E/G/J QFN68L 管脚布局</em></div>
+<div align="center"><em>图 3.3-2：SF32LB52B/D/E/G/J QFN68L 管脚布局</em></div>
 
 ### 3.4. 应用场景 { #34-applications }
 
@@ -184,7 +184,7 @@ SF32LB52x 系列在紧凑的 QFN68 封装中集成双核 STAR-MC1 处理器、�
 | Buck 电感 | 4.7 μH +/-20%，DCR <= 0.4 Ω，Isat >= 450 mA |
 | 晶体 | 48 MHz 主晶体和 32.768 kHz RTC 晶体 |
 | RF | 50 Ω 阻抗受控走线，预留 π 型匹配网络 |
-| 显示 | 3 线 SPI、4 线 SPI、Dual-SPI、Quad-SPI（最高 512 x 512）、JDI 和 8-bit EPD |
+| 显示 | 3 线 SPI、4 线 SPI、Dual-SPI、Quad-SPI（最高 512 x 512）、JDI；8-bit 并行 EPD（资料明确适用于 `52B/D/E/G/J`，其他具体型号需向思澈科技（SiFli）确认） |
 | 触摸 | I2C 电容触摸控制器，支持中断唤醒 |
 | 存储 | 根据具体型号使用 SiP Flash/PSRAM、外部 SPI NOR、SPI NAND、SD NAND 或 eMMC |
 | 音频 | 模拟麦克风输入、差分 DAC 输出、外部 PA |
@@ -210,7 +210,7 @@ SF32LB52x 系列在紧凑的 QFN68 封装中集成双核 STAR-MC1 处理器、�
 | 4 | 选择 RF 拓扑、显示、音频、传感器及其他产品接口 | 时钟生成、RF、用户接口、存储与连接 |
 | 5 | 评审 PCB 叠层、扇出、阻抗和敏感走线 | PCB 布局指导 |
 | 6 | 对照原始资料中的参考原理图、PCB 布局、机械图和电源图 | 附录 A-E |
-| 7 | 预留启动调试、调试、校准和量产测试所需的接口 | 调试、量产、设计评审检查表 |
+| 7 | 预留硬件启动调试、后续调试、校准和量产测试所需的接口 | 调试、量产、设计评审检查表 |
 
 </div>
 
@@ -229,7 +229,7 @@ SF32LB52x 系列在紧凑的 QFN68 封装中集成双核 STAR-MC1 处理器、�
 
 ### 4.4. 评审证据包 { #44-review-evidence-pack }
 
-硬件发布前，应归档原理图 PDF、PCB 叠层、阻抗报告、元器件 AVL 核对、DRC 报告，以及 RF、晶体、USB、SDIO/eMMC、音频、电源和启动存储布局截图。将这些证据与板卡版本一起保存，便于后续固件、RF 和量产问题追溯到已评审的硬件基线。
+硬件设计发布前，应归档原理图 PDF、PCB 叠层、阻抗报告、元器件 AVL 核对、DRC 报告，以及 RF、晶体、USB、SDIO/eMMC、音频、电源和启动存储布局截图。将这些证据与板卡版本一起保存，便于后续固件、RF 和量产问题追溯到已评审的硬件基线。
 
 ## 5. 使用核对表 { #using-the-checklists }
 

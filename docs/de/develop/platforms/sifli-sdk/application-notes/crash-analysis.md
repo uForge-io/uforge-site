@@ -26,7 +26,7 @@ Wenn LPSYS aus dem Standby aufwacht, kehrt SWD zu HCPU zurück. Ein J-Link-Reset
 
 ## Ein Live- oder Post-Mortem-Paket erfassen { #capture-a-live-or-post-mortem-package }
 
-Erfassen Sie bei aktuellen SDK-Releases über UART oder J-Link mit `sdk.py`:
+Die aktuelle `sdk.py`-CLI unterstützt J-Link für alle Serien und UART DEBUG IP direkt nur für SF32LB52X und SF32LB56X. Verwenden Sie für andere Familien J-Link; die älteren AssertDump/UART-Verfahren weiter unten sind separate Abläufe.
 
 !!! note "Geltungsbereich des Beispiels"
     Der folgende Befehl ist ein Beispiel für SF32LB52/LB525. Behalten Sie die Befehlsstruktur bei, ersetzen Sie aber Chip/Modell, Kern, Transport und ELF durch Werte, die von der Zielfamilie und dem SDK-Release unterstützt werden.
@@ -37,7 +37,7 @@ sdk.py crash-dump capture-live --transport uart --probe /dev/ttyUSB0 \
   --output /tmp/live-crash --elf build_hcpu/main.elf
 ```
 
-Um auch PSRAM zu exportieren, ergänzen Sie `--include-psram` oder verwenden Sie `--psram-size 8MB`, um das PSRAM-Skript manuell auszuwählen. Für J-Link über IP mit `SifliUsartServer` verwenden Sie `--transport jlink --jlink-ip 127.0.0.1:19025`; wählen Sie den betroffenen Kern mit `--core hcpu` oder `--core lcpu` aus. Das Ausgabeverzeichnis sollte die erfasste Binärdatei, Core-ELF/AXF, `log.txt`, `manifest.json` und `sdk_manifest.json` enthalten.
+Um auch PSRAM zu exportieren, ergänzen Sie `--include-psram` oder verwenden Sie `--psram-size 8MB`, um das PSRAM-Skript manuell auszuwählen. Für J-Link über IP mit `SifliUsartServer` verwenden Sie `--transport jlink --jlink-ip 127.0.0.1:19025`; wählen Sie den betroffenen Kern mit `--core hcpu` oder `--core lcpu` aus. Das Crash-Paket enthält erfasste Binärdateien sowie `manifest.json` und `sdk_manifest.json`; eine angegebene `--elf`-Datei wird als `hcpu.axf` kopiert. `log.txt` wird nur bei `capture-live --transport jlink` aus `capture.log` kopiert oder bei `export-coredump` über `--log` bereitgestellt.
 
 Verwenden Sie bei älteren SDKs das familienspezifische Verfahren aus dem entsprechenden SiFli-Crash-Analyseleitfaden:
 

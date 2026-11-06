@@ -56,7 +56,7 @@ Um produto SF32LB55x típico inclui o MCU, a árvore de alimentação, os crista
 
 3. **Por que soldar a bateria pode travar o chip e como evitar isso?** O aterramento inadequado do ferro de solda pode causar um surto. Adicione proteção contra surtos e ESD à interface da bateria e aterre corretamente o ferro de solda.
 
-4. **Por que o botão de despertar não tira o MCU do Hibernate?** Apenas as seis entradas de despertar do LCPU, GPIO43–GPIO48, podem tirar o MCU do Hibernate; os GPIO0–GPIO3 do HCPU não podem.
+4. **Por que o botão de despertar não tira o MCU do Hibernate?** Apenas as seis entradas de despertar do LCPU, GPIO43–GPIO48, podem tirar o MCU do Hibernate; os GPIO0–GPIO3 do HCPU não podem. Esses são identificadores lógicos GPIO. Em BGA125/145/169, HCPU GPIO0–GPIO3 correspondem aos pads PA80/PA79/PA78/PA77 e LCPU GPIO43–GPIO48 a PB43–PB48; o QFN68 usa os nomes GPIO indicados.
 
 5. **Por que um acelerômetro ou sensor de frequência cardíaca pode consumir demais ou apresentar falhas durante a depuração de baixo consumo?** O firmware do sensor executa no LCPU; portanto, os sinais I2C, SPI, de controle e de interrupção devem usar interfaces do LCPU. Atribuí-los ao HCPU pode elevar o consumo ou causar falhas.
 

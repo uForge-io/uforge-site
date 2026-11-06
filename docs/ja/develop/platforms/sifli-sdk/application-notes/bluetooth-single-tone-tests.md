@@ -69,6 +69,8 @@ RXに切り替える前にTXを停止します。チャネルを設定してStar
 PER = (1500 - received_packets) / 1500 × 100%
 ```
 
+リンク先の[SiFliガイド](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/app_note/bt_individual_test_guide.html)では、`n`を受信したパケット数と定義しながら、`PER = (n - 1500) / 1500 × 100%`と記載しています。これは上記のロストパケット計算と符号が逆です。本ページではロストパケットの式を維持します。両者を同じものとして扱う前に、SiFliへ意図を確認してください。
+
 RSSIも記録します。Classic BT RXでは、CMW500 GPRF GeneratorのDH1/2-DH1/3-DH1などの波形を使用し、受信パケット数、エラーパケット数、ビット数、BER、RSSIを記録します。BLEとClassic BTのRF経路はハードウェアを共有するため、並行して実行しないでください。
 
 ![SiFli_RfToolのBLE RX設定](../../../../assets/develop/app-notes/bluetooth-single-item/figure_13-5.png){ loading="lazy" }

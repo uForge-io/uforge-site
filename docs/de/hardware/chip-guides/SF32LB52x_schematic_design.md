@@ -8,10 +8,14 @@ tags:
     - Chip
 ---
 
+<div id="sf32lb52x"></div>
+
 # SF32LB52x Hardware-Design-Leitfaden — Schaltplan-Designrichtlinien { #sf32lb52x-hardware-design-guide-schematic-design-guidelines }
 
 !!! note "Teil des SF32LB52x Hardware-Design-Leitfadens"
     Die Schaltplanrichtlinien erstrecken sich über drei Seiten: diese Seite (Abschnitte 5.1-5.3: Minimalsystem, Stromversorgung und Takt), [RF & Benutzerschnittstellen](SF32LB52x_schematic_rf_interfaces.md) (Abschnitte 5.4-5.5) und [Speicher & Fertigung](SF32LB52x_schematic_storage_mfg.md) (Abschnitte 5.6-5.7). Für die Geräteauswahl und den vollständigen Designablauf beginnen Sie mit der [Übersicht des SF32LB52x Hardware-Design-Leitfadens](SF32LB52x_hardware_design_guide.md). Für die Prüfung einzelner Anforderungen verwenden Sie die [Schaltplan-Checkliste](SF32LB52x_schematic_checklist.md).
+
+<div id="5"></div>
 
 ## 5. Schaltplan-Designrichtlinien { #5-schematic-design-guidelines }
 
@@ -32,6 +36,8 @@ Dieses Kapitel führt Sie auf drei Seiten durch den Schaltplanentwurf. Prüfen S
 | Fertigung | DBG_UART/SWD, Testpunkte, Serienprogrammierung, Kalibrierungszugang und Freigabe-Checklisten | Testpunkt-Zeichnung, Plan der Prüfvorrichtung für die Serienfertigung, vollständige Freigabenachweise |
 
 </div>
+
+<div id="51"></div>
 
 ### 5.1. Minimalsystem-Design { #51-minimum-system-design }
 
@@ -54,6 +60,8 @@ Nach dieser Prüfung sollte sich die Schaltung ohne optionale Produktperipherie 
 
 Die Stromversorgung umfasst Versorgungsspannungen, Lastschalter, Ladepfad, OVP, interne LDOs, Weckverhalten und Energiesparzustände. Sie bildet die Grundlage für ein zuverlässiges Minimalsystem. Legen Sie sie vor der Bauteilplatzierung fest, da davon die weitere Auslegung von Display, Speicher, RF, Audio und Sensoren abhängt.
 
+<div id="521"></div>
+
 #### 5.2.1. Stromversorgung { #521-power-supply }
 
 **Kurzübersicht**
@@ -65,6 +73,8 @@ Die Stromversorgung umfasst Versorgungsspannungen, Lastschalter, Ladepfad, OVP, 
 **Entwurfsziel**
 
 Entwerfen Sie für die gewählte Variante eine stabile Versorgungsstruktur mit geringem Leckstrom. Vermeiden Sie eine Überlastung der internen LDO-Ausgänge und Störungen auf den RF- und Audio-Versorgungsschienen. Ungenutzte Lasten und der Boot-Speicher lassen sich in Energiesparmodi abschalten.
+
+<div id="5211"></div>
 
 ##### 5.2.1.1. Anforderungen an die Prozessor-Stromversorgung { #5211-processor-power-supply-requirements }
 
@@ -126,8 +136,13 @@ Entwerfen Sie für die gewählte Variante eine stabile Versorgungsstruktur mit g
 
     (1) VDD_SIP: SF32LB52BU36 benötigt eine externe 1,8-V- oder 3,3-V-Versorgung; SF32LB52BU56 benötigt eine externe 3,3-V-Versorgung; SF32LB52DUB6 benötigt eine externe 1,8-V-Versorgung; SF32LB52E/G/JUx6 werden direkt vom internen LDO versorgt und benötigen keine externe Versorgung.
 
+    !!! note "PVDD-Geltungsbereich bestätigen"
+        Die Tabelle nennt PVDD = 2,97–3,63 V (typisch 3,3 V); innerhalb dieses Bereichs gilt die Aussage zum internen LDO für E/G/J. Die B3-Quelle beschreibt zusätzlich den Fall PVDD = 1,8 V, in dem der interne LDO nicht verfügbar ist und eine externe 1,8-V-Versorgung benötigt wird. Dieser Fall liegt außerhalb des Tabellenbereichs; die Quelle löst den Geltungsbereich nicht auf. Lassen Sie die Anwendbarkeit von SiFli bestätigen. Dies ist keine Empfehlung für PVDD = 1,8 V. Den zugehörigen Hinweis zum VDD_SIP-Versorgungsschalter finden Sie unter [Speicher und Fertigung](SF32LB52x_schematic_storage_mfg.md).
+
     !!! important "Hinweis zum Hibernate-Modus"
         Wenn das System in den Hibernate-Modus wechselt, muss VDD_SIP abgeschaltet werden, da sonst Leckstrom über die I/O-Pins des im selben Gehäuse integrierten Speichers fließen kann. Verwenden Sie den dedizierten Pin PA21, um den VDD_SIP-Lastschalter zu steuern.
+
+<div id="5212-buck"></div>
 
 ##### 5.2.1.2. Auswahl der BUCK-Induktivität { #5212-buck-inductor-selection }
 
@@ -135,6 +150,8 @@ Beide Versorgungsvarianten verwenden dieselbe Induktivitätsspezifikation.
 
 !!! important "Wichtige Parameter der Leistungsinduktivität"
     L (Induktivität) = 4,7 µH ± 20 %, DCR (Gleichstromwiderstand) ≤ 0,4 Ω, Isat (Sättigungsstrom) ≥ 450 mA.
+
+<div id="5213"></div>
 
 ##### 5.2.1.3. Akku- und Ladesteuerung { #5213-battery-and-charging-control }
 
@@ -208,6 +225,8 @@ Beide Versorgungsvarianten verwenden dieselbe Induktivitätsspezifikation.
     !!! info "Nicht zutreffend"
         Diese Variante wird direkt aus einer extern geregelten Quelle versorgt und **verfügt über keine Lademanagement-Schaltung**. Dieser Abschnitt gilt nicht. Wenn Ihr Produkt Akkubetrieb und Laden benötigt, verwenden Sie stattdessen die Serie SF32LB520/3/5/7.
 
+<div id="5214-standby"></div>
+
 ##### 5.2.1.4. Verringerung der Standby-Leistungsaufnahme { #5214-reducing-standby-power }
 
 === "SF32LB520/3/5/7 (akkubetrieben)"
@@ -225,6 +244,8 @@ Beide Versorgungsvarianten verwenden dieselbe Induktivitätsspezifikation.
     Verwenden Sie Lastschalter für das dynamische Power-Management jedes Funktionsblocks; wählen Sie für dauerhaft eingeschaltete Module oder Pfade Bauteile mit niedrigem Ruhestrom.
 
     Legen Sie den hardwareseitigen Anfangszustand der GPIOs zur Lastschaltersteuerung sorgfältig fest. Verwenden Sie Pull-up-/Pull-down-Widerstände im Megaohm-Bereich, damit die Lastschalter standardmäßig ausgeschaltet sind. Wählen Sie bei der LDO- und Lastschalterauswahl Bauteile mit niedrigem Ruhestrom (Iq) und niedrigem Abschaltstrom (Istb), und achten Sie besonders auf Iq bei dauerhaft eingeschalteten Stromversorgungsbauteilen.
+
+<div id="5215"></div>
 
 ##### 5.2.1.5. Checkliste Stromversorgungsdesign { #5215-power-design-checklist }
 
@@ -247,6 +268,8 @@ Beide Versorgungsvarianten verwenden dieselbe Induktivitätsspezifikation.
 - Messen Sie `VCC`/`PVDD`, den BUCK-Ausgang, RF-/Audio-Schienen und die Speicherversorgung, bevor die Firmware Peripherie aktiviert.
 - Prüfen Sie bei akkubetriebenen Designs den Ladegeräteanschluss, die Vorladung, die Konstantstromladung und den erneuten Ladebeginn.
 - Messen Sie den Standby- und Hibernate-Strom bei ausgeschalteten Lastschaltern für Display, Sensoren, Speicher und Motor.
+
+<div id="522"></div>
 
 #### 5.2.2. Betriebsmodi und Weckquellen { #522-operating-modes-and-wake-sources }
 
@@ -304,7 +327,11 @@ Die gesamte Familie unterstützt 15 weckfähige Interruptquellen in den Modi Sta
 - [ ] Externe Speicher- und Sensorversorgungen weisen im Hibernate-Modus keinen Leckstrom über I/O-Pins auf.
 - [ ] Firmware- und Hardwareteams haben abgestimmt, welcher Zustand für Versand, Lagerung und normalen Standby verwendet wird.
 
+<div id="53"></div>
+
 ### 5.3. Takterzeugung { #53-clock-generation }
+
+<div id="531"></div>
 
 #### 5.3.1. Quarzauswahl { #531-crystal-selection }
 

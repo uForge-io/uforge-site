@@ -21,7 +21,7 @@ SiFli-SDK 的音频示例适合用于验证完整音频链路，但不能直接�
 
 | 目标 | 建议示例 | 可验证的能力 | 官方列出的目标与限制 |
 |:---------|:---------|:-------------|:---------------------|
-| 使用两路或四路数字麦克风录音 | [PDM 示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html) | PDM 采集；支持相应处理模式时进行 WAV 录音和回放 | 当前页面仅列出 `sf32lb56-lcd_a128r12n1`；需确认 PDM 布线和引脚复用。页面的引脚配置说明误将开发板名称写成 `f32lb56-lcd_a128r12n1`（漏掉开头的 `s`）；构建命令中的开发板名称正确。 |
+| 使用两路或四路数字麦克风录音 | [PDM 示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/4pdm/README.html) | PDM 采集；支持相应处理模式时进行 WAV 录音和回放 | 当前页面仅列出 `sf32lb56-lcd_a128r12n1`；需确认 PDM 布线和引脚复用。页面的引脚配置说明和构建命令都漏写了开发板名称开头的 `s`。请按所用 SDK 版本核对 `sf32lb56-lcd_a128r12n1` 是否受支持。 |
 | 使用两路模拟麦克风录音 | [立体声扬声器本地音乐示例（Local Music Example for stereo speaker，双 ADC/DAC）](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/dual_adc_dac/README.html) | 同时采集两路麦克风并分别保存为 PCM 文件；可选择一路麦克风送扬声器监听 | 需使用 SF32LB58x 自定义板，不能在思澈科技（SiFli）模组板上运行；需要两路模拟麦克风和两个模拟扬声器。 |
 | 验证基本的麦克风到扬声器链路 | [录音示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/record/README.html) | 将麦克风录音 5 秒并存入 PCM 内存缓冲区，然后自动播放 | 官方列出的目标为 `eh-lb525`、`sf32lb52-lcd` 系列、`sf32lb56-lcd` 系列或 `sf32lb58-lcd` 系列；需要扬声器。 |
 | 从根文件系统播放预置音频 | [本地音乐示例](https://docs.sifli.com/projects/sdk/latest/en/sf32lb52x/example/multimedia/audio/local_music/README.html) | 从已挂载的 FAT 根分区播放预置的 `16k.wav`；也可播放预置 MP3，但须符合文件系统容量限制 | 官方列出的目标为 `eh-lb525`、`sf32lb52-lcd` 系列、`sf32lb56-lcd` 系列或 `sf32lb58-lcd` 系列；需要 FAT 根分区和扬声器。 |

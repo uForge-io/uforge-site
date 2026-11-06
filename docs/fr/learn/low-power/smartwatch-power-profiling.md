@@ -7,6 +7,8 @@ tags:
   - Objets portables
 ---
 
+<div id="_1"></div>
+
 # Profilage de la consommation d'une montre connectée { #power-profiling-a-smartwatch }
 
 Le profilage de la consommation transforme l'usage quotidien attendu en une estimation d'autonomie et, surtout, en une liste hiérarchisée des charges à optimiser. Cet article s'appuie sur le [classeur anglais de données de profil de consommation d'une montre connectée](assets/smartwatch-power-profile-data.xlsx) fourni comme exemple détaillé. Il montre comment convertir le comportement de l'utilisateur en mAh par jour, repérer les charges qui dominent le budget et transformer le modèle du tableur en plan de mesure.
@@ -16,6 +18,8 @@ Le profilage de la consommation transforme l'usage quotidien attendu en une esti
     Le classeur ne contient aucun relevé de mesure ; il n'identifie donc aucune entrée comme une mesure matérielle. Le résultat de 13,15 jours est une estimation du modèle, et non une autonomie observée.
 
 Utilisez cette page avec la [vue d'ensemble de la basse consommation](overview.md) pour l'architecture et les conseils de firmware, et avec [Mesure et validation de la consommation](measurement-and-validation.md) pour le flux de mesure qui valide le modèle.
+
+<div id="_2"></div>
 
 ## Vue d'ensemble du système de montre connectée { #smartwatch-system-overview }
 
@@ -34,6 +38,8 @@ Commencez par définir la frontière du modèle. Ce classeur représente une mon
 | Tension nominale de la batterie | 3,87 V | Utilisée par la valeur auxiliaire de normalisation de tension du classeur. |
 
 </div>
+
+<div id="_3"></div>
 
 ## Consommation par scénario { #power-consumption-by-scenario }
 
@@ -118,6 +124,8 @@ flowchart LR
     F --> B
 ```
 
+<div id="_4"></div>
+
 ### Convertir un scénario en charge quotidienne { #convert-a-scenario-into-daily-charge }
 
 Pour une charge dont le courant est déjà exprimé au niveau de la batterie, la charge quotidienne est simple :
@@ -135,11 +143,15 @@ battery_current_mA = (load_voltage_V x load_current_mA) /
 
 Utilisez le rendement mesuré du régulateur au courant de charge visé. Le rendement maximal affiché en titre d'un régulateur est rarement utile pour une montre qui passe une grande partie de la journée en faible charge.
 
+<div id="_5"></div>
+
 ### Vérifier l'hypothèse de conversion du classeur { #check-the-workbooks-conversion-assumption }
 
 La colonne « Rendement de conversion de puissance (%) » du classeur est calculée comme `tension de la charge / tension de la batterie`. Sa formule de charge suivante divise par cette valeur auxiliaire (« helper »), puis par la tension de la batterie, de sorte que les termes de tension s'annulent. La charge quotidienne qui en résulte est simplement le courant de charge multiplié par le temps : elle traite le courant de batterie comme égal au courant de charge, au lieu de modéliser une conversion de puissance idéale. Cela ressemble à un régulateur linéaire dont le courant de repos est omis ; ce n'est pas un modèle général pour un régulateur à découpage.
 
 Par exemple, une charge de 1 mA sous 3,3 V alimentée depuis une batterie de 3,87 V consommerait environ 0,853 mA à travers un convertisseur idéal, alors que le classeur compte 1 mA. Le résultat d'un convertisseur réel dépend de son rendement et de son courant de repos. Par conséquent, l'hypothèse de conversion du classeur ne suffit pas à établir si son estimation d'autonomie est optimiste ou prudente. Le classement est utile pour une première revue des hypothèses déclarées de courant et de temps, mais ce n'est pas un budget de batterie définitif. Pour un budget de production, remplacez la valeur auxiliaire par le rendement mesuré de chaque rail et de chaque plage de charge, incluez le courant de repos sans le compter deux fois s'il figure déjà dans cette mesure, et tenez compte des pertes de la protection de batterie et du chemin de charge.
+
+<div id="_6"></div>
 
 ## Calculer la consommation quotidienne à partir de l'usage du produit { #calculate-daily-consumption-from-product-usage }
 
@@ -302,6 +314,8 @@ Le classeur ne fournit aucune catégorie dédiée aux capteurs. Sa catégorie `A
 
 </div>
 
+<div id="_7"></div>
+
 ## Transformer le classement en travail de conception { #turn-the-ranking-into-design-work }
 
 Travaillez du plus gros contributeur modélisé vers le plus petit, puis validez l'ordre par des mesures. Dans ce modèle, un enchaînement raisonnable est le suivant :
@@ -313,6 +327,8 @@ Travaillez du plus gros contributeur modélisé vers le plus petit, puis validez
 5. **Surveillance prolongée :** profilez le suivi du sommeil et l'enregistrement d'exercice comme des scénarios complets, y compris le rapport cyclique des capteurs, le traitement, le trafic mémoire et le comportement radio.
 
 N'optimisez pas un chiffre de tableur isolé. Un changement apparemment efficace peut augmenter la fréquence des réveils, réduire la satisfaction de l'utilisateur ou allonger le temps actif au point d'effacer l'économie d'énergie attendue.
+
+<div id="_8"></div>
 
 ## Valider le modèle sur le matériel { #validate-the-model-on-hardware }
 
@@ -333,6 +349,8 @@ Le modèle devient utile lorsqu'il est étalonné en continu par des mesures. Po
 
 </div>
 
+<div id="_9"></div>
+
 ## Garder le profil honnête { #keep-the-profile-honest }
 
 - Considérez les scénarios désactivés comme non budgétés, et non comme gratuits. Le classeur affecte actuellement une charge nulle aux scénarios NFC, appels Bluetooth et AOD.
@@ -340,6 +358,8 @@ Le modèle devient utile lorsqu'il est étalonné en continu par des mesures. Po
 - Mesurez si possible à l'entrée de la batterie. Les mesures au niveau des rails restent précieuses, mais il faut leur ajouter les pertes du régulateur et le courant de repos avant d'en faire des chiffres d'autonomie.
 - Changez une hypothèse à la fois, puis comparez les mAh par jour plutôt que seulement le courant instantané.
 - Relancez le profil chaque fois qu'une politique d'écran, un réglage Bluetooth, une cadence de capteur, une politique de gestion d'énergie ou une fonction majeure du firmware change.
+
+<div id="_10"></div>
 
 ## Points clés à retenir { #key-takeaways }
 

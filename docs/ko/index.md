@@ -155,7 +155,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } Cortex-M33 STAR-MC1 애플리케이션 코어 + 전용 Bluetooth 컨트롤러 코어
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 모드 Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 모드 Bluetooth 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 하드웨어 압축 해제
     - :fontawesome-solid-circle:{ .uf-dot-blue } 오디오 코덱, 1 x AMIC, 2 x DMIC
@@ -171,7 +171,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 코어 Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 모드 Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 모드 Bluetooth 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 최대 1024 x 600 RGB 디스플레이
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 하드웨어 압축 해제
@@ -188,7 +188,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } 트리플 코어 Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 모드 Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 모드 Bluetooth 6.3(데이터시트 초안)
     - :fontawesome-solid-circle:{ .uf-dot-blue } 최대 1024 x 600 RGB 디스플레이
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU, ePicasso 3.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 3.0 및 JPEG/MJPEG 디코딩
@@ -206,7 +206,7 @@ hide:
     ---
 
     - :fontawesome-solid-circle:{ .uf-dot-blue } 트리플 코어 Cortex-M33 STAR-MC1
-    - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 모드 Bluetooth 6.3
+    - :fontawesome-solid-circle:{ .uf-dot-blue } 듀얼 모드 Bluetooth 5.3
     - :fontawesome-solid-circle:{ .uf-dot-blue } 최대 1280 x 800 MIPI 디스플레이
     - :fontawesome-solid-circle:{ .uf-dot-blue } 2D / 2.5D GPU + 벡터 그래픽, ePicasso 2.0
     - :fontawesome-solid-circle:{ .uf-dot-blue } eZip 2.0 및 JPEG/MJPEG 디코딩

@@ -76,7 +76,7 @@ Por ejemplo, un producto de audio Bluetooth debería partir de un ejemplo de aud
 4. Vuelva a compilar y a probar.
 5. Haga un commit o registre el cambio antes de añadir otro subsistema.
 
-Este flujo es más lento durante la primera hora y mucho más rápido después del primer fallo difícil.
+Este flujo exige más tiempo durante la primera hora, pero permite avanzar mucho más rápido después del primer fallo complejo.
 
 ## Qué registrar { #evidence-to-keep }
 

@@ -70,7 +70,7 @@ SuperKey에는 그래픽, 여러 디스플레이, 복합 USB 디바이스, 키�
 
 | 구성 요소 | 필수 사양 | 역할 | 상태 | 구하는 곳 | 호환성 및 대체 참고 사항 |
 |:----------|:-----------------------|:-----|:-------|:----------------|:-------------------------------------|
-| SuperKey 오픈 하드웨어 어셈블리 | 프로젝트에 기술된 대로 128 × 128 GC9107 LCD 3개, RGB LED 3개, 키 4개, 로터리 인코더, SHT30, USB 연결을 갖춘 SF32LB52 타깃 | 매크로 키보드 컨트롤러, 디스플레이, 입력, 센싱, USB HID/CDC | 필수 | [공개된 `sf32-keyboard` 설계](https://oshwhub.com/sifli/sf32-keyboard); [SuperKey 저장소](https://github.com/SiFliSparks/SuperKey) | 설계 파일은 구매 가능한 조립 완료 보드의 사양이 아닙니다. 핀과 어셈블리 리비전을 기록해야 합니다 |
+| SuperKey 오픈 하드웨어 어셈블리 | 프로젝트에 기술된 대로 128 × 128 GC9107 LCD 3개, RGB LED 3개, 키 4개, 로터리 인코더, SHT30, USB 연결을 갖춘 SF32LB52 타깃 | 매크로 키보드 컨트롤러, 디스플레이, 입력, 센싱, USB HID/CDC | 필수 | [공개된 `sf32-keyboard` 설계](https://oshwhub.com/sifli/sf32-keyboard); [SuperKey 저장소](https://github.com/SiFliSparks/SuperKey) | 설계 파일은 구매 가능한 조립 완료 보드의 사양이 아닙니다. 핀 배치 및 조립 리비전을 기록해야 합니다 |
 | 호스트 컴퓨터와 USB 데이터 연결 | Windows 10/11이 문서화된 주 경로; 데이터 전송이 가능한 USB 연결 | SuperKeyHub 실행, HID/CDC 호스트 제공, 플래싱/복구 지원 | 필수 | [SuperKey 문서](https://sparks.sifli.com/projects/superkey/) | SuperKeyHub에는 Windows/macOS 지원이 나열되어 있습니다. 선택한 호스트 OS에서 CDC, DFU, 플래싱, 복구를 검증하십시오 |
 | QWeather 계정/API 구성 | API Key, API Host, 도시 설정 | 선택적 날씨 표시 기능 | 선택 | [QWeather](https://www.qweather.com/) | 자격 증명을 소스 관리에 포함하지 마십시오. 서비스 약관과 가용성을 검증하십시오 |
 

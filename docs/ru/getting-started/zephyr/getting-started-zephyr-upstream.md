@@ -8,7 +8,7 @@ tags:
 
 # Zephyr upstream { #zephyr-upstream }
 
-Плата `sf32lb52_devkit_lcd` поддерживается и сопровождается в основной ветке Zephyr начиная с v4.3.0. См. [примечания к выпуску v4.3.0](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html) и [документацию платы SF32LB52 DevKit LCD](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html). В этом руководстве создаётся рабочая область v4.3.0, собирается первый пример и прошивается плата. Для более широкого набора официальных функций SF32 используйте [SiFli-SDK](../sifli/getting-started-sifli-sdk.md).
+Плата `sf32lb52_devkit_lcd` поддерживается в основной ветке Zephyr начиная с v4.3.0. В этом руководстве для новой рабочей области, сборки первого примера и прошивки платы используется поддерживаемый выпуск Zephyr v4.5.0. См. [примечания к выпуску v4.3.0](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html), [примечания к выпуску v4.5.0](https://docs.zephyrproject.org/4.5.0/releases/release-notes-4.5.html) и актуальную [документацию платы SF32LB52 DevKit LCD](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html). Для более широкого набора официальных функций SF32 используйте [SiFli-SDK](../sifli/getting-started-sifli-sdk.md).
 
 !!! note "Проверьте список функций платы"
     Наличие описания платы в основной ветке Zephyr само по себе не подтверждает, что все периферийные устройства и режимы работы включены или проверены для продукта. Изучите таблицу поддерживаемых функций в документации платы и проверьте нужное поведение на конкретной ревизии платы.
@@ -22,23 +22,49 @@ tags:
 
 **Программное обеспечение**
 
-- Хостовая ОС, поддерживаемая Zephyr v4.3.0; требования к ней указаны в [руководстве Getting Started](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html).
+- Хостовая ОС, поддерживаемая Zephyr v4.5.0; требования к ней указаны в [руководстве Getting Started](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html).
 - Хост-зависимости Zephyr и Zephyr SDK для цели ARM Cortex-M, установленные согласно этому руководству.
 - Git, Python 3 и `pip`.
 
 ## Подготовьте инструменты { #prepare-the-tooling }
 
-Сначала установите хост-зависимости и Zephyr SDK по [руководству Getting Started для Zephyr v4.3.0](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html). Затем создайте окружение Python и инициализируйте рабочую область с соответствующим тегом Zephyr:
+Сначала установите хост-зависимости и Zephyr SDK по [руководству Getting Started для Zephyr v4.5.0](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html). Затем выберите команды для используемой оболочки, чтобы создать окружение Python и инициализировать рабочую область с соответствующим тегом Zephyr:
 
 ```bash
 python3 -m venv ~/zephyr-venv
-source ~/zephyr-venv/bin/activate
-pip install west
-west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.3.0 ~/zephyrproject
+. ~/zephyr-venv/bin/activate
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 ~/zephyrproject
 cd ~/zephyrproject
 west update
 west zephyr-export
-pip install -r zephyr/scripts/requirements.txt
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+В Windows PowerShell:
+
+```powershell
+py -3 -m venv "$HOME\zephyr-venv"
+& "$HOME\zephyr-venv\Scripts\Activate.ps1"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "$HOME\zephyrproject"
+Set-Location "$HOME\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+В командной строке Windows:
+
+```bat
+py -3 -m venv "%USERPROFILE%\zephyr-venv"
+call "%USERPROFILE%\zephyr-venv\Scripts\activate.bat"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "%USERPROFILE%\zephyrproject"
+cd /d "%USERPROFILE%\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
 ```
 
 Оставьте это окружение Python активным на время сборки и прошивки.
@@ -75,7 +101,7 @@ west build -b sf32lb52_devkit_lcd samples/hello_world --pristine
 west flash
 ```
 
-Если прошивка не удаётся, проверьте выбранный последовательный порт, режим загрузки и описание runner в [документации платы](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html).
+Если прошивка не удаётся, проверьте выбранный последовательный порт, режим загрузки и описание runner в [документации платы](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html).
 
 ## Откройте последовательную консоль { #open-the-serial-console }
 
@@ -87,7 +113,7 @@ Hello World! sf32lb52_devkit_lcd
 
 ## Выберите следующий пример { #choose-a-next-sample }
 
-Выберите следующий программный интерфейс или периферийное устройство для проверки по таблице поддерживаемых функций в документации платы в основной ветке Zephyr и [каталогу примеров Zephyr](https://docs.zephyrproject.org/4.3.0/samples/index.html). Убедитесь, что функция указана для этой платы и необходимая конфигурация включена; успешный запуск примера сам по себе не подтверждает готовность к продуктовой эксплуатации.
+Выберите следующий программный интерфейс или периферийное устройство для проверки по таблице поддерживаемых функций в документации платы в основной ветке Zephyr и [каталогу примеров Zephyr](https://docs.zephyrproject.org/4.5.0/samples/index.html). Убедитесь, что функция указана для этой платы и необходимая конфигурация включена; успешный запуск примера сам по себе не подтверждает готовность к продуктовой эксплуатации.
 
 ## Устранение неполадок { #troubleshooting }
 
@@ -97,8 +123,8 @@ Hello World! sf32lb52_devkit_lcd
 
 | Симптом | Проверка |
 |:--------|:---------|
-| `west boards` не показывает цель SF32 | Убедитесь, что рабочая область инициализирована на основе основного репозитория Zephyr версии v4.3.0 или новее и что `west update` завершился. |
-| Сборка завершается ошибкой до компиляции | Убедитесь, что окружение Python активно, Zephyr SDK для ARM Cortex-M установлен, а зависимости v4.3.0 загружены. |
+| `west boards` не показывает цель SF32 | Убедитесь, что рабочая область инициализирована на основе основного репозитория Zephyr версии v4.5.0 или новее и что `west update` завершился. |
+| Сборка завершается ошибкой до компиляции | Убедитесь, что окружение Python активно, Zephyr SDK для ARM Cortex-M установлен, а зависимости v4.5.0 загружены. |
 | Плата собирается, но не прошивается | Убедитесь, что `sftool` установлен и доступен через `PATH`, выбран правильный последовательный порт, а плата находится в режиме последовательной загрузки. |
 | Нет вывода в последовательный порт | Проверьте `usart1`, скорость `1000000` бод, подключение USB-UART и не открыт ли порт в другом терминале. |
 | Пример периферии завершается ошибкой | Проверьте таблицу поддерживаемых функций платы и конфигурацию примера; базовая цель платы не обязательно включает все периферийные устройства. |

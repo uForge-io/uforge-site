@@ -187,7 +187,7 @@ EVT 전에 데이터시트/사용자 매뉴얼 버전, 패키지 도면, 회로�
 
 [SiFli Chip Hardware Design Guide Index (Wiki)]: https://wiki.sifli.com/hardware/index.html
 
-## 설계 가이드 계속 보기 { #continue-the-design-guide }
+## 5. 설계 가이드 계속 보기 { #continue-the-design-guide }
 
 전체 가이드는 아래 페이지에 걸쳐 이어집니다. 각 페이지는 설계 과정의 한 단계를 다루며 여기에서 이동할 수 있습니다.
 

@@ -73,7 +73,7 @@ La liste des cartes prises en charge figure dans le README de chaque exemple. La
 
 ## Exemples SDK DFU v2 { #dfu-v2-sdk-examples }
 
-<div align="center"><em>Tableau : Exemples officiels SiFli-SDK DFU v2 pour SF32LB58x</em></div>
+<div align="center"><em>Tableau : Chemins des exemples DFU v2 dans SiFli-SDK</em></div>
 
 <div align="center" markdown>
 

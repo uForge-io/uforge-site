@@ -187,7 +187,7 @@ EVT 前应归档数据手册/用户手册版本、封装图、原理图 PDF、PC
 
 [思澈科技（SiFli）芯片硬件设计指南索引（Wiki）]: https://wiki.sifli.com/hardware/index.html
 
-## 继续设计指南 { #continue-the-design-guide }
+## 5. 继续设计指南 { #continue-the-design-guide }
 
 完整指南在以下页面中继续展开，每页对应设计流程的一个阶段，均可从本页进入。
 

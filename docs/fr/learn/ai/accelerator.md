@@ -38,31 +38,12 @@ Une chaîne simplifiée de traitement de l'IA en périphérie sur SF32 se prése
 
 <div align="center"><em>Schéma : Étapes de traitement et inférence pilotée par le firmware</em></div>
 
-```text
-Sensors / Audio / Camera
-        │
-        ▼
-Pre-processing
-  - filtering
-  - framing
-  - normalization
-  - feature extraction
-        │
-        ▼
-Firmware / Inference Runtime
-  - model graph orchestration
-  - supported operations on NNACC
-  - other operations on CPU, if implemented
-        │
-        ▼
-Post-processing
-  - thresholding
-  - smoothing
-  - event detection
-  - application decisions
-        │
-        ▼
-Application, UI, Bluetooth, or Storage
+```mermaid
+flowchart TD
+    A["Capteurs / Audio / Caméra"] --> B["Prétraitement<br/>filtrage<br/>segmentation en trames<br/>normalisation<br/>extraction de caractéristiques"]
+    B --> C["Firmware / environnement d'inférence<br/>orchestration du graphe du modèle<br/>opérations prises en charge sur NNACC<br/>autres opérations sur CPU, si elles sont implémentées"]
+    C --> D["Post-traitement<br/>seuillage<br/>lissage<br/>détection d'événements<br/>décisions de l'application"]
+    D --> E["Application, UI, Bluetooth ou stockage"]
 ```
 
 L'accélérateur n'est qu'un élément de la chaîne complète de traitement de l'IA. Un produit doit aussi assurer l'acquisition et la mise en tampon des données, le prétraitement, la planification de l'inférence, le post-traitement et la prise de décision applicative. Les meilleurs résultats s'obtiennent généralement en concevant toute la chaîne autour de la hiérarchie mémoire et des accélérateurs disponibles, plutôt qu'en considérant l'inférence comme un simple appel de fonction isolé.

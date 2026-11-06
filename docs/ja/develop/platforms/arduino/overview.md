@@ -12,7 +12,7 @@ tags:
 [OpenSiFli/ArduinoCore-zephyr](https://github.com/OpenSiFli/ArduinoCore-zephyr) は、SF32向けのZephyrベースArduinoコアです。**SiFli SF32LB52 DevKit LCD** でスケッチを実行するほか、周辺機器の実験、デモ、初期プロトタイプを作るのに適しています。
 
 !!! warning "ベータ版コア"
-    OpenSiFliはこのコアを **BETA** としています。機能、API、パッケージ内容、ローダーの動作、リリースは変更される場合があります。製品での採用を決める前に、プロジェクトのREADMEとReleasesで現行の動作を確認してください。
+    OpenSiFliはこのコアを **BETA** とし、テスト用途に限るとしています。製品の基盤として扱わないでください。機能、API、パッケージ内容、ローダーの動作、リリースは変更される場合があります。さらに評価する前に、プロジェクトのREADMEとReleasesで現行の動作を確認してください。
 
 IDEの初期インストール、ボード／ポート選択、ブートローダーのインストール、Blinkの確認については、[Arduinoを始める](../../../getting-started/arduino/getting-started-arduino.md)を参照してください。このページでは、Arduinoが要件に合うかを判断し、初回起動後にArduinoベースのプロジェクトを維持する方法を説明します。
 

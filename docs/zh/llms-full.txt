@@ -311,7 +311,7 @@ OpenSiFli 还发布了开源命令行工具 [`sftool`](https://github.com/OpenSi
 | 找不到构建工具 | 在当前终端中重新执行 `export.sh` / `export.ps1`。 |
 | 无法识别开发板名称 | 查阅 SDK 的支持开发板文档。 |
 | 下载脚本无法打开串口 | 关闭所有串口终端，并检查 USB 转 UART 数据线和接口。 |
-| 烧录没有开始 | 按照开发板文档规定的下载流程操作。以 `sf32lb52-lcd_n16r8` 为例，先选择串口，再重启开发板，并在 2 秒内按 Enter 键开始下载；其他开发板应遵循各自的操作时序。同时检查供电、所选串口和 UART 连接。 |
+| 烧录没有开始 | 按照开发板文档规定的下载流程操作。以 `sf32lb52-lcd_n16r8` 为例，建议重启开发板；采用此流程时，应在重启后 2 秒内按 Enter 键开始下载。其他开发板应遵循各自的操作时序。同时检查供电、所选串口和 UART 连接。 |
 | 串口输出乱码 | 检查波特率，并确认使用数据线连接开发板的 UART 接口，而非仅支持充电的 USB 线缆。 |
 
 </div>
@@ -1111,7 +1111,7 @@ Summary: 构建并烧录 Zephyr 上游支持的 SF32LB52 DevKit LCD 开发板目
 
 # Zephyr 上游版本
 
-自 Zephyr v4.3.0 起，上游 Zephyr 已提供并持续维护 `sf32lb52_devkit_lcd` 开发板支持。请参阅 [v4.3.0 发布说明](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html)和 [SF32LB52 DevKit LCD 开发板文档](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)。本指南将创建 v4.3.0 工作区、构建首个示例并烧录开发板。如果需要更完整的 SF32 官方功能支持，请使用 [SiFli-SDK](../sifli/getting-started-sifli-sdk.md)。
+上游 Zephyr 自 v4.3.0 起支持 `sf32lb52_devkit_lcd` 开发板。本指南使用仍受维护的 Zephyr v4.5.0 新建工作区、构建首个示例并烧录开发板；请参阅 [v4.3.0 发布说明](https://docs.zephyrproject.org/4.3.0/releases/release-notes-4.3.html)、[v4.5.0 发布说明](https://docs.zephyrproject.org/4.5.0/releases/release-notes-4.5.html)和当前的 [SF32LB52 DevKit LCD 开发板文档](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)。如果需要更完整的 SF32 官方功能支持，请使用 [SiFli-SDK](../sifli/getting-started-sifli-sdk.md)。
 
 !!! note "检查开发板功能列表"
     上游开发板定义本身并不能证明所有外设或工作模式都已启用，或已针对产品完成验证。请查看开发板文档中的受支持功能表，并在目标硬件的具体版本上验证所需行为。
@@ -1125,23 +1125,49 @@ Summary: 构建并烧录 Zephyr 上游支持的 SF32LB52 DevKit LCD 开发板目
 
 **软件**
 
-- Zephyr v4.3.0 支持的主机操作系统，并按其[入门指南](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html)进行配置。
+- Zephyr v4.5.0 支持的主机操作系统，并按其[入门指南](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html)进行配置。
 - 按该指南为 ARM Cortex-M 目标安装 Zephyr 主机依赖项和 Zephyr SDK。
 - Git、Python 3 和 `pip`。
 
 ## 准备工具链
 
-先按照 Zephyr 的 [v4.3.0 入门指南](https://docs.zephyrproject.org/4.3.0/develop/getting_started/index.html)完成主机依赖项和 Zephyr SDK 的安装。然后创建 Python 环境，并从对应的 Zephyr tag 初始化工作区：
+先按照 Zephyr 的 [v4.5.0 入门指南](https://docs.zephyrproject.org/4.5.0/develop/getting_started/index.html)完成主机依赖项和 Zephyr SDK 的安装。然后根据所用 shell 运行相应命令，创建 Python 环境并从对应的 Zephyr tag 初始化工作区：
 
 ```bash
 python3 -m venv ~/zephyr-venv
-source ~/zephyr-venv/bin/activate
-pip install west
-west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.3.0 ~/zephyrproject
+. ~/zephyr-venv/bin/activate
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 ~/zephyrproject
 cd ~/zephyrproject
 west update
 west zephyr-export
-pip install -r zephyr/scripts/requirements.txt
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+Windows PowerShell：
+
+```powershell
+py -3 -m venv "$HOME\zephyr-venv"
+& "$HOME\zephyr-venv\Scripts\Activate.ps1"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "$HOME\zephyrproject"
+Set-Location "$HOME\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
+```
+
+Windows 命令提示符：
+
+```bat
+py -3 -m venv "%USERPROFILE%\zephyr-venv"
+call "%USERPROFILE%\zephyr-venv\Scripts\activate.bat"
+python -m pip install west
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.5.0 "%USERPROFILE%\zephyrproject"
+cd /d "%USERPROFILE%\zephyrproject"
+west update
+west zephyr-export
+python -m pip install -r zephyr/scripts/requirements.txt
 ```
 
 执行下方构建和烧录步骤时，请保持此 Python 环境处于激活状态。
@@ -1178,7 +1204,7 @@ west build -b sf32lb52_devkit_lcd samples/hello_world --pristine
 west flash
 ```
 
-如果烧录失败，请检查串口选择、下载模式，以及[开发板文档](https://docs.zephyrproject.org/4.3.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)中的 runner 说明。
+如果烧录失败，请检查串口选择、下载模式，以及[开发板文档](https://docs.zephyrproject.org/4.5.0/boards/sifli/sf32lb52_devkit_lcd/doc/index.html)中的 runner 说明。
 
 ## 打开串口控制台
 
@@ -1190,7 +1216,7 @@ Hello World! sf32lb52_devkit_lcd
 
 ## 选择下一个示例
 
-结合上游开发板文档中的受支持功能表和 [Zephyr 示例目录](https://docs.zephyrproject.org/4.3.0/samples/index.html)，选择接下来要评估的 API 或外设。请先确认该开发板支持相应功能，并启用了所需配置；不要把示例能够运行直接当作产品级验证的依据。
+结合上游开发板文档中的受支持功能表和 [Zephyr 示例目录](https://docs.zephyrproject.org/4.5.0/samples/index.html)，选择接下来要评估的 API 或外设。请先确认该开发板支持相应功能，并启用了所需配置；不要把示例能够运行直接当作产品级验证的依据。
 
 ## 故障排查
 
@@ -1200,8 +1226,8 @@ Hello World! sf32lb52_devkit_lcd
 
 | 现象 | 检查项 |
 |:-----|:-------|
-| `west boards` 中未显示 SF32 目标 | 确认工作区使用上游 Zephyr v4.3.0 或更高版本初始化，并且 `west update` 已完成。 |
-| 编译开始前构建即失败 | 确认 Python 环境已激活、已为 ARM Cortex-M 安装 Zephyr SDK，并已安装 v4.3.0 所需依赖项。 |
+| `west boards` 中未显示 SF32 目标 | 确认工作区使用上游 Zephyr v4.5.0 或更高版本初始化，并且 `west update` 已完成。 |
+| 编译开始前构建即失败 | 确认 Python 环境已激活、已为 ARM Cortex-M 安装 Zephyr SDK，并已安装 v4.5.0 所需依赖项。 |
 | 开发板构建成功但无法烧录 | 确认已安装 `sftool` 且其位于 `PATH` 中，串口选择正确，并且开发板处于串口下载模式。 |
 | 串口没有输出 | 检查 `usart1`、`1000000` 波特率、USB 转 UART 连接，以及该串口是否已被其他终端占用。 |
 | 外设示例运行失败 | 查看开发板的受支持功能表和示例配置；不要假设基础开发板目标已启用所有外设。 |
@@ -2005,7 +2031,7 @@ SDK 提供多种标准和厂商 Profile 的示例实现，包括：
 - **经典蓝牙音频**——A2DP 用于音频流、AVRCP 用于播放控制、HFP 用于通话。技术成熟，并与现有手机和耳机广泛兼容。
 - **LE Audio**——[基础音频应用规范（Basic Audio Profile，BAP）](https://www.bluetooth.com/specifications/specs/basic-audio-profile-1-0-2/)定义了管理单播和广播 LE Audio 音频流的流程。SDK 提供广播发送端（Source）和广播接收端（Sink）示例，也提供 LE Audio 广播发送端与经典蓝牙混合工作的示例，适用于过渡期需要兼容两类方案的产品。
 
-两条路径都需要稳定的时序、缓冲和音频采样数据的可靠传输，通常使用 DMA。当 SF32LB52x/56x/58x 所支持的蓝牙音频角色和 SDK 配置满足产品要求时，可选用它们。SF32LB55x 仅支持 BLE，不能提供经典蓝牙音频，但这并不意味着它没有本地音频能力。DMA 和缓冲区设计请参阅[音频概览](../audio/overview.md)及[蓝牙处理器架构](processor.md#bluetooth-audio-and-le-audio)。
+两条路径都需要稳定的时序、缓冲和音频采样数据的可靠传输，通常使用 DMA。当 SF32LB52x/56x/58x 所支持的蓝牙音频角色和 SDK 配置满足产品要求时，可选用它们。SiFli SDK 的 A2DP 共享示例列出了 `eh-lb57x` 开发板，并演示 A2DP 音乐共享与 HFP 通话中继；这并不能证明所有 SF32LB57x 料号和角色都受支持，需核实具体 SKU、角色和 SDK 配置。SF32LB55x 仅支持 BLE，不能提供经典蓝牙音频，但这并不意味着它没有本地音频能力。DMA 和缓冲区设计请参阅[音频概览](../audio/overview.md)及[蓝牙处理器架构](processor.md#bluetooth-audio-and-le-audio)。
 
 ## Sibles 服务实现模式
 
@@ -2191,40 +2217,22 @@ SF32 面向紧凑型 AIoT 和可穿戴产品。此类产品既要求 UI 流畅�
 
 <div align="center"><em>图：图形资源与显示流程</em></div>
 
-```text
-Source images, fonts, and animations
-        │
-        ▼
-GraphicsTool converts supported resources to eZip or eZip-A
-        │
-        ▼
-Compressed assets in NOR Flash, PSRAM, NAND, or file storage
-        │
-        ▼
-eZip hardware decoder expands an asset when required
-        │
-        ▼
-LVGL or another UI framework + graphics/display driver
-        │
-        ├── CPU fallback rendering
-        │
-        └── ePicasso pixel acceleration
-        │
-        ▼
-Final rendered bitmap in a draw buffer or framebuffer
-        │
-        ├── Uncompressed display path
-        │
-        └── Optional: extDMA compresses it into TurboPixel
-                    │
-                    ▼
-             TurboPixel framebuffer in PSRAM
-        │
-        ▼
-Display controller transfers pixels to the panel
-        │
-        ▼
-SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
+```mermaid
+flowchart TD
+    A["源图像、字体和动画"] --> B["GraphicsTool 将受支持的资源转换为 eZip 或 eZip-A"]
+    B --> C["压缩资源存储在 NOR Flash、PSRAM、NAND 或文件存储中"]
+    C --> D["eZip 硬件解码器按需展开资源"]
+    D --> E["LVGL 或其他 UI 框架 + 图形/显示驱动"]
+    E --> F["CPU 回退渲染"]
+    E --> G["ePicasso 像素加速"]
+    F --> H["绘图缓冲区或帧缓冲区中的最终渲染位图"]
+    G --> H
+    H --> I["未压缩显示路径"]
+    H --> J["可选：extDMA 将位图压缩为 TurboPixel"]
+    J --> K["PSRAM 中的 TurboPixel 帧缓冲区"]
+    I --> L["显示控制器将像素传输到面板"]
+    K --> L
+    L --> M["面板接口：SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI"]
 ```
 
 该路径可按需配置，并非所有产品都必须使用 eZip、ePicasso、TurboPixel 或完整帧缓冲区。各图形功能是否可用及其连接方式，取决于所选器件、SDK、显示接口、面板和驱动配置。当前 OpenSiFli LCDC 头文件仅在启用 `HAL_EXTDMA_MODULE_ENABLED` 且芯片系列条件允许时定义 `LCDC_SUPPORTED_COMPRESSED_LAYER`；SF32LB52x 和 SF32LB57x 被排除在外。源码注释还指出 LCPU 路径尚未启用。已发布的 SDK LCDC 功能表将 SF32LB55x 的压缩图层解压标为不支持，因此 55x 应视为有条件支持，而非已验证的完整运行时能力。请结合具体 SDK 版本、核心、构建配置和目标硬件验证；详见 [TurboPixel](turbopixel.md#availability-in-the-sf32-family)。
@@ -2949,6 +2957,8 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 
 [^1]: STAR-MC1 是安谋科技（Arm China）的可配置 Armv8-M Mainline 嵌入式 CPU IP。思澈科技（SiFli）在兼容的 SF32 器件中，将其标注为 Arm Cortex-M33 STAR-MC1 应用处理器。其 Cortex-M33 级软件模型有助于沿用既有 Cortex-M33 固件、中间件、RTOS 移植和工具链，但仍需完成器件专用的常规集成工作。CU、SP 和 SE 配置主要在缓存、TCM、XIPU 和 TrustZone 能力上有所不同；Arm 自定义指令/CDE 和协处理器接口属于可选能力，须针对具体 SF32 料号核实。思澈科技（SiFli）文档会依上下文使用 ***Arm Cortex-M33 STAR-MC1*** 或 ***Arm Cortex-M33***。
 
+<div id="_1"></div>
+
 ## 应用场景
 
 **SF32LB52x 适用于**以蓝牙为核心、且成本、集成度与电池续航是主要设计考量的产品，包括：
@@ -2996,7 +3006,11 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 
 ---
 
+<div id="_2"></div>
+
 ## 特性与规格
+
+<div id="_3"></div>
 
 ### 计算与存储
 
@@ -3005,6 +3019,8 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 - 32 KB 指令缓存 + 16 KB 数据缓存
 - 512 KB 应用 SRAM + 64 KB 蓝牙控制器 SRAM
 - 合封存储随具体型号变化，可从 1 MB QSPI-NOR 到 16 MB OPI-PSRAM
+
+<div id="_4"></div>
 
 ### 图形与音频
 
@@ -3016,6 +3032,8 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 - 1 路 24 位音频 ADC，99 dB 信噪比
 - 1 路 24 位音频 DAC，109 dB 信噪比
 
+<div id="_5"></div>
+
 ### 无线连接
 
 - 双模蓝牙 5.3（经典蓝牙 + BLE）
@@ -3026,11 +3044,15 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 - 专用 Arm Cortex-M33 STAR-MC1 蓝牙控制核心，64 KB SRAM @ 24 MHz
 - 产品简介给出的睡眠电流为 2 μA；系统级待机电流还取决于工作模式和板级漏电
 
+<div id="_6"></div>
+
 ### 安全
 
 - AES/HASH/CRC 硬件加速器
 - TRNG
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### 外设与 I/O
 
@@ -3046,6 +3068,8 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 - RTC 与看门狗定时器
 - 按型号系列提供 44 或 45 路 GPIO
 
+<div id="_7"></div>
+
 ### 电源
 
 - **电池供电组：SF32LB520/3/5/7** —— 由单节锂离子/锂聚合物电池直接供电，适用于采用集成充电路径的设计。
@@ -3055,6 +3079,8 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 - **外部稳压供电 1.8 V 组：SF32LB52D** —— 面向特殊超低功耗 1.8 V 系统，与 3.3 V 型号在电气上不能互换。
 
 电池供电组与外部稳压供电组是相互独立的芯片配置，两个供电系列之间**不引脚兼容**。
+
+<div id="_8"></div>
 
 ## 系列型号
 
@@ -3088,7 +3114,7 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 
 </div>
 
-本表依据思澈科技（SiFli）的[芯片型号指南](https://wiki.sifli.com/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)列出主要型号，并非完整的订购型号目录。当前链接的外部供电版数据手册还列有 **SF32LB52HUD6**（1.8 V、QFN68L、128 Mb PSRAM）；硬件设计指南中也使用了 `52AUx6` 和 `52D/F/HUx6` 等后缀写法。现有资料没有给出一份统一一致的型号表。设计定型前，任何此类 SKU 的订购状态、供电限制、合封存储接口和 I/O 规格都应以对应的最新版数据手册为准。
+本表依据思澈科技（SiFli）的[芯片型号指南](https://wiki.sifli.com/silicon/%E8%8A%AF%E7%89%87%E5%9E%8B%E5%8F%B7%E6%8C%87%E5%8D%97.html)列出主要型号，并非完整的订购型号目录。链接的 [DS5202-SF32LB52X 数据手册 V0.2.6](https://downloads.sifli.com/docs/Datasheet/SF32LB52X/DS5202-SF32LB52X-Datasheet%20V0p2p6.pdf) 在修订记录（2025-03-12）中提到 **SF32LB52HUD6**，但当前表 5-7 的订购信息未列出该型号。这条历史记录不能证明该型号目前可订购，也不能核实其规格。硬件设计指南另有 `52AUx6` 和 `52D/F/HUx6` 等后缀写法；设计定型前，请通过思澈科技当前官方资料核实准确的可订购料号及其规格。
 
 ## 集成路径
 
@@ -3097,7 +3123,7 @@ SF32LB52x 是思澈科技（SiFli）面向入门级智能可穿戴设备、紧�
 1. **验证固件路径。** 从 [SiFli-SDK 快速开始](../../getting-started/sifli/getting-started-sifli-sdk.md)开始，再通过 [SiFli-SDK 工作流](../../develop/platforms/sifli-sdk/overview.md)和[示例](../../develop/examples/index.md)验证所需外设和蓝牙行为。
 2. **选择集成载体。** 如果产品适合使用已集成 RF 的模组，请评估 [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md)；否则选择最接近的 [SF32LB52 开发板](../devkits/SF32LB52-DevKit-LCD.md)，用于早期固件和外设验证。
 3. **进行硬件设计与评审。** 在发布原理图或布局前，使用本地[硬件设计指南](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)，包括其[原理图核对表](../../hardware/chip-guides/SF32LB52x_schematic_checklist.md)和 [PCB 布局核对表](../../hardware/chip-guides/SF32LB52x_pcb_layout_checklist.md)。确认正确的供电系列基线：520/3/5/7、52B/E/G/J 或 52D。
-4. **核对权威来源。** 针对准确的可订购型号和封装，核对适用的[数据手册](#development-resources)，以及思澈科技（SiFli）的 [520/3/5/7 硬件设计指南]或 [52B/D/E/G/J 硬件设计指南]。
+4. **核对权威来源。** 针对准确的可订购型号和封装，核对适用的[数据手册](#development-resources)，以及思澈科技（SiFli）的[520/3/5/7 硬件设计指南][硬件设计指南(520/3/5/7)]或[52B/D/E/G/J 硬件设计指南][硬件设计指南(52B/D/E/G/J)]。
 
 <!-- uf-faq:start -->
 ## 常见问题
@@ -3123,11 +3149,17 @@ SPI / DSPI / QSPI / 8080 / EPD / JDI。各接口适用型号见[按器件划分�
 请先阅读 [SF32LB52x 硬件设计指南](../../hardware/chip-guides/SF32LB52x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求；投板前再使用原理图与布局检查清单。
 <!-- uf-faq:end -->
 
+<div id="_9"></div>
+
 ## 相关产品
+
+<div id="_10"></div>
 
 ### 模组
 
 [SF32LB52-MOD-1](../modules/SF32LB52-MOD-1.md) 集成 SF32LB525UC6 芯片及其 RF 匹配网络；标准配置下，芯片还合封 8 MB OPI-PSRAM。模组尺寸为 27.9 × 18.0 × 3.1 mm，适合希望采用 SF32LB52 级方案、同时减少芯片级 RF 布局与验证工作量的项目。
+
+<div id="_11"></div>
 
 ### 开发套件
 
@@ -3135,6 +3167,8 @@ SPI / DSPI / QSPI / 8080 / EPD / JDI。各接口适用型号见[按器件划分�
 - [SF32LB52-DevKit-Core-3p3](../devkits/SF32LB52-DevKit-Core-3p3.md) 是面向 52B/52J 类外部供电设计的紧凑型核心板，适合快速完成固件、GPIO 与低功耗启动调试。
 - [SF32LB52-DevKit-Nano](../devkits/SF32LB52-DevKit-Nano.md) 是 52 系列中尺寸最小的开发板，适合目标产品对尺寸有限制的场景。
 - [SF32LB52-DevKit-ULP](../devkits/SF32LB52-DevKit-ULP.md) 更偏向低功耗与电池应用评估，适合做紧凑型方案实验。
+
+<div id="_12"></div>
 
 ### 参考产品
 
@@ -3151,6 +3185,8 @@ Summary: SF32LB55x：面向可穿戴与紧凑型 HMI 产品的主流超低功耗
 
 # SF32LB55x
 
+<div id="_1"></div>
+
 ## 概览
 
 SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产品，这类产品需要比入门级蓝牙（Bluetooth）MCU 更强的显示能力、更充裕的内存余量和更多的封装选择。
@@ -3164,6 +3200,8 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 思澈科技（SiFli）的芯片型号指南还指出，SF32LB55x 的定义早于后续的 52/56/58 系列，因此其型号后缀并未完全遵循这些系列采用的编号规则。选型时应以完整的可订购料号和对应封装的能力表为准，不要仅凭后缀推断器件的全部特性。
 
 [^1]: STAR-MC1 是安谋科技（Arm China）的可配置 Armv8-M Mainline 嵌入式 CPU IP。思澈科技（SiFli）在兼容的 SF32 器件中，将其标注为 Arm Cortex-M33 STAR-MC1 应用处理器。其 Cortex-M33 级软件模型有助于沿用既有 Cortex-M33 固件、中间件、RTOS 移植和工具链，但仍需完成器件专用的常规集成工作。CU、SP 和 SE 配置主要在缓存、TCM、XIPU 和 TrustZone 能力上有所不同；Arm 自定义指令/CDE 和协处理器接口属于可选能力，具体功能以目标 SF32 料号为准。思澈科技（SiFli）文档会依上下文使用 ***Arm Cortex-M33 STAR-MC1*** 或 ***Arm Cortex-M33***。
+
+<div id="_2"></div>
 
 ## 应用场景
 
@@ -3185,6 +3223,8 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 - 用户可编程的低功耗处理器
 - 比 SF32LB52x 更多的 GPIO 或更密集的封装选项
 - NOR、NAND、eMMC、QSPI-PSRAM 或 OPI-PSRAM 的外部存储灵活性
+
+<div id="_3"></div>
 
 ## 开发资源
 
@@ -3220,7 +3260,11 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 
 ---
 
+<div id="_4"></div>
+
 ## 特性与规格
+
+<div id="_5"></div>
 
 ### 计算与存储
 
@@ -3231,6 +3275,8 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 - 1,088 KB 应用 SRAM，其中包含 64 KB 保持型 SRAM
 - 224 KB 低功耗 SRAM，全部为保持型 SRAM
 - 支持 NOR、NAND、eMMC、QSPI-PSRAM 和 OPI-PSRAM 外部存储
+
+<div id="ai"></div>
 
 ### 图形、显示与 AI
 
@@ -3244,6 +3290,8 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 - 双 LCD 控制器；常开显示（always-on display）接口和双屏能力取决于所选型号与封装
 - 面向 TinyML 的神经网络矩阵加速器，最高 1.92 GOPS、5.73 TOPS/W
 
+<div id="_6"></div>
+
 ### 无线连接
 
 - 低功耗蓝牙（Bluetooth Low Energy，BLE）5.2
@@ -3252,11 +3300,15 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 - 最大发射功率 10 dBm
 - 接收峰值电流：3.3 V 下 2.0 mA
 
+<div id="_7"></div>
+
 ### 安全
 
 - AES 与 CRC 硬件加速器
 - 真随机数发生器（TRNG）
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### 外设与 I/O
 
@@ -3287,6 +3339,8 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 - 外设任务控制器（PTC）
 - GPIO 数量因封装而异，详见下方封装表和资料差异说明
 
+<div id="_8"></div>
+
 ### 电源与封装
 
 - 供电范围因型号而异：SS6600A8 为 2.97 V 至 3.63 V；551U4O5 和表列 BGA 型号为 1.71 V 至 3.63 V
@@ -3295,6 +3349,8 @@ SF32LB55x 系列是主流超低功耗 AIoT 微控制器，面向 BLE 连接产�
 - RTC 唤醒下睡眠电流：600 nA
 - 引脚唤醒下睡眠电流：280 nA
 - 封装选项：QFN68L、BGA145、BGA169
+
+<div id="_9"></div>
 
 ## 系列型号
 
@@ -3332,6 +3388,8 @@ SF32LB55x 提供 QFN 与 BGA 封装。由于 GPIO 数量、合封存储、显示
 
 针对 SF32LB557VD3A6，思澈科技（SiFli）当前的芯片型号指南和 DS5501 V1.7.2 数据手册表 0-1 均列出 HCPU 71 路 + LCPU 42 路，共 113 路 GPIO。但该数据手册的特性摘要和封装汇总，以及 PB0001 V1.3 产品简介，又将 BGA169 列为 119 路 GPIO（HCPU 71 路 + LCPU 48 路）。因此，官方资料之间存在冲突，DS5501 数据手册内部也不一致。本页按型号明细表和当前芯片型号指南采用 113 路。分配管脚或定版前，请根据所选封装的球位图核实可用 GPIO，并向思澈科技（SiFli）确认可订购料号；同时核对各型号的供电与温度等级、完整料号及合封存储配置。相关资料见 [DS5501 V1.7.2 数据手册][数据手册]、[PB0001 V1.3 产品简介][产品简介]和[思澈科技（SiFli）芯片型号指南]。BGA145 和 BGA169 封装尺寸均为 7 × 7 × 0.94 mm，球距为 0.5 mm。
 
+<div id="_10"></div>
+
 ## 集成路径
 
 可按以下步骤，将 SF32LB55x 的初步选型推进到设计验证：
@@ -3345,7 +3403,7 @@ SF32LB55x 提供 QFN 与 BGA 封装。由于 GPIO 数量、合封存储、显示
 ## 常见问题
 
 **SF32LB55x 的主要规格是什么？**
-SF32LB55x 配备应用 CPU（Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33 @48 MHz，用户可编程内核）和 1,312 KB SRAM，仅支持低功耗蓝牙（BLE）。图形：ePicasso 1.0。封装：QFN68L / BGA145 / BGA169（7 × 7 mm (QFN68L)）。USB 2.0 FS。
+SF32LB55x 配备应用 CPU（Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33 @48 MHz，用户可编程内核）和 1,312 KB SRAM，仅支持低功耗蓝牙（BLE）。图形：ePicasso 1.0。本页前文的系列概述将图形引擎称为 ePicasso 2.5D。现有资料未说明这一名称与 ePicasso 1.0 的关系；请勿据此推断两者等同或代表代际变化，并应依据当前官方资料核实准确订购型号的图形能力。封装：QFN68L / BGA145 / BGA169（7 × 7 mm (QFN68L)）。USB 2.0 FS。
 
 **SF32LB55x 支持哪些显示接口？**
 SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI。各接口适用型号见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。这是整个系列的接口汇总，并非每个订货型号或封装都支持全部接口；请查阅所链接的接口矩阵。
@@ -3363,11 +3421,17 @@ SS6600A8 需要 2.97–3.63 V；本页列出的 SF32LB551U4O5 和 BGA 型号采�
 请先阅读 [SF32LB55x 硬件设计指南](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求；投板前再使用原理图与布局检查清单。
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## 相关产品
+
+<div id="_12"></div>
 
 ### 开发套件
 
 建议以官方硬件应用说明、参考原理图和核对表作为封装选择、电源树定义、显示接口规划、存储选型、RF 布局以及量产测试规划的起点。
+
+<div id="_13"></div>
 
 ### 参考产品
 
@@ -3381,6 +3445,8 @@ Summary: SF32LB56x：先进的超低功耗双模蓝牙 MCU 系列，面向需要
 
 # SF32LB56x
 
+<div id="_1"></div>
+
 ## 概览
 
 SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模蓝牙（Bluetooth）、更强图形能力、集成音频、外部存储，以及比 SF32LB 系列低阶型号更灵活的显示和存储接口的产品。
@@ -3392,6 +3458,8 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 思澈科技（SiFli）的芯片型号指南还提示了 56x 家族的一个关键选型点：不同封装支持的显示接口组合并不完全相同，因此准确料号和封装选择应被视为前期架构决策，而不是后期 PCB 细节。
 
 [^1]: STAR-MC1 是安谋科技（Arm China）的可配置 Armv8-M Mainline 嵌入式 CPU IP。思澈科技（SiFli）在兼容的 SF32 器件中，将其标注为 Arm Cortex-M33 STAR-MC1 应用处理器。其 Cortex-M33 级软件模型有助于沿用既有 Cortex-M33 固件、中间件、RTOS 移植和工具链，但仍需完成器件专用的常规集成工作。CU、SP 和 SE 配置主要在缓存、TCM、XIPU 和 TrustZone 能力上有所不同；Arm 自定义指令/CDE 和协处理器接口属于可选能力，具体功能以目标 SF32 料号为准。思澈科技（SiFli）文档会依上下文使用 ***Arm Cortex-M33 STAR-MC1*** 或 ***Arm Cortex-M33***。
+
+<div id="_2"></div>
 
 ## 应用场景
 
@@ -3415,6 +3483,8 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 - 通过 SDIO 连接外部 Wi-Fi；通过 SD/SDIO 或 eMMC 扩展外部存储
 - 通过 WBBGA175 获取更高 GPIO 数量
 - 为 TinyML、音频和 UI 并发处理留出更多余量
+
+<div id="_3"></div>
 
 ## 开发资源
 
@@ -3454,7 +3524,11 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 
 ---
 
+<div id="_4"></div>
+
 ## 特性与规格
+
+<div id="_5"></div>
 
 ### 计算与存储
 
@@ -3466,6 +3540,8 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 - LCPU 内存系统：16 KB I-cache + 8 KB D-cache，160 KB 保持型 SRAM
 - 提供 512 KB 或 1 MB 封装内 QSPI-NOR 选项
 - 支持 QSPI-NOR、SPI-NAND、QPI/OPI-PSRAM、SD/SDIO 和 eMMC 外部存储
+
+<div id="ai"></div>
 
 ### 图形、显示与 AI
 
@@ -3480,6 +3556,8 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 - TurboPixel：extDMA 以固定压缩比对最终帧缓冲区进行有损压缩，再由显示控制器解压，从而降低 PSRAM 带宽和容量需求
 - 面向 TinyML 的神经网络矩阵加速器，最高 1.92 GOPS，效率超过 10 TOPS/W
 
+<div id="_6"></div>
+
 ### 音频与无线连接
 
 - 双模蓝牙 5.3，支持 BLE Audio
@@ -3490,11 +3568,17 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 - 1 个 HiFi 24 位音频 ADC，信噪比 99 dB
 - 2 路 PDM 接口和 1 路 I2S 接口
 
+**DAC 信噪比资料差异：**[PB0056 V1.1](https://downloads.sifli.com/silicon/PB0056-SF32LB56x-Product%20Brief%20V1p1.pdf) 和 [UM5601 V1.0.2](https://downloads.sifli.com/user%20manual/UM5601-SF32LB56x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V1p0p2.pdf) 标为 108 dB，而 [DS5601 V1.9.2](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-Datasheet%20V1p9p2.pdf) 标为 109 dB。本页链接的较新版本 PB0056 V1.2、DS5601 V1.9.3 和 UM5601 V1.0.5 尚未据此消除这一差异，因此目前无法确定应以哪个数值为准；使用前请按准确型号核对当前资料。
+
+<div id="_7"></div>
+
 ### 安全
 
 - AES、HASH 与 CRC 硬件加速器
 - 真随机数发生器（TRNG）
 - PSA Certified Level 1
+
+<div id="io"></div>
 
 ### 外设与 I/O
 
@@ -3511,6 +3595,8 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 - 外设任务控制器（PTC）
 - 最多 120 路 GPIO，取决于封装
 
+<div id="_8"></div>
+
 ### 电源与封装
 
 - 供电范围：1.71 V 至 3.63 V
@@ -3519,6 +3605,8 @@ SF32LB56x 是先进的超低功耗 AIoT 微控制器系列，面向需要双模�
 - RTC 唤醒下睡眠电流：600 nA
 - 引脚唤醒下睡眠电流：300 nA
 - 封装选项：QFN68L 与 WBBGA175
+
+<div id="_9"></div>
 
 ## 系列型号
 
@@ -3542,6 +3630,8 @@ SF32LB56x 同时覆盖紧凑型 QFN68L 与高 I/O 的 WBBGA175 料号，并提�
 | SF32LB567VND36 | WBBGA175 | 79 / 41 | 16 MB OPI-PSRAM + 1 MB QSPI-NOR Flash | DPI / QSPI / 8080 / JDI | 适合需要更大单一 PSRAM 区域与更复杂显示布线的高 I/O 设计，但不是 56 模组的标准芯片选择 |
 
 </div>
+
+<div id="_10"></div>
 
 ## 集成路径
 
@@ -3576,15 +3666,23 @@ SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB。各接口适用型号见[按器件�
 请先阅读 [SF32LB56x 硬件设计指南](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求；投板前再使用原理图与布局检查清单。
 <!-- uf-faq:end -->
 
+<div id="_11"></div>
+
 ## 相关产品
+
+<div id="_12"></div>
 
 ### 模组
 
 [SF32LB56-MOD](../modules/SF32LB56-MOD.md) 将 SF32LB566VCB36 芯片、存储器、RF 设计与天线选项整合在一块可直接集成的模组中。若项目希望在保留 SF32LB56x 能力的同时降低 RF 布局、天线匹配、晶振布局与高速存储集成风险，它是很实用的方案。
 
+<div id="_13"></div>
+
 ### 开发板
 
 [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md) 开发板适合作为固件启动调试、显示验证、音频与存储测试、RF 检查以及功耗分析的起点，尤其适合在投入芯片级或模组级硬件开发前先完成软件与系统验证。
+
+<div id="_14"></div>
 
 ### 参考产品
 
@@ -3850,6 +3948,8 @@ Summary: SF32LB58x：SF32LB5x 系列旗舰档 AIoT MCU，面向图形、显示�
 
 # SF32LB58x
 
+<div id="_1"></div>
+
 ## 概览
 
 SF32LB58x 系列属于 SF32LB5x 家族中的旗舰级产品，面向需要高级图形、大容量内存、双模蓝牙（Bluetooth）、丰富音频和显示接口以及大量 GPIO 的电池供电 AIoT 产品，同时无需转向规模更大的应用处理器平台。
@@ -3859,6 +3959,8 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 思澈科技（SiFli）资料显示，SF32LB58x 片上集成 3,744 KB SRAM；不同 SKU 提供合封 NOR Flash、OPI-PSRAM 和 HPI-PSRAM 的不同组合。该系列还支持 MIPI DSI 等显示接口、矢量图形加速和 USB 2.0 High-Speed，并采用高 I/O 数量的 BGA 封装。若设计需要高分辨率 UI、大量图形资源、通过 SDIO 连接外部 Wi-Fi，或需要足够的计算与内存资源来运行边缘 AI、传感器融合任务，可以评估 SF32LB58x。
 
 [^1]: STAR-MC1 是安谋科技（Arm China）的可配置 Armv8-M Mainline 嵌入式 CPU IP。思澈科技（SiFli）在兼容的 SF32 器件中，将其标注为 Arm Cortex-M33 STAR-MC1 应用处理器。其 Cortex-M33 级软件模型有助于沿用既有 Cortex-M33 固件、中间件、RTOS 移植和工具链，但仍需完成器件专用的常规集成工作。CU、SP 和 SE 配置主要在缓存、TCM、XIPU 和 TrustZone 能力上有所不同；Arm 自定义指令/CDE 和协处理器接口属于可选能力，具体功能以目标 SF32 料号为准。思澈科技（SiFli）文档会依上下文使用 ***Arm Cortex-M33 STAR-MC1*** 或 ***Arm Cortex-M33***。
+
+<div id="_2"></div>
 
 ## 应用场景
 
@@ -3880,6 +3982,8 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 - 需要通过 SDIO 连接外部 Wi-Fi
 - 需要更大的帧缓冲、音频、图形或 AI 模型内存
 - 需要较高 GPIO 数量或多路高速外部接口
+
+<div id="_3"></div>
 
 ## 开发资源
 
@@ -3907,7 +4011,11 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 
 ---
 
+<div id="_4"></div>
+
 ## 特性与规格
+
+<div id="_5"></div>
 
 ### 计算与存储
 
@@ -3916,6 +4024,8 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 - 合封 NOR Flash 选项的封装内总容量为 1 MB 至 8 MB，具体取决于 SKU
 - 可选合封 OPI-PSRAM 或 HPI-PSRAM；HPI-PSRAM 最高为 2 × 32 MB，具体取决于 SKU
 - 外部 NOR 或 SPI NAND Flash 可通过 MPI3/MPI4 连接；SD NAND、eMMC、SD 卡或外部 Wi-Fi 可通过 SDIO 连接。具体可用组合取决于接口选择和引脚分配。
+
+<div id="ai"></div>
 
 ### 图形、显示与 AI
 
@@ -3931,6 +4041,8 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 - 支持 SPI、DSPI、QSPI（包括 SPI 电子纸）、MCU8080、JDI、RGB/DPI（RGB888 或 RGB565）与 MIPI DSI 显示接口
 - 支持 MIPI DSI 与 SPI、DSPI 或 QSPI 组合的双屏异显
 - 适用于本地边缘 AI、机器学习和传感器融合类任务
+
+<div id="_6"></div>
 
 ### 音频与无线连接
 
@@ -3969,11 +4081,15 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 - RTC、看门狗、GPIO 唤醒、PBR 唤醒、PWM、I2C、SPI 与通用模拟接口
 - BGA256 封装，适合高密度设计
 
+<div id="_7"></div>
+
 ### 电源与封装
 
 - 供电范围：1.71 V 至 3.63 V
 - BGA256 封装，尺寸 6.5 × 8.5 × 0.94 mm，引脚间距 0.4 mm
 - 需要 HDI PCB；量产设计建议采用 6HDI-2 叠层
+
+<div id="_8"></div>
 
 ## 系列型号
 
@@ -4003,6 +4119,8 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 - 外部存储与外部 Wi-Fi 接口需求
 - BGA256、0.4 mm 间距 HDI 布局对应的 PCB 制造能力
 
+<div id="_9"></div>
+
 ## 集成路径
 
 使用以下顺序将 SF32LB58x 的初步选型推进为已验证的设计：
@@ -4016,7 +4134,7 @@ SF32LB58x 采用由 3 个 Arm Cortex-M33 STAR-MC1[^1] 核心组成的异构架�
 ## 常见问题
 
 **SF32LB58x 的主要规格是什么？**
-SF32LB58x 配备应用 CPU（2× Cortex-M33 @240 MHz）、低功耗内核（Cortex-M33 @48/96 MHz，用户可编程内核）和 3.7 MB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 2.0 + Vivante GCNanoUltraV（矢量）。封装：BGA256（8.5 × 6.5 mm）。USB 2.0 HS。
+SF32LB58x 配备应用 CPU（2× Cortex-M33 @240 MHz）和低功耗内核（用户可编程 Cortex-M33，最高可调至 96 MHz；另有 48 MHz 这一 CoreMark 功耗测量点，但现有资料未证明它是第二个规定工作频率），并集成 3.7 MB SRAM，支持双模蓝牙（经典蓝牙 + BLE）。图形：ePicasso 2.0 + Vivante GCNanoUltraV（矢量）。封装：BGA256（8.5 × 6.5 mm）。USB 2.0 HS。
 
 **SF32LB58x 支持哪些显示接口？**
 SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI。各接口适用型号见[按器件划分的接口矩阵](../../learn/graphics/display-controller.md#per-device-interface-matrix)。
@@ -4034,15 +4152,23 @@ SPI / DSPI / QSPI / 8080 / EPD / JDI / RGB / MIPI。各接口适用型号见[按
 请先阅读 [SF32LB58x 硬件设计指南](../../hardware/chip-guides/SF32LB58x_hardware_design_guide.md)，了解原理图、电源、时钟/RF 和 PCB 布局要求；投板前再使用原理图与布局检查清单。
 <!-- uf-faq:end -->
 
+<div id="_10"></div>
+
 ## 相关产品
+
+<div id="_11"></div>
 
 ### 模组
 
 [SF32LB58-MOD](../modules/SF32LB58-MOD.md) 将 SF32LB586VDD36 芯片、射频匹配网络，以及封装内 HPI-PSRAM 与存储选项整合为可直接导入设计的模组。若项目需要 58 系列的能力，又希望在硬件开发早期降低 RF、BGA 与存储布局风险，可使用该模组。
 
+<div id="_12"></div>
+
 ### 开发板
 
 [SF32LB58-DevKit-LCD](../devkits/SF32LB58-DevKit-LCD.md) 是电源树、显示、存储、音频、RF、USB 和 SDIO 设计决策的起点。
+
+<div id="_13"></div>
 
 ### 参考产品
 
@@ -4251,6 +4377,8 @@ USB Type-C 供电时，板载 LDO 将 VBUS 的 5 V 转换为 3.3 V。
 | 24 | PA_32 | **PA32**、UART、I2C、GPTIM、GPADC4 | PD |
 
 </div>
+
+板卡概述列出 6 个 GPADC 通道，而此引脚功能表在 PA28–PA34 上列出 GPADC0–GPADC6。思澈科技 SDK 将 ADC CH7 映射到 VBAT。这些资料不足以证明板上有 7 路可同时使用的外部输入，因此板级通道数仍未确定；连接外部模拟信号前，请核对准确的板卡版本、引脚复用和通道配置。参见[思澈科技 ADC 指南](https://docs.sifli.com/projects/sdk/latest/sf32lb56x/app_note/adc.html)。
 
 ### LCD、音频与调试排针
 
@@ -4566,7 +4694,13 @@ USB 转 UART 端口是主要的固件下载和日志接口。
 | 模组引脚 | 信号 | 开发板功能 |
 | :--- | :--- | :--- |
 | PA44 | VBUS_DET | 充电器插入检测 |
-| PA43..PA37 | DB7..DB2 | MCU/8080 LCD 数据 |
+| PA43 | DB7 | MCU/8080 LCD 数据 |
+| PA42 | DB6 | MCU/8080 LCD 数据 |
+| PA41 | DB5 | MCU/8080 LCD 数据 |
+| PA40 | DB4 | MCU/8080 LCD 数据 |
+| PA39 | DB3 | MCU/8080 LCD 数据 |
+| PA38 | GPIO | 通用输入输出 |
+| PA37 | DB2 | MCU/8080 LCD 数据 |
 | PA08..PA07 | DB1..DB0 / QSPI D3..D2 | LCD 数据 |
 | PA06 | DC / QSPI D1 | LCD 数据 / 命令 |
 | PA05 | RD / QSPI D0 | LCD 数据 |
@@ -4578,7 +4712,7 @@ USB 转 UART 端口是主要的固件下载和日志接口。
 | PA33 / PA30 | I2C SDA / SCL | 触摸面板 |
 | PA31 / PA09 | 触摸 INT / RST | 触摸面板 |
 | PA24, PA25, PA28, PA29 | SPI1 | TF 卡接口 |
-| PA26 | 卡检测 / LED | 共用功能 |
+| PA26 | SD 卡检测 / 外部 Flash2 片选 / GPIO LED | V1.2.0 共用功能；请确认具体版本 |
 | PA20 / PA27 | UART RX/TX | 用户 UART |
 | PA18 / PA19 | 调试 UART RX/TX | 下载与软件调试 |
 | PA10 | AU_PA_EN | 音频功放使能 |
@@ -5070,6 +5204,12 @@ SF32LB52-DevKit-ULP 也被称为 **立创黄山派**、**LCKFB-HSPI-SF32LB52-ULP
 - 容量大于 450 mAh 的锂离子电池
 - 当需要同时进行 UART 调试和原生 USB 测试时，第二根 USB 数据线
 
+<div id="_1"></div>
+<div id="board-einrichtung-und-startmodi"></div>
+<div id="configuracao-da-placa-e-modos-de-inicializacao"></div>
+<div id="configuracion-y-modos-de-arranque-de-la-placa"></div>
+<div id="configuration-de-la-carte-et-modes-de-demarrage"></div>
+
 ### 开发板设置与启动模式
 
 将主机连接到开发板的 USB Type-C UART 接口，然后打开 SifliTrace 并选择正确的 COM 口。
@@ -5151,7 +5291,7 @@ SiFli-SDK 中该板的精确构建目标名为 `sf32lb52-lchspi-ulp`；请在 `s
 
 开发板采用 AMOLED 显示链路，并引出一组 22 针 QSPI FPC 信号。思澈科技（SiFli）V1.0.0 表格将第 5–10 针标为 NC；下表列出全部 22 个位置，并明确标出这些未连接的引脚。
 
-屏幕板标注还区分了连接 LCD 模组的 22 针 FPC 接口，以及连接核心板的 24 针板对板（B2B）连接器。装配前请根据具体版本确认这两组接口。
+**接口数量存在来源不一致，选型前请核实：**SiFli 指南正文称，专用显示接口通过 22 针 FPC 和 40 针排针引出；屏幕板图则标注了连接 LCD 模组的 22 针 FPC，以及连接核心板的 24 针板对板（B2B）连接器。资料未说明 40 针排针与 24 针 B2B 连接器之间的关系。不要仅凭其中任一针数选择或对接连接器；应按具体组件版本核对原理图/BOM。
 
 <div align="center"><em>22 针 QSPI 显示与触摸 FPC 信号表</em></div>
 
@@ -5914,7 +6054,11 @@ Source: https://uForge.io/zh/sf32-products/family/SF32_family/
 
 Summary: SF32LB5xx 系列概览：异构 Cortex-M33 内核、蓝牙、ePicasso 图形和边缘 AI，并提供对比表和快速选型指南。
 
+<div id="sf32"></div>
+
 # SF32 产品系列
+
+<div id="_1"></div>
 
 ## 简介
 
@@ -5947,6 +6091,8 @@ SF32 旨在填补传统微控制器与应用处理器之间的空档。该系列
     [规划量产工作 :material-arrow-right:](../../hardware/design-for-production.md){ .uf-hw-link-green }
 
 </div>
+
+<div id="_2"></div>
 
 ## 关键特性
 
@@ -6299,7 +6445,7 @@ Summary: SF32 产品选型常见问题：芯片、模组与开发板，存储与
 - **供电方式：** 电池或稳压电源供电、工作电压范围及 I/O 电平。
 - **音频功能：** ADC/DAC、I2S 和 PDM 需求，包括麦克风通道数。
 
-比较具体型号，不要只看系列编号：编号更大不一定更适合你的产品。以上条件均可在[产品选型器](../product-selector.md)中设置，用来筛选具体型号。
+比较具体型号，不要只看系列编号：编号更大不一定更适合你的产品。[产品选型器](../product-selector.md)可按封装、供电、显示、GPIO、音频等条件筛选，但目前没有蓝牙模式筛选项。先用现有条件缩小候选范围，再到具体型号页面确认 BLE/经典蓝牙支持情况。
 
 [系列对比](SF32_family.md) · [产品选型器](../product-selector.md)
 
@@ -6389,7 +6535,7 @@ SF32LB55x 仅支持 BLE；SF32LB52x、SF32LB56x、SF32LB57x 和 SF32LB58x 系列
 
 ### 能否申请其他存储或模组配置？
 
-联系 μForge.io 时，请说明目标芯片或模组、存储和 PSRAM 容量、接口、天线要求、预计用量及项目进度。设计定型前，应确认方案可行性、SDK 支持、最小订购量和交期。旧资料列出的配置不代表目前仍有供货；SF32LB58-MOD-E4R32N1 已因近期存储芯片供应短缺而停售。
+联系 μForge.io 时，请说明目标芯片或模组、存储和 PSRAM 容量、接口、天线要求、预计用量及项目进度。设计定型前，应确认方案可行性、SDK 支持、最小订购量和交期。旧资料列出的配置不代表目前仍有供货；因存储芯片供应短缺，SF32LB58-MOD-E4R32N1 目前无法供货。
 
 [联系 μForge.io](../../about/contact.md) · [58 模组供货情况](../modules/SF32LB58-MOD.md#storage-interfaces-and-module-variants)
 
@@ -6447,6 +6593,8 @@ Summary: 端到端 SF32 产品规划路径：选择器件和集成层级，在�
 Source: https://uForge.io/zh/sf32-products/
 
 Summary: 从这里了解 SF32 硬件、规划产品、选择芯片/模组/开发板、复用参考设计，并完成量产硬件设计准备。
+
+<div id="sf32"></div>
 
 # SF32 产品
 

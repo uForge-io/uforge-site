@@ -17,6 +17,16 @@ tags:
 
 Gleichen Sie Gehäusezeichnung und Pad-Layout-Vorgaben des gewählten QFN- oder BGA-Gehäuses mit den Bestückungsmöglichkeiten des vorgesehenen Herstellers ab. Bei BGA-Gehäusen sind Ball-Fanout, Via-Strategie, Lötstopplack-Regeln und Fertigungsgrenzen frühzeitig zu klären.
 
+Die SiFli-Quelle zeigt gehäusespezifische Fan-out-Beispiele für BGA und QFN. Sie dienen nur als Referenz: Der konkrete Ausbruch hängt vom gewählten Gehäuse und den Fertigungsregeln des Herstellers ab und muss für das jeweilige Design geprüft werden.
+
+![BGA-Gehäuse: Fan-out-Beispiel](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA-FANOUT-PCB.png)
+
+<div align="center"><em>Abbildung 6.1-1: Fan-out-Referenz für BGA-Gehäuse</em></div>
+
+![QFN-Gehäuse: Fan-out-Beispiel](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/assets/55x/SF32LB55x-QFN-FANOUT-PCB.png)
+
+<div align="center"><em>Abbildung 6.1-2: Fan-out-Referenz für QFN-Gehäuse</em></div>
+
 #### 6.1.1. Referenz für Lagenaufbau und Fertigung { #611-stack-up-and-fabrication }
 
 Die SF32LB55x-Serie unterstützt die Bestückung auf einer oder auf beiden Leiterplattenseiten.

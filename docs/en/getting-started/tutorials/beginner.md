@@ -195,7 +195,7 @@ rt_pwm_enable(pwm, channel);
 ```
 
 1. Pick a PWM-capable channel and confirm the pin mux.
-2. Choose a period that matches the peripheral: high enough to avoid visible LED flicker, or in the audible range for a buzzer.
+2. Choose a PWM frequency that matches the peripheral: high enough to avoid visible LED flicker, or in the audible range for a buzzer.
 3. Sweep the duty cycle to fade an LED up and down.
 4. Try a few fixed tones on a buzzer by changing the period.
 5. Disable the PWM and confirm the output returns to a safe idle state.

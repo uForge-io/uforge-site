@@ -21,7 +21,7 @@ Evalúe primero estos criterios de selección:
 - **Alimentación:** Batería o fuente regulada, rango de tensión de funcionamiento y niveles de E/S.
 - **Funciones de audio:** Requisitos de ADC/DAC, I2S y PDM, incluidos los canales de micrófono.
 
-Compare referencias concretas, no solo números de familia: un número mayor no implica una mejor elección. Todos estos factores son filtros del [Selector de productos](../product-selector.md): configúrelos allí para preseleccionar referencias concretas.
+Compare referencias concretas, no solo números de familia: un número mayor no implica una mejor elección. El [Selector de productos](../product-selector.md) permite filtrar por encapsulado, alimentación, pantalla, GPIO, audio y otros criterios, pero no ofrece un filtro para el modo Bluetooth. Use los filtros disponibles para acotar las opciones y confirme la compatibilidad con BLE/Classic Bluetooth en la página del modelo exacto.
 
 [Comparación de familias](SF32_family.md) · [Selector de productos](../product-selector.md)
 

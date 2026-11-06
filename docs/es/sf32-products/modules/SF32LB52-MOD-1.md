@@ -27,7 +27,7 @@ Según el SKU seleccionado, el chip montado en el módulo puede llevar OPI-PSRAM
 - Concentradores de sensores Bluetooth y accesorios conectados
 - Cerraduras inteligentes, dispositivos para el hogar conectado y electrodomésticos compactos
 - Productos HMI con pantalla gráfica pequeña
-- Llaveros electrónicos para vehículos y mandos a distancia para vehículos que se llevan puestos
+- Llaveros electrónicos para vehículos y dispositivos vestibles con función de control remoto
 - Dispositivos conectados con pantalla dirigidos a segmentos sensibles al precio
 
 Considere SF32LB52-MOD-1 si el proyecto necesita una o varias de estas ventajas:

@@ -101,7 +101,7 @@ hide:
 | 20 | AVDD33_BRF 电容至少为 4.7 μF | SF32LB565/567 | 必检 |
 | 21 | AUD_VREF 电容 = 1 μF | 所有芯片 | 必检 |
 | 22 | GPADC VREFP 电容 = 4.7 μF | 所有芯片 | 必检 |
-| 23 | BUCK 电感为[思澈科技（SiFli）合格供应商名录（AVL）]中的料号 | 所有芯片 | 必检 |
+| 23 | BUCK 电感为[思澈科技（SiFli）合格供应商名录（AVL）][思澈科技（SiFli）合格供应商名录（AVL）]中的料号 | 所有芯片 | 必检 |
 | 24 | 若 BUCK 电感不是思澈科技（SiFli）推荐料号，则需满足 L = 4.7 μH、DCR ≤ 0.4 Ω、Isat ≥ 450 mA | 所有芯片 | 必检 |
 | 25 | <span class="flag-red">PVDD 设为 1.8 V；推荐使用 VBAT 转 1.8 V 的 DCDC</span> | 所有芯片 | 必检 |
 | 26 | <span class="flag-red">若存在 GPS 或其他易受干扰外设，则需在 BUCK_LX 预留对地并联电容焊盘；取值依据实际测试结果确定</span> | 所有芯片 | 必检 |

@@ -45,7 +45,7 @@ As categorias abaixo são estados conceituais do sistema, não uma lista exata d
 
 </div>
 
-Durante a execução normal, o sistema alterna entre estados. Uma fonte de despertar configurada desperta a CPU ou o subsistema; a sequência de despertar e restauração dos clocks varia conforme o dispositivo. Ao concluir o trabalho, os drivers ou tarefas responsáveis devem liberar as solicitações de PM que impedem a suspensão, para que a política configurada selecione um estado de baixo consumo permitido. A curva abaixo é ilustrativa: mostra transições relativas, não correntes ou tempos específicos de um dispositivo.
+Durante a execução normal, o sistema alterna entre estados. Uma fonte de despertar configurada desperta a CPU ou o subsistema; a sequência de despertar e restauração dos clocks varia conforme o dispositivo. Ao concluir o trabalho, recomenda-se que os drivers ou tarefas responsáveis liberem as solicitações de PM que impedem a suspensão, para que a política configurada selecione um estado de baixo consumo permitido. A curva abaixo é ilustrativa: mostra transições relativas, não correntes ou tempos específicos de um dispositivo.
 
 <div align="center">
 <img src="assets/power-mode-transition-pt.svg" alt="Curva ilustrativa de corrente relativa com Deep Sleep, despertar, trabalho ativo, inatividade e retorno ao baixo consumo" width="960">
@@ -84,7 +84,7 @@ Os maiores ganhos costumam vir da estrutura do firmware, não de truques de baix
 
 - **Prefira interrupções e eventos ao polling.** Um loop de polling mantém a CPU ativa mesmo quando não há trabalho.
 - **Agrupe tarefas.** Quando a latência permitir, acumule amostras de sensores, eventos Bluetooth ou blocos de áudio e processe-os juntos, em vez de despertar para cada item.
-- **Libere rapidamente as solicitações de PM que impedem o repouso.** Um driver ou tarefa que mantém uma solicitação bloqueando a entrada em um estado de baixo consumo mais profundo deve liberar a solicitação correspondente assim que esse bloqueio deixar de ser necessário. Caso contrário, o sistema pode permanecer em um estado menos profundo que o previsto.
+- **Libere rapidamente as solicitações de PM que impedem o repouso.** Recomenda-se que um driver ou tarefa que mantém uma solicitação bloqueando a entrada em um estado de baixo consumo mais profundo libere a solicitação correspondente assim que esse bloqueio deixar de ser necessário. Caso contrário, o sistema pode permanecer em um estado menos profundo que o previsto.
 - **Projete os caminhos de interface e áudio para responder a eventos**, em vez de polling periódico baseado em temporizadores, quando o framework permitir.
 - **Revise os temporizadores.** Um temporizador periódico agenda trabalho futuro e pode despertar o sistema ou reduzir o intervalo de inatividade disponível para a política de PM. Por isso, vários temporizadores aparentemente inofensivos podem reduzir o tempo nos estados mais profundos de baixo consumo.
 

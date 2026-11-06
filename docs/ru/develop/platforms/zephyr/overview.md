@@ -80,7 +80,7 @@ OpenSiFli активно развивает поддержку Zephyr в реп�
 
 ## Контрольный список рисков downstream { #downstream-risk-checklist }
 
-- Вы используете downstream-ветку OpenSiFli, а не основную ветку Zephyr?
+- Вы используете downstream-ветку OpenSiFli, а не код upstream-проекта Zephyr?
 - Ревизия HAL зафиксирована?
 - Использует ли `west flash` ожидаемый runner `sftool`?
 - Настроена ли консоль на `1000000` бод?

@@ -71,7 +71,7 @@ tags:
 
 \* 这些参考数值来自 Arm 的 [2020 版 Cortex-M 对比表](https://developer.arm.com/-/media/Arm%20Developer%20Community/PDF/Cortex-A%20R%20M%20datasheets/Arm%20Cortex-M%20Comparison%20Table_v3.pdf?revision=077cd073-b4ff-4193-8a26-5e854aa6e431)，不是通用于当前所有配置的分数，也不能用于直接排列最终 SoC 的性能。编译器、内存系统、缓存设置和基准测试配置都会影响结果。
 
-† 由于 STAR-MC1 与 CM33 兼容，此处使用 CM33 的参考数值。该数值仅用于比较基线，不是 Arm 公布或实测的 STAR-MC1 结果。
+† 表中将 Arm 公布的 Cortex-M33 4.02 CoreMark/MHz 数值用作 STAR-MC1 的共同比较基线。Arm 中国的 STAR-MC1 产品手册也公布了 4.02 CoreMark/MHz，但本文未独立核验该手册的测试方法，因此不能据此认为两项结果采用了等效方法。
 
 ‡ 本行用于说明内核架构层面的相对定位，并非实测芯片功耗数据。实际功耗受工艺制程、电压、频率、存储器架构、启用的功能、外设、固件占空比和最终 SoC 实现等因素共同影响。
 

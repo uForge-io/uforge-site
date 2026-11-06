@@ -73,7 +73,7 @@ Die unterstützten Boards sind im README des jeweiligen Beispiels aufgeführt. D
 
 ## DFU-v2-SDK-Beispiele { #dfu-v2-sdk-examples }
 
-<div align="center"><em>Tabelle: Offizielle SiFli-SDK-DFU-v2-Beispiele für SF32LB58x</em></div>
+<div align="center"><em>Tabelle: DFU-v2-Beispielpfade im SiFli-SDK</em></div>
 
 <div align="center" markdown>
 

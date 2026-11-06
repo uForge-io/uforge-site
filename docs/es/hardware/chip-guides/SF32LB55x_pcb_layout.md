@@ -17,6 +17,16 @@ tags:
 
 Contraste el plano mecánico y los requisitos de la huella de montaje del encapsulado QFN o BGA seleccionado con la capacidad de ensamblaje del fabricante previsto. En el caso de BGA, confirme cuanto antes el escape de las bolas (fan-out), la estrategia de vías, las reglas de máscara de soldadura y los límites de fabricación.
 
+La fuente de SiFli incluye ejemplos de fan-out específicos para los encapsulados BGA y QFN. Úselos solo como referencia: el escape exacto depende del encapsulado seleccionado y de las reglas de fabricación del fabricante, que deben verificarse para cada diseño.
+
+![Ejemplo de fan-out para encapsulado BGA](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/assets/55x/SF32LB55x-BGA-FANOUT-PCB.png)
+
+<div align="center"><em>Figura 6.1-1: Referencia de fan-out para encapsulado BGA</em></div>
+
+![Ejemplo de fan-out para encapsulado QFN](https://raw.githubusercontent.com/OpenSiFli/SiFli-Wiki/main/source/zh_CN/hardware/assets/55x/SF32LB55x-QFN-FANOUT-PCB.png)
+
+<div align="center"><em>Figura 6.1-2: Referencia de fan-out para encapsulado QFN</em></div>
+
 #### 6.1.1. Referencias de apilado y fabricación { #611-stack-up-and-fabrication }
 
 La serie SF32LB55x admite componentes montados en una o en ambas caras de la placa.

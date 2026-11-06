@@ -8,7 +8,9 @@ tags:
 
 # SF32LB55x
 
-## 개요
+<div id="_1"></div>
+
+## 개요 { #overview }
 
 SF32LB55x 시리즈는 BLE 연결 제품을 위한 메인스트림 초저전력 AIoT 마이크로컨트롤러 제품군으로, 보급형 Bluetooth MCU보다 강력한 디스플레이 기능, 더 큰 메모리 여유, 더 다양한 패키지가 필요한 제품을 대상으로 합니다.
 
@@ -22,7 +24,9 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 
 [^1]: STAR-MC1은 Arm China의 구성 가능한 Armv8-M Mainline 임베디드 CPU IP입니다. 호환되는 SF32 디바이스에서 SiFli는 이를 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서로 문서화합니다. Cortex-M33급 소프트웨어 모델은 기존 Cortex-M33용 펌웨어, 미들웨어, RTOS 포트, 개발 도구를 활용하는 데 도움이 됩니다. 다만 실제 디바이스에 맞춘 통합 작업은 여전히 필요합니다. CU, SP, SE 구성은 주로 캐시, TCM, XIPU, TrustZone 기능에서 차이가 나며, Arm Custom Instructions/CDE와 코프로세서 인터페이스는 선택 기능이므로 해당 SF32 부품에서 지원되는지 반드시 확인해야 합니다. SiFli 문서는 문맥에 따라 ***Arm Cortex-M33 STAR-MC1*** 또는 ***Arm Cortex-M33***이라는 표기를 사용할 수 있습니다.
 
-## 애플리케이션
+<div id="_2"></div>
+
+## 애플리케이션 { #applications }
 
 **SF32LB55x는** 보급형 웨어러블 MCU보다 강력한 UI, 더 큰 작업 메모리, 더 유연한 패키지가 필요한 BLE 중심 제품에 **권장되며**, 대표적인 예는 다음과 같습니다.
 
@@ -43,7 +47,9 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 - SF32LB52x보다 많은 GPIO 또는 더 고밀도인 패키지 옵션
 - 외부 NOR, NAND, eMMC, QSPI-PSRAM, OPI-PSRAM을 유연하게 선택
 
-## 개발 리소스
+<div id="_3"></div>
+
+## 개발 리소스 { #development-resources }
 
 [Product Brief]: https://downloads.sifli.com/silicon/PB0001-SF32LB55x-Product%20Brief%20V1p3.pdf
 [Datasheet]: https://downloads.sifli.com/docs/Datasheet/sf32lb55/DS5501-SF32LB55x-Datasheet%20V1p7p2.pdf
@@ -77,9 +83,13 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 
 ---
 
-## 기능 및 사양
+<div id="_4"></div>
 
-### 연산 및 메모리
+## 기능 및 사양 { #features-and-specs }
+
+<div id="_5"></div>
+
+### 연산 및 메모리 { #compute-and-memory }
 
 - 최대 240 MHz의 고성능 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서
 - 최대 48 MHz의 초저전력 Arm Cortex-M33 STAR-MC1 프로세서
@@ -89,7 +99,9 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 - 전부 리텐션 SRAM인 224 KB 저전력 SRAM
 - NOR, NAND, eMMC, QSPI-PSRAM, OPI-PSRAM용 외부 메모리 인터페이스
 
-### 그래픽, 디스플레이, AI
+<div id="ai"></div>
+
+### 그래픽, 디스플레이, AI { #graphics-display-and-ai }
 
 최대 해상도와 패널 인터페이스는 [디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)에서 확인하십시오.
 
@@ -101,7 +113,9 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 - 듀얼 LCD 컨트롤러. 상시 표시(always-on display) 인터페이스와 듀얼 디스플레이 기능은 선택한 모델과 패키지에 따라 달라집니다.
 - TinyML 워크로드용 신경망 행렬 가속기, 최대 1.92 GOPS 및 5.73 TOPS/W
 
-### 무선 연결
+<div id="_6"></div>
+
+### 무선 연결 { #wireless-connectivity }
 
 - Bluetooth Low Energy 5.2
 - BLE 125 kbps, 500 kbps, 1 Mbps, 2 Mbps 모드
@@ -109,13 +123,17 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 - 최대 송신 전력: 10 dBm
 - 수신 피크 전류: 3.3 V에서 2.0 mA
 
-### 보안
+<div id="_7"></div>
+
+### 보안 { #security }
 
 - AES 및 CRC 하드웨어 가속기
 - 진성 난수 생성기(TRNG)
 - PSA Certified Level 1
 
-### 주변 장치 및 I/O
+<div id="io"></div>
+
+### 주변 장치 및 I/O { #peripherals-and-ios }
 
 - 제품군 전체에서 최대 UART 5개, I2C 6개, SPI 4개 인터페이스. 개수는 아래 표와 같이 모델에 따라 다릅니다.
 - I2S 및 PDM 인터페이스 개수는 모델에 따라 다름(표 참조). PDM 인터페이스 하나에 디지털 마이크를 최대 2개 연결할 수 있으므로 인터페이스 개수와 마이크 개수는 같지 않으며, 선택한 모델의 핀 사용 가능 여부도 확인하십시오.
@@ -144,7 +162,9 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 - Peripheral Task Controller(PTC)
 - GPIO 개수는 패키지에 따라 다르므로, 아래의 패키지 표와 출처 불일치 참고 사항을 참조하십시오.
 
-### 전원 공급 및 패키지
+<div id="_8"></div>
+
+### 전원 공급 및 패키지 { #power-supply-and-package }
 
 - 전원 공급 범위는 변형별로 다릅니다. SS6600A8은 2.97~3.63 V, 551U4O5와 선택된 BGA 변형은 1.71~3.63 V입니다.
 - 동작 온도는 변형별로 다릅니다. 문서화된 QFN 변형은 -20~+70 °C, 선택된 BGA 변형은 -40~+85 °C입니다.
@@ -153,7 +173,9 @@ SiFli의 칩 모델 가이드에 따르면 SF32LB55x는 이후의 52/56/58 제�
 - 핀 웨이크업 시 슬립 전류: 280 nA
 - 패키지 옵션: QFN68L, BGA145, BGA169
 
-## 제품군 변형
+<div id="_9"></div>
+
+## 제품군 변형 { #family-variants }
 
 SF32LB55x 디바이스는 QFN 및 BGA 패키지로 제공됩니다. GPIO 개수, 내장 메모리, 디스플레이 인터페이스 선택, PCB 공정이 모두 패키지에 따라 크게 달라지므로 패키지를 일찍 선택하십시오.
 
@@ -189,7 +211,9 @@ SiFli 칩 모델 가이드에 나열된 다음의 현재 모델은 패키지와 
 
 SF32LB557VD3A6에 대해 현재 SiFli 칩 모델 가이드와 DS5501 V1.7.2 데이터시트의 Table 0-1에는 HCPU 71개 + LCPU 42개 = GPIO 113개로 나열되어 있습니다. 반면 데이터시트의 기능 및 패키지 요약과 PB0001 V1.3 제품 브리프에는 BGA169의 GPIO가 119개(HCPU 71개 + LCPU 48개)로 기재되어 있습니다. 따라서 공식 자료끼리, 심지어 데이터시트 안에서도 값이 상충합니다. 이 페이지는 모델별 행과 현재 모델 가이드의 값(113)을 따릅니다. 핀을 할당하거나 설계를 확정하기 전에 선택한 패키지의 볼 맵에서 GPIO 사용 가능 여부를 확인하고, SiFli에 주문 가능한 부품을 확인하십시오. 또한 해당 변형의 공급 전압 및 온도 등급, 전체 부품 번호, 내장 메모리 구성을 [DS5501 V1.7.2 데이터시트][Datasheet], [PB0001 V1.3 제품 브리프][Product Brief], [SiFli 칩 모델 가이드][SiFli Chip Model Guide]와 대조하여 확인하십시오. BGA145와 BGA169 패키지의 크기는 7 × 7 × 0.94 mm이며 피치는 0.5 mm입니다.
 
-## 통합 경로
+<div id="_10"></div>
+
+## 통합 경로 { #integration-path }
 
 SF32LB55x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따르십시오.
 
@@ -202,7 +226,7 @@ SF32LB55x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따
 ## 자주 묻는 질문 { #frequently-asked-questions }
 
 **SF32LB55x의 주요 사양은 무엇입니까?**
-SF32LB55x는 애플리케이션 CPU(Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @48 MHz, 사용자 프로그래밍 가능)를 갖추고 있으며, 내장 SRAM은 1,312 KB입니다. Bluetooth 모드는 BLE 전용입니다. 그래픽: ePicasso 1.0. 패키지는 QFN68L / BGA145 / BGA169이며, 크기는 7 × 7 mm (QFN68L)입니다. USB는 2.0 FS를 지원합니다.
+SF32LB55x는 애플리케이션 CPU(Cortex-M33 @240 MHz)와 저전력 코어(Cortex-M33 @48 MHz, 사용자 프로그래밍 가능)를 갖추고 있으며, 내장 SRAM은 1,312 KB입니다. Bluetooth 모드는 BLE 전용입니다. 그래픽: ePicasso 1.0. 앞부분의 제품군 개요에서는 그래픽 엔진을 ePicasso 2.5D로 표기합니다. 확인 가능한 자료에는 두 표기의 관계가 설명되어 있지 않으므로, 서로 동등하거나 세대 차이를 뜻한다고 추정하지 말고 정확한 주문 부품의 그래픽 기능을 최신 공식 문서에서 확인하십시오. 패키지는 QFN68L / BGA145 / BGA169이며, 크기는 7 × 7 mm (QFN68L)입니다. USB는 2.0 FS를 지원합니다.
 
 **SF32LB55x는 어떤 디스플레이 인터페이스를 지원합니까?**
 지원하는 인터페이스는 SPI / DSPI / QSPI / 8080 / JDI / RGB / MIPI입니다. ([디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)) 전체 제품군의 인터페이스 목록이며 모든 부품 번호나 패키지에 대한 보장이 아닙니다. 연결된 인터페이스 매트릭스를 확인하십시오.
@@ -220,12 +244,18 @@ SS6600A8은 2.97–3.63 V가 필요하며, 이 페이지에 나열된 SF32LB551U
 먼저 [SF32LB55x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB55x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하십시오.
 <!-- uf-faq:end -->
 
-## 관련 제품
+<div id="_11"></div>
 
-### 개발 키트
+## 관련 제품 { #related-products }
+
+<div id="_12"></div>
+
+### 개발 키트 { #development-kits }
 
 패키지 선택, 전원 트리 정의, 디스플레이 인터페이스 선택, 메모리 계획, RF 레이아웃, 양산 테스트 계획의 출발점으로 공식 하드웨어 애플리케이션 노트, 레퍼런스 회로도, 체크리스트를 사용하십시오.
 
-### 레퍼런스 제품
+<div id="_13"></div>
+
+### 레퍼런스 제품 { #reference-products }
 
 일반적인 SF32LB55x 최종 제품으로는 스마트워치, 피트니스 밴드, 건강 모니터링 웨어러블, 스마트 도어락, 연결형 액세서리, 스마트 홈 컨트롤러, 소형 그래픽 HMI가 있습니다.

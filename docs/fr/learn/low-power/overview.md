@@ -45,7 +45,7 @@ Les catégories suivantes représentent des états conceptuels du système, et n
 
 </div>
 
-La charge de travail fait passer le système d'un état à l'autre. Une source de réveil configurée réveille le CPU ou le sous-système ; la séquence de réveil et de restauration des horloges dépend de l'appareil. Une fois la tâche terminée, les pilotes ou tâches responsables doivent libérer les demandes PM qui empêchent la veille afin que la politique configurée puisse sélectionner un état basse consommation admissible. Le tracé ci-dessous est illustratif : il montre des transitions relatives, et non des valeurs de courant ou des durées propres à un appareil.
+La charge de travail fait passer le système d'un état à l'autre. Une source de réveil configurée réveille le CPU ou le sous-système ; la séquence de réveil et de restauration des horloges dépend de l'appareil. Une fois la tâche terminée, les pilotes ou tâches responsables devraient libérer les demandes PM qui empêchent la veille afin que la politique configurée puisse sélectionner un état basse consommation admissible. Le tracé ci-dessous est illustratif : il montre des transitions relatives, et non des valeurs de courant ou des durées propres à un appareil.
 
 <div align="center">
 <img src="assets/power-mode-transition-fr.svg" alt="Tracé illustratif du courant relatif : Deep Sleep, réveil, activité, inactivité et retour au mode basse consommation" width="960">
@@ -84,7 +84,7 @@ Les gains les plus importants viennent généralement de l'architecture du firmw
 
 - **Préférez les interruptions et les événements aux interrogations périodiques (polling).** Une boucle d'interrogation maintient le CPU actif même lorsqu'il n'y a rien à faire.
 - **Regroupez les traitements.** Lorsque la latence le permet, accumulez les mesures des capteurs, les événements Bluetooth ou les blocs audio, puis traitez-les ensemble au lieu de réveiller le système pour chacun.
-- **Libérez rapidement les demandes PM qui empêchent la veille.** Un pilote ou une tâche qui maintient une demande bloquant l'entrée dans un état basse consommation plus profond doit libérer la demande correspondante dès que ce blocage n'est plus nécessaire. Sinon, le système peut rester dans un état moins profond que prévu.
+- **Libérez rapidement les demandes PM qui empêchent la veille.** Un pilote ou une tâche qui maintient une demande bloquant l'entrée dans un état basse consommation plus profond devrait libérer la demande correspondante dès que ce blocage n'est plus nécessaire. Sinon, le système peut rester dans un état moins profond que prévu.
 - **Concevez les parcours de l'interface et de l'audio pour réagir aux événements**, plutôt que de les interroger périodiquement, dans la mesure permise par le framework.
 - **Passez les minuteurs en revue.** Un minuteur périodique programme une tâche future et peut réveiller le système ou réduire l'intervalle d'inactivité disponible pour la politique PM. Plusieurs minuteurs apparemment « inoffensifs » peuvent ainsi réduire le temps passé dans des états basse consommation plus profonds.
 
@@ -288,7 +288,7 @@ Consignez la version du firmware, la révision de la carte, la tension de la bat
 - La consommation dépend du système dans son ensemble : Bluetooth, affichage, audio, IA et mémoire déterminent ensemble la profondeur et la fréquence des périodes de veille.
 - La politique PM configurée choisit parmi les états basse consommation admissibles ; une demande non libérée qui empêche les modes plus profonds peut maintenir le système dans un état moins profond que prévu.
 - Les architectures fondées sur les événements et les interruptions consomment généralement moins que les interrogations périodiques.
-- Sur un produit connecté, les paramètres de connexion Bluetooth et la stratégie de rafraîchissement de l'écran sont souvent deux leviers majeurs d'économie.
+- Sur un produit portable connecté, les paramètres de connexion Bluetooth et la stratégie de rafraîchissement de l'écran sont souvent deux leviers majeurs d'économie.
 - Mesurez l'énergie consommée avec des charges combinées représentatives, sur le matériel réel et dans le boîtier final. Les mesures au banc et celles de sous-systèmes isolés peuvent sous-estimer la consommation du produit complet.
 
 Pour estimer le pourcentage de batterie restant à partir de la tension, consultez [Estimation du niveau de charge de la batterie](battery-capacity-calculation.md).

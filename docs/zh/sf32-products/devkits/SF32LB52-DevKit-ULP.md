@@ -175,7 +175,13 @@ SF32LB52-DevKit-ULP 也被称为 **立创黄山派**、**LCKFB-HSPI-SF32LB52-ULP
 - 容量大于 450 mAh 的锂离子电池
 - 当需要同时进行 UART 调试和原生 USB 测试时，第二根 USB 数据线
 
-### 开发板设置与启动模式
+<div id="_1"></div>
+<div id="board-einrichtung-und-startmodi"></div>
+<div id="configuracao-da-placa-e-modos-de-inicializacao"></div>
+<div id="configuracion-y-modos-de-arranque-de-la-placa"></div>
+<div id="configuration-de-la-carte-et-modes-de-demarrage"></div>
+
+### 开发板设置与启动模式 { #board-setup-and-boot-modes }
 
 将主机连接到开发板的 USB Type-C UART 接口，然后打开 SifliTrace 并选择正确的 COM 口。
 
@@ -256,7 +262,7 @@ SiFli-SDK 中该板的精确构建目标名为 `sf32lb52-lchspi-ulp`；请在 `s
 
 开发板采用 AMOLED 显示链路，并引出一组 22 针 QSPI FPC 信号。思澈科技（SiFli）V1.0.0 表格将第 5–10 针标为 NC；下表列出全部 22 个位置，并明确标出这些未连接的引脚。
 
-屏幕板标注还区分了连接 LCD 模组的 22 针 FPC 接口，以及连接核心板的 24 针板对板（B2B）连接器。装配前请根据具体版本确认这两组接口。
+**接口数量存在来源不一致，选型前请核实：**SiFli 指南正文称，专用显示接口通过 22 针 FPC 和 40 针排针引出；屏幕板图则标注了连接 LCD 模组的 22 针 FPC，以及连接核心板的 24 针板对板（B2B）连接器。资料未说明 40 针排针与 24 针 B2B 连接器之间的关系。不要仅凭其中任一针数选择或对接连接器；应按具体组件版本核对原理图/BOM。
 
 <div align="center"><em>22 针 QSPI 显示与触摸 FPC 信号表</em></div>
 

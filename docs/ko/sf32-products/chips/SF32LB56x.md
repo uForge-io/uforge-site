@@ -8,7 +8,9 @@ tags:
 
 # SF32LB56x
 
-## 개요
+<div id="_1"></div>
+
+## 개요 { #overview }
 
 SF32LB56x 시리즈는 듀얼 모드 Bluetooth, 더 풍부한 그래픽, 통합 오디오, 외부 메모리, 하위 등급 SF32LB 디바이스보다 높은 디스플레이/스토리지 유연성이 필요한 제품을 위한 고급 초저전력 AIoT 마이크로컨트롤러 제품군입니다.
 
@@ -20,7 +22,9 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 
 [^1]: STAR-MC1은 Arm China의 구성 가능한 Armv8-M Mainline 임베디드 CPU IP입니다. 호환되는 SF32 디바이스에서 SiFli는 이를 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서로 문서화합니다. Cortex-M33급 소프트웨어 모델은 기존 Cortex-M33용 펌웨어, 미들웨어, RTOS 포트, 개발 도구를 활용하는 데 도움이 됩니다. 다만 실제 디바이스에 맞춘 통합 작업은 여전히 필요합니다. CU, SP, SE 구성은 주로 캐시, TCM, XIPU, TrustZone 기능에서 차이가 나며, Arm Custom Instructions/CDE와 코프로세서 인터페이스는 선택 기능이므로 해당 SF32 부품에서 지원되는지 반드시 확인해야 합니다. SiFli 문서는 문맥에 따라 ***Arm Cortex-M33 STAR-MC1*** 또는 ***Arm Cortex-M33***이라는 표기를 사용할 수 있습니다.
 
-## 애플리케이션
+<div id="_2"></div>
+
+## 애플리케이션 { #applications }
 
 **SF32LB56x는** 더 높은 수준의 디스플레이, 오디오, 스토리지, 로컬 처리 능력이 필요한 듀얼 모드 Bluetooth 제품에 **권장되며**, 대표적인 예는 다음과 같습니다.
 
@@ -43,7 +47,9 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 - WBBGA175 옵션을 통한 더 많은 GPIO
 - TinyML, 오디오, UI 워크로드를 동시에 처리할 여유
 
-## 개발 리소스
+<div id="_3"></div>
+
+## 개발 리소스 { #development-resources }
 
 [Product Brief]: https://downloads.sifli.com/docs/Product%20Brief/SF32LB56x/PB0056-SF32LB56x-Product%20Brief%20V1p2.pdf
 [Datasheet]: https://downloads.sifli.com/docs/Datasheet/sf32lb56/DS5601-SF32LB56x-Datasheet%20V1p9p3.pdf
@@ -81,9 +87,13 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 
 ---
 
-## 기능 및 사양
+<div id="_4"></div>
 
-### 연산 및 메모리
+## 기능 및 사양 { #features-and-specs }
+
+<div id="_5"></div>
+
+### 연산 및 메모리 { #compute-and-memory }
 
 - 최대 240 MHz의 고성능 Arm Cortex-M33 STAR-MC1 애플리케이션 프로세서(HCPU)
 - 최대 96 MHz의 초저전력 Arm Cortex-M33 STAR-MC1 프로세서(LCPU)
@@ -94,7 +104,9 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 - 512 KB 또는 1 MB 패키지 내장 QSPI-NOR 옵션
 - QSPI-NOR, SPI-NAND, QPI/OPI-PSRAM, SD/SDIO, eMMC용 외부 메모리 인터페이스
 
-### 그래픽, 디스플레이, AI
+<div id="ai"></div>
+
+### 그래픽, 디스플레이, AI { #graphics-display-and-ai }
 
 최대 해상도와 패널 인터페이스는 [디바이스별 인터페이스 매트릭스](../../learn/graphics/display-controller.md#per-device-interface-matrix)에서 확인하십시오.
 
@@ -107,7 +119,9 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 - TurboPixel: extDMA가 최종 프레임버퍼에 고정 비율 손실 압축을 적용하고 디스플레이 컨트롤러가 이를 해제해 필요한 PSRAM 대역폭과 용량을 줄임
 - TinyML 워크로드용 신경망 행렬 가속기, 최대 1.92 GOPS 및 10 TOPS/W 이상
 
-### 오디오 및 무선 연결
+<div id="_6"></div>
+
+### 오디오 및 무선 연결 { #audio-and-wireless-connectivity }
 
 - BLE Audio를 지원하는 듀얼 모드 Bluetooth 5.3
 - 감도: BLE 1 Mbps에서 -100 dBm, BR에서 -96.3 dBm, EDR2에서 -95.5 dBm, EDR3에서 -88.5 dBm
@@ -117,13 +131,19 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 - SNR 99 dB의 HiFi 24비트 오디오 ADC 1개
 - PDM 인터페이스 2개와 I2S 인터페이스 1개
 
-### 보안
+**DAC SNR 자료 불일치:** [PB0056 V1.1](https://downloads.sifli.com/silicon/PB0056-SF32LB56x-Product%20Brief%20V1p1.pdf)과 [UM5601 V1.0.2](https://downloads.sifli.com/user%20manual/UM5601-SF32LB56x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V1p0p2.pdf)는 108 dB, [DS5601 V1.9.2](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-Datasheet%20V1p9p2.pdf)는 109 dB로 기재합니다. 이 페이지에서 링크한 최신 PB0056 V1.2, DS5601 V1.9.3, UM5601 V1.0.5는 이번 검토에서 불일치를 해소하지 못했으므로 적용할 값은 아직 확정되지 않았습니다. 사용 전 정확한 주문 부품의 최신 공식 문서에서 확인하십시오.
+
+<div id="_7"></div>
+
+### 보안 { #security }
 
 - AES, HASH, CRC 하드웨어 가속기
 - 진성 난수 생성기(TRNG)
 - PSA Certified Level 1
 
-### 주변 장치 및 I/O
+<div id="io"></div>
+
+### 주변 장치 및 I/O { #peripherals-and-ios }
 
 - UART 인터페이스 6개
 - I2C 인터페이스 7개
@@ -138,7 +158,9 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 - Peripheral Task Controller(PTC)
 - 패키지에 따라 최대 120개의 GPIO
 
-### 전원 공급 및 패키지
+<div id="_8"></div>
+
+### 전원 공급 및 패키지 { #power-supply-and-package }
 
 - 전원 공급 범위: 1.71 V~3.63 V
 - 동작 온도: -40~+85 °C
@@ -147,7 +169,9 @@ SiFli의 칩 모델 가이드도 여기서 중요합니다. SF32LB56x 제품군�
 - 핀 웨이크업 시 슬립 전류: 300 nA
 - 패키지 옵션: QFN68L, WBBGA175
 
-## 제품군 변형
+<div id="_9"></div>
+
+## 제품군 변형 { #family-variants }
 
 SF32LB56x는 소형 QFN68L 부품부터 I/O가 더 많은 WBBGA175 부품까지 걸쳐 있으며, 내장 메모리 옵션도 서로 다릅니다. 디스플레이 인터페이스 지원, GPIO 여유, 스토리지 용량, PCB 공정, 모듈 마이그레이션 옵션이 제품군 내에서 크게 다르므로 정확한 주문 코드를 일찍 선택하십시오.
 
@@ -170,7 +194,9 @@ SF32LB56x는 소형 QFN68L 부품부터 I/O가 더 많은 WBBGA175 부품까지 
 
 </div>
 
-## 통합 경로
+<div id="_10"></div>
+
+## 통합 경로 { #integration-path }
 
 SF32LB56x 후보 목록을 검증된 설계로 만들려면 다음 순서를 따르십시오.
 
@@ -203,16 +229,24 @@ RGB888 색상에서 최대 1024 × 600 해상도를 지원합니다. BGA 패키�
 먼저 [SF32LB56x 하드웨어 설계 가이드](../../hardware/chip-guides/SF32LB56x_hardware_design_guide.md)에서 회로도, 전원, 클럭/RF, PCB 레이아웃 지침을 확인하고, 보드 릴리스 전에 회로도와 레이아웃 체크리스트를 사용하십시오.
 <!-- uf-faq:end -->
 
-## 관련 제품
+<div id="_11"></div>
 
-### 모듈
+## 관련 제품 { #related-products }
+
+<div id="_12"></div>
+
+### 모듈 { #module }
 
 [SF32LB56-MOD](../modules/SF32LB56-MOD.md)는 SF32LB566VCB36 칩, 메모리, RF 설계, 안테나 옵션을 바로 통합할 수 있는 모듈로 패키징한 제품입니다. SF32LB56x의 기능을 사용하면서 RF 레이아웃, 안테나 매칭, 크리스털 배치, 고속 메모리 통합의 위험을 줄이려는 프로젝트에 적합합니다.
 
-### 개발 키트
+<div id="_13"></div>
+
+### 개발 키트 { #development-kits }
 
 [SF32LB56-DevKit-LCD](../devkits/SF32LB56-DevKit-LCD.md)는 칩 다운 또는 모듈 기반 설계를 확정하기 전에 펌웨어 브링업, 디스플레이 검증, 오디오 및 스토리지 테스트, RF 점검, 전력 프로파일링을 수행하기 위한 실용적인 출발점입니다.
 
-### 레퍼런스 제품
+<div id="_14"></div>
+
+### 레퍼런스 제품 { #reference-products }
 
 일반적인 SF32LB56x 최종 제품으로는 고급 스마트워치, 연결형 HMI 패널, 헬스케어 디바이스, 산업용 핸드헬드, 휴대용 계측기, 더 풍부한 eBike 또는 eScooter 디스플레이가 있습니다.

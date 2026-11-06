@@ -33,6 +33,8 @@ Die Seite Bluetooth-AT-Befehlsmodul verlinkt auf diese Referenz für V1.2.1. Dar
 
 </div>
 
+<div id="_1"></div>
+
 ## Übersicht { #overview }
 
 Das SF32LB57-Dual-Mode-Bluetooth-Modul stellt dem Host eine UART-basierte AT-Befehlsschnittstelle für BLE und Classic Bluetooth (BR/EDR) bereit. Über AT-Befehle kann der Host Geräteparameter konfigurieren, Verbindungen verwalten, Daten senden und empfangen sowie unaufgeforderte Statusmeldungen des Moduls erhalten.
@@ -63,12 +65,16 @@ Das SF32LB57-Dual-Mode-Bluetooth-Modul stellt dem Host eine UART-basierte AT-Bef
 
 ## Befehlsformat { #command-format }
 
+<div id="_2"></div>
+
 ### Syntaxdefinition { #syntax-definition }
 
 AT-Befehle werden als ASCII-Text übertragen und mit einem Wagenrücklaufzeichen `\r` (0x0D) abgeschlossen. Das Befehlspräfix ist `AT+` (AT-Format-Befehle) oder `AT>` (PDU-Format-Befehle). Beim SF32LB57 ist der AT-Port USART1; er verwendet 8N1 ohne Hardware-Flusskontrolle und standardmäßig 460800 Baud. Ein einzelner AT-Frame ist auf 512 Byte begrenzt.
 
 !!! warning "Längenbegrenzung für PDU-Rahmen bestätigen"
     Die Quelle begrenzt AT-Rahmen auf 512 Byte, erlaubt jedoch zugleich einen PDU-Body von bis zu 508 Byte. Zusammen mit den dargestellten 8 Byte für den Befehlsrahmen ergäben sich 516 Byte auf der UART. Die Quelle erklärt nicht, wie diese zusätzlichen Bytes bei der Begrenzung des Empfangspuffers berücksichtigt werden. Bestätigen Sie die vom Ziel-Firmwarestand akzeptierte maximale PDU-Rahmenlänge, bevor Sie Hostpuffer dimensionieren oder die maximale Body-Länge verwenden. Ersetzen Sie keinen der beiden Quellwerte durch eine vermutete Grenze.
+
+<div id="at"></div>
 
 ### AT-Format-Befehle { #at-format-commands }
 
@@ -95,6 +101,8 @@ AT-Befehle werden als ASCII-Text übertragen und mit einem Wagenrücklaufzeichen
 | Rückgabewert einer Abfrage | `\r\n+<CMD>:<value>\r\n\r\nOK\r\n` |
 
 </div>
+
+<div id="pdu"></div>
 
 ### Aufbau des PDU-Befehlsrahmens { #pdu-format-command-framing }
 
@@ -130,7 +138,11 @@ PDU-Befehle übertragen binäre Nutzdaten, während sich das Modul im Befehlsmod
 
 Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben Kategorien wie die Übersicht auf der Seite Bluetooth-AT-Befehlsmodul.
 
+<div id="_3"></div>
+
 ### System und Gerät { #system-and-device }
+
+<div id="_4"></div>
 
 #### Firmware-Version abrufen { #get-firmware-version }
 
@@ -147,6 +159,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_5"></div>
+
 #### Gerätenamen abfragen { #query-device-name }
 
 <div align="center"><em>Tabelle: Gerätenamen abfragen</em></div>
@@ -161,6 +175,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Gibt den aktuell eingestellten Gerätenamen ohne MAC-Suffix zurück. Das Suffix wirkt sich nur auf den in Advertising-Paketen sichtbaren Namen aus. |
 
 </div>
+
+<div id="_6"></div>
 
 #### Gerätenamen setzen { #set-device-name }
 
@@ -177,6 +193,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="mac"></div>
+
 #### MAC-Suffix im Gerätenamen abfragen { #query-mac-name-suffix-switch }
 
 <div align="center"><em>Tabelle: MAC-Suffix im Gerätenamen abfragen</em></div>
@@ -191,6 +209,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Gibt zurück, ob das Suffix angehängt wird: 0 = nein, 1 = ja. |
 
 </div>
+
+<div id="mac_1"></div>
 
 #### MAC-Suffix im Gerätenamen aktivieren oder deaktivieren { #set-mac-name-suffix-switch }
 
@@ -207,6 +227,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="ieee-1284-id"></div>
+
 #### IEEE-1284-Geräte-ID abfragen { #query-ieee-1284-device-id }
 
 <div align="center"><em>Tabelle: IEEE-1284-Geräte-ID abfragen</em></div>
@@ -221,6 +243,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Gibt die aktuell konfigurierte IEEE-1284-Geräte-ID-Zeichenkette zurück; leer, wenn nicht konfiguriert. |
 
 </div>
+
+<div id="ieee-1284-id_1"></div>
 
 #### IEEE-1284-Geräte-ID setzen { #set-ieee-1284-device-id }
 
@@ -237,6 +261,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_7"></div>
+
 #### Gerät zurücksetzen { #reset-device }
 
 <div align="center"><em>Tabelle: Gerät zurücksetzen</em></div>
@@ -252,6 +278,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_8"></div>
+
 #### Werksreset { #factory-reset }
 
 <div align="center"><em>Tabelle: Werksreset</em></div>
@@ -266,6 +294,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Stellt die Standardwerte der AT-Konfiguration wieder her und löscht die benutzerdefinierte GATT-Service-Konfiguration, die BLE- und Classic-Bluetooth-(BR/EDR)-Pairing-Daten sowie die statische BLE-Zufallsadresse. Das Modul antwortet mit `OK` und startet anschließend neu. Der Host sollte danach auf `IM_READY` warten. |
 
 </div>
+
+<div id="_9"></div>
 
 #### Konfigurationsreset { #configuration-reset }
 
@@ -297,6 +327,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_10"></div>
+
 #### Frequenzoffset-Kalibrierung abfragen { #query-frequency-offset-calibration }
 
 <div align="center"><em>Tabelle: Frequenzoffset-Kalibrierung abfragen</em></div>
@@ -311,6 +343,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Gibt den in der AT-Konfiguration gespeicherten Echo-Wert zurück; der tatsächlich wirksame Wert steht in der Partition `FACTORY_CFG_ID_CRYSTAL`. |
 
 </div>
+
+<div id="_11"></div>
 
 #### Frequenzoffset-Kalibrierung setzen { #set-frequency-offset-calibration }
 
@@ -327,6 +361,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="dut"></div>
+
 #### DUT-Testmodus betreten { #enter-dut-test-mode }
 
 <div align="center"><em>Tabelle: DUT-Testmodus betreten</em></div>
@@ -342,7 +378,11 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_12"></div>
+
 ### Adresse und Identität { #address-and-identity }
+
+<div id="bluetooth"></div>
 
 #### Bluetooth-Adresse abfragen { #query-bluetooth-address }
 
@@ -359,6 +399,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="bluetooth_1"></div>
+
 #### Bluetooth-Adresse setzen { #set-bluetooth-address }
 
 <div align="center"><em>Tabelle: Bluetooth-Adresse setzen</em></div>
@@ -373,6 +415,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Die Adresse wird in der Konfiguration gespeichert und nach einem Reset wirksam. Ab Werk besteht der Wert nur aus Nullen; in diesem Fall wird die Adresse automatisch aus der Chip-UID erzeugt. |
 
 </div>
+
+<div id="ble"></div>
 
 #### BLE-Adresse abfragen { #query-ble-address }
 
@@ -389,6 +433,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="ble_1"></div>
+
 #### BLE-Adresse setzen { #set-ble-address }
 
 <div align="center"><em>Tabelle: BLE-Adresse setzen</em></div>
@@ -403,6 +449,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Mit diesem Befehl lässt sich die BLE-Adresse nicht direkt setzen; jeder Aufruf gibt `ERROR` zurück. Eine statische BLE-Zufallsadresse wird über `AT+RANDOMADDR=1` generiert. |
 
 </div>
+
+<div id="ble_2"></div>
 
 #### BLE-Zufallsadresseinstellung abfragen { #query-ble-random-address-switch }
 
@@ -419,6 +467,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="ble_3"></div>
+
 #### BLE-Zufallsadresseinstellung ändern { #set-ble-random-address-switch }
 
 <div align="center"><em>Tabelle: BLE-Zufallsadresseinstellung ändern</em></div>
@@ -433,6 +483,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Die Einstellung wird gespeichert. Wird 1 angefordert, aber die öffentliche Adresse kann nicht gelesen werden, wird die Einstellung auf 0 zurückgesetzt und `ERROR` zurückgegeben. Die Adressänderung wird in NVDS geschrieben und nach einem Reset wirksam. Ein erneuter Aufruf von `AT+RANDOMADDR=1` leitet dieselbe Zufallsadresse erneut von der unveränderten öffentlichen Adresse ab. |
 
 </div>
+
+<div id="class-of-device"></div>
 
 #### Class of Device abfragen { #query-class-of-device }
 
@@ -449,6 +501,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="class-of-device_1"></div>
+
 #### Class of Device setzen { #set-class-of-device }
 
 <div align="center"><em>Tabelle: Class of Device setzen</em></div>
@@ -464,7 +518,11 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_13"></div>
+
 ### Betriebsmodus und Sichtbarkeit { #operating-mode-and-visibility }
+
+<div id="_14"></div>
 
 #### Sichtbarkeitsstatus abfragen { #query-discoverable-state }
 
@@ -481,6 +539,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_15"></div>
+
 #### Sichtbarkeitsstatus setzen { #set-discoverable-state }
 
 <div align="center"><em>Tabelle: Sichtbarkeitsstatus setzen</em></div>
@@ -495,6 +555,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Die Wirkung hängt vom aktuellen Betriebsmodus ab: Im BLE-Modus (`BTMODE=1`) schaltet der Befehl das BLE-Advertising ein oder aus, im BT-Modus (`BTMODE=2`) den Inquiry-Scan und Page-Scan. Im Dual-Mode (`BTMODE=0`) steuert er BLE-Advertising, Inquiry-Scan und Page-Scan gemeinsam. |
 
 </div>
+
+<div id="gatt"></div>
 
 #### GATT-Advertising-Status abfragen { #query-gatt-advertising-state }
 
@@ -511,6 +573,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="gatt_1"></div>
+
 #### GATT-Advertising setzen { #set-gatt-advertising }
 
 <div align="center"><em>Tabelle: GATT-Advertising setzen</em></div>
@@ -525,6 +589,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Schaltet das BLE-Advertising direkt ein oder aus. Im reinen BT-Modus (`BTMODE=2`) ist der Befehl nicht verfügbar. |
 
 </div>
+
+<div id="spp"></div>
 
 #### SPP-Sichtbarkeitsstatus abfragen { #query-spp-discoverable-state }
 
@@ -541,6 +607,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="spp_1"></div>
+
 #### SPP-Sichtbarkeitsstatus setzen { #set-spp-discoverable-state }
 
 <div align="center"><em>Tabelle: SPP-Sichtbarkeitsstatus setzen</em></div>
@@ -555,6 +623,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Gibt `ERROR` zurück, wenn `AT+BTMODE` gleich 1 ist (nur BLE). Ändert nur das Inquiry-Scan-Bit und lässt das Page-Scan-Bit unverändert. |
 
 </div>
+
+<div id="spp_2"></div>
 
 #### SPP-Verbindbarkeitsstatus abfragen { #query-spp-connectable-state }
 
@@ -571,6 +641,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="spp_3"></div>
+
 #### SPP-Verbindbarkeitsstatus setzen { #set-spp-connectable-state }
 
 <div align="center"><em>Tabelle: SPP-Verbindbarkeitsstatus setzen</em></div>
@@ -585,6 +657,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Gibt `ERROR` zurück, wenn `AT+BTMODE` gleich 1 ist (nur BLE). Ändert nur das Page-Scan-Bit und lässt das Inquiry-Scan-Bit unverändert. |
 
 </div>
+
+<div id="bluetooth_2"></div>
 
 #### Bluetooth-Betriebsmodus abfragen { #query-bluetooth-operating-mode }
 
@@ -601,6 +675,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="bluetooth_3"></div>
+
 #### Bluetooth-Betriebsmodus setzen { #set-bluetooth-operating-mode }
 
 <div align="center"><em>Tabelle: Bluetooth-Betriebsmodus setzen</em></div>
@@ -615,6 +691,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Das Setzen aktualisiert die Konfiguration und wird nach einem Reset wirksam. |
 
 </div>
+
+<div id="_16"></div>
 
 #### Befehlsmodus abfragen { #query-command-mode }
 
@@ -631,6 +709,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_17"></div>
+
 #### Befehlsmodus setzen { #set-command-mode }
 
 <div align="center"><em>Tabelle: Befehlsmodus setzen</em></div>
@@ -646,7 +726,11 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_18"></div>
+
 ### Pairing und Sicherheit { #pairing-and-security }
+
+<div id="_19"></div>
 
 #### Pairing-Informationen löschen { #clear-pairing-information }
 
@@ -663,7 +747,11 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_20"></div>
+
 ### Serielle Schnittstelle und Ereignisse { #serial-port-and-events }
+
+<div id="_21"></div>
 
 #### Serielle Baudrate abfragen { #query-serial-baud-rate }
 
@@ -680,6 +768,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_22"></div>
+
 #### Serielle Baudrate setzen { #set-serial-baud-rate }
 
 <div align="center"><em>Tabelle: Serielle Baudrate setzen</em></div>
@@ -694,6 +784,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Das Setzen der Baudrate aktualisiert die Konfiguration und setzt das Gerät zurück; die neue Baudrate wird nach dem Reset wirksam. |
 
 </div>
+
+<div id="_23"></div>
 
 #### Ereignisbenachrichtigungen abfragen { #query-event-reporting-switch }
 
@@ -710,6 +802,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_24"></div>
+
 #### Ereignisbenachrichtigungen einstellen { #set-event-reporting-switch }
 
 <div align="center"><em>Tabelle: Ereignisbenachrichtigungen einstellen</em></div>
@@ -724,6 +818,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Das Setzen aktualisiert die Konfiguration. Bei Einstellung auf 1 werden Verbindungsaufbau-, Trennungs- und Bereitschaftsereignisse nicht über die serielle Schnittstelle ausgegeben. |
 
 </div>
+
+<div id="_25"></div>
 
 #### Leerlauf-Trennzeit im Transparenzmodus abfragen { #query-pass-through-idle-disconnect-time }
 
@@ -740,6 +836,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_26"></div>
+
 #### Leerlauf-Trennzeit im Transparenzmodus setzen { #set-pass-through-idle-disconnect-time }
 
 <div align="center"><em>Tabelle: Leerlauf-Trennzeit im Transparenzmodus setzen</em></div>
@@ -755,7 +853,11 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_27"></div>
+
 ### Verbindungsverwaltung { #connection-management }
+
+<div id="_28"></div>
 
 #### Status der Mehrfachverbindung abfragen { #query-multi-connection-switch }
 
@@ -772,6 +874,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_29"></div>
+
 #### Mehrfachverbindung aktivieren oder deaktivieren { #set-multi-connection-switch }
 
 <div align="center"><em>Tabelle: Mehrfachverbindung aktivieren oder deaktivieren</em></div>
@@ -786,6 +890,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Das Setzen aktualisiert die Konfiguration. Ist die Mehrfachverbindung ausgeschaltet, sind gleichzeitige Verbindungen eingeschränkt. Ist sie eingeschaltet, richtet sich die Anzahl nach den Einstellungen von `AT+BLEMULTICONN` und `AT+BTMULTICONN`. |
 
 </div>
+
+<div id="ble_4"></div>
 
 #### Maximale gleichzeitige BLE-Verbindungen abfragen { #query-maximum-ble-concurrent-connections }
 
@@ -802,6 +908,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="ble_5"></div>
+
 #### Maximale gleichzeitige BLE-Verbindungen setzen { #set-maximum-ble-concurrent-connections }
 
 <div align="center"><em>Tabelle: Maximale gleichzeitige BLE-Verbindungen setzen</em></div>
@@ -816,6 +924,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Kann nur gesetzt werden, wenn die Mehrfachverbindung aktiviert ist (`AT+MULTICONN=1`). Die Einstellung wird gespeichert. Erreicht die Anzahl der Verbindungen den Grenzwert, wird das Advertising gestoppt; weitere Verbindungen sind dann nicht möglich. Sinkt die Zahl wieder unter den Grenzwert, wird das Advertising automatisch fortgesetzt. |
 
 </div>
+
+<div id="classic-bluetooth"></div>
 
 #### Maximale gleichzeitige Classic-Bluetooth-Verbindungen abfragen { #query-maximum-classic-bluetooth-concurrent-connections }
 
@@ -832,6 +942,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="classic-bluetooth_1"></div>
+
 #### Maximale gleichzeitige Classic-Bluetooth-Verbindungen setzen { #set-maximum-classic-bluetooth-concurrent-connections }
 
 <div align="center"><em>Tabelle: Maximale gleichzeitige Classic-Bluetooth-Verbindungen setzen</em></div>
@@ -846,6 +958,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Kann nur gesetzt werden, wenn die Mehrfachverbindung aktiviert ist (`AT+MULTICONN=1`). Die Einstellung wird gespeichert. Erreicht die Anzahl der Verbindungen den Grenzwert, stoppt das Modul den Page-Scan und setzt ihn automatisch fort, sobald die Anzahl wieder darunter liegt. |
 
 </div>
+
+<div id="_30"></div>
 
 #### Trennen { #disconnect }
 
@@ -862,6 +976,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_31"></div>
+
 #### Verbindungsliste abfragen { #query-connection-list }
 
 <div align="center"><em>Tabelle: Verbindungsliste abfragen</em></div>
@@ -877,7 +993,11 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="_32"></div>
+
 ### Datenübertragung { #data-transfer }
+
+<div id="ble-mtu"></div>
 
 #### BLE-MTU abfragen { #query-ble-mtu }
 
@@ -894,6 +1014,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="ble-mtu_1"></div>
+
 #### BLE-MTU setzen { #set-ble-mtu }
 
 <div align="center"><em>Tabelle: BLE-MTU setzen</em></div>
@@ -908,6 +1030,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Dieser Wert setzt die während der MTU-Aushandlung verwendete Obergrenze. |
 
 </div>
+
+<div id="spp_4"></div>
 
 #### SPP-Daten senden { #send-spp-data }
 
@@ -924,7 +1048,11 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="gatt_2"></div>
+
 ### Benutzerdefiniertes GATT { #custom-gatt }
+
+<div id="gatt_3"></div>
 
 #### Liste benutzerdefinierter GATT-Services abfragen { #query-custom-gatt-service-list }
 
@@ -941,6 +1069,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="gatt_4"></div>
+
 #### Benutzerdefinierten GATT-Service erstellen { #create-custom-gatt-service }
 
 <div align="center"><em>Tabelle: Benutzerdefinierten GATT-Service erstellen</em></div>
@@ -955,6 +1085,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | `idx` muss eine einzelne Ziffer sein, unmittelbar gefolgt von einem Komma. Die UUID-Länge muss exakt 4 oder 32 Zeichen betragen — jede andere Länge gibt `ERROR` zurück. Ist der Slot bereits im Protokollstack registriert, kann er nicht neu konfiguriert werden, und das Erstellen gibt `ERROR` zurück. Das Erstellen eines Service löscht jede vorherige Konfiguration in diesem Slot |
 
 </div>
+
+<div id="gatt_5"></div>
 
 #### Benutzerdefinierten GATT-Service löschen { #delete-custom-gatt-service }
 
@@ -971,6 +1103,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="gatt_6"></div>
+
 #### Liste benutzerdefinierter GATT-Charakteristiken abfragen { #query-custom-gatt-characteristic-list }
 
 <div align="center"><em>Tabelle: Liste benutzerdefinierter GATT-Charakteristiken abfragen</em></div>
@@ -985,6 +1119,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Keine |
 
 </div>
+
+<div id="gatt_7"></div>
 
 #### Benutzerdefinierte GATT-Charakteristik hinzufügen { #add-custom-gatt-characteristic }
 
@@ -1001,6 +1137,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="gatt_8"></div>
+
 #### Benutzerdefinierte GATT-Services starten (registrieren) { #start-register-custom-gatt-services }
 
 <div align="center"><em>Tabelle: Benutzerdefinierte GATT-Services starten (registrieren)</em></div>
@@ -1015,6 +1153,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Registriert alle genutzten Services, die noch nicht registriert sind und mindestens eine Charakteristik besitzen, im Protokollstack. Ein registrierter Service kann zur Laufzeit weder entfernt noch neu konfiguriert werden. Die Abfrageform wird nicht unterstützt. |
 
 </div>
+
+<div id="gatt-notifyindicate"></div>
 
 #### GATT-Charakteristikdaten senden (Notify/Indicate) { #send-gatt-characteristic-data-notifyindicate }
 
@@ -1031,6 +1171,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="gatt_9"></div>
+
 #### Benutzerdefinierte GATT-Konfiguration in Flash speichern { #save-custom-gatt-configuration-to-flash }
 
 <div align="center"><em>Tabelle: Benutzerdefinierte GATT-Konfiguration in Flash speichern</em></div>
@@ -1045,6 +1187,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Speichert die aktuelle Konfiguration aller Services und Charakteristiken dauerhaft im Flash. Nur Konfigurationsdaten werden gespeichert — Laufzeitinformationen wie der Registrierungsstatus werden nicht gespeichert. Gibt `ERROR` zurück, wenn KVDB nicht bereit ist oder der Schreibvorgang fehlschlägt. Die Abfrageform wird nicht unterstützt |
 
 </div>
+
+<div id="gatt_10"></div>
 
 #### Benutzerdefinierte GATT-Konfiguration im Flash löschen { #clear-custom-gatt-configuration-in-flash }
 
@@ -1061,6 +1205,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="gatt_11"></div>
+
 #### Automatisches Laden der GATT-Konfiguration beim Einschalten abfragen { #query-gatt-auto-load-on-power-up-switch }
 
 <div align="center"><em>Tabelle: Automatisches Laden der GATT-Konfiguration beim Einschalten abfragen</em></div>
@@ -1075,6 +1221,8 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 | Hinweise | Keine |
 
 </div>
+
+<div id="gatt_12"></div>
 
 #### Automatisches Laden der GATT-Konfiguration beim Einschalten einstellen { #set-gatt-auto-load-on-power-up-switch }
 
@@ -1091,9 +1239,13 @@ Die folgenden Befehle sind nach Funktionsbereich gruppiert und folgen denselben 
 
 </div>
 
+<div id="urc"></div>
+
 ## Unaufgeforderte Statusmeldungen (URCs) { #unsolicited-events-urc }
 
 Die folgenden Statusmeldungen gibt das Modul selbst aus; der Host muss sie nicht anfordern. Ihre Ausgabe wird über `AT+EVT` gesteuert. Im stillen Modus gibt das Modul keine Statusmeldungen aus.
+
+<div id="im_ready"></div>
 
 ### IM_READY-Bereitschaftsmeldung { #im_ready-ready-indication }
 
@@ -1110,6 +1262,8 @@ Die folgenden Statusmeldungen gibt das Modul selbst aus; der Host muss sie nicht
 
 </div>
 
+<div id="im_conn"></div>
+
 ### IM_CONN-Verbindungsmeldung { #im_conn-connection-indication }
 
 <div align="center"><em>Tabelle: IM_CONN-Verbindungsmeldung</em></div>
@@ -1124,6 +1278,8 @@ Die folgenden Statusmeldungen gibt das Modul selbst aus; der Host muss sie nicht
 | Hinweise | Im Befehlsmodus wird jede neu hergestellte Verbindung einmal mit Handle, Adresse der Gegenstelle und MTU gemeldet. Im Transparenzmodus wird die Meldung nur bei der ersten Verbindung ausgegeben (wenn die Anzahl aktiver Verbindungen 1 beträgt) und enthält keine Parameter. Die Ausgabe wird über `AT+EVT` gesteuert; `AT+EVT=1` unterdrückt diese Meldungen. |
 
 </div>
+
+<div id="im_disconn"></div>
 
 ### IM_DISCONN-Trennmeldung { #im_disconn-disconnect-indication }
 
@@ -1142,6 +1298,8 @@ Die folgenden Statusmeldungen gibt das Modul selbst aus; der Host muss sie nicht
 
 ## PDU-Format-Befehle { #pdu-format-commands }
 
+<div id="pdu-opcode-0x0101"></div>
+
 ### PDU-Datenmeldung (Opcode 0x0101) { #pdu-data-report-opcode-0x0101 }
 
 <div align="center"><em>Tabelle: PDU-Datenmeldung (Modul → Host, Opcode 0x0101)</em></div>
@@ -1156,6 +1314,8 @@ Die folgenden Statusmeldungen gibt das Modul selbst aus; der Host muss sie nicht
 | Hinweise | Im Befehlsmodus meldet das Modul dem Host im obigen Format, wenn Daten in eine benutzerdefinierte BLE-Charakteristik geschrieben oder über Classic-Bluetooth-SPP empfangen werden; im Transparenzmodus werden die Daten direkt ausgegeben. |
 
 </div>
+
+<div id="pdu-notify-opcode-0x0101"></div>
 
 ### Daten im PDU-Modus senden (automatische Auswahl der Notify-Charakteristik, Opcode 0x0101) { #pdu-mode-send-data-auto-select-notify-characteristic-opcode-0x0101 }
 
@@ -1172,6 +1332,8 @@ Die folgenden Statusmeldungen gibt das Modul selbst aus; der Host muss sie nicht
 
 </div>
 
+<div id="pdu-opcode-0x0102"></div>
+
 ### Daten im PDU-Modus senden (Service und Charakteristik angeben, Opcode 0x0102) { #pdu-mode-send-data-specify-service-and-characteristic-opcode-0x0102 }
 
 <div align="center"><em>Tabelle: Daten im PDU-Modus senden (Service und Charakteristik angeben, Opcode 0x0102)</em></div>
@@ -1186,6 +1348,8 @@ Die folgenden Statusmeldungen gibt das Modul selbst aus; der Host muss sie nicht
 | Hinweise | Der Befehl gilt nur für BLE-Verbindungen. Wird das Handle einer SPP-Verbindung zugeordnet, verwirft die Firmware den Frame. `svc_idx` muss einem registrierten benutzerdefinierten Service entsprechen und `char_idx` kleiner als die Anzahl seiner Charakteristiken sein; andernfalls wird der Frame verworfen. Die angegebene Charakteristik muss die Eigenschaft Notify oder Indicate besitzen. Andernfalls wird der Frame ebenfalls verworfen. `conn_hdl` wird wie bei `0x0101` aufgelöst: zuerst als 1-basiertes BLE-Handle, danach als rohes Handle. Unmittelbar auf den Frame muss `\r` folgen. |
 
 </div>
+
+<div id="pdu_1"></div>
 
 ### Verbindungen im PDU-Modus trennen { #pdu-mode-disconnect }
 
@@ -1202,6 +1366,8 @@ Die folgenden Statusmeldungen gibt das Modul selbst aus; der Host muss sie nicht
 
 </div>
 
+<div id="pdu-im_conn-im_disconn"></div>
+
 ### PDU-Verbindungsstatusmeldung (IM_CONN / IM_DISCONN) { #pdu-connection-status-indication-im_conn-im_disconn }
 
 <div align="center"><em>Tabelle: PDU-Verbindungsstatusmeldung (IM_CONN / IM_DISCONN)</em></div>
@@ -1217,7 +1383,11 @@ Die folgenden Statusmeldungen gibt das Modul selbst aus; der Host muss sie nicht
 
 </div>
 
+<div id="_33"></div>
+
 ## Anhang { #appendix }
+
+<div id="class-of-device_2"></div>
 
 ### Häufige Class-of-Device-Werte { #common-class-of-device-values }
 

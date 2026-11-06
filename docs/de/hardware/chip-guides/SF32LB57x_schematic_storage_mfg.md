@@ -9,12 +9,18 @@ tags:
     - Chip
 ---
 
+<div id="sf32lb57x"></div>
+
 # SF32LB57x Hardware-Design-Leitfaden — Speicher & Fertigung { #sf32lb57x-hardware-design-guide-storage-manufacturing }
 
 !!! note "Teil des SF32LB57x Hardware-Design-Leitfadens"
     Diese Seite deckt die Abschnitte 5.6-5.7 der Schaltplan-Design-Richtlinien ab: Speicher und Konnektivität sowie Fertigung. Zurück zu [Takt, RF & Benutzerschnittstellen](SF32LB57x_schematic_clock_rf_interfaces.md), oder weiter zu [PCB-Layout-Richtlinien](SF32LB57x_pcb_layout.md).
 
+<div id="56"></div>
+
 ### 5.6. Speicher und Konnektivität { #56-storage-and-connectivity }
+
+<div id="561"></div>
 
 #### 5.6.1. Speicher und Boot { #561-storage-and-boot }
 
@@ -37,6 +43,8 @@ Bestellbare Varianten mit gehäuseintegriertem SPI-NOR-Flash booten standardmä�
 | H | H | eMMC |
 
 </div>
+
+<div id="562"></div>
 
 #### 5.6.2. Speicherschnittstellen { #562-storage-interfaces }
 
@@ -69,6 +77,8 @@ Prüfen Sie vor der Freigabe des Schaltplans:
     SiFlis Speichertabelle bezeichnet die Signale an `PA12`–`PA17` als `SD2_*`, die IO-MUX-Tabelle dagegen Function 2 derselben Pins als `SD1_*`. Die obige Tabelle übernimmt die Bezeichnungen aus der Speichertabelle. Die physische Pinzuordnung stimmt überein; wählen Sie SDIO2 oder die Firmware-Instanz jedoch nicht allein anhand dieser Namen. Prüfen Sie Benutzerhandbuch, SDK-Pinkonfiguration und Referenzdesign der genauen Bestellnummer.
 
 
+<div id="563"></div>
+
 #### 5.6.3. Boot- und Versorgungssteuerung { #563-boot-and-power-control }
 
 Ein eMMC-Baustein besitzt getrennte Versorgungsdomänen `VCC` und `VCCQ`. Werden beide gemeinsam geschaltet, sinkt der Stromverbrauch beim Herunterfahren, aber das Aufwachen aus dem Schlafmodus dauert länger und die mittlere CPU-Leistungsaufnahme steigt. Wird nur `VCC` geschaltet und `VCCQ` dauerhaft versorgt, steigt der Stromverbrauch beim Herunterfahren, aber die eMMC wacht schneller auf und die mittlere CPU-Leistungsaufnahme sinkt.
@@ -97,9 +107,13 @@ Die Auswahl des externen Boot-Mediums ist in Tabelle 5.6-1 und Abbildung 5.6-1 d
 - Belegt gehäuseintegrierter Speicher bereits MPI3, ist die externe Nutzung von MPI3 auf SD NAND oder eMMC beschränkt; schließen Sie keinen externen SPI-NOR-/SPI-NAND-Flash an diesen Kanal an.
 - Passen Sie die I/O-Betriebsspannung des Speicherbausteins an die MCU-I/O-Versorgung an und wählen Sie ein Bauteil aus der Approved Vendor List (AVL) des Projekts.
 
+<div id="564-gpio"></div>
+
 #### 5.6.4. GPIO und Pin-Multiplexing { #564-gpio-and-pin-multiplexing }
 
 Planen Sie die GPIOs, bevor Sie alle Peripheriegeräte fest zuordnen. Signale für Boot, Debugging, Wecken, USB, Analogfunktionen, Display, Speicher und Hochgeschwindigkeitsverbindungen können die flexible Zuordnung über die Matrix einschränken.
+
+<div id="565"></div>
 
 #### 5.6.5. Pin-Planung { #565-pin-planning }
 
@@ -108,6 +122,8 @@ SF32LB57x unterstützt flexibles Pin-Multiplexing. Legen Sie jedoch folgende Sig
 - RF-, Quarz-, Strom-, USB-, Analog-Audio-, GPADC-, Boot- und Debug-Pins.
 - Hochgeschwindigkeits-Display-, SDIO-, Speicher- und DCMI-Schnittstellen, die bestimmte Pin-Gruppen erfordern.
 - weckfähige GPIOs, die Boot-Konfiguration, die SWD-Umschaltung und Pins für Produktionstests.
+
+<div id="566-gpio"></div>
 
 #### 5.6.6. GPIO-Richtlinien { #566-gpio-guidelines }
 
@@ -264,6 +280,8 @@ Jeder GPIO-Pin kann per Matrix auf jede der obigen Funktionen zugeordnet werden 
 !!! warning "IF_SEL-Werte in der LCDC-Submux-Tabelle"
     Die SiFli-Quelltabelle weist sowohl dem SPI- als auch dem JDI-Modus `IF_SEL=0` zu. Dieser Artikel übernimmt die Quellwerte, die doppelte Zuordnung ist jedoch mehrdeutig. Prüfen Sie die Einstellung vor der Panelkonfiguration anhand des passenden SDK-Treibers und Referenzdesigns; leiten Sie den Registerwert nicht allein aus dieser Tabelle ab.
 
+<div id="567"></div>
+
 #### 5.6.7. Allgemeine Schnittstellen { #567-general-interfaces }
 
 Wenden Sie für jede allgemeine Schnittstelle dasselbe Prüfschema an: elektrische Verbindung, I/O-Spannung, Zustand nach Reset und im Schlafmodus, Versorgung der Pull-ups, ESD-Belastung sowie Konflikte mit Boot-, Debug-, Aufweck- oder Hochgeschwindigkeitsfunktionen.
@@ -275,6 +293,8 @@ Wenden Sie für jede allgemeine Schnittstelle dasselbe Prüfschema an: elektrisc
 
 !!! warning "Spannungsangaben der GPADC-Taste"
     Der SiFli-Schaltplan zeigt für jeden Tastenknoten zwei durch einen Schrägstrich getrennte Spannungswerte, erläutert jedoch nicht die zugehörigen Bedingungen. Prüfen Sie die Zuordnung anhand der vorgesehenen Versorgung und der Referenzschaltung, bevor Sie die Werte als Schwellwerte verwenden.
+
+<div id="568"></div>
 
 #### 5.6.8. Prüfprinzipien für Schnittstellen { #568-interface-review-principles }
 
@@ -387,7 +407,11 @@ Für jede Peripherieschnittstelle vier Punkte prüfen:
 !!! warning "VBATS-Pinspannung und Messbereich"
     Für 3,3-V-Versorgungsvarianten nennt die Versorgungspin-Tabelle für `VBATS` 0 bis 4,7 V, während die Schaltplan-Checkliste den Akkuspannungs-Messbereich auf 0 bis 4,5 V begrenzt. Für GPADC-Messungen gilt der engere Bereich von 0 bis 4,5 V; die 4,7-V-Angabe der Pin-Tabelle ist kein gültiger ADC-Messbereich.
 
+<div id="57"></div>
+
 ### 5.7. Fertigung { #57-manufacturing }
+
+<div id="571"></div>
 
 #### 5.7.1. Produktions-Boot- und Download-Modi { #571-production-boot-and-download-modes }
 
@@ -436,6 +460,8 @@ Halten Sie die Standard-Debug-/Download-Pins für die Produktionsvorrichtung zug
 | Hardware-Checkliste 4.8, Punkt 3 | Alle Modelle | `VBAT` oder 3,3 V, `GND`, `PA18`, `PA19`, `VDD33_VOUT1` (bei der 3,3-V-Serie nicht vorhanden), `PA00`, `PA01` und `PA34`; stimmen Sie Padgröße, Abstand und Ausrichtung auf die Prüfspitzen ab. |
 
 </div>
+
+<div id="572"></div>
 
 #### 5.7.2. Produktionsprogrammierung und Kalibrierung { #572-production-programming-and-calibration }
 

@@ -22,40 +22,22 @@ SF32 디바이스는 소형 AIoT 및 웨어러블 제품을 위해 설계되었�
 
 <div align="center"><em>그림: 그래픽 리소스와 디스플레이 흐름</em></div>
 
-```text
-Source images, fonts, and animations
-        │
-        ▼
-GraphicsTool converts supported resources to eZip or eZip-A
-        │
-        ▼
-Compressed assets in NOR Flash, PSRAM, NAND, or file storage
-        │
-        ▼
-eZip hardware decoder expands an asset when required
-        │
-        ▼
-LVGL or another UI framework + graphics/display driver
-        │
-        ├── CPU fallback rendering
-        │
-        └── ePicasso pixel acceleration
-        │
-        ▼
-Final rendered bitmap in a draw buffer or framebuffer
-        │
-        ├── Uncompressed display path
-        │
-        └── Optional: extDMA compresses it into TurboPixel
-                    │
-                    ▼
-             TurboPixel framebuffer in PSRAM
-        │
-        ▼
-Display controller transfers pixels to the panel
-        │
-        ▼
-SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI panel
+```mermaid
+flowchart TD
+    A["원본 이미지, 글꼴, 애니메이션"] --> B["GraphicsTool이 지원 리소스를 eZip 또는 eZip-A로 변환"]
+    B --> C["NOR Flash, PSRAM, NAND 또는 파일 저장소에 있는 압축 리소스"]
+    C --> D["필요할 때 eZip 하드웨어 디코더가 리소스를 확장"]
+    D --> E["LVGL 또는 다른 UI 프레임워크 + 그래픽/디스플레이 드라이버"]
+    E --> F["CPU 대체 렌더링"]
+    E --> G["ePicasso 픽셀 가속"]
+    F --> H["그리기 버퍼 또는 프레임버퍼의 최종 렌더링 비트맵"]
+    G --> H
+    H --> I["압축하지 않는 디스플레이 경로"]
+    H --> J["선택 사항: extDMA가 비트맵을 TurboPixel로 압축"]
+    J --> K["PSRAM의 TurboPixel 프레임버퍼"]
+    I --> L["디스플레이 컨트롤러가 픽셀을 패널로 전송"]
+    K --> L
+    L --> M["패널 인터페이스: SPI / QSPI / 8080 / RGB / MIPI DSI / EPD / JDI"]
 ```
 
 이 경로는 필수가 아니라 구성 가능한 경로입니다. 제품에 따라 eZip, ePicasso, TurboPixel 또는 전체 프레임버퍼를 사용하지 않을 수 있습니다. 사용 가능 여부와 연결 방식은 선택한 디바이스, SDK, 디스플레이 인터페이스, 패널, 드라이버 구성에 따라 달라집니다. 현재 OpenSiFli LCDC 헤더는 `HAL_EXTDMA_MODULE_ENABLED`가 활성화되어 있고 제품군 가드가 허용하는 경우에만 `LCDC_SUPPORTED_COMPRESSED_LAYER`를 정의하며, SF32LB52x와 SF32LB57x는 제외됩니다. 소스 주석에는 LCPU 경로가 활성화되지 않았다는 내용도 있습니다. 공개된 SDK LCDC 기능 표는 SF32LB55x에서 압축 레이어 압축 해제를 지원하지 않는 것으로 표시하므로, 55x는 종단 간 검증된 지원이 아니라 조건부 지원으로 취급하십시오. 정확한 SDK 리비전, 코어, 빌드 구성, 대상 하드웨어를 확인하십시오. [TurboPixel 프레임버퍼 압축](turbopixel.md#availability-in-the-sf32-family)을 참고하십시오.

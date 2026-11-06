@@ -67,10 +67,10 @@ menuconfig SENSOR_USING_6D
                 default 94
 
                 config LSM_USING_AWT
-                bool "Enable AWT fucntion"
+                bool "Enable AWT function"
                 default y
                 config LSM_USING_PEDO
-                bool "Enable Pedometer fucntion"
+                bool "Enable Pedometer function"
                 default y
                 config LSM6DSL_USE_FIFO
                 bool "LSM6DSL use fifo"
@@ -294,6 +294,9 @@ __exit:
 #define DRV_BMP280_TEST
 
 #ifdef DRV_BMP280_TEST
+#include <errno.h>
+#include <limits.h>
+#include <stdlib.h>
 #include <string.h>
 
 int cmd_bmpt(int argc, char *argv[])
@@ -322,7 +325,20 @@ int cmd_bmpt(int argc, char *argv[])
     }
     if (strcmp(argv[1], "-r") == 0)
     {
-        uint8_t rega = atoi(argv[2]) & 0xff;
+        if (argc < 3)
+        {
+            LOG_I("Missing operand!\n");
+            return 1;
+        }
+        char *end;
+        errno = 0;
+        long reg = strtol(argv[2], &end, 10);
+        if (errno == ERANGE || end == argv[2] || *end != '\0' || reg < 0 || reg > 255)
+        {
+            LOG_I("Invalid register address!\n");
+            return 1;
+        }
+        uint8_t rega = (uint8_t)reg;
         uint8_t value;
         BMP280_ReadReg(rega, 1, &value);
         LOG_I("Reg 0x%x value 0x%x\n", rega, value);
@@ -339,8 +355,21 @@ int cmd_bmpt(int argc, char *argv[])
     }
     if (strcmp(argv[1], "-bps") == 0)
     {
+        if (argc < 3)
+        {
+            LOG_I("Missing operand!\n");
+            return 1;
+        }
         struct rt_i2c_configuration cfg;
-        int bps = atoi(argv[2]);
+        char *end;
+        errno = 0;
+        long parsed_bps = strtol(argv[2], &end, 10);
+        if (errno == ERANGE || end == argv[2] || *end != '\0' || parsed_bps <= 0 || parsed_bps > INT_MAX)
+        {
+            LOG_I("Invalid bus speed!\n");
+            return 1;
+        }
+        int bps = (int)parsed_bps;
         cfg.addr = 0;
         cfg.max_hz = bps;
         cfg.mode = 0;

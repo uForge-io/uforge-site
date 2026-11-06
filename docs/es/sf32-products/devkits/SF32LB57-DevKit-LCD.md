@@ -74,7 +74,7 @@ Una placa con firmware de fábrica puede mostrar su interfaz inicial al encender
 
 ## Configuración del SDK { #sdk-build-targets }
 
-La guía de SiFli indica que se instale SiFli SDK y se seleccione el paquete de soporte de placa `SF32LB57-DevKit-LCD`. El archivo ascendente `build_config_gcc.yaml` enlazado actualmente no enumera ningún destino de compilación SF32LB57. Antes de compilar, confirme el paquete de soporte y el identificador exacto en la copia del SDK que vaya a utilizar; no sustituya el destino por el de otra placa. Un hello-world por UART solo verifica el arranque serie básico, no los controladores de pantalla, cámara o Wi-Fi.
+La guía de SiFli indica que se instale SiFli SDK y se seleccione el paquete de soporte de placa `SF32LB57-DevKit-LCD`. El archivo `build_config_gcc.yaml` del repositorio upstream, enlazado actualmente, no enumera ningún destino de compilación SF32LB57. Antes de compilar, confirme el paquete de soporte y el identificador exacto en la copia del SDK que vaya a utilizar; no sustituya el destino por el de otra placa. Un hello-world por UART solo verifica el arranque serie básico, no los controladores de pantalla, cámara o Wi-Fi.
 
 ## Alimentación y depuración { #power-and-debug }
 
